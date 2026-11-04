@@ -240,6 +240,8 @@ import DASHI.Education.DigitalESDWorldPNFTrialecticControlBridgeExact
 import DASHI.Education.DigitalESDSpectralWorldGapSelectionExact
 import DASHI.Education.DigitalESDPNFSignedGraphConsumerExact
 
+import DASHI.Education.DigitalESDResearchMathematicsCompletionExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
