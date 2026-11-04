@@ -27,7 +27,7 @@ open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Data.Nat.Tactic.RingSolver using (solve-∀)
+open import Data.Nat.Tactic.RingSolver using (solve)
 open import Data.Maybe.Base using (just)
 open import Relation.Binary.PropositionalEquality using (sym)
 
@@ -102,7 +102,7 @@ countedAllComparisons (observation ∷ rest)
 squareStepRing :
   (k : Nat) →
   (k + (k * k)) + suc k ≡ suc k * suc k
-squareStepRing = solve-∀
+squareStepRing k = solve (k ∷ [])
 
 squareStepBound :
   (k : Nat) →
