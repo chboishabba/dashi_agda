@@ -182,3 +182,29 @@ New `DASHI/Analysis/BishopMachinHalfPhaseFromImaginaryProductExact.agda` elimina
 No separate half-phase sign/Pythagorean/double-angle authority is needed. Combined with the new unconditional `sin_B(theta_M)>0` and conditional `sin_B(pi_M-x)=sin_B(x)`, this sharpens the geometric/sign route: establish the native mixed product and actual atan→quarter equality first; obtain local positivity and a constructive interval split covering all `0<x<pi_M` from the **existing radius-two alternating sine lower** plus reflection. A complete locatedness/interval split and local strict cubic positivity beyond the existing quarter fibre are **not yet proved**; no first-positive-zero promotion is claimed.
 
 This module is source-written with `{-# OPTIONS --safe #-}` and imported by all three TOE roots. A successful Agda kernel check has not been observed.
+
+## 2026-11-04 — K05 first-positive-zero SIGN discharge from pinned Bishop locatedness (source-written)
+
+**New source theorem owners** on golden PR #1408:
+
+1. `DASHI/Analysis/BishopSinePositiveTwoBallFromCubicExact.agda`. This finally extends the existing radius-two source interlacing theorem from a nonstrict **cubic** lower bound to strict positivity of the *original* Round11 signed-factorial sine. It uses native exact setoid arithmetic:
+   `|x|<=2 ⇒ x*x<=4 ⇒ 1-x*x/6 >= 1/3 >0`;
+   `0<x ⇒ 0<x(1-x*x/6)=x-x^3/6<=sin_B(x)`.
+   The proof consumes the actual `BalabanBishopSineTwoBallCubicLowerExact.sineCubicLowerTwoBall` and `Round11.round11ConcreteTermIdentification`. **No** imaginary product, trigonometric identity, Machin equality or differentiation is an input.
+
+2. `DASHI/Analysis/BishopMachinPiGlobalSineSignFromTwoBallExact.agda` reuses the EXACT **pinned vendor/bishop** `RealProperties.fast-corollary-2-17`: for separated rational thresholds `3/2<2`, every Bishop x satisfies `x<2 ⊎ 3/2<x` constructively. For `0<x<pi_M`, branch 1 uses the newly proven radius-two sine positivity; branch 2 uses the actual Machin interval `pi_M<22/7` to show `0<pi_M-x<22/7-3/2=23/14<2`, then the already derived same-series `round11SineMachinComplement` to transfer strict positivity back to x. The exact rational inequalities were independently checked with Python Fraction (3/2<2, 23/14<2, 1−4/6=1/3). No excluded-middle or undecidable real trichotomy.
+
+3. `round11MachinPiIsFirstPositiveSineZero` uses the **existing original** `BishopMachinFirstPositiveSineZeroFromNativePhaseExact.sourceMachinFirstSineZeroFromNativePhase`, but now supplies its previous free `NativeSinePositiveBeforeMachinPi` hypothesis with a source-written inhabitant instead of passing it in. Hence **K05-PI no longer has a separate global sine-sign or least-positive-zero leaf**. It is reduced to exactly two original source theorem dependencies: `Round11ImaginaryExpMultiplicative inputs` (K05-PRODUCT) and the actual quarter analytic equality `Quad.quarterCos inputs ≃ Quad.quarterSin inputs` (K05-PI). Those inputs are still UNPROVED in golden Agda, so the terminal π equality is not unconditional.
+
+**Pinned upstream signature audit:** `viktorcsimma/bishop@240e38c7f6938f20f865b1f956c5f084da48bd54/RealProperties.agda` was fetched, confirming `fast-corollary-2-17`, `neg-mono-<`, `+-monoʳ-<`, `≤-respˡ-≃`, `<-respˡ-≃`, `<-respʳ-≃`, `*-monoˡ-≤-nonNeg`. The new source uses these original, non-postulatory operations and explicitly corrected left-setoid-order transport orientation in the earlier `BishopMachinQuarterStrictSineFromTwoBallExact` as well.
+
+The two new golden modules are imported in all three canonical TOE roots, start with `{-# OPTIONS --safe #-}`, and contain no literal postulate, meta hole or termination bypass. **Agda kernel elaboration still has NOT been observed; source-writing is not completion.**
+
+### Updated Pareto frontier after this source implementation
+
+1. **P0 K05-PRODUCT:** native signed-factorial mixed complex finite Cauchy coefficient and absolute-limit law on the selected Round11 Bishop complex.
+2. **P0 K05-QUARTER:** native atan/tangent same-object theorem proving `cos_B(theta_M)≃sin_B(theta_M)`, using already owned 4atan−atan rational tangent algebra, branch interval and now independent strict sine sign at quarter.
+3. **P1 K04d-LOG:** original canonical negative-log inverse `exp_B(-L(x))≃1-x` with original Nat successor argument (Lean mirror is not an Agda import).
+4. **P1 K04d-CONTINUITY:** actual Bishop source finite-term/compact uniform-limit continuity and concrete identification with the selected abstract half-plane and completed zeta objects.
+
+The theorem `round11MachinPiIsFirstPositiveSineZero` is **source-written conditional on 1 and 2**; do not leave a third independent K05 interval-sign obligation in the remaining max-cut, and do not call it an unconditional π proof until these two proofs and Agda safe kernel checks are paid.
