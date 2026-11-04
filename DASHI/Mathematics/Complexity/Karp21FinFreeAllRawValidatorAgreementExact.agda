@@ -23,10 +23,10 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeAllRawValidatorAgreementExact w
 -- Richard Karp 1972; DASHI original graph and sparse runtime owners.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (Σ; _×_; _,_)
 open import Data.Empty using (⊥; ⊥-elim)
@@ -42,6 +42,9 @@ import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as C
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
+import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact as Observe
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
+open import Data.Integer.Base using (ℤ; +_)
 
 nothingNotJust :
   ∀ {A : Set} {x : A} → nothing ≡ just x → ⊥
@@ -187,3 +190,66 @@ rawValidationSameStatus n prev raw =
   rawGuardTrueImpliesTypedSuccess n prev raw ,
     (typedRejectImpliesRawGuardFalse n prev raw ,
      rawGuardFalseImpliesTypedReject n prev raw)
+
+------------------------------------------------------------------------
+-- Raw validation success preserves actual numeric endpoints and
+-- ORIGINAL signed weights. Reuse the already-written source observer:
+-- there is no new edge decoder or invented score field.
+------------------------------------------------------------------------
+
+rawGuardTruePreservesOriginalFields :
+  (n : Nat) (prev : Graph.PreviousPair)
+  (raw : List Graph.RawEdge) →
+  Runtime.validRawEdges n prev raw ≡ true →
+  Σ (List (Cut.SignedUndirectedEdge n))
+    (λ decoded →
+      (Graph.validateRawEdges n prev raw ≡ just decoded)
+      × Observe.RawEdgeListFieldsSame raw decoded)
+rawGuardTruePreservesOriginalFields n prev raw accepted
+  with rawGuardTrueImpliesTypedSuccess n prev raw accepted
+... | decoded , validatorSuccess =
+  decoded ,
+    (validatorSuccess ,
+      Observe.validateRawEdgesSuccessFields
+        n prev raw decoded validatorSuccess)
+
+rawFieldPreservingListLength :
+  ∀ {n : Nat}
+    (raw : List Graph.RawEdge)
+    (decoded : List (Cut.SignedUndirectedEdge n)) →
+  Observe.RawEdgeListFieldsSame raw decoded →
+  length raw ≡ length decoded
+rawFieldPreservingListLength [] [] Observe.raw-list-nil = refl
+rawFieldPreservingListLength
+  (_ ∷ rawRest) (_ ∷ decodedRest)
+  (Observe.raw-list-cons _ tailAgreement) =
+  cong suc
+    (rawFieldPreservingListLength rawRest decodedRest tailAgreement)
+
+------------------------------------------------------------------------
+-- The signed score of ONE original raw edge has the same endpoint
+-- crossing contribution as its genuinely reconstructed Fin edge.
+-- It holds for all four Boolean labels and all ℤ weights, including
+-- negative weights (no positivity assumptions).
+------------------------------------------------------------------------
+
+rawEdgeContribution : ℤ → Bool → Bool → ℤ
+rawEdgeContribution weight a b
+  with Boolean.boolEqual a b
+... | true = + zero
+... | false = weight
+
+sameRawSignedCrossingContribution :
+  ∀ {n : Nat}
+    (raw : Graph.RawEdge)
+    (decoded : Cut.SignedUndirectedEdge n) →
+  Observe.RawEdgeFieldsSame raw decoded →
+  (a b : Bool) →
+  rawEdgeContribution (Graph.signedWeight raw) a b
+    ≡ Sparse.edgeBitsCut (Cut.weight decoded) a b
+sameRawSignedCrossingContribution raw decoded fields true true = refl
+sameRawSignedCrossingContribution raw decoded fields false false = refl
+sameRawSignedCrossingContribution raw decoded fields true false =
+  sym (Observe.signedWeight fields)
+sameRawSignedCrossingContribution raw decoded fields false true =
+  sym (Observe.signedWeight fields)
