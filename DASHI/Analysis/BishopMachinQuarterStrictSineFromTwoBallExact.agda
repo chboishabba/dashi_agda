@@ -76,7 +76,7 @@ quarterInsideTwo :
   R._≤_ (R.∣_∣ Quarter.machinQuarterAngle) TwoBall.bishopTwo
 quarterInsideTwo =
   RP.≤-respˡ-≃
-    (RP.nonNegx⇒∣x∣≃x quarterNonnegative)
+    (RP.≃-symm (RP.nonNegx⇒∣x∣≃x quarterNonnegative))
     quarterBelowTwo
 
 quarterSignedSineInputs :
