@@ -73,18 +73,18 @@ booleanNot : Bool → Bool
 booleanNot true = false
 booleanNot false = true
 
-memberBoolean : OriginalFineBond → List OriginalFineBond → Bool
-memberBoolean bond [] = false
-memberBoolean bond (head ∷ tail) =
+notMemberBoolean : OriginalFineBond → List OriginalFineBond → Bool
+notMemberBoolean bond [] = true
+notMemberBoolean bond (head ∷ tail) =
   booleanAnd
     (booleanNot (originalBondEqualsBoolean bond head))
-    (memberBoolean bond tail)
+    (notMemberBoolean bond tail)
   -- This is a "not-member" conjunction, not a standard member predicate.
 
 allDistinctBoolean : List OriginalFineBond → Bool
 allDistinctBoolean [] = true
 allDistinctBoolean (bond ∷ rest) =
-  booleanAnd (memberBoolean bond rest) (allDistinctBoolean rest)
+  booleanAnd (notMemberBoolean bond rest) (allDistinctBoolean rest)
 
 module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
 
