@@ -30,6 +30,8 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Route
 import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
+import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact as TSFVKKSameArrow
+import DASHI.Physics.Foundations.TSFVOriginalHiddenHistoryFiltrationWeldExact as TSFVOriginalFiltration
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
@@ -105,12 +107,47 @@ open TSFVArrow public using
   ; pastRecordCannotRecoverSelectedMicroHistory
   ; selectedTSFVPhysicalSignatureIs31
   )
+-- P01 concrete source-family bridge: the actual original finite hidden
+-- history and smoothing decisions are what the old observer filtration
+-- reveals. Early records coalesce; late ones differ; forgetful observer
+-- projection is provably noninjective, not assumed to be a time semigroup.
+open TSFVOriginalFiltration public using
+  ( selectedFutureBoundary
+  ; actualSelectedSmoothing
+  ; smoothingIsOriginalHiddenTerminal
+  ; observedTerminal
+  ; originalEarlyRecordCannotSeeTerminal
+  ; originalLateRecordReadsSameHiddenState
+  ; originalEarlyRecordsIndistinguishable
+  ; originalLateMinusIsReadMinus
+  ; originalLatePlusIsReadPlus
+  ; originalLateRecordsDiffer
+  ; noEarlyObserverHistoryDecoder
+  ; forgetLateObserverRecord
+  ; actualLateRecordsForgetToSameEarlyRecord
+  ; forgettingLateRecordIsNotInjective
+  ; chosenHiddenHistoriesEqualAction
+  )
+
 open TSFVKKSameMetric public using
   ( SameMetricTSFVKK
   ; sameMetricKKSignatureFromTSFV
   ; sameMetricKKReversedCountExcluded
   ; globalStrictReversalRankImpossible
   )
+-- Stronger P02/P07 *source-selected* arrow weld:
+-- same quadratic signs + existing injective boolean calibration prove the
+-- actual KK observer probe is identical on all four axes to the TSVF probe,
+-- and the independently supplied KK evidence picks the same axis.
+open TSFVKKSameArrow public using
+  ( classifyProbeInjective
+  ; sameMetricKKObservedProbeEqualsTSFV
+  ; sameMetricKKDirectionFromTSFV
+  ; selectedArrowUnique
+  ; derivedKKSelectedAxisIsOriginal
+  ; samePhysicalObserverAndKKTimeAxis
+  )
+
 open L31Probe public using
   ( calibratedProbeForcesThreePlusOne
   ; realizedDynamicsThreePlusOne
@@ -244,11 +281,13 @@ open TSVFBellNoGo public using
   ; noLocalMarginalDecoder
   )
 open TSVFOSClock public using
-  ( observerOSClockAllFiniteTimes
+  ( originalClockIterateAdd
+  ; observerOSClockAllFiniteTimes
   ; observerOSAllFiniteReadouts
   ; selectedOSClockHamiltonian
   ; selectedTransferIsOfExactlyReconstructedH
   ; sameClockPhysicalMetricHas31Signature
+  ; selectedP07ObserverAndKKClockDirectionAgree
   ; selectedObserverKetReallyIsMetricState
   ; identityEmbeddingCannotIntertwineWrongOSStep
   )
