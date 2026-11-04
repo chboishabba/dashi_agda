@@ -50,7 +50,7 @@ SelectedObservedAccessOrder selected early late =
 originalAccessImpliesActualMeasuredAccess :
   (selected : Bridge.SelectedTSFVToLorentzPhysicalSource)
   (early late : History.FiltrationLevel) →
-  early Access.⊑obs late →
+  Access._⊑obs_ early late →
   SelectedObservedAccessOrder selected early late
 originalAccessImpliesActualMeasuredAccess
     selected early late original event visible =
@@ -68,7 +68,7 @@ actualMeasuredAccessImpliesOriginal :
   (selected : Bridge.SelectedTSFVToLorentzPhysicalSource)
   (early late : History.FiltrationLevel) →
   SelectedObservedAccessOrder selected early late →
-  early Access.⊑obs late
+  Access._⊑obs_ early late
 actualMeasuredAccessImpliesOriginal
     selected early late measured event originalVisible =
   trans
@@ -84,11 +84,11 @@ actualMeasuredAccessImpliesOriginal
 sameSelectedObserverAccessIFFOriginal :
   (selected : Bridge.SelectedTSFVToLorentzPhysicalSource)
   (early late : History.FiltrationLevel) →
-  (early Access.⊑obs late →
+  (Access._⊑obs_ early late →
     SelectedObservedAccessOrder selected early late)
   ×
   (SelectedObservedAccessOrder selected early late →
-    early Access.⊑obs late)
+    Access._⊑obs_ early late)
 sameSelectedObserverAccessIFFOriginal selected early late =
   originalAccessImpliesActualMeasuredAccess selected early late ,
   actualMeasuredAccessImpliesOriginal selected early late
