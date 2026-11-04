@@ -162,6 +162,7 @@ import DASHI.Mathematics.Complexity.Karp21OriginalGammaCompleteGraphParserExact
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGammaFrameExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreeE20RawValidatorAgreementExact
+import DASHI.Mathematics.Complexity.Karp21FinFreeAllRawValidatorAgreementExact
 
 import DASHI.Mathematics.Complexity.Karp21CliqueComplementUpperTriangleWordExact
 
