@@ -28,7 +28,7 @@ module DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact 
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
@@ -130,6 +130,99 @@ originalFourMetricCannotUniquelyLiftFibreRadius
   different
     (originalFiveMetricEqualityForcesSameFibreRadius
       g4 connection radius1 radius2 v w same)
+
+------------------------------------------------------------------------
+-- SECOND INVERSE OBSTRUCTION: the KK four-metric ALSO forgets the
+-- CONNECTION A. At fixed positive unit radius, an off-diagonal
+-- vertical difference of the SAME 5D bilinear reads A(v).
+--
+-- IMPORTANT: A and A+dLambda may describe gauge-equivalent local
+-- coordinate charts (see original KK5GaugeShiftPreservesBilinear).
+-- Pointwise chart-bilinear nonidentity is not a proof that their
+-- global gauge geometries are physically inequivalent. It proves
+-- only that horizontal g4 cannot recover a chart connection.
+------------------------------------------------------------------------
+
+originalFiveMetricMixedVerticalDifferenceReadsConnection :
+  ∀ {V : Set}
+    (g4 : V → V → ℚ)
+    (connection : V → ℚ)
+    (v w : V) →
+    (KK.KK5Bilinear g4 connection 1ℚ
+       v 0ℚ w 1ℚ)
+    -
+    (KK.KK5Bilinear g4 connection 1ℚ
+       v 0ℚ w 0ℚ)
+    ≡ connection v
+originalFiveMetricMixedVerticalDifferenceReadsConnection
+    g4 connection v w =
+  Ring.solve-∀ (g4 v w) (connection v) (connection w)
+
+originalFiveMetricEqualityForcesSameChartConnection :
+  ∀ {V : Set}
+    (g4 : V → V → ℚ)
+    (connection1 connection2 : V → ℚ)
+    (v w : V) →
+    (∀ x fibreX y fibreY →
+      KK.KK5Bilinear g4 connection1 1ℚ
+        x fibreX y fibreY
+      ≡
+      KK.KK5Bilinear g4 connection2 1ℚ
+        x fibreX y fibreY) →
+    connection1 v ≡ connection2 v
+originalFiveMetricEqualityForcesSameChartConnection
+    g4 connection1 connection2 v w same =
+  trans
+    (sym
+      (originalFiveMetricMixedVerticalDifferenceReadsConnection
+        g4 connection1 v w))
+    (trans
+      (cong₂ _-_
+        (same v 0ℚ w 1ℚ)
+        (same v 0ℚ w 0ℚ))
+      (originalFiveMetricMixedVerticalDifferenceReadsConnection
+        g4 connection2 v w))
+
+originalFourMetricCannotRecoverUniqueChartConnection :
+  ∀ {V : Set}
+    (g4 : V → V → ℚ)
+    (connection1 connection2 : V → ℚ)
+    (v w : V) →
+    (connection1 v ≡ connection2 v → ⊥) →
+    (∀ x fibreX y fibreY →
+      KK.KK5Bilinear g4 connection1 1ℚ
+        x fibreX y fibreY
+      ≡
+      KK.KK5Bilinear g4 connection2 1ℚ
+        x fibreX y fibreY) →
+    ⊥
+originalFourMetricCannotRecoverUniqueChartConnection
+    g4 connection1 connection2 v w different same =
+  different
+    (originalFiveMetricEqualityForcesSameChartConnection
+      g4 connection1 connection2 v w same)
+
+originalSameFourMetricForAnyTwoConnections :
+  ∀ {V : Set}
+    (g4 : V → V → ℚ)
+    (connection1 connection2 : V → ℚ)
+    (radiusSquared : ℚ)
+    (v w : V) →
+    KK.KK5Bilinear g4 connection1 radiusSquared
+      v (KK.horizontalCircleComponent connection1 v)
+      w (KK.horizontalCircleComponent connection1 w)
+    ≡
+    KK.KK5Bilinear g4 connection2 radiusSquared
+      v (KK.horizontalCircleComponent connection2 v)
+      w (KK.horizontalCircleComponent connection2 w)
+originalSameFourMetricForAnyTwoConnections
+    g4 connection1 connection2 radiusSquared v w =
+  trans
+    (KK.actualKKHorizontalReductionIsOriginalFourMetric
+      g4 connection1 radiusSquared v w)
+    (sym
+      (KK.actualKKHorizontalReductionIsOriginalFourMetric
+        g4 connection2 radiusSquared v w))
 
 -- The same proof leaves room for valid effective KK physics: a
 -- fifth-sector observable and actual 5D fields can distinguish the
