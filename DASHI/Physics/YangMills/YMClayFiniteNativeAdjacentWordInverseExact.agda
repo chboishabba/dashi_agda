@@ -28,10 +28,10 @@ module DASHI.Physics.YangMills.YMClayFiniteNativeAdjacentWordInverseExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.List using (List; []; _∷_)
+import Agda.Builtin.List as List
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Fin.Base as Fin
-open import Data.Vec.Base using (Vec; []; _∷_)
+import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
@@ -47,9 +47,9 @@ originalAdjacentAt {n = suc n} (Fin.suc index) =
 
 originalApplyAdjacentWord :
   ∀ {A : Set} {n : Nat} →
-  List (Fin.Fin n) → Vec A (suc n) → Vec A (suc n)
-originalApplyAdjacentWord [] values = values
-originalApplyAdjacentWord (index ∷ rest) values =
+  List.List (Fin.Fin n) → Vec.Vec A (suc n) → Vec.Vec A (suc n)
+originalApplyAdjacentWord List.[] values = values
+originalApplyAdjacentWord (List._∷_ index rest) values =
   originalApplyAdjacentWord rest
     (Product.permuteLinks (originalAdjacentAt index) values)
 
@@ -57,22 +57,22 @@ originalApplyAdjacentWord (index ∷ rest) values =
 -- applies second FIRST. Therefore the source word recursion must
 -- compose the *rest* after the FIRST listed adjacent step.
 originalAdjacentWordProgram :
-  ∀ {n} → List (Fin.Fin n) → Product.LinkPermutation (suc n)
-originalAdjacentWordProgram [] = Product.identity
-originalAdjacentWordProgram (index ∷ rest) =
+  ∀ {n} → List.List (Fin.Fin n) → Product.LinkPermutation (suc n)
+originalAdjacentWordProgram List.[] = Product.identity
+originalAdjacentWordProgram (List._∷_ index rest) =
   Product.compose
     (originalAdjacentWordProgram rest)
     (originalAdjacentAt index)
 
 originalAdjacentWordProgramActsInListedOrder :
   ∀ {A : Set} {n}
-    (word : List (Fin.Fin n)) (values : Vec A (suc n)) →
+    (word : List.List (Fin.Fin n)) (values : Vec.Vec A (suc n)) →
   Product.permuteLinks
     (originalAdjacentWordProgram word) values
   ≡ originalApplyAdjacentWord word values
-originalAdjacentWordProgramActsInListedOrder [] values = refl
+originalAdjacentWordProgramActsInListedOrder List.[] values = refl
 originalAdjacentWordProgramActsInListedOrder
-    (index ∷ rest) values =
+    (List._∷_ index rest) values =
   originalAdjacentWordProgramActsInListedOrder
     rest (Product.permuteLinks (originalAdjacentAt index) values)
 
@@ -93,7 +93,7 @@ originalInverseProgram Product.swapHead = Product.swapHead
 originalInverseAfterProgram :
   ∀ {A : Set} {n}
     (program : Product.LinkPermutation n)
-    (values : Vec A n) →
+    (values : Vec.Vec A n) →
   Product.permuteLinks
     (originalInverseProgram program)
     (Product.permuteLinks program values)
@@ -107,16 +107,16 @@ originalInverseAfterProgram (Product.compose first second) values =
         first (Product.permuteLinks second values)))
     (originalInverseAfterProgram second values)
 originalInverseAfterProgram (Product.fixHead program)
-    (head ∷ tail) =
-  cong (_∷_ head)
+    (Vec._∷_ head tail) =
+  cong (λ chosenTail → Vec._∷_ head chosenTail)
     (originalInverseAfterProgram program tail)
 originalInverseAfterProgram Product.swapHead
-    (first ∷ second ∷ tail) = refl
+    (Vec._∷_ first (Vec._∷_ second tail)) = refl
 
 originalProgramAfterInverse :
   ∀ {A : Set} {n}
     (program : Product.LinkPermutation n)
-    (values : Vec A n) →
+    (values : Vec.Vec A n) →
   Product.permuteLinks program
     (Product.permuteLinks (originalInverseProgram program) values)
   ≡ values
@@ -130,7 +130,7 @@ originalProgramAfterInverse (Product.compose first second) values =
     (originalProgramAfterInverse first values)
 originalProgramAfterInverse (Product.fixHead program)
     (head ∷ tail) =
-  cong (_∷_ head)
+  cong (λ chosenTail → Vec._∷_ head chosenTail)
     (originalProgramAfterInverse program tail)
 originalProgramAfterInverse Product.swapHead
     (first ∷ second ∷ tail) = refl
