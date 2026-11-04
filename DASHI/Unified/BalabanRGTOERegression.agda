@@ -217,8 +217,10 @@ open TSVFGenerator public using
   ; osDifferenceQuotient
   ; originalSelectedDifferenceQuotientsIntertwine
   ; originalSelectedStrongGeneratorIntertwines
+  ; originalForwardKetStrongGeneratorIntertwines
   ; PhysicalHbarEnergyConversion
   ; originalSelectedPhysicalEnergyIntertwines
+  ; originalForwardKetPhysicalEnergyIntertwines
   )
 
 open TSVFWickFirewall public using
