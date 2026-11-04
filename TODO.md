@@ -1,3 +1,6 @@
+- [x] P01 correlated-global Born error SOURCE: actual complex whole-environment wrong amplitude plus explicit nonnegative `delta` compared to independent controlled ABL numerator gives corrected `2^k*Wactual <= 1+2^k*delta` and two-channel cross bound; 3200 Fraction fixtures PASS. **Kernel pending; not a physical estimate.**
+- [ ] P01 physical next producer: construct selected many-body global Hilbert overlap and prove a useful source-derived correlation error `delta`, then identify original selected pre/post ABL ensemble; local Bell marginals cannot provide delta.
+
 - [x] P01.L15/L16 SOURCE: controlled complex emitter/site Born > rational ordered-rate original-ABL inequality (same original Q.ablProbability), certified 3/5, heterogeneous pulses, complex gamma bound; 3000 exact-Fraction fixtures, two invalid controls PASS. Agda KERNEL PENDING; physical correlated many-body postselection OPEN.
 - [ ] P00.L02: reconcile #1444 parent later R445 F08–F12 with #1460 child TSVF/KK; 20/26 shared changed paths have identical blobs, six docs/root differ; no overwrite/false same-object physical source.
 
