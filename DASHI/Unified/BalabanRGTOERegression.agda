@@ -53,6 +53,7 @@ import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellN
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact as TSVFWickFirewall
 import DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact as TSVFGenerator
+import DASHI.Physics.Foundations.TSVFOSSelectedKetHamiltonianNonpromotionExact as TSVFSelectedKetHNoGo
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -187,6 +188,19 @@ open TSFVKKPhysicalWeld public using
   ( selectedKK5HorizontalIsActualObservedBilinear
   ; selectedKKHorizontalEqualsReductionOfActualFiveMetric
   ; selectedSameBilinearAndSameObserverArrow
+  )
+
+-- P07 BIDI negative control: TWO explicitly symmetric rational
+-- Hamiltonian maps agree on one selected ket but differ on a second.
+-- Therefore no P07 single-forward-ket source may be promoted to
+-- equality of full operators, self-adjoint domains or spectra.
+open TSVFSelectedKetHNoGo public using
+  ( controlHamiltoniansAgreeOnForwardKet
+  ; positiveOneIsNotZero
+  ; controlHamiltoniansDifferOnSecondMode
+  ; sameSelectedForwardKetDoesNotForceWholeHamiltonian
+  ; zeroHamiltonianSymmetric
+  ; secondModeHamiltonianSymmetric
   )
 
 -- P07 Stone/OS trust firewall: on the SAME original TSVF/OS clock,
