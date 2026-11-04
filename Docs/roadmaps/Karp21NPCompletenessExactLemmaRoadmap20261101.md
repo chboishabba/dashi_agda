@@ -1,5 +1,14 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-04 — N21 Fin-free original gamma frame on E20 words; finite referee separation
+
+**New source:** `Karp21FinFreeOriginalGammaFrameExact.agda`, imported in `Karp21Everything.agda`, has `readFinFreeRawGraphFromActualFrame` for the actual `Runtime.readRawGraphWord` success path (including original 3m guard, no trailing suffix, signed triples, positive threshold and original raw order/endpoint check) and `e20OriginalWordFinFreeRawDecode` on `Gen.completeScaledPairEdges`. All field replay terms come from the already-existing `Karp21OriginalGammaGraphWordFieldsReplayExact`, and the actual raw runtime guard from `Karp21FinFreeE20RawValidatorAgreementExact`; no alternative grammar or dictionary verifier is smuggled in.
+
+**Independent finite arithmetic/grammar audit executed in this session:** 3,906 signed source-to-target E20 images, 111,111 small cut-label schedules, 989 rejected short bitstrings and one sparse graph with declared `n=2^1024` all passed exact integer/gamma model checks. These results came from an independent local Python reproduction, NOT an execution of the committed repository Python scripts and NOT Agda kernel certification. The repository's existing `scripts/check_karp_binary_codec.py` and `scripts/check_karp21_binary_native_sparse_verifier.py` continue to own their richer independent regression controls.
+
+**Still unpaid:** a full arbitrary-word `n21FinFreeVerifierSameWord` (both original parsers, malformed words, sparse label compatibility, negative weights, threshold score), binary native representation of gamma-decoded Nat fields and a literal polynomial tape clock. `Karp21OriginalGammaCompleteGraphParserExact` and this new N21 frame are both source-written proof candidates pending exact-head Agda. The 0/20 costed reduction and 0/21 end-to-end completion counts remain unchanged.
+
+
 ## 2026-11-04 — P0 strict Cook unary-index resource representation bound (source-written; kernel OPEN)
 
 **New Golden-candidate source:** `Karp21CookUnaryIndexWordBoundExact.agda`, imported by the existing Karp focused root, reuses the **original** `Prefix.encodeNatInto` successor/zero syntax, `Prefix.cookFormulaTokenCount`, `Finite.formulaVariables`, exactly-three-bit `Binary.encodeFormulaBits`, `Finite.canonicalCookFormulaWordSizeExact`, and `Canonical.k00StrictAcceptedWordCanonicalReencode`. `formulaIndexTokenBound` bounds **every** syntactic Cook variable index by its source AST's actual token count; `k00StrictWordAllIndicesBounded` transfers it to the length of **any successfully strict-parsed original SAT input word**, not merely the canonical encoder's image.
