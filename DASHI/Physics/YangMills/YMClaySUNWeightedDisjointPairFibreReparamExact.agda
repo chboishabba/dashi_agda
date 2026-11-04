@@ -35,7 +35,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Vec.Base using (Vec; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_; *-comm)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; _*ℝ_; _<ℝ_; *-comm)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
@@ -333,6 +333,49 @@ module _
       (λ blocks →
         originalAllPairsEffectiveDensity weight blocks
           *ℝ observable blocks)
+
+  -- Constructive strict positivity from the EXISTING original
+  -- one-link strict-positive integration input, not a separate
+  -- postulate that the coarse Wilson-Gibbs partition is nonzero.
+  originalAllPairsFibreDensityStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
+    ∀ {n}
+    (weight : Vec Pair n → ℝ) →
+    (∀ pairs → 0ℝ <ℝ weight pairs) →
+    ∀ blocks →
+    0ℝ <ℝ originalAllPairsEffectiveDensity weight blocks
+  originalAllPairsFibreDensityStrictlyPositive
+      strict {n = zero} weight positive [] =
+    positive []
+  originalAllPairsFibreDensityStrictlyPositive
+      strict {n = suc n} weight positive (block ∷ blocks) =
+    Ordered.oneStrictPositive strict _
+      (λ fibre →
+        originalAllPairsFibreDensityStrictlyPositive strict
+          (λ tail →
+            weight (pairFromCoarseAndFibre block fibre ∷ tail))
+          (λ tail →
+            positive (pairFromCoarseAndFibre block fibre ∷ tail))
+          blocks)
+
+  -- The same original N-link Haar strict integration gives a
+  -- nonzero selected effective coarse partition whenever the chosen
+  -- original fine weight is pointwise strictly positive.
+  -- The numerical value is the SAME unnormalized fine partition by
+  -- F19; this does not construct the physical Borel Haar itself.
+  originalAllPairsEffectivePartitionStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration source)
+    ∀ {n}
+    (weight : Vec Pair n → ℝ) →
+    (∀ pairs → 0ℝ <ℝ weight pairs) →
+    0ℝ <ℝ Product.productIntegral source
+      (originalAllPairsEffectiveDensity weight)
+  originalAllPairsEffectivePartitionStrictlyPositive
+      strict weight positive =
+    Ordered.productIntegralStrictlyPositive source strict
+      (originalAllPairsEffectiveDensity weight)
+      (originalAllPairsFibreDensityStrictlyPositive
+        strict weight positive)
 
   -- The actual coarse effective density must remain INSIDE the
   -- original coarse Haar. Pulling an arbitrary observable through
