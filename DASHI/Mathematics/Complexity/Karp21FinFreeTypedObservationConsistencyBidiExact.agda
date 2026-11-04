@@ -25,9 +25,9 @@ open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
-open import Data.Empty using (⊥-elim)
+open import Data.Empty using (⊥; ⊥-elim)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (sym; cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (sym; cong; cong₂; trans)
 import Data.Nat.Properties as NatP
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
@@ -216,3 +216,81 @@ originalRawLocalSignedCutMatchesTyped
     (originalRawLocalSignedCutMatchesTyped
       rs es restSame restBits)
 
+
+------------------------------------------------------------------------
+-- The actual rawSparseScore checks both endpoints against OLD history,
+-- then prepends them as (u,a) :: (v,b) :: history. To compare this with
+-- a sequential chronological checker, visit (v,b) first, then (u,a).
+-- The extra (u vs v) comparison is trivially successful because every
+-- typed original SignedUndirectedEdge carries offDiagonal, and the
+-- source-owned RawEdgeFieldsSame preserves both numeric addresses.
+------------------------------------------------------------------------
+
+rawDecodedEndpointsDistinct :
+  ∀ {n : Nat}
+    (raw : Graph.RawEdge)
+    (typed : Cut.SignedUndirectedEdge n) →
+  Observe.RawEdgeFieldsSame raw typed →
+  Graph.source raw ≡ Graph.target raw → ⊥
+rawDecodedEndpointsDistinct raw typed fields equal =
+  Cut.offDiagonal typed
+    (FinP.toℕ-injective
+      (trans (Observe.firstAddress fields)
+        (trans equal (sym (Observe.secondAddress fields)))))
+
+runtimeOtherEndpointCannotChangeHistory :
+  ∀ {n : Nat}
+    (raw : Graph.RawEdge)
+    (typed : Cut.SignedUndirectedEdge n) →
+  Observe.RawEdgeFieldsSame raw typed →
+  (a b : Bool) (history : List (Nat × Bool)) →
+  Runtime.endpointConsistent (Graph.source raw) a
+    ((Graph.target raw , b) ∷ history)
+    ≡ Runtime.endpointConsistent (Graph.source raw) a history
+runtimeOtherEndpointCannotChangeHistory raw typed fields a b history
+  with NatP._≟_ (Graph.source raw) (Graph.target raw)
+... | yes same =
+  ⊥-elim (rawDecodedEndpointsDistinct raw typed fields same)
+... | no _ = refl
+
+andSwap3 : (a b c : Bool) →
+  Golden.andBool a (Golden.andBool b c)
+    ≡ Golden.andBool b (Golden.andBool a c)
+andSwap3 true true true = refl
+andSwap3 true true false = refl
+andSwap3 true false true = refl
+andSwap3 true false false = refl
+andSwap3 false true true = refl
+andSwap3 false true false = refl
+andSwap3 false false true = refl
+andSwap3 false false false = refl
+
+-- The two ACTUAL Runtime.endpointConsistent calls at one signed edge
+-- are identical to doing v then u chronologically, with the exact
+-- same history that Runtime.rawSparseScore passes to its tail.
+rawPairOldHistoryEqualsSequentialChronology :
+  ∀ {n : Nat}
+    (raw : Graph.RawEdge)
+    (typed : Cut.SignedUndirectedEdge n) →
+  (fields : Observe.RawEdgeFieldsSame raw typed) →
+  (a b restOK : Bool) (history : List (Nat × Bool)) →
+  Golden.andBool
+    (Runtime.endpointConsistent (Graph.source raw) a history)
+    (Golden.andBool
+      (Runtime.endpointConsistent (Graph.target raw) b history)
+      restOK)
+  ≡
+  Golden.andBool
+    (Runtime.endpointConsistent (Graph.target raw) b history)
+    (Golden.andBool
+      (Runtime.endpointConsistent (Graph.source raw) a
+        ((Graph.target raw , b) ∷ history))
+      restOK)
+rawPairOldHistoryEqualsSequentialChronology
+  raw typed fields a b restOK history
+  rewrite runtimeOtherEndpointCannotChangeHistory
+    raw typed fields a b history =
+  andSwap3
+    (Runtime.endpointConsistent (Graph.source raw) a history)
+    (Runtime.endpointConsistent (Graph.target raw) b history)
+    restOK
