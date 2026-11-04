@@ -127,5 +127,5 @@ originalObserverResidualReopening =
     { Prior.ResidualReopening.Residual = Original.TerminalAccess
     ; Prior.ResidualReopening.residual = proj₂
     ; Prior.ResidualReopening.reopen = λ past terminal → past , terminal
-    ; Prior.ResidualReopening.reopenExact = λ _ → refl
+    ; Prior.ResidualReopening.reopenExact = λ { (past , terminal) → refl }
     }
