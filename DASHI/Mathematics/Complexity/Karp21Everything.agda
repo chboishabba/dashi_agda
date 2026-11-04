@@ -107,6 +107,8 @@ import DASHI.Mathematics.Complexity.Karp21EncodedFixedGraphWordsExact
 
 import DASHI.Mathematics.Complexity.Karp21CookAllWordCertificateBoundExact
 
+import DASHI.Mathematics.Complexity.Karp21CookConsistencyComparisonClockExact
+
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact
 
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact
