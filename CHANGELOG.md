@@ -223,3 +223,10 @@ Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAt
 - Three TOE root imports updated for both owners; no ESD changes.
 - Open draft Lean PR [#104](https://github.com/chboishabba/dashi_lean4/pull/104) contains source-faithful native-log, imaginary-product/quarter, genuine Riemann zeta/continuity Lean companion proofs and focused source-level checks. Prior Lean PR #24 is merged/closed, not the live work.
 - All four mathematical gates remain **OPEN on golden Agda** pending native proofs or verified proof-term import and independent exact-head Agda elaboration. No kernel pass, zero-axiom receipt or complete theorem is claimed from GitHub source readback.
+
+## 2026-11-04 — Machin exact owner reuse and new golden Bishop sign/reflection
+
+- Re-audited the existing constructive arctangent construction, exact rational tangent chain, Archimedes 223/71–22/7 enclosure, Machin quarter window, Round11 shared classical trig weld and derivative source owners, radius-two alternating sine source, and Wilson period carrier. Formal source documentation now distinguishes numerical theorem, chosen period carrier, conditional source-weld and true analytic pi identification.
+- New `DASHI/Analysis/BishopMachinPiComplementReflectionFromImaginaryProductExact.agda`: same selected Bishop signed-series `sin(pi_M−x)=sin(x)`, `cos(pi_M−x)=−cos(x)` under only already-owed K05 product and quarter equality; original odd/even parity/limit and ring-setoid solver reused.
+- New `DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda`: actual selected Round11 sine satisfies `87/128 ≤ sin_B(theta_M)` and `0<sin_B(theta_M)` from original two-ball sine certificate and Machin quarter interval, without new trigonometric assumptions.
+- Imported both into `EverythingTOESymmetryResolved369`, `Unifier`, and `Unified/Everything`. No protected ESD surfaces touched. Both are source-written with no added postulates or unsolved holes; exact Agda `--safe` kernel acceptance not yet observed. K04d/K05 terminal four mathematical obligations remain OPEN.
