@@ -1,3 +1,14 @@
+## Follow-up exact BIDI nonpromotion results — 4 November 2026
+
+The completed 186-row source/kernel/physical status appendix is in the canonical `Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md`. New original source-owned implementations preserve #1460 vs #1444 ownership.
+
+- **Observer spatial measurement necessary condition:** original finite diamond x/y/z cannot be recovered from original filtration; any additional measured sensor whose output plus filtration reconstructs all three events must distinguish x/y, x/z and y/z pairwise. `TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact.originalSpatialSensorNeedsThreePairwiseDistinctReadouts` is a finite, legacy-import NON-GOLDEN negative/necessity theorem.
+- **KK inverse problem:** `TSFVKKHorizontalReductionNoninjectiveBidiExact` proves horizontal g4 is independent of the original 5D fibre radius and chart connection. An actual full 5D vertical radius readout yields b²; a mixed offdiagonal difference yields A(v) at unit radius. This is **not** an actual physical 5D solution or uniqueness up to gauge/diffeomorphism, and global gauge-equivalent chart connections must not be counted as physically distinct.
+- **OS/Stone inverse problem:** `TSVFOSSelectedKetHamiltonianNonpromotionExact` supplies two explicit symmetric rational H that agree on one ket but not on the whole operator. This blocks promotion of `originalForwardKetPhysicalEnergyIntertwines` to self-adjoint/spectral/unitary-on-Hilbert equality without a real dense domain and physical J.
+
+Independent equivalent exact tests: 24,000 KK radius, 36,000 chart connection and 12,000 two-mode Hamiltonian-symmetry cases PASS. Golden compiler absent; no source/kernal or physical promotion claimed. Full backward/falsification ledger: [Physical Completion Bidirectional Steelman](TSFVPhysicalCompletionBidirectionalSteelmanExactCut20261104.md).
+
+
 ## 4 November 2026 — further P01/P02/P03/P07/P08 same-source max-cut
 
 **P01/P02 original finite diamond:** New source owner DASHI/Physics/Foundations/TSFVOriginalFiltrationFiniteCausalDiamondNonpromotionExact.agda imports the *existing* DASHI.Geometry.FiniteCausalDiamond, maps all seven original diamond causal edges to the existing observer-visibility preorder, and proves no decoder of only the original three filtration levels can distinguish the genuine diamond x/y spatial branches. The earlier three-element observer information chain is a true finite order, but not a physical measurement or derivation of three spatial dimensions. The original diamond itself supplies three branches as a chosen finite model, not a measured 4D continuum. This new module is intentionally non-Golden because the original diamond owner is not known transitively safe.
