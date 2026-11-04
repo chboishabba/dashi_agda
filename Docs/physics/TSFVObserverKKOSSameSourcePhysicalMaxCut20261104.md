@@ -23,7 +23,7 @@
 
 **P07 Wick/Stone:** for a common positive self-adjoint H,
 \[
- T(\tau)=e^{-\tau H},\qquad
+ T(\tau)=e^{-\tau H/\hbar},\qquad
  U(t)=e^{-itH/\hbar}.
 \]
 For SI-time tau in seconds (mathematical inverse-energy parameter s=tau/hbar), \\(T(\\tau)=e^{-\\tau H/\\hbar}\\). A strictly decaying nonvacuum OS state has `||T(τ)ψ||<||ψ||` while `||U(t)ψ||=||ψ||`; a norm-preserving onto identification cannot map one positive-time operator directly to the other. The source-written no-go accepts exactly the actual old `OriginalTSVFToOSClock` and proves `⊥` from its direct step intertwiner plus physical isometry/strict-decay evidence. This avoids a central **false proof promotion**. The finite permutation/rank-drop example is not a finite-positive-τ exponential, only a qualitative logical witness.
