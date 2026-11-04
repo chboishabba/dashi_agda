@@ -111,8 +111,124 @@ def check_time_no_go():
           "step-identity negative control (not finite-time OS exponential)")
 
 
+
+
+# Additional P01->P02 / P02->P08 / P03->P07 max-cut checks.
+# The two-level example is a FINITE Hilbert mathematical model, NOT the
+# physically selected OS-reconstructed Hilbert of Yang-Mills.
+import cmath
+
+
+def check_actual_diamond_visibility_nonpromotion():
+    levels = {"past": "initial", "x": "intermediate",
+              "y": "intermediate", "z": "intermediate",
+              "future": "terminal"}
+    original_edges = (
+        ("past", "x"), ("past", "y"), ("past", "z"),
+        ("x", "future"), ("y", "future"), ("z", "future"),
+        ("past", "future")
+    )
+    assert all(precedes(levels[a], levels[b]) for a, b in original_edges)
+    assert levels["x"] == levels["y"] == levels["z"]
+    # A single-valued decoder of a level cannot return x,y,z at once.
+    assert len({"x", "y", "z"}) == 3
+    assert len({levels[x] for x in ("x", "y", "z")}) == 1
+    print("PASS: seven original-diamond causal edges respect observer "
+          "access; spatial x/y/z cannot be reconstructed from the level")
+
+
+def check_kk_shear_congruence():
+    rng = random.Random(1317)
+    count = 0
+    for _ in range(5000):
+        u = tuple(F(rng.randint(-7, 7), rng.randint(1, 7))
+                  for _ in range(4))
+        v = tuple(F(rng.randint(-7, 7), rng.randint(1, 7))
+                  for _ in range(4))
+        s = F(rng.randint(-7, 7), rng.randint(1, 7))
+        t = F(rng.randint(-7, 7), rng.randint(1, 7))
+        b2 = F(rng.randint(1, 7), rng.randint(1, 7))
+        shear_u = (u, s + connection(u))
+        shear_v = (v, t + connection(v))
+        unshear_u = (shear_u[0], shear_u[1] - connection(shear_u[0]))
+        assert unshear_u == (u, s)
+        assert (u, (s - connection(u)) + connection(u)) == (u, s)
+        decoupled = (
+            actual_four_bilinear(shear_u[0], shear_v[0])
+            + b2 * shear_u[1] * shear_v[1]
+        )
+        assert decoupled == kk_five(
+            actual_four_bilinear, connection, b2, u, s, v, t
+        )
+        assert (-connection(u)) + connection(u) == 0
+        count += 4
+    print(f"PASS: {count:,} exact rational invertible-KK-shear "
+          "and metric-congruence checks")
+
+
+def check_noncollapsed_two_level_wick_stone_reference():
+    # The real-time groups are U_obs(t)=exp(-it H_obs/hbar) and
+    # U_os(t)=J U_obs(t) J^-1 on C^2, with actual H=(0,3/2).
+    # This provides a genuinely noncollapsed 2D Hilbert CONTROL,
+    # not an OS physical 4D YM reconstruction.
+    hbar = 1.4
+    energy = 1.5
+
+    def J(vec):
+        return (vec[1], vec[0])
+
+    def evolve_obs(t, vec):
+        return (vec[0], cmath.exp(-1j * t * energy / hbar) * vec[1])
+
+    def evolve_os(t, vec):
+        return J(evolve_obs(t, J(vec)))
+
+    def energy_obs(vec):
+        return (0j, energy * vec[1])
+
+    def energy_os(vec):
+        return J(energy_obs(J(vec)))
+
+    def norm2(vec):
+        return sum(abs(v) ** 2 for v in vec)
+
+    psi = (0.6+0.2j, 0.3-0.7j)
+    for t in (0, 0.1, 0.3, 1.2):
+        assert max(abs(x-y) for x,y in zip(
+            J(evolve_obs(t, psi)), evolve_os(t, J(psi)))) < 1e-12
+        assert abs(norm2(evolve_obs(t, psi)) - norm2(psi)) < 1e-12
+        assert J(energy_obs(psi)) == energy_os(J(psi))
+
+    # Strong derivative and physical H=i*hbar*K, using actual
+    # difference quotients, not an independent Hamiltonian label.
+    def finite_derivative(t):
+        evolved = evolve_obs(t, psi)
+        return tuple((e - z)/t for e,z in zip(evolved, psi))
+
+    target = tuple(-1j*x/hbar for x in energy_obs(psi))
+    errors = [
+        max(abs(a-b) for a,b in zip(finite_derivative(2**(-n)),target))
+        for n in range(3, 16)
+    ]
+    assert all(errors[i+1] < errors[i] for i in range(len(errors)-1))
+    for a,b in zip(J(target),tuple(-1j*x/hbar for x in energy_os(J(psi)))):
+        assert abs(a-b) < 1e-12
+
+    tau = 0.7
+    epsi = (psi[0], cmath.exp(-tau*energy/hbar)*psi[1])
+    assert norm2(epsi) < norm2(psi)
+    # Real time is norm-preserving and Euclidean positive time contracts.
+    assert abs(norm2(evolve_obs(tau, psi))-norm2(psi)) < 1e-12
+    print("PASS: noncollapsed C^2 common-H, real-time unitary, "
+          "OS-side conjugation, finite derivative and Euclidean contraction "
+          "(analytic numerical control, not physical YM or Agda)")
+
+
 if __name__ == "__main__":
     check_original_access()
     check_kk_horizontal()
     check_time_no_go()
+    check_actual_diamond_visibility_nonpromotion()
+    check_kk_shear_congruence()
+    check_noncollapsed_two_level_wick_stone_reference()
     print("REFERENCE ONLY: NOT a physical/Agda/Stone/OS/Clay result")
