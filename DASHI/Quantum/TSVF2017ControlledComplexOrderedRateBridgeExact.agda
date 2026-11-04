@@ -42,7 +42,7 @@ import Data.Rational.Properties as ℚP
 open ℚP using (_≤?_)
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Relation.Nullary.Decidable.Core using (toWitness)
-open import Relation.Binary.PropositionalEquality using (cong; subst; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; subst; subst₂; sym; trans)
 
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
 import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as Pulse
@@ -304,3 +304,112 @@ originalRepeatedUnitaryABLExponentialCrossBound :
 originalRepeatedUnitaryABLExponentialCrossBound k =
   originalControlledABLExponentialCrossBound
     [] (replicateThreeFour k) ℚP.≤-refl
+
+------------------------------------------------------------------------
+-- Correlated-state ERROR branch: exact correction to the independent
+-- product bound, NOT a claim that local marginals bound global overlap.
+--
+-- A physical source must furnish the actual whole-environment amplitude
+-- and the additive Born comparison below. The existing Bell marginal
+-- no-go shows why those data cannot be inferred from one-site densities.
+------------------------------------------------------------------------
+
+record ControlledCorrelationBornError
+    (gammas : List C.RationalComplex)
+    (sites : List CalibratedControlledPulse) : Set where
+  constructor controlledCorrelationBornError
+  field
+    actualGlobalWrongAmplitude : C.RationalComplex
+    errorBorn : ℚ
+    errorNonnegative : 0ℚ ≤ errorBorn
+    correlatedBornUpper :
+      C.complexNormSq actualGlobalWrongAmplitude
+      ≤ ABL.numerator (Hetero.wrongABL gammas (emittedSites sites))
+          + errorBorn
+
+open ControlledCorrelationBornError public
+
+-- Even with correlated records, if a physical source bounds the
+-- GLOBAL Born deviation by delta, 2^k W_actual <= 1+2^k delta.
+-- No product factorization is asserted for actualGlobalWrongAmplitude.
+correlatedWrongRateWithError :
+  (gammas : List C.RationalComplex)
+  (sites : List CalibratedControlledPulse) →
+  Gamma.complexGammaBornWeight gammas ≤ 1ℚ →
+  (errorData : ControlledCorrelationBornError gammas sites) →
+  powerTwo sites
+    * C.complexNormSq (actualGlobalWrongAmplitude errorData)
+  ≤ 1ℚ + powerTwo sites * errorBorn errorData
+correlatedWrongRateWithError gammas sites gammaBound errorData =
+  let
+    power = powerTwo sites
+    actual = C.complexNormSq (actualGlobalWrongAmplitude errorData)
+    independent =
+      ABL.numerator (Hetero.wrongABL gammas (emittedSites sites))
+    delta = errorBorn errorData
+
+    instance
+      powerNN : NonNegative power
+      powerNN = nonNegative (powerTwoNonnegative sites)
+
+    first :
+      power * actual ≤ power * (independent + delta)
+    first =
+      ℚP.*-monoˡ-≤-nonNeg power (correlatedBornUpper errorData)
+
+    distribute :
+      power * (independent + delta)
+      ≡ power * independent + power * delta
+    distribute = ℚRing.solve-∀ power independent delta
+
+    second :
+      power * independent + power * delta
+      ≤ 1ℚ + power * delta
+    second =
+      ℚP.+-mono-≤
+        (originalControlledWrongRate gammas sites gammaBound)
+        ℚP.≤-refl
+  in
+  ℚP.≤-trans first
+    (subst
+      (λ lhs → lhs ≤ 1ℚ + power * delta)
+      (sym distribute)
+      second)
+
+-- Corrected two-channel cross inequality, intentionally not named an
+-- original ABL probability for the unconstructed correlated postselection.
+-- The actual numerator is a real Born norm, not a new independent label.
+correlatedTwoChannelCrossWithError :
+  (gammas : List C.RationalComplex)
+  (sites : List CalibratedControlledPulse) →
+  Gamma.complexGammaBornWeight gammas ≤ 1ℚ →
+  (errorData : ControlledCorrelationBornError gammas sites) →
+  (powerTwo sites + 1ℚ)
+    * C.complexNormSq (actualGlobalWrongAmplitude errorData)
+  ≤ 1ℚ
+    + C.complexNormSq (actualGlobalWrongAmplitude errorData)
+    + powerTwo sites * errorBorn errorData
+correlatedTwoChannelCrossWithError gammas sites gammaBound errorData =
+  let
+    power = powerTwo sites
+    actual = C.complexNormSq (actualGlobalWrongAmplitude errorData)
+    delta = errorBorn errorData
+
+    raw :
+      power * actual + actual
+      ≤ (1ℚ + power * delta) + actual
+    raw = ℚP.+-mono-≤
+      (correlatedWrongRateWithError gammas sites gammaBound errorData)
+      ℚP.≤-refl
+
+    expand :
+      (power + 1ℚ) * actual ≡ power * actual + actual
+    expand = ℚRing.solve-∀ power actual
+
+    rearrange :
+      (1ℚ + power * delta) + actual
+      ≡ 1ℚ + actual + power * delta
+    rearrange = ℚRing.solve-∀ power actual delta
+  in
+  subst₂ _≤_ (sym expand) rearrange raw
+
