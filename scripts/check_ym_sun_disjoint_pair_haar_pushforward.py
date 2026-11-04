@@ -27,6 +27,22 @@ def exact_paired_haar_expect(func, n):
     return Q(sum(func(tuple(mul(v[2*j],v[2*j+1]) for j in range(n)))
                  for v in product(G,repeat=2*n)), 8**(2*n))
 
+def ordered_path(path):
+    # This matches the original positive-path right-associated product.
+    value=path[-1]
+    for link in reversed(path[:-1]):
+        value=mul(link,value)
+    return value
+
+def exact_path_haar_expect(func,length):
+    return Q(sum(func(ordered_path(path))
+                 for path in product(G,repeat=length)),8**length)
+
+def exact_disjoint_path_haar_expect(func,n,length):
+    return Q(sum(func(tuple(ordered_path(links[j*length:(j+1)*length])
+                            for j in range(n)))
+                 for links in product(G,repeat=n*length)),8**(n*length))
+
 def geometry():
     points=list(product(range(4),repeat=4))
     all_fine_bonds={(p,a) for p in points for a in range(4)}
@@ -70,9 +86,24 @@ def run():
             f=lambda xs:weights[xs]
             assert exact_paired_haar_expect(f,n)==exact_haar_expect(f,n)
             pair_checks+=1
+    arbitrary_lengths=0
+    for length in range(1,6):
+        for _ in range(4):
+            weights={g:rng.randrange(-30,31) for g in G}
+            assert exact_path_haar_expect(lambda x:weights[x],length)==Q(sum(weights.values()),8)
+            arbitrary_lengths+=1
+    arbitrary_disjoint=0
+    for n,length,trials in ((1,4,3),(2,3,2),(3,2,2)):
+        for _ in range(trials):
+            weights={key:rng.randrange(-9,10) for key in product(G,repeat=n)}
+            f=lambda xs:weights[xs]
+            assert exact_disjoint_path_haar_expect(f,n,length)==exact_haar_expect(f,n)
+            arbitrary_disjoint+=1
     links,selected,spectators=geometry()
     print('PASS: 64 exact Q8 one-block noncommutative Haar tests')
     print(f'PASS: {pair_checks} exact Q8 disjoint-pair Haar tests (n<=3)')
+    print(f'PASS: {arbitrary_lengths} exact Q8 positive path Haar tests (L=1..5)')
+    print(f'PASS: {arbitrary_disjoint} exact Q8 disjoint ordered arbitrary-L path tests')
     print(f'PASS: native side4->side2: {links} coarse bonds, {selected} disjoint ordered fine links, {spectators} spectators')
     print('REFERENCE ONLY: not SU(N) continuous Haar, Agda kernel, Gibbs RG or Clay gap')
 
