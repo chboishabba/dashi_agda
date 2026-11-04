@@ -26,6 +26,19 @@ The proof composes actual emitted-record Born factors, rational monotone product
 
 `scripts/check_tsvf_controlled_complex_ordered_rate.py`, exact `fractions.Fraction` complex multiplication and norm-square, 3000 deterministic heterogeneous fixtures, 21000 checked identities/inequalities; passed. A noncalibrated pulse (`c=1`, one site) and an oversized `gamma=2+0i` (zero sites) each violate the desired universal bound, so both hypotheses are essential. The reference is **not** Agda typechecking.
 
+## Correlated-global Born error: exact conditional correction
+
+The follow-on `ControlledCorrelationBornError` does NOT infer independence from local density matrices. It requires an **actual global complex wrong amplitude** `A_actual`, a nonnegative explicit error `delta`, and the source-side comparison `|A_actual|² <= W_independent + delta`, where `W_independent` is the original controlled-pulse ABL wrong numerator. Then `correlatedWrongRateWithError` and `correlatedTwoChannelCrossWithError` prove over the exact rationals:
+
+```text
+2^k |A_actual|² <= 1 + 2^k delta
+(2^k+1)|A_actual|² <= 1 + |A_actual|² + 2^k delta
+```
+
+This is the correct **error-dependent** inequality to use in physical correlated-environment work rather than declaring a tensor product from local marginals. A physical selected global source must independently construct `A_actual`, derive a useful `delta`, and instantiate its chosen **original ABL** two-outcome context; the present theorem intentionally does NOT equate the global correlated amplitude with that unconstructed postselection. Without an upper bound on global deviation, the Bell counterexample prevents a uniform tensor-rate promotion.
+
+Independent `scripts/check_tsvf_correlated_born_error_rate.py` exact-Fraction run passed 3200 variable-global-amplitude fixtures with nonzero and zero additive errors. Source-written lemma; Agda kernel acceptance pending.
+
 ## Physical no-promotion boundary
 
 The local `CalibratedControlledPulse` certificate is NOT yet derived for the *selected physical many-body interaction*. The current tensor product is a finite independent record preparation, not a theorem for correlated or entangled environmental histories. A selected real final effect/bra and actually admissible disturbance class, relation to the published 2017 experiment, quantum dynamics, real-Hilbert completion, strongly continuous observer semigroup, domain/core identification, and same OS Hamiltonian spectral transport remain open. No 4D Yang–Mills nontriviality, cutoff-uniform CMP116 decay, continuum OS gap or Clay result is claimed.
