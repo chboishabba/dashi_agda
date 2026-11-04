@@ -42,6 +42,7 @@ import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
 import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as TSVFHeteroABL
 import DASHI.Quantum.TSVF2017HeterogeneousRateExact as TSVFHeteroRate
 import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as TSVFControlled
+import DASHI.Quantum.TSVF2017ControlledComplexOrderedRateBridgeExact as TSVFControlledComplexRate
 import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellNoGo
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
