@@ -23,7 +23,7 @@ module DASHI.Analysis.BishopRound11NativeComplexRectangleExact where
 -- rectangle, Round11 signed-factorial and complex-series authors.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 
 import Real as R
@@ -32,6 +32,7 @@ import Sequence as Seq
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
+import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -297,3 +298,70 @@ round11RectangleConvergesToOriginalExpProduct inputs x y =
       (C.pureImaginary y))
     (round11PhaseSeriesConvergesToOriginalExp inputs x)
     (round11PhaseSeriesConvergesToOriginalExp inputs y)
+
+
+------------------------------------------------------------------------
+-- FINITE COMPLEX TRIANGLE: REUSE THE ORIGINAL REAL MER TENS ROW
+-- IDENTITY FOUR TIMES.  This remains on the *same* Bishop-complex
+-- carrier and preserves the original grouped Round11 term histories.
+------------------------------------------------------------------------
+
+complexTriangle :
+  (left right : Nat → C.BishopComplex) →
+  Nat → C.BishopComplex
+complexTriangle left right count =
+  C.complex
+    (R._-_
+      (Row.trianglePartial (realTerms left) (realTerms right) count)
+      (Row.trianglePartial (imagTerms left) (imagTerms right) count))
+    (R._+_
+      (Row.trianglePartial (realTerms left) (imagTerms right) count)
+      (Row.trianglePartial (imagTerms left) (realTerms right) count))
+
+complexMertensRow :
+  (left right : Nat → C.BishopComplex) →
+  Nat → C.BishopComplex
+complexMertensRow left right count =
+  C.complex
+    (R._-_
+      (Row.mertensRowPartial (realTerms left) (realTerms right) count)
+      (Row.mertensRowPartial (imagTerms left) (imagTerms right) count))
+    (R._+_
+      (Row.mertensRowPartial (realTerms left) (imagTerms right) count)
+      (Row.mertensRowPartial (imagTerms left) (realTerms right) count))
+
+complexTriangleIsMertens :
+  (left right : Nat → C.BishopComplex) →
+  (count : Nat) →
+  C._≈C_
+    (complexTriangle left right count)
+    (complexMertensRow left right count)
+complexTriangleIsMertens left right count =
+  C.complex-equivalent
+    (RP.+-cong
+      (Row.triangleIsMertensRow
+        (realTerms left) (realTerms right) count)
+      (RP.-‿cong
+        (Row.triangleIsMertensRow
+          (imagTerms left) (imagTerms right) count)))
+    (RP.+-cong
+      (Row.triangleIsMertensRow
+        (realTerms left) (imagTerms right) count)
+      (Row.triangleIsMertensRow
+        (imagTerms left) (realTerms right) count))
+
+round11PhaseTriangleIsMertens :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (count : Nat) →
+  C._≈C_
+    (complexTriangle
+      (round11PhaseTerms inputs x)
+      (round11PhaseTerms inputs y) count)
+    (complexMertensRow
+      (round11PhaseTerms inputs x)
+      (round11PhaseTerms inputs y) count)
+round11PhaseTriangleIsMertens inputs x y count =
+  complexTriangleIsMertens
+    (round11PhaseTerms inputs x)
+    (round11PhaseTerms inputs y) count
