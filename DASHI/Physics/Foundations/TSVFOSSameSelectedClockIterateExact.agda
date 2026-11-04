@@ -98,7 +98,7 @@ record OriginalTSVFToOSClock
 
     -- Algebraic interface for the chosen osStep. There is NO
     -- independent proof here that osStep is the Euclidean OS transfer
-    -- T(tau)=exp(-tau H) or the reconstructed real-time unitary
+    -- T(tau)=exp(-tau H/hbar) for tau in seconds, or the reconstructed real-time unitary
     -- U(t)=exp(-i t H/hbar). These are NOT equal on positive-energy
     -- excitations: a real-time isometry cannot intertwine a strictly
     -- contracting positive-E Euclidean step under a norm-isometric
