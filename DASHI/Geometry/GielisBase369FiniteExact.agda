@@ -13,8 +13,8 @@ open import Agda.Builtin.Nat using (_+_)
 open import Data.Integer using (ℤ; +_; -[1+_])
   renaming (_+_ to _+ℤ_; _*_ to _*ℤ_)
 open import Data.List.Base using (List; []; _∷_)
-open import DASHI.Foundations.Base369CirclePhase as Phase
-  using (Phase18; phase18-index; fromPhase18Index)
+import DASHI.Foundations.Base369CirclePhase as Phase
+open Phase using (Phase18; phase18-index; fromPhase18Index)
 
 
 -- 2 cos(2 pi 3 j / 18), exactly on j = 0,...,17.
@@ -82,13 +82,13 @@ signal9 Phase.p18-17 = -[1+ 1 ]
 
 -- Rotations of 2 pi / m correspond to shifts of 18/m sectors.
 rotate3 : Phase18 → Phase18
-rotate3 p = fromPhase18Index (phase18-index p _+_ 6)
+rotate3 p = fromPhase18Index (phase18-index p + 6)
 
 rotate6 : Phase18 → Phase18
-rotate6 p = fromPhase18Index (phase18-index p _+_ 3)
+rotate6 p = fromPhase18Index (phase18-index p + 3)
 
 rotate9 : Phase18 → Phase18
-rotate9 p = fromPhase18Index (phase18-index p _+_ 2)
+rotate9 p = fromPhase18Index (phase18-index p + 2)
 
 reflect18 : Phase18 → Phase18
 reflect18 Phase.p18-0 = Phase.p18-0
