@@ -121,3 +121,21 @@ The new Phase 3 changes have not been independently type-checked in this session
 
 ### Phase 5 changelog
 2026-11-03: Added staged formal pipeline, corrected spectral coordinate parse indentation, and wired TOE roots. Python/Rust/ESD unchanged. Kernel acceptance and same-object runtime receipt correspondence remain open.
+
+## Phase 5 same-object tightening — 2026-11-04
+Referee receipt supplied by maintainer: `0afb4fd938` passed focused `agda --safe` checks for coordinate rebuildability, numeric ABI, ITIR inventory, SLR crate inventory and the original pipeline. This receipt **does not** certify the new commits below.
+
+- [x] R1: admitted candidate pair now carries two source emission receipts.
+- [x] R3: obligation residual is definitionally computed from the same two emission receipts, with a receipt-derived constructor.
+- [x] R4: spectral band has a natural-number micro-unit inequality witness; protection is a typed `FleetReduction.Protection`, not a bare Boolean. Formally required and reviewed witnesses survive the bulk.
+- [x] R5: the no-typed-meet proof is checked against the computed receipt residual, and an end-to-end record identifies the same R1/R3 receipts and R4/R5 evidence.
+- [x] ITIR: 93 tool contract rows now carry typed backing subsystem, explicit-profile Boolean, and differentiated mutability/gate fields. All 26 re_gpt contracts have an exhaustive no-uncertain-commit-retry lemma.
+- [ ] Source-extracted parity: the `itir-mcp` registry and authority profile source could not be fetched in this update. The 93 tool mutability/backing/profile classifications are **provisional**; they must be replaced/checked against pinned runtime source before claiming exact implementation parity.
+- [ ] The per-tool `ValidToolContract` theorem currently only rules out `promoted` as the maximum output. Extend it to the actual status order, output list and gate metadata.
+- [ ] Verify runtime `re_gpt` decorator read-only/retry classifications, including `chatgpt_reconcile` and `chatgpt_session_doctor`.
+- [ ] Establish a source-bound, unforgeable witness from PostgreSQL source row through PNF, Hecke fibre, numeric eigenvalue, AST compiler digest and independent proof-join receipt. A well-typed record alone does not establish that the real runtime produced its fields.
+- [ ] Re-run `agda --safe` on this revision and all three TOE roots; do not reuse the prior `0afb4fd938` receipt as acceptance of the new source.
+- [ ] Check actual Marchenko–Pastur threshold computation and its units: the typed `3148495` micro-unit threshold is a specified constant, not derived from the covariance source.
+
+### Changelog
+2026-11-04: Tightened Phase 5 same-object witness chain and typed ITIR registry backing. Kept runtime source fidelity and kernel acceptance open pending independent referee. No Python/Rust/ESD changes.
