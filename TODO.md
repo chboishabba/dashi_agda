@@ -1,3 +1,8 @@
+- [x] R445.F13 SOURCE: existing one-link SUN Haar plus left-invariance/scale yields exact noncommutative two-link and disjoint-pair+spectator **unweighted** Haar pushforward; original side4->side2 reference geometry 64 pairs/128 selected/896 spectator from 1024. Q8 exact checks PASS; kernel pending.
+- [x] R445.F14 SOURCE: exact selected original SU(N) weighted Wilson-Gibbs **blocked covariance** agrees with actual R445 pushforward coarse covariance, same finite measure/map, not invented bare coarse Wilson.
+- [ ] R445 critical: kernel-prove original 1024-bond pair/spectator permutation + SUNBlock coordinate identification, then measurable SU(N) product Haar and **weighted** effective-action disintegration/reflection-compatible scaling.
+- [ ] R320/R333: original physical mixed-J logZ derivatives, uniform rooted-shell decay, physical same OS Hamiltonian strict gap through UV+IR limits and H6 nontriviality, independent Clay endpoint.
+
 - [x] R445.F12 SOURCE: existing `SectionedProjectionProvenanceBridgeExact.pullbackObservable` + `BalabanFiniteProbabilityPartitionDisintegrationExact` + `BalabanFiniteRGObservableReopeningExact` yield `T(f o pi)=f` and `E_fine[f o pi]=E_coarse[f]` on the SAME finite rational partition, with factorized fine observables; 2400 exact-rational reference tests PASS. **Agda pending; not physical SU(N) Haar/disintegration.**
 - [ ] R445.P04 remains: actual measurable SU(N) coarse conditional disintegration/effective action and physical pushforward identification, not a finite Q rational projection replacement.
 
