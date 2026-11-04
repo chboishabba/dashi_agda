@@ -358,3 +358,194 @@ gram69 = refl
 -- Finite mode orthogonality is kernel-checkable after Agda invocation.
 -- Not claimed: continuous analytic Gielis equality, complex Fourier
 -- reconstruction, eigenvalue convergence, or a physical optical theorem.
+
+-- The dihedral relation needs inverses, not just periodicity of each signal.
+rotate3Inverse : Phase18 → Phase18
+rotate3Inverse p = fromPhase18Index (phase18-index p + 12)
+
+rotate3InverseLeft : (p : Phase18) → rotate3Inverse (rotate3 p) ≡ p
+rotate3InverseLeft Phase.p18-0 = refl
+rotate3InverseLeft Phase.p18-1 = refl
+rotate3InverseLeft Phase.p18-2 = refl
+rotate3InverseLeft Phase.p18-3 = refl
+rotate3InverseLeft Phase.p18-4 = refl
+rotate3InverseLeft Phase.p18-5 = refl
+rotate3InverseLeft Phase.p18-6 = refl
+rotate3InverseLeft Phase.p18-7 = refl
+rotate3InverseLeft Phase.p18-8 = refl
+rotate3InverseLeft Phase.p18-9 = refl
+rotate3InverseLeft Phase.p18-10 = refl
+rotate3InverseLeft Phase.p18-11 = refl
+rotate3InverseLeft Phase.p18-12 = refl
+rotate3InverseLeft Phase.p18-13 = refl
+rotate3InverseLeft Phase.p18-14 = refl
+rotate3InverseLeft Phase.p18-15 = refl
+rotate3InverseLeft Phase.p18-16 = refl
+rotate3InverseLeft Phase.p18-17 = refl
+
+rotate3InverseRight : (p : Phase18) → rotate3 (rotate3Inverse p) ≡ p
+rotate3InverseRight Phase.p18-0 = refl
+rotate3InverseRight Phase.p18-1 = refl
+rotate3InverseRight Phase.p18-2 = refl
+rotate3InverseRight Phase.p18-3 = refl
+rotate3InverseRight Phase.p18-4 = refl
+rotate3InverseRight Phase.p18-5 = refl
+rotate3InverseRight Phase.p18-6 = refl
+rotate3InverseRight Phase.p18-7 = refl
+rotate3InverseRight Phase.p18-8 = refl
+rotate3InverseRight Phase.p18-9 = refl
+rotate3InverseRight Phase.p18-10 = refl
+rotate3InverseRight Phase.p18-11 = refl
+rotate3InverseRight Phase.p18-12 = refl
+rotate3InverseRight Phase.p18-13 = refl
+rotate3InverseRight Phase.p18-14 = refl
+rotate3InverseRight Phase.p18-15 = refl
+rotate3InverseRight Phase.p18-16 = refl
+rotate3InverseRight Phase.p18-17 = refl
+
+reflectRotate3 : (p : Phase18) → reflect18 (rotate3 p) ≡ rotate3Inverse (reflect18 p)
+reflectRotate3 Phase.p18-0 = refl
+reflectRotate3 Phase.p18-1 = refl
+reflectRotate3 Phase.p18-2 = refl
+reflectRotate3 Phase.p18-3 = refl
+reflectRotate3 Phase.p18-4 = refl
+reflectRotate3 Phase.p18-5 = refl
+reflectRotate3 Phase.p18-6 = refl
+reflectRotate3 Phase.p18-7 = refl
+reflectRotate3 Phase.p18-8 = refl
+reflectRotate3 Phase.p18-9 = refl
+reflectRotate3 Phase.p18-10 = refl
+reflectRotate3 Phase.p18-11 = refl
+reflectRotate3 Phase.p18-12 = refl
+reflectRotate3 Phase.p18-13 = refl
+reflectRotate3 Phase.p18-14 = refl
+reflectRotate3 Phase.p18-15 = refl
+reflectRotate3 Phase.p18-16 = refl
+reflectRotate3 Phase.p18-17 = refl
+
+rotate6Inverse : Phase18 → Phase18
+rotate6Inverse p = fromPhase18Index (phase18-index p + 15)
+
+rotate6InverseLeft : (p : Phase18) → rotate6Inverse (rotate6 p) ≡ p
+rotate6InverseLeft Phase.p18-0 = refl
+rotate6InverseLeft Phase.p18-1 = refl
+rotate6InverseLeft Phase.p18-2 = refl
+rotate6InverseLeft Phase.p18-3 = refl
+rotate6InverseLeft Phase.p18-4 = refl
+rotate6InverseLeft Phase.p18-5 = refl
+rotate6InverseLeft Phase.p18-6 = refl
+rotate6InverseLeft Phase.p18-7 = refl
+rotate6InverseLeft Phase.p18-8 = refl
+rotate6InverseLeft Phase.p18-9 = refl
+rotate6InverseLeft Phase.p18-10 = refl
+rotate6InverseLeft Phase.p18-11 = refl
+rotate6InverseLeft Phase.p18-12 = refl
+rotate6InverseLeft Phase.p18-13 = refl
+rotate6InverseLeft Phase.p18-14 = refl
+rotate6InverseLeft Phase.p18-15 = refl
+rotate6InverseLeft Phase.p18-16 = refl
+rotate6InverseLeft Phase.p18-17 = refl
+
+rotate6InverseRight : (p : Phase18) → rotate6 (rotate6Inverse p) ≡ p
+rotate6InverseRight Phase.p18-0 = refl
+rotate6InverseRight Phase.p18-1 = refl
+rotate6InverseRight Phase.p18-2 = refl
+rotate6InverseRight Phase.p18-3 = refl
+rotate6InverseRight Phase.p18-4 = refl
+rotate6InverseRight Phase.p18-5 = refl
+rotate6InverseRight Phase.p18-6 = refl
+rotate6InverseRight Phase.p18-7 = refl
+rotate6InverseRight Phase.p18-8 = refl
+rotate6InverseRight Phase.p18-9 = refl
+rotate6InverseRight Phase.p18-10 = refl
+rotate6InverseRight Phase.p18-11 = refl
+rotate6InverseRight Phase.p18-12 = refl
+rotate6InverseRight Phase.p18-13 = refl
+rotate6InverseRight Phase.p18-14 = refl
+rotate6InverseRight Phase.p18-15 = refl
+rotate6InverseRight Phase.p18-16 = refl
+rotate6InverseRight Phase.p18-17 = refl
+
+reflectRotate6 : (p : Phase18) → reflect18 (rotate6 p) ≡ rotate6Inverse (reflect18 p)
+reflectRotate6 Phase.p18-0 = refl
+reflectRotate6 Phase.p18-1 = refl
+reflectRotate6 Phase.p18-2 = refl
+reflectRotate6 Phase.p18-3 = refl
+reflectRotate6 Phase.p18-4 = refl
+reflectRotate6 Phase.p18-5 = refl
+reflectRotate6 Phase.p18-6 = refl
+reflectRotate6 Phase.p18-7 = refl
+reflectRotate6 Phase.p18-8 = refl
+reflectRotate6 Phase.p18-9 = refl
+reflectRotate6 Phase.p18-10 = refl
+reflectRotate6 Phase.p18-11 = refl
+reflectRotate6 Phase.p18-12 = refl
+reflectRotate6 Phase.p18-13 = refl
+reflectRotate6 Phase.p18-14 = refl
+reflectRotate6 Phase.p18-15 = refl
+reflectRotate6 Phase.p18-16 = refl
+reflectRotate6 Phase.p18-17 = refl
+
+rotate9Inverse : Phase18 → Phase18
+rotate9Inverse p = fromPhase18Index (phase18-index p + 16)
+
+rotate9InverseLeft : (p : Phase18) → rotate9Inverse (rotate9 p) ≡ p
+rotate9InverseLeft Phase.p18-0 = refl
+rotate9InverseLeft Phase.p18-1 = refl
+rotate9InverseLeft Phase.p18-2 = refl
+rotate9InverseLeft Phase.p18-3 = refl
+rotate9InverseLeft Phase.p18-4 = refl
+rotate9InverseLeft Phase.p18-5 = refl
+rotate9InverseLeft Phase.p18-6 = refl
+rotate9InverseLeft Phase.p18-7 = refl
+rotate9InverseLeft Phase.p18-8 = refl
+rotate9InverseLeft Phase.p18-9 = refl
+rotate9InverseLeft Phase.p18-10 = refl
+rotate9InverseLeft Phase.p18-11 = refl
+rotate9InverseLeft Phase.p18-12 = refl
+rotate9InverseLeft Phase.p18-13 = refl
+rotate9InverseLeft Phase.p18-14 = refl
+rotate9InverseLeft Phase.p18-15 = refl
+rotate9InverseLeft Phase.p18-16 = refl
+rotate9InverseLeft Phase.p18-17 = refl
+
+rotate9InverseRight : (p : Phase18) → rotate9 (rotate9Inverse p) ≡ p
+rotate9InverseRight Phase.p18-0 = refl
+rotate9InverseRight Phase.p18-1 = refl
+rotate9InverseRight Phase.p18-2 = refl
+rotate9InverseRight Phase.p18-3 = refl
+rotate9InverseRight Phase.p18-4 = refl
+rotate9InverseRight Phase.p18-5 = refl
+rotate9InverseRight Phase.p18-6 = refl
+rotate9InverseRight Phase.p18-7 = refl
+rotate9InverseRight Phase.p18-8 = refl
+rotate9InverseRight Phase.p18-9 = refl
+rotate9InverseRight Phase.p18-10 = refl
+rotate9InverseRight Phase.p18-11 = refl
+rotate9InverseRight Phase.p18-12 = refl
+rotate9InverseRight Phase.p18-13 = refl
+rotate9InverseRight Phase.p18-14 = refl
+rotate9InverseRight Phase.p18-15 = refl
+rotate9InverseRight Phase.p18-16 = refl
+rotate9InverseRight Phase.p18-17 = refl
+
+reflectRotate9 : (p : Phase18) → reflect18 (rotate9 p) ≡ rotate9Inverse (reflect18 p)
+reflectRotate9 Phase.p18-0 = refl
+reflectRotate9 Phase.p18-1 = refl
+reflectRotate9 Phase.p18-2 = refl
+reflectRotate9 Phase.p18-3 = refl
+reflectRotate9 Phase.p18-4 = refl
+reflectRotate9 Phase.p18-5 = refl
+reflectRotate9 Phase.p18-6 = refl
+reflectRotate9 Phase.p18-7 = refl
+reflectRotate9 Phase.p18-8 = refl
+reflectRotate9 Phase.p18-9 = refl
+reflectRotate9 Phase.p18-10 = refl
+reflectRotate9 Phase.p18-11 = refl
+reflectRotate9 Phase.p18-12 = refl
+reflectRotate9 Phase.p18-13 = refl
+reflectRotate9 Phase.p18-14 = refl
+reflectRotate9 Phase.p18-15 = refl
+reflectRotate9 Phase.p18-16 = refl
+reflectRotate9 Phase.p18-17 = refl
+
