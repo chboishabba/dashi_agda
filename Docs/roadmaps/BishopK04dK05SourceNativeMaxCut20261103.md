@@ -208,3 +208,21 @@ The two new golden modules are imported in all three canonical TOE roots, start 
 4. **P1 K04d-CONTINUITY:** actual Bishop source finite-term/compact uniform-limit continuity and concrete identification with the selected abstract half-plane and completed zeta objects.
 
 The theorem `round11MachinPiIsFirstPositiveSineZero` is **source-written conditional on 1 and 2**; do not leave a third independent K05 interval-sign obligation in the remaining max-cut, and do not call it an unconditional π proof until these two proofs and Agda safe kernel checks are paid.
+
+
+## 2026-11-04 continuation — finite Bishop-complex rectangle and original-series limit
+
+**Golden source owner:** `DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda` (new). Reused the existing `BishopFiniteSeriesRectangleProductExact.rectangleProduct` for all four Cartesian coordinates, the actual `BishopSetoidComplexExact.BishopComplex` / `_≈C_` / `expC`, the original `BalabanBishopConcreteSineCosineTermParityExact` signed terms, and the original `Round11MachinSetoidComplexInstanceExact` convergence witnesses.
+
+- `complexFiniteRectangleProduct`: fully source-written finite rectangle = product of finite partial sums for arbitrary histories in the **actual** Bishop setoid-complex carrier.
+- `round11PhaseRectangleIsProduct`: direct original Round11 signed-factorial specialization; no synthetic or abstract complex semiring.
+- `round11PhaseSeriesConvergesToOriginalExp`: two native Bishop convergence witnesses now identify the grouped signed-factorial complex phase history with the **actual** `expC(i*x)` limit.
+- `complexFinitePartialProductsConverge` and `complexRectangleConvergesToProduct`: existing Bishop sequence sum, product, negation and setoid-equivalence limit laws extend the finite rectangle identity to the infinite **rectangle**.
+- `round11RectangleConvergesToOriginalExpProduct`: the actual grouped Round11 rectangular sums converge coordinatewise to `expC(i*x) *C expC(i*y)`. This does not assume an imaginary exponential multiplication theorem.
+- Both the new owner and its original imports are exposed from all three canonical TOE import roots. No ESD files changed.
+
+**Remaining K05-PRODUCT max-cut is now narrower:** prove the all-degree mixed parity/factorial coefficients and the grouped signed-cosine/sine **rectangle-to-triangle** wing convergence/reindexing. The grouped index pairs even and odd Taylor degrees; one must NOT assert that their naive degree-n triangular convolution directly equals the grouped degree-n coefficients at x+y. Use the existing finite Cauchy triangle/wing owners with an explicit parity-sensitive regrouping and a common absolute majorant, then apply Bishop uniqueness of limits.
+
+**Unchanged independent gates:** K04d-LOG original negative-log exp inverse and Nat transport; K04d-CONTINUITY finite-term/local-uniform/same-object selected zeta; K05-PI original atan-to-trig quarter equality. Downstream K05 first-positive-zero remains conditional only on K05-PRODUCT and that quarter equality. The new source is `{-# OPTIONS --safe #-}`, contains no locally declared postulate or hole, but **no observed exact-head Agda kernel acceptance**; all declarations remain proof candidates until checking. No claim about completed zeta or original Riemann's zeta is promoted from a generic function record.
+
+**Attribution:** original finite Cauchy theorem authors and DASHI Round11/complex series authors, Cauchy, Machin, Bishop–Bridges, Zachary Murray, Viktor Csimma. Lean #104 remains a separate source-faithful companion, not an Agda proof transporter.
