@@ -273,6 +273,56 @@ module _
       theory traceData exponential betaFine
       oneLink bilateral divide betaCoarse gamma
 
+  -- R445.F08: the selected pushforward FUNCTIONAL itself, not merely
+  -- a pulled-back fine-gauge integrand, is invariant under every original
+  -- coarse SU(N) site gauge. The gauge lift is constructed in Existing.
+  actualPushforwardAllCoarseGaugeInvariant :
+    ∀ observable
+      (pointwise :
+        Existing.CoarsePointwiseObservable
+          theory traceData exponential betaFine
+          oneLink bilateral divide observable)
+      (coarseGamma : Variable.SUNPeriodicGauge theory 1) →
+    actualPushforwardNormalized
+      (λ coarse →
+        observable (Variable.periodicSUNGaugeTransform
+          theory 1 coarse coarseGamma))
+    ≡ actualPushforwardNormalized observable
+  actualPushforwardAllCoarseGaugeInvariant observable pointwise coarseGamma =
+    Existing.selectedPushforwardAllCoarseGaugeInvariant
+      theory traceData exponential betaFine
+      oneLink bilateral divide observable pointwise coarseGamma
+
+  actualPushforwardWilsonAllCoarseGaugeInvariant :
+    ∀ betaCoarse (coarseGamma : Variable.SUNPeriodicGauge theory 1) →
+    actualPushforwardNormalized
+      (λ coarse →
+        Variable.periodicSUNWilsonAction theory traceData 1 betaCoarse
+          (Variable.periodicSUNGaugeTransform
+            theory 1 coarse coarseGamma))
+    ≡ actualPushforwardNormalized
+      (Variable.periodicSUNWilsonAction theory traceData 1 betaCoarse)
+  actualPushforwardWilsonAllCoarseGaugeInvariant betaCoarse coarseGamma =
+    Existing.selectedBlockedWilsonAllCoarseGaugeInvariant
+      theory traceData exponential betaFine
+      oneLink bilateral divide betaCoarse coarseGamma
+
+  actualPushforwardGibbsAllCoarseGaugeInvariant :
+    ∀ betaCoarse (coarseGamma : Variable.SUNPeriodicGauge theory 1) →
+    actualPushforwardNormalized
+      (λ coarse →
+        Variable.periodicSUNGibbsDensity
+          theory traceData exponential 1 betaCoarse
+          (Variable.periodicSUNGaugeTransform
+            theory 1 coarse coarseGamma))
+    ≡ actualPushforwardNormalized
+      (Variable.periodicSUNGibbsDensity
+        theory traceData exponential 1 betaCoarse)
+  actualPushforwardGibbsAllCoarseGaugeInvariant betaCoarse coarseGamma =
+    Existing.selectedBlockedGibbsAllCoarseGaugeInvariant
+      theory traceData exponential betaFine
+      oneLink bilateral divide betaCoarse coarseGamma
+
 -- NO R445 physical pushforward-vs-bare coarse Wilson measure identity:
 -- the above provides a positive normalized source cylinder functional,
 -- not an identification of its Radon--Nikodym density or a measure kernel.
