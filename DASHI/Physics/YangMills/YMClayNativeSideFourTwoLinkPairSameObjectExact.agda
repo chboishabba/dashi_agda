@@ -39,6 +39,12 @@ import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SUNNative
 import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNBlock
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
+import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
+import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 module _ {Value : Set} (group : Bond.ExactLinkGroup Value) where
 
@@ -114,3 +120,31 @@ module _
   originalSUNBlockIsLiteralTwoLinkProduct fine bond =
     originalNativeBlockedLinkIsLiteralTwoFineProduct
       selectedOriginalGroup fine bond
+
+
+-- Most stringent same-object identity: select the ACTUAL original weighted
+-- side-four Gibbs / native blocked-cylinder pushforward owner, then prove
+-- that its literal chosen block map is exactly the same 2 fine-bond product.
+-- No new Gibbs measure, scalar division, or gauge-field configuration.
+module _
+    {Matrix Complex : Set} {N : Nat}
+    (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
+    (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
+    (exponential : Exp.StrictPositiveRealExponential)
+    (betaFine : ℝ)
+    (oneLink : Product.OneLinkProductHaar (SUN.SUNMatrixElement theory))
+    (bilateral : Bilateral.OneLinkSUNBilateralHaar theory oneLink)
+    (divide : ℝ → ℝ → ℝ)
+  where
+
+  actualSelectedWeightedGibbsBlockIsNativePair :
+    (fine : Variable.SUNPeriodicLinks theory 3)
+    (bond : Torus.PositiveBond 2) →
+    Push.actualBlockedLinkMap
+      theory traceData exponential betaFine oneLink bilateral divide
+      fine bond
+    ≡
+    literalOriginalTwoFineLinkProduct
+      (SUNNative.sunExactSignedLinkGroup theory) fine bond
+  actualSelectedWeightedGibbsBlockIsNativePair fine bond =
+    originalSUNBlockIsLiteralTwoLinkProduct theory fine bond
