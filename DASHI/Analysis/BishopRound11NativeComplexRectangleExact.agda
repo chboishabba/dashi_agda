@@ -144,13 +144,11 @@ round11PhaseSeriesConvergesToOriginalExp inputs x =
     phaseEquality = C.imaginaryExponentialIsPhase T x
   in
   Seq.xₙ→x∧x≃y⇒xₙ→y
-    (C.re (C.imaginaryPhase T x) ,
-      Route.round11MachinCosineConverges inputs x)
+    (Route.round11MachinCosineConverges inputs x)
     (RP.≃-symm (C.reEquivalent phaseEquality))
   ,
   Seq.xₙ→x∧x≃y⇒xₙ→y
-    (C.im (C.imaginaryPhase T x) ,
-      Route.round11MachinSineConverges inputs x)
+    (Route.round11MachinSineConverges inputs x)
     (RP.≃-symm (C.imEquivalent phaseEquality))
 
 ------------------------------------------------------------------------
