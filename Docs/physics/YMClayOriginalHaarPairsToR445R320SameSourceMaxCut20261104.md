@@ -43,6 +43,18 @@ The theorem then specializes first to the existing `SUNNative.sunExactSignedLink
 
 Remaining finite cut is one original native 1024-bond global pair/spectator permutation/canonical-label witness (the 64 ordered pairs and 896 spectators), plus a proof that its decoder is the very same selected physical `Codec.decodeOriginalBonds 4`. It is separate from the independently open R443 C3 spatial permutation certificate. Only after that and genuine one-link compact Haar is the full selected unweighted coarse Haar identity available for R445 effective-action disintegration. The fine Gibbs weight still couples the spectators.
 
+### R445.F16 — closed original selected label distinctness and 1024-index reindex plan
+
+File: `DASHI/Physics/YangMills/YMClayNativeSideFourPairDistinctCertificateExact.agda`.
+
+This imports **the original** `Codec.originalPositiveBondFinite 2` / `Codec.originalPositiveBondFinite 4`, the exact original `Torus.productDecidableEquality`, and F15's actual selected source `originalFirstFineBond` and `originalSecondFineBond`. It constructs the finite 128-label selected fine-list (in original coarse enumeration order), a *concrete* decidable no-duplicates fold, and source-written `refl` certificates for 64 original coarse bonds, 128 selected fine links, 1024 original fine bonds and truth of the computed selected-label distinctness boolean. **These closed `refl` claims have not been evaluated by the Agda kernel**; compiler/trust acceptance pending.
+
+The independent original-order companion `scripts/check_ym_native_1024_pair_spectator_reindex.py` enumerates all 1024 original four-torus fine-bond coordinates and all 64 coarse-bond coordinates (4 axes). Its selected 128 ordered labels are distinct; the remaining 896 are spectators; it constructs the exact 1024-label original-to-reordered index permutation, its inverse and an explicit 41,792-adjacent-swap sequence. It validates the full rearranged vector equality, inverse, the absence of duplicates and rejection of a wrong ordered pair. SHA256 of the comma-separated target original indices:
+
+`49b954c21ccd1649208074eb5096e5b6b63102313da773fe17e1268b67727ada`.
+
+**Remaining:** convert that Python-valid swap sequence to a **kernel-visible** `Product.LinkPermutation 1024` term and a *single canonical original bond-label-vector equality*, then apply the original `Product.productHaarPermutationInvariant`/congruence owners with F13's path/spectator theorem. The original selected Gibbs weight cannot be dropped over spectators: measurable conditional Gibbs integration/effective action, RP and UV/IR estimates remain separate. This F16 is deliberately not marked kernel-accepted or a physical Haar pushforward/disintegration proof.
+
 ### R445.F14 — actual selected physical finite blocked covariance
 
 File: `DASHI/Physics/YangMills/YMClaySUNR445BlockedPushforwardR320CovarianceExact.agda`.
@@ -65,6 +77,7 @@ This is the correct **finite R320 covariance identity**, not a proof that the se
 - 14 arbitrary **non-factorized** vector observables, disjoint ordered pairs with n=1,2,3 and exact sums over Q8^(2n), all pass.
 - 20 arbitrary one-path function tests for ordered positive lengths L=1..5; seven **non-factorized** multi-path tests for disjoint ordered L=2,3,4 blocks (all using exact rational Q8 Haar sums), all pass.
 - Original 4D side-four fine 1024 positive bonds, side-two coarse 64 bonds, disjoint 128 pair-selected fine bonds and 896 spectators, including periodic wrap endpoint, all pass.
+- Full original-bond-index reindex reference: exact inverse of all 1024 indices and 41,792 adjacent swaps, SHA256 and two wrong-order/duplicate negative controls, all pass.
 
 Q8 is a finite group *reference*, not the physical continuous compact SU(N) measure. It tests arithmetic/geometry; it does not prove the Agda terms or analytic application.
 
