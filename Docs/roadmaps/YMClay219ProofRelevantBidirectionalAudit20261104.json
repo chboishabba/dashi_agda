@@ -5,7 +5,7 @@
     "original_219_inventory": "Docs/roadmaps/YMClaySubmission219FieldInventory20261103.json",
     "original_219_inventory_blob_sha": "d3a2cbc10996cf063897c3ab82d14cd946479916",
     "producer_ledger": "Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md",
-    "producer_ledger_blob_sha": "1360b52abc57dab853154ef6c65b838a5bae0330",
+    "producer_ledger_blob_sha": "81959c7e345a45f45aac276f0cdb0d553ffd58e6",
     "source_contract_blob_sha": {
       "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda": "1ed00390e8401f86313f0440d6edfb29870dd31d",
       "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda": "0a69198469e601f124d6da8397c3a766bf61ec72"
@@ -16,7 +16,9 @@
     "positive_promotion_rule": "A field may be marked PROVED only after a pinned selected physical proposition, a proof term of that proposition, a same-object transport when applicable, and an exact-head kernel/transitive-trust receipt are present.",
     "redundancy_rule": "A field may be marked ELIMINATED only with a proof of implication from already discharged selected physical predicates to this literal selected field predicate, plus accepted kernel receipt.",
     "bidirectional_rule": "Forward candidate-gate search hints are invertibly indexed below. Neither field-to-producer logical implication nor producer-to-field converse is claimed without a named Agda theorem.",
-    "endpoint_rule": "The top-down Round78 compiler proves sufficiency of five actual typed hypotheses on ONE literal YangMillsConstruction; it does not prove the converse, establish the physical hypotheses, or promote Set-valued placeholders."
+    "endpoint_rule": "The top-down Round78 compiler proves sufficiency of five actual typed hypotheses on ONE literal YangMillsConstruction; it does not prove the converse, establish the physical hypotheses, or promote Set-valued placeholders.",
+    "original_219_are_bare_types": "219 / 219 original fields literally declared name : Set; NONE of those declarations is an inhabitant of a selected proposition",
+    "selected_endpoint_is_parametric": "ClayYangMillsSolution is indexed by arbitrary ClayProblemVocabulary, so an all-Trivial vocabulary can be inhabited and cannot count as external Clay theorem"
   },
   "chosen_terminal_compiler": {
     "path": "DASHI/Physics/YangMills/BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.agda",
@@ -30,7 +32,8 @@
       "StandardSameHGaussianNontrivialityConsequence Y"
     ],
     "converse_status": "UNPROVED_NOT_ASSUMED",
-    "physical_instantiation_status": "OPEN"
+    "physical_instantiation_status": "OPEN",
+    "extra_external_semantic_hypothesis": "Need same-object real-world interpretation of 15 carriers/34 semantics and Clay 8 pre,9 post,11 invariant physical requirements. Trivial chosen predicates are forbidden."
   },
   "exact_field_counts": {
     "A": 58,
@@ -45,7 +48,7 @@
   },
   "exact_total_fields": 219,
   "exact_bare_Set_fields": 219,
-  "producer_rows": 63,
+  "producer_rows": 66,
   "producer_catalog": [
     {
       "id": "R443.F01",
@@ -548,6 +551,30 @@
       "family": "TRUST",
       "ledger_description": "OPEN",
       "ledger_status": "Independent compiler clean-room receipt, exact theorem names, revisions, dependency graph, author/source provenance and manuscript correspondence",
+      "payment": "",
+      "relation_to_submission_fields": "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"
+    },
+    {
+      "id": "SEM.P01",
+      "family": "SEM",
+      "ledger_description": "OPEN / SOURCE FIREWALL",
+      "ledger_status": "For EACH of 219 names, fix the physically selected predicate on the **same** actual YM construction, prove equality to the original named chosen `Set`, and construct the predicate's witness; or provide a kernel-accepted same-statement redundancy implication. Bare original `Set` or string-search owner never discharges a proposition.",
+      "payment": "",
+      "relation_to_submission_fields": "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"
+    },
+    {
+      "id": "SEM.P02",
+      "family": "SEM",
+      "ledger_description": "OPEN / SOURCE FIREWALL",
+      "ledger_status": "Fix the 15 carrier types and 34 `LiteralYangMillsSemantics` predicate families to the **external mathematical requirements** (actual compact simple groups, actual Euclidean R⁴, nontrivial local 4D QFT, selected physical OS Hamiltonian and strictly positive gap); establish a same-object proof-relevant equality/interpretation for all 8/9/11 Clay vocabulary requirements. The trivial parametric endpoint countermodel must be rejected.",
+      "payment": "",
+      "relation_to_submission_fields": "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"
+    },
+    {
+      "id": "SEM.P03",
+      "family": "SEM",
+      "ledger_description": "OPEN",
+      "ledger_status": "Produce explicit checked edges from each nonredundant **physically anchored** 219-field proposition into the five source-selected T78 compiler inputs, or a proof of redundancy/supersession. The typed Round78 five-input → parametric endpoint implication is sufficient, NOT a proved converse; direct physical solutions via another route must not be excluded. Audit exact link semantics and independently confirm external Clay acceptance.",
       "payment": "",
       "relation_to_submission_fields": "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"
     }
@@ -6212,6 +6239,11 @@
     "individual_proof_discharge_receipts": 0,
     "semantic_physical_predicate_welds": 0,
     "asserted_sufficiency_edges_from_219_to_clay": 0,
-    "as_of_source": "2026-11-04"
+    "as_of_source": "2026-11-04",
+    "producer_rows": 66,
+    "semantic_anchor_count": 0,
+    "official_vocabularies_pinned_to_physical_meaning": 0,
+    "round78_inputs_physical_proof_terms": 0,
+    "current_live_status": "No physical proof upgraded. Three new SEM gates are separate from the 219 source placeholders."
   }
 }
