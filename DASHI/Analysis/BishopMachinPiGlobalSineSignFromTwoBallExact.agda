@@ -121,7 +121,7 @@ machinComplementBelowTwoFromLocatedRight x middleBelowX =
         differenceUpperBelowTwo
   in
   RP.<-respˡ-≃
-    (Reflection.machinComplementAsNegativePlusPi x)
+    (RP.≃-symm (Reflection.machinComplementAsNegativePlusPi x))
     combined
 
 machinComplementInsideTwoFromLocatedRight :
@@ -142,7 +142,7 @@ machinComplementInsideTwoFromLocatedRight x xBelowPi middleBelowX =
     compNN = RP.0≤x⇒nonNegx (RP.<⇒≤ compPositive)
   in
   RP.≤-respˡ-≃
-    (RP.nonNegx⇒∣x∣≃x compNN)
+    (RP.≃-symm (RP.nonNegx⇒∣x∣≃x compNN))
     (RP.<⇒≤
       (machinComplementBelowTwoFromLocatedRight x middleBelowX))
 
@@ -159,8 +159,8 @@ round11SinePositiveBeforeMachinPi inputs product quarterEqual
   SinePos.round11SinePositiveOnStrictTwoBall
     inputs x xPositive
     (RP.≤-respˡ-≃
-      (RP.nonNegx⇒∣x∣≃x
-        (RP.0≤x⇒nonNegx (RP.<⇒≤ xPositive)))
+      (RP.≃-symm (RP.nonNegx⇒∣x∣≃x
+        (RP.0≤x⇒nonNegx (RP.<⇒≤ xPositive))))
       (RP.<⇒≤ xBelowTwo))
 ... | inj₂ middleBelowX =
   RP.<-respʳ-≃
