@@ -21,7 +21,7 @@ module DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact where
 -- No physical same-clock, nonzero YM mass gap, or full Stone theorem is
 -- manufactured from finite iteration or from matching (3,1) signatures.
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Empty using (⊥)
@@ -30,6 +30,7 @@ import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as Source
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as SameMetric
+import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact as SameArrow
 import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as Arrow
 import DASHI.Physics.YangMills.BalabanOSMassGapClosure as OS
 import DASHI.Physics.YangMills.BalabanOSIndexedTransferCoordinateRound331Exact as R331
@@ -45,6 +46,20 @@ iterate : ∀ {State : Set} →
   Nat → (State → State) → State → State
 iterate zero step x = x
 iterate (suc n) step x = step (iterate n step x)
+
+
+-- Positive-integer observation steps really form an additive discrete
+-- iteration semigroup. This is algebra on the original observer/OS
+-- transition carriers; it must not be confused with a strongly continuous
+-- REAL-TIME unitary group or a Stone generator theorem.
+originalClockIterateAdd :
+  ∀ {State : Set} (m n : Nat)
+    (step : State → State) (x : State) →
+  iterate (m + n) step x ≡
+  iterate m step (iterate n step x)
+originalClockIterateAdd zero n step x = refl
+originalClockIterateAdd (suc m) n step x =
+  cong step (originalClockIterateAdd m n step x)
 
 record OriginalTSVFToOSClock
     {F : Bidi.BidirectionallyAdmissibleHistoryFibre}
@@ -197,6 +212,28 @@ sameClockPhysicalMetricHas31Signature :
   ≡ L31.signature 3 1
 sameClockPhysicalMetricHas31Signature upgrade =
   SameMetric.sameMetricKKSignatureFromTSFV (sameObservedMetric upgrade)
+
+-- The P07 optional KK upgrade now imports the STRICTER same-observer
+-- directional theorem, rather than merely reciting equal (3,1) counts.
+-- The selected original forward ket is already matched to the selected
+-- physical metric state in SameMetric31ClockUpgrade; the underlying
+-- SameMetricTSFVKK calibration forces both original arrow probes to
+-- choose the same physical timelike axis.
+selectedP07ObserverAndKKClockDirectionAgree :
+  ∀ {F Q E Observable Point Scalar system reconstruction Energy}
+    {clock : OriginalTSVFToOSClock {F} {Q} E
+      {Observable} {Point} {Scalar} {system} reconstruction Energy} →
+  (upgrade : SameMetric31ClockUpgrade clock) →
+  L31.selectedArrow
+    (KK.SameSourceKKYMContinuation.observedDirectionalEvidence
+      (SameMetric.kkSource (sameObservedMetric upgrade)))
+  ≡
+  L31.selectedArrow
+    (Arrow.SelectedTSFVToLorentzPhysicalSource.uniqueMeasuredArrow
+      (SameMetric.arrowSource (sameObservedMetric upgrade)))
+selectedP07ObserverAndKKClockDirectionAgree upgrade =
+  SameArrow.samePhysicalObserverAndKKTimeAxis
+    (sameObservedMetric upgrade)
 
 ------------------------------------------------------------------------
 -- Exact negative control: even matching a carrier and a time label is
