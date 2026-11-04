@@ -1,3 +1,6 @@
+- [x] P01.L15/L16 SOURCE: controlled complex emitter/site Born > rational ordered-rate original-ABL inequality (same original Q.ablProbability), certified 3/5, heterogeneous pulses, complex gamma bound; 3000 exact-Fraction fixtures, two invalid controls PASS. Agda KERNEL PENDING; physical correlated many-body postselection OPEN.
+- [ ] P00.L02: reconcile #1444 parent later R445 F08–F12 with #1460 child TSVF/KK; 20/26 shared changed paths have identical blobs, six docs/root differ; no overwrite/false same-object physical source.
+
 ### 2026-11-03 maximal source payment — 2017 TSVF complex amplitudes, actual original ABL and same OS clock
 - [x] Verify original 2017 Aharonov/Cohen/Landsberger Eqs.22–25. Track printed unsquared gamma overlap products in a probability ratio; source-write a literal i-vs-1 complex phase counterexample and correct Born-squared factorized alternative, without claiming to have resolved author notation.
 - [x] Reuse existing rational CayleyDickson complex norm, gamma-product theorem, rational square nonnegativity and original two-boundary/TSVF owners. Source-write complex two-coordinate Hermitian environmental site and k-fold tensor overlap, arbitrary complex gamma product amplitudes, Born right/wrong factorization and exact ratio cross equation (safe; kernel pending).
