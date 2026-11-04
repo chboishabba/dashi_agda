@@ -25,7 +25,9 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeE20RawValidatorAgreementExact w
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (List; []; _∷_)
+open import Data.List.Base using (List; []; _∷_; length)
+open import Data.Nat.Base using (_≤_)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Data.Integer.Base using (ℤ)
 open import Data.Maybe.Base using (just)
 open import Data.Product using (Σ; _×_; _,_)
@@ -45,6 +47,12 @@ import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorPremisesExact as 
 import DASHI.Mathematics.Complexity.Karp21CanonicalParsedGraphAcceptanceExact as Parsed
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
+import DASHI.Mathematics.Complexity.Karp21CanonicalRawValidatorCompleteExact as Validated
+import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
+import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact as Observed
+import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as WireSize
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagWordEncodeExact as Encode
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 
 ------------------------------------------------------------------------
 -- The ORIGINAL source-owned parser premises directly discharge all
@@ -124,3 +132,45 @@ e20FiniteRawParsersAgreeAndPreserveYES
     (parsed ,
       (scaledCompleteRuntimeRawValid source ,
        sameYES))
+
+------------------------------------------------------------------------
+-- The actual returned Fin edge list has the SAME number of edges as
+-- the original source. Therefore the already-proved 2m witness-bit
+-- bound for the ORIGINAL graph word applies to the PARSER OUTPUT.
+-- This is the exact dependent sparse-guard premise, not a fabricated
+-- assumption or a claim about binary tape execution.
+------------------------------------------------------------------------
+
+e20DecodedEdgesFitOriginalSparseWord :
+  ∀ {n : Nat}
+    (source : Vec.Vec ℤ n)
+    (threshold : ℤ)
+    (positive : Threshold.PositiveThreshold threshold) →
+  Σ (List (Cut.SignedUndirectedEdge n))
+    (λ decoded →
+      (Decode.validateRawEdges n Decode.noPrevious
+        (Raw.rawOfEdges (Gen.completeScaledPairEdges source))
+        ≡ just decoded)
+      ×
+      (Sparse.twoPerEdge (length decoded)
+        ≤ Word.encodingSize
+          (Encode.encodeGraphWord
+            (n , Cut.graph (Gen.completeScaledPairEdges source)
+              threshold positive))))
+e20DecodedEdgesFitOriginalSparseWord {n} source threshold positive
+  with Validated.scaledCompleteRawValidatorSuccess source
+... | decoded , (parserAccepted , fields) =
+  decoded ,
+    (parserAccepted ,
+      subst
+        (λ m →
+          Sparse.twoPerEdge m
+            ≤ Word.encodingSize
+              (Encode.encodeGraphWord
+                (n , Cut.graph (Gen.completeScaledPairEdges source)
+                  threshold positive)))
+        (Observed.sameWeightedEdgeListLength
+          (Gen.completeScaledPairEdges source) decoded fields)
+        (WireSize.encodedGraphAtLeastSparseBits
+          (n , Cut.graph (Gen.completeScaledPairEdges source)
+            threshold positive)))
