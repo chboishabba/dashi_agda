@@ -10,6 +10,7 @@
 - `YMClaySUNProductHaarGaugeFromOneLinkExact.OneLinkSUNBilateralHaar.oneLeftInvariant`: original Haar translation law.
 - `YMClaySUNMatrixProductHaarC3Exact.productIntegralCongruent`: original product integration congruence.
 - `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact`: **actual** original 1024-positive-bond side-four SU(N) Wilson-Gibbs selected fine measure and original side-two ordered native two-link block.
+- `YMClayNativeBlockedPositiveHolonomyGaugeExact`, `YMClaySUNNativeBlockedPositiveHolonomyExact`, `YMClayNativeSideFourTwoLinkPairSameObjectExact`: original path group, native side-four bond geometry and exact 2-link/selected weighted-Gibbs block equality (new F15).
 - `BalabanFiniteProbabilityPartitionDisintegrationExact`, `BalabanFiniteRGObservableReopeningExact`, `YMClayFiniteRGExistingPushPullReopeningWeldExact`: finite **rational** exact partition/disintegration/transport for a different carrier; NOT silently identified with continuous physical SU(N) Borel Haar.
 - `YMClaySUNMatrixR445R320SameCovarianceExact`, `BalabanConnectedCovarianceExpectationLimitRound278Exact`: original selected covariance/continuum **conditional** compilers; the *physical changing-cutoff family and estimates* must still be supplied.
 
@@ -31,6 +32,16 @@ Using the **existing** one-link normalized Haar, left invariance and linearity r
 Physical original selected side-four to side-two geometry consists of **64 coarse positive bonds** (16 sites × 4 directions). Each coarse bond traverses two distinct fine positive links, giving **128 distinct selected fine links**. Exactly **896** of the 1024 fine links are unselected spectators. The original native torus/codec and positive-link path construction have precisely these dimensions and a source-written selected two-block endpoint. The still-unconstructed Agda certificate is the **1024-index original-bond permutation / disjoint pair decomposition** and the exact literal `SUNBlock.nativeSUNBlockLinks` coordinate equality, not a new Haar/disintegration axiom. An independent exact reference enumerates every original 4D coordinate and checks distinctness and periodic endpoint, but is not a kernel proof.
 
 **Important:** The fine Wilson density couples links, so one cannot drop 896 spectator bonds from the *weighted Gibbs law*. The theorem applies to the **unweighted Haar** pushforward of coarse observables. Its physical payoff is a kinematic path for a coarse-Haar reference, not a bare Wilson effective action.
+
+### R445.F15 — original selected native 2-link geometry, pointwise exact
+
+File: `DASHI/Physics/YangMills/YMClayNativeSideFourTwoLinkPairSameObjectExact.agda`.
+
+The *existing* `YMClayNativeBlockedPositiveHolonomyGaugeExact.nativeBlockedPositiveLinks {m=1} {l=1}` on the original side-four bond field is now source-written to be the **literal group product of two original bond lookups**, at `Block.fineBlockOrigin` and `Bond.positiveStep`. The proof unfolds the original two-step `positiveHolonomy` and applies the already-owned `Bond.identityRight`. Every original coarse bond is universally quantified; no second coarse field or arbitrary product witness is introduced.
+
+The theorem then specializes first to the existing `SUNNative.sunExactSignedLinkGroup` and selected `SUNBlock.nativeSUNBlockLinks`, and further to the **exact** `Push.actualBlockedLinkMap` chosen by the **original weighted side-four SU(N) Gibbs cylinder measure**. The resulting `actualSelectedWeightedGibbsBlockIsNativePair` is the selected physical same-object source identity connecting F13's non-Abelian pair multiplication with the weighted R445 block carrier. It does not yet show *all* selected pairs are disjoint in Agda, so **do not silently use the F13 unweighted Haar vector law on all 1024 actual fine link coordinates**.
+
+Remaining finite cut is one original native 1024-bond global pair/spectator permutation/canonical-label witness (the 64 ordered pairs and 896 spectators), plus a proof that its decoder is the very same selected physical `Codec.decodeOriginalBonds 4`. It is separate from the independently open R443 C3 spatial permutation certificate. Only after that and genuine one-link compact Haar is the full selected unweighted coarse Haar identity available for R445 effective-action disintegration. The fine Gibbs weight still couples the spectators.
 
 ### R445.F14 — actual selected physical finite blocked covariance
 
