@@ -217,6 +217,10 @@ open TSFVKKBackwardBidi public using
   ; originalFiveMetricVerticalProbeReadsFibreRadius
   ; originalFiveMetricEqualityForcesSameFibreRadius
   ; originalFourMetricCannotUniquelyLiftFibreRadius
+  ; originalFiveMetricMixedVerticalDifferenceReadsConnection
+  ; originalFiveMetricEqualityForcesSameChartConnection
+  ; originalFourMetricCannotRecoverUniqueChartConnection
+  ; originalSameFourMetricForAnyTwoConnections
   )
 
 -- P03/P07: ACTUAL original TSVF/OS clock strongly convergent
