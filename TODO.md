@@ -1,3 +1,7 @@
+- [x] R445.F15 SOURCE: original side-4 2-link `Block.nativeBlockedPositiveLinks` equals exactly two original fine-bond values multiplied in order; the selected physical weighted `Push.actualBlockedLinkMap` is that same native block. Kernel PENDING.
+- [x] R445.F16 SOURCE: original finite 64 coarse/128 selected/1024 fine bond lists + closed distinct Boolean `refl` candidate, Agda kernel PENDING. Python canonical 1024-index reindex passed: 41,792 swaps, inverse/digest/negative controls.
+- [ ] R445 next strict 1024 canonical-label `Product.LinkPermutation` proof and same original physical decoder matching; then actual compact SU(N) Haar and weighted effective-action disintegration, reflection-compatible RG, UV/IR constants.
+
 - [x] R445.F13 SOURCE: existing one-link SUN Haar plus left-invariance/scale yields exact noncommutative two-link and disjoint-pair+spectator **unweighted** Haar pushforward; original side4->side2 reference geometry 64 pairs/128 selected/896 spectator from 1024. Q8 exact checks PASS; kernel pending.
 - [x] R445.F14 SOURCE: exact selected original SU(N) weighted Wilson-Gibbs **blocked covariance** agrees with actual R445 pushforward coarse covariance, same finite measure/map, not invented bare coarse Wilson.
 - [ ] R445 critical: kernel-prove original 1024-bond pair/spectator permutation + SUNBlock coordinate identification, then measurable SU(N) product Haar and **weighted** effective-action disintegration/reflection-compatible scaling.
