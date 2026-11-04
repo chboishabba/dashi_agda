@@ -32,6 +32,10 @@ import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVAr
 import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
 import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact as TSFVKKSameArrow
 import DASHI.Physics.Foundations.TSFVOriginalHiddenHistoryFiltrationWeldExact as TSFVOriginalFiltration
+import DASHI.Physics.Foundations.TSFVOriginalObserverVisibilityCausalOrderExact as TSFVObserverAccess
+import DASHI.Physics.Foundations.TSFVObservedPhysicalAccessTransportExact as TSFVPhysicalAccess
+import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSFVKKHorizontal
+import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
@@ -45,6 +49,7 @@ import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as TSVFControll
 import DASHI.Quantum.TSVF2017ControlledComplexOrderedRateBridgeExact as TSVFControlledComplexRate
 import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellNoGo
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
+import DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact as TSVFWickFirewall
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -128,6 +133,69 @@ open TSFVOriginalFiltration public using
   ; actualLateRecordsForgetToSameEarlyRecord
   ; forgettingLateRecordIsNotInjective
   ; chosenHiddenHistoriesEqualAction
+  )
+
+-- P01/P02: original source-filtration event inclusion and full
+-- strict operational access chain; physical P02 signal/null cone OPEN.
+open TSFVObserverAccess public using
+  ( _⊑obs_
+  ; observableAccessReflexive
+  ; observableAccessTransitive
+  ; initialAccessPrecedesIntermediate
+  ; intermediateAccessPrecedesTerminal
+  ; initialAccessPrecedesTerminal
+  ; initialIntermediateActualStrictGain
+  ; intermediateTerminalActualStrictGain
+  ; initialTerminalActualStrictGain
+  ; terminalDoesNotAccessPrecedeIntermediate
+  ; intermediateDoesNotAccessPrecedeInitial
+  ; terminalDoesNotAccessPrecedeInitial
+  ; observableAccessAntisymmetric
+  ; selectedEarlyHistoryIndistinguishability
+  )
+
+-- The same-state *conditional physical observer* inherits the original
+-- access order in BOTH directions from its already selected readout
+-- source-equality. This is not metric propagation or 4D dimension.
+open TSFVPhysicalAccess public using
+  ( SelectedObservedAccessOrder
+  ; originalAccessImpliesActualMeasuredAccess
+  ; actualMeasuredAccessImpliesOriginal
+  ; sameSelectedObserverAccessIFFOriginal
+  ; measuredMiddleEventStrictGain
+  ; measuredTerminalEventStrictGain
+  ; originalTerminalVisibleOnMeasuredArrowAxis
+  )
+
+-- P02/P08: actual nonzero U(1) KK connection retains horizontal metric
+-- and fibre-gauge covariance; source-selected conditional theorem uses
+-- EXACT same 5D metric, 4D reduction and original observed bilinear.
+-- No arbitrary metric assignment or completed physical 5D solution.
+open TSFVKKHorizontal public using
+  ( KK5Bilinear
+  ; horizontalCircleComponent
+  ; actualKKHorizontalReductionIsOriginalFourMetric
+  ; KK5ExpandedBlocks
+  ; naivelyFrozenFibreHasAdditionalConnectionTerm
+  ; KK5GaugeShiftPreservesBilinear
+  ; horizontalCircleGaugeShift
+  )
+open TSFVKKPhysicalWeld public using
+  ( selectedKK5HorizontalIsActualObservedBilinear
+  ; selectedKKHorizontalEqualsReductionOfActualFiveMetric
+  ; selectedSameBilinearAndSameObserverArrow
+  )
+
+-- P07 Stone/OS trust firewall: on the SAME original TSVF/OS clock,
+-- a norm-isometric real-time observer step cannot equal a strictly
+-- norm-contracting Euclidean OS transfer step on a selected excitation.
+-- This is an actual proof implication, NOT an OS spectral-gap proof.
+open TSVFWickFirewall public using
+  ( originalClockDirectEuclideanNormMustBeEqual
+  ; originalClockCannotIdentifyStrictEuclideanDecay
+  ; finiteObserverNormPreserved
+  ; finiteEuclideanExcitationNormDrops
+  ; finiteDirectStepwiseIdentificationImpossible
   )
 
 open TSFVKKSameMetric public using
