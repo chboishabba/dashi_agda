@@ -27,7 +27,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -201,6 +201,89 @@ module _
           (observerDerivativeExists source a domain)))
       (originalOSDerivativeExists source
         (J a) (mappedDomain source a domain))
+
+  ------------------------------------------------------------------------
+  -- Selected physical ENERGY H = i*hbar*dU/dt (Schrodinger convention).
+  -- The previous theorem identifies the strong derivative generator
+  -- K=-iH/hbar. Energy H requires the COMPLEX LINEAR, physically
+  -- calibrated action factor i*hbar to commute with the SAME J.
+  --
+  -- This is not an automatic equivalence of the abstract original OS
+  -- Hamiltonian carrier with a self-adjoint energy operator. The
+  -- conversion laws below must come from the real physical Hilbert.
+  ------------------------------------------------------------------------
+
+  record PhysicalHbarEnergyConversion
+      (source : RealTimeDerivativeBridge) : Set₁ where
+    field
+      ComplexActionScalar : Set
+      iHbar : ComplexActionScalar
+
+      observerComplexScale :
+        ComplexActionScalar → ObserverState → ObserverState
+      osComplexScale :
+        ComplexActionScalar → ReconstructedState → ReconstructedState
+
+      -- The ORIGINAL selected observer-state isometry must be
+      -- complex-linear for H=i*hbar K to transport.
+      selectedJComplexLinearAtIHbar :
+        ∀ a →
+        J (observerComplexScale iHbar a)
+        ≡ osComplexScale iHbar (J a)
+
+      observerPhysicalEnergyOperator :
+        ObserverState → ObserverState
+      observerEnergyIsSchrodingerGenerator :
+        ∀ a →
+        observerPhysicalEnergyOperator a
+        ≡ observerComplexScale iHbar
+             (observerGenerator source a)
+
+      -- Meaning of the *same original* OS.hamiltonian, not a
+      -- manufactured independent operator called H_OS.
+      originalOSPhysicalEnergyOperator :
+        OS.Hamiltonian reconstruction →
+        ReconstructedState → ReconstructedState
+
+      originalOSEnergyIsSchrodingerGenerator :
+        ∀ a →
+        originalOSPhysicalEnergyOperator
+          (OS.hamiltonian reconstruction) a
+        ≡
+        osComplexScale iHbar
+          (osGeneratorFromOriginalHamiltonian source
+            (OS.hamiltonian reconstruction) a)
+
+  open PhysicalHbarEnergyConversion public
+
+  -- On the ACTUAL mapped strong-derivative domain, the same physical
+  -- energy Hamiltonian is now derived using the source's complex
+  -- linearity and the independently calibrated i*hbar conversion.
+  originalSelectedPhysicalEnergyIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (observerPhysicalEnergyOperator conversion a)
+    ≡
+    originalOSPhysicalEnergyOperator conversion
+      (OS.hamiltonian reconstruction) (J a)
+  originalSelectedPhysicalEnergyIntertwines
+      source conversion a domain =
+    trans
+      (cong J
+        (observerEnergyIsSchrodingerGenerator conversion a))
+      (trans
+        (selectedJComplexLinearAtIHbar conversion
+          (observerGenerator source a))
+        (trans
+          (cong
+            (osComplexScale conversion (iHbar conversion))
+            (originalSelectedStrongGeneratorIntertwines
+              source a domain))
+          (sym
+            (originalOSEnergyIsSchrodingerGenerator
+              conversion (J a)))))
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
