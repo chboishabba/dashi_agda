@@ -33,6 +33,7 @@ open import Data.Integer.Base using (ℤ; +_)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Complexity.Karp21FiniteWeightedMaxCutVerifierExact as Cut
+import DASHI.Mathematics.Complexity.Karp21SparseGraphWordNPBoundaryExact as N21
 import DASHI.Mathematics.Complexity.Karp21FiniteCompleteGraphGeneratorExact as Gen
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
@@ -91,7 +92,7 @@ completeGraphGammaGraphDecodeSameObject :
     (source : Vec.Vec ℤ n)
     (threshold : ℤ)
     (positive : Threshold.PositiveThreshold threshold) →
-  Σ (Graph.GraphInstance)
+  Σ (N21.GraphInstance)
     (λ decoded →
       (Graph.decodeGraphWord
         (Encode.encodeGraphWord
