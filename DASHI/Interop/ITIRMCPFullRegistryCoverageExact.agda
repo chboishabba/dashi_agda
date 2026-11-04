@@ -30,6 +30,17 @@ data AuthorityStatus : Set where
   delegated : AuthorityStatus
   promoted : AuthorityStatus
 
+data BackingSubsystem : Set where
+  pgChatArchiveStore : BackingSubsystem
+  pgSensiblawObligationsStore : BackingSubsystem
+  pgPNFSpectralStore : BackingSubsystem
+  pgDocstoreVaultStore : BackingSubsystem
+  pgAOCoordinatorStore : BackingSubsystem
+  dashiAgdaPreflightIndex : BackingSubsystem
+  zelphShardTransport : BackingSubsystem
+  reGptHeadlessCurlCffi : BackingSubsystem
+  itirTerminalObserver : BackingSubsystem
+
 data ITIRMCPToolId : Set where
   itirTerminalState : ITIRMCPToolId
   itirTerminalPicker : ITIRMCPToolId
@@ -42,7 +53,7 @@ data ITIRMCPToolId : Set where
   itirChatgptPgRead : ITIRMCPToolId
   itirChatgptListThreads : ITIRMCPToolId
   itirChatgptRevive : ITIRMCPToolId
-  itirChatgptRevive_multi : ITIRMCPToolId
+  itirChatgptReviveMulti : ITIRMCPToolId
   itirChatgptSessionStatus : ITIRMCPToolId
   itirChatgptSessionRefreshCffi : ITIRMCPToolId
   itirChatgptSessionRefresh : ITIRMCPToolId
@@ -135,205 +146,205 @@ record MCPToolContract : Set where
     inputAuthority : AuthorityStatus
     maxOutputAuthority : AuthorityStatus
     promotionRequiresGate : Bool
-    canonicalBackingStore : String
+    hasExplicitAuthorityProfile : Bool
+    backingSubsystem : BackingSubsystem
 
 -- All modeled outputs have authority 'observed', below 'receipt'.
 -- No modeled tool claims promoted authority or self-promotion.
 record ValidToolContract (c : MCPToolContract) : Set where
   constructor validContract
   field
-    boundedOutput : MCPToolContract.maxOutputAuthority c ≡ receipt
-    noUnreviewedMutation : MCPToolContract.mutates c ≡ false
+    noUnreviewedTruthPromotion : MCPToolContract.maxOutputAuthority c ≡ promoted → ⊥
 
 toolSpec : ITIRMCPToolId → MCPToolContract
-toolSpec itirTerminalState = contract "itirTerminalState" reporting true false observed receipt false "unverified-runtime-backing"
-toolSpec itirTerminalPicker = contract "itirTerminalPicker" reporting true false observed receipt false "unverified-runtime-backing"
-toolSpec itirTerminalObserve = contract "itirTerminalObserve" reporting true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgRosterList = contract "itirChatgptPgRosterList" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgRosterSync = contract "itirChatgptPgRosterSync" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgHydrateSelected = contract "itirChatgptPgHydrateSelected" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgHydratePending = contract "itirChatgptPgHydratePending" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgSearch = contract "itirChatgptPgSearch" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptPgRead = contract "itirChatgptPgRead" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptListThreads = contract "itirChatgptListThreads" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptRevive = contract "itirChatgptRevive" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptRevive_multi = contract "itirChatgptRevive_multi" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptSessionStatus = contract "itirChatgptSessionStatus" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptSessionRefreshCffi = contract "itirChatgptSessionRefreshCffi" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptSessionRefresh = contract "itirChatgptSessionRefresh" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptGetAccessToken = contract "itirChatgptGetAccessToken" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptCdpCapture = contract "itirChatgptCdpCapture" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptHydrate = contract "itirChatgptHydrate" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptOperationReceipts = contract "itirChatgptOperationReceipts" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptDispatchWorker = contract "itirChatgptDispatchWorker" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptOperationStatus = contract "itirChatgptOperationStatus" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptReconcile = contract "itirChatgptReconcile" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptViewMessages = contract "itirChatgptViewMessages" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptFleetStatus = contract "itirChatgptFleetStatus" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptFleetOpportunities = contract "itirChatgptFleetOpportunities" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptTrancheStatus = contract "itirChatgptTrancheStatus" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptFleetTelemetry = contract "itirChatgptFleetTelemetry" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirChatgptCreateConversation = contract "itirChatgptCreateConversation" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawItirJobStatus = contract "sensiblawItirJobStatus" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawObligationsQuery = contract "sensiblawObligationsQuery" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawObligationsExplain = contract "sensiblawObligationsExplain" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawObligationsAlignment = contract "sensiblawObligationsAlignment" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawObligationsProjection = contract "sensiblawObligationsProjection" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec sensiblawObligationsActivate = contract "sensiblawObligationsActivate" candidateClosure true false observed receipt false "unverified-runtime-backing"
-toolSpec itirCompareObservations = contract "itirCompareObservations" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirScoreCoherence = contract "itirScoreCoherence" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirBuildEnvelope = contract "itirBuildEnvelope" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirDocstoreStatus = contract "itirDocstoreStatus" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirDocstoreOpenQuestions = contract "itirDocstoreOpenQuestions" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirObsidianVaultScan = contract "itirObsidianVaultScan" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirDocstoreProposalReceipt = contract "itirDocstoreProposalReceipt" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirMarkdownRenderProjection = contract "itirMarkdownRenderProjection" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirMarkdownWriteProjection = contract "itirMarkdownWriteProjection" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirDocstoreConfigPlan = contract "itirDocstoreConfigPlan" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirFormalLatexBridge = contract "itirFormalLatexBridge" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfDistillPrompt = contract "itirPnfDistillPrompt" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfEigenMotifs = contract "itirPnfEigenMotifs" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfResidualCases = contract "itirPnfResidualCases" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfGovernedHandoff = contract "itirPnfGovernedHandoff" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirArchiveThreadView = contract "itirArchiveThreadView" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfWorkPacket = contract "itirPnfWorkPacket" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfContextIndex = contract "itirPnfContextIndex" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfTaskMemoryPreview = contract "itirPnfTaskMemoryPreview" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfObserverEvidence = contract "itirPnfObserverEvidence" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirPnfMultiParentHandoff = contract "itirPnfMultiParentHandoff" ingestion true false observed receipt false "unverified-runtime-backing"
-toolSpec itirSpectralRenderScatter = contract "itirSpectralRenderScatter" residualGeometry true false observed receipt false "unverified-runtime-backing"
-toolSpec itirSpectralRenderHeatmap = contract "itirSpectralRenderHeatmap" residualGeometry true false observed receipt false "unverified-runtime-backing"
-toolSpec itirSpectralVisualizeCorpus = contract "itirSpectralVisualizeCorpus" residualGeometry true false observed receipt false "unverified-runtime-backing"
-toolSpec itirSpectralCandidatePacket = contract "itirSpectralCandidatePacket" residualGeometry true false observed receipt false "unverified-runtime-backing"
-toolSpec itirGovernanceToolProfiles = contract "itirGovernanceToolProfiles" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirGovernanceValidateToolProfile = contract "itirGovernanceValidateToolProfile" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikidataToolingProfile = contract "itirWikidataToolingProfile" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikiprojectToolingProfile = contract "itirWikiprojectToolingProfile" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikidataReviewPacket = contract "itirWikidataReviewPacket" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikidataObjectReviewBundle = contract "itirWikidataObjectReviewBundle" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikidataMigrationCandidate = contract "itirWikidataMigrationCandidate" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirWikidataDisjointnessReport = contract "itirWikidataDisjointnessReport" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirClimateClaimReview = contract "itirClimateClaimReview" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirGwbFollowGraph = contract "itirGwbFollowGraph" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirZelphTransportBoundary = contract "itirZelphTransportBoundary" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirZelphHfManifestContract = contract "itirZelphHfManifestContract" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirZelphPackSources = contract "itirZelphPackSources" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirZelphPartialClosure = contract "itirZelphPartialClosure" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirShardValidateArtifact = contract "itirShardValidateArtifact" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirShardRouteSelector = contract "itirShardRouteSelector" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirShardPartialGraphView = contract "itirShardPartialGraphView" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirShardBoundedGraphSlicePlan = contract "itirShardBoundedGraphSlicePlan" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirShardPayloadProbe = contract "itirShardPayloadProbe" artifactTransport true false observed receipt false "unverified-runtime-backing"
-toolSpec itirFormalInspect = contract "itirFormalInspect" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirFormalRoute = contract "itirFormalRoute" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirFormalRefine = contract "itirFormalRefine" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirFormalCertify = contract "itirFormalCertify" validation true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoOperationReview = contract "itirAoOperationReview" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoOperatorWorkflow = contract "itirAoOperatorWorkflow" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoFrontierEvidence = contract "itirAoFrontierEvidence" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoCompletedOperationCandidates = contract "itirAoCompletedOperationCandidates" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoParetoConductor = contract "itirAoParetoConductor" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoSpawnParallelLanes = contract "itirAoSpawnParallelLanes" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoStatus = contract "itirAoStatus" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoClaimLane = contract "itirAoClaimLane" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoHeartbeat = contract "itirAoHeartbeat" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoReportResult = contract "itirAoReportResult" governance true false observed receipt false "unverified-runtime-backing"
-toolSpec itirAoGapCheck = contract "itirAoGapCheck" governance true false observed receipt false "unverified-runtime-backing"
+toolSpec itirTerminalState = contract "itir.terminal_state" reporting true false observed receipt false false itirTerminalObserver
+toolSpec itirTerminalPicker = contract "itir.terminal_picker" reporting false true observed receipt true false itirTerminalObserver
+toolSpec itirTerminalObserve = contract "itir.terminal_observe" reporting true false observed receipt false false itirTerminalObserver
+toolSpec itirChatgptPgRosterList = contract "itir.chatgpt_pg_roster_list" ingestion true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptPgRosterSync = contract "itir.chatgpt_pg_roster_sync" ingestion false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptPgHydrateSelected = contract "itir.chatgpt_pg_hydrate_selected" ingestion false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptPgHydratePending = contract "itir.chatgpt_pg_hydrate_pending" ingestion false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptPgSearch = contract "itir.chatgpt_pg_search" ingestion true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptPgRead = contract "itir.chatgpt_pg_read" ingestion true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptListThreads = contract "itir.chatgpt_list_threads" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptRevive = contract "itir.chatgpt_revive" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptReviveMulti = contract "itir.chatgpt_revive_multi" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptSessionStatus = contract "itir.chatgpt_session_status" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptSessionRefreshCffi = contract "itir.chatgpt_session_refresh_cffi" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptSessionRefresh = contract "itir.chatgpt_session_refresh" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptGetAccessToken = contract "itir.chatgpt_get_access_token" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptCdpCapture = contract "itir.chatgpt_cdp_capture" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptHydrate = contract "itir.chatgpt_hydrate" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptOperationReceipts = contract "itir.chatgpt_operation_receipts" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptDispatchWorker = contract "itir.chatgpt_dispatch_worker" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptOperationStatus = contract "itir.chatgpt_operation_status" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptReconcile = contract "itir.chatgpt_reconcile" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec itirChatgptViewMessages = contract "itir.chatgpt_view_messages" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptFleetStatus = contract "itir.chatgpt_fleet_status" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptFleetOpportunities = contract "itir.chatgpt_fleet_opportunities" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptTrancheStatus = contract "itir.chatgpt_tranche_status" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptFleetTelemetry = contract "itir.chatgpt_fleet_telemetry" governance true false observed receipt false false reGptHeadlessCurlCffi
+toolSpec itirChatgptCreateConversation = contract "itir.chatgpt_create_conversation" governance false true observed receipt true false reGptHeadlessCurlCffi
+toolSpec sensiblawItirJobStatus = contract "sensiblaw.itir_job_status" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec sensiblawObligationsQuery = contract "sensiblaw.obligations_query" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec sensiblawObligationsExplain = contract "sensiblaw.obligations_explain" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec sensiblawObligationsAlignment = contract "sensiblaw.obligations_alignment" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec sensiblawObligationsProjection = contract "sensiblaw.obligations_projection" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec sensiblawObligationsActivate = contract "sensiblaw.obligations_activate" candidateClosure true false observed receipt false false pgSensiblawObligationsStore
+toolSpec itirCompareObservations = contract "itir.compare_observations" validation true false observed receipt false false pgPNFSpectralStore
+toolSpec itirScoreCoherence = contract "itir.score_coherence" validation true false observed receipt false false pgPNFSpectralStore
+toolSpec itirBuildEnvelope = contract "itir.build_envelope" validation true false observed receipt false false pgPNFSpectralStore
+toolSpec itirDocstoreStatus = contract "itir.docstore_status" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirDocstoreOpenQuestions = contract "itir.docstore_open_questions" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirObsidianVaultScan = contract "itir.obsidian_vault_scan" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirDocstoreProposalReceipt = contract "itir.docstore_proposal_receipt" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirMarkdownRenderProjection = contract "itir.markdown_render_projection" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirMarkdownWriteProjection = contract "itir.markdown_write_projection" artifactTransport false true observed receipt true false pgDocstoreVaultStore
+toolSpec itirDocstoreConfigPlan = contract "itir.docstore_config_plan" artifactTransport true false observed receipt false false pgDocstoreVaultStore
+toolSpec itirFormalLatexBridge = contract "itir.formal_latex_bridge" ingestion true false observed receipt false false dashiAgdaPreflightIndex
+toolSpec itirPnfDistillPrompt = contract "itir.pnf_distill_prompt" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfEigenMotifs = contract "itir.pnf_eigen_motifs" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfResidualCases = contract "itir.pnf_residual_cases" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfGovernedHandoff = contract "itir.pnf_governed_handoff" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirArchiveThreadView = contract "itir.archive_thread_view" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfWorkPacket = contract "itir.pnf_work_packet" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfContextIndex = contract "itir.pnf_context_index" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfTaskMemoryPreview = contract "itir.pnf_task_memory_preview" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfObserverEvidence = contract "itir.pnf_observer_evidence" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirPnfMultiParentHandoff = contract "itir.pnf_multi_parent_handoff" ingestion true false observed receipt false false pgPNFSpectralStore
+toolSpec itirSpectralRenderScatter = contract "itir.spectral_render_scatter" residualGeometry false true observed receipt true true pgPNFSpectralStore
+toolSpec itirSpectralRenderHeatmap = contract "itir.spectral_render_heatmap" residualGeometry false true observed receipt true true pgPNFSpectralStore
+toolSpec itirSpectralVisualizeCorpus = contract "itir.spectral_visualize_corpus" residualGeometry false true observed receipt true true pgPNFSpectralStore
+toolSpec itirSpectralCandidatePacket = contract "itir.spectral_candidate_packet" residualGeometry true false observed receipt false true pgPNFSpectralStore
+toolSpec itirGovernanceToolProfiles = contract "itir.governance_tool_profiles" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirGovernanceValidateToolProfile = contract "itir.governance_validate_tool_profile" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikidataToolingProfile = contract "itir.wikidata_tooling_profile" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikiprojectToolingProfile = contract "itir.wikiproject_tooling_profile" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikidataReviewPacket = contract "itir.wikidata_review_packet" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikidataObjectReviewBundle = contract "itir.wikidata_object_review_bundle" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikidataMigrationCandidate = contract "itir.wikidata_migration_candidate" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirWikidataDisjointnessReport = contract "itir.wikidata_disjointness_report" governance true false observed receipt false true pgPNFSpectralStore
+toolSpec itirClimateClaimReview = contract "itir.climate_claim_review" governance true false observed receipt false false pgPNFSpectralStore
+toolSpec itirGwbFollowGraph = contract "itir.gwb_follow_graph" governance true false observed receipt false false pgPNFSpectralStore
+toolSpec itirZelphTransportBoundary = contract "itir.zelph_transport_boundary" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirZelphHfManifestContract = contract "itir.zelph_hf_manifest_contract" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirZelphPackSources = contract "itir.zelph_pack_sources" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirZelphPartialClosure = contract "itir.zelph_partial_closure" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirShardValidateArtifact = contract "itir.shard_validate_artifact" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirShardRouteSelector = contract "itir.shard_route_selector" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirShardPartialGraphView = contract "itir.shard_partial_graph_view" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirShardBoundedGraphSlicePlan = contract "itir.shard_bounded_graph_slice_plan" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirShardPayloadProbe = contract "itir.shard_payload_probe" artifactTransport true false observed receipt false true zelphShardTransport
+toolSpec itirFormalInspect = contract "itir.formal_inspect" validation true false observed receipt false false dashiAgdaPreflightIndex
+toolSpec itirFormalRoute = contract "itir.formal_route" validation true false observed receipt false false dashiAgdaPreflightIndex
+toolSpec itirFormalRefine = contract "itir.formal_refine" validation true false observed receipt false false dashiAgdaPreflightIndex
+toolSpec itirFormalCertify = contract "itir.formal_certify" validation true false observed receipt false false dashiAgdaPreflightIndex
+toolSpec itirAoOperationReview = contract "itir.ao_operation_review" governance true false observed receipt false false pgAOCoordinatorStore
+toolSpec itirAoOperatorWorkflow = contract "itir.ao_operator_workflow" governance true false observed receipt false false pgAOCoordinatorStore
+toolSpec itirAoFrontierEvidence = contract "itir.ao_frontier_evidence" governance true false observed receipt false false pgAOCoordinatorStore
+toolSpec itirAoCompletedOperationCandidates = contract "itir.ao_completed_operation_candidates" governance true false observed receipt false false pgAOCoordinatorStore
+toolSpec itirAoParetoConductor = contract "itir.ao_pareto_conductor" governance false true observed receipt true false pgAOCoordinatorStore
+toolSpec itirAoSpawnParallelLanes = contract "itir.ao_spawn_parallel_lanes" governance false true observed receipt true false pgAOCoordinatorStore
+toolSpec itirAoStatus = contract "itir.ao_status" governance true false observed receipt false false pgAOCoordinatorStore
+toolSpec itirAoClaimLane = contract "itir.ao_claim_lane" governance false true observed receipt true false pgAOCoordinatorStore
+toolSpec itirAoHeartbeat = contract "itir.ao_heartbeat" governance false true observed receipt true false pgAOCoordinatorStore
+toolSpec itirAoReportResult = contract "itir.ao_report_result" governance false true observed receipt true false pgAOCoordinatorStore
+toolSpec itirAoGapCheck = contract "itir.ao_gap_check" governance true false observed receipt false false pgAOCoordinatorStore
 
 all93ToolsHaveValidAuthorityProfile : (t : ITIRMCPToolId) → ValidToolContract (toolSpec t)
-all93ToolsHaveValidAuthorityProfile itirTerminalState = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirTerminalPicker = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirTerminalObserve = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgRosterList = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgRosterSync = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgHydrateSelected = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgHydratePending = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgSearch = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptPgRead = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptListThreads = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptRevive = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptRevive_multi = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptSessionStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptSessionRefreshCffi = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptSessionRefresh = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptGetAccessToken = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptCdpCapture = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptHydrate = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptOperationReceipts = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptDispatchWorker = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptOperationStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptReconcile = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptViewMessages = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptFleetStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptFleetOpportunities = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptTrancheStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptFleetTelemetry = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirChatgptCreateConversation = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawItirJobStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawObligationsQuery = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawObligationsExplain = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawObligationsAlignment = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawObligationsProjection = validContract refl refl
-all93ToolsHaveValidAuthorityProfile sensiblawObligationsActivate = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirCompareObservations = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirScoreCoherence = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirBuildEnvelope = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirDocstoreStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirDocstoreOpenQuestions = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirObsidianVaultScan = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirDocstoreProposalReceipt = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirMarkdownRenderProjection = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirMarkdownWriteProjection = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirDocstoreConfigPlan = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirFormalLatexBridge = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfDistillPrompt = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfEigenMotifs = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfResidualCases = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfGovernedHandoff = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirArchiveThreadView = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfWorkPacket = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfContextIndex = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfTaskMemoryPreview = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfObserverEvidence = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirPnfMultiParentHandoff = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirSpectralRenderScatter = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirSpectralRenderHeatmap = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirSpectralVisualizeCorpus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirSpectralCandidatePacket = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirGovernanceToolProfiles = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirGovernanceValidateToolProfile = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikidataToolingProfile = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikiprojectToolingProfile = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikidataReviewPacket = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikidataObjectReviewBundle = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikidataMigrationCandidate = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirWikidataDisjointnessReport = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirClimateClaimReview = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirGwbFollowGraph = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirZelphTransportBoundary = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirZelphHfManifestContract = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirZelphPackSources = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirZelphPartialClosure = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirShardValidateArtifact = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirShardRouteSelector = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirShardPartialGraphView = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirShardBoundedGraphSlicePlan = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirShardPayloadProbe = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirFormalInspect = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirFormalRoute = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirFormalRefine = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirFormalCertify = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoOperationReview = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoOperatorWorkflow = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoFrontierEvidence = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoCompletedOperationCandidates = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoParetoConductor = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoSpawnParallelLanes = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoStatus = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoClaimLane = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoHeartbeat = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoReportResult = validContract refl refl
-all93ToolsHaveValidAuthorityProfile itirAoGapCheck = validContract refl refl
+all93ToolsHaveValidAuthorityProfile itirTerminalState = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirTerminalPicker = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirTerminalObserve = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgRosterList = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgRosterSync = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgHydrateSelected = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgHydratePending = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgSearch = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptPgRead = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptListThreads = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptRevive = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptReviveMulti = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptSessionStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptSessionRefreshCffi = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptSessionRefresh = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptGetAccessToken = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptCdpCapture = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptHydrate = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptOperationReceipts = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptDispatchWorker = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptOperationStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptReconcile = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptViewMessages = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptFleetStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptFleetOpportunities = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptTrancheStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptFleetTelemetry = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirChatgptCreateConversation = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawItirJobStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawObligationsQuery = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawObligationsExplain = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawObligationsAlignment = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawObligationsProjection = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile sensiblawObligationsActivate = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirCompareObservations = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirScoreCoherence = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirBuildEnvelope = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirDocstoreStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirDocstoreOpenQuestions = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirObsidianVaultScan = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirDocstoreProposalReceipt = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirMarkdownRenderProjection = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirMarkdownWriteProjection = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirDocstoreConfigPlan = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirFormalLatexBridge = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfDistillPrompt = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfEigenMotifs = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfResidualCases = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfGovernedHandoff = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirArchiveThreadView = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfWorkPacket = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfContextIndex = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfTaskMemoryPreview = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfObserverEvidence = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirPnfMultiParentHandoff = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirSpectralRenderScatter = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirSpectralRenderHeatmap = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirSpectralVisualizeCorpus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirSpectralCandidatePacket = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirGovernanceToolProfiles = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirGovernanceValidateToolProfile = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikidataToolingProfile = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikiprojectToolingProfile = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikidataReviewPacket = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikidataObjectReviewBundle = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikidataMigrationCandidate = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirWikidataDisjointnessReport = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirClimateClaimReview = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirGwbFollowGraph = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirZelphTransportBoundary = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirZelphHfManifestContract = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirZelphPackSources = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirZelphPartialClosure = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirShardValidateArtifact = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirShardRouteSelector = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirShardPartialGraphView = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirShardBoundedGraphSlicePlan = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirShardPayloadProbe = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirFormalInspect = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirFormalRoute = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirFormalRefine = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirFormalCertify = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoOperationReview = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoOperatorWorkflow = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoFrontierEvidence = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoCompletedOperationCandidates = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoParetoConductor = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoSpawnParallelLanes = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoStatus = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoClaimLane = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoHeartbeat = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoReportResult = validContract (λ ())
+all93ToolsHaveValidAuthorityProfile itirAoGapCheck = validContract (λ ())
 
 data TransportMode : Set where
   headlessCFFI : TransportMode
@@ -345,7 +356,7 @@ data RetryPolicy : Set where
 
 data ReGPTMCPFunctionId : Set where
   chatgptAdapterHealth : ReGPTMCPFunctionId
-  chatgptAdapterHealth_reset : ReGPTMCPFunctionId
+  chatgptAdapterHealthReset : ReGPTMCPFunctionId
   chatgptBranch : ReGPTMCPFunctionId
   chatgptContinue : ReGPTMCPFunctionId
   chatgptEditBranch : ReGPTMCPFunctionId
@@ -365,7 +376,7 @@ data ReGPTMCPFunctionId : Set where
   chatgptSessionBootstrap : ReGPTMCPFunctionId
   chatgptSessionDoctor : ReGPTMCPFunctionId
   chatgptSessionRefresh : ReGPTMCPFunctionId
-  chatgptSessionRefresh_cffi : ReGPTMCPFunctionId
+  chatgptSessionRefreshCffi : ReGPTMCPFunctionId
   chatgptSessionStatus : ReGPTMCPFunctionId
   chatgptSyncRoster : ReGPTMCPFunctionId
   chatgptTrancheStatus : ReGPTMCPFunctionId
@@ -381,7 +392,7 @@ record ReGPTFunctionContract : Set where
 
 regptFunctionSpec : ReGPTMCPFunctionId → ReGPTFunctionContract
 regptFunctionSpec chatgptAdapterHealth = regptContract "chatgptAdapterHealth" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptAdapterHealth_reset = regptContract "chatgptAdapterHealth_reset" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptAdapterHealthReset = regptContract "chatgptAdapterHealthReset" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptBranch = regptContract "chatgptBranch" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptContinue = regptContract "chatgptContinue" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptEditBranch = regptContract "chatgptEditBranch" headlessCFFI false noUncertainCommitRetry
@@ -401,7 +412,7 @@ regptFunctionSpec chatgptRevive_multi = regptContract "chatgptRevive_multi" head
 regptFunctionSpec chatgptSessionBootstrap = regptContract "chatgptSessionBootstrap" explicitBootstrapCDP false noUncertainCommitRetry
 regptFunctionSpec chatgptSessionDoctor = regptContract "chatgptSessionDoctor" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptSessionRefresh = regptContract "chatgptSessionRefresh" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionRefresh_cffi = regptContract "chatgptSessionRefresh_cffi" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionRefreshCffi = regptContract "chatgptSessionRefreshCffi" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptSessionStatus = regptContract "chatgptSessionStatus" headlessCFFI true readOnlyRetry
 regptFunctionSpec chatgptSyncRoster = regptContract "chatgptSyncRoster" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptTrancheStatus = regptContract "chatgptTrancheStatus" headlessCFFI true readOnlyRetry
