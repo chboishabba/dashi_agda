@@ -36,6 +36,7 @@ import DASHI.Physics.Foundations.TSFVOriginalObserverVisibilityCausalOrderExact 
 import DASHI.Physics.Foundations.TSFVObservedPhysicalAccessTransportExact as TSFVPhysicalAccess
 import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSFVKKHorizontal
 import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
+import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact as TSFVKKShear
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
 import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
@@ -50,6 +51,7 @@ import DASHI.Quantum.TSVF2017ControlledComplexOrderedRateBridgeExact as TSVFCont
 import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellNoGo
 import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
 import DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact as TSVFWickFirewall
+import DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact as TSVFGenerator
 import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
 import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
@@ -190,6 +192,35 @@ open TSFVKKPhysicalWeld public using
 -- a norm-isometric real-time observer step cannot equal a strictly
 -- norm-contracting Euclidean OS transfer step on a selected excitation.
 -- This is an actual proof implication, NOT an OS spectral-gap proof.
+-- P02/P08 stronger concrete KK source: the actual five-bilinear with
+-- connection is an INVERTIBLE shear congruence of g4 ⊕ b². This does
+-- not construct an actual 5D Einstein solution or physical index.
+open TSFVKKShear public using
+  ( FiveTangent
+  ; kkMetricShear
+  ; kkMetricUnShear
+  ; kkShearLeftInverse
+  ; kkShearRightInverse
+  ; kkDecoupledProductBilinear
+  ; kkActualFiveBilinear
+  ; kkActualFiveBilinearIsInvertibleShearPullback
+  ; kkHorizontalShearHasZeroCirclePart
+  )
+
+-- P03/P07: ACTUAL original TSVF/OS clock strongly convergent
+-- difference-quotient theorem. Derives generator, then i*hbar ENERGY
+-- operator matching on the selected domain; physical Hilbert,
+-- continuity, self-adjointness and OS meaning remain OPEN.
+open TSVFGenerator public using
+  ( RealTimeDerivativeBridge
+  ; observerDifferenceQuotient
+  ; osDifferenceQuotient
+  ; originalSelectedDifferenceQuotientsIntertwine
+  ; originalSelectedStrongGeneratorIntertwines
+  ; PhysicalHbarEnergyConversion
+  ; originalSelectedPhysicalEnergyIntertwines
+  )
+
 open TSVFWickFirewall public using
   ( originalClockDirectEuclideanNormMustBeEqual
   ; originalClockCannotIdentifyStrictEuclideanDecay
