@@ -91,15 +91,15 @@ fromParametricToSelected anchored =
   (λ pre →
     transport
       (preconditionSameMeaning anchored pre)
-      (Clay.preconditions (sourceParametricProof anchored) pre)) ,
+      (Clay.ClayYangMillsSolution.preconditions (sourceParametricProof anchored) pre)) ,
   (λ post →
     transport
       (postconditionSameMeaning anchored post)
-      (Clay.postconditions (sourceParametricProof anchored) post)) ,
+      (Clay.ClayYangMillsSolution.postconditions (sourceParametricProof anchored) post)) ,
   (λ inv →
     transport
       (invariantSameMeaning anchored inv)
-      (Clay.invariants (sourceParametricProof anchored) inv))
+      (Clay.ClayYangMillsSolution.invariants (sourceParametricProof anchored) inv))
   where
     transport : ∀ {A B : Set} → A ≡ B → A → B
     transport refl proof = proof
