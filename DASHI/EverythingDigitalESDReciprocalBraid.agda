@@ -235,6 +235,15 @@ import DASHI.Education.DigitalESDIntersectionalRecompositionExact
 import DASHI.Education.DigitalESDHigherOrderFabricIncidenceExact
 import DASHI.Education.DigitalESDDependencyScopedWorldRevisionExact
 
+
+import DASHI.Education.DigitalESDWorldPNFTrialecticControlBridgeExact
+import DASHI.Education.DigitalESDSpectralWorldGapSelectionExact
+import DASHI.Education.DigitalESDPNFSignedGraphConsumerExact
+
+import DASHI.Education.DigitalESDResearchMathematicsCompletionExact
+
+import DASHI.Education.DigitalESDSourceNumericEvidenceFirewallExact
+
 module DASHI.EverythingDigitalESDReciprocalBraid where
 
 ------------------------------------------------------------------------
