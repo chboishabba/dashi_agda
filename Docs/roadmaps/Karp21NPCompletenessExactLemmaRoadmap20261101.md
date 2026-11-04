@@ -1,5 +1,12 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-04 — P0 strict Cook unary-index resource representation bound (source-written; kernel OPEN)
+
+**New Golden-candidate source:** `Karp21CookUnaryIndexWordBoundExact.agda`, imported by the existing Karp focused root, reuses the **original** `Prefix.encodeNatInto` successor/zero syntax, `Prefix.cookFormulaTokenCount`, `Finite.formulaVariables`, exactly-three-bit `Binary.encodeFormulaBits`, `Finite.canonicalCookFormulaWordSizeExact`, and `Canonical.k00StrictAcceptedWordCanonicalReencode`. `formulaIndexTokenBound` bounds **every** syntactic Cook variable index by its source AST's actual token count; `k00StrictWordAllIndicesBounded` transfers it to the length of **any successfully strict-parsed original SAT input word**, not merely the canonical encoder's image.
+
+**Cost consequence with no false promotion:** the unary index representation in this specific Cook syntax consumes `index+1` source tokens, so its Nat index magnitude is at most accepted source word size. This permits a future literal ordinary tape checker to pay for unary index comparisons in polynomial input length. It is NOT transferable to the E20/N21 Elias gamma-coded vertex count; `n=2^1024` remains a valid sparse graph-code stress case. No machine cost was proved for repeated-variable lookups, prefix formula parser, total syntax evaluation, witness composition, or a standard finite-state TM; `k00StrictSATMachineVerifierClock` and `PR.InNP` remain OPEN. No exact-head Agda compiler or transitive `--safe` receipt was run.
+
+
 ## 2026-11-04 — original nested gamma decoder and E20 word-receipt composition, kernel OPEN
 
 **New source, in existing PR #1445:** `Karp21OriginalGammaCompleteGraphParserExact.agda`, imported by `Karp21Everything.agda`, assembles the original `Graph.decodeGraphWord` using its exact header, edge, threshold, dependent validator and sparse bound decisions. `decodeGraphWordFromActualFrame` accepts proof terms for each literal parse result and both inequalities, then follows the original parser's rejection/acceptance branches; it does not define a second graph grammar.
