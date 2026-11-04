@@ -60,13 +60,44 @@ module _
   record RealTimeDerivativeBridge : Set₁ where
     field
       Time : Set
+      zeroTime : Time
+      addTime : Time → Time → Time
+      negateTime : Time → Time
+
+      -- A physically nontrivial real one-parameter group rather
+      -- than arbitrary names for two independently selected flows.
       RealStep : Set
+
+      TimeConvergesToZero : (Nat → Time) → Set
       samplesToZero : Nat → Time
+      selectedTimeSamplesConverge :
+        TimeConvergesToZero samplesToZero
       inverseRealStep : Nat → RealStep
 
       -- PHYSICAL real-time groups, separate from osStep and Euclidean T.
       observerUnitary : Time → ObserverState → ObserverState
       osUnitary : Time → ReconstructedState → ReconstructedState
+
+      observerZeroIsIdentity :
+        ∀ a → observerUnitary zeroTime a ≡ a
+      osZeroIsIdentity :
+        ∀ a → osUnitary zeroTime a ≡ a
+      observerAdditiveGroupLaw :
+        ∀ t u a →
+          observerUnitary (addTime t u) a
+          ≡ observerUnitary t (observerUnitary u a)
+      osAdditiveGroupLaw :
+        ∀ t u a →
+          osUnitary (addTime t u) a
+          ≡ osUnitary t (osUnitary u a)
+      observerTimeInverse :
+        ∀ t a →
+          observerUnitary (negateTime t) (observerUnitary t a)
+          ≡ a
+      osTimeInverse :
+        ∀ t a →
+          osUnitary (negateTime t) (osUnitary t a)
+          ≡ a
 
       observerSubtract :
         ObserverState → ObserverState → ObserverState
@@ -122,6 +153,12 @@ module _
       OSDomain : ReconstructedState → Set
       mappedDomain :
         ∀ a → ObserverGeneratorDomain a → OSDomain (J a)
+
+      -- A non-vacuous source-specific selected ket: at minimum the
+      -- ORIGINAL preselected forward state belongs to the domain.
+      -- Empty-domain "proofs" are not accepted as a P07 population.
+      originalSelectedForwardKetInDomain :
+        ObserverGeneratorDomain (TSVF.forwardState E)
 
       observerDerivativeExists :
         ∀ a → ObserverGeneratorDomain a →
@@ -201,6 +238,19 @@ module _
           (observerDerivativeExists source a domain)))
       (originalOSDerivativeExists source
         (J a) (mappedDomain source a domain))
+
+  -- This is the source-specialized ORIGINAL TSVF selected forward ket,
+  -- not an arbitrary or empty observer domain.
+  originalForwardKetStrongGeneratorIntertwines :
+    (source : RealTimeDerivativeBridge) →
+    J (observerGenerator source (TSVF.forwardState E))
+    ≡
+    osGeneratorFromOriginalHamiltonian source
+      (OS.hamiltonian reconstruction) (J (TSVF.forwardState E))
+  originalForwardKetStrongGeneratorIntertwines source =
+    originalSelectedStrongGeneratorIntertwines
+      source (TSVF.forwardState E)
+      (originalSelectedForwardKetInDomain source)
 
   ------------------------------------------------------------------------
   -- Selected physical ENERGY H = i*hbar*dU/dt (Schrodinger convention).
@@ -284,6 +334,20 @@ module _
           (sym
             (originalOSEnergyIsSchrodingerGenerator
               conversion (J a)))))
+
+  originalForwardKetPhysicalEnergyIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    J (observerPhysicalEnergyOperator conversion
+        (TSVF.forwardState E))
+    ≡
+    originalOSPhysicalEnergyOperator conversion
+      (OS.hamiltonian reconstruction)
+      (J (TSVF.forwardState E))
+  originalForwardKetPhysicalEnergyIntertwines source conversion =
+    originalSelectedPhysicalEnergyIntertwines
+      source conversion (TSVF.forwardState E)
+      (originalSelectedForwardKetInDomain source)
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
