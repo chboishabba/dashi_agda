@@ -417,3 +417,34 @@ regptFunctionSpec chatgptSessionStatus = regptContract "chatgptSessionStatus" he
 regptFunctionSpec chatgptSyncRoster = regptContract "chatgptSyncRoster" headlessCFFI false noUncertainCommitRetry
 regptFunctionSpec chatgptTrancheStatus = regptContract "chatgptTrancheStatus" headlessCFFI true readOnlyRetry
 regptFunctionSpec chatgptView = regptContract "chatgptView" headlessCFFI true readOnlyRetry
+
+mutatingReGPTFunctionsNeverRetryUncertainCommit :
+  (f : ReGPTMCPFunctionId) →
+  ReGPTFunctionContract.readOnly (regptFunctionSpec f) ≡ false →
+  ReGPTFunctionContract.retryPolicy (regptFunctionSpec f) ≡ noUncertainCommitRetry
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptAdapterHealth ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptAdapterHealthReset _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptBranch _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptContinue _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptEditBranch _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptFleetTelemetry ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptHydrate _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptList ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptLiveActivity ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptLiveStatus ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptNew _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptOperationStatus ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptProtocolCompare ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptProtocolFingerprint ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptReconcile ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRegenerate _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRevive _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRevive_multi _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionBootstrap _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionDoctor _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionRefresh _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionRefreshCffi _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionStatus ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSyncRoster _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptTrancheStatus ()
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptView ()
