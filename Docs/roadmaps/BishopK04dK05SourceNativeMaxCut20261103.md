@@ -226,3 +226,45 @@ The theorem `round11MachinPiIsFirstPositiveSineZero` is **source-written conditi
 **Unchanged independent gates:** K04d-LOG original negative-log exp inverse and Nat transport; K04d-CONTINUITY finite-term/local-uniform/same-object selected zeta; K05-PI original atan-to-trig quarter equality. Downstream K05 first-positive-zero remains conditional only on K05-PRODUCT and that quarter equality. The new source is `{-# OPTIONS --safe #-}`, contains no locally declared postulate or hole, but **no observed exact-head Agda kernel acceptance**; all declarations remain proof candidates until checking. No claim about completed zeta or original Riemann's zeta is promoted from a generic function record.
 
 **Attribution:** original finite Cauchy theorem authors and DASHI Round11/complex series authors, Cauchy, Machin, Bishop–Bridges, Zachary Murray, Viktor Csimma. Lean #104 remains a separate source-faithful companion, not an Agda proof transporter.
+
+
+### 2026-11-04 exact *grouped* signed-factorial Cauchy correction
+
+The ordinary ungrouped complex Taylor series has coefficients `a_n(x)=(i*x)^n/n!`.
+The **original Round11 phase** instead groups `b_n(x)=a_(2n)(x)+a_(2n+1)(x)`
+because its n-th cosine and sine terms carry even and odd factorial degrees.
+A naive coefficient assertion `sum(k=0..n,b_k(x)*b_(n-k)(y))=b_n(x+y)` is **false**.
+The missing odd/odd boundary matters even at the first row.
+
+Define `O_n(x,y)=sum(k=0..n,a_(2k+1)(x)*a_(2(n-k)+1)(y))`, `O_(-1)=0`.
+The mathematically correct universal finite identity to formalize is
+
+```text
+sum (k=0..n) b_k(x)*b_(n-k)(y)
+  = b_n(x+y) + O_n(x,y) - O_(n-1)(x,y).
+```
+
+The correction follows by partitioning the *ungrouped* factorial binomial theorem
+according to parity of the two factor degrees: even+even and odd+odd
+contribute even degree, whereas odd+even and even+odd contribute odd degree.
+Thus finite Cauchy **triangles telescope**:
+
+```text
+sum (n=0..N) sum (k=0..n) b_k(x)*b_(n-k)(y)
+  = sum (n=0..N) b_n(x+y) + O_N(x,y).
+```
+
+The formal remaining K05 bridge is: (1) implement this all-n equality using
+the existing native Bishop factorial coefficient and parity owners;
+(2) show `O_N(x,y)` vanishes as N increases, from a source-native
+absolute Cauchy convolution majorant; (3) transfer the original
+rectangle-to-triangle wing estimate using the very same grouped histories.
+The new Bishop rectangle-limit owner already supplies the target product limit.
+
+**Executed finite regression:** `scripts/check_bishop_round11_grouped_parity_cauchy.py`
+checks both displayed identities in exact Python `Fraction` Gaussian complex
+arithmetic for 25 pairs of rational inputs and 20 degrees each: **PASS 500/500**,
+including the original Machin `1/5` and `1/239`. This is **not** the Agda
+universal equality, nor a Bishop convergence theorem. It rules out promoting
+the false uncorrected grouped coefficient formula. No exact-head Agda
+elaboration receipt exists; remain kernel-pending.
