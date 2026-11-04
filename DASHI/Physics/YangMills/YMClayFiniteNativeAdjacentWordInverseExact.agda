@@ -133,7 +133,7 @@ originalProgramAfterInverse (Product.fixHead program)
   cong (λ chosenTail → Vec._∷_ head chosenTail)
     (originalProgramAfterInverse program tail)
 originalProgramAfterInverse Product.swapHead
-    (first ∷ second ∷ tail) = refl
+    (Vec._∷_ first (Vec._∷_ second tail)) = refl
 
 -- Any closed R443 C3 program or R445 128-pair/896-spectator program
 -- expressed in this original LinkPermutation language inherits both
