@@ -41,6 +41,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as IntegralCongruence
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 
 module _
@@ -135,6 +136,55 @@ module _
         (λ block →
           Product.productIntegral source
             (λ tail → observable (block ∷ tail))))
+
+  -- Any finite number of genuinely independent unobserved original
+  -- Haar links integrates out to one, without a conditional Gibbs
+  -- factorization. Product normalization is derived from oneLink.
+  productIntegralConstant :
+    ∀ {spectators : Nat} (value : ℝ) →
+    Product.productIntegral {n = spectators} source (λ _ → value)
+    ≡ value
+  productIntegralConstant {spectators = zero} value = refl
+  productIntegralConstant {spectators = suc n} value =
+    trans
+      (Product.integrateCongruent source _ _
+        (λ link → productIntegralConstant {spectators = n} value))
+      (integrateConstant value)
+
+  -- The spectators are still genuine independent original Haar link
+  -- coordinates; integrating them out is legal only for the UNWEIGHTED
+  -- pullback observable, which is independent of those links.
+  originalUnweightedSpectatorsDisappear :
+    ∀ {n spectators : Nat} (observable : Vec Link n → ℝ) →
+    Product.productIntegral source
+      (λ blocks →
+        Product.productIntegral {n = spectators} source
+          (λ _ → observable blocks))
+    ≡ Product.productIntegral source observable
+  originalUnweightedSpectatorsDisappear
+      {spectators = spectators} observable =
+    IntegralCongruence.productIntegralCongruent source _ _
+      (λ blocks →
+        productIntegralConstant {spectators = spectators}
+          (observable blocks))
+
+  -- Combined exact kinematic statement:
+  -- 2*n independent links, grouped into disjoint ordered pairs, plus
+  -- any number of independent spectators -> n original Haar links.
+  -- The all-64 native block-pairs + 896 spectators coordinate PERMUTATION
+  -- and equality with selected SUNBlock are separate original geometry.
+  originalDisjointPairSpectatorPushforward :
+    ∀ {n spectators : Nat}
+      (observable : Vec Link n → ℝ) →
+    disjointPairIntegral
+      (λ blocks →
+        Product.productIntegral {n = spectators} source
+          (λ _ → observable blocks))
+    ≡ Product.productIntegral source observable
+  originalDisjointPairSpectatorPushforward observable =
+    trans
+      (disjointPairHaarPushforward _)
+      (originalUnweightedSpectatorsDisappear observable)
 
   -- A chosen concrete sequence of non-Abelian blocked link values is
   -- not supplied here by a guessed Gamma/RG coarse configuration.
