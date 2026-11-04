@@ -33,6 +33,7 @@ import Sequence as Seq
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
+import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -365,3 +366,143 @@ round11PhaseTriangleIsMertens inputs x y count =
   complexTriangleIsMertens
     (round11PhaseTerms inputs x)
     (round11PhaseTerms inputs y) count
+
+
+------------------------------------------------------------------------
+-- INFINITE COMPLEX CAUCHY TRIANGLE, WITHOUT ANY COMPLEX-SERIES
+-- CONVERGENCE AXIOM OR SECOND ANALYTIC CARRIER.
+--
+-- The four genuine Bishop-real generic Cauchy lemmas are assembled
+-- on the literal existing C.BishopComplex Cartesian representation.
+-- Its only remaining input is four actual absolute triangular
+-- convergence witnesses.  Original Round11 source terms, not an
+-- unverified "factorial product" record, are used at the endpoint.
+------------------------------------------------------------------------
+
+record FourAbsoluteTriangles
+    (left right : Nat → C.BishopComplex) : Set where
+  field
+    realRealLimit realImagLimit imagRealLimit imagImagLimit : R.ℝ
+
+    realRealConverges :
+      Seq._ConvergesTo_
+        (Generic.absoluteTriangle
+          (realTerms left) (realTerms right))
+        realRealLimit
+    realImagConverges :
+      Seq._ConvergesTo_
+        (Generic.absoluteTriangle
+          (realTerms left) (imagTerms right))
+        realImagLimit
+    imagRealConverges :
+      Seq._ConvergesTo_
+        (Generic.absoluteTriangle
+          (imagTerms left) (realTerms right))
+        imagRealLimit
+    imagImagConverges :
+      Seq._ConvergesTo_
+        (Generic.absoluteTriangle
+          (imagTerms left) (imagTerms right))
+        imagImagLimit
+
+open FourAbsoluteTriangles public
+
+complexTriangleConvergesToProduct :
+  (left right : Nat → C.BishopComplex) →
+  (leftLimit rightLimit : C.BishopComplex) →
+  ComplexFinitePartialConvergesTo left leftLimit →
+  ComplexFinitePartialConvergesTo right rightLimit →
+  FourAbsoluteTriangles left right →
+  (Seq._ConvergesTo_
+    (λ n → C.re (complexTriangle left right n))
+    (C.re (C._*C_ leftLimit rightLimit)))
+  ×
+  (Seq._ConvergesTo_
+    (λ n → C.im (complexTriangle left right n))
+    (C.im (C._*C_ leftLimit rightLimit)))
+complexTriangleConvergesToProduct
+    left right leftLimit rightLimit leftConv rightConv abs =
+  let
+    rr =
+      Generic.cauchyTriangleConvergesToActualProduct
+        (realTerms left) (realTerms right)
+        (C.re leftLimit) (C.re rightLimit)
+        (realRealLimit abs)
+        (proj₁ leftConv) (proj₁ rightConv)
+        (realRealConverges abs)
+    ri =
+      Generic.cauchyTriangleConvergesToActualProduct
+        (realTerms left) (imagTerms right)
+        (C.re leftLimit) (C.im rightLimit)
+        (realImagLimit abs)
+        (proj₁ leftConv) (proj₂ rightConv)
+        (realImagConverges abs)
+    ir =
+      Generic.cauchyTriangleConvergesToActualProduct
+        (imagTerms left) (realTerms right)
+        (C.im leftLimit) (C.re rightLimit)
+        (imagRealLimit abs)
+        (proj₂ leftConv) (proj₁ rightConv)
+        (imagRealConverges abs)
+    ii =
+      Generic.cauchyTriangleConvergesToActualProduct
+        (imagTerms left) (imagTerms right)
+        (C.im leftLimit) (C.im rightLimit)
+        (imagImagLimit abs)
+        (proj₂ leftConv) (proj₂ rightConv)
+        (imagImagConverges abs)
+  in
+  Seq.xₙ+yₙ→x₀+y₀
+    (R._*_ (C.re leftLimit) (C.re rightLimit) , rr)
+    (R.-_ (R._*_ (C.im leftLimit) (C.im rightLimit)) ,
+      Seq.-xₙ→-x₀
+        (R._*_ (C.im leftLimit) (C.im rightLimit) , ii))
+  ,
+  Seq.xₙ+yₙ→x₀+y₀
+    (R._*_ (C.re leftLimit) (C.im rightLimit) , ri)
+    (R._*_ (C.im leftLimit) (C.re rightLimit) , ir)
+
+-- K05 exact original-series specialization. No new formal product
+-- input: only the absolute-triangle source convergence witnesses.
+round11PhaseTriangleConvergesFromFourAbsoluteTriangles :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  FourAbsoluteTriangles
+    (round11PhaseTerms inputs x)
+    (round11PhaseTerms inputs y) →
+  let
+    T = Route.round11MachinTranscendentals inputs
+  in
+  (Seq._ConvergesTo_
+    (λ n →
+      C.re
+        (complexTriangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n))
+    (C.re
+      (C._*C_
+        (C.expC T (C.pureImaginary x))
+        (C.expC T (C.pureImaginary y)))))
+  ×
+  (Seq._ConvergesTo_
+    (λ n →
+      C.im
+        (complexTriangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n))
+    (C.im
+      (C._*C_
+        (C.expC T (C.pureImaginary x))
+        (C.expC T (C.pureImaginary y)))))
+round11PhaseTriangleConvergesFromFourAbsoluteTriangles
+    inputs x y abs =
+  complexTriangleConvergesToProduct
+    (round11PhaseTerms inputs x)
+    (round11PhaseTerms inputs y)
+    (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.pureImaginary x))
+    (C.expC (Route.round11MachinTranscendentals inputs)
+      (C.pureImaginary y))
+    (round11PhaseSeriesConvergesToOriginalExp inputs x)
+    (round11PhaseSeriesConvergesToOriginalExp inputs y)
+    abs
