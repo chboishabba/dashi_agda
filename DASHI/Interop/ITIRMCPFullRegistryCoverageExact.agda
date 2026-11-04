@@ -372,7 +372,7 @@ data ReGPTMCPFunctionId : Set where
   chatgptReconcile : ReGPTMCPFunctionId
   chatgptRegenerate : ReGPTMCPFunctionId
   chatgptRevive : ReGPTMCPFunctionId
-  chatgptRevive_multi : ReGPTMCPFunctionId
+  chatgptReviveMulti : ReGPTMCPFunctionId
   chatgptSessionBootstrap : ReGPTMCPFunctionId
   chatgptSessionDoctor : ReGPTMCPFunctionId
   chatgptSessionRefresh : ReGPTMCPFunctionId
@@ -391,32 +391,32 @@ record ReGPTFunctionContract : Set where
     retryPolicy : RetryPolicy
 
 regptFunctionSpec : ReGPTMCPFunctionId → ReGPTFunctionContract
-regptFunctionSpec chatgptAdapterHealth = regptContract "chatgptAdapterHealth" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptAdapterHealthReset = regptContract "chatgptAdapterHealthReset" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptBranch = regptContract "chatgptBranch" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptContinue = regptContract "chatgptContinue" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptEditBranch = regptContract "chatgptEditBranch" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptFleetTelemetry = regptContract "chatgptFleetTelemetry" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptHydrate = regptContract "chatgptHydrate" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptList = regptContract "chatgptList" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptLiveActivity = regptContract "chatgptLiveActivity" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptLiveStatus = regptContract "chatgptLiveStatus" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptNew = regptContract "chatgptNew" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptOperationStatus = regptContract "chatgptOperationStatus" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptProtocolCompare = regptContract "chatgptProtocolCompare" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptProtocolFingerprint = regptContract "chatgptProtocolFingerprint" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptReconcile = regptContract "chatgptReconcile" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptRegenerate = regptContract "chatgptRegenerate" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptRevive = regptContract "chatgptRevive" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptRevive_multi = regptContract "chatgptRevive_multi" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionBootstrap = regptContract "chatgptSessionBootstrap" explicitBootstrapCDP false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionDoctor = regptContract "chatgptSessionDoctor" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionRefresh = regptContract "chatgptSessionRefresh" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionRefreshCffi = regptContract "chatgptSessionRefreshCffi" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptSessionStatus = regptContract "chatgptSessionStatus" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptSyncRoster = regptContract "chatgptSyncRoster" headlessCFFI false noUncertainCommitRetry
-regptFunctionSpec chatgptTrancheStatus = regptContract "chatgptTrancheStatus" headlessCFFI true readOnlyRetry
-regptFunctionSpec chatgptView = regptContract "chatgptView" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptAdapterHealth = regptContract "chatgpt_adapter_health" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptAdapterHealthReset = regptContract "chatgpt_adapter_health_reset" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptBranch = regptContract "chatgpt_branch" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptContinue = regptContract "chatgpt_continue" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptEditBranch = regptContract "chatgpt_edit_branch" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptFleetTelemetry = regptContract "chatgpt_fleet_telemetry" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptHydrate = regptContract "chatgpt_hydrate" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptList = regptContract "chatgpt_list" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptLiveActivity = regptContract "chatgpt_live_activity" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptLiveStatus = regptContract "chatgpt_live_status" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptNew = regptContract "chatgpt_new" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptOperationStatus = regptContract "chatgpt_operation_status" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptProtocolCompare = regptContract "chatgpt_protocol_compare" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptProtocolFingerprint = regptContract "chatgpt_protocol_fingerprint" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptReconcile = regptContract "chatgpt_reconcile" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptRegenerate = regptContract "chatgpt_regenerate" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptRevive = regptContract "chatgpt_revive" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptReviveMulti = regptContract "chatgpt_revive_multi" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionBootstrap = regptContract "chatgpt_session_bootstrap" explicitBootstrapCDP false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionDoctor = regptContract "chatgpt_session_doctor" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionRefresh = regptContract "chatgpt_session_refresh" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionRefreshCffi = regptContract "chatgpt_session_refresh_cffi" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptSessionStatus = regptContract "chatgpt_session_status" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptSyncRoster = regptContract "chatgpt_sync_roster" headlessCFFI false noUncertainCommitRetry
+regptFunctionSpec chatgptTrancheStatus = regptContract "chatgpt_tranche_status" headlessCFFI true readOnlyRetry
+regptFunctionSpec chatgptView = regptContract "chatgpt_view" headlessCFFI true readOnlyRetry
 
 mutatingReGPTFunctionsNeverRetryUncertainCommit :
   (f : ReGPTMCPFunctionId) →
@@ -439,7 +439,7 @@ mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptProtocolFingerprint ()
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptReconcile ()
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRegenerate _ = refl
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRevive _ = refl
-mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptRevive_multi _ = refl
+mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptReviveMulti _ = refl
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionBootstrap _ = refl
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionDoctor _ = refl
 mutatingReGPTFunctionsNeverRetryUncertainCommit chatgptSessionRefresh _ = refl
