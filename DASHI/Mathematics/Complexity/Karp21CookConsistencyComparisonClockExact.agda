@@ -25,12 +25,19 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; []; _∷_; length)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Nat.Tactic.RingSolver using (solve-∀)
+open import Data.Maybe.Base using (just)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
 import DASHI.Mathematics.Complexity.Karp21CookFiniteOccurrenceWitnessExact as Finite
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
+import DASHI.Mathematics.Complexity.Karp21CookStrictTripleBitBoundaryExact as Strict
+import DASHI.Mathematics.Complexity.Karp21CookExecutableFiniteVerifierBidiExact as Verifier
+import DASHI.Mathematics.Complexity.Karp21CookAllWordCertificateBoundExact as AllWords
 
 -- The original compatibleCookObservations makes exactly one Nat-index
 -- equality test for each explicit pair; schedule all pairs here.
@@ -128,3 +135,48 @@ k00ActualConsistencyComparisonEnvelope observations
 -- The counted Boolean result is the exact ORIGINAL value. Its resource
 -- bound does not itself inhabit PR.polynomialTimeVerifier for BitWord.
 ------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- P0 SAME ACCEPTED BITWORD: k observations fit in the certificate
+-- bits, and the original K00 all-word theorem bounds accepted
+-- certificates by the actual strict SAT input word.
+--
+-- The arithmetic thus gives an explicit quadratic comparison
+-- envelope in the length of THAT original word. It is not a
+-- bit-tape transition count and is not a PolynomialCostModel witness.
+------------------------------------------------------------------------
+
+pairObservationsNoLongerThanBits :
+  (indices : List Nat) (bits : List Bool) →
+  length (Finite.pairObservations indices bits) ≤ length bits
+pairObservationsNoLongerThanBits [] bits = z≤n
+pairObservationsNoLongerThanBits (_ ∷ rest) [] = z≤n
+pairObservationsNoLongerThanBits (_ ∷ rest) (_ ∷ bits) =
+  s≤s (pairObservationsNoLongerThanBits rest bits)
+
+k00ActualAcceptedWordPairComparisonBound :
+  (word bits : Word.BitWord)
+  (formula : Cook.BooleanFormula) →
+  Strict.strictDecodeCookFormulaBits word ≡ just formula →
+  Verifier.verifyStrictCookSATWord word bits ≡ true →
+  proj₂
+    (countedAll
+      (Finite.pairObservations
+        (Finite.formulaVariables formula) bits))
+    ≤ Word.encodingSize word * Word.encodingSize word
+k00ActualAcceptedWordPairComparisonBound word bits formula decoded checked =
+  let observations =
+        Finite.pairObservations (Finite.formulaVariables formula) bits
+      observationsWithinWord =
+        NatP.≤-trans
+          (pairObservationsNoLongerThanBits
+            (Finite.formulaVariables formula) bits)
+          (NatP.≤-trans
+            (NatP.≤-reflexive
+              (sym (Finite.canonicalBitWordIsListLength bits)))
+            (AllWords.k00StrictAcceptedWordCertificateBound
+              word bits checked))
+  in NatP.≤-trans
+      (k00ActualConsistencyComparisonEnvelope observations)
+      (NatP.*-mono-≤
+        observationsWithinWord observationsWithinWord)
