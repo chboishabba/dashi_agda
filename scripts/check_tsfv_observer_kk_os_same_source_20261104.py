@@ -224,11 +224,59 @@ def check_noncollapsed_two_level_wick_stone_reference():
           "(analytic numerical control, not physical YM or Agda)")
 
 
+
+
+def check_kk_backward_radius_nonidentifiability():
+    """SOURCE negative control: same g4 and A, distinct strictly positive
+    KK radii, identical horizontal reductions, different vertical readings.
+    Does NOT establish 5D Einstein/radion equations or physical realizability.
+    """
+    rng = random.Random(5234)
+    checked = 0
+    for _ in range(6000):
+        v = tuple(F(rng.randint(-9, 9), rng.randint(1, 9))
+                  for _ in range(4))
+        w = tuple(F(rng.randint(-9, 9), rng.randint(1, 9))
+                  for _ in range(4))
+        b1 = F(rng.randint(1, 8), rng.randint(1, 9))
+        b2 = b1 + F(rng.randint(1, 8), rng.randint(1, 9))
+        assert b1 > 0 and b2 > b1
+
+        # Both physical candidates reduce to exactly the SAME g4,
+        # including with a nonzero selected source connection.
+        h1 = kk_five(
+            actual_four_bilinear, connection, b1,
+            v, -connection(v), w, -connection(w)
+        )
+        h2 = kk_five(
+            actual_four_bilinear, connection, b2,
+            v, -connection(v), w, -connection(w)
+        )
+        assert h1 == h2 == actual_four_bilinear(v, w)
+
+        # The full 5D bilinear at a unit vertical displacement
+        # re-identifies the discarded fibre-radius coordinate.
+        p1 = kk_five(
+            actual_four_bilinear, connection, b1,
+            v, 1-connection(v), w, 1-connection(w)
+        ) - actual_four_bilinear(v, w)
+        p2 = kk_five(
+            actual_four_bilinear, connection, b2,
+            v, 1-connection(v), w, 1-connection(w)
+        ) - actual_four_bilinear(v, w)
+        assert p1 == b1 and p2 == b2 and p1 != p2
+        checked += 4
+
+    print(f"PASS: {checked:,} exact rational KK reverse-lift "
+          "non-identifiability and vertical-radius recovery identities")
+
+
 if __name__ == "__main__":
     check_original_access()
     check_kk_horizontal()
     check_time_no_go()
     check_actual_diamond_visibility_nonpromotion()
     check_kk_shear_congruence()
+    check_kk_backward_radius_nonidentifiability()
     check_noncollapsed_two_level_wick_stone_reference()
     print("REFERENCE ONLY: NOT a physical/Agda/Stone/OS/Clay result")
