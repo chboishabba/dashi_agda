@@ -206,7 +206,7 @@ module _
             (sym (Product.integrateTwoSwap source
               (λ first second →
                 weight first second
-                  *ℝ coarseObservable (multiply first second))))))
+                  *ℝ coarseObservable (multiply first second)))))))
 
   -- Fine and coarse partition functions are not unrelated
   -- normalization assumptions. Both are the ORIGINAL weighted pair
