@@ -1,3 +1,9 @@
+## 2026-11-04 — P01 complex controlled Born → ordered original ABL rate (SOURCE, kernel pending)
+
+`TSVF2017ControlledComplexOrderedRateBridgeExact.agda` reuses the chosen original `TSVF2017ControlledPointerRecordUnitaryExact`, heterogeneous tensor complex/Hermitian overlap, and original `Q.ablProbability` numerators/denominators. Heterogeneous *actual emitted* rational Born factors with explicit `2*siteBorn<=1`, complex gamma squared-product bound `<=1`, and rational monotone multiplication yield `(2^k+1)*wrongABL.numerator <= rightABL.denominator` with the nonzero ABL normalizer already proved in original Hetero. Canonical emitted `3/5` pulse gives exact `9/25` Born factor. No Nat calibration proxy, no independent probability law.
+
+Independent `scripts/check_tsvf_controlled_complex_ordered_rate.py` reference passed 3000 exact-Fraction heterogeneous fixtures/21000 checks plus two invalid-input negative controls. **Golden header is source-written only; exact-head Agda kernel not run.** The selected physical correlated N-body pointer/environment model, actual disturbance bound and final bra, real-time/OS domain equivalence, R443/R445/R320/R333 and standalone Clay construction remain open. New dossier: `Docs/physics/TSVF2017ControlledComplexOrderedRateOriginalABLMaxCut20261104.md`. P00 parent/child comparison: 20/26 shared changed files byte-identical; six documentation/regression file blobs diverged, parent YM #1444 and downstream #1460 both have independent changes, no merge. Keep 186 roadmap lemma IDs unchanged and 219 Clay submission fields unchanged.
+
 ## 2026-11-03 — genuine complex TSVF gamma/ABL max-cut and OS-indexed same-state physical boundary
 
 - Verified original 2017 source Eqs.22–25 and isolated unsquared-complex-gamma/printed-probability notation mismatch with an exact i-vs-1 phase negative control. Attributed to Aharonov, Cohen and Landsberger; no claim source authors made an empirically false prediction.
