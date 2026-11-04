@@ -31,6 +31,7 @@ import Real as R
 import RealProperties as RP
 
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
+import DASHI.Foundations.BishopMachinArctanConstructionExact as Machin
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -41,9 +42,11 @@ machinHalfPhase = Quad.twiceQuarter
 doubleMachinHalfIsOriginalPi :
   R._≃_
     (R._+_ machinHalfPhase machinHalfPhase)
-    (R._*_ (R._⋆ (Data.Rational.Unnormalised.+ 4 / 1)) Quarter.machinQuarterAngle)
+    Machin.bishopMachinPi
 doubleMachinHalfIsOriginalPi =
-  Quad.twiceTwiceIsFourTimesQuarter
+  RP.≃-trans
+    Quad.twiceTwiceIsFourTimesQuarter
+    Quarter.fourTimesQuarterIsMachinPi
 
 round11MachinHalfSineIsOne :
   (inputs : Round11.Round11BishopCutset) →
