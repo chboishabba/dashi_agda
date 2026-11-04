@@ -1,5 +1,16 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-04 — actual E20 image: dependent/Fin-free validator guard agreement (source-written; kernel pending)
+
+**New source owner:** `Karp21FinFreeE20RawValidatorAgreementExact.agda` is imported by the original `Karp21Everything.agda` focused root. `canonicalRawRuntimeChecksPass` is structural induction over the EXISTING `Karp21CanonicalRawValidatorPremisesExact.ValidFromPrevious` certificate. It pays exactly the two numeric endpoint inequalities and the original `strictAfter` check executed by the original `Karp21FinFreeRawSparseWordVerifierExact.validRawEdges`. No distinct graph construction, order convention, witness, or Boolean oracle is introduced.
+
+`scaledCompleteRuntimeRawValid` specializes the statement to E20's existing `Gen.completeScaledPairEdges`. `e20FiniteRawParsersAgreeAndPreserveYES` additionally reuses `Karp21CanonicalParsedGraphAcceptanceExact.scaledRawParsedGraphAcceptanceBidi` to package the ORIGINAL dependent `validateRawEdges` success, Fin-free raw-validation success and signed `WeightedMaxCutYES` equivalence on the same E20 generated finite graph and threshold.
+
+**Scope / non-promotion:** this is the E20-image raw-guard portion only. `n21FinFreeVerifierSameWord` still needs *arbitrary* graph-word parsing and all malformed branches, the typed/runtime sparse-endpoint consistency equivalence, signed score and threshold equality. `completeGraphGammaGraphDecodeSameObject` still needs the composed outer gamma fields and sparse budget, and `scaledCompleteWordFaithful` remains open. Neither Nat-valued `Fin` avoidance nor operation counts alone supplies binary-tape arithmetic, parsing, comparator, and transition costs. P0 SAT `InNP`/universal Cook-Levin, E20/N21 polynomial clocks, E01–E19/N01–N20, and `CertifiedKarpNetwork` remain open. Zero new kernel-certified resource reductions or terminal NP-completeness proofs. The Agda compiler, transitive `--safe` audit, and CI have not been run; do not mark this as Golden/kernel accepted.
+
+**Cross-pollination audit:** existing P≠NP concrete tape/cost owners are preferred to fresh machine models; the Shor/RSA binary/ternary register and Euclid bridges remain model/cost testbeds, not classical SAT or factoring hardness authority; XOR-grid parity is a Boolean primitive/finite special instance, not a general signed Max-Cut solution; BSD remains a separate arithmetic domain. Attribution: Cook 1971, Leonid Levin 1973, Karp 1972 and prior DASHI owners retained.
+
+
 ## 2026-11-03 — E05 original CLIQUE→NODE COVER canonical binary complement payload
 
 **Source-written at PR #1445; no Agda acceptance receipt:** `Karp21CliqueComplementUpperTriangleWordExact.agda` defines the literal off-diagonal bitwise negation of a sorted `List Bool` upper-triangle adjacency section, with `complementUpperTriangleInvolution`, `complementUpperTrianglePreservesLength` and `emittedComplementBitCountExact`. The pure binary owner imports only `--safe` DASHI definitions and is itself marked `--safe`.
