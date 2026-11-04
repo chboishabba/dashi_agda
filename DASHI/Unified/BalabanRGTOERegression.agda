@@ -956,6 +956,8 @@ import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SU
 import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as SUNSideFourBlockEndpoint
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedWilsonGaugeExact as SUNSideFourBlockedWilson
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as SUNBlockedFineHaar
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as SUNBlockedPushforward
+import DASHI.Physics.YangMills.YMClayFiniteRGPushforwardNonBareWitnessSafeExact as SUNPushforwardNoBare
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
@@ -1429,3 +1431,43 @@ open SUNBlockedFineHaar public using
   ; originalFineGibbsBlockedWilsonGaugeInvariant
   ; blockedCoarseGibbsPointwise
   ; originalFineGibbsBlockedGibbsGaugeInvariant)
+
+------------------------------------------------------------------------
+-- R445 selected original fine Gibbs law -> blocked SUN cylinder PUSHFORWARD.
+-- Uses exactly the same selected fine physical measure and native two-link
+-- SU(N) block already exported above. Numerator positivity, additivity,
+-- scaling, partition normalization and source-gauge covariance are derived
+-- from the actual older physical finite-cylinder owner.
+--
+-- This is a positive coarse observable functional, NOT a constructed
+-- coarse bare-Wilson product-Haar law or a completed disintegration.
+-- The finite Golden three-to-two counterexample makes the logical
+-- nonpromotion explicit. --safe on this unified legacy root is NOT
+-- a transitive axiomatic acceptance receipt (RealAnalysisAxioms).
+------------------------------------------------------------------------
+open SUNBlockedPushforward public using
+  ( pullbackCoarse
+  ; actualPushforwardNumerator
+  ; actualPushforwardPartition
+  ; actualPushforwardNormalized
+  ; actualPushforwardNumeratorIsOriginalWeightedIntegral
+  ; actualPushforwardNormalizedIsOriginalBlockedExpectation
+  ; originalFineIntegrationLaws
+  ; actualPushforwardNumeratorZero
+  ; actualPushforwardNumeratorOne
+  ; actualPushforwardNumeratorAdd
+  ; actualPushforwardNumeratorScale
+  ; actualPushforwardNumeratorPositive
+  ; actualFinePartitionPositive
+  ; actualPushforwardUnitNormalized
+  ; actualPushforwardGaugeInvariant
+  ; actualPushforwardWilsonGaugeInvariant
+  ; actualPushforwardGibbsGaugeInvariant)
+
+open SUNPushforwardNoBare public using
+  ( sameCoarseFibreDistinctFine
+  ; coarsePushforwardMassA
+  ; coarsePushforwardMassB
+  ; noBareUniformUnnormalizedClosure
+  ; noBareUniformNormalizedClosure)
+
