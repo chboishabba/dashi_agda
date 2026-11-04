@@ -308,6 +308,37 @@ def check_kk_backward_chart_connection_nonidentifiability():
           "(not gauge-invariant physical distinction)")
 
 
+
+
+def check_selected_ket_hamiltonian_nonpromotion():
+    """Two algebraic finite rational symmetric H have equal action on e0,
+    but not on e1. Independent negative control: NOT physical OS H.
+    """
+    e0 = (F(1), F(0))
+    e1 = (F(0), F(1))
+    def h0(vec):
+        return (F(0), F(0))
+    def h1(vec):
+        return (F(0), vec[1])
+    def dot2(x, y):
+        return x[0]*y[0] + x[1]*y[1]
+
+    assert h0(e0) == h1(e0)
+    assert h0(e1) != h1(e1)
+    rng = random.Random(1541)
+    checked = 0
+    for _ in range(6000):
+        x = tuple(F(rng.randint(-10,10),rng.randint(1,11))
+                  for i in range(2))
+        y = tuple(F(rng.randint(-10,10),rng.randint(1,11))
+                  for i in range(2))
+        assert dot2(x,h0(y)) == dot2(h0(x),y)
+        assert dot2(x,h1(y)) == dot2(h1(x),y)
+        checked += 2
+    print(f"PASS: {checked:,} exact rational symmetry cases "
+          "and selected-ket agreement/full-H disagreement control")
+
+
 if __name__ == "__main__":
     check_original_access()
     check_kk_horizontal()
@@ -317,4 +348,5 @@ if __name__ == "__main__":
     check_kk_backward_radius_nonidentifiability()
     check_kk_backward_chart_connection_nonidentifiability()
     check_noncollapsed_two_level_wick_stone_reference()
+    check_selected_ket_hamiltonian_nonpromotion()
     print("REFERENCE ONLY: NOT a physical/Agda/Stone/OS/Clay result")
