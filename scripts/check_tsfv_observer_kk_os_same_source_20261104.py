@@ -271,6 +271,43 @@ def check_kk_backward_radius_nonidentifiability():
           "non-identifiability and vertical-radius recovery identities")
 
 
+
+
+def check_kk_backward_chart_connection_nonidentifiability():
+    """Original g4 forgets chart connection. Off-diagonal vertical
+    5D readout retrieves local A(v). Gauge-related potentials can be
+    physically equivalent, so this is NOT a physical gauge invariant.
+    """
+    rng = random.Random(6437)
+    zero_a = lambda x: F(0)
+    checked = 0
+    for _ in range(6000):
+        v = tuple(F(rng.randint(-9, 9), rng.randint(1, 9))
+                  for _ in range(4))
+        w = tuple(F(rng.randint(-9, 9), rng.randint(1, 9))
+                  for _ in range(4))
+        shift = F(rng.randint(1, 7), rng.randint(1, 7))
+        def a2(x):
+            return connection(x) + shift*x[0]
+        b = F(rng.randint(1, 8), rng.randint(1, 9))
+        for a in (zero_a, connection, a2):
+            assert kk_five(
+                actual_four_bilinear, a, b, v, -a(v), w, -a(w)
+            ) == actual_four_bilinear(v, w)
+            # At fixed b=1, the mixed fifth-circle cross-term
+            # recovers the chart A(v) independently of A(w).
+            mixed = kk_five(
+                actual_four_bilinear, a, F(1), v, F(0), w, F(1)
+            ) - kk_five(
+                actual_four_bilinear, a, F(1), v, F(0), w, F(0)
+            )
+            assert mixed == a(v)
+            checked += 2
+    print(f"PASS: {checked:,} exact rational KK chart-connection "
+          "non-injection and vertical offdiagonal readout checks "
+          "(not gauge-invariant physical distinction)")
+
+
 if __name__ == "__main__":
     check_original_access()
     check_kk_horizontal()
@@ -278,5 +315,6 @@ if __name__ == "__main__":
     check_actual_diamond_visibility_nonpromotion()
     check_kk_shear_congruence()
     check_kk_backward_radius_nonidentifiability()
+    check_kk_backward_chart_connection_nonidentifiability()
     check_noncollapsed_two_level_wick_stone_reference()
     print("REFERENCE ONLY: NOT a physical/Agda/Stone/OS/Clay result")
