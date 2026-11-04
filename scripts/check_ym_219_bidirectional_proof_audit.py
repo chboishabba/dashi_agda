@@ -21,7 +21,7 @@ AUDIT = "Docs/roadmaps/YMClay219ProofRelevantBidirectionalAudit20261104.json"
 LEDGER = "Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md"
 T78 = "DASHI/Physics/YangMills/BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.agda"
 GATES = {"R443", "R445", "R320", "R333", "CLAY"}
-PRODUCER = re.compile(r"^\|\s*((?:R443|R445|R320|R333|CLAY|TRUST)\.[FPK]\d{2})\s*\|")
+PRODUCER = re.compile(r"^\|\s*((?:R443|R445|R320|R333|CLAY|TRUST|SEM)\.[FPK]\d{2})\s*\|")
 UPGRADE_FIELDS = (
     "selected_physical_proposition",
     "selected_physical_owner",
@@ -128,8 +128,8 @@ def check(repo):
     snap_ids = [row["id"] for row in audit["producer_catalog"]]
     if ids != snap_ids:
         fail("producer IDs changed: regenerate and review audit in full")
-    if len(ids) != 63:
-        fail("original 63-producer audit baseline changed")
+    if len(ids) != 66:
+        fail("original 66-producer audit baseline changed")
     for row in audit["producer_catalog"]:
         if row["relation_to_submission_fields"] != (
                 "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"):
