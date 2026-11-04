@@ -45,6 +45,10 @@ import DASHI.Mathematics.Complexity.Karp21DecodedWeightedCutSemanticBidiExact as
 import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Size
 import DASHI.Mathematics.Complexity.Karp21ScaledThresholdExact as Threshold
 import DASHI.Mathematics.Complexity.Karp21PositiveThresholdGammaExact as Positive
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExact as Indexed
+import DASHI.Mathematics.Complexity.Karp21PartitionScaledInstanceExact as Source
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphWordBoundaryExact as Boundary
+import DASHI.Mathematics.Complexity.Karp21SignedPartitionActualGraphYESExact as Actual
 import DASHI.Mathematics.Complexity.Karp21GammaWeightedEdgeListRoundTripExact as Raw
 
 ------------------------------------------------------------------------
@@ -144,3 +148,74 @@ completeGraphGammaGraphDecodeSameObject {n} source threshold positive
           (fullDecoder ,
             Observed.sameWeightedGraphsAccept original decodedGraph
               refl sameFields)
+
+------------------------------------------------------------------------
+-- A successful *actual* Graph.decodeGraphWord identifies the original
+-- graph-word language with the returned weighted MAX CUT predicate.
+-- This is not an equality of irrelevant dependent proof functions.
+------------------------------------------------------------------------
+
+decodedGraphWordLanguageIff :
+  (word : Word.BitWord)
+  (decoded : N21.GraphInstance) →
+  Graph.decodeGraphWord word ≡ just decoded →
+  PR.Iff
+    (PR.accepts Graph.concreteGraphWordLanguage word)
+    (Cut.WeightedMaxCutYES (proj₂ decoded))
+decodedGraphWordLanguageIff word decoded accepted
+  rewrite accepted = PR.iff (λ witness → witness) (λ witness → witness)
+
+------------------------------------------------------------------------
+-- Instantiate the ORIGINAL E20ImageWordReceipts hole, not a parallel
+-- target language. Malformed words and zero-total fixed-YES branch are
+-- already treated by the source Boundary.EncodedE20 totalization.
+------------------------------------------------------------------------
+
+e20ScaledCompleteWordFaithful :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
+  PR.Iff
+    (Actual.ActualPositiveTargetAccepts
+      (Source.scaledCompletePositive parts nonzero))
+    (PR.accepts Graph.concreteGraphWordLanguage
+      (Encode.encodeGraphWord
+        (Boundary.graphOfPositiveTarget
+          (Source.scaledCompletePositive parts nonzero))))
+e20ScaledCompleteWordFaithful parts nonzero
+  with completeGraphGammaGraphDecodeSameObject
+    (Indexed.vectorOfList parts)
+    (Source.sourceTotal parts * Source.sourceTotal parts)
+    (Threshold.nonzeroTotalSquareIsPositiveThreshold
+      (Source.sourceTotal parts) nonzero)
+... | decoded , (decodedWord , originalIff) =
+  let word = Encode.encodeGraphWord
+        (Boundary.graphOfPositiveTarget
+          (Source.scaledCompletePositive parts nonzero))
+      wordIff = decodedGraphWordLanguageIff word decoded decodedWord
+  in PR.iff
+       (λ accepted →
+         PR.backward wordIff (PR.forward originalIff accepted))
+       (λ accepted →
+         PR.backward originalIff (PR.forward wordIff accepted))
+
+sourceWrittenE20ImageWordReceipts : Boundary.E20ImageWordReceipts
+sourceWrittenE20ImageWordReceipts =
+  record
+    { Boundary.scaledCompleteWordFaithful =
+        e20ScaledCompleteWordFaithful
+    }
+
+module SourceWrittenE20 = Boundary.EncodedE20
+  sourceWrittenE20ImageWordReceipts
+
+-- Assembled *semantic* total reduction, including malformed source words.
+-- Its polynomial machine cost is a SEPARATE required inhabitant of
+-- PR.polynomialTimeMap under a nondegenerate executable cost model.
+e20OriginalEncodedDecisionIff :
+  (word : Word.BitWord) →
+  PR.Iff
+    (PR.accepts SourceWrittenE20.sourceLanguage word)
+    (PR.accepts Graph.concreteGraphWordLanguage
+      (SourceWrittenE20.totalE20WordReduction word))
+e20OriginalEncodedDecisionIff =
+  SourceWrittenE20.e20EncodedSignedPartitionDecisionIff
