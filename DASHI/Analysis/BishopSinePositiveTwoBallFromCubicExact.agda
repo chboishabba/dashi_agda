@@ -82,7 +82,7 @@ oneThirdBelowSineFactor :
   R._≤_ Two.bishopOneThird (sineFactor x)
 oneThirdBelowSineFactor x xNN insideTwo =
   RP.≤-respˡ-≃
-    (RP.≃-symm oneThirdIsOneMinusFourSixths)
+    oneThirdIsOneMinusFourSixths
     (RP.≤-respʳ-≃
       (let open RP.ℝ-Solver
        in solve 1
