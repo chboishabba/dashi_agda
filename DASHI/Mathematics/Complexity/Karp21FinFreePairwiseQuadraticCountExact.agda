@@ -22,7 +22,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_∸_)
 open import Relation.Binary.PropositionalEquality using (cong)
-open import Data.Nat.Tactic.RingSolver using (solve-∀)
+open import Data.Nat.Tactic.RingSolver using (solve)
+open import Agda.Builtin.List using ([]; _∷_)
 
 -- Number of comparisons in the first j complete edge scans of the
 -- full-history deterministic pairwise checker.
@@ -35,7 +36,7 @@ comparisonStepSemiring :
   (j : Nat) →
   (2 * suc j * j) + (4 * suc j)
     ≡ 2 * suc (suc j) * suc j
-comparisonStepSemiring = solve-∀
+comparisonStepSemiring j = solve (j ∷ [])
 
 -- Closed quadratic count independent of the declared vertex n.
 -- For m=0, m=1 the loop never scans an earlier endpoint.
