@@ -1,3 +1,12 @@
+- [x] YM semantic max-cut SOURCE: 219/219 original submission field types are bare `Set`, not fixed propositions or proof terms; pinned field/line/blob and 521 invertible search-hint edges. Forward/reverse audit is source-verified, Agda PENDING.
+- [x] YM formal no-promotion SOURCE: generic safe anchored field; concrete original five-empty-CMP109 countermodel; trivial parametric Clay-vocabulary countermodel; bidirectional type transport only for anchored physically fixed meanings. Agda PENDING.
+- [x] YM steelman/bidi: 66 producer rows (63 preexisting + SEM.P01/02/03); 39 explicit candidate mathematical leaves, six exact nonpromotion counterexamples; official Clay problem remains open.
+- [ ] SEM.P01: upgrade physically meaningful original 219 named predicates with literal same-Y types and proof-relevant witness/redundancy theorem, one field at a time; bare Set selection cannot discharge anything.
+- [ ] SEM.P02: anchor 15 carriers/34 semantic predicates and selected 8/9/11 Clay requirements to external mathematical YM on R^4 and all compact simple groups. Reject trivial parametric vocabulary.
+- [ ] SEM.P03: exact checked *sufficiency* edge from necessary anchored field witnesses to the five typed T78 inputs; no unsupported converse/iff.
+- [ ] R443/R445: exact-head kernel typecheck, 1 C3 + 2 pair/spectator original closed vector equalities; source matched 1024-bond weighted Wilson-Gibbs into F19 actual effective density; genuine compact continuous Haar.
+- [ ] R445/R320/R333/Clay: uniform physical RG/continuum, full RP Gram, same-measure two-J CMP116 rooted-shell, same reconstructed H strict positive gap, all required axioms and compact-simple group scope. Physically OPEN.
+
 - [x] YM R445.F17–F19 SOURCE: original **weighted** SU(N) Haar one/all-pair noncommutative fibre identity and explicit effective density, 64 pair/896 spectator specialization; no bare Wilson or new coarse measure. Python exact references PASS; Agda pending.
 - [x] YM R445.F22 SOURCE: all-pair derived coarse density/partition positivity from original one-link strict Haar + pointwise positive coupled fine weight. Agda pending; real SU(N) Borel Haar and original Gibbs decoder still OPEN.
 - [x] YM R443.F08/R445.F20–F21 SOURCE: original native typed `LinkPermutation` adjacent word+inverse and constructed C3/pair-spectator canonical target programs. Independent C3 46,592 / pair 41,792 swap tests PASS. **Three closed Agda equalities outstanding** (C3 one; R445 count+label).
