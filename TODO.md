@@ -17538,3 +17538,5 @@ Cleanup
 - [x] Import both new owners into all three TOE roots and update K04d/K05 exact lemma roadmap.
 - [ ] Exact-head `agda --safe` elaboration and import validation of both new owners plus roots; no such run/receipt observed.
 - [ ] K04d native original source log-exp inverse; K05 native complex mixed-factorial Cauchy/limit product; K04d native uniform-limit and original selected zeta/completed same-object; K05 original arctangent/tangent equality and constructive interval sine positivity for the *first positive zero*.
+
+- [x] 2026-11-04 K05 Machin half-angle owner: `BishopMachinHalfPhaseFromImaginaryProductExact` reuses original 4θ_M≃π_M, original series double-angle and product-derived Pythagorean to show sin_B(2θ_M)≃1 and cos_B(2θ_M)≃0, conditional on precisely the already-live product + original quarter equality; imported into all three TOE roots, exact kernel receipt pending.
