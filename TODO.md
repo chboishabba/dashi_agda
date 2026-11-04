@@ -17529,3 +17529,12 @@ Cleanup
 - [ ] Golden selected finite-term continuity and uniform-limit actual `ZetaHalfPlaneLayer.zetaHalfPlane` / completed-zeta same-object identification.
 - [ ] Golden original atan-to-sine/cosine Machin quarter equality and strict sine positivity on (0,pi_M), or verified source-faithful proof import.
 - [ ] Exact-head Agda `--safe` kernel checks and zero-postulate/hole/import audit; exact-head Lean checks for all new mirror files. Neither run observed.
+
+### 2026-11-04 — Machin source-archaeology/max-cut (golden Agda #1408)
+
+- [x] Re-audit original `BishopMachinArctanConstructionExact`, `BishopMachinPiArchimedesWindowExact`, `BishopMachinRationalTangentAlgebraExact`, `BishopMachinQuarterAngleBranchExact`, `BishopMachinQuarterPhaseQuadruplicationAlgebraExact`, `BishopRound11ClassicalTrigObjectWeldExact`, the two-ball sine lower owner, and the Wilson Fourier Machin period carrier. Do not count a conditional source-weld record or a chosen period parameter as an independent trigonometric pi proof.
+- [x] Source-write `BishopMachinPiComplementReflectionFromImaginaryProductExact`: original signed-series `sin_B(pi_M−x)≃sin_B(x)` and `cos_B(pi_M−x)≃−cos_B(x)` from the *same* existing K05 product + quarter assumptions and actual Bishop parity.
+- [x] Source-write `BishopMachinQuarterStrictSineFromTwoBallExact`: existing original radius-two factorial-series sine lower and 3/4 < theta_M < 11/14 imply 87/128 ≤ sin_B(theta_M), hence strict positivity, with no new sine/trig assumption.
+- [x] Import both new owners into all three TOE roots and update K04d/K05 exact lemma roadmap.
+- [ ] Exact-head `agda --safe` elaboration and import validation of both new owners plus roots; no such run/receipt observed.
+- [ ] K04d native original source log-exp inverse; K05 native complex mixed-factorial Cauchy/limit product; K04d native uniform-limit and original selected zeta/completed same-object; K05 original arctangent/tangent equality and constructive interval sine positivity for the *first positive zero*.
