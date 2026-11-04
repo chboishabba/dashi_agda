@@ -92,6 +92,96 @@ originalDiamondXYZArePairwiseIncomparable :
 originalDiamondXYZArePairwiseIncomparable =
   Diamond.x-y-incomparable
 
+------------------------------------------------------------------------
+-- S02 / P02.L01,06 BACKWARD NECESSITY:
+-- Exactly WHICH additional original observer measurement is required?
+--
+-- If a source-selected sensor readout together with the original
+-- 3-level filtration can reconstruct the three actual spatial
+-- diamond events, that sensor MUST distinguish x/y, x/z and y/z.
+-- These are derived necessary consequences, not separately assumed
+-- empirical independence of the three sensors. A generic Reading
+-- carrier does NOT produce a physical detector or a 4D continuum.
+------------------------------------------------------------------------
+
+originalDiamondSpatialXAndZAreDistinct :
+  Diamond.xNow ≡ Diamond.zNow → ⊥
+originalDiamondSpatialXAndZAreDistinct ()
+
+originalDiamondSpatialYAndZAreDistinct :
+  Diamond.yNow ≡ Diamond.zNow → ⊥
+originalDiamondSpatialYAndZAreDistinct ()
+
+originalSpatialSensorMustDistinguishXY :
+  ∀ {Reading : Set}
+    (sensor : Diamond.Event → Reading)
+    (decode : History.FiltrationLevel → Reading → Diamond.Event) →
+    ((event : Diamond.Event) →
+      decode (originalDiamondCoarseAccessLevel event)
+        (sensor event) ≡ event) →
+    sensor Diamond.xNow ≡ sensor Diamond.yNow →
+    ⊥
+originalSpatialSensorMustDistinguishXY sensor decode correct same =
+  originalDiamondSpatialXAndYAreDistinct
+    (trans
+      (sym (correct Diamond.xNow))
+      (trans
+        (cong (decode History.intermediateFiltration) same)
+        (correct Diamond.yNow)))
+
+originalSpatialSensorMustDistinguishXZ :
+  ∀ {Reading : Set}
+    (sensor : Diamond.Event → Reading)
+    (decode : History.FiltrationLevel → Reading → Diamond.Event) →
+    ((event : Diamond.Event) →
+      decode (originalDiamondCoarseAccessLevel event)
+        (sensor event) ≡ event) →
+    sensor Diamond.xNow ≡ sensor Diamond.zNow →
+    ⊥
+originalSpatialSensorMustDistinguishXZ sensor decode correct same =
+  originalDiamondSpatialXAndZAreDistinct
+    (trans
+      (sym (correct Diamond.xNow))
+      (trans
+        (cong (decode History.intermediateFiltration) same)
+        (correct Diamond.zNow)))
+
+originalSpatialSensorMustDistinguishYZ :
+  ∀ {Reading : Set}
+    (sensor : Diamond.Event → Reading)
+    (decode : History.FiltrationLevel → Reading → Diamond.Event) →
+    ((event : Diamond.Event) →
+      decode (originalDiamondCoarseAccessLevel event)
+        (sensor event) ≡ event) →
+    sensor Diamond.yNow ≡ sensor Diamond.zNow →
+    ⊥
+originalSpatialSensorMustDistinguishYZ sensor decode correct same =
+  originalDiamondSpatialYAndZAreDistinct
+    (trans
+      (sym (correct Diamond.yNow))
+      (trans
+        (cong (decode History.intermediateFiltration) same)
+        (correct Diamond.zNow)))
+
+-- These three independent conclusions put an actual empirical
+-- discriminability burden on S02: an observation that depends only
+-- on coarse time/filtration cannot carry the missing spatial data.
+originalSpatialSensorNeedsThreePairwiseDistinctReadouts :
+  ∀ {Reading : Set}
+    (sensor : Diamond.Event → Reading)
+    (decode : History.FiltrationLevel → Reading → Diamond.Event) →
+    ((event : Diamond.Event) →
+      decode (originalDiamondCoarseAccessLevel event)
+        (sensor event) ≡ event) →
+    ((sensor Diamond.xNow ≡ sensor Diamond.yNow → ⊥)
+    × ((sensor Diamond.xNow ≡ sensor Diamond.zNow → ⊥)
+    × (sensor Diamond.yNow ≡ sensor Diamond.zNow → ⊥)))
+originalSpatialSensorNeedsThreePairwiseDistinctReadouts
+    sensor decode correct =
+  originalSpatialSensorMustDistinguishXY sensor decode correct ,
+  (originalSpatialSensorMustDistinguishXZ sensor decode correct ,
+   originalSpatialSensorMustDistinguishYZ sensor decode correct)
+
 -- Proper next physical producer: a nonconstant measured spatial
 -- observable on the SOURCE-selected microscopic observer system,
 -- supporting one common operational cone/principal symbol, rather
