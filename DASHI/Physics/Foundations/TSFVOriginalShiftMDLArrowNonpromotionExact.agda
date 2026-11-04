@@ -79,7 +79,7 @@ noOriginalHistoryDecoderFromShiftArrow encode decode correct =
 -- UNIVERSAL STRICT decrease for the same selected shift step.
 -- Original shiftCoarseFixed provides the actual witness of a fixed state.
 originalShiftHasCoarseFixedPoint :
-  Shift.ShiftStep
+  Shift.ShiftStep {m = suc zero} {k = suc (suc (suc zero))}
     (ShiftRG.shiftCoarse Shift.canonicalShiftStateWitness)
   ≡ ShiftRG.shiftCoarse Shift.canonicalShiftStateWitness
 originalShiftHasCoarseFixedPoint =
@@ -87,11 +87,12 @@ originalShiftHasCoarseFixedPoint =
 
 originalShiftMDLCannotAlwaysStrictlyDecrease :
   ((x : ShiftState13) →
-    Shift.ShiftMDL (Shift.ShiftStep x) < Shift.ShiftMDL x) →
+    Shift.ShiftMDL {m = suc zero} {k = suc (suc (suc zero))} (Shift.ShiftStep {m = suc zero} {k = suc (suc (suc zero))} x) < Shift.ShiftMDL {m = suc zero} {k = suc (suc (suc zero))} x) →
   ⊥
 originalShiftMDLCannotAlwaysStrictlyDecrease strict =
   NatP.<-irrefl
-    (cong Shift.ShiftMDL originalShiftHasCoarseFixedPoint)
+    (cong (Shift.ShiftMDL {m = suc zero} {k = suc (suc (suc zero))})
+      originalShiftHasCoarseFixedPoint)
     (strict (ShiftRG.shiftCoarse Shift.canonicalShiftStateWitness))
 
 -- This is NO claim that the original MDL nonincrease is false:
