@@ -9,6 +9,7 @@ import DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact
 import DASHI.Cognition.CaveTraumaNonErasingReopeningExact
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
 import DASHI.Cognition.CCDCOECognitiveMultiplexInvariantExact
+import DASHI.Cognition.CCDCOECognitiveMultiplexInvariantRegression
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
