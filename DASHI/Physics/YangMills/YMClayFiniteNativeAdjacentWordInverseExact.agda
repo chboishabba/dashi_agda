@@ -129,7 +129,7 @@ originalProgramAfterInverse (Product.compose first second) values =
         (Product.permuteLinks (originalInverseProgram first) values)))
     (originalProgramAfterInverse first values)
 originalProgramAfterInverse (Product.fixHead program)
-    (head ∷ tail) =
+    (Vec._∷_ head tail) =
   cong (λ chosenTail → Vec._∷_ head chosenTail)
     (originalProgramAfterInverse program tail)
 originalProgramAfterInverse Product.swapHead
