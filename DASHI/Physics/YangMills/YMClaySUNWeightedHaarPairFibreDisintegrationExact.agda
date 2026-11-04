@@ -36,7 +36,7 @@ module DASHI.Physics.YangMills.YMClaySUNWeightedHaarPairFibreDisintegrationExact
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using
   (ℝ; 0ℝ; _*ℝ_; _<ℝ_; *-comm)
 
@@ -207,6 +207,56 @@ module _
               (λ first second →
                 weight first second
                   *ℝ coarseObservable (multiply first second))))))
+
+  -- Fine and coarse partition functions are not unrelated
+  -- normalization assumptions. Both are the ORIGINAL weighted pair
+  -- integral with the identical constant coarse observable.
+  originalFinePairPartition :
+    (weight : Link → Link → ℝ) → ℝ
+  originalFinePairPartition weight =
+    originalFinePairNumerator weight (λ _ → 1ℝ)
+
+  originalCoarsePairPartition :
+    (weight : Link → Link → ℝ) → ℝ
+  originalCoarsePairPartition weight =
+    originalCoarsePairEffectiveNumerator weight (λ _ → 1ℝ)
+
+  actualWeightedPairPartitionSameObject :
+    ∀ weight →
+    originalFinePairPartition weight
+    ≡ originalCoarsePairPartition weight
+  actualWeightedPairPartitionSameObject weight =
+    actualWeightedPairDisintegration weight (λ _ → 1ℝ)
+
+  originalFinePairNormalized :
+    (divide : ℝ → ℝ → ℝ)
+    (weight : Link → Link → ℝ)
+    (observable : Link → ℝ) → ℝ
+  originalFinePairNormalized divide weight observable =
+    divide
+      (originalFinePairNumerator weight observable)
+      (originalFinePairPartition weight)
+
+  originalCoarsePairNormalized :
+    (divide : ℝ → ℝ → ℝ)
+    (weight : Link → Link → ℝ)
+    (observable : Link → ℝ) → ℝ
+  originalCoarsePairNormalized divide weight observable =
+    divide
+      (originalCoarsePairEffectiveNumerator weight observable)
+      (originalCoarsePairPartition weight)
+
+  -- Same normalized functionals for any original scalar division
+  -- operation; positivity/nonzero division laws are needed separately
+  -- to interpret either as a physical probability measure.
+  actualWeightedPairNormalizedSameObject :
+    ∀ divide weight observable →
+    originalFinePairNormalized divide weight observable
+    ≡ originalCoarsePairNormalized divide weight observable
+  actualWeightedPairNormalizedSameObject divide weight observable =
+    cong₂ divide
+      (actualWeightedPairDisintegration weight observable)
+      (actualWeightedPairPartitionSameObject weight)
 
   -- Strict positivity of the effective density follows from the
   -- ORIGINAL one-link strict-positive Haar input, if a chosen actual
