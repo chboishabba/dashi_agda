@@ -8,7 +8,7 @@ module DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact where
 -- oneStepIntertwines field which commutes observerStep and osStep under
 -- a two-sided state carrier embedding. That is valid as finite ALGEBRA,
 -- but osStep must NOT automatically be interpreted as a positive-time
--- Euclidean OS transfer exp(-tau H) if observerStep is a real-time
+-- Euclidean OS transfer exp(-tau H/hbar) for SI seconds if observerStep is a real-time
 -- norm-preserving unitary exp(-i t H / hbar) and the OS state contains
 -- a genuinely strictly decaying positive-energy excitation.
 --
@@ -26,7 +26,7 @@ module DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact where
 -- self-adjointness or domain equality.
 --
 -- The finite witness below is a discrete *qualitative* negative control
--- and NOT exp(-tau H) at finite tau. The general no-go applies to any
+-- and NOT exp(-tau H/hbar) at finite positive SI tau. The general no-go applies to any
 -- actual strictly norm-decreasing selected Euclidean OS step.
 --
 -- Original sources: Osterwalder--Schrader; Stone; original DASHI
@@ -128,7 +128,7 @@ originalClockCannotIdentifyStrictEuclideanDecay clock Norm
 -- Independent concrete finite nonpromotion example.
 --
 -- Three sector labels are a *discrete* witness of the logical gap,
--- NOT an actual Euclidean exp(-tau H) at a finite physical time:
+-- NOT an actual Euclidean exp(-tau H/hbar) at a finite physical time:
 -- a norm-preserving excitation permutation and a norm-reducing map
 -- cannot be identified on a non-vacuum state.
 ------------------------------------------------------------------------
