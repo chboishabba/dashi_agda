@@ -291,3 +291,26 @@ factorial/binomial coefficient embedding, with the explicit odd-index
 subsum and nonnegative-sum monotonicity. Then use the pinned
 `Sequence` term-vanishing-from-series-convergence lemma and subsequence
 transport, not an arbitrary complex tail assumption.
+
+
+## 2026-11-04 second continuation — native generic Cauchy wing, four-way Round11 triangle compiler
+
+New golden source owner: `DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda`:
+- `absoluteTriangle` and `positiveWing` retain the *literal* Bishop signed source histories and reuse the original `BishopFiniteCauchyRowReindexExact` and `BishopFiniteCauchyWingAbsoluteBoundExact`.
+- `positiveWingConvergesZero` derives the finite positive wing tail from actual convergence of the absolute triangle by the pinned `BishopConvergentDoubleTailExact` theorem, with `double n = n+n` transported by the already-proved Nat identity.
+- `rectangleConvergesToProduct` derives the genuine real rectangular product limit via `BishopFiniteSeriesRectangleProductExact.rectangleProduct` and native `Sequence.xₙyₙ→x₀y₀`.
+- `reverseFiniteWingBound` derives the required *triangle-minus-rectangle* order of the wing bound, not silently applying a mismatched directional inequality.
+- **`cauchyTriangleConvergesToActualProduct`** consumes only (a) actual separate Bishop series convergence and (b) absolute triangle convergence, then proves convergence of the original signed Cauchy triangle to the original product with `BishopVanishingDifferenceConvergenceExact`. No separate assumed Cauchy-product theorem, no alternate carrier.
+
+Extended existing golden owner `DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda`:
+- `complexTriangle`, `complexMertensRow` and `complexTriangleIsMertens`: finite complex Cauchy triangle and genuine four-way source-native Mertens reindexing on `BishopSetoidComplexExact`.
+- `FourAbsoluteTriangles` is an **explicit unresolved premise** packaging four genuinely convergent absolute real Cauchy triangles (cos/cos, sin/sin, cos/sin, sin/cos); it is NOT claimed instantiated from source absolute sine/cosine convergence.
+- `complexTriangleConvergesToProduct` and `round11PhaseTriangleConvergesFromFourAbsoluteTriangles` compile those four real generic Cauchy conclusions to the literal original Round11 `expC(i*x) *C expC(i*y)` complex product, with no new complex convergence authority.
+
+The earlier "rectangle-to-triangle transport" gate is now **generic-source-written** on both Bishop real and complex carriers; the **remaining independent K05 content** is:
+1. Build `FourAbsoluteTriangles (round11PhaseTerms inputs x) (round11PhaseTerms inputs y)` from the original absolute sine/cosine convergence and the existing positive-triangle/rectangle finite sandwich (or from the grouped factorial majorant). Do not assume a generic positive-triangle limit.
+2. Prove the **correct** universal parity grouped Cauchy coefficient/telescope identity `T_N(x,y) ≃ P_N(x+y)+O_(N-1)` with index convention checked carefully, on the actual Bishop setoid complex. The prior direct uncorrected coefficient identity is false.
+3. Prove the odd–odd factorial boundary tends to zero on the actual Bishop real/complex history, identify the resulting `complexTriangle` limit with the original `expC(i*(x+y))`, and apply uniqueness of limits to finish `Round11ImaginaryExpMultiplicative`.
+4. Obtain an **exact-head Agda kernel acceptance receipt**. No Agda executable or observed exact-head CI success is available for these additions; they are --safe source-written proof candidates only.
+
+K04d-LOG, K04d-CONTINUITY, K05-PI remain separately OPEN. All three TOE roots import the new generic owner. No ESD owner changed. Historical source and proof attribution to Cauchy, Bishop–Bridges, Murray/Csimma and the original DASHI owners is preserved.
