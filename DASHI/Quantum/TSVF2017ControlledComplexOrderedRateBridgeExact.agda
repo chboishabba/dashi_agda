@@ -96,6 +96,14 @@ powerTwo : List CalibratedControlledPulse → ℚ
 powerTwo [] = 1ℚ
 powerTwo (_ ∷ sites) = two * powerTwo sites
 
+-- Exactly the original rational power convention, not a new 2^k.
+powerTwoIsOriginalRationalPower :
+  (sites : List CalibratedControlledPulse) →
+  powerTwo sites ≡ Env.rationalPower two (count sites)
+powerTwoIsOriginalRationalPower [] = refl
+powerTwoIsOriginalRationalPower (_ ∷ sites) =
+  cong (two *_) (powerTwoIsOriginalRationalPower sites)
+
 bornProduct : List CalibratedControlledPulse → ℚ
 bornProduct [] = 1ℚ
 bornProduct (site ∷ sites) =
