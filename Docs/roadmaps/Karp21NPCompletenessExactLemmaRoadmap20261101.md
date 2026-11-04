@@ -1,5 +1,12 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-04 — K00 concrete Cook consistency full-scan comparison envelope (source-written; kernel pending)
+
+**New source owner:** `Karp21CookConsistencyComparisonClockExact.agda`, imported by `Karp21Everything.agda`, instruments the ORIGINAL `Finite.compatibleCookObservations` and `Finite.allCookObservationsConsistent` on the SAME `List (Nat × Bool)` source carrier. `countedAgainstValue`/`countedAllValue` source-write Boolean observational equivalence with the original checker, while `countedAgainstComparisons`, `countedAllComparisons`, and `fullPairCountAtMostSquare` derive a real full-scan address-comparison envelope `k²` for `k` actual syntactic variable observations. This bound is on observed-variable occurrence count, never the maximum (binary-coded) variable number, so no unary max-index vector is introduced.
+
+**Not a P0 clock promotion:** the full SAT bitword verifier still requires canonical syntax parsing, binary Nat-index equality, repeated-bit consistency, finite formula evaluation, input/certificate checks and an executable ordinary-tape-machine realization with all bit costs accounted for. A scheduled comparison count is not `PR.polynomialTimeVerifier`, and `k00StrictSATMachineVerifierClock`, `k00StrictSATInNP`, the uniform Cook–Levin root, and the full P1/P2/P3 gates remain OPEN. Pure new module declares `{-# OPTIONS --safe #-}` but no exact-head Agda compiler/kernel or transitive `--safe` receipt was run, so Golden acceptance is pending. No CI.
+
+
 ## 2026-11-04 — actual E20 image: dependent/Fin-free validator guard agreement (source-written; kernel pending)
 
 **New source owner:** `Karp21FinFreeE20RawValidatorAgreementExact.agda` is imported by the original `Karp21Everything.agda` focused root. `canonicalRawRuntimeChecksPass` is structural induction over the EXISTING `Karp21CanonicalRawValidatorPremisesExact.ValidFromPrevious` certificate. It pays exactly the two numeric endpoint inequalities and the original `strictAfter` check executed by the original `Karp21FinFreeRawSparseWordVerifierExact.validRawEdges`. No distinct graph construction, order convention, witness, or Boolean oracle is introduced.
