@@ -17540,3 +17540,14 @@ Cleanup
 - [ ] K04d native original source log-exp inverse; K05 native complex mixed-factorial Cauchy/limit product; K04d native uniform-limit and original selected zeta/completed same-object; K05 original arctangent/tangent equality and constructive interval sine positivity for the *first positive zero*.
 
 - [x] 2026-11-04 K05 Machin half-angle owner: `BishopMachinHalfPhaseFromImaginaryProductExact` reuses original 4θ_M≃π_M, original series double-angle and product-derived Pythagorean to show sin_B(2θ_M)≃1 and cos_B(2θ_M)≃0, conditional on precisely the already-live product + original quarter equality; imported into all three TOE roots, exact kernel receipt pending.
+
+### 2026-11-04 K05 maximal-source sign reuse (golden Agda PR #1408)
+
+- [x] Reuse original pinned Bishop locatedness `fast-corollary-2-17`, not a trichotomy postulate, to split x at thresholds 3/2 and 2.
+- [x] Source-write `BishopSinePositiveTwoBallFromCubicExact`: on actual Round11 sine, 0<x and |x|≤2 => x²≤4 => x(1−x²/6)>0 => sin_B(x)>0. Signed-series cubic lower and original term identification reused.
+- [x] Source-write `BishopMachinPiGlobalSineSignFromTwoBallExact`: on 0<x<pi_M the located split and pi_M<22/7 guarantee x or its Machin complement is inside radius two; native reflection transfers positivity.
+- [x] Feed constructed global sign into the existing `SourceMachinFirstPositiveSineZero` constructor. No global sine positivity assumption now required beyond original K05-PRODUCT and K05-QUARTER.
+- [x] Inspect *pinned* vendor/bishop RealProperties for exact order, locatedness and setoid-congruence signatures and correct earlier left-transport orientations.
+- [x] Wire both new modules to all three TOE roots and audit the updated roadmap.
+- [ ] Native Agda K05 mixed signed factorial Cauchy multiplication and actual original atan/tangent quarter equality still independently open; only then first-sine-zero becomes unconditional.
+- [ ] Exact-head Agda --safe kernel check and transitive imports of new modules; no observed kernel receipt.
