@@ -32,6 +32,7 @@ REQUIRED_FORCE_CLASSES = (
     "residual_gas_and_ionic_wind",
     "rf_instrumentation",
     "radiative_momentum",
+    "unmodelled_cross_couplings",
 )
 
 
