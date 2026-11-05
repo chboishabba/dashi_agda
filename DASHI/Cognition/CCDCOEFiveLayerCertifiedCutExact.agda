@@ -48,12 +48,15 @@ cutNetwork = record
 
 -- Everyone remains in every layer, with complete local links, while
 -- an interlayer separator splits the five-layer dependency chain.
+layerSide : C.InvariantLayer → Bool
+layerSide C.epistemic = true
+layerSide C.axiological = true
+layerSide C.identificatory = true
+layerSide C.social = false
+layerSide C.teleological = false
+
 side : G.LayerNode C.Actor C.InvariantLayer → Bool
-side (node _ C.epistemic) = true
-side (node _ C.axiological) = true
-side (node _ C.identificatory) = true
-side (node _ C.social) = false
-side (node _ C.teleological) = false
+side vertex = layerSide (G.LayerNode.layer vertex)
 
 -- Exhaustive constructor cases: a proof that NO retained link crosses
 -- the identified partition, not merely that a named path is missing.
