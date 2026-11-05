@@ -35,7 +35,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat)
 import Data.Vec.Base as Vec
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ; _*ℝ_)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 1ℝ; _*ℝ_; mulOneʳ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
@@ -47,6 +47,10 @@ import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateE
 import DASHI.Physics.YangMills.YMClayNativeC3AdjacentSortProgramExact as Sort
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as Congruence
+import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
+import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as Constructed
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Cyl
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 
 module _
@@ -141,3 +145,62 @@ module _
     cong (λ numerator → divide numerator actualOriginalFinePartition)
       (actualOriginalWeightedC3NumeratorInvariant
         closedC3 densityC3 observable)
+
+  ----------------------------------------------------------------------
+  -- Exact same-selected-physical-measure interface, not a new Gibbs
+  -- law. The original #1444 measure is Constructed.actualPeriodic-
+  -- ProductMeasure theory traceData exponential n=3 ... with exactly
+  -- Codec.decodeOriginalBonds (suc 3) = Codec.decodeOriginalBonds 4.
+  ----------------------------------------------------------------------
+
+  module _
+      (bilateral : Bilateral.OneLinkSUNBilateralHaar theory oneLink)
+    where
+
+    originalSelectedPhysicalMeasure :
+      Physical.PhysicalFiniteYMMeasure
+        (Variable.SUNPeriodicLinks theory 3) ℝ
+    originalSelectedPhysicalMeasure =
+      Constructed.actualPeriodicProductMeasure
+        theory traceData exponential 3 betaFine
+        oneLink bilateral divide
+
+    -- A selected original physical Gibbs cylinder numerator literally
+    -- equals the same original 1024-vector weighted numerator. No new
+    -- density, source or cutoff index appears in this equality.
+    selectedPhysicalNumeratorIsLiteralOriginalC3Vector :
+      (observable : Variable.SUNPeriodicLinks theory 3 → ℝ) →
+      Cyl.unnormalizedNumerator originalSelectedPhysicalMeasure observable
+      ≡
+      actualOriginalFineNumerator
+        (λ links → observable (Codec.decodeOriginalBonds Torus.four links))
+    selectedPhysicalNumeratorIsLiteralOriginalC3Vector observable = refl
+
+    -- The actual selected physical partition lacks an explicit *1,
+    -- whereas the original vector partition uses the numeral unit.
+    -- The equality is obtained from ORIGINAL all-link congruence,
+    -- rather than assuming a second partition authority.
+    selectedPhysicalPartitionIsLiteralOriginalC3Vector :
+      Physical.partitionFunction originalSelectedPhysicalMeasure
+      ≡ actualOriginalFinePartition
+    selectedPhysicalPartitionIsLiteralOriginalC3Vector =
+      Congruence.productIntegralCongruent oneLink _ _
+        (λ links →
+          sym (mulOneʳ (actualOriginalFineWilsonDensity links)))
+
+    selectedPhysicalNormalizedIsLiteralOriginalC3Vector :
+      (observable : Variable.SUNPeriodicLinks theory 3 → ℝ) →
+      Physical.normalizedExpectation
+        originalSelectedPhysicalMeasure observable
+      ≡ actualOriginalFineNormalized
+        (λ links → observable (Codec.decodeOriginalBonds Torus.four links))
+    selectedPhysicalNormalizedIsLiteralOriginalC3Vector observable =
+      cong
+        (λ partition →
+          divide
+            (actualOriginalFineNumerator
+              (λ links →
+                observable (Codec.decodeOriginalBonds Torus.four links)))
+            partition)
+        selectedPhysicalPartitionIsLiteralOriginalC3Vector
+
