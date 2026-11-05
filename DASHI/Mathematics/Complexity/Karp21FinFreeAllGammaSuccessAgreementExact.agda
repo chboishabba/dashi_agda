@@ -40,6 +40,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact as Observe
 import DASHI.Mathematics.Complexity.Karp21FinFreeAllRawValidatorAgreementExact as AllRaw
+import DASHI.Mathematics.Complexity.Karp21FinFreeGammaGeneralSparseBudgetExact as Budget
 import DASHI.Mathematics.Complexity.Karp21OriginalGammaCompleteGraphParserExact as TypedFrame
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGammaFrameExact as RawFrame
 
@@ -55,7 +56,6 @@ allRawGammaFrameSuccessAgreement :
   m * suc (suc (suc zero)) ≤ length afterM →
   Graph.readRawEdges m afterM ≡ just (raw , afterEdges) →
   Gamma.readGamma afterEdges ≡ just (suc k , []) →
-  Sparse.twoPerEdge (length raw) ≤ Word.encodingSize word →
   Runtime.validRawEdges n Graph.noPrevious raw ≡ true →
   Σ (List (Cut.SignedUndirectedEdge n))
     (λ decoded →
@@ -70,11 +70,15 @@ allRawGammaFrameSuccessAgreement :
       Observe.RawEdgeListFieldsSame raw decoded)
 allRawGammaFrameSuccessAgreement
   word n m k afterN afterM afterEdges raw
-  readN readM tripleBound readEdges readW rawBudget rawValid
+  readN readM tripleBound readEdges readW rawValid
   with AllRaw.rawGuardTruePreservesOriginalFields
     n Graph.noPrevious raw rawValid
 ... | decoded , (typedValidation , observedFields) =
-  let typedBudget =
+  let rawBudget =
+        Budget.originalGammaFrameHasSparseBudget
+          word n m afterN afterM afterEdges raw
+          readN readM tripleBound readEdges
+      typedBudget =
         subst
           (λ count →
             Sparse.twoPerEdge count ≤ Word.encodingSize word)
