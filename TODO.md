@@ -17562,3 +17562,18 @@ Cleanup
 - [ ] K05-PRODUCT source-specific blockers: construct four actual absolute triangular convergence receipts, prove all-n grouped signed factorial parity coefficient/telescope theorem including the O_N correction, prove O_N→0 on Bishop via factorial majorant, finish original `Round11ImaginaryExpMultiplicative`.
 - [ ] K04d-LOG actual negative-log inverse and Nat specialization; K04d-CONTINUITY finite-term/uniform-limit and same-object original selected zeta; K05-PI actual arctan/trig quarter equality.
 - [ ] Exact-head `agda --safe` proof acceptance and all three TOE root checks; no executable/accepted workflow receipt observed in this pass.
+
+
+### 2026-11-05 — exact source-native K05 analytic closure / final finite parity cut (golden PR #1408)
+
+- [x] Native original Round11 concrete absolute sine and cosine histories selected, source term setoid-identifications transported, and concrete absolute series convergence derived.
+- [x] Native generic Bishop squeeze and increasing-history doubled-subsequence ⇒ full-sequence convergence; the original positive Cauchy triangle is squeezed between `R(n,n)` and `R(2n,2n)`.
+- [x] Construct *all four* original Round11 absolute-triangle convergence witnesses with zero caller-supplied analytic authority; derive the selected signed complex Cauchy triangle convergence to `expC(ix)*C expC(iy)`.
+- [x] Show signed sine×sine Cauchy coefficient tends to zero by pinned Bishop `∑xₙisConvergent⇒xₙ→0`, so the original odd/odd correction vanishes without an independent factorial tail.
+- [x] Write native general finite even/odd reindex for every degree and original signed-factorial ↔ doubled exponential coefficient identification; compile the final all-n parity equalities **as exact explicit inputs** to original expC multiplication and trig addition.
+- [x] Update all three canonical TOE import roots, K04d/K05 roadmap, and add dedicated exact-branch Agda --safe kernel receipt workflow.
+- [ ] **K05 terminal finite algebra:** prove for *all* Bishop x,y,n the two universal source grouped Cauchy identities: real difference `T_(n+1)-P_(n+1)≃O_n`; imaginary difference `T_(n+1)-P_(n+1)≃0`. Compose original finite binomial coefficients, signed-factorial source transport and all-degree parity reindex; no hypothetical authority/witness.
+- [ ] **K04d-LOG:** native `exp_B(-Σ_(m≥1) x^m/m)≃1-x` at every source interval x and original Nat-successor substitution.
+- [ ] **K04d-CONTINUITY:** native finite-term and uniform-limit continuity; original ZetaHalfPlaneLayer and completed-zeta full original same-object identification.
+- [ ] **K05-PI:** native Machin original arctan/tangent quarter equality; then instantiate existing conditional first-positive-sine-zero proof.
+- [ ] **Kernel gate:** retrieve successful Agda --safe exact-head focused and three TOE root receipt; workflow exists but no passing exact-head receipt yet. Distinguish source-written proof candidate from accepted Agda derivation. No ESD edits.
