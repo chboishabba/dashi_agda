@@ -314,3 +314,107 @@ The earlier "rectangle-to-triangle transport" gate is now **generic-source-writt
 4. Obtain an **exact-head Agda kernel acceptance receipt**. No Agda executable or observed exact-head CI success is available for these additions; they are --safe source-written proof candidates only.
 
 K04d-LOG, K04d-CONTINUITY, K05-PI remain separately OPEN. All three TOE roots import the new generic owner. No ESD owner changed. Historical source and proof attribution to Cauchy, Bishop–Bridges, Murray/Csimma and the original DASHI owners is preserved.
+
+
+## 2026-11-05 continuation — four *actual* absolute triangles and vanishing odd/odd boundary
+
+The prior block above is a dated snapshot. The following discharges its old
+source-level K05 analytic premises as source-written **proof candidates**,
+not as Agda-kernel accepted theorems. Golden PR #1408.
+
+### Actual new owners and exact theorem endpoints
+
+1. `DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda`
+   transports the existing `Round11.elementarySeries` sine/cosine absolute
+   series convergence through `round11ConcreteTermIdentification` to the
+   literal signed-factorial sequences. Both real absolute limits are selected,
+   not newly assumed.
+2. `DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda` proves generic
+   `nativeBishopSqueeze` directly from Bishop finite order and existing
+   convergence algebra. `BishopMonotoneDoubleSubsequenceLimitExact.agda`
+   proves `monotoneDoubleConvergesImpliesFullConverges` by constructive
+   `Sequence.con*`, using the pinned `xₙisIncreasing⇒xₙ≤limxₙ` result.
+3. `DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda`
+   proves `positiveCauchyTriangleConverges` for any two nonnegative Bishop
+   sequences with convergent original series, by the **existing**
+   `R(n,n) ≤ T(2n) ≤ R(2n,2n)` source inequalities, real product limit,
+   native squeeze and monotone double subsequence. This reuses every
+   original Fin-sum and Bishop carrier; it does not assume a Cauchy product.
+4. `DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda` now
+   source-constructs `round11SourceFourAbsoluteTriangles inputs x y`,
+   using the four combinations (cos/cos, cos/sin, sin/cos, sin/sin) of the
+   two actual Round11 absolute sequences. Hence
+   `round11OriginalComplexCauchyTriangleConverges` no longer needs a
+   caller-supplied `FourAbsoluteTriangles` witness.
+5. The signed sine×sine **Cauchy triangle itself converges** with its
+   original source coefficients, by
+   `round11SignedSineCauchyTriangleConverges`. Consequently
+   `round11SignedSineCauchyCoefficientConvergesZero` follows by pinned
+   `Sequence.∑xₙisConvergent⇒xₙ→0`; and thus
+   `round11OddOddCorrectionConvergesZero` is also constructed. A separate
+   factorial tail-bound theorem is no longer needed for this analytic leaf.
+6. `DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda`
+   source-writes arbitrary-history `finiteEvenOddSplit`,
+   `finiteOddLengthSplit`, and literal all-degree finite Cauchy even- and
+   odd-parity split theorems. No numerical case check is used to infer an
+   all-N identity.
+7. `DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda`
+   derives original recursive `evenExponent n ≡ double n`,
+   `oddExponent n ≡ suc (double n)`, identifies the actual signed
+   cosine/sine terms with `alternatingSign n * Exp.expTerm x (2n/2n+1)`,
+   and establishes `alternatingSignAddition` using pinned Bishop
+   `xⁿxᵐ≃xⁿ⁺ᵐ`. The **finite mixed signed factorial algebra connecting**
+   these to the original exponential binomial/Cauchy coefficient theorem
+   remains unproved.
+8. `DASHI/Analysis/BishopOneStepLagConvergenceExact.agda` builds
+   constructive one-step convergence transport, needed because the finite
+   Cauchy partial of N terms differs by correction O_(N-1).
+9. `round11ProductFromVanishingGroupedBoundary` and
+   `round11ProductFromExactFiniteGroupedParity` derive the original
+   complex exponential product using **only** source finite parity
+   differences and already-proved convergence/uniqueness. Existing
+   `C.imaginaryExponentialProductGivesAddition` then yields both
+   original sine and cosine addition laws in
+   `round11TrigAdditionFromExactFiniteGroupedParity`.
+
+### **ONE remaining independent K05 finite equality pair**
+
+On the original complex Bishop carrier, for every n,x,y and the original
+selected Round11 cutset, prove the exact finite identities:
+
+```agda
+round11GroupedBoundaryReal inputs x y (suc n)
+  ≃ round11OddOddCorrection inputs x y n
+
+round11GroupedBoundaryImag inputs x y (suc n)
+  ≃ R.0ℝ
+```
+
+These are precisely the **corrected grouped factorial** Cauchy identities:
+`T_(n+1) - P_(n+1) ≃ O_n`. The real odd/odd correction is already
+proven to converge to zero above. Finite parity reindex and source
+exponent/signed factorial identifications are written, but their
+universal signed 2D convolution/binomial composition is still missing.
+Do **not** substitute the false naive `b_k*b_(n-k)=b_n(x+y)`
+coefficient claim. Once these two exact identities are paid and accepted,
+`round11ProductFromExactFiniteGroupedParity` is the terminal source
+theorem. Its `C._≈C_` conclusion is reversed as needed by the existing
+`C.imaginaryExponentialProductGivesAddition`.
+
+### Verification and distinct gates
+
+All three canonical TOE roots import the new source owners. A narrow
+`.github/workflows/bishop-k04d-k05-native-proof.yml` was added to
+attempt `agda --safe` 2.6.4.3 / stdlib 2.1 checks of the exact new
+dependency chain and preserve a kernel diagnostic receipt. **No passing
+exact-head kernel receipt was observed at source-writing time**. Treat
+the `--safe` annotations and hole-free static inspection as
+insufficient for acceptance.
+
+K04d-LOG (canonical original exp(-log) inverse and Nat successor),
+K04d-CONTINUITY (native finite/uniform limit plus original and completed
+zeta same-object weld), and K05-PI (original Machin atan/trig quarter
+equality) remain **OPEN**, not converted into mere formalization status.
+No ESD file has been intentionally edited. The original Cauchy,
+Newton/binomial, Bishop–Bridges, Murray/Csimma, and DASHI source
+provenance is preserved.
