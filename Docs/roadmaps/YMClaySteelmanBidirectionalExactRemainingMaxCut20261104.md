@@ -17,6 +17,25 @@ This requires three new independent, still-open gates:
 
 The machine-readable **219-row forward/reverse candidate-gate index** `Docs/roadmaps/YMClay219ProofRelevantBidirectionalAudit20261104.json` pins exact source record/field/line/blob, 66 gate producers and every unproved physical statement. The root countermodels are new source modules; nothing is marked Clay completed.
 
+## 5 November 2026 R443 same-original weighted C3 and all-group bidi continuation
+
+**New R443.F09 physical-source implication, not an unproved action theorem:** `YMClayOriginalWilsonC3WeightedHaarTransferExact` defines the weight **literally** as `Variable.periodicSUNGibbsDensity theory traceData exponential 3 betaFine (Codec.decodeOriginalBonds Torus.four links)` on original `Vec Link 1024`. Given the already isolated `Sort.constructedNativeC3CanonicalLabelGoal` and a **separate pointwise equality on that very weight** `ActualOriginalC3GibbsActionInvariant`, it derives:
+[
+\mathcal N_{\rm fine}(F\circ C_3)=\mathcal N_{\rm fine}(F),\qquad
+\mathbb E_{\rm fine}(F\circ C_3)=\mathbb E_{\rm fine}(F)
+]
+by the original `Product.productHaarPermutationInvariant` plus **original 1,024-link** `Congruence.productIntegralCongruent`, with the same partition and chosen division. This is a useful conditional result: the two hard leaves are kernel-accepting the native C3 label equality and **proving the literal CMP119 E/R/B/V physical action C3 covariance**. The latter is not established by unweighted C3/Haar permutation, by an arbitrary gauge symmetry, or by an SU(2) rational Wilson-only reference. Reuse existing `YMClaySide4SpatialC3WilsonNaturalityExact`, `YMClaySide4RationalSU2C3WilsonTraceExact`, `CMP119FlatSide4SpatialC3FieldCovarianceExact` and `YMClaySUNVariablePeriodicGibbsGaugeExact` with their correct carrier boundaries rather than substituting a new action.
+
+**Independent executed exact 4D Q8 reference:** `scripts/check_ym_original_c3_weighted_wilson_q8.py` tested 32 random original (4^4\times4=1024)-bond fields; Wilson plaquette action invariant under the literal time-fixed spatial (C_3), local gauge action invariant, and (C_3^3=\mathrm{id}). All 32 deliberately spatially anisotropic plane-weighted Wilson actions violated (C_3) invariance. These checks concern **the finite pure Wilson action for Q8**, not the full selected real CMP119 terms, compact Borel SU(N) Haar, Agda acceptance or continuum physics.
+
+**New SEM.P02 no-vacuum scope theorem:** `YMClayCompactSimpleScopeBidiNoVacuitySafeExact` source-writes a genuine `--safe` empty-group universal-proof counterexample, requires an actual externally chosen compact-simple group witness, and proves **both** transports
+[
+(\forall i\in I,\ P_I(i))\Longleftrightarrow(\forall g\in G_{\rm ext},\ P_{\rm ext}(g))
+]
+ONLY when a checked group-index equivalence (G_{\rm ext}\leftrightarrow I) and pointwise *physical predicate equality* are supplied. Those semantic witnesses are not constructed. **SU(N) alone is not the full class of compact simple Lie groups**, so one SU(2)/SU(N) result never automatically fills the external all-group Clay scope.
+
+**Updated source/trust counts:** 67 distinct producer rows after R443.F09 (66 previous), 219 unchanged bare-`Set` source field declarations, 521 strictly candidate search links and zero newly kernel-audited field witnesses. Exact-head Agda unavailable; no clean kernel receipt. R445 physical weighted source decoder, cutoff-uniform R320 and same-OS R333 gap remain OPEN. These new modules are SOURCE-WRITTEN, not source-proved in a compiler.
+
 ## 1. What the selected final compiler actually requires
 
 The literal source term is `BalabanClayHighestAlphaRound78TopDownThreeAnalyticFrontierExact.literalClaySolutionFromTopDownThree` with exactly **one** same construction `Y` and FIVE inputs, not just "three" unchecked objects:
