@@ -34,6 +34,7 @@ import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
+import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -506,3 +507,24 @@ round11PhaseTriangleConvergesFromFourAbsoluteTriangles
     (round11PhaseSeriesConvergesToOriginalExp inputs x)
     (round11PhaseSeriesConvergesToOriginalExp inputs y)
     abs
+
+
+------------------------------------------------------------------------
+-- SOURCE-BEARING ABSOLUTE CONVERGENCE ON THE EXACT COMPLEX HISTORY.
+-- Each coordinate is the original concrete Round11 alternating term,
+-- and these two receipts are derived from Round11, not assumed.
+------------------------------------------------------------------------
+
+round11PhaseSourceAbsoluteConvergent :
+  (inputs : Round11.Round11BishopCutset) →
+  (x : R.ℝ) →
+  (Seq._isConvergent
+    (Seq.SeriesOf
+      (λ n → R.∣ realTerms (round11PhaseTerms inputs x) n ∣)))
+  ×
+  (Seq._isConvergent
+    (Seq.SeriesOf
+      (λ n → R.∣ imagTerms (round11PhaseTerms inputs x) n ∣)))
+round11PhaseSourceAbsoluteConvergent inputs x =
+  AbsRound11.round11ConcreteCosineAbsoluteConvergent inputs x ,
+  AbsRound11.round11ConcreteSineAbsoluteConvergent inputs x
