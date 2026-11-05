@@ -271,6 +271,11 @@ open TSVFGenerator public using
   ; originalPhysicalEnergyPowersStayOnSelectedDomain
   ; originalPhysicalEnergyPowersIntertwine
   ; originalSelectedForwardKetEnergyPowersIntertwine
+  ; OriginalObserverEnergyGraph
+  ; OriginalOSEnergyGraph
+  ; originalPhysicalEnergyGraphForward
+  ; originalPhysicalEnergyGraphBackward
+  ; originalMatchedPhysicalEnergyGraphsBidi
   )
 
 open TSVFWickFirewall public using
