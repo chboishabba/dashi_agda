@@ -46,10 +46,7 @@ unobservedIntegrityQuestionCannotFactor :
     Q.outwardEpisode Q.semantics Q.interlayerIntegrityQuestion →
   G.Void
 unobservedIntegrityQuestionCannotFactor factor =
-  -- Existing query theorem returns Data.Empty. Pattern elimination
-  -- builds the local graph core's empty-type certificate.
-  let impossibility = Q.outwardCannotAnswerIntegrity factor in
-  emptyElim impossibility
+  emptyElim (Q.outwardCannotAnswerIntegrity factor)
   where
     emptyElim : ⊥ → G.Void
     emptyElim ()
