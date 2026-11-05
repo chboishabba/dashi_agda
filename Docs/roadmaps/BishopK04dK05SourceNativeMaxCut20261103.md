@@ -418,3 +418,5 @@ equality) remain **OPEN**, not converted into mere formalization status.
 No ESD file has been intentionally edited. The original Cauchy,
 Newton/binomial, Bishop–Bridges, Murray/Csimma, and DASHI source
 provenance is preserved.
+
+**2026-11-05 finite-sign refinement:** `BishopRound11SignedFactorialExponentEncodingExact` also source-writes `alternatingSignTwoIsOne`, `alternatingSignEvenIndexIsOne`, and `alternatingSignOddIndexIsMinusOne`, using the original Bishop real squared-negative lemma and pinned real-power addition. This pays universal even/odd sign reduction, but **does not yet produce the final signed mixed-convolution coefficient theorem**. These declarations are kernel-pending along with the other newly added K05 proof terms.
