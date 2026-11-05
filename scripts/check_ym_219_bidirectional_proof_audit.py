@@ -128,8 +128,8 @@ def check(repo):
     snap_ids = [row["id"] for row in audit["producer_catalog"]]
     if ids != snap_ids:
         fail("producer IDs changed: regenerate and review audit in full")
-    if len(ids) != 66:
-        fail("original 66-producer audit baseline changed")
+    if len(ids) != 67:
+        fail("original 67-producer audit baseline changed")
     for row in audit["producer_catalog"]:
         if row["relation_to_submission_fields"] != (
                 "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"):
