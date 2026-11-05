@@ -14,6 +14,7 @@ import DASHI.Cognition.CCDCOEMultiplexGraphCutCoreExact
 import DASHI.Cognition.CCDCOEFiveLayerCertifiedCutExact
 import DASHI.Cognition.CCDCOEQueryPNFEvidenceBridgeExact
 import DASHI.Cognition.CCDCOEPersonalHolonomyBoundaryExact
+import DASHI.Cognition.CCDCOEMaxCutRegressionExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
