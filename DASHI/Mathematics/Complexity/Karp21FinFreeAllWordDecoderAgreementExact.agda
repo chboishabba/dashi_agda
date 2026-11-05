@@ -36,6 +36,7 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as R
 import DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact as Observe
 import DASHI.Mathematics.Complexity.Karp21FinFreeAllRawValidatorAgreementExact as AllRaw
 import DASHI.Mathematics.Complexity.Karp21FinFreeAllGammaSuccessAgreementExact as AllFrame
+import DASHI.Mathematics.Complexity.Karp21FinFreeSparseCertificateWordVerifierSameExact as Same
 
 -- This lemma handles the ONLY discrepant validation branch: the
 -- original raw checker returns false, and the dependent original
@@ -126,7 +127,6 @@ allOriginalN21GraphWordsAgree word
 -- This composition contains NO new external parser/certificate oracle.
 ------------------------------------------------------------------------
 
-import DASHI.Mathematics.Complexity.Karp21FinFreeSparseCertificateWordVerifierSameExact as Same
 
 n21FinFreeVerifierSameWord :
   (word certificate : Word.BitWord) →
