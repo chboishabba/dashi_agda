@@ -5,7 +5,7 @@
     "original_219_inventory": "Docs/roadmaps/YMClaySubmission219FieldInventory20261103.json",
     "original_219_inventory_blob_sha": "d3a2cbc10996cf063897c3ab82d14cd946479916",
     "producer_ledger": "Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md",
-    "producer_ledger_blob_sha": "d6a92722ea0c017d00ead37e5c12ba968b934610",
+    "producer_ledger_blob_sha": "eb5c93dfca4537f989421010e78dc880e6a49ee9",
     "source_contract_blob_sha": {
       "DASHI/Physics/YangMills/BalabanClayGate4PhysicalClosureRound6ExactCutset.agda": "1ed00390e8401f86313f0440d6edfb29870dd31d",
       "DASHI/Physics/YangMills/YangMillsSubmissionExactCutset.agda": "0a69198469e601f124d6da8397c3a766bf61ec72"
@@ -117,9 +117,9 @@
     {
       "id": "R443.F09",
       "family": "R443",
-      "ledger_description": "`YMClayOriginalWilsonC3WeightedHaarTransferExact`: derive **weighted** C3 invariance of the **ACTUAL selected original** SU(N) side-four six-plane Gibbs density under the original 1,024-bond `Codec.decodeOriginalBonds 4`, then of its original weighted numerator and common-partition normalised expectation, from R443's ONE closed C3 label certificate and literal pointwise **original Gibbs-action covariance**; uses prior `Product.productHaarPermutationInvariant` and `Congruence.productIntegralCongruent`, not an invented Gibbs measure",
+      "ledger_description": "`YMClayOriginalWilsonC3WeightedHaarTransferExact`: derive **weighted** C3 invariance of the **ACTUAL selected original** SU(N) side-four six-plane Gibbs density under the original 1,024-bond `Codec.decodeOriginalBonds 4`, then of its original weighted numerator and common-partition normalised expectation, PLUS actual same-selected-physical `Constructed.actualPeriodicProductMeasure` cylinder numerator, original partition and normalised expectation equalities (via the same `Codec.decodeOriginalBonds 4` and original full product Haar), from R443's ONE closed C3 label certificate and literal pointwise **original Gibbs-action covariance**; uses prior `Product.productHaarPermutationInvariant` and `Congruence.productIntegralCongruent`, not an invented Gibbs measure",
       "ledger_status": "SOURCE / CONDITIONAL / KERNEL PENDING",
-      "payment": "Prove the actual physical selected CMP119 E/R/B/V six-plane action density C3 covariance on the same group/trace/real carrier, kernel-accept original C3 equality and original all-link integral, construct true Borel compact SU(N) Haar/integrable functions. Local exact Q8 Wilson-only 4^4 check: 32 C3/gauge runs PASS and 32 anisotropic negative controls; does NOT certify full CMP119 or Clay",
+      "payment": "Prove the actual physical selected CMP119 E/R/B/V six-plane action density C3 covariance on the same group/trace/real carrier, kernel-accept original C3 equality and original all-link integral, construct true Borel compact SU(N) Haar/integrable functions. Local exact Q8 Wilson-only 4^4 check: 32 C3/gauge runs PASS and 32 anisotropic negative controls, plus 32 original weighted orbit numerators and 32 weighted anisotropic controls; does NOT certify full CMP119 or Clay",
       "relation_to_submission_fields": "NOT_AUDITED_CANDIDATE_GATE_ASSOCIATION_ONLY"
     },
     {
@@ -6253,6 +6253,7 @@
     "official_vocabularies_pinned_to_physical_meaning": 0,
     "round78_inputs_physical_proof_terms": 0,
     "current_live_status": "No physical proof upgraded. Three new SEM gates are separate from the 219 source placeholders.",
-    "next_yang_mills_proof_cut": "R443.F09 original weighted C3 action covariance; R443 C3 closed equality; real Borel SU(N) Haar; R445 two native pair certificates; actual full CMP119 disintegration; R320/R333 physical."
+    "next_yang_mills_proof_cut": "One closed C3 native label proof plus literal same original CMP119 E/R/B/V density C3 covariance; continuous Borel SU(N) Haar; 2 original pair/spectator closed goals; real original selected R445 weighted Gibbs effective action; physical uniform R320/R333.",
+    "physical_meaning_anchoring_status": "SEM.P02 source includes nonvacuous all-compact-simple group scope bidi, uninstantiated physical external group classifier"
   }
 }
