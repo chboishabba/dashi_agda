@@ -13,7 +13,7 @@ modules=(
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
-  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\\{!|!\\}|TERMINATING|NO_TERMINATION_CHECK|--allow-unsolved-metas' "$file"; then
+  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|[{][!]|[!][}]|TERMINATING|NO_TERMINATION_CHECK|--allow-unsolved-metas' "$file"; then
     echo "Rejected postulate/meta/termination bypass: $file" >&2
     exit 1
   fi
@@ -28,6 +28,7 @@ command -v agda >/dev/null || {
   exit 2
 }
 
+agda --safe -i . DASHI/Cognition/CCDCOEMultiplexGraphCutCoreExact.agda
 for file in "${modules[@]}"; do
   agda -i . "$file"
 done
