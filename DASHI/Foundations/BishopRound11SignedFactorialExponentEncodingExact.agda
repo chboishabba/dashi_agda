@@ -97,3 +97,49 @@ alternatingSignAddition :
 alternatingSignAddition left right =
   RP.xⁿxᵐ≃xⁿ⁺ᵐ
     Terms.bishopMinusOne left right
+
+
+------------------------------------------------------------------------
+-- SOURCE-NATIVE SIGNS AT EVERY EVEN/ODD FACTORIAL DEGREE.
+-- The base (-1)^2=1 uses Round11's original negated-square proof;
+-- the inductive step uses the pinned all-N power-addition theorem.
+------------------------------------------------------------------------
+
+alternatingSignTwoIsOne :
+  R._≃_
+    (Terms.alternatingSign (suc (suc zero)))
+    R.1ℝ
+alternatingSignTwoIsOne =
+  RP.≃-trans
+    (RP.*-congʳ
+      (RP.*-identityˡ Terms.bishopMinusOne))
+    (RP.≃-trans
+      (Terms.negatedSquareEquivalentSquare R.1ℝ)
+      (RP.*-identityˡ R.1ℝ))
+
+alternatingSignEvenIndexIsOne :
+  (n : Nat) →
+  R._≃_
+    (Terms.alternatingSign (Double.double n))
+    R.1ℝ
+alternatingSignEvenIndexIsOne zero = RP.≃-refl
+alternatingSignEvenIndexIsOne (suc n) =
+  RP.≃-trans
+    (RP.≃-symm
+      (alternatingSignAddition
+        (suc (suc zero)) (Double.double n)))
+    (RP.≃-trans
+      (RP.*-cong
+        alternatingSignTwoIsOne
+        (alternatingSignEvenIndexIsOne n))
+      (RP.*-identityˡ R.1ℝ))
+
+alternatingSignOddIndexIsMinusOne :
+  (n : Nat) →
+  R._≃_
+    (Terms.alternatingSign (suc (Double.double n)))
+    Terms.bishopMinusOne
+alternatingSignOddIndexIsMinusOne n =
+  RP.≃-trans
+    (RP.*-congʳ (alternatingSignEvenIndexIsOne n))
+    (RP.*-identityˡ Terms.bishopMinusOne)
