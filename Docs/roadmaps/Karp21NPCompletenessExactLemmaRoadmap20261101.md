@@ -1,5 +1,22 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-05 — N21 universal original decoder / verifier source-candidate, kernel and bit-clock still OPEN
+
+**GitHub PR #1445, focused Karp21 root updated.** Three new proof modules reduce the *actual* N21 binary gamma decoder gap without inventing an alternative graph language:
+
+1. `Karp21FinFreeGammaGeneralSparseBudgetExact.agda`: source-level `readLowBitsSuffixWithinInput`, `readGammaZerosSuffixWithinInput`, `readGammaSuffixWithinInput`, `readRawEdgesCountExact`, `twoPerEdgeWithinTripleBudget` and `originalGammaFrameHasSparseBudget`. They follow the original `Gamma.readLowBits`, `Gamma.readGammaZeros` and `Graph.readRawEdges`, establishing from the **original** (3m\leq\lvert\mathrm{afterM}\rvert) header guard that `Sparse.twoPerEdge (length raw) ≤ Word.encodingSize word` on **every** successful source raw-edge frame. There is no bound on binary gamma vertex count `n`.
+
+2. `Karp21FinFreeRawReaderSparseBudgetExact.agda`: `rawReaderBudgetOutcome` exhausts the actual `Runtime.readRawGraphWord` gamma and edge decision branches using the literal source reader and the general budget theorem. `actualFinFreeRawGraphSuccessHasSparseBudget` specializes to **any** successful original raw graph word. This is a source-level size/correctness theorem and NOT a polynomial bit-tape runtime.
+
+3. `Karp21FinFreeAllWordDecoderAgreementExact.agda`: `originalTypedDecoderRejectsInvalidRawFrame` handles the raw-validator rejection branch by reusing the generic `AllRaw.rawGuardFalseImpliesTypedReject` proof. `OriginalN21ReaderAgreement` records either exact failure of both original decoders or successful matching `Runtime.parsed-raw-graph` and original dependent `Cut.graph` outputs, with signed `Observe.RawEdgeListFieldsSame` and no equality of offDiagonal proof-function fields. `allOriginalN21GraphWordsAgree` performs the **entire original nested gamma/3m/edge/trailing/positive-threshold/validator case split**. Its positive case consumes `AllFrame.allRawGammaFrameSuccessAgreement`, whose earlier caller-supplied sparse-budget premise has now been **removed** and replaced by the derived generic theorem. `n21FinFreeVerifierSameWord` composes the all-word outcome with `Same.n21FinFreeVerifierSameWordOnMatchedFrame` and `...OnBothRejected`, targeting exact equality of the two **original** Boolean verifiers for **all** graph words and certificate words.
+
+**PROMOTION STATUS:** All three modules and revised `AllFrame` are genuine committed Agda source candidates and imported by `Karp21Everything.agda`. No Agda binary, no exact-head kernel/typecheck, no transitive `--safe` certification or CI proof receipt was available. Do NOT mark `n21FinFreeVerifierSameWord` Golden/accepted merely because the name is present or code has no visible holes. Agda will need to elaborate the nested `with ... in` equalities, the dependent matched-frame constructor and the original codec imports. Any failure must be fixed on this same PR, not bypassed by a postulate.
+
+**Exact next P1/N21 gates:** (a) kernel-check `Karp21FinFreeGammaGeneralSparseBudgetExact`, `Karp21FinFreeRawReaderSparseBudgetExact`, `Karp21FinFreeAllWordDecoderAgreementExact` and the full imported consistency/score chain; (b) select a **genuine** binary machine cost model for original gamma-decoded integers with explicit length-dependent arithmetic and scan clocks; (c) prove `PR.polynomialTimeVerifier` for an executable same-object binary tape implementation and instantiate existing `Graph.LiteralN21.karpWeightedMaxCutInNPFromMachineReceipts`, paying certificate admissibility under that nondegenerate model.
+
+**Unchanged P0/P1/E20/P2/P3:** P0 SAT binary verifier and uniform Cook–Levin costed compiler, E20 polynomial source-to-signed-MaxCut word machine and kernel acceptance, all 20 Karp reductions and all 21 NP memberships, and actual `CertifiedKarpNetwork`. No Clay/P≠NP consequence. **0/20 new kernel-certified costed reductions, 0/21 new fully certified NP-completeness chains.**
+
+
 ## 2026-11-04 — N21 ALL certificate bits + original per-frame Boolean verifier alignment (Agda source candidate, NOT certified)
 
 **Two new modules on PR #1445, imported by the focused `Karp21Everything.agda` root:**
