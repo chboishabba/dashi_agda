@@ -112,6 +112,19 @@ def main():
                 assert left == right
                 checks += 1
 
+    # Exact whole-graph membership BIDI, including wrong-output
+    # negative controls, not just the correct selected forward ket.
+    for x in (F(0), F(2, 3), F(-1)):
+        for y in (F(1), F(-3, 5)):
+            psi = (x, y)
+            energy_psi = (E0 * x, E1 * y)
+            for wrong in (F(0), F(1, 7)):
+                candidate = (energy_psi[0], energy_psi[1] + wrong)
+                in_observer_graph = candidate == energy_psi
+                in_os_graph = J(candidate) == (E1 * y, E0 * x)
+                assert in_observer_graph == in_os_graph
+                checks += 1
+
     print(
         f"PASS: {checks} noncollapsed C^2 two-sided real-time/Euclidean, "
         "generator, group and full-domain controls"
