@@ -91,8 +91,11 @@ def run():
     assert not partition_certificate(bypass)
     assert reachable(bypass, ("a", LAYERS[0]), ("b", LAYERS[-1]))
 
-    # Same observed outer function, differing cross-layer integrity.
-    assert True == True
+    # Outward functionality is identical, yet integrated connectivity differs.
+    outward = lambda _graph: "components-still-function"
+    assert outward(full) == outward(cut)
+    assert reachable(full, ("a", LAYERS[0]), ("b", LAYERS[-1]))
+    assert not reachable(cut, ("a", LAYERS[0]), ("b", LAYERS[-1]))
     # Four crossed states: each of both graph conditions admits both origins.
     episodes = {(arch, origin) for arch in ("full", "cut")
                 for origin in ("organic", "influence")}
