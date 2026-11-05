@@ -1,3 +1,10 @@
+## 5 November 2026 — strengthened P07 full energy-operator graph, forward and backward
+
+The original `TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact` now includes `originalMatchedPhysicalEnergyGraphsBidi`. This derives from the ORIGINAL clock's `embedObserver`/`decodeObserver` inverse identities, matched isometric strong topology, derived domain equality and `i*hbar` energy conversion that the complete physical energy-operator graphs correspond in BOTH directions on their source-domain vectors. This is stronger than single-branch/one-ket or finite powers. It still does not establish an actual self-adjoint H, spectral projections, OS reflection-positive full Schwinger family, real analytic Wick continuation or unitary representation of the original physical operator. Those physical inputs are the exact unsupplied S08/S09 leaves; the physical 4D YM/OS producer S07 belongs to the other worker.
+
+The local equivalent independent reference passed 377 C² numerical/exact algebraic cases (215 real-time/group/Euclidean/derivative, 150 all-power moments, 12 correct/wrong output graph BIDI). Agda cannot be executed in this environment, and none of these finite controls is physical 4D YM.
+
+
 ## 5 November 2026 — stronger P07 two-way analytic BIDI / spatial information cut
 
 **Reused original owner, not a new time generator:** `TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact` consumes the original clock's definitionally two-sided `embedObserver` and `decodeObserver`. The new `ObserverHasStrongDerivative` and `OSHasStrongDerivative` predicates quantify the actual strongly converging difference-quotient limits. From same-source J linearity and real-time intertwinement it proves the forward and inverse derivative directions; OS strong-limit uniqueness plus the ORIGINAL decode laws proves observer strong-limit uniqueness. With correct actual derivative-based domain completeness it DERIVES the full P07 observer/OS operator-domain equivalence. This is strictly stronger than the previously selected-forward-ket result.
