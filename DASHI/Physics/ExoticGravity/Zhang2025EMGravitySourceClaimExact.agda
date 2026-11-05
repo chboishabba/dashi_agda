@@ -6,7 +6,6 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 
-import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 
 data Contradiction : Set where
 
@@ -119,32 +118,6 @@ data ScientificConsumer : Set where
   freeFall : ScientificConsumer
   metricClock : ScientificConsumer
   farFieldTTStrain : ScientificConsumer
-
-data GravitationalRoute : ScientificConsumer → Set where
-  remoteProbe :
-    (claim : Anti.AntigravityClaim) →
-    claim ≡ Anti.remoteRepulsiveField →
-    GravitationalRoute externalTestMass
-  freeFallProbe :
-    (claim : Anti.AntigravityClaim) →
-    claim ≡ Anti.changedFreeFallResponse →
-    GravitationalRoute freeFall
-  metricProbe :
-    (claim : Anti.AntigravityClaim) →
-    claim ≡ Anti.engineeredMetricResponse →
-    GravitationalRoute metricClock
-
-canonicalExternalRoute : GravitationalRoute externalTestMass
-canonicalExternalRoute =
-  remoteProbe Anti.remoteRepulsiveField refl
-
-canonicalFreeFallRoute : GravitationalRoute freeFall
-canonicalFreeFallRoute =
-  freeFallProbe Anti.changedFreeFallResponse refl
-
-canonicalMetricRoute : GravitationalRoute metricClock
-canonicalMetricRoute =
-  metricProbe Anti.engineeredMetricResponse refl
 
 data SameClaimConsumer : ScientificConsumer → ScientificConsumer → Set where
   sameConsumer : {c : ScientificConsumer} → SameClaimConsumer c c
