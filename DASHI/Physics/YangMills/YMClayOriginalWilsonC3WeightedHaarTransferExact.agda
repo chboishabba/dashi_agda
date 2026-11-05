@@ -46,6 +46,7 @@ import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as C3
 import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as Single
 import DASHI.Physics.YangMills.YMClayNativeC3AdjacentSortProgramExact as Sort
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as Congruence
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 
 module _
@@ -109,7 +110,7 @@ module _
   actualOriginalWeightedC3NumeratorInvariant
       closedC3 densityC3 observable =
     trans
-      (Product.integrateCongruent oneLink _ _
+      (Congruence.productIntegralCongruent oneLink _ _
         (λ links →
           trans
             (cong
