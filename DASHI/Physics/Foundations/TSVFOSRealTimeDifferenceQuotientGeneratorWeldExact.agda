@@ -27,6 +27,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Quantum.TSVF as TSVF
@@ -348,6 +349,193 @@ module _
     originalSelectedPhysicalEnergyIntertwines
       source conversion (TSVF.forwardState E)
       (originalSelectedForwardKetInDomain source)
+
+  ------------------------------------------------------------------------
+  -- P07.L05--L07 / P11: BIDIRECTIONAL STRONG DERIVATIVE DOMAIN WELD.
+  --
+  -- The ORIGINAL clock contains a two-sided state isomorphism:
+  --   J = embedObserver; decodeObserver (J x) = x;
+  --   J (decodeObserver y) = y.
+  -- This lets us pull the SAME real-time finite difference quotients
+  -- back from OS to the selected observer, with no second embedding
+  -- or inverse-H assumption.
+  --
+  -- Actual limits, physical topology, completeness, analytic Stone
+  -- reconstruction and dense self-adjoint domains remain sourced
+  -- physical premises. We DO derive the two-way differentiability
+  -- equivalence and uniqueness of the observer strong derivative.
+  ------------------------------------------------------------------------
+
+  ObserverHasStrongDerivative :
+    (source : RealTimeDerivativeBridge) →
+    ObserverState → Set
+  ObserverHasStrongDerivative source a =
+    Σ ObserverState
+      (λ derivative →
+        ObserverConverges source
+          (λ n → observerDifferenceQuotient source n a)
+          derivative)
+
+  OSHasStrongDerivative :
+    (source : RealTimeDerivativeBridge) →
+    ReconstructedState → Set
+  OSHasStrongDerivative source y =
+    Σ ReconstructedState
+      (λ derivative →
+        OSConverges source
+          (λ n → osDifferenceQuotient source n y)
+          derivative)
+
+  -- Forward differentiability transport is a NEW theorem: it does
+  -- not assume observer-generator equality or OS-generator equality.
+  originalObserverStrongDifferentiabilityImpliesOS :
+    (source : RealTimeDerivativeBridge)
+    (a : ObserverState) →
+    ObserverHasStrongDerivative source a →
+    OSHasStrongDerivative source (J a)
+  originalObserverStrongDifferentiabilityImpliesOS
+      source a (derivative , convergence) =
+    J derivative ,
+    osConvergesRespectPointwise source
+      (λ n → originalSelectedDifferenceQuotientsIntertwine source n a)
+      (embeddingPreservesLimit source convergence)
+
+  -- The ORIGINAL embedding is also INJECTIVE by decodeEmbed.
+  -- Consequently uniqueness of the original OS strong limit
+  -- implies uniqueness of the observer strong limit without
+  -- postulating a second, independent observer uniqueness theorem.
+  originalObserverStrongLimitUniqueFromOS :
+    (source : RealTimeDerivativeBridge)
+    {sequence : Nat → ObserverState}
+    {x y : ObserverState} →
+    ObserverConverges source sequence x →
+    ObserverConverges source sequence y →
+    x ≡ y
+  originalObserverStrongLimitUniqueFromOS
+      source {x = x} {y = y} first second =
+    trans
+      (sym (Clock.decodeEmbed clock x))
+      (trans
+        (cong (Clock.decodeObserver clock)
+          (osLimitUnique source
+            (embeddingPreservesLimit source first)
+            (embeddingPreservesLimit source second)))
+        (Clock.decodeEmbed clock y))
+
+  -- Unlike an arbitrary 'backwards time' axiom, this is ONLY
+  -- continuity of the ORIGINAL physical inverse identification.
+  -- It must follow from a genuinely unitary onto J on a completed
+  -- Hilbert topology, not merely from the old Set-level decode.
+  record OriginalInverseHilbertContinuity
+      (source : RealTimeDerivativeBridge) : Set₁ where
+    field
+      decodePreservesStrongLimit :
+        ∀ {sequence limit} →
+        OSConverges source sequence limit →
+        ObserverConverges source
+          (λ n → Clock.decodeObserver clock (sequence n))
+          (Clock.decodeObserver clock limit)
+
+      observerLimitRespectsPointwise :
+        ∀ {sequence other limit} →
+        (∀ n → sequence n ≡ other n) →
+        ObserverConverges source sequence limit →
+        ObserverConverges source other limit
+
+      -- The true generator DOMAIN is defined by differentiability,
+      -- not a freely chosen subset containing only the forward ket.
+      observerDerivativeDomainComplete :
+        ∀ a →
+        ObserverHasStrongDerivative source a →
+        ObserverGeneratorDomain source a
+
+  open OriginalInverseHilbertContinuity public
+
+  -- Converse finite-difference quotient transport follows entirely
+  -- from the SAME original two-sided state isomorphism and earlier
+  -- J-intertwiner. No extra inverse group intertwinement assumption.
+  originalOSDifferenceQuotientsDecodeToObserver :
+    (source : RealTimeDerivativeBridge)
+    (n : Nat) (a : ObserverState) →
+    Clock.decodeObserver clock
+      (osDifferenceQuotient source n (J a))
+    ≡
+    observerDifferenceQuotient source n a
+  originalOSDifferenceQuotientsDecodeToObserver source n a =
+    trans
+      (cong (Clock.decodeObserver clock)
+        (sym (originalSelectedDifferenceQuotientsIntertwine source n a)))
+      (Clock.decodeEmbed clock
+        (observerDifferenceQuotient source n a))
+
+  -- This is the core BIDI comparison for the ORIGINAL selected
+  -- observer/OS state: a strong OS derivative determines an observer
+  -- strong derivative using original decodeObserver and its topology.
+  originalOSStrongDifferentiabilityImpliesObserver :
+    (source : RealTimeDerivativeBridge)
+    (inverse : OriginalInverseHilbertContinuity source)
+    (a : ObserverState) →
+    OSHasStrongDerivative source (J a) →
+    ObserverHasStrongDerivative source a
+  originalOSStrongDifferentiabilityImpliesObserver
+      source inverse a (derivative , convergence) =
+    Clock.decodeObserver clock derivative ,
+    observerLimitRespectsPointwise inverse
+      (λ n →
+        originalOSDifferenceQuotientsDecodeToObserver source n a)
+      (decodePreservesStrongLimit inverse convergence)
+
+  -- Derive actual two-way DOMAIN equivalence; it is NOT asserted
+  -- as an independent one-field same-H source identity.
+  -- Domain-completeness and continuity of J-inverse remain the
+  -- exact physical sublemmas the complete Hilbert must provide.
+  originalObserverOSStrongGeneratorDomainsIff :
+    (source : RealTimeDerivativeBridge)
+    (inverse : OriginalInverseHilbertContinuity source)
+    (a : ObserverState) →
+    (ObserverGeneratorDomain source a →
+      OSDomain source (J a))
+    ×
+    (OSDomain source (J a) →
+      ObserverGeneratorDomain source a)
+  originalObserverOSStrongGeneratorDomainsIff
+      source inverse a =
+    mappedDomain source a ,
+    (λ osDomain →
+      observerDerivativeDomainComplete inverse a
+        (originalOSStrongDifferentiabilityImpliesObserver
+          source inverse a
+          (osGeneratorFromOriginalHamiltonian source
+              (OS.hamiltonian reconstruction) (J a) ,
+           originalOSDerivativeExists source
+             (J a) osDomain)))
+
+  -- Matching strong derivatives now holds ON THE ENTIRE selected
+  -- generator domain (not only the original forward ket) in both
+  -- directions. Combined with the earlier i*hbar theorem, this is
+  -- the analytic part of the common H domain identification.
+  -- It still requires genuine physical H, real time and topology.
+  originalOSDomainGivesOriginalPhysicalEnergyEquality :
+    (source : RealTimeDerivativeBridge)
+    (inverse : OriginalInverseHilbertContinuity source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (a : ObserverState)
+    (osDomain : OSDomain source (J a)) →
+    J (observerPhysicalEnergyOperator conversion a)
+    ≡
+    originalOSPhysicalEnergyOperator conversion
+      (OS.hamiltonian reconstruction) (J a)
+  originalOSDomainGivesOriginalPhysicalEnergyEquality
+      source inverse conversion a osDomain =
+    originalSelectedPhysicalEnergyIntertwines
+      source conversion a
+      (observerDerivativeDomainComplete inverse a
+        (originalOSStrongDifferentiabilityImpliesObserver
+          source inverse a
+          (osGeneratorFromOriginalHamiltonian source
+              (OS.hamiltonian reconstruction) (J a) ,
+           originalOSDerivativeExists source
+             (J a) osDomain)))
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
