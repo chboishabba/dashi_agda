@@ -49,6 +49,7 @@ def action(u): return sum(action_by_plane(u).values())
 def run():
     rng=random.Random(443119)
     anisotropic_witnesses=0
+    weighted_orbit_controls=0
     for case in range(32):
         u={bond:rng.choice(Q8) for bond in BONDS}
         assert c3field(c3field(c3field(u)))==u
@@ -62,10 +63,23 @@ def run():
         lhs=sum(weights[k]*v for k,v in action_by_plane(u).items())
         rhs=sum(weights[k]*v for k,v in action_by_plane(rotated).items())
         anisotropic_witnesses+=(lhs!=rhs)
+        orbit=[u,c3field(u),c3field(c3field(u))]
+        physical_weights=[1+action(state) for state in orbit]
+        local_observables=[action_by_plane(state)[(0,1)] for state in orbit]
+        assert sum(physical_weights[i]*local_observables[i] for i in range(3)) == sum(
+            physical_weights[i]*local_observables[(i+1)%3] for i in range(3))
+        bad_weights=[
+            1+sum(weights[k]*v for k,v in action_by_plane(state).items())
+            for state in orbit]
+        weighted_orbit_controls += (
+            sum(bad_weights[i]*local_observables[i] for i in range(3)) !=
+            sum(bad_weights[i]*local_observables[(i+1)%3] for i in range(3)))
     assert anisotropic_witnesses>=20,anisotropic_witnesses
+    assert weighted_orbit_controls>=20,weighted_orbit_controls
     print('PASS: 32 original 4^4 Q8 Wilson C3 tests on 1024 bonds')
     print('PASS: 32 C3-cubed and 32 gauge-action invariances')
     print(f'PASS: {anisotropic_witnesses}/32 anisotropic non-C3 action negatives')
+    print(f'PASS: 32 weighted C3 orbit numerators; {weighted_orbit_controls}/32 anisotropic weighted negatives')
     print('REFERENCE ONLY: not continuous SU(N) Haar, full CMP119 or Agda kernel')
 
 if __name__=='__main__':run()
