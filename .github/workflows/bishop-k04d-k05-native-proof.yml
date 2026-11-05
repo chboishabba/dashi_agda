@@ -7,6 +7,7 @@ on:
     paths:
       - 'DASHI/Analysis/Bishop*.agda'
       - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
+      - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - '.github/workflows/bishop-k04d-k05-native-proof.yml'
   workflow_dispatch:
 
@@ -45,6 +46,7 @@ jobs:
             DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda
             DASHI/Analysis/BishopMonotoneDoubleSubsequenceLimitExact.agda
             DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda
+            DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
             DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
