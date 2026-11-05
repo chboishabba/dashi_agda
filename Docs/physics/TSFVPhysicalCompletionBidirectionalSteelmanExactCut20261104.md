@@ -1,3 +1,15 @@
+## 5 November 2026 — stronger P07 two-way analytic BIDI / spatial information cut
+
+**Reused original owner, not a new time generator:** `TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact` consumes the original clock's definitionally two-sided `embedObserver` and `decodeObserver`. The new `ObserverHasStrongDerivative` and `OSHasStrongDerivative` predicates quantify the actual strongly converging difference-quotient limits. From same-source J linearity and real-time intertwinement it proves the forward and inverse derivative directions; OS strong-limit uniqueness plus the ORIGINAL decode laws proves observer strong-limit uniqueness. With correct actual derivative-based domain completeness it DERIVES the full P07 observer/OS operator-domain equivalence. This is strictly stronger than the previously selected-forward-ket result.
+
+**Isometric inverse continuity:** `OriginalIsometricStrongLimitSource` specifies the one actually selected distance-to-target convergence and J-isometry rather than separately assuming physical inverse continuity. `originalMatchedDistancesForceInverseLimitContinuity` and `originalMetricSourceProducesInverseHilbertContinuity` derive that inverse from the same original decoder and pointwise distance equality. Constructing the physically real complete Hilbert topology, bona fide real scalar time, dense common self-adjoint domain and selected OS operator remains OPEN.
+
+**Full-domain polynomial moment transport:** `OriginalInvariantPhysicalEnergyCore` makes invariance of the actual observer generator domain under selected energy operator explicit. The new induction `originalPhysicalEnergyPowersIntertwine` proves all natural operator powers transport through J. A family of polynomial monomial moments is NOT the physical self-adjoint spectral measure/analytic functional calculus without further norm/density/Stone and uniqueness arguments. Physical P07.L07 and P11.L07 remain OPEN.
+
+**Original observer causal spatial discriminator:** original three-way finite causal diamond + actual source-filter levels imply no Boolean one-bit sensor can reconstruct x/y/z; a selected two-bit encoding recovers all five finite labels, but no spatial propagation/continuum or physical detector is claimed. Non-Golden source import remains isolated.
+
+**Independent local reference:** noncollapsed C² script executed 365 checks (215 complex real-time, Euclidean and generator, 150 exact rational all-power moments); original finite spatial diamond exhaustive source check passed 32 possible one-bit encodings and 64 two-bit encodings (24 injective) and selected decoder. Exact Agda source has GitHub readback but no `agda` installation or kernel verification. This is a useful S02 information requirement and P07 forward/backwards theorem, not E1 physical completion.
+
 ## 4 November 2026 — source-native max-cut / Pareto / alpha implementation receipt
 
 **P01→P02 SENSOR NECESSITY (finite source, non-Golden):**
