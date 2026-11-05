@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.ExoticGravity.Zhang2025EMGravityValidation where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -42,13 +41,13 @@ sourceCannotEntitleGWClaim = S.patentDoesNotClaimMeasuredGW
 
 -- Routing preserves the exact consumer/claim identity already in DASHI.
 externalRouteUsesRemoteField :
-  S.canonicalExternalRoute ≡
-    S.remoteProbe Anti.remoteRepulsiveField refl
+  P.canonicalExternalRoute ≡
+    P.remoteProbe Anti.remoteRepulsiveField refl
 externalRouteUsesRemoteField = refl
 
 metricRouteUsesMetricConsumer :
-  S.canonicalMetricRoute ≡
-    S.metricProbe Anti.engineeredMetricResponse refl
+  P.canonicalMetricRoute ≡
+    P.metricProbe Anti.engineeredMetricResponse refl
 metricRouteUsesMetricConsumer = refl
 
 currentSourceHasNoIndependentPhysicalReceipt :
