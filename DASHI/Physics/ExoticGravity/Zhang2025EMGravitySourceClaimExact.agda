@@ -35,6 +35,49 @@ familyIdentity : (p q : Publication) → family p ≡ family q
 familyIdentity _ _ = refl
 
 ------------------------------------------------------------------------
+-- WEB SOURCE CROSSWALK (2026-11-06): documentary evidence can describe
+-- DIFFERENT APPARATUS without providing a same-instrument measurement.
+-- The Zhang/Xu 2025 50Hz/18mm toroid is NOT the US patent's HV
+-- 10cm vessel with a suspended rotating sphere. Neither is Pais HFGWG.
+------------------------------------------------------------------------
+
+data ApparatusSource : Set where
+  zhangPatentVacuumSphere : ApparatusSource
+  zhangXuToroidAirGap : ApparatusSource
+  paisHFGWGSource : ApparatusSource
+
+data SameApparatusSource : ApparatusSource → ApparatusSource → Set where
+  identicalSource : {a : ApparatusSource} → SameApparatusSource a a
+
+patentSphereNotToroid :
+  SameApparatusSource zhangPatentVacuumSphere zhangXuToroidAirGap →
+  Contradiction
+patentSphereNotToroid ()
+
+patentSphereNotPaisSource :
+  SameApparatusSource zhangPatentVacuumSphere paisHFGWGSource →
+  Contradiction
+patentSphereNotPaisSource ()
+
+toroidNotPaisSource :
+  SameApparatusSource zhangXuToroidAirGap paisHFGWGSource →
+  Contradiction
+toroidNotPaisSource ()
+
+data TheoryStatement : Set where
+  directMagneticFieldCurlLaw : TheoryStatement
+  magneticTimeDerivativeCurlLaw : TheoryStatement
+
+data SameTheoryStatement : TheoryStatement → TheoryStatement → Set where
+  sameTheory : {t : TheoryStatement} → SameTheoryStatement t t
+
+distinctMagneticCurlClaims :
+  SameTheoryStatement directMagneticFieldCurlLaw
+                      magneticTimeDerivativeCurlLaw →
+  Contradiction
+distinctMagneticCurlClaims ()
+
+------------------------------------------------------------------------
 -- A source *claims* controlled motion, not observed gravitational geometry.
 -- The three unsupported stronger propositions are deliberately separate.
 ------------------------------------------------------------------------
