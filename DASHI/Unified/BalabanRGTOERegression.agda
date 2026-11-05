@@ -260,6 +260,13 @@ open TSVFGenerator public using
   ; originalOSStrongDifferentiabilityImpliesObserver
   ; originalObserverOSStrongGeneratorDomainsIff
   ; originalOSDomainGivesOriginalPhysicalEnergyEquality
+  ; OriginalIsometricStrongLimitSource
+  ; originalOSDistanceTransportedByDecoder
+  ; originalMatchedDistancesForceForwardLimitContinuity
+  ; originalMatchedDistancesForceInverseLimitContinuity
+  ; originalMetricObserverLimitPointwiseTransport
+  ; originalMetricSourceProducesInverseHilbertContinuity
+  ; originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
   )
 
 open TSVFWickFirewall public using
