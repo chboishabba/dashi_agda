@@ -101,6 +101,17 @@ def main():
     Hprime = lambda v: (complex(E0) * v[0], complex(E1 + 1) * v[1])
     assert H(e0) == Hprime(e0) and H(e1) != Hprime(e1)
     checks += 2
+    # Exact rational two-sided powers of one physical-energy operator
+    # on arbitrary selected basis/linear-combination control vectors.
+    for n in range(25):
+        for x in (F(0), F(1), F(3, 5)):
+            for y in (F(1), F(-2, 3)):
+                psi = (x, y)
+                left = (E1 ** n * y, E0 ** n * x)
+                right = (E1 ** n * J(psi)[0], E0 ** n * J(psi)[1])
+                assert left == right
+                checks += 1
+
     print(
         f"PASS: {checks} noncollapsed C^2 two-sided real-time/Euclidean, "
         "generator, group and full-domain controls"
