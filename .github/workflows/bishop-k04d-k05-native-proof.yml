@@ -1,0 +1,72 @@
+name: Bishop K04d K05 native proof receipts
+
+on:
+  push:
+    branches:
+      - feat/twin-prime-six-wheel-bounded-gap-reuse-20261028
+    paths:
+      - 'DASHI/Analysis/Bishop*.agda'
+      - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
+      - '.github/workflows/bishop-k04d-k05-native-proof.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bishop-k04d-k05-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  agda-golden-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Fetch pinned Murray-Csimma Bishop backend
+        run: git submodule update --init vendor/bishop
+
+      - name: Install selected Agda and stdlib
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+
+      - name: Kernel-check K05 source-native analytic chain
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          files=(
+            DASHI/Analysis/BishopOneStepLagConvergenceExact.agda
+            DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda
+            DASHI/Analysis/BishopMonotoneDoubleSubsequenceLimitExact.agda
+            DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda
+            DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
+            DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
+            DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
+            DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda
+          )
+          : > bishop-k05-kernel.log
+          for file in "${files[@]}"; do
+            echo "=== agda --safe ${file} ===" | tee -a bishop-k05-kernel.log
+            timeout 300s agda --safe -i . -i vendor/bishop -l standard-library "${file}" 2>&1 | tee -a bishop-k05-kernel.log
+            rc=${PIPESTATUS[0]}
+            if [[ ${rc} -ne 0 ]]; then
+              echo "FAIL rc=${rc} ${file}" | tee -a bishop-k05-kernel.log
+              status=1
+            else
+              echo "PASS ${file}" | tee -a bishop-k05-kernel.log
+            fi
+          done
+          exit "${status}"
+
+      - name: Retain kernel acceptance or counterexample diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bishop-k05-exact-head-agda-kernel-receipt
+          path: bishop-k05-kernel.log
