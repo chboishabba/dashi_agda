@@ -37,3 +37,14 @@ noAutomaticMeasuredReplications :
   S.PatentClaimBoundary.patentIsExperimentalReplication
     S.canonicalPatentClaimBoundary ≡ false
 noAutomaticMeasuredReplications = refl
+
+distinctApparatusPreventsUnpaidWeld :
+  S.SameApparatusSource S.zhangPatentVacuumSphere S.zhangXuToroidAirGap →
+  S.Contradiction
+distinctApparatusPreventsUnpaidWeld = S.patentSphereNotToroid
+
+differentCurlHypothesesRequireIndependentTest :
+  S.SameTheoryStatement S.directMagneticFieldCurlLaw
+                        S.magneticTimeDerivativeCurlLaw →
+  S.Contradiction
+differentCurlHypothesesRequireIndependentTest = S.distinctMagneticCurlClaims
