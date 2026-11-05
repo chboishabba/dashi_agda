@@ -1,5 +1,5 @@
 """Regression of the Zhang/Pais non-promotion and bounded-force consumer."""
-import copy
+import json
 import math
 import sys
 import unittest
@@ -44,6 +44,12 @@ def case():
 
 
 class ZhangPatentForceAuditTests(unittest.TestCase):
+    def test_committed_json_fixture_is_synthetic_only(self):
+        fixture = Path(__file__).resolve().parent / "fixtures" / "zhang2025_synthetic_pair.json"
+        result = m.evaluate(json.loads(fixture.read_text(encoding="utf-8")))
+        self.assertEqual(result["status"], "synthetic_fixture_only")
+        self.assertFalse(result["gravity_identified"])
+
     def test_patent_power_nominal_not_metric(self):
         self.assertEqual(m.nominal_input_power(50000, 1e-5), 0.5)
 
