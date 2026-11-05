@@ -267,6 +267,10 @@ open TSVFGenerator public using
   ; originalMetricObserverLimitPointwiseTransport
   ; originalMetricSourceProducesInverseHilbertContinuity
   ; originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
+  ; OriginalInvariantPhysicalEnergyCore
+  ; originalPhysicalEnergyPowersStayOnSelectedDomain
+  ; originalPhysicalEnergyPowersIntertwine
+  ; originalSelectedForwardKetEnergyPowersIntertwine
   )
 
 open TSVFWickFirewall public using
