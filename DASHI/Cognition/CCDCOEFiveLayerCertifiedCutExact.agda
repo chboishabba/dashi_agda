@@ -36,14 +36,14 @@ data CutCross :
 
 fullNetwork : G.Multiplex C.Actor C.InvariantLayer
 fullNetwork = record
-  { within = λ _ _ _ → ⊤
-  ; between = FullCross
+  { G.Multiplex.within = λ _ _ _ → ⊤
+  ; G.Multiplex.between = FullCross
   }
 
 cutNetwork : G.Multiplex C.Actor C.InvariantLayer
 cutNetwork = record
-  { within = λ _ _ _ → ⊤
-  ; between = CutCross
+  { G.Multiplex.within = λ _ _ _ → ⊤
+  ; G.Multiplex.between = CutCross
   }
 
 -- Everyone remains in every layer, with complete local links, while
