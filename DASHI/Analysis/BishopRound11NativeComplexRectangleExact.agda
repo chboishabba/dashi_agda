@@ -38,6 +38,7 @@ import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
 import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
+import DASHI.Analysis.BishopOneStepLagConvergenceExact as Lag
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -819,3 +820,87 @@ round11OddOddCorrectionConvergesZero inputs x y =
         round11SignedSineCauchyCoefficientConvergesZero
           inputs x y))
     (RP.≃-symm RP.0≃-0)
+
+
+------------------------------------------------------------------------
+-- LAST-FINITE-LEMMA K05 COMPILER.
+--
+-- The ONLY hypotheses here are the two exact original-signed-
+-- factorial finite-coefficient identities, for every n:
+--
+--   (triangle_(n+1) - phase_(n+1)).re  ~= O_n(x,y)
+--   (triangle_(n+1) - phase_(n+1)).im  ~= 0.
+--
+-- They are mathematical source-object equalities, not arbitrary
+-- "addition law" data. The odd/odd O_n convergence is already
+-- independently proved above by the original sine*sine Cauchy
+-- triangle and Bishop convergent-series-term-vanishing.
+--
+-- Therefore these finite equalities mechanically yield the full
+-- imaginary exponential product and BOTH original trig additions.
+------------------------------------------------------------------------
+
+round11ProductFromExactFiniteGroupedParity :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (∀ n →
+    R._≃_
+      (round11GroupedBoundaryReal inputs x y (suc n))
+      (round11OddOddCorrection inputs x y n)) →
+  (∀ n →
+    R._≃_
+      (round11GroupedBoundaryImag inputs x y (suc n))
+      R.0ℝ) →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  C._≈C_
+    (C._*C_
+      (C.expC T (C.pureImaginary x))
+      (C.expC T (C.pureImaginary y)))
+    (C.expC T (C.pureImaginary (R._+_ x y)))
+round11ProductFromExactFiniteGroupedParity
+    inputs x y exactRealParity exactImagParity =
+  let
+    correctionLagConverges =
+      Lag.oneStepLagConverges
+        (round11OddOddCorrection inputs x y)
+        R.0ℝ
+        (round11OddOddCorrectionConvergesZero inputs x y)
+
+    realBoundaryConverges =
+      Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+        (λ {(suc n) →
+          RP.≃-symm (exactRealParity n)})
+        (R.0ℝ , correctionLagConverges)
+
+    imagBoundaryConverges =
+      Seq.xₙ≃c⇒xₙ→c
+        (λ {(suc n) → exactImagParity n})
+  in
+  round11ProductFromVanishingGroupedBoundary
+    inputs x y realBoundaryConverges imagBoundaryConverges
+
+round11TrigAdditionFromExactFiniteGroupedParity :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (∀ n →
+    R._≃_
+      (round11GroupedBoundaryReal inputs x y (suc n))
+      (round11OddOddCorrection inputs x y n)) →
+  (∀ n →
+    R._≃_
+      (round11GroupedBoundaryImag inputs x y (suc n))
+      R.0ℝ) →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  C.BishopSineAdditionAt T x y
+  ×
+  C.BishopCosineAdditionAt T x y
+round11TrigAdditionFromExactFiniteGroupedParity
+    inputs x y exactRealParity exactImagParity =
+  C.imaginaryExponentialProductGivesAddition
+    (Route.round11MachinTranscendentals inputs)
+    x y
+    (C.≈C-sym
+      (round11ProductFromExactFiniteGroupedParity
+        inputs x y exactRealParity exactImagParity))
