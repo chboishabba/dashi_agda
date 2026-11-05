@@ -72,7 +72,7 @@ positiveCauchyTriangleIncreasing
   RP.≤-respʳ-≃
     (RP.≃-symm (FinSum.finSumIsSeriesOf coefficients (suc count)))
     (RP.≤-respˡ-≃
-      (FinSum.finSumIsSeriesOf coefficients count)
+      (RP.≃-symm (FinSum.finSumIsSeriesOf coefficients count))
       (nativeIncreasing count))
 
 nonnegativeRectangleBelowEvenTriangle :
