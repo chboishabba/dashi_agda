@@ -28,7 +28,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
@@ -536,6 +536,195 @@ module _
               (OS.hamiltonian reconstruction) (J a) ,
            originalOSDerivativeExists source
              (J a) osDomain)))
+
+  ------------------------------------------------------------------------
+  -- P03/P07 strongest topology-compatible Pareto cut:
+  -- DERIVE inverse strong-limit continuity from a genuinely matched
+  -- distance/convergence source on the ORIGINAL J, rather than
+  -- postulate decode continuity as an unrelated physical witness.
+  --
+  -- This is a SOURCE-level isometric topology specification. The
+  -- proof of the comparison is independent of the numerical distance
+  -- backend; constructing a real noncollapsed Hilbert norm with
+  -- metric axioms, Cauchy completion, and the proper strong operator
+  -- topology is STILL a separate physical/analytic requirement.
+  ------------------------------------------------------------------------
+
+  record OriginalIsometricStrongLimitSource
+      (source : RealTimeDerivativeBridge) : Set₁ where
+    field
+      Distance : Set
+      observerDistance : ObserverState → ObserverState → Distance
+      osDistance : ReconstructedState → ReconstructedState → Distance
+
+      -- ACTUAL same observer/OS isometry, not just pointwise equality
+      -- of the two clock labels or one selected spectral value.
+      selectedJPreservesDistances :
+        ∀ a b →
+        osDistance (J a) (J b) ≡ observerDistance a b
+
+      DistanceConverges : (Nat → Distance) → Set
+
+      distanceConvergenceRespectsPointwise :
+        ∀ {seq other} →
+        (∀ n → seq n ≡ other n) →
+        DistanceConverges seq → DistanceConverges other
+
+      -- Characterise convergence by distance-to-target on BOTH
+      -- original physical carriers, not independent arbitrary
+      -- boolean continuity tags. The actual norm/metric topology
+      -- must be physically constructed outside this conditional file.
+      observerConvergenceIntoDistance :
+        ∀ {seq limit} →
+        ObserverConverges source seq limit →
+        DistanceConverges
+          (λ n → observerDistance (seq n) limit)
+      observerDistanceIntoConvergence :
+        ∀ {seq limit} →
+        DistanceConverges
+          (λ n → observerDistance (seq n) limit) →
+        ObserverConverges source seq limit
+
+      osConvergenceIntoDistance :
+        ∀ {seq limit} →
+        OSConverges source seq limit →
+        DistanceConverges
+          (λ n → osDistance (seq n) limit)
+      osDistanceIntoConvergence :
+        ∀ {seq limit} →
+        DistanceConverges
+          (λ n → osDistance (seq n) limit) →
+        OSConverges source seq limit
+
+      -- The ORIGINAL physical operator domain must contain ALL
+      -- strong derivatives, not merely the selected original ket.
+      metricObserverDerivativeDomainComplete :
+        ∀ a →
+        ObserverHasStrongDerivative source a →
+        ObserverGeneratorDomain source a
+
+  open OriginalIsometricStrongLimitSource public
+
+  -- On the ORIGINAL onto state identification, OS distances are
+  -- *definitionally reducible* to observer distances by decoding.
+  -- This is the same original J and its same-source decodeEmbed/
+  -- embedDecode, not a second chosen isometric Hilbert equivalence.
+  originalOSDistanceTransportedByDecoder :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (x y : ReconstructedState) →
+    osDistance metric x y ≡
+    observerDistance metric
+      (Clock.decodeObserver clock x)
+      (Clock.decodeObserver clock y)
+  originalOSDistanceTransportedByDecoder source metric x y =
+    trans
+      (cong₂ (osDistance metric)
+        (sym (Clock.embedDecode clock x))
+        (sym (Clock.embedDecode clock y)))
+      (selectedJPreservesDistances metric
+        (Clock.decodeObserver clock x)
+        (Clock.decodeObserver clock y))
+
+  -- Matched J-isometry already makes the OBSERVER->OS strong
+  -- continuity hypothesis follow from the declared distance law.
+  originalMatchedDistancesForceForwardLimitContinuity :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    {sequence : Nat → ObserverState}
+    {limit : ObserverState} →
+    ObserverConverges source sequence limit →
+    OSConverges source
+      (λ n → J (sequence n)) (J limit)
+  originalMatchedDistancesForceForwardLimitContinuity
+      source metric {sequence} {limit} convergence =
+    osDistanceIntoConvergence metric
+      (distanceConvergenceRespectsPointwise metric
+        (λ n →
+          sym (selectedJPreservesDistances metric
+            (sequence n) limit))
+        (observerConvergenceIntoDistance metric convergence))
+
+  -- Actual original inverse continuity is NOT supplied directly:
+  -- it is DERIVED from the same norm/distance and J's original
+  -- two-sided inverse. Convergence predicates are both controlled
+  -- by ONE DistanceConverges source.
+  originalMatchedDistancesForceInverseLimitContinuity :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    {sequence : Nat → ReconstructedState}
+    {limit : ReconstructedState} →
+    OSConverges source sequence limit →
+    ObserverConverges source
+      (λ n → Clock.decodeObserver clock (sequence n))
+      (Clock.decodeObserver clock limit)
+  originalMatchedDistancesForceInverseLimitContinuity
+      source metric {sequence} {limit} convergence =
+    observerDistanceIntoConvergence metric
+      (distanceConvergenceRespectsPointwise metric
+        (λ n →
+          originalOSDistanceTransportedByDecoder
+            source metric (sequence n) limit)
+        (osConvergenceIntoDistance metric convergence))
+
+  -- Every occurrence of observer pointwise sequence transport also
+  -- follows from this SAME metric-convergence authority.
+  originalMetricObserverLimitPointwiseTransport :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    {sequence other : Nat → ObserverState}
+    {limit : ObserverState} →
+    (∀ n → sequence n ≡ other n) →
+    ObserverConverges source sequence limit →
+    ObserverConverges source other limit
+  originalMetricObserverLimitPointwiseTransport
+      source metric {sequence} {other} {limit}
+      equal convergence =
+    observerDistanceIntoConvergence metric
+      (distanceConvergenceRespectsPointwise metric
+        (λ n → cong
+          (λ x → observerDistance metric x limit)
+          (equal n))
+        (observerConvergenceIntoDistance metric convergence))
+
+  -- The previously required two-sided continuity/domain record is
+  -- now an ACTUAL construction from the original J isometry and
+  -- the single source's metric/distance-to-target topology.
+  originalMetricSourceProducesInverseHilbertContinuity :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source) →
+    OriginalInverseHilbertContinuity source
+  originalMetricSourceProducesInverseHilbertContinuity
+      source metric =
+    record
+      { OriginalInverseHilbertContinuity.decodePreservesStrongLimit =
+          originalMatchedDistancesForceInverseLimitContinuity
+            source metric
+      ; OriginalInverseHilbertContinuity.observerLimitRespectsPointwise =
+          originalMetricObserverLimitPointwiseTransport
+            source metric
+      ; OriginalInverseHilbertContinuity.observerDerivativeDomainComplete =
+          metricObserverDerivativeDomainComplete metric
+      }
+
+  -- Final SOURCE theorem: matched actual selected distance topology
+  -- yields the two-way ORIGINAL observer/OS physical generator
+  -- DOMAIN identification without separately postulating decode
+  -- continuity (even though physical metric/hilbert is missing).
+  originalMatchedMetricSourceForcesTwoSidedGeneratorDomains :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (a : ObserverState) →
+    (ObserverGeneratorDomain source a →
+      OSDomain source (J a))
+    ×
+    (OSDomain source (J a) →
+      ObserverGeneratorDomain source a)
+  originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
+      source metric a =
+    originalObserverOSStrongGeneratorDomainsIff
+      source (originalMetricSourceProducesInverseHilbertContinuity
+        source metric) a
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
