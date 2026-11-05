@@ -251,6 +251,15 @@ open TSVFGenerator public using
   ; PhysicalHbarEnergyConversion
   ; originalSelectedPhysicalEnergyIntertwines
   ; originalForwardKetPhysicalEnergyIntertwines
+  ; ObserverHasStrongDerivative
+  ; OSHasStrongDerivative
+  ; OriginalInverseHilbertContinuity
+  ; originalObserverStrongDifferentiabilityImpliesOS
+  ; originalObserverStrongLimitUniqueFromOS
+  ; originalOSDifferenceQuotientsDecodeToObserver
+  ; originalOSStrongDifferentiabilityImpliesObserver
+  ; originalObserverOSStrongGeneratorDomainsIff
+  ; originalOSDomainGivesOriginalPhysicalEnergyEquality
   )
 
 open TSVFWickFirewall public using
