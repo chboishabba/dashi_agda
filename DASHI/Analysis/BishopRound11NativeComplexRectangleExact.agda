@@ -35,6 +35,7 @@ import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
+import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -528,3 +529,111 @@ round11PhaseSourceAbsoluteConvergent :
 round11PhaseSourceAbsoluteConvergent inputs x =
   AbsRound11.round11ConcreteCosineAbsoluteConvergent inputs x ,
   AbsRound11.round11ConcreteSineAbsoluteConvergent inputs x
+
+
+------------------------------------------------------------------------
+-- FOUR ABSOLUTE-TRIANGLE RECEIPTS ARE NOW BUILT FROM ROUND11.
+-- The nonnegative Cauchy theorem above has only the original
+-- (already owned) absolute sine and cosine series as input.  These
+-- four fields are not synthetic or externally assumed propositions.
+------------------------------------------------------------------------
+
+round11SourceFourAbsoluteTriangles :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  FourAbsoluteTriangles
+    (round11PhaseTerms inputs x)
+    (round11PhaseTerms inputs y)
+round11SourceFourAbsoluteTriangles inputs x y =
+  let
+    left = round11PhaseTerms inputs x
+    right = round11PhaseTerms inputs y
+
+    leftAbs = round11PhaseSourceAbsoluteConvergent inputs x
+    rightAbs = round11PhaseSourceAbsoluteConvergent inputs y
+
+    cosineX = proj₁ leftAbs
+    sineX = proj₂ leftAbs
+    cosineY = proj₁ rightAbs
+    sineY = proj₂ rightAbs
+
+    realAbsoluteLeft = λ n → R.∣ realTerms left n ∣
+    imagAbsoluteLeft = λ n → R.∣ imagTerms left n ∣
+    realAbsoluteRight = λ n → R.∣ realTerms right n ∣
+    imagAbsoluteRight = λ n → R.∣ imagTerms right n ∣
+
+    positiveRealLeft = λ n → RP.nonNeg∣x∣ (realTerms left n)
+    positiveImagLeft = λ n → RP.nonNeg∣x∣ (imagTerms left n)
+    positiveRealRight = λ n → RP.nonNeg∣x∣ (realTerms right n)
+    positiveImagRight = λ n → RP.nonNeg∣x∣ (imagTerms right n)
+  in
+  record
+    { realRealLimit =
+        R._*_ (proj₁ cosineX) (proj₁ cosineY)
+    ; realImagLimit =
+        R._*_ (proj₁ cosineX) (proj₁ sineY)
+    ; imagRealLimit =
+        R._*_ (proj₁ sineX) (proj₁ cosineY)
+    ; imagImagLimit =
+        R._*_ (proj₁ sineX) (proj₁ sineY)
+
+    ; realRealConverges =
+        Positive.positiveCauchyTriangleConverges
+          realAbsoluteLeft realAbsoluteRight
+          positiveRealLeft positiveRealRight
+          cosineX cosineY
+    ; realImagConverges =
+        Positive.positiveCauchyTriangleConverges
+          realAbsoluteLeft imagAbsoluteRight
+          positiveRealLeft positiveImagRight
+          cosineX sineY
+    ; imagRealConverges =
+        Positive.positiveCauchyTriangleConverges
+          imagAbsoluteLeft realAbsoluteRight
+          positiveImagLeft positiveRealRight
+          sineX cosineY
+    ; imagImagConverges =
+        Positive.positiveCauchyTriangleConverges
+          imagAbsoluteLeft imagAbsoluteRight
+          positiveImagLeft positiveImagRight
+          sineX sineY
+    }
+
+-- K05 major upgrade: the ORIGINAL Round11 complex CAUCHY TRIANGLE
+-- now has a source-native proof of convergence to the product, with
+-- NO caller-supplied absolute-triangle convergence interface.
+--
+-- The remaining K05 terminal theorem is coefficient identification:
+-- group the ALL-degree factorial terms, retain the odd/odd boundary
+-- O_N, prove O_N→0, then use uniqueness of original complex limits
+-- to conclude expC(i*(x+y)) = expC(ix)*C expC(iy).
+round11OriginalComplexCauchyTriangleConverges :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  let
+    T = Route.round11MachinTranscendentals inputs
+  in
+  (Seq._ConvergesTo_
+    (λ n →
+      C.re
+        (complexTriangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n))
+    (C.re
+      (C._*C_
+        (C.expC T (C.pureImaginary x))
+        (C.expC T (C.pureImaginary y)))))
+  ×
+  (Seq._ConvergesTo_
+    (λ n →
+      C.im
+        (complexTriangle
+          (round11PhaseTerms inputs x)
+          (round11PhaseTerms inputs y) n))
+    (C.im
+      (C._*C_
+        (C.expC T (C.pureImaginary x))
+        (C.expC T (C.pureImaginary y)))))
+round11OriginalComplexCauchyTriangleConverges inputs x y =
+  round11PhaseTriangleConvergesFromFourAbsoluteTriangles
+    inputs x y (round11SourceFourAbsoluteTriangles inputs x y)
