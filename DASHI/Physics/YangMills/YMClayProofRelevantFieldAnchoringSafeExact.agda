@@ -66,7 +66,7 @@ record AnchoredField
     (chosenOriginalType : Set)
     (selectedObject : PhysicalObject)
     (selectedPhysicalPredicate : PhysicalObject → Set)
-    : Set where
+    : Set₁ where
   constructor anchoredField
   field
     originalEqualsSelectedPhysical :
