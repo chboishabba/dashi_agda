@@ -52,13 +52,13 @@ F_m (N) = chi * volume (m^3) / (2 mu0) * grad[B^2] (T^2/m)
 
 They are **comparison kernels**, not an adequate full pulsed HV/coil Maxwell–matter–mechanics simulation. In particular applied voltage DOES NOT determine local E, tank diameter DOES NOT determine gap, and alpha/chi must be material- and frequency-appropriate. A dielectric insulator can be polarised, so "nonconducting" does not imply "no electromagnetic force."
 
-The script `scripts/check_zhang2025_em_gravity_bidi.py` implements a signed-force interval handoff. It requires paired **ON/OFF** source states sharing apparatus, target, axis, configuration, calibration and instrument, distinct run IDs, explicit raw-hash metadata, and ten separately bounded families:
+The script `scripts/check_zhang2025_em_gravity_bidi.py` implements a signed-force interval handoff. It requires paired **ON/OFF** source states sharing apparatus, target, axis, configuration, calibration and instrument, distinct run IDs, explicit raw-hash metadata, and eleven separately bounded families:
 
 ```
 charge_force, dielectrophoresis, magnetic_gradient,
 time_varying_induction, suspension_and_support,
 mechanical_vibration, thermal_drift, residual_gas_and_ionic_wind,
-rf_instrumentation, radiative_momentum
+rf_instrumentation, radiative_momentum, unmodelled_cross_couplings
 ```
 
 Every bound (including any explicitly justified zero) requires an evidence-receipt locator; the program cannot authenticate that locator. Omission is recorded as `incomplete_ordinary_force_comparator`, NEVER silently set to zero. Each bound is a conservative deterministic interval, not a sigma/significance claim. An entirely bounded model can yield `ordinary_force_interval_compatible` or `candidate_unexplained_signed_force_residual`; the latter is **not** a discovered gravitational field. Explicit synthetic fixtures are always `synthetic_fixture_only`. Raw SHA metadata is not verified against bytes by this script, so source provenance is a separate real-world gate.
@@ -69,7 +69,7 @@ For paired interval observations, `M_on`, `M_off`, and classical model `C_on`, `
 R = (M_on - M_off) - (C_on - C_off)
 ```
 
-All four intervals propagate through subtraction by extrema. A nonzero residual interval requires further ordinary-physics model checks and blinded validation. It does **not** imply tensorial gravitational geometry, negative Newton coupling, unique propulsion or propagating GW. No generated fixture is labeled empirical evidence.
+All four intervals propagate through subtraction by extrema. A nonzero residual interval requires further ordinary-physics model checks and blinded validation. It does **not** imply tensorial gravitational geometry, negative Newton coupling, unique propulsion or propagating GW. No generated fixture is labeled empirical evidence. An explicit catch-all bound for unmodelled and cross-coupling forces is required, but even it does not mathematically prove model completeness.
 
 **Execution:**
 
@@ -78,7 +78,7 @@ python3 -m unittest discover -s tests -p 'test_zhang2025_em_gravity_bidi.py' -v
 python3 scripts/check_zhang2025_em_gravity_bidi.py --input path/to/calibrated_case.json
 ```
 
-Input must declare `data_kind` as `synthetic` or `real_unverified`. Each `on` and `off` is a JSON object with identity metadata, `source_mode`, `channel: signed_force_N`, `measurement: {nominal_N, bound_N, evidence_receipt}`, and a `force_classes` map containing bounded entries for each required mechanism. Rotational-angle videos cannot be fed in as N without an independently measured force/torque calibration.
+Runnable synthetic case: `python3 scripts/check_zhang2025_em_gravity_bidi.py --input tests/fixtures/zhang2025_synthetic_pair.json`. This fixture has **no** real measurement entitlement.\n\nInput must declare `data_kind` as `synthetic` or `real_unverified`. Each `on` and `off` is a JSON object with identity metadata, `source_mode`, `channel: signed_force_N`, `measurement: {nominal_N, bound_N, evidence_receipt}`, and a `force_classes` map containing bounded entries for each required mechanism. Rotational-angle videos cannot be fed in as N without an independently measured force/torque calibration.
 
 ## 3. Agda integration and no-promotion
 
