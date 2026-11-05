@@ -4,9 +4,11 @@ module DASHI.Physics.ExoticGravity.Zhang2025EMGravitySourceClaimExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Unit using (⊤; tt)
+
 
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
+
+data Contradiction : Set where
 
 ------------------------------------------------------------------------
 -- SOURCE FIRST: ONE PATENT FAMILY IS NOT THREE INDEPENDENT EXPERIMENTS.
@@ -49,15 +51,15 @@ data PatentClaimEntitlement : CandidateClaim → Set where
   claimedTargetMotion : PatentClaimEntitlement controlledTargetMotion
 
 patentDoesNotClaimMeasuredMassReduction :
-  PatentClaimEntitlement massReduction → ⊤
+  PatentClaimEntitlement massReduction → Contradiction
 patentDoesNotClaimMeasuredMassReduction ()
 
 patentDoesNotClaimMeasuredGW :
-  PatentClaimEntitlement propagatingGravityWave → ⊤
+  PatentClaimEntitlement propagatingGravityWave → Contradiction
 patentDoesNotClaimMeasuredGW ()
 
 patentDoesNotClaimMeasuredMetric :
-  PatentClaimEntitlement engineeredMetricShift → ⊤
+  PatentClaimEntitlement engineeredMetricShift → Contradiction
 patentDoesNotClaimMeasuredMetric ()
 
 data DocumentaryAuthority : Set where
@@ -148,11 +150,11 @@ data SameClaimConsumer : ScientificConsumer → ScientificConsumer → Set where
   sameConsumer : {c : ScientificConsumer} → SameClaimConsumer c c
 
 motionIsNotMetricConsumer :
-  SameClaimConsumer apparatusMotion metricClock → ⊤
+  SameClaimConsumer apparatusMotion metricClock → Contradiction
 motionIsNotMetricConsumer ()
 
 motionIsNotGWConsumer :
-  SameClaimConsumer apparatusMotion farFieldTTStrain → ⊤
+  SameClaimConsumer apparatusMotion farFieldTTStrain → Contradiction
 motionIsNotGWConsumer ()
 
 ------------------------------------------------------------------------
