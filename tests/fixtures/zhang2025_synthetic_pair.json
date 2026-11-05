@@ -1,0 +1,142 @@
+{
+  "patent_reference": "US12417870B1",
+  "data_kind": "synthetic",
+  "on": {
+    "source_mode": "ON",
+    "apparatus_id": "SYNTHETIC/rig-A",
+    "target_id": "SYNTHETIC/polymer-ball",
+    "force_axis": "SYNTHETIC/x-axis",
+    "configuration_id": "SYNTHETIC/cfg-1",
+    "calibration_id": "SYNTHETIC/cal-1",
+    "instrument_id": "SYNTHETIC/meter-1",
+    "run_id": "fixture-ON",
+    "raw_data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "channel": "signed_force_N",
+    "measurement": {
+      "nominal_N": 2e-9,
+      "bound_N": 1e-10,
+      "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+    },
+    "force_classes": {
+      "charge_force": {
+        "nominal_N": 2e-9,
+        "bound_N": 1e-10,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "dielectrophoresis": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "magnetic_gradient": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "time_varying_induction": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "suspension_and_support": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "mechanical_vibration": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "thermal_drift": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "residual_gas_and_ionic_wind": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "rf_instrumentation": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "radiative_momentum": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      }
+    }
+  },
+  "off": {
+    "source_mode": "OFF",
+    "apparatus_id": "SYNTHETIC/rig-A",
+    "target_id": "SYNTHETIC/polymer-ball",
+    "force_axis": "SYNTHETIC/x-axis",
+    "configuration_id": "SYNTHETIC/cfg-1",
+    "calibration_id": "SYNTHETIC/cal-1",
+    "instrument_id": "SYNTHETIC/meter-1",
+    "run_id": "fixture-OFF",
+    "raw_data_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "channel": "signed_force_N",
+    "measurement": {
+      "nominal_N": 0,
+      "bound_N": 1e-10,
+      "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+    },
+    "force_classes": {
+      "charge_force": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "dielectrophoresis": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "magnetic_gradient": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "time_varying_induction": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "suspension_and_support": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "mechanical_vibration": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "thermal_drift": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "residual_gas_and_ionic_wind": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "rf_instrumentation": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "radiative_momentum": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      }
+    }
+  }
+}
