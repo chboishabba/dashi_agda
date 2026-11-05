@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.ExoticGravity.Zhang2025EMGravityPhysicalPromotionExact where
 
 open import Agda.Builtin.Bool using (Bool; false; true)
@@ -12,6 +11,34 @@ import DASHI.Physics.ExoticGravity.AntigravityExperimentalCutProvenanceExact as 
 import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Promotion
 import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as Calibrated
 import DASHI.Physics.ExoticGravity.AntigravityStrongestConditionalTheoremExact as Strong
+
+------------------------------------------------------------------------
+-- Gravity-consumer routing is downstream of the SAFE documentary core.
+-- It uses existing non-safe legacy comparison owners by their original types.
+------------------------------------------------------------------------
+
+data GravitationalRoute : Zhang.ScientificConsumer → Set where
+  remoteProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.remoteRepulsiveField →
+    GravitationalRoute Zhang.externalTestMass
+  freeFallProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.changedFreeFallResponse →
+    GravitationalRoute Zhang.freeFall
+  metricProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.engineeredMetricResponse →
+    GravitationalRoute Zhang.metricClock
+
+canonicalExternalRoute : GravitationalRoute Zhang.externalTestMass
+canonicalExternalRoute = remoteProbe Anti.remoteRepulsiveField refl
+
+canonicalFreeFallRoute : GravitationalRoute Zhang.freeFall
+canonicalFreeFallRoute = freeFallProbe Anti.changedFreeFallResponse refl
+
+canonicalMetricRoute : GravitationalRoute Zhang.metricClock
+canonicalMetricRoute = metricProbe Anti.engineeredMetricResponse refl
 
 ------------------------------------------------------------------------
 -- NO GENERIC "ANTIGRAVITY" RECEIPT MAY BE CREATED BY A PATENT NUMBER.
@@ -66,29 +93,29 @@ record ExternalFieldEvaluation : Set where
   constructor external-field-evaluation
   field
     comparison : ChinesePatentPhysicalComparison Anti.remoteRepulsiveField
-    discriminator : Zhang.GravitationalRoute Zhang.externalTestMass
+    discriminator : GravitationalRoute Zhang.externalTestMass
     discriminatorIsCanonical :
-      discriminator ≡ Zhang.canonicalExternalRoute
+      discriminator ≡ canonicalExternalRoute
 
 compileExternalFieldEvaluation :
   ChinesePatentPhysicalComparison Anti.remoteRepulsiveField →
   ExternalFieldEvaluation
 compileExternalFieldEvaluation comparison =
-  external-field-evaluation comparison Zhang.canonicalExternalRoute refl
+  external-field-evaluation comparison canonicalExternalRoute refl
 
 record MetricEvaluation : Set where
   constructor metric-evaluation
   field
     comparison : ChinesePatentPhysicalComparison Anti.engineeredMetricResponse
-    discriminator : Zhang.GravitationalRoute Zhang.metricClock
+    discriminator : GravitationalRoute Zhang.metricClock
     discriminatorIsCanonical :
-      discriminator ≡ Zhang.canonicalMetricRoute
+      discriminator ≡ canonicalMetricRoute
 
 compileMetricEvaluation :
   ChinesePatentPhysicalComparison Anti.engineeredMetricResponse →
   MetricEvaluation
 compileMetricEvaluation comparison =
-  metric-evaluation comparison Zhang.canonicalMetricRoute refl
+  metric-evaluation comparison canonicalMetricRoute refl
 
 ------------------------------------------------------------------------
 -- The strongest negative-G interpretation needs an ADDITIONAL constitutive
