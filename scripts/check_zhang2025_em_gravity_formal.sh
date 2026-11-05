@@ -6,6 +6,7 @@ files=(
   DASHI/Physics/ExoticGravity/Zhang2025EMGravitySourceClaimExact.agda
   DASHI/Physics/ExoticGravity/Zhang2025EMGravityPhysicalPromotionExact.agda
   DASHI/Physics/ExoticGravity/Zhang2025EMGravityValidation.agda
+  DASHI/Physics/ExoticGravity/Zhang2025EMGravitySourceSafeValidation.agda
 )
 
 for f in "${files[@]}"; do
@@ -23,6 +24,8 @@ grep -q 'currentSourceHasNoIndependentPhysicalReceipt' "${files[2]}"
 export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$PWD/zhang2025-agda.log}"
 export AGDA_BIN="$PWD/scripts/agda29_without_k_wrapper.sh"
 bash scripts/run_agda29_parallel_check.sh --safe -- \
+  DASHI/Physics/ExoticGravity/Zhang2025EMGravitySourceSafeValidation.agda
+bash scripts/run_agda29_parallel_check.sh -- \
   DASHI/Physics/ExoticGravity/Zhang2025EMGravityValidation.agda
 
 echo 'Zhang source/scope Agda proof validation passed on this exact checkout.'
