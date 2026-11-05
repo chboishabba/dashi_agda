@@ -33,6 +33,7 @@ import Sequence as Seq
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
+import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
@@ -720,3 +721,101 @@ round11ProductFromVanishingGroupedBoundary
       (proj₁ productTriangle) realTriangleToSum)
     (Seq.uniqueness-of-limits
       (proj₂ productTriangle) imagTriangleToSum)
+
+
+------------------------------------------------------------------------
+-- THE ODD/ODD BOUNDARY VANISHES: NO SECOND FACTORIAL TAIL THEOREM.
+--
+-- For grouped pure-imaginary Taylor coefficients:
+--   O_n(x,y) = - Sum_{k<=n} sineTerm(x,k)*sineTerm(y,n-k).
+--
+-- This is MINUS the nth coefficient of the already-convergent
+-- original sine*sine CAUCHY PRODUCT. The pinned Bishop theorem
+-- "∑xₙisConvergent⇒xₙ→0" makes O_n -> 0 unconditionally.
+--
+-- This removes the previous need for an independent explicit
+-- (|x|+|y|)^(2n+2)/(2n+2)! factorial domination proof.
+-- The finite *parity coefficient identity itself* remains required.
+------------------------------------------------------------------------
+
+round11SignedSineCauchyCoefficient :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11SignedSineCauchyCoefficient inputs x y =
+  Row.cauchyCoefficient
+    (imagTerms (round11PhaseTerms inputs x))
+    (imagTerms (round11PhaseTerms inputs y))
+
+round11SignedSineCauchyTriangleConverges :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  Seq._ConvergesTo_
+    (Row.trianglePartial
+      (imagTerms (round11PhaseTerms inputs x))
+      (imagTerms (round11PhaseTerms inputs y)))
+    (R._*_
+      (C.im (C.expC T (C.pureImaginary x)))
+      (C.im (C.expC T (C.pureImaginary y))))
+round11SignedSineCauchyTriangleConverges inputs x y =
+  let
+    T = Route.round11MachinTranscendentals inputs
+    left = round11PhaseTerms inputs x
+    right = round11PhaseTerms inputs y
+    convergenceLeft = round11PhaseSeriesConvergesToOriginalExp inputs x
+    convergenceRight = round11PhaseSeriesConvergesToOriginalExp inputs y
+    absolute = round11SourceFourAbsoluteTriangles inputs x y
+  in
+  Generic.cauchyTriangleConvergesToActualProduct
+    (imagTerms left) (imagTerms right)
+    (C.im (C.expC T (C.pureImaginary x)))
+    (C.im (C.expC T (C.pureImaginary y)))
+    (imagImagLimit absolute)
+    (proj₂ convergenceLeft)
+    (proj₂ convergenceRight)
+    (imagImagConverges absolute)
+
+round11SignedSineCauchyCoefficientConvergesZero :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  Seq._ConvergesTo_
+    (round11SignedSineCauchyCoefficient inputs x y)
+    R.0ℝ
+round11SignedSineCauchyCoefficientConvergesZero inputs x y =
+  let
+    T = Route.round11MachinTranscendentals inputs
+    coefficients = round11SignedSineCauchyCoefficient inputs x y
+    productLimit =
+      R._*_
+        (C.im (C.expC T (C.pureImaginary x)))
+        (C.im (C.expC T (C.pureImaginary y)))
+    triangleIsSeriesLimit =
+      Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+        (λ {(suc n) →
+          FinSum.finSumIsSeriesOf coefficients (suc n)})
+        (productLimit ,
+          round11SignedSineCauchyTriangleConverges inputs x y)
+  in
+  Seq.∑xₙisConvergent⇒xₙ→0
+    coefficients (productLimit , triangleIsSeriesLimit)
+
+round11OddOddCorrection :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11OddOddCorrection inputs x y n =
+  R.-_ (round11SignedSineCauchyCoefficient inputs x y n)
+
+round11OddOddCorrectionConvergesZero :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  Seq._ConvergesTo_
+    (round11OddOddCorrection inputs x y)
+    R.0ℝ
+round11OddOddCorrectionConvergesZero inputs x y =
+  Seq.xₙ→x∧x≃y⇒xₙ→y
+    (Seq.-xₙ→-x₀
+      (R.0ℝ ,
+        round11SignedSineCauchyCoefficientConvergesZero
+          inputs x y))
+    (RP.≃-symm RP.0≃-0)
