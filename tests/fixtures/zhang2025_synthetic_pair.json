@@ -67,6 +67,11 @@
         "nominal_N": 0,
         "bound_N": 0,
         "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "unmodelled_cross_couplings": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
       }
     }
   },
@@ -133,6 +138,11 @@
         "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
       },
       "radiative_momentum": {
+        "nominal_N": 0,
+        "bound_N": 0,
+        "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
+      },
+      "unmodelled_cross_couplings": {
         "nominal_N": 0,
         "bound_N": 0,
         "evidence_receipt": "SYNTHETIC-only fixture: not a physical measurement"
