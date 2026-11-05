@@ -27,7 +27,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (Σ; _×_; _,_)
+open import Data.Product using (Σ; _×_; _,_; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import DASHI.Quantum.TSVF as TSVF
@@ -828,6 +828,105 @@ module _
       source conversion core n
       (TSVF.forwardState E)
       (originalSelectedForwardKetInDomain source)
+
+  ------------------------------------------------------------------------
+  -- P07.L07 FULL GRAPH BIDI (not only a ket, not merely one direction).
+  --
+  -- Once the original selected Hilbert metric supplies the real
+  -- strong-derivative domains and complex-linear energy comparison,
+  -- prove equality of WHOLE ENERGY OPERATOR GRAPHS under the old J:
+  --
+  --   (psi,Hobs psi) ∈ graph(Hobs)
+  --      iff (J psi,HOS J psi) ∈ graph(HOS).
+  --
+  -- The reverse direction uses the original decodeEmbed identity to
+  -- reflect operator equality, rather than asserting faithfulness
+  -- as an extra chosen H field. A mathematically valid operator-graph
+  -- isomorphism is not yet a self-adjoint spectral calculus or a
+  -- physically inhabited selected quantum Hilbert.
+  ------------------------------------------------------------------------
+
+  OriginalObserverEnergyGraph :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    ObserverState → ObserverState → Set
+  OriginalObserverEnergyGraph source conversion a b =
+    ObserverGeneratorDomain source a
+    × (observerPhysicalEnergyOperator conversion a ≡ b)
+
+  OriginalOSEnergyGraph :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    ReconstructedState → ReconstructedState → Set
+  OriginalOSEnergyGraph source conversion x y =
+    OSDomain source x
+    ×
+    (originalOSPhysicalEnergyOperator conversion
+       (OS.hamiltonian reconstruction) x ≡ y)
+
+  originalPhysicalEnergyGraphForward :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (a b : ObserverState) →
+    OriginalObserverEnergyGraph source conversion a b →
+    OriginalOSEnergyGraph source conversion (J a) (J b)
+  originalPhysicalEnergyGraphForward
+      source conversion a b (inDomain , energyEquals) =
+    mappedDomain source a inDomain ,
+    trans
+      (sym (originalSelectedPhysicalEnergyIntertwines
+        source conversion a inDomain))
+      (cong J energyEquals)
+
+  originalPhysicalEnergyGraphBackward :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (a b : ObserverState) →
+    OriginalOSEnergyGraph source conversion (J a) (J b) →
+    OriginalObserverEnergyGraph source conversion a b
+  originalPhysicalEnergyGraphBackward
+      source metric conversion a b (osDomain , osEnergyEquals) =
+    let
+      observerDomain : ObserverGeneratorDomain source a
+      observerDomain =
+        proj₂
+          (originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
+            source metric a)
+          osDomain
+    in
+    observerDomain ,
+    trans
+      (sym (Clock.decodeEmbed clock
+        (observerPhysicalEnergyOperator conversion a)))
+      (trans
+        (cong (Clock.decodeObserver clock)
+          (trans
+            (originalSelectedPhysicalEnergyIntertwines
+              source conversion a observerDomain)
+            osEnergyEquals))
+        (Clock.decodeEmbed clock b))
+
+  -- This is an actual TWO-DIRECTIONAL theorem of matched physical
+  -- energy-operator GRAPHS for every original state on the sourced
+  -- domain. Physical validity remains conditional on the
+  -- independently measured complete Hilbert topology and
+  -- selected reconstructed operator meaning.
+  originalMatchedPhysicalEnergyGraphsBidi :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (a b : ObserverState) →
+    (OriginalObserverEnergyGraph source conversion a b →
+      OriginalOSEnergyGraph source conversion (J a) (J b))
+    ×
+    (OriginalOSEnergyGraph source conversion (J a) (J b) →
+      OriginalObserverEnergyGraph source conversion a b)
+  originalMatchedPhysicalEnergyGraphsBidi
+      source metric conversion a b =
+    originalPhysicalEnergyGraphForward source conversion a b ,
+    originalPhysicalEnergyGraphBackward
+      source metric conversion a b
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
