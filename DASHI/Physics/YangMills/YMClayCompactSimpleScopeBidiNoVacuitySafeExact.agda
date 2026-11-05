@@ -32,6 +32,9 @@ module DASHI.Physics.YangMills.YMClayCompactSimpleScopeBidiNoVacuitySafeExact wh
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 
+cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+cong f refl = refl
+
 data Empty : Set where
 
 data Unit : Set where
