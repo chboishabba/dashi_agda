@@ -10,6 +10,10 @@ import DASHI.Cognition.CaveTraumaNonErasingReopeningExact
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact
 import DASHI.Cognition.CCDCOECognitiveMultiplexInvariantExact
 import DASHI.Cognition.CCDCOECognitiveMultiplexInvariantRegression
+import DASHI.Cognition.CCDCOEMultiplexGraphCutCoreExact
+import DASHI.Cognition.CCDCOEFiveLayerCertifiedCutExact
+import DASHI.Cognition.CCDCOEQueryPNFEvidenceBridgeExact
+import DASHI.Cognition.CCDCOEPersonalHolonomyBoundaryExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
