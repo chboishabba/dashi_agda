@@ -25,7 +25,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 -- No unrelated finite clock fixture or arbitrary physical promotion.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
@@ -725,6 +725,109 @@ module _
     originalObserverOSStrongGeneratorDomainsIff
       source (originalMetricSourceProducesInverseHilbertContinuity
         source metric) a
+
+  ------------------------------------------------------------------------
+  -- P07.L07: the same ORIGINAL observer/OS physical energy operator
+  -- is intertwined at EVERY FINITE OPERATOR POWER on the selected
+  -- common invariant core. Unlike the single-forward-ket equality,
+  -- this works simultaneously for every vector in the source domain.
+  --
+  -- This is algebraic polynomial-moment transport, NOT a spectral
+  -- projection theorem: an actual self-adjoint spectral calculus,
+  -- approximation topology, OS Hilbert norm and mass-gap bounds are
+  -- still missing real physical hypotheses.
+  ------------------------------------------------------------------------
+
+  record OriginalInvariantPhysicalEnergyCore
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source)
+      : Set₁ where
+    field
+      originalObserverEnergyPreservesDomain :
+        ∀ a →
+        ObserverGeneratorDomain source a →
+        ObserverGeneratorDomain source
+          (observerPhysicalEnergyOperator conversion a)
+
+  open OriginalInvariantPhysicalEnergyCore public
+
+  originalPhysicalEnergyPowersStayOnSelectedDomain :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalInvariantPhysicalEnergyCore source conversion)
+    (n : Nat)
+    (a : ObserverState)
+    (inDomain : ObserverGeneratorDomain source a) →
+    ObserverGeneratorDomain source
+      (Clock.iterate n
+        (observerPhysicalEnergyOperator conversion) a)
+  originalPhysicalEnergyPowersStayOnSelectedDomain
+      source conversion core zero a inDomain = inDomain
+  originalPhysicalEnergyPowersStayOnSelectedDomain
+      source conversion core (suc n) a inDomain =
+    originalObserverEnergyPreservesDomain core
+      (Clock.iterate n
+        (observerPhysicalEnergyOperator conversion) a)
+      (originalPhysicalEnergyPowersStayOnSelectedDomain
+        source conversion core n a inDomain)
+
+  -- Every finite energy polynomial monomial now commutes with the
+  -- SAME original observer embedding, on the physically declared
+  -- invariant domain. The proof iterates a PREVIOUSLY DERIVED
+  -- original H intertwinement, rather than requiring a new H^n axiom.
+  originalPhysicalEnergyPowersIntertwine :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalInvariantPhysicalEnergyCore source conversion)
+    (n : Nat)
+    (a : ObserverState)
+    (inDomain : ObserverGeneratorDomain source a) →
+    J (Clock.iterate n
+        (observerPhysicalEnergyOperator conversion) a)
+    ≡
+    Clock.iterate n
+      (originalOSPhysicalEnergyOperator conversion
+        (OS.hamiltonian reconstruction))
+      (J a)
+  originalPhysicalEnergyPowersIntertwine
+      source conversion core zero a inDomain = refl
+  originalPhysicalEnergyPowersIntertwine
+      source conversion core (suc n) a inDomain =
+    trans
+      (originalSelectedPhysicalEnergyIntertwines
+        source conversion
+        (Clock.iterate n
+          (observerPhysicalEnergyOperator conversion) a)
+        (originalPhysicalEnergyPowersStayOnSelectedDomain
+          source conversion core n a inDomain))
+      (cong
+        (originalOSPhysicalEnergyOperator conversion
+          (OS.hamiltonian reconstruction))
+        (originalPhysicalEnergyPowersIntertwine
+          source conversion core n a inDomain))
+
+  -- This specialisation uses the ACTUAL original TSVF selected
+  -- forward ket. The result is still source-conditional on the
+  -- complete operator domain, not a proof of a finite or Clay gap.
+  originalSelectedForwardKetEnergyPowersIntertwine :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalInvariantPhysicalEnergyCore source conversion)
+    (n : Nat) →
+    J (Clock.iterate n
+        (observerPhysicalEnergyOperator conversion)
+        (TSVF.forwardState E))
+    ≡
+    Clock.iterate n
+      (originalOSPhysicalEnergyOperator conversion
+        (OS.hamiltonian reconstruction))
+      (J (TSVF.forwardState E))
+  originalSelectedForwardKetEnergyPowersIntertwine
+      source conversion core n =
+    originalPhysicalEnergyPowersIntertwine
+      source conversion core n
+      (TSVF.forwardState E)
+      (originalSelectedForwardKetInDomain source)
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
