@@ -1,0 +1,78 @@
+module DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact as Hardening
+
+legacyHZetaStoresObligationTypesOnly :
+  Hardening.legacyHZetaRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyHZetaStoresObligationTypesOnly = refl
+
+legacyMultiplicityDimensionStoresTypeOnly :
+  Hardening.legacyMultiplicityDimensionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyMultiplicityDimensionStoresTypeOnly = refl
+
+legacyHomIntertwinerStoresTypeOnly :
+  Hardening.legacyHomIntertwinerIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyHomIntertwinerStoresTypeOnly = refl
+
+legacyConstituentElementStoresTypeOnly :
+  Hardening.legacyConstituentElementIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyConstituentElementStoresTypeOnly = refl
+
+legacyConstituentAttachmentStoresTypeOnly :
+  Hardening.legacyConstituentAttachmentIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyConstituentAttachmentStoresTypeOnly = refl
+
+legacyZetaBasisRecognitionStoresTypeOnly :
+  Hardening.legacyZetaBasisRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyZetaBasisRecognitionStoresTypeOnly = refl
+
+legacyMultiplicityBasisStoresTypeOnly :
+  Hardening.legacyMultiplicityBasisRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyMultiplicityBasisStoresTypeOnly = refl
+
+legacyBasisVectorCompatibilityStoresTypeOnly :
+  Hardening.legacyWZetaBasisVectorRecognitionIsProofRelevant Hardening.canonicalBoundary ≡ false
+legacyBasisVectorCompatibilityStoresTypeOnly = refl
+
+paidHZetaWrapperRequiresWitnesses :
+  Hardening.paidHZetaRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidHZetaWrapperRequiresWitnesses = refl
+
+paidMultiplicityWrapperRequiresWitnesses :
+  Hardening.paidMultiplicityRouteWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidMultiplicityWrapperRequiresWitnesses = refl
+
+paidConstituentElementWrapperRequiresWitnesses :
+  Hardening.paidConstituentElementWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidConstituentElementWrapperRequiresWitnesses = refl
+
+paidConstituentListWrapperRequiresWitnesses :
+  Hardening.paidConstituentListWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidConstituentListWrapperRequiresWitnesses = refl
+
+paidConstituentWrapperRequiresWitnesses :
+  Hardening.paidConstituentAttachmentWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidConstituentWrapperRequiresWitnesses = refl
+
+paidHomWrapperRequiresWitnesses :
+  Hardening.paidHomIntertwinerWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidHomWrapperRequiresWitnesses = refl
+
+paidZetaBasisWrapperRequiresWitnesses :
+  Hardening.paidZetaBasisRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidZetaBasisWrapperRequiresWitnesses = refl
+
+paidMultiplicityBasisWrapperRequiresWitnesses :
+  Hardening.paidMultiplicityBasisRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidMultiplicityBasisWrapperRequiresWitnesses = refl
+
+paidBasisVectorWrapperRequiresWitnesses :
+  Hardening.paidWZetaBasisVectorRecognitionWrapperAvailable Hardening.canonicalBoundary ≡ true
+paidBasisVectorWrapperRequiresWitnesses = refl
+
+noPromotionFromTypedObligationAlone :
+  Hardening.typedObligationAlonePaysRecognition Hardening.canonicalBoundary ≡ false
+noPromotionFromTypedObligationAlone = refl
