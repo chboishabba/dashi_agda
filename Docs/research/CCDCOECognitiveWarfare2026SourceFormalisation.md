@@ -142,3 +142,100 @@ G6. Keep the later CCDCOE personal-holonomy model as a *separate*
 
 Source assertions, mathematical witnesses, candidate explanations, and
 real-world attributions must remain distinct authority classes.
+
+## 2026-11-06 exact max-cut (PR #1467)
+
+**Implementation status: SOURCE-WRITTEN, NO AGDA KERNEL RECEIPT.**
+The source audit has been rechecked against the attached 6m24s SRT,
+the actual original CCDCOE April-2026 PDF (sections 5.1–5.4), and
+the authors' later individual-agent paper. Explicit no-promotion
+boundaries are preserved.
+
+### Reused prior art, not reimplemented
+
+- `DASHI.Core.IntersectionalNonFactorability`: every observer inadequacy
+  witness uses the **existing** `NonFactorabilityWitness` and
+  `FactorsThrough` definitions.
+- `DASHI.Core.QueryIndexedProjectionAdequacyExact`: one outward
+  observation is adequate for outward function and demonstrably
+  inadequate for inter-layer integrity and provenance.
+- `DASHI.Core.AttributedSourceCore`: research-paper attribution.
+- `DASHI.Cognition.PNF.EventAlgebra`: actual `EventPNF`,
+  `CandidatePNF`, revision and temporal coordinates.
+- `DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact` and
+  `CognitiveWarfarePlatoTraumaDetectorWeldExact`: existing noncausal
+  provenance, action cone and coherence/truth firewalls.
+- `DASHI.Cognition.PlatoCaveTraumaMemoryDecisionBridgeExact`:
+  source-native refinements are conceptually separate from Plato
+  metaphors or claims to possess 'ultimate truth'.
+
+### Source-written mathematical deliverables
+
+| Gate | New owner/proof | Exact result / limit |
+| --- | --- | --- |
+| M1 generic multiplex | `CCDCOEMultiplexGraphCutCoreExact` | Common actor carrier, two types of typed edges, arbitrary proof-bearing walks and concatenation, retained-edge partition and disconnection theorem |
+| M2 five-layer cut | `CCDCOEFiveLayerCertifiedCutExact` | All original intra-layer links survive; exhaustive interlayer constructors certify a genuine cut separating epistemic from teleological layers, for **both actors** |
+| M3 alternate-path safety | `scripts/check_ccdcoe_cognitive_multiplex.py` | Exhaustive 16 connector masks × four ordered actor pairs; bypass edge must *invalidate* cut certificate |
+| M4 query sufficiency | `CCDCOEQueryPNFEvidenceBridgeExact` | Source-native `QuerySemantics` shows outward observer sufficient for function, insufficient for connectivity/provenance; recharting cannot restore lost information |
+| M5 PNF interface | `EvidenceOf About episode question` | Actual PNF event and candidate, plus **application-provided typed `About` proof**; existing event/observation time and revision-retention fields reused, no synthetic observation promoted |
+| M6 personal context | `CCDCOEPersonalHolonomyBoundaryExact` | Different loop transport under unchanged public role; finite non-factorability and no hostile-origin inference |
+| M7 old example | `CCDCOECognitiveMultiplexInvariantExact` + regression | Boolean selected-path cut, independent origin/architecture, abstract repair and bounds |
+
+### Why this is stronger than the previous four-edge example
+
+A broken **specified path** does not imply graph disconnection when
+alternative routes exist. The generic theorem first supplies a
+partition map `side : V → Bool`, then requires every surviving
+edge to be certified same-side. Only then can *any* walk from a
+true-side node to a false-side node be ruled out. The five-layer
+case discharges this stronger edge-by-edge obligation by exhaustive
+constructor pattern matching. The Python counterexample adds a
+cross-partition bypass edge: the certificate fails and reachability
+returns.
+
+```text
+path missing != graph disconnected
+every surviving edge side-preserving + endpoints opposite sides
+    => no surviving path can join endpoints
+```
+
+### Exact still-open gates (do NOT claim completion)
+
+| Gate | Remaining acceptance evidence | Why the graph proofs do not pay it |
+| --- | --- | --- |
+| KERNEL | `agda -i .` compile each new module, regression, and cognition umbrella, inspect CI and use explicit `--safe` where dependency graph permits | No Agda executable or CI kernel receipt accessible in this pass |
+| MEASURE | independently measured, appropriately sampled, time-stamped layer membership, edge existence, confidence/uncertainty, and criterion-valid group-level indicators | Synthetic complete intra-layer relations do not represent measured networks |
+| CAUSAL | longitudinal/experimental, confounder-sensitive discrimination between voluntary change, institutional failure, external influence, hostile intention, and independently verified events | Four-episode counterexample proves an identification **impossibility** from structural state alone |
+| PNF-PRODUCER | source-licensed original `EventPNF` and `CandidatePNF` for a **specific** publicly inspectable event with typed `About` witness and revisable lineage | A contract requiring evidence is not an actual ingested evidence record |
+| HUMAN | establish that observed decisions across real contexts are faithfully represented by a selected personal state/connection, and that holonomy transport is empirically meaningful | Two-state finite loop is mathematical analogy, not psychological measurement |
+| INTERVENTION | consent, privacy, pluralism, reversible action, effectiveness, adverse effects and independent oversight in a declared setting | `abstractRepair` is only a mathematical map that resets an edge |
+| EXTERNAL | distinguish CCDCOE original systemic paper, later human-agent/companion work, presenter commentary, and DASHI theorems in every claim | Citation, interpretation, and proof are different authority types |
+
+### Falsifiability and ethical requirements for any real-world extension
+
+A legitimate observational study must define its sampling frame and
+decision-process outcomes first, collect only proportionate,
+consent-governed **aggregate procedural** observations, pre-register
+the connectivity indicator and negative controls, test stability
+under measurement error, and explicitly measure alternative
+explanations. Do not operationalise the model as surveillance,
+psychological classification of individuals, or a label for dissent.
+No manipulation of participant beliefs is required or authorised
+by the formal programme.
+
+### Regression commands
+
+```sh
+python3 scripts/check_ccdcoe_cognitive_multiplex.py
+agda -i . DASHI/Cognition/CCDCOEMultiplexGraphCutCoreExact.agda
+agda -i . DASHI/Cognition/CCDCOEFiveLayerCertifiedCutExact.agda
+agda -i . DASHI/Cognition/CCDCOEQueryPNFEvidenceBridgeExact.agda
+agda -i . DASHI/Cognition/CCDCOEPersonalHolonomyBoundaryExact.agda
+agda -i . DASHI/Cognition/CCDCOECognitiveMultiplexInvariantRegression.agda
+agda -i . DASHI/Cognition/Everything.agda
+```
+
+Until an actual successful Agda run is recorded, the formal status
+is **source-written, not kernel-verified**. A successful finite
+Python test is not an Agda proof receipt, and neither establishes
+empirical cognitive warfare.
