@@ -36,6 +36,7 @@ import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
+import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
 import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
 import DASHI.Physics.YangMills.BalabanBishopConcreteSineCosineTermParityExact as Concrete
 import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
@@ -637,3 +638,85 @@ round11OriginalComplexCauchyTriangleConverges :
 round11OriginalComplexCauchyTriangleConverges inputs x y =
   round11PhaseTriangleConvergesFromFourAbsoluteTriangles
     inputs x y (round11SourceFourAbsoluteTriangles inputs x y)
+
+
+------------------------------------------------------------------------
+-- TERMINAL K05 LIMIT-UNIQUENESS COMPILER.
+--
+-- The last genuinely new K05 analytic input has been reduced to the
+-- TWO actual Bishop convergences of the grouped finite signed
+-- Cauchy triangle minus the original source phase series at x+y.
+-- The grouped factorial parity identity must show these differences
+-- are the odd/odd correction O_(n-1), then show it vanishes.
+--
+-- Both other limits are now source-native Round11 proofs.  Thus the
+-- target imaginary exponent multiplication is produced without an
+-- independent multiplication-authority or abstract complex limit.
+------------------------------------------------------------------------
+
+round11GroupedBoundaryReal :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11GroupedBoundaryReal inputs x y n =
+  R._-_
+    (C.re
+      (complexTriangle
+        (round11PhaseTerms inputs x)
+        (round11PhaseTerms inputs y) n))
+    (C.re
+      (complexFinitePartial
+        (round11PhaseTerms inputs (R._+_ x y)) n))
+
+round11GroupedBoundaryImag :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11GroupedBoundaryImag inputs x y n =
+  R._-_
+    (C.im
+      (complexTriangle
+        (round11PhaseTerms inputs x)
+        (round11PhaseTerms inputs y) n))
+    (C.im
+      (complexFinitePartial
+        (round11PhaseTerms inputs (R._+_ x y)) n))
+
+round11ProductFromVanishingGroupedBoundary :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  Seq._ConvergesTo_
+    (round11GroupedBoundaryReal inputs x y) R.0ℝ →
+  Seq._ConvergesTo_
+    (round11GroupedBoundaryImag inputs x y) R.0ℝ →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  C._≈C_
+    (C._*C_
+      (C.expC T (C.pureImaginary x))
+      (C.expC T (C.pureImaginary y)))
+    (C.expC T (C.pureImaginary (R._+_ x y)))
+round11ProductFromVanishingGroupedBoundary
+    inputs x y realBoundaryZero imagBoundaryZero =
+  let
+    sourceAtSum =
+      round11PhaseSeriesConvergesToOriginalExp
+        inputs (R._+_ x y)
+    productTriangle =
+      round11OriginalComplexCauchyTriangleConverges inputs x y
+
+    realTriangleToSum =
+      Vanish.vanishingDifferenceConvergence
+        (proj₁ sourceAtSum)
+        realBoundaryZero
+        (λ index → RP.≤-refl)
+
+    imagTriangleToSum =
+      Vanish.vanishingDifferenceConvergence
+        (proj₂ sourceAtSum)
+        imagBoundaryZero
+        (λ index → RP.≤-refl)
+  in
+  C.complex-equivalent
+    (Seq.uniqueness-of-limits
+      (proj₁ productTriangle) realTriangleToSum)
+    (Seq.uniqueness-of-limits
+      (proj₂ productTriangle) imagTriangleToSum)
