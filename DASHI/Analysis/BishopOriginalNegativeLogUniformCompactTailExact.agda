@@ -24,6 +24,7 @@ import Data.Nat.Base as N using (NonZero; _≤_; _≥_)
 import Data.Nat.Properties as NP
 open import Data.Product.Base using (proj₁; proj₂; _,_)
 open import Data.Sum.Base using (inj₁; inj₂)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as R
 import RealProperties as RP
@@ -163,8 +164,10 @@ sourceLogFinitePartialMinusIsTail :
       (Seq.SeriesOf (Log.sourceNegativeLogTerm point) m))
     (Seq.∑ (Log.sourceNegativeLogTerm point) m n)
 sourceLogFinitePartialMinusIsTail point zero n =
-  RP.-identityʳ
-    (Seq.SeriesOf (Log.sourceNegativeLogTerm point) n)
+  let open RP.ℝ-Solver in
+  solve 1
+    (λ prefix → prefix ⊖ Κ 0ℚᵘ ⊜ prefix)
+    RP.≃-refl (Seq.SeriesOf (Log.sourceNegativeLogTerm point) n)
 sourceLogFinitePartialMinusIsTail point (suc m) n =
   RP.≃-refl
 
