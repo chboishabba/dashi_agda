@@ -75,10 +75,10 @@ literalToCook :
   CNF.Literal width →
   Cook.BooleanFormula
 literalToCook (CNF.positive index) =
-  Cook.variable (Fin.toℕ index)
+  Cook.formulaVar (Fin.toℕ index)
 literalToCook (CNF.negative index) =
   Cook.negate
-    (Cook.variable (Fin.toℕ index))
+    (Cook.formulaVar (Fin.toℕ index))
 
 clauseToCook :
   ∀ {width : Nat} →
