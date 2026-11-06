@@ -214,8 +214,8 @@ data TwelveRole : Set where
   suzukiDegreeTwelve : TwelveRole
   heisenbergSixPlusSix : TwelveRole
 
-open import Agda.Builtin.Unit using (⊤)
+open import Data.Empty using (⊥)
 
 distinctTwelveRoles :
-  coxeterInvolutionAlphabet ≡ suzukiDegreeTwelve → ⊤
+  coxeterInvolutionAlphabet ≡ suzukiDegreeTwelve → ⊥
 distinctTwelveRoles ()
