@@ -472,3 +472,102 @@ provenance is preserved.
 
 This is an evidence/reuse audit, **not a new Agda kernel acceptance
 receipt** or a claim that the outstanding coefficient theorem is proved.
+
+
+## 2026-11-06 — terminal K05 signed binomial source and fail-closed CI coverage
+
+Current golden PR: [#1408](https://github.com/chboishabba/dashi_agda/pull/1408).
+The initial audited head for this continuation was
+`51a5a494330c2768637a8024a9c47eebd142a937`.
+Follow-up workflow coverage change: `d5e0dc7991741b7bc6c69586ccf77d978a70efd3`.
+
+### K05: no longer list the two finite convolution identities as unimplemented
+
+The new `DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda`
+implements actual proof **terms**, not propositional placeholders, for:
+
+- `originalEvenSignedFactorialDegree`: for every `n`,
+  `C_n(c_x,c_y) - C_(n-1)(s_x,s_y) ≃ c_n(x+y)`, with
+  `C_(-1)=0` and an explicit degree-zero case;
+- `originalOddSignedFactorialDegree`: for every `n`,
+  `C_n(c_x,s_y) + C_n(s_x,c_y) ≃ s_n(x+y)`;
+- `originalImaginaryExponentialMultiplicative`: same original Round11
+  `expC(ix)*expC(iy) ≈C expC(i(x+y))`, via the existing
+  `round11ProductFromOriginalFactorialDegreeSplits` limit/telescope;
+- `originalSineCosineAdditionFromNativeFactorials`: both source-bound
+  trig addition laws, as consumers of that same imaginary product.
+
+The upstream `BishopUnsignedFactorialCauchyParitySplitExact` pays the
+even/odd unsigned Cauchy reindex; `BishopSignTwistedFiniteCauchyCoefficientExact`
+pays `(-1)^k(-1)^(n-k)=(-1)^n` on bounded Fin indices; and
+`BishopRound11SignedFactorialExponentEncodingExact` identifies the
+original signed sine/cosine factorial terms with the selected exponential
+coefficients. The independent original Round11 complex Cauchy convergence
+and odd/odd boundary vanishing remain sourced by
+`BishopRound11NativeComplexRectangleExact`.
+
+**Status: source-composed, kernel-pending.** None of these four theorem
+claims is promoted to accepted until Agda 2.9 checks the precise new
+head and the transitive TOE roots. The 49 exact bivariate rational
+polynomial degrees checked by `scripts/check_k05_symbolic_grouped.py
+--through-degree 48` (and separately spot-tested rational examples)
+are regression evidence, *not* an all-index proof.
+
+### K04d-LOG: true outstanding identity
+
+The `BishopNegativeLogExponentialReciprocalFromCancellationExact`
+module already proves exp(L(x))*exp(-L(x)) ≃ 1 and that a witness to
+exp(-L(x)) ≃ 1-x forces exp(L(x)) to be the genuine Bishop inverse of
+1-x. Its *required native input* remains the canonical same-series
+identity
+`Exp.bishopExp (- Log.sourceNegativeLogValue x ...) ≃ 1 - x`
+for every `0<x<1`. Specialize at the original
+`natLogArgument n`, retain the canonical negative-log dataset
+same-object weld, then construct the positive Nat-successor exponential
+inverse. Merely choosing a canonical dataset is not the analytic proof.
+
+### K04d-CONTINUITY: input and same-object gates
+
+`BishopFinitePowerSeriesSequentialContinuityExact` and
+`BishopUniformLimitSequentialContinuityExact` supply source-written
+finite/limit continuity machinery;
+`BishopOriginalCompletedZetaUniformChartContinuityExact` gives the
+selected completed-zeta **conditional compiler**. Still instantiate
+the actual finite `exp_C(-s L_n)` continuity family on the chart,
+prove the original half-plane `OriginalHalfPlaneDirichletAgreement`
+on the same function, and discharge the selected completed-zeta
+agreement rather than a replacement witness.
+
+### K05-PI: original trigonometric semantics and least zero
+
+`BishopMachinQuarterAngleBranchExact` proves a rational tangent
+parameter and a strict quarter interval; it does **not** prove that
+the actual Bishop sine/cosine tangent equals that parameter. Prove
+`quarterCos inputs ≃ quarterSin inputs` for the original atan-derived
+quarter; then feed the K05 product-derived double-angle proof to the
+existing `BishopMachinFirstPositiveSineZeroFromNativePhaseExact`.
+Its explicit `NativeSinePositiveBeforeMachinPi` (all `0<x<pi_M`)
+is a further independent sign/least-zero premise. A period or endpoint
+zero alone cannot justify uniqueness.
+
+### Exact verification status and reproducibility
+
+The prior GitHub query returned **no associated pull-request Actions
+workflow run for head** `51a5a494330c2768637a8024a9c47eebd142a937`
+and no accepted compiler receipt. Local runtime has `git` but no
+`agda`, and external GitHub cloning is unavailable in that runtime.
+The CI coverage commit `d5e0dc7991741b7bc6c69586ccf77d978a70efd3`
+extends the focused `--safe` list to the terminal signed binomial
+theorem and ten original negative-log, Dirichlet, phase, first-zero,
+and selected-zeta consumer modules. Its own success has **not** been
+observed and must not be inferred from workflow existence.
+
+Next strict check: resolve the branch's pinned Agda executable, run
+`.github/workflows/bishop-k04d-k05-native-proof.yml` at its exact
+commit, collect `bishop-focused-kernel.log` and
+`bishop-toe-kernel.log`, fix *actual* first elaboration diagnostics,
+then recheck all three TOE roots. The current labels remain:
+K05 **source-composed/kernel-open**, K04d-LOG **mathematically open**,
+K04d-CONTINUITY **mathematically open**,
+K05-PI **mathematically open**. No RH or other Millennium problem is
+claimed.
