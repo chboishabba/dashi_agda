@@ -1,6 +1,23 @@
 # #1460 unification TODO — Pareto source construction and fail-closed acceptance
 
-**Four-cut source-producing proof queue:** [40 proposed exact OBS/HIL/KK/BIDI theorems](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
+**Four-cut source-producing proof queue:** [39 named exact OBS/HIL/KK/BIDI producer lemmas](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
+
+## 6 November 2026 — current exact max-cut / ownership and evidence
+
+**39 named** source-producing OBS/HIL/KK/BIDI obligations (10+12+9+8) are now fully inventoried and crosswalked to the existing 48 phased deliverables and 186 canonical source IDs. Audit: `scripts/check_tsfv_39_physical_producer_inventory_20261106.py`. **This is an exact inventory, not a proof that the 39 physical statements have been fulfilled.**
+
+**Source-written child proof progress:** [x] original finite TSVF intervention and ordered commutator; [x] original selected forward-ket conditional normalization/additivity/homogeneity and (A^\dagger A) norm; [x] exact native original Wilson R445 all-word and now **reflected all-word real Gram** pushforward; [x] original QuantumSurface singleton nonpromotion and positive-Gibbs-weight/not-necessarily-OS-RP no-go; [x] nonflat sourced AdS4×S1 Einstein–scalar test and original selected KK horizontal identity *conditional on observer measurement*. All remain **KERNEL_OPEN** unless an exact-head `parallel_checker` record is produced.
+
+**Latest independent YM donor #1444 (do not mutate):** actual original two-plaquette marked source, whole normalized native Wilson R445 pushforward, interacting 64-pair/896-spectator fibre effective source, original native Wilson OS **reflected quadratic** pullback (which specifically still requires original fine Wilson RP and geometric reflection compatibility). These remove duplicate finite calculus problems but **not** same-source CMP119/122 ghost/boundary E/R/B/V, CMP116 cutoff/volume-uniform localization or OS continuum.
+
+**Highest Pareto physical producer leaves, in strict dependency order:** 
+1. `OBS01→OBS05→OBS06→OBS07→OBS08→OBS09`: actual selected physical unitary/observer instrument and local response Kubo kernel, calibrated signal cone/dimension four/Lorentz measured principal symbol (O01–O11).
+2. `HIL01→HIL02→HIL04→HIL05`: physically instantiate inner product/star/operator/positive real state, construct complete noncollapsed observer GNS and strongly continuous unitary/Stone; in parallel YM must construct original Wilson fine RP/complete OS.
+3. `HIL06→HIL07→HIL08→HIL09→HIL10→HIL11`: match original observer state with independent YM OS *all-word reflected* Gram, null quotient and dense onto isometry, both real-time groups, full spectral calculus and Wick.
+4. `KK01→KK02→KK03→KK04→KK05→KK06→KK07→KK08`: original observer-linked smooth five-metric and Einstein–gauge–matter solution; reduce to **independently measured** original OBS08 4D bilinear (K01–K08), not chosen AdS4 control.
+5. `BIDI01→BIDI02→BIDI03→BIDI04→BIDI05→BIDI06→BIDI07→BIDI08`: original physical source key across all branches, UV/IR/KK/history/OS commuting limits, independent falsification and exact-head trust/physical receipts (B01–B08).
+
+**Acceptance policy:** source-written/conditional ≠ kernel acceptance ≠ selected physical theorem; this status must remain fail-closed in all three ledgers. Neither mathematical exact reduction nor source syntax alone can stand in for independently measured causal geometry, physical reflection positivity, nonzero continuum OS sectors, or uniform CMP116 exponential decay.
 
 ## Actually completed source and integration work this round
 
