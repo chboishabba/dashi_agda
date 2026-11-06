@@ -21,6 +21,8 @@ on:
       - 'DASHI/Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda'
+      - 'DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda'
       - 'DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda'
       - 'DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda'
       - 'DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda'
@@ -146,6 +148,8 @@ jobs:
             DASHI/Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda
             DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
+            DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
+            DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
             DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda
             DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda
             DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda
