@@ -12,7 +12,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (_++_; length)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 
 import DASHI.Foundations.PrimorialFactorAddressConcrete as Prime
@@ -108,11 +108,11 @@ factor4EncodeInjective :
   (a b : Prime.PrimorialDigits4) →
   encodeFactorWord a ≡ encodeFactorWord b →
   a ≡ b
-factor4EncodeInjective a b equal
-  with factorDecodeEncode a | factorDecodeEncode b
-... | left | right =
+factor4EncodeInjective a b equal =
   justInject
-    (cong decodeFactorWord equal)
+    (trans (sym (factorDecodeEncode a))
+      (trans (cong decodeFactorWord equal)
+        (factorDecodeEncode b)))
   where
     justInject : ∀ {x y : Prime.PrimorialDigits4} →
       just x ≡ just y → x ≡ y
@@ -124,7 +124,9 @@ factor15EncodeInjective :
   a ≡ b
 factor15EncodeInjective a b equal =
   justInject
-    (cong decodeFactor15Word equal)
+    (trans (sym (factor15DecodeEncode a))
+      (trans (cong decodeFactor15Word equal)
+        (factor15DecodeEncode b)))
   where
     justInject : ∀ {x y : Godel.FactorVec} →
       just x ≡ just y → x ≡ y
