@@ -11,6 +11,8 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
+  DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
+  DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
 )
 test -s "$ROOT"
 for module in "${MODULES[@]}"; do
@@ -31,6 +33,10 @@ grep -q 'initialAllTracesPreserveBiologicalProjection' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
 grep -q 'coupledSignalIdempotentAt' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
+grep -q 'morphologyFutureEquivalenceExactlyMinimalCode' \
+  DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
+grep -q 'completePlaquetteCount' \
+  DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
 grep -q 'sourceQualifiedCellObservation' \
   DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda
 grep -q 'withdrawalReopensModelCandidate' \
@@ -38,6 +44,7 @@ grep -q 'withdrawalReopensModelCandidate' \
 
 python3 scripts/check_biological_history_future_quotient.py
 python3 scripts/check_biological_spatial_stochastic.py
+python3 scripts/check_biological_minimal_cube.py
 python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
 python3 scripts/biological_si_kinetic_calibration.py --self-test
 python3 scripts/biological_measured_genotype_holdout.py --self-test
