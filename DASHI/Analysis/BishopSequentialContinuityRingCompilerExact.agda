@@ -18,6 +18,7 @@ module DASHI.Analysis.BishopSequentialContinuityRingCompilerExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product.Base using (_,_)
 import Real as R
 import Sequence as Seq
 import RealProperties as RP
