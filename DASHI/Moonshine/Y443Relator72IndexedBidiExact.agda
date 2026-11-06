@@ -110,3 +110,35 @@ y443EdgeHasSevenClasses = Orbit.edgeHasSevenOrbitClasses
 
 y443NonedgeHasThirtyOneClasses : Orbit.nonedgeOrbitCount ≡ 31
 y443NonedgeHasThirtyOneClasses = Orbit.nonedgeHasThirtyOneOrbitClasses
+
+
+------------------------------------------------------------------------
+-- 9 -> 5 and 27 -> 13 exact NUMBER-ROLE cross-pollination.
+-- 13 is the number of noncentral antipodal PAIRS of a 27 cube;
+-- the corresponding quotient has 14 classes including its centre.
+-- Equalities below are finite comparisons, not same-action equivalences.
+------------------------------------------------------------------------
+
+elevenEdgesAsOnePlusTwiceFive :
+  Y.countEdges Y.pairs
+  ≡ 1 + 2 * Ternary.quotientOrbitCount Ternary.rank2
+elevenEdgesAsOnePlusTwiceFive = refl
+
+fiftyFiveNonedgesAsOnePlusTwiceTwentySeven :
+  Y.countNonedges Y.pairs
+  ≡ 1 + 2 * Ternary.rawCarrierCount Ternary.rank3
+fiftyFiveNonedgesAsOnePlusTwiceTwentySeven = refl
+
+fiftyFiveNonedgesAsThreePlusFourTimesThirteen :
+  Y.countNonedges Y.pairs
+  ≡ 3 + 4 * Ternary.pairedOrbitCount Ternary.rank3
+fiftyFiveNonedgesAsThreePlusFourTimesThirteen = refl
+
+fiftyFiveNonedgesAsFiveTimesEleven :
+  Y.countNonedges Y.pairs
+  ≡ Ternary.quotientOrbitCount Ternary.rank2 * Y.countEdges Y.pairs
+fiftyFiveNonedgesAsFiveTimesEleven = refl
+
+-- But Y443's ACTUAL arm-swap gives 3 fixed edges and 7 fixed nonedges.
+-- Hence these arithmetic decompositions are not the existing 9/27
+-- antipodal involution on these raw relation-index carriers.
