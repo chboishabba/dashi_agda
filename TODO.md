@@ -1,3 +1,15 @@
+## 2026-11-06 — CMP119/116/122 original-source selected implementation max-cut
+
+- [x] Audit **actual** CMP119 beta-driven density / anchored expectations, CMP122 published UV and boundary reinjection, CMP116 exact literal selected-J/R342→R467→R482 and T5 Bishop/OS donors; preserve their original citation/proof boundaries.
+- [x] Source-write `YMClayCMP119122116SelectedProducerWeldExact.agda`: four term-level reuse theorems, no parallel CMP116 local covariance or independent gap-positive token (**Agda pending**).
+- [x] Add `scripts/check_ym_cmp119116122_same_source_contract.py`, CI typecheck and canonical TOE regression import; static readback inspected 11 golden owners, 4 new terms. **No kernel CI PASS**.
+- [x] Reconcile 4 physical same-source cuts Y.01–Y.04 into active phases, source ledger, roadmap and BIDI steelman.
+- [ ] **Y.01** Same original continuous Wilson/Gibbs/Haar density and source CMP119/CMP122 `E/R/B/V`, ghost, actual T-operation and beta-history physical identification at all cutoffs.
+- [ ] **Y.02** Original local observable/loop/source-J physical pair belongs to source-native CMP119/CMP116 marked analytic class with same root/support.
+- [ ] **Y.03** Literal R342 CMP116 source uniform physical rate, CMP122 R-operation **crossing** RP, source one-step UV defect and selected Bishop/measure limit; no duplicate KP or normalized expectation analysis.
+- [ ] **Y.04** Same selected OS H/full dense excitation spectrum, original noncollapsed cumulant, interacting continuum local axioms, group quantifier.
+- [ ] **V00/F1** Typecheck all three native 1024-bond equality proof terms, new CMP119/116/122 bridge and TOE regression using pinned Agda; transitive authority report.
+
 
 - [x] CLAY4.D2/D3 sharpened golden noncollapse ABI: rational RG charge *lower certificate* mapped to actual Bishop-real continuous cumulant via `selectedFiniteChargeLower`, `actualCumulantConverges`; no rational-continuum conflation.
 - [ ] CLAY4.D3 physical work: construct original source `selectedFiniteChargeLower` against the renormalized Wilson fourth derivative and its completed real weak limit, using existing T5/Bishop owner.
