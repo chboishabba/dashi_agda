@@ -20,7 +20,7 @@ import DASHI.Moonshine.TwistedModuleModularity as TM
 sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
 
-trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z
+trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl eq = eq
 
 cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
