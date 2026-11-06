@@ -37,7 +37,7 @@ deformation*, not a claim of a Gielis-law solution or a Tesla 369 law.
 repository are not the ray-optics Kozyrev mirror simulator. The **legacy
 optical mirror** is the earlier HTML SDF raymarcher/state machine, with
 independent collision replay and torque logs. Its exact original repo/path
-is NOT located in this GitHub checkout; require its actual scene/interface,
+has now been located in original PR #1404 (head 337aabb, distinct open Git ref); its browser HTML event exports are NOT in this checkout. Require the exact original scene/interface,
 not an invented identification. Prior audit reported first-hit
 HTML-versus-independent intersection discrepancy ~1.349–1.832 mm and
 a -195.58 micro-N m torque ranking **provisional**. This unresolved
@@ -72,16 +72,16 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 operator/compact resolvent proof; E15 Rayleigh bound PASS; native Agda OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 sector-domain all-eigenvalue O(m/N) certified; Cartesian FD error OPEN |
-| G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | E16 independent new-scene root/segment source; original HTML SDF OPEN |
-| G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | E09 nongrazing paper proof; local new-scene 17.85x convergence; legacy OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E08 sign and ideal P/c torque model SOURCE; physical calibration OPEN |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E16 IID Hoeffding simultaneous uncertainty model SOURCE; measured CI OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 certified angular-sector continuum domain convergence; E17 exact rational bracket for original raster FD first eigenvalue (41/61 grids); FD-to-continuum theorem OPEN |
+| G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
+| G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | Existing PR #1404 RayLedger reused; wall angular momentum conservation and exact E19 ideal P,R,eta,B bound; independent measured source+material calibration OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | Non369 m4/5/7 controls, paired IID source Hoeffding intervals and dual Pareto interpretation source-written; physical measured CI and same-apparatus Pareto OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06/E13 exact 7-mode Fourier theorem/pass; native sampling owner OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Local E13–E15 checks pass; full exact-head Agda/Python/empirical receipt OPEN |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Exact-rational source audit and local spectral/Fourier tests; pinned PR1404 importer available; exact HEAD Agda/Python full receipt and HTML event replay OPEN |
 
 ## Critical dependencies / max-cut
 
@@ -233,3 +233,23 @@ The source DASHI/Analysis/BishopRound11ClassicalTrigObjectWeldExact.agda already
 ### Exact G13 original optical replay artifact identifiers
 
 Historical independent first-forward audit records 132/132 intersecting rays, with median/max positional differences: Archimedean 1.414/1.499 mm, logarithmic 1.729/1.832 mm, segmented 1.349/1.431 mm. The HTML event solver used distance-to-stroked-wall geometry while the independent solver used normal-offset finite wall thickness. The original files were named spiral_raymarch_collision_export_forward.html, spiral_collision_events_forward.json and referee_spiral_events.py (and a kozyrev_first_forward_audit_bundle.zip artifact); their bytes are not present in the connected repo/Library sources available in this round. A first-hit convergence study on a DIFFERENT new analytic scene cannot close the original thickness-semantics mismatch. The 2026-10-28 log-spiral torque value -195.58 microN m remains provisional until that precise original replay is recovered and parity demonstrated.
+
+
+## 2026-11-06 additional max-cut: original Kozyrev reuse + finite raster spectral proof
+
+Original canonical sources now FOUND in [Kozyrev PR #1404](https://github.com/chboishabba/dashi_agda/pull/1404): `scripts/kozyrev_first_forward_intersection_referee.py`, `scripts/kozyrev_optical_event_ledger.py`, `scripts/kozyrev_matched_envelope_html.py`, `scripts/kozyrev_html_family_ternary_runner.py`, and `scripts/kozyrev_geometry_optimizer.py`. Do not describe the original PR as unidentified or duplicate its independent normal-offset physics owners. The browser HTML file and recorded actual event JSON are still absent from this branch.
+
+| Extra subdeliverable | New acceptance | Current status |
+|---|---|---|
+| G12a original raster FD first eigenvalue | E17 exact-rational Perron–Frobenius/Collatz–Wielandt upper/lower bracket for the actual 4-minus-adjacency five-point matrix; check 3/6/9 on n41 and 3 on n61 | **MATHEMATICS CLOSED**, independent local rationals tested; committed-head replay pending |
+| G12b FD-to-continuum | Prove Cartesian raster Dirichlet eigenvalue convergence including cut-cell boundary and numeric error | OPEN; the E14 angular-sector domain bound is distinct |
+| G13a same logarithmic centreline | E18 prove Gielis epsilon-zero curve exactly equals the PR #1404 log family after matching inner=.75, outer=1.55, turns=1.5 and growth=log(1.55/.75)/(3pi) | MATHEMATICS CLOSED |
+| G13b normal-offset wall referee | Source- and blob-hash-pinned PR #1404 original first-forward referee, with same finite thickness, sidecaps, and 3mm gate | ADAPTER SOURCE COMMITTED; exact-head cross-PR execution pending |
+| G13c original HTML SDF parity | Recover actual browser HTML and JSON, reconcile stroked-SDF versus normal-offset wall geometry, verify 132/132 rays and higher bounces | OPEN |
+| G15a physical angular-impulse convention | Import original PR #1404 RayLedger and compare identical event, power, reflectivity, momentum and torque | SOURCE-WRITTEN; original physical measurement not implied |
+| G15b classical maximum radiation-pressure torque | E19 exact rational bound abs(tau) <= (P*R/c)(1+eta)*sum(eta^k,k=0..B-1) <= 2PRB/c | MATHEMATICS CLOSED and executable source; independent calibration OPEN |
+| G16a paired random-angle model | Simultaneous Hoeffding focus/abs-impulse *paired differences* against baseline across m3/6/9 and m4/5/7 controls | CONDITIONAL MODEL PROOF, CODE SOURCE; experimental CI OPEN |
+
+**Verification without Nix:** scripts/check_gielis_base369_cut.sh uses the repository's run_agda29_parallel_check.sh --safe. For source-pinned PR #1404 referee/ledger replay, export `KOZYREV_PR1404_DIR` pointing to a local checkout's `scripts` folder. The bridge rejects missing or mismatched original Git object blobs (SHA-1). This is optional on the general maths checker, but **mandatory** to claim G13b closed. Original HTML SDF parity is a separate G13c producer.
+
+**Primary proof note**: [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md), sections E01–E19. These are partial original acceptance closures, not a blanket discharge of P2/P3/P4/P5.
