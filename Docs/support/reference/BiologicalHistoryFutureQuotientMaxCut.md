@@ -428,3 +428,47 @@ new Python reproduction script has no independent execution receipt yet.
 P0 whole-cell physiological state, P2 physical flux dynamics, P3 real
 organism-specific SI calibration, P4 reviewed PostgreSQL promotion and P5
 prospective developmental-attractor discrimination remain open.
+
+
+### Further P1/P2 source-written advance: the actual observer compiler and every incident bond
+
+**P1: `BiologicalMorphologyPartitionDepth4Exact.agda` now instantiates
+`CertifiedPartitionRefiner` starting from the original current-*morphology*
+observer**. The finite search has a source-written depth-four fixed-point
+certificate (via four-action diagnostic histories), and the canonical
+compiler is linked to the true 18-class future quotient. This supersedes
+the earlier note that morphology-only compilation was merely a possible
+future extension. The proof is Golden-integrated but its exact-head Agda
+kernel receipt is still pending.
+
+The previous fixed-operator `BiologicalStochasticFutureLumpingExact.agda`
+has an additional `allControlledStochasticHistoriesRemainCoarse` theorem
+for an arbitrary finite *mixed* list of interventions, not only repetitions
+of one action. The companion finite rational regression enumerates all
+64 states and all 156 words of length at most 3 (each probability is
+computed as an exact `Fraction`). The transition rates remain synthetic.
+
+**P2: `BiologicalAllNeighbourTissueDynamicsExact.agda` gives a stronger
+synchronous tissue update** in which each of the 27 cubical sites reads
+junctions at every incident bond of the complete 54-bond nonperiodic
+cube. The fine and future-sufficient coarse updates preserve pointwise
+equivalence for *all* finite intervention traces. In contrast with the
+earlier canonical one-x-neighbour schedule, this update uses the full
+undirected adjacency graph; degree distribution is 8 corners of degree
+3, 12 edge-centres of degree 4, 6 face-centres of degree 5, and
+1 internal site of degree 6. A proper adjacent junction flips the
+source response. New independent supporting script
+`check_biological_all_neighbours.py` covers 32 seeded 15-action traces.
+
+The source-written all-neighbour rule is still Boolean. It is not yet
+a validated mass-conserving ionic flux, experimentally fitted
+reaction-diffusion equation, stochastic cellular kinetics,
+time-varying tissue graph, or observed planarian attraction basin.
+
+**Updated acceptance slice:** Golden root now imports all added owners;
+`scripts/check_biological_history_future_round23.sh` tests all new
+Python regressions and fails closed unless Agda is installed.
+The project uses the *independent parallel_checker* for actual final
+proof acceptance; neither a shell source scan nor the original-data
+finite computational readout establishes that acceptance. All
+physical calibration and PostgreSQL review gates remain explicit.
