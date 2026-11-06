@@ -1,5 +1,14 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-06 — genuine boundary-phantom counterexample blocks reverse Cook–Levin locality
+
+See [Karp21TapeLocalityBoundaryNoGo20261106.md](Karp21TapeLocalityBoundaryNoGo20261106.md) for exact ZKP O/R/C/S/L/P/G/F formulation, seven-cell-window finite witness, source/citation boundaries, C4 diagram, and amended P0–P3 contracts. The original unrestricted local-to-after-unique theorem is **false**: a nine-cell old row with one interior head at index 5, a right move to index 6, and an additional after-head at index 0 satisfies the original seven legal window constructors, without having a unique after head. `scripts/check_karp21_tape_boundary_ghost.py` is committed and called by every referee preflight. `ConcreteTapeBoundaryGhostNoGoExact.agda` independently uses the original Local/TapeCell and WF/ExactlyOneHead carriers to witness old uniqueness and refute new uniqueness. Agda kernel acceptance of the no-go module itself remains pending.
+
+Do not promote `ConcreteTapeAfterUniqueFromLocalityExact.globalTransitionScanAfterUnique` or `localityScanWithInteriorGivesWellFormedStep` in their current unconditional forms. Fixing the rule index of `LegalWindowForRule` is necessary but **not sufficient**, because `legalOldLeftPlainForcesNewLeftPlain` and its symmetric right-edge lemma are false for genuine centered/overlap windows. The minimal real frontier is a same-object canonical SAT/tableau **boundary head exclusion or globally coherent overlap anchor**, proved before recursive prefix/suffix plainness and after-uniqueness. The existing `ConcreteTapeHeadMarginExact` is downstream of well-formed steps and cannot supply the missing reverse implication. Do not adopt a second oracle, relaxed grammar or unproved boundary premise to conceal this.
+
+Kernel gate unchanged: original two modules halted e20 at ~2297/4475 by user-provided Agda 2.9 diagnostics. This turn's regression is executable finite evidence and typewritten no-go source, not compiler receipt. Proof consumers and full Karp21 integration remain explicitly BLOCKED pending a true strengthened contract.
+
+
 ## 2026-11-06 — final three Agda 2.9 term alignments (source repaired, kernel receipt pending)
 
 At historic local head `038970cc0e27d3ac94a7fc76ca571a8a6ef8ddd9`, the remaining diagnostics concerned Cook token-count right-zero, clique selection equality, and the signed-list `length-++` implicit `ys`. Live source readback showed the clique branch already using direct `cong negBool eqU/eqV` and the signed-list branch already passing `{ys = encodeSignedValuesPure rest}`. The Cook original owner now uses `trans equality (NatP.+-identityʳ (cookFormulaTokenCount formula))` with the necessary `trans` import. These are source-level repairs; re-run the exact-head parallel Agda 2.9 compiler before promoting Golden or integration claims.
