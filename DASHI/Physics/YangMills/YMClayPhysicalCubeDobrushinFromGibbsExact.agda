@@ -20,13 +20,19 @@ module DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact where
 -- iteration, actual CMP116 mixed-J rate, OS reconstruction or Clay.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanFiniteBoundaryConditionedDobrushinExact as Boundary
 import DASHI.Physics.YangMills.BalabanP33RationalQuaternionNormSquaredExact as Norm
+
+physicalCubeCellLength : Nat → ℚ → ℚ
+physicalCubeCellLength zero spacing = 0ℚ
+physicalCubeCellLength (suc cells) spacing =
+  spacing + physicalCubeCellLength cells spacing
 
 record OriginalPhysicalCubeConditionals
     (Cutoff Volume : Set)
@@ -49,8 +55,10 @@ record OriginalPhysicalCubeConditionals
     latticeSpacing : Cutoff → ℚ
     latticeSpacingPositive : ∀ cutoff → 0ℚ < latticeSpacing cutoff
     cubeSideInCells : Cutoff → Nat
-    physicalCubeCalibration : ∀ cutoff → Set
-    physicalCubeCalibrationProof : ∀ cutoff → physicalCubeCalibration cutoff
+    physicalCubeCalibration : ∀ cutoff →
+      physicalCubeCellLength
+        (cubeSideInCells cutoff) (latticeSpacing cutoff)
+      ≡ physicalCubeSide
 
     -- A single strict coefficient, shared by every cutoff and volume.
     commonBlockInfluence : ℚ
