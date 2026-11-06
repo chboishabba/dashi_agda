@@ -103,7 +103,9 @@ def check():
                 result.environment,result.morphology)
             assert project(result)==project(flipped)
             assert project(result)==coarse_step(action,project(x))
-            mass={project(result):0.5,project(flipped):0.5}
+            mass=defaultdict(float)
+            for endpoint in (result,flipped):
+                mass[project(endpoint)]+=0.5
             assert sum(mass.values())==1
     rng=random.Random(20261106)
     states=list(all_states())
