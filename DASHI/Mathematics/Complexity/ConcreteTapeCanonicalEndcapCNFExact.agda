@@ -358,8 +358,11 @@ shiftRowSlotMember :
   RowSlotMember slot rows →
   RowSlotMember (Global.there slot) (shiftRowSlots rows)
 shiftRowSlotMember row-member-here = row-member-here
-shiftRowSlotMember (row-member-there member) =
-  row-member-there (shiftRowSlotMember member)
+shiftRowSlotMember
+    (row-member-there {other = some-row-slot otherSlot} member) =
+  row-member-there
+    {other = some-row-slot (Global.there otherSlot)}
+    (shiftRowSlotMember member)
 
 everyPhysicalRowIsEnumerated :
   ∀ {count index} (slot : Global.Slot index count) →
