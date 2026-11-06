@@ -144,6 +144,41 @@ boundaries, ionic conductances, externally measured temporal trajectories
 and a proof that its observer commutes with the selected intervention
 schedule remains the decisive P2/P3 physical instance.
 
+### P5 longitudinal held-out attractor-discrimination runner
+
+`scripts/check_longitudinal_attractor_discrimination.py` is a new
+fail-closed original-data evaluation runner. It accepts externally supplied
+original `source_id`, SHA-256, `experiment_id`, globally unique
+`specimen_id`, split, intervention history, time, observed binary endpoint
+and two **precomputed** competing model probabilities.
+
+- Requires at least two distinct times per specimen; scores the terminal
+  time point **once per specimen** rather than treating repeated temporal
+  measurements as independent biological replicates.
+- Keeps all specimens within their original experiment split, rejects reuse
+  of specimen IDs across experiments, and requires at least two independent
+  test experiment groups.
+- Compares held-out model A versus B by mean log-loss and Brier-score
+  improvement. Bootstraps entire independent experiment clusters, not
+  individual time rows or individual cells.
+- Retains source-file digest, declared original-source identifier and
+  original-source digest separately. Declared provenance cannot itself
+  verify the original archive; pre-registration and wet-lab independence
+  are explicitly **not** certified by the runner.
+- No source data are bundled: its `--self-test` is synthetic and the only
+  supported empirical mode requires an actual longitudinal assay CSV.
+
+```bash
+python3 scripts/check_longitudinal_attractor_discrimination.py --self-test
+python3 scripts/check_longitudinal_attractor_discrimination.py \
+  --assay original-longitudinal-assay.csv \
+  --output heldout-discrimination-receipt.json
+```
+
+The script is invoked by the Round-23 shell checker. This completes the
+prospective **evaluation interface**, not the decisive independent
+longitudinal planarian experiment or its biological outcome.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
