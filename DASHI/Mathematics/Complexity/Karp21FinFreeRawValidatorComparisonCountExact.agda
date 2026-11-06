@@ -9,10 +9,12 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExac
 -- A valid edge continues; an invalid edge returns false immediately.
 --
 -- The counted function follows the SAME decisions, recording three
--- address/pair comparisons for each visited edge. It proves literal
--- Boolean equality and a universal bound of 3*m comparisons on a
+-- TOP-LEVEL PREDICATE INVOCATIONS for each visited edge. It proves literal
+-- Boolean equality and a universal bound of 3*m predicate invocations on a
 -- list of m edges, including malformed/unsorted/out-of-range edges.
--- This is an address-comparison COUNT, not bit machine steps.
+-- Graph.strictAfter may itself use up to three primitive comparisons,
+-- so the primitive comparison envelope is 5*m, NOT 3*m.
+-- Neither result counts binary bit-machine steps.
 --
 -- Sources: Karp 1972; original DASHI gamma/fin-free N21 graph owners.
 ------------------------------------------------------------------------
@@ -71,3 +73,65 @@ originalRawValidatorComparisonCountBound n prev
       n (Graph.previous u v) rest)))
 ... | _ | _ | _ =
   s≤s (s≤s (s≤s z≤n))
+
+------------------------------------------------------------------------
+-- Account for the INTERNAL primitive comparisons in Graph.strictAfter:
+-- * noPrevious: no numeric comparisons
+-- * previous (a,b): compare a < u; on failure compare a == u;
+--   on equality compare b < v.  The maximum is three.
+-- This follows the ORIGINAL source branches and returns the same Bool.
+------------------------------------------------------------------------
+
+countedStrictAfter :
+  Graph.PreviousPair → Nat → Nat → Bool × Nat
+countedStrictAfter Graph.noPrevious u v = true , zero
+countedStrictAfter (Graph.previous a b) u v
+  with NatP._<?_ a u
+... | yes _ = true , suc zero
+... | no _ with NatP._≟_ a u
+...   | no _ = false , suc (suc zero)
+...   | yes _ with NatP._<?_ b v
+...     | yes _ = true , suc (suc (suc zero))
+...     | no _ = false , suc (suc (suc zero))
+
+strictAfterValueSame :
+  (prev : Graph.PreviousPair) (u v : Nat) →
+  proj₁ (countedStrictAfter prev u v)
+    ≡ Graph.strictAfter prev u v
+strictAfterValueSame Graph.noPrevious u v = refl
+strictAfterValueSame (Graph.previous a b) u v
+  with NatP._<?_ a u
+... | yes _ = refl
+... | no _ with NatP._≟_ a u
+...   | no _ = refl
+...   | yes _ with NatP._<?_ b v
+...     | yes _ = refl
+...     | no _ = refl
+
+strictAfterPrimitiveCountBound :
+  (prev : Graph.PreviousPair) (u v : Nat) →
+  proj₂ (countedStrictAfter prev u v)
+    ≤ suc (suc (suc zero))
+strictAfterPrimitiveCountBound Graph.noPrevious u v = z≤n
+strictAfterPrimitiveCountBound (Graph.previous a b) u v
+  with NatP._<?_ a u
+... | yes _ = s≤s z≤n
+... | no _ with NatP._≟_ a u
+...   | no _ = s≤s (s≤s z≤n)
+...   | yes _ with NatP._<?_ b v
+...     | yes _ = NatP.≤-refl
+...     | no _ = NatP.≤-refl
+
+-- Worst-case per visited edge: 2 top-level numerical comparisons
+-- plus up to 3 inside strictAfter. This exact static cap follows
+-- the actual source syntax, with early exits only making it smaller.
+primitiveValidatorComparisonBudget : Nat → Nat
+primitiveValidatorComparisonBudget m = 5 * m
+
+primitiveBudgetAtLeastMacroBudget :
+  (m : Nat) → 3 * m ≤ primitiveValidatorComparisonBudget m
+primitiveBudgetAtLeastMacroBudget zero = z≤n
+primitiveBudgetAtLeastMacroBudget (suc m) =
+  NatP.+-mono-≤
+    (s≤s (s≤s (s≤s z≤n)))
+    (primitiveBudgetAtLeastMacroBudget m)
