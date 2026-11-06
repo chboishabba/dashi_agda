@@ -101,39 +101,39 @@ separateSitesAddToSameWeight :
     ≡ inputSum allRows
 separateSitesAddToSameWeight = refl
 
--- Compute the exact OAG-type extinction discount without floating point.
--- It is a finite integer exponent (20), not a field measurement.
+-- Reconstruct OAG discounted quality credits using annual compounding.
+-- The original 2012 OAG uses (1+p)^(-20), not (1-p)^20.
+-- All published row values are reproduced to original display precision.
 powNat : Nat → Nat → Nat
 powNat base zero = 1
 powNat base (suc n) = base * powNat base n
 
-oagDenominator : Nat
-oagDenominator = 8960 * powNat 1000 20
+oagNumerator : Nat
+oagNumerator = inputSum allRows * powNat 1000 20
 
-reportedVulnerableNumerator : Nat
-reportedVulnerableNumerator = inputSum allRows * powNat 998 20
+vulnerableDenominator : Nat
+vulnerableDenominator = 8960 * powNat 1002 20
 
-conditionalEndangeredNumerator : Nat
-conditionalEndangeredNumerator = inputSum allRows * powNat 988 20
+endangeredDenominator : Nat
+endangeredDenominator = 8960 * powNat 1012 20
 
--- The decimal percentage is NUMERATOR / DENOMINATOR.
--- Vulnerable --> 108.336465... percent; Endangered --> 88.573280...
--- These comparisons prove strict bounds by exact nonnegative Nat gap,
--- not approximate numerical floating point.
+-- Exact percentage formula:
+-- numerator / denominator, with reported p=0.2% or hypothetical p=1.2%.
+-- Approx 108.3451326195926% vs 88.8287572224147%.
+-- No difference of rational numbers is silently rounded.
 vulnerableAbove100Exact :
-  100 * oagDenominator +
-    74694729431565397060899339608368338351827166358385744947812761600
-    ≡ reportedVulnerableNumerator
+  100 * vulnerableDenominator +
+    77820798575317738974523471040150835744595301920859529259515904000
+    ≡ oagNumerator
 vulnerableAbove100Exact = refl
 
 endangeredBelow90Exact :
-  conditionalEndangeredNumerator +
-    12783410568185683280961630916019256474889973561150887111845478400
-    ≡ 90 * oagDenominator
+  oagNumerator +
+    13321869823871146708748754453675736687701422609971835407066726400
+    ≡ 90 * endangeredDenominator
 endangeredBelow90Exact = refl
 
--- If only Mount Walker West AU2's future quality changes 7 -> 6,
--- one quality-gain point is removed. Everything else is held fixed.
+-- One MWW AU2 quality-gain point removed, all else held unchanged.
 mwwAU2OnePointSensitivityWeight : Nat
 mwwAU2OnePointSensitivityWeight = 1047 * 75
 
@@ -142,24 +142,19 @@ mwwAU2ReductionInputWeight :
 mwwAU2ReductionInputWeight = refl
 
 mwwAU2ScenarioNumerator : Nat
-mwwAU2ScenarioNumerator = 931825 * powNat 998 20
+mwwAU2ScenarioNumerator = 931825 * powNat 1000 20
 
--- A one-point reduction in AU2's forecast future quality produces
--- 99.91649... percent. It is strictly below 100, by EXACT Nat arithmetic.
 onePointMWWAU2Below100Exact :
   mwwAU2ScenarioNumerator +
-    748239468928167351638019368963401905585837292123722684222668800
-    ≡ 100 * oagDenominator
+    704201424682261025476528959849164255404698079140470740484096000
+    ≡ 100 * vulnerableDenominator
 onePointMWWAU2Below100Exact = refl
 
 onePointMWWAU2StillAbove90Exact :
-  90 * oagDenominator +
-    88851760531071832648361980631036598094414162707876277315777331200
+  90 * vulnerableDenominator +
+    92548718717785965077071123936135752170135771728773576333564313600
     ≡ mwwAU2ScenarioNumerator
 onePointMWWAU2StillAbove90Exact = refl
-
--- Absolute gap under 100 is source-derived and finite; no legal test.
--- Numerical approximate target 99.91649113%, before source AU rounding.
 
 sourceCreditFromPrior : Nat
 sourceCreditFromPrior = Credit.allReportedCredit Credit.koala
