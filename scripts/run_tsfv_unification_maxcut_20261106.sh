@@ -38,6 +38,7 @@ safe_sources=(
   DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda
   DASHI/Physics/Foundations/TSVFOriginalInterventionRetardedPrefixExact.agda
   DASHI/Physics/Foundations/TSVFObserverOSCyclicGramSetoidExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalCyclicFiniteSpanGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalAllWordMomentTransportExact.agda
   DASHI/Physics/Foundations/TSVFOriginalSelectedFiniteCommutatorResponseExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardPositiveFunctionalExact.agda
@@ -60,6 +61,7 @@ physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445ReflectedAllWordGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalMeasuredFiniteSpanR445Exact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardToNativeWilsonWordGramExact.agda
   DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
