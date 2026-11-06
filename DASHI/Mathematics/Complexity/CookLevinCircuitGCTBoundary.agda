@@ -37,7 +37,7 @@ import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 import DASHI.Mathematics.Symmetry.KleinGroupActionInvariantExact as K
 
 data BooleanFormula : Set where
-  variable : Nat → BooleanFormula
+  formulaVar : Nat → BooleanFormula
   constant : Bool → BooleanFormula
   negate : BooleanFormula → BooleanFormula
   conjunction disjunction : BooleanFormula → BooleanFormula → BooleanFormula
@@ -58,7 +58,7 @@ Assignment : Set
 Assignment = Nat → Bool
 
 evaluate : BooleanFormula → Assignment → Bool
-evaluate (variable index) assignment = assignment index
+evaluate (formulaVar index) assignment = assignment index
 evaluate (constant value) assignment = value
 evaluate (negate formula) assignment = notBool (evaluate formula assignment)
 evaluate (conjunction left right) assignment =
@@ -68,7 +68,7 @@ evaluate (disjunction left right) assignment =
 
 excludedMiddleFormula : BooleanFormula
 excludedMiddleFormula =
-  disjunction (variable zero) (negate (variable zero))
+  disjunction (formulaVar zero) (negate (formulaVar zero))
 
 excludedMiddleFormulaIsTautology : ∀ assignment →
   evaluate excludedMiddleFormula assignment ≡ true
