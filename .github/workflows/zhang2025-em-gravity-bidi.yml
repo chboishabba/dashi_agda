@@ -7,8 +7,15 @@ on:
       - 'DASHI/Physics/ExoticGravity/Everything.agda'
       - 'scripts/check_zhang2025_em_gravity*'
       - 'scripts/check_zhang2025_quantitative_consumers.py'
+      - 'scripts/check_zhang2025_source_stress_dynamics.py'
+      - 'scripts/check_zhang2025_torsion_consumer.py'
+      - 'scripts/check_zhang2025_evidence_packets.py'
       - 'tests/test_zhang2025_em_gravity_bidi.py'
       - 'tests/test_zhang2025_quantitative_consumers.py'
+      - 'tests/test_zhang2025_source_stress_dynamics.py'
+      - 'tests/test_zhang2025_torsion_consumer.py'
+      - 'tests/test_zhang2025_evidence_packets.py'
+      - 'tests/fixtures/zhang2025_*.json'
       - '.github/workflows/zhang2025-em-gravity-bidi.yml'
   pull_request:
     paths:
@@ -16,8 +23,15 @@ on:
       - 'DASHI/Physics/ExoticGravity/Everything.agda'
       - 'scripts/check_zhang2025_em_gravity*'
       - 'scripts/check_zhang2025_quantitative_consumers.py'
+      - 'scripts/check_zhang2025_source_stress_dynamics.py'
+      - 'scripts/check_zhang2025_torsion_consumer.py'
+      - 'scripts/check_zhang2025_evidence_packets.py'
       - 'tests/test_zhang2025_em_gravity_bidi.py'
       - 'tests/test_zhang2025_quantitative_consumers.py'
+      - 'tests/test_zhang2025_source_stress_dynamics.py'
+      - 'tests/test_zhang2025_torsion_consumer.py'
+      - 'tests/test_zhang2025_evidence_packets.py'
+      - 'tests/fixtures/zhang2025_*.json'
       - '.github/workflows/zhang2025-em-gravity-bidi.yml'
   workflow_dispatch:
 
@@ -37,6 +51,11 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p 'test_zhang2025_em_gravity_bidi.py' -v
           python3 -m unittest discover -s tests -p 'test_zhang2025_quantitative_consumers.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_source_stress_dynamics.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_torsion_consumer.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_evidence_packets.py' -v
+          python3 scripts/check_zhang2025_source_stress_dynamics.py --input tests/fixtures/zhang2025_synthetic_translation_timed.json > zhang2025-translation-synthetic.json
+          python3 scripts/check_zhang2025_torsion_consumer.py --input tests/fixtures/zhang2025_synthetic_torsion_timed.json > zhang2025-torsion-synthetic.json
           python3 scripts/check_zhang2025_quantitative_consumers.py > zhang2025-quantitative.json
 
   scoped-agda-source:
