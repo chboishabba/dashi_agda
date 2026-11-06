@@ -20,6 +20,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_)
 open import Data.Maybe.Base using (just)
+open import Data.Product using (proj₂)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -36,13 +37,12 @@ comparisonCountForParsedGraph graph =
 actualValidatedComparisonCount : Runtime.ParsedRawGraph → Nat
 actualValidatedComparisonCount graph =
   History.comparisonPolynomial (length (Runtime.rawEdges graph))
-  + Data.Product.proj₂
+  + proj₂
       (Validate.countedRawValidator
         (Runtime.rawVertices graph)
         Graph.noPrevious
         (Runtime.rawEdges graph))
 
-import Data.Product
 
 -- First account for the original validator's exact observed count,
 -- not a presumed constant-time check per edge.
