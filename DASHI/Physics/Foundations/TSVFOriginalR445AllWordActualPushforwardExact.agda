@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.TSVFOriginalR445AllWordActualPushforwardExact where
 
 -- S10 / HIL07 finite original-source donor.
