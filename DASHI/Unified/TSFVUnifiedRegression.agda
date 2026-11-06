@@ -44,6 +44,7 @@ import DASHI.Physics.Foundations.TSFVObservedPhysicalAccessTransportExact as TSF
 import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSFVKKHorizontal
 import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
 import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact as TSFVKKShear
+import DASHI.Physics.Foundations.TSFVAcousticMassInverseBidiNoGoExact as TSFVAcousticBidi
 import DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact as TSFVKKBackwardBidi
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
@@ -208,6 +209,18 @@ open TSVFSelectedKetHNoGo public using
   ; sameSelectedForwardKetDoesNotForceWholeHamiltonian
   ; zeroHamiltonianSymmetric
   ; secondModeHamiltonianSymmetric
+  )
+
+-- P02/P07 selected-source inverse BIDI: a measured 3+1 principal
+-- cone does NOT determine the mass term / entire retarded operator,
+-- hence cannot by itself determine a unique physical observer/OS H.
+open TSFVAcousticBidi public using
+  ( selectedAcousticPrincipalForAnyMass
+  ; allMassesShareSelectedAcousticPrincipal
+  ; selectedAcousticFullFourierDenominator
+  ; selectedZeroFourierReadoutIsMass
+  ; fullSelectedResponseEqualityForcesSameMass
+  ; differentMassCannotShareEntireResponse
   )
 
 -- P07 Stone/OS trust firewall: on the SAME original TSVF/OS clock,
