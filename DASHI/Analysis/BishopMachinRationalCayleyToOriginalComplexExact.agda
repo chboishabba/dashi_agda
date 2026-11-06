@@ -25,7 +25,7 @@ module DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 import Real as R
 import RealProperties as RP
-open import Data.Rational.Base as Q using (ℚ; 0ℚ; 1ℚ; toℚᵘ)
+import Data.Rational.Base as Q using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; -_; toℚᵘ)
 import Data.Rational.Properties as QP
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
