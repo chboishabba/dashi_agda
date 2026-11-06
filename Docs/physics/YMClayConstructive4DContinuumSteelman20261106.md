@@ -26,15 +26,15 @@ The theorem would prove the constructive nontrivial continuum Clay endpoint if *
 
 | Lane | Golden repo owner | Concrete value | Physical weld needed |
 |---|---|---|---|
-| R443 Wilson field, Haar/Fubini and C3 | \`YMClaySUNVariablePeriodicProductHaarExact\`, \`YMClaySUNMatrixSpatialC3RealFubiniExact\`, \`YMClayNativeClosedThreeEqualitiesCandidateExact\` | Native side-four six-plane Wilson, finite normalized one-link product-Haar and source-written original C3 1024-bond certificate | Genuine SU(N) Borel Haar on original matrix test algebra; transitive kernel; full E/R/B/V action |
-| R445 non-bare physical block pushforward | \`YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact\`, \`YMClaySUNWeightedDisjointPairFibreReparamExact\`, \`YMClayNativeSideFourTwoLinkPairSameObjectExact\` | Original Wilson weighted pushforward functional and 64-pair + 896-spectator Fubini change | Same measurable regular conditional, scale-general original decoder and RP compatible physical block |
-| CMP119/CMP122 perturbative UV | \`BalabanBetaDrivenCMP119FunctionalOperatorExact\`, \`BalabanPublishedUVStabilityNonlinearRGCoreExact\`, \`BalabanCMP122PublishedFourDimensionalUVStabilityExact\` | Selected E/R/B/V RG operator/finite-volume and published-source stability interfaces | Show chosen original running coupling and renormalized sources satisfy the published hypotheses at all physical scales, including large fields |
-| Continuum Cauchy *already in Bishop-style completion* | \`BalabanClayT5TypedContinuumDefectCauchyExact\` | Dyadic absolute one-step defect + SAME-observable telescope gives an actual FastCauchyReal of selected rational expectations | Construct one-step original renormalized Wilson defect and typed telescope; do not postulate a generic limit |
-| Compactness | \`BalabanClayT5Path4ToSelectedDiagonalTightnessRound433Exact\`, \`BalabanClayT5BoundedWeakCompactnessRound439Exact\`, \`BalabanClayT5MarkovToProkhorovTightnessExact\` | Path4 coercive/Markov → compact containment → Prokhorov/unique selected limit | Original physical energy/expectation semantics and true compact sublevels of the selected configuration topology |
-| RP and OS, same continuum | \`BalabanClayOSWilsonReflectionPositivityExact\`, \`BalabanClayT5SameFamilyContinuumRecoveryRound425Exact\`, \`BalabanClayT5OSReconstructionCyclicityExact\` | Link-plane and site-plane positivity authority, finite Gram → continuum Gram, same-family OS recovery and dense local vectors interface | Literal original Wilson weight, preserved positive-time support, true OS reconstruction and strong semigroup |
-| CMP116 source and positive gap | \`BalabanCMP116PublishedLiteralSelectedRound467Exact\`, \`BalabanCMP116PublishedLiteralToGapRound479Exact\`, \`BalabanCMP116ModeSelectedSubgapClusteringBidiExact\`, \`YangMillsDirectSourceOSSameHGapExact\` | Same mixed-J derivative ABI, rooted-shell envelope→selected gap and same-H consumers | Actual uniform source theorem, time-to-distance and dense full physical spectral coverage |
-| Nontriviality | \`BalabanClayPlaquetteNoncollapseContinuumCalibrationExact\`, \`BalabanClayT5CumulantLowerBoundNontrivialityExact\`, \`BalabanContinuumNontrivialityAsymptoticFreedomGateExact\` | OS-norm 1/16→1/32→1/64 calibration, finite uniform cumulant lower→continuum non-Gaussian; AF survival margin | One actual selected observable, original physical covariance/cumulant lower bound and limit identity |
-| Finite→infinite dimension controls | \`YMClayVoyagerDimensionSignatureForkExact\`; in separate #1460: \`YMClayFiveSectorBidiSteelmanExact\` | 2/3/4/5-dimensional coupling dimensions, explicit cross-fibre curvature loss | Keep distinct 4D action and spectrum. 5D KK is NOT a continuum YM proof |
+| R443 Wilson field, Haar/Fubini and C3 | `YMClaySUNVariablePeriodicProductHaarExact`, `YMClaySUNMatrixSpatialC3RealFubiniExact`, `YMClayNativeClosedThreeEqualitiesCandidateExact` | Native side-four six-plane Wilson, finite normalized one-link product-Haar and source-written original C3 1024-bond certificate | Genuine SU(N) Borel Haar on original matrix test algebra; transitive kernel; full E/R/B/V action |
+| R445 non-bare physical block pushforward | `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact`, `YMClaySUNWeightedDisjointPairFibreReparamExact`, `YMClayNativeSideFourTwoLinkPairSameObjectExact` | Original Wilson weighted pushforward functional and 64-pair + 896-spectator Fubini change | Same measurable regular conditional, scale-general original decoder and RP compatible physical block |
+| CMP119/CMP122 perturbative UV | `BalabanBetaDrivenCMP119FunctionalOperatorExact`, `BalabanPublishedUVStabilityNonlinearRGCoreExact`, `BalabanCMP122PublishedFourDimensionalUVStabilityExact` | Selected E/R/B/V RG operator/finite-volume and published-source stability interfaces | Show chosen original running coupling and renormalized sources satisfy the published hypotheses at all physical scales, including large fields |
+| Continuum Cauchy *already in Bishop-style completion* | `BalabanClayT5TypedContinuumDefectCauchyExact` | Dyadic absolute one-step defect + SAME-observable telescope gives an actual FastCauchyReal of selected rational expectations | Construct one-step original renormalized Wilson defect and typed telescope; do not postulate a generic limit |
+| Compactness | `BalabanClayT5Path4ToSelectedDiagonalTightnessRound433Exact`, `BalabanClayT5BoundedWeakCompactnessRound439Exact`, `BalabanClayT5MarkovToProkhorovTightnessExact` | Path4 coercive/Markov → compact containment → Prokhorov/unique selected limit | Original physical energy/expectation semantics and true compact sublevels of the selected configuration topology |
+| RP and OS, same continuum | `BalabanClayOSWilsonReflectionPositivityExact`, `BalabanClayT5SameFamilyContinuumRecoveryRound425Exact`, `BalabanClayT5OSReconstructionCyclicityExact` | Link-plane and site-plane positivity authority, finite Gram → continuum Gram, same-family OS recovery and dense local vectors interface | Literal original Wilson weight, preserved positive-time support, true OS reconstruction and strong semigroup |
+| CMP116 source and positive gap | `BalabanCMP116PublishedLiteralSelectedRound467Exact`, `BalabanCMP116PublishedLiteralToGapRound479Exact`, `BalabanCMP116ModeSelectedSubgapClusteringBidiExact`, `YangMillsDirectSourceOSSameHGapExact` | Same mixed-J derivative ABI, rooted-shell envelope→selected gap and same-H consumers | Actual uniform source theorem, time-to-distance and dense full physical spectral coverage |
+| Nontriviality | `BalabanClayPlaquetteNoncollapseContinuumCalibrationExact`, `BalabanClayT5CumulantLowerBoundNontrivialityExact`, `BalabanContinuumNontrivialityAsymptoticFreedomGateExact` | OS-norm 1/16→1/32→1/64 calibration, finite uniform cumulant lower→continuum non-Gaussian; AF survival margin | One actual selected observable, original physical covariance/cumulant lower bound and limit identity |
+| Finite→infinite dimension controls | `YMClayVoyagerDimensionSignatureForkExact`; in separate #1460: `YMClayFiveSectorBidiSteelmanExact` | 2/3/4/5-dimensional coupling dimensions, explicit cross-fibre curvature loss | Keep distinct 4D action and spectrum. 5D KK is NOT a continuum YM proof |
 
 ## 2. One effective-action mechanism for four results
 
@@ -73,6 +73,33 @@ The physical gap comes from matching to a finite physical \(\ell_*\) and a nonpe
 
 Do not replace generated multi-loop interactions by the bare Wilson action. The original R445 fibre density is non-bare and must be retained.
 
+
+## 2a. Specific four-dimensional AF improvement — subtract marginal drift, then sum \(g^4\)
+
+**This is the nontrivial falsifiable conjecture I favor:** the *same-source renormalized* observable error after solving the marginal running-coupling and source-anomalous-dimension equations can be bounded by
+\[
+|\delta_n(F)| \le
+\frac{A_F}{(n+1)(n+2)}+
+C_F\,2^{-(n+1)}+h_{F,n},
+\qquad \sum_{n\ge0}h_{F,n}\le H_F.
+\]
+Why target this and not a generic geometric gap? In 4D asymptotic freedom the inverse squared coupling grows linearly with UV depth if the exact \`BalabanYM4RunningCouplingDriftExact.inverseCouplingRobustPositiveDrift\` source hypotheses hold, hence \(g_n^2=O(1/n)\) but \(g_n^4=O(1/n^2)\). The order-\(g_n^2\) unrenormalized correction has a divergent harmonic history; a properly subtracted order-\(g_n^4\) remainder is summable. The repo's \`BalabanBetaHistoryLocalizedInfluenceExact\` already warns not to force exponential forgetting on the marginal coupling and reserves geometric decay for the irrelevant-memory channel. This is exactly the split demanded here.
+
+Algebraically, for all \(N\),
+\[
+\sum_{n=0}^{N-1}\frac{1}{(n+1)(n+2)}=1-\frac1{N+1},\qquad
+\sum_{n=0}^{N-1}2^{-(n+1)}=1-2^{-N}.
+\]
+Consequently the original physical RG influence family satisfies one \(q<1\) if the *actual source-specific* coefficients satisfy
+\[
+\kappa_0\le q_0,\quad
+\kappa_{n+1}\le\kappa_n+\delta_n,\quad
+q_0+A+C+H<1.
+\]
+An explicit **toy BIDI arithmetic certificate** chooses \(q_0=1/4\), \(A=1/16\), \(C=1/32\), \(H=1/64\), producing \(q=23/64\), with exact rational checks through 512 refinements and a harmonic counterexample. The solver is \`scripts/check_ym_marginal_subtracted_uv_tail.py\`. These numbers are **NOT fitted to Wilson SU(N)** and are not physical facts.
+
+To turn this into a theorem, prove the actual O(g⁴) remainder on the original CMP119/CMP122 T-operation and all conditioned boundary sectors, including large-field holes; show the selected marked-J source-renormalization and Ward identities really cancel the O(g²) marginal insertion and that the resulting operator norm controls the full original physical two-marked CMP116 weight. If this fails, use the direct original CMP116 rooted-shell route rather than choosing smaller constants.
+
 ## 3. Four source-native estimates (the actual theorem cut)
 
 **A. Full UV observable convergence.** For the same renormalized positive-time test \(F\) at all \(n\), uniformly over admissible physical volumes:
@@ -80,21 +107,21 @@ Do not replace generated multi-loop interactions by the bare Wilson action. The 
 |\mathbb E_{\mu_{n+1,L}}F_{n+1}-\mathbb E_{\mu_{n,L}}F_n|
  \le A_F\,2^{-\alpha n},\quad \alpha>0.
 \]
-This is the actual missing input of \`BalabanClayT5TypedContinuumDefectCauchyExact\`. It supplies fast-Cauchy/Bishop expectation data once telescoping semantics are proved. To lift from selected rational approximation to completed real expectation use the already-owned completion, then R433/R439 and R425 for measure/OS same-object recovery. We should NOT demand a second generic measure limit.
+This is the actual missing input of `BalabanClayT5TypedContinuumDefectCauchyExact`. It supplies fast-Cauchy/Bishop expectation data once telescoping semantics are proved. To lift from selected rational approximation to completed real expectation use the already-owned completion, then R433/R439 and R425 for measure/OS same-object recovery. We should NOT demand a second generic measure limit.
 
 **B. IR/two-marked rooted-shell estimate.** For any physical \(R=\mathrm{dist}(\mathrm{supp}F,\partial\Lambda_L)\),
 \[
 |\mathbb E_{\mu_{n,L'}}F_n-\mathbb E_{\mu_{n,L}}F_n|
  \le B_F e^{-\mu R}.
 \]
-Use \`BalabanClayT5PhysicalRootedShellInjectionExact\`, \`BalabanClayT5TwoMarkedConnectedClusterTailExact\`, \`BalabanClayT5PhysicalTwoWeightKoteckyPreissExact\`; prove actual absolute connecting-cluster weight inequality with holes and large-field domains. No assumption that a source-free one-marked tail controls a connected two-marked response.
+Use `BalabanClayT5PhysicalRootedShellInjectionExact`, `BalabanClayT5TwoMarkedConnectedClusterTailExact`, `BalabanClayT5PhysicalTwoWeightKoteckyPreissExact`; prove actual absolute connecting-cluster weight inequality with holes and large-field domains. No assumption that a source-free one-marked tail controls a connected two-marked response.
 
 **C. Actual literal CMP116 source bound.** For every declared selected physical test and the *original* \(Z_{n,L}(J)\),
 \[
 |D_{J_F}D_{J_G}\log Z_{n,L}(0)|
  \le C_{F,G}e^{-m\,d_{\rm phys}(F,G)}
 \]
-with \(m>0\) **uniform in both** \(n,L\), including continuum-scale source normalization. Reuse R467's \`literalSelectedCMP116Localization\` and \`sourceEnvelopeBelowPhysicalClusteringEnvelope\`, or direct R342→R467 compiler if source-native. Preferred terminal physics is source localization/KP; weighted block Dobrushin \(\|C^{n,L}\|_w\le q<1\) is a **backup sufficient criterion**, not an additional mandatory gate.
+with \(m>0\) **uniform in both** \(n,L\), including continuum-scale source normalization. Reuse R467's `literalSelectedCMP116Localization` and `sourceEnvelopeBelowPhysicalClusteringEnvelope`, or direct R342→R467 compiler if source-native. Preferred terminal physics is source localization/KP; weighted block Dobrushin \(\|C^{n,L}\|_w\le q<1\) is a **backup sufficient criterion**, not an additional mandatory gate.
 
 **D. Noncollapsed interacting witness.** For one selected reflected positive-time curvature composite \(O_f\), prove
 \[
@@ -104,7 +131,7 @@ and for a selected fourth cumulant with a fixed sign \(s_f\in\{-1,+1\}\),
 \[
 s_f\kappa_{4,n}(O_{f_1},O_{f_2},O_{f_3},O_{f_4})\ge\eta_4>0.
 \]
-The 4pt sign MUST be selected by the actual Wilson source; equivalently prove \(|\kappa_4|\ge\eta_4\) and a stable sign. \`BalabanClayPlaquetteNoncollapseContinuumCalibrationExact\` already proves 1/16 − 1/32 − 1/64 = 1/64, conditioned on original Gaussian, interaction and cutoff errors. \`BalabanClayT5CumulantLowerBoundNontrivialityExact\` already promotes a **finite uniform** fourth-cumulant lower bound to non-Gaussian continuum. New \`YMClayRGLossBudgetToNonGaussianExact.agda\` attempts to *derive* that finite uniform lower input from one reference charge and bounded losses:
+The 4pt sign MUST be selected by the actual Wilson source; equivalently prove \(|\kappa_4|\ge\eta_4\) and a stable sign. `BalabanClayPlaquetteNoncollapseContinuumCalibrationExact` already proves 1/16 − 1/32 − 1/64 = 1/64, conditioned on original Gaussian, interaction and cutoff errors. `BalabanClayT5CumulantLowerBoundNontrivialityExact` already promotes a **finite uniform** fourth-cumulant lower bound to non-Gaussian continuum. New `YMClayRGLossBudgetToNonGaussianExact.agda` attempts to *derive* that finite uniform lower input from one reference charge and bounded losses:
 \[
 c_0\ge\eta+B,\quad c_n\le c_{n+1}+\delta_n,\quad
 \sum_{k<n}\delta_k\le B\quad\Longrightarrow\quad
@@ -116,7 +143,7 @@ It then compiles the result into the existing original T5 non-Gaussian theorem. 
 
 ## 4. Reflection positivity, Euclidean invariance, and locality: do not manufacture them
 
-The original finite Wilson measure has a standard link/site-plane RP proof (Menotti–Pelissetto source recorded in repo). For \(F\) in the *actual positive-time gauge-invariant algebra*, reflected \(\mathbb E_{n,L}[(\Theta F)^*F]\ge0\). A limit of complete finite reflected Gram forms preserves positivity provided their entries converge and the same positive-time algebra survives the limit. \`BalabanClayT5SameFamilyContinuumRecoveryRound425Exact\` is the chosen owner.
+The original finite Wilson measure has a standard link/site-plane RP proof (Menotti–Pelissetto source recorded in repo). For \(F\) in the *actual positive-time gauge-invariant algebra*, reflected \(\mathbb E_{n,L}[(\Theta F)^*F]\ge0\). A limit of complete finite reflected Gram forms preserves positivity provided their entries converge and the same positive-time algebra survives the limit. `BalabanClayT5SameFamilyContinuumRecoveryRound425Exact` is the chosen owner.
 
 **BIDI test:** gauge fixing or a temporal smearing across the reflection plane may break the selected positive-time test class; a positive Gibbs density or reflection-compatible density equality is not by itself RP. Preserve the original ungauge-fixed measure in the positive-time OS route. Spatial-only or suitably supported time-separated probes can be safer at finite regularization.
 
@@ -137,13 +164,13 @@ Once A–C give same-family convergence of every reflected pair needed for a den
 0\le\langle F\Omega,T(t)F\Omega\rangle
  \le C_F e^{-mt}.
 \]
-The positive spectral measure \(\nu_F\) then has no support below \(m\); density eliminates an invisible subgap sector. Existing \`BalabanCMP116PublishedLiteralToGapRound479Exact\`, \`BalabanClayT5OSReconstructionCyclicityExact\` and \`YangMillsDirectSourceOSSameHGapExact\` should finish that *implication*. This proves a physical gap only when (i) the marked-source spatial bound is correctly converted to **physical OS time**, (ii) the selected semigroup is positive, and (iii) the dense core detects every excitation. Do not apply a graph metric without its time calibration.
+The positive spectral measure \(\nu_F\) then has no support below \(m\); density eliminates an invisible subgap sector. Existing `BalabanCMP116PublishedLiteralToGapRound479Exact`, `BalabanClayT5OSReconstructionCyclicityExact` and `YangMillsDirectSourceOSSameHGapExact` should finish that *implication*. This proves a physical gap only when (i) the marked-source spatial bound is correctly converted to **physical OS time**, (ii) the selected semigroup is positive, and (iii) the dense core detects every excitation. Do not apply a graph metric without its time calibration.
 
 A different free-scalar OS control, finite transfer matrix, flat KK model or an invented generator \(H'\) cannot be substituted for \(H_{\rm OS}\).
 
 ## 6. 2D / 3D / 5D donors and falsifiers
 
-The #1460 \`YMClayFiveSectorBidiSteelmanExact\` establishes exact 10→6→3→1 curvature-plane accounting and an explicit nonzero cross-fibre counterexample. Reuse this as a falsification test: projecting a 5D gauge action onto 4D does **not** preserve the measure and physical Hamiltonian if the discarded four cross-fibre planes carry nonzero action. 2D/3D heat-kernel, Markov and stochastic results are candidate *techniques* for conditional/compactness bounds; their different canonical coupling dimensions mean they cannot be directly lifted to the marginal 4D theory. Keep Lorentz/TSVF/KK identification on #1460, not as a prerequisite to proving #1444 YM.
+The #1460 `YMClayFiveSectorBidiSteelmanExact` establishes exact 10→6→3→1 curvature-plane accounting and an explicit nonzero cross-fibre counterexample. Reuse this as a falsification test: projecting a 5D gauge action onto 4D does **not** preserve the measure and physical Hamiltonian if the discarded four cross-fibre planes carry nonzero action. 2D/3D heat-kernel, Markov and stochastic results are candidate *techniques* for conditional/compactness bounds; their different canonical coupling dimensions mean they cannot be directly lifted to the marginal 4D theory. Keep Lorentz/TSVF/KK identification on #1460, not as a prerequisite to proving #1444 YM.
 
 ## 7. Concrete bidirectional adversarial programme
 
@@ -159,25 +186,25 @@ The #1460 \`YMClayFiveSectorBidiSteelmanExact\` establishes exact 10→6→3→1
 
 | ID | Exact source-physics lemma | Required output |
 |---|---|---|
-| CLAY4.F1 | Three native source 1024-bond equalities \`YMClayNativeClosedThreeEqualitiesCandidateExact\` | Actual kernel certificate, no normalized \`refl\` timeouts; source trust |
-| CLAY4.A1 | Original same-renormalized-source \`T5.TypedContinuumDefectCauchyData.oneStepDefectAbsoluteBound\` | UV dyadic bound on original \(F_n\) at all physical volumes |
-| CLAY4.A2 | \`telescopingExpectationDifferenceExact\` for the actual renormalized observable | Original Wilson E difference = true finite signed defect sum |
+| CLAY4.F1 | Three native source 1024-bond equalities `YMClayNativeClosedThreeEqualitiesCandidateExact` | Actual kernel certificate, no normalized `refl` timeouts; source trust |
+| CLAY4.A1 | Original same-renormalized-source `T5.TypedContinuumDefectCauchyData.oneStepDefectAbsoluteBound` | UV dyadic bound on original \(F_n\) at all physical volumes |
+| CLAY4.A2 | `telescopingExpectationDifferenceExact` for the actual renormalized observable | Original Wilson E difference = true finite signed defect sum |
 | CLAY4.A3 | Physical Path4 moment/coercive compact sublevels and determining bounded tests | Original Prokhorov/R439 continuation, or direct completed-expectation uniqueness |
 | CLAY4.B1 | Original two-support CMP116 connecting cluster expansion and absolute weight sum | Physical \(B_F e^{-\mu R}\) uniformly in \(n,L\) |
-| CLAY4.C1 | R467 \`literalSelectedCMP116Localization\` | Literal original two-J log Z derivative uniformly localized |
-| CLAY4.C2 | R467 \`sourceEnvelopeBelowPhysicalClusteringEnvelope\` | Physical time rate + prefactor and source norms |
+| CLAY4.C1 | R467 `literalSelectedCMP116Localization` | Literal original two-J log Z derivative uniformly localized |
+| CLAY4.C2 | R467 `sourceEnvelopeBelowPhysicalClusteringEnvelope` | Physical time rate + prefactor and source norms |
 | CLAY4.D1 | One selected Wilson plaquette local OS Gaussian floor and interacting error budget | \(\eta_2>0\) on SAME reconstructed OS vector |
-| CLAY4.D2 | New \`YMClayRGLossBudgetToNonGaussianExact.referenceRGUniformNoncollapse\` | 4th-cumulant signed charge survives UV finite stages from q0 + loss budget |
-| CLAY4.D3 | New \`asOriginalT5Nontriviality\` plus T5 cumulant convergence | \(\eta_4>0\) non-Gaussian continuum, same \(J\) |
+| CLAY4.D2 | New `YMClayRGLossBudgetToNonGaussianExact.referenceRGUniformNoncollapse` | 4th-cumulant signed charge survives UV finite stages from q0 + loss budget |
+| CLAY4.D3 | New `asOriginalT5Nontriviality` plus T5 cumulant convergence | \(\eta_4>0\) non-Gaussian continuum, same \(J\) |
 | CLAY4.E1 | Original finite Wilson RP, continuous geometry/E(4), regular/tempered Ward/stress | R425 continuum OS core from SAME measure, no source-replacement |
 | CLAY4.E2 | R333 same dense OS time semigroup and R479 full spectral conclusion | strictly positive \(m_G\) in physical units |
 | CLAY4.E3 | Compact-simple-group quantifier + no hidden source/representation switch | selected actual \(G\)-wise witnesses to full Clay endpoint |
 
-**Acceptance codes:** \`PROPOSED_TEST\` (mathematical hypothesis), \`SOURCE_PENDING_AGDA\`, \`REFERENCE_EXACT\`, \`KERNEL_ACCEPTED\`, \`PHYSICAL_SOURCE_PROVED\`, \`CLAY_ENDPOINT_PROVED\`. Do not turn \`SOURCE_PENDING_AGDA\` or \`REFERENCE_EXACT\` into the last two.
+**Acceptance codes:** `PROPOSED_TEST` (mathematical hypothesis), `SOURCE_PENDING_AGDA`, `REFERENCE_EXACT`, `KERNEL_ACCEPTED`, `PHYSICAL_SOURCE_PROVED`, `CLAY_ENDPOINT_PROVED`. Do not turn `SOURCE_PENDING_AGDA` or `REFERENCE_EXACT` into the last two.
 
 ### Algorithm — same-family maximum-cut execution
 
-\`\`\`text
+```text
 for each selected compact simple group G:
     choose faithful rep, original Wilson Haar/action and physical g_R(ell*)
     pin original bond/link source, normalization and +time algebra
@@ -195,12 +222,12 @@ for each selected compact simple group G:
     instantiate original R467 selected marked-J response with physical time
     reconstruct exactly ONE OS H and exclude every subgap vector
     validate SAME SOURCE both ways and per-G original action
-\`\`\`
+```
 
 **Highest alpha:** do not redo finite Haar, Fubini, Prokhorov, Markov, OS implications, or generic KP mathematics. Pay **the original-source one-step defect**, **literal two-marked CMP116 absolute tail**, **one reference noncollapse + UV loss**, **physical metric/OS test class**. These are mutually coupled enough to drive the continuum result without six disconnected arbitrary records.
 
 ## 9. Independent exact controls
 
-\`scripts/check_ym_rg_noncollapse_steelman.py\`: 192 exact rational refinements, five rejection controls, 64 exhaustive small signed-charge fixtures. \`scripts/check_ym_clay_continuum_bidi_controls.py\`: 4x4 OS Hankel principal-minor necessary condition, physical transfer geometric bound, 128-stage RG noncollapse, seven false-positive controls. These are test harnesses **only**, no claims of original 4D Wilson inequalities or Agda acceptance.
+`scripts/check_ym_rg_noncollapse_steelman.py`: 192 exact rational refinements, five rejection controls, 64 exhaustive small signed-charge fixtures. `scripts/check_ym_clay_continuum_bidi_controls.py`: 4x4 OS Hankel principal-minor necessary condition, physical transfer geometric bound, 128-stage RG noncollapse, seven false-positive controls. These are test harnesses **only**, no claims of original 4D Wilson inequalities or Agda acceptance.
 
-**Next acceptance:** pinned \`agda\` for every new golden module and TOE root, exact original Wilson/CMP116 witness lemmas, independent physical proof receipts, full trust audit. No CI run has been observed for the newly added code at the time of writing.
+**Next acceptance:** pinned `agda` for every new golden module and TOE root, exact original Wilson/CMP116 witness lemmas, independent physical proof receipts, full trust audit. No CI run has been observed for the newly added code at the time of writing.
