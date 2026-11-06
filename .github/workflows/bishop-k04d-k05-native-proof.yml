@@ -182,7 +182,7 @@ jobs:
           : > bishop-toe-kernel.log
           for file in DASHI/EverythingTOESymmetryResolved369.agda DASHI/Unifier.agda DASHI/Unified/Everything.agda; do
             echo "=== golden TOE ${file} ===" | tee -a bishop-toe-kernel.log
-            timeout 600s bash scripts/run_agda29_parallel_check.sh "${file}" 2>&1 | tee -a bishop-toe-kernel.log
+            timeout 600s bash scripts/run_agda29_parallel_check.sh --safe "${file}" 2>&1 | tee -a bishop-toe-kernel.log
             rc=${PIPESTATUS[0]}
             if [[ ${rc} -ne 0 ]]; then
               echo "FAIL rc=${rc} ${file}" | tee -a bishop-toe-kernel.log
