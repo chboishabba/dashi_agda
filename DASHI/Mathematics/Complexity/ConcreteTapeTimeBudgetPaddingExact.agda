@@ -67,6 +67,28 @@ guardedInitialCols :
 guardedInitialCols input steps =
   Input.initialInputCellCount input + (2 * steps)
 
+-- The original literal initial row always has a plain-left,
+-- headed-middle, plain-right triple. Hence its width is a successor
+-- independent of the input/timestep, permitting canonical endcap CNF
+-- placement without a vacuous zero-column case.
+natPredecessor : Nat → Nat
+natPredecessor zero = zero
+natPredecessor (suc n) = n
+
+guardedInitialColsMinusOne :
+  ∀ {machine} → Input.InputWord machine → Nat → Nat
+guardedInitialColsMinusOne input steps =
+  natPredecessor (guardedInitialCols input steps)
+
+guardedInitialColsSuccessor :
+  ∀ {machine}
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  guardedInitialCols input steps
+  ≡ suc (guardedInitialColsMinusOne input steps)
+guardedInitialColsSuccessor input steps = refl
+
+
 guardedInitialCellCount :
   ∀ {machine}
     (input : Input.InputWord machine)
