@@ -110,23 +110,8 @@ coupledStepCommutesAtEveryVoxel schedule Bio.restoreMemory field p =
 coupledStepCommutesAtEveryVoxel schedule Bio.provideEnvironment field p =
   Bio.projectionCommutes Bio.provideEnvironment (field p)
 
--- The stronger spatial theorem has an explicit history of interventions.
-fineEvolve :
-  AdmissibleNeighbourSchedule → List Bio.Intervention →
-  Bio.TissueField → Bio.TissueField
-fineEvolve schedule [] field = field
-fineEvolve schedule (a ∷ rest) field =
-  fineEvolve schedule rest (coupledStep schedule a field)
-
-coarseEvolve :
-  AdmissibleNeighbourSchedule → List Bio.Intervention →
-  Bio.CoarseTissueField → Bio.CoarseTissueField
-coarseEvolve schedule [] field = field
-coarseEvolve schedule (a ∷ rest) field =
-  coarseEvolve schedule rest (coarseCoupledStep schedule a field)
-
--- Explicit pointwise equivalence is retained as a relation, so the
--- inductive theorem does not assume extensional equality of functions.
+-- The stronger spatial theorem retains an explicit intervention history.
+-- Pointwise equality is a relation; no function extensionality is required.
 record FieldsAgree
     (fine : Bio.TissueField)
     (coarse : Bio.CoarseTissueField) : Set where
@@ -142,8 +127,17 @@ initialFieldAgreement :
   FieldsAgree fine (Bio.spatialProject fine)
 initialFieldAgreement fine = fieldsAgree (λ p → refl)
 
--- The following named obligation is stronger than pointwise one-step
--- equality: it allows a separately represented coarse field.
+-- Change of the entire field, not just the source voxel.  In particular
+-- the chosen neighbouring junction is transported by the same receipt.
+coarseResponseRespectsFieldAgreement :
+  (schedule : AdmissibleNeighbourSchedule)
+  (left right : Bio.CoarseTissueField) →
+  ((p : Cube.Ternary27Point) → left p ≡ right p) →
+  (p : Cube.Ternary27Point) →
+  coarseResponse schedule left p ≡ coarseResponse schedule right p
+coarseResponseRespectsFieldAgreement schedule left right same p
+  rewrite same p | same (neighbour schedule p) = refl
+
 coupledAgreementPreserved :
   (schedule : AdmissibleNeighbourSchedule)
   (a : Bio.Intervention)
@@ -157,10 +151,80 @@ coupledAgreementPreserved schedule Bio.signal fine coarse agreement =
   fieldsAgree λ p →
     trans
       (coupledStepCommutesAtEveryVoxel schedule Bio.signal fine p)
-      (cong
-        (λ x → withCoarseMorphology
-          (Bio.coarseStep Bio.signal x)
-          (coarseResponse schedule (Bio.spatialProject fine) p))
-        (atEveryVoxel agreement p))
-      -- The neighbour response must also transport across the two fields.
-      -- This is provided by the full-field component relation below.
+      (trans
+        (cong
+          (λ x → withCoarseMorphology
+            (Bio.coarseStep Bio.signal x)
+            (coarseResponse schedule (Bio.spatialProject fine) p))
+          (atEveryVoxel agreement p))
+        (cong
+          (withCoarseMorphology
+            (Bio.coarseStep Bio.signal (coarse p)))
+          (coarseResponseRespectsFieldAgreement
+            schedule (Bio.spatialProject fine) coarse
+            (atEveryVoxel agreement) p)))
+coupledAgreementPreserved schedule Bio.wound fine coarse agreement =
+  fieldsAgree λ p →
+    trans
+      (Bio.projectionCommutes Bio.wound (fine p))
+      (cong (Bio.coarseStep Bio.wound) (atEveryVoxel agreement p))
+coupledAgreementPreserved schedule Bio.connect fine coarse agreement =
+  fieldsAgree λ p →
+    trans
+      (Bio.projectionCommutes Bio.connect (fine p))
+      (cong (Bio.coarseStep Bio.connect) (atEveryVoxel agreement p))
+coupledAgreementPreserved schedule Bio.restoreMemory fine coarse agreement =
+  fieldsAgree λ p →
+    trans
+      (Bio.projectionCommutes Bio.restoreMemory (fine p))
+      (cong (Bio.coarseStep Bio.restoreMemory) (atEveryVoxel agreement p))
+coupledAgreementPreserved schedule Bio.provideEnvironment fine coarse agreement =
+  fieldsAgree λ p →
+    trans
+      (Bio.projectionCommutes Bio.provideEnvironment (fine p))
+      (cong (Bio.coarseStep Bio.provideEnvironment) (atEveryVoxel agreement p))
+
+fineEvolve :
+  AdmissibleNeighbourSchedule → List Bio.Intervention →
+  Bio.TissueField → Bio.TissueField
+fineEvolve schedule [] field = field
+fineEvolve schedule (a ∷ rest) field =
+  fineEvolve schedule rest (coupledStep schedule a field)
+
+coarseEvolve :
+  AdmissibleNeighbourSchedule → List Bio.Intervention →
+  Bio.CoarseTissueField → Bio.CoarseTissueField
+coarseEvolve schedule [] field = field
+coarseEvolve schedule (a ∷ rest) field =
+  coarseEvolve schedule rest (coarseCoupledStep schedule a field)
+
+allTracesPreserveCoupledFieldAgreement :
+  (schedule : AdmissibleNeighbourSchedule)
+  (actions : List Bio.Intervention)
+  (fine : Bio.TissueField)
+  (coarse : Bio.CoarseTissueField) →
+  FieldsAgree fine coarse →
+  FieldsAgree
+    (fineEvolve schedule actions fine)
+    (coarseEvolve schedule actions coarse)
+allTracesPreserveCoupledFieldAgreement schedule [] fine coarse agrees = agrees
+allTracesPreserveCoupledFieldAgreement schedule (a ∷ rest) fine coarse agrees =
+  allTracesPreserveCoupledFieldAgreement schedule rest
+    (coupledStep schedule a fine) (coarseCoupledStep schedule a coarse)
+    (coupledAgreementPreserved schedule a fine coarse agrees)
+
+initialAllTracesPreserveBiologicalProjection :
+  (schedule : AdmissibleNeighbourSchedule)
+  (actions : List Bio.Intervention)
+  (field : Bio.TissueField) →
+  FieldsAgree
+    (fineEvolve schedule actions field)
+    (coarseEvolve schedule actions (Bio.spatialProject field))
+initialAllTracesPreserveBiologicalProjection schedule actions field =
+  allTracesPreserveCoupledFieldAgreement schedule actions
+    field (Bio.spatialProject field)
+    (initialFieldAgreement field)
+
+-- Adjacency-witness schedules do not imply symmetric transport or numerical
+-- conservation.  Boundary conditions and all-face/plaquette flux are still
+-- independent dynamical owners, and must be paid before a PNP PDE claim.
