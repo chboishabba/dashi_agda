@@ -43,3 +43,5 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelope
 import DASHI.Mathematics.Complexity.Karp21N21BitWeightedComparisonEnvelopeExact
 
 import DASHI.Mathematics.Complexity.Karp21BinaryWordEqualityPrimitiveExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryEqualitySameValueExact
