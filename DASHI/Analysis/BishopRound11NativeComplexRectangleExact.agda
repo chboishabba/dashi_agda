@@ -34,6 +34,7 @@ import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Foundations.BishopFiniteSeriesRectangleProductExact as Rect
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
+import DASHI.Foundations.BishopGroupedCauchyParityTelescopeExact as Telescope
 import DASHI.Analysis.BishopGenericCauchyFromAbsoluteTriangleExact as Generic
 import DASHI.Analysis.BishopRound11ConcreteAbsoluteSeriesConvergenceExact as AbsRound11
 import DASHI.Analysis.BishopPositiveCauchyTriangleFromAbsoluteSeriesExact as Positive
@@ -904,3 +905,195 @@ round11TrigAdditionFromExactFiniteGroupedParity
     (C.≈C-sym
       (round11ProductFromExactFiniteGroupedParity
         inputs x y exactRealParity exactImagParity))
+
+
+------------------------------------------------------------------------
+-- ALL-N TRANSPORT OF THE FINITE TELESCOPE TO THE ORIGINAL ROUND11
+-- COMPLEX COEFFICIENTS (AND TO THE ALREADY-CONSTRUCTED PRODUCT).
+--
+-- These are not new polynomial or complex carriers. Every coefficient
+-- is Row.cauchyCoefficient on the literal concrete sine/cosine terms.
+-- The only outstanding source algebra is the pair of signed-factorial
+-- degree-split binomial identities. The all-N accumulation and the
+-- exact odd/odd boundary are independently derived here.
+------------------------------------------------------------------------
+
+round11CosCosDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11CosCosDegree inputs x y =
+  Row.cauchyCoefficient
+    (realTerms (round11PhaseTerms inputs x))
+    (realTerms (round11PhaseTerms inputs y))
+
+round11SinSinDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11SinSinDegree inputs x y =
+  Row.cauchyCoefficient
+    (imagTerms (round11PhaseTerms inputs x))
+    (imagTerms (round11PhaseTerms inputs y))
+
+round11CosSinDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11CosSinDegree inputs x y =
+  Row.cauchyCoefficient
+    (realTerms (round11PhaseTerms inputs x))
+    (imagTerms (round11PhaseTerms inputs y))
+
+round11SinCosDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11SinCosDegree inputs x y =
+  Row.cauchyCoefficient
+    (imagTerms (round11PhaseTerms inputs x))
+    (realTerms (round11PhaseTerms inputs y))
+
+round11OriginalCosineSourceDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11OriginalCosineSourceDegree inputs x y =
+  realTerms (round11PhaseTerms inputs (R._+_ x y))
+
+round11OriginalSineSourceDegree :
+  (inputs : Round11.Round11BishopCutset) →
+  R.ℝ → R.ℝ → Nat → R.ℝ
+round11OriginalSineSourceDegree inputs x y =
+  imagTerms (round11PhaseTerms inputs (R._+_ x y))
+
+round11RealBoundaryIsNativeTelescope :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (count : Nat) →
+  R._≃_
+    (round11GroupedBoundaryReal inputs x y count)
+    (Telescope.realGroupedResidual
+      (round11CosCosDegree inputs x y)
+      (round11SinSinDegree inputs x y)
+      (round11OriginalCosineSourceDegree inputs x y)
+      count)
+round11RealBoundaryIsNativeTelescope inputs x y count =
+  let
+    cc = round11CosCosDegree inputs x y
+    ss = round11SinSinDegree inputs x y
+    original = round11OriginalCosineSourceDegree inputs x y
+  in
+  RP.≃-trans
+    (RP.+-congʳ
+      (R.-_ (Seq.SeriesOf original count))
+      (RP.+-cong
+        (FinSum.finSumIsSeriesOf cc count)
+        (RP.-‿cong (FinSum.finSumIsSeriesOf ss count))))
+    (RP.+-congʳ
+      (R.-_ (Seq.SeriesOf original count))
+      (RP.≃-symm
+        (Telescope.nativeFiniteSeriesDifferenceLinear cc ss count)))
+
+round11ImagBoundaryIsNativeTelescope :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (count : Nat) →
+  R._≃_
+    (round11GroupedBoundaryImag inputs x y count)
+    (Telescope.imagGroupedResidual
+      (round11CosSinDegree inputs x y)
+      (round11SinCosDegree inputs x y)
+      (round11OriginalSineSourceDegree inputs x y)
+      count)
+round11ImagBoundaryIsNativeTelescope inputs x y count =
+  let
+    cs = round11CosSinDegree inputs x y
+    sc = round11SinCosDegree inputs x y
+    original = round11OriginalSineSourceDegree inputs x y
+  in
+  RP.≃-trans
+    (RP.+-congʳ
+      (R.-_ (Seq.SeriesOf original count))
+      (RP.+-cong
+        (FinSum.finSumIsSeriesOf cs count)
+        (FinSum.finSumIsSeriesOf sc count)))
+    (RP.+-congʳ
+      (R.-_ (Seq.SeriesOf original count))
+      (RP.≃-symm
+        (Telescope.nativeFiniteSeriesSumLinear cs sc count)))
+
+-- EXACT FINAL TWO FACTORIAL DEGREE LEAVES:
+-- even: cos*cos_n - sin*sin_(n-1) = cos_n(x+y);
+-- odd:  cos*sin_n + sin*cos_n     = sin_n(x+y).
+-- Notice the n=0 case uses previousCoefficient = 0, not sin*sin_0.
+
+round11OriginalEvenDegreeBinomialSuffices :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (∀ degree →
+    R._≃_
+      (R._-_
+        (round11CosCosDegree inputs x y degree)
+        (Telescope.previousCoefficient
+          (round11SinSinDegree inputs x y) degree))
+      (round11OriginalCosineSourceDegree inputs x y degree)) →
+  ∀ n →
+  R._≃_
+    (round11GroupedBoundaryReal inputs x y (suc n))
+    (round11OddOddCorrection inputs x y n)
+round11OriginalEvenDegreeBinomialSuffices inputs x y evenDegree n =
+  RP.≃-trans
+    (round11RealBoundaryIsNativeTelescope inputs x y (suc n))
+    (Telescope.universalFiniteRealGroupedTelescope
+      (round11CosCosDegree inputs x y)
+      (round11SinSinDegree inputs x y)
+      (round11OriginalCosineSourceDegree inputs x y)
+      evenDegree (suc n))
+
+round11OriginalOddDegreeBinomialSuffices :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (∀ degree →
+    R._≃_
+      (R._+_
+        (round11CosSinDegree inputs x y degree)
+        (round11SinCosDegree inputs x y degree))
+      (round11OriginalSineSourceDegree inputs x y degree)) →
+  ∀ n →
+  R._≃_
+    (round11GroupedBoundaryImag inputs x y (suc n))
+    R.0ℝ
+round11OriginalOddDegreeBinomialSuffices inputs x y oddDegree n =
+  RP.≃-trans
+    (round11ImagBoundaryIsNativeTelescope inputs x y (suc n))
+    (Telescope.universalFiniteImagGroupedEquality
+      (round11CosSinDegree inputs x y)
+      (round11SinCosDegree inputs x y)
+      (round11OriginalSineSourceDegree inputs x y)
+      oddDegree (suc n))
+
+round11ProductFromOriginalFactorialDegreeSplits :
+  (inputs : Round11.Round11BishopCutset) →
+  (x y : R.ℝ) →
+  (∀ degree →
+    R._≃_
+      (R._-_
+        (round11CosCosDegree inputs x y degree)
+        (Telescope.previousCoefficient
+          (round11SinSinDegree inputs x y) degree))
+      (round11OriginalCosineSourceDegree inputs x y degree)) →
+  (∀ degree →
+    R._≃_
+      (R._+_
+        (round11CosSinDegree inputs x y degree)
+        (round11SinCosDegree inputs x y degree))
+      (round11OriginalSineSourceDegree inputs x y degree)) →
+  let T = Route.round11MachinTranscendentals inputs
+  in
+  C._≈C_
+    (C._*C_
+      (C.expC T (C.pureImaginary x))
+      (C.expC T (C.pureImaginary y)))
+    (C.expC T (C.pureImaginary (R._+_ x y)))
+round11ProductFromOriginalFactorialDegreeSplits
+    inputs x y evenDegree oddDegree =
+  round11ProductFromExactFiniteGroupedParity
+    inputs x y
+    (round11OriginalEvenDegreeBinomialSuffices inputs x y evenDegree)
+    (round11OriginalOddDegreeBinomialSuffices inputs x y oddDegree)
