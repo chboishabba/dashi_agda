@@ -13,6 +13,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
+  DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
 )
 test -s "$ROOT"
@@ -38,6 +39,8 @@ grep -q 'morphologyFutureEquivalenceExactlyMinimalCode' \
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
 grep -q 'completePlaquetteCount' \
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
+grep -q 'canonicalAllNeighboursFutureSafe' \
+  DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
 grep -q 'differentRawMeanReadouts' \
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
 grep -q 'sourceQualifiedCellObservation' \
@@ -48,6 +51,7 @@ grep -q 'withdrawalReopensModelCandidate' \
 python3 scripts/check_biological_history_future_quotient.py
 python3 scripts/check_biological_spatial_stochastic.py
 python3 scripts/check_biological_minimal_cube.py
+python3 scripts/check_biological_all_neighbours.py
 python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
 python3 scripts/biological_si_kinetic_calibration.py --self-test
 python3 scripts/biological_measured_genotype_holdout.py --self-test
