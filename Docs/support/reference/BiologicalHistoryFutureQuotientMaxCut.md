@@ -139,7 +139,7 @@ not the same as a source-validated scientific result.
 | P2 — spatial dynamics | `BiologicalCoupledTissueCubeExact` provides a synchronous old-field neighbour-coupled update with explicit real 3×3×3 nearest-neighbour witnesses, a concrete nonperiodic x-neighbour schedule for every vertex, arbitrary-trace fine/coarse preservation without function extensionality, and a source-written one-step finite basin/fixed-point result for repeated unchanged signalling. | **P2.ALL-EDGE-PNP:** full 54-edge/36-plaquette flux, physically typed local couplings, conservation/boundary conditions, measured tissue dynamics, and physical basin transport beyond the selected Boolean one-step idempotence. The selected neighbour operator is a finite mathematical model, not tissue physics. |
 | P3 — kinetic calibration | `validate_biological_source_models.py` performs fail-closed official gocam-py/libSBML checks when those dependencies are installed. `biological_si_kinetic_calibration.py` fits a declared SI first-order production/decay law on source-scoped training experiments, bootstraps by experiment and reports disjoint held-out performance and identifiability failures. | **P3.ORIGINAL-SI:** original model-specific kinetic parameter values, external SI-unit validation, lawful simulation of selected SBML/SED-ML equations, uncertainty/identifiability controls, measured tissue/chemical trajectories and independent experimental replication. First-order fitting does not validate another biological mechanism by analogy. |
 | P4 — ontology / PNF | `biological_gocam_sbml_receipt_intake.py` reads original IDs, predicates, source hashes and explicit candidate crosswalks; `BiologicalEvidenceFeedbackFiniteExact` proves finite evidence-driven rejection and reopening. ITIR-suite draft PR [#72](https://github.com/chboishabba/ITIR-suite/pull/72) adds a source-bound, review-only candidate projection to the canonical world-model boundary with evidence and trust tests. | **P4.CANONICAL-PG:** original schema validation on an identified model, source-span SLR/PNF parser, reviewed candidate reconciliation and actual PostgreSQL authoritative receipts. No parallel persistent store or automatic ontology mutation. |
-| P5 — held-out measurements | `prepare_shine_dalgarno_measured.py` is pinned to the 2020 Kuo et al. original dmsC replicate columns as provided by the 2026 `cmarti/shine_dalgarno` reanalysis, with genotype-disjoint train/validation/test splits and no inferred imputation. `biological_measured_genotype_holdout.py` selects additive/pairwise regularized regressions by validation only and reports held-out metrics/bootstrap intervals. `check_biological_spatial_stochastic.py` independently checks the selected finite spatial/stochastic claims. | **P5.ORIGINAL-RUN:** fetch/audit the actual measured CSV and preserve its original SHA/experiment context, run the pinned assay holdout and report its results; **P5.DEVELOPMENT:** longitudinal planarian/Levin control cohorts, prospective morphological basin predictions, independent controls/replication and source-separated effect estimates. A static dmsC translation-efficiency benchmark is *not* a developmental attractor experiment. |
+| P5 — held-out measurements | `prepare_shine_dalgarno_measured.py` is pinned to the 2020 Kuo et al. original dmsC replicate columns as provided by the 2026 `cmarti/shine_dalgarno` reanalysis, with genotype-disjoint train/validation/test splits and no inferred imputation. `biological_measured_genotype_holdout.py` selects additive/pairwise regularized regressions by validation only and reports held-out metrics/bootstrap intervals. `check_biological_spatial_stochastic.py` independently checks the selected finite spatial/stochastic claims. | **P5.ORIGINAL-RUN:** fetch/audit the actual measured CSV and preserve its original SHA/experiment context, reproduce the connector-computed original-data readout in the committed Python code and obtain an independent receipt; **P5.DEVELOPMENT:** longitudinal planarian/Levin control cohorts, prospective morphological basin predictions, independent controls/replication and source-separated effect estimates. A static dmsC translation-efficiency benchmark is *not* a developmental attractor experiment. |
 
 ### Source lineage is two-stage
 
@@ -160,9 +160,25 @@ model-inferred landscape positions. The converter retains observed replicates
 and rejects missing values; it never promotes the full `4^9` inferred
 landscape as independent measured outcomes.
 
-No real data file was obtained or fitted in this connector session. The
-upstream GitHub file locator was verified; the file-content fetch returned
-no data, so the measured external holdout remains an execution/receipt gate.
+**Original-data readout obtained.** The GitHub content-file endpoint returned an
+empty payload for this large CSV, but the Git *blob SHA* endpoint returned the
+entire original source table (262,144 9-mers). The 2026-11-06 in-memory
+measured-data analysis contains 257,565 genotypes with at least one dmsC
+replicate and 635,085 observed replicate values.
+
+Source-identified report:
+`Docs/support/reference/OriginalDmscMeasured20261106.md`.
+The report documents a 181,279 / 37,784 / 38,502 genotype-disjoint
+train/validation/test split, original measured-data G/C/U count model test
+RMSE 0.321043 against baseline 0.364172 (11.8431% improvement), a
+600-resample genotype bootstrap 95% interval for improvement of
+11.5062%–12.1945%, and measured Hamming-one tolerance-network component
+counts at epsilon 0.05, 0.10 and 0.20.
+
+This is a genuine primary-source computational readout, **not** a running
+receipt from the newly committed Python reproduction scripts. Those scripts
+remain to be executed independently on the pinned CSV, and a source/assay
+batch-replication or mechanistic attractor claim still requires more data.
 
 ### Exact commands
 
@@ -175,6 +191,14 @@ python3 scripts/prepare_shine_dalgarno_measured.py \
   --out /tmp/dmsc-measured-assay.csv \
   --manifest /tmp/dmsc-source-receipt.json \
   --trait-unit 'log[GFP]'
+
+python3 scripts/check_original_dmsc_holdout.py \
+  --original-csv /path/to/upstream/data/dmsc.csv \
+  --receipt /tmp/dmsc-primary-ols-reproduction.json
+
+python3 scripts/check_original_dmsc_neutral_components.py \
+  --original-csv /path/to/upstream/data/dmsc.csv \
+  --output /tmp/dmsc-primary-component-reproduction.json
 
 python3 scripts/biological_measured_genotype_holdout.py \
   --assay /tmp/dmsc-measured-assay.csv \
@@ -261,20 +285,22 @@ rather than claiming kernel acceptance.
 - **Mechanistic finding**: a discrimination test supports a specific biological
   claim against relevant alternatives and controls.
 
-Only the first level has been established in this branch before a compiler run.
-A separate local Python enumeration passed the synthetic finite checks; it is
-not a receipt for a run of the exact committed script or an Agda kernel pass.
-No Agda kernel, *schema-validated or physically calibrated* SBML ingestion,
-production ontology/PNF importer, or held-out biological validation receipt
-has been claimed by this document. The read-only lexical intake is not
+The Golden code remains **source-written, not kernel accepted**. Separately,
+the original measured dmsC genotype holdout and tolerance network were
+computed in-memory directly from the pinned Git source blob, and the results
+are recorded in `OriginalDmscMeasured20261106.md`. Independent Python
+execution and `parallel_checker` receipts remain pending. No Agda kernel,
+*physically calibrated* SBML kinetics, production ontology/PNF importer, or
+independent developmental-attractor validation receipt is claimed. The read-only lexical intake is not
 substituted for these gates.
 
 ## Remaining decisive implementation order
 
 1. Exact-head Golden Agda and parallel_checker acceptance for all Round-23
    owners, including the original canonical root and transitive imports.
-2. Run the original measured dmsC benchmark, inspect the data/DOI evidence,
-   and retain the actual held-out result with its source checksum.
+2. Independently reproduce the original measured dmsC in-memory readout
+   using the committed Python scripts, preserving source SHA256 and experiment
+   provenance; validate neutral tolerance thresholds against assay error.
 3. Select original planarian treatment/longitudinal measurements and fit the
    actual bioelectric/chemical model, not a generic surrogate.
 4. Complete source-validating GO-CAM/LinkML and SBML/SED-ML adapters,
