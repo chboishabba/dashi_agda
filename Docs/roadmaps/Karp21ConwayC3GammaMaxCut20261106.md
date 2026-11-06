@@ -68,7 +68,9 @@ actual polynomial tape cost remain open.
 `Trit -> Trit`, definitionally. The source proof is `refl`.
 `ConwayC3SameObjectCodecExact` adds the explicitly invertible
 `C3CubeFourier27Exact.Cube3 <-> Trit -> Trit` table map,
-pointwise additive C3 transport, and reuse of
+pointwise additive C3 transport, the original C3^3 character action
+and character homomorphism, strict six-bit reverse decoding with malformed
+reserved-word rejection, and reuse of
 `VerifiedFiniteTritCoder.encodeTriple` (six-bit fixed width).
 
 This identifies selected carriers with a proof of operation transport,
@@ -105,6 +107,10 @@ The current tool environment has no local Agda executable, no
 The Agda theorem sources and original imports above are therefore
 not independently kernel accepted in this work session.
 
+The retained executable reference fixture is
+\`scripts/check_karp21_conway_gamma_reference.py\`, now called by the
+existing original \`referee_karp21_maxcut.sh\` preflight. The referee
+also typechecks the new safe K01/K02 roots in golden mode.
 A bounded independent reference check compared 103 finite chains
 against a separate direct implementation of the six Conway rules;
 18 chains with impractically large expansions were skipped.
