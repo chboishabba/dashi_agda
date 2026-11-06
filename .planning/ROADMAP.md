@@ -98,3 +98,27 @@ library; D3 spectral certification; D4 source/geometry parity; D5
 control/Pareto benchmark; D6 empirical validation; D7 inverse compiler and
 publication. The exact G01–G21 lemma list, dependencies, owners, tests and
 nonpromotion rules live exclusively in the linked lane roadmap.
+
+### Gielis round-2 mathematical certificates, separate from Golden acceptance
+
+- [x] Paper-level exact special-case Gielis identity, smooth star boundary,
+  3/6/9 dihedral symmetry, and common area `sqrt(2)*pi` (E01–E03).
+- [x] Paper-level normal/curvature formulas and 3/6/9 nonconvexity (E04).
+- [x] Full finite cyclic-group projector identity and exact selected 36-sample
+  bandlimited reconstruction, with 18-sample aliasing counterexample (E05–E06).
+- [x] Standard-theorem argument for Dirichlet compact resolvent and disk/Faber–Krahn
+  first-eigenvalue bounds; **not** a mesh-error proof (E07).
+- [x] Correct wall-versus-ray impulse sign and derive conditional optical
+  power-to-SI-torque conversion; no measured power claim (E08).
+- [x] Explicit zero-modulation inverse-identifiability counterexample and
+  C27 versus C3^3 nonisomorphism; computational prefix code (E10–E11).
+- [ ] G01–G05/G07/G08/G09/G10/G11/G19: **ordinary-real Agda kernel**
+  certificates for the paper mathematics and finite carrier transport.
+- [ ] G12: rigorous numerical PDE eigenvalue discretization convergence/errors.
+- [ ] G13–G16/G21: original HTML Kozyrev mirror source/collision parity,
+  committed-head executable receipt, optical power calibration and CIs.
+- [ ] P5: independent physical measurements and replication.
+
+See [Proof theorems](../Docs/support/reference/GielisBase369ProofTheorems.md)
+for E01–E11 and [exact gate roadmap](../Docs/support/reference/GielisBase369Roadmap.md)
+for G01–G21, status, phases, dependencies and D0–D7.
