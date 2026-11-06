@@ -37,6 +37,8 @@
 - [ ] **S10/BIDI01–BIDI04:** same complete CMP119/122 effective Wilson source, genuine selected uniform CMP116 localized estimates and physical UV/IR/history/KK/OS limits.
 - [ ] **S11/BIDI07:** exact-head `parallel_checker` zero-error compile and full transitive trust audit; 1,443 reference cases alone are NOT kernel acceptance.
 
+**OBS04/OBS05/OBS07 source-specific negative control:** `TSVFOriginalComplexFiniteClockPropagationNonpromotionExact` consumes the ACTUAL `TSVF2017OriginalComplexABLSelectedExact.finiteComplexQuantum` (rather than a hypothetical singleton Q) and proves its original Time is Unit, all time coordinates are equal, and original `evolveKet/evolveBra` are identities. Its existing nontrivial complex ABL and record amplitudes do not contain a physical retarded propagation clock or dimension-four manifold. A new nontrivial original continuous, spatially located physical dynamics must be built to discharge OBS05–OBS09; this is a mathematically proven source boundary, not an extra YM dependency.
+
 ## Actually completed source and integration work this round
 
 - [x] Reconcile #1444 physical-cube PCUBE/CMP116 donor into #1460 through [#1470](https://github.com/chboishabba/dashi_agda/pull/1470), merge SHA `1f71c1d58cc2d231a0fdc42c50b0c9969d35e49b`. Pin donor source head; later parent updates require a new sync.
