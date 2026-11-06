@@ -36,6 +36,8 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOriginalInterventionRetardedPrefixExact.agda
   DASHI/Physics/Foundations/TSVFObserverOSCyclicGramSetoidExact.agda
   DASHI/Physics/Foundations/TSVFOriginalAllWordMomentTransportExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalSelectedFiniteCommutatorResponseExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalForwardPositiveFunctionalExact.agda
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda
 )
