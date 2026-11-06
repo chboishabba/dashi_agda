@@ -65,11 +65,11 @@ module _
         apply (operatorScale scalar a) ket
           ≡ ketScale scalar (apply a ket)
 
+      scalarMultiply : Scalar → Scalar → Scalar
+
       pairRightHomogeneous : (bra : Bra) (scalar : Scalar) (ket : Ket) →
         pair bra (ketScale scalar ket)
           ≡ scalarMultiply scalar (pair bra ket)
-
-      scalarMultiply : Scalar → Scalar → Scalar
 
       -- Finite nonnegative norm on the PHYSICAL selected ket carrier.
       -- This is not implicit in QuantumSurface, which only declares
