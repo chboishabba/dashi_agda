@@ -7,6 +7,9 @@ on:
     paths:
       - 'DASHI/Analysis/Bishop*.agda'
       - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda'
+      - 'DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
       - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
@@ -84,6 +87,18 @@ jobs:
             DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda
             DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda
             DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda
+            # Terminal and same-object consumer checks: unlike static lemma
+            # discovery, these force Agda to elaborate the actual endpoints.
+            DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda
+            DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda
+            DASHI/Analysis/BishopRound11CanonicalNegativeLogSameObjectExact.agda
+            DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda
+            DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda
+            DASHI/Analysis/BishopRound11ImaginaryProductPythagoreanReuseExact.agda
+            DASHI/Analysis/BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda
+            DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda
+            DASHI/Analysis/BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda
+            DASHI/Analysis/BishopMachinZetaSequentialContinuityReducerExact.agda
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
             DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
