@@ -146,7 +146,9 @@ doubleIsTwice :
   D.double n ≡ (2 N.* n)
 doubleIsTwice zero = refl
 doubleIsTwice (suc n) =
-  cong suc (cong suc (doubleIsTwice n))
+  trans
+    (cong suc (cong suc (doubleIsTwice n)))
+    (sym (NP.*-suc 2 n))
 
 doubleDifference :
   (n k : Nat) →
