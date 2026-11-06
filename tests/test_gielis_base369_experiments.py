@@ -11,6 +11,8 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0,str(ROOT / "scripts"))
 SPEC = importlib.util.spec_from_file_location(
     "gielis_base369_experiments", ROOT / "scripts" / "gielis_base369_experiments.py"
 )
@@ -498,3 +500,31 @@ def test_exact_radiation_pressure_torque_envelope():
         module.envelope("9000","17/10",8,"11/10")
     with pytest.raises(ValueError):
         module.envelope("-1","17/10",8,"1")
+
+
+def test_canonical_si_existing_owner_and_nominal_torque_role():
+    from gielis_si_owner_adapter import canonical_speed_of_light_si, owner_receipt
+    r=owner_receipt()
+    assert canonical_speed_of_light_si()==299792458
+    assert g.SPEED_OF_LIGHT_M_S == r["speed_of_light_m_per_s"]
+    assert r["si_power_exponents_MLT"] == (1,2,-3)
+    assert r["si_force_exponents_MLT"] == (1,1,-2)
+    assert r["si_wall_torque_exponents_MLT"] == (1,2,-2)
+    assert r["si_angular_impulse_exponents_MLT"] == (1,2,-1)
+    assert r["torque_is_nominally_not_energy"]
+    assert not r["apparatus_calibrated"]
+    from gielis_optical_force_envelope import C as envelope_c
+    assert envelope_c==r["speed_of_light_m_per_s"]
+
+
+def test_gielis_si_perron_native_weld_declares_exact_owner_reuse():
+    src=(ROOT/"DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda").read_text()
+    assert "DASHI.Physics.Units.SI" in src
+    assert "DASHI.Physics.Units.SIMetrologyBridge" in src
+    assert "DASHI.Promotion.SIExactConstantParsedCarrierRequest" in src
+    assert "DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact" in src
+    assert "MechanicalSI.mechanicalEnergyToSI" in src
+    assert "speedOfLightIsExactSIInteger" in src
+    assert "mechanicalOpticalTorqueIsSI" in src
+    assert "finiteInfluenceRowPowerBoundReuse" in src
+    assert "EmpiricalOpticalCalibration" in src
