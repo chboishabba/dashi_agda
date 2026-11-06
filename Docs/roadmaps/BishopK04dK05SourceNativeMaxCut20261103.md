@@ -1296,3 +1296,105 @@ without that receipt.
 5. Execute \`scripts/run_agda29_parallel_check.sh --safe\` at the exact PR head, all focused 53 and all three TOE roots; reconcile every kernel error before theorem promotion.
 
 Do not mark terminal proofs complete until all five close.
+
+
+## 2026-11-06 source exponential continuity: actual compact-uniform factorial and selected Dirichlet chart
+
+The prior K04d-CONTINUITY matrix contained two independently open
+leaves: source exponential term continuity and selected Dirichlet
+function agreement. **The former has now been source-written, including
+the finite/limit transport, without assuming any full-series derivative
+interchange. The latter remains genuinely independent.**
+
+### Proof owners (new this round)
+
+1. `Analysis/BishopOriginalExponentialUniformCompactTailExact.agda`.
+   At every native fixed nonnegative Bishop bound `M`, for every
+   original point `|x|≤M` and every degree `n`, it proves
+   `|Exp.expTerm x n|≤Exp.expMagnitudeTerm M n`.
+   This uses actual `Sequence.∣xⁿ∣≃∣x∣ⁿ`,
+   `Sequence.x≤y∧nonNegx⇒xⁿ≤yⁿ`, and the original
+   `Exp.embeddedInverseFactorialNonnegative`; there is no new
+   exponential series or comparison axiom.
+   The original `Exp.expMagnitudeSeriesConvergent M` yields ONE
+   `sourceExpUniformTailCutoff M k`, independent of `x`.
+   `orderedSourceExpUniformFiniteTail`,
+   `sourceExpUniformFiniteTail`, and
+   `sourceExpUniformLimitError` transport the uniform bound
+   to the original `Exp.bishopExp x`, using vendored Bishop
+   `Sequence.cauchyConvergenceTest-if`, finite triangle/ordering,
+   `Sequence.xₙ≤y⇒limxₙ≤y`, and original selected convergence.
+   `sourceExpUniformApproximationOnBall` is the final proof-relevant
+   all-point uniform source approximation.
+
+2. `Analysis/BishopOriginalExponentialSequentialContinuityExact.agda`.
+   `sourceExpFinitePartialIsNativePowerSeries` identifies every
+   literal finite source Exp partial with the original finite Bishop
+   power-series continuity theorem, via the native finite sum
+   extensionality owner. The terminal
+   `originalBishopExpSequentiallyContinuous` applies vendored
+   `Sequence.convergent⇒bounded` to the actual convergent
+   input history, chooses `M = originalBound ⊔ |limit|`,
+   applies ONE original uniform source cutoff, and uses the
+   existing Bishop three-leg triangle/precision splitting.
+   This is a source-written proof that the ACTUAL `Exp.bishopExp`
+   is sequentially continuous at **every** native Bishop real,
+   pending Agda elaboration. No derivative interchange is assumed.
+
+3. `Analysis/BishopK04dOriginalPolynomialChartTermContinuityExact.agda`.
+   On the genuine already-constructed selected original chart
+   `s_eta(t)=(3+t²)+i eta`, the imaginary exponent of
+   every original Dirichlet term `exp_C(-s_eta(t)L_n)`
+   is constant in `t`. The real exponent is a native polynomial
+   composed with multiplication by the ACTUAL source `L_n`.
+   Consequently its source cosine/sine factors are constants and
+   **only** the now-derived original real exponential continuity
+   is required. The module proves both coordinates of each actual
+   `Terms.bishopDirichletExponentialTerm` are sequentially
+   continuous, proves every finite original complex Dirichlet
+   partial continuous by induction using vendored `Sequence`
+   algebra, then discharges the ORIGINAL selected
+   `Compiler.OnSelectedChart` finite-term input and obtains
+   the real and imaginary native Dirichlet LIMIT sequential
+   continuity on that chart. This final limit theorem depends on
+   exactly ONE source analytic LOG premise,
+   `NativeLog.OriginalBishopNegativeLogExponentialGap`,
+   to derive the original Basel domination; not on an arbitrary
+   chosen trigonometric or uniform-limit authority.
+
+### Remaining decisive gates after these new owners
+
+- **K05-PRODUCT**: actual exact-head Agda 2.9 `--safe` kernel
+  acceptance of native all-degree signed-factorial theorem and
+  transitive original source root.
+- **K05-PI**: original infinite arctangent factor-derivative
+  interchange, nested absolute exponential composition and the
+  two original analytic `exp_C(2i atan_B)` to Cayley evaluations.
+  Uniform geometric derivative remainders and actual derivative
+  series convergence are now source-written but do not alone
+  establish infinite function-derivative interchange.
+- **K04d-LOG**: original infinite negative-log factor-derivative
+  interchange and nested absolute exponential composition, yielding
+  the source identity `exp_B(-L_B(x))≃1-x`. Its all-N Nat
+  specialization is already source-written.
+- **K04d-CONTINUITY**: real `exp_B` original source global
+  sequential continuity and the original selected quadratic-chart
+  finite Dirichlet-term continuity are source-written; the selected
+  chart-limit theorem consumes ONLY K04d-LOG for its Basel bound.
+  The original **two-dimensional** `exp_C` and sine/cosine
+  continuity away from constant imaginary phase remain independent
+  if a larger complex chart is demanded. Original
+  `ZetaHalfPlaneLayer.zetaHalfPlane` SAME OBJECT equality with
+  this constructed Bishop Dirichlet series and original
+  `CompletedRiemannZeta.xi` gamma/prefactor factor identity
+  remain *unproved*: their substrate carries only opaque
+  `Set` descriptors and does not instantiate the literal
+  function value semantics. No derivation from an uninterpreted
+  `CompletedDefinition` has been manufactured.
+
+All **three** new source owners are imported by the three
+golden TOE roots; the focused canonical parallel-checker workflow
+now includes **56** owner files and the three `--safe` roots.
+No exact-head Agda acceptance receipts were observed. Therefore
+these results are **source-written/kernel-pending**, not claimed
+kernel-accepted.
