@@ -21,7 +21,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Relation.Binary.PropositionalEquality using (subst; trans)
 open import Data.Nat.Tactic.RingSolver using (solve)
 open import Data.List.Base using (length)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.Maybe.Base using (just)
 open import Data.Product using (proj₂)
 import Data.Nat.Properties as NatP
@@ -93,7 +93,6 @@ positiveNatAtMostSquare (suc n) =
     (NatP.*-mono-≤
       NatP.≤-refl (s≤s z≤n))
 
-import Data.Nat.Base using (z≤n; s≤s)
 
 squareNativePolynomial :
   ERQ.PolynomialBound (λ n → n * n)
