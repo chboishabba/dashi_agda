@@ -338,3 +338,12 @@ Boolean agreement and `cost <= 5m`. The repository's existing
 alongside the prior 63,001 comparison-budget cases. These are
 differential tests only, not Agda kernel acceptance or a Turing-machine
 clock. The new all-word N21 sources are on PR #1474.
+
+**Agda source-alignment repair:** `Karp21FinFreeAllWordValidationClockExact`
+uses the EXACT original header guard `m * 3` and an explicit
+`inputListLengthIsWordSize` proof because the original gamma parser
+uses `Data.List.length`, while the existing complexity model uses
+`FiniteWordSizeExact.encodingSize`. No definitional equality between
+two separately recursive owners is assumed. This and the original
+strictAfter internal primitive-guard proof are part of the exact-head
+compiler acceptance cut, not already certified.
