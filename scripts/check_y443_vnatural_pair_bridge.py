@@ -28,6 +28,7 @@ JMD_SOURCE = ROOT / "DASHI/Moonshine/Y443JMDSourceWordInstantiationExact.agda"
 JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agda"
 JMD_POWERS = ROOT / "DASHI/Moonshine/Y443JMDPowerFiveSixAlgebraExact.agda"
 JMD_PATHS = ROOT / "DASHI/Moonshine/Y443JMDThreePathGraphCertificateExact.agda"
+JMD_SQUARE = ROOT / "DASHI/Moonshine/Y443JMDSquareFromPresentationExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -136,7 +137,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -193,7 +194,11 @@ def assert_source_scope() -> None:
     for symbol in ("jmdFirstPathGraphValid", "jmdBetaPathGraphValid", "jmdThirdPathGraphValid", "x4IsNonadjacentToEntireBetaPath"):
         if symbol not in path_src:
             raise AssertionError(f"missing JMD three-path graph theorem {symbol}")
-    print("PASS source: original JMD paths, graph certificates, 5/6 algebra and 72+8 included")
+    square_src = JMD_SQUARE.read_text()
+    for symbol in ("fifthNodeSquareRelator", "squareFromActualPresentation"):
+        if symbol not in square_src:
+            raise AssertionError(f"missing presentation-to-square theorem {symbol}")
+    print("PASS source: JMD 3 paths, fifth Coxeter square, powers, indexed 72+8 included")
 
 
 def check_agda() -> None:
