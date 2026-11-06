@@ -1,3 +1,27 @@
+## 6 November 2026 — priority physical-cube max-cut, stronger than bare-link Dobrushin
+
+**New rigorous quantitative strategy / source implementation:** [YMClayPhysicalCubeDobrushinCMP116Transport20261106.md](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md). It audits the actual original Dobrushin, CMP116, Wilson/Haar/Gibbs, Perron/Doob, physical RG/UV and OS owners, and retains distinct 2D/3D/4D/5D semantics. The 2D/3D/5D donor does NOT independently prove 4D.
+
+**Source-written:** `DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda` reuses original `BalabanFiniteBoundaryConditionedDobrushinExact` and `BalabanP33RationalQuaternionNormSquaredExact`; explicit `physicalCubeCellLength (cubeSideInCells a) (latticeSpacing a) ≡ physicalCubeSide`, one `0≤q<1` across all UV cutoffs/volumes, same original normalized Gibbs conditional fibre, `originalConditionalRowsUniformlyContract`, `originalConditionalObservableUniformlyContract`. **These are SOURCE/CONDITIONAL, Agda kernel pending**; actual uniform influence estimates remain to be produced. No bare `Set` field for physical cube calibration.
+
+**Reference:** `scripts/check_ym_physical_cube_perron_certificate.py` implements exact rational weighted Perron `Cw≤q w`, positivity, exact fixed-physical-cube calibration, 12+ power checks and negative controls. It **refuses physical proof admission even if metadata is supplied**, because authentic physical source claims cannot be verified by strings. Independently checked the 4×4 illustrative matrix with exact fractions through 101 powers, max weighted row `5/12`, `q=1/2`, 5 refinements; not evidence of any actual Wilson measure.
+
+| Physical-cube ID | Exact missing theorem/source producer | Definition of done |
+|---|---|---|
+| PCUBE.P01 | Construct selected `B_{a,ell *}μ_{a,L}^{Wilson}` conditional kernels from original continuous Haar/Gibbs and exact R445 same-object maps | Kernel proof and Borel conditional integration with same action/decoder |
+| PCUBE.P02 | Fixed `ell` across physical lattice spacings `a→0`, `b(a)a=ell` or certified ceil interval | Original lattice geometry/units, not fixed block in lattice units |
+| PCUBE.P03 | Selected all-scale physical reflection-halfspace compatibility for actual blocking | Reflective transfer and OS-positive-time sigma-algebra mapping |
+| PCUBE.P04 | Actual cutoff/volume independent weighted influence `C^{a,L}w≤q w`, `0≤q<1` | **Core new nonperturbative estimate**, actual SU(N) conditionals; either direct relative, averaged Dobrushin–Shlosman, or CMP116 rooted-polymer route |
+| PCUBE.P05 | Selected direct R467 `literalSelectedCMP116Localization` and envelope `≤ C_F q^{t/ell}` on actual source/continuum family | One original same-J witness and common physical source norm, no unproved field |
+| PCUBE.P06 | Same limiting OS H, strong semigroup and dense local modes, gap `m≥-log(q)/ell` | Physical units, no spectral pollution or invisible subgap states |
+| PCUBE.P07 | Nontrivial continuum and all prescribed compact simple groups | Actual physical OS/Wightman theory and full Clay interpretation |
+| PCUBE.F01–F03 | `physicalCubeCellLength`, `originalConditionalRowsUniformlyContract`, `originalConditionalObservableUniformlyContract` | Source written; require Agda exact-head/typecheck and actual PCUBE.P01/P04 inputs |
+| PCUBE.F04 | Weighted Perron checker | Python exact rational algebra and negative controls only, no physical promotion |
+
+**Max-cut order:** prefer original CMP116 rooted-shell estimate if source-native, otherwise selected **weighted** physical-block Dobrushin matrix, rather than bare-link `18 tanh(12 beta)`. If pointwise raw-weight influence fails, the weaker averaged block criterion remains admissible. This does **not** duplicate existing published 4D CMP122 RG theorem. Any strict `q` at fixed physical `ell` gives `m=-log(q)/ell>0` for the same OS Hamiltonian IF all selected physical continuum/OS/spectral premises are actually proved. `q<1` for fixed LATTICE step with changing `a` is not the same theorem.
+
+---
+
 
 ### Phase-1 constructive decision procedure — 6 November
 
