@@ -25,6 +25,7 @@ open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Law.SensibLawWoogarooIndependentObjectionBurden20261106Exact as Objection
 import DASHI.Law.SensibLawWoogarooKoalaOAGStatusSensitivity20261106Exact as OAG
 import DASHI.Law.SensibLawWoogarooProponentEvidenceAdversarialAudit20261106Exact as PD
@@ -187,7 +188,9 @@ sourceScoreNotRealisedEcology : SourceOnlyProvesRealisedEcology → ⊥
 sourceScoreNotRealisedEcology ()
 
 -- Reuse of the original existing canonical modules; no duplicates.
+originalQUT : Attribution.AttributedSource
 originalQUT = Objection.priorQUTAttribution
+originalQCC : Attribution.AttributedSource
 originalQCC = Objection.priorQCCAttribution
 originalOriginalKoalaCoeff :
   OAG.inputSum OAG.allRows ≡ 1010350
