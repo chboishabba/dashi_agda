@@ -1,3 +1,10 @@
+## 2026-11-06 — YM original CMP119/116/122 source-owner reconciliation
+
+- Live source audit found 248 filenames matching CMP119-related, 244 CMP116-related and 33 CMP122-related YM Agda modules on #1444's current branch; these are inventory matches, **not accepted theorem counts**.
+- Added `YMClayCMP119122116SelectedProducerWeldExact.agda` reusing beta-driven CMP119/CMP122 original coupling history and localized CMP109/CMP116 potential, then compiling one actual R342 literal source into R467 finite covariance and the existing R479/R482 same-spectrum positive-transfer-gap core without a parallel localization package/positive gap token.
+- Added focused [source-first four-gate proof dossier](Docs/physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md), 11-owner fail-closed `scripts/check_ym_cmp119116122_same_source_contract.py`, direct Agda CI and TOE root imports, updated active exact-lemma phase/roadmap/BIDI/TODO. GitHub source readback confirms owner names and wiring; no Agda kernel or Clay physical receipt claimed.
+- Critical physical source leaves: actual continuous Wilson+Haar-to-CMP119/CMP122 action/mark dictionary; CMP116 physical rate on selected marked pair; CMP122 time-crossing reflection-positive kernel; same Wilson T5 continuum noncollapse and dense OS spectrum/all compact simple groups. The existing **published theorem and formal conditional compiler** are reused, never relabeled as completed source-specific nonperturbative estimates.
+
 ## 2026-11-06 — YM source-driven 4D continuum and interacting nonGaussian steelman
 
 - New `Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md` specifies the strongest single-original-Wilson physical theorem and explicit UV dyadic, IR rooted-shell, literal mixed-J CMP116, noncollapsed fourth-cumulant, original reflection positive OS and compact-simple-group obligations; same-H BIDI/false-positive tests are required. This is a proposed theorem to test, not a proved Clay solution.
