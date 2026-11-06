@@ -21,6 +21,8 @@ open import Data.Rational.Unnormalised using (_/_)
 import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Trig
+import DASHI.Analysis.BishopRound11FactorDerivativeInterchangeExact as Round11
+import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Shared
 
 square : Bishop.ℝ → Bishop.ℝ
 square x = Bishop._*_ x x
@@ -116,3 +118,31 @@ record BishopGielisConcreteTrigInputs
 
 -- Unlike a terminal one-point real carrier, these inputs are about the
 -- actual same BishopReal.ℝ and the same existing sine/cosine functions.
+
+------------------------------------------------------------------------
+-- REUSE of the existing SAME-object Round-11/classical Bishop trig weld:
+-- two separate mathematical claims, differential and Pythagorean, share
+-- exactly one source-function identification. No new classical trigonometry
+-- axiom is introduced here. The Shared weld itself is not automatically
+-- inhabited; its status was explicitly OPEN in the original owner.
+------------------------------------------------------------------------
+
+bishopGielisPythagoreanFromSharedWeld :
+  (P : Round11.Round11FactorInterchangeProblem) →
+  (W : Shared.Round11ClassicalTrigObjectWeld P) →
+  (angle : Bishop.ℝ) →
+  Bishop._≃_
+    (Bishop._+_
+      (square (Trig.bishopCos (Round11.dataSet P) angle))
+      (square (Trig.bishopSin (Round11.dataSet P) angle)))
+    Bishop.1ℝ
+bishopGielisPythagoreanFromSharedWeld P W angle =
+  BishopP.≃-trans
+    (BishopP.+-comm
+      (square (Trig.bishopCos (Round11.dataSet P) angle))
+      (square (Trig.bishopSin (Round11.dataSet P) angle)))
+    (Shared.compileRound11Pythagorean P W angle)
+
+-- The derivative side of the very same W is also already supplied by:
+--   Shared.compileRound11DerivativeAuthority P W
+-- and is not duplicated here. This supports the eventual smoothness proof.
