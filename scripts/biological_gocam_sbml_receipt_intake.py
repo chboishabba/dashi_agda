@@ -177,6 +177,18 @@ def explicit_joins(gocam: dict, sbml: dict, crosswalk: dict) -> list[dict]:
         raise ValueError("crosswalk requires a joins array")
     aids = {x["id"] for x in gocam["activities"]}
     rids = {x["id"] for x in sbml["reactions"]}
+    # Source-local evidence must be present on the selected original activity;
+    # a free-text crosswalk citation alone cannot establish this model join.
+    evidence_by_activity = {}
+    for activity in gocam["activities"]:
+        records = list(activity["molecular_function_evidence"])
+        for arc in activity["causal_associations"]:
+            records.extend(arc["evidence"])
+        evidence_by_activity[activity["id"]] = {
+            record.get("reference")
+            for record in records
+            if isinstance(record, dict) and isinstance(record.get("reference"), str)
+        }
     seen = set()
     out = []
     for row in rows:
@@ -187,6 +199,10 @@ def explicit_joins(gocam: dict, sbml: dict, crosswalk: dict) -> list[dict]:
         evidence = require_string(row.get("evidence_reference"), "join evidence")
         if a not in aids or r not in rids:
             raise ValueError("join endpoint does not exist in source models")
+        if evidence not in evidence_by_activity[a]:
+            raise ValueError(
+                "join evidence is not attached to the selected original GO-CAM activity"
+            )
         if (a, r) in seen:
             raise ValueError("duplicate join")
         seen.add((a, r))
@@ -194,6 +210,7 @@ def explicit_joins(gocam: dict, sbml: dict, crosswalk: dict) -> list[dict]:
             "gocam_activity": a,
             "sbml_reaction": r,
             "evidence_reference": evidence,
+            "evidence_attached_to_original_activity": True,
             "interpretation": "source-asserted candidate; not model equivalence",
             "trusted": False,
         })
@@ -261,6 +278,18 @@ def self_test():
             "downstream_activity"] == "gomodel:test/b"
         assert receipt["sbml"]["reactions"][0]["kinetic_law_present"]
         assert receipt["pnf_mutation_performed"] is False
+        assert receipt["candidate_joins"][0]["evidence_attached_to_original_activity"]
+        crosswalk.write_text(json.dumps({"joins": [{
+            "gocam_activity": "gomodel:test/a",
+            "sbml_reaction": "r1",
+            "evidence_reference": "PMID:NOT-IN-SOURCE",
+        }]}))
+        try:
+            build_receipt(go, sbml, crosswalk)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("unanchored source evidence accepted")
         crosswalk.write_text(json.dumps({"joins": [{
             "gocam_activity": "gomodel:test/a",
             "sbml_reaction": "DOES-NOT-EXIST",
