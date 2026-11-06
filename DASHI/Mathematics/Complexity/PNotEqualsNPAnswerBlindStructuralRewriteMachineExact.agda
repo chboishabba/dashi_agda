@@ -317,7 +317,7 @@ twoSuccessorsAbove n =
 formulaCountPositive :
   (formula : Cook.BooleanFormula) →
   suc zero ≤ Size.formulaNodeCount formula
-formulaCountPositive (Cook.variable index) =
+formulaCountPositive (Cook.formulaVar index) =
   s≤s z≤n
 formulaCountPositive (Cook.constant value) =
   s≤s z≤n
