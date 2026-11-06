@@ -501,8 +501,8 @@ satToAcceptingRunReceipt machine = record
   { guardedInitialBitsPaid = true
   ; rowZeroSameObjectPaid = true
   ; transitionScanPaid = true
-  ; tStepRunInductionPaid = true
-  ; runFinishSameFinalRowPaid = true
+  ; tStepRunInductionPaid = false
+  ; runFinishSameFinalRowPaid = false
   ; acceptanceWitnessUniquenessPaid = true
-  ; satToAcceptingRunPaid = true
+  ; satToAcceptingRunPaid = false
   }
