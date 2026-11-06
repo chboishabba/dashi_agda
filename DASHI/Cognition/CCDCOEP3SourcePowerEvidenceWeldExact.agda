@@ -19,6 +19,7 @@ import DASHI.Wikimedia.IbrahimSnowballAnthropologyClimateDenialPoliticalTheology
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Governance.EvidenceGradedGenealogyCasesExact as Cases
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
+import DASHI.Law.SensibLawLegalCaseBatteryExact as Murujuga
 import DASHI.Biology.AliceBrownDissentGovernanceCrossPollinationExact as Alice
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 import DASHI.Culture.KimmererBraidTransferResidualBoundaryExact as Kimmerer
@@ -106,6 +107,17 @@ repairBraidMustNotPresumeEveryRuptureRecoverable :
 repairBraidMustNotPresumeEveryRuptureRecoverable =
   Kimmerer.KimmererTransferResidualBoundary.everyRuptureShouldBeReframedAsLatentBraidingIsFalse
     Kimmerer.canonicalKimmererTransferResidualBoundary
+
+------------------------------------------------------------------------
+-- Australian rock-art/heritage example: Murujuga is deliberately an
+-- open-discovery source case; no Mabo dependency is allowed to be invented
+-- merely because both concern Australian Indigenous rights and Country.
+------------------------------------------------------------------------
+
+murujugaSourceSearchMustNotManufactureMaboJoin :
+  Murujuga.MurujugaMustIntersectMabo → ⊥
+murujugaSourceSearchMustNotManufactureMaboJoin =
+  Murujuga.murujugaNeedNotIntersectMabo
 
 ------------------------------------------------------------------------
 -- Dialectical challenge and ideological closure have distinct types:
