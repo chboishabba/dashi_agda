@@ -15,6 +15,7 @@ on:
       - 'DASHI/Unified/TSFVParentChildRegression.agda'
       - 'scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py'
       - 'scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py'
+      - 'scripts/check_tsfv_unification_48_phase_cut_20261106.py'
       - 'scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py'
       - 'Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md'
       - 'Docs/roadmaps/TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md'
@@ -55,6 +56,7 @@ jobs:
       - name: Check 186 original lemma IDs/status coverage
         run: |
           python scripts/check_emergent31_complete_186_status_20261104.py
+          python scripts/check_tsfv_unification_48_phase_cut_20261106.py
 
   agda-selected-golden:
     name: Agda native selected owners and Golden source graph
