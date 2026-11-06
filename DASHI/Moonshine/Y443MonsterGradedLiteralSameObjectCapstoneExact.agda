@@ -71,8 +71,6 @@ record SelectedMonsterLiteralY443Source
       Pair.RelatorsSatisfied gi nodes Y.monsterRelators
     sourcePresented :
       Presented.PresentedByY443Nodes gi nodes
-    jmdPathShifts :
-      Paths.JMDPathShiftCertificate gi nodes
 
     -- Stronger optional linearity structure reuses the ACTUAL
     -- legacy literal action. Not another vector-space instance.
@@ -105,7 +103,6 @@ actualGradedMonsterCapstone source =
     ; Cap.nodes = nodes source
     ; Cap.relatorsHold = relators source
     ; Cap.presentationSurjective = sourcePresented source
-    ; Cap.pathShifts = jmdPathShifts source
     ; Cap.construction = construction source
     ; Cap.action = actualActionTransported source
     }
