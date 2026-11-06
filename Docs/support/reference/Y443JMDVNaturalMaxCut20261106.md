@@ -283,3 +283,45 @@ internal **product chart** remains a separate theorem requiring a
 typed 72-slot chart, a two-sided inverse, and a C3/Fricke commuting
 square. It must not replace the priority of importing JMD's actual
 ten-step words and identifying the selected Monster action.
+
+
+## Sharp nonary-72 equivariance falsifier (new exact Agda theorem)
+
+`Y443Nonary72EquivarianceNoGoExact.agda` uses the ACTUAL
+`Registry.ReducedNonary8` (four nonidentity D4 mode labels times
+`Five.BinaryOrientation`) and ACTUAL
+`Five.ModePhaseQuotient9`, not fake `Fin 8` and `Fin 9`.
+
+- It constructs `swapTag` on Y443 relation labels, with full node/pair
+  coverage and `swapTagInvolutive`.
+- `coreSwapInvariant` proves the 72-subset predicate is preserved for
+  all relator tags, by checking all 12x12 node pairs.
+- The unique central-node square is a **fixed core relator**:
+  `centralCoreFixed`.
+- `flipReducedNonary8` flips positive/negative orientation. By
+  distinct constructors `reducedEightHasNoFixedPoint` proves this
+  action has **no fixed state**.
+- `flipChart` on `ReducedNonary8 x ModePhaseQuotient9` flips
+  the first factor (and the second mode-phase orientation); therefore
+  `chartHasNoFixedPoint` shows its fixed-point set is empty.
+- Hence `noNaiveEightByNineEquivariantChart` gives an explicit
+  contradiction from any allegedly equivariant map of the
+  graph-canonical 72 core to this particular 8x9 chart. Even a
+  one-way equivariant map is impossible under THESE involutions.
+
+**This does not veto other C3 actions, nontrivial cocycles, Fricke
+transport, action modifications or deliberately symmetry-breaking
+coordinate charts.** It precisely tells a future analytic/369 theorem
+which direct-natural-action identification is forbidden.
+
+Also reused the exact existing ternary orbit numbers rather than
+duplicating their definitions:
+```text
+Y443 edge count    11 = 1 + 2*(5 quotient classes of 9).
+Y443 nonedge count 55 = 1 + 2*(27 raw ternary states).
+                    55 = 3 + 4*(13 antipodal pairs of 27).
+                    55 = 5 * 11.
+```
+These are genuine Agda-definitional numeric comparison theorems;
+the actual Y443 arm-swap fixed/paired orbit data (3/4 for edges, 7/24
+for nonedges) is DIFFERENT and is the decisive equivariance test.
