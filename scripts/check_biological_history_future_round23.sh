@@ -13,6 +13,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
+  DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
 )
 test -s "$ROOT"
 for module in "${MODULES[@]}"; do
@@ -37,6 +38,8 @@ grep -q 'morphologyFutureEquivalenceExactlyMinimalCode' \
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
 grep -q 'completePlaquetteCount' \
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
+grep -q 'differentRawMeanReadouts' \
+  DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
 grep -q 'sourceQualifiedCellObservation' \
   DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda
 grep -q 'withdrawalReopensModelCandidate' \
@@ -51,6 +54,7 @@ python3 scripts/biological_measured_genotype_holdout.py --self-test
 python3 scripts/prepare_shine_dalgarno_measured.py --self-test
 python3 scripts/check_original_dmsc_holdout.py --self-test
 python3 scripts/check_original_dmsc_neutral_components.py --self-test
+python3 scripts/check_original_dmsc_replicate_ranges.py --self-test
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
