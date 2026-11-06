@@ -1,3 +1,13 @@
+## 6 November YM M.01/M.02 deep source implementation
+
+New original-source Agda owners: `YMClayNative1024ClosedReindexHaarConsequencesExact`, `YMClayNative1024WeightedWilsonReindexExact`, `YMClayNative1024FullMarkedWilsonReindexExact`, `YMClayOriginalWilsonF19ConcreteWeightExact`, `YMClayNativePairsSpectatorsFubiniExact`, and `YMClayOriginalWilsonPhysicalF19PartitionExact`. The last three identify the original complete Gibbs density as the interacting F19 pair/spectator weight and provide an arbitrary-integrand flat ordered product-Haar to nested pair/spectator equality. The physical original Wilson partition is source-written as the same nested F19 fine partition. The F19 full two-marked and normalized effective-density identities are instantiated using that physical source.
+
+Original finite 1024-link C3 and pair/spectator sorts are checked by an executed exact Python reference (46592 and 41792 swaps respectively), not Agda kernel acceptance. The independent physical-rate BIDI check establishes that a fixed q=1/2 lattice envelope corresponds to envelope rate log(2)/a; a finite continuum rate needs explicit cutoff calibration. A separate exact Q8 toy reference confirmed interacting non-Abelian finite fibre disintegration and rejected uniform bare-coarse substitution; it is not a continuous compact-SU(N) proof.
+
+**Strict remaining source contracts:** Agda pinned parallel_checker acceptance; same full marked flat-to-F19 integration at the literal native coarse cylinder insertion, including the real scalar algebra; physically instantiated compact Borel SU(N) Haar on an integrable test algebra; CMP119/122 complete effective-action E/R/B/V and boundary/ghost equality at every physical scale; CMP116 literal uniform differentiated spatial localization and calibrated same-source time; genuine fine Wilson RP/half-space native-block compatibility and full complex OS positivity through continuum; nontrivial four-dimensional local fields, same H_OS and positive calibrated spectral gap. No invented physical inputs and no Clay completion claim.
+
+---
+
 ## 6 November — YM-only all-word R445/OS and published Wilson RP (source implementation)
 
 Two pre-existing, source-written finite Wilson results on the separate #1460 branch have been adapted as **YM-owned** Agda sources on #1444, with no dependency on TSVF/observer/KK:
