@@ -66,8 +66,8 @@ inPToPolynomialSATDeciderCandidate satP =
 contradictionFormula : Cook.BooleanFormula
 contradictionFormula =
   Cook.conjunction
-    (Cook.variable zero)
-    (Cook.negate (Cook.variable zero))
+    (Cook.formulaVar zero)
+    (Cook.negate (Cook.formulaVar zero))
 
 contradictionFormulaIsUnsatisfiable :
   Cook.Satisfiable contradictionFormula → ⊥
