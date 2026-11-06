@@ -68,3 +68,25 @@ betterFitDoesNotIdentifyUniqueGravityMechanism :
   P.NonPromotionBoundary.alternativeModelBetterFitIdentifiesUniqueMechanism
     P.canonicalNonPromotionBoundary ≡ false
 betterFitDoesNotIdentifyUniqueGravityMechanism = refl
+
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact as Quant
+
+source2024ScreenTracksIndependentStudy :
+  P.ExternalNullScreen.originatingStudy
+    P.canonicalTajmar2024Screen ≡ Quant.tajmar2024SteadyVacuumBalance
+source2024ScreenTracksIndependentStudy = refl
+
+source2026ScreenTracksIndependentDCStudy :
+  P.ExternalNullScreen.originatingStudy
+    P.canonicalTajmar2026Screen ≡ Quant.tajmar2026ThreeAmpereDCToroid
+source2026ScreenTracksIndependentDCStudy = refl
+
+independent2024IsNotZhangExperiment :
+  P.ExternalNullScreen.samePhysicalApparatusAsZhang
+    P.canonicalTajmar2024Screen ≡ false
+independent2024IsNotZhangExperiment = refl
+
+independent2026IsNotZhangExperiment :
+  P.ExternalNullScreen.samePhysicalApparatusAsZhang
+    P.canonicalTajmar2026Screen ≡ false
+independent2026IsNotZhangExperiment = refl
