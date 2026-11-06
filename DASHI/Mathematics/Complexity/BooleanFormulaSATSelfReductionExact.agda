@@ -4,12 +4,12 @@ module DASHI.Mathematics.Complexity.BooleanFormulaSATSelfReductionExact where
 -- FINITE-VARIABLE BOOLEAN SAT SELF-REDUCTION
 --
 -- Boolean formulas are indexed by the number of still-free variables.
--- Restricting variable zero to false/true lowers that index by one.  The
+-- Restricting formulaVar zero to false/true lowers that index by one.  The
 -- evaluator proves restriction correctness, satisfiability splits on the
 -- chosen bit, and satisfying assignments lift back through each restriction.
 --
 -- Instantiating SATDecisionToWitnessSelfReductionExact therefore yields a
--- satisfying assignment for an n-variable satisfiable formula using exactly
+-- satisfying assignment for an n-formulaVar satisfiable formula using exactly
 -- n exact SAT-decision queries.
 ------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ orBool true right = true
 orBool false right = right
 
 data BooleanFormula (variables : Nat) : Set where
-  variable : Fin.Fin variables → BooleanFormula variables
+  formulaVar : Fin.Fin variables → BooleanFormula variables
   constant : Bool → BooleanFormula variables
   negate : BooleanFormula variables → BooleanFormula variables
   conjunction disjunction :
@@ -51,7 +51,7 @@ evaluate :
   BooleanFormula variables →
   Assignment variables →
   Bool
-evaluate (variable index) assignment = assignment index
+evaluate (formulaVar index) assignment = assignment index
 evaluate (constant value) assignment = value
 evaluate (negate formula) assignment =
   notBool (evaluate formula assignment)
@@ -79,8 +79,8 @@ restrictHead :
   Bool →
   BooleanFormula (suc variables) →
   BooleanFormula variables
-restrictHead bit (variable Fin.zero) = constant bit
-restrictHead bit (variable (Fin.suc index)) = variable index
+restrictHead bit (formulaVar Fin.zero) = constant bit
+restrictHead bit (formulaVar (Fin.suc index)) = formulaVar index
 restrictHead bit (constant value) = constant value
 restrictHead bit (negate formula) =
   negate (restrictHead bit formula)
@@ -96,8 +96,8 @@ restrictionEvaluation :
     (assignment : Assignment variables) →
   evaluate (restrictHead bit formula) assignment
   ≡ evaluate formula (extendAssignment bit assignment)
-restrictionEvaluation bit (variable Fin.zero) assignment = refl
-restrictionEvaluation bit (variable (Fin.suc index)) assignment = refl
+restrictionEvaluation bit (formulaVar Fin.zero) assignment = refl
+restrictionEvaluation bit (formulaVar (Fin.suc index)) assignment = refl
 restrictionEvaluation bit (constant value) assignment = refl
 restrictionEvaluation bit (negate formula) assignment =
   cong notBool (restrictionEvaluation bit formula assignment)
@@ -116,7 +116,7 @@ evaluateExtensional :
     {left right : Assignment variables} →
   ((index : Fin.Fin variables) → left index ≡ right index) →
   evaluate formula left ≡ evaluate formula right
-evaluateExtensional (variable index) agreement = agreement index
+evaluateExtensional (formulaVar index) agreement = agreement index
 evaluateExtensional (constant value) agreement = refl
 evaluateExtensional (negate formula) agreement =
   cong notBool (evaluateExtensional formula agreement)
