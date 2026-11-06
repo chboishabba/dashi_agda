@@ -125,23 +125,82 @@ Production promotion needs the official
 [SBML Level-3 specification](https://sbml.org/documents/specifications/)
 plus the original experimental provenance, units and result receipts.
 
-## Exact P0–P5 status / remaining max-cut
+## Round-23 P0–P5 implementation delta and exact remaining max-cut
 
-| Gate | Completed or already reusable | Remaining named decisive obligation |
+This tranche *implements* finite theorem owners, live source-intake and
+evaluation executables, while refusing to manufacture missing biological
+observations or trusted checker receipts.  An executable research pipeline is
+not the same as a source-validated scientific result.
+
+| Gate | New implementation | Exact unresolved acceptance |
 |---|---|---|
-| P0 — phenotype carrier and histories | `CellStateAttractor` coupled-cell carrier; Levin geometry; generic `IndexedBiologicalPhenotype`; new finite `BiologicalState` | **P0.BIO-CARRIER**: instantiate actual genome/regulation/chemistry/cell/tissue carriers and admissible history-indexed fibres with source-backed observations, rather than just finite flags |
-| P1 — future equivalence | New safe/unsafe projection, trace commutation, concrete nonfactorability; existing general future language quotient and finite compiler | **P1.FINITE-COMPILER**: give this biological finite transition system an accepted `CertifiedPartitionRefiner`, rank bound and stable partition; **P1.STOCHASTIC**: compare distributions using measured/admissible stochastic transition kernels |
-| P2 — cubical spatial field | Existing 27-vertex, 54-edge, 36-plaquette, 8-cube geometry; new pointwise and one-hop adjacency-gated response/projection proofs | **P2.COUPLED-FIELD**: construct a simultaneous neighbourhood-coupled state evolution, prove all-edge/plaquette and boundary compatibility, and transport the biology quotient through it |
-| P3 — physical calibration | Existing finite chemical master generator, electrodiffusion, SI bioelectric adapter, B-DNA SE(3), finite basin and planarian source count observations | **P3.SBML-SI**: full schema-validated SBML/SED-ML model/parameter ingestion beyond current read-only lexical intake, unit-checked original molecular state laws, identifiability analysis, trajectory error/uncertainty, held-out calibration and exact provenance receipts |
-| P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; new finite source/model refinement and reopening theorems with an uninhabited calibrated join contract; canonical programme registry | **P4.ONTOLOGY-WELD**: production versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph beyond the new read-only candidate crosswalk with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
-| P5 — empirical discrimination | Explicit fine-vs-coarse intervention tests in finite fixture; existing dashitest/dashifine numerical machinery and planarian observations | **P5.HELDOUT**: source-separated measurements, held-out predictions, uncertainty intervals, neutral-component census, local/global perturbation sensitivity and prospective predictions that can distinguish candidate attractor models |
+| P0 — biological carrier | `SourceIndexedBiologicalCarrierExact` assembles the original `CellStateAttractor` genome/chromatin/RNA/proteome/metabolism/membrane/environment/history carrier with a typed phenotype observation, experimental time/history, and the exact Grodstein–Levin source-observation anchor. | **P0.PHYSICAL-INSTANCE:** original sequence/assay/context-specific physical state and source-qualified history evolution, with actual observational readouts; the Boolean fixture is not a physiological cell. |
+| P1 — future quotient | `BiologicalFuturePartitionCompilerExact` instantiates `CertifiedPartitionRefiner`, with a rank-bounded depth-zero stable code *relative to the five-coordinate future-sufficient observer*. `BiologicalStochasticFutureLumpingExact` gives a half/half hidden-marker randomized rational Markov operator and an all-horizon lumpability transport. The supplemental finite script computes the morphology-observer partition by refinement without confusing it with the stronger code observer. | **P1.KERNEL:** independent exact-head parallel_checker/Agda acceptance; **P1.PHYSICAL-STOCHASTIC:** experimentally justified stochastic transition rates and source-specific admissibility; **P1.MORPH-MINIMAL:** promote the actual morphology-observer minimal finite partition into the Golden compiler if needed. |
+| P2 — spatial dynamics | `BiologicalCoupledTissueCubeExact` provides a synchronous old-field neighbour-coupled update with explicit real 3×3×3 nearest-neighbour witnesses, a concrete nonperiodic x-neighbour schedule for every vertex, and arbitrary-trace fine/coarse preservation without function extensionality. | **P2.ALL-EDGE-PNP:** full 54-edge/36-plaquette flux, physically typed local couplings, conservation/boundary conditions, measured tissue dynamics and basin transport. The selected neighbour operator is a finite mathematical model, not tissue physics. |
+| P3 — kinetic calibration | `validate_biological_source_models.py` performs fail-closed official gocam-py/libSBML checks when those dependencies are installed. `biological_si_kinetic_calibration.py` fits a declared SI first-order production/decay law on source-scoped training experiments, bootstraps by experiment and reports disjoint held-out performance and identifiability failures. | **P3.ORIGINAL-SI:** original model-specific kinetic parameter values, external SI-unit validation, lawful simulation of selected SBML/SED-ML equations, uncertainty/identifiability controls, measured tissue/chemical trajectories and independent experimental replication. First-order fitting does not validate another biological mechanism by analogy. |
+| P4 — ontology / PNF | `biological_gocam_sbml_receipt_intake.py` reads original IDs, predicates, source hashes and explicit candidate crosswalks; `BiologicalEvidenceFeedbackFiniteExact` proves finite evidence-driven rejection and reopening. ITIR-suite draft PR [#72](https://github.com/chboishabba/ITIR-suite/pull/72) adds a source-bound, review-only candidate projection to the canonical world-model boundary with evidence and trust tests. | **P4.CANONICAL-PG:** original schema validation on an identified model, source-span SLR/PNF parser, reviewed candidate reconciliation and actual PostgreSQL authoritative receipts. No parallel persistent store or automatic ontology mutation. |
+| P5 — held-out measurements | `prepare_shine_dalgarno_measured.py` is pinned to the 2020 Kuo et al. original dmsC replicate columns as provided by the 2026 `cmarti/shine_dalgarno` reanalysis, with genotype-disjoint train/validation/test splits and no inferred imputation. `biological_measured_genotype_holdout.py` selects additive/pairwise regularized regressions by validation only and reports held-out metrics/bootstrap intervals. `check_biological_spatial_stochastic.py` independently checks the selected finite spatial/stochastic claims. | **P5.ORIGINAL-RUN:** fetch/audit the actual measured CSV and preserve its original SHA/experiment context, run the pinned assay holdout and report its results; **P5.DEVELOPMENT:** longitudinal planarian/Levin control cohorts, prospective morphological basin predictions, independent controls/replication and source-separated effect estimates. A static dmsC translation-efficiency benchmark is *not* a developmental attractor experiment. |
 
-No gate P0–P5 is legitimately globally closed for *real biology* by the
-new finite proof alone.  The direct deterministic finite part of P1, and the
-selected finite spatial-response part of P2, are source-written pending Agda
-acceptance.  P3–P5 require external model and experimental data, not tautological
-proof fields. The P4 finite feedback regression is source-written, but no
-production ontology or world-model importer has been accepted.
+### Source lineage is two-stage
+
+- **Original experiment:** Kuo et al. (2020), *Global fitness landscapes
+  of the Shine-Dalgarno sequence*, DOI `10.1101/gr.260182.119`.
+  The original assay measured sequence-dependent GFP/translation-efficiency
+  responses in multiple mRNA contexts.
+- **Reanalysis and reproducible code:** Martí-Gómez et al. (2026),
+  *Inference and visualization of complex genotype–phenotype maps*,
+  DOI `10.1093/molbev/msag023`.
+  The [upstream repository](https://github.com/cmarti/shine_dalgarno)
+  contains `data/dmsc.csv`, and `scripts/prep_data/get_mave_data.py`
+  specifically reads `Genotype`, `dmsC.1`, `dmsC.2`, `dmsC.3`.
+  Our input adapter requires the reviewer to declare the original trait scale.
+
+The upstream reanalysis distinguishes directly measured genotypes from
+model-inferred landscape positions. The converter retains observed replicates
+and rejects missing values; it never promotes the full `4^9` inferred
+landscape as independent measured outcomes.
+
+No real data file was obtained or fitted in this connector session. The
+upstream GitHub file locator was verified; the file-content fetch returned
+no data, so the measured external holdout remains an execution/receipt gate.
+
+### Exact commands
+
+```bash
+bash scripts/check_biological_history_future_round23.sh
+# Then run the repository's independent parallel_checker on exact HEAD.
+
+python3 scripts/prepare_shine_dalgarno_measured.py \
+  --raw /path/to/upstream/data/dmsc.csv \
+  --out /tmp/dmsc-measured-assay.csv \
+  --manifest /tmp/dmsc-source-receipt.json \
+  --trait-unit 'log[GFP]'
+
+python3 scripts/biological_measured_genotype_holdout.py \
+  --assay /tmp/dmsc-measured-assay.csv \
+  --output /tmp/dmsc-heldout-receipt.json
+
+python3 scripts/validate_biological_source_models.py \
+  --gocam /path/to/real-gocam.json \
+  --sbml /path/to/real-model.xml \
+  --output /tmp/schema-validated-sources.json
+```
+
+The `/tmp` outputs above are **ephemeral reports**, not a replacement
+JSON ledger or persistent source-truth store; source-reviewed promotion
+belongs only to the canonical PostgreSQL PNF pipeline.
+
+### Acceptance standing
+
+- Source-written: all new Agda owners and source-intake/calibration/evaluation
+  scripts are committed in the draft PR.
+- Runtime tests: the previous finite Python enumeration passed; this
+  session has **no independently executed receipts** for the newly committed
+  P0–P5 scripts.
+- Agda kernel: **not confirmed**; no exact-head parallel_checker pass.
+- Real assays: **not run**, and no model-specific calibration is claimed.
+- World model: ITIR PR #72 is a candidate-only bridge, not a canonical PNF
+  materialisation or a trusted ontology equivalence.
 
 ## Model/observation/ontology feedback must be bidirectional
 
@@ -210,14 +269,19 @@ production ontology/PNF importer, or held-out biological validation receipt
 has been claimed by this document. The read-only lexical intake is not
 substituted for these gates.
 
-## Next prioritized max-cut
+## Remaining decisive implementation order
 
-1. P1.FINITE-COMPILER + P0.BIO-CARRIER on the real genotype/phenotype domain.
-2. P2.COUPLED-FIELD with actual local interactions and meaningful boundary laws.
-3. P3.SBML-SI and P4.ONTOLOGY-WELD as an evidence/physics feedback pair.
-4. P5.HELDOUT including a deliberately selected distinguishing perturbation.
+1. Exact-head Golden Agda and parallel_checker acceptance for all Round-23
+   owners, including the original canonical root and transitive imports.
+2. Run the original measured dmsC benchmark, inspect the data/DOI evidence,
+   and retain the actual held-out result with its source checksum.
+3. Select original planarian treatment/longitudinal measurements and fit the
+   actual bioelectric/chemical model, not a generic surrogate.
+4. Complete source-validating GO-CAM/LinkML and SBML/SED-ML adapters,
+   then pass through the native reviewed PostgreSQL PNF parser and receipts.
+5. Independently test intervention-conditional future equivalence, basin
+   boundaries, ecological context and model alternatives.
 
-Useful first measured comparison, subject to retrieval and provenance audit:
-the attachment's Shine–Dalgarno landscape or yeast promoter-expression data,
-followed by planarian regenerative perturbation histories.  Model accuracy,
-mechanism identification and evolutionary interpretation remain separate claims.
+A failed calibration or disconfirming intervention remains an informative
+accepted result; it must not be reclassified as a proof failure or silently
+discarded.
