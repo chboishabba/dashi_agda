@@ -7,6 +7,8 @@ open import Data.Empty using (⊥)
 
 import Base369 as Base
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
+import DASHI.Cognition.CCDCOEP3TypedIntersectionalAxisExact as Axis
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
@@ -15,18 +17,23 @@ import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Wikimedia.IbrahimSnowballAnthropologyClimateDenialPoliticalTheologyExact as Climate
 
-twoPlusTwoPreserved :
-  P3.additiveModel true true ≡ 4
-twoPlusTwoPreserved = P3.literalArithmeticIntact
+-- The two axes have different indexed point carriers despite their
+-- equal finite point counts. Their contextual response is not recovered
+-- by adding, counting, or recharting those point coordinates.
 
-interactionAddsIndependentDimension :
-  P3.jointModel true true ≡ 5
-interactionAddsIndependentDimension = P3.selectedNonadditiveOutcome
+typedRaceSexNotIdentical :
+  Axis.raceAxis ≡ Axis.sexAxis → ⊥
+typedRaceSexNotIdentical = P3.typedRaceSexAxesDistinct
 
-interactionCannotFactor :
-  NF.FactorsThrough P3.reportedAdditive P3.situatedOutcome → ⊥
-interactionCannotFactor =
-  P3.interactionCannotBeRecoveredFromAdditiveReport
+typedIntersectionIsNotEndpointAdditive :
+  Interaction.NonseparableAdditiveInteraction Axis.typedJointSurface
+typedIntersectionIsNotEndpointAdditive =
+  P3.typedInteractionHasNoEndpointAdditiveReconstruction
+
+sameTypedPositionsDoNotFixSituatedOutcome :
+  NF.FactorsThrough Axis.coordinatesOnly Axis.recognition → ⊥
+sameTypedPositionsDoNotFixSituatedOutcome =
+  P3.sameTypedCoordinatesDoNotDetermineSituatedRecognition
 
 originalS3Reverse :
   Perm.applyPermutation
