@@ -54,7 +54,7 @@ nativeAbsoluteZeroImpliesZero x absoluteZero =
       RP.≤-respʳ-≃
         (RP.neg-involutive x)
         (RP.≤-respˡ-≃
-          RP.0≃-0
+          (RP.≃-symm RP.0≃-0)
           (RP.neg-mono-≤ negXBelowZero))
   in
   RP.≤-antisym xBelowZero zeroBelowX
