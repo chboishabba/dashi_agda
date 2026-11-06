@@ -46,6 +46,8 @@ import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectoryToPublishedLiteralR467Exact as Bridge
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact as R467
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralToGapRound479Exact as R479
+import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralRateToGapRound482Exact as R482
+import DASHI.Physics.YangMills.BalabanLocalEnergyDecayRatioRound301Exact as Rate
 import DASHI.Physics.YangMills.BalabanClayT5ClusteringToTransferGapExact as Gap
 
 -- Proven source coupling is literal beta history; the potential is
@@ -127,3 +129,30 @@ sameLiteralR342SourceFiniteCovarianceDecay :
 sameLiteralR342SourceFiniteCovarianceDecay source =
   R467.finiteConnectedCovarianceLocalization
     (Bridge.asPublishedLiteralSelectedLocalization source)
+
+------------------------------------------------------------------------
+-- Stronger existing Round482 route: no separately chosen PositiveEnergy
+-- token. The positivity of the selected candidate gap is constructed
+-- from its SAME reconstructed spectrum's local energy/rate semantics.
+------------------------------------------------------------------------
+
+sameLiteralR342AndLocalRateYieldsGap :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : Radius.CMP116FiniteNormalizedAnalyticDemands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests} →
+  R342.LiteralTrajectoryCMP116Source base demands tests spectrumSource →
+  Limit.SelectedLimitUpperClosure {dataSet = dataSet} →
+  Rate.LocalEnergyDecayRatioSemantics
+    (R281.asReconstructedClusteringSpectrum spectrumSource) →
+  Gap.PositiveTransferGapCore
+    (R281.asReconstructedClusteringSpectrum spectrumSource)
+sameLiteralR342AndLocalRateYieldsGap source limitClosure rateSemantics =
+  R482.publishedLiteralAndLocalRateBuildPositiveTransferGap
+    (Bridge.asPublishedLiteralSelectedLocalization source)
+    limitClosure rateSemantics
