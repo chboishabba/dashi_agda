@@ -1,0 +1,53 @@
+name: Biology history future quotient
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda'
+      - 'DASHI/EverythingBiologicalHistoryFutureRound23.agda'
+      - 'scripts/check_biological_history_future_quotient.py'
+      - 'scripts/check_biological_history_future_round23.sh'
+      - '.github/workflows/biology-history-future.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: dashi-biology-history-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  golden:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y agda agda-stdlib
+      - name: Prepare writable standard library
+        id: stdlib
+        shell: bash
+        run: |
+          file="$(dpkg -L agda-stdlib | grep '/Data/Product.agda$' | head -n 1)"
+          test -n "$file"
+          source_path="${file%/Data/Product.agda}"
+          target_path="$RUNNER_TEMP/agda-stdlib"
+          cp -a "$source_path" "$target_path"
+          echo "path=$target_path" >> "$GITHUB_OUTPUT"
+      - name: Python finite regressions
+        run: python3 scripts/check_biological_history_future_quotient.py
+      - name: Golden Agda check
+        shell: bash
+        run: |
+          set -o pipefail
+          agda --no-libraries --no-default-libraries \
+            -i . -i '${{ steps.stdlib.outputs.path }}' \
+            DASHI/EverythingBiologicalHistoryFutureRound23.agda \
+            2>&1 | tee biological-history-agda.log
+      - name: Upload kernel receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: biology-history-agda-typecheck-log
+          path: biological-history-agda.log
+          if-no-files-found: ignore
