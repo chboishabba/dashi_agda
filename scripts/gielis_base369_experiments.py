@@ -168,11 +168,30 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
             exit_reason = "reflection_limit"
             break
         _,point,normal,segment=hit
+        # Specular reflection: p_ray,out = p_ray,in - 2(p_ray,in·n)n.
+        # Momentum delivered TO THE WALL is p_ray,in - p_ray,out.
+        # Earlier code used the opposite (ray-change) convention, which
+        # reverses signed wall angular impulse.
         new_d = d-2*np.dot(d,normal)*normal
-        torque = float(cross(point,new_d-d))  # dimensionless momentum impulse
-        signed+=torque; magnitude+=abs(torque)
+        wall_delta_p = d-new_d
+        ray_delta_p = -wall_delta_p
+        wall_angular_impulse = float(cross(point,wall_delta_p))
+        ray_angular_change = float(cross(point,ray_delta_p))
+        signed+=wall_angular_impulse
+        magnitude+=abs(wall_angular_impulse)
         if collisions is not None:
-            collisions.append({"point":point.tolist(),"segment":segment,"torque":torque})
+            collisions.append({
+                "point":point.tolist(),"segment":segment,
+                "normal":normal.tolist(),
+                "incoming_unit_momentum":d.tolist(),
+                "outgoing_unit_momentum":new_d.tolist(),
+                "wall_unit_impulse":wall_delta_p.tolist(),
+                "wall_angular_impulse":wall_angular_impulse,
+                "ray_angular_change":ray_angular_change,
+                "torque":wall_angular_impulse,
+                "angular_momentum_balance_residual":
+                    wall_angular_impulse+ray_angular_change,
+            })
         if path is not None: path.append(point.tolist())
         p=point+1e-6*new_d
         d=new_d/np.linalg.norm(new_d)
@@ -193,7 +212,8 @@ def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True,include_control
         results.append({"m":m,"epsilon":eps,"rays":rays,"max_bounces":bounces,
                         "geometry":"endpoint_locked_open_1p5_turn_spiral",
                         "comparison_to_legacy":"not_same_apparatus",
-                        "torque_unit":"unit_momentum_times_metre",
+                        "torque_unit":"angular_impulse_metre_times_unit_momentum",
+                        "torque_sign":"positive_impulse_delivered_to_wall",
                         "model_code_bits":len(model_encode(m,eps)),
                         "total_reflections":sum(t["reflections"] for t in traces),
                         "focus_fraction":sum(t["hit_target"] for t in traces)/rays,
