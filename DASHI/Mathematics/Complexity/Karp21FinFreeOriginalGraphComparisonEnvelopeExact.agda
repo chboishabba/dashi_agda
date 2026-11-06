@@ -30,6 +30,7 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact as Validate
+import DASHI.Mathematics.Complexity.Karp21FinFreeAllWordValidationClockExact as ValidationWord
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact as History
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 import DASHI.Mathematics.Complexity.PolynomialBoundClosureExact as Poly
@@ -145,5 +146,37 @@ originalSuccessfulWordCombinedPolynomialClock :
 originalSuccessfulWordCombinedPolynomialClock word graph parsed =
   NatP.≤-trans
     (successfulOriginalGraphCombinedComparisonBound word graph parsed)
+    (ERQ.bounded combinedComparisonPolynomialBound
+      (Word.encodingSize word))
+
+------------------------------------------------------------------------
+-- FINAL ALL-WORD primitive-comparator count: actual original parser
+-- raw validator (even when it rejects) + actual original sparse
+-- endpoint-history scan (if and only if parsing succeeds).
+------------------------------------------------------------------------
+
+allWordCombinedComparisonCount : Word.BitWord → Nat
+allWordCombinedComparisonCount word =
+  History.actualAllWordComparisonCount word
+    + ValidationWord.originalRawValidationCountForWord word
+
+allWordCombinedComparisonBound :
+  (word : Word.BitWord) →
+  allWordCombinedComparisonCount word
+    ≤ combinedComparisonPolynomial (Word.encodingSize word)
+allWordCombinedComparisonBound word =
+  NatP.+-mono-≤
+    (History.allWordComparisonCountBound word)
+    (ValidationWord.originalAllWordRawValidationCountBound word)
+
+allWordCombinedPolynomialClock :
+  (word : Word.BitWord) →
+  allWordCombinedComparisonCount word ≤
+    ERQ.coefficient combinedComparisonPolynomialBound *
+      ERQ.pow (suc (Word.encodingSize word))
+        (ERQ.exponent combinedComparisonPolynomialBound)
+allWordCombinedPolynomialClock word =
+  NatP.≤-trans
+    (allWordCombinedComparisonBound word)
     (ERQ.bounded combinedComparisonPolynomialBound
       (Word.encodingSize word))
