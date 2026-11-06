@@ -252,6 +252,38 @@ fleetExternalPlanningTextDoesNotCreateFormalResidual :
 fleetExternalPlanningTextDoesNotCreateFormalResidual = refl
 
 ------------------------------------------------------------------------
+-- Typed non-promotion gates for the fleet planning frontier.
+--
+-- The Boolean receipt fields remain audit facts.
+-- These constructorless types give consumers exact fail-closed gates.
+-- They do not validate the external producer run.
+------------------------------------------------------------------------
+
+data FleetEigenPriorityCreatesProof : Set where
+
+data FleetExternalCountCreatesFormalDischarge : Set where
+
+data FleetDischargedFibreRetargetPermission : Set where
+
+data FleetContradictionGapReclassificationPermission : Set where
+
+fleetEigenPriorityPromotionImpossible :
+  FleetEigenPriorityCreatesProof → ⊥
+fleetEigenPriorityPromotionImpossible ()
+
+fleetExternalCountPromotionImpossible :
+  FleetExternalCountCreatesFormalDischarge → ⊥
+fleetExternalCountPromotionImpossible ()
+
+fleetDischargedFibresCannotBeRetargetedByThisBoundary :
+  FleetDischargedFibreRetargetPermission → ⊥
+fleetDischargedFibresCannotBeRetargetedByThisBoundary ()
+
+fleetContradictionsCannotBeRelabelledAsFormalGaps :
+  FleetContradictionGapReclassificationPermission → ⊥
+fleetContradictionsCannotBeRelabelledAsFormalGaps ()
+
+------------------------------------------------------------------------
 -- Reuse the existing O/R/C/S/L/P/G/F process carrier.
 ------------------------------------------------------------------------
 
