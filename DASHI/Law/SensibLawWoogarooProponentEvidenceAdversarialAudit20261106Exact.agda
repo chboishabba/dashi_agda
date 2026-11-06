@@ -25,6 +25,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooOffsetSATAdversarial20261106Exact as SAT
 import DASHI.Law.SensibLawWoogarooAdversarialLogicalTests20261028Exact as Prior
+import DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact as Grounds
 
 ------------------------------------------------------------------------
 -- A16: Table 45's component SUM contradicts its published AU4 TOTAL.
@@ -140,7 +141,7 @@ data EvidenceFamily : Set where
 
 data AuditStage : Set where
   sourceReportedOnly : AuditStage
-  directSourceArithmeticConflict : AuditStage
+  directSourceArithmeticConflict sourceInternalConflict : AuditStage
   exactSourceArithmeticChecked : AuditStage
   independentlyConfirmed : AuditStage
   legallyAdjudicated : AuditStage
@@ -183,7 +184,7 @@ review speciesOccurrence = evidence-review speciesOccurrence
   "Site-level presence cannot by itself evidence use in each AU or a viable population."
   false false
 review surveyDesign = evidence-review surveyDesign
-  "A16 Sections 6.1.3 and 6.2.1" directSourceArithmeticConflict
+  "A16 Sections 6.1.3 and 6.2.1" sourceInternalConflict
   "Reconcile 5 SAT transect labels, selection, unsearched paddocks and detectability."
   false false
 review surveySpatialJoin = evidence-review surveySpatialJoin
@@ -295,5 +296,5 @@ oldReportedSAT : SAT.SurveyReceipt
 oldReportedSAT = SAT.mountWalkerReceipt
 priorLegalHabitatCountermodel :
   Prior.ShortcutCountermodel
-    DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact.actionBaselineError
+    Grounds.actionBaselineError
 priorLegalHabitatCountermodel = SAT.habitatGroundCountermodel
