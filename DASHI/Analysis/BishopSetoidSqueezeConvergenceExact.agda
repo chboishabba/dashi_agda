@@ -51,9 +51,9 @@ boundedDifference lower middle upper lower≤middle middle≤upper n =
   let
     lower≤upper = RP.≤-trans (lower≤middle n) (middle≤upper n)
     difference1Nonnegative =
-      RP.0≤x⇒nonNegx (S.x≤y⇒0≤y-x (lower≤middle n))
+      RP.0≤x⇒nonNegx (RP.nonNegx⇒0≤x (lower≤middle n))
     difference2Nonnegative =
-      RP.0≤x⇒nonNegx (S.x≤y⇒0≤y-x lower≤upper)
+      RP.0≤x⇒nonNegx (RP.nonNegx⇒0≤x lower≤upper)
     absDifference1 = RP.nonNegx⇒∣x∣≃x difference1Nonnegative
     absDifference2 = RP.nonNegx⇒∣x∣≃x difference2Nonnegative
   in
