@@ -329,3 +329,34 @@ def test_random_angle_hoeffding_optical_receipt_is_explicitly_simulated():
         lo,hi=design["mean_abs_impulse_hoeffding_interval"]
         assert lo <= design["mean_abs_torque"] <= hi
         assert not design["physical_calibration"]
+
+
+
+def test_exact_radial_rayleigh_ritz_bound():
+    pytest.importorskip("sympy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_rayleigh_spectral_bound",
+        ROOT/"scripts/gielis_rayleigh_spectral_bound.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    proof=module.theorem()
+    assert proof["m3_continuum_lambda1_upper_rational_strict"]=="1273/264"
+    assert proof["m3_upper_decimal"]<4.822
+    assert not proof["certified_numeric_FD_error"]
+
+
+def test_new_smooth_spiral_first_hit_refinement():
+    pytest.importorskip("scipy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_reflection_parity_convergence",
+        ROOT/"scripts/gielis_reflection_parity.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    coarse=module.parity(m=3,epsilon=.12,rays=20,segments=384,brackets=6144)
+    fine=module.parity(m=3,epsilon=.12,rays=20,segments=1536,brackets=6144)
+    assert coarse["paired"]>=1 and fine["paired"]>=1
+    assert coarse["unpaired"]==0 and fine["unpaired"]==0
+    assert fine["max_first_hit_error_m"]<coarse["max_first_hit_error_m"]
+    assert not fine["same_as_original_Kozyrev_HTML_SDF"]
