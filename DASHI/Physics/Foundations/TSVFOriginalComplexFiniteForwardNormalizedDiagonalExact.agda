@@ -41,7 +41,7 @@ import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as Env
 import DASHI.Mathematics.Algebra.CayleyDicksonRationalComplexQuaternionExact
   as C
 import DASHI.Physics.Closure.NSTriadKNLuoFiniteRationalOrderCore as Order
-import DASHI.Analysis.CanonicalRationalMetric as Metric
+
 
 -- This is the real diagonal subalgebra of the original selected
 -- finite complex 2D Hilbert carrier. It includes identity and
@@ -180,9 +180,12 @@ module _
           (Order.squareNonnegative a)
           (Order.squareNonnegative b)
 
+      halfNonnegative : 0ℚ ≤ ½
+      halfNonnegative = ℚP.0≤∣p∣ ½
+
       instance
         halfNN : NonNegative ½
-        halfNN = nonNegative Metric.halfNonnegative
+        halfNN = nonNegative halfNonnegative
 
         sumNN : NonNegative ((a * a) + (b * b))
         sumNN = nonNegative sumNonnegative
