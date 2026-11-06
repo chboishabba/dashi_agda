@@ -50,6 +50,7 @@ differentCurlHypothesesRequireIndependentTest :
 differentCurlHypothesesRequireIndependentTest = S.distinctMagneticCurlClaims
 
 import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact as Q
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityCurlGaugeExact as Curl
 
 sourcePaperMassIsReported :
   Q.massMg Q.paper ≡ 50
