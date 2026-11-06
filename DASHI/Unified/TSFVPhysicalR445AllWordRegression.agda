@@ -16,3 +16,11 @@ import DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact
 -- attached to the same native finite Wilson word Gram.
 import DASHI.Physics.Foundations.TSVFOriginalR445PublishedWilsonRPWordWeldExact
   as OriginalR445PublishedWordRP
+
+-- Source-selected ORIGINAL TSVF forward-ket observer -> physical
+-- Wilson/R445 all-word Gram. The complex observer's real readout is
+-- calibrated explicitly, not equated to Wilson ℝ by definitional fiat.
+-- Source-facing cylinder Born equality/product/adjoint are physical
+-- producer obligations, not a second assumed Gram.
+import DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact
+  as OriginalObserverWilsonGram
