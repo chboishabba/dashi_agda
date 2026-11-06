@@ -168,3 +168,26 @@ This is a concrete *mathematical* closure strategy for the two infinite
 compositions; it is **not yet the complete machine-checked K04d/K05
 max-cut**. Attribution: original Bishop/Bridges, Murray/Csimma,
 Cauchy, Machin, and existing DASHI proof owners.
+
+## E. K05-PRODUCT source-owner re-audit (same head)
+
+The original source-level product **does already have its full terminal
+implementation**. In
+`DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda`:
+
+- `originalEvenSignedFactorialDegree` proves the shifted odd/odd
+  correction against literal original cosine coefficients;
+- `originalOddSignedFactorialDegree` proves the original sine
+  convolution equality;
+- `originalImaginaryExponentialMultiplicative` invokes
+  `Native.round11ProductFromOriginalFactorialDegreeSplits` for **all**
+  original Bishop-real arguments;
+- `originalSineCosineAdditionFromNativeFactorials` obtains both addition
+  laws on the exact selected Bishop setoid-complex carrier.
+
+`BishopRound11NativeComplexRectangleExact.agda` independently implements
+four source-absolute Cauchy triangles, their convergence to the original
+complex exponential product, the odd/odd vanishing correction and the
+finite telescope. **No additional product lemma needs to be invented**.
+The remaining K05-PRODUCT task is exact-head Agda elaboration and repair
+of any actual elaboration failures, not mathematical implementation.
