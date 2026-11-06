@@ -27,6 +27,11 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
+-- 6 November 2026: new ORIGINAL native-bond structural sort and Wilson C3
+-- composition are import-tested by the canonical TOE regression root.
+-- SOURCE ONLY; importing does not constitute a kernel receipt.
+import DASHI.Physics.YangMills.YMClayNativeOriginalSortMembershipCorrectExact as YMNativeSortCorrect
+import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
