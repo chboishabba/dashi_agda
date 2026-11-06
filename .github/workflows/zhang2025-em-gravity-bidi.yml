@@ -6,14 +6,18 @@ on:
       - 'DASHI/Physics/ExoticGravity/Zhang2025EMGravity*.agda'
       - 'DASHI/Physics/ExoticGravity/Everything.agda'
       - 'scripts/check_zhang2025_em_gravity*'
+      - 'scripts/check_zhang2025_quantitative_consumers.py'
       - 'tests/test_zhang2025_em_gravity_bidi.py'
+      - 'tests/test_zhang2025_quantitative_consumers.py'
       - '.github/workflows/zhang2025-em-gravity-bidi.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/ExoticGravity/Zhang2025EMGravity*.agda'
       - 'DASHI/Physics/ExoticGravity/Everything.agda'
       - 'scripts/check_zhang2025_em_gravity*'
+      - 'scripts/check_zhang2025_quantitative_consumers.py'
       - 'tests/test_zhang2025_em_gravity_bidi.py'
+      - 'tests/test_zhang2025_quantitative_consumers.py'
       - '.github/workflows/zhang2025-em-gravity-bidi.yml'
   workflow_dispatch:
 
@@ -30,7 +34,10 @@ jobs:
         with:
           python-version: '3.12'
       - name: Run synthetic controls and non-promotion regression
-        run: python3 -m unittest discover -s tests -p 'test_zhang2025_em_gravity_bidi.py' -v
+        run: |
+          python3 -m unittest discover -s tests -p 'test_zhang2025_em_gravity_bidi.py' -v
+          python3 -m unittest discover -s tests -p 'test_zhang2025_quantitative_consumers.py' -v
+          python3 scripts/check_zhang2025_quantitative_consumers.py > zhang2025-quantitative.json
 
   scoped-agda-source:
     runs-on: ubuntu-latest
