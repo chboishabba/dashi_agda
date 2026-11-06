@@ -23,6 +23,8 @@ from pathlib import Path
 CASE = "2019/8575"
 QUT = "QUT School of Law, Taylor/Maguire/Lewis, 12 March 2026"
 QCC = "Queensland Conservation Council, Anthony Gough, 12 March 2026"
+RSPCA = "RSPCA Queensland, Emma Lagoon, April-June 2025"
+HOLDING = "Shannon Mooney and Andrew Davidson, QCC commissioned Holding the Line v2.0, 31 August 2023"
 
 @dataclass(frozen=True)
 class Claim:
@@ -100,6 +102,39 @@ def run():
     assert set(FUNCTIONS.values()).issubset({l.id for l in LEADS})
     assert all(not value for coverage in PROXY_COVERAGE.values() for value in coverage.values())
 
+    # Source acquisition has advanced beyond QCC's secondhand account:
+    # RSPCA Queensland public articles directly attest return of Maximus
+    # to Woogaroo and William to bordering Woogaroo woodland, but do not
+    # provide treatment case IDs or selected EPBC impact polygon GPS.
+    original_organisation_records = {
+        "maximus": {"publisher": RSPCA, "publication_date": "2025-06-02",
+            "source_url": "https://www.rspcaqld.org.au/resources/wildlife/maximus-the-koala-returns-to-woogaroo-forest-MCFYVERYNGXNCQBFHBTLBTRMTCG4",
+            "reported_return_location": "Woogaroo Forest",
+            "2019_8575_impact_polygon_matched": False,
+            "original_clinical_case_ID_obtained": False},
+        "william": {"publisher": RSPCA, "publication_date": "2025-04-11",
+            "source_url": "https://www.rspcaqld.org.au/resources/wildlife/william-the-koala-returns-home-MCTXS73T5DCJB27OKMKOYOXCLEEE",
+            "reported_return_location": "bordering Woogaroo Forest",
+            "2019_8575_impact_polygon_matched": False,
+            "original_clinical_case_ID_obtained": False},
+    }
+    holding_original = {
+        "authors": HOLDING,
+        "source_url": "https://assets.nationbuilder.com/queenslandconservation/pages/5629/attachments/original/1694603342/QCC_Holding_The_Line_Reversing_Biodiversity_Decline.pdf",
+        "original_page":31,
+        "source_table":"Table 8, vegetation extent by region and LGA (HLW 2021)",
+        "council":"Ipswich City",
+        "council_area_ha":109315,
+        "percentage_remnant_vegetation":21,
+        "data_basis_year":2021,
+        "is_same_as_2019_8575_impact_polygon":False,
+        "is_2026_updated_vegetation_measurement":False,
+        "is_universal_legal_30_percent_threshold":False,
+    }
+    assert set(original_organisation_records)=={"maximus","william"}
+    assert holding_original["percentage_remnant_vegetation"]==21
+    assert not any(v["2019_8575_impact_polygon_matched"] for v in original_organisation_records.values())
+
     # Adversarial burden is claim-specific, not a credibility ranking
     # based merely on being a campaigning organisation, academic or
     # commissioned consultant. Primary proof of original authored speech
@@ -111,20 +146,24 @@ def run():
         "original_QUT_leads":3,
         "original_QCC_leads":5,
         "lead_records":[asdict(x) for x in LEADS],
+        "new_primary_RSPCA_organisation_reports":original_organisation_records,
+        "QCC_commissioned_original_remnant_report":holding_original,
         "ecological_function_distinctions":FUNCTIONS,
         "automatic_proxy_to_function_inference_prohibited":PROXY_COVERAGE,
         "material_scope_gates":[
           "QUT cites 136ha mature forest, proponent OAG assesses 128ha: compare exact geometry/scope and dates, do not assume numeric contradiction",
           "QUT cites 500ha functional block: establish GIS polygon, not identical 2019/8575 approved impact",
           "QUT cites 396ha regional historical clearing: context, not same-action 2019/8575 authorized area",
-          "QCC cites Ipswich ~21% native cover and generic 30% ecological heuristic: obtain denominator and species-specific support",
-          "QCC relays RSPCA rescue/return: seek original field case before claiming exact on-site rescue",
+          "QCC 21% original report/HLW 2021 Table 8 located; original mapping layer and site polygon still needed; 30% is not an automatic legal threshold",
+          "QCC relay corroborated by RSPCA original public reports for Maximus/William; clinical case IDs and EPBC 2019/8575 polygon remain open",
           "QUT cites Possingham/Zdenek: explicit author or cross-project DOI/record required before treating them as individual authors of QUT submission",
           "Save Woogaroo submission index includes Scenic 2020/8651 and Peninsula 2020/8629 documents: do not convert to 2019/8575",
         ],
         "review_status":{
           "original_author_submissions_in_hand":True,
           "underlying_direct_observation_for_all_leads":False,
+          "independent_RSPCA_original_public_organisation_reports_found":True,
+          "QCC_commissioned_2023_report_original_found":True,
           "agency_consideration_in_95C_or_95B":False,
           "approved_15October_offset_calculator_reconciled":False,
           "legally_decided":False
@@ -140,7 +179,8 @@ def main():
     if a.agda_file:
         txt=a.agda_file.read_text()
         for k in ("qutCorridor","qutClimate","qutCumulative","qccConnectivity",
-                  "qccSurvey","qccRescue","qccLandscape","qccRedZone",
+                  "qccSurvey","qccRescue","qccLandscape","qccRedZone", "rspcaMaximusDirectOriginal",
+                  "rspcaWilliamDirectOriginal", "holdingTheLineOriginal",
                   "noAutomaticMatureForestEquivalence","noAutomaticCorridorEquivalence",
                   "noAutomaticClimateRefugeEquivalence","priorQUTAttribution"):
             assert k in txt,k
