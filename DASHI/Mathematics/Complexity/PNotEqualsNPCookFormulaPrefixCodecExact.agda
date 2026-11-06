@@ -32,7 +32,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Empty using (⊥-elim)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
@@ -486,7 +486,7 @@ encodeCookFormulaLength formula
         formula
         []
 ... | equality =
-  equality
+  trans equality (NatP.+-identityʳ (cookFormulaTokenCount formula))
 
 ------------------------------------------------------------------------
 -- Quotation never has zero token length.
