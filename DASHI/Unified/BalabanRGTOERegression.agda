@@ -32,6 +32,8 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Route
 -- SOURCE ONLY; importing does not constitute a kernel receipt.
 import DASHI.Physics.YangMills.YMClayNativeOriginalSortMembershipCorrectExact as YMNativeSortCorrect
 import DASHI.Physics.YangMills.YMClayNativeOriginalSortDeciderExact as YMNativeSortDecider
+-- Quantitative physical-cube conditional-Gibbs Dobrushin; source proof is conditional.
+import DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact as YMPhysicalCubeDobrushin
 import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
