@@ -10,6 +10,7 @@ MODULES=(
   DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda
   DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
+  DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
   DASHI/Biology/Physical/BiologicalMorphologyPartitionDepth4Exact.agda
@@ -34,6 +35,8 @@ grep -q 'compiledCodeExactlyCapturesFutureLanguage' \
   DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda
 grep -q 'allStochasticHorizonsRemainCoarse' \
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
+grep -q 'parametricAllFiniteHorizonsRemainCoarse' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
+grep -q 'arbitraryNormalizedWeightsPreserveAllControlledFutures' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
 grep -q 'allControlledStochasticHistoriesRemainCoarse' \
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
 grep -q 'initialAllTracesPreserveBiologicalProjection' \
