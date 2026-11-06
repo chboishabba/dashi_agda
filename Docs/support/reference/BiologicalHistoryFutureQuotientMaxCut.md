@@ -53,6 +53,23 @@ while retaining the other five coordinates.  Proven in Agda source:
 This **is not** a calibrated interpretation of any genome, signalling pathway,
 bioelectric voltage, chromatin effect, cell type, or whole-organism attractor.
 
+The second owner provides a distinct **synthetic mechanism/evidence feedback**
+regression.  It reuses the existing \`PhenomenonEvidenceFibreOverTimeExact\`
+instead of introducing another evidence governance system:
+
+- \`syntheticObservationRefinesModelFamily\`: a distinguishing observed
+  response removes the memory-blind candidate from the admitted family;
+- \`memoryBlindMisfitsSyntheticObservation\`: the model predicts a
+  conflicting result for the selected fixture;
+- \`withdrawalReopensModelCandidate\`: reanalysis/withdrawal can re-admit the
+  rejected candidate without rewriting the history;
+- \`SourceCalibratedMechanism\` makes provenance, the ontology-to-reaction
+  join, valid units, original observation and prediction match **separate
+  proof-relevant obligations**.  No instance is fabricated.
+
+This demonstrates feedback logic, **not** GO-CAM ingestion, SBML parsing, an
+identified reaction mechanism or an empirical discrimination result.
+
 The mathematical condition is the commuting diagram
 
 \`project(step a x) = coarseStep a (project x)\`
@@ -78,14 +95,15 @@ Existing donors reused (not replicated): \`FutureObservationLanguageQuotientExac
 | P1 — future equivalence | New safe/unsafe projection, trace commutation, concrete nonfactorability; existing general future language quotient and finite compiler | **P1.FINITE-COMPILER**: give this biological finite transition system an accepted \`CertifiedPartitionRefiner\`, rank bound and stable partition; **P1.STOCHASTIC**: compare distributions using measured/admissible stochastic transition kernels |
 | P2 — cubical spatial field | Existing 27-vertex, 54-edge, 36-plaquette, 8-cube geometry; new pointwise and one-hop adjacency-gated response/projection proofs | **P2.COUPLED-FIELD**: construct a simultaneous neighbourhood-coupled state evolution, prove all-edge/plaquette and boundary compatibility, and transport the biology quotient through it |
 | P3 — physical calibration | Existing finite chemical master generator, electrodiffusion, SI bioelectric adapter, B-DNA SE(3), finite basin and planarian source count observations | **P3.SBML-SI**: versioned SBML/SED-ML model/parameter ingestion, unit-checked original molecular state laws, identifiability analysis, trajectory error/uncertainty, held-out calibration and exact provenance receipts |
-| P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; canonical Agda programme registry; source-domain GO-CAM/BioModels mapping described in attached research brief | **P4.ONTOLOGY-WELD**: versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
+| P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; new finite source/model refinement and reopening theorems with an uninhabited calibrated join contract; canonical programme registry | **P4.ONTOLOGY-WELD**: versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
 | P5 — empirical discrimination | Explicit fine-vs-coarse intervention tests in finite fixture; existing dashitest/dashifine numerical machinery and planarian observations | **P5.HELDOUT**: source-separated measurements, held-out predictions, uncertainty intervals, neutral-component census, local/global perturbation sensitivity and prospective predictions that can distinguish candidate attractor models |
 
 No gate P0–P5 is legitimately globally closed for *real biology* by the
 new finite proof alone.  The direct deterministic finite part of P1, and the
 selected finite spatial-response part of P2, are source-written pending Agda
 acceptance.  P3–P5 require external model and experimental data, not tautological
-proof fields.
+proof fields. The P4 finite feedback regression is source-written, but no
+production ontology or world-model importer has been accepted.
 
 ## Model/observation/ontology feedback must be bidirectional
 
@@ -147,6 +165,8 @@ rather than claiming kernel acceptance.
   claim against relevant alternatives and controls.
 
 Only the first level has been established in this branch before a compiler run.
+A separate local Python enumeration passed the synthetic finite checks; it is
+not a receipt for a run of the exact committed script or an Agda kernel pass.
 No Agda kernel, SBML ingestion, ontology importer, or held-out biological
 validation receipt has been claimed by this document.
 
