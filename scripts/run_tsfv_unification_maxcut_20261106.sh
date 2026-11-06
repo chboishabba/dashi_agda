@@ -39,6 +39,7 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOriginalSelectedFiniteCommutatorResponseExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardPositiveFunctionalExact.agda
   DASHI/Physics/Foundations/TSVFOriginalQuantumSurfaceSpatialNonpromotionExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalOSPositiveWeightNotReflectionPositiveExact.agda
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda
 )
