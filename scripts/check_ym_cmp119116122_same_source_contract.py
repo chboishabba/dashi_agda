@@ -122,6 +122,13 @@ def main():
             "import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact",
             "native R445-R320 blocked jet regression root")
     require(wf,"$AGDA " + blocked_jet,"original native blocked source Agda CI")
+    physical_root = "DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda"
+    require(text(physical_root), "import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact",
+            "independent physical regression finite jet")
+    require(text(physical_root), "import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact",
+            "independent physical regression native blocked jet")
+    require(wf,"$AGDA " + physical_root,"dedicated physical root typecheck")
+    require(wf,"- '" + physical_root + "'","physical regression root CI trigger")
     require(wf,"- '" + blocked_jet + "'","original blocked source CI trigger")
 
     require(wf,"- '" + jet + "'","original Wilson finite jet CI trigger")
