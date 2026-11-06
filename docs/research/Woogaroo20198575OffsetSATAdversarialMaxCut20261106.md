@@ -86,3 +86,9 @@ agda --safe -i . -i /path/to/agda-stdlib DASHI/Law/SensibLawWoogarooPreservation
 ~~~
 
 **Non-promotion:** proponent source ≠ independent verification; survey lead ≠ four occupied AUs; source inconsistency ≠ fraud; site occurrence ≠ functional-equivalence finding; offsets ≠ actual ecological outcomes; approvals ≠ compliance; legal hypotheses ≠ filed cases/judgments; contractual mention ≠ financial transfer. No submissions, forms or enforcement reports were lodged.
+
+## Uniform proponent source review: stronger first-order findings
+
+[The 6 November all-material-family evidence audit](Woogaroo20198575AllProponentEvidenceAdversarialAudit20261106.md) now supersedes reliance on generic SAT non-identifiability alone. A16 Table 45's AU4 components yield 30 but the printed total is 40; if the table values control, the 4-point SSR changes by 4/7. A16 Table 2 and main PD Table A26 show a source-internal 0.98-ha area discrepancy. Most materially, A16 Table 13 assigns its entire 50.02% koala claim to AU1/AU2, the sparsely treed, currently zero-density-scored units. This puts the 20-year future habitat-quality forecast and the 75% confidence claim at the center of the audit. AU3 and AU4 get zero koala offset credit, hence their arithmetic inconsistency is NOT proof of the claimed 50.02% changing.
+
+Every source-authored positive assertion and inconvenient admission now faces the same independent evidence standards. Higher offset baseline can REDUCE projected gain; optimistic future habitat can INCREASE it. No one-direction bias or actual legal invalidity is presumed. See golden owner SensibLawWoogarooProponentEvidenceAdversarialAudit20261106Exact.agda.
