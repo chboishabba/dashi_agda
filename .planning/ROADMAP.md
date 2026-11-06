@@ -183,3 +183,15 @@ Authoritative G01–G21 obligations and deliverables: Docs/support/reference/Gie
 No parallel CI or original HTML replay pursued, per current user scope.
 Canonical E01–E26 proof note: Docs/support/reference/GielisBase369ProofTheorems.md.
 Canonical G01–G21 exact remaining lemmas: Docs/support/reference/GielisBase369Roadmap.md.
+
+
+## 2026-11-06 E27 original raster continuum proof and exact target repair
+
+- [x] Discover and repair original raster FD radial boundary FIXED-epsilon asymptotic wrong-target defect: replace 1e-12 by δ(h)=min(1e-12,h²), retaining identical n41/n61 masks.
+- [x] Exact original zero-extended 5-point energy identity u^T(4I-B)u = Σ_edges(u_i-u_j)²; implemented exact integer/Fraction checker with four independent selected vectors.
+- [x] Qualitative mathematical fixed-k Cartesian FD spectral convergence for the exact analytic domain under corrected vanishing ε: smooth-test limsup, compactness/liminf, zero exterior trace, min-max.
+- [ ] Controlled literal binary64 boundary evaluation / interval-certified actual finite mesh parity for arbitrary small h (fixed roundoff cannot be treated as o(1)).
+- [ ] Quantitative continuum n41/n61 eigenvalue error bound and native Agda continuum compactness/raster proofs.
+- [ ] Actual Bishop Round11 trigonometric object, C36 Fourier scalar and original SI optical source transfer physical semantic weld.
+
+The existing YM Mosco recovery/liminf owners are status inventories, not Gielis theorems. The full proof E27 and exact G12/G21 gate updates are in the existing canonical Gielis proof notebook and roadmap. CI/HTML are not active priorities.
