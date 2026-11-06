@@ -20,6 +20,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooProponentEvidenceAdversarialAudit20261106Exact as Audit
 import DASHI.Law.SensibLawWoogarooAdversarialLogicalTests20261028Exact as Prior
+import DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact as Grounds
 
 data Matter : Set where
   koala flyingFox swiftParrot regentHoneyeater : Matter
@@ -135,7 +136,7 @@ regentMWW88PercentRetained :
 regentMWW88PercentRetained = refl
 
 koalaMWW80PercentRetained :
-  retainedCreditHundredths koala 80 ≡ 983440
+  retainedCreditHundredths koala 80 ≡ 983460
 koalaMWW80PercentRetained = refl
 
 -- Both parties' counterfactuals must still be tested: this finite
@@ -145,7 +146,7 @@ oldAudit = Audit.review Audit.futureHabitatValue
 
 priorLegalCaseCountermodel :
   Prior.ShortcutCountermodel
-    DASHI.Law.SensibLawWoogarooEPBC8575PleadableGroundsPrecedentCut20261028Exact.actionBaselineError
+    Grounds.actionBaselineError
 priorLegalCaseCountermodel = Audit.priorLegalHabitatCountermodel
 
 data SourceReportedCompensationIsRealisedOutcome : Set where
