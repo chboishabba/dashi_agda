@@ -120,3 +120,25 @@ C_m rotation symmetry despite its m-fold angular modulation.
   wavelets = optical Kozyrev mirrors; singleton-real model = Bishop ℝ;
   finite Fourier → 4D Yang–Mills/NS/Monster physical claim; reflection
   proxy = measured torque; Python smoke test = Agda kernel acceptance.
+
+
+## 2026-11-06 follow-up: Kolmogorov, Shannon and computational MDL
+
+The Python optics sweep now carries a concrete `model_code_bits` field,
+computed by `model_encode`/`model_decode`, not a guessed entropy:
+one baseline bit for any eps=0 log spiral, otherwise one modulation tag
+plus two Elias-gamma positive-integer codes for m and (1+1000*eps).
+Only millistep eps in [0,0.45] is admitted. Roundtrip and sample
+prefix-free regression are included. This is a description length for an
+**explicit program language**, not universal Kolmogorov complexity K(x).
+No Shannon source-distribution or rate-distortion optimum is asserted.
+
+There is a second, distinct 'Kolmogorov' owner in turbulence:
+`DASHI/Physics/Closure/NSCarrierKolmogorovSerrinReceipt.agda`.
+Its cascade/length-scale semantics cannot be identified with algorithmic
+information theory, and neither yields a measured optical performance
+advantage without a field/source model. Do not mix these three meanings.
+
+The 18→36 proof is specifically a discrete two-mode aliasing counterexample.
+It does not prove continuous Nyquist-Shannon sampling/reconstruction or
+selected MSE bounds. Those are independent G19 obligations.
