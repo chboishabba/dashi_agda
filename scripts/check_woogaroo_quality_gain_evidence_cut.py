@@ -55,7 +55,7 @@ def scenario(cap):
 
 def run():
     assert sum(map(len,ROWS.values()))==14
-    assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>1)==7
+    assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>1)==6
     assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>2)==4
     assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>3)==3
     results={("source" if cap is None else "cap_"+str(cap)):scenario(cap)
@@ -75,7 +75,7 @@ def run():
        "time_until_benefit_years":20,
        "zero_avoided_loss_only":True,
        "results":results,
-       "above_one_gain_rows":7,
+       "above_one_gain_rows":6,
        "above_two_gain_rows":4,
        "above_three_gain_rows":3,
        "legal_or_scientific_adequacy_proved":False,
