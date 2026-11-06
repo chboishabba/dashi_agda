@@ -420,3 +420,55 @@ Newton/binomial, Bishop–Bridges, Murray/Csimma, and DASHI source
 provenance is preserved.
 
 **2026-11-05 finite-sign refinement:** `BishopRound11SignedFactorialExponentEncodingExact` also source-writes `alternatingSignTwoIsOne`, `alternatingSignEvenIndexIsOne`, and `alternatingSignOddIndexIsMinusOne`, using the original Bishop real squared-negative lemma and pinned real-power addition. This pays universal even/odd sign reduction, but **does not yet produce the final signed mixed-convolution coefficient theorem**. These declarations are kernel-pending along with the other newly added K05 proof terms.
+
+
+## 2026-11-06 — strong-triangle prior-art audit and exact K05 reuse boundary
+
+**Repository prior art confirmed, with two distinct meanings of triangle.**
+
+- `Ultrametric.agda` supplies the Nat-valued `Ultrametric.ultratriangle`
+  contract `d x z ≤ max (d x y) (d y z)`.
+- `DASHI/Metric/AgreementUltrametric.agda` proves
+  `agreeDepth-triangle`, `ultraNat` and the stronger strict-leg
+  `strictLegForcesLongSideEquality`: `d x y < d y z` implies
+  `d x z ≡ d y z`.
+- `DASHI/Reasoning/Trialectic369HypervoxelUltrametricExact.agda`
+  transports those statements as `trialecticStrongTriangle` and
+  `trialecticStrictLegEquality` on the 9-trit observer hyperfabric.
+  Other existing consumers include the DNA four-adic prefix carrier and
+  `DASHI/Metric/TernaryUltrametric.agda`.
+- **K05 directly relevant owners are different.** On the actual
+  Archimedean Bishop-real carrier,
+  `DASHI/Foundations/BishopFiniteSeriesAbsoluteBoundExact.agda` proves
+  `|Σ a_j| ≤ Σ |a_j|`, and
+  `BishopFiniteSeriesTailAbsoluteBoundExact.agda` proves the finite-tail
+  version. `BishopFiniteCauchyWingAbsoluteBoundExact.agda` *already
+  imports/reuses both* to bound the original signed rectangle–triangle
+  error by the nonnegative Cauchy wing; the positive-square
+  rectangle/triangle inequalities live in
+  `BishopFiniteRectangleInsideCauchyTriangleExact.agda` and
+  `BishopFiniteCauchyTriangleInsideRectangleExact.agda`.
+  `BishopGenericCauchyFromAbsoluteTriangleExact.agda` already reuses
+  this wing bound and the original Bishop limits.
+- **Do not transport the ultrametric inequality to Bishop.ℝ.** The
+  Archimedean absolute value fails `|a+b| ≤ max(|a|,|b|)` already for
+  `a=b=1`, where `2 > 1`. The ultrametric strict-leg equality
+  describes distance configurations, not an exact signed Cauchy
+  convolution coefficient. No cross-carrier additive/absolute-value
+  identification has been established to justify that replacement.
+- **Acceptance consequence:** This archaeology does **not** discharge
+  the remaining K05 original grouped-factorial finite coefficient pair.
+  Use the existing universal finite parity reindexing, signed
+  factorial/exponential source transport and the original all-degree
+  exponential binomial coefficient proof. Prove exact signed
+  coefficient equality *before* using the ordinary triangle inequality
+  or convergence transport. The independent
+  `NSTriadKNLuoFiniteCancellationAbsoluteValueNoGoExact.agda`
+  demonstrates why absolute-value majorants cannot recover signed
+  cancellation identities.
+- K04d-LOG, K04d-CONTINUITY and K05-PI similarly still need their
+  original source-function identities and analytic continuity/quarter
+  arguments; neither triangle inequality is a substitute.
+
+This is an evidence/reuse audit, **not a new Agda kernel acceptance
+receipt** or a claim that the outstanding coefficient theorem is proved.
