@@ -36,8 +36,8 @@ weakenFormula :
   ∀ {variables : Nat} →
   SAT.BooleanFormula variables →
   SAT.BooleanFormula (suc variables)
-weakenFormula (SAT.variable index) =
-  SAT.variable (Fin.suc index)
+weakenFormula (SAT.formulaVar index) =
+  SAT.formulaVar (Fin.suc index)
 weakenFormula (SAT.constant value) =
   SAT.constant value
 weakenFormula (SAT.negate formula) =
@@ -61,7 +61,7 @@ restrictWeakenFalse :
   SAT.restrictHead false
     (weakenFormula formula)
   ≡ formula
-restrictWeakenFalse (SAT.variable index) =
+restrictWeakenFalse (SAT.formulaVar index) =
   refl
 restrictWeakenFalse (SAT.constant value) =
   refl
@@ -83,7 +83,7 @@ restrictWeakenTrue :
   SAT.restrictHead true
     (weakenFormula formula)
   ≡ formula
-restrictWeakenTrue (SAT.variable index) =
+restrictWeakenTrue (SAT.formulaVar index) =
   refl
 restrictWeakenTrue (SAT.constant value) =
   refl
@@ -110,7 +110,7 @@ weakenPreservesNodeCount :
     (weakenFormula formula)
   ≡
   Size.formulaNodeCount formula
-weakenPreservesNodeCount (SAT.variable index) =
+weakenPreservesNodeCount (SAT.formulaVar index) =
   refl
 weakenPreservesNodeCount (SAT.constant value) =
   refl
