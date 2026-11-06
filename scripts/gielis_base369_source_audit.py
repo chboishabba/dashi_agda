@@ -24,6 +24,7 @@ FILES = (
     "DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda",
     "DASHI/Geometry/GielisSpectralSIScaleExact.agda",
     "DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda",
+    "scripts/gielis_fd_energy_mosco.py",
 )
 THEOREMS = (
     "rotation3PreservesSignal", "rotation6PreservesSignal",
@@ -152,6 +153,10 @@ def source_audit(root: Path = ROOT) -> dict:
         assert theorem in finite,theorem
     assert "Fubini.sumRationalAdd" in finite
     assert "Sums.sumRationalCong" in finite
+    fd_energy=source["scripts/gielis_fd_energy_mosco.py"]
+    assert "grid_energy" in fd_energy
+    assert "legacy_1e_minus_12_mask_equal_at_selected_n" in fd_energy
+    assert "boundary_tolerance_normalized" in fd_energy
     numerical=source["scripts/gielis_base369_experiments.py"]
     assert "raster_boundary_tolerance(h)" in numerical
     roadmap=source[FILES[3]]
