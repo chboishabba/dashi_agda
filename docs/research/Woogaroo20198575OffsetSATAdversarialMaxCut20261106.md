@@ -52,6 +52,12 @@ The same Mount Walker West source scores **0/6 for the ecological-corridor locat
 - Source-reported Mount Walker West contributions **50.02% Koala, 66.89% GHFF, 91.92% Swift Parrot, 37.40% Regent Honeyeater** are stored as input claims, **not recalculated** from SATs or independently verified.
 - Avonvale consultant material reports no WildNet/ALA Swift Parrot or Regent Honeyeater records within 10 km, but missing database records ≠ absence/unsuitability.
 
+## Paired adversary and conditional component arithmetic
+
+A16's SSR method reports a **70-point species-stocking numerator rescaled to 4 of the 10 composite-quality points**. Holding *every other* component fixed, a ten-point change in one AU's presence item has exactly **10/70 × 4 = 4/7 ≈ 0.5714286** of one AU's 10-point weighted-quality score. This is a **conditional component sensitivity**, not a confidence interval, not a change in the legally approved offset fraction, and not even necessarily an admissible score adjustment under the scoring rubric. Future-condition scores, area weighting, time discounting and all OAG inputs need separate source-paid recomputation.
+
+The Agda additionally provides **noUniversalRubricCorrectnessDecoder**: two adversarial interpretations share the identical published scores but differ in whether the adopted rubric permits site-level evidence to justify every AU. Thus the **challenger cannot infer mis-scoring from the scores alone**, and the **proponent cannot establish the per-AU methodological entitlement from the same scores alone**. Original approved method, all provenance, survey coordinates and an independent expert opinion are the discriminating evidence.
+
 ## Material ecological comparator
 
 The proponent's impact-site PD estimates **128 ha** critical habitat clearing, Koala MHQA **6.78**, GHFF FHA **7.47**. Mount Walker West has **225.6 ha** designated offset but envisages **155.4 ha** of recreation on historically cleared grazing land; the 2-ha building envelope is excluded. Esk's **280.2-ha offset** excludes proposed rural building envelopes. Avonvale's **168 ha** consists of variable grazing/regrowth land and a **reported agreement** with One Environment (contract terms/consideration not independently obtained). Future planted habitat is not immediate equivalent for the affected Woogaroo local koala population, even where it may improve a separate population or provide resources to highly mobile species.
