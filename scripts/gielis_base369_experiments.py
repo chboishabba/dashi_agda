@@ -200,7 +200,8 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
     return {"reflections":reflections,"hit_target":touched,"signed_torque":signed,"absolute_torque":magnitude,
             "exit_reason":exit_reason,"path":path,"collisions":collisions}
 
-SPEED_OF_LIGHT_M_S = 299792458  # exact SI-defined constant
+from gielis_si_owner_adapter import canonical_speed_of_light_si
+SPEED_OF_LIGHT_M_S = canonical_speed_of_light_si()
 
 def ideal_specular_wall_torque_nm(mean_wall_angular_impulse_m, power_watts):
     """Conditional optical-force transfer, never a measured apparatus value.
