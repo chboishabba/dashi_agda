@@ -19,6 +19,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -26,6 +28,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canoni
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
+import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
+import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 
 -- The tag is the first bit of the original actual canonical cell block.
 -- A headed cell is rejected independently of its arbitrary state/symbol
@@ -148,3 +153,79 @@ placedPlainEndcapComplete stateCoverage symbolCoverage
     rename plainEndcapPredicate assignment
     (plainEndcapPredicateComplete stateCoverage symbolCoverage
       (Rename.pullbackBits rename assignment) plain)
+
+------------------------------------------------------------------------
+-- SAME ORIGINAL GLOBAL SAT ASSIGNMENT: ROW/COLUMN BLOCK PLACEMENT.
+--
+-- The actual endcap cell is selected by Global.globalRowRename,
+-- Global.blockRename, and Endpoint.liftBaseIndex. This neither
+-- introduces fresh bits nor duplicates row codecs. A per-row
+-- conjunction producer can reuse this compiled canonical predicate.
+------------------------------------------------------------------------
+
+rowCellExtendedRename :
+  ∀ {machine steps cols rowIndex colIndex} →
+  Global.Slot rowIndex (suc steps) →
+  Global.Slot colIndex cols →
+  Fin.Fin (Canonical.CellWidth machine) →
+  Fin.Fin (Endpoint.ExtendedGlobalWidth machine steps cols)
+rowCellExtendedRename rowSlot cellSlot index =
+  Endpoint.liftBaseIndex
+    (Global.globalRowRename rowSlot
+      (Global.blockRename cellSlot index))
+
+globalRowCellPlainCNF :
+  ∀ {machine steps cols rowIndex colIndex} →
+  Global.Slot rowIndex (suc steps) →
+  Global.Slot colIndex cols →
+  CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps cols)
+globalRowCellPlainCNF rowSlot cellSlot =
+  placedPlainEndcapCNF (rowCellExtendedRename rowSlot cellSlot)
+
+globalRowCellPlainSound :
+  ∀ {machine steps cols rowIndex colIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (rowSlot : Global.Slot rowIndex (suc steps))
+    (cellSlot : Global.Slot colIndex cols)
+    (assignment :
+      CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
+  CNF.evaluateCNF
+    (globalRowCellPlainCNF rowSlot cellSlot) assignment ≡ true →
+  Pattern.IsPlainCell
+    (Canonical.decodeCell stateCoverage symbolCoverage
+      (Rename.pullbackBits
+        (rowCellExtendedRename rowSlot cellSlot) assignment))
+globalRowCellPlainSound stateCoverage symbolCoverage
+    rowSlot cellSlot assignment accepted =
+  placedPlainEndcapSound
+    stateCoverage symbolCoverage
+    (rowCellExtendedRename rowSlot cellSlot)
+    assignment accepted
+
+-- Construct a canonical RIGHTMOST column, not a user-selected proxy.
+lastPhysicalColumn :
+  (n : Nat) →
+  Global.Slot n (suc n)
+lastPhysicalColumn zero = Global.here
+lastPhysicalColumn (suc n) = Global.there (lastPhysicalColumn n)
+
+-- At any nonempty row width suc n, these are exactly the first/last
+-- actual cells, each constrained on the SAME original global bits.
+globalRowEndcapsCNF :
+  ∀ {machine steps rowIndex}
+    (colsMinusOne : Nat)
+    (rowSlot : Global.Slot rowIndex (suc steps)) →
+  CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))
+globalRowEndcapsCNF colsMinusOne rowSlot =
+  appendCNFs
+    (globalRowCellPlainCNF rowSlot Global.here)
+    (globalRowCellPlainCNF rowSlot (lastPhysicalColumn colsMinusOne))
+  where
+    appendCNFs :
+      ∀ {n} → CNF.CNF n → CNF.CNF n → CNF.CNF n
+    appendCNFs [] right = right
+    appendCNFs (first ∷ rest) right =
+      first ∷ appendCNFs rest right
