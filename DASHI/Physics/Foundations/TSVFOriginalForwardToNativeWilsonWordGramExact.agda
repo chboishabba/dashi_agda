@@ -112,6 +112,12 @@ module _
       -- insertion on one measured cylinder, not a free J-index.
       cylinderOperator : Observable → Operator
 
+      -- ONE actual physical time-reflection on the selected
+      -- gauge-invariant positive-time cylinder algebra. The previous
+      -- forall-reflection M2b would force all distinct cylinder
+      -- insertions to coincide by choosing arbitrary constant maps.
+      selectedPhysicalReflection : Observable → Observable
+
       -- M1: the actual selected one-boundary observer expectation
       -- is the original Wilson source expectation ON EACH PHYSICAL
       -- GAUGE CYLINDER. A future proof must construct this from the
@@ -138,8 +144,8 @@ module _
       -- M2b: the physical selected reflection IS original adjoint
       -- on a single admissible cylinder, not an all-word Gram axiom.
       originalCylinderReflectionIsOperatorAdjoint :
-        ∀ reflection cylinder →
-        cylinderOperator (reflection cylinder)
+        ∀ cylinder →
+        cylinderOperator (selectedPhysicalReflection cylinder)
         ≡ operatorAdjoint (cylinderOperator cylinder)
 
   open OriginalSameSourceMeasurement public
@@ -148,32 +154,31 @@ module _
   -- two locally source-testable product and adjoint laws.
   originalAllWordReflectedProductIsObserverStar :
     (source : OriginalSameSourceMeasurement)
-    (reflection : Observable → Observable)
     (left right : Word) →
     cylinderOperator source
-      (reflectedWord reflection left right)
+      (reflectedWord (selectedPhysicalReflection source) left right)
     ≡
     operatorCompose
       (operatorAdjoint (cylinderOperator source (coarseWord left)))
       (cylinderOperator source (coarseWord right))
   originalAllWordReflectedProductIsObserverStar
-      source reflection left right =
+      source left right =
     trans
       (originalCylinderProductIsOperatorComposition source
-        (reflection (coarseWord left)) (coarseWord right))
+        (selectedPhysicalReflection source (coarseWord left))
+        (coarseWord right))
       (cong
         (λ op →
           operatorCompose op
             (cylinderOperator source (coarseWord right)))
         (originalCylinderReflectionIsOperatorAdjoint
-          source reflection (coarseWord left)))
+          source (coarseWord left)))
 
   originalMeasuredObserverCrossWordGram :
     (source : OriginalSameSourceMeasurement)
-    (reflection : Observable → Observable)
     (left right : Word) → ℝ
   originalMeasuredObserverCrossWordGram
-      source reflection left right =
+      source left right =
     readOriginalScalarAsReal
       (Cyclic.originalObserverCrossGram E laws
         (cylinderOperator source (coarseWord left))
@@ -187,10 +192,11 @@ module _
     (reflection : Observable → Observable)
     (left right : Word) →
     originalMeasuredObserverCrossWordGram
-      source reflection left right
-    ≡ actualNativeR445WordGram reflection left right
+      source left right
+    ≡ actualNativeR445WordGram
+      (selectedPhysicalReflection source) left right
   originalMeasuredAllWordCrossGramEqualsNativeR445
-      source reflection left right =
+      source left right =
     trans
       (cong
         (λ op →
@@ -198,9 +204,10 @@ module _
             (Forward.originalForwardFunctional E laws op))
         (sym
           (originalAllWordReflectedProductIsObserverStar
-            source reflection left right)))
+            source left right)))
       (sameSourceCylinderReadout source
-        (reflectedWord reflection left right))
+        (reflectedWord (selectedPhysicalReflection source)
+          left right))
 
   -- The actual original 1024-link fine Wilson-Gibbs measure is
   -- recovered too, by the SAME native block pushforward theorem.
@@ -209,17 +216,19 @@ module _
     (reflection : Observable → Observable)
     (left right : Word) →
     originalMeasuredObserverCrossWordGram
-      source reflection left right
-    ≡ originalFineWilsonWordGram reflection left right
+      source left right
+    ≡ originalFineWilsonWordGram
+      (selectedPhysicalReflection source) left right
   originalMeasuredAllWordCrossGramEqualsFineWilson
       source reflection left right =
     trans
       (originalMeasuredAllWordCrossGramEqualsNativeR445
-        source reflection left right)
+        source left right)
       (sym
         (Native.actualNativeR445AllReflectedWordGrams
           theory traceData exponential betaFine
-          oneLink bilateral divide reflection left right))
+          oneLink bilateral divide
+          (selectedPhysicalReflection source) left right))
 
   -- The original operator-state cyclic vectors themselves (not a
   -- parallel abstract Gram) have the same native word-pair Gram.
@@ -231,9 +240,10 @@ module _
       (Cyclic.originalSelectedCyclicPair E laws
         (cylinderOperator source (coarseWord left))
         (cylinderOperator source (coarseWord right)))
-    ≡ actualNativeR445WordGram reflection left right
+    ≡ actualNativeR445WordGram
+      (selectedPhysicalReflection source) left right
   originalSelectedCyclicKetAllWordGramEqualsNativeR445
-      source reflection left right =
+      source left right =
     trans
       (cong readOriginalScalarAsReal
         (sym
@@ -242,7 +252,7 @@ module _
             (cylinderOperator source (coarseWord left))
             (cylinderOperator source (coarseWord right)))))
       (originalMeasuredAllWordCrossGramEqualsNativeR445
-        source reflection left right)
+        source left right)
 
 -- Two physical same-source producer obligations are now isolated:
 -- (M1) calibrated REAL COMPONENT of one-cylinder original observer
