@@ -31,6 +31,7 @@ import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Route
 -- composition are import-tested by the canonical TOE regression root.
 -- SOURCE ONLY; importing does not constitute a kernel receipt.
 import DASHI.Physics.YangMills.YMClayNativeOriginalSortMembershipCorrectExact as YMNativeSortCorrect
+import DASHI.Physics.YangMills.YMClayNativeOriginalSortDeciderExact as YMNativeSortDecider
 import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
