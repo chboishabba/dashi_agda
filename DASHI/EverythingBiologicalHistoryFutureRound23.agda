@@ -15,6 +15,8 @@ import DASHI.Biology.Physical.SourceIndexedBiologicalCarrierExact
 import DASHI.Biology.Physical.BiologicalFuturePartitionCompilerExact
 import DASHI.Biology.Physical.BiologicalStochasticFutureLumpingExact
 import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact
+import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact
+import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact
 
 -- No claim of Agda kernel acceptance without an executable/compiler receipt;
 -- no empirical genome-to-bioelectric-attractor calibration is inferred from
