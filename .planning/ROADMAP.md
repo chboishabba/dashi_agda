@@ -78,3 +78,23 @@ Plans:
 | 3. MDL Integration | 1/2 | In progress | - |
 | 4. Signature Elimination | 2/2 | Complete | 2026-03-01 |
 | 5. Closure Harness | 0/2 | Not started | - |
+
+
+## Cross-domain geometry lane: Gielis × Base369 (November 2026)
+
+**Authority:** [GielisBase369Roadmap.md](../Docs/support/reference/GielisBase369Roadmap.md).
+**Implementation:** [PR #1466](https://github.com/chboishabba/dashi_agda/pull/1466), draft;
+the original closure phases above remain unchanged.
+
+- [x] Phase G0: prior-art owner mapping (dihedral, Nyquist/Shannon, MDL/Kolmogorov, SO(3)/torque, log-polar spiral).
+- [ ] Phase G1: G01/G06 native C18 and 36-sector exact proofs **kernel-accepted**; three new sources present but compiler receipt outstanding.
+- [ ] Phase G2: G02–G05/G08–G09 ordinary-real Gielis identity, cyclic/dihedral continuum, area/curvature.
+- [ ] Phase G3: G07/G10–G12/G19 native Fourier, sampling and convergent Dirichlet spectrum.
+- [ ] Phase G4: G13–G16/G21 original Kozyrev HTML raymarcher same-apparatus reproduction, calibrated angular impulse, non-369 controls, CI and Pareto.
+- [ ] Phase G5: G17/G18/G20 inverse/MDL/product-symmetry proofs, reproducible paper and independent physical validation.
+
+**Deliverables:** D0 prior-art map; D1 kernel receipt; D2 continuous geometric
+library; D3 spectral certification; D4 source/geometry parity; D5
+control/Pareto benchmark; D6 empirical validation; D7 inverse compiler and
+publication. The exact G01–G21 lemma list, dependencies, owners, tests and
+nonpromotion rules live exclusively in the linked lane roadmap.
