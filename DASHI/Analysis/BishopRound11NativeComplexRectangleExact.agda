@@ -980,12 +980,12 @@ round11RealBoundaryIsNativeTelescope inputs x y count =
     original = round11OriginalCosineSourceDegree inputs x y
   in
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ (Seq.SeriesOf original count))
       (RP.+-cong
         (FinSum.finSumIsSeriesOf cc count)
         (RP.-‿cong (FinSum.finSumIsSeriesOf ss count))))
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ (Seq.SeriesOf original count))
       (RP.≃-symm
         (Telescope.nativeFiniteSeriesDifferenceLinear cc ss count)))
@@ -1008,12 +1008,12 @@ round11ImagBoundaryIsNativeTelescope inputs x y count =
     original = round11OriginalSineSourceDegree inputs x y
   in
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ (Seq.SeriesOf original count))
       (RP.+-cong
         (FinSum.finSumIsSeriesOf cs count)
         (FinSum.finSumIsSeriesOf sc count)))
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ (Seq.SeriesOf original count))
       (RP.≃-symm
         (Telescope.nativeFiniteSeriesSumLinear cs sc count)))
