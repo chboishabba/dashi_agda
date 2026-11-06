@@ -98,6 +98,9 @@ jobs:
             DASHI/Analysis/BishopMachinQuarterPhaseQuadruplicationAlgebraExact.agda
             DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda
             DASHI/Analysis/BishopMachinFirstPositiveSineZeroFromNativePhaseExact.agda
+            DASHI/Analysis/BishopSinePositiveTwoBallFromCubicExact.agda
+            DASHI/Analysis/BishopMachinQuarterStrictSineFromTwoBallExact.agda
+            DASHI/Analysis/BishopMachinPiGlobalSineSignFromTwoBallExact.agda
             DASHI/Analysis/BishopMachinZetaSequentialContinuityReducerExact.agda
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
