@@ -325,3 +325,49 @@ Y443 nonedge count 55 = 1 + 2*(27 raw ternary states).
 These are genuine Agda-definitional numeric comparison theorems;
 the actual Y443 arm-swap fixed/paired orbit data (3/4 for edges, 7/24
 for nonedges) is DIFFERENT and is the decisive equivariance test.
+
+
+## 2026-11-06 exact primary JMD Lean proof recovered — source-data gate CLOSED
+
+**Correction of stale prior frontier:** JMD's actual word and path proof
+are publicly accessible at
+[CFSGCorollary/Sporadic/Monster/Y443.lean](https://github.com/AxiomMath/CFSGCorollary/blob/main/CFSGCorollary/Sporadic/Monster/Y443.lean).
+The proof is not merely an attributed screenshot/ten-step prose report.
+It contains theorem names
+`y443_paths`, `y443_closure_pair_eq_top`,
+`twoGenerated_y443`, and `twoGenerated_tcg`, with the private
+general-purpose `closure_pair_eq_top_of_paths` lemma.
+
+The **actual chosen group elements** are:
+```text
+u    = x11 * x10 * x9 * x0 * x1 * x2 * x3 * x4
+beta = x5 * x6 * x7 * x8
+v    = u * x4 * beta
+w    = u^-1 * v = x4 * beta
+```
+
+DASHI source transcription `Y443JMDSourceWordInstantiationExact.agda`
+defines the twelve `x0..x11` names using its preexisting `Y.Node`,
+the 8/4/5-node Coxeter paths, exact `uElement`, `betaElement`,
+`vElement`, `wElement`, concrete `jmdWTwoWord`, and proves
+`wIsX4Beta` from the existing literal `TM.GroupWithInverse` laws.
+`Y443JMDConcretePairPowerCompilerExact.agda` wires these to the
+already-implemented exact `w^5`, `w^6` power representation closure;
+the Lean-derived `sourceX4Fifth`, `sourceBetaSixth` equalities
+remain explicit Agda inputs to that compiler, rather than trusted
+claims. The two full path-reconstruction theorems, total node-word
+construction and Agda proof of whole-group generation are also
+separate replay gates.
+
+These are two distinct authorities:
+1. **JMD/CFSGCorollary Lean**: has an actual source-written path proof
+   of `Y443` and `TCG` being two-generated.
+2. **DASHI Agda**: now owns an exact source-word import, a concrete
+   group-algebra proof of `w = x4 beta`, and conditional power/action
+   transfer. A successful Agda compiler receipt is not observed yet.
+
+The source theorem alone proves TWO-GENERATION of TauCeti's presented
+group; identifying that presentation with the full abstract Monster
+and then proving the selected `Aut_VOA(Vnatural)` equivalence
+are separate structural claims and require their corresponding
+source-to-concrete object maps.
