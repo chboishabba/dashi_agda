@@ -1,0 +1,76 @@
+name: Karp21 exact proof referee
+
+on:
+  push:
+    branches:
+      - chatgpt/karp21-reduction-transport
+    paths:
+      - "DASHI/Mathematics/Complexity/**"
+      - "scripts/**"
+      - ".github/workflows/karp21-referee.yml"
+  pull_request:
+    paths:
+      - "DASHI/Mathematics/Complexity/**"
+      - "scripts/**"
+      - ".github/workflows/karp21-referee.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-preflight:
+    name: Source and executable regression (not a proof)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test no-Agda fail-closed referee mode
+        run: python3 scripts/check_karp21_referee_no_agda.py
+      - name: Existing binary codec, N21 and E20 regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/referee_karp21_maxcut.sh preflight 2>&1 | tee karp21-preflight.log
+      - name: Upload preflight evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: karp21-python-preflight
+          path: karp21-preflight.log
+          if-no-files-found: warn
+
+  agda-kernel:
+    name: Actual Agda kernel (fail closed)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Agda and standard library
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y agda agda-stdlib
+          agda --version
+          dpkg-query -W agda agda-stdlib
+          stdlib_module="$(dpkg -L agda-stdlib | grep -m1 '/Data/List/Base.agda$')"
+          if [[ -z "$stdlib_module" ]]; then
+            echo "FAIL: no Agda stdlib Data/List/Base.agda was installed" >&2
+            exit 1
+          fi
+          stdlib_root="$(dirname "$(dirname "$(dirname "$stdlib_module")")")"
+          echo "AGDA_STDLIB_ROOT=$stdlib_root" >> "$GITHUB_ENV"
+          printf 'Agda stdlib root: %s\n' "$stdlib_root"
+      - name: Referee golden and full Karp21 Agda roots
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/referee_karp21_maxcut.sh all 2>&1 | tee karp21-agda.log
+      - name: Upload kernel diagnostics and receipts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: karp21-agda-kernel
+          path: karp21-agda.log
+          if-no-files-found: warn
