@@ -179,6 +179,26 @@ The script is invoked by the Round-23 shell checker. This completes the
 prospective **evaluation interface**, not the decisive independent
 longitudinal planarian experiment or its biological outcome.
 
+### Adversarial future-quotient refinement test
+
+The Golden root now also includes
+`BiologicalMinimalMorphologyAdversarialRefinementExact`.
+It proves that two states merged by the original exact 18-class
+morphology quotient can be distinguished by a *new synthetic* action
+that reads the previously discarded chromatin marker:
+
+- `sameMinimal18ClassBeforeMarkerProbe`: identical original coarse class;
+- `markerProbeReadsFirstFalse` and `markerProbeReadsSecondTrue`:
+  distinguishable post-intervention morphology;
+- `original18ClassProjectionNotSafeUnderNewDynamics`:
+  canonical future-language safety becomes contradictory under this
+  **different**, marker-sensitive transition system.
+
+This is not evidence that the original quotient theorem was wrong.
+It establishes an exact re-refinement requirement if subsequent
+source-supported biology introduces another observationally relevant
+state variable or intervention.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
