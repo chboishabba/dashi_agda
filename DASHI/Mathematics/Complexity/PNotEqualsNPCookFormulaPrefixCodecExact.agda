@@ -31,6 +31,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Empty using (⊥-elim)
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 
@@ -124,55 +127,58 @@ parseNat (natSuccToken ∷ rest)
 parseNat (_ ∷ _) =
   parseFailure
 
+------------------------------------------------------------------------
+-- Termination is on explicit fuel, never on the opaque suffix returned
+-- by a recursive parse. On a successful encoded formula, the original
+-- entire input word length supplies enough fuel for both subformulae.
+------------------------------------------------------------------------
+
+listLength :
+  ∀ {A : Set} →
+  List A →
+  Nat
+listLength [] = zero
+listLength (_ ∷ rest) = suc (listLength rest)
+
+parseCookFormulaFuel :
+  Nat →
+  List CookSyntaxToken →
+  ParseResult Cook.BooleanFormula
+parseCookFormulaFuel zero tokens = parseFailure
+parseCookFormulaFuel (suc fuel) [] = parseFailure
+parseCookFormulaFuel (suc fuel) (formulaVariableToken ∷ rest)
+  with parseNat rest
+... | parseFailure = parseFailure
+... | parsed index suffix = parsed (Cook.formulaVar index) suffix
+parseCookFormulaFuel (suc fuel) (formulaFalseToken ∷ rest) =
+  parsed (Cook.constant false) rest
+parseCookFormulaFuel (suc fuel) (formulaTrueToken ∷ rest) =
+  parsed (Cook.constant true) rest
+parseCookFormulaFuel (suc fuel) (formulaNegateToken ∷ rest)
+  with parseCookFormulaFuel fuel rest
+... | parseFailure = parseFailure
+... | parsed formula suffix = parsed (Cook.negate formula) suffix
+parseCookFormulaFuel (suc fuel) (formulaAndToken ∷ rest)
+  with parseCookFormulaFuel fuel rest
+... | parseFailure = parseFailure
+... | parsed left afterLeft
+  with parseCookFormulaFuel fuel afterLeft
+...   | parseFailure = parseFailure
+...   | parsed right suffix = parsed (Cook.conjunction left right) suffix
+parseCookFormulaFuel (suc fuel) (formulaOrToken ∷ rest)
+  with parseCookFormulaFuel fuel rest
+... | parseFailure = parseFailure
+... | parsed left afterLeft
+  with parseCookFormulaFuel fuel afterLeft
+...   | parseFailure = parseFailure
+...   | parsed right suffix = parsed (Cook.disjunction left right) suffix
+parseCookFormulaFuel (suc fuel) (_ ∷ _) = parseFailure
+
 parseCookFormula :
   List CookSyntaxToken →
   ParseResult Cook.BooleanFormula
-parseCookFormula [] =
-  parseFailure
-parseCookFormula
-    (formulaVariableToken ∷ rest)
-    with parseNat rest
-... | parseFailure =
-  parseFailure
-... | parsed index suffix =
-  parsed (Cook.formulaVar index) suffix
-parseCookFormula
-    (formulaFalseToken ∷ rest) =
-  parsed (Cook.constant false) rest
-parseCookFormula
-    (formulaTrueToken ∷ rest) =
-  parsed (Cook.constant true) rest
-parseCookFormula
-    (formulaNegateToken ∷ rest)
-    with parseCookFormula rest
-... | parseFailure =
-  parseFailure
-... | parsed formula suffix =
-  parsed (Cook.negate formula) suffix
-parseCookFormula
-    (formulaAndToken ∷ rest)
-    with parseCookFormula rest
-... | parseFailure =
-  parseFailure
-... | parsed left afterLeft
-    with parseCookFormula afterLeft
-...   | parseFailure =
-  parseFailure
-...   | parsed right suffix =
-  parsed (Cook.conjunction left right) suffix
-parseCookFormula
-    (formulaOrToken ∷ rest)
-    with parseCookFormula rest
-... | parseFailure =
-  parseFailure
-... | parsed left afterLeft
-    with parseCookFormula afterLeft
-...   | parseFailure =
-  parseFailure
-...   | parsed right suffix =
-  parsed (Cook.disjunction left right) suffix
-parseCookFormula (_ ∷ _) =
-  parseFailure
+parseCookFormula tokens =
+  parseCookFormulaFuel (listLength tokens) tokens
 
 ------------------------------------------------------------------------
 -- Suffix-preserving roundtrip.
@@ -189,57 +195,97 @@ parseNatEncodeInto (suc n) suffix
     rewrite parseNatEncodeInto n suffix =
   refl
 
+------------------------------------------------------------------------
+-- An encoder cannot shorten its continuation. Consequently any
+-- fuel bound for an encoded binary formula also bounds the right child.
+------------------------------------------------------------------------
+
+encodeNatIntoSuffixLower :
+  (n : Nat) (suffix : List CookSyntaxToken) →
+  listLength suffix ≤ listLength (encodeNatInto n suffix)
+encodeNatIntoSuffixLower zero suffix =
+  NatP.≤-step NatP.≤-refl
+encodeNatIntoSuffixLower (suc n) suffix =
+  NatP.≤-step (encodeNatIntoSuffixLower n suffix)
+
+encodeCookFormulaIntoSuffixLower :
+  (formula : Cook.BooleanFormula) (suffix : List CookSyntaxToken) →
+  listLength suffix ≤ listLength (encodeCookFormulaInto formula suffix)
+encodeCookFormulaIntoSuffixLower (Cook.formulaVar n) suffix =
+  NatP.≤-step (encodeNatIntoSuffixLower n suffix)
+encodeCookFormulaIntoSuffixLower (Cook.constant false) suffix =
+  NatP.≤-step NatP.≤-refl
+encodeCookFormulaIntoSuffixLower (Cook.constant true) suffix =
+  NatP.≤-step NatP.≤-refl
+encodeCookFormulaIntoSuffixLower (Cook.negate f) suffix =
+  NatP.≤-step (encodeCookFormulaIntoSuffixLower f suffix)
+encodeCookFormulaIntoSuffixLower (Cook.conjunction f g) suffix =
+  NatP.≤-step
+    (NatP.≤-trans
+      (encodeCookFormulaIntoSuffixLower g suffix)
+      (encodeCookFormulaIntoSuffixLower f
+        (encodeCookFormulaInto g suffix)))
+encodeCookFormulaIntoSuffixLower (Cook.disjunction f g) suffix =
+  NatP.≤-step
+    (NatP.≤-trans
+      (encodeCookFormulaIntoSuffixLower g suffix)
+      (encodeCookFormulaIntoSuffixLower f
+        (encodeCookFormulaInto g suffix)))
+
+-- This stronger induction statement makes the fuel sufficient without
+-- assuming that the right child is a syntactic tail of the left child.
+parseCookFormulaFuelEncodeInto :
+  (formula : Cook.BooleanFormula) →
+  (suffix : List CookSyntaxToken) →
+  (fuel : Nat) →
+  listLength (encodeCookFormulaInto formula suffix) ≤ fuel →
+  parseCookFormulaFuel fuel (encodeCookFormulaInto formula suffix)
+    ≡ parsed formula suffix
+parseCookFormulaFuelEncodeInto (Cook.formulaVar n) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.formulaVar n) suffix
+    (suc fuel) (s≤s enough)
+  rewrite parseNatEncodeInto n suffix = refl
+parseCookFormulaFuelEncodeInto (Cook.constant false) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.constant false) suffix
+    (suc fuel) (s≤s enough) = refl
+parseCookFormulaFuelEncodeInto (Cook.constant true) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.constant true) suffix
+    (suc fuel) (s≤s enough) = refl
+parseCookFormulaFuelEncodeInto (Cook.negate f) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.negate f) suffix
+    (suc fuel) (s≤s enough)
+  rewrite parseCookFormulaFuelEncodeInto f suffix fuel enough = refl
+parseCookFormulaFuelEncodeInto (Cook.conjunction left right) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.conjunction left right) suffix
+    (suc fuel) (s≤s enough)
+  rewrite parseCookFormulaFuelEncodeInto
+    left (encodeCookFormulaInto right suffix) fuel enough
+    | parseCookFormulaFuelEncodeInto right suffix fuel
+      (NatP.≤-trans
+        (encodeCookFormulaIntoSuffixLower left
+          (encodeCookFormulaInto right suffix))
+        enough) = refl
+parseCookFormulaFuelEncodeInto (Cook.disjunction left right) suffix zero ()
+parseCookFormulaFuelEncodeInto (Cook.disjunction left right) suffix
+    (suc fuel) (s≤s enough)
+  rewrite parseCookFormulaFuelEncodeInto
+    left (encodeCookFormulaInto right suffix) fuel enough
+    | parseCookFormulaFuelEncodeInto right suffix fuel
+      (NatP.≤-trans
+        (encodeCookFormulaIntoSuffixLower left
+          (encodeCookFormulaInto right suffix))
+        enough) = refl
+
 parseCookFormulaEncodeInto :
   (formula : Cook.BooleanFormula) →
   (suffix : List CookSyntaxToken) →
-  parseCookFormula
-    (encodeCookFormulaInto formula suffix)
-  ≡ parsed formula suffix
-parseCookFormulaEncodeInto
-    (Cook.formulaVar index)
-    suffix
-    rewrite parseNatEncodeInto index suffix =
-  refl
-parseCookFormulaEncodeInto
-    (Cook.constant false)
-    suffix =
-  refl
-parseCookFormulaEncodeInto
-    (Cook.constant true)
-    suffix =
-  refl
-parseCookFormulaEncodeInto
-    (Cook.negate formula)
-    suffix
-    rewrite
-      parseCookFormulaEncodeInto
-        formula
-        suffix =
-  refl
-parseCookFormulaEncodeInto
-    (Cook.conjunction left right)
-    suffix
-    rewrite
-      parseCookFormulaEncodeInto
-        left
-        (encodeCookFormulaInto right suffix)
-      |
-      parseCookFormulaEncodeInto
-        right
-        suffix =
-  refl
-parseCookFormulaEncodeInto
-    (Cook.disjunction left right)
-    suffix
-    rewrite
-      parseCookFormulaEncodeInto
-        left
-        (encodeCookFormulaInto right suffix)
-      |
-      parseCookFormulaEncodeInto
-        right
-        suffix =
-  refl
+  parseCookFormula (encodeCookFormulaInto formula suffix)
+    ≡ parsed formula suffix
+parseCookFormulaEncodeInto formula suffix =
+  parseCookFormulaFuelEncodeInto
+    formula suffix
+    (listLength (encodeCookFormulaInto formula suffix))
+    NatP.≤-refl
 
 parseEncodedCookFormula :
   (formula : Cook.BooleanFormula) →
@@ -271,15 +317,6 @@ decodeEncodeCookFormula formula
 ------------------------------------------------------------------------
 -- Exact token accounting.
 ------------------------------------------------------------------------
-
-listLength :
-  ∀ {A : Set} →
-  List A →
-  Nat
-listLength [] =
-  zero
-listLength (_ ∷ rest) =
-  suc (listLength rest)
 
 natTokenCount :
   Nat →
