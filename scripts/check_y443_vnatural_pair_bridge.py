@@ -23,6 +23,7 @@ TRACE = ROOT / "DASHI/Moonshine/Y443JMDTracePowerExact.agda"
 HEISENBERG = ROOT / "DASHI/Moonshine/Y443Monster3BTwelveDisjointExact.agda"
 ORBIT = ROOT / "DASHI/Moonshine/Y443ArmSwapOrbitMaxCutExact.agda"
 INDEXED = ROOT / "DASHI/Moonshine/Y443Relator72IndexedBidiExact.agda"
+NOGO = ROOT / "DASHI/Moonshine/Y443Nonary72EquivarianceNoGoExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -110,7 +111,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -150,7 +151,11 @@ def assert_source_scope() -> None:
         for symbol in symbols:
             if symbol not in txt:
                 raise AssertionError(f"missing Y443 orbit/indexed theorem {symbol} in {source.name}")
-    print("PASS source: Y443 72+8 indexed relation algebra and JMD proofs without listed trust escapes")
+    no_go = NOGO.read_text()
+    for symbol in ("centralCoreFixed", "reducedEightHasNoFixedPoint", "chartHasNoFixedPoint", "noNaiveEightByNineEquivariantChart"):
+        if symbol not in no_go:
+            raise AssertionError(f"missing Y443 8x9 equivariance no-go {symbol}")
+    print("PASS source: Y443 72+8, JMD trace, and 8x9 natural-involution no-go without listed trust escapes")
 
 
 def check_agda() -> None:
