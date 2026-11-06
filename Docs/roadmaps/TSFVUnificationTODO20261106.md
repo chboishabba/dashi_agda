@@ -1,6 +1,6 @@
 # #1460 unification TODO — Pareto source construction and fail-closed acceptance
 
-**Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
+**Four-cut source-producing proof queue:** [40 proposed exact OBS/HIL/KK/BIDI theorems](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
 
 ## Actually completed source and integration work this round
 
