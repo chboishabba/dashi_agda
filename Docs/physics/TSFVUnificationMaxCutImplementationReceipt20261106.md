@@ -25,15 +25,15 @@ Source: `DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.
 
 Source: `DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda` (`--safe` candidate), importing the *same* chosen acoustic `sourceMeasuredWavePrincipal` from `TSFVSelectedLatticeAcousticKKFlatControlExact`.
 
-For any masses ( m_1^2,m_2^2) the selected principal symbols are equal:
-[
+For any squared masses \(m_1^2,m_2^2\) the selected principal symbols are equal:
+\[
 Q_{m_1}=Q_{m_2}=k_x^2+k_y^2+k_z^2-\omega^2
-]
-in normalized (c=1) coordinates. Nevertheless their FULL model Fourier denominators
-[
+\]
+in normalized \(c=1\) coordinates. Nevertheless their FULL model Fourier denominators
+\[
 D_m(\omega,k)=Q(\omega,k)+m^2
-]
-are distinguishable: ( D_m(0,0)=m^2), and pointwise equality of (D_{m_1}) and (D_{m_2}) forces (m_1^2=m_2^2). `fullSelectedResponseEqualityForcesSameMass` and `differentMassCannotShareEntireResponse` formalize the backwards discriminator. This is a genuine mathematical reason a measured 4D cone alone cannot identify a unique underlying field mass/Hilbert/OS source.
+\]
+are distinguishable: \(D_m(0,0)=m^2\), and pointwise equality of \(D_{m_1}\) and \(D_{m_2}\) forces \(m_1^2=m_2^2\). `fullSelectedResponseEqualityForcesSameMass` and `differentMassCannotShareEntireResponse` formalize the backwards discriminator. This is a genuine mathematical reason a measured 4D cone alone cannot identify a unique underlying field mass/Hilbert/OS source.
 
 **Not proved:** this formula is the actual original TSVF retarded dynamical denominator or that its mass is empirically selected. It is a source-control BIDI no-go, not the original physical completion.
 
