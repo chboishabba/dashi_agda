@@ -63,9 +63,9 @@ cliqueToComplementCover :
 cliqueToComplementCover adjacency picked clique u v distinct nonEdge
   with picked u in eqU | picked v in eqV
 ... | false | _ =
-  inj₁ (trans (cong negBool eqU) refl)
+  inj₁ (cong negBool eqU)
 ... | true | false =
-  inj₂ (trans (cong negBool eqV) refl)
+  inj₂ (cong negBool eqV)
 ... | true | true =
   ⊥-elim (trueAndNegationImpossible (adjacency u v)
     (clique u v distinct eqU eqV) nonEdge)
