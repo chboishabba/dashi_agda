@@ -24,3 +24,8 @@ import DASHI.Physics.Foundations.TSVFOriginalR445PublishedWilsonRPWordWeldExact
 -- producer obligations, not a second assumed Gram.
 import DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact
   as OriginalObserverWilsonGram
+
+-- Original same-instrument forward-ket measured Wilson/R445 *finite cyclic
+-- real-span* equality and two-way Gram-observational quotient transport.
+import DASHI.Physics.Foundations.TSVFOriginalMeasuredFiniteSpanR445Exact
+  as OriginalObserverNativeFiniteSpan
