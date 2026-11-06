@@ -16,6 +16,8 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
+  DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+  DASHI/Biology/Physical/BiologicalAtomicMolecularHammingReuseExact.agda
 )
 test -s "$ROOT"
 for module in "${MODULES[@]}"; do
@@ -48,6 +50,9 @@ grep -q 'canonicalAllNeighboursFutureSafe' \
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
 grep -q 'differentRawMeanReadouts' \
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
+grep -q 'hamming9Symmetric' DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+grep -q 'originalsOneSubstitution' DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+grep -q 'candidateTimeAdvances' DASHI/Biology/Physical/BiologicalAtomicMolecularHammingReuseExact.agda
 grep -q 'sourceQualifiedCellObservation' \
   DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda
 grep -q 'withdrawalReopensModelCandidate' \
@@ -65,6 +70,8 @@ python3 scripts/check_original_dmsc_holdout.py --self-test
 python3 scripts/check_original_dmsc_neutral_components.py --self-test
 python3 scripts/check_original_dmsc_replicate_ranges.py --self-test
 python3 scripts/check_original_measured_context_transfer.py --self-test
+python3 scripts/check_biological_rna9_hamming.py
+python3 scripts/check_original_dmsc_exact_replicate_bootstrap.py
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
