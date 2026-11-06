@@ -1,3 +1,11 @@
+## 2026-11-06 — YM source-driven 4D continuum and interacting nonGaussian steelman
+
+- New `Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md` specifies the strongest single-original-Wilson physical theorem and explicit UV dyadic, IR rooted-shell, literal mixed-J CMP116, noncollapsed fourth-cumulant, original reflection positive OS and compact-simple-group obligations; same-H BIDI/false-positive tests are required. This is a proposed theorem to test, not a proved Clay solution.
+- Identified asymptotic-freedom lever: after exact marginal/source Ward renormalization, a **hypothesized** (O(g_n^4)sim O(n^{-2})) physical defect is summable whereas an unsubtracted (O(g_n^2)sim O(n^{-1})) defect is not. Preserved `BalabanBetaHistoryLocalizedInfluenceExact` warning that only irrelevant memory, not marginal RG, forgets geometrically.
+- Added `YMClayRGLossBudgetToNonGaussianExact.agda`, deriving `eta≤c_n` from one reference (c_0≥eta+B), actual one-step charge loss and uniform sum bound, and assembling the existing `BalabanClayT5CumulantLowerBoundNontrivialityExact` continuum theorem. **Source candidate, no Agda acceptance receipt**.
+- Added `scripts/check_ym_rg_noncollapse_steelman.py`, `scripts/check_ym_clay_continuum_bidi_controls.py`, `scripts/check_ym_marginal_subtracted_uv_tail.py`. Independently executed exact rational tests and negative controls, all PASS for mathematical fixtures; no physical Wilson, all-G or Clay proof implied.
+- Updated main/active roadmaps, exact lemma ledger, steelman atlas, TODO, canonical TOE import and targeted Nix CI (no run receipt); retained full original finite 1024-label F1 acceptance gate and all prior theorem-owner provenance.
+
 ## 2026-11-06 — source-candidate finite permutation lemmas and physical RG budget
 
 ## 2026-11-06 — executable finite and RG-drift implementation / acceptance audit
