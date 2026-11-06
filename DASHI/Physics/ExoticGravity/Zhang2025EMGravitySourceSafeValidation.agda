@@ -97,3 +97,11 @@ sourceCurlCanAgreeForDistinctCandidateFields :
   Curl.Contradiction
 sourceCurlCanAgreeForDistinctCandidateFields =
   Curl.fixtureFieldsAreNotEqual
+ 
+closedFiniteGaugeShiftIsCurlInvisible :
+  Curl.curl Curl.fixtureComplex
+    (Curl.addField Curl.fixtureComplex Curl.baseField
+      (Curl.grad Curl.fixtureComplex Curl.nonconstantPotential))
+  ≡ Curl.curl Curl.fixtureComplex Curl.baseField
+closedFiniteGaugeShiftIsCurlInvisible =
+  Curl.fixtureNontrivialShiftHasSameCurl
