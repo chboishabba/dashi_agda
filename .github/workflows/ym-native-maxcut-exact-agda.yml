@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -13,6 +14,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -50,6 +52,7 @@ jobs:
             agda --version
             AGDA="agda -i . -i DCHoTT-Agda -i cubical -l standard-library"
             $AGDA DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
