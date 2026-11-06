@@ -29,6 +29,8 @@ grep -q 'allStochasticHorizonsRemainCoarse' \
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
 grep -q 'initialAllTracesPreserveBiologicalProjection' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
+grep -q 'coupledSignalIdempotentAt' \
+  DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
 grep -q 'sourceQualifiedCellObservation' \
   DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda
 grep -q 'withdrawalReopensModelCandidate' \
