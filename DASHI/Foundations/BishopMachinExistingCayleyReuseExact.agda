@@ -28,7 +28,7 @@ module DASHI.Foundations.BishopMachinExistingCayleyReuseExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; cong)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -147,11 +147,6 @@ originalComplexMachinQuarterHasUnitNorm :
   CD.complexNormSq machinQuarterCayleyPhase ≡ 1ℚ
 originalComplexMachinQuarterHasUnitNorm =
   trans
-    (congNorm originalComplexMachinQuarterCayleyIsImaginaryUnit)
+    (cong CD.complexNormSq
+      originalComplexMachinQuarterCayleyIsImaginaryUnit)
     ℚRing.solve-∀
-  where
-    open import Relation.Binary.PropositionalEquality using (cong)
-    congNorm :
-      ∀ {x y} → x ≡ y →
-      CD.complexNormSq x ≡ CD.complexNormSq y
-    congNorm = cong CD.complexNormSq
