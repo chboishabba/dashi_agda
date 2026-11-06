@@ -7,9 +7,11 @@ cd "$(dirname "$0")/.."
 ROOT=DASHI/EverythingBiologicalHistoryFutureRound23.agda
 MODULE=DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda
 REGRESSION=scripts/check_biological_history_future_quotient.py
+FEEDBACK=DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda
 
 test -s "$ROOT"
 test -s "$MODULE"
+test -s "$FEEDBACK"
 test -s "$REGRESSION"
 
 if grep -vE '^[[:space:]]*--' "$MODULE" \
@@ -26,6 +28,15 @@ for theorem in \
   localEdgeResponseSurvivesProjection; do
   grep -q "$theorem" "$MODULE" || {
     echo "Missing load-bearing theorem: $theorem" >&2
+    exit 1
+  }
+done
+
+for theorem in \
+  syntheticObservationRefinesModelFamily withdrawalReopensModelCandidate \
+  memoryBlindMisfitsSyntheticObservation; do
+  grep -q "$theorem" "$FEEDBACK" || {
+    echo "Missing feedback theorem: $theorem" >&2
     exit 1
   }
 done
