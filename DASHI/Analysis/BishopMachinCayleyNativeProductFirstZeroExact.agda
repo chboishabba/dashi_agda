@@ -25,6 +25,7 @@ import Real as R
 import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
+import DASHI.Analysis.BishopK04dNatLogFromOriginalGapExact as NativeLog
 import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
@@ -78,3 +79,26 @@ sourceRegionBaselFromNativeSignedFactorials :
 sourceRegionBaselFromNativeSignedFactorials inputs inverse =
   Product.sourceRegionWideFromSingleImaginaryProduct
     inputs inverse (originalNativeImaginaryExpProduct inputs)
+
+
+------------------------------------------------------------------------
+-- K04d LOG -> K04d CONTINUITY PAYOFF:
+-- no separately postulated Nat-index exp/log inverse family, and no
+-- separately postulated imaginary-exponential product/Pythagorean.
+-- The Basel majorant is compiled from ONE actual source-native
+-- exp_B(-L(x))=1-x theorem, via exact canonical Nat specialization.
+------------------------------------------------------------------------
+
+sourceRegionBaselFromOneNativeLogIdentity :
+  (inputs : Round11.Round11BishopCutset) →
+  NativeLog.OriginalBishopNegativeLogExponentialGap →
+  Uniform.RegionBaselDomination
+    (Terms.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      Terms.sourceCanonicalNatLogCandidate)
+    Region.sourceAboveTwoRegion
+sourceRegionBaselFromOneNativeLogIdentity inputs originalLogIdentity =
+  sourceRegionBaselFromNativeSignedFactorials
+    inputs
+    (NativeLog.sourceCanonicalNatLogAllIndicesExpInverse
+      originalLogIdentity)
