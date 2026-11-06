@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# P00/P11 exact-head proof gate for #1460, synchronized with #1444 Nix.
-# Safe candidates MUST compile with --safe; roots are typechecked
-# separately and require a transitive postulate/import trust audit.
-# No chosen free scalar/KK or conditional Agda source equals E1 physics.
+# P00/P11 #1460: invoke repository Agda29 PARALLEL CHECKER, not direct Nix
+# or an unpinned system Agda. This wrapper owns compiler, stdlib,
+# vendor/bishop, cache, parallelism, RSS limits, logs, status and tmux.
+# SOURCE typechecks != transitive axiomatic trust != PHYSICAL proof.
 set -euo pipefail
-cd "$(dirname "$0")/.."
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$root"
 
 echo "DASHI_UNIFICATION_HEAD=$(git rev-parse HEAD 2>/dev/null || echo UNAVAILABLE)"
 python3 scripts/check_emergent31_complete_186_status_20261104.py
@@ -13,12 +14,18 @@ python3 scripts/check_tsvf_original_os_strong_domain_bidi_20261105.py
 python3 scripts/check_tsfv_original_diamond_spatial_bits_bidi_20261105.py
 python3 scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py
 
-if ! command -v agda >/dev/null 2>&1; then
-  echo "FAILED: Agda is absent. Enter pinned Nix shell: nix develop .# --command bash scripts/run_tsfv_unification_maxcut_20261106.sh" >&2
-  exit 127
-fi
-agda --version
-flags=(-i . -i DCHoTT-Agda -i cubical -l standard-library)
+# Reuse the canonical 2.9 checker environment, never invoke nix develop
+# or an independent 'agda -l standard-library' command here.
+parallel_checker="$root/scripts/run_agda29_parallel_check.sh"
+test -f "$parallel_checker"
+
+cache_root="${DASHI_AGDA29_CACHE_ROOT:-${RUNNER_TEMP:-$root/.cache}/dashi-agda29-tsfv}"
+export DASHI_AGDA29_CACHE_ROOT="$cache_root"
+export DASHI_STATUS_DIR="${DASHI_STATUS_DIR:-$cache_root/status}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$cache_root/xdg}"
+export AGDA_LOG_PATH="${AGDA_LOG_PATH:-$cache_root/tsfv-parallel-check.log}"
+export AGDA_JOBS="${AGDA_JOBS:-4}"
+mkdir -p "$DASHI_STATUS_DIR" "$XDG_CACHE_HOME" "$(dirname "$AGDA_LOG_PATH")"
 
 safe_sources=(
   DASHI/Physics/Foundations/TSFVKKSelectedHorizontalMetricSchurExact.agda
@@ -29,21 +36,27 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda
 )
-for src in "${safe_sources[@]}"; do
-  echo "::group::Agda --safe $src"
-  agda --safe "${flags[@]}" "$src"
-  echo "::endgroup::"
-done
-
 roots=(
   DASHI/Unified/BalabanRGTOERegression.agda
   DASHI/Unified/TSFVUnifiedRegression.agda
   DASHI/Unified/TSFVParentChildRegression.agda
 )
-for src in "${roots[@]}"; do
-  echo "::group::Agda typecheck, trust not assumed $src"
-  agda "${flags[@]}" "$src"
-  echo "::endgroup::"
+for file in "${safe_sources[@]}" "${roots[@]}"; do
+  test -f "$file"
 done
 
-echo "PASS native source typecheck; independent transitive trust and physical E1 remain separate"
+# Local fail-closed structural trust checks of the selected own modules;
+# the transitive dependency graph and mathematical axioms require a
+# separately reviewed proof authority report, even after typechecking.
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|--type-in-type|primTrustMe|trustMe' "${safe_sources[@]}"; then
+  echo "P00/S11 unsafe local selected source / hole / unreviewed axiom" >&2
+  exit 1
+fi
+
+echo "P00/S11: parallel_checker --safe, ${#safe_sources[@]} selected candidates"
+"$parallel_checker" --safe "${safe_sources[@]}"
+
+echo "P00/S11: parallel_checker, ${#roots[@]} parent/child transitive roots"
+"$parallel_checker" "${roots[@]}"
+
+echo "SOURCE_KERNEL_CHECK_COMPLETED; review transitive axioms and original PHYSICAL E1 separately"
