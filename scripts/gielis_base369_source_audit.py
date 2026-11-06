@@ -23,6 +23,7 @@ FILES = (
     "DASHI/Geometry/GielisBishopPolynomialExact.agda",
     "DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda",
     "DASHI/Geometry/GielisSpectralSIScaleExact.agda",
+    "DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda",
 )
 THEOREMS = (
     "rotation3PreservesSignal", "rotation6PreservesSignal",
@@ -135,6 +136,22 @@ def source_audit(root: Path = ROOT) -> dict:
         "modelOpticalTorqueSIMagnitude",
     ):
         assert theorem in si,theorem
+    bishop=source["DASHI/Geometry/GielisBishopPolynomialExact.agda"]
+    for theorem in (
+        "bishopCorrectedQuarticFromPythagorean",
+        "bishopGielisConfiguredTrigIdentity",
+    ):
+        assert theorem in bishop,theorem
+    finite=source["DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda"]
+    for theorem in (
+        "edgeGroundStateIdentity",
+        "edgeSquareNonnegative",
+        "finiteEdgeSquareSumNonnegative",
+        "finiteGroundStateEdgeIdentity",
+    ):
+        assert theorem in finite,theorem
+    assert "Fubini.sumRationalAdd" in finite
+    assert "Sums.sumRationalCong" in finite
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -142,7 +159,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,25):
+    for i in range(1,27):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -163,7 +180,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":24,
+        "paper_proof_sections":26,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
