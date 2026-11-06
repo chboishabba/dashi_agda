@@ -39,6 +39,13 @@
 - **S05/S06:** prior `TSFVKKActualSelectedMetricHorizontalWeldExact` already proves the exact Schur/horizontal reduction *conditional on* `selectedObserverBilinearIsSameFourMetric` and the selected five-metric KK-form equality. Do not replace this actual measured premise with a flat or AdS4 control. The previously committed sourced (AdS_4\times S^1) winding scalar is a standalone Einstein-matter solution, not the original measured metric.
 - **S10:** fixed native Wilson R445 all-word pushforward now instantiated; complete CMP119/122 (E/R/B/V), ghost/boundary normalized expectation identification, uniform CMP116 cutoff/volume bounds, same TSVF observer state, OS reflection and limit commute remain open. Existing R403/R327/finite analytic two-J owners must be reused, not recreated.
 
+## Parent YM source progress observed 2026-11-06 (preserve ownership)
+
+- YM #1444 has advanced beyond two-source calculus: `YMClayOriginalWilsonNativeMarkedPushforwardExact` gives the **whole** finite original Wilson two-marked affine partition and same normalized R445 pushforward, with original gauge-invariant source marks. `YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact` selects real literal original plaquettes on the variable four-torus, proves gauge invariance, finite moment polynomial and its original covariance jet. `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact` gives genuine interacting-weight fibre disintegration over the selected 64 noncommutative pairs and 896 spectators, equality of the full two-source normalized source, and positive effective density from positive original weight.
+- These **close more of finite Y.01/Y.02** and should replace any purported fresh generic calculus/marked source tasks. They do not equal a fully renormalized CMP119/122 E/R/B/V/ghost/boundary density, or grant a CMP116 uniform localized marked estimate. Keep all YM source modules on #1444 until safely reconciled; do not copy them into this child from an outdated head.
+- Finite all-order R445 pushforward on the child is compatible with these newer parent results but is **not** an independent OS all-word quantum Gram equality. The two-source affine source is degree two in marks; arbitrary all-word moments use the underlying original measure pushforward.
+- No original TSVF microdynamics source currently presented here supplies an independently **measured** 4D response cone, and no measured g4 matches the standalone AdS4xS1 scalar-winding Einstein solution. This is an evidentiary/mathematical input requirement, not a missing `refl`.
+
 ## S01–S04: actual microscopic observer → measured causal 3+1
 
 | Proposed producer lemma | Canonical original IDs | Exact proof target |
