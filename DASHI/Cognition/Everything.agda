@@ -15,6 +15,9 @@ import DASHI.Cognition.CCDCOEFiveLayerCertifiedCutExact
 import DASHI.Cognition.CCDCOEQueryPNFEvidenceBridgeExact
 import DASHI.Cognition.CCDCOEPersonalHolonomyBoundaryExact
 import DASHI.Cognition.CCDCOEMaxCutRegressionExact
+import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact
+import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact
+import DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
