@@ -112,7 +112,3 @@ fixtureFieldsAreNotEqual :
   baseField ≡ nontrivialGradientField → Contradiction
 fixtureFieldsAreNotEqual ()
 
-record CurlSourceAuthorityBoundary : Set where
-  field
-    concreteSpacetimeComplexSelected : Set
-    measuredBoundaryDataProvided : concreteSpacetimeComplexSelected
