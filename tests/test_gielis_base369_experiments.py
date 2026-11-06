@@ -360,3 +360,66 @@ def test_new_smooth_spiral_first_hit_refinement():
     assert coarse["unpaired"]==0 and fine["unpaired"]==0
     assert fine["max_first_hit_error_m"]<coarse["max_first_hit_error_m"]
     assert not fine["same_as_original_Kozyrev_HTML_SDF"]
+
+
+def test_original_pr1404_kozyrev_bridge_fails_closed_without_sources(tmp_path):
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.match_original_owners(tmp_path,segments=128,
+                                         first_hit_rays=12)
+    assert receipt["status"]=="NOT_CHECKED"
+    assert receipt["original_pr"]==1404
+    assert not receipt["original_HTML_SDF_parity"]
+    assert set(receipt["missing_original_files"]) == set(module.ORIGINAL_FILES)
+
+
+def test_kozyrev_legacy_pr1404_baseline_mathematical_centerline_identity():
+    import math
+    t=np.linspace(0.,3*math.pi,257)
+    geom= g.spiral_vertices(3,0.,segments=256)
+    theta=t
+    r=.75*np.exp(math.log(1.55/.75)*theta/(3*math.pi))
+    independent=np.column_stack((r*np.cos(theta),r*np.sin(theta)))
+    np.testing.assert_allclose(geom,independent,rtol=0,atol=1e-14)
+
+
+def test_kozyrev_bridge_real_sources_if_checked_out():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.match_original_owners(segments=256,first_hit_rays=24)
+    if receipt["status"]=="NOT_CHECKED":
+        pytest.skip("PR1404 original owners are in a different open Git ref")
+    assert receipt["status"]=="CENTRELINE_PARITY_CHECKED"
+    assert receipt["matched_centreline_max_position_error_m"]<1e-12
+    assert receipt["first_hit_comparison_skipped"]==0
+    assert receipt["first_hit_max_difference_m"]<1e-11
+    assert receipt["power_ledger_event_count"]>=1
+    assert receipt["max_angular_residual_Nm"]<1e-12
+    assert not receipt["original_HTML_SDF_parity"]
+
+
+def test_hoeffding_paired_random_angle_baseline_controls():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_statistics_paired",
+        ROOT/"scripts/gielis_optical_statistics.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    receipt=module.matched_random_sweep(rays=36,segments=128,bounces=2,
+                                        seed=369,include_controls=True)
+    assert len(receipt["paired_baseline_intervals"]) == 12
+    assert receipt["paired_familywise_coverage_at_least"] == .95
+    for row in receipt["paired_baseline_intervals"]:
+        lo,hi=row["focus_difference_simultaneous_interval"]
+        assert lo <= row["focus_difference_from_baseline"] <= hi
+        lo,hi=row["impulse_difference_simultaneous_interval"]
+        assert lo <= row["absolute_impulse_difference_from_baseline"] <= hi
+        assert row["interpretation"].endswith("only")
