@@ -112,7 +112,7 @@ reportedExcitationHz : Nat
 reportedExcitationHz = 50
 
 aluminiumToPaperMassRatioForty :
-  massMg aluminium ≡ 40 * massMg paper
+  massMg aluminium ≡ 2000
 aluminiumToPaperMassRatioForty = refl
 
 data HasCalibratedAcceleration : Sample → Set where
