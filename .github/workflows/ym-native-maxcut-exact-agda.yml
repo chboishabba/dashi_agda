@@ -11,6 +11,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
       - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -19,6 +20,7 @@ on:
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
       - 'scripts/check_ym_cmp119116122_same_source_contract.py'
+      - 'scripts/check_ym_original_wilson_two_source_jet_reference.py'
       - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
       - 'scripts/check_ym_clay_steelman_lemma_crosswalk.py'
       - 'Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md'
@@ -39,6 +41,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
       - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -47,6 +50,7 @@ on:
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
       - 'scripts/check_ym_cmp119116122_same_source_contract.py'
+      - 'scripts/check_ym_original_wilson_two_source_jet_reference.py'
       - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
       - 'scripts/check_ym_clay_steelman_lemma_crosswalk.py'
       - 'Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md'
@@ -75,6 +79,7 @@ jobs:
           python3 scripts/check_ym_physical_cube_perron_certificate.py --selftest
           python3 scripts/check_ym_rg_drift_budget_reference.py
           python3 scripts/check_ym_cmp119116122_same_source_contract.py
+          python3 scripts/check_ym_original_wilson_two_source_jet_reference.py
           python3 scripts/check_ym_rg_noncollapse_steelman.py
           python3 scripts/check_ym_clay_continuum_bidi_controls.py
           python3 scripts/check_ym_marginal_subtracted_uv_tail.py
@@ -102,6 +107,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
