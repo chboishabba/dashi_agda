@@ -46,6 +46,12 @@
 - Finite all-order R445 pushforward on the child is compatible with these newer parent results but is **not** an independent OS all-word quantum Gram equality. The two-source affine source is degree two in marks; arbitrary all-word moments use the underlying original measure pushforward.
 - No original TSVF microdynamics source currently presented here supplies an independently **measured** 4D response cone, and no measured g4 matches the standalone AdS4xS1 scalar-winding Einstein solution. This is an evidentiary/mathematical input requirement, not a missing `refl`.
 
+## S01–S04 original QuantumSurface no-promotion control
+
+- `TSVFOriginalQuantumSurfaceSpatialNonpromotionExact` constructs an **actual inhabitant** of the source `DASHI.Quantum.TSVF.QuantumSurface` with singleton time/ket/bra/operator carriers. It proves all operator and time coordinates equal and refutes distinct-time/distinct-operator witnesses for that model. Thus dimension four, spatial support or nontrivial retarded propagation cannot follow from the abstract QuantumSurface axioms alone. This pinpoints the actual selected physical operator, spacetime and dispersion measurements that must be added to the source, rather than filling S01–S04 with a second arbitrary Lorentzian record.
+- Imported in the safe unified regression and safe checker list. This is a **countermodel to an invalid inference**, not a proof of 4D emergence.
+- HIL01 forward state precursor and S01 finite ordered commutator identity are source-written with actual original states; Agda kernel acceptance remains pending.
+
 ## S01–S04: actual microscopic observer → measured causal 3+1
 
 | Proposed producer lemma | Canonical original IDs | Exact proof target |
