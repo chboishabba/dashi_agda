@@ -25,6 +25,7 @@ done
 python scripts/gielis_base369_source_audit.py > /dev/null
 python scripts/gielis_cyclotomic36_exact.py > /dev/null
 python scripts/gielis_sector_spectral_certificate.py --m 9 --sectors 2048 > /dev/null
+python scripts/gielis_rayleigh_spectral_bound.py > /dev/null
 python scripts/gielis_base369_symbolic_certificates.py > /dev/null
 
 scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
