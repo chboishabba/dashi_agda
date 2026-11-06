@@ -1,3 +1,19 @@
+## 6 November — YM-only all-word R445/OS and published Wilson RP (source implementation)
+
+Two pre-existing, source-written finite Wilson results on the separate #1460 branch have been adapted as **YM-owned** Agda sources on #1444, with no dependency on TSVF/observer/KK:
+
+1. `YMClayOriginalR445ReflectedAllWordGramExact.agda`: `actualNativeR445AllReflectedWordGrams` proves that the *original 1,024-bond fine Wilson-Gibbs measure* and its exact non-Abelian R445 pushforward give the same real reflected pairing for **any two finite coarse-observable words**. `originalFineOSPositiveTransfersToNativeR445` transports a nonnegative original pairing to the same native coarse pairing.
+2. `YMClayOriginalR445PublishedWilsonRPWordWeldExact.agda`: `originalPublishedWilsonRPYieldsNativePositiveWord` invokes the existing `BalabanClayOSWilsonReflectionPositivityExact` published Osterwalder–Seiler / Menotti–Pelissetto owner, to infer positivity of the original R445 reflected word **under the literal original-to-published Wilson reflected-expectation identity, gauge invariance, positive-time admissibility and scalar order interpretation**.
+
+Both are imported by `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`; original donor/provenance retained.
+
+**Do not promote a named imported theorem as a concrete Wilson RP instantiation:** the published owner is a `WilsonReflectionPositivityData` record of theorem premises, not a literal constructed analytic continuum Wilson measure. Source-specific `sourceIdentifiesActualWilsonReflection`, reflection plane/support, real-to-complex OS star and positivity under physical cutoff/volume limits still need proof. All-word pushforward is **not** CMP116 decay or an OS mass gap.
+
+M.01 actual closed `refl` kernel candidates remain in `YMClayNativeClosedThreeEqualitiesCandidateExact`, not a compiler receipt. M.02 original CMP119/122 complete-density equality, M.03 selected differentiated uniform CMP116 estimates, M.04 literal physical reflection/RP/limits, and M.05 nontrivial R4 OS reconstruction and strictly positive physical gap remain *unpaid*. This change neither resolves the Clay theorem nor imports any observer/KK theorem.
+
+**Verification:** GitHub source commit/readback only; exact-head Agda `parallel_checker` receipt not obtained.
+
+---
 ## 6 November — finite ORIGINAL Wilson reflected cross-Gram transport (new source theorem)
 
 The existing original same-source native R445 OS pullback has been strengthened to **two different real observables**, not merely the quadratic diagonal. New declarations in `YMClayOriginalWilsonNativeOSPullbackExact.agda`:
