@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
+import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 
 record AdmissibleNeighbourSchedule : Set where
@@ -224,6 +225,43 @@ initialAllTracesPreserveBiologicalProjection schedule actions field =
   allTracesPreserveCoupledFieldAgreement schedule actions
     field (Bio.spatialProject field)
     (initialFieldAgreement field)
+
+-- Concrete total schedule on the actual P3 x P3 x P3 grid. Every vertex
+-- is coupled to one of its proper +/-x neighbours. This is a non-periodic
+-- boundary-respecting owner, not an assumption that some schedule exists.
+canonicalXNeighbour : Cube.Ternary27Point → Cube.Ternary27Point
+canonicalXNeighbour (Cube.ternary27Point SSP.sspNegOne y z) =
+  Cube.ternary27Point SSP.sspZero y z
+canonicalXNeighbour (Cube.ternary27Point SSP.sspZero y z) =
+  Cube.ternary27Point SSP.sspPosOne y z
+canonicalXNeighbour (Cube.ternary27Point SSP.sspPosOne y z) =
+  Cube.ternary27Point SSP.sspZero y z
+
+canonicalXEdge :
+  (p : Cube.Ternary27Point) →
+  Cube.HypervoxelAdjacent p (canonicalXNeighbour p)
+canonicalXEdge (Cube.ternary27Point SSP.sspNegOne y z) =
+  Cube.adjacentX Cube.negToZero
+canonicalXEdge (Cube.ternary27Point SSP.sspZero y z) =
+  Cube.adjacentX Cube.zeroToPos
+canonicalXEdge (Cube.ternary27Point SSP.sspPosOne y z) =
+  Cube.adjacentX Cube.posToZero
+
+canonicalXSchedule : AdmissibleNeighbourSchedule
+canonicalXSchedule = record
+  { neighbour = canonicalXNeighbour
+  ; actualEdge = canonicalXEdge
+  }
+
+canonicalXAllTracesAreFutureSafe :
+  (actions : List Bio.Intervention)
+  (field : Bio.TissueField) →
+  FieldsAgree
+    (fineEvolve canonicalXSchedule actions field)
+    (coarseEvolve canonicalXSchedule actions (Bio.spatialProject field))
+canonicalXAllTracesAreFutureSafe actions field =
+  initialAllTracesPreserveBiologicalProjection
+    canonicalXSchedule actions field
 
 -- Adjacency-witness schedules do not imply symmetric transport or numerical
 -- conservation.  Boundary conditions and all-face/plaquette flux are still
