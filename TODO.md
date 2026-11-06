@@ -1,3 +1,12 @@
+## 2026-11-06 — YM proof-source / RG budget supplement
+
+See [phase-specific exact update](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). F1 three original 1024-link equality proof attempts source-written, **no Agda receipt**. New original physical-cube RG arithmetic derives q=q0+B, with 128-step exact rational reference but actual continuous SU(N)/CMP116/OS physical coefficients and compact-group coverage OPEN. Files: `YMClayNativeClosedThreeEqualitiesCandidateExact.agda`, `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`, `YMClayRGDriftOriginalGibbsInstantiationExact.agda` and `scripts/check_ym_rg_drift_budget_reference.py`. #1460 remains separate physical observer/KK lane; no child import. Full source contracts in `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md`.
+
+---
+
+
+---
+
 ## 2026-11-06 — physical-cube quantitative max-cut / original CMP116 reused
 
 - [x] Audit original Dobrushin, CMP116 R467/R479, Perron, Wilson/Haar/Fubini, RG/UV and 2D/3D/5D owner `YMClayVoyagerDimensionSignatureForkExact`.
