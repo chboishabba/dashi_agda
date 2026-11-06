@@ -32,3 +32,5 @@ import DASHI.Physics.YangMills.YMClayNativeClosedThreeEqualitiesCandidateExact a
 import DASHI.Physics.YangMills.YMClayNative1024ClosedReindexHaarConsequencesExact as Native1024Haar
 
 import DASHI.Physics.YangMills.YMClayNative1024WeightedWilsonReindexExact as NativeWeightedWilson
+
+import DASHI.Physics.YangMills.YMClayNative1024FullMarkedWilsonReindexExact as NativeFullMarkedWilson
