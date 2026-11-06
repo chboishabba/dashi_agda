@@ -142,6 +142,11 @@ fixtureGradientCurlZero :
 fixtureGradientCurlZero constantPotential = refl
 fixtureGradientCurlZero nonconstantPotential = refl
 
+fixtureCurlRightNeutral :
+  (v : OneCurl) →
+  fixtureAddCurl v zeroCurlFixture ≡ v
+fixtureCurlRightNeutral zeroCurlFixture = refl
+
 fixtureComplex : CurlGradientComplex
 fixtureComplex = record
   { Field = TwoFields
@@ -154,7 +159,7 @@ fixtureComplex = record
   ; addCurl = fixtureAddCurl
   ; curlAddHom = fixtureCurlAddHom
   ; curlGradZero = fixtureGradientCurlZero
-  ; curlRightNeutral = λ v → refl
+  ; curlRightNeutral = fixtureCurlRightNeutral
   }
 
 fixtureGradientIsNontrivial :
