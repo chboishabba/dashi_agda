@@ -1,3 +1,15 @@
+## 7 November 2026 — E1 original changing carriers and D2 invisible sector
+
+`YMClayE1VariableCutoffCylinderLimitExact.agda` proves normalized/positive/additive/homogeneous selected real cylinder limit-state laws while preserving `Configuration : Nat → Set`; `YMClayE1OriginalSUNDependentCylinderExact.agda` identifies each finite component with the **literal n-dependent original Wilson-Gibbs/Haar family**. The unrestricted n-dependent section algebra is not an automatically convergent continuum observable algebra; E1 still requires a physical gauge-invariant local selection, compatible embeddings, actual selected convergence/tightness and complete 4D axiomatic reconstruction.
+
+`YMClayD1OriginalCovarianceToR320Exact.agda` proves selected R320 decay iff the actual finite covariance rooted-shell inequality; that **physical inequality remains open**.
+
+Independent exact-rational counterexample in `scripts/check_ym_selected_covariance_spectrum_bidi_20261107.py`: selected covariance `(1/2)^t` can coexist with an invisible slow transfer eigenvalue `n/(n+1)` and full gap `1/(n+1) → 0`. Thus D2 MUST derive a full-sector/cyclic-spectrum detection theorem for the **same** reconstructed YM OS Hamiltonian rather than promote a bound on a strict selected subspace to the full spectrum. Do not add this as an independent Clay condition: it is the mathematical premise for the chosen spectral-clustering proof.
+
+No Agda exact-head `parallel_checker` receipt, original source analytic bound, continuum theory, physical same-H gap, N1 or all-group result is claimed.
+
+---
+
 ## 7 November 2026 — implemented D1 narrow original-source equivalence
 
 `YMClayD1OriginalCovarianceToR320Exact.agda` is the new source-written, regression-imported exact bridge: selected normalized T5 mixed-log Hessian at cutoff `n` = **same finite original measure's actual connected covariance** at `n`. It transports the single genuine physical rooted-shell bound to R320 in BOTH directions, and consumes it through already-written Route-S H1/R313/R296 to produce the selected R333 finite source. The single open hard estimate is the ORIGINAL, physically cutoff/volume-uniform covariance shell inequality; no separate formal-jet theorem, generic J oracle or second coarse density is needed.
