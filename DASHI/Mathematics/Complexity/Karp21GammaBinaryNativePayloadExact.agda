@@ -25,6 +25,7 @@ open import Data.Product using (_×_; _,_)
 open import Data.List.Base using (_++_; length)
 import Data.List.Properties as ListP
 import Data.Nat.Properties as NatP
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Relation.Binary.PropositionalEquality using (cong; sym)
 import Data.Nat.Binary.Base as Bin
 
@@ -113,3 +114,50 @@ gammaOriginalEncodeNativeSuffix n suffix
 
 -- Exact wire-level encoding shapes; numerical reconstruction is
 -- intentionally a separate observation from reading a binary codeword.
+
+------------------------------------------------------------------------
+-- The parser's own bit-inspection clock. Both cost functions mirror
+-- the exact recursive calls of readPayload and scanZeros.
+------------------------------------------------------------------------
+
+payloadInspectionWork : Nat → Word.BitWord → Nat
+payloadInspectionWork zero rest = 1
+payloadInspectionWork (suc k) [] = 1
+payloadInspectionWork (suc k) (_ ∷ rest) =
+  suc (payloadInspectionWork k rest)
+
+payloadInspectionLinear :
+  (k : Nat) (bits : Word.BitWord) →
+  payloadInspectionWork k bits ≤ suc (length bits)
+payloadInspectionLinear zero bits = s≤s z≤n
+payloadInspectionLinear (suc k) [] = s≤s z≤n
+payloadInspectionLinear (suc k) (_ ∷ rest) =
+  s≤s (payloadInspectionLinear k rest)
+
+scanInspectionWork : Nat → Word.BitWord → Nat
+scanInspectionWork seen [] = 1
+scanInspectionWork seen (false ∷ rest) =
+  suc (scanInspectionWork (suc seen) rest)
+scanInspectionWork seen (true ∷ rest) =
+  suc (payloadInspectionWork seen rest)
+
+scanInspectionLinear :
+  (seen : Nat) (bits : Word.BitWord) →
+  scanInspectionWork seen bits ≤ suc (length bits)
+scanInspectionLinear seen [] = s≤s z≤n
+scanInspectionLinear seen (false ∷ rest) =
+  s≤s (scanInspectionLinear (suc seen) rest)
+scanInspectionLinear seen (true ∷ rest) =
+  s≤s (payloadInspectionLinear seen rest)
+
+gammaNativeInspectionWork : Word.BitWord → Nat
+gammaNativeInspectionWork = scanInspectionWork zero
+
+gammaNativeInspectionLinear :
+  (bits : Word.BitWord) →
+  gammaNativeInspectionWork bits ≤ suc (length bits)
+gammaNativeInspectionLinear bits = scanInspectionLinear zero bits
+
+-- This pays the number of input-symbol inspections for ONE literal
+-- gamma token. It does not count machine-head movement for a tape
+-- representation, allocation, or full graph-level many-token scan.
