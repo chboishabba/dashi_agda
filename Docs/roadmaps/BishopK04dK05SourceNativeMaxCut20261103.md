@@ -706,3 +706,120 @@ socket, or setoid-to-propositional-equality replacement is permitted.
 not to be substituted for golden Agda proofs on the vendored Bishop
 backend. Existing `BishopToDASHIRealBridge` remains a separate
 conditional transport and is not required for native K04d/K05 theorems.
+
+
+## 2026-11-06 active implementation — golden Agda finite and native continuity consumers
+
+This continuation modifies the GOLDEN Agda PR #1408; the selected
+Murray/Csimma `vendor/bishop` `Real.ℝ`, `RealProperties`,
+`Sequence.SeriesOf`, `Sequence._ConvergesTo_`, and real setoid
+`Real._≃_` remain the canonical analytic objects. No replacement
+real completion or new analytic assumptions have been added.
+
+### New source-owned mathematical components
+
+| Source owner | Exact source output | What is genuinely established in source | What this does *not* establish |
+| --- | --- | --- | --- |
+| `Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda` | `tailCoefficientsZero`, `allFormalCoefficientsCanonical` | For *all* Nat degrees, a rational coefficient history satisfying the exact solved recurrence from `(1-X)F'+F=0`, with prescribed coefficients 1 and -1, equals the polynomial `1-X`. Explicit proof uses pinned standard rational zero laws rather than a bounded test. | That the literal nested `exp_B(-L(x))` evaluation satisfies the formal recurrence or agrees as a Bishop series limit. |
+| `Foundations/BishopMachinRationalGaussianPhaseExact.agda` | `phaseFiveFourthRealExact`, `phaseFiveFourthImagExact`, `machinQuarterGaussianRealZero`, `machinQuarterGaussianImagOne`, two unit-modulus results | The finite rational Cayley-phase relation `((1+i/5)/(1-i/5))^4 * conjugate((1+i/239)/(1-i/239)) = i` exactly. | The original Bishop arctangent/exponential phase correspondence `exp_C(2i atan_B(t))` = Cayley phase. |
+| `Analysis/BishopSequentialContinuityRingCompilerExact.agda` | `sequentiallyContinuousConstant`, `Identity`, `Add`, `Negate`, `Subtract`, `Multiply`, `ScalarMultiply`, `CartesianProductReal`, `CartesianProductImag` | Each algebraic continuity consumer is constructed directly from the vendored `Sequence.xₙ+yₙ→x₀+y₀`, `-xₙ→-x₀` and `xₙyₙ→x₀y₀`. | Continuity of the literal original exp/log/Dirichlet functions. |
+| `Analysis/BishopComplexSequentialContinuityAlgebraExact.agda` | `selectedComplexProductSequentiallyContinuous` | Same-object Bishop Cartesian multiplication continuity by componentwise native Sequence transport and source `RiemannBishopComplexAnalyticCarrierExact._*C_`. | The analytic exponential, gamma or original zeta continuity assumptions. |
+| `Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda` | `originalXiContinuityFromActualFactors` | A factor-continuity compiler on the ORIGINAL `CompletedRiemannZeta.xi`, `GammaMellinLayer.gamma`, and `CompletedRiemannZeta.zeta` field evaluations, preserving an explicit two-coordinate same-object `XiIsOriginalFactorProduct` premise. | That the actual original completed xi factor formula, gamma-factor continuity or pi power semantics already exist. These remain source-side proof obligations. |
+
+All five owners are `{-# OPTIONS --safe #-}` and import the
+existing carriers. The three original TOE roots now import every
+owner. Their status is **source-written / exact-head Agda
+kernel-pending**, never `machineChecked` on this evidence.
+
+The independent
+`scripts/check_bishop_machin_rational_gaussian_phase.py` exact
+fraction calculation for `Q[i]` **passed locally** in an equivalent
+inline implementation. CI is configured to run the actual script.
+This finite test is not Bishop-analytic acceptance.
+
+### Revised exact lemma max-cut (no false closure)
+
+**LOG.0 (source-written/verification open):**
+`allFormalCoefficientsCanonical`: universal uniqueness from the
+already-solved rational recurrence.
+
+**LOG.1 (open):** Build actual *nested* exponential-of-log finite
+coefficients using source `expTerm` and
+`sourceNegativeLogTerm`; prove the all-N solved recurrence for these
+coefficients without changing their definition. This is a finite
+formal power-series construction, not the Bishop limit theorem.
+
+**LOG.2 (open):** Constructively prove absolute convergence and
+justified reindex/series composition for the original source functions
+at each `0<x<1` (the existing
+`BishopUnitIntervalMidpointExact.canonicalMidpointRatioPair`
+provides a strict larger majorant radius). Then use uniqueness of
+Bishop series limits to derive
+`Exp.bishopExp (- NativeLog.sourceNegativeLogValue x p q)
+  ≃ (1-x)`.
+
+**LOG.3 (open):** Specialize `LOG.2` at
+`DASHI.Analysis.BishopRiemannDirichletExponentialTermExact.natLogArgument n`,
+prove the explicit Bishop rational reciprocal equality
+`1-x_n ≃ 1/(n+2)`, invoke the already source-written reciprocal
+cancellation theorem, and transport to the literal
+`sourceCanonicalNatLogCandidate (suc n)`. Handle the zero index
+with existing `sourceCanonicalOriginalExpLogInverseAtOne`.
+
+**PI.0 (source-written/verification open):** Exact rational
+Gaussian Cayley phase and original K05 signed-factorial
+`originalImaginaryExponentialMultiplicative`.
+
+**PI.1 (open):** Construct original
+`exp_C(2i * bishopAtanHalfBall(t))`
+Cayley fraction correspondence for `t=1/5,1/239` using actual
+Bishop arctangent series and the original complex exponential; no
+opaque source theorem authority or Lean proof substitution.
+
+**PI.2 (open):** Transfer `PI.1` through existing imaginary
+exponential product to `exp_C(2i theta_M) ≃ i`. Then obtain
+`quarterCos ≃ quarterSin` using original double-angle and the
+Bishop zero-square reflection, then instantiate the already
+source-written
+`round11MachinPiIsFirstPositiveSineZero` consumer.
+
+**CONT.0 (source-written/verification open):** Native real and
+selected Cartesian complex ring sequential-continuity closure.
+
+**CONT.1 (open):** Construct source `exp_B` and original
+`exp_C` sequential continuity on the literal selected Bishop
+series, instantiate each finite original Dirichlet term, and provide
+the finite-continuity premise of
+`BishopDirichletUniformLimitContinuityCompilerExact` on a
+domain-valid local chart near the Machin point.
+
+**CONT.2 (open):** With `LOG.3` and `PI.2`, feed the actual
+`Re(s)>2` Basel domination and native uniform-limit modulus into
+the selected Dirichlet chart. Prove the
+`OriginalHalfPlaneDirichletAgreement` for the *selected*
+`ZetaHalfPlaneLayer.zetaHalfPlane`, not an alternative function.
+
+**CONT.3 (open):** Continue `agreesWithHalfPlane` to original
+`CompletedRiemannZeta.zeta` and independently establish the
+original completed `CompletedRiemannZeta.xi` factor definition,
+selected gamma continuity, pi power continuity, and
+`XiIsOriginalFactorProduct`. The new `originalXiContinuityFromActualFactors`
+then consumes these inputs; zeta continuity is not xi continuity.
+
+**ACCEPT (open):** The exact-head pinned Agda-2.9
+`--safe` check of all five owners and all three TOE roots; capture
+compiler diagnostics, concrete git SHA, and log/artifact receipts.
+
+### CI provenance
+
+`.github/workflows/bishop-k04d-k05-native-proof.yml` now
+checks all five new source owners, all original focused K05/K04d owners,
+and the three TOE roots. The experimental Agda stdlib is pinned to
+`008f12c2908479567a3ae3c873f9cf0b8fe5987e`, instead of
+floating with the experimental branch. The kernel and symbolic logs
+are preserved as workflow artifacts. At the time of this write,
+the available GitHub checks provide no successful Agda-2.9 run for
+these commits. A CI configuration is not a pass receipt.
+
+No completion of the Riemann hypothesis, nor any substituted
+classical analytic semantics, is asserted.
