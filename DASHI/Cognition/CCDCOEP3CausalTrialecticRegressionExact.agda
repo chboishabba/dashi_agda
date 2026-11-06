@@ -9,7 +9,9 @@ import Base369 as Base
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
 import DASHI.Cognition.CCDCOEP3TypedIntersectionalAxisExact as Axis
+import DASHI.Cognition.CCDCOEP3SituatedHistoryPNFExact as History
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
@@ -34,6 +36,21 @@ sameTypedPositionsDoNotFixSituatedOutcome :
   NF.FactorsThrough Axis.coordinatesOnly Axis.recognition → ⊥
 sameTypedPositionsDoNotFixSituatedOutcome =
   P3.sameTypedCoordinatesDoNotDetermineSituatedRecognition
+
+-- A positive context observation separates the originally indistinguishable
+-- pair. It cannot be simulated by recharting the two axis coordinates.
+contextualDiscriminatorClosesTheSelectedPair :
+  Discriminator.BundleSeparates Axis.contextualObservationBundle
+    Axis.sameCoordinatesAccessible Axis.sameCoordinatesExclusionary
+contextualDiscriminatorClosesTheSelectedPair =
+  Axis.contextualObservationSeparates
+
+historicalCandidateCannotBeAutoPromoted :
+  ∀ {About}
+    (evidence : History.SituatedEventEvidence About) →
+  PNF.candidateOnly (History.originalCandidate evidence) ≡ true
+historicalCandidateCannotBeAutoPromoted =
+  History.candidateStatusPreserved
 
 originalS3Reverse :
   Perm.applyPermutation
