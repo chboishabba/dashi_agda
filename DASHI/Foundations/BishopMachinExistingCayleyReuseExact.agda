@@ -28,7 +28,7 @@ module DASHI.Foundations.BishopMachinExistingCayleyReuseExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans; cong)
+open import Relation.Binary.PropositionalEquality using (trans; cong; cong₂)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -140,13 +140,55 @@ originalComplexMachinQuarterCayleyIsImaginaryUnit =
       originalComplexQuarterImagIsExistingCertificate
       Machin.machinQuarterGaussianImagOne)
 
--- Existing complex norm composition now makes the accumulated
--- Machin phase a source-owned unit, without a second Pythagorean
--- implementation.
+-- Independent source-native norm proof: reuse the ORIGINAL
+-- Cayley-Dickson rational complex norm composition, not a second
+-- Pythagorean normalizer. These equations hold on the very same
+-- RationalComplex carrier as the Yang--Mills quaternion owner.
+oneTimesOne : 1ℚ * 1ℚ ≡ 1ℚ
+oneTimesOne = ℚRing.solve-∀
+
+fivePhaseSquaredUnit :
+  CD.complexNormSq fivePhaseSquared ≡ 1ℚ
+fivePhaseSquaredUnit =
+  trans
+    (CD.complexNormMultiplicative fivePhase fivePhase)
+    (trans
+      (cong₂ _*_ fivePhaseUnitNorm fivePhaseUnitNorm)
+      oneTimesOne)
+
+fivePhaseFourthUnit :
+  CD.complexNormSq fivePhaseFourth ≡ 1ℚ
+fivePhaseFourthUnit =
+  trans
+    (CD.complexNormMultiplicative fivePhaseSquared fivePhaseSquared)
+    (trans
+      (cong₂ _*_ fivePhaseSquaredUnit fivePhaseSquaredUnit)
+      oneTimesOne)
+
+conjugateComplexNormSame :
+  (z : CD.RationalComplex) →
+  CD.complexNormSq (CD.conjugateC z) ≡ CD.complexNormSq z
+conjugateComplexNormSame (CD.complex a b) = ℚRing.solve-∀
+
+twoHundredThirtyNineConjugateUnit :
+  CD.complexNormSq (CD.conjugateC twoHundredThirtyNinePhase) ≡ 1ℚ
+twoHundredThirtyNineConjugateUnit =
+  trans
+    (conjugateComplexNormSame twoHundredThirtyNinePhase)
+    twoHundredThirtyNinePhaseUnitNorm
+
 originalComplexMachinQuarterHasUnitNorm :
   CD.complexNormSq machinQuarterCayleyPhase ≡ 1ℚ
 originalComplexMachinQuarterHasUnitNorm =
   trans
-    (cong CD.complexNormSq
-      originalComplexMachinQuarterCayleyIsImaginaryUnit)
-    ℚRing.solve-∀
+    (CD.complexNormMultiplicative
+      fivePhaseFourth
+      (CD.conjugateC twoHundredThirtyNinePhase))
+    (trans
+      (cong₂ _*_
+        fivePhaseFourthUnit
+        twoHundredThirtyNineConjugateUnit)
+      oneTimesOne)
+
+-- An independent check of the same norm is also available from
+-- originalComplexMachinQuarterCayleyIsImaginaryUnit + complexNormSq.
