@@ -11,14 +11,14 @@
 ## Decisive maximum cut and Pareto ordering
 
 The minimum physical construction cut is:
-[
+\[
 \mathcal C=\{\underbrace{\mathrm{S01\to S04}}_{\text{measured observer propagation}},
 \underbrace{\mathrm{S08}}_{\text{actual observer Hilbert/Stone}},
 \underbrace{\mathrm{S05\to S06}}_{\text{5D Einstein--matter source}},
 \underbrace{\mathrm{S09}}_{\text{same original observer and YM OS H}},
 \underbrace{\mathrm{S10\to S11}}_{\text{limits/kernel/independent validation}}\}.
-]
-All four source lines have to converge to the **same** selected micro/observer state. A convergent finite toy, abstract Set-level isomorphism, positive fixed-cutoff mass gap, same signature matrix or conditional source record is NOT an inhabitant of these physical fields.
+\]
+All five source components have to converge to the **same** selected micro/observer state. A convergent finite toy, abstract Set-level isomorphism, positive fixed-cutoff mass gap, same signature matrix or conditional source record is NOT an inhabitant of these physical fields.
 
 **Execution order:** in parallel, do V01/V02 (kernel/trust), O01–O06 (actual observer response) and H01–H04 (actual observer Hilbert); next O07–O11 and K01–K07 with one measured g4; then H06–H11 and B07 once the independent YM worker supplies a physical OS Hilbert; finally B01–B08 and all real continuum/experiment receipts. Keep fixed-physical-cube YM quantitative research independent.
 
