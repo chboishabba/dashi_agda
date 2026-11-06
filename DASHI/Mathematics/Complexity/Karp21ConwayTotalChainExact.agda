@@ -25,6 +25,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
+import Data.Nat.Properties as NatP
 
 power : Nat → Nat → Nat
 power a zero = 1
@@ -146,7 +147,7 @@ stepConstant v ext constant (suc (suc q)) (suc p) =
 
 startOneInvariant :
   (a : Nat) → extension (start a) 1 ≡ value (start a)
-startOneInvariant a = refl
+startOneInvariant a = NatP.*-identityʳ a
 
 pushOneInvariant :
   (state : Prefix) (n : Nat) →
