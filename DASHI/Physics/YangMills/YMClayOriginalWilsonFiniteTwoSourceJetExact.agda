@@ -61,6 +61,28 @@ module _
     Family.physicalFiniteCutoffMeasure
       theory traceData exponential beta oneLink bilateral divide
 
+  -- Y.01 source anchoring: the measure used by BOTH marked directions
+  -- is the literal six-plane Wilson Gibbs density at each physical cutoff.
+  originalWilsonDensityIsSelectedWilson :
+    ∀ n links →
+    Physical.density (originalWilsonMeasure n) links
+    ≡ Wilson.periodicSUNGibbsDensity
+        theory traceData exponential n (beta n) links
+  originalWilsonDensityIsSelectedWilson =
+    Family.physicalFiniteDensitySameWilson
+      theory traceData exponential beta oneLink bilateral divide
+
+  -- This proof is the actual partition identity already derived from one
+  -- selected product-Haar source, not a fresh normalization axiom.
+  originalWilsonPartitionIsSelectedProductHaar :
+    ∀ n →
+    Physical.partitionFunction (originalWilsonMeasure n)
+    ≡
+    (Physical.haarIntegral (originalWilsonMeasure n))
+      (Wilson.periodicSUNGibbsDensity
+        theory traceData exponential n (beta n))
+  originalWilsonPartitionIsSelectedProductHaar n = refl
+
   originalWilsonExpectation :
     (n : Nat) → OriginalObservable n → ℝ
   originalWilsonExpectation n =
