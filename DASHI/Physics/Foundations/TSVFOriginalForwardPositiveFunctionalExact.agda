@@ -58,6 +58,19 @@ module _
         pair bra (ketAdd x y)
           ≡ scalarAdd (pair bra x) (pair bra y)
 
+      operatorScale : Scalar → Operator → Operator
+      ketScale : Scalar → Ket → Ket
+
+      scaleActs : (scalar : Scalar) (a : Operator) (ket : Ket) →
+        apply (operatorScale scalar a) ket
+          ≡ ketScale scalar (apply a ket)
+
+      pairRightHomogeneous : (bra : Bra) (scalar : Scalar) (ket : Ket) →
+        pair bra (ketScale scalar ket)
+          ≡ scalarMultiply scalar (pair bra ket)
+
+      scalarMultiply : Scalar → Scalar → Scalar
+
       -- Finite nonnegative norm on the PHYSICAL selected ket carrier.
       -- This is not implicit in QuantumSurface, which only declares
       -- a Weight and a predicate Positive.
@@ -103,6 +116,19 @@ module _
         (braOfKet source originalForward)
         (apply a originalForward)
         (apply b originalForward))
+
+  originalForwardHomogeneous :
+    (source : OriginalPhysicalInnerProductLaws) (scalar : Scalar)
+    (a : Operator) →
+    originalForwardFunctional source (operatorScale source scalar a)
+      ≡ scalarMultiply source scalar (originalForwardFunctional source a)
+  originalForwardHomogeneous source scalar a =
+    trans
+      (cong (pair (braOfKet source originalForward))
+        (scaleActs source scalar a originalForward))
+      (pairRightHomogeneous source
+        (braOfKet source originalForward) scalar
+        (apply a originalForward))
 
   originalPositiveQuadraticIsForwardNorm :
     (source : OriginalPhysicalInnerProductLaws)
