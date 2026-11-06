@@ -26,6 +26,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact as Endcap
+import DASHI.Mathematics.Complexity.ConcreteTapeDecodedEndcapSameObjectExact as Same
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
@@ -211,3 +213,50 @@ guardedGlobalCNFToOriginalAndAllEndcaps
     parts = guardedGlobalCookLevinCNFSound
       stateCoverage symbolCoverage nonempty
       steps colsMinusOne initialTarget assignment accepted
+
+------------------------------------------------------------------------
+-- SOUND REVERSE COMPOSITION UNDER LITERAL DECODED ROW ENDPOINTS.
+-- No all-row boundary evidence is synthesized from SAT alone: it is
+-- the semantic certificate supplied by an actual padded accepting run.
+------------------------------------------------------------------------
+
+guardedCompletenessFromDecodedEndcaps :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (steps colsMinusOne : Nat)
+    (initialTarget :
+      CNF.Bits (Decode.RowBitsWidth machine (suc colsMinusOne)))
+    (assignment :
+      CNF.Bits
+        (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  CNF.evaluateCNF
+    (GlobalCNF.globalCookLevinCNF
+      stateCoverage symbolCoverage nonempty steps
+      (suc colsMinusOne) initialTarget) assignment ≡ true →
+  (∀ {rowIndex} (slot : Global.Slot rowIndex (suc steps)) →
+    Same.DecodedRowEndcapsPlain
+      stateCoverage symbolCoverage slot assignment) →
+  CNF.evaluateCNF
+    (guardedGlobalCookLevinCNF
+      stateCoverage symbolCoverage nonempty
+      steps colsMinusOne initialTarget) assignment ≡ true
+guardedCompletenessFromDecodedEndcaps
+    stateCoverage symbolCoverage nonempty steps colsMinusOne
+    initialTarget assignment originalAccepted allDecodedEndcaps =
+  guardedGlobalCookLevinCNFComplete
+    stateCoverage symbolCoverage nonempty steps colsMinusOne
+    initialTarget assignment
+    record
+      { originalFormulaTrue = originalAccepted
+      ; globalEndcapCNFTrue =
+          Endcap.globalAllRowsEndcapsComplete
+            stateCoverage symbolCoverage colsMinusOne assignment
+            (λ slot →
+              Same.decodedEndcapsToPhysicalBlocks
+                stateCoverage symbolCoverage colsMinusOne
+                slot assignment (allDecodedEndcaps slot))
+      }
