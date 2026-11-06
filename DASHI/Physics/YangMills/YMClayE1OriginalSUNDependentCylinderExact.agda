@@ -38,7 +38,12 @@ module _
   ActualLinks : Nat → Set
   ActualLinks n = Wilson.SUNPeriodicLinks theory n
 
-  -- A continuum cylinder is represented on ALL original finite
+  -- This is the FULL algebra of cutoff-dependent sections, used ONLY
+  -- to identify the original finite-measure source. Not every such
+  -- section converges: e.g. arbitrary n-parity-dependent constants.
+  -- A true E1 continuum state must restrict to a physically admissible
+  -- local cylinder selection with gauge/embedding compatibility.
+  -- Each selected section is represented on ALL original finite
   -- lattices; its domain genuinely changes with n.
   Cylinder : Set
   Cylinder = (n : Nat) → ActualLinks n → ℝ
