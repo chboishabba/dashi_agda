@@ -1,3 +1,10 @@
+## 2026-11-06 — YM actual marked physical original source max-cut
+
+- Added `YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact.agda`: exact selected original native plaquette trace-deficit J marks at every varying periodic cutoff, their gauge/pointwise invariance, normalized Wilson marked polynomial and same-original finite connected covariance.
+- Added `YMClayOriginalWilsonNativeMarkedPushforwardExact.agda`: native side-four exact entire **two-variable** original Wilson marked partition and normalized R445 pushforward equivalence, moment polynomial and coarse gauge-invariance; does not infer bare coarse Wilson closure.
+- Added `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact.agda`: original noncommutative 64-pair/896-spectator interacting-weight effective density with full affine marks, same normalized denominator and strict positivity using existing Haar/Fubini source laws.
+- Imported all new Agda owners into the dedicated honest physical regression root. Updated mathematical source ledger, execution phases and Clay roadmap with remaining exact M.01–M.05 original physical theorems; no new abstract 2-J oracle, no false continuum promotion or typecheck claim.
+
 ## 2026-11-06 — Original Wilson analytic-J source completion cut
 
 - Repository archaeology recovered existing real normalized CMP119 two-J source/cumulant calculus, observable-indexed source meaning (R403), common domain (R327), literal localization (R342/R344/R454) and bounded compact-SU(N) holomorphic finite marked-source proof. Removed the spurious independent finite analytic-J mathematical leaf from the roadmap.
