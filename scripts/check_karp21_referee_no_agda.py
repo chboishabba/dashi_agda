@@ -16,6 +16,7 @@ import sys
 import tempfile
 
 CHECKERS = (
+    "check_karp21_reserved_formula_constructors.py",
     "check_karp21_agda_stdlib_arity.py",
     "check_karp21_e20_bitlength_bound.py",
     "check_karp_binary_codec.py",
@@ -68,7 +69,7 @@ def check(referee: Path) -> None:
         assert blocked.returncode == 127, (blocked.returncode, blocked.stdout, blocked.stderr)
         assert "BLOCKED: agda executable unavailable" in blocked.stderr
         assert not calls.exists(), "The kernel mode ran preflights without Agda"
-    print("PASS: no-Agda preflight ran four checks; golden mode rejected with exit 127")
+    print("PASS: no-Agda preflight ran five checks; golden mode rejected with exit 127")
 
 
 if __name__ == "__main__":
