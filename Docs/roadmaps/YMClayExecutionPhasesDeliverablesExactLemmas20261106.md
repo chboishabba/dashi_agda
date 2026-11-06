@@ -1,3 +1,8 @@
+
+### Phase-1 constructive decision procedure — 6 November
+
+**New original source:** `YMClayNativeOriginalSortDeciderExact.agda` adds `decideNativeMember`, `decideAllSelectable`, `isYes`, `proofFromYes`, `originalC3SelectableBooleanGoal`, `originalC3CanonicalFromBoolean`, `originalPairSelectableBooleanGoal`, and `originalPairCanonicalFromBoolean`. A successful *closed* computed Boolean membership trace now implies the existing exact native C3 or pair canonical-label equality without assuming an entire 1,024-vector equality. The two Boolean equalities and the pair-length equality **still require closed Agda proof terms and kernel acceptance**; `decideAllSelectable` is not a physical or analytic theorem. This source is imported by `DASHI/Unified/BalabanRGTOERegression.agda` and targeted by `.github/workflows/ym-native-maxcut-exact-agda.yml`, which uses the repository's existing Nix Agda shell. New workflow creation is not a green CI receipt. 
+
 # Yang–Mills #1444 — execution phases, concrete deliverables and exact lemma acceptance queue
 **Snapshot:** 6 November 2026. **Owner:** independent 4D Yang–Mills PR #1444. **Unification #1460 is NOT a prerequisite.**
 
