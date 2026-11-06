@@ -41,7 +41,7 @@ nodeCountBelowTokenCount :
   ≤
   Prefix.cookFormulaTokenCount formula
 nodeCountBelowTokenCount
-    (Cook.variable index) =
+    (Cook.formulaVar index) =
   s≤s z≤n
 nodeCountBelowTokenCount
     (Cook.constant value) =
