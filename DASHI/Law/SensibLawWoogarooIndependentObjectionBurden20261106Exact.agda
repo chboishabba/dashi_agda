@@ -20,6 +20,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.AttributedSourceCore as Attribution
 import DASHI.Law.SensibLawWoogarooKoalaPopulationConnectivitySnowballExact as OriginalAttribution
 import DASHI.Law.SensibLawWoogarooEvidenceDependencyMatrixExact as OriginalDependencies
 import DASHI.Law.SensibLawWoogarooEPBC8575DualUseEvidenceMatrixExact as OriginalDualUse
@@ -196,7 +197,9 @@ data UnpaidOriginal : Set where
     sourceExactCausalEcology : UnpaidOriginal
 
 -- Prior independent and proponent proof owners are linked, not copied.
+priorQUTAttribution : Attribution.AttributedSource
 priorQUTAttribution = OriginalAttribution.qutCurrentSubmission
+priorQCCAttribution : Attribution.AttributedSource
 priorQCCAttribution = OriginalAttribution.qccCurrentSubmission
 priorProponentAudit : Proponent.ProponentEvidenceReview
 priorProponentAudit = Proponent.review Proponent.habitatConnectivity
