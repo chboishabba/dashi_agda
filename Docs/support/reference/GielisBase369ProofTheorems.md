@@ -1020,3 +1020,110 @@ E23's continuum scaling is mathematically proved with
 standard Dirichlet monotonicity/dilation, not proof of the
 actual Cartesian FD-to-continuum limit. E24 does not
 construct a measured optical calibration or confidence interval.
+
+
+## E25 — Bishop-real Gielis quartic from actual same-object trig inputs
+
+The original concrete source
+DASHI/Geometry/GielisBishopPolynomialExact.agda now proves
+this setoid consequence, for the configured Bishop sine/cosine:
+
+\[
+ \bigl(\cos_B(x)^2+\sin_B(x)^2\simeq1\bigr)
+ \quad\land\quad
+ \bigl(\cos_B(4x)\simeq
+  \cos_B(x)^4+\sin_B(x)^4
+  -6\cos_B(x)^2\sin_B(x)^2\bigr)
+\]
+\[
+ \Longrightarrow\qquad
+ \boxed{4(\cos_B(x)^4+\sin_B(x)^4)
+ \simeq 3+\cos_B(4x).}
+\]
+
+The proof is a *real* setoid derivation, not a statement-only
+record: bishopUnityCorrection is a native Bishop ring-solver proof;
+bishopCorrectedQuarticFromPythagorean transports the
+Pythagorean equivalence under squaring, negation, multiplication
+and addition; bishopGielisConfiguredTrigIdentity composes it
+with the previously proved universal quartic normal form and
+the selected actual cosine quadrupling.
+
+The input fields belong to BishopGielisConcreteTrigInputs
+on the same chosen BishopElementaryPowerSeriesData and
+Bishop real angle; an unrelated axiom about a formal terminal
+real carrier cannot discharge them. The existing
+Round11ClassicalTrigObjectWeldExact Pythagorean compiler
+is already consumed for one of the two analytic inputs.
+The other continuous same-object cosine quadruple-angle
+producer, canonical \(\pi\), positivity/sqrt/area, and exact-head
+Agda kernel acceptance still remain open.
+
+## E26 — Native finite rational ground-state edge-square identity
+
+For a symmetric finite raster adjacency matrix \(B\) and
+a strictly positive rational vector \(q\), set \(x_i=q_i u_i\).
+On each undirected edge \(\{i,j\}\), the following **rational
+polynomial identity**, requiring NO spectral theorem, holds:
+
+\[
+q_iq_j(u_i-u_j)^2
++2q_iq_ju_iu_j
+=q_iq_j(u_i^2+u_j^2).
+\]
+
+Summing this identity over any finite edge list and adding
+the diagonal potential gives the exact *ground-state transform*
+
+\[
+\boxed{
+x^\top(4I-B)x
+=\sum_i\frac{4q_i-(Bq)_i}{q_i}x_i^2
+ +\sum_{\{i,j\}\in E}q_iq_j
+    \left(\frac{x_i}{q_i}-\frac{x_j}{q_j}\right)^2.
+}
+\]
+
+The second term is nonnegative whenever every \(q_i>0\).
+Consequently,
+\[
+\min_i\frac{4q_i-(Bq)_i}{h^2q_i}
+\le\lambda_1(h^{-2}(4I-B)).
+\]
+The complementary upper bound follows by inserting the
+positive test vector \(x=q\) into the Rayleigh quotient
+and using its weighted-mean bound by the largest row ratio.
+**No irreducibility, connectedness or Perron–Frobenius
+eigenvector theorem is needed** for this enclosure.
+
+The new Agda
+DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda
+actually invokes the existing rational ring solver for the
+edge identity, the repo's native nonnegative-square and
+nonnegative-scale owners for its sign, and original
+finite-sum add/congruence lemmas to prove the identity for
+*any finite list of weighted edges*. It does NOT yet
+complete the native vertex/adjacency assembly for all
+specific raster sites, which remains a separately identified
+instance, nor the continuum FD convergence proof.
+
+The original executable raster certificate now checks the
+exact ground-state identity for additional rational test
+vectors, alongside its already-existing exact positive-vector
+rational eigenvalue enclosure. In independent local work,
+120 graph/vector instances were checked over exact Python
+Fractions with zero algebraic residuals. These are
+validation checks, NOT Agda kernel receipts.
+
+### E25/E26 refined acceptance
+
+- E25: nontrivial conditional concrete Bishop-real theorem is
+  SOURCE-WRITTEN; cosine quadrupling and the analytic
+  Round11 same-object suppliers remain OPEN.
+- E26: finite arbitrary-edge-list algebra and positivity are
+  SOURCE-WRITTEN; actual raster site/edge enumeration in
+  Agda and kernel verification OPEN. The standalone finite
+  matrix *mathematical theorem* itself is now elementary and
+  independent of a new PF library.
+- CI and original HTML scene remain DEFERRED in the active
+  work priorities, as requested.
