@@ -238,6 +238,52 @@ modelOpticalTorqueSIMagnitude :
   ≡ (power * inverseSpeed) * radius
 modelOpticalTorqueSIMagnitude power inverseSpeed radius = refl
 
+------------------------------------------------------------------------
+-- Signed optical momentum geometry: distinguish the lever-arm magnitude
+-- and the dimensionless signed deflection factor g from a measured torque.
+--
+-- For a ray, g is the signed z-component of
+-- e_r × (d_in - eta*d_out). The selected scalar may be negative;
+-- the SI torque role remains distinct from joules.
+------------------------------------------------------------------------
+
+opticalDeflectionFactor :
+  ℚ → Mechanical.Quantity ℚ Mechanical.dimensionless
+opticalDeflectionFactor = Mechanical.quantity
+
+modelOpticalTorqueWithDeflection :
+  powerQuantity →
+  inverseSpeedQuantity →
+  radiusQuantity →
+  Mechanical.Quantity ℚ Mechanical.dimensionless →
+  Mechanical.Quantity ℚ Mechanical.energyDimension
+modelOpticalTorqueWithDeflection power inverseSpeed radius factor =
+  Mechanical.multiplyQuantity _*_
+    (modelOpticalTorque power inverseSpeed radius)
+    factor
+
+modelOpticalTorqueWithDeflectionMagnitude :
+  ∀ power inverseSpeed radius factor →
+  Mechanical.magnitude
+    (modelOpticalTorqueWithDeflection
+      (Mechanical.quantity power)
+      (Mechanical.quantity inverseSpeed)
+      (Mechanical.quantity radius)
+      (opticalDeflectionFactor factor))
+  ≡ ((power * inverseSpeed) * radius) * factor
+modelOpticalTorqueWithDeflectionMagnitude power inverseSpeed radius factor =
+  refl
+
+modelOpticalTorqueWithDeflectionInSI :
+  powerQuantity →
+  inverseSpeedQuantity →
+  radiusQuantity →
+  Mechanical.Quantity ℚ Mechanical.dimensionless →
+  MechanicalSI.SIIndexedQuantity ℚ SI.Energy
+modelOpticalTorqueWithDeflectionInSI power inverseSpeed radius factor =
+  MechanicalSI.mechanicalQuantityToSI
+    (modelOpticalTorqueWithDeflection power inverseSpeed radius factor)
+
 -- SI and MLT dimension equality is a genuine type-indexed transport.
 -- A physical sample requires (among other things) a calibrated P,
 -- source direction distribution, actual wall reflectivity, normal and
