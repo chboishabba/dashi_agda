@@ -199,6 +199,24 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
     return {"reflections":reflections,"hit_target":touched,"signed_torque":signed,"absolute_torque":magnitude,
             "exit_reason":exit_reason,"path":path,"collisions":collisions}
 
+SPEED_OF_LIGHT_M_S = 299792458  # exact SI-defined constant
+
+def ideal_specular_wall_torque_nm(mean_wall_angular_impulse_m, power_watts):
+    """Conditional optical-force transfer, never a measured apparatus value.
+
+    All rays must represent equal shares of source power, wall collisions
+    must be ideal specular, and mean_wall_angular_impulse_m must average
+    r cross (unit_incoming-unit_outgoing) over those equal-power rays.
+    Summing all collisions along each ray is included in that observable.
+    Then torque (N m) = source power (W)/c (m/s) * angular impulse proxy (m).
+    """
+    if not (math.isfinite(float(power_watts)) and power_watts >= 0):
+        raise ValueError("power must be a finite nonnegative watt value")
+    if not math.isfinite(float(mean_wall_angular_impulse_m)):
+        raise ValueError("angular impulse must be finite")
+    return float(power_watts) * float(mean_wall_angular_impulse_m) / SPEED_OF_LIGHT_M_S
+
+
 def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True,include_controls=False):
     """Matched deterministic rays; not the legacy Kozyrev experiment."""
     angles = np.arange(rays)*2*math.pi/rays
@@ -309,6 +327,8 @@ def main():
     parser.add_argument("--segments",type=int,default=1536)
     parser.add_argument("--bounces",type=int,default=8)
     parser.add_argument("--controls",action="store_true",help="add non-369 m=4,5,7 controls")
+    parser.add_argument("--power-watts",type=float,default=None,
+                        help="report IDEAL specular wall-torque estimate, not measured torque")
     parser.add_argument("--torque-objective",choices=["min","max"],default="min")
     parser.add_argument("--output")
     args=parser.parse_args()
@@ -321,6 +341,15 @@ def main():
     if args.optics:
         output["optics"]=optical_sweep(args.rays,args.segments,args.bounces,
                                        include_controls=args.controls)
+        if args.power_watts is not None:
+            output["ideal_optical_torque_model"] = {
+                "source_power_watts": args.power_watts,
+                "conditions": "equal_power_rays_and_lossless_specular_wall",
+                "apparatus_calibrated": False,
+                "wall_torques_Nm": [ideal_specular_wall_torque_nm(
+                    row["mean_signed_torque"], args.power_watts)
+                    for row in output["optics"]],
+            }
         output["torque_objective"]=args.torque_objective
         output["pareto"]=pareto(output["optics"],args.torque_objective)
         output["alternate_pareto"]=pareto(output["optics"],
