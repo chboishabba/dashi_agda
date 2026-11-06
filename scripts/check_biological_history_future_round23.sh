@@ -47,6 +47,6 @@ if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
   exit 2
 fi
-agda -i . -i src "$ROOT"
+agda --safe -i . -i src "$ROOT"
 echo "LOCAL AGDA TYPECHECK ACCEPTED: $ROOT"
 echo "Independent exact-head parallel_checker receipt remains separately required."
