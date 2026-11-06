@@ -8,6 +8,9 @@ on:
       - 'DASHI/Analysis/Bishop*.agda'
       - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
+      - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
+      - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
+      - 'scripts/check_k05_symbolic_grouped.py'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/Everything.agda'
@@ -51,6 +54,10 @@ jobs:
           git clone --depth=1 --branch experimental https://github.com/agda/agda-stdlib.git "$GITHUB_WORKSPACE/.agda-stdlib"
           git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD | tee agda-stdlib-sha.txt
 
+      - name: Independent finite exact bivariate coefficient regression
+        shell: bash
+        run: python3 scripts/check_k05_symbolic_grouped.py --through-degree 48 | tee bishop-k05-symbolic.log
+
       - name: Kernel check all focused K05 and K04d new owners
         shell: bash
         run: |
@@ -69,6 +76,8 @@ jobs:
             DASHI/Analysis/BishopMonotoneDoubleSubsequenceLimitExact.agda
             DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda
             DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda
+            DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda
+            DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
             DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
@@ -127,3 +136,4 @@ jobs:
             bishop-focused-kernel.log
             bishop-toe-kernel.log
             agda-stdlib-sha.txt
+            bishop-k05-symbolic.log
