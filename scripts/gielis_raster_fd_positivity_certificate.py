@@ -122,6 +122,8 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
     return {
         "status":"certified_finite_discrete_lambda1_enclosure",
         "mode":m,"axis_nodes":n,
+        "boundary_tolerance_normalized":G.raster_boundary_tolerance(h),
+        "boundary_tolerance_vanishes_with_grid_spacing":True,
         "interior_nodes":len(points),"adjacency_connected":True,
         "degree_diagonal":"4","off_diagonal":"-1 for adjacent",
         "h_inv_squared_exact":str(h_inv_sq),
