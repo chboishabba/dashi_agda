@@ -7,6 +7,7 @@ files=(
   DASHI/Physics/ExoticGravity/Zhang2025EMGravityPhysicalPromotionExact.agda
   DASHI/Physics/ExoticGravity/Zhang2025EMGravityValidation.agda
   DASHI/Physics/ExoticGravity/Zhang2025EMGravitySourceSafeValidation.agda
+  DASHI/Physics/ExoticGravity/Zhang2025EMGravityQuantitativeSourceExact.agda
 )
 
 for f in "${files[@]}"; do
