@@ -1,3 +1,9 @@
+# 6 November execution/steelman addendum
+
+The canonical active phase/deliverables table is [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). Phase F1 has moved from an unstructured large closed-conversion attempt to source-written structural membership/bubble/sort proof, leaving the two exact native target-selectability certificates and one length equality as next gates. The generic sorter theorem requires `AllSelectable`, which is a genuine proof premise; do not hide this as a closed C3 or blocking vector identity. Local 5,914+2×1024 selection-trace checks are finite Python reference, not Agda acceptance. R443 physical continuous Haar, selected CMP119 action, R445 uniform RG, R320 CMP116, R333 OS and Clay remain analytically unpaid.
+
+---
+
 # Yang–Mills physical max-cut: exact lemma atlas, steelman and bidirectional audit
 
 **Snapshot:** 4 November 2026. Independent four-dimensional Yang–Mills/Clay PR #1444 only. The TSVF/(3,1)/KK worker owns #1460 and is **not** an upstream premise for Clay Yang–Mills. The authoritative current 66-row producer ledger is `Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md`. The original 219-field inventory remains byte-preserved. Every claim below is either an existing source-owned theorem/candidate, a precise outstanding type, or a deliberately labelled *candidate mathematical statement*. No open physical result is promoted to proved. **Agda kernel acceptance is pending on all new sources.**
