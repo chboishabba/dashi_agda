@@ -187,3 +187,86 @@ bishopCosineQuadrupleFromDouble c s =
        ⊖
        (Κ (+ 6 / 1) ⊗ ((a ⊗ a) ⊗ (b ⊗ b)))))
     BishopP.≃-refl c s
+
+
+------------------------------------------------------------------------
+-- Close the *conditional same-object Gielis inverse-square numerator*:
+--
+-- pythagorean at x + actual Bishop cosine quadrupling at x
+--  ==>  4(cos_B(x)^4 + sin_B(x)^4) ≃ 3 + cos_B(4x).
+--
+-- This is a genuine setoid consequence of the concrete Bishop input,
+-- not a made-up new independent real carrier. The remaining producer
+-- is to construct both analytic inputs on the actual Round11 trig.
+------------------------------------------------------------------------
+
+bishopUnityCorrection :
+  ∀ c s →
+  Bishop._≃_
+    (Bishop._+_
+      (Bishop._*_ four (gielisFourthSum c s))
+      (Bishop._*_ three
+        (Bishop._-_ one (Bishop._*_ one one))))
+    (Bishop._*_ four (gielisFourthSum c s))
+bishopUnityCorrection c s =
+  let open BishopP.ℝ-Solver
+  in solve 2
+    (λ a b →
+      ((Κ (+ 4 / 1) ⊗
+        ((a ⊗ a ⊗ a ⊗ a) ⊕
+         (b ⊗ b ⊗ b ⊗ b)))
+       ⊕
+       (Κ (+ 3 / 1) ⊗
+         (Κ (+ 1 / 1) ⊖
+           (Κ (+ 1 / 1) ⊗ Κ (+ 1 / 1)))))
+      ⊜
+      (Κ (+ 4 / 1) ⊗
+        ((a ⊗ a ⊗ a ⊗ a) ⊕
+         (b ⊗ b ⊗ b ⊗ b))))
+    BishopP.≃-refl c s
+
+bishopCorrectedQuarticFromPythagorean :
+  ∀ c s →
+  Bishop._≃_
+    (Bishop._+_ (square c) (square s)) one →
+  Bishop._≃_
+    (Bishop._*_ four (gielisFourthSum c s))
+    (gielisCorrectedQuartic c s)
+bishopCorrectedQuarticFromPythagorean c s p =
+  BishopP.≃-trans
+    (BishopP.≃-symm (bishopUnityCorrection c s))
+    (BishopP.+-cong
+      BishopP.≃-refl
+      (BishopP.*-cong
+        BishopP.≃-refl
+        (BishopP.≃-symm
+          (BishopP.+-cong
+            BishopP.≃-refl
+            (BishopP.-‿cong
+              (BishopP.*-cong p p))))))
+
+bishopGielisConfiguredTrigIdentity :
+  ∀ (dataSet : Trig.BishopElementaryPowerSeriesData)
+    (angle : Bishop.ℝ) →
+  BishopGielisConcreteTrigInputs dataSet angle →
+  Bishop._≃_
+    (Bishop._*_ four
+      (gielisFourthSum
+        (Trig.bishopCos dataSet angle)
+        (Trig.bishopSin dataSet angle)))
+    (Bishop._+_ three
+      (Trig.bishopCos dataSet
+        (Bishop._*_ four angle)))
+bishopGielisConfiguredTrigIdentity dataSet angle inputs =
+  let
+    c = Trig.bishopCos dataSet angle
+    s = Trig.bishopSin dataSet angle
+    open BishopGielisConcreteTrigInputs inputs
+  in
+  BishopP.≃-trans
+    (bishopCorrectedQuarticFromPythagorean c s pythagorean)
+    (BishopP.≃-trans
+      (bishopGielisUniversalQuarticNormalForm c s)
+      (BishopP.+-cong
+        BishopP.≃-refl
+        (BishopP.≃-symm cosineQuadruple)))
