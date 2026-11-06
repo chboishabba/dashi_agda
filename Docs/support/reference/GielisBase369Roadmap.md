@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E26), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E27), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -76,7 +76,7 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 continuum sector-domain O(m/N) convergence, E17 exact finite raster eigenvalues, E26 native finite edge-square/source proof; Agda full raster vertex assembly and Cartesian FD→continuum OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E27 qualitative fixed-k Cartesian FD-to-continuum convergence PAPER PROVED for vanishing δ(h) and exact radial predicate; E14 sector O(m/N), E17 finite rational bounds; literal binary64 mask/quantitative rate/native Agda still OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
 | G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E22 typed SI numeric magnitude proof (P/c×R×signed deflection), E19/E24 rational torque envelope with exact canonical c; measured physical coupling OPEN |
@@ -85,7 +85,7 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06/E13 exact 7-mode Fourier theorem/pass; native sampling owner OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | All seven selected native Gielis sources in parallel checker; E01–E26 proof/source audit; no exact-head Agda kernel receipt |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E27 proof/source audit with seven Agda roots; exact-head kernel acceptance OPEN, CI and HTML explicitly DEFERRED |
 
 ## Critical dependencies / max-cut
 
@@ -412,3 +412,59 @@ vertex/edge aggregation and Cartesian FD-to-continuum theorem;
 G-SI-TRANSFER: original impact geometry \(r\times(d_{\rm in}-
 \eta d_{\rm out})\) on the same typed SI magnitude and independently
 calibrated inputs if a physical endpoint is asserted.
+
+
+## Latest G12 producer: exact-target raster and qualitative spectral convergence (E27)
+
+**Exact-target defect fixed:** The selected 5-point Dirichlet
+finite-difference scripts previously used a FIXED normalized
+radial inward tolerance 1e-12. As h→0 this selects a
+different continuum domain, not literally the selected
+unshrunken Gielis Ω_m. Both the actual PDE builder and its
+exact rational eigenvalue referee now use
+
+\[
+ \delta(h)=\min(10^{-12},h^2),\qquad h=3/(n-1).
+\]
+
+For original n=41/n=61, this is exactly 1e-12, preserving
+the original selected mask and earlier rational brackets.
+For h→0 it tends to zero.
+
+**Exact finite quadratic form identity**, including zero
+extensions at EVERY exterior lattice site:
+
+\[
+ u^\top(4I-B_h)u =
+ \sum_{i\in\mathbb Z^2}\sum_{j=1}^2
+  (u_{i+e_j}-u_i)^2.
+\]
+
+The new scripts/gielis_fd_energy_mosco.py independently
+checks this with integer/Fraction exact arithmetic for four
+test vectors at each chosen original mask and verifies the
+n41/n61 unchanged-mask property. E26 supplies the native
+rational arbitrary finite-edge sum-of-squares donor.
+
+**Paper mathematical theorem:** For every fixed k,
+the idealized exact-radial-boundary Cartesian five-point
+scheme with δ(h)→0 obeys
+\(\lambda_k(A_h)\to\lambda_k(-\Delta_{D,\Omega_m})\).
+E27 gives an explicit standard proof: smooth-test
+recovery and Rayleigh limsup; finite-difference energy,
+piecewise constant L2 reconstruction, bounded-support
+Kolmogorov–Riesz compactness, H0¹ trace recovery,
+and min-max liminf. This settles the qualitative
+exact-boundary mathematical convergence cut.
+
+**Still OPEN and not promoted:** Literal binary64 radial
+evaluations have fixed machine error (no asymptotic
+uniform guarantee); a validated numerical radial
+predicate and quantitative n41/n61 continuum error
+constant remain to be constructed, as does native
+Agda compactness/raster-endpoint proof.
+No fabricated result from the Yang–Mills Mosco
+receipt modules, which themselves label recovery/liminf
+as not constructed.
+
+CI and historical HTML are deferred from the active cut.
