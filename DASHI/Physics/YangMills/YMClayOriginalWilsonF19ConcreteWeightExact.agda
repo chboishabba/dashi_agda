@@ -35,8 +35,8 @@ originalPairsAndSpectators :
   ∀ {A : Set} →
   Vec.Vec (Torus.Product A A) 64 →
   Vec.Vec A 896 → Vec.Vec A (Codec.originalPositiveBondCount 4)
-originalPairsAndSpectators pairs spectators =
-  subst (λ n → Vec.Vec _ n)
+originalPairsAndSpectators {A = A} pairs spectators =
+  subst (Vec.Vec A)
     (sym Codec.originalSideFourCountIs1024)
     (appendVec (flattenPairs pairs) spectators)
 
