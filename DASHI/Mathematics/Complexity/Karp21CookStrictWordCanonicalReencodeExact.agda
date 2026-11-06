@@ -94,7 +94,7 @@ data FormulaTop : Set where
     topInvalid : FormulaTop
 
 formulaTop : Cook.BooleanFormula → FormulaTop
-formulaTop (Cook.variable _) = topVariable
+formulaTop (Cook.formulaVar _) = topVariable
 formulaTop (Cook.constant false) = topFalse
 formulaTop (Cook.constant true) = topTrue
 formulaTop (Cook.negate _) = topNegate
@@ -168,36 +168,36 @@ rebuildCook :
   (tokens suffix : List Prefix.CookSyntaxToken) →
   Prefix.parseCookFormula tokens ≡ Prefix.parsed formula suffix →
   tokens ≡ Prefix.encodeCookFormulaInto formula suffix
-rebuildCook (Cook.variable index) [] suffix ()
-rebuildCook (Cook.variable index) (Prefix.natZeroToken ∷ rest) suffix evidence =
+rebuildCook (Cook.formulaVar index) [] suffix ()
+rebuildCook (Cook.formulaVar index) (Prefix.natZeroToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.natZeroToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.natSuccToken ∷ rest) suffix evidence =
+      Prefix.natZeroToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.natSuccToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.natSuccToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
+      Prefix.natSuccToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.formulaFalseToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.formulaFalseToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
+      Prefix.formulaFalseToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.formulaTrueToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.formulaTrueToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
+      Prefix.formulaTrueToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.formulaNegateToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.formulaNegateToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.formulaAndToken ∷ rest) suffix evidence =
+      Prefix.formulaNegateToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.formulaAndToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.formulaAndToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index) (Prefix.formulaOrToken ∷ rest) suffix evidence =
+      Prefix.formulaAndToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index) (Prefix.formulaOrToken ∷ rest) suffix evidence =
   ⊥-elim ((λ ())
     (parsedFormulaTopMatchesInput
-      Prefix.formulaOrToken rest (Cook.variable index) suffix evidence))
-rebuildCook (Cook.variable index)
+      Prefix.formulaOrToken rest (Cook.formulaVar index) suffix evidence))
+rebuildCook (Cook.formulaVar index)
   (Prefix.formulaVariableToken ∷ rest) suffix evidence
   with Prefix.parseNat rest
 ... | Prefix.parseFailure = ⊥-elim (failureIsNotParsed evidence)
