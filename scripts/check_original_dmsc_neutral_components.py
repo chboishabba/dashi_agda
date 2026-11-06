@@ -34,14 +34,16 @@ def data(path):
     original=Path(path).read_bytes()
     values=[None]*SLOTS
     rep_hist={k:0 for k in range(4)}
+    seen=set()
     with Path(path).open(newline="") as f:
         source=csv.DictReader(f)
         if not {"Genotype",*FEATURES}.issubset(source.fieldnames or []):
             raise ValueError("missing original dmsC genotype/replicate fields")
         for row in source:
             i=index_for((row["Genotype"] or "").strip().upper())
-            if values[i] is not None:
-                raise ValueError("duplicate measured genotype")
+            if i in seen:
+                raise ValueError("duplicate original source genotype")
+            seen.add(i)
             observations=[]
             for column in FEATURES:
                 value=(row[column] or "").strip()
