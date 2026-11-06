@@ -25,6 +25,7 @@ import DASHI.Moonshine.Y443JMDPowerFiveSixAlgebraExact as Algebra
 import DASHI.Moonshine.Y443JMDTracePowerExact as Power
 import DASHI.Moonshine.TwistedModuleModularity as TM
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
+import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 
 sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
@@ -53,24 +54,22 @@ record CoxeterA4LocalRules
     squareWhenAllowed :
       (a b : W.Gen) →
       W.eqG a b ≡ true →
-      let module P = Algebra.PowerAlgebra gi in
-      P.mul (nodes (sourceGen a)) (nodes (sourceGen b)) ≡ P.e
+      Pair.multiply gi (nodes (sourceGen a)) (nodes (sourceGen b))
+      ≡ Pair.identity gi
 
     commuteWhenAllowed :
       (a b : W.Gen) →
       W.canCommute a b ≡ true →
-      let module P = Algebra.PowerAlgebra gi in
-      P.mul (nodes (sourceGen a)) (nodes (sourceGen b)) ≡
-      P.mul (nodes (sourceGen b)) (nodes (sourceGen a))
+      Pair.multiply gi (nodes (sourceGen a)) (nodes (sourceGen b)) ≡
+      Pair.multiply gi (nodes (sourceGen b)) (nodes (sourceGen a))
 
     braidWhenAllowed :
       (a b c : W.Gen) →
       W.canBraid a b c ≡ true →
-      let module P = Algebra.PowerAlgebra gi in
-      P.mul (nodes (sourceGen a))
-        (P.mul (nodes (sourceGen b)) (nodes (sourceGen c))) ≡
-      P.mul (nodes (sourceGen b))
-        (P.mul (nodes (sourceGen a)) (nodes (sourceGen b)))
+      Pair.multiply gi (nodes (sourceGen a))
+        (Pair.multiply gi (nodes (sourceGen b)) (nodes (sourceGen c))) ≡
+      Pair.multiply gi (nodes (sourceGen b))
+        (Pair.multiply gi (nodes (sourceGen a)) (nodes (sourceGen b)))
 
 open CoxeterA4LocalRules public
 
