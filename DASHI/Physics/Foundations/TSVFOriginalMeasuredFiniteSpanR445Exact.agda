@@ -52,11 +52,6 @@ module _
     (source : Measurement.OriginalSameSourceMeasurement
       E laws observerRealReadout
       theory traceData exponential betaFine oneLink bilateral divide)
-    (reflection :
-      (Native.CoarseLinks theory traceData exponential
-        betaFine oneLink bilateral divide → ℝ) →
-      (Native.CoarseLinks theory traceData exponential
-        betaFine oneLink bilateral divide → ℝ))
   where
 
   CoarseObservable : Set
@@ -67,18 +62,23 @@ module _
   Word : Set
   Word = List CoarseObservable
 
+  selectedActualReflection : CoarseObservable → CoarseObservable
+  selectedActualReflection =
+    Measurement.OriginalSameSourceMeasurement.selectedPhysicalReflection
+      source
+
   originalMeasuredWordPair : Word → Word → ℝ
   originalMeasuredWordPair =
     Measurement.originalMeasuredObserverCrossWordGram
       E laws observerRealReadout
       theory traceData exponential betaFine oneLink bilateral divide
-      source reflection
+      source
 
   originalNativeR445WordPair : Word → Word → ℝ
   originalNativeR445WordPair =
     Native.nativeR445ReflectedWordGram
       theory traceData exponential betaFine oneLink bilateral divide
-      reflection
+      selectedActualReflection
 
   matchedActualWords : Gram.MatchedPhysicalCyclicWords Word Word ℝ
   matchedActualWords = record
@@ -89,7 +89,7 @@ module _
         Measurement.originalMeasuredAllWordCrossGramEqualsNativeR445
           E laws observerRealReadout
           theory traceData exponential betaFine oneLink bilateral divide
-          source reflection
+          source
     }
 
   FiniteRealCyclicSpan : Set
