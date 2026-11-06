@@ -4,7 +4,7 @@
 - [x] Derive finite source density/partition identity, numerator-additivity, unit-numerator partition and unit-normalization implication with explicit positive-denominator division-cancellation law.
 - [x] Add exhaustive exact rational three-state BIDI/negative-control reference and wire the new Agda owner into canonical regression/CI.
 - [x] Y.FIN.05: source-write the exact original n=3 side-four Wilson measure equality and native R445 ordered-block two-source jet → actual R320 pushforward covariance weld, with a nonbare-coarse negative reference.
-- [ ] Run pinned `parallel_checker`/Agda on the actual original module, finite native equalities and transitive regression; record exact head and trust receipt. No acceptance inferred from code or CI YAML.
+- [ ] Run pinned `parallel_checker`/Agda on `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and the canonical TOE root, original finite equalities, and transitive trust audit. The physical root deliberately exposes legacy RealAnalysisAxioms and one-link Haar assumptions; no receipt inferred from CI YAML.
 - [ ] Y.01: identify the full original Wilson/ghost/Haar/R-operation physical source with the CMP119/122 effective density, including boundary and renormalized insertion equality.
 - [ ] Y.02: actual analytic Wilson `J_L,J_R` derivative and CMP116 localized source applicability; the already-closed formal jet is not a substitute.
 - [ ] Y.03: source-derived cutoff/volume-uniform physical decay and UV/IR tails, including reflection-plane crossing terms.
