@@ -44,6 +44,42 @@ the dmsC static assay discharges that requirement.
 **Verification:** source-written, not Agda/parallel_checker certified at
 this head. No quantitative, authority, or empirical promotion occurred.
 
+### Native RNA9 Hamming acceptance extension
+
+Round-23 now imports `DASHI.Biology.Physical.BiologicalRNA9HammingExact`.
+Unlike the earlier two-bit Gray-code bridge, this module works on the
+original `OriginalDmscTwoGenotypeMeasuredExact.RNA9` carrier and proves:
+
+- `baseDifferenceSelf` and `baseDifferenceSymmetric` by nucleotide cases;
+- `hamming8Self`, `hamming9Self`, `hamming8Symmetric`,
+  `hamming9Symmetric` for all source-carrier sequences;
+- `originalsOneSubstitution` and its reverse: the two original source
+  9-mers differ at exactly one position;
+- `originalMeanDifferenceThousandths`: their reported mean difference
+  is exactly 101 assay-thousandths;
+- `oneSubstitutionDoesNotForceEqualMeans`: a one-base edge does not
+  enforce equality of the two recorded arithmetic sample means.
+
+`scripts/check_biological_rna9_hamming.py` additionally enumerates all
+262,144 nine-mers and 7,077,888 directed one-base transitions
+(3,538,944 undirected edges) in the **complete alphabet graph**,
+compares the result to the pre-existing DNA codec Hamming function
+under the U→T alphabet relabeling, and checks deterministic random pairs.
+This complete *theoretical* graph is distinct from the previously
+documented **3,429,837 experimentally measured Hamming-one edges**;
+missing genotype measurements are not imputed.
+
+Run from the repo root:
+
+```bash
+python3 scripts/check_biological_rna9_hamming.py
+```
+
+No run receipt or kernel acceptance has been obtained in this session.
+This new metric closes a missing representation/interface slice of P0/P5,
+but it is not a genotype-to-chemical mechanism, fitted diffusion law,
+source-authorized PNF join or longitudinal attractor-discrimination test.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
