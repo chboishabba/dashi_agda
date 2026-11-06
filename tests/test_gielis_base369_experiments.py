@@ -189,3 +189,28 @@ def test_model_code_is_distinct_from_information_optimality():
     assert all(row["model_code_bits"]>=1 for row in result)
     assert result[0]["model_code_bits"]==1
     assert all(row["comparison_to_legacy"]=="not_same_apparatus" for row in result)
+
+
+@pytest.mark.parametrize("m,epsilon", ((3,.12),(6,.24),(9,.12)))
+def test_wall_angular_impulse_conserves_ray_angular_momentum(m,epsilon):
+    """The wall receives the negative of the ray's angular impulse."""
+    scene = g.spiral_vertices(m,epsilon,256)
+    for angle in np.linspace(.05, 2*np.pi-.05, 37):
+        row = g.trace_ray(float(angle), scene, max_bounces=5, record=True)
+        assert row["reflections"] == len(row["collisions"])
+        total_wall_impulse = 0.0
+        for hit in row["collisions"]:
+            pin = np.array(hit["incoming_unit_momentum"])
+            pout = np.array(hit["outgoing_unit_momentum"])
+            normal = np.array(hit["normal"])
+            point = np.array(hit["point"])
+            np.testing.assert_allclose(pout, pin-2*np.dot(pin,normal)*normal,
+                                       rtol=0,atol=3e-13)
+            np.testing.assert_allclose(hit["wall_unit_impulse"],pin-pout,
+                                       rtol=0,atol=3e-13)
+            assert abs(hit["angular_momentum_balance_residual"]) < 1e-13
+            assert hit["wall_angular_impulse"] == pytest.approx(
+                g.cross(point,pin-pout),abs=3e-13)
+            total_wall_impulse += hit["wall_angular_impulse"]
+        assert row["signed_torque"] == pytest.approx(total_wall_impulse,abs=3e-13)
+        assert row["absolute_torque"]+1e-12 >= abs(total_wall_impulse)
