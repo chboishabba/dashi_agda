@@ -199,6 +199,108 @@ module _
         (Finite.numeratorAdd laws onePlusLeft rightPlusMixed)
         (cong₂ _+ℝ_ leftExpansion rightExpansion))
 
+  -- Same-original-Wilson normalized affine partition (NOT a second law).
+  originalNormalizedAffineMarkedPartition :
+    ∀ n (left right : OriginalObservable n) → ℝ → ℝ → ℝ
+  originalNormalizedAffineMarkedPartition n left right s t =
+    divide
+      (originalAffineMarkedPartition n left right s t)
+      (Physical.partitionFunction (originalMeasure n))
+
+  originalNormalizedMomentPolynomial :
+    ∀ n (left right : OriginalObservable n) → ℝ → ℝ → ℝ
+  originalNormalizedMomentPolynomial n left right s t =
+    (1ℝ +ℝ s *ℝ
+      Original.originalWilsonExpectation
+        theory traceData exponential beta oneLink bilateral divide n left)
+    +ℝ
+    (t *ℝ
+      Original.originalWilsonExpectation
+        theory traceData exponential beta oneLink bilateral divide n right
+      +ℝ
+      (s *ℝ t) *ℝ
+        Original.originalWilsonExpectation
+          theory traceData exponential beta oneLink bilateral divide
+          n (pair n left right))
+
+  -- General real-field division laws.  These are the same standard
+  -- laws already owned by BalabanNormalizedCylinderExpectationLimitExact
+  -- RealDivisionAlgebra, not a new physical localization assumption.
+  originalNormalizedAffineIsLiteralMomentPolynomial :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideSelf : ∀ denominator →
+      0ℝ <ℝ denominator → divide denominator denominator ≡ 1ℝ)
+    (divideAdd : ∀ denominator →
+      0ℝ <ℝ denominator → ∀ left right →
+      divide (left +ℝ right) denominator
+      ≡ divide left denominator +ℝ divide right denominator)
+    (divideScale : ∀ denominator →
+      0ℝ <ℝ denominator → ∀ scalar numerator →
+      divide (scalar *ℝ numerator) denominator
+      ≡ scalar *ℝ divide numerator denominator)
+    ∀ n (left right : OriginalObservable n) s t →
+    originalNormalizedAffineMarkedPartition n left right s t
+    ≡ originalNormalizedMomentPolynomial n left right s t
+  originalNormalizedAffineIsLiteralMomentPolynomial
+      ordered strictToWeak strict
+      divideSelf divideAdd divideScale n left right s t =
+    let
+      z : ℝ
+      z = Physical.partitionFunction (originalMeasure n)
+
+      zPositive : 0ℝ <ℝ z
+      zPositive =
+        Original.originalWilsonFinitePartitionPositive
+          theory traceData exponential beta oneLink bilateral divide
+          strict n
+
+      leftPart :
+        divide (z +ℝ s *ℝ numerator n left) z
+        ≡ 1ℝ +ℝ s *ℝ
+          Original.originalWilsonExpectation
+            theory traceData exponential beta oneLink bilateral divide n left
+      leftPart =
+        trans
+          (divideAdd z zPositive z (s *ℝ numerator n left))
+          (cong₂ _+ℝ_
+            (divideSelf z zPositive)
+            (divideScale z zPositive s (numerator n left)))
+
+      rightPart :
+        divide
+          (t *ℝ numerator n right
+            +ℝ (s *ℝ t) *ℝ numerator n (pair n left right)) z
+        ≡
+        t *ℝ
+          Original.originalWilsonExpectation
+            theory traceData exponential beta oneLink bilateral divide n right
+        +ℝ (s *ℝ t) *ℝ
+          Original.originalWilsonExpectation
+            theory traceData exponential beta oneLink bilateral divide
+            n (pair n left right)
+      rightPart =
+        trans
+          (divideAdd z zPositive
+            (t *ℝ numerator n right)
+            ((s *ℝ t) *ℝ numerator n (pair n left right)))
+          (cong₂ _+ℝ_
+            (divideScale z zPositive t (numerator n right))
+            (divideScale z zPositive (s *ℝ t)
+              (numerator n (pair n left right))))
+    in
+    trans
+      (cong (λ value → divide value z)
+        (originalAffinePartitionIsExactNumeratorPolynomial
+          ordered strictToWeak n left right s t))
+      (trans
+        (divideAdd z zPositive
+          (z +ℝ s *ℝ numerator n left)
+          (t *ℝ numerator n right
+            +ℝ (s *ℝ t) *ℝ numerator n (pair n left right)))
+        (cong₂ _+ℝ_ leftPart rightPart))
+
 -- Real polynomial analyticity, two-source log quotient rule and the
 -- compact-Haar differentiation of exp(sF+tG) are standard analytic facts.
 -- Their mathematical proof is retained in
