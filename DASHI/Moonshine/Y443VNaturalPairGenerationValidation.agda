@@ -15,6 +15,9 @@ import DASHI.Moonshine.Y443JMDConcretePairPowerCompilerExact as JMDCertificate
 import DASHI.Moonshine.Y443JMDPowerFiveSixAlgebraExact as JMDPowerProof
 import DASHI.Moonshine.Y443JMDThreePathGraphCertificateExact as JMDPaths
 import DASHI.Moonshine.Y443JMDSquareFromPresentationExact as JMDSquare
+import DASHI.Moonshine.Y443JMDNonadjacentRelatorConsequencesExact as JMDNonadjacent
+import DASHI.Moonshine.Y443JMDFromRelatorsToPowerExact as JMDFromRelators
+import DASHI.Moonshine.Y443JMDBetaFiveFiniteRewriteExact as BetaRewrite
 import DASHI.Moonshine.Y443Monster3BTwelveDisjointExact as H3
 import DASHI.Moonshine.Y443ArmSwapOrbitMaxCutExact as Orbit
 import DASHI.Moonshine.Y443Relator72IndexedBidiExact as Indexed
