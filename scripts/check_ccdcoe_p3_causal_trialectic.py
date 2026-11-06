@@ -57,6 +57,18 @@ def run():
     )
     assert situated[0][0] == situated[1][0]
     assert situated[0][2] != situated[1][2]
+    # A NEW contextual observation distinguishes worlds, whereas any
+    # postcomposition of the same typed coordinates cannot do so.
+    context_probe = lambda w: w[1]
+    assert context_probe(situated[0]) != context_probe(situated[1])
+    for rechart in (
+        lambda coords: coords,
+        lambda coords: (len(str(coords)),),
+        lambda coords: "constant",
+        lambda coords: tuple(reversed(coords)),
+    ):
+        assert rechart(situated[0][0]) == rechart(situated[1][0])
+
 
     s3 = tuple(permutations((0, 1, 2)))
     assert len(s3) == len(set(s3)) == 6
@@ -93,6 +105,7 @@ def run():
     print(f"PASS: {typed_cases} typed race/sex joint cases, rectangle obstruction, and equal-size nonidentity")
     print(f"PASS: all {len(s3)} S3 permutations, {s3_composition_tests} associativity cases")
     print("PASS: observationally equivalent SCMs and separating do(X=1) intervention")
+    print("PASS: contextual separation; no recharting of typed axes recovers history")
     print("PASS: coherence/revision, cause/intent and dyadic/triadic nonfactorability")
 
 
