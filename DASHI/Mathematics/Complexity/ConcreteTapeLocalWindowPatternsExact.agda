@@ -228,6 +228,34 @@ configuredOldRightPlain Local.realizes-left = is-plain
 configuredOldRightPlain Local.realizes-stay = is-plain
 configuredOldRightPlain Local.realizes-right = is-plain
 
+------------------------------------------------------------------------
+-- One-cell end guards. These express genuine missing tableau premises,
+-- not an assumption that the *whole* post-transition context is plain.
+-- FrontPlain is vacuous for []; EndPlain requires a plain final cell
+-- on nonempty lists. They are only boundary conditions on the exact
+-- after-prefix and after-suffix lists extracted at the centered window.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.List using (List; []; _∷_)
+
+data FrontPlain {State Symbol : Set} :
+    List (Local.TapeCell State Symbol) → Set where
+  frontNil : FrontPlain []
+  frontCons :
+    ∀ {symbol rest} →
+    FrontPlain (Local.plain symbol ∷ rest)
+
+data EndPlain {State Symbol : Set} :
+    List (Local.TapeCell State Symbol) → Set where
+  endNil : EndPlain []
+  endOne :
+    ∀ {symbol} →
+    EndPlain (Local.plain symbol ∷ [])
+  endMore :
+    ∀ {first second rest} →
+    EndPlain (second ∷ rest) →
+    EndPlain (first ∷ second ∷ rest)
+
 legalPlainLeftSymbolAgreement :
   ∀ {machine rule oldSymbol newSymbol oldCenter oldRight newCenter newRight} →
   LegalWindowForRule machine rule
