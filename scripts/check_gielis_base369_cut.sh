@@ -26,6 +26,9 @@ python scripts/gielis_base369_source_audit.py > /dev/null
 python scripts/gielis_cyclotomic36_exact.py > /dev/null
 python scripts/gielis_sector_spectral_certificate.py --m 9 --sectors 2048 > /dev/null
 python scripts/gielis_rayleigh_spectral_bound.py > /dev/null
+python scripts/gielis_raster_fd_positivity_certificate.py --m 3 --grid 41 > /dev/null
+python scripts/gielis_raster_fd_positivity_certificate.py --m 6 --grid 41 > /dev/null
+python scripts/gielis_raster_fd_positivity_certificate.py --m 9 --grid 41 > /dev/null
 python scripts/gielis_base369_symbolic_certificates.py > /dev/null
 
 scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
@@ -37,4 +40,11 @@ python scripts/gielis_reflection_parity.py --m 3 --epsilon .12 \
   --rays 12 --segments 384 --brackets 3072 > /dev/null
 python scripts/gielis_optical_statistics.py --rays 24 --segments 128 \
   --bounces 2 --seed 369 > /dev/null
-echo "Gielis Base369 finite+numeric cut passed"
+if [[ -n "${KOZYREV_PR1404_DIR:-}" ]]; then
+  python scripts/gielis_kozyrev_pr1404_bridge.py \
+    --legacy-dir "$KOZYREV_PR1404_DIR" --require-legacy \
+    --segments 256 --rays 24 > /dev/null
+else
+  echo "G13 PR1404 exact-source replay NOT CHECKED: supply KOZYREV_PR1404_DIR" >&2
+fi
+echo "Finite/math/simulation checks passed; native physics and G13 original HTML remain OPEN"
