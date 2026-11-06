@@ -1,11 +1,14 @@
 module DASHI.Mathematics.Complexity.ConcreteTapeAfterUniqueFromLocalityExact where
 
 ------------------------------------------------------------------------
--- BEFORE INTERIOR + LEGAL WHOLE-ROW SCAN -> AFTER EXACTLY ONE HEAD
+-- BEFORE INTERIOR + LEGAL WHOLE-ROW SCAN + NO-GHOST ENDCAPS
+--   -> AFTER EXACTLY ONE HEAD (CONDITIONAL, PROOF RELEVANT)
 --
--- This removes the extra afterUnique premise from the reverse locality
--- compiler.  Plain old context cells force aligned new context cells plain;
--- the one configured centered window contributes exactly one new head.
+-- Original unrestricted scan-to-afterUnique is FALSE: boundary overlap
+-- windows can introduce phantom heads. The repaired theorem consumes
+-- explicit FrontPlain/EndPlain witnesses for the *same* extracted center
+-- and proves plain contexts by genuine inward inductions. The original
+-- SAT compiler must still construct these boundary witnesses.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
@@ -13,14 +16,14 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥-elim)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact as Whole
 import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as Center
-import DASHI.Mathematics.Complexity.ConcreteTapeGlobalRewriteReconstructionExact as Reconstruct
+import DASHI.Mathematics.Complexity.ConcreteTapeCenteredRewriteReconstructionExact as Reconstruct
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalPrefixAgreementExact as Prefix
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
@@ -64,10 +67,13 @@ afterPrefixPlainFromLegalScan
   WF.plainNil
 
 afterPrefixPlainFromLegalScan
-    [] (_ ∷ _) WF.plainNil oldLeftPlain newFront () legal
+    [] (_ ∷ afterPrefix) WF.plainNil
+    oldLeftPlain newFront () legal
 
 afterPrefixPlainFromLegalScan
-    (_ ∷ _) [] (WF.plainCons _) oldLeftPlain Pattern.frontNil () legal
+    (Local.plain oldSymbol ∷ beforePrefix) []
+    (WF.plainCons beforePlain)
+    oldLeftPlain Pattern.frontNil () legal
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldSymbol ∷ [])
@@ -78,19 +84,19 @@ afterPrefixPlainFromLegalScan
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldSymbol ∷ [])
-    (Local.plain newSymbol ∷ _ ∷ _)
+    (Local.plain newSymbol ∷ newNext ∷ restAfter)
     (WF.plainCons WF.plainNil)
     oldLeftPlain Pattern.frontCons () legal
 
 afterPrefixPlainFromLegalScan
-    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ _)
+    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ beforeRest)
     (Local.plain newFirst ∷ [])
-    (WF.plainCons (WF.plainCons _))
+    (WF.plainCons (WF.plainCons restPlain))
     oldLeftPlain Pattern.frontCons () legal
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldFirst ∷ Local.plain oldSecond ∷ [])
-    (Local.plain newFirst ∷ newSecond ∷ [])
+    (Local.plain newFirst ∷ newSecond ∷ afterRest)
     (WF.plainCons (WF.plainCons WF.plainNil))
     Pattern.is-plain Pattern.frontCons lengthEq
     (Whole.allCons firstLegal restLegal)
@@ -100,7 +106,7 @@ afterPrefixPlainFromLegalScan
   WF.plainCons
     (afterPrefixPlainFromLegalScan
       (Local.plain oldSecond ∷ [])
-      (newSecond ∷ [])
+      (Local.plain newSecond ∷ afterRest)
       (WF.plainCons WF.plainNil)
       Pattern.is-plain
       Pattern.frontCons
@@ -108,22 +114,10 @@ afterPrefixPlainFromLegalScan
       restLegal)
 
 afterPrefixPlainFromLegalScan
-    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ [])
-    (Local.plain newFirst ∷ newSecond ∷ _ ∷ _)
-    (WF.plainCons (WF.plainCons WF.plainNil))
-    oldLeftPlain Pattern.frontCons () legal
-
-afterPrefixPlainFromLegalScan
-    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ Local.plain oldThird ∷ _)
-    (Local.plain newFirst ∷ newSecond ∷ [])
-    (WF.plainCons (WF.plainCons (WF.plainCons _)))
-    oldLeftPlain Pattern.frontCons () legal
-
-afterPrefixPlainFromLegalScan
     (Local.plain oldFirst
       ∷ Local.plain oldSecond
       ∷ Local.plain oldThird ∷ beforeRest)
-    (Local.plain newFirst ∷ newSecond ∷ newThird ∷ afterRest)
+    (Local.plain newFirst ∷ newSecond ∷ afterRest)
     (WF.plainCons
       (WF.plainCons
         (WF.plainCons restPlain)))
@@ -135,7 +129,7 @@ afterPrefixPlainFromLegalScan
   WF.plainCons
     (afterPrefixPlainFromLegalScan
       (Local.plain oldSecond ∷ Local.plain oldThird ∷ beforeRest)
-      (newSecond ∷ newThird ∷ afterRest)
+      (Local.plain newSecond ∷ afterRest)
       (WF.plainCons (WF.plainCons restPlain))
       oldLeftPlain
       Pattern.frontCons
@@ -246,39 +240,15 @@ dropAlignedPrefixScan :
 
 dropAlignedPrefixScan [] [] refl legal =
   legal
-dropAlignedPrefixScan [] (_ ∷ _) () legal
-dropAlignedPrefixScan (_ ∷ _) [] () legal
-
+dropAlignedPrefixScan [] (_ ∷ afterPrefix) () legal
+dropAlignedPrefixScan (_ ∷ beforePrefix) [] () legal
 dropAlignedPrefixScan
-    (b1 ∷ [])
-    (a1 ∷ [])
-    lengthEq
-    (Whole.allCons current rest) =
-  rest
-dropAlignedPrefixScan (b1 ∷ []) (_ ∷ _ ∷ _) () legal
-dropAlignedPrefixScan (_ ∷ _ ∷ _) (a1 ∷ []) () legal
-
-dropAlignedPrefixScan
-    (b1 ∷ b2 ∷ [])
-    (a1 ∷ a2 ∷ [])
+    (_ ∷ beforePrefix)
+    (_ ∷ afterPrefix)
     lengthEq
     (Whole.allCons current rest) =
   dropAlignedPrefixScan
-    (b2 ∷ [])
-    (a2 ∷ [])
-    (NatP.suc-injective lengthEq)
-    rest
-dropAlignedPrefixScan (b1 ∷ b2 ∷ []) (_ ∷ _ ∷ _ ∷ _) () legal
-dropAlignedPrefixScan (_ ∷ _ ∷ _ ∷ _) (a1 ∷ a2 ∷ []) () legal
-
-dropAlignedPrefixScan
-    (b1 ∷ b2 ∷ b3 ∷ beforeRest)
-    (a1 ∷ a2 ∷ a3 ∷ afterRest)
-    lengthEq
-    (Whole.allCons current rest) =
-  dropAlignedPrefixScan
-    (b2 ∷ b3 ∷ beforeRest)
-    (a2 ∷ a3 ∷ afterRest)
+    beforePrefix afterPrefix
     (NatP.suc-injective lengthEq)
     rest
 
@@ -344,7 +314,7 @@ globalTransitionScanAfterUnique :
   Pattern.EndPlain
     (Center.afterSuffix (Center.centeredOccurrenceFromGlobalScan scan)) →
   WF.ExactlyOneHead (Local.cells after)
-globalTransitionScanAfterUnique {machine} {rule} {before} {after} scan interior frontGuard endGuard =
+globalTransitionScanAfterUnique scan interior frontGuard endGuard =
   WF.transportExactlyOneHead
     (sym (Center.afterDecomposition extracted))
     localUnique
@@ -450,32 +420,6 @@ globalTransitionScanAfterUnique {machine} {rule} {before} {after} scan interior 
         (suffixLengthsFromAlignedDecomposition scan)
         tailLegal
 
-    goUnique :
-      ∀ {rule' window'} →
-      Local.RuleRealizesWindow machine rule' window' →
-      WF.ExactlyOneHead
-        (Local.append
-          (Center.afterPrefix extracted)
-          (Local.newLeft window'
-            ∷ Local.newCenter window'
-            ∷ Local.newRight window'
-            ∷ Center.afterSuffix extracted))
-    goUnique Local.realizes-left =
-      WF.prependPlain afterPrefixPlain
-        (WF.headHere
-          (WF.plainCons
-            (WF.plainCons afterSuffixPlain)))
-    goUnique Local.realizes-stay =
-      WF.prependPlain afterPrefixPlain
-        (WF.plainBefore
-          (WF.headHere
-            (WF.plainCons afterSuffixPlain)))
-    goUnique Local.realizes-right =
-      WF.prependPlain afterPrefixPlain
-        (WF.plainBefore
-          (WF.plainBefore
-            (WF.headHere afterSuffixPlain)))
-
     localUnique :
       WF.ExactlyOneHead
         (Local.append
@@ -484,30 +428,170 @@ globalTransitionScanAfterUnique {machine} {rule} {before} {after} scan interior 
             ∷ Local.newCenter (Center.window extracted)
             ∷ Local.newRight (Center.window extracted)
             ∷ Center.afterSuffix extracted))
-    localUnique = goUnique (Center.configured extracted)
+    localUnique
+      with Center.configured extracted
+    ... | Local.realizes-left =
+      WF.prependPlain afterPrefixPlain
+        (WF.headHere
+          (WF.plainCons
+            (WF.plainCons afterSuffixPlain)))
+    ... | Local.realizes-stay =
+      WF.prependPlain afterPrefixPlain
+        (WF.plainBefore
+          (WF.headHere
+            (WF.plainCons afterSuffixPlain)))
+    ... | Local.realizes-right =
+      WF.prependPlain afterPrefixPlain
+        (WF.plainBefore
+          (WF.plainBefore
+            (WF.headHere afterSuffixPlain)))
+
+------------------------------------------------------------------------
+-- Explicit, proof-relevant anti-phantom boundary contract for the SAME
+-- centered occurrence extracted from the original semantic scan.
+--
+-- The original CNF does not currently carry this record. It must be
+-- constructed by the canonical boundary CNF producer, not by a
+-- postulate, an inferred record field, or the original old-head margin.
+------------------------------------------------------------------------
+
+record NoGhostContextBoundaries
+    {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) : Set where
+  field
+    afterPrefixStartsPlain :
+      Pattern.FrontPlain
+        (Center.afterPrefix
+          (Center.centeredOccurrenceFromGlobalScan
+            (Character.localityScanToGlobalTransitionScan scan interior)))
+    afterSuffixEndsPlain :
+      Pattern.EndPlain
+        (Center.afterSuffix
+          (Center.centeredOccurrenceFromGlobalScan
+            (Character.localityScanToGlobalTransitionScan scan interior)))
+
+open NoGhostContextBoundaries public
 
 localityScanWithInteriorGivesWellFormedStep :
   ∀ {machine rule before after}
     (scan : Character.TransitionLocalityScan machine rule before after) →
   (interior : Character.InteriorHeadConfiguration machine before) →
-  Pattern.FrontPlain
-    (Center.afterPrefix
-      (Center.centeredOccurrenceFromGlobalScan
-        (Character.localityScanToGlobalTransitionScan scan interior))) →
-  Pattern.EndPlain
-    (Center.afterSuffix
-      (Center.centeredOccurrenceFromGlobalScan
-        (Character.localityScanToGlobalTransitionScan scan interior))) →
+  NoGhostContextBoundaries scan interior →
   WF.WellFormedMachineStep machine before after
-localityScanWithInteriorGivesWellFormedStep scan interior
-    frontGuard endGuard =
+localityScanWithInteriorGivesWellFormedStep scan interior boundary =
   Character.localityCharacterizationGivesWellFormedStep
     record
-      { beforeInterior = interior
-      ; afterUnique =
+      { Character.beforeInterior = interior
+      ; Character.afterUnique =
           globalTransitionScanAfterUnique
             (Character.localityScanToGlobalTransitionScan scan interior)
-            interior frontGuard endGuard
-      ; localityScan = scan
+            interior
+            (afterPrefixStartsPlain boundary)
+            (afterSuffixEndsPlain boundary)
+      ; Character.localityScan = scan
       }
 
+
+------------------------------------------------------------------------
+-- GLOBAL ENDCAPS -> THE SAME EXTRACTED CENTER'S NO-GHOST BOUNDARY.
+--
+-- An executable SAT endcap constraint can establish plain first/last
+-- cells of the entire decoded after-row. The lemmas below transport
+-- exactly that evidence onto the aligned afterPrefix/afterSuffix
+-- extracted from the ORIGINAL whole-row semantic scan.
+--
+-- No unproved Boolean reflection or arbitrary outside-head premise:
+-- this is pure induction on Local.append and the original EndPlain /
+-- FrontPlain constructors. The SAT/CNF source still owes both endcaps.
+------------------------------------------------------------------------
+
+frontPlainPrefixOfAppend :
+  ∀ {State Symbol : Set}
+    (prefix tail : List (Local.TapeCell State Symbol)) →
+  Pattern.FrontPlain (Local.append prefix tail) →
+  Pattern.FrontPlain prefix
+frontPlainPrefixOfAppend [] tail front = Pattern.frontNil
+frontPlainPrefixOfAppend
+    (Local.plain symbol ∷ prefix) tail Pattern.frontCons =
+  Pattern.frontCons
+frontPlainPrefixOfAppend
+    (Local.headed state symbol ∷ prefix) tail ()
+
+endPlainTail :
+  ∀ {State Symbol : Set}
+    {first : Local.TapeCell State Symbol}
+    {rest : List (Local.TapeCell State Symbol)} →
+  Pattern.EndPlain (first ∷ rest) →
+  Pattern.EndPlain rest
+endPlainTail Pattern.endOne = Pattern.endNil
+endPlainTail (Pattern.endMore restPlain) = restPlain
+
+endPlainSuffixOfAppend :
+  ∀ {State Symbol : Set}
+    (prefix suffix : List (Local.TapeCell State Symbol)) →
+  Pattern.EndPlain (Local.append prefix suffix) →
+  Pattern.EndPlain suffix
+endPlainSuffixOfAppend [] suffix endcap = endcap
+endPlainSuffixOfAppend (_ ∷ prefix) suffix endcap =
+  endPlainSuffixOfAppend prefix suffix (endPlainTail endcap)
+
+endPlainAfterTriple :
+  ∀ {State Symbol : Set}
+    {left center right : Local.TapeCell State Symbol}
+    {suffix : List (Local.TapeCell State Symbol)} →
+  Pattern.EndPlain (left ∷ center ∷ right ∷ suffix) →
+  Pattern.EndPlain suffix
+endPlainAfterTriple endcap =
+  endPlainTail (endPlainTail (endPlainTail endcap))
+
+-- Construct the EXACT proof-relevant contract already consumed by
+-- localityScanWithInteriorGivesWellFormedStep, with no alternative
+-- center or newly assumed rewrite witness.
+noGhostFromAfterRowEndcaps :
+  ∀ {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) →
+  Pattern.FrontPlain (Local.cells after) →
+  Pattern.EndPlain (Local.cells after) →
+  NoGhostContextBoundaries scan interior
+noGhostFromAfterRowEndcaps {after = after}
+    scan interior front endcap = record
+  { afterPrefixStartsPlain =
+      frontPlainPrefixOfAppend
+        (Center.afterPrefix extracted)
+        (Local.newLeft (Center.window extracted) ∷
+         Local.newCenter (Center.window extracted) ∷
+         Local.newRight (Center.window extracted) ∷
+         Center.afterSuffix extracted)
+        (subst Pattern.FrontPlain
+          (Center.afterDecomposition extracted) front)
+  ; afterSuffixEndsPlain =
+      endPlainAfterTriple
+        (endPlainSuffixOfAppend
+          (Center.afterPrefix extracted)
+          (Local.newLeft (Center.window extracted) ∷
+           Local.newCenter (Center.window extracted) ∷
+           Local.newRight (Center.window extracted) ∷
+           Center.afterSuffix extracted)
+          (subst Pattern.EndPlain
+            (Center.afterDecomposition extracted) endcap))
+  }
+  where
+    extracted =
+      Center.centeredOccurrenceFromGlobalScan
+        (Character.localityScanToGlobalTransitionScan scan interior)
+
+-- The postcondition is the original WellFormedMachineStep, now
+-- reduced to concrete global decoded-row endcap witnesses.
+localityScanWithInteriorAndEndcapsGivesWellFormedStep :
+  ∀ {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) →
+  Pattern.FrontPlain (Local.cells after) →
+  Pattern.EndPlain (Local.cells after) →
+  WF.WellFormedMachineStep machine before after
+localityScanWithInteriorAndEndcapsGivesWellFormedStep scan interior front endcap =
+  localityScanWithInteriorGivesWellFormedStep
+    scan interior
+    (noGhostFromAfterRowEndcaps scan interior front endcap)

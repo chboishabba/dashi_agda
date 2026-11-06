@@ -4,10 +4,11 @@ module DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact where
 -- COMPLETE DIRECTIONAL 2x3 WINDOW GRAMMAR FOR ONE TAPE STEP
 --
 -- For a unique-head one-tape transition, every sliding width-three window is
--- either unchanged or one of the finite overlap patterns below.  This module
--- pays the fixed-width semantic grammar; the remaining theorem is the global
--- scan showing that every window of a well-formed rewrite belongs to it, and
--- conversely that a globally compatible scan reconstructs one rewrite.
+-- unchanged or one of the finite directional overlap patterns. This original
+-- grammar is indexed by the SAME rule, not parameterised by one fixed rule.
+-- Local legality ALONE does not force a globally unique post-step head:
+-- a row-boundary overlap can introduce a phantom head. The guarded global
+-- reconstruction must establish an additional source-owned endcap invariant.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
