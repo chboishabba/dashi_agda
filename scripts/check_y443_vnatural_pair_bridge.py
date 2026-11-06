@@ -29,6 +29,10 @@ JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agd
 JMD_POWERS = ROOT / "DASHI/Moonshine/Y443JMDPowerFiveSixAlgebraExact.agda"
 JMD_PATHS = ROOT / "DASHI/Moonshine/Y443JMDThreePathGraphCertificateExact.agda"
 JMD_SQUARE = ROOT / "DASHI/Moonshine/Y443JMDSquareFromPresentationExact.agda"
+JMD_NONADJ = ROOT / "DASHI/Moonshine/Y443JMDNonadjacentRelatorConsequencesExact.agda"
+JMD_FROM_RELATORS = ROOT / "DASHI/Moonshine/Y443JMDFromRelatorsToPowerExact.agda"
+BETA_FIVE = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveFiniteRewriteExact.agda"
+BETA_SCRIPT = ROOT / "scripts/check_y443_jmd_beta5_rewrite_certificate.py"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -137,7 +141,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -198,7 +202,12 @@ def assert_source_scope() -> None:
     for symbol in ("fifthNodeSquareRelator", "squareFromActualPresentation"):
         if symbol not in square_src:
             raise AssertionError(f"missing presentation-to-square theorem {symbol}")
-    print("PASS source: JMD 3 paths, fifth Coxeter square, powers, indexed 72+8 included")
+    for src, markers in ((JMD_NONADJ, ("relatorMembershipElim", "e1CommutesBeta")), (JMD_FROM_RELATORS, ("powerFromActualEightyRelators", "betaInJMDPairFromActualRelators")), (BETA_FIVE, ("betaFifthAllThirtyFiveMovesValid", "betaFifthReducesToEmpty"))):
+        content = src.read_text()
+        for marker in markers:
+            if marker not in content:
+                raise AssertionError(f"missing source theorem {marker}")
+    print("PASS source: JMD beta5 finite rewrite, actual relator commutations, 72+8")
 
 
 def check_agda() -> None:
@@ -225,6 +234,7 @@ def main() -> None:
     args = parser.parse_args()
     assert_finite_counts()
     assert_source_scope()
+    subprocess.run([sys.executable, str(BETA_SCRIPT)], cwd=ROOT, check=True)
     if args.finite_only:
         print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
     else:
