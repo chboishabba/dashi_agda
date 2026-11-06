@@ -16,6 +16,7 @@ on:
       - 'scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py'
       - 'scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py'
       - 'scripts/check_tsfv_unification_48_phase_cut_20261106.py'
+      - 'scripts/run_tsfv_unification_maxcut_20261106.sh'
       - 'scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py'
       - 'Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md'
       - 'Docs/roadmaps/TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md'
@@ -59,48 +60,19 @@ jobs:
           python scripts/check_tsfv_unification_48_phase_cut_20261106.py
 
   agda-selected-golden:
-    name: Agda native selected owners and Golden source graph
+    name: Agda pinned Nix safe selected-source + transitive roots
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: false
-      - name: Install reproducible system Agda provenance
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Run #1460 full exact source / --safe / parent-child root cut
         run: |
-          sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq agda-bin agda-stdlib >/dev/null
-          cp -a /usr/share/agda-stdlib .agda-stdlib
-          agda --version
-          apt-cache policy agda-bin agda-stdlib
-          sha256sum .agda-stdlib/standard-library.agda-lib || true
-      - name: Typecheck exact native source owners with Agda safe
-        shell: bash
-        run: |
-          set +e
-          failures=0
-          for module in \
-            DASHI/Physics/Foundations/TSFVKKSelectedHorizontalMetricSchurExact.agda \
-            DASHI/Physics/Foundations/TSFVSelectedLatticeAcousticKKFlatControlExact.agda \
-            DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda \
-            DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda \
-            DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda \
-            DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda \
-            DASHI/Unified/BalabanRGTOERegression.agda \
-            DASHI/Unified/TSFVUnifiedRegression.agda \
-            DASHI/Unified/TSFVParentChildRegression.agda; do
-            echo "::group::Agda safe $module"
-            timeout 360s agda --safe --no-libraries --no-default-libraries \
-              -i . -i .agda-stdlib "$module"
-            result=$?
-            echo "AGDA_EXIT module=$module status=$result"
-            echo "::endgroup::"
-            if [ "$result" -ne 0 ]; then failures=$((failures+1)); fi
-          done
-          echo "AGDA_GOLDEN_FAILURES=$failures"
-          test "$failures" -eq 0
+          set -euo pipefail
+          nix develop .# --command bash scripts/run_tsfv_unification_maxcut_20261106.sh
 
-# A successful job certifies the listed Agda source roots against its
-# printed compiler/stdlib versions. It cannot certify a physical
-# microscopic (3,1) emergence, an interacting 4D YM OS construction,
-# a physically selected 5D Einstein matter source, or a Clay mass gap.
+# A green job establishes only the specific Agda and source-level checks.
+# A separate transitive trust audit and source-matched PHYSICAL E1
+# evidence remain necessary for the unification theorem.
