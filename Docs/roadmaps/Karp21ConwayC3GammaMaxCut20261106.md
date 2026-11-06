@@ -473,3 +473,26 @@ bridge are next. A full polynomial bit-tape clock still needs
 signed big-integer operations, full graph/certificate loops
 and machine-step correspondence. This source awaits Agda 2.9
 kernel acceptance.
+
+## 2026-11-07 — native gamma strict validity equivalence
+
+New `Karp21GammaBinaryNativeAllWordValidityExact` closes a
+different, direct all-word property:
+`accepted (Native.readGammaBinary w) ≡ accepted (Old.readGamma w)`
+for EVERY original literal bitword `w`, including early rejection,
+truncated prefix/payload, and suffix-bearing words. The theorem
+uses the native branch-control scan plus the previously written
+all-word numeric-observation equality; the executable branch never
+constructs `pow2`-sized Peano values.
+
+The selected original N21 focused runtime and overall Karp21 root
+import this source, and the unchanged-original referee flow now
+checks its focused Agda owner. No claim of Agda kernel acceptance
+without the original `parallel_checker` receipt.
+
+Remaining exact machine gates have not changed: native binary
+less-than for endpoints and canonical `strictAfter`, signed
+accumulation, multi-token graph parser and certificate, exact tape
+movement, `PR.polynomialTimeVerifier`, E20 clock, Cook–Levin
+uniform compiler, historical network, and independent SAT lower
+bound for P != NP.
