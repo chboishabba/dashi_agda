@@ -1,3 +1,9 @@
+
+**2026-11-06 D2/D3 precise Bishop interface:** `YMClayRGLossBudgetToNonGaussianExact` distinguishes rational `charge : Nat→ℚ` **lower enclosures** from the true physical `actualFiniteCumulant : Nat→Scalar`. The source theorem demands `selectedFiniteChargeLower : embed charge(n) ≤ actualFiniteCumulant(n)` and `actualCumulantConverges` in the actual completed real/Bishop carrier; cannot promote rational toy data to a physical Gibbs expectation. `referenceRGUniformNoncollapse` is the new derived mathematical lemma, `asOriginalT5Nontriviality` compiles the real selected T5 nonGaussian consumer (kernel still pending).
+
+
+---
+
 ## 6 November 2026 — same-original-Wilson constructive 4D continuum steelman / BIDI max-cut
 
 **Primary theorem proposal:** [YMClayConstructive4DContinuumSteelman20261106.md](../physics/YMClayConstructive4DContinuumSteelman20261106.md). It explicitly derives the hypothetical nontrivial 4D continuum from ONE original compact-simple-G Wilson family, not six unrelated records, and proposes source-specific bounds for same-observable UV Cauchy limits, IR/crossing tails, literal CMP116 mixed-J decay, OS reconstruction and non-Gaussian survival. The existing R443/R445/R320/R333 owners are reused; unification #1460 remains downstream.
