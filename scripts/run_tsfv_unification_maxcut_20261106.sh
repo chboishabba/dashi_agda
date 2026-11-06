@@ -14,7 +14,7 @@ python3 scripts/check_tsvf_original_os_strong_domain_bidi_20261105.py
 python3 scripts/check_tsfv_original_diamond_spatial_bits_bidi_20261105.py
 python3 scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py
 
-# Reuse the canonical 2.9 checker environment, never invoke nix develop
+# Reuse the canonical 2.9 checker environment; wrapper owns the toolchain
 # or an independent 'agda -l standard-library' command here.
 parallel_checker="$root/scripts/run_agda29_parallel_check.sh"
 test -f "$parallel_checker"
