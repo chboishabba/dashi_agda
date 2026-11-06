@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayRGLossBudgetToNonGaussianExact where
 
 ------------------------------------------------------------------------
@@ -15,7 +14,7 @@ module DASHI.Physics.YangMills.YMClayRGLossBudgetToNonGaussianExact where
 --
 -- A sign convention on the chosen fourth cumulant must be proved
 -- against the original observable; no sign is manufactured here.
--- Exact-head Agda and transitive --safe acceptance PENDING.
+-- Exact-head Agda and transitive source trust and Agda acceptance PENDING.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
