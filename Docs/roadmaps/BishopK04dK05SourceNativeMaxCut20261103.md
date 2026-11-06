@@ -1570,3 +1570,27 @@ the LOG identity, the two original Cayley evaluations and any
 selected external zeta/xi same-object equality are **not** marked
 closed. All source owners and the three TOE roots are configured for
 parallel checking; actual Agda kernel acceptance is pending.
+
+
+## 2026-11-07 exponential zero-to-global propagation
+
+New `DASHI/Analysis/BishopOriginalExponentialGlobalDerivativeFromOriginExact.agda`
+uses the actual original `BishopExponentialCauchyProductExact.bishopExpAdd`
+and `BishopFactorDerivativeAt` to derive the global exponential
+factor derivative at every original Bishop point from **only**
+`BishopFactorDerivativeAt Exp.bishopExp 0 1`. The quotient is the
+literal origin quotient multiplied by `Exp.bishopExp x`, and
+the requisite null-sequence convergence is derived by the pinned
+`Sequence.xₙyₙ→x₀y₀`. It avoids generic all-point exponential
+derivative-series limit interchange.
+
+**Remaining origin leaf:** construct that origin factor-derivative
+receipt from the literal original factorial series, i.e. exhibit
+a division-free analytic difference-factor `q(h)` with
+`exp_B(h)-1 ≃ h*q(h)` and `q(h_n)→1` for every `h_n→0`.
+This is NOT inferred from finite coefficient convergence.
+
+The two original terminal atan-Cayley identities, original
+`exp_B(-sourceNegativeLogValue)=1-x`, and chosen external
+zeta/completed-xi value identities are still open. No compiler
+or CI kernel receipt for the new source module has been observed.
