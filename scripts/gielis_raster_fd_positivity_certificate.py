@@ -63,7 +63,8 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
         raise ValueError("m>0, odd grid n>=17, scale>=1000 required")
     axis=np.linspace(-1.5,1.5,n)
     x,y=np.meshgrid(axis,axis,indexing="ij")
-    inside=np.hypot(x,y)<G.gielis_radius(np.arctan2(y,x),m)-1e-12
+    h=3/(n-1)
+    inside=np.hypot(x,y)<G.gielis_radius(np.arctan2(y,x),m)-G.raster_boundary_tolerance(h)
     points=np.argwhere(inside)
     index={tuple(map(int,p)):j for j,p in enumerate(points)}
     neighbors=[]
