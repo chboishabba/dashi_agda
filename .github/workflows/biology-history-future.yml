@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda'
+      - 'DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda'
       - 'DASHI/EverythingBiologicalHistoryFutureRound23.agda'
       - 'scripts/check_biological_history_future_quotient.py'
       - 'scripts/check_biological_history_future_round23.sh'
