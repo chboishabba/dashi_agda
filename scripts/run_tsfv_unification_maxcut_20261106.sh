@@ -10,6 +10,7 @@ cd "$root"
 echo "DASHI_UNIFICATION_HEAD=$(git rev-parse HEAD 2>/dev/null || echo UNAVAILABLE)"
 python3 scripts/check_emergent31_complete_186_status_20261104.py
 python3 scripts/check_tsfv_unification_48_phase_cut_20261106.py
+python3 scripts/check_tsfv_40_physical_producer_inventory_20261106.py
 python3 scripts/check_tsvf_original_os_strong_domain_bidi_20261105.py
 python3 scripts/check_tsfv_original_diamond_spatial_bits_bidi_20261105.py
 python3 scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py
@@ -49,6 +50,7 @@ safe_sources=(
 # foundational axioms solely from a successful Agda typecheck.
 physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalR445ReflectedAllWordGramExact.agda
   DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
 roots=(
