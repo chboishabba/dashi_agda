@@ -917,3 +917,106 @@ finite rational eigenvalue interval are established on their
 respective selected carriers. A continuum FD convergence proof
 and independently calibrated physical power/torque remain distinct
 gates, not consequences of Perron–Frobenius or SI dimensional typing.
+
+
+## E22 — Magnitude-level type-indexed optical torque
+
+The actual source DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda
+now uses the **existing** Mechanical.Quantity and multiplyQuantity
+for rational scalar magnitudes. It constructs typed power,
+inverse-speed and radius values and proves the scalar equation
+
+\[
+\operatorname{magnitude}(\operatorname{modelOpticalTorque}
+  (Q_P,Q_{c^{-1}},Q_R))=(P c^{-1})R.
+\]
+
+The same source transports the resulting value through the existing
+YangMillsSIScalingEndpointExact.mechanicalQuantityToSI and proves
+the same magnitude on the SIIndexedQuantity, not just matching
+unit names. The signed dimensionless ray-response parameter g is
+then included in a further scalar identity
+
+\[
+ \operatorname{magnitude}
+ (\operatorname{modelOpticalTorqueWithDeflection}
+  (Q_P,Q_{c^{-1}},Q_R,Q_g))
+ = ((P c^{-1})R)g.
+\]
+
+This distinguishes torque (N m) from energy (J) at the nominal
+physical-role level even though both have \(ML^2T^{-2}\).
+g can have either sign or vanish. Source-written equalities still
+require a native Agda check; no measured watt value is assumed.
+
+## E23 — Continuum eigenvalue length scaling in exact SI
+
+The new GielisSpectralSIScaleExact.agda reuses
+Mechanical.inverseAreaDimension, Mechanical.areaDimension,
+and YangMillsSIScalingEndpointExact. It proves source-level
+MLT/SI dimension equalities and carries a rational-valued
+dimensionless eigenvalue times an inverse-area scale onto an
+actual SIIndexedQuantity with units \(\mathrm{m}^{-2}\).
+
+For the *continuum* m=3 selected domain, \(r_3\le\sqrt2\)
+implies \(\Omega_3\subset(-\sqrt2,\sqrt2)^2\).
+The first Dirichlet eigenvalue of this enclosing square is
+\(\pi^2/4\); \(\pi>3\) implies
+\(\lambda_1(\Omega_3)>9/4\).
+E15 supplies \(\lambda_1(\Omega_3)<1273/264\).
+Under a Euclidean scaling \(x\mapsto Lx\),
+\(\lambda_1(L\Omega_3)=\lambda_1(\Omega_3)/L^2\).
+Consequently, given assumed SI length \(L\in[L_-,L_+]\),
+
+\[
+ \boxed{\frac{9}{4L_+^2}<
+ \lambda_1(L\Omega_3)<
+ \frac{1273}{264L_-^2}\;\mathrm{m}^{-2}.}
+\]
+
+For hypothetical \(L\in[0.99,1.01]\) m, exact rational
+endpoints computed by the new
+scripts/gielis_physical_spectral_si.py are
+
+\[
+  \frac{22500}{10201}
+  <\lambda_1(L\Omega_3)
+  <\frac{1591250}{323433}\;\mathrm{m}^{-2}.
+\]
+
+No numerical wave frequency follows without selecting and
+calibrating a constitutive wave equation and speed.
+The native continuum eigenfunction pullback remains OPEN.
+Finite Cartesian-matrix eigenvalues are transported separately;
+they are not identified with the continuum spectrum.
+
+## E24 — Exact rational assumed SI uncertainty propagation
+
+For explicitly supplied nonnegative intervals
+\(P\in[P_-,P_+]\), \(R\in[R_-,R_+]\),
+\(\eta\in[\eta_-,\eta_+]\subseteq[0,1]\), and
+at most B wall reflections, E19 yields
+
+\[
+ \boxed{|\tau_{\mathrm{wall}}|
+ \le \frac{P_+R_+}{c}(1+\eta_+)
+ \sum_{k=0}^{B-1}\eta_+^k.}
+\]
+
+Since signed ray torques may cancel, the only unconditional
+lower bound on absolute torque from these inputs is zero.
+The associated signed torque lies in \([-\tau_+,\tau_+]\).
+scripts/gielis_si_optical_interval.py computes this entirely
+with Fraction rationals and the original exact SI c owner.
+Its intervals are **model assumptions**, not measurements,
+and do not constrain mechanical, thermal, electrostatic or
+gravitational non-optical forces.
+
+### E22–E24 acceptance boundary
+
+The magnitude-level Agda terms and numerical source are
+committed; exact-head Agda elaboration is still unverified.
+E23's continuum scaling is mathematically proved with
+standard Dirichlet monotonicity/dilation, not proof of the
+actual Cartesian FD-to-continuum limit. E24 does not
+construct a measured optical calibration or confidence interval.
