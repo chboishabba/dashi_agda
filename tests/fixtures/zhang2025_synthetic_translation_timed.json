@@ -1,0 +1,819 @@
+{
+  "data_kind": "synthetic",
+  "on": {
+    "source_mode": "ON",
+    "apparatus_id": "SYNTHETIC-ZHANG-B",
+    "source_class": "zhang2025_toroid",
+    "target_id": "SYNTHETIC-test_body",
+    "axis": "x",
+    "protocol_id": "SYNTHETIC/randomized_pairs",
+    "calibration_id": "SYNTHETIC/position+source_clock",
+    "instrument_id": "SYNTHETIC/camera",
+    "run_id": "SYNTHETIC/ON",
+    "raw_data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "frame_times_calibrated": true,
+    "quasistatic_linear_response_justified": true,
+    "material": {
+      "mass_kg": {
+        "nominal": 0.000001,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "electric_charge_C": {
+        "nominal": 1e-12,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "polarizability_C_m2_V": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "magnetic_susceptibility": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "sample_volume_m3": {
+        "nominal": 1e-9,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "spring_N_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "damping_N_s_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "equilibrium_x_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      }
+    },
+    "frames": [
+      {
+        "t_s": 0,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          1000,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 1,
+        "x_m": {
+          "nominal": 0.0005,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          1000,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 2,
+        "x_m": {
+          "nominal": 0.002,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          1000,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 3,
+        "x_m": {
+          "nominal": 0.0045000000000000005,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          1000,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 4,
+        "x_m": {
+          "nominal": 0.008,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          1000,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      }
+    ]
+  },
+  "off": {
+    "source_mode": "OFF",
+    "apparatus_id": "SYNTHETIC-ZHANG-B",
+    "source_class": "zhang2025_toroid",
+    "target_id": "SYNTHETIC-test_body",
+    "axis": "x",
+    "protocol_id": "SYNTHETIC/randomized_pairs",
+    "calibration_id": "SYNTHETIC/position+source_clock",
+    "instrument_id": "SYNTHETIC/camera",
+    "run_id": "SYNTHETIC/OFF",
+    "raw_data_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "frame_times_calibrated": true,
+    "quasistatic_linear_response_justified": true,
+    "material": {
+      "mass_kg": {
+        "nominal": 0.000001,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "electric_charge_C": {
+        "nominal": 1e-12,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "polarizability_C_m2_V": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "magnetic_susceptibility": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "sample_volume_m3": {
+        "nominal": 1e-9,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "spring_N_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "damping_N_s_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "equilibrium_x_m": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      }
+    },
+    "frames": [
+      {
+        "t_s": 0,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 1,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 2,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 3,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 4,
+        "x_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "grad_E2_x_V2_m3": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "grad_B2_x_T2_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_forces_N": {
+          "time_varying_induction": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "suspension_and_support": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "mechanical_vibration": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_drift": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "residual_gas_and_ionic_wind": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_instrumentation": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "radiative_momentum": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_cross_couplings": {
+            "nominal_N": 0,
+            "bound_N": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      }
+    ]
+  }
+}
