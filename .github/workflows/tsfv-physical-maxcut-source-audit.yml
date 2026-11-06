@@ -6,18 +6,24 @@ on:
       - research/lorentz31-directional-kk-ym-20261103
     paths:
       - 'DASHI/Physics/Foundations/TSFVSelectedLatticeAcousticKKFlatControlExact.agda'
+      - 'DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda'
       - 'DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda'
       - 'DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Unified/TSFVUnifiedRegression.agda'
       - 'DASHI/Unified/TSFVParentChildRegression.agda'
       - 'scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py'
+      - 'scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py'
       - 'scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py'
       - 'Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md'
+      - 'Docs/roadmaps/TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md'
       - '.github/workflows/tsfv-physical-maxcut-source-audit.yml'
   pull_request:
     paths:
       - 'DASHI/Physics/Foundations/TSFVSelectedLatticeAcousticKKFlatControlExact.agda'
+      - 'DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda'
+      - 'DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda'
       - 'DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda'
       - 'DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
@@ -45,6 +51,7 @@ jobs:
         run: |
           python scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py
           python scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py
+          python scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py
       - name: Check 186 original lemma IDs/status coverage
         run: |
           python scripts/check_emergent31_complete_186_status_20261104.py
@@ -73,6 +80,8 @@ jobs:
           for module in \
             DASHI/Physics/Foundations/TSFVKKSelectedHorizontalMetricSchurExact.agda \
             DASHI/Physics/Foundations/TSFVSelectedLatticeAcousticKKFlatControlExact.agda \
+            DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda \
+            DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda \
             DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda \
             DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda \
             DASHI/Unified/BalabanRGTOERegression.agda \
