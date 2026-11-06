@@ -60,6 +60,7 @@ python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
 python3 scripts/check_karp21_binary_native_sparse_verifier.py
 python3 scripts/check_karp21_conway_gamma_reference.py
+python3 scripts/check_karp21_finfree_word_comparison_bound.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
