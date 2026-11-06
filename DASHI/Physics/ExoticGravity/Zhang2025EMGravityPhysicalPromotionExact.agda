@@ -63,6 +63,11 @@ record ChinesePatentPhysicalComparison
     claimedMotion : Zhang.PatentClaimEntitlement Zhang.controlledTargetMotion
     apparatusIdentification : String
     physicalComparison : Provenance.ProvenancedComparativeAnomalyReceipt claim
+    apparatusMatchesExperimentalCut :
+      apparatusIdentification ≡
+        Promotion.apparatusCarrier
+          (Provenance.baseCut
+            (Provenance.experimentalCut physicalComparison))
     physicalStage : ExperimentallyGroundedStage
     stageIsExperimental : physicalStage ≡ actualSameApparatusComparison
     physicalAnomaly : Promotion.ComparativeAnomalyReceipt claim
@@ -76,12 +81,16 @@ open ChinesePatentPhysicalComparison public
 compileChinesePatentComparison :
   {claim : Anti.AntigravityClaim} →
   (source : Zhang.DocumentaryClaimReceipt) →
-  (apparatus : String) →
   (receipt : Provenance.ProvenancedComparativeAnomalyReceipt claim) →
   ChinesePatentPhysicalComparison claim
-compileChinesePatentComparison source apparatus receipt =
+compileChinesePatentComparison source receipt =
   chinese-patent-physical-comparison
-    source Zhang.claimedTargetMotion apparatus receipt
+    source
+    Zhang.claimedTargetMotion
+    (Promotion.apparatusCarrier
+      (Provenance.baseCut
+        (Provenance.experimentalCut receipt)))
+    receipt refl
     actualSameApparatusComparison refl
     (Provenance.anomaly receipt) refl
 
