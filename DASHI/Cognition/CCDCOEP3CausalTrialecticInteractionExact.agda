@@ -273,3 +273,32 @@ narrativeCoherenceDoesNotDetermineRevisability =
     (NF.nonFactorabilityWitness
       coherentAndContestable coherentButSelfSealed
       refl revisabilityDiffers)
+
+-- If a legitimate observer can measure revision responses rather than
+-- only their public narrative label, it separates this finite collision.
+-- A real study must independently validate response scoring and consent.
+revisabilityDistinguishingProbe :
+  Discriminator.ExperimentBundle EpistemicWorld
+revisabilityDistinguishingProbe =
+  Discriminator.experimentBundle
+    Revisability
+    evidenceRevision
+    1
+    "Finite evidence-response probe rather than narrative-agreement label"
+    "Toy observation only; no human data or validated predictor"
+
+revisionProbeSeparates :
+  Discriminator.BundleSeparates
+    revisabilityDistinguishingProbe
+    coherentAndContestable coherentButSelfSealed
+revisionProbeSeparates =
+  Discriminator.bundleSeparates revisabilityDiffers
+
+revisionLanguageExtension :
+  Discriminator.DiscriminatingLanguageExtension publicCoherence
+revisionLanguageExtension =
+  Discriminator.discriminatingLanguageExtension
+    (Discriminator.currentObserverCollision
+      coherentAndContestable coherentButSelfSealed refl)
+    revisabilityDistinguishingProbe
+    revisionProbeSeparates
