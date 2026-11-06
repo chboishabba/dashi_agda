@@ -324,3 +324,13 @@ labels denote distinct **sorts** with no implicit coercion, and
 real-world identity, positionality and institutional power require
 source-specific situated evidence rather than the toy two-point model.
 
+
+## Canonical verification route (parallel_checker)
+
+The focused acceptance entrypoint is `bash scripts/check_ccdcoe_cognition_agda.sh`.
+It runs both finite Python regressions, scans every focused module for holes,
+then invokes the **existing** `scripts/run_agda29_parallel_check.sh` with
+all focused Agda modules and `DASHI/Cognition/Everything.agda`. The
+parallel checker owns Agda 2.9, cache and resource policy; do not run Nix
+directly. Its exact-head success receipt is still required; this repository
+edit is not a successful kernel execution.
