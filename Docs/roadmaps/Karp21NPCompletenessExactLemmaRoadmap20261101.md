@@ -1,5 +1,11 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-06 — final three Agda 2.9 term alignments (source repaired, kernel receipt pending)
+
+At historic local head `038970cc0e27d3ac94a7fc76ca571a8a6ef8ddd9`, the remaining diagnostics concerned Cook token-count right-zero, clique selection equality, and the signed-list `length-++` implicit `ys`. Live source readback showed the clique branch already using direct `cong negBool eqU/eqV` and the signed-list branch already passing `{ys = encodeSignedValuesPure rest}`. The Cook original owner now uses `trans equality (NatP.+-identityʳ (cookFormulaTokenCount formula))` with the necessary `trans` import. These are source-level repairs; re-run the exact-head parallel Agda 2.9 compiler before promoting Golden or integration claims.
+
+See [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md) for original diagnostic coordinates, implementation decisions and fail-closed governance.
+
 **2026-11-06 Agda 2.9 follow-up:** The user reports all five preflight checks passing at historical commit `cbf4302cc90d72dcc44ce3d27847954bf56a6654`. Source fixes now on PR #1445 simplify the original clique-cover congruence witnesses, instantiate `{ys = encodeSignedValuesPure rest}` for the original signed-gamma `length-++` rewrite, and retain the previously written fuel-indexed Cook prefix parser. The latter and both repaired Agda Golden/integration roots are still **exact-head kernel-unverified** in this session. See [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md) for precise repaired lemmas and status.
 
 
