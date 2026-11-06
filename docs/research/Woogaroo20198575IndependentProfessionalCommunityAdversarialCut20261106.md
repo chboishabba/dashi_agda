@@ -36,6 +36,19 @@ QUT explicitly challenges the sufficiency of movement, climate refuge and home-r
 
 This QCC material is **independent authorship of an ecological challenge**, but observations repeated from community or RSPCA become primary direct empirical observations only when the original records are joined. The distinction avoids both the false proponent-credibility symmetry and the opposite mistake of automatically admitting every submission assertion as independently measured.
 
+## Newly acquired independent ORIGINALS — upgrade two formerly secondary leads
+
+**RSPCA Queensland has published first-party accounts**, authored by **Emma Lagoon**, about named koalas in the Woogaroo landscape:
+
+- [Maximus returned to Woogaroo Forest, 2 June 2025](https://www.rspcaqld.org.au/resources/wildlife/maximus-the-koala-returns-to-woogaroo-forest-MCFYVERYNGXNCQBFHBTLBTRMTCG4). The RSPCA's original public report says Maximus entered its wildlife hospital in November 2024, was one of **three koalas admitted from the same area**, received treatment and rehabilitation and was returned to Woogaroo Forest after approximately six months.
+- [William returned home, 11 April 2025](https://www.rspcaqld.org.au/resources/wildlife/william-the-koala-returns-home-MCTXS73T5DCJB27OKMKOYOXCLEEE). The RSPCA original says William was rescued at **Bellbird Park** in November 2024 and returned to a location **bordering Woogaroo Forest**. This is NOT precisely the same site/claim as Maximus's Woogaroo return; don't reword it as within the exact approved clearing footprint. Both reports identify named animals and care histories; **clinical case IDs, release GPS and the exact EPBC 2019/8575 action-footprint join remain unacquired**.
+
+**The original professional ecological report behind QCC's 21% is now located**, not merely asserted by its March 2026 submission:
+
+- [*Holding the Line — Reversing Biodiversity Decline*, version 2.0, 31 August 2023](https://assets.nationbuilder.com/queenslandconservation/pages/5629/attachments/original/1694603342/QCC_Holding_The_Line_Reversing_Biodiversity_Decline.pdf), prepared by **Shannon Mooney and Andrew Davidson**, reviewed by **Jen Basham / QCC**. **Table 8 on page 31**, vegetation extent by local government area (citing **HLW 2021**), lists Ipswich City council area **109,315 ha** and **21% of the LGA in remnant vegetation**. This pays the bounded claim "**original commissioned report reports Ipswich LGA remnant cover at 21% on 2021 data**." It does **not** independently prove 21% vegetation within Woogaroo, represent a new 2026 remote-sensing statistic, or establish a universal statutory 30% cover minimum. Separate full raw HLW mapping/2026 update and local polygon overlap still open.
+
+**Evidence status change:** QCC's reliance on RSPCA returns now has first-party **organisation-authored corroboration**. The original clinical records and GPS coordinates are not yet present. QCC's 21% claim now has its original commissioned professional analysis in hand, although underlying vegetation mapping and time-specific denominator need inspection. The source-stage upgrade is recorded in the revised golden \`SensibLawWoogarooIndependentObjectionBurden20261106Exact\` and Python reference. No ecological/legal claim should remain labelled "only second-hand QCC" where the RSPCA or original commissioned report is now known.
+
 ## The crucial model omission the earlier arithmetic-only round did not settle
 
 The 2012 OAG's **0.2% vulnerable / 1.2% endangered koala**, area/quality, confidence and 20-year inverse-compound calculation **does** reproduce the proponent's 108.35% original source credit (conditional 1.2% gives ~88.83%). That proves arithmetic/conditional numerical vulnerability only, **not ecological adequacy**. A proponent can have **perfect source spreadsheet arithmetic** yet provide NO validated bridge to the following ecological functions:
