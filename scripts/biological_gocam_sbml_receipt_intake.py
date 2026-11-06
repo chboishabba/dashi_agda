@@ -290,6 +290,15 @@ def self_test():
         assert receipt["sbml"]["reactions"][0]["kinetic_law_present"]
         assert receipt["pnf_mutation_performed"] is False
         assert receipt["candidate_joins"][0]["evidence_attached_to_original_activity"]
+        # Structured GO-CAM references are normalized without losing their
+        # original source reference identity.
+        nested_source = json.loads(go.read_text())
+        nested_source["activities"][0]["causal_associations"][0]["evidence"] = [
+            {"reference": {"id": "PMID:1"}}
+        ]
+        go.write_text(json.dumps(nested_source))
+        nested_receipt = build_receipt(go, sbml, crosswalk)
+        assert nested_receipt["candidate_joins"][0]["evidence_attached_to_original_activity"]
         crosswalk.write_text(json.dumps({"joins": [{
             "gocam_activity": "gomodel:test/a",
             "sbml_reaction": "r1",
