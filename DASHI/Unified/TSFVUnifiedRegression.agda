@@ -45,6 +45,7 @@ import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSF
 import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
 import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact as TSFVKKShear
 import DASHI.Physics.Foundations.TSFVAcousticMassInverseBidiNoGoExact as TSFVAcousticBidi
+import DASHI.Physics.Foundations.TSFVAcousticLocalImpulseThirdDerivativeExact as TSFVImpulse
 import DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact as TSFVKKBackwardBidi
 import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
 import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
@@ -221,6 +222,22 @@ open TSFVAcousticBidi public using
   ; selectedZeroFourierReadoutIsMass
   ; fullSelectedResponseEqualityForcesSameMass
   ; differentMassCannotShareEntireResponse
+  )
+
+-- S02 source-dynamic response: one original chosen local-impulse
+-- operator produces six third-derivative neighbour readouts.
+-- The spatial source dimension is still CHOSEN, not emergent TSVF.
+open TSFVImpulse public using
+  ( LocalAxis
+  ; LocalOrientation
+  ; LocalObservationSite
+  ; sixNeighborWeights
+  ; sourceLatticeImpulseStiffness
+  ; sourceLocalImpulseThirdDerivative
+  ; allSixFirstNeighborResponsesReadCoupling
+  ; outsideNearestBallHasZeroThirdDerivative
+  ; originalKickedSiteThirdDerivative
+  ; firstNeighborImpulseResponseIsMassIndependent
   )
 
 -- P07 Stone/OS trust firewall: on the SAME original TSVF/OS clock,
