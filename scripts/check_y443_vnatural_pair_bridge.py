@@ -21,6 +21,8 @@ PRESENTATION = ROOT / "DASHI/Moonshine/Y443CoxeterPresentationExact.agda"
 ACTION = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationExact.agda"
 TRACE = ROOT / "DASHI/Moonshine/Y443JMDTracePowerExact.agda"
 HEISENBERG = ROOT / "DASHI/Moonshine/Y443Monster3BTwelveDisjointExact.agda"
+ORBIT = ROOT / "DASHI/Moonshine/Y443ArmSwapOrbitMaxCutExact.agda"
+INDEXED = ROOT / "DASHI/Moonshine/Y443Relator72IndexedBidiExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -61,7 +63,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -96,7 +98,12 @@ def assert_source_scope() -> None:
     for symbol in ("axis0DoubleTranslationIsNotIdentity", "axis0TripleTranslationIsIdentity", "axis0TripleTranslationEverywhere"):
         if symbol not in h:
             raise AssertionError(f"missing order-3/order-2 disjointness theorem {symbol}")
-    print("PASS source: diagram, pair-word, JMD power and Heisenberg falsifier without listed trust escapes")
+    for source, symbols in ((ORBIT, ("swapPreservesAdjacency", "fixedNonedgesAreSeven", "coreIsEightByNine", "fullCutIsSeventyTwoPlusEight")), (INDEXED, ("allTagsRecoverOriginal80Words", "coxeterCoreCount", "fullResidualCount"))):
+        txt = source.read_text()
+        for symbol in symbols:
+            if symbol not in txt:
+                raise AssertionError(f"missing Y443 orbit/indexed theorem {symbol} in {source.name}")
+    print("PASS source: Y443 72+8 indexed relation algebra and JMD proofs without listed trust escapes")
 
 
 def check_agda() -> None:
