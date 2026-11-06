@@ -1178,3 +1178,98 @@ remain separately OPEN.
   complex exponential finite-term continuity and original
   selected `zetaHalfPlane` agreement; (D) selected completed
   `xi` gamma/prefactor value identity and factor continuity.
+
+
+## 2026-11-06 original Bishop calculus source sweep — finite derivatives now owned
+
+Source-first correction to the active four-gate max-cut. The actual original
+Power/Factor calculus and Bishop native scale/reciprocal machinery were
+already present and must replace another generic derivative authority.
+
+**New modules source-written on the selected pinned Bishop carrier:**
+
+1. Foundations/BishopLogAtanFiniteDerivativeGeometricExact.agda:
+   all-N original Bishop real finite geometric telescope
+   (1-q) sum_{k<N}q^k ~= 1-q^N. Both original negative-log
+   and signed-arctangent derivative-polynomial specializations are explicit.
+2. Foundations/BishopCayleyRationalDifferentialEquationExact.agda:
+   original rational Cayley quotient numerator obeys N'D-ND'=2iN for
+   ALL rational t on the existing CayleyDickson Q[i] carrier.
+3. Analysis/BishopOriginalNegativeLogFiniteDerivativeExact.agda:
+   the LITERAL source Log.sourceNegativeLogTerm(x,n) has a genuine
+   BishopFactorDerivativeAt with value x^n; every finite original log
+   sum is differentiated on that same source. Uses original
+   reciprocalNatCancels and native natural scale.
+4. Analysis/BishopOriginalMachinAtanFiniteDerivativeExact.agda:
+   the LITERAL source Machin.atanSignedTerm(x,n) has native
+   BishopFactorDerivativeAt with value (-1)^n x^(2n).
+   The finite original Machin arctangent partial is differentiated
+   by the existing factorDerivativeAdd theorem.
+5. Analysis/BishopOriginalMachinAtanDerivativeGeometricWeldExact.agda:
+   all-N native identity (-1)^n x^(2n) ~= (-x*x)^n; hence the
+   derivative of EVERY literal original Machin atan partial is the
+   exact geometric polynomial with residual 1-(-x*x)^N.
+6. Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda:
+   literal Exp.expTerm(x,0) derivative 0 and
+   Exp.expTerm(x,n+1) derivative Exp.expTerm(x,n), with the
+   original checked inverse-factorial coefficient cancellation.
+   Every finite original Exp partial has that derivative and its
+   derivative partials agree with a one-step shift of source Exp
+   partials. The ORIGINAL derivative-series converges pointwise to
+   Exp.bishopExp by existing BishopOneStepLagConvergenceExact.
+7. Docs/proofs/BishopK04dK05OriginalSeriesConstructiveDerivations.md:
+   detailed original-function mathematical argument, with constructive
+   absolute series-composition bounds and explicit coefficient tail
+   moduli for both exp(-L) and exp(2i arctan), exponential factorial
+   continuity bounds, and the structural obstruction at the original
+   zeta/xi substrate's opaque Set-labelled fields.
+
+Independent exact Fraction Q[i] audit
+scripts/check_bishop_k04d_k05_nested_source_exp_coefficients.py computes
+the NESTED source formal exponential coefficients from weighted original
+-log and 2i*atan coefficients, using n*a_n = sum_(k=1)^n k*c_k*a_(n-k).
+At 128 independently evaluated degrees, the resulting coefficients
+equal 1-X and Cayley 1+sum_(n>=1)2i^n X^n respectively; the focused CI
+checks through degree 96. These tests are not Agda or analytic
+composition convergence receipts.
+
+**Reduced exact mathematical cut after these changes:**
+
+K05-PRODUCT — the original signed-factorial theorem is source-written and
+imported by native Machin/Dirichlet consumers; Agda-2.9 --safe
+kernel acceptance remains open.
+
+K05-PI — source finite derivatives, source geometric telescope,
+rational Cayley ODE, exact Q[i] coefficients and both two-point terminal
+consumers are now source-written. Still needed: (A) uniform *native
+Bishop* factor-quotient convergence on the literal original Machin
+half-ball, and (B) actual absolutely convergent nested exponential
+composition/reindexing to identify the original source exp_C(2i atan_B t)
+with its Cayley coefficients at t=1/5 and 1/239. No separate rational
+Cayley algebra or global sign proof is required.
+
+K04d-LOG — original source finite derivatives and all-N gap telescoping,
+formal coefficient uniqueness, and Nat inverse specialization are
+source-written. Still needed: (A) uniform native Bishop
+factor-quotient convergence for source L(x) on every strict radius below
+one and (B) nested series composition limit identification
+exp_B(-L(x)) ~= 1-x. The actual Nat-inverse is then compiled from one
+identity.
+
+K04d-CONTINUITY — original finite Exp derivatives and pointwise
+derivative-series convergence, finite power sequential continuity, and
+the original constructed Dirichlet Basel limit are source-written.
+Still needed: native factorial *uniform* quotient/tail modulus for the
+source exponential and cosine/sine; hence original complex expC
+continuity and finite term continuity. Independently, a concrete
+same-object ZetaHalfPlaneLayer.zetaHalfPlane value equality and
+CompletedRiemannZeta.xi gamma/prefactor definition must be supplied by
+the actual source implementations. Neither ZetaEqualsDirichletSeries:
+Complex->Set nor CompletedDefinition:Complex->Set is that equality.
+
+**Verification contract:** all six new calculus/finite-algebra source
+modules are imported into the 3 golden TOE roots, focused CI now covers
+51 source owners using the canonical parallel checker with --safe.
+No exact-head Agda kernel receipt exists in this connector session.
+Do not promote any new module or original analytic cut to kernelChecked
+without that receipt.
