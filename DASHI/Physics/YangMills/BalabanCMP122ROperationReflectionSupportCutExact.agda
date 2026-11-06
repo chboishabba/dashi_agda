@@ -40,11 +40,11 @@ ROperationCrossing :
 ROperationCrossing cut polymer =
   Geometry.polymerCrossesReflectionCut cut polymer
 
-/--
+{-
 The imported CMP122 Eq. (1.100) bound survives unchanged on a crossing
 polymer.  The support proof is deliberately unused in the arithmetic: it
 records which source terms need a later RP audit, not a stronger decay claim.
--/
+-}
 rOperationCrossingEquation1100 :
   ∀ {n Scale Boundary}
     (source : Source.CMP122Equation1100Pointwise
