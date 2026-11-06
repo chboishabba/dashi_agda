@@ -8,6 +8,7 @@ direction. Explicitly finds unguarded counterexamples. This is bounded
 differential mathematics, NOT an Agda typecheck or universal proof.
 """
 from itertools import product
+from pathlib import Path
 
 P, H = 0, 1
 
@@ -36,7 +37,27 @@ def legal(direction, old, new):
     return cases[direction].get((old, new))
 
 
+def assert_source_contract() -> None:
+    root = Path(__file__).resolve().parents[1]
+    base = root / "DASHI/Mathematics/Complexity"
+    patterns = (base / "ConcreteTapeLocalWindowPatternsExact.agda").read_text()
+    guarded = (base / "ConcreteTapeAfterUniqueFromLocalityExact.agda").read_text()
+    step = (base / "ConcreteTapeDecodedTransitionStepExact.agda").read_text()
+    for old in (
+        "legalOldLeftPlainForcesNewLeftPlain :",
+        "legalOldRightPlainForcesNewRightPlain :",
+    ):
+        assert old not in patterns, f"unsound universal plainness lemma resurfaced: {old}"
+    assert "data LegalWindowForRule\n    (machine" in patterns
+    assert "record NoGhostContextBoundaries" in guarded
+    assert "NoGhostContextBoundaries scan interior" in guarded
+    assert "AfterUnique.NoGhostContextBoundaries" in step
+    assert "localityAfterUniqueDerivedPaid = false" in step
+    assert "oneSATTimeSliceToMachineStepPaid = false" in step
+
+
 def main() -> int:
+    assert_source_contract()
     accepted = 0
     unguarded_ghosts = 0
     guarded_ghosts = 0
