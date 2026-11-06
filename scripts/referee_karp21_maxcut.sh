@@ -59,6 +59,7 @@ python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
 python3 scripts/check_karp21_binary_native_sparse_verifier.py
+python3 scripts/check_karp21_conway_gamma_reference.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
@@ -109,6 +110,8 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
       --entry "$root"
   done
 
+  check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21ConwayGammaChainCodecExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
