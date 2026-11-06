@@ -138,7 +138,7 @@ module Laws {G : Set} (gi : TM.GroupWithInverse G)
 
   edgeBraid :
     (x y : Y.Node) →
-    Y.pairRelator (Y.pair x y) Relations.∈ Y.monsterRelators →
+    Relations._∈_ (Y.pairRelator (Y.pair x y)) Y.monsterRelators →
     Relations._∈_ (Y.square x) Y.monsterRelators →
     Relations._∈_ (Y.square y) Y.monsterRelators →
     Y.adjacent x y ≡ true →
