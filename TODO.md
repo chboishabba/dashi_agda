@@ -1,3 +1,16 @@
+## 2026-11-06 — physical-cube quantitative max-cut / original CMP116 reused
+
+- [x] Audit original Dobrushin, CMP116 R467/R479, Perron, Wilson/Haar/Fubini, RG/UV and 2D/3D/5D owner `YMClayVoyagerDimensionSignatureForkExact`.
+- [x] Add `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md` exact physical-block criterion and A/B/C alternative lanes.
+- [x] Source-write `YMClayPhysicalCubeDobrushinFromGibbsExact.agda` with exact `cells(a)·a=ell` and original normalized Gibbs row/observable bounds (**source, Agda kernel PENDING**).
+- [x] Add exact rational weighted Perron checker `scripts/check_ym_physical_cube_perron_certificate.py` (illustrative fixture, negative controls, physical-admission hard fail). Independent 101-power rational control PASS; committed selftest CI receipt PENDING.
+- [ ] PCUBE.P01: continuous original Wilson-Gibbs physical cube conditionals, exact Haar+R445 pushforward and all-size selected decoder.
+- [ ] PCUBE.P02–P03: same physical `ell` refinement and reflection-compatible time/block maps (actual all-scale RG).
+- [ ] **PCUBE.P04: one strict cutoff+volume-uniform weighted `q<1` for real original coarse conditional influence, OR source-native CMP116 absolute rooted-polymer q**.
+- [ ] PCUBE.P05: instantiate `BalabanCMP116PublishedLiteralSelectedRound467Exact.literalSelectedCMP116Localization` and `sourceEnvelopeBelowPhysicalClusteringEnvelope` for the actual original same-J marks; no new abstract source.
+- [ ] PCUBE.P06/P07: same-OS-H gap in physical units and genuinely nontrivial 4D continuum for every prescribed compact simple G.
+- [ ] V00–V02: exact-head Agda/Nix kernel CI and trust receipts for new modules; no receipt currently.
+ 
 - [x] YM native `decideNativeMember` / `decideAllSelectable` / Boolean→original C3 and pair-vector compiler source written in `YMClayNativeOriginalSortDeciderExact.agda` (**Agda unverified**).
 - [x] YM native targeted Agda Nix workflow added `.github/workflows/ym-native-maxcut-exact-agda.yml`; **no green CI receipt yet**.
 - [ ] YM F1.1/F1.2/F1.3: kernel-close Boolean `originalC3SelectableBooleanGoal`, native pair length and `originalPairSelectableBooleanGoal`; then derive existing three original canonical equalities via the constructive compiler.
