@@ -71,13 +71,13 @@ distanceDecreasesBelowUpper x y limit x≤y y≤limit =
         (RP.∣x-y∣≃∣y-x∣ y limit)
         (RP.nonNegx⇒∣x∣≃x
           (RP.0≤x⇒nonNegx
-            (S.x≤y⇒0≤y-x y≤limit)))
+            (RP.nonNegx⇒0≤x y≤limit)))
     absX =
       RP.≃-trans
         (RP.∣x-y∣≃∣y-x∣ x limit)
         (RP.nonNegx⇒∣x∣≃x
           (RP.0≤x⇒nonNegx
-            (S.x≤y⇒0≤y-x x≤limit)))
+            (RP.nonNegx⇒0≤x x≤limit)))
   in
   RP.≤-respˡ-≃ (RP.≃-symm absY)
     (RP.≤-respʳ-≃ (RP.≃-symm absX)
