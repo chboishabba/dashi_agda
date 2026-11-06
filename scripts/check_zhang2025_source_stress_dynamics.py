@@ -40,7 +40,21 @@ def nonempty(data: dict, key: str) -> str:
 
 
 def interval(value: dict, label: str) -> Interval:
-    return force_interval(value, label)
+    """Unit is carried by the parent field name; values use generic bounds.
+
+    Unlike the legacy force-only schema, mass, gradient and displacement must
+    NOT be mislabeled with a _N (newton) suffix.
+    """
+    if not isinstance(value, dict):
+        raise ValueError(f"{label}: measurement interval object required")
+    nominal = finite(value.get("nominal"), f"{label}.nominal")
+    width = finite(value.get("bound"), f"{label}.bound")
+    receipt = value.get("evidence_receipt")
+    if not isinstance(receipt, str) or not receipt.strip():
+        raise ValueError(f"{label}: evidence_receipt required")
+    if width < 0:
+        raise ValueError(f"{label}: nonnegative bound required")
+    return Interval(nominal - width, nominal + width)
 
 
 def imul(left: Interval, right: Interval) -> Interval:
@@ -132,7 +146,7 @@ def _timed_frame(frame: dict) -> None:
     if missing:
         raise ValueError("missing background class(es): " + ", ".join(missing))
     for key in DYNAMIC_BACKGROUND_CLASSES:
-        interval(bg[key], key)
+        force_interval(bg[key], key)
 
 
 def validate_run(run: dict, mode: str) -> None:
@@ -155,12 +169,12 @@ def validate_run(run: dict, mode: str) -> None:
         "spring_N_m", "damping_N_s_m", "equilibrium_x_m",
     ):
         interval(material.get(key), key)
-    if material["mass_kg"]["nominal_N"] - material["mass_kg"]["bound_N"] <= 0:
+    if material["mass_kg"]["nominal"] - material["mass_kg"]["bound"] <= 0:
         raise ValueError("strictly positive lower mass required")
-    if material["sample_volume_m3"]["nominal_N"] - material["sample_volume_m3"]["bound_N"] <= 0:
+    if material["sample_volume_m3"]["nominal"] - material["sample_volume_m3"]["bound"] <= 0:
         raise ValueError("strictly positive sample volume required")
     for key in ("spring_N_m", "damping_N_s_m"):
-        if material[key]["nominal_N"] - material[key]["bound_N"] < 0:
+        if material[key]["nominal"] - material[key]["bound"] < 0:
             raise ValueError(f"{key}: negative physical lower coefficient")
     if run.get("quasistatic_linear_response_justified") is not True:
         raise ValueError("selected weak-response model applicability required")
@@ -215,7 +229,7 @@ def _frame_force(run: dict, index: int) -> dict:
                  1.0 / (2 * MAGNETIC_PERMEABILITY))
     )
     for key in DYNAMIC_BACKGROUND_CLASSES:
-        classical = classical + interval(f["background_forces_N"][key], key)
+        classical = classical + force_interval(f["background_forces_N"][key], key)
     residual = inferred_external - classical
     return {
         "t_s": f["t_s"],
