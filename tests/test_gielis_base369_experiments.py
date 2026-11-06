@@ -423,3 +423,23 @@ def test_hoeffding_paired_random_angle_baseline_controls():
         lo,hi=row["impulse_difference_simultaneous_interval"]
         assert lo <= row["absolute_impulse_difference_from_baseline"] <= hi
         assert row["interpretation"].endswith("only")
+
+
+@pytest.mark.parametrize("m,n",((3,25),(3,41),(6,41),(9,41),(3,61)))
+def test_original_raster_fd_discrete_eigenvalue_rational_pf_enclosure(m,n):
+    spec=importlib.util.spec_from_file_location(
+        "gielis_raster_fd_positivity_certificate",
+        ROOT/"scripts/gielis_raster_fd_positivity_certificate.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.certify(m,n)
+    from fractions import Fraction
+    low=Fraction(r["rational_lower"])
+    high=Fraction(r["rational_upper"])
+    assert 0 < low <= high
+    assert float(low)-1e-8 <= r["original_fd_eigsh_estimate"] <= float(high)+1e-8
+    assert r["certified_interval_width"] < 1e-6
+    assert r["adjacency_connected"]
+    assert r["all_integer_test_vector_entries_positive"]
+    assert not r["continuum_dirichlet_mesh_convergence_proved"]
