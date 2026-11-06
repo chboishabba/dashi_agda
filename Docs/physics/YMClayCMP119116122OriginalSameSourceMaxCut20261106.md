@@ -38,11 +38,11 @@ These are **source-written proof terms awaiting Agda kernel acceptance**, and st
 
 ### Y.01. Original finite Wilson→CMP119/CMP122 exact carrier + action
 For all selected cutoffs, volumes, field configurations and legal source gauges establish an explicit original equality (or a correctly measured gauge-fixed change of variables)
-[
+\[
 \mathbb E_{\mu_{a,L}^{\rm Wilson}}[F] =
 \frac{\int F_{\rm selected}\, e^{-S_{119/122}(A,E,R,B,V)}\,d\nu_{\rm phys}}
 {\int e^{-S_{119/122}(A,E,R,B,V)}\,d\nu_{\rm phys}}.
-]
+\]
 Do not pretend `RealAnalysisAxioms`, a `OneLinkProductHaar` record or two equal types prove this. For original compact SU(N), verify actual Borel Haar, measurable gauge factors, original decoder, partition positivity and noncommutative blocking; reuse the already implemented 1,024-link C3/64-pair/896-spectator code. If gauge fixing includes ghosts, demonstrate determinant/BRST/Ward compatibility, not an independent gauge-fixed measure assumption.
 
 ### Y.02. Literal selected insertions→published CMP119/CMP116 mark class
@@ -59,7 +59,7 @@ From SAME selected source show a lower OS norm and a nonzero signed fourth cumul
 - **BWD 116→119/122:** every marked source root/domain appearing in the supposed physical bound must trace to the selected Wilson density/physical T-operation and *the same* beta history, with no ungrounded source-independent envelope.
 - **FWD 122→OS:** every reflected finite Gram matrix stays PSD after selected RG/blocking and cutoff limit; test crossing R-polymers explicitly.
 - **BWD OS→122:** every physical OS local insertion and its RG predecessor must lie in the claimed CMP119/116 analytic family with correct renormalized normalization.
-- **Control:** a real symmetric 2×2 kernel with entries (\begin{bmatrix}1&2\\2&1\end{bmatrix}) has all positive entries but a negative quadratic for (v=(1,-1)); pointwise positive/decaying weights alone do not imply reflection positivity.
+- **Control:** a real symmetric 2×2 kernel with entries $\begin{bmatrix}1&2\\2&1\end{bmatrix}$ has all positive entries but a negative quadratic for (v=(1,-1)); pointwise positive/decaying weights alone do not imply reflection positivity.
 - **RG:** require actual original nonperturbative `q<1` or CMP116 two-marked physical rate at fixed physical `ell`. Stagewise q<1 and a bare-link high-temperature bound do not suffice.
 
 ## Verification/phase status
