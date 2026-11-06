@@ -103,3 +103,11 @@ There are independent negative and falsification pathways: require direct same-f
 **V — golden Agda / target checker**: source-written \`DASHI/Law/SensibLawWoogarooIndependentObjectionBurden20261106Exact.agda\` + independent deterministic \`scripts/check_woogaroo_independent_objection_burden.py\`, integrated into both Agda roots. Real \`parallel_checker\`/Agda --safe not yet received; do not claim kernel acceptance.
 
 This is a genuine adversarial challenge to *proponent-side inference and model sufficiency* that is grounded in original independently authored professional submissions. All QUT/QCC/field-observer and prior PR authorship and all unobserved real-world outcomes remain explicit.
+
+## More decisive tests than the ecological-function proxy (later 6 November)
+
+The [fourteen original-source decisive tests](Woogaroo20198575FourteenDecisiveTestsMaxCut20261106.md) add: avoidance-before-offsets, impact/indirect/spatial-area scope, direct/indirect policy composition, independent original release and no double-counting, asymmetric score direction, species-status saved-law question, prior-offset additionality, offset security before stage-specific clearing, measurable monitoring/remedy and **actual 95B/95C consideration** to the earlier same-function/corridor/thermal-refuge audit.
+
+Importantly, [RSPCA Queensland's original 2025 **Impact Report p 11**](https://www.rspcaqld.org.au/~/media/files/annual%20reports/rspca-qld-impact-report-2025-digital.ash) states **both William and Maximus were released back into their Woogaroo Forest home**, strengthening the April RSPCA article's "bordering Woogaroo Forest" detail at forest level. Neither supplies original GPS evidence within the selected 2019/8575 legal polygon.
+
+The new 2026 [F2026L01093 National Environmental Standard](https://www.legislation.gov.au/F2026L01093/asmade/details) was registered August 2026, but DCCEEW explicitly says its new approval tests do NOT apply until new approval-test commencement on/before 1 December 2026. Do not invent legal invalidity on **16 October** by retrospective 2026-standard application; read the original [2012 offsets policy](https://www.nationalepa.gov.au/epbc/approvals/offsets/guidance/offset-policy-principles) for the present tests and keep saved-law review open.
