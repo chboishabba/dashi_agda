@@ -25,6 +25,7 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact where
 
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_; _≤ℝ_)
 
@@ -128,6 +129,33 @@ module _
     Finite.numeratorAdd
       (originalWilsonFiniteIntegrationLaws ordered strictToWeak n)
       left right
+
+  -- Normalization is NOT inherited from an arbitrary divide operation.
+  -- Strict positivity is inherited from the actual one-link product Haar;
+  -- only the selected real-division cancellation law is a separate scalar
+  -- input.  This avoids silently identifying an arbitrary ratio with Z/Z=1.
+  originalWilsonExpectationOfUnitIsOne :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideSelf : ∀ denominator →
+      0ℝ <ℝ denominator → divide denominator denominator ≡ 1ℝ)
+    (n : Nat) →
+    Physical.normalizedExpectation (originalWilsonMeasure n)
+      Finite.oneObservable ≡ 1ℝ
+  originalWilsonExpectationOfUnitIsOne
+    ordered strictToWeak strict divideSelf n =
+    trans
+      (cong
+        (λ numerator →
+          divide numerator
+            (Physical.partitionFunction (originalWilsonMeasure n)))
+        (originalWilsonUnitNumeratorIsPartition ordered strictToWeak n))
+      (divideSelf
+        (Physical.partitionFunction (originalWilsonMeasure n))
+        (Family.physicalFinitePartitionPositive
+          theory traceData exponential beta oneLink bilateral divide
+          strict n))
 
   originalWilsonExpectation :
     (n : Nat) → OriginalObservable n → ℝ
