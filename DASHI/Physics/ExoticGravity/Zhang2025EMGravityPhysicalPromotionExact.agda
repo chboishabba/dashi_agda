@@ -12,6 +12,8 @@ import DASHI.Physics.ExoticGravity.AntigravityExperimentalCutProvenanceExact as 
 import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Promotion
 import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as Calibrated
 import DASHI.Physics.ExoticGravity.AntigravityStrongestConditionalTheoremExact as Strong
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as LabCompiler
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as LabStress
 
 ------------------------------------------------------------------------
 -- Gravity-consumer routing is downstream of the SAFE documentary core.
@@ -127,6 +129,41 @@ compileMetricEvaluation :
 compileMetricEvaluation comparison =
   metric-evaluation comparison canonicalMetricRoute refl
 
+
+------------------------------------------------------------------------
+-- REAL IN-REPO SOURCE-STRESS OWNER, NOT A SECOND T_mu_nu CONSTRUCTION.
+-- Local vacuum Maxwell stress estimates alone do NOT supply mass current,
+-- material/elastic source, tensor assembly, or physical metric variation.
+-- The exact same apparatus must be retained at the physical comparison edge.
+------------------------------------------------------------------------
+
+record SameApparatusZhangLaboratoryStress
+  (claim : Anti.AntigravityClaim) : Set₁ where
+  constructor same-apparatus-zhang-laboratory-stress
+  field
+    physicalComparison : ChinesePatentPhysicalComparison claim
+    sourceTensorInput : LabCompiler.LaboratoryStressEnergyCompilationInput
+    sourceApparatusMatchesExperimentalApparatus :
+      LabCompiler.apparatusIdentity sourceTensorInput
+        ≡ apparatusIdentification physicalComparison
+    compiledSourceTensor : LabStress.LaboratoryStressEnergyReceipt
+    compiledSourceTensorIsTheSelectedPhysicalTensor :
+      compiledSourceTensor ≡
+        LabCompiler.compileLaboratoryStressEnergy sourceTensorInput
+
+open SameApparatusZhangLaboratoryStress public
+
+compileSameApparatusZhangLaboratoryStress :
+  {claim : Anti.AntigravityClaim} →
+  (comparison : ChinesePatentPhysicalComparison claim) →
+  (source : LabCompiler.LaboratoryStressEnergyCompilationInput) →
+  LabCompiler.apparatusIdentity source ≡
+    apparatusIdentification comparison →
+  SameApparatusZhangLaboratoryStress claim
+compileSameApparatusZhangLaboratoryStress comparison source sameApparatus =
+  same-apparatus-zhang-laboratory-stress
+    comparison source sameApparatus
+    (LabCompiler.compileLaboratoryStressEnergy source) refl
 
 ------------------------------------------------------------------------
 -- QUANTITATIVE CONSUMER WELD (source-bounded).
