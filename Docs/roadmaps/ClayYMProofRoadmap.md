@@ -1,3 +1,12 @@
+## 2026-11-06 — YM proof-source / RG budget supplement
+
+See [phase-specific exact update](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). F1 three original 1024-link equality proof attempts source-written, **no Agda receipt**. New original physical-cube RG arithmetic derives q=q0+B, with 128-step exact rational reference but actual continuous SU(N)/CMP116/OS physical coefficients and compact-group coverage OPEN. Files: `YMClayNativeClosedThreeEqualitiesCandidateExact.agda`, `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`, `YMClayRGDriftOriginalGibbsInstantiationExact.agda` and `scripts/check_ym_rg_drift_budget_reference.py`. #1460 remains separate physical observer/KK lane; no child import. Full source contracts in `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md`.
+
+---
+
+
+---
+
 ## 6 November 2026 — physical-cube CMP116/Dobrushin/Perron steelman, not generic bare-link repetition
 
 **Primary new implementation and physical theorem spec:** [Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md), wired into [phases/deliverables](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). The prior finite 1024-label C3/pair selection proofs remain open for kernel acceptance; this physical lane runs in parallel. Key genuine theorem is `PCUBE.P04`: find one (0≤q<1), independent of a,L, for weighted conditional Dobrushin matrix of the SAME original blocked compact SU(N) Wilson Gibbs state at fixed physical `ell`; source-native CMP116 marked-J / rooted-polymer is the competing route, and R467 source specialization already exists. Existing direct R479/T5 same-H spectral compiler should be reused. `YMClayPhysicalCubeDobrushinFromGibbsExact.agda` formalizes the exact conditional row/observable transport; no new coarse probability law is declared. No proof of the strict actual physical `q` or continuum mass gap is claimed.
