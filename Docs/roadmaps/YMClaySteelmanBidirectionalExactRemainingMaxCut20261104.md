@@ -1,3 +1,12 @@
+## 2026-11-06 — YM proof-source / RG budget supplement
+
+See [phase-specific exact update](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). F1 three original 1024-link equality proof attempts source-written, **no Agda receipt**. New original physical-cube RG arithmetic derives q=q0+B, with 128-step exact rational reference but actual continuous SU(N)/CMP116/OS physical coefficients and compact-group coverage OPEN. Files: `YMClayNativeClosedThreeEqualitiesCandidateExact.agda`, `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`, `YMClayRGDriftOriginalGibbsInstantiationExact.agda` and `scripts/check_ym_rg_drift_budget_reference.py`. #1460 remains separate physical observer/KK lane; no child import. Full source contracts in `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md`.
+
+---
+
+
+---
+
 ## 6 Nov 2026 — replacing weak bare-link Dobrushin with fixed physical cube
 
 The precise high-alpha analytic strategy, source crosswalk and dimensional donor separation now live in [YMClayPhysicalCubeDobrushinCMP116Transport20261106.md](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md). The prior (18\tanh(12\beta)) single-link estimate is merely a very conservative sufficient high-temperature criterion, irrelevant to weak-coupling continuum. The actual new target is a **uniform strict Dobrushin–Shlosman/Perron block conditional coefficient** at fixed physical `ell` for the original selected R445 Wilson-Gibbs pushforward, or a directly selected CMP116 rooted-polymer envelope for R467. The existing `BalabanClayUniformPerronContractionExact` already proves stagewise finite diameters do not imply uniform contraction. The exact q→m transport then feeds existing R479 and T5 same-H OS consumers, requiring full continuum/OS/nontrivial all-group physical data. Finite Gibbs compiler added, physical q not established.
