@@ -62,7 +62,13 @@ fi
 check_agda() {
   local source="$1"
   printf '\nREFEREE CHECK: %s\n' "$source"
-  agda -i . "$source"
+  local -a include_args=(-i .)
+  # Explicit stdlib source root for clean CI/ephemeral environments.
+  # Locally registered Agda libraries continue working unchanged.
+  if [[ -n "${AGDA_STDLIB_ROOT:-}" ]]; then
+    include_args+=(-i "$AGDA_STDLIB_ROOT")
+  fi
+  agda "${include_args[@]}" "$source"
   printf 'ACCEPTED BY AGDA: %s\n' "$source"
 }
 
