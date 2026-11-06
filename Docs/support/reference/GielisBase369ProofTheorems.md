@@ -600,3 +600,16 @@ mechanism/measurement and original-scene controls remain OPEN.
 - E16: new-scene first-hit evidence and conditional uniform-ray
   simultaneous intervals **MODELED**, old HTML SDF and measured
   torque/calibration/replication **OPEN**.
+
+### P2 native Bishop reuse clarification
+
+The existing concrete same-object bridge is not hypothetical new Gielis apparatus:
+
+- DASHI/Analysis/BishopRound11ClassicalTrigObjectWeldExact.agda already has compileRound11Pythagorean and compileRound11DerivativeAuthority for the same Round11 data set.
+- DASHI/Analysis/TrigonometricPythagoreanSourceAuthorityExact.agda identifies NIST DLMF 4.21.12 as the classical source, and explicitly refuses to promote it to Bishop without the source-function weld.
+- GielisBishopPolynomialExact.agda now invokes compileRound11Pythagorean through an explicit witness W, rearranging sin^2+cos^2 to cos^2+sin^2 via BishopP.+-comm; this is a derived conditional transport, not proof that W is inhabited.
+- The canonical shared-weld status records sameTrigObjectWeldClosed=false. G02/G03 require this source equality, genuine constructive quadruple-angle and pi/square-root transport. Never fabricate W merely to mark the consumer theorem closed.
+
+### Original Kozyrev optical replay provenance
+
+The historical original was spiral_raymarch_collision_export_forward.html with spiral_collision_events_forward.json and referee_spiral_events.py. The original HTML raymarcher modeled a distance-based finite-thickness stroke, while the independent solver used normal-offset wall thickness. First-forward positional discrepancy: median/max Archimedean 1.414/1.499 mm, logarithmic 1.729/1.832 mm, segmented 1.349/1.431 mm, across 132/132 intersections. That geometrical wall-definition mismatch is a distinct G13 obstruction; all E16 384/1536 segment convergence figures are for a newly selected analytic open-spiral scene and cannot resolve the original apparatus without its actual source and event data.
