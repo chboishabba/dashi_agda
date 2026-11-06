@@ -171,6 +171,17 @@ def read_sbml(path: Path) -> dict:
     }
 
 
+def original_evidence_reference(record: object) -> str | None:
+    if not isinstance(record, dict):
+        return None
+    reference = record.get("reference")
+    if isinstance(reference, dict):
+        reference = reference.get("id")
+    if isinstance(reference, str) and reference.strip():
+        return reference.strip()
+    return None
+
+
 def explicit_joins(gocam: dict, sbml: dict, crosswalk: dict) -> list[dict]:
     rows = crosswalk.get("joins")
     if not isinstance(rows, list):
@@ -185,9 +196,9 @@ def explicit_joins(gocam: dict, sbml: dict, crosswalk: dict) -> list[dict]:
         for arc in activity["causal_associations"]:
             records.extend(arc["evidence"])
         evidence_by_activity[activity["id"]] = {
-            record.get("reference")
+            reference
             for record in records
-            if isinstance(record, dict) and isinstance(record.get("reference"), str)
+            if (reference := original_evidence_reference(record)) is not None
         }
     seen = set()
     out = []
