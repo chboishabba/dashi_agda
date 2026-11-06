@@ -141,3 +141,17 @@ for G01–G21, status, phases, dependencies and D0–D7.
 - [ ] G15/G16 measured optical power, wall reflectivity, physical torque/uncertainty and actual Pareto validation.
 
 Authoritative proof details: Docs/support/reference/GielisBase369ProofTheorems.md (E01–E16). Exact phase/deliverables/status: Docs/support/reference/GielisBase369Roadmap.md (P0–P5, D0–D7, G01–G21).
+ 
+### PR #1466 — Gielis max-cut update: canonical Kozyrev and certified discrete spectrum
+
+- [x] E17: rigorous Perron–Frobenius exact-rational first eigenvalue intervals for original raster FD 41x41 (m=3,6,9) and 61x61 (m=3). Original finite matrix eigenvalue error is certified independently of eigsh; **FD-to-continuum convergence remains OPEN G12b**.
+- [x] E18: Original Kozyrev implementation is **PR #1404** (head 337aabb), not an unknown repository. Exact epsilon-zero Gielis/log-spiral centreline identity. SHA-pinned adapter to original Kozyrev first-forward referee + RayLedger built.
+- [ ] E18 acceptance: run source-pinned normal-offset wall first-hit parity (G13b); separate original browser HTML SDF collisions and recorded event files G13c remain OPEN.
+- [x] E19: exact conditional P,R,eta,B radiation-pressure optical torque envelope, plus paired uniform-angle source Hoeffding contrast model. This is NOT independently measured apparatus torque/CI.
+- [ ] G02–G05/G08–G09: actual Bishop sin/cos same-object weld, double/quadruple-angle, pi, real inverse/sqrt and Agda Golden still OPEN. A native universal Bishop-real fourth-degree algebraic reduction now exists in source.
+- [ ] G07/G10/G19: Python Q(zeta36) 1296-pair exact results need native Agda character and reconstruction owner.
+- [ ] G15/G16: original apparatus measured power, reflectivity, mechanical torque, full controls, uncertainty and independent replication.
+- [ ] G21: exact-head parallel checker acceptance and PR #1404 cross-ref events and signed torque parity.
+
+Proof explanations E01–E19: Docs/support/reference/GielisBase369ProofTheorems.md.
+Authoritative G01–G21 obligations and deliverables: Docs/support/reference/GielisBase369Roadmap.md.
