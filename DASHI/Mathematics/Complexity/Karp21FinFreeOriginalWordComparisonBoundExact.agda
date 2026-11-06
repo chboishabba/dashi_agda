@@ -18,7 +18,7 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExac
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (length)
-open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s; _∸_)
 open import Data.Maybe.Base using (just)
 import Data.Nat.Properties as NatP
 
@@ -76,5 +76,5 @@ comparisonPolynomial n = Count.maxAddressComparisons n
 
 comparisonPolynomialClosed :
   (n : Nat) →
-  comparisonPolynomial n ≡ 2 * n * (n NatP.∸ suc zero)
+  comparisonPolynomial n ≡ 2 * n * (n ∸ suc zero)
 comparisonPolynomialClosed = Count.maxAddressComparisonsClosed
