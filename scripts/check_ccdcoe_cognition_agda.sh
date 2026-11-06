@@ -27,17 +27,17 @@ done
 python3 scripts/check_ccdcoe_cognitive_multiplex.py
 python3 scripts/check_ccdcoe_p3_causal_trialectic.py
 
-# A real Agda executable is mandatory. Never substitute source scanning or
-# Python enumeration for kernel verification.
-command -v agda >/dev/null || {
-  echo "Agda unavailable: structural tests pass, kernel verification OPEN" >&2
+# The repo's canonical Agda 2.9 parallel checker owns compiler resolution,
+# cache, resource guards and exact-head kernel receipts. No direct nix call.
+# Its nonzero exit remains fatal. The source --safe option on the generic
+# graph owner is enforced by Agda when this target is checked.
+test -f scripts/run_agda29_parallel_check.sh || {
+  echo "Canonical parallel_checker wrapper is missing; kernel verification OPEN" >&2
   exit 2
 }
 
-agda --safe -i . DASHI/Cognition/CCDCOEMultiplexGraphCutCoreExact.agda
-for file in "${modules[@]}"; do
-  agda -i . "$file"
-done
-agda -i . DASHI/Cognition/Everything.agda
+bash scripts/run_agda29_parallel_check.sh \
+  "${modules[@]}" \
+  DASHI/Cognition/Everything.agda
 
-echo "CCDCOE max-cut: all focused Agda owners and cognition aggregate accepted"
+echo "CCDCOE max-cut: canonical parallel_checker accepted all focused owners and cognition aggregate"
