@@ -211,3 +211,75 @@ Coxeter coordinates in 78=72+6 for Suzuki degree 12, the Heisenberg
 
 This alternative indexing is a **research target**, not a promoted
 Monster/VOA theorem and not a second presentation.
+
+
+## 2026-11-06 graph-derived 72+8 completion and 9/5, 27/13 comparison
+
+Added exact Agda:
+- `Y443ArmSwapOrbitMaxCutExact.agda`: literally swaps the two length-four
+  arms, gives all 12 node involution proofs and 144 exhaustive graph adjacency
+  equalities, and evaluates the fixed/moving relator counts from the actual
+  Y443 node/pair enumeration.
+- `Y443Relator72IndexedBidiExact.agda`: a literal tagged 80-relator
+  indexing that maps back to the ORIGINAL 80 word list by
+  `allTagsRecoverOriginal80Words`, plus exact predicate `core` and
+  `residual`, counts 72/8 and Coxeter-only counts 72/6.
+
+Graph automorphism census (independently evaluated):
+```
+  relation type        fixed       moving      total     C2 orbit classes
+  node involutions        4           8          12           8
+  adjacent pairs          3           8          11           7
+  nonadjacent pairs       7          48          55          31
+  Coxeter total          14          64          78          46
+  plus spider/central     2           0           2           2
+  all relation labels    16          64          80          48
+```
+
+There is a **structural**, not numerology-based, relator partition:
+```
+  Core72 =
+     all 55 nonadjacent-pair relations
+   + the 8 involutions on the two exchanged long arms
+   + the 8 edge relations on the two exchanged long arms
+   + the central-node involution
+   = 55+8+8+1 = 72.
+
+  CoxeterResidual6 =
+     short-arm b3,c3,d3 involutions (3)
+   + short-arm a-b3,b3-c3,c3-d3 edge relations (3).
+
+  FullResidual8 =
+     CoxeterResidual6 + spider + Ivanov f312 quotient.
+```
+
+This partition is invariant under the **two-long-arm swap at the level of
+relator roles**, with the spider and Ivanov relator retained as two
+distinguished singleton *tags*, not asserted to be fixed as literal words.
+It supplies a graph-selected 72+8 cut; it still does NOT canonically supply
+eight groups of nine nor a C3 phase transformation on the 72 indices.
+
+The earlier 55 and 11 numerical observations have a sharp
+**negative control**. The existing
+`BalancedTernaryAntipodal369OrbitHierarchyExact` proves
+```text
+9 = 1 + 2*4  ->  5 orbit classes,
+27 = 1 + 2*13 -> 14 orbit classes.
+```
+But *under the actual Y443 long-arm swap*,
+```text
+11 = 3 + 2*4 -> 7 edge orbit classes,
+55 = 7 + 2*24 -> 31 nonedge orbit classes.
+```
+These are **not** 9/5 or 27/13 antipodal quotient objects. The equal
+appearance of 4 exchanged edge pairs versus four antipodal pairs in
+the 9-carrier does not give a same-action equivalence: the former has
+three fixed edge relators, the latter one fixed centre. A different
+involution/conjugation action or nontrivial induced quotient must be
+explicitly implemented if the analytic J/Fricke/C3 tie is pursued.
+
+The selected 72 is real relator-index mathematics. `8*9` as an
+internal **product chart** remains a separate theorem requiring a
+typed 72-slot chart, a two-sided inverse, and a C3/Fricke commuting
+square. It must not replace the priority of importing JMD's actual
+ten-step words and identifying the selected Monster action.
