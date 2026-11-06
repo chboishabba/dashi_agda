@@ -38,3 +38,6 @@ import DASHI.Mathematics.Complexity.Karp21N21SameWordCountedAcceptanceExact
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelopeExact
+
+-- Native bit-weighted original-word comparison envelope (not a machine receipt).
+import DASHI.Mathematics.Complexity.Karp21N21BitWeightedComparisonEnvelopeExact
