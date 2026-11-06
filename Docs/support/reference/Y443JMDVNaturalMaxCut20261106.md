@@ -448,3 +448,66 @@ interpretation of these relations, nor the full path Coxeter element
 generator recovery theorem in Agda. The external Lean proof does
 establish those statements in its presented group, with source code
 now precisely identified.
+
+
+## Source-only A4 Coxeter path -> actual JMD beta^5 group theorem (new)
+
+**A0: finite source certificate.**
+`Y443JMDBetaFiveFiniteRewriteExact.agda` owns a literal
+35-move certificate that reduces
+`(x5 x6 x7 x8)^5` to the empty word:
+15 distant commutations, 10 adjacent braids and 10 involution
+cancellations. It proves both `betaFifthAllThirtyFiveMovesValid`
+and `betaFifthReducesToEmpty` by native finite evaluation.
+The independent Python
+`scripts/check_y443_jmd_beta5_rewrite_certificate.py`
+replays these *same* 35 operations and checks source adjacency at
+every position, producing the empty word.
+
+**A1: generic semantic soundness.**
+`Y443JMDBetaFiveSemanticCompilerExact.agda` proves that each
+valid local Coxeter rule preserves the interpretation in a
+`TM.GroupWithInverse`, derives `runSound` by induction on the
+operation list, proves `evalPower`, and compiles the native
+finite certificate into `betaOrderFiveFromFiniteCertificate`.
+Its `CoxeterA4LocalRules` record is indexed by the selected
+original nodes x5,x6,x7,x8; no arbitrary generator map.
+
+**A2: source relator consequences.**
+`Y443JMDNonadjacentRelatorConsequencesExact.agda` includes
+proof-relevant literal membership of all five relevant squares
+and all four x4-to-beta nonedges in the ORIGINAL 80-relator list.
+Its group derivation `commuteFromThreeSquares` proves
+x4 commutes with each beta generator; `e1CommutesBeta`
+composes these commutations over the literal source word.
+
+`Y443CoxeterRelatorSemanticLawsExact.agda` proves that the
+original adjacent word relation `(xy)^3=1`, together with
+source involutions, implies the braid law `xyx=yxy`.
+It uses literal relation membership, source word-power evaluation,
+and inverse uniqueness.
+
+**A3: original 80 -> local rules.**
+`Y443JMDA4RulesFromPresentationExact.agda` has exact
+relator-index witnesses for b2c2, b2d2, b2e2, c2d2,
+c2e2, d2e2 and the 4 beta-path node squares.
+It constructs the actual `CoxeterA4LocalRules` by exhaustive
+4-generator case analysis. Thus
+`betaFiveFromOriginal80Relators` requires only the selected
+`RelatorsSatisfied` witness; it does NOT postulate beta^5.
+
+**A4: recover the JMD pair witnesses.**
+`x4InPairWithNoExtraPowerPremise` and
+`betaInPairWithNoExtraPowerPremise` now chain the exact
+source relators to beta^5, then the group algebra proves
+w^5=x4 and w^6=beta and constructs concrete u/v words.
+
+**Status distinction:** these new modules are source-written and
+imported into the focused Agda golden root, but *Agda --safe kernel
+acceptance is not observed in this environment*. Hence this is a
+complete proposed source-level proof of the JMD **initial
+power-recovery stage**, not a certified cross-prover reproduction
+of the full JMD theorem. Full path-Coxeter endpoint recovery,
+actual all-node u/v witness, `NodeGeneration`, source Monster
+isomorphism, and literal `Aut_VOA(Vnatural)` identification
+remain separately identified.
