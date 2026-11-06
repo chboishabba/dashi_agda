@@ -15,6 +15,8 @@ on:
       - 'DASHI/Foundations/BishopMachinOriginalCayleyFormalSeriesExact.agda'
       - 'DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda'
       - 'DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda'
+      - 'DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda'
+      - 'DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda'
       - 'DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda'
       - 'DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda'
       - 'DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda'
@@ -118,6 +120,8 @@ jobs:
             DASHI/Foundations/BishopMachinOriginalCayleyFormalSeriesExact.agda
             DASHI/Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda
             DASHI/Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda
+            DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda
+            DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda
             DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda
             DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda
             DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda
