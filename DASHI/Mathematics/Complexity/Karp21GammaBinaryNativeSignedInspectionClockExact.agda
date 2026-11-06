@@ -16,6 +16,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Data.List.Base using (length)
+import Data.Nat.Properties as NatP
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
@@ -44,20 +45,10 @@ twoPassLinearBudget : Word.BitWord → Nat
 twoPassLinearBudget word =
   suc (length word) + suc (length word)
 
--- Explicit addition monotonicity avoids treating the two machine
--- inspections as a single unit-cost arithmetic operation.
-+-mono-two :
-  {a b c d : Nat} → a ≤ b → c ≤ d → a + c ≤ b + d
-+-mono-two z≤n z≤n = z≤n
-+-mono-two {a = zero} {b = suc b} z≤n (s≤s cd) =
-  s≤s (+-mono-two {a = zero} {b = b} z≤n cd)
-+-mono-two {a = suc a} {b = suc b} (s≤s ab) cd =
-  s≤s (+-mono-two {a = a} {b = b} ab cd)
-
 signedTokenInspectionLinear :
   (word : Word.BitWord) →
   signedTokenInspectionEnvelope word ≤ twoPassLinearBudget word
 signedTokenInspectionLinear word =
-  +-mono-two
+  NatP.+-mono-≤
     (Gamma.gammaNativeInspectionLinear word)
     (Signed.splitLastInspectionLinear word)
