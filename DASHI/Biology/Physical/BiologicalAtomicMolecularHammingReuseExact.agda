@@ -71,3 +71,51 @@ candidateEvidenceUnchangedByHistoryStep action candidate = refl
 -- constrained minimizer discharges geometric/chemical obligations only
 -- when its witnesses are supplied; the quantitative bridge retains
 -- stoichiometry, law, instrument and wet-lab authority separately.
+
+
+------------------------------------------------------------------------
+-- Source-pinned measured RNA transition with an independent history
+-- coordinate. This never assigns the original bacterial assay to a
+-- synthetic planarian treatment or claims its readout predicts morphology.
+------------------------------------------------------------------------
+import DASHI.Biology.Physical.OriginalDmscTwoGenotypeMeasuredExact as Dmsc
+import DASHI.Biology.Physical.BiologicalRNA9HammingExact as RNAMetric
+
+record OriginalRNA9PairAtHistory : Set where
+  constructor originalRNA9PairAtHistory
+  field
+    developmentalFrame : Biology.FiniteDevelopmentalFrame
+    measuredLeft : Dmsc.OriginalDmscMeasuredNineMer
+    measuredRight : Dmsc.OriginalDmscMeasuredNineMer
+    leftIsOriginal : measuredLeft ≡ Dmsc.originalOne
+    rightIsOriginal : measuredRight ≡ Dmsc.originalTwo
+
+canonicalOriginalPairAtHistory :
+  Biology.FiniteDevelopmentalFrame → OriginalRNA9PairAtHistory
+canonicalOriginalPairAtHistory historicalFrame =
+  originalRNA9PairAtHistory historicalFrame
+    Dmsc.originalOne Dmsc.originalTwo refl refl
+
+advanceOriginalPairHistory :
+  Finite.Intervention → OriginalRNA9PairAtHistory →
+  OriginalRNA9PairAtHistory
+advanceOriginalPairHistory action pair =
+  originalRNA9PairAtHistory
+    (Biology.nextFiniteFrame action
+      (OriginalRNA9PairAtHistory.developmentalFrame pair))
+    (OriginalRNA9PairAtHistory.measuredLeft pair)
+    (OriginalRNA9PairAtHistory.measuredRight pair)
+    (OriginalRNA9PairAtHistory.leftIsOriginal pair)
+    (OriginalRNA9PairAtHistory.rightIsOriginal pair)
+
+canonicalOriginalPairDistance :
+  (historicalFrame : Biology.FiniteDevelopmentalFrame) →
+  RNAMetric.hamming9
+    (Dmsc.OriginalDmscMeasuredNineMer.genomeRNA
+      (OriginalRNA9PairAtHistory.measuredLeft
+        (canonicalOriginalPairAtHistory historicalFrame)))
+    (Dmsc.OriginalDmscMeasuredNineMer.genomeRNA
+      (OriginalRNA9PairAtHistory.measuredRight
+        (canonicalOriginalPairAtHistory historicalFrame))) ≡ 1
+canonicalOriginalPairDistance historicalFrame =
+  RNAMetric.originalsOneSubstitution
