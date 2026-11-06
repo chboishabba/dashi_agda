@@ -1,3 +1,13 @@
+## 7 November 2026 — implemented D1 narrow original-source equivalence
+
+`YMClayD1OriginalCovarianceToR320Exact.agda` is the new source-written, regression-imported exact bridge: selected normalized T5 mixed-log Hessian at cutoff `n` = **same finite original measure's actual connected covariance** at `n`. It transports the single genuine physical rooted-shell bound to R320 in BOTH directions, and consumes it through already-written Route-S H1/R313/R296 to produce the selected R333 finite source. The single open hard estimate is the ORIGINAL, physically cutoff/volume-uniform covariance shell inequality; no separate formal-jet theorem, generic J oracle or second coarse density is needed.
+
+E1's genuine limiter is original Wilson physical cylinder tightness/convergence and full four-dimensional Schwinger/OS QFT axioms. The previously added general E1 limit-state adapter duplicated already-existing `YangMillsLiteralRealCylinderLimitPhysicalMeasureExact`, `YangMillsFinitePhysicalMeasureContinuumOS2Exact` and symmetry-limit owners; it was deleted. Reuse those existing source proofs. Keep D2 physical OS spectral semantics and N1 noncollapse independent.
+
+`parallel_checker` exact-head and trust receipt **not available**; the new theorem is source-written, not kernel certified. Do not claim Clay.
+
+---
+
 ## 7 November 2026 — canonical CLAY endpoint cut (supersedes oversized M.01–M.05 priority)
 
 The **authoritative minimum proof frontier** is now [`YMClayMinimalEndpointMaxCut20261107.md`](../physics/YMClayMinimalEndpointMaxCut20261107.md). Prior ten-gate and M.01–M.05 inventories are **implementation dependencies only**, not Clay prerequisites or the active priority list.
