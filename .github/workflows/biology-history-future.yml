@@ -17,6 +17,8 @@ on:
       - 'scripts/biological_measured_genotype_holdout.py'
       - 'scripts/prepare_shine_dalgarno_measured.py'
       - 'scripts/validate_biological_source_models.py'
+      - 'scripts/check_original_dmsc_holdout.py'
+      - 'scripts/check_original_dmsc_neutral_components.py'
       - 'scripts/check_biological_history_future_round23.sh'
       - '.github/workflows/biology-history-future.yml'
   workflow_dispatch:
@@ -57,6 +59,8 @@ jobs:
           python3 scripts/biological_si_kinetic_calibration.py --self-test
           python3 scripts/biological_measured_genotype_holdout.py --self-test
           python3 scripts/prepare_shine_dalgarno_measured.py --self-test
+          python3 scripts/check_original_dmsc_holdout.py --self-test
+          python3 scripts/check_original_dmsc_neutral_components.py --self-test
       - name: GO-CAM/SBML fail-closed intake regression
         run: python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
       - name: Golden Agda check
