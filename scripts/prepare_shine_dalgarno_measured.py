@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Adapt the ORIGINAL Shine-Dalgarno dmsC MAVE measurements, not inferred maps.
 
-Upstream: cmarti/shine_dalgarno/data/dmsc.csv, 2026 MBE msag023,
-DOI 10.1093/molbev/msag023. Source has Genotype and dmsC.1/.2/.3
+Upstream: cmarti/shine_dalgarno/data/dmsc.csv (2026 MBE msag023),
+original assay Kuo et al., Genome Research (2020),
+DOI 10.1101/gr.260182.119; 2026 analysis DOI 10.1093/molbev/msag023. Source has Genotype and dmsC.1/.2/.3
 replicate columns. Missing replicate values are NOT synthesized.
 Deterministic genotype-group splits prevent replicate leakage.
 Source file sha256, conversion parameters, split counts retained in manifest.
@@ -18,7 +19,8 @@ import math
 from collections import Counter
 from pathlib import Path
 
-SOURCE_DOI="10.1093/molbev/msag023"
+SOURCE_DOI="10.1101/gr.260182.119"
+ANALYSIS_DOI="10.1093/molbev/msag023"
 SAMPLES=("dmsC.1","dmsC.2","dmsC.3")
 
 
@@ -88,7 +90,8 @@ def convert(raw_path, output_path, manifest_path, *,trait_unit, salt="dashi-2026
         "authority":"source-measured-only-unpromoted",
         "source_repository":"https://github.com/cmarti/shine_dalgarno",
         "source_path":"data/dmsc.csv",
-        "source_doi":SOURCE_DOI,"original_file_sha256":source_sha,
+        "source_doi":SOURCE_DOI,"analysis_reuse_doi":ANALYSIS_DOI,
+        "original_file_sha256":source_sha,
         "split_salt":salt,
         "train_fraction":0.70,"validation_fraction":0.15,"test_fraction":0.15,
         "unit_or_scale_declared":trait_unit,
