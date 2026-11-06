@@ -55,10 +55,34 @@ def test():
     assert cov(w,left,right) == Q(2,9)
     assert cov(tuple(map(Q,(1,2,4))),left,right) == Q(10,49)
     assert cov(w,left,right) != cov(tuple(map(Q,(1,2,4))),left,right)
+    # R443 -> R445 -> R320 BIDI: the original fine Gibbs measure is
+    # pushed forward by a deterministic block.  Both marks MUST pull
+    # back to exactly the same fine law; replacing it by a bare uniform
+    # coarse law is an explicit false-positive negative control.
+    fine_weights = tuple(map(Q, (1,2,3,4,5,6)))
+    native_block = (0,0,0,1,1,2)
+    coarse_weights = tuple(
+        sum((fine_weights[i] for i in range(len(fine_weights))
+            if native_block[i] == j), Q(0))
+        for j in range(3))
+    assert coarse_weights == (Q(6),Q(9),Q(6))
+    coarse_left = tuple(map(Q, (0,1,2)))
+    coarse_right = tuple(map(Q, (2,0,1)))
+    fine_left = tuple(coarse_left[j] for j in native_block)
+    fine_right = tuple(coarse_right[j] for j in native_block)
+    assert formal_jet(fine_weights,fine_left,fine_right) == Q(-2,7)
+    assert cov(coarse_weights,coarse_left,coarse_right) == Q(-2,7)
+    assert formal_jet(fine_weights,fine_left,fine_right) == cov(
+        coarse_weights,coarse_left,coarse_right)
+    assert cov((Q(1),Q(1),Q(1)),coarse_left,coarse_right) == Q(-1,3)
+    assert cov((Q(1),Q(1),Q(1)),coarse_left,coarse_right) != cov(
+        coarse_weights,coarse_left,coarse_right)
     return {"status":"PASS_EXACT_RATIONAL_REFERENCE",
         "exhaustive_three_state_cases":count,
         "same_source_relabelings":6,
         "changed_measure_negative_control":"REJECTED",
+        "R445_blocked_pushforward_covariance":"EXACT_REFERENCE_PASS",
+        "bare_coarse_replacement_negative_control":"REJECTED",
         "actual_SU_N_Haar_calculus":"NOT_TESTED",
         "CMP116_source_applicability":"NOT_TESTED",
         "agda_kernel":"NOT_TESTED"}
