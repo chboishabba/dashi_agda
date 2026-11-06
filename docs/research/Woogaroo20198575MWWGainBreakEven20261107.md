@@ -27,7 +27,7 @@ Hence the submitted four-point gain has to survive serious science-based scrutin
 
 ## Exact proof implementation
 
-New golden [SensibLawWoogarooMWWGainThreshold20261107Exact.agda](../../DASHI/Law/SensibLawWoogarooMWWGainThreshold20261107Exact.agda) proves (via normalized Nat equalities) the exact 90/100 relations for g=2/3/4. [Exact rational checker](../../scripts/check_woogaroo_mww_gain_threshold.py) computes non-rounded break-even points and tests g=2,3,4. Independent local Python verification **was actually executed** in this conversation and numerically checked the four giant integer witnesses: [local signed computation output in conversation receipt](sandbox:/mnt/data/woogaroo_maxcut/mww_gain_threshold_independent_20261107.json). The Agda --safe kernel and in-repository parallel_checker **were NOT run**. Do not promote source-written Agda into kernel acceptance.
+New golden [SensibLawWoogarooMWWGainThreshold20261107Exact.agda](../../DASHI/Law/SensibLawWoogarooMWWGainThreshold20261107Exact.agda) proves (via normalized Nat equalities) the exact 90/100 relations for g=2/3/4. [Exact rational checker](../../scripts/check_woogaroo_mww_gain_threshold.py) computes non-rounded break-even points and tests g=2,3,4. Independent local Python verification **was actually executed** in this conversation and numerically checked the four giant integer witnesses: local exact-rational JSON receipt `mww_gain_threshold_independent_20261107.json` generated in the conversation runtime (not an in-repository certified artifact). The Agda --safe kernel and in-repository parallel_checker **were NOT run**. Do not promote source-written Agda into kernel acceptance.
 
 ## What changed, and what's still actually missing
 
