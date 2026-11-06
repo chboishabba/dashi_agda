@@ -277,8 +277,8 @@ AfterEndcapsForAllTimes :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Set
-AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits =
-  ∀ {timeIndex} (slot : Global.Slot timeIndex _) →
+AfterEndcapsForAllTimes {steps = steps} stateCoverage symbolCoverage globalBits =
+  ∀ {timeIndex} (slot : Global.Slot timeIndex steps) →
     Pattern.FrontPlain
       (Local.cells
         (Step.decodedAfterRow stateCoverage symbolCoverage slot globalBits))
