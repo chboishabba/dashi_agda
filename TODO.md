@@ -1,3 +1,19 @@
+## 2026-11-06 — YM #1444 constructive continuum / Clay steelman
+
+- [x] Write actual 4D same-original-Wilson constructive physical continuum conjecture with R443/R445/R320/R333/T5 proof owners, selected (a_n), (g_n), original Wilson Schwinger functional, expected OS (H), nontriviality, Ward/rotation and every compact simple (G): `Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md`.
+- [x] Implement new `YMClayRGLossBudgetToNonGaussianExact.agda` deriving cutoff-uniform finite noncollapse from reference-margin and summable RG charge loss, *then* constructing existing T5 nonGaussian certificate. **Agda kernel still pending.**
+- [x] Execute BIDI exact rational control scripts, reject Gaussian/OS-invalid/cutoff-only/trivial and wrong-source fixtures, test AF-motivated (1/n^2) sum and unsubtracted harmonic fail. **Toy references only**.
+- [x] Add all 13 `CLAY4.F1/A1/A2/A3/B1/C1/C2/D1/D2/D3/E1/E2/E3` to active phases, exact ledger, main roadmap and steelman atlas.
+- [ ] **F1** Agda accept original C3 target, pair/spectator 1,024 length and canonical-vector equality (source candidates not receipts).
+- [ ] **A1/A2** Literal original normalized (F_{n,L}) one-step UV defect and same-observable signed telescoping, deliver Bishop FastCauchyReal from existing T5 code.
+- [ ] **A3** Correct selected original gauge-invariant Path4 coercive compactness and original bounded-test-determining family, no generic fake Prokhorov measure.
+- [ ] **B1/C1/C2** Prove actual original CMP116 two-marked rooted shell weights and physical time envelope uniformly in (a_n,L); don't redo generic KP/Fubini or assume all-step Dobrushin.
+- [ ] **D1/D2/D3** Derive physical local OS norm (eta_2>0), one selected signed fourth cumulant (eta_4>0), same original charge (delta_n) and cutoff/volume-uniform loss budget.
+- [ ] **E1** Original Wilson RP + all reflected Gram + (E(4))/Ward/tempered regular local composite from same T5 continuum.
+- [ ] **E2** Dense original OS core, strong continuous physical semigroup and exact (H_{m OS}) same-source gap in physical units, no invisible subgap states.
+- [ ] **E3** Construct per compact-simple-(G) group physical action/representation coupling/renormalized source and full Clay semantic witnesses; no SU(N)-only scope promotion.
+- [ ] Pin exact-head Agda compiler root receipts + transitive trust audit; `--safe` not asserted for new source with historical unaudited T5 import.
+
 ## 2026-11-06 — YM proof-source / RG budget supplement
 
 See [phase-specific exact update](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). F1 three original 1024-link equality proof attempts source-written, **no Agda receipt**. New original physical-cube RG arithmetic derives q=q0+B, with 128-step exact rational reference but actual continuous SU(N)/CMP116/OS physical coefficients and compact-group coverage OPEN. Files: `YMClayNativeClosedThreeEqualitiesCandidateExact.agda`, `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`, `YMClayRGDriftOriginalGibbsInstantiationExact.agda` and `scripts/check_ym_rg_drift_budget_reference.py`. #1460 remains separate physical observer/KK lane; no child import. Full source contracts in `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md`.
