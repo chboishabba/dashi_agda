@@ -59,6 +59,53 @@ def assert_finite_counts() -> None:
             sum(map(len, monster))) == (310, 400, 463)
     assert SPIDER == ("a", "b1", "c1", "a", "b2", "c2", "a", "b3", "c3")
     assert CENTRAL == ("a", "b3", "c3", "d3", "b1", "c1", "b2")
+
+    # Independent C2 graph automorphism census: swap the two long arms.
+    swap = {n: (n[:-1] + "2" if n.endswith("1")
+                else n[:-1] + "1" if n.endswith("2") else n)
+            for n in NODES}
+    assert all(swap[swap[n]] == n for n in NODES)
+    assert all((frozenset((swap[a], swap[b])) in EDGES)
+               == (frozenset((a, b)) in EDGES) for a, b in pairs)
+    fixed_nodes = [n for n in NODES if swap[n] == n]
+    fixed_pairs = [p for p in pairs
+                   if frozenset(p) == frozenset((swap[p[0]], swap[p[1]]))]
+    fixed_edges = [p for p in fixed_pairs if frozenset(p) in EDGES]
+    fixed_nonedges = [p for p in fixed_pairs if frozenset(p) not in EDGES]
+    assert (len(fixed_nodes), len(fixed_pairs),
+            len(fixed_edges), len(fixed_nonedges)) == (4, 10, 3, 7)
+    moving_nodes = [n for n in NODES if swap[n] != n]
+    moving_edges = [p for p in adjacent if p not in fixed_edges]
+    moving_nonedges = [p for p in nonadjacent if p not in fixed_nonedges]
+    assert (len(moving_nodes), len(moving_edges),
+            len(moving_nonedges)) == (8, 8, 48)
+
+    # The canonical 72 block is ALL 55 nonedges + 8 moving nodes
+    # + 8 moving edge relators + the UNIQUE trivalent central node a.
+    core = ([("nonedge", p) for p in nonadjacent]
+            + [("square", n) for n in moving_nodes]
+            + [("edge", p) for p in moving_edges]
+            + [("square", "a")])
+    residual = ([("square", n) for n in ("b3", "c3", "d3")]
+                + [("edge", p) for p in fixed_edges]
+                + [("spider", None), ("central", None)])
+    assert len(core) == 72 and len(residual) == 8
+    alltags = ([("square", n) for n in NODES]
+               + [("edge" if frozenset(p) in EDGES else "nonedge", p)
+                  for p in pairs]
+               + [("spider", None), ("central", None)])
+    assert set(core).isdisjoint(residual)
+    assert set(core) | set(residual) == set(alltags)
+    assert len(alltags) == len(set(alltags)) == 80
+    assert len(fixed_edges) == 3 and len(fixed_nonedges) == 7
+    assert 78 == 72 + 6 and 80 == 72 + 8
+    # This C2 quotient has 7 edge-orbits, 31 nonedge-orbits:
+    # NOT the 5 classes of 9, nor the 14 classes of 27.
+    assert len(fixed_edges) + len(moving_edges) // 2 == 7
+    assert len(fixed_nonedges) + len(moving_nonedges) // 2 == 31
+    print("PASS arm-swap: fixed (node,edge,nonedge)=(4,3,7); moving=(8,8,48)")
+    print("PASS canonical Y443: all 55 nonedges +8 nodes +8 edges +centre=72; residual=8")
+
     print("PASS finite: 12 nodes / 11 edges / 55 nonedges / 78,79,80 relators / 310,400,463 letters")
 
 
