@@ -546,9 +546,14 @@ the actual Bishop sine/cosine tangent equals that parameter. Prove
 `quarterCos inputs ≃ quarterSin inputs` for the original atan-derived
 quarter; then feed the K05 product-derived double-angle proof to the
 existing `BishopMachinFirstPositiveSineZeroFromNativePhaseExact`.
-Its explicit `NativeSinePositiveBeforeMachinPi` (all `0<x<pi_M`)
-is a further independent sign/least-zero premise. A period or endpoint
-zero alone cannot justify uniqueness.
+Its `NativeSinePositiveBeforeMachinPi` (all `0<x<pi_M`)
+has **already been source-derived** in
+`BishopMachinPiGlobalSineSignFromTwoBallExact.agda` from the same
+K05 exponential product and quarter equality; it is NOT a further
+independent sign/least-zero premise. The existing terminal
+`round11MachinPiIsFirstPositiveSineZero` constructs the first-positive
+sine zero from just those two inputs. A period or endpoint zero *alone*
+still cannot justify uniqueness.
 
 ### Exact verification status and reproducibility
 
@@ -571,3 +576,23 @@ K05 **source-composed/kernel-open**, K04d-LOG **mathematically open**,
 K04d-CONTINUITY **mathematically open**,
 K05-PI **mathematically open**. No RH or other Millennium problem is
 claimed.
+
+
+### 2026-11-06 source audit correction: complete global sign already owned
+
+Golden `DASHI/Analysis/BishopMachinPiGlobalSineSignFromTwoBallExact.agda`
+constructs `round11SinePositiveBeforeMachinPi` and
+`round11MachinPiIsFirstPositiveSineZero`. Its only two nontrivial
+remaining *external inputs* are `Product.Round11ImaginaryExpMultiplicative
+inputs` and `Quad.quarterCos inputs ≃ Quad.quarterSin inputs`. The
+all-interior strict positivity is **proved in source**, using locatedness
+to split at `3/2<2`, the independently positive sine on `(0,2]`, and
+the Machin complement `pi_M-x` (bounded above by `23/14<2` for the
+upper region). The separate quarter positivity bound is already source
+owned by `BishopMachinQuarterStrictSineFromTwoBallExact.agda`.
+Thus K05-PI has **ONE independent mathematical analytic leaf** after
+K05-PRODUCT: the *actual* Bishop arctan/tangent-to-sine/cosine quarter
+identification. The constructive first-zero and global sign are consumers,
+not new assumptions; all remain golden-kernel-pending. CI now explicitly
+checks these three sign owners as well (coverage commit
+`aa0886ba8e99d48b86089a4c30ceca7e4b2ee1b8`).
