@@ -22,6 +22,7 @@ FILES = (
     "scripts/gielis_base369_experiments.py",
     "DASHI/Geometry/GielisBishopPolynomialExact.agda",
     "DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda",
+    "DASHI/Geometry/GielisSpectralSIScaleExact.agda",
 )
 THEOREMS = (
     "rotation3PreservesSignal", "rotation6PreservesSignal",
@@ -119,6 +120,19 @@ def source_audit(root: Path = ROOT) -> dict:
         "mechanicalOpticalTorqueIsSI",
         "torqueFromPowerOverSpeedAndRadius",
         "finiteInfluenceRowPowerBoundReuse",
+    ):
+        assert theorem in si,theorem
+    spectral=source["DASHI/Geometry/GielisSpectralSIScaleExact.agda"]
+    for theorem in (
+        "nativeSpectralDimensionMatchesSI",
+        "inverseAreaTimesAreaDimensionless",
+        "scaleEigenvalueSIScalar",
+    ):
+        assert theorem in spectral,theorem
+    for theorem in (
+        "modelOpticalTorqueHasActualMagnitude",
+        "modelOpticalTorqueWithDeflectionMagnitude",
+        "modelOpticalTorqueSIMagnitude",
     ):
         assert theorem in si,theorem
     roadmap=source[FILES[3]]
