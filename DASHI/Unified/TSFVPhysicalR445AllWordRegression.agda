@@ -7,3 +7,7 @@ module DASHI.Unified.TSFVPhysicalR445AllWordRegression where
 -- transitive axioms/physical identification.
 import DASHI.Physics.Foundations.TSVFOriginalR445AllWordActualPushforwardExact
   as OriginalR445AllWord
+
+-- Original native Wilson reflected all-word Gram, same physical finite Gibbs.
+import DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact
+  as OriginalR445ReflectedGram
