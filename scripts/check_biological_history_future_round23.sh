@@ -42,6 +42,7 @@ for theorem in \
 done
 
 python3 "$REGRESSION"
+python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; finite regression is not kernel acceptance." >&2
