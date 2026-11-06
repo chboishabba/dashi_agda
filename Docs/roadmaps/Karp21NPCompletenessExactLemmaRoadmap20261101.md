@@ -1,5 +1,14 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-06 — change in acceptance policy: executable referee, not more uncompiled proof candidates
+
+**Actual PR #1445 changes:** `scripts/referee_karp21_maxcut.sh` now lets `preflight` run without an Agda installation. Previously it called `agda --version` unconditionally after allowing the `preflight` mode, so all its actual existing Python bitword/gadget checks were blocked. **Kernel modes still abort with exit 127 if Agda is missing.** An explicit `AGDA_STDLIB_ROOT` can now be supplied to direct the compiler to a clean standard-library installation. `scripts/check_karp21_referee_no_agda.py` is a new isolation regression for this exact failure mode, run locally against equivalent referee control flow and now invoked by the actual referee. A new `.github/workflows/karp21-referee.yml` requests two separate PR/push jobs: Python source/executable preflight and actual hosted Ubuntu Agda typechecking of all referee Golden/integration roots. It records exact compiler version and captures diagnostics/artifacts; no paper proof, status marker or test-only result substitutes for a compilation receipt.
+
+**Acceptance rule:** P1/N21 `n21FinFreeVerifierSameWord` and every P0/P1/E20 proof candidate remain SOURCE WRITTEN / KERNEL UNVERIFIED until the CI job reports successful Agda typechecking at the *same commit*. Source import scans, absence of holes, differential Python tests and existence of CI workflow alone do not promote any gate. The current connected GitHub commit has **no returned PR workflow run**; CI execution/diagnostics remain outstanding. The referee's current all-mode is Agda typechecking of integration roots; an additional transitive `--safe` receipt is mandatory for any Golden root whose owner/import closure is not yet --safe.
+
+**Next decisive max cut:** Retrieve the first actual Agda compiler diagnostic from `Karp21FinFreeGammaGeneralSparseBudgetExact`, `Karp21FinFreeAllWordDecoderAgreementExact` or the focused `Karp21Everything` root and repair it IN PLACE. Once N21 is kernel accepted, pay the independent binary-native bit-complexity and `PR.polynomialTimeVerifier` clock. P0 SAT bit-tape/ Cook–Levin universal costed compiler, E20 actual polynomial transducer, E01–E19+E05 encoded reductions and all 21 NP memberships, and P3 `CertifiedKarpNetwork` are still OPEN. No new full NP-completeness chain or P≠NP result claimed.
+
+
 ## 2026-11-05 — N21 universal original decoder / verifier source-candidate, kernel and bit-clock still OPEN
 
 **GitHub PR #1445, focused Karp21 root updated.** Three new proof modules reduce the *actual* N21 binary gamma decoder gap without inventing an alternative graph language:
