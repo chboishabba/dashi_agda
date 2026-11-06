@@ -191,3 +191,37 @@ realization is constructed. **G01 remains OPEN until an actual
 paper-level E01–E11 proof details and the admissible conditional
 theorems; ordinary-real Agda proof terms and physical observation
 are separate acceptances.
+
+
+## November 6 proof round: E12–E16, phase and deliverable advancement
+
+Concrete mathematical and executable advances:
+
+- E12: Native Bishop Real universal quartic polynomial normal form, source-written using the existing Bishop ring solver. Actual Bishop trigonometric Pythagorean and quadruple-angle and pi proof terms still OPEN; no claim of Agda kernel success.
+- E13: Exact rational cyclotomic field Q(zeta36), 1296 Fourier-character orthogonality pairs and seven-mode 36-point reconstruction passed independent local execution. Native Agda complex Fourier instantiation OPEN.
+- E14: Rigorous all-eigenvalue continuum sector-domain relative error inequality, eps=55*m/(49*N), (1+eps)^(-2) <= lambda_k(sector)/lambda_k(smooth) <= (1-eps)^(-2). Local rational m=9,N=2048 certificate gives max error 0.993875%; Cartesian finite-difference solver numerical error remains OPEN.
+- E15: Explicit continuum Rayleigh–Ritz spectral first-eigenvalue upper bound lambda1(Omega3)<1273/264=4.82196969... by an H0^1 radial trial function; local SymPy exact integration passed.
+- E16: Independent analytic-first-hit versus polygon-first-hit validation on the NEW open log-Gielis spiral. A local independent 80-ray run found maximum 384-segment discrepancy 0.00022293 m, versus 1536-segment discrepancy 0.00001249 m, factor 17.85. The original HTML Kozyrev SDF scene remains unavailable and same-object legacy G13 is OPEN.
+- E16: Matched pseudo-random uniform ray source plus familywise Hoeffding intervals for focus and angular impulse, conditional on IID uniform source directions and bounded bounces. This cannot calibrate optical power or provide measured uncertainty for the older deterministic grid.
+
+New source files:
+
+    DASHI/Geometry/GielisBishopPolynomialExact.agda
+    scripts/gielis_cyclotomic36_exact.py
+    scripts/gielis_sector_spectral_certificate.py
+    scripts/gielis_rayleigh_spectral_bound.py
+    scripts/gielis_reflection_parity.py
+    scripts/gielis_optical_statistics.py
+
+**Phase/deliverable acceptance:** P2 ordinary mathematics advanced but Bishop Golden D2 OPEN; P3 exact Fourier and continuum sector spectral D3 subcertificates completed, full Cartesian finite-difference D3 OPEN; P4 new-scene collision and conditional statistics D4/D5 implemented, original-scene parity and physical calibration OPEN; P5 D6/D7 measurements/replication/publication OPEN. No P2–P5 blanket completion claim.
+
+Verification commands (these are instructions, NOT exact-head test receipts):
+
+    python scripts/gielis_cyclotomic36_exact.py
+    python scripts/gielis_sector_spectral_certificate.py --m 9 --sectors 2048
+    python scripts/gielis_rayleigh_spectral_bound.py
+    python scripts/gielis_reflection_parity.py --m 3 --epsilon .12 --rays 48
+    python scripts/gielis_optical_statistics.py --rays 720 --seed 369
+    scripts/check_gielis_base369_cut.sh
+
+Exact remaining native/empirical leaf list is the G01–G21 table above. Technical E01–E16 mathematical proofs and their nonpromotion conditions live in GielisBase369ProofTheorems.md.
