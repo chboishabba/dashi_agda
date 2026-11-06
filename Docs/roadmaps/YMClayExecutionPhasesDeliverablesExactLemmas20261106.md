@@ -1,3 +1,23 @@
+
+### 6 November R344 finding: the canonical CMP116 q=1/2 shell is ALREADY source-implemented
+
+`BalabanCMP116SharedMarkedDirectCalibrationRound344Exact` does not need a second generic exponential-carrier construction. Its existing `SharedMarkedDirectCMP116Source` gives the physical selected two-J/Hessian source with
+[
+\text{markedAnalyticShell}(d)\le\tfrac14 C_H\,2^{-d},
+\quad C_H\le1,
+\quad d_{\rm source}=t_{\rm selected},
+]
+and the selected spectrum's `quarter*halfPower(time)` envelope. **These are input fields to instantiate on the actual Wilson measure, not a new externally verified continuum rate.** The module already constructs `R342.LiteralTrajectoryCMP116Source` directly from R344. Its explicit selected physical source-facing leaves are (a) `literalSelectedDifferentiatedLocalization`, (b) `selectedSourceDistanceIsTime` with calibrated physical units, and (c) `hessianAnalyticConstantAtMostOne`.
+
+New terms appended to `YMClayCMP119122116SelectedProducerWeldExact.agda`:
+- `sameOriginalSharedMarkedHalfRateFiniteDecay`: **R344→R342→R467**, exact finite connected covariance upper, without invented q;
+- `sameOriginalSharedMarkedHalfRateYieldsGap`: **R344→R342→R467→R482**, selected transfer gap with rate-based positive-energy semantics and selected-limit closure, no independent positivity token.
+
+These are **SOURCE-WRITTEN, AGDA KERNEL UNVERIFIED** and preserve selected physical q/time as proof-relevant input. They do **not** magically establish the full physical rate at arbitrary lattice spacings: `d_source=t` must mean the appropriate physical time calibration, and the actual original same-Wilson marked source must supply the R344 assumptions. The local source crosswalk checker now audits **12 owners and 6 new proof terms**. This is a stricter, lower-debt completion route than generic block-Dobrushin q if Y.01/Y.02's actual original-source identification is proved.
+
+
+---
+
 ## 6 November 2026 — CMP119/CMP116/CMP122 source-first ORIGINAL-WILSON maximum cut
 
 **Canonical deep audit:** [CMP119/116/122 same-original-source and BIDI dossier](../physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md). **New golden code:** `DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda`. **Static readback contract:** `scripts/check_ym_cmp119116122_same_source_contract.py` (11 existing golden owners, 4 new source-written proof terms, source-drift/CI/conditional-status checks). The repository has substantial CMP119, 116 and 122 machinery already: do not re-prove Bałaban's general source theorems, normalized covariance algebra, KP, beta history, Prokhorov or OS implications.
