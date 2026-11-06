@@ -56,9 +56,9 @@ wireVariableFormula :
   Circuit.WireRef inputs gates →
   Cook.BooleanFormula
 wireVariableFormula (Circuit.inputWire index) =
-  Cook.variable (toℕ index)
+  Cook.formulaVar (toℕ index)
 wireVariableFormula {inputs} (Circuit.gateWire index) =
-  Cook.variable (gateVariableIndex inputs index)
+  Cook.formulaVar (gateVariableIndex inputs index)
 
 gateExpressionFormula :
   ∀ {inputs gates : Nat} →
@@ -84,7 +84,7 @@ gateConstraintFormula :
   Cook.BooleanFormula
 gateConstraintFormula {inputs} {gates} gate =
   Shared.equivalenceFormula
-    (Cook.variable (inputs + gates))
+    (Cook.formulaVar (inputs + gates))
     (gateExpressionFormula gate)
 
 programSharedConstraints :
@@ -113,7 +113,7 @@ circuitSharedConstraints circuit =
 formulaNodeCountPositive :
   (formula : Cook.BooleanFormula) →
   suc zero ≤ FormulaSize.formulaNodeCount formula
-formulaNodeCountPositive (Cook.variable index) =
+formulaNodeCountPositive (Cook.formulaVar index) =
   s≤s z≤n
 formulaNodeCountPositive (Cook.constant value) =
   s≤s z≤n
