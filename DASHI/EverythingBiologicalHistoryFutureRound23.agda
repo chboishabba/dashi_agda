@@ -13,6 +13,7 @@ import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact
 import DASHI.Biology.Physical.BiologicalEvidenceFeedbackFiniteExact
 import DASHI.Biology.Physical.SourceIndexedBiologicalCarrierExact
 import DASHI.Biology.Physical.BiologicalFuturePartitionCompilerExact
+import DASHI.Biology.Physical.BiologicalParametricStochasticLumpingExact
 import DASHI.Biology.Physical.BiologicalStochasticFutureLumpingExact
 import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact
 import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact
