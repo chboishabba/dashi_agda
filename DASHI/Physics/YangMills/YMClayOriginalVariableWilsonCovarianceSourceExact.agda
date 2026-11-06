@@ -35,6 +35,8 @@ import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as 
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductCongruence
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
@@ -267,6 +269,56 @@ module _
     actualE1D1SameWilsonConnectedCovariance n
       originalLocalPlaquetteTraceSection
       originalLocalPlaquetteTraceSection
+
+  -- Actual TWO LOCAL Wilson insertions, at arbitrary physically
+  -- selected plaquettes on the ORIGINAL varying four-torus. This is
+  -- the original same-source real two-J direction, NOT the rational
+  -- R320/T5 source carrier.
+  originalLocalPlaquetteTraceAt :
+    (n : Nat) → Plaquette.PeriodicPlaquette n → Test n
+  originalLocalPlaquetteTraceAt n p links =
+    Trace.matrixWilsonValue traceData
+      (Variable.periodicSUNPositivePlaquette theory n links p)
+
+  originalLocalPlaquetteTraceAtGaugeInvariant :
+    (n : Nat) (p : Plaquette.PeriodicPlaquette n) →
+    originalGaugeInvariant n (originalLocalPlaquetteTraceAt n p)
+  originalLocalPlaquetteTraceAtGaugeInvariant n p gamma links =
+    Variable.periodicSUNPositivePlaquetteGaugeTrace
+      theory traceData n links gamma p
+
+  originalLocalPairProductGaugeInvariant :
+    (n : Nat) (p q : Plaquette.PeriodicPlaquette n) →
+    originalGaugeInvariant n
+      (λ links →
+        originalLocalPlaquetteTraceAt n p links
+        *ℝ originalLocalPlaquetteTraceAt n q links)
+  originalLocalPairProductGaugeInvariant n p q =
+    originalGaugeInvariantProduct n
+      (originalLocalPlaquetteTraceAt n p)
+      (originalLocalPlaquetteTraceAt n q)
+      (originalLocalPlaquetteTraceAtGaugeInvariant n p)
+      (originalLocalPlaquetteTraceAtGaugeInvariant n q)
+
+  -- The actual original *real* mixed-log two-source jet computes
+  -- the ORIGINAL two-local-plaquette covariance, at every n.
+  -- This is a finite SOURCE IDENTITY, not a physical decay proof.
+  originalTwoLocalWilsonMixedLogIsOriginalD1Covariance :
+    (n : Nat) (p q : Plaquette.PeriodicPlaquette n) →
+    Cumulant.literalMixedSecondLogDerivative
+      (Original.originalWilsonLiteralJetDirections
+        theory traceData exponential beta oneLink bilateral divide n)
+      (originalLocalPlaquetteTraceAt n p)
+      (originalLocalPlaquetteTraceAt n q)
+    ≡
+    originalWilsonConnectedCovariance n
+      (originalLocalPlaquetteTraceAt n p)
+      (originalLocalPlaquetteTraceAt n q)
+  originalTwoLocalWilsonMixedLogIsOriginalD1Covariance n p q =
+    Original.originalWilsonMixedJetIsSameFiniteCovariance
+      theory traceData exponential beta oneLink bilateral divide n
+      (originalLocalPlaquetteTraceAt n p)
+      (originalLocalPlaquetteTraceAt n q)
 
   -- The existing original six-plaquette action density is the
   -- ACTUAL selected Wilson cylinder generator, at EVERY variable
