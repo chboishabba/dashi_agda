@@ -1,3 +1,44 @@
+## 6 November 2026 — selected physical-cube CMP116 / R445 / R333 exact lemma cut
+
+**Source owners reused (do not reconstruct):** `BalabanFiniteDobrushinReopeningExact`, `BalabanFiniteNormalizedWeightDobrushinExact`, `BalabanFiniteBoundaryConditionedDobrushinExact`, `BalabanFiniteRGReopeningDobrushinExact`, `BalabanCMP116PublishedLiteralSelectedRound467Exact`, `BalabanCMP116ModeSelectedSubgapClusteringBidiExact`, `BalabanCMP116PublishedLiteralToGapRound479Exact`, `BalabanClayT5ClusteringToTransferGapExact`, `BalabanClayUniformPerronContractionExact`, `BalabanPublishedUVStabilityNonlinearRGCoreExact`. **CMP116 is widely implemented**; its selected R467 `literalSelectedCMP116Localization` and physical envelope are physically uninhabited record fields, not closed selected theorems.
+
+| ID | Exact producer | Status |
+|---|---|---|
+| PCUBE.F01 | `YMClayPhysicalCubeDobrushinFromGibbsExact.physicalCubeCellLength` and literal original physical-cube equality `cells(a) a = ell` | SOURCE; equality required of actual cutoff schedule; Agda pending |
+| PCUBE.F02 | `originalConditionalRowsUniformlyContract`, original normalized Gibbs conditional L1 `≤q` from original relative epsilon and uniform `2eps≤q` | SOURCE / CONDITIONAL; actual q premise unpaid, Agda pending |
+| PCUBE.F03 | `originalConditionalObservableUniformlyContract`, exact original local observable oscillation `≤A q` | SOURCE / CONDITIONAL; actual q premise unpaid, Agda pending |
+| PCUBE.F04 | `scripts/check_ym_physical_cube_perron_certificate.py`: exact rational `Cw≤qw`, finite-power and wrong-source/geometry rejection | REFERENCE ONLY; independent 101-power 4×4 check passed; committed selftest/CI execution pending |
+| PCUBE.P01–P03 | Selected original SU(N) Borel Haar/gauge/R445 weighted conditional, physical cube calibration and RP-compatible map | OPEN PHYSICAL |
+| PCUBE.P04 | All cutoffs and volumes same normalized block conditionals, one strict weighted `q<1` in physical units | OPEN ANALYTIC decisive |
+| PCUBE.P05 | Literal selected R467 common-domain mixed-J CMP116 and uniform physical exponential `q^{r}` | OPEN PHYSICAL source application |
+| PCUBE.P06 | Same OS H semigroup, density of selected local modes, no spectral pollution, `Δ≥-log(q)/ell` | OPEN PHYSICAL |
+| PCUBE.P07 | Nontrivial 4D continuum QFT and all compact simple groups | OPEN CLAY |
+
+**Quantitative negative control:** finite-stage projective diameters (`BalabanClayUniformPerronContractionExact`) and a bare-link Dobrushin threshold are insufficient. This physical-block bound must hold for `b(a)=ell/a→∞` rather than a fixed number of fine links. All earlier source-count and 219-field semantics unchanged. See full theorem and 2D/3D/5D comparison: [physical-cube steelman](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md).
+
+---
+
+
+**6 Nov further F1 proof-code reduction:** `YMClayNativeOriginalSortDeciderExact.agda` contains constructive native `decideNativeMember`, `decideAllSelectable`, `proofFromYes`, closed `originalC3SelectableBooleanGoal` and parameterized original `originalPairSelectableBooleanGoal`, and two exact Boolean→canonical-vector compiler terms. `F1.0c` and `F1.0d` are **SOURCE_PENDING**. `F1.1`, `F1.2` and `F1.3` remain **OPEN** until their closed Boolean/length certificates are actually accepted by Agda. Native Nix CI workflow is `.github/workflows/ym-native-maxcut-exact-agda.yml`; no CI result claimed.
+
+# Active exact-lemma execution update — 6 November 2026
+
+Refer to [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md) for the **current phase, deliverables and acceptance**; the ledger below is the historical/complete source-indexed producer inventory.
+
+| Executable ID | Exact producer / goal | Status |
+|---|---|---|
+| F1.0a | `YMClayNativeOriginalSortMembershipCorrectExact.bubbleDesiredHeadWhenMember` | **SOURCE_PENDING**; new structural lemma, no Agda kernel receipt |
+| F1.0b | `YMClayNativeOriginalSortMembershipCorrectExact.originalSortToTargetCorrect`, given a proof-relevant `AllSelectable` trace | **SOURCE_PENDING**; next construct original target traces without assuming final equality |
+| F1.1 | `YMClayNativeC3AdjacentSortProgramExact.constructedNativeC3CanonicalLabelGoal` | **OPEN**; C3 target trace/bijection + Agda acceptance |
+| F1.2 | `YMClayNativeSideFourPairSpectatorSortProgramExact.originalPairSpectatorLengthGoal` | **OPEN**; 128 selected + 896 complementary original labels |
+| F1.3 | `YMClayNativeSideFourPairSpectatorSortProgramExact.originalPairSpectatorCanonicalLabelGoal` | **OPEN**; pair target trace/bijection + Agda acceptance |
+| V00 | Pinned Agda/stdlib/kernel clean check | **OPEN**; Agda not available in local runtime |
+| V02 | `scripts/check_ym_sort_selectability_reference.py` | **REFERENCE PASS**: 5,914 exhaustive permutations, 1024+1024 original select steps, swap counts 46,592/41,792, invalid-target controls |
+
+**Producer-count policy:** no original 67-entry or 219-field counts are decremented or inflated by the two new source helpers. They are sublemmas of F1.0, not physical witnesses. Existing R443 full CMP119/Haar, R445 RG, R320 CMP116, R333 OS and Clay remain OPEN. Do not call originalSort correctness unconditional: it requires a native `AllSelectable` certificate.
+
+---
+
 # Yang–Mills: canonical current exact-lemma ledger
 **Snapshot:** 4 November 2026, YM [PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444), stacked on Route-S #1440. PR #1460 is downstream TSVF/Lorentz/KK work, **not** a Clay YM proof premise.
 

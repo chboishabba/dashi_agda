@@ -1,3 +1,15 @@
+## 6 Nov 2026 — replacing weak bare-link Dobrushin with fixed physical cube
+
+The precise high-alpha analytic strategy, source crosswalk and dimensional donor separation now live in [YMClayPhysicalCubeDobrushinCMP116Transport20261106.md](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md). The prior (18\tanh(12\beta)) single-link estimate is merely a very conservative sufficient high-temperature criterion, irrelevant to weak-coupling continuum. The actual new target is a **uniform strict Dobrushin–Shlosman/Perron block conditional coefficient** at fixed physical `ell` for the original selected R445 Wilson-Gibbs pushforward, or a directly selected CMP116 rooted-polymer envelope for R467. The existing `BalabanClayUniformPerronContractionExact` already proves stagewise finite diameters do not imply uniform contraction. The exact q→m transport then feeds existing R479 and T5 same-H OS consumers, requiring full continuum/OS/nontrivial all-group physical data. Finite Gibbs compiler added, physical q not established.
+
+---
+
+# 6 November execution/steelman addendum
+
+The canonical active phase/deliverables table is [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). Phase F1 has moved from an unstructured large closed-conversion attempt to source-written structural membership/bubble/sort proof, leaving the two exact native target-selectability certificates and one length equality as next gates. The generic sorter theorem requires `AllSelectable`, which is a genuine proof premise; do not hide this as a closed C3 or blocking vector identity. Local 5,914+2×1024 selection-trace checks are finite Python reference, not Agda acceptance. R443 physical continuous Haar, selected CMP119 action, R445 uniform RG, R320 CMP116, R333 OS and Clay remain analytically unpaid.
+
+---
+
 # Yang–Mills physical max-cut: exact lemma atlas, steelman and bidirectional audit
 
 **Snapshot:** 4 November 2026. Independent four-dimensional Yang–Mills/Clay PR #1444 only. The TSVF/(3,1)/KK worker owns #1460 and is **not** an upstream premise for Clay Yang–Mills. The authoritative current 66-row producer ledger is `Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md`. The original 219-field inventory remains byte-preserved. Every claim below is either an existing source-owned theorem/candidate, a precise outstanding type, or a deliberately labelled *candidate mathematical statement*. No open physical result is promoted to proved. **Agda kernel acceptance is pending on all new sources.**
