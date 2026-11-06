@@ -142,6 +142,18 @@ headPairsScoreMatchesHistoricalCross x tail head bits =
     (emitHeadLinksScore (Gen.headLinks x tail) head bits)
     (headLinkCutMatchesHistoricalCross x tail head bits)
 
+promoteTailEdgePreservesContribution :
+  ∀ {n} (e : Cut.SignedUndirectedEdge n)
+    (head : Bool) (tail : Vec.Vec Bool n) →
+  Cut.edgeContribution (Gen.promoteTailEdge e) (head Vec.∷ tail) ≡
+  Cut.edgeContribution e tail
+promoteTailEdgePreservesContribution e head tail
+  with Cut.differentLabels
+         (Vec.lookup tail (Cut.first e))
+         (Vec.lookup tail (Cut.second e))
+... | true = refl
+... | false = refl
+
 tailGraphPromotionPreservesCut :
   ∀ {n} (edges : List (Cut.SignedUndirectedEdge n))
     (head : Bool) (tail : Vec.Vec Bool n) →
@@ -150,7 +162,8 @@ tailGraphPromotionPreservesCut :
   Cut.edgeListCutValue edges tail
 tailGraphPromotionPreservesCut [] head tail = refl
 tailGraphPromotionPreservesCut (e ∷ es) head tail =
-  cong₂ _+_ refl
+  cong₂ _+_
+    (promoteTailEdgePreservesContribution e head tail)
     (tailGraphPromotionPreservesCut es head tail)
 
 -- MAIN EXACT E20 FINITE GRAPH / HISTORICAL OBJECTIVE IFF SEAM.

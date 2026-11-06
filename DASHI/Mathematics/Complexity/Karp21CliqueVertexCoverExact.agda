@@ -62,10 +62,8 @@ cliqueToComplementCover :
     (complementSelection picked)
 cliqueToComplementCover adjacency picked clique u v distinct nonEdge
   with picked u in eqU | picked v in eqV
-... | false | _ =
-  inj₁ (cong negBool eqU)
-... | true | false =
-  inj₂ (cong negBool eqV)
+... | false | _ = inj₁ refl
+... | true | false = inj₂ refl
 ... | true | true =
   ⊥-elim (trueAndNegationImpossible (adjacency u v)
     (clique u v distinct eqU eqV) nonEdge)
@@ -89,11 +87,9 @@ complementCoverToClique :
   Clique adjacency picked
 complementCoverToClique adjacency picked cover u v distinct pickedU pickedV
   with adjacency u v in eqAdj
-... | true = eqAdj
+... | true = refl
 ... | false = ⊥-elim
-  (bothPickedImpossible
-    (cover u v distinct (trans (cong negBool eqAdj) refl))
-    pickedU pickedV)
+  (bothPickedImpossible (cover u v distinct (cong negBool eqAdj)) pickedU pickedV)
 
 karpCliqueCoverSemanticEquivalence :
   ∀ {Vertex : Set}

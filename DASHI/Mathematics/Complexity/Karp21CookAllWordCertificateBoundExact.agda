@@ -35,12 +35,12 @@ k00StrictAcceptedWordCertificateBound :
   Verifier.verifyStrictCookSATWord word bits ≡ true →
   Word.encodingSize bits ≤ Word.encodingSize word
 k00StrictAcceptedWordCertificateBound word bits verified
-  with Strict.strictDecodeCookFormulaBits word
+  with Strict.strictDecodeCookFormulaBits word in eqWord
 ... | nothing = ⊥-elim (Golden.falseNotTrue verified)
 ... | just formula =
   subst
     (λ actualWord →
       Word.encodingSize bits ≤ Word.encodingSize actualWord)
-    (Canonical.k00StrictAcceptedWordCanonicalReencode word formula refl)
+    (Canonical.k00StrictAcceptedWordCanonicalReencode word formula eqWord)
     (Verifier.cookExecutableCertificateCanonicalSize
       formula bits verified)

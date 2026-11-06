@@ -40,13 +40,12 @@ endpointConsistentCounted :
 endpointConsistentCounted vertex selected [] =
   true , zero
 endpointConsistentCounted vertex selected ((other , observed) ∷ rest)
-  with NatP._≟_ vertex other
-... | yes _ with endpointConsistentCounted vertex selected rest
-...   | status , checks =
+  with endpointConsistentCounted vertex selected rest
+... | status , checks with NatP._≟_ vertex other
+...   | yes _ =
   Boolean.andBool
     (Boolean.boolEqual selected observed) status , suc checks
-... | no _ with endpointConsistentCounted vertex selected rest
-...   | status , checks = status , suc checks
+...   | no _  = status , suc checks
 
 -- On empty history the original owner reduces to true. Keep the
 -- instrumented base a direct definitional witness, not a decision flag.

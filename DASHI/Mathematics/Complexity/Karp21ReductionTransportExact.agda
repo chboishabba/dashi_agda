@@ -60,8 +60,8 @@ transportNPComplete :
   PR.InNP cost target →
   PR.NPComplete cost target
 transportNPComplete composition complete reduction targetNP = record
-  { PR.targetInNP = targetNP
-  ; PR.everyNPLanguageReduces = λ language languageNP →
+  { targetInNP = targetNP
+  ; everyNPLanguageReduces = λ language languageNP →
       PR.composeReduction composition
         (PR.everyNPLanguageReduces complete language languageNP)
         reduction

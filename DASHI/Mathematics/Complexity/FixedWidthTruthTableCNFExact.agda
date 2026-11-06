@@ -31,6 +31,12 @@ andBool : Bool → Bool → Bool
 andBool false right = false
 andBool true right = right
 
+falseNotTrue : false ≡ true → ⊥
+falseNotTrue ()
+
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
+
 data Bits : Nat → Set where
   []ᵇ : Bits zero
   _∷ᵇ_ : ∀ {n} → Bool → Bits n → Bits (suc n)
@@ -153,14 +159,10 @@ evaluateLiftClause :
   evaluateClause (liftClause clause) (bit ∷ᵇ bits)
   ≡ evaluateClause clause bits
 evaluateLiftClause [] bit bits = refl
-evaluateLiftClause (literal ∷ literals) bit bits
-    with literal
-... | positive index
-    with evaluateLiftClause literals bit bits
-... | refl = refl
-... | negative index
-    with evaluateLiftClause literals bit bits
-... | refl = refl
+evaluateLiftClause (positive index ∷ literals) bit bits
+  rewrite evaluateLiftClause literals bit bits = refl
+evaluateLiftClause (negative index ∷ literals) bit bits
+  rewrite evaluateLiftClause literals bit bits = refl
 
 oppositeHeadLiteral :
   ∀ {n} → Bool → Literal (suc n)
@@ -178,13 +180,11 @@ forbidClauseRejectsSelf :
   evaluateClause (forbidClause bits) bits ≡ false
 forbidClauseRejectsSelf []ᵇ = refl
 forbidClauseRejectsSelf (false ∷ᵇ bits)
-    with evaluateLiftClause (forbidClause bits) false bits
-       | forbidClauseRejectsSelf bits
-... | refl | refl = refl
+  rewrite evaluateLiftClause (forbidClause bits) false bits
+        | forbidClauseRejectsSelf bits = refl
 forbidClauseRejectsSelf (true ∷ᵇ bits)
-    with evaluateLiftClause (forbidClause bits) true bits
-       | forbidClauseRejectsSelf bits
-... | refl | refl = refl
+  rewrite evaluateLiftClause (forbidClause bits) true bits
+        | forbidClauseRejectsSelf bits = refl
 
 forbidClauseFalseImpliesEqual :
   ∀ {n} (forbidden candidate : Bits n) →
@@ -195,8 +195,7 @@ forbidClauseFalseImpliesEqual
     (false ∷ᵇ forbidden)
     (false ∷ᵇ candidate)
     rejected
-    with evaluateLiftClause (forbidClause forbidden) false candidate
-... | refl =
+  rewrite evaluateLiftClause (forbidClause forbidden) false candidate =
   prependFalseCongruence
     (forbidClauseFalseImpliesEqual forbidden candidate rejected)
   where
@@ -217,8 +216,7 @@ forbidClauseFalseImpliesEqual
     (true ∷ᵇ forbidden)
     (true ∷ᵇ candidate)
     rejected
-    with evaluateLiftClause (forbidClause forbidden) true candidate
-... | refl =
+  rewrite evaluateLiftClause (forbidClause forbidden) true candidate =
   prependTrueCongruence
     (forbidClauseFalseImpliesEqual forbidden candidate rejected)
   where
@@ -266,18 +264,17 @@ compiledRowsComplete :
   ≡ true
 compiledRowsComplete predicate [] assignment accepted = refl
 compiledRowsComplete predicate (row ∷ rows) assignment accepted
-    with predicate row
+    with predicate row in rowEq
 ... | true =
   compiledRowsComplete predicate rows assignment accepted
 ... | false
-    with evaluateClause (forbidClause row) assignment
+    with evaluateClause (forbidClause row) assignment in clauseEq
 ... | true =
   compiledRowsComplete predicate rows assignment accepted
 ... | false
-    with forbidClauseFalseImpliesEqual row assignment refl
+    with forbidClauseFalseImpliesEqual row assignment clauseEq
 ... | refl
-    with accepted
-... | ()
+    rewrite accepted = ⊥-elim (trueNotFalse rowEq)
 
 compiledRowsSoundAtMember :
   ∀ {n}
@@ -295,10 +292,7 @@ compiledRowsSoundAtMember predicate (row ∷ rows) assignment here cnfTrue
     with predicate assignment
 ... | true = refl
 ... | false
-    with forbidClauseRejectsSelf assignment
-... | rejected
-    with cnfTrue
-... | ()
+  rewrite forbidClauseRejectsSelf assignment = ⊥-elim (falseNotTrue cnfTrue)
 compiledRowsSoundAtMember predicate (row ∷ rows) assignment
     (there membership) cnfTrue
     with predicate row

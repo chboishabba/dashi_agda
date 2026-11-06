@@ -105,6 +105,15 @@ graphOfPositiveTarget (Source.scaledCompletePositive parts nonzero) =
 -- This deliberately does not assert equality of offDiagonal proofs.
 ------------------------------------------------------------------------
 
+e20ActualScaledGraphEndpointBounds :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
+  Order.AllCanonicalEdgeEndpoints
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+e20ActualScaledGraphEndpointBounds parts nonzero =
+  Order.sourceIndexedScaledCompleteGraphEndpoints
+    (Indexed.vectorOfList parts)
+
 e20ActualScaledGraphReconstructionScoreSame :
   (parts : List ℤ)
   (nonzero : Threshold.NonZero (Source.sourceTotal parts))
@@ -150,6 +159,24 @@ validateRawEdgesEncodedUpperPairs :
 validateRawEdgesEncodedUpperPairs parts nonzero labels =
   Validator.scaledCompleteRawValidatorCutScore
     (Indexed.vectorOfList parts) labels
+
+e20ScaledActualRawEdgeRoundTrip :
+  (parts : List ℤ)
+  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
+  (suffix : Word.BitWord) →
+  GraphWord.readRawEdges
+    (length (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero)))
+    (Encode.encodeEdgeWords
+      (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+      ++ suffix)
+  ≡ just
+      ( Raw.rawOfEdges
+          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+      , suffix )
+e20ScaledActualRawEdgeRoundTrip parts nonzero suffix =
+  Raw.readActualEdgeListWordSuffix
+    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
+    suffix
 
 -- The actual encoded edge payload decodes to the same raw triples,
 -- and precisely those triples are accepted by the source validator.
@@ -205,33 +232,6 @@ e20ActualScaledGraphStrictLex :
 e20ActualScaledGraphStrictLex parts nonzero =
   StrictLex.sourceIndexedScaledCompleteGraphStrictLex
     (Indexed.vectorOfList parts)
-
-e20ActualScaledGraphEndpointBounds :
-  (parts : List ℤ)
-  (nonzero : Threshold.NonZero (Source.sourceTotal parts)) →
-  Order.AllCanonicalEdgeEndpoints
-    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
-e20ActualScaledGraphEndpointBounds parts nonzero =
-  Order.sourceIndexedScaledCompleteGraphEndpoints
-    (Indexed.vectorOfList parts)
-
-e20ScaledActualRawEdgeRoundTrip :
-  (parts : List ℤ)
-  (nonzero : Threshold.NonZero (Source.sourceTotal parts))
-  (suffix : Word.BitWord) →
-  GraphWord.readRawEdges
-    (length (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero)))
-    (Encode.encodeEdgeWords
-      (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
-      ++ suffix)
-  ≡ Data.Maybe.Base.just
-      ( Raw.rawOfEdges
-          (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
-      , suffix )
-e20ScaledActualRawEdgeRoundTrip parts nonzero suffix =
-  Raw.readActualEdgeListWordSuffix
-    (Cut.edges (Actual.sourceIndexedWeightedGraph parts nonzero))
-    suffix
 
 positiveTargetGraphAcceptsIff :
   (target : Source.PositiveCutTarget) →

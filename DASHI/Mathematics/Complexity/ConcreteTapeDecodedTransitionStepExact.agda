@@ -6,8 +6,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -19,10 +21,35 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExac
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedWholeRowSemanticExact as WholeDecoded
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
+import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as Center
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeAfterUniqueFromLocalityExact as AfterUnique
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
+
+canonicalListLength_eq_coordinate :
+  ∀ {A : Set} (xs : List A) →
+  Canonical.listLength xs ≡ Coordinate.listLength xs
+canonicalListLength_eq_coordinate [] = refl
+canonicalListLength_eq_coordinate (_ ∷ xs) =
+  cong suc (canonicalListLength_eq_coordinate xs)
+
+decodeCellsCoordinateLength :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (count : Nat)
+    (bits : CNF.Bits (Decode.RowBitsWidth machine count)) →
+  Coordinate.listLength
+    (Decode.decodeCells {machine} stateCoverage symbolCoverage count bits)
+  ≡ count
+decodeCellsCoordinateLength {machine} stateCoverage symbolCoverage count bits =
+  trans
+    (sym (canonicalListLength_eq_coordinate (Decode.decodeCells {machine} stateCoverage symbolCoverage count bits)))
+    (Decode.decodeCellsLength {machine} stateCoverage symbolCoverage count bits)
 
 decodedBeforeRow :
   ∀ {machine steps cols timeIndex}
@@ -33,9 +60,9 @@ decodedBeforeRow :
     (timeSlot : Global.Slot timeIndex steps)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Local.TapeRow machine
-decodedBeforeRow stateCoverage symbolCoverage timeSlot globalBits =
-  Decode.decodeRow stateCoverage symbolCoverage _
-    (Global.rowSliceBits
+decodedBeforeRow {machine} {steps} {cols} stateCoverage symbolCoverage timeSlot globalBits =
+  Decode.decodeRow stateCoverage symbolCoverage cols
+    (Global.rowSliceBits {machine} {steps} {cols}
       (Global.sameSlotInSucc timeSlot) globalBits)
 
 decodedAfterRow :
@@ -47,9 +74,9 @@ decodedAfterRow :
     (timeSlot : Global.Slot timeIndex steps)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Local.TapeRow machine
-decodedAfterRow stateCoverage symbolCoverage timeSlot globalBits =
-  Decode.decodeRow stateCoverage symbolCoverage _
-    (Global.rowSliceBits
+decodedAfterRow {machine} {steps} {cols} stateCoverage symbolCoverage timeSlot globalBits =
+  Decode.decodeRow stateCoverage symbolCoverage cols
+    (Global.rowSliceBits {machine} {steps} {cols}
       (Global.nextSlotInSucc timeSlot) globalBits)
 
 decodedRowsSameLength :
@@ -62,23 +89,23 @@ decodedRowsSameLength :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Coordinate.listLength
     (Local.cells
-      (decodedBeforeRow
+      (decodedBeforeRow {machine} {steps} {cols}
         stateCoverage symbolCoverage timeSlot globalBits))
   ≡
   Coordinate.listLength
     (Local.cells
-      (decodedAfterRow
+      (decodedAfterRow {machine} {steps} {cols}
         stateCoverage symbolCoverage timeSlot globalBits))
 decodedRowsSameLength
-    {cols = cols}
+    {machine} {steps} {cols}
     stateCoverage symbolCoverage timeSlot globalBits =
   trans
-    (Decode.decodeCellsLength stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+    (decodeCellsCoordinateLength {machine} stateCoverage symbolCoverage cols
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits))
     (sym
-      (Decode.decodeCellsLength stateCoverage symbolCoverage cols
-        (Global.rowSliceBits
+      (decodeCellsCoordinateLength {machine} stateCoverage symbolCoverage cols
+        (Global.rowSliceBits {machine} {steps} {cols}
           (Global.nextSlotInSucc timeSlot) globalBits)))
 
 decodedTimeLocalityScan :
@@ -95,26 +122,91 @@ decodedTimeLocalityScan :
     timeSlot globalBits
     (Transition.allWindowStarts cols) →
   Character.TransitionLocalityScan machine
-    (WholeDecoded.ruleAtTime nonempty timeSlot globalBits)
-    (decodedBeforeRow
+    (WholeDecoded.ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
+    (decodedBeforeRow {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot globalBits)
-    (decodedAfterRow
+    (decodedAfterRow {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot globalBits)
-decodedTimeLocalityScan
+decodedTimeLocalityScan {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits semantics =
   record
-    { Character.ruleOccursInMachine =
+    { ruleOccursInMachine =
         Selector.decodeRuleOccurs nonempty
-          (Global.selectorSliceBits timeSlot globalBits)
-    ; Character.sameRowLength =
-        decodedRowsSameLength
+          (Global.selectorSliceBits {machine} {steps} {cols} timeSlot globalBits)
+    ; sameRowLength =
+        decodedRowsSameLength {machine} {steps} {cols}
           stateCoverage symbolCoverage timeSlot globalBits
-    ; Character.everyWindowLegal =
-        WholeDecoded.allRawWindowsSemanticToDecodedAllWindowsLegal
+    ; everyWindowLegal =
+        WholeDecoded.allRawWindowsSemanticToDecodedAllWindowsLegal {machine} {steps} {cols}
           stateCoverage symbolCoverage nonempty
           timeSlot globalBits semantics
     }
+
+StepBoundaryGuards :
+  ∀ {machine steps cols timeIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (timeSlot : Global.Slot timeIndex steps)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (interior :
+      Character.InteriorHeadConfiguration machine
+        (decodedBeforeRow {machine} {steps} {cols}
+          stateCoverage symbolCoverage timeSlot globalBits))
+    (semantics :
+      Scan.AllRawWindowsSemantic
+        stateCoverage symbolCoverage nonempty
+        timeSlot globalBits
+        (Transition.allWindowStarts cols)) →
+    Set
+StepBoundaryGuards {machine} {steps} {cols}
+    stateCoverage symbolCoverage nonempty
+    timeSlot globalBits interior semantics =
+  Pattern.FrontPlain
+    (Center.afterPrefix
+      (Center.centeredOccurrenceFromGlobalScan
+        (Character.localityScanToGlobalTransitionScan
+          (decodedTimeLocalityScan {machine} {steps} {cols}
+            stateCoverage symbolCoverage nonempty
+            timeSlot globalBits semantics)
+          interior)))
+  ×
+  Pattern.EndPlain
+    (Center.afterSuffix
+      (Center.centeredOccurrenceFromGlobalScan
+        (Character.localityScanToGlobalTransitionScan
+          (decodedTimeLocalityScan {machine} {steps} {cols}
+            stateCoverage symbolCoverage nonempty
+            timeSlot globalBits semantics)
+          interior)))
+
+AllTimeStepsBoundaryGuards :
+  ∀ {machine steps cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  Set
+AllTimeStepsBoundaryGuards {machine} {steps} {cols}
+    stateCoverage symbolCoverage nonempty globalBits =
+  ∀ {timeIndex} (timeSlot : Global.Slot timeIndex steps)
+    (interior :
+      Character.InteriorHeadConfiguration machine
+        (decodedBeforeRow {machine} {steps} {cols}
+          stateCoverage symbolCoverage timeSlot globalBits))
+    (semantics :
+      Scan.AllRawWindowsSemantic
+        stateCoverage symbolCoverage nonempty
+        timeSlot globalBits
+        (Transition.allWindowStarts cols)) →
+  StepBoundaryGuards
+    stateCoverage symbolCoverage nonempty
+    timeSlot globalBits interior semantics
 
 decodedAdjacentRowsFormMachineStep :
   ∀ {machine steps cols timeIndex}
@@ -127,25 +219,29 @@ decodedAdjacentRowsFormMachineStep :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (interior :
       Character.InteriorHeadConfiguration machine
-        (decodedBeforeRow
-          stateCoverage symbolCoverage timeSlot globalBits)) →
-  Scan.AllRawWindowsSemantic
+        (decodedBeforeRow {machine} {steps} {cols}
+          stateCoverage symbolCoverage timeSlot globalBits))
+    (semantics :
+      Scan.AllRawWindowsSemantic
+        stateCoverage symbolCoverage nonempty
+        timeSlot globalBits
+        (Transition.allWindowStarts cols)) →
+  StepBoundaryGuards
     stateCoverage symbolCoverage nonempty
-    timeSlot globalBits
-    (Transition.allWindowStarts cols) →
+    timeSlot globalBits interior semantics →
   WF.WellFormedMachineStep machine
-    (decodedBeforeRow
+    (decodedBeforeRow {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot globalBits)
-    (decodedAfterRow
+    (decodedAfterRow {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot globalBits)
-decodedAdjacentRowsFormMachineStep
+decodedAdjacentRowsFormMachineStep {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
-    timeSlot globalBits interior semantics =
-  AfterUnique.localityScanWithInteriorGivesWellFormedStep
-    (decodedTimeLocalityScan
+    timeSlot globalBits interior semantics (frontGuard , endGuard) =
+  AfterUnique.localityScanWithInteriorGivesWellFormedStep {machine}
+    (decodedTimeLocalityScan {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty
       timeSlot globalBits semantics)
-    interior
+    interior frontGuard endGuard
 
 decodedStepAfterUnique :
   ∀ {machine steps cols timeIndex}
@@ -158,24 +254,27 @@ decodedStepAfterUnique :
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (interior :
       Character.InteriorHeadConfiguration machine
-        (decodedBeforeRow
+        (decodedBeforeRow {machine} {steps} {cols}
           stateCoverage symbolCoverage timeSlot globalBits))
     (semantics :
       Scan.AllRawWindowsSemantic
         stateCoverage symbolCoverage nonempty
         timeSlot globalBits
         (Transition.allWindowStarts cols)) →
+  StepBoundaryGuards
+    stateCoverage symbolCoverage nonempty
+    timeSlot globalBits interior semantics →
   WF.ExactlyOneHead
     (Local.cells
-      (decodedAfterRow
+      (decodedAfterRow {machine} {steps} {cols}
         stateCoverage symbolCoverage timeSlot globalBits))
-decodedStepAfterUnique
+decodedStepAfterUnique {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
-    timeSlot globalBits interior semantics =
+    timeSlot globalBits interior semantics guards =
   WF.afterExactlyOneHead
-    (decodedAdjacentRowsFormMachineStep
+    (decodedAdjacentRowsFormMachineStep {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty
-      timeSlot globalBits interior semantics)
+      timeSlot globalBits interior semantics guards)
 
 record DecodedTransitionStepReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

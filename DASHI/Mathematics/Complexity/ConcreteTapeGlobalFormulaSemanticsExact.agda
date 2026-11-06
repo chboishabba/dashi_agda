@@ -13,8 +13,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact wher
 -- carrier.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -32,8 +34,8 @@ baseTraceBits :
   ∀ {machine steps cols} →
   CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols) →
   CNF.Bits (Trace.GlobalTraceWidth machine steps cols)
-baseTraceBits assignment =
-  Rename.pullbackBits Endpoint.liftBaseIndex assignment
+baseTraceBits {machine} {steps} {cols} assignment =
+  Rename.pullbackBits (Endpoint.liftBaseIndex {machine} {steps} {cols}) assignment
 
 record SatisfyingGlobalFormulaSemantics
     {machine : Local.ConcreteTapeMachine}
@@ -42,7 +44,7 @@ record SatisfyingGlobalFormulaSemantics
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
-    (steps cols : Agda.Builtin.Nat.Nat)
+    (steps cols : Nat)
     (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols))
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) : Set where
@@ -51,17 +53,17 @@ record SatisfyingGlobalFormulaSemantics
       CNF.evaluateCNF
         (Transition.globalTransitionCNF
           stateCoverage symbolCoverage nonempty steps cols)
-        (baseTraceBits assignment)
+        (baseTraceBits {machine} {steps} {cols} assignment)
       ≡ true
 
     initialRowBitsExact :
       Rename.pullbackBits
-        Endpoint.initialRowExtendedRename
+        (Endpoint.initialRowExtendedRename {machine} {steps} {cols})
         assignment
       ≡ initialTarget
 
     acceptingFinalCell :
-      AcceptSound.DecodedAcceptingCell
+      AcceptSound.DecodedAcceptingCell {machine} {steps} {cols}
         stateCoverage symbolCoverage assignment
 
 open SatisfyingGlobalFormulaSemantics public
@@ -73,7 +75,7 @@ satisfyingGlobalFormulaSemantics :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
-    (steps cols : Agda.Builtin.Nat.Nat)
+    (steps cols : Nat)
     (initialTarget : CNF.Bits (Decode.RowBitsWidth machine cols))
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
@@ -86,17 +88,18 @@ satisfyingGlobalFormulaSemantics :
   SatisfyingGlobalFormulaSemantics
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget assignment
-satisfyingGlobalFormulaSemantics
+satisfyingGlobalFormulaSemantics {machine}
     stateCoverage symbolCoverage nonempty
     steps cols initialTarget assignment accepted =
   record
     { transitionCNFTrue = transitionTrueBase
     ; initialRowBitsExact =
-        (Endpoint.initialEndpointCNF_iff
-          initialTarget assignment).to
+        Endpoint._↔_.to
+          (Endpoint.initialEndpointCNF_iff {machine} {steps} {cols}
+            initialTarget assignment)
           (GlobalCNF.initialTrue parts)
     ; acceptingFinalCell =
-        AcceptSound.acceptingEndpointCNF_sound
+        AcceptSound.acceptingEndpointCNF_sound {machine} {steps} {cols}
           stateCoverage symbolCoverage assignment
           (GlobalCNF.acceptingTrue parts)
     }
@@ -112,19 +115,17 @@ satisfyingGlobalFormulaSemantics
 
     renamedEvaluation =
       Rename.renamedCNFEvaluation
-        Endpoint.liftBaseIndex
+        (Endpoint.liftBaseIndex {machine} {steps} {cols})
         transitionFormula
         assignment
 
     transitionTrueBase :
       CNF.evaluateCNF
         transitionFormula
-        (baseTraceBits assignment)
+        (baseTraceBits {machine} {steps} {cols} assignment)
       ≡ true
-    transitionTrueBase
-      with renamedEvaluation
-    ... | refl =
-      GlobalCNF.transitionTrue parts
+    transitionTrueBase =
+      trans (sym renamedEvaluation) (GlobalCNF.transitionTrue parts)
 
 record GlobalFormulaSemanticReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

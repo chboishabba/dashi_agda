@@ -60,10 +60,7 @@ sameWeightedEdgeContribution :
   SameWeightedEdgeFields original decoded →
   Cut.edgeContribution original labels
     ≡ Cut.edgeContribution decoded labels
-sameWeightedEdgeContribution original decoded labels fieldsSame
-  rewrite firstSame fieldsSame
-        | secondSame fieldsSame
-        | signedWeightSame fieldsSame =
+sameWeightedEdgeContribution (Cut.edge u v oOff w) (Cut.edge .u .v dOff .w) labels (same-weighted-edge refl refl refl) =
   refl
 
 data SameWeightedEdgeLists {n : Nat} :

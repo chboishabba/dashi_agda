@@ -26,6 +26,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.CookLevinCircuitGCTBoundary as Cook
 import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaPrefixCodecExact as Prefix
@@ -115,10 +116,7 @@ listLength :
   ∀ {A : Set} →
   List A →
   Nat
-listLength [] =
-  zero
-listLength (_ ∷ xs) =
-  suc (listLength xs)
+listLength = Prefix.listLength
 
 appendLength :
   ∀ {A : Set}
@@ -220,6 +218,8 @@ encodeTokenStreamLength (token ∷ tokens)
         (encodeTokenStream tokens)
       |
       tokenBitsLength token
+      |
+      NatP.*-suc (suc (suc (suc zero))) (listLength tokens)
       |
       encodeTokenStreamLength tokens =
   refl

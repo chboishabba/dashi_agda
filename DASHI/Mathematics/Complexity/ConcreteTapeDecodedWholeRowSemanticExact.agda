@@ -8,7 +8,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst; subst₂)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -32,6 +32,24 @@ import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 -- The indexed window list selected by raw allWindowStarts
 ------------------------------------------------------------------------
 
+decodedWindowsForStartsFromRows :
+  ∀ {machine cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (starts : List (Transition.SomeWindowStart cols))
+    (beforeBits afterBits : CNF.Bits (Decode.RowBitsWidth machine cols)) →
+  List
+    (Indexed.IndexedSixCellWindow machine
+      (Decode.decodeRow stateCoverage symbolCoverage cols beforeBits)
+      (Decode.decodeRow stateCoverage symbolCoverage cols afterBits))
+decodedWindowsForStartsFromRows stateCoverage symbolCoverage [] beforeBits afterBits = []
+decodedWindowsForStartsFromRows {machine} {cols} stateCoverage symbolCoverage
+    (Transition.some-window-start index start ∷ rest) beforeBits afterBits =
+  Same.decodedAdjacentWindowFromRows stateCoverage symbolCoverage start beforeBits afterBits
+  ∷ decodedWindowsForStartsFromRows stateCoverage symbolCoverage rest beforeBits afterBits
+
 decodedWindowsForStarts :
   ∀ {machine steps cols timeIndex}
     (stateCoverage :
@@ -44,23 +62,18 @@ decodedWindowsForStarts :
   List
     (Indexed.IndexedSixCellWindow machine
       (Decode.decodeRow stateCoverage symbolCoverage cols
-        (Global.rowSliceBits
+        (Global.rowSliceBits {machine} {steps} {cols}
           (Global.sameSlotInSucc timeSlot) globalBits))
       (Decode.decodeRow stateCoverage symbolCoverage cols
-        (Global.rowSliceBits
+        (Global.rowSliceBits {machine} {steps} {cols}
           (Global.nextSlotInSucc timeSlot) globalBits)))
-decodedWindowsForStarts stateCoverage symbolCoverage
-    timeSlot [] globalBits =
-  []
-decodedWindowsForStarts stateCoverage symbolCoverage
-    timeSlot
-    (Transition.some-window-start index start ∷ rest)
-    globalBits =
-  Same.decodedAdjacentWindow
-    stateCoverage symbolCoverage timeSlot start globalBits
-  ∷
-  decodedWindowsForStarts
-    stateCoverage symbolCoverage timeSlot rest globalBits
+decodedWindowsForStarts {machine} {steps} {cols} stateCoverage symbolCoverage
+    timeSlot starts globalBits =
+  decodedWindowsForStartsFromRows stateCoverage symbolCoverage starts
+    (Global.rowSliceBits {machine} {steps} {cols}
+      (Global.sameSlotInSucc timeSlot) globalBits)
+    (Global.rowSliceBits {machine} {steps} {cols}
+      (Global.nextSlotInSucc timeSlot) globalBits)
 
 ------------------------------------------------------------------------
 -- Legality transfers immediately through the P1 same-object equality
@@ -72,9 +85,9 @@ ruleAtTime :
     (timeSlot : Global.Slot timeIndex steps)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Local.TapeRule (Local.State machine) (Local.Symbol machine)
-ruleAtTime nonempty timeSlot globalBits =
+ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits =
   Selector.decodeRule nonempty
-    (Global.selectorSliceBits timeSlot globalBits)
+    (Global.selectorSliceBits {machine} {steps} {cols} timeSlot globalBits)
 
 semanticRule_eq_ruleAtTime :
   ∀ {machine steps cols timeIndex index}
@@ -91,8 +104,9 @@ semanticRule_eq_ruleAtTime :
         stateCoverage symbolCoverage nonempty
         timeSlot start globalBits) →
   Semantic.rule semantic
-  ≡ ruleAtTime nonempty timeSlot globalBits
+  ≡ ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits
 semanticRule_eq_ruleAtTime
+    {machine} {steps} {cols}
     {nonempty = nonempty}
     {timeSlot = timeSlot}
     {start = start}
@@ -101,7 +115,7 @@ semanticRule_eq_ruleAtTime
   trans
     (Semantic.ruleExact semantic)
     (cong (Selector.decodeRule nonempty)
-      (Same.rawSelectedRuleBits_eq_selectorSliceBits
+      (Same.rawSelectedRuleBits_eq_selectorSliceBits {machine} {steps} {cols}
         timeSlot start globalBits))
 
 rawSemanticToDecodedIndexedLegal :
@@ -117,37 +131,38 @@ rawSemanticToDecodedIndexedLegal :
   Scan.AllRawWindowsSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits starts →
-  IndexedScan.AllIndexedLegal
-    (ruleAtTime nonempty timeSlot globalBits)
-    (decodedWindowsForStarts
+  IndexedScan.AllIndexedLegal {machine}
+    (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
+    (decodedWindowsForStarts {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot starts globalBits)
-rawSemanticToDecodedIndexedLegal
+rawSemanticToDecodedIndexedLegal {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot [] globalBits Scan.semanticWindowsDone =
   IndexedScan.allIndexedNil
-rawSemanticToDecodedIndexedLegal
+rawSemanticToDecodedIndexedLegal {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot
     (Transition.some-window-start index start ∷ rest)
     globalBits
     (Scan.semanticWindowsStep current remaining) =
   IndexedScan.allIndexedCons currentLegal
-    (rawSemanticToDecodedIndexedLegal
+    (rawSemanticToDecodedIndexedLegal {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty
       timeSlot rest globalBits remaining)
   where
     currentLegal :
       Pattern.LegalWindowForRule machine
-        (ruleAtTime nonempty timeSlot globalBits)
+        (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
         (Indexed.forgetIndex
-          (Same.decodedAdjacentWindow
+          (Same.decodedAdjacentWindow {machine} {steps} {cols}
             stateCoverage symbolCoverage timeSlot start globalBits))
-    currentLegal
-      rewrite sym (semanticRule_eq_ruleAtTime current)
-            | sym (Same.decodedRawWindowEqualsAdjacentRowsWindow
-                stateCoverage symbolCoverage nonempty
-                timeSlot start globalBits) =
-      Semantic.legal current
+    currentLegal =
+      subst₂ (Pattern.LegalWindowForRule machine)
+        (semanticRule_eq_ruleAtTime {machine} {steps} {cols} current)
+        (trans (Semantic.windowExact current)
+          (Same.decodedRawWindowEqualsAdjacentRowsWindow {machine} {steps} {cols}
+            stateCoverage symbolCoverage nonempty timeSlot start globalBits))
+        (Semantic.legal current)
 
 ------------------------------------------------------------------------
 -- The only list-level same-object fact required above the local P1 theorem.
@@ -157,6 +172,69 @@ rawSemanticToDecodedIndexedLegal
 --   :: shift every window of the one-cell tail.
 -- Hence this is structural on cols.
 ------------------------------------------------------------------------
+
+decodedWindowsForStarts_mapShift :
+  ∀ {machine cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (starts : List (Transition.SomeWindowStart cols))
+    (beforeBits afterBits : CNF.Bits (Decode.RowBitsWidth machine (suc cols))) →
+  decodedWindowsForStartsFromRows stateCoverage symbolCoverage
+    (Transition.mapShiftWindowStarts starts) beforeBits afterBits
+  ≡
+  IndexedScan.mapShiftIndexedWindows
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Canonical.takeBits (Canonical.CellWidth machine) beforeBits))
+    (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+      (Canonical.takeBits (Canonical.CellWidth machine) afterBits))
+    (decodedWindowsForStartsFromRows stateCoverage symbolCoverage starts
+      (Canonical.dropBits (Canonical.CellWidth machine) beforeBits)
+      (Canonical.dropBits (Canonical.CellWidth machine) afterBits))
+decodedWindowsForStarts_mapShift stateCoverage symbolCoverage [] beforeBits afterBits = refl
+decodedWindowsForStarts_mapShift {machine} stateCoverage symbolCoverage
+    (Transition.some-window-start index start ∷ rest) beforeBits afterBits =
+  cong
+    (Same.decodedAdjacentWindowFromRows stateCoverage symbolCoverage (Raw.there start) beforeBits afterBits ∷_)
+    (decodedWindowsForStarts_mapShift stateCoverage symbolCoverage rest beforeBits afterBits)
+
+decodedAllStarts_eq_indexedScanFromRows :
+  ∀ {machine cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (beforeBits afterBits : CNF.Bits (Decode.RowBitsWidth machine cols)) →
+  decodedWindowsForStartsFromRows stateCoverage symbolCoverage
+    (Transition.allWindowStarts cols) beforeBits afterBits
+  ≡
+  IndexedScan.scanIndexedWindows machine
+    (Decode.decodeRow stateCoverage symbolCoverage cols beforeBits)
+    (Decode.decodeRow stateCoverage symbolCoverage cols afterBits)
+decodedAllStarts_eq_indexedScanFromRows {cols = zero} stateCoverage symbolCoverage beforeBits afterBits = refl
+decodedAllStarts_eq_indexedScanFromRows {cols = suc zero} stateCoverage symbolCoverage beforeBits afterBits = refl
+decodedAllStarts_eq_indexedScanFromRows {cols = suc (suc zero)} stateCoverage symbolCoverage beforeBits afterBits = refl
+decodedAllStarts_eq_indexedScanFromRows {machine} {cols = suc (suc (suc rest))}
+    stateCoverage symbolCoverage beforeBits afterBits =
+  cong (head ∷_)
+    (trans
+      (decodedWindowsForStarts_mapShift stateCoverage symbolCoverage
+        (Transition.allWindowStarts (suc (suc rest))) beforeBits afterBits)
+      (cong
+        (IndexedScan.mapShiftIndexedWindows
+          (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+            (Canonical.takeBits (Canonical.CellWidth machine) beforeBits))
+          (Canonical.decodeCell {machine} stateCoverage symbolCoverage
+            (Canonical.takeBits (Canonical.CellWidth machine) afterBits)))
+        (decodedAllStarts_eq_indexedScanFromRows {machine} {cols = suc (suc rest)}
+          stateCoverage symbolCoverage
+          (Canonical.dropBits (Canonical.CellWidth machine) beforeBits)
+          (Canonical.dropBits (Canonical.CellWidth machine) afterBits))))
+  where
+    head =
+      Same.decodedAdjacentWindowFromRows stateCoverage symbolCoverage
+        Raw.here beforeBits afterBits
 
 decodedAllStarts_eq_indexedScan :
   ∀ {machine steps cols timeIndex}
@@ -172,45 +250,17 @@ decodedAllStarts_eq_indexedScan :
   ≡
   IndexedScan.scanIndexedWindows machine
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits))
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.nextSlotInSucc timeSlot) globalBits))
-decodedAllStarts_eq_indexedScan
-    {cols = zero} stateCoverage symbolCoverage
-    timeSlot globalBits =
-  refl
-decodedAllStarts_eq_indexedScan
-    {cols = suc zero} stateCoverage symbolCoverage
-    timeSlot globalBits =
-  refl
-decodedAllStarts_eq_indexedScan
-    {cols = suc (suc zero)} stateCoverage symbolCoverage
-    timeSlot globalBits =
-  refl
-decodedAllStarts_eq_indexedScan
-    {machine} {steps} {cols = suc (suc (suc rest))}
+decodedAllStarts_eq_indexedScan {machine} {steps} {cols}
     stateCoverage symbolCoverage timeSlot globalBits =
-  decodedAllStartsSucc
-  where
-    -- This equality is definitionally driven by the two recursive scanners.
-    decodedAllStartsSucc :
-      decodedWindowsForStarts
-        stateCoverage symbolCoverage timeSlot
-        (Transition.allWindowStarts (suc (suc (suc rest))))
-        globalBits
-      ≡
-      IndexedScan.scanIndexedWindows machine
-        (Decode.decodeRow stateCoverage symbolCoverage
-          (suc (suc (suc rest)))
-          (Global.rowSliceBits
-            (Global.sameSlotInSucc timeSlot) globalBits))
-        (Decode.decodeRow stateCoverage symbolCoverage
-          (suc (suc (suc rest)))
-          (Global.rowSliceBits
-            (Global.nextSlotInSucc timeSlot) globalBits))
-    decodedAllStartsSucc = refl
+  decodedAllStarts_eq_indexedScanFromRows {machine} {cols}
+    stateCoverage symbolCoverage
+    (Global.rowSliceBits {machine} {steps} {cols} (Global.sameSlotInSucc timeSlot) globalBits)
+    (Global.rowSliceBits {machine} {steps} {cols} (Global.nextSlotInSucc timeSlot) globalBits)
 
 ------------------------------------------------------------------------
 -- P2: raw semantic scan -> actual Whole.AllWindowsLegal
@@ -222,10 +272,11 @@ allIndexedLegalToAllWindowsLegal :
       IndexedScan.AllIndexedLegal rule
         (IndexedScan.scanIndexedWindows machine before after)) →
   Whole.AllWindowsLegal machine rule before after
-allIndexedLegalToAllWindowsLegal {machine} {rule} {before} {after} legal
-    with IndexedScan.scanIndexed_forget machine before after
-... | refl =
-  go legal
+allIndexedLegalToAllWindowsLegal {machine} {rule} {before} {after} legal =
+  subst
+    (Whole.All (Pattern.LegalWindowForRule machine rule))
+    (IndexedScan.scanIndexed_forget machine before after)
+    (go legal)
   where
     go :
       ∀ {occurrences} →
@@ -252,57 +303,42 @@ allRawWindowsSemanticToDecodedAllWindowsLegal :
     timeSlot globalBits
     (Transition.allWindowStarts cols) →
   Whole.AllWindowsLegal machine
-    (ruleAtTime nonempty timeSlot globalBits)
+    (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits))
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.nextSlotInSucc timeSlot) globalBits))
-allRawWindowsSemanticToDecodedAllWindowsLegal
+allRawWindowsSemanticToDecodedAllWindowsLegal {machine} {steps}
     {cols = zero}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits Scan.semanticWindowsDone =
   Whole.allNil
-allRawWindowsSemanticToDecodedAllWindowsLegal
+allRawWindowsSemanticToDecodedAllWindowsLegal {machine} {steps}
     {cols = suc zero}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits Scan.semanticWindowsDone =
   Whole.allNil
-allRawWindowsSemanticToDecodedAllWindowsLegal
+allRawWindowsSemanticToDecodedAllWindowsLegal {machine} {steps}
     {cols = suc (suc zero)}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits Scan.semanticWindowsDone =
   Whole.allNil
 allRawWindowsSemanticToDecodedAllWindowsLegal
-    {machine} {cols = suc (suc (suc rest))}
+    {machine} {steps} {cols = suc (suc (suc rest))}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits semantics =
-  allIndexedLegalToAllWindowsLegal transported
-  where
-    rawLegal =
-      rawSemanticToDecodedIndexedLegal
+  allIndexedLegalToAllWindowsLegal {machine}
+    (subst
+      (IndexedScan.AllIndexedLegal {machine}
+        (ruleAtTime {machine} {steps} {suc (suc (suc rest))} nonempty timeSlot globalBits))
+      (decodedAllStarts_eq_indexedScan {machine} {steps} {suc (suc (suc rest))}
+        stateCoverage symbolCoverage timeSlot globalBits)
+      (rawSemanticToDecodedIndexedLegal {machine} {steps} {suc (suc (suc rest))}
         stateCoverage symbolCoverage nonempty
-        timeSlot (Transition.allWindowStarts _)
-        globalBits semantics
-
-    scanExact =
-      decodedAllStarts_eq_indexedScan
-        stateCoverage symbolCoverage timeSlot globalBits
-
-    transported :
-      IndexedScan.AllIndexedLegal
-        (ruleAtTime nonempty timeSlot globalBits)
-        (IndexedScan.scanIndexedWindows machine
-          (Decode.decodeRow stateCoverage symbolCoverage _
-            (Global.rowSliceBits
-              (Global.sameSlotInSucc timeSlot) globalBits))
-          (Decode.decodeRow stateCoverage symbolCoverage _
-            (Global.rowSliceBits
-              (Global.nextSlotInSucc timeSlot) globalBits))
-    transported
-      rewrite sym scanExact =
-      rawLegal
+        timeSlot (Transition.allWindowStarts (suc (suc (suc rest))))
+        globalBits semantics))
 
 
 
@@ -315,27 +351,35 @@ allWindowsLegalToAllIndexed :
   Whole.AllWindowsLegal machine rule before after →
   IndexedScan.AllIndexedLegal rule
     (IndexedScan.scanIndexedWindows machine before after)
-allWindowsLegalToAllIndexed {machine} {rule} {before} {after} legal
-    with IndexedScan.scanIndexed_forget machine before after
-... | scanEq =
-  recover
-    (IndexedScan.scanIndexedWindows machine before after)
-    legal scanEq
+allWindowsLegalToAllIndexed {machine} {rule} {before} {after} legal =
+  go (IndexedScan.scanIndexedWindows machine before after)
+    (subst
+      (Whole.All (Pattern.LegalWindowForRule machine rule))
+      (sym (IndexedScan.scanIndexed_forget machine before after))
+      legal)
   where
-    recover :
+    go :
       ∀ occurrences →
       Whole.All
         (Pattern.LegalWindowForRule machine rule)
-        (Whole.scanWindows machine before after) →
-      IndexedScan.mapForgetIndexed occurrences
-      ≡ Whole.scanWindows machine before after →
+        (IndexedScan.mapForgetIndexed occurrences) →
       IndexedScan.AllIndexedLegal rule occurrences
-    recover [] Whole.allNil refl =
+    go [] Whole.allNil =
       IndexedScan.allIndexedNil
-    recover (window ∷ rest)
-        (Whole.allCons current remaining) refl =
-      IndexedScan.allIndexedCons current
-        (recover rest remaining refl)
+    go (window ∷ rest) (Whole.allCons current remaining) =
+      IndexedScan.allIndexedCons current (go rest remaining)
+
+headAllIndexedLegal :
+  ∀ {machine rule before after w ws} →
+  IndexedScan.AllIndexedLegal {machine} rule {before} {after} (w ∷ ws) →
+  Pattern.LegalWindowForRule machine rule (Indexed.forgetIndex w)
+headAllIndexedLegal (IndexedScan.allIndexedCons legal _) = legal
+
+tailAllIndexedLegal :
+  ∀ {machine rule before after w ws} →
+  IndexedScan.AllIndexedLegal {machine} rule {before} {after} (w ∷ ws) →
+  IndexedScan.AllIndexedLegal {machine} rule {before} {after} ws
+tailAllIndexedLegal (IndexedScan.allIndexedCons _ rest) = rest
 
 decodedIndexedLegalToRawSemantic :
   ∀ {machine steps cols timeIndex}
@@ -347,28 +391,29 @@ decodedIndexedLegalToRawSemantic :
     (timeSlot : Global.Slot timeIndex steps)
     (starts : List (Transition.SomeWindowStart cols))
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  IndexedScan.AllIndexedLegal
-    (ruleAtTime nonempty timeSlot globalBits)
-    (decodedWindowsForStarts
+  IndexedScan.AllIndexedLegal {machine}
+    (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
+    (decodedWindowsForStarts {machine} {steps} {cols}
       stateCoverage symbolCoverage timeSlot starts globalBits) →
   Scan.AllRawWindowsSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits starts
-decodedIndexedLegalToRawSemantic
+decodedIndexedLegalToRawSemantic {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
-    timeSlot [] globalBits IndexedScan.allIndexedNil =
+    timeSlot [] globalBits legal =
   Scan.semanticWindowsDone
-decodedIndexedLegalToRawSemantic
+decodedIndexedLegalToRawSemantic {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot
     (Transition.some-window-start index start ∷ rest)
     globalBits
-    (IndexedScan.allIndexedCons current remaining) =
+    legal =
   Scan.semanticWindowsStep
     semanticCurrent
-    (decodedIndexedLegalToRawSemantic
+    (decodedIndexedLegalToRawSemantic {machine} {steps} {cols}
       stateCoverage symbolCoverage nonempty
-      timeSlot rest globalBits remaining)
+      timeSlot rest globalBits
+      (tailAllIndexedLegal legal))
   where
     semanticCurrent :
       Semantic.RawDecodedWindowSemantic
@@ -376,25 +421,25 @@ decodedIndexedLegalToRawSemantic
         timeSlot start globalBits
     semanticCurrent =
       record
-        { Semantic.rule =
-            ruleAtTime nonempty timeSlot globalBits
-        ; Semantic.window =
+        { rule =
+            ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits
+        ; window =
             Indexed.forgetIndex
-              (Same.decodedAdjacentWindow
+              (Same.decodedAdjacentWindow {machine} {steps} {cols}
                 stateCoverage symbolCoverage
                 timeSlot start globalBits)
-        ; Semantic.ruleExact =
+        ; ruleExact =
             sym
               (cong
                 (Selector.decodeRule nonempty)
-                (Same.rawSelectedRuleBits_eq_selectorSliceBits
+                (Same.rawSelectedRuleBits_eq_selectorSliceBits {machine} {steps} {cols}
                   timeSlot start globalBits))
-        ; Semantic.windowExact =
+        ; windowExact =
             sym
-              (Same.decodedRawWindowEqualsAdjacentRowsWindow
+              (Same.decodedRawWindowEqualsAdjacentRowsWindow {machine} {steps} {cols}
                 stateCoverage symbolCoverage nonempty
                 timeSlot start globalBits)
-        ; Semantic.legal = current
+        ; legal = headAllIndexedLegal legal
         }
 
 decodedAllWindowsLegalToRawSemantic :
@@ -407,38 +452,31 @@ decodedAllWindowsLegalToRawSemantic :
     (timeSlot : Global.Slot timeIndex steps)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
   Whole.AllWindowsLegal machine
-    (ruleAtTime nonempty timeSlot globalBits)
+    (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits)
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.sameSlotInSucc timeSlot) globalBits))
     (Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Global.nextSlotInSucc timeSlot) globalBits)) →
   Scan.AllRawWindowsSemantic
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits
     (Transition.allWindowStarts cols)
-decodedAllWindowsLegalToRawSemantic
+decodedAllWindowsLegalToRawSemantic {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
     timeSlot globalBits legal =
-  decodedIndexedLegalToRawSemantic
+  decodedIndexedLegalToRawSemantic {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty
-    timeSlot (Transition.allWindowStarts _)
-    globalBits transported
-  where
-    indexed =
-      allWindowsLegalToAllIndexed legal
-
-    transported :
-      IndexedScan.AllIndexedLegal
-        (ruleAtTime nonempty timeSlot globalBits)
-        (decodedWindowsForStarts
-          stateCoverage symbolCoverage timeSlot
-          (Transition.allWindowStarts _) globalBits)
-    transported
-      rewrite decodedAllStarts_eq_indexedScan
-        stateCoverage symbolCoverage timeSlot globalBits =
-      indexed
+    timeSlot (Transition.allWindowStarts cols)
+    globalBits
+    (subst
+      (IndexedScan.AllIndexedLegal {machine}
+        (ruleAtTime {machine} {steps} {cols} nonempty timeSlot globalBits))
+      (sym
+        (decodedAllStarts_eq_indexedScan {machine} {steps} {cols}
+          stateCoverage symbolCoverage timeSlot globalBits))
+      (allWindowsLegalToAllIndexed {machine} legal))
 
 record DecodedWholeRowSemanticReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

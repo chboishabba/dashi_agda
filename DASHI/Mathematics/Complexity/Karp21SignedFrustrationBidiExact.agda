@@ -25,7 +25,8 @@ module DASHI.Mathematics.Complexity.Karp21SignedFrustrationBidiExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
+open import Data.Product using (Σ; _,_; _×_)
+open import Data.Integer using (ℤ; +_; -[1+_]; -_; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 

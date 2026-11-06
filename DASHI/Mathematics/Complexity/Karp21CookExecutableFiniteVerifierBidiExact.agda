@@ -55,7 +55,7 @@ natEqualBoolSound :
   natEqualBool a b ≡ true → a ≡ b
 natEqualBoolSound a b accepted with NatP._≟_ a b
 ... | yes equal = equal
-... | no _ = Golden.falseNotTrue accepted
+... | no _ = ⊥-elim (Golden.falseNotTrue accepted)
 
 natEqualBoolComplete :
   (a b : Nat) →

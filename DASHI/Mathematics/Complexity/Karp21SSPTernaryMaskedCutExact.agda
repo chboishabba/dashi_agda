@@ -25,6 +25,7 @@ import Data.Fin.Base as Fin
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -_; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 
 import Data.Vec.Base as Vec

@@ -64,24 +64,25 @@ afterExtractedSuffixIsPlain :
   WF.PlainCells
     (Center.afterSuffix
       (Center.centeredOccurrenceFromGlobalScan scan))
-afterExtractedSuffixIsPlain scan afterUnique
+afterExtractedSuffixIsPlain {machine} {rule} scan afterUnique
+    with Center.centeredOccurrenceFromGlobalScan scan
+... | extracted
     with Center.configured extracted
-... | Local.realizes-left {b = written} {rightSymbol = rightSymbol}
-    with plainSuffixAfterHead
+... | Local.realizes-left {b = written} {rightSymbol = rightSymbol} =
+  extractSuffix
+    (plainSuffixAfterHead
       (Center.afterPrefix extracted)
       (Local.plain written
         ∷ Local.plain rightSymbol
         ∷ Center.afterSuffix extracted)
       (Prefix.transportUnique
         (Center.afterDecomposition extracted)
-        afterUnique)
-... | WF.plainCons (WF.plainCons suffixPlain) =
-  suffixPlain
+        afterUnique))
   where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
-
-afterExtractedSuffixIsPlain scan afterUnique
-    | Local.realizes-stay =
+    extractSuffix : ∀ {first second rest} →
+      WF.PlainCells (first ∷ second ∷ rest) → WF.PlainCells rest
+    extractSuffix (WF.plainCons (WF.plainCons suffixPlain)) = suffixPlain
+... | Local.realizes-stay =
   proj₂
     (Reconstruct.plainContextsAroundCenteredHead
       (Center.afterPrefix extracted)
@@ -89,21 +90,28 @@ afterExtractedSuffixIsPlain scan afterUnique
       (Prefix.transportUnique
         (Center.afterDecomposition extracted)
         afterUnique))
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
-
-afterExtractedSuffixIsPlain scan afterUnique
-    | Local.realizes-right {b = written} {leftSymbol = leftSymbol} =
+... | Local.realizes-right {b = written} {leftSymbol = leftSymbol} =
   plainSuffixAfterHead
     (Local.append
       (Center.afterPrefix extracted)
       (Local.plain leftSymbol ∷ Local.plain written ∷ []))
     (Center.afterSuffix extracted)
     (Prefix.transportUnique
-      (Center.afterDecomposition extracted)
+      (trans
+        (Center.afterDecomposition extracted)
+        (sym (Prefix.appendAssoc (Center.afterPrefix extracted) (Local.plain leftSymbol ∷ Local.plain written ∷ []) _)))
       afterUnique)
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+
+transportAfterPrefix :
+  ∀ {machine rule beforeCells}
+    {afterPrefix1 afterPrefix2 : List (Local.TapeCell (Local.State machine) (Local.Symbol machine))}
+    {suffix : List (Local.TapeCell (Local.State machine) (Local.Symbol machine))} →
+  afterPrefix2 ≡ afterPrefix1 →
+  Whole.All (Pattern.LegalWindowForRule machine rule)
+    (Whole.scanWindowsCells machine beforeCells (Local.append afterPrefix2 suffix)) →
+  Whole.All (Pattern.LegalWindowForRule machine rule)
+    (Whole.scanWindowsCells machine beforeCells (Local.append afterPrefix1 suffix))
+transportAfterPrefix refl h = h
 
 transportAllToCommonPrefix :
   ∀ {machine rule before after}
@@ -144,11 +152,12 @@ transportAllToCommonPrefix :
               (Center.centeredOccurrenceFromGlobalScan scan))
           ∷ Center.afterSuffix
             (Center.centeredOccurrenceFromGlobalScan scan))))
-transportAllToCommonPrefix scan refl =
-  Prefix.transportAllToDecomposedRows
-    (Center.beforeDecomposition extracted)
-    (Center.afterDecomposition extracted)
-    (Whole.everyWindowLegal scan)
+transportAllToCommonPrefix scan prefixEquality =
+  transportAfterPrefix (sym prefixEquality)
+    (Prefix.transportAllToDecomposedRows
+      (Center.beforeDecomposition extracted)
+      (Center.afterDecomposition extracted)
+      (Whole.everyWindowLegal scan))
   where
     extracted = Center.centeredOccurrenceFromGlobalScan scan
 
@@ -172,8 +181,11 @@ dropCommonPrefixScan :
       (oldLeft ∷ oldCenter ∷ oldRight ∷ oldSuffix)
       (newLeft ∷ newCenter ∷ newRight ∷ newSuffix))
 dropCommonPrefixScan [] legal = legal
-dropCommonPrefixScan (cell ∷ prefix) (Whole.allCons firstLegal restLegal) =
-  dropCommonPrefixScan prefix restLegal
+dropCommonPrefixScan (c1 ∷ []) (Whole.allCons firstLegal restLegal) = restLegal
+dropCommonPrefixScan (c1 ∷ c2 ∷ []) (Whole.allCons firstLegal restLegal) =
+  dropCommonPrefixScan (c2 ∷ []) restLegal
+dropCommonPrefixScan (c1 ∷ c2 ∷ c3 ∷ rest) (Whole.allCons firstLegal restLegal) =
+  dropCommonPrefixScan (c2 ∷ c3 ∷ rest) restLegal
 
 decomposedRowLengthsAgree :
   ∀ {machine rule before after}
@@ -242,6 +254,13 @@ cancelCommonPrefixAndTriple (_ ∷ prefix) equality =
   cancelCommonPrefixAndTriple prefix
     (NatP.suc-injective equality)
 
+transportLengthEquality :
+  ∀ {A : Set} {p1 p2 : List A} {t1 t2 : List A} →
+  p2 ≡ p1 →
+  Coordinate.listLength (Local.append p1 t1) ≡ Coordinate.listLength (Local.append p2 t2) →
+  Coordinate.listLength (Local.append p1 t1) ≡ Coordinate.listLength (Local.append p1 t2)
+transportLengthEquality refl eq = eq
+
 suffixLengthsAgree :
   ∀ {machine rule before after}
     (scan : Whole.GlobalTransitionScan machine rule before after) →
@@ -256,10 +275,10 @@ suffixLengthsAgree :
   ≡ Coordinate.listLength
       (Center.afterSuffix
         (Center.centeredOccurrenceFromGlobalScan scan))
-suffixLengthsAgree scan refl =
+suffixLengthsAgree scan prefixEquality =
   cancelCommonPrefixAndTriple
     (Center.beforePrefix extracted)
-    (decomposedRowLengthsAgree scan)
+    (transportLengthEquality (sym prefixEquality) (decomposedRowLengthsAgree scan))
   where
     extracted = Center.centeredOccurrenceFromGlobalScan scan
 
@@ -331,7 +350,8 @@ suffixAgreementFromGlobalLegality scan beforeUnique afterUnique prefixEquality
     with Reconstruct.beforeExtractedContextIsPlain scan beforeUnique
        | afterExtractedSuffixIsPlain scan afterUnique
        | dropCommonPrefixScan
-           (Center.beforePrefix extracted)
+           (Center.beforePrefix
+             (Center.centeredOccurrenceFromGlobalScan scan))
            (transportAllToCommonPrefix scan prefixEquality)
 ... | beforePrefixPlain , beforeSuffixPlain
     | afterSuffixPlain
@@ -354,8 +374,8 @@ outsideAgreementFromGlobalLegality :
   Reconstruct.CenteredOutsideAgreement scan
 outsideAgreementFromGlobalLegality scan beforeUnique afterUnique =
   record
-    { Reconstruct.prefixAgreement = prefixEquality
-    ; Reconstruct.suffixAgreement =
+    { prefixAgreement = prefixEquality
+    ; suffixAgreement =
         suffixAgreementFromGlobalLegality
           scan beforeUnique afterUnique prefixEquality
     }

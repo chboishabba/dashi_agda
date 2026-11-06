@@ -20,7 +20,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Patt
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact as Whole
 import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as Center
-import DASHI.Mathematics.Complexity.ConcreteTapeCenteredRewriteReconstructionExact as Reconstruct
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalRewriteReconstructionExact as Reconstruct
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalPrefixAgreementExact as Prefix
 import DASHI.Mathematics.Complexity.ConcreteTapeOccurrenceCoordinateExact as Coordinate
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
@@ -64,13 +64,10 @@ afterPrefixPlainFromLegalScan
   WF.plainNil
 
 afterPrefixPlainFromLegalScan
-    [] (_ ∷ afterPrefix) WF.plainNil
-    oldLeftPlain newFront () legal
+    [] (_ ∷ _) WF.plainNil oldLeftPlain newFront () legal
 
 afterPrefixPlainFromLegalScan
-    (Local.plain oldSymbol ∷ beforePrefix) []
-    (WF.plainCons beforePlain)
-    oldLeftPlain Pattern.frontNil () legal
+    (_ ∷ _) [] (WF.plainCons _) oldLeftPlain Pattern.frontNil () legal
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldSymbol ∷ [])
@@ -81,19 +78,19 @@ afterPrefixPlainFromLegalScan
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldSymbol ∷ [])
-    (Local.plain newSymbol ∷ newNext ∷ restAfter)
+    (Local.plain newSymbol ∷ _ ∷ _)
     (WF.plainCons WF.plainNil)
     oldLeftPlain Pattern.frontCons () legal
 
 afterPrefixPlainFromLegalScan
-    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ beforeRest)
+    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ _)
     (Local.plain newFirst ∷ [])
-    (WF.plainCons (WF.plainCons restPlain))
+    (WF.plainCons (WF.plainCons _))
     oldLeftPlain Pattern.frontCons () legal
 
 afterPrefixPlainFromLegalScan
     (Local.plain oldFirst ∷ Local.plain oldSecond ∷ [])
-    (Local.plain newFirst ∷ newSecond ∷ afterRest)
+    (Local.plain newFirst ∷ newSecond ∷ [])
     (WF.plainCons (WF.plainCons WF.plainNil))
     Pattern.is-plain Pattern.frontCons lengthEq
     (Whole.allCons firstLegal restLegal)
@@ -103,7 +100,7 @@ afterPrefixPlainFromLegalScan
   WF.plainCons
     (afterPrefixPlainFromLegalScan
       (Local.plain oldSecond ∷ [])
-      (Local.plain newSecond ∷ afterRest)
+      (newSecond ∷ [])
       (WF.plainCons WF.plainNil)
       Pattern.is-plain
       Pattern.frontCons
@@ -111,10 +108,22 @@ afterPrefixPlainFromLegalScan
       restLegal)
 
 afterPrefixPlainFromLegalScan
+    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ [])
+    (Local.plain newFirst ∷ newSecond ∷ _ ∷ _)
+    (WF.plainCons (WF.plainCons WF.plainNil))
+    oldLeftPlain Pattern.frontCons () legal
+
+afterPrefixPlainFromLegalScan
+    (Local.plain oldFirst ∷ Local.plain oldSecond ∷ Local.plain oldThird ∷ _)
+    (Local.plain newFirst ∷ newSecond ∷ [])
+    (WF.plainCons (WF.plainCons (WF.plainCons _)))
+    oldLeftPlain Pattern.frontCons () legal
+
+afterPrefixPlainFromLegalScan
     (Local.plain oldFirst
       ∷ Local.plain oldSecond
       ∷ Local.plain oldThird ∷ beforeRest)
-    (Local.plain newFirst ∷ newSecond ∷ afterRest)
+    (Local.plain newFirst ∷ newSecond ∷ newThird ∷ afterRest)
     (WF.plainCons
       (WF.plainCons
         (WF.plainCons restPlain)))
@@ -126,7 +135,7 @@ afterPrefixPlainFromLegalScan
   WF.plainCons
     (afterPrefixPlainFromLegalScan
       (Local.plain oldSecond ∷ Local.plain oldThird ∷ beforeRest)
-      (Local.plain newSecond ∷ afterRest)
+      (newSecond ∷ newThird ∷ afterRest)
       (WF.plainCons (WF.plainCons restPlain))
       oldLeftPlain
       Pattern.frontCons
@@ -237,15 +246,39 @@ dropAlignedPrefixScan :
 
 dropAlignedPrefixScan [] [] refl legal =
   legal
-dropAlignedPrefixScan [] (_ ∷ afterPrefix) () legal
-dropAlignedPrefixScan (_ ∷ beforePrefix) [] () legal
+dropAlignedPrefixScan [] (_ ∷ _) () legal
+dropAlignedPrefixScan (_ ∷ _) [] () legal
+
 dropAlignedPrefixScan
-    (_ ∷ beforePrefix)
-    (_ ∷ afterPrefix)
+    (b1 ∷ [])
+    (a1 ∷ [])
+    lengthEq
+    (Whole.allCons current rest) =
+  rest
+dropAlignedPrefixScan (b1 ∷ []) (_ ∷ _ ∷ _) () legal
+dropAlignedPrefixScan (_ ∷ _ ∷ _) (a1 ∷ []) () legal
+
+dropAlignedPrefixScan
+    (b1 ∷ b2 ∷ [])
+    (a1 ∷ a2 ∷ [])
     lengthEq
     (Whole.allCons current rest) =
   dropAlignedPrefixScan
-    beforePrefix afterPrefix
+    (b2 ∷ [])
+    (a2 ∷ [])
+    (NatP.suc-injective lengthEq)
+    rest
+dropAlignedPrefixScan (b1 ∷ b2 ∷ []) (_ ∷ _ ∷ _ ∷ _) () legal
+dropAlignedPrefixScan (_ ∷ _ ∷ _ ∷ _) (a1 ∷ a2 ∷ []) () legal
+
+dropAlignedPrefixScan
+    (b1 ∷ b2 ∷ b3 ∷ beforeRest)
+    (a1 ∷ a2 ∷ a3 ∷ afterRest)
+    lengthEq
+    (Whole.allCons current rest) =
+  dropAlignedPrefixScan
+    (b2 ∷ b3 ∷ beforeRest)
+    (a2 ∷ a3 ∷ afterRest)
     (NatP.suc-injective lengthEq)
     rest
 
@@ -311,7 +344,7 @@ globalTransitionScanAfterUnique :
   Pattern.EndPlain
     (Center.afterSuffix (Center.centeredOccurrenceFromGlobalScan scan)) →
   WF.ExactlyOneHead (Local.cells after)
-globalTransitionScanAfterUnique scan interior frontGuard endGuard =
+globalTransitionScanAfterUnique {machine} {rule} {before} {after} scan interior frontGuard endGuard =
   WF.transportExactlyOneHead
     (sym (Center.afterDecomposition extracted))
     localUnique
@@ -417,6 +450,32 @@ globalTransitionScanAfterUnique scan interior frontGuard endGuard =
         (suffixLengthsFromAlignedDecomposition scan)
         tailLegal
 
+    goUnique :
+      ∀ {rule' window'} →
+      Local.RuleRealizesWindow machine rule' window' →
+      WF.ExactlyOneHead
+        (Local.append
+          (Center.afterPrefix extracted)
+          (Local.newLeft window'
+            ∷ Local.newCenter window'
+            ∷ Local.newRight window'
+            ∷ Center.afterSuffix extracted))
+    goUnique Local.realizes-left =
+      WF.prependPlain afterPrefixPlain
+        (WF.headHere
+          (WF.plainCons
+            (WF.plainCons afterSuffixPlain)))
+    goUnique Local.realizes-stay =
+      WF.prependPlain afterPrefixPlain
+        (WF.plainBefore
+          (WF.headHere
+            (WF.plainCons afterSuffixPlain)))
+    goUnique Local.realizes-right =
+      WF.prependPlain afterPrefixPlain
+        (WF.plainBefore
+          (WF.plainBefore
+            (WF.headHere afterSuffixPlain)))
+
     localUnique :
       WF.ExactlyOneHead
         (Local.append
@@ -425,23 +484,7 @@ globalTransitionScanAfterUnique scan interior frontGuard endGuard =
             ∷ Local.newCenter (Center.window extracted)
             ∷ Local.newRight (Center.window extracted)
             ∷ Center.afterSuffix extracted))
-    localUnique
-      with Center.configured extracted
-    ... | Local.realizes-left =
-      WF.prependPlain afterPrefixPlain
-        (WF.headHere
-          (WF.plainCons
-            (WF.plainCons afterSuffixPlain)))
-    ... | Local.realizes-stay =
-      WF.prependPlain afterPrefixPlain
-        (WF.plainBefore
-          (WF.headHere
-            (WF.plainCons afterSuffixPlain)))
-    ... | Local.realizes-right =
-      WF.prependPlain afterPrefixPlain
-        (WF.plainBefore
-          (WF.plainBefore
-            (WF.headHere afterSuffixPlain)))
+    localUnique = goUnique (Center.configured extracted)
 
 localityScanWithInteriorGivesWellFormedStep :
   ∀ {machine rule before after}
@@ -460,11 +503,11 @@ localityScanWithInteriorGivesWellFormedStep scan interior
     frontGuard endGuard =
   Character.localityCharacterizationGivesWellFormedStep
     record
-      { Character.beforeInterior = interior
-      ; Character.afterUnique =
+      { beforeInterior = interior
+      ; afterUnique =
           globalTransitionScanAfterUnique
             (Character.localityScanToGlobalTransitionScan scan interior)
             interior frontGuard endGuard
-      ; Character.localityScan = scan
+      ; localityScan = scan
       }
 

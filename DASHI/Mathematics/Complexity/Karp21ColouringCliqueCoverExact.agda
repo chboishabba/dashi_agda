@@ -48,10 +48,10 @@ colouringToComplementCliqueFibres :
   CliqueFibres adjacent sameColour colouring
 colouringToComplementCliqueFibres adjacent sameColour colouring proper
   u v distinct same
-  with adjacent u v
+  with adjacent u v in eqAdj
 ... | false = refl
 ... | true =
-  ⊥-elim (trueFalseImpossible same (proper u v distinct refl))
+  ⊥-elim (trueFalseImpossible same (proper u v distinct eqAdj))
 
 complementCliqueFibresToColouring :
   ∀ {Vertex Colour : Set}
@@ -62,14 +62,14 @@ complementCliqueFibresToColouring :
   ProperColouring adjacent sameColour colouring
 complementCliqueFibresToColouring adjacent sameColour colouring fibres
   u v distinct connected
-  with sameColour (colouring u) (colouring v)
+  with sameColour (colouring u) (colouring v) in eqSame
 ... | false = refl
 ... | true =
   ⊥-elim
     (Graph.trueAndNegationImpossible
       (adjacent u v)
       connected
-      (fibres u v distinct refl))
+      (fibres u v distinct eqSame))
 
 karpColouringCliqueCoverWitnessIff :
   ∀ {Vertex Colour : Set}

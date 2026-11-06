@@ -66,7 +66,7 @@ module OnCodec (codec : SparseGraphWordCodec) where
 
   canonicalWeightedMaxCutLanguage : PR.Language Word.BitWord
   canonicalWeightedMaxCutLanguage =
-    record { PR.accepts = CanonicalWeightedMaxCutWordYES }
+    record { accepts = CanonicalWeightedMaxCutWordYES }
 
   verifyCanonicalSparseGraphWord :
     Word.BitWord → Word.BitWord → Bool
@@ -95,7 +95,7 @@ module OnCodec (codec : SparseGraphWordCodec) where
     CanonicalWeightedMaxCutWordYES word →
     BoundedSparseGraphWordYES word
   canonicalGraphWordToBoundedSparse word accepted
-    with decodeGraph codec word
+    with decodeGraph codec word in eqDecode
   ... | nothing = ⊥-elim accepted
   ... | just graph
     with Bidi.actualCutToSizeExactSparse (proj₂ graph) accepted
@@ -103,7 +103,7 @@ module OnCodec (codec : SparseGraphWordCodec) where
     bits ,
       ( NatP.≤-trans
           (NatP.≤-reflexive exactLength)
-          (edgeBitBound codec word graph refl)
+          (edgeBitBound codec word graph eqDecode)
       , acceptedBits )
 
   boundedSparseToCanonicalGraphWord :
@@ -138,13 +138,13 @@ module OnCodec (codec : SparseGraphWordCodec) where
   karpWeightedMaxCutInNPFromMachineReceipts
     cost verifierClock certificateBound =
     record
-      { PR.Certificate = Word.BitWord
-      ; PR.verifies = verifyCanonicalSparseGraphWord
-      ; PR.certificateAdmissible = canonicalSparseCertificateAdmissible
-      ; PR.sound = λ word bits bound check →
+      { Certificate = Word.BitWord
+      ; verifies = verifyCanonicalSparseGraphWord
+      ; certificateAdmissible = canonicalSparseCertificateAdmissible
+      ; sound = λ word bits bound check →
           boundedSparseToCanonicalGraphWord word
             (bits , (bound , check))
-      ; PR.complete = canonicalGraphWordToBoundedSparse
-      ; PR.polynomialVerification = verifierClock
-      ; PR.polynomialCertificateSize = certificateBound
+      ; complete = canonicalGraphWordToBoundedSparse
+      ; polynomialVerification = verifierClock
+      ; polynomialCertificateSize = certificateBound
       }

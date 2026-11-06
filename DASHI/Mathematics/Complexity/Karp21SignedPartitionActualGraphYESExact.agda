@@ -117,7 +117,7 @@ sourcePartitionActualPositiveGraphIff :
     (ActualPositiveTargetAccepts
       (Source.totalPartitionToPositiveCut parts))
 sourcePartitionActualPositiveGraphIff parts
-  with Int._≟_ (Source.sourceTotal parts) (+ 0)
+  with IntP._≟_ (Source.sourceTotal parts) (+ 0)
 ... | yes eq =
   PR.iff
     (λ _ → fixedUnitGraphAccepts)

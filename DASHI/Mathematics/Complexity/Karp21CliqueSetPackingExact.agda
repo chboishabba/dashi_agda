@@ -91,12 +91,12 @@ packingToClique :
   Packing adjacency picked →
   CV.Clique adjacency picked
 packingToClique adjacency picked packing u v distinct pu pv
-  with adjacency u v
+  with adjacency u v in eqAdj
 ... | true = refl
 ... | false = ⊥-elim
   (packing u v distinct pu pv (u , v)
-    (inj₁ refl , (distinct , refl))
-    (inj₂ refl , (distinct , refl)))
+    (inj₁ refl , (distinct , eqAdj))
+    (inj₂ refl , (distinct , eqAdj)))
 
 karpCliquePackingSemanticEquivalence :
   ∀ {Vertex : Set}

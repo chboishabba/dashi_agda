@@ -63,8 +63,9 @@ decodeEncodeCutLabels (bit Vec.∷ tail)
 cutCertificateWordLength :
   ∀ {n} (labels : Vec.Vec Bool n) →
   length (encodeCutLabels labels) ≡ n
-cutCertificateWordLength labels =
-  Finite.selectionListLength labels
+cutCertificateWordLength Vec.[] = refl
+cutCertificateWordLength (_ Vec.∷ xs) =
+  cong suc (cutCertificateWordLength xs)
 
 -- A word's extra trailing bit cannot be silently ignored, including
 -- the empty (n=0) case. This distinguishes exact parsing from prefix

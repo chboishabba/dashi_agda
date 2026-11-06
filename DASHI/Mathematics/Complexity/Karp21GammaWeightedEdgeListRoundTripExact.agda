@@ -23,6 +23,7 @@ open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 import Data.List.Properties as ListP
 open import Data.Maybe.Base using (just)
+open import Data.Product using (Σ; _,_; _×_)
 import Data.Fin.Base as Fin
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word

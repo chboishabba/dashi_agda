@@ -34,7 +34,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCenteredWindowExtractionExact as
 plainCellsCannotContainLaterHead :
   ∀ {State Symbol : Set}
     (prefix : List (Local.TapeCell State Symbol))
-    {state symbol}
+    {state : State} {symbol : Symbol}
     (suffix : List (Local.TapeCell State Symbol)) →
   WF.PlainCells
     (Local.append prefix
@@ -47,6 +47,30 @@ plainCellsCannotContainLaterHead
     (WF.plainCons restPlain) =
   plainCellsCannotContainLaterHead prefix suffix restPlain
 plainCellsCannotContainLaterHead
+    (Local.headed prefixState prefixSymbol ∷ prefix)
+    suffix
+    ()
+
+plainCellsCannotContainCenteredHead :
+  ∀ {State Symbol : Set}
+    (prefix : List (Local.TapeCell State Symbol))
+    {leftSymbol readSymbol rightSymbol : Symbol}
+    {q : State}
+    (suffix : List (Local.TapeCell State Symbol)) →
+  WF.PlainCells
+    (Local.append prefix
+      (Local.plain leftSymbol
+        ∷ Local.headed q readSymbol
+        ∷ Local.plain rightSymbol
+        ∷ suffix)) →
+  ⊥
+plainCellsCannotContainCenteredHead [] suffix (WF.plainCons ())
+plainCellsCannotContainCenteredHead
+    (Local.plain prefixSymbol ∷ prefix)
+    suffix
+    (WF.plainCons plain) =
+  plainCellsCannotContainCenteredHead prefix suffix plain
+plainCellsCannotContainCenteredHead
     (Local.headed prefixState prefixSymbol ∷ prefix)
     suffix
     ()
@@ -81,15 +105,10 @@ plainContextsAroundCenteredHead
   WF.plainCons prefixPlain , suffixPlain
 
 plainContextsAroundCenteredHead
-    {rightSymbol = rightSymbol}
     (Local.headed prefixState prefixSymbol ∷ prefix)
     suffix
     (WF.headHere restPlain) =
-  ⊥-elim
-    (plainCellsCannotContainLaterHead
-      prefix
-      (Local.plain rightSymbol ∷ suffix)
-      restPlain)
+  ⊥-elim (plainCellsCannotContainCenteredHead prefix suffix restPlain)
 
 record CenteredOutsideAgreement
     {machine : Local.ConcreteTapeMachine}
@@ -131,36 +150,32 @@ beforeExtractedContextIsPlain :
   WF.PlainCells
       (Center.beforeSuffix
         (Center.centeredOccurrenceFromGlobalScan scan))
-beforeExtractedContextIsPlain scan beforeUnique
-    with Center.configured
-      (Center.centeredOccurrenceFromGlobalScan scan)
-... | Local.realizes-left =
-  plainContextsAroundCenteredHead
-    (Center.beforePrefix extracted)
-    (Center.beforeSuffix extracted)
-    (transportUnique
-      (Center.beforeDecomposition extracted)
-      beforeUnique)
+beforeExtractedContextIsPlain scan beforeUnique =
+  go (Center.beforePrefix extracted)
+     (Center.beforeSuffix extracted)
+     (Center.configured extracted)
+     (transportUnique
+       (Center.beforeDecomposition extracted)
+       beforeUnique)
   where
     extracted = Center.centeredOccurrenceFromGlobalScan scan
-... | Local.realizes-stay =
-  plainContextsAroundCenteredHead
-    (Center.beforePrefix extracted)
-    (Center.beforeSuffix extracted)
-    (transportUnique
-      (Center.beforeDecomposition extracted)
-      beforeUnique)
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
-... | Local.realizes-right =
-  plainContextsAroundCenteredHead
-    (Center.beforePrefix extracted)
-    (Center.beforeSuffix extracted)
-    (transportUnique
-      (Center.beforeDecomposition extracted)
-      beforeUnique)
-  where
-    extracted = Center.centeredOccurrenceFromGlobalScan scan
+
+    go :
+      ∀ prefix suffix {rule window} →
+      Local.RuleRealizesWindow _ rule window →
+      WF.ExactlyOneHead
+        (Local.append prefix
+          (Local.oldLeft window
+            ∷ Local.oldCenter window
+            ∷ Local.oldRight window
+            ∷ suffix)) →
+      WF.PlainCells prefix × WF.PlainCells suffix
+    go prefix suffix Local.realizes-left unique =
+      plainContextsAroundCenteredHead prefix suffix unique
+    go prefix suffix Local.realizes-stay unique =
+      plainContextsAroundCenteredHead prefix suffix unique
+    go prefix suffix Local.realizes-right unique =
+      plainContextsAroundCenteredHead prefix suffix unique
 
 transportAfterDecomposition :
   ∀ {machine rule before after}
@@ -199,42 +214,42 @@ globalScanWithCommonOutsideGivesWellFormedStep
     with beforeExtractedContextIsPlain scan beforeUnique
 ... | prefixPlain , suffixPlain =
   record
-    { WF.step =
+    { step =
         record
-          { Local.rule = rule
-          ; Local.ruleOccursInMachine =
+          { rule = rule
+          ; ruleOccursInMachine =
               Whole.ruleOccursInMachine scan
-          ; Local.window =
+          ; window =
               Center.window extracted
-          ; Local.ruleIsConfigured =
+          ; ruleIsConfigured =
               Center.configured extracted
-          ; Local.occurrence =
+          ; occurrence =
               record
-                { Local.prefix =
+                { prefix =
                     Center.beforePrefix extracted
-                ; Local.suffix =
+                ; suffix =
                     Center.beforeSuffix extracted
-                ; Local.beforeShape =
+                ; beforeShape =
                     Center.beforeDecomposition extracted
-                ; Local.afterShape =
+                ; afterShape =
                     transportAfterDecomposition scan agreement
                 }
           }
-    ; WF.wellFormedOccurrence =
+    ; wellFormedOccurrence =
         record
-          { WF.occurrence =
+          { occurrence =
               record
-                { Local.prefix =
+                { prefix =
                     Center.beforePrefix extracted
-                ; Local.suffix =
+                ; suffix =
                     Center.beforeSuffix extracted
-                ; Local.beforeShape =
+                ; beforeShape =
                     Center.beforeDecomposition extracted
-                ; Local.afterShape =
+                ; afterShape =
                     transportAfterDecomposition scan agreement
                 }
-          ; WF.prefixPlain = prefixPlain
-          ; WF.suffixPlain = suffixPlain
+          ; prefixPlain = prefixPlain
+          ; suffixPlain = suffixPlain
           }
     }
   where

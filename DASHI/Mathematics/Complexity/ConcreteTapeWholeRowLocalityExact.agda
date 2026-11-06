@@ -15,6 +15,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeWholeRowLocalityExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
@@ -390,13 +391,28 @@ centeredWindowOccursInRewriteScan :
 centeredWindowOccursInRewriteScan [] suffix WF.plainNil configured =
   centeredHere configured
 centeredWindowOccursInRewriteScan
-    (Local.plain symbol ∷ prefix)
+    (Local.plain symbol ∷ [])
     suffix
-    (WF.plainCons prefixPlain)
+    (WF.plainCons WF.plainNil)
+    configured =
+  centeredThere (centeredHere configured)
+centeredWindowOccursInRewriteScan
+    (Local.plain symbol ∷ Local.plain second ∷ [])
+    suffix
+    (WF.plainCons (WF.plainCons WF.plainNil))
+    configured =
+  centeredThere (centeredThere (centeredHere configured))
+centeredWindowOccursInRewriteScan
+    (Local.plain symbol ∷ Local.plain second ∷ Local.plain third ∷ rest)
+    suffix
+    (WF.plainCons (WF.plainCons (WF.plainCons restPlain)))
     configured =
   centeredThere
     (centeredWindowOccursInRewriteScan
-      prefix suffix prefixPlain configured)
+      (Local.plain second ∷ Local.plain third ∷ rest)
+      suffix
+      (WF.plainCons (WF.plainCons restPlain))
+      configured)
 
 
 rewriteOccurrencePreservesLength :
@@ -407,8 +423,21 @@ rewriteOccurrencePreservesLength :
 rewriteOccurrencePreservesLength occurrence =
   trans
     (congLength (Local.beforeShape occurrence))
-    (sym (congLength (Local.afterShape occurrence)))
+    (trans
+      (appendSameLength (Local.prefix occurrence) refl)
+      (sym (congLength (Local.afterShape occurrence))))
   where
+    appendSameLength :
+      ∀ {A : Set} (prefix : List A) {xs ys : List A} →
+      Coordinate.listLength xs ≡ Coordinate.listLength ys →
+      Coordinate.listLength (Local.append prefix xs)
+      ≡ Coordinate.listLength (Local.append prefix ys)
+    appendSameLength [] eq = eq
+    appendSameLength (p ∷ prefix) eq = congCoordinate (appendSameLength prefix eq)
+      where
+        congCoordinate : ∀ {m n : Nat} → m ≡ n → suc m ≡ suc n
+        congCoordinate refl = refl
+
     congLength :
       ∀ {A : Set} {xs ys : List A} →
       xs ≡ ys →

@@ -202,99 +202,103 @@ semanticLegalImpliesBooleanTrue :
   ∀ {machine rule window} →
   Pattern.LegalWindowForRule machine rule window →
   legalWindowBool machine rule window ≡ true
-semanticLegalImpliesBooleanTrue {machine} Pattern.legal-unchanged
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine} (Pattern.legal-unchanged {firstSymbol = s1} {secondSymbol = s2} {thirdSymbol = s3})
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) s1
+          | Local.decideEqualRefl (Local.finiteSymbol machine) s2
+          | Local.decideEqualRefl (Local.finiteSymbol machine) s3 =
   refl
 semanticLegalImpliesBooleanTrue {machine}
-    (Pattern.legal-centered Local.realizes-left)
-    rewrite Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+    (Pattern.legal-centered (Local.realizes-left {q} {q'} {a} {b} {left} {right}))
+    rewrite Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right =
   refl
 semanticLegalImpliesBooleanTrue {machine}
-    (Pattern.legal-centered Local.realizes-stay)
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+    (Pattern.legal-centered (Local.realizes-stay {q} {q'} {a} {b} {left} {right}))
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right =
   refl
 semanticLegalImpliesBooleanTrue {machine}
-    (Pattern.legal-centered Local.realizes-right)
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+    (Pattern.legal-centered (Local.realizes-right {q} {q'} {a} {b} {left} {right}))
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.left-overlap-minus-two
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.left-overlap-minus-two {q} {q'} {a} {b} {first} {second} {left})
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) first
+          | Local.decideEqualRefl (Local.finiteSymbol machine) second
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) left =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.left-overlap-minus-one
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.left-overlap-minus-one {q} {q'} {a} {b} {context} {left})
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) context
+          | Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.left-overlap-plus-one
-    rewrite Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.left-overlap-plus-one {q} {q'} {a} {b} {right} {context})
+    rewrite Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right
+          | Local.decideEqualRefl (Local.finiteSymbol machine) context =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.stay-overlap-minus-one
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.stay-overlap-minus-one {q} {q'} {a} {b} {context} {left})
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) context
+          | Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.stay-overlap-plus-one
-    rewrite Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.stay-overlap-plus-one {q} {q'} {a} {b} {right} {context})
+    rewrite Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right
+          | Local.decideEqualRefl (Local.finiteSymbol machine) context =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.right-overlap-minus-one
-    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.right-overlap-minus-one {q} {q'} {a} {b} {context} {left})
+    rewrite Local.decideEqualRefl (Local.finiteSymbol machine) context
+          | Local.decideEqualRefl (Local.finiteSymbol machine) left
+          | Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.right-overlap-plus-one
-    rewrite Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.right-overlap-plus-one {q} {q'} {a} {b} {right} {context})
+    rewrite Local.decideEqualRefl (Local.finiteState machine) q
+          | Local.decideEqualRefl (Local.finiteSymbol machine) a
+          | Local.decideEqualRefl (Local.finiteSymbol machine) b
+          | Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right
+          | Local.decideEqualRefl (Local.finiteSymbol machine) context =
   refl
-semanticLegalImpliesBooleanTrue {machine} Pattern.right-overlap-plus-two
-    rewrite Local.decideEqualRefl (Local.finiteState machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _
-          | Local.decideEqualRefl (Local.finiteSymbol machine) _ =
+semanticLegalImpliesBooleanTrue {machine}
+    (Pattern.right-overlap-plus-two {q} {q'} {a} {b} {right} {first} {second})
+    rewrite Local.decideEqualRefl (Local.finiteState machine) q'
+          | Local.decideEqualRefl (Local.finiteSymbol machine) right
+          | Local.decideEqualRefl (Local.finiteSymbol machine) first
+          | Local.decideEqualRefl (Local.finiteSymbol machine) second =
   refl
 
 record ConcreteTapeLegalWindowBoolBoundary : Set where

@@ -4,11 +4,11 @@ module DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact whe
 -- CANONICAL PADDED INPUT BITS DECODE BACK TO THE LITERAL PADDED INPUT ROW
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; cong₂; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -31,25 +31,27 @@ decodeCells_encodeCells :
       List (Local.TapeCell
         (Local.State machine)
         (Local.Symbol machine))) →
-  Decode.decodeCells stateCoverage symbolCoverage
+  Decode.decodeCells {machine} stateCoverage symbolCoverage
     (Canonical.listLength cells)
-    (Flat.encodeCells stateCoverage symbolCoverage cells)
+    (Flat.encodeCells {machine} stateCoverage symbolCoverage cells)
   ≡ cells
 decodeCells_encodeCells stateCoverage symbolCoverage [] =
   refl
 decodeCells_encodeCells {machine}
-    stateCoverage symbolCoverage (cell ∷ cells)
-    rewrite Canonical.takeAppendBits
-      (Canonical.encodeCell stateCoverage symbolCoverage cell)
-      (Flat.encodeCells stateCoverage symbolCoverage cells)
-          | Canonical.dropAppendBits
-              (Canonical.encodeCell stateCoverage symbolCoverage cell)
-              (Flat.encodeCells stateCoverage symbolCoverage cells)
-          | Canonical.decodeEncodeCell
-              stateCoverage symbolCoverage cell
-          | decodeCells_encodeCells
-              stateCoverage symbolCoverage cells =
-  refl
+    stateCoverage symbolCoverage (cell ∷ cells) =
+  cong₂ _∷_
+    (trans
+      (cong (Canonical.decodeCell {machine} stateCoverage symbolCoverage)
+        (Canonical.takeAppendBits
+          (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
+          (Flat.encodeCells {machine} stateCoverage symbolCoverage cells)))
+      (Canonical.decodeEncodeCell {machine} stateCoverage symbolCoverage cell))
+    (trans
+      (cong (Decode.decodeCells {machine} stateCoverage symbolCoverage (Canonical.listLength cells))
+        (Canonical.dropAppendBits
+          (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
+          (Flat.encodeCells {machine} stateCoverage symbolCoverage cells)))
+      (decodeCells_encodeCells {machine} stateCoverage symbolCoverage cells))
 
 decodeRow_encodeRow :
   ∀ {machine}
@@ -58,15 +60,14 @@ decodeRow_encodeRow :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (row : Local.TapeRow machine) →
-  Decode.decodeRow stateCoverage symbolCoverage
-    (Canonical.listLength (Local.cells row))
-    (Flat.encodeRow stateCoverage symbolCoverage row)
+  Decode.decodeRow {machine} stateCoverage symbolCoverage
+    (Canonical.listLength (Local.cells {machine} row))
+    (Flat.encodeRow {machine} stateCoverage symbolCoverage row)
   ≡ row
-decodeRow_encodeRow stateCoverage symbolCoverage
-    (Local.tape-row cells)
-    rewrite decodeCells_encodeCells
-      stateCoverage symbolCoverage cells =
-  refl
+decodeRow_encodeRow {machine} stateCoverage symbolCoverage
+    (Local.tape-row cells) =
+  cong (Local.tape-row {machine})
+    (decodeCells_encodeCells {machine} stateCoverage symbolCoverage cells)
 
 paddedInitialBitsAtWidth :
   ∀ {machine}
@@ -79,11 +80,28 @@ paddedInitialBitsAtWidth :
     (extension : Padding.WidthExtension input cols) →
   CNF.Bits (Decode.RowBitsWidth machine cols)
 paddedInitialBitsAtWidth {machine}
-    stateCoverage symbolCoverage input cols extension
-    rewrite sym (Padding.paddedInitialRowAtWidth_count
-      input cols extension) =
-  Flat.encodeRow stateCoverage symbolCoverage
-    (Padding.paddedInitialRowAtWidth input cols extension)
+    stateCoverage symbolCoverage input cols extension =
+  subst CNF.Bits
+    (cong (Decode.RowBitsWidth machine)
+      (Padding.paddedInitialRowAtWidth_count input cols extension))
+    (Flat.encodeRow {machine} stateCoverage symbolCoverage
+      (Padding.paddedInitialRowAtWidth input cols extension))
+
+initialBitsDecodeToPaddedInputRow_helper :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (row : Local.TapeRow machine)
+    (cols : Nat)
+    (e : Canonical.listLength (Local.cells {machine} row) ≡ cols) →
+  Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+    (subst CNF.Bits (cong (Decode.RowBitsWidth machine) e)
+      (Flat.encodeRow {machine} stateCoverage symbolCoverage row))
+  ≡ row
+initialBitsDecodeToPaddedInputRow_helper {machine} stateCoverage symbolCoverage row ._ refl =
+  decodeRow_encodeRow {machine} stateCoverage symbolCoverage row
 
 initialBitsDecodeToPaddedInputRow :
   ∀ {machine}
@@ -94,17 +112,18 @@ initialBitsDecodeToPaddedInputRow :
     (input : Input.InputWord machine)
     (cols : Nat)
     (extension : Padding.WidthExtension input cols) →
-  Decode.decodeRow stateCoverage symbolCoverage cols
-    (paddedInitialBitsAtWidth
+  Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+    (paddedInitialBitsAtWidth {machine}
       stateCoverage symbolCoverage input cols extension)
   ≡
   Padding.paddedInitialRowAtWidth input cols extension
-initialBitsDecodeToPaddedInputRow
-    stateCoverage symbolCoverage input cols extension
-    rewrite sym (Padding.paddedInitialRowAtWidth_count
-      input cols extension) =
-  decodeRow_encodeRow stateCoverage symbolCoverage
+initialBitsDecodeToPaddedInputRow {machine}
+    stateCoverage symbolCoverage input cols extension =
+  initialBitsDecodeToPaddedInputRow_helper {machine}
+    stateCoverage symbolCoverage
     (Padding.paddedInitialRowAtWidth input cols extension)
+    cols
+    (Padding.paddedInitialRowAtWidth_count input cols extension)
 
 paddedInitialInterior :
   ∀ {machine}
@@ -116,48 +135,19 @@ paddedInitialInterior :
     (Padding.paddedInitialRowAtWidth input cols extension)
 paddedInitialInterior {machine} input cols extension =
   record
-    { Accepting.interior =
+    { interior =
         paddedInterior
-    ; Accepting.headIsInitial =
-        refl
+    ; headIsInitial =
+        headIsInit input
     }
   where
-    paddedInterior :
-      Locality.InteriorHeadConfiguration machine
-        (Padding.paddedInitialRowAtWidth input cols extension)
-    paddedInterior =
-      extendInterior
-        (Input.initialInputInterior input)
-        (Padding.extra extension)
-
-    extendInterior :
-      ∀ {row}
-        (interior : Locality.InteriorHeadConfiguration machine row)
-        (extra : Nat) →
-      Locality.InteriorHeadConfiguration machine
-        (Local.tape-row
-          (Local.append (Local.cells row)
-            (Padding.replicateBlank extra)))
-    extendInterior interior extra = record
-      { Locality.prefix = Locality.prefix interior
-      ; Locality.suffix =
-          Local.append
-            (Locality.suffix interior)
-            (Padding.replicateBlank extra)
-      ; Locality.leftSymbol = Locality.leftSymbol interior
-      ; Locality.readSymbol = Locality.readSymbol interior
-      ; Locality.rightSymbol = Locality.rightSymbol interior
-      ; Locality.headState = Locality.headState interior
-      ; Locality.prefixPlain = Locality.prefixPlain interior
-      ; Locality.suffixPlain =
-          appendPlain
-            (Locality.suffixPlain interior)
-            (Padding.replicateBlankPlain extra)
-      ; Locality.rowShape =
-          appendInteriorShape
-            (Locality.rowShape interior) extra
-      }
-
+    headIsInit :
+      (inp : Input.InputWord machine) →
+      Locality.headState (Input.initialInputInterior {machine} inp)
+      ≡ Local.initialState machine
+    headIsInit [] = refl
+    headIsInit (x ∷ []) = refl
+    headIsInit (x ∷ y ∷ rest) = refl
     appendPlain :
       ∀ {xs ys} →
       WF.PlainCells xs →
@@ -170,22 +160,22 @@ paddedInitialInterior {machine} input cols extension =
     appendInteriorShape :
       ∀ {row prefix suffix left read right q}
         (shape :
-          Local.cells row
+          Local.cells {machine} row
           ≡ Local.append prefix
               (Local.plain left
                 ∷ Local.headed q read
                 ∷ Local.plain right
                 ∷ suffix))
         (extra : Nat) →
-      Local.append (Local.cells row) (Padding.replicateBlank extra)
+      Local.append (Local.cells {machine} row) (Padding.replicateBlank {machine} extra)
       ≡
       Local.append prefix
         (Local.plain left
           ∷ Local.headed q read
           ∷ Local.plain right
-          ∷ Local.append suffix (Padding.replicateBlank extra))
-    appendInteriorShape refl extra =
-      appendAssoc _ _ _
+          ∷ Local.append suffix (Padding.replicateBlank {machine} extra))
+    appendInteriorShape {prefix = prefix} {suffix = suffix} {left = left} {read = read} {right = right} {q = q} refl extra =
+      appendAssoc prefix (Local.plain left ∷ Local.headed q read ∷ Local.plain right ∷ suffix) (Padding.replicateBlank {machine} extra)
       where
         appendAssoc :
           ∀ {A : Set} (xs ys zs : List A) →
@@ -195,6 +185,42 @@ paddedInitialInterior {machine} input cols extension =
         appendAssoc (x ∷ xs) ys zs
             rewrite appendAssoc xs ys zs =
           refl
+
+    extendInterior :
+      ∀ {row}
+        (interior : Locality.InteriorHeadConfiguration machine row)
+        (extra : Nat) →
+      Locality.InteriorHeadConfiguration machine
+        (Local.tape-row {machine}
+          (Local.append (Local.cells {machine} row)
+            (Padding.replicateBlank {machine} extra)))
+    extendInterior interior extra = record
+      { prefix = Locality.prefix interior
+      ; suffix =
+          Local.append
+            (Locality.suffix interior)
+            (Padding.replicateBlank {machine} extra)
+      ; leftSymbol = Locality.leftSymbol interior
+      ; readSymbol = Locality.readSymbol interior
+      ; rightSymbol = Locality.rightSymbol interior
+      ; headState = Locality.headState interior
+      ; prefixPlain = Locality.prefixPlain interior
+      ; suffixPlain =
+          appendPlain
+            (Locality.suffixPlain interior)
+            (Padding.replicateBlankPlain {machine} extra)
+      ; rowShape =
+          appendInteriorShape
+            (Locality.rowShape interior) extra
+      }
+
+    paddedInterior :
+      Locality.InteriorHeadConfiguration machine
+        (Padding.paddedInitialRowAtWidth {machine} input cols extension)
+    paddedInterior =
+      extendInterior
+        (Input.initialInputInterior {machine} input)
+        (Padding.extra extension)
 
 record InitialDecodeSameObjectReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where
