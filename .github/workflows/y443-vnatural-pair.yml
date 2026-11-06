@@ -1,0 +1,39 @@
+name: Y443 Coxeter and Vnatural pair-action golden gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/y443-monster-vnatural-maxcut-20261106
+    paths:
+      - 'DASHI/Moonshine/Y443*.agda'
+      - 'scripts/check_y443_vnatural_pair_bridge.py'
+      - '.github/workflows/y443-vnatural-pair.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Moonshine/Y443*.agda'
+      - 'scripts/check_y443_vnatural_pair_bridge.py'
+      - '.github/workflows/y443-vnatural-pair.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  y443-finite-and-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Agda/standard library compatible with DASHI
+        uses: wenkokke/setup-agda@v2
+        with:
+          agda-version: '2.6.4.3'
+          agda-stdlib-version: '2.1'
+      - name: Show toolchain versions
+        run: |
+          agda --version
+          python3 --version
+      - name: Run exact Y443 finite and golden Agda gate
+        run: python3 scripts/check_y443_vnatural_pair_bridge.py
+      - name: Check Y443 validation root
+        run: agda -i . -l standard-library DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda
