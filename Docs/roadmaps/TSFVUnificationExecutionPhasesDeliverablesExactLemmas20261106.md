@@ -10,6 +10,16 @@
 
 **New HIL06/HIL07 selected native published RP compiler:** `TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda` reuses the repository's Osterwalder–Seiler/Menotti–Pelissetto `BalabanClayOSWilsonReflectionPositivityExact.wilsonPositivityAtAnySeparationParity`; for every *admissible gauge-invariant positive-time finite word* it transports the published nonnegative reflected expectation through an explicit **same-original-Wilson-source equality**, then through `TSVFOriginalR445ReflectedAllWordGramExact.originalFineOSPositiveTransfersToNativeR445` onto the actual R445 coarse positive word form. It does NOT prove the physically missing source equality, fine reflection/block geometry, continuum OS or observer Hilbert identification. This is a new non-safe physical regression proof, checked through `parallel_checker` as a candidate; no Agda/kernel receipt yet.
 
+## Extended 6 November implementation and dependency status (HIL01/HIL02/HIL07/KK10)
+
+**Five new source owners, 48 deliverable mappings retained exactly:** O05/O06 continue to require actual physical Kubo/propagation; H01–H05 now consume `TSVFOriginalForwardCyclicCrossGramExact` (same original TSVF forward source all-operator Gram), `TSVFOriginalForwardCyclicActionQuotientExact` (original left-action, addition and scalar quotient laws), and `TSVFOriginalComplexFiniteForwardNormalizedDiagonalExact` (actual selected original rational-complex finite source with norm 2, normalized faithful positive real-diagonal subalgebra; exact original Hermitian adjoint/composition). These pay substantial SOURCE mathematics but do not complete the selected physical complex Hilbert, CCR or Stone.
+
+**H07/B01/B02:** `TSVFOriginalForwardToNativeWilsonWordGramExact` derives all-pair **real** Wilson/observer cyclic Gram equality under the original instrument's source-local M1 single-cylinder Born/Wilson agreement, M2a operator multiplication and M2b reflection/adjoint agreement. It then derives equality to actual **fine** 1024-link Wilson source by native R445 pushforward. These source-facing premises are not global all-word Gram assumptions, but need actual physical witness from OBS01–OBS05 and HIL06. Full complex imaginary/time OS Gram and onto isometry remain physically OPEN. This bridge is **non-safe** because it imports the original real Wilson physical source, and must be checked in the separate `TSFVPhysicalR445AllWordRegression`, not the Golden root.
+
+**K07/K08/B03:** `TSFVKKFourMetricVerticalProbeFullReconstructionExact` proves equality of the *entire* five-dimensional original KK bilinear given the same horizontal g4, vertical radius and mixed connection probe readouts. It also reuses the existing actual original 5D bilinear radius/connection extraction theorems. This closes **algebraic KK10 tomography sufficiency** but not a measured original 5D Einstein solution or independent g4 identification.
+
+**Reference/validation:** `scripts/check_tsfv_original_complex_diagonal_kk_tomography_20261106.py` supplies 1,443 exact rational test cases (independent finite mathematical checks). All five Agda owners have been added to the relevant `safe_sources` or `physical_sources` and the two correctly separated regression roots of `run_tsfv_unification_maxcut_20261106.sh`. This wrapper is the only accepted Agda entrypoint (`parallel_checker`), but an exact-head kernel receipt is NOT present.
+
 ## Exact producer, phase and deliverable synchronization (6 November 2026)
 
 **Three different counts, never interchangeable:** **40 named** physical producer lemmas (10 OBS + 12 HIL + 10 KK + 8 BIDI) in [the source theorem ledger](TSFVFourPhysicalCutsExactProducerLemmas20261106.md); **48** disjoint execution deliverables (V01–V07, O01–O12, H01–H12, K01–K09, B01–B08) in this file; **186** canonical P00–P11 lemma IDs in [the original ledger](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). The former two are refinements/crosswalks, not newly minted canonical theorems.
@@ -69,13 +79,13 @@ All five source components have to converge to the **same** selected micro/obser
 
 | Execution ID | Original exact-lemma IDs | Exact remaining theorem / deliverable | Leaf | State |
 |---|---|---|---|---|
-| `H01` | `P03.L01–L05` | Construct symplectic form/positive energy from original observer action, compatible J, noncollapsed complex Hilbert completion | S08 | PHYSICAL_OPEN |
+| `H01` | `P03.L01–L05` | Construct symplectic form/positive energy from original observer action, compatible J, noncollapsed complex Hilbert completion | S08 | SOURCE_FINITE_POSITIVE / PHYSICAL_OPEN |
 | `H02` | `P03.L06–L08` | Construct finite-to-Hilbert isometric embeddings, dense Weyl/CCR invariant domain and valid unbounded operators | S08 | SOURCE_PARTIAL / PHYSICAL_OPEN |
 | `H03` | `P03.L09` | Construct original observer strongly continuous real-time unitary group with physical time and Planck calibration | S08 | CONDITIONAL_SOURCE / PHYSICAL_OPEN |
 | `H04` | `P03.L10,L11` | Construct actual original Stone self-adjoint H and its D(H), core, spectral resolution and Schrödinger equation | S08 | PHYSICAL_OPEN |
 | `H05` | `P03.L12,L13` | Reconcile original antiunitary time reversal, observer filtration arrow and physical energy-time units | S08 | SOURCE_PARTIAL / PHYSICAL_OPEN |
 | `H06` | `P07.L02,L03` | Original micro physical Euclidean Schwinger family and reflection-positive OS half-space, not a second measure | S09 | YM_PRODUCER_DEPENDENCY |
-| `H07` | `P07.L05` | Prove original `embedObserver` extends to an onto complex-linear unitary on actual completed Hilbert quotients | S09 | SET_ISO_ONLY / PHYSICAL_OPEN |
+| `H07` | `P07.L05` | Prove original `embedObserver` extends to an onto complex-linear unitary on actual completed Hilbert quotients | S09 | SOURCE_REAL_ALLWORD_GRAM_CONDITIONAL / PHYSICAL_OPEN |
 | `H08` | `P07.L06,L07` | Use strong-limit matched topology to derive J-intertwined group/generator domains and full operator graphs | S09 | SOURCE_PARTIAL / KERNEL_OPEN |
 | `H09` | `P07.L07,P11.L07` | Show J intertwines source spectral projectors, full self-adjoint functional calculus and all relevant physical energies | S09 | PHYSICAL_OPEN |
 | `H10` | `P07.L08,L10,L15` | Identify original TSVF pointer/state/local source and all gauge/Wilson correlators with independent OS observables | S09 | PHYSICAL_OPEN |
@@ -93,7 +103,7 @@ All five source components have to converge to the **same** selected micro/obser
 | `K05` | `P08.L09,L10` | Prove KK heavy-mode and radion truncation or give controlled EFT error including gauge/metric/stress observables | S05 | PHYSICAL_OPEN |
 | `K06` | `P08.L11` | Produce valid pure-SU(N) decoupling from the physical KK matter theory where YM claims require pure gauge | S05 | PHYSICAL_OPEN |
 | `K07` | `P08.L12,P07.L09,L14` | Prove `KKReduce(G5)=g_obs` on original independently measured 4D source—not only scoped chosen acoustic g4 | S06 | SCOPED_IDENTITY / PHYSICAL_OPEN |
-| `K08` | `P08.L16,L17` | Preserve Euclidean 5-axis vs Lorentzian KK types, retain cross-fibre curvature and dimensional nontransport | S06 | SOURCE_PARTIAL / KERNEL_OPEN |
+| `K08` | `P08.L16,L17` | Preserve Euclidean 5-axis vs Lorentzian KK types, retain cross-fibre curvature and dimensional nontransport | S06 | SOURCE_KK_PROBE_TOMOGRAPHY / PHYSICAL_OPEN |
 | `K09` | `P08.L13–L15` | If claimed, supply E6/trinification anomaly or Möbius monodromy proofs; otherwise explicitly exclude scope | S05,S06 | OPTIONAL_NOT_REQUIRED |
 
 ## Phase 4 — S10/S11 BIDI, physical limits and terminal proof
