@@ -27,7 +27,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 1ℝ; _+ℝ_; _*ℝ_;
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _<ℝ_; _≤ℝ_;
    *-assoc; *-comm; *-distribˡ-+; *-distribʳ-+; mulOneʳ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -47,11 +47,11 @@ mixedProduct s t x y =
     (sym (*-assoc s x (t *ℝ y)))
     (trans
       (cong (λ z → s *ℝ z)
-        (*-assoc x t y))
+        (sym (*-assoc x t y)))
       (trans
         (cong (λ z → s *ℝ (z *ℝ y)) (*-comm x t))
         (trans
-          (cong (λ z → s *ℝ z) (sym (*-assoc t x y)))
+          (cong (λ z → s *ℝ z) (*-assoc t x y))
           (sym (*-assoc s t (x *ℝ y)))))
 
 affineFactorExpansion : ∀ s t x y →
@@ -126,11 +126,7 @@ module _
 
   originalAffinePartitionIsExactNumeratorPolynomial :
     (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
-    (strictToWeak : ∀ {value} →
-      DASHI.Foundations.RealAnalysisAxioms._<ℝ_
-        DASHI.Foundations.RealAnalysisAxioms.0ℝ value →
-      DASHI.Foundations.RealAnalysisAxioms._≤ℝ_
-        DASHI.Foundations.RealAnalysisAxioms.0ℝ value)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
     ∀ n (left right : OriginalObservable n) s t →
     originalAffineMarkedPartition n left right s t
     ≡ originalNumeratorTaylorPolynomial n left right s t
