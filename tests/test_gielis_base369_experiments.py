@@ -474,3 +474,27 @@ def test_first_hit_minimum_forward_threshold():
     assert g.nearest_hit(origin,direction,poly,min_t=10.) is None
     with pytest.raises(ValueError):
         g.nearest_hit(origin,direction,poly,min_t=-.1)
+
+
+def test_exact_radiation_pressure_torque_envelope():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_force_envelope",
+        ROOT/"scripts/gielis_optical_force_envelope.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    from fractions import Fraction
+    for power in ("0","100","9000"):
+        for eta in ("0","1/2","19/20","1"):
+            row=module.envelope(power,"17/10",8,eta)
+            bound=Fraction(row["exact_absolute_wall_torque_bound_Nm"])
+            ideal=Fraction(row["perfect_reflector_bound_Nm"])
+            assert 0 <= bound <= ideal
+            if eta=="1":
+                assert bound==ideal
+    row=module.envelope("9000","17/10",0,"1")
+    assert Fraction(row["exact_absolute_wall_torque_bound_Nm"])==0
+    with pytest.raises(ValueError):
+        module.envelope("9000","17/10",8,"11/10")
+    with pytest.raises(ValueError):
+        module.envelope("-1","17/10",8,"1")
