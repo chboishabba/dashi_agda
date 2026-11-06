@@ -1,0 +1,909 @@
+{
+  "data_kind": "synthetic",
+  "on": {
+    "source_mode": "ON",
+    "apparatus_id": "SYNTHETIC-ZHANG-A-HV-sphere",
+    "source_class": "zhang2025_HV_sphere",
+    "target_id": "SYNTHETIC-polymer_ball",
+    "axis": "vertical_torsion",
+    "protocol_id": "SYNTHETIC/tracking_e_axis",
+    "calibration_id": "SYNTHETIC/torsion_frame_clock",
+    "instrument_id": "SYNTHETIC/two_camera",
+    "run_id": "SYNTHETIC/ON",
+    "raw_data_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "frame_times_calibrated": true,
+    "linear_quasistatic_anisotropy_justified": true,
+    "material": {
+      "inertia_kg_m2": {
+        "nominal": 1e-7,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "damping_Nm_s_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "torsion_Nm_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "zero_angle_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "electric_polarizability_anisotropy_C_m2_V": {
+        "nominal": 2e-16,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "magnetic_susceptibility_anisotropy": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "sample_volume_m3": {
+        "nominal": 1e-8,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      }
+    },
+    "frames": [
+      {
+        "t_s": 0,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          707.1067811865476,
+          707.1067811865474,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 1000000,
+          "bound": 1e-7,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0.7853981633974483,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 1,
+        "theta_rad": {
+          "nominal": 0.0005,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          706.7531394223398,
+          707.4602461740635,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 1000000,
+          "bound": 1e-7,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0.7858981633974482,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 2,
+        "theta_rad": {
+          "nominal": 0.002,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          705.6911543538923,
+          708.5195795930208,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 1000000,
+          "bound": 1e-7,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0.7873981633974483,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 3,
+        "theta_rad": {
+          "nominal": 0.0045000000000000005,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          703.9176519663035,
+          710.2815915186357,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 1000000,
+          "bound": 1e-7,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0.7898981633974482,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 4,
+        "theta_rad": {
+          "nominal": 0.008,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          701.427359980322,
+          712.7409478001356,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 1000000,
+          "bound": 1e-7,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0.7933981633974483,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      }
+    ]
+  },
+  "off": {
+    "source_mode": "OFF",
+    "apparatus_id": "SYNTHETIC-ZHANG-A-HV-sphere",
+    "source_class": "zhang2025_HV_sphere",
+    "target_id": "SYNTHETIC-polymer_ball",
+    "axis": "vertical_torsion",
+    "protocol_id": "SYNTHETIC/tracking_e_axis",
+    "calibration_id": "SYNTHETIC/torsion_frame_clock",
+    "instrument_id": "SYNTHETIC/two_camera",
+    "run_id": "SYNTHETIC/OFF",
+    "raw_data_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "frame_times_calibrated": true,
+    "linear_quasistatic_anisotropy_justified": true,
+    "material": {
+      "inertia_kg_m2": {
+        "nominal": 1e-7,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "damping_Nm_s_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "torsion_Nm_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "zero_angle_rad": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "electric_polarizability_anisotropy_C_m2_V": {
+        "nominal": 2e-16,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "magnetic_susceptibility_anisotropy": {
+        "nominal": 0,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      },
+      "sample_volume_m3": {
+        "nominal": 1e-8,
+        "bound": 0,
+        "evidence_receipt": "SYNTHETIC/fixture_only"
+      }
+    },
+    "frames": [
+      {
+        "t_s": 0,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 1,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 2,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 3,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      },
+      {
+        "t_s": 4,
+        "theta_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "E_V_m": [
+          0,
+          0,
+          0
+        ],
+        "B_T": [
+          0,
+          0,
+          0
+        ],
+        "E2_V2_m2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "B2_T2": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "electric_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "magnetic_axis_angle_rad": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/fixture_only"
+        },
+        "background_torques_Nm": {
+          "thread_asymmetry": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "air_and_ionic_wind": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "vibration_and_mounts": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "thermal_transients": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "magnetic_hysteresis_and_eddy": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "charge_loss_and_leakage": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "rf_pickup": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          },
+          "unmodelled_torque": {
+            "nominal": 0,
+            "bound": 0,
+            "evidence_receipt": "SYNTHETIC/fixture_only"
+          }
+        }
+      }
+    ]
+  }
+}
