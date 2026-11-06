@@ -89,3 +89,47 @@ def test_small_pareto_sweep_and_determinism():
     assert runs1 == runs2 and len(runs1) == 7
     assert g.pareto(runs1)
     assert all(0 <= row["focus_fraction"] <= 1 for row in runs1)
+
+
+def test_exact_18_to_36_nyquist_phase_resolution():
+    r = g.nyquist36_receipt()
+    assert r["coarse_sine_samples_zero"] == 18
+    assert r["fine_sine9_j1"] == 1
+    assert r["fine_sine27_j1"] == -1
+    assert r["cos_sin9_gram"] == 0
+
+
+def test_zero_reflection_budget_is_strict():
+    scene = g.spiral_vertices(3, 0.12, 192)
+    for angle in (.1,.6,1.1,2.8,4.8):
+        row = g.trace_ray(angle, scene, max_bounces=0, record=True)
+        assert row["reflections"] == 0
+        assert len(row["collisions"]) == 0
+
+
+def test_bounce_budget_never_exceeded():
+    scene = g.spiral_vertices(6, 0.24, 192)
+    for angle in np.linspace(0, 2*np.pi, 31,endpoint=False):
+        row = g.trace_ray(float(angle), scene, max_bounces=3, record=True)
+        assert row["reflections"] <= 3
+        assert row["reflections"] == len(row["collisions"])
+
+
+def test_pareto_both_legal_torque_objectives():
+    designs = [
+        {"name":"A", "focus_fraction":.60, "mean_abs_torque":1.},
+        {"name":"B", "focus_fraction":.40, "mean_abs_torque":2.},
+        {"name":"C", "focus_fraction":.20, "mean_abs_torque":.25},
+    ]
+    assert [x["name"] for x in g.pareto(designs, "min")] == ["A","C"]
+    assert [x["name"] for x in g.pareto(designs, "max")] == ["A","B"]
+    with pytest.raises(ValueError):
+        g.pareto(designs, "unspecified")
+
+
+def test_non369_controls_are_not_silently_excluded():
+    controls = g.optical_sweep(rays=16,segments=128,bounces=2,
+                               include_controls=True)
+    assert len(controls)==13
+    assert {item["m"] for item in controls} == {3,4,5,6,7,9}
+    assert all(item["total_reflections"] <= 16*2 for item in controls)
