@@ -33,6 +33,9 @@ JMD_NONADJ = ROOT / "DASHI/Moonshine/Y443JMDNonadjacentRelatorConsequencesExact.
 JMD_FROM_RELATORS = ROOT / "DASHI/Moonshine/Y443JMDFromRelatorsToPowerExact.agda"
 BETA_FIVE = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveFiniteRewriteExact.agda"
 BETA_SCRIPT = ROOT / "scripts/check_y443_jmd_beta5_rewrite_certificate.py"
+BETA_SEMANTICS = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveSemanticCompilerExact.agda"
+COXETER_LAWS = ROOT / "DASHI/Moonshine/Y443CoxeterRelatorSemanticLawsExact.agda"
+ACTUAL_BETA = ROOT / "DASHI/Moonshine/Y443JMDA4RulesFromPresentationExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -141,7 +144,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -207,7 +210,12 @@ def assert_source_scope() -> None:
         for marker in markers:
             if marker not in content:
                 raise AssertionError(f"missing source theorem {marker}")
-    print("PASS source: JMD beta5 finite rewrite, actual relator commutations, 72+8")
+    for src, markers in ((BETA_SEMANTICS, ("localSound", "runSound", "betaOrderFiveFromFiniteCertificate")), (COXETER_LAWS, ("edgeProductCube", "braidFromCoxeter", "edgeBraid")), (ACTUAL_BETA, ("betaFiveFromOriginal80Relators", "x4InPairWithNoExtraPowerPremise", "betaInPairWithNoExtraPowerPremise"))):
+        raw = src.read_text()
+        for marker in markers:
+            if marker not in raw:
+                raise AssertionError(f"missing source-backed Agda theorem {marker}")
+    print("PASS source: exact source→35 rewrites→group beta^5→JMD u/v powers present")
 
 
 def check_agda() -> None:
