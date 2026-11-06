@@ -42,7 +42,7 @@ if command -v agda >/dev/null 2>&1; then
 else
   # The Python/static preflight must run even without Agda installed.
   # All kernel modes have already failed closed above.
-  printf 'Agda version: unavailable (preflight-only; no kernel receipt)\\n'
+  printf 'Agda version: unavailable (preflight-only; no kernel receipt)\n'
 fi
 printf 'Mode: %s\n' "$mode"
 
