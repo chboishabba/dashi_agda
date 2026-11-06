@@ -199,6 +199,27 @@ It establishes an exact re-refinement requirement if subsequent
 source-supported biology introduces another observationally relevant
 state variable or intervention.
 
+## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
+
+This table **supersedes** earlier Round-23 provisional descriptions
+below, especially the prior restriction to fair ½–½ marker weights.
+
+| Gate | Newly integrated source owner / regression | Exact remaining acceptance |
+|---|---|---|
+| **P0** | Original source-measured `RNA9` Hamming-one witness; source-indexed independent developmental frame; existing atom/molecule/chemistry owners via `BiologicalAtomicMolecularHammingReuseExact` | **P0.PHYSICAL-SOURCE:** selected genome, regulatory, biochemical, bioelectric and physical state and a source-validated whole-cell/tissue transition law; observed frame-to-frame states |
+| **P1** | Source-written **18-class** exact deterministic quotient; `BiologicalParametricStochasticLumpingExact` with nonnegative, normalized, time-dependent rational weights; explicit marker-sensitive countermodel | **P1.KERNEL:** exact-head Agda/`parallel_checker` receipt; **P1.STOCHASTIC-PHYSICAL:** measured transition probabilities and proof the actual physical observer/transition agrees with the chosen quotient; re-refine if markers are experimentally relevant |
+| **P2** | 54-bond/36-plaquette cubical dynamics, finite basin transport; native SI PNP flux/charge donor linked to tissue observation socket | **P2.PNP-STEP:** selected PNP model with source-qualified ionic flux, cell/tissue boundaries, sampled voltage/morphology trajectory and intervention-commuting physical-to-tissue state refinement; **P2.BASIN:** measured stability/basin discrimination |
+| **P3** | Existing SI quantitative calibration executable, native stoichiometric/rate-law/electrochemical and molecular assembly owners; parametric stochastic semantics | **P3.MEASURED-TRAJECTORIES:** original model-specific time-series observations, fitted/identifiable parameter receipts, uncertainty and independent heldout checks; dmsC static mean assays cannot supply physical kinetic rates |
+| **P4** | Original-evidence-anchored GO-CAM/SBML candidate crosswalk now checked at both producer and ITIR PR #72 consumer; fail-closed negative tests | **P4.SOURCE-SPAN:** canonical source-span/parser reconciliation; **P4.REVIEW:** independently reviewed linkage and authorized PostgreSQL PNF operation, not an automatic promotion |
+| **P5** | Source-pinned molecular measured genotypes, Hamming graph/replicate-range regressions, exact 729-resample interval, independent experiment/specimen-heldout longitudinal evaluation runner | **P5.PROSPECTIVE:** original independent repeated longitudinal perturbations with prespecified hypotheses and disjoint test groups, independently verified source digest, discrimination and replication of tissue attractors |
+
+**Verification distinction:** The finite 4^9 graph and 729-bootstrap
+arithmetic were also cross-checked in a second independent JS
+enumeration. All newly written Agda modules, Python scripts, exact-head
+root and `parallel_checker` remain unexecuted or unaccepted in this
+environment. No external experimental inputs, PostgreSQL mutation,
+approved ontology identity or empirical physical model are manufactured.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
