@@ -144,6 +144,20 @@ mwwAU2ReductionInputWeight = refl
 mwwAU2ScenarioNumerator : Nat
 mwwAU2ScenarioNumerator = 931825 * powNat 998 20
 
+-- A one-point reduction in AU2's forecast future quality produces
+-- 99.91649... percent. It is strictly below 100, by EXACT Nat arithmetic.
+onePointMWWAU2Below100Exact :
+  mwwAU2ScenarioNumerator +
+    748239468928167351638019368963401905585837292123722684222668800
+    ≡ 100 * oagDenominator
+onePointMWWAU2Below100Exact = refl
+
+onePointMWWAU2StillAbove90Exact :
+  90 * oagDenominator +
+    88851760531071832648361980631036598094414162707876277315777331200
+    ≡ mwwAU2ScenarioNumerator
+onePointMWWAU2StillAbove90Exact = refl
+
 -- Absolute gap under 100 is source-derived and finite; no legal test.
 -- Numerical approximate target 99.91649113%, before source AU rounding.
 
