@@ -1,3 +1,23 @@
+## 6 November follow-on: the LITERAL TWO-WILSON half-power donor is already source-owned
+
+Further source audit found `BalabanLiteralTwoWilsonQuarterDyadicCompletionExact.agda` (not an abstract common-J envelope). Its **already existing** `literalTwoWilsonEmbeddedQuarterDyadicDecay` proves, for a `QuarterDyadicTwoWilsonSource` on the exact selected finite T5 covariance,
+
+```text
+embed |Cov_(mu_{a,L})(W_left,W_right)|
+  <= embed ((1/4) * (1/2)^euclideanTime)
+```
+
+by composing the original literal two-Wilson marked expansion, the selected R429 mixed log, connected-support geometry, residual dyadic physical calibration, a rational-real ring embedding and the source amplitude `<= embed(1/4)`. **This is an important stronger specific donor than a new generic KP proof.** It still requires the actual original continuous Wilson/Haar generating functional, physical support and uniform selected amplitude inputs, not a mere type-matching change of carrier.
+
+The source-first route has two competing real code producers:
+- **R344 shared marked Hessian** -> literal R342 -> R467 -> R482, with selected J, source-time equality, hessian (C_H<=1).
+- **Literal two-Wilson quarter-dyadic** -> existing finite T5 physical covariance bound, with original two Wilson insertions, R429/trace/source ring embedding, physical separation and (A_{\rm src}<=1/4). After verifying *same covariance carrier and same physical selected time*, use existing R479/R482 continuum/OS consumers, not a substitute transfer kernel.
+
+No independent generic exponential source estimate or physical-q assumption should be added on top of either. The BIDI comparison must identify the original two Wilson source and R344's selected analytic J pair as the same generating functional, or explicitly record them as different test families.
+
+
+---
+
 
 ### 6 November R344 finding: the canonical CMP116 q=1/2 shell is ALREADY source-implemented
 
