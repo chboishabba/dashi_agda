@@ -17,6 +17,8 @@ open import Data.Empty using (⊥)
 
 import Base369
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
+import DASHI.Cognition.CCDCOEP3TypedIntersectionalAxisExact as Axis
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
@@ -25,58 +27,28 @@ import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Trialectic
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as Braid
 
 ------------------------------------------------------------------------
--- The phrase "2x + 2y != 4" must not be made a false arithmetic theorem.
--- An intersectional claim concerns an outcome depending on the joint
--- fibre, with an interaction that is erased by an additive projection.
+-- INTERSECTIONAL OWNERSHIP: heterogeneous typed axes, NOT a scalar trick.
+--
+-- Reuse CCDCOEP3TypedIntersectionalAxisExact, which directly consumes the
+-- original IntersectionalBinaryInteractionBridgeExact,
+-- BinaryInteractionNonseparabilityExact, IntersectionalConstraintGeometryExact,
+-- and IntersectionalNonFactorability owners. Neither an equal point count
+-- nor a reweighted aggregate identifies race- and sex-axis positions.
 ------------------------------------------------------------------------
 
-bit : Bool → Nat
-bit false = zero
-bit true = 1
+typedRaceSexAxesDistinct :
+  Axis.raceAxis ≡ Axis.sexAxis → ⊥
+typedRaceSexAxesDistinct = Axis.axisTagsDiffer
 
-additiveModel : Bool → Bool → Nat
-additiveModel x y = 2 * bit x + 2 * bit y
+typedInteractionHasNoEndpointAdditiveReconstruction :
+  Interaction.NonseparableAdditiveInteraction Axis.typedJointSurface
+typedInteractionHasNoEndpointAdditiveReconstruction =
+  Axis.typedJointNotAdditivelySeparable
 
-intersectionTerm : Bool → Bool → Nat
-intersectionTerm true true = 1
-intersectionTerm _ _ = zero
-
-jointModel : Bool → Bool → Nat
-jointModel x y = additiveModel x y + intersectionTerm x y
-
-literalArithmeticIntact : additiveModel true true ≡ 4
-literalArithmeticIntact = refl
-
-selectedNonadditiveOutcome : jointModel true true ≡ 5
-selectedNonadditiveOutcome = refl
-
-nonadditiveNotLiteralFour :
-  jointModel true true ≡ additiveModel true true → ⊥
-nonadditiveNotLiteralFour ()
-
--- Same values of x and y and same additive report, but two different
--- laws of interaction. This is not a claim of a real measured effect size.
-data InteractionWorld : Set where
-  additiveWorld : InteractionWorld
-  coupledWorld : InteractionWorld
-
-reportedAdditive : InteractionWorld → Nat
-reportedAdditive _ = additiveModel true true
-
-situatedOutcome : InteractionWorld → Nat
-situatedOutcome additiveWorld = additiveModel true true
-situatedOutcome coupledWorld = jointModel true true
-
-situatedOutcomesDiffer :
-  situatedOutcome additiveWorld ≡ situatedOutcome coupledWorld → ⊥
-situatedOutcomesDiffer ()
-
-interactionCannotBeRecoveredFromAdditiveReport :
-  NF.FactorsThrough reportedAdditive situatedOutcome → ⊥
-interactionCannotBeRecoveredFromAdditiveReport =
-  NF.witnessRulesOutEveryFlatFactorisation
-    (NF.nonFactorabilityWitness
-      additiveWorld coupledWorld refl situatedOutcomesDiffer)
+sameTypedCoordinatesDoNotDetermineSituatedRecognition :
+  NF.FactorsThrough Axis.coordinatesOnly Axis.recognition → ⊥
+sameTypedCoordinatesDoNotDetermineSituatedRecognition =
+  Axis.jointPositionsStillDoNotRecoverContextualOutcome
 
 ------------------------------------------------------------------------
 -- The SIX S3 reorientations are owned by existing ternary group modules.
