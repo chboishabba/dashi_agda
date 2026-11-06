@@ -189,7 +189,6 @@ module _
   -- two source-local product and adjoint laws M2a/M2b, both on SAME selected source.
   originalMeasuredAllWordCrossGramEqualsNativeR445 :
     (source : OriginalSameSourceMeasurement)
-    (reflection : Observable → Observable)
     (left right : Word) →
     originalMeasuredObserverCrossWordGram
       source left right
@@ -213,14 +212,13 @@ module _
   -- recovered too, by the SAME native block pushforward theorem.
   originalMeasuredAllWordCrossGramEqualsFineWilson :
     (source : OriginalSameSourceMeasurement)
-    (reflection : Observable → Observable)
     (left right : Word) →
     originalMeasuredObserverCrossWordGram
       source left right
     ≡ originalFineWilsonWordGram
       (selectedPhysicalReflection source) left right
   originalMeasuredAllWordCrossGramEqualsFineWilson
-      source reflection left right =
+      source left right =
     trans
       (originalMeasuredAllWordCrossGramEqualsNativeR445
         source left right)
@@ -234,7 +232,6 @@ module _
   -- parallel abstract Gram) have the same native word-pair Gram.
   originalSelectedCyclicKetAllWordGramEqualsNativeR445 :
     (source : OriginalSameSourceMeasurement)
-    (reflection : Observable → Observable)
     (left right : Word) →
     readOriginalScalarAsReal
       (Cyclic.originalSelectedCyclicPair E laws
