@@ -986,3 +986,194 @@ The CI workflow no longer shells out to `nix build` or directly
 executes `AGDA_BIN` in its checking steps. It retains the
 environment installation action required by the wrapper. The
 actual runtime receipt is still pending.
+
+
+## 2026-11-06 four-gate source max-cut continuation — native product, two-point Cayley, Nat log, real chart
+
+**Scope:** golden Agda PR #1408; original `vendor/bishop` reals,
+`RealProperties`, `Sequence`, and selected Round11
+`BishopSetoidComplexExact.expC`. This continues the four gates in
+the user's exact maximal cut, while keeping source-written, static
+inspection, finite independent regression and kernel acceptance
+strictly distinct.
+
+### 1. K05-PRODUCT — eliminate the mathematical input, retain kernel gate
+
+The ORIGINAL
+`DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda`
+already exports
+
+```agda
+originalImaginaryExponentialMultiplicative :
+  (inputs : Cutset.Round11BishopCutset) (x y : R.ℝ) →
+  Complex._≈C_
+    (Complex._*C_
+      (Complex.expC T (Complex.pureImaginary x))
+      (Complex.expC T (Complex.pureImaginary y)))
+    (Complex.expC T (Complex.pureImaginary (R._+_ x y)))
+```
+
+where `T=Route.round11MachinTranscendentals inputs`. Thus the
+separate `Round11ImaginaryExpMultiplicative` **premise** in
+the original K05/K04d consumers has a source-written implementation,
+up to `Complex.≈C-sym`.
+
+New owner:
+`Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda`
+
+- `originalNativeImaginaryExpProduct` supplies all-`x,y` original
+  pure-imaginary multiplication from the existing signed-factorial
+  owner, not a fresh law.
+- `originalNativeFirstPositiveSineZeroFromCayley` consumes **only**
+  the explicit original Bishop Machin Cayley evaluation, not an
+  independent product, global sign or Pythagorean premise.
+- `sourceRegionBaselFromNativeSignedFactorials` discharges the
+  phase-modulus/Pythagorean premise of the existing original
+  `Re(s)>2` Basel comparison. It still needs Nat exp/log inversion.
+- `sourceRegionBaselFromOneNativeLogIdentity` further reduces this
+  to ONE original negative-log identity through the new Nat bridge.
+
+**Status:** source-written mathematical interface used directly;
+Agda kernel acceptance of the signed-factorial theorem, transitive
+dependencies, and TOE root **OPEN**. No verified theorem receipt is
+invented.
+
+### 2. K05-PI — two literal arctangent evaluations are the only analytic inputs
+
+New owner:
+`Analysis/BishopMachinTwoPointCayleyCompositionExact.agda`.
+
+The original Bishop arctan values are the actual
+`Machin.bishopAtanOneFifth` and
+`Machin.bishopAtanOneTwoHundredThirtyNinth`; these are finite-source
+selected limits, not a classical atan or a new analytic carrier.
+Their two precise remaining evaluations are:
+
+```agda
+OriginalAtanFiveCayleyEvaluation inputs
+OriginalAtan239CayleyEvaluation inputs
+```
+
+respectively
+
+```text
+exp_C (i * (2 * atan_B(1/5))) ~= embed(C(1/5))
+exp_C (i * (2 * atan_B(1/239))) ~= embed(C(1/239)).
+```
+
+The new module source-writes:
+
+- `nativeExpImagProduct` directly from the above original K05
+  signed-factorial theorem.
+- `nativeExpImagNegateIsConjugate` using source
+  `Round11.round11ParityInputs` and the existing Bishop
+  sine/cosine even-odd limit theorem.
+- `nativeFivePhaseSquared`, `nativeFivePhaseFourth`,
+  `native239ConjugatePhase` using the original rational complex
+  morphism and conjugation rather than assuming complex
+  associativity on a different carrier.
+- `originalDoubleQuarterIsCayleyAngleSum`: literal selected
+  Bishop ring identity `2 theta_M = 8 atan_B(1/5) - 2 atan_B(1/239)`.
+- `nativeCombinedCayleyFromTwoOriginalAtanValues`: maps the two
+  pointwise original exp/atan identities to the original selected
+  combined Machin Cayley equation.
+- `originalMachinFirstPositiveSineZeroFromTwoAtanCayleyValues`:
+  obtains original first positive sine zero by the already-written
+  `BishopMachinCayleyNativeProductFirstZeroExact` proof consumer.
+
+**Remaining PI.1/PI.2:** establish the TWO actual source analytic
+exp/atan-to-Cayley evaluations, using original Bishop power-series
+composition, coefficient recurrence, constructive absolute convergence
+and uniqueness of limits. No additional independent product,
+phase conjugation, quarter equality, branch sign, or first-zero sign
+lemma is required by this new terminal source owner.
+
+### 3. K04d-LOG — genuine Nat specialization from ONE original identity
+
+New owner:
+`Analysis/BishopK04dNatLogFromOriginalGapExact.agda`.
+
+- Exact rational all-N `natRatioPlusReciprocalIsOne` and
+  `natReciprocalTimesSuccessorIsOne` at the literal
+  `(n+1)/(n+2)` source argument; these are direct
+  `Data.Integer.Solver` proof certificates on the existing
+  unnormalised rational carrier.
+- `nativeNatGapIsReciprocal` and
+  `nativeNatGapTimesSuccessorIsOne` transport this finite identity
+  to the original `Real._⋆` setoid.
+- `sourceCanonicalNatLogSuccessorExpInverse` reuses
+  `BishopNegativeLogExponentialReciprocalFromCancellationExact`
+  and `BishopInverseSquareProductExact.inverseFromCancellation`,
+  **not** an independently assumed `exp_B(L_n)=n+2` family.
+- `sourceCanonicalNatLogAllIndicesExpInverse` includes the
+  original `Exp(0)=1` base case.
+
+Single source analytic input
+`OriginalBishopNegativeLogExponentialGap` is explicitly the
+original `Log.sourceNegativeLogValue`:
+`exp_B(-L_B(x)) ≃ 1-x`.
+**This source exp/log composition identity is still OPEN.**
+Finite all-N arithmetic plus Python Fraction cross-checks of 10,000
+indices are not a proof of that identity or Agda acceptance.
+
+### 4. K04d-CONTINUITY — actual total above-two chart
+
+New owner:
+`Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda`.
+
+It constructs a literal original Bishop Cartesian complex chart
+
+```text
+sourcePolynomialChart eta t = (3+t*t) + i*eta
+```
+
+and proves, constructively:
+- `sourcePolynomialChartInsideAboveTwo` for **every** Bishop real
+  `t`, from `2<3` and original
+  `BishopSquareNonnegativeExact.bishopSquareNonnegative`.
+- `sourcePolynomialChartRealContinuous` and
+  `sourcePolynomialChartImagContinuous` from original vendored
+  `Sequence` algebra, no arbitrary chart `inside` field.
+- `OriginalNatLogPolynomialChart.Actual` selects the ORIGINAL
+  `Terms.bishopDirichletExponentialTerm` and constructs the actual
+  uniform Basel real/imag approximation of its source summation.
+  The only still-unproved majorant input is the same original
+  `OriginalBishopNegativeLogExponentialGap` above.
+- `selectedOriginalRealContinuityFromFiniteExp` and
+  `selectedOriginalImagContinuityFromFiniteExp` apply the already
+  owned source Bishop uniform-limit continuity theorem.
+
+**Boundary:** the chosen quadratic chart is a concrete 1D
+curve/subregion. Its existence alone is NOT a general
+complex-neighborhood holomorphy theorem, not an all-`Re(s)>2`
+continuity proof, and not a selected `zetaHalfPlane` or
+completed-`xi` identification. Native pointwise continuity of
+the actual selected `expC(-sL_n)` finite source terms remains
+OPEN; original selected `ZetaHalfPlaneLayer` agreement and
+original `CompletedRiemannZeta.xi` gamma/prefactor formula
+remain separately OPEN.
+
+### Acceptance and actual deliverables
+
+- All seven new source owners across this round are imported into
+  the three golden TOE roots with no additional real/complex carrier.
+- The repository's canonical `scripts/run_agda29_parallel_check.sh`
+  now owns both the focused `--safe` check and the three
+  `--safe` TOE-root checks, with exact selected standard library
+  SHA `008f12c2908479567a3ae3c873f9cf0b8fe5987e`.
+- `.github/workflows/bishop-k04d-k05-native-proof.yml`
+  includes 45 focused owner paths and non-promotional finite
+  exact-rational and Cayley regression scripts. It preserves
+  `bishop-focused-kernel.log`, `bishop-toe-kernel.log`
+  and source test output as GitHub workflow artifacts.
+- **Observed:** no successful exact-head kernel/TOE workflow receipt
+  was available in this chat. Static inspection is not promotion.
+  All source mathematical results here remain
+  `source-written / kernel-pending`.
+- **Open true analytic cut:** (A) one original constructive
+  absolutely-convergent exp/log composition lift; (B) two
+  original Bishop arctan/exponential-to-Cayley evaluations,
+  ideally via that shared composition theorem; (C) original
+  complex exponential finite-term continuity and original
+  selected `zetaHalfPlane` agreement; (D) selected completed
+  `xi` gamma/prefactor value identity and factor continuity.
