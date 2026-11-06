@@ -1,3 +1,34 @@
+## 6 November 2026 — same-original-Wilson constructive 4D continuum steelman / BIDI max-cut
+
+**Primary theorem proposal:** [YMClayConstructive4DContinuumSteelman20261106.md](../physics/YMClayConstructive4DContinuumSteelman20261106.md). It explicitly derives the hypothetical nontrivial 4D continuum from ONE original compact-simple-G Wilson family, not six unrelated records, and proposes source-specific bounds for same-observable UV Cauchy limits, IR/crossing tails, literal CMP116 mixed-J decay, OS reconstruction and non-Gaussian survival. The existing R443/R445/R320/R333 owners are reused; unification #1460 remains downstream.
+
+**New golden producer:** `DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda` (source-written, **Agda kernel pending**): `finiteRGLoss`, `referenceChargeBelowCurrentPlusLoss`, `referenceRGUniformNoncollapse` from a reference `eta+B≤c0` and actual `c_n≤c_{n+1}+δ_n`, `sum_{k<n}δ_k≤B`; `asOriginalT5Nontriviality` instantiates the EXISTING T5 uniform fourth-cumulant lower theorem with this **derived** finite bound; `continuumRGChargeIsNonzero` imports existing T5 nonzero result. This does not construct the original source-specific charge/limit, and cannot assign a fictitious fourth-cumulant sign.
+
+**Physical RG insight to test, not assert:** after actual 4D marginal and source renormalization, an original Wilson/CMP119/122 one-step residual may obey `δ_n≤A/((n+1)(n+2))+C 2^{-(n+1)}+h_n`, `Σ h_n≤H`; this gives `q≤q0+A+C+H<1` via the *existing* `YMClayPhysicalRGDriftToUniformInfluenceExact`, while bare O(g²) harmonic sums diverge. The actual Ward cancellation/marginal subtraction and full large-field/marked-J source error remain to be proved.
+
+**Executed independent exact rational BIDI controls** (all illustrative, NOT physical): 192-step RG noncollapse, 64 exhaustive bounded charge configurations and 5 negative cases; 4×4 transfer Hankel Gram PSD, 128-step noncollapse and 7 false-positive negative controls; the UV rational n^-2+geometric+holes sum checked at depths 1,2,4,8,16,64,256,512, with a divergent harmonic control. The fixture `q0=1/4, A=1/16, C=1/32, H=1/64` gives `q=23/64`; NO Wilson measurement or Agda acceptance is inferred. New scripts `check_ym_rg_noncollapse_steelman.py`, `check_ym_clay_continuum_bidi_controls.py`, `check_ym_marginal_subtracted_uv_tail.py` committed and targeted by CI. Golden TOE root imports the new Agda module.
+
+**Exact deliverable IDs (do not rename; promote only with physical proof receipts):**
+- `CLAY4.F1`
+- `CLAY4.A1`
+- `CLAY4.A2`
+- `CLAY4.A3`
+- `CLAY4.B1`
+- `CLAY4.C1`
+- `CLAY4.C2`
+- `CLAY4.D1`
+- `CLAY4.D2`
+- `CLAY4.D3`
+- `CLAY4.E1`
+- `CLAY4.E2`
+- `CLAY4.E3`
+
+**Status:** `CLAY4.D2` source-written mathematical compiler, Agda pending; `CLAY4.D3` derived conditional transport to T5, Agda pending; `CLAY4.F1` source-written original closed 1024-label candidates, kernel pending. `CLAY4.A1/A2/A3/B1/C1/C2/D1/E1/E2/E3` are physical same-source analytic or semantic construction work, NOT realized original continuum theorems. No CLAY endpoint acceptance claimed.
+
+**Highest alpha execution order:** original one-step marked source/Dyadic Cauchy `A1/A2` and two-marked physical CMP116 shell `B1/C1/C2` in parallel, then one fixed-scale nonGaussian `D1/D2/D3`, exact original RP/OS/E(4) `E1/E2` and per-G `E3`; native `F1` kernel independently. Fail on unproved physical input rather than selecting a toy model.
+
+---
+
 ## 2026-11-06 — executable finite and RG-drift implementation / acceptance audit
 
 **YM-owned branch:** #1444 only. #1469 parent reconciliation was merged; #1460 remains observer/KK/OS unification and is not imported into the parent. The other worker's separate physical-observer results do not pay any YM continuum or R443–R333 theorem. Keep all original Wilson/Fubini/Haar/CMP116/UV owners.
