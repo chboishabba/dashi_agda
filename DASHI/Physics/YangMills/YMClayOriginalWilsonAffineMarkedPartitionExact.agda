@@ -53,7 +53,7 @@ mixedProduct s t x y =
         (cong (λ z → s *ℝ (z *ℝ y)) (*-comm x t))
         (trans
           (cong (λ z → s *ℝ z) (*-assoc t x y))
-          (sym (*-assoc s t (x *ℝ y)))))
+          (sym (*-assoc s t (x *ℝ y))))))
 
 affineFactorExpansion : ∀ s t x y →
   (1ℝ +ℝ s *ℝ x) *ℝ (1ℝ +ℝ t *ℝ y)
