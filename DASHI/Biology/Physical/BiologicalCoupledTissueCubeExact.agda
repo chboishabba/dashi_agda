@@ -263,6 +263,53 @@ canonicalXAllTracesAreFutureSafe actions field =
   initialAllTracesPreserveBiologicalProjection
     canonicalXSchedule actions field
 
+-- Basin transport for the SELECTED synchronous Boolean morphogenetic map.
+-- Signalling alters morphology, but preserves the genetic, memory, junction
+-- and environmental coordinates used to calculate the next local response.
+-- Hence a second unchanged signal fixes the first-signal macro pattern.
+-- This is a finite fixed-point/one-step basin certificate, not an empirical
+-- convergence rate, a metric separatrix or a PDE stability theorem.
+coupledSignalIdempotentAt :
+  (schedule : AdmissibleNeighbourSchedule)
+  (field : Bio.TissueField)
+  (p : Cube.Ternary27Point) →
+  coupledStep schedule Bio.signal
+    (coupledStep schedule Bio.signal field) p
+  ≡ coupledStep schedule Bio.signal field p
+coupledSignalIdempotentAt schedule field p
+  with field p | field (neighbour schedule p)
+... | Bio.biologicalState g c h j e m
+    | Bio.biologicalState g' c' h' j' e' m' = refl
+
+coarseSignalIdempotentAt :
+  (schedule : AdmissibleNeighbourSchedule)
+  (field : Bio.CoarseTissueField)
+  (p : Cube.Ternary27Point) →
+  coarseCoupledStep schedule Bio.signal
+    (coarseCoupledStep schedule Bio.signal field) p
+  ≡ coarseCoupledStep schedule Bio.signal field p
+coarseSignalIdempotentAt schedule field p
+  with field p | field (neighbour schedule p)
+... | Bio.futureSufficientCode g h j e m
+    | Bio.futureSufficientCode g' h' j' e' m' = refl
+
+-- Fine and coarse projections agree at the selected one-step basin target,
+-- as well as along the arbitrary supplied intervention trace.
+coupledBasinTargetProjection :
+  (schedule : AdmissibleNeighbourSchedule)
+  (field : Bio.TissueField)
+  (p : Cube.Ternary27Point) →
+  Bio.project
+    (coupledStep schedule Bio.signal
+      (coupledStep schedule Bio.signal field) p)
+  ≡ coarseCoupledStep schedule Bio.signal
+      (Bio.spatialProject
+        (coupledStep schedule Bio.signal field)) p
+coupledBasinTargetProjection schedule field p =
+  coupledStepCommutesAtEveryVoxel
+    schedule Bio.signal
+    (coupledStep schedule Bio.signal field) p
+
 -- Adjacency-witness schedules do not imply symmetric transport or numerical
 -- conservation.  Boundary conditions and all-face/plaquette flux are still
 -- independent dynamical owners, and must be paid before a PNP PDE claim.
