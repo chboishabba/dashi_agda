@@ -272,3 +272,14 @@ Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAt
   analytic **PI.1** goal. The above finite source-written lemmas do not yet
   have an exact-head Agda kernel receipt. Their presence does not close
   K05-PI's original positive-sine/first-zero terminal.
+
+
+## 2026-11-06 — Bishop Machin Cayley formal/real same-object max-cut
+
+- Proved in new source candidate `BishopMachinOriginalCayleyFormalSeriesExact` the all-degree Q[i] coefficient equation for `(1-iX)F=1+iX` and all-degree recurrence uniqueness, reusing the existing rational complex type and not creating a second Cayley/phase model.
+- Source-wrote `BishopSquareZeroReflectsSetoidZeroExact`: `x*x ≃ 0 ⇒ x ≃ 0` on the vendored Bishop reals by reusing native square/absolute reflection. No imported square-root authority required.
+- Source-wrote `BishopMachinRationalCayleyToOriginalComplexExact`: actual normalized rational → unnormalized rational → vendored `Real._⋆`, preserving add/subtract/negate/multiply and original Cartesian complex multiplication; transported the existing finite Machin Cayley phase `= i` into the *same* selected original Bishop complex carrier.
+- Source-wrote `BishopMachinCayleyHalfPhaseToFirstZeroExact`: selected exact `exp_C(2i θ_M) ≃ i` plus the existing K05 shared original imaginary exponential product implies `(cos_B θ_M - sin_B θ_M)^2 ≃ 0`, then original quarter equality and first positive source sine zero through existing global sign theorem. New strongest consumer: `sourceMachinFirstPositiveZeroFromSameObjectCayley`.
+- New exact Python regression `check_k05_cayley_formal_coefficients.py`; independently evaluated 4096 Q[i] denominator-product coefficients without failures. These tests are non-promotional.
+- Added four Agda owners to all three golden TOE roots and focused workflow. Corrected the focused CI to invoke the **existing repository Agda parallel-checker wrapper** (`scripts/run_agda29_parallel_check.sh`), not directly `nix build` or `AGDA_BIN`, with fixed selected stdlib commit and 41 focused files. Updated max-cut roadmap.
+- **Evidence gate:** No successful Agda kernel logs or TOE acceptance receipts were returned. The original Bishop atan/exponential selected Cayley evaluation, the all-parameter imaginary product kernel receipt, K04d-LOG nested source exp/log identity and K04d-CONTINUITY selected original zeta/xi weld remain OPEN. Never mark conditional compilers as completed analytic theorems.
