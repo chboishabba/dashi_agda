@@ -39,6 +39,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as Global
+import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as Guarded
+import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact as Endcap
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeExact as CNFSize
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeClosedExact as Closed
@@ -360,18 +362,43 @@ nonemptyPayloadStrictlyBelowCookFormulaNodes
         input
         steps
 
+    originalFormula :
+      CNF.CNF
+        (Endpoint.ExtendedGlobalWidth
+          machine steps cols)
+    originalFormula =
+      Global.globalCookLevinCNF
+        stateCoverage symbolCoverage nonempty
+        steps cols initialTarget
+
     globalFormula :
       CNF.CNF
         (Endpoint.ExtendedGlobalWidth
           machine steps cols)
     globalFormula =
-      Global.globalCookLevinCNF
-        stateCoverage
-        symbolCoverage
-        nonempty
-        steps
-        cols
+      Guarded.guardedGlobalCookLevinCNF
+        stateCoverage symbolCoverage nonempty
+        steps (Guard.guardedInitialColsMinusOne input steps)
         initialTarget
+
+    endcapFormula :
+      CNF.CNF
+        (Endpoint.ExtendedGlobalWidth
+          machine steps cols)
+    endcapFormula =
+      Endcap.globalAllRowsEndcapsCNF
+        (Guard.guardedInitialColsMinusOne input steps)
+
+    originalBelowGuarded :
+      CNFSize.listLength originalFormula
+      ≤ CNFSize.listLength globalFormula
+    originalBelowGuarded =
+      subst
+        (λ n → CNFSize.listLength originalFormula ≤ n)
+        (sym (Closed.appendLength originalFormula endcapFormula))
+        (NatP.m≤m+n
+          (CNFSize.listLength originalFormula)
+          (CNFSize.listLength endcapFormula))
 
     payloadBelowBits :
       Input.inputPayloadLength input
@@ -384,12 +411,10 @@ nonemptyPayloadStrictlyBelowCookFormulaNodes
             symbol rest steps)
           (guardedColsBelowRowBits
             input steps))
-        (rowBitsBelowGlobalClauses
-          stateCoverage
-          symbolCoverage
-          nonempty
-          input
-          steps)
+        (NatP.≤-trans
+          (rowBitsBelowGlobalClauses
+            stateCoverage symbolCoverage nonempty input steps)
+          originalBelowGuarded)
 
     clausesBelowNodes :
       CNFSize.listLength globalFormula

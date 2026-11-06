@@ -6,13 +6,12 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunInitialCompleteExact
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Relation.Binary.PropositionalEquality using (trans; sym; cong)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
 import DASHI.Mathematics.Complexity.ConcreteTapeFlatAssignmentExact as Flat
-import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunAssignmentExact as Assignment
@@ -26,6 +25,14 @@ import DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact as 
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
+takeBitsAll :
+  ∀ {n} (bits : CNF.Bits n) →
+  Canonical.takeBits n bits ≡ bits
+takeBitsAll CNF.[]ᵇ = refl
+takeBitsAll (bit CNF.∷ᵇ bits)
+  rewrite takeBitsAll bits =
+  refl
+
 encodeRunRows_takeFirst :
   ∀ {machine start rows finish}
     (stateCoverage :
@@ -38,16 +45,14 @@ encodeRunRows_takeFirst :
       Canonical.CellWidth machine)
     (Assignment.encodeRunRows stateCoverage symbolCoverage run)
   ≡ Flat.encodeRow stateCoverage symbolCoverage start
-encodeRunRows_takeFirst {machine} {start = start}
+encodeRunRows_takeFirst
     stateCoverage symbolCoverage Run.runDone =
-  Canonical.takeAppendBits
-    (Flat.encodeRow {machine} stateCoverage symbolCoverage start)
-    CNF.[]ᵇ
-encodeRunRows_takeFirst {machine} {start = start}
+  takeBitsAll (Flat.encodeRow stateCoverage symbolCoverage _)
+encodeRunRows_takeFirst
     stateCoverage symbolCoverage
     (Run.runStep step rest) =
   Canonical.takeAppendBits
-    (Flat.encodeRow {machine} stateCoverage symbolCoverage start)
+    (Flat.encodeRow stateCoverage symbolCoverage _)
     _
 
 encodeRunBaseTrace_rowsPrefix :
@@ -57,14 +62,12 @@ encodeRunBaseTrace_rowsPrefix :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (run : Run.WellFormedTapeRun machine start rows finish) →
-  Slice.rowsPrefixBits {machine}
-    {Run.runLength run}
-    {Canonical.listLength (Local.cells start)}
+  Slice.rowsPrefixBits
     (Assignment.encodeRunBaseTrace
       stateCoverage symbolCoverage run)
   ≡ Assignment.encodeRunRows
       stateCoverage symbolCoverage run
-encodeRunBaseTrace_rowsPrefix {machine} {start = start}
+encodeRunBaseTrace_rowsPrefix
     stateCoverage symbolCoverage run =
   Canonical.takeAppendBits
     (Assignment.encodeRunRows
@@ -78,27 +81,23 @@ encodedRunBase_rowZero :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (run : Run.WellFormedTapeRun machine start rows finish) →
-  Global.rowSliceBits {machine}
-    {Run.runLength run}
-    {Canonical.listLength (Local.cells start)}
+  Global.rowSliceBits
     (Global.here {remaining = Run.runLength run})
     (Assignment.encodeRunBaseTrace
       stateCoverage symbolCoverage run)
   ≡ Flat.encodeRow stateCoverage symbolCoverage start
-encodedRunBase_rowZero {machine} {start = start}
+encodedRunBase_rowZero
     stateCoverage symbolCoverage run =
   trans
-    (Slice.rowSliceBits_eq_blockSlice {machine}
-      {Run.runLength run}
-      {Canonical.listLength (Local.cells start)}
+    (Slice.rowSliceBits_eq_blockSlice
       Global.here
       (Assignment.encodeRunBaseTrace
         stateCoverage symbolCoverage run))
     (trans
       (cong
         (Canonical.takeBits
-          (Canonical.listLength (Local.cells start) *
-            Canonical.CellWidth machine))
+          (Canonical.listLength (Local.cells _) *
+            Canonical.CellWidth _))
         (encodeRunBaseTrace_rowsPrefix
           stateCoverage symbolCoverage run))
       (encodeRunRows_takeFirst
@@ -113,16 +112,14 @@ encodedAcceptingAssignment_baseTrace :
     (certificate :
       Accepting.AcceptingWellFormedRun
         machine start rows finish) →
-  FormulaSem.baseTraceBits {machine}
-    {Accepting.acceptingRunLength certificate}
-    {Canonical.listLength (Local.cells start)}
+  FormulaSem.baseTraceBits
     (Assignment.encodeAcceptingRunAssignment
       stateCoverage symbolCoverage certificate)
   ≡
   Assignment.encodeRunBaseTrace
     stateCoverage symbolCoverage
     (Accepting.run certificate)
-encodedAcceptingAssignment_baseTrace {machine} {start = start}
+encodedAcceptingAssignment_baseTrace
     stateCoverage symbolCoverage certificate =
   trans
     (Slice.pullbackFinLeft_eq_takeBits
@@ -135,50 +132,91 @@ encodedAcceptingAssignment_baseTrace {machine} {start = start}
       _)
 
 
-decodedRunBase_finalRow :
+-- FINISH ROW IS PROPOSITIONALLY, NOT DEFINITIONALLY, THE START
+-- WIDTH. Use the ONE original width equality at the global boundary.
+encodedRunBase_finalRow :
   ∀ {machine start rows finish}
     (stateCoverage :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (run : Run.WellFormedTapeRun machine start rows finish) →
-  Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
-    (Canonical.listLength (Local.cells start))
-    (Global.rowSliceBits {machine}
-      {Run.runLength run}
-      {Canonical.listLength (Local.cells start)}
-      (Endpoint.finalRowSlot (Run.runLength run))
+  Global.rowSliceBits
+    (Endpoint.finalRowSlot (Run.runLength run))
+    (Assignment.encodeRunBaseTrace
+      stateCoverage symbolCoverage run)
+  ≡ Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (Assignment.runFinishCanonicalLength run)))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
+encodedRunBase_finalRow
+    stateCoverage symbolCoverage run
+    rewrite sym (Assignment.finalRunRowSlot_eq_finalRowSlot run) =
+  trans
+    (Slice.rowSliceBits_eq_blockSlice
+      (Assignment.finalRunRowSlot run)
       (Assignment.encodeRunBaseTrace
         stateCoverage symbolCoverage run))
-  ≡ finish
-decodedRunBase_finalRow {machine} {start = start}
-    stateCoverage symbolCoverage run =
-  trans
-    (cong
-      (λ s →
-        Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
-          cols
-          (Global.rowSliceBits {machine} {steps} {cols} s
-            (Assignment.encodeRunBaseTrace stateCoverage symbolCoverage run)))
-      (sym (Assignment.finalRunRowSlot_eq_finalRowSlot run)))
     (trans
       (cong
-        (Decode.decodeRow {machine = machine} stateCoverage symbolCoverage cols)
-        (trans
-          (Slice.rowSliceBits_eq_blockSlice {machine} {steps} {cols}
-            (Assignment.finalRunRowSlot run)
-            (Assignment.encodeRunBaseTrace
-              stateCoverage symbolCoverage run))
-          (cong
-            (Slice.blockSliceBits
-              (Assignment.finalRunRowSlot run))
-            (Assignment.encodeRunBaseTrace_rows
-              stateCoverage symbolCoverage run))))
+        (Slice.blockSliceBits
+          (Assignment.finalRunRowSlot run))
+        (Assignment.encodeRunBaseTrace_rows
+          stateCoverage symbolCoverage run))
       (Assignment.encodeRunRows_finalBlock
         stateCoverage symbolCoverage run))
-  where
-    steps = Run.runLength run
-    cols = Canonical.listLength (Local.cells start)
+
+encodedAcceptingAssignment_finalRow :
+  ∀ {machine start rows finish}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun
+        machine start rows finish) →
+  Global.rowSliceBits
+    (Endpoint.finalRowSlot
+      (Accepting.acceptingRunLength certificate))
+    (FormulaSem.baseTraceBits
+      (Assignment.encodeAcceptingRunAssignment
+        stateCoverage symbolCoverage certificate))
+  ≡ Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (Assignment.runFinishCanonicalLength
+          (Accepting.run certificate))))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
+encodedAcceptingAssignment_finalRow
+    stateCoverage symbolCoverage certificate =
+  trans
+    (cong
+      (Global.rowSliceBits
+        (Endpoint.finalRowSlot
+          (Accepting.acceptingRunLength certificate)))
+      (encodedAcceptingAssignment_baseTrace
+        stateCoverage symbolCoverage certificate))
+    (encodedRunBase_finalRow
+      stateCoverage symbolCoverage
+      (Accepting.run certificate))
+
+-- A dependent decode commutes with the ONE canonical length cast.
+-- Pattern matching on eq, rather than rewrite/with on a free length,
+-- eliminates the indexed target safely in Agda 2.9.
+decodeCastRow :
+  ∀ {machine fromCols toCols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (eq : fromCols ≡ toCols)
+    (encoded : CNF.Bits
+      (toCols * Canonical.CellWidth machine)) →
+  Decode.decodeRow stateCoverage symbolCoverage fromCols
+    (Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine) (sym eq))
+      encoded)
+  ≡ Decode.decodeRow stateCoverage symbolCoverage toCols encoded
+decodeCastRow stateCoverage symbolCoverage refl encoded = refl
 
 decodedAcceptingAssignment_finalRow :
   ∀ {machine start rows finish}
@@ -189,38 +227,29 @@ decodedAcceptingAssignment_finalRow :
     (certificate :
       Accepting.AcceptingWellFormedRun
         machine start rows finish) →
-  Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
+  Decode.decodeRow stateCoverage symbolCoverage
     (Canonical.listLength (Local.cells start))
-    (Global.rowSliceBits {machine}
-      {Accepting.acceptingRunLength certificate}
-      {Canonical.listLength (Local.cells start)}
+    (Global.rowSliceBits
       (Endpoint.finalRowSlot
         (Accepting.acceptingRunLength certificate))
-      (FormulaSem.baseTraceBits {machine}
-        {Accepting.acceptingRunLength certificate}
-        {Canonical.listLength (Local.cells start)}
+      (FormulaSem.baseTraceBits
         (Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage certificate)))
   ≡ finish
-decodedAcceptingAssignment_finalRow {machine} {start = start}
+decodedAcceptingAssignment_finalRow
     stateCoverage symbolCoverage certificate =
   trans
     (cong
-      (Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
-        (Canonical.listLength (Local.cells start)))
-      (cong
-        (Global.rowSliceBits {machine}
-          {steps}
-          {cols}
-          (Endpoint.finalRowSlot steps))
-        (encodedAcceptingAssignment_baseTrace
-          stateCoverage symbolCoverage certificate)))
-    (decodedRunBase_finalRow
-      stateCoverage symbolCoverage
-      (Accepting.run certificate))
-  where
-    steps = Accepting.acceptingRunLength certificate
-    cols = Canonical.listLength (Local.cells start)
+      (Decode.decodeRow stateCoverage symbolCoverage _)
+      (encodedAcceptingAssignment_finalRow
+        stateCoverage symbolCoverage certificate))
+    (trans
+      (decodeCastRow stateCoverage symbolCoverage
+        (Assignment.runFinishCanonicalLength
+          (Accepting.run certificate))
+        (Flat.encodeRow stateCoverage symbolCoverage _))
+      (Initial.decodeRow_encodeRow
+        stateCoverage symbolCoverage _))
 
 encodedAcceptingAssignment_initialPullback :
   ∀ {machine start rows finish}
@@ -232,24 +261,17 @@ encodedAcceptingAssignment_initialPullback :
       Accepting.AcceptingWellFormedRun
         machine start rows finish) →
   CNF.evaluateCNF
-    (Endpoint.initialEndpointCNF {machine}
-      {Accepting.acceptingRunLength certificate}
-      {Canonical.listLength (Local.cells start)}
+    (Endpoint.initialEndpointCNF
       (Flat.encodeRow stateCoverage symbolCoverage start))
     (Assignment.encodeAcceptingRunAssignment
       stateCoverage symbolCoverage certificate)
   ≡ true
-encodedAcceptingAssignment_initialPullback {machine} {start = start}
+encodedAcceptingAssignment_initialPullback
     stateCoverage symbolCoverage certificate =
-  Endpoint._↔_.from
-    (Endpoint.initialEndpointCNF_iff {machine} {steps} {cols}
-      (Flat.encodeRow {machine = machine} stateCoverage symbolCoverage start)
-      assignment)
-    initialExact
+  (Endpoint.initialEndpointCNF_iff
+    (Flat.encodeRow stateCoverage symbolCoverage _)
+    assignment).from initialExact
   where
-    steps = Accepting.acceptingRunLength certificate
-    cols = Canonical.listLength (Local.cells start)
-
     assignment =
       Assignment.encodeAcceptingRunAssignment
         stateCoverage symbolCoverage certificate
@@ -258,19 +280,22 @@ encodedAcceptingAssignment_initialPullback {machine} {start = start}
 
     initialExact :
       Rename.pullbackBits
-        (Endpoint.initialRowExtendedRename {machine} {steps} {cols})
-        assignment
+        Endpoint.initialRowExtendedRename assignment
       ≡
-      Flat.encodeRow {machine = machine} stateCoverage symbolCoverage start
+      Flat.encodeRow stateCoverage symbolCoverage _
     initialExact =
       trans
         (sym
-          (Sound.baseRowZeroBits_eq_endpointInitialBits {machine}
-            steps cols assignment))
+          (Sound.baseRowZeroBits_eq_endpointInitialBits
+            (Accepting.acceptingRunLength certificate)
+            (Canonical.listLength (Local.cells _))
+            assignment))
         (trans
           (cong
-            (Global.rowSliceBits {machine} {steps} {cols}
-              (Global.here {remaining = steps}))
+            (Global.rowSliceBits
+              (Global.here
+                {remaining =
+                  Accepting.acceptingRunLength certificate}))
             (encodedAcceptingAssignment_baseTrace
               stateCoverage symbolCoverage certificate))
           (encodedRunBase_rowZero

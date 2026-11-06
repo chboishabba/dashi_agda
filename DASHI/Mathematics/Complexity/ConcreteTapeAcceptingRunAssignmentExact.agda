@@ -16,8 +16,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunAssignmentExact wher
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
-open import Data.Product using (Σ; _,_; proj₁; proj₂)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
+open import Data.Product using (Σ; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -35,8 +35,6 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Accepting
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
 import DASHI.Mathematics.Complexity.ConcreteTapeIndexedWindowExact as Indexed
-import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
-import DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact as Initial
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
@@ -49,10 +47,6 @@ castBits :
   CNF.Bits m →
   CNF.Bits n
 castBits refl bits = bits
-
-plusZero : ∀ n → n ≡ n + 0
-plusZero zero = refl
-plusZero (suc n) = cong suc (plusZero n)
 
 canonicalLength_eq_coordinateLength :
   ∀ {A : Set} (xs : List A) →
@@ -67,14 +61,14 @@ stepCanonicalLength :
   WF.WellFormedMachineStep machine before after →
   Canonical.listLength (Local.cells before)
   ≡ Canonical.listLength (Local.cells after)
-stepCanonicalLength {before = before} {after = after} step =
+stepCanonicalLength step =
   trans
-    (canonicalLength_eq_coordinateLength (Local.cells before))
+    (canonicalLength_eq_coordinateLength (Local.cells _))
     (trans
       (Whole.rewriteOccurrencePreservesLength
         (WF.occurrence (WF.wellFormedOccurrence step)))
       (sym
-        (canonicalLength_eq_coordinateLength (Local.cells after))))
+        (canonicalLength_eq_coordinateLength (Local.cells _))))
 
 runFinishCanonicalLength :
   ∀ {machine start rows finish} →
@@ -103,15 +97,13 @@ encodeRunRows :
     (Trace.RowsTraceWidth machine
       (Run.runLength run)
       (Canonical.listLength (Local.cells start)))
-encodeRunRows {machine} {start = start} stateCoverage symbolCoverage Run.runDone =
-  Canonical.appendBits
-    (Flat.encodeRow {machine} stateCoverage symbolCoverage start)
-    CNF.[]ᵇ
+encodeRunRows stateCoverage symbolCoverage Run.runDone =
+  Flat.encodeRow stateCoverage symbolCoverage _
 encodeRunRows {machine} {start = current}
     stateCoverage symbolCoverage
     (Run.runStep {next = next} step rest) =
   Canonical.appendBits
-    (Flat.encodeRow {machine} stateCoverage symbolCoverage current)
+    (Flat.encodeRow stateCoverage symbolCoverage _)
     tail
   where
     beforeCols =
@@ -145,29 +137,53 @@ finalRunRowSlot Run.runDone =
 finalRunRowSlot (Run.runStep step rest) =
   Global.there (finalRunRowSlot rest)
 
-stepFinalRowHelper :
-  ∀ {machine steps beforeCols afterCols}
-    (eq : beforeCols ≡ afterCols)
-    (slot : Global.Slot steps (suc steps))
-    (tailRaw : CNF.Bits (Trace.RowsTraceWidth machine steps afterCols)) →
-  Slice.blockSliceBits slot (castBits (cong (Trace.RowsTraceWidth machine steps) (sym eq)) tailRaw)
-  ≡ castBits (cong (Decode.RowBitsWidth machine) (sym eq)) (Slice.blockSliceBits slot tailRaw)
-stepFinalRowHelper refl slot tailRaw = refl
+-- The fixed-width SAT trace uses the length of START. A genuine
+-- step proves equality of lengths but not judgmental equality.
+-- Casting is confined to this adapter, not distributed across CNF.
+blockSliceCast :
+  ∀ {count index sourceWidth targetWidth}
+    (eq : sourceWidth ≡ targetWidth)
+    (slot : Global.Slot index count)
+    (bits : CNF.Bits (count * sourceWidth)) →
+  Slice.blockSliceBits slot
+    (castBits (cong (λ w → count * w) eq) bits)
+  ≡ castBits eq (Slice.blockSliceBits slot bits)
+blockSliceCast refl slot bits = refl
 
-decodeRowCastHelper :
-  ∀ {machine}
-    (stateCoverage :
-      Canonical.EnumerationCoverage (Local.finiteState machine))
-    (symbolCoverage :
-      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
-    {beforeCols afterCols : Nat}
-    (eq : beforeCols ≡ afterCols)
-    (bits : CNF.Bits (Decode.RowBitsWidth machine afterCols)) →
-  Decode.decodeRow {machine = machine} stateCoverage symbolCoverage beforeCols
-    (castBits (cong (Decode.RowBitsWidth machine) (sym eq)) bits)
-  ≡ Decode.decodeRow {machine = machine} stateCoverage symbolCoverage afterCols bits
-decodeRowCastHelper stateCoverage symbolCoverage refl bits = refl
+-- The recursive row encoder casts an entire tail-row array from the
+-- next width to the current width. This lemma moves that cast past
+-- final-row extraction and composes it with the recursive width
+-- transport, by equality elimination instead of a with-abstraction.
+finalBlockTransport :
+  ∀ {machine count index startCols nextCols finishCols}
+    (stepEq : startCols ≡ nextCols)
+    (finishEq : nextCols ≡ finishCols)
+    (slot : Global.Slot index count)
+    (rowsBits : CNF.Bits
+      (count * (nextCols * Canonical.CellWidth machine)))
+    (finishBits : CNF.Bits
+      (finishCols * Canonical.CellWidth machine)) →
+  Slice.blockSliceBits slot rowsBits
+    ≡ castBits
+        (cong (λ n → n * Canonical.CellWidth machine)
+          (sym finishEq))
+        finishBits →
+  Slice.blockSliceBits slot
+    (castBits
+      (cong
+        (λ n → count * (n * Canonical.CellWidth machine))
+        (sym stepEq))
+      rowsBits)
+    ≡ castBits
+        (cong (λ n → n * Canonical.CellWidth machine)
+          (sym (trans stepEq finishEq)))
+        finishBits
+finalBlockTransport refl finishEq slot rowsBits finishBits proof =
+  proof
 
+-- THE HOMOGENEOUS STATEMENT: both sides have the start-row width.
+-- The right-hand side is the canonical finish encoding transported
+-- along the original run's proof of equal row lengths.
 encodeRunRows_finalBlock :
   ∀ {machine start rows finish}
     (stateCoverage :
@@ -175,60 +191,43 @@ encodeRunRows_finalBlock :
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (run : Run.WellFormedTapeRun machine start rows finish) →
-  Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
-    (Canonical.listLength (Local.cells start))
-    (Slice.blockSliceBits
-      (finalRunRowSlot run)
-      (encodeRunRows stateCoverage symbolCoverage run))
-  ≡ finish
-encodeRunRows_finalBlock {machine} {start = start}
+  Slice.blockSliceBits
+    (finalRunRowSlot run)
+    (encodeRunRows stateCoverage symbolCoverage run)
+  ≡ castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (runFinishCanonicalLength run)))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
+encodeRunRows_finalBlock
     stateCoverage symbolCoverage Run.runDone =
-  trans
-    (cong
-      (Decode.decodeRow {machine = machine} stateCoverage symbolCoverage
-        (Canonical.listLength (Local.cells start)))
-      (Canonical.takeAppendBits
-        (Flat.encodeRow {machine} stateCoverage symbolCoverage start)
-        CNF.[]ᵇ))
-    (Initial.decodeRow_encodeRow {machine} stateCoverage symbolCoverage start)
-encodeRunRows_finalBlock {machine} {start = current}
+  takeAll (Flat.encodeRow stateCoverage symbolCoverage _)
+  where
+    takeAll :
+      ∀ {n} (bits : CNF.Bits n) →
+      Canonical.takeBits n bits ≡ bits
+    takeAll CNF.[]ᵇ = refl
+    takeAll (bit CNF.∷ᵇ bits)
+      rewrite takeAll bits = refl
+
+encodeRunRows_finalBlock {machine} {start = current} {finish = finish}
     stateCoverage symbolCoverage
     (Run.runStep {next = next} step rest) =
   trans
-    (cong
-      (Decode.decodeRow {machine = machine} stateCoverage symbolCoverage beforeCols)
-      (trans
-        (cong
-          (Slice.blockSliceBits (finalRunRowSlot rest))
-          (Canonical.dropAppendBits
-            (Flat.encodeRow {machine} stateCoverage symbolCoverage current)
-            tail))
-        (stepFinalRowHelper {machine} {Run.runLength rest} {beforeCols} {afterCols}
-          eq (finalRunRowSlot rest) tailRaw)))
-    (trans
-      (decodeRowCastHelper {machine} stateCoverage symbolCoverage {beforeCols} {afterCols}
-        eq (Slice.blockSliceBits (finalRunRowSlot rest) tailRaw))
+    (cong (Slice.blockSliceBits (finalRunRowSlot rest))
+      (Canonical.dropAppendBits
+        (Flat.encodeRow stateCoverage symbolCoverage current)
+        (castBits
+          (cong
+            (Trace.RowsTraceWidth machine (Run.runLength rest))
+            (sym (stepCanonicalLength step)))
+          (encodeRunRows stateCoverage symbolCoverage rest))))
+    (finalBlockTransport
+      (stepCanonicalLength step)
+      (runFinishCanonicalLength rest)
+      (finalRunRowSlot rest)
+      (encodeRunRows stateCoverage symbolCoverage rest)
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
       (encodeRunRows_finalBlock stateCoverage symbolCoverage rest))
-  where
-    beforeCols =
-      Canonical.listLength (Local.cells current)
-
-    afterCols =
-      Canonical.listLength (Local.cells next)
-
-    eq =
-      stepCanonicalLength step
-
-    tailRaw =
-      encodeRunRows stateCoverage symbolCoverage rest
-
-    tail =
-      castBits
-        (cong
-          (Trace.RowsTraceWidth machine (Run.runLength rest))
-          (sym eq))
-        tailRaw
-
 
 finalRunRowSlot_eq_finalRowSlot :
   ∀ {machine start rows finish}
@@ -296,28 +295,6 @@ transportAtValue :
 transportAtValue refl occurrence =
   occurrence
 
-headAtInteriorGo :
-  ∀ {State Symbol : Set}
-    (leftSymbol readSymbol rightSymbol : Symbol)
-    (q : State)
-    (suffix : List (Local.TapeCell State Symbol))
-    (prefix : List (Local.TapeCell State Symbol)) →
-  WF.PlainCells prefix →
-  Σ Nat (λ n →
-    Indexed.At n
-      (Local.headed q readSymbol)
-      (Local.append prefix
-        (Local.plain leftSymbol
-          ∷ Local.headed q readSymbol
-          ∷ Local.plain rightSymbol
-          ∷ suffix)))
-headAtInteriorGo left read right q suffix [] WF.plainNil =
-  suc zero , Indexed.there Indexed.here
-headAtInteriorGo left read right q suffix (Local.plain symbol ∷ prefix) (WF.plainCons plain)
-    with headAtInteriorGo left read right q suffix prefix plain
-... | n , occurrence =
-  suc n , Indexed.there occurrence
-
 headAtInterior :
   ∀ {machine row}
     (interior : Character.InteriorHeadConfiguration machine row) →
@@ -328,12 +305,7 @@ headAtInterior :
         (Character.readSymbol interior))
       (Local.cells row))
 headAtInterior interior
-    with headAtInteriorGo
-      (Character.leftSymbol interior)
-      (Character.readSymbol interior)
-      (Character.rightSymbol interior)
-      (Character.headState interior)
-      (Character.suffix interior)
+    with go
       (Character.prefix interior)
       (Character.prefixPlain interior)
 ... | n , occurrence =
@@ -348,6 +320,29 @@ headAtInterior interior
       Indexed.At k x left →
       Indexed.At k x right
     transportAtList refl proof = proof
+
+    go :
+      ∀ prefix →
+      WF.PlainCells prefix →
+      Σ Nat (λ n →
+        Indexed.At n
+          (Local.headed
+            (Character.headState interior)
+            (Character.readSymbol interior))
+          (Local.append prefix
+            (Local.plain (Character.leftSymbol interior)
+              ∷ Local.headed
+                  (Character.headState interior)
+                  (Character.readSymbol interior)
+              ∷ Local.plain (Character.rightSymbol interior)
+              ∷ Character.suffix interior)))
+    go [] WF.plainNil =
+      suc zero , Indexed.there Indexed.here
+    go (Local.plain symbol ∷ prefix)
+        (WF.plainCons plain)
+        with go prefix plain
+    ... | n , occurrence =
+      suc n , Indexed.there occurrence
 
 acceptingHeadOccurrence :
   ∀ {machine row} →
@@ -375,8 +370,10 @@ acceptingWitnessBits :
   ∀ {machine row} →
   Accepting.AcceptingInteriorRow machine row →
   CNF.Bits (Canonical.listLength (Local.cells row))
-acceptingWitnessBits certificate =
-  oneHotAtOccurrence (proj₂ (proj₂ (acceptingHeadOccurrence certificate)))
+acceptingWitnessBits certificate
+    with acceptingHeadOccurrence certificate
+... | n , symbol , occurrence =
+  oneHotAtOccurrence occurrence
 
 ------------------------------------------------------------------------
 -- Final exact global assignment
@@ -395,7 +392,7 @@ encodeAcceptingRunAssignment :
     (Endpoint.ExtendedGlobalWidth machine
       (Accepting.acceptingRunLength certificate)
       (Canonical.listLength (Local.cells start)))
-encodeAcceptingRunAssignment {machine} {start = start}
+encodeAcceptingRunAssignment
     stateCoverage symbolCoverage certificate =
   Canonical.appendBits
     (encodeRunBaseTrace
@@ -407,7 +404,7 @@ encodeAcceptingRunAssignment {machine} {start = start}
       acceptingWitnessBits (Accepting.accepting certificate)
 
     witnessAtStartWidth :
-      CNF.Bits (Canonical.listLength (Local.cells start))
+      CNF.Bits (Canonical.listLength (Local.cells _))
     witnessAtStartWidth =
       castBits
         (sym
@@ -538,15 +535,10 @@ encodeRunRows_head :
     (encodeRunRows stateCoverage symbolCoverage
       (Run.runStep step rest))
   ≡ Flat.encodeRow stateCoverage symbolCoverage current
-encodeRunRows_head {machine} {current = current}
-    stateCoverage symbolCoverage step rest =
+encodeRunRows_head stateCoverage symbolCoverage step rest =
   Canonical.takeAppendBits
-    (Flat.encodeRow {machine} stateCoverage symbolCoverage current)
-    (castBits
-      (cong
-        (Trace.RowsTraceWidth machine (Run.runLength rest))
-        (sym (stepCanonicalLength step)))
-      (encodeRunRows stateCoverage symbolCoverage rest))
+    (Flat.encodeRow stateCoverage symbolCoverage _)
+    _
 
 record AcceptingRunAssignmentReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

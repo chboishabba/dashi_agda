@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.ConcreteTapeBoundaryGhostCounterexampleExact where
 
 ------------------------------------------------------------------------
@@ -19,6 +18,9 @@ module DASHI.Mathematics.Complexity.ConcreteTapeBoundaryGhostCounterexampleExact
 -- its original unconditional type without a genuine boundary guard.
 -- Neither an Agda postulate nor a proof of the false plain lemma
 -- is a valid completion. This example is not an NP hardness claim.
+-- This integration owner is NOT --safe until the original Local/Pattern/
+-- Whole/Character import closure is kernel accepted with safe options.
+-- The independent original-carrier finite no-go owner remains separate.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true)

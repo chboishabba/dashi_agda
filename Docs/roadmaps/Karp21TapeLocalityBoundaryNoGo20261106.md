@@ -1,5 +1,92 @@
 # Cook–Levin tape-locality boundary ghost — exact obstruction and repair contract
 
+## 2026-11-06 — original categorical row-dimension max-cut (same-object Agda source)
+
+**Defect:** the former `ConcreteTapeAcceptingRunAssignmentExact.encodeRunRows_finalBlock` compared a bit vector indexed by `Canonical.listLength (Local.cells start)` with a finish row encoded at `Canonical.listLength (Local.cells finish)`, even though only `runFinishCanonicalLength : startCols ≡ finishCols` is proved. Its recursive `rewrite stepCanonicalLength step` caused ill-typed Agda 2.9 `with`-abstraction. Do **not** impose definitional equality of distinct free rows or postulate width invariance.
+
+**Implementation (source written, kernel receipt pending):** the original assignment owner now states a homogeneous equality with `castBits (cong (λ n → n * CellWidth machine) (sym (runFinishCanonicalLength run)))` on `Flat.encodeRow finish`. `finalBlockTransport` eliminates the local step and final width equalities by pattern matching on `refl`; the original row-tail encoder/Fin indices are unchanged. `ConcreteTapeAcceptingRunInitialCompleteExact` now transports this equality across `encodedRunBase_finalRow`, `encodedAcceptingAssignment_finalRow`, and `decodeCastRow`, composing with the existing `Initial.decodeRow_encodeRow`. `ConcreteTapeEncodedPaddedRunRowsExact.encodedTailBlockTransport` removes its own fragile recursive `rewrite` on a free width. `ConcreteTapeUniformRunWidthExact` provides an original-run `Global.Slot` indexed, proof-relevant uniform-width view, without changing `TapeRow`, `WellFormedTapeRun`, the real CNF bits or underlying transition semantics.
+
+**ZKP contract:** Preconditions = original `WellFormedTapeRun` + `stepCanonicalLength` / `runFinishCanonicalLength` and canonical `Fin`/codec. Invariants = one original fixed-width SAT fibre, one equality-justified cast boundary, every original physical row aligned to the selected `cols`. Postconditions = transported final-row block equality, decoded final-row identity, and a proof-relevant per-time row/width pair; not promoted until pinned Agda 2.9 acceptance. `ConcreteTapeBoundaryGuardFocusedRootExact` now imports the changed original initial-completeness owner and the new uniform view.
+
+**Verification:** independent deterministic 1,008 row-slot/cell-width/step cases passed; `scripts/check_karp21_uniform_row_width.py` added to fail-closed preflight and no-Agda referee fixture (10 preflight checks). This is not Agda kernel verification. Next local command `bash scripts/referee_karp21_maxcut.sh all`; compile the original focused root and `Karp21Everything` at the new head, then pay any exact Agda diagnostic. Full uniform bit-tape runtime and remaining Karp network gates are separate.
+
+**Detailed formalism, C4/PlantUML, ISO/ITIL/NIST/Six Sigma crosswalk and attribution:** [Karp21UniformRunWidthZKP20261106.md](Karp21UniformRunWidthZKP20261106.md). Agda Golden source is primary; `dashi_lean4` is a non-promoting comparison.
+
+
+## 2026-11-06 — guarded Cook–Levin original-owner closure pass: Golden acceptance pending
+
+**O/R/C/S/L/P/G/F source contract.** O = DASHI Karp-21; R = PR #1445 on `chatgpt/karp21-reduction-transport`; C = original Cook–Levin Agda owners plus `ConcreteTapeEncodedPaddedRunDecodeWeldExact` and referee sources; S = new source commits beyond the prior kernel receipts (no new Agda 2.9 receipt); L = canonical encoded accepting-run assignment ↔ real decoded row/Fin slice ↔ row endcaps ↔ guarded CNF ↔ exact-budget iff ↔ Cook BooleanFormula ↔ quotation/size; P = run exact-head kernel checks and repair the first true Agda diagnostic; G = only Agda typechecking of exact source/head promotes proofs, no Python/Lean/promotional Boolean substitutes; F = exact-head compiler and full transitive e20 closure; original uniform bit-tape clock and remaining Karp network edges are separate.
+
+**Implemented this round.**
+
+- `ConcreteTapeEncodedPaddedRunDecodeWeldExact`: `encodedAcceptanceBaseSameObject`, `encodedAcceptanceRowSliceSameObject` reuse original `Assignment.encodeAcceptingRunAssignment_base`, `Block.pullbackFinLeft_eq_takeBits`, `Block.rowSliceBits_eq_blockSlice`, `Assignment.encodeRunBaseTrace_rows`; `encodedPaddedRowDecodesSameObject` reuses `Initial.decodeRow_encodeRow`; `encodedAcceptingAssignmentDecodedEndcaps` transports real padded-run endcaps to **every** original SAT row slot, using ordinary time/width index equalities.
+- `ConcreteTapeCookLevinExactBudgetIff`: `GuardedCookLevinSAT.satisfies` now evaluates the actual `GuardedCNF.guardedGlobalCookLevinCNF`, and `exactRunToGuardedSAT` builds its proof from `Padded.allPaddedRunRowsHavePlainEndcaps`, the original accepting-run encoding/row weld, `Complete.acceptingRunSatisfiesGlobalCookLevinCNF`, and `GuardedCNF.guardedCompletenessFromDecodedEndcaps`. `guardedSATToExactRun` uses the same SAT record and original decoded-run soundness.
+- `ConcreteTapeCookLevinCookFormulaExact`: the literal `guardedCookFormula` and both Cook witness transports are compiled from **the same guarded CNF** as the exact-budget record, not the previous unguarded formula.
+- `ConcreteTapeCookLevinQuotationGrowthExact`: the previous strict lower bound on original unit clauses remains attributed to its actual original owner, while `originalBelowGuarded` (from original list concatenation and `m≤m+n`) transports that bound to the new source-defined guarded Cook formula. The binary quotation lower-bound consumer remains unchanged in structure.
+- `ConcreteTapeCookLevinPrizeFacingExact`: the prize-facing `closedClauseBound` now refers to the guarded CNF and delegates to `ConcreteTapeGuardedClauseCountExact.guardedGlobalClauseBound`, including the exact additive `(steps+1)·2·localEndcapClauseCount` overhead. The original variable-count theorem still applies because the global bit width is unchanged.
+- `scripts/check_karp21_guarded_sat_same_object.py` joins `referee_karp21_maxcut.sh` preflight and the no-Agda referee fixture. It fails on an absent original proof owner, stale unguarded Cook/size consumers, an expected original proof edge disappearing, or source-level proof holes. This is static governance, not an Agda proof.
+
+**Preconditions:** original `AcceptingWellFormedRun`, `exactLength = steps`, original `guardedInitialCellCount` and successor-width proof, `Guard.guardedInitialMargin`, and the prior canonical coding/row-slice proofs. **Invariants:** one underlying extended Boolean assignment, a single chosen original machine/rule, one precise row-slot witness for each row, plain boundary cells throughout the physically padded run, same Cook BooleanFormula carrier, and additive clause overhead without extra SAT variables. **Postconditions (source-candidate):** guarded SAT iff exact accepting run, preserved Cook-formula satisfiability iff, genuine endcap row evidence, and an exact guarded CNF clause bound; none is promoted until the Agda 2.9 kernel accepts the transitive source tree.
+
+**Exact remaining acceptance cut:** `bash scripts/referee_karp21_maxcut.sh preflight`, then `golden`, then `e20` (or `all`) on the new pinned head; repair any Agda termination, positivity, index/unification or rewrite diagnostic emitted by `ConcreteTapeBoundaryGuardFocusedRootExact`, `Karp21Everything`, and the original Cook capstones. The absent Agda executable in the current connected-GitHub environment prevents a fresh kernel receipt here. The original uniform **binary machine** runtime bound, remaining P1 N21/E20 edge closure, P2 E01–E19 and P3 CertifiedKarpNetwork remain distinct max-cut obligations.
+
+**Attribution:** Cook/Levin remain credited for foundational SAT NP-completeness; Agda source owners and their exact proof terms own internal claims; Lean mirrors are secondary comparison; Python differential tests are explicitly labelled independent, bounded regressions; no claim that any finite test settles a universal theorem.
+
+
+## 2026-11-06 — G2–G5 maximal source implementation and exact acceptance wall
+
+**ZKP / O-R-C-S-L-P-G-F:** O=DASHI Karp-21; R=PR #1445 original branch; C=`DASHI/Mathematics/Complexity/ConcreteTape{DecodedEndcapSameObject,GuardedDecodedTransition,DecodedRunInduction,DecodedRunLength,SATToAcceptingRun,PaddedRunEndcaps,EncodedPaddedRunRows,CanonicalEndcapCNF,GuardedGlobalCookLevinCNF,GuardedClauseCount}Exact.agda` plus `ConcreteTapeTimeBudgetPaddingExact.agda`; S=source commits with no new local Agda 2.9 receipt; L=original SAT clauses → canonical endcap clauses → literal indexed row decode → NoGhost → well-formed step → run induction → accepting endpoint, reversed along padded-run margins and canonical row encoding; P=complete same-object slot-to-run completeness proof and preserve original Cook BooleanFormula carrier; G=Agda Golden with no authority promotion from source writes, Boolean flags or independent finite Python; F=transitive compiler acceptance and canonical encoded-run/extended-assignment row alignment in the reverse SAT direction, followed by uniform bit-clock and network root.
+
+**G2 endpoint equality source-written:** `ConcreteTapeDecodedEndcapSameObjectExact` supplies `pullbackCompose`, `decodedCellAtBlockSlice`, `decodedCellAtCanonicalBlock`, `extendedRowCellSameObject`, `globalCNFToDecodedRowEndcaps`, and the reverse `decodedEndcapsToPhysicalBlocks`. All use the ORIGINAL `Block.pullbackBlockRename_eq_blockSlice`, `Global.rowSliceBits`, `Decode.decodeCells`, and canonical `Fin` index. The formerly external NoGhost record is instantiated in `ConcreteTapeGuardedDecodedTransitionExact.guardedSATNoGhostAtTime`, and its guarded SAT-to-original-step consequence is `guardedSATDecodedMachineStep`. Agda kernel acceptance for the new focused root remains UNVERIFIED.
+
+**G4 run chain source-written:** The ORIGINAL `ConcreteTapeDecodedRunInductionExact` now defines `AfterEndcapsForAllTimes` and `decodedStepFromEndcaps`, threading one proof-relevant row-endcap function through `buildDecodedRunNonempty`, `decodedAllSlotsRun`, and final-row equalities. `ConcreteTapeDecodedRunLengthExact` threads the same evidence through length induction. `ConcreteTapeSATToAcceptingRunExact` now requires the guarded CNF, obtains `guardedParts`, derives `allEndcaps` directly from SAT's same extended assignment, then feeds the original run and length proof. `ConcreteTapeTimeBudgetPaddingExact.guardedInitialColsSuccessor` establishes the nonempty width needed for endcap placement. These are proof candidates, not accepted Agda 2.9 results.
+
+**G5 forward completeness and size source-written:** `ConcreteTapePaddedRunEndcapsExact` obtains first/last plainness from the ORIGINAL `WF.ExactlyOneHead`, `Margin.HeadMargin` and `Margin.wellFormedStepMargin`, inductively carrying it across `Run.WellFormedTapeRun`. `ConcreteTapeEncodedPaddedRunRowsExact.encodedPaddedRunRowAt` is the indexed same-object row/cast alignment candidate. `Endcap.globalAllRowsEndcapsComplete` proves the whole added endcap CNF from genuine first/last canonical blocks on every row; `Guarded.guardedCompletenessFromDecodedEndcaps` combines original CNF acceptance with decoded-row endcap proofs. `ConcreteTapeGuardedClauseCountExact` gives an exact additive formula `|CNF_guarded| = |CNF_original| + (steps+1)·2·|CNF_plainCell|` and lifts the existing clause upper bound. A fixed-machine truth-table template makes this additional clause count linear in row count; it does NOT by itself prove the total uniform binary-machine clock.
+
+**Exact still unpaid (fail closed):** (1) Agda 2.9 diagnostics/receipts on `ConcreteTapeBoundaryGuardFocusedRootExact` plus the dependent run and exact-budget roots; (2) transport `encodedPaddedRunRowAt` through `Assignment.encodeAcceptingRunAssignment_base`, `Block.rowSliceBits_eq_blockSlice` and `Initial.decodeRow_encodeRow` to construct `∀ Global.Slot, DecodedRowEndcapsPlain` for the specific original accepting-run assignment; (3) update `ConcreteTapeCookLevinExactBudgetIff.GuardedCookLevinSAT` and `exactRunToGuardedSAT` to the same new guarded CNF **without silently using the old unguarded satisfaction theorem**; (4) ensure all `ConcreteTapeCookLevinCookFormulaExact`/quotation/clock consumers use the same formula, pay actual uniform compiler machine time, and recheck N21/E20 and P2/P3 Golden roots. No interpretation of source edits as compiler acceptance. Preserve Cook (1971)/Levin (1973) attribution, DASHI source ownership and separate independent test attribution.
+
+**Deterministic controls:** the canonical headed-bit/endcap truth-table and physical-row-endcap model passed 33,020 independently executed finite assignments; `scripts/check_karp21_canonical_endcap_cnf.py` is part of fail-closed preflight. This does not establish any universal Agda proof.
+
+
+## 2026-11-06 — decoded endpoint and guarded one-step weld (new implementation)
+
+At this branch head, two Agda source owners have been added to the canonical P0-B/G2/G3 lane, with the guarded formula's Boolean completeness proof made explicit via `trans`/`cong₂`.
+
+**G2-b endpoint same-object:** `ConcreteTapeDecodedEndcapSameObjectExact.agda` reuses original `Block.pullbackBlockRename_eq_blockSlice`, `Global.blockRename`, `Global.globalRowRename`, `Endpoint.liftBaseIndex`, `FormulaSem.baseTraceBits`, and literal `Decode.decodeCells`. It defines `pullbackCompose`, `decodedCellAtBlockSlice`, `decodedCellAtCanonicalBlock`, and `extendedRowCellSameObject`. `frontPlainFromFirstBlock` and `endPlainFromLastBlock` establish exact decoded list endcaps; `globalCNFToDecodedRowEndcaps` combines them with the global all-row CNF certificate. This is a *source-written candidate*, not a compiler-accepted theorem until the new focused root passes Agda 2.9.
+
+**G3 guarded one-step:** `ConcreteTapeGuardedDecodedTransitionExact.agda` now defines `guardedSATNoGhostAtTime` and `guardedSATDecodedMachineStep`. The latter takes the ORIGINAL guarded global CNF satisfaction, actual source-defined semantic sliding-window proof, and original before-row interior; it constructs `NoGhostContextBoundaries` from the SAT endcap evidence and applies `Step.decodedAdjacentRowsFormMachineStep` to yield the ORIGINAL `WF.WellFormedMachineStep` on the same decoded trace assignment. No standalone guard oracle, alternate decoding or unproved whole-row uniqueness assumption.
+
+**Verifier:** `ConcreteTapeBoundaryGuardFocusedRootExact.agda` now imports both new modules, the original canonical endcap CNF and the guarded global formula. A local independent exhaustive Python model of the actual canonical headed-flag truth-table and first/last row constraints passed 33,020 assignments, but the repository's Agda 2.9 command is unavailable in this environment. No `--safe` acceptance is inferred for these transitive roots.
+
+**Exact remaining G4/G5:** Thread the constructed per-time-step `NoGhost` witnesses through the existing `ConcreteTapeDecodedRunInductionExact` and dependent `ConcreteTapeDecodedRunLengthExact` without changing their row identities. Then change `ConcreteTapeSATToAcceptingRunExact` to accept the *guarded* global formula, and prove the **guarded completeness** direction for every original padded accepting run; do not silently claim that imposing new endcap clauses preserves the old unguarded SAT language. The uniform polynomial clause/variable/bit-clock estimates, N21/E20 encoded clocks and P2/P3 network construction remain independently unpaid. Obtain first concrete Agda error from the updated focused root before any Golden promotion.
+
+
+### Additional same-object endcap proof owners: every row, not selected examples
+
+The canonical Agda endcap source now also proves `everyPhysicalRowIsEnumerated : Slot i count → RowSlotMember ... (allPhysicalRows count)` and `everyRowEndcapCNFTrue`, which selects any actual row's CNF acceptance from the whole-row-endcap conjunction. `globalRowEndcapsSound` splits the exact two physical-column CNFs into a `PhysicalRowEndcapCellsPlain` witness, and `globalAllRowsEndcapsGivePhysicalRowPlain` derives the two **actual canonical decoded cell** plainness facts from the original global assignment and original row/cell index placements. These are source-written proof terms, not compiler receipts.
+
+A separate concrete owner `ConcreteTapeGuardedGlobalCookLevinCNFExact.agda` defines `guardedGlobalCookLevinCNF = Placed.append originalGlobalCNF globalAllRowsEndcapsCNF`. Its `guardedGlobalCookLevinCNFSound` and `guardedGlobalCookLevinCNFComplete` prove exact Boolean conjunction decomposition; `guardedGlobalCNFToOriginalAndAllEndcaps` produces both original SAT formula parts and the all-row source certificate. The focused Agda acceptance root imports this new owner. The ORIGINAL `globalCookLevinCNF` remains unchanged: claims of original-SAT equivalence and polynomial compiled size require their own proof, not mere formula extension.
+
+**Revised exact unpaid weld:** for every decoded after-row, prove the equality between the `Canonical.decodeCell` at the physical endpoint Fin placements and the first/last constructor in `Decode.decodeCells` for `Global.rowSliceBits` (existing `ConcreteTapeGlobalBlockSliceConsistencyExact` is a likely donor). Apply `noGhostFromAfterRowEndcaps`, thread `NoGhostContextBoundaries` through `DecodedRunInduction`, switch SAT soundness to the guarded global formula with a matching completeness proof for encoded padded runs, and obtain Agda 2.9 exact-head receipts. Unit CNF clauses and source-documented proof flags alone do not close those steps.
+
+**Verification already performed locally:** 33,020 cases passed in an independent Python differential model of the canonical plain-tag truth-table and row-endcap pairing, plus the existing six-cell ghost model. The actual repo script is included in preflight, but this workspace lacks Agda and a local checkout, so **no exact-head compiler receipt** can be reported.
+
+
+## 2026-11-06 — current max-cut implementation: endcap witness route (Agda source written)
+
+**Authority and scope:** Golden candidate sources are the ORIGINAL `ConcreteTapeAfterUniqueFromLocalityExact.agda` and `ConcreteTapeCanonicalEndcapCNFExact.agda`; the focused `ConcreteTapeBoundaryGuardFocusedRootExact.agda` imports both. The previously reported `NoGhostContextBoundaries` remains proof relevant. `dashi_lean4` AuthorityBoundary/Loom relation status is diagnostic comparison, never the Agda compiler receipt.
+
+**G1 (new, source-written):** `ConcreteTapeCanonicalEndcapCNFExact.plainEndcapPredicate` selects the original canonical cell-code headed flag (first bit), and `canonicalPlainEndcapCNFSound` / `canonicalPlainEndcapCNFComplete` prove literal equivalence with decoded `Pattern.IsPlainCell`. The `placedPlainEndcapSound` and `globalRowCellPlainSound` proofs transport that same literal predicate through `Rename.pullbackBits`, `Global.globalRowRename`, `Global.blockRename` and `Endpoint.liftBaseIndex`. `lastPhysicalColumn` selects an actual rightmost slot, and `globalAllRowsEndcapsCNF` compiles both physical endcaps across `allPhysicalRows (suc steps)`, with `globalAllRowsEndcapsSound` furnishing a proof-relevant per-row conjunction certificate. No alternative row codec, imaginary guard Boolean or arbitrary endcap index is used.
+
+**G2-a (new, source-written):** `ConcreteTapeAfterUniqueFromLocalityExact.frontPlainPrefixOfAppend`, `endPlainTail`, `endPlainSuffixOfAppend` and `endPlainAfterTriple` prove that *global* decoded after-row first/last plainness entails exactly the existing, extracted-centered `NoGhostContextBoundaries` through `noGhostFromAfterRowEndcaps`. The corollary `localityScanWithInteriorAndEndcapsGivesWellFormedStep` derives the ORIGINAL `WF.WellFormedMachineStep` without accepting the false unrestricted scan lemma.
+
+**G2-b (OPEN, decisive):** (i) use existing same-object fixed row decoder and global `Fin` block identities to transport `globalRowCellPlainSound` at first/last columns to `Pattern.FrontPlain` and `Pattern.EndPlain` on *each actual* `Step.decodedAfterRow`; (ii) conjoin `globalAllRowsEndcapsCNF` into the original `GlobalCNF.globalCookLevinCNF`, adapt both `GlobalFormulaPartsTrue` directions and `GlobalFormulaSemantics`, and prove the new guarded SAT↔run completeness over the same encoding. Its mere definition is not yet a conjunct of the old global formula.
+
+**G3–G5 (OPEN):** furnish the resulting `NoGhostContextBoundaries` to `Step.decodedAdjacentRowsFormMachineStep` and every time-slice in `ConcreteTapeDecodedRunInductionExact`; then finish `ConcreteTapeSATToAcceptingRunExact` and the costed machine reduction. G0 exact-head Agda 2.9 focused-root kernel acceptance is still OPEN. No local Agda installation is present here.
+
+**Finite test:** `scripts/check_karp21_canonical_endcap_cnf.py` now participates in referee preflight and its no-Agda fixture. An independent local Python equivalent exercised 33,020 exhaustive tag/payload and endcap assignments successfully. It is not an Agda compiler receipt or a proof of G2-b.
+
+
 **Attribution:** Original Cook (1971) / Levin (1973) tableau method and DASHI-owned Agda original sources. The specific finite counterexample and missing boundary-anchoring distinction are DASHI audit results of 2026-11-06; do not attribute a claimed Clay result to this work. The source-related Lean `AgdaMirror/AuthorityBoundary.lean` and `AgdaMirror/LoomRelationAlgebra.lean` are auxiliary evidence/governance parallels only. **Golden:** exact source Agda 2.9 `--safe` kernel acceptance.
 
 ## O / R / C / S / L / P / G / F as a ZKP-style verification contract
@@ -87,3 +174,79 @@ skinparam componentStyle rectangle
 Normalize owner/source/test/receipt and nonconformance logs as internal controls: ITIL incident/problem resolution; ISO 9000 corrective-action evidence; ISO/IEC 42001 and ISO/IEC 23894 model-risk governance; ISO/IEC 27001/27701 integrity and privacy provenance; ISO 9241 comprehensible error reports; Six Sigma defect reproduction and prevention; NIST AI RMF **Govern–Map–Measure–Manage** to separate the counterexample and future remediation. These are *engineering crosswalks*, not normative or certification claims.
 
 **Current gate:** fail-closed; no Agda 2.9 exact-head receipt for two requested modules. No source-written but false theorem is promoted to Golden.
+
+## Concurrent source update: guarded reverse-locality repair now present
+
+At the latest source readback, a separate worker had committed updates to both requested original modules. `ConcreteTapeLocalWindowPatternsExact.agda` now declares rule-**indexed** `LegalWindowForRule` and directional classifiers `legalPlainTripleNewLeftClassified` / `legalPlainTripleNewRightClassified`, plus the true adjacent-middle propagation lemmas. It no longer claims the two false unqualified old-plain/new-plain implications. Its `FrontPlain` proves the first cell plain and `EndPlain` the final cell plain (each with a vacuous empty-row case). The previous public plain-symbol agreement theorems are retained.
+
+`ConcreteTapeAfterUniqueFromLocalityExact.agda` now performs separate left-to-right prefix and right-to-left suffix inductions, using those classified windows. Its `globalTransitionScanAfterUnique` and `localityScanWithInteriorGivesWellFormedStep` are **conditional** on the extracted after-prefix `Pattern.FrontPlain` and after-suffix `Pattern.EndPlain`. This is a mathematically sensible strengthening: it excludes exactly the boundary-ghost family shown by the regression, without presupposing the entire new context plain. However, it changes the latter theorem's signature, and **`ConcreteTapeDecodedTransitionStepExact.agda` was still calling it with only the original scan/interior witnesses** at this readback. The exact missing same-object proof is that the actual compiled SAT/tableau source supplies the two end guards, or that those guards are already consequences of a stronger existing canonical boundary condition. Do not create an arbitrary guard oracle.
+
+Until exact Agda 2.9 `--safe` receipts confirm the two repaired modules **and** the decoded consumer supplies verified guards, the `e20` proof root remains BLOCKED. The companion no-go remains a regression for the unguarded theorem, not a claim that the newly guarded theorem is false. The disjoint no-go lane leaves the concurrently modified original two modules untouched.
+
+## Further concurrent interface normalization
+
+A subsequent exact readback found the original `AfterUnique` source now packages the two required proof fields as `NoGhostContextBoundaries scan interior`, and the original `ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep` now **accepts and passes that typed record**. This supersedes the earlier observation that the decoded caller still supplied only two arguments. The typed record is a *requirement*, not its constructor or a proof that the current CNF enforces the requirement. The unresolved cut has therefore moved **upstream**: construct `NoGhostContextBoundaries` from the actual decoded row / canonical SAT boundary constraints and thread it through every SAT-to-run and polynomial-clock consumer. No such exact-head acceptance result has been observed in this session.
+
+## 2026-11-06 guarded repair cut — original owners, no phantom-head axiom
+
+**This section supersedes the earlier unconditional-construction proposal; the finite no-go remains valid.** The in-place `ConcreteTapeLocalWindowPatternsExact.agda` constructor has now been indexed by the actual `rule` instead of parameterised by it. The two false universal `legalOldLeftPlainForcesNewLeftPlain` and `legalOldRightPlainForcesNewRightPlain` assertions have been removed. Genuine source-level replacement lemmas `legalPlainTripleNewLeftClassified`, `legalPlainTripleNewRightClassified`, `legalPlainTripleNewLeftPlainForcesMiddlePlain` and `legalPlainTripleNewRightPlainForcesMiddlePlain` identify exactly how the original direction-indexed grammar treats an all-plain old triple.
+
+**ZKP-style corrected judgement (preconditions / invariants / postcondition):**
+
+```text
+O = DASHI/Karp-21; R = PR #1445; C = original Local, Pattern, Whole, Center, AfterUnique, Step
+S = earlier Agda 2.9 failure + deterministic boundary-ghost counterexample
+L = countermodel -> explicit missing premise -> source proof -> kernel receipt
+P = boundary-anchored reverse locality; G = never promote conditional proof to unconditional
+F = missing canonical SAT boundary-guard producer plus exact-head compiler acceptance
+
+PRE:
+  scan     : Character.TransitionLocalityScan machine rule before after
+  interior : Character.InteriorHeadConfiguration machine before
+  boundary : AfterUnique.NoGhostContextBoundaries scan interior
+
+INVARIANTS:
+  old beforePrefix/suffix are PlainCells (original reconstruction owner)
+  extracted centered rule has plain oldLeft and oldRight
+  each all-plain old triple, given plain new outer cell, forces plain new middle
+  prefix induction propagates FrontPlain from first new prefix cell forwards
+  suffix induction propagates EndPlain from final new suffix cell backwards
+
+POST:
+  WF.ExactlyOneHead (Local.cells after)
+  WF.WellFormedMachineStep machine before after
+```
+
+The new `AfterUnique.NoGhostContextBoundaries` is **proof-relevant**, requiring only the front cell of the aligned **after-prefix** and the last cell of the aligned **after-suffix** to be plain (vacuously satisfied for empty contexts). These are weaker than assuming all new context cells are plain. `afterPrefixPlainFromLegalScan` and `afterSuffixPlainFromLegalTail` have source-written structural proofs using them, and `localityScanWithInteriorGivesWellFormedStep` now explicitly accepts this boundary record. The genuine, intended centered move is permitted even if its new head touches a tape endpoint; guards apply only outside the selected 3-cell window.
+
+**Same-object downstream:** `ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep` and `decodedStepAfterUnique` have been retyped to require the proof-relevant boundary record for the **same** `decodedTimeLocalityScan` and original `interior`. Their status fields were demoted to `false` until the actual canonical CNF proves the guard. `ConcreteTapeDecodedRunInductionExact` and `ConcreteTapeSATToAcceptingRunExact` also have downstream promotion flags demoted; their present invocations still need the boundary witness, and **do not kernel-typecheck unconditionally**. The focused independent `ConcreteTapeBoundaryGuardFocusedRootExact.agda` now gives the next exact compiler cut. The remaining semantic defect has been sharply localized to **CNF-derived boundary-guard production**, not generic prefix induction.
+
+**Deterministic finite referee:** `scripts/check_karp21_tape_guarded_uniqueness_small.py` enumerates all length-3 through length-12 one-state/one-symbol pre-rows with exactly one interior head, all two-valued after-rows, all three directional grammars, and exact centered windows. An independently executed equivalent model found **237 legal centered cases** and **zero** non-unique after-rows satisfying the two boundary guards; unguarded counterexamples remain. The script is included in the actual `referee_karp21_maxcut.sh` preflight and its isolated no-Agda mock fixture. These are exhaustive *finite* computations, not an Agda 2.9 kernel proof or universal SAT boundary-CNF derivation.
+
+**Cross-repository and normalized evidence:** Lean `AgdaMirror/AuthorityBoundary.lean` demonstrates that citation authority and artifact acceptance differ; `AgdaMirror/LoomRelationAlgebra.lean` separates evidence status and promotion, while Golden Agda remains the theorem carrier. Treat the source-owner/path, precise precondition, falsifying fixture, local test, exact compiler head, and postcondition as the normalized evidence tuple. ITIL incident/problem and ISO 9000 corrective actions represent defect lifecycle; ISO/IEC 42001, 23894 and NIST AI RMF Govern/Map/Measure/Manage represent risk tracking; ISO/IEC 27001/27701 represent integrity/privacy provenance; ISO 9241 supports understandable diagnostic presentation; Six Sigma provides reproducible regression/defect controls. These are **engineering analogies only**, not claims of conformance or certification.
+
+```plantuml
+@startuml
+package "Golden Agda (tape-locality lane)" {
+  [Original Local grammar] --> [Rule-indexed Pattern]
+  [Rule-indexed Pattern] --> [Boundary-guided prefix/suffix induction]
+  [Centered occurrence] --> [Boundary-guided prefix/suffix induction]
+  [NoGhostContextBoundaries] --> [Boundary-guided prefix/suffix induction]
+  [Boundary-guided prefix/suffix induction] --> [DecodedTransitionStep conditional]
+}
+package "External SAT certificate obligation" {
+  [Canonical global CNF] --> [Missing endcap guard source]
+  [Missing endcap guard source] ..> [NoGhostContextBoundaries] : OPEN
+}
+[Boundary ghost regression] ..> [Rule-indexed Pattern] : countermodel
+[DecodedTransitionStep conditional] --> [DecodedRunInduction] : requires guard
+@enduml
+```
+
+**Acceptance discipline:** neither newly patched Agda source nor the new focused root has an actual latest-head Agda 2.9 `--safe` transitive acceptance receipt in this execution environment. In particular, original dependencies are not all marked `--safe`; a module import is not a receipt. No arbitrary `NoGhostContextBoundaries` witness is manufactured. The SAT-to-run and P0 Cook-Levin completeness gates must remain OPEN until the actual compiler, wire encoding, and proof producer are accepted.
+
+## Pareto / snowball / Ibrahim donor reconciliation (existing originals only)
+
+Cross-pollination reused **existing, typed repository governance**, without importing unrelated domain theorems into the tape proof root: `DASHI.Core.SnowballAttributionProvenanceInvariantExact` retains author, title, publication, DOI, canonical URL, source kind, formalisation relationship, proof-import status and authority status and explicitly proves that citation cannot create proof or authority. `DASHI.Wikimedia.IbrahimSnowballParetoFrontierExact` defines source-owned `ParetoFrontierLeaf` coordinates `rank`, `status`, `surface`, `paidBy`, `survivingResidual`, `completionTest`, `unlocks` and `requiresNewOntology`. `DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact` separates search priority from proved results and source availability from actual receipts. These are **governance donors**; do not import their huge transitive mathematical dependencies into `ConcreteTapeBoundaryGuardFocusedRootExact`.
+
+Apply their normalization policy here: **one disjoint tape-locality worker lane**, a single current source of truth for the `NoGhostContextBoundaries` proof producer, a finite counterexample regression shared by all affected consumers, and the minimum new source after quotienting existing `Local`, `Pattern`, `Whole`, `Center`, `AfterUnique` and `Step` owners. The high-value unpaid residual is the canonical global-CNF endcap guard. Repeatedly repairing contextual plain lemmas without that producer is dominated in the Pareto order; it cannot close SAT→run. The primary Cook/Levin historical attribution and original Agda source ownership remain intact. Compiler acceptance is a separate artifact and must be tied to exact commit and options.
