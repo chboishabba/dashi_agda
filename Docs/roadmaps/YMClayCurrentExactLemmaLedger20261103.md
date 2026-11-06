@@ -1,3 +1,23 @@
+## 6 November — CMP119 / CMP116 / CMP122 source-reuse correction and exact acceptance ledger
+
+See the [literal source crosswalk](../physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md) and [active deliverables](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). **Existing mathematical source owners are already abundant**: the generic CMP119 anchored expectation/physical T-operation, CMP122 nonlinear RG/boundary reinjection, CMP116 selected J / R342→R467→R479/R482 and T5 Bishop Cauchy/OS compilers are not fresh unproved mathematical subprojects. Keep 219 original legacy Set fields out of the count of true physically witnessed results.
+
+| Lemma | Concrete current result | Acceptance status |
+|---|---|---|
+| `Y119.01 cmp119122BetaAndCMP116PotentialSameSource` | Conjunction of original beta-driven source history coupling identity and exact SAME CMP109/116 localized potential equality | **SOURCE-WRITTEN, AGDA_UNVERIFIED** |
+| `Y116.02 sameLiteralR342SourceFiniteCovarianceDecay` | Direct R342→R467 exact original finite selected covariance physical-envelope implication | **SOURCE-WRITTEN, needs actual R342 Wilson source** |
+| `Y116.03 sameLiteralR342SourceYieldsR479TransferGap` | No duplicate R467 source, existing selected-limit and gap-positive input | **SOURCE-WRITTEN, conditional** |
+| `Y116.04 sameLiteralR342AndLocalRateYieldsGap` | R342→R467→R482 selected rate semantics eliminate independently supplied positive-gap token | **SOURCE-WRITTEN, conditional** |
+| `Y.01` | Original SU(N)/all-G Wilson/Haar/E-R-B-V/T-operation-to-CMP119/CMP122 source dictionary including exact RG action | **OPEN PHYSICAL** |
+| `Y.02` | Original gauge-invariant insertion→CMP119 anchored/normalized→CMP116 literal J and physical support/root dictionary | **OPEN PHYSICAL** |
+| `Y.03` | Original R342 actual selected-J physical exponential envelope, finite UV/IR defect, physical CMP122 crossing RP, T5 measure limit | **OPEN PHYSICAL** |
+| `Y.04` | Same selected OS H, dense local modes, local noncollapse and fourth cumulant, actual axioms and all compact simple groups | **OPEN PHYSICAL** |
+| `V00` | Pinned Agda typecheck new bridge, three original F1 closed equality candidates and entire TOE root + trusted transitive audit | **NO KERNEL RECEIPT** |
+
+11 exact source-owner symbols and four bridge-term declarations have **GitHub source readback PASS**. Python `scripts/check_ym_cmp119116122_same_source_contract.py` is committed and CI configured; *its job has not produced a green workflow receipt*. The source proof term readback does not discharge the physical original-Wilson witnesses.
+
+---
+
 
 **2026-11-06 CLAY4.D2/D3 refinement:** `RGReferenceChargeSurvival.charge : Nat→ℚ` is explicitly a *rational lower certificate*, NOT the actual continuous Wilson expectation. `ActualRGContinuumChargeLimit r Scalar` uses real/Bishop `Scalar`, `actualFiniteCumulant`, `selectedFiniteChargeLower`, `actualCumulantConverges`, order-preserving `embed`, and standard closed-order authority; derived `referenceRGUniformNoncollapse` + `selectedFiniteChargeLower` proves the actual finite cumulant lower, passed to existing `BalabanClayT5CumulantLowerBoundNontrivialityExact`. Physical source lower enclosures and convergence remain `OPEN_PHYSICS`; Agda is `SOURCE_PENDING_AGDA`.
 
