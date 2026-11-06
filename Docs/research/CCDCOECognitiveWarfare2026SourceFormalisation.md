@@ -239,3 +239,15 @@ Until an actual successful Agda run is recorded, the formal status
 is **source-written, not kernel-verified**. A successful finite
 Python test is not an Agda proof receipt, and neither establishes
 empirical cognitive warfare.
+
+## 2026-11-06 P3 causal-trialectic source max-cut
+
+P3 now has two additional golden Agda source owners, a regression, a finite
+Python checker and a detailed source/PR archaeology ledger. Read
+[CCDCOE P3 Causal-Trialectic Source Max-Cut](../roadmaps/CCDCOEP3CausalTrialecticSourceMaxCut20261106.md)
+for the exact new theorems and evidence gates. These sources extend the original
+five-layer certified-cut model, reusing in-repo climate-denial, S3, intersectional,
+Brown, Indigenous/Two-Eyed, Žižek, Kimmerer and ITIR owners. The Sophontic,
+Bolo, ESD and runtime Wiki PRs are explicitly provenance-controlled donors,
+not silently imported unmerged implementations. Golden kernel verification
+and real causal/intent identification remain OPEN.
