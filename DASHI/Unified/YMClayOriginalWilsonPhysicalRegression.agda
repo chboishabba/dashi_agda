@@ -46,3 +46,7 @@ import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1Origin
 
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1OriginalSUNDependent
+
+-- D1 exact ORIGINAL all-varying-cutoff real-valued Wilson covariance,
+-- gauge-invariant test products, normalized expectation extensionality.
+import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as D1VariableOriginalWilsonCovariance
