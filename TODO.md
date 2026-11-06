@@ -1,3 +1,16 @@
+## YM 2026-11-06 — selected original physical finite source/max-cut
+
+- [x] **M.FIN.01:** implement actual all-cutoff original two-plaquette Wilson/trace source, selected gauge-invariance and physical covariance: `YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact.agda`.
+- [x] **M.FIN.02:** prove equality of full original side-four 1024-link two-marked partition and its normalized functional with exact native R445 weighted pushforward: `YMClayOriginalWilsonNativeMarkedPushforwardExact.agda`. Preserve coarse-gauge invariance on the same measure.
+- [x] **M.FIN.03:** specialize existing all-64-pair+896-spectator noncommutative weighted fibre disintegration to whole marked source; prove same-partition normalized identity and effective-density positivity: `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact.agda`.
+- [ ] **M.01:** establish original native 1024-bond label/permutation equality as an accepted exact source theorem, connecting arbitrary-weight F19 pair/spectator Haar integration to the literal Wilson decoder.
+- [ ] **M.02:** construct selected actual SU(N) Borel Haar/full matrix trace and SAME complete CMP119/122 E/R/B/V/ghost/background density/R-operation on this original Wilson source, at every renormalization scale (including reflection-plane crossing).
+- [ ] **M.03:** prove CMP116 published differentiated marked localization on selected original two-plaquette/loop supports of that renormalized physical density, with actual source coordinates, root and physical time calibration. Do **not** re-prove the already-paid finite Hessian/covariance identity.
+- [ ] **M.04:** derive uniform physical `a→0` and `L→∞` source/defect bounds and reflection-positive crossing kernel, not a false bare coarse Wilson law.
+- [ ] **M.05:** reconstruct the same nontrivial OS 4D theory and Hamiltonian, positive physical gap and required group scope.
+
+**Receipt:** source additions verified by GitHub; no Agda kernel check in this environment; the Clay endpoint is not claimed.
+
 ## 2026-11-06 — Y.02 finite analytic source max-cut correction
 
 - [x] Reuse the existing bounded finite compact-SU(N) source holomorphy and mixed-log/covariance proof in `Docs/physics/YMClayR320BoundedMarkedSourceLemma20261106.md`; do not leave a new "formal jet vs finite analytic derivative" mathematical research gate.
