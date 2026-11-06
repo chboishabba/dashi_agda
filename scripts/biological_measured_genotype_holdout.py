@@ -127,23 +127,31 @@ def fit_and_evaluate(data,sha,metadata,seed=0,bootstrap=300):
     null_pred=np.full(len(yp),float(np.mean(y["train"])))
     m=score(y["test"],yp)
     baseline=score(y["test"],null_pred)
+    # Cluster by genotype, not measurement row: multiple MAVE replicates of
+    # one genotype are not independent samples of sequence-space coverage.
     rng=np.random.default_rng(seed)
+    by_genotype={}
+    for idx,row in enumerate(splits["test"]):
+        by_genotype.setdefault(row[0],[]).append(idx)
+    heldout_genotypes=sorted(by_genotype)
     rmse_draws=[]
     for _ in range(bootstrap):
-        indices=rng.integers(0,len(yp),size=len(yp))
+        chosen=rng.choice(heldout_genotypes,size=len(heldout_genotypes),
+                          replace=True)
+        indices=np.asarray([idx for genotype in chosen
+                            for idx in by_genotype[genotype]],dtype=int)
         rmse_draws.append(score(y["test"][indices],yp[indices])["rmse"])
     ci=np.quantile(rmse_draws,[.025,.975])
-    # The neutral graph is restricted to *observed test sequences*. It is
-    # not promoted to the full 4^L neutral-component census.
-    seqs=[r[0] for r in splits["test"]]
-    values={seq:val for seq,val in zip(seqs,y["test"])}
+    # The neutral graph is restricted to observed test genotypes: this is
+    # not the full 4^L neutral-component census.
     return {
         "status":"heldout-measured-assay-association-not-causal-attractor",
         "source_sha256":sha,"metadata":metadata,
         "selected_order":order,"selected_ridge_alpha":alpha,
         "selected_validation_rmse":val_rmse,
         "test":m,"train_mean_baseline_test":baseline,
-        "test_rmse_bootstrap_95_interval":[float(ci[0]),float(ci[1])],
+        "test_rmse_genotype_cluster_bootstrap_95_interval":[float(ci[0]),float(ci[1])],
+        "test_independent_genotype_count":len(heldout_genotypes),
         "bootstrap_seed":seed,"bootstrap_replicates":bootstrap,
         "all_model_selection_used_validation_only":True,
         "test_genotypes_disjoint_from_train_and_validation":True,
