@@ -36,3 +36,6 @@ import DASHI.Physics.YangMills.YMClayNative1024WeightedWilsonReindexExact as Nat
 import DASHI.Physics.YangMills.YMClayNative1024FullMarkedWilsonReindexExact as NativeFullMarkedWilson
 
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact as PhysicalF19WilsonWeight
+
+import DASHI.Physics.YangMills.YMClayNativePairsSpectatorsFubiniExact as OriginalFlatNestedFubini
+import DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact as OriginalPhysicalF19Partition
