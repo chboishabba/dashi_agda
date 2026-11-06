@@ -135,8 +135,8 @@ not the same as a source-validated scientific result.
 | Gate | New implementation | Exact unresolved acceptance |
 |---|---|---|
 | P0 — biological carrier | `SourceIndexedBiologicalCarrierExact` assembles the original `CellStateAttractor` genome/chromatin/RNA/proteome/metabolism/membrane/environment/history carrier with a typed phenotype observation, experimental time/history, and the exact Grodstein–Levin source-observation anchor. | **P0.PHYSICAL-INSTANCE:** original sequence/assay/context-specific physical state and source-qualified history evolution, with actual observational readouts; the Boolean fixture is not a physiological cell. |
-| P1 — future quotient | `BiologicalFuturePartitionCompilerExact` instantiates `CertifiedPartitionRefiner`, with a rank-bounded depth-zero stable code *relative to the five-coordinate future-sufficient observer*. `BiologicalStochasticFutureLumpingExact` gives a half/half hidden-marker randomized rational Markov operator and an all-horizon lumpability transport. The supplemental finite script computes the morphology-observer partition by refinement without confusing it with the stronger code observer. | **P1.KERNEL:** independent exact-head parallel_checker/Agda acceptance; **P1.PHYSICAL-STOCHASTIC:** experimentally justified stochastic transition rates and source-specific admissibility; **P1.MORPH-MINIMAL:** promote the actual morphology-observer minimal finite partition into the Golden compiler if needed. |
-| P2 — spatial dynamics | `BiologicalCoupledTissueCubeExact` provides a synchronous old-field neighbour-coupled update with explicit real 3×3×3 nearest-neighbour witnesses, a concrete nonperiodic x-neighbour schedule for every vertex, arbitrary-trace fine/coarse preservation without function extensionality, and a source-written one-step finite basin/fixed-point result for repeated unchanged signalling. | **P2.ALL-EDGE-PNP:** full 54-edge/36-plaquette flux, physically typed local couplings, conservation/boundary conditions, measured tissue dynamics, and physical basin transport beyond the selected Boolean one-step idempotence. The selected neighbour operator is a finite mathematical model, not tissue physics. |
+| P1 — future quotient | `BiologicalFuturePartitionCompilerExact` instantiates `CertifiedPartitionRefiner`, with a rank-bounded depth-zero stable code *relative to the five-coordinate future-sufficient observer*. `BiologicalStochasticFutureLumpingExact` gives a half/half hidden-marker randomized rational Markov operator and an all-horizon lumpability transport. The supplemental finite script computes the morphology-observer partition by refinement without confusing it with the stronger code observer. | **P1.KERNEL:** independent exact-head parallel_checker/Agda acceptance; **P1.PHYSICAL-STOCHASTIC:** experimentally justified stochastic transition rates and source-specific admissibility; **P1.MORPH-MINIMAL:** the 18-class morphology-observer minimal code now has an explicit source-written Agda exact-future equivalence proof in `BiologicalMinimalMorphologyFutureQuotientExact`; independent Agda/parallel_checker kernel acceptance remains to be obtained. |
+| P2 — spatial dynamics | `BiologicalCoupledTissueCubeExact` provides a synchronous old-field neighbour-coupled update with explicit real 3×3×3 nearest-neighbour witnesses, a concrete nonperiodic x-neighbour schedule for every vertex, arbitrary-trace fine/coarse preservation without function extensionality, and a source-written one-step finite basin/fixed-point result for repeated unchanged signalling. | **P2.ALL-EDGE-PNP:** the 54 positive directed bonds and 36 elementary squares now have native source-written incidence/path-closure and projection checks; physically typed flux, conservation and boundary laws, measured mechanics/PNP and biological basin transport remain required. The selected neighbour operator is a finite mathematical model, not tissue physics. |
 | P3 — kinetic calibration | `validate_biological_source_models.py` performs fail-closed official gocam-py/libSBML checks when those dependencies are installed. `biological_si_kinetic_calibration.py` fits a declared SI first-order production/decay law on source-scoped training experiments, bootstraps by experiment and reports disjoint held-out performance and identifiability failures. | **P3.ORIGINAL-SI:** original model-specific kinetic parameter values, external SI-unit validation, lawful simulation of selected SBML/SED-ML equations, uncertainty/identifiability controls, measured tissue/chemical trajectories and independent experimental replication. First-order fitting does not validate another biological mechanism by analogy. |
 | P4 — ontology / PNF | `biological_gocam_sbml_receipt_intake.py` reads original IDs, predicates, source hashes and explicit candidate crosswalks; `BiologicalEvidenceFeedbackFiniteExact` proves finite evidence-driven rejection and reopening. ITIR-suite draft PR [#72](https://github.com/chboishabba/ITIR-suite/pull/72) adds a source-bound, review-only candidate projection to the canonical world-model boundary with evidence and trust tests. | **P4.CANONICAL-PG:** original schema validation on an identified model, source-span SLR/PNF parser, reviewed candidate reconciliation and actual PostgreSQL authoritative receipts. No parallel persistent store or automatic ontology mutation. |
 | P5 — held-out measurements | `prepare_shine_dalgarno_measured.py` is pinned to the 2020 Kuo et al. original dmsC replicate columns as provided by the 2026 `cmarti/shine_dalgarno` reanalysis, with genotype-disjoint train/validation/test splits and no inferred imputation. `biological_measured_genotype_holdout.py` selects additive/pairwise regularized regressions by validation only and reports held-out metrics/bootstrap intervals. `check_biological_spatial_stochastic.py` independently checks the selected finite spatial/stochastic claims. | **P5.ORIGINAL-RUN:** fetch/audit the actual measured CSV and preserve its original SHA/experiment context, reproduce the connector-computed original-data readout in the committed Python code and obtain an independent receipt; **P5.DEVELOPMENT:** longitudinal planarian/Levin control cohorts, prospective morphological basin predictions, independent controls/replication and source-separated effect estimates. A static dmsC translation-efficiency benchmark is *not* a developmental attractor experiment. |
@@ -311,3 +311,120 @@ substituted for these gates.
 A failed calibration or disconfirming intervention remains an informative
 accepted result; it must not be reclassified as a proof failure or silently
 discarded.
+
+
+## 2026-11-06 max-cut refinement: minimal quotient, complete cubical incidence, replicate-aware experimental readout
+
+This extension reuses the established owners and source identities.  It does
+not introduce a new persistent ontology or assume that a toy Boolean law
+describes a tissue.
+
+### P1 — exact minimal morphology-observer quotient
+
+`BiologicalMinimalMorphologyFutureQuotientExact.agda` proves, for the
+specified six-Boolean state and five interventions, the stronger equivalence
+
+`minimalProject(x) == minimalProject(y)` **iff**
+`FutureObservationEquivalent(deterministicSystem step, observe, x, y)`.
+
+Unlike the previous sufficient five-coordinate code (32 values), the
+minimal code has **18 classes**: two genome-incompetent classes distinguished
+by current morphology, and 16 genome-competent classes distinguished by the
+three causal flags and morphology.  It is *not* safe to erase chromatin or
+biological memory in an arbitrary physiological model; this is a
+source-written theorem for the explicitly chosen fixture only.
+
+Five experiment words, comprising the empty observation and four controlled
+intervention histories, exactly decode the quotient: isolate genome,
+memory, junction and environment, with the current phenotype retained.
+The Golden proof uses the repository's canonical future-language bridge,
+not an independently invented equivalence definition.
+
+`scripts/check_biological_minimal_cube.py` exhaustively enumerates 64
+states and independently refines the original morphology observer.  Its
+class counts are **2 → 4 → 10 → 16 → 18**, and its final partition is
+identical to the explicit diagnostic and minimal-code kernels.
+
+**Acceptance boundary:** source-written proof and a separately computed
+finite enumeration; no independent exact-head Agda/parallel_checker receipt.
+
+### P2 — full cubical incidence without physical overclaim
+
+`BiologicalFullCubeIncidenceExact.agda` reuses the native ternary
+3×3×3 point and adjacency constructors.  It indexes **54 positive
+coordinate-oriented nearest-neighbour bonds** (18 per axis) and
+**36 elementary squares** (12 per axis pair).  All source/target edges
+carry a native adjacency witness; each square's two two-step
+paths have equal initial, intermediate and terminal corners by proofs,
+and all bond-junction observations survive the original phenotype
+projection.  No cyclic boundary is silently introduced.
+
+This closes the **topological enumeration/incidence slice**, not the
+dynamical PNP/chemistry/mechanics slice.  A physically admissible edge
+current, flux conservation, boundary conditions, calibrated constitutive
+laws and measured basin transport still require original source evidence.
+
+### P0/P5 — original measured two-genotype Agda witness
+
+`OriginalDmscTwoGenotypeMeasuredExact.agda` pins two directly measured
+RNA 9-mers from the original upstream dmsC CSV (Git blob
+`151cd87272cbdd6bcc2b1e70bdfd2a4ea2933d2c`), preserving
+`AAAAAAAAA: 0.256, 0.769, 0.664` and
+`AAAAAAAAC: 0.389, 0.908, 0.695`.
+Their exact source-scale replicate means are 0.563 and 0.664, encoded
+as thousandths.  It proves that the typed genotypes share their first
+eight nucleotides but differ at the ninth, and that those two sample
+means are arithmetically unequal.  **No statistical significance,
+causal substitution effect or regenerative attractor claim follows.**
+
+### P5 — measured replicate-range discrimination
+
+The raw original dmsC Git blob was read directly again and the previously
+reported **257,565 measured genotypes, 635,085 measured replicate values,
+3,429,837 measured Hamming-one edges** and mean-tolerance edge counts
+were independently reproduced in JavaScript double precision.
+
+New `check_original_dmsc_replicate_ranges.py` adds a *fail-closed original
+Git-blob checksum* and a separate descriptive classification.  For an
+edge between genotypes each with at least two measured replicates:
+
+- **all within** iff the maximum observed across-genotype replicate-pair
+  difference is at most the chosen tolerance;
+- **all beyond** iff even the minimum possible difference between the two
+  observed replicate ranges exceeds the tolerance;
+- **mixed** otherwise.
+
+Of the measured Hamming-one edges, 2,721,334 have at least two original
+replicates at both ends; 708,503 do not.
+
+| Illustrative tolerance | Mean-difference within | All observed pairs within | All observed pairs beyond | Mixed ranges |
+|---|---:|---:|---:|---:|
+| 0.05 | 1,004,490 | 928 | 212,967 | 2,507,439 |
+| 0.10 | 1,770,810 | 6,240 | 180,506 | 2,534,588 |
+| 0.20 | 2,582,535 | 54,368 | 148,222 | 2,518,744 |
+
+These are **not** confidence intervals, hypothesis tests or biologically
+validated equivalence margins.  The result exposes how much an endpoint
+mean-only tolerance graph conceals within-assay replicate spread.  A
+source-calibrated error model, independent batches, prospective controls
+and longitudinal organ/tissue measurements remain separate P5 work.
+
+### Updated commands
+
+```bash
+python3 scripts/check_biological_minimal_cube.py
+python3 scripts/check_original_dmsc_replicate_ranges.py --self-test
+python3 scripts/check_original_dmsc_replicate_ranges.py \
+  --original-csv /path/to/cmarti/shine_dalgarno/data/dmsc.csv \
+  --receipt /tmp/dmsc-replicate-ranges.json
+bash scripts/check_biological_history_future_round23.sh
+# then run the repository's independent parallel_checker against exact HEAD
+```
+
+**Trust:** all appended Agda proof owners remain **source-written pending
+kernel acceptance**. The original-data replicate-range census was
+independently computed from the pinned upstream blob in this chat; the
+new Python reproduction script has no independent execution receipt yet.
+P0 whole-cell physiological state, P2 physical flux dynamics, P3 real
+organism-specific SI calibration, P4 reviewed PostgreSQL promotion and P5
+prospective developmental-attractor discrimination remain open.
