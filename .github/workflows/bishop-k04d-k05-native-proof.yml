@@ -17,6 +17,7 @@ on:
       - 'DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda'
       - 'DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda'
       - 'scripts/check_k05_symbolic_grouped.py'
+      - 'scripts/check_k04d_negative_log_exp_truncated.py'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
       - 'DASHI/Unified/Everything.agda'
@@ -63,6 +64,10 @@ jobs:
       - name: Independent finite exact bivariate coefficient regression
         shell: bash
         run: python3 scripts/check_k05_symbolic_grouped.py --through-degree 48 | tee bishop-k05-symbolic.log
+
+      - name: Exact rational finite canonical negative-log exponential regression
+        shell: bash
+        run: python3 scripts/check_k04d_negative_log_exp_truncated.py --through-degree 32 | tee bishop-k04d-finite-log-exp.log
 
       - name: Kernel check all focused K05 and K04d new owners
         shell: bash
@@ -162,3 +167,4 @@ jobs:
             bishop-toe-kernel.log
             agda-stdlib-sha.txt
             bishop-k05-symbolic.log
+            bishop-k04d-finite-log-exp.log
