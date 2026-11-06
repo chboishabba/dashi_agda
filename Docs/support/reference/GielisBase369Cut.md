@@ -258,3 +258,34 @@ measured apparatus calibration or an anomalous-gravity observation.
 See [E17–E19 proofs](GielisBase369ProofTheorems.md) and
 [G01–G21 acceptance roadmap](GielisBase369Roadmap.md) for
 the exact remaining proof/measurement gates.
+
+
+## Gielis–SI/Perron reuse seam, November 6
+
+The original **SI carrier** is `DASHI.Physics.Units.SI`, with
+`SIMetrologyBridge`, `MechanicalDimensionExact`, and
+`YangMillsSIScalingEndpointExact`. The canonical exact c integer
+belongs to `SIExactConstantParsedCarrierRequest`.
+
+The new `DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda`
+retains those owners, proves `[P/c]×R = M L² T⁻²` as an
+MLT/SI dimension equality, gives torque a distinct nominal role
+from energy, and preserves SI measurement uncertainty/source/version.
+
+For spectral reuse, the canonical
+`BalabanFiniteInfluenceRowMassPowerExact` already proves
+finite rational matrix sum and row-power estimates given a
+nonnegative-powers witness. This is imported directly.
+The original Gielis five-point discrete eigenvalue enclosure
+E17 is an exact rational Collatz–Wielandt calculation, *not*
+a claim that the repo has a fully accepted generic native
+Collatz–Wielandt theorem. The Collatz/Syracuse integer iteration
+modules address a different problem.
+
+`scripts/gielis_si_owner_adapter.py` source-checks the existing
+canonical c and Power/Force/Energy exponents; the Gielis ray solver
+and rational torque envelope now use it as their numerical source.
+An SI unit-typed equation is not a new source-power measurement.
+
+CI and original HTML replay are excluded from this round's active
+max-cut, while their earlier provenance remains documented.
