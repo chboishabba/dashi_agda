@@ -10,6 +10,11 @@ on:
       - 'DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda'
       - 'DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda'
       - 'DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda'
+      - 'DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda'
+      - 'DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda'
+      - 'DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda'
+      - 'DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda'
+      - 'scripts/check_bishop_machin_rational_gaussian_phase.py'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
       - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
@@ -58,7 +63,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          git clone --depth=1 --branch experimental https://github.com/agda/agda-stdlib.git "$GITHUB_WORKSPACE/.agda-stdlib"
+          git clone --filter=blob:none https://github.com/agda/agda-stdlib.git "$GITHUB_WORKSPACE/.agda-stdlib"
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" fetch --depth=1 origin 008f12c2908479567a3ae3c873f9cf0b8fe5987e
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" checkout --detach FETCH_HEAD
+          test "$(git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD)" = 008f12c2908479567a3ae3c873f9cf0b8fe5987e
           git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD | tee agda-stdlib-sha.txt
 
       - name: Independent finite exact bivariate coefficient regression
@@ -68,6 +76,10 @@ jobs:
       - name: Exact rational finite canonical negative-log exponential regression
         shell: bash
         run: python3 scripts/check_k04d_negative_log_exp_truncated.py --through-degree 32 | tee bishop-k04d-finite-log-exp.log
+
+      - name: Exact Machin Gaussian phase fraction regression
+        shell: bash
+        run: python3 scripts/check_bishop_machin_rational_gaussian_phase.py | tee bishop-machin-rational-gaussian.log
 
       - name: Kernel check all focused K05 and K04d new owners
         shell: bash
@@ -92,6 +104,10 @@ jobs:
             DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda
             DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda
             DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda
+            DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda
+            DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda
+            DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda
+            DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda
             # Terminal and same-object consumer checks: unlike static lemma
             # discovery, these force Agda to elaborate the actual endpoints.
             DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda
@@ -168,3 +184,4 @@ jobs:
             agda-stdlib-sha.txt
             bishop-k05-symbolic.log
             bishop-k04d-finite-log-exp.log
+            bishop-machin-rational-gaussian.log
