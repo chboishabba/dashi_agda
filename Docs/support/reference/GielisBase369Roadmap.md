@@ -62,14 +62,14 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | ID | Exact target (proposed proof-owner name) | Requirement | Depends | State |
 |---|---|---|---|---|
 | G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
-| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Bishop π/sample values OPEN; E12 ring lemma SOURCE |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E01 paper proof; E12 native Bishop polynomial SOURCE; actual trig weld OPEN |
-| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 smoothness paper proof; Bishop derivative/sqrt OPEN |
-| G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | E02 cyclic/dihedral paper proof; native Bishop/Phase18 OPEN |
+| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Same Round11/Bishop sine-cosine owner found; classical-object weld and π sample calculation OPEN |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | Native Bishop ring polynomial SOURCE; Round11 shared Pythagorean conditional compiler REUSED; quadruple-angle and Golden OPEN |
+| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 paper smoothness; Round11 derivative authority reusable only after same-object weld; sqrt/positivity kernel OPEN |
+| G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
 | G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E05 paper proof; E13 exact Q(zeta36) 1296-pair PASS; Agda OPEN |
-| G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop integration OPEN |
-| G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 exact curvature paper proof; Bishop derivative OPEN |
+| G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop polar integration, π and inverse/sqrt OPEN |
+| G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 operator/compact resolvent proof; E15 Rayleigh bound PASS; native Agda OPEN |
 | G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 sector-domain all-eigenvalue O(m/N) certified; Cartesian FD error OPEN |
@@ -225,3 +225,11 @@ Verification commands (these are instructions, NOT exact-head test receipts):
     scripts/check_gielis_base369_cut.sh
 
 Exact remaining native/empirical leaf list is the G01–G21 table above. Technical E01–E16 mathematical proofs and their nonpromotion conditions live in GielisBase369ProofTheorems.md.
+
+### Crucial P2 existing owner: shared Round11 same-object trig weld
+
+The source DASHI/Analysis/BishopRound11ClassicalTrigObjectWeldExact.agda already packages **one same-object identification** that, when furnished, transports BOTH classical DLMF sine/cosine Pythagorean and the Bishop analytic derivative source to the literal Round11 Bishop functions. The owner's canonical status explicitly has sameTrigObjectWeldClosed=false. Do not duplicate Pythagorean as an unattested Gielis-specific axiom. New GielisBishopPolynomialExact.agda now calls Shared.compileRound11Pythagorean using an actual shared weld witness W, and uses the real BishopP ring solver for the universal polynomial identity. G03 still needs the quadruple-angle producer and the same-object square-root/canonical pi phase. Conditional transport is not proof that W exists.
+
+### Exact G13 original optical replay artifact identifiers
+
+Historical independent first-forward audit records 132/132 intersecting rays, with median/max positional differences: Archimedean 1.414/1.499 mm, logarithmic 1.729/1.832 mm, segmented 1.349/1.431 mm. The HTML event solver used distance-to-stroked-wall geometry while the independent solver used normal-offset finite wall thickness. The original files were named spiral_raymarch_collision_export_forward.html, spiral_collision_events_forward.json and referee_spiral_events.py (and a kozyrev_first_forward_audit_bundle.zip artifact); their bytes are not present in the connected repo/Library sources available in this round. A first-hit convergence study on a DIFFERENT new analytic scene cannot close the original thickness-semantics mismatch. The 2026-10-28 log-spiral torque value -195.58 microN m remains provisional until that precise original replay is recovered and parity demonstrated.
