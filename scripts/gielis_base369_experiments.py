@@ -58,6 +58,19 @@ def gielis_radius(theta, m, epsilon=1.0):
         raise ValueError("positivity requires |epsilon|<3")
     return 2/np.sqrt(3+epsilon*np.cos(m*np.asarray(theta)))
 
+def raster_boundary_tolerance(h):
+    """Vanishing radial classification tolerance: δ(h) -> 0 as h -> 0.
+
+    The legacy 1e-12 tolerance was a FIXED inward shrinkage and
+    therefore selected a distinct continuum limit domain. The capped
+    h² tolerance preserves legacy 41/61 masks yet fixes the analytic
+    limit's target domain.
+    """
+    if not (math.isfinite(float(h)) and h>0):
+        raise ValueError("positive finite grid spacing required")
+    return min(1e-12,float(h)**2)
+
+
 def laplacian_eigenvalues(m, n=41, k=4):
     """Five-point Dirichlet approximation on a rasterized supershape domain."""
     from scipy.sparse import csr_matrix
@@ -67,7 +80,7 @@ def laplacian_eigenvalues(m, n=41, k=4):
     axes = np.linspace(-1.5,1.5,n)
     h = axes[1]-axes[0]
     x,y = np.meshgrid(axes,axes,indexing="ij")
-    inside = np.hypot(x,y) < gielis_radius(np.arctan2(y,x),m)-1e-12
+    inside = np.hypot(x,y) < gielis_radius(np.arctan2(y,x),m)-raster_boundary_tolerance(h)
     points = np.argwhere(inside)
     index = {tuple(p):j for j,p in enumerate(points)}
     row=[]; col=[]; data=[]
