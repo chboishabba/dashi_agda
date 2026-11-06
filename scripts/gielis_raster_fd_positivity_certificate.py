@@ -27,6 +27,37 @@ from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import eigsh
 import gielis_base369_experiments as G
 
+def ground_state_identity_exact(q,neighbors,x):
+    """Exact universal algebraic identity (checked on this x).
+
+    For A=4I-B, r_i=(Aq)_i/q_i, q_i>0, symmetric adjacency:
+      x^T A x
+        = sum_i r_i x_i^2
+          + sum_{edges {i,j}} q_i q_j (x_i/q_i-x_j/q_j)^2.
+
+    Its proof is edgewise expansion:
+     q_i q_j(a-b)^2 =
+       (q_j/q_i) x_i^2+(q_i/q_j) x_j^2-2x_i x_j.
+    Therefore min(r_i)||x||² <= x^T A x for EVERY real x,
+    without requiring a Perron eigenvector or connectivity.
+    """
+    if len(q)!=len(x) or len(q)!=len(neighbors) or any(t<=0 for t in q):
+        raise ValueError("positive q and matching vector lengths required")
+    e=sum(
+        (Q(q[i])*q[j]*(Q(x[i],q[i])-Q(x[j],q[j]))**2
+         for i,ns in enumerate(neighbors) for j in ns if j>i),
+        Q(0))
+    r=[Q(4*q[i]-sum(q[j] for j in ns),q[i])
+       for i,ns in enumerate(neighbors)]
+    kinetic=Q(4)*sum((Q(y*y) for y in x),Q(0))-sum(
+        (Q(x[i]*x[j]) for i,ns in enumerate(neighbors) for j in ns),
+        Q(0))
+    ground=sum((r[i]*x[i]*x[i] for i in range(len(q))),Q(0))
+    if kinetic!=ground+e:
+        raise AssertionError("ground state transform fails exact rational equality")
+    return {"energy":kinetic,"diagonal_potential":ground,"edge_squares":e}
+
+
 def certify(m:int,n:int=41,scale:int=10**15)->dict:
     if type(m) is not int or m<=0 or n<17 or n%2!=1 or scale<1000:
         raise ValueError("m>0, odd grid n>=17, scale>=1000 required")
@@ -62,6 +93,20 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
     # Every exact rational test vector entry is STRICTLY POSITIVE.
     ratios=[Q(4*q[k]-sum(q[j] for j in adjacent),q[k])
             for k,adjacent in enumerate(neighbors)]
+    # The following equality is an exact polynomial identity for ALL
+    # x. These independent rational vectors exercise its implementation.
+    # The mathematical lower bound does NOT need PF/Collatz-Wielandt
+    # or the connectivity assumption used by the older certificate.
+    probes=[
+        q,
+        [1 for _ in q],
+        [(-1)**i*(1+i%7) for i in range(len(q))],
+        [1+(i%11)**2 for i in range(len(q))],
+    ]
+    ground_receipts=[
+        ground_state_identity_exact(q,neighbors,x) for x in probes
+    ]
+    assert all(r["edge_squares"]>=0 for r in ground_receipts)
     h_inv_sq=Q((n-1)**2,9)
     lower=min(ratios)*h_inv_sq
     upper=max(ratios)*h_inv_sq
@@ -86,7 +131,11 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
         "certified_interval_width":float(upper-lower),
         "scipy_eigsh_estimate":estimate,
         "original_fd_eigsh_estimate":old,
-        "proof":"Collatz-Wielandt/Perron-Frobenius with exact integer vector",
+        "proof":"exact finite ground-state transform edge-square identity plus Rayleigh upper bound; PF/Collatz-Wielandt optional donor",
+        "exact_ground_state_test_vectors":len(ground_receipts),
+        "ground_state_identity_edge_squares_nonnegative":True,
+        "PF_theorem_required_for_lower_bound":False,
+        "connectivity_required_for_lower_bound":False,
         "original_cartesian_fd_discrete_operator_identified":True,
         "continuum_dirichlet_mesh_convergence_proved":False,
         "sympy_or_agda_needed_for_discrete_certificate":False,
