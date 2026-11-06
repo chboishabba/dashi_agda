@@ -24,9 +24,10 @@ module DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product using (_×_; _,_)
-open import Data.Rational.Base using (ℚ)
+open import Data.Rational.Base using (ℚ; _≤_)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Beta
@@ -77,9 +78,7 @@ cmp119122BetaAndCMP116PotentialSameSource inputs family =
         family scale volume background)
       (Local.densityPotentialIsLocalizedCompositeSum
         family scale volume background))
-  where
-  open import Relation.Binary.PropositionalEquality using (trans)
-
+ 
 -- R342 owns the LITERAL same mixed-J source. R467 and R479 are
 -- ALREADY complete theorem compilers on that exact source and its OS
 -- selected upper-closure.  Avoid duplicating the source-facing
