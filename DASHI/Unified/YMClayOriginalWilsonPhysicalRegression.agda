@@ -34,3 +34,5 @@ import DASHI.Physics.YangMills.YMClayNative1024ClosedReindexHaarConsequencesExac
 import DASHI.Physics.YangMills.YMClayNative1024WeightedWilsonReindexExact as NativeWeightedWilson
 
 import DASHI.Physics.YangMills.YMClayNative1024FullMarkedWilsonReindexExact as NativeFullMarkedWilson
+
+import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact as PhysicalF19WilsonWeight
