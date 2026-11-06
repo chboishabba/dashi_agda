@@ -18,6 +18,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
   DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+  DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
   DASHI/Biology/Physical/BiologicalAtomicMolecularHammingReuseExact.agda
 )
 test -s "$ROOT"
@@ -53,6 +54,8 @@ grep -q 'canonicalAllNeighboursFutureSafe' \
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
 grep -q 'differentRawMeanReadouts' \
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
+grep -q 'sourcePoissonChargeAgrees' DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
+grep -q 'sourceIonicFluxSplits' DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
 grep -q 'hamming9Symmetric' DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
 grep -q 'originalsOneSubstitution' DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
 grep -q 'candidateTimeAdvances' DASHI/Biology/Physical/BiologicalAtomicMolecularHammingReuseExact.agda
