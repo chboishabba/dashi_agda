@@ -27,6 +27,7 @@ import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bila
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as Native
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1
+import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as OriginalWilson
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
@@ -200,62 +201,220 @@ module _
             proof
     }
 
-  record ActualSelectedOriginalSUNConvergence
-      (finite : ActualNativeFiniteIntegration) : Set₁ where
+
+  ----------------------------------------------------------------------
+  -- Genuine continuum observable selection: never quantify convergence
+  -- over ALL arbitrary n-dependent sections! The latter includes
+  -- alternating constants and need not converge.
+  --
+  -- This chosen algebra carries literal realizations and their
+  -- pointwise finite algebra laws. No independent expectation is added.
+  ----------------------------------------------------------------------
+
+  record SelectedNativeCylinderAlgebra : Set₁ where
     field
-      continuumExpectation :
+      Observable : Set
+      selectedSection : Observable →
         Native.Cylinder theory traceData exponential beta oneLink
-          bilateral (Quotient.divide quotient) → ℝ
+          bilateral (Quotient.divide quotient)
+
+      zeroObservable oneObservable : Observable
+      addObservable : Observable → Observable → Observable
+      scalarObservable : ℝ → Observable → Observable
+
+      zeroMeaning :
+        ∀ n links →
+        selectedSection zeroObservable n links ≡ 0ℝ
+
+      oneMeaning :
+        ∀ n links →
+        selectedSection oneObservable n links ≡ 1ℝ
+
+      addMeaning :
+        ∀ n left right links →
+        selectedSection (addObservable left right) n links
+        ≡ selectedSection left n links +ℝ selectedSection right n links
+
+      scalarMeaning :
+        ∀ n scalar observable links →
+        selectedSection (scalarObservable scalar observable) n links
+        ≡ scalar *ℝ selectedSection observable n links
+
+      Nonnegative : Observable → Set
+      nonnegativeMeaning :
+        ∀ observable →
+        Nonnegative observable →
+        ∀ n links → 0ℝ ≤ℝ selectedSection observable n links
+
+      -- This is the actual gauge action on each original n-dependent
+      -- Wilson link carrier, not a new abstract gauge-invariance token.
+      gaugeInvariantSelection :
+        ∀ observable →
+        OriginalWilson.OriginalGaugeInvariantSection
+          theory traceData exponential beta oneLink bilateral
+          (Quotient.divide quotient)
+          (selectedSection observable)
+
+  open SelectedNativeCylinderAlgebra public
+
+  selectedRealization :
+    (selection : SelectedNativeCylinderAlgebra) →
+    E1.CylinderRealization
+      (Native.ActualLinks theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient))
+      (Observable selection) ℝ
+  selectedRealization selection = record
+    { E1.CylinderRealization.realization =
+        λ n observable → selectedSection selection observable n
+    ; E1.CylinderRealization.zeroObservable = zeroObservable selection
+    ; E1.CylinderRealization.oneObservable = oneObservable selection
+    ; E1.CylinderRealization.addObservable = addObservable selection
+    ; E1.CylinderRealization.scalarObservable = scalarObservable selection
+    }
+
+  nativeExpectationExtensional :
+    (n : Nat)
+    (left right :
+      Native.Cylinder theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient)) →
+    (∀ links → left n links ≡ right n links) →
+    nativeExpectation n left ≡ nativeExpectation n right
+  nativeExpectationExtensional n left right same =
+    OriginalWilson.originalWilsonExpectationExtensional
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+      n (left n) (right n) same
+
+  nativeSelectedExpectationZero :
+    (finite : ActualNativeFiniteIntegration)
+    (selection : SelectedNativeCylinderAlgebra) →
+    ∀ n →
+    nativeExpectation n (selectedSection selection (zeroObservable selection))
+      ≡ 0ℝ
+  nativeSelectedExpectationZero finite selection n =
+    trans
+      (nativeExpectationExtensional n
+        (selectedSection selection (zeroObservable selection))
+        (Native.zeroCylinder theory traceData exponential beta oneLink
+          bilateral (Quotient.divide quotient))
+        (zeroMeaning selection n))
+      (nativeExpectationZero finite n)
+
+  nativeSelectedExpectationOne :
+    (finite : ActualNativeFiniteIntegration)
+    (selection : SelectedNativeCylinderAlgebra) →
+    ∀ n →
+    nativeExpectation n (selectedSection selection (oneObservable selection))
+      ≡ 1ℝ
+  nativeSelectedExpectationOne finite selection n =
+    trans
+      (nativeExpectationExtensional n
+        (selectedSection selection (oneObservable selection))
+        (Native.oneCylinder theory traceData exponential beta oneLink
+          bilateral (Quotient.divide quotient))
+        (oneMeaning selection n))
+      (nativeExpectationOne finite n)
+
+  nativeSelectedExpectationAdd :
+    (finite : ActualNativeFiniteIntegration)
+    (selection : SelectedNativeCylinderAlgebra) →
+    ∀ n left right →
+    nativeExpectation n
+      (selectedSection selection (addObservable selection left right))
+    ≡
+    nativeExpectation n (selectedSection selection left)
+      +ℝ nativeExpectation n (selectedSection selection right)
+  nativeSelectedExpectationAdd finite selection n left right =
+    trans
+      (nativeExpectationExtensional n
+        (selectedSection selection (addObservable selection left right))
+        (λ cutoff links →
+          selectedSection selection left cutoff links
+            +ℝ selectedSection selection right cutoff links)
+        (addMeaning selection n left right))
+      (nativeExpectationAdd finite n
+        (selectedSection selection left)
+        (selectedSection selection right))
+
+  nativeSelectedExpectationScale :
+    (finite : ActualNativeFiniteIntegration)
+    (selection : SelectedNativeCylinderAlgebra) →
+    ∀ n scalar observable →
+    nativeExpectation n
+      (selectedSection selection
+        (scalarObservable selection scalar observable))
+    ≡
+    scalar *ℝ nativeExpectation n
+      (selectedSection selection observable)
+  nativeSelectedExpectationScale finite selection n scalar observable =
+    trans
+      (nativeExpectationExtensional n
+        (selectedSection selection
+          (scalarObservable selection scalar observable))
+        (λ cutoff links →
+          scalar *ℝ selectedSection selection observable cutoff links)
+        (scalarMeaning selection n scalar observable))
+      (nativeExpectationScale finite n scalar
+        (selectedSection selection observable))
+
+  record ActualSelectedOriginalSUNConvergence
+      (finite : ActualNativeFiniteIntegration)
+      (selection : SelectedNativeCylinderAlgebra) : Set₁ where
+    field
+      continuumExpectation : Observable selection → ℝ
 
       originalWilsonCylinderConverges :
-        ∀ cylinder →
+        ∀ observable →
         RealLimit.Converges sequenceLimit
-          (λ n → nativeExpectation n cylinder)
-          (continuumExpectation cylinder)
+          (λ n → nativeExpectation n
+            (selectedSection selection observable))
+          (continuumExpectation observable)
 
   open ActualSelectedOriginalSUNConvergence public
 
-  -- The entire finite E1 law record is NOW PRODUCED from native Gibbs
-  -- measure/Haar data. Only actual physical continuum convergence is
-  -- passed, explicitly, by the selected source.
+  -- A faithful, physically selectable original E1 source:
+  -- actual native finite Wilson measures; derived finite scalar laws;
+  -- proof-bearing gauge-invariant selected cylinder representation;
+  -- one explicit selected physical convergence theorem.
   nativeSUNAsDependentE1Source :
     (finite : ActualNativeFiniteIntegration)
-    (selected : ActualSelectedOriginalSUNConvergence finite) →
+    (selection : SelectedNativeCylinderAlgebra)
+    (selected : ActualSelectedOriginalSUNConvergence finite selection) →
     E1.ActualVariableCutoffCylinderFamily
       (Native.ActualLinks theory traceData exponential beta oneLink
         bilateral (Quotient.divide quotient))
       (λ n → Physical.PhysicalFiniteYMMeasure
         (Native.ActualLinks theory traceData exponential beta oneLink
           bilateral (Quotient.divide quotient) n) ℝ)
-      (Native.Cylinder theory traceData exponential beta oneLink
-        bilateral (Quotient.divide quotient))
+      (Observable selection)
       ℝ
-      (Native.originalDependentCylinderRealization
-        theory traceData exponential beta oneLink bilateral
-        (Quotient.divide quotient))
+      (selectedRealization selection)
       realSelectedScalarLaws
-  nativeSUNAsDependentE1Source finite selected = record
+  nativeSUNAsDependentE1Source finite selection selected = record
     { E1.ActualVariableCutoffCylinderFamily.finitePhysicalMeasure =
         nativeMeasure
     ; E1.ActualVariableCutoffCylinderFamily.originalNormalizedExpectation =
         λ n → Physical.normalizedExpectation
     ; E1.ActualVariableCutoffCylinderFamily.finiteExpectation =
-        nativeExpectation
+        λ n observable →
+          nativeExpectation n (selectedSection selection observable)
     ; E1.ActualVariableCutoffCylinderFamily.finiteExpectationIsOriginalWilson =
-        λ n cylinder → refl
+        λ n observable → refl
     ; E1.ActualVariableCutoffCylinderFamily.finiteZero =
-        nativeExpectationZero finite
+        nativeSelectedExpectationZero finite selection
     ; E1.ActualVariableCutoffCylinderFamily.finiteOne =
-        nativeExpectationOne finite
+        nativeSelectedExpectationOne finite selection
     ; E1.ActualVariableCutoffCylinderFamily.finiteAdd =
-        nativeExpectationAdd finite
+        nativeSelectedExpectationAdd finite selection
     ; E1.ActualVariableCutoffCylinderFamily.finiteScale =
-        nativeExpectationScale finite
+        nativeSelectedExpectationScale finite selection
     ; E1.ActualVariableCutoffCylinderFamily.PositiveCylinder =
-        λ cylinder → ∀ n links → 0ℝ ≤ℝ cylinder n links
+        Nonnegative selection
     ; E1.ActualVariableCutoffCylinderFamily.finitePositive =
-        λ n cylinder proof →
-          nativeExpectationPositive finite n cylinder (proof n)
+        λ n observable positive →
+          nativeExpectationPositive finite n
+            (selectedSection selection observable)
+            (nonnegativeMeaning selection observable positive n)
     ; E1.ActualVariableCutoffCylinderFamily.continuumExpectation =
         continuumExpectation selected
     ; E1.ActualVariableCutoffCylinderFamily.originalWilsonConverges =
