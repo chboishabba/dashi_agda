@@ -102,8 +102,9 @@ def spiral_vertices(m, epsilon, segments=1536):
 def cross(a,b):
     return a[...,0]*b[...,1]-a[...,1]*b[...,0]
 
-def nearest_hit(origin, direction, vertices):
+def nearest_hit(origin, direction, vertices, min_t=1e-7):
     """Nearest ray/open-polyline intersection; returns (t,point,normal,index)."""
+    if min_t < 0: raise ValueError("minimum forward distance must be nonnegative")
     a = vertices[:-1]; edge = vertices[1:]-a
     den = cross(np.broadcast_to(direction,edge.shape),edge)
     ok = np.abs(den)>1e-12
@@ -112,7 +113,7 @@ def nearest_hit(origin, direction, vertices):
     u = np.full(len(edge),np.inf)
     t[ok] = cross(delta[ok],edge[ok])/den[ok]
     u[ok] = cross(delta[ok],direction)/den[ok]
-    admissible = (t>1e-7)&(u>=-1e-10)&(u<=1+1e-10)
+    admissible = (t>min_t)&(u>=-1e-10)&(u<=1+1e-10)
     if not admissible.any():
         return None
     j = int(np.argmin(np.where(admissible,t,np.inf)))
