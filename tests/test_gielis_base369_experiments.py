@@ -443,3 +443,34 @@ def test_original_raster_fd_discrete_eigenvalue_rational_pf_enclosure(m,n):
     assert r["adjacency_connected"]
     assert r["all_integer_test_vector_entries_positive"]
     assert not r["continuum_dirichlet_mesh_convergence_proved"]
+
+
+def test_referee_offset_wall_parity_if_exact_pr1404_sources_available():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_kozyrev_pr1404_offset_bridge",
+        ROOT/"scripts/gielis_kozyrev_pr1404_bridge.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    source,_=module.locate_modules()
+    if source is None:
+        pytest.skip("original PR1404 source blobs not present at this checkout")
+    row=module.match_original_owners(segments=384,first_hit_rays=48,
+                                     thickness=.156)
+    assert row["status"]=="OFFSET_WALL_REFEREE_PARITY_CHECKED"
+    assert row["matched_normal_offset_wall_max_position_error_m"]<1e-12
+    assert row["first_hit_comparison_skipped"]==0
+    assert row["first_hit_max_difference_m"]<1e-10
+    assert not row["original_HTML_SDF_parity"]
+
+
+def test_first_hit_minimum_forward_threshold():
+    poly=np.array([[-1.,-.2],[1.,.2],[2.,.1]])
+    origin=np.array([-2.,0.])
+    direction=np.array([1.,0.])
+    first=g.nearest_hit(origin,direction,poly)
+    if first is not None:
+        assert first[0]>0
+    assert g.nearest_hit(origin,direction,poly,min_t=10.) is None
+    with pytest.raises(ValueError):
+        g.nearest_hit(origin,direction,poly,min_t=-.1)
