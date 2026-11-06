@@ -76,6 +76,10 @@ def assert_finite_counts() -> None:
                    if frozenset(p) == frozenset((swap[p[0]], swap[p[1]]))]
     fixed_edges = [p for p in fixed_pairs if frozenset(p) in EDGES]
     fixed_nonedges = [p for p in fixed_pairs if frozenset(p) not in EDGES]
+    ordered_index = {tuple(p) for p in pairs}
+    canonical = lambda x, y: tuple(sorted((x, y), key=NODES.index))
+    assert all(canonical(swap[a], swap[b]) in ordered_index for a, b in pairs)
+    assert all(canonical(swap[canonical(swap[a], swap[b])[0]], swap[canonical(swap[a], swap[b])[1]]) == (a, b) for a, b in pairs)
     assert (len(fixed_nodes), len(fixed_pairs),
             len(fixed_edges), len(fixed_nonedges)) == (4, 10, 3, 7)
     moving_nodes = [n for n in NODES if swap[n] != n]
