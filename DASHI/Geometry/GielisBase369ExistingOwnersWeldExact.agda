@@ -7,6 +7,7 @@ module DASHI.Geometry.GielisBase369ExistingOwnersWeldExact where
 -- Not a claim that all of these carriers denote the same physical device.
 
 open import DASHI.Core.Prelude
+open import Data.Integer using (+_)
 
 import DASHI.Geometry.GielisBase369FiniteExact as Gielis
 import DASHI.Geometry.GielisBase369NyquistPhase36Exact as Nyquist
