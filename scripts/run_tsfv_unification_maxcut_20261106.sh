@@ -40,6 +40,7 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFObserverOSCyclicGramSetoidExact.agda
   DASHI/Physics/Foundations/TSVFOriginalCyclicFiniteSpanGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalArbitraryReflectionCollapseNoGoExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalCylinderFullAlgebraCommutativityNoGoExact.agda
   DASHI/Physics/Foundations/TSVFOriginalAllWordMomentTransportExact.agda
   DASHI/Physics/Foundations/TSVFOriginalSelectedFiniteCommutatorResponseExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardPositiveFunctionalExact.agda
