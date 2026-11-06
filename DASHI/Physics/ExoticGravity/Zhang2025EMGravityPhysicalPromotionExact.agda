@@ -141,11 +141,11 @@ record SameApparatusZhangLaboratoryStress
   (claim : Anti.AntigravityClaim) : Set₁ where
   constructor same-apparatus-zhang-laboratory-stress
   field
-    physicalComparison : ChinesePatentPhysicalComparison claim
+    zhangComparison : ChinesePatentPhysicalComparison claim
     sourceTensorInput : LabCompiler.LaboratoryStressEnergyCompilationInput
     sourceApparatusMatchesExperimentalApparatus :
       LabCompiler.apparatusIdentity sourceTensorInput
-        ≡ apparatusIdentification physicalComparison
+        ≡ apparatusIdentification zhangComparison
     compiledSourceTensor : LabStress.LaboratoryStressEnergyReceipt
     compiledSourceTensorIsTheSelectedPhysicalTensor :
       compiledSourceTensor ≡
