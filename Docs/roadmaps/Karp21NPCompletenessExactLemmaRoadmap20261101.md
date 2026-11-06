@@ -1444,3 +1444,30 @@ K00 original Cook–Levin clock; the other Karp-21 edges and memberships.
 No `PR.polynomialTimeVerifier` or `PR.InNP` inhabitant has been
 created. No Agda/parallel_checker kernel acceptance is available
 in the current connected GitHub environment.
+
+## 2026-11-07 — native signed parser, no unary-magnitude fabrication
+
+After the native gamma payload reader, the new
+`Karp21GammaBinaryNativeSignedExact` discharges the executable
+sign/magnitude *representation construction* for source-style
+zigzag using the LAST bit of the original Elias-gamma(n+1) payload.
+It retains the canonical literal suffix and proves a source
+encoder-image equality, with structurally linear last-bit extraction.
+No `pow2`-sized Peano Nat, repeated `even`/ `half` loops, or
+original graph-language replacement is used.
+
+The original source roots and golden referee now import this owner.
+All 8,191 binary strings through length 12 passed an independent
+signed-token/old-zigzag/suffix-equivalence check. This is a bounded
+regression, not a universal source proof of the original decoder's
+numeric semantics nor a kernel receipt.
+
+**Exact remaining N21 promotion (updated):**
+(1) all-word gamma / zigzag numerical weld for malformed and valid
+inputs, while retaining the binary-native execution path;
+(2) canonical binary less-than and `strictAfter` agreement on the
+same original graph fields; (3) bit-native signed add/threshold,
+certificate verifier, and actual bit-tape step budget over
+`|graphWord|+|certificate|`; (4) native `PR.InNP` polynomialTimeVerifier
+inhabitant under selected physical machine cost model and kernel
+acceptance. Karp E20 and original Cook–Levin clocks remain separate.
