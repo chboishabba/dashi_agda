@@ -35,6 +35,29 @@ module _
         pair (braOfKet left) (apply (operatorAdjoint a) right)
           ≡ pair (braOfKet (apply a left)) right
 
+      oneScalar : Scalar
+      operatorIdentity : Operator
+      identityActs : (ket : Ket) →
+        apply operatorIdentity ket ≡ ket
+
+      -- This is the physical normalization of the *actual selected*
+      -- forward ket; no Q normalization law is inherited automatically.
+      originalSelectedNormIsOne :
+        pair (braOfKet (TSVF.forwardState E)) (TSVF.forwardState E)
+          ≡ oneScalar
+
+      operatorAdd : Operator → Operator → Operator
+      ketAdd : Ket → Ket → Ket
+      scalarAdd : Scalar → Scalar → Scalar
+
+      addActs : (a b : Operator) (ket : Ket) →
+        apply (operatorAdd a b) ket
+          ≡ ketAdd (apply a ket) (apply b ket)
+
+      pairRightAdditive : (bra : Bra) (x y : Ket) →
+        pair bra (ketAdd x y)
+          ≡ scalarAdd (pair bra x) (pair bra y)
+
       -- Finite nonnegative norm on the PHYSICAL selected ket carrier.
       -- This is not implicit in QuantumSurface, which only declares
       -- a Weight and a predicate Positive.
@@ -55,6 +78,31 @@ module _
   originalForwardFunctional source a =
     pair (braOfKet source originalForward)
       (apply a originalForward)
+
+  originalForwardNormalized :
+    (source : OriginalPhysicalInnerProductLaws) →
+    originalForwardFunctional source (operatorIdentity source)
+      ≡ oneScalar source
+  originalForwardNormalized source =
+    trans
+      (cong (pair (braOfKet source originalForward))
+        (identityActs source originalForward))
+      (originalSelectedNormIsOne source)
+
+  originalForwardAdditive :
+    (source : OriginalPhysicalInnerProductLaws) (a b : Operator) →
+    originalForwardFunctional source (operatorAdd source a b)
+      ≡ scalarAdd source
+          (originalForwardFunctional source a)
+          (originalForwardFunctional source b)
+  originalForwardAdditive source a b =
+    trans
+      (cong (pair (braOfKet source originalForward))
+        (addActs source a b originalForward))
+      (pairRightAdditive source
+        (braOfKet source originalForward)
+        (apply a originalForward)
+        (apply b originalForward))
 
   originalPositiveQuadraticIsForwardNorm :
     (source : OriginalPhysicalInnerProductLaws)
