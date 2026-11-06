@@ -79,9 +79,12 @@ originalAtanMagnitudeBelowHalfReference :
     (Atan.atanMagnitudeTerm point n)
     (Atan.atanMagnitudeTerm Half.bishopHalf n)
 originalAtanMagnitudeBelowHalfReference point inside n =
-  RP.*-monoʳ-≤-nonNeg
-    (originalAtanMagnitudePowerBelowHalf point inside n)
+  RP.*-mono-≤
     (Atan.embeddedInverseOddNonnegative n)
+    (RP.nonNeg∣x∣
+      (R.pow point (Exponents.oddExponent n)))
+    RP.≤-refl
+    (originalAtanMagnitudePowerBelowHalf point inside n)
 
 originalAtanSignedAbsoluteBelowHalfReference :
   (point : R.ℝ) →
