@@ -43,6 +43,7 @@ def load_original_rows(path: Path):
     if not data:
         raise ValueError("no measured longitudinal rows")
     groups, specimens = {}, defaultdict(list)
+    specimen_owner = {}
     source_keys = set()
     seen = set()
     for row in data:
@@ -60,6 +61,9 @@ def load_original_rows(path: Path):
             raise ValueError("split must be train, validation or test")
         source_keys.add((source, sha))
         key = (source, experiment, specimen)
+        if specimen in specimen_owner and specimen_owner[specimen] != key:
+            raise ValueError("specimen identifier reused across experiment groups")
+        specimen_owner[specimen] = key
         subject_meta = (source, sha, experiment, split, trace)
         t = float(row["time_s"])
         if not math.isfinite(t) or t < 0:
@@ -169,9 +173,11 @@ def self_test():
         assert result["measured_timepoint_rows"] == 54
         assert result["test_mean_logloss_improvement_a_over_b"] > 0
         # Deliberate held-out leakage must fail closed.
-        with path.open("a") as stream:
-            stream.write("SYNTHETIC:NO-EXPERIMENT," + "0"*64 +
-                         ",4,specimen-4-0,train,wound,signal,30,1,.9,.3\n")
+        with path.open("a", newline="") as stream:
+            csv.writer(stream).writerow((
+                "SYNTHETIC:NO-EXPERIMENT", "0"*64, "4",
+                "specimen-4-0", "train", "wound,signal", "30", "1", ".9", ".3"
+            ))
         try:
             load_original_rows(path)
         except ValueError:
