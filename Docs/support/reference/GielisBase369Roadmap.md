@@ -167,3 +167,27 @@ selected MSE bounds. Those are independent G19 obligations.
 - User request to 'complete all' cannot turn missing original optical
   scene/experiments, native Agda checks, or continuum numerical error bounds
   into proof terms. These remain listed above as OPEN acceptance leaves.
+
+
+## 2026-11-06 exact-head source-enumeration audit
+
+\`scripts/gielis_base369_source_audit.py\` now parses the **literal**
+Agda tables and 18-case proof declarations, with no third-party
+dependency. An independent connector-side computation on the committed
+Agda source blobs (see GitHub file SHAs in repo) checked **648 finite
+cases**, including 19 named theorem clause sets of 18 cases each,
+literal 3/6/9 signature values, rotation/reflection invariance,
+the full Gram diagonal, 18→36 aliasing and separation, and G01–G21
+roadmap coverage. The executable source-audit script is wired into
+\`scripts/check_gielis_base369_cut.sh\` and pytest.
+
+**Interpretation:** source enumeration shows no missing listed cases.
+It does not check that those Agda equations type-check, that the
+imported proof owners are \`--safe\`, or that continuous Bishop-real
+realization is constructed. **G01 remains OPEN until an actual
+\`agda --safe\` kernel receipt at the exact head.**
+
+\`Docs/support/reference/GielisBase369ProofTheorems.md\` records
+paper-level E01–E11 proof details and the admissible conditional
+theorems; ordinary-real Agda proof terms and physical observation
+are separate acceptances.
