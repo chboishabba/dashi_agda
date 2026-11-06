@@ -16,7 +16,8 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; trans; sym)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s; _∸_)
 open import Data.Maybe.Base using (just)
@@ -27,6 +28,8 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as R
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawReaderSparseBudgetExact as Budget
 import DASHI.Mathematics.Complexity.Karp21SparseEndpointCutCertificateExact as Sparse
 import DASHI.Mathematics.Complexity.Karp21FinFreePairwiseQuadraticCountExact as Count
+import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
+import DASHI.Mathematics.Complexity.PolynomialBoundClosureExact as Poly
 
 -- Sparse.twoPerEdge is the original recursive 2-bit-per-edge function.
 edgeCountBelowSparseBitCount :
@@ -78,3 +81,62 @@ comparisonPolynomialClosed :
   (n : Nat) →
   comparisonPolynomial n ≡ 2 * n * (n ∸ suc zero)
 comparisonPolynomialClosed = Count.maxAddressComparisonsClosed
+
+------------------------------------------------------------------------
+-- Reuse DASHI's genuine resource-bound certificate. This is a
+-- universal degree-two bound on the comparison COUNT function,
+-- not an assertion that arbitrary binary addresses compare in O(1).
+------------------------------------------------------------------------
+
+n≤sucN : (n : Nat) → n ≤ suc n
+n≤sucN zero = z≤n
+n≤sucN (suc n) = s≤s (n≤sucN n)
+
+minusOneBelow : (n : Nat) → (n ∸ suc zero) ≤ n
+minusOneBelow zero = z≤n
+minusOneBelow (suc n) = n≤sucN n
+
+linearUpperIdentity :
+  (n : Nat) →
+  suc n ≡ 1 * ERQ.pow (suc n) 1
+linearUpperIdentity n =
+  trans
+    (sym (NatP.*-identityʳ (suc n)))
+    (sym (NatP.*-identityˡ (ERQ.pow (suc n) 1)))
+
+identityPolynomial : ERQ.PolynomialBound (λ n → n)
+identityPolynomial =
+  ERQ.polynomialBound 1 1
+    (λ n →
+      subst (λ upper → n ≤ upper)
+        (linearUpperIdentity n)
+        (n≤sucN n))
+
+twiceSquarePolynomial :
+  ERQ.PolynomialBound (λ n → 2 * (n * n))
+twiceSquarePolynomial =
+  Poly.constantMultiplePolynomialBound 2
+    (Poly.productPolynomialBound
+      identityPolynomial identityPolynomial)
+
+comparisonCountBelowTwiceSquare :
+  (n : Nat) → comparisonPolynomial n ≤ 2 * (n * n)
+comparisonCountBelowTwiceSquare n =
+  subst (λ lower → lower ≤ 2 * (n * n))
+    (sym (comparisonPolynomialClosed n))
+    (subst
+      (λ upper → 2 * n * (n ∸ suc zero) ≤ upper)
+      (NatP.*-assoc 2 n n)
+      (NatP.*-mono-≤ NatP.≤-refl
+        (minusOneBelow n)))
+
+comparisonPolynomialBound :
+  ERQ.PolynomialBound comparisonPolynomial
+comparisonPolynomialBound =
+  ERQ.polynomialBound
+    (ERQ.coefficient twiceSquarePolynomial)
+    (ERQ.exponent twiceSquarePolynomial)
+    (λ n →
+      NatP.≤-trans
+        (comparisonCountBelowTwiceSquare n)
+        (ERQ.bounded twiceSquarePolynomial n))
