@@ -17,7 +17,8 @@ from __future__ import annotations
 from fractions import Fraction as Q
 import argparse, json
 
-C = 299792458
+from gielis_si_owner_adapter import canonical_speed_of_light_si
+C = canonical_speed_of_light_si()
 
 def envelope(power_watts, radius_metres, max_bounces:int, reflectivity):
     P=Q(str(power_watts))
