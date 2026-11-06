@@ -82,7 +82,7 @@ run state [] = value state
 run state (n ∷ rest) = run (push state n) rest
 
 evaluate : List Nat → Nat
-evaluate [] = 0
+evaluate [] = 1
 evaluate (a ∷ rest) = run (start a) rest
 
 -- Positive inputs can be formed without a runtime nonzero assumption.
@@ -98,6 +98,9 @@ positiveEntries (p ∷ ps) = asNat p ∷ positiveEntries ps
 
 evaluatePositive : List Positive → Nat
 evaluatePositive entries = evaluate (positiveEntries entries)
+
+emptyEntry : evaluate [] ≡ 1
+emptyEntry = refl
 
 oneEntry : (a : Nat) → evaluate (a ∷ []) ≡ a
 oneEntry a = refl
@@ -119,6 +122,9 @@ twoThreeTwo = refl
 threeTwoTwo : evaluate (3 ∷ 2 ∷ 2 ∷ []) ≡ 27
 threeTwoTwo = refl
 
+-- The source's rule 5 also drops everything after a 1. The prefix
+-- extension invariant extension 1 = value makes that hold under folding.
+--
 -- The higher chain is intentionally retained symbolically.
 -- Reducing [2,3,2,2] to a fully evaluated Nat during kernel checking
 -- would be impractical; chainRuleSix is its universal derivation rule.
