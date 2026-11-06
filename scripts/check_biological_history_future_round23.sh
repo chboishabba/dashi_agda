@@ -35,6 +35,7 @@ grep -q 'withdrawalReopensModelCandidate' \
   DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda
 
 python3 scripts/check_biological_history_future_quotient.py
+python3 scripts/check_biological_spatial_stochastic.py
 python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
 python3 scripts/biological_si_kinetic_calibration.py --self-test
 python3 scripts/biological_measured_genotype_holdout.py --self-test
