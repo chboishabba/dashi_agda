@@ -35,7 +35,10 @@ def material():
 def frame(t, position, e):
     return {
         "t_s": float(t),
+        "t_s_bound": 0.,
+        "time_evidence_receipt": "SYNTHETIC/clock",
         "x_m": bounded(position),
+        "E_x_V_m": bounded(e),
         "E_V_m": [e, 0., 0.],
         "B_T": [0., 0., 0.],
         "grad_E2_x_V2_m3": bounded(0.),
