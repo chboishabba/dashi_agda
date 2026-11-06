@@ -289,3 +289,33 @@ An SI unit-typed equation is not a new source-power measurement.
 
 CI and original HTML replay are excluded from this round's active
 max-cut, while their earlier provenance remains documented.
+
+
+### Gielis phase 2026-11-06: original mathematical producer advances
+
+The existing SI/M-L-T carriers now construct *actual* rational-valued
+optical torque with a signed dimensionless ray-response parameter,
+rather than merely checking dimension tags; see E22.
+The native eigenvalue scaling source preserves `m^-2` units, while
+the exact continuum threefold spectral bound (9/(4L_+^2)<λ₁<
+1273/(264L_-^2)) follows by domain monotonicity/Rayleigh/dilation.
+The assumed-input radiation-pressure interval code preserves the
+possibility of zero torque under cancellation; see E23–E24.
+
+For G03, the same concrete Bishop real sine/cosine dataset now has
+a conditional, source-written quartic trigonometric theorem derived
+from existing ring, Pythagorean, setoid and cosine quadrupling
+identities (E25), leaving ONLY the actual Round11 analytic
+same-object inputs and kernel check rather than an abstract
+geometry carrier.
+
+For G12, the original finite raster PF numerical enclosure has
+a stronger intrinsic proof: exact graph ground-state transform,
+expressed as a nonnegative sum over edge squares. A native finite
+edge-list theorem has been added with original rational ring,
+sum/congruence and positivity owners, so this part need not
+rebuild Perron–Frobenius/Collatz–Wielandt (E26). The
+remaining active numerical theorem is **actual Cartesian FD-to-
+continuum** compatibility. Existing Yang–Mills Mosco/recovery/no-
+pollution files are donor gate inventories, not a substitute
+for the selected Gielis recovery/liminf proof.
