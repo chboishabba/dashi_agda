@@ -37,11 +37,10 @@ relatorWord centralQuotient = Y.centralInvolutionRelator
 
 coxeterTags : List RelatorTag
 coxeterTags =
-  Y.map nodeSquare Y.nodes Y.++
-  Y.map pairPower Y.pairs
+  Y._++_ (Y.map nodeSquare Y.nodes) (Y.map pairPower Y.pairs)
 
 fullTags : List RelatorTag
-fullTags = coxeterTags Y.++ (spider ∷ centralQuotient ∷ [])
+fullTags = Y._++_ coxeterTags (spider ∷ centralQuotient ∷ [])
 
 tagCount : Y.length fullTags ≡ 80
 tagCount = refl
