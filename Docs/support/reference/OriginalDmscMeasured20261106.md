@@ -204,3 +204,55 @@ python3 scripts/check_original_dmsc_replicate_ranges.py \
   --original-csv /path/to/cmarti/shine_dalgarno/data/dmsc.csv \
   --receipt /tmp/dmsc-original-replicate-range.json
 ```
+
+
+## Directly measured contextual phenotype variation: Fepb / Arti / dmsC
+
+The same original upstream source table also includes three-replicate
+columns for **Fepb**, **Arti** and **dmsC** mRNA contexts. Re-reading the
+original Git blob, and using *only observed source replicates*,
+the measured-genotype coverage is:
+
+| Source context | Genotypes with direct original measurements | Original observed replicate values |
+|---|---:|---:|
+| Fepb | 244,401 | 546,182 |
+| Arti | 259,821 | 710,153 |
+| dmsC | 257,565 | 635,085 |
+
+There are **240,034** genotypes directly measured in all three contexts.
+Pairwise correlations were independently computed from original,
+per-genotype available-replicate means, without inferred landscape
+positions or cross-context equality assumptions. On the same
+precommitted genotype-disjoint FNV train/validation/test split, the
+*held-out test* correlations were:
+
+| Paired contexts | Held-out test genotypes measured in both | Original observed Pearson correlation |
+|---|---:|---:|
+| Fepb / Arti | 36,300 | 0.569360 |
+| Fepb / dmsC | 36,025 | 0.475965 |
+| Arti / dmsC | 38,268 | 0.554731 |
+
+The comparable training correlations are 0.573433, 0.487356 and
+0.542711; validation correlations are 0.570472, 0.485059 and 0.545870.
+The moderate correlations are **descriptive measured-context
+heterogeneity**, not prediction-model validation, causal dissection,
+matched physiological context, cross-study replication, or
+an organismal attractor identification. In particular, mean shifts and
+replicate dispersion can partly reflect assay-specific readout scales.
+
+`scripts/check_original_measured_context_transfer.py` independently
+recalculates this using the full original CSV, rejects a mismatched
+actual Git-blob SHA, does not leak a genotype across split categories
+and never mutates the canonical PNF world store.
+
+```bash
+python3 scripts/check_original_measured_context_transfer.py --self-test
+python3 scripts/check_original_measured_context_transfer.py \
+  --original-csv /path/to/cmarti/shine_dalgarno/data/dmsc.csv \
+  --receipt /tmp/three-context-measured-receipt.json
+```
+
+**Verification:** quantitative numbers above were independently
+computed in-memory from the actual upstream blob. The newly committed
+Python implementation is source-written, without an independent
+execution receipt in this session.
