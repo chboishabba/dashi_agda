@@ -24,6 +24,8 @@ HEISENBERG = ROOT / "DASHI/Moonshine/Y443Monster3BTwelveDisjointExact.agda"
 ORBIT = ROOT / "DASHI/Moonshine/Y443ArmSwapOrbitMaxCutExact.agda"
 INDEXED = ROOT / "DASHI/Moonshine/Y443Relator72IndexedBidiExact.agda"
 NOGO = ROOT / "DASHI/Moonshine/Y443Nonary72EquivarianceNoGoExact.agda"
+JMD_SOURCE = ROOT / "DASHI/Moonshine/Y443JMDSourceWordInstantiationExact.agda"
+JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -111,7 +113,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -155,7 +157,12 @@ def assert_source_scope() -> None:
     for symbol in ("centralCoreFixed", "reducedEightHasNoFixedPoint", "chartHasNoFixedPoint", "noNaiveEightByNineEquivariantChart"):
         if symbol not in no_go:
             raise AssertionError(f"missing Y443 8x9 equivariance no-go {symbol}")
-    print("PASS source: Y443 72+8, JMD trace, and 8x9 natural-involution no-go without listed trust escapes")
+    for source, symbols in ((JMD_SOURCE, ("uPathHasEight", "betaPathHasFour", "thirdPathHasFive", "wIsX4Beta", "jmdWFromPair")), (JMD_COMPILER, ("concreteTrace", "sourceX4Word", "sourceBetaWord"))):
+        src = source.read_text()
+        for symbol in symbols:
+            if symbol not in src:
+                raise AssertionError(f"missing JMD source theorem {symbol}")
+    print("PASS source: real JMD u/v words and concrete pair-power compiler included")
 
 
 def check_agda() -> None:
