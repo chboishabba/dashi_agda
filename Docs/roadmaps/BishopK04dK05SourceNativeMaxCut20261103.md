@@ -823,3 +823,62 @@ these commits. A CI configuration is not a pass receipt.
 
 No completion of the Riemann hypothesis, nor any substituted
 classical analytic semantics, is asserted.
+
+
+## K05-PI Cayley prior-art reconciliation — 2026-11-06
+
+**User correction confirmed by source inspection.** The golden repo
+already contains a genuine Cayley/Pythagorean rational phase in
+`DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda`
+(`nearIdentityScalar`, `nearIdentityX`,
+`nearIdentityUnitNormExact` at `rho=1/8192`), namely
+`((1-t²)/(1+t²), 2t/(1+t²), 0, 0)`.
+It also has the canonical rational complex carrier,
+conjugation/multiplication, norm-composition and quaternion embedding in
+`DASHI/Mathematics/Algebra/CayleyDicksonRationalComplexQuaternionExact.agda`.
+The separate Smith `MobiusMatrix` owner describes fractional-linear
+coordinates but is not automatically the same Cayley/Bishop phase.
+Other repo uses of “Cayley” include Cayley graphs and
+Cayley–Hamilton, and must not be confused with the needed map.
+
+The new `DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda`
+**recovers and reuses** these exact owners:
+- A *general division-free rational identity* proves
+  `|(1-t²)+2it|² = (1+t²)²` for all rational `t`.
+- `guardCayleyIsOriginalComplexQuaternion` identifies the exact
+  existing YM quaternion with the original rational-complex embedding
+  by definitional equality.
+- `fivePhaseIsCayley*Numerator` and
+  `twoHundredThirtyNinePhaseIsCayley*Numerator` identify the prior
+  Cayley parametrisation at the literal two Machin arguments,
+  without inventing a generic rational division at an unspecified
+  positive denominator.
+- `machinQuarterCayleyPhase` uses the original
+  `CD._*c_` and `CD.conjugateC`, not an independent complex type.
+  `originalComplexMachinQuarterCayleyIsImaginaryUnit` transports
+  the earlier exact scalar certificates into the *original*
+  `RationalComplex` object.
+- `originalComplexMachinQuarterHasUnitNorm` independently reuses
+  the *existing* `CD.complexNormMultiplicative`, with unit norm
+  certified for each factor.
+
+Thus the rational algebra **PI.0** is owned by prior art plus a
+small explicit exact-instantiation module. All three TOE roots import
+it and focused CI checks the new `--safe` owner.
+
+**Remaining independent analytic K05 cut:** No located source
+from this audit proves the *original vendored Bishop* equality
+
+```text
+exp_C (2 * i * bishopAtanHalfBall t)
+  ≃C CayleyBishop t
+```
+
+at `t=1/5` and `t=1/239`, on the selected Round11 signed-factorial
+complex exponential (and with a nonzero rational denominator/inverse
+weld). The existing rational Cayley and global K05 imaginary-product
+theorems are necessary, but neither is itself the arctangent-series
+evaluation theorem. PI.1 therefore remains OPEN; no extra
+independent rational/Cayley construction is necessary.
+
+Source-written / Agda-2.9 `--safe` kernel acceptance OPEN.
