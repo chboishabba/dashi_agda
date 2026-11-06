@@ -1394,3 +1394,53 @@ uses `Data.List.length`, while the existing complexity model uses
 two separately recursive owners is assumed. This and the original
 strictAfter internal primitive-guard proof are part of the exact-head
 compiler acceptance cut, not already certified.
+
+## 2026-11-07 — K05 binary-native parser/comparison implementation (Conway integration PR)
+
+Original head context: `730f62ed27` and subsequent original Karp-21
+comparison-count owners as synchronized in PR #1474.
+
+New source owners:
+1. `Karp21N21BitWeightedComparisonEnvelopeExact` combines the
+   actual original all-word primitive-comparison count with a
+   1+|w|-bit schedule, proving a native degree-three PolynomialBound.
+   It does **not** manufacture a bit-TM implementation.
+2. `Karp21BinaryWordEqualityPrimitiveExact` implements a
+   bit-list equality machine, proves extensional equality and exact
+   symbol-inspection count <= 1+|left|.
+3. `Karp21GammaBinaryEqualitySameValueExact` proves bit-list equality
+   of the ORIGINAL gamma encoded numerals iff their actual Nat values
+   agree. Canonicality follows from existing gamma read/encode proof,
+   not a new encoding.
+4. `Karp21GammaBinaryNativePayloadExact` reads Elias-gamma headers
+   into binary payload words while preserving suffix. It is a
+   structurally terminating alternative to constructing the huge
+   unary `pow2 zeros` Nat in the original `readGamma` reader.
+   It proves roundtrip on actual original gamma encoder outputs
+   and an all-input bound of 1+|word| input-symbol inspections
+   for one gamma token.
+
+The original roots `Karp21Everything` and
+`Karp21BinaryRuntimeEverything` import these owners, and the
+original referee includes focused checks and executable independent
+controls.
+
+Independent checks ACTUALLY EXECUTED in this session:
+- original Conway/gamma reference: 103 Conway equalities, 18 capped,
+  and 781 gamma strict roundtrips;
+- new binary word equality: 16,129 bounded binary word pairs, exact
+  equality and bit-inspection-cost checks;
+- new binary gamma: ALL 8,191 words of lengths 0..12, exact
+  original parser numeric result and suffix agreement, linear
+  inspection bound, including malformed/truncated inputs.
+
+**Full remaining math**: The new gamma parser's *all-word*
+numeric correspondence (not just encoder images); native binary
+less-than/strictAfter transport for original endpoint validation;
+per-field operand width and tape movement accounting; original
+signed-zigzag score accumulation and comparison with threshold;
+whole graph parser/certificate loops; E20 all-word transducer and
+K00 original Cook–Levin clock; the other Karp-21 edges and memberships.
+No `PR.polynomialTimeVerifier` or `PR.InNP` inhabitant has been
+created. No Agda/parallel_checker kernel acceptance is available
+in the current connected GitHub environment.
