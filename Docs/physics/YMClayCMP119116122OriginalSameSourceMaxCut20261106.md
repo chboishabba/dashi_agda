@@ -1,3 +1,15 @@
+## 6 Nov: M.01/M.02 native original weighted Wilson reindex
+
+The source now contains three physical YM modules: `YMClayNative1024ClosedReindexHaarConsequencesExact`, `YMClayNative1024WeightedWilsonReindexExact`, and `YMClayNative1024FullMarkedWilsonReindexExact`. Together they derive the all-vector original adjacent-swap reordering, inverse permutation and full original interacting Wilson weight and two-source partition identities. The physical regression imports them. Their Agda kernel acceptance has not been obtained.
+
+Independent executed finite checks: 1024 positive bonds, 64 coarse, 128 selected, 896 spectators, 46592 C3 swaps, 41792 pair/spectator swaps. Exact reference file: `scripts/check_ym_native_1024_permutation_reference_20261106.py`.
+
+M.03 scaling BIDI: an envelope q(a) to the power d_lattice corresponds to m_env(a) = -log(q(a))/a in physical units. Fixed q=1/2 yields m_env=log(2)/a and is not automatically a finite physical mass gap. q(a)=exp(-m*a) gives finite envelope rate m. Independent executed decimal checks passed; script `scripts/check_ym_cmp116_physical_rate_bidi_20261106.py`. An upper bound alone cannot certify nontriviality or an exact spectral mass.
+
+Open: actual flat-to-nested F19 integral with original weight, full CMP119/122 density, physical CMP116 uniformity, Wilson RP geometry, continuum noncollapse and mass-gap. No Clay completion claimed.
+
+---
+
 ## 6 November — YM-only all-word R445/OS and published Wilson RP (source implementation)
 
 Two pre-existing, source-written finite Wilson results on the separate #1460 branch have been adapted as **YM-owned** Agda sources on #1444, with no dependency on TSVF/observer/KK:
