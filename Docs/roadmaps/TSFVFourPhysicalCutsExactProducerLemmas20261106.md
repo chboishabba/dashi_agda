@@ -1,14 +1,14 @@
 # #1460 — four physical maximum cuts: exact producer lemmas (6 November 2026)
 
-**Authority:** These 39 named *proposed producer theorems* are NOT additional canonical P lemma IDs and are NOT new Agda proof receipts. They are a focused concrete implementation/dependency contract for the existing 186 original P00–P11 statements and 48 execution deliverables. The original Yang–Mills OS producer and CMP116/PCUBE proof remain solely in #1444.
+**Authority:** These 40 named *proposed producer theorems* are NOT additional canonical P lemma IDs and are NOT new Agda proof receipts. They are a focused concrete implementation/dependency contract for the existing 186 original P00–P11 statements and 48 execution deliverables. The original Yang–Mills OS producer and CMP116/PCUBE proof remain solely in #1444.
 
 **Physical acceptance rule:** Each theorem must construct from the SAME original microscopic TSVF/observer state, physical instrument, observable algebra, clock and action; a record asserting its conclusion is not an inhabitant. Selected acoustic lattice, flat KK and free Fock examples serve as independent positive/negative controls, not the selected original physical source.
 
 **Dependency schedule:** OBS01–OBS06 + HIL01–HIL05 in parallel from the actual micro source; OBS07–OBS09 to physically measure (3,1); KK01–KK08 from that observed g4; HIL06–HIL11 only after #1444 supplies its real OS construction; BIDI01–BIDI08 close the measured commuting limits, kernel, falsification.
 
-## Exact 39-producer physical acceptance ledger — audited 6 November 2026
+## Exact 40-producer physical acceptance ledger — audited 6 November 2026
 
-**Inventory:** 10 OBS + 12 HIL + 9 KK + 8 BIDI = **39 named** producer obligations. These are **not** the independent **48** phased execution tasks or the **186** canonical Agda P00–P11 lemma IDs. Every numbered name below already appears with its canonical ID mapping in the original full tables. `scripts/check_tsfv_39_physical_producer_inventory_20261106.py` now checks exact presence, uniqueness, contiguous ID ranges, mappings and all three downstream roadmap/receipt surfaces.
+**Inventory:** 10 OBS + 12 HIL + 10 KK + 8 BIDI = **40 named** producer obligations. These are **not** the independent **48** phased execution tasks or the **186** canonical Agda P00–P11 lemma IDs. Every numbered name below already appears with its canonical ID mapping in the original full tables. `scripts/check_tsfv_40_physical_producer_inventory_20261106.py` now checks exact presence, uniqueness, contiguous ID ranges, mappings and all three downstream roadmap/receipt surfaces.
 
 **Minimum complete physical cut, in proof-dependency order:**
 
@@ -29,6 +29,7 @@
 | `HIL12` | Original TSVF macro-pointer/filtration | Physical pointer observable in the matched OS test algebra and controlled postselection | Independent operational records unchanged under permitted future choices |
 | `KK01–KK03` | `TSFVKKSelectedHorizontalMetricSchurExact`; 5D scalar winding control | Smooth selected original S¹ bundle, invariant full Einstein–gauge–matter action, variation including (F_{\mu5}), boundaries, radion | Every selected field satisfies same sourced Euler–Lagrange equations |
 | `KK04` | `scripts/check_tsfv_5d_ads4_circle_winding_matter.py` | Source-inhabited **same original** observer-linked nonflat 5D coupled solution/global bundle; standalone AdS4×S1 is only a mathematical control | Concrete 5D source solution with original physical boundary data and units |
+| `KK10` | `TSFVKKHorizontalReductionNoninjectiveBidiExact` and native 5D radius/connection controls | Independent fifth-sector probe observable distinguishing physically inequivalent 5D lifts with the same g4, or formally retained gauge-equivalent lift family | Disambiguating 5D metric data not inferred from 4D g4 alone |
 | `KK05–KK07` | 5D/4D native curvature/Schur owners | Physical KK spectrum, radion and heavy-mode error, gauge/gravitation decoupling or explicit impossibility | Exact SU(N)/YM sector and controlled low-energy reduction on selected model |
 | `KK08` | `TSFVKKActualSelectedMetricHorizontalWeldExact` | Construct `selectedObserverBilinearIsSameFourMetric` from independent OBS08 measurement and KK04 selected solution, not an assumed equality | (\operatorname{KKReduce}(G_5)=g_{\rm obs}) for all original physical probes and charts |
 | `KK09` | 5D cross-fibre dimension/curvature owners | Nonzero cross-curvature and typed 3+1/4+1/Euclidean comparison on selected same action | No lost (F_{\mu5}) or replacement of Euclidean YM by Lorentzian KK |
