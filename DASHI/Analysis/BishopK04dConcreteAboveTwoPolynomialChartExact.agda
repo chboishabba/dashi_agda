@@ -61,7 +61,7 @@ threeBelowThreePlusSquare :
     (R._+_ bishopThree (R._*_ t t))
 threeBelowThreePlusSquare t =
   RP.≤-respˡ-≃
-    (RP.≃-symm (RP.+-identityʳ bishopThree))
+    (RP.+-identityʳ bishopThree)
     (RP.+-monoʳ-≤
       bishopThree
       (RP.nonNegx⇒0≤x
