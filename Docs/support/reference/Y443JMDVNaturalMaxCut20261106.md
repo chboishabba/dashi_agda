@@ -293,7 +293,7 @@ ten-step words and identifying the selected Monster action.
 `Five.ModePhaseQuotient9`, not fake `Fin 8` and `Fin 9`.
 
 - It constructs `swapTag` on Y443 relation labels, with full node/pair
-  coverage and `swapTagInvolutive`.
+  coverage, explicit canonical pair sorting and `allListedPairsReturnAfterDoubleSwap` on the ORIGINAL 66 unordered pair indices.
 - `coreSwapInvariant` proves the 72-subset predicate is preserved for
   all relator tags, by checking all 12x12 node pairs.
 - The unique central-node square is a **fixed core relator**:
@@ -409,3 +409,19 @@ The **actual Lean source already proves** these in
 `AxiomMath/CFSGCorollary/Sporadic/Monster/Y443.lean`; Agda
 cannot simply claim Lean's kernel acceptance without a trusted
 cross-prover certificate or native proof.
+
+
+## Canonical indexing correction
+
+The graph automorphism on unordered pairs must include the
+`canonicalPair` sort. The raw substitution
+`pair(x,y) -> pair(swap x,swap y)` does not preserve the source
+`Y.pairs` **oriented** enumeration for inter-arm pairs, even though it
+preserves the abstract unordered-pair relation. The corrected
+`Y443Nonary72EquivarianceNoGoExact` now normalizes both endpoints
+using the exact 12-node source rank and proves
+`allListedPairsReturnAfterDoubleSwap` by complete evaluation of the
+66 source indices. The independent Python audit checks closure of
+the full 66 index set under this normalized swap and its involution.
+This closes a genuine source-index identity bug without changing the
+72/8 cardinality census or the central fixed-point no-go.
