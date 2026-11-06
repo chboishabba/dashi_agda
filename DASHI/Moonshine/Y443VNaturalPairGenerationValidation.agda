@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y443
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443JMDTracePowerExact as JMD
+import DASHI.Moonshine.Y443Monster3BTwelveDisjointExact as H3
 import DASHI.Moonshine.Monster3BNormalizerBridge as N3B
 
 coxeterTwelveMatchesSuzukiDegreeNumerically :
