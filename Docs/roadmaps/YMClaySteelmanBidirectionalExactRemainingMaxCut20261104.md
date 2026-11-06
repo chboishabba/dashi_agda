@@ -1,3 +1,11 @@
+
+## 6 November — canonical R344 shared marked CMP116 half-rate direct weld
+
+The *existing* `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact` proves the shared-Hessian shell's conditional geometric (\frac14 C_H 2^{-d}) bound, with selected physical source distance/time and (C_H≤1) as proof inputs. Two new terms `sameOriginalSharedMarkedHalfRateFiniteDecay`, `sameOriginalSharedMarkedHalfRateYieldsGap` (R344→R342→R467→R482) are source-written in `YMClayCMP119122116SelectedProducerWeldExact.agda`, Agda unverified. The actual original Wilson-Haar marked J applicability, uniform physical rate and OS limit are not derived from a name match. Exact four-cut Y.01–Y.04 is in `Docs/physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md`. Source contract audit now 12 donor owners / 6 bridge proof terms.
+
+
+---
+
 ## 6 Nov source-first CMP119/116/122 BIDI max-cut
 
 [Full exact source-owner audit and physical BIDI falsifiers](../physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md). An original selected finite beta history + CMP119 localized density now produces in one source-written Agda bridge both exact beta coupling and source-native CMP109/116 effective potential. A literal selected R342 source similarly generates finite R467 physical-envelope covariance and R482 rate-based positive gap, so there is no requirement to separately re-prove source KP, normalized expectation derivatives, arbitrary energy-positivity token, or R454/R455 historical detours. New file `YMClayCMP119122116SelectedProducerWeldExact.agda`, static source contract `scripts/check_ym_cmp119116122_same_source_contract.py`; compiler receipt pending.
