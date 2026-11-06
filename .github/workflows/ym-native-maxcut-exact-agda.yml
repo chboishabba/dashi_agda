@@ -7,6 +7,8 @@ on:
       - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda'
       - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -20,6 +22,8 @@ on:
       - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda'
       - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -62,6 +66,8 @@ jobs:
             $AGDA DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
