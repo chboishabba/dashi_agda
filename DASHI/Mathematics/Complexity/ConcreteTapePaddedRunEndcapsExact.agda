@@ -9,7 +9,8 @@ module DASHI.Mathematics.Complexity.ConcreteTapePaddedRunEndcapsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _≤_)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -21,9 +22,9 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 -- Nonempty plain suffixes have plain last elements.
 endPlainOfNonemptyPlainCells :
   ∀ {State Symbol : Set} {symbol}
-    {rest : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
-  WF.PlainCells (Local.plain symbol Agda.Builtin.List.∷ rest) →
-  Pattern.EndPlain (Local.plain symbol Agda.Builtin.List.∷ rest)
+    {rest : List (Local.TapeCell State Symbol)} →
+  WF.PlainCells (Local.plain symbol ∷ rest) →
+  Pattern.EndPlain (Local.plain symbol ∷ rest)
 endPlainOfNonemptyPlainCells (WF.plainCons WF.plainNil) =
   Pattern.endOne
 endPlainOfNonemptyPlainCells
@@ -33,7 +34,7 @@ endPlainOfNonemptyPlainCells
 
 frontPlainFromOneHeadMargin :
   ∀ {State Symbol : Set}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+    {cells : List (Local.TapeCell State Symbol)} →
   WF.ExactlyOneHead cells →
   Margin.HeadMargin 1 cells →
   Pattern.FrontPlain cells
@@ -45,9 +46,9 @@ frontPlainFromOneHeadMargin (WF.plainBefore tailUnique) margin =
 
 endPlainFromOneHeadRightMargin :
   ∀ {State Symbol : Set}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+    {cells : List (Local.TapeCell State Symbol)} →
   WF.ExactlyOneHead cells →
-  suc zero Margin.≤ Margin.rightOfHead cells →
+  suc zero ≤ Margin.rightOfHead cells →
   Pattern.EndPlain cells
 endPlainFromOneHeadRightMargin
     (WF.headHere WF.plainNil) ()
@@ -68,7 +69,7 @@ endPlainFromOneHeadRightMargin
 
 oneHeadMarginEndcaps :
   ∀ {State Symbol : Set}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+    {cells : List (Local.TapeCell State Symbol)} →
   WF.ExactlyOneHead cells →
   Margin.HeadMargin 1 cells →
   Pattern.FrontPlain cells × Pattern.EndPlain cells
@@ -78,7 +79,7 @@ oneHeadMarginEndcaps unique margin =
 
 marginToOne :
   ∀ {State Symbol : Set} {k : Nat}
-    {cells : Agda.Builtin.List.List (Local.TapeCell State Symbol)} →
+    {cells : List (Local.TapeCell State Symbol)} →
   Margin.HeadMargin (suc k) cells →
   Margin.HeadMargin 1 cells
 marginToOne {k = zero} margin = margin
