@@ -127,6 +127,21 @@ fixtureAddField nontrivialGradientField nontrivialGradientField =
 fixtureAddCurl : OneCurl → OneCurl → OneCurl
 fixtureAddCurl _ _ = zeroCurlFixture
 
+fixtureCurlAddHom :
+  (x y : TwoFields) →
+  fixtureCurl (fixtureAddField x y)
+    ≡ fixtureAddCurl (fixtureCurl x) (fixtureCurl y)
+fixtureCurlAddHom baseField baseField = refl
+fixtureCurlAddHom baseField nontrivialGradientField = refl
+fixtureCurlAddHom nontrivialGradientField baseField = refl
+fixtureCurlAddHom nontrivialGradientField nontrivialGradientField = refl
+
+fixtureGradientCurlZero :
+  (p : PotentialBit) →
+  fixtureCurl (fixtureGrad p) ≡ zeroCurlFixture
+fixtureGradientCurlZero constantPotential = refl
+fixtureGradientCurlZero nonconstantPotential = refl
+
 fixtureComplex : CurlGradientComplex
 fixtureComplex = record
   { Field = TwoFields
@@ -137,8 +152,8 @@ fixtureComplex = record
   ; curl = fixtureCurl
   ; zeroCurl = zeroCurlFixture
   ; addCurl = fixtureAddCurl
-  ; curlAddHom = λ x y → refl
-  ; curlGradZero = λ p → refl
+  ; curlAddHom = fixtureCurlAddHom
+  ; curlGradZero = fixtureGradientCurlZero
   ; curlRightNeutral = λ v → refl
   }
 
