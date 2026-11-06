@@ -15,10 +15,12 @@ module DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Sigma using (Σ; _,_)
+open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _≤ℝ_)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_; _<ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -165,8 +167,65 @@ module _
   -- from an arbitrary function Nat -> Real -> Real.
   ----------------------------------------------------------------------
 
-  realSelectedScalarLaws : E1.SelectedScalarConvergence ℝ
-  realSelectedScalarLaws = record
+
+  -- Genuine sequential (epsilon--N) convergence in the selected real
+  -- scalar carrier. Unlike the old `limit : (Nat -> Real) -> Real`
+  -- boundary, this is NOT reflexively true for arbitrary cutoff words.
+  PhysicalRealConverges : (Nat → ℝ) → ℝ → Set
+  PhysicalRealConverges sequence target =
+    ∀ epsilon → 0ℝ <ℝ epsilon →
+      Σ Nat (λ threshold →
+        ∀ n → threshold ≤ n →
+          absℝ (sequence n -ℝ target) ≤ℝ epsilon)
+
+  -- These are STANDARD physical-real topology theorems, not Yang--Mills
+  -- convergence evidence. They must be instantiated by an actual real
+  -- analysis development (rather than a postulated all-sequence lim).
+  record PhysicalRealSequentialConvergenceLaws : Set₁ where
+    field
+      convergenceUnique :
+        ∀ sequence left right →
+        PhysicalRealConverges sequence left →
+        PhysicalRealConverges sequence right →
+        left ≡ right
+
+      constantConverges :
+        ∀ value →
+        PhysicalRealConverges (λ _ → value) value
+
+      addConverges :
+        ∀ left right leftLimit rightLimit →
+        PhysicalRealConverges left leftLimit →
+        PhysicalRealConverges right rightLimit →
+        PhysicalRealConverges
+          (λ n → left n +ℝ right n)
+          (leftLimit +ℝ rightLimit)
+
+      multiplyConstantConverges :
+        ∀ scalar sequence target →
+        PhysicalRealConverges sequence target →
+        PhysicalRealConverges
+          (λ n → scalar *ℝ sequence n)
+          (scalar *ℝ target)
+
+      nonnegativeClosed :
+        ∀ sequence target →
+        PhysicalRealConverges sequence target →
+        (∀ n → 0ℝ ≤ℝ sequence n) →
+        0ℝ ≤ℝ target
+
+      convergenceCongruent :
+        ∀ first second target →
+        (∀ n → first n ≡ second n) →
+        PhysicalRealConverges second target →
+        PhysicalRealConverges first target
+
+  open PhysicalRealSequentialConvergenceLaws public
+
+  realSelectedScalarLaws :
+    PhysicalRealSequentialConvergenceLaws →
+    E1.SelectedScalarConvergence ℝ
+  realSelectedScalarLaws topology = record
     { E1.SelectedScalarConvergence.zero = 0ℝ
     ; E1.SelectedScalarConvergence.one = 1ℝ
     ; E1.SelectedScalarConvergence.add = _+ℝ_
@@ -174,33 +233,20 @@ module _
     ; E1.SelectedScalarConvergence.Nonnegative =
         λ value → 0ℝ ≤ℝ value
     ; E1.SelectedScalarConvergence.Converges =
-        RealLimit.Converges sequenceLimit
+        PhysicalRealConverges
     ; E1.SelectedScalarConvergence.convergenceUnique =
-        λ sequence left right leftProof rightProof →
-          trans (sym leftProof) rightProof
+        convergenceUnique topology
     ; E1.SelectedScalarConvergence.constantConverges =
-        RealLimit.constantLimit limitLaws
+        constantConverges topology
     ; E1.SelectedScalarConvergence.addConverges =
-        λ left right leftLimit rightLimit leftProof rightProof →
-          trans
-            (RealLimit.addLimit limitLaws left right)
-            (RealLimit.cong₂ _+ℝ_ leftProof rightProof)
+        addConverges topology
     ; E1.SelectedScalarConvergence.multiplyConstantConverges =
-        λ scalar sequence target proof →
-          trans
-            (RealLimit.multiplyConstantLimit limitLaws scalar sequence)
-            (cong (λ value → scalar *ℝ value) proof)
+        multiplyConstantConverges topology
     ; E1.SelectedScalarConvergence.nonnegativeClosed =
-        λ sequence target proof pointwise →
-          subst (λ value → 0ℝ ≤ℝ value) proof
-            (RealLimit.nonnegativeLimitClosed limitLaws sequence pointwise)
+        nonnegativeClosed topology
     ; E1.SelectedScalarConvergence.convergenceCongruent =
-        λ first second target pointwise proof →
-          trans
-            (Seq.limitCongruent sequenceLimit first second pointwise)
-            proof
+        convergenceCongruent topology
     }
-
 
   ----------------------------------------------------------------------
   -- Genuine continuum observable selection: never quantify convergence
@@ -365,7 +411,7 @@ module _
 
       originalWilsonCylinderConverges :
         ∀ observable →
-        RealLimit.Converges sequenceLimit
+        PhysicalRealConverges
           (λ n → nativeExpectation n
             (selectedSection selection observable))
           (continuumExpectation observable)
@@ -379,6 +425,7 @@ module _
   nativeSUNAsDependentE1Source :
     (finite : ActualNativeFiniteIntegration)
     (selection : SelectedNativeCylinderAlgebra)
+    (topology : PhysicalRealSequentialConvergenceLaws)
     (selected : ActualSelectedOriginalSUNConvergence finite selection) →
     E1.ActualVariableCutoffCylinderFamily
       (Native.ActualLinks theory traceData exponential beta oneLink
@@ -389,8 +436,8 @@ module _
       (Observable selection)
       ℝ
       (selectedRealization selection)
-      realSelectedScalarLaws
-  nativeSUNAsDependentE1Source finite selection selected = record
+      (realSelectedScalarLaws topology)
+  nativeSUNAsDependentE1Source finite selection topology selected = record
     { E1.ActualVariableCutoffCylinderFamily.finitePhysicalMeasure =
         nativeMeasure
     ; E1.ActualVariableCutoffCylinderFamily.originalNormalizedExpectation =
