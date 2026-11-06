@@ -16,6 +16,7 @@ import DASHI.Cognition.CCDCOEQueryPNFEvidenceBridgeExact
 import DASHI.Cognition.CCDCOEPersonalHolonomyBoundaryExact
 import DASHI.Cognition.CCDCOEMaxCutRegressionExact
 import DASHI.Cognition.CCDCOEP3TypedIntersectionalAxisExact
+import DASHI.Cognition.CCDCOEP3SituatedHistoryPNFExact
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact
 import DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact
