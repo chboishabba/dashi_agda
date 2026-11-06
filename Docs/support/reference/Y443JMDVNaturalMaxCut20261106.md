@@ -157,3 +157,57 @@ Agda has not been executed in this environment. The JMD words/Lean
 certificate and an actual Monster same-object witness have not been
 imported. Do not mark the unified Monster = Aut(V-natural) theorem as
 established on this basis.
+
+
+## Candidate 8-by-9 / C3 / analytical J coordinate cross-pollination
+
+Observed relator counts:
+- 78 = 8*9+6: Coxeter relations only;
+- 79 = 8*9+7: Coxeter plus spider;
+- 80 = 8*9+8: Coxeter plus spider and central;
+- **canonical presentation decomposition**: 78 = 12 node involutions
+  + 11 adjacent pair relations + 55 nonadjacent pair relations.
+  Thus 80 = 12 + 11 + 55 + 1 spider + 1 central.
+
+A cardinality equality does not furnish a canonical relator-to-chart
+bijection. In particular, 72 is NOT currently an established orbit of
+C3, a block of Heisenberg representation data, or a 369 phase fibre.
+
+Existing exact donors for a **candidate** indexed chart:
+- `DASHI/Foundations/Base369NestedUnitCompletionMonsterAssemblyExact.agda`:
+  `modePhase9IsReduced8PlusIdentity` builds the actual
+  `ModePhaseQuotient9` <-> `ReducedNonary8 + identity` carrier iso.
+- `DASHI/Moonshine/JInvariantAnalyticJCoarseFineFrickeIntertwinerExact.agda`:
+  conditional two-way analytic-vs-finite Fricke transport, using its
+  actual `AnalyticJCoarseFineFrickeEquivalence`.
+- `DASHI/Moonshine/Monster369ZetaSameObjectWeldExact.agda`:
+  native symbolic C3/Monster 3B zeta scalar identification, not yet
+  the whole representation-level same-object weld.
+- `DASHI/Moonshine/JInvariant369JointJReflectionWeldExact.agda`:
+  existing analytic reflection-to-joint-J commuting square.
+
+For a genuine Y443/369 theorem, construct:
+```text
+R80 = (Rnode12 + Redge11 + Rnonedge55) + Rspider + Rcentral
+  -- eR --> (ReducedNonary8 * ModePhaseQuotient9) + Exceptional8
+  |                                |
+ Coxeter/word rewrite          369 phase/chart operation
+  |                                |
+  v                                v
+R80 ----------------eR------> chart
+```
+with a **two-sided inverse eR**, transported relation *types*
+(order-two/order-three/spider/central), and commutation of the chosen
+rewrite/phase operations. Require further same-object maps before
+postcomposing with `JInvariantAnalyticJCoarseFineFrickeIntertwinerExact`
+or `Monster369ZetaSameObjectWeldExact`.
+
+If a Y443 symmetry acts on the relator index, equivariance must be
+checked on ALL 80 indices (or explicitly restricted to the subgroup
+that preserves the selected relator family). Mere enumeration order
+does not certify such equivariance. Do not mistake the six residual
+Coxeter coordinates in 78=72+6 for Suzuki degree 12, the Heisenberg
+6+6 axes, or an analytic zeta divisor.
+
+This alternative indexing is a **research target**, not a promoted
+Monster/VOA theorem and not a second presentation.
