@@ -87,6 +87,44 @@ Existing donors reused (not replicated): `FutureObservationLanguageQuotientExact
 `PlanarianControlCalibrationExact`, and
 `Base369Ternary27HypervoxelFabricGeometryExact`.
 
+## Read-only GO-CAM and SBML evidence intake
+
+`scripts/biological_gocam_sbml_receipt_intake.py` now supplies a concrete
+**source-intake**, separate from the Golden mathematical and physics owners.
+It reads local GO-CAM LinkML-style JSON and SBML Level-3 XML, retaining file
+SHA-256, original model/activity/reaction identifiers, causal predicates,
+source evidence terms, SBML parameter units, and kinetic-law presence.
+
+It rejects duplicate activity/species/reaction/parameter IDs, missing causal
+edge endpoints within the selected model, nonexistent crosswalk endpoints, and
+join assertions without an evidence reference. No label-based or silent
+gene-name matching is permitted. Every crosswalk join remains `trusted=false`;
+the output is a read-only unpromoted JSON receipt, not an ITIR/PNF write.
+
+Example:
+
+```bash
+python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
+
+python3 scripts/biological_gocam_sbml_receipt_intake.py \
+  --gocam source-gocam.json --sbml source-model.xml \
+  --crosswalk explicitly-evidenced-crosswalk.json \
+  --output unpromoted-biological-intake.json
+```
+
+The optional crosswalk file is a JSON object with a `joins` array containing
+`gocam_activity`, `sbml_reaction` and `evidence_reference` fields.
+A provided crosswalk is a *source-asserted candidate*, not an established
+biochemical equivalence.
+
+This adapter deliberately **does not** validate the full GO-CAM LinkML schema,
+implement libSBML semantic or unit analysis, interpret MathML kinetics, execute
+a simulation, estimate parameters, calibrate an assay, or write to PNF.
+Production promotion needs the official
+[GO-CAM gocam-py model](https://geneontology.github.io/gocam-py/) and
+[SBML Level-3 specification](https://sbml.org/documents/specifications/)
+plus the original experimental provenance, units and result receipts.
+
 ## Exact P0–P5 status / remaining max-cut
 
 | Gate | Completed or already reusable | Remaining named decisive obligation |
@@ -94,8 +132,8 @@ Existing donors reused (not replicated): `FutureObservationLanguageQuotientExact
 | P0 — phenotype carrier and histories | `CellStateAttractor` coupled-cell carrier; Levin geometry; generic `IndexedBiologicalPhenotype`; new finite `BiologicalState` | **P0.BIO-CARRIER**: instantiate actual genome/regulation/chemistry/cell/tissue carriers and admissible history-indexed fibres with source-backed observations, rather than just finite flags |
 | P1 — future equivalence | New safe/unsafe projection, trace commutation, concrete nonfactorability; existing general future language quotient and finite compiler | **P1.FINITE-COMPILER**: give this biological finite transition system an accepted `CertifiedPartitionRefiner`, rank bound and stable partition; **P1.STOCHASTIC**: compare distributions using measured/admissible stochastic transition kernels |
 | P2 — cubical spatial field | Existing 27-vertex, 54-edge, 36-plaquette, 8-cube geometry; new pointwise and one-hop adjacency-gated response/projection proofs | **P2.COUPLED-FIELD**: construct a simultaneous neighbourhood-coupled state evolution, prove all-edge/plaquette and boundary compatibility, and transport the biology quotient through it |
-| P3 — physical calibration | Existing finite chemical master generator, electrodiffusion, SI bioelectric adapter, B-DNA SE(3), finite basin and planarian source count observations | **P3.SBML-SI**: versioned SBML/SED-ML model/parameter ingestion, unit-checked original molecular state laws, identifiability analysis, trajectory error/uncertainty, held-out calibration and exact provenance receipts |
-| P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; new finite source/model refinement and reopening theorems with an uninhabited calibrated join contract; canonical programme registry | **P4.ONTOLOGY-WELD**: versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
+| P3 — physical calibration | Existing finite chemical master generator, electrodiffusion, SI bioelectric adapter, B-DNA SE(3), finite basin and planarian source count observations | **P3.SBML-SI**: full schema-validated SBML/SED-ML model/parameter ingestion beyond current read-only lexical intake, unit-checked original molecular state laws, identifiability analysis, trajectory error/uncertainty, held-out calibration and exact provenance receipts |
+| P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; new finite source/model refinement and reopening theorems with an uninhabited calibrated join contract; canonical programme registry | **P4.ONTOLOGY-WELD**: production versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph beyond the new read-only candidate crosswalk with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
 | P5 — empirical discrimination | Explicit fine-vs-coarse intervention tests in finite fixture; existing dashitest/dashifine numerical machinery and planarian observations | **P5.HELDOUT**: source-separated measurements, held-out predictions, uncertainty intervals, neutral-component census, local/global perturbation sensitivity and prospective predictions that can distinguish candidate attractor models |
 
 No gate P0–P5 is legitimately globally closed for *real biology* by the
@@ -167,8 +205,10 @@ rather than claiming kernel acceptance.
 Only the first level has been established in this branch before a compiler run.
 A separate local Python enumeration passed the synthetic finite checks; it is
 not a receipt for a run of the exact committed script or an Agda kernel pass.
-No Agda kernel, SBML ingestion, ontology importer, or held-out biological
-validation receipt has been claimed by this document.
+No Agda kernel, *schema-validated or physically calibrated* SBML ingestion,
+production ontology/PNF importer, or held-out biological validation receipt
+has been claimed by this document. The read-only lexical intake is not
+substituted for these gates.
 
 ## Next prioritized max-cut
 
