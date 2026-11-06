@@ -347,3 +347,62 @@ uses `Data.List.length`, while the existing complexity model uses
 two separately recursive owners is assumed. This and the original
 strictAfter internal primitive-guard proof are part of the exact-head
 compiler acceptance cut, not already certified.
+
+## 2026-11-06 — K05 N21 bit-weighted comparator and real bitword equality
+
+Actual original Karp owners:
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact`:
+  original graph-word raw-validator + endpoint-history comparison count for
+  ALL words, including malformed, bounded by a degree-two polynomial.
+- `Karp21N21SameWordCountedAcceptanceExact`:
+  reuses `Karp21FinFreeAllWordDecoderAgreementExact.n21FinFreeVerifierSameWord`.
+  The exact original fin-free and typed N21 Boolean verifiers agree
+  for all literal graph/certificate words.
+- New `Karp21N21BitWeightedComparisonEnvelopeExact`:
+  charges each of the ORIGINAL counted primitive-comparison slots
+  `1+Word.encodingSize word`; constructs a genuine native
+  `ERQ.PolynomialBound` on the product envelope (degree three by
+  product closure) and proves the all-word weighted bound.
+  Its `OriginalN21ComparisonImplementationClock` contract is a real
+  separate proof premise; there is NO supplied inhabitant for the
+  original comparator's bit-machine implementation.
+- New `Karp21BinaryWordEqualityPrimitiveExact`:
+  actual structural bitword equality function with extensional
+  soundness and completeness, exact bit-inspection count, and
+  upper bound `1+length left` independently of decoded numeric
+  magnitude. This is a comparator candidate on bit representations;
+  the gamma-decoded Nat equality interface has NOT been swapped
+  for this implementation or proved definitionally identical.
+
+Existing original `Karp21BinaryRuntimeEverything` and
+`Karp21Everything` import the weighted-count and comparator
+sources; the Golden referee checks both additional focused roots.
+Independent exhaustive reference: all 16,129 binary word pairs
+of lengths 0..6 passed equality/inspection-count checks, executed
+locally; the equivalent committed Python reference runs in preflight.
+
+What is now exact at SOURCE level:
+  primitive comparison count <= 7(1+L)^2;
+  scheduled bit-weighted comparison count <= 7(1+L)^3;
+  extensional equality and bit inspection cost for a selected
+  separately defined binary-word comparator.
+
+**Decisive remaining original-owner weld**:
+  1. Preserve gamma payloads or reconstruct canonical binary operands,
+     prove each original `NatP._≟_` / `NatP._<?_` /
+     `Graph.strictAfter` result agrees with the selected
+     bit-native comparator on ALL parsed inputs.
+  2. Prove that operand descriptions inspected by original graph
+     parsing are each O(L) bits, including malformed rejected paths.
+  3. Prove concrete machine-clock costs for original gamma parsing,
+     signed zigzag/large-integer addition and threshold comparison,
+     certificate read and storage.
+  4. Combine these into a true all-word N21 polynomial verifier,
+     instantiate the original `PR.InNP` resource model and
+     obtain `parallel_checker` kernel acceptance.
+  5. Complete original E20 all-word bit transducer clock, guarded
+     Cook–Levin and the remaining historical network.
+
+The new degree-three expression is a polynomial schedule, NOT an
+unconditional Turing-machine execution bound; no false claim that
+native Agda `Nat` equality is constant time.
