@@ -39,6 +39,13 @@ cong₂ : ∀ {A B C : Set} (f : A → B → C) {x y : A} {z w : B} →
   x ≡ y → z ≡ w → f x z ≡ f y w
 cong₂ f refl refl = refl
 
+-- The group alphabet is fixed to the original JMD x5..x8 nodes.
+sourceGen : W.Gen → Y.Node
+sourceGen W.x5 = Y.b2
+sourceGen W.x6 = Y.c2
+sourceGen W.x7 = Y.d2
+sourceGen W.x8 = Y.e2
+
 record CoxeterA4LocalRules
   {G : Set} (gi : TM.GroupWithInverse G)
   (nodes : Y.Node → G) : Set where
@@ -46,29 +53,24 @@ record CoxeterA4LocalRules
     squareWhenAllowed :
       (a b : W.Gen) →
       W.eqG a b ≡ true →
-      let
-        module P = Algebra.PowerAlgebra gi
-        gx = JMD.node (Y.a)
-      in
-      P.mul (generator a) (generator b) ≡ P.e
-
-    -- Generator is deliberately the EXACT original Y443 node action.
-    -- Defined below as a separate top-level function.
-    generator : W.Gen → G
+      let module P = Algebra.PowerAlgebra gi in
+      P.mul (nodes (sourceGen a)) (nodes (sourceGen b)) ≡ P.e
 
     commuteWhenAllowed :
       (a b : W.Gen) →
       W.canCommute a b ≡ true →
       let module P = Algebra.PowerAlgebra gi in
-      P.mul (generator a) (generator b) ≡
-      P.mul (generator b) (generator a)
+      P.mul (nodes (sourceGen a)) (nodes (sourceGen b)) ≡
+      P.mul (nodes (sourceGen b)) (nodes (sourceGen a))
 
     braidWhenAllowed :
       (a b c : W.Gen) →
       W.canBraid a b c ≡ true →
       let module P = Algebra.PowerAlgebra gi in
-      P.mul (generator a) (P.mul (generator b) (generator c)) ≡
-      P.mul (generator b) (P.mul (generator a) (generator b))
+      P.mul (nodes (sourceGen a))
+        (P.mul (nodes (sourceGen b)) (nodes (sourceGen c))) ≡
+      P.mul (nodes (sourceGen b))
+        (P.mul (nodes (sourceGen a)) (nodes (sourceGen b)))
 
 open CoxeterA4LocalRules public
 
@@ -80,7 +82,7 @@ module Semantic {G : Set} (gi : TM.GroupWithInverse G)
   open P using (e; mul; assoc; leftId; rightId; pow)
 
   gen : W.Gen → G
-  gen = generator rules
+  gen x = nodes (sourceGen x)
 
   eval : W.Word → G
   eval [] = e
