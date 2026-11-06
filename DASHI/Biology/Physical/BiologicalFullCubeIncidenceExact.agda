@@ -143,18 +143,19 @@ lowerFirst upperFirst lowerSecond upperSecond :
   ElementarySquare → PositiveBond
 
 lowerFirst (xySquare a b z) = xBond a (low b) z
-upperFirst (xySquare a b z) = xBond a (high b) z
-lowerSecond (xySquare a b z) = yBond (low a) b z
-upperSecond (xySquare a b z) = yBond (high a) b z
-
 lowerFirst (xzSquare a y b) = xBond a y (low b)
-upperFirst (xzSquare a y b) = xBond a y (high b)
-lowerSecond (xzSquare a y b) = zBond (low a) y b
-upperSecond (xzSquare a y b) = zBond (high a) y b
-
 lowerFirst (yzSquare x a b) = yBond x a (low b)
+
+upperFirst (xySquare a b z) = xBond a (high b) z
+upperFirst (xzSquare a y b) = xBond a y (high b)
 upperFirst (yzSquare x a b) = yBond x a (high b)
+
+lowerSecond (xySquare a b z) = yBond (low a) b z
+lowerSecond (xzSquare a y b) = zBond (low a) y b
 lowerSecond (yzSquare x a b) = zBond x (low a) b
+
+upperSecond (xySquare a b z) = yBond (high a) b z
+upperSecond (xzSquare a y b) = zBond (high a) y b
 upperSecond (yzSquare x a b) = zBond x (high a) b
 
 squareInitialCorner :
