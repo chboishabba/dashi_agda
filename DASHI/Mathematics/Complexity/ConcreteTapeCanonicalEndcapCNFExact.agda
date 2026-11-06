@@ -27,6 +27,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canoni
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
+import DASHI.Mathematics.Complexity.CNFPlacedConstraintConjunctionExact as Placed
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 
@@ -218,12 +219,116 @@ globalRowEndcapsCNF :
     (rowSlot : Global.Slot rowIndex (suc steps)) →
   CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))
 globalRowEndcapsCNF colsMinusOne rowSlot =
-  appendCNFs
+  Placed.append
     (globalRowCellPlainCNF rowSlot Global.here)
     (globalRowCellPlainCNF rowSlot (lastPhysicalColumn colsMinusOne))
+
+-- Enumerate every physical row slot 0 .. steps. The same list is used
+-- for the concrete CNF and its proof-relevant evaluation certificate.
+data SomeRowSlot (count : Nat) : Set where
+  some-row-slot : ∀ {index} → Global.Slot index count → SomeRowSlot count
+
+shiftRowSlots :
+  ∀ {count} →
+  List (SomeRowSlot count) → List (SomeRowSlot (suc count))
+shiftRowSlots [] = []
+shiftRowSlots (some-row-slot slot ∷ rest) =
+  some-row-slot (Global.there slot) ∷ shiftRowSlots rest
+
+allPhysicalRows : (count : Nat) → List (SomeRowSlot count)
+allPhysicalRows zero = []
+allPhysicalRows (suc count) =
+  some-row-slot Global.here ∷ shiftRowSlots (allPhysicalRows count)
+
+appendAllRowEndcaps :
+  ∀ {machine steps}
+    (colsMinusOne : Nat) →
+  List (SomeRowSlot (suc steps)) →
+  CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))
+appendAllRowEndcaps colsMinusOne [] = []
+appendAllRowEndcaps colsMinusOne (some-row-slot slot ∷ rest) =
+  Placed.append
+    (globalRowEndcapsCNF colsMinusOne slot)
+    (appendAllRowEndcaps colsMinusOne rest)
+
+-- Actual polynomially replicated row-boundary constraints over the
+-- original extended vector. This is intentionally separate from the
+-- pre-existing globalCookLevinCNF until the same-object decoded
+-- endcap soundness and completeness consumers are welded.
+globalAllRowsEndcapsCNF :
+  ∀ {machine steps}
+    (colsMinusOne : Nat) →
+  CNF.CNF (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))
+globalAllRowsEndcapsCNF {steps = steps} colsMinusOne =
+  appendAllRowEndcaps colsMinusOne (allPhysicalRows (suc steps))
+
+-- The exact AND refinement for every emitted row. In particular this
+-- certificate does not select just an arbitrary compatible row.
+data AllPhysicalRowEndcapsTrue
+    {machine steps}
+    (colsMinusOne : Nat)
+    (assignment :
+      CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) :
+    List (SomeRowSlot (suc steps)) → Set where
+  all-row-endcaps-done :
+    AllPhysicalRowEndcapsTrue colsMinusOne assignment []
+  all-row-endcaps-step :
+    ∀ {index rest} (slot : Global.Slot index (suc steps)) →
+    CNF.evaluateCNF
+      (globalRowEndcapsCNF colsMinusOne slot) assignment ≡ true →
+    AllPhysicalRowEndcapsTrue colsMinusOne assignment rest →
+    AllPhysicalRowEndcapsTrue colsMinusOne assignment
+      (some-row-slot slot ∷ rest)
+
+andLeftTrue :
+  ∀ left right →
+  CNF.andBool left right ≡ true → left ≡ true
+andLeftTrue false right ()
+andLeftTrue true right proof = refl
+
+andRightTrue :
+  ∀ left right →
+  CNF.andBool left right ≡ true → right ≡ true
+andRightTrue false right ()
+andRightTrue true right proof = proof
+
+appendAllRowEndcapsSound :
+  ∀ {machine steps}
+    (colsMinusOne : Nat)
+    (slots : List (SomeRowSlot (suc steps)))
+    (assignment :
+      CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  CNF.evaluateCNF
+    (appendAllRowEndcaps colsMinusOne slots) assignment ≡ true →
+  AllPhysicalRowEndcapsTrue colsMinusOne assignment slots
+appendAllRowEndcapsSound colsMinusOne [] assignment accepted =
+  all-row-endcaps-done
+appendAllRowEndcapsSound colsMinusOne
+    (some-row-slot slot ∷ rest) assignment accepted =
+  all-row-endcaps-step slot
+    (andLeftTrue left right split)
+    (appendAllRowEndcapsSound colsMinusOne rest assignment
+      (andRightTrue left right split))
   where
-    appendCNFs :
-      ∀ {n} → CNF.CNF n → CNF.CNF n → CNF.CNF n
-    appendCNFs [] right = right
-    appendCNFs (first ∷ rest) right =
-      first ∷ appendCNFs rest right
+    left = CNF.evaluateCNF
+      (globalRowEndcapsCNF colsMinusOne slot) assignment
+    right = CNF.evaluateCNF
+      (appendAllRowEndcaps colsMinusOne rest) assignment
+    split : CNF.andBool left right ≡ true
+    split with Placed.evaluateCNFAppend
+      (globalRowEndcapsCNF colsMinusOne slot)
+      (appendAllRowEndcaps colsMinusOne rest) assignment
+    ... | refl = accepted
+
+globalAllRowsEndcapsSound :
+  ∀ {machine steps}
+    (colsMinusOne : Nat)
+    (assignment :
+      CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  CNF.evaluateCNF (globalAllRowsEndcapsCNF colsMinusOne) assignment ≡ true →
+  AllPhysicalRowEndcapsTrue colsMinusOne assignment
+    (allPhysicalRows (suc steps))
+globalAllRowsEndcapsSound {steps = steps}
+    colsMinusOne assignment accepted =
+  appendAllRowEndcapsSound colsMinusOne
+    (allPhysicalRows (suc steps)) assignment accepted
