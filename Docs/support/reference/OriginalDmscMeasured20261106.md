@@ -153,3 +153,54 @@ promoted by this analysis.
 
 This original-data result closes a **bounded molecular P5 measured-holdout
 slice**, not the whole P5 developmental-attractor endpoint.
+
+
+## New original-replicate sensitivity analysis — same pinned source
+
+The complete original Git blob was read again. The mean-based Hamming-one
+edge counts above reproduce exactly when the original numeric readout is
+processed in double precision. The new
+`scripts/check_original_dmsc_replicate_ranges.py` rejects a local source CSV
+unless its **computed Git blob SHA-1** matches
+`151cd87272cbdd6bcc2b1e70bdfd2a4ea2933d2c`.
+
+Of 3,429,837 measured Hamming-one edges, 2,721,334 have at least two
+original measured replicates at both genotypes; 708,503 lack that
+minimum. For the former edges the tool computes maximum and minimum
+absolute differences over the two observed replicate ranges. These
+are finite sample-range checks, not inferential equivalence tests.
+
+| Illustrative tolerance | Mean within | Every observed pair within | Every observed pair beyond | Mixed replicate ranges |
+|---|---:|---:|---:|---:|
+| 0.05 | 1,004,490 | 928 | 212,967 | 2,507,439 |
+| 0.10 | 1,770,810 | 6,240 | 180,506 | 2,534,588 |
+| 0.20 | 2,582,535 | 54,368 | 148,222 | 2,518,744 |
+
+This demonstrates an important instability of treating genotype-mean
+closeness as physical neutrality: the count of mean-close edges is
+orders of magnitude greater than the count where *all* available
+replicate cross-pairs meet that same descriptive threshold.
+
+Neither the thresholds nor replicate ranges are validated
+confidence/equivalence intervals. Independence of replicates,
+measurement-error distributions, systematic batch shifts, and
+organism-level effects have not been established.
+
+`OriginalDmscTwoGenotypeMeasuredExact.agda` also pins two actual measured
+rows to a source-scoped RNA9 carrier:
+
+- `AAAAAAAAA`: 0.256, 0.769, 0.664, arithmetic mean 0.563.
+- `AAAAAAAAC`: 0.389, 0.908, 0.695, arithmetic mean 0.664.
+
+Agda source proofs certify that the typed nine-mers differ only at
+position nine and that the source-scale arithmetic means differ.
+This statement has no statistical-significance or causal-effect
+implication. As with the other Golden files, exact-head kernel
+acceptance is still required.
+
+```bash
+python3 scripts/check_original_dmsc_replicate_ranges.py --self-test
+python3 scripts/check_original_dmsc_replicate_ranges.py \
+  --original-csv /path/to/cmarti/shine_dalgarno/data/dmsc.csv \
+  --receipt /tmp/dmsc-original-replicate-range.json
+```
