@@ -14,6 +14,7 @@ on:
       - 'DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda'
       - 'DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda'
       - 'DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda'
+      - 'DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda'
       - 'scripts/check_bishop_machin_rational_gaussian_phase.py'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
@@ -108,6 +109,7 @@ jobs:
             DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda
             DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda
             DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda
+            DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda
             # Terminal and same-object consumer checks: unlike static lemma
             # discovery, these force Agda to elaborate the actual endpoints.
             DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda
