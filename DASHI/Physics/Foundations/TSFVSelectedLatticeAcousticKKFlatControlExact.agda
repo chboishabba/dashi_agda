@@ -119,6 +119,65 @@ sourceSelectedFiveMetricFrozenCircleRetainsConnection v w =
     sourceSelectedKKRadiusSquared
     v w
 
+------------------------------------------------------------------------
+-- REQUIRED SAME-CLOCK CALIBRATION (P02/P07/P08):
+-- The above 3+1 rational Lorentz metric uses normalized speed c=1.
+-- An independently measured physical speed c is NOT silently set to
+-- one. Instead the exact coordinate map tau = c*t is inserted, and
+-- the raw physical selected metric is the pullback by that map.
+--
+-- This makes the source-specific Python 3/2-speed physical metric
+-- and c=1 Agda normalized metric directly comparable as chart data.
+-- SI units/actual empirical c measurement remain a different task.
+------------------------------------------------------------------------
+
+physicalClockToNormalizedChart :
+  ℚ → AcousticTangent4 → AcousticTangent4
+physicalClockToNormalizedChart c
+    (t , (x , (y , z))) =
+  (c * t) , (x , (y , z))
+
+physicalAcousticFourMetric :
+  ℚ → AcousticTangent4 → AcousticTangent4 → ℚ
+physicalAcousticFourMetric c v w =
+  sourceAcousticFourMetric
+    (physicalClockToNormalizedChart c v)
+    (physicalClockToNormalizedChart c w)
+
+physicalWaveSpeedTimeCoefficient :
+  ∀ c t u →
+  ((- (c * t)) * (c * u))
+  ≡
+  (- ((c * c) * (t * u)))
+physicalWaveSpeedTimeCoefficient =
+  Ring.solve-∀
+
+-- Source-observer metric for any physically specified speed c:
+-- the very same physical g4 can be lifted by the ORIGINAL KK owner
+-- with no redefinition or unrelated signature fixture.
+physicalSelectedFiveMetric :
+  ℚ → AcousticTangent4 → ℚ →
+  AcousticTangent4 → ℚ → ℚ
+physicalSelectedFiveMetric c =
+  KK.KK5Bilinear
+    (physicalAcousticFourMetric c)
+    sourceSelectedKKConnection
+    sourceSelectedKKRadiusSquared
+
+physicalSelectedFiveMetricHorizontalEqualsObservedMetric :
+  ∀ c v w →
+  physicalSelectedFiveMetric c
+    v (KK.horizontalCircleComponent sourceSelectedKKConnection v)
+    w (KK.horizontalCircleComponent sourceSelectedKKConnection w)
+  ≡
+  physicalAcousticFourMetric c v w
+physicalSelectedFiveMetricHorizontalEqualsObservedMetric c v w =
+  KK.actualKKHorizontalReductionIsOriginalFourMetric
+    (physicalAcousticFourMetric c)
+    sourceSelectedKKConnection
+    sourceSelectedKKRadiusSquared
+    v w
+
 -- Strong scope warning: the exact rational target has been
 -- CONSTRUCTED, not empirically measured; the original physical
 -- history-to-observer sensor and 5D Einstein-matter action source
