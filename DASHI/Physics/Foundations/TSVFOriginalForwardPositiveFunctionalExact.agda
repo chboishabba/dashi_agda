@@ -9,7 +9,7 @@ module DASHI.Physics.Foundations.TSVFOriginalForwardPositiveFunctionalExact wher
 -- OS state remains an additional physical theorem.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans; cong)
+open import Relation.Binary.PropositionalEquality using (trans; cong; subst; sym)
 import DASHI.Quantum.TSVF as TSVF
 
 module _
@@ -38,11 +38,6 @@ module _
       -- Finite nonnegative norm on the PHYSICAL selected ket carrier.
       -- This is not implicit in QuantumSurface, which only declares
       -- a Weight and a predicate Positive.
-      physicalNormSquare :
-        (ket : Ket) →
-        pair (braOfKet ket) ket
-          ≡ pair (braOfKet ket) ket
-
       scalarSelfPairPositive :
         (ket : Ket) →
         Positive (normSquared (pair (braOfKet ket) ket))
@@ -84,23 +79,10 @@ module _
         (originalForwardFunctional source
           (operatorCompose source (operatorAdjoint source a) a)))
   originalPositiveQuadraticHasPositiveWeight source a =
-    let equality = originalPositiveQuadraticIsForwardNorm source a
-    in
-    transportPositive source equality
-    where
-      transportPositive :
-        (source : OriginalPhysicalInnerProductLaws)
-        (equality :
-          originalForwardFunctional source
-            (operatorCompose source (operatorAdjoint source a) a)
-          ≡ pair (braOfKet source (apply a originalForward))
-              (apply a originalForward)) →
-        Positive
-          (normSquared
-            (originalForwardFunctional source
-              (operatorCompose source (operatorAdjoint source a) a)))
-      transportPositive source refl =
-        scalarSelfPairPositive source (apply a originalForward)
+    subst
+      (λ scalar → Positive (normSquared scalar))
+      (sym (originalPositiveQuadraticIsForwardNorm source a))
+      (scalarSelfPairPositive source (apply a originalForward))
 
 -- WARNING: QuantumSurface.normSquared is a Weight conversion, not an
 -- ordered complex scalar. A genuine C*-algebra state needs a
