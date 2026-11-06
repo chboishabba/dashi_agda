@@ -2,6 +2,16 @@
 
 **New HIL06/HIL07 selected native published RP compiler:** `TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda` reuses the repository's Osterwalder–Seiler/Menotti–Pelissetto `BalabanClayOSWilsonReflectionPositivityExact.wilsonPositivityAtAnySeparationParity`; for every *admissible gauge-invariant positive-time finite word* it transports the published nonnegative reflected expectation through an explicit **same-original-Wilson-source equality**, then through `TSVFOriginalR445ReflectedAllWordGramExact.originalFineOSPositiveTransfersToNativeR445` onto the actual R445 coarse positive word form. It does NOT prove the physically missing source equality, fine reflection/block geometry, continuum OS or observer Hilbert identification. This is a new non-safe physical regression proof, checked through `parallel_checker` as a candidate; no Agda/kernel receipt yet.
 
+## Native Bishop-complex HIL08 algebraic finite-span completion (6 November 2026)
+
+The existing selected observer-to-Wilson readout is only real-valued. **It is not legitimate to identify its equality with a complex Hilbert Gram.** The new `TSVFBishopSetoidComplexCyclicSpanGramExact` imports `DASHI.Analysis.BishopSetoidComplexExact` directly (the real Murray/Bishop setoid and native complex `conjugate`, `_+C_`, `_*C_`, `_≈C_`), and proves by two nested finite inductions that every *finite complex coefficient* cyclic pairing `Σ_iΣ_j conjugate(a_i) * b_j * Gram(w_i,w_j)` is setoid-equivalent across observer and OS when their genuine all-word complex Gram values match. It proves the diagonal as a corollary and **both directions of finite-span Gram-indistinguishability** on the OS image.
+
+This is constructive **finite sesquilinear coefficient transport**, not an abstract arbitrary-real or propositional complex equality. It reuses Bishop/Murray/Csimma code and carries no new primitive analytic axiom itself; the non-safe Bishop import/transitive dependencies are checked in the separate physical/Bishop regression and must receive a full trust audit.
+
+**The exact HIL07/HIL08 wall is now sharper:** construct the *actual complex* original TSVF star/reflection state and same-source equality with the independent YM OS gauge-test complex Gram (real-part cylinder calibration M1/M2 is insufficient by itself); then a positive complex null ideal, completed GNS, dense onto complex-linear isometry, Stone spectral/domain same-source. The finite algebraic span portion is source-written, not independently kernel accepted.
+
+**Cross-domain K05-PRODUCT:** this constructive Bishop complex finite sum-product/setoid congruence machinery is reusable as a donor. The actual **signed-factorial Cauchy convolution limit and triangle/rectangle summation** have NOT been constructed by this proof; neither `K04d-LOG`, `K05-PI` nor `K04d-CONTINUITY` is promoted.
+
 ## HIL07/HIL08 actual source-to-finite-span bridge (6 November 2026)
 
 - `DASHI.Physics.Foundations.TSVFOriginalCyclicFiniteSpanGramExact` is a **safe** structural induction proof: one original source `MatchedPhysicalCyclicWords.allWordGramMatches` extends to **all pairs of arbitrary finite real-weighted cyclic word combinations** and their diagonal pairings. It also supplies a formal OS-image map for the finite spans. This is not a claim that complex Hilbert superpositions or positive OS norm already exist.
