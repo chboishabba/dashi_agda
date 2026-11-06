@@ -1,3 +1,21 @@
+## 7 November continuation — actual original covariance-to-R333 finite-source equivalence
+
+**New original D1 Agda owner:** `YMClayD1OriginalCovarianceToR320Exact.agda`, imported in the dedicated physical regression root. It reuses `NormalizedTwoSourceConnectedCumulantExact.mixedSecondLogDerivativeIsConnectedCovariance` and `BalabanT5StateFamilySourceAlgebraRound295Exact.sourceConnectedCovarianceIsExactFiniteT5` to prove an **equality** between the selected normalized mixed-log Hessian and the true connected covariance of the very same finite `measureSequence` at every cutoff. Thus it proves the forward and reverse implication between the existing R320 `DirectSelectedT5MarkedDecayPayment.mixedDerivativeMagnitudeBelowSelectedShell` and ONE literal finite connected-covariance rooted-shell inequality. The new `originalCovarianceBoundBuildsR333FiniteSource` then consumes the physical covariance estimate through the existing H1/R313/R296 compiler to construct the finite T5 source expected by R333. No new independent two-J polynomial, Hessian axiom, rooted-shell distance or physical measure is introduced.
+
+**Exact genuine physical D1 lemma not yet provided:**
+```
+for every selected cutoff n and local gauge-invariant original Wilson tests F,G:
+  |Cov_{mu_n}(F,G)|
+    <= rootedShell(scale(n), volume(n), root(n,F,G), distance(F,G)).
+```
+It must be derived from actual original CMP119/122/R445 physical conditional/polymer bounds with the chosen scaling, not supplied as a handpicked source field. This inequality is all R320 asks on the selected T5 family; its analytic proof remains open.
+
+**E1 reuse correction:** `YangMillsLiteralRealCylinderLimitPhysicalMeasureExact`, `YangMillsFinitePhysicalMeasureContinuumOS2Exact` and `YangMillsFinitePhysicalMeasureSymmetryLimitExact` already compile a concrete normalized positive continuum expectation, reflection-positive real Gram and finite-symmetry preservation from **selected finite expectation convergence**. A temporary duplicate `YMClayE1ConcreteCylinderStateOS2Exact` was removed from the branch, and its regression import removed. This avoids parallel wrapper debt. The hard E1 work is an actual nontrivial gauge-invariant `R^4` cylinder limit from the variable-size Wilson family, with all accepted axioms, not re-proving a generic functional-limit theorem.
+
+**Verification:** source-written and GitHub readback pending exact Agda `parallel_checker` acceptance. These compiler equalities are partial results; no infinite-volume/continuum existence theorem, published uniform analytic D1 estimate, spectrum or nontriviality was constructed.
+
+---
+
 # Clay Yang–Mills: minimal endpoint max-cut (7 November 2026)
 
 **Canonical target**: for every externally specified compact simple Lie group G, construct a nontrivial four-dimensional quantum Yang–Mills theory on R^4 satisfying an accepted axiomatic QFT scheme, with a strictly positive mass gap above its vacuum. The YM proof is independent of TSVF, measured observer dynamics, Lorentz (3,1) emergence and 5D KK. No fixed 1024-bond sample, R443/R445 phase, CMP116/CMP119/122 scheme or OS route is mandated by Clay. They may be employed ONLY as needed by the selected proof.
