@@ -443,28 +443,49 @@ globalTransitionScanAfterUnique scan interior frontGuard endGuard =
           (WF.plainBefore
             (WF.headHere afterSuffixPlain)))
 
+------------------------------------------------------------------------
+-- Explicit, proof-relevant anti-phantom boundary contract for the SAME
+-- centered occurrence extracted from the original semantic scan.
+--
+-- The original CNF does not currently carry this record. It must be
+-- constructed by the canonical boundary CNF producer, not by a
+-- postulate, an inferred record field, or the original old-head margin.
+------------------------------------------------------------------------
+
+record NoGhostContextBoundaries
+    {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) : Set where
+  field
+    afterPrefixStartsPlain :
+      Pattern.FrontPlain
+        (Center.afterPrefix
+          (Center.centeredOccurrenceFromGlobalScan
+            (Character.localityScanToGlobalTransitionScan scan interior)))
+    afterSuffixEndsPlain :
+      Pattern.EndPlain
+        (Center.afterSuffix
+          (Center.centeredOccurrenceFromGlobalScan
+            (Character.localityScanToGlobalTransitionScan scan interior)))
+
+open NoGhostContextBoundaries public
+
 localityScanWithInteriorGivesWellFormedStep :
   ∀ {machine rule before after}
     (scan : Character.TransitionLocalityScan machine rule before after) →
   (interior : Character.InteriorHeadConfiguration machine before) →
-  Pattern.FrontPlain
-    (Center.afterPrefix
-      (Center.centeredOccurrenceFromGlobalScan
-        (Character.localityScanToGlobalTransitionScan scan interior))) →
-  Pattern.EndPlain
-    (Center.afterSuffix
-      (Center.centeredOccurrenceFromGlobalScan
-        (Character.localityScanToGlobalTransitionScan scan interior))) →
+  NoGhostContextBoundaries scan interior →
   WF.WellFormedMachineStep machine before after
-localityScanWithInteriorGivesWellFormedStep scan interior
-    frontGuard endGuard =
+localityScanWithInteriorGivesWellFormedStep scan interior boundary =
   Character.localityCharacterizationGivesWellFormedStep
     record
       { Character.beforeInterior = interior
       ; Character.afterUnique =
           globalTransitionScanAfterUnique
             (Character.localityScanToGlobalTransitionScan scan interior)
-            interior frontGuard endGuard
+            interior
+            (afterPrefixStartsPlain boundary)
+            (afterSuffixEndsPlain boundary)
       ; Character.localityScan = scan
       }
 
