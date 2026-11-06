@@ -80,6 +80,37 @@ This new metric closes a missing representation/interface slice of P0/P5,
 but it is not a genotype-to-chemical mechanism, fitted diffusion law,
 source-authorized PNF join or longitudinal attractor-discrimination test.
 
+### Original replicate-level uncertainty and anchored ontology join
+
+The same two original RNA9 measurements are now carried explicitly by
+`BiologicalAtomicMolecularHammingReuseExact.OriginalRNA9PairAtHistory`.
+The certified **data attachment** is source-pinned while the index of
+a synthetic developmental frame remains explicitly independent. Advancing
+the synthetic intervention history does not pretend to advance a measured
+bacterial molecular state.
+
+The additional deterministic original-readout regression
+`scripts/check_original_dmsc_exact_replicate_bootstrap.py` exhaustively
+enumerates all `3^3 × 3^3 = 729` ordered within-genotype bootstrap
+resamples. For original observed means 0.563 and 0.664, their difference
+is 0.101 in the assay's reported units. Nearest-rank bootstrap
+percentiles yield **[-0.243, 0.445]** for the difference, including
+zero. This calculation uses no fitted biological kinetic parameters and
+cannot establish an organismal causal effect. The nine cross-replicate
+pairwise differences span **[-0.380, 0.652]**.
+
+The original GO-CAM/SBML lexical intake now additionally rejects a
+candidate join whose `evidence_reference` does not appear on the
+selected activity's original molecular-function or causal-edge evidence.
+A positive source-local evidence match is retained as an explicit
+receipt field, but trust remains **false** until independent
+source-span review via the existing ITIR/PNF authority.
+
+These modules and both new scripts are included in the Round-23 shell
+gate. The shell script still fails closed without an executable Agda
+kernel; it is not a substitute for the requested `parallel_checker`
+receipt.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
