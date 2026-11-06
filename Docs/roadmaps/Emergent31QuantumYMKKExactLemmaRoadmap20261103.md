@@ -1,3 +1,10 @@
+### 6 November 2026 — S02 exact source impulse, free OS spectral gap and correct scope
+
+Committed `scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py`: exact rational chosen-source 125-site local impulse has six nonzero first offsite (t^3)-response channels at (75/8), which identify three opposite pairs via original graph response and 12 transverse pairs; all 18 distance-two sites are inactive at (t^3) and active at (t^5). This is an actually measured/readable response **inside the selected analytic model**, not a measured external apparatus, physically selected original TSVF dynamics or a proof of universal emergent (3,1). The continuum sharp cone and the discrete beyond-front tails are kept strictly distinct.
+
+The selected free Gaussian three-mode Fock Hamiltonian has mathematically exact (Delta_{m free}=hbaromega_{min}=(7/5)(5/4)=7/4) with a standard self-adjoint multiplication operator on its complete weighted domain. The GitHub reference checker now tests that energy separation, real-time versus Euclidean semigroups and spectral projections. **Not YM/R333/Clay:** the independent original continuum OS Hamiltonian still requires the #1444 worker and the original physical TSVF observer source map remains uninhabited.
+
+
 ### 6 November 2026 — concrete S01–S09 control, completed #1444→#1460 merge; E1 and Agda kernel still OPEN
 
 **Primary dossier:** [physically explicit selected scalar wave, flat 5D KK Einstein vacuum and noncollapsed free-Gaussian OS construction](../physics/TSFVPhysicalS01S11ScopedConstructiveMaxCut20261106.md). Original E1 physical TSVF-selected interacting Yang–Mills unification remains OPEN; do **not** count the scoped control as P01/P02/P03/P07/P08 physical closure. No new 186 lemma IDs or optional SM/E6/antigravity claims.
