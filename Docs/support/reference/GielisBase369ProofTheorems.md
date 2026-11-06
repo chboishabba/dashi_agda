@@ -354,3 +354,249 @@ It does **not** certify:
 Those remain literal roadmap leaves. The word "closed" here always
 means **mathematical proof on the stated carrier**, never automatic
 Agda or physical acceptance.
+
+
+## E12 — Native Bishop quartic algebra (new source, Golden receipt open)
+
+\`DASHI/Geometry/GielisBishopPolynomialExact.agda\` imports the actual
+vendored \`Real\`, \`RealProperties\`, and the existing
+\`BishopPowerSeriesElementaryBridgeExact\` sine/cosine owner.
+
+It defines, on Bishop \(\mathbb R_B\),
+
+\[
+ Q(c,s)=c^4+s^4,\quad T(c,s)=(c^2+s^2)^2,\quad
+ C_4(c,s)=c^4-6c^2s^2+s^4,
+\]
+and supplies the ring-solver target
+
+\[
+ \boxed{4Q(c,s)+3[1-T(c,s)] = 3+C_4(c,s)}
+ \qquad(c,s\in\mathbb R_B).
+\]
+
+This universal polynomial equality does not require a trigonometric
+or \(\pi\) premise. It is a **source-written** use of the repo's
+existing \`BishopP.ℝ-Solver\`, NOT accepted until Agda --safe runs.
+
+To get the actual Gielis inverse-square identity, the selected Bishop
+trigonometric functions still owe these *same-object* certificates:
+
+1. \(\cos_B^2x+\sin_B^2x\simeq1\), for the actual Round-11
+   power-series data set (not a generic conditional \`Set\`);
+2. \(\cos_B(4x)\simeq C_4(\cos_Bx,\sin_Bx)\), using the actual
+   Bishop addition/quadrupling theorem;
+3. the positive square-root reciprocal construction and canonical
+   Bishop \(\pi\) phase, including 18/36 sample values.
+
+Only after these three witnesses are constructed and the module is
+kernel-accepted may G02/G03/G04/G05/G08/G09 be marked GOLDEN.
+The earlier K05-PI and Bishop trigonometric interchangeable-series
+frontiers are *relevant hard dependencies*, not bypassed by the
+unconditional polynomial equality.
+
+## E13 — exact cyclotomic 36-point Fourier algebra
+
+Let \(K=\mathbb Q(\zeta)\) where
+\(\Phi_{36}(X)=X^{12}-X^6+1\). The quotient
+\(K=\mathbb Q[X]/(\Phi_{36})\) has basis \(1,\zeta,\dots,\zeta^{11}\).
+Every \(K\)-element is thus an exact 12-component rational vector.
+For \(0\le k,j<36\), define
+\(\chi_k(j)=\zeta^{kj}\). Since \(\zeta\) has order 36,
+
+\[
+ \sum_{j=0}^{35}\chi_k(j)\overline{\chi_\ell(j)}
+ =\begin{cases}36&k=\ell,\\0&k\ne\ell.\end{cases}
+\]
+
+\`scripts/gielis_cyclotomic36_exact.py\` implements reduction by
+\(\zeta^{12}=\zeta^6-1\), rational multiplication and the full
+36-character Gram calculation. A local exact run verified **1296
+ordered character pairs** and coefficient/sample roundtrips for
+the seven modes
+
+\[
+ \{0,\pm3,\pm6,\pm9\}\pmod{36}
+  =\{0,3,6,9,27,30,33\}.
+\]
+
+This yields finite exact computational confirmation of Fourier
+inversion and selected bandlimited reconstruction *without floating
+roots*. The existing native Fourier-resolution owner remains to be
+instantiated with this precise cyclotomic scalar and C36 index space;
+Python verification is not Agda kernel closure of G07/G10/G19.
+
+## E14 — certified O(m/N) continuum spectral geometry error
+
+Select \(N\) angular sectors. At each angle take the radial value at
+its nearest sector centre \(2\pi j/N\), yielding the sectorwise-constant
+polar domain \(\Omega_{m,N}\). This is **not** the Cartesian 41/61-node
+finite-difference domain.
+
+From E04,
+
+\[
+ \left|\frac{dr_m}{d\theta}\right|
+ =\frac{m|\sin(m\theta)|}
+        {(3+\cos(m\theta))^{3/2}}
+ \le\frac{m}{2\sqrt2}.
+\]
+
+Every angle lies within \(\pi/N\) of its nearest sample. Using the
+rational inequalities \(\pi<22/7\), \(\sqrt2>7/5\),
+we therefore have the *rigorous* error constant
+
+\[
+ |r_{m,N}-r_m|<\varepsilon_{m,N}
+  :=\frac{55m}{49N}.
+\]
+
+Because \(r_m\ge1\), for \(\varepsilon_{m,N}<1\),
+
+\[
+ (1-\varepsilon)\Omega_m
+ \subseteq\Omega_{m,N}
+ \subseteq(1+\varepsilon)\Omega_m.
+\]
+
+Min–max domain monotonicity of the Dirichlet Laplacian and 2D dilation
+scaling imply, for **every \(k\ge1\)**,
+
+\[
+ \boxed{
+  (1+\varepsilon)^{-2}
+  \le\lambda_k(\Omega_{m,N})/\lambda_k(\Omega_m)
+  \le(1-\varepsilon)^{-2}.
+ }
+\]
+
+This is an explicit **constructive geometric spectral convergence
+theorem**, with O(m/N) relative bound. At m=9,N=2048 the fully
+rational upper absolute relative error is
+
+\[
+ \frac{99103455}{9971420449}<0.01.
+\]
+
+\`scripts/gielis_sector_spectral_certificate.py\` outputs rational
+endpoint quotients and the first N meeting a target. The local
+independent certificate run passed. This CLOSES the continuum
+*sector-boundary geometry error* sublemma of G12 on paper;
+it does **not** certify the raster five-point finite-difference
+eigenvalue error, native Bishop operator semantics, or numerical
+eigensolver floating-point error. Those remain G11/G12 leaves.
+
+## E15 — explicit continuum Rayleigh–Ritz upper bound
+
+For any positive \(m\), let
+\(u(r,\theta)=1-(r/r_m(\theta))^2\) on \(\Omega_m\).
+This \(u\in H_0^1(\Omega_m)\) is nonzero, and direct radial
+integration gives
+
+\[
+ \int_{\Omega_m}|\nabla u|^2\,dA
+ =\int_0^{2\pi}\left(1+\frac{r_m'^2}{r_m^2}\right)d\theta,
+ \qquad
+ \int_{\Omega_m}|u|^2\,dA
+ =\frac16\int_0^{2\pi}r_m^2d\theta.
+\]
+
+Using the tangent-half-angle identity
+
+\[
+ \int_0^{2\pi}\frac{\sin^2\phi}{(3+\cos\phi)^2}d\phi
+ =2\pi\left(\frac3{2\sqrt2}-1\right),
+\]
+
+the Rayleigh quotient is
+
+\[
+ R_m=\frac3{\sqrt2}
+ \left[2+\frac{m^2}{2}
+   \left(\frac3{2\sqrt2}-1\right)\right].
+\]
+
+Hence \(\lambda_1(\Omega_m)\le R_m\). For \(m=3\),
+
+\[
+ R_3=\frac{81}{8}-\frac{15}{2\sqrt2}
+ < \frac{1273}{264}=4.82196969\ldots,
+\]
+
+where the rational strict bound uses
+\(\sqrt2<99/70\), since \(99^2>2\cdot70^2\).
+The numerical estimate for the *true* continuum eigenvalue is thereby
+rigorously bounded above, independently of any mesh. A local SymPy
+integral/rational arithmetic check passed in
+\`scripts/gielis_rayleigh_spectral_bound.py\`.
+
+This improves E07's enclosing-disk estimate for m=3.
+The Faber–Krahn lower bound remains
+\(\lambda_1(\Omega_3)>j_{0,1}^2/\sqrt2\).
+No 41/61 finite-difference convergence certificate is implied.
+
+## E16 — independent first-hit and conditional optical sampling
+
+For the *new* log-Gielis spiral, smooth positions are
+\(X(\theta)=r(\theta)(\cos\theta,\sin\theta)\). A ray with
+origin \(p\) and unit direction \(d\) meets the smooth curve only
+if
+
+\[
+ F(\theta)=
+  \operatorname{cross}\bigl(X(\theta)-p,d\bigr)=0,
+ \quad t=(X(\theta)-p)\cdot d>0.
+\]
+
+\`scripts/gielis_reflection_parity.py\` independently brackets and
+solves those roots, selecting the first forward intersection; it
+compares the event with the segment-based ray/polyline solver.
+A separate local audit of **80 matched rays** (m=3, epsilon=.12)
+found maximum positional discrepancy
+
+- 384 segments: \(2.229313372\times10^{-4}\) metres;
+- 1536 segments: \(1.249194747\times10^{-5}\) metres,
+
+a roughly **17.85×** improvement upon fourfold refinement.
+This is *evidence for convergence on the chosen new scene only*;
+a generic root bracketer can miss tangential double roots, and
+the initial HTML SDF scene was not available to re-run. G13/G14
+original-apparatus parity remains OPEN.
+
+For source uncertainties, \`scripts/gielis_optical_statistics.py\`
+draws matched pseudo-random directions uniformly on the circle.
+Under the explicitly stated **IID uniform-angle source model**,
+for any sample mean with \(X_i\in[a,b]\), Hoeffding implies
+
+\[
+ \Pr\{|\bar X-\mathbb E X|\ge t\}
+ \le2\exp[-2n t^2/(b-a)^2].
+\]
+
+A ray reflects at most B times and its first-hit position stays within
+radius 1.70 m, so total absolute wall angular impulse per unit
+ray momentum is in [0,3.40 B] metres. For K designs and two
+observables each (hit indicator, absolute wall impulse), setting
+\(\alpha_{\mathrm{each}}=\alpha/(2K)\) yields simultaneous
+coverage at least \(1-\alpha\) by the union bound.
+
+This closes the *conditional random-angle statistical theorem*;
+it does NOT provide a confidence interval for the earlier
+deterministic 720-ray grid, nor infer independence of physical
+emission events or empirical source calibration. G15/G16 physical
+mechanism/measurement and original-scene controls remain OPEN.
+
+### New exact acceptance ledger (E12–E16)
+
+- E12: actual Bishop quartic polynomial proof source; Agda check plus
+  genuine Bishop trig/π/sqrt suppliers **OPEN**.
+- E13: \(\mathbb Q(\zeta_{36})\) all-pairs/7-mode exact computational
+  result **LOCALLY VERIFIED**, native cyclotomic owner **OPEN**.
+- E14: all-continuum-eigenvalues sector geometry relative O(m/N)
+  mathematical theorem and exact rational certificate **LOCALLY
+  VERIFIED**; Cartesian FD error **OPEN**.
+- E15: explicit Rayleigh–Ritz first eigenvalue rational bound
+  **MATHEMATICALLY CLOSED**, native Bishop/Hilbert formalisation OPEN.
+- E16: new-scene first-hit evidence and conditional uniform-ray
+  simultaneous intervals **MODELED**, old HTML SDF and measured
+  torque/calibration/replication **OPEN**.
