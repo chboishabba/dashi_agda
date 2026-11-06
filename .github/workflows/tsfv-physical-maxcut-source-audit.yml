@@ -10,12 +10,19 @@ on:
       - 'DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda'
       - 'DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda'
       - 'DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda'
+      - 'DASHI/Physics/Foundations/TSVFOriginal*.agda'
+      - 'DASHI/Physics/Foundations/TSFVKKFourMetricVerticalProbeFullReconstructionExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'DASHI/Unified/TSFVUnifiedRegression.agda'
       - 'DASHI/Unified/TSFVParentChildRegression.agda'
       - 'scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py'
       - 'scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py'
       - 'scripts/check_tsfv_unification_48_phase_cut_20261106.py'
+      - 'scripts/check_tsfv_40_physical_producer_inventory_20261106.py'
+      - 'scripts/check_tsfv_original_complex_diagonal_kk_tomography_20261106.py'
+      - 'Docs/roadmaps/TSFVFourPhysicalCutsExactProducerLemmas20261106.md'
+      - 'Docs/roadmaps/TSFVUnificationTODO20261106.md'
+      - 'Docs/physics/TSFVUnificationMaxCutImplementationReceipt20261106.md'
       - 'scripts/run_tsfv_unification_maxcut_20261106.sh'
       - 'scripts/check_tsfv_lattice_impulse_dimension_exact_20261106.py'
       - 'Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md'
@@ -28,6 +35,8 @@ on:
       - 'DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda'
       - 'DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda'
       - 'DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda'
+      - 'DASHI/Physics/Foundations/TSVFOriginal*.agda'
+      - 'DASHI/Physics/Foundations/TSFVKKFourMetricVerticalProbeFullReconstructionExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - '.github/workflows/tsfv-physical-maxcut-source-audit.yml'
   workflow_dispatch:
@@ -58,6 +67,8 @@ jobs:
         run: |
           python scripts/check_emergent31_complete_186_status_20261104.py
           python scripts/check_tsfv_unification_48_phase_cut_20261106.py
+          python scripts/check_tsfv_40_physical_producer_inventory_20261106.py
+          python scripts/check_tsfv_original_complex_diagonal_kk_tomography_20261106.py
 
   agda-selected-golden:
     name: Agda29 parallel_checker selected-source + transitive roots
