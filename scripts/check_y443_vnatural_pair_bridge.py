@@ -26,6 +26,7 @@ INDEXED = ROOT / "DASHI/Moonshine/Y443Relator72IndexedBidiExact.agda"
 NOGO = ROOT / "DASHI/Moonshine/Y443Nonary72EquivarianceNoGoExact.agda"
 JMD_SOURCE = ROOT / "DASHI/Moonshine/Y443JMDSourceWordInstantiationExact.agda"
 JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agda"
+JMD_POWERS = ROOT / "DASHI/Moonshine/Y443JMDPowerFiveSixAlgebraExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -113,7 +114,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -162,7 +163,11 @@ def assert_source_scope() -> None:
         for symbol in symbols:
             if symbol not in src:
                 raise AssertionError(f"missing JMD source theorem {symbol}")
-    print("PASS source: real JMD u/v words and concrete pair-power compiler included")
+    power_src = JMD_POWERS.read_text()
+    for symbol in ("commutesWithPowers", "powCommutingProduct", "fifthProductIsFirst", "sixthProductIsSecond", "deriveConcretePowers"):
+        if symbol not in power_src:
+            raise AssertionError(f"missing JMD power proof {symbol}")
+    print("PASS source: exact JMD words, algebraic 5/6 powers, 72+8 and no-go included")
 
 
 def check_agda() -> None:
