@@ -12,6 +12,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
+  DASHI/Biology/Physical/BiologicalMorphologyPartitionDepth4Exact.agda
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
@@ -31,12 +32,16 @@ grep -q 'compiledCodeExactlyCapturesFutureLanguage' \
   DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda
 grep -q 'allStochasticHorizonsRemainCoarse' \
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
+grep -q 'allControlledStochasticHistoriesRemainCoarse' \
+  DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
 grep -q 'initialAllTracesPreserveBiologicalProjection' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
 grep -q 'coupledSignalIdempotentAt' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
 grep -q 'morphologyFutureEquivalenceExactlyMinimalCode' \
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
+grep -q 'morphologyCompilerStopsAtFour' \
+  DASHI/Biology/Physical/BiologicalMorphologyPartitionDepth4Exact.agda
 grep -q 'completePlaquetteCount' \
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
 grep -q 'canonicalAllNeighboursFutureSafe' \
