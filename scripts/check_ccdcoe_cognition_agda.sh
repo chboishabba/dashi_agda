@@ -10,6 +10,9 @@ modules=(
   DASHI/Cognition/CCDCOEPersonalHolonomyBoundaryExact.agda
   DASHI/Cognition/CCDCOECognitiveMultiplexInvariantRegression.agda
   DASHI/Cognition/CCDCOEMaxCutRegressionExact.agda
+  DASHI/Cognition/CCDCOEP3CausalTrialecticInteractionExact.agda
+  DASHI/Cognition/CCDCOEP3SourcePowerEvidenceWeldExact.agda
+  DASHI/Cognition/CCDCOEP3CausalTrialecticRegressionExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
@@ -20,6 +23,7 @@ for file in "${modules[@]}"; do
 done
 
 python3 scripts/check_ccdcoe_cognitive_multiplex.py
+python3 scripts/check_ccdcoe_p3_causal_trialectic.py
 
 # A real Agda executable is mandatory. Never substitute source scanning or
 # Python enumeration for kernel verification.
