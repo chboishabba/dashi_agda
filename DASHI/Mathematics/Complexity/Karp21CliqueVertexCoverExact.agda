@@ -15,6 +15,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥; ⊥-elim)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
 
