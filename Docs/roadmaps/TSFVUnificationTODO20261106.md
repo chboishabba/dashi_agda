@@ -2,6 +2,8 @@
 
 **Four-cut source-producing proof queue:** [40 named exact OBS/HIL/KK/BIDI producer lemmas](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
 
+**New HIL06/HIL07 selected native published RP compiler:** `TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda` reuses the repository's Osterwalder–Seiler/Menotti–Pelissetto `BalabanClayOSWilsonReflectionPositivityExact.wilsonPositivityAtAnySeparationParity`; for every *admissible gauge-invariant positive-time finite word* it transports the published nonnegative reflected expectation through an explicit **same-original-Wilson-source equality**, then through `TSVFOriginalR445ReflectedAllWordGramExact.originalFineOSPositiveTransfersToNativeR445` onto the actual R445 coarse positive word form. It does NOT prove the physically missing source equality, fine reflection/block geometry, continuum OS or observer Hilbert identification. This is a new non-safe physical regression proof, checked through `parallel_checker` as a candidate; no Agda/kernel receipt yet.
+
 ## 6 November 2026 — current exact max-cut / ownership and evidence
 
 **40 named** source-producing OBS/HIL/KK/BIDI obligations (10+12+10+8) are now fully inventoried and crosswalked to the existing 48 phased deliverables and 186 canonical source IDs. Audit: `scripts/check_tsfv_40_physical_producer_inventory_20261106.py`. **This is an exact inventory, not a proof that the 40 physical statements have been fulfilled.**
