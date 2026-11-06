@@ -1,5 +1,49 @@
 # Biology, phenotype and future-observation max-cut — 6 November 2026
 
+## Cross-layer reuse: Hamming, atomic and molecular owners (6 November 2026)
+
+The original P0–P5 map omitted important already-written donors.  The
+Golden owner `BiologicalAtomicMolecularHammingReuseExact` is now imported
+by `EverythingBiologicalHistoryFutureRound23` and carries an unpromoted
+`Chemistry.TransitionKernel.Species` and `Transition` together with the
+original `FiniteDevelopmentalFrame`, evidence status, source, and the
+existing two-bit code-space Hamming observer.
+
+- `DASHI.Crypto.GrayPathTransitionOptimalExact`: canonical finite
+  Hamming/Gray path cost. This measures a representation coordinate,
+  **not** RNA edit distance, biochemical free energy or phenotype distance.
+- `tools/dna_production_codec.py`: existing equal-length sequence Hamming
+  implementation; the proper donor for the 9-mer measured dmsC graph.
+  Reuse it rather than introducing a rival nucleotide metric.
+- `DASHI.Chemistry.TransitionKernel` and
+  `DASHI.Chemistry.ExistingContentBridge`: molecular species,
+  stoichiometry, rate-law types, compartments and authority boundaries
+  already map to quantitative chemistry and biology promotion obligations.
+- `DASHI.Biology.Molecular.MolecularConstrainedMinimizerBridge`: a
+  constrained geometry/chemistry witness donor, not an asserted
+  genotype-to-phenotype transfer theorem.
+- `DASHI.Physics.Chemistry.AtomicForceSectorSeparation`: atomic
+  nuclear/electron sector separation; useful for specifying microscopic
+  carriers but not a substitute for source-specific molecular kinetics.
+
+The new bridge proves that advancing an intervention retains the candidate
+species/evidence and representation-distance record and advances the
+original biological time. These equalities are *bookkeeping theorems*; they
+do not claim molecular state or genomic sequence remains physically fixed.
+
+**Next exact acceptance cut**: a native nine-symbol nucleotide metric
+with a proven equivalence to the Python codec's equal-length Hamming
+function; chemically admissible transition/source-span witnesses attached
+to a selected biological frame; a physical coarse-graining map from
+reaction/transport state to the measured phenotype observer; and an
+intervention-commuting theorem for that *selected physical* transition.
+The selected kinetic parameters, uncertainty and experimental longitudinal
+response must be independently source-validated. Neither this bridge nor
+the dmsC static assay discharges that requirement.
+
+**Verification:** source-written, not Agda/parallel_checker certified at
+this head. No quantitative, authority, or empirical promotion occurred.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
