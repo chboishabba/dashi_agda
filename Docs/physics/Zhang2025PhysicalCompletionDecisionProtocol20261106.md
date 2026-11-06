@@ -134,3 +134,83 @@ T_{\mu\nu}^{\rm full}\longrightarrow g_{\mu\nu}\longrightarrow
 8. In parallel, maintain an engineering-performance ledger so a reproducible conventional actuator can become an immediately useful result.
 
 **Acceptance:** no physical-promotion flag may be true unless its exact sample/run identity, measured observable, uncertainty, ordinary-model closure, independent evidence and source-to-prediction mapping are supplied. Kernel checking validates implication structure, not truth of empirical premises.
+
+
+## 2026-11-06 exact computational max-cut update
+
+### New public physics donor, independently checked
+
+The Rust crate [gravitics::electrogravity v0.5.11](https://docs.rs/gravitics/latest/gravitics/electrogravity/) already computes classical dielectric, charge, torsion and magnetic mechanisms for the three Zhang rigs. The selected analytical formulas are well-known ordinary electromechanics; **no code has been copied**. The DASHI regression independently reproduces its declared dielectric example: a 2cm × 2cm × 0.15mm sample, eps_r=2.2 and an assumed gradient of E-squared of 2e16 V²/m³ produces approximately **6.375 mN** in the dilute polarization model. Those field gradients are ASSUMED, not measured by Zhang. Equal-volume polarization acceleration for polyethylene versus tungsten has approximately 20.3-fold density contrast, unlike universal gravitational free fall.
+
+### Same-apparatus finite-difference consumers
+
+**Translation consumer:** [check_zhang2025_source_stress_dynamics.py](../../scripts/check_zhang2025_source_stress_dynamics.py) requires two matched calibrated ON/OFF position records plus local E/B vectors, spatial field-gradient *measurements*, mass, charge, polarizability, susceptibility, finite source geometry, spring/damping and all residual background bounds. It evaluates
+
+\[
+F_{\rm inferred}=m\ddot x+\gamma\dot x+k(x-x_0),\quad
+F_{\rm ordinary}=qE_x+\tfrac12\alpha\partial_x(E^2)
++\frac{\chi V}{2\mu_0}\partial_x(B^2)+F_{\rm nuisances}.
+\]
+
+Then it forms a signed paired residual from ON minus OFF. It never infers a gradient from the 18mm gap alone, a force from a video without inertial calibration, or a confidence interval by treating adjacent frames as independent experiments. Its linear/quasistatic material applicability must be declared, and the output refuses to assert source/Einstein/metric completion.
+
+**Rotation consumer:** [check_zhang2025_torsion_consumer.py](../../scripts/check_zhang2025_torsion_consumer.py) separately takes a calibrated theta(t) trace, sample rotational inertia, suspension torsion/damping, measured planar electric and magnetic axes, field-squared bounds and eight bounded torque-background classes. It evaluates
+
+\[
+\tau_{\rm inferred}=I\ddot\theta+\gamma_\theta\dot\theta
++\kappa(\theta-\theta_0),
+\]
+\[
+\tau_{\rm ordinary}=\tfrac12\Delta\alpha E^2\sin(2(\phi_E-\theta))
++\frac{V\Delta\chi}{2\mu_0}B^2\sin(2(\phi_B-\theta))
++\tau_{\rm nuisances}.
+\]
+
+Sine intervals include interior critical values. Measured planar field orientation must match the observed field vectors. A rotating sphere, even with an unexplained residual, is NOT a force, free-fall or metric/TT wave measurement.
+
+**Vacuum field-stress cross-check:** both scripts expose
+
+\[
+u_{EM}=\tfrac12(\epsilon_0 E^2+B^2/\mu_0),\quad
+\mathbf S=\mu_0^{-1}(\mathbf E\times\mathbf B),
+\]
+\[
+\sigma_{ij}=\epsilon_0(E_iE_j-\tfrac12\delta_{ij}E^2)
++\mu_0^{-1}(B_iB_j-\tfrac12\delta_{ij}B^2).
+\]
+
+They test Maxwell traction symmetry, vacuum trace and the causal flux bound. **This is not the full conserved Maxwell–matter–elastic stress tensor or the theorem-facing W4 stress**. The same-apparatus Agda consumer now directly reuses the existing AntigravityLaboratoryStressEnergyCompilationExact input/receipt and requires its apparatus to match the ORIGINAL provenanced experimental cut.
+
+### Safe curl-gauge theorem
+
+The new [Zhang2025EMGravityCurlGaugeExact.agda](../../DASHI/Physics/ExoticGravity/Zhang2025EMGravityCurlGaugeExact.agda) formalizes an abstract curl/gradient complex. From additivity and curl(grad phi)=0 it proves curl(G+grad phi)=curl G, with an exact finite noninjectivity fixture. Therefore a proposed curl law matching an electric induction curl cannot by itself uniquely determine a gravitational vector field. The actual continuous spacetime complex and boundary values remain physical source obligations; this mathematical theorem does NOT prove or refute the existence of a gravity effect.
+
+### Actual byte-integrity gate
+
+[check_zhang2025_evidence_packets.py](../../scripts/check_zhang2025_evidence_packets.py) now recomputes SHA-256 from **actual local experimental and calibration files** and checks exact ON/OFF pairing, lab, target apparatus, calibration, instrument and run identities. It rejects missing/empty/tampered files, duplicate raw-data hashes, duplicate run IDs, and file paths outside the chosen evidence root. It emits a deterministic, content-addressed SHA-256 receipt to attach to the existing ITIR/PNF evidence spine. The hashes prove BYTES match the supplied manifest; they do NOT prove authorship, the instrument was genuine, calibration was correct, claimed laboratory independence, a force, or gravity. No connected physical source files currently inhabit that real-data gate.
+
+### Runnable synthetic models / regression
+
+These are executable synthetic fixtures **not real experimental evidence**:
+
+    python3 scripts/check_zhang2025_source_stress_dynamics.py --input tests/fixtures/zhang2025_synthetic_translation_timed.json
+    python3 scripts/check_zhang2025_torsion_consumer.py --input tests/fixtures/zhang2025_synthetic_torsion_timed.json
+    python3 -m unittest discover -s tests -p 'test_zhang2025_*py' -v
+    bash scripts/check_zhang2025_em_gravity_formal.sh
+
+The Agda checker uses the repository parallel-checker wrapper: source/curl/quantitative safe checks are separated from the legacy-dependent integration root. **Exact-head kernel acceptance and GitHub CI are not claimed without an actual returned receipt.**
+
+### Exact remaining maximal cut: no interchangeable payments
+
+| Primitive | New software result | Unpaid real-world or analytic input |
+|---|---|---|
+| Original Zhang claim, material regime, source | original patent, separate Zhang/Xu toroid, Pais; safe indexed identity | selected source's authenticated calibrated E/B and position/time series |
+| Same apparatus classical stress and motion | Maxwell vacuum tensor, translated/torsional 1D bounded comparators | nonlinear hysteretic source current and full material/elastic tensor; energy-momentum boundary flux and field map |
+| Error budget and residual | rigorous interval propagation, no missing→zero, signed ON/OFF contrast and conditional independent-block CI | quantitative nuisance closure, actual independent randomized paired run data |
+| Original evidence and replication | actual SHA-256 byte and calibration file verifier; canonical manifest receipt | original files and independent externally authenticated second facility |
+| Gravity-specific distinction | external-test-mass/free-fall/metric source-indexed owners and curl nonidentifiability proof | independent gravitational readouts, common solved metric and predicted geometry |
+| Technology application | force/torque output definitions and performance measurement protocol | real input power, heat, lifetime, energy/impulse ledger and useful device qualification |
+| Terminal 5D/KK/YM/OS | exact pre-existing conditional donors reused | actual selected physical action, continuum/source/stress/metric and independent prediction |
+| Formal acceptance | source, tests and workflow committed | exact current-head Agda --safe and legacy-check receipts |
+
+**Scientific boundary:** no mathematical compiler can supply measurements that were never reported. The computational cut now exposes the shortest experimental path, not an undocumented assertion that the full physical apparatus has been validated.
