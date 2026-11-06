@@ -1,4 +1,4 @@
-name: Bishop K04d K05 native proof receipts
+name: Bishop K04d K05 Agda-2.9 golden proof receipts
 
 on:
   push:
@@ -8,6 +8,9 @@ on:
       - 'DASHI/Analysis/Bishop*.agda'
       - 'DASHI/Foundations/BishopFiniteEvenOddCauchyReindexExact.agda'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
+      - 'DASHI/EverythingTOESymmetryResolved369.agda'
+      - 'DASHI/Unifier.agda'
+      - 'DASHI/Unified/Everything.agda'
       - '.github/workflows/bishop-k04d-k05-native-proof.yml'
   workflow_dispatch:
 
@@ -19,28 +22,47 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  agda-golden-source:
+  golden-kernel:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 125
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - name: Fetch pinned Murray-Csimma Bishop backend
-        run: git submodule update --init vendor/bishop
+      - name: Original pinned Bishop, DCHoTT and cubical submodules
+        run: git submodule update --init vendor/bishop DCHoTT-Agda cubical
 
-      - name: Install selected Agda and stdlib
-        uses: wenkokke/setup-agda@v2
-        with:
-          agda-version: '2.6.4.3'
-          agda-stdlib-version: '2.1'
+      - name: Install Nix (the repository pins the Agda-2.9 executable)
+        uses: nix-community/install-nix-action@v31
 
-      - name: Kernel-check K05 source-native analytic chain
+      - name: Resolve repository-pinned Agda-2.9 executable
+        shell: bash
+        run: |
+          set -euo pipefail
+          AGDA_STORE="$(nix build --no-link --print-out-paths '.#agda29-parallel')"
+          echo "AGDA_BIN=${AGDA_STORE}/bin/agda" >> "$GITHUB_ENV"
+          "${AGDA_STORE}/bin/agda" --version
+
+      - name: Resolve the repository-selected experimental stdlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth=1 --branch experimental https://github.com/agda/agda-stdlib.git "$GITHUB_WORKSPACE/.agda-stdlib"
+          git -C "$GITHUB_WORKSPACE/.agda-stdlib" rev-parse HEAD | tee agda-stdlib-sha.txt
+
+      - name: Kernel check all focused K05 and K04d new owners
         shell: bash
         run: |
           set -uo pipefail
           status=0
+          source_stdlib="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          flags=(
+            --no-libraries --no-default-libraries --safe
+            -i . -i vendor/bishop -i DCHoTT-Agda -i cubical
+            -i "$source_stdlib"
+            -WnoUnsupportedIndexedMatch
+          )
           files=(
             DASHI/Analysis/BishopOneStepLagConvergenceExact.agda
             DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda
@@ -50,25 +72,58 @@ jobs:
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
             DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
+            DASHI/Analysis/BishopFinitePowerSeriesSequentialContinuityExact.agda
+            DASHI/Analysis/BishopUniformLimitSequentialContinuityExact.agda
+            DASHI/Analysis/BishopDirichletUniformLimitContinuityCompilerExact.agda
             DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda
           )
-          : > bishop-k05-kernel.log
+          : > bishop-focused-kernel.log
           for file in "${files[@]}"; do
-            echo "=== agda --safe ${file} ===" | tee -a bishop-k05-kernel.log
-            timeout 300s agda --safe -i . -i vendor/bishop -l standard-library "${file}" 2>&1 | tee -a bishop-k05-kernel.log
+            echo "=== golden agda --safe ${file} ===" | tee -a bishop-focused-kernel.log
+            timeout 600s "$AGDA_BIN" "${flags[@]}" "$file" 2>&1 | tee -a bishop-focused-kernel.log
             rc=${PIPESTATUS[0]}
             if [[ ${rc} -ne 0 ]]; then
-              echo "FAIL rc=${rc} ${file}" | tee -a bishop-k05-kernel.log
+              echo "FAIL rc=${rc} ${file}" | tee -a bishop-focused-kernel.log
               status=1
             else
-              echo "PASS ${file}" | tee -a bishop-k05-kernel.log
+              echo "PASS ${file}" | tee -a bishop-focused-kernel.log
             fi
           done
           exit "${status}"
 
-      - name: Retain kernel acceptance or counterexample diagnostics
+      - name: Check three canonical TOE roots against exact branch
+        if: always()
+        shell: bash
+        run: |
+          set -uo pipefail
+          status=0
+          source_stdlib="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          flags=(
+            --no-libraries --no-default-libraries
+            -i . -i vendor/bishop -i DCHoTT-Agda -i cubical
+            -i "$source_stdlib"
+            -WnoUnsupportedIndexedMatch
+          )
+          : > bishop-toe-kernel.log
+          for file in             DASHI/EverythingTOESymmetryResolved369.agda             DASHI/Unifier.agda             DASHI/Unified/Everything.agda; do
+            echo "=== golden TOE ${file} ===" | tee -a bishop-toe-kernel.log
+            timeout 600s "$AGDA_BIN" "${flags[@]}" "$file" 2>&1 | tee -a bishop-toe-kernel.log
+            rc=${PIPESTATUS[0]}
+            if [[ ${rc} -ne 0 ]]; then
+              echo "FAIL rc=${rc} ${file}" | tee -a bishop-toe-kernel.log
+              status=1
+            else
+              echo "PASS ${file}" | tee -a bishop-toe-kernel.log
+            fi
+          done
+          exit "${status}"
+
+      - name: Preserve exact-head proof receipts and counterexamples
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: bishop-k05-exact-head-agda-kernel-receipt
-          path: bishop-k05-kernel.log
+          name: bishop-k04d-k05-agda29-kernel-receipts
+          path: |
+            bishop-focused-kernel.log
+            bishop-toe-kernel.log
+            agda-stdlib-sha.txt
