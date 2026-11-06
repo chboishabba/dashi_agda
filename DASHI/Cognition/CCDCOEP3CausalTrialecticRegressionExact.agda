@@ -67,6 +67,13 @@ coherenceDoesNotFixEpistemicRevision :
 coherenceDoesNotFixEpistemicRevision =
   P3.narrativeCoherenceDoesNotDetermineRevisability
 
+revisionMeasurementSeparatesCoherenceCollision :
+  Discriminator.BundleSeparates
+    P3.revisabilityDistinguishingProbe
+    P3.coherentAndContestable P3.coherentButSelfSealed
+revisionMeasurementSeparatesCoherenceCollision =
+  P3.revisionProbeSeparates
+
 denialSurfaceCannotIdentifyMeaning :
   NF.FactorsThrough Climate.projectDenialSurface
     Climate.denialSocialReading → ⊥
