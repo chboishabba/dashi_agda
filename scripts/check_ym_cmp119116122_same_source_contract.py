@@ -51,6 +51,11 @@ OWNERS = {
     "CMP122_reflection_crossing": ("BalabanCMP122ROperationReflectionSupportCutExact.agda",
         ("rOperationCrossingEquation1100",
          "cmp122ROperationCrossingKernelRPLevel = conditional")),
+    "ORIGINAL_NATIVE_BLOCKED_JET": ("YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda",
+        ("originalVariableN3IsNativeR445FineMeasure",
+         "originalN3CumulantIsNativeBlockedFineCovariance",
+         "originalN3LiteralMixedLogJetIsNativeBlockedCovariance",
+         "originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance")),
     "ORIGINAL_WILSON_FINITE_JET": ("YMClayOriginalWilsonFiniteTwoSourceJetExact.agda",
         ("originalWilsonDensityIsSelectedWilson",
          "originalWilsonPartitionIsSelectedProductHaar",
@@ -112,12 +117,21 @@ def main():
             "import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact",
             "original finite jet regression root")
     require(wf,"$AGDA " + jet,"original Wilson finite jet Agda CI")
+    blocked_jet = P + "YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda"
+    require(text(ROOT_IMPORT),
+            "import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact",
+            "native R445-R320 blocked jet regression root")
+    require(wf,"$AGDA " + blocked_jet,"original native blocked source Agda CI")
+    require(wf,"- '" + blocked_jet + "'","original blocked source CI trigger")
+
     require(wf,"- '" + jet + "'","original Wilson finite jet CI trigger")
     test = "scripts/check_ym_original_wilson_two_source_jet_reference.py"
     require(wf,"python3 " + test,"original finite jet exact reference CI")
     require(wf,"- '" + test + "'","original finite jet reference trigger")
     require(text(test), "changed_measure_negative_control",
             "two-marked BIDI negative control")
+    require(text(test), "bare_coarse_replacement_negative_control",
+            "nonbare pushforward R445/R320 negative control")
     require(wf,"- '" + WELD + "'","Agda CI trigger")
     document = text(DOC)
     for item in ("Y.01.","Y.02.","Y.03.","Y.04.","BalabanCMP116119NormalizedExpectationDerivativeRound281Exact",
