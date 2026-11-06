@@ -1,3 +1,15 @@
+# 6 November 2026 — canonical active execution queue (replaces repeated six-gate summary)
+
+**ACTIVE PHASES, DELIVERABLES, ACCEPTANCE AND EXACT LEMMAS:** [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). This file's historical milestones remain preserved below. Do not mistake original source-written owners for kernel acceptance or proof of the full mass gap.
+
+**P0 actual execution:** new `YMClayNativeOriginalSortMembershipCorrectExact.agda` contains source-written (1) membership-indexed `bubbleDesiredHeadWhenMember`, (2) inductive `AllSelectable` and (3) `originalSortToTargetCorrect`, on the actual original sorter. The next unproved original-target producers are C3 selectability and pair/spectator selectability+length. Exact native Python reference has passed 5,914 exhaustive distinct small permutations, all 1,024 original C3 and blocking steps, 46,592/41,792 swaps, both negative invalid-target controls; **not Agda**. `scripts/check_ym_sort_selectability_reference.py` recorded. Agda not installed in current local runtime; this source is **UNTYPECHECKED**.
+
+**P1 finite source:** reuse original positive/signed Wilson plaquette, finite real Fubini, weighted Haar fibre laws F17–F22. Native SU(N) 6-plane C3 source composition exists. Still need original `Variable.periodicSUNGibbsDensity` same-decoder equation and separate selected CMP119 E/R/B/V action; true compact measurable Haar remains open.
+
+**P2 physical:** R445 physical scaling, reflection compatibility, uniform estimates/continuum, R320 actual CMP116 differentiated mixed-J rooted-shell decay, R333 selected RP/OS same H positive gap, and external Clay all-compact-simple-group solution are **OPEN MATHEMATICS**. Original 219 field names remain bare Set, not 219 proved witnesses. No six-gate status was falsely decremented.
+
+---
+
 ## 2026-11-05 — R443 original weighted Wilson–Gibbs spatial C3 and SEM.P02 nonvacuous group scope
 
 - **R443.F09 SOURCE / KERNEL PENDING:** `YMClayOriginalWilsonC3WeightedHaarTransferExact.agda` defines the density with the **same original** `Variable.periodicSUNGibbsDensity`, the canonical 1024-positive-bond decoder and the original one-link product Haar. Its conditional source theorem derives **weighted** spatial C3 numerator and normalized expectation invariance from the ONE closed native C3 label equality **and** literal physical action density C3 covariance. It additionally constructs selected `Constructed.actualPeriodicProductMeasure` and proves the actual original physical cylinder numerator is the original 1024-vector numerator, and physical partition/normalized expectation are the same (source-written, using original `mulOneʳ` and `Congruence.productIntegralCongruent`). Thus no second Gibbs/partition is introduced. **Still OPEN:** kernel-accept the original C3 equality, prove the selected physical CMP119 E/R/B/V action C3 equality, genuine continuous SU(N) Borel Haar on the correct integrable tests, real scalar/trace instantiation, uniform RG/CMP116/OS/Clay.
