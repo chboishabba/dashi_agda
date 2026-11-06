@@ -97,6 +97,7 @@ fi
 if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   # These graph integration roots are intentionally not declared
   # --safe. Kernel typechecking is still required and must fail-closed.
+  check_agda DASHI/Mathematics/Complexity/ConcreteTapeBoundaryGuardFocusedRootExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21RawGraphValidatorObservationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CanonicalRawValidatorCompleteExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21OriginalGammaGraphWordFieldsReplayExact.agda
