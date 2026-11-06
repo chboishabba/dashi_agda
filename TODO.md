@@ -1,3 +1,13 @@
+## 2026-11-06 — Y.02 finite analytic source max-cut correction
+
+- [x] Reuse the existing bounded finite compact-SU(N) source holomorphy and mixed-log/covariance proof in `Docs/physics/YMClayR320BoundedMarkedSourceLemma20261106.md`; do not leave a new "formal jet vs finite analytic derivative" mathematical research gate.
+- [x] Source-write `YMClayOriginalWilsonAffineMarkedPartitionExact.agda`: actual original Wilson product-Haar two-source affine integral = its exact finite numerator polynomial; normalize with existing real division algebra = same original moment polynomial. Source state is fixed by original Wilson measure, not a second J oracle.
+- [ ] Formal kernel acceptance/native constructive differentiation if a zero-axiom Bishop endpoint is demanded; this is distinct from proving the already-standard finite analytic identity.
+- [ ] Y.01 physical source: original entire Wilson/E/R/B/V/ghost/background ↔ CMP119/122 RG density with genuine group/Borel-Haar and same normalized expectations.
+- [ ] Y.02 physical CMP116: original renormalized two marked insertions, source supports/roots, common-domain and literal localized response on the same density. No independent generic derivative/covariance theorem needed.
+- [ ] Y.03 physical uniform spatial rate/defect bounds, reflection-compatible RG crossing and common cutoff/volume/OS limit.
+- [ ] Y.04 one noncollapsed OS Hamiltonian theory, gap in physical units, nontriviality and intended compact-simple group scope.
+
 ## YM max-cut 2026-11-06 — Y.FIN finite original Wilson source jet
 
 - [x] Source-write original changing-cutoff SU(N) finite Wilson two-source jet `YMClayOriginalWilsonFiniteTwoSourceJetExact` from the existing actual product-Haar/Gibbs measure; reuse normalized-cumulant and finite numerator-algebra owners.
