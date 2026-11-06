@@ -136,3 +136,44 @@ record KernelPromotion (TrustedReceipt : Set) : Set where
 -- The compilation witness is intentionally absent at the historical
 -- failed head. This is a schema to consume future receipts, not a
 -- constructed successful compilation.
+
+------------------------------------------------------------------------
+-- FOLLOW-UP LOCAL AGDA 2.9.0 OBSERVATIONS (USER-SUPPLIED).
+--
+-- This is the second local diagnostic at historical commit
+-- 972219b39894d28fed950f95fe0e2a2f050c68c6. Earlier compiler
+-- successes were independently reported for CookLevinCircuitGCT,
+-- GammaBinaryRoundTrip, FinDecoderIndexBidi, BinaryFinMaterialization
+-- and this compiler-repair governance module.
+--
+-- Observed constructor coordinates: 14 listed lines in the Cook
+-- indexed reject-guard module and 2 in DirectSATLowerBound; literal
+-- constructor TOKEN occurrences may exceed line count when two
+-- occurrences share a line. Preserve this observation faithfully.
+------------------------------------------------------------------------
+
+data FollowupRepairIssue : Set where
+  residualCookSATConstructors : FollowupRepairIssue
+  gammaSignedListMissingSym : FollowupRepairIssue
+  cliqueVertexCoverMissingTrans : FollowupRepairIssue
+  cookPrefixParserNonStructuralTermination : FollowupRepairIssue
+  cookPrefixRoundTripRewriteMismatch : FollowupRepairIssue
+
+reportedFollowupKinds : List FollowupRepairIssue
+reportedFollowupKinds =
+  residualCookSATConstructors ∷
+  gammaSignedListMissingSym ∷
+  cliqueVertexCoverMissingTrans ∷
+  cookPrefixParserNonStructuralTermination ∷
+  cookPrefixRoundTripRewriteMismatch ∷ []
+
+followupKindCountExactlyFive :
+  length reportedFollowupKinds ≡ suc (suc (suc (suc (suc zero))))
+followupKindCountExactlyFive = refl
+
+-- A repaired source is not a new compiler observation. The caller
+-- must supply a trusted artifact for the NEW head after typechecking;
+-- the historical local pass status is never carried over implicitly.
+followupSourceRepairDoesNotPromote :
+  canPromoteWithoutReceipt sourcePatched ≡ false
+followupSourceRepairDoesNotPromote = refl
