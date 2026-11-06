@@ -190,3 +190,5 @@ import DASHI.Mathematics.Complexity.Karp21ConwayPrimorialGammaAdapterExact
 import DASHI.Foundations.ConwayC3SameObjectCodecExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21N21SameWordCountedAcceptanceExact
