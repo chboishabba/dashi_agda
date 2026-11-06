@@ -44,6 +44,7 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOriginalForwardCyclicCrossGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardCyclicActionQuotientExact.agda
   DASHI/Physics/Foundations/TSVFOriginalComplexFiniteForwardNormalizedDiagonalExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalComplexFiniteClockPropagationNonpromotionExact.agda
   DASHI/Physics/Foundations/TSFVKKFourMetricVerticalProbeFullReconstructionExact.agda
   DASHI/Physics/Foundations/TSVFOriginalQuantumSurfaceSpatialNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOriginalOSPositiveWeightNotReflectionPositiveExact.agda
