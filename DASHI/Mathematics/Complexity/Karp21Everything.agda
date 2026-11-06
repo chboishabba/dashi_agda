@@ -205,3 +205,5 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryEqualitySameValueExact
 import DASHI.Mathematics.Complexity.Karp21BinaryWordEqualityPrimitiveExact
 
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordNumericalWeldExact
