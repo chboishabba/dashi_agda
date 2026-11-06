@@ -448,3 +448,28 @@ multi-token graph parser; encoded endpoint bounds; signed binary
 addition and threshold comparison; certificate loop; input/output
 tape motion; E20 and original Cook–Levin. Neither these source
 proofs nor the finite regressions are Agda-kernel certificates.
+
+## 2026-11-07 — all-word native gamma numeric-observation equality
+
+`Karp21GammaBinaryNativeAllWordNumericalWeldExact` is the original
+gamma decoder's full input-domain source bridge, not only an
+encoder-image or finite-regression statement.
+
+- `readPayloadNativeNumericalSameAllWords` proves that reading
+  k low bits into a native binary payload and interpreting that
+  payload yields the exact source-owned `readLowBits` numeric value,
+  with the same suffix, for every word and every k.
+- `scanNativeNumericMatchesOriginal` lifts it through the literal
+  `readGammaZeros` prefix scanner, including failure branches.
+- `originalGammaSameAllWordNumericalObservation` identifies the
+  complete original `readGamma` with a numeric OBSERVATION of
+  the native grammar for every input word.
+
+The normal N21 verifier must execute the binary parser, NOT the
+numeric observation, which is used in Agda proof terms only.
+The native signed-last-bit parser's corresponding all-word
+numeric observation and the original `strictAfter` less-than
+bridge are next. A full polynomial bit-tape clock still needs
+signed big-integer operations, full graph/certificate loops
+and machine-step correspondence. This source awaits Agda 2.9
+kernel acceptance.
