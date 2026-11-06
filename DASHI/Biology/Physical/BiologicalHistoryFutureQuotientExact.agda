@@ -265,6 +265,38 @@ originRetainsCubeLocation :
   spatialProject field Cube.origin ≡ project (field Cube.origin)
 originRetainsCubeLocation field = refl
 
+-- This second spatial operation genuinely consults an adjacent vertex.
+-- The edge witness is mandatory: arbitrary distant points cannot be passed
+-- as a local edge.  Quantitative coupling strengths and tissue dynamics are
+-- not provided by this finite Boolean response.
+edgeDrivenMorphology :
+  (source neighbour : Cube.Ternary27Point) →
+  Cube.HypervoxelAdjacent source neighbour →
+  TissueField → Bool
+edgeDrivenMorphology source neighbour edge field =
+  andB (genomeCompetence (field source))
+    (andB (retainedMemory (field source))
+      (andB (junctionPresent (field neighbour))
+        (environmentalSupport (field source))))
+
+coarseEdgeDrivenMorphology :
+  (source neighbour : Cube.Ternary27Point) →
+  Cube.HypervoxelAdjacent source neighbour →
+  CoarseTissueField → Bool
+coarseEdgeDrivenMorphology source neighbour edge field =
+  andB (codeGenome (field source))
+    (andB (codeMemory (field source))
+      (andB (codeJunction (field neighbour))
+        (codeEnvironment (field source))))
+
+localEdgeResponseSurvivesProjection :
+  (source neighbour : Cube.Ternary27Point) →
+  (edge : Cube.HypervoxelAdjacent source neighbour) →
+  (field : TissueField) →
+  edgeDrivenMorphology source neighbour edge field
+  ≡ coarseEdgeDrivenMorphology source neighbour edge (spatialProject field)
+localEdgeResponseSurvivesProjection source neighbour edge field = refl
+
 -- General history-indexed phenotype *contract*, not an empirical inhabitant.
 -- Fibres can differ at the same time under different admissible histories;
 -- this does not replace the established temporal/reopenable evidence owners.
