@@ -1,11 +1,14 @@
 module DASHI.Mathematics.Complexity.ConcreteTapeAfterUniqueFromLocalityExact where
 
 ------------------------------------------------------------------------
--- BEFORE INTERIOR + LEGAL WHOLE-ROW SCAN -> AFTER EXACTLY ONE HEAD
+-- BEFORE INTERIOR + LEGAL WHOLE-ROW SCAN + NO-GHOST ENDCAPS
+--   -> AFTER EXACTLY ONE HEAD (CONDITIONAL, PROOF RELEVANT)
 --
--- This removes the extra afterUnique premise from the reverse locality
--- compiler.  Plain old context cells force aligned new context cells plain;
--- the one configured centered window contributes exactly one new head.
+-- Original unrestricted scan-to-afterUnique is FALSE: boundary overlap
+-- windows can introduce phantom heads. The repaired theorem consumes
+-- explicit FrontPlain/EndPlain witnesses for the *same* extracted center
+-- and proves plain contexts by genuine inward inductions. The original
+-- SAT compiler must still construct these boundary witnesses.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
