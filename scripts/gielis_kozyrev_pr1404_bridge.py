@@ -46,6 +46,30 @@ def legacy_geometry(inner=.75,outer=1.55,turns=1.5,thickness=0.):
             "turns":turns,"thick":thickness,
             "srot":0.,"family":"log"}
 
+def gielis_offset_surfaces(segments, thickness):
+    """Independent Gielis log-baseline normal offsets and endcaps.
+
+    Matches Kozyrev PR1404 log-family centreline and normal-offset
+    geometry in literal parameter space. Does NOT model HTML stroked SDF.
+    """
+    if segments < 100 or thickness < 0:
+        raise ValueError("bad geometry discretisation")
+    theta=np.linspace(0,3*math.pi,segments+1)
+    b=math.log(1.55/.75)/(3*math.pi)
+    r=.75*np.exp(b*theta)
+    x=r*np.cos(theta);y=r*np.sin(theta)
+    tx=b*r*np.cos(theta)-r*np.sin(theta)
+    ty=b*r*np.sin(theta)+r*np.cos(theta)
+    norm=np.hypot(tx,ty)
+    nx=-ty/norm; ny=tx/norm
+    half=thickness/2
+    sides=(np.column_stack((x+half*nx,y+half*ny)),
+           np.column_stack((x-half*nx,y-half*ny)))
+    caps=(np.array([sides[0][0],sides[1][0]]),
+          np.array([sides[0][-1],sides[1][-1]]))
+    return sides+caps
+
+
 def locate_modules(legacy_dir=None):
     folder=(pathlib.Path(legacy_dir) if legacy_dir else pathlib.Path(__file__).parent)
     missing=[name for name in ORIGINAL_FILES if not (folder/name).is_file()]
@@ -85,28 +109,34 @@ def match_original_owners(legacy_dir=None,segments=1536,power_w=100.,
     sides=First.surfaces(g,samples=segments)
     # Only for zero wall thickness are the original offset walls
     # identical to the Gielis centreline; not an HTML SDF equivalence.
-    centreline_error=None
-    if thickness==0:
-        original=np.concatenate((sides[0][0],sides[0][1][-1:]),axis=0)
-        centreline_error=float(np.max(np.linalg.norm(outer-original,axis=1)))
-        if centreline_error>1e-12:
-            raise AssertionError("logarithmic baseline centreline mismatch")
+    # Compare TWO INDEPENDENT constructors for the exact same
+    # finite-thickness normal-offset curve (including end caps).
+    generated=gielis_offset_surfaces(segments,thickness)
+    original_polylines=[
+        np.concatenate((a,b[-1:]),axis=0) for a,b in sides
+    ]
+    wall_error=max(float(np.max(np.linalg.norm(a-b,axis=1)))
+                   for a,b in zip(generated,original_polylines))
+    if wall_error>1e-12:
+        raise AssertionError("Kozyrev reference normal-offset geometry mismatch")
+    centreline_error=wall_error if thickness==0 else None
     eps=.003 # original PR1404 first_cross admission threshold
     differences=[];pairs=0;skipped=0
     for j in range(first_hit_rays):
         theta=2*math.pi*(j+.319)/first_hit_rays
         direction=np.array([math.cos(theta),math.sin(theta)])
         independent=First.first_cross(sides,START,direction,epsilon=eps)
-        # Only centreline comparisons are genuinely same-wall object.
-        if thickness!=0:continue
-        other=G.nearest_hit(START,direction,outer)
-        if not math.isfinite(independent):
-            if other is None or other[0]<=eps:continue
-            skipped+=1;continue
-        if other is None or other[0]<=eps:
-            skipped+=1;continue
+        possible=[G.nearest_hit(START,direction,poly)
+                  for poly in generated]
+        finite=[hit[0] for hit in possible if hit is not None]
+        other=min((t for t in finite if t>eps),default=math.inf)
+        if not math.isfinite(independent) and not math.isfinite(other):
+            continue
+        if not math.isfinite(independent) or not math.isfinite(other):
+            skipped+=1
+            continue
         pairs+=1
-        differences.append(abs(float(independent)-other[0]))
+        differences.append(abs(float(independent)-float(other)))
     # Cross-check the ORIGINAL power/reflectivity/momentum ledger at
     # one single specular hit of the shared 0-thickness baseline.
     ledger_residuals=[]
@@ -135,10 +165,13 @@ def match_original_owners(legacy_dir=None,segments=1536,power_w=100.,
             if len(ledger_residuals)>=8:break
     return {
         "status":"CENTRELINE_PARITY_CHECKED" if thickness==0
-                 else "OFFSET_WALL_LEGACY_IMPORTED_NOT_SAME_HTML",
+                 else "OFFSET_WALL_REFEREE_PARITY_CHECKED",
         "original_pr":1404,"source_commit":PR1404,
         "geometry":g,"segments":segments,"rays":first_hit_rays,
         "matched_centreline_max_position_error_m":centreline_error,
+        "matched_normal_offset_wall_max_position_error_m":wall_error,
+        "wall_thickness_m":thickness,
+        "legacy_wall_representation":"normal_offset_with_flat_endcaps",
         "paired_first_hits":pairs,
         "first_hit_comparison_skipped":skipped,
         "first_hit_max_difference_m":max(differences,default=None),
