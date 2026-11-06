@@ -73,7 +73,7 @@ def receipt(m=3,n=41):
         "status":"exact_discrete_energy_identity_passed",
         "mode":m,"grid":n,"interior_cells":len(nodes),
         "legacy_1e_minus_12_mask_equal_at_selected_n":legacy_equal,
-        "boundary_tolerance_m":delta,
+        "boundary_tolerance_normalized":delta,
         "boundary_tolerance_function":"min(1e-12,(3/(n-1))^2)",
         "boundary_tolerance_limit_zero":True,
         "exact_test_vectors":len(checks),
