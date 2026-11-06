@@ -28,6 +28,7 @@ import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.TSVFOriginalForwardPositiveFunctionalExact as Forward
 import DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact as Measurement
 import DASHI.Physics.Foundations.TSVFOriginalCyclicFiniteSpanGramExact as FiniteSpan
+import DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact as Native
 import DASHI.Physics.Foundations.TSVFObserverOSCyclicGramSetoidExact as Gram
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -52,16 +53,16 @@ module _
       E laws observerRealReadout
       theory traceData exponential betaFine oneLink bilateral divide)
     (reflection :
-      Measurement.Observable E laws observerRealReadout
-        theory traceData exponential betaFine oneLink bilateral divide
-        → Measurement.Observable E laws observerRealReadout
-          theory traceData exponential betaFine oneLink bilateral divide)
+      (Native.CoarseLinks theory traceData exponential
+        betaFine oneLink bilateral divide → ℝ) →
+      (Native.CoarseLinks theory traceData exponential
+        betaFine oneLink bilateral divide → ℝ))
   where
 
   CoarseObservable : Set
   CoarseObservable =
-    Measurement.Observable E laws observerRealReadout
-      theory traceData exponential betaFine oneLink bilateral divide
+    Native.CoarseLinks theory traceData exponential
+      betaFine oneLink bilateral divide → ℝ
 
   Word : Set
   Word = List CoarseObservable
@@ -75,8 +76,7 @@ module _
 
   originalNativeR445WordPair : Word → Word → ℝ
   originalNativeR445WordPair =
-    Measurement.actualNativeR445WordGram
-      E laws observerRealReadout
+    Native.nativeR445ReflectedWordGram
       theory traceData exponential betaFine oneLink bilateral divide
       reflection
 
