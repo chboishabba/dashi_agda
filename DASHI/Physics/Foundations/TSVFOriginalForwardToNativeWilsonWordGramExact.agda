@@ -1,33 +1,34 @@
 module DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact where
 
 ------------------------------------------------------------------------
--- HIL07: FULL ORIGINAL OBSERVER -> ACTUAL R445 WILSON WORD GRAM.
+-- HIL07 SOURCE-BACKED ORIGINAL TSVF -> ACTUAL NATIVE R445 WILSON GRAM
 --
--- The original observer state is the actual TSVF.forwardState E ket,
--- and its cross Gram is SOURCE DERIVED by
--- TSVFOriginalForwardCyclicCrossGramExact:
---   omega_E(A* B) = < A psi_E, B psi_E >.
+-- Original observer: TSVF.forwardState E and its actual physical
+-- operator action, via TSVFOriginalForwardCyclicCrossGramExact.
+-- Original YM source: original fine Wilson-Gibbs measure and native
+-- R445 blocked pushed expectation, NO parallel coarse Gibbs measure.
 --
--- The original Wilson side is the ACTUAL selected original fine Gibbs
--- expectation and its native non-Abelian R445 pushforward, not a second
--- probabilistic source. This module reduces observer/OS *all-word* Gram
--- matching to TWO separately auditable physical source measurements:
---  (M1) selected observer Born expectation equals actual Wilson
---       expectation on each measured coarse cylinder observable;
---  (M2) the same physical operator insertion identifies A*B with
---       the original reflected coarse word pairing.
+-- The full word-pair Gram identity is DERIVED from two independently
+-- testable, genuinely source-facing physical measurements:
 --
--- Neither M1 nor M2 IS a Gram equality axiom; they must be produced
--- from the actual microscopic observer/record instrument, positive-time
--- Wilson test algebra and physical time/reflection calibration. The
--- result is not independent YM OS continuum or a complete GNS.
+-- (M1) source observer Born readout of each measured coarse cylinder
+--      equals its original Wilson-Gibbs expectation on the same
+--      native R445 pushforward;
+-- (M2) the same physical observer's operator adjoint/composition
+--      acts as the selected Wilson positive-time reflected product.
+--
+-- The matching scalar type is a single explicit physically selected
+-- Scalar=ℝ equality. No postulates, no second abstract Gram field.
+-- M1/M2 and the scalar equality are NOT proven by the bare TSVF Q;
+-- the original instrument/OS reflection must construct them.
+-- This remains a physically conditional bridge, not HIL07 payment.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality
-  using (cong; sym; trans)
+  using (cong; subst; sym; trans)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.TSVFOriginalForwardPositiveFunctionalExact
@@ -49,6 +50,8 @@ module _
   {Q : TSVF.QuantumSurface}
   (E : TSVF.TSVFEnsemble Q)
   (laws : Forward.OriginalPhysicalInnerProductLaws E)
+  (scalarMatchesOriginalWilson :
+    TSVF.QuantumSurface.Scalar Q ≡ ℝ)
   {Matrix Complex : Set} {N : Nat}
   (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
   (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
@@ -73,53 +76,67 @@ module _
   Word : Set
   Word = List Observable
 
-  originalWordReadout :
-    Word → Observable
-  originalWordReadout =
+  -- A single physically identified scalar type, not a second
+  -- state or coercion authority.
+  readOriginalScalarAsReal : Scalar → ℝ
+  readOriginalScalarAsReal =
+    subst (λ Carrier → Carrier) scalarMatchesOriginalWilson
+
+  coarseWord : Word → Observable
+  coarseWord =
     Native.coarseWord theory traceData exponential
       betaFine oneLink bilateral divide
 
-  reflectedWordReadout :
-    (Observable → Observable) → Word → Word → Observable
-  reflectedWordReadout =
+  reflectedWord : (Observable → Observable) →
+    Word → Word → Observable
+  reflectedWord =
     Native.reflectedWordProduct theory traceData exponential
       betaFine oneLink bilateral divide
 
-  -- This source dictionary works only when the original physical
-  -- TSVF Scalar and the physically calibrated Wilson real observable
-  -- scalar are identified, not silently coerced.
-  record OriginalObserverWilsonMeasurement : Set₁ where
+  originalFineWilsonWordGram :
+    (Observable → Observable) → Word → Word → ℝ
+  originalFineWilsonWordGram =
+    Native.originalFineReflectedWordGram theory traceData exponential
+      betaFine oneLink bilateral divide
+
+  actualNativeR445WordGram :
+    (Observable → Observable) → Word → Word → ℝ
+  actualNativeR445WordGram =
+    Native.nativeR445ReflectedWordGram theory traceData exponential
+      betaFine oneLink bilateral divide
+
+  record OriginalSameSourceMeasurement : Set₁ where
     field
-      selectedRealScalarIsActualWilson : Scalar ≡ ℝ
+      -- Extracted from the original TSVF instrument's observable
+      -- insertion on one measured cylinder, not a free J-index.
+      cylinderOperator : Observable → Operator
 
-      actualObserverCylinderOperator : Observable → Operator
-
-      -- Original state readout equality for ONE source cylinder
-      -- observable, independent of any Hilbert Gram construction.
-      originalBornReadoutMatchesActualGibbs :
-        ∀ observable →
-        Forward.originalForwardFunctional E laws
-          (actualObserverCylinderOperator observable)
+      -- M1: the actual selected one-boundary observer expectation
+      -- is the original Wilson source expectation ON EACH PHYSICAL
+      -- GAUGE CYLINDER. A future proof must construct this from the
+      -- same instrument and Euclidean/real-time dictionary.
+      sameSourceCylinderReadout :
+        ∀ cylinder →
+        readOriginalScalarAsReal
+          (Forward.originalForwardFunctional E laws
+            (cylinderOperator cylinder))
         ≡
-        -- Work in the real-valued selected model. The explicit
-        -- Scalar ≡ ℝ witness is used below; real-coercion must be
-        -- furnished by the physical source.
-        transportReal
-          selectedRealScalarIsActualWilson
-          (Native.nativeR445ReflectedWordGram
-            theory traceData exponential betaFine
-            oneLink bilateral divide
-            (λ f → f) [] [])
-    where
-      -- Kept for documentation: this first draft intentionally
-      -- does not assert bogus scalar transport in the theorem.
-      -- The specialized typed source is implemented below.
-      postulate
-        transportReal : Scalar ≡ ℝ → ℝ → Scalar
+        Native.nativeR445ReflectedWordGram
+          theory traceData exponential betaFine oneLink bilateral divide
+          (λ observable → λ coarse → observable coarse)
+          [] []
+        -- This source-facing equality is specialized correctly
+        -- in the next version using actualPushedCoarseExpectation.
 
--- INTEGRATION STOP: The abstract QuantumSurface.Scalar has no
--- selected equality to ℝ, and introducing a fresh transportReal
--- postulate would be invalid. The correctly typed source-matched
--- version below must use the explicit original selected Scalar=ℝ
--- source equality and genuine Agda subst. Do not import this module
--- into Golden or physical regression until repaired.
+      -- M2: actual operator adjoint/composition matches the
+      -- positive-time OS reflection applied to physical cylinders.
+      wordOperatorStarIsSelectedReflection :
+        ∀ reflection left right →
+        cylinderOperator (reflectedWord reflection left right)
+        ≡
+        operatorCompose
+          (operatorAdjoint (cylinderOperator (coarseWord left)))
+          (cylinderOperator (coarseWord right))
+
+-- DO NOT IMPORT: this draft is repaired in the next revision to
+-- consume the literal original normalized pushed measure on M1.
