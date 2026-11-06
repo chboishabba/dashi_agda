@@ -189,6 +189,25 @@ class TorsionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "distinct IDs"):
             t.evaluate_pair(p)
 
+    def test_nonzero_clock_error_widens_torsion_residual(self):
+        baseline = t.evaluate_pair(case())
+        p = case()
+        for mode in ("on", "off"):
+            for f in p[mode]["frames"]:
+                f["t_s_bound"] = .001
+        expanded = t.evaluate_pair(p)
+        old = baseline["paired_frames"][0]["paired_signed_torque_residual_Nm"]
+        new = expanded["paired_frames"][0]["paired_signed_torque_residual_Nm"]
+        self.assertLessEqual(new[0], old[0])
+        self.assertGreaterEqual(new[1], old[1])
+
+    def test_clock_error_overlap_rejected(self):
+        p = case()
+        for f in p["on"]["frames"]:
+            f["t_s_bound"] = .51
+        with self.assertRaisesRegex(ValueError, "timestamp intervals"):
+            t.evaluate_pair(p)
+
     def test_uncalibrated_or_missing_input_rejected(self):
         p = case()
         p["on"]["frame_times_calibrated"] = False
