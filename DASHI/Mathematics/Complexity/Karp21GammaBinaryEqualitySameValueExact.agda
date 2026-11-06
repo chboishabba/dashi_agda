@@ -13,11 +13,14 @@ module DASHI.Mathematics.Complexity.Karp21GammaBinaryEqualitySameValueExact wher
 -- this bitword comparator, or charge gamma re-encoding machine time.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Nat.Base using (_≤_)
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (_++_)
+open import Data.List.Base using ([]; _++_)
 open import Data.Maybe.Base using (just)
+open import Data.Product using (_,_)
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import Data.List.Properties as ListP
 
@@ -43,7 +46,7 @@ gammaEncodedEqualImpliesSameNat a b equality =
         (Round.gammaReadEncodeSuffix b [])))
   where
     justPairInjectFirst :
-      ∀ {x y : Nat} {rest : Decoder.Word.BitWord} →
+      ∀ {x y : Nat} {rest : Word.BitWord} →
       just (x , rest) ≡ just (y , rest) → x ≡ y
     justPairInjectFirst refl = refl
 
@@ -71,7 +74,7 @@ gammaEncodedEqualityInspectionBound :
   (a b : Nat) →
   Binary.bitEqualityInspectionCount
     (Gamma.encodeGammaNat a) (Gamma.encodeGammaNat b)
-      ≤ suc (Decoder.Word.encodingSize (Gamma.encodeGammaNat a))
+      ≤ suc (Word.encodingSize (Gamma.encodeGammaNat a))
 gammaEncodedEqualityInspectionBound a b =
   Binary.bitEqualityInspectionBound
     (Gamma.encodeGammaNat a) (Gamma.encodeGammaNat b)
