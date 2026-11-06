@@ -39,12 +39,19 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda
 )
+# Native original R445 donor is NOT transitively --safe: it imports
+# selected RealAnalysisAxioms and the original Wilson physical carriers.
+# Check it in the pinned parallel environment but never certify its
+# foundational axioms solely from a successful Agda typecheck.
+physical_sources=(
+  DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
+)
 roots=(
   DASHI/Unified/BalabanRGTOERegression.agda
   DASHI/Unified/TSFVUnifiedRegression.agda
   DASHI/Unified/TSFVParentChildRegression.agda
 )
-for file in "${safe_sources[@]}" "${roots[@]}"; do
+for file in "${safe_sources[@]}" "${physical_sources[@]}" "${roots[@]}"; do
   test -f "$file"
 done
 
@@ -58,6 +65,9 @@ fi
 
 echo "P00/S11: parallel_checker --safe, ${#safe_sources[@]} selected candidates"
 "$parallel_checker" --safe "${safe_sources[@]}"
+
+echo "P00/S11: parallel_checker original physical donor (axiomatic authority audited separately)"
+"$parallel_checker" "${physical_sources[@]}"
 
 echo "P00/S11: parallel_checker, ${#roots[@]} parent/child transitive roots"
 "$parallel_checker" "${roots[@]}"
