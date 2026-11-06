@@ -20,6 +20,9 @@ module DASHI.Analysis.BishopOriginalLogAtanDerivativeLimitValuesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Sum.Base using (inj₂)
+open import Data.Product.Base using (proj₂)
+import Inverse as Inv
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
@@ -32,6 +35,16 @@ import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Foundations.BishopSquareNonnegativeExact as Square
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Atan
+
+-- Vendored Sequence.1-r≄0 is intentionally private; repeat only
+-- its SHORT constructive sign argument, using the public Bishop order.
+oneMinusNonzero :
+  (q : R.ℝ) →
+  R._<_ (R.∣ q ∣) R.1ℝ →
+  R._≄0 (R._-_ R.1ℝ q)
+oneMinusNonzero q inside =
+  inj₂ (RP.x<y⇒0<y-x q R.1ℝ
+    (proj₂ (RP.∣x∣<y⇒-y<x<y q R.1ℝ inside)))
 
 geometricPartialIsOriginalBishopSeries :
   (q : R.ℝ) (count : Nat) →
@@ -49,16 +62,16 @@ originalLogFiniteDerivativeSeriesConverges :
   (inside : R._<_ (R.∣ x ∣) R.1ℝ) →
   Seq._ConvergesTo_
     (λ count → Geo.negativeLogDerivativePolynomial x count)
-    (R._⁻¹_
+    (Inv._⁻¹_
       (R._-_ R.1ℝ x)
-      (Seq.1-r≄0 x inside))
+      (oneMinusNonzero x inside))
 originalLogFiniteDerivativeSeriesConverges x inside =
   Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
     (λ {(suc count) →
       RP.≃-symm
         (geometricPartialIsOriginalBishopSeries x (suc count))})
-    ((R._⁻¹_ (R._-_ R.1ℝ x)
-        (Seq.1-r≄0 x inside)) ,
+    ((Inv._⁻¹_ (R._-_ R.1ℝ x)
+        (oneMinusNonzero x inside)) ,
       Seq.geometric-series-converges inside)
 
 -- The original atan point is constrained by the EXACT original half
@@ -83,7 +96,7 @@ nativeNegativeSquareInsideUnit x insideHalf =
     squareBelowQuarter : R._≤_ xx Half.bishopQuarter
     squareBelowQuarter =
       RP.≤-respˡ-≃
-        (RP.≃-symm (Norm.absoluteSquare x))
+        (Norm.absoluteSquare x)
         (Half.bishopHalfBallMagnitudeSquareBelowQuarter x insideHalf)
   in
   RP.≤-<-trans
@@ -97,9 +110,9 @@ originalAtanFiniteDerivativeSeriesConverges :
   (insideHalf : R._≤_ (R.∣ x ∣) Half.bishopHalf) →
   Seq._ConvergesTo_
     (λ count → AtanFinite.sourceAtanDerivativeFinitePartial x count)
-    (R._⁻¹_
+    (Inv._⁻¹_
       (R._-_ R.1ℝ (R.-_ (R._*_ x x)))
-      (Seq.1-r≄0
+      (oneMinusNonzero
         (R.-_ (R._*_ x x))
         (nativeNegativeSquareInsideUnit x insideHalf)))
 originalAtanFiniteDerivativeSeriesConverges x insideHalf =
@@ -120,7 +133,7 @@ originalAtanFiniteDerivativeSeriesConverges x insideHalf =
   Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
     (λ {(suc count) →
       RP.≃-symm (originalPartialIsGeometric (suc count))})
-    ((R._⁻¹_ (R._-_ R.1ℝ q) (Seq.1-r≄0 q qInside)) ,
+    ((Inv._⁻¹_ (R._-_ R.1ℝ q) (oneMinusNonzero q qInside)) ,
       Seq.geometric-series-converges qInside)
 
 -- Two actual selected Machin values are now fully instantiated
