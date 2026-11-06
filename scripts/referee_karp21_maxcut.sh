@@ -48,6 +48,7 @@ printf 'Mode: %s\n' "$mode"
 
 # This source/bitword preflight is independent of the Agda kernel.
 # It catches actual codec mismatches and stdlib argument-arity mistakes.
+python3 scripts/check_karp21_reserved_formula_constructors.py
 python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
