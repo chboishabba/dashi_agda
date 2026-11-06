@@ -23,6 +23,13 @@ module DASHI.Analysis.BishopMachinCayleyNativeProductFirstZeroExact where
 import Real as R
 
 import DASHI.Analysis.BishopSetoidComplexExact as C
+import DASHI.Analysis.BishopRiemannComplexAboveTwoBaselExact as Region
+import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
+import DASHI.Analysis.BishopDirichletUniformBaselTailsExact as Uniform
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Route
+open import Agda.Builtin.Nat using (Nat; suc)
 import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Foundations.BishopRound11SignedFactorialDegreeBinomialExact as Signed
 import DASHI.Analysis.BishopMachinCayleyHalfPhaseToFirstZeroExact as Cayley
@@ -48,3 +55,26 @@ originalNativeFirstPositiveSineZeroFromCayley inputs cayleyEvaluation =
     inputs
     (originalNativeImaginaryExpProduct inputs)
     cayleyEvaluation
+
+
+------------------------------------------------------------------------
+-- K04d-CONTINUITY: remove the parallel phase-modulus/Pythagorean
+-- authority from the original region-wide Basel bound as well.
+-- The only remaining mathematical input is the selected original
+-- exponential-of-Nat-log inverse, sourced from K04d-LOG.
+------------------------------------------------------------------------
+
+sourceRegionBaselFromNativeSignedFactorials :
+  (inputs : Round11.Round11BishopCutset) →
+  ((n : Nat) →
+    R._≃_
+      (Exp.bishopExp (Terms.sourceCanonicalNatLogCandidate n))
+      (NatReal.natReal (suc n))) →
+  Uniform.RegionBaselDomination
+    (Terms.bishopDirichletExponentialTerm
+      (Route.round11MachinTranscendentals inputs)
+      Terms.sourceCanonicalNatLogCandidate)
+    Region.sourceAboveTwoRegion
+sourceRegionBaselFromNativeSignedFactorials inputs inverse =
+  Product.sourceRegionWideFromSingleImaginaryProduct
+    inputs inverse (originalNativeImaginaryExpProduct inputs)
