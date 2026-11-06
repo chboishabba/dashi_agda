@@ -112,3 +112,45 @@ fixtureFieldsAreNotEqual :
   baseField ≡ nontrivialGradientField → Contradiction
 fixtureFieldsAreNotEqual ()
 
+------------------------------------------------------------------------
+-- Closed finite additive Z₂ field fixture. A nonzero gradient changes a
+-- selected field while the curl readout is unchanged.
+------------------------------------------------------------------------
+
+fixtureAddField : TwoFields → TwoFields → TwoFields
+fixtureAddField baseField y = y
+fixtureAddField nontrivialGradientField baseField =
+  nontrivialGradientField
+fixtureAddField nontrivialGradientField nontrivialGradientField =
+  baseField
+
+fixtureAddCurl : OneCurl → OneCurl → OneCurl
+fixtureAddCurl _ _ = zeroCurlFixture
+
+fixtureComplex : CurlGradientComplex
+fixtureComplex = record
+  { Field = TwoFields
+  ; Potential = PotentialBit
+  ; CurlValue = OneCurl
+  ; addField = fixtureAddField
+  ; grad = fixtureGrad
+  ; curl = fixtureCurl
+  ; zeroCurl = zeroCurlFixture
+  ; addCurl = fixtureAddCurl
+  ; curlAddHom = λ x y → refl
+  ; curlGradZero = λ p → refl
+  ; curlRightNeutral = λ v → refl
+  }
+
+fixtureGradientIsNontrivial :
+  fixtureAddField baseField (fixtureGrad nonconstantPotential)
+    ≡ nontrivialGradientField
+fixtureGradientIsNontrivial = refl
+
+fixtureNontrivialShiftHasSameCurl :
+  curl fixtureComplex
+    (addField fixtureComplex baseField
+      (grad fixtureComplex nonconstantPotential))
+  ≡ curl fixtureComplex baseField
+fixtureNontrivialShiftHasSameCurl =
+  curlInvisibleGradient fixtureComplex baseField nonconstantPotential
