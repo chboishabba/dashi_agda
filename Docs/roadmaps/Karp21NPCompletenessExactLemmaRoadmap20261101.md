@@ -1,5 +1,8 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+**2026-11-06 Agda 2.9 follow-up:** The user reports all five preflight checks passing at historical commit `cbf4302cc90d72dcc44ce3d27847954bf56a6654`. Source fixes now on PR #1445 simplify the original clique-cover congruence witnesses, instantiate `{ys = encodeSignedValuesPure rest}` for the original signed-gamma `length-++` rewrite, and retain the previously written fuel-indexed Cook prefix parser. The latter and both repaired Agda Golden/integration roots are still **exact-head kernel-unverified** in this session. See [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md) for precise repaired lemmas and status.
+
+
 ## 2026-11-06 — second compiler repair: all reported source issues patched, new Agda receipt pending
 
 The user's **local Agda 2.9.0 success receipts at historical head `972219b39894d28fed950f95fe0e2a2f050c68c6`** cover `Karp21CompilerRepairGovernanceExact`, `Karp21FinDecoderIndexBidiExact`, `Karp21BinaryFinMaterializationCostExact`, `CookLevinCircuitGCTBoundary` and `Karp21GammaBinaryRoundTripExact`. New diagnostic set: 16 line coordinates with reserved Cook/SAT constructor syntax (17 textual references on those lines), a missing `sym` in `Karp21GammaSignedListRoundTripExact`, a missing `trans` in `Karp21CliqueVertexCoverExact`, and the nonstructural recursive `parseCookFormula` with failing roundtrip rewrite in `PNotEqualsNPCookFormulaPrefixCodecExact`.
