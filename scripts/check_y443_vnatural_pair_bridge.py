@@ -233,20 +233,32 @@ def assert_source_scope() -> None:
 
 
 def check_agda() -> None:
-    compiler = os.environ.get("AGDA_BIN", "agda")
-    if not shutil.which(compiler):
-        raise RuntimeError(
-            f"Golden Agda NOT RUN: {compiler!r} not found; "
-            "finite-only must not be cited as kernel acceptance"
-        )
-    flags = ["--safe", "-i", ".", "-l", "standard-library"]
-    for file in (GOLDEN_ROOT,):
-        print(f"Agda checking: {file.relative_to(ROOT)}", flush=True)
-        subprocess.run(
-            [compiler, *flags, str(file.relative_to(ROOT))],
-            cwd=ROOT, check=True,
-        )
-    print("PASS golden Agda: Y443 transitive capstone root typechecked under --safe")
+    """Use the repository's Agda 2.9 parallel_checker, not a bare older Agda.
+
+    DASHI_Y443_DIRECT_AGDA=1 is a deliberate alternate entrypoint for
+    environments that already provide the matching Agda 2.9 libraries.
+    """
+    golden = str(GOLDEN_ROOT.relative_to(ROOT))
+    if os.environ.get("DASHI_Y443_DIRECT_AGDA", "0") == "1":
+        compiler = os.environ.get("AGDA_BIN", "agda")
+        if not shutil.which(compiler):
+            raise RuntimeError(f"Golden Agda NOT RUN: {compiler!r} not found")
+        cmd = [
+            compiler, "--safe", "--no-libraries", "--no-default-libraries",
+            "-i", ".", "-i", "DCHoTT-Agda", "-i", "vendor/bishop",
+            "-i", "cubical", "-i", os.environ.get("AGDA_STDLIB_SRC_29", ""),
+            golden,
+        ]
+    else:
+        wrapper = ROOT / "scripts/run_agda29_parallel_check.sh"
+        if not wrapper.is_file():
+            raise RuntimeError(
+                f"Golden Agda NOT RUN: parallel_checker wrapper missing {wrapper}"
+            )
+        cmd = ["bash", str(wrapper), "--safe", golden]
+    print("Golden Agda checker:", " ".join(cmd), flush=True)
+    subprocess.run(cmd, cwd=ROOT, check=True)
+    print("PASS golden Agda 2.9 parallel_checker: transitive capstone accepted")
 
 
 def main() -> None:
