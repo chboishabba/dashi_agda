@@ -1,3 +1,21 @@
+# Active exact-lemma execution update — 6 November 2026
+
+Refer to [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md) for the **current phase, deliverables and acceptance**; the ledger below is the historical/complete source-indexed producer inventory.
+
+| Executable ID | Exact producer / goal | Status |
+|---|---|---|
+| F1.0a | `YMClayNativeOriginalSortMembershipCorrectExact.bubbleDesiredHeadWhenMember` | **SOURCE_PENDING**; new structural lemma, no Agda kernel receipt |
+| F1.0b | `YMClayNativeOriginalSortMembershipCorrectExact.originalSortToTargetCorrect`, given a proof-relevant `AllSelectable` trace | **SOURCE_PENDING**; next construct original target traces without assuming final equality |
+| F1.1 | `YMClayNativeC3AdjacentSortProgramExact.constructedNativeC3CanonicalLabelGoal` | **OPEN**; C3 target trace/bijection + Agda acceptance |
+| F1.2 | `YMClayNativeSideFourPairSpectatorSortProgramExact.originalPairSpectatorLengthGoal` | **OPEN**; 128 selected + 896 complementary original labels |
+| F1.3 | `YMClayNativeSideFourPairSpectatorSortProgramExact.originalPairSpectatorCanonicalLabelGoal` | **OPEN**; pair target trace/bijection + Agda acceptance |
+| V00 | Pinned Agda/stdlib/kernel clean check | **OPEN**; Agda not available in local runtime |
+| V02 | `scripts/check_ym_sort_selectability_reference.py` | **REFERENCE PASS**: 5,914 exhaustive permutations, 1024+1024 original select steps, swap counts 46,592/41,792, invalid-target controls |
+
+**Producer-count policy:** no original 67-entry or 219-field counts are decremented or inflated by the two new source helpers. They are sublemmas of F1.0, not physical witnesses. Existing R443 full CMP119/Haar, R445 RG, R320 CMP116, R333 OS and Clay remain OPEN. Do not call originalSort correctness unconditional: it requires a native `AllSelectable` certificate.
+
+---
+
 # Yang–Mills: canonical current exact-lemma ledger
 **Snapshot:** 4 November 2026, YM [PR #1444](https://github.com/chboishabba/dashi_agda/pull/1444), stacked on Route-S #1440. PR #1460 is downstream TSVF/Lorentz/KK work, **not** a Clay YM proof premise.
 
