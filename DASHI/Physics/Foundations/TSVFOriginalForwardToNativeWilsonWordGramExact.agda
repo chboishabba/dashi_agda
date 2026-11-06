@@ -17,9 +17,9 @@ module DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact 
 -- (M2) the same physical observer's operator adjoint/composition
 --      acts as the selected Wilson positive-time reflected product.
 --
--- The matching scalar type is a single explicit physically selected
--- Scalar=ℝ equality. No postulates, no second abstract Gram field.
--- M1/M2 and the scalar equality are NOT proven by the bare TSVF Q;
+-- The observer Scalar can be complex. A physically calibrated real
+-- readout is explicit, so no unjustified Scalar=ℝ equality is used.
+-- M1/M2 and that readout are NOT proven by the bare TSVF Q;
 -- the original instrument/OS reflection must construct them.
 -- This remains a physically conditional bridge, not HIL07 payment.
 ------------------------------------------------------------------------
@@ -28,7 +28,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality
-  using (cong; subst; sym; trans)
+  using (cong; sym; trans)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.TSVFOriginalForwardPositiveFunctionalExact
@@ -51,8 +51,8 @@ module _
   {Q : TSVF.QuantumSurface}
   (E : TSVF.TSVFEnsemble Q)
   (laws : Forward.OriginalPhysicalInnerProductLaws E)
-  (scalarMatchesOriginalWilson :
-    TSVF.QuantumSurface.Scalar Q ≡ ℝ)
+  (actualObserverRealReadout :
+    TSVF.QuantumSurface.Scalar Q → ℝ)
   {Matrix Complex : Set} {N : Nat}
   (theory : SUN.CertifiedSUNMatrixTheory N Matrix Complex)
   (traceData : Trace.SUNMatrixRealTrace {Scalar = ℝ} theory)
@@ -77,11 +77,11 @@ module _
   Word : Set
   Word = List Observable
 
-  -- A single physically identified scalar type, not a second
-  -- state or coercion authority.
+  -- A complex physical observer supplies a calibrated real
+  -- expectation readout of its scalar pairing. This is NOT an
+  -- equality of the original complex scalar with Wilson ℝ.
   readOriginalScalarAsReal : Scalar → ℝ
-  readOriginalScalarAsReal =
-    subst (λ Carrier → Carrier) scalarMatchesOriginalWilson
+  readOriginalScalarAsReal = actualObserverRealReadout
 
   coarseWord : Word → Observable
   coarseWord =
@@ -245,7 +245,8 @@ module _
         source reflection left right)
 
 -- Two physical same-source producer obligations are now isolated:
--- (M1) one-cylinder original observer readout = original native
+-- (M1) calibrated REAL COMPONENT of one-cylinder original observer
+--      readout = original native
 --      Wilson-Gibbs expectation, and (M2) original observer * on
 --      compiled words = Wilson positive-time reflection product.
 -- These are not proved by the abstract QuantumSurface. Nor does
