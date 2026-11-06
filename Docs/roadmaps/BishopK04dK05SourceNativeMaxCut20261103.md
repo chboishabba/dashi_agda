@@ -1594,3 +1594,40 @@ The two original terminal atan-Cayley identities, original
 `exp_B(-sourceNegativeLogValue)=1-x`, and chosen external
 zeta/completed-xi value identities are still open. No compiler
 or CI kernel receipt for the new source module has been observed.
+
+
+## 2026-11-07 source-level closure of original exponential factor derivative
+
+The earlier origin-only reduction has now been strengthened into an
+**unconditional source-written** original Bishop differentiation proof.
+
+- `BishopOriginalExpOriginDividedDifferenceSeriesExact`: constructs
+  `originalExpOriginQuotient h` as the literal convergent shifted
+  factorial series `Σ h^n/(n+1)!`, proves its absolute convergence
+  using the same source factorial ratio test, proves the finite
+  coefficient-shift identity, and takes the actual pinned Bishop limit
+  to obtain `originalExpOriginIncrementFactor h`:
+  `exp_B(0+h)-exp_B(0) ≃ h*Q(h)`.
+- `BishopOriginalExpOriginDerivativeClosedExact`: proves
+  `originalInverseFactorialNonIncreasing`, constructs source
+  term/finite-sum comparison and passes it to the real Bishop limit:
+  `|Q(h)-1| ≤ exp_B(|h|)-1`. Already-implemented original
+  `ExpCont.originalBishopExpSequentiallyContinuous` and
+  `BishopVanishingDifferenceConvergenceExact` yield
+  `originalExpOriginQuotientConvergesToOne`.
+  Therefore `originalBishopExpFactorDerivativeAtOrigin` is built
+  with NO external derivative witness.
+- The source-`Exp.bishopExp` Cauchy-product lemma then produces
+  `originalBishopExponentialFactorDerivative` for ALL original
+  Bishop reals with derivative exactly `Exp.bishopExp x`.
+
+This removes the **exp_B differentiability** subgate entirely at
+the source level. The actual LOG composition theorem still requires
+the source negative-log evaluation/derivative and an analytic
+identity or uniqueness argument; the two PI Cayley values and
+selected external zeta/xi equality are still outstanding.
+
+All newly introduced Agda source is marked `--safe`, integrated
+in three golden TOE roots and in the parallel-checker targets.
+No successful exact-head Agda 2.9 kernel receipt has been
+observed; source-written is **not** promoted to accepted.
