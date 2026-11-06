@@ -86,3 +86,14 @@ publishedNominalNotMeasuredAcceleration :
   Q.PublishedQuantitativeEvidenceBoundary.originalZhangAcceleration95CIAvailable
     Q.canonicalPublishedQuantitativeEvidenceBoundary ≡ false
 publishedNominalNotMeasuredAcceleration = refl
+
+sourceCurlUnderdeterminationWitness :
+  Curl.fixtureCurl Curl.baseField ≡
+  Curl.fixtureCurl Curl.nontrivialGradientField
+sourceCurlUnderdeterminationWitness = Curl.fixtureSameCurl
+
+sourceCurlCanAgreeForDistinctCandidateFields :
+  Curl.baseField ≡ Curl.nontrivialGradientField →
+  Curl.Contradiction
+sourceCurlCanAgreeForDistinctCandidateFields =
+  Curl.fixtureFieldsAreNotEqual
