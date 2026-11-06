@@ -14,56 +14,56 @@ They are not the organising theory and cannot be substituted for measured biolog
 
 The canonical mathematics remains in Golden Agda, with related numerical work in
 dashitest, dashifine, dashiBRAIN and dashiQ, and provenance in ITIR/PNF.  Existing
-\`DASHI.Programmes.ResearchProgrammeExact\` is the repository registry.  No second
+`DASHI.Programmes.ResearchProgrammeExact` is the repository registry.  No second
 repo or source-truth registry is proposed.
 
 ## The new concrete finite theorem package
 
-Owner: \`DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda\`.
-Cumulative root: \`DASHI/EverythingBiologicalHistoryFutureRound23.agda\`.
+Owner: `DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda`.
+Cumulative root: `DASHI/EverythingBiologicalHistoryFutureRound23.agda`.
 
 Selected **abstract** state is
-\`(genomeCompetence, chromatinMarker, retainedMemory, junctionPresent,
-environmentalSupport, visibleMorphology)\`, all Boolean.  The marker is inert
+`(genomeCompetence, chromatinMarker, retainedMemory, junctionPresent,
+environmentalSupport, visibleMorphology)`, all Boolean.  The marker is inert
 *only in this chosen fixture*: this asserts nothing about real chromatin biology.
 
-Interventions are \`signal\`, \`wound\`, \`connect\`, \`restoreMemory\`, and
-\`provideEnvironment\`.  The future-sufficient code forgets the inert marker
+Interventions are `signal`, `wound`, `connect`, `restoreMemory`, and
+`provideEnvironment`.  The future-sufficient code forgets the inert marker
 while retaining the other five coordinates.  Proven in Agda source:
 
-- \`projectionCommutes\`: every action commutes with fine-to-coarse projection.
-- \`projectionAfterTrace\`: this holds for every finite action trace.
-- \`futureSufficientCodeIsSafe\`: equal coarse codes entail equal complete
+- `projectionCommutes`: every action commutes with fine-to-coarse projection.
+- `projectionAfterTrace`: this holds for every finite action trace.
+- `futureSufficientCodeIsSafe`: equal coarse codes entail equal complete
   deterministic future observation languages, reusing the original canonical
   future-equivalence theorem.
-- \`sameGenome\`, \`samePresentPhenotype\`, \`memoryDifference\`, and
-  \`sameSignalDistinguishesFuture\`: same genome competence and current
+- `sameGenome`, `samePresentPhenotype`, `memoryDifference`, and
+  `sameSignalDistinguishesFuture`: same genome competence and current
   morphology but different memory can lead to distinct future morphology.
-- \`morphologyOnlyNotFutureSafe\` and
-  \`memoryBlindProjectionNotFutureSafe\`: no future-safe projection can merge
+- `morphologyOnlyNotFutureSafe` and
+  `memoryBlindProjectionNotFutureSafe`: no future-safe projection can merge
   the exhibited pair under the stated interventions.
-- \`markerActuallyDiffers\` and \`markerStatesAreFutureEquivalent\`: a concrete
+- `markerActuallyDiffers` and `markerStatesAreFutureEquivalent`: a concrete
   noninjective safe quotient in the selected finite model.
-- \`spatialProjectionCommutes\` and \`localEdgeResponseSurvivesProjection\`:
+- `spatialProjectionCommutes` and `localEdgeResponseSurvivesProjection`:
   pointwise and actual nearest-neighbour response projections on the existing
-  nonperiodic \`P3 × P3 × P3\` geometric carrier.
-- \`oneAdjacentJunctionChangesSourceResponse\`: an adjacent +x junction
+  nonperiodic `P3 × P3 × P3` geometric carrier.
+- `oneAdjacentJunctionChangesSourceResponse`: an adjacent +x junction
   change alters a source's local response while the source itself is fixed.
 
 This **is not** a calibrated interpretation of any genome, signalling pathway,
 bioelectric voltage, chromatin effect, cell type, or whole-organism attractor.
 
 The second owner provides a distinct **synthetic mechanism/evidence feedback**
-regression.  It reuses the existing \`PhenomenonEvidenceFibreOverTimeExact\`
+regression.  It reuses the existing `PhenomenonEvidenceFibreOverTimeExact`
 instead of introducing another evidence governance system:
 
-- \`syntheticObservationRefinesModelFamily\`: a distinguishing observed
+- `syntheticObservationRefinesModelFamily`: a distinguishing observed
   response removes the memory-blind candidate from the admitted family;
-- \`memoryBlindMisfitsSyntheticObservation\`: the model predicts a
+- `memoryBlindMisfitsSyntheticObservation`: the model predicts a
   conflicting result for the selected fixture;
-- \`withdrawalReopensModelCandidate\`: reanalysis/withdrawal can re-admit the
+- `withdrawalReopensModelCandidate`: reanalysis/withdrawal can re-admit the
   rejected candidate without rewriting the history;
-- \`SourceCalibratedMechanism\` makes provenance, the ontology-to-reaction
+- `SourceCalibratedMechanism` makes provenance, the ontology-to-reaction
   join, valid units, original observation and prediction match **separate
   proof-relevant obligations**.  No instance is fabricated.
 
@@ -72,27 +72,27 @@ identified reaction mechanism or an empirical discrimination result.
 
 The mathematical condition is the commuting diagram
 
-\`project(step a x) = coarseStep a (project x)\`
+`project(step a x) = coarseStep a (project x)`
 
 for every selected action, lifted to finite intervention traces.  The retained
 code therefore preserves morphology responses under the fixture.  Current
 morphology alone does not.
 
-Existing donors reused (not replicated): \`FutureObservationLanguageQuotientExact\`,
-\`GenericFuturePartitionRefinementExact\`,
-\`StablePartitionCanonicalFutureBridgeExact\`,
-\`DynamicTopologyFutureDefectExact\`,
-\`DynamicTopologyObserverRefinementExact\`,
-\`FiniteMorphogeneticBasinControlExact\`,
-\`PlanarianControlCalibrationExact\`, and
-\`Base369Ternary27HypervoxelFabricGeometryExact\`.
+Existing donors reused (not replicated): `FutureObservationLanguageQuotientExact`,
+`GenericFuturePartitionRefinementExact`,
+`StablePartitionCanonicalFutureBridgeExact`,
+`DynamicTopologyFutureDefectExact`,
+`DynamicTopologyObserverRefinementExact`,
+`FiniteMorphogeneticBasinControlExact`,
+`PlanarianControlCalibrationExact`, and
+`Base369Ternary27HypervoxelFabricGeometryExact`.
 
 ## Exact P0–P5 status / remaining max-cut
 
 | Gate | Completed or already reusable | Remaining named decisive obligation |
 |---|---|---|
-| P0 — phenotype carrier and histories | \`CellStateAttractor\` coupled-cell carrier; Levin geometry; generic \`IndexedBiologicalPhenotype\`; new finite \`BiologicalState\` | **P0.BIO-CARRIER**: instantiate actual genome/regulation/chemistry/cell/tissue carriers and admissible history-indexed fibres with source-backed observations, rather than just finite flags |
-| P1 — future equivalence | New safe/unsafe projection, trace commutation, concrete nonfactorability; existing general future language quotient and finite compiler | **P1.FINITE-COMPILER**: give this biological finite transition system an accepted \`CertifiedPartitionRefiner\`, rank bound and stable partition; **P1.STOCHASTIC**: compare distributions using measured/admissible stochastic transition kernels |
+| P0 — phenotype carrier and histories | `CellStateAttractor` coupled-cell carrier; Levin geometry; generic `IndexedBiologicalPhenotype`; new finite `BiologicalState` | **P0.BIO-CARRIER**: instantiate actual genome/regulation/chemistry/cell/tissue carriers and admissible history-indexed fibres with source-backed observations, rather than just finite flags |
+| P1 — future equivalence | New safe/unsafe projection, trace commutation, concrete nonfactorability; existing general future language quotient and finite compiler | **P1.FINITE-COMPILER**: give this biological finite transition system an accepted `CertifiedPartitionRefiner`, rank bound and stable partition; **P1.STOCHASTIC**: compare distributions using measured/admissible stochastic transition kernels |
 | P2 — cubical spatial field | Existing 27-vertex, 54-edge, 36-plaquette, 8-cube geometry; new pointwise and one-hop adjacency-gated response/projection proofs | **P2.COUPLED-FIELD**: construct a simultaneous neighbourhood-coupled state evolution, prove all-edge/plaquette and boundary compatibility, and transport the biology quotient through it |
 | P3 — physical calibration | Existing finite chemical master generator, electrodiffusion, SI bioelectric adapter, B-DNA SE(3), finite basin and planarian source count observations | **P3.SBML-SI**: versioned SBML/SED-ML model/parameter ingestion, unit-checked original molecular state laws, identifiability analysis, trajectory error/uncertainty, held-out calibration and exact provenance receipts |
 | P4 — ontology/world model | Existing PNF/ITIR evidence/history governance; new finite source/model refinement and reopening theorems with an uninhabited calibrated join contract; canonical programme registry | **P4.ONTOLOGY-WELD**: versioned GO-CAM/ontology/Cell Ontology/uPheno/SBML identity graph with evidence-qualified causal edges, source-safe joins, rejected hypotheses and bidirectional model revision |
@@ -131,12 +131,12 @@ or bounded defect, not automatically a transitive quotient.
 
 ## Existing quantitative anchors and limits
 
-\`PlanarianControlCalibrationExact\` records the Grodstein–Levin 2022
+`PlanarianControlCalibrationExact` records the Grodstein–Levin 2022
 155/555 parameter-search count and the 65/35 phenotype proportion for one
 reported case.  Neither quantity identifies a unique bioelectric basin, and
 the first is **not** a population frequency.
 
-\`FiniteMorphogeneticBasinControlExact\` supplies a four-state finite control
+`FiniteMorphogeneticBasinControlExact` supplies a four-state finite control
 regression with quantitative intervention costs; it does not measure a
 separatrix in biological tissue.  The history-indexed phenotype fibres and
 3×3×3 spatial structure are distinct: a tissue can carry a local field of
@@ -144,11 +144,11 @@ cubical coordinates through time; one vertex is not the entire organism.
 
 ## Regression, acceptance and non-promotion
 
-\`scripts/check_biological_history_future_quotient.py\` checks the synthetic
+`scripts/check_biological_history_future_quotient.py` checks the synthetic
 state/action census, exact projection laws, selected divergence and 27-point
 cube structure; this is supporting computation, not formal or empirical proof.
 
-\`scripts/check_biological_history_future_round23.sh\` runs that regression,
+`scripts/check_biological_history_future_round23.sh` runs that regression,
 rejects simple proof escapes, then **requires a working Agda executable** to
 check the cumulative Golden root.  It exits nonzero when Agda is missing,
 rather than claiming kernel acceptance.
