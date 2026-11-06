@@ -15,8 +15,8 @@ from pathlib import Path
 
 from check_zhang2025_source_stress_dynamics import (
     MAGNETIC_PERMEABILITY, SOURCE_CLASSES, IDENTITY_FIELDS,
-    Interval, finite, interval, vec3, imul, iscale, idiv_positive,
-    nonempty, vacuum_maxwell_stress,
+    Interval, finite, interval, vec3, imul, iscale,
+    idiv_interval_positive, time_interval, nonempty, vacuum_maxwell_stress,
 )
 
 TORQUE_BACKGROUND_CLASSES = (
@@ -44,7 +44,7 @@ def sine_interval(argument: Interval) -> Interval:
 
 
 def _validate_frame(f: dict) -> None:
-    finite(f.get("t_s"), "timestamp")
+    time_interval(f)
     for key in (
         "theta_rad", "E2_V2_m2", "B2_T2", "electric_axis_angle_rad",
         "magnetic_axis_angle_rad",
@@ -122,23 +122,27 @@ def validate_torsion_run(run: dict, mode: str) -> None:
         raise ValueError("three or more frames required")
     for f in frames:
         _validate_frame(f)
-    if any(b["t_s"] <= a["t_s"] for a, b in zip(frames, frames[1:])):
-        raise ValueError("strictly increasing time required")
+    if any(time_interval(b).lo <= time_interval(a).hi
+           for a, b in zip(frames, frames[1:])):
+        raise ValueError("strictly non-overlapping calibrated timestamp intervals required")
 
 
 def _torque_model(run: dict, i: int) -> dict:
     frames = run["frames"]
     past, current, future = frames[i-1:i+2]
-    dt1 = current["t_s"] - past["t_s"]
-    dt2 = future["t_s"] - current["t_s"]
+    t_prev, t_curr, t_next = (
+        time_interval(past), time_interval(current), time_interval(future)
+    )
+    dt1 = t_curr - t_prev
+    dt2 = t_next - t_curr
     p = interval(past["theta_rad"], "theta prev")
     th = interval(current["theta_rad"], "theta")
     n = interval(future["theta_rad"], "theta next")
-    omega = idiv_positive(n - p, dt1 + dt2)
+    omega = idiv_interval_positive(n - p, t_next - t_prev)
     angular_accel = iscale(
-        idiv_positive(
-            idiv_positive(n - th, dt2) -
-            idiv_positive(th - p, dt1), dt1 + dt2
+        idiv_interval_positive(
+            idiv_interval_positive(n - th, dt2) -
+            idiv_interval_positive(th - p, dt1), dt1 + dt2
         ), 2.,
     )
     m = run["material"]
