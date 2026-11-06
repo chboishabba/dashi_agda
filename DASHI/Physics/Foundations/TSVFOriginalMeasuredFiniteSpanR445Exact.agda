@@ -20,6 +20,7 @@ open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
 open import Data.Product.Base using (_×_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; _+ℝ_; _*ℝ_)
 
@@ -132,6 +133,49 @@ module _
   originalMeasuredFiniteSpanDiagonalEqualsNativeR445 =
     FiniteSpan.originalAllFiniteSpanDiagonalMatches
       0ℝ _+ℝ_ _*ℝ_ matchedActualWords
+
+
+  -- Two finite spans are experimentally Gram-indistinguishable iff
+  -- they pair equally against every selected finite source test.
+  -- This is a literal original-observer/R445 image setoid compiler,
+  -- not the OS completed Hilbert null relation.
+  OriginalFiniteSpanIndistinguishable :
+    FiniteRealCyclicSpan → FiniteRealCyclicSpan → Set
+  OriginalFiniteSpanIndistinguishable left right =
+    (test : FiniteRealCyclicSpan) →
+    measuredObserverSpanPair left test
+      ≡ measuredObserverSpanPair right test
+
+  NativeR445ImageSpanIndistinguishable :
+    FiniteRealCyclicSpan → FiniteRealCyclicSpan → Set
+  NativeR445ImageSpanIndistinguishable left right =
+    (test : FiniteRealCyclicSpan) →
+    literalNativeR445SpanPair left test
+      ≡ literalNativeR445SpanPair right test
+
+  originalFiniteSpanIndistinguishabilityBidi :
+    (left right : FiniteRealCyclicSpan) →
+    OriginalFiniteSpanIndistinguishable left right →
+    NativeR445ImageSpanIndistinguishable left right
+  originalFiniteSpanIndistinguishabilityBidi left right match test =
+    trans
+      (sym (originalMeasuredFiniteRealSpanEqualsActualNativeR445
+        left test))
+      (trans (match test)
+        (originalMeasuredFiniteRealSpanEqualsActualNativeR445
+          right test))
+
+  nativeR445ImageIndistinguishabilityReflectsObserver :
+    (left right : FiniteRealCyclicSpan) →
+    NativeR445ImageSpanIndistinguishable left right →
+    OriginalFiniteSpanIndistinguishable left right
+  nativeR445ImageIndistinguishabilityReflectsObserver left right match test =
+    trans
+      (originalMeasuredFiniteRealSpanEqualsActualNativeR445
+        left test)
+      (trans (match test)
+        (sym (originalMeasuredFiniteRealSpanEqualsActualNativeR445
+          right test)))
 
 -- The intended original physical completion must construct the
 -- M1 same-instrument Born/Wilson cylinder equality and M2
