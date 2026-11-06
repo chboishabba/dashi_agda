@@ -1,3 +1,17 @@
+## 6 Nov continued M.02/M.04 original-source closure (source-written, not kernel accepted)
+
+**M.02 finite physical Wilson/F19 assembly:** `YMClayOriginalWilsonF19ConcreteWeightExact` now constructs the selected original complete Wilson density on the actual 64 ordered fine-link pairs and 896 spectators, with its selected all-marked F19 effective-density equality and same-denominator normalized identity. `YMClayNativePairsSpectatorsFubiniExact` proves by structural induction that arbitrary original flat product-Haar integrands agree with the true nested ordered-pairs-then-spectators integral. `YMClayOriginalWilsonPhysicalF19PartitionExact` composes the actual 1024-link inverse permutation with this Fubini theorem to identify the full original Wilson partition with the nested F19 fine partition. The M.02 bridge is source-written; an actual physical CMP119/122 E/R/B/V effective-action equality at all changing scales is NOT thereby established.
+
+**M.04 original native temporal reflection algebra:** `YMClayNativeR445TemporalReversalExact` proves on the original side-four SU(N) link field that the ordered product of the inverses of the second and first fine links equals the inverse of the ACTUAL native two-link R445 coarse holonomy. It reuses original `ExactLinkGroup.inverseProduct` and the original native block same-object owner, not a new reflection or a toy proof.
+
+**Executed non-Abelian reflection BIDI:** `scripts/check_ym_r445_time_reflection_q8_20261106.py` checks the concrete four-dimensional side-four to side-two site-plane time-reflection/block commute on 32 random Q8 fields, all 64 coarse bonds per field (2048 equalities); the naive reflection without temporal inversion/reversal fails 456 comparisons. This validates the intended orientation and finite label convention independently, but is NOT proof of literal Agda torus-index reflection compatibility, all fields, finite Wilson RP, complex OS or continuum positivity.
+
+**Physical-rate BIDI:** fixed lattice half-decay has envelope exponent (log 2)/a, not a finite calibrated physical mass. `scripts/check_ym_cmp116_physical_rate_bidi_20261106.py` documents positive and negative controls. A bound is not a spectral gap or noncollapse proof.
+
+**Kernel/trust:** no Agda binary or parallel_checker runtime here; no typecheck or trust receipt. Both new and old closed refl sources must be compiled before closure. R443 continuous compact-group Haar integrable-class instance, variable-cutoff CMP119/122 physical density identification, literal CMP116 uniform rate, physical time reflection and original fine Wilson RP, 4D nontrivial continuum reconstruction and mass gap remain distinct.
+
+---
+
 ## 6 Nov: M.01/M.02 native original weighted Wilson reindex
 
 The source now contains three physical YM modules: `YMClayNative1024ClosedReindexHaarConsequencesExact`, `YMClayNative1024WeightedWilsonReindexExact`, and `YMClayNative1024FullMarkedWilsonReindexExact`. Together they derive the all-vector original adjacent-swap reordering, inverse permutation and full original interacting Wilson weight and two-source partition identities. The physical regression imports them. Their Agda kernel acceptance has not been obtained.
