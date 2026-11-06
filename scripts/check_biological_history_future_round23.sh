@@ -13,6 +13,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
+  DASHI/Biology/Physical/BiologicalMinimalMorphologyAdversarialRefinementExact.agda
   DASHI/Biology/Physical/BiologicalMorphologyPartitionDepth4Exact.agda
   DASHI/Biology/Physical/BiologicalFullCubeIncidenceExact.agda
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
@@ -46,6 +47,7 @@ grep -q 'initialAllTracesPreserveBiologicalProjection' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
 grep -q 'coupledSignalIdempotentAt' \
   DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda
+grep -q 'original18ClassProjectionNotSafeUnderNewDynamics' DASHI/Biology/Physical/BiologicalMinimalMorphologyAdversarialRefinementExact.agda
 grep -q 'morphologyFutureEquivalenceExactlyMinimalCode' \
   DASHI/Biology/Physical/BiologicalMinimalMorphologyFutureQuotientExact.agda
 grep -q 'morphologyCompilerStopsAtFour' \
