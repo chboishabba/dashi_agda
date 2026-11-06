@@ -649,3 +649,60 @@ Current proof ledger (fail-closed):
 | K04d-LOG | Canonical source log convergent; inverse cancellation reduction source written; finite algebra diagnostic added | Original Bishop exp(-L)=1-x and Nat-successor same-object transport |
 | K04d-CONTINUITY | Generic finite/uniform continuity and conditional original-zeta chart written | Actual Dirichlet finite continuity + original half-plane/completed-zeta agreement |
 | K05-PI | Original two-ball global sine positivity and constructive first-positive-zero compiler written | Original atan/tan-to-sin/cos quarter semantic equality, then kernel acceptance |
+
+## Vendor/Bishop-first proof plan — 2026-11-06
+
+**Nonnegotiable foundation:** `vendor/bishop` is the Git submodule
+`viktorcsimma/bishop` (the existing repository identifies the pinned Bishop
+backend commit as `240e38c7f6938f20f865b1f956c5f084da48bd54`).
+The analytic proofs must stay on the imported `Real.ℝ` with
+`Real._≃_` setoid equality, `RealProperties` arithmetic/order and
+`Sequence.SeriesOf` convergence; no fresh complete-real type, axiom
+socket, or setoid-to-propositional-equality replacement is permitted.
+
+**Proven reusable vendor primitives and existing DASHI adapters:**
+- `BishopConstructiveRealBridgeExact`: pinned `Sequence.fast-cauchy⇒convergent`,
+  `Sequence.fast-convergent⇒cauchy`, `Sequence.uniqueness-of-limits`,
+  `Sequence.absolute⇒isConvergent`, `Sequence.lim`, and
+  `SeriesOf_ConvergesAbsolutely`.
+- `BishopFiniteSeriesExtensionalityExact`: termwise setoid equality
+  -> finite partial-sum congruence -> uniqueness of *actual* Bishop limits.
+- `BishopExponentialCauchyProductExact`: existing finite Cauchy row/wing,
+  absolute-triangle and rectangle/product limit lemmas for the original
+  source exponential, NOT a new exponential function.
+- `BishopUniformLimitSequentialContinuityExact` and
+  `BishopDirichletUniformLimitContinuityCompilerExact`: genuine native
+  uniform modulus and continuity transport, not a synthetic continuity axiom.
+
+**Corrected proof sequence:**
+1. Audit vendor's exact finite-sum, power, convergence, absolute-series,
+   squeeze and order APIs before adding any generic lemma. Implement
+   *only missing specializations* needed for source-series composition
+   (`exp(-∑x^k/k)`, `exp(2i atan_B t)`), using vendor-native `SeriesOf`,
+   finite `Fin` reindexing and setoid limit uniqueness.
+2. K04d-LOG: identify original rational formal-series finite coefficients;
+   prove the absolute summable reindex/limit transport on the actual
+   `Real.ℝ`; derive `exp_B(-L(x)) ≃ 1-x`; apply existing
+   `negativeLogExpIsActualBishopInverse` and
+   `sourceCanonicalNatLogCandidate` at the literal Nat-successor ratio.
+3. K05-PI: prove the rational Bishop complex phase identity on the exact
+   selected arctangent terms and use existing K05 imaginary multiplication,
+   Machin rational tangent algebra, `BishopMachinQuarterAngleBranchExact`,
+   and `BishopMachinPiGlobalSineSignFromTwoBallExact`. Do not recreate
+   sine, cosine, tangent or pi carriers.
+4. K04d-CONTINUITY: instantiate native finite exponential term continuity
+   and the existing uniform Basel tails on an admissible *local* chart;
+   prove original `ZetaHalfPlaneLayer.zetaHalfPlane` value agrees with the
+   selected Bishop sum. Treat original `CompletedRiemannZeta.zeta`
+   separately from `CompletedRiemannZeta.xi`; a genuine completed
+   xi definition and gamma-factor continuity remain additional work.
+5. Kernel accept exact PR head with the pinned submodule, matching
+   experimental stdlib, `agda --safe` and three TOE roots. Source-written
+   proof candidates and finite rational regressions never count as
+   compiler acceptance.
+
+**Explicit reuse restriction:** the legacy
+`Foundations.RealAnalysisAxioms` bridge and Lean semantic mirror are
+not to be substituted for golden Agda proofs on the vendored Bishop
+backend. Existing `BishopToDASHIRealBridge` remains a separate
+conditional transport and is not required for native K04d/K05 theorems.
