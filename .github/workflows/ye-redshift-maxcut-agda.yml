@@ -1,0 +1,86 @@
+name: Ye redshift max-cut Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/Closure/BothwellYe2022*.agda'
+      - 'DASHI/Physics/Closure/QuantumClockEmpiricalRedshift*.agda'
+      - 'DASHI/Physics/Closure/YeRedshiftEverything.agda'
+      - 'DASHI/Physics/Closure/WolfPrize2026UltracoldControlBridge.agda'
+      - 'DASHI/Promotion/SIMetreFromSecondAndCAdapter.agda'
+      - 'DASHI/Promotion/SIMetrologyPayloadDependencyDAG.agda'
+      - 'tests/test_bothwell_ye_2022_empirical_maxcut.py'
+      - 'tests/test_ye_redshift_*_maxcut.py'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/ye-redshift-maxcut-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ye-redshift-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check published gradient payload
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022PublishedGradientPayloadExact.agda
+
+      - name: Type-check exact redshift comparison
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022RedshiftComparisonExact.agda
+
+      - name: Type-check geodetic calibration
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022GeodeticCalibrationExact.agda
+
+      - name: Type-check chronometric geodesy bridge
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022ChronometricGeodesyBridgeExact.agda
+
+      - name: Type-check public artifact locator
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022PublicArtifactLocatorExact.agda
+
+      - name: Type-check external acquisition max-cut
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/BothwellYe2022ExternalAcquisitionMaxCut.agda
+
+      - name: Type-check staged ingestion status
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/QuantumClockEmpiricalRedshiftIngestionStatusExact.agda
+
+      - name: Type-check focused Ye redshift rollup
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/Closure/YeRedshiftEverything.agda
