@@ -137,6 +137,53 @@ finalRunRowSlot Run.runDone =
 finalRunRowSlot (Run.runStep step rest) =
   Global.there (finalRunRowSlot rest)
 
+-- The fixed-width SAT trace uses the length of START. A genuine
+-- step proves equality of lengths but not judgmental equality.
+-- Casting is confined to this adapter, not distributed across CNF.
+blockSliceCast :
+  ∀ {count index sourceWidth targetWidth}
+    (eq : sourceWidth ≡ targetWidth)
+    (slot : Global.Slot index count)
+    (bits : CNF.Bits (count * sourceWidth)) →
+  Slice.blockSliceBits slot
+    (castBits (cong (λ w → count * w) eq) bits)
+  ≡ castBits eq (Slice.blockSliceBits slot bits)
+blockSliceCast refl slot bits = refl
+
+-- The recursive row encoder casts an entire tail-row array from the
+-- next width to the current width. This lemma moves that cast past
+-- final-row extraction and composes it with the recursive width
+-- transport, by equality elimination instead of a with-abstraction.
+finalBlockTransport :
+  ∀ {machine count index startCols nextCols finishCols}
+    (stepEq : startCols ≡ nextCols)
+    (finishEq : nextCols ≡ finishCols)
+    (slot : Global.Slot index count)
+    (rowsBits : CNF.Bits
+      (count * (nextCols * Canonical.CellWidth machine)))
+    (finishBits : CNF.Bits
+      (finishCols * Canonical.CellWidth machine)) →
+  Slice.blockSliceBits slot rowsBits
+    ≡ castBits
+        (cong (λ n → n * Canonical.CellWidth machine)
+          (sym finishEq))
+        finishBits →
+  Slice.blockSliceBits slot
+    (castBits
+      (cong
+        (λ n → count * (n * Canonical.CellWidth machine))
+        (sym stepEq))
+      rowsBits)
+    ≡ castBits
+        (cong (λ n → n * Canonical.CellWidth machine)
+          (sym (trans stepEq finishEq)))
+        finishBits
+finalBlockTransport refl finishEq slot rowsBits finishBits proof =
+  proof
+
+-- THE HOMOGENEOUS STATEMENT: both sides have the start-row width.
+-- The right-hand side is the canonical finish encoding transported
+-- along the original run's proof of equal row lengths.
 encodeRunRows_finalBlock :
   ∀ {machine start rows finish}
     (stateCoverage :
@@ -147,29 +194,40 @@ encodeRunRows_finalBlock :
   Slice.blockSliceBits
     (finalRunRowSlot run)
     (encodeRunRows stateCoverage symbolCoverage run)
-  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+  ≡ castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (runFinishCanonicalLength run)))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
 encodeRunRows_finalBlock
     stateCoverage symbolCoverage Run.runDone =
-  takeAll
-    (Flat.encodeRow stateCoverage symbolCoverage _)
+  takeAll (Flat.encodeRow stateCoverage symbolCoverage _)
   where
     takeAll :
       ∀ {n} (bits : CNF.Bits n) →
       Canonical.takeBits n bits ≡ bits
     takeAll CNF.[]ᵇ = refl
     takeAll (bit CNF.∷ᵇ bits)
-      rewrite takeAll bits =
-      refl
-encodeRunRows_finalBlock {machine} {start = current}
-    stateCoverage symbolCoverage
-    (Run.runStep {next = next} step rest)
-    rewrite stepCanonicalLength step
-          | Canonical.dropAppendBits
-              (Flat.encodeRow stateCoverage symbolCoverage current)
-              (encodeRunRows stateCoverage symbolCoverage rest) =
-  encodeRunRows_finalBlock
-    stateCoverage symbolCoverage rest
+      rewrite takeAll bits = refl
 
+encodeRunRows_finalBlock {machine} {start = current} {finish = finish}
+    stateCoverage symbolCoverage
+    (Run.runStep {next = next} step rest) =
+  trans
+    (cong (Slice.blockSliceBits (finalRunRowSlot rest))
+      (Canonical.dropAppendBits
+        (Flat.encodeRow stateCoverage symbolCoverage current)
+        (castBits
+          (cong
+            (Trace.RowsTraceWidth machine (Run.runLength rest))
+            (sym (stepCanonicalLength step)))
+          (encodeRunRows stateCoverage symbolCoverage rest))))
+    (finalBlockTransport
+      (stepCanonicalLength step)
+      (runFinishCanonicalLength rest)
+      (finalRunRowSlot rest)
+      (encodeRunRows stateCoverage symbolCoverage rest)
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
+      (encodeRunRows_finalBlock stateCoverage symbolCoverage rest))
 
 finalRunRowSlot_eq_finalRowSlot :
   ∀ {machine start rows finish}
