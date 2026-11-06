@@ -179,3 +179,33 @@ must be resolved at the same-apparatus/first-hit seam (G13).
 
 Do not mix p-adic Kozyrev wavelets (different mathematical lane) with the
 optical Kozyrev mirror apparatus.
+
+
+## New proof-round deliverables (2026-11-06)
+
+- **Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md)
+  explicitly proves E01–E08 and E10–E11; E09 is a transverse,
+  finite-reflection conditional theorem. The paper proofs *do not*
+  replace ordinary Bishop-real Agda golden receipts.
+- **Symbolic exact checks:** \`scripts/gielis_base369_symbolic_certificates.py\`
+  verifies special-case trig identity, derivatives, curvature,
+  half-angle area integral, angular momentum exchange and finite
+  18→36 aliasing; tested independently with SymPy, no Agda claim.
+- **Physical sign correction:** \`wall_impulse = incoming - outgoing\`,
+  while the change of **ray** momentum is the negative. The previous
+  \`mean_signed_torque\` sign described the ray, not the wall.
+  Existing absolute-torque Pareto values are not a substitute for
+  a newly run committed-head optical receipt.
+- **Conditional SI torque:** for ideal specular walls and equal-power
+  source rays, \`tau_Nm = (power_W / 299792458) * mean_wall_angular_impulse_m\`.
+  The script supports \`--power-watts\`; this is an ideal-source model,
+  not experimentally calibrated optics or antigravity.
+- **Spectrum:** exact area \(\sqrt2\pi\), negative curvature for
+  m≥3 at radial indentations, and classical Faber–Krahn bounds
+  \(j_{0,1}^2/\sqrt2<\lambda_1(\Omega_m)\le j_{0,1}^2\).
+  These do not certify the grid 41/61 discretization's eigenvalue errors.
+
+All G01–G21 native/physical acceptance levels are recorded in
+[GielisBase369Roadmap.md](GielisBase369Roadmap.md). No false automatic
+promotion occurs from an external classical theorem, symbolic algebra,
+or a simulated emitter to a fully kernel-checked empirical proof.
