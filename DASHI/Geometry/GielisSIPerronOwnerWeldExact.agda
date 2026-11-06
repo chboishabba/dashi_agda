@@ -23,7 +23,8 @@ module DASHI.Geometry.GielisSIPerronOwnerWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Integer using (+_; -[1+_])
 open import Agda.Builtin.Int using (pos)
 open import Agda.Builtin.String using (String)
 open import Data.Rational.Base using (ℚ; _≤_)
@@ -107,6 +108,52 @@ zeroWallTorque = roleIndexedSI SI.zeroQ
 
 zeroOpticalEnergy : RoleIndexedSIQuantity opticalEnergy SI.unitScale
 zeroOpticalEnergy = roleIndexedSI SI.zeroQ
+
+------------------------------------------------------------------------
+-- Dimensional product on the PREEXISTING Buckingham mechanical algebra.
+-- Power / speed = force, and force x lever arm = torque.
+-- This proves units, not a constitutive law relating the magnitudes.
+------------------------------------------------------------------------
+
+inverseSpeedDimension : Mechanical.MechanicalDimension
+inverseSpeedDimension =
+  Mechanical.dimension
+    (+ zero) -[1+ zero ] (+ (suc zero))
+
+forceFromPowerOverSpeed :
+  Mechanical._⊗ᴰ_
+    Mechanical.powerDimension
+    inverseSpeedDimension
+  ≡
+  Mechanical.dimension
+    (+ (suc zero)) (+ (suc zero))
+    -[1+ suc zero ]
+forceFromPowerOverSpeed = refl
+
+torqueFromPowerOverSpeedAndRadius :
+  Mechanical._⊗ᴰ_
+    (Mechanical._⊗ᴰ_
+      Mechanical.powerDimension
+      inverseSpeedDimension)
+    Mechanical.lengthDimension
+  ≡ Mechanical.energyDimension
+torqueFromPowerOverSpeedAndRadius = refl
+
+mechanicalOpticalTorqueIsSI :
+  MechanicalSI.mechanicalToSI
+    (Mechanical._⊗ᴰ_
+      (Mechanical._⊗ᴰ_
+        Mechanical.powerDimension
+        inverseSpeedDimension)
+      Mechanical.lengthDimension)
+  ≡ SI.Energy
+mechanicalOpticalTorqueIsSI = refl
+
+angularImpulseIsDistinctFromPower :
+  roleDimension angularImpulse ≡
+  SI.dim (pos 2) SI.one SI.minusOne
+    SI.zeroI SI.zeroI SI.zeroI SI.zeroI
+angularImpulseIsDistinctFromPower = refl
 
 ------------------------------------------------------------------------
 -- Canonical exact speed-of-light carrier, with no fabricated authority.
