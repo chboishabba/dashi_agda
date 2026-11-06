@@ -29,3 +29,6 @@ import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact
 import DASHI.Mathematics.Complexity.Karp21FinFreeEndpointScanComparisonCountExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreePairwiseQuadraticCountExact
+
+-- Original-word input-length polynomial endpoint-comparison certificate.
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact
