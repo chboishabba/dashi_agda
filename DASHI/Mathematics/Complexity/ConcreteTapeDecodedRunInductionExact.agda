@@ -671,7 +671,7 @@ decodedRunInductionReceipt machine = record
   { allSlotsOrderedPaid = true
   ; adjacentRowsSameGlobalBlockPaid = true
   ; oneStepMarginThreadPaid = true
-  ; allTimeSlicesToWellFormedRunPaid = true
-  ; finalUniquePaid = true
-  ; finalInteriorPaid = true
+  ; allTimeSlicesToWellFormedRunPaid = false
+  ; finalUniquePaid = false
+  ; finalInteriorPaid = false
   }
