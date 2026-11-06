@@ -117,6 +117,11 @@ def free_fock_os():
     modes=np.array([float(sp.N(x)) for x in omegas])
     labels=list(product(range(5),repeat=3))
     energies=np.array([float(hbar)*np.dot(modes,n) for n in labels])
+    # Actual positive gap in the chosen FREE three-mode Fock model:
+    # min_{n!=0} E_n = hbar*mu = 7/4. This is NOT Clay YM.
+    free_gap=hbar*mu
+    assert free_gap==sp.Rational(7,4)
+    assert all(E==0 or E>=float(free_gap)-1e-12 for E in energies)
     rng=np.random.default_rng(404)
     psi=rng.normal(size=len(labels))+1j*rng.normal(size=len(labels))
     psi=psi/np.linalg.norm(psi)
@@ -135,6 +140,8 @@ def free_fock_os():
         "Hilbert":"noncollapsed infinite bosonic Fock l2(N^3) occupation space",
         "Hamiltonian":"H|n>=hbar*(sum_i omega_i n_i)|n>, domain weighted ell2",
         "spectral_projections":"energy-indicator multiplication operators",
+        "free_gap_energy":str(free_gap),
+        "free_gap_scope":"FREE Gaussian oscillator, not non-Abelian interacting YM",
         "real_time":"U(t)=exp(-itH/hbar)",
         "euclidean_time":"T(tau)=exp(-tau H/hbar)",
         "Gaussian_OS_two_point":"C_i(tau)=hbar*exp(-omega_i*abs(tau))/(2omega_i)",
