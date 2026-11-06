@@ -1,3 +1,11 @@
+## 2026-11-06 — original physical cube Dobrushin / CMP116 selected-H max-cut
+
+- Audited existing original Dobrushin row L1/reopening/normalized boundary weights, R467/R479 literal selected CMP116→gap, weighted Perron/Doob, R443/R445 native Wilson–Haar, published CMP122 RG/UV, and 2D/3D/4D/5D Voyager dimensional signatures.
+- Added the physical-cube rate steelman `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md`: one physical `ell` over changing `a,L`, conditional Gibbs source kernels, relative/weighted/cluster alternative sufficient q routes, explicit `C^{a,L}w≤q w` and `m≥-log q/ell` with same continuum OS H and full physical premise audit.
+- Added Agda `YMClayPhysicalCubeDobrushinFromGibbsExact`: literal `cells(a)·spacing(a)=ell` and conditional exact normalized Gibbs row/observable contraction for all selected cutoffs/volumes from the older normalized finite Dobrushin theorem, **conditional on genuine relative source estimate, no kernel receipt**.
+- Added exact rational `check_ym_physical_cube_perron_certificate.py`: weighted influence/Perron subeigenmatrix and scale-consistency checker with hard rejection of forged physical metadata. Independent exact 4×4 arithmetic through 101 powers PASS, illustration only.
+- Refined active phases/roadmap/exact-ledger/steelman/TODO to differentiate mathematically proved transport from the physical q<1, original R467 literal source, same-OS continuum and all-group Clay obligations; no endpoint falsely completed.
+
 ## 2026-11-06 — YM original finite sorter proof and execution-phase accountability
 
 - Added `Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md`: pinned Phase 0 trust/CI, F1 native 1024-link equalities, W2 original compact SU(N) Haar/same Gibbs, A3 uniform R445/R320, S4 same-H OS gap, C5 full Clay/SEM scope, exact acceptance conditions and honest status taxonomy. Synchronized `ClayYMProofRoadmap`, exact-lemma ledger, steelman atlas and TODO.
