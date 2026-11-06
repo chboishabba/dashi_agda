@@ -28,3 +28,5 @@ import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as Pu
 import DASHI.Physics.YangMills.YMClayOriginalR445ReflectedAllWordGramExact as NativeAllWordGram
 import DASHI.Physics.YangMills.YMClayOriginalR445PublishedWilsonRPWordWeldExact as NativePublishedWilsonRP
 import DASHI.Physics.YangMills.YMClayNativeClosedThreeEqualitiesCandidateExact as Original1024PermutationChecks
+
+import DASHI.Physics.YangMills.YMClayNative1024ClosedReindexHaarConsequencesExact as Native1024Haar
