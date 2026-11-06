@@ -25,6 +25,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21FinFreeAllWordDecoderAgreementExact as SameWord
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact as Counted
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelopeExact as Envelope
 import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
 
 -- Both claims pertain to the exact same original graph input word.
@@ -37,6 +38,11 @@ record SameWordCostedN21Certificate
     originalEndpointComparisonBound :
       Counted.actualAllWordComparisonCount word
         ≤ Counted.comparisonPolynomial (Word.encodingSize word)
+    allWordOriginalPrimitiveComparisonBudget :
+      Envelope.allWordCombinedComparisonCount word
+        ≤ ERQ.coefficient Envelope.combinedComparisonPolynomialBound *
+          ERQ.pow (suc (Word.encodingSize word))
+            (ERQ.exponent Envelope.combinedComparisonPolynomialBound)
     nativePolynomialComparisonBudget :
       Counted.actualAllWordComparisonCount word
         ≤ ERQ.coefficient Counted.comparisonPolynomialBound *
@@ -54,6 +60,8 @@ allWordsSameVerifierAndPolynomialComparisonCount word certificate =
         SameWord.n21FinFreeVerifierSameWord word certificate
     ; originalEndpointComparisonBound =
         Counted.allWordComparisonCountBound word
+    ; allWordOriginalPrimitiveComparisonBudget =
+        Envelope.allWordCombinedPolynomialClock word
     ; nativePolynomialComparisonBudget =
         Counted.allWordComparisonPolynomialClock word
     }
