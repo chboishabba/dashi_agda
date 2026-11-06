@@ -11,6 +11,7 @@ modules=(
   DASHI/Cognition/CCDCOECognitiveMultiplexInvariantRegression.agda
   DASHI/Cognition/CCDCOEMaxCutRegressionExact.agda
   DASHI/Cognition/CCDCOEP3TypedIntersectionalAxisExact.agda
+  DASHI/Cognition/CCDCOEP3SituatedHistoryPNFExact.agda
   DASHI/Cognition/CCDCOEP3CausalTrialecticInteractionExact.agda
   DASHI/Cognition/CCDCOEP3SourcePowerEvidenceWeldExact.agda
   DASHI/Cognition/CCDCOEP3CausalTrialecticRegressionExact.agda
