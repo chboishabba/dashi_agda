@@ -24,6 +24,8 @@ on:
       - 'Docs/diagrams/ym_toe_r559_current_master_convergence.puml'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unified/**'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEExact.agda'
+      - 'DASHI/Unified/FleetFormalGapTargetTOEValidation.agda'
       - 'DASHI/Unified/BalabanRGTOEMaxCutValidation.agda'
       - 'DASHI/Unifier.agda'
       - '.github/workflows/toe-symmetry-resolved-369.yml'
@@ -89,6 +91,12 @@ jobs:
           dashi-repo lineage --prefix DASHI.Physics.YangMills.BalabanCMP116 --root .
           dashi-repo diagnose DASHI/EverythingTOESymmetryResolved369.agda --root .
           dashi-repo diagnose DASHI/Unifier.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEExact.agda --root .
+          dashi-repo diagnose DASHI/Unified/FleetFormalGapTargetTOEValidation.agda --root .
+          dashi-repo related fleetFormalGapOrdinalCount --root . --limit 20
+          dashi-repo related fleetSharedCardinalityDoesNotCreateIdentity --root . --limit 20
+          dashi-repo discover 'Fleet 58 formal gap target ordinal non-promotion spectral identity firewall' --root . --limit 40
+          dashi-repo lineage --prefix DASHI.Unified.Fleet --root .
           dashi-repo related BalabanRGTOEReceipt --root .
           dashi-repo related balabanStressCauchyModulusCompilerLevel --root . --limit 20
           dashi-repo related balabanStressHilbertBoundCompilerLevel --root . --limit 20
@@ -144,6 +152,8 @@ jobs:
             DASHI/Physics/YangMills/YangMillsTOEConvergenceRound559Validation.agda
             DASHI/Unified/Physics.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/FleetFormalGapTargetTOEExact.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unifier.agda
             DASHI/EverythingTOESymmetryResolved369.agda
           )
@@ -167,6 +177,7 @@ jobs:
             DASHI/EverythingTOESymmetryResolved369.agda
             DASHI/Unifier.agda
             DASHI/Unified/Everything.agda
+            DASHI/Unified/FleetFormalGapTargetTOEValidation.agda
             DASHI/Unified/YMGoal1TOECompatibilityValidation.agda
           )
           for module in "${modules[@]}"; do
