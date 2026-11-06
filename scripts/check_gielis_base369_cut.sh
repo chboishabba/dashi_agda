@@ -11,6 +11,7 @@ sources=(
   DASHI/Geometry/GielisBishopPolynomialExact.agda
   DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda
   DASHI/Geometry/GielisSpectralSIScaleExact.agda
+  DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
