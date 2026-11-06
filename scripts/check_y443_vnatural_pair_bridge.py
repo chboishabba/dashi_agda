@@ -27,6 +27,7 @@ NOGO = ROOT / "DASHI/Moonshine/Y443Nonary72EquivarianceNoGoExact.agda"
 JMD_SOURCE = ROOT / "DASHI/Moonshine/Y443JMDSourceWordInstantiationExact.agda"
 JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agda"
 JMD_POWERS = ROOT / "DASHI/Moonshine/Y443JMDPowerFiveSixAlgebraExact.agda"
+JMD_PATHS = ROOT / "DASHI/Moonshine/Y443JMDThreePathGraphCertificateExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -111,6 +112,23 @@ def assert_finite_counts() -> None:
     # NOT the 5 classes of 9, nor the 14 classes of 27.
     assert len(fixed_edges) + len(moving_edges) // 2 == 7
     assert len(fixed_nonedges) + len(moving_nonedges) // 2 == 31
+
+    # Independently evaluate all of JMD's literal paths against the Y443
+    # graph: neighboring pairs adjacent, all pairs distance >= 2 nonadjacent.
+    paths = (
+        ("d3", "c3", "b3", "a", "b1", "c1", "d1", "e1"),
+        ("b2", "c2", "d2", "e2"),
+        ("a", "b2", "c2", "d2", "e2"),
+    )
+    for path in paths:
+        assert len(path) == len(set(path))
+        assert all(frozenset((path[i], path[i + 1])) in EDGES
+                   for i in range(len(path) - 1))
+        assert all(frozenset((path[i], path[j])) not in EDGES
+                   for i in range(len(path)) for j in range(i + 2, len(path)))
+    assert all(frozenset(("e1", k)) not in EDGES for k in paths[1])
+    print("PASS JMD paths: all 3 graph paths and all 4 x4-beta commuting pairs")
+
     print("PASS arm-swap: fixed (node,edge,nonedge)=(4,3,7); moving=(8,8,48)")
     print("PASS canonical Y443: all 55 nonedges +8 nodes +8 edges +centre=72; residual=8")
 
@@ -118,7 +136,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -171,7 +189,11 @@ def assert_source_scope() -> None:
     for symbol in ("commutesWithPowers", "powCommutingProduct", "fifthProductIsFirst", "sixthProductIsSecond", "deriveConcretePowers"):
         if symbol not in power_src:
             raise AssertionError(f"missing JMD power proof {symbol}")
-    print("PASS source: exact JMD words, algebraic 5/6 powers, 72+8 and no-go included")
+    path_src = JMD_PATHS.read_text()
+    for symbol in ("jmdFirstPathGraphValid", "jmdBetaPathGraphValid", "jmdThirdPathGraphValid", "x4IsNonadjacentToEntireBetaPath"):
+        if symbol not in path_src:
+            raise AssertionError(f"missing JMD three-path graph theorem {symbol}")
+    print("PASS source: original JMD paths, graph certificates, 5/6 algebra and 72+8 included")
 
 
 def check_agda() -> None:
