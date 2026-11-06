@@ -53,3 +53,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordNumericalWeldExact
 
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordValidityExact
+
+-- All-word native signed-gamma structural inspection bound.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClockExact
