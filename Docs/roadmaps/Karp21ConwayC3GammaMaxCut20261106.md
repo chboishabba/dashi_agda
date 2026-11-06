@@ -137,3 +137,28 @@ clock obligations, not fabricated by these representation theorems.
 Priority: run the original golden referee on this head; resolve first
 actual Agda diagnostics; only then promote C01/C02/C04. Continue
 original N21/E20 machine-cost and Karp-21 network gates independently.
+
+## 2026-11-06 — arbitrary-bit grammar strengthening and independent controls
+
+K02 gains two additional SOURCE-WRITTEN universal theorems in the actual
+gamma `BitWord` owner:
+
+- `chainFullBinaryNoProperPrefix`: any raw bit suffix that makes a
+  complete encoded chain equal a second complete encoded chain is empty.
+  This is not restricted to whole three-bit or gamma tokens.
+- `chainEncodeInjective`: two chain syntax lists with equal encoded words
+  are equal lists, using the exact original suffix-preserving reader.
+
+Independent local Python reference controls (not kernel proofs):
+- 103 positive Conway rule agreements over 0–4 entries from {1,2,3};
+  18 larger cases skipped under the explicit evaluation cap.
+- 224 additional positive Conway rule agreements for 5–7 entries
+  from {1,2}; zero skips in that tranche.
+- 781 chain-gamma strict roundtrips with bounded lengths and values.
+- Exhaustive 8,191 binary strings of lengths 0–12:
+  133 canonical codewords re-encode identically, 8,058 rejected.
+
+The checked Python reference and the exact Agda source are
+different artifacts. The original `parallel_checker`/Agda 2.9
+kernel acceptance is STILL required for promotion. The source
+head of this branch must be pinned again after the final edit.
