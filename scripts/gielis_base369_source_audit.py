@@ -111,7 +111,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,17):
+    for i in range(1,20):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -132,7 +132,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":16,
+        "paper_proof_sections":19,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
