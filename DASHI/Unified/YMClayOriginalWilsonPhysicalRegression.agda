@@ -30,3 +30,5 @@ import DASHI.Physics.YangMills.YMClayOriginalR445PublishedWilsonRPWordWeldExact 
 import DASHI.Physics.YangMills.YMClayNativeClosedThreeEqualitiesCandidateExact as Original1024PermutationChecks
 
 import DASHI.Physics.YangMills.YMClayNative1024ClosedReindexHaarConsequencesExact as Native1024Haar
+
+import DASHI.Physics.YangMills.YMClayNative1024WeightedWilsonReindexExact as NativeWeightedWilson
