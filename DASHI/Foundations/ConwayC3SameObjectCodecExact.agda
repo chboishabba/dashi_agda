@@ -2,6 +2,8 @@ module DASHI.Foundations.ConwayC3SameObjectCodecExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong)
+open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.Product using (_×_; _,_)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 import DASHI.Core.TriadicClosureTower as Tower
 import DASHI.Biology.Physical.C3CubeFourier27Exact as Cube
@@ -141,3 +143,32 @@ towerCharacterHomomorphism k f g t
       (phaseAt k t)
       (tritToPhase (f t))
       (tritToPhase (g t)))
+
+------------------------------------------------------------------------
+-- Literal bidirectional six-bit word codec. The original trit encoder
+-- reserves 11, and its strict decoder rejects any reserved component.
+------------------------------------------------------------------------
+
+tripleToTower : Bits.TritTriple → Tower.ThreeSuperThree
+tripleToTower (a , (b , c)) neg = a
+tripleToTower (a , (b , c)) zer = b
+tripleToTower (a , (b , c)) pos = c
+
+decodeCubeBits : Bits.WordTriple → Maybe Cube.Cube3
+decodeCubeBits word with Bits.decodeTriple word
+... | nothing = nothing
+... | just triple = just (towerToCube (tripleToTower triple))
+
+cubeBitRoundTrip : (c : Cube.Cube3) →
+  decodeCubeBits (cubeBits c) ≡ just c
+cubeBitRoundTrip (Cube.cube3 a b c)
+  rewrite Bits.triple-roundtrip
+    (phaseToTrit a , (phaseToTrit b , phaseToTrit c))
+        | phaseRoundTrip a
+        | phaseRoundTrip b
+        | phaseRoundTrip c = refl
+
+reservedCubeWordRejected :
+  decodeCubeBits
+    (Bits.word11 , (Bits.word00 , Bits.word00)) ≡ nothing
+reservedCubeWordRejected = refl
