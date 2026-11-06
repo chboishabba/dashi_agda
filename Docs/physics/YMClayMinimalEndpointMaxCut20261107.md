@@ -1,3 +1,15 @@
+## 7 November — E1 original finite Wilson integration and safe/physical boundary
+
+**Source-written proof:** `YMClayE1OriginalSUNFiniteCylinderLawsExact.agda` is pinned to `YMClayE1OriginalSUNDependentCylinderExact.actualOriginalWilsonMeasureAt` at every varying cutoff `n`. It reuses `YangMillsFinitePhysicalMeasureLimitExact` *at each actual n-specific link carrier* by constructing `fixedCutoffFiniteLaws`; there is no attempt to equate different finite link types. It derives `nativeExpectationZero`, `nativeExpectationOne`, `nativeExpectationAdd`, `nativeExpectationScale`, and `nativeExpectationPositive` from **only** native `PhysicalFiniteMeasureIntegrationLaws`, original partition nonzero and one common genuine quotient/division operation. This is exactly the finite E1 requirement and removes five independently supplied physical finite-state laws, not an arbitrary new continuum expectation oracle.
+
+**Safe boundary repair:** `YMClayE1VariableCutoffCylinderLimitExact.agda` now parameterizes `Measure : Nat -> Set` and `originalNormalizedExpectation` and imports NO physical measure or postulated real-analysis module. Its selected-limit algebra/transport is genuinely abstract and `--safe`-eligible. The native Wilson finite source module remains non-safe due to `RealAnalysisAxioms`. Exact Agda kernel acceptance is not claimed without `parallel_checker`.
+
+**Important analytic restraint:** the legacy `BalabanRealSequenceLimitByVanishingErrorExact.RealSequenceLimitByVanishingError.limit : (Nat -> Real) -> Real` is an externally supplied `limit` for every sequence. Defining `Converges s target` as `limit s ≡ target` can be an adequate abstract convergence authority, but MUST NOT be interpreted as proving ordinary topological convergence of all original Wilson expectation sequences. The genuine E1 obligation is an actual sequence-specific physical convergence/tightness theorem in a well-defined topology on physically admissible local cylinders; no finite linearity identity proves that.
+
+**D1/D2/N1/G1 remain genuinely open:** the original real-valued Wilson physical CMP116 bound, a full-sector spectral theorem for the reconstructed OS Hamiltonian, actual nontrivial continuum local correlation, and all compact-simple-G extension. The real-valued `YangMillsClayCMP119RealSelectedGapExact` route renders the proposed general ℚ/ℝ scalar-isomorphism obligation optional.
+
+---
+
 ## 7 November: original LOCAL two-plaquette Wilson physical D1 test class and marked-source identity
 
 `YMClayOriginalVariableWilsonCovarianceSourceExact.agda` additionally constructs `originalLocalPlaquetteTraceAt n p` for **every** original positive plaquette `p : Plaquette.PeriodicPlaquette n` at every changing cutoff `n`. This uses the actual original Wilson plaquette holonomy and selected SU(N) real trace—not a synthetic test or one global all-lattice action. `originalLocalPlaquetteTraceAtGaugeInvariant` consumes `Variable.periodicSUNPositivePlaquetteGaugeTrace`; `originalLocalPairProductGaugeInvariant` proves any two selected plaquette insertions produce a gauge-invariant original test.
