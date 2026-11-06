@@ -1,3 +1,11 @@
+## 6 Nov 2026 — CMP119/116/122 source archaeology upgraded to exact reuse
+
+**Do not regenerate Bałaban's mathematics.** Existing repo already owns CMP119 beta-driven full density + anchored *normalized* expectation, CMP122 complete-density UV/boundary reinjection, CMP116 finite differentiated/selected two-J localization, and R342→R467→R479/R482 positive transfer-gap compilers. New `YMClayCMP119122116SelectedProducerWeldExact.agda` imports and composes these on one source: beta coupling + localized CMP116 potential, R342→R467 finite same-selected covariance, and R342→R482 positive-gap rate without independent positivity token. No Agda compiler receipt or physical Wilson instantiation claimed. Source-owned statements are distinguished from original SU(N) Wilson, gauge/ghost physical density, original marked-J dictionary, source uniform physical rate and reflection-positive *crossing* R-operation.
+
+Four actual same-Wilson physical payments **Y.01–Y.04** are specified in [CMP119/116/122 source max-cut](../physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md) and [current phases](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). New fail-closed source/CI contract: `scripts/check_ym_cmp119116122_same_source_contract.py`. The optional physical Dobrushin/Perron route is not a compulsory additional CMP116 source leaf.
+
+---
+
 ## 6 November 2026 — same-original-Wilson constructive 4D continuum steelman / BIDI max-cut
 
 **Primary theorem proposal:** [YMClayConstructive4DContinuumSteelman20261106.md](../physics/YMClayConstructive4DContinuumSteelman20261106.md). It explicitly derives the hypothetical nontrivial 4D continuum from ONE original compact-simple-G Wilson family, not six unrelated records, and proposes source-specific bounds for same-observable UV Cauchy limits, IR/crossing tails, literal CMP116 mixed-J decay, OS reconstruction and non-Gaussian survival. The existing R443/R445/R320/R333 owners are reused; unification #1460 remains downstream.
