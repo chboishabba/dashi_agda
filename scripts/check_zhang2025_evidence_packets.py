@@ -121,7 +121,7 @@ def verify_manifest(manifest: dict, evidence_root: Path) -> dict:
                          "runs": checked})
     distinct_labs = len({b["lab_id"] for b in observed}) > 1
     distinct_rigs = len({b["apparatus_id"] for b in observed}) > 1
-    return {
+    receipt = {
         "schema": manifest["schema"],
         "source_class": manifest["source_class"],
         "protocol_id": protocol,
@@ -139,6 +139,12 @@ def verify_manifest(manifest: dict, evidence_root: Path) -> dict:
         "frames_count_as_independent_trials": False,
         "blocks": observed,
     }
+    # Deterministic receipt for ITIR/PNF-style source chaining; this digest
+    # hashes a provenance statement, not a physical or identity certification.
+    canonical = json.dumps(receipt, sort_keys=True, separators=(",", ":"),
+                           ensure_ascii=False).encode("utf-8")
+    receipt["verified_manifest_receipt_sha256"] = hashlib.sha256(canonical).hexdigest()
+    return receipt
 
 
 def main() -> None:
