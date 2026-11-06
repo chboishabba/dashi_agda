@@ -22,7 +22,10 @@ module DASHI.Analysis.BishopOriginalExpOriginDividedDifferenceSeriesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
-open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
+open import Data.Integer.Base using (+_)
+import Data.Nat.Base as Nat
+import Data.Nat.Properties as NatP
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 
 import Real as R
@@ -31,6 +34,7 @@ import Sequence as Seq
 
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialPositiveOrderExact as ExpZero
+import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as Ext
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 
@@ -78,7 +82,7 @@ originalExpOriginMagnitudeSuccessorFactor :
     (originalExpOriginMagnitudeTerm h (suc n))
     (R._*_
       (R._*_ (R.∣ h ∣)
-        (Exp.embed (Data.Rational.Unnormalised._/_ (Data.Integer.Base.+ 1) (suc (suc n)))))
+        (Exp.embed ((+ 1 / suc (suc n)))))
       (originalExpOriginMagnitudeTerm h n))
 originalExpOriginMagnitudeSuccessorFactor h n =
   RP.≃-trans
@@ -92,7 +96,7 @@ originalExpOriginMagnitudeSuccessorFactor h n =
            ((reciprocal ⊗ coefficient) ⊗ (oldPower ⊗ absH))
            ⊜ ((absH ⊗ reciprocal) ⊗ (coefficient ⊗ oldPower)))
          RP.≃-refl
-         (Exp.embed (Data.Rational.Unnormalised._/_ (Data.Integer.Base.+ 1) (suc (suc n))))
+         (Exp.embed ((+ 1 / suc (suc n))))
          (Exp.embed (Exp.inverseFactorial (suc n)))
          (R.pow (R.∣ h ∣) n)
          (R.∣ h ∣))
@@ -104,7 +108,7 @@ originalExpOriginMagnitudeSuccessorFactor h n =
 
 originalExpOriginMagnitudeRatioHalf :
   (h : R.ℝ) (n : Nat) →
-  (2 * Exp.magnitudeNaturalBound h) Data.Nat.Base.≤ (suc (suc n)) →
+  (2 * Exp.magnitudeNaturalBound h) Nat.≤ (suc (suc n)) →
   R._≤_
     (originalExpOriginMagnitudeTerm h (suc n))
     (R._*_ Exp.half (originalExpOriginMagnitudeTerm h n))
@@ -125,9 +129,9 @@ originalExpOriginMagnitudeConvergent h =
     (2 * Exp.magnitudeNaturalBound h ,
       λ n nAtLeast →
         originalExpOriginMagnitudeRatioHalf h n
-          (Data.Nat.Properties.≤-trans
+          (NatP.≤-trans
             nAtLeast
-            (Data.Nat.Properties.n≤1+n (suc n))))
+            (NatP.n≤1+n (suc n))))
 
 originalExpOriginQuotientAbsolutelyConvergent :
   (h : R.ℝ) →
