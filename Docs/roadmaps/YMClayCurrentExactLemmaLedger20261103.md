@@ -1,3 +1,6 @@
+
+**6 Nov further F1 proof-code reduction:** `YMClayNativeOriginalSortDeciderExact.agda` contains constructive native `decideNativeMember`, `decideAllSelectable`, `proofFromYes`, closed `originalC3SelectableBooleanGoal` and parameterized original `originalPairSelectableBooleanGoal`, and two exact Boolean→canonical-vector compiler terms. `F1.0c` and `F1.0d` are **SOURCE_PENDING**. `F1.1`, `F1.2` and `F1.3` remain **OPEN** until their closed Boolean/length certificates are actually accepted by Agda. Native Nix CI workflow is `.github/workflows/ym-native-maxcut-exact-agda.yml`; no CI result claimed.
+
 # Active exact-lemma execution update — 6 November 2026
 
 Refer to [YMClayExecutionPhasesDeliverablesExactLemmas20261106.md](YMClayExecutionPhasesDeliverablesExactLemmas20261106.md) for the **current phase, deliverables and acceptance**; the ledger below is the historical/complete source-indexed producer inventory.
