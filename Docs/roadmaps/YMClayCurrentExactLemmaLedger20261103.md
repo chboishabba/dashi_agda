@@ -1,3 +1,23 @@
+## 6 November 2026 — selected physical-cube CMP116 / R445 / R333 exact lemma cut
+
+**Source owners reused (do not reconstruct):** `BalabanFiniteDobrushinReopeningExact`, `BalabanFiniteNormalizedWeightDobrushinExact`, `BalabanFiniteBoundaryConditionedDobrushinExact`, `BalabanFiniteRGReopeningDobrushinExact`, `BalabanCMP116PublishedLiteralSelectedRound467Exact`, `BalabanCMP116ModeSelectedSubgapClusteringBidiExact`, `BalabanCMP116PublishedLiteralToGapRound479Exact`, `BalabanClayT5ClusteringToTransferGapExact`, `BalabanClayUniformPerronContractionExact`, `BalabanPublishedUVStabilityNonlinearRGCoreExact`. **CMP116 is widely implemented**; its selected R467 `literalSelectedCMP116Localization` and physical envelope are physically uninhabited record fields, not closed selected theorems.
+
+| ID | Exact producer | Status |
+|---|---|---|
+| PCUBE.F01 | `YMClayPhysicalCubeDobrushinFromGibbsExact.physicalCubeCellLength` and literal original physical-cube equality `cells(a) a = ell` | SOURCE; equality required of actual cutoff schedule; Agda pending |
+| PCUBE.F02 | `originalConditionalRowsUniformlyContract`, original normalized Gibbs conditional L1 `≤q` from original relative epsilon and uniform `2eps≤q` | SOURCE / CONDITIONAL; actual q premise unpaid, Agda pending |
+| PCUBE.F03 | `originalConditionalObservableUniformlyContract`, exact original local observable oscillation `≤A q` | SOURCE / CONDITIONAL; actual q premise unpaid, Agda pending |
+| PCUBE.F04 | `scripts/check_ym_physical_cube_perron_certificate.py`: exact rational `Cw≤qw`, finite-power and wrong-source/geometry rejection | REFERENCE ONLY; independent 101-power 4×4 check passed; committed selftest/CI execution pending |
+| PCUBE.P01–P03 | Selected original SU(N) Borel Haar/gauge/R445 weighted conditional, physical cube calibration and RP-compatible map | OPEN PHYSICAL |
+| PCUBE.P04 | All cutoffs and volumes same normalized block conditionals, one strict weighted `q<1` in physical units | OPEN ANALYTIC decisive |
+| PCUBE.P05 | Literal selected R467 common-domain mixed-J CMP116 and uniform physical exponential `q^{r}` | OPEN PHYSICAL source application |
+| PCUBE.P06 | Same OS H semigroup, density of selected local modes, no spectral pollution, `Δ≥-log(q)/ell` | OPEN PHYSICAL |
+| PCUBE.P07 | Nontrivial 4D continuum QFT and all compact simple groups | OPEN CLAY |
+
+**Quantitative negative control:** finite-stage projective diameters (`BalabanClayUniformPerronContractionExact`) and a bare-link Dobrushin threshold are insufficient. This physical-block bound must hold for `b(a)=ell/a→∞` rather than a fixed number of fine links. All earlier source-count and 219-field semantics unchanged. See full theorem and 2D/3D/5D comparison: [physical-cube steelman](../physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md).
+
+---
+
 
 **6 Nov further F1 proof-code reduction:** `YMClayNativeOriginalSortDeciderExact.agda` contains constructive native `decideNativeMember`, `decideAllSelectable`, `proofFromYes`, closed `originalC3SelectableBooleanGoal` and parameterized original `originalPairSelectableBooleanGoal`, and two exact Boolean→canonical-vector compiler terms. `F1.0c` and `F1.0d` are **SOURCE_PENDING**. `F1.1`, `F1.2` and `F1.3` remain **OPEN** until their closed Boolean/length certificates are actually accepted by Agda. Native Nix CI workflow is `.github/workflows/ym-native-maxcut-exact-agda.yml`; no CI result claimed.
 
