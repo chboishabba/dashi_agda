@@ -1,3 +1,14 @@
+## 6 Nov 2026 — YM #1444 active executable proof cut
+
+- [x] Create **phase/deliverables/exact-lemma** acceptance queue: `Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md`; keep legacy roadmap and 219-field ledger distinct.
+- [x] Source-write membership-indexed original bubble-head and sort-correctness under `AllSelectable`: `YMClayNativeOriginalSortMembershipCorrectExact.agda` (**Agda UNVERIFIED**).
+- [x] Run exact local reference for 5,914 small distinct permutations, original 1,024-bond C3 and pair/spectator targets, 46,592 and 41,792 swaps and negative invalid-target controls. Add `scripts/check_ym_sort_selectability_reference.py` (**Python only**).
+- [ ] **F1.1** construct original 1024 C3 `AllSelectable` certificate and kernel-accept `constructedNativeC3CanonicalLabelGoal`.
+- [ ] **F1.2–F1.3** prove original pair/spectator `listLength=1024` and `AllSelectable` and kernel-accept `originalPairSpectatorCanonicalLabelGoal`.
+- [ ] **V00–V02** exact-head Agda/stdlib/TOE root typecheck + transitive trust audit (Agda unavailable here).
+- [ ] **W2.0–W2.3** original CMP119/variable-Gibbs same-object action, continuous Borel SU(N) Haar, weighted physical 1,024-link effective density; do not redo existing Wilson/Fubini owners.
+- [ ] **A3.0–S4.4, C5.0–C5.3** uniform RG and CMP116 exponential decay, physical OS same-H gap in both limits, nontrivial QFT/all compact simple group scope. Genuinely open, not a scheduling issue.
+
 - [x] YM R443.F09 SOURCE: original selected 1024-bond real SU(N) Gibbs density and chosen physical finite measure use literally the same decoder, weighted cylinder numerator, partition and normalized expectation; conditional original C3 weighted expectation transfer from one closed native permutation and selected action C3 covariance. Agda kernel pending.
 - [x] YM SEM.P02 SOURCE: nonempty external compact-simple group scope and bidirectional all-group transport requires physically anchored group index equivalence/predicate meaning; prevents vacuous SU(N)-only Clay upgrade. Agda kernel pending.
 - [x] YM R443 reference: 32 exact original 1024-bond Q8 Wilson action C3/gauge tests and 32 C3-orbit weighted numerators PASS; 32 anisotropic weighted negative controls rejected (independent, not physical/Agda).
