@@ -21,6 +21,22 @@
 
 **Acceptance policy:** source-written/conditional ≠ kernel acceptance ≠ selected physical theorem; this status must remain fail-closed in all three ledgers. Neither mathematical exact reduction nor source syntax alone can stand in for independently measured causal geometry, physical reflection positivity, nonzero continuum OS sectors, or uniform CMP116 exponential decay.
 
+## Extended source implementation completed in one pass — 6 November 2026
+
+- [x] **HIL01:** `TSVFOriginalForwardCyclicCrossGramExact` proves all original source operator cross-pairings `omega_E(A†B)=<A psi_E,B psi_E>`, with actual `TSVF.forwardState E`, using only the selected physical source adjoint/compose laws rather than an independently assumed Gram.
+- [x] **HIL02:** `TSVFOriginalForwardCyclicActionQuotientExact` proves original cyclic-action kernel congruence for left composition, addition, scalar multiplication and identity. It does NOT assume right-ideal/complete-Hilbert positivity.
+- [x] **Concrete original HIL01:** `TSVFOriginalComplexFiniteForwardNormalizedDiagonalExact` uses the actual `TSVF2017OriginalComplexABLSelectedExact.finiteComplexQuantum`: its forward ket is `(1,1)`, norm **2**. Constructs a correctly normalized physical-source real-diagonal state with exact identity, complex-coordinate composition, self-adjointness and `omega(A†A)>=0` from rational square positivity; not the full noncommutative/continuum algebra.
+- [x] **HIL07/S10:** `TSVFOriginalForwardToNativeWilsonWordGramExact` compiles the same original forward source to actual Wilson/R445 fine and pushed real **all-word** cyclic Gram. The full pairing equality is DERIVED from independently auditable M1 single-cylinder original real readout match, M2a cylinder multiplication and M2b reflection/adjoint, not a global all-pair Gram premise. **Still PHYSICAL_OPEN** until the selected instrument supplies M1/M2 and independent YM complete complex OS.
+- [x] **KK10:** `TSFVKKFourMetricVerticalProbeFullReconstructionExact` proves complete KK5 bilinear reconstruction from the same g4, fifth-circle radius and mixed connection probes using native 5D metric. Selected original measured probes/5D solution remain PHYSICAL_OPEN.
+- [x] **Independent exact control:** `scripts/check_tsfv_original_complex_diagonal_kk_tomography_20261106.py` passed 1,443 Fraction equivalence/reference cases. It now runs before the pinned `parallel_checker`.
+- [x] Both Golden-safe and axiomatic physical R445 regressions/selected source arrays updated without touching YM #1444 and without creating alternate Wilson measures.
+- [ ] **S08/HIL02–HIL05:** selected full complex noncommutative GNS, positive null-ideal quotient, complete Hilbert, strongly continuous physical Stone group.
+- [ ] **S09/HIL06–HIL11:** original physical observer Born/Wilson cylinder map M1, product/adjoint M2a/M2b, full complex Schwinger/OS all-word state, onto unitary, self-adjoint generator and Wick.
+- [ ] **S01–S04/OBS01–OBS09:** original nontrivial measured Kubo, uniform propagation, independent 4D Lorentz cone/clock.
+- [ ] **S05–S06/KK01–KK08:** actual original 5D Einstein–matter solution and its reduction to independently measured g4; neither symbolic AdS4×S1 control nor algebraic tomography is the physical source.
+- [ ] **S10/BIDI01–BIDI04:** same complete CMP119/122 effective Wilson source, genuine selected uniform CMP116 localized estimates and physical UV/IR/history/KK/OS limits.
+- [ ] **S11/BIDI07:** exact-head `parallel_checker` zero-error compile and full transitive trust audit; 1,443 reference cases alone are NOT kernel acceptance.
+
 ## Actually completed source and integration work this round
 
 - [x] Reconcile #1444 physical-cube PCUBE/CMP116 donor into #1460 through [#1470](https://github.com/chboishabba/dashi_agda/pull/1470), merge SHA `1f71c1d58cc2d231a0fdc42c50b0c9969d35e49b`. Pin donor source head; later parent updates require a new sync.
