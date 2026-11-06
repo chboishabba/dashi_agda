@@ -472,3 +472,40 @@ The project uses the *independent parallel_checker* for actual final
 proof acceptance; neither a shell source scan nor the original-data
 finite computational readout establishes that acceptance. All
 physical calibration and PostgreSQL review gates remain explicit.
+
+
+### Additional P2 basin and P5 assay-context max-cut (same extension)
+
+The all-neighbour module now also contains
+`allNeighbourSignalIdempotentAt`,
+`allNeighbourCoarseSignalIdempotentAt`,
+`fineResponseUnchangedBySignal`,
+`coarseResponseUnchangedBySignal`, and
+`fullBasinTargetProjection`. These source-written statements certify
+that, under the selected *Boolean synchronous 54-bond* signalling law,
+a second identical signal does not change the one-step target pattern,
+and that the fine/coarse quotient agrees at that fixed target.
+This is an exact **finite selected basin**, not measured
+planarian convergence, noise robustness or a physiological separatrix.
+
+Original three-context measurements in the same pinned Kuo et al. CSV
+were also inspected. The measured counts are 244,401 Fepb, 259,821
+Arti and 257,565 dmsC genotypes. Across the **genotype-disjoint test
+split** from the earlier reproducible FNV protocol, source-measured
+Pearson correlations are **0.569360 (Fepb/Arti; n=36,300),
+0.475965 (Fepb/dmsC; n=36,025),
+0.554731 (Arti/dmsC; n=38,268)**. All three values come from
+directly measured genotype means, not predicted landscape points.
+
+`check_original_measured_context_transfer.py` independently replays
+the source-pinned three-context comparison and rejects an incorrect
+source blob. Its same-study held-out contexts demonstrate measured
+context dependence, **not** independent-study replication,
+mechanism identification, or held-out developmental attraction.
+The full methods/counts are recorded in
+`Docs/support/reference/OriginalDmscMeasured20261106.md`.
+
+**No production physiological P3 parameter claim or P4 authoritative
+PNF mutation was introduced.** Both require source-specific review and
+physical data; fitting arbitrary trajectories or promoting ontology
+labels would violate the source-trust boundary.
