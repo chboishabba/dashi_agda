@@ -1,3 +1,14 @@
+
+### 3a. Exact real/Bishop-facing nonGaussian compiler interpretation
+
+The golden \`YMClayRGLossBudgetToNonGaussianExact.agda\` has now been sharpened: the rational \(c_n\) is **a certified numerical lower enclosure**, NOT an assertion that a continuous Wilson–Gibbs cumulant is rational. \`ActualRGContinuumChargeLimit r Scalar\` is parameterized over the actual continuum \`Scalar\` (intended to be the vendored Bishop/fast-Cauchy completion), with \`actualFiniteCumulant : Nat→Scalar\`, order-preserving embedding \`embed : ℚ→Scalar\`, and the required original-source witness
+\[
+\operatorname{embed}(c_n)\le \kappa_{4,n}^{\text{actual}}(O_{f_1},\ldots,O_{f_4}).
+\]
+A *single derived* proof \`referenceRGUniformNoncollapse\` supplies \(\eta\le c_n\). Its composite with \`selectedFiniteChargeLower\` yields the **actual** \(\operatorname{embed}(\eta)\le\kappa_{4,n}^{\rm actual}\); then true same-source finite-cumulant convergence and a closed interval in the completed real order feed the ORIGINAL T5 nonGaussian theorem. This avoids the important false move of identifying a rational interval certificate with a physical real expectation. Exact Agda/physical instantiation remains subject to receipts.
+
+---
+
 # YM Clay — constructive 4D continuum steelman and same-source BIDI programme
 
 **Date** 2026-11-06. **Owner** YM PR #1444 (R443/R445/R320/R333 + Clay). **Status** mathematical conjectural programme with real finite and conditional Agda components, not a claimed Millennium solution. **Companion** [exact phase / deliverables ledger](../roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md). This is **not** an observer→Lorentz/KK construction: those belong to #1460. Do not import #1460 into the #1444 parent.
