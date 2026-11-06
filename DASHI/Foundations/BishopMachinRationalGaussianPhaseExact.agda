@@ -23,7 +23,7 @@ module DASHI.Foundations.BishopMachinRationalGaussianPhaseExact where
 -- BishopMachinRationalTangentAlgebraExact owner.
 ------------------------------------------------------------------------
 
-open import Data.Integer.Base using (+_; -_)
+open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _+_; _-_; _*_; _/_)
 open import Agda.Builtin.Equality using (_≡_)
 import Data.Rational.Tactic.RingSolver as ℚRing
@@ -51,7 +51,7 @@ phaseFiveFourthImag =
   squareImag phaseFiveSquareReal phaseFiveSquareImag
 
 phaseFiveFourthRealExact :
-  phaseFiveFourthReal ≡ - 239 / 28561
+  phaseFiveFourthReal ≡ (+ 0 / 1) - (+ 239 / 28561)
 phaseFiveFourthRealExact = ℚRing.solve-∀
 
 phaseFiveFourthImagExact :
