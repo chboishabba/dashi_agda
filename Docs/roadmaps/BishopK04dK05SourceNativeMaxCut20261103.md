@@ -1155,7 +1155,8 @@ remain separately OPEN.
 
 ### Acceptance and actual deliverables
 
-- All seven new source owners across this round are imported into
+- All four new source owners in this round (plus the updated existing
+  rational-to-Bishop morphism and the square-zero helper) are imported into
   the three golden TOE roots with no additional real/complex carrier.
 - The repository's canonical `scripts/run_agda29_parallel_check.sh`
   now owns both the focused `--safe` check and the three
