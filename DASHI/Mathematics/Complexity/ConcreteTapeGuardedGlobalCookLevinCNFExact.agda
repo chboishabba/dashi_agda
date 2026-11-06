@@ -16,6 +16,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact w
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong₂; trans)
 open import Agda.Builtin.Nat using (Nat; suc)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
@@ -144,10 +145,11 @@ guardedGlobalCookLevinCNFComplete
       (suc colsMinusOne) initialTarget)
     (Endcap.globalAllRowsEndcapsCNF colsMinusOne)
     assignment
-... | equality
-  rewrite originalFormulaTrue parts
-        | globalEndcapCNFTrue parts =
-  equality
+... | equality =
+  trans equality
+    (cong₂ CNF.andBool
+      (originalFormulaTrue parts)
+      (globalEndcapCNFTrue parts))
 
 record GuardedGlobalSATConsequences
     {machine : Local.ConcreteTapeMachine}
