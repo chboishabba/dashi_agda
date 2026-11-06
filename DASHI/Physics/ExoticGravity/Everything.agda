@@ -115,3 +115,4 @@ import DASHI.Physics.ExoticGravity.Zhang2025EMGravitySourceClaimExact
 import DASHI.Physics.ExoticGravity.Zhang2025EMGravityPhysicalPromotionExact
 import DASHI.Physics.ExoticGravity.Zhang2025EMGravityValidation
 import DASHI.Physics.ExoticGravity.Zhang2025EMGravitySourceSafeValidation
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact
