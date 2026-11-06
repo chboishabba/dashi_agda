@@ -104,9 +104,10 @@ referenceRGUniformNoncollapse r n =
 record ActualRGContinuumChargeLimit
     (r : RGReferenceChargeSurvival) (Scalar : Set) : Set₁ where
   field
-    -- The actual physical continuum scalar may be a vendor Bishop
-    -- completion; it is NOT assumed to be a rational number.
+    -- Rational charge(n) is a PROVED LOWER ENCLOSURE, not a claim
+    -- that an actual continuous Wilson Gibbs expectation is rational.
     continuumCharge : Scalar
+    actualFiniteCumulant : Nat → Scalar
     scalarZero : Scalar
     embed : ℚ → Scalar
     embedZero : embed 0ℚ ≡ scalarZero
@@ -118,11 +119,18 @@ record ActualRGContinuumChargeLimit
       a ≤ b → LessEqual (embed a) (embed b)
     embedPreservesPositive : ∀ q →
       0ℚ < q → Positive (embed q)
+    orderTransitive : ∀ {a b c : Scalar} →
+      LessEqual a b → LessEqual b c → LessEqual a c
     positiveCannotLieBelowZero : ∀ value →
       Positive value → LessEqual value scalarZero → T5.Empty
 
-    actualChargeConverges :
-      Converges (λ cutoff → embed (charge r cutoff)) continuumCharge
+    -- MUST be derived for the true original selected physical
+    -- differentiable fourth cumulant, not a toy rational.
+    selectedFiniteChargeLower : ∀ cutoff →
+      LessEqual (embed (charge r cutoff))
+        (actualFiniteCumulant cutoff)
+    actualCumulantConverges :
+      Converges actualFiniteCumulant continuumCharge
     selectedOrderIntervalClosed :
       ∀ sequence target →
       Converges sequence target →
@@ -139,17 +147,19 @@ asOriginalT5Nontriviality r limit = record
   { T5.UniformCumulantLowerBoundData.zero = scalarZero limit
   ; T5.UniformCumulantLowerBoundData.eta = embed limit (eta r)
   ; T5.UniformCumulantLowerBoundData.finiteCumulant =
-      λ n → embed limit (charge r n)
+      actualFiniteCumulant limit
   ; T5.UniformCumulantLowerBoundData.continuumCumulant =
       continuumCharge limit
   ; T5.UniformCumulantLowerBoundData.LessEqual = LessEqual limit
   ; T5.UniformCumulantLowerBoundData.Positive = Positive limit
   ; T5.UniformCumulantLowerBoundData.Converges = Converges limit
   ; T5.UniformCumulantLowerBoundData.finiteCumulantsConverge =
-      actualChargeConverges limit
+      actualCumulantConverges limit
   ; T5.UniformCumulantLowerBoundData.finiteUniformLowerBound =
-      λ cutoff → embedPreservesOrder limit
-        (referenceRGUniformNoncollapse r cutoff)
+      λ cutoff → orderTransitive limit
+        (embedPreservesOrder limit
+          (referenceRGUniformNoncollapse r cutoff))
+        (selectedFiniteChargeLower limit cutoff)
   ; T5.UniformCumulantLowerBoundData.lowerOrderIntervalClosed =
       selectedOrderIntervalClosed limit
   ; T5.UniformCumulantLowerBoundData.etaPositive =
