@@ -42,6 +42,8 @@ python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
 python3 scripts/biological_si_kinetic_calibration.py --self-test
 python3 scripts/biological_measured_genotype_holdout.py --self-test
 python3 scripts/prepare_shine_dalgarno_measured.py --self-test
+python3 scripts/check_original_dmsc_holdout.py --self-test
+python3 scripts/check_original_dmsc_neutral_components.py --self-test
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
