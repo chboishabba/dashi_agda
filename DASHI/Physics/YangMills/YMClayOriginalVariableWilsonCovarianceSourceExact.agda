@@ -30,6 +30,9 @@ open import DASHI.Foundations.RealAnalysisAxioms
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Blocks
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
@@ -209,6 +212,61 @@ module _
   originalGaugeInvariantSectionProduct left right invLeft invRight n =
     originalGaugeInvariantProduct n (left n) (right n)
       (invLeft n) (invRight n)
+
+  -- Original ONE FIXED positive plaquette at the canonical origin:
+  -- a genuinely support-local original SU(N) Wilson trace test on
+  -- each varying periodic four-torus (NOT the extensive six-plane
+  -- action sum). The same original theory and trace are used.
+  originalOriginPositivePlaquetteAt :
+    (n : Nat) → Plaquette.PeriodicPlaquette n
+  originalOriginPositivePlaquetteAt n =
+    Plaquette.periodicPlaquetteAt Blocks.zeroBlock Torus.zeroᵢ
+
+  originalLocalPlaquetteTraceSection : OriginalCylinderSection
+  originalLocalPlaquetteTraceSection n links =
+    Trace.matrixWilsonValue traceData
+      (Variable.periodicSUNPositivePlaquette theory n links
+        (originalOriginPositivePlaquetteAt n))
+
+  originalLocalPlaquetteTraceIsGaugeInvariantSection :
+    OriginalGaugeInvariantSection originalLocalPlaquetteTraceSection
+  originalLocalPlaquetteTraceIsGaugeInvariantSection n gamma links =
+    Variable.periodicSUNPositivePlaquetteGaugeTrace
+      theory traceData n links gamma
+      (originalOriginPositivePlaquetteAt n)
+
+  originalLocalPlaquetteProductIsGaugeInvariantSection :
+    OriginalGaugeInvariantSection
+      (λ n links →
+        originalLocalPlaquetteTraceSection n links
+        *ℝ originalLocalPlaquetteTraceSection n links)
+  originalLocalPlaquetteProductIsGaugeInvariantSection =
+    originalGaugeInvariantSectionProduct
+      originalLocalPlaquetteTraceSection
+      originalLocalPlaquetteTraceSection
+      originalLocalPlaquetteTraceIsGaugeInvariantSection
+      originalLocalPlaquetteTraceIsGaugeInvariantSection
+
+  -- This LOCAL source is available to the E1 and D1 physical
+  -- programmes at every finite cutoff, without inventing a new
+  -- measure, trace, gauge algebra or cylinder-representation axiom.
+  originalE1LocalPlaquetteConnectedCovarianceIsSameD1 :
+    (n : Nat) →
+    originalWilsonConnectedCovariance n
+      (originalLocalPlaquetteTraceSection n)
+      (originalLocalPlaquetteTraceSection n)
+    ≡
+    actualE1CylinderExpectation n
+      (λ cutoff links →
+        originalLocalPlaquetteTraceSection cutoff links
+        *ℝ originalLocalPlaquetteTraceSection cutoff links)
+    -ℝ
+    (actualE1CylinderExpectation n originalLocalPlaquetteTraceSection
+      *ℝ actualE1CylinderExpectation n originalLocalPlaquetteTraceSection)
+  originalE1LocalPlaquetteConnectedCovarianceIsSameD1 n =
+    actualE1D1SameWilsonConnectedCovariance n
+      originalLocalPlaquetteTraceSection
+      originalLocalPlaquetteTraceSection
 
   -- The existing original six-plaquette action density is the
   -- ACTUAL selected Wilson cylinder generator, at EVERY variable
