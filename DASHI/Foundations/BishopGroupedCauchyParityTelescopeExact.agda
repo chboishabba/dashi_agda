@@ -178,3 +178,73 @@ universalFiniteImagGroupedEquality evenOdd oddEven sourceOdd degree count =
       (Ext.seriesPartialSumsCongruent degree count))
     (RP.+-inverseʳ
       (S.SeriesOf sourceOdd count))
+
+
+------------------------------------------------------------------------
+-- THE MISSING FINITE LINEARITY WELD: native Sequence.SeriesOf.
+-- This is needed because the original complex triangle is
+-- defined as a difference of TWO triangle partials, whereas
+-- the signed algebraic telescope is a series of differences.
+------------------------------------------------------------------------
+
+nativeFiniteSeriesDifferenceLinear :
+  (left right : Nat → R.ℝ) →
+  (count : Nat) →
+  R._≃_
+    (S.SeriesOf (λ k → R._-_ (left k) (right k)) count)
+    (R._-_
+      (S.SeriesOf left count)
+      (S.SeriesOf right count))
+nativeFiniteSeriesDifferenceLinear left right zero =
+  let open RP.ℝ-Solver
+  in solve 0
+    (Κ 0ℚᵘ ⊜ (Κ 0ℚᵘ ⊖ Κ 0ℚᵘ))
+    RP.≃-refl
+nativeFiniteSeriesDifferenceLinear left right (suc count) =
+  let
+    L = S.SeriesOf left count
+    R′ = S.SeriesOf right count
+    a = left count
+    b = right count
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.+-congʳ
+      (R._-_ a b)
+      (nativeFiniteSeriesDifferenceLinear left right count))
+    (solve 4
+      (λ l r a′ b′ →
+        (l ⊖ r) ⊕ (a′ ⊖ b′)
+        ⊜ (l ⊕ a′) ⊖ (r ⊕ b′))
+      RP.≃-refl L R′ a b)
+
+nativeFiniteSeriesSumLinear :
+  (left right : Nat → R.ℝ) →
+  (count : Nat) →
+  R._≃_
+    (S.SeriesOf (λ k → R._+_ (left k) (right k)) count)
+    (R._+_
+      (S.SeriesOf left count)
+      (S.SeriesOf right count))
+nativeFiniteSeriesSumLinear left right zero =
+  let open RP.ℝ-Solver
+  in solve 0
+    (Κ 0ℚᵘ ⊜ (Κ 0ℚᵘ ⊕ Κ 0ℚᵘ))
+    RP.≃-refl
+nativeFiniteSeriesSumLinear left right (suc count) =
+  let
+    L = S.SeriesOf left count
+    R′ = S.SeriesOf right count
+    a = left count
+    b = right count
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.+-congʳ
+      (R._+_ a b)
+      (nativeFiniteSeriesSumLinear left right count))
+    (solve 4
+      (λ l r a′ b′ →
+        (l ⊕ r) ⊕ (a′ ⊕ b′)
+        ⊜ (l ⊕ a′) ⊕ (r ⊕ b′))
+      RP.≃-refl L R′ a b)
