@@ -135,3 +135,53 @@ primitiveBudgetAtLeastMacroBudget (suc m) =
   NatP.+-mono-≤
     (s≤s (s≤s (s≤s z≤n)))
     (primitiveBudgetAtLeastMacroBudget m)
+
+------------------------------------------------------------------------
+-- ACTUAL primitive comparison scheduling for the original validator.
+-- This counts u<v, v<n and every primitive test inside strictAfter,
+-- rather than incorrectly charging strictAfter as one primitive op.
+------------------------------------------------------------------------
+
+countedRawValidatorPrimitive :
+  Nat → Graph.PreviousPair → List Graph.RawEdge → Bool × Nat
+countedRawValidatorPrimitive n prev [] = true , zero
+countedRawValidatorPrimitive n prev (Graph.raw-edge u v w ∷ rest)
+  with NatP._<?_ u v | NatP._<?_ v n | Graph.strictAfter prev u v
+... | yes _ | yes _ | true =
+  let later = countedRawValidatorPrimitive n (Graph.previous u v) rest
+  in proj₁ later ,
+       suc (suc (proj₂ (countedStrictAfter prev u v) + proj₂ later))
+... | _ | _ | _ =
+  false , suc (suc (proj₂ (countedStrictAfter prev u v)))
+
+primitiveValidatorValueSame :
+  (n : Nat) (prev : Graph.PreviousPair)
+  (edges : List Graph.RawEdge) →
+  proj₁ (countedRawValidatorPrimitive n prev edges)
+    ≡ Runtime.validRawEdges n prev edges
+primitiveValidatorValueSame n prev [] = refl
+primitiveValidatorValueSame n prev (Graph.raw-edge u v w ∷ rest)
+  with NatP._<?_ u v | NatP._<?_ v n | Graph.strictAfter prev u v
+... | yes _ | yes _ | true =
+  primitiveValidatorValueSame n (Graph.previous u v) rest
+... | _ | _ | _ = refl
+
+primitiveValidatorCountBound :
+  (n : Nat) (prev : Graph.PreviousPair)
+  (edges : List Graph.RawEdge) →
+  proj₂ (countedRawValidatorPrimitive n prev edges)
+    ≤ primitiveValidatorComparisonBudget (length edges)
+primitiveValidatorCountBound n prev [] = z≤n
+primitiveValidatorCountBound n prev (Graph.raw-edge u v w ∷ rest)
+  with NatP._<?_ u v | NatP._<?_ v n | Graph.strictAfter prev u v
+... | yes _ | yes _ | true =
+  s≤s (s≤s
+    (NatP.+-mono-≤
+      (strictAfterPrimitiveCountBound prev u v)
+      (primitiveValidatorCountBound n (Graph.previous u v) rest)))
+... | _ | _ | _ =
+  s≤s (s≤s
+    (NatP.≤-trans
+      (strictAfterPrimitiveCountBound prev u v)
+      (NatP.m≤m+n 3
+        (5 * length rest))))
