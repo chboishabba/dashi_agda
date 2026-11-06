@@ -106,7 +106,7 @@ def check_agda() -> None:
             f"Golden Agda NOT RUN: {compiler!r} not found; "
             "finite-only must not be cited as kernel acceptance"
         )
-    flags = ["-i", ".", "-l", "standard-library"]
+    flags = ["--safe", "-i", ".", "-l", "standard-library"]
     for file in (PRESENTATION, ACTION):
         print(f"Agda checking: {file.relative_to(ROOT)}", flush=True)
         subprocess.run(
