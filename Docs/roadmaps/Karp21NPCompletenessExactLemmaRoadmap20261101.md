@@ -1306,14 +1306,14 @@ Karp21Everything and Karp21BinaryRuntimeEverything):
   original `Graph.strictAfter`. `originalRawValidatorValueSame`
   states literal Boolean equivalence on any raw edge list, including
   invalid/unsorted/over-range edges. The actual short-circuiting
-  validation count is at most `3*m`.
+  validation count is at most `3*m` top-level predicates.
 - `Karp21FinFreeOriginalGraphComparisonEnvelopeExact` composes
   the validation count with the genuine `2m(m-1)` original sparse
   history endpoint-equality count. For every original successfully
   parsed graph word of length L, it proves the combined count is
-  bounded by `C(L)+3L`, where `C(L)=2L(L-1)`.
+  bounded by `C(L)+5L` primitive comparisons, where `C(L)=2L(L-1)`.
   Thus the combined number of address/order comparisons is bounded
-  by the explicit polynomial expression `2L(L-1)+3L`.
+  by the explicit polynomial expression `2L(L-1)+5L`.
 
 No separate fabricated finite graph verifier is introduced.
 This joins the source-level original decision and address-operation
@@ -1321,3 +1321,14 @@ resource accounting. It is NOT yet a binary bit-operation or Turing
 machine polynomial clock: gamma parsing, comparisons on arbitrary
 binary integers, signed cut arithmetic, all malformed parser branches,
 actual strict clock instantiation and Agda acceptance remain to pay.
+
+**2026-11-07 comparator-cost correction:** The source's `Graph.strictAfter`
+contains up to three primitive Nat comparisons (a<u, a=u, b<v),
+not one. The independent `countedStrictAfter`, `strictAfterValueSame`
+and `strictAfterPrimitiveCountBound` follow those exact branches.
+`countedRawValidatorPrimitive`, `primitiveValidatorValueSame`
+and `primitiveValidatorCountBound` now count the original u<v,
+v<n and strictAfter's internal comparisons, yielding 5m rather
+than the 3m *top-level predicate invocation* bound. The combined
+original successful-word envelope is the corrected
+`2L(L-1)+5L`. This is still not binary machine time.
