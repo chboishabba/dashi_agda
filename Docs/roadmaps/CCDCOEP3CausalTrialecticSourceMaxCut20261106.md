@@ -166,6 +166,28 @@ measurement reliability, sampling coverage, prediction horizon and
 context-specific validation. Strong group agreement is not equivalent
 to truth or autonomy. Open disagreement is not automatically incoherence.
 
+## External empirical comparator pair (source-specific, not universal)
+
+- Gauthier et al., The political effects of X's feed algorithm,
+  Nature 2026, DOI 10.1038/s41586-026-10098-2:
+  independent randomised 7-week 2023 X feed-setting experiment;
+  measured changes in certain political priorities/attitudes and
+  following behaviour, without significant effects on measured
+  affective polarisation or party identification. Source-owned,
+  time/platform/population-specific positive example of a causal
+  media-exposure question. It is not a universal radicalisation result.
+- Evaluating Echo Chambers, Rabbit Holes, and Radicalization Pathways on
+  YouTube, Political Communication, published 10 June 2026,
+  DOI 10.1080/10584609.2026.2671765:
+  a recommendation-system audit reports content rabbit holes and
+  limited echo-chamber patterns but no algorithm-driven pathway into
+  ever-more-extreme rabbit holes in the sampled setting. This is a
+  useful contrast on different outcomes and another platform, not a
+  contradictory experiment on the identical causal estimand.
+
+Neither source is imported as a theorem; each supplies an independently
+measured hypothesis/endpoint example for future P3 discriminator work.
+
 ## Experiment and causal identification plan
 
 Choose publicly documented institutional/campaign events with archived
