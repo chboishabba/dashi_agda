@@ -1127,3 +1127,160 @@ validation checks, NOT Agda kernel receipts.
   independent of a new PF library.
 - CI and original HTML scene remain DEFERRED in the active
   work priorities, as requested.
+
+
+## E27 — Corrected Cartesian FD operator: a qualitative continuum spectral convergence theorem
+
+**Critical discovered exact-target defect.** The original five-point
+raster code used the fixed, nonvanishing radial boundary shrinkage
+\(10^{-12}\) in *dimensionless normalized coordinates*. Its
+mathematical \(h\to0\) limit targets the **shrunken** domain
+\(\{|x|<r_m(\arg x)-10^{-12}\}\), not literally \(\Omega_m\).
+The code now uses
+
+\[
+\delta(h)=\min(10^{-12},h^2)\longrightarrow0
+\quad\text{as }h\downarrow0.
+\]
+
+At the original \(n=41\) and \(n=61\) grids, \(h=3/(n-1)\)
+and \(\delta(h)=10^{-12}\), so all existing finite
+certificate grid masks are **exactly the legacy masks**.
+At sufficiently small \(h\), the new inward shrinkage
+decreases, selecting the *unshrunken* intended domain.
+
+**Theorem (exact-boundary idealization, standard compactness).**
+Let \(m\ge1\) be fixed, and define \(S_h\) as the
+interior nodes of the Cartesian mesh of width \(h=3/(n-1)\)
+inside the exact analytic star boundary satisfying
+\(\lvert x_i\rvert<r_m(\arg x_i)-\delta(h)\).
+Let \(A_h=h^{-2}(4I-B_h)\) be the original zero-exterior
+five-point Dirichlet matrix, including diagonal 4 at all
+interior nodes. For every fixed positive integer \(k\),
+
+\[
+\boxed{
+  \lambda_k(A_h)\longrightarrow
+  \lambda_k(-\Delta_{D,\Omega_m})
+  \quad (h\downarrow0,\;\text{odd }n\to\infty).
+}
+\]
+
+This is a **qualitative** theorem; no explicit uniform
+error rate or numerical n=41/n=61 continuum error bound
+is claimed by this statement.
+
+**Proof.**
+
+1. **Geometry and boundary convergence.** E02 gives a
+   compact smooth positive radial embedding, with
+   \(B_1\subseteq\Omega_m\subseteq B_{\sqrt2}\).
+   The centered grid box \([-1.5,1.5]^2\) therefore
+   contains the full domain for every n.
+   Since \(\delta(h)\to0\), each fixed compact subset
+   \(K\Subset\Omega_m\) is eventually contained in the
+   selected grid interior. Every piecewise-constant
+   grid-cell extension of \(S_h\) is supported inside
+   the \(O(h+\delta(h))\) neighbourhood of \(\overline
+   {\Omega_m}\).
+
+2. **Exact finite energy.** Extend an arbitrary finitely
+   supported grid vector \(u_i\) by zero to all
+   \(\mathbb Z^2\). The original matrix satisfies
+   \[
+   u^\top(4I-B_h)u
+     =\sum_{i\in\mathbb Z^2}\sum_{j=1}^2
+        (u_{i+e_j}-u_i)^2\ge0.
+   \]
+   The equality holds *including all boundary edges*
+   because the original diagonal coefficient is exactly
+   4; it is not the degree of an induced subgraph.
+   The script scripts/gielis_fd_energy_mosco.py
+   verifies this with exact rational/integer arithmetic
+   on four independent selected test-vector families.
+
+3. **Reconstruction in \(L^2\).** Set \(U_h\) equal to
+   \(u_i\) on the \(h\times h\) cell centred at grid
+   point \(i\), and zero elsewhere. Then exactly
+   \[
+   \|U_h\|_{L^2}^2=h^2\sum_i u_i^2,\quad
+   \sum_{j=1}^2\|D_j^hU_h\|_{L^2}^2
+   =u^\top(4I-B_h)u,
+   \]
+   where \(D_j^h=(T_{he_j}-I)/h\) is the finite
+   difference quotient. Thus the finite Rayleigh
+   quotient is the quotient of a nonnegative discrete
+   \(H^1\)-energy by the exact reconstructed \(L^2\)-mass.
+
+4. **Recovery / limsup.** For every
+   \(\varphi\in C_c^\infty(\Omega_m)\), assign
+   \(u_i=\varphi(x_i)\). For all sufficiently fine
+   meshes its support avoids the boundary and
+   the sampling and Riemann-sum rules yield
+   \(\|U_h\|_2\to\|\varphi\|_2\) and
+   \(\sum_j\|D_j^hU_h\|_2^2
+      \to\int_{\Omega_m}|\nabla\varphi|^2\).
+   Density of \(C_c^\infty(\Omega_m)\) in \(H_0^1(\Omega_m)\)
+   and the min–max theorem give
+   \(\limsup_h\lambda_k(A_h)\le\lambda_k(\Omega_m)\).
+
+5. **Compactness / liminf.** Normalize the first k
+   discrete eigenvectors in the reconstructed \(L^2\)
+   norm. The recovery estimate bounds their energies.
+   The discrete difference quotient bound, bounded
+   spatial support, and Kolmogorov–Riesz translation
+   criterion give a strongly \(L^2\)-convergent subsequence.
+   The discrete derivatives have weakly convergent
+   \(L^2\) subsequences, whose distributional limits are
+   the weak derivatives. Limits therefore lie in
+   \(H^1(\mathbb R^2)\), vanish outside \(\Omega_m\),
+   and by its smooth/Lipschitz boundary have zero trace,
+   hence lie in \(H_0^1(\Omega_m)\).
+   Strong \(L^2\) convergence preserves the k
+   orthonormal directions. Weak lower semicontinuity
+   of the Dirichlet form applied to each linear
+   combination and the min–max principle yield
+   \(\lambda_k(\Omega_m)\le
+     \liminf_h\lambda_k(A_h)\).
+
+6. **Conclusion.** The matching liminf/limsup prove the
+   asserted spectral convergence. There is no
+   pollution of each *fixed low Dirichlet eigenvalue*,
+   but this does not assert norm-resolvent convergence,
+   quantitative mesh errors or statements about
+   increasingly high mode numbers \(k=k(h)\).
+
+**Implementation caveat.** The above mathematical
+convergence theorem selects *exact real evaluation* of
+the analytic \(r_m\) in the grid predicate. The
+current Python simulator evaluates trigonometric functions
+in binary64, so the finite selected masks must be
+cross-checked (or evaluated by certified/precision-growing
+interval arithmetic) to transfer the asymptotic theorem
+to literal floating-point execution. A fixed binary64
+roundoff error cannot be silently treated as \(o(1)\).
+The exact FD energy identity itself holds for **any**
+realized finite mask, regardless of how it was selected.
+The Agda source still owes explicit raster vertex/edge
+enumeration, analytic discrete compactness and operator
+identification; this note is a rigorous *paper theorem*
+using standard compactness, not an Agda kernel receipt.
+
+The old YM Mosco/recovery/liminf modules were inspected as
+methodological donors. They explicitly record those
+theorems as **not constructed** and cannot be used as
+kernel evidence of the present Gielis continuum result.
+
+### E27 accepted mathematical cut versus remaining exact leaves
+
+- Mathematical exact-boundary, vanishing-tolerance
+  original Cartesian five-point scheme: fixed-k
+  **qualitative** Dirichlet spectral convergence CLOSED
+  on paper, using stated classical theorems.
+- Original n=41/n=61 finite mask, exact positive-vector
+  eigenvalue enclosure and discrete energy algebra:
+  retained and source-checked; no numerical continuum
+  error width inferred.
+- Literal binary64 mesh predicate, machine-verified
+  convergence rate and native Agda continuum proof:
+  OPEN; no false promotion from E27.
