@@ -98,17 +98,40 @@ originalAtanSignedAbsoluteBelowHalfReference point inside n =
     (Atan.atanSignedAbsIsMagnitude point n)
     (originalAtanMagnitudeBelowHalfReference point inside n)
 
--- The selected majorant is an original signed-term magnitude series,
--- rather than an unrelated geometric proxy.
+-- The selected majorant is the original literal magnitude series
+-- on one reference point, not a new geometric proxy.
+originalAtanHalfMajorantAbsIsSelf :
+  (n : Nat) →
+  R._≃_
+    (R.∣ Atan.atanMagnitudeTerm Half.bishopHalf n ∣)
+    (Atan.atanMagnitudeTerm Half.bishopHalf n)
+originalAtanHalfMajorantAbsIsSelf n =
+  RP.nonNegx⇒∣x∣≃x
+    (Atan.atanMagnitudeNonnegative Half.bishopHalf n)
+
+originalAtanHalfMagnitudeSuccessorRatio :
+  (n : Nat) →
+  R._≤_
+    (R.∣ Atan.atanMagnitudeTerm Half.bishopHalf (suc n) ∣)
+    (R._*_
+      Half.bishopQuarter
+      (R.∣ Atan.atanMagnitudeTerm Half.bishopHalf n ∣))
+originalAtanHalfMagnitudeSuccessorRatio n =
+  RP.≤-respʳ-≃
+    (RP.*-congˡ
+      (RP.≃-symm (originalAtanHalfMajorantAbsIsSelf n)))
+    (RP.≤-respˡ-≃
+      (originalAtanHalfMajorantAbsIsSelf (suc n))
+      (Atan.atanMagnitudeSuccessorBelowQuarter
+        Half.bishopHalf n originalHalfInsideHalf))
+
 originalAtanHalfMajorantConvergent :
   Seq._isConvergent
     (Seq.SeriesOf (Atan.atanMagnitudeTerm Half.bishopHalf))
 originalAtanHalfMajorantConvergent =
   Seq.proposition-3-6-1
     (Atan.quarterPositive , Atan.quarterBelowOne)
-    (zero , λ n _ →
-      Atan.atanMagnitudeSuccessorBelowQuarter
-        Half.bishopHalf n originalHalfInsideHalf)
+    (zero , λ n _ → originalAtanHalfMagnitudeSuccessorRatio n)
 
 sourceAtanUniformTailCutoff :
   (k : Nat) → .{{_ : NonZero k}} → Nat
