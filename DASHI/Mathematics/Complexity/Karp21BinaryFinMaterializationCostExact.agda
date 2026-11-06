@@ -64,6 +64,6 @@ decodedFinConstructorDepthExact bound =
 lastVertexConstructorDepth :
   (u : Nat) →
   finConstructorDepth
-    (Fin.fromℕ< (NatP.≤-refl {n = suc u})) ≡ suc u
+    (Fin.fromℕ< (NatP.≤-refl {x = suc u})) ≡ suc u
 lastVertexConstructorDepth u =
-  decodedFinConstructorDepthExact (NatP.≤-refl {n = suc u})
+  decodedFinConstructorDepthExact (NatP.≤-refl {x = suc u})
