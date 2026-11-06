@@ -5,7 +5,8 @@ module DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact where
 --
 -- No assumed NodeWordCertificate or NodeGeneration:
 -- * original eighty relators compile to x4, beta u/v words;
--- * 11 path-Coxeter shift equations compile all twelve node words;
+-- * 141 finite path rewrites, certified from all 80 original relations,
+--   compile all twelve node words;
 -- * literal presented-group signed-word surjectivity compiles the
 --   node-generation induction.
 --
@@ -15,9 +16,8 @@ module DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact where
 --
 -- The only remaining external semantic producers:
 -- 1. concrete Y443 presentation's signed-word surjectivity;
--- 2. 11 generic Coxeter-path shift equations (Lean source proves them);
--- 3. selection/identification of the actual Monster group action;
--- 4. full VOA automorphism equivalence, not implied by transport.
+-- 2. selection/identification of the actual Monster group action;
+-- 3. full VOA automorphism equivalence, not implied by transport.
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
@@ -27,6 +27,7 @@ import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as Source
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as All
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
+import DASHI.Moonshine.Y443AllCoxeterGraphLawsFrom80Exact as GraphSource
 import DASHI.Moonshine.TwistedModuleModularity as TM
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
@@ -39,8 +40,6 @@ record PresentedY443VNaturalSource (G : Set) : Setω where
       Pair.RelatorsSatisfied groupWithInverse nodes Y.monsterRelators
     presentationSurjective :
       Presented.PresentedByY443Nodes groupWithInverse nodes
-    pathShifts :
-      All.JMDPathShiftCertificate groupWithInverse nodes
     construction : VN.VNaturalConstruction
     action :
       VOA.VOAGroupAction
@@ -59,7 +58,9 @@ compileNodeWords :
 compileNodeWords src =
   All.Recover.actualNodeWordCertificate
     (groupWithInverse src) (nodes src)
-    (relatorsHold src) (pathShifts src)
+    (relatorsHold src)
+    (GraphSource.Source.allElevenShiftsFromActual80
+      (groupWithInverse src) (nodes src) (relatorsHold src))
 
 compileNodeGeneration :
   ∀ {G} (src : PresentedY443VNaturalSource G) →
