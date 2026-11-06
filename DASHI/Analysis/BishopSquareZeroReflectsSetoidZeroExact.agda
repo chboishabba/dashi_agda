@@ -39,15 +39,15 @@ nativeAbsoluteZeroImpliesZero x absoluteZero =
   let
     xBelowZero : R._≤_ x R.0ℝ
     xBelowZero =
-      RP.≤-respʳ-≃ absoluteZero (RP.x≤∣x∣ x)
+      RP.≤-respʳ-≃ absoluteZero (RP.x≤∣x∣ {x = x})
 
     negXBelowZero : R._≤_ (R.-_ x) R.0ℝ
     negXBelowZero =
       RP.≤-respʳ-≃
         (RP.≃-trans
-          (RP.∣-x∣≃∣x∣ x)
+          (RP.∣-x∣≃∣x∣ {x = x})
           absoluteZero)
-        (RP.x≤∣x∣ (R.-_ x))
+        (RP.x≤∣x∣ {x = R.-_ x})
 
     zeroBelowX : R._≤_ R.0ℝ x
     zeroBelowX =
