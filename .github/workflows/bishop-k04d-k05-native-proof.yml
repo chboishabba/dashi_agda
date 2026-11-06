@@ -84,6 +84,7 @@ jobs:
             DASHI/Analysis/BishopFinitePowerSeriesSequentialContinuityExact.agda
             DASHI/Analysis/BishopUniformLimitSequentialContinuityExact.agda
             DASHI/Analysis/BishopDirichletUniformLimitContinuityCompilerExact.agda
+            DASHI/Analysis/BishopOriginalCompletedZetaUniformChartContinuityExact.agda
             DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda
           )
           : > bishop-focused-kernel.log
