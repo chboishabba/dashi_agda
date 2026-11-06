@@ -8,6 +8,7 @@ sources=(
   DASHI/Geometry/GielisBase369FiniteExact.agda
   DASHI/Geometry/GielisBase369NyquistPhase36Exact.agda
   DASHI/Geometry/GielisBase369ExistingOwnersWeldExact.agda
+  DASHI/Geometry/GielisBishopPolynomialExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
@@ -22,10 +23,17 @@ for source_file in "${sources[@]}"; do
 done
 
 python scripts/gielis_base369_source_audit.py > /dev/null
+python scripts/gielis_cyclotomic36_exact.py > /dev/null
+python scripts/gielis_sector_spectral_certificate.py --m 9 --sectors 2048 > /dev/null
+python scripts/gielis_base369_symbolic_certificates.py > /dev/null
 
 scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
 
 python -m pytest -q tests/test_gielis_base369_experiments.py
 python scripts/gielis_base369_experiments.py --pde --optics \
   --rays 72 --segments 384 --bounces 4 --controls --torque-objective min > /dev/null
+python scripts/gielis_reflection_parity.py --m 3 --epsilon .12 \
+  --rays 12 --segments 384 --brackets 3072 > /dev/null
+python scripts/gielis_optical_statistics.py --rays 24 --segments 128 \
+  --bounces 2 --seed 369 > /dev/null
 echo "Gielis Base369 finite+numeric cut passed"
