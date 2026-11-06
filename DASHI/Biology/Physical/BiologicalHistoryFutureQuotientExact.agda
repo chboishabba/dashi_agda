@@ -24,6 +24,7 @@ import DASHI.Biology.Physical.DynamicTopologyFutureDefectExact as Topology
 import DASHI.Biology.Physical.FiniteMorphogeneticBasinControlExact as Basin
 import DASHI.Biology.Physical.PlanarianControlCalibrationExact as Planarian
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
+import DASHI.Foundations.SSPTritCarrier as SSP
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
@@ -296,6 +297,51 @@ localEdgeResponseSurvivesProjection :
   edgeDrivenMorphology source neighbour edge field
   ≡ coarseEdgeDrivenMorphology source neighbour edge (spatialProject field)
 localEdgeResponseSurvivesProjection source neighbour edge field = refl
+
+-- A genuinely local one-hop effect: only the state of an actual adjacent
+-- positive-x neighbour changes; the source and its genome/memory are held
+-- fixed.  This tests spatial sensitivity, not a global developmental basin.
+positiveXNeighbour : Cube.Ternary27Point
+positiveXNeighbour =
+  Cube.ternary27Point SSP.sspPosOne SSP.sspZero SSP.sspZero
+
+sourceReady : BiologicalState
+sourceReady = biologicalState true false true false true false
+
+neighborOpen neighborClosed : BiologicalState
+neighborOpen = biologicalState true false false true true false
+neighborClosed = biologicalState true false false false true false
+
+openJunctionField closedJunctionField : TissueField
+openJunctionField (Cube.ternary27Point SSP.sspPosOne y z) = neighborOpen
+openJunctionField _ = sourceReady
+closedJunctionField (Cube.ternary27Point SSP.sspPosOne y z) = neighborClosed
+closedJunctionField _ = sourceReady
+
+sameSourceAtOrigin :
+  openJunctionField Cube.origin ≡ closedJunctionField Cube.origin
+sameSourceAtOrigin = refl
+
+adjacentOpenSignal :
+  edgeDrivenMorphology
+    Cube.origin positiveXNeighbour Cube.originAdjacentPositiveX
+    openJunctionField ≡ true
+adjacentOpenSignal = refl
+
+adjacentClosedSignal :
+  edgeDrivenMorphology
+    Cube.origin positiveXNeighbour Cube.originAdjacentPositiveX
+    closedJunctionField ≡ false
+adjacentClosedSignal = refl
+
+oneAdjacentJunctionChangesSourceResponse :
+  edgeDrivenMorphology
+    Cube.origin positiveXNeighbour Cube.originAdjacentPositiveX
+    closedJunctionField
+  ≢ edgeDrivenMorphology
+    Cube.origin positiveXNeighbour Cube.originAdjacentPositiveX
+    openJunctionField
+oneAdjacentJunctionChangesSourceResponse = false≢true
 
 -- General history-indexed phenotype *contract*, not an empirical inhabitant.
 -- Fibres can differ at the same time under different admissible histories;
