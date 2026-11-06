@@ -136,7 +136,7 @@ alternativeExplanationIsNotAForcedAntipode =
 
 -- A candidate interpretive reading can refer to an existing Žižekian
 -- closure object without licensing the new source-world inference.
-record IdeologicalClosureHypothesis : Set₁ where
+record IdeologicalClosureHypothesis : Set₂ where
   constructor ideologicalClosureHypothesis
   field
     closureCandidate : Zizek.PNFIdeologicalClosure
