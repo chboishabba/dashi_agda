@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.YMClayD1OriginalRealCMP116VariableCutoffExact whe
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (cong; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; 1ℝ; absℝ; _*ℝ_; _≤ℝ_; _<ℝ_; ≤ℝ-trans)
 
@@ -26,6 +26,8 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Wilson
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Jet
+import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 import DASHI.Physics.YangMills.BalabanCMP116DifferentiatedLocalizationSourceExact as CMP116
 
 module _
@@ -76,16 +78,24 @@ module _
 
       -- The one critical source identity on the SAME actual SU(N)
       -- original real Gibbs expectation at cutoff n.
-      differentiatedSourceIsOriginalRealCovariance :
+      sourceResponseIsActualOriginalWilsonJet :
         ∀ n left right →
         CMP116.differentiatedMagnitude source
           (scaleAt n) (volumeAt n)
           (direction left) (direction right)
         ≡
         absℝ
-          (Wilson.originalWilsonConnectedCovariance
-            theory traceData exponential beta oneLink bilateral divide
-            n (originalTest n left) (originalTest n right))
+          (Cumulant.literalMixedSecondLogDerivative
+            (Jet.originalWilsonLiteralJetDirections
+              theory traceData exponential beta oneLink bilateral divide n)
+            (Cumulant.sourceDirectionOf
+              (Jet.originalWilsonLiteralJetDirections
+                theory traceData exponential beta oneLink bilateral divide n)
+              (originalTest n left))
+            (Cumulant.sourceDirectionOf
+              (Jet.originalWilsonLiteralJetDirections
+                theory traceData exponential beta oneLink bilateral divide n)
+              (originalTest n right)))
 
       -- Genuine physical geometry and nonperturbative uniform
       -- localization. The envelope is independent of n and volume;
@@ -129,6 +139,33 @@ module _
 
   open OriginalRealCMP116PhysicalSelection public
 
+  -- The normalized original Wilson jet's connected-covariance identity
+  -- is ALREADY proved for every finite test on this native source.
+  -- Only the CMP116 *analytic-to-literal-J* identification remains a
+  -- source-specific theorem payment.
+  sourceMagnitudeIsOriginalRealCovariance :
+    ∀ {PhysicalTest Scale Volume Root SourceDirection}
+      {source : CMP116.PublishedCMP116DifferentiatedLocalization
+        Scale Volume Root SourceDirection ℝ}
+      (selected : OriginalRealCMP116PhysicalSelection
+        PhysicalTest Scale Volume Root SourceDirection source) →
+    ∀ n left right →
+    CMP116.differentiatedMagnitude source
+      (scaleAt selected n) (volumeAt selected n)
+      (direction selected left) (direction selected right)
+    ≡
+    absℝ
+      (Wilson.originalWilsonConnectedCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        n (originalTest selected n left) (originalTest selected n right))
+  sourceMagnitudeIsOriginalRealCovariance selected n left right =
+    trans
+      (sourceResponseIsActualOriginalWilsonJet selected n left right)
+      (cong absℝ
+        (Jet.originalWilsonMixedJetIsSameFiniteCovariance
+          theory traceData exponential beta oneLink bilateral divide
+          n (originalTest selected n left) (originalTest selected n right)))
+
   -- Actual original Yang--Mills covariance localization. The constant
   -- does not depend on n, unlike bounds on arbitrary fixed lattice
   -- spacings. Physical exponential-rate calibration remains in
@@ -149,7 +186,7 @@ module _
       selected n left right =
     subst
       (λ lower → lower ≤ℝ physicalUpper selected left right)
-      (differentiatedSourceIsOriginalRealCovariance selected n left right)
+      (sourceMagnitudeIsOriginalRealCovariance selected n left right)
       (≤ℝ-trans
         (sourceOrderIsRealOrder selected _ _
           (CMP116.sourceDifferentiatedLocalization source
