@@ -1194,3 +1194,26 @@ The key affine signed-graph identity for fixed edges and labels is **`frustratio
 - In-repo finite same-object Max-Cut graph: in `dashi_agda` PR #1438 (not a general NP-completeness proof).
 - Ford–Fulkerson background: https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
 - Minimum k-cut distinction: https://en.wikipedia.org/wiki/Minimum_k-cut
+
+## 2026-11-06 — Conway / C3 / primorial crosswalk on updated Karp head
+
+Reference original branch head: `730f62ed27a0c45d71c89e5cdbc61bd9f1e6ab2c`.
+The separately derived integration branch imports the actual Karp original owners
+into `Karp21Everything` and records exact new gate status at
+[`Karp21ConwayC3GammaMaxCut20261106.md`](Karp21ConwayC3GammaMaxCut20261106.md).
+
+K01: source-written structurally recursive arbitrary finite Conway-chain
+evaluator and source rule-six equation, strictly-positive typed input.
+K02: source-written original Elias-gamma BitWord strict chain and
+four-prime exponent-vector roundtrips and exact wire length; not clock-certified.
+K04: `TriadicCube ≡ ThreeSuperThree` by definitional equality and actual
+`C3CubeFourier27Exact.Cube3` bidirectional lookup/additive transport.
+K03/K05/K06: all ORIGINAL signed E20/N21 cost and malformed-word
+obligations, original guarded Cook-Levin SAT lower bound, and network
+remain independently open; no synthetic C3 reduction substituted.
+K07: no Agda/`parallel_checker` executable receipt in this environment;
+source-written candidates and bounded independent tests are not kernel proofs.
+
+The new symbolic syntax is NOT interchangeable with an expanded integer
+word in a polynomial-time many-one reduction. The P != NP lower bound is
+not supplied by this bridge.
