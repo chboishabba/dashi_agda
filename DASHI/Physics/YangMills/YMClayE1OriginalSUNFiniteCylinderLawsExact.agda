@@ -420,3 +420,113 @@ module _
     ; E1.ActualVariableCutoffCylinderFamily.originalWilsonConverges =
         originalWilsonCylinderConverges selected
     }
+
+  ----------------------------------------------------------------------
+  -- A CONCRETE NONEMPTY SELECTED ALGEBRA from the actual original
+  -- gauge-invariant local plaquette trace at the canonical origin.
+  -- No arbitrary new physical observable carrier: the syntax evaluates
+  -- at EVERY n to the genuine original Wilson link configuration.
+  --
+  -- Warning: this plaquette is microscopic; a fixed physical-size
+  -- local continuum observable and its UV renormalization remain E1.
+  ----------------------------------------------------------------------
+
+  data OriginWilsonPolynomial : Set where
+    zeroP oneP plaquetteP : OriginWilsonPolynomial
+    addP multiplyP :
+      OriginWilsonPolynomial → OriginWilsonPolynomial →
+      OriginWilsonPolynomial
+    scaleP : ℝ → OriginWilsonPolynomial → OriginWilsonPolynomial
+
+  evalOriginWilsonPolynomial :
+    OriginWilsonPolynomial →
+    Native.Cylinder theory traceData exponential beta oneLink
+      bilateral (Quotient.divide quotient)
+  evalOriginWilsonPolynomial zeroP =
+    OriginalWilson.originalZeroCylinderSection
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  evalOriginWilsonPolynomial oneP =
+    OriginalWilson.originalUnitCylinderSection
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  evalOriginWilsonPolynomial plaquetteP =
+    OriginalWilson.originalLocalPlaquetteTraceSection
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  evalOriginWilsonPolynomial (addP left right) n links =
+    evalOriginWilsonPolynomial left n links
+      +ℝ evalOriginWilsonPolynomial right n links
+  evalOriginWilsonPolynomial (multiplyP left right) n links =
+    evalOriginWilsonPolynomial left n links
+      *ℝ evalOriginWilsonPolynomial right n links
+  evalOriginWilsonPolynomial (scaleP scalar expr) n links =
+    scalar *ℝ evalOriginWilsonPolynomial expr n links
+
+  originPolynomialGaugeInvariant :
+    (expr : OriginWilsonPolynomial) →
+    OriginalWilson.OriginalGaugeInvariantSection
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+      (evalOriginWilsonPolynomial expr)
+  originPolynomialGaugeInvariant zeroP =
+    OriginalWilson.originalGaugeInvariantZeroCylinder
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  originPolynomialGaugeInvariant oneP =
+    OriginalWilson.originalGaugeInvariantUnitCylinder
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  originPolynomialGaugeInvariant plaquetteP =
+    OriginalWilson.originalLocalPlaquetteTraceIsGaugeInvariantSection
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+  originPolynomialGaugeInvariant (addP left right) =
+    OriginalWilson.originalGaugeInvariantSectionAdd
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+      (evalOriginWilsonPolynomial left)
+      (evalOriginWilsonPolynomial right)
+      (originPolynomialGaugeInvariant left)
+      (originPolynomialGaugeInvariant right)
+  originPolynomialGaugeInvariant (multiplyP left right) =
+    OriginalWilson.originalGaugeInvariantSectionProduct
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+      (evalOriginWilsonPolynomial left)
+      (evalOriginWilsonPolynomial right)
+      (originPolynomialGaugeInvariant left)
+      (originPolynomialGaugeInvariant right)
+  originPolynomialGaugeInvariant (scaleP scalar expr) =
+    OriginalWilson.originalGaugeInvariantSectionScale
+      theory traceData exponential beta oneLink bilateral
+      (Quotient.divide quotient)
+      scalar (evalOriginWilsonPolynomial expr)
+      (originPolynomialGaugeInvariant expr)
+
+  originWilsonPolynomialSelectedAlgebra :
+    SelectedNativeCylinderAlgebra
+  originWilsonPolynomialSelectedAlgebra = record
+    { SelectedNativeCylinderAlgebra.Observable = OriginWilsonPolynomial
+    ; SelectedNativeCylinderAlgebra.selectedSection =
+        evalOriginWilsonPolynomial
+    ; SelectedNativeCylinderAlgebra.zeroObservable = zeroP
+    ; SelectedNativeCylinderAlgebra.oneObservable = oneP
+    ; SelectedNativeCylinderAlgebra.addObservable = addP
+    ; SelectedNativeCylinderAlgebra.scalarObservable = scaleP
+    ; SelectedNativeCylinderAlgebra.zeroMeaning =
+        λ n links → refl
+    ; SelectedNativeCylinderAlgebra.oneMeaning =
+        λ n links → refl
+    ; SelectedNativeCylinderAlgebra.addMeaning =
+        λ n left right links → refl
+    ; SelectedNativeCylinderAlgebra.scalarMeaning =
+        λ n scalar expr links → refl
+    ; SelectedNativeCylinderAlgebra.Nonnegative =
+        λ expr → ∀ n links →
+          0ℝ ≤ℝ evalOriginWilsonPolynomial expr n links
+    ; SelectedNativeCylinderAlgebra.nonnegativeMeaning =
+        λ expr positive n links → positive n links
+    ; SelectedNativeCylinderAlgebra.gaugeInvariantSelection =
+        originPolynomialGaugeInvariant
+    }
