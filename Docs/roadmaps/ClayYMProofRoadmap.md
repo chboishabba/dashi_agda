@@ -1,3 +1,17 @@
+## 7 November — CLAY YM production sprint, E1 genuine convergence + D1 full Wilson
+
+Current canonical max-cut remains **E1, D1, D2, N1, G1**, not a 1024-link/observer/KK package. See `Docs/physics/YMClayMinimalEndpointMaxCut20261107.md`.
+
+**E1 now source-written** in `YMClayE1VariableCutoffCylinderLimitExact` (safe, carrier-parametric; fully explicit all-cutoff convergence transports) and `YMClayE1OriginalSUNFiniteCylinderLawsExact` (actual original varying-link Wilson/Haar finite normalization, positivity, additivity, scalar multiplication; concrete gauge-invariant original plaquette polynomial test algebra by induction). `ActualSelectedOriginalSUNConvergence` now requires **epsilon–N** convergence of native original Wilson expectations on that **selected** gauge-invariant algebra, not reflexive equality against an arbitrary `limit` selector and not all n-dependent sections. UV/IR existence and full 4D QFT axioms are still unproved.
+
+**D1 now source-written** in `YMClayD1OriginalRealCMP116VariableCutoffExact` (actual native real Wilson two-J jet, physical q<1 rate) and `YMClayD1OriginalFullWilsonSmallLargeFieldExact` (published **small-field CMP116** + genuine full-original **large-field** error; combined amplitude/physical geometric rate). Correct published source provenance: Bałaban CMP109 I and CMP116 II are **four-dimensional small-field approximation** theorems; CMP119's convergent complete large-field expansion scope is **superrenormalizable models**, not automatically the complete original four-dimensional YM. The full original-measure source decomposition, nonperturbative cutoff/volume-uniform large-field error and uniform positive physical rate are the outstanding D1 analytic inputs. A citation to a published small-field estimate cannot inhabit those.
+
+**D2** already has R287/T5 cyclicity and `YangMillsClayCMP119CoreSemigroupH3Exact`, but physically selected E1 Wilson OS dense cyclicity, spectral-measure lower bound, subgap-state detection and full-sector proof on SAME H_OS are required. **N1** original same-source Ward/Maxwell H6 or actual fourth-cumulant survival; **G1** genuine all-compact-simple-G physical continuation, including global forms/central quotients, not an SU(N)-only quantifier.
+
+**Verification:** new owners regression-imported and GitHub source read back. No local Agda or `parallel_checker` available; no exact-head accepted proof or complete Clay solution. Do not promote conditional records to closed physical theorems.
+
+---
+
 ## 7 November: original LOCAL two-plaquette Wilson physical D1 test class and marked-source identity
 
 `YMClayOriginalVariableWilsonCovarianceSourceExact.agda` additionally constructs `originalLocalPlaquetteTraceAt n p` for **every** original positive plaquette `p : Plaquette.PeriodicPlaquette n` at every changing cutoff `n`. This uses the actual original Wilson plaquette holonomy and selected SU(N) real trace—not a synthetic test or one global all-lattice action. `originalLocalPlaquetteTraceAtGaugeInvariant` consumes `Variable.periodicSUNPositivePlaquetteGaugeTrace`; `originalLocalPairProductGaugeInvariant` proves any two selected plaquette insertions produce a gauge-invariant original test.
