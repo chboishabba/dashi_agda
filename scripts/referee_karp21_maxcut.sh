@@ -114,6 +114,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
 
   check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21ConwayGammaChainCodecExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21N21BitWeightedComparisonEnvelopeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
