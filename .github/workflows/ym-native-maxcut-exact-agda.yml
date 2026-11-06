@@ -15,6 +15,7 @@ on:
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'scripts/check_ym_sort_selectability_reference.py'
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
+      - 'scripts/check_ym_rg_drift_budget_reference.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
   pull_request:
     paths:
@@ -30,6 +31,7 @@ on:
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
       - 'scripts/check_ym_sort_selectability_reference.py'
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
+      - 'scripts/check_ym_rg_drift_budget_reference.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
   workflow_dispatch:
 
@@ -47,6 +49,7 @@ jobs:
           set -euo pipefail
           python3 scripts/check_ym_sort_selectability_reference.py
           python3 scripts/check_ym_physical_cube_perron_certificate.py --selftest
+          python3 scripts/check_ym_rg_drift_budget_reference.py
           python3 scripts/check_ym_native_c3_and_pair_original_sort_program.py
 
   kernel-native:
