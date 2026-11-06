@@ -31,6 +31,15 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21FinFreeGammaGeneralSparseBudgetExact as Budget
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact as Validate
+open import Relation.Binary.PropositionalEquality using (cong)
+
+-- FiniteWordSizeExact.wordLength and Data.List.length have the same
+-- constructors but are distinct named recursive source functions.
+inputListLengthIsWordSize :
+  (word : Word.BitWord) → length word ≡ Word.encodingSize word
+inputListLengthIsWordSize [] = refl
+inputListLengthIsWordSize (_ ∷ rest)
+  rewrite inputListLengthIsWordSize rest = refl
 
 mBelowTriple : (m : Nat) → m ≤ m * 3
 mBelowTriple m = NatP.m≤m+n m (m * 2)
@@ -50,7 +59,10 @@ rawFrameVertexCountIndependentBound word n m afterN afterM
     (NatP.≤-trans guard
       (NatP.≤-trans
         (Budget.readGammaSuffixWithinInput afterN m afterM readM)
-        (Budget.readGammaSuffixWithinInput word n afterN readN)))
+        (NatP.≤-trans
+          (Budget.readGammaSuffixWithinInput word n afterN readN)
+          (NatP.≤-reflexive
+            (inputListLengthIsWordSize word)))))
 
 rawValidationCountBelowInput :
   (word : Word.BitWord) (n m : Nat)
