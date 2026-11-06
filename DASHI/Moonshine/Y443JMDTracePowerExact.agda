@@ -77,8 +77,9 @@ traceStepFourBeta gi u v trace =
 traceStepsThreeAndFour :
   ∀ {G} (gi : TM.GroupWithInverse G) (u v : G) →
   (trace : JMDStepsTwoToFour gi u v) →
-  Pair.RepresentedByPair gi u v (x4 trace)
-  Pair.∧ Pair.RepresentedByPair gi u v (beta trace)
+  Pair._∧_
+    (Pair.RepresentedByPair gi u v (x4 trace))
+    (Pair.RepresentedByPair gi u v (beta trace))
 traceStepsThreeAndFour gi u v trace =
   Pair._,,_
     (traceStepThreeX4 gi u v trace)
