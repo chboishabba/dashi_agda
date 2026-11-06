@@ -70,6 +70,9 @@ centrality of f312, simplicity or this isomorphism.
   [#1250](https://github.com/chboishabba/dashi_agda/pull/1250):
   the **different** natural Suzuki 12 and 12+78 multiplicity problem.
   Those dimensions alone are not an image of the twelve Y443 involutions.
+  The exact `Y443Monster3BTwelveDisjointExact` consumer also proves that
+  the standard Heisenberg axis0 translation has order three on every
+  six-trit state, and fails the Coxeter order-two relation at zeroState.
 - Existing B4 Coxeter/Weyl and Coxeter--Todd lattice implementations are
   distinct carriers; none supplies the Y443 spider quotient automatically.
 
@@ -100,6 +103,9 @@ based only on group order or dimension is sufficient.
 - `doubleMonsterRelatorCount`, `monsterRelatorCount`;
 - `doubleMonsterWrittenLength`, `monsterWrittenLength`;
 - `identityRepresented`, `productRepresented`, `inverseRepresented`;
+- `Y443Monster3BTwelveDisjointExact.axis0TripleTranslationEverywhere`
+  and `axis0DoubleTranslationIsNotIdentity`: concrete standard-generator
+  source obstruction (order 3 vs Coxeter order 2);
 - `Y443JMDTracePowerExact.powerRepresented` (natural-power closure),
   `traceStepThreeX4` and `traceStepFourBeta` (JMD's w^5 and w^6
   subgroup propagation), and `traceStepsThreeAndFour`;
