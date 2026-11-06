@@ -102,6 +102,15 @@ def main():
                 count += 1
             except (TooLarge, RecursionError, OverflowError):
                 skipped += 1
+    long_agreement = long_skipped = 0
+    for length in range(5, 8):
+        for items in itertools.product((1, 2), repeat=length):
+            try:
+                assert prefix_value(items) == rule_rewrite(items), items
+                long_agreement += 1
+            except (TooLarge, RecursionError, OverflowError):
+                long_skipped += 1
+    assert long_agreement == 224 and long_skipped == 0
     assert prefix_value((2, 3, 2)) == 16
     assert prefix_value((3, 2, 2)) == 27
     assert prefix_value((2, 2, 2, 2)) == 4
@@ -129,7 +138,7 @@ def main():
             except ValueError:
                 rejected += 1
     assert canonical == 133 and rejected == 8058
-    print(f"Conway reference: {count} agreement, {skipped} bounded skips; gamma: {roundtrips} roundtrips; exhaustive <=12-bit: {canonical} canonical, {rejected} rejected")
+    print(f"Conway reference: {count} agreement, {skipped} bounded skips; gamma: {roundtrips} roundtrips; extra longer chains: {long_agreement} agreement, {long_skipped} skips; exhaustive <=12-bit: {canonical} canonical, {rejected} rejected")
 
 if __name__ == "__main__":
     main()
