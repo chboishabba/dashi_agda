@@ -18,7 +18,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeEncodedPaddedRunDecodeWeldExact 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product using (Σ; _,_; _×_)
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -30,6 +30,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalFormulaSemanticsExact as F
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunAssignmentExact as Assignment
 import DASHI.Mathematics.Complexity.ConcreteTapeEncodedPaddedRunRowsExact as Encoded
 import DASHI.Mathematics.Complexity.ConcreteTapePaddedRunEndcapsExact as Padded
+import DASHI.Mathematics.Complexity.ConcreteTapeDecodedEndcapSameObjectExact as Same
 import DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact as Initial
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
@@ -128,3 +129,59 @@ encodedPaddedRowDecodesSameObject
       (Initial.decodeRow_encodeRow
         stateCoverage symbolCoverage row) ,
     endcaps
+
+------------------------------------------------------------------------
+-- The reverse exact SAT endcap producer for the ORIGINAL encoded run.
+-- Width and time equalities are ordinary original-source index
+-- transports (not axioms); once matched to refl this is the same
+-- extended assignment and the same rowSlot used by global CNF.
+------------------------------------------------------------------------
+
+encodedAcceptingAssignmentDecodedEndcaps :
+  ∀ {machine start rows finish steps colsMinusOne}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (certificate :
+      Accepting.AcceptingWellFormedRun machine start rows finish)
+    (padded :
+      Padded.AllWellFormedRunRowEndcaps
+        (Accepting.run certificate)) →
+  Accepting.acceptingRunLength certificate ≡ steps →
+  Canonical.listLength (Local.cells start) ≡ suc colsMinusOne →
+  ∀ {rowIndex}
+    (slot : Global.Slot rowIndex (suc steps)) →
+  Same.DecodedRowEndcapsPlain
+    stateCoverage symbolCoverage slot
+    (Assignment.encodeAcceptingRunAssignment
+      stateCoverage symbolCoverage certificate)
+encodedAcceptingAssignmentDecodedEndcaps
+    stateCoverage symbolCoverage certificate padded
+    refl refl slot
+  with encodedPaddedRowDecodesSameObject
+    stateCoverage symbolCoverage
+    (Accepting.run certificate) padded slot
+... | row , (decodedEq , (frontPlain , backPlain)) =
+  record
+    { Same.front = subst
+        (λ r → Pattern.FrontPlain (Local.cells r))
+        (sym entireRowEq)
+        frontPlain
+    ; Same.back = subst
+        (λ r → Pattern.EndPlain (Local.cells r))
+        (sym entireRowEq)
+        backPlain
+    }
+  where
+    encodedRowEq =
+      encodedAcceptanceRowSliceSameObject
+        stateCoverage symbolCoverage certificate slot
+
+    entireRowEq =
+      trans
+        (cong
+          (Decode.decodeRow stateCoverage symbolCoverage
+            (Canonical.listLength (Local.cells start)))
+          encodedRowEq)
+        decodedEq
