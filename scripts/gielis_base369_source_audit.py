@@ -21,6 +21,7 @@ FILES = (
     "Docs/support/reference/GielisBase369ProofTheorems.md",
     "scripts/gielis_base369_experiments.py",
     "DASHI/Geometry/GielisBishopPolynomialExact.agda",
+    "DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda",
 )
 THEOREMS = (
     "rotation3PreservesSignal", "rotation6PreservesSignal",
@@ -63,7 +64,7 @@ def source_audit(root: Path = ROOT) -> dict:
     ny=source[FILES[1]]
     assert not any(
         re.search(r"(^|\s)postulate(\s|$)|\{\!|--unsafe|--no-termination-check", source[path],flags=re.M)
-        for path in (FILES[0],FILES[1],FILES[2],FILES[-1])
+        for path in FILES if path.endswith(".agda")
     ), "source contains trust escape"
 
     sig={m:table(agda,f"signal{m}","Phase.p18",18) for m in (3,6,9)}
@@ -104,6 +105,22 @@ def source_audit(root: Path = ROOT) -> dict:
         assert cases==list(range(18)),(theorem,cases)
         assertions+=18
 
+    si=source["DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda"]
+    for exact_owner in (
+        "DASHI.Physics.Units.SI",
+        "DASHI.Physics.Units.SIMetrologyBridge",
+        "DASHI.Physics.Units.MechanicalDimensionExact",
+        "DASHI.Promotion.SIExactConstantParsedCarrierRequest",
+        "DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact",
+    ):
+        assert exact_owner in si,exact_owner
+    for theorem in (
+        "speedOfLightIsExactSIInteger",
+        "mechanicalOpticalTorqueIsSI",
+        "torqueFromPowerOverSpeedAndRadius",
+        "finiteInfluenceRowPowerBoundReuse",
+    ):
+        assert theorem in si,theorem
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
