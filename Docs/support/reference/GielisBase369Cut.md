@@ -218,3 +218,43 @@ Agda tables and 342 explicit theorem clauses. Independent inspection
 of the branch contents checked **648 literal integer/finite cases**
 successfully. No Agda kernel run was available, so this is
 **not** a Golden acceptance claim. See the [proof ledger](GielisBase369Roadmap.md).
+
+
+## Nov 6 further code/proof tranche: E17–E19 and Kozyrev original-owner recovery
+
+The original optical implementation has been found in
+[Kozyrev PR #1404](https://github.com/chboishabba/dashi_agda/pull/1404),
+head `337aabb00ed54bc1a4c28ada48364cb4dc54d46e`.
+The canonical referee and physical ledger are
+`scripts/kozyrev_first_forward_intersection_referee.py` and
+`scripts/kozyrev_optical_event_ledger.py`. The matched-envelope
+HTML runner and 3x3x3 ternary runner are also in that original PR.
+**Do not equate** the HTML stroked SDF and independent normal-offset
+walls until original event export acceptance.
+
+New `scripts/gielis_kozyrev_pr1404_bridge.py` pins the exact Git
+blob hashes of these original modules, proves the identical
+epsilon-zero log centreline on matching parameters, constructs
+matching finite-thickness normal-offset sides and caps, aligns the
+first-forward 3mm threshold and invokes the original RayLedger
+for conventional optical angular-momentum conservation. Set
+`KOZYREV_PR1404_DIR` to the local original PR scripts when running
+the integrated checker to require that exact cross-PR replay.
+
+The independent rational
+`scripts/gielis_raster_fd_positivity_certificate.py`
+certifies the *original finite raster matrix* first eigenvalue using
+Collatz–Wielandt and an exact integer positive vector, with
+n=41 m=3/6/9 and n=61 m=3 verification. Its certified finite-matrix
+error must not be promoted to continuum mesh convergence.
+
+`scripts/gielis_optical_force_envelope.py` provides an exact rational
+radiation-pressure-only torque ceiling given power, radius,
+reflectivity and bounce count. Paired random-angle simultaneous
+Hoeffding contrasts were added to
+`scripts/gielis_optical_statistics.py`. Neither is a
+measured apparatus calibration or an anomalous-gravity observation.
+
+See [E17–E19 proofs](GielisBase369ProofTheorems.md) and
+[G01–G21 acceptance roadmap](GielisBase369Roadmap.md) for
+the exact remaining proof/measurement gates.
