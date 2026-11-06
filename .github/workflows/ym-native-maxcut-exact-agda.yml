@@ -18,6 +18,12 @@ on:
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
       - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
+      - 'scripts/check_ym_clay_steelman_lemma_crosswalk.py'
+      - 'Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md'
+      - 'Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md'
+      - 'Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md'
+      - 'Docs/roadmaps/ClayYMProofRoadmap.md'
+      - 'Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md'
       - 'scripts/check_ym_clay_continuum_bidi_controls.py'
       - 'scripts/check_ym_rg_noncollapse_steelman.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
@@ -38,6 +44,12 @@ on:
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
       - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
+      - 'scripts/check_ym_clay_steelman_lemma_crosswalk.py'
+      - 'Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md'
+      - 'Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md'
+      - 'Docs/roadmaps/YMClayCurrentExactLemmaLedger20261103.md'
+      - 'Docs/roadmaps/ClayYMProofRoadmap.md'
+      - 'Docs/roadmaps/YMClaySteelmanBidirectionalExactRemainingMaxCut20261104.md'
       - 'scripts/check_ym_clay_continuum_bidi_controls.py'
       - 'scripts/check_ym_rg_noncollapse_steelman.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
@@ -61,6 +73,7 @@ jobs:
           python3 scripts/check_ym_rg_noncollapse_steelman.py
           python3 scripts/check_ym_clay_continuum_bidi_controls.py
           python3 scripts/check_ym_marginal_subtracted_uv_tail.py
+          python3 scripts/check_ym_clay_steelman_lemma_crosswalk.py
           python3 scripts/check_ym_native_c3_and_pair_original_sort_program.py
 
   kernel-native:
