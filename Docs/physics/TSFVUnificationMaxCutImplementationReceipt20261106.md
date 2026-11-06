@@ -2,7 +2,7 @@
 
 ## 6 November 2026 — current proof, phase and deliverable acceptance receipt
 
-**39 named** physical source-producer theorems = 10 OBS + 12 HIL + 9 KK + 8 BIDI (the formerly advertised 40 was a counting error). These map to **48** disjoint phase deliverables and **186** canonical original P00–P11 lemma IDs; they are not interchangeable counts. The exact 39-producer original type/owner/dependency/acceptance rows now live in `Docs/roadmaps/TSFVFourPhysicalCutsExactProducerLemmas20261106.md`, linked to the independent 48-task phase file and active TODO; `scripts/check_tsfv_39_physical_producer_inventory_20261106.py` validates the inventory.
+**40 named** physical source-producer theorems = 10 OBS + 12 HIL + 10 KK + 8 BIDI, including KK10. The earlier 39 claim was an audit error and is superseded. These map to **48** disjoint phase deliverables and **186** canonical original P00–P11 lemma IDs; they are not interchangeable counts. The exact 40-producer original type/owner/dependency/acceptance rows now live in `Docs/roadmaps/TSFVFourPhysicalCutsExactProducerLemmas20261106.md`, linked to the independent 48-task phase file and active TODO; `scripts/check_tsfv_40_physical_producer_inventory_20261106.py` validates the inventory.
 
 **New child original-source proof:** `DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact`. For any two finite ordered coarse Wilson observable words A and B and a specified coarse real reflection Θ, uses the **actual original native** `YMClaySUNR445BlockedPushforwardR320CovarianceExact.originalBlockedFineExpectationIsPushforward` to prove
 \[
@@ -18,7 +18,7 @@ The theorem is source-exact and all-word, not degree-two covariance extrapolatio
 
 **KK status correction:** `scripts/check_tsfv_5d_ads4_circle_winding_matter.py` is a source-written independent symbolic verification of a nonflat Einstein–scalar winding control (AdS_4\times S^1). The earlier phrase `flat vacuum control only` is superseded. It is NOT the original observed metric or a selected 5D Einstein–gauge–matter solution. `TSFVKKActualSelectedMetricHorizontalWeldExact` still requires an independently produced observer g4 matching actual KK reduction.
 
-**Exact S11 receipt:** new source module imported into **separate non-safe physical regression** `TSFVPhysicalR445AllWordRegression`, with own transitive `RealAnalysisAxioms` trust boundary; add it to `physical_sources` in pinned `run_tsfv_unification_maxcut_20261106.sh`. 39-inventory validator runs before compiler. GitHub source-written ≠ checked exact-head Agda. No kernel/physical status is marked complete without `parallel_checker` log, detailed transitive axiom audit, independently measured original physical semantics and quantitative limits.
+**Exact S11 receipt:** new source module imported into **separate non-safe physical regression** `TSFVPhysicalR445AllWordRegression`, with own transitive `RealAnalysisAxioms` trust boundary; add it to `physical_sources` in pinned `run_tsfv_unification_maxcut_20261106.sh`. 40-inventory validator runs before compiler. GitHub source-written ≠ checked exact-head Agda. No kernel/physical status is marked complete without `parallel_checker` log, detailed transitive axiom audit, independently measured original physical semantics and quantitative limits.
 
 ## Governance and cross-worker cut
 
