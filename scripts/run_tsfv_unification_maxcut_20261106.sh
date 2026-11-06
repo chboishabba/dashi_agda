@@ -40,6 +40,10 @@ safe_sources=(
   DASHI/Physics/Foundations/TSVFOriginalAllWordMomentTransportExact.agda
   DASHI/Physics/Foundations/TSVFOriginalSelectedFiniteCommutatorResponseExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardPositiveFunctionalExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalForwardCyclicCrossGramExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalForwardCyclicActionQuotientExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalComplexFiniteForwardNormalizedDiagonalExact.agda
+  DASHI/Physics/Foundations/TSFVKKFourMetricVerticalProbeFullReconstructionExact.agda
   DASHI/Physics/Foundations/TSVFOriginalQuantumSurfaceSpatialNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOriginalOSPositiveWeightNotReflectionPositiveExact.agda
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
@@ -53,6 +57,7 @@ physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445ReflectedAllWordGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalForwardToNativeWilsonWordGramExact.agda
   DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
 roots=(
@@ -67,7 +72,7 @@ done
 # Local fail-closed structural trust checks of the selected own modules;
 # the transitive dependency graph and mathematical axioms require a
 # separately reviewed proof authority report, even after typechecking.
-if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|--type-in-type|primTrustMe|trustMe' "${safe_sources[@]}"; then
+if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check|--type-in-type|primTrustMe|trustMe' "${safe_sources[@]}" "${physical_sources[@]}"; then
   echo "P00/S11 unsafe local selected source / hole / unreviewed axiom" >&2
   exit 1
 fi
