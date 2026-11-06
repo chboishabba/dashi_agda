@@ -249,3 +249,26 @@ Additional K05 source theorem outputs: `round11SineAtTwoPi` and `round11CosineAt
 - Added `BishopOriginalCompletedXiFactorContinuityCompilerExact` for the literal original completed `xi`, gamma and zeta fields. This is a conditional algebraic consumer requiring the actual `xi` factor-formula equality and factor continuities, NOT proof that `xiEntire` implies continuity of a separately constructed `zeta`.
 - Imported all five owners into the three TOE roots; extended focused Agda --safe CI, pinned the experimental stdlib checkout to `008f12c2908479567a3ae3c873f9cf0b8fe5987e`, and added a deterministic Gaussian-phase test to CI. Updated the exact K04d/K05 roadmap. No ESD owner changed.
 - **Fail-closed evidence:** new modules are hole-free, postulate-free `--safe` source candidates; no exact-head Agda compiler or TOE-root acceptance receipt was observed. K05-PRODUCT terminal source still needs kernel acceptance; K04d-LOG native exp/log equality, K05-PI native arctan correspondence, and K04d-CONTINUITY original Dirichlet/xi identification remain mathematically OPEN.
+
+
+## 2026-11-06 — K05-PI existing Cayley/Pythagorean reuse
+
+- Audited source-native `BalabanSelectedGaugeRedundancyHolonomyGuardExact`:
+  the exact rational Cayley/Pythagorean parameterization at `rho=1/8192`
+  and unit-quaternion norm were already implemented. Also reused
+  `CayleyDicksonRationalComplexQuaternionExact` for ORIGINAL rational
+  complex multiplication, conjugation, norm composition and literal quaternion
+  identity (not the unrelated Cayley graph, Cayley–Hamilton or Smith observer lanes).
+- Added `BishopMachinExistingCayleyReuseExact.agda`: universal denominator-free
+  Cayley numerator norm polynomial; definally identical quaternion embedding
+  of the existing selected YM Cayley unit; exact t=1/5 and t=1/239
+  source-Cayley specialization; original rational-complex Machin phase `=i`;
+  and an independent unit-norm derivation reusing existing rational complex
+  norm multiplicativity. No new scalar or complex carrier.
+- Imported the new source in all three golden TOE roots and focused Agda
+  --safe workflow; updated K04d/K05 max-cut roadmap.
+- **Unclosed and not misrepresented:** the original Bishop arctangent power-series
+  to Cayley phase equality, at the two Machin points, remains a genuinely
+  analytic **PI.1** goal. The above finite source-written lemmas do not yet
+  have an exact-head Agda kernel receipt. Their presence does not close
+  K05-PI's original positive-sine/first-zero terminal.
