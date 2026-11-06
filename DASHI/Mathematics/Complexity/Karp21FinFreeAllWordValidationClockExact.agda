@@ -32,10 +32,8 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as R
 import DASHI.Mathematics.Complexity.Karp21FinFreeGammaGeneralSparseBudgetExact as Budget
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact as Validate
 
-mBelowTriple : (m : Nat) → m ≤ 3 * m
-mBelowTriple zero = z≤n
-mBelowTriple (suc m) =
-  s≤s (NatP.≤-step (NatP.≤-step (mBelowTriple m)))
+mBelowTriple : (m : Nat) → m ≤ m * 3
+mBelowTriple m = NatP.m≤m+n m (m * 2)
 
 -- Any successful original edge-list READ, even when graph validation
 -- ultimately fails, fits in the actual source input bit budget.
@@ -44,7 +42,7 @@ rawFrameVertexCountIndependentBound :
   (afterN afterM : Word.BitWord) →
   Gamma.readGamma word ≡ just (n , afterN) →
   Gamma.readGamma afterN ≡ just (m , afterM) →
-  3 * m ≤ length afterM →
+  m * 3 ≤ length afterM →
   m ≤ Word.encodingSize word
 rawFrameVertexCountIndependentBound word n m afterN afterM
   readN readM guard =
@@ -60,7 +58,7 @@ rawValidationCountBelowInput :
   (raw : List Graph.RawEdge) →
   Gamma.readGamma word ≡ just (n , afterN) →
   Gamma.readGamma afterN ≡ just (m , afterM) →
-  3 * m ≤ length afterM →
+  m * 3 ≤ length afterM →
   Graph.readRawEdges m afterM ≡ just (raw , afterEdges) →
   proj₂ (Validate.countedRawValidatorPrimitive
     n Graph.noPrevious raw)
@@ -91,7 +89,7 @@ originalRawValidationCountForWord word
   with Gamma.readGamma afterN
 ...   | nothing = zero
 ...   | just (m , afterM)
-  with NatP._≤?_ (3 * m) (length afterM)
+  with NatP._≤?_ (m * 3) (length afterM)
 ...     | no _ = zero
 ...     | yes _ with Graph.readRawEdges m afterM
 ...       | nothing = zero
@@ -117,7 +115,7 @@ originalAllWordRawValidationCountBound word
   with Gamma.readGamma afterN in readM
 ...   | nothing = z≤n
 ...   | just (m , afterM)
-  with NatP._≤?_ (3 * m) (length afterM)
+  with NatP._≤?_ (m * 3) (length afterM)
 ...     | no _ = z≤n
 ...     | yes tripleGuard
   with Graph.readRawEdges m afterM in readEdges
