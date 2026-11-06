@@ -111,6 +111,39 @@ gate. The shell script still fails closed without an executable Agda
 kernel; it is not a substitute for the requested `parallel_checker`
 receipt.
 
+### P1/P2 expanded native physical and stochastic donors
+
+The Round-23 Golden root additionally imports:
+
+- `BiologicalParametricStochasticLumpingExact`. Its
+  `NormalizedRationalBranches` requires **both** nonnegative rational
+  weights and their exact sum-one witness. It proves factored-observable
+  preservation and instantiates the existing
+  `RationalMarkovLumpingFutureExact.ConstructiveMarkovLumping` for
+  arbitrary admissible weights. It proves all finite horizons,
+  arbitrary mixed interventions under fixed weights, and
+  `timeVaryingRationalHistoriesPreserveCoarseFuture` for distinct
+  weights assigned **per intervention**. Selection/fitting of those
+  weights from measured outcomes is still a separate physical source
+  obligation.
+- `BiologicalElectrodiffusionTissueDonorExact`. Its
+  `BiophysicalTissueSourceSocket` carries the native
+  `PoissonNernstPlanckElectrodiffusionExact.ElectrodiffusionApplicationReceipt`,
+  a source-specific chemistry network and a selected observation map
+  onto the genuine 3×3×3 tissue field. It reuses the PNP flux
+  decomposition and Poisson charge equality directly, rather than
+  replacing electrodiffusion with Boolean adjacency. It also reuses
+  `SIBioelectricNetworkAdapterExact` and the published
+  `PlanarianControlCalibrationExact` observation. **No source-validated
+  physical-to-Boolean observation map or intervention commutation proof
+  is invented.**
+
+These are type/theorem reuse bridges, not parameter-fitted physical
+dynamics. In particular, a source-specific PNP solution with tissue
+boundaries, ionic conductances, externally measured temporal trajectories
+and a proof that its observer commutes with the selected intervention
+schedule remains the decisive P2/P3 physical instance.
+
 ## Scope and authority
 
 This programme follows the accompanying genotype–phenotype/Levin/ontology/world-model
