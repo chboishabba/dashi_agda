@@ -89,8 +89,8 @@ diagonalFormulaConsumer :
   (decode : Nat → Cook.BooleanFormula → Bool) →
   Cook.BooleanFormula →
   Bool
-diagonalFormulaConsumer decode (Cook.variable index) =
-  Cook.notBool (decode index (Cook.variable index))
+diagonalFormulaConsumer decode (Cook.formulaVar index) =
+  Cook.notBool (decode index (Cook.formulaVar index))
 diagonalFormulaConsumer decode (Cook.constant value) =
   false
 diagonalFormulaConsumer decode (Cook.negate formula) =
@@ -115,8 +115,8 @@ noNatQuotationOfAllFormulaConsumers decode allegedlySurjective
     with allegedlySurjective (diagonalFormulaConsumer decode)
 ... | code , decodedEqualsDiagonal =
   boolCannotEqualItsNegation
-    (decode code (Cook.variable code))
-    (decodedEqualsDiagonal (Cook.variable code))
+    (decode code (Cook.formulaVar code))
+    (decodedEqualsDiagonal (Cook.formulaVar code))
 
 ------------------------------------------------------------------------
 -- Consequence for the P != NP self-reference lane.

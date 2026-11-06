@@ -38,7 +38,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
-import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
+import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as GuardedCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff as Exact
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.FixedWidthCNFToCookFormulaExact as Bridge
@@ -64,12 +64,12 @@ guardedCookFormula
     input
     steps =
   Bridge.cnfToCook
-    (GlobalCNF.globalCookLevinCNF
+    (GuardedCNF.guardedGlobalCookLevinCNF
       stateCoverage
       symbolCoverage
       nonempty
       steps
-      (Guard.guardedInitialCols input steps)
+      (Guard.guardedInitialColsMinusOne input steps)
       (Sound.guardedInitialBits
         stateCoverage
         symbolCoverage
@@ -120,12 +120,12 @@ cookSatisfiableToExactBudgetRun
     guardedSat
   where
     cnf =
-      GlobalCNF.globalCookLevinCNF
+      GuardedCNF.guardedGlobalCookLevinCNF
         stateCoverage
         symbolCoverage
         nonempty
         steps
-        (Guard.guardedInitialCols input steps)
+        (Guard.guardedInitialColsMinusOne input steps)
         (Sound.guardedInitialBits
           stateCoverage
           symbolCoverage
@@ -190,12 +190,12 @@ exactBudgetRunToCookSatisfiable
     (Exact.satisfies guardedSat)
   where
     cnf =
-      GlobalCNF.globalCookLevinCNF
+      GuardedCNF.guardedGlobalCookLevinCNF
         stateCoverage
         symbolCoverage
         nonempty
         steps
-        (Guard.guardedInitialCols input steps)
+        (Guard.guardedInitialColsMinusOne input steps)
         (Sound.guardedInitialBits
           stateCoverage
           symbolCoverage

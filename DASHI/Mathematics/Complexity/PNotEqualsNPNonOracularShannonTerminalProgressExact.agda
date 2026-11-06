@@ -166,14 +166,14 @@ oneVariableState :
   Q2.BoundedSelfReferenceState
 oneVariableState =
   Q2.bounded-self-reference-state
-    (Cook.variable zero)
+    (Cook.formulaVar zero)
     zero
     zero
     (suc zero)
     stateFits
   where
     stateFits :
-      Size.formulaNodeCount (Cook.variable zero)
+      Size.formulaNodeCount (Cook.formulaVar zero)
         + (zero + zero)
       ≤
       suc zero

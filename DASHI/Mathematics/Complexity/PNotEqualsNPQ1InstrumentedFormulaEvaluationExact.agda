@@ -37,7 +37,7 @@ formulaNodeVisits :
   ∀ {variables : Nat} →
   SAT.BooleanFormula variables →
   Nat
-formulaNodeVisits (SAT.variable index) = suc zero
+formulaNodeVisits (SAT.formulaVar index) = suc zero
 formulaNodeVisits (SAT.constant value) = suc zero
 formulaNodeVisits (SAT.negate formula) =
   suc (formulaNodeVisits formula)
@@ -51,7 +51,7 @@ evaluateWithNodeVisits :
   SAT.BooleanFormula variables →
   SAT.Assignment variables →
   Bool × Nat
-evaluateWithNodeVisits (SAT.variable index) assignment =
+evaluateWithNodeVisits (SAT.formulaVar index) assignment =
   assignment index , suc zero
 evaluateWithNodeVisits (SAT.constant value) assignment =
   value , suc zero
@@ -82,7 +82,7 @@ instrumentedValueExact :
     (assignment : SAT.Assignment variables) →
   proj₁ (evaluateWithNodeVisits formula assignment)
   ≡ SAT.evaluate formula assignment
-instrumentedValueExact (SAT.variable index) assignment =
+instrumentedValueExact (SAT.formulaVar index) assignment =
   refl
 instrumentedValueExact (SAT.constant value) assignment =
   refl
@@ -122,7 +122,7 @@ instrumentedWorkExact :
     (assignment : SAT.Assignment variables) →
   proj₂ (evaluateWithNodeVisits formula assignment)
   ≡ formulaNodeVisits formula
-instrumentedWorkExact (SAT.variable index) assignment =
+instrumentedWorkExact (SAT.formulaVar index) assignment =
   refl
 instrumentedWorkExact (SAT.constant value) assignment =
   refl
