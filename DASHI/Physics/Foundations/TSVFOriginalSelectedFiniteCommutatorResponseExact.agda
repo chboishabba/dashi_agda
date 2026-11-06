@@ -72,20 +72,7 @@ module _
         (composeOperator laws a b)
         (composeOperator laws b a)
         (TSVF.backwardState E) (TSVF.forwardState E))
-      (cong
-        (λ second →
-          subtractScalar laws
-            (pair (TSVF.backwardState E)
-              (apply (composeOperator laws a b) (TSVF.forwardState E)))
-            second)
-        (cong (pair (TSVF.backwardState E))
-          (applyComposition laws b a (TSVF.forwardState E))))
-    where
-      -- The preceding expression alone rewrites only the right term;
-      -- rewrite the left by a second equality in the stronger theorem.
-      -- This local scope is not an extra physical assumption.
-      dummy : Scalar → Scalar
-      dummy x = x
+      (originalOrderedResponseBothCompositions laws a b)
 
   -- IMPORTANT: the complete left- and right-nested identity is stated
   -- separately below to expose both composition rewrites.
