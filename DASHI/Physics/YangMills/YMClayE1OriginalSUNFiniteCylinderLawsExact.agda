@@ -16,6 +16,7 @@ module DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact where
 
 open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _≤ℝ_)
 
@@ -25,6 +26,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as Native
+import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsFinitePhysicalMeasureLimitExact as Limit
@@ -152,3 +154,110 @@ module _
   nativeExpectationPositive source n cylinder positive =
     Limit.finiteExpectationPositive (fixedCutoffFiniteLaws source n)
       zero (λ links → cylinder n links) positive
+
+  ----------------------------------------------------------------------
+  -- ONE ORIGINAL SOURCE: finite integration laws plus the genuinely
+  -- source-selected convergence witness are the ONLY inputs. The
+  -- generic E1 carrier's five finite-state laws are calculated above.
+  --
+  -- This does not manufacture convergence or claim ordinary limits
+  -- from an arbitrary function Nat -> Real -> Real.
+  ----------------------------------------------------------------------
+
+  realSelectedScalarLaws : E1.SelectedScalarConvergence ℝ
+  realSelectedScalarLaws = record
+    { E1.SelectedScalarConvergence.zero = 0ℝ
+    ; E1.SelectedScalarConvergence.one = 1ℝ
+    ; E1.SelectedScalarConvergence.add = _+ℝ_
+    ; E1.SelectedScalarConvergence.multiply = _*ℝ_
+    ; E1.SelectedScalarConvergence.Nonnegative =
+        λ value → 0ℝ ≤ℝ value
+    ; E1.SelectedScalarConvergence.Converges =
+        RealLimit.Converges sequenceLimit
+    ; E1.SelectedScalarConvergence.convergenceUnique =
+        λ sequence left right leftProof rightProof →
+          trans (sym leftProof) rightProof
+    ; E1.SelectedScalarConvergence.constantConverges =
+        RealLimit.constantLimit limitLaws
+    ; E1.SelectedScalarConvergence.addConverges =
+        λ left right leftLimit rightLimit leftProof rightProof →
+          trans
+            (RealLimit.addLimit limitLaws left right)
+            (RealLimit.cong₂ _+ℝ_ leftProof rightProof)
+    ; E1.SelectedScalarConvergence.multiplyConstantConverges =
+        λ scalar sequence target proof →
+          trans
+            (RealLimit.multiplyConstantLimit limitLaws scalar sequence)
+            (cong (λ value → scalar *ℝ value) proof)
+    ; E1.SelectedScalarConvergence.nonnegativeClosed =
+        λ sequence target proof pointwise →
+          subst (λ value → 0ℝ ≤ℝ value) proof
+            (RealLimit.nonnegativeLimitClosed limitLaws sequence pointwise)
+    ; E1.SelectedScalarConvergence.convergenceCongruent =
+        λ first second target pointwise proof →
+          trans
+            (Seq.limitCongruent sequenceLimit first second pointwise)
+            proof
+    }
+
+  record ActualSelectedOriginalSUNConvergence
+      (finite : ActualNativeFiniteIntegration) : Set₁ where
+    field
+      continuumExpectation :
+        Native.Cylinder theory traceData exponential beta oneLink
+          bilateral (Quotient.divide quotient) → ℝ
+
+      originalWilsonCylinderConverges :
+        ∀ cylinder →
+        RealLimit.Converges sequenceLimit
+          (λ n → nativeExpectation n cylinder)
+          (continuumExpectation cylinder)
+
+  open ActualSelectedOriginalSUNConvergence public
+
+  -- The entire finite E1 law record is NOW PRODUCED from native Gibbs
+  -- measure/Haar data. Only actual physical continuum convergence is
+  -- passed, explicitly, by the selected source.
+  nativeSUNAsDependentE1Source :
+    (finite : ActualNativeFiniteIntegration)
+    (selected : ActualSelectedOriginalSUNConvergence finite) →
+    E1.ActualVariableCutoffCylinderFamily
+      (Native.ActualLinks theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient))
+      (λ n → Physical.PhysicalFiniteYMMeasure
+        (Native.ActualLinks theory traceData exponential beta oneLink
+          bilateral (Quotient.divide quotient) n) ℝ)
+      (Native.Cylinder theory traceData exponential beta oneLink
+        bilateral (Quotient.divide quotient))
+      ℝ
+      (Native.originalDependentCylinderRealization
+        theory traceData exponential beta oneLink bilateral
+        (Quotient.divide quotient))
+      realSelectedScalarLaws
+  nativeSUNAsDependentE1Source finite selected = record
+    { E1.ActualVariableCutoffCylinderFamily.finitePhysicalMeasure =
+        nativeMeasure
+    ; E1.ActualVariableCutoffCylinderFamily.originalNormalizedExpectation =
+        λ n → Physical.normalizedExpectation
+    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectation =
+        nativeExpectation
+    ; E1.ActualVariableCutoffCylinderFamily.finiteExpectationIsOriginalWilson =
+        λ n cylinder → refl
+    ; E1.ActualVariableCutoffCylinderFamily.finiteZero =
+        nativeExpectationZero finite
+    ; E1.ActualVariableCutoffCylinderFamily.finiteOne =
+        nativeExpectationOne finite
+    ; E1.ActualVariableCutoffCylinderFamily.finiteAdd =
+        nativeExpectationAdd finite
+    ; E1.ActualVariableCutoffCylinderFamily.finiteScale =
+        nativeExpectationScale finite
+    ; E1.ActualVariableCutoffCylinderFamily.PositiveCylinder =
+        λ cylinder → ∀ n links → 0ℝ ≤ℝ cylinder n links
+    ; E1.ActualVariableCutoffCylinderFamily.finitePositive =
+        λ n cylinder proof →
+          nativeExpectationPositive finite n cylinder (proof n)
+    ; E1.ActualVariableCutoffCylinderFamily.continuumExpectation =
+        continuumExpectation selected
+    ; E1.ActualVariableCutoffCylinderFamily.originalWilsonConverges =
+        originalWilsonCylinderConverges selected
+    }
