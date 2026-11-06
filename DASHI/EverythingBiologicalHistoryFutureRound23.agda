@@ -16,6 +16,7 @@ import DASHI.Biology.Physical.BiologicalFuturePartitionCompilerExact
 import DASHI.Biology.Physical.BiologicalStochasticFutureLumpingExact
 import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact
 import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact
+import DASHI.Biology.Physical.BiologicalMorphologyPartitionDepth4Exact
 import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact
 import DASHI.Biology.Physical.BiologicalAllNeighbourTissueDynamicsExact
 import DASHI.Biology.Physical.OriginalDmscTwoGenotypeMeasuredExact
