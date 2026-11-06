@@ -42,6 +42,7 @@ import DASHI.Physics.YangMills.YMClayRGLossBudgetToNonGaussianExact as YMActualR
 import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as YMSameLiteral119122116
 -- Original changing-cutoff Wilson finite two-marked jet (not CMP116 analytic J yet).
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as YMOriginalWilsonTwoSourceJet
+import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact as YMOriginalBlockedTwoSource
 import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
