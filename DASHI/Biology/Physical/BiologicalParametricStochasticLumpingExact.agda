@@ -5,11 +5,12 @@ module DASHI.Biology.Physical.BiologicalParametricStochasticLumpingExact where
 -- stochastic fixture used weights 1/2 and 1/2 only. Here *any*
 -- source-supplied normalized rational branch weights preserve the same
 -- future-sufficient code under arbitrary finite mixed action histories.
--- Weight positivity/calibration remains an explicit source obligation.
+-- Nonnegative branch weights and exact normalization are required by type.
+-- Source-specific calibration remains an additional obligation.
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _≤_; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
@@ -21,6 +22,8 @@ record NormalizedRationalBranches : Set where
   field
     retainWeight : ℚ
     flipWeight : ℚ
+    retainNonnegative : 0ℚ ≤ retainWeight
+    flipNonnegative : 0ℚ ≤ flipWeight
     sumIsOne : retainWeight + flipWeight ≡ 1ℚ
 
 open NormalizedRationalBranches public
