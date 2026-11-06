@@ -5,6 +5,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.ExoticGravity.Zhang2025EMGravitySourceClaimExact as Zhang
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact as Quant
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
 import DASHI.Physics.ExoticGravity.AntigravityClaimTheoryComparisonExact as Comparison
 import DASHI.Physics.ExoticGravity.AntigravityExperimentalCutProvenanceExact as Provenance
@@ -116,6 +117,61 @@ compileMetricEvaluation :
   MetricEvaluation
 compileMetricEvaluation comparison =
   metric-evaluation comparison canonicalMetricRoute refl
+
+
+------------------------------------------------------------------------
+-- QUANTITATIVE CONSUMER WELD (source-bounded).
+-- 2024 actual force/torque noise envelopes and the 2026 mass-resolution
+-- threshold MAY enter an EXTERNAL, REGIME-INDEXED sensitivity consumer.
+-- They cannot become one Chinese-patent same-apparatus comparative anomaly.
+------------------------------------------------------------------------
+
+record ExternalNullScreen : Set where
+  constructor external-null-screen
+  field
+    originatingStudy : Quant.SourceStudy
+    reportedEvidenceKind : Quant.EvidenceKind
+    admittedIndependentRegimeUse :
+      Quant.AdmissibleNonPromotingUse
+        originatingStudy reportedEvidenceKind
+        Quant.independentRegimeSensitivity
+    samePhysicalApparatusAsZhang : Bool
+    isNotSamePhysicalApparatus : samePhysicalApparatusAsZhang ≡ false
+
+open ExternalNullScreen public
+
+canonicalTajmar2024Screen : ExternalNullScreen
+canonicalTajmar2024Screen =
+  external-null-screen
+    Quant.tajmar2024SteadyVacuumBalance
+    Quant.authorNoiseScreening
+    Quant.independent2024Sensitivity
+    false refl
+
+canonicalTajmar2026Screen : ExternalNullScreen
+canonicalTajmar2026Screen =
+  external-null-screen
+    Quant.tajmar2026ThreeAmpereDCToroid
+    Quant.instrumentalResolution
+    Quant.independent2026Resolution
+    false refl
+
+-- This strongest composition still requires the PREEXISTING experimental
+-- physical comparison as input. The independent screen itself cannot pay it.
+record QuantitativelyScreenedPhysicalComparison
+  (claim : Anti.AntigravityClaim) : Set where
+  constructor quantitatively-screened-physical-comparison
+  field
+    physicalComparison : ChinesePatentPhysicalComparison claim
+    externalNullComparator : ExternalNullScreen
+
+compileQuantitativelyScreenedPhysicalComparison :
+  {claim : Anti.AntigravityClaim} →
+  ChinesePatentPhysicalComparison claim →
+  ExternalNullScreen →
+  QuantitativelyScreenedPhysicalComparison claim
+compileQuantitativelyScreenedPhysicalComparison comparison screen =
+  quantitatively-screened-physical-comparison comparison screen
 
 ------------------------------------------------------------------------
 -- The strongest negative-G interpretation needs an ADDITIONAL constitutive
