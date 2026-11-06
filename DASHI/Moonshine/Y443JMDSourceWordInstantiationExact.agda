@@ -98,6 +98,9 @@ cong f refl = refl
 trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl q = q
 
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
 wIsX4Beta :
   ∀ {G} (gi : TM.GroupWithInverse G) (nodes : Y.Node → G) →
   wElement gi nodes ≡
@@ -112,11 +115,11 @@ wIsX4Beta gi nodes =
     g = TM.GroupWithInverse.group gi
   in
   trans
-    (GR.Group.associativity g (inv u) (mult u x) b)
+    (sym (GR.Group.associativity g (inv u) (mult u x) b))
     (trans
       (cong (λ z → mult z b)
         (trans
-          (GR.Group.associativity g (inv u) u x)
+          (sym (GR.Group.associativity g (inv u) u x))
           (trans
             (cong (λ z → mult z x)
               (TM.GroupWithInverse.leftInverse gi u))
