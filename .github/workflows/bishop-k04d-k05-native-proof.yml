@@ -32,6 +32,7 @@ on:
       - 'DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda'
       - 'DASHI/Analysis/BishopFactorDerivativeChainExact.agda'
       - 'DASHI/Analysis/BishopOriginalNegativeLogUniformCompactTailExact.agda'
+      - 'DASHI/Analysis/BishopOriginalMachinAtanUniformHalfBallTailExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
@@ -155,6 +156,7 @@ jobs:
             DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda
             DASHI/Analysis/BishopFactorDerivativeChainExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogUniformCompactTailExact.agda
+            DASHI/Analysis/BishopOriginalMachinAtanUniformHalfBallTailExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
             DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
             DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
