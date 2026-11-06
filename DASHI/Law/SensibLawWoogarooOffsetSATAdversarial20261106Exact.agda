@@ -154,6 +154,31 @@ noUniversalAU1UseDecoder decoder exact =
   falseCannotEqualTrue
     (trans (sym (exact worldWithNoAU1Use)) (exact worldWithAU1Use))
 
+-- Adversarial symmetry: the SAME published 10/10 table could be
+-- rubric-compliant if the site/adjacent evidence can be used for every AU,
+-- or rubric-noncompliant if each AU requires its own coordinate-specific
+-- observation. Neither possibility is the actual rule until sourced.
+record HypotheticalRubricWorld : Set where
+  constructor hypothetical-rubric
+  field
+    visibleScores : PublicProjection
+    wholeSitePresenceRulePermitted : Bool
+open HypotheticalRubricWorld public
+
+proponentRubricWorld : HypotheticalRubricWorld
+proponentRubricWorld = hypothetical-rubric publishedMountWalker true
+
+challengerRubricWorld : HypotheticalRubricWorld
+challengerRubricWorld = hypothetical-rubric publishedMountWalker false
+
+noUniversalRubricCorrectnessDecoder :
+  (decoder : PublicProjection → Bool) →
+  ((w : HypotheticalRubricWorld) →
+    decoder (visibleScores w) ≡ wholeSitePresenceRulePermitted w) → ⊥
+noUniversalRubricCorrectnessDecoder decoder exact =
+  falseCannotEqualTrue
+    (trans (sym (exact challengerRubricWorld)) (exact proponentRubricWorld))
+
 -- Reuse the existing seven-ground applicant/respondent adversary.
 habitatGroundCountermodel :
   Adversarial.ShortcutCountermodel Grounds.actionBaselineError
