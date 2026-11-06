@@ -173,23 +173,25 @@ uniformLimitSequentialContinuity approximation f
                       (approximation m (input n))
                       (approximation m limit)
                       (f limit) ⟩
-              (R.∣ R._-_ (f (input n))
-                (approximation m (input n)) ∣)
-              R.+ ((R.∣ R._-_
-                (approximation m (input n))
-                (approximation m limit) ∣)
-                R.+ (R.∣ R._-_ (approximation m limit)
-                  (f limit) ∣))
+              R._+_
+                (R.∣ R._-_ (f (input n))
+                  (approximation m (input n)) ∣)
+                (R._+_
+                  (R.∣ R._-_
+                    (approximation m (input n))
+                    (approximation m limit) ∣)
+                  (R.∣ R._-_ (approximation m limit)
+                    (f limit) ∣))
                 ≤⟨ RP.+-mono-≤ reversedFirst
                       (RP.+-mono-≤ atMiddle atLimit) ⟩
-              quarter R.+ (half R.+ quarter)
+              R._+_ quarter (R._+_ half quarter)
                 ≈⟨ solve 3
                       (λ q h q′ →
                         q ⊕ (h ⊕ q′) ⊜ (q ⊕ q′) ⊕ h)
                       RP.≃-refl quarter half quarter ⟩
-              (quarter R.+ quarter) R.+ half
+              R._+_ (R._+_ quarter quarter) half
                 ≈⟨ RP.+-congʳ half (halfPlusHalf (2 * k)) ⟩
-              half R.+ half
+              R._+_ half half
                 ≈⟨ halfPlusHalf k ⟩
               whole ∎
           })
