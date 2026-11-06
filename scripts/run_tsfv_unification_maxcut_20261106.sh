@@ -51,6 +51,7 @@ safe_sources=(
 physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445ReflectedAllWordGramExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda
   DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
 roots=(
