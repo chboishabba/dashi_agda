@@ -1,3 +1,11 @@
+## 2026-11-06 — stronger full-continuum same-Wilson steelman
+
+[Read constructive 4D continuum proposal](YMClayConstructive4DContinuumSteelman20261106.md). This extends the fixed-physical-cube (q<1) fallback with an **independent direct CMP116 two-marked polymer route**, a source-native Bishop/T5 Cauchy full continuum construction, reflected-OS same-H identification, and two **separate** nontriviality witnesses (OS norm and nonzero signed connected 4pt). This is not another arbitrary physical-interface record.
+
+**Key novel candidate:** after exact marginal/Ward source subtraction, test that actual UV corrections satisfy `δ_n≤A/((n+1)(n+2))+C 2^{-(n+1)}+h_n`, `Σh_n≤H`, enabling `q≤q0+A+C+H<1`; unsubtracted (g_n^2~1/n) is not summable. `BalabanYM4RunningCouplingDriftExact` and `BalabanBetaHistoryLocalizedInfluenceExact` are the correct in-repo donors, the latter explicitly prohibits geometric decay of the marginal direction. No physical Wilson coefficients are assigned. New `YMClayRGLossBudgetToNonGaussianExact.agda` derives uniform noncollapse from a single reference with bounded RG losses and passes it to existing T5 continuum cumulant theorem. See active 13 `CLAY4` exact lemmas and BIDI tests in the new dossier.
+
+---
+
 ### Physical R445/R320: derivation of a uniform q from UV RG error budget
 
 **New** `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`: defines `finiteRGDrift`, `SelectedPhysicalRGInfluenceBudget` and proofs `selectedRGInfluenceBelowFiniteDrift`, `selectedRGInfluenceUniformPhysicalUpper`, `selectedRGInfluenceUniformStrictMargin`. It implements exact induction for:
