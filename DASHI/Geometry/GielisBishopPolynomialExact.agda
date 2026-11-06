@@ -146,3 +146,44 @@ bishopGielisPythagoreanFromSharedWeld P W angle =
 -- The derivative side of the very same W is also already supplied by:
 --   Shared.compileRound11DerivativeAuthority P W
 -- and is not duplicated here. This supports the eventual smoothness proof.
+
+
+------------------------------------------------------------------------
+-- Exact FOUR-ANGLE POLYNOMIAL REDUCTION on the same concrete Bishop ℝ.
+-- This discharges the *algebraic* part of the quadruple-angle theorem:
+-- (c²-s²)²-(2cs)² = c⁴-6c²s²+s⁴.
+-- The analytic claim cos_B(2x)=cos_B(x)²-sin_B(x)² and the
+-- corresponding sine duplication must still be paid on the real
+-- Bishop sine/cosine functions, not fabricated by ring rewriting.
+------------------------------------------------------------------------
+
+bishopCosineDoublePolynomial : Bishop.ℝ → Bishop.ℝ → Bishop.ℝ
+bishopCosineDoublePolynomial c s =
+  Bishop._-_ (square c) (square s)
+
+bishopSineDoublePolynomial : Bishop.ℝ → Bishop.ℝ → Bishop.ℝ
+bishopSineDoublePolynomial c s =
+  Bishop._*_ two (Bishop._*_ c s)
+
+bishopCosineQuadrupleFromDouble :
+  ∀ c s →
+  Bishop._≃_
+    (Bishop._-_
+      (square (bishopCosineDoublePolynomial c s))
+      (square (bishopSineDoublePolynomial c s)))
+    (cosineQuadruplePolynomial c s)
+bishopCosineQuadrupleFromDouble c s =
+  let open BishopP.ℝ-Solver
+  in solve 2
+    (λ a b →
+      (((a ⊗ a) ⊖ (b ⊗ b))
+       ⊗ ((a ⊗ a) ⊖ (b ⊗ b))
+       ⊖
+       ((Κ (+ 2 / 1) ⊗ (a ⊗ b))
+        ⊗ (Κ (+ 2 / 1) ⊗ (a ⊗ b))))
+      ⊜
+      (((a ⊗ a ⊗ a ⊗ a)
+        ⊕ (b ⊗ b ⊗ b ⊗ b))
+       ⊖
+       (Κ (+ 6 / 1) ⊗ ((a ⊗ a) ⊗ (b ⊗ b)))))
+    BishopP.≃-refl c s
