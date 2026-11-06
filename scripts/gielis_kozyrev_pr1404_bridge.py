@@ -15,7 +15,7 @@ This identity does not identify original HTML stroked-SDF thickness
 with independent normal-offset walls.
 """
 from __future__ import annotations
-import argparse, importlib.util, json, math, pathlib
+import argparse, hashlib, importlib.util, json, math, pathlib
 import numpy as np
 import gielis_base369_experiments as G
 
@@ -24,6 +24,18 @@ ORIGINAL_FILES = (
     "kozyrev_first_forward_intersection_referee.py",
     "kozyrev_optical_event_ledger.py",
 )
+ORIGINAL_GIT_BLOBS = {
+    "kozyrev_first_forward_intersection_referee.py":
+        "30c6f3021f32769d153aa9afb17cc6a38d55b90d",
+    "kozyrev_optical_event_ledger.py":
+        "6f89d38c6509ccbc332d066829cbddf620844b64",
+}
+
+def git_blob_sha(path):
+    content=path.read_bytes()
+    return hashlib.sha1(b"blob "+str(len(content)).encode()
+                        +b"\x00"+content).hexdigest()
+
 START = np.array([1.05,0.],dtype=float)
 
 def legacy_geometry(inner=.75,outer=1.55,turns=1.5,thickness=0.):
@@ -40,6 +52,17 @@ def locate_modules(legacy_dir=None):
     if missing:
         return None,{"status":"NOT_CHECKED","missing_original_files":missing,
                      "original_pr":1404,"source_commit":PR1404,
+                     "original_HTML_SDF_parity":False}
+    mismatches=[
+        {"path":name,"expected":ORIGINAL_GIT_BLOBS[name],
+         "actual":git_blob_sha(folder/name)}
+        for name in ORIGINAL_FILES
+        if git_blob_sha(folder/name)!=ORIGINAL_GIT_BLOBS[name]
+    ]
+    if mismatches:
+        return None,{"status":"WRONG_SOURCE","original_pr":1404,
+                     "source_commit":PR1404,
+                     "source_blob_mismatches":mismatches,
                      "original_HTML_SDF_parity":False}
     loaded=[]
     for name in ORIGINAL_FILES:
@@ -141,9 +164,8 @@ if __name__=="__main__":
     result=match_original_owners(
         args.legacy_dir,args.segments,args.power_watts,
         args.rays,args.thickness)
-    if args.require_legacy and result["status"]=="NOT_CHECKED":
-        raise SystemExit("Original PR1404 owners missing: "+str(
-            result["missing_original_files"]))
+    if args.require_legacy and result["status"] in ("NOT_CHECKED","WRONG_SOURCE"):
+        raise SystemExit("Original PR1404 owners missing: "+str(result))
     data=json.dumps(result,indent=2,sort_keys=True)
     if args.output:pathlib.Path(args.output).write_text(data+"\n")
     print(data)
