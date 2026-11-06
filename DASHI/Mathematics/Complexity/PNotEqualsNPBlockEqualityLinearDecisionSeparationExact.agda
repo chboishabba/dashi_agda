@@ -127,7 +127,7 @@ nodeVisitsInvariantUnderRenaming :
   Eval.formulaNodeVisits (Rename.renameFormula rename formula)
   ≡
   Eval.formulaNodeVisits formula
-nodeVisitsInvariantUnderRenaming rename (SAT.variable index) =
+nodeVisitsInvariantUnderRenaming rename (SAT.formulaVar index) =
   refl
 nodeVisitsInvariantUnderRenaming rename (SAT.constant value) =
   refl
