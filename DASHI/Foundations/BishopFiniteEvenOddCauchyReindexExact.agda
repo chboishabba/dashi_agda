@@ -195,3 +195,28 @@ evenOddComplement :
 evenOddComplement zero k ()
 evenOddComplement (suc n) k (N.s≤s k≤n) =
   oddEvenComplement n k k≤n
+
+
+-- An odd first exponent in an even 2n convolution consumes one
+-- factorial degree from each input. The remaining integer index is
+-- (n-1)-k, *not* n-k. The proof is truncated-subtraction
+-- associativity, valid even at zero without a separate branch.
+oddOffsetReassociation :
+  (n k : Nat) →
+  (n N.∸ suc k)
+    ≡ ((n N.∸ suc zero) N.∸ k)
+oddOffsetReassociation n k =
+  sym (NP.∸-+-assoc n (suc zero) k)
+
+-- In the actual odd/even factorial split this identity turns the
+-- n-k-1 complementary exponent into the original sine source index.
+evenOddComplementThroughPredecessor :
+  (n k : Nat) →
+  k N.< n →
+  (D.double n N.∸ suc (D.double k))
+    ≡ suc (D.double ((n N.∸ suc zero) N.∸ k))
+evenOddComplementThroughPredecessor n k k<n =
+  trans
+    (evenOddComplement n k k<n)
+    (cong (λ r → suc (D.double r))
+      (oddOffsetReassociation n k))
