@@ -332,3 +332,14 @@ Refusal compelled by offset defect = NO
 The strongest current offset question for counsel is therefore:
 
 > **Does the proposed offset package actually replace the ecological attributes being lost at a mature, connected, urban-pressure Woogaroo site, or does it principally secure or plant lower-risk/different habitat elsewhere whose apparent hectare gain overstates its additional, timely and functionally equivalent conservation benefit?**
+
+
+---
+
+## 6 November 2026 — primary evidence reconciliation (supersedes older acquisition statuses)
+
+The **actual 50-page Part 9 decision** is now held, signed **16 October 2026** by Mark Hall, Annexure A containing operative conditions. The pre-decision **January 2026 Preliminary Documentation v5** Parts A.i/A.iii are also held in the user evidence library. Do **not** repeat the older bottom-line status that the detailed proponent offset package is entirely unavailable. The **15 October 2026 approved offset-management-plan versions**, section 95C decision recommendation, section 95B complete response-to-comments and registered declarations remain separate unacquired/matching gates.
+
+The new source-paid numerical record is narrow but decisive for **adversarial checking**: Mount Walker West A16 Table 44 has five 30-tree SAT counts **0,2,0,1,0** (3 scat-positive tree slots); Avonvale A15 Table 33 has **11,5,0,0,1** (17). Mount Walker West awards **10/10 presence on/adjacent** in each of four AUs; this must be compared to the original rubric and AU-to-transect coordinates, not asserted fraudulent. A16 reports a discrepancy in its five SAT labels between methodology/table and later prose, and has an AU4 species-usage table/narrative discrepancy. The **Esk** exact SAT table still requires source extraction. No iid confidence interval, corrected habitat-quality score, corrected OAG offset fraction, non-compliance or invalidity follows from these counts alone.
+
+Implementation and falsification: **[6 November source-typed SAT adversarial maximum-cut](../docs/research/Woogaroo20198575OffsetSATAdversarialMaxCut20261106.md)**, golden **DASHI/Law/SensibLawWoogarooOffsetSATAdversarial20261106Exact.agda**, and **scripts/check_woogaroo_offset_sat_adversarial.py**; reused under the original PR **#1276** seven-ground adversarial owner and old landscape/attribution owners. Finite reference executable checked; **Agda kernel acceptance remains OPEN**. QUT/QCC, Saunders Havill, BAAM, One Environment and all earlier PR original attribution preserved.
