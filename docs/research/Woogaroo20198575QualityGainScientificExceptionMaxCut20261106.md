@@ -63,3 +63,15 @@ QUT/QCC's mature-canopy/thermal-refuge/corridor critique is **separate and survi
 **V exact kernel**: parallel_checker and Agda 2.9 --safe at actual branch SHA; no CI or independently verified compiler result is claimed here.
 
 **Scope firewall:** Scenic EPBC 2020/8651, Peninsula EPBC 2020/8629, nearby historical clearing, asset/political adjacency and financial transfer speculation are not same-action legal facts.
+
+
+## Second independent source-algebra cut: rounded versus unrounded MWW AU quality
+
+**The proponent's own A16 Table 13 gives source-reported unrounded quality:**
+- MWW AU1 baseline **3.40**, year-20 **6.86** → **3.46** point increase, but the published OAG inputs are rounded **3→7** → **4.00** point increase.
+- MWW AU2 baseline **3.44**, year-20 **6.71** → **3.27** point increase, but published rounded OAG inputs are **3→7** → **4.00** point increase.
+- A16 Table 13 gives all **50.02%** of MWW's koala credit to those two AUs. The other two MWW AUs contribute 0% for Koala in this published source. The logic of the perturbation is therefore source-specific, not an arbitrary haircut.
+
+Changing ONLY these two OAG improvement differences to the source's unrounded forecasts, holding all other original source inputs unchanged, changes the exact rational 14-AU reconstruction from **108.34513261959262% to 99.99180171252917%**; a difference of **8.353330907063455 percentage points**. The original 8.35-point headline surplus over 100% is essentially exhausted by this source precision convention. This is not a claim that the official OAG prohibits integer-rounded inputs, or that the spreadsheet actually accepted decimals. **The actual OAG workbook, cell validation and accepted precision/rounding rule must be produced.** If original OAG instructions require/permit 0–10 integer categories, the proper challenge moves to whether those coarse categories reliably measure species viability rather than accusing a numerical error.
+
+Exact golden: \`DASHI/Law/SensibLawWoogarooKoalaQualityRoundingCut20261106Exact.agda\` (source hundredths 346 and 327 vs rounded 400 and 400, weighted difference integer **7,789,725**, modified coefficient hundredths **93,245,275**), companion Fraction reference \`scripts/check_woogaroo_koala_quality_rounding.py\`, independent actual arithmetic reproduction in this conversation. Both root imports updated, **Agda kernel and repo-script execution unverified**. Preserve all original authors and no promotion to legal error, ecological outcome, registered offset, actual filing or condition breach.
