@@ -67,6 +67,57 @@ actualOriginalComplexDiagonalOperator (a , b)
     (C._*c_ (C.complex a 0ℚ) x)
     (C._*c_ (C.complex b 0ℚ) y)
 
+-- The source-selected diagonal operators have actual identity,
+-- composition and Hermitian-adjoint action, not merely an abstract
+-- positive quadratic polynomial. This makes the finite original
+-- observer's selected real *-subalgebra executable in complex coords.
+actualOriginalDiagonalIdentityActs :
+  ∀ ket →
+  actualOriginalComplexDiagonalOperator diagIdentity ket ≡ ket
+actualOriginalDiagonalIdentityActs
+    (Env.pointerRecord (C.complex x y) (C.complex z w)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt
+      (solve (x ∷ y ∷ []))
+      (solve (x ∷ y ∷ [])))
+    (C.complexExt
+      (solve (z ∷ w ∷ []))
+      (solve (z ∷ w ∷ [])))
+
+actualOriginalDiagonalComposition :
+  ∀ left right ket →
+  actualOriginalComplexDiagonalOperator (diagProduct left right) ket
+  ≡
+  actualOriginalComplexDiagonalOperator left
+    (actualOriginalComplexDiagonalOperator right ket)
+actualOriginalDiagonalComposition
+    (a , b) (c , d)
+    (Env.pointerRecord (C.complex x y) (C.complex z w)) =
+  cong₂ Env.pointerRecord
+    (C.complexExt
+      (solve (a ∷ c ∷ x ∷ y ∷ []))
+      (solve (a ∷ c ∷ x ∷ y ∷ [])))
+    (C.complexExt
+      (solve (b ∷ d ∷ z ∷ w ∷ []))
+      (solve (b ∷ d ∷ z ∷ w ∷ [])))
+
+-- The source's ACTUAL Hermitian pair, so its physical star is not
+-- a new arbitrary operator-adjoint record on this real subalgebra.
+actualOriginalDiagonalHermitianAdjoint :
+  ∀ diagonal left right →
+  Env.hermitianPair
+    (actualOriginalComplexDiagonalOperator diagonal left) right
+  ≡
+  Env.hermitianPair left
+    (actualOriginalComplexDiagonalOperator (diagStar diagonal) right)
+actualOriginalDiagonalHermitianAdjoint
+    (a , b)
+    (Env.pointerRecord (C.complex x y) (C.complex z w))
+    (Env.pointerRecord (C.complex p q) (C.complex r s)) =
+  C.complexExt
+    (solve (a ∷ b ∷ x ∷ y ∷ z ∷ w ∷ p ∷ q ∷ r ∷ s ∷ []))
+    (solve (a ∷ b ∷ x ∷ y ∷ z ∷ w ∷ p ∷ q ∷ r ∷ s ∷ []))
+
 -- The SAME original Q.TSVF selected forward state, for every
 -- admissible gamma/environment choice and k.
 module _
