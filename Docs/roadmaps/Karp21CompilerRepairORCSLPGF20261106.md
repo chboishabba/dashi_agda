@@ -64,3 +64,16 @@ The repaired parser was also independently modelled in local Python against 1,40
 The source-native `Karp21CompilerRepairGovernanceExact.agda` now also enumerates the five **second-round diagnostic categories** as `FollowupRepairIssue`/`reportedFollowupKinds`. It continues to prohibit promoting any source-stage status to proof authority without an actual new exact-head receipt. This formalism remains Golden Agda; the checked `dashi_lean4` AuthorityBoundary/Loom relation language is context, not an independent certification.
 
 **Immediate acceptance cut:** update branch, run existing Python/preflight and `scripts/run_agda29_parallel_check.sh` under the user's existing Agda 2.9.0 environment; return the first exact failing filename/coordinate or the complete successful root receipts with new head. No Agda toolchain is present in this execution environment, so no newly updated kernel outcome is asserted.
+
+## 2026-11-06 local Agda 2.9 follow-up: three compiler fronts
+
+
+**Supplied local receipt:** at historical commit `cbf4302cc90d72dcc44ce3d27847954bf56a6654`, the user reports that `referee_karp21_maxcut.sh preflight` and `check_karp21_reserved_formula_constructors.py` pass, including the Cook/SAT constructor migration. This is a user-supplied preflight report, not an Agda kernel receipt for the subsequently edited head.
+
+**Source repair 1 — Clique / cover:** `Karp21CliqueVertexCoverExact.agda` replaces the unnecessary `trans (cong negBool eqU) refl` and matching `eqV` expression with direct `cong negBool eqU` / `cong negBool eqV`. This preserves the source-owned `with ... in` equality witnesses and the same semantic graph carrier.
+
+**Source repair 2 — signed gamma list:** `Karp21GammaSignedListRoundTripExact.agda` explicitly supplies `{ys = encodeSignedValuesPure rest}` to the original standard-library `ListP.length-++ (encodeSignedGammaPure value)` rewrite, avoiding an implicit function-valued rewrite target. No new encoding or parser is introduced.
+
+**Source repair 3 — Cook prefix codec:** `PNotEqualsNPCookFormulaPrefixCodecExact.agda` on the current branch already contains a fuel-indexed `parseCookFormulaFuel` implementation with the public `parseCookFormula` wrapper and a strengthened encoded-roundtrip length-budget proof. This is source-written and must be independently checked with the pinned Agda 2.9.0 compiler; do not regard the old termination issue as kernel-resolved merely because the recursive calls now descend on fuel.
+
+**Exact promotion checks:** `Karp21GammaGoldenEverything.agda`, `Karp21RawGraphValidatorObservationExact.agda`, and `Karp21CookGoldenEverything.agda` must be recompiled on the new exact Git head. A further compiler diagnostic becomes a new F-gap coordinate, not a pretext for a simulated acceptance receipt. The Lean mirror remains an independent comparison surface; the Agda source and Agda 2.9.0 receipts are Golden.
