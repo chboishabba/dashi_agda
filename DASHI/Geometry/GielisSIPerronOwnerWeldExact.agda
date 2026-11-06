@@ -23,7 +23,8 @@ module DASHI.Geometry.GielisSIPerronOwnerWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Int using (pos)
 open import Agda.Builtin.String using (String)
 open import Data.Rational.Base using (ℚ; _≤_)
 
@@ -50,19 +51,15 @@ data OpticalSIObservable : Set where
 
 angularImpulseDimension : SI.Dimension
 angularImpulseDimension =
-  SI.dim (SI.one) (SI.one) SI.minusOne
+  SI.dim (pos 2) SI.one SI.minusOne
     SI.zeroI SI.zeroI SI.zeroI SI.zeroI
-  -- M L^2 T^-1 is corrected below in the nominal bridge:
-  -- the exact length exponent is 2, not 1.
 
 wallTorqueDimension : SI.Dimension
 wallTorqueDimension =
   MechanicalSI.mechanicalToSI Mechanical.energyDimension
 
 angularMomentumDimension : SI.Dimension
-angularMomentumDimension =
-  SI.dim (SI.one) (SI.one) SI.minusOne
-    SI.zeroI SI.zeroI SI.zeroI SI.zeroI
+angularMomentumDimension = angularImpulseDimension
 
 roleDimension : OpticalSIObservable → SI.Dimension
 roleDimension sourcePower = SI.Power
@@ -159,7 +156,7 @@ finiteInfluenceRowPowerBoundReuse :
     (PerronRows.majorantPowerPositive dataSet n x)
   ≤ PerronRows.rationalPower
       (PerronRows.rowMass dataSet)
-      (Agda.Builtin.Nat.suc n)
+      (suc n)
 finiteInfluenceRowPowerBoundReuse =
   PerronRows.positivePowerRowMassBound
 
