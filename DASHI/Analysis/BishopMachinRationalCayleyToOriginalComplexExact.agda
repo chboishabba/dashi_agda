@@ -119,6 +119,16 @@ embedOriginalComplexMultiply
         (embedMultiply a d)
         (embedMultiply b c)))
 
+-- The exact prior-art rational conjugation descends to the same
+-- source Bishop componentwise conjugation.
+embedOriginalComplexConjugate :
+  (z : CD.RationalComplex) →
+  C._≈C_
+    (embedOriginalComplex (CD.conjugateC z))
+    (C.conjugate (embedOriginalComplex z))
+embedOriginalComplexConjugate (CD.complex a b) =
+  C.complex-equivalent RP.≃-refl (embedNegate b)
+
 embedOriginalComplexCongruent :
   ∀ {z w : CD.RationalComplex} →
   z ≡ w →
