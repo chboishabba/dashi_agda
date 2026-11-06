@@ -1217,3 +1217,33 @@ source-written candidates and bounded independent tests are not kernel proofs.
 The new symbolic syntax is NOT interchangeable with an expanded integer
 word in a polynomial-time many-one reduction. The P != NP lower bound is
 not supplied by this bridge.
+
+## 2026-11-06 — full public Conway rule-five and factor codec strengthening
+
+On PR #1474 derived from the original updated Karp head, the
+`Karp21ConwayTotalChainExact.conwayDropAfterInternalOne` public theorem
+now states arbitrary-list prefix absorption:
+
+`evaluate (a :: (before ++ (1 :: after))) == evaluate (a :: before)`.
+
+It is derived from the actual prefix-machine invariant and the
+structural run/advance append proof. This strengthens internal
+`dropAfterOne` to a consumer-facing chain equality for every
+`before` and `after`.
+
+`Karp21ConwayGammaChainCodecExact` now has:
+- arbitrary-bit prefix-exclusion `chainFullBinaryNoProperPrefix`;
+- literal gamma chain injectivity `chainEncodeInjective`;
+- exact word lengths and strict positive-chain roundtrip.
+
+`Karp21ConwayPrimorialGammaAdapterExact` transports wire-size,
+injectivity, and arbitrary-bit prefix-exclusion to BOTH the original
+4-prime primorial coordinates and 15-prime SSP Gödel exponent vector.
+
+Independent tests: 327 successful finite Conway rewrite comparisons
+(103 short + 224 longer), 18 deliberately capped cases, 781 gamma
+roundtrips, and all 8,191 bitstrings through length 12 (133 accepted
+canonical/8,058 rejected). No Agda/parallel_checker acceptance; no
+polynomial Turing machine cost or P!=NP proof implied. The actual
+E20/N21 binary reduction and machine clock remain the original
+K03/K05/K06 critical path.
