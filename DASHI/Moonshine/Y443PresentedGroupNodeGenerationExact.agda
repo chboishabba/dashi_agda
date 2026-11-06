@@ -82,10 +82,10 @@ inductionOnSourceWord gi nodes P eid mulClosed invClosed genClosed
     (inductionOnSourceWord gi nodes P eid mulClosed invClosed genClosed w)
 
 nodeGenerationFromPresentedSyntax :
-  ∀ {G} (gi : TM.GroupWithInverse G) (nodes : Y.Node → G) →
+  ∀ {G : Set} (gi : TM.GroupWithInverse G) (nodes : Y.Node → G) →
   PresentedByY443Nodes gi nodes →
   Pair.NodeGeneration gi nodes
-nodeGenerationFromPresentedSyntax gi nodes source = record
+nodeGenerationFromPresentedSyntax {G} gi nodes source = record
   { Pair.allFromNodes = proof
   }
   where
