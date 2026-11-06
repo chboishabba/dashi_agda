@@ -1450,3 +1450,28 @@ recorded in
 `Docs/proofs/BishopK04dK05TerminalCompositionExactProof20261106.md`.
 This is a mathematical derivation and explicit implementation map,
 NOT a claimed Agda proof term. No kernel receipt has been observed.
+
+
+## 2026-11-06 impossibility certificate for bare original zeta/xi interfaces
+
+`DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda`
+constructs two instances of the **actual**
+`RiemannAnalyticSubstrate.ZetaHalfPlaneLayer` record with an identical
+complex carrier and all identically inhabited domain/convergence/equality
+predicate fields but distinct `zetaHalfPlane` values. It separately
+constructs two `CompletedRiemannZeta` instances with exactly the
+same `zeta`, `gamma`, carrier, and half-plane layer yet distinct
+`xi` values. Both non-equalities are proved by constructor
+disjointness, not an alleged RH result.
+
+This rules out the false next step "instantiate arbitrary Set fields
+to finish K04d". It forces a **positive** native Bishop realization of
+the exact original Dirichlet series value and completed gamma/factor
+identity, which may be plugged into an analytic layer ONLY with explicit
+same-object equality. The countermodel is `--safe` source-written,
+imported in three golden TOE roots, and included in the Bishop
+parallel-checker workflow. Agda elaboration is still pending.
+
+The mathematical LOG/PI composition identities remain separate.
+The countermodel is a proof of a missing premise's necessity, not
+a proof of those positive terminal identities.
