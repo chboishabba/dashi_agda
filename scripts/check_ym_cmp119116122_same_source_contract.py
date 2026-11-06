@@ -51,6 +51,13 @@ OWNERS = {
     "CMP122_reflection_crossing": ("BalabanCMP122ROperationReflectionSupportCutExact.agda",
         ("rOperationCrossingEquation1100",
          "cmp122ROperationCrossingKernelRPLevel = conditional")),
+    "ORIGINAL_WILSON_FINITE_JET": ("YMClayOriginalWilsonFiniteTwoSourceJetExact.agda",
+        ("originalWilsonDensityIsSelectedWilson",
+         "originalWilsonPartitionIsSelectedProductHaar",
+         "originalWilsonNormalizedJet",
+         "originalWilsonLiteralJetDirections",
+         "originalWilsonMixedJetIsSameFiniteCovariance",
+         "originalWilsonMixedJetIsOriginalConnectedCumulant")),
 }
 WELD = P + "YMClayCMP119122116SelectedProducerWeldExact.agda"
 TERMS = (
@@ -96,6 +103,17 @@ def main():
             "canonical regression root")
     wf = text(WORKFLOW)
     require(wf,"$AGDA " + WELD,"Agda CI actual typecheck")
+    jet = P + "YMClayOriginalWilsonFiniteTwoSourceJetExact.agda"
+    require(text(ROOT_IMPORT),
+            "import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact",
+            "original finite jet regression root")
+    require(wf,"$AGDA " + jet,"original Wilson finite jet Agda CI")
+    require(wf,"- '" + jet + "'","original Wilson finite jet CI trigger")
+    test = "scripts/check_ym_original_wilson_two_source_jet_reference.py"
+    require(wf,"python3 " + test,"original finite jet exact reference CI")
+    require(wf,"- '" + test + "'","original finite jet reference trigger")
+    require(text(test), "changed_measure_negative_control",
+            "two-marked BIDI negative control")
     require(wf,"- '" + WELD + "'","Agda CI trigger")
     document = text(DOC)
     for item in ("Y.01.","Y.02.","Y.03.","Y.04.","BalabanCMP116119NormalizedExpectationDerivativeRound281Exact",
