@@ -20,9 +20,7 @@ module DASHI.Analysis.BishopOriginalLogAtanDerivativeLimitValuesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Sum.Base using (inj₂)
-open import Data.Product.Base using (proj₂)
-import Inverse as Inv
+open import Data.Product.Base using (proj₁)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
@@ -36,16 +34,10 @@ import DASHI.Foundations.BishopSquareNonnegativeExact as Square
 import DASHI.Physics.YangMills.BalabanBishopConcreteHalfBallSquareExact as Half
 import DASHI.Foundations.BishopMachinArctanConstructionExact as Atan
 
--- Vendored Sequence.1-r≄0 is intentionally private; repeat only
--- its SHORT constructive sign argument, using the public Bishop order.
-oneMinusNonzero :
-  (q : R.ℝ) →
-  R._<_ (R.∣ q ∣) R.1ℝ →
-  R._≄0 (R._-_ R.1ℝ q)
-oneMinusNonzero q inside =
-  inj₂ (RP.x<y⇒0<y-x q R.1ℝ
-    (proj₂ (RP.∣x∣<y⇒-y<x<y q R.1ℝ inside)))
-
+-- Reuse the exact ORIGINAL Bishop geometric-series limit carrier.
+-- The vendor inverse's nonzero witness is intentionally private;
+-- its convergent pair already contains the correct computed inverse.
+-- Projecting that same pair avoids any synthetic inverse witness.
 geometricPartialIsOriginalBishopSeries :
   (q : R.ℝ) (count : Nat) →
   R._≃_
@@ -62,17 +54,13 @@ originalLogFiniteDerivativeSeriesConverges :
   (inside : R._<_ (R.∣ x ∣) R.1ℝ) →
   Seq._ConvergesTo_
     (λ count → Geo.negativeLogDerivativePolynomial x count)
-    (Inv._⁻¹_
-      (R._-_ R.1ℝ x)
-      (oneMinusNonzero x inside))
+    (proj₁ (Seq.geometric-series-isConvergent inside))
 originalLogFiniteDerivativeSeriesConverges x inside =
   Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
     (λ {(suc count) →
       RP.≃-symm
         (geometricPartialIsOriginalBishopSeries x (suc count))})
-    ((Inv._⁻¹_ (R._-_ R.1ℝ x)
-        (oneMinusNonzero x inside)) ,
-      Seq.geometric-series-converges inside)
+    (Seq.geometric-series-isConvergent inside)
 
 -- The original atan point is constrained by the EXACT original half
 -- ball; no extra analytic domain predicate is inserted.
@@ -110,11 +98,8 @@ originalAtanFiniteDerivativeSeriesConverges :
   (insideHalf : R._≤_ (R.∣ x ∣) Half.bishopHalf) →
   Seq._ConvergesTo_
     (λ count → AtanFinite.sourceAtanDerivativeFinitePartial x count)
-    (Inv._⁻¹_
-      (R._-_ R.1ℝ (R.-_ (R._*_ x x)))
-      (oneMinusNonzero
-        (R.-_ (R._*_ x x))
-        (nativeNegativeSquareInsideUnit x insideHalf)))
+    (proj₁ (Seq.geometric-series-isConvergent
+      (nativeNegativeSquareInsideUnit x insideHalf)))
 originalAtanFiniteDerivativeSeriesConverges x insideHalf =
   let
     q = R.-_ (R._*_ x x)
@@ -133,8 +118,7 @@ originalAtanFiniteDerivativeSeriesConverges x insideHalf =
   Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
     (λ {(suc count) →
       RP.≃-symm (originalPartialIsGeometric (suc count))})
-    ((Inv._⁻¹_ (R._-_ R.1ℝ q) (oneMinusNonzero q qInside)) ,
-      Seq.geometric-series-converges qInside)
+    (Seq.geometric-series-isConvergent qInside)
 
 -- Two actual selected Machin values are now fully instantiated
 -- with the original source absolute-half-ball witnesses. Only
