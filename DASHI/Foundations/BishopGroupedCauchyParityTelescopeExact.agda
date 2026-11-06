@@ -69,7 +69,7 @@ recoverEvenEven ee oo source sourceDegree n =
       (λ e o → e ⊜ (e ⊖ o) ⊕ o)
       RP.≃-refl
       (ee n) (previousCoefficient oo n))
-    (RP.+-congʳ
+    (RP.+-congˡ
       (previousCoefficient oo n)
       (sourceDegree n))
 
@@ -95,9 +95,9 @@ realDegreeDefect ee oo source sourceDegree n =
     open RP.ℝ-Solver
   in
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ v)
-      (RP.+-congʳ
+      (RP.+-congˡ
         (R.-_ b)
         (recoverEvenEven ee oo source sourceDegree n)))
     (solve 3
@@ -173,7 +173,7 @@ universalFiniteImagGroupedEquality :
     R.0ℝ
 universalFiniteImagGroupedEquality evenOdd oddEven sourceOdd degree count =
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ (S.SeriesOf sourceOdd count))
       (Ext.seriesPartialSumsCongruent degree count))
     (RP.+-inverseʳ
@@ -209,7 +209,7 @@ nativeFiniteSeriesDifferenceLinear left right (suc count) =
     open RP.ℝ-Solver
   in
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R._-_ a b)
       (nativeFiniteSeriesDifferenceLinear left right count))
     (solve 4
@@ -240,7 +240,7 @@ nativeFiniteSeriesSumLinear left right (suc count) =
     open RP.ℝ-Solver
   in
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R._+_ a b)
       (nativeFiniteSeriesSumLinear left right count))
     (solve 4
