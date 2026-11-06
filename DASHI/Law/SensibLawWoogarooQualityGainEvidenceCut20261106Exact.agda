@@ -15,6 +15,7 @@ module DASHI.Law.SensibLawWoogarooQualityGainEvidenceCut20261106Exact where
 -- authorship, and previous PR #1276 direct/indirect source ledgers.
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 
