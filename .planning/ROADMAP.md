@@ -155,3 +155,17 @@ Authoritative proof details: Docs/support/reference/GielisBase369ProofTheorems.m
 
 Proof explanations E01–E19: Docs/support/reference/GielisBase369ProofTheorems.md.
 Authoritative G01–G21 obligations and deliverables: Docs/support/reference/GielisBase369Roadmap.md.
+
+
+## 2026-11-06 Gielis: existing SI + Perron formal-owner reuse (active max-cut)
+
+- [x] Reuse canonical SI seven-exponent Dimension/Quantity/Measurement in `DASHI.Physics.Units.SI` and `SIMetrologyBridge`; no second physical-unit system.
+- [x] Reuse Buckingham M/L/T algebra and existing mechanical→SI mapping; source-write the exact `[P/c]R = M L² T⁻²` dimensional theorem.
+- [x] Preserve nominal meaning of wall torque (N m) and optical energy (J) as distinct roles despite equal dimensional exponents; angular impulse has M L² T⁻¹.
+- [x] Reuse canonical SI exact c natural-number carrier `SIExactConstantParsedCarrierRequest` (299792458 m/s); Python optics/torque now reads that canonical source.
+- [x] Reuse actual Yang–Mills/Balaban finite **nonnegative rational matrix row/power** theorem in `GielisSIPerronOwnerWeldExact.agda`, avoiding a duplicate Perron library.
+- [x] Keep E17 original finite-raster Collatz–Wielandt rational eigenvalue interval, verified mathematically; do not confuse Syracuse integer dynamics with the Perron variational theorem.
+- [ ] The five new Gielis Agda roots require exact-head kernel acceptance; the universal Gielis Bishop trigonometric weld and native selected raster spectral owner are still distinct obligations.
+- [ ] Cross-calibrate actual optical power/reflectivity/lever-arm measurements to typed SI quantities if a physical empirical endpoint is required.
+
+**Scope adjustment:** CI and historical HTML ray replay are deferred from the active priority cut, not erased from the G13 provenance ledger. Full E01–E21 proof details and G01–G21 remaining exact lemmas: `Docs/support/reference/GielisBase369ProofTheorems.md` and `GielisBase369Roadmap.md`.
