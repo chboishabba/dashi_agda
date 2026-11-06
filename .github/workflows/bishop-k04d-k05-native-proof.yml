@@ -11,6 +11,7 @@ on:
       - 'DASHI/Foundations/BishopNegativeLogExponentialReciprocalFromCancellationExact.agda'
       - 'DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda'
       - 'DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda'
+      - 'DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda'
       - 'DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda'
       - 'DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda'
       - 'DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda'
@@ -107,6 +108,7 @@ jobs:
             DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda
             DASHI/Foundations/BishopNegativeLogExpFormalRecurrenceUniquenessExact.agda
             DASHI/Foundations/BishopMachinRationalGaussianPhaseExact.agda
+            DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda
             DASHI/Analysis/BishopSequentialContinuityRingCompilerExact.agda
             DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda
             DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda
