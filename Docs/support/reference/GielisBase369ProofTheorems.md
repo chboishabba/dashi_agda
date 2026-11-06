@@ -771,3 +771,22 @@ has been independently measured for the original apparatus.
   hypothesis and paired Hoeffding model theorem,
   with runnable rational/statistical source;
   material/power measurements and replication OPEN.
+
+
+### Reproducing E18 with the literal original owner files
+
+The new `scripts/check_gielis_kozyrev_pr1404_original.sh`
+performs an explicit, hash-pinned Git fetch of PR #1404
+(if `--fetch` is given) and runs reference-wall checks at zero
+thickness and at (w=0.156) m using the original Kozyrev
+source modules. The command changes no working tree source
+and does not require Nix or Chrome:
+
+```bash
+bash scripts/check_gielis_kozyrev_pr1404_original.sh --fetch
+```
+
+This command is an **acceptance procedure**, not a completed
+run receipt. Only the original historical HTML SDF and
+collision-export replay can close G13c's remaining geometry
+semantics mismatch.
