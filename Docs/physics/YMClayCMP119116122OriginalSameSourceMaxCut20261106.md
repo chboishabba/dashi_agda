@@ -1,3 +1,18 @@
+## 6 November — finite ORIGINAL Wilson reflected cross-Gram transport (new source theorem)
+
+The existing original same-source native R445 OS pullback has been strengthened to **two different real observables**, not merely the quadratic diagonal. New declarations in `YMClayOriginalWilsonNativeOSPullbackExact.agda`:
+
+- `originalFineOSCrossGram`: original fine Wilson reflected bilinear expectation `E_mu[(Theta_f f) g]`.
+- `actualR445CoarseOSCrossGram`: original weighted R445 pushforward expectation `E_B*mu[(Theta_c F) G]`.
+- `originalR445CrossGramIsFineWilsonCrossGram`: exact finite equality for all coarse real tests `F,G` when the *literal* native block intertwines the selected reflections.
+
+This is derived by the same existing Haar cylinder congruence, unchanged Wilson density and unchanged partition, using the actual native non-Abelian block. It does **not** assume a separate covariance, a bare coarse Wilson weight, or isolated CMP122 crossing-fragment positivity.
+
+**Status:** source-written; not Agda-kernel accepted. `NativeBlockReflectsExactly` is still an explicit premise, as are the selected ordered Haar laws. Full fine Wilson RP, positive-time support preservation, complex adjoint transport, physical CMP119/122 whole-form identification, cutoff/volume limits, CMP116 localization and the same continuum OS spectral gap remain unproved for the selected original family. No such gate is marked closed by this finite Gram identity.
+
+**Next strict max-cut:** instantiate native reflection geometry and fine Wilson RP on the original gauge-invariant positive-time algebra, then transport the full Gram matrix through the complete CMP119/122 source/continuum; in parallel complete M.01 kernel receipt and M.02/M.03 selected-source and uniform-rate applications. Keep the pure 4D YM chain independent of TSVF/KK/observer claims.
+
+---
 ## 6 November correction: same ORIGINAL R445 reflected OS form, no per-polymer PSD tax
 
 New physical-source Agda owner `DASHI/Physics/YangMills/YMClayOriginalWilsonNativeOSPullbackExact.agda` defines the real two-point reflected quadratic forms **from the exact original fine 1024-bond Wilson–Gibbs normalized expectation and its exact R445 native weighted pushforward**, not from independent fine/coarse reflection forms.
