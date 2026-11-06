@@ -23,6 +23,7 @@ module DASHI.Mathematics.Complexity.Karp21ConwayTotalChainExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (_++_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 import Data.Nat.Properties as NatP
@@ -194,6 +195,50 @@ dropAfterOne state invariant rest =
         (sym invariant))
       rest)
     invariant
+
+
+------------------------------------------------------------------------
+-- Publish the rule-five proof over ANY actual finite chain prefix,
+-- not merely the private Prefix machine state.
+------------------------------------------------------------------------
+
+advance : Prefix → List Nat → Prefix
+advance state [] = state
+advance state (n ∷ rest) = advance (push state n) rest
+
+runAdvance :
+  (state : Prefix) (entries : List Nat) →
+  run state entries ≡ value (advance state entries)
+runAdvance state [] = refl
+runAdvance state (n ∷ rest) =
+  runAdvance (push state n) rest
+
+runAppend :
+  (state : Prefix) (pre post : List Nat) →
+  run state (pre ++ post) ≡ run (advance state pre) post
+runAppend state [] post = refl
+runAppend state (n ∷ pre) post =
+  runAppend (push state n) pre post
+
+advanceOneInvariant :
+  (state : Prefix) (entries : List Nat) →
+  extension (advance state entries) 1
+    ≡ value (advance state entries)
+advanceOneInvariant state [] = refl
+advanceOneInvariant state (n ∷ rest) =
+  advanceOneInvariant (push state n) rest
+
+conwayDropAfterInternalOne :
+  (a : Nat) (before after : List Nat) →
+  evaluate (a ∷ (before ++ (1 ∷ after)))
+    ≡ evaluate (a ∷ before)
+conwayDropAfterInternalOne a before after =
+  trans
+    (runAppend (start a) before (1 ∷ after))
+    (trans
+      (dropAfterOne (advance (start a) before)
+        (advanceOneInvariant (start a) before) after)
+      (sym (runAdvance (start a) before)))
 
 -- Concrete rules small enough for ordinary normalization.
 twoThreeTwo : evaluate (2 ∷ 3 ∷ 2 ∷ []) ≡ 16
