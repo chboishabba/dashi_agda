@@ -596,3 +596,56 @@ identification. The constructive first-zero and global sign are consumers,
 not new assumptions; all remain golden-kernel-pending. CI now explicitly
 checks these three sign owners as well (coverage commit
 `aa0886ba8e99d48b86089a4c30ceca7e4b2ee1b8`).
+
+
+### 2026-11-06 K04d finite formal-series cancellation subcut
+
+A further exact algebraic reduction for the canonical source log is available
+before the genuinely analytic Bishop limit transport. In the purely **formal
+rational** power-series ring `Q[[X]]`, put
+
+```text
+L(X) = sum_(k>=1) X^k/k
+F(X) = exp(-L(X)) = sum_(n>=0) a_n X^n.
+```
+
+Formal differentiation gives `L'(X)=1/(1-X)`, so
+`(1-X)F'(X)+F(X)=0` and `a_0=1`. The exact coefficient recursion is
+
+```text
+(n+1)*a_(n+1) + (1-n)*a_n = 0  for all n>=0.
+```
+
+It gives `a_1=-1`, `a_2=0`, and by induction `a_n=0` for
+all `n>=2`. Thus formally `F(X)=1-X`; equivalently,
+
+```text
+sum_(j=0)^N (-sum_(k=1)^N X^k/k)^j/j! = 1-X mod X^(N+1).
+```
+
+`scripts/check_k04d_negative_log_exp_truncated.py` now checks these
+literal finite rational polynomial coefficients, without floats or CAS,
+for each `N=0..32`. It is CI-wired alongside the existing K05
+exact-bivariate coefficient regression, in
+`bishop-k04d-finite-log-exp.log` (commits
+`73e934466e8819fcc9c6abb8e56468c5d68d6c0c`,
+`9aad72d3f426d7f5a2759f3bdd0021f84fc2f8c2`).
+An independent local rational implementation also passed degree 48
+among eleven sampled truncation degrees.
+
+**Remaining native Agda theorem cut is not the finite identity alone.**
+Formal power-series composition and coefficient recurrence must be
+transported to the *actual Bishop series at each 0<x<1*: constructive
+absolute convergence of the composed exponential, justified triangle/
+rectangle reindex and uniqueness of original limits, followed by the
+Nat-successor reciprocal weld. That is not obtained by testing 33 finite
+truncations. The K04d-LOG gate remains open.
+
+Current proof ledger (fail-closed):
+
+| Gate | Source-level status | Remaining independent mathematical/acceptance work |
+| --- | --- | --- |
+| K05-PRODUCT | Terminal all-degree source written, actual original Bishop carrier | Agda-2.9 `--safe` exact-head and TOE root acceptance |
+| K04d-LOG | Canonical source log convergent; inverse cancellation reduction source written; finite algebra diagnostic added | Original Bishop exp(-L)=1-x and Nat-successor same-object transport |
+| K04d-CONTINUITY | Generic finite/uniform continuity and conditional original-zeta chart written | Actual Dirichlet finite continuity + original half-plane/completed-zeta agreement |
+| K05-PI | Original two-ball global sine positivity and constructive first-positive-zero compiler written | Original atan/tan-to-sin/cos quarter semantic equality, then kernel acceptance |
