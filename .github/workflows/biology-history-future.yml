@@ -63,7 +63,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          agda --no-libraries --no-default-libraries \
+          agda --safe --no-libraries --no-default-libraries \
             -i . -i '${{ steps.stdlib.outputs.path }}' \
             DASHI/EverythingBiologicalHistoryFutureRound23.agda \
             2>&1 | tee biological-history-agda.log
