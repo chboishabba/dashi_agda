@@ -126,7 +126,7 @@ def match_original_owners(legacy_dir=None,segments=1536,power_w=100.,
         theta=2*math.pi*(j+.319)/first_hit_rays
         direction=np.array([math.cos(theta),math.sin(theta)])
         independent=First.first_cross(sides,START,direction,epsilon=eps)
-        possible=[G.nearest_hit(START,direction,poly)
+        possible=[G.nearest_hit(START,direction,poly,min_t=eps)
                   for poly in generated]
         finite=[hit[0] for hit in possible if hit is not None]
         other=min((t for t in finite if t>eps),default=math.inf)
@@ -144,7 +144,7 @@ def match_original_owners(legacy_dir=None,segments=1536,power_w=100.,
         for j in range(first_hit_rays):
             theta=2*math.pi*(j+.319)/first_hit_rays
             direction=np.array([math.cos(theta),math.sin(theta)])
-            hit=G.nearest_hit(START,direction,outer)
+            hit=G.nearest_hit(START,direction,outer,min_t=eps)
             if hit is None or hit[0]<=eps:continue
             _,point,normal,_=hit
             outgoing=Ledger.specular(tuple(direction),tuple(normal))
