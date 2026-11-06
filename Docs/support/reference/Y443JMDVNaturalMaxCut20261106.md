@@ -371,3 +371,41 @@ group; identifying that presentation with the full abstract Monster
 and then proving the selected `Aut_VOA(Vnatural)` equivalence
 are separate structural claims and require their corresponding
 source-to-concrete object maps.
+
+
+## 2026-11-06 algebraic w^5/w^6 discharge, no external numeric axiom
+
+`Y443JMDPowerFiveSixAlgebraExact.agda` now establishes the
+general-purpose group identities
+```text
+rightId
+powTwoStep
+powFiveOfInvolution
+powSixOfInvolution
+powSixOfOrderFive
+commutesWithPowers
+powCommutingProduct
+fifthProductIsFirst
+sixthProductIsSecond
+```
+directly from `TM.GroupWithInverse`, `GR.Group.associativity`,
+the power recursion in `Y443JMDTracePowerExact`, and explicit
+`x^2=e`, `beta^5=e`, `x*beta=beta*x` premises.
+
+`deriveConcretePowers` constructs the previously input-only
+`JMDConcretePowers` by using the actual
+`JMD.wIsX4Beta` equality, rather than asking for unproved power
+equalities. This specializes to JMD's literal source definitions
+of `u, v, beta`, and discharges `sourceX4Fifth` and
+`sourceBetaSixth` from only the three direct path facts.
+
+**Remaining original Agda-replay boundary**: instantiate the
+three path facts inside the selected presentation (x4 involution;
+beta fifth power via the length-4 involution Coxeter path;
+commutation via four nonadjacent nodes), replay the general
+Coxeter-path generator-recovery theorem, and build the
+`NodeWordCertificate` / `NodeGeneration` for the exact same group.
+The **actual Lean source already proves** these in
+`AxiomMath/CFSGCorollary/Sporadic/Monster/Y443.lean`; Agda
+cannot simply claim Lean's kernel acceptance without a trusted
+cross-prover certificate or native proof.
