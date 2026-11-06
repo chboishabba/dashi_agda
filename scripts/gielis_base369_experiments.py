@@ -194,6 +194,7 @@ def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True,include_control
                         "geometry":"endpoint_locked_open_1p5_turn_spiral",
                         "comparison_to_legacy":"not_same_apparatus",
                         "torque_unit":"unit_momentum_times_metre",
+                        "model_code_bits":len(model_encode(m,eps)),
                         "total_reflections":sum(t["reflections"] for t in traces),
                         "focus_fraction":sum(t["hit_target"] for t in traces)/rays,
                         "mean_abs_torque":sum(t["absolute_torque"] for t in traces)/rays,
@@ -217,6 +218,52 @@ def pareto(results, torque_objective="min"):
         torque_strict=tb<ta if torque_objective=="min" else tb>ta
         return fb>=fa and torque_better and (fb>fa or torque_strict)
     return [a for a in results if not any(dominates(b,a) for b in results)]
+
+def elias_gamma_encode(n):
+    """Prefix-free positive-integer code, not a Kolmogorov optimal code."""
+    if not isinstance(n,int) or n <= 0:
+        raise ValueError("gamma code accepts positive integers")
+    b = format(n,"b")
+    return "0"*(len(b)-1)+b
+
+def elias_gamma_decode(bits,offset=0):
+    if not isinstance(bits,str) or offset < 0 or offset >= len(bits):
+        raise ValueError("invalid gamma payload")
+    j = offset
+    while j < len(bits) and bits[j] == "0":
+        j += 1
+    length = j-offset+1
+    if j+length > len(bits) or any(ch not in "01" for ch in bits[offset:j+length]):
+        raise ValueError("truncated/invalid gamma payload")
+    return int(bits[j:j+length],2), j+length
+
+def model_encode(m,epsilon):
+    """Exact canonical *discrete* model code, epsilon in steps of 0.001.
+
+    0 denotes the baseline logarithmic spiral (m irrelevant).
+    1 gamma(m) gamma(1+round(1000*epsilon)) denotes modulated spirals.
+    The encoding is prefix-free and explicitly reversible on admitted inputs.
+    This upper-bounds description length in this codec; it is NOT true K(x).
+    """
+    if not isinstance(m,int) or not (1 <= m <= 27):
+        raise ValueError("invalid integer mode")
+    q = int(round(1000*epsilon))
+    if not (0 <= q <= 450) or abs(epsilon-q/1000)>1e-12:
+        raise ValueError("epsilon must be a nonnegative millistep <= .45")
+    if q==0:
+        return "0"
+    return "1"+elias_gamma_encode(m)+elias_gamma_encode(q+1)
+
+def model_decode(bits):
+    if bits=="0":
+        return 0,0.
+    if not isinstance(bits,str) or not bits.startswith("1"):
+        raise ValueError("bad model prefix")
+    m,k = elias_gamma_decode(bits,1)
+    q,end = elias_gamma_decode(bits,k)
+    if end!=len(bits) or not (1 <= m <= 27) or not (2 <= q <= 451):
+        raise ValueError("noncanonical model code")
+    return m,(q-1)/1000
 
 def nyquist36_receipt():
     """Exact integer 18 -> 36 orientation recovery, without claiming Shannon."""
