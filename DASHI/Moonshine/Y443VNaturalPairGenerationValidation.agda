@@ -43,3 +43,5 @@ y443RelatorCountIsEighty = Y443.monsterRelatorCount
 y443WrittenLengthIsFourSixtyThree :
   Y443.wordLengthSum Y443.monsterRelators ≡ 463
 y443WrittenLengthIsFourSixtyThree = Y443.monsterWrittenLength
+
+import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as NodeRecovery
