@@ -18,6 +18,7 @@ module DASHI.Mathematics.Complexity.Karp21N21BitWeightedComparisonEnvelopeExact 
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 
@@ -45,7 +46,11 @@ lengthWeightedComparisonAtMostCubicSchedule word =
 
 onePlusLengthPolynomial : ERQ.PolynomialBound suc
 onePlusLengthPolynomial =
-  ERQ.polynomialBound 1 1 (λ _ → NatP.≤-refl)
+  ERQ.polynomialBound 1 1
+    (λ n → NatP.≤-reflexive
+      (trans
+        (sym (NatP.*-identityʳ (suc n)))
+        (sym (NatP.*-identityˡ (ERQ.pow (suc n) 1)))))
 
 weightedComparatorPolynomial : ERQ.PolynomialBound
   (λ n → Count.combinedComparisonPolynomial n * suc n)
