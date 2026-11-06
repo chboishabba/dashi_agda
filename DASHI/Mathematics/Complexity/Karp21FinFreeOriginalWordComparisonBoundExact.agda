@@ -20,7 +20,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (subst; trans; sym)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s; _∸_)
-open import Data.Maybe.Base using (just)
+open import Data.Maybe.Base using (just; nothing)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -140,3 +140,40 @@ comparisonPolynomialBound =
       NatP.≤-trans
         (comparisonCountBelowTwiceSquare n)
         (ERQ.bounded twiceSquarePolynomial n))
+
+------------------------------------------------------------------------
+-- TOTAL ALL-WORD CLAIM: malformed graph syntax cannot create an
+-- uncharged endpoint-comparison execution path. This mirrors the
+-- original fin-free verifier: it compares endpoints only after a
+-- successful literal readRawGraphWord.
+------------------------------------------------------------------------
+
+actualAllWordComparisonCount : Word.BitWord → Nat
+actualAllWordComparisonCount word
+  with Runtime.readRawGraphWord word
+... | nothing = zero
+... | just graph =
+  comparisonPolynomial (length (Runtime.rawEdges graph))
+
+allWordComparisonCountBound :
+  (word : Word.BitWord) →
+  actualAllWordComparisonCount word
+    ≤ comparisonPolynomial (Word.encodingSize word)
+allWordComparisonCountBound word
+  with Runtime.readRawGraphWord word in read
+... | nothing = z≤n
+... | just graph =
+  successfulWordComparisonBound word graph read
+
+-- Compose the EXACT original-word budget with DASHI's native
+-- degree-two polynomial witness; no new abstract cost oracle.
+allWordComparisonPolynomialClock :
+  (word : Word.BitWord) →
+  actualAllWordComparisonCount word ≤
+    ERQ.coefficient comparisonPolynomialBound *
+      ERQ.pow (suc (Word.encodingSize word))
+        (ERQ.exponent comparisonPolynomialBound)
+allWordComparisonPolynomialClock word =
+  NatP.≤-trans
+    (allWordComparisonCountBound word)
+    (ERQ.bounded comparisonPolynomialBound (Word.encodingSize word))
