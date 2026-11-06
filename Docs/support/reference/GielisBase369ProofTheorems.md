@@ -613,3 +613,204 @@ The existing concrete same-object bridge is not hypothetical new Gielis apparatu
 ### Original Kozyrev optical replay provenance
 
 The historical original was spiral_raymarch_collision_export_forward.html with spiral_collision_events_forward.json and referee_spiral_events.py. The original HTML raymarcher modeled a distance-based finite-thickness stroke, while the independent solver used normal-offset wall thickness. First-forward positional discrepancy: median/max Archimedean 1.414/1.499 mm, logarithmic 1.729/1.832 mm, segmented 1.349/1.431 mm, across 132/132 intersections. That geometrical wall-definition mismatch is a distinct G13 obstruction; all E16 384/1536 segment convergence figures are for a newly selected analytic open-spiral scene and cannot resolve the original apparatus without its actual source and event data.
+
+
+## E17 — exact Perron–Frobenius certification of the ORIGINAL raster FD λ₁
+
+The existing `gielis_base369_experiments.laplacian_eigenvalues`
+builds a five-point grid on Cartesian coordinates
+`linspace(-1.5,1.5,n)` and keeps cells satisfying
+`hypot(x,y) < r_m(atan2(y,x))-1e-12`.
+For every interior point the discrete Dirichlet matrix is exactly
+
+[
+  A_{m,n}=h^{-2}(4I-B),quad
+  h=rac{3}{n-1},
+]
+where (B) is the unweighted nearest-neighbour adjacency
+matrix of the retained interior nodes. The `4` diagonal is
+**not** replaced by the number of interior neighbours: missing
+neighbours represent zero Dirichlet boundary data.
+
+On each connected interior graph, (B) is nonnegative and
+irreducible. Given **any** strictly positive rational vector
+(q=(q_i)), Collatz–Wielandt bounds the Perron root:
+
+[
+ min_irac{(Bq)_i}{q_i}le ho(B)le
+ max_irac{(Bq)_i}{q_i}.
+]
+Because (A_{m,n}=h^{-2}(4I-B)),
+the first discrete eigenvalue satisfies the **exact rational**
+enclosure
+
+[
+ oxed{
+ min_irac{4q_i-sum_{jsim i}q_j}{h^2q_i}
+ le lambda_1(A_{m,n}) le
+ max_irac{4q_i-sum_{jsim i}q_j}{h^2q_i}.
+ }
+]
+
+The new independent referee
+`scripts/gielis_raster_fd_positivity_certificate.py`
+uses SciPy only to *propose* (q), then rounds every entry
+to a positive **integer**, checks graph connectivity and
+computes both bounds using Python `Fraction` integer rational
+arithmetic. The conclusion holds regardless of the floating
+eigenvector's alleged correctness. It cross-checks the actual
+original five-point eigsh value.
+
+Independent local reproduction yielded:
+
+| m | n | rational enclosure endpoints (decimal approximations) |
+|---|---|---|
+| 3 | 41 | [4.222626933506416, 4.222626933827854] |
+| 6 | 41 | [4.487431020746635, 4.487431021257153] |
+| 9 | 41 | [4.6493512607746865, 4.649351262121115] |
+| 3 | 61 | [4.289131748459455, 4.289131749856795] |
+
+This **closes a rigorous first-discrete-eigenvalue error
+certificate** for the original finite matrix. It does
+**not** prove spectral convergence of that *Cartesian raster
+scheme* to the continuum Dirichlet spectrum; E14 is a
+different, sectorwise continuum approximation theorem.
+G12 continuum/FD weld is still OPEN, but the error of
+the *individual discrete eigenvalue computation* is paid.
+
+## E18 — precise Kozyrev PR #1404 same-object baseline and offset-wall weld
+
+The original canonical owners are accessible in
+[Kozyrev PR #1404](https://github.com/chboishabba/dashi_agda/pull/1404),
+head `337aabb00ed54bc1a4c28ada48364cb4dc54d46e`:
+
+- `scripts/kozyrev_first_forward_intersection_referee.py`:
+  `surfaces(g,samples)` defines an `inner*exp(growth*theta)`
+  logarithmic centreline, *normal-offset* finite-thickness wall
+  sides and two end caps; `first_cross` has a **0.003 m**
+  first-forward admission threshold.
+- `scripts/kozyrev_optical_event_ledger.py`: canonical
+  `RayLedger`, `specular`, wall momentum, optical
+  reflection/absorption and physical SI torque.
+- `scripts/kozyrev_matched_envelope_html.py`,
+  `scripts/kozyrev_html_family_ternary_runner.py`,
+  `scripts/kozyrev_geometry_optimizer.py`: the original
+  matched-scene/sweep and geometry donor interfaces.
+
+The Gielis open spiral for (epsilon=0) has
+(h_{m,0}(	heta)=0) for every mode m, whence
+
+[
+ R_{m,0}(	heta)=0.75exp(b	heta),
+ qquad
+ b=rac{log(1.55/0.75)}{3pi}.
+]
+
+In PR #1404's `family="log"` with
+`inner=0.75, outer=1.55, turns=1.5, srot=0`,
+`growth=b`, the centreline is **the identical
+mathematical function**, not a geometric approximation.
+For any finite wall thickness w, both normal-offset
+reference walls can be written
+
+[
+ X_pm(	heta)=R_{m,0}e_r
+ pm 	frac{w}{2}
+ rac{-,R_{m,0}e_r'+R'_{m,0}e_r}{sqrt{R_{m,0}^2+(R'_{m,0})^2}}
+]
+
+with consistent orientation and the same two flat end caps.
+Here (e_r'=e_	heta); equivalently, use the normal
+((-t_y,t_x)/|t|) for the positively oriented tangent.
+The **sign label** of (pm) may be swapped without altering
+the union of two wall sides. The actual normal orientation
+used by the Python adapter is exactly PR #1404's tangent
+convention.
+
+`scripts/gielis_kozyrev_pr1404_bridge.py` imports
+those two original Python module files from a local
+checkout, checks their *literal Git blob hashes*, rebuilds
+both reference walls independently, and compares first
+forward hits with the **same 3 mm threshold**. Its
+`RayLedger` check verifies
+((P/c)r	imes(d_{m in}-d_{m out})) and
+linear/angular momentum conservation for the same ray.
+
+This establishes the exact *parameter identity* of
+the log baseline and permits executable finite-thickness
+referee parity. It does **not** identify the original
+browser HTML **stroked SDF wall** with the normal-offset
+reference wall. The historical HTML first-hit differences
+(1.35–1.83 mm) and actual event-file replay remain G13
+acceptance obligations, not a citation problem.
+
+## E19 — conditional radiation-pressure torque envelope and paired CI
+
+For source power (Pge0), maximum hit radius (R),
+at most B wall reflections and reflected power fraction
+(etain[0,1]) at each hit, each individual unit-direction
+change satisfies
+
+[
+ |d_{m in}-eta d_{m out}|le1+eta.
+]
+
+As the surviving ray power at hit k is (Peta^k),
+the total optical wall torque obeys
+
+[
+ oxed{|	au_{m wall}|
+ le rac{PR}{c}(1+eta)
+       sum_{k=0}^{B-1}eta^k
+ le rac{2PRB}{c}.}
+]
+
+This remains true for signed angular momentum contributions
+because absolute value is bounded by the sum of individual
+magnitudes. It is an **ideal radiation-pressure-only**
+inequality, not a bound on thermal, electrostatic,
+gravitational or mechanical forces.
+
+`scripts/gielis_optical_force_envelope.py` computes
+this inequality entirely over `Fraction` rationals.
+For a *hypothetical model input* (P=9000) W,
+(R=1.7) m, (B=8), the perfect reflector bound
+is about (816.565 mumathrm{N,m}), and
+the (eta=0.95) bound about
+(669.920 mumathrm{N,m}). These are not
+observed apparatus readings.
+
+For the numerical comparison of K geometries,
+the same IID random ray directions are reused across
+all K geometries as **paired** source samples.
+For each nonbaseline design (a), write
+(D_{i,a}=X_{i,a}-X_{i,0}).
+Then focus differences belong to ([-1,1]), and
+absolute-impulse differences to ([-M,M]) with
+(M=2RB). Distinct ray directions remain independent,
+even though geometry outcomes within each ray are
+deliberately paired. Hoeffding and a union bound give
+simultaneous model-source intervals for all
+(2(K-1)) paired differences with
+(alpha_{m each}=alpha/[2(K-1)]).
+This corrects the unpaired-comparison inefficiency,
+but it does **not** claim experimentally measured
+confidence intervals or an actual physical emitter's
+statistical independence.
+
+## Acceptance status for E17–E19
+
+- **E17:** original finite raster FD (lambda_1)
+  rigorously enclosed by exact rationals, with
+  an independent local numerical reproduction;
+  full Cartesian **continuum** mesh convergence OPEN.
+- **E18:** original PR #1404 owners and exact baseline
+  functional equality identified, finite-thickness
+  same-owner adapter source committed; its
+  source-pinned execution and original HTML event
+  replay OPEN until both refs are materialized.
+- **E19:** unconditional mathematical photon-momentum
+  envelope under the explicitly stated ideal
+  hypothesis and paired Hoeffding model theorem,
+  with runnable rational/statistical source;
+  material/power measurements and replication OPEN.
