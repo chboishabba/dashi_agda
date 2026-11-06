@@ -68,19 +68,19 @@ readSignedBinary word with Raw.readGammaBinary word
 
 -- Output is literally derived from the original Karp Elias-gamma
 -- encoder, not a substitute decoder or a new sign convention.
+justSignedResult :
+  Maybe SignedMagnitudeBits → Word.BitWord →
+  Maybe (SignedMagnitudeBits × Word.BitWord)
+justSignedResult nothing rest = nothing
+justSignedResult (just signed) rest = just (signed , rest)
+
 readSignedOriginalGammaEncodedExact :
   (n : Nat) (suffix : Word.BitWord) →
   readSignedBinary (Enc.encodeGammaNat n ++ suffix)
-    ≡ justResult
+    ≡ justSignedResult
         (signMagnitudeFromSuccessorBits
           (Enc.successorBits (Bin.fromℕ n)))
         suffix
-  where
-    justResult :
-      Maybe SignedMagnitudeBits → Word.BitWord →
-      Maybe (SignedMagnitudeBits × Word.BitWord)
-    justResult nothing rest = nothing
-    justResult (just signed) rest = just (signed , rest)
 readSignedOriginalGammaEncodedExact n suffix
   rewrite Raw.gammaOriginalEncodeNativeSuffix n suffix = refl
 
@@ -89,8 +89,8 @@ readSignedOriginalGammaEncodedExact n suffix
 splitLastInspectionWork : Word.BitWord → Nat
 splitLastInspectionWork [] = 1
 splitLastInspectionWork (_ ∷ []) = 1
-splitLastInspectionWork (_ ∷ _ ∷ rest) =
-  suc (splitLastInspectionWork (true ∷ rest))
+splitLastInspectionWork (_ ∷ b ∷ rest) =
+  suc (splitLastInspectionWork (b ∷ rest))
 
 -- A bit-native value/representation correspondence over ALL words
 -- still needs an all-word numerical weld to Old.readSignedGamma.
