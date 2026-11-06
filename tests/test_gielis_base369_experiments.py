@@ -528,3 +528,69 @@ def test_gielis_si_perron_native_weld_declares_exact_owner_reuse():
     assert "mechanicalOpticalTorqueIsSI" in src
     assert "finiteInfluenceRowPowerBoundReuse" in src
     assert "EmpiricalOpticalCalibration" in src
+
+
+def test_native_mechanical_to_si_torque_magnitude_owner():
+    source=(ROOT/"DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda").read_text()
+    for theorem in (
+        "modelOpticalForce",
+        "modelOpticalTorqueRaw",
+        "modelOpticalTorqueHasActualMagnitude",
+        "modelOpticalTorqueInExistingSI",
+        "modelOpticalTorqueSIMagnitude",
+        "modelOpticalTorqueWithDeflectionMagnitude",
+        "modelOpticalTorqueWithDeflectionInSI",
+    ):
+        assert theorem in source
+    assert "Mechanical.multiplyQuantity _*_" in source
+    assert "MechanicalSI.mechanicalQuantityToSI" in source
+    assert "sourcePower : OpticalSIObservable" in source
+
+
+def test_native_si_laplacian_physical_dimension_owner():
+    source=(ROOT/"DASHI/Geometry/GielisSpectralSIScaleExact.agda").read_text()
+    assert "nativeSpectralDimensionMatchesSI" in source
+    assert "inverseAreaTimesAreaDimensionless" in source
+    assert "scaleEigenvalueSIScalar" in source
+    assert "DASHI.Physics.Units.MechanicalDimensionExact" in source
+    assert "DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact" in source
+
+
+def test_exact_continuum_gielis_m3_physical_scale_interval():
+    from gielis_physical_spectral_si import (
+        gielis_m3_physical_continuum_enclosure,
+        physical_scale_discrete_lambda_interval,
+    )
+    r=gielis_m3_physical_continuum_enclosure("99/100","101/100")
+    assert Fraction(r["first_dirichlet_eigenvalue_lower_m^-2_open"]) == Fraction(22500,10201)
+    assert Fraction(r["first_dirichlet_eigenvalue_upper_m^-2_open"]) == Fraction(1591250,323433)
+    assert r["lambda_dimension_MLT"] == (0,-2,0)
+    assert not r["scale_interval_is_measured"]
+    assert not r["physical_resonant_frequency_inferred"]
+    scaled=physical_scale_discrete_lambda_interval("4","5","2","3")
+    assert Fraction(scaled["first_eigenvalue_lower_m^-2"])==Fraction(4,9)
+    assert Fraction(scaled["first_eigenvalue_upper_m^-2"])==Fraction(5,4)
+    assert not scaled["continuum_fd_convergence_proved"]
+    with pytest.raises(ValueError):
+        gielis_m3_physical_continuum_enclosure("2","1")
+
+
+def test_si_optical_interval_uses_canonical_c_and_zero_lower_bound():
+    from gielis_si_optical_interval import si_torque_uncertainty_enclosure
+    r=si_torque_uncertainty_enclosure("8500","9500","3/2","17/10",
+                                    "9/10","19/20",8)
+    assert r["source_c_SI_m_per_s"]==g.SPEED_OF_LIGHT_M_S
+    assert Fraction(r["absolute_torque_lower_Nm"])==0
+    upper=Fraction(r["absolute_torque_upper_Nm"])
+    assert upper>0
+    assert tuple(map(Fraction,r["signed_torque_interval_Nm"]))==(-upper,upper)
+    assert upper <= Fraction(r["perfect_reflector_upper_Nm"])
+    assert r["lower_bound_cannot_be_promoted_above_zero"]
+    assert not r["calibration_receipt_present"]
+    assert not r["non_optical_forces_bounded"]
+    lossless=si_torque_uncertainty_enclosure("100","100","1","1","1","1",3)
+    assert Fraction(lossless["absolute_torque_upper_Nm"])==Fraction(600,299792458)
+    zero=si_torque_uncertainty_enclosure("0","0","1","2","0","1",8)
+    assert Fraction(zero["absolute_torque_upper_Nm"])==0
+    with pytest.raises(ValueError):
+        si_torque_uncertainty_enclosure("100","80","1","2","0","1",8)
