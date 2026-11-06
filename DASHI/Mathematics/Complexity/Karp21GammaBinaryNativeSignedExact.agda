@@ -16,6 +16,7 @@ module DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (_++_; length)
@@ -94,3 +95,15 @@ splitLastInspectionWork (_ ∷ b ∷ rest) =
 
 -- A bit-native value/representation correspondence over ALL words
 -- still needs an all-word numerical weld to Old.readSignedGamma.
+
+splitLastInspectionLinear :
+  (bits : Word.BitWord) →
+  splitLastInspectionWork bits ≤ suc (length bits)
+splitLastInspectionLinear [] = s≤s z≤n
+splitLastInspectionLinear (b ∷ []) = s≤s z≤n
+splitLastInspectionLinear (b ∷ b2 ∷ rest) =
+  s≤s (splitLastInspectionLinear (b2 ∷ rest))
+
+-- Each original signed token is a gamma token followed by one pass
+-- over the already-read binary successor payload. This pays the
+-- structural inspections of the second pass separately.
