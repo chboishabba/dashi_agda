@@ -63,6 +63,7 @@ python3 scripts/check_karp21_conway_gamma_reference.py
 python3 scripts/check_karp21_binary_word_equality.py
 python3 scripts/check_karp21_gamma_binary_native.py
 python3 scripts/check_karp21_gamma_binary_native_signed.py
+python3 scripts/check_karp21_native_bitword_sparse_verifier.py
 python3 scripts/check_karp21_finfree_word_comparison_bound.py
 python3 scripts/check_karp21_finfree_raw_primitive_comparisons.py
 
