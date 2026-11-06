@@ -29,6 +29,7 @@ on:
       - 'DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda'
       - 'DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda'
       - 'DASHI/Analysis/BishopK04dK05NativeProductDischargeExact.agda'
+      - 'DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
       - 'DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda'
@@ -158,6 +159,7 @@ jobs:
             DASHI/Analysis/BishopMachinCayleyNativeProductFirstZeroExact.agda
             DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda
             DASHI/Analysis/BishopK04dK05NativeProductDischargeExact.agda
+            DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda
             DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda
             DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda
             DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda
