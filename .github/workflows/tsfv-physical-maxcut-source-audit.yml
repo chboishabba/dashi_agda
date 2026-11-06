@@ -60,7 +60,7 @@ jobs:
           python scripts/check_tsfv_unification_48_phase_cut_20261106.py
 
   agda-selected-golden:
-    name: Agda pinned Nix safe selected-source + transitive roots
+    name: Agda29 parallel_checker selected-source + transitive roots
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -68,10 +68,16 @@ jobs:
         with:
           submodules: false
       - uses: DeterminateSystems/nix-installer-action@v3
-      - name: Run #1460 full exact source / --safe / parent-child root cut
+      - name: Run canonical Agda29 parallel checker for #1460
+        env:
+          AGDA_JOBS: '4'
+          DASHI_NO_TMUX: '1'
+          AGDA_FLAKE: 'github:chboishabba/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin'
+          AGDA_LOG_PATH: ${{ runner.temp }}/tsfv-agda29-parallel.log
+          DASHI_AGDA29_CACHE_ROOT: ${{ runner.temp }}/dashi-agda29-tsfv
         run: |
           set -euo pipefail
-          nix develop .# --command bash scripts/run_tsfv_unification_maxcut_20261106.sh
+          bash scripts/run_tsfv_unification_maxcut_20261106.sh
 
 # A green job establishes only the specific Agda and source-level checks.
 # A separate transitive trust audit and source-matched PHYSICAL E1
