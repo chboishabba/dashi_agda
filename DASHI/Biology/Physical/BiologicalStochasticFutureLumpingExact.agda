@@ -114,3 +114,47 @@ allStochasticHorizonsRemainCoarse :
 allStochasticHorizonsRemainCoarse a horizon observable state =
   Markov.allFiniteHorizonsRemainCoarseFactored
     (stochasticBiologicalLumping a) horizon observable state
+
+
+------------------------------------------------------------------------
+-- Mixed controlled intervention histories, not only repetition of one
+-- Markov operator.  Chronological actions [a,b] mean P_a(P_b f).
+-- The internal hidden-marker randomness is re-sampled at EACH step.
+------------------------------------------------------------------------
+
+fineControlledExpectation :
+  List Bio.Intervention →
+  (Bio.BiologicalState → ℚ) →
+  Bio.BiologicalState → ℚ
+fineControlledExpectation [] observable = observable
+fineControlledExpectation (a ∷ rest) observable =
+  halfMarkerStep a (fineControlledExpectation rest observable)
+
+coarseControlledExpectation :
+  List Bio.Intervention →
+  (Bio.FutureSufficientCode → ℚ) →
+  Bio.FutureSufficientCode → ℚ
+coarseControlledExpectation [] observable = observable
+coarseControlledExpectation (a ∷ rest) observable =
+  coarseMarkovStep a (coarseControlledExpectation rest observable)
+
+allControlledStochasticHistoriesRemainCoarse :
+  (actions : List Bio.Intervention)
+  (observable : Bio.FutureSufficientCode → ℚ)
+  (state : Bio.BiologicalState) →
+  fineControlledExpectation actions
+    (λ x → observable (Bio.project x)) state
+  ≡ coarseControlledExpectation actions observable (Bio.project state)
+allControlledStochasticHistoriesRemainCoarse [] observable state = refl
+allControlledStochasticHistoriesRemainCoarse
+  (a ∷ rest) observable state
+  rewrite
+    allControlledStochasticHistoriesRemainCoarse
+      rest observable (Bio.step a state)
+  | allControlledStochasticHistoriesRemainCoarse
+      rest observable (flipMarker (Bio.step a state))
+  | flipPreservesCoarseCode (Bio.step a state)
+  | Bio.projectionCommutes a state =
+  halfPlusHalf
+    (coarseControlledExpectation rest observable
+      (Bio.coarseStep a (Bio.project state)))
