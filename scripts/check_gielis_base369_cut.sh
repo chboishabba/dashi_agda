@@ -29,6 +29,7 @@ python scripts/gielis_rayleigh_spectral_bound.py > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 3 --grid 41 > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 6 --grid 41 > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 9 --grid 41 > /dev/null
+python scripts/gielis_optical_force_envelope.py --watts 9000 --radius 17/10 --bounces 8 --reflectivity 19/20 > /dev/null
 python scripts/gielis_base369_symbolic_certificates.py > /dev/null
 
 scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
