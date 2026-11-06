@@ -142,3 +142,14 @@
 - Preferred same-source terminal cut still uses `BalabanClayCurrentTerminalCutsetRound191Exact` and the old Eq.119/Kato/T5 producer owners. The 219-item submission inventory remains the full A–I *field* inventory; the 4-row analytic cut remains a *research compression*. Neither is decremented by the finite R443/R445 work.
 - Highest-alpha order: **F07** one 1024-label adjacent-swap certificate → R443.P01–P05 genuinely physical Haar/measurability and selected action → R445.P01–P08 original blocked gauge/path/refinement and physical limits → R320.P01–P06 selected CMP116 mixed-J decay → R333.P01–P07 same OS Hamiltonian physical gap → Clay contract. Parallel work on physical Haar and R445 path blocking is permissible; they do not imply R320/R333 automatically.
 - The other worker's TSVF selected-branch macroscopic record and proposed same-clock compatibility live downstream in PR #1460; no identification with OS reflection positivity/time semigroup is established. Avoid reverse import into #1444.
+
+
+## 6 November 2026: bounded individual-plaquette R320 marked-source mathematics (restricted; no physical gate closed)
+
+Exact new paper-level finite-source result and reproducible rational reference:
+- `Docs/physics/YMClayR320BoundedMarkedSourceLemma20261106.md`
+- `scripts/check_ym_r320_bounded_source_exact_reference.py`
+
+For a **genuine finite compact SU(N) Wilson–Gibbs measure**, with two marks `F_p,F_q=1-ReTr(U_p,q)/N` in `[0,2]`, the *same-source* marked partition `Z(s,t)` satisfies `|Z(s,t)/Z(0,0)-1| <= exp(2(|s|+|t|))-1`. Thus its normalized log is analytic throughout `|s|+|t| < log(2)/2`, independent of cutoff, volume, beta and mark location. Its mixed logarithmic derivative at zero is the **same Gibbs covariance**, of absolute value at most 1. The restriction to uniformly bounded single-plaquette marks is essential. A two-state exact positive-weight negative control saturates covariance=1 at arbitrarily assigned distance, so none of this produces physical CMP116 exponential decay.
+
+**Exact gate-status correction (not a numerical promotion):** R320.P01/P02 gain a standard-mathematics bounded-mark sublemma conditional on the physical R443 same-source Haar/Gibbs identification. Agda kernel implementation, physical CMP119 marked-J source semantics, full unbounded/renormalized stress-source analytic radii, R320.P04/P05 differentiated rooted-shell exponential decay, R445 continuum, R333 same-H OS gap, SEM.P01–P03 and Clay **remain OPEN**. The local exact-rational companion was tested for 25,000 cases, while the GitHub script has source readback but no checkout-based execution or Agda receipt.
