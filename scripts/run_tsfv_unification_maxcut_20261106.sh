@@ -62,6 +62,7 @@ physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445ReflectedAllWordGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda
   DASHI/Physics/Foundations/TSVFOriginalMeasuredFiniteSpanR445Exact.agda
+  DASHI/Physics/Foundations/TSVFBishopSetoidComplexCyclicSpanGramExact.agda
   DASHI/Physics/Foundations/TSVFOriginalForwardToNativeWilsonWordGramExact.agda
   DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
