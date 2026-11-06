@@ -22,6 +22,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNR445BlockedPushforwardR320CovarianceExact as R445
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -69,6 +70,27 @@ module _
   originalFiniteWilsonWordMoment word =
     R445.originalBlockedFineExpectation theory traceData exponential
       betaFine oneLink bilateral divide (coarseWord word)
+
+  -- Makes the precise native original Gibbs source explicit. The
+  -- equality is definitional because R445.originalBlockedFineExpectation
+  -- already means this physical normalized expectation, not a surrogate.
+  originalWordMomentIsActualFineGibbs :
+    (word : List CoarseObservable) →
+    originalFiniteWilsonWordMoment word
+    ≡
+    Physical.normalizedExpectation
+      (R445.originalFineGibbsMeasure theory traceData exponential
+        betaFine oneLink bilateral divide)
+      (originalFineWord word)
+  originalWordMomentIsActualFineGibbs word = refl
+
+  -- Explicit pointwise R445 word evaluation: the fine source reads
+  -- the same ordered coarse observables after the native block map.
+  originalWordIsLiteralNativeBlockRead :
+    (word : List CoarseObservable) (fine : FineLinks) →
+    originalFineWord word fine
+    ≡ coarseWord word (originalBlock fine)
+  originalWordIsLiteralNativeBlockRead word fine = refl
 
   actualR445PushedWordMoment : List CoarseObservable → ℝ
   actualR445PushedWordMoment word =
