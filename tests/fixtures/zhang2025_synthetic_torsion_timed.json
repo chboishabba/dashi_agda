@@ -129,7 +129,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 1,
@@ -209,7 +211,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 2,
@@ -289,7 +293,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 3,
@@ -369,7 +375,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 4,
@@ -449,7 +457,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       }
     ]
   },
@@ -582,7 +592,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 1,
@@ -662,7 +674,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 2,
@@ -742,7 +756,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 3,
@@ -822,7 +838,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       },
       {
         "t_s": 4,
@@ -902,7 +920,9 @@
             "bound": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
-        }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture"
       }
     ]
   }
