@@ -99,3 +99,61 @@ Until exact Agda 2.9 `--safe` receipts confirm the two repaired modules **and** 
 ## Further concurrent interface normalization
 
 A subsequent exact readback found the original `AfterUnique` source now packages the two required proof fields as `NoGhostContextBoundaries scan interior`, and the original `ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep` now **accepts and passes that typed record**. This supersedes the earlier observation that the decoded caller still supplied only two arguments. The typed record is a *requirement*, not its constructor or a proof that the current CNF enforces the requirement. The unresolved cut has therefore moved **upstream**: construct `NoGhostContextBoundaries` from the actual decoded row / canonical SAT boundary constraints and thread it through every SAT-to-run and polynomial-clock consumer. No such exact-head acceptance result has been observed in this session.
+
+## 2026-11-06 guarded repair cut — original owners, no phantom-head axiom
+
+**This section supersedes the earlier unconditional-construction proposal; the finite no-go remains valid.** The in-place `ConcreteTapeLocalWindowPatternsExact.agda` constructor has now been indexed by the actual `rule` instead of parameterised by it. The two false universal `legalOldLeftPlainForcesNewLeftPlain` and `legalOldRightPlainForcesNewRightPlain` assertions have been removed. Genuine source-level replacement lemmas `legalPlainTripleNewLeftClassified`, `legalPlainTripleNewRightClassified`, `legalPlainTripleNewLeftPlainForcesMiddlePlain` and `legalPlainTripleNewRightPlainForcesMiddlePlain` identify exactly how the original direction-indexed grammar treats an all-plain old triple.
+
+**ZKP-style corrected judgement (preconditions / invariants / postcondition):**
+
+```text
+O = DASHI/Karp-21; R = PR #1445; C = original Local, Pattern, Whole, Center, AfterUnique, Step
+S = earlier Agda 2.9 failure + deterministic boundary-ghost counterexample
+L = countermodel -> explicit missing premise -> source proof -> kernel receipt
+P = boundary-anchored reverse locality; G = never promote conditional proof to unconditional
+F = missing canonical SAT boundary-guard producer plus exact-head compiler acceptance
+
+PRE:
+  scan     : Character.TransitionLocalityScan machine rule before after
+  interior : Character.InteriorHeadConfiguration machine before
+  boundary : AfterUnique.NoGhostContextBoundaries scan interior
+
+INVARIANTS:
+  old beforePrefix/suffix are PlainCells (original reconstruction owner)
+  extracted centered rule has plain oldLeft and oldRight
+  each all-plain old triple, given plain new outer cell, forces plain new middle
+  prefix induction propagates FrontPlain from first new prefix cell forwards
+  suffix induction propagates EndPlain from final new suffix cell backwards
+
+POST:
+  WF.ExactlyOneHead (Local.cells after)
+  WF.WellFormedMachineStep machine before after
+```
+
+The new `AfterUnique.NoGhostContextBoundaries` is **proof-relevant**, requiring only the front cell of the aligned **after-prefix** and the last cell of the aligned **after-suffix** to be plain (vacuously satisfied for empty contexts). These are weaker than assuming all new context cells are plain. `afterPrefixPlainFromLegalScan` and `afterSuffixPlainFromLegalTail` have source-written structural proofs using them, and `localityScanWithInteriorGivesWellFormedStep` now explicitly accepts this boundary record. The genuine, intended centered move is permitted even if its new head touches a tape endpoint; guards apply only outside the selected 3-cell window.
+
+**Same-object downstream:** `ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep` and `decodedStepAfterUnique` have been retyped to require the proof-relevant boundary record for the **same** `decodedTimeLocalityScan` and original `interior`. Their status fields were demoted to `false` until the actual canonical CNF proves the guard. `ConcreteTapeDecodedRunInductionExact` and `ConcreteTapeSATToAcceptingRunExact` also have downstream promotion flags demoted; their present invocations still need the boundary witness, and **do not kernel-typecheck unconditionally**. The focused independent `ConcreteTapeBoundaryGuardFocusedRootExact.agda` now gives the next exact compiler cut. The remaining semantic defect has been sharply localized to **CNF-derived boundary-guard production**, not generic prefix induction.
+
+**Deterministic finite referee:** `scripts/check_karp21_tape_guarded_uniqueness_small.py` enumerates all length-3 through length-12 one-state/one-symbol pre-rows with exactly one interior head, all two-valued after-rows, all three directional grammars, and exact centered windows. An independently executed equivalent model found **237 legal centered cases** and **zero** non-unique after-rows satisfying the two boundary guards; unguarded counterexamples remain. The script is included in the actual `referee_karp21_maxcut.sh` preflight and its isolated no-Agda mock fixture. These are exhaustive *finite* computations, not an Agda 2.9 kernel proof or universal SAT boundary-CNF derivation.
+
+**Cross-repository and normalized evidence:** Lean `AgdaMirror/AuthorityBoundary.lean` demonstrates that citation authority and artifact acceptance differ; `AgdaMirror/LoomRelationAlgebra.lean` separates evidence status and promotion, while Golden Agda remains the theorem carrier. Treat the source-owner/path, precise precondition, falsifying fixture, local test, exact compiler head, and postcondition as the normalized evidence tuple. ITIL incident/problem and ISO 9000 corrective actions represent defect lifecycle; ISO/IEC 42001, 23894 and NIST AI RMF Govern/Map/Measure/Manage represent risk tracking; ISO/IEC 27001/27701 represent integrity/privacy provenance; ISO 9241 supports understandable diagnostic presentation; Six Sigma provides reproducible regression/defect controls. These are **engineering analogies only**, not claims of conformance or certification.
+
+```plantuml
+@startuml
+package "Golden Agda (tape-locality lane)" {
+  [Original Local grammar] --> [Rule-indexed Pattern]
+  [Rule-indexed Pattern] --> [Boundary-guided prefix/suffix induction]
+  [Centered occurrence] --> [Boundary-guided prefix/suffix induction]
+  [NoGhostContextBoundaries] --> [Boundary-guided prefix/suffix induction]
+  [Boundary-guided prefix/suffix induction] --> [DecodedTransitionStep conditional]
+}
+package "External SAT certificate obligation" {
+  [Canonical global CNF] --> [Missing endcap guard source]
+  [Missing endcap guard source] ..> [NoGhostContextBoundaries] : OPEN
+}
+[Boundary ghost regression] ..> [Rule-indexed Pattern] : countermodel
+[DecodedTransitionStep conditional] --> [DecodedRunInduction] : requires guard
+@enduml
+```
+
+**Acceptance discipline:** neither newly patched Agda source nor the new focused root has an actual latest-head Agda 2.9 `--safe` transitive acceptance receipt in this execution environment. In particular, original dependencies are not all marked `--safe`; a module import is not a receipt. No arbitrary `NoGhostContextBoundaries` witness is manufactured. The SAT-to-run and P0 Cook-Levin completeness gates must remain OPEN until the actual compiler, wire encoding, and proof producer are accepted.
