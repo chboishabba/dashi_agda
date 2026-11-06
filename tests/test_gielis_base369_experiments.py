@@ -164,3 +164,28 @@ def test_roadmap_named_new_sources_exist():
         "Docs/support/reference/GielisBase369Roadmap.md",
     ):
         assert (ROOT / relpath).is_file()
+
+
+def test_model_code_is_reversible_and_baseline_canonical():
+    assert g.model_encode(3,0.) == g.model_encode(9,0.) == "0"
+    assert g.model_decode("0") == (0,0.)
+    codes = set()
+    for m in range(1,10):
+        for q in range(1,451):
+            epsilon=q/1000
+            bits=g.model_encode(m,epsilon)
+            assert g.model_decode(bits) == (m,epsilon)
+            codes.add(bits)
+    assert len(codes)==9*450
+    # In sorted order a strict prefix would precede its extensions.
+    ordered=sorted(codes)
+    assert all(not b.startswith(a) for a,b in zip(ordered,ordered[1:]))
+    with pytest.raises(ValueError):
+        g.model_decode("101")
+
+
+def test_model_code_is_distinct_from_information_optimality():
+    result=g.optical_sweep(rays=12,segments=128,bounces=1)
+    assert all(row["model_code_bits"]>=1 for row in result)
+    assert result[0]["model_code_bits"]==1
+    assert all(row["comparison_to_legacy"]=="not_same_apparatus" for row in result)
