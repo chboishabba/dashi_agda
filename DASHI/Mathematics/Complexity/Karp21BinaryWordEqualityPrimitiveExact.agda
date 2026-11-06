@@ -23,7 +23,7 @@ open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Data.Empty using (⊥; ⊥-elim)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 
@@ -105,8 +105,17 @@ bitEqualityInspectionBound (_ ∷ xs) [] = s≤s z≤n
 bitEqualityInspectionBound (_ ∷ xs) (_ ∷ ys) =
   s≤s (bitEqualityInspectionBound xs ys)
 
+literalLengthIsWordSize :
+  (xs : Word.BitWord) → length xs ≡ Word.encodingSize xs
+literalLengthIsWordSize [] = refl
+literalLengthIsWordSize (_ ∷ xs)
+  rewrite literalLengthIsWordSize xs = refl
+
 bitEqualityIndependentOfEncodedNatMagnitude :
   (xs ys : Word.BitWord) →
   bitEqualityInspectionCount xs ys ≤ suc (length xs)
 bitEqualityIndependentOfEncodedNatMagnitude xs ys =
-  bitEqualityInspectionBound xs ys
+  subst
+    (λ n → bitEqualityInspectionCount xs ys ≤ suc n)
+    (sym (literalLengthIsWordSize xs))
+    (bitEqualityInspectionBound xs ys)
