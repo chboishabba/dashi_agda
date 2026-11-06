@@ -23,7 +23,7 @@ module DASHI.Analysis.RiemannOpaqueZetaHalfPlaneCountermodelExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Unit using (⊤; tt)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 
 import DASHI.Analysis.RiemannAnalyticSubstrate as Analytic
@@ -86,3 +86,63 @@ opaqueHalfPlaneCannotIdentifyZetaValues :
     (Analytic.ZetaHalfPlaneLayer.zetaHalfPlane oneHalfPlane) zero
   → ⊥
 opaqueHalfPlaneCannotIdentifyZetaValues = zeroIsNotOne
+
+------------------------------------------------------------------------
+-- COMPLETED XI: the opaque CompletedDefinition field does not
+-- characterize xi either, even with gamma and zeta fixed.
+------------------------------------------------------------------------
+
+opaqueGamma :
+  Analytic.GammaMellinLayer discreteCarrier
+opaqueGamma = record
+  { Analytic.GammaMellinLayer.Test = Nat
+  ; Analytic.GammaMellinLayer.MellinDomain = λ _ → ⊤
+  ; Analytic.GammaMellinLayer.MellinInversionLaw = λ _ → ⊤
+  ; Analytic.GammaMellinLayer.gamma = λ _ → zero
+  ; Analytic.GammaMellinLayer.mellin = λ _ _ → zero
+  ; Analytic.GammaMellinLayer.gammaMeromorphic = tt
+  ; Analytic.GammaMellinLayer.mellinHolomorphicOnDomain = λ _ _ → tt
+  ; Analytic.GammaMellinLayer.mellinInversion = λ _ _ → tt
+  }
+
+opaqueCompleted :
+  (xiValue : Nat → Nat) →
+  Analytic.CompletedRiemannZeta
+    discreteCarrier opaqueGamma zeroHalfPlane
+opaqueCompleted xiValue = record
+  { Analytic.CompletedRiemannZeta.zeta = λ _ → zero
+  ; Analytic.CompletedRiemannZeta.xi = xiValue
+  ; Analytic.CompletedRiemannZeta.oneMinus = λ n → n
+  ; Analytic.CompletedRiemannZeta.isZero = λ _ _ → ⊤
+  ; Analytic.CompletedRiemannZeta.nontrivialZero = λ _ → ⊤
+  ; Analytic.CompletedRiemannZeta.criticalLine = λ _ → ⊤
+  ; Analytic.CompletedRiemannZeta.agreesWithHalfPlane = λ _ _ → refl
+  ; Analytic.CompletedRiemannZeta.CompletedDefinition = λ _ → ⊤
+  ; Analytic.CompletedRiemannZeta.zetaMeromorphic = tt
+  ; Analytic.CompletedRiemannZeta.simplePoleAtOne = tt
+  ; Analytic.CompletedRiemannZeta.xiEntire = tt
+  ; Analytic.CompletedRiemannZeta.completedDefinition = λ _ → tt
+  ; Analytic.CompletedRiemannZeta.functionalEquation = λ _ → refl
+  ; Analytic.CompletedRiemannZeta.conjugationLaw = λ _ → refl
+  ; Analytic.CompletedRiemannZeta.nontrivialZeroIsZetaZero = λ _ _ → tt
+  ; Analytic.CompletedRiemannZeta.nontrivialZeroIsXiZero = λ _ _ → tt
+  ; Analytic.CompletedRiemannZeta.xiZeroIsNontrivialZetaZero = λ _ _ → tt
+  }
+
+zeroCompleted oneCompleted :
+  Analytic.CompletedRiemannZeta
+    discreteCarrier opaqueGamma zeroHalfPlane
+zeroCompleted = opaqueCompleted (λ _ → zero)
+oneCompleted = opaqueCompleted (λ _ → suc zero)
+
+-- One *identical* zeta and gamma function admits two different xi
+-- functions under the current interface. These models do not claim
+-- to satisfy any unencoded analytic axioms.
+opaqueCompletedDefinitionCannotIdentifyXi :
+  Analytic.ComplexAnalyticCarrier.apply discreteCarrier
+    (Analytic.CompletedRiemannZeta.xi zeroCompleted) zero
+  ≡
+  Analytic.ComplexAnalyticCarrier.apply discreteCarrier
+    (Analytic.CompletedRiemannZeta.xi oneCompleted) zero
+  → ⊥
+opaqueCompletedDefinitionCannotIdentifyXi = zeroIsNotOne
