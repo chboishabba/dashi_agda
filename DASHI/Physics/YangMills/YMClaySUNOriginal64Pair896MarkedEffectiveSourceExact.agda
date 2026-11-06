@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YMClaySUNOriginal64Pair896MarkedEffectiveSourceEx
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong₂)
 open import Data.Vec.Base using (Vec)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _<ℝ_)
@@ -95,6 +96,50 @@ module _
     Fibre.selected64Pair896SpectatorWeightedDisintegration
       theory source bilateral linear
       fineWeight (actualTwoMarkedCoarseTest left right s t)
+
+  -- The same partition is used to NORMALIZE both entire two-source
+  -- functions, not merely their mixed second-order coefficient.  Division
+  -- is one selected real scalar operation on both sides.  The displayed
+  -- denominator is explicitly Z_aff(0,0), so no second coarse partition
+  -- can be injected by an alleged RG covariance identity.
+  actualFineNormalizedTwoMarkedSource :
+    (divide : ℝ → ℝ → ℝ)
+    (fineWeight : OriginalFineWeight)
+    (left right : OriginalCoarseTest) s t → ℝ
+  actualFineNormalizedTwoMarkedSource
+      divide fineWeight left right s t =
+    divide
+      (actualOriginalFineTwoMarkedNumerator fineWeight left right s t)
+      (actualOriginalFineTwoMarkedNumerator
+        fineWeight left right 0ℝ 0ℝ)
+
+  actualEffectiveNormalizedTwoMarkedSource :
+    (divide : ℝ → ℝ → ℝ)
+    (fineWeight : OriginalFineWeight)
+    (left right : OriginalCoarseTest) s t → ℝ
+  actualEffectiveNormalizedTwoMarkedSource
+      divide fineWeight left right s t =
+    divide
+      (actualEffectiveTwoMarkedNumerator fineWeight left right s t)
+      (actualEffectiveTwoMarkedNumerator
+        fineWeight left right 0ℝ 0ℝ)
+
+  originalSamePartitionNormalizedMarkedSource :
+    (divide : ℝ → ℝ → ℝ)
+    ∀ (fineWeight : OriginalFineWeight)
+      (left right : OriginalCoarseTest) s t →
+    actualFineNormalizedTwoMarkedSource
+      divide fineWeight left right s t
+    ≡
+    actualEffectiveNormalizedTwoMarkedSource
+      divide fineWeight left right s t
+  originalSamePartitionNormalizedMarkedSource
+      divide fineWeight left right s t =
+    cong₂ divide
+      (originalFullTwoMarkedFibreEqualsActualEffectiveDensity
+        fineWeight left right s t)
+      (originalFullTwoMarkedFibreEqualsActualEffectiveDensity
+        fineWeight left right 0ℝ 0ℝ)
 
   -- The effective density remains strictly positive on every block
   -- whenever the original interacting weight is pointwise positive:
