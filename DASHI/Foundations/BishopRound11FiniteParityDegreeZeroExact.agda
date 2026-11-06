@@ -119,7 +119,7 @@ originalEvenFactorialBinomialDegreeZero :
     (Round11.round11OriginalCosineSourceDegree inputs x y zero)
 originalEvenFactorialBinomialDegreeZero inputs x y =
   RP.≃-trans
-    (RP.+-congʳ
+    (RP.+-congˡ
       (R.-_ R.0ℝ)
       (cosineCosineFirstCoefficient x y))
     (RP.≃-trans
