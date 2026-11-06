@@ -1,0 +1,80 @@
+name: YM native finite maximum-cut Agda acceptance
+
+on:
+  push:
+    paths:
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
+      - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
+      - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'scripts/check_ym_sort_selectability_reference.py'
+      - 'scripts/check_ym_physical_cube_perron_certificate.py'
+      - '.github/workflows/ym-native-maxcut-exact-agda.yml'
+  pull_request:
+    paths:
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
+      - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
+      - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'scripts/check_ym_sort_selectability_reference.py'
+      - 'scripts/check_ym_physical_cube_perron_certificate.py'
+      - '.github/workflows/ym-native-maxcut-exact-agda.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  finite-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact original native selection-invariant reference
+        run: |
+          set -euo pipefail
+          python3 scripts/check_ym_sort_selectability_reference.py
+          python3 scripts/check_ym_physical_cube_perron_certificate.py --selftest
+          python3 scripts/check_ym_native_c3_and_pair_original_sort_program.py
+
+  kernel-native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - name: Typecheck original native sorter and six-plane C3
+        run: |
+          set -euo pipefail
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            agda --version
+            AGDA="agda -i . -i DCHoTT-Agda -i cubical -l standard-library"
+            $AGDA DASHI/Physics/YangMills/YMClayNativeOriginalSortMembershipCorrectExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayNativeOriginalSortDeciderExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
+          '
+      - name: Check canonical YM regression imports
+        run: |
+          set -euo pipefail
+          nix develop .# --command bash -lc '
+            set -euo pipefail
+            agda -i . -i DCHoTT-Agda -i cubical -l standard-library DASHI/Unified/BalabanRGTOERegression.agda
+          '
+
+# This check detects typechecking failure; it does not construct Haar,
+# continuum estimates, physical reflection positivity, the OS mass gap,
+# or a proof of the external Clay problem. Imported real axioms require
+# an independent transitive trust audit even on a green kernel job.

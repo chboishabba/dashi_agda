@@ -1,3 +1,31 @@
+## 2026-11-06 — physical-cube quantitative max-cut / original CMP116 reused
+
+- [x] Audit original Dobrushin, CMP116 R467/R479, Perron, Wilson/Haar/Fubini, RG/UV and 2D/3D/5D owner `YMClayVoyagerDimensionSignatureForkExact`.
+- [x] Add `Docs/physics/YMClayPhysicalCubeDobrushinCMP116Transport20261106.md` exact physical-block criterion and A/B/C alternative lanes.
+- [x] Source-write `YMClayPhysicalCubeDobrushinFromGibbsExact.agda` with exact `cells(a)·a=ell` and original normalized Gibbs row/observable bounds (**source, Agda kernel PENDING**).
+- [x] Add exact rational weighted Perron checker `scripts/check_ym_physical_cube_perron_certificate.py` (illustrative fixture, negative controls, physical-admission hard fail). Independent 101-power rational control PASS; committed selftest CI receipt PENDING.
+- [ ] PCUBE.P01: continuous original Wilson-Gibbs physical cube conditionals, exact Haar+R445 pushforward and all-size selected decoder.
+- [ ] PCUBE.P02–P03: same physical `ell` refinement and reflection-compatible time/block maps (actual all-scale RG).
+- [ ] **PCUBE.P04: one strict cutoff+volume-uniform weighted `q<1` for real original coarse conditional influence, OR source-native CMP116 absolute rooted-polymer q**.
+- [ ] PCUBE.P05: instantiate `BalabanCMP116PublishedLiteralSelectedRound467Exact.literalSelectedCMP116Localization` and `sourceEnvelopeBelowPhysicalClusteringEnvelope` for the actual original same-J marks; no new abstract source.
+- [ ] PCUBE.P06/P07: same-OS-H gap in physical units and genuinely nontrivial 4D continuum for every prescribed compact simple G.
+- [ ] V00–V02: exact-head Agda/Nix kernel CI and trust receipts for new modules; no receipt currently.
+ 
+- [x] YM native `decideNativeMember` / `decideAllSelectable` / Boolean→original C3 and pair-vector compiler source written in `YMClayNativeOriginalSortDeciderExact.agda` (**Agda unverified**).
+- [x] YM native targeted Agda Nix workflow added `.github/workflows/ym-native-maxcut-exact-agda.yml`; **no green CI receipt yet**.
+- [ ] YM F1.1/F1.2/F1.3: kernel-close Boolean `originalC3SelectableBooleanGoal`, native pair length and `originalPairSelectableBooleanGoal`; then derive existing three original canonical equalities via the constructive compiler.
+
+## 6 Nov 2026 — YM #1444 active executable proof cut
+
+- [x] Create **phase/deliverables/exact-lemma** acceptance queue: `Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md`; keep legacy roadmap and 219-field ledger distinct.
+- [x] Source-write membership-indexed original bubble-head and sort-correctness under `AllSelectable`: `YMClayNativeOriginalSortMembershipCorrectExact.agda` (**Agda UNVERIFIED**).
+- [x] Run exact local reference for 5,914 small distinct permutations, original 1,024-bond C3 and pair/spectator targets, 46,592 and 41,792 swaps and negative invalid-target controls. Add `scripts/check_ym_sort_selectability_reference.py` (**Python only**).
+- [ ] **F1.1** construct original 1024 C3 `AllSelectable` certificate and kernel-accept `constructedNativeC3CanonicalLabelGoal`.
+- [ ] **F1.2–F1.3** prove original pair/spectator `listLength=1024` and `AllSelectable` and kernel-accept `originalPairSpectatorCanonicalLabelGoal`.
+- [ ] **V00–V02** exact-head Agda/stdlib/TOE root typecheck + transitive trust audit (Agda unavailable here).
+- [ ] **W2.0–W2.3** original CMP119/variable-Gibbs same-object action, continuous Borel SU(N) Haar, weighted physical 1,024-link effective density; do not redo existing Wilson/Fubini owners.
+- [ ] **A3.0–S4.4, C5.0–C5.3** uniform RG and CMP116 exponential decay, physical OS same-H gap in both limits, nontrivial QFT/all compact simple group scope. Genuinely open, not a scheduling issue.
+
 - [x] YM R443.F09 SOURCE: original selected 1024-bond real SU(N) Gibbs density and chosen physical finite measure use literally the same decoder, weighted cylinder numerator, partition and normalized expectation; conditional original C3 weighted expectation transfer from one closed native permutation and selected action C3 covariance. Agda kernel pending.
 - [x] YM SEM.P02 SOURCE: nonempty external compact-simple group scope and bidirectional all-group transport requires physically anchored group index equivalence/predicate meaning; prevents vacuous SU(N)-only Clay upgrade. Agda kernel pending.
 - [x] YM R443 reference: 32 exact original 1024-bond Q8 Wilson action C3/gauge tests and 32 C3-orbit weighted numerators PASS; 32 anisotropic weighted negative controls rejected (independent, not physical/Agda).
