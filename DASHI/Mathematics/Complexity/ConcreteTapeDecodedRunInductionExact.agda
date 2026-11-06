@@ -15,6 +15,7 @@ open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Fin.Base as Fin
 
@@ -26,6 +27,8 @@ import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Glo
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionConjunctionExact as Transition
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTransitionSemanticScanExact as Scan
 import DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact as Step
+import DASHI.Mathematics.Complexity.ConcreteTapeAfterUniqueFromLocalityExact as AfterUnique
+import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
 import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
@@ -262,6 +265,64 @@ record DecodedRunResult
 
 open DecodedRunResult public
 
+------------------------------------------------------------------------
+-- SAME-OBJECT ALL-TIME ENDCAP EVIDENCE FOR THE ORIGINAL RUN INDUCTION.
+------------------------------------------------------------------------
+
+AfterEndcapsForAllTimes :
+  ∀ {machine steps cols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+  Set
+AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits =
+  ∀ {timeIndex} (slot : Global.Slot timeIndex _) →
+    Pattern.FrontPlain
+      (Local.cells
+        (Step.decodedAfterRow stateCoverage symbolCoverage slot globalBits))
+    ×
+    Pattern.EndPlain
+      (Local.cells
+        (Step.decodedAfterRow stateCoverage symbolCoverage slot globalBits))
+
+decodedStepFromEndcaps :
+  ∀ {machine steps cols timeIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (endcaps : AfterEndcapsForAllTimes
+      stateCoverage symbolCoverage globalBits)
+    (timeSlot : Global.Slot timeIndex steps)
+    (semantics :
+      Scan.AllRawWindowsSemantic
+        stateCoverage symbolCoverage nonempty timeSlot globalBits
+        (Transition.allWindowStarts cols))
+    (interior :
+      Character.InteriorHeadConfiguration machine
+        (Step.decodedBeforeRow
+          stateCoverage symbolCoverage timeSlot globalBits)) →
+  WF.WellFormedMachineStep machine
+    (Step.decodedBeforeRow stateCoverage symbolCoverage timeSlot globalBits)
+    (Step.decodedAfterRow stateCoverage symbolCoverage timeSlot globalBits)
+decodedStepFromEndcaps stateCoverage symbolCoverage nonempty
+    globalBits endcaps timeSlot semantics interior =
+  Step.decodedAdjacentRowsFormMachineStep
+    stateCoverage symbolCoverage nonempty timeSlot globalBits
+    interior semantics
+    (AfterUnique.noGhostFromAfterRowEndcaps
+      (Step.decodedTimeLocalityScan
+        stateCoverage symbolCoverage nonempty
+        timeSlot globalBits semantics)
+      interior
+      (proj₁ (endcaps timeSlot))
+      (proj₂ (endcaps timeSlot)))
+
+
 buildDecodedRunNonempty :
   ∀ {machine steps cols}
     (stateCoverage :
@@ -270,6 +331,7 @@ buildDecodedRunNonempty :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (endcaps : AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits)
     (first : Transition.SomeSlot steps)
     (rest : List (Transition.SomeSlot steps)) →
   Scan.AllTimesSemantic
@@ -288,7 +350,7 @@ buildDecodedRunNonempty :
     (Step.decodedBeforeRow stateCoverage symbolCoverage
       (Transition.witness first) globalBits)
 buildDecodedRunNonempty
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     first []
     (Scan.semanticTimesStep current Scan.semanticTimesDone)
     orderedOne
@@ -313,10 +375,10 @@ buildDecodedRunNonempty
         unique (weakenMarginToOne margin)
 
     step =
-      Step.decodedAdjacentRowsFormMachineStep
+      decodedStepFromEndcaps
         stateCoverage symbolCoverage nonempty
-        (Transition.witness first) globalBits
-        interior current
+        globalBits endcaps (Transition.witness first)
+        current interior
 
     after =
       Step.decodedAfterRow
@@ -324,7 +386,7 @@ buildDecodedRunNonempty
         (Transition.witness first) globalBits
 
 buildDecodedRunNonempty
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     first (second ∷ rest)
     (Scan.semanticTimesStep current remaining)
     (orderedCons adjacent orderedRest)
@@ -345,10 +407,10 @@ buildDecodedRunNonempty
         unique (weakenMarginToOne margin)
 
     step =
-      Step.decodedAdjacentRowsFormMachineStep
+      decodedStepFromEndcaps
         stateCoverage symbolCoverage nonempty
-        (Transition.witness first) globalBits
-        interior current
+        globalBits endcaps (Transition.witness first)
+        current interior
 
     after =
       Step.decodedAfterRow
@@ -373,7 +435,7 @@ buildDecodedRunNonempty
 
     recursive =
       buildDecodedRunNonempty
-        stateCoverage symbolCoverage nonempty globalBits
+        stateCoverage symbolCoverage nonempty globalBits endcaps
         second rest remaining orderedRest
         nextUnique nextMargin
 
@@ -385,7 +447,8 @@ decodedAllSlotsRun :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
     (steps : Nat)
-    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
+    (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (endcaps : AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits) →
   (semantic :
     Scan.AllTimesSemantic
       stateCoverage symbolCoverage nonempty globalBits
@@ -411,7 +474,7 @@ decodedAllSlotsRun :
         globalBits))
 decodedAllSlotsRun
     stateCoverage symbolCoverage nonempty
-    zero globalBits
+    zero globalBits endcaps
     Scan.semanticTimesDone
     startUnique startMargin =
   record
@@ -431,12 +494,12 @@ decodedAllSlotsRun
 
 decodedAllSlotsRun
     stateCoverage symbolCoverage nonempty
-    (suc steps) globalBits
+    (suc steps) globalBits endcaps
     semantic
     startUnique startMargin
     rewrite sym (allSlotsLength (suc steps)) =
   buildDecodedRunNonempty
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     (Transition.some-slot zero Global.here)
     (Transition.mapShiftSlots (Transition.allSlots steps))
     semantic
@@ -507,6 +570,7 @@ buildDecodedRun_finish_eq_lastAfter :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (nonempty : Selector.NonemptyRuleTable machine)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (endcaps : AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits)
     (first : Transition.SomeSlot steps)
     (rest : List (Transition.SomeSlot steps))
     (semantic :
@@ -528,27 +592,27 @@ buildDecodedRun_finish_eq_lastAfter :
   LastSlot last (first ∷ rest) →
   finish
     (buildDecodedRunNonempty
-      stateCoverage symbolCoverage nonempty globalBits
+      stateCoverage symbolCoverage nonempty globalBits endcaps
       first rest semantic ordered unique margin)
   ≡
   Step.decodedAfterRow
     stateCoverage symbolCoverage
     (Transition.witness last) globalBits
 buildDecodedRun_finish_eq_lastAfter
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     first []
     semantic ordered unique margin
     .first lastOne =
   refl
 buildDecodedRun_finish_eq_lastAfter
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     first (second ∷ rest)
     (Scan.semanticTimesStep current remaining)
     (orderedCons adjacent orderedRest)
     unique margin
     last (lastCons lastProof) =
   buildDecodedRun_finish_eq_lastAfter
-    stateCoverage symbolCoverage nonempty globalBits
+    stateCoverage symbolCoverage nonempty globalBits endcaps
     second rest remaining orderedRest
     nextUnique nextMargin
     last lastProof
@@ -558,10 +622,10 @@ buildDecodedRun_finish_eq_lastAfter
         unique (weakenMarginToOne margin)
 
     step =
-      Step.decodedAdjacentRowsFormMachineStep
+      decodedStepFromEndcaps
         stateCoverage symbolCoverage nonempty
-        (Transition.witness first) globalBits
-        interior current
+        globalBits endcaps (Transition.witness first)
+        current interior
 
     afterEq =
       adjacentDecodedRows
@@ -606,6 +670,7 @@ decodedAllSlotsRun_finish_eq_finalGlobalRow :
     (nonempty : Selector.NonemptyRuleTable machine)
     (steps : Nat)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
+    (endcaps : AfterEndcapsForAllTimes stateCoverage symbolCoverage globalBits)
     (semantic :
       Scan.AllTimesSemantic
         stateCoverage symbolCoverage nonempty globalBits
@@ -627,7 +692,7 @@ decodedAllSlotsRun_finish_eq_finalGlobalRow :
   finish
     (decodedAllSlotsRun
       stateCoverage symbolCoverage nonempty
-      steps globalBits semantic startUnique startMargin)
+      steps globalBits endcaps semantic startUnique startMargin)
   ≡
   Decode.decodeRow stateCoverage symbolCoverage cols
     (Global.rowSliceBits
@@ -635,15 +700,15 @@ decodedAllSlotsRun_finish_eq_finalGlobalRow :
       globalBits)
 decodedAllSlotsRun_finish_eq_finalGlobalRow
     stateCoverage symbolCoverage nonempty
-    zero globalBits Scan.semanticTimesDone
+    zero globalBits endcaps Scan.semanticTimesDone
     startUnique startMargin =
   refl
 decodedAllSlotsRun_finish_eq_finalGlobalRow
     stateCoverage symbolCoverage nonempty
-    (suc n) globalBits semantic startUnique startMargin =
+    (suc n) globalBits endcaps semantic startUnique startMargin =
   trans
     (buildDecodedRun_finish_eq_lastAfter
-      stateCoverage symbolCoverage nonempty globalBits
+      stateCoverage symbolCoverage nonempty globalBits endcaps
       (Transition.some-slot zero Global.here)
       (Transition.mapShiftSlots (Transition.allSlots n))
       semantic
