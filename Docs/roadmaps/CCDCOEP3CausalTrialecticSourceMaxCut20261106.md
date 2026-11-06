@@ -91,13 +91,41 @@ religion, dissent, or Indigenous source is classified as an attack by label.
 
 Owner: DASHI/Cognition/CCDCOEP3CausalTrialecticInteractionExact.agda
 
-P3-I1: at x=y=true, the additive 2x+2y model remains exactly 4;
-a selected x*y interaction yields 5. This is a finite counterexample
-to the information-sufficiency of an additive projection, NOT a claim
-that arithmetic is false or that every interaction is positive.
+P3-I0: IMPORTANT CORRECTION (6 November, later revision). The original
+intersectionality programme is not a formula '2x+2y=4+xy'. An equality
+of two CARDINALITIES does not identify the domains they count.
+Two race-axis points and two sex-axis points have different types.
+There is no implicit coerced common unit, summable oppression score,
+or equality of political/epistemic/social positions.
 
-P3-I2: two situated laws with the same additive report can give
-different outcomes; no factorisation through the report exists.
+Typed owner: DASHI/Cognition/CCDCOEP3TypedIntersectionalAxisExact.agda.
+- Axis = raceAxis | sexAxis (two distinct indexed sorts).
+- AxisPoint : Axis -> Set; race0/race1 and sex0/sex1 carry separate types.
+- Both two-position lists have length two; axisTagsDiffer and
+  raceAndSexTagsNeverEqual prevent interpreting equal point counts as
+  a typed position equivalence.
+- The actual heterogeneous response surface has
+  Left = AxisPoint raceAxis; Right = AxisPoint sexAxis.
+- Reuses the pre-existing BinaryInteractionNonseparabilityExact
+  RectangleObstruction: the selected joint response cannot be
+  reconstructed from independent endpoint contributions.
+- Reuses the original IntersectionalBinaryInteractionBridgeExact and
+  IntersectionalConstraintGeometryExact, not a competing generic sum.
+- Two situated contexts share *both* typed axis coordinates but differ
+  on recognised versus excluded, establishing NonFactorability and
+  persistent loss under any postprocessing/recharting of those coordinates.
+
+The synthetic response illustrates a mathematical obstruction only;
+neither the axis names nor synthetic point numbers express an intrinsic
+demographic hierarchy, burden, identity equivalence, or measured effect.
+The full original body x time x place x relation x institution x axis-bundle
+carrier in IntersectionalLongitudinalResidualDynamics remains the
+authoritative longitudinal evidence boundary.
+
+P3-I1/I2 now point to the typed owner and canonical rectangle / situated
+nonfactorability. The earlier add-xy scalar toy was removed from the
+Cognition P3 proof and regression, and the finite Python test was
+replaced with a typed-axis cardinality and contextual-collision check.
 
 P3-T1: the original six S3 reorientations and the source's inverse
 and noncommutation laws are reused; braid-route non-descent and
@@ -144,7 +172,7 @@ Fail-closed checker: scripts/check_ccdcoe_cognition_agda.sh.
 ## Independent finite tests
 
 A local independent execution of the corresponding exact definitions
-passed four Boolean interaction cases, all six S3 permutations, all
+passed four heterogeneous typed-axis response cells, all six S3 permutations, all
 216 associativity triples, and observational collision versus
 interventional-separation. This is not Agda kernel acceptance, and
 the repo script itself has not been executed through a pinned checkout
