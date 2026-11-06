@@ -122,3 +122,22 @@ nonpromotion rules live exclusively in the linked lane roadmap.
 See [Proof theorems](../Docs/support/reference/GielisBase369ProofTheorems.md)
 for E01–E11 and [exact gate roadmap](../Docs/support/reference/GielisBase369Roadmap.md)
 for G01–G21, status, phases, dependencies and D0–D7.
+
+
+## Gielis × Base369 round-four proof/implementation delta (November 6, 2026)
+
+- [x] E12 source-written universal Bishop polynomial normal form, using real project's solver. Actual Bishop Pythagorean, quadruple-angle, pi and sqrt integration and Agda --safe checks remain [ ].
+- [x] E13 exact cyclotomic Q(zeta36) character orthogonality: 1296 pairs and exact selected seven-mode inversion (local executable check passed). Agda native Fourier instantiation remains [ ].
+- [x] E14 continuum angular-sector domain spectral O(m/N) bound for all Dirichlet eigenvalues; exact rational m=9, N=2048 error less than 1%. Cartesian finite-difference numerical error certification remains [ ].
+- [x] E15 first-eigenvalue Rayleigh bound for the m=3 Gielis domain: lambda1 < 1273/264, verified via symbolic integral and rational arithmetic. Native Bishop Hilbert formalisation remains [ ].
+- [x] E16 independent new-scene 80-ray continuous-root versus polygon ray first-hit convergence: max error 0.223 mm (384 seg) versus 0.0125 mm (1536 seg). Original HTML SDF same-apparatus parity remains [ ].
+- [x] Source-code implementation of IID uniform-angle Hoeffding simultaneous intervals for focus/impulse. Physical source probability/measurement/replication remains [ ].
+- [x] Independent local math regression set, 7 tests PASS. NOT the exact-head GitHub Agda+pytest receipt.
+- [ ] G01 Agda --safe for all four native sources, including the Bishop polynomial module.
+- [ ] G02–G05/G08/G09 actual Bishop ordinary trigonometric/square-root/pi continuous proofs and kernel acceptance.
+- [ ] G07/G10/G19 actual C36 cyclotomic Fourier Agda module and exact resolution owner instance.
+- [ ] G11 native Dirichlet operator/Hilbert formalisation; G12 verified Cartesian FD solver error.
+- [ ] G13/G14 original Kozyrev HTML SDF source scene/collision parity.
+- [ ] G15/G16 measured optical power, wall reflectivity, physical torque/uncertainty and actual Pareto validation.
+
+Authoritative proof details: Docs/support/reference/GielisBase369ProofTheorems.md (E01–E16). Exact phase/deliverables/status: Docs/support/reference/GielisBase369Roadmap.md (P0–P5, D0–D7, G01–G21).
