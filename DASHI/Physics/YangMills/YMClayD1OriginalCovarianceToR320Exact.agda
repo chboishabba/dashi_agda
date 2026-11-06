@@ -91,3 +91,32 @@ module _
               cutoff left right))
             (originalBound cutoff left right)
     }
+
+  -- Reverse implication: R320's one physical field is no stronger than
+  -- the concrete original selected connected-covariance shell estimate.
+  -- This is the exact algebraic max-cut, not a new analytic hypothesis.
+  r320ImpliesOriginalConnectedCovarianceRootedShellBound :
+    R320.DirectSelectedT5MarkedDecayPayment base →
+    ∀ cutoff left right →
+    R278.connectedCovarianceMagnitude extension
+      (Gram.measureSequence dataSet cutoff) left right
+    ≤
+    Shell.rootedShell (R318.shellData base)
+      (R318.scaleOf base cutoff)
+      (R318.volumeOf base cutoff)
+      (R318.connectingRoot base cutoff left right)
+      (R318.physicalDistance base left right)
+  r320ImpliesOriginalConnectedCovarianceRootedShellBound
+      payment cutoff left right =
+    subst
+      (λ lower →
+        lower ≤
+        Shell.rootedShell (R318.shellData base)
+          (R318.scaleOf base cutoff)
+          (R318.volumeOf base cutoff)
+          (R318.connectingRoot base cutoff left right)
+          (R318.physicalDistance base left right))
+      (selectedHessianMagnitudeIsOriginalCovarianceMagnitude
+        cutoff left right)
+      (R320.mixedDerivativeMagnitudeBelowSelectedShell
+        payment cutoff left right)
