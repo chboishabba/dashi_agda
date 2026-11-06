@@ -2,11 +2,11 @@
 ### 6 November R344 finding: the canonical CMP116 q=1/2 shell is ALREADY source-implemented
 
 `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact` does not need a second generic exponential-carrier construction. Its existing `SharedMarkedDirectCMP116Source` gives the physical selected two-J/Hessian source with
-[
+\[
 \text{markedAnalyticShell}(d)\le\tfrac14 C_H\,2^{-d},
 \quad C_H\le1,
 \quad d_{\rm source}=t_{\rm selected},
-]
+\]
 and the selected spectrum's `quarter*halfPower(time)` envelope. **These are input fields to instantiate on the actual Wilson measure, not a new externally verified continuum rate.** The module already constructs `R342.LiteralTrajectoryCMP116Source` directly from R344. Its explicit selected physical source-facing leaves are (a) `literalSelectedDifferentiatedLocalization`, (b) `selectedSourceDistanceIsTime` with calibrated physical units, and (c) `hessianAnalyticConstantAtMostOne`.
 
 New terms appended to `YMClayCMP119122116SelectedProducerWeldExact.agda`:
