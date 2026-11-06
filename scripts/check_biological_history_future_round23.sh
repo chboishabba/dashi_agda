@@ -36,6 +36,8 @@ grep -q 'compiledCodeExactlyCapturesFutureLanguage' \
   DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda
 grep -q 'allStochasticHorizonsRemainCoarse' \
   DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda
+grep -q 'allStochasticHorizonsPreserveMinimal18Classes' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
+grep -q 'timeVaryingStochasticHistoriesPreserveMinimal18Classes' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
 grep -q 'parametricAllFiniteHorizonsRemainCoarse' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
 grep -q 'arbitraryNormalizedWeightsPreserveAllControlledFutures' DASHI/Biology/Physical/BiologicalParametricStochasticLumpingExact.agda
 grep -q 'allControlledStochasticHistoriesRemainCoarse' \
