@@ -882,3 +882,107 @@ evaluation theorem. PI.1 therefore remains OPEN; no extra
 independent rational/Cayley construction is necessary.
 
 Source-written / Agda-2.9 `--safe` kernel acceptance OPEN.
+
+
+## 2026-11-06 Cayley-to-Bishop analytic max-cut reduction (current PR)
+
+**Golden repo prior-art reuse** (not a second Cayley construction):
+`DASHI/Physics/YangMills/BalabanSelectedGaugeRedundancyHolonomyGuardExact.agda`
+owns the rational Cayley/Pythagorean quaternion at selected `rho`;
+`DASHI/Mathematics/Algebra/CayleyDicksonRationalComplexQuaternionExact.agda`
+owns the original normalized-rational complex multiplication, conjugation,
+norm composition, and complex/quaternion literal identification.
+`DASHI/Foundations/BishopMachinExistingCayleyReuseExact.agda`
+instantiates these at `t=1/5,1/239` and establishes the source
+`C(1/5)^4 * conj(C(1/239)) = i` certificate.
+
+### This round: new source-owned proofs
+
+- `Foundations/BishopMachinOriginalCayleyFormalSeriesExact.agda`:
+  genuine **all-N** coefficient statement for
+  `(1-iX) F(X) = 1+iX`, with
+  `F_0=1,F_1=2i,F_(n+2)=i F_(n+1)`. The original
+  `CayleyDicksonRationalComplexQuaternionExact.RationalComplex`
+  carrier is reused; there is no new Q[i] or alternative exp.
+  Theorem owners:
+  `cayleyAllDegreeFormalEquation`,
+  `originalCayleyFormalCoefficientUnique`.
+  The independent Python `check_k05_cayley_formal_coefficients.py`
+  exact-Q[i] oracle tested 4096 degrees with **zero failures**.
+  That is finite arithmetic validation, not proof of source Bishop
+  exp/atan equality or Agda elaboration.
+
+- `Analysis/BishopSquareZeroReflectsSetoidZeroExact.agda`:
+  proposed *native* constructive `x*x ≃ 0 -> x ≃ 0`,
+  combining original `Norm.absoluteSquare`,
+  `Reflect.squareReflectsOnNonnegative` and
+  `Chord.absoluteZeroImpliesZero`. This removes the need for
+  supplying a fresh `BishopSquareRootCalculus` to the K05 quarter
+  phase consumer.
+
+- `Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda`:
+  the actual normalized `Data.Rational.Base.ℚ` -> unnormalised
+  rational -> pinned `Real._⋆` source embedding, with
+  `embedAdd`, `embedMultiply`, `embedNegate`, `embedSubtract`,
+  `embedOriginalComplexAdd/Subtract/Multiply` as actual setoid
+  equalities, not structural declarations. The selected original
+  `Cayley.machinQuarterCayleyPhase` is thus identified with the
+  actual `BishopSetoidComplexExact.imaginaryUnit`.
+  `originalMachinRationalCayleyIsBishopImaginaryUnit` is the
+  same-object algebraic endpoint.
+
+- `Analysis/BishopMachinCayleyHalfPhaseToFirstZeroExact.agda`:
+  on the *selected* Round11 original Bishop sine/cosine,
+  `OriginalMachinCayleyHalfPhase inputs`
+  plus the existing shared `Round11ImaginaryExpMultiplicative`
+  derive `sin_B(2 theta_M) ≃ 1`, then
+  `(cos_B(theta_M)-sin_B(theta_M))² ≃ 0`, then
+  `cos_B(theta_M) ≃ sin_B(theta_M)`.
+  The established two-ball/sign reflection machinery derives the
+  original first positive sine zero without any extra angle branch.
+  Terminal compiler:
+  `sourceMachinFirstPositiveZeroFromSameObjectCayley`.
+
+### Updated independent proof leaves
+
+1. **K05-PRODUCT kernel**: Accept the original all-N signed factorial,
+   mixed source Cauchy, original complex rectangle/triangle,
+   original pure-imaginary multiplication theorem and its TOE import
+   via the canonical Agda checker.
+2. **K05-PI analytic leaf**: Construct
+   `OriginalMachinCayleySameObjectEvaluation inputs` from the
+   **actual source arctangent series evaluations** at 1/5 and 1/239,
+   and the actual source exponential `C.expC`. Finite Cayley
+   coefficients, original rational complex multiplication,
+   normalized rational -> Bishop setoid carrier transport,
+   selected half-phase -> quarter equality, global sine sign and
+   first-positive-zero consumer are now source-written.
+   Do NOT assume a classical atan identity over an unrelated real.
+3. **K04d-LOG**: Original nested
+   `Exp.bishopExp(-L_B(x)) ≃ 1-x` still needs source coefficient
+   identification, constructive absolute summability and limit
+   rearrangement. Universal rational uniqueness is not an
+   analytic series composition theorem.
+4. **K04d-CONTINUITY**: Native original exponential sequential
+   continuity on a local Dirichlet chart, actual uniform Basel
+   magnitude, selected `OriginalHalfPlaneDirichletAgreement`,
+   and `xi` original gamma/prefactor factor identity still need
+   source-specific witnesses. The new real/complex algebra and
+   `xi` factor continuity compilers are not those witnesses.
+5. **Verification**: all newly added `--safe` source owners and
+   three TOE roots must be accepted by an exact-head Agda kernel
+   run. **No positive receipt has been obtained in this connector
+   environment**. Python fraction tests do not substitute.
+
+### Canonical proof checker (no direct Agda/Nix calls)
+
+The focused GitHub workflow has been corrected to call the
+repository's **existing**
+`scripts/run_agda29_parallel_check.sh` wrapper on 42 focused
+source owners and the three golden TOE roots, with explicit
+pinned stdlib `008f12c2908479567a3ae3c873f9cf0b8fe5987e`,
+the existing Agda flake/ref, and source `vendor/bishop` gitlink.
+The CI workflow no longer shells out to `nix build` or directly
+executes `AGDA_BIN` in its checking steps. It retains the
+environment installation action required by the wrapper. The
+actual runtime receipt is still pending.
