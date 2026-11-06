@@ -184,6 +184,7 @@ import DASHI.Mathematics.Complexity.Karp21CliqueComplementSameGraphWordExact
 -- and actual C3 cube -> trit-function algebraic transport.
 ------------------------------------------------------------------------
 import DASHI.Mathematics.Complexity.Karp21ConwayTotalChainExact
+import DASHI.Mathematics.Complexity.Karp21ConwayTetrationSameObjectExact
 import DASHI.Mathematics.Complexity.Karp21ConwayGammaChainCodecExact
 import DASHI.Mathematics.Complexity.Karp21ConwayPrimorialGammaAdapterExact
 import DASHI.Foundations.ConwayC3SameObjectCodecExact
