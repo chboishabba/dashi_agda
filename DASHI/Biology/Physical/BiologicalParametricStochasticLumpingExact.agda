@@ -224,3 +224,135 @@ timeVaryingRationalHistoriesPreserveCoarseFuture
   weightedSameValue weights
     (weightedCoarseSchedule rest observable
       (Bio.coarseStep action (Bio.project state)))
+
+------------------------------------------------------------------------
+-- The selected exact 18-class MORPHOLOGY observer, not just the earlier
+-- 32-element sufficient code. The 18-class projection is a true lumping
+-- of the same normalized weighted hidden-marker operator.
+------------------------------------------------------------------------
+
+import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact as Minimal
+
+minimalMarkerInvariant :
+  (state : Bio.BiologicalState) →
+  Minimal.minimalProject (Original.flipMarker state)
+    ≡ Minimal.minimalProject state
+minimalMarkerInvariant (Bio.biologicalState false false h j e p) = refl
+minimalMarkerInvariant (Bio.biologicalState false true h j e p) = refl
+minimalMarkerInvariant (Bio.biologicalState true false h j e p) = refl
+minimalMarkerInvariant (Bio.biologicalState true true h j e p) = refl
+
+weightedMinimalStep :
+  Bio.Intervention →
+  (Minimal.MorphologyFutureCode → ℚ) →
+  Minimal.MorphologyFutureCode → ℚ
+weightedMinimalStep action observable code =
+  observable (Minimal.minimalStep action code)
+
+weightedMinimalOneStepProjection :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention)
+  (observable : Minimal.MorphologyFutureCode → ℚ)
+  (state : Bio.BiologicalState) →
+  weightedFineStep weights action
+    (λ s → observable (Minimal.minimalProject s)) state
+  ≡ weightedMinimalStep action observable (Minimal.minimalProject state)
+weightedMinimalOneStepProjection weights action observable state
+  rewrite minimalMarkerInvariant (Bio.step action state)
+        | Minimal.minimalStepCommutes action state =
+  weightedSameValue weights
+    (observable
+      (Minimal.minimalStep action (Minimal.minimalProject state)))
+
+weightedMinimalStepFactors :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention)
+  (observable : Markov.FactoredObservable Minimal.minimalProject)
+  (state : Bio.BiologicalState) →
+  weightedFineStep weights action
+    (Markov.fineObservable observable) state
+  ≡ weightedMinimalStep action
+    (Markov.coarseObservable observable)
+    (Minimal.minimalProject state)
+weightedMinimalStepFactors weights action observable state
+  rewrite Markov.factors observable (Bio.step action state)
+        | Markov.factors observable
+            (Original.flipMarker (Bio.step action state))
+        | minimalMarkerInvariant (Bio.step action state)
+        | Minimal.minimalStepCommutes action state =
+  weightedSameValue weights
+    (Markov.coarseObservable observable
+      (Minimal.minimalStep action (Minimal.minimalProject state)))
+
+minimal18ClassMarkovLumping :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention) →
+  Markov.ConstructiveMarkovLumping
+    Bio.BiologicalState Minimal.MorphologyFutureCode
+minimal18ClassMarkovLumping weights action =
+  Markov.constructiveMarkovLumping
+    Minimal.minimalProject
+    (weightedFineStep weights action)
+    (weightedMinimalStep action)
+    (λ observable →
+      Markov.factoredObservable
+        (weightedFineStep weights action
+          (Markov.fineObservable observable))
+        (weightedMinimalStep action
+          (Markov.coarseObservable observable))
+        (weightedMinimalStepFactors weights action observable))
+    (λ observable state → refl)
+    (λ observable code → refl)
+
+allStochasticHorizonsPreserveMinimal18Classes :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention)
+  (horizon : Nat)
+  (observable : Minimal.MorphologyFutureCode → ℚ)
+  (state : Bio.BiologicalState) →
+  Markov.fineObservable
+    (Markov.iterateFactored
+      (minimal18ClassMarkovLumping weights action) horizon
+      (Markov.initialFactoredObservable
+        (minimal18ClassMarkovLumping weights action) observable)) state
+  ≡ Markov.coarseObservable
+    (Markov.iterateFactored
+      (minimal18ClassMarkovLumping weights action) horizon
+      (Markov.initialFactoredObservable
+        (minimal18ClassMarkovLumping weights action) observable))
+    (Minimal.minimalProject state)
+allStochasticHorizonsPreserveMinimal18Classes weights action horizon observable state =
+  Markov.allFiniteHorizonsRemainCoarseFactored
+    (minimal18ClassMarkovLumping weights action) horizon observable state
+
+weightedMinimalSchedule :
+  List WeightedBiologicalIntervention →
+  (Minimal.MorphologyFutureCode → ℚ) →
+  Minimal.MorphologyFutureCode → ℚ
+weightedMinimalSchedule [] observable = observable
+weightedMinimalSchedule (entry ∷ rest) observable =
+  weightedMinimalStep (selectedIntervention entry)
+    (weightedMinimalSchedule rest observable)
+
+timeVaryingStochasticHistoriesPreserveMinimal18Classes :
+  (schedule : List WeightedBiologicalIntervention)
+  (observable : Minimal.MorphologyFutureCode → ℚ)
+  (state : Bio.BiologicalState) →
+  weightedFineSchedule schedule
+    (λ s → observable (Minimal.minimalProject s)) state
+  ≡ weightedMinimalSchedule schedule observable
+    (Minimal.minimalProject state)
+timeVaryingStochasticHistoriesPreserveMinimal18Classes [] observable state =
+  refl
+timeVaryingStochasticHistoriesPreserveMinimal18Classes
+  (weightedBiologicalIntervention action weights ∷ rest) observable state
+  rewrite
+    timeVaryingStochasticHistoriesPreserveMinimal18Classes
+      rest observable (Bio.step action state)
+  | timeVaryingStochasticHistoriesPreserveMinimal18Classes
+      rest observable (Original.flipMarker (Bio.step action state))
+  | minimalMarkerInvariant (Bio.step action state)
+  | Minimal.minimalStepCommutes action state =
+  weightedSameValue weights
+    (weightedMinimalSchedule rest observable
+      (Minimal.minimalStep action (Minimal.minimalProject state)))
