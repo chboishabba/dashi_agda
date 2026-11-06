@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact where
 
 ------------------------------------------------------------------------
@@ -30,7 +29,6 @@ import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
-import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Decode
 
 -- The tag is the first bit of the original actual canonical cell block.
 -- A headed cell is rejected independently of its arbitrary state/symbol
