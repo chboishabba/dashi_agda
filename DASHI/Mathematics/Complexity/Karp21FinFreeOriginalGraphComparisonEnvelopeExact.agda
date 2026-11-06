@@ -5,12 +5,12 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelope
 -- BOTH raw validator comparison count AND endpoint-consistency scans.
 --
 -- This closes the source-owned composition:
---   raw validator: at most 3m comparisons on original raw edges;
+--   raw validator: at most 5m primitive comparisons on original raw edges;
 --   endpoint history: exactly 2m(m-1) potential comparisons;
 --   original successful gamma input-word: 2m <= |word|.
 --
 -- Thus the whole selected pair/endpoint COMPARISON COUNT is bounded
--- by the explicit quadratic expression C(L) + 3L for input bit length
+-- by the explicit quadratic expression C(L) + 5L for input bit length
 -- L. Binary arithmetic and parsing work are NOT included.
 -- No cost oracle, alternative graph decoder or synthetic language.
 ------------------------------------------------------------------------
@@ -32,13 +32,13 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExac
 comparisonCountForParsedGraph : Runtime.ParsedRawGraph → Nat
 comparisonCountForParsedGraph graph =
   History.comparisonPolynomial (length (Runtime.rawEdges graph))
-  + 3 * length (Runtime.rawEdges graph)
+  + 5 * length (Runtime.rawEdges graph)
 
 actualValidatedComparisonCount : Runtime.ParsedRawGraph → Nat
 actualValidatedComparisonCount graph =
   History.comparisonPolynomial (length (Runtime.rawEdges graph))
   + proj₂
-      (Validate.countedRawValidator
+      (Validate.countedRawValidatorPrimitive
         (Runtime.rawVertices graph)
         Graph.noPrevious
         (Runtime.rawEdges graph))
@@ -52,7 +52,7 @@ actualComparisonCountBelowSchedule :
 actualComparisonCountBelowSchedule graph =
   NatP.+-mono-≤
     NatP.≤-refl
-    (Validate.originalRawValidatorComparisonCountBound
+    (Validate.primitiveValidatorCountBound
       (Runtime.rawVertices graph)
       Graph.noPrevious
       (Runtime.rawEdges graph))
@@ -65,7 +65,7 @@ successfulOriginalGraphCombinedComparisonBound :
   Runtime.readRawGraphWord word ≡ just graph →
   actualValidatedComparisonCount graph
     ≤ History.comparisonPolynomial (Word.encodingSize word)
-      + 3 * Word.encodingSize word
+      + 5 * Word.encodingSize word
 successfulOriginalGraphCombinedComparisonBound word graph parsed =
   NatP.≤-trans
     (actualComparisonCountBelowSchedule graph)
