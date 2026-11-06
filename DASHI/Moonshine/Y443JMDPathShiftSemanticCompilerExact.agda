@@ -88,16 +88,8 @@ module Semantic
       (sym (assoc (nodes a) (nodes b) (eval rest)))
       (trans
         (cong (λ q → mul q (eval rest))
-          (squareWhenSame a b condition))
+          (sourceSquareWhenSame a b condition))
         (leftId (eval rest)))
-      where
-      squareWhenSame :
-        (x y : Y.Node) → Finite.eqNode x y ≡ true →
-        mul (nodes x) (nodes y) ≡ e
-      squareWhenSame x y eq =
-        -- This kernel equality follows by finite elimination on nodes:
-        -- equivalent canonical ranks select literally the same constructor.
-        sourceSquareWhenSame x y eq
   ... | false = refl
   localSound W.commute (a ∷ b ∷ rest)
     with Finite.canCommute a b in condition
@@ -306,7 +298,7 @@ module Semantic
   evalReverse :
     (w : Y.Word) →
     eval (Finite.reverse w) ≡ inv (eval w)
-  evalReverse [] = sym (TM.GroupWithInverse.leftInverse gi e)
+  evalReverse [] = R.leftInverseUnique e e (leftId e)
   evalReverse (x ∷ rest) =
     trans
       (evalAppend (Finite.reverse rest) (x ∷ []))
