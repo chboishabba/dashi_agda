@@ -88,7 +88,7 @@ def spiral_vertices(m, epsilon, segments=1536):
     A detrended log-Gielis modulation retains endpoint radii for every m.
     For epsilon=0 this is exactly the baseline logarithmic spiral.
     """
-    if m not in (3,6,9) or not (0 <= epsilon <= .45) or segments < 100:
+    if not (isinstance(m, int) and 1 <= m <= 27) or not (0 <= epsilon <= .45) or segments < 100:
         raise ValueError("invalid spiral parameters")
     T = 3*math.pi
     theta = np.linspace(0,T,segments+1)
@@ -138,8 +138,13 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
     signed = 0.0; magnitude = 0.0
     path = [p.tolist()] if record else None
     collisions = [] if record else None
+    if max_bounces < 0:
+        raise ValueError("max_bounces must be nonnegative")
     exit_reason = "reflection_limit"
-    for _ in range(max_bounces+1):
+    reflections = 0
+    # One free segment per reflection, one final propagation, and at most
+    # one extra segment when an optional transparent target is crossed.
+    for _ in range(max_bounces+3):
         hit = nearest_hit(p,d,vertices)
         surface_t = hit[0] if hit is not None else math.inf
         target_t = circle_hit(p,d,origin,.1) if not touched else math.inf
@@ -159,6 +164,9 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
             break
         if hit is None:
             exit_reason="escaped_open_reflector"; break
+        if reflections >= max_bounces:
+            exit_reason = "reflection_limit"
+            break
         _,point,normal,segment=hit
         new_d = d-2*np.dot(d,normal)*normal
         torque = float(cross(point,new_d-d))  # dimensionless momentum impulse
@@ -168,17 +176,25 @@ def trace_ray(angle,vertices,max_bounces=8,absorber=True,outer_gate=1.70,
         if path is not None: path.append(point.tolist())
         p=point+1e-6*new_d
         d=new_d/np.linalg.norm(new_d)
-    return {"hit_target":touched,"signed_torque":signed,"absolute_torque":magnitude,
+        reflections += 1
+    return {"reflections":reflections,"hit_target":touched,"signed_torque":signed,"absolute_torque":magnitude,
             "exit_reason":exit_reason,"path":path,"collisions":collisions}
 
-def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True):
+def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True,include_controls=False):
     """Matched deterministic rays; not the legacy Kozyrev experiment."""
     angles = np.arange(rays)*2*math.pi/rays
     results=[]
-    for m,eps in ((3,0.),(3,.12),(3,.24),(6,.12),(6,.24),(9,.12),(9,.24)):
+    candidates = [(3,0.),(3,.12),(3,.24),(6,.12),(6,.24),(9,.12),(9,.24)]
+    if include_controls:
+        candidates.extend([(4,.12),(4,.24),(5,.12),(5,.24),(7,.12),(7,.24)])
+    for m,eps in candidates:
         boundary = spiral_vertices(m,eps,segments)
         traces=[trace_ray(float(a),boundary,bounces,absorber) for a in angles]
         results.append({"m":m,"epsilon":eps,"rays":rays,"max_bounces":bounces,
+                        "geometry":"endpoint_locked_open_1p5_turn_spiral",
+                        "comparison_to_legacy":"not_same_apparatus",
+                        "torque_unit":"unit_momentum_times_metre",
+                        "total_reflections":sum(t["reflections"] for t in traces),
                         "focus_fraction":sum(t["hit_target"] for t in traces)/rays,
                         "mean_abs_torque":sum(t["absolute_torque"] for t in traces)/rays,
                         "mean_signed_torque":sum(t["signed_torque"] for t in traces)/rays,
@@ -186,14 +202,37 @@ def optical_sweep(rays=720,segments=1536,bounces=8,absorber=True):
                                       for t in traces)})
     return results
 
-def pareto(results):
-    """Nondominated designs for maximising focus and mean absolute torque."""
-    return [a for a in results if not any(
-       b["focus_fraction"]>=a["focus_fraction"] and
-       b["mean_abs_torque"]>=a["mean_abs_torque"] and
-       (b["focus_fraction"]>a["focus_fraction"] or
-        b["mean_abs_torque"]>a["mean_abs_torque"])
-       for b in results)]
+def pareto(results, torque_objective="min"):
+    """Nondominated designs, max focus, and min or max absolute impulse.
+
+    Direction matters: 'min' treats impulse as a mechanical disturbance cost.
+    'max' treats it as an intentionally delivered angular impulse benefit.
+    """
+    if torque_objective not in ("min", "max"):
+        raise ValueError("torque_objective must be min or max")
+    def dominates(b, a):
+        fb,fa=b["focus_fraction"],a["focus_fraction"]
+        tb,ta=b["mean_abs_torque"],a["mean_abs_torque"]
+        torque_better=tb<=ta if torque_objective=="min" else tb>=ta
+        torque_strict=tb<ta if torque_objective=="min" else tb>ta
+        return fb>=fa and torque_better and (fb>fa or torque_strict)
+    return [a for a in results if not any(dominates(b,a) for b in results)]
+
+def nyquist36_receipt():
+    """Exact integer 18 -> 36 orientation recovery, without claiming Shannon."""
+    cos9 = tuple((1,0,-1,0)[j%4] for j in range(36))
+    sin9 = tuple((0,1,0,-1)[j%4] for j in range(36))
+    sin27 = tuple((0,-1,0,1)[j%4] for j in range(36))
+    assert all(sin9[2*j]==sin27[2*j]==0 for j in range(18))
+    assert sin9[1]==1 and sin27[1]==-1
+    assert sum(x*y for x,y in zip(cos9,sin9))==0
+    assert sum(x*x for x in sin9)==18
+    assert sum(x*x for x in cos9)==18
+    return {"coarse_sine_samples_zero":18,
+            "fine_sine9_j1":sin9[1],"fine_sine27_j1":sin27[1],
+            "cos_sin9_gram":0,"sin9_norm_squared":18,
+            "not_a_continuous_sampling_theorem":True}
+
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -202,15 +241,23 @@ def main():
     parser.add_argument("--rays",type=int,default=720)
     parser.add_argument("--segments",type=int,default=1536)
     parser.add_argument("--bounces",type=int,default=8)
+    parser.add_argument("--controls",action="store_true",help="add non-369 m=4,5,7 controls")
+    parser.add_argument("--torque-objective",choices=["min","max"],default="min")
     parser.add_argument("--output")
     args=parser.parse_args()
-    output={"exact":exact_receipt()}
+    output={"exact":exact_receipt(), "nyquist36":nyquist36_receipt(),
+            "model_identity":"fresh_geometry_not_original_Kozyrev_experiment",
+            "physical_torque_calibrated":False}
     if args.pde:
         output["pde"]={str(m):{"grid41":laplacian_eigenvalues(m,41),
                               "grid61":laplacian_eigenvalues(m,61)} for m in (3,6,9)}
     if args.optics:
-        output["optics"]=optical_sweep(args.rays,args.segments,args.bounces)
-        output["pareto"]=pareto(output["optics"])
+        output["optics"]=optical_sweep(args.rays,args.segments,args.bounces,
+                                       include_controls=args.controls)
+        output["torque_objective"]=args.torque_objective
+        output["pareto"]=pareto(output["optics"],args.torque_objective)
+        output["alternate_pareto"]=pareto(output["optics"],
+                                         "max" if args.torque_objective=="min" else "min")
         output["sample_ray"]=trace_ray(.37*math.pi,spiral_vertices(3,.12,args.segments),
                                        args.bounces,record=True)
     rendered=json.dumps(output,indent=2)
