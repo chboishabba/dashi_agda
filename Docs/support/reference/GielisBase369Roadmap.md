@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E21), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E26), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -67,7 +67,7 @@ means computational test/design only; **OPEN** means original theorem unproved.
 |---|---|---|---|---|
 | G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
 | G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Same Round11/Bishop sine-cosine owner found; classical-object weld and π sample calculation OPEN |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | Native Bishop ring polynomial SOURCE; Round11 shared Pythagorean conditional compiler REUSED; quadruple-angle and Golden OPEN |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E25 native Bishop setoid 4(cos⁴+sin⁴)=3+cos(4x) implication SOURCE (actual configured trig); Round11 cosine quadruple-angle/same-object suppliers and kernel OPEN |
 | G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 paper smoothness; Round11 derivative authority reusable only after same-object weld; sqrt/positivity kernel OPEN |
 | G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
@@ -75,17 +75,17 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop polar integration, π and inverse/sqrt OPEN |
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
-| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 operator/compact resolvent proof; E15 Rayleigh bound PASS; native Agda OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 continuum sector-boundary convergence + E17 exact rational original raster first-eigenvalue bounds; Perron finite row/power owner REUSED, native full Collatz–Wielandt/FD-continuum identification OPEN |
+| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 continuum sector-domain O(m/N) convergence, E17 exact finite raster eigenvalues, E26 native finite edge-square/source proof; Agda full raster vertex assembly and Cartesian FD→continuum OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E20 native SI dimension/nominal-role/c registry bridge SOURCE (power/speed×radius = N m); E19 exact rational radiation-pressure envelope and original SO3/RayLedger reused; real measured transfer OPEN |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E20 SI.Measurement supports uncertainty/source/version; E19 paired simulation contrasts SOURCE; measured SI quantities/physical-source calibration OPEN |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E22 typed SI numeric magnitude proof (P/c×R×signed deflection), E19/E24 rational torque envelope with exact canonical c; measured physical coupling OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E24 strict rational assumed optical input interval propagation; matched IID comparison owner; empirical calibrated/uncertainty data OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06/E13 exact 7-mode Fourier theorem/pass; native sampling owner OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Exact SI constant source adapter + owner-audit/checker SOURCE; branch kernel acceptance and independently measured metrology beyond this cut |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | All seven selected native Gielis sources in parallel checker; E01–E26 proof/source audit; no exact-head Agda kernel receipt |
 
 ## Critical dependencies / max-cut
 
@@ -350,3 +350,65 @@ parity. The previously documented experimental calibration dependency
 is unchanged: SI dimension proofs are not measured newton-metres.
 
 **Proof details:** [E20–E21](GielisBase369ProofTheorems.md).
+
+
+## 2026-11-06 latest exact SI/Bishop/spectral proof tranche E22–E26
+
+**Six active golden-source dependencies now have concrete new producers:**
+
+1. **SI dimension AND magnitude, E22:** Use the actual
+   Mechanical.Quantity/multiplyQuantity to construct
+   \(\tau=((P c^{-1})R)g\) and original mechanicalQuantityToSI
+   to preserve its scalar value; \(g\) is a signed, dimensionless
+   impact response, NOT inferred from SI. Distinct torque and
+   energy roles remain intact.
+2. **Physical spectral SI scaling, E23:** the new native
+   GielisSpectralSIScaleExact source proves inverse-area units
+   and typed rational magnitude scaling. The selected
+   continuum m3 domain satisfies
+   \(9/(4L_+^2)<\lambda_1(L\Omega_3)<
+     1273/(264L_-^2)\;\mathrm{m}^{-2}\)
+   for an assumed positive length interval. No wave speed,
+   resonant frequency or measured physical device is invented.
+3. **Optical input intervals, E24:** rational exact
+   \(|\tau|\le(P_+R_+/c)(1+\eta_+)
+   \sum_{k<B}\eta_+^k\), with valid \(\eta_+\le1\).
+   Cancellation means the model's absolute lower bound is 0.
+4. **Concrete Bishop configured trig, E25:** the actual
+   GielisBishopPolynomialExact source derives
+   \(4(\cos_B^4+\sin_B^4)\simeq3+\cos_B(4x)\)
+   through the native ring solver, Pythagorean and
+   quadruple-angle congruence. It is a **conditional theorem**
+   on the same concrete Bishop functions. The true analytic
+   Round11 quadruple-angle/same-object source and Agda kernel
+   check remain OPEN.
+5. **Finite raster positive-vector bound, E26:** derive
+   the original lowest-eigenvalue enclosure directly from
+   a symmetric-graph ground-state sum-of-squares identity,
+   *without requiring a new PF or connectivity proof*.
+   GielisFiniteGroundStateEdgeExact uses original ring,
+   rational positivity and finite-sum owners for the general
+   weighted-edge-list identity. The exact original raster
+   calculator now checks additional rational vectors;
+   120 independent exact rational graph/vector checks passed.
+   Native full raster vertex assembly and FD-to-continuum remain OPEN.
+
+**Actual source files this tranche:** GielisSpectralSIScaleExact.agda,
+GielisFiniteGroundStateEdgeExact.agda, extensions to
+GielisSIPerronOwnerWeldExact.agda and GielisBishopPolynomialExact.agda,
+gielis_physical_spectral_si.py and gielis_si_optical_interval.py.
+Existing canonical SI c, the MLT→SI bridge and original Balaban
+Perron nonnegative-matrix owners are reused. Seven native
+Gielis sources are now registered in the parallel checker.
+No Agda kernel receipt is asserted.
+
+**Remaining active MAX-CUT leaves (CI/HTML not in scope):**
+G-BISHOP-A: original Round11 same-object sine/cosine and concrete
+cosine doubling/quadrupling; G-BISHOP-B: canonical Bishop π,
+sqrt reciprocal, differentiable radial star geometry and integral;
+G-FOURIER: native \(C_{36}\) cyclotomic inversion on the original
+Fourier-resolution operator; G-SPECTRAL: Agda specific raster
+vertex/edge aggregation and Cartesian FD-to-continuum theorem;
+G-SI-TRANSFER: original impact geometry \(r\times(d_{\rm in}-
+\eta d_{\rm out})\) on the same typed SI magnitude and independently
+calibrated inputs if a physical endpoint is asserted.
