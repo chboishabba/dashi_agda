@@ -18,4 +18,5 @@ module DASHI.Unified.YMClayOriginalWilsonPhysicalRegression where
 
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as FiniteSource
 import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact as NativeBlockedSource
+import DASHI.Physics.YangMills.YMClayOriginalWilsonAffineMarkedPartitionExact as OriginalAffineSource
 import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as PublishedLocalizationCompiler
