@@ -65,3 +65,18 @@ module _
   actualF19WilsonTwoMarkTheorem left right s t =
     F19.originalFullTwoMarkedFibreEqualsActualEffectiveDensity
       theory source bilateral linear physicalWeight left right s t
+
+  actualF19WilsonNormalizedTwoMarkTheorem :
+    (divide : ℝ → ℝ → ℝ)
+    (left right : F19.OriginalCoarseTest theory source bilateral linear)
+    (s t : ℝ) →
+    F19.actualFineNormalizedTwoMarkedSource
+      theory source bilateral linear
+      divide physicalWeight left right s t
+    ≡ F19.actualEffectiveNormalizedTwoMarkedSource
+      theory source bilateral linear
+      divide physicalWeight left right s t
+  actualF19WilsonNormalizedTwoMarkTheorem divide left right s t =
+    F19.originalSamePartitionNormalizedMarkedSource
+      theory source bilateral linear
+      divide physicalWeight left right s t
