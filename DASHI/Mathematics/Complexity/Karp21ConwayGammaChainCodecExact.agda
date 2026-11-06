@@ -23,7 +23,7 @@ open import Data.List.Base using (_++_; length)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_)
 import Data.List.Properties as ListP
-open import Relation.Binary.PropositionalEquality using (cong; sym)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Gamma
@@ -147,3 +147,52 @@ positiveChainRoundTrip :
 positiveChainRoundTrip entries
   rewrite chainDecodeEncode (Conway.positiveEntries entries)
         | parsePositiveEntries entries = refl
+
+------------------------------------------------------------------------
+-- Universal arbitrary-bit prefix exclusion, not only completed tokens.
+-- A full encoded chain has an exact gamma count and therefore cannot
+-- swallow a nonempty raw suffix to become another full encoded chain.
+------------------------------------------------------------------------
+
+justPairInjectSecond :
+  ∀ {xs ys : List Nat} {left right : Word.BitWord} →
+  just (xs , left) ≡ just (ys , right) →
+  left ≡ right
+justPairInjectSecond refl = refl
+
+justPairInjectFirst :
+  ∀ {xs ys : List Nat} {left right : Word.BitWord} →
+  just (xs , left) ≡ just (ys , right) →
+  xs ≡ ys
+justPairInjectFirst refl = refl
+
+chainFullBinaryNoProperPrefix :
+  (left right : List Nat) (suffix : Word.BitWord) →
+  encodeChainWord left ++ suffix ≡ encodeChainWord right →
+  suffix ≡ []
+chainFullBinaryNoProperPrefix left right suffix equal =
+  justPairInjectSecond
+    (trans
+      (sym (chainReadEncodeSuffix left suffix))
+      (trans
+        (cong readChainWithSuffix equal)
+        (trans
+          (sym (cong readChainWithSuffix
+            (ListP.++-identityʳ (encodeChainWord right))))
+          (chainReadEncodeSuffix right []))))
+
+chainEncodeInjective :
+  (left right : List Nat) →
+  encodeChainWord left ≡ encodeChainWord right →
+  left ≡ right
+chainEncodeInjective left right equal =
+  justPairInjectFirst
+    (trans
+      (sym (chainReadEncodeSuffix left []))
+      (trans
+        (cong readChainWithSuffix
+          (trans
+            (sym (ListP.++-identityʳ (encodeChainWord left)))
+            (trans equal
+              (ListP.++-identityʳ (encodeChainWord right)))))
+        (chainReadEncodeSuffix right [])))
