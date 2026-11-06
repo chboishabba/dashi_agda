@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PRESENTATION = ROOT / "DASHI/Moonshine/Y443CoxeterPresentationExact.agda"
 ACTION = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationExact.agda"
 TRACE = ROOT / "DASHI/Moonshine/Y443JMDTracePowerExact.agda"
+HEISENBERG = ROOT / "DASHI/Moonshine/Y443Monster3BTwelveDisjointExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -60,7 +61,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -91,7 +92,11 @@ def assert_source_scope() -> None:
     for symbol in ("powerRepresented", "traceStepThreeX4", "traceStepFourBeta", "traceStepsThreeAndFour"):
         if symbol not in t:
             raise AssertionError(f"missing JMD trace theorem {symbol}")
-    print("PASS source: exact diagram, pair-word and JMD power theorems without listed trust escapes")
+    h = HEISENBERG.read_text()
+    for symbol in ("axis0DoubleTranslationIsNotIdentity", "axis0TripleTranslationIsIdentity", "axis0TripleTranslationEverywhere"):
+        if symbol not in h:
+            raise AssertionError(f"missing order-3/order-2 disjointness theorem {symbol}")
+    print("PASS source: diagram, pair-word, JMD power and Heisenberg falsifier without listed trust escapes")
 
 
 def check_agda() -> None:
