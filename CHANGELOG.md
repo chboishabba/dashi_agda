@@ -1,3 +1,8 @@
+## 2026-11-06 — YM original native R445 reflected OS-form source identity
+
+- Added `YMClayOriginalWilsonNativeOSPullbackExact.agda`: `originalR445ReflectedQuadraticIsFineWilsonQuadratic` is the actual normalized fine Wilson/R445 pushed reflected-quadratic equality, and `originalR445OSReflectionPositiveFromSameFineWilson` derives coarse RP from same-source fine Wilson RP with explicit physical reflection/positive-time compatibility.
+- Corrected the physical max-cut: original existing OS pullback/recombination machinery rules out an unnecessary independent positivity requirement on each crossing-polymer label; the essential physical source/geometry payment is now reflection equivariance, positive-time support and full-form same-source identification, followed by uniform limits.
+
 ## 2026-11-06 — YM actual marked physical original source max-cut
 
 - Added `YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact.agda`: exact selected original native plaquette trace-deficit J marks at every varying periodic cutoff, their gauge/pointwise invariance, normalized Wilson marked polynomial and same-original finite connected covariance.
