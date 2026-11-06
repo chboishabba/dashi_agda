@@ -16,14 +16,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 
 data LegalWindowForRule
-    (machine : Local.ConcreteTapeMachine)
-    (rule : Local.TapeRule
+    (machine : Local.ConcreteTapeMachine) :
+    Local.TapeRule
       (Local.State machine)
-      (Local.Symbol machine)) :
+      (Local.Symbol machine) →
     Local.SixCellWindow machine → Set where
 
   legal-unchanged :
-    ∀ {firstSymbol secondSymbol thirdSymbol} →
+    ∀ {rule firstSymbol secondSymbol thirdSymbol} →
     LegalWindowForRule machine rule
       (Local.six-cell-window
         (Local.plain firstSymbol)
@@ -34,7 +34,7 @@ data LegalWindowForRule
         (Local.plain thirdSymbol))
 
   legal-centered :
-    ∀ {window} →
+    ∀ {rule window} →
     Local.RuleRealizesWindow machine rule window →
     LegalWindowForRule machine rule window
 
@@ -146,44 +146,87 @@ data IsPlainCell {State Symbol : Set} :
     Local.TapeCell State Symbol → Set where
   is-plain : ∀ {symbol} → IsPlainCell (Local.plain symbol)
 
-legalOldLeftPlainForcesNewLeftPlain :
-  ∀ {machine rule oldSymbol oldCenter oldRight newLeft newCenter newRight} →
+-- Old-left-plain alone does NOT imply new-left-plain: realizes-left
+-- and right-overlap-plus-two can introduce a head. Symmetrically
+-- realizes-right and left-overlap-minus-two can head the right cell.
+-- These classifications preserve exactly those cases, rather than
+-- deriving the previously false universal plain-cell invariants.
+
+data IsHeadCell {State Symbol : Set} :
+    Local.TapeCell State Symbol → Set where
+  is-headed : ∀ {state symbol} →
+    IsHeadCell (Local.headed state symbol)
+
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+
+legalPlainTripleNewLeftClassified :
+  ∀ {machine rule first second third newLeft newCenter newRight} →
   LegalWindowForRule machine rule
     (Local.six-cell-window
-      (Local.plain oldSymbol) oldCenter oldRight
+      (Local.plain first) (Local.plain second) (Local.plain third)
       newLeft newCenter newRight) →
-  IsPlainCell newLeft
-legalOldLeftPlainForcesNewLeftPlain legal-unchanged = is-plain
-legalOldLeftPlainForcesNewLeftPlain
-    (legal-centered Local.realizes-left) = is-plain
-legalOldLeftPlainForcesNewLeftPlain
-    (legal-centered Local.realizes-stay) = is-plain
-legalOldLeftPlainForcesNewLeftPlain
-    (legal-centered Local.realizes-right) = is-plain
-legalOldLeftPlainForcesNewLeftPlain left-overlap-minus-two = is-plain
-legalOldLeftPlainForcesNewLeftPlain left-overlap-minus-one = is-plain
-legalOldLeftPlainForcesNewLeftPlain stay-overlap-minus-one = is-plain
-legalOldLeftPlainForcesNewLeftPlain right-overlap-minus-one = is-plain
+  IsPlainCell newLeft ⊎ IsHeadCell newLeft
+legalPlainTripleNewLeftClassified legal-unchanged = inj₁ is-plain
+legalPlainTripleNewLeftClassified left-overlap-minus-two = inj₁ is-plain
+legalPlainTripleNewLeftClassified right-overlap-plus-two = inj₂ is-headed
 
-legalOldRightPlainForcesNewRightPlain :
-  ∀ {machine rule oldLeft oldCenter oldSymbol newLeft newCenter newRight} →
+legalPlainTripleNewRightClassified :
+  ∀ {machine rule first second third newLeft newCenter newRight} →
   LegalWindowForRule machine rule
     (Local.six-cell-window
-      oldLeft oldCenter (Local.plain oldSymbol)
+      (Local.plain first) (Local.plain second) (Local.plain third)
       newLeft newCenter newRight) →
-  IsPlainCell newRight
-legalOldRightPlainForcesNewRightPlain legal-unchanged = is-plain
-legalOldRightPlainForcesNewRightPlain
-    (legal-centered Local.realizes-left) = is-plain
-legalOldRightPlainForcesNewRightPlain
-    (legal-centered Local.realizes-stay) = is-plain
-legalOldRightPlainForcesNewRightPlain
-    (legal-centered Local.realizes-right) = is-plain
-legalOldRightPlainForcesNewRightPlain left-overlap-plus-one = is-plain
-legalOldRightPlainForcesNewRightPlain stay-overlap-plus-one = is-plain
-legalOldRightPlainForcesNewRightPlain right-overlap-plus-one = is-plain
-legalOldRightPlainForcesNewRightPlain right-overlap-plus-two = is-plain
+  IsPlainCell newRight ⊎ IsHeadCell newRight
+legalPlainTripleNewRightClassified legal-unchanged = inj₁ is-plain
+legalPlainTripleNewRightClassified left-overlap-minus-two = inj₂ is-headed
+legalPlainTripleNewRightClassified right-overlap-plus-two = inj₁ is-plain
 
+-- The actual proof boundary used by prefix/suffix propagation:
+-- once one new boundary cell is plain, a legal *all-plain old*
+-- triple cannot spontaneously change the adjacent new middle cell
+-- into a head; the only two all-plain exceptional overlap windows
+-- place their potential new head at one OUTER edge.
+legalPlainTripleNewLeftPlainForcesMiddlePlain :
+  ∀ {machine rule first second third newLeft newCenter newRight} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      (Local.plain first) (Local.plain second) (Local.plain third)
+      newLeft newCenter newRight) →
+  IsPlainCell newLeft → IsPlainCell newCenter
+legalPlainTripleNewLeftPlainForcesMiddlePlain legal-unchanged is-plain =
+  is-plain
+legalPlainTripleNewLeftPlainForcesMiddlePlain left-overlap-minus-two
+    is-plain = is-plain
+legalPlainTripleNewLeftPlainForcesMiddlePlain right-overlap-plus-two ()
+
+legalPlainTripleNewRightPlainForcesMiddlePlain :
+  ∀ {machine rule first second third newLeft newCenter newRight} →
+  LegalWindowForRule machine rule
+    (Local.six-cell-window
+      (Local.plain first) (Local.plain second) (Local.plain third)
+      newLeft newCenter newRight) →
+  IsPlainCell newRight → IsPlainCell newCenter
+legalPlainTripleNewRightPlainForcesMiddlePlain legal-unchanged is-plain =
+  is-plain
+legalPlainTripleNewRightPlainForcesMiddlePlain left-overlap-minus-two ()
+legalPlainTripleNewRightPlainForcesMiddlePlain right-overlap-plus-two
+    is-plain = is-plain
+
+configuredOldLeftPlain :
+  ∀ {machine rule window} →
+  Local.RuleRealizesWindow machine rule window →
+  IsPlainCell (Local.oldLeft window)
+configuredOldLeftPlain Local.realizes-left = is-plain
+configuredOldLeftPlain Local.realizes-stay = is-plain
+configuredOldLeftPlain Local.realizes-right = is-plain
+
+configuredOldRightPlain :
+  ∀ {machine rule window} →
+  Local.RuleRealizesWindow machine rule window →
+  IsPlainCell (Local.oldRight window)
+configuredOldRightPlain Local.realizes-left = is-plain
+configuredOldRightPlain Local.realizes-stay = is-plain
+configuredOldRightPlain Local.realizes-right = is-plain
 
 legalPlainLeftSymbolAgreement :
   ∀ {machine rule oldSymbol newSymbol oldCenter oldRight newCenter newRight} →
