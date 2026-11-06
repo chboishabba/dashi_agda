@@ -30,6 +30,8 @@ on:
       - 'DASHI/Analysis/BishopMachinTwoPointCayleyCompositionExact.agda'
       - 'DASHI/Analysis/BishopK04dK05NativeProductDischargeExact.agda'
       - 'DASHI/Analysis/RiemannOpaqueZetaHalfPlaneCountermodelExact.agda'
+      - 'DASHI/Analysis/BishopFactorDerivativeChainExact.agda'
+      - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
       - 'DASHI/Analysis/BishopMachinRationalCayleyToOriginalComplexExact.agda'
@@ -150,6 +152,7 @@ jobs:
             DASHI/Analysis/BishopOriginalMachinAtanDerivativeGeometricWeldExact.agda
             DASHI/Analysis/BishopOriginalExponentialFiniteFactorDerivativeExact.agda
             DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda
+            DASHI/Analysis/BishopFactorDerivativeChainExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
             DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
             DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
