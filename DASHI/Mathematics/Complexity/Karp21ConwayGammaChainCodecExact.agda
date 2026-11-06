@@ -29,7 +29,7 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryRoundTripExact as Round
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Decode
-import DASHI.Foundations.PrimorialFactorAddressConcrete as Prime
+import DASHI.Mathematics.Complexity.Karp21ConwayTotalChainExact as Conway
 
 encodeEntries : List Nat → Word.BitWord
 encodeEntries [] = []
@@ -119,31 +119,31 @@ chainWireSizeExact entries
     {ys = encodeEntries entries}
         | entryWireSizeExact entries = refl
 
--- The existing four-prime exponent carrier is represented by FOUR
--- chain entries but not interpreted as four Conway arrow parameters.
-exponents : Prime.PrimorialDigits4 → List Nat
-exponents digits =
-  Prime.digit2 digits ∷
-  Prime.digit3 digits ∷
-  Prime.digit5 digits ∷
-  Prime.digit7 digits ∷ []
+-- Positive-only typed source language.  No zero-valued chain entry
+-- can be constructed through this representation.
+parsePositive : List Nat → Maybe (List Conway.Positive)
+parsePositive [] = just []
+parsePositive (zero ∷ rest) = nothing
+parsePositive (suc n ∷ rest) with parsePositive rest
+... | nothing = nothing
+... | just parsed = just (Conway.positive n ∷ parsed)
 
-encodeFactorWord : Prime.PrimorialDigits4 → Word.BitWord
-encodeFactorWord digits = encodeChainWord (exponents digits)
+parsePositiveEntries :
+  (entries : List Conway.Positive) →
+  parsePositive (Conway.positiveEntries entries) ≡ just entries
+parsePositiveEntries [] = refl
+parsePositiveEntries (Conway.positive n ∷ rest)
+  rewrite parsePositiveEntries rest = refl
 
-decodeFactorWord : Word.BitWord → Maybe Prime.PrimorialDigits4
-decodeFactorWord bits with decodeChainWord bits
-... | just (a ∷ b ∷ c ∷ d ∷ []) =
-  just (Prime.primorialDigits4 a b c d)
-... | _ = nothing
+decodePositiveChain : Word.BitWord → Maybe (List Conway.Positive)
+decodePositiveChain bits with decodeChainWord bits
+... | nothing = nothing
+... | just entries = parsePositive entries
 
-factorDecodeEncode :
-  (digits : Prime.PrimorialDigits4) →
-  decodeFactorWord (encodeFactorWord digits) ≡ just digits
-factorDecodeEncode (Prime.primorialDigits4 a b c d)
-  rewrite chainDecodeEncode (a ∷ b ∷ c ∷ d ∷ []) = refl
-
--- Parse is strict: a complete encoded chain cannot absorb a suffix
--- containing another whole gamma token (or even a trailing single bit).
--- The stronger arbitrary-bit prefix-exclusion can be discharged using
--- chainReadEncodeSuffix and a parser uniqueness proof.
+positiveChainRoundTrip :
+  (entries : List Conway.Positive) →
+  decodePositiveChain
+    (encodeChainWord (Conway.positiveEntries entries)) ≡ just entries
+positiveChainRoundTrip entries
+  rewrite chainDecodeEncode (Conway.positiveEntries entries)
+        | parsePositiveEntries entries = refl
