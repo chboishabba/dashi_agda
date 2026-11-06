@@ -254,3 +254,92 @@ globalCNFToDecodedRowEndcaps
       Endcap.globalAllRowsEndcapsGivePhysicalRowPlain
         stateCoverage symbolCoverage colsMinusOne
         rowSlot assignment accepted
+
+------------------------------------------------------------------------
+-- Reverse decoded-row endpoint transport: needed by the ORIGINAL
+-- accepting-run->guarded-SAT completeness assignment.
+------------------------------------------------------------------------
+
+firstDecodedBlockPlainFromFront :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (n : Nat)
+    (rowBits : CNF.Bits (Decode.RowBitsWidth machine (suc n))) →
+  Pattern.FrontPlain
+    (Decode.decodeCells stateCoverage symbolCoverage (suc n) rowBits) →
+  Pattern.IsPlainCell
+    (Canonical.decodeCell stateCoverage symbolCoverage
+      (Block.blockSliceBits Global.here rowBits))
+firstDecodedBlockPlainFromFront
+    stateCoverage symbolCoverage n rowBits Pattern.frontCons =
+  Pattern.is-plain
+
+lastDecodedBlockPlainFromEnd :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (n : Nat)
+    (rowBits : CNF.Bits (Decode.RowBitsWidth machine (suc n))) →
+  Pattern.EndPlain
+    (Decode.decodeCells stateCoverage symbolCoverage (suc n) rowBits) →
+  Pattern.IsPlainCell
+    (Canonical.decodeCell stateCoverage symbolCoverage
+      (Block.blockSliceBits (Endcap.lastPhysicalColumn n) rowBits))
+lastDecodedBlockPlainFromEnd
+    stateCoverage symbolCoverage zero rowBits Pattern.endOne =
+  Pattern.is-plain
+lastDecodedBlockPlainFromEnd {machine}
+    stateCoverage symbolCoverage (suc n) rowBits
+    (Pattern.endMore tailEnd) =
+  lastDecodedBlockPlainFromEnd
+    stateCoverage symbolCoverage n
+    (Canonical.dropBits (Canonical.CellWidth machine) rowBits)
+    tailEnd
+
+-- Establish physical endpoint facts for the same extended assignment,
+-- from the EXACT decoded row's two syntactic outermost cells.
+decodedEndcapsToPhysicalBlocks :
+  ∀ {machine steps rowIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (colsMinusOne : Nat)
+    (rowSlot : Global.Slot rowIndex (suc steps))
+    (assignment :
+      CNF.Bits
+        (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  DecodedRowEndcapsPlain
+    stateCoverage symbolCoverage rowSlot assignment →
+  Endcap.PhysicalRowEndcapCellsPlain
+    stateCoverage symbolCoverage rowSlot assignment
+decodedEndcapsToPhysicalBlocks
+    stateCoverage symbolCoverage colsMinusOne
+    rowSlot assignment decoded = record
+  { Endcap.firstPhysicalCellIsPlain =
+      subst
+        (λ cellBits → Pattern.IsPlainCell
+          (Canonical.decodeCell stateCoverage symbolCoverage cellBits))
+        (sym (extendedRowCellSameObject rowSlot Global.here assignment))
+        (firstDecodedBlockPlainFromFront
+          stateCoverage symbolCoverage colsMinusOne rowBits
+          (front decoded))
+  ; Endcap.lastPhysicalCellIsPlain =
+      subst
+        (λ cellBits → Pattern.IsPlainCell
+          (Canonical.decodeCell stateCoverage symbolCoverage cellBits))
+        (sym (extendedRowCellSameObject
+          rowSlot (Endcap.lastPhysicalColumn colsMinusOne) assignment))
+        (lastDecodedBlockPlainFromEnd
+          stateCoverage symbolCoverage colsMinusOne rowBits
+          (back decoded))
+  }
+  where
+    rowBits =
+      Global.rowSliceBits rowSlot
+        (FormulaSem.baseTraceBits assignment)
