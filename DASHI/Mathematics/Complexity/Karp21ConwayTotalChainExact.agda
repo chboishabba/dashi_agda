@@ -222,11 +222,13 @@ runAppend state (n ∷ pre) post =
 
 advanceOneInvariant :
   (state : Prefix) (entries : List Nat) →
+  extension state 1 ≡ value state →
   extension (advance state entries) 1
     ≡ value (advance state entries)
-advanceOneInvariant state [] = refl
-advanceOneInvariant state (n ∷ rest) =
+advanceOneInvariant state [] invariant = invariant
+advanceOneInvariant state (n ∷ rest) invariant =
   advanceOneInvariant (push state n) rest
+    (pushOneInvariant state n)
 
 conwayDropAfterInternalOne :
   (a : Nat) (before after : List Nat) →
@@ -237,7 +239,8 @@ conwayDropAfterInternalOne a before after =
     (runAppend (start a) before (1 ∷ after))
     (trans
       (dropAfterOne (advance (start a) before)
-        (advanceOneInvariant (start a) before) after)
+        (advanceOneInvariant (start a) before
+          (startOneInvariant a)) after)
       (sym (runAdvance (start a) before)))
 
 -- Concrete rules small enough for ordinary normalization.
