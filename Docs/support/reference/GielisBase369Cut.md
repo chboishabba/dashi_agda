@@ -209,3 +209,12 @@ All G01–G21 native/physical acceptance levels are recorded in
 [GielisBase369Roadmap.md](GielisBase369Roadmap.md). No false automatic
 promotion occurs from an external classical theorem, symbolic algebra,
 or a simulated emitter to a fully kernel-checked empirical proof.
+
+
+### Exact-head static source-audit evidence
+
+\`scripts/gielis_base369_source_audit.py\` parses the actual
+Agda tables and 342 explicit theorem clauses. Independent inspection
+of the branch contents checked **648 literal integer/finite cases**
+successfully. No Agda kernel run was available, so this is
+**not** a Golden acceptance claim. See the [proof ledger](GielisBase369Roadmap.md).
