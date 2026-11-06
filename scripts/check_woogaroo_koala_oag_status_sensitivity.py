@@ -61,7 +61,7 @@ ROWS = {
 
 def discount(annual_extinction:F) -> F:
     assert F(0) <= annual_extinction <= F(1)
-    return (F(1)-annual_extinction)**YEARS
+    return (F(1)+annual_extinction)**(-YEARS)
 
 def contribution_percent(row:Row, annual_extinction:F) -> F:
     raw_gain=F(row.area_tenths,10)*F(row.q_with-row.q_without,10)
@@ -130,8 +130,8 @@ def verify_source():
             k:formatted(sum(v)) for k,v in model.items()},
         "reconstructed_vulnerable_percent":formatted(exact_sum(vulnerable)),
         "reconstructed_endangered_percent":formatted(exact_sum(endangered)),
-        "discounter_vulnerable":"(0.998)^20",
-        "discounter_endangered":"(0.988)^20",
+        "discounter_vulnerable":"(1.002)^(-20)",
+        "discounter_endangered":"(1.012)^(-20)",
         "discount_ratio_exact":f"{ratio.numerator}/{ratio.denominator}",
         "AU2_one_point_quality_loss_percent_points":formatted(loss),
         "AU2_one_point_lower_aggregate_percent":formatted(adjusted),
