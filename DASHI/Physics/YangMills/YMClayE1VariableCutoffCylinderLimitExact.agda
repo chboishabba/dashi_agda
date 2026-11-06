@@ -2,7 +2,7 @@
 module DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact where
 
 ------------------------------------------------------------------------
--- CLAY E1: the real original Wilson family has CHANGING link carriers.
+-- CLAY E1: a SAFE, measure-parametric theorem for CHANGING link carriers.
 -- A cylinder is one continuum-labelled observable with a realization
 -- on EVERY finite lattice; it is not a function on a fictitious fixed
 -- Configuration. No global limit operator on arbitrary real sequences.
@@ -12,13 +12,13 @@ module DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact where
 -- continuum expectation for the same source. Genuine convergence,
 -- projective consistency, gauge covariance and OS reconstruction require
 -- original source evidence; no Clay conclusion is assumed or proved.
+-- No import of RealAnalysisAxioms or an unverified physical scalar socket.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
-import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 record CylinderRealization
     (Configuration : Nat → Set)
@@ -70,14 +70,16 @@ record SelectedScalarConvergence (Scalar : Set) : Set₁ where
 open SelectedScalarConvergence public
 
 record ActualVariableCutoffCylinderFamily
-    (Configuration : Nat → Set)
+    (Configuration Measure : Nat → Set)
     (Observable Scalar : Set)
     (realization : CylinderRealization Configuration Observable Scalar)
     (laws : SelectedScalarConvergence Scalar) : Set₁ where
   field
     -- These are the original n-dependent Wilson/Haar measure objects.
-    finitePhysicalMeasure :
-      (n : Nat) → Physical.PhysicalFiniteYMMeasure (Configuration n) Scalar
+    finitePhysicalMeasure : (n : Nat) → Measure n
+
+    originalNormalizedExpectation :
+      (n : Nat) → Measure n → (Configuration n → Scalar) → Scalar
 
     -- This is the SAME literal normalization at every physical cutoff.
     finiteExpectation :
@@ -86,8 +88,7 @@ record ActualVariableCutoffCylinderFamily
     finiteExpectationIsOriginalWilson :
       ∀ n observable →
       finiteExpectation n observable
-      ≡ Physical.normalizedExpectation
-          (finitePhysicalMeasure n)
+      ≡ originalNormalizedExpectation n (finitePhysicalMeasure n)
           (CylinderRealization.realization realization n observable)
 
     -- Finite Wilson/Haar identities are derived from actual integration
@@ -123,18 +124,17 @@ open ActualVariableCutoffCylinderFamily public
 
 -- Actual continuum measure is the selected functional with certified
 -- original changing-cutoff expectation convergence.
-literalVariableCutoffContinuumMeasure :
-  ∀ {Configuration Observable Scalar realization laws} →
+literalVariableCutoffContinuumExpectation :
+  ∀ {Configuration Measure Observable Scalar realization laws} →
   ActualVariableCutoffCylinderFamily
-    Configuration Observable Scalar realization laws →
-  Physical.PhysicalContinuumYMMeasure Observable Scalar
-literalVariableCutoffContinuumMeasure source =
-  Physical.physicalContinuumMeasure (continuumExpectation source)
+    Configuration Measure Observable Scalar realization laws →
+  Observable → Scalar
+literalVariableCutoffContinuumExpectation source = continuumExpectation source
 
 variableCutoffContinuumZero :
-  ∀ {Configuration Observable Scalar realization laws}
+  ∀ {Configuration Measure Observable Scalar realization laws}
     (source : ActualVariableCutoffCylinderFamily
-      Configuration Observable Scalar realization laws) →
+      Configuration Measure Observable Scalar realization laws) →
   continuumExpectation source (zeroObservable realization) ≡ zero laws
 variableCutoffContinuumZero {laws = laws} source =
   convergenceUnique laws _
@@ -146,9 +146,9 @@ variableCutoffContinuumZero {laws = laws} source =
       (constantConverges laws (zero laws)))
 
 variableCutoffContinuumNormalized :
-  ∀ {Configuration Observable Scalar realization laws}
+  ∀ {Configuration Measure Observable Scalar realization laws}
     (source : ActualVariableCutoffCylinderFamily
-      Configuration Observable Scalar realization laws) →
+      Configuration Measure Observable Scalar realization laws) →
   continuumExpectation source (oneObservable realization) ≡ one laws
 variableCutoffContinuumNormalized {laws = laws} source =
   convergenceUnique laws _
@@ -160,9 +160,9 @@ variableCutoffContinuumNormalized {laws = laws} source =
       (constantConverges laws (one laws)))
 
 variableCutoffContinuumAdd :
-  ∀ {Configuration Observable Scalar realization laws}
+  ∀ {Configuration Measure Observable Scalar realization laws}
     (source : ActualVariableCutoffCylinderFamily
-      Configuration Observable Scalar realization laws)
+      Configuration Measure Observable Scalar realization laws)
     left right →
   continuumExpectation source (addObservable realization left right)
     ≡ add laws
@@ -178,9 +178,9 @@ variableCutoffContinuumAdd {laws = laws} source left right =
         (originalWilsonConverges source right)))
 
 variableCutoffContinuumScale :
-  ∀ {Configuration Observable Scalar realization laws}
+  ∀ {Configuration Measure Observable Scalar realization laws}
     (source : ActualVariableCutoffCylinderFamily
-      Configuration Observable Scalar realization laws)
+      Configuration Measure Observable Scalar realization laws)
     scalar observable →
   continuumExpectation source (scalarObservable realization scalar observable)
     ≡ multiply laws scalar (continuumExpectation source observable)
@@ -193,9 +193,9 @@ variableCutoffContinuumScale {laws = laws} source scalar observable =
         (originalWilsonConverges source observable)))
 
 variableCutoffContinuumPositive :
-  ∀ {Configuration Observable Scalar realization laws}
+  ∀ {Configuration Measure Observable Scalar realization laws}
     (source : ActualVariableCutoffCylinderFamily
-      Configuration Observable Scalar realization laws)
+      Configuration Measure Observable Scalar realization laws)
     observable →
   PositiveCylinder source observable →
   Nonnegative laws (continuumExpectation source observable)
