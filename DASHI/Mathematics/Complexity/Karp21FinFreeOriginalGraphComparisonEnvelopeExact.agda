@@ -16,7 +16,10 @@ module DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelope
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_; _+_)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using ([]; _∷_)
+open import Relation.Binary.PropositionalEquality using (subst; trans)
+open import Data.Nat.Tactic.RingSolver using (solve)
 open import Data.List.Base using (length)
 open import Data.Nat.Base using (_≤_)
 open import Data.Maybe.Base using (just)
@@ -28,6 +31,8 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact as Validate
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact as History
+import DASHI.Core.EfficientRecoverableQuotientExact as ERQ
+import DASHI.Mathematics.Complexity.PolynomialBoundClosureExact as Poly
 
 comparisonCountForParsedGraph : Runtime.ParsedRawGraph → Nat
 comparisonCountForParsedGraph graph =
@@ -74,3 +79,72 @@ successfulOriginalGraphCombinedComparisonBound word graph parsed =
       (NatP.*-mono-≤
         NatP.≤-refl
         (History.successfulWordEdgeCountBound word graph parsed)))
+
+------------------------------------------------------------------------
+-- Native DASHI degree-two polynomial certificate on the combined
+-- ORIGINAL comparator-operation count C(L) + 5L.
+------------------------------------------------------------------------
+
+positiveNatAtMostSquare : (n : Nat) → n ≤ n * n
+positiveNatAtMostSquare zero = NatP.≤-refl
+positiveNatAtMostSquare (suc n) =
+  subst (λ lower → lower ≤ suc n * suc n)
+    (NatP.*-identityʳ (suc n))
+    (NatP.*-mono-≤
+      NatP.≤-refl (s≤s z≤n))
+
+import Data.Nat.Base using (z≤n; s≤s)
+
+squareNativePolynomial :
+  ERQ.PolynomialBound (λ n → n * n)
+squareNativePolynomial =
+  Poly.productPolynomialBound
+    History.identityPolynomial History.identityPolynomial
+
+squareAtMostNativePow :
+  (n : Nat) → n * n ≤ ERQ.pow (suc n) 2
+squareAtMostNativePow n =
+  subst (λ upper → n * n ≤ upper)
+    (NatP.*-identityˡ (ERQ.pow (suc n) 2))
+    (ERQ.bounded squareNativePolynomial n)
+
+natBelowSquaredPolynomial :
+  (n : Nat) → n ≤ ERQ.pow (suc n) 2
+natBelowSquaredPolynomial n =
+  NatP.≤-trans
+    (positiveNatAtMostSquare n)
+    (squareAtMostNativePow n)
+
+sevenFactorIdentity :
+  (x : Nat) → 2 * x + 5 * x ≡ 7 * x
+sevenFactorIdentity x = solve (x ∷ [])
+
+combinedComparisonPolynomial : Nat → Nat
+combinedComparisonPolynomial n = History.comparisonPolynomial n + 5 * n
+
+combinedComparisonPolynomialBound :
+  ERQ.PolynomialBound combinedComparisonPolynomial
+combinedComparisonPolynomialBound =
+  ERQ.polynomialBound 7 2
+    (λ n →
+      subst
+        (λ upper → combinedComparisonPolynomial n ≤ upper)
+        (sevenFactorIdentity (ERQ.pow (suc n) 2))
+        (NatP.+-mono-≤
+          (ERQ.bounded History.comparisonPolynomialBound n)
+          (NatP.*-mono-≤
+            NatP.≤-refl (natBelowSquaredPolynomial n))))
+
+originalSuccessfulWordCombinedPolynomialClock :
+  (word : Word.BitWord)
+  (graph : Runtime.ParsedRawGraph) →
+  Runtime.readRawGraphWord word ≡ just graph →
+  actualValidatedComparisonCount graph ≤
+    ERQ.coefficient combinedComparisonPolynomialBound *
+      ERQ.pow (suc (Word.encodingSize word))
+        (ERQ.exponent combinedComparisonPolynomialBound)
+originalSuccessfulWordCombinedPolynomialClock word graph parsed =
+  NatP.≤-trans
+    (successfulOriginalGraphCombinedComparisonBound word graph parsed)
+    (ERQ.bounded combinedComparisonPolynomialBound
+      (Word.encodingSize word))
