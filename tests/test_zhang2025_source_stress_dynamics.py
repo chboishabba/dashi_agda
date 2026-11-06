@@ -187,6 +187,36 @@ class ZhangPhysicalSourceRegression(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "measurement interval"):
             s.evaluate_pair(p)
 
+    def test_nonzero_clock_uncertainty_widens_force_residual(self):
+        baseline = s.evaluate_pair(case())
+        p = case()
+        for mode in ("on", "off"):
+            for f in p[mode]["frames"]:
+                f["t_s_bound"] = .001
+        expanded = s.evaluate_pair(p)
+        old = baseline["paired_frames"][0]["paired_residual_N"]
+        new = expanded["paired_frames"][0]["paired_residual_N"]
+        self.assertLessEqual(new[0], old[0])
+        self.assertGreaterEqual(new[1], old[1])
+
+    def test_nonzero_E_uncertainty_widens_force_residual(self):
+        baseline = s.evaluate_pair(case())
+        p = case()
+        for f in p["on"]["frames"]:
+            f["E_x_V_m"] = bounded(1000., 100.)
+        expanded = s.evaluate_pair(p)
+        old = baseline["paired_frames"][0]["paired_residual_N"]
+        new = expanded["paired_frames"][0]["paired_residual_N"]
+        self.assertLess(new[0], old[0])
+        self.assertGreater(new[1], old[1])
+
+    def test_time_interval_overlap_rejected(self):
+        p = case()
+        for f in p["on"]["frames"]:
+            f["t_s_bound"] = .51
+        with self.assertRaisesRegex(ValueError, "timestamp intervals"):
+            s.evaluate_pair(p)
+
     def test_source_not_allowed_to_claim_pais_instrument(self):
         p = case()
         p["on"]["source_class"] = "Pais-HFGWG"
