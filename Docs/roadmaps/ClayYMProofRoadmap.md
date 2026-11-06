@@ -1,3 +1,22 @@
+## 7 November 2026 — canonical CLAY endpoint cut (supersedes oversized M.01–M.05 priority)
+
+The **authoritative minimum proof frontier** is now [`YMClayMinimalEndpointMaxCut20261107.md`](../physics/YMClayMinimalEndpointMaxCut20261107.md). Prior ten-gate and M.01–M.05 inventories are **implementation dependencies only**, not Clay prerequisites or the active priority list.
+
+For each externally specified compact simple group `G`, prove:
+- **E1:** construct the actual nontrivial candidate four-dimensional continuum Yang–Mills Schwinger theory from the selected source, with full accepted OS/Wightman-strength axioms and local gauge-invariant observables.
+- **D1** (only for the selected direct source route): prove one physical cutoff/volume-uniform selected R320 differentiated Wilson source bound on **that exact E1 family**; consume R295/R313/R296/R333 rather than rebuilding the compiler.
+- **D2:** construct the *same reconstructed* `H_G`, vacuum and spectral transfer identification, proving `sigma(H_G) ⊂ {0} ∪ [Delta_G,∞)` with `Delta_G > 0` in physical units.
+- **N1:** supply an actual nontrivial continuum local gauge-invariant witness on the E1 source; the existing RG fourth-cumulant charge route is sufficient but stronger than logically necessary.
+- **G1:** quantify independently over all externally specified compact simple `G`, allowing group-dependent mass-gap constants. No SU(2) or SUN-only scope promotion.
+
+R443/R445/F19/CMP119/122/CMP116, fixed 1024-link and abstract compatibility record work is **deprioritized** unless it directly supplies E1/D1/D2/N1/G1. No observer, TSVF, Lorentz or KK work enters Clay YM.
+
+**Important semantic check:** Existing `BalabanOSMassGapClosure` and `YangMillsClayLiteralTopDownConstructionExact` package endpoint semantics in externally supplied `Set` fields. Their assembly theorems are not an unconditional derivation of a physical 4D QFT. A required endpoint cannot be paid by passing a new record containing its desired conclusion.
+
+Status: source audit and roadmap correction committed; no Clay proof, Agda exact-head receipt or physical endpoint source supplied by this update.
+
+---
+
 ## 6 November YM M.01/M.02 deep source implementation
 
 New original-source Agda owners: `YMClayNative1024ClosedReindexHaarConsequencesExact`, `YMClayNative1024WeightedWilsonReindexExact`, `YMClayNative1024FullMarkedWilsonReindexExact`, `YMClayOriginalWilsonF19ConcreteWeightExact`, `YMClayNativePairsSpectatorsFubiniExact`, and `YMClayOriginalWilsonPhysicalF19PartitionExact`. The last three identify the original complete Gibbs density as the interacting F19 pair/spectator weight and provide an arbitrary-integrand flat ordered product-Haar to nested pair/spectator equality. The physical original Wilson partition is source-written as the same nested F19 fine partition. The F19 full two-marked and normalized effective-density identities are instantiated using that physical source.
