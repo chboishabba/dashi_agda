@@ -23,11 +23,12 @@ module DASHI.Geometry.GielisSIPerronOwnerWeldExact where
 
 open import Agda.Builtin.Bool using (Bool; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Integer using (+_; -[1+_])
 open import Agda.Builtin.Int using (pos)
 open import Agda.Builtin.String using (String)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; _≤_; _*_)
 
 import DASHI.Physics.Units.SI as SI
 import DASHI.Physics.Units.SIMetrologyBridge as SIMetrology
@@ -154,6 +155,93 @@ angularImpulseIsDistinctFromPower :
   SI.dim (pos 2) SI.one SI.minusOne
     SI.zeroI SI.zeroI SI.zeroI SI.zeroI
 angularImpulseIsDistinctFromPower = refl
+
+
+------------------------------------------------------------------------
+-- PAY THE MAGNITUDE TRANSPORT, not only the dimension-labelled target.
+-- The payload uses the existing dimension-indexed Mechanical.Quantity
+-- and its multiplyQuantity owner; the SI conversion comes from the
+-- existing YangMillsSIScalingEndpointExact bridge. No unitless
+-- scalar is silently called a measured optical watt.
+------------------------------------------------------------------------
+
+inverseSpeedQuantity : Set
+inverseSpeedQuantity =
+  Mechanical.Quantity ℚ inverseSpeedDimension
+
+powerQuantity : Set
+powerQuantity =
+  Mechanical.Quantity ℚ Mechanical.powerDimension
+
+radiusQuantity : Set
+radiusQuantity =
+  Mechanical.Quantity ℚ Mechanical.lengthDimension
+
+modelOpticalForce :
+  powerQuantity →
+  inverseSpeedQuantity →
+  Mechanical.Quantity ℚ
+    (Mechanical._⊗ᴰ_ Mechanical.powerDimension
+      inverseSpeedDimension)
+modelOpticalForce power inverseSpeed =
+  Mechanical.multiplyQuantity _*_ power inverseSpeed
+
+modelOpticalTorqueRaw :
+  powerQuantity →
+  inverseSpeedQuantity →
+  radiusQuantity →
+  Mechanical.Quantity ℚ
+    (Mechanical._⊗ᴰ_
+      (Mechanical._⊗ᴰ_ Mechanical.powerDimension
+        inverseSpeedDimension)
+      Mechanical.lengthDimension)
+modelOpticalTorqueRaw power inverseSpeed radius =
+  Mechanical.multiplyQuantity _*_
+    (modelOpticalForce power inverseSpeed) radius
+
+modelOpticalTorque :
+  powerQuantity →
+  inverseSpeedQuantity →
+  radiusQuantity →
+  Mechanical.Quantity ℚ Mechanical.energyDimension
+modelOpticalTorque power inverseSpeed radius =
+  subst (Mechanical.Quantity ℚ)
+    torqueFromPowerOverSpeedAndRadius
+    (modelOpticalTorqueRaw power inverseSpeed radius)
+
+modelOpticalTorqueHasActualMagnitude :
+  ∀ (power : ℚ) (inverseSpeed : ℚ) (radius : ℚ) →
+  Mechanical.magnitude
+    (modelOpticalTorque
+      (Mechanical.quantity power)
+      (Mechanical.quantity inverseSpeed)
+      (Mechanical.quantity radius))
+  ≡ (power * inverseSpeed) * radius
+modelOpticalTorqueHasActualMagnitude power inverseSpeed radius = refl
+
+modelOpticalTorqueInExistingSI :
+  powerQuantity →
+  inverseSpeedQuantity →
+  radiusQuantity →
+  MechanicalSI.SIIndexedQuantity ℚ SI.Energy
+modelOpticalTorqueInExistingSI power inverseSpeed radius =
+  MechanicalSI.mechanicalQuantityToSI
+    (modelOpticalTorque power inverseSpeed radius)
+
+modelOpticalTorqueSIMagnitude :
+  ∀ (power : ℚ) (inverseSpeed : ℚ) (radius : ℚ) →
+  MechanicalSI.magnitude
+    (modelOpticalTorqueInExistingSI
+      (Mechanical.quantity power)
+      (Mechanical.quantity inverseSpeed)
+      (Mechanical.quantity radius))
+  ≡ (power * inverseSpeed) * radius
+modelOpticalTorqueSIMagnitude power inverseSpeed radius = refl
+
+-- SI and MLT dimension equality is a genuine type-indexed transport.
+-- A physical sample requires (among other things) a calibrated P,
+-- source direction distribution, actual wall reflectivity, normal and
+-- hit position; none is introduced as an equality by this construction.
 
 ------------------------------------------------------------------------
 -- Canonical exact speed-of-light carrier, with no fabricated authority.
