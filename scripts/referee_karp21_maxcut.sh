@@ -54,6 +54,7 @@ python3 scripts/check_karp21_tape_boundary_ghost.py
 python3 scripts/check_karp21_tape_guarded_uniqueness_small.py
 python3 scripts/check_karp21_canonical_endcap_cnf.py
 python3 scripts/check_karp21_guarded_sat_same_object.py
+python3 scripts/check_karp21_uniform_row_width.py
 python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
