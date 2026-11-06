@@ -29,3 +29,8 @@ import DASHI.Physics.Foundations.TSVFOriginalForwardToNativeWilsonWordGramExact
 -- real-span* equality and two-way Gram-observational quotient transport.
 import DASHI.Physics.Foundations.TSVFOriginalMeasuredFiniteSpanR445Exact
   as OriginalObserverNativeFiniteSpan
+
+-- Constructive-native Bishop complex conjugate-linear finite cyclic span
+-- setoid; separate from axiomatic real OS and the --safe Golden root.
+import DASHI.Physics.Foundations.TSVFBishopSetoidComplexCyclicSpanGramExact
+  as OriginalBishopComplexSpan
