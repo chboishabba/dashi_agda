@@ -82,12 +82,13 @@ threeLegTriangle a b c d =
   let open RP.ℝ-Solver
   in
   RP.≤-respˡ-≃
-    (RP.∣-∣-cong
-      (solve 4
+    (RP.≃-symm
+      (RP.∣-∣-cong
+        (solve 4
         (λ a′ b′ c′ d′ →
           a′ ⊖ d′
           ⊜ (a′ ⊖ b′) ⊕ ((b′ ⊖ c′) ⊕ (c′ ⊖ d′)))
-        RP.≃-refl a b c d))
+        RP.≃-refl a b c d)))
     (RP.≤-trans
       (RP.∣x+y∣≤∣x∣+∣y∣
         (R._-_ a b)
