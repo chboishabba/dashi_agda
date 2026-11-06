@@ -14,6 +14,7 @@ open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
 import DASHI.Biology.Physical.BiologicalStochasticFutureLumpingExact as Original
+import DASHI.Cognition.PNF.RationalMarkovLumpingFutureExact as Markov
 
 record NormalizedRationalBranches : Set where
   constructor normalizedRationalBranches
@@ -100,3 +101,69 @@ arbitraryNormalizedWeightsPreserveAllControlledFutures
   weightedSameValue weights
     (weightedCoarseWord rest observable
       (Bio.coarseStep a (Bio.project state)))
+
+------------------------------------------------------------------------
+-- Constructive Markov-lumping owner (same native interface as Round-22).
+-- Supplies full finite horizon closure, not only selected source words.
+------------------------------------------------------------------------
+
+weightedStepFactors :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention)
+  (observable : Markov.FactoredObservable Bio.project)
+  (state : Bio.BiologicalState) →
+  weightedFineStep weights action
+    (Markov.fineObservable observable) state
+  ≡ weightedCoarseStep action
+    (Markov.coarseObservable observable)
+    (Bio.project state)
+weightedStepFactors weights action observable state
+  rewrite Markov.factors observable (Bio.step action state)
+        | Markov.factors observable
+            (Original.flipMarker (Bio.step action state))
+        | Original.flipPreservesCoarseCode (Bio.step action state)
+        | Bio.projectionCommutes action state =
+  weightedSameValue weights
+    (Markov.coarseObservable observable
+      (Bio.coarseStep action (Bio.project state)))
+
+parametricMarkovLumping :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention) →
+  Markov.ConstructiveMarkovLumping
+    Bio.BiologicalState Bio.FutureSufficientCode
+parametricMarkovLumping weights action =
+  Markov.constructiveMarkovLumping
+    Bio.project
+    (weightedFineStep weights action)
+    (weightedCoarseStep action)
+    (λ observable →
+      Markov.factoredObservable
+        (weightedFineStep weights action
+          (Markov.fineObservable observable))
+        (weightedCoarseStep action
+          (Markov.coarseObservable observable))
+        (weightedStepFactors weights action observable))
+    (λ observable state → refl)
+    (λ observable code → refl)
+
+parametricAllFiniteHorizonsRemainCoarse :
+  (weights : NormalizedRationalBranches)
+  (action : Bio.Intervention)
+  (horizon : Nat)
+  (observable : Bio.FutureSufficientCode → ℚ)
+  (state : Bio.BiologicalState) →
+  Markov.fineObservable
+    (Markov.iterateFactored
+      (parametricMarkovLumping weights action) horizon
+      (Markov.initialFactoredObservable
+        (parametricMarkovLumping weights action) observable)) state
+  ≡ Markov.coarseObservable
+    (Markov.iterateFactored
+      (parametricMarkovLumping weights action) horizon
+      (Markov.initialFactoredObservable
+        (parametricMarkovLumping weights action) observable))
+    (Bio.project state)
+parametricAllFiniteHorizonsRemainCoarse weights action horizon observable state =
+  Markov.allFiniteHorizonsRemainCoarseFactored
+    (parametricMarkovLumping weights action) horizon observable state
