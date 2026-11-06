@@ -9,7 +9,7 @@ module DASHI.Biology.Physical.BiologicalParametricStochasticLumpingExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
-open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _*_)
+open import Data.Rational.Base using (ℚ; 1ℚ; _+_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve-∀)
 
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
@@ -23,9 +23,6 @@ record NormalizedRationalBranches : Set where
     sumIsOne : retainWeight + flipWeight ≡ 1ℚ
 
 open NormalizedRationalBranches public
-
-fairBranches : NormalizedRationalBranches
-fairBranches = normalizedRationalBranches ½ ½ (Original.halfPlusHalf 1ℚ)
 
 weightedSameValue :
   (weights : NormalizedRationalBranches) (value : ℚ) →
