@@ -6,9 +6,23 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import check_zhang2025_quantitative_consumers as q
+import check_zhang2025_em_gravity_bidi as ordinary
 
 
 class QuantitativeConsumerTests(unittest.TestCase):
+    def test_independent_gravitics_reference_dielectrophoresis(self):
+        # Source: gravitics::electrogravity, docs.rs 0.5.11, 2026-11-06.
+        # Classical dilute dielectric approximation, independent SI formula.
+        volume_m3 = .02 * .02 * .00015
+        alpha = 8.8541878128e-12 * volume_m3 * (2.2 - 1)
+        result = ordinary.linear_dielectrophoresis(alpha, 2e16)
+        self.assertAlmostEqual(result * 1e3, 6.375015225216, places=3)
+
+    def test_density_material_independence_countercontrast(self):
+        # Same volume classical dielectric-force -> acceleration inversely
+        # proportional to mass density; gravity's free-fall is universal.
+        self.assertAlmostEqual(19300. / 950., 20.31578947368421)
+
     def test_toroid_mass_range_and_95_ci_missing(self):
         r = q.report_2025()
         self.assertEqual(r["mass_g"]["ratio_max_to_min"], 40)
