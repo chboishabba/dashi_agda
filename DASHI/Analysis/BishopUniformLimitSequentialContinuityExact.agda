@@ -191,7 +191,7 @@ uniformLimitSequentialContinuity approximation f
                         q ⊕ (h ⊕ q′) ⊜ (q ⊕ q′) ⊕ h)
                       RP.≃-refl quarter half quarter ⟩
               R._+_ (R._+_ quarter quarter) half
-                ≈⟨ RP.+-congʳ half (halfPlusHalf (2 * k)) ⟩
+                ≈⟨ RP.+-congˡ half (halfPlusHalf (2 * k)) ⟩
               R._+_ half half
                 ≈⟨ halfPlusHalf k ⟩
               whole ∎
