@@ -214,3 +214,17 @@ The Agda checker uses the repository parallel-checker wrapper: source/curl/quant
 | Formal acceptance | source, tests and workflow committed | exact current-head Agda --safe and legacy-check receipts |
 
 **Scientific boundary:** no mathematical compiler can supply measurements that were never reported. The computational cut now exposes the shortest experimental path, not an undocumented assertion that the full physical apparatus has been validated.
+
+
+### Subsequent precision audit: measurement-time and source-field uncertainty
+
+The classical inverse-dynamics adapters now require the electric field on the selected displacement axis as a calibrated SI interval and require every frame to carry a separate positive/negative clock error bound and timing evidence receipt. They propagate those time intervals through nonuniform-interval velocity/acceleration estimates. Overlapping adjacent timestamp ranges fail closed; no instrumental precision is invented. The torsional consumer applies the same time-interval treatment. New regressions prove that increasing clock or field uncertainty widens residual bounds rather than yielding spurious significance.
+
+The data-acquisition email is prepared, **not sent**, at [Zhang2025OriginalDataAcquisitionRequest20261106.md](Zhang2025OriginalDataAcquisitionRequest20261106.md). The user must approve sender and contact; no claim is made that authors have replied.
+
+### Release / acceptance distinction
+
+- **Source written and committed**: conditional translation/torsion field-to-motion consumers, vacuum Maxwell stress formula checks, source identity, safe finite curl/gradient proof, external published measurement screens, independently paired conditional confidence-interval compiler, actual-byte SHA-256 manifest verifier, runnable synthetic fixtures, tests, diagrams/documented max-cut.
+- **Source semantics still dependent on source data**: actual measured electromagnetic field gradients, material charge/permittivity/magnetisation and hysteresis, nontrivial original experimental waveforms, measured supports/nuisance, total conserved matter+field stress and source Einstein solution.
+- **Laboratory-science gate not paid by code**: independently authenticated ON/OFF original runs and a separate lab; without them the numerical residual is not an experimental result.
+- **Formal checker status**: the repository parallel checker has committed targets; source-level Agda correctness is not asserted as kernel-accepted until the exact-head invocation returns a successful receipt.
