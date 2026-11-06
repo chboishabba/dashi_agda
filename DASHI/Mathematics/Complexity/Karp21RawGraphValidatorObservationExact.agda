@@ -22,7 +22,7 @@ module DASHI.Mathematics.Complexity.Karp21RawGraphValidatorObservationExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Bool using (Bool; true)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Nat.Base using (_<_)
 import Data.Nat.Properties as NatP
@@ -86,8 +86,10 @@ validateRawEdgesObservesFields :
 validateRawEdgesObservesFields n prev [] = raw-list-nil
 validateRawEdgesObservesFields
   n prev (Decode.raw-edge u v w ∷ tail)
-  with NatP._<?_ u v | NatP._<?_ v n
-       | Decode.strictAfter prev u v
+  with NatP._<?_ u v | NatP._<?_ v n | Decode.strictAfter prev u v
+... | no _    | _     | _     = tt
+... | yes _   | no _  | _     = tt
+... | yes _   | yes _ | false = tt
 ... | yes u<v | yes v<n | true
   with FinP._≟_
     (Fin.fromℕ< (NatP.<-trans u<v v<n))
@@ -105,7 +107,6 @@ validateRawEdgesObservesFields
       (FinP.toℕ-fromℕ< v<n)
       refl)
     tailSame
-... | _ | _ | _ = tt
 
 validateRawEdgesSuccessFields :
   (n : Nat)

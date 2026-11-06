@@ -29,6 +29,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Integer using (ℤ; +_; -[1+_]; _+_; _-_; _*_)
 open import Data.List.Base using (List; []; _∷_)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
 import Data.Integer.Base as Int

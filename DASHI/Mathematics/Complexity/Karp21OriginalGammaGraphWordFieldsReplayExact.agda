@@ -43,67 +43,67 @@ import DASHI.Mathematics.Complexity.Karp21EncodedGraphSparseBitBoundExact as Siz
 -- Exact tail of the serialized gamma vertex-count header. The source
 -- graph may have an enormous vertex count and zero listed edges.
 graphWordAfterVertexCount :
-  (instance : Instance.GraphInstance) → Word.BitWord
+  (inst : Instance.GraphInstance) → Word.BitWord
 graphWordAfterVertexCount (n , graph) =
   EncodeGamma.encodeGammaNat (length (Cut.edges graph)) ++
   Encode.encodeEdgeWords (Cut.edges graph) ++
   EncodeGamma.encodeGammaNat (∣ Cut.threshold graph ∣)
 
 graphWordAfterEdgeCount :
-  (instance : Instance.GraphInstance) → Word.BitWord
+  (inst : Instance.GraphInstance) → Word.BitWord
 graphWordAfterEdgeCount (n , graph) =
   Encode.encodeEdgeWords (Cut.edges graph) ++
   EncodeGamma.encodeGammaNat (∣ Cut.threshold graph ∣)
 
 graphWordThresholdBits :
-  (instance : Instance.GraphInstance) → Word.BitWord
+  (inst : Instance.GraphInstance) → Word.BitWord
 graphWordThresholdBits (n , graph) =
   EncodeGamma.encodeGammaNat (∣ Cut.threshold graph ∣)
 
 -- This is the REAL original encoder, not a new serialization.
 graphWordStartsAtSameObject :
-  (instance : Instance.GraphInstance) →
-  Encode.encodeGraphWord instance ≡
-  EncodeGamma.encodeGammaNat (proj₁ instance) ++
-  graphWordAfterVertexCount instance
+  (inst : Instance.GraphInstance) →
+  Encode.encodeGraphWord inst ≡
+  EncodeGamma.encodeGammaNat (proj₁ inst) ++
+  graphWordAfterVertexCount inst
 graphWordStartsAtSameObject (n , graph) = refl
 
 readEncodedGraphVertexCount :
-  (instance : Instance.GraphInstance) →
-  Gamma.readGamma (Encode.encodeGraphWord instance)
-    ≡ just (proj₁ instance ,
-            graphWordAfterVertexCount instance)
+  (inst : Instance.GraphInstance) →
+  Gamma.readGamma (Encode.encodeGraphWord inst)
+    ≡ just (proj₁ inst ,
+            graphWordAfterVertexCount inst)
 readEncodedGraphVertexCount (n , graph) =
   Numeric.gammaReadEncodeSuffix n
     (graphWordAfterVertexCount (n , graph))
 
 readEncodedGraphEdgeCount :
-  (instance : Instance.GraphInstance) →
-  Gamma.readGamma (graphWordAfterVertexCount instance)
+  (inst : Instance.GraphInstance) →
+  Gamma.readGamma (graphWordAfterVertexCount inst)
     ≡ just
-      (length (Cut.edges (proj₂ instance)) ,
-       graphWordAfterEdgeCount instance)
+      (length (Cut.edges (proj₂ inst)) ,
+       graphWordAfterEdgeCount inst)
 readEncodedGraphEdgeCount (n , graph) =
   Numeric.gammaReadEncodeSuffix (length (Cut.edges graph))
     (graphWordAfterEdgeCount (n , graph))
 
 readEncodedGraphEdgeTriples :
-  (instance : Instance.GraphInstance) →
+  (inst : Instance.GraphInstance) →
   Graph.readRawEdges
-    (length (Cut.edges (proj₂ instance)))
-    (graphWordAfterEdgeCount instance)
+    (length (Cut.edges (proj₂ inst)))
+    (graphWordAfterEdgeCount inst)
     ≡ just
-      (Raw.rawOfEdges (Cut.edges (proj₂ instance)) ,
-       graphWordThresholdBits instance)
+      (Raw.rawOfEdges (Cut.edges (proj₂ inst)) ,
+       graphWordThresholdBits inst)
 readEncodedGraphEdgeTriples (n , graph) =
   Raw.readActualEdgeListWordSuffix
     (Cut.edges graph) (graphWordThresholdBits (n , graph))
 
 readEncodedGraphThresholdMagnitude :
-  (instance : Instance.GraphInstance) →
-  Gamma.readGamma (graphWordThresholdBits instance)
+  (inst : Instance.GraphInstance) →
+  Gamma.readGamma (graphWordThresholdBits inst)
     ≡ just
-      (∣ Cut.threshold (proj₂ instance) ∣ , [])
+      (∣ Cut.threshold (proj₂ inst) ∣ , [])
 readEncodedGraphThresholdMagnitude (n , graph) =
   Numeric.gammaReadEncodeRoundTrip
     (∣ Cut.threshold graph ∣)
@@ -116,9 +116,9 @@ readEncodedGraphThresholdMagnitude (n , graph) =
 ------------------------------------------------------------------------
 
 readEncodedGraphEdgeCountBudget :
-  (instance : Instance.GraphInstance) →
-  (length (Cut.edges (proj₂ instance)) * suc (suc (suc zero)))
-    ≤ length (graphWordAfterEdgeCount instance)
-readEncodedGraphEdgeCountBudget instance =
-  Size.encodedGraphEdgeParserBudget instance
+  (inst : Instance.GraphInstance) →
+  (length (Cut.edges (proj₂ inst)) * suc (suc (suc zero)))
+    ≤ length (graphWordAfterEdgeCount inst)
+readEncodedGraphEdgeCountBudget inst =
+  Size.encodedGraphEdgeParserBudget inst
 

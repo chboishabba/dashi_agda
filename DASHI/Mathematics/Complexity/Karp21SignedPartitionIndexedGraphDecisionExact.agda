@@ -17,7 +17,7 @@ module DASHI.Mathematics.Complexity.Karp21SignedPartitionIndexedGraphDecisionExa
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; +_; _+_; _*_)
+open import Data.Integer using (ℤ; +_; _+_; _*_; _≟_)
 open import Data.List.Base as List using (List; []; _∷_; length)
 open import Data.Product using (Σ; _×_; _,_)
 open import Data.Unit using (⊤; tt)
@@ -72,7 +72,7 @@ indexedSignedGraphCutSourceScore parts choice =
     (Exact.e20ScaledIndexedGraphExactCut
       (vectorOfList parts)
       (labelsOfSelection parts choice))
-    (cong (λ score → (+ 4) * score)
+    (cong (λ list → (+ 4) * Quadratic.completeGraphCut list)
       (annotatedListIsSameObject parts choice))
 
 -- THIS is the actual indexed finite weighted graph threshold predicate.
@@ -140,7 +140,7 @@ sourcePartitionIndexedPositiveTargetIff :
     (IndexedPositiveTargetAccepts
       (sourcePartitionToIndexedPositiveTarget parts))
 sourcePartitionIndexedPositiveTargetIff parts
-  with Int._≟_ (Source.sourceTotal parts) (+ 0)
+  with _≟_ (Source.sourceTotal parts) (+ 0)
 ... | yes zeroSum =
   PR.iff (λ _ → tt) (λ _ → Source.zeroTotalPartitionYES parts zeroSum)
 ... | no notZero =

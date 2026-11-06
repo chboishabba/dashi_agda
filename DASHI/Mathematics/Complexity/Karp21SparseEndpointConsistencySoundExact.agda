@@ -39,6 +39,7 @@ open import Data.List.Base using (List; []; _∷_)
 open import Data.Product using (Σ; _,_; _×_; proj₁; proj₂)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Data.Maybe.Base using (Maybe; just; nothing)
 import Data.Fin.Base as Fin
 import Data.Fin.Properties as FinP
 import Data.Vec.Base as Vec

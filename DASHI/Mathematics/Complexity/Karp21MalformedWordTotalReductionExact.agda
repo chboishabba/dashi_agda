@@ -37,9 +37,9 @@ module TotalMalformedSource
   (encodeTarget : Target → Word)
   (targetLanguage : PR.Language Word)
   (instanceCorrect :
-    ∀ instance →
-      PR.Iff (sourceAccepts instance)
-             (targetAccepts (transform instance)))
+    ∀ inst →
+      PR.Iff (sourceAccepts inst)
+             (targetAccepts (transform inst)))
   (targetWordFaithful :
     ∀ target →
       PR.Iff (targetAccepts target)
@@ -50,17 +50,17 @@ module TotalMalformedSource
   SourceWordAccepts : Word → Set
   SourceWordAccepts word with decodeSource word
   ... | nothing = ⊥
-  ... | just instance = sourceAccepts instance
+  ... | just inst = sourceAccepts inst
 
   sourceLanguage : PR.Language Word
   sourceLanguage = record
-    { PR.accepts = SourceWordAccepts }
+    { accepts = SourceWordAccepts }
 
   -- Explicit total reduction: neither branch reads a guessed witness.
   totalReduce : Word → Word
   totalReduce word with decodeSource word
   ... | nothing = encodeTarget targetNo
-  ... | just instance = encodeTarget (transform instance)
+  ... | just inst = encodeTarget (transform inst)
 
   -- For an actual target language the independent target parser must
   -- establish the faithful word iff for ALL target encodings.
@@ -80,10 +80,10 @@ module TotalMalformedSource
           (targetNoProof
             (PR.backward
               (targetWordFaithful targetNo) encodedProof)))
-  ... | just instance =
+  ... | just inst =
     PR.iffTransitive
-      (instanceCorrect instance)
-      (targetWordFaithful (transform instance))
+      (instanceCorrect inst)
+      (targetWordFaithful (transform inst))
 
   -- Only the independent polynomial-time map proof can fill the
   -- resource certificate; this theorem does NOT manufacture one.
@@ -93,7 +93,7 @@ module TotalMalformedSource
     PR.PolynomialManyOneReduction
       cost sourceLanguage targetLanguage
   makeCostedTotalReduction cost clock = record
-    { PR.reduce = totalReduce
-    ; PR.preservesLanguage = totalMalformedReductionIff
-    ; PR.polynomialReduction = clock
+    { reduce = totalReduce
+    ; preservesLanguage = totalMalformedReductionIff
+    ; polynomialReduction = clock
     }

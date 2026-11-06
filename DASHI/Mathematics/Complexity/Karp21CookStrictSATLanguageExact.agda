@@ -36,7 +36,7 @@ StrictSATAccepts word with Strict.strictDecodeCookFormulaBits word
 ... | just formula = Cook.Satisfiable formula
 
 strictSATLanguage : PR.Language Word.BitWord
-strictSATLanguage = record { PR.accepts = StrictSATAccepts }
+strictSATLanguage = record { accepts = StrictSATAccepts }
 
 -- Real SAT language roundtrip on every Cook formula, not merely token
 -- equality, with impossible malformed syntax excluded by the parser.

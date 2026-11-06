@@ -111,7 +111,7 @@ canonicalCertificateWord bits =
 
 canonicalCertificateWordLength :
   ∀ {n : Nat} (bits : Vec.Vec Bool (suc n)) →
-  Data.List.Base.length (canonicalCertificateWord bits) ≡ suc n
+  List.length (canonicalCertificateWord bits) ≡ suc n
 canonicalCertificateWordLength bits =
   BitCode.cutCertificateWordLength (canonicalBitLabels bits)
 
@@ -119,7 +119,7 @@ canonicalCertificateWordDecodes :
   ∀ {n : Nat} (bits : Vec.Vec Bool (suc n)) →
   BitCode.decodeCutLabels (suc n)
     (canonicalCertificateWord bits)
-  ≡ Data.Maybe.Base.just (canonicalBitLabels bits)
+  ≡ Maybe.just (canonicalBitLabels bits)
 canonicalCertificateWordDecodes bits =
   BitCode.decodeEncodeCutLabels (canonicalBitLabels bits)
 

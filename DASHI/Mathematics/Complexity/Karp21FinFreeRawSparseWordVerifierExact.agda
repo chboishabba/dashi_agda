@@ -78,12 +78,12 @@ readRawGraphWord word with Gamma.readGamma word
 ...       | just (edges , afterEdges) with Gamma.readGamma afterEdges
 ...         | nothing = nothing
 ...         | just (zero , _) = nothing
+...         | just (suc threshold , _ ∷ _) = nothing
 ...         | just (suc threshold , []) with
             validRawEdges n Graph.noPrevious edges
 ...           | true =
   just (parsed-raw-graph n edges (suc threshold))
 ...           | false = nothing
-...         | just (suc threshold , _ ∷ _) = nothing
 
 ------------------------------------------------------------------------
 -- Pairwise consistency uses exactly the original vertex addresses.
@@ -117,13 +117,14 @@ rawSparseScore (Graph.raw-edge u v w ∷ edges) (a ∷ b ∷ bits)
   history
   with endpointConsistent u a history
      | endpointConsistent v b history
-... | true | true
+... | false | _     = nothing
+... | true  | false = nothing
+... | true  | true
   with rawSparseScore edges bits ((u , a) ∷ (v , b) ∷ history)
 ...   | nothing = nothing
 ...   | just remaining with Boolean.boolEqual a b
 ...     | true = just remaining
 ...     | false = just (w + remaining)
-... | _ | _ = nothing
 
 verifyFinFreeSparseGraphWord :
   Word.BitWord → Word.BitWord → Bool

@@ -7,7 +7,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeDecodedRunLengthExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym; cong; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -46,63 +46,67 @@ buildDecodedRunNonempty_length :
     (first : Transition.SomeSlot steps)
     (rest : List (Transition.SomeSlot steps))
     (semantic :
-      Scan.AllTimesSemantic
+      Scan.AllTimesSemantic {machine} {steps} {cols}
         stateCoverage symbolCoverage nonempty globalBits
         (first ∷ rest))
     (ordered : Induction.OrderedSlotChain (first ∷ rest))
     (unique :
       WF.ExactlyOneHead
-        (Local.cells
-          (Step.decodedBeforeRow
+        (Local.cells {machine}
+          (Step.decodedBeforeRow {machine} {steps} {cols}
             stateCoverage symbolCoverage
             (Transition.witness first) globalBits)))
     (margin :
       Margin.HeadMargin (suc (Induction.timesLength (first ∷ rest)))
-        (Local.cells
-          (Step.decodedBeforeRow
+        (Local.cells {machine}
+          (Step.decodedBeforeRow {machine} {steps} {cols}
             stateCoverage symbolCoverage
-            (Transition.witness first) globalBits))) →
+            (Transition.witness first) globalBits)))
+    (guards :
+      Step.AllTimeStepsBoundaryGuards {machine} {steps} {cols}
+        stateCoverage symbolCoverage nonempty globalBits) →
   Run.runLength
     (Induction.run
-      (Induction.buildDecodedRunNonempty
+      (Induction.buildDecodedRunNonempty {machine} {steps} {cols}
         stateCoverage symbolCoverage nonempty globalBits
-        first rest semantic ordered unique margin))
+        first rest semantic ordered unique margin guards))
   ≡ Induction.timesLength (first ∷ rest)
 buildDecodedRunNonempty_length
     stateCoverage symbolCoverage nonempty globalBits
     first []
     (Scan.semanticTimesStep current Scan.semanticTimesDone)
     Induction.orderedOne
-    unique margin =
+    unique margin guards =
   refl
-buildDecodedRunNonempty_length
+buildDecodedRunNonempty_length {machine} {steps} {cols}
     stateCoverage symbolCoverage nonempty globalBits
     first (second ∷ rest)
     (Scan.semanticTimesStep current remaining)
     (Induction.orderedCons adjacent orderedRest)
-    unique margin
-    rewrite transportRunStart_length
-      (Induction.adjacentDecodedRows
-        stateCoverage symbolCoverage adjacent globalBits)
-      (Induction.run recursive)
-          | buildDecodedRunNonempty_length
-              stateCoverage symbolCoverage nonempty globalBits
-              second rest remaining orderedRest
-              nextUnique nextMargin =
-  refl
+    unique margin guards =
+  cong suc
+    (trans
+      (transportRunStart_length
+        afterEq
+        (Induction.run recursive))
+      (buildDecodedRunNonempty_length {machine} {steps} {cols}
+        stateCoverage symbolCoverage nonempty globalBits
+        second rest remaining orderedRest
+        nextUnique nextMargin guards))
   where
     interior =
-      Margin.interiorFromUniqueMargin
+      Margin.interiorFromUniqueMargin {machine}
         unique (Induction.weakenMarginToOne margin)
 
     step =
-      Step.decodedAdjacentRowsFormMachineStep
+      Step.decodedAdjacentRowsFormMachineStep {machine} {steps} {cols}
         stateCoverage symbolCoverage nonempty
         (Transition.witness first) globalBits
         interior current
+        (guards (Transition.witness first) interior current)
 
     afterEq =
-      Induction.adjacentDecodedRows
+      Induction.adjacentDecodedRows {machine} {steps} {cols}
         stateCoverage symbolCoverage adjacent globalBits
 
     nextUnique =
@@ -114,10 +118,10 @@ buildDecodedRunNonempty_length
         (Margin.wellFormedStepMargin step margin)
 
     recursive =
-      Induction.buildDecodedRunNonempty
+      Induction.buildDecodedRunNonempty {machine} {steps} {cols}
         stateCoverage symbolCoverage nonempty globalBits
         second rest remaining orderedRest
-        nextUnique nextMargin
+        nextUnique nextMargin guards
 
 decodedAllSlotsRun_length :
   ∀ {machine cols}
@@ -129,46 +133,51 @@ decodedAllSlotsRun_length :
     (steps : Nat)
     (globalBits : CNF.Bits (Trace.GlobalTraceWidth machine steps cols))
     (semantic :
-      Scan.AllTimesSemantic
+      Scan.AllTimesSemantic {machine} {steps} {cols}
         stateCoverage symbolCoverage nonempty globalBits
         (Transition.allSlots steps))
     (startUnique :
       WF.ExactlyOneHead
-        (Local.cells
-          (Decode.decodeRow
-            stateCoverage symbolCoverage cols
-            (Global.rowSliceBits
+        (Local.cells {machine}
+          (Decode.decodeRow stateCoverage symbolCoverage cols
+            (Global.rowSliceBits {machine} {steps} {cols}
               (Global.here {remaining = steps})
               globalBits))))
     (startMargin :
       Margin.HeadMargin (suc steps)
-        (Local.cells
-          (Decode.decodeRow
-            stateCoverage symbolCoverage cols
-            (Global.rowSliceBits
+        (Local.cells {machine}
+          (Decode.decodeRow stateCoverage symbolCoverage cols
+            (Global.rowSliceBits {machine} {steps} {cols}
               (Global.here {remaining = steps})
-              globalBits)))) →
+              globalBits))))
+    (guards :
+      Step.AllTimeStepsBoundaryGuards {machine} {steps} {cols}
+        stateCoverage symbolCoverage nonempty globalBits) →
   Run.runLength
     (Induction.run
-      (Induction.decodedAllSlotsRun
+      (Induction.decodedAllSlotsRun {machine} {cols}
         stateCoverage symbolCoverage nonempty
-        steps globalBits semantic startUnique startMargin))
+        steps globalBits semantic startUnique startMargin guards))
   ≡ steps
 decodedAllSlotsRun_length
     stateCoverage symbolCoverage nonempty
     zero globalBits Scan.semanticTimesDone
-    startUnique startMargin =
+    startUnique startMargin guards =
   refl
-decodedAllSlotsRun_length
+decodedAllSlotsRun_length {machine} {cols}
     stateCoverage symbolCoverage nonempty
     (suc steps) globalBits semantic
-    startUnique startMargin
-    rewrite sym (Induction.allSlotsLength (suc steps))
-          | buildDecodedRunNonempty_length
-              stateCoverage symbolCoverage nonempty globalBits
-              (Transition.some-slot zero Global.here)
-              (Transition.mapShiftSlots (Transition.allSlots steps))
-              semantic
-              (Induction.allSlotsOrdered (suc steps))
-              startUnique startMargin =
-  Induction.allSlotsLength (suc steps)
+    startUnique startMargin guards =
+  trans
+    (buildDecodedRunNonempty_length {machine} {suc steps} {cols}
+      stateCoverage symbolCoverage nonempty globalBits
+      (Transition.some-slot zero (Global.here {remaining = steps}))
+      (Transition.mapShiftSlots (Transition.allSlots steps))
+      semantic
+      (Induction.allSlotsOrdered (suc steps))
+      startUnique
+      (subst (λ len → Margin.HeadMargin len (Local.cells {machine} (Decode.decodeRow stateCoverage symbolCoverage cols (Global.rowSliceBits {machine} {suc steps} {cols} (Global.here {remaining = suc steps}) globalBits))))
+             (cong suc (sym (Induction.allSlotsLength (suc steps))))
+             startMargin)
+      guards)
+    (Induction.allSlotsLength (suc steps))

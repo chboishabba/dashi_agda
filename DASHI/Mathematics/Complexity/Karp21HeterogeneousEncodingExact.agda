@@ -32,14 +32,14 @@ compileHeterogeneousKarpReduction :
     PR.Iff
       (PR.accepts sourceLanguage word)
       (sourceAccepts (decodeSource word))) →
-  ((instance : Source) →
+  ((inst : Source) →
     PR.Iff
-      (sourceAccepts instance)
-      (targetAccepts (transform instance))) →
-  ((instance : Target) →
+      (sourceAccepts inst)
+      (targetAccepts (transform inst))) →
+  ((inst : Target) →
     PR.Iff
-      (targetAccepts instance)
-      (PR.accepts targetLanguage (encodeTarget instance))) →
+      (targetAccepts inst)
+      (PR.accepts targetLanguage (encodeTarget inst))) →
   PR.polynomialTimeMap cost
     (λ word → encodeTarget (transform (decodeSource word))) →
   PR.PolynomialManyOneReduction cost sourceLanguage targetLanguage
@@ -47,13 +47,13 @@ compileHeterogeneousKarpReduction
   sourceAccepts targetAccepts decodeSource transform encodeTarget
   sourceFaithful targetIff outputFaithful polynomialWordMap =
   record
-    { PR.reduce =
+    { reduce =
         λ word → encodeTarget (transform (decodeSource word))
-    ; PR.preservesLanguage = λ word →
+    ; preservesLanguage = λ word →
         PR.iffTransitive
           (sourceFaithful word)
           (PR.iffTransitive
             (targetIff (decodeSource word))
             (outputFaithful (transform (decodeSource word))))
-    ; PR.polynomialReduction = polynomialWordMap
+    ; polynomialReduction = polynomialWordMap
     }

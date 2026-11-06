@@ -98,6 +98,9 @@ validateRawEdges :
 validateRawEdges n prev [] = just []
 validateRawEdges n prev (raw-edge u v w ∷ tail)
   with NatP._<?_ u v | NatP._<?_ v n | strictAfter prev u v
+... | no _    | _     | _     = nothing
+... | yes _   | no _  | _     = nothing
+... | yes _   | yes _ | false = nothing
 ... | yes u<v | yes v<n | true
   with FinP._≟_
     (Fin.fromℕ< (NatP.<-trans u<v v<n))
@@ -112,7 +115,6 @@ validateRawEdges n prev (raw-edge u v w ∷ tail)
       (Fin.fromℕ< (NatP.<-trans u<v v<n))
       (Fin.fromℕ< v<n)
       apart w ∷ rest)
-... | _ | _ | _ = nothing
 
 ------------------------------------------------------------------------
 -- Exact nested decode:
@@ -150,6 +152,7 @@ decodeGraphWordCertified word with Gamma.readGamma word
 ...       | just (raw , afterEdges) with Gamma.readGamma afterEdges
 ...         | nothing = nothing
 ...         | just (zero , suffix) = nothing
+...         | just (suc threshold , _ ∷ _) = nothing
 ...         | just (suc threshold , []) with
             validateRawEdges n noPrevious raw
 ...           | nothing = nothing
@@ -163,7 +166,6 @@ decodeGraphWordCertified word with Gamma.readGamma word
     ((n , Cut.graph edges (+ (suc threshold))
        (Int.+≤+ z≤n , (λ ())))
      , budget)
-...         | just (suc threshold , _ ∷ _) = nothing
 
 decodeGraphWord : Word.BitWord → Maybe N21.GraphInstance
 decodeGraphWord word with decodeGraphWordCertified word
@@ -171,7 +173,7 @@ decodeGraphWord word with decodeGraphWordCertified word
 ... | just (graph , _) = just graph
 
 noGraphOnDecodeFailure :
-  ∀ {word : Word.BitWord} {graph : N21.GraphInstance} →
+  ∀ {graph : N21.GraphInstance} →
   nothing ≡ just graph → ⊥
 noGraphOnDecodeFailure ()
 
@@ -192,8 +194,8 @@ n21GraphWordEdgeCountBitBound word graph decoded
 literalGammaSparseGraphCodec : N21.SparseGraphWordCodec
 literalGammaSparseGraphCodec =
   record
-    { N21.decodeGraph = decodeGraphWord
-    ; N21.edgeBitBound = n21GraphWordEdgeCountBitBound
+    { decodeGraph = decodeGraphWord
+    ; edgeBitBound = n21GraphWordEdgeCountBitBound
     }
 
 module LiteralN21 = N21.OnCodec literalGammaSparseGraphCodec
@@ -237,4 +239,4 @@ concreteGraphWordAccepts word with decodeGraphWord word
 
 concreteGraphWordLanguage : PR.Language Word.BitWord
 concreteGraphWordLanguage =
-  record { PR.accepts = concreteGraphWordAccepts }
+  record { accepts = concreteGraphWordAccepts }

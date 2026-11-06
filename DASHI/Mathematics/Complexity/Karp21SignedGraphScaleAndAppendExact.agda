@@ -21,6 +21,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; _+_; _*_)
 open import Data.List.Base using (List; []; _∷_; _++_; map)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 
 import Data.Vec.Base as Vec

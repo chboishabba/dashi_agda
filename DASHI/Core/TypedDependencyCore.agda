@@ -69,7 +69,7 @@ open FamilyWitness public
 -- inhabited.  Preconditions and postconditions are indexed by state/action.
 ------------------------------------------------------------------------
 
-record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
+record DependentActionSystem (State Action : Set) : Set₁ where
   field
     Precondition : State → Action → Set
     Postcondition : State → Action → State → Set
@@ -78,11 +78,10 @@ record DependentActionSystem {State : Set ℓ} (Action : Set) : Set₁ where
 open DependentActionSystem public
 
 record AdmissibleAction
-    {State : Set ℓ}
-    {Action : Set}
-    (system : DependentActionSystem {State = State} Action)
+    {State Action : Set}
+    (system : DependentActionSystem State Action)
     (before : State)
-    (action : Action) : Set ℓ where
+    (action : Action) : Set where
   field
     precondition : Precondition system before action
     after : State

@@ -19,9 +19,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Empty using (⊥; ⊥-elim)
-open import Data.Product using (Σ; _,_)
+open import Data.Product using (Σ; _,_; proj₁; proj₂)
 import Data.Fin.Base as Fin
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -41,6 +41,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunCNFExact as Acceptin
 import DASHI.Mathematics.Complexity.ConcreteTapeRunCNFWeldExact as Run
 import DASHI.Mathematics.Complexity.ConcreteTapeWellFormedConfigurationExact as WF
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalityCharacterizationExact as Character
+import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeInitialDecodeSameObjectExact as Initial
@@ -48,12 +49,26 @@ import DASHI.Mathematics.Complexity.ConcreteTapeDecodedWindowSameObjectExact as 
 import DASHI.Mathematics.Complexity.ConcreteTapeIndexedWindowExact as Indexed
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalWindowPlacementExact as Placement
+import DASHI.Mathematics.Complexity.ConcreteTapeDecodedTransitionStepExact as Step
 import DASHI.Mathematics.Complexity.CNFVariableRenamingExact as Rename
 import DASHI.Mathematics.Complexity.FixedWidthTruthTableCNFExact as CNF
 
 ------------------------------------------------------------------------
 -- Exact guarded input target bits
 ------------------------------------------------------------------------
+
+canonicalGuardedInitialCellCount :
+  ∀ {machine}
+    (input : Input.InputWord machine)
+    (steps : Nat) →
+  Canonical.listLength
+    (Local.cells {machine} (Guard.guardedInitialRow input steps))
+  ≡ Guard.guardedInitialCols input steps
+canonicalGuardedInitialCellCount {machine} input steps =
+  trans
+    (sym (Guard.canonical_eq_coordinate
+      (Guard.guardedInitialCells {machine} input steps)))
+    (Guard.guardedInitialCellCount input steps)
 
 guardedInitialBits :
   ∀ {machine}
@@ -67,10 +82,28 @@ guardedInitialBits :
     (Decode.RowBitsWidth machine
       (Guard.guardedInitialCols input steps))
 guardedInitialBits {machine}
-    stateCoverage symbolCoverage input steps
-    rewrite sym (Guard.guardedInitialCellCount input steps) =
-  Flat.encodeRow stateCoverage symbolCoverage
-    (Guard.guardedInitialRow input steps)
+    stateCoverage symbolCoverage input steps =
+  subst CNF.Bits
+    (cong (Decode.RowBitsWidth machine)
+      (canonicalGuardedInitialCellCount input steps))
+    (Flat.encodeRow {machine} stateCoverage symbolCoverage
+      (Guard.guardedInitialRow input steps))
+
+guardedInitialBitsDecode_helper :
+  ∀ {machine}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (row : Local.TapeRow machine)
+    (cols : Nat)
+    (e : Canonical.listLength (Local.cells {machine} row) ≡ cols) →
+  Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+    (subst CNF.Bits (cong (Decode.RowBitsWidth machine) e)
+      (Flat.encodeRow {machine} stateCoverage symbolCoverage row))
+  ≡ row
+guardedInitialBitsDecode_helper {machine} stateCoverage symbolCoverage row ._ refl =
+  Initial.decodeRow_encodeRow {machine} stateCoverage symbolCoverage row
 
 guardedInitialBitsDecode :
   ∀ {machine}
@@ -80,17 +113,19 @@ guardedInitialBitsDecode :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (input : Input.InputWord machine)
     (steps : Nat) →
-  Decode.decodeRow stateCoverage symbolCoverage
+  Decode.decodeRow {machine} stateCoverage symbolCoverage
     (Guard.guardedInitialCols input steps)
     (guardedInitialBits
       stateCoverage symbolCoverage input steps)
   ≡
   Guard.guardedInitialRow input steps
-guardedInitialBitsDecode
-    stateCoverage symbolCoverage input steps
-    rewrite sym (Guard.guardedInitialCellCount input steps) =
-  Initial.decodeRow_encodeRow stateCoverage symbolCoverage
+guardedInitialBitsDecode {machine}
+    stateCoverage symbolCoverage input steps =
+  guardedInitialBitsDecode_helper {machine}
+    stateCoverage symbolCoverage
     (Guard.guardedInitialRow input steps)
+    (Guard.guardedInitialCols input steps)
+    (canonicalGuardedInitialCellCount input steps)
 
 ------------------------------------------------------------------------
 -- Row 0 in the base trace is the exact endpoint pullback.
@@ -101,20 +136,21 @@ baseRowZeroBits_eq_endpointInitialBits :
     (steps cols : Nat)
     (assignment :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols)) →
-  Global.rowSliceBits
+  Global.rowSliceBits {machine} {steps} {cols}
     (Global.here {remaining = steps})
-    (FormulaSem.baseTraceBits assignment)
+    (FormulaSem.baseTraceBits {machine} {steps} {cols} assignment)
   ≡
   Rename.pullbackBits
-    Endpoint.initialRowExtendedRename
+    (Endpoint.initialRowExtendedRename {machine} {steps} {cols})
     assignment
 baseRowZeroBits_eq_endpointInitialBits
     {machine} steps cols assignment =
-  Same.pullbackCompose
-    (Global.globalRowRename
-      (Global.here {remaining = steps}))
-    Endpoint.liftBaseIndex
-    assignment
+  sym
+    (Same.pullbackCompose
+      (Global.globalRowRename {machine} {steps} {cols}
+        (Global.here {remaining = steps}))
+      (Endpoint.liftBaseIndex {machine} {steps} {cols})
+      assignment)
 
 decodedStart_eq_guardedInitial :
   ∀ {machine}
@@ -122,6 +158,7 @@ decodedStart_eq_guardedInitial :
       Canonical.EnumerationCoverage (Local.finiteState machine))
     (symbolCoverage :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (nonempty : Selector.NonemptyRuleTable machine)
     (input : Input.InputWord machine)
     (steps : Nat)
     (assignment :
@@ -129,30 +166,31 @@ decodedStart_eq_guardedInitial :
         (Endpoint.ExtendedGlobalWidth machine steps
           (Guard.guardedInitialCols input steps)))
     (semantics :
-      FormulaSem.SatisfyingGlobalFormulaSemantics
+      FormulaSem.SatisfyingGlobalFormulaSemantics {machine}
         stateCoverage symbolCoverage
-        _
+        nonempty
         steps (Guard.guardedInitialCols input steps)
         (guardedInitialBits
           stateCoverage symbolCoverage input steps)
         assignment) →
-  Decode.decodeRow stateCoverage symbolCoverage
+  Decode.decodeRow {machine} stateCoverage symbolCoverage
     (Guard.guardedInitialCols input steps)
-    (Global.rowSliceBits
+    (Global.rowSliceBits {machine} {steps} {Guard.guardedInitialCols input steps}
       (Global.here {remaining = steps})
-      (FormulaSem.baseTraceBits assignment))
+      (FormulaSem.baseTraceBits {machine} {steps} {Guard.guardedInitialCols input steps} assignment))
   ≡
   Guard.guardedInitialRow input steps
-decodedStart_eq_guardedInitial
-    stateCoverage symbolCoverage input steps assignment semantics =
+decodedStart_eq_guardedInitial {machine}
+    stateCoverage symbolCoverage nonempty input steps assignment semantics =
   trans
     (cong
-      (Decode.decodeRow stateCoverage symbolCoverage _)
+      (Decode.decodeRow {machine} stateCoverage symbolCoverage
+        (Guard.guardedInitialCols input steps))
       (trans
-        (baseRowZeroBits_eq_endpointInitialBits
-          steps _ assignment)
+        (baseRowZeroBits_eq_endpointInitialBits {machine}
+          steps (Guard.guardedInitialCols input steps) assignment)
         (FormulaSem.initialRowBitsExact semantics)))
-    (guardedInitialBitsDecode
+    (guardedInitialBitsDecode {machine}
       stateCoverage symbolCoverage input steps)
 
 ------------------------------------------------------------------------
@@ -267,27 +305,26 @@ transportAcceptanceOccurrenceToFinish :
       CNF.Bits (Endpoint.ExtendedGlobalWidth machine steps cols))
     (finish : Local.TapeRow machine) →
   finish ≡
-    Decode.decodeRow stateCoverage symbolCoverage cols
-      (Global.rowSliceBits
+    Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+      (Global.rowSliceBits {machine} {steps} {cols}
         (Endpoint.finalRowSlot steps)
-        (FormulaSem.baseTraceBits assignment)) →
-  AcceptFinal.AcceptingCellInDecodedFinalRow
+        (FormulaSem.baseTraceBits {machine} {steps} {cols} assignment)) →
+  AcceptFinal.AcceptingCellInDecodedFinalRow {machine} {steps} {cols}
     stateCoverage symbolCoverage assignment →
   Σ Nat (λ n →
     Σ (Local.Symbol machine) (λ symbol →
       Indexed.At n
         (Local.headed (Local.acceptingState machine) symbol)
-        (Local.cells finish)))
+        (Local.cells {machine} finish)))
 transportAcceptanceOccurrenceToFinish
+    {machine = machine} {steps = steps} {cols = cols}
     stateCoverage symbolCoverage assignment
     finish finishEq witness =
   Fin.toℕ (AcceptFinal.index witness) ,
   AcceptFinal.symbol witness ,
   transportAtList
-    (cong Local.cells (sym finishEq))
+    (cong (Local.cells {machine}) (sym finishEq))
     (AcceptFinal.occurs witness)
-  where
-    open 
 ------------------------------------------------------------------------
 -- P7 capstone
 ------------------------------------------------------------------------
@@ -332,10 +369,13 @@ satisfyingCookLevinAssignmentToAcceptingRun :
         stateCoverage symbolCoverage input steps))
     assignment
   ≡ true →
+  Step.AllTimeStepsBoundaryGuards {machine} {steps} {Guard.guardedInitialCols input steps}
+    stateCoverage symbolCoverage nonempty
+    (FormulaSem.baseTraceBits {machine} {steps} {Guard.guardedInitialCols input steps} assignment) →
   SatisfyingAssignmentAcceptingRun input steps
 satisfyingCookLevinAssignmentToAcceptingRun
     {machine} stateCoverage symbolCoverage nonempty
-    input steps assignment accepted =
+    input steps assignment accepted guards =
   record
     { rows = RunInduction.rows runResult
     ; finish = RunInduction.finish runResult
@@ -346,7 +386,7 @@ satisfyingCookLevinAssignmentToAcceptingRun
     cols = Guard.guardedInitialCols input steps
 
     semantics =
-      FormulaSem.satisfyingGlobalFormulaSemantics
+      FormulaSem.satisfyingGlobalFormulaSemantics {machine}
         stateCoverage symbolCoverage nonempty
         steps cols
         (guardedInitialBits
@@ -354,7 +394,7 @@ satisfyingCookLevinAssignmentToAcceptingRun
         assignment accepted
 
     baseBits =
-      FormulaSem.baseTraceBits assignment
+      FormulaSem.baseTraceBits {machine} {steps} {cols} assignment
 
     semanticScan =
       Scan.globalTransitionCNF_to_semanticScan
@@ -366,58 +406,60 @@ satisfyingCookLevinAssignmentToAcceptingRun
       Scan.everyTimeEveryWindowSemantic semanticScan
 
     start =
-      Decode.decodeRow stateCoverage symbolCoverage cols
-        (Global.rowSliceBits
+      Decode.decodeRow {machine} stateCoverage symbolCoverage cols
+        (Global.rowSliceBits {machine} {steps} {cols}
           (Global.here {remaining = steps}) baseBits)
 
     startEq :
       start ≡ Guard.guardedInitialRow input steps
     startEq =
-      decodedStart_eq_guardedInitial
-        stateCoverage symbolCoverage input steps
+      decodedStart_eq_guardedInitial {machine}
+        stateCoverage symbolCoverage nonempty input steps
         assignment semantics
 
     literalUnique :
       WF.ExactlyOneHead
-        (Local.cells (Guard.guardedInitialRow input steps))
+        (Local.cells {machine} (Guard.guardedInitialRow input steps))
     literalUnique =
       Margin.interiorExactlyOneHead
         (Guard.guardedInitialInterior input steps)
 
     startUnique :
-      WF.ExactlyOneHead (Local.cells start)
+      WF.ExactlyOneHead (Local.cells {machine} start)
     startUnique =
       WF.transportExactlyOneHead
-        (cong Local.cells (sym startEq))
+        (cong (Local.cells {machine}) (sym startEq))
         literalUnique
 
     startMargin :
       Margin.HeadMargin
-        (suc steps) (Local.cells start)
+        (suc steps) (Local.cells {machine} start)
     startMargin =
-      RunInduction.transportMarginRow
+      RunInduction.transportMarginRow {machine}
         (sym startEq)
         (Guard.guardedInitialMargin input steps)
 
     runResult =
-      RunInduction.decodedAllSlotsRun
+      RunInduction.decodedAllSlotsRun {machine} {cols}
         stateCoverage symbolCoverage nonempty
         steps baseBits allSemantic
-        startUnique startMargin
+        startUnique startMargin guards
 
     finishEq =
-      RunInduction.decodedAllSlotsRun_finish_eq_finalGlobalRow
+      RunInduction.decodedAllSlotsRun_finish_eq_finalGlobalRow {machine} {cols}
         stateCoverage symbolCoverage nonempty
         steps baseBits allSemantic
-        startUnique startMargin
+        startUnique startMargin guards
 
     endpointCell =
       AcceptFinal.acceptanceWitnessCellIsDecodedFinalCell
+        {machine} {steps} {cols}
         stateCoverage symbolCoverage assignment
         (FormulaSem.acceptingFinalCell semantics)
 
     acceptingInFinish =
       transportAcceptanceOccurrenceToFinish
+        {machine} {steps} {cols}
         stateCoverage symbolCoverage assignment
         (RunInduction.finish runResult)
         finishEq endpointCell
@@ -426,24 +468,33 @@ satisfyingCookLevinAssignmentToAcceptingRun
       RunInduction.finalInterior runResult
 
     interiorOccurrence =
-      interiorHeadOccurrence finalInterior
+      interiorHeadOccurrence {machine} finalInterior
 
     acceptingStateEq :
       Character.headState finalInterior
       ≡ Local.acceptingState machine
-    acceptingStateEq
-      with interiorOccurrence | acceptingInFinish
-    ... | i , headOccurs | j , symbol , acceptingOccurs =
+    acceptingStateEq =
       uniqueHeadedStates
         (RunInduction.finalUnique runResult)
-        headOccurs acceptingOccurs
+        (proj₂ interiorOccurrence)
+        (proj₂ (proj₂ acceptingInFinish))
 
     acceptingFinish :
       Accepting.AcceptingInteriorRow
         machine (RunInduction.finish runResult)
     acceptingFinish = record
-      { Accepting.interior = finalInterior
-      ; Accepting.headIsAccepting = acceptingStateEq
+      { interior = finalInterior
+      ; headIsAccepting = acceptingStateEq
+      }
+
+    guardedInitialIsInitial :
+      Accepting.InitialInteriorRow
+        machine (Guard.guardedInitialRow input steps)
+    guardedInitialIsInitial = record
+      { interior =
+          Guard.guardedInitialInterior input steps
+      ; headIsInitial =
+          Guard.guardedInitialState input steps
       }
 
     certificateExact :
@@ -453,12 +504,12 @@ satisfyingCookLevinAssignmentToAcceptingRun
         (RunInduction.rows runResult)
         (RunInduction.finish runResult)
     certificateExact = record
-      { Accepting.initial = guardedInitialIsInitial
-      ; Accepting.run =
+      { initial = guardedInitialIsInitial
+      ; run =
           RunInduction.transportRunStart
             (sym startEq)
             (RunInduction.run runResult)
-      ; Accepting.accepting = acceptingFinish
+      ; accepting = acceptingFinish
       }
 
     certificateExactLength :
@@ -471,17 +522,7 @@ satisfyingCookLevinAssignmentToAcceptingRun
         (RunLength.decodedAllSlotsRun_length
           stateCoverage symbolCoverage nonempty
           steps baseBits allSemantic
-          startUnique startMargin)
-
-    guardedInitialIsInitial :
-      Accepting.InitialInteriorRow
-        machine (Guard.guardedInitialRow input steps)
-    guardedInitialIsInitial = record
-      { Accepting.interior =
-          Guard.guardedInitialInterior input steps
-      ; Accepting.headIsInitial =
-          Guard.guardedInitialState input steps
-      }
+          startUnique startMargin guards)
 
 record SATToAcceptingRunReceipt
     (machine : Local.ConcreteTapeMachine) : Set₁ where

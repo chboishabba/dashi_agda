@@ -61,16 +61,35 @@ if [[ "$mode" == "preflight" ]]; then
   exit 0
 fi
 
+export DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-16384}"
+
+if [[ -z "${AGDA_BIN:-}" ]]; then
+  if [[ -x "/nix/store/jv7cagyh8wm4cw8j94z5s2ffqmjv10dq-Agda-2.9.0-bin/bin/agda" ]]; then
+    export AGDA_BIN="/nix/store/jv7cagyh8wm4cw8j94z5s2ffqmjv10dq-Agda-2.9.0-bin/bin/agda"
+  fi
+fi
+
 check_agda() {
   local source="$1"
   printf '\nREFEREE CHECK: %s\n' "$source"
-  local -a include_args=(-i .)
-  # Explicit stdlib source root for clean CI/ephemeral environments.
-  # Locally registered Agda libraries continue working unchanged.
-  if [[ -n "${AGDA_STDLIB_ROOT:-}" ]]; then
-    include_args+=(-i "$AGDA_STDLIB_ROOT")
+  if [[ -f "scripts/run_agda29_parallel_check.sh" ]] && { [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]] || command -v nix >/dev/null 2>&1; }; then
+    DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh "$source"
+  else
+    local shadow_dir
+    shadow_dir="$(mktemp -d /tmp/dashi-referee-agda.XXXXXX)"
+    rsync -a --prune-empty-dirs \
+      --include='*/' \
+      --include='*.agda' \
+      --include='*.lagda*' \
+      --exclude='*' \
+      "$repo_root/" "$shadow_dir/"
+    local -a include_args=(-i "$shadow_dir" --no-libraries --no-default-libraries)
+    if [[ -n "${AGDA_STDLIB_ROOT:-}" ]]; then
+      include_args+=(-i "$AGDA_STDLIB_ROOT")
+    fi
+    agda "${include_args[@]}" "$shadow_dir/$source"
+    rm -rf "$shadow_dir"
   fi
-  agda "${include_args[@]}" "$source"
   printf 'ACCEPTED BY AGDA: %s\n' "$source"
 }
 

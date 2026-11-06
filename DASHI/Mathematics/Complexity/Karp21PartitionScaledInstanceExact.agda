@@ -209,8 +209,8 @@ unitNonzero : Int.+ 1 ≡ Int.+ 0 → ⊥
 unitNonzero ()
 
 positiveTargetThresholdCertified :
-  (instance : PositiveCutTarget) →
-  Scaled.PositiveThreshold (positiveTargetThreshold instance)
+  (target : PositiveCutTarget) →
+  Scaled.PositiveThreshold (positiveTargetThreshold target)
 positiveTargetThresholdCertified unitEdgeYesPositive =
   Int.+≤+ z≤n , unitNonzero
 positiveTargetThresholdCertified (scaledCompletePositive parts nonzero) =

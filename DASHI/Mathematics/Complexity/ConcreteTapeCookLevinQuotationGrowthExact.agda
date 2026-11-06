@@ -164,8 +164,8 @@ nonemptyPayloadStrictlyBelowInitialCells
     rewrite
       Input.initialInputCellCount_nonempty
         symbol rest =
-  NatP.n<1+n
-    (suc (Canonical.listLength rest))
+  NatP.n≤1+n
+    (suc (suc (Canonical.listLength rest)))
 
 initialCellsBelowGuardedCols :
   ∀ {machine : Local.ConcreteTapeMachine}

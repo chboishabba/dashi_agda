@@ -124,9 +124,9 @@ encodedEdgeWordsAtLeastSparseBits (edge ∷ rest)
 ------------------------------------------------------------------------
 
 encodedGraphAtLeastSparseBits :
-  (instance : Graph.GraphInstance) →
-  Sparse.twoPerEdge (length (Cut.edges (proj₂ instance)))
-    ≤ Word.encodingSize (Encode.encodeGraphWord instance)
+  (inst : Graph.GraphInstance) →
+  Sparse.twoPerEdge (length (Cut.edges (proj₂ inst)))
+    ≤ Word.encodingSize (Encode.encodeGraphWord inst)
 encodedGraphAtLeastSparseBits (n , graph) =
   NatP.≤-trans
     (encodedEdgeWordsAtLeastSparseBits (Cut.edges graph))
@@ -189,11 +189,11 @@ encodedEdgeWordsAtLeastTripleBits (edge ∷ rest)
 -- The positive threshold field comes after all edges, so the exact
 -- parser guard is implied by the actual source-generated serialization.
 encodedGraphEdgeParserBudget :
-  (instance : Graph.GraphInstance) →
-  (length (Cut.edges (proj₂ instance)) * suc (suc (suc zero)))
+  (inst : Graph.GraphInstance) →
+  (length (Cut.edges (proj₂ inst)) * suc (suc (suc zero)))
     ≤ length
-       (Encode.encodeEdgeWords (Cut.edges (proj₂ instance))
-       ++ Gamma.encodeGammaNat (∣ Cut.threshold (proj₂ instance) ∣))
+       (Encode.encodeEdgeWords (Cut.edges (proj₂ inst))
+       ++ Gamma.encodeGammaNat (∣ Cut.threshold (proj₂ inst) ∣))
 encodedGraphEdgeParserBudget (n , graph) =
   NatP.≤-trans
     (encodedEdgeWordsAtLeastTripleBits (Cut.edges graph))

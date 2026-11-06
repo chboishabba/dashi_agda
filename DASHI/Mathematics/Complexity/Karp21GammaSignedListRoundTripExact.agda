@@ -76,6 +76,16 @@ readSignedItemsEncodeSuffix (value ∷ rest) suffix
         | readSignedItemsEncodeSuffix rest suffix =
   refl
 
+readSignedItemsEncode :
+  (values : List ℤ) →
+  Dec.readSignedItems (length values) (encodeSignedValuesPure values)
+    ≡ just (values , [])
+readSignedItemsEncode values =
+  subst
+    (λ bits → Dec.readSignedItems (length values) bits ≡ just (values , []))
+    (ListP.++-identityʳ (encodeSignedValuesPure values))
+    (readSignedItemsEncodeSuffix values [])
+
 ------------------------------------------------------------------------
 -- One bit per signed value is a genuine lower bound on the actual
 -- encoded source list, not a source-level oracle or a length field.
@@ -125,4 +135,4 @@ partitionWordDecodeEncode values
     (length (encodeSignedValuesPure values))
 ... | no impossible =
   ⊥-elim (impossible (signedListWireLengthLower values))
-... | yes _ rewrite readSignedItemsEncodeSuffix values [] = refl
+... | yes _ rewrite readSignedItemsEncode values = refl

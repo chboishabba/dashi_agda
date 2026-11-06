@@ -89,14 +89,14 @@ k00StrictSATInNPFromConcreteResourceReceipts :
 k00StrictSATInNPFromConcreteResourceReceipts
   cost verifierClock certificateBound =
   record
-    { PR.Certificate = Word.BitWord
-    ; PR.verifies = Verify.verifyStrictCookSATWord
-    ; PR.certificateAdmissible = strictSATCertificateAdmissible
-    ; PR.sound = λ word certificate _ verified →
+    { Certificate = Word.BitWord
+    ; verifies = Verify.verifyStrictCookSATWord
+    ; certificateAdmissible = strictSATCertificateAdmissible
+    ; sound = λ word certificate _ verified →
         Verify.strictCookExecutableVerifierSound word
           (certificate , verified)
-    ; PR.complete = strictSATToBoundedWitness
-    ; PR.polynomialVerification = verifierClock
-    ; PR.polynomialCertificateSize = certificateBound
+    ; complete = strictSATToBoundedWitness
+    ; polynomialVerification = verifierClock
+    ; polynomialCertificateSize = certificateBound
     }
 

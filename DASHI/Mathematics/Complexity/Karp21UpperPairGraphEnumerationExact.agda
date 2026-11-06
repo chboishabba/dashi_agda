@@ -113,9 +113,12 @@ completeGraphMatchesUpperPairEnumeration {n = suc n} (x Vec.∷ xs) =
       (trans
         (cong (map Gen.promoteTailEdge)
           (completeGraphMatchesUpperPairEnumeration xs))
-        (sym (mapCompose
-          (edgeAtUpperPair (x Vec.∷ xs))
-          Pair.tailPair (Pair.allUpperPairs n)))))
+        (trans
+          (mapCompose Gen.promoteTailEdge
+            (edgeAtUpperPair xs) (Pair.allUpperPairs n))
+          (sym (mapCompose
+            (edgeAtUpperPair (x Vec.∷ xs))
+            Pair.tailPair (Pair.allUpperPairs n))))))
     (sym (mapAppend
       (edgeAtUpperPair (x Vec.∷ xs))
       (map Pair.headTail (Pair.allFin n))

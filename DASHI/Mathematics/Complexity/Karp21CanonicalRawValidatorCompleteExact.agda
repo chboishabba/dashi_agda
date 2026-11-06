@@ -72,6 +72,9 @@ validateCanonicalRawEdgesSuccess {n} prev
      | Decode.strictAfter prev
          (Fin.toℕ (Cut.first edge))
          (Fin.toℕ (Cut.second edge))
+... | no notLess  | _           | _     = ⊥-elim (notLess ordered)
+... | yes _       | no notRange | _     = ⊥-elim (notRange inRange)
+... | yes _       | yes _       | false = ⊥-elim (Bool.falseNotTrue check)
 ... | yes firstLess | yes secondLess | true
   with FinP._≟_
     (Fin.fromℕ< (NatP.<-trans firstLess secondLess))
@@ -97,9 +100,6 @@ validateCanonicalRawEdgesSuccess {n} prev
     (Cut.weight edge)
     ∷ decodedRest)
   , refl
-... | no notLess | _ | _ = ⊥-elim (notLess ordered)
-... | yes _ | no notRange | _ = ⊥-elim (notRange inRange)
-... | yes _ | yes _ | false = ⊥-elim (Bool.falseNotTrue check)
 
 ------------------------------------------------------------------------
 -- The ORIGINAL decoder and SAME signed graph observation theorem
