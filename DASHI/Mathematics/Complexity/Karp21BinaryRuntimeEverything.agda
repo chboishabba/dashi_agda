@@ -41,3 +41,5 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelope
 
 -- Native bit-weighted original-word comparison envelope (not a machine receipt).
 import DASHI.Mathematics.Complexity.Karp21N21BitWeightedComparisonEnvelopeExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryWordEqualityPrimitiveExact
