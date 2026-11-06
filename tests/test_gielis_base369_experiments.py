@@ -622,3 +622,28 @@ def test_finite_ground_state_transform_identity_exact_rational_probes():
         proof=ground_state_identity_exact(q,edges,x)
         assert proof["energy"] == proof["diagonal_potential"]+proof["edge_squares"]
         assert proof["edge_squares"]>=0
+
+
+def test_vanishing_fd_mask_tolerance_preserves_legacy_grids_and_limit():
+    assert g.raster_boundary_tolerance(3/40) == 1e-12
+    assert g.raster_boundary_tolerance(3/60) == 1e-12
+    assert g.raster_boundary_tolerance(1e-9) == pytest.approx(1e-18)
+    assert g.raster_boundary_tolerance(1e-7) == pytest.approx(1e-14)
+    assert g.raster_boundary_tolerance(1e-12) == pytest.approx(1e-24)
+    with pytest.raises(ValueError):
+        g.raster_boundary_tolerance(0)
+
+
+@pytest.mark.parametrize("m,n",((3,41),(6,41),(9,41),(3,61)))
+def test_exact_original_fd_zero_extension_energy_identity(m,n):
+    from gielis_fd_energy_mosco import receipt
+    r=receipt(m,n)
+    assert r["status"]=="exact_discrete_energy_identity_passed"
+    assert r["legacy_1e_minus_12_mask_equal_at_selected_n"]
+    assert r["boundary_tolerance_limit_zero"]
+    assert r["exact_test_vectors"]==4
+    assert r["all_difference_squares_nonnegative"]
+    assert not r["liminf_compactness_proof_in_python"]
+    for c in r["checks"]:
+        assert c["exact_identity"]
+        assert c["operator_energy_integer"]==c["finite_difference_energy_integer"]
