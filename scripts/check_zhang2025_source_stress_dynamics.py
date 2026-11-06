@@ -77,6 +77,21 @@ def idiv_positive(value: Interval, coefficient: float) -> Interval:
     return iscale(value, 1.0 / coefficient)
 
 
+def idiv_interval_positive(value: Interval, denom: Interval) -> Interval:
+    if denom.lo <= 0:
+        raise ValueError("time interval divisor must be strictly positive")
+    return imul(value, Interval(1.0 / denom.hi, 1.0 / denom.lo))
+
+
+def time_interval(frame: dict) -> Interval:
+    center = finite(frame.get("t_s"), "timestamp")
+    error = finite(frame.get("t_s_bound"), "timestamp bound")
+    if error < 0:
+        raise ValueError("timestamp bound must be nonnegative")
+    nonempty(frame, "time_evidence_receipt")
+    return Interval(center - error, center + error)
+
+
 def vec3(value: object, label: str) -> tuple[float, float, float]:
     if not isinstance(value, list) or len(value) != 3:
         raise ValueError(f"{label}: require a measured 3-component vector")
@@ -133,9 +148,12 @@ def vacuum_maxwell_stress(E_V_m: object, B_T: object) -> dict:
 
 
 def _timed_frame(frame: dict) -> None:
-    finite(frame.get("t_s"), "time")
+    time_interval(frame)
     interval(frame.get("x_m"), "position")
-    vec3(frame.get("E_V_m"), "E_V_m")
+    electric_x = interval(frame.get("E_x_V_m"), "E_x")
+    electric_vector = vec3(frame.get("E_V_m"), "E_V_m")
+    if not electric_x.lo <= electric_vector[0] <= electric_x.hi:
+        raise ValueError("measured E_x interval inconsistent with field vector")
     vec3(frame.get("B_T"), "B_T")
     interval(frame.get("grad_E2_x_V2_m3"), "grad E2")
     interval(frame.get("grad_B2_x_T2_m"), "grad B2")
@@ -183,24 +201,28 @@ def validate_run(run: dict, mode: str) -> None:
         raise ValueError("at least three calibrated time frames required")
     for row in frames:
         _timed_frame(row)
-    if any(b["t_s"] <= a["t_s"] for a, b in zip(frames, frames[1:])):
-        raise ValueError("timestamps must strictly increase")
+    if any(time_interval(b).lo <= time_interval(a).hi
+           for a, b in zip(frames, frames[1:])):
+        raise ValueError("measured timestamp intervals must be non-overlapping")
 
 
 def _frame_force(run: dict, index: int) -> dict:
     f = run["frames"][index]
     previous = run["frames"][index - 1]
     following = run["frames"][index + 1]
-    dt_prev = f["t_s"] - previous["t_s"]
-    dt_next = following["t_s"] - f["t_s"]
+    t_prev, t_curr, t_next = (
+        time_interval(previous), time_interval(f), time_interval(following)
+    )
+    dt_prev = t_curr - t_prev
+    dt_next = t_next - t_curr
     x_prev = interval(previous["x_m"], "previous x")
     x = interval(f["x_m"], "current x")
     x_next = interval(following["x_m"], "next x")
-    velocity = idiv_positive(x_next - x_prev, dt_prev + dt_next)
+    velocity = idiv_interval_positive(x_next - x_prev, t_next - t_prev)
     accel = iscale(
-        idiv_positive(
-            idiv_positive(x_next - x, dt_next)
-            - idiv_positive(x - x_prev, dt_prev),
+        idiv_interval_positive(
+            idiv_interval_positive(x_next - x, dt_next)
+            - idiv_interval_positive(x - x_prev, dt_prev),
             dt_prev + dt_next,
         ), 2.0,
     )
@@ -219,7 +241,7 @@ def _frame_force(run: dict, index: int) -> dict:
     polarizability = interval(m["polarizability_C_m2_V"], "polarizability")
     chi = interval(m["magnetic_susceptibility"], "susceptibility")
     volume = interval(m["sample_volume_m3"], "volume")
-    efield = Interval(f["E_V_m"][0], f["E_V_m"][0])
+    efield = interval(f["E_x_V_m"], "E_x")
     classical = (
         imul(charge, efield)
         + iscale(imul(polarizability,
