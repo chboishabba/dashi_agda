@@ -1332,3 +1332,41 @@ v<n and strictAfter's internal comparisons, yielding 5m rather
 than the 3m *top-level predicate invocation* bound. The combined
 original successful-word envelope is the corrected
 `2L(L-1)+5L`. This is still not binary machine time.
+
+## 2026-11-07 — all-original-input N21 primitive-count polynomial
+
+The previous *successful graph word only* comparison envelope has now
+been strengthened without changing the original parser or graph domain.
+
+- `Karp21FinFreeAllWordValidationClockExact`: mirrors the ACTUAL
+  `readRawGraphWord` original gamma(n), gamma(m), 3m guard,
+  raw-edge read and positive W/suffix branches. It counts original
+  primitive raw-validator comparisons **even when that validator
+  rejects** a malformed graph, and proves for EVERY binary input word
+  `rawValidationCount(word) <= 5 * encodingSize(word)` from the
+  literal original source `readGammaSuffixWithinInput`,
+  `readRawEdgesCountExact` and 3m guard.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact`:
+  `allWordCombinedComparisonCount = original sparse consistency count
+  + original raw validator primitive count`; proves
+  `allWordCombinedComparisonBound` against
+  `C(L) + 5L = 2L(L-1) + 5L` and constructs an ACTUAL
+  `ERQ.PolynomialBound` with coefficient 7/exponent 2:
+  `count(word) <= 7*(1+L)^2` universally.
+- `Karp21N21SameWordCountedAcceptanceExact` now packages that exact
+  all-original-word primitive count with the original universal N21
+  typed/fin-free same-word Boolean theorem. In both Karp source roots.
+
+This is the strongest sound **operation-count** result of this tranche.
+It does NOT yet provide a proper bit-machine runtime: decoding
+`Nat` into unary values, binary comparisons and signed arithmetic
+cannot be treated as unit-cost steps. Nor does it typecheck itself
+without the exact Agda 2.9/parallel_checker receipt.
+
+**Updated K05 status:** original N21 raw validation + endpoint-history
+primitive-comparison count now SOURCE WRITTEN with an all-input
+native quadratic polynomial witness. Remaining: binary implementation,
+each arithmetic operation's bit-cost, end-to-end parser/score runtime,
+and original PolynomialCostModel/InNP certificate.
+**Updated K06 status:** original same-word verifier semantics source
+written, kernel acceptance and full E20/Cook compiler still pending.
