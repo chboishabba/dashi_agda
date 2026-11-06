@@ -67,7 +67,7 @@ module Ghost
             (WF.plainBefore
               (WF.headHere
                 (WF.plainCons
-                  (WF.plainCons WF.plainNil))))))
+                  (WF.plainCons WF.plainNil)))))))
 
   -- After the first new head, the trailing second head is not plain.
   -- This is refuted by the ACTUAL WF.PlainCells constructors.
