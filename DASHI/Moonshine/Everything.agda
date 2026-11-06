@@ -69,3 +69,7 @@ import DASHI.Moonshine.JInvariant369SSP15OggAddressCodecExact
 
 import DASHI.Moonshine.JInvariant369SSP15PrimeInternalFibreExact
 import DASHI.Moonshine.JInvariant369OggAddressResidualFibreExact
+
+-- Ivanov/Bray/TauCeti Y443 finite presentation and JMD pair-word action cut.
+-- This imports the constructive Agda theorem, not an unverified JMD certificate.
+import DASHI.Moonshine.Y443VNaturalPairGenerationValidation
