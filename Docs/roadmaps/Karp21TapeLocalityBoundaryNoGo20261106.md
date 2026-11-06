@@ -1,5 +1,20 @@
 # Cook–Levin tape-locality boundary ghost — exact obstruction and repair contract
 
+## 2026-11-06 — current max-cut implementation: endcap witness route (Agda source written)
+
+**Authority and scope:** Golden candidate sources are the ORIGINAL `ConcreteTapeAfterUniqueFromLocalityExact.agda` and `ConcreteTapeCanonicalEndcapCNFExact.agda`; the focused `ConcreteTapeBoundaryGuardFocusedRootExact.agda` imports both. The previously reported `NoGhostContextBoundaries` remains proof relevant. `dashi_lean4` AuthorityBoundary/Loom relation status is diagnostic comparison, never the Agda compiler receipt.
+
+**G1 (new, source-written):** `ConcreteTapeCanonicalEndcapCNFExact.plainEndcapPredicate` selects the original canonical cell-code headed flag (first bit), and `canonicalPlainEndcapCNFSound` / `canonicalPlainEndcapCNFComplete` prove literal equivalence with decoded `Pattern.IsPlainCell`. The `placedPlainEndcapSound` and `globalRowCellPlainSound` proofs transport that same literal predicate through `Rename.pullbackBits`, `Global.globalRowRename`, `Global.blockRename` and `Endpoint.liftBaseIndex`. `lastPhysicalColumn` selects an actual rightmost slot, and `globalAllRowsEndcapsCNF` compiles both physical endcaps across `allPhysicalRows (suc steps)`, with `globalAllRowsEndcapsSound` furnishing a proof-relevant per-row conjunction certificate. No alternative row codec, imaginary guard Boolean or arbitrary endcap index is used.
+
+**G2-a (new, source-written):** `ConcreteTapeAfterUniqueFromLocalityExact.frontPlainPrefixOfAppend`, `endPlainTail`, `endPlainSuffixOfAppend` and `endPlainAfterTriple` prove that *global* decoded after-row first/last plainness entails exactly the existing, extracted-centered `NoGhostContextBoundaries` through `noGhostFromAfterRowEndcaps`. The corollary `localityScanWithInteriorAndEndcapsGivesWellFormedStep` derives the ORIGINAL `WF.WellFormedMachineStep` without accepting the false unrestricted scan lemma.
+
+**G2-b (OPEN, decisive):** (i) use existing same-object fixed row decoder and global `Fin` block identities to transport `globalRowCellPlainSound` at first/last columns to `Pattern.FrontPlain` and `Pattern.EndPlain` on *each actual* `Step.decodedAfterRow`; (ii) conjoin `globalAllRowsEndcapsCNF` into the original `GlobalCNF.globalCookLevinCNF`, adapt both `GlobalFormulaPartsTrue` directions and `GlobalFormulaSemantics`, and prove the new guarded SAT↔run completeness over the same encoding. Its mere definition is not yet a conjunct of the old global formula.
+
+**G3–G5 (OPEN):** furnish the resulting `NoGhostContextBoundaries` to `Step.decodedAdjacentRowsFormMachineStep` and every time-slice in `ConcreteTapeDecodedRunInductionExact`; then finish `ConcreteTapeSATToAcceptingRunExact` and the costed machine reduction. G0 exact-head Agda 2.9 focused-root kernel acceptance is still OPEN. No local Agda installation is present here.
+
+**Finite test:** `scripts/check_karp21_canonical_endcap_cnf.py` now participates in referee preflight and its no-Agda fixture. An independent local Python equivalent exercised 33,020 exhaustive tag/payload and endcap assignments successfully. It is not an Agda compiler receipt or a proof of G2-b.
+
+
 **Attribution:** Original Cook (1971) / Levin (1973) tableau method and DASHI-owned Agda original sources. The specific finite counterexample and missing boundary-anchoring distinction are DASHI audit results of 2026-11-06; do not attribute a claimed Clay result to this work. The source-related Lean `AgdaMirror/AuthorityBoundary.lean` and `AgdaMirror/LoomRelationAlgebra.lean` are auxiliary evidence/governance parallels only. **Golden:** exact source Agda 2.9 `--safe` kernel acceptance.
 
 ## O / R / C / S / L / P / G / F as a ZKP-style verification contract
