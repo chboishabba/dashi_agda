@@ -162,3 +162,41 @@ The checked Python reference and the exact Agda source are
 different artifacts. The original `parallel_checker`/Agda 2.9
 kernel acceptance is STILL required for promotion. The source
 head of this branch must be pinned again after the final edit.
+
+## 2026-11-07 — actual original N21 bitword comparison-count cost bridge
+
+New owner `DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact`
+is imported in the actual Karp21Everything source root and Golden referee.
+
+**ORIGINAL donors**, not alternative toy language:
+- `Karp21FinFreeRawReaderSparseBudgetExact.actualFinFreeRawGraphSuccessHasSparseBudget`:
+  for any successful parse of the original gamma graph word,
+  `twoPerEdge m <= encodingSize word`.
+- `Karp21FinFreePairwiseQuadraticCountExact.maxAddressComparisonsClosed`:
+  `maxAddressComparisons m = 2*m*(m-1)` for the actual pairwise address loop.
+- `EfficientRecoverableQuotientExact.PolynomialBound`,
+  `PolynomialBoundClosureExact.productPolynomialBound` and
+  `constantMultiplePolynomialBound`.
+
+The new theorem first derives `m <= inputBitLength`, then
+monotonicity of the original comparison count. It proves
+
+```
+maxAddressComparisons m
+  <= maxAddressComparisons (encodingSize word)
+  <= 2 * (encodingSize word)^2
+```
+
+for every original successful raw graph read, with a native
+degree-two `PolynomialBound` witness. This is independent of
+declared `n`, even for a graph with a huge binary vertex count
+and one edge.
+
+**Precisely not paid:** each binary vertex-equality test's
+bit-operation cost; gamma and zigzag parsing in a fully specified
+binary tape machine; signed score/threshold arithmetic cost;
+strict full-word verification and compiler machine clock; actual
+`PR.polynomialTimeVerifier` for N21; Agda 2.9/parallel_checker
+kernel acceptance. These remain original K03/K05/K06/K07 gates.
+Independent Python arithmetic checked 63,001 finite (m,L) pairs
+with 2m <= L for m <= 250, L <= 500; this is not kernel evidence.
