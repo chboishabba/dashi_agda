@@ -60,6 +60,23 @@ def _validate_frame(f: dict) -> None:
     bn = sum(x*x for x in B)
     if not e2.lo <= en <= e2.hi or not b2.lo <= bn <= b2.hi:
         raise ValueError("measured vector field outside stated E2/B2 interval")
+    # Planar torsion: instrument-reported field axes must agree with measured
+    # x/y field vectors (mod pi, since the torque depends on E² and B²).
+    for vector, scalar, key in (
+        (E, en, "electric_axis_angle_rad"),
+        (B, bn, "magnetic_axis_angle_rad"),
+    ):
+        if abs(vector[2]) > 1e-12 * max(math.sqrt(scalar), 1e-30):
+            raise ValueError("selected planar torsion requires negligible z field")
+        if scalar > 0:
+            measured_axis = interval(f[key], key)
+            theta_axis = (measured_axis.lo + measured_axis.hi) / 2
+            phase_delta = math.remainder(
+                theta_axis - math.atan2(vector[1], vector[0]), math.pi
+            )
+            axis_uncertainty = (measured_axis.hi - measured_axis.lo) / 2
+            if abs(phase_delta) > axis_uncertainty + 1e-10:
+                raise ValueError("field-axis angle disagrees with vector E/B")
     backgrounds = f.get("background_torques_Nm")
     if not isinstance(backgrounds, dict):
         raise ValueError("bounded background torque map required")
