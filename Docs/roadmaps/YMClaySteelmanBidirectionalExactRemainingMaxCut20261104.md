@@ -1,3 +1,11 @@
+## 6 Nov source-first CMP119/116/122 BIDI max-cut
+
+[Full exact source-owner audit and physical BIDI falsifiers](../physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md). An original selected finite beta history + CMP119 localized density now produces in one source-written Agda bridge both exact beta coupling and source-native CMP109/116 effective potential. A literal selected R342 source similarly generates finite R467 physical-envelope covariance and R482 rate-based positive gap, so there is no requirement to separately re-prove source KP, normalized expectation derivatives, arbitrary energy-positivity token, or R454/R455 historical detours. New file `YMClayCMP119122116SelectedProducerWeldExact.agda`, static source contract `scripts/check_ym_cmp119116122_same_source_contract.py`; compiler receipt pending.
+
+**BIDI physical acceptance:** FWD 119→122→116 on original Wilson density, local inserted J, physical time source; BWD 116→same original action/beta and original Haar; CMP122 crossing reflection Gram PSD (pointwise exponential source bound is not enough); original T5 noncollapsed continuum/OS same H and all-G. Four indivisible original witness cuts Y.01–Y.04 are mapped into the active phased deliverables. Existing source theorems still require their hypotheses, but these must not be counted as independently missing *generic proofs*.
+
+---
+
 ## 6 November 2026 — same-original-Wilson constructive 4D continuum steelman / BIDI max-cut
 
 **Primary theorem proposal:** [YMClayConstructive4DContinuumSteelman20261106.md](../physics/YMClayConstructive4DContinuumSteelman20261106.md). It explicitly derives the hypothetical nontrivial 4D continuum from ONE original compact-simple-G Wilson family, not six unrelated records, and proposes source-specific bounds for same-observable UV Cauchy limits, IR/crossing tails, literal CMP116 mixed-J decay, OS reconstruction and non-Gaussian survival. The existing R443/R445/R320/R333 owners are reused; unification #1460 remains downstream.
