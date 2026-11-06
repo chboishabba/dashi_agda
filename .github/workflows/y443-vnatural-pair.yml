@@ -1,4 +1,4 @@
-name: Y443 Coxeter and Vnatural pair-action golden gate
+name: Y443 source finite certificates (Agda 2.9 via parallel_checker separately)
 
 on:
   workflow_dispatch:
@@ -8,6 +8,7 @@ on:
     paths:
       - 'DASHI/Moonshine/Y443*.agda'
       - 'scripts/check_y443_vnatural_pair_bridge.py'
+      - 'scripts/check_y443_jmd_*.py'
       - '.github/workflows/y443-vnatural-pair.yml'
   pull_request:
     paths:
@@ -19,21 +20,13 @@ permissions:
   contents: read
 
 jobs:
-  y443-finite-and-agda:
+  y443-finite-source:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Install pinned Agda/standard library compatible with DASHI
-        uses: wenkokke/setup-agda@v2
-        with:
-          agda-version: '2.6.4.3'
-          agda-stdlib-version: '2.1'
-      - name: Show toolchain versions
-        run: |
-          agda --version
-          python3 --version
-      - name: Run exact Y443 finite and golden Agda gate
-        run: python3 scripts/check_y443_vnatural_pair_bridge.py
-      - name: Check Y443 validation root
-        run: agda --safe -i . -l standard-library DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda
+      # Agda golden acceptance uses scripts/run_agda29_parallel_check.sh
+      # with the pinned DASHI 2.9 standard library and sources. The generic
+      # GitHub runner's old 2.6.4 compiler must NOT be called a golden pass.
+      - name: Run independent finite Y443 35-step and 141-step audits
+        run: python3 scripts/check_y443_vnatural_pair_bridge.py --finite-only
