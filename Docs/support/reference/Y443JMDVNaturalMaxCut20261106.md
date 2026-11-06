@@ -117,9 +117,7 @@ based only on group order or dimension is sufficient.
 **P — Preconditions still requiring actual providers.**
 P0 `NodeWordCertificate`: *all twelve* exact `u,v` words, including
 the path1 and path3 derivations of JMD's ten-step trace.
-P0a JMD's actual `w` word and equalities `x4 = w^5`,
-`beta = w^6`, now consumable by the proved `JMDStepsTwoToFour` module;
-`w` has not been reconstructed from the report alone.
+P0a **source-written cut now paid**: the original JMD Lean u/v/w paths are imported literally in Agda; the selected relator witness compiles through the 35-step A4 certificate into `x4 = w^5` and `beta = w^6`. Exact-head Agda kernel acceptance remains to be observed.
 P1 `NodeGeneration`: the presentation-induced node-generation
 theorem for the *same* selected source group.
 P2 `RelatorsSatisfied`: evaluate all **80** relations in that group,
@@ -131,11 +129,10 @@ compatibility using the actual selected representation, not merely labels.
 
 **G — Guards.** No postulates, holes, order-inference-by-arithmetic,
 or assertion that 12 Suzuki dimensions = 12 Y443 involutions. The
-fact that JMD reports `H = Y443` is tracked as attributed external data
-until the exact proof/witness is ingested.
+original JMD Lean theorem `y443_closure_pair_eq_top` has been retrieved and explicitly attributed, while native Agda replay of its complete path-generation argument remains a separate proof gate.
 
 **F — Finish/test.** First run the finite regression, then golden Agda
-typechecking. Both files must pass in the same source tree. Replaying
+typechecking. The complete current golden Y443 validation root must pass in the same source tree. Replaying
 JMD's certificate and the selected Monster/VOA identity are separate
 promotion gates.
 
@@ -150,13 +147,7 @@ The second command fails rather than pretending success if `agda` is
 missing. The first command provides an independently executable source
 transcription audit, *not* Agda kernel acceptance.
 
-**Current state:** source-written conditional two-generator surjectivity,
-plus constructive JMD trace steps 2--4 subgroup-word propagation,
-and same-V-natural-action proof, finite arithmetic independently checked.
-Agda has not been executed in this environment. The JMD words/Lean
-certificate and an actual Monster same-object witness have not been
-imported. Do not mark the unified Monster = Aut(V-natural) theorem as
-established on this basis.
+**Current state:** the original JMD Lean theorem and literal source words have been recovered; Agda source contains the complete proposed original-relator-to-beta-five rewrite/semantic chain, power-stage recovery, constructive conditional whole-group generation compiler and same-V-natural-action transport. The independent 35-step Python rewrite test was executed successfully. Agda --safe kernel acceptance has NOT been observed in this environment. Complete all-node path-generator recovery in Agda and the selected Monster = Aut(V-natural) identification remain open; no global endpoint promotion is claimed.
 
 
 ## Candidate 8-by-9 / C3 / analytical J coordinate cross-pollination
