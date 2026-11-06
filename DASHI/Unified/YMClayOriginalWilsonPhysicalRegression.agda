@@ -16,9 +16,6 @@ module DASHI.Unified.YMClayOriginalWilsonPhysicalRegression where
 -- proof-relevant physical Y.01/Y.02 applicability obligations.
 ------------------------------------------------------------------------
 
-import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact
-  as FiniteSource
-import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact
-  as NativeBlockedSource
-import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact
-  as PublishedLocalizationCompiler
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as FiniteSource
+import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact as NativeBlockedSource
+import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as PublishedLocalizationCompiler
