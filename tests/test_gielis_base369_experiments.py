@@ -133,3 +133,34 @@ def test_non369_controls_are_not_silently_excluded():
     assert len(controls)==13
     assert {item["m"] for item in controls} == {3,4,5,6,7,9}
     assert all(item["total_reflections"] <= 16*2 for item in controls)
+
+
+def test_roadmap_has_complete_exact_leaves_and_deliverables():
+    import re
+    roadmap = (ROOT / "Docs/support/reference/GielisBase369Roadmap.md").read_text()
+    ids = re.findall(r"^\\| (G\\d\\d) \\|",roadmap,flags=re.MULTILINE)
+    assert ids == [f"G{i:02d}" for i in range(1,22)]
+    for phase in range(6):
+        assert f"P{phase} " in roadmap or f"P{phase} —" in roadmap
+    for deliverable in range(8):
+        assert f"D{deliverable}" in roadmap
+    for owner in (
+        "Base369CirclePhase.agda",
+        "DNAHelixDihedralExact.agda",
+        "TorqueTrialectic369Exact.agda",
+        "AnalyticLogPolarSpiralCompilerExact.agda",
+        "ShannonInformationEntropyBoundary.agda",
+        "GielisBase369NyquistPhase36Exact.agda",
+    ):
+        assert owner in roadmap
+    assert "OPEN" in roadmap and "kernel" in roadmap
+
+
+def test_roadmap_named_new_sources_exist():
+    for relpath in (
+        "DASHI/Geometry/GielisBase369FiniteExact.agda",
+        "DASHI/Geometry/GielisBase369NyquistPhase36Exact.agda",
+        "DASHI/Geometry/GielisBase369ExistingOwnersWeldExact.agda",
+        "Docs/support/reference/GielisBase369Roadmap.md",
+    ):
+        assert (ROOT / relpath).is_file()
