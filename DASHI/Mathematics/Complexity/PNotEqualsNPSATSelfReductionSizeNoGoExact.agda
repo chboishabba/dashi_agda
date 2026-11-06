@@ -37,7 +37,7 @@ formulaNodeCount :
   ∀ {variables : Nat} →
   SAT.BooleanFormula variables →
   Nat
-formulaNodeCount (SAT.variable index) =
+formulaNodeCount (SAT.formulaVar index) =
   suc zero
 formulaNodeCount (SAT.constant value) =
   suc 0
@@ -60,7 +60,7 @@ restrictHeadPreservesNodeCount :
     (SAT.restrictHead bit formula)
   ≡
   formulaNodeCount formula
-restrictHeadPreservesNodeCount bit (SAT.variable index)
+restrictHeadPreservesNodeCount bit (SAT.formulaVar index)
     with index
 ... | Fin.zero =
   refl
