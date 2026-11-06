@@ -502,3 +502,91 @@ of the full JMD theorem. Full path-Coxeter endpoint recovery,
 actual all-node u/v witness, `NodeGeneration`, source Monster
 isomorphism, and literal `Aut_VOA(Vnatural)` identification
 remain separately identified.
+
+
+## 2026-11-06 terminal JMD full-path max-cut (source written, golden pending)
+
+**The previously named eleven path-shift debt is now discharged at source level.**
+The original 80-relator-to-whole-group pipeline is:
+
+```
+Y443CoxeterPresentationExact (12 squares + 66 pair relators +2 global)
+       │
+       ├─ Y443JMDA4RulesFromPresentationExact
+       │     original source -> beta^5 by 35 finite A4 rewrites
+       │     -> w^5=x4 and w^6=beta -> concrete x4, beta pair words
+       │
+       ├─ Y443AllCoxeterGraphLawsFrom80Exact
+       │     nth/source-index proofs for all 12 squares and 66 pairs
+       │     -> involution + nonedge commute + adjacent braid laws
+       │        for the literal selected group
+       │
+       └─ Y443JMDThreePathFiniteRewriteExact
+             7 backward P1 shifts *15 moves
+             4 forward P3 shifts  * 9 moves
+             = 141 checked local source-graph Coxeter rewrites
+                   │
+             Y443JMDPathShiftSemanticCompilerExact
+             -> all eleven group-valued shift identities
+                   │
+             Y443JMDAllTwelveNodeWordCompilerExact
+             -> 12 actual u/v TwoWord syntax trees + proofs
+                   │
+             Y443PresentedGroupNodeGenerationExact
+             (signed-node expression induction +
+              selected presentation-word surjectivity)
+                   │
+             Y443JMDPresentedVNaturalCapstoneExact
+             -> RepresentedByPair u v g for EVERY selected g
+             -> same selected VOA literal action
+                   │
+             Y443MonsterGradedLiteralSameObjectCapstoneExact
+             -> transport the EXISTING character/VOA action
+                along SAME-GROUP / SAME-VNATURAL equality receipts
+```
+
+The independent Python checker
+`scripts/check_y443_jmd_11_path_shifts.py` checks the 11 source
+path shifts and their 141 locally valid Coxeter moves; the existing
+`scripts/check_y443_jmd_beta5_rewrite_certificate.py` checks the
+35-step `beta^5` trace. The finite checker now requires both,
+and checks the source presence of the new modules.
+
+**Golden contract correction:** `scripts/check_y443_vnatural_pair_bridge.py`
+now delegates the transitive focused root to the repository's pinned
+Agda 2.9 `scripts/run_agda29_parallel_check.sh`, rather than only
+checking the elementary presentation/action files with a 2.6-era
+direct compiler. The generic GitHub Actions workflow performs only
+the independently executable finite tests and does NOT claim to be
+the golden Agda checker.
+
+**Exact remaining acceptance cut (not hidden):**
+1. **Kernel**: Execute the repository's Agda 2.9
+   `run_agda29_parallel_check.sh --safe
+   DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda`
+   on the PR exact head, correct any reported elaboration errors,
+   and retain a receipt. No kernel receipt is observed here, so
+   source-written claims are NOT marked Agda-accepted.
+2. **Concrete source group**: Inhabit
+   `PresentedByY443Nodes gi nodes` for the selected Y443/Monster
+   presentation quotient by proving the actual signed-word evaluator
+   is surjective. This is a natural construction fact about a
+   presented-group quotient, not the same as already having
+   `NodeGeneration` as an axiom. The rest of the node-generation
+   and 12-word transport is now proved from it.
+3. **Selected object alignment**: Supply the actual
+   `MonsterGradedVOALiteralActionWeld`, group identity equality
+   and `VNaturalConstruction` equality in
+   `SelectedMonsterLiteralY443Source`, rather than name-based
+   identification or a second action.
+4. **Full automorphism theorem**:
+   The existing core record only stores
+   `monsterIsFullVOAAutomorphismGroup : Set`; it does not yet
+   provide a proof-bearing equivalence of the concrete Monster
+   group and the full VOA automorphism set/group with
+   faithfulness, action axioms and onto-automorphism recovery.
+   The source-written two-generation theorem cannot replace this.
+
+The 80=72+8 alternative chart and no-equivariance result remain
+independent of the JMD whole-group proof, which does not assume
+a 369 chart, C3 zeta identification, or jCoarse/jFine correspondence.
