@@ -25,6 +25,7 @@ import DASHI.Moonshine.Y443JMDBetaFiveFiniteRewriteExact as W
 import DASHI.Moonshine.Y443JMDBetaFiveSemanticCompilerExact as Sem
 import DASHI.Moonshine.Y443CoxeterRelatorSemanticLawsExact as Laws
 import DASHI.Moonshine.Y443JMDNonadjacentRelatorConsequencesExact as Relations
+open Relations using (there; here)
 import DASHI.Moonshine.Y443JMDFromRelatorsToPowerExact as PowerRoute
 import DASHI.Moonshine.Y443JMDConcretePairPowerCompilerExact as Compiler
 import DASHI.Moonshine.Y443JMDTracePowerExact as Power
