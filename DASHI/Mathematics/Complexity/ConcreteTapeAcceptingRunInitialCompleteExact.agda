@@ -132,6 +132,8 @@ encodedAcceptingAssignment_baseTrace
       _)
 
 
+-- FINISH ROW IS PROPOSITIONALLY, NOT DEFINITIONALLY, THE START
+-- WIDTH. Use the ONE original width equality at the global boundary.
 encodedRunBase_finalRow :
   ∀ {machine start rows finish}
     (stateCoverage :
@@ -143,7 +145,10 @@ encodedRunBase_finalRow :
     (Endpoint.finalRowSlot (Run.runLength run))
     (Assignment.encodeRunBaseTrace
       stateCoverage symbolCoverage run)
-  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+  ≡ Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (Assignment.runFinishCanonicalLength run)))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
 encodedRunBase_finalRow
     stateCoverage symbolCoverage run
     rewrite sym (Assignment.finalRunRowSlot_eq_finalRowSlot run) =
@@ -176,7 +181,11 @@ encodedAcceptingAssignment_finalRow :
     (FormulaSem.baseTraceBits
       (Assignment.encodeAcceptingRunAssignment
         stateCoverage symbolCoverage certificate))
-  ≡ Flat.encodeRow stateCoverage symbolCoverage finish
+  ≡ Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine)
+        (sym (Assignment.runFinishCanonicalLength
+          (Accepting.run certificate))))
+      (Flat.encodeRow stateCoverage symbolCoverage finish)
 encodedAcceptingAssignment_finalRow
     stateCoverage symbolCoverage certificate =
   trans
@@ -189,6 +198,25 @@ encodedAcceptingAssignment_finalRow
     (encodedRunBase_finalRow
       stateCoverage symbolCoverage
       (Accepting.run certificate))
+
+-- A dependent decode commutes with the ONE canonical length cast.
+-- Pattern matching on eq, rather than rewrite/with on a free length,
+-- eliminates the indexed target safely in Agda 2.9.
+decodeCastRow :
+  ∀ {machine fromCols toCols}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (eq : fromCols ≡ toCols)
+    (encoded : CNF.Bits
+      (toCols * Canonical.CellWidth machine)) →
+  Decode.decodeRow stateCoverage symbolCoverage fromCols
+    (Assignment.castBits
+      (cong (λ n → n * Canonical.CellWidth machine) (sym eq))
+      encoded)
+  ≡ Decode.decodeRow stateCoverage symbolCoverage toCols encoded
+decodeCastRow stateCoverage symbolCoverage refl encoded = refl
 
 decodedAcceptingAssignment_finalRow :
   ∀ {machine start rows finish}
@@ -215,24 +243,13 @@ decodedAcceptingAssignment_finalRow
       (Decode.decodeRow stateCoverage symbolCoverage _)
       (encodedAcceptingAssignment_finalRow
         stateCoverage symbolCoverage certificate))
-    (transportDecode
-      (Assignment.runFinishCanonicalLength
-        (Accepting.run certificate))
+    (trans
+      (decodeCastRow stateCoverage symbolCoverage
+        (Assignment.runFinishCanonicalLength
+          (Accepting.run certificate))
+        (Flat.encodeRow stateCoverage symbolCoverage _))
       (Initial.decodeRow_encodeRow
         stateCoverage symbolCoverage _))
-  where
-    transportDecode :
-      ∀ {machine}
-        {start finish : Local.TapeRow machine}
-        (lengthEq :
-          Canonical.listLength (Local.cells start)
-          ≡ Canonical.listLength (Local.cells finish)) →
-      Decode.decodeRow stateCoverage symbolCoverage
-        (Canonical.listLength (Local.cells start))
-        (Flat.encodeRow stateCoverage symbolCoverage finish)
-      ≡ finish
-    transportDecode refl proof =
-      proof
 
 encodedAcceptingAssignment_initialPullback :
   ∀ {machine start rows finish}
