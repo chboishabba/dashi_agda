@@ -54,6 +54,14 @@ class EvidencePacketTests(unittest.TestCase):
             }],
         }
 
+    def test_verified_packet_receipt_is_deterministic(self):
+        a = e.verify_manifest(self.m, self.root)
+        b = e.verify_manifest(self.m, self.root)
+        self.assertEqual(a["verified_manifest_receipt_sha256"],
+                         b["verified_manifest_receipt_sha256"])
+        self.assertEqual(len(a["verified_manifest_receipt_sha256"]), 64)
+        self.assertFalse(a["calibration_correctness_independently_authenticated"])
+
     def test_real_file_hashes_are_checked(self):
         r = e.verify_manifest(self.m, self.root)
         self.assertTrue(r["byte_integrity_checked"])
