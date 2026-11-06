@@ -118,5 +118,49 @@ class QuantitativeConsumerTests(unittest.TestCase):
         )
 
 
+    def test_mass_normalization_for_same_acceleration_is_conditionally_consistent(self):
+        a = [
+            dict(apparatus_id="SYNTHETIC/A", protocol_id="SYNTHETIC/ONOFF",
+                 sample_id="paper", force_lo_N=4.5e-9, force_hi_N=5.5e-9,
+                 mass_lo_kg=50e-6, mass_hi_kg=50e-6,
+                 calibrated_force_and_ordinary_controls_declared=True,
+                 data_locator="SYNTHETIC/paper"),
+            dict(apparatus_id="SYNTHETIC/A", protocol_id="SYNTHETIC/ONOFF",
+                 sample_id="aluminium", force_lo_N=1.8e-7, force_hi_N=2.2e-7,
+                 mass_lo_kg=2e-3, mass_hi_kg=2e-3,
+                 calibrated_force_and_ordinary_controls_declared=True,
+                 data_locator="SYNTHETIC/aluminium"),
+        ]
+        r = q.conditional_material_independence_consumer(a)
+        self.assertIsNotNone(r["shared_acceleration_interval"])
+        self.assertFalse(r["common_acceleration_established"])
+        self.assertFalse(r["gravitational_mechanism_established"])
+
+    def test_material_consumer_rejects_distinct_protocol(self):
+        rows = [
+            dict(apparatus_id="A", protocol_id="ONOFF-1", sample_id="paper"),
+            dict(apparatus_id="A", protocol_id="ONOFF-2", sample_id="metal"),
+        ]
+        with self.assertRaisesRegex(ValueError, "same apparatus/protocol"):
+            q.conditional_material_independence_consumer(rows)
+
+    def test_material_consumer_blocks_missing_classical_controls(self):
+        rows = [
+            dict(apparatus_id="A", protocol_id="P", sample_id="paper",
+                 calibrated_force_and_ordinary_controls_declared=False),
+            dict(apparatus_id="A", protocol_id="P", sample_id="metal",
+                 calibrated_force_and_ordinary_controls_declared=True),
+        ]
+        self.assertEqual(
+            q.conditional_material_independence_consumer(rows)["kind"], "not_identifiable"
+        )
+
+    def test_signed_force_mass_interval_handles_negative_force(self):
+        lo, hi = q.acceleration_interval_from_force(-2., -1., 1., 2.)
+        self.assertEqual((lo, hi), (-2., -.5))
+        with self.assertRaisesRegex(ValueError, "positive mass"):
+            q.acceleration_interval_from_force(0., 1., 0., 1.)
+
+
 if __name__ == "__main__":
     unittest.main()
