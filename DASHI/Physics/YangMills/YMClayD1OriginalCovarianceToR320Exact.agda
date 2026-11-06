@@ -14,7 +14,7 @@ module DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Rational.Base as ℚ using (ℚ; _≤_)
+open import Data.Rational.Base as ℚ using (ℚ; _≤_; ∣_∣)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans; subst)
 
 import DASHI.Physics.YangMills.BalabanClayT5PhysicalMeasureGramContinuityExact as Gram
@@ -23,6 +23,9 @@ import DASHI.Physics.YangMills.BalabanClayT2TraversalRootedShellExact as Shell
 import DASHI.Physics.YangMills.BalabanT5StateFamilySourceAlgebraRound295Exact as R295
 import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Exact as R318
 import DASHI.Physics.YangMills.BalabanT5DirectSelectedMarkedDecayRound320Exact as R320
+import DASHI.Physics.YangMills.BalabanT5JMagnitudeDirectShellRound296Exact as R296
+import DASHI.Physics.YangMills.YMClayRouteSH1DirectSelectedMarkedDecayExact as H1
+import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as Direct
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 
 module _
@@ -120,3 +123,29 @@ module _
         cutoff left right)
       (R320.mixedDerivativeMagnitudeBelowSelectedShell
         payment cutoff left right)
+
+  -- The existing canonical Route-S compiler immediately consumes the
+  -- original physical covariance bound. Its output is the literal finite
+  -- T5 source that R333 expects; no independent R296 source is requested.
+  originalCovarianceBoundBuildsR333FiniteSource :
+    (originalBound :
+      ∀ cutoff left right →
+      R278.connectedCovarianceMagnitude extension
+        (Gram.measureSequence dataSet cutoff) left right
+      ≤
+      Shell.rootedShell (R318.shellData base)
+        (R318.scaleOf base cutoff)
+        (R318.volumeOf base cutoff)
+        (R318.connectingRoot base cutoff left right)
+        (R318.physicalDistance base left right)) →
+    (magnitudeIsAbsolute :
+      ∀ value → R278.magnitude extension value ≡ ∣ value ∣) →
+    R296.ExactT5JMagnitudePresentation dataSet extension
+  originalCovarianceBoundBuildsR333FiniteSource
+      originalBound magnitudeIsAbsolute =
+    Direct.routeSH1BuildsFiniteMagnitude base
+      (record
+        { H1.RouteSH1DirectSelectedPayment.directSelectedDecay =
+            originalConnectedCovarianceRootedShellBound originalBound
+        })
+      magnitudeIsAbsolute
