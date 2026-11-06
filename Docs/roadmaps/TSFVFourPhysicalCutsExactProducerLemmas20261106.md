@@ -28,6 +28,14 @@
 | **OBS09** — `originalFutureConeHyperbolicEnergyWellposed` | `P02.L11,L12` | Prove global physical future orientation from selected filtration and source operator well-posedness/positive energy, not merely signature convention. |
 | **OBS10** — `originalSignatureOwnersAndMassNoGoWeld` | `P02.L09,L14–L16;P07.L04` | Reconcile existing Lorentz source owners; use existing mass-sensitive response no-go to prevent a causal metric from being misidentified with a full quantum Hamiltonian. |
 
+## HIL07/HIL08 2026-11-06 additional proof
+
+- `DASHI.Physics.Foundations.TSVFObserverOSCyclicGramSetoidExact` is now in the child Golden regression. It proves the all-test Gram-observational equivalence relation reflexive, symmetric, transitive, reflected by the physical word map, and (with explicit OS word coverage) preserved in both directions. Pairings are preserved on all mapped words from one all-word Gram equality. This is a genuine *word-level setoid compiler*, **not** completed GNS Hilbert, a physical positive form, or proof that `allWordGramMatches` is inhabited.
+- Key correction: vanishing of one mixed cross-pairing is NOT the GNS null equivalence relation. The implementation uses equality against every test word. The positivity/Cauchy–Schwarz lemma relating that equivalence to the usual norm-null quotient is still required.
+- Latest YM parent's `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact` establishes original n=3 mixed-log two-source covariance on R445/R320. This is only a degree-two / centered-moment source, **not equality of arbitrary observable-word Schwinger Gram kernels**. A true HIL07 instantiation needs finite *all-order* moments from original Wilson products, same-order OS reflection pairings, physical observer state identification and compatible continuum measures. Do not silently promote matching covariance to full isometry.
+- Independent OS word coverage at finite words is stronger than the physically natural dense cyclic range. Prove density, extend the isometry by Hilbert completion, then derive surjectivity from dense closed range. Domain and spectral compatibility remain distinct HIL09–HIL11 gates.
+- Source read/write completed on child; exact-head `parallel_checker` has not executed, and no trusted kernel receipt is claimed. New YM parent file is not in this branch yet; do not import it before a conflict-resolved source merge.
+
 ## S08–S09: actual observer Hilbert/Stone and physical YM OS identification
 
 | Proposed producer lemma | Canonical original IDs | Exact proof target |
