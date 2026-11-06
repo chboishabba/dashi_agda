@@ -105,7 +105,7 @@ formulaIndexTokenBound :
   AllIndicesWithin
     (Prefix.cookFormulaTokenCount formula)
     (Finite.formulaVariables formula)
-formulaIndexTokenBound (Cook.variable i) =
+formulaIndexTokenBound (Cook.formulaVar i) =
   (NatP.≤-trans
      (indexWithinUnaryTokenCount i)
      (naturalAtMostSuccessor (Prefix.natTokenCount i)))
