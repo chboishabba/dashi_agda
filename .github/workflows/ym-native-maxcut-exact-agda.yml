@@ -12,6 +12,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda'
       - 'DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -42,6 +43,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda'
       - 'DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -108,6 +110,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayCMP119122116SelectedProducerWeldExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteTwoSourceJetExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
