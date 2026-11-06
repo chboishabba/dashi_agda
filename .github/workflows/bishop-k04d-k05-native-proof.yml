@@ -10,6 +10,9 @@ on:
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
       - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
+      - 'DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda'
+      - 'DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda'
+      - 'DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda'
       - 'scripts/check_k05_symbolic_grouped.py'
       - 'DASHI/EverythingTOESymmetryResolved369.agda'
       - 'DASHI/Unifier.agda'
@@ -78,6 +81,9 @@ jobs:
             DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda
             DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda
             DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda
+            DASHI/Foundations/BishopUnsignedFactorialCauchyParitySplitExact.agda
+            DASHI/Foundations/BishopSignTwistedFiniteCauchyCoefficientExact.agda
+            DASHI/Foundations/BishopRound11SignedFactorialDegreeBinomialExact.agda
             DASHI/Analysis/BishopRound11ConcreteAbsoluteSeriesConvergenceExact.agda
             DASHI/Analysis/BishopGenericCauchyFromAbsoluteTriangleExact.agda
             DASHI/Analysis/BishopPositiveCauchyTriangleFromAbsoluteSeriesExact.agda
