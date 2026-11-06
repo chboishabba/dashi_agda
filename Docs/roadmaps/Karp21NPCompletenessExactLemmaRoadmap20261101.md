@@ -1295,3 +1295,29 @@ fully costed all-word map and Cook–Levin transitive acceptance.
 comparisons, signed score, and the explicit machine clock. The
 operation-count polynomial does NOT turn unary Nat operations into
 binary constant-time primitives.
+
+## 2026-11-07 — original raw graph validator cost folded into N21 cut
+
+Two new source-written ORIGINAL-source modules (imported by original
+Karp21Everything and Karp21BinaryRuntimeEverything):
+
+- `Karp21FinFreeRawValidatorComparisonCountExact` instruments the
+  ACTUAL `Runtime.validRawEdges` decisions `u<v`, `v<n` and
+  original `Graph.strictAfter`. `originalRawValidatorValueSame`
+  states literal Boolean equivalence on any raw edge list, including
+  invalid/unsorted/over-range edges. The actual short-circuiting
+  validation count is at most `3*m`.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact` composes
+  the validation count with the genuine `2m(m-1)` original sparse
+  history endpoint-equality count. For every original successfully
+  parsed graph word of length L, it proves the combined count is
+  bounded by `C(L)+3L`, where `C(L)=2L(L-1)`.
+  Thus the combined number of address/order comparisons is bounded
+  by the explicit polynomial expression `2L(L-1)+3L`.
+
+No separate fabricated finite graph verifier is introduced.
+This joins the source-level original decision and address-operation
+resource accounting. It is NOT yet a binary bit-operation or Turing
+machine polynomial clock: gamma parsing, comparisons on arbitrary
+binary integers, signed cut arithmetic, all malformed parser branches,
+actual strict clock instantiation and Agda acceptance remain to pay.
