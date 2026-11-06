@@ -10,7 +10,7 @@
 - [x] Import/export both from original child `DASHI.Unified.TSFVUnifiedRegression`, preserving separate YM and TSVF/KK/OS owner roots.
 - [x] Execute 2,764 equivalent exact Fraction checks of coupling/response/mass inverse BIDI; commit `scripts/check_tsfv_acoustic_impulse_mass_bidi_20261106.py`. This is a reference, NOT Agda.
 - [x] Preserve 186 canonical IDs + 186 status entries; write 48-task five-phase execution crosswalk to 101 original canonical lemma IDs, inspect all IDs against the live original ledger.
-- [x] Implement `scripts/run_tsfv_unification_maxcut_20261106.sh`, Nix-aligned `--safe` source proof candidates, original YM/TSVF/combined roots, and CI source/reference/48-ledger checks.
+- [x] Implement `scripts/run_tsfv_unification_maxcut_20261106.sh`, canonical Agda29 `parallel_checker` `--safe` source proof candidates, original YM/TSVF/combined roots, and CI source/reference/48-ledger checks.
 
 ## Exact remaining physical max-cut (do not mark complete)
 
@@ -26,4 +26,4 @@
 - [ ] **S11** actual pinned-head Agda compiler and zero-meta/transitive trust reports, independent analytic proofs and physical measurement receipts (V01–V06). GitHub Actions has reported no runs for the #1460 branch; a workflow file is not acceptance.
 - [ ] **Parent synchronization** on future #1444 commits: compare pinned donor head and repeat conflict-aware parent→child integration, never child→parent without independent YM owner's review.
 
-**Required command on clone/Nix:** `nix develop .# --command bash scripts/run_tsfv_unification_maxcut_20261106.sh`. All files above have source GitHub readback but no actual Agda compiler receipt in this turn. The terminal full E1 theorem and Clay endpoint remain OPEN.
+**Required command via repository parallel_checker:** `AGDA_JOBS=4 bash scripts/run_tsfv_unification_maxcut_20261106.sh`. The wrapper invokes `scripts/run_agda29_parallel_check.sh` and manages its own compiler/cache/stdlib; do not invoke Nix or Agda directly. All files above have source GitHub readback but no actual Agda compiler receipt in this turn. The terminal full E1 theorem and Clay endpoint remain OPEN.
