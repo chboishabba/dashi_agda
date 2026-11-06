@@ -251,3 +251,20 @@ Brown, Indigenous/Two-Eyed, Žižek, Kimmerer and ITIR owners. The Sophontic,
 Bolo, ESD and runtime Wiki PRs are explicitly provenance-controlled donors,
 not silently imported unmerged implementations. Golden kernel verification
 and real causal/intent identification remain OPEN.
+
+## Intersectionality correction (6 November 2026, follow-up)
+
+The P3 mathematical owner has been corrected after inspecting the actual
+`IntersectionalConstraintGeometryExact`, `IntersectionalBinaryInteractionBridgeExact`,
+`IntersectionalNonFactorability`, `BinaryInteractionNonseparabilityExact`,
+`IndexedRelationalHyperfabricSpineExact` and longitudinal axis-bundle owners.
+Two race-axis positions are **not** identified with two sex-axis positions
+because both lists have cardinality two. Axis indices are distinct types;
+cardinality, order and equal numerals do not supply a cross-axis coercion.
+The new `CCDCOEP3TypedIntersectionalAxisExact.agda` consumes the original
+rectangle obstruction and proves a full typed-coordinate observation can
+still lose context and recognition outcomes; any recharting of that observer
+also loses the distinction. The earlier `2x+2y+x*y` toy was removed as
+an intersectionality formalisation, not merely relabelled. The definitive
+P3 evidence/accounting roadmap is
+[CCDCOEP3CausalTrialecticSourceMaxCut20261106](../roadmaps/CCDCOEP3CausalTrialecticSourceMaxCut20261106.md).
