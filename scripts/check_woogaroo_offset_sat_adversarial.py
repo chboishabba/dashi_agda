@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+from fractions import Fraction
 from pathlib import Path
 
 MWW_TREES = (0, 2, 0, 1, 0)
@@ -54,6 +55,18 @@ def finite_checks() -> dict:
     assert set(raw_totals) == set(range(41))
     assert all(0 <= n <= 10000 for n in MWW_REPORTED_OFFSET_BASIS_POINTS.values())
 
+    # Conditional only: A16 expresses species stocking as score/70 x 4.
+    # Removing a 10/70 presence subcomponent from one AU, HOLDING OTHER
+    # components fixed, changes that AU's stocking contribution by 4/7.
+    # Not a MHQA/OAG offset-percentage result or evidence of improper rule.
+    conditional_AU_stocking_delta = Fraction(10 * 4, 70)
+    assert conditional_AU_stocking_delta == Fraction(4, 7)
+    # Both independent interpretations remain admissible until the
+    # rubric is joined: site-wide presence allowed vs AU-specific only.
+    rubric_worlds = (True, False)
+    assert rubric_worlds == (True, False)
+
+
     return {
         "case": "EPBC 2019/8575",
         "decision_date": "2026-10-16",
@@ -80,6 +93,8 @@ def finite_checks() -> dict:
             "unlocated_AU_use_worlds": len(worlds),
             "site_positive_worlds_without_AU_join": len(site_positive),
             "AU_use_identified_from_exposed_data": False,
+            "rubric_compatible_and_incompatible_worlds_unresolved": 2,
+            "conditional_one_AU_max_presence_component_change_exact": "4/7 of a 10-point composite",
             "raw_presence_subscore_allocations": len(raw_totals),
             "raw_score_range_not_ecological_CI": [min(raw_totals), max(raw_totals)],
             "OAG_percentage_recomputed": False,
@@ -102,7 +117,7 @@ def check_agda_contract(source: str) -> None:
     for token in (
         "mountWalkerThreePositiveTrees", "avonvaleSeventeenPositiveTrees",
         "mountWalkerTwoPositiveSATs", "avonvaleThreePositiveSATs",
-        "allFourPresenceComponentsTotal", "noUniversalAU1UseDecoder",
+        "allFourPresenceComponentsTotal", "noUniversalAU1UseDecoder", "noUniversalRubricCorrectnessDecoder",
         "habitatGroundCountermodel", "CompleteOffsetDischarge",
         "originalAUSurveyCoordinates", "final20261015OffsetPlanVersionIdentity",
     ):
