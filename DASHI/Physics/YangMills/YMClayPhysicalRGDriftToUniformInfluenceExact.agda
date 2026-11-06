@@ -22,7 +22,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
   (ℚ; 0ℚ; 1ℚ; _+_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
-open import Relation.Binary.PropositionalEquality using (subst)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 -- Total RG drift through the first n original refinement steps.
 finiteRGDrift : (Nat → ℚ) → Nat → ℚ
@@ -84,8 +84,6 @@ selectedRGInfluenceBelowFiniteDrift source zero =
     (λ upper → selectedPhysicalInfluence source zero ≤ upper)
     (sym (ℚP.+-identityʳ (referenceInfluence source)))
     (referenceInfluenceUpper source)
-  where
-    open import Relation.Binary.PropositionalEquality using (sym)
 selectedRGInfluenceBelowFiniteDrift source (suc n) =
   let
     inductive = selectedRGInfluenceBelowFiniteDrift source n
