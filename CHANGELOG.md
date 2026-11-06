@@ -1,3 +1,9 @@
+## 2026-11-06 — Original Wilson analytic-J source completion cut
+
+- Repository archaeology recovered existing real normalized CMP119 two-J source/cumulant calculus, observable-indexed source meaning (R403), common domain (R327), literal localization (R342/R344/R454) and bounded compact-SU(N) holomorphic finite marked-source proof. Removed the spurious independent finite analytic-J mathematical leaf from the roadmap.
+- Added `YMClayOriginalWilsonAffineMarkedPartitionExact.agda` with actual original variable-cutoff Wilson two-marked affine numerator integral, pointwise four-coefficient factor expansion, exact integrated numerator Taylor polynomial, and corresponding *normalized* moment polynomial under existing ordered-Haar integration and real-field denominator laws.
+- Updated physical Agda regression imports and six original mathematical/roadmap documents; remaining gates concern the CMP119/122 *renormalized physical same-source* and CMP116 *uniform localized decay*, not the elementary finite Hessian identity. No Agda kernel acceptance claimed.
+
 ## 2026-11-06 — YM original finite two-source max-cut
 
 - Added `YMClayOriginalWilsonFiniteTwoSourceJetExact.agda`: original variable-cutoff SU(N) Wilson density/partition anchoring, product-Haar finite integration laws, numerator additivity, explicit unit-normalization proof boundary and two literal formal-jet/connected-covariance equalities on one source.
