@@ -23,7 +23,7 @@ module DASHI.Mathematics.Complexity.Karp21GammaBinaryRoundTripExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (_∸_)
+open import Data.Nat.Base using (_∸_; _+_)
 open import Data.List.Base using (List; []; _∷_; _++_; length)
 open import Data.Product using (Σ; _,_)
 open import Data.Maybe.Base using (just)
