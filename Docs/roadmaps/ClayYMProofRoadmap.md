@@ -1,3 +1,15 @@
+## 7 November — final source-validity cuts on PR #1444
+
+The native E1 source now selects an explicitly proof-bearing gauge-invariant original Wilson polynomial cylinder class (`SelectedNativeCylinderAlgebra`; example `OriginWilsonPolynomial`) instead of all arbitrary n-sections. `PhysicalRealConverges` uses an explicit epsilon--N definition and `PhysicalRealSequentialConvergenceLaws` carries standard topology; no tautological `lim(s)=lim(s)` can close E1. `YMClayE1VariableCutoffCylinderLimitExact` uses explicit cutoff-indexed congruence and arithmetic convergence transports with no inferred holes, and its physical owner derives finite integration laws from actual native variable Wilson/Haar.
+
+For D1, `YMClayD1OriginalRealCMP116VariableCutoffExact` now **derives** its exact real original covariance identity via `YMClayOriginalWilsonFiniteTwoSourceJetExact.originalWilsonMixedJetIsSameFiniteCovariance` and asks only for genuine analytic CMP116-to-original-literal-J identification and physical rate, rather than another independent covariance identity.
+
+The source-valid full-Gibbs route is `YMClayD1OriginalFullWilsonSmallLargeFieldExact.originalFullWilsonUniformGeometricClustering`: original full covariance <= small-field CMP116 source + large-field remainder, both controlled by the same cutoff-independent physical-block geometric profile q<1. It is a mathematical conditional compiler. Published CMP116 four-dimensional small-field bounds do **not** supply the original full Gibbs large-field error; Bałaban CMP119 convergent expansions are stated in superrenormalizable scope, not a completed 4D full Yang–Mills measure. Missing hard D1 inputs are exactly `originalFullCovarianceBelowSmallPlusLarge`, `smallFieldEnvelopeCalibration`, `largeFieldErrorCalibration`, `smallFieldGeometricRate`, `largeFieldGeometricRate`, source admissibility and geometric physical calibration.
+
+D2 H2/H3 OS semigroup and R287 cyclicity, N1 H6 Ward/Maxwell or RG cumulant, G1 all compact simple physical continuation remain the same cross-cutting terminal science. An Agda source-written record with physical theorem-valued fields is not a proof of those inputs. Only exact-head `parallel_checker` + trust audit can certify the formal code; no such receipt exists from this session. Clay completion is not claimed.
+
+---
+
 ## 7 November — CLAY YM production sprint, E1 genuine convergence + D1 full Wilson
 
 Current canonical max-cut remains **E1, D1, D2, N1, G1**, not a 1024-link/observer/KK package. See `Docs/physics/YMClayMinimalEndpointMaxCut20261107.md`.
