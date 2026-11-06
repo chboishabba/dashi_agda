@@ -406,3 +406,45 @@ What is now exact at SOURCE level:
 The new degree-three expression is a polynomial schedule, NOT an
 unconditional Turing-machine execution bound; no false claim that
 native Agda `Nat` equality is constant time.
+
+## 2026-11-07 — binary-native gamma and signed token readers
+
+A concrete resource defect was identified in the original executable
+`Karp21GammaZigzagPartitionWordDecodeExact.readGamma`: it
+reconstructs `pow2 zeros` and the full decoded magnitude as Peano
+`Nat`. A source proof of gamma token count alone is insufficient
+to assert polynomial execution of that original implementation.
+
+New:
+- `Karp21GammaBinaryNativePayloadExact`:
+  `readGammaBinary`, `readPayload` and `scanZeros` operate on the
+  source's real `FiniteWordSizeExact.BitWord` and return the binary
+  `n+1` representation plus the literal remaining suffix, without
+  forming `n` as Peano `Nat`. `gammaOriginalEncodeNativeSuffix`
+  proves the native parser reads outputs of the ORIGINAL Elias-gamma
+  encoder. `gammaNativeInspectionLinear` proves its all-input
+  recursive source-inspection work ≤1+input length, malformed
+  strings included.
+- `Karp21GammaBinaryNativeSignedExact`:
+  `splitLast` and `readSignedBinary` directly derive the sign and
+  magnitude of a signed zigzag value from `n+1`'s last binary bit:
+  last=1 means nonnegative, last=0 means negative; preceding bits are
+  floor((n+1)/2). `readSignedOriginalGammaEncodedExact` proves the
+  original encoder-image bridge, and `splitLastInspectionLinear`
+  bounds the structural inspections for the magnitude extraction.
+
+Independent reference tests ACTUALLY EXECUTED: all 8,191 binary
+strings with length ≤12 for each binary gamma and signed parser;
+both agreed with the old numerical/zigzag parser and suffix on
+every well-formed token and rejected every malformed token, and
+the gamma inspection bound held. Retained
+`scripts/check_karp21_gamma_binary_native*.py` are wired to the
+original referee, with focused Agda roots in golden mode.
+
+Still **not a full bit-machine clock**: all-input numerical
+equivalence of the new binary reader to the original mathematical
+`readGamma`; canonical binary comparison `<` and `strictAfter`;
+multi-token graph parser; encoded endpoint bounds; signed binary
+addition and threshold comparison; certificate loop; input/output
+tape motion; E20 and original Cook–Levin. Neither these source
+proofs nor the finite regressions are Agda-kernel certificates.
