@@ -1,3 +1,9 @@
+
+**2026-11-06 CLAY4.D2/D3 refinement:** `RGReferenceChargeSurvival.charge : Nat→ℚ` is explicitly a *rational lower certificate*, NOT the actual continuous Wilson expectation. `ActualRGContinuumChargeLimit r Scalar` uses real/Bishop `Scalar`, `actualFiniteCumulant`, `selectedFiniteChargeLower`, `actualCumulantConverges`, order-preserving `embed`, and standard closed-order authority; derived `referenceRGUniformNoncollapse` + `selectedFiniteChargeLower` proves the actual finite cumulant lower, passed to existing `BalabanClayT5CumulantLowerBoundNontrivialityExact`. Physical source lower enclosures and convergence remain `OPEN_PHYSICS`; Agda is `SOURCE_PENDING_AGDA`.
+
+
+---
+
 ## 6 November 2026 — same-original-Wilson constructive 4D continuum steelman / BIDI max-cut
 
 **Primary theorem proposal:** [YMClayConstructive4DContinuumSteelman20261106.md](../physics/YMClayConstructive4DContinuumSteelman20261106.md). It explicitly derives the hypothetical nontrivial 4D continuum from ONE original compact-simple-G Wilson family, not six unrelated records, and proposes source-specific bounds for same-observable UV Cauchy limits, IR/crossing tails, literal CMP116 mixed-J decay, OS reconstruction and non-Gaussian survival. The existing R443/R445/R320/R333 owners are reused; unification #1460 remains downstream.
