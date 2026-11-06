@@ -64,6 +64,7 @@ python3 scripts/prepare_shine_dalgarno_measured.py --self-test
 python3 scripts/check_original_dmsc_holdout.py --self-test
 python3 scripts/check_original_dmsc_neutral_components.py --self-test
 python3 scripts/check_original_dmsc_replicate_ranges.py --self-test
+python3 scripts/check_original_measured_context_transfer.py --self-test
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
