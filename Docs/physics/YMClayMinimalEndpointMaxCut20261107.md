@@ -1,3 +1,13 @@
+## 7 November — selected physical E1 algebra repair and original plaquette polynomial witness
+
+The initially introduced `ActualSelectedOriginalSUNConvergence` over `Native.Cylinder = (forall n, Links_n -> Real)` was **too broad**: arbitrary cutoff-dependent sections (including oscillating constants) cannot all converge in an ordinary physical continuum topology. The original endpoint candidate was unusable as a genuine E1 existence proof. It has now been **replaced** by `SelectedNativeCylinderAlgebra` with an explicit `Observable : Set` and source-realization `selectedSection : Observable -> forall n, Links_n -> Real`, pointwise selected zero/one/add/scale meanings, positivity interpretation and actual original Wilson gauge-invariance proof at every n. `ActualSelectedOriginalSUNConvergence` now quantifies **only over that selected observable class**. The new `nativeSUNAsDependentE1Source` derives the finite normalized state laws via `nativeExpectationExtensional` from the real original product-Haar measure and the selected pointwise meaning proofs; it does **not** assume convergence of all cutoff sections.
+
+A concrete proof-bearing nonempty class is now implemented as `OriginWilsonPolynomial` (constants, one original local Wilson plaquette trace, finite sums/products, scalar multiplication), interpreted by `evalOriginWilsonPolynomial` on the **actual** changing-cutoff Wilson links. `originPolynomialGaugeInvariant` proves exact original gauge invariance by structural induction using existing original finite-source owners, and `originWilsonPolynomialSelectedAlgebra` instantiates the selection record. **Physical caveat:** the fixed microscopic plaquette shrinks with cutoff; its continuum limit may collapse. Thus this is a concrete E1 **finite local algebra**, not a proof of local renormalized continuum YM observables, and cannot be used as the N1 nontriviality witness by declaration.
+
+The genuine next E1 theorem is **selected local continuum source convergence on a physically supported/renormalized cylinder algebra**, with projective consistency, correct physical (a_n,L_n,β_n), and full Euclidean/OS QFT identification. No generic `limit` oracle or arbitrary n-section can stand in for it. Exact Agda 2.9 kernel/parallel_checker acceptance remains unverified.
+
+---
+
 ## 7 November — E1/D1 source-level implementation: no borrowed YM endpoint
 
 ### E1 safe compiler and native source
