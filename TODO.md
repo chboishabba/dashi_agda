@@ -1,3 +1,7 @@
+- [x] YM native `decideNativeMember` / `decideAllSelectable` / Boolean→original C3 and pair-vector compiler source written in `YMClayNativeOriginalSortDeciderExact.agda` (**Agda unverified**).
+- [x] YM native targeted Agda Nix workflow added `.github/workflows/ym-native-maxcut-exact-agda.yml`; **no green CI receipt yet**.
+- [ ] YM F1.1/F1.2/F1.3: kernel-close Boolean `originalC3SelectableBooleanGoal`, native pair length and `originalPairSelectableBooleanGoal`; then derive existing three original canonical equalities via the constructive compiler.
+
 ## 6 Nov 2026 — YM #1444 active executable proof cut
 
 - [x] Create **phase/deliverables/exact-lemma** acceptance queue: `Docs/roadmaps/YMClayExecutionPhasesDeliverablesExactLemmas20261106.md`; keep legacy roadmap and 219-field ledger distinct.
