@@ -44,3 +44,23 @@ Keep **per-root exact compiler diagnostics**, pinned source SHA and exit codes. 
 ## Same-object documentary policy
 
 The Python scripts are execution/referee surfaces, not new mathematical problem definitions. The one original finite signed Max-Cut and Cook SAT semantics must remain the inputs of any repaired Golden theorems. When compiler feedback identifies a new issue, change the original source owner and this ledger together; do not add an assumed Boolean pass marker or construct a fake `TrustedReceipt`. The Lean authority and Loom relations may be used for vocabulary, never to override the Agda kernel.
+
+## Second exact Agda 2.9 verification round at 972219b398…
+
+The user supplied a **new local exact-head receipt** at `972219b39894d28fed950f95fe0e2a2f050c68c6` using Agda 2.9.0 and `.venv`, accepting: `Karp21CompilerRepairGovernanceExact` (44/44), `Karp21FinDecoderIndexBidiExact` (148/148), `Karp21BinaryFinMaterializationCostExact` (143/143), `CookLevinCircuitGCTBoundary`, and `Karp21GammaBinaryRoundTripExact`. These are historical **positive receipts only for that head**; no success is inferred for subsequent edits.
+
+The same local verification identified the following remaining failures. They have now been **patched in original source files** on PR #1445, with a fresh Agda 2.9 run still REQUIRED:
+
+| Exact failure | Original-owner repair | Verification target |
+| --- | --- | --- |
+| Residual reserved constructors: 14 reported lines in `PNotEqualsNPCookIndexedRejectGuardCommutationExact.agda` and 2 lines in `PNotEqualsNPDirectSATLowerBoundExact.agda` | Replace all qualified `Cook.variable` and `SAT.variable` references in both files with `Cook.formulaVar`/`SAT.formulaVar`. Source token count was 15+2=17, while the user's 16 figure counts line coordinates; these are not contradictory. | Run `check_karp21_reserved_formula_constructors.py`, then compile affected P≠NP source owners. |
+| `Karp21GammaSignedListRoundTripExact.agda:92` missing `sym` | Import `sym` from `Relation.Binary.PropositionalEquality` using the original source import list. | Compile `Karp21GammaSignedListRoundTripExact` and `Karp21GammaGoldenEverything`. |
+| `Karp21CliqueVertexCoverExact.agda:65` missing `trans` | Import `sym; trans; cong` from `Relation.Binary.PropositionalEquality`, preserving the prior explicit with-equality transports. | Compile `Karp21CliqueVertexCoverExact` and `Karp21RawGraphValidatorObservationExact`. |
+| `PNotEqualsNPCookFormulaPrefixCodecExact.agda:127` nonstructural recursion on `afterLeft` | Replace the original recursive parser body by `parseCookFormulaFuel`, strictly structural on a decreasing `Nat` fuel. The public parser uses `listLength tokens` fuel, not an oracle or unsafe termination pragma. | Compile the original `--safe` prefix codec and Cook Golden root. |
+| Same codec around line 201: round-trip rewrite mismatch | Replace rewrite-based structural parser proof with `parseCookFormulaFuelEncodeInto`: an induction requiring `listLength (encodeCookFormulaInto formula suffix) ≤ fuel`. `encodeCookFormulaIntoSuffixLower` guarantees the right child fits the remaining fuel; `parseCookFormulaEncodeInto` specializes to the actual input length. All original exported theorem names remain intact. | Kernel-check suffix preservation, decoding, token-count properties and transitive Golden root. |
+
+The repaired parser was also independently modelled in local Python against 1,400 generated formula/continuation pairs, including additional surplus-fuel checks. Those finite tests passed; they are not Agda kernel evidence.
+
+The source-native `Karp21CompilerRepairGovernanceExact.agda` now also enumerates the five **second-round diagnostic categories** as `FollowupRepairIssue`/`reportedFollowupKinds`. It continues to prohibit promoting any source-stage status to proof authority without an actual new exact-head receipt. This formalism remains Golden Agda; the checked `dashi_lean4` AuthorityBoundary/Loom relation language is context, not an independent certification.
+
+**Immediate acceptance cut:** update branch, run existing Python/preflight and `scripts/run_agda29_parallel_check.sh` under the user's existing Agda 2.9.0 environment; return the first exact failing filename/coordinate or the complete successful root receipts with new head. No Agda toolchain is present in this execution environment, so no newly updated kernel outcome is asserted.
