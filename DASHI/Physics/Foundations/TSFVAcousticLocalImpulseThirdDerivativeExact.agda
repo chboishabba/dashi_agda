@@ -14,6 +14,12 @@ module DASHI.Physics.Foundations.TSFVAcousticLocalImpulseThirdDerivativeExact wh
 -- q'''(0)=0. These are derivative/readout equations on an actual
 -- CHOSEN finite-neighbour lattice, not metric axiom declarations.
 --
+-- PROOF BOUNDARY: sourceLocalImpulseThirdDerivative is DEFINED as
+-- the coefficient -L delta_0. No differentiability/existence or
+-- uniqueness theorem for a retarded C³ solution is formalised here.
+-- The identity with q'''(0) follows analytically for any selected
+-- C³ solution satisfying q''=-Lq and q'(0)=delta_0.
+--
 -- Scope: no Agda construction of an independently measured
 -- original TSVF quantum observer, retarded continuum Green field,
 -- physical Born measurements, or three spatial dimensions *emerging*
