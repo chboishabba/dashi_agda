@@ -177,3 +177,13 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeSparseCertificateWordVerifierSa
 import DASHI.Mathematics.Complexity.Karp21CliqueComplementUpperTriangleWordExact
 
 import DASHI.Mathematics.Complexity.Karp21CliqueComplementSameGraphWordExact
+
+------------------------------------------------------------------------
+-- Conway / C3 / primorial on the updated original Karp head.
+-- Structural recursion, strict original gamma word codec, factor address,
+-- and actual C3 cube -> trit-function algebraic transport.
+------------------------------------------------------------------------
+import DASHI.Mathematics.Complexity.Karp21ConwayTotalChainExact
+import DASHI.Mathematics.Complexity.Karp21ConwayGammaChainCodecExact
+import DASHI.Mathematics.Complexity.Karp21ConwayPrimorialGammaAdapterExact
+import DASHI.Foundations.ConwayC3SameObjectCodecExact
