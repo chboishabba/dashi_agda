@@ -51,3 +51,5 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact
 
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordNumericalWeldExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordValidityExact
