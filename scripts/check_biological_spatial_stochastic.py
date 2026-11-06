@@ -9,6 +9,7 @@ from __future__ import annotations
 from itertools import product
 from collections import defaultdict
 import random
+from fractions import Fraction
 
 from check_biological_history_future_quotient import (
     ACTIONS, BiologicalState, all_states, project, update, coarse_step
@@ -89,7 +90,7 @@ def check():
         assert n in POINTS
         assert sum(abs(a-b) for a,b in zip(p,n))==1
     depth,count,history=refine_minimal_morphology()
-    assert 2<=count<=64 and depth<=64
+    assert count==18 and depth<=64
     print("Minimal morphology future quotient:", count,
           "classes, stabilization depth",depth,"history",history)
 
@@ -117,6 +118,32 @@ def check():
             field=coupled_step(field,action)
             cf=coarse_coupled_step(cf,action)
             assert {p:project(x) for p,x in field.items()}==cf
+
+
+    # Exact rational hidden-marker resampling over all controlled words of
+    # lengths 0, 1, 2 and 3.  Each action can be different; the coarse
+    # endpoint remains deterministic even though the fine path branches.
+    for x in all_states():
+        for word_length in range(4):
+            for actions in product(ACTIONS, repeat=word_length):
+                mass={x:Fraction(1,1)}
+                coarse_result=project(x)
+                for action in actions:
+                    after={}
+                    for current,weight in mass.items():
+                        result=update(action,current)
+                        flipped=BiologicalState(
+                            result.genome,not result.marker,result.memory,
+                            result.junction,result.environment,result.morphology)
+                        for endpoint in (result,flipped):
+                            after[endpoint]=after.get(endpoint,Fraction(0,1)) + weight/2
+                    mass=after
+                    coarse_result=coarse_step(action,coarse_result)
+                marginal=defaultdict(Fraction)
+                for endpoint,weight in mass.items():
+                    marginal[project(endpoint)]+=weight
+                assert dict(marginal)=={coarse_result:Fraction(1,1)}
+    print("PASS: all 64 starting states x 156 mixed-action words, exact rational lumping")
 
     print("PASS: actual 3x3x3 nonperiodic coupling; randomized full-field traces")
     print("PASS: rank-bounded morphology quotient refinement and coarse stochastic mass")
