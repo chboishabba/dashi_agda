@@ -78,7 +78,7 @@ module Laws {G : Set} (gi : TM.GroupWithInverse G)
   edgeProductCube :
     (x y : Y.Node) →
     (member :
-      Y.pairRelator (Y.pair x y) Relations.∈ Y.monsterRelators) →
+      Relations._∈_ (Y.pairRelator (Y.pair x y)) Y.monsterRelators) →
     Y.adjacent x y ≡ true →
     pow (mul (nodes x) (nodes y)) 3 ≡ e
   edgeProductCube x y member isAdjacent rewrite isAdjacent =
@@ -139,8 +139,8 @@ module Laws {G : Set} (gi : TM.GroupWithInverse G)
   edgeBraid :
     (x y : Y.Node) →
     Y.pairRelator (Y.pair x y) Relations.∈ Y.monsterRelators →
-    Y.square x Relations.∈ Y.monsterRelators →
-    Y.square y Relations.∈ Y.monsterRelators →
+    Relations._∈_ (Y.square x) Y.monsterRelators →
+    Relations._∈_ (Y.square y) Y.monsterRelators →
     Y.adjacent x y ≡ true →
     mul (nodes x) (mul (nodes y) (nodes x)) ≡
     mul (nodes y) (mul (nodes x) (nodes y))
