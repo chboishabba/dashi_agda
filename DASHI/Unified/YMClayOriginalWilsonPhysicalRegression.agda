@@ -54,3 +54,5 @@ import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact as E1NativeFiniteCylinderLaws
 
 import DASHI.Physics.YangMills.YMClayD1OriginalRealCMP116VariableCutoffExact as D1OriginalRealCMP116
+
+import DASHI.Physics.YangMills.YMClayD1OriginalFullWilsonSmallLargeFieldExact as D1FullWilsonSmallLarge
