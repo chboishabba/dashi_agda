@@ -107,9 +107,9 @@ record ActualRGContinuumChargeLimit
     -- The actual physical continuum scalar may be a vendor Bishop
     -- completion; it is NOT assumed to be a rational number.
     continuumCharge : Scalar
-    zero : Scalar
+    scalarZero : Scalar
     embed : ℚ → Scalar
-    embedZero : embed 0ℚ ≡ zero
+    embedZero : embed 0ℚ ≡ scalarZero
     LessEqual : Scalar → Scalar → Set
     Positive : Scalar → Set
     Converges : (Nat → Scalar) → Scalar → Set
@@ -119,7 +119,7 @@ record ActualRGContinuumChargeLimit
     embedPreservesPositive : ∀ q →
       0ℚ < q → Positive (embed q)
     positiveCannotLieBelowZero : ∀ value →
-      Positive value → LessEqual value zero → T5.Empty
+      Positive value → LessEqual value scalarZero → T5.Empty
 
     actualChargeConverges :
       Converges (λ cutoff → embed (charge r cutoff)) continuumCharge
@@ -136,7 +136,7 @@ asOriginalT5Nontriviality :
   ActualRGContinuumChargeLimit r Scalar →
   T5.UniformCumulantLowerBoundData Scalar
 asOriginalT5Nontriviality r limit = record
-  { T5.UniformCumulantLowerBoundData.zero = zero limit
+  { T5.UniformCumulantLowerBoundData.zero = scalarZero limit
   ; T5.UniformCumulantLowerBoundData.eta = embed limit (eta r)
   ; T5.UniformCumulantLowerBoundData.finiteCumulant =
       λ n → embed limit (charge r n)
@@ -165,7 +165,7 @@ asOriginalT5Nontriviality r limit = record
 continuumRGChargeIsNonzero :
   ∀ {Scalar : Set} (r : RGReferenceChargeSurvival)
   (limit : ActualRGContinuumChargeLimit r Scalar) →
-  continuumCharge limit ≡ zero limit → T5.Empty
+  continuumCharge limit ≡ scalarZero limit → T5.Empty
 continuumRGChargeIsNonzero r limit =
   T5.uniformFiniteLowerBoundForcesContinuumNonzero
     (asOriginalT5Nontriviality r limit)
