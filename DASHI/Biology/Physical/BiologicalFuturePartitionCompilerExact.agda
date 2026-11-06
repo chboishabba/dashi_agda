@@ -79,8 +79,8 @@ biologicalCompiler =
     (λ left right → Compiler.relationIff (λ x → x) (λ x → x))
     (λ code left right →
       Compiler.relationIff
-        (Refinement.backwardStable stableBiologicalCodeAtZero)
-        (Refinement.forwardStable stableBiologicalCodeAtZero))
+        (Refinement.forwardStable stableBiologicalCodeAtZero)
+        (Refinement.backwardStable stableBiologicalCodeAtZero))
 
 compiledBiologicalCode :
   Compiler.CompiledFutureQuotient biologicalCompiler
