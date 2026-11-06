@@ -74,6 +74,7 @@ check_agda() {
 
 if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   for root in \
+    DASHI.Mathematics.Complexity.Karp21CompilerRepairGovernanceExact \
     DASHI.Mathematics.Complexity.Karp21CookGoldenEverything \
     DASHI.Mathematics.Complexity.Karp21GammaGoldenEverything \
     DASHI.Mathematics.Complexity.Karp21FinDecoderIndexBidiExact \
@@ -83,6 +84,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
       --entry "$root"
   done
 
+  check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda
