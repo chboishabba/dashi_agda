@@ -41,6 +41,8 @@ import DASHI.Analysis.BishopSetoidComplexExact as C
 import DASHI.Analysis.BishopMachinQuarterPhaseQuadruplicationAlgebraExact as Quad
 import DASHI.Analysis.BishopRound11ImaginaryProductPythagoreanReuseExact as Product
 import DASHI.Analysis.BishopSquareZeroReflectsSetoidZeroExact as SquareZero
+import DASHI.Analysis.BishopMachinRationalCayleyToOriginalComplexExact as CayleyBridge
+import DASHI.Foundations.BishopMachinExistingCayleyReuseExact as Cayley
 import DASHI.Analysis.BishopMachinPiGlobalSineSignFromTwoBallExact as Global
 import DASHI.Analysis.BishopMachinFirstPositiveSineZeroFromNativePhaseExact as First
 import DASHI.Foundations.BishopMachinQuarterAngleBranchExact as Quarter
@@ -181,3 +183,34 @@ sourceMachinFirstPositiveZeroFromCayley inputs product halfPhase =
   Global.round11MachinPiIsFirstPositiveSineZero
     inputs product
     (sourceMachinQuarterEqualityFromCayley inputs product halfPhase)
+
+
+------------------------------------------------------------------------
+-- Final semantic reduction:
+-- the finite rational Cayley phase is ALREADY embedded into the
+-- actual Bishop complex, with its multiplication preserved.
+-- Only original selected Bishop exp/atan EVALUATION remains open.
+------------------------------------------------------------------------
+
+OriginalMachinCayleySameObjectEvaluation :
+  Round11.Round11BishopCutset → Set
+OriginalMachinCayleySameObjectEvaluation inputs =
+  C._≈C_
+    (C.expC
+      (Route.round11MachinTranscendentals inputs)
+      (C.pureImaginary Quad.twiceQuarter))
+    (CayleyBridge.embedOriginalComplex
+      Cayley.machinQuarterCayleyPhase)
+
+sourceMachinFirstPositiveZeroFromSameObjectCayley :
+  (inputs : Round11.Round11BishopCutset) →
+  (product : Product.Round11ImaginaryExpMultiplicative inputs) →
+  OriginalMachinCayleySameObjectEvaluation inputs →
+  First.SourceMachinFirstPositiveSineZero inputs
+sourceMachinFirstPositiveZeroFromSameObjectCayley
+    inputs product sameObject =
+  sourceMachinFirstPositiveZeroFromCayley
+    inputs product
+    (C.≈C-trans
+      sameObject
+      CayleyBridge.originalMachinRationalCayleyIsBishopImaginaryUnit)
