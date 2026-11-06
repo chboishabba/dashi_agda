@@ -26,11 +26,11 @@ The separate [four-species exact finite credit cut](../../DASHI/Law/SensibLawWoo
 
 ## 2. Reconstruct the ORIGINAL 14 koala rows, not just hypothetical reported-credit haircuts
 
-The original OAG quality-only branch (with proponent-reported **risk of loss 0% both without and with offset**) has this source-reconstructible form, measured in percentage points of total assessed impact:
+The original OAG quality-only branch (using the source-reproducing inverse-compounding discount) (with proponent-reported **risk of loss 0% both without and with offset**) has this source-reconstructible form, measured in percentage points of total assessed impact:
 
 \[
 C_i(p)=100\frac{A_i}{89.6}\frac{Q_{i,\mathrm{with}}-Q_{i,\mathrm{without}}}{10}
-\frac{c_i}{100}(1-p)^{20}.
+\frac{c_i}{100}(1+p)^{-20}.
 \]
 
 - \(A_i\): AU area in hectares. Impact quantum **89.60 adjusted ha**, from impact **128 ha × quality 7/10**.
@@ -48,7 +48,7 @@ Rows:
 
 **Avonvale AU4:** The generic proponent narrative describes 85% confidence for some remnant/regrowth units, but the **published 13.96% AU4 output reproduces using 75%**, not 85%. This requires worksheet-source inspection. The present model reconstructs the reported output; it does not certify that the 75% is the accepted original cell.
 
-The **exact rational numerical sum** (before separately rounding AU rows) is **108.336465338344...%** at p=0.002, approximately the printed **108.35%** after the per-AU publication rounding. Every AU output matches to within about 0.011 percentage points. Source-reported AU percentages are rounded and not a substitute for source-exact cell contents.
+The **exact rational numerical sum** (before separately rounding AU rows) is **108.345132619592...%** at p=0.002, approximately the printed **108.35%** after the per-AU publication rounding. Every AU output matches to within about 0.011 percentage points. Source-reported AU percentages are rounded and not a substitute for source-exact cell contents.
 
 The [new golden Agda owner](../../DASHI/Law/SensibLawWoogarooKoalaOAGStatusSensitivity20261106Exact.agda) computes the exact finite coefficient **1,010,350**, with area in tenths and confidence percent, and proves via exact natural-number equalities: (i) the vulnerable-source total exceeds 100%; (ii) the endangered-input total is strictly below 90%; (iii) one point less projected MWW AU2 future habitat quality gives a total strictly below 100% but above 90%. It explicitly imports the existing original credit/adversary owner; it is not a second ontology or legal pipeline.
 
@@ -59,10 +59,10 @@ Executable companion: [check_woogaroo_koala_oag_status_sensitivity.py](../../scr
 | Test (all other values fixed) | Calculated total koala compensation | Status |
 |---|---:|---|
 | Reported OAG input **Vulnerable 0.2%** | **108.336465%** | Reconstructs the reported 108.35% |
-| Same source rows with **Endangered 1.2%** | **88.573280%** | **Below 90%**, if that extinction parameter is legally applicable |
-| Reported Vulnerable 0.2% with MWW AU2 projected **quality 6 instead of 7** | **99.916491%** | Below 100%; still above 90% |
+| Same source rows with **Endangered 1.2%** | **88.828757%** | **Below 90%**, if that extinction parameter is legally applicable |
+| Reported Vulnerable 0.2% with MWW AU2 projected **quality 6 instead of 7** | **99.924485%** | Below 100%; still above 90% |
 
-The endangered correction is a common twenty-year multiplier **\((0.988/0.998)^{20}≈0.817576\)** over the quality-only rows. This is source-exact discount arithmetic, but NOT an independently validated future gain nor a decided transitional-status issue.
+The endangered correction is a common twenty-year inverse-discount multiplier **\((1.002/1.012)^{20}≈0.819868\)** over the quality-only rows. This is source-exact discount arithmetic, but NOT an independently validated future gain nor a decided transitional-status issue.
 
 **The 2012 OAG distinguishes a normal minimum of 90% direct offsets from the balance of other compensatory measures**, and requires consistent habitat-quality assessment on impact and offset sides. **Do not equate “below 100% direct” with automatic approval invalidity**. The alternative 88.57% instead has potential relevance even to the ordinary 90% direct threshold; identify any applicable exceptions and the actual final accepted worksheet.
 
@@ -89,3 +89,10 @@ The endangered correction is a common twenty-year multiplier **\((0.988/0.998)^{
 | V — proof trust | native Agda source with exact Nat witnesses and independently executed rational finite reference | exact-head **Agda --safe and parallel_checker kernel receipt OPEN** |
 
 No filing, FOI, courtroom, agency decision or ecological transfer performed. QUT/QCC original submissions and existing DASHI/SLR credits unchanged. Scenic EPBC 2020/8651 and financial/asset adjacency explicitly outside the 2019/8575 action.
+
+
+### 6 November later same-round correction: inverse-compounding and four-species crosscheck
+
+The explicit MWW/Esk/Avonvale feature-based sheets show the **2012 OAG uses inverse compound discount \((1+p)^{-20}\)**. The earlier \((1-p)^{20}\) approximation is **superseded**. With correct discount the 14-row koala reconstruction is **108.345132619592...%**, the conditional Endangered case is **88.828757222414...%**, and MWW AU2 future quality 7→6 gives **99.924484785719...%**. The golden and Python sources were updated accordingly.
+
+The original per-AU worksheets for the flying-fox, Swift Parrot and Regent Honeyeater expose further arithmetic/input disagreements requiring explicit row-level reconciliation, not fabricated values. The same-round full-species addendum will be recorded in the subsequent cross-species audit. This is still *source-authored numerical auditing* and not a result that decides applicable transitional law or independent ecology.
