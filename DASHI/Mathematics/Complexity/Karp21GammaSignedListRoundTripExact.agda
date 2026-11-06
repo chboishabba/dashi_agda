@@ -30,7 +30,7 @@ open import Data.Maybe.Base using (just)
 open import Data.Empty using (⊥-elim)
 open import Data.Integer.Base using (ℤ)
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (cong; subst)
+open import Relation.Binary.PropositionalEquality using (cong; subst; sym)
 import Data.Nat.Binary.Base as Bin
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
