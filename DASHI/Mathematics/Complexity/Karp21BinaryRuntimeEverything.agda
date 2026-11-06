@@ -56,3 +56,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordValidityExact
 
 -- All-word native signed-gamma structural inspection bound.
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClockExact
+
+-- K05: original/native signed gamma all-word acceptance equivalence.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedAllWordValidityExact
