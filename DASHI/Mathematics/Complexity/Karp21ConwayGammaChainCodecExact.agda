@@ -16,12 +16,12 @@ module DASHI.Mathematics.Complexity.Karp21ConwayGammaChainCodecExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (_++_; length)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Product using (_,_)
+open import Data.Product using (_×_; _,_)
 import Data.List.Properties as ListP
 open import Relation.Binary.PropositionalEquality using (cong; sym)
 
