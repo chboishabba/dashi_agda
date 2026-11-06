@@ -20,6 +20,8 @@
 
 **Reference/validation:** `scripts/check_tsfv_original_complex_diagonal_kk_tomography_20261106.py` supplies 1,443 exact rational test cases (independent finite mathematical checks). All five Agda owners have been added to the relevant `safe_sources` or `physical_sources` and the two correctly separated regression roots of `run_tsfv_unification_maxcut_20261106.sh`. This wrapper is the only accepted Agda entrypoint (`parallel_checker`), but an exact-head kernel receipt is NOT present.
 
+**OBS04/OBS05/OBS07 source-specific negative control:** `TSVFOriginalComplexFiniteClockPropagationNonpromotionExact` consumes the ACTUAL `TSVF2017OriginalComplexABLSelectedExact.finiteComplexQuantum` (rather than a hypothetical singleton Q) and proves its original Time is Unit, all time coordinates are equal, and original `evolveKet/evolveBra` are identities. Its existing nontrivial complex ABL and record amplitudes do not contain a physical retarded propagation clock or dimension-four manifold. A new nontrivial original continuous, spatially located physical dynamics must be built to discharge OBS05–OBS09; this is a mathematically proven source boundary, not an extra YM dependency.
+
 ## Exact producer, phase and deliverable synchronization (6 November 2026)
 
 **Three different counts, never interchangeable:** **40 named** physical producer lemmas (10 OBS + 12 HIL + 10 KK + 8 BIDI) in [the source theorem ledger](TSFVFourPhysicalCutsExactProducerLemmas20261106.md); **48** disjoint execution deliverables (V01–V07, O01–O12, H01–H12, K01–K09, B01–B08) in this file; **186** canonical P00–P11 lemma IDs in [the original ledger](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). The former two are refinements/crosswalks, not newly minted canonical theorems.
