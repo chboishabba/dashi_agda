@@ -19,6 +19,7 @@ open import Data.Vec using (Vec; []; _∷_)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
+import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
 import DASHI.Core.IntersectionalBinaryInteractionBridgeExact as Existing
 import DASHI.Core.IntersectionalConstraintGeometryExact as Geometry
 
@@ -175,3 +176,40 @@ noRechartingOfCoordinatesCanRecoverRecognition :
 noRechartingOfCoordinatesCanRecoverRecognition rechart =
   NF.rechartingCannotRecoverErasedPhenomenon
     rechart coordinateOnlyNonfactorability
+
+------------------------------------------------------------------------
+-- Positive finite separator for the contextual collision: a legitimate
+-- context observation, not a numerical relabelling of the original axes.
+-- No empirical validation or authority to observe sensitive details follows.
+------------------------------------------------------------------------
+
+contextualObservationBundle : Discriminator.ExperimentBundle Situated
+contextualObservationBundle =
+  Discriminator.experimentBundle
+    Context
+    context
+    1
+    "Selected contextual institutional observation distinguishes two situated worlds"
+    "Exact synthetic source interface; real institutional observation requires separate source and consent"
+
+contextualObservationSeparates :
+  Discriminator.BundleSeparates
+    contextualObservationBundle
+    sameCoordinatesAccessible sameCoordinatesExclusionary
+contextualObservationSeparates =
+  Discriminator.bundleSeparates (λ ())
+
+contextualObservationAddsRequiredInformation :
+  Discriminator.DiscriminatingLanguageExtension coordinatesOnly
+contextualObservationAddsRequiredInformation =
+  Discriminator.discriminatingLanguageExtension
+    (Discriminator.currentObserverCollision
+      sameCoordinatesAccessible
+      sameCoordinatesExclusionary
+      refl)
+    contextualObservationBundle
+    contextualObservationSeparates
+
+-- The query is only the selected recognition distinction. Pairwise
+-- separation alone does not certify every real-world intersectional
+-- consumer or validate the meaning of any demographic coordinate.
