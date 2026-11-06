@@ -104,7 +104,7 @@ module SourceConsequences {G : Set} (gi : TM.GroupWithInverse G)
     Y.adjacent x y ≡ Agda.Builtin.Bool.false →
     mul (mul (nodes x) (nodes y))
       (mul (nodes x) (nodes y)) ≡ e
-  nonedgeProductSquare x y member notAdjacent =
+  nonedgeProductSquare x y member notAdjacent rewrite notAdjacent =
     let
       a = nodes x
       b = nodes y
@@ -217,6 +217,26 @@ module SourceConsequences {G : Set} (gi : TM.GroupWithInverse G)
         memberPairE1e2 refl)
 
 
+  commutesWithProduct :
+    (x y z : G) →
+    mul x y ≡ mul y x →
+    mul x z ≡ mul z x →
+    mul x (mul y z) ≡ mul (mul y z) x
+  commutesWithProduct x y z xy xz =
+    trans
+      (sym (assoc x y z))
+      (trans
+        (cong (λ q → mul q z) xy)
+        (trans
+          (assoc y x z)
+          (trans
+            (cong (mul y) xz)
+            (sym (assoc y z x)))))
+
+  commutesWithIdentity : (x : G) → mul x e ≡ mul e x
+  commutesWithIdentity x =
+    trans (rightId x) (sym (leftId x))
+
   e1CommutesBeta :
     mul (nodes JMD.x4) (JMD.betaElement gi nodes)
     ≡ mul (JMD.betaElement gi nodes) (nodes JMD.x4)
@@ -227,15 +247,14 @@ module SourceConsequences {G : Set} (gi : TM.GroupWithInverse G)
       c = nodes Y.c2
       d = nodes Y.d2
       f = nodes Y.e2
-      -- beta's last expression ends in a trailing identity because the
-      -- source Word evaluator is a right fold.
-      betaFold =
-        cong (λ z → mul b (mul c (mul d z))) (rightId f)
+      tail1 = mul f e
+      tail2 = mul d tail1
+      tail3 = mul c tail2
+      proof1 = commutesWithProduct x f e
+        e1Commutese2 (commutesWithIdentity x)
+      proof2 = commutesWithProduct x d tail1
+        e1Commutesd2 proof1
+      proof3 = commutesWithProduct x c tail2
+        e1Commutesc2 proof2
     in
-    trans
-      (cong (mul x) betaFold)
-      (trans
-        (sym (assoc x b (mul c (mul d f))))
-        (trans
-          (cong (λ z → mul z (mul c (mul d f))) e1Commutesb2)
-          (assoc b x (mul c (mul d f)))))
+    commutesWithProduct x b tail3 e1Commutesb2 proof3
