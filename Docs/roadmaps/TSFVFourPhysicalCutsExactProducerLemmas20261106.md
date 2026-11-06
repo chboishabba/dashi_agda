@@ -26,6 +26,8 @@ Five source-written, dependency-driven proof owners added together; this is not 
 
 **Acceptance status:** SOURCE_WRITTEN, STRUCTURAL_READBACK; Agda `parallel_checker` kernel/axiomatic trust and selected physical hypotheses unverified. The original finite complex ket norm-two correction supersedes any implication that `TSVF2017OriginalComplexABLSelectedExact.finiteComplexEnsemble` inhabits a unit-normalized forward state automatically.
 
+**OBS04/OBS05/OBS07 source-specific negative control:** `TSVFOriginalComplexFiniteClockPropagationNonpromotionExact` consumes the ACTUAL `TSVF2017OriginalComplexABLSelectedExact.finiteComplexQuantum` (rather than a hypothetical singleton Q) and proves its original Time is Unit, all time coordinates are equal, and original `evolveKet/evolveBra` are identities. Its existing nontrivial complex ABL and record amplitudes do not contain a physical retarded propagation clock or dimension-four manifold. A new nontrivial original continuous, spatially located physical dynamics must be built to discharge OBS05–OBS09; this is a mathematically proven source boundary, not an extra YM dependency.
+
 ## Exact 40-producer physical acceptance ledger — audited 6 November 2026
 
 **Inventory:** 10 OBS + 12 HIL + 10 KK + 8 BIDI = **40 named** producer obligations. These are **not** the independent **48** phased execution tasks or the **186** canonical Agda P00–P11 lemma IDs. Every numbered name below already appears with its canonical ID mapping in the original full tables. `scripts/check_tsfv_40_physical_producer_inventory_20261106.py` now checks exact presence, uniqueness, contiguous ID ranges, mappings and all three downstream roadmap/receipt surfaces.
