@@ -7,13 +7,14 @@ finite-model validation and is NOT an Agda kernel receipt or real study.
 from itertools import permutations, product
 
 
-def additive(x, y):
-    return 2*x + 2*y
+# The string value of an axis point is not its semantic identity.
+# Using (axis-tag, coordinate) preserves the type information.
+RACE = (("race", 0), ("race", 1))
+SEX = (("sex", 0), ("sex", 1))
 
-
-def joint(x, y):
-    return additive(x, y) + x*y
-
+def typed_joint(race, sex):
+    assert race in RACE and sex in SEX
+    return 1 if race == RACE[1] and sex == SEX[1] else 0
 
 def observed_exposure(u):
     return u
@@ -37,12 +38,25 @@ def composition(left, right):
 
 
 def run():
-    additive_fixtures = 0
-    for x, y in product((0, 1), repeat=2):
-        assert joint(x, y) == additive(x, y) + x*y
-        additive_fixtures += 1
-    assert additive(1, 1) == 4
-    assert joint(1, 1) == 5
+    assert len(RACE) == len(SEX) == 2
+    assert set(RACE).isdisjoint(SEX)
+    typed_cases = 0
+    for race, sex in product(RACE, SEX):
+        assert typed_joint(race, sex) in (0, 1)
+        typed_cases += 1
+    # Rectangle obstruction: (r0,s0)+(r1,s1) != (r0,s1)+(r1,s0)
+    left = typed_joint(RACE[0], SEX[0]) + typed_joint(RACE[1], SEX[1])
+    right = typed_joint(RACE[0], SEX[1]) + typed_joint(RACE[1], SEX[0])
+    assert left != right
+
+    # Even both typed points can coincide under two situated contexts
+    # while recognition differs: axis labels alone are an incomplete view.
+    situated = (
+        ((RACE[1], SEX[1]), "accessible", "recognised"),
+        ((RACE[1], SEX[1]), "exclusionary", "excluded"),
+    )
+    assert situated[0][0] == situated[1][0]
+    assert situated[0][2] != situated[1][2]
 
     s3 = tuple(permutations((0, 1, 2)))
     assert len(s3) == len(set(s3)) == 6
@@ -76,7 +90,7 @@ def run():
     triads = ((same_dyads, "reciprocal"), (same_dyads, "coercive"))
     assert triads[0][0] == triads[1][0] and triads[0][1] != triads[1][1]
 
-    print(f"PASS: {additive_fixtures} two-axis additive/interaction cases")
+    print(f"PASS: {typed_cases} typed race/sex joint cases, rectangle obstruction, and equal-size nonidentity")
     print(f"PASS: all {len(s3)} S3 permutations, {s3_composition_tests} associativity cases")
     print("PASS: observationally equivalent SCMs and separating do(X=1) intervention")
     print("PASS: coherence/revision, cause/intent and dyadic/triadic nonfactorability")
