@@ -319,3 +319,31 @@ remaining active numerical theorem is **actual Cartesian FD-to-
 continuum** compatibility. Existing Yang–Mills Mosco/recovery/no-
 pollution files are donor gate inventories, not a substitute
 for the selected Gielis recovery/liminf proof.
+
+
+## E27: original raster FD exact-domain continuum repair
+
+The selected Gielis raster eigenvalue code had a fixed normalised
+inward radial cutoff 1e-12. This is not harmless in the
+mathematical n→∞ limit, because it selects a fixed
+slightly smaller analytic domain. Both the actual raster
+PDE builder and independent rational eigenvalue certificate
+now use the **vanishing** ε(h)=min(1e-12,h²), which is
+identical at n41/n61 but tends to zero for h→0.
+
+The source scripts/gielis_fd_energy_mosco.py checks
+the exact zero-extension 5-point discrete energy
+uᵀ(4I-B)u=Σ_axes,edges(u_i-u_j)² on the
+original selected mask and several integer test-vector
+families, with actual arithmetic identity not a float
+tolerance test.
+
+The proof notebook E27 gives a full paper-level
+fixed-k qualitative Cartesian FD Dirichlet spectral
+convergence proof for exact radial evaluation, using
+compactness, recovery and min–max. This is stronger
+than the earlier distinct sector-geometry convergence
+alone, but is NOT a quantitative numerical eigenvalue
+error guarantee for the existing binary64 run.
+Source-native Agda compactness and actual numerical
+boundary interval certification remain named leaves.
