@@ -24,7 +24,7 @@ module DASHI.Analysis.BishopOriginalMachinAtanFiniteDerivativeExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym)
 open import Data.Rational.Unnormalised as Q using (1ℚᵘ; _*_; _≃_; *≡*)
 
 import Real as R
