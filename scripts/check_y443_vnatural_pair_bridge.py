@@ -19,6 +19,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 PRESENTATION = ROOT / "DASHI/Moonshine/Y443CoxeterPresentationExact.agda"
 ACTION = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationExact.agda"
+TRACE = ROOT / "DASHI/Moonshine/Y443JMDTracePowerExact.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -59,7 +60,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION):
+    for file in (PRESENTATION, ACTION, TRACE):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -86,7 +87,11 @@ def assert_source_scope() -> None:
     ):
         if symbol not in b:
             raise AssertionError(f"missing action theorem {symbol}")
-    print("PASS source: explicit proof owners and no listed trust escapes")
+    t = TRACE.read_text()
+    for symbol in ("powerRepresented", "traceStepThreeX4", "traceStepFourBeta", "traceStepsThreeAndFour"):
+        if symbol not in t:
+            raise AssertionError(f"missing JMD trace theorem {symbol}")
+    print("PASS source: exact diagram, pair-word and JMD power theorems without listed trust escapes")
 
 
 def check_agda() -> None:
