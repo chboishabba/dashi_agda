@@ -1,3 +1,28 @@
+## 7 November — final safety cuts: genuine selected epsilon--N convergence; geometric physical D1
+
+**E1 genuine topology:** `YMClayE1OriginalSUNFiniteCylinderLawsExact.PhysicalRealConverges` now means an actual epsilon--N estimate, **not** equality to an arbitrary selected `limit : (Nat -> Real) -> Real`:
+```
+forall epsilon>0, exists N, forall n>=N:
+  abs(nativeExpectation(n,F) - continuumExpectation(F)) <= epsilon.
+```
+`PhysicalRealSequentialConvergenceLaws` makes standard real-analysis uniqueness, arithmetic and positivity closure explicit. `ActualSelectedOriginalSUNConvergence` now demands the above genuine convergence **only for the proof-bearing selected gauge-invariant local algebra**, NOT all `(forall n, Links_n -> Real)` sections. `nativeSUNAsDependentE1Source` uses that topology, native original Haar/Wilson finite integration, and the selected physical cylinder realization. There is no tautological `lim(s)=lim(s)` path to E1.
+
+**Concrete selected algebra:** `OriginWilsonPolynomial` and `originWilsonPolynomialSelectedAlgebra` are source-written with actual original local plaquette holonomy/trace, constants and polynomial operations; `originPolynomialGaugeInvariant` inducts over the true native finite-gauge action. These are microscopic original finite-local expressions: physical local renormalization, UV/IR convergence, full Euclidean/OS axioms and nontriviality remain open.
+
+**D1 quantitative shape:** `YMClayD1OriginalRealCMP116VariableCutoffExact` now additionally requires physical cube length `physicalCubeLength > 0`, a shared real `0 <= commonContraction < 1`, finite amplitude and a physical block distance; it proves `originalWilsonRealCovarianceGeometricBound`:
+```
+forall n, left, right:
+  abs(Cov_original_Wilson_n(left_n,right_n))
+    <= amplitude * (commonContraction ^ physicalBlockDistance(left,right)).
+```
+This is the correct positive-rate *physical-block* form, without a rational T5 equality. **The actual source calibration is not established:** `pairAdmissible`, `differentiatedSourceIsOriginalRealCovariance`, `uniformSourceEnvelope`, and `upperHasUniformGeometricRate` remain physical source inputs. A cutoff-independent bound with no distance factor is not sufficient for Clay D1.
+
+**D2:** R287 and `BalabanClayT5OSReconstructionCyclicityExact` already compile abstract cyclicity and subgap detection; the specific selected original E1 OS Hilbert representation and full positive spectral-measure inclusion still need original-source proof. No dependence on #1460 observer/HIL.
+
+**Trust:** The Agda source is committed, and the regression imports were added; exact-head Agda `parallel_checker` and transitive proof/real-authority trust have **not** been run. The source modules are conditional and do not prove Clay. An actual 4D interacting YM theory, physical D1 estimate, full D2 spectrum, N1 and G1 remain genuine outstanding results.
+
+---
+
 ## 7 November — selected physical E1 algebra repair and original plaquette polynomial witness
 
 The initially introduced `ActualSelectedOriginalSUNConvergence` over `Native.Cylinder = (forall n, Links_n -> Real)` was **too broad**: arbitrary cutoff-dependent sections (including oscillating constants) cannot all converge in an ordinary physical continuum topology. The original endpoint candidate was unusable as a genuine E1 existence proof. It has now been **replaced** by `SelectedNativeCylinderAlgebra` with an explicit `Observable : Set` and source-realization `selectedSection : Observable -> forall n, Links_n -> Real`, pointwise selected zero/one/add/scale meanings, positivity interpretation and actual original Wilson gauge-invariance proof at every n. `ActualSelectedOriginalSUNConvergence` now quantifies **only over that selected observable class**. The new `nativeSUNAsDependentE1Source` derives the finite normalized state laws via `nativeExpectationExtensional` from the real original product-Haar measure and the selected pointwise meaning proofs; it does **not** assume convergence of all cutoff sections.
