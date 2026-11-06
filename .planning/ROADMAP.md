@@ -169,3 +169,17 @@ Authoritative G01–G21 obligations and deliverables: Docs/support/reference/Gie
 - [ ] Cross-calibrate actual optical power/reflectivity/lever-arm measurements to typed SI quantities if a physical empirical endpoint is required.
 
 **Scope adjustment:** CI and historical HTML ray replay are deferred from the active priority cut, not erased from the G13 provenance ledger. Full E01–E21 proof details and G01–G21 remaining exact lemmas: `Docs/support/reference/GielisBase369ProofTheorems.md` and `GielisBase369Roadmap.md`.
+
+
+## Gielis max-cut native theorem transport: E22–E26 (Nov 6, 2026)
+
+- [x] E22: actual quantity-level rational `Mechanical.multiplyQuantity` for `((P*c^-1)*R)*g`, SIIndexedQuantity transport, and explicit distinction of signed geometric response g from measured power.
+- [x] E23: source-written native inverse-area Laplace eigenvalue unit transport and fully rational CONTINUUM m3 length-scaled envelope (9/(4 Lmax²) < λ₁ < 1273/(264 Lmin²)); no wave frequency inferred.
+- [x] E24: exact rational assumed-input intervals for power, hit radius and reflectivity; `|τ|≤(Pmax Rmax/c)(1+ηmax)Σ ηmax^k`; zero lower bound and no false measured CI.
+- [x] E25: native Bishop setoid/ring derivation of `4(cos_B⁴+sin_B⁴)≃3+cos_B(4x)` from ACTUAL configured sine/cosine Pythagorean and quadruple-angle inputs; the analytic same-object producers and kernel check remain [ ].
+- [x] E26: native rational ring/sum/positivity proof of arbitrary finite weighted-graph edge correction; exact ground-state identity supplies first finite raster eigenvalue lower bound without PF/connectivity assumption. Independent exact-fraction check 120 graph/vector pairs PASS.
+- [ ] Golden acceptance: true Round11 Bishop trigonometric quadrupling/weld; C36 cyclotomic reconstruction; actual Gielis raster vertex aggregate; Cartesian FD-to-continuum; selected SI optics actual collision/source magnitude; Agda kernel acceptance of seven roots.
+
+No parallel CI or original HTML replay pursued, per current user scope.
+Canonical E01–E26 proof note: Docs/support/reference/GielisBase369ProofTheorems.md.
+Canonical G01–G21 exact remaining lemmas: Docs/support/reference/GielisBase369Roadmap.md.
