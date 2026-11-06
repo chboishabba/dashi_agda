@@ -36,3 +36,5 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExac
 import DASHI.Mathematics.Complexity.Karp21N21SameWordCountedAcceptanceExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelopeExact
