@@ -130,8 +130,10 @@ originalExpOriginMagnitudeConvergent h =
       λ n nAtLeast →
         originalExpOriginMagnitudeRatioHalf h n
           (NatP.≤-trans
-            nAtLeast
-            (NatP.n≤1+n (suc n))))
+            (NatP.n≤1+n (2 * Exp.magnitudeNaturalBound h))
+            (NatP.≤-trans
+              nAtLeast
+              (NatP.n≤1+n (suc n)))))
 
 originalExpOriginQuotientAbsolutelyConvergent :
   (h : R.ℝ) →
