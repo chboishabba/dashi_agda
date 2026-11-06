@@ -118,7 +118,18 @@ def main():
             except ValueError:
                 pass
             roundtrips += 1
-    print(f"Conway reference: {count} agreement, {skipped} bounded skips; gamma: {roundtrips} roundtrips")
+    canonical = rejected = 0
+    for bits_count in range(13):
+        for value in range(1 << bits_count):
+            word = format(value, f"0{bits_count}b") if bits_count else ""
+            try:
+                source = decode(word)
+                assert encode(source) == word
+                canonical += 1
+            except ValueError:
+                rejected += 1
+    assert canonical == 133 and rejected == 8058
+    print(f"Conway reference: {count} agreement, {skipped} bounded skips; gamma: {roundtrips} roundtrips; exhaustive <=12-bit: {canonical} canonical, {rejected} rejected")
 
 if __name__ == "__main__":
     main()
