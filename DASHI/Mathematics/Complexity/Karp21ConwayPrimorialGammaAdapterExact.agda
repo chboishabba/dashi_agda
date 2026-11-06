@@ -11,6 +11,8 @@ module DASHI.Mathematics.Complexity.Karp21ConwayPrimorialGammaAdapterExact where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.List.Base using (_++_; length)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 
 import DASHI.Foundations.PrimorialFactorAddressConcrete as Prime
@@ -80,3 +82,68 @@ factor15DecodeEncode (Godel.v15 a b c d e f g h i j k l m n o)
   rewrite Chain.chainDecodeEncode
     (a ∷ b ∷ c ∷ d ∷ e ∷ f ∷ g ∷ h ∷ i ∷ j ∷
      k ∷ l ∷ m ∷ n ∷ o ∷ []) = refl
+
+------------------------------------------------------------------------
+-- Fixed-four and SSP15 prime vectors inherit the exact canonical
+-- gamma chain bit length, injectivity, and raw-bit prefix exclusion.
+------------------------------------------------------------------------
+
+factor4WireLength :
+  (digits : Prime.PrimorialDigits4) →
+  length (encodeFactorWord digits) ≡
+    length (Chain.Gamma.encodeGammaNat (length (factorEntries digits)))
+    + Chain.entryBitLength (factorEntries digits)
+factor4WireLength digits =
+  Chain.chainWireSizeExact (factorEntries digits)
+
+factor15WireLength :
+  (factors : Godel.FactorVec) →
+  length (encodeFactor15Word factors) ≡
+    length (Chain.Gamma.encodeGammaNat (length (factor15Entries factors)))
+    + Chain.entryBitLength (factor15Entries factors)
+factor15WireLength factors =
+  Chain.chainWireSizeExact (factor15Entries factors)
+
+factor4EncodeInjective :
+  (a b : Prime.PrimorialDigits4) →
+  encodeFactorWord a ≡ encodeFactorWord b →
+  a ≡ b
+factor4EncodeInjective a b equal
+  with factorDecodeEncode a | factorDecodeEncode b
+... | left | right =
+  justInject
+    (cong decodeFactorWord equal)
+  where
+    justInject : ∀ {x y : Prime.PrimorialDigits4} →
+      just x ≡ just y → x ≡ y
+    justInject refl = refl
+
+factor15EncodeInjective :
+  (a b : Godel.FactorVec) →
+  encodeFactor15Word a ≡ encodeFactor15Word b →
+  a ≡ b
+factor15EncodeInjective a b equal =
+  justInject
+    (cong decodeFactor15Word equal)
+  where
+    justInject : ∀ {x y : Godel.FactorVec} →
+      just x ≡ just y → x ≡ y
+    justInject refl = refl
+
+factor4NoProperBinaryPrefix :
+  (a b : Prime.PrimorialDigits4)
+  (suffix : Word.BitWord) →
+  encodeFactorWord a ++ suffix ≡ encodeFactorWord b →
+  suffix ≡ []
+factor4NoProperBinaryPrefix a b suffix =
+  Chain.chainFullBinaryNoProperPrefix
+    (factorEntries a) (factorEntries b) suffix
+
+factor15NoProperBinaryPrefix :
+  (a b : Godel.FactorVec)
+  (suffix : Word.BitWord) →
+  encodeFactor15Word a ++ suffix ≡ encodeFactor15Word b →
+  suffix ≡ []
+factor15NoProperBinaryPrefix a b suffix =
+  Chain.chainFullBinaryNoProperPrefix
+    (factor15Entries a) (factor15Entries b) suffix
