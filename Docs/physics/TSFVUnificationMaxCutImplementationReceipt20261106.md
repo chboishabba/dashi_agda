@@ -1,5 +1,25 @@
 # 6 November 2026 — #1460 exact max-cut implementation / physical proof integrity receipt
 
+## 6 November 2026 — current proof, phase and deliverable acceptance receipt
+
+**39 named** physical source-producer theorems = 10 OBS + 12 HIL + 9 KK + 8 BIDI (the formerly advertised 40 was a counting error). These map to **48** disjoint phase deliverables and **186** canonical original P00–P11 lemma IDs; they are not interchangeable counts. The exact 39-producer original type/owner/dependency/acceptance rows now live in `Docs/roadmaps/TSFVFourPhysicalCutsExactProducerLemmas20261106.md`, linked to the independent 48-task phase file and active TODO; `scripts/check_tsfv_39_physical_producer_inventory_20261106.py` validates the inventory.
+
+**New child original-source proof:** `DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact`. For any two finite ordered coarse Wilson observable words A and B and a specified coarse real reflection Θ, uses the **actual original native** `YMClaySUNR445BlockedPushforwardR320CovarianceExact.originalBlockedFineExpectationIsPushforward` to prove
+\[
+E_{\mu_{\rm Wilson}}[(\Theta A)(B)\circ B_{\rm native}]
+=
+E_{B_{\rm native*}\mu_{\rm Wilson}}[(\Theta A)B].
+\]
+The theorem is source-exact and all-word, not degree-two covariance extrapolation. It additionally transports diagonal nonnegative real reflected forms **if the same original fine form's nonnegativity is independently proved**. The original fine Wilson RP, positive-time test algebra, physical native reflection intertwining, and actual original observer `A*B` to independent YM OS Gram identification are NOT supplied by this theorem.
+
+**Latest separate YM parent #1444:** `YMClayOriginalWilsonNativeOSPullbackExact` already proves the whole **actual native** Wilson fine/coarse reflected quadratic equality and transports positive forms from the original fine RP hypothesis. `YMClayOriginalWilsonNativeMarkedPushforwardExact`, `YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact`, `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact` pay substantial finite marked-source/fibre mathematics. The remaining YM leaves are genuinely source-generated complete CMP119/122 E/R/B/V/ghost/boundary, published CMP116 localization on that exact marked source with uniform UV/IR and nontrivial continuum OS. Do not recreate these source owners on child or identify RP with mere Gibbs density positivity.
+
+**Selected S01/HIL01 proof progress:** `TSVFOriginalSelectedFiniteCommutatorResponseExact` computes source selected original forward/backward ordered commutator under physical composition laws; `TSVFOriginalForwardPositiveFunctionalExact` derives forward-state normalization, additivity, homogeneity and its (A^\dagger A) norm identity **given** actual Hilbert/operator and norm laws. `TSVFOriginalQuantumSurfaceSpatialNonpromotionExact` constructs a genuine singleton instance of the source abstract `QuantumSurface`; absent nontrivial physically selected probes, no 4D geometry can be derived from that record. `TSVFOriginalOSPositiveWeightNotReflectionPositiveExact` blocks the incorrect density-positivity → OS-RP inference.
+
+**KK status correction:** `scripts/check_tsfv_5d_ads4_circle_winding_matter.py` is a source-written independent symbolic verification of a nonflat Einstein–scalar winding control (AdS_4\times S^1). The earlier phrase `flat vacuum control only` is superseded. It is NOT the original observed metric or a selected 5D Einstein–gauge–matter solution. `TSFVKKActualSelectedMetricHorizontalWeldExact` still requires an independently produced observer g4 matching actual KK reduction.
+
+**Exact S11 receipt:** new source module imported into **separate non-safe physical regression** `TSFVPhysicalR445AllWordRegression`, with own transitive `RealAnalysisAxioms` trust boundary; add it to `physical_sources` in pinned `run_tsfv_unification_maxcut_20261106.sh`. 39-inventory validator runs before compiler. GitHub source-written ≠ checked exact-head Agda. No kernel/physical status is marked complete without `parallel_checker` log, detailed transitive axiom audit, independently measured original physical semantics and quantitative limits.
+
 ## Governance and cross-worker cut
 
 **Canonical:** [186 original lemma IDs + 186 source/kernel/physical status rows](../roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Active phases:** [48 executable deliverables across five phases](../roadmaps/TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). **Current TODO:** [our-lane max-cut](../roadmaps/TSFVUnificationTODO20261106.md).
@@ -54,7 +74,7 @@ Both new owners imported and publicly exported by `DASHI.Unified.TSFVUnifiedRegr
 | S02 | Physically observed original local retarded response and spatial discrimination | PHYSICAL OPEN; chosen oscillator coefficient only |
 | S03 | Independent 4-dimensional causal-volume/continuum from microscopic observer | PHYSICAL OPEN |
 | S04 | Original measured Lorentz principal, light cone, positive energy and 3+1 without assumed dimensions | PHYSICAL OPEN |
-| S05 | Actual nontrivial 5D smooth Einstein–matter/KK source and stress/radion/global bundle | PHYSICAL OPEN; flat vacuum control only |
+| S05 | Actual nontrivial 5D smooth Einstein–matter/KK source and stress/radion/global bundle | PHYSICAL OPEN; sourced nonflat Einstein–scalar control, not selected observer metric |
 | S06 | 5D reduction equal to original **independently measured** observer g4 | PHYSICAL OPEN; chosen same-g4 algebra only |
 | S07 | Actual interacting Yang–Mills nontrivial continuum OS H and spectral gap | YM #1444 EXTERNAL |
 | S08 | Original noncollapsed complete Hilbert and physical Stone generator | PHYSICAL OPEN; free Fock control only |
