@@ -278,3 +278,49 @@ bash scripts/check_ccdcoe_cognition_agda.sh
 
 The shell gate requires real Agda and will fail when unavailable.
 Keep PR #1467 draft until exact-head kernel acceptance and review.
+
+## 2026-11-06 — situated history, original PNF, and positive context discriminator
+
+The P3 typed-axis owner now additionally creates
+`contextualObservationBundle`, `contextualObservationSeparates`
+and `contextualObservationAddsRequiredInformation`, directly consuming
+`DASHI.Core.DiscriminatorSynthesisExact`. The previously colliding
+situated worlds share both individually typed axis coordinates; an
+independent contextual observation distinguishes the selected worlds.
+The result is a **finite pairwise** separator, neither a real-world
+measurement nor complete identification across all possible histories.
+
+The new `DASHI/Cognition/CCDCOEP3SituatedHistoryPNFExact.agda`
+does not recreate the primary longitudinal source owner. It imports the
+actual `IntersectionalLongitudinalResidualDynamics.IntersectionalResidualCarrier`
+(body, time, place, relation, institution, axis-bundle) and
+`PNF.EventAlgebra.CandidatePNF/EventPNF` (source surface, original event
+revision, event time, observation time). An application-provided, indexed
+`About` witness joins the **specific** PNF event and original
+longitudinal carrier to its typed situated state. The owner proves
+candidate-only preservation and source-relative recharting obstruction
+conditional on an actual fibre-collision witness. It constructs no
+fictional human, source event, or population score.
+
+Both owners and composition regression are imported from
+`DASHI/Cognition/Everything.agda` and included in
+`scripts/check_ccdcoe_cognition_agda.sh`.
+
+**Revised implementation cut:**
+- FINITE SOURCE PROOFS: typed-axis separation, original rectangle
+  obstruction, situated-context nonfactorability, source-indexed
+  provenance/longitudinal extraction, and positive finite discriminator
+  are source-written.
+- KERNEL VERIFICATION: OPEN (no actual Agda receipt in this environment).
+- SOURCE ADMISSION: OPEN (needs original reviewed `EventPNF`,
+  application-specific `About` proof, source revision, and
+  independently meaningful longitudinal context).
+- MEASUREMENT/CAUSAL/INTENT: OPEN (real designs, confounders, uncertainty,
+  ethical authority and independent source evidence). A synthetic
+  constructor is not a causal measurement.
+
+This change does not claim a literal race/sex population metric: axis
+labels denote distinct **sorts** with no implicit coercion, and
+real-world identity, positionality and institutional power require
+source-specific situated evidence rather than the toy two-point model.
+
