@@ -9,6 +9,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
       - 'DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda'
       - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -16,6 +17,9 @@ on:
       - 'scripts/check_ym_sort_selectability_reference.py'
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
+      - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
+      - 'scripts/check_ym_clay_continuum_bidi_controls.py'
+      - 'scripts/check_ym_rg_noncollapse_steelman.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
   pull_request:
     paths:
@@ -25,6 +29,7 @@ on:
       - 'DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda'
       - 'DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda'
       - 'DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda'
+      - 'DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda'
       - 'DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda'
@@ -32,6 +37,9 @@ on:
       - 'scripts/check_ym_sort_selectability_reference.py'
       - 'scripts/check_ym_physical_cube_perron_certificate.py'
       - 'scripts/check_ym_rg_drift_budget_reference.py'
+      - 'scripts/check_ym_marginal_subtracted_uv_tail.py'
+      - 'scripts/check_ym_clay_continuum_bidi_controls.py'
+      - 'scripts/check_ym_rg_noncollapse_steelman.py'
       - '.github/workflows/ym-native-maxcut-exact-agda.yml'
   workflow_dispatch:
 
@@ -50,6 +58,9 @@ jobs:
           python3 scripts/check_ym_sort_selectability_reference.py
           python3 scripts/check_ym_physical_cube_perron_certificate.py --selftest
           python3 scripts/check_ym_rg_drift_budget_reference.py
+          python3 scripts/check_ym_rg_noncollapse_steelman.py
+          python3 scripts/check_ym_clay_continuum_bidi_controls.py
+          python3 scripts/check_ym_marginal_subtracted_uv_tail.py
           python3 scripts/check_ym_native_c3_and_pair_original_sort_program.py
 
   kernel-native:
@@ -71,6 +82,7 @@ jobs:
             $AGDA DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayRGDriftOriginalGibbsInstantiationExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayPhysicalRGDriftToUniformInfluenceExact.agda
+            $AGDA DASHI/Physics/YangMills/YMClayRGLossBudgetToNonGaussianExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeC3AdjacentSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClayNativeSideFourPairSpectatorSortProgramExact.agda
             $AGDA DASHI/Physics/YangMills/YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact.agda
