@@ -1,10 +1,10 @@
 # #1460 unification TODO — Pareto source construction and fail-closed acceptance
 
-**Four-cut source-producing proof queue:** [39 named exact OBS/HIL/KK/BIDI producer lemmas](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
+**Four-cut source-producing proof queue:** [40 named exact OBS/HIL/KK/BIDI producer lemmas](TSFVFourPhysicalCutsExactProducerLemmas20261106.md), each mapped to existing canonical IDs. **Canonical:** [186 exact P00–P11 lemma IDs](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). **Executable:** [48 deliverables / five phases](TSFVUnificationExecutionPhasesDeliverablesExactLemmas20261106.md). This is our lane only; do not mutate #1444 YM-owned science.
 
 ## 6 November 2026 — current exact max-cut / ownership and evidence
 
-**39 named** source-producing OBS/HIL/KK/BIDI obligations (10+12+9+8) are now fully inventoried and crosswalked to the existing 48 phased deliverables and 186 canonical source IDs. Audit: `scripts/check_tsfv_39_physical_producer_inventory_20261106.py`. **This is an exact inventory, not a proof that the 39 physical statements have been fulfilled.**
+**40 named** source-producing OBS/HIL/KK/BIDI obligations (10+12+10+8) are now fully inventoried and crosswalked to the existing 48 phased deliverables and 186 canonical source IDs. Audit: `scripts/check_tsfv_40_physical_producer_inventory_20261106.py`. **This is an exact inventory, not a proof that the 40 physical statements have been fulfilled.**
 
 **Source-written child proof progress:** [x] original finite TSVF intervention and ordered commutator; [x] original selected forward-ket conditional normalization/additivity/homogeneity and (A^\dagger A) norm; [x] exact native original Wilson R445 all-word and now **reflected all-word real Gram** pushforward; [x] original QuantumSurface singleton nonpromotion and positive-Gibbs-weight/not-necessarily-OS-RP no-go; [x] nonflat sourced AdS4×S1 Einstein–scalar test and original selected KK horizontal identity *conditional on observer measurement*. All remain **KERNEL_OPEN** unless an exact-head `parallel_checker` record is produced.
 
