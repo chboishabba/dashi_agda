@@ -25,6 +25,7 @@ import DASHI.Moonshine.Y443CoxeterRelatorSemanticLawsExact as Laws
 import DASHI.Moonshine.Y443JMDThreePathFiniteRewriteExact as Finite
 import DASHI.Moonshine.Y443Nonary72EquivarianceNoGoExact as Canon
 import DASHI.Moonshine.Y443JMDPathShiftSemanticCompilerExact as Path
+import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as All
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.TwistedModuleModularity as TM
 
@@ -1396,7 +1397,7 @@ braidAdjacent Y.d3 Y.d3 ()
     }
 
   allElevenShiftsFromActual80 :
-    DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact.JMDPathShiftCertificate
+    All.JMDPathShiftCertificate
       gi nodes
   allElevenShiftsFromActual80 =
     Path.Semantic.elevenSourcePathShiftEquations
