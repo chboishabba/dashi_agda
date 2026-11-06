@@ -30,6 +30,11 @@ OWNERS = {
     "CMP116_mixed_source": ("BalabanCMP116LiteralTrajectorySourceRound342Exact.agda",
         ("LiteralTrajectoryCMP116Source",
          "literalSelectedDifferentiatedLocalization")),
+    "CMP116_R344_shared": ("BalabanCMP116SharedMarkedDirectCalibrationRound344Exact.agda",
+        ("SharedMarkedDirectCMP116Source",
+         "asLiteralTrajectoryCMP116Source",
+         "sharedMarkedEnvelopeBelowSpectrumEnvelope",
+         "round344LiteralSelectedLocalizationLevel = conditional")),
     "CMP116_R342_R467": ("BalabanCMP116LiteralTrajectoryToPublishedLiteralR467Exact.agda",
         ("asPublishedLiteralSelectedLocalization",
          "sharedMarkedDirectAsPublishedLiteralSelectedLocalization")),
@@ -53,6 +58,8 @@ TERMS = (
     "sameLiteralR342SourceFiniteCovarianceDecay",
     "sameLiteralR342SourceYieldsR479TransferGap",
     "sameLiteralR342AndLocalRateYieldsGap",
+    "sameOriginalSharedMarkedHalfRateFiniteDecay",
+    "sameOriginalSharedMarkedHalfRateYieldsGap",
 )
 DOC = "Docs/physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md"
 WORKFLOW = ".github/workflows/ym-native-maxcut-exact-agda.yml"
@@ -79,6 +86,7 @@ def main():
         require(actual, term + " :", "exact theorem term " + term)
     if re.search(r"\bpostulate\b|\bprimTrustMe\b|\btrustMe\b|\{!|\bTERMINATING\b",actual):
         raise AssertionError("weld added a source-local trust escape")
+    require(actual, "R344.asLiteralTrajectoryCMP116Source source", "canonical shared half-rate source")
     require(actual, "Bridge.asPublishedLiteralSelectedLocalization source",
             "single selected source")
     require(actual, "R482.publishedLiteralAndLocalRateBuildPositiveTransferGap",
