@@ -66,7 +66,7 @@ encodeCookFormulaInto :
   List CookSyntaxToken →
   List CookSyntaxToken
 encodeCookFormulaInto
-    (Cook.variable index)
+    (Cook.formulaVar index)
     rest =
   formulaVariableToken
   ∷ encodeNatInto index rest
@@ -135,7 +135,7 @@ parseCookFormula
 ... | parseFailure =
   parseFailure
 ... | parsed index suffix =
-  parsed (Cook.variable index) suffix
+  parsed (Cook.formulaVar index) suffix
 parseCookFormula
     (formulaFalseToken ∷ rest) =
   parsed (Cook.constant false) rest
@@ -196,7 +196,7 @@ parseCookFormulaEncodeInto :
     (encodeCookFormulaInto formula suffix)
   ≡ parsed formula suffix
 parseCookFormulaEncodeInto
-    (Cook.variable index)
+    (Cook.formulaVar index)
     suffix
     rewrite parseNatEncodeInto index suffix =
   refl
@@ -293,7 +293,7 @@ cookFormulaTokenCount :
   Cook.BooleanFormula →
   Nat
 cookFormulaTokenCount
-    (Cook.variable index) =
+    (Cook.formulaVar index) =
   suc (natTokenCount index)
 cookFormulaTokenCount
     (Cook.constant value) =
@@ -332,7 +332,7 @@ encodeCookFormulaIntoLength :
   cookFormulaTokenCount formula
   + listLength suffix
 encodeCookFormulaIntoLength
-    (Cook.variable index)
+    (Cook.formulaVar index)
     suffix
     rewrite encodeNatIntoLength index suffix =
   refl
@@ -459,7 +459,7 @@ cookFormulaTokenCountPositive :
   (formula : Cook.BooleanFormula) →
   suc zero ≤ cookFormulaTokenCount formula
 cookFormulaTokenCountPositive
-    (Cook.variable index) =
+    (Cook.formulaVar index) =
   s≤s z≤n
 cookFormulaTokenCountPositive
     (Cook.constant value) =
