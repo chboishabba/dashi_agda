@@ -205,6 +205,64 @@ def conditional_hoeffding_ci(payload: PairedCIInput) -> dict:
     }
 
 
+
+def acceleration_interval_from_force(
+    force_lo_N: float, force_hi_N: float,
+    mass_lo_kg: float, mass_hi_kg: float,
+) -> tuple[float, float]:
+    """Conservative a=F/m interval; DOES NOT assume force is gravitational."""
+    values = (force_lo_N, force_hi_N, mass_lo_kg, mass_hi_kg)
+    if not all(is_finite_number(v) for v in values):
+        raise ValueError("force and mass bounds must be finite numbers")
+    if force_lo_N > force_hi_N or not 0 < mass_lo_kg <= mass_hi_kg:
+        raise ValueError("ordered force and strictly positive mass intervals required")
+    candidates = (
+        force_lo_N / mass_lo_kg, force_lo_N / mass_hi_kg,
+        force_hi_N / mass_lo_kg, force_hi_N / mass_hi_kg,
+    )
+    return min(candidates), max(candidates)
+
+
+def conditional_material_independence_consumer(rows: list[dict]) -> dict:
+    """Necessary interval consistency screen, not evidence for common gravity.
+
+    Expects distinct samples in one apparatus and identical source protocol.
+    Each supplied force interval must be from separately calibrated outcomes
+    and ordinary-force subtraction; this utility cannot verify its provenance.
+    """
+    if len(rows) < 2:
+        raise ValueError("at least two distinct material samples required")
+    apparatuses = {row.get("apparatus_id") for row in rows}
+    protocols = {row.get("protocol_id") for row in rows}
+    samples = {row.get("sample_id") for row in rows}
+    if len(apparatuses) != 1 or len(protocols) != 1 or len(samples) != len(rows):
+        raise ValueError("same apparatus/protocol and distinct samples required")
+    if None in apparatuses or None in protocols or None in samples:
+        raise ValueError("apparatus, protocol and sample IDs required")
+    intervals = []
+    for row in rows:
+        if not row.get("calibrated_force_and_ordinary_controls_declared", False):
+            return {"kind": "not_identifiable", "reason": "force/ordinary controls missing"}
+        if not str(row.get("data_locator", "")).strip():
+            raise ValueError("row data locator required")
+        v = acceleration_interval_from_force(
+            row["force_lo_N"], row["force_hi_N"],
+            row["mass_lo_kg"], row["mass_hi_kg"],
+        )
+        intervals.append({"sample_id": row["sample_id"],
+                          "acceleration_interval_m_per_s2": [v[0], v[1]]})
+    lower = max(x["acceleration_interval_m_per_s2"][0] for x in intervals)
+    upper = min(x["acceleration_interval_m_per_s2"][1] for x in intervals)
+    return {
+        "kind": "necessary_interval_overlap_not_proof_of_gravitational_coupling",
+        "samples": intervals,
+        "shared_acceleration_interval": [lower, upper] if lower <= upper else None,
+        "common_acceleration_rejected_by_intervals": lower > upper,
+        "common_acceleration_established": False,
+        "gravitational_mechanism_established": False,
+    }
+
+
 def full_report() -> dict:
     return {
         "schema": "Zhang2025QuantitativeConsumers/v1",
