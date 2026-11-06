@@ -1,3 +1,11 @@
+
+## 6 November — canonical R344 shared marked CMP116 half-rate direct weld
+
+The *existing* `BalabanCMP116SharedMarkedDirectCalibrationRound344Exact` proves the shared-Hessian shell's conditional geometric (\frac14 C_H 2^{-d}) bound, with selected physical source distance/time and (C_H≤1) as proof inputs. Two new terms `sameOriginalSharedMarkedHalfRateFiniteDecay`, `sameOriginalSharedMarkedHalfRateYieldsGap` (R344→R342→R467→R482) are source-written in `YMClayCMP119122116SelectedProducerWeldExact.agda`, Agda unverified. The actual original Wilson-Haar marked J applicability, uniform physical rate and OS limit are not derived from a name match. Exact four-cut Y.01–Y.04 is in `Docs/physics/YMClayCMP119116122OriginalSameSourceMaxCut20261106.md`. Source contract audit now 12 donor owners / 6 bridge proof terms.
+
+
+---
+
 ## 6 Nov 2026 — CMP119/116/122 source archaeology upgraded to exact reuse
 
 **Do not regenerate Bałaban's mathematics.** Existing repo already owns CMP119 beta-driven full density + anchored *normalized* expectation, CMP122 complete-density UV/boundary reinjection, CMP116 finite differentiated/selected two-J localization, and R342→R467→R479/R482 positive transfer-gap compilers. New `YMClayCMP119122116SelectedProducerWeldExact.agda` imports and composes these on one source: beta coupling + localized CMP116 potential, R342→R467 finite same-selected covariance, and R342→R482 positive-gap rate without independent positivity token. No Agda compiler receipt or physical Wilson instantiation claimed. Source-owned statements are distinguished from original SU(N) Wilson, gauge/ghost physical density, original marked-J dictionary, source uniform physical rate and reflection-positive *crossing* R-operation.
