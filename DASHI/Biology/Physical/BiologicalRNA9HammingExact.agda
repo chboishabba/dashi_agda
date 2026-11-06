@@ -9,10 +9,8 @@ module DASHI.Biology.Physical.BiologicalRNA9HammingExact where
 open import DASHI.Core.Prelude
 import DASHI.Biology.Physical.OriginalDmscTwoGenotypeMeasuredExact as Dmsc
 
-open Dmsc using (RNABase; RNA8; RNA9)
+open Dmsc using (RNABase; RNA8; RNA9; rna8; rna9)
 open RNABase
-open RNA8 using (rna8)
-open RNA9 using (rna9)
 
 baseDifference : RNABase → RNABase → Nat
 baseDifference A A = 0
