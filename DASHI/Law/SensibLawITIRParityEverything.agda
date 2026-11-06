@@ -1,6 +1,8 @@
 module DASHI.Law.SensibLawITIRParityEverything where
 
 open import DASHI.Core.Prelude
+open import Agda.Builtin.Bool using (false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Law.SensibLawAgdaFirstLegalRuntimeEverything as LegalRuntime
 import DASHI.Interop.ITIRSuiteNormalizedCompilerParityExact as ITIRParity
@@ -15,6 +17,14 @@ import DASHI.Interop.SensibLawHealthEvidenceProcessorParityExact as ProcessorPar
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesNarrativeGovernanceWeldExact as FriendlyjordiesNarrative
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesCompetingNarrativeExact as FriendlyjordiesCompeting
 import DASHI.Cognition.PNF.SensibLawFriendlyjordiesSourceTotalityExact as FriendlyjordiesSourceTotality
+import DASHI.Law.SensibLawRealMatterReviewDecisionExact as RealMatterReview
+import DASHI.Law.SensibLawExpertEvidenceProductionIntegrityExact as ExpertProduction
+import DASHI.Governance.LegalDecisionDoubleProjectionExact as LegalDecision
+import DASHI.Governance.LegitimacyEvidenceSeparationExact as Legitimacy
+import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Governance.PromotionSpine as Promotion
+import DASHI.Foundations.CanonicalProvenancePromotion as Canonical
+import DASHI.Governance.GovernedArtifactCore as Governed
 
 ------------------------------------------------------------------------
 -- Terminal parity surface for the current housing / ITIR / SensibLaw tranche.
@@ -90,3 +100,171 @@ selectedFriendlyjordiesResidualAcquisitionClosure :
   FriendlyjordiesSourceTotality.ResidualAcquisitionClosure
 selectedFriendlyjordiesResidualAcquisitionClosure =
   FriendlyjordiesSourceTotality.canonicalResidualAcquisitionClosure
+
+
+------------------------------------------------------------------------
+-- Canonical legal-governance semantic handoff.
+--
+-- Reuse existing owners.
+-- Do not create an Actionstep-specific ontology.
+-- Runtime parity, semantic promotion, legal citation, compliance, and domain
+-- authority remain separate proof coordinates.
+------------------------------------------------------------------------
+
+open import DASHI.Interop.SensibLawSemanticPromotionPolicy public using
+  ( SemanticPromotionPolicySurface
+  ; semanticPromotionPolicySurface
+  ; heuristic-only-abstains
+  ; promotion-ignores-heuristic-bits
+  ; semantic-promotion-truth-authority-closed
+  ; semantic-promotion-legal-authority-closed
+  ; semantic-promotion-all-authority-closed
+  )
+
+open import DASHI.Core.CompositionalComplianceExact public using
+  ( CertifiedStage
+  ; CompositeCompliance
+  ; composeCertifiedStages
+  ; DependentCertifiedStage
+  )
+
+open import DASHI.Law.LegalAuthorityCitationExact public using
+  ( LegalCitation
+  ; LegalAuthorityUseReceipt
+  ; LegalCitationBoundary
+  ; canonicalLegalCitationBoundary
+  )
+
+import DASHI.Governance.DomainPermeabilityAuthorityTransport as Domain
+
+selectedDomainTransportReceipt : Domain.DomainTransportReceipt
+selectedDomainTransportReceipt = Domain.canonicalDomainTransportReceipt
+
+selectedRepresentationEqualityCreatesLegalAuthorityIsFalse :
+  Domain.DomainTransportReceipt.representationEqualityCreatesLegalAuthority
+    selectedDomainTransportReceipt ≡ false
+selectedRepresentationEqualityCreatesLegalAuthorityIsFalse = refl
+
+selectedVendorIdentityCreatesAuthorityIsFalse :
+  Domain.DomainTransportReceipt.vendorIdentityCreatesAuthority
+    selectedDomainTransportReceipt ≡ false
+selectedVendorIdentityCreatesAuthorityIsFalse = refl
+
+selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue :
+  Domain.DomainTransportReceipt.targetDomainNeedsOwnAuthorityWitness
+    selectedDomainTransportReceipt ≡ true
+selectedTargetDomainNeedsOwnAuthorityWitnessIsTrue = refl
+
+------------------------------------------------------------------------
+-- Exact legal/compliance non-promotion handoff.
+-- Reuse canonical owners. These proofs do not create vendor semantics.
+------------------------------------------------------------------------
+
+selectedLegalReviewDoesNotCreateClaimTruth :
+  RealMatterReview.LegalReviewDecisionCreatesClaimTruth → ⊥
+selectedLegalReviewDoesNotCreateClaimTruth =
+  RealMatterReview.legalReviewDecisionDoesNotCreateClaimTruth
+
+selectedQualificationDoesNotAutomaticallyProveForensicCompliance :
+  ExpertProduction.QualificationAutomaticallyForensicCompliance → ⊥
+selectedQualificationDoesNotAutomaticallyProveForensicCompliance =
+  ExpertProduction.qualificationDoesNotAutomaticallyProveForensicCompliance
+
+selectedReportAdmissionDoesNotRepairMissingInput :
+  ExpertProduction.ReportAdmissionRepairsMissingInput → ⊥
+selectedReportAdmissionDoesNotRepairMissingInput =
+  ExpertProduction.reportAdmissionDoesNotRepairMissingInput
+
+selectedOfficialLegalSurfaceDoesNotRecoverFineState :
+  NF.FactorsThrough
+    LegalDecision.officialSurface
+    LegalDecision.fineLegalStateOf
+  → ⊥
+selectedOfficialLegalSurfaceDoesNotRecoverFineState =
+  LegalDecision.officialSurfaceCannotRecoverFineLegalState
+
+selectedOfficialActionDoesNotRecoverAutonomyAndAuthority :
+  NF.FactorsThrough
+    LegalDecision.autonomyOfficialSurface
+    LegalDecision.fineAutonomyLegalStateOf
+  → ⊥
+selectedOfficialActionDoesNotRecoverAutonomyAndAuthority =
+  LegalDecision.officialActionCannotRecoverAutonomyAndAuthority
+
+selectedLegalityAloneDoesNotCreateLegitimacy :
+  Legitimacy.AdmittedLegitimacy
+    Legitimacy.demoEvidence
+    Legitimacy.legalOnly
+  → ⊥
+selectedLegalityAloneDoesNotCreateLegitimacy =
+  Legitimacy.legalOnlyIsNotAdmittedLegitimacy
+
+selectedMissingAdmissibilityStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true false true true true)
+  ≡ Governed.abstain
+selectedMissingAdmissibilityStillAbstains =
+  Promotion.missingAdmissibilityAbstains
+
+selectedMissingValidationStillAbstains :
+  Promotion.authorizationFromObligations
+    (Canonical.promotionObligations true true true true false)
+  ≡ Governed.abstain
+selectedMissingValidationStillAbstains =
+  Promotion.missingValidationAbstains
+
+------------------------------------------------------------------------
+-- Mabo citation-use and cross-matter non-promotion handoff.
+--
+-- Reuse the existing case battery and Mabo/Pabai owners.
+-- A citation seed is a navigation coordinate.
+-- Shared Country context does not discharge a different statutory element.
+-- Structural analogy does not transfer substantive doctrine.
+------------------------------------------------------------------------
+
+import DASHI.Law.SensibLawLegalCaseBatteryExact as CaseBattery
+import DASHI.Law.SensibLawMaboPabaiExecutableProofSearchExact as MaboPabai
+import DASHI.Cognition.PNF.SensibLawMaboRecognitionCreationFootholdExact as MaboFoothold
+
+selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin :
+  CaseBattery.YunupinguSeedAutomaticallyMaboJoin → ⊥
+selectedYindjibarndiCitationSeedDoesNotCreateMaboJoin =
+  CaseBattery.yunupinguSeedDoesNotCreateMaboJoin
+
+selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement :
+  CaseBattery.NativeTitleAtomPaysOffshorePetroleumElement → ⊥
+selectedMunkaraNativeTitleAtomDoesNotPayOffshoreElement =
+  CaseBattery.nativeTitleAtomDoesNotPayOffshoreElement
+
+selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType :
+  CaseBattery.SharedCountryConceptCollapsesWrongType → ⊥
+selectedMunkaraSharedCountryConceptDoesNotCollapseWrongType =
+  CaseBattery.sharedConceptDoesNotCollapseWrongType
+
+selectedPabaiMaboAnalogyStillNonPromoting :
+  MaboPabai.MaboPabaiSearchBoundary.maboAnalogyAutomaticallyTransfersDoctrine
+    MaboPabai.canonicalMaboPabaiSearchBoundary
+  ≡ false
+selectedPabaiMaboAnalogyStillNonPromoting =
+  CaseBattery.pabaiMaboAnalogyStillNonPromoting
+
+selectedMaboIsNotClimateNegligencePrecedent :
+  MaboPabai.MaboIsClimateNegligencePrecedent → ⊥
+selectedMaboIsNotClimateNegligencePrecedent =
+  MaboPabai.maboIsNotPromotedToClimateNegligencePrecedent
+
+selectedMaboStructureDoesNotProveClimateDoctrine :
+  MaboFoothold.MaboFootholdAutomaticallyTransfersToClimateNegligence → ⊥
+selectedMaboStructureDoesNotProveClimateDoctrine =
+  MaboFoothold.maboStructureDoesNotProveClimateDoctrine
+
+selectedAmoduCitationDoesNotMeanWholesaleAdoption :
+  MaboPabai.AmoduCitationMeansMaboAdoptedEveryAmoduProposition → ⊥
+selectedAmoduCitationDoesNotMeanWholesaleAdoption =
+  MaboPabai.amoduCitationDoesNotMeanWholesaleAdoption
+
+selectedPabaiCurrentRouteStillUnreachable =
+  MaboPabai.pabaiCurrentRouteStillUnreachable
+
+selectedPabaiSearchStillRequiresProof =
+  MaboPabai.pabaiSearchStillRequiresProof
