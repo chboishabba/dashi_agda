@@ -23,7 +23,7 @@ module DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _+_; _*_; _<_; _≤_; ∣_∣)
+  (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _<_; _≤_; ∣_∣)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanFiniteBoundaryConditionedDobrushinExact as Boundary
