@@ -187,6 +187,66 @@ module _
         (actualCoarsePullback observable)
         (positiveTimePullback observable positive))
 
+------------------------------------------------------------------------
+-- Complete REAL reflected cross-Gram transport on the original
+-- Wilson family.  The diagonal case above is not sufficient by itself
+-- to identify an OS Gram matrix: two distinct tests must also be
+-- transported without selecting another measure.
+------------------------------------------------------------------------
+
+  originalFineOSCrossGram :
+    (fineReflect : FineObservable → FineObservable) →
+    FineObservable → FineObservable → ℝ
+  originalFineOSCrossGram fineReflect left right =
+    Physical.normalizedExpectation originalFineGibbsMeasure
+      (λ fine → fineReflect left fine *ℝ right fine)
+
+  actualR445CoarseOSCrossGram :
+    (coarseReflect : CoarseObservable → CoarseObservable) →
+    CoarseObservable → CoarseObservable → ℝ
+  actualR445CoarseOSCrossGram coarseReflect left right =
+    Push.actualPushforwardNormalized
+      theory traceData exponential betaFine oneLink bilateral divide
+      (λ coarse → coarseReflect left coarse *ℝ right coarse)
+
+  originalR445CrossGramIsFineWilsonCrossGram :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (fineReflect : FineObservable → FineObservable)
+    (coarseReflect : CoarseObservable → CoarseObservable) →
+    NativeBlockReflectsExactly fineReflect coarseReflect →
+    ∀ left right →
+    originalFineOSCrossGram fineReflect
+      (actualCoarsePullback left) (actualCoarsePullback right)
+    ≡ actualR445CoarseOSCrossGram coarseReflect left right
+  originalR445CrossGramIsFineWilsonCrossGram
+      ordered strictToWeak fineReflect coarseReflect compatible
+      left right =
+    cong
+      (λ numerator →
+        divide numerator
+          (Physical.partitionFunction originalFineGibbsMeasure))
+      (Finite.haarIntegralCongruent
+        (Push.originalFineIntegrationLaws
+          theory traceData exponential betaFine
+          oneLink bilateral divide ordered strictToWeak)
+        (λ fine →
+          Physical.density originalFineGibbsMeasure fine
+          *ℝ
+          (fineReflect (actualCoarsePullback left) fine
+            *ℝ actualCoarsePullback right fine))
+        (λ fine →
+          Physical.density originalFineGibbsMeasure fine
+          *ℝ
+          (coarseReflect left (originalNativeBlock fine)
+            *ℝ right (originalNativeBlock fine)))
+        (λ fine →
+          cong
+            (λ product →
+              Physical.density originalFineGibbsMeasure fine
+              *ℝ product)
+            (cong₂ _*ℝ_ (compatible left fine) refl)))
+
 -- Reflection compatibility of the original 64-block ordered native map,
 -- fine Wilson OS positivity for the selected physical plane, and actual
 -- positive-time support are the theorem-bearing M.04 physical inputs.
