@@ -15,7 +15,8 @@ module DASHI.Moonshine.Y443Nonary72EquivarianceNoGoExact where
 -- square, not a no-go for alternative charts or C3/Fricke identifications.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (true)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_; proj₁)
@@ -34,21 +35,54 @@ sym refl = refl
 trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl eq = eq
 
+------------------------------------------------------------------------
+-- Canonical unordered-pair normalization prevents the graph automorphism
+-- from leaving the actual 66-pair Y443 index list. The old raw
+-- pair(x,y)->pair(swap x,swap y) was NOT closed on that enumeration.
+------------------------------------------------------------------------
+
+rank : Y.Node → Nat
+rank Y.a = 0
+rank Y.b1 = 1
+rank Y.c1 = 2
+rank Y.d1 = 3
+rank Y.e1 = 4
+rank Y.b2 = 5
+rank Y.c2 = 6
+rank Y.d2 = 7
+rank Y.e2 = 8
+rank Y.b3 = 9
+rank Y.c3 = 10
+rank Y.d3 = 11
+
+leq : Nat → Nat → Bool
+leq zero _ = true
+leq (suc _) zero = false
+leq (suc x) (suc y) = leq x y
+
+canonicalPair : Y.Node → Y.Node → Y.Pair
+canonicalPair x y with leq (rank x) (rank y)
+... | true = Y.pair x y
+... | false = Y.pair y x
+
 swapTag : Index.RelatorTag → Index.RelatorTag
 swapTag (Index.nodeSquare n) = Index.nodeSquare (Orbit.swap n)
 swapTag (Index.pairPower (Y.pair x y)) =
-  Index.pairPower (Y.pair (Orbit.swap x) (Orbit.swap y))
+  Index.pairPower (canonicalPair (Orbit.swap x) (Orbit.swap y))
 swapTag Index.spider = Index.spider
 swapTag Index.centralQuotient = Index.centralQuotient
 
-swapTagInvolutive :
-  (tag : Index.RelatorTag) → swapTag (swapTag tag) ≡ tag
-swapTagInvolutive (Index.nodeSquare n)
-  rewrite Orbit.swapInvolutive n = refl
-swapTagInvolutive (Index.pairPower (Y.pair x y))
-  rewrite Orbit.swapInvolutive x | Orbit.swapInvolutive y = refl
-swapTagInvolutive Index.spider = refl
-swapTagInvolutive Index.centralQuotient = refl
+-- This is a literal proof over the ACTUAL 66 unordered-pair indices.
+-- It fails definitionally if the canonical pair sort is wrong.
+allListedPairsReturnAfterDoubleSwap :
+  Y.map (λ p → swapTag (swapTag (Index.pairPower p))) Y.pairs
+  ≡ Y.map Index.pairPower Y.pairs
+allListedPairsReturnAfterDoubleSwap = refl
+
+swapNodeInvolutive :
+  (n : Y.Node) →
+  swapTag (swapTag (Index.nodeSquare n)) ≡ Index.nodeSquare n
+swapNodeInvolutive n rewrite Orbit.swapInvolutive n = refl
 
 -- Exhaustive 12x12 *relator-role* equivariance; this does not assert
 -- literal word equality of the spider or central quotient under swap.
