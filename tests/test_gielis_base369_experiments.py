@@ -257,3 +257,75 @@ def test_exact_agda_tables_source_audit():
     assert receipt["complete_18_case_theorems"] == 19
     assert receipt["gram_369"] == [[36,0,0],[0,36,0],[0,0,72]]
     assert not receipt["agda_kernel_accepted"]
+
+
+def test_exact_q_zeta36_character_orthogonality_and_reconstruction():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_cyclotomic36_exact",
+        ROOT/"scripts/gielis_cyclotomic36_exact.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.receipt()
+    assert r["full_character_orthogonality_pairs"] == 1296
+    assert r["recovered_coefficients"] == 7
+    assert r["all_36_sample_reconstruction"]
+    assert not r["float_computation"]
+    assert not r["agda_kernel_accepted"]
+
+
+def test_exact_rational_sector_spectral_convergence_certificate():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_sector_spectral_certificate",
+        ROOT/"scripts/gielis_sector_spectral_certificate.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.certificate(9,2048)
+    from fractions import Fraction
+    assert Fraction(r["relative_eigenvalue_error_upper"]) < Fraction(1,100)
+    assert r["rigorous_radial_relative_error_upper"] == "495/100352"
+    assert r["all_dirichlet_eigenvalues_continuum_sector_domain"]
+    assert not r["certified_cartesian_fd_eigensolver_error"]
+    for m in (3,6,9):
+        errors=[
+            Fraction(module.certificate(m,n)["relative_eigenvalue_error_upper"])
+            for n in (64,128,256,512)
+        ]
+        assert all(x>y for x,y in zip(errors,errors[1:]))
+        assert module.minimal_sector_count(m,Fraction(1,100)) > 0
+
+
+def test_independent_analytic_spiral_first_hit_parity_smoke():
+    pytest.importorskip("scipy")
+    spec=importlib.util.spec_from_file_location(
+        "gielis_reflection_parity",
+        ROOT/"scripts/gielis_reflection_parity.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.parity(m=3,epsilon=.12,rays=12,segments=384,brackets=3072)
+    assert r["rays"] == 12
+    assert r["paired"] >= 1
+    assert not r["same_as_original_Kozyrev_HTML_SDF"]
+    assert not r["grazing_and_tangency_completeness_proved"]
+
+
+def test_random_angle_hoeffding_optical_receipt_is_explicitly_simulated():
+    spec=importlib.util.spec_from_file_location(
+        "gielis_optical_statistics",
+        ROOT/"scripts/gielis_optical_statistics.py")
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[spec.name]=module
+    spec.loader.exec_module(module)
+    r=module.matched_random_sweep(rays=24,segments=128,bounces=2,
+                                  seed=369,include_controls=False)
+    assert r["familywise_simultaneous_coverage_at_least"] == .95
+    assert len(r["results"]) == 7
+    assert r["no_inference_for_deterministic_grid"]
+    for design in r["results"]:
+        lo,hi=design["focus_hoeffding_interval"]
+        assert lo <= design["focus_fraction"] <= hi
+        lo,hi=design["mean_abs_impulse_hoeffding_interval"]
+        assert lo <= design["mean_abs_torque"] <= hi
+        assert not design["physical_calibration"]
