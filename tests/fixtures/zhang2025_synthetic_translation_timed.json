@@ -124,6 +124,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 1000,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -194,6 +201,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 1000,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -264,6 +278,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 1000,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -334,6 +355,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 1000,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -404,6 +432,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 1000,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       }
     ]
@@ -532,6 +567,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -602,6 +644,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -672,6 +721,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -742,6 +798,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       },
       {
@@ -812,6 +875,13 @@
             "bound_N": 0,
             "evidence_receipt": "SYNTHETIC/fixture_only"
           }
+        },
+        "t_s_bound": 0,
+        "time_evidence_receipt": "SYNTHETIC/clock_fixture",
+        "E_x_V_m": {
+          "nominal": 0,
+          "bound": 0,
+          "evidence_receipt": "SYNTHETIC/field_meter_fixture"
         }
       }
     ]
