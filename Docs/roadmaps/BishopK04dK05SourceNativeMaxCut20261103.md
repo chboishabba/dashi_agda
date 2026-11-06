@@ -1475,3 +1475,33 @@ parallel-checker workflow. Agda elaboration is still pending.
 The mathematical LOG/PI composition identities remain separate.
 The countermodel is a proof of a missing premise's necessity, not
 a proof of those positive terminal identities.
+
+
+## 2026-11-07 native derivative limit and chain-rule implementation
+
+Two original-`Real.ℝ` source implementations have been added to the
+golden verification path, without introducing generic oracle fields:
+
+* `BishopOriginalLogAtanDerivativeLimitValuesExact` now uses native
+  `Sequence.uniqueness-of-limits`, actual geometric partial telescope,
+  and `Sequence.∣r∣<1⇒rⁿ→0` to prove that the source negative-log
+  derivative-series limit satisfies `(1-x) D_L(x) ≃ 1`; the source
+  arctangent derivative-series limit satisfies
+  `(1+x²) D_A(x) ≃ 1`, including the concrete original Bishop
+  Machin arguments `1/5` and `1/239`.
+* New `BishopFactorDerivativeChainExact` implements the division-free
+  factor-derivative chain rule on the original pinned Bishop real
+  using the existing proof of differentiability-implies-sequential-
+  continuity and actual quotient convergence. It explicitly consumes
+  outer-function setoid congruence, which is necessary because
+  `Real._≃_` is not propositional equality.
+
+Both source owners are included in the golden TOE imports or the
+Bishop parallel-checker target; exact-head compiler acceptance has
+**not** yet been obtained. The source-level results prove values of
+the limiting **derivative series**, not that the derivative of the
+infinite original function equals that limit. The latter is the
+remaining true derivative-limit interchange gate. Accordingly the
+original LOG exponential composition and the two PI source Cayley
+identities remain open; the original zeta/xi semantic equality remains
+independently open.
