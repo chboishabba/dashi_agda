@@ -21,6 +21,7 @@ on:
       - 'DASHI/Analysis/BishopComplexSequentialContinuityAlgebraExact.agda'
       - 'DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda'
       - 'scripts/check_bishop_machin_rational_gaussian_phase.py'
+      - 'scripts/check_k05_cayley_formal_coefficients.py'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
       - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
@@ -82,6 +83,10 @@ jobs:
       - name: Exact Machin Gaussian phase fraction regression
         shell: bash
         run: python3 scripts/check_bishop_machin_rational_gaussian_phase.py | tee bishop-machin-rational-gaussian.log
+
+      - name: Exact Cayley rational all-degree recurrence regression
+        shell: bash
+        run: python3 scripts/check_k05_cayley_formal_coefficients.py --through-degree 4095 | tee bishop-cayley-formal-coefficients.log
 
       - name: Kernel check all focused K05 and K04d new owners via parallel checker
         shell: bash
@@ -187,3 +192,4 @@ jobs:
             bishop-k05-symbolic.log
             bishop-k04d-finite-log-exp.log
             bishop-machin-rational-gaussian.log
+            bishop-cayley-formal-coefficients.log
