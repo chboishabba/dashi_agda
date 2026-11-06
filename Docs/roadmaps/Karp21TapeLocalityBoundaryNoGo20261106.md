@@ -1,5 +1,16 @@
 # Cook–Levin tape-locality boundary ghost — exact obstruction and repair contract
 
+### Additional same-object endcap proof owners: every row, not selected examples
+
+The canonical Agda endcap source now also proves `everyPhysicalRowIsEnumerated : Slot i count → RowSlotMember ... (allPhysicalRows count)` and `everyRowEndcapCNFTrue`, which selects any actual row's CNF acceptance from the whole-row-endcap conjunction. `globalRowEndcapsSound` splits the exact two physical-column CNFs into a `PhysicalRowEndcapCellsPlain` witness, and `globalAllRowsEndcapsGivePhysicalRowPlain` derives the two **actual canonical decoded cell** plainness facts from the original global assignment and original row/cell index placements. These are source-written proof terms, not compiler receipts.
+
+A separate concrete owner `ConcreteTapeGuardedGlobalCookLevinCNFExact.agda` defines `guardedGlobalCookLevinCNF = Placed.append originalGlobalCNF globalAllRowsEndcapsCNF`. Its `guardedGlobalCookLevinCNFSound` and `guardedGlobalCookLevinCNFComplete` prove exact Boolean conjunction decomposition; `guardedGlobalCNFToOriginalAndAllEndcaps` produces both original SAT formula parts and the all-row source certificate. The focused Agda acceptance root imports this new owner. The ORIGINAL `globalCookLevinCNF` remains unchanged: claims of original-SAT equivalence and polynomial compiled size require their own proof, not mere formula extension.
+
+**Revised exact unpaid weld:** for every decoded after-row, prove the equality between the `Canonical.decodeCell` at the physical endpoint Fin placements and the first/last constructor in `Decode.decodeCells` for `Global.rowSliceBits` (existing `ConcreteTapeGlobalBlockSliceConsistencyExact` is a likely donor). Apply `noGhostFromAfterRowEndcaps`, thread `NoGhostContextBoundaries` through `DecodedRunInduction`, switch SAT soundness to the guarded global formula with a matching completeness proof for encoded padded runs, and obtain Agda 2.9 exact-head receipts. Unit CNF clauses and source-documented proof flags alone do not close those steps.
+
+**Verification already performed locally:** 33,020 cases passed in an independent Python differential model of the canonical plain-tag truth-table and row-endcap pairing, plus the existing six-cell ghost model. The actual repo script is included in preflight, but this workspace lacks Agda and a local checkout, so **no exact-head compiler receipt** can be reported.
+
+
 ## 2026-11-06 — current max-cut implementation: endcap witness route (Agda source written)
 
 **Authority and scope:** Golden candidate sources are the ORIGINAL `ConcreteTapeAfterUniqueFromLocalityExact.agda` and `ConcreteTapeCanonicalEndcapCNFExact.agda`; the focused `ConcreteTapeBoundaryGuardFocusedRootExact.agda` imports both. The previously reported `NoGhostContextBoundaries` remains proof relevant. `dashi_lean4` AuthorityBoundary/Loom relation status is diagnostic comparison, never the Agda compiler receipt.
