@@ -214,3 +214,32 @@ def test_wall_angular_impulse_conserves_ray_angular_momentum(m,epsilon):
             total_wall_impulse += hit["wall_angular_impulse"]
         assert row["signed_torque"] == pytest.approx(total_wall_impulse,abs=3e-13)
         assert row["absolute_torque"]+1e-12 >= abs(total_wall_impulse)
+
+
+def test_ideal_specular_power_torque_is_dimensionally_scaled():
+    import math
+    assert g.SPEED_OF_LIGHT_M_S == 299792458
+    for watts in (0., .5, 25., 1000.):
+        for angular_m in (-3.5, 0., 1.25):
+            result = g.ideal_specular_wall_torque_nm(angular_m, watts)
+            assert result == pytest.approx(watts*angular_m/299792458,abs=1e-18)
+    with pytest.raises(ValueError):
+        g.ideal_specular_wall_torque_nm(1., -1.)
+    with pytest.raises(ValueError):
+        g.ideal_specular_wall_torque_nm(1., math.inf)
+
+
+def test_symbolic_gielis_certificates_if_sympy_available():
+    pytest.importorskip("sympy")
+    spec = importlib.util.spec_from_file_location(
+        "gielis_base369_symbolic_certificates",
+        ROOT / "scripts/gielis_base369_symbolic_certificates.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    receipt=module.prove()
+    assert receipt["status"] == "exact_symbolic_identities_passed"
+    assert receipt["area"] == "sqrt(2)*pi"
+    assert receipt["wall_ray_angular_impulse_balance"]
+    assert not receipt["agda_kernel_accepted"]
+    assert not receipt["physical_optics_validated"]
