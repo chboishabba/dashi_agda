@@ -118,7 +118,6 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryFinMaterializationCostExact.agda
-  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalWordComparisonBoundExact.agda
 fi
 
 if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
@@ -130,6 +129,11 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21OriginalGammaGraphWordFieldsReplayExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21PositiveThresholdGammaExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeRawSparseWordVerifierExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeRawValidatorComparisonCountExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeAllWordValidationClockExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalWordComparisonBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalGraphComparisonEnvelopeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21N21SameWordCountedAcceptanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
 fi
