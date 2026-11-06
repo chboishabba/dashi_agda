@@ -7,6 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E11), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -60,27 +61,27 @@ means computational test/design only; **OPEN** means original theorem unproved.
 
 | ID | Exact target (proposed proof-owner name) | Requirement | Depends | State |
 |---|---|---|---|---|
-| G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE |
-| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | OPEN |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | OPEN |
-| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | OPEN |
-| G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | SOURCE finite; continuous OPEN |
-| G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | SOURCE; Python independent exact |
-| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | NUMERIC exact ℚ^18; native OPEN |
-| G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | OPEN |
-| G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | OPEN |
-| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | OPEN |
-| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | NUMERIC only |
-| G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | OPEN |
-| G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | native orientation reused; physical OPEN |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | numerical sweep only |
-| G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | OPEN |
-| G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | OPEN |
-| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | OPEN |
-| G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | CODEC SOURCE; native/empirical OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | OPEN |
+| G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
+| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Finite integer sources; Bishop same-object OPEN |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E01 mathematical proof + SymPy certificate; native Bishop OPEN |
+| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 mathematical proof; native Agda OPEN |
+| G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | E02 rotation/reflection proof; Agda continuum OPEN |
+| G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
+| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E05 general mathematical proof; native operator OPEN |
+| G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area proof + SymPy check; Bishop integral OPEN |
+| G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 exact normal/curvature proof + SymPy; Agda OPEN |
+| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E06 restricted complex DFT proof; Agda OPEN |
+| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 standard-form proof via Friedrichs/Rellich; Agda OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | Classical spectral disk bounds; actual mesh-error proof OPEN |
+| G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | Original HTML/SDF same-scene evidence OPEN |
+| G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | E09 nongrazing conditional mathematical proof; original scene OPEN |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E08 ideal wall angular impulse proved; SI power conversion SOURCE; calibrated physics OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | Optical code/tests SOURCE; same-object CI/Pareto OPEN |
+| G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
+| G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
+| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06 exact 36-sample reconstruction on specified 7-mode space; native/general OPEN |
+| G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 prefix-code mathematical proof + codec SOURCE; universal K/Shannon empirical OPEN |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Standalone SymPy receipt PASS; committed-head Agda/Python/optics receipt OPEN |
 
 ## Critical dependencies / max-cut
 
@@ -142,3 +143,27 @@ advantage without a field/source model. Do not mix these three meanings.
 The 18→36 proof is specifically a discrete two-mode aliasing counterexample.
 It does not prove continuous Nyquist-Shannon sampling/reconstruction or
 selected MSE bounds. Those are independent G19 obligations.
+
+
+## 2026-11-06 proof-round receipts and corrected physical sign
+
+- Independent exact local SymPy check passed: special-case trig polynomial,
+  ordinary-real radial derivatives/curvature, area = sqrt(2)*pi, and the
+  algebraic ray-wall angular-impulse conservation relation. Its local artifact
+  is a symbolic check, **not** an Agda proof acceptance receipt.
+- `scripts/gielis_base369_symbolic_certificates.py` added for head-commit
+  symbolic reproduction; pytest invokes it when SymPy is installed.
+- Optical ray tracer now records `wall_unit_impulse = d_in - d_out` and
+  `ray_angular_change = -(wall_unit_impulse)`. The earlier code used ray-side
+  sign while calling the output 'torque'. The new measured wall torque
+  conversion is **conditional**: for power P and equal-power rays,
+  τ = (P/c) mean[summed r × (d_in-d_out)] in N m. It is not a physical
+  calibration or an apparatus measurement.
+- The paper-level mathematical results include a strict nonconvexity
+  obstruction κ_m(0) = 1 - m²/8 for m ∈ {3,6,9}, strict Faber–Krahn lower
+  bound j_{0,1}²/sqrt(2) < λ₁(Ω_m), and exact 36-grid DFT reconstruction
+  for the selected 7-dimensional bandlimited space. No mesh error theorem
+  or native formalisation is promoted.
+- User request to 'complete all' cannot turn missing original optical
+  scene/experiments, native Agda checks, or continuum numerical error bounds
+  into proof terms. These remain listed above as OPEN acceptance leaves.
