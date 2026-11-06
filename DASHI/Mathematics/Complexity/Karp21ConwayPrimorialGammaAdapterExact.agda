@@ -19,6 +19,7 @@ import DASHI.Foundations.PrimorialFactorAddressConcrete as Prime
 import Ontology.GodelLattice as Godel
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21ConwayGammaChainCodecExact as Chain
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Gamma
 
 factorEntries : Prime.PrimorialDigits4 → List Nat
 factorEntries digits =
@@ -91,7 +92,7 @@ factor15DecodeEncode (Godel.v15 a b c d e f g h i j k l m n o)
 factor4WireLength :
   (digits : Prime.PrimorialDigits4) →
   length (encodeFactorWord digits) ≡
-    length (Chain.Gamma.encodeGammaNat (length (factorEntries digits)))
+    length (Gamma.encodeGammaNat (length (factorEntries digits)))
     + Chain.entryBitLength (factorEntries digits)
 factor4WireLength digits =
   Chain.chainWireSizeExact (factorEntries digits)
@@ -99,7 +100,7 @@ factor4WireLength digits =
 factor15WireLength :
   (factors : Godel.FactorVec) →
   length (encodeFactor15Word factors) ≡
-    length (Chain.Gamma.encodeGammaNat (length (factor15Entries factors)))
+    length (Gamma.encodeGammaNat (length (factor15Entries factors)))
     + Chain.entryBitLength (factor15Entries factors)
 factor15WireLength factors =
   Chain.chainWireSizeExact (factor15Entries factors)
