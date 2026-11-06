@@ -15,7 +15,7 @@ for source_file in "${sources[@]}"; do
     echo "Agda trust escape rejected: $source_file" >&2
     exit 1
   fi
-  if grep -Pzoq '(?s)\\{!.*?!\\}' "$source_file"; then
+  if grep -Pzoq '(?s)\{!.*?!\}' "$source_file"; then
     echo "Agda hole rejected: $source_file" >&2
     exit 1
   fi
