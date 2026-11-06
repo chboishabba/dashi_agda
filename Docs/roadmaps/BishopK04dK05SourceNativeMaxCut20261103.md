@@ -1398,3 +1398,55 @@ now includes **56** owner files and the three `--safe` roots.
 No exact-head Agda acceptance receipts were observed. Therefore
 these results are **source-written/kernel-pending**, not claimed
 kernel-accepted.
+
+
+## 2026-11-06 original native product discharge (source-owned, kernel pending)
+
+The prior K05-PRODUCT inventory incorrectly kept the mixed signed-factorial
+product among missing *source-written* lemmas. The actual original implementation
+already exists in `BishopRound11SignedFactorialDegreeBinomialExact`:
+`originalEvenSignedFactorialDegree`,
+`originalOddSignedFactorialDegree`,
+`originalImaginaryExponentialMultiplicative`, and
+`originalSineCosineAdditionFromNativeFactorials`. They consume the
+original complex Cauchy triangle and odd/odd vanishing work in
+`BishopRound11NativeComplexRectangleExact`.
+
+The new `DASHI.Analysis.BishopK04dK05NativeProductDischargeExact`
+exposes the UNCONDITIONAL selected-source product, both addition
+laws, Pythagorean, and the original phase bounds, and explicitly feeds
+the single original LOG identity through the existing K04d
+region-wide Basel compiler. It also exposes the first-positive-zero
+compiler requiring exactly two actual original source atan-Cayley
+evaluations. All three golden TOE roots import this file and the
+Bishop focused parallel-checker target list includes it.
+
+The precise remaining cut is now:
+
+1. **K05-PRODUCT:** exact-head Agda kernel elaboration of existing
+   signed-factorial source owner; no outstanding *mathematical*
+   factorial split is independently identified.
+2. **K04d-LOG:** constructively evaluate the **original** nested
+   exponential of the actual convergent Bishop negative-log series,
+   proving `exp_B(-L(x)) ≃ 1-x` on the source domain. Formal
+   recurrence uniqueness, uniform residual and Nat-index transport
+   are already source-written; the infinite composition/evaluation
+   map remains open.
+3. **K05-PI:** prove `exp_C(2i atan_B t) ≃ (1+it)/(1-it)` at the
+   original Bishop points 1/5 and 1/239. All terminal original
+   Machin first-positive-zero consumers are source-written.
+4. **K04d-CONTINUITY:** the original selected-chart finite-term,
+   original exponential sequential continuity, and Bishop
+   uniform-limit theorem are source-written. Complete original zeta
+   and completed-xi **same-object** evaluation/equality beyond the
+   existing conditional `OriginalHalfPlaneDirichletAgreement`.
+5. **Verification:** run the repository
+   `scripts/run_agda29_parallel_check.sh --safe` via its canonical
+   parallel-checker setup on the exact source and three TOE roots,
+   and repair first actual Agda 2.9 elaboration failure.
+
+Analytic argument, majorants, and exact series normalization are
+recorded in
+`Docs/proofs/BishopK04dK05TerminalCompositionExactProof20261106.md`.
+This is a mathematical derivation and explicit implementation map,
+NOT a claimed Agda proof term. No kernel receipt has been observed.
