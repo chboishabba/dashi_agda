@@ -34,6 +34,8 @@ def frame(ts, mode, acceleration=.001):
     e = 1000. if active else 0.
     return {
         "t_s": float(ts),
+        "t_s_bound": 0.,
+        "time_evidence_receipt": "SYNTHETIC/clock",
         "theta_rad": bounded(theta),
         "E_V_m": [e * math.cos(phi), e * math.sin(phi), 0.],
         "B_T": [0., 0., 0.],
