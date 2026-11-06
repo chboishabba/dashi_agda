@@ -1,0 +1,44 @@
+# Clay Yang–Mills: minimal endpoint max-cut (7 November 2026)
+
+**Canonical target**: for every externally specified compact simple Lie group G, construct a nontrivial four-dimensional quantum Yang–Mills theory on R^4 satisfying an accepted axiomatic QFT scheme, with a strictly positive mass gap above its vacuum. The YM proof is independent of TSVF, measured observer dynamics, Lorentz (3,1) emergence and 5D KK. No fixed 1024-bond sample, R443/R445 phase, CMP116/CMP119/122 scheme or OS route is mandated by Clay. They may be employed ONLY as needed by the selected proof.
+
+## Four terminal claims; three main mathematical producer cuts
+
+### E — Existence and axioms (C1)
+For a **fixed external compact simple G**, construct one actual cutoff-to-continuum family of four-dimensional gauge-invariant Schwinger functions and prove the regularity, positivity, covariance, symmetry, growth/locality, Euclidean/OS or accepted Wightman strength, and local nontrivial quantum YM identification required at the endpoint. Source-generated finite measures, tightness/weak limits and local observable representation must all refer to the same physical G, action, coupling trajectory, cutoff and volume. In the selected Euclidean route, the finite Wilson RP theorem is reusable; only its application to the actual original Wilson measure and preservation at the limit matter.
+
+**Source owner:** `BalabanOSMassGapClosure.PreGapContinuumSchwingerSystem`, `PreGapOSReconstructionAuthority` and `YangMillsClayLiteralTopDownConstructionExact`. The former OS reconstruction interfaces are records with `Set` predicates, **not constructed original Schwinger functions or a checked implementation of the full physical QFT axioms**. `YMClaySUNVariablePhysicalCutoffFamilyExact` constructs changing finite lattices, explicitly not a continuum limit.
+
+**Required physical lemma E1:** construct the actual same-source continuum Schwinger family and proof-bearing endpoint axioms, including full `R^4` Euclidean symmetry, local gauge-invariant observables, correct YM/UV interpretation and genuinely reconstructed OS/Wightman QFT. This is an existential source construction, not another implication from a parametrically supplied `ContinuumSchwingerSystem` record.
+
+### D — Direct spectral gap (C3)
+**Preferred shortest existing route:** `YMClayRouteSH1DirectSelectedMarkedDecayExact` and `YMClayDirectSourceOSMassGapFrontierExact`: original selected R320 direct marked decay `RouteSH1DirectSelectedPayment` -> R295/R313/R296 -> R333 `CanonicalBOSIndexedApplication` and `CanonicalBOSIndexedCompletion` -> `BalabanOSMassGapClosure.PhysicalMassGapCertificate`. The separately expressed direct upper route `YMClayR387PhysicalSpectrumExact` consumes `PhysicalSpectrumInterpretation`. None builds the required physical analytic input automatically.
+
+**Required analytic lemma D1:** on the *same* physical cutoff/continuum family E1, derive the direct selected two-source rooted-shell/connected Wilson correlation bound uniform in the physical scaling limit (the actual R320 source payment). Do not rebuild the finite mixed-derivative polynomial already supplied by the original source owners.
+
+**Required spectral lemma D2:** prove the actual reconstructed self-adjoint `H_G` and its vacuum, same-family transfer/time/functional-calculus correspondence, and the genuine spectrum statement
+`sigma(H_G) subset {0} union [Delta_G,infinity)`, `Delta_G > 0`, excluding positive subgap spectrum in physical units. The R333 transfer/spectral application and limit fields must be derived from E1 and D1, not inhabited by arbitrary `Set` parameters. A fixed lattice q=1/2 estimate is not automatically a finite physical gap under a->0. Dense L2/Mosco/finite-form route is optional, not an independent prerequisite when the direct OS route is proved.
+
+### N — Nontriviality (C2)
+Existing sufficient (possibly **stronger than necessary**) route: `YMClayRGLossBudgetToNonGaussianExact.RGReferenceChargeSurvival` yields `referenceRGUniformNoncollapse` from an actual reference charge, summable physical one-step losses and total budget; `ActualRGContinuumChargeLimit` plus `BalabanClayT5CumulantLowerBoundNontrivialityExact` gives an original nonzero fourth connected cumulant and excludes Gaussianity. This is an optional **witness strategy**, not a requirement of Clay that the particular fourth cumulant be nonzero.
+
+**Required lemma N1:** construct one genuinely nontrivial local gauge-invariant continuum YM observable/correlation on the SAME E1 source. Use original RG fourth cumulant charge-survival if it is the shortest certifiable route; otherwise a weaker physical noncollapse witness suffices. A mere `InteractingContinuumWitness` with uninterpreted `Witness : Set` does not prove physical nontriviality.
+
+### G — All compact simple groups (C4)
+Fix G first and allow G-dependent constants. Then quantify the **same per-group completed E1,D1,D2,N1 construction** over every externally specified compact simple Lie group. `YangMillsClayFixedGroupMaxCutRound477Exact` permits group-dependent constants; `YMClayCompactSimpleScopeBidiNoVacuitySafeExact` prevents vacuous internal group-index scopes. Existing SUN matrix constructors alone do not establish every compact simple G.
+
+**Required lemma G1:** provide an externally sound compact-simple group index/interpretation, and for each G the actual fixed-group physical continuum + gap + nontriviality construction. Do not infer arbitrary G from one SU(2)/SU(N) example.
+
+## Minimal decisive proof cut
+
+`E1` (one original continuum axiomatic YM theory at fixed G) + `D1` (physical selected uniform decay) + `D2` (same OS Hamiltonian spectral identification) + `N1` (genuine nontriviality), then `G1` quantification. D1 is only required **for this chosen direct decay proof route**, not by Clay. If a different direct Hamiltonian gap proof is shorter, substitute it without reopening R443/R445/CMP116.
+
+## Supporting proof modules, not terminal requirements
+
+`YMClayNative1024*`, `YMClayOriginalWilsonF19*`, R443, R445, CMP119/122, CMP116, R342, R344, R467, R482, R333 remain donors. Review or repair those only when E1/D1/D2/N1/G1 consumes them. Published reflection positivity and analytic estimates must be applied accurately to the selected source; do not demand per-polymer PSD, an extra observer model, 5D gravity or reconstruction of the source literature in Agda.
+
+## Acceptance/verification
+
+A completed proof has an exact-head `parallel_checker` Agda receipt, transitive trust review identifying any postulates/external mathematical authorities, and a closed theorem whose constructor does not accept the missing endpoint properties as arbitrary user-supplied `Set` evidence. A generic record or conditional compiler is useful mathematics but cannot be presented as E1/D2/N1. At the time of writing no exact-head kernel check or physical endpoint witness has been obtained in this session.
+
+**Next implementation target:** E1 and D1 in parallel, then D2/N1; G1 is a group-index/scoping requirement throughout, not a demand for a uniform gap constant over all G.
