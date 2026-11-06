@@ -23,15 +23,19 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact where
 -- physical clustering and Agda kernel acceptance are NOT inferred.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; _*ℝ_; _-ℝ_)
+  using (ℝ; 0ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_; _≤ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Wilson
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as ProductHaar
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
+import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -82,6 +86,48 @@ module _
       (Wilson.periodicSUNGibbsDensity
         theory traceData exponential n (beta n))
   originalWilsonPartitionIsSelectedProductHaar n = refl
+
+  -- All per-cutoff numerator integration laws come from the ORIGINAL
+  -- one-link Haar product, not from a different analytic CMP119 measure.
+  originalWilsonFiniteIntegrationLaws :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (n : Nat) →
+    Finite.PhysicalFiniteMeasureIntegrationLaws (originalWilsonMeasure n)
+  originalWilsonFiniteIntegrationLaws ordered strictToWeak n =
+    ProductHaar.periodicProductIntegrationLaws
+      theory traceData exponential n (beta n)
+      oneLink (Codec.decodeOriginalBonds (suc n)) divide
+      ordered strictToWeak
+
+  -- The numerator of the constant insertion is the ORIGINAL Wilson
+  -- partition; it cannot be picked independently of the marked source.
+  originalWilsonUnitNumeratorIsPartition :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (n : Nat) →
+    Finite.unnormalizedNumerator
+      (originalWilsonMeasure n) Finite.oneObservable
+    ≡ Physical.partitionFunction (originalWilsonMeasure n)
+  originalWilsonUnitNumeratorIsPartition ordered strictToWeak n =
+    Finite.numeratorOneIsPartitionFunction
+      (originalWilsonFiniteIntegrationLaws ordered strictToWeak n)
+
+  -- Actual source numerators are additive on the selected periodic carrier.
+  originalWilsonInsertionNumeratorAdd :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (n : Nat) (left right : OriginalObservable n) →
+    Finite.unnormalizedNumerator
+      (originalWilsonMeasure n) (Finite.addObservable left right)
+    ≡
+    Finite.unnormalizedNumerator (originalWilsonMeasure n) left
+    +ℝ
+    Finite.unnormalizedNumerator (originalWilsonMeasure n) right
+  originalWilsonInsertionNumeratorAdd ordered strictToWeak n left right =
+    Finite.numeratorAdd
+      (originalWilsonFiniteIntegrationLaws ordered strictToWeak n)
+      left right
 
   originalWilsonExpectation :
     (n : Nat) → OriginalObservable n → ℝ
