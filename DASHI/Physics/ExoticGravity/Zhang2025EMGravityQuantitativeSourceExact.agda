@@ -111,9 +111,13 @@ reportedFieldHighDeciTesla = 5
 reportedExcitationHz : Nat
 reportedExcitationHz = 50
 
-aluminiumToPaperMassRatioForty :
+aluminiumMassTwoGrams :
   massMg aluminium ≡ 2000
-aluminiumToPaperMassRatioForty = refl
+aluminiumMassTwoGrams = refl
+
+paperMassFiftyMilligrams :
+  massMg paper ≡ 50
+paperMassFiftyMilligrams = refl
 
 data HasCalibratedAcceleration : Sample → Set where
 
