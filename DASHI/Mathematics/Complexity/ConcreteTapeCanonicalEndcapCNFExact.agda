@@ -18,6 +18,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact where
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans; cong₂)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Data.Fin.Base as Fin
@@ -499,3 +500,109 @@ globalAllRowsEndcapsGivePhysicalRowPlain
     colsMinusOne rowSlot assignment
     (everyRowEndcapCNFTrue
       colsMinusOne assignment rowSlot allAccepted)
+
+------------------------------------------------------------------------
+-- Reverse direction: actual plain physical row endpoints imply the
+-- SAT CNF, with one original row/column placement per fact.
+-- This is the exact completeness constructor required for an
+-- appropriately padded accepting-run assignment.
+------------------------------------------------------------------------
+
+globalRowEndcapsComplete :
+  ∀ {machine steps rowIndex}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (colsMinusOne : Nat)
+    (rowSlot : Global.Slot rowIndex (suc steps))
+    (assignment :
+      CNF.Bits
+        (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  PhysicalRowEndcapCellsPlain
+    stateCoverage symbolCoverage rowSlot assignment →
+  CNF.evaluateCNF
+    (globalRowEndcapsCNF colsMinusOne rowSlot) assignment ≡ true
+globalRowEndcapsComplete stateCoverage symbolCoverage
+    colsMinusOne rowSlot assignment plain =
+  trans
+    (Placed.evaluateCNFAppend firstCNF lastCNF assignment)
+    (cong₂ CNF.andBool firstAccepted lastAccepted)
+  where
+    firstCNF = globalRowCellPlainCNF rowSlot Global.here
+    lastCNF =
+      globalRowCellPlainCNF rowSlot
+        (lastPhysicalColumn colsMinusOne)
+
+    firstAccepted :
+      CNF.evaluateCNF firstCNF assignment ≡ true
+    firstAccepted =
+      placedPlainEndcapComplete
+        stateCoverage symbolCoverage
+        (rowCellExtendedRename rowSlot Global.here)
+        assignment
+        (firstPhysicalCellIsPlain plain)
+
+    lastAccepted :
+      CNF.evaluateCNF lastCNF assignment ≡ true
+    lastAccepted =
+      placedPlainEndcapComplete
+        stateCoverage symbolCoverage
+        (rowCellExtendedRename
+          rowSlot (lastPhysicalColumn colsMinusOne))
+        assignment
+        (lastPhysicalCellIsPlain plain)
+
+allRowEndcapsComplete :
+  ∀ {machine steps}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (colsMinusOne : Nat)
+    (assignment :
+      CNF.Bits
+        (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne)))
+    (rows : List (SomeRowSlot (suc steps))) →
+  (∀ {rowIndex}
+     (slot : Global.Slot rowIndex (suc steps)) →
+    PhysicalRowEndcapCellsPlain
+      stateCoverage symbolCoverage slot assignment) →
+  CNF.evaluateCNF
+    (appendAllRowEndcaps colsMinusOne rows) assignment ≡ true
+allRowEndcapsComplete stateCoverage symbolCoverage
+    colsMinusOne assignment [] allPlain = refl
+allRowEndcapsComplete stateCoverage symbolCoverage
+    colsMinusOne assignment (some-row-slot slot ∷ rest) allPlain =
+  trans
+    (Placed.evaluateCNFAppend
+      (globalRowEndcapsCNF colsMinusOne slot)
+      (appendAllRowEndcaps colsMinusOne rest)
+      assignment)
+    (cong₂ CNF.andBool
+      (globalRowEndcapsComplete stateCoverage symbolCoverage
+        colsMinusOne slot assignment (allPlain slot))
+      (allRowEndcapsComplete stateCoverage symbolCoverage
+        colsMinusOne assignment rest allPlain))
+
+globalAllRowsEndcapsComplete :
+  ∀ {machine steps}
+    (stateCoverage :
+      Canonical.EnumerationCoverage (Local.finiteState machine))
+    (symbolCoverage :
+      Canonical.EnumerationCoverage (Local.finiteSymbol machine))
+    (colsMinusOne : Nat)
+    (assignment :
+      CNF.Bits
+        (Endpoint.ExtendedGlobalWidth machine steps (suc colsMinusOne))) →
+  (∀ {rowIndex}
+     (slot : Global.Slot rowIndex (suc steps)) →
+    PhysicalRowEndcapCellsPlain
+      stateCoverage symbolCoverage slot assignment) →
+  CNF.evaluateCNF
+    (globalAllRowsEndcapsCNF colsMinusOne) assignment ≡ true
+globalAllRowsEndcapsComplete {steps = steps}
+    stateCoverage symbolCoverage colsMinusOne assignment allPlain =
+  allRowEndcapsComplete
+    stateCoverage symbolCoverage colsMinusOne assignment
+    (allPhysicalRows (suc steps)) allPlain
