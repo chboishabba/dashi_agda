@@ -113,3 +113,9 @@ A16 cites reaching **50% canopy cover and 70% canopy height** relative to region
 | 7 | Actual independently verified works, applicant standing/filing/orders | Can support *new* claims about breach/review; not derived by numerical model |
 
 **Bottom line:** The record contains direct internal inconsistencies; its apparent koala compensation at MWW depends entirely on projected improvement in the two low-use paddock AUs. The proper adversarial standard is **not** “uncertain means proponent is wrong” nor “rubric compliance settles ecological truth.” It is: *the proponent bears the burden of making each numerical, spatial, causal and ecological bridge reproducible and independently defensible before it is adopted as conservation benefit*. No 2019/8575 filing, agency breach finding or actual transfer is fabricated.
+
+## Same-round original all-species calculator reconciliation (6 November 2026)
+
+The earlier 29-family adversarial routing is now **fed by the original 56-AU four-species numeric source audit**, not only SAT countermodels. See [source-exact OAG/feature crosscut](Woogaroo20198575FourSpeciesSourceExactMaxCut20261106.md), with exact 14-row koala (2012 OAG inverse discount) and 42 additional flying-fox/bird rows. The source tables produce four direct row disagreements and four additional table-level contradictions; these require the **final approved 15 October 2026** workbooks, not a guessed fix.
+
+Most discriminating new conditional result: koala at **Vulnerable 0.2%=108.3451%**, **Endangered 1.2%=88.8288%**, subject to saved 2019 referral/transitional status and actual 2026 decision reliance. The old 88.57% based on \\(1-p)^{20}\\ is **superseded** by 88.83% using the real inverse-compound OAG discount. MWW AU2 future quality one point lower yields **99.9245%**. Regent Honeyeater total **104.42%** is vulnerable to modest assumed future tree-establishment changes, but no failure is observed. No legal/adjudicated premise is paid.
