@@ -253,3 +253,23 @@ Original canonical sources now FOUND in [Kozyrev PR #1404](https://github.com/ch
 **Verification without Nix:** scripts/check_gielis_base369_cut.sh uses the repository's run_agda29_parallel_check.sh --safe. For source-pinned PR #1404 referee/ledger replay, export `KOZYREV_PR1404_DIR` pointing to a local checkout's `scripts` folder. The bridge rejects missing or mismatched original Git object blobs (SHA-1). This is optional on the general maths checker, but **mandatory** to claim G13b closed. Original HTML SDF parity is a separate G13c producer.
 
 **Primary proof note**: [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md), sections E01–E19. These are partial original acceptance closures, not a blanket discharge of P2/P3/P4/P5.
+
+
+### Exact PR #1404 original-owner replay command
+
+```bash
+bash scripts/check_gielis_kozyrev_pr1404_original.sh --fetch
+```
+
+This uses Git objects from the **open original PR #1404**, verifies
+the canonical Git blob hashes of both the original first-forward
+referee and `RayLedger`, materializes them outside the working
+tree, and runs the new baseline and finite-thickness normal-offset
+geometry parity tests. It has no Nix/Chrome/terminal scraping
+dependency. Network fetching is explicit only with `--fetch`.
+The command is documented, **not claimed to have run in this
+authoring environment**.
+
+Once this command passes, mark **G13b reference-wall parity**
+accepted. Do *not* promote G13c original HTML SDF or its
+132-ray actual collision export without that separate evidence.
