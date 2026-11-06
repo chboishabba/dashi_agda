@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse, hashlib, importlib.util, json, math, pathlib
 import numpy as np
 import gielis_base369_experiments as G
+from gielis_si_owner_adapter import canonical_speed_of_light_si
 
 PR1404 = "337aabb00ed54bc1a4c28ada48364cb4dc54d46e"
 ORIGINAL_FILES = (
@@ -104,6 +105,8 @@ def match_original_owners(legacy_dir=None,segments=1536,power_w=100.,
     modules,not_checked=locate_modules(legacy_dir)
     if modules is None:return not_checked
     First,Ledger=modules
+    if int(Ledger.C)!=canonical_speed_of_light_si():
+        raise AssertionError("original Kozyrev power ledger c not equal to canonical SI c")
     g=legacy_geometry(thickness=thickness)
     outer=G.spiral_vertices(3,0.,segments)
     sides=First.surfaces(g,samples=segments)
