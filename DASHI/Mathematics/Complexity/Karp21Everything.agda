@@ -209,3 +209,9 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordNumericalWeldExact
 
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordValidityExact
+
+-- K05: original/native signed gamma all-word acceptance equivalence.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedAllWordValidityExact
+
+-- K05: conservative two-pass signed gamma inspection schedule.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClockExact
