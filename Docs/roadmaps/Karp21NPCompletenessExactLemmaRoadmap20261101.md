@@ -1,5 +1,13 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-06 — second compiler repair: all reported source issues patched, new Agda receipt pending
+
+The user's **local Agda 2.9.0 success receipts at historical head `972219b39894d28fed950f95fe0e2a2f050c68c6`** cover `Karp21CompilerRepairGovernanceExact`, `Karp21FinDecoderIndexBidiExact`, `Karp21BinaryFinMaterializationCostExact`, `CookLevinCircuitGCTBoundary` and `Karp21GammaBinaryRoundTripExact`. New diagnostic set: 16 line coordinates with reserved Cook/SAT constructor syntax (17 textual references on those lines), a missing `sym` in `Karp21GammaSignedListRoundTripExact`, a missing `trans` in `Karp21CliqueVertexCoverExact`, and the nonstructural recursive `parseCookFormula` with failing roundtrip rewrite in `PNotEqualsNPCookFormulaPrefixCodecExact`.
+
+**Implemented on PR #1445:** update the two original residual-constructor consumer files, fix both scope imports, and replace the original prefix codec's parser with a structurally terminating fuel-indexed parser plus a length-budgeted suffix roundtrip proof, retaining the exported `parseCookFormula`, `parseCookFormulaEncodeInto`, `decodeCookFormula`, and token-length interfaces. The source Goldens also now have a second-round typed diagnostic enumeration `FollowupRepairIssue` in `Karp21CompilerRepairGovernanceExact`. The independent local Python fuel-model run tested 1,400 formula/continuation combinations successfully; it is *not* a formal proof receipt.
+
+**Detailed current source/doc alignment:** [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md). The remaining immediate gate is the next **exact-head Agda 2.9** result from `scripts/run_agda29_parallel_check.sh`, not more compiler-free source claims. A successful old-head root is never promoted to the new head. P0 SAT bit-tape/ Cook–Levin, P1 N21/E20 clocks, P2 20 costed reductions and 21 NP memberships, and P3 `CertifiedKarpNetwork` remain separately OPEN.
+
 ## 2026-11-06 — Agda 2.9 compiler repair; O/R/C/S/L/P/G/F synchronized
 
 **Detailed implementation and typed-provenance record:** [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md). The Golden source candidate `DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda` encodes five historical issues and a fail-closed status boundary; the referee now checks it independently before the Cook Golden root. The read-only `dashi_lean4` comparison identified `AgdaMirror/AuthorityBoundary.lean` and `AgdaMirror/LoomRelationAlgebra.lean`, neither of which supplies an Agda kernel receipt.
