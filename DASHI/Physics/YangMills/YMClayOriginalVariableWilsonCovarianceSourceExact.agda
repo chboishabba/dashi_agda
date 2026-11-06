@@ -31,6 +31,7 @@ import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
+import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as ProductCongruence
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Product
@@ -110,6 +111,32 @@ module _
         (λ links → right links *ℝ left links)
         (λ links → *-comm (left links) (right links)))
       (*-comm (expectation n left) (expectation n right))
+
+  -- E1 and D1 are now literally SAME changing physical Wilson
+  -- measure for any cutoff-dependent original cylinder sections.
+  -- The only data chosen is the original observable section itself.
+  -- No rational T5 source or independent cumulant is inserted.
+  OriginalCylinderSection : Set
+  OriginalCylinderSection = (n : Nat) → Test n
+
+  actualE1CylinderExpectation :
+    (n : Nat) → OriginalCylinderSection → ℝ
+  actualE1CylinderExpectation n cylinder =
+    E1.actualOriginalWilsonCylinderExpectation
+      theory traceData exponential beta oneLink bilateral divide
+      n cylinder
+
+  actualE1D1SameWilsonConnectedCovariance :
+    (n : Nat)
+    (left right : OriginalCylinderSection) →
+    originalWilsonConnectedCovariance n (left n) (right n)
+    ≡
+    (actualE1CylinderExpectation n
+      (λ cutoff links → left cutoff links *ℝ right cutoff links))
+    -ℝ
+    (actualE1CylinderExpectation n left
+      *ℝ actualE1CylinderExpectation n right)
+  actualE1D1SameWilsonConnectedCovariance n left right = refl
 
   originalGauge : (n : Nat) → Set
   originalGauge n = Family.gaugeAt
