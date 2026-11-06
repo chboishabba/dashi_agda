@@ -170,3 +170,57 @@ parametricAllFiniteHorizonsRemainCoarse :
 parametricAllFiniteHorizonsRemainCoarse weights action horizon observable state =
   Markov.allFiniteHorizonsRemainCoarseFactored
     (parametricMarkovLumping weights action) horizon observable state
+
+------------------------------------------------------------------------
+-- Time-inhomogeneous controlled dynamics: each action can carry distinct
+-- certified rational transition weights. No single fair-coin or globally
+-- stationary probability is assumed.
+------------------------------------------------------------------------
+
+record WeightedBiologicalIntervention : Set where
+  constructor weightedBiologicalIntervention
+  field
+    selectedIntervention : Bio.Intervention
+    transitionWeights : NormalizedRationalBranches
+
+open WeightedBiologicalIntervention public
+
+weightedFineSchedule :
+  List WeightedBiologicalIntervention →
+  (Bio.BiologicalState → ℚ) → Bio.BiologicalState → ℚ
+weightedFineSchedule [] observable = observable
+weightedFineSchedule (entry ∷ rest) observable =
+  weightedFineStep
+    (transitionWeights entry) (selectedIntervention entry)
+    (weightedFineSchedule rest observable)
+
+weightedCoarseSchedule :
+  List WeightedBiologicalIntervention →
+  (Bio.FutureSufficientCode → ℚ) →
+  Bio.FutureSufficientCode → ℚ
+weightedCoarseSchedule [] observable = observable
+weightedCoarseSchedule (entry ∷ rest) observable =
+  weightedCoarseStep (selectedIntervention entry)
+    (weightedCoarseSchedule rest observable)
+
+timeVaryingRationalHistoriesPreserveCoarseFuture :
+  (schedule : List WeightedBiologicalIntervention)
+  (observable : Bio.FutureSufficientCode → ℚ)
+  (state : Bio.BiologicalState) →
+  weightedFineSchedule schedule
+    (λ x → observable (Bio.project x)) state
+  ≡ weightedCoarseSchedule schedule observable
+    (Bio.project state)
+timeVaryingRationalHistoriesPreserveCoarseFuture [] observable state = refl
+timeVaryingRationalHistoriesPreserveCoarseFuture
+  (weightedBiologicalIntervention action weights ∷ rest) observable state
+  rewrite
+    timeVaryingRationalHistoriesPreserveCoarseFuture
+      rest observable (Bio.step action state)
+  | timeVaryingRationalHistoriesPreserveCoarseFuture
+      rest observable (Original.flipMarker (Bio.step action state))
+  | Original.flipPreservesCoarseCode (Bio.step action state)
+  | Bio.projectionCommutes action state =
+  weightedSameValue weights
+    (weightedCoarseSchedule rest observable
+      (Bio.coarseStep action (Bio.project state)))
