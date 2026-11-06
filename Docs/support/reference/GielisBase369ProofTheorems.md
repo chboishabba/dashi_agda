@@ -2,7 +2,7 @@
 
 **Scope and trust.** These are explicit mathematical proofs for the selected
 Gielis radial family, not an Agda kernel acceptance receipt. The companion
-\`scripts/gielis_base369_symbolic_certificates.py\` independently checks the
+`scripts/gielis_base369_symbolic_certificates.py` independently checks the
 elementary identities symbolically using SymPy. An external theorem (e.g.,
 Rellich compact embedding, min–max or Faber–Krahn) is used *as a known theorem*
 and is not thereby a new native Agda formalisation.
@@ -178,7 +178,7 @@ Let \(f_k(\theta)=\sin(k\theta)\),
 
 At \(N=36,j=1\), the respective samples are \(+1\) and
 \(-1\). The finite equality and separation witnesses have explicit
-source in \`GielisBase369NyquistPhase36Exact.agda\`.
+source in `GielisBase369NyquistPhase36Exact.agda`.
 
 **Exact restricted reconstruction theorem.** Let
 
@@ -269,7 +269,7 @@ each representing P/N), averaging all collisions per ray gives the
 
 Here \(P/c\) has force units and the bracket has metres, so the result
 is N·m. The committed ray tracer now uses this wall sign convention
-and offers \`--power-watts\` as a **conditional ideal model**;
+and offers `--power-watts` as a **conditional ideal model**;
 no source-power measurement, real wall constitutive optical response,
 radiative loss or experimental uncertainty is supplied.
 G15 **physical model identity/calibration** still OPEN.
@@ -318,8 +318,8 @@ counterexample). Both endpoint radii are fixed for every admitted
 \(m,\epsilon\).
 
 For operational MDL, put \(q=1000\epsilon\in\{0,\ldots,450\}\).
-The codec emits \`0\` for \(q=0\), independent of \(m\).
-For \(q>0\), it emits \`1 gamma(m) gamma(q+1)\`,
+The codec emits `0` for \(q=0\), independent of \(m\).
+For \(q>0\), it emits `1 gamma(m) gamma(q+1)`,
 where \(\mathrm{gamma}(n)=0^{\ell(n)-1}\mathrm{bin}(n)\).
 The unary length prefix determines how many binary bits to consume,
 so each gamma word is self-delimiting. The tagged concatenation is
@@ -342,7 +342,7 @@ This document **mathematically discharges** E01–E08 and E10/E11
 (with stated classical theorem dependencies); E09 is conditional on
 nongrazing separated finite reflection histories.
 It does **not** certify:
-- \`agda --safe\` or ordinary-real Agda same-object realization (G01–G05);
+- `agda --safe` or ordinary-real Agda same-object realization (G01–G05);
 - native finite/complex Fourier inversion (G07/G10);
 - certified convergence/errors of the actual raster PDE solver (G12);
 - original HTML SDF Kozyrev mirror parity and recorded source geometry (G13);
@@ -358,9 +358,9 @@ Agda or physical acceptance.
 
 ## E12 — Native Bishop quartic algebra (new source, Golden receipt open)
 
-\`DASHI/Geometry/GielisBishopPolynomialExact.agda\` imports the actual
-vendored \`Real\`, \`RealProperties\`, and the existing
-\`BishopPowerSeriesElementaryBridgeExact\` sine/cosine owner.
+`DASHI/Geometry/GielisBishopPolynomialExact.agda` imports the actual
+vendored `Real`, `RealProperties`, and the existing
+`BishopPowerSeriesElementaryBridgeExact` sine/cosine owner.
 
 It defines, on Bishop \(\mathbb R_B\),
 
@@ -377,13 +377,13 @@ and supplies the ring-solver target
 
 This universal polynomial equality does not require a trigonometric
 or \(\pi\) premise. It is a **source-written** use of the repo's
-existing \`BishopP.ℝ-Solver\`, NOT accepted until Agda --safe runs.
+existing `BishopP.ℝ-Solver`, NOT accepted until Agda --safe runs.
 
 To get the actual Gielis inverse-square identity, the selected Bishop
 trigonometric functions still owe these *same-object* certificates:
 
 1. \(\cos_B^2x+\sin_B^2x\simeq1\), for the actual Round-11
-   power-series data set (not a generic conditional \`Set\`);
+   power-series data set (not a generic conditional `Set`);
 2. \(\cos_B(4x)\simeq C_4(\cos_Bx,\sin_Bx)\), using the actual
    Bishop addition/quadrupling theorem;
 3. the positive square-root reciprocal construction and canonical
@@ -409,7 +409,7 @@ For \(0\le k,j<36\), define
  =\begin{cases}36&k=\ell,\\0&k\ne\ell.\end{cases}
 \]
 
-\`scripts/gielis_cyclotomic36_exact.py\` implements reduction by
+`scripts/gielis_cyclotomic36_exact.py` implements reduction by
 \(\zeta^{12}=\zeta^6-1\), rational multiplication and the full
 36-character Gram calculation. A local exact run verified **1296
 ordered character pairs** and coefficient/sample roundtrips for
@@ -478,7 +478,7 @@ rational upper absolute relative error is
  \frac{99103455}{9971420449}<0.01.
 \]
 
-\`scripts/gielis_sector_spectral_certificate.py\` outputs rational
+`scripts/gielis_sector_spectral_certificate.py` outputs rational
 endpoint quotients and the first N meeting a target. The local
 independent certificate run passed. This CLOSES the continuum
 *sector-boundary geometry error* sublemma of G12 on paper;
@@ -528,7 +528,7 @@ where the rational strict bound uses
 The numerical estimate for the *true* continuum eigenvalue is thereby
 rigorously bounded above, independently of any mesh. A local SymPy
 integral/rational arithmetic check passed in
-\`scripts/gielis_rayleigh_spectral_bound.py\`.
+`scripts/gielis_rayleigh_spectral_bound.py`.
 
 This improves E07's enclosing-disk estimate for m=3.
 The Faber–Krahn lower bound remains
@@ -548,7 +548,7 @@ if
  \quad t=(X(\theta)-p)\cdot d>0.
 \]
 
-\`scripts/gielis_reflection_parity.py\` independently brackets and
+`scripts/gielis_reflection_parity.py` independently brackets and
 solves those roots, selecting the first forward intersection; it
 compares the event with the segment-based ray/polyline solver.
 A separate local audit of **80 matched rays** (m=3, epsilon=.12)
@@ -563,7 +563,7 @@ a generic root bracketer can miss tangential double roots, and
 the initial HTML SDF scene was not available to re-run. G13/G14
 original-apparatus parity remains OPEN.
 
-For source uncertainties, \`scripts/gielis_optical_statistics.py\`
+For source uncertainties, `scripts/gielis_optical_statistics.py`
 draws matched pseudo-random directions uniformly on the circle.
 Under the explicitly stated **IID uniform-angle source model**,
 for any sample mean with \(X_i\in[a,b]\), Hoeffding implies
@@ -790,3 +790,130 @@ This command is an **acceptance procedure**, not a completed
 run receipt. Only the original historical HTML SDF and
 collision-export replay can close G13c's remaining geometry
 semantics mismatch.
+
+
+## E20 — Exact SI dimensional and nominal-role transport
+
+The repo already has a **seven-exponent SI carrier** in
+`DASHI.Physics.Units.SI`, its explicit metrology/uncertainty
+bridge `DASHI.Physics.Units.SIMetrologyBridge`, and the exact
+mechanical M/L/T dimension algebra in
+`DASHI.Physics.Units.MechanicalDimensionExact`.
+The accepted mechanical-to-SI mapping is owned by
+`DASHI.Physics.YangMills.YangMillsSIScalingEndpointExact`.
+We reuse all four, without defining an independent SI universe.
+
+In base dimensions \((M,L,T)\),
+
+\[
+[P]=M L^{2}T^{-3},\qquad [c]=L T^{-1},
+\qquad [R]=L,
+\]
+
+so the **mechanical torque dimension law** is
+
+\[
+ \boxed{[P/c]\,[R]=M L^{2}T^{-2}=[\tau]}.
+\]
+
+At the same time,
+
+\[
+ [F]=MLT^{-2},\qquad [L_{\mathrm{angular}}]
+   =ML^{2}T^{-1}.
+\]
+
+The torque SI exponents coincide with the exponents of work/energy,
+but **a torque observable is not interchangeable with an energy
+observable**. Their conventional SI unit symbols are \(\mathrm{N\,m}\)
+(torque) and \(\mathrm{J}\) (energy).
+A nominally role-indexed quantity therefore adds information that
+dimension exponents alone cannot encode.
+
+The new source
+`DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda`
+imports the actual SI, mechanical-dimension and metrology modules.
+It derives the power/speed/radius dimension, defines distinct
+nominal roles for optical power, momentum flux, wall torque, energy
+and angular impulse, and retains typed SI measurements with
+their uncertainty/source/version fields.
+
+The **exact speed-of-light integer**, by SI definition, is
+**not a free numerical model parameter**:
+
+\[
+ \boxed{c=299\,792\,458\ \mathrm{m\,s^{-1}}.}
+\]
+
+Its canonical in-repo carrier is
+`DASHI.Promotion.SIExactConstantParsedCarrierRequest.
+canonicalCMetrePerSecondIntegerCarrier`,
+which records the literal natural number. The new Agda bridge
+uses that existing carrier and proves an integer-value equality by
+definitional reduction.
+
+Python `scripts/gielis_si_owner_adapter.py` reads that canonical
+Agda carrier and verifies the SI Power/Force/Energy dimensions.
+Both the ray simulator and rational optical-force bound now use
+the one canonical value, not independent copies.
+That source-level check is **not** itself an Agda kernel result.
+
+**Authority boundary:** an exact SI defining constant and
+dimensionally valid quantities do not certify a real experimental
+power source, material reflectivity, torque sensor, geometric
+alignment or measurement uncertainty. No fabricated
+`EmpiricalOpticalCalibration` value exists in the new Agda source.
+
+## E21 — Reusing the repository's nonnegative-matrix/Perron machinery
+
+The existing finite matrix owners are:
+
+1. `DASHI.Physics.YangMills.BalabanFiniteInfluenceRowMassPowerExact`:
+   *actual* native finite rational sum/distributivity, nonnegative
+   influence majorants and a theorem that a uniform row-mass bound
+   propagates to all positive matrix powers, conditional on a
+   separately supplied nonnegative-powers proof.
+2. `DASHI.Physics.YangMills.BalabanFiniteWeightedInfluencePowerExact`:
+   weighted nonnegative matrix powers and row control.
+3. `DASHI.Physics.YangMills.BalabanClayUniformPerronContractionExact`:
+   distinguishes finite-stage cone contraction from a **uniform**
+   modulus; it does not supply the Gielis raster's spectral radius
+   or an accepted original Collatz–Wielandt certificate.
+4. `DASHI.Core.FiniteTypedBranchingKernelExact`: contains finite
+   Perron-root-related *interface* and explicitly records that the
+   full spectral-radius theorem is **not** constructed in that owner.
+
+There are also many Collatz/Syracuse *integer iteration* modules,
+which must not be confused with **Collatz–Wielandt**, the
+positive-matrix variational formula.
+
+The new native source reuses the actual finite influence powers
+and the full row-power bound through
+`finiteInfluenceRowPowerBoundReuse`, and imports the existing
+R³ Hodge/torque owner. It does **not** redeclare a fictitious
+Agda proof of spectral-radius Collatz–Wielandt.
+
+For the *original finite Gielis raster*,
+E17 already provides the exact accepted mathematical proof:
+
+\[
+ \boxed{\min_i \frac{4q_i-(Bq)_i}{h^2q_i}
+  \le \lambda_{\min}\!\left(h^{-2}(4I-B)\right)
+  \le \max_i\frac{4q_i-(Bq)_i}{h^2q_i}}
+\]
+
+for every positive rational vector \(q\), provided the finite
+adjacency graph is connected. An independently checked positive
+integer \(q\) and exact rational sums make this certificate
+constructive at each specific finite matrix.
+Transporting this calculation into an *in-repo Agda
+Collatz–Wielandt spectral-radius theorem* remains a native proof
+leaf if that formal endpoint is demanded; it is not necessary to
+re-prove the entire classical Perron–Frobenius theory just to
+use a finite positive-rational enclosure.
+
+**Acceptance distinction:** typed SI exponents and the exact
+finite rational eigenvalue interval are established on their
+respective selected carriers. A continuum FD convergence proof
+and independently calibrated physical power/torque remain distinct
+gates, not consequences of Perron–Frobenius or SI dimensional typing.
