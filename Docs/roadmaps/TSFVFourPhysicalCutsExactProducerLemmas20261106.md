@@ -52,6 +52,13 @@
 - Imported in the safe unified regression and safe checker list. This is a **countermodel to an invalid inference**, not a proof of 4D emergence.
 - HIL01 forward state precursor and S01 finite ordered commutator identity are source-written with actual original states; Agda kernel acceptance remains pending.
 
+## OS original-source audit: actual new YM parent pullback and positive-weight no-go
+
+- **New #1444 source owner:** `DASHI.Physics.YangMills.YMClayOriginalWilsonNativeOSPullbackExact` proves equality of the original native Wilson fine reflected quadratic and the actual R445 coarse pushforward reflected quadratic, assuming the block map intertwines the physically selected reflections. It derives coarse OS positivity from *fine Wilson OS positivity on positive-time observables* plus pullback compatibility. This is genuinely on the original 1024-bond Gibbs source, not another surrogate oscillator.
+- **New child safe negative control:** `TSVFOriginalOSPositiveWeightNotReflectionPositiveExact` provides a concrete involutive swap reflection on two configurations and odd observable. The reflected integrand is the negative sign at **both** configurations; uniform positive weights yield OS reflected form -1. Thus the positive `YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact` density alone cannot discharge fine RP or the reflection-compatible support requirements.
+- HIL07 latest remaining OS leaf is therefore **original fine Wilson reflection positivity for the selected plane with the actual positive-time half-space algebra**, plus native-block reflection intertwining, followed by the separate observer-to-OS all-word `A*B` dictionary. No noncommutative quantum Hilbert identification follows from classical positive Gibbs density.
+- This child safe no-go is imported by `TSFVUnifiedRegression` and added to the canonical pinned `parallel_checker` safe-source array. No typechecker run or fully verified physical theorem is claimed.
+
 ## S01–S04: actual microscopic observer → measured causal 3+1
 
 | Proposed producer lemma | Canonical original IDs | Exact proof target |
