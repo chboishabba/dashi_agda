@@ -702,3 +702,18 @@ physicsDepthContinuumLimitPromotionImpossible =
 validationZKPFrame : Balaban.BalabanTOEZKPFrame
 validationZKPFrame =
   Balaban.canonicalBalabanTOEZKPFrame
+
+
+------------------------------------------------------------------------
+-- Direct canonical scale-transfer eliminator reachability.
+------------------------------------------------------------------------
+
+toeDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+toeDirectScaleTransferPromotionImpossible =
+  TOE.toeBalabanScaleTransferPromotionImpossible
+
+unifierDirectScaleTransferPromotionImpossible :
+  Balaban.BalabanRGScaleTransferPromotion → ⊥
+unifierDirectScaleTransferPromotionImpossible =
+  Unifier.unifierBalabanScaleTransferPromotionImpossible

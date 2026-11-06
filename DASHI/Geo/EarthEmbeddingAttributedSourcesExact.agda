@@ -130,11 +130,23 @@ springfieldNatureCare = Attribution.mkNoDOISource
   "Description of Mountain joining Opossum before Woogaroo; triangulate with mapped waterway assets."
   Attribution.publicAttribution
 
+recoverableGeographicLocation : Attribution.AttributedSource
+recoverableGeographicLocation = Attribution.mkNoDOISource
+  "Peiwen Zhang, Kristie Hu, Jovana Knezevic, Shunde Yin, Kyle Gao"
+  "Recoverable Geographic Location Information in Earth-Observation Embeddings"
+  "arXiv:2609.29151"
+  "2026"
+  "https://arxiv.org/abs/2609.29151"
+  Attribution.academicArticleSource
+  "Authors report recoverable geographic information in AlphaEarth and TESSERA-family embeddings; location recoverability does not create physical-variable identity, causality, or Woogaroo validation."
+  Attribution.publicAttribution
+
 earthEmbeddingSourceAtlas : Attribution.AttributedSourceAtlas
 earthEmbeddingSourceAtlas = Attribution.mkSourceAtlas
   "AlphaEarth-TESSERA physical geometry and Woogaroo source atlas"
   "DASHI.Geo.EarthEmbeddingAttributedSourcesExact"
   (alphaEarthPaper ∷ alphaEarthDocumentation ∷ tesseraOriginal ∷ tesseraV2 ∷
    rahmanPhysical ∷ rahmanGeometry ∷ ouZheng ∷ geoTesseraSoftware ∷
-   woogarooCouncil ∷ springfieldEmergencyPlan ∷ springfieldNatureCare ∷ [])
+   woogarooCouncil ∷ springfieldEmergencyPlan ∷ springfieldNatureCare ∷
+   recoverableGeographicLocation ∷ [])
   "Sources retain original author claims; DASHI geometry and evidence contracts remain separately authored."
