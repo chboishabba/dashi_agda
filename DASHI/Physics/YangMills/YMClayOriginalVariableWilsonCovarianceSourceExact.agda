@@ -162,6 +162,69 @@ module _
       (invLeft gamma links)
       (invRight gamma links)
 
+  -- E1: actual dependent GAUGE-INVARIANT source subalgebra.
+  -- This is narrower than ALL cutoff sections and uses the literal
+  -- (n+1)^4 periodic local gauge transformation at every n.
+  OriginalGaugeInvariantSection : OriginalCylinderSection → Set
+  OriginalGaugeInvariantSection cylinder =
+    ∀ n → originalGaugeInvariant n (cylinder n)
+
+  originalGaugeInvariantSectionProduct :
+    (left right : OriginalCylinderSection) →
+    OriginalGaugeInvariantSection left →
+    OriginalGaugeInvariantSection right →
+    OriginalGaugeInvariantSection
+      (λ n links → left n links *ℝ right n links)
+  originalGaugeInvariantSectionProduct left right invLeft invRight n =
+    originalGaugeInvariantProduct n (left n) (right n)
+      (invLeft n) (invRight n)
+
+  -- The existing original six-plaquette action density is the
+  -- ACTUAL selected Wilson cylinder generator, at EVERY variable
+  -- lattice size. No second arbitrary gauge test is introduced.
+  originalSixPlaquetteDeficitSection : OriginalCylinderSection
+  originalSixPlaquetteDeficitSection n links =
+    Variable.periodicSUNSixDeficit theory traceData n links
+
+  originalSixPlaquetteDeficitIsGaugeInvariantSection :
+    OriginalGaugeInvariantSection originalSixPlaquetteDeficitSection
+  originalSixPlaquetteDeficitIsGaugeInvariantSection n gamma links =
+    Variable.periodicSUNSixDeficitGaugeInvariant
+      theory traceData n links gamma
+
+  originalSixPlaquetteDeficitSquareIsGaugeInvariantSection :
+    OriginalGaugeInvariantSection
+      (λ n links →
+        originalSixPlaquetteDeficitSection n links
+        *ℝ originalSixPlaquetteDeficitSection n links)
+  originalSixPlaquetteDeficitSquareIsGaugeInvariantSection =
+    originalGaugeInvariantSectionProduct
+      originalSixPlaquetteDeficitSection
+      originalSixPlaquetteDeficitSection
+      originalSixPlaquetteDeficitIsGaugeInvariantSection
+      originalSixPlaquetteDeficitIsGaugeInvariantSection
+
+  -- In particular, the original E1 variance/covariance for the
+  -- true six-plaquette Wilson deficit is definitionally the original
+  -- D1 covariance at every cutoff, and its gauge sector is proved.
+  originalE1SixDeficitCovarianceIsSameD1Source :
+    (n : Nat) →
+    originalWilsonConnectedCovariance n
+      (originalSixPlaquetteDeficitSection n)
+      (originalSixPlaquetteDeficitSection n)
+    ≡
+    actualE1CylinderExpectation n
+      (λ cutoff links →
+        originalSixPlaquetteDeficitSection cutoff links
+        *ℝ originalSixPlaquetteDeficitSection cutoff links)
+    -ℝ
+    (actualE1CylinderExpectation n originalSixPlaquetteDeficitSection
+      *ℝ actualE1CylinderExpectation n originalSixPlaquetteDeficitSection)
+  originalE1SixDeficitCovarianceIsSameD1Source n =
+    actualE1D1SameWilsonConnectedCovariance n
+      originalSixPlaquetteDeficitSection
+      originalSixPlaquetteDeficitSection
+
   -- Gauge-invariant ORIGINAL Wilson cylinder covariance is exactly
   -- gauge invariant at every changing physical cutoff.
   originalWilsonGaugeInvariantConnectedCovariance :
