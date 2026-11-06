@@ -56,8 +56,8 @@ finiteEvenOddSplit f (suc n) =
     open RP.ℝ-Solver
   in
   RP.≃-trans
-    (RP.+-congʳ b
-      (RP.+-congʳ a
+    (RP.+-congˡ b
+      (RP.+-congˡ a
         (finiteEvenOddSplit f n)))
     (solve 4
       (λ e o a b →
@@ -79,7 +79,7 @@ finiteOddLengthSplit f n =
     open RP.ℝ-Solver
   in
   RP.≃-trans
-    (RP.+-congʳ a (finiteEvenOddSplit f n))
+    (RP.+-congˡ a (finiteEvenOddSplit f n))
     (solve 3
       (λ e o a → (e ⊕ o) ⊕ a ⊜ (e ⊕ a) ⊕ o)
       RP.≃-refl e o a)
