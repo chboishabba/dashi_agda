@@ -306,8 +306,8 @@ module Semantic
         (cong₂ mul (evalReverse rest) (single x))
         (trans
           (cong (mul (inv (eval rest)))
-            (sym (R.leftInverseUnique (nodes x) (nodes x)
-              (square laws x))))
+            (R.leftInverseUnique (nodes x) (nodes x)
+              (square laws x)))
           (R.inverseProduct (nodes x) (eval rest))))
 
   evalBackwardWord :
