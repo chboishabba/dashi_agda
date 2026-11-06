@@ -1247,3 +1247,23 @@ canonical/8,058 rejected). No Agda/parallel_checker acceptance; no
 polynomial Turing machine cost or P!=NP proof implied. The actual
 E20/N21 binary reduction and machine clock remain the original
 K03/K05/K06 critical path.
+
+## 2026-11-07 — total original N21 comparison-count resource bound
+
+The original-word N21 owner now defines `actualAllWordComparisonCount`
+on *every* binary graph word, returning zero endpoint comparisons on
+malformed raw input and the original `maxAddressComparisons m` after a
+successful parse. It proves `allWordComparisonCountBound` and
+`allWordComparisonPolynomialClock` from the source-owned read/parser,
+2m witness budget and native degree-two polynomial witness.
+
+This completes the **input-length polynomial endpoint-comparison-count
+subgate** without assuming n <= input-length or inventing any generic
+verifier cost oracle. The original `Karp21BinaryRuntimeEverything` and
+`Karp21Everything` roots import the new owner.
+
+Still required for full K05: native binary-value parsing and signed
+addition/equality bit costs, executable bit-tape instruction count,
+formal machine simulation and original `PR.polynomialTimeVerifier`
+instantiation. All new proofs remain source-written until checked by
+Agda 2.9 via the repository's parallel checker. No P != NP claim.
