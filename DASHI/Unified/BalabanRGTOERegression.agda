@@ -38,6 +38,8 @@ import DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact as YMPh
 import DASHI.Physics.YangMills.YMClayPhysicalRGDriftToUniformInfluenceExact as YMPhysicalRGDrift
 import DASHI.Physics.YangMills.YMClayRGDriftOriginalGibbsInstantiationExact as YMActualGibbsRGDrift
 import DASHI.Physics.YangMills.YMClayRGLossBudgetToNonGaussianExact as YMActualRGNonGaussian
+-- Reuse literal CMP119/CMP122/CMP116 typed owners into original R342/R467/R482, no substitute source.
+import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as YMSameLiteral119122116
 import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
