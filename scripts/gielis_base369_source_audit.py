@@ -20,6 +20,7 @@ FILES = (
     "Docs/support/reference/GielisBase369Roadmap.md",
     "Docs/support/reference/GielisBase369ProofTheorems.md",
     "scripts/gielis_base369_experiments.py",
+    "DASHI/Geometry/GielisBishopPolynomialExact.agda",
 )
 THEOREMS = (
     "rotation3PreservesSignal", "rotation6PreservesSignal",
@@ -62,7 +63,7 @@ def source_audit(root: Path = ROOT) -> dict:
     ny=source[FILES[1]]
     assert not any(
         re.search(r"(^|\s)postulate(\s|$)|\{\!|--unsafe|--no-termination-check", source[path],flags=re.M)
-        for path in FILES[:3]
+        for path in (FILES[0],FILES[1],FILES[2],FILES[-1])
     ), "source contains trust escape"
 
     sig={m:table(agda,f"signal{m}","Phase.p18",18) for m in (3,6,9)}
@@ -110,7 +111,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,12):
+    for i in range(1,17):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -131,7 +132,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":11,
+        "paper_proof_sections":16,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
