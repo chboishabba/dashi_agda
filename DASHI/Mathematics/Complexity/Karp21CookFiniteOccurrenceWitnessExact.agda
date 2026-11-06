@@ -44,7 +44,7 @@ import DASHI.Mathematics.Complexity.PNotEqualsNPCookFormulaBinaryCodecExact as B
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Golden
 
 formulaVariables : Cook.BooleanFormula → List Nat
-formulaVariables (Cook.variable i) = i ∷ []
+formulaVariables (Cook.formulaVar i) = i ∷ []
 formulaVariables (Cook.constant value) = []
 formulaVariables (Cook.negate formula) = formulaVariables formula
 formulaVariables (Cook.conjunction left right) =
@@ -116,7 +116,7 @@ memberAppendRight (head ∷ tail) ys m =
   there (memberAppendRight tail ys m)
 
 data Appears (index : Nat) : Cook.BooleanFormula → Set where
-  atVariable : Appears index (Cook.variable index)
+  atVariable : Appears index (Cook.formulaVar index)
   underNegation : ∀ {formula} →
     Appears index formula → Appears index (Cook.negate formula)
   inConjunctionLeft : ∀ {left right} →
@@ -188,7 +188,7 @@ evaluateAgreesOnOccurrences :
   (left right : Cook.Assignment) →
   (∀ index → Appears index formula → left index ≡ right index) →
   Cook.evaluate formula left ≡ Cook.evaluate formula right
-evaluateAgreesOnOccurrences (Cook.variable index) left right agrees =
+evaluateAgreesOnOccurrences (Cook.formulaVar index) left right agrees =
   agrees index atVariable
 evaluateAgreesOnOccurrences (Cook.constant value) left right agrees =
   refl
@@ -376,7 +376,7 @@ leqSuccRight (s≤s proof) = s≤s (leqSuccRight proof)
 variableCountWithinCookTokenCount :
   (formula : Cook.BooleanFormula) →
   length (formulaVariables formula) ≤ Prefix.cookFormulaTokenCount formula
-variableCountWithinCookTokenCount (Cook.variable index) = s≤s z≤n
+variableCountWithinCookTokenCount (Cook.formulaVar index) = s≤s z≤n
 variableCountWithinCookTokenCount (Cook.constant value) = z≤n
 variableCountWithinCookTokenCount (Cook.negate formula) =
   leqSuccRight (variableCountWithinCookTokenCount formula)
