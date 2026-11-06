@@ -36,8 +36,14 @@ fi
 printf 'Repository: %s\n' "$repo_root"
 printf 'Referee revision: '
 git rev-parse HEAD
-printf 'Agda version: '
-agda --version
+if command -v agda >/dev/null 2>&1; then
+  printf 'Agda version: '
+  agda --version
+else
+  # The Python/static preflight must run even without Agda installed.
+  # All kernel modes have already failed closed above.
+  printf 'Agda version: unavailable (preflight-only; no kernel receipt)\\n'
+fi
 printf 'Mode: %s\n' "$mode"
 
 # This source/bitword preflight is independent of the Agda kernel.
