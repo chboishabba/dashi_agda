@@ -56,10 +56,16 @@ module _
 
   -- No fresh independent source word algebra: use the native
   -- reflected ALL-WORD structure from the actual Wilson source.
+  originalReflectedWordGram :
+    (CoarseObservable → CoarseObservable) →
+    List CoarseObservable → List CoarseObservable → ℝ
   originalReflectedWordGram =
     Native.originalFineReflectedWordGram
       theory traceData exponential betaFine oneLink bilateral divide
 
+  actualR445ReflectedWordGram :
+    (CoarseObservable → CoarseObservable) →
+    List CoarseObservable → List CoarseObservable → ℝ
   actualR445ReflectedWordGram =
     Native.nativeR445ReflectedWordGram
       theory traceData exponential betaFine oneLink bilateral divide
