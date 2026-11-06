@@ -35,6 +35,7 @@ import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as Paths
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
 import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as Cap
+import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as JMD
 
 transportVOAGroupAction :
   ∀ {G : Set}
@@ -115,9 +116,9 @@ sameActualGradedMonsterActionTwoGenerated :
   (g : Monster) →
   Pair.RepresentedByPair
     (gi source)
-    (DASHI.Moonshine.Y443JMDSourceWordInstantiationExact.uElement
+    (JMD.uElement
       (gi source) (nodes source))
-    (DASHI.Moonshine.Y443JMDSourceWordInstantiationExact.vElement
+    (JMD.vElement
       (gi source) (nodes source))
     g
 sameActualGradedMonsterActionTwoGenerated source =
