@@ -48,3 +48,40 @@ differentCurlHypothesesRequireIndependentTest :
                         S.magneticTimeDerivativeCurlLaw →
   S.Contradiction
 differentCurlHypothesesRequireIndependentTest = S.distinctMagneticCurlClaims
+
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact as Q
+
+sourcePaperMassIsReported :
+  Q.massMg Q.paper ≡ 50
+sourcePaperMassIsReported = Q.paperMassFiftyMilligrams
+
+sourceAluminiumMassIsReported :
+  Q.massMg Q.aluminium ≡ 2000
+sourceAluminiumMassIsReported = Q.aluminiumMassTwoGrams
+
+nominalFieldDoesNotPayZhangAnomaly :
+  Q.AdmissibleNonPromotingUse
+    Q.zhangXu2025Toroid Q.reportedNominalInput Q.sameApparatusAnomaly →
+  S.Contradiction
+nominalFieldDoesNotPayZhangAnomaly = Q.noZhangNominalToSameApparatusAnomaly
+
+Dresden2024NoiseCannotPayZhangMetric :
+  Q.AdmissibleNonPromotingUse
+    Q.tajmar2024SteadyVacuumBalance Q.authorNoiseScreening
+    Q.gravitationalFreeFallMetric →
+  S.Contradiction
+Dresden2024NoiseCannotPayZhangMetric =
+  Q.noTajmar2024SensitivityToZhangMetric
+
+Dresden2026ResolutionCannotPayZhangAnomaly :
+  Q.AdmissibleNonPromotingUse
+    Q.tajmar2026ThreeAmpereDCToroid Q.instrumentalResolution
+    Q.sameApparatusAnomaly →
+  S.Contradiction
+Dresden2026ResolutionCannotPayZhangAnomaly =
+  Q.noTajmar2026ResolutionToZhangAnomaly
+
+publishedNominalNotMeasuredAcceleration :
+  Q.PublishedQuantitativeEvidenceBoundary.originalZhangAcceleration95CIAvailable
+    Q.canonicalPublishedQuantitativeEvidenceBoundary ≡ false
+publishedNominalNotMeasuredAcceleration = refl
