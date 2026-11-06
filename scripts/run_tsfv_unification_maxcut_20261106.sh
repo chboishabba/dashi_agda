@@ -45,6 +45,7 @@ safe_sources=(
 # foundational axioms solely from a successful Agda typecheck.
 physical_sources=(
   DASHI/Physics/Foundations/TSVFOriginalR445AllWordActualPushforwardExact.agda
+  DASHI/Unified/TSFVPhysicalR445AllWordRegression.agda
 )
 roots=(
   DASHI/Unified/BalabanRGTOERegression.agda
