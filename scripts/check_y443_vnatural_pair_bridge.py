@@ -36,6 +36,15 @@ BETA_SCRIPT = ROOT / "scripts/check_y443_jmd_beta5_rewrite_certificate.py"
 BETA_SEMANTICS = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveSemanticCompilerExact.agda"
 COXETER_LAWS = ROOT / "DASHI/Moonshine/Y443CoxeterRelatorSemanticLawsExact.agda"
 ACTUAL_BETA = ROOT / "DASHI/Moonshine/Y443JMDA4RulesFromPresentationExact.agda"
+ELEVEN_FINITE = ROOT / "DASHI/Moonshine/Y443JMDThreePathFiniteRewriteExact.agda"
+ELEVEN_SEMANTICS = ROOT / "DASHI/Moonshine/Y443JMDPathShiftSemanticCompilerExact.agda"
+ALL_GRAPH = ROOT / "DASHI/Moonshine/Y443AllCoxeterGraphLawsFrom80Exact.agda"
+PRESENTED_GENERATION = ROOT / "DASHI/Moonshine/Y443PresentedGroupNodeGenerationExact.agda"
+ALL_TWELVE = ROOT / "DASHI/Moonshine/Y443JMDAllTwelveNodeWordCompilerExact.agda"
+PRESENTED_CAPSTONE = ROOT / "DASHI/Moonshine/Y443JMDPresentedVNaturalCapstoneExact.agda"
+SAME_OBJECT = ROOT / "DASHI/Moonshine/Y443MonsterGradedLiteralSameObjectCapstoneExact.agda"
+PATHS_SCRIPT = ROOT / "scripts/check_y443_jmd_11_path_shifts.py"
+GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
 EDGES = {
@@ -144,7 +153,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -215,7 +224,12 @@ def assert_source_scope() -> None:
         for marker in markers:
             if marker not in raw:
                 raise AssertionError(f"missing source-backed Agda theorem {marker}")
-    print("PASS source: exact source→35 rewrites→group beta^5→JMD u/v powers present")
+    for src, markers in ((ELEVEN_FINITE, ("pathP1Shift6Result", "pathP3Shift3Result")), (ELEVEN_SEMANTICS, ("elevenSourcePathShiftEquations", "evalReverse", "runSound")), (ALL_GRAPH, ("squareIndexCorrect", "canonicalPairAtCorrect", "allElevenShiftsFromActual80")), (PRESENTED_GENERATION, ("nodeGenerationFromPresentedSyntax", "inductionOnSourceWord")), (ALL_TWELVE, ("everyNodeRepresented", "actualNodeWordCertificate")), (PRESENTED_CAPSTONE, ("wholeGroupTwoGenerated", "sameLiteralVNaturalActionWord")), (SAME_OBJECT, ("actualActionTransported", "sameActualGradedMonsterActionTwoGenerated"))):
+        raw = src.read_text()
+        for marker in markers:
+            if marker not in raw:
+                raise AssertionError(f"missing capstone theorem {marker} in {src.name}")
+    print("PASS source: original 80 relators to 141-step full JMD generator capstone")
 
 
 def check_agda() -> None:
@@ -226,13 +240,13 @@ def check_agda() -> None:
             "finite-only must not be cited as kernel acceptance"
         )
     flags = ["--safe", "-i", ".", "-l", "standard-library"]
-    for file in (PRESENTATION, ACTION):
+    for file in (GOLDEN_ROOT,):
         print(f"Agda checking: {file.relative_to(ROOT)}", flush=True)
         subprocess.run(
             [compiler, *flags, str(file.relative_to(ROOT))],
             cwd=ROOT, check=True,
         )
-    print("PASS golden Agda: both Y443 modules typechecked")
+    print("PASS golden Agda: Y443 transitive capstone root typechecked under --safe")
 
 
 def main() -> None:
@@ -243,11 +257,12 @@ def main() -> None:
     assert_finite_counts()
     assert_source_scope()
     subprocess.run([sys.executable, str(BETA_SCRIPT)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(PATHS_SCRIPT)], cwd=ROOT, check=True)
     if args.finite_only:
         print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
     else:
         check_agda()
-        print("STATUS: finite exact cut Agda-accepted; JMD witness still not imported")
+        print("STATUS: exact-head capstone kernel accepted; concrete Monster/Aut(Vnatural) authority still requires a selected inhabitant")
 
 
 if __name__ == "__main__":
