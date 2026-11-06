@@ -35,6 +35,8 @@ import DASHI.Physics.YangMills.YMClayNativeOriginalSortDeciderExact as YMNativeS
 import DASHI.Physics.YangMills.YMClayNativeClosedThreeEqualitiesCandidateExact as YMNativeClosedThree
 -- Quantitative physical-cube conditional-Gibbs Dobrushin; source proof is conditional.
 import DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact as YMPhysicalCubeDobrushin
+import DASHI.Physics.YangMills.YMClayPhysicalRGDriftToUniformInfluenceExact as YMPhysicalRGDrift
+import DASHI.Physics.YangMills.YMClayRGDriftOriginalGibbsInstantiationExact as YMActualGibbsRGDrift
 import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
