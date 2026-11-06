@@ -1505,3 +1505,68 @@ remaining true derivative-limit interchange gate. Accordingly the
 original LOG exponential composition and the two PI source Cayley
 identities remain open; the original zeta/xi semantic equality remains
 independently open.
+
+
+## 2026-11-07 high-alpha shortest-cut reassessment (not lemma enumeration)
+
+The downstream owners materially reduce the necessary mathematical work.
+This ledger distinguishes **required source equalities** from **optional
+proof strategies**:
+
+1. **K05-PRODUCT** is already source-written in
+   `BishopRound11SignedFactorialDegreeBinomialExact`; kernel-check it,
+   but do not delay independent LOG work awaiting unrelated CI. No more
+   trigonometric product, Pythagorean, or symmetry lemmas should be made.
+2. **K04d-LOG** is the highest-leverage shared original source equality.
+   One `OriginalBishopNegativeLogExponentialGap` produces all native
+   Nat log inverses and the existing `Re(s)>2` Basel source bound.
+   Its finite coefficients and derivative-series limits are written.
+   **Prefer direct absolutely convergent power-series composition and
+   evaluation**, using existing coefficient uniqueness and Cauchy
+   transport, if that is shorter than constructing a general
+   derivative-interchange theorem. Do not assume either equivalence.
+3. **K05-PI** needs precisely the two `OriginalAtan*Evaluation`
+   inhabitants. The signed factorial product, rational Cayley
+   quadrupling/conjugation, and first-positive-zero compiler are
+   written. **Prefer direct source Cayley evaluation** at 1/5 and
+   1/239. General global derivative theory or a second pi construction
+   is not a prerequisite unless needed by the selected proof.
+4. **K04d native Dirichlet chart continuity** is already a compiler
+   on the actual source `exp_C(-s L_n)` terms at
+   `s_eta(t)=3+t²+i eta` and consumes only the LOG identity
+   (and existing PRODUCT). Thus *do not* reprove finite term,
+   uniform limit, or chart continuity. The separately selected
+   opaque `ZetaHalfPlaneLayer` and `CompletedRiemannZeta.xi`
+   **cannot** acquire original-value equality from the current
+   Set-valued fields. Genuine `Gamma(s/2)` and xi construction
+   is a separate independent research lane, not a hidden part of
+   proving the original `Re(s)>2` Dirichlet chart continuous.
+5. **Kernel verification** must run the exact existing Agda 2.9
+   `parallel_checker`; static source readback, `--safe` headers
+   and imports are not kernel receipts.
+
+### New source proof owners and exact achieved claims
+
+- `DASHI/Analysis/BishopOriginalNegativeLogUniformCompactTailExact.agda`:
+  `sourceLogTermBoundOnPositiveCompact`,
+  `sourceLogUniformTailCutoff`,
+  `sourceLogUniformFiniteTail`,
+  `sourceLogUniformLimitError`, and
+  `originalNegativeLogUniformApproximation` construct one common
+  original-series cutoff on `0<x<=r<1` and a genuine bound on
+  `sourceNegativeLogValue` minus its literal partial sum.
+- `DASHI/Analysis/BishopOriginalMachinAtanUniformHalfBallTailExact.agda`:
+  `originalAtanMagnitudePowerBelowHalf`,
+  `originalAtanHalfMajorantConvergent`,
+  `sourceAtanUniformTailCutoff`,
+  `sourceAtanUniformLimitError`, and
+  `originalMachinTwoPointUniformApproximation` produce one
+  common original-series cutoff on `|t|<=1/2`, including
+  `t=1/5` and `t=1/239`.
+
+The native uniform bounds are **value** bounds, not yet quotient-tail
+bounds or a full analytic power-series composition theorem. Therefore
+the LOG identity, the two original Cayley evaluations and any
+selected external zeta/xi same-object equality are **not** marked
+closed. All source owners and the three TOE roots are configured for
+parallel checking; actual Agda kernel acceptance is pending.
