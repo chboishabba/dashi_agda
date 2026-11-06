@@ -18,6 +18,7 @@ module DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact where
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 1ℝ; _*ℝ_; 0ℝ; _≤ℝ_)
 
@@ -100,8 +101,6 @@ module _
       (actualNativeR445AllReflectedWordGrams reflectCoarse word word)
       finePositive
     where
-      open import Relation.Binary.PropositionalEquality using (subst)
-
       substNonnegative : ∀ {x y : ℝ} →
         x ≡ y → 0ℝ ≤ℝ x → 0ℝ ≤ℝ y
       substNonnegative equality positive =
