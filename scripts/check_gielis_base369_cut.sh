@@ -21,6 +21,8 @@ for source_file in "${sources[@]}"; do
   fi
 done
 
+python scripts/gielis_base369_source_audit.py > /dev/null
+
 scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
 
 python -m pytest -q tests/test_gielis_base369_experiments.py
