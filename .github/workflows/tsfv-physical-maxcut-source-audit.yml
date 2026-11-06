@@ -9,6 +9,8 @@ on:
       - 'DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda'
       - 'DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda'
       - 'DASHI/Unified/BalabanRGTOERegression.agda'
+      - 'DASHI/Unified/TSFVUnifiedRegression.agda'
+      - 'DASHI/Unified/TSFVParentChildRegression.agda'
       - 'scripts/check_tsfv_selected_scalar_kk_os_control_20261106.py'
       - 'Docs/roadmaps/Emergent31QuantumYMKKExactLemmaRoadmap20261103.md'
       - '.github/workflows/tsfv-physical-maxcut-source-audit.yml'
@@ -68,7 +70,9 @@ jobs:
             DASHI/Physics/Foundations/TSFVSelectedLatticeAcousticKKFlatControlExact.agda \
             DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda \
             DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda \
-            DASHI/Unified/BalabanRGTOERegression.agda; do
+            DASHI/Unified/BalabanRGTOERegression.agda \
+            DASHI/Unified/TSFVUnifiedRegression.agda \
+            DASHI/Unified/TSFVParentChildRegression.agda; do
             echo "::group::Agda safe $module"
             timeout 360s agda --safe --no-libraries --no-default-libraries \
               -i . -i .agda-stdlib "$module"
