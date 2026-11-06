@@ -1,4 +1,5 @@
 """Finite-difference torsion source tests, synthetic only."""
+import json
 import math
 import sys
 import unittest
@@ -70,6 +71,14 @@ def case():
 
 
 class TorsionTests(unittest.TestCase):
+    def test_repository_torsion_fixture_executes_without_gravity_claim(self):
+        fixture = Path(__file__).resolve().parent / "fixtures" / "zhang2025_synthetic_torsion_timed.json"
+        case = json.loads(fixture.read_text(encoding="utf-8"))
+        out = t.evaluate_pair(case)
+        self.assertEqual(out["data_kind"], "synthetic")
+        self.assertFalse(out["metric_perturbation_measured"])
+        self.assertEqual(len(out["paired_frames"]), 3)
+
     def test_sine_interior_critical_extrema(self):
         i = t.sine_interval(Interval(0., math.pi))
         self.assertAlmostEqual(i.hi, 1.)
