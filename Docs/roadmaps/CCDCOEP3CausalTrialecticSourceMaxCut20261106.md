@@ -114,6 +114,10 @@ interventional probe; this is NOT an approved human experiment.
 P3-C3: an observed positive effect cannot determine hostile intent;
 the same effect is compatible with distinct purposes.
 
+P3-C4b: the same pre-existing costed Discriminator bundle now observes
+revision behaviour and separates the two same-coherence worlds. This is a
+finite language-extension theorem, not an established population predictor.
+
 P3-C4: identical public narrative agreement can coexist with
 differing evidence revisability and contestability. Coherence needs
 separate logical, probabilistic, evidence, revision, agency, and
