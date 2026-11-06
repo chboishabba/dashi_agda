@@ -425,3 +425,26 @@ using the exact 12-node source rank and proves
 the full 66 index set under this normalized swap and its involution.
 This closes a genuine source-index identity bug without changing the
 72/8 cardinality census or the central fixed-point no-go.
+
+
+## Three original JMD path certificates — native finite graph side now source-written
+
+`Y443JMDThreePathGraphCertificateExact.agda` takes JMD's
+ORIGINAL exact source paths from `Y443JMDSourceWordInstantiationExact`:
+```text
+path 1 = [x11, x10, x9, x0, x1, x2, x3, x4]  (8 nodes)
+path 2 = [x5, x6, x7, x8]                     (4 nodes)
+path 3 = [x0, x5, x6, x7, x8]                 (5 nodes)
+```
+It proves `jmdFirstPathGraphValid`,
+`jmdBetaPathGraphValid`, `jmdThirdPathGraphValid`,
+and `x4IsNonadjacentToEntireBetaPath` directly using Y443's
+original adjacency matrix: all neighbor edges true, all separated
+pairs distinct/nonadjacent, four x4/beta commuting pairs nonadjacent.
+The finite checker independently re-evaluates all positions.
+
+**Still distinct:** graph data alone do not establish the group
+interpretation of these relations, nor the full path Coxeter element
+generator recovery theorem in Agda. The external Lean proof does
+establish those statements in its presented group, with source code
+now precisely identified.
