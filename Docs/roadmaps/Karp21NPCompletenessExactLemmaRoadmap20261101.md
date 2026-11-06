@@ -1267,3 +1267,31 @@ addition/equality bit costs, executable bit-tape instruction count,
 formal machine simulation and original `PR.polynomialTimeVerifier`
 instantiation. All new proofs remain source-written until checked by
 Agda 2.9 via the repository's parallel checker. No P != NP claim.
+
+## 2026-11-07 — rediscovered original all-word N21 semantic equivalence
+
+PR #1445 already contains the SOURCE-WRITTEN universal theorem
+`Karp21FinFreeAllWordDecoderAgreementExact.n21FinFreeVerifierSameWord`.
+It proves that the actual original typed N21 graph parser/verifier and
+the actual fin-free verifier return the same Boolean for *every*
+original binary graph word and *every* certificate word, including
+malformed words. This is considerably stronger than the older
+conditional E20 image equivalence. No different graph language or
+oracle is introduced.
+
+New owner `Karp21N21SameWordCountedAcceptanceExact` consumes this
+exact original theorem and the new native `ERQ.PolynomialBound` for
+the same original word's endpoint-comparison count. Its
+`allWordsSameVerifierAndPolynomialComparisonCount` packages both
+facts without extra assumptions, and both original `Karp21Everything`
+and `Karp21BinaryRuntimeEverything` import it.
+
+**Updated K06 source status:** original N21 all-word Boolean
+semantics are **SOURCE-WRITTEN** (including malformed graph and
+certificate words), not still awaiting a new semantic proof.
+**Remaining K06:** kernel acceptance, original E20 output compiler's
+fully costed all-word map and Cook–Levin transitive acceptance.
+**Remaining K05:** binary tape step cost of gamma/signed parsing,
+comparisons, signed score, and the explicit machine clock. The
+operation-count polynomial does NOT turn unary Nat operations into
+binary constant-time primitives.
