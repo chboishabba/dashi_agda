@@ -33,6 +33,9 @@ safe_sources=(
   DASHI/Physics/Foundations/TSFVAcousticMassInverseBidiNoGoExact.agda
   DASHI/Physics/Foundations/TSFVAcousticLocalImpulseThirdDerivativeExact.agda
   DASHI/Physics/Foundations/TSFVKKHorizontalReductionNoninjectiveBidiExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalInterventionRetardedPrefixExact.agda
+  DASHI/Physics/Foundations/TSVFObserverOSCyclicGramSetoidExact.agda
+  DASHI/Physics/Foundations/TSVFOriginalAllWordMomentTransportExact.agda
   DASHI/Physics/Foundations/TSVFOSSelectedKetHamiltonianNonpromotionExact.agda
   DASHI/Physics/Foundations/TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact.agda
 )
