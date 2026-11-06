@@ -109,7 +109,7 @@ Kozyrev mirror simulations. A physical seam/cover is not postulated.
 - deterministic 720-ray configurations and a focus/absolute-torque Pareto front.
 
 The ray starts at (1.05,0), emitted uniformly in [0,2*pi). "Torque" is
-a **normalized angular impulse proxy**, sum over collisions of
+a **normalized angular impulse proxy** (metres × unit momentum), sum over collisions of
 cross(position, outgoing_unit_direction - incoming_unit_direction),
 not a measured Newton-metre physical torque. Sampled 720-ray results should
 not be compared to prior 13.61% results without matching source, walls and
@@ -150,3 +150,32 @@ actions and preservation maps, not state-count equivalence.
 Preserve source/proof provenance: Gielis owns the superformula; the finite
 special-case reduction and Base369 integration are new derivations in this
 tranche; numerical claims must retain their seeds/geometries and settings.
+
+
+## November 6 owner-reuse implementation and authoritative phase plan
+
+See [GielisBase369Roadmap.md](GielisBase369Roadmap.md) for exact
+G01–G21 lemma definitions, owner mapping, dependencies, P0–P5
+phases and D0–D7 deliverable acceptance.
+
+Additional new owners on PR #1466:
+- `DASHI/Geometry/GielisBase369NyquistPhase36Exact.agda`:
+  18-sector sine aliasing of modes 9 and 27 and 36-sector orientation
+  separation in integer tables;
+- `DASHI/Geometry/GielisBase369ExistingOwnersWeldExact.agda`:
+  reexports prior native DNA dihedral, SO3/Hodge torque orientation,
+  Base369 MDL, semantic-sampling boundary, and existing log-polar spiral
+  results rather than duplicating those domains.
+
+The Python benchmark now distinguishes minimising physical disturbance
+from maximising delivered angular impulse, provides m=4/5/7 controls,
+and refuses to record more reflections than the stated bounce budget.
+An earlier standalone 720-ray receipt is **not** evidence that the new
+committed head and expanded tests have run. Do not represent the
+uncalibrated impulse as SI newton-metres or compare it with the
+legacy Kozyrev HTML motor/torque result. The original HTML SDF collision
+versus independent-boundary disagreement of approximately 1.349–1.832 mm
+must be resolved at the same-apparatus/first-hit seam (G13).
+
+Do not mix p-adic Kozyrev wavelets (different mathematical lane) with the
+optical Kozyrev mirror apparatus.
