@@ -42,6 +42,7 @@ import DASHI.Physics.YangMills.BalabanT5UnlocalizedJSourceLocalizationRound318Ex
 import DASHI.Physics.YangMills.BalabanContinuumCovarianceSpectrumConstructorRound281Exact as R281
 import DASHI.Physics.YangMills.BalabanCMP116CanonicalCommonRadiusRound104Exact as Radius
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectorySourceRound342Exact as R342
+import DASHI.Physics.YangMills.BalabanCMP116SharedMarkedDirectCalibrationRound344Exact as R344
 import DASHI.Physics.YangMills.BalabanCMP116R281SourceResponseSameObjectRound342Exact as Limit
 import DASHI.Physics.YangMills.BalabanCMP116LiteralTrajectoryToPublishedLiteralR467Exact as Bridge
 import DASHI.Physics.YangMills.BalabanCMP116PublishedLiteralSelectedRound467Exact as R467
@@ -155,4 +156,54 @@ sameLiteralR342AndLocalRateYieldsGap :
 sameLiteralR342AndLocalRateYieldsGap source limitClosure rateSemantics =
   R482.publishedLiteralAndLocalRateBuildPositiveTransferGap
     (Bridge.asPublishedLiteralSelectedLocalization source)
+    limitClosure rateSemantics
+
+------------------------------------------------------------------------
+-- Strongest already-owned CMP116 source rate: R344 constructs R342
+-- from the ACTUAL shared Hessian mark with source-native geometric
+-- (1/4 * C_H) * (1/2)^distance.  The reconstructed upper envelope
+-- is then (1/4)*(1/2)^time under R344's explicit source-distance/time
+-- and C_H <= 1 assumptions.  No new B-side generic exponent,
+-- arbitrary numerical q, or source-independent spectral rate.
+------------------------------------------------------------------------
+
+sameOriginalSharedMarkedHalfRateFiniteDecay :
+  ∀ {Measure TestObservable SpectralObservable Energy
+      dataSet extension base demands tests spectrumSource}
+    (source : R344.SharedMarkedDirectCMP116Source
+      {Measure = Measure} {TestObservable = TestObservable}
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      {dataSet = dataSet} {extension = extension}
+      base demands tests spectrumSource) →
+  ∀ cutoff observable time →
+  let index = R281.indexFor spectrumSource observable time in
+  R278.connectedCovarianceMagnitude extension
+    (Gram.measureSequence dataSet cutoff)
+    (R278.left tests index)
+    (R278.right tests index)
+  ≤
+  R281.clusteringEnvelope spectrumSource observable time
+sameOriginalSharedMarkedHalfRateFiniteDecay source =
+  sameLiteralR342SourceFiniteCovarianceDecay
+    (R344.asLiteralTrajectoryCMP116Source source)
+
+sameOriginalSharedMarkedHalfRateYieldsGap :
+  ∀ {Measure TestObservable SpectralObservable Energy}
+    {dataSet : Gram.PhysicalMeasureConvergenceData Measure TestObservable ℚ}
+    {extension : R278.ScalarCovarianceConvergenceExtension dataSet}
+    {base : R318.UnlocalizedT5StateFamilyJPresentation dataSet extension}
+    {demands : Radius.CMP116FiniteNormalizedAnalyticDemands}
+    {tests : R278.SelectedConnectedCovarianceTests dataSet}
+    {spectrumSource : R281.ContinuumCovarianceSpectrumData
+      {SpectralObservable = SpectralObservable} {Energy = Energy}
+      dataSet extension tests} →
+  R344.SharedMarkedDirectCMP116Source base demands tests spectrumSource →
+  Limit.SelectedLimitUpperClosure {dataSet = dataSet} →
+  Rate.LocalEnergyDecayRatioSemantics
+    (R281.asReconstructedClusteringSpectrum spectrumSource) →
+  Gap.PositiveTransferGapCore
+    (R281.asReconstructedClusteringSpectrum spectrumSource)
+sameOriginalSharedMarkedHalfRateYieldsGap source limitClosure rateSemantics =
+  sameLiteralR342AndLocalRateYieldsGap
+    (R344.asLiteralTrajectoryCMP116Source source)
     limitClosure rateSemantics
