@@ -1,4 +1,5 @@
 """DASHI source-to-force Maxwell-stress/dynamics synthetic physical regression."""
+import json
 import copy
 import math
 import sys
@@ -74,6 +75,14 @@ def case():
 
 
 class ZhangPhysicalSourceRegression(unittest.TestCase):
+    def test_repository_timed_fixture_executes_without_promotion(self):
+        fixture = Path(__file__).resolve().parent / "fixtures" / "zhang2025_synthetic_translation_timed.json"
+        case = json.loads(fixture.read_text(encoding="utf-8"))
+        out = s.evaluate_pair(case)
+        self.assertEqual(out["data_kind"], "synthetic")
+        self.assertFalse(out["gravity_anomaly_established"])
+        self.assertEqual(len(out["paired_frames"]), 3)
+
     def test_pure_electric_stress_has_correct_traction_and_trace(self):
         v = s.vacuum_maxwell_stress([1000, 0, 0], [0, 0, 0])
         energy = 0.5 * s.EPS0 * 1e6
