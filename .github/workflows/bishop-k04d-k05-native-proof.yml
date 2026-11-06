@@ -26,6 +26,7 @@ on:
       - 'DASHI/Analysis/BishopOriginalCompletedXiFactorContinuityCompilerExact.agda'
       - 'scripts/check_bishop_machin_rational_gaussian_phase.py'
       - 'scripts/check_k05_cayley_formal_coefficients.py'
+      - 'scripts/check_k04d_nat_log_gap_rational.py'
       - 'DASHI/Foundations/BishopRound11SignedFactorialExponentEncodingExact.agda'
       - 'DASHI/Foundations/BishopGroupedCauchyParityTelescopeExact.agda'
       - 'DASHI/Foundations/BishopRound11FiniteParityDegreeZeroExact.agda'
@@ -91,6 +92,10 @@ jobs:
       - name: Exact Cayley rational all-degree recurrence regression
         shell: bash
         run: python3 scripts/check_k05_cayley_formal_coefficients.py --through-degree 4095 | tee bishop-cayley-formal-coefficients.log
+
+      - name: Exact Nat log-gap rational regression
+        shell: bash
+        run: python3 scripts/check_k04d_nat_log_gap_rational.py --through-index 9999 | tee bishop-nat-log-gap-rational.log
 
       - name: Kernel check all focused K05 and K04d new owners via parallel checker
         shell: bash
@@ -201,3 +206,4 @@ jobs:
             bishop-k04d-finite-log-exp.log
             bishop-machin-rational-gaussian.log
             bishop-cayley-formal-coefficients.log
+            bishop-nat-log-gap-rational.log
