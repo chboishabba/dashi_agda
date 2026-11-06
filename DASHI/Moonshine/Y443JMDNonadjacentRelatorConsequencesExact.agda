@@ -11,6 +11,7 @@ module DASHI.Moonshine.Y443JMDNonadjacentRelatorConsequencesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.List using (List; []; _∷_)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
@@ -101,7 +102,7 @@ module SourceConsequences {G : Set} (gi : TM.GroupWithInverse G)
   nonedgeProductSquare :
     (x y : Y.Node) →
     Y.pairRelator (Y.pair x y) ∈ Y.monsterRelators →
-    Y.adjacent x y ≡ Agda.Builtin.Bool.false →
+    Y.adjacent x y ≡ false →
     mul (mul (nodes x) (nodes y))
       (mul (nodes x) (nodes y)) ≡ e
   nonedgeProductSquare x y member notAdjacent rewrite notAdjacent =
