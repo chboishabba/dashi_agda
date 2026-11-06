@@ -100,6 +100,9 @@ based only on group order or dimension is sufficient.
 - `doubleMonsterRelatorCount`, `monsterRelatorCount`;
 - `doubleMonsterWrittenLength`, `monsterWrittenLength`;
 - `identityRepresented`, `productRepresented`, `inverseRepresented`;
+- `Y443JMDTracePowerExact.powerRepresented` (natural-power closure),
+  `traceStepThreeX4` and `traceStepFourBeta` (JMD's w^5 and w^6
+  subgroup propagation), and `traceStepsThreeAndFour`;
 - `nodeRepresented`, `pairWordsSurjective` (constructive word for EVERY
   element when JMD node-word and generation certificates are supplied);
 - `pairWordActionMatchesLiteral` (on the actual selected V-natural
@@ -108,6 +111,9 @@ based only on group order or dimension is sufficient.
 **P — Preconditions still requiring actual providers.**
 P0 `NodeWordCertificate`: *all twelve* exact `u,v` words, including
 the path1 and path3 derivations of JMD's ten-step trace.
+P0a JMD's actual `w` word and equalities `x4 = w^5`,
+`beta = w^6`, now consumable by the proved `JMDStepsTwoToFour` module;
+`w` has not been reconstructed from the report alone.
 P1 `NodeGeneration`: the presentation-induced node-generation
 theorem for the *same* selected source group.
 P2 `RelatorsSatisfied`: evaluate all **80** relations in that group,
@@ -138,7 +144,8 @@ The second command fails rather than pretending success if `agda` is
 missing. The first command provides an independently executable source
 transcription audit, *not* Agda kernel acceptance.
 
-**Current state:** source-written conditional two-generator surjectivity
+**Current state:** source-written conditional two-generator surjectivity,
+plus constructive JMD trace steps 2--4 subgroup-word propagation,
 and same-V-natural-action proof, finite arithmetic independently checked.
 Agda has not been executed in this environment. The JMD words/Lean
 certificate and an actual Monster same-object witness have not been
