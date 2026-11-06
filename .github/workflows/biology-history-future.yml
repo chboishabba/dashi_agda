@@ -5,9 +5,18 @@ on:
     paths:
       - 'DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda'
       - 'DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda'
+      - 'DASHI/Biology/Physical/SourceIndexedBiologicalCarrierExact.agda'
+      - 'DASHI/Biology/Physical/BiologicalFuturePartitionCompilerExact.agda'
+      - 'DASHI/Biology/Physical/BiologicalStochasticFutureLumpingExact.agda'
+      - 'DASHI/Biology/Physical/BiologicalCoupledTissueCubeExact.agda'
       - 'DASHI/EverythingBiologicalHistoryFutureRound23.agda'
       - 'scripts/check_biological_history_future_quotient.py'
       - 'scripts/biological_gocam_sbml_receipt_intake.py'
+      - 'scripts/check_biological_spatial_stochastic.py'
+      - 'scripts/biological_si_kinetic_calibration.py'
+      - 'scripts/biological_measured_genotype_holdout.py'
+      - 'scripts/prepare_shine_dalgarno_measured.py'
+      - 'scripts/validate_biological_source_models.py'
       - 'scripts/check_biological_history_future_round23.sh'
       - '.github/workflows/biology-history-future.yml'
   workflow_dispatch:
@@ -36,8 +45,18 @@ jobs:
           target_path="$RUNNER_TEMP/agda-stdlib"
           cp -a "$source_path" "$target_path"
           echo "path=$target_path" >> "$GITHUB_OUTPUT"
-      - name: Python finite regressions
-        run: python3 scripts/check_biological_history_future_quotient.py
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install numerical test dependencies
+        run: python -m pip install numpy scipy scikit-learn
+      - name: Finite biological and spatial regressions
+        run: |
+          python3 scripts/check_biological_history_future_quotient.py
+          python3 scripts/check_biological_spatial_stochastic.py
+          python3 scripts/biological_si_kinetic_calibration.py --self-test
+          python3 scripts/biological_measured_genotype_holdout.py --self-test
+          python3 scripts/prepare_shine_dalgarno_measured.py --self-test
       - name: GO-CAM/SBML fail-closed intake regression
         run: python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
       - name: Golden Agda check
