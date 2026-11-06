@@ -60,13 +60,14 @@ factorChainDeltaConvergesZero
 
 factorDerivativeChain :
   ∀ {f g point df dg} →
+  (∀ {x y} → R._≃_ x y → R._≃_ (f x) (f y)) →
   Factor.BishopFactorDerivativeAt f (g point) df →
   Factor.BishopFactorDerivativeAt g point dg →
   Factor.BishopFactorDerivativeAt
     (λ x → f (g x))
     point
     (R._*_ df dg)
-factorDerivativeChain {f} {g} {point} {df} {dg} F G =
+factorDerivativeChain {f} {g} {point} {df} {dg} fCongruent F G =
   record
   { Factor.quotient = λ h →
       R._*_
@@ -82,8 +83,13 @@ factorDerivativeChain {f} {g} {point} {df} {dg} F G =
       RP.≃-trans
         (RP.≃-trans
           (RP.+-cong
-            (RP.≃-refl)
-            (RP.≃-refl))
+            (fCongruent
+              (solve 2
+                (λ gh g0 →
+                  gh ⊜ g0 ⊕ (gh ⊖ g0))
+                RP.≃-refl
+                (g (R._+_ point h)) (g point)))
+            RP.≃-refl)
           (Factor.incrementFactorisation F delta))
         (RP.≃-trans
           (RP.*-cong
