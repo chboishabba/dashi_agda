@@ -7,6 +7,7 @@ on:
       - 'DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda'
       - 'DASHI/EverythingBiologicalHistoryFutureRound23.agda'
       - 'scripts/check_biological_history_future_quotient.py'
+      - 'scripts/biological_gocam_sbml_receipt_intake.py'
       - 'scripts/check_biological_history_future_round23.sh'
       - '.github/workflows/biology-history-future.yml'
   workflow_dispatch:
@@ -37,6 +38,8 @@ jobs:
           echo "path=$target_path" >> "$GITHUB_OUTPUT"
       - name: Python finite regressions
         run: python3 scripts/check_biological_history_future_quotient.py
+      - name: GO-CAM/SBML fail-closed intake regression
+        run: python3 scripts/biological_gocam_sbml_receipt_intake.py --self-test
       - name: Golden Agda check
         shell: bash
         run: |
