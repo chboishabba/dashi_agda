@@ -36,4 +36,4 @@ jobs:
       - name: Run exact Y443 finite and golden Agda gate
         run: python3 scripts/check_y443_vnatural_pair_bridge.py
       - name: Check Y443 validation root
-        run: agda -i . -l standard-library DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda
+        run: agda --safe -i . -l standard-library DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda
