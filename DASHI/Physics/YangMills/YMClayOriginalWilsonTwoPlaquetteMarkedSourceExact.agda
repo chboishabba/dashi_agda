@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonTwoPlaquetteMarkedSourceExact
 -- CMP116 *localized* response are deliberately not inferred.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂)
 open import DASHI.Foundations.RealAnalysisAxioms
@@ -31,6 +31,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as Pointwise
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as GaugeHaar
 import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as Constructed
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
@@ -100,8 +101,7 @@ module _
     GaugeHaar.PeriodicPointwiseObservable
       theory traceData exponential n (beta n)
       oneLink bilateral
-      (DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact.decodeOriginalBonds
-        (Agda.Builtin.Nat.suc n))
+      (Codec.decodeOriginalBonds (suc n))
       divide (originalTwoPlaquetteAffineTest n p q s t)
   originalTwoPlaquetteAffineTestPointwise n p q s t = record
     { GaugeHaar.PeriodicPointwiseObservable.congruentAt =
