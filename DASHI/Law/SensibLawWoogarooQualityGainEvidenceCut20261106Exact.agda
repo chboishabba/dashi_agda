@@ -42,9 +42,9 @@ capThree (suc (suc (suc _))) = 3
 cappedInput : (Nat → Nat) → List Koala.QualityRow → Nat
 cappedInput cap [] = zero
 cappedInput cap (r ∷ rs) =
-  Koala.QualityRow.areaTenths r *
-  cap (Koala.QualityRow.gainQualityPoints r) *
-  Koala.QualityRow.futureConfidencePercent r +
+  Koala.areaTenths r *
+  cap (Koala.gainQualityPoints r) *
+  Koala.futureConfidencePercent r +
   cappedInput cap rs
 
 fullSourceCoefficient : Koala.inputSum Koala.allRows ≡ 1010350
