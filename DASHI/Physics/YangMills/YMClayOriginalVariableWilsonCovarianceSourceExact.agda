@@ -25,7 +25,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; _*ℝ_; _-ℝ_; *-comm)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; *-comm)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -168,6 +168,37 @@ module _
   OriginalGaugeInvariantSection : OriginalCylinderSection → Set
   OriginalGaugeInvariantSection cylinder =
     ∀ n → originalGaugeInvariant n (cylinder n)
+
+  originalZeroCylinderSection : OriginalCylinderSection
+  originalZeroCylinderSection n links = 0ℝ
+
+  originalUnitCylinderSection : OriginalCylinderSection
+  originalUnitCylinderSection n links = 1ℝ
+
+  originalGaugeInvariantZeroCylinder :
+    OriginalGaugeInvariantSection originalZeroCylinderSection
+  originalGaugeInvariantZeroCylinder n gamma links = refl
+
+  originalGaugeInvariantUnitCylinder :
+    OriginalGaugeInvariantSection originalUnitCylinderSection
+  originalGaugeInvariantUnitCylinder n gamma links = refl
+
+  originalGaugeInvariantSectionAdd :
+    (left right : OriginalCylinderSection) →
+    OriginalGaugeInvariantSection left →
+    OriginalGaugeInvariantSection right →
+    OriginalGaugeInvariantSection
+      (λ n links → left n links +ℝ right n links)
+  originalGaugeInvariantSectionAdd left right invLeft invRight n gamma links =
+    cong₂ _+ℝ_ (invLeft n gamma links) (invRight n gamma links)
+
+  originalGaugeInvariantSectionScale :
+    (scalar : ℝ) (cylinder : OriginalCylinderSection) →
+    OriginalGaugeInvariantSection cylinder →
+    OriginalGaugeInvariantSection
+      (λ n links → scalar *ℝ cylinder n links)
+  originalGaugeInvariantSectionScale scalar cylinder inv n gamma links =
+    cong (λ value → scalar *ℝ value) (inv n gamma links)
 
   originalGaugeInvariantSectionProduct :
     (left right : OriginalCylinderSection) →
