@@ -323,3 +323,18 @@ each arithmetic operation's bit-cost, end-to-end parser/score runtime,
 and original PolynomialCostModel/InNP certificate.
 **Updated K06 status:** original same-word verifier semantics source
 written, kernel acceptance and full E20/Cook compiler still pending.
+
+**Literal-source guard and referee:** The all-word raw-validator
+clock follows the original `m * 3` header guard exactly; this
+is deliberately not replaced by `3 * m` in Agda's dependent
+`with` branches. `m <= m * 3` is proved separately using native
+Nat order. The original `Graph.strictAfter` three-case decision
+tree is preserved and its internal primitive comparisons counted.
+
+A retained source-aligned independent Python model checked 26,214
+small original `strictAfter`/raw-validator input cases, with literal
+Boolean agreement and `cost <= 5m`. The repository's existing
+`referee_karp21_maxcut.sh` now executes this regression in preflight,
+alongside the prior 63,001 comparison-budget cases. These are
+differential tests only, not Agda kernel acceptance or a Turing-machine
+clock. The new all-word N21 sources are on PR #1474.
