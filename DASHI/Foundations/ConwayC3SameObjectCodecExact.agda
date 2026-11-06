@@ -1,6 +1,7 @@
 module DASHI.Foundations.ConwayC3SameObjectCodecExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import DASHI.Algebra.Trit using (Trit; neg; zer; pos)
 import DASHI.Core.TriadicClosureTower as Tower
 import DASHI.Biology.Physical.C3CubeFourier27Exact as Cube
@@ -93,3 +94,50 @@ cubeAdditionPreservedPointwise
 cubeAdditionPreservedPointwise
   (Cube.cube3 x y z) (Cube.cube3 u v w) pos =
     phaseAddTransport z w
+
+------------------------------------------------------------------------
+-- Character action from the ORIGINAL C3^3 Fourier owner: transport both
+-- the character and its additive homomorphism into the same tower carrier.
+------------------------------------------------------------------------
+
+phaseAt : Cube.Cube3 → Trit → Cube.Phase
+phaseAt (Cube.cube3 x y z) neg = x
+phaseAt (Cube.cube3 x y z) zer = y
+phaseAt (Cube.cube3 x y z) pos = z
+
+towerCharacter :
+  Cube.Cube3 → Tower.ThreeSuperThree → Tower.ThreeSuperThree
+towerCharacter index f t =
+  phaseToTrit
+    (Cube.scalarCharacter (phaseAt index t) (tritToPhase (f t)))
+
+cubeCharacterPreservedPointwise :
+  (k c : Cube.Cube3) (t : Trit) →
+  cubeToTower (Cube.character k c) t
+    ≡ towerCharacter k (cubeToTower c) t
+cubeCharacterPreservedPointwise
+  (Cube.cube3 ka kb kc) (Cube.cube3 a b c) neg
+  rewrite phaseRoundTrip a = refl
+cubeCharacterPreservedPointwise
+  (Cube.cube3 ka kb kc) (Cube.cube3 a b c) zer
+  rewrite phaseRoundTrip b = refl
+cubeCharacterPreservedPointwise
+  (Cube.cube3 ka kb kc) (Cube.cube3 a b c) pos
+  rewrite phaseRoundTrip c = refl
+
+towerCharacterHomomorphism :
+  (k : Cube.Cube3) (f g : Tower.ThreeSuperThree) (t : Trit) →
+  towerCharacter k (towerAdd f g) t
+    ≡ towerAdd (towerCharacter k f) (towerCharacter k g) t
+towerCharacterHomomorphism k f g t
+  rewrite phaseRoundTrip
+    (Cube.add (tritToPhase (f t)) (tritToPhase (g t)))
+        | phaseRoundTrip
+    (Cube.scalarCharacter (phaseAt k t) (tritToPhase (f t)))
+        | phaseRoundTrip
+    (Cube.scalarCharacter (phaseAt k t) (tritToPhase (g t))) =
+  cong phaseToTrit
+    (Cube.scalarCharacterHomomorphism
+      (phaseAt k t)
+      (tritToPhase (f t))
+      (tritToPhase (g t)))
