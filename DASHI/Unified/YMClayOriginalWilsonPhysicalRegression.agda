@@ -43,3 +43,6 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact as 
 import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as NativeTimeReflection
 
 import DASHI.Physics.YangMills.YMClayD1OriginalCovarianceToR320Exact as D1OriginalCovariance
+
+import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1VariableCutoffCylinder
+import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1OriginalSUNDependent
