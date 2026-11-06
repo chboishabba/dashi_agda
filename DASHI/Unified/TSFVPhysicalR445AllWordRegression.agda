@@ -11,3 +11,8 @@ import DASHI.Physics.Foundations.TSVFOriginalR445AllWordActualPushforwardExact
 -- Original native Wilson reflected all-word Gram, same physical finite Gibbs.
 import DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact
   as OriginalR445ReflectedGram
+
+-- Published Osterwalder--Seiler / Menotti--Pelissetto RP route,
+-- attached to the same native finite Wilson word Gram.
+import DASHI.Physics.Foundations.TSVFOriginalR445PublishedWilsonRPWordWeldExact
+  as OriginalR445PublishedWordRP
