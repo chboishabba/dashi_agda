@@ -21,7 +21,9 @@ module DASHI.Foundations.BishopFiniteEvenOddCauchyReindexExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Relation.Binary.PropositionalEquality using (_≡_; refl; trans; sym; cong; cong₂)
 import Data.Nat.Base as N
+import Data.Nat.Properties as NP
 
 import Real as R
 import RealProperties as RP
@@ -128,3 +130,66 @@ finiteCauchyOddDegreeSplit left right n =
       (suc (suc (D.double n))))
     (finiteEvenOddSplit
       (cauchySummand left right (suc (D.double n))) (suc n))
+
+
+------------------------------------------------------------------------
+-- NATURAL-INDEX PARITY ARITHMETIC, USING THE ACTUAL FINITE
+-- CAUCHY EXPONENT INDEX CONVENTION n ∸ k.
+--
+-- This is necessary to transport the original factorial/binomial
+-- convolution of degree 2n and 2n+1 to the even and odd Round11
+-- source terms.  The signed algebra is not silently inferred.
+------------------------------------------------------------------------
+
+doubleIsTwice :
+  (n : Nat) →
+  D.double n ≡ (2 N.* n)
+doubleIsTwice zero = refl
+doubleIsTwice (suc n) =
+  cong suc (cong suc (doubleIsTwice n))
+
+doubleDifference :
+  (n k : Nat) →
+  (D.double n N.∸ D.double k) ≡ D.double (n N.∸ k)
+doubleDifference n k =
+  trans
+    (cong₂ N._∸_ (doubleIsTwice n) (doubleIsTwice k))
+    (trans
+      (sym (NP.*-distribˡ-∸ 2 n k))
+      (sym (doubleIsTwice (n N.∸ k))))
+
+doubleMonotone :
+  {k n : Nat} →
+  k N.≤ n →
+  D.double k N.≤ D.double n
+doubleMonotone {k} {n} k≤n =
+  NP.≤-trans
+    (NP.≤-reflexive (doubleIsTwice k))
+    (NP.≤-trans
+      (NP.*-monoˡ-≤ 2 k≤n)
+      (NP.≤-reflexive (sym (doubleIsTwice n))))
+
+oddEvenComplement :
+  (n k : Nat) →
+  k N.≤ n →
+  (suc (D.double n) N.∸ D.double k)
+    ≡ suc (D.double (n N.∸ k))
+oddEvenComplement n k k≤n =
+  trans
+    (NP.∸-suc (doubleMonotone k≤n))
+    (cong suc (doubleDifference n k))
+
+oddOddComplement :
+  (n k : Nat) →
+  (suc (D.double n) N.∸ suc (D.double k))
+    ≡ D.double (n N.∸ k)
+oddOddComplement n k = doubleDifference n k
+
+evenOddComplement :
+  (n k : Nat) →
+  k N.< n →
+  (D.double n N.∸ suc (D.double k))
+    ≡ suc (D.double (n N.∸ suc k))
+evenOddComplement zero k ()
+evenOddComplement (suc n) k (N.s≤s k≤n) =
+  oddEvenComplement n k k≤n
