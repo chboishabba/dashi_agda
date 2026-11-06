@@ -48,8 +48,9 @@ splitLastAppendExact :
   splitLast (prefix ++ (last ∷ []))
     ≡ just (prefix , last)
 splitLastAppendExact [] last = refl
-splitLastAppendExact (b ∷ prefix) last
-  rewrite splitLastAppendExact prefix last = refl
+splitLastAppendExact (b ∷ []) last = refl
+splitLastAppendExact (b ∷ b2 ∷ prefix) last
+  rewrite splitLastAppendExact (b2 ∷ prefix) last = refl
 
 signMagnitudeFromSuccessorBits :
   Word.BitWord → Maybe SignedMagnitudeBits
