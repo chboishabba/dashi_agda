@@ -106,7 +106,8 @@ signedListWireLengthLower :
   length values ≤ length (encodeSignedValuesPure values)
 signedListWireLengthLower [] = z≤n
 signedListWireLengthLower (value ∷ rest)
-  rewrite ListP.length-++ (encodeSignedGammaPure value) =
+  rewrite ListP.length-++ (encodeSignedGammaPure value)
+    {ys = encodeSignedValuesPure rest} =
   NatP.+-mono-≤
     (gammaNatHasBit (Dec.zigzag value))
     (signedListWireLengthLower rest)
