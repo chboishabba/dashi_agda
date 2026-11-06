@@ -1,5 +1,18 @@
 # Cook–Levin tape-locality boundary ghost — exact obstruction and repair contract
 
+## 2026-11-06 — decoded endpoint and guarded one-step weld (new implementation)
+
+At this branch head, two Agda source owners have been added to the canonical P0-B/G2/G3 lane, with the guarded formula's Boolean completeness proof made explicit via `trans`/`cong₂`.
+
+**G2-b endpoint same-object:** `ConcreteTapeDecodedEndcapSameObjectExact.agda` reuses original `Block.pullbackBlockRename_eq_blockSlice`, `Global.blockRename`, `Global.globalRowRename`, `Endpoint.liftBaseIndex`, `FormulaSem.baseTraceBits`, and literal `Decode.decodeCells`. It defines `pullbackCompose`, `decodedCellAtBlockSlice`, `decodedCellAtCanonicalBlock`, and `extendedRowCellSameObject`. `frontPlainFromFirstBlock` and `endPlainFromLastBlock` establish exact decoded list endcaps; `globalCNFToDecodedRowEndcaps` combines them with the global all-row CNF certificate. This is a *source-written candidate*, not a compiler-accepted theorem until the new focused root passes Agda 2.9.
+
+**G3 guarded one-step:** `ConcreteTapeGuardedDecodedTransitionExact.agda` now defines `guardedSATNoGhostAtTime` and `guardedSATDecodedMachineStep`. The latter takes the ORIGINAL guarded global CNF satisfaction, actual source-defined semantic sliding-window proof, and original before-row interior; it constructs `NoGhostContextBoundaries` from the SAT endcap evidence and applies `Step.decodedAdjacentRowsFormMachineStep` to yield the ORIGINAL `WF.WellFormedMachineStep` on the same decoded trace assignment. No standalone guard oracle, alternate decoding or unproved whole-row uniqueness assumption.
+
+**Verifier:** `ConcreteTapeBoundaryGuardFocusedRootExact.agda` now imports both new modules, the original canonical endcap CNF and the guarded global formula. A local independent exhaustive Python model of the actual canonical headed-flag truth-table and first/last row constraints passed 33,020 assignments, but the repository's Agda 2.9 command is unavailable in this environment. No `--safe` acceptance is inferred for these transitive roots.
+
+**Exact remaining G4/G5:** Thread the constructed per-time-step `NoGhost` witnesses through the existing `ConcreteTapeDecodedRunInductionExact` and dependent `ConcreteTapeDecodedRunLengthExact` without changing their row identities. Then change `ConcreteTapeSATToAcceptingRunExact` to accept the *guarded* global formula, and prove the **guarded completeness** direction for every original padded accepting run; do not silently claim that imposing new endcap clauses preserves the old unguarded SAT language. The uniform polynomial clause/variable/bit-clock estimates, N21/E20 encoded clocks and P2/P3 network construction remain independently unpaid. Obtain first concrete Agda error from the updated focused root before any Golden promotion.
+
+
 ### Additional same-object endcap proof owners: every row, not selected examples
 
 The canonical Agda endcap source now also proves `everyPhysicalRowIsEnumerated : Slot i count → RowSlotMember ... (allPhysicalRows count)` and `everyRowEndcapCNFTrue`, which selects any actual row's CNF acceptance from the whole-row-endcap conjunction. `globalRowEndcapsSound` splits the exact two physical-column CNFs into a `PhysicalRowEndcapCellsPlain` witness, and `globalAllRowsEndcapsGivePhysicalRowPlain` derives the two **actual canonical decoded cell** plainness facts from the original global assignment and original row/cell index placements. These are source-written proof terms, not compiler receipts.
