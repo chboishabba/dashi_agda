@@ -1,5 +1,14 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-06 — Agda 2.9 compiler repair; O/R/C/S/L/P/G/F synchronized
+
+**Detailed implementation and typed-provenance record:** [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md). The Golden source candidate `DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda` encodes five historical issues and a fail-closed status boundary; the referee now checks it independently before the Cook Golden root. The read-only `dashi_lean4` comparison identified `AgdaMirror/AuthorityBoundary.lean` and `AgdaMirror/LoomRelationAlgebra.lean`, neither of which supplies an Agda kernel receipt.
+
+**Five baseline diagnostics reported by the user at `2340ed9374f825af7e61d38a7319da5901e2dded`:** reserved BooleanFormula constructor `variable` (both Cook and SAT indexed source owners); missing `_+_` in the gamma roundtrip; wrong implicit `{n = suc u}` for `NatP.≤-refl`; missing `with ... in` equalities on the clique/cover proof; and `referee_karp21_maxcut.sh` invoking its own isolated regression recursively. Source-level fixes are on PR #1445 with scoped Cook/SAT constructor consumers and a full-complexity lexical migration guard. The isolated no-Agda regression includes the new guard fixture but must only run independently of the actual referee.
+
+**Promotion boundary:** user-supplied previous local Agda 2.9.0 / Python 3.14.8 run accepted `Karp21FinDecoderIndexBidiExact.agda` at the historical head, not all modified roots at this newer head. The changed Cook, Gamma, Fin, and Clique original sources must be kernel checked again using `scripts/run_agda29_parallel_check.sh`; no exact-head receipt is available to this session. No P0/P1/P2/P3 terminal certification or binary-time clock is thereby promoted.
+
+
 ## 2026-11-06 — change in acceptance policy: executable referee, not more uncompiled proof candidates
 
 **Actual PR #1445 changes:** `scripts/referee_karp21_maxcut.sh` now lets `preflight` run without an Agda installation. Previously it called `agda --version` unconditionally after allowing the `preflight` mode, so all its actual existing Python bitword/gadget checks were blocked. **Kernel modes still abort with exit 127 if Agda is missing.** An explicit `AGDA_STDLIB_ROOT` can now be supplied to direct the compiler to a clean standard-library installation. `scripts/check_karp21_referee_no_agda.py` is a new isolation regression for this exact failure mode, run locally against equivalent referee control flow and now invoked by the actual referee. A new `.github/workflows/karp21-referee.yml` requests two separate PR/push jobs: Python source/executable preflight and actual hosted Ubuntu Agda typechecking of all referee Golden/integration roots. It records exact compiler version and captures diagnostics/artifacts; no paper proof, status marker or test-only result substitutes for a compilation receipt.
