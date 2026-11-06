@@ -102,49 +102,70 @@ referenceRGUniformNoncollapse r n =
 -- continuum fourth-cumulant and a closed order interval, NOT a new
 -- arbitrary fourth-cumulant lower bound.
 record ActualRGContinuumChargeLimit
-    (r : RGReferenceChargeSurvival) : Set₁ where
+    (r : RGReferenceChargeSurvival) (Scalar : Set) : Set₁ where
   field
-    continuumCharge : ℚ
-    Converges : (Nat → ℚ) → ℚ → Set
-    actualChargeConverges : Converges (charge r) continuumCharge
+    -- The actual physical continuum scalar may be a vendor Bishop
+    -- completion; it is NOT assumed to be a rational number.
+    continuumCharge : Scalar
+    zero : Scalar
+    embed : ℚ → Scalar
+    embedZero : embed 0ℚ ≡ zero
+    LessEqual : Scalar → Scalar → Set
+    Positive : Scalar → Set
+    Converges : (Nat → Scalar) → Scalar → Set
+
+    embedPreservesOrder : ∀ {a b : ℚ} →
+      a ≤ b → LessEqual (embed a) (embed b)
+    embedPreservesPositive : ∀ q →
+      0ℚ < q → Positive (embed q)
+    positiveCannotLieBelowZero : ∀ value →
+      Positive value → LessEqual value zero → T5.Empty
+
+    actualChargeConverges :
+      Converges (λ cutoff → embed (charge r cutoff)) continuumCharge
     selectedOrderIntervalClosed :
       ∀ sequence target →
       Converges sequence target →
-      (∀ cutoff → eta r ≤ sequence cutoff) →
-      eta r ≤ target
+      (∀ cutoff → LessEqual (embed (eta r)) (sequence cutoff)) →
+      LessEqual (embed (eta r)) target
 
 open ActualRGContinuumChargeLimit public
 
 asOriginalT5Nontriviality :
-  (r : RGReferenceChargeSurvival) →
-  ActualRGContinuumChargeLimit r →
-  T5.UniformCumulantLowerBoundData ℚ
+  ∀ {Scalar : Set} (r : RGReferenceChargeSurvival) →
+  ActualRGContinuumChargeLimit r Scalar →
+  T5.UniformCumulantLowerBoundData Scalar
 asOriginalT5Nontriviality r limit = record
-  { T5.UniformCumulantLowerBoundData.zero = 0ℚ
-  ; T5.UniformCumulantLowerBoundData.eta = eta r
-  ; T5.UniformCumulantLowerBoundData.finiteCumulant = charge r
+  { T5.UniformCumulantLowerBoundData.zero = zero limit
+  ; T5.UniformCumulantLowerBoundData.eta = embed limit (eta r)
+  ; T5.UniformCumulantLowerBoundData.finiteCumulant =
+      λ n → embed limit (charge r n)
   ; T5.UniformCumulantLowerBoundData.continuumCumulant =
       continuumCharge limit
-  ; T5.UniformCumulantLowerBoundData.LessEqual = _≤_
-  ; T5.UniformCumulantLowerBoundData.Positive =
-      (λ value → 0ℚ < value)
+  ; T5.UniformCumulantLowerBoundData.LessEqual = LessEqual limit
+  ; T5.UniformCumulantLowerBoundData.Positive = Positive limit
   ; T5.UniformCumulantLowerBoundData.Converges = Converges limit
   ; T5.UniformCumulantLowerBoundData.finiteCumulantsConverge =
       actualChargeConverges limit
   ; T5.UniformCumulantLowerBoundData.finiteUniformLowerBound =
-      referenceRGUniformNoncollapse r
+      λ cutoff → embedPreservesOrder limit
+        (referenceRGUniformNoncollapse r cutoff)
   ; T5.UniformCumulantLowerBoundData.lowerOrderIntervalClosed =
       selectedOrderIntervalClosed limit
-  ; T5.UniformCumulantLowerBoundData.etaPositive = etaPositive r
+  ; T5.UniformCumulantLowerBoundData.etaPositive =
+      embedPreservesPositive limit (eta r) (etaPositive r)
   ; T5.UniformCumulantLowerBoundData.positiveCannotLieBelowZero =
-      λ value positive below →
-        ℚP.<-irrefl ℚP.≃-refl (ℚP.<-≤-trans positive below)
+      positiveCannotLieBelowZero limit
   }
 
+-- This proof respects the vendored Bishop real carrier: instantiate
+-- Scalar with the completed carrier and pay the original embedding/
+-- weak-limit semantics, rather than pretending a continuum cumulant
+-- lies in Q.
 continuumRGChargeIsNonzero :
-  (r : RGReferenceChargeSurvival)
-  (limit : ActualRGContinuumChargeLimit r) →
-  continuumCharge limit ≡ 0ℚ → T5.Empty
+  ∀ {Scalar : Set} (r : RGReferenceChargeSurvival)
+  (limit : ActualRGContinuumChargeLimit r Scalar) →
+  continuumCharge limit ≡ zero limit → T5.Empty
 continuumRGChargeIsNonzero r limit =
   T5.uniformFiniteLowerBoundForcesContinuumNonzero
     (asOriginalT5Nontriviality r limit)
