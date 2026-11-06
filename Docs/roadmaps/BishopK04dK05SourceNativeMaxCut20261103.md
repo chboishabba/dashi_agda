@@ -978,7 +978,7 @@ instantiates these at `t=1/5,1/239` and establishes the source
 
 The focused GitHub workflow has been corrected to call the
 repository's **existing**
-`scripts/run_agda29_parallel_check.sh` wrapper on 42 focused
+`scripts/run_agda29_parallel_check.sh` wrapper on 41 focused
 source owners and the three golden TOE roots, with explicit
 pinned stdlib `008f12c2908479567a3ae3c873f9cf0b8fe5987e`,
 the existing Agda flake/ref, and source `vendor/bishop` gitlink.
