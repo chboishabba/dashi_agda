@@ -101,6 +101,7 @@ def main():
     altered[(1, 0, 0)] = (False, False, False, True, False, False)
     assert fine_update("signal", base)[(0, 0, 0)][5] is False
     assert fine_update("signal", altered)[(0, 0, 0)][5] is True
+    assert fine_update("signal", fine_update("signal", altered)) == fine_update("signal", altered)
 
     random = Random(20261106)
     for _ in range(32):
@@ -109,6 +110,8 @@ def main():
             for v in VOXELS
         }
         coarse = {v: project(s) for v, s in field.items()}
+        assert fine_update("signal", fine_update("signal", field)) == fine_update("signal", field)
+        assert coarse_update("signal", coarse_update("signal", coarse)) == coarse_update("signal", coarse)
         for action in ACTIONS * 3:
             field = fine_update(action, field)
             coarse = coarse_update(action, coarse)
@@ -116,6 +119,7 @@ def main():
     print("PASS: all 54 undirected bonds used symmetrically, no periodic wrap")
     print("PASS: degree distribution: 8 corners, 12 edge centres, 6 face centres, 1 core")
     print("PASS: one proper neighbour changes a source morphology response")
+    print("PASS: idempotent all-neighbour finite basin after one signal")
     print("PASS: 32 x 15-action traces preserve spatial phenotype projection")
 
 
