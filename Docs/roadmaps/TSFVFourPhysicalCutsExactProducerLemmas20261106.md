@@ -6,6 +6,13 @@
 
 **Dependency schedule:** OBS01–OBS06 + HIL01–HIL05 in parallel from the actual micro source; OBS07–OBS09 to physically measure (3,1); KK01–KK08 from that observed g4; HIL06–HIL11 only after #1444 supplies its real OS construction; BIDI01–BIDI08 close the measured commuting limits, kernel, falsification.
 
+## 6 November 2026 — source-implemented finite OBS05 precursor and fresh YM dependency
+
+- **New child owner:** `DASHI.Physics.Foundations.TSVFOriginalInterventionRetardedPrefixExact` uses the original `QuantumSurface.evolveKet`, `QuantumSurface.apply`, and `TSVFEnsemble` initial/middle/final time fields. It constructs the actual selected prefix ket, an after-prefix intervention and later evolved readout. `originalNoLaterChoiceRewritesEarlierRecord` is the finite operational retarded-prefix fact; `originalEqualTerminalKetsGiveEqualReadouts` transports a genuine terminal-ket equality. Imported by `TSFVUnifiedRegression`.
+- **Status:** source-written finite precursor only; not yet exact-head Agda-kernel accepted. It is **not** the OBS05 Kubo derivative, a space-local propagation bound, universal no-retrocausality under postselection or a four-dimensional causal cone. OBS01–OBS10 physical completion remains open.
+- **YM synchronization:** latest independently inspected parent #1444 head `c1ea5c692637737a6007a597442be473bf41dd43` adds `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact` and `YMClayCMP119122116SelectedProducerWeldExact`. The former proves finite original n=3 literal mixed-log jets equal the actual R445 blocked/R320 pushforward covariance; the latter reuses selected R342/R467/R479 with explicit source, limit and energy/rate premises. Neither creates a physical observer/OS state dictionary, so HIL06–HIL11 and S10 are not discharged.
+- **Integration guard:** GitHub comparison against the child head before this update reported 119 parent-ahead commits. Do not treat this document or a normal merge of source files as an Agda kernel receipt. Respect the parallel checker and reconcile concurrent changes without overwriting #1444's owners.
+
 ## S01–S04: actual microscopic observer → measured causal 3+1
 
 | Proposed producer lemma | Canonical original IDs | Exact proof target |
