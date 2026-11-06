@@ -33,6 +33,7 @@ open import DASHI.Foundations.RealAnalysisAxioms using
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
@@ -252,7 +253,7 @@ module _
 
       zPositive : 0ℝ <ℝ z
       zPositive =
-        Original.originalWilsonFinitePartitionPositive
+        Family.physicalFinitePartitionPositive
           theory traceData exponential beta oneLink bilateral divide
           strict n
 
