@@ -1,3 +1,20 @@
+## 7 November — D1 *full* original measure: published small-field/large-field separation
+
+The real source audit identified a necessary boundary that must not be silently elided. Bałaban CMP 109 I and CMP 116 II explicitly treat the **four-dimensional small-field approximation**. Source references: https://doi.org/10.1007/BF01215223 and https://doi.org/10.1007/BF01239022 . Bałaban CMP 119, https://doi.org/10.1007/BF01217741 , discusses large-field effective densities and notes convergent expansions **for superrenormalizable models**; this is NOT a free theorem that the complete original four-dimensional Wilson family satisfies a physical mass-gap clustering estimate.
+
+New `YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda` therefore separates the full original `Wilson.originalWilsonConnectedCovariance` into a source-controlled small-field response plus a quantitatively controlled original **large-field remainder**. It carries three decisive source obligations: `originalFullCovarianceBelowSmallPlusLarge` (correct mixed-log/partition decomposition at each cutoff), `smallFieldEnvelopeCalibration` (applicable published CMP116 source), and `largeFieldErrorCalibration` (native full Gibbs large-field control), followed by `smallFieldGeometricRate` and `largeFieldGeometricRate` at the same **fixed physical block scale** and common `0 <= q < 1`. The theorem `originalFullWilsonUniformGeometricClustering` proves the full original native real covariance bound
+```
+abs Cov_full_Wilson_n(F,G)
+  <= (A_small + A_large) * q ^ physicalBlockDistance(F,G)
+```
+for **every n** by explicit exact order algebra. This theorem is source-written and regression-imported, but the physical input estimates above are **not proved by CMP116 alone** and are the actual D1 research frontier.
+
+The direct `YMClayD1OriginalRealCMP116VariableCutoffExact` remains available **only when** the selected CMP116 source has been independently proved to control the entire original response, rather than the small-field approximation. It now derives the native original response/covariance identity from the already existing `YMClayOriginalWilsonFiniteTwoSourceJetExact.originalWilsonMixedJetIsSameFiniteCovariance`; the remaining hard meaning is its `sourceResponseIsActualOriginalWilsonJet`, plus original analytic domain and physical geometric envelope.
+
+D1 **cannot be closed** by taking CMP116's small-field differentiated localization as the original full Wilson connected-covariance theorem without a valid full-measure weld. Neither this source audit nor a conditional algebraic compiler is a proof of the missing four-dimensional nonlinear RG analytic estimates.
+
+---
+
 ## 7 November — final safety cuts: genuine selected epsilon--N convergence; geometric physical D1
 
 **E1 genuine topology:** `YMClayE1OriginalSUNFiniteCylinderLawsExact.PhysicalRealConverges` now means an actual epsilon--N estimate, **not** equality to an arbitrary selected `limit : (Nat -> Real) -> Real`:
