@@ -24,6 +24,7 @@ import DASHI.Mathematics.Complexity.ConcreteTapeFixedDimensionDecodeExact as Dec
 import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact as Endcap
+import DASHI.Mathematics.Complexity.ConcreteTapeGlobalTracePlacementExact as Global
 import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as Guarded
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
 import DASHI.Mathematics.Complexity.ConcreteTapeCookLevinSizeClosedExact as Closed
@@ -51,8 +52,8 @@ localEndcapTruthTableBound machine =
 
 onePhysicalCellCNFCount :
   ∀ {machine steps cols rowIndex colIndex}
-    (rowSlot : Endcap.Global.Slot rowIndex (suc steps))
-    (cellSlot : Endcap.Global.Slot colIndex cols) →
+    (rowSlot : Global.Slot rowIndex (suc steps))
+    (cellSlot : Global.Slot colIndex cols) →
   Size.listLength
     (Endcap.globalRowCellPlainCNF rowSlot cellSlot)
   ≡ localEndcapClauseCount machine
@@ -64,18 +65,18 @@ onePhysicalCellCNFCount rowSlot cellSlot =
 oneRowEndcapsCNFCount :
   ∀ {machine steps rowIndex}
     (colsMinusOne : Nat)
-    (rowSlot : Endcap.Global.Slot rowIndex (suc steps)) →
+    (rowSlot : Global.Slot rowIndex (suc steps)) →
   Size.listLength
     (Endcap.globalRowEndcapsCNF colsMinusOne rowSlot)
   ≡ twoEndcapsPerRow machine
 oneRowEndcapsCNFCount colsMinusOne rowSlot =
   trans
     (Closed.appendLength
-      (Endcap.globalRowCellPlainCNF rowSlot Endcap.Global.here)
+      (Endcap.globalRowCellPlainCNF rowSlot Global.here)
       (Endcap.globalRowCellPlainCNF rowSlot
         (Endcap.lastPhysicalColumn colsMinusOne)))
     (cong₂ _+_
-      (onePhysicalCellCNFCount rowSlot Endcap.Global.here)
+      (onePhysicalCellCNFCount rowSlot Global.here)
       (onePhysicalCellCNFCount rowSlot
         (Endcap.lastPhysicalColumn colsMinusOne)))
 
