@@ -28,10 +28,10 @@ module DASHI.Foundations.BishopNegativeLogExpFormalRecurrenceUniquenessExact whe
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans; cong)
+open import Relation.Binary.PropositionalEquality using (trans; cong; sym)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; _/_; _*_; _-_)
-import Data.Rational.Tactic.RingSolver as ℚRing
+import Data.Rational.Properties as ℚP
 
 zeroQ oneQ minusOneQ : ℚ
 zeroQ = + 0 / 1
@@ -63,8 +63,14 @@ canonicalSolvedRecurrence = record
   { constantOne = refl
   ; linearMinusOne = refl
   ; solvedRecurrence = λ
-      { zero → ℚRing.solve-∀
-      ; (suc n) → ℚRing.solve-∀
+      { zero →
+          sym
+            (trans
+              (cong (λ q → q * minusOneQ)
+                (ℚP.0/n≡0 (suc (suc zero))))
+              (ℚP.*-zeroˡ minusOneQ))
+      ; (suc n) →
+          sym (ℚP.*-zeroʳ (successorFactor (suc n)))
       }
   }
 
@@ -76,14 +82,17 @@ tailCoefficientsZero :
 tailCoefficientsZero a evidence zero =
   trans
     (solvedRecurrence evidence zero)
-    ℚRing.solve-∀
+    (trans
+      (cong (λ q → q * a (suc zero))
+        (ℚP.0/n≡0 (suc (suc zero))))
+      (ℚP.*-zeroˡ (a (suc zero))))
 tailCoefficientsZero a evidence (suc n) =
   trans
     (solvedRecurrence evidence (suc n))
     (trans
       (cong (λ q → successorFactor (suc n) * q)
         (tailCoefficientsZero a evidence n))
-      ℚRing.solve-∀)
+      (ℚP.*-zeroʳ (successorFactor (suc n))))
 
 allFormalCoefficientsCanonical :
   (a : Nat → ℚ) →
