@@ -27,6 +27,7 @@ module DASHI.Analysis.BishopOriginalExponentialSequentialContinuityExact where
 
 open import Agda.Builtin.Nat using (Nat; suc; _*_)
 open import Data.Integer.Base using (+_)
+import Data.Nat.Base as N using (NonZero)
 open import Data.Rational.Unnormalised using (_/_)
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 
@@ -98,7 +99,7 @@ originalBishopExpSequentiallyContinuous
   let
     bound = R._⊔_ sequenceBound (R.∣ limit ∣)
 
-    pointBounded : (n : Nat) → .{{_ : S.NonZero n}} →
+    pointBounded : (n : Nat) → .{{_ : N.NonZero n}} →
       R._≤_ (R.∣ input n ∣) bound
     pointBounded n =
       RP.≤-trans
