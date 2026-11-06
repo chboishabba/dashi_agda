@@ -37,6 +37,7 @@ import DASHI.Physics.Foundations.TSVFOriginalForwardCyclicCrossGramExact
   as Cyclic
 import DASHI.Physics.Foundations.TSVFOriginalR445ReflectedAllWordGramExact
   as Native
+import DASHI.Physics.YangMills.YMClaySUNR445BlockedPushforwardR320CovarianceExact as R445
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
@@ -121,12 +122,9 @@ module _
           (Forward.originalForwardFunctional E laws
             (cylinderOperator cylinder))
         ≡
-        Native.nativeR445ReflectedWordGram
-          theory traceData exponential betaFine oneLink bilateral divide
-          (λ observable → λ coarse → observable coarse)
-          [] []
-        -- This source-facing equality is specialized correctly
-        -- in the next version using actualPushedCoarseExpectation.
+        R445.actualPushedCoarseExpectation
+          theory traceData exponential betaFine
+          oneLink bilateral divide cylinder
 
       -- M2: actual operator adjoint/composition matches the
       -- positive-time OS reflection applied to physical cylinders.
@@ -138,5 +136,89 @@ module _
           (operatorAdjoint (cylinderOperator (coarseWord left)))
           (cylinderOperator (coarseWord right))
 
--- DO NOT IMPORT: this draft is repaired in the next revision to
--- consume the literal original normalized pushed measure on M1.
+
+  open OriginalSameSourceMeasurement public
+
+  originalMeasuredObserverCrossWordGram :
+    (source : OriginalSameSourceMeasurement)
+    (reflection : Observable → Observable)
+    (left right : Word) → ℝ
+  originalMeasuredObserverCrossWordGram
+      source reflection left right =
+    readOriginalScalarAsReal
+      (Cyclic.originalObserverCrossGram E laws
+        (cylinderOperator source (coarseWord left))
+        (cylinderOperator source (coarseWord right)))
+
+  -- No all-pairs Gram matching is a field: it is derived from
+  -- single-observable Born/Wilson equality M1 and the operational
+  -- adjoint/reflection word law M2, both on SAME selected source.
+  originalMeasuredAllWordCrossGramEqualsNativeR445 :
+    (source : OriginalSameSourceMeasurement)
+    (reflection : Observable → Observable)
+    (left right : Word) →
+    originalMeasuredObserverCrossWordGram
+      source reflection left right
+    ≡ actualNativeR445WordGram reflection left right
+  originalMeasuredAllWordCrossGramEqualsNativeR445
+      source reflection left right =
+    trans
+      (cong
+        (λ op →
+          readOriginalScalarAsReal
+            (Forward.originalForwardFunctional E laws op))
+        (sym
+          (wordOperatorStarIsSelectedReflection
+            source reflection left right)))
+      (sameSourceCylinderReadout source
+        (reflectedWord reflection left right))
+
+  -- The actual original 1024-link fine Wilson-Gibbs measure is
+  -- recovered too, by the SAME native block pushforward theorem.
+  originalMeasuredAllWordCrossGramEqualsFineWilson :
+    (source : OriginalSameSourceMeasurement)
+    (reflection : Observable → Observable)
+    (left right : Word) →
+    originalMeasuredObserverCrossWordGram
+      source reflection left right
+    ≡ originalFineWilsonWordGram reflection left right
+  originalMeasuredAllWordCrossGramEqualsFineWilson
+      source reflection left right =
+    trans
+      (originalMeasuredAllWordCrossGramEqualsNativeR445
+        source reflection left right)
+      (sym
+        (Native.actualNativeR445AllReflectedWordGrams
+          theory traceData exponential betaFine
+          oneLink bilateral divide reflection left right))
+
+  -- The original operator-state cyclic vectors themselves (not a
+  -- parallel abstract Gram) have the same native word-pair Gram.
+  originalSelectedCyclicKetAllWordGramEqualsNativeR445 :
+    (source : OriginalSameSourceMeasurement)
+    (reflection : Observable → Observable)
+    (left right : Word) →
+    readOriginalScalarAsReal
+      (Cyclic.originalSelectedCyclicPair E laws
+        (cylinderOperator source (coarseWord left))
+        (cylinderOperator source (coarseWord right)))
+    ≡ actualNativeR445WordGram reflection left right
+  originalSelectedCyclicKetAllWordGramEqualsNativeR445
+      source reflection left right =
+    trans
+      (cong readOriginalScalarAsReal
+        (sym
+          (Cyclic.originalCyclicCrossGramIsActualOperatorPair
+            E laws
+            (cylinderOperator source (coarseWord left))
+            (cylinderOperator source (coarseWord right)))))
+      (originalMeasuredAllWordCrossGramEqualsNativeR445
+        source reflection left right)
+
+-- Two physical same-source producer obligations are now isolated:
+-- (M1) one-cylinder original observer readout = original native
+--      Wilson-Gibbs expectation, and (M2) original observer * on
+--      compiled words = Wilson positive-time reflection product.
+-- These are not proved by the abstract QuantumSurface. Nor does
+-- this file construct a continuum OS space, observer GNS completion,
+-- Stone Hamiltonian, KK metric or original Kubo propagation.
