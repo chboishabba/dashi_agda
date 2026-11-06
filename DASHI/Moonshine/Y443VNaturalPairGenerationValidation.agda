@@ -45,3 +45,11 @@ y443WrittenLengthIsFourSixtyThree :
 y443WrittenLengthIsFourSixtyThree = Y443.monsterWrittenLength
 
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as NodeRecovery
+
+import DASHI.Moonshine.Y443JMDThreePathFiniteRewriteExact as ElevenFinite
+import DASHI.Moonshine.Y443JMDPathShiftSemanticCompilerExact as ElevenSemantics
+import DASHI.Moonshine.Y443AllCoxeterGraphLawsFrom80Exact as FullGraphSource
+import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as PresentedGeneration
+import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as AllTwelve
+import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as PresentedCapstone
+import DASHI.Moonshine.Y443MonsterGradedLiteralSameObjectCapstoneExact as ActualVnatural
