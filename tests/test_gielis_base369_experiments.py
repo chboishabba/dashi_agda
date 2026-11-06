@@ -243,3 +243,17 @@ def test_symbolic_gielis_certificates_if_sympy_available():
     assert receipt["wall_ray_angular_impulse_balance"]
     assert not receipt["agda_kernel_accepted"]
     assert not receipt["physical_optics_validated"]
+
+
+def test_exact_agda_tables_source_audit():
+    spec = importlib.util.spec_from_file_location(
+        "gielis_base369_source_audit",
+        ROOT / "scripts/gielis_base369_source_audit.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    receipt=module.source_audit(ROOT)
+    assert receipt["finite_checks"] == 648
+    assert receipt["complete_18_case_theorems"] == 19
+    assert receipt["gram_369"] == [[36,0,0],[0,36,0],[0,0,72]]
+    assert not receipt["agda_kernel_accepted"]
