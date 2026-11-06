@@ -1,3 +1,11 @@
+## HIL01/HIL07 full algebra noncommutativity scope: exact negative theorem (7 Nov)
+
+`TSVFOriginalCylinderFullAlgebraCommutativityNoGoExact.agda` is a **safe** theorem on the original M2a algebraic shape. Any `compile` preserving products from a commutative cylinder algebra into operator composition necessarily has commuting images (`originalCylinderImagesAlwaysCommute`). Any pair of noncommuting operators in that image refutes the global M2a premise (`aNoncommutingPairInTheImageIsImpossible`). If the cylinder image is falsely asserted onto the *whole* operator algebra via a selected right inverse, `noFullNoncommutativeOntoCylinderOperatorRepresentation` forces all operators to commute. This is an exact algebraic falsifier, not a chosen physical QFT.
+
+**Required HIL01/HIL07 repair:** M2a must be explicitly scoped to the appropriate commutative Wilson/gauge-invariant cylinder sector, and full noncommutative observer star algebra must be separately generated/represented and completed with justified density/continuity. The finite HIL08 Gram lemmas remain valid for their selected cylinder input, but do not entail a full onto operator-algebra equivalence. Original selected reflection M2b remains one physical map (see arbitrary-reflection-collapse no-go), not a universally arbitrary map.
+
+The new safe falsifier is imported into the golden unified regression and listed in `run_tsfv_unification_maxcut_20261106.sh` for exact-head `parallel_checker`; source-written only, no kernel receipt or continuum physical input.
+
 # #1460 — four physical maximum cuts: exact producer lemmas (6 November 2026)
 
 **Authority:** These 40 named *proposed producer theorems* are NOT additional canonical P lemma IDs and are NOT new Agda proof receipts. They are a focused concrete implementation/dependency contract for the existing 186 original P00–P11 statements and 48 execution deliverables. The original Yang–Mills OS producer and CMP116/PCUBE proof remain solely in #1444.
