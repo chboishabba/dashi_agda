@@ -45,7 +45,7 @@ import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact
   as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact
   as Exp
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
+open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 
 module _
   {Q : TSVF.QuantumSurface}
@@ -126,18 +126,47 @@ module _
           theory traceData exponential betaFine
           oneLink bilateral divide cylinder
 
-      -- M2: actual operator adjoint/composition matches the
-      -- positive-time OS reflection applied to physical cylinders.
-      wordOperatorStarIsSelectedReflection :
-        ∀ reflection left right →
-        cylinderOperator (reflectedWord reflection left right)
+      -- M2a: the actual physical cylinder insertion preserves
+      -- pointwise multiplication and original operator composition.
+      originalCylinderProductIsOperatorComposition :
+        ∀ left right →
+        cylinderOperator (λ coarse → left coarse *ℝ right coarse)
         ≡
-        operatorCompose
-          (operatorAdjoint (cylinderOperator (coarseWord left)))
-          (cylinderOperator (coarseWord right))
+        operatorCompose (cylinderOperator left)
+          (cylinderOperator right)
 
+      -- M2b: the physical selected reflection IS original adjoint
+      -- on a single admissible cylinder, not an all-word Gram axiom.
+      originalCylinderReflectionIsOperatorAdjoint :
+        ∀ reflection cylinder →
+        cylinderOperator (reflection cylinder)
+        ≡ operatorAdjoint (cylinderOperator cylinder)
 
   open OriginalSameSourceMeasurement public
+
+  -- Every ordered word-pair star/reflection law now follows from
+  -- two locally source-testable product and adjoint laws.
+  originalAllWordReflectedProductIsObserverStar :
+    (source : OriginalSameSourceMeasurement)
+    (reflection : Observable → Observable)
+    (left right : Word) →
+    cylinderOperator source
+      (reflectedWord reflection left right)
+    ≡
+    operatorCompose
+      (operatorAdjoint (cylinderOperator source (coarseWord left)))
+      (cylinderOperator source (coarseWord right))
+  originalAllWordReflectedProductIsObserverStar
+      source reflection left right =
+    trans
+      (originalCylinderProductIsOperatorComposition source
+        (reflection (coarseWord left)) (coarseWord right))
+      (cong
+        (λ op →
+          operatorCompose op
+            (cylinderOperator source (coarseWord right)))
+        (originalCylinderReflectionIsOperatorAdjoint
+          source reflection (coarseWord left)))
 
   originalMeasuredObserverCrossWordGram :
     (source : OriginalSameSourceMeasurement)
@@ -152,7 +181,7 @@ module _
 
   -- No all-pairs Gram matching is a field: it is derived from
   -- single-observable Born/Wilson equality M1 and the operational
-  -- adjoint/reflection word law M2, both on SAME selected source.
+  -- two source-local product and adjoint laws M2a/M2b, both on SAME selected source.
   originalMeasuredAllWordCrossGramEqualsNativeR445 :
     (source : OriginalSameSourceMeasurement)
     (reflection : Observable → Observable)
@@ -168,7 +197,7 @@ module _
           readOriginalScalarAsReal
             (Forward.originalForwardFunctional E laws op))
         (sym
-          (wordOperatorStarIsSelectedReflection
+          (originalAllWordReflectedProductIsObserverStar
             source reflection left right)))
       (sameSourceCylinderReadout source
         (reflectedWord reflection left right))
