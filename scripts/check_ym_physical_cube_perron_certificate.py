@@ -53,6 +53,14 @@ def validate(data, require_physical=False):
                 raise ValueError(f"physical source missing: {key}")
         if data.get("illustrative", True):
             raise ValueError("illustrative certificate cannot pass physical admission")
+        # A string-valued receipt is NOT a proof of the conditional
+        # coefficient for continuous SU(N) Wilson Gibbs.  This utility
+        # cannot independently verify Agda or measure-theoretic authority:
+        # refuse physical admission even when metadata is filled in.
+        raise ValueError(
+            "PHYSICAL_ADMISSION_UNAVAILABLE: need externally verified "
+            "Agda/source proof that C bounds the selected Wilson "
+            "conditionals uniformly for all cutoff/volume")
     weighted = [sum(c*w for c,w in zip(row,weights)) for row in matrix]
     ratios = [a/w for a,w in zip(weighted, weights)]
     for i,ratio in enumerate(ratios):
