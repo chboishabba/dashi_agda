@@ -1,3 +1,19 @@
+
+
+### Native original finite-source implementation (6 November follow-on)
+
+`DASHI/Physics/YangMills/YMClayOriginalWilsonAffineMarkedPartitionExact.agda` now defines the *actual unnormalized* variable-cutoff original SU(N) Wilson product-Haar marked source, not an independently supplied response oracle, and source-writes:
+
+[
+Z^{\mathrm{aff}}_{n}(s,t)
+=\int \rho_n(U)(1+sF(U))(1+tG(U))\,dH_n(U)
+= Z_n+sN_n(F)+tN_n(G)+stN_n(FG).
+]
+
+The source terms `originalAffinePartitionIsExactNumeratorPolynomial` and `originalNormalizedAffineIsLiteralMomentPolynomial` derive the corresponding unnormalized and normalized polynomial equalities from the pre-existing actual original product-Haar integration laws and real-division algebra. Thus, where the selected real division has its **standard positive-denominator field laws**, the actual finite normalized source has coefficients (1,E_nF,E_nG,E_n(FG)). The already existing normalized-cumulant proof then derives (\partial_s\partial_t\log Z(0,0)=\mathrm{Cov}_{\mu_n}(F,G)). For a bounded *exponential* marked source the same Taylor coefficients follow by the finite compact-Haar dominated-convergence proof already given above. No fresh source-independent calculus or "finite derivative mystery" is required.
+
+This is not the full CMP116 *localized renormalized* source application: CMP119/122's E/R/B/V/ghost/background effective density, exact selected polymer root/support, uniform marked localization, physical-rate calibration, RG crossing positivity and continuum/OS limit still require the source-specific proofs. Source-written Agda is not a green kernel receipt.
+
 # R320 bounded marked-source theorem — 6 November 2026
 
 **Scope:** rigorous finite continuous-SU(N) Wilson–Gibbs mathematics for two bounded plaquette marks. No Agda kernel receipt, CMP116 rooted-shell estimate, UV/IR limit, OS gap or Clay theorem is asserted.
