@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E11), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E21), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -29,6 +29,10 @@ deformation*, not a claim of a Gielis-law solution or a Tesla 369 law.
 | Nyquist / resolution / aliasing | `DASHI/Cognition/PNF/SemanticSamplingLookupGeometry.agda`; `DASHI/Physics/Closure/Gate3PrunedUnionDensityReceipt.agda` | maintain distinction between sampling theorem and resolution analogy |
 | Shannon information and codes | `DASHI/Biology/Levin/ShannonInformationEntropyBoundary.agda`, `PrefixFreeCodingBoundary.agda` | no Shannon optimality without probability/code witness |
 | Kolmogorov/MDL | `DASHI/Foundations/Base369EngineeringMDL.agda`; `DASHI/Core/MultiscaleMDL.agda` | operational code-length/costs, not claimed true universal K |
+| Exact SI dimensions and metrology | `DASHI/Physics/Units/SI.agda`; `SIMetrologyBridge.agda`; `MechanicalDimensionExact.agda`; `YangMillsSIScalingEndpointExact.agda` | typed W, N, N m, J, angular impulse; nominal roles and SI authority separate |
+| Exact SI c carrier | `DASHI/Promotion/SIExactConstantParsedCarrierRequest.agda` | canonical c=299792458 m/s; no duplicate untyped numerical literal |
+| Perron/finite nonnegative matrices | `DASHI/Physics/YangMills/BalabanFiniteInfluenceRowMassPowerExact.agda`, `BalabanFiniteWeightedInfluencePowerExact.agda`, `BalabanClayUniformPerronContractionExact.agda` | reuse finite row/power bounds, cone uniformity; E17 rational positive-vector spectral certificate remains specific |
+| Collatz naming boundary | `DASHI/Core/FiniteTypedBranchingKernelExact.agda` plus Collatz/Syracuse dynamics owners | do not confuse Collatz iteration with Collatz–Wielandt; full generic spectral radius theorem not represented as verified here |
 | Log-polar/exponential spiral | `DASHI/Cognition/AnalyticLogPolarSpiralCompilerExact.agda`, `DASHI/Analysis/ConstructiveRealSpine.agda` | reuse the actual log/exp construction |
 | Concrete Bishop trig | `DASHI/Analysis/BishopConcreteTrigAnalyticTermDerivativeExact.agda` and Bishop sine/cosine sources | same-object native trig, no terminal singleton replacement |
 | Geometric SOTA baseline | Gielis shape/PDE literature plus freeform optics | compare against non-369 m, splines, splines/ellipses/other reflectors |
@@ -72,16 +76,16 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 operator/compact resolvent proof; E15 Rayleigh bound PASS; native Agda OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 certified angular-sector continuum domain convergence; E17 exact rational bracket for original raster FD first eigenvalue (41/61 grids); FD-to-continuum theorem OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E14 continuum sector-boundary convergence + E17 exact rational original raster first-eigenvalue bounds; Perron finite row/power owner REUSED, native full Collatz–Wielandt/FD-continuum identification OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | Existing PR #1404 RayLedger reused; wall angular momentum conservation and exact E19 ideal P,R,eta,B bound; independent measured source+material calibration OPEN |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | Non369 m4/5/7 controls, paired IID source Hoeffding intervals and dual Pareto interpretation source-written; physical measured CI and same-apparatus Pareto OPEN |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E20 native SI dimension/nominal-role/c registry bridge SOURCE (power/speed×radius = N m); E19 exact rational radiation-pressure envelope and original SO3/RayLedger reused; real measured transfer OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E20 SI.Measurement supports uncertainty/source/version; E19 paired simulation contrasts SOURCE; measured SI quantities/physical-source calibration OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06/E13 exact 7-mode Fourier theorem/pass; native sampling owner OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Exact-rational source audit and local spectral/Fourier tests; pinned PR1404 importer available; exact HEAD Agda/Python full receipt and HTML event replay OPEN |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | Exact SI constant source adapter + owner-audit/checker SOURCE; branch kernel acceptance and independently measured metrology beyond this cut |
 
 ## Critical dependencies / max-cut
 
@@ -273,3 +277,76 @@ authoring environment**.
 Once this command passes, mark **G13b reference-wall parity**
 accepted. Do *not* promote G13c original HTML SDF or its
 132-ray actual collision export without that separate evidence.
+
+
+## Current narrow max-cut: already existing SI + Perron donors (2026-11-06)
+
+**User scope change:** CI and historical HTML SDF replay are **DEFERRED
+from this round's active work**, not deleted from the research record.
+Work now prioritises direct native type transport and exact numerical
+mathematics rather than new test infrastructure.
+
+### Native owners consumed and concrete implementation
+
+- `DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda` (NEW)
+  imports `SI`, `SIMetrologyBridge`, `MechanicalDimensionExact`,
+  `YangMillsSIScalingEndpointExact`,
+  `SIExactConstantParsedCarrierRequest`,
+  `BalabanFiniteInfluenceRowMassPowerExact`, and the
+  original R³ Hodge/SO3 torque owners.
+- `speedOfLightIsExactSIInteger`: uses the existing canonical SI
+  speed-of-light integer carrier, not another floating constant.
+- `torqueFromPowerOverSpeedAndRadius` and
+  `mechanicalOpticalTorqueIsSI`: exact mechanical dimension algebra
+  \([P/c]R=M L^2T^{-2}\), derived on the existing M/L/T carrier and
+  transported to the SI dimension vector.
+- `RoleIndexedSIQuantity` and `OpticalMeasurement`: distinguish
+  *torque N m* from *energy J* at the nominal-role level despite
+  their equal SI dimensions, and retain the native uncertainty,
+  source, version and decimal scale fields.
+- `finiteInfluenceRowPowerBoundReuse`: direct application of
+  the already existing theorem on the actual finite nonnegative
+  matrix owner; no redundant finite-sum/distributive proof.
+- `scripts/gielis_si_owner_adapter.py`: source-verified exact c and
+  Power/Force/Energy exponent checks; both the existing Gielis
+  ray model and rational torque envelope obtain the same value.
+- All five Agda Gielis roots are now referenced by the existing
+  parallel checker invocation. Source-written is **not** kernel
+  acceptance.
+
+### The correct Perron/Frobenius/Collatz division of labour
+
+\[
+ A_{m,n}=h^{-2}(4I-B),\quad
+ \min_i\frac{4q_i-(Bq)_i}{h^2q_i}\le\lambda_1(A_{m,n})
+ \le\max_i\frac{4q_i-(Bq)_i}{h^2q_i}.
+\]
+
+The lower/upper endpoints use the existing finite nonnegative-matrix
+context and an exact *positive rational q*. They are already valid
+via the classical Perron–Frobenius/Collatz–Wielandt theorem.
+The *existing Agda sources found in the indexed repository* include
+row-power and cone-contraction proofs, but do **not** expose a
+kernel-accepted generic `CollatzWielandt` spectral-radius theorem.
+The Collatz/Syracuse dynamics files refer to another mathematical
+problem entirely. So this tranche **reuses** the real finite
+row/power owners and keeps the generic spectral theorem distinct
+from the exact-rational finite certificate; it neither invents
+a new PF library nor promotes a statement-only interface.
+
+### Exact remaining prioritized lemmas, excluding deferred CI/HTML
+
+| Cut | Original source and target | Exact unfinished acceptance |
+|---|---|---|
+| SI1 | GielisSIPerronOwnerWeldExact on SI/Mechanical | Agda kernel acceptance of nominal role, exact c, and M/L/T→SI equations |
+| SI2 | Native R³ Hodge and `RayLedger` | Same-source optical ray impulse × lever arm in selected typed magnitude and SI units, not merely dimension compatibility |
+| PF1 | E17 rational FD and existing Balaban row/power owner | Native finite *specific* raster adjacency/positive-vector/row bounds if original Agda eigen proof is required |
+| PF2 | Domain vs raster operators | Actual Cartesian FD-to-continuum error theorem; existing exact finite intervals do not prove convergence |
+| BISHOP | G02–G05/G08–G09 | Round11 same-object sine/cosine/π/sqrt, analytic integration and kernel proofs |
+| FOURIER | G07/G10/G19 | Native 36th-cyclotomic scalar and exact Fourier inversion with existing resolution owner |
+
+**Explicitly deferred:** CI workflow and original HTML browser/132-ray
+parity. The previously documented experimental calibration dependency
+is unchanged: SI dimension proofs are not measured newton-metres.
+
+**Proof details:** [E20–E21](GielisBase369ProofTheorems.md).
