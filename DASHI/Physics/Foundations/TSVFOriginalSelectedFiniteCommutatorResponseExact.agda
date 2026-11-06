@@ -61,19 +61,6 @@ module _
       (composeOperator laws a b)
       (composeOperator laws b a)
 
-  -- The precise original TSVF state pair, no parallel response source.
-  originalCommutatorAmplitudeIsOrderedResponse :
-    (laws : SelectedOperatorCommutatorLaws) (a b : Operator) →
-    originalSelectedAmplitudes (originalCommutator laws a b)
-      ≡ originalOrderedResponse laws a b
-  originalCommutatorAmplitudeIsOrderedResponse laws a b =
-    trans
-      (applySubtractPair laws
-        (composeOperator laws a b)
-        (composeOperator laws b a)
-        (TSVF.backwardState E) (TSVF.forwardState E))
-      (originalOrderedResponseBothCompositions laws a b)
-
   -- IMPORTANT: the complete left- and right-nested identity is stated
   -- separately below to expose both composition rewrites.
   originalOrderedResponseBothCompositions :
@@ -99,6 +86,20 @@ module _
             (apply a (apply b (TSVF.forwardState E)))))
         (cong (pair (TSVF.backwardState E))
           (applyComposition laws b a (TSVF.forwardState E))))
+
+  -- The precise original TSVF state pair, no parallel response source.
+  originalCommutatorAmplitudeIsOrderedResponse :
+    (laws : SelectedOperatorCommutatorLaws) (a b : Operator) →
+    originalSelectedAmplitudes (originalCommutator laws a b)
+      ≡ originalOrderedResponse laws a b
+  originalCommutatorAmplitudeIsOrderedResponse laws a b =
+    trans
+      (applySubtractPair laws
+        (composeOperator laws a b)
+        (composeOperator laws b a)
+        (TSVF.backwardState E) (TSVF.forwardState E))
+      (originalOrderedResponseBothCompositions laws a b)
+
 
 -- S01–S04 physical obligations remain:
 -- * original physical measurement functional (postselected weak
