@@ -6,6 +6,8 @@
 
 **Dependency schedule:** OBS01–OBS06 + HIL01–HIL05 in parallel from the actual micro source; OBS07–OBS09 to physically measure (3,1); KK01–KK08 from that observed g4; HIL06–HIL11 only after #1444 supplies its real OS construction; BIDI01–BIDI08 close the measured commuting limits, kernel, falsification.
 
+**New HIL06/HIL07 selected native published RP compiler:** `TSVFOriginalR445PublishedWilsonRPWordWeldExact.agda` reuses the repository's Osterwalder–Seiler/Menotti–Pelissetto `BalabanClayOSWilsonReflectionPositivityExact.wilsonPositivityAtAnySeparationParity`; for every *admissible gauge-invariant positive-time finite word* it transports the published nonnegative reflected expectation through an explicit **same-original-Wilson-source equality**, then through `TSVFOriginalR445ReflectedAllWordGramExact.originalFineOSPositiveTransfersToNativeR445` onto the actual R445 coarse positive word form. It does NOT prove the physically missing source equality, fine reflection/block geometry, continuum OS or observer Hilbert identification. This is a new non-safe physical regression proof, checked through `parallel_checker` as a candidate; no Agda/kernel receipt yet.
+
 ## Exact 40-producer physical acceptance ledger — audited 6 November 2026
 
 **Inventory:** 10 OBS + 12 HIL + 10 KK + 8 BIDI = **40 named** producer obligations. These are **not** the independent **48** phased execution tasks or the **186** canonical Agda P00–P11 lemma IDs. Every numbered name below already appears with its canonical ID mapping in the original full tables. `scripts/check_tsfv_40_physical_producer_inventory_20261106.py` now checks exact presence, uniqueness, contiguous ID ranges, mappings and all three downstream roadmap/receipt surfaces.
