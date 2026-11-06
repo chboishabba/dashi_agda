@@ -32,3 +32,5 @@ import DASHI.Mathematics.Complexity.Karp21FinFreePairwiseQuadraticCountExact
 
 -- Original-word input-length polynomial endpoint-comparison certificate.
 import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21N21SameWordCountedAcceptanceExact
