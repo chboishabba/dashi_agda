@@ -103,11 +103,17 @@ module _
     FiniteSpan.finiteObserverGram
       0ℝ _+ℝ_ _*ℝ_ matchedActualWords
 
+  mapActualSpan : FiniteRealCyclicSpan → FiniteRealCyclicSpan
+  mapActualSpan =
+    FiniteSpan.mapCyclicSpan
+      0ℝ _+ℝ_ _*ℝ_ matchedActualWords
+
   literalNativeR445SpanPair :
     FiniteRealCyclicSpan → FiniteRealCyclicSpan → ℝ
-  literalNativeR445SpanPair =
+  literalNativeR445SpanPair left right =
     FiniteSpan.finiteOSGram
       0ℝ _+ℝ_ _*ℝ_ matchedActualWords
+      (mapActualSpan left) (mapActualSpan right)
 
   -- Full finite bilinear completion from the original M1/M2,
   -- for arbitrary pairs of real-weighted finite word combinations.
