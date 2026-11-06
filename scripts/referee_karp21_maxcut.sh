@@ -51,6 +51,7 @@ printf 'Mode: %s\n' "$mode"
 python3 scripts/check_karp21_reserved_formula_constructors.py
 # Guard against unsound old-locality -> new-unique-head promotion.
 python3 scripts/check_karp21_tape_boundary_ghost.py
+python3 scripts/check_karp21_tape_guarded_uniqueness_small.py
 python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
