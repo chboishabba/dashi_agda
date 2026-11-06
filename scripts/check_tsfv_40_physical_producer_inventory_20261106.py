@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fail-closed #1460 exact physical producer count and scope audit.
 
-40 names = 10 OBS + 12 HIL + 9 KK + 8 BIDI.
+40 names = 10 OBS + 12 HIL + 10 KK + 8 BIDI.
 These are producer obligations, NOT additional canonical lemmas and NOT
 the 48 independent phased execution tasks. The authoritative 186-ID
 checker remains scripts/check_tsfv_unification_48_phase_cut_20261106.py.
