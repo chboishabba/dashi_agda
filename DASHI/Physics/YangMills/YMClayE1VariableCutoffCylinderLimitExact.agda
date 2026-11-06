@@ -136,12 +136,17 @@ variableCutoffContinuumZero :
     (source : ActualVariableCutoffCylinderFamily
       Configuration Measure Observable Scalar realization laws) →
   continuumExpectation source (zeroObservable realization) ≡ zero laws
-variableCutoffContinuumZero {laws = laws} source =
-  convergenceUnique laws _
-    (continuumExpectation source (zeroObservable _))
+variableCutoffContinuumZero
+    {realization = realization} {laws = laws} source =
+  convergenceUnique laws
+    (λ n → finiteExpectation source n (zeroObservable realization))
+    (continuumExpectation source (zeroObservable realization))
     (zero laws)
-    (originalWilsonConverges source (zeroObservable _))
-    (convergenceCongruent laws _ _ _
+    (originalWilsonConverges source (zeroObservable realization))
+    (convergenceCongruent laws
+      (λ n → finiteExpectation source n (zeroObservable realization))
+      (λ n → zero laws)
+      (zero laws)
       (finiteZero source)
       (constantConverges laws (zero laws)))
 
@@ -150,12 +155,17 @@ variableCutoffContinuumNormalized :
     (source : ActualVariableCutoffCylinderFamily
       Configuration Measure Observable Scalar realization laws) →
   continuumExpectation source (oneObservable realization) ≡ one laws
-variableCutoffContinuumNormalized {laws = laws} source =
-  convergenceUnique laws _
-    (continuumExpectation source (oneObservable _))
+variableCutoffContinuumNormalized
+    {realization = realization} {laws = laws} source =
+  convergenceUnique laws
+    (λ n → finiteExpectation source n (oneObservable realization))
+    (continuumExpectation source (oneObservable realization))
     (one laws)
-    (originalWilsonConverges source (oneObservable _))
-    (convergenceCongruent laws _ _ _
+    (originalWilsonConverges source (oneObservable realization))
+    (convergenceCongruent laws
+      (λ n → finiteExpectation source n (oneObservable realization))
+      (λ n → one laws)
+      (one laws)
       (finiteOne source)
       (constantConverges laws (one laws)))
 
@@ -168,12 +178,30 @@ variableCutoffContinuumAdd :
     ≡ add laws
       (continuumExpectation source left)
       (continuumExpectation source right)
-variableCutoffContinuumAdd {laws = laws} source left right =
-  convergenceUnique laws _ _ _
-    (originalWilsonConverges source (addObservable _ left right))
-    (convergenceCongruent laws _ _ _
-      (finiteAdd source _ left right)
-      (addConverges laws _ _ _ _
+variableCutoffContinuumAdd
+    {realization = realization} {laws = laws} source left right =
+  convergenceUnique laws
+    (λ n → finiteExpectation source n
+      (addObservable realization left right))
+    (continuumExpectation source (addObservable realization left right))
+    (add laws (continuumExpectation source left)
+      (continuumExpectation source right))
+    (originalWilsonConverges source
+      (addObservable realization left right))
+    (convergenceCongruent laws
+      (λ n → finiteExpectation source n
+        (addObservable realization left right))
+      (λ n → add laws
+        (finiteExpectation source n left)
+        (finiteExpectation source n right))
+      (add laws (continuumExpectation source left)
+        (continuumExpectation source right))
+      (λ n → finiteAdd source n left right)
+      (addConverges laws
+        (λ n → finiteExpectation source n left)
+        (λ n → finiteExpectation source n right)
+        (continuumExpectation source left)
+        (continuumExpectation source right)
         (originalWilsonConverges source left)
         (originalWilsonConverges source right)))
 
@@ -184,12 +212,26 @@ variableCutoffContinuumScale :
     scalar observable →
   continuumExpectation source (scalarObservable realization scalar observable)
     ≡ multiply laws scalar (continuumExpectation source observable)
-variableCutoffContinuumScale {laws = laws} source scalar observable =
-  convergenceUnique laws _ _ _
-    (originalWilsonConverges source (scalarObservable _ scalar observable))
-    (convergenceCongruent laws _ _ _
-      (finiteScale source _ scalar observable)
-      (multiplyConstantConverges laws scalar _ _
+variableCutoffContinuumScale
+    {realization = realization} {laws = laws} source scalar observable =
+  convergenceUnique laws
+    (λ n → finiteExpectation source n
+      (scalarObservable realization scalar observable))
+    (continuumExpectation source
+      (scalarObservable realization scalar observable))
+    (multiply laws scalar (continuumExpectation source observable))
+    (originalWilsonConverges source
+      (scalarObservable realization scalar observable))
+    (convergenceCongruent laws
+      (λ n → finiteExpectation source n
+        (scalarObservable realization scalar observable))
+      (λ n → multiply laws scalar
+        (finiteExpectation source n observable))
+      (multiply laws scalar (continuumExpectation source observable))
+      (λ n → finiteScale source n scalar observable)
+      (multiplyConstantConverges laws scalar
+        (λ n → finiteExpectation source n observable)
+        (continuumExpectation source observable)
         (originalWilsonConverges source observable)))
 
 variableCutoffContinuumPositive :
@@ -200,6 +242,8 @@ variableCutoffContinuumPositive :
   PositiveCylinder source observable →
   Nonnegative laws (continuumExpectation source observable)
 variableCutoffContinuumPositive {laws = laws} source observable positive =
-  nonnegativeClosed laws _ _
+  nonnegativeClosed laws
+    (λ n → finiteExpectation source n observable)
+    (continuumExpectation source observable)
     (originalWilsonConverges source observable)
     (λ n → finitePositive source n observable positive)
