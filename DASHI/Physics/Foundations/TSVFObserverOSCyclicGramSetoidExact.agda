@@ -1,35 +1,22 @@
 {-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.TSVFObserverOSCyclicGramSetoidExact where
 
--- HIL07/HIL08 algebraic maximum-cut precursor.
--- An honest cyclic Gram equality gives quotient well-definedness and
--- exact preservation of all observable-word pairings; it is stronger
--- than merely matching two-point centered covariance.
---
--- The pairings, positivity, completion, and cyclic density must come
--- from the original observer and independently reconstructed physical
--- OS state. No field here asserts an onto Hilbert unitary.
---
--- Mathematical object constructed: a map of Gram-null setoids on
--- the ACTUAL source word carriers, with an inverse when a word-level
--- inverse is explicitly exhibited. This avoids quotient choice and
--- does NOT pretend an Agda setoid is already a complete Hilbert space.
+-- HIL07/HIL08: exact Gram-observational quotient transport.
+-- The correct word quotient is indistinguishability against ALL tests,
+-- not merely vanishing of a single cross-pairing. For positive
+-- sesquilinear forms GNS null quotient requires additional physics.
+-- No Hilbert completion, OS cyclic density or source Gram equality is
+-- asserted as accomplished; equality is the explicit physical cut.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality
-  using (sym; trans; cong)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 record MatchedPhysicalCyclicWords
     (ObserverWord OSWord Scalar : Set) : Set₁ where
   field
-    zero : Scalar
     observerPair : ObserverWord → ObserverWord → Scalar
     osPair : OSWord → OSWord → Scalar
     wordToOS : ObserverWord → OSWord
-
-    -- HIL07 physical producer: ALL words, not merely linear
-    -- one/two-point jets. Must eventually be obtained from the
-    -- same original Wilson/TSVF state and reconstructed OS state.
     allWordGramMatches :
       (left right : ObserverWord) →
       observerPair left right
@@ -43,78 +30,95 @@ module _
       ObserverWord OSWord Scalar)
   where
 
-  ObserverNull : ObserverWord → ObserverWord → Set
-  ObserverNull left right =
-    observerPair matched left right ≡ zero matched
+  ObserverEquivalent : ObserverWord → ObserverWord → Set
+  ObserverEquivalent x y =
+    (test : ObserverWord) →
+    observerPair matched x test ≡ observerPair matched y test
 
-  OSNull : OSWord → OSWord → Set
-  OSNull left right =
-    osPair matched left right ≡ zero matched
+  OSEquivalent : OSWord → OSWord → Set
+  OSEquivalent x y =
+    (test : OSWord) →
+    osPair matched x test ≡ osPair matched y test
 
-  -- Immediate mathematical gain: the selected physical Gram equality
-  -- transports every null pair, so the cyclic map descends to the
-  -- null-identified quotient without choosing representatives.
-  originalGramNullMapsToOSNull :
-    (left right : ObserverWord) →
-    ObserverNull left right →
-    OSNull (wordToOS matched left) (wordToOS matched right)
-  originalGramNullMapsToOSNull left right evidence =
-    trans (sym (allWordGramMatches matched left right)) evidence
+  observerReflexive : (x : ObserverWord) → ObserverEquivalent x x
+  observerReflexive x test = refl
 
-  originalOSNullReflectsObserverNull :
-    (left right : ObserverWord) →
-    OSNull (wordToOS matched left) (wordToOS matched right) →
-    ObserverNull left right
-  originalOSNullReflectsObserverNull left right evidence =
-    trans (allWordGramMatches matched left right) evidence
+  observerSymmetric : (x y : ObserverWord) →
+    ObserverEquivalent x y → ObserverEquivalent y x
+  observerSymmetric x y proof test = sym (proof test)
 
-  originalNullEquivalence :
-    (left right : ObserverWord) →
-    ObserverNull left right →
-    OSNull (wordToOS matched left) (wordToOS matched right)
-  originalNullEquivalence = originalGramNullMapsToOSNull
+  observerTransitive : (x y z : ObserverWord) →
+    ObserverEquivalent x y → ObserverEquivalent y z →
+    ObserverEquivalent x z
+  observerTransitive x y z xy yz test =
+    trans (xy test) (yz test)
+
+  osReflexive : (x : OSWord) → OSEquivalent x x
+  osReflexive x test = refl
+
+  osSymmetric : (x y : OSWord) →
+    OSEquivalent x y → OSEquivalent y x
+  osSymmetric x y proof test = sym (proof test)
+
+  osTransitive : (x y z : OSWord) →
+    OSEquivalent x y → OSEquivalent y z →
+    OSEquivalent x z
+  osTransitive x y z xy yz test = trans (xy test) (yz test)
+
+  originalEquivalentPairsMatchEveryMappedOSTest :
+    (x y : ObserverWord) → ObserverEquivalent x y →
+    (test : ObserverWord) →
+    osPair matched (wordToOS matched x) (wordToOS matched test)
+    ≡ osPair matched (wordToOS matched y) (wordToOS matched test)
+  originalEquivalentPairsMatchEveryMappedOSTest x y proof test =
+    trans (sym (allWordGramMatches matched x test))
+      (trans (proof test) (allWordGramMatches matched y test))
+
+  originalOSEquivalenceReflectsObserver :
+    (x y : ObserverWord) →
+    OSEquivalent (wordToOS matched x) (wordToOS matched y) →
+    ObserverEquivalent x y
+  originalOSEquivalenceReflectsObserver x y proof test =
+    trans (allWordGramMatches matched x test)
+      (trans (proof (wordToOS matched test))
+        (sym (allWordGramMatches matched y test)))
 
   originalAllCyclicInnerProductsPreserved :
-    (left right : ObserverWord) →
-    observerPair matched left right
-    ≡ osPair matched (wordToOS matched left) (wordToOS matched right)
-  originalAllCyclicInnerProductsPreserved =
-    allWordGramMatches matched
+    (x y : ObserverWord) →
+    observerPair matched x y
+    ≡ osPair matched (wordToOS matched x) (wordToOS matched y)
+  originalAllCyclicInnerProductsPreserved = allWordGramMatches matched
 
-  -- A physical onto result cannot be inferred from an isometry.
-  -- If the original independent OS word carrier is explicitly
-  -- covered, the induced quotient has a two-sided inverse.
+  -- Word-level OS coverage is a separate physical input. It is
+  -- stronger than the Hilbert cyclic-density condition; eventually
+  -- prove a dense range and extend by norm-completion instead.
   module _
       (osWordToObserver : OSWord → ObserverWord)
       (rightInverse : (word : OSWord) →
         wordToOS matched (osWordToObserver word) ≡ word)
     where
 
-    originalOSWordCoverage :
+    originalEquivalencePreservedWithCoverage :
+      (x y : ObserverWord) →
+      ObserverEquivalent x y →
+      OSEquivalent (wordToOS matched x) (wordToOS matched y)
+    originalEquivalencePreservedWithCoverage x y proof test =
+      trans
+        (cong (osPair matched (wordToOS matched x))
+          (sym (rightInverse test)))
+        (trans
+          (originalEquivalentPairsMatchEveryMappedOSTest
+            x y proof (osWordToObserver test))
+          (cong (osPair matched (wordToOS matched y))
+            (rightInverse test)))
+
+    originalOSWordCovered :
       (word : OSWord) →
       wordToOS matched (osWordToObserver word) ≡ word
-    originalOSWordCoverage = rightInverse
+    originalOSWordCovered = rightInverse
 
-    originalOSNullPullback :
-      (left right : OSWord) →
-      OSNull left right →
-      ObserverNull (osWordToObserver left) (osWordToObserver right)
-    originalOSNullPullback left right evidence =
-      originalOSNullReflectsObserverNull
-        (osWordToObserver left) (osWordToObserver right)
-        (trans
-          (cong
-            (λ x → osPair matched x
-              (wordToOS matched (osWordToObserver right)))
-            (sym (rightInverse left)))
-          (trans
-            (cong (osPair matched left)
-              (sym (rightInverse right)))
-            evidence))
-
--- Physical interpretation of the remaining gap:
--- HIL01-05 require a positive sesquilinear observer functional,
--- a nonzero null quotient, its complex Hilbert completion and Stone.
--- HIL06-08 must prove allWordGramMatches from the *actual* same
--- Wilson/TSVF and OS sources, OS cyclic density and norm continuity.
--- HIL09-11 require real-time group/domain/spectrum/Wick semantics.
+-- HIL01-05 still require the actual positive sesquilinear observer
+-- state, nonzero quotient, complete complex Hilbert and Stone group.
+-- HIL06-08 must derive allWordGramMatches from original TSVF/Wilson
+-- and independent OS sources, plus a dense cyclic range. HIL09-11
+-- still require full generator, spectral and Wick identifications.
