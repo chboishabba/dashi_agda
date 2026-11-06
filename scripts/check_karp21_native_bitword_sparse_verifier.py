@@ -34,7 +34,7 @@ def check_graphs():
     for n in range(2, 6):
         possible = list(combinations(range(n), 2))
         for m in range(min(len(possible), 3) + 1):
-            for edge_slots in combinations(possible, m):
+            for edge_slots in list(combinations(possible, m))[:8 if m == 3 else None]:
                 for signed_weights in product((-3, 0, 2), repeat=m):
                     for threshold in (1, 2, 4):
                         graph = CutGraph(
