@@ -21,10 +21,17 @@ import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 zeroState : H.X6
 zeroState = H.x6 zer zer zer zer zer zer
 
+cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+cong f refl = refl
+
+negCannotEqualZero : neg ≡ zer → ⊥
+negCannotEqualZero ()
+
 axis0DoubleTranslationIsNotIdentity :
   H.translate H.axis0 (H.translate H.axis0 zeroState)
   ≡ zeroState → ⊥
-axis0DoubleTranslationIsNotIdentity ()
+axis0DoubleTranslationIsNotIdentity equality =
+  negCannotEqualZero (cong H.x0 equality)
 
 axis0TripleTranslationIsIdentity :
   H.translate H.axis0
