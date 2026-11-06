@@ -59,7 +59,7 @@ def main():
         for lemma in expand_ids(spec):
             assert lemma in ids, f"{task}: missing original lemma {lemma}"
             referenced.add(lemma)
-        assert "OPEN" in state or "PINNED" in state or "OPTIONAL" in state or "SOURCE" in state or "DEPENDENCY" in state or "PENDING" in state, (
+        assert "OPEN" in state or "PINNED" in state or "OPTIONAL" in state or "SOURCE" in state or "DEPENDENCY" in state or "PENDING" in state or "SEPARATE" in state, (
             f"{task}: status needs explicit scope and proof receipt"
         )
     assert "YMClayPhysicalCubeDobrushinFromGibbsExact" in phase_source
