@@ -59,6 +59,8 @@ def main():
         "TSVFOriginalForwardPositiveFunctionalExact",
         "TSVFOriginalQuantumSurfaceSpatialNonpromotionExact",
         "TSVFOriginalR445ReflectedAllWordGramExact",
+        "TSVFOriginalR445PublishedWilsonRPWordWeldExact",
+        "KK10",
         "YMClayOriginalWilsonNativeOSPullbackExact",
         "YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact",
         "HIL07", "KK08", "OBS05", "BIDI04",
