@@ -1,3 +1,9 @@
+## 2026-11-06 — YM original finite two-source max-cut
+
+- Added `YMClayOriginalWilsonFiniteTwoSourceJetExact.agda`: original variable-cutoff SU(N) Wilson density/partition anchoring, product-Haar finite integration laws, numerator additivity, explicit unit-normalization proof boundary and two literal formal-jet/connected-covariance equalities on one source.
+- Added `check_ym_original_wilson_two_source_jet_reference.py`: exact 19,683-case rational reference, relabeling and changed-measure negative controls; updated source-contract checker, TOE import and targeted CI.
+- Updated canonical CLAY4/Y.01–Y.04 roadmap, lemma ledger and constructive steelman with Y.FIN.01–04 and strict SOURCE_PENDING_AGDA/OPEN_PHYSICAL statuses. No claim of physical CMP116 localization or the Clay endpoint.
+
 
 ## 6 November — canonical R344 shared marked CMP116 half-rate direct weld
 
