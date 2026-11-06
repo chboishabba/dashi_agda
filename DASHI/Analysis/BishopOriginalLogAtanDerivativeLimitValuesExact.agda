@@ -26,6 +26,8 @@ import RealProperties as RP
 import Sequence as Seq
 
 import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geo
+import DASHI.Analysis.BishopFinitePowerSeriesSequentialContinuityExact as FiniteCont
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteDerivativeExact as LogFinite
 import DASHI.Analysis.BishopOriginalMachinAtanFiniteDerivativeExact as AtanFinite
 import DASHI.Analysis.BishopOriginalMachinAtanDerivativeGeometricWeldExact as AtanWeld
@@ -129,5 +131,152 @@ originalOneFifthAtanDerivativeSeriesConverges =
 
 originalOne239AtanDerivativeSeriesConverges =
   originalAtanFiniteDerivativeSeriesConverges
+    Atan.bishopOneTwoHundredThirtyNinth
+    Atan.bishopOneTwoHundredThirtyNinthInsideHalf
+
+------------------------------------------------------------------------
+-- EXACT INFINITE GEOMETRIC DERIVATIVE CANCELLATION.
+--
+-- This is the actual pinned-Bishop convergence of BOTH sides of
+-- (1-q) P_N(q) = 1-q^N. It is NOT a formal coefficient calculation.
+-- The limit is uniquely characterized by the original Sequence.lim
+-- used by the actual finite source log and atan derivative series.
+------------------------------------------------------------------------
+
+originalGeometricDerivativeLimitCancels :
+  (q : R.ℝ) →
+  (inside : R._<_ (R.∣ q ∣) R.1ℝ) →
+  R._≃_
+    (R._*_
+      (R._-_ R.1ℝ q)
+      (proj₁ (Seq.geometric-series-isConvergent inside)))
+    R.1ℝ
+originalGeometricDerivativeLimitCancels q inside =
+  let
+    factor = R._-_ R.1ℝ q
+    selectedLimit = proj₁ (Seq.geometric-series-isConvergent inside)
+
+    constantFactorConverges :
+      Seq._ConvergesTo_ (λ _ → factor) factor
+    constantFactorConverges =
+      FiniteCont.constantConverges factor
+
+    sourceDerivativePartialConverges :
+      Seq._ConvergesTo_
+        (λ n → Geo.geometricPartial q n)
+        selectedLimit
+    sourceDerivativePartialConverges =
+      originalLogFiniteDerivativeSeriesConverges q inside
+
+    finiteProductsConverge :
+      Seq._ConvergesTo_
+        (λ n → R._*_ factor (Geo.geometricPartial q n))
+        (R._*_ factor selectedLimit)
+    finiteProductsConverge =
+      Seq.xₙyₙ→x₀y₀
+        (factor , constantFactorConverges)
+        (selectedLimit , sourceDerivativePartialConverges)
+
+    telescopeSideConverges :
+      Seq._ConvergesTo_
+        (λ n → R._-_ R.1ℝ (R.pow q n))
+        (R._*_ factor selectedLimit)
+    telescopeSideConverges =
+      Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+        (λ {(suc n) →
+          Geo.geometricPolynomialTelescope q (suc n)})
+        (R._*_ factor selectedLimit , finiteProductsConverge)
+
+    powersConvergeZero :
+      Seq._ConvergesTo_
+        (λ n → R.pow q n)
+        R.0ℝ
+    powersConvergeZero = Seq.∣r∣<1⇒rⁿ→0 inside
+
+    oneMinusPowersConvergesOne :
+      Seq._ConvergesTo_
+        (λ n → R._-_ R.1ℝ (R.pow q n))
+        R.1ℝ
+    oneMinusPowersConvergesOne =
+      Seq.xₙ→x∧x≃y⇒xₙ→y
+        (Seq.xₙ+yₙ→x₀+y₀
+          (R.1ℝ , FiniteCont.constantConverges R.1ℝ)
+          (R.-_ R.0ℝ ,
+            Seq.-xₙ→-x₀ (R.0ℝ , powersConvergeZero)))
+        (let open RP.ℝ-Solver in
+         solve 0
+           (Κ 1ℚᵘ ⊕ (⊝ Κ 0ℚᵘ) ⊜ Κ 1ℚᵘ)
+           RP.≃-refl)
+  in
+  Seq.uniqueness-of-limits
+    telescopeSideConverges
+    oneMinusPowersConvergesOne
+
+-- This is the ORIGINAL source negative-log derivative partial limit:
+-- no newly selected inverse or derivative-value oracle.
+originalLogSourceDerivativeLimitIsReciprocal :
+  (x : R.ℝ) →
+  (inside : R._<_ (R.∣ x ∣) R.1ℝ) →
+  R._≃_
+    (R._*_
+      (R._-_ R.1ℝ x)
+      (proj₁ (Seq.geometric-series-isConvergent inside)))
+    R.1ℝ
+originalLogSourceDerivativeLimitIsReciprocal =
+  originalGeometricDerivativeLimitCancels
+
+-- The two original Machin points instantiate the same actual
+-- geometric derivative limit with q=-x*x; the factor is 1+x*x.
+originalAtanSourceDerivativeLimitIsReciprocal :
+  (x : R.ℝ) →
+  (insideHalf : R._≤_ (R.∣ x ∣) Half.bishopHalf) →
+  let q = R.-_ (R._*_ x x)
+      inside = nativeNegativeSquareInsideUnit x insideHalf
+  in
+  R._≃_
+    (R._*_
+      (R._+_ R.1ℝ (R._*_ x x))
+      (proj₁ (Seq.geometric-series-isConvergent inside)))
+    R.1ℝ
+originalAtanSourceDerivativeLimitIsReciprocal x insideHalf =
+  let
+    q = R.-_ (R._*_ x x)
+    inside = nativeNegativeSquareInsideUnit x insideHalf
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.*-cong
+      (solve 1
+        (λ y → Κ 1ℚᵘ ⊕ y ⊜ Κ 1ℚᵘ ⊖ (⊝ y))
+        RP.≃-refl (R._*_ x x))
+      RP.≃-refl)
+    (originalGeometricDerivativeLimitCancels q inside)
+
+originalOneFifthDerivativeLimitCancels :
+  let x = Atan.bishopOneFifth
+      inside = nativeNegativeSquareInsideUnit
+        x Atan.bishopOneFifthInsideHalf
+  in
+  R._≃_
+    (R._*_
+      (R._+_ R.1ℝ (R._*_ x x))
+      (proj₁ (Seq.geometric-series-isConvergent inside)))
+    R.1ℝ
+originalOneFifthDerivativeLimitCancels =
+  originalAtanSourceDerivativeLimitIsReciprocal
+    Atan.bishopOneFifth Atan.bishopOneFifthInsideHalf
+
+originalOne239DerivativeLimitCancels :
+  let x = Atan.bishopOneTwoHundredThirtyNinth
+      inside = nativeNegativeSquareInsideUnit
+        x Atan.bishopOneTwoHundredThirtyNinthInsideHalf
+  in
+  R._≃_
+    (R._*_
+      (R._+_ R.1ℝ (R._*_ x x))
+      (proj₁ (Seq.geometric-series-isConvergent inside)))
+    R.1ℝ
+originalOne239DerivativeLimitCancels =
+  originalAtanSourceDerivativeLimitIsReciprocal
     Atan.bishopOneTwoHundredThirtyNinth
     Atan.bishopOneTwoHundredThirtyNinthInsideHalf
