@@ -114,6 +114,23 @@ def free_fock_os():
             coeff=sp.Matrix(coeffs)
             assert float(sp.N((coeff.T*K*coeff)[0]))>=-1e-12
         assert K==v*v.T*hbar/(2*om)
+    # Exact source-independent OS negative control: an ordinarily
+    # positive Euclidean Fourier multiplier (p_E^2+m^2)^(-2) has a
+    # reflected covariance whose 2x2 determinant is NEGATIVE when
+    # the selected positive test times differ. Ordinary positivity
+    # is NOT reflection positivity.
+    E,t1,t2=sp.symbols("E t1 t2",positive=True)
+    def doubled_pole_kernel(z):
+        return sp.exp(-E*z)*(1+E*z)/(4*E**3)
+    reflected=sp.Matrix([
+        [doubled_pole_kernel(2*t1),doubled_pole_kernel(t1+t2)],
+        [doubled_pole_kernel(t1+t2),doubled_pole_kernel(2*t2)]
+    ])
+    expected_det=-sp.exp(-2*E*(t1+t2))*(t1-t2)**2/(16*E**4)
+    assert sp.simplify(reflected.det()-expected_det)==0
+    assert float(expected_det.subs({
+        E:2,t1:sp.Rational(1,3),t2:sp.Rational(2,3)
+    }))<0
     modes=np.array([float(sp.N(x)) for x in omegas])
     labels=list(product(range(5),repeat=3))
     energies=np.array([float(hbar)*np.dot(modes,n) for n in labels])
@@ -145,6 +162,7 @@ def free_fock_os():
         "real_time":"U(t)=exp(-itH/hbar)",
         "euclidean_time":"T(tau)=exp(-tau H/hbar)",
         "Gaussian_OS_two_point":"C_i(tau)=hbar*exp(-omega_i*abs(tau))/(2omega_i)",
+        "OS_negative_control":"double-pole covariance has negative two-time reflected determinant",
         "spectral_and_wick_samples":"PASS on 125-state dense-core truncation",
         "caveat":"full OS reconstruction uses external Gaussian Wick/Fock theorem; NOT original Yang-Mills OS source"
     }
