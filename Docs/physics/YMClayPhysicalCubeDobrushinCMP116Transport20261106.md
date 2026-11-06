@@ -1,3 +1,35 @@
+### Physical R445/R320: derivation of a uniform q from UV RG error budget
+
+**New** `YMClayPhysicalRGDriftToUniformInfluenceExact.agda`: defines `finiteRGDrift`, `SelectedPhysicalRGInfluenceBudget` and proofs `selectedRGInfluenceBelowFiniteDrift`, `selectedRGInfluenceUniformPhysicalUpper`, `selectedRGInfluenceUniformStrictMargin`. It implements exact induction for:
+
+```text
+kappa_0 <= q0
+kappa_(n+1) <= kappa_n + delta_n
+sum_(k<n) delta_k <= B  for ALL n
+q0+B < 1
+---------------------------------
+for ALL n: kappa_n <= q := q0+B < 1 .
+```
+
+`YMClayRGDriftOriginalGibbsInstantiationExact.agda` then *constructs* an indexed finite conditional family `Cube.OriginalPhysicalCubeConditionals` with common `q=q0+B` by proof transport through the preexisting rational normalized-row Dobrushin owner. No independent global q field is chosen in this constructor. Source is **AGDA_UNVERIFIED and PHYSICALLY_CONDITIONAL**.
+
+The exact original physical obligation now decomposes into three non-interchangeable proofs:
+1. `UV.P01`: selected actual full SU(N) Wilson (continuous Borel Haar) Gibbs pushforward and regular conditionals on the SAME original chosen physical cube. **Current rational finite-fibre record does not itself encode equality to the original continuous measure.** Build a genuine physical measure-to-conditional kernel weld or a valid approximation with cutoff-uniform TV error.
+2. `UV.P02`: bound `kappa_0<=q0` for that physical source at reference fixed physical `ell`; establish `kappa_(n+1)<=kappa_n+delta_n` on the SAME conditional family for every cutoff and volume. A β(a) bare-link perturbation that grows cannot silently inhabit this premise.
+3. `UV.P03`: derive `sum_(k<n)delta_k<=B` uniformly in n (and L), e.g. a source-proved geometric-polymer envelope `delta_k<=A theta^k` with `0<=theta<1` gives `B=A/(1-theta)`; check strict `q0+B<1`.
+
+**Exact rational independent fixture (NOT the Wilson source):** `q0=1/3`, `A=1/12`, `theta=1/2`, so `B=1/6`, `q=1/2`. `scripts/check_ym_rg_drift_budget_reference.py` executed 128 exact Fraction refinements, exact geometric partial-sum equality and 5 negative controls PASS.  No source-Gibbs/OS interpretation or compiler receipt is inferred from this fixture.
+
+**Critical distinction:** `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact` constructs a selected original weighted *positive functional*, not a regular conditional probability or a density on a continuous measurable carrier. `YMClaySUNWeightedDisjointPairFibreReparamExact` supplies weighted finite fibre identities under one-link Haar algebraic prerequisites, not a full SU(N) Borel measure. `BalabanCMP116PublishedLiteralSelectedRound467Exact` provides the correct literal source ABI, but its `literalSelectedCMP116Localization` and `sourceEnvelopeBelowPhysicalClusteringEnvelope` are physical fields without constructed original-source witnesses.
+
+### OS and Clay endpoints (same source, NOT promotional bookkeeping)
+
+Even if UV.P01–03 establish actual conditional q at fixed physical `ell`, the inference `m >= -log(q)/ell` requires a **separate selected physical** local-support-to-OS-time bound, positive transfer semigroup, dense relevant local vectors, continuum limit, original same-`H` and no inaccessible sectors; these are in existing `BalabanCMP116PublishedLiteralToGapRound479Exact`, `BalabanClayT5ClusteringToTransferGapExact`, and `YangMillsDirectSourceOSSameHGapExact`. Nontrivial axiomatic 4D continuum for every compact simple G remains unproved. Do not claim Clay completion.
+
+**Verification in this tool environment:** no `agda`/Nix binary; no green associated PR-triggered workflow receipt. Python exact-reference and source/GitHub readback only. The deadline for `VERIFIED_AGDA` status is an actual pinned Agda return code, no metas and audited transitive authorities, not a GitHub PR link.
+
+---
+
 # YM #1444 — physical-cube Dobrushin × CMP116 × OS: constructive maximum-cut steelman (2026-11-06)
 
 **Target:** physical 4-dimensional nontrivial Yang–Mills with strictly positive spectral gap for prescribed compact simple groups. **Current status:** stronger quantitative *criterion and finite Gibbs compiler*, **NOT** a proof that its universal physical assumptions hold. This document supersedes the bare-link `18 tanh(12 beta)` as the priority strategy but does not deny that sufficient estimate. Golden proof owners remain the existing Agda sources, not this prose.
