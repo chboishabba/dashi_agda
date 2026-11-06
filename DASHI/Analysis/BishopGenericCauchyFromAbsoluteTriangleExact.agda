@@ -121,12 +121,13 @@ reverseFiniteWingBound :
     (R.∣ positiveWing left right count ∣)
 reverseFiniteWingBound left right count =
   RP.≤-respˡ-≃
-    (RP.≃-trans
-      (RP.∣-∣-cong
-        (subtractionReversal
-          (Row.trianglePartial left right count)
-          (Rect.rectangleSum left right count count)))
-      RP.∣-x∣≃∣x∣)
+    (RP.≃-symm
+      (RP.≃-trans
+        (RP.∣-∣-cong
+          (subtractionReversal
+            (Row.trianglePartial left right count)
+            (Rect.rectangleSum left right count count)))
+        RP.∣-x∣≃∣x∣))
     (RP.≤-trans
       (Wing.finiteCauchyWingAbsoluteBound left right count)
       (RP.x≤∣x∣ {x = positiveWing left right count}))
