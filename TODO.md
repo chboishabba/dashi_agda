@@ -1,3 +1,9 @@
+
+- [x] CLAY4.D2/D3 sharpened golden noncollapse ABI: rational RG charge *lower certificate* mapped to actual Bishop-real continuous cumulant via `selectedFiniteChargeLower`, `actualCumulantConverges`; no rational-continuum conflation.
+- [ ] CLAY4.D3 physical work: construct original source `selectedFiniteChargeLower` against the renormalized Wilson fourth derivative and its completed real weak limit, using existing T5/Bishop owner.
+
+---
+
 ## 2026-11-06 — YM #1444 constructive continuum / Clay steelman
 
 - [x] Write actual 4D same-original-Wilson constructive physical continuum conjecture with R443/R445/R320/R333/T5 proof owners, selected (a_n), (g_n), original Wilson Schwinger functional, expected OS (H), nontriviality, Ward/rotation and every compact simple (G): `Docs/physics/YMClayConstructive4DContinuumSteelman20261106.md`.
