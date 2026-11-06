@@ -136,3 +136,65 @@ A and B may be from overlapping inventors/programme but their run IDs, original 
 **Prioritised Pareto acquisition**: obtain ORIGINAL complete on/off video with frame-time data, synchronous measured B(t), dB/dt and field gradients, exact target/thread properties, vacuum/air-pressure log, input real power and coil-temperature record from *either* identified A or B rig; do not combine measurements from the two. Next ask for apparatus-specific response-vs-frequency, response-vs-polarity and response-vs-current/ramp-rate with open negative controls. Then independent test mass/free fall readout. No observational/gravitational promotion until empirical receipts actually exist.
 
 **Cross-domain note**: A scalar, electrodynamic or KK proposed action must deliver its own conserved source and selected stress/metric prediction under the same apparatus; an alternative action's numerical fit cannot promote a local force to universal negative-G or to a Pais-type propagating TT gravitational wave.
+
+## 6. Quantitative CI/sensitivity and existing-physical-consumer bridge (2026-11-06)
+
+**Revised source types, no authority inflation.** The Python source adapter `scripts/check_zhang2025_quantitative_consumers.py` and the `--safe` `Zhang2025EMGravityQuantitativeSourceExact.agda` owner distinguish: (i) approximate nominal input range, (ii) conditional waveform model, (iii) actual external published measurements with author-defined noise decision, (iv) instrument resolution, (v) calibrated same-apparatus paired outcomes. The new downstream weld `Zhang2025EMGravityPhysicalPromotionExact.ExternalNullScreen` transports (iii) and (iv) only into an **independent-regime sensitivity** consumer. Actual physical promotion still requires the EXISTING `ChinesePatentPhysicalComparison`, itself dependent on the original `ProvenancedComparativeAnomalyReceipt` for that exact claim. The compiler has no constructor from a sensitivity screen alone to the experimental receipt.
+
+### First-party 2025 Zhang/Xu toroid: observed input constraints, NOT a CI for motion
+
+Original 2025 journal article reports approximate gap (B\in[0.1,0.5]\,\mathrm T) at 50 Hz, 18 mm gap, 400 turns, ambient-pressure samples with published masses (mg): paper 50, leaf 125, pork skin 500, epoxy 1500, ceramic 1500, aluminium 2000; mass ratio 40×. It does NOT report per-sample calibrated ON/OFF accelerations, force/torque estimates, uncertainty, repeated trial-level outcomes or a measured (B(t)) map. Its 2025 SSRN descendant likewise names precise quantitative calibration and vacuum/shielding/scaling as future work. Thus **a numeric Zhang acceleration 95% CI cannot be inferred**.
+
+*Illustrative, explicitly assumed waveform*: if 0.1–0.5 T are **peak** amplitudes for a PURE sinusoid at exactly 50 Hz, then \(\max |\partial_tB|=2\pi f B_0 \in[31.416,157.080]\,\mathrm{T/s}\). If those values instead refer to RMS, local average or saturation, this interval is NOT licensed. Normal DC steady state yields zero time derivative, but switching transients are nonzero. The two proposed source laws \(\nabla\times A=B/k\) versus \(\nabla\times G=-\alpha\,\partial_tB\) must therefore remain separate hypotheses.
+
+*Illustrative local field energy*: \(u_B=B^2/(2\mu_0)\in[3.98,99.47]\,\mathrm{kJ/m^3}\). This is a vacuum constitutive comparator and local EM-stress scale, not measured total apparatus stress, field-gradient force, gravitating mass or external metric. In particular the 18 mm GAP alone is not a measured \(\nabla B^2\); do not divide B² by gap to manufacture a gradient.
+
+*Universal-acceleration necessary test*: if the same controlled force/torque channel, source protocol, target mass interval and classical residual force interval become available, calculate signed \(a_i\in F_{i,\mathrm{residual}}/m_i\) using correct interval endpoint propagation. Equality of accelerations REQUIRES overlap across all independently calibrated samples; overlap is a necessary condition only, not evidence that the shared force is gravitational. For similar acceleration, the paper's 2 g aluminium sample would require roughly 40 times the net force on its 50 mg paper sample. Similar *visible displacement* is not proof of equal acceleration, especially with different sample size, thread length and torque/damping. `conditional_material_independence_consumer` enforces matching source/protocol and refuses missing classical controls.
+
+### 2024 original independent high-vacuum measurements: reported ± and 3σ rule
+
+Tajmar/Kößling/Neunzig (2024), https://pmc.ncbi.nlm.nih.gov/articles/PMC11339412/, Table 1 and Results, report (unit preserved):
+
+| Independent physical apparatus/regime | Published estimate ± published noise quantity | Conditional screen \(y\pm 3u\) | 95% CI for population effect? |
+|---|---|---|---|
+| PTFE toroid vertical, 1 A | −4.1 ± 4.1 nN | [−16.4, +8.2] nN | NO |
+| PTFE toroid torque, 1 A | −0.37 ± 0.27 nN·m | [−1.18, +0.44] nN·m | NO |
+| iron toroid vertical, 1 A | +7.0 ± 6.4 nN | [−12.2, +26.2] nN | NO |
+| crossed coil vertical, 1 A | +13.8 ± 6.8 nN | [−6.6, +34.2] nN | NO |
+| PLA toroid pair, 2 A | −0.2 ± 2.7 nN | [−8.3, +7.9] nN | NO |
+| PTFE capacitor horizontal, 10 kV | +0.39 ± 0.66 nN | [−1.59, +2.37] nN | NO |
+
+For the displayed conditional screen we multiply the table's quoted \(\pm u\) by three, following its authored three-sigma decision rule **assuming (u) is the per-condition one-sigma noise scale**. The paper does not establish (u) as the standard error of an independent sample-mean estimator; hence these screens are NOT 95% confidence intervals, and cannot be interpreted as Zhang's own measurements. The crossed-coil result includes zero under the authors' 3σ decision despite a narrower naive 1.96× noise envelope; multiple tests, outgassing/RF and apparatus backgrounds must be respected. The high-power varistor nominal horizontal \(-25\pm5.3\) nN is flagged as confounded by outgassing and photon-pressure magnitude in the authors' own discussion; do not promote a naive nonzero sign.
+
+### 2026 independent toroidal DC null: instrument resolution, not 95% CI
+
+Tajmar/Olek/Neunzig (2026), https://doi.org/10.1142/S0217751X26501472, report resolution 0.1 mg on a balance, DC up to 3 A, normal air and water. Converting **resolution**, at stipulated standard acceleration \(g_n=9.80665\,\mathrm{m/s^2}\):
+\[
+0.1\,\mathrm{mg}\cdot g_n = 9.80665\times10^{-7}\,\mathrm N\approx0.981\,\mathrm{\mu N}.
+\]
+This is a force-equivalent *scale*, not a statistical uncertainty distribution, 95% confidence interval or same-regime Zhang/patent exclusion. The reported 6–10 orders coupling constraint is model-specific to their Mbelek comparator, not a general new-gravity bound.
+
+### Fully specified route to a future numerical 95% CI
+
+`conditional_hoeffding_ci` accepts independently switched paired outcome differences \(d_1,\ldots,d_n\), explicit **hard physical bounds** \(a\le d_i\le b\), an error rate \(\alpha\), and declared same-apparatus, calibration+nuisance, source-switching independence and data locators. Under those independently established conditions, the bounded-iid Hoeffding interval for the true mean \(\mu\) is
+\[
+\overline d\ \pm\ (b-a)\sqrt{\frac{\ln(2/\alpha)}{2n}}.
+\]
+At \(\alpha=0.05\), it is a **conditional nominal 95% confidence interval for a paired mean**, not a gravitational-mechanism CI. It can be extremely wide, assumes independently repeated pairs and REAL fixed support bounds, and does not account for omitted systematic uncertainty. The script cannot validate raw hashes, independence or the claimed bound; any `synthetic` or `real_unverified` output remains unpromoted. The data currently published for Zhang **do not instantiate this function's prerequisites**.
+
+### Exact current scientific cut
+
+- P0 PDF source masses/geometry, source identity, and the 2024 numerical rows are **acquired** and typed.
+- P1 nominal field-variation and magnetic-energy conditional calculations are **implemented** but not measured.
+- P2 external 2024 reported three-sigma *screening* envelopes and 2026 DC resolution are **admitted solely to regime-indexed sensitivity**.
+- P3 local material-normalized paired residual and distribution-free conditional CI **compilers exist**, but are **uninhabited by source data**.
+- P4 actual same-apparatus `ProvenancedComparativeAnomalyReceipt`, external test-mass/free-fall, metric-clock/optical and radiative TT consumers remain **uninhabited**.
+- P5 Agda kernel/typecheck and Python CI must be **observed at exact PR head** before any formal-validation claim.
+
+New code:
+```sh
+python3 scripts/check_zhang2025_quantitative_consumers.py --output /tmp/zhang-evidence.json
+python3 -m unittest discover -s tests -p 'test_zhang2025_quantitative_consumers.py' -v
+```
+
+**No synthetic, nominal or indirect-null figure may be back-filled into a real Chinese-patent force observation.**
