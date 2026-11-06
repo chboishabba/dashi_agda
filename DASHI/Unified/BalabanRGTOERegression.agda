@@ -27,42 +27,6 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
-import DASHI.Physics.Foundations.Lorentz31DirectionalProbeExact as L31Probe
-import DASHI.Physics.Foundations.TSFVFiltrationArrowLorentzBridgeExact as TSFVArrow
-import DASHI.Physics.Foundations.TSFVKKSameMetricTransportExact as TSFVKKSameMetric
-import DASHI.Physics.Foundations.TSFVKKSameArrowQuadraticMetricWeldExact as TSFVKKSameArrow
-import DASHI.Physics.Foundations.TSFVOriginalHiddenHistoryFiltrationWeldExact as TSFVOriginalFiltration
-import DASHI.Physics.Foundations.TSFVOriginalObserverVisibilityCausalOrderExact as TSFVObserverAccess
-import DASHI.Physics.Foundations.TSFVObservedPhysicalAccessTransportExact as TSFVPhysicalAccess
-import DASHI.Physics.Foundations.TSFVKKSelectedHorizontalMetricSchurExact as TSFVKKHorizontal
-import DASHI.Physics.Foundations.TSFVKKActualSelectedMetricHorizontalWeldExact as TSFVKKPhysicalWeld
-import DASHI.Physics.Foundations.TSFVKKFiveMetricInvertibleShearExact as TSFVKKShear
-import DASHI.Physics.Foundations.TSFVKKHorizontalReductionNoninjectiveBidiExact as TSFVKKBackwardBidi
-import DASHI.Physics.Foundations.TSVFMacroscopicSingleBranchRobustnessExact as TSVFMacro
-import DASHI.Physics.Foundations.TSVFAdmissibleQuantumOverlapRobustnessExact as TSVFOverlap
-import DASHI.Quantum.TSVFConcreteAdmissibleQubitABLExact as TSVFQubit
-import DASHI.Quantum.TSVFComplexGammaProductBornExact as TSVFGamma
-import DASHI.Quantum.TSVF2017ComplexEnvironmentRobustnessExact as TSVF2017Env
-import DASHI.Quantum.TSVF2017OriginalComplexABLSelectedExact as TSVF2017ABL
-import DASHI.Quantum.TSVF2017QuantitativeRateExact as TSVF2017Rate
-import DASHI.Quantum.TSVF2017HeterogeneousEnvironmentABLExact as TSVFHeteroABL
-import DASHI.Quantum.TSVF2017HeterogeneousRateExact as TSVFHeteroRate
-import DASHI.Quantum.TSVF2017ControlledPointerRecordUnitaryExact as TSVFControlled
-import DASHI.Quantum.TSVF2017ControlledComplexOrderedRateBridgeExact as TSVFControlledComplexRate
-import DASHI.Quantum.TSVF2017CorrelatedEnvironmentMarginalNoGoExact as TSVFBellNoGo
-import DASHI.Physics.Foundations.TSVFOSSameSelectedClockIterateExact as TSVFOSClock
-import DASHI.Physics.Foundations.TSVFOSRealEuclideanTimeSeparationExact as TSVFWickFirewall
-import DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldExact as TSVFGenerator
-import DASHI.Physics.Foundations.TSVFOSSelectedKetHamiltonianNonpromotionExact as TSVFSelectedKetHNoGo
-import DASHI.Physics.YangMills.YMClayLorentz31DirectionalKKHodgeExact as YMKKHodge
-import DASHI.Physics.YangMills.YMClayFiveSectorBidiSteelmanExact as FiveSectorBIDI
-import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
-import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
-import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
-import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNCyclicFin
-import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNNativeReindex
-import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
-import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -97,463 +61,6 @@ import DASHI.Physics.YangMills.BalabanRGLane as LegacyRGLane
 import DASHI.Physics.YangMills.YangMillsHighestAlphaGateDependencyExact as Gate
 import DASHI.Physics.YangMills.YangMillsClayProblemContractExact as Clay
 import DASHI.Physics.YangMills.YangMillsConstructivePathPrePostInvariantExact as Path
-
-------------------------------------------------------------------------
--- Tag-free directional finite signature and YM/KK Hodge source bridge.
--- The selected physical observed dynamics and OS/KK same-action witness
--- remain explicit inputs, not fabricated inhabitants.
-------------------------------------------------------------------------
-open TSFVArrow public using
-  ( earlyObserverCannotSeeFinal
-  ; lateObserverCanSeeFinal
-  ; earlyAndLateVisibilityDiffer
-  ; futureBoundaryChangesSmoothing
-  ; microscopicReversalInvolutive
-  ; microscopicActionTimeReversalInvariant
-  ; futureChoicesKeepSamePast
-  ; futureChoicesChangeHiddenHistory
-  ; futureChoicesHaveSameMicroscopicAction
-  ; historyNotRecoverableFromActionAlone
-  ; pastRecordCannotRecoverSelectedMicroHistory
-  ; selectedTSFVPhysicalSignatureIs31
-  )
--- P01 concrete source-family bridge: the actual original finite hidden
--- history and smoothing decisions are what the old observer filtration
--- reveals. Early records coalesce; late ones differ; forgetful observer
--- projection is provably noninjective, not assumed to be a time semigroup.
-open TSFVOriginalFiltration public using
-  ( selectedFutureBoundary
-  ; actualSelectedSmoothing
-  ; smoothingIsOriginalHiddenTerminal
-  ; observedTerminal
-  ; originalEarlyRecordCannotSeeTerminal
-  ; originalLateRecordReadsSameHiddenState
-  ; originalEarlyRecordsIndistinguishable
-  ; originalLateMinusIsReadMinus
-  ; originalLatePlusIsReadPlus
-  ; originalLateRecordsDiffer
-  ; noEarlyObserverHistoryDecoder
-  ; forgetLateObserverRecord
-  ; actualLateRecordsForgetToSameEarlyRecord
-  ; forgettingLateRecordIsNotInjective
-  ; chosenHiddenHistoriesEqualAction
-  )
-
--- P01/P02: original source-filtration event inclusion and full
--- strict operational access chain; physical P02 signal/null cone OPEN.
-open TSFVObserverAccess public using
-  ( _⊑obs_
-  ; observableAccessReflexive
-  ; observableAccessTransitive
-  ; initialAccessPrecedesIntermediate
-  ; intermediateAccessPrecedesTerminal
-  ; initialAccessPrecedesTerminal
-  ; initialIntermediateActualStrictGain
-  ; intermediateTerminalActualStrictGain
-  ; initialTerminalActualStrictGain
-  ; terminalDoesNotAccessPrecedeIntermediate
-  ; intermediateDoesNotAccessPrecedeInitial
-  ; terminalDoesNotAccessPrecedeInitial
-  ; observableAccessAntisymmetric
-  ; selectedEarlyHistoryIndistinguishability
-  )
-
--- The same-state *conditional physical observer* inherits the original
--- access order in BOTH directions from its already selected readout
--- source-equality. This is not metric propagation or 4D dimension.
-open TSFVPhysicalAccess public using
-  ( SelectedObservedAccessOrder
-  ; originalAccessImpliesActualMeasuredAccess
-  ; actualMeasuredAccessImpliesOriginal
-  ; sameSelectedObserverAccessIFFOriginal
-  ; measuredMiddleEventStrictGain
-  ; measuredTerminalEventStrictGain
-  ; originalTerminalVisibleOnMeasuredArrowAxis
-  )
-
--- P02/P08: actual nonzero U(1) KK connection retains horizontal metric
--- and fibre-gauge covariance; source-selected conditional theorem uses
--- EXACT same 5D metric, 4D reduction and original observed bilinear.
--- No arbitrary metric assignment or completed physical 5D solution.
-open TSFVKKHorizontal public using
-  ( KK5Bilinear
-  ; horizontalCircleComponent
-  ; actualKKHorizontalReductionIsOriginalFourMetric
-  ; KK5ExpandedBlocks
-  ; naivelyFrozenFibreHasAdditionalConnectionTerm
-  ; KK5GaugeShiftPreservesBilinear
-  ; horizontalCircleGaugeShift
-  )
-open TSFVKKPhysicalWeld public using
-  ( selectedKK5HorizontalIsActualObservedBilinear
-  ; selectedKKHorizontalEqualsReductionOfActualFiveMetric
-  ; selectedSameBilinearAndSameObserverArrow
-  )
-
--- P07 BIDI negative control: TWO explicitly symmetric rational
--- Hamiltonian maps agree on one selected ket but differ on a second.
--- Therefore no P07 single-forward-ket source may be promoted to
--- equality of full operators, self-adjoint domains or spectra.
-open TSVFSelectedKetHNoGo public using
-  ( controlHamiltoniansAgreeOnForwardKet
-  ; positiveOneIsNotZero
-  ; controlHamiltoniansDifferOnSecondMode
-  ; sameSelectedForwardKetDoesNotForceWholeHamiltonian
-  ; zeroHamiltonianSymmetric
-  ; secondModeHamiltonianSymmetric
-  )
-
--- P07 Stone/OS trust firewall: on the SAME original TSVF/OS clock,
--- a norm-isometric real-time observer step cannot equal a strictly
--- norm-contracting Euclidean OS transfer step on a selected excitation.
--- This is an actual proof implication, NOT an OS spectral-gap proof.
--- P02/P08 stronger concrete KK source: the actual five-bilinear with
--- connection is an INVERTIBLE shear congruence of g4 ⊕ b². This does
--- not construct an actual 5D Einstein solution or physical index.
-open TSFVKKShear public using
-  ( FiveTangent
-  ; kkMetricShear
-  ; kkMetricUnShear
-  ; kkShearLeftInverse
-  ; kkShearRightInverse
-  ; kkDecoupledProductBilinear
-  ; kkActualFiveBilinear
-  ; kkActualFiveBilinearIsInvertibleShearPullback
-  ; kkHorizontalShearHasZeroCirclePart
-  )
-
--- P08/P11 actual backwards steelman: any two unequal radii remain
--- indistinguishable by the ORIGINAL 4D horizontal metric, but an
--- actual unit-vertical observation on the ORIGINAL 5D bilinear
--- separates them. Real 5D Einstein/radion inhabitants stay OPEN.
-open TSFVKKBackwardBidi public using
-  ( sameOriginalFourBilinearForAnyTwoRadii
-  ; originalFiveMetricVerticalProbeReadsFibreRadius
-  ; originalFiveMetricEqualityForcesSameFibreRadius
-  ; originalFourMetricCannotUniquelyLiftFibreRadius
-  ; originalFiveMetricMixedVerticalDifferenceReadsConnection
-  ; originalFiveMetricEqualityForcesSameChartConnection
-  ; originalFourMetricCannotRecoverUniqueChartConnection
-  ; originalSameFourMetricForAnyTwoConnections
-  )
-
--- P03/P07: ACTUAL original TSVF/OS clock strongly convergent
--- difference-quotient theorem. Derives generator, then i*hbar ENERGY
--- operator matching on the selected domain; physical Hilbert,
--- continuity, self-adjointness and OS meaning remain OPEN.
-open TSVFGenerator public using
-  ( RealTimeDerivativeBridge
-  ; observerDifferenceQuotient
-  ; osDifferenceQuotient
-  ; originalSelectedDifferenceQuotientsIntertwine
-  ; originalSelectedStrongGeneratorIntertwines
-  ; originalForwardKetStrongGeneratorIntertwines
-  ; PhysicalHbarEnergyConversion
-  ; originalSelectedPhysicalEnergyIntertwines
-  ; originalForwardKetPhysicalEnergyIntertwines
-  ; ObserverHasStrongDerivative
-  ; OSHasStrongDerivative
-  ; OriginalInverseHilbertContinuity
-  ; originalObserverStrongDifferentiabilityImpliesOS
-  ; originalObserverStrongLimitUniqueFromOS
-  ; originalOSDifferenceQuotientsDecodeToObserver
-  ; originalOSStrongDifferentiabilityImpliesObserver
-  ; originalObserverOSStrongGeneratorDomainsIff
-  ; originalOSDomainGivesOriginalPhysicalEnergyEquality
-  ; OriginalIsometricStrongLimitSource
-  ; originalOSDistanceTransportedByDecoder
-  ; originalMatchedDistancesForceForwardLimitContinuity
-  ; originalMatchedDistancesForceInverseLimitContinuity
-  ; originalMetricObserverLimitPointwiseTransport
-  ; originalMetricSourceProducesInverseHilbertContinuity
-  ; originalMatchedMetricSourceForcesTwoSidedGeneratorDomains
-  ; OriginalInvariantPhysicalEnergyCore
-  ; originalPhysicalEnergyPowersStayOnSelectedDomain
-  ; originalPhysicalEnergyPowersIntertwine
-  ; originalSelectedForwardKetEnergyPowersIntertwine
-  ; OriginalObserverEnergyGraph
-  ; OriginalOSEnergyGraph
-  ; originalPhysicalEnergyGraphForward
-  ; originalPhysicalEnergyGraphBackward
-  ; originalMatchedPhysicalEnergyGraphsBidi
-  )
-
-open TSVFWickFirewall public using
-  ( originalClockDirectEuclideanNormMustBeEqual
-  ; originalClockCannotIdentifyStrictEuclideanDecay
-  ; finiteObserverNormPreserved
-  ; finiteEuclideanExcitationNormDrops
-  ; finiteDirectStepwiseIdentificationImpossible
-  )
-
-open TSFVKKSameMetric public using
-  ( SameMetricTSFVKK
-  ; sameMetricKKSignatureFromTSFV
-  ; sameMetricKKReversedCountExcluded
-  ; globalStrictReversalRankImpossible
-  )
--- Stronger P02/P07 *source-selected* arrow weld:
--- same quadratic signs + existing injective boolean calibration prove the
--- actual KK observer probe is identical on all four axes to the TSVF probe,
--- and the independently supplied KK evidence picks the same axis.
-open TSFVKKSameArrow public using
-  ( classifyProbeInjective
-  ; sameMetricKKObservedProbeEqualsTSFV
-  ; sameMetricKKDirectionFromTSFV
-  ; selectedArrowUnique
-  ; derivedKKSelectedAxisIsOriginal
-  ; samePhysicalObserverAndKKTimeAxis
-  )
-
-open L31Probe public using
-  ( calibratedProbeForcesThreePlusOne
-  ; realizedDynamicsThreePlusOne
-  ; threePlusOneDiffersFromOnePlusThree
-  )
-open YMKKHodge public using
-  ( lorentzStarSquareIsNegative
-  ; euclideanStarSquareIsPositive
-  ; sameSourceDirectionalLorentzSignature
-  ; creutzFiveEuclideanIsNotKK
-  )
--- Genuine finite selected single-branch macro restoration, not a quantum
--- or same-H_OS theorem. Original Aharonov/Cohen/Gruss/Landsberger credited.
--- Source-native original two-boundary admissibility → original TSVF ABL
--- plus actual nontrivial finite tensor environmental overlap and exact
--- selected ABL normalization. Physical Hilbert/2017 gamma/OS still OPEN.
-open TSVFOverlap public using
-  ( rightAmplitude
-  ; wrongAmplitude
-  ; twoOutcomeABLNormalizes
-  ; sourceMatchedOriginalABLNormalizes
-  ; tensorOverlap
-  ; tensorSquaredOverlapReduces
-  ; actualTensorSquaredOverlapIsNineOverTwentyFivePower
-  ; selectedBornMass
-  ; selectedBornRightDominates
-  ; oneAtMostWrongPower
-  ; selectedBornDenominatorIsSum
-  ; weightedBornMass
-  ; weightedBornNormalizes
-  ; wrongBornTailBoundCrossMultiplied
-  ; zeroWrongFactorGivesZeroWrongMassCorrect
-  ; admissibleDoesNotForcePositiveWeight
-  ; adversarialWrongDominatesRightAtTwo
-  )
--- Exact complex gamma amplitude/Born factor product using the original
--- rational Cayley-Dickson complex owner. Physical 2017 Eq25 source OPEN.
--- P01 selected original complex TSVF/ABL and P07 physical same-H OS core.
--- The all-k finite theorems and Eq.25 phase falsifier are source-written,
--- NOT a physical 2017 many-body macro reversal, OS spectrum or Clay proof.
-open TSVF2017Env public using
-  ( complexPowerBornIsBornPower
-  ; environmentOverlapIsProductRate
-  ; rightBornIsComplexGammaWeight
-  ; wrongBornExact2017Factorization
-  ; rightWrongBornRatioCross
-  ; complexBornNonnegative
-  ; rightBornNonnegative
-  ; wrongBornNonnegative
-  ; totalBornNonnegative
-  ; selectedNumeratorsSumToSameTotal
-  ; imaginaryAndUnitGammaHaveSameBornWeight
-  ; imaginaryGammaIsNotUnitComplex
-  )
-open TSVF2017ABL public using
-  ( projectorsComplete
-  ; rightAfterWrongZero
-  ; wrongAfterRightZero
-  ; rightOriginalTransitionAmplitude
-  ; wrongOriginalTransitionAmplitude
-  ; originalABLTotalMatchesBornSum
-  ; positiveSelectedComplexABL
-  ; selectedOriginalABLContext
-  ; selectedOriginalABLNormalizes
-  ; selectedOriginalABLWrongIsFactorizedGammaOverlap
-  ; actualComplexSelectedBidiSource
-  ; originalAdmissibleRightAmplitudeIsComplexSource
-  ; originalAdmissibleWrongAmplitudeIsComplexSource
-  )
-open TSVF2017Rate public using
-  ( doublingRightVsWrongForAllK
-  ; weightedDoublingBound
-  ; wrongProbabilityExponentialDenominatorBound
-  ; adversarialNoGammaControl
-  )
--- General distinct-site complex tensor source and original ABL, plus
--- genuinely nonuniform all-site exponential robustness. The complex-to-Nat
--- calibration and selected pointer/environment dynamics remain unpaid.
-open TSVFHeteroABL public using
-  ( heterogeneousTensorBornFactorization
-  ; homogeneousOverlapMatchesExisting
-  ; homogeneousBornMatchesExisting
-  ; heterogeneousWrongBornFactorization
-  ; heterogeneousWrongBornNonnegative
-  ; rightOriginalAmplitude
-  ; wrongOriginalAmplitude
-  ; originalHeterogeneousTotal
-  ; positiveHeterogeneousTotal
-  ; heterogeneousOriginalABLNormalizes
-  ; heterogeneousOriginalABLHasCorrectBornFactor
-  ; actualHeterogeneousAdmissibleSource
-  ; admittedWrongHistoryAmplitudeIsProduct
-  )
-open TSVFHeteroRate public using
-  ( heterogeneousExponentialRate
-  ; weightedHeterogeneousRate
-  ; heterogeneousWrongProbabilityCrossBound
-  ; originalRightProductRecovered
-  ; originalWrongProductRecovered
-  )
--- Original selected-ABL complex site lists are now emitted by a genuine
--- certified finite controlled C^2-pointer/C^2-environment rotation. This
--- remains a finite four-complex-coordinate isometry, NOT the physical 2017
--- many-body device or a continuum strongly continuous Stone/OS Hamiltonian.
-open TSVFControlled public using
-  ( rotationNormScalesExactly
-  ; rotationPreservesBornNorm
-  ; controlledRecordPreservesFullBornNorm
-  ; rightEmissionIsOriginalVacuum
-  ; wrongEmissionIsControlledRotation
-  ; pulseGeneratedWrongABLFactorization
-  ; pulseGeneratedOriginalABLNormalizes
-  ; threeFourCircleLaw
-  ; threeFourPulseEmitsOriginalWrongQubit
-  ; threeFourPulseOverlap
-  ; threeFourPulseBornNineTwentyFifths
-  )
--- P01 rigorous correlated-state nonpromotion: two Bell sectors with the
--- same COMPLETE local reduced-density matrices but zero global overlap.
--- This closes the logical loophole "local marginals imply tensor product".
-open TSVFBellNoGo public using
-  ( firstRightIsIdentity
-  ; firstWrongIsIdentity
-  ; secondRightIsIdentity
-  ; secondWrongIsIdentity
-  ; sameFullLocalReductions
-  ; bothNormSquaresAreTwo
-  ; twoBellStatesGloballyOrthogonal
-  ; globalBornIsZero
-  ; bellStatesDistinct
-  ; noLocalMarginalDecoder
-  )
-open TSVFOSClock public using
-  ( originalClockIterateAdd
-  ; observerOSClockAllFiniteTimes
-  ; observerOSAllFiniteReadouts
-  ; selectedOSClockHamiltonian
-  ; selectedTransferIsOfExactlyReconstructedH
-  ; sameClockPhysicalMetricHas31Signature
-  ; selectedP07ObserverAndKKClockDirectionAgree
-  ; selectedObserverKetReallyIsMetricState
-  ; identityEmbeddingCannotIntertwineWrongOSStep
-  )
-open TSVFGamma public using
-  ( complexGammaBornWeightIsNormOfProduct
-  ; complexConjugateBornNormInvariant
-  ; gammaBornProductConjugationInvariant
-  ; complexGammaProductConjugationBornInvariant
-  ; imaginaryUnitGammaDoesNotChangeBornWeight
-  )
-open TSVFQubit public using
-  ( rightProjectorIdempotent
-  ; wrongProjectorIdempotent
-  ; projectorsSumToIdentity
-  ; rightAfterWrongZero
-  ; wrongAfterRightZero
-  ; excludedCannotBeJointlyAdmissible
-  ; rightTransitionAmplitude
-  ; wrongTransitionAmplitude
-  ; rightBornNumerator
-  ; wrongBornNumerator
-  ; finiteMeasurementTotalPositive
-  ; finiteOriginalABLContext
-  ; finiteOriginalABLNormalization
-  ; finiteABLRightBornPositive
-  ; finiteABLWrongBornPositive
-  ; selectedABLMatchesActualTensorOverlap
-  ; selectedJointTSVFSource
-  ; admissibleRightIsOriginalABLProjector
-  ; admissibleWrongIsOriginalABLProjector
-  ; selectedFiniteABLRightAtLeastWrong
-  )
-open TSVFMacro public using
-  ( singleFaultMacroRobust
-  ; twoFaultsReverseSelectedMacro
-  ; twoFaultsDoNotPreserveOriginalPointer
-  ; singleFaultChangesFineData
-  ; noExactMicroRestorationFromMacro
-  ; originalPastRecordUnchanged
-  ; originalMicroHistoriesDiffer
-  ; selectedBranchMacroRobust
-  ; pastOnlyCannotDetermineSelectedMacroBranch
-  ; reversalAndRobustMacroCoexist
-  )
--- #1444@7c6b2efd finite same-source native gauge/codec/conditional Haar
--- explicitly copied into #1460. The further analysis-only moving-cutoff
--- module has no Golden --safe header and is NOT imported into this root.
-open SUNVariableHaar public using
-  ( periodicProductHaar
-  ; periodicProductFiniteMeasure
-  ; periodicProductHaarUnit
-  ; periodicActualDensityStrictPositive
-  ; periodicProductPartitionStrictPositive
-  ; periodicProductIntegrationLaws
-  ; periodicProductDensitySameObject
-  ; periodicProductPartitionSameObject
-  )
-open SUNVariableGaugeHaar public using
-  ( OriginalPeriodicGaugeVectorNaturality
-  ; PeriodicPointwiseObservable
-  ; periodicProductGaugeHaarInvariant
-  ; periodicGibbsPointwise
-  ; periodicWeightedPointwise
-  ; periodicGaugeNumeratorInvariant
-  ; periodicGaugeNormalizedExpectationInvariant
-  )
-open SUNBondCodec public using
-  ( originalPositiveBondFinite
-  ; originalPositiveBondDistinct
-  ; originalPositiveBondCount
-  ; originalSiteCountFormula
-  ; originalPositiveBondCountFormula
-  ; originalSideFourCountIs1024
-  ; originalBondsDecodeEncodeAt
-  ; originalBondsEncodePointwise
-  ; originalBondsEncodeDecodeExactly
-  ; encodeOriginalBonds
-  ; decodeOriginalBonds
-  )
-open SUNConstructedGauge public using
-  ( nativeDecode
-  ; nativeEncode
-  ; constructedOriginalPeriodicGaugeNaturality
-  ; actualGaugeVectorEncoded
-  ; actualGaugeVectorDecodedAt
-  ; actualPeriodicProductMeasure
-  ; actualPeriodicPartitionPositive
-  ; actualPeriodicGaugeHaar
-  ; actualPeriodicGaugeNormalized
-  ; actualSixDeficitGaugeNormalized
-  )
-open SUNFiniteSafe public using
-  ( originalGaugeDecodedAt
-  ; encodeGaugeNatural
-  ; vectorGaugeDecodedAt
-  )
-
-open FiveSectorBIDI public using
-  ( threeToTwoExact
-  ; fourToThreeExact
-  ; fiveToFourExact
-  ; fiveMatchesFourForcesCrossZero
-  ; fourMatchesThreeForcesCrossZero
-  ; threeMatchesTwoForcesCrossZero
-  ; fiveDoesNotAutomaticallyMatchFour
-  ; treeLevelCouplingTowerCoheres
-  ; matchedFiveToTwo
-  ; selectedLorentzian31FromSameMetric
-  )
 
 ------------------------------------------------------------------------
 -- Exact theorem-owner re-exports.
@@ -1433,6 +940,41 @@ import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGi
 import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUNGaugeAction
 import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact as SUNCanonicalWilsonWeld
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
+import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
+import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
+import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNFiniteReindex
+import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as SUNNativeC3Vec
+import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SUNNativeC3Haar
+import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as SUNOneVectorC3
+import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFinIso
+import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
+import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as SUNNativeBlockHolonomy
+import DASHI.Physics.YangMills.YMClayNativeAllScaleBlockedCoarseGaugeLiftExact as SUNAllScaleGaugeLift
+import DASHI.Physics.YangMills.YMClayFiniteRGExistingPushPullReopeningWeldExact as SUNFinitePushPull
+import DASHI.Physics.YangMills.YMClaySUNHaarDisjointPairBlockingExact as SUNHaarPairBlocking
+import DASHI.Physics.YangMills.YMClaySUNWeightedHaarPairFibreDisintegrationExact as SUNWeightedPairFibre
+import DASHI.Physics.YangMills.YMClaySUNWeightedDisjointPairFibreReparamExact as SUNWeightedAllPairFibre
+import DASHI.Physics.YangMills.YMClayFiniteNativeAdjacentWordInverseExact as SUNOriginalAdjacentInverse
+import DASHI.Physics.YangMills.YMClayNativeC3AdjacentSortProgramExact as SUNOriginalC3AdjacentSort
+import DASHI.Physics.YangMills.YMClayOriginalWilsonC3WeightedHaarTransferExact as SUNOriginalWeightedC3PhysicalTransfer
+import DASHI.Physics.YangMills.YMClayCompactSimpleScopeBidiNoVacuitySafeExact as YMCompactSimpleScopeBidi
+import DASHI.Physics.YangMills.YMClayNativeSideFourPairSpectatorSortProgramExact as SUNOriginalPairSpectatorSort
+import DASHI.Physics.YangMills.YMClayProofRelevantFieldAnchoringSafeExact as YM219ProofRelevantField
+import DASHI.Physics.YangMills.YMClayOriginalCMP109NamedSetNoPromotionExact as YMOriginalCMP109BareSetNoGo
+import DASHI.Physics.YangMills.YMClayParametricVocabularyNoClayPromotionExact as YMExternalClaySemanticAnchor
+import DASHI.Physics.YangMills.YMClayNativeSideFourTwoLinkPairSameObjectExact as SUNNativePairLiteral
+import DASHI.Physics.YangMills.YMClayNativeSideFourPairDistinctCertificateExact as SUNNativePairDistinct
+import DASHI.Physics.YangMills.YMClaySUNR445BlockedPushforwardR320CovarianceExact as SUNBlockedSameCovariance
+import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNPhysicalBlockedHolonomy
+import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as SUNSideFourBlockEndpoint
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedWilsonGaugeExact as SUNSideFourBlockedWilson
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as SUNBlockedFineHaar
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as SUNBlockedPushforward
+import DASHI.Physics.YangMills.YMClayFiniteRGPushforwardNonBareWitnessSafeExact as SUNPushforwardNoBare
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
 import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
@@ -1657,19 +1199,6 @@ open SUNCanonicalWilsonWeld public using
   ; nativeSixAtSiteIsCanonicalSUNWilsonAction)
 
 
--- R445 native finite site/bond coordinate owners synced from YM PR #1444.
--- The constructed path-holonomy gauge bridge also depends on legacy
--- non-safe source modules; it stays in its OWN non-Golden source file and
--- is not falsely imported as a transitive safe theorem here.
-open SUNCyclicFin public using (cyclicRoundtrip; finRoundtrip)
-open SUNNativeReindex public using
-  ( reindexAt
-  ; reindexIdentity
-  ; reindexCompose
-  ; reindexInverseLeft
-  ; reindexInverseRight
-  ; reindexOrderThree
-  )
 -- Variable-n original periodic SUN Wilson source: n genuinely changes the
 -- four-torus, unlike a beta-only sequence on the fixed side-four source.
 -- All-n local gauge invariance and n=3 source matching are proof terms,
@@ -1687,3 +1216,274 @@ open SUNVariable public using
   ; periodicSUNGibbsDensityGaugeInvariant
   ; periodicSUNFiniteGibbsMeasure
   ; sideFourPlaquetteSameNativeHolonomy)
+
+-- Every actual periodic cutoff: derive product-Haar integration and positive
+-- Wilson Gibbs partition from one-link laws, without inventing continuum data.
+open SUNVariableHaar public using
+  (periodicProductHaar
+  ; periodicProductFiniteMeasure
+  ; periodicProductHaarUnit
+  ; periodicActualDensityStrictPositive
+  ; periodicProductPartitionStrictPositive
+  ; periodicProductIntegrationLaws
+  ; periodicProductDensitySameObject
+  ; periodicProductPartitionSameObject)
+
+-- Every-n native original finite Gibbs gauge symmetry, using one-link
+-- bilateral Haar and a pointwise gauge/bond vector naturality witness.
+open SUNVariableGaugeHaar public using
+  (OriginalPeriodicGaugeVectorNaturality
+  ; PeriodicPointwiseObservable
+  ; periodicProductGaugeHaarInvariant
+  ; periodicGibbsPointwise
+  ; periodicWeightedPointwise
+  ; periodicGaugeNumeratorInvariant
+  ; periodicGaugeNormalizedExpectationInvariant)
+
+-- The ORIGINAL positive-bond enumeration is an actually constructed all-n
+-- Vec codec. The previous R443/R445 decoder and gauge naturality fields
+-- no longer need to be supplied independently on this finite source.
+open SUNBondCodec public using
+  (originalPositiveBondFinite
+  ; originalPositiveBondDistinct
+  ; originalPositiveBondCount
+  ; originalSiteCountFormula
+  ; originalPositiveBondCountFormula
+  ; originalSideFourCountIs1024
+  ; originalBondsDecodeEncodeAt
+  ; originalBondsEncodePointwise
+  ; originalBondsEncodeDecodeExactly
+  ; encodeOriginalBonds
+  ; decodeOriginalBonds)
+open SUNConstructedGauge public using
+  (nativeDecode
+  ; nativeEncode
+  ; constructedOriginalPeriodicGaugeNaturality
+  ; actualGaugeVectorEncoded
+  ; actualGaugeVectorDecodedAt
+  ; actualPeriodicProductMeasure
+  ; actualPeriodicPartitionPositive
+  ; actualPeriodicGaugeHaar
+  ; actualPeriodicGaugeNormalized
+  ; actualSixDeficitGaugeNormalized)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443/R445: separate finite Golden construction from
+-- analysis-authority-dependent moving-cutoff physical Gibbs family.
+-- The parent theorem graph does NOT import downstream Lorentz/KK PR #1460.
+------------------------------------------------------------------------
+
+-- No real scalar/Haar assumptions are imported by this finite theorem
+-- itself: the canonical bond codec plus group laws prove naturality.
+open SUNFiniteSafe public using
+  (originalGaugeDecodedAt
+  ; encodeGaugeNatural
+  ; vectorGaugeDecodedAt)
+
+-- Actual periodic side increases with n; old fixed-side-four beta-only
+-- families do not constitute a lattice-changing UV limit.
+open SUNMovingFamily public using
+  (finiteCutoffLinks
+  ; linksAt
+  ; gaugeAt
+  ; physicalFiniteCutoffMeasure
+  ; finiteCutoffLinkCountFormula
+  ; physicalFiniteDensitySameWilson
+  ; physicalFinitePartitionSameWilson
+  ; physicalFinitePartitionPositive
+  ; physicalSixDeficitGaugeExpectation
+  ; physicalWilsonActionAt
+  ; physicalWilsonActionGauge)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443: original spatial C3 bond coordinates -> actual
+-- side-four 1024-link Vec. Exact native order-three/inverse source.
+-- This does NOT yet construct an adjacent-swap LinkPermutation witness.
+------------------------------------------------------------------------
+open SUNFiniteReindex public using
+  (reindexBonds
+  ; reindexAt
+  ; reindexIdentity
+  ; reindexCompose
+  ; reindexAsIdentity
+  ; reindexInverseLeft
+  ; reindexInverseRight
+  ; reindexOrderThree)
+
+open SUNNativeC3Vec public using
+  (forwardBond
+  ; backwardBond
+  ; forwardAfterBackward
+  ; backwardAfterForward
+  ; bondOrderThree
+  ; forwardVector
+  ; backwardVector
+  ; nativeForwardIsVectorAt
+  ; nativeForwardEncodesExactly
+  ; forwardBackwardVector
+  ; backwardForwardVector
+  ; forwardVectorOrderThree)
+
+open SUNOneVectorC3 public using
+  (canonicalLabelVector
+  ; reconstructFromCanonicalLabels
+  ; permuteLinksMap
+  ; canonicalC3IsEncodedBondMap
+  ; nativeC3VectorMap
+  ; SingleVectorC3PermutationCertificate
+  ; singleVectorC3ImpliesAllVectors)
+
+open SUNNativeC3Haar public using
+  (ExactC3AdjacentSwapWitness
+  ; originalNativeC3SetoidCodec
+  ; originalNativeC3GibbsHaarInvariant
+  ; adjacentSwapFromOneVector
+  ; originalNativeC3SetoidCodecFromOneVector
+  ; originalNativeC3GibbsHaarInvariantFromOneVector)
+
+------------------------------------------------------------------------
+-- R445: same-original-periodic-torus site and positive-bond block codec.
+-- It uses the earlier BałabanBlockedPeriodicLattice exact Fin refinement
+-- through the safe CyclicIndex/Fin equivalence. No physical blocking
+-- action/measure, analytic bounds, RG contraction or OS source is inferred.
+------------------------------------------------------------------------
+open SUNNativeFinIso public using
+  (cyclicToFin
+  ; finToCyclic
+  ; cyclicRoundtrip
+  ; finRoundtrip)
+
+open SUNNativeBlockWeld public using
+  (siteToCube
+  ; cubeToSite
+  ; siteCubeRoundtrip
+  ; cubeSiteRoundtrip
+  ; blockNativeSite
+  ; unblockNativeSite
+  ; blockNativeSiteAfterUnblock
+  ; unblockNativeSiteAfterBlock
+  ; BlockedPositiveBond
+  ; blockNativeBond
+  ; unblockNativeBond
+  ; blockNativeBondAfterUnblock
+  ; unblockNativeBondAfterBlock)
+
+------------------------------------------------------------------------
+-- R445 moving-lattice actual GROUP-VALUED source join. The original
+-- Bałaban positive path holonomy now supplies a non-Abelian blocked-link
+-- field at every M×L, not merely a blocked bond-label coordinate. The
+-- source-write proves gauge cancellation and signed-path identification
+-- independently of arbitrary field funext. The coarse endpoint arithmetic
+-- is left as ONE explicit proposition, and no Gibbs pushforward, RG
+-- uniform estimates, continuum or OS spectral gap is promoted here.
+------------------------------------------------------------------------
+
+open SUNNativeBlockHolonomy public using
+  (positiveDirections
+  ; positiveSteps
+  ; positiveHolonomy
+  ; positiveHolonomyPointwise
+  ; positiveHolonomyGaugeCovariant
+  ; positiveHolonomyIsSelectedPath
+  ; fineBlockOrigin
+  ; positiveBlockDirections
+  ; nativeBlockedPositiveLinks
+  ; nativeBlockedPositiveLinksPointwise
+  ; nativeBlockedCoarseGauge
+  ; nativeBlockedGaugeLawAtFineEndpoint
+  ; BlockEndpointCompatibility
+  ; nativeBlockedGaugeLawOnCoarse)
+
+open SUNPhysicalBlockedHolonomy public using
+  (nativeSUNBlockLinks
+  ; nativeSUNBlockGauge
+  ; nativeSUNBlockAgreesSelectedPath
+  ; nativeSUNBlockGaugeLawAtFineEndpoint
+  ; NativeSUNBlockEndpoint
+  ; nativeSUNBlockGaugeLawOnCoarse)
+
+------------------------------------------------------------------------
+-- R445 finite selected side-four M=L=2 witness:
+-- exact periodic 2-step fine endpoint for the existing original
+-- 1024-link lattice; consequently no externally supplied block-endpoint
+-- equality remains for the *specific* side-four SU(N) coarse block.
+-- General M,L, physical Gibbs/RG pushforward, RP and limits stay open.
+------------------------------------------------------------------------
+open SUNSideFourBlockEndpoint public using
+  (sideFourTwoBlockEndpoint
+  ; sideFourSUNBlockGaugeCovariant)
+
+------------------------------------------------------------------------
+-- R445 selected original side-four -> side-two Wilson/Gibbs observable.
+-- These are the actual SU(N) matrix Wilson plaquettes and original
+-- variable-periodic six-plane and Gibbs functions evaluated on the
+-- constructed noncommutative coarse link holonomies. Invariance is
+-- proved at the source, then at the SAME original fine product-Haar
+-- Gibbs expectation conditionally on ONE chosen one-link Haar.
+--
+-- Neither source asserts that a fine Wilson pushforward equals a new
+-- coarse Wilson Gibbs law, nor that reflection positivity, Haar
+-- measurability, continuum R445 or same-Hamiltonian R333 are paid.
+------------------------------------------------------------------------
+open SUNSideFourBlockedWilson public using
+  (fineToCoarse
+  ; gaugeToCoarse
+  ; blockFineGaugeCoarsePointwise
+  ; blockedSelectedPlaquette
+  ; blockedSelectedPlaquetteGauge
+  ; blockedSelectedPlaquetteWilsonGauge
+  ; blockedSelectedSixDeficit
+  ; blockedSelectedSixDeficitGaugeInvariant
+  ; blockedSelectedWilsonAction
+  ; blockedSelectedWilsonActionGaugeInvariant
+  ; blockedSelectedGibbsDensity
+  ; blockedSelectedGibbsDensityGaugeInvariant)
+
+open SUNBlockedFineHaar public using
+  (CoarsePointwiseObservable
+  ; blockedPullbackPointwise
+  ; originalFineMeasureBlockedGaugeInvariant
+  ; blockedCoarseWilsonPointwise
+  ; originalFineGibbsBlockedWilsonGaugeInvariant
+  ; blockedCoarseGibbsPointwise
+  ; originalFineGibbsBlockedGibbsGaugeInvariant)
+
+------------------------------------------------------------------------
+-- R445 selected original fine Gibbs law -> blocked SUN cylinder PUSHFORWARD.
+-- Uses exactly the same selected fine physical measure and native two-link
+-- SU(N) block already exported above. Numerator positivity, additivity,
+-- scaling, partition normalization and source-gauge covariance are derived
+-- from the actual older physical finite-cylinder owner.
+--
+-- This is a positive coarse observable functional, NOT a constructed
+-- coarse bare-Wilson product-Haar law or a completed disintegration.
+-- The finite Golden three-to-two counterexample makes the logical
+-- nonpromotion explicit. --safe on this unified legacy root is NOT
+-- a transitive axiomatic acceptance receipt (RealAnalysisAxioms).
+------------------------------------------------------------------------
+open SUNBlockedPushforward public using
+  ( pullbackCoarse
+  ; actualPushforwardNumerator
+  ; actualPushforwardPartition
+  ; actualPushforwardNormalized
+  ; actualPushforwardNumeratorIsOriginalWeightedIntegral
+  ; actualPushforwardNormalizedIsOriginalBlockedExpectation
+  ; originalFineIntegrationLaws
+  ; actualPushforwardNumeratorZero
+  ; actualPushforwardNumeratorOne
+  ; actualPushforwardNumeratorAdd
+  ; actualPushforwardNumeratorScale
+  ; actualPushforwardNumeratorPositive
+  ; actualFinePartitionPositive
+  ; actualPushforwardUnitNormalized
+  ; actualPushforwardGaugeInvariant
+  ; actualPushforwardWilsonGaugeInvariant
+  ; actualPushforwardGibbsGaugeInvariant)
+
+open SUNPushforwardNoBare public using
+  ( sameCoarseFibreDistinctFine
+  ; coarsePushforwardMassA
+  ; coarsePushforwardMassB
+  ; noBareUniformUnnormalizedClosure
+  ; noBareUniformNormalizedClosure)
+
