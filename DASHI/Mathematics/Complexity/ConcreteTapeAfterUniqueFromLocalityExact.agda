@@ -16,7 +16,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Empty using (⊥-elim)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import Data.Nat.Properties as NatP
-open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeLocalWindowPatternsExact as Pattern
@@ -492,3 +492,106 @@ localityScanWithInteriorGivesWellFormedStep scan interior boundary =
       ; Character.localityScan = scan
       }
 
+
+------------------------------------------------------------------------
+-- GLOBAL ENDCAPS -> THE SAME EXTRACTED CENTER'S NO-GHOST BOUNDARY.
+--
+-- An executable SAT endcap constraint can establish plain first/last
+-- cells of the entire decoded after-row. The lemmas below transport
+-- exactly that evidence onto the aligned afterPrefix/afterSuffix
+-- extracted from the ORIGINAL whole-row semantic scan.
+--
+-- No unproved Boolean reflection or arbitrary outside-head premise:
+-- this is pure induction on Local.append and the original EndPlain /
+-- FrontPlain constructors. The SAT/CNF source still owes both endcaps.
+------------------------------------------------------------------------
+
+frontPlainPrefixOfAppend :
+  ∀ {State Symbol : Set}
+    (prefix tail : List (Local.TapeCell State Symbol)) →
+  Pattern.FrontPlain (Local.append prefix tail) →
+  Pattern.FrontPlain prefix
+frontPlainPrefixOfAppend [] tail front = Pattern.frontNil
+frontPlainPrefixOfAppend
+    (Local.plain symbol ∷ prefix) tail Pattern.frontCons =
+  Pattern.frontCons
+frontPlainPrefixOfAppend
+    (Local.headed state symbol ∷ prefix) tail ()
+
+endPlainTail :
+  ∀ {State Symbol : Set}
+    {first : Local.TapeCell State Symbol}
+    {rest : List (Local.TapeCell State Symbol)} →
+  Pattern.EndPlain (first ∷ rest) →
+  Pattern.EndPlain rest
+endPlainTail Pattern.endOne = Pattern.endNil
+endPlainTail (Pattern.endMore restPlain) = restPlain
+
+endPlainSuffixOfAppend :
+  ∀ {State Symbol : Set}
+    (prefix suffix : List (Local.TapeCell State Symbol)) →
+  Pattern.EndPlain (Local.append prefix suffix) →
+  Pattern.EndPlain suffix
+endPlainSuffixOfAppend [] suffix endcap = endcap
+endPlainSuffixOfAppend (_ ∷ prefix) suffix endcap =
+  endPlainSuffixOfAppend prefix suffix (endPlainTail endcap)
+
+endPlainAfterTriple :
+  ∀ {State Symbol : Set}
+    {left center right : Local.TapeCell State Symbol}
+    {suffix : List (Local.TapeCell State Symbol)} →
+  Pattern.EndPlain (left ∷ center ∷ right ∷ suffix) →
+  Pattern.EndPlain suffix
+endPlainAfterTriple endcap =
+  endPlainTail (endPlainTail (endPlainTail endcap))
+
+-- Construct the EXACT proof-relevant contract already consumed by
+-- localityScanWithInteriorGivesWellFormedStep, with no alternative
+-- center or newly assumed rewrite witness.
+noGhostFromAfterRowEndcaps :
+  ∀ {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) →
+  Pattern.FrontPlain (Local.cells after) →
+  Pattern.EndPlain (Local.cells after) →
+  NoGhostContextBoundaries scan interior
+noGhostFromAfterRowEndcaps {after = after}
+    scan interior front endcap = record
+  { afterPrefixStartsPlain =
+      frontPlainPrefixOfAppend
+        (Center.afterPrefix extracted)
+        (Local.newLeft (Center.window extracted) ∷
+         Local.newCenter (Center.window extracted) ∷
+         Local.newRight (Center.window extracted) ∷
+         Center.afterSuffix extracted)
+        (subst Pattern.FrontPlain
+          (Center.afterDecomposition extracted) front)
+  ; afterSuffixEndsPlain =
+      endPlainAfterTriple
+        (endPlainSuffixOfAppend
+          (Center.afterPrefix extracted)
+          (Local.newLeft (Center.window extracted) ∷
+           Local.newCenter (Center.window extracted) ∷
+           Local.newRight (Center.window extracted) ∷
+           Center.afterSuffix extracted)
+          (subst Pattern.EndPlain
+            (Center.afterDecomposition extracted) endcap))
+  }
+  where
+    extracted =
+      Center.centeredOccurrenceFromGlobalScan
+        (Character.localityScanToGlobalTransitionScan scan interior)
+
+-- The postcondition is the original WellFormedMachineStep, now
+-- reduced to concrete global decoded-row endcap witnesses.
+localityScanWithInteriorAndEndcapsGivesWellFormedStep :
+  ∀ {machine rule before after}
+    (scan : Character.TransitionLocalityScan machine rule before after)
+    (interior : Character.InteriorHeadConfiguration machine before) →
+  Pattern.FrontPlain (Local.cells after) →
+  Pattern.EndPlain (Local.cells after) →
+  WF.WellFormedMachineStep machine before after
+localityScanWithInteriorAndEndcapsGivesWellFormedStep scan interior front endcap =
+  localityScanWithInteriorGivesWellFormedStep
+    scan interior
+    (noGhostFromAfterRowEndcaps scan interior front endcap)
