@@ -292,3 +292,162 @@ canonicalAllNeighboursFutureSafe actions fine =
 -- The rule is a simultaneous finite adjacency-coupled Boolean update.
 -- Its proof neither establishes physical current conservation nor extends
 -- the measured dmsC sequence assays to regenerative planarian dynamics.
+
+
+------------------------------------------------------------------------
+-- SELECTED ONE-STEP BASIN: the full 54-bond signalling operator is
+-- idempotent because signalling changes only visible morphology; the
+-- stored genome, developmental memory, local junction, environment and
+-- all adjacent junction readings remain unchanged. This is an honest
+-- finite fixed-point certificate, not empirical tissue attractivity.
+------------------------------------------------------------------------
+
+fineJunctionUnchangedBySignal :
+  (field : Bio.TissueField) (p : Cube.Ternary27Point) →
+  junctionFine (fullFineStep Bio.signal field) p
+    ≡ junctionFine field p
+fineJunctionUnchangedBySignal field p with field p
+... | Bio.biologicalState g c h j e m = refl
+
+coarseJunctionUnchangedBySignal :
+  (field : Bio.CoarseTissueField) (p : Cube.Ternary27Point) →
+  junctionCoarse (fullCoarseStep Bio.signal field) p
+    ≡ junctionCoarse field p
+coarseJunctionUnchangedBySignal field p with field p
+... | Bio.futureSufficientCode g h j e m = refl
+
+sourceUnchangedBySignal :
+  (field : Bio.TissueField) (p : Cube.Ternary27Point) →
+  sourceReadyFine (fullFineStep Bio.signal field p)
+    ≡ sourceReadyFine (field p)
+sourceUnchangedBySignal field p with field p
+... | Bio.biologicalState g c h j e m = refl
+
+coarseSourceUnchangedBySignal :
+  (field : Bio.CoarseTissueField) (p : Cube.Ternary27Point) →
+  sourceReadyCoarse (fullCoarseStep Bio.signal field p)
+    ≡ sourceReadyCoarse (field p)
+coarseSourceUnchangedBySignal field p with field p
+... | Bio.futureSufficientCode g h j e m = refl
+
+fineBondIncomingUnchanged :
+  (field : Bio.TissueField)
+  (p : Cube.Ternary27Point)
+  (edge : Grid.PositiveBond) →
+  fineBondIncoming (fullFineStep Bio.signal field) p edge
+    ≡ fineBondIncoming field p edge
+fineBondIncomingUnchanged field p edge =
+  cong₂ orB
+    (cong
+      (masked (pointEqual p (Grid.bondStart edge)))
+      (fineJunctionUnchangedBySignal field (Grid.bondEnd edge)))
+    (cong
+      (masked (pointEqual p (Grid.bondEnd edge)))
+      (fineJunctionUnchangedBySignal field (Grid.bondStart edge)))
+
+coarseBondIncomingUnchanged :
+  (field : Bio.CoarseTissueField)
+  (p : Cube.Ternary27Point)
+  (edge : Grid.PositiveBond) →
+  coarseBondIncoming (fullCoarseStep Bio.signal field) p edge
+    ≡ coarseBondIncoming field p edge
+coarseBondIncomingUnchanged field p edge =
+  cong₂ orB
+    (cong
+      (masked (pointEqual p (Grid.bondStart edge)))
+      (coarseJunctionUnchangedBySignal field (Grid.bondEnd edge)))
+    (cong
+      (masked (pointEqual p (Grid.bondEnd edge)))
+      (coarseJunctionUnchangedBySignal field (Grid.bondStart edge)))
+
+fineListIncomingUnchanged :
+  (field : Bio.TissueField)
+  (p : Cube.Ternary27Point)
+  (edges : List Grid.PositiveBond) →
+  fineListIncoming (fullFineStep Bio.signal field) p edges
+    ≡ fineListIncoming field p edges
+fineListIncomingUnchanged field p [] = refl
+fineListIncomingUnchanged field p (edge ∷ rest) =
+  cong₂ orB
+    (fineBondIncomingUnchanged field p edge)
+    (fineListIncomingUnchanged field p rest)
+
+coarseListIncomingUnchanged :
+  (field : Bio.CoarseTissueField)
+  (p : Cube.Ternary27Point)
+  (edges : List Grid.PositiveBond) →
+  coarseListIncoming (fullCoarseStep Bio.signal field) p edges
+    ≡ coarseListIncoming field p edges
+coarseListIncomingUnchanged field p [] = refl
+coarseListIncomingUnchanged field p (edge ∷ rest) =
+  cong₂ orB
+    (coarseBondIncomingUnchanged field p edge)
+    (coarseListIncomingUnchanged field p rest)
+
+fineResponseUnchangedBySignal :
+  (field : Bio.TissueField) (p : Cube.Ternary27Point) →
+  fineMorphogenicResponse (fullFineStep Bio.signal field) p
+    ≡ fineMorphogenicResponse field p
+fineResponseUnchangedBySignal field p =
+  cong₂ Bio.andB
+    (sourceUnchangedBySignal field p)
+    (fineListIncomingUnchanged field p Grid.allPositiveBonds)
+
+coarseResponseUnchangedBySignal :
+  (field : Bio.CoarseTissueField) (p : Cube.Ternary27Point) →
+  coarseMorphogenicResponse (fullCoarseStep Bio.signal field) p
+    ≡ coarseMorphogenicResponse field p
+coarseResponseUnchangedBySignal field p =
+  cong₂ Bio.andB
+    (coarseSourceUnchangedBySignal field p)
+    (coarseListIncomingUnchanged field p Grid.allPositiveBonds)
+
+fineSignalIgnoresPriorMorphology :
+  (state : Bio.BiologicalState) (new : Bool) →
+  Bio.step Bio.signal (Coupled.withMorphology state new)
+    ≡ Bio.step Bio.signal state
+fineSignalIgnoresPriorMorphology
+  (Bio.biologicalState g c h j e m) new = refl
+
+coarseSignalIgnoresPriorMorphology :
+  (state : Bio.FutureSufficientCode) (new : Bool) →
+  Bio.coarseStep Bio.signal
+    (Coupled.withCoarseMorphology state new)
+    ≡ Bio.coarseStep Bio.signal state
+coarseSignalIgnoresPriorMorphology
+  (Bio.futureSufficientCode g h j e m) new = refl
+
+allNeighbourSignalIdempotentAt :
+  (field : Bio.TissueField) (p : Cube.Ternary27Point) →
+  fullFineStep Bio.signal (fullFineStep Bio.signal field) p
+    ≡ fullFineStep Bio.signal field p
+allNeighbourSignalIdempotentAt field p
+  rewrite fineResponseUnchangedBySignal field p
+        | fineSignalIgnoresPriorMorphology
+            (Bio.step Bio.signal (field p))
+            (fineMorphogenicResponse field p) = refl
+
+allNeighbourCoarseSignalIdempotentAt :
+  (field : Bio.CoarseTissueField) (p : Cube.Ternary27Point) →
+  fullCoarseStep Bio.signal (fullCoarseStep Bio.signal field) p
+    ≡ fullCoarseStep Bio.signal field p
+allNeighbourCoarseSignalIdempotentAt field p
+  rewrite coarseResponseUnchangedBySignal field p
+        | coarseSignalIgnoresPriorMorphology
+            (Bio.coarseStep Bio.signal (field p))
+            (coarseMorphogenicResponse field p) = refl
+
+-- Fixed-point/basin transport on every voxel under the original projection.
+fullBasinTargetProjection :
+  (field : Bio.TissueField) (p : Cube.Ternary27Point) →
+  Bio.project
+    (fullFineStep Bio.signal
+      (fullFineStep Bio.signal field) p)
+  ≡ fullCoarseStep Bio.signal
+      (Bio.spatialProject (fullFineStep Bio.signal field)) p
+fullBasinTargetProjection field p =
+  Coupled.atEveryVoxel
+    (fullAgreementPreserved Bio.signal
+      (fullFineStep Bio.signal field)
+      (Bio.spatialProject (fullFineStep Bio.signal field))
+      (Coupled.initialFieldAgreement (fullFineStep Bio.signal field))) p
