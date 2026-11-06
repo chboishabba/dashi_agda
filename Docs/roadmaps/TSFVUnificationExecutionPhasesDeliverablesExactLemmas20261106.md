@@ -10,7 +10,7 @@
 
 ## Exact producer, phase and deliverable synchronization (6 November 2026)
 
-**Three different counts, never interchangeable:** **39 named** physical producer lemmas (10 OBS + 12 HIL + 9 KK + 8 BIDI) in [the source theorem ledger](TSFVFourPhysicalCutsExactProducerLemmas20261106.md); **48** disjoint execution deliverables (V01–V07, O01–O12, H01–H12, K01–K09, B01–B08) in this file; **186** canonical P00–P11 lemma IDs in [the original ledger](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). The former two are refinements/crosswalks, not newly minted canonical theorems.
+**Three different counts, never interchangeable:** **40 named** physical producer lemmas (10 OBS + 12 HIL + 10 KK + 8 BIDI) in [the source theorem ledger](TSFVFourPhysicalCutsExactProducerLemmas20261106.md); **48** disjoint execution deliverables (V01–V07, O01–O12, H01–H12, K01–K09, B01–B08) in this file; **186** canonical P00–P11 lemma IDs in [the original ledger](Emergent31QuantumYMKKExactLemmaRoadmap20261103.md). The former two are refinements/crosswalks, not newly minted canonical theorems.
 
 **Most recent source-exact receipts in #1460 (not kernel/physical completion):** `TSVFOriginalInterventionRetardedPrefixExact`, `TSVFOriginalSelectedFiniteCommutatorResponseExact`, `TSVFOriginalForwardPositiveFunctionalExact` (normalization, additivity, scalar homogeneity, adjoint-square norm under physical operator laws), `TSVFOriginalQuantumSurfaceSpatialNonpromotionExact` (singleton countermodel to fictitious 4D inference), `TSVFOriginalR445AllWordActualPushforwardExact`, `TSVFOriginalR445ReflectedAllWordGramExact` (real reflected all-pair-word Gram on the literal native R445 fine/pushed measure), `TSVFObserverOSCyclicGramSetoidExact` and `TSVFOriginalOSPositiveWeightNotReflectionPositiveExact`. Original R445 real sources remain in separate non-`--safe` `TSFVPhysicalR445AllWordRegression`. Do not assert GNS positivity or actual interacting YM OS from these alone.
 
@@ -18,7 +18,7 @@
 
 **Critical serial producer chain:** O01–O04 -> O05 response -> O06 physical symbol -> O07/O08 original dimension/manifold -> O09–O11 (3,1) physical cone; H01–H05 original complete GNS/Stone parallel with O01–O04; YM independent H06 fine Wilson RP/continuum -> H07 actual all-word observer–OS Gram and dense onto unitary -> H08/H09 full Stone/spectral -> H10–H12 correlators/Wick/pointer; K01–K06 source-selected 5D action/solution -> K07 equality with *independently measured* original O08/O09 g4; B01–B08 physical source and limit BIDI closes last. No stage may be labelled PHYSICAL_CLOSED on the strength of a requested premise.
 
-**Current acceptance receipts:** source-written, GH commits available, original exact-head `parallel_checker` **not executed/green**, no verified full physical theorem. A new source-guard `scripts/check_tsfv_39_physical_producer_inventory_20261106.py` checks 39 names + 48 tasks and this crosswalk; the established 186/48 checker remains independent.
+**Current acceptance receipts:** source-written, GH commits available, original exact-head `parallel_checker` **not executed/green**, no verified full physical theorem. A new source-guard `scripts/check_tsfv_40_physical_producer_inventory_20261106.py` checks 40 names + 48 tasks and this crosswalk; the established 186/48 checker remains independent.
 
 ## Decisive maximum cut and Pareto ordering
 
