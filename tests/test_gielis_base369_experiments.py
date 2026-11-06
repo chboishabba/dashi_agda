@@ -594,3 +594,31 @@ def test_si_optical_interval_uses_canonical_c_and_zero_lower_bound():
     assert Fraction(zero["absolute_torque_upper_Nm"])==0
     with pytest.raises(ValueError):
         si_torque_uncertainty_enclosure("100","80","1","2","0","1",8)
+
+
+def test_new_native_bishop_conditional_369_trig_compiler_and_edge_identity():
+    bishop=(ROOT/"DASHI/Geometry/GielisBishopPolynomialExact.agda").read_text()
+    assert "bishopUnityCorrection" in bishop
+    assert "bishopCorrectedQuarticFromPythagorean" in bishop
+    assert "bishopGielisConfiguredTrigIdentity" in bishop
+    assert "BishopP.≃-trans" in bishop
+    edges=(ROOT/"DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda").read_text()
+    for theorem in ("edgeGroundStateIdentity","edgeSquareNonnegative",
+                    "finiteGroundStateEdgeIdentity","finiteEdgeSquareSumNonnegative"):
+        assert theorem in edges
+    assert "Fubini.sumRationalAdd" in edges
+    assert "Sums.sumRationalCong" in edges
+    assert "Ring.solve-∀" in edges
+    assert "postulate" not in edges.split("open import")[1]
+
+
+def test_finite_ground_state_transform_identity_exact_rational_probes():
+    from gielis_raster_fd_positivity_certificate import ground_state_identity_exact
+    from fractions import Fraction as F
+    edges=[[1],[0,2],[1]]
+    q=[2,3,5]
+    for x in ([0,0,0],[2,-3,7],[2,3,5],[-2,7,-9],
+              [F(3,7),F(13,17),F(-11,5)]):
+        proof=ground_state_identity_exact(q,edges,x)
+        assert proof["energy"] == proof["diagonal_potential"]+proof["edge_squares"]
+        assert proof["edge_squares"]>=0
