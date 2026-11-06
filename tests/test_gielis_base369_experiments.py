@@ -138,7 +138,7 @@ def test_non369_controls_are_not_silently_excluded():
 def test_roadmap_has_complete_exact_leaves_and_deliverables():
     import re
     roadmap = (ROOT / "Docs/support/reference/GielisBase369Roadmap.md").read_text()
-    ids = re.findall(r"^\\| (G\\d\\d) \\|",roadmap,flags=re.MULTILINE)
+    ids = re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.MULTILINE)
     assert ids == [f"G{i:02d}" for i in range(1,22)]
     for phase in range(6):
         assert f"P{phase} " in roadmap or f"P{phase} —" in roadmap
