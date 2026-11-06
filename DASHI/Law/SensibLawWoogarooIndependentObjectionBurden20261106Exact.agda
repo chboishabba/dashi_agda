@@ -28,7 +28,8 @@ import DASHI.Law.SensibLawWoogarooAllSpeciesOAGSourceReconciliation20261106Exact
 
 data OriginalSource : Set where
   qut20260312 qcc20260312 communityOriginal
-    independentFieldOriginal proponentPD20260130 governmentDecision : OriginalSource
+    rspca2025 holdingTheLine2023 independentFieldOriginal
+    proponentPD20260130 governmentDecision : OriginalSource
 
 data Claim : Set where
   matureForestLoss climateRefugeLoss corridorSeverance
@@ -40,7 +41,8 @@ data Claim : Set where
     approvedOffsetSpatialIdentity actualOffsetDeclaration : Claim
 
 data ReceiptStage : Set where
-  originalAuthoredSubmission primaryFieldObservation
+  originalAuthoredSubmission originalOrganisationPublicReport
+    originalIndependentCommissionedAnalysis primaryFieldObservation
     proponentModelAssertion officialRecord corroboratedSameSite
     unresolvedUnderlyingRecord : ReceiptStage
 
@@ -113,6 +115,39 @@ qccRedZone = claim-receipt qcc20260312 irreplaceableRedZone
   originalAuthoredSubmission
   "QCC argues high-value red-zone/irreplaceable habitat classification; full original zoning report and selected project polygon required."
   "QCC submission, 12 March 2026, pp 3-4"
+  false false
+
+-- Newly verified independent FIRST-PARTY records (not rephrased QCC):
+-- RSPCA Queensland, Emma Lagoon, published 2 June 2025 and 11 April
+-- 2025. In Nov 2024 Maximus and William received RSPCA treatment;
+-- both later returned to Woogaroo Forest / bordering forest. RSPCA
+-- says three koalas from the same broader area entered care, not all
+-- three proved inside the exact EPBC 2019/8575 impact polygon.
+rspcaMaximusDirectOriginal : ClaimReceipt
+rspcaMaximusDirectOriginal = claim-receipt rspca2025 rescueReturn
+  originalOrganisationPublicReport
+  "RSPCA Queensland confirms Maximus (treated from Nov 2024) returned to Woogaroo Forest after six months' care; three koalas entered care from the same general area."
+  "RSPCA Queensland / Emma Lagoon, 2 June 2025, Maximus the Koala returns to Woogaroo Forest"
+  false false
+
+rspcaWilliamDirectOriginal : ClaimReceipt
+rspcaWilliamDirectOriginal = claim-receipt rspca2025 rescueReturn
+  originalOrganisationPublicReport
+  "RSPCA confirms William rescued Bellbird Park November 2024 and returned to a forest described as bordering Woogaroo Forest."
+  "RSPCA Queensland / Emma Lagoon, 11 April 2025, William the Koala returns home"
+  false false
+
+-- Original professional source is now DIRECTLY accessible: 2023
+-- QCC-commissioned Holding the Line report, by Shannon Mooney and
+-- Andrew Davidson; Table 8 citing HLW 2021 maps Ipswich LGA 21%
+-- remnant vegetation. It is NOT a new 2026 cover measurement, not
+-- Woogaroo-polygon remnant proportion, and not a universal legally
+-- binding 30% biological threshold.
+holdingTheLineOriginal : ClaimReceipt
+holdingTheLineOriginal = claim-receipt holdingTheLine2023 vegetation21Percent
+  originalIndependentCommissionedAnalysis
+  "Ipswich City LGA: 109315 ha total council area and 21 percent remnant vegetation according to Table 8, HLW 2021 source."
+  "Mooney and Davidson, Holding the Line (QCC, version 2.0, 31 August 2023), Table 8 p31"
   false false
 
 -- Explicit non-promotion: a full OAG numerical score and four-species
