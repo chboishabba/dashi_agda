@@ -24,6 +24,7 @@ module DASHI.Mathematics.Complexity.Karp21ConwayTotalChainExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 power : Nat → Nat → Nat
 power a zero = 1
@@ -36,9 +37,9 @@ iterate f (suc n) seed = f (iterate f n seed)
 -- q is the last arrow argument, p is penultimate.
 -- Zero inputs belong only to the total parser's non-Conway fallback.
 chainStep : Nat → (Nat → Nat) → Nat → Nat → Nat
-chainStep value extension zero p = 0
+chainStep value extension zero p = value
 chainStep value extension (suc zero) p = extension p
-chainStep value extension (suc (suc q)) zero = 0
+chainStep value extension (suc (suc q)) zero = value
 chainStep value extension (suc (suc q)) (suc p) =
   iterate
     (λ k → chainStep value extension (suc q) k)
@@ -114,6 +115,84 @@ threeEntries :
   evaluate (a ∷ b ∷ c ∷ [])
     ≡ chainStep a (power a) c b
 threeEntries a b c = refl
+
+------------------------------------------------------------------------
+-- Universal rule-five tail elimination. The extension invariant at 1
+-- holds for every reachable prefix. Once a 1 has been appended,
+-- its successor state is constant on ALL future arguments.
+------------------------------------------------------------------------
+
+iterateConstant :
+  (f : Nat → Nat) (v n : Nat) →
+  ((k : Nat) → f k ≡ v) →
+  iterate f n v ≡ v
+iterateConstant f v zero constant = refl
+iterateConstant f v (suc n) constant
+  rewrite iterateConstant f v n constant = constant v
+
+stepConstant :
+  (v : Nat) (ext : Nat → Nat) →
+  ((k : Nat) → ext k ≡ v) →
+  (q p : Nat) →
+  chainStep v ext q p ≡ v
+stepConstant v ext constant zero p = refl
+stepConstant v ext constant (suc zero) p = constant p
+stepConstant v ext constant (suc (suc q)) zero = refl
+stepConstant v ext constant (suc (suc q)) (suc p) =
+  iterateConstant
+    (λ k → chainStep v ext (suc q) k)
+    v p
+    (stepConstant v ext constant (suc q))
+
+startOneInvariant :
+  (a : Nat) → extension (start a) 1 ≡ value (start a)
+startOneInvariant a = refl
+
+pushOneInvariant :
+  (state : Prefix) (n : Nat) →
+  extension (push state n) 1 ≡ value (push state n)
+pushOneInvariant state n = refl
+
+constantRun :
+  (state : Prefix) →
+  ((k : Nat) → extension state k ≡ value state) →
+  (rest : List Nat) →
+  run state rest ≡ value state
+constantRun state constant [] = refl
+constantRun (prefix v ext) constant (n ∷ rest) =
+  trans
+    (constantRun
+      (push (prefix v ext) n)
+      (λ q →
+        trans
+          (stepConstant v ext constant q n)
+          (sym (constant n)))
+      rest)
+    (constant n)
+
+pushOneConstant :
+  (state : Prefix) →
+  extension state 1 ≡ value state →
+  (q : Nat) →
+  extension (push state 1) q ≡ value state
+pushOneConstant (prefix v ext) invariant zero = refl
+pushOneConstant (prefix v ext) invariant (suc zero) = invariant
+pushOneConstant (prefix v ext) invariant (suc (suc q)) = refl
+
+dropAfterOne :
+  (state : Prefix) →
+  extension state 1 ≡ value state →
+  (rest : List Nat) →
+  run (push state 1) rest ≡ value state
+dropAfterOne state invariant rest =
+  trans
+    (constantRun
+      (push state 1)
+      (λ q → trans
+        (pushOneConstant state invariant q)
+        (sym invariant))
+      rest)
+    invariant
 
 -- Concrete rules small enough for ordinary normalization.
 twoThreeTwo : evaluate (2 ∷ 3 ∷ 2 ∷ []) ≡ 16
