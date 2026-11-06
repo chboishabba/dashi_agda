@@ -12,25 +12,28 @@ module DASHI.Biology.Physical.SourceIndexedBiologicalCarrierExact where
 open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
-import DASHI.Biology.Cell.CellStateAttractor as Cell
+import DASHI.Biology.CellStateAttractor as Cell
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Finite
 import DASHI.Biology.Physical.PlanarianControlCalibrationExact as Planarian
+
+open Cell.CoupledCellState
+open Cell.CellPhenotypeQuotient
 
 record CoupledBiologicalFrame
     (C : Cell.CoupledCellState) : Set where
   constructor coupledBiologicalFrame
   field
-    genome : Cell.GenomeState C
-    chromatin : Cell.ChromatinState C
-    rna : Cell.RNAState C
-    proteome : Cell.ProteomeState C
-    metabolism : Cell.MetabolicState C
-    membrane : Cell.MembraneState C
-    environment : Cell.Environment C
-    developmentalHistory : Cell.History C
-    assembled : Cell.CellState C
+    genome : GenomeState C
+    chromatin : ChromatinState C
+    rna : RNAState C
+    proteome : ProteomeState C
+    metabolism : MetabolicState C
+    membrane : MembraneState C
+    environment : Environment C
+    developmentalHistory : History C
+    assembled : CellState C
     assembledExactly :
-      assembled ≡ Cell.assemble C
+      assembled ≡ assemble C
         genome chromatin rna proteome metabolism membrane
         environment developmentalHistory
     timeIndex : Nat
@@ -42,21 +45,21 @@ open CoupledBiologicalFrame public
 
 assembleFrame :
   (C : Cell.CoupledCellState) →
-  (g : Cell.GenomeState C) →
-  (c : Cell.ChromatinState C) →
-  (r : Cell.RNAState C) →
-  (p : Cell.ProteomeState C) →
-  (m : Cell.MetabolicState C) →
-  (b : Cell.MembraneState C) →
-  (e : Cell.Environment C) →
-  (h : Cell.History C) →
+  (g : GenomeState C) →
+  (c : ChromatinState C) →
+  (r : RNAState C) →
+  (p : ProteomeState C) →
+  (m : MetabolicState C) →
+  (b : MembraneState C) →
+  (e : Environment C) →
+  (h : History C) →
   (t : Nat) →
   (source specimen protocol : String) →
   CoupledBiologicalFrame C
 assembleFrame C g c r p m b e h t source specimen protocol =
   coupledBiologicalFrame
     g c r p m b e h
-    (Cell.assemble C g c r p m b e h) refl
+    (assemble C g c r p m b e h) refl
     t source specimen protocol
 
 record SourceQualifiedCellObservation
@@ -65,9 +68,9 @@ record SourceQualifiedCellObservation
   constructor sourceQualifiedCellObservation
   field
     frame : CoupledBiologicalFrame C
-    observedPhenotype : Cell.Phenotype Q
+    observedPhenotype : Phenotype Q
     matchesNativeObservation :
-      observedPhenotype ≡ Cell.phenotype Q (assembled frame)
+      observedPhenotype ≡ phenotype Q (assembled frame)
     observationReceipt : String
 
 open SourceQualifiedCellObservation public
@@ -80,7 +83,7 @@ nativeObservation :
   SourceQualifiedCellObservation C Q
 nativeObservation C Q frame receipt =
   sourceQualifiedCellObservation
-    frame (Cell.phenotype Q (assembled frame)) refl receipt
+    frame (phenotype Q (assembled frame)) refl receipt
 
 -- History is an actual dynamic coordinate in the finite specialization.
 -- The newest action is consed onto the causal history.  This representation
