@@ -27,6 +27,7 @@ module DASHI.Foundations.BishopGroupedCauchyParityTelescopeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as R
 import RealProperties as RP
@@ -121,7 +122,7 @@ universalFiniteRealGroupedTelescope ee oo source sourceDegree zero =
   let open RP.ℝ-Solver
   in
   solve 0
-    (λ → (Κ 0ℚᵘ ⊖ Κ 0ℚᵘ) ⊜ ⊝ Κ 0ℚᵘ)
+    ((Κ 0ℚᵘ ⊖ Κ 0ℚᵘ) ⊜ (⊝ Κ 0ℚᵘ))
     RP.≃-refl
 universalFiniteRealGroupedTelescope ee oo source sourceDegree (suc count) =
   let
