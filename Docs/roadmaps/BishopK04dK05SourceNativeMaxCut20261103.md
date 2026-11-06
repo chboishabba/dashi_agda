@@ -1273,3 +1273,26 @@ modules are imported into the 3 golden TOE roots, focused CI now covers
 No exact-head Agda kernel receipt exists in this connector session.
 Do not promote any new module or original analytic cut to kernelChecked
 without that receipt.
+
+
+## 2026-11-06 terminal analytic convergence sweep — original geometric derivative values and uniform half-ball residual
+
+**New source-written owners (golden Agda PR #1408):**
+
+- \`DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda\`: imports the **actual vendored** \`Sequence.geometric-series-isConvergent\`, proves \`geometricPartialIsOriginalBishopSeries\` for all finite counts and transports it to the **literal** source negative-log and Machin-arctangent factor-derivative finite sums. It provides \`originalLogFiniteDerivativeSeriesConverges\`, \`originalAtanFiniteDerivativeSeriesConverges\` on the actual half-ball, and the literal 1/5 and 1/239 source values. Vendored \`Sequence.1-r≄0\` is private, so the proof correctly projects the computed inverse *from the vendor's original convergent pair* instead of assuming its private nonzero witness or creating a second inverse.
+- \`DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda\`: proves all-degree Bishop-order power domination \`|x^N|≤r^N\` for any \`|x|≤r\` with nonnegative radius and, **uniformly for every actual source Machin point \`|t|≤1/2\`**, \`|(-t²)^N|≤(1/4)^N\`. It constructs the original square/absolute identification and reuses the pinned \`Sequence.∣xⁿ∣≃∣x∣ⁿ\`, \`Sequence.x≤y∧nonNegx⇒xⁿ≤yⁿ\`, and \`Sequence.∣r∣<1⇒rⁿ→0\` to conclude that the common source quarter-power envelope converges to zero.
+
+**What this pays:** a fully source-expressed derivative-series convergence certificate (rather than an extra premise) at both actual Machin points; one constructive uniform geometric **residual** modulus independent of the original point; the previously written original finite-factor derivatives and all-degree geometric telescope now sit above one original constructive geometric limit owner.
+
+**What it does not pay:** the remaining uniform limit of **factor difference quotients** \`[f(x+h)-f(x)]/h\` represented division-free as the original source BishopFactorDerivativeAt; a geometric remainder at the finite derivative level does *not*, on its own, justify differentiating the literal infinite sum. K05's exponent-of-atan-to-Cayley identification still requires the actual nested-series absolute-convergence/termwise-composition lift. K04d-LOG still requires the original exponential/negative-log composition on the same source carrier. Original exp/sin/cos uniform continuity and actual selected zeta/xi semantic value identity remain separate K04d-CONTINUITY leaves.
+
+**Acceptance:** Both owners are committed and imported into all 3 golden TOE roots; the focused canonical parallel-checker workflow includes **53** owners with \`--safe\`, with three additional \`--safe\` TOE checks. No exact-head Agda kernel or TOE receipt was available in this interaction. These source owners are **not certified** merely because they are \`{-# OPTIONS --safe #-}\` and lack explicit holes. A successful Agda elaboration is necessary.
+
+**Fail-closed terminal cut:**
+1. Derive the original Bishop LOG/ATAN/EXP **uniform factor-quotient** limit, using explicit original full partial series error and radius-gap envelope (not merely the pointwise derivative series or original finite residuals).
+2. Prove source absolutely convergent **nested exponential composition reindexing**, thereby evaluating the actual source \`exp_B(-L_B(x))\` and two selected actual \`exp_C(2i atan_B(t))\` at 1/5 and 1/239. Prior formal all-degree coefficient arithmetic is a donor, not the analytic proof.
+3. Establish original Bishop exponential/trigonometric local **uniform factorial tails** and consequent original finite Dirichlet-term sequential continuity, then apply already-owned Basel uniform approximation.
+4. Construct actual original selected \`ZetaHalfPlaneLayer.zetaHalfPlane\` and \`CompletedRiemannZeta.xi\` **proof-relevant value identities** at the function layer. Their current abstract \`Set\` descriptors cannot be eliminated by finite-series algebra.
+5. Execute \`scripts/run_agda29_parallel_check.sh --safe\` at the exact PR head, all focused 53 and all three TOE roots; reconcile every kernel error before theorem promotion.
+
+Do not mark terminal proofs complete until all five close.
