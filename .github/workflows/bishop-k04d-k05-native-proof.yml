@@ -57,13 +57,9 @@ jobs:
       - name: Install Nix (the repository pins the Agda-2.9 executable)
         uses: nix-community/install-nix-action@v31
 
-      - name: Resolve repository-pinned Agda-2.9 executable
+      - name: Validate canonical Agda parallel checker entrypoint
         shell: bash
-        run: |
-          set -euo pipefail
-          AGDA_STORE="$(nix build --no-link --print-out-paths '.#agda29-parallel')"
-          echo "AGDA_BIN=${AGDA_STORE}/bin/agda" >> "$GITHUB_ENV"
-          "${AGDA_STORE}/bin/agda" --version
+        run: bash -n scripts/run_agda29_parallel_check.sh
 
       - name: Resolve the repository-selected experimental stdlib
         shell: bash
@@ -87,18 +83,19 @@ jobs:
         shell: bash
         run: python3 scripts/check_bishop_machin_rational_gaussian_phase.py | tee bishop-machin-rational-gaussian.log
 
-      - name: Kernel check all focused K05 and K04d new owners
+      - name: Kernel check all focused K05 and K04d new owners via parallel checker
         shell: bash
         run: |
-          set -uo pipefail
-          status=0
-          source_stdlib="$GITHUB_WORKSPACE/.agda-stdlib/src"
-          flags=(
-            --no-libraries --no-default-libraries --safe
-            -i . -i vendor/bishop -i DCHoTT-Agda -i cubical
-            -i "$source_stdlib"
-            -WnoUnsupportedIndexedMatch
-          )
+          set -euo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-agda-status"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/xdg-cache"
+          export AGDA_STDLIB_SRC_29="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export AGDA_JOBS=2
+          export DASHI_NO_TMUX=1
+          export AGDA_LOG_PATH="$RUNNER_TEMP/bishop-focused-parallel-check.log"
           files=(
             DASHI/Analysis/BishopOneStepLagConvergenceExact.agda
             DASHI/Analysis/BishopSetoidSqueezeConvergenceExact.agda
@@ -144,37 +141,30 @@ jobs:
             DASHI/Analysis/BishopOriginalCompletedZetaUniformChartContinuityExact.agda
             DASHI/Analysis/BishopRound11NativeComplexRectangleExact.agda
           )
-          : > bishop-focused-kernel.log
-          for file in "${files[@]}"; do
-            echo "=== golden agda --safe ${file} ===" | tee -a bishop-focused-kernel.log
-            timeout 600s "$AGDA_BIN" "${flags[@]}" "$file" 2>&1 | tee -a bishop-focused-kernel.log
-            rc=${PIPESTATUS[0]}
-            if [[ ${rc} -ne 0 ]]; then
-              echo "FAIL rc=${rc} ${file}" | tee -a bishop-focused-kernel.log
-              status=1
-            else
-              echo "PASS ${file}" | tee -a bishop-focused-kernel.log
-            fi
-          done
-          exit "${status}"
+          printf '%s\n' "${files[@]}" > "$RUNNER_TEMP/bishop-focused-targets.txt"
+          export AGDA_TARGETS_FILE="$RUNNER_TEMP/bishop-focused-targets.txt"
+          bash scripts/run_agda29_parallel_check.sh --safe 2>&1 | tee bishop-focused-kernel.log
 
-      - name: Check three canonical TOE roots against exact branch
+      - name: Check three canonical TOE roots via parallel checker
         if: always()
         shell: bash
         run: |
           set -uo pipefail
+          export DASHI_REPO_ROOT="$GITHUB_WORKSPACE"
+          export DASHI_AGDA29_CACHE_ROOT="$RUNNER_TEMP/dashi-agda29"
+          export DASHI_STATUS_DIR="$RUNNER_TEMP/dashi-agda-status"
+          export XDG_CACHE_HOME="$RUNNER_TEMP/xdg-cache"
+          export AGDA_STDLIB_SRC_29="$GITHUB_WORKSPACE/.agda-stdlib/src"
+          export AGDA_FLAKE="github:agda/agda/86a1179c1f886da773dc53be920bcca5d876884e#debug.bin"
+          export AGDA_JOBS=2
+          export DASHI_NO_TMUX=1
+          export AGDA_LOG_PATH="$RUNNER_TEMP/bishop-toe-parallel-check.log"
+          unset AGDA_TARGETS_FILE
           status=0
-          source_stdlib="$GITHUB_WORKSPACE/.agda-stdlib/src"
-          flags=(
-            --no-libraries --no-default-libraries
-            -i . -i vendor/bishop -i DCHoTT-Agda -i cubical
-            -i "$source_stdlib"
-            -WnoUnsupportedIndexedMatch
-          )
           : > bishop-toe-kernel.log
-          for file in             DASHI/EverythingTOESymmetryResolved369.agda             DASHI/Unifier.agda             DASHI/Unified/Everything.agda; do
+          for file in DASHI/EverythingTOESymmetryResolved369.agda DASHI/Unifier.agda DASHI/Unified/Everything.agda; do
             echo "=== golden TOE ${file} ===" | tee -a bishop-toe-kernel.log
-            timeout 600s "$AGDA_BIN" "${flags[@]}" "$file" 2>&1 | tee -a bishop-toe-kernel.log
+            timeout 600s bash scripts/run_agda29_parallel_check.sh "${file}" 2>&1 | tee -a bishop-toe-kernel.log
             rc=${PIPESTATUS[0]}
             if [[ ${rc} -ne 0 ]]; then
               echo "FAIL rc=${rc} ${file}" | tee -a bishop-toe-kernel.log
