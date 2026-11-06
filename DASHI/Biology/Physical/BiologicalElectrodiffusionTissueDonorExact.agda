@@ -12,6 +12,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
+import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as EM
 import DASHI.Biology.Physical.SIBioelectricNetworkAdapterExact as BioSI
 import DASHI.Biology.Cell.BioelectricNetwork as Network
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
@@ -52,7 +53,7 @@ sourcePoissonChargeAgrees :
   (state : PNP.CoupledState (PNP.fluxLaw (electroDiffusion socket))) →
   PNP.ionicChargeDensity
     (PNP.poissonCoupling (electroDiffusion socket)) state
-  ≡ PNP.EM.chargeDensity
+  ≡ EM.chargeDensity
       (PNP.electromagneticField (electroDiffusion socket))
       (PNP.fieldState
         (PNP.fluxLaw (electroDiffusion socket)) state)
