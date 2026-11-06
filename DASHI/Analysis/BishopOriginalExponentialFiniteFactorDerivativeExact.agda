@@ -23,11 +23,13 @@ module DASHI.Analysis.BishopOriginalExponentialFiniteFactorDerivativeExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
 
 import DASHI.Analysis.BishopFactorDerivativeExact as Factor
+import DASHI.Analysis.BishopOneStepLagConvergenceExact as Lag
 import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Power
 import DASHI.Analysis.BishopNaturalScaleEmbeddingBridgeExact as Scale
 import DASHI.Analysis.BishopInverseFactorialDerivativeCoefficientExact as Coeff
@@ -125,3 +127,45 @@ originalSourceExpFinitePartialFactorDerivative x (suc count) =
   Factor.factorDerivativeAdd
     (originalSourceExpFinitePartialFactorDerivative x count)
     (originalSourceExpTermFactorDerivative x count)
+
+
+------------------------------------------------------------------------
+-- THE ACTUAL SOURCE DERIVATIVE SERIES CONVERGES TO THE ACTUAL
+-- ORIGINAL BISHOP EXPONENTIAL. No freely chosen limit function.
+--
+-- Finite partial derivative = one-step lag of original exponential
+-- partial. Pointwise derivative-series convergence now follows
+-- directly from the pinned Bishop one-step-lag convergence theorem.
+-- The derivative-of-limit interchange remains a separate gate.
+------------------------------------------------------------------------
+
+sourceExponentialDerivativeFiniteShift :
+  (x : R.ℝ) (count : Nat) →
+  R._≃_
+    (sourceExponentialFiniteDerivativePartial x (suc count))
+    (sourceExponentialFinitePartial x count)
+sourceExponentialDerivativeFiniteShift x zero =
+  let open RP.ℝ-Solver in
+  solve 0
+    (Κ 0ℚᵘ ⊕ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+    RP.≃-refl
+sourceExponentialDerivativeFiniteShift x (suc count) =
+  RP.+-cong
+    (sourceExponentialDerivativeFiniteShift x count)
+    RP.≃-refl
+
+sourceOriginalExponentialDerivativeSeriesConverges :
+  (x : R.ℝ) →
+  Seq._ConvergesTo_
+    (λ count → sourceExponentialFiniteDerivativePartial x count)
+    (Exp.bishopExp x)
+sourceOriginalExponentialDerivativeSeriesConverges x =
+  Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count) →
+      RP.≃-symm
+        (sourceExponentialDerivativeFiniteShift x count)})
+    (Exp.bishopExp x ,
+      Lag.oneStepLagConverges
+        (sourceExponentialFinitePartial x)
+        (Exp.bishopExp x)
+        (Exp.bishopExpConverges x))
