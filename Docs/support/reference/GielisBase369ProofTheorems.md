@@ -2044,3 +2044,134 @@ actual measurements.
 **Status:** this is a SOURCE ARCHAEOLOGY / REUSE
 correction, not an independent E36 proof of
 the four remaining promoted results.
+
+
+## E37 — Original Bishop complex-series same-carrier transport
+
+The existing BishopComplexSeriesConvergenceExact and
+BishopSetoidComplexExact declare different BishopComplex
+record types with the identical vendored Bishop-real
+coordinates. GielisBishopComplexSeriesSameCarrierExact.agda
+constructs total conversion maps and proves both round
+trips by definitional equality. It also proves the
+correspondence of addition, multiplication, zero and one
+with BishopComplexAlgebraExact, transports the componentwise
+setoid relation in both directions, and reuses the
+ORIGINAL complexSeriesLimitConvergence and
+complexSeriesLimitUnique theorems on the actual complex
+carrier consumed by the Gielis exponential.
+
+This closes the *generic complex-series ABI transport* at
+source level. Remaining: select the actual imaginary-axis
+factorial sequence, prove its absolute componentwise
+convergence and Cauchy product, identify its real/imaginary
+parts with original Round11 sine/cosine, and identify
+the selected pi with the trigonometric period. Agda
+kernel acceptance has not been obtained here.
+
+## E38 — Full unrestricted exact cyclotomic C36 signal inversion
+
+The original scripts/gielis_cyclotomic36_exact.py
+implements K=Q[x]/(x^12-x^6+1), with zeta^36=1 and
+the complete 1296 exact cyclic character-resolution
+pairs. Its prior selected-mode recovery was not the
+full input space. The new script
+scripts/gielis_cyclotomic36_unrestricted_exact.py
+explicitly defines
+
+\[
+ F(k)=\sum_{j=0}^{35} f(j)\zeta^{-kj},\qquad
+ f(j)=\frac1{36}\sum_{k=0}^{35}F(k)\zeta^{kj}.
+\]
+
+It checks every original character-resolution pair
+and **both** transforms of all 36 standard basis
+vectors in the original 12-rational-coordinate field,
+plus non-basis cyclotomic examples. The identity
+on the basis and finite field-linearity prove
+inversion for arbitrary K^36 signals, not just the
+seven selected frequency modes.
+
+Thus unrestricted C36 Fourier inversion is CLOSED at
+the exact algebraic/computational level. Still OPEN:
+construct this precise original cyclotomic K coefficient
+carrier and its complete 36-character-resolution
+instance natively in Agda, then invoke the already
+existing Shor/NSTriad generic Fourier inverse.
+A computational proof is not an Agda kernel receipt.
+
+## E39 — Rigorous quantitative a posteriori Cartesian FD error
+
+For the selected m=3 continuum Gielis domain,
+the independently proved E35/E15 interval is
+\(224/55<\lambda_c<1273/264\).
+The original E17/E26 finite 5-point matrix on
+the same unshrunken Gielis domain gives a
+rational positive-vector enclosure
+\(L_h\le\lambda_h\le U_h\).
+Consequently every pair consistent with the
+two original theorem certificates satisfies
+
+\[
+ \boxed{|\lambda_h-\lambda_c|
+ <\max\bigl(0,1273/264-L_h,U_h-224/55\bigr).}
+\]
+
+It also gives strict relative error upper bound
+obtained by dividing by 224/55.
+scripts/gielis_certified_continuum_fd_error.py
+loads the ORIGINAL exact finite-grid referee
+and continuum bounds; its output is a fully
+rational finite n=41 or n=61 error enclosure.
+It fails closed for other m, where the continuum
+upper bound is not established.
+
+This **does pay a quantitative error bound** at the
+selected finite meshes, but it is necessarily loose.
+It does NOT prove an asymptotic \(O(h^p)\) rate,
+native Agda compactness/minmax, or a sharp
+mesh interpolation bound. Those stay explicit.
+
+## E40 — Actual original Kozyrev RayLedger exact-event interface
+
+The original PR #1404 owns RayLedger.emit/hit/close,
+power depletion, reflectivity, signed r-cross-delta-p
+torque, source/terminal momenta and absorption.
+Earlier Gielis code already compared zero-modulation
+log spirals with the original first-impact owners.
+
+The new
+scripts/gielis_kozyrev_same_event_original_owner.py
+accepts an exact decimal/rational source, sequence
+of directed wall hits, axis origin, reflectivities
+and a terminal state. It independently computes
+the same event's exact Fraction optical wall-force,
+signed torque, absorbed/output power and full
+momentum/energy/angular budgets. It dynamically
+loads the ACTUAL original PR #1404 RayLedger
+owner, verifies the exact expected Git blob SHA
+from gielis_kozyrev_pr1404_bridge, replays the
+same events and compares all observables.
+
+For the nontrivial two-hit synthetic fixture:
+power 9000 W, axis (-1,1), source (-2,0) along
++x, hit (0,0) outgoing +y at reflectivity 19/20,
+hit (0,2) outgoing -x at reflectivity 4/5,
+escape at (-2,2). Exact rational calculation gives
+\[
+ \tau_z=\frac{1080}{149896229}\ {\rm N\,m},
+ \quad P_{\rm absorbed}=2160\ {\rm W},
+ \quad P_{\rm escaped}=6840\ {\rm W}.
+\]
+The exact total momentum, angular and energy
+budget residuals vanish. This is conventional
+optical mathematics, NOT a measured Kozyrev effect.
+
+The original PR source is on a DIFFERENT Git ref.
+Runtime comparison must be supplied the byte-identical
+PR #1404 source; absent/mismatched owner fails
+closed and actual original runtime parity is
+NOT YET CHECKED here. A Gielis solver-produced
+multi-hit event receipt and independent
+apparatus calibration remain separate physical
+acceptance gates.
