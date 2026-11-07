@@ -16,6 +16,7 @@ import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
+import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact as API1998
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -131,3 +132,16 @@ climateCaseHypotheticalCommandDiscriminator :
     ClimateCase.decentralisedCandidate ClimateCase.centralisedCandidate
 climateCaseHypotheticalCommandDiscriminator =
   ClimateCase.centralisationHypothesesCanBeSeparatedIfEvidenceExists
+
+-- A contemporaneous Congressional Record primary plan is evidence of
+-- drafting and intended tactics, NOT documentary proof of their execution.
+primaryDraftDoesNotEstablishImplementation :
+  NF.FactorsThrough API1998.publicDraftObservation API1998.implementation → ⊥
+primaryDraftDoesNotEstablishImplementation =
+  API1998.draftDocumentDoesNotIdentifyImplementation
+
+primaryDraftAndActualImplementationWouldSeparate :
+  Discriminator.BundleSeparates API1998.implementationEvidenceProbe
+    API1998.unimplementedWorld API1998.implementedWorld
+primaryDraftAndActualImplementationWouldSeparate =
+  API1998.implementationEvidenceSeparates
