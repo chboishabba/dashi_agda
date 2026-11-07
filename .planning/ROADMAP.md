@@ -215,3 +215,22 @@ The existing YM Mosco recovery/liminf owners are status inventories, not Gielis 
 Current canonical docs: `Docs/support/reference/GielisBase369ProofTheorems.md` (E01–E35),
 `Docs/support/reference/GielisBase369Roadmap.md` (G01–G21; P0–P5; D0–D7).
 Per user request, CI chasing and historical HTML replay are not current active gates.
+
+
+## 2026-11-07 verified Gielis missing-lemmas correction (E36 owner archaeology)
+
+Prior priority labels P0–P3 were too coarse: SOURCE-VERIFIED original owners are present and must be consumed, not reimplemented.
+
+- [x] P0: `BishopComplexSeriesConvergenceExact` proves componentwise complex series limit/convergence/uniqueness; `BishopComplexAlgebraExact` supplies complex arithmetic/powers; `BishopSetoidComplexExact` supplies expC and congruence (two structurally related but distinct Agda record carriers).
+- [x] P0: `BishopExponentialFiniteCauchyCoefficientExact` and `BishopExponentialCauchyProductExact.bishopExpAdd` already construct factorial convolution and real analytic exponential multiplication.
+- [x] P0: `BishopMachinPiRationalWindowExact` has 3 < π_M < 22/7, `BishopNatSquareRootSemanticSquareExact` proves the constructed sqrt(N) semantic square for natural N, `BishopPolarJacobianSameTrigWeldCompilerExact` already owns selected trig derivative/pointwise polar determinant.
+- [ ] P0 actual consumer leaf: selected complex exp factorial Cauchy + Round11 cosine/sine same-object weld, Machin π trigonometric period identity, variable positive root/reciprocal, Gielis-specific polar integration. Polar measure owner explicitly has `measureTheoreticWeldClosed=false`.
+- [x] P1: `ShorCyclicCharacterResolutionExact`, `ShorCyclicDFTLeanCrossProverWeldExact`, `NSTriadKNLuoFiniteFourierInversionFromResolutionExact`, Parseval and native C3³ scalar Fourier already exist.
+- [ ] P1 specific leaf: choose original Q(zeta36) 12D coefficients and exhibit all 36 root character resolution laws / same Fin Q normalization.
+- [x] P2: finite Hermitian/Rayleigh and Mosco/recovery/spectral interfaces exist; Gielis exact finite geometry/energy and paper fixed-mode convergence already supplied.
+- [ ] P2 specific leaf: native selected Gielis forms/density/minmax and quantitative n41/n61 continuum error. Original YM Mosco interfaces are partly conditional/fail-closed.
+- [x] P3: Kozyrev original PR #1404 `scripts/kozyrev_optical_event_ledger.py` implements P/c ray force, r×impulse torque, reflectivity/absorption, along with log-spiral optimizer and first-forward intersection referee.
+- [ ] P3 specific leaf: selected Gielis event to SAME Kozyrev RayLedger and actual measured apparatus inputs/uncertainty if empirical claims are made.
+- [ ] Agda native Golden receipt outstanding; CI and HTML excluded from active priority by user direction.
+
+See `Docs/support/reference/GielisBase369ProofTheorems.md` E36 and `GielisBase369Roadmap.md` corrected G02/G03/G04/G08/G09/G10/G11/G12/G15/G16/G19/G21.
