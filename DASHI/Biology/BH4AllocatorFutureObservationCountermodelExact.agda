@@ -49,12 +49,6 @@ sameCoarseSupply :
     ≡ commonSupply nitricOxidePriority
 sameCoarseSupply = refl
 
-bothBalanced :
-  (sourceBalance hydroxylasePriority
-    , sourceBalance nitricOxidePriority)
-    ≡ (refl , refl)
-bothBalanced = refl
-
 branchSensitiveResultA :
   branchResponse hydroxylasePriority ≡ true
 branchSensitiveResultA = refl
