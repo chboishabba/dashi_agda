@@ -2,6 +2,26 @@
 
 ## 2026-11-07: Physical location, connectivity and circulation max-cut
 
+### Source and Golden acceptance command
+
+The spatial BH4 theorem suite now has a dedicated single entry point:
+
+```bash
+bash scripts/check_bh4_spatial_golden.sh
+```
+
+This runs the finite exact allocation, circulation and source-specific
+measurement-schema regressions, performs a source safety scan of the
+four Agda spatial/catalytic/physical owners and invokes the
+**existing repository-owned parallel Agda checker** against
+`DASHI/Biology/KitzerowBH4EvidenceEverything.agda`.
+It does not call the Agda executable directly and does not invent
+a checker-success receipt. The script is source-written, not executed
+on this head. Actual same-source physiological calibration and
+independent measured data remain separate gates.
+
+
+
 **Correction to well-mixed resource model:** The *physical state*
 must include source-qualified **location, compartment, boundary,
 connectivity, direction, perfusion, clearance, BH4/BH2 redox state,
