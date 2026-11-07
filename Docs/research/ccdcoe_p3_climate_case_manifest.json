@@ -185,5 +185,157 @@
       "kind": "documented_proposal",
       "implementation_status": "not_verified"
     }
-  ]
+  ],
+  "pnf_candidate_intake": [
+    {
+      "candidate_id": "pnf-document_circulation",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 425,
+        "rendered_line_end": 449
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "global-climate-science-team",
+      "predicate": "circulated-for-review",
+      "object": "draft-communications-plan",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-named_contributors",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 550,
+        "rendered_line_end": 560
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "names-contributors-from",
+      "object": "industry-and-advocacy-organisations",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-public_opinion_objectives",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 568,
+        "rendered_line_end": 590
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "states-objectives-for",
+      "object": "public-and-media-views",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-media_tactics",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 599,
+        "rendered_line_end": 646
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes",
+      "object": "media-outreach-and-training",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-science_center_proposal",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 652,
+        "rendered_line_end": 723
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes",
+      "object": "climate-science-information-centre",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-planned_tracking_metrics",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 788,
+        "rendered_line_end": 795
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes-to-monitor",
+      "object": "opinion-and-media-coverage",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    }
+  ],
+  "pnf_ingestion_status": "source_locator_and_candidate_roles_created; actual EventPNF parser-proven spans, human semantic review and content digests remain OPEN",
+  "integration_joins": {
+    "congressional_draft_to_tobacco_climate_gradeB_edge": "candidate_relation_only; no same-actor/document-time identity proof asserted",
+    "congressional_draft_to_realised_policy_effect": "not_identified",
+    "congressional_draft_to_implementation": "not_identified"
+  }
 }
