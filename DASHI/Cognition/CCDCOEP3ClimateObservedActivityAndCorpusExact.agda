@@ -116,6 +116,10 @@ record PublishedCorpusMeasurement : Set where
     sourceDOI : String
     corpusScope : String
     totalDocuments : Nat
+    totalAdvertorials : Nat
+    advertorialsTakingPosition : Nat
+    advertorialAcknowledgementCount : Nat
+    advertorialDoubtCount : Nat
     peerReviewedAcknowledgementPercent : Nat
     internalAcknowledgementPercent : Nat
     publicAdvertorialAcknowledgementPercent : Nat
@@ -127,12 +131,26 @@ originalPublishedCorpusMeasurement =
   publishedCorpusMeasurement
     "10.1088/1748-9326/aa815f"
     "ExxonMobil internal/scientific/public communications, 1977–2014"
-    187 83 80 12 81 false
+    187 36 26 3 21 83 80 12 81 false
 
 publishedCorpusSize :
   PublishedCorpusMeasurement.totalDocuments
     originalPublishedCorpusMeasurement ≡ 187
 publishedCorpusSize = refl
+
+-- In the original AGW-real-and-human-caused category, 21 of 26
+-- position-taking advertorials code as doubt, 3 of 26 as acknowledge.
+-- The percentages 81 and 12 use that eligible subset; never pass
+-- them off as 21/36 and 3/36 or as population percentages.
+observedAdvertorialPositionSubset :
+  PublishedCorpusMeasurement.advertorialsTakingPosition
+    originalPublishedCorpusMeasurement ≡ 26
+observedAdvertorialPositionSubset = refl
+
+observedAdvertorialDoubtCount :
+  PublishedCorpusMeasurement.advertorialDoubtCount
+    originalPublishedCorpusMeasurement ≡ 21
+observedAdvertorialDoubtCount = refl
 
 publishedPeerAndPublicAcknowledgementsDistinct :
   PublishedCorpusMeasurement.peerReviewedAcknowledgementPercent
