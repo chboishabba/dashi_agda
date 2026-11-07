@@ -29,6 +29,7 @@ import DASHI.Biology.BH4Phase4RoadmapExact
 import DASHI.Biology.BH4PathwayOntologyInteropExact
 import DASHI.Biology.BH4PathwayReviewInteropExact
 import DASHI.Biology.BH4CreatorChartSourceBridgeExact
+import DASHI.Biology.BH4SpatialConnectivityCirculationExact
 import DASHI.Biology.BH4PNPSamePhysicalHistoryBridgeExact
 import DASHI.Biology.BH4CatalyticTurnoverFutureCountermodelExact
 import DASHI.Biology.BH4AllocatorFutureObservationCountermodelExact
