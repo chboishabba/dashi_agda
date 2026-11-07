@@ -334,3 +334,57 @@ all focused Agda modules and `DASHI/Cognition/Everything.agda`. The
 parallel checker owns Agda 2.9, cache and resource policy; do not run Nix
 directly. Its exact-head success receipt is still required; this repository
 edit is not a successful kernel execution.
+
+## 7 November — First source-anchored bounded climate case
+
+Implementation:
+- `DASHI/Cognition/CCDCOEP3ClimateGenealogyCaseExact.agda` imports the
+  *actual* existing grade-B `tobaccoToClimateHistoricalContinuity` edge,
+  its original `merchantsOfDoubtHistory` and
+  `oreskesConwayNatureCommentary` source identifiers and original
+  strong-grade receipt.
+- It also compares the actual grade-C `wellnessToAntiVaxAdjacency`
+  (a different source and topic) **only to test that a generic
+  'pipeline' label erases evidence grade**. This is not a matched
+  empirical counterfactual or climate negative-control population.
+- The SAME selected tobacco/climate grade-B edge is then held fixed over
+  three **hypothetical** command-structure models: decentralised continuity,
+  central command and unresolved mixture. The same published historical
+  grade cannot determine the command mechanism.
+- A `DiscriminatorSynthesis.ExperimentBundle` identifies a prospective
+  command-document observation that *would* separate the finite
+  alternatives. No actual such original document is claimed available.
+  Hypothesis worlds inhabit `Set`, while the source `EvidenceEdge`
+  inhabits `Set₁`; evidence projection retains the genuine owner.
+- `Docs/research/ccdcoe_p3_climate_case_manifest.json` captures original
+  source identifiers and the exact bounded historical claim, with
+  **null source spans/revision hashes** where original-document material
+  has not been acquired. It also explicitly records missing command,
+  exposure, control and outcome observations.
+- `scripts/check_ccdcoe_p3_climate_case.py` rejects fabricated
+  primary spans, effect estimates, command records or promoted intent,
+  and crosschecks registered Agda source-identity names. Added to the
+  existing fail-closed checker and P3 regression/Golden root.
+
+**Source status:** source register and original bounded scholarly genealogy
+reused; no original primary-document event/PNF transcription, exposure
+experiment or real-world effect estimate acquired. The demonstrator
+is *end-to-end for provenance of a bounded historical relation and
+nonidentification of command*, not a completed measured-world causal
+study. This distinction is substantive, not merely an Agda check issue.
+
+**Exact remaining empirically decisive gates after this cut:**
+1. Original bounded excerpts plus revision/content hashes from identified
+   authorised archival sources, and literal source-to-PNF reviewed joins.
+2. Campaign-specific actor/event/funding/decision/timeline edges with
+   source and event time, place, institution, claim scope and uncertainty.
+3. Pre-declared counterfactual estimand and comparison units; verified
+   exposure, controls, interference and selection/missingness handling.
+4. Actual coherence/revision/agency measurements, validation, uncertainty
+   and refusal to conflate dissent with ideological hostility.
+5. Independent, source-licensed coordination/intent evidence, if claimed;
+   preserve underidentification otherwise.
+6. Replication/held-out validation against a different historical/institutional
+   setting with custodial and ethical boundaries as appropriate.
+
+No synthetic case may promote these open empirical gates to 'complete'.
