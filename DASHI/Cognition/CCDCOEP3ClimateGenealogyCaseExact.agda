@@ -121,29 +121,22 @@ data CoordinationHypothesis : Set where
   centrallyCommandedStrategy : CoordinationHypothesis
   unresolvedMixedStrategy : CoordinationHypothesis
 
--- Explicit candidate worlds, not three observed historical cases.
-record ClimateCausalCandidate : Set where
-  constructor climateCausalCandidate
-  field
-    historicalEdge : Genealogy.EvidenceEdge
-    commandHypothesis : CoordinationHypothesis
+-- The source edge inhabits Set₁. The MODEL index inhabits Set and
+-- refers to the ORIGINAL edge via a projection; no second source edge
+-- or universe-inconsistent ExperimentBundle World is constructed.
+data ClimateCausalCandidate : Set where
+  decentralisedCandidate : ClimateCausalCandidate
+  centralisedCandidate : ClimateCausalCandidate
+  mixedCandidate : ClimateCausalCandidate
 
-open ClimateCausalCandidate public
+historicalEdge : ClimateCausalCandidate → Genealogy.EvidenceEdge
+historicalEdge _ = originalClimateContinuity
 
-decentralisedCandidate : ClimateCausalCandidate
-decentralisedCandidate =
-  climateCausalCandidate originalClimateContinuity
-    sharedStrategyWithoutSingleCommand
-
-centralisedCandidate : ClimateCausalCandidate
-centralisedCandidate =
-  climateCausalCandidate originalClimateContinuity
-    centrallyCommandedStrategy
-
-mixedCandidate : ClimateCausalCandidate
-mixedCandidate =
-  climateCausalCandidate originalClimateContinuity
-    unresolvedMixedStrategy
+commandHypothesis : ClimateCausalCandidate → CoordinationHypothesis
+commandHypothesis decentralisedCandidate =
+  sharedStrategyWithoutSingleCommand
+commandHypothesis centralisedCandidate = centrallyCommandedStrategy
+commandHypothesis mixedCandidate = unresolvedMixedStrategy
 
 -- Same actual grade-B historical evidence for all candidate mechanisms.
 publicHistoricalGrade :
