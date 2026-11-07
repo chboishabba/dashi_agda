@@ -432,3 +432,35 @@ These recovered donors are not new Gielis proof receipts,
 and source-written current PR Agda is still uncompiled.
 Exact selective remaining consumer details live in
 GielisBase369Roadmap.md and E36 proof-owner archaeology.
+
+
+## E37–E41 latest original-lemma max-cut
+
+The actual Bishop complex series convergence and original Gielis complex
+exponential now have a native same-carrier bridge. This includes literal
+conversions, complex arithmetic equivalence, transported original complex
+series limit/uniqueness, and the real exp(0)=1 reduction of the literal
+Round11 expC(iθ) to its configured cosine/sine pair. Remaining analytic
+work is actual imaginary-axis multiplication, period pi and variable
+positive reciprocal root/integration, not generic complex convergence.
+
+Full C36 Fourier inversion over the original Q(zeta36) polynomial
+quotient is now justified for ALL 36-component signals by the checked
+complete 36×36 character kernel and 36 basis round trips; the separate
+native Agda cyclotomic scalar/character resolution is still missing.
+
+The selected m3 finite Cartesian λ1 already has exact rational finite
+matrix and rigorous continuum bounds. The new adapter combines these
+into a machine-computable *quantitative* rational a posteriori
+finite-to-continuum absolute/relative error; the actual mesh convergence
+order O(h^p) and native compactness/operator theorem are distinct leaves.
+
+Physical: the actual original PR1404 RayLedger owner is now required
+by a strict SHA-pinned same-event exact-rational hit/terminal comparison.
+The nonzero two-bounce synthetic event conserves power, momentum and
+angular momentum exactly. Runtime replay requires the *exact original*
+PR1404 checkout and has not been executed as a successful result here.
+It does not supply real apparatus measurement or novel torsion evidence.
+
+Sixteen native Gielis Agda roots are listed in the original parallel
+checker. No new exact-head Agda kernel receipt is claimed.
