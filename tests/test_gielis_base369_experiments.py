@@ -786,3 +786,15 @@ def test_native_Bishop_one_complex_imaginary_exp_law_replaces_trig_assumptions()
     assert "Round11.termIdentification" in source
     assert "Complex.reEquivalent" in source
     assert "Complex.imEquivalent" in source
+
+
+def test_native_bishop_complex_ring_laws_for_cauchy_product():
+    source=(ROOT/"DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda").read_text()
+    for name in ("complexAddCommutative","complexAddAssociative",
+                 "complexMulCommutative","complexMulAssociative",
+                 "complexMulDistributiveLeft","complexMulDistributiveRight"):
+        assert name in source
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in source
+    assert "BishopP.ℝ-Solver" in source
+    assert "Complex.≈C-trans" in source
+    assert "postulate" not in source.split("import Real")[1]
