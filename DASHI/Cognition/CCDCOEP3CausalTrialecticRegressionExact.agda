@@ -18,6 +18,7 @@ import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact as API1998
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
+import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -167,3 +168,29 @@ originalApprovalRecordsWouldSeparateAlternatives :
     Contested.unapprovedWorld Contested.approvedWorld
 originalApprovalRecordsWouldSeparateAlternatives =
   Contested.authorisationRecordWouldSeparate
+
+-- Independent public communication materials exist while the April 1998
+-- API document retains the type of a draft. The original publication
+-- does not support a causal or same-plan command/effect promotion.
+realPublicationIsNotThe1998Draft :
+  NF.FactorsThrough Observed.unqualifiedLabel Observed.sourceStage → ⊥
+realPublicationIsNotThe1998Draft =
+  Observed.stageDoesNotFactorThroughGenericLabel
+
+realArchiveStageDiscriminator :
+  Discriminator.BundleSeparates Observed.evidenceStageBundle
+    Observed.apiDraft1998 Observed.ice1991
+realArchiveStageDiscriminator =
+  Observed.stageSeparatesDraftFromPublicCommunication
+
+publishedCommunicationCorpusHas187Documents :
+  Observed.PublishedCorpusMeasurement.totalDocuments
+    Observed.originalPublishedCorpusMeasurement ≡ 187
+publishedCommunicationCorpusHas187Documents =
+  Observed.publishedCorpusSize
+
+publishedMessageDiscrepancyDoesNotMeasurePersuasion :
+  Observed.PublishedCorpusMeasurement.isHumanTreatmentEffect
+    Observed.originalPublishedCorpusMeasurement ≡ false
+publishedMessageDiscrepancyDoesNotMeasurePersuasion =
+  Observed.documentContentIsNotPublicBeliefEffect
