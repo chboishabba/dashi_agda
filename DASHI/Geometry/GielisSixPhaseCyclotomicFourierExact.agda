@@ -18,7 +18,7 @@ module DASHI.Geometry.GielisSixPhaseCyclotomicFourierExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; ½; -_)
+open import Data.Rational.Base using (ℚ; ½; 1ℚ; -_)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 import Data.Rational.Tactic.RingSolver as Ring
 
@@ -44,7 +44,7 @@ C2Signal : Set
 C2Signal = Pair C3.Cyclotomic3
 
 negC : C3.Cyclotomic3 → C3.Cyclotomic3
-negC = C3.scaleC (- C3.realPart C3.oneC)
+negC = C3.scaleC (- 1ℚ)
 
 forward2 : C2Signal → C2Signal
 forward2 (pair a b) =
@@ -154,10 +154,7 @@ sixC2ForwardInverse
 -- Cartesian C2 x C3 transform; reuse the native C3 result, not
 -- a postulated general Fourier inversion theorem.
 forwardSix : SixSignal → SixSignal
-forwardSix = mapPair C3.forward1 ∘ forward2Triple
-  where
-  _∘_ : ∀ {A B C : Set} → (B → C) → (A → B) → A → C
-  (f ∘ g) x = f (g x)
+forwardSix x = mapPair C3.forward1 (forward2Triple x)
 
 inverseSix : SixSignal → SixSignal
 inverseSix x = inverse2Triple (mapPair C3.inverse1 x)
