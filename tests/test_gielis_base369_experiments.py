@@ -812,3 +812,14 @@ def test_exact_all_mode_faber_krahn_continuum_first_eigenvalue_bound():
     assert F(c["first_continuum_dirichlet_eigenvalue_strict_lower"])==F(224,55)
     assert F(c["sqrt2_strict_rational_upper"])**2>2
     assert not c["native_Agda_Bessel_FaberKrahn_closed"]
+
+
+def test_native_rational_bessel_J0_FaberKrahn_lower_certificate():
+    source=(ROOT/"DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda").read_text()
+    for theorem in ("j0S5Exact","j0S5StrictPositive",
+                    "j1FirstRatioBelowOne","j1UniformLowerExact",
+                    "sqrtTwoUpperSquareAboveTwo","eigenvalueLowerArithmeticExact",
+                    "eigenvalueRationalLowerAboveFour"):
+        assert theorem in source
+    assert "608149" in source and "244140625" in source
+    assert "224" in source and "55" in source
