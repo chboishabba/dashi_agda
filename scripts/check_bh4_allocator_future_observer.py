@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OWNER = ROOT / "DASHI/Biology/BH4AllocatorFutureObservationCountermodelExact.agda"
 CYCLE_OWNER = ROOT / "DASHI/Biology/BH4CatalyticTurnoverFutureCountermodelExact.agda"
+JOINT_OWNER = ROOT / "DASHI/Biology/BH4PNPSamePhysicalHistoryBridgeExact.agda"
 
 def candidates(supply: int):
     if supply < 0:
@@ -37,6 +38,12 @@ def main():
     for lemma in ("sameOriginalPoolAmount", "differentThroughputAtSameAmount",
                   "samePoolDoesNotDetermineEffectiveTurnover"):
         assert lemma in cycles, f"missing catalytic turnover owner: {lemma}"
+    joint_source = JOINT_OWNER.read_text(encoding="utf-8")
+    for lemma in ("allBH4ControlledHistoriesSamePhysicalSource",
+                  "allPNPControlledHistoriesSamePhysicalSource",
+                  "allHistoriesRemainOnOriginalBH4System",
+                  "bh4StepCommutes", "pnStepCommutes"):
+        assert lemma in joint_source, f"missing joint physical-history theorem: {lemma}"
     assert 1 * 1 != 1 * 2
     cases = {}
     for supply in range(9):
@@ -61,6 +68,7 @@ def main():
         "supply_one_balanced_allocations": 5,
         "same_supply_different_branch_response": True,
         "equal_pool_distinct_selected_turnover_capacity": True,
+        "same_physical_source_bh4_pnp_history_owner_present": True,
         "by_supply": cases,
         "real_29x12_bh4_flux_paid": False,
         "source_kinetics_or_compartments_paid": False,
