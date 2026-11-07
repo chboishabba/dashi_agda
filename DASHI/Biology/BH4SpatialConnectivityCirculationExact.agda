@@ -99,3 +99,41 @@ transportIfConnectedConservesCharge valenceMagnitude false state = refl
 transportIfConnectedConservesCharge valenceMagnitude true state =
   Transport.transportConservesChargeMagnitude
     valenceMagnitude Transport.leftToRight state
+
+------------------------------------------------------------------------
+-- Connectivity can encode directed distal delivery, not only cellular
+-- nearest-neighbour diffusion. This is the generic path semantics;
+-- physiological pressure/flow resistance remains source-owned.
+------------------------------------------------------------------------
+
+data FlowPath
+  {Location : Set}
+  (Flow : Location → Location → Set) :
+  Location → Location → Set where
+  here : (x : Location) → FlowPath Flow x x
+  thenFlow : ∀ {a b c} →
+    Flow a b → FlowPath Flow b c → FlowPath Flow a c
+
+data IllustrativeRegion : Set where
+  circulationSource : IllustrativeRegion
+  deliveredTarget : IllustrativeRegion
+
+data IllustrativeDirectedVessel :
+  IllustrativeRegion → IllustrativeRegion → Set where
+  sourceFeedsTarget :
+    IllustrativeDirectedVessel circulationSource deliveredTarget
+
+forwardDeliveryPath :
+  FlowPath IllustrativeDirectedVessel
+    circulationSource deliveredTarget
+forwardDeliveryPath =
+  thenFlow sourceFeedsTarget (here deliveredTarget)
+
+reversePathNotProvided :
+  FlowPath IllustrativeDirectedVessel
+    deliveredTarget circulationSource → ⊥
+reversePathNotProvided ()
+
+-- Under source-qualified physiological conditions flow might reverse,
+-- branch, or be regulated. The toy's absence of reverse flow is not
+-- a universal theorem about blood vessels or transport physiology.
