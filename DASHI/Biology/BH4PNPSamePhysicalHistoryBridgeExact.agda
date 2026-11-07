@@ -25,7 +25,14 @@ record SameSourceBH4PNPModel : Set₁ where
     selectedPNP : PNP.ElectrodiffusionApplicationReceipt
     selectedMetabolicNetwork : Metabolic.BH4OpenMetabolicNetworkAdapter
     circulation : Spatial.ContextIndexedCirculation
+    sameElectrodiffusiveLaw :
+      Spatial.selectedPNP circulation ≡ selectedPNP
     locationOf : PhysicalState → Spatial.Location circulation
+    localCompartment : PhysicalState → BH4.Compartment
+    originalCompartmentAgreement :
+      (x : PhysicalState) →
+      localCompartment x
+        ≡ Spatial.compartmentAt circulation (locationOf x)
     -- Physical transport from x to its successor must be reachable
     -- by original-source permitted directed connections; a location
     -- string or a nonzero global pool does not pay the route.
