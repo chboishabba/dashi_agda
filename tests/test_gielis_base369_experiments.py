@@ -694,3 +694,46 @@ def test_selected_C6_native_source_imports_original_C3_cyclotomic_inversion():
                  "reconstructSelectedSixSamples"):
         assert term in source
     assert "Phase.p18-4" in source and "Phase.p18-5" in source
+
+
+@pytest.mark.parametrize("m,n,inside_count",((3,41,792),(6,41,779),
+                                            (9,41,792),(3,61,1788)))
+def test_exact_rational_unshrunken_Gielis_raster_membership(m,n,inside_count):
+    from gielis_exact_rational_raster_geometry import receipt,exact_mask
+    r=receipt(m,n)
+    assert r["status"]=="exact_unshrunken_Gielis_raster_classification"
+    assert r["integer_fraction_only_for_membership"]
+    assert r["fixed_binary64_boundary_error_in_membership"] is False
+    assert r["legacy_float_mask_disagreements"] == 0
+    assert r["interior_nodes"] == inside_count
+    assert int(exact_mask(m,n).sum()) == inside_count
+    assert not r["Agda_native_rational_predicate_kernel_accepted"]
+
+
+def test_exact_rational_gielis_odd_sign_decisions_and_boundary():
+    from gielis_exact_rational_raster_geometry import (
+        exact_inside_gielis,complex_integer_power_real,grid_coordinate
+    )
+    from fractions import Fraction as F
+    for m in (3,6,9):
+        assert exact_inside_gielis(F(0),F(0),m)
+        assert not exact_inside_gielis(F(1),F(0),m)
+        assert exact_inside_gielis(F(1,2),F(0),m)
+    assert complex_integer_power_real(F(3,5),F(4,5),2)==F(-7,25)
+    assert grid_coordinate(41,0)==F(-3,2)
+    assert grid_coordinate(41,40)==F(3,2)
+    assert grid_coordinate(41,20)==F(0)
+    with pytest.raises(ValueError):
+        exact_inside_gielis(F(0),F(0),0)
+
+
+def test_native_selected_exact_rational_gielis_classifier_source():
+    source=(ROOT/"DASHI/Geometry/GielisExactRationalGridPredicateExact.agda").read_text()
+    assert "Data.Rational.Properties" in source
+    assert "oddRootLessThanZero" in source
+    assert "insideEvenMode" in source and "insideOddMode" in source
+    for symbol in ("insideGielis3","insideGielis6","insideGielis9",
+                   "positiveAxisBoundary3","positiveAxisBoundary6",
+                   "positiveAxisBoundary9"):
+        assert symbol in source
+    assert "postulate" not in source.split("open import")[1]
