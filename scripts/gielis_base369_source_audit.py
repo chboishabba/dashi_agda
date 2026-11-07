@@ -28,6 +28,7 @@ FILES = (
     "DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda",
     "DASHI/Geometry/GielisExactRationalGridPredicateExact.agda",
     "DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda",
+    "DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda",
     "scripts/gielis_exact_signed_optical_torque.py",
     "scripts/gielis_exact_rational_raster_geometry.py",
     "scripts/gielis_six_phase_cyclotomic_exact.py",
@@ -213,6 +214,19 @@ def source_audit(root: Path = ROOT) -> dict:
     optical_event=source["scripts/gielis_exact_signed_optical_torque.py"]
     assert "canonical_speed_of_light_si" in optical_event
     assert "exact_signed_torque_Nm" in optical_event
+    imaginary=source["DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda"]
+    for theorem in (
+        "ImaginaryAxisSameSourceExponentialDoubling",
+        "cosineDoubleFromImaginaryExponential",
+        "sineDoubleFromImaginaryExponential",
+        "fourIsTwiceTwice",
+        "concreteDoubleAngleInputsFromImaginaryExp",
+        "gielisRound11FromOneImaginaryExponentialLaw",
+        "realBishopExpAddAlreadyProved",
+    ):
+        assert theorem in imaginary,theorem
+    assert "DASHI.Foundations.BishopExponentialCauchyProductExact" in imaginary
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in imaginary
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -220,7 +234,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,33):
+    for i in range(1,34):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -241,7 +255,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":32,
+        "paper_proof_sections":33,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
