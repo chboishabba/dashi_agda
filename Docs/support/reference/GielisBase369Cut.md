@@ -393,3 +393,42 @@ The full analytic Bishop trig/weld and native C36 scalar, native
 continuum compactness/quantitative mesh rate and independent measured
 optical source calibration remain exact outstanding acceptances.
 The source-written Agda terms have not been kernel-accepted here.
+
+
+### E36: recovered existing theorem owners rather than duplicate implementations
+
+The user correctly identified that P0/P1/P2/P3 had been overstated as
+missing mathematical foundations. Direct source audit found:
+BishopComplexSeriesConvergenceExact complexSeriesLimit/Convergence/Unique;
+BishopComplexAlgebraExact complex arithmetic; BishopSetoidComplexExact
+expC and setoid congruence; BishopExponentialCauchyProductExact.bishopExpAdd;
+BishopMachinPiRationalWindowExact rigorous Machin bounds;
+BishopNatSquareRootSemanticSquareExact natural radicand semantic root;
+BishopPolarJacobianSameTrigWeldCompilerExact actual derivative and
+pointwise determinant. The latter's measure consumer explicitly
+declares measureTheoreticWeldClosed=false.
+
+Fourier: ShorCyclicCharacterResolutionExact generic cyclic inversion,
+external Lean DFT same-object weld, NSTriadKNLuoFiniteFourierInversionFromResolutionExact
+and Parseval, plus C3CubeCyclotomicFourierExact, already own
+the generic tasks. The remaining native C36 work is its
+original 12-dimensional Q(zeta36) scalar and 36-character
+orthogonality/normalization instantiation.
+
+Spectrum: native finite Hermitian/Rayleigh and YM Mosco/recovery/liminf
+theorems/interfaces exist, with conditional domain/density gates,
+beside E17/E26/E27/E31 exact selected Gielis lattice and paper convergence.
+Only the selected native continuum object and *quantitative*
+n41/n61 error remain.
+
+Physical: Kozyrev PR #1404 has literal RayLedger P/c,
+reflection/absorption and signed r×impulse torque,
+log-spiral geometry and independent intersection referee.
+The new E32 restates this *existing* conventional optical
+physical law natively; remaining is SAME-event integration
+plus empirical calibration, not torque law invention.
+
+These recovered donors are not new Gielis proof receipts,
+and source-written current PR Agda is still uncompiled.
+Exact selective remaining consumer details live in
+GielisBase369Roadmap.md and E36 proof-owner archaeology.
