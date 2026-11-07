@@ -1794,3 +1794,116 @@ Round11 cosine/sine power series. E34 has paid
 the algebraic rearrangement portion but not the
 full analytic infinite-product theorem.
 Native Agda kernel acceptance is still unverified.
+
+
+## E35 — Improved first Dirichlet eigenvalue lower bound for ALL Gielis modes
+
+For every positive integer \(m\) in the selected
+special Gielis family,
+\[
+ r_m(\theta)^2=\frac{4}{3+\cos(m\theta)}
+\quad\Longrightarrow\quad
+|\Omega_m|
+ =\frac12\int_0^{2\pi}r_m(\theta)^2\,d\theta
+ =\sqrt2\pi.
+\]
+The exact area is independent of \(m\). The classical
+Faber–Krahn inequality therefore gives
+\[
+ \lambda_1(\Omega_m)\ge
+ \frac{j_{0,1}^{\,2}\pi}{|\Omega_m|}
+ =\frac{j_{0,1}^{\,2}}{\sqrt2},
+\]
+where \(j_{0,1}\) is the first positive zero of
+the Bessel \(J_0\) function.
+
+The irrational Bessel zero itself need not be
+numerically guessed to obtain a **strict rational**
+bound. At \(x=12/5\), the absolutely convergent
+\(J_0\) alternating series has terms
+\(a^k/(k!)^2\), \(a=x^2/4=36/25\). The terms
+decrease after \(k=1\), so the **odd truncation
+through degree five** is a rigorous lower bound:
+
+\[
+ J_0(12/5) >
+ S_5=
+ 1-\frac{36}{25}+\frac{324}{625}
+ -\frac{1296}{15625}
+ +\frac{2916}{390625}
+ -\frac{104976}{244140625}
+ =\boxed{\frac{608149}{244140625}}>0.
+\]
+
+For \(0<x\le12/5\),
+\[
+ J_1(x)=\frac x2\sum_{k=0}^{\infty}
+  \frac{(-1)^k(x^2/4)^k}{k!(k+1)!}.
+\]
+The alternating magnitudes decrease from \(k=0\)
+because their first ratio is at most
+\((36/25)/2=18/25<1\). The inner series
+is therefore at least \(1-18/25=7/25>0\).
+Since the classical derivative identity is
+\(J_0'=-J_1\), the function \(J_0\) is strictly
+decreasing throughout \((0,12/5]\).
+Combining monotonicity with \(J_0(12/5)>0\)
+shows \(j_{0,1}>12/5\).
+
+Finally,
+\((99/70)^2>2\) implies
+\(\sqrt2<99/70\), whence
+\[
+ \boxed{\lambda_1(\Omega_m)>
+  \left(\frac{12}{5}\right)^2\frac{70}{99}
+  =\frac{224}{55}\approx4.07272727}
+\]
+for **every positive integer mode m**.
+
+This sharpens E23's former elementary square
+lower bound \(9/4\) to \(224/55\) (a gain of
+roughly 81%) without depending on any
+finite-difference eigensolver. The previously
+derived m=3 Rayleigh upper certificate E15
+gives
+\[
+ \boxed{\frac{224}{55}<\lambda_1(\Omega_3)
+  <\frac{1273}{264}.}
+\]
+The dimensional SI bound for assumed physical
+scale \(L\in[L_-,L_+]\) becomes
+\[
+ \boxed{
+ \frac{224}{55L_+^2}<
+  \lambda_1(L\Omega_3)<
+ \frac{1273}{264L_-^2}\quad\mathrm{m}^{-2}.}
+\]
+
+**Executable provenance:** The source
+scripts/gielis_continuum_faber_krahn_bound.py
+verifies all displayed finite rational inequalities
+using only Python Fraction. The actual SI spectral
+consumer gielis_physical_spectral_si.py now uses
+the stronger constant; no physical frequency is
+deduced without an independently selected wave
+equation and speed.
+
+**Native Agda:** The new
+GielisBesselFaberKrahnRationalExact.agda
+source-writes exact normalized rational equalities,
+strict positivity of the truncated \(J_0\)
+series, the \(J_1\) coefficient lower bound,
+rational upper bound on \(\sqrt2\), and the
+arithmetic for \(224/55\), all on the original
+Agda rational carrier.
+
+**Exact acceptance limit:** The native finite
+arithmetic terms are source-written but not
+kernel-accepted in this environment. The
+analytic Faber–Krahn theorem, Bessel derivative,
+alternating-series convergence and exact
+area-to-domain identification are classical
+external mathematical donors at the paper
+level, not formally completed native Agda
+theorems merely because their rational
+consequences were checked.
