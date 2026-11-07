@@ -29,6 +29,7 @@ FILES = (
     "DASHI/Geometry/GielisExactRationalGridPredicateExact.agda",
     "DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda",
     "DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda",
+    "DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda",
     "scripts/gielis_exact_signed_optical_torque.py",
     "scripts/gielis_exact_rational_raster_geometry.py",
     "scripts/gielis_six_phase_cyclotomic_exact.py",
@@ -227,6 +228,13 @@ def source_audit(root: Path = ROOT) -> dict:
         assert theorem in imaginary,theorem
     assert "DASHI.Foundations.BishopExponentialCauchyProductExact" in imaginary
     assert "DASHI.Analysis.BishopSetoidComplexExact" in imaginary
+    complex_algebra=source["DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda"]
+    for theorem in ("complexAddCommutative","complexAddAssociative",
+                    "complexMulCommutative","complexMulAssociative",
+                    "complexMulDistributiveLeft","complexMulDistributiveRight"):
+        assert theorem in complex_algebra,theorem
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in complex_algebra
+    assert "Complex.≈C-trans" in complex_algebra
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -234,7 +242,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,34):
+    for i in range(1,35):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -255,7 +263,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":33,
+        "paper_proof_sections":34,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
