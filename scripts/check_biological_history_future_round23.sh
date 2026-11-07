@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Standalone gate; independent parallel_checker acceptance is separate.
+# Source/finite regressions followed by repository-owned parallel Agda checker.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -87,10 +87,13 @@ python3 scripts/check_original_dmsc_exact_replicate_bootstrap.py
 python3 scripts/check_longitudinal_attractor_discrimination.py --self-test
 python3 scripts/check_biological_parametric_minimal18.py
 
-if ! command -v agda >/dev/null 2>&1; then
-  echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
+# Run the repository-owned parallel Agda checker, never an ad hoc local
+# direct Agda invocation. Its exact-head result remains a separate receipt
+# from these Python/Agda-owner presence checks.
+if [ ! -x scripts/run_agda29_parallel_check.sh ]; then
+  echo "FAIL CLOSED: repository parallel Agda checker is unavailable." >&2
   exit 2
 fi
-agda --safe -i . -i src "$ROOT"
-echo "LOCAL AGDA TYPECHECK ACCEPTED: $ROOT"
-echo "Independent exact-head parallel_checker receipt remains separately required."
+scripts/run_agda29_parallel_check.sh "$ROOT"
+echo "REPOSITORY PARALLEL AGDA CHECKER COMPLETED: $ROOT"
+echo "Publish exact-head checker receipt separately; no source-only promotion."
