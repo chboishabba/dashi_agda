@@ -36,8 +36,8 @@ open DirectedTissueCirculation public
 transportOnDirectedBond :
   DirectedTissueCirculation →
   Grid.PositiveBond → Transport.IonPairState
-transportOnDirectedBond network edge with
-  allowForward network edge | allowReverse network edge
+transportOnDirectedBond network edge
+  with allowForward network edge | allowReverse network edge
 ... | true | _ =
   Transport.transport Transport.leftToRight (originalBondState network edge)
 ... | false | true =
@@ -49,8 +49,8 @@ directedBondConservesAmount :
   (edge : Grid.PositiveBond) →
   Transport.totalAmount (transportOnDirectedBond network edge)
     ≡ Transport.totalAmount (originalBondState network edge)
-directedBondConservesAmount network edge with
-  allowForward network edge | allowReverse network edge
+directedBondConservesAmount network edge
+  with allowForward network edge | allowReverse network edge
 ... | true | _ =
   Transport.transportConservesAmount
     Transport.leftToRight (originalBondState network edge)
