@@ -13,6 +13,29 @@ import DASHI.Biology.BH4CompartmentKineticStateExact as Kinetics
 import DASHI.Biology.Physical.FiniteElectrodiffusiveMovingBoundaryExact as Transport
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
 
+data TransportMode : Set where
+  localDiffusion : TransportMode
+  gapJunctionTransfer : TransportMode
+  plasmaMembraneTransfer : TransportMode
+  vascularPerfusion : TransportMode
+  interstitialTransfer : TransportMode
+  bloodBrainBarrierTransfer : TransportMode
+  namedPhysicalMode : String → TransportMode
+
+record SourcePaidDirectedTransport : Set where
+  constructor source-paid-directed-transport
+  field
+    mode : TransportMode
+    sourceRegionReference : String
+    targetRegionReference : String
+    permeabilityOrFlowReference : String
+    measuredTimeReference : String
+    originalParameterReference : String
+    physicalLawValidated : Bool
+    physiologicalDirectionVerified : Bool
+
+open SourcePaidDirectedTransport public
+
 record ContextIndexedCirculation : Set₁ where
   field
     Location : Set
@@ -23,6 +46,8 @@ record ContextIndexedCirculation : Set₁ where
     PermittedFlow : Location → Location → Set
     originalFlowAuthority : (a b : Location) →
       PermittedFlow a b → String
+    classifyPermittedFlow : (a b : Location) →
+      PermittedFlow a b → SourcePaidDirectedTransport
     originalSpecimen : String
     timeReference : String
     sourceReference : String
