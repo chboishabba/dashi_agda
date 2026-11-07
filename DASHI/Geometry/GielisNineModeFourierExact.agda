@@ -17,7 +17,8 @@ module DASHI.Geometry.GielisNineModeFourierExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Rational.Base using (ℚ; ½; _+_; _-_; _*_)
+open import Data.Integer using (+_; -[1+_])
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; ½; _+_; _-_; _*_; -_)
 import Data.Rational.Tactic.RingSolver as Ring
 
 import DASHI.Geometry.GielisBase369NyquistPhase36Exact as Nyquist
@@ -109,3 +110,58 @@ reconstructNineQuarterSamples f =
 -- GielisBase369NyquistPhase36Exact. The above four-point map
 -- resolves all four independent 9-mode quarter-phase coefficients
 -- once the relevant fine samples have been retained.
+
+------------------------------------------------------------------------
+-- Canonical selected character rows: exactly the existing Nyquist
+-- fine 9-mode quarter-phase tables, embedded in rational coordinates.
+------------------------------------------------------------------------
+
+canonicalCosineNine : FourSamples
+canonicalCosineNine = four 1ℚ 0ℚ (- 1ℚ) 0ℚ
+
+canonicalSineNine : FourSamples
+canonicalSineNine = four 0ℚ 1ℚ 0ℚ (- 1ℚ)
+
+canonicalCosineEighteen : FourSamples
+canonicalCosineEighteen = four 1ℚ (- 1ℚ) 1ℚ (- 1ℚ)
+
+cosineNineIsPureFourierMode :
+  fourierFour canonicalCosineNine ≡ coeffs 0ℚ 1ℚ 0ℚ 0ℚ
+cosineNineIsPureFourierMode =
+  coeffs-ext
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+
+sineNineIsPureFourierMode :
+  fourierFour canonicalSineNine ≡ coeffs 0ℚ 0ℚ 1ℚ 0ℚ
+sineNineIsPureFourierMode =
+  coeffs-ext
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+
+cosineEighteenIsPureFourierMode :
+  fourierFour canonicalCosineEighteen ≡ coeffs 0ℚ 0ℚ 0ℚ 1ℚ
+cosineEighteenIsPureFourierMode =
+  coeffs-ext
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+    (Ring.solve-∀)
+
+existingFineCosNineFirst : Nyquist.cosNine Nyquist.p36-0 ≡ + 1
+existingFineCosNineFirst = refl
+
+existingFineSinNineSecond : Nyquist.sinNine Nyquist.p36-1 ≡ + 1
+existingFineSinNineSecond = refl
+
+existingFineCosNineThird :
+  Nyquist.cosNine Nyquist.p36-2 ≡ -[1+ 0 ]
+existingFineCosNineThird = refl
+
+existingFineSinNineFourth :
+  Nyquist.sinNine Nyquist.p36-3 ≡ -[1+ 0 ]
+existingFineSinNineFourth = refl
