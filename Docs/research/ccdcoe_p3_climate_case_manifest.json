@@ -87,25 +87,103 @@
     "control_groups": [],
     "temporal_alignment_receipts": [],
     "coherence_revision_measurements": [],
-    "institutional_voice_and_power_measurements": []
+    "institutional_voice_and_power_measurements": [],
+    "documented_plan_content": [
+      "document_circulation",
+      "named_contributors",
+      "public_opinion_objectives",
+      "media_tactics",
+      "science_center_proposal",
+      "planned_tracking_metrics"
+    ]
   },
   "promotion": {
     "historical_continuity": "bounded_supported",
     "single_central_command": "not_identified",
     "causal_effect": "not_identified",
     "hostile_intent": "not_identified",
-    "population_level_radicalisation": "not_identified"
+    "population_level_radicalisation": "not_identified",
+    "documented_joint_planning": "source_supported",
+    "plan_execution": "not_identified"
   },
   "follow_up_discriminator": {
-    "id": "archive_command_record",
-    "description": "Locate independently attributable command/responsibility records and source-specific temporal connections; negative findings must account for incomplete archive coverage.",
+    "id": "implementation_and_command_archive",
+    "description": "Locate original approvals, funding releases, executed outreach records, exposure logs, responses, and any responsibility chain linking the draft plan to implemented activities. The publicly documented plan establishes planning but not execution or outcome effects.",
     "currently_observed": false,
     "ethical_route": "public institutional documents only",
     "expected_to_distinguish": [
-      "decentralised_continuity",
-      "central_command",
-      "mixed_relations"
+      "unimplemented_draft",
+      "partly_implemented",
+      "implemented_campaign_with_attributable_controls"
     ],
     "source_type_required": "original_document_with_provenance"
-  }
+  },
+  "primary_publication": {
+    "id": "congressional_record_1998_04_27",
+    "kind": "contemporaneous_government_record_of_draft",
+    "document_title": "Global Climate Science Communications Action Plan, dated April 3, 1998, reproduced in Congressional Record",
+    "original_plan_date": "1998-04-03",
+    "publication_date": "1998-04-27",
+    "publisher": "U.S. Congressional Record, House, pp. H2323-H2327",
+    "url": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "document_span": "H2325-H2327; online rendered text lines 425-795",
+    "original_scan_sha256": null,
+    "source_quality_note": "Public contemporaneous House record reproduces the draft plan. Document presence and stated goals are directly evidenced; implementation, effects and a single central command of all later campaigns are not."
+  },
+  "primary_plan_claims": [
+    {
+      "id": "document_circulation",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 425,
+      "line_end": 449,
+      "claim": "A signed circulation message accompanied a draft plan, requested review and described a proposed follow-up team meeting.",
+      "kind": "documented_planning",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "named_contributors",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 550,
+      "line_end": 560,
+      "claim": "The plan identifies named contributors affiliated with industry, think tanks and advocacy organisations.",
+      "kind": "documented_planning",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "public_opinion_objectives",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 568,
+      "line_end": 590,
+      "claim": "The draft specifies intended changes in public/media understanding and proposes before/after measurement.",
+      "kind": "documented_intention",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "media_tactics",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 599,
+      "line_end": 646,
+      "claim": "The draft proposes media outreach, training communicators, distributing materials and public debates.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "science_center_proposal",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 652,
+      "line_end": 723,
+      "claim": "The draft proposes a staffed climate-science information centre and associated funding.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "planned_tracking_metrics",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 788,
+      "line_end": 795,
+      "claim": "The draft lists proposed opinion, media and outreach tracking metrics.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    }
+  ]
 }
