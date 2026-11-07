@@ -29,6 +29,8 @@ import json
 import math
 import os
 
+from gielis_kozyrev_pr1404_bridge import ORIGINAL_GIT_BLOBS,PR1404
+ORIGINAL_BLOB=ORIGINAL_GIT_BLOBS["kozyrev_optical_event_ledger.py"]
 C=F(299792458)
 
 def frac(v):
@@ -106,6 +108,13 @@ def load_original_ray_ledger(path):
     path=Path(path).resolve()
     if not path.is_file():raise FileNotFoundError(f"original Kozyrev PR #1404 RayLedger source missing: {path}")
     contents=path.read_bytes()
+    actual_git_blob=hashlib.sha1(
+        b"blob "+str(len(contents)).encode()+b"\x00"+contents).hexdigest()
+    if actual_git_blob!=ORIGINAL_BLOB:
+        raise ValueError(
+            "original Kozyrev RayLedger blob mismatch: "
+            +actual_git_blob+" != "+ORIGINAL_BLOB
+        )
     if b"class RayLedger:" not in contents or b"def hit(" not in contents or b"def close(" not in contents:
         raise ValueError("not the expected original Kozyrev RayLedger owner")
     spec=importlib.util.spec_from_file_location("kozyrev_original_pr1404_rayledger",path)
@@ -147,6 +156,9 @@ def compare_with_original(owner_path,scene):
     return {
       "status":"SAME_EVENT_ORIGINAL_KOZYREV_GIELIS_OPTICAL_PARITY",
       "original_owner":"PR #1404 scripts/kozyrev_optical_event_ledger.py",
+      "original_owner_pr_head":PR1404,
+      "original_owner_git_blob_verified":True,
+      "original_owner_git_blob":ORIGINAL_BLOB,
       "original_owner_sha256":digest,
       "geometry":"original event stream, not separately generated Gielis collision list",
       "input_source":scene,
