@@ -284,6 +284,73 @@ directly. This uses the repository-owned parallel checker interface;
 it neither claims that the checker has run in this session nor
 replaces the independent exact-head acceptance receipt.
 
+## 2026-11-07: location, transport connectivity and circulation closure
+
+The physically meaningful state is **not a spatially mixed BH4 or
+total metabolite scalar**. It requires regions/compartments, directed
+local/vascular edges, membrane permeability, circulation, per-region
+BH4 and BH2, reaction-specific consumption/recycling, local
+electrochemical potential, volume and dynamic boundaries.
+
+New source-written owner
+`BiologicalSpatialCirculationIncidenceExact` reuses the **actual**
+`BiologicalFullCubeIncidenceExact.PositiveBond` and
+`FiniteElectrodiffusiveMovingBoundaryExact`:
+
+- `DirectedTissueCirculation` identifies source,
+  source/target compartments and time, original PNP model, independent
+  **forward and reverse flow permissions** for every actual
+  nonperiodic tissue bond and the selected per-bond ionic inventory.
+- `directedBondConservesAmount` and
+  `directedBondConservesCharge` prove exact conservation for the
+  selected 2-site finite-volume edge transfer.
+- This does **not** prove a whole-voxel conservative PNP update or
+  allow a remote vessel to masquerade as one of the 54 local bonds.
+  A physiological per-voxel divergence law with explicit boundary
+  conditions is still required.
+
+The new `scripts/check_biological_spatial_circulation.py`
+enumerates the complete 27-site/54-bond nonperiodic lattice and
+distinguishes three exact transfer mechanisms:
+1. adjacent local transfer only on a genuine geometry edge;
+2. gated membrane transfer with an explicit permission;
+3. distal **vascular** delivery on a different source-anchored
+   physical network, not an invented lattice adjacency.
+
+Its exact-integer tests preserve mass under permitted internal
+transfer, account for external injection and clearance separately,
+reject overdraw and fictional local edges, and show that two systems
+with the same total BH4/BH2 inventory can have different
+target-region cofactor access. This is a **synthetic** transport
+regression, not a fitted circulation or tissue-growth model.
+
+Physiology source context:
+- Original source-verified Rhea enzyme identities do not establish
+  plasma-to-endothelium transfer rates.
+- BH4/BH2 intracellular recycling and limited uptake:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC5357050/`.
+- BBB transport and time-dependent regional delivery:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC8573752/`.
+- Cardiovascular cofactor/redox and regional NOS coupling:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC4038990/`.
+
+The older `BiologicalSourcePhysicalTissueSimulationExact` remains
+the one-step-to-arbitrary-history theorem. The new spatial owner
+makes the **flow topology** an explicit physical requirement; it
+does not yet discharge same-source measured permeability or
+fluid-dynamics constitutive parameters.
+
+Companion Kitzerow PR #1454 now includes
+`BH4SpatialConnectivityCirculationExact` and a location-aware
+source-paid physical history path theorem. Companion ITIR PR #72
+preserves original location/time/compartment measurement candidates
+without turning unverified route provenance into PNF authority.
+
+The Round-23 shell gate now requires this source owner and
+`check_biological_spatial_circulation.py`, before calling the
+repository-owned parallel Agda checker. Neither Agda nor
+`parallel_checker` has been run in the current execution environment.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
