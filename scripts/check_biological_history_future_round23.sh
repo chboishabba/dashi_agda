@@ -87,6 +87,7 @@ python3 scripts/check_biological_rna9_hamming.py
 python3 scripts/check_original_dmsc_exact_replicate_bootstrap.py
 python3 scripts/check_longitudinal_attractor_discrimination.py --self-test
 python3 scripts/check_biological_parametric_minimal18.py
+python3 scripts/check_biological_spatial_circulation.py
 
 # Run the repository-owned parallel Agda checker, never an ad hoc local
 # direct Agda invocation. Its exact-head result remains a separate receipt
