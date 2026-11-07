@@ -155,6 +155,18 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "internal_acknowledge_human_cause": 80,
         "advertorial_acknowledge_human_cause": 12,
         "advertorial_doubt_human_cause": 81}
+    assert corpus["advertorial_position_subset"] == {
+        "all_advertorial_documents": 36,
+        "taking_position_on_real_and_human_caused": 26,
+        "acknowledge_count": 3,
+        "doubt_count": 21,
+        "denominator_note": corpus["advertorial_position_subset"]["denominator_note"],
+    }
+    assert "3/26" in corpus["advertorial_position_subset"]["denominator_note"]
+    assert "21/26" in corpus["advertorial_position_subset"]["denominator_note"]
+    assert corpus["advertorial_position_subset"]["doubt_count"] + corpus[
+        "advertorial_position_subset"]["acknowledge_count"] <= corpus[
+        "advertorial_position_subset"]["taking_position_on_real_and_human_caused"]
     assert corpus["outcome_type"] == "document_coding_by_source_type_not_people"
     assert not corpus["has_original_microdata_in_repo"]
     assert corpus["causal_effect_on_readers"] is None
