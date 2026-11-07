@@ -1,0 +1,94 @@
+module DASHI.Biology.Physical.BiologicalSourcePhysicalTissueSimulationExact where
+
+-- The physical-to-observer theorem needed to connect selected chemistry,
+-- ionic transport and the existing nonperiodic 54-bond morphology model.
+-- A physical source must PROVIDE the one-step simulation; this theorem
+-- transports it to ALL intervention histories without extensionality.
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
+
+import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
+import DASHI.Biology.Physical.BiologicalAllNeighbourTissueDynamicsExact as Tissue
+import DASHI.Biology.Physical.BiologicalCoupledTissueCubeExact as Agreement
+import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
+import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
+
+record SourcePhysicalTissueSimulation : Set₁ where
+  field
+    PhysicalState : Set
+    selectedPNP : PNP.ElectrodiffusionApplicationReceipt
+    assaySource : String
+    specimenIdentity : String
+    observationProtocol : String
+    physicalStep : Bio.Intervention → PhysicalState → PhysicalState
+    tissueReadout : PhysicalState → Bio.TissueField
+    -- This is the crucial NOT-YET-PAID PHYSICAL source obligation.
+    physicalOneStep :
+      (action : Bio.Intervention)
+      (state : PhysicalState)
+      (p : Cube.Ternary27Point) →
+      tissueReadout (physicalStep action state) p
+        ≡ Tissue.fullFineStep action (tissueReadout state) p
+
+open SourcePhysicalTissueSimulation public
+
+physicalTrace :
+  (model : SourcePhysicalTissueSimulation) →
+  List Bio.Intervention → PhysicalState model → PhysicalState model
+physicalTrace model [] state = state
+physicalTrace model (action ∷ rest) state =
+  physicalTrace model rest (physicalStep model action state)
+
+physicalOneStepCoarse :
+  (model : SourcePhysicalTissueSimulation)
+  (action : Bio.Intervention)
+  (state : PhysicalState model)
+  (p : Cube.Ternary27Point) →
+  Bio.project (tissueReadout model (physicalStep model action state) p)
+    ≡ Tissue.fullCoarseStep action
+        (Bio.spatialProject (tissueReadout model state)) p
+physicalOneStepCoarse model action state p =
+  trans
+    (cong Bio.project (physicalOneStep model action state p))
+    (Agreement.atEveryVoxel
+      (Tissue.fullAgreementPreserved action
+        (tissueReadout model state)
+        (Bio.spatialProject (tissueReadout model state))
+        (Agreement.initialFieldAgreement (tissueReadout model state))) p)
+
+-- Generalized induction with arbitrary starting coarse field.
+physicalAllControlledHistories :
+  (model : SourcePhysicalTissueSimulation)
+  (actions : List Bio.Intervention)
+  (state : PhysicalState model)
+  (coarse : Bio.CoarseTissueField) →
+  Agreement.FieldsAgree (tissueReadout model state) coarse →
+  Agreement.FieldsAgree
+    (tissueReadout model (physicalTrace model actions state))
+    (Tissue.fullCoarseRun actions coarse)
+physicalAllControlledHistories model [] state coarse initial = initial
+physicalAllControlledHistories model (action ∷ rest) state coarse initial =
+  physicalAllControlledHistories model rest
+    (physicalStep model action state)
+    (Tissue.fullCoarseStep action coarse)
+    (Agreement.fieldsAgree λ p →
+      trans
+        (cong Bio.project (physicalOneStep model action state p))
+        (Agreement.atEveryVoxel
+          (Tissue.fullAgreementPreserved action
+            (tissueReadout model state) coarse initial) p))
+
+-- No choice, function extensionality, or hidden measured-law axiom.
+physicalHistoryProjectsToAll54Bonds :
+  (model : SourcePhysicalTissueSimulation)
+  (actions : List Bio.Intervention)
+  (state : PhysicalState model) →
+  Agreement.FieldsAgree
+    (tissueReadout model (physicalTrace model actions state))
+    (Tissue.fullCoarseRun actions
+      (Bio.spatialProject (tissueReadout model state)))
+physicalHistoryProjectsToAll54Bonds model actions state =
+  physicalAllControlledHistories model actions state
+    (Bio.spatialProject (tissueReadout model state))
+    (Agreement.initialFieldAgreement (tissueReadout model state))
