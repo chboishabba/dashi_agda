@@ -23,6 +23,7 @@ import DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact
+import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
