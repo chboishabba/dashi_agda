@@ -473,3 +473,66 @@ import/check the owner.
 No new facts above prove the API April 1998 draft was fully
 implemented. Real documented campaigns and a peer-reviewed document
 analysis nevertheless make the P3 case materially more empirical.
+
+## 7 November — preplan survey and real source-byte ingestion max-cut
+
+The original April 3 1998 draft, published in the April 27 Congressional
+Record, describes a Charlton Research survey of **1,100 'informed
+Americans'** (printed plan lines 533-549). Under a stated conditional
+question about scientists' uncertainty, **58% are reported** as more
+likely to oppose Kyoto. The published excerpt does not expose the
+original sample weights, questionnaire, randomisation, respondent-level
+data or a campaign follow-up. This is evidence of **what the draft
+reports about a preplan framing survey**, not an independently confirmed
+causal treatment effect or a campaign effectiveness measurement.
+
+The same record specifies **proposed**, not disbursed, amounts:
+- $600,000 national media programme, excluding paid advertising;
+- $5,000,000 projected data centre over a *different two-year horizon*;
+- $300,000 direct outreach;
+- $2,000,000 total required through November 1998.
+
+The $5M and $2M have different timeframes: never sum them into a
+historical expenditure figure. `CCDCOEP3API1998PrimaryPlanExact.agda`
+now owns source-scoped `ReportedPreplanSurvey` and `PlannedAmounts`
+records proving the published report is not a measured postcampaign
+followup and its proposal is not a payment receipt. The source manifest,
+validator and Golden regression reflect those exact distinctions.
+
+**Actual raw-source bridge, rather than a placeholder hash:**
+`scripts/build_ccdcoe_p3_primary_intake.py` is an OFFLINE reader that
+accepts the original GovInfo HTML bytes obtained through a separately
+controlled source acquisition workflow. It computes SHA256 of the
+supplied original input, extracts a normalized text surface, requires
+six **unique** anchored source phrases, and emits exact normalized
+character offsets with six candidate-only, undetermined source claims.
+It fails closed on duplicate/missing anchors, unrecognized source
+identity and attempted candidate promotion. It emits null semantic
+review approvals and no claim that these offsets are raw HTML byte
+offsets. A deterministic `--self-test` including negative fixtures
+is now included in `check_ccdcoe_cognition_agda.sh`.
+
+Use:
+
+```sh
+python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
+python3 scripts/build_ccdcoe_p3_primary_intake.py \
+  --source /archive/CREC-1998-04-27-pt1-PgH2323.html \
+  --output /archive/ccdcoe-p3-pnf-candidates.json
+```
+
+No archive file was fetched into this execution environment; no real
+SHA256, normalized original-source offsets or PNF reviewer receipts
+are claimed until the command is run against that specific file.
+
+**Current high-alpha remaining original-world cut (excluding Agda):**
+(i) obtain archived raw bytes and review the six candidate spans;
+(ii) source-identity/authorisation/actual expenditure and event
+delivery for the specific April 1998 draft; (iii) independent
+pre/post and comparison outcome records with source and question
+harmonisation; (iv) exposure/control/selection/interference
+identification and uncertainty; (v) externally verified institutional
+authority and governance voice. The 1991/1995 independent campaigns,
+1998 invitation and the 187-document publication already evidence
+some distinct communication and document-level outcomes, but not the
+missing causal effect of the 1998 API plan.
