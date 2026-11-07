@@ -59,21 +59,33 @@ inverseFourierFour (coeffs a b c d) =
     ((a - b) + d)
     ((a - c) - d)
 
+four-ext : ∀ {a b c d e f g h} →
+  a ≡ e → b ≡ f → c ≡ g → d ≡ h →
+  four a b c d ≡ four e f g h
+four-ext refl refl refl refl = refl
+
+coeffs-ext : ∀ {a b c d e f g h} →
+  a ≡ e → b ≡ f → c ≡ g → d ≡ h →
+  coeffs a b c d ≡ coeffs e f g h
+coeffs-ext refl refl refl refl = refl
+
 fourierFourRoundTrip : (s : FourSamples) →
   inverseFourierFour (fourierFour s) ≡ s
-fourierFourRoundTrip (four a b c d)
-  rewrite Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d = refl
+fourierFourRoundTrip (four a b c d) =
+  four-ext
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
 
 fourierFourCoefficientRoundTrip : (c : FourCoefficients) →
   fourierFour (inverseFourierFour c) ≡ c
-fourierFourCoefficientRoundTrip (coeffs a b c d)
-  rewrite Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d
-        | Ring.solve-∀ a b c d = refl
+fourierFourCoefficientRoundTrip (coeffs a b c d) =
+  coeffs-ext
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
+    (Ring.solve-∀ a b c d)
 
 -- The actual fine-sampling surface is Nyquist.Phase36, not a
 -- second four-phase cyclic carrier. We select four existing points
