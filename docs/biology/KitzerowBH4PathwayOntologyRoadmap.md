@@ -1,5 +1,53 @@
 # Kitzerow BH4 pathway ontology and executable-network roadmap (2026-11-02)
 
+## 2026-11-07: Future-sufficiency and catalytic-throughput exact cut
+
+The previous *resource-pool scalar* representation is now subjected to
+two independent source-written Agda falsification tests:
+
+- `BH4AllocatorFutureObservationCountermodelExact` supplies two
+  selected nonnegative throughput-budget allocations with identical
+  total supply (one synthetic unit) and exact finite accounting, but
+  different hydroxylase-branch response. It proves
+  `supplyOnlyNotSufficientForBranchFuture`. **This is an
+  allocation-capacity abstraction**, not a physically calibrated
+  stoichiometric BH4 sink equation: BH4 is recyclable.
+- `BH4CatalyticTurnoverFutureCountermodelExact` supplies two
+  toy catalytic scenarios with the *same BH4 molecule count* but
+  different turnover capacities and proves
+  `samePoolDoesNotDetermineEffectiveTurnover`.
+  Catalytic turnover cannot be inferred from pool amount alone.
+
+Both are imported into `KitzerowBH4EvidenceEverything.agda`.
+The exact bounded enumeration in
+`scripts/check_bh4_allocator_future_observer.py` is invoked from
+`scripts/check_kitzerow_bh4_priority_all.py`.
+
+**Physical implication:** the proposed future-state observer must retain
+source-evidenced compartment, recycling/oxidation and effective
+branch-specific throughput; mere pathway-ID coverage, steady-state
+balance or a scalar BH4 pool cannot uniquely determine downstream
+results. No published clinical causal result follows from these
+countermodels.
+
+**Cross-branch physical programme:** see
+`docs/biology/BH4PhysicalTissueFutureObservationMaxCut.md`.
+Developmental PR #1471 separately owns
+`BiologicalSourcePhysicalTissueSimulationExact`, which proves the
+arbitrary-history 54-bond tissue projection conditional on a
+source-paid PNP/physical step. We have not imported either branch into
+the other's Golden root, because #1454 is stacked on older ancestors.
+
+**Remaining decisive receipts:** matched original BH4/BH2 redox and
+QDPR/TH/TPH/NOS/AGMO kinetics and isotope/recycling rates, enzyme
+abundance, transport and compartment/time identities; exact original
+29×12 S*v+e evidence, independent kinetic/flux calibration;
+controlled model-discriminating interventions, replication and
+source-anchored ontology review; exact-head parallel_checker/kernel
+acceptance and branch reconciliation.
+
+
+
 ## Correction: creator's published reaction chart is the first source
 
 On 2026-11-02 we checked Kitzerow's original *BH4/Folate/Cobalamin/
