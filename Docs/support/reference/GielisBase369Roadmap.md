@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E29), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E31), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -71,21 +71,21 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 paper smoothness; Round11 derivative authority reusable only after same-object weld; sqrt/positivity kernel OPEN |
 | G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
-| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E28 selected four-phase m9 rational Fourier forward/inverse on ACTUAL Phase36 SOURCE; full C36 cyclotomic native 36-mode resolution OPEN |
+| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E28 exact four-quarter m9 Fourier and E30 original-C3-derived six-phase CRT cyclotomic Fourier SOURCE; full 36-mode field/reconstruction OPEN |
 | G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop polar integration, π and inverse/sqrt OPEN |
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
-| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E28 selected m9 four-sample reconstruction plus E13 exact Q(zeta36) 1296 computational pairs; full 36-dimensional cyclotomic Agda inversion OPEN |
+| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E28 four-phase + E30 six-phase native Fourier roundtrips SOURCE, independently 625/729 exact vectors; original full C36 native field/DFT OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E27 qualitative fixed-k Cartesian FD-to-continuum convergence PAPER PROVED for vanishing δ(h) and exact radial predicate; E14 sector O(m/N), E17 finite rational bounds; literal binary64 mask/quantitative rate/native Agda still OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E31 exact Fraction-only unshrunken raster predicate for all integer m; original n41/n61 masks 0 mismatches, E26 exact energy, E27 fixed-k FD→continuum paper theorem; quantitative mesh error and native Agda compactness OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
 | G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E22 typed SI numeric magnitude proof (P/c×R×signed deflection), E19/E24 rational torque envelope with exact canonical c; measured physical coupling OPEN |
 | G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E24 strict rational assumed optical input interval propagation; matched IID comparison owner; empirical calibrated/uncertainty data OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
-| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | Selected four-dimensional quarter-wave Fourier E28 SOURCE, full C36 12-coordinate cyclotomic scalar and 36-mode reconstruction OPEN |
+| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E28 selected four-dimensional 9th-mode Fourier and E30 six-dimensional C6=C2×C3 exact transform SOURCE; full C36 36-character Agda scalar OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E29 source audit, eight Agda Gielis roots in parallel checker; kernel acceptance OPEN; CI/HTML DEFERRED |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E31 theorem/source ledger, ten Gielis Agda sources in parallel checker; no typecheck/kernel acceptance; CI/HTML deferred |
 
 ## Critical dependencies / max-cut
 
@@ -518,3 +518,85 @@ double-angle proof, actual C36 native scalar/DFT,
 G12 original raster native compactness, and
 calibrated optical SI magnitude transfer.
 CI and historical HTML are out of current scope.
+
+
+## E30 + E31 latest exact max-cut: native C6 and no more binary64 raster predicate
+
+### E30 — Original C3 cyclotomic Fourier → actual C6 signal
+
+GielisSixPhaseCyclotomicFourierExact.agda now
+reuses the repository's fully proved
+C3CubeCyclotomicFourierExact arithmetic and
+native oneDimensionalFourierInversion /
+oneDimensionalFourierForwardInverse theorems.
+It constructs a two-point Fourier/Hadamard
+transform and tensors it with the existing C3
+DFT to give an exact selected C6=C2×C3
+operator with both inverse directions.
+The actual Phase18 six-point selection is
+even=[0,4,2], odd=[3,1,5] and corresponding
+original Q(zeta36) mode order [0,2,4,3,5,1].
+The exact interoperability script tests
+729 input signals against the direct original
+cyclotomic six-point DFT and confirms all
+transform/reconstruction equalities without float.
+This closes source-level selected C6 Fourier
+but not native FULL C36 representation.
+
+### E31 — Exact rational m=3,6,9 raster geometry
+
+**G12 numerical-boundary blocker RESOLVED**, not
+merely reduced by the E27 h² cutoff.
+An exact identity decides unshrunken Gielis
+membership at every rational grid point using
+the real part of (x+iy)^m and a strict
+rational polynomial/sign comparison. For odd m
+the single square root is eliminated by
+case splitting on the sign of A and B before
+squaring; equality is excluded exactly.
+The source scripts/gielis_exact_rational_raster_geometry.py
+has replaced the floating radial predicate in
+the original Cartesian finite-difference solver,
+the rational eigenvalue referee and the exact
+zero-exterior discrete energy checker.
+All four original fixtures (m3/6/9,n41 and
+m3,n61) retained EXACTLY the legacy masks:
+792,779,792,1788 interior sites and zero
+disagreeing nodes. The old floating epsilon
+is no longer a necessary algorithmic input,
+and E27's vanishing-tolerance scheme is
+superseded by exact *zero*-tolerance geometric
+classification for positive integer m.
+The selected rational Agda decision
+functions and boundary/origin equations are
+source-written in
+GielisExactRationalGridPredicateExact.agda.
+Native Agda correspondence with the Bishop-real
+radial definition and kernel acceptance remain
+separate G12/Bishop proof obligations.
+
+### Current exact remaining high-alpha leaves
+
+- G-BISHOP: actual Round11 same-source addition
+  theorem/double-angle/π, reciprocal/sqrt and
+  Bishop real radial integration, and Agda acceptance.
+- G-FOURIER: FULL C36 Cyclotomic36 scalar
+  \(\mathbb Q[x]/(x^{12}-x^6+1)\), 36 character
+  orthogonality and generic inversion in native
+  Agda; E28/E30 now CLOSE selected C4/C6
+  subcarriers without implying the full result.
+- G-SPECTRAL: existing exact-rational membership
+  removes floating-boundary ambiguity;
+  quantitative original finite-grid continuum
+  error and native mathematical compactness/graph
+  assembly remain.
+- G-SI: exact typed optical signed-torque magnitude
+  already implemented; original calibrated
+  impact/momentum geometry and source receipt
+  remain as the real-world validation leaf.
+- Golden: all ten selected Gielis Agda modules now
+  wired to parallel checker, exact-head source
+  kernel acceptance not yet obtained.
+
+Historical CI/HTML are deferred from the active
+user-requested max-cut.
