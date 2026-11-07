@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E33), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E35), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -75,8 +75,8 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop polar integration, π and inverse/sqrt OPEN |
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E28 four-phase + E30 six-phase native Fourier roundtrips SOURCE, independently 625/729 exact vectors; original full C36 native field/DFT OPEN |
-| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E31 exact unshrunken Fraction-only grid membership for integer m in ORIGINAL FD/eigenvalue/energy sources; old n41/61 masks identical; E27 fixed-k convergence on paper; native Bishop geometry equivalence/quantitative continuum eigenvalue rate/Agda compactness OPEN |
+| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E35 exact area + Faber–Krahn all-m first continuum eigenvalue >224/55; E15 m3 upper <1273/264, E23 SI length scaling; full Bishop-native functional analysis still OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E31 exact rational unshrunken membership, E26 native finite graph algebra, E27 fixed-k continuum convergence on paper; E35 rigorous continuum lower >224/55; native Agda compactness/quantitative mesh error OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
 | G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E32 original signed ray r×(d_in−eta d_out) scalar lever algebra, right-hand rule, exact nominal SI torque magnitude SOURCE; original SI c reused; calibrated source inputs/hit geometry OPEN |
@@ -85,7 +85,7 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E28 selected four-dimensional 9th-mode Fourier and E30 six-dimensional C6=C2×C3 exact transform SOURCE; full C36 36-character Agda scalar OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E33 ledger, twelve Gielis Agda source roots registered; no native kernel receipt; CI/HTML deferred |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E35 mathematical ledger, thirteen native Agda Gielis roots registered in parallel checker; source written, Agda kernel receipt OPEN; CI/HTML out of scope |
 
 ## Critical dependencies / max-cut
 
@@ -696,3 +696,64 @@ theorem. The reducer source is written,
 but the complex multiplication input itself
 has **not** been constructed as a proof
 and cannot be claimed closed.
+
+
+## E34/E35 current exact analytic and continuum improvements
+
+**Bishop E34:** New
+GielisBishopComplexCauchyAlgebraExact.agda
+proves source-level commutative and associative
+Bishop complex multiplication and distribution,
+on the existing BishopSetoidComplexExact
+carrier, using the original Bishop real solver.
+This pays the algebraic donor required for E33's
+single complex imaginary-axis exponential
+multiplication law. Remaining leaf:
+**complex factorial coefficient Cauchy product
+and absolute-limit identification** with the
+original Round11 sin/cos functions. Do not
+reprove real bishopExpAdd—it is already owned
+by BishopExponentialCauchyProductExact.
+
+**Continuum spectral E35:** The selected
+Gielis family has area sqrt(2)*pi for ALL
+positive integer m. Using the classical
+Faber–Krahn inequality and a rational
+alternating Bessel J0/J1 certificate:
+- J0(12/5) > 608149/244140625 > 0;
+- J1(x)>0 on (0,12/5], hence j_{0,1}>12/5;
+- sqrt(2)<99/70 exactly;
+- therefore lambda1(Omega_m)>224/55 (~4.0727).
+
+The first Dirichlet eigenvalue for m=3 now
+satisfies
+\[
+ \boxed{\frac{224}{55}<\lambda_1(\Omega_3)
+  <\frac{1273}{264}.}
+\]
+For assumed physical scale L in [Llow,Lhigh],
+the SI consumer now returns the stronger
+strict lower 224/(55 Lhigh²) m^-2, without
+claiming any wave-speed or empirical frequency.
+The bound is **independent** of the original
+finite-raster eigenvalue calculation.
+
+The new Agda
+GielisBesselFaberKrahnRationalExact.agda
+contains the exact rational Bessel truncation,
+strict positivity and eigenvalue arithmetic;
+the standard Bessel/Faber–Krahn analytic
+theorems and original Bishop-real embedding
+remain explicit foreign mathematical donors.
+The native Agda source has not been
+kernel-checked in this environment.
+
+**Active outstanding:** original Round11
+complex exponential factorial-tail proof;
+canonical Bishop pi/sqrt/area/curvature;
+full Q(zeta36) cyclotomic native DFT;
+native graph-to-continuum min–max/compactness;
+quantitative finite-mesh spectral error;
+measured original optical source/material
+calibration. No CI or original HTML
+replay is pursued under the current scope.
