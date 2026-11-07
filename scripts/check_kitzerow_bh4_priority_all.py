@@ -18,6 +18,7 @@ for name in [
     "check_bh4_numeric_flux_guard.py",
     "check_bh4_exchange_identifiability.py",
     "check_bh4_allocator_future_observer.py",
+    "check_bh4_spatial_circulation.py",
 ]:
     runpy.run_path(str(root / "scripts" / name), run_name="__main__")
 print("Kitzerow BH4 aggregate evidence + identity + chemistry + executed-panel + quantitative + flux-ranking + payment-preparation + state-acquisition + ontology + source-reopening review Phase-4 regression: ok")
