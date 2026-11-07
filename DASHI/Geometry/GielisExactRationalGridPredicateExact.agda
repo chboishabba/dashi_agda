@@ -34,6 +34,10 @@ isLess a b with ℚP._<?_ a b
 ... | yes _ = true
 ... | no _ = false
 
+if_then_else_ : ∀ {A : Set} → Bool → A → A → A
+if true then yesValue else noValue = yesValue
+if false then yesValue else noValue = noValue
+
 record RationalComplex : Set where
   constructor complex
   field
@@ -62,35 +66,37 @@ squareRadius x y = x * x + y * y
 -- A>0, B<0: A sqrt(q)+B<0 iff A² q<B².
 -- For A<0 and B<=0, strict inequality holds because q>0.
 oddRootLessThanZero : ℚ → ℚ → ℚ → Bool
-oddRootLessThanZero A B q with isLess A 0ℚ
-... | true with isLess 0ℚ B
-...   | true = isLess (B * B) ((A * A) * q)
-...   | false = true
-... | false with isLess 0ℚ A
-...   | true with isLess B 0ℚ
-...     | true = isLess ((A * A) * q) (B * B)
-...     | false = false
-...   | false = isLess B 0ℚ
+oddRootLessThanZero A B q =
+  if isLess A 0ℚ then
+    (if isLess 0ℚ B then
+       isLess (B * B) ((A * A) * q)
+     else true)
+  else
+    (if isLess 0ℚ A then
+       (if isLess B 0ℚ then
+          isLess ((A * A) * q) (B * B)
+        else false)
+     else isLess B 0ℚ)
 
 insideEvenMode : Nat → ℚ → ℚ → Bool
-insideEvenMode k x y with squareRadius x y
-... | q with isLess 0ℚ q
-...   | false = true
-...   | true =
-  isLess
-    (((3 * q - 4) * powQ q k)
-     + (q * re (complexPow x y (twice k))))
-    0ℚ
+insideEvenMode k x y =
+  let q = squareRadius x y in
+  if isLess 0ℚ q then
+    isLess
+      (((3 * q - 4) * powQ q k)
+       + (q * re (complexPow x y (twice k))))
+      0ℚ
+  else true
 
 insideOddMode : Nat → ℚ → ℚ → Bool
-insideOddMode k x y with squareRadius x y
-... | q with isLess 0ℚ q
-...   | false = true
-...   | true =
-  oddRootLessThanZero
-    ((3 * q - 4) * powQ q k)
-    (q * re (complexPow x y (suc (twice k))))
-    q
+insideOddMode k x y =
+  let q = squareRadius x y in
+  if isLess 0ℚ q then
+    oddRootLessThanZero
+      ((3 * q - 4) * powQ q k)
+      (q * re (complexPow x y (suc (twice k))))
+      q
+  else true
 
 insideGielis3 : ℚ → ℚ → Bool
 insideGielis3 = insideOddMode 1
