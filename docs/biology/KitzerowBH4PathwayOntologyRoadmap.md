@@ -1,5 +1,86 @@
 # Kitzerow BH4 pathway ontology and executable-network roadmap (2026-11-02)
 
+## 2026-11-07: Physical location, connectivity and circulation max-cut
+
+**Correction to well-mixed resource model:** The *physical state*
+must include source-qualified **location, compartment, boundary,
+connectivity, direction, perfusion, clearance, BH4/BH2 redox state,
+substrate access and measurement time**. The selected Rhea/ChEBI
+29×12 stoichiometry by itself cannot identify which cells or tissues
+receive BH4 or an accessible metabolic precursor.
+
+New original Agda source owners:
+
+1. `BH4SpatialConnectivityCirculationExact.agda`
+   reuses `FiniteElectrodiffusiveMovingBoundaryExact` for a finite
+   source-to-target conservative transfer. Its selected directed graph
+   distinguishes local diffusion, cell-gap junction, plasma membrane,
+   vascular perfusion, interstitial transport and BBB transfer.
+   `globalInventoryCannotDetermineLocalDelivery` is a genuine
+   **same-total, different-target** finite counterexample.
+   `reversePathNotProvided` proves that a selected forward
+   connection does not automatically supply a reverse route.
+   `totalsAloneCannotDetermineLocalCofactor` proves an even stronger
+   redox example: the same **global BH4 AND BH2 totals** can have
+   different target-local available reduced cofactor.
+2. `BH4PNPSamePhysicalHistoryBridgeExact.agda` now requires a
+   typed `ContextIndexedCirculation`, a source-identical selected
+   PNP model, physical-to-location/compartment maps, and a
+   `permittedStepRoute` for each selected physical transition.
+   `physicalTrajectoryHasSourcePermittedRoute` proves by
+   concatenation that every finite controlled physical history
+   follows an admitted original-source directed route. This joins
+   the existing BH4 and PNP all-history identities, **but not**
+   a calibrated physical circulation law.
+3. `scripts/check_bh4_spatial_circulation.py`
+   provides a deterministic directed-reachability, conservation,
+   local BH4/BH2 and membrane-gating numerical regression.
+4. `scripts/check_bh4_spatial_measurement_payment.py`
+   is an original-source interface for measured **compartment
+   concentration × measured volume = amount**; it requires SHA
+   provenance, original source, experiment, specimen, split,
+   repeated times, region, compartment, original transport
+   reference and both BH4/BH2 measurements. It refuses cross-group
+   specimen leakage, unmeasured volume/compartment context and
+   unsupported transport modes. Its default aggregate mode is an
+   explicitly labeled **synthetic-only self-test**. Real source
+   data are *not* bundled and concentration differences are never
+   promoted into measured flow rates.
+5. Both new executables are wired into
+   `scripts/check_kitzerow_bh4_priority_all.py`. The formal owners
+   are imported into `KitzerowBH4EvidenceEverything.agda`.
+
+**Primary physiological references and limitations:**
+- Tetrahydrobiopterin cardiovascular recycling and uptake review,
+  DOI 10.1016/j.tips.2011.02.003 (see article/review source for exact
+  bibliography; separate original-subject source identity remains
+  required).
+- Redox, endothelial NOS and compartment-specific BH4/BH2:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC4038990/`.
+- Transport, intracerebral access and BBB:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC8573752/`.
+- Endothelial/vascular treatment differences:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC4273464/`.
+
+**No clinical promotion.** Mechanistic proposals in the Kitzerow
+source registry remain source-graded and distinct from curated
+BH4 biochemistry. No tissue-specific numerical permeability, perfusion
+pressure, clearance rate or BH4 transport rate has been inferred from
+an uncalibrated graph edge. One cannot substitute plasma BH4 for
+intracellular BH4, or local tissue adjacency for vascular
+connectivity, without independent physical evidence.
+
+The remaining **physical same-object gate** is a source-supported
+species- and region-indexed reaction/transport law, matched measured
+connectivity and compartment volumes, measured boundary sources,
+simultaneous branch/enzyme turnover, and same-specimen time-series.
+The 29×12 matrix and 29 exchange coordinates must remain separately
+paid. The new ITIR candidate consumer PR #72 preserves these
+spatial coordinates without creating a competing PNF compiler.
+The PRs remain branch-separated and kernel acceptance pending.
+
+
+
 ## 2026-11-07: Future-sufficiency and catalytic-throughput exact cut
 
 ### Same-source BH4 ↔ electrodiffusion all-history theorem
