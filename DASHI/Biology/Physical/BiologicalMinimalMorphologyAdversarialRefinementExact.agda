@@ -1,0 +1,59 @@
+module DASHI.Biology.Physical.BiologicalMinimalMorphologyAdversarialRefinementExact where
+
+------------------------------------------------------------------------
+-- A constructive negative control for the EXACT 18-class fixture quotient.
+-- If an independently justified future intervention reads the discarded
+-- chromatin-marker coordinate, the original 18-class code ceases to be
+-- behaviourally safe. No claim is made that the synthetic marker-probe
+-- is a real molecular assay or that chromatin is inert in real biology.
+------------------------------------------------------------------------
+
+open import DASHI.Core.Prelude
+open import Agda.Builtin.String using (String)
+
+import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
+import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact as Minimal
+import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
+import DASHI.Core.FutureObservationLanguageQuotientExact as Future
+
+data MarkerSensitiveAction : Set where
+  markerProbe : MarkerSensitiveAction
+
+markerActionLabel : MarkerSensitiveAction → String
+markerActionLabel markerProbe = "synthetic-marker-sensitive-probe"
+
+markerSensitiveStep :
+  MarkerSensitiveAction → Bio.BiologicalState → Bio.BiologicalState
+markerSensitiveStep markerProbe
+  (Bio.biologicalState g c h j e p) =
+    Bio.biologicalState g c h j e c
+
+sameMinimal18ClassBeforeMarkerProbe :
+  Minimal.minimalProject Bio.withoutMemory
+    ≡ Minimal.minimalProject Bio.differentMarker
+sameMinimal18ClassBeforeMarkerProbe = refl
+
+markerProbeReadsFirstFalse :
+  Bio.observe (markerSensitiveStep markerProbe Bio.withoutMemory)
+    ≡ false
+markerProbeReadsFirstFalse = refl
+
+markerProbeReadsSecondTrue :
+  Bio.observe (markerSensitiveStep markerProbe Bio.differentMarker)
+    ≡ true
+markerProbeReadsSecondTrue = refl
+
+original18ClassProjectionNotSafeUnderNewDynamics :
+  Future.FutureLanguageSafeProjection
+    (Bridge.deterministicSystem markerSensitiveStep markerActionLabel)
+    Bio.observe Minimal.minimalProject →
+  ⊥
+original18ClassProjectionNotSafeUnderNewDynamics safe =
+  Bio.false≢true
+    (Bridge.canonicalFutureEquivalentImpliesTraceEquivalent
+      (Future.kernelContainedInFutureEquivalence
+        safe sameMinimal18ClassBeforeMarkerProbe)
+      (markerProbe ∷ []))
+
+-- This is why the source/evidence revision loop must be permitted to reopen
+-- and refine a quotient when new intervention measurements discriminate it.
