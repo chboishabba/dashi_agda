@@ -66,6 +66,29 @@ def validate(data: dict, cases: str, sources: str) -> dict:
                                   "documented_proposal")
         assert claim["implementation_status"] == "not_verified"
     assert set(data["observations"]["documented_plan_content"]) == claim_ids
+    intake = data["pnf_candidate_intake"]
+    assert len(intake) == len(claim_ids)
+    assert {r["candidate_id"] for r in intake} == {
+        "pnf-" + claim_id for claim_id in claim_ids}
+    assert data["pnf_ingestion_status"].startswith(
+        "source_locator_and_candidate_roles_created")
+    for row in intake:
+        assert row["source_id"] == primary["id"]
+        assert row["source_locator"] == primary["url"]
+        assert row["source_event_time"] == "1998-04-03"
+        assert row["source_publication_time"] == "1998-04-27"
+        assert row["modality"] == "proposed_or_recorded_in_source"
+        assert row["candidate_only"] is True
+        assert row["candidate_validity"] == "undetermined"
+        assert row["claim_scope"] == "claim_about_published_draft_only"
+        assert all(row[key] is None for key in (
+            "source_observation_time", "source_ingestion_time",
+            "original_text_offset", "parser_profile",
+            "semantic_review_receipt", "source_content_hash"))
+    assert data["integration_joins"][
+        "congressional_draft_to_implementation"] == "not_identified"
+    assert data["integration_joins"][
+        "congressional_draft_to_realised_policy_effect"] == "not_identified"
     for name, observations in data["observations"].items():
         if name not in ("published_historical_genealogy",
                         "documented_plan_content"):
@@ -91,6 +114,7 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "causal_effect": "NOT_IDENTIFIED",
         "hostile_intent": "NOT_IDENTIFIED",
         "primary_record_span_anchors": len(claims),
+        "candidate_pnf_intake_rows": len(intake),
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
         "real_measured_outcomes": 0,
