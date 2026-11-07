@@ -104,11 +104,13 @@
     "hostile_intent": "not_identified",
     "population_level_radicalisation": "not_identified",
     "documented_joint_planning": "source_supported",
-    "plan_execution": "not_identified"
+    "plan_execution": "not_identified",
+    "api_wide_authorisation": "contested_not_identified",
+    "later_coalition_advocacy": "bounded_reported"
   },
   "follow_up_discriminator": {
     "id": "implementation_and_command_archive",
-    "description": "Locate original approvals, funding releases, executed outreach records, exposure logs, responses, and any responsibility chain linking the draft plan to implemented activities. The publicly documented plan establishes planning but not execution or outcome effects.",
+    "description": "Locate original approvals, funding releases, executed outreach records, exposure logs, responses, and any responsibility chain linking the draft plan to implemented activities. The publicly documented plan establishes planning but not execution or outcome effects. Preserve the 1998 API vice-president response as contested-authorisation evidence and the later coalition reporting as a separate longitudinal branch. Seek company adoption/vote/expenditure receipts, dated outreach event records and exposed audiences before promoting implementation.",
     "currently_observed": false,
     "ethical_route": "public institutional documents only",
     "expected_to_distinguish": [
@@ -336,6 +338,137 @@
   "integration_joins": {
     "congressional_draft_to_tobacco_climate_gradeB_edge": "candidate_relation_only; no same-actor/document-time identity proof asserted",
     "congressional_draft_to_realised_policy_effect": "not_identified",
-    "congressional_draft_to_implementation": "not_identified"
-  }
+    "congressional_draft_to_implementation": "not_identified",
+    "1998_draft_to_2017_later_coalition_activity": "no direct execution identity; distinct time, organisation and source scope",
+    "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect"
+  },
+  "followup_evidence_20261107": [
+    {
+      "id": "api_response_1998_05_01",
+      "date": "1998-05-01",
+      "title": "Climate Change Misinformation Campaign Charges",
+      "publisher": "Living on Earth (public-radio transcript)",
+      "url": "https://www.loe.org/shows/segments.html?programID=98-P13-00018&segmentID=1",
+      "source_type": "contemporaneous_attributed_response",
+      "source_line_ranges": [
+        [
+          20,
+          23
+        ],
+        [
+          40,
+          42
+        ]
+      ],
+      "claims": [
+        {
+          "id": "api_disputes_plan_scope",
+          "attributed_speaker": "William O'Keefe, API vice-president",
+          "proposition": "The meetings and correspondence were the personal initiatives of a lower-level employee, according to the radio programme's attribution of API's response.",
+          "kind": "quoted_organisational_position_reported_by_media",
+          "effect_on_p3": "contests institutional authorisation; does not deny draft existence or independently prove authorisation absent"
+        }
+      ],
+      "operational_primary_receipt": false
+    },
+    {
+      "id": "coalition_investigation_2017_09_05",
+      "date": "2017-09-05",
+      "title": "A two-decade crusade by conservative charities fueled Trump’s exit from Paris climate accord",
+      "publisher": "The Washington Post",
+      "url": "https://www.washingtonpost.com/investigations/a-two-decade-crusade-by-conservative-charities-fueled-trumps-exit-from-paris-climate-accord/2017/09/05/fcb8d9fe-6726-11e7-9928-22d00a47778f_story.html",
+      "source_type": "later_investigative_reporting",
+      "source_line_ranges": [
+        [
+          19,
+          42
+        ]
+      ],
+      "claims": [
+        {
+          "id": "coalition_advocacy_record",
+          "proposition": "The investigation reports Cooler Heads Coalition advocacy, funding links, outreach and institutional activities over later years.",
+          "kind": "reported_later_activity",
+          "effect_on_p3": "supports independently reported later advocacy, not an execution receipt for the 1998 draft"
+        },
+        {
+          "id": "coalition_disputes_overarching_direction",
+          "attributed_speaker": "Myron Ebell",
+          "proposition": "The investigation quotes a coalition figure rejecting overarching direction by any funder.",
+          "kind": "attributed_participant_account",
+          "effect_on_p3": "preserve as competing account, not proof of absence of coordination"
+        }
+      ],
+      "operational_primary_receipt": false
+    },
+    {
+      "id": "house_hearing_2019_10_23",
+      "date": "2019-10-23",
+      "title": "Examining the Oil Industry's Efforts to Suppress the Truth About Climate Change",
+      "publisher": "US House Subcommittee on Civil Rights and Civil Liberties",
+      "url": "https://www.govinfo.gov/content/pkg/CHRG-116hhrg38304/html/CHRG-116hhrg38304.htm",
+      "source_type": "official_hearing_transcript_with_testimony",
+      "source_line_ranges": [
+        [
+          0,
+          39
+        ]
+      ],
+      "claims": [
+        {
+          "id": "hearing_review_of_1998_plan",
+          "proposition": "The 2019 hearing revisits the 1998 document and climate-industry activity in testimony and member statements.",
+          "kind": "official_record_of_attributed_statements",
+          "effect_on_p3": "evidence of later congressional examination; testimony is not automatically direct proof of any causal effect"
+        }
+      ],
+      "operational_primary_receipt": false
+    }
+  ],
+  "evidence_question_ledger": [
+    {
+      "id": "public_1998_draft",
+      "status": "documented_primary",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
+    },
+    {
+      "id": "planning_group_and_proposed_actions",
+      "status": "documented_primary",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
+    },
+    {
+      "id": "api_wide_authorisation_of_plan",
+      "status": "contested_not_identified",
+      "source_ids": [
+        "congressional_record_1998_04_27",
+        "api_response_1998_05_01"
+      ]
+    },
+    {
+      "id": "independently_reported_later_coalition_advocacy",
+      "status": "reported_independent_later_activity",
+      "source_ids": [
+        "coalition_investigation_2017_09_05"
+      ]
+    },
+    {
+      "id": "specific_1998_plan_implementation",
+      "status": "not_identified",
+      "source_ids": []
+    },
+    {
+      "id": "campaign_exposure_and_impact",
+      "status": "not_identified",
+      "source_ids": []
+    },
+    {
+      "id": "plan_caused_Kyoto_or_Paris_policy_outcome",
+      "status": "not_identified",
+      "source_ids": []
+    }
+  ]
 }
