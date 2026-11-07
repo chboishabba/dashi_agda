@@ -1284,3 +1284,105 @@ kernel evidence of the present Gielis continuum result.
 - Literal binary64 mesh predicate, machine-verified
   convergence rate and native Agda continuum proof:
   OPEN; no false promotion from E27.
+
+
+## E28 — Native selected four-phase Fourier inversion and Nyquist separation
+
+The existing GielisBase369NyquistPhase36Exact.agda supplies
+the actual Phase36 sample carrier. It proves that m=9
+and m=27 sine modes are identically zero when sampled on
+the coarser 18 even phases, and that fine j=1 samples
+resolve their opposite signs.
+
+The new GielisNineModeFourierExact.agda constructs an
+actual selected rational 4-phase Fourier transform using
+the **same** Nyquist.Phase36 samples j=0,1,2,3.
+For arbitrary rational samples \(f=(f_0,f_1,f_2,f_3)\),
+its Fourier coefficients are
+
+\[
+ a=(f_0+f_1+f_2+f_3)/4,\quad
+ b=(f_0-f_2)/2,\quad c=(f_1-f_3)/2,\quad
+ d=(f_0-f_1+f_2-f_3)/4.
+\]
+
+The exact inverse is
+
+\[
+ (f_0,f_1,f_2,f_3)
+ =(a+b+d,a+c-d,a-b+d,a-c-d).
+\]
+
+These are the four real character rows
+\(1,\cos(9\theta_j),\sin(9\theta_j),\cos(18\theta_j)\)
+for \(\theta_j=2\pi j/36\).
+Both directions of the original 4x4 rational transform
+are source-written using the repository's rational
+ring solver and record-coordinate extensionality,
+without a hypothetical FFT or assumed Fourier operator.
+
+The original \(\mathbb Q(\zeta_{36})\) twelve-rational-
+coordinate implementation is reused in
+scripts/gielis_nine_quarter_fourier_exact.py. It
+independently establishes the exact character rows
+
+\[
+ \cos9=[1,0,-1,0],\quad
+ \sin9=[0,1,0,-1],\quad
+ \cos18=[1,-1,1,-1]
+\]
+
+inside the actual cyclotomic quotient, and checks
+both forward/inverse identities for 625 rational
+sample vectors by exact Fraction arithmetic.
+
+This is a **selected m=9 quarter-wave reconstruction
+result**, not proof of the entire C36 cyclotomic DFT
+over arbitrary 36 signals. The latter requires an
+Agda native twelve-dimensional field carrier and
+all 36 character-resolution relations.
+Exact-head Agda acceptance remains to be established.
+
+## E29 — Reduce concrete Bishop four-angle to same-object doubling
+
+The source GielisBishopPolynomialExact.agda now
+contains BishopConcreteDoubleAngleInputs on the
+**same actual configured Bishop sine/cosine dataset**.
+Its three proof inputs are
+
+\[
+ \cos_B(2x)\simeq\cos_B(x)^2-\sin_B(x)^2,\quad
+ \sin_B(2x)\simeq2\cos_B(x)\sin_B(x),
+\]
+and
+\[
+ \cos_B(4x)\simeq
+ \cos_B(2x)^2-\sin_B(2x)^2.
+\]
+
+The reducer bishopCosineQuadrupleFromTwoDoubleAngles
+uses actual Bishop setoid congruence and the
+previous native polynomial quartic equality to
+derive the ordinary concrete four-angle identity
+
+\[
+ \cos_B(4x)\simeq
+ \cos_B(x)^4-6\cos_B(x)^2\sin_B(x)^2
+ +\sin_B(x)^4.
+\]
+
+The consumer bishopGielisFromPythagoreanAndTwoDoubleAngles
+then applies the previously source-written Gielis
+Pythagorean/quartic reducer to prove the selected
+rational radial identity from these smaller native
+analytic leaves.
+
+The remaining analytical producer is now precisely
+the two sine/cosine doubling equations on the
+original Round11 Bishop sine/cosine power-series
+carrier, including \(4x=2(2x)\) setoid argument
+transport. The current module does NOT manufacture
+those inputs, nor identify them with a new formal
+sine/cosine object. The analytic power-series
+product/addition theorem and exact-head Agda kernel
+check remain outstanding.
