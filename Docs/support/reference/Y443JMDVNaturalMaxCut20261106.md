@@ -590,3 +590,32 @@ the golden Agda checker.
 The 80=72+8 alternative chart and no-equivariance result remain
 independent of the JMD whole-group proof, which does not assume
 a 369 chart, C3 zeta identification, or jCoarse/jFine correspondence.
+
+
+## 2026-11-07 local Python C3 / F2^5 / 3B / 196883 max-cut
+
+Read back and reused original owner modules:
+- `DASHI/Biology/ThreeSixNineMoonshineScaleExact.agda` and `MonsterFilteredCarrierExact.agda`: original ten copies of 3^9 plus 53, 196883, with **non-invariance** of the candidate pieces explicitly retained.
+- `DASHI/Foundations/Base369FiveModePhaseQuotientExact.agda`: five D4 **irrep labels**, ten oriented states, nine-cell quotient, not a theorem identifying those types with primitive atoms of an F2^5 algebra.
+- `DASHI/Moonshine/Monster3BNormalizerBridge.agda`: C3 class 3B data 65663+65610+65610=196883, trace 53.
+- `DASHI/Biology/MoonshineGriessAutomorphismClassificationExact.agda` (PR #437): Griess restriction, **not** reverse VOA extension.
+- `DASHI/Moonshine/PenumbralSQModuleLift.agda` and `JInvariantEisensteinBishopConvergenceFrontierExact.agda`: coefficientwise stabilisation and Bishop convergence; neither determines Aut(Vnatural) without additional source laws.
+
+**New independent exact Python model** (local execution receipt retained separately):
+
+For x in first 196830 coordinate states, define T(x) as incrementing the low ternary digit modulo 3; fix the remaining 53. Exhaustive Python computed T^3=1 on all 196883 states and cycle count **65610 3-cycles plus 53 fixed points**. Therefore the complex permutation module has multiplicities (65663,65610,65610) for (1,omega,omega²), trace 53; adding a distinct conformal fixed line gives (65664,65610,65610), trace 54 on 196884. This matches the recorded C3/3B character. By semisimplicity of complex C3 modules, this proves existence of an **abstract C3-equivariant linear equivalence**, provided the selected actual 3B operator has the claimed dimension/order/trace. It does **not** construct a canonical Monster basis, preserve the Griess product or identify the full Monster representation.
+
+Construct five target coordinate blocks, of sizes (65610,65610,65610,52,1), by the low ternary digit on the bulk and splitting the 53 fixed residual coordinates. The map sending each primitive idempotent of the finite Boolean ring `F2^5` to the characteristic function of its block is **unital, injective and multiplicative/additive**, and is C3-equivariant for the first-three-atom cycle `C3 -> S5 = Aut_alg(F2^5)`. Exhaustively checked the full chart and all 32 source elements / 1024 element pairs. This is an actual finite-object C3 bridge, stronger than a numeral-only cardinality comparison.
+
+**Negative gate:** it is impossible to extend the full S5 atom-permutation action to a permutation action on the same 196883 target coordinates while preserving this unital five-block embedding: transitivity would require all blocks equal in size, but 196883 mod 5 = 3. This is a no-go for the selected **Boolean permutation chart**, not for Monster's non-permutation complex linear action.
+
+**Crucial scientific boundary:** `F2^5` is a 32-element Boolean algebra over characteristic two, not a 196884-dimensional complex Griess algebra. Its five primitive idempotents are not the five D4 representation types merely because both labels have count five. C3-equivalent complex representations need not have compatible multiplication or extend to full Monster action.
+
+**Next source-specific completion cuts:**
+(1) selected actual 3B action on the same Monster module and a concrete intertwiner;
+(2) selected complex Griess product/Aut_Griess identification, reusing PRs #433/#437;
+(3) literal weight-two generation for the constructed Vnatural (gives Aut_VOA -> Aut_Griess injectivity by mode-generation induction);
+(4) full Griess-to-VOA extension preserving the orbifold relations (gives surjectivity);
+(5) source Y443/80 Monster group identification with precisely that same action.
+
+The local Python source and JSON receipts are available in the ChatGPT artifact bundle; this documentation does not falsely claim a repo-executed script or Agda kernel check.
