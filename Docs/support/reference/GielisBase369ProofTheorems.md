@@ -1568,3 +1568,100 @@ constants, and native Agda formalisation of the
 min-max/compactness and graph-to-grid operators.
 An exact finite eigenvalue bracket (E17/E26) is not
 the same as a continuum discretisation error bound.
+
+
+## E32 — Signed original ray cross-product to the actual typed SI torque
+
+The older E22 used an abstract dimensionless signed ray response
+\(g\). Its physical geometric value is no longer opaque.
+
+For a selected ray hit \(\mathbf r=(x,y)\), unit input direction
+\(\mathbf d_{\rm in}=(i_x,i_y)\), output direction
+\(\mathbf d_{\rm out}=(o_x,o_y)\), and reflected power fraction
+\(\eta\in[0,1]\), conservation of optical momentum gives
+the **wall's** radiation-pressure force
+
+\[
+ \mathbf F_{\rm wall}
+   =\frac{P}{c}
+      (\mathbf d_{\rm in}-\eta\mathbf d_{\rm out}).
+\]
+
+Its right-hand-rule signed \(z\)-torque is therefore
+
+\[
+ \boxed{
+ \tau_z
+ = \frac{P}{c}\left[
+ x(i_y-\eta o_y)-y(i_x-\eta o_x)
+ \right]\quad \mathrm{N\,m}.}
+\]
+
+The new native source
+DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda
+constructs this *exact rational* signed lever as
+signedWallLever, proves
+
+\[
+ \operatorname{signedWallLever}
+  = \operatorname{rationalCrossZ}
+     (\mathbf r,\mathbf d_{\rm in}-\eta\mathbf d_{\rm out})
+\]
+and its anti-symmetry, sign reversal under exchanging
+input/output directions when \(\eta=1\),
+zero torque from zero direction change, and invariance
+under simultaneous \(180^\circ\) rotation of both position
+and ray directions.
+
+Crucially, the theorem
+modelWallTorqueSIMagnitude invokes the previous
+**actual** Mechanical.Quantity SI transport
+from E22 with the *computed signed lever*:
+
+\[
+ \operatorname{magnitude}_{SI}
+  (\operatorname{modelWallTorqueSI})
+ = (P c^{-1})\,
+ \operatorname{signedWallLever}
+  (\mathbf r,\mathbf d_{\rm in},\mathbf d_{\rm out},\eta).
+\]
+
+There is no separate unattested SI carrier.
+The existing R3HodgeCrossExact.hodgeWedgeEqualsCross
+is reused for the established right-handed spatial
+convention. Its underlying general-real group is **not**
+identified automatically with the finite rational
+carrier: an explicit rational-to-real embedding is still
+needed to assert a fully same-carrier Hodge equality.
+
+An independent executable event example uses the
+original exact SI constant and \(P=9000\) W,
+\(\mathbf r=(1,0)\) m, initial/outgoing directions
+\((0,1),(0,-1)\), \(\eta=1\).
+Its exact model torque is
+
+\[
+ \tau_z=\frac{18000}{299792458}\,\mathrm{N\,m},
+\]
+and the opposite directional swap gives its negative.
+A radial reversal at \(\mathbf r=(1,0)\) gives zero
+torque, while a simultaneous half-turn of the
+entire geometry leaves the signed torque unchanged.
+scripts/gielis_exact_signed_optical_torque.py checks
+all these statements by Fraction arithmetic.
+
+**What E32 closes:** the *finite* same-source
+optical wall-angular-impulse coordinate expression,
+its sign convention, and its typed SI scalar magnitude.
+The earlier abstract \(g\) no longer needs to be
+invented or accepted by assumption in this selected
+planar model.
+
+**Still necessary for real-world claims:**
+measured emitted power, material reflectivity,
+actual incident/outgoing directions and hit
+locations with physical uncertainty, the original
+apparatus model and independent replication.
+A typed and dimensionally correct expression is
+not a measurement receipt. Agda kernel acceptance
+of the source-written E32 theorem also remains open.
