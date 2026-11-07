@@ -562,7 +562,7 @@ def test_exact_continuum_gielis_m3_physical_scale_interval():
         physical_scale_discrete_lambda_interval,
     )
     r=gielis_m3_physical_continuum_enclosure("99/100","101/100")
-    assert Fraction(r["first_dirichlet_eigenvalue_lower_m^-2_open"]) == Fraction(22500,10201)
+    assert Fraction(r["first_dirichlet_eigenvalue_lower_m^-2_open"]) == Fraction(448000,112211)
     assert Fraction(r["first_dirichlet_eigenvalue_upper_m^-2_open"]) == Fraction(1591250,323433)
     assert r["lambda_dimension_MLT"] == (0,-2,0)
     assert not r["scale_interval_is_measured"]
@@ -798,3 +798,17 @@ def test_native_bishop_complex_ring_laws_for_cauchy_product():
     assert "BishopP.ℝ-Solver" in source
     assert "Complex.≈C-trans" in source
     assert "postulate" not in source.split("import Real")[1]
+
+
+def test_exact_all_mode_faber_krahn_continuum_first_eigenvalue_bound():
+    from gielis_continuum_faber_krahn_bound import certificate
+    from fractions import Fraction as F
+    c=certificate()
+    assert c["status"]=="exact_rational_Faber_Krahn_Gielis_continuum_lower"
+    assert c["applies_to_all_positive_integer_modes"]
+    assert F(c["J0_first_zero_strictly_greater_than"])==F(12,5)
+    assert F(c["J0_alternating_S5_strict_lower_rational"])==F(608149,244140625)
+    assert F(c["J1_inner_uniform_positive_lower_on_0_to_12_over_5"])==F(7,25)
+    assert F(c["first_continuum_dirichlet_eigenvalue_strict_lower"])==F(224,55)
+    assert F(c["sqrt2_strict_rational_upper"])**2>2
+    assert not c["native_Agda_Bessel_FaberKrahn_closed"]
