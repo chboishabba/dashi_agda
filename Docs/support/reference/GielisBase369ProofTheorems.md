@@ -1468,3 +1468,103 @@ or the actual continuum Shannon reconstruction
 theorem. Those are separate G07/G10/G19
 acceptance types, not consequences of selecting
 only six samples.
+
+
+## E31 — Exact unshrunken rational Gielis grid membership, no floating geometry
+
+**This supersedes E27's remaining binary64 *boundary-classification*
+obstruction for all selected integer modes.** The original
+finite-difference solver, rational eigenvalue referee and
+zero-exterior discrete-energy checker now use
+scripts/gielis_exact_rational_raster_geometry.py,
+not floating-point evaluation of sine, cosine or
+square roots to decide node membership.
+
+**Theorem (exact integer-mode rational predicate).**
+Fix an integer mode \(m>0\) and rational coordinates
+\(x,y\). Put \(q=x^2+y^2\) and
+\(u_m=\operatorname{Re}((x+iy)^m)\in\mathbb Q\).
+At \(q=0\), the point is strictly inside the selected
+Gielis domain. At \(q>0\), since
+\(\cos(m\arg(x+iy))=u_m/q^{m/2}\), the analytic
+radial inequality is exactly equivalent to
+
+\[
+\boxed{(3q-4)q^{m/2}+q u_m<0.}
+\]
+
+If \(m=2k\) is even, this is a strict comparison of
+two *rational polynomials*. If \(m=2k+1\) is odd, write
+
+\[
+ A=(3q-4)q^k,\qquad B=q u_m,
+\]
+so membership is the sign test \(A\sqrt q+B<0\),
+decidable **without calculating \(\sqrt q\)**:
+
+\[
+\begin{array}{ll}
+ A=0: & B<0,\\
+ A>0: & B<0\ \land\ A^2q<B^2,\\
+ A<0: & B\le0\ \lor\ A^2q>B^2.
+\end{array}
+\]
+
+All strict comparisons retain equality semantics,
+so the boundary is excluded. These three cases are
+proved by moving a strictly signed term to the other
+side and squaring **only after sign checking**.
+The rational complex power is constructed by integer
+polynomial multiplication, and every comparison is
+performed by exact Python Fraction integer arithmetic,
+without arbitrary precision approximations or a
+fixed radial tolerance.
+
+**Concrete selected legacy parity:** The strict
+*unshrunken exact-domain* predicate gives the same
+mask as the old floating radius-minus-1e-12 predicate
+at all four original computational fixtures:
+
+| Mode | Grid | Exact interior nodes | Legacy disagreements |
+|---|---|---:|---:|
+| 3 | 41×41 | 792 | 0 |
+| 6 | 41×41 | 779 | 0 |
+| 9 | 41×41 | 792 | 0 |
+| 3 | 61×61 | 1788 | 0 |
+
+These are independent local exact Fraction checks
+against the old NumPy mask. For **new** fine grids,
+the solver now always uses the exact unshrunken
+membership; the 1e-12 cutoff is no longer the actual
+membership convention. Accordingly the earlier
+vanishing-tolerance family E27 is *superseded* at
+the numerical source level by the stronger zero
+tolerance/exact analytic predicate, which also
+satisfies the E27 recovery/compactness proof
+assumptions.
+
+**Native Agda owner:**
+DASHI/Geometry/GielisExactRationalGridPredicateExact.agda
+source-writes the actual RationalComplex integer
+power, rational strict less-than decisions, and
+selected 3/6/9 membership booleans, including exact
+origin and positive-x axis boundary laws.
+It does not insert a new postulate or an artificial
+real carrier. Agda kernel acceptance and the
+same-object Bishop-real analytic cosine/radial
+connection remain distinct proof obligations.
+
+**What now closes:** Binary64 geometry classification
+is **removed from the actual raster algorithms** for
+integer Gielis modes; the original four selected
+legacy masks agree exactly. G12's exact arithmetic
+raster-to-continuum paper theorem applies to the
+algorithm's mathematical membership predicate.
+
+**Remaining G12:** A quantitative, validated bound
+for the *finite* n41/n61 eigenvalues against continuum
+spectrum still requires explicit interpolation/truncation
+constants, and native Agda formalisation of the
+min-max/compactness and graph-to-grid operators.
+An exact finite eigenvalue bracket (E17/E26) is not
+the same as a continuum discretisation error bound.
