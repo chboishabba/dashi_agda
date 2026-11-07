@@ -384,3 +384,92 @@ merely from shared participants and a similar objective.
 are not a parallel_checker receipt. The canonical Agda and Python
 scripts have not been executed from a full checkout in this assistant
 environment, which has no network path to git and no Agda executable.
+
+## 7 November — independent realised communication and measured document coherence
+
+This tranche now goes beyond proposed communications and purely synthetic
+epistemic observations, while preserving campaign and target identity:
+
+**Original/archived communication evidence (different historical sources):**
+
+- 1991 Information Council for the Environment media campaign:
+  Climate Files documentary index includes original advertising material
+  and campaign documentation; this is a separate documented historical
+  campaign, NOT execution of the April 1998 API draft.
+  https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/
+- 1995 Global Climate Coalition public `Climate Change: Your Passport to
+  the Facts` handout; archival materials evidence publication and report
+  distribution. No downstream persuasion is measured by that fact alone.
+  Same archival index.
+- GCC science/technical committee 1995–96 draft/meeting records:
+  archive synopsis and linked source material describe removal of
+  a section dealing with `contrarian theories` from the science primer.
+  Distinguish actual editorial document revision from asserted intent
+  and downstream effects.
+  https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1996-science-technology-january-february-meetings/
+- Original October 9, 1998 Cooler Heads Coalition briefing invitation:
+  https://climateinvestigations.org/wp-content/uploads/2017/09/CHPDF.pdf
+  This is an ACTUAL dated invitation specifying a session, venue and
+  sponsors, not an independently verified attendance or exposure record,
+  nor the same authorised event as the April API draft.
+
+**Peer-reviewed measured documents (NOT population persuasion):**
+
+Geoffrey Supran and Naomi Oreskes (2017), `Assessing ExxonMobil’s climate
+change communications (1977–2014)`, Environmental Research Letters 12,
+084019, DOI 10.1088/1748-9326/aa815f, analyses 187 company communications
+and reports 83% peer-reviewed acknowledgements of human-caused warming,
+80% internal-document acknowledgement, 12% acknowledgement in public
+advertorials and 81% of public advertorials expressing doubt (the
+percentages correspond to the study's stated coding/denominator rules;
+do NOT fabricate microdata or impose unrelated common denominators).
+This is an observed cross-document-type difference under the study's
+coding model, not a causal effect of the 1998 draft, not a direct study
+of reader belief changes, and not a reconstructed individual motive.
+The publisher lists a 2020 correction; the corrected coding details
+have not been separately reaudited in this tranche.
+
+**New Agda original consumer**
+`CCDCOEP3ClimateObservedActivityAndCorpusExact.agda` retains source
+families and evidence stage, proves a broad `climate communication` label
+does not recover whether evidence is an authored draft or an
+independently published communication, and uses the existing
+`DiscriminatorSynthesisExact` to identify a positive source-type
+observation. It defines a bounded `PublishedCorpusMeasurement` with the
+original study's numeric abstract summaries, with
+`isHumanTreatmentEffect=false` by construction. This is an
+**attributed measured-source record**, not a proved statistical estimate
+from underlying respondent data.
+
+**Integration**
+`ccdcoe_p3_climate_case_manifest.json` now has four independently
+source-qualified historical communication entries plus an actual
+published 187-document study entry. The fail-closed validator enforces
+different execution identities, publication/invitation status,
+study source, study numerals and no fabricated persuasion effect.
+Golden cognition, P3 regression and `check_ccdcoe_cognition_agda.sh`
+import/check the owner.
+
+**Revised empirical max-cut excluding kernel:**
+1. Source-exact event identity and reviewer-approved ITIR/SLR EventPNF for
+   a scoped collection of actual activities; original downloads, span
+   and content hashes, dates, funders, actors, recipients.
+2. Determine whether specific activities authorised/executed the
+   April API draft (distinct from the documented 1991, 1995–96 and
+   October 1998 materials).
+3. If asking about empirical communication **content**, obtain and
+   re-score actual microdata or source documents, calibration, coding
+   reliability, changing document composition and uncertainty.
+4. If asking about human belief or policy **effects**, obtain a
+   separate measured exposure/outcome dataset with comparison design,
+   selection/confounding, time alignment and interference controls.
+5. If asking about central direction or hostile intent, acquire
+   independently sourced authorisation/coordination and responsibility
+   evidence for the particular organisation/time/action; do not promote
+   cross-domain similarities.
+6. Held-out transport to other institutions, with local custodianship,
+   power/voice and safe source-governance gates preserved.
+
+No new facts above prove the API April 1998 draft was fully
+implemented. Real documented campaigns and a peer-reviewed document
+analysis nevertheless make the P3 case materially more empirical.
