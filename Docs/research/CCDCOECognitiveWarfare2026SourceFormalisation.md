@@ -426,7 +426,7 @@ do NOT fabricate microdata or impose unrelated common denominators).
 This is an observed cross-document-type difference under the study's
 coding model, not a causal effect of the 1998 draft, not a direct study
 of reader belief changes, and not a reconstructed individual motive.
-The publisher lists a 2020 correction; the corrected coding details
+Within 36 advertorials, the 26 taking a position on human-caused warming are the subset: 3/26 acknowledge (rounded 12%) and 21/26 express doubt (rounded 81%). Do NOT use 36 as the denominator for those percentages. The publisher lists a 2020 correction; the corrected coding details
 have not been separately reaudited in this tranche.
 
 **New Agda original consumer**
