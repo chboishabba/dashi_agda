@@ -1745,3 +1745,52 @@ shared Round11 Pythagorean same-object weld,
 positive real reciprocal square root and radial
 integration/derivatives. Agda kernel acceptance of
 this new source has not been verified here.
+
+
+## E34 — Same-object Bishop complex algebra for factorial Cauchy products
+
+The E33 trigonometric reducer now has a precise remaining
+analytic input \(E_B(i\,2x)\simeq E_B(ix)^2\). The existing
+BishopSetoidComplexExact.agda owns the literal Cartesian
+Bishop complex carrier and operations but does not expose
+every commutative algebra law needed for that Cauchy
+product. The new
+DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda
+constructs them using the original complex operations
+and the **existing Bishop real polynomial ring solver**:
+
+\[
+ z+w\simeq w+z,\qquad (z+w)+v\simeq z+(w+v),
+\]
+\[
+ zw\simeq wz,\qquad (zw)v\simeq z(wv),
+\]
+\[
+ z(w+v)\simeq zw+zv,\qquad
+ (z+w)v\simeq zv+wv.
+\]
+
+These are genuine source-written complex setoid
+equalities, with real and imaginary coordinate
+proofs; the right distributive law reuses the
+proved commutative and left-distributive laws.
+No second complex carrier or postulate is added.
+
+The original BishopExponentialFiniteCauchyCoefficientExact
+already proves real factorial binomial/Cauchy
+coefficients, and BishopExponentialCauchyProductExact
+already proves real exponential additivity via the
+rectangle/triangle/tail convergence machinery.
+Those sources are exact donors, NOT a ready-made
+complex series theorem.
+
+**Remaining complex analytic lemma:** construct
+the same semiring/binomial Cauchy coefficient
+identity for the original BishopComplex exponential
+factorials, prove its absolute series convergence
+and limit interchange, and identify its even/odd
+imaginary-axis components with the original
+Round11 cosine/sine power series. E34 has paid
+the algebraic rearrangement portion but not the
+full analytic infinite-product theorem.
+Native Agda kernel acceptance is still unverified.
