@@ -15,6 +15,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3CausalTrialecticInteractionExact.agda
   DASHI/Cognition/CCDCOEP3SourcePowerEvidenceWeldExact.agda
   DASHI/Cognition/CCDCOEP3CausalTrialecticRegressionExact.agda
+  DASHI/Cognition/CCDCOEP3ClimateGenealogyCaseExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
@@ -26,6 +27,7 @@ done
 
 python3 scripts/check_ccdcoe_cognitive_multiplex.py
 python3 scripts/check_ccdcoe_p3_causal_trialectic.py
+python3 scripts/check_ccdcoe_p3_climate_case.py
 
 # The repo's canonical Agda 2.9 parallel checker owns compiler resolution,
 # cache, resource guards and exact-head kernel receipts. No direct nix call.
