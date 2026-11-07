@@ -823,3 +823,71 @@ def test_native_rational_bessel_J0_FaberKrahn_lower_certificate():
         assert theorem in source
     assert "608149" in source and "244140625" in source
     assert "224" in source and "55" in source
+
+
+def test_full_C36_all_character_resolution_and_unrestricted_basis():
+    from gielis_cyclotomic36_unrestricted_exact import receipt
+    r=receipt()
+    assert r["status"]=="full_arbitrary_36_signal_C36_inversion_exact"
+    assert r["full_character_resolution_entries"]==36*36
+    assert r["forward_inverse_basis_vectors"]==36
+    assert r["inverse_forward_basis_vectors"]==36
+    assert r["universal_arbitrary_signal_by_linearity_and_basis"]
+    assert r["no_selected_mode_restriction"]
+    assert not r["native_Agda_C36_instantiation_accepted"]
+
+
+def test_P0_native_Bishop_existing_series_complex_records_same_object():
+    source=(ROOT/"DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda").read_text()
+    for token in ("seriesRoundTrip","setoidRoundTrip",
+                  "setoidPlusSameSeriesAlgebra","setoidMultiplySameSeriesAlgebra",
+                  "setoidComplexSeriesLimitConverges","setoidComplexSeriesLimitUnique"):
+        assert token in source
+    assert "Series.complexSeriesLimitConvergence" in source
+    assert "Series.complexSeriesLimitUnique" in source
+    assert "postulate" not in source.split("import DASHI.Analysis")[1]
+
+
+def test_P2_rational_a_posteriori_error_enclosure_is_rigorous_but_not_rate():
+    from gielis_certified_continuum_fd_error import exact_error_enclosure
+    from fractions import Fraction as F
+    c=exact_error_enclosure(F(4),F(9,2))
+    # cl=224/55 and cu=1273/264
+    expected=max(F(1273,264)-F(4),F(9,2)-F(224,55))
+    assert F(c["absolute_error_rational_strict_upper"])==expected
+    assert c["finite_to_continuum_error_quantitatively_bounded"]
+    assert not c["mesh_order_rate_Oh_power_certified"]
+    assert c["absolute_error_rational_lower"]=="0"
+    with pytest.raises(ValueError):
+        exact_error_enclosure(F(5),F(4))
+
+
+def test_P3_two_hit_exact_photon_angular_momentum_budget():
+    from gielis_kozyrev_same_event_original_owner import (
+        synthetic_two_hit_fixture,exact_ray_ledger)
+    from fractions import Fraction as F
+    s=synthetic_two_hit_fixture()
+    p=exact_ray_ledger(s["source"],s["hits"],s["terminal"],s["axis_origin"])
+    assert p["event_count"]==2
+    assert p["wall_torque_Nm"]==F(1080,149896229)
+    assert p["wall_absorption_W"]==F(2160)
+    assert p["output_W"]==F(6840)
+    assert p["energy_residual_W"]==0
+    assert p["angular_residual_Nm"]==0
+    assert p["momentum_residual_N"]==(0,0)
+
+
+def test_P3_original_Kozyrev_owner_same_event_if_checked_out():
+    import os
+    from pathlib import Path
+    owner=os.environ.get("KOZYREV_RAY_LEDGER_PATH")
+    if owner is None and os.environ.get("KOZYREV_PR1404_DIR"):
+        owner=str(Path(os.environ["KOZYREV_PR1404_DIR"])/"kozyrev_optical_event_ledger.py")
+    if not owner:
+        pytest.skip("PR1404 original source worktree not present; same-event parity NOT CHECKED")
+    from gielis_kozyrev_same_event_original_owner import (
+        compare_with_original,synthetic_two_hit_fixture)
+    receipt=compare_with_original(owner,synthetic_two_hit_fixture())
+    assert receipt["original_event_parity"]
+    assert receipt["original_owner_git_blob_verified"]
+    assert not receipt["same_physical_apparatus_calibrated"]
