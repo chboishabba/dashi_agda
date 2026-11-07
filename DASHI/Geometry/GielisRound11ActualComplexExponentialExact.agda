@@ -15,6 +15,8 @@ module DASHI.Geometry.GielisRound11ActualComplexExponentialExact where
 -- a DIFFERENT analytic proposition (not asserted here).
 ------------------------------------------------------------------------
 
+open import Agda.Builtin.Equality using (_≡_; refl)
+
 import Real as Bishop
 import RealProperties as BishopP
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
