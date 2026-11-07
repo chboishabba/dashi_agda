@@ -32,6 +32,7 @@ FILES = (
     "DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda",
     "DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda",
     "DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda",
+    "DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda",
     "scripts/gielis_cyclotomic36_unrestricted_exact.py",
     "scripts/gielis_certified_continuum_fd_error.py",
     "scripts/gielis_kozyrev_same_event_original_owner.py",
@@ -271,6 +272,14 @@ def source_audit(root: Path = ROOT) -> dict:
     original_event=source["scripts/gielis_kozyrev_same_event_original_owner.py"]
     assert "ORIGINAL_GIT_BLOBS" in original_event
     assert "compare_with_original" in original_event
+    native_exp=source["DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda"]
+    for theorem in ("actualRound11ComplexTranscendentals",
+                    "actualImaginaryAxisArgument",
+                    "actualRound11ExpCIsTrigPair",
+                    "actualSelectedPi"):
+        assert theorem in native_exp,theorem
+    assert "ExpZero.bishopExpZero" in native_exp
+    assert "Round11.termIdentification" in native_exp
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -278,7 +287,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,41):
+    for i in range(1,42):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -299,7 +308,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":40,
+        "paper_proof_sections":41,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
