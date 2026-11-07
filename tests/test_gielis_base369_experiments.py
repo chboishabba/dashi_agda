@@ -891,3 +891,16 @@ def test_P3_original_Kozyrev_owner_same_event_if_checked_out():
     assert receipt["original_event_parity"]
     assert receipt["original_owner_git_blob_verified"]
     assert not receipt["same_physical_apparatus_calibrated"]
+
+
+def test_P0_original_Round11_expC_imaginary_axis_is_literal_trig_pair():
+    source=(ROOT/"DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda").read_text()
+    for theorem in ("actualRound11ComplexTranscendentals",
+                    "actualImaginaryAxisArgument",
+                    "actualRound11ExpCIsTrigPair","actualSelectedPi"):
+        assert theorem in source
+    assert "ExpZero.bishopExpZero" in source
+    assert "Complex.expC" in source
+    assert "Round11.termIdentification" in source
+    assert "Machin.bishopMachinPi" in source
+    assert "postulate" not in source.split("import Real")[1]
