@@ -1,0 +1,621 @@
+{
+  "schema": "dashi.ccdcoe.p3.climate_case.v1",
+  "case_id": "oreskes-conway-bounded-tobacco-climate-continuity",
+  "scope": "Bounded published historical genealogy, not full primary-document event extraction or an identified causal effect.",
+  "citation_refs": [
+    {
+      "id": "merchants_of_doubt_2010",
+      "kind": "book",
+      "authors": [
+        "Naomi Oreskes",
+        "Erik M. Conway"
+      ],
+      "title": "Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming",
+      "year": 2010,
+      "identifier": "ISBN 978-1-59691-610-4",
+      "source_owner": "DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda::merchantsOfDoubtHistory",
+      "original_document_span": null,
+      "original_revision_hash": null
+    },
+    {
+      "id": "nature_465686a",
+      "kind": "scholarly_commentary",
+      "authors": [
+        "Naomi Oreskes",
+        "Erik M. Conway"
+      ],
+      "title": "Defeating the merchants of doubt",
+      "year": 2010,
+      "identifier": "DOI 10.1038/465686a",
+      "source_owner": "DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda::oreskesConwayNatureCommentary",
+      "original_document_span": null,
+      "original_revision_hash": null
+    }
+  ],
+  "documented_edges": [
+    {
+      "id": "tobacco_to_climate",
+      "source_node": "tobacco industry R&D / influence infrastructure",
+      "target_node": "climate-change doubt / denial campaigns",
+      "relation": "personnelInstitutionalContinuity",
+      "evidence_grade": "B",
+      "source_ids": [
+        "merchants_of_doubt_2010",
+        "nature_465686a"
+      ],
+      "agda_owner": "DASHI/Governance/EvidenceGradedGenealogyCasesExact.agda::tobaccoToClimateHistoricalContinuity",
+      "bounded_claim": "Historically documented continuity of recurring people and doubt-production strategies across tobacco and climate controversies, not a single centrally directed network.",
+      "observed_campaign_effect": null,
+      "observed_command_structure": null
+    }
+  ],
+  "comparator": {
+    "id": "wellness_to_antivax",
+    "evidence_grade": "C",
+    "relation": "audienceContentAdjacency",
+    "agda_owner": "DASHI/Governance/EvidenceGradedGenealogyCasesExact.agda::wellnessToAntiVaxAdjacency",
+    "scope": "Separate historical topic and source, used only to test distinction between evidence grades; not a negative control population for climate."
+  },
+  "hypotheses": [
+    {
+      "id": "decentralised_continuity",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "not_established",
+      "source_supported": false
+    },
+    {
+      "id": "central_command",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "centralised",
+      "source_supported": false
+    },
+    {
+      "id": "mixed_relations",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "mixed",
+      "source_supported": false
+    }
+  ],
+  "observations": {
+    "published_historical_genealogy": "grade_B_documented",
+    "specific_campaign_command_records": [],
+    "intervention_or_exposure_records": [],
+    "outcome_measurements": [],
+    "control_groups": [],
+    "temporal_alignment_receipts": [],
+    "coherence_revision_measurements": [],
+    "institutional_voice_and_power_measurements": [],
+    "documented_plan_content": [
+      "document_circulation",
+      "named_contributors",
+      "public_opinion_objectives",
+      "media_tactics",
+      "science_center_proposal",
+      "planned_tracking_metrics"
+    ]
+  },
+  "promotion": {
+    "historical_continuity": "bounded_supported",
+    "single_central_command": "not_identified",
+    "causal_effect": "not_identified",
+    "hostile_intent": "not_identified",
+    "population_level_radicalisation": "not_identified",
+    "documented_joint_planning": "source_supported",
+    "plan_execution": "not_identified",
+    "api_wide_authorisation": "contested_not_identified",
+    "later_coalition_advocacy": "bounded_reported",
+    "separate_campaign_public_materials": "source_bounded_documented",
+    "document_content_divergence": "published_study_result",
+    "1998_API_draft_identified_effect": "not_identified",
+    "preplan_survey": "reported_in_original_draft_not_independently_validated",
+    "actual_1998_plan_expenditure": "not_identified"
+  },
+  "follow_up_discriminator": {
+    "id": "implementation_and_command_archive",
+    "description": "Locate original approvals, funding releases, executed outreach records, exposure logs, responses, and any responsibility chain linking the draft plan to implemented activities. The publicly documented plan establishes planning but not execution or outcome effects. Preserve the 1998 API vice-president response as contested-authorisation evidence and the later coalition reporting as a separate longitudinal branch. Seek company adoption/vote/expenditure receipts, dated outreach event records and exposed audiences before promoting implementation.",
+    "currently_observed": false,
+    "ethical_route": "public institutional documents only",
+    "expected_to_distinguish": [
+      "unimplemented_draft",
+      "partly_implemented",
+      "implemented_campaign_with_attributable_controls"
+    ],
+    "source_type_required": "original_document_with_provenance"
+  },
+  "primary_publication": {
+    "id": "congressional_record_1998_04_27",
+    "kind": "contemporaneous_government_record_of_draft",
+    "document_title": "Global Climate Science Communications Action Plan, dated April 3, 1998, reproduced in Congressional Record",
+    "original_plan_date": "1998-04-03",
+    "publication_date": "1998-04-27",
+    "publisher": "U.S. Congressional Record, House, pp. H2323-H2327",
+    "url": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "document_span": "H2325-H2327; online rendered text lines 425-795",
+    "original_scan_sha256": null,
+    "source_quality_note": "Public contemporaneous House record reproduces the draft plan. Document presence and stated goals are directly evidenced; implementation, effects and a single central command of all later campaigns are not."
+  },
+  "primary_plan_claims": [
+    {
+      "id": "document_circulation",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 425,
+      "line_end": 449,
+      "claim": "A signed circulation message accompanied a draft plan, requested review and described a proposed follow-up team meeting.",
+      "kind": "documented_planning",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "named_contributors",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 550,
+      "line_end": 560,
+      "claim": "The plan identifies named contributors affiliated with industry, think tanks and advocacy organisations.",
+      "kind": "documented_planning",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "public_opinion_objectives",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 568,
+      "line_end": 590,
+      "claim": "The draft specifies intended changes in public/media understanding and proposes before/after measurement.",
+      "kind": "documented_intention",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "media_tactics",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 599,
+      "line_end": 646,
+      "claim": "The draft proposes media outreach, training communicators, distributing materials and public debates.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "science_center_proposal",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 652,
+      "line_end": 723,
+      "claim": "The draft proposes a staffed climate-science information centre and associated funding.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    },
+    {
+      "id": "planned_tracking_metrics",
+      "source_id": "congressional_record_1998_04_27",
+      "line_start": 788,
+      "line_end": 795,
+      "claim": "The draft lists proposed opinion, media and outreach tracking metrics.",
+      "kind": "documented_proposal",
+      "implementation_status": "not_verified"
+    }
+  ],
+  "pnf_candidate_intake": [
+    {
+      "candidate_id": "pnf-document_circulation",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 425,
+        "rendered_line_end": 449
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "global-climate-science-team",
+      "predicate": "circulated-for-review",
+      "object": "draft-communications-plan",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-named_contributors",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 550,
+        "rendered_line_end": 560
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "names-contributors-from",
+      "object": "industry-and-advocacy-organisations",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-public_opinion_objectives",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 568,
+        "rendered_line_end": 590
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "states-objectives-for",
+      "object": "public-and-media-views",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-media_tactics",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 599,
+        "rendered_line_end": 646
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes",
+      "object": "media-outreach-and-training",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-science_center_proposal",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 652,
+        "rendered_line_end": 723
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes",
+      "object": "climate-science-information-centre",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    },
+    {
+      "candidate_id": "pnf-planned_tracking_metrics",
+      "source_id": "congressional_record_1998_04_27",
+      "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+      "span": {
+        "rendered_line_start": 788,
+        "rendered_line_end": 795
+      },
+      "source_event_time": "1998-04-03",
+      "source_publication_time": "1998-04-27",
+      "source_observation_time": null,
+      "source_ingestion_time": null,
+      "subject": "action-plan",
+      "predicate": "proposes-to-monitor",
+      "object": "opinion-and-media-coverage",
+      "modality": "proposed_or_recorded_in_source",
+      "candidate_validity": "undetermined",
+      "candidate_only": true,
+      "original_text_offset": null,
+      "parser_profile": null,
+      "semantic_review_receipt": null,
+      "source_content_hash": null,
+      "claim_scope": "claim_about_published_draft_only"
+    }
+  ],
+  "pnf_ingestion_status": "source_locator_and_candidate_roles_created; actual EventPNF parser-proven spans, human semantic review and content digests remain OPEN",
+  "integration_joins": {
+    "congressional_draft_to_tobacco_climate_gradeB_edge": "candidate_relation_only; no same-actor/document-time identity proof asserted",
+    "congressional_draft_to_realised_policy_effect": "not_identified",
+    "congressional_draft_to_implementation": "not_identified",
+    "1998_draft_to_2017_later_coalition_activity": "no direct execution identity; distinct time, organisation and source scope",
+    "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect",
+    "1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft": "independent events; no shared-execution identity admitted",
+    "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate"
+  },
+  "followup_evidence_20261107": [
+    {
+      "id": "api_response_1998_05_01",
+      "date": "1998-05-01",
+      "title": "Climate Change Misinformation Campaign Charges",
+      "publisher": "Living on Earth (public-radio transcript)",
+      "url": "https://www.loe.org/shows/segments.html?programID=98-P13-00018&segmentID=1",
+      "source_type": "contemporaneous_attributed_response",
+      "source_line_ranges": [
+        [
+          20,
+          23
+        ],
+        [
+          40,
+          42
+        ]
+      ],
+      "claims": [
+        {
+          "id": "api_disputes_plan_scope",
+          "attributed_speaker": "William O'Keefe, API vice-president",
+          "proposition": "The meetings and correspondence were the personal initiatives of a lower-level employee, according to the radio programme's attribution of API's response.",
+          "kind": "quoted_organisational_position_reported_by_media",
+          "effect_on_p3": "contests institutional authorisation; does not deny draft existence or independently prove authorisation absent"
+        }
+      ],
+      "operational_primary_receipt": false
+    },
+    {
+      "id": "coalition_investigation_2017_09_05",
+      "date": "2017-09-05",
+      "title": "A two-decade crusade by conservative charities fueled Trump’s exit from Paris climate accord",
+      "publisher": "The Washington Post",
+      "url": "https://www.washingtonpost.com/investigations/a-two-decade-crusade-by-conservative-charities-fueled-trumps-exit-from-paris-climate-accord/2017/09/05/fcb8d9fe-6726-11e7-9928-22d00a47778f_story.html",
+      "source_type": "later_investigative_reporting",
+      "source_line_ranges": [
+        [
+          19,
+          42
+        ]
+      ],
+      "claims": [
+        {
+          "id": "coalition_advocacy_record",
+          "proposition": "The investigation reports Cooler Heads Coalition advocacy, funding links, outreach and institutional activities over later years.",
+          "kind": "reported_later_activity",
+          "effect_on_p3": "supports independently reported later advocacy, not an execution receipt for the 1998 draft"
+        },
+        {
+          "id": "coalition_disputes_overarching_direction",
+          "attributed_speaker": "Myron Ebell",
+          "proposition": "The investigation quotes a coalition figure rejecting overarching direction by any funder.",
+          "kind": "attributed_participant_account",
+          "effect_on_p3": "preserve as competing account, not proof of absence of coordination"
+        }
+      ],
+      "operational_primary_receipt": false
+    },
+    {
+      "id": "house_hearing_2019_10_23",
+      "date": "2019-10-23",
+      "title": "Examining the Oil Industry's Efforts to Suppress the Truth About Climate Change",
+      "publisher": "US House Subcommittee on Civil Rights and Civil Liberties",
+      "url": "https://www.govinfo.gov/content/pkg/CHRG-116hhrg38304/html/CHRG-116hhrg38304.htm",
+      "source_type": "official_hearing_transcript_with_testimony",
+      "source_line_ranges": [
+        [
+          0,
+          39
+        ]
+      ],
+      "claims": [
+        {
+          "id": "hearing_review_of_1998_plan",
+          "proposition": "The 2019 hearing revisits the 1998 document and climate-industry activity in testimony and member statements.",
+          "kind": "official_record_of_attributed_statements",
+          "effect_on_p3": "evidence of later congressional examination; testimony is not automatically direct proof of any causal effect"
+        }
+      ],
+      "operational_primary_receipt": false
+    }
+  ],
+  "evidence_question_ledger": [
+    {
+      "id": "public_1998_draft",
+      "status": "documented_primary",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
+    },
+    {
+      "id": "planning_group_and_proposed_actions",
+      "status": "documented_primary",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
+    },
+    {
+      "id": "api_wide_authorisation_of_plan",
+      "status": "contested_not_identified",
+      "source_ids": [
+        "congressional_record_1998_04_27",
+        "api_response_1998_05_01"
+      ]
+    },
+    {
+      "id": "independently_reported_later_coalition_advocacy",
+      "status": "reported_independent_later_activity",
+      "source_ids": [
+        "coalition_investigation_2017_09_05"
+      ]
+    },
+    {
+      "id": "specific_1998_plan_implementation",
+      "status": "not_identified",
+      "source_ids": []
+    },
+    {
+      "id": "campaign_exposure_and_impact",
+      "status": "not_identified",
+      "source_ids": []
+    },
+    {
+      "id": "plan_caused_Kyoto_or_Paris_policy_outcome",
+      "status": "not_identified",
+      "source_ids": []
+    },
+    {
+      "id": "separate_climate_advocacy_implemented_elsewhere",
+      "status": "documented_separate_examples_not_API_draft_execution",
+      "source_ids": [
+        "ice_1991_advertising",
+        "gcc_1995_public_handout",
+        "cooler_heads_1998_event_invitation",
+        "gcc_1996_primer_review"
+      ]
+    },
+    {
+      "id": "corporate_message_divergence_in_published_corpus",
+      "status": "quantified_document_content_not_causal_effect",
+      "source_ids": [
+        "supran_oreskes_2017"
+      ]
+    },
+    {
+      "id": "charlton_preplan_survey_reported",
+      "status": "reported_survey_not_causal_effect",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
+    }
+  ],
+  "independent_activity_and_document_measurements": [
+    {
+      "id": "ice_1991_advertising",
+      "event_year": 1991,
+      "organisation": "Information Council for the Environment (ICE)",
+      "source_url": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "evidence_type": "archived_campaign_documents_and_ads",
+      "documented_observation": "Archived 1991 advertising materials and archive summary document a coal/utility-backed public media campaign; archive describes media material for named US locations.",
+      "implementation_class": "separately_documented_public_communication",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "archival_index_plus_original_material_links_not_yet_full_fidelity_PNF",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "archival index section May June 1991 ICE Campaign; internal links to advertisements"
+    },
+    {
+      "id": "gcc_1995_public_handout",
+      "event_year": 1995,
+      "organisation": "Global Climate Coalition",
+      "source_url": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "evidence_type": "archived_public_pamphlet",
+      "documented_observation": "1995 Global Climate Coalition public handout Climate Change: Your Passport to the Facts is indexed with image/document links; archive reports distribution at UN climate convention.",
+      "implementation_class": "separately_documented_published_material",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "archival_index_plus_original_material_links_not_yet_full_fidelity_PNF",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "archival index 1995 GCC handout, with linked source material"
+    },
+    {
+      "id": "cooler_heads_1998_event_invitation",
+      "event_date": "1998-10-09",
+      "organisation": "Cooler Heads Coalition",
+      "source_url": "https://climateinvestigations.org/wp-content/uploads/2017/09/CHPDF.pdf",
+      "evidence_type": "original_public_invitation_scan",
+      "documented_observation": "Contemporaneous invitation names a 9 October 1998 congressional/media briefing on extreme weather with announced guest lecturer and listed sponsoring organisations.",
+      "implementation_class": "invitation_and_scheduled_event_documented",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "original_invitation_document_observed_attendance_delivery_unverified",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "single-page Cooler Heads Coalition briefing invitation; Cannon House Office Building"
+    },
+    {
+      "id": "gcc_1996_primer_review",
+      "event_year": 1996,
+      "organisation": "Global Climate Coalition Science and Technology Advisory Committee",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1996-science-technology-january-february-meetings/",
+      "evidence_type": "archived_meeting_materials_and_draft_revision",
+      "documented_observation": "Archive synopsis reports the committee's deletion of a discussion of contrarian theories in a planned primer; editorial decision is source-scoped and does not measure public response.",
+      "implementation_class": "documented_editorial_revision_report",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "source_archive_synopsis_meeting_scans_linked_but_not_transcribed",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "GCC 1996 STAC meeting materials archive"
+    }
+  ],
+  "published_document_content_measurement": {
+    "id": "supran_oreskes_2017",
+    "journal": "Environmental Research Letters",
+    "title": "Assessing ExxonMobil’s climate change communications (1977–2014)",
+    "publication_date": "2017-08-23",
+    "doi": "10.1088/1748-9326/aa815f",
+    "url": "https://doi.org/10.1088/1748-9326/aa815f",
+    "correction": "2020 Environ. Res. Lett. 15 119401 noted by publisher; precise coding correction not reanalysed here",
+    "document_count": 187,
+    "reported_percentages": {
+      "peer_reviewed_acknowledge_human_cause": 83,
+      "internal_acknowledge_human_cause": 80,
+      "advertorial_acknowledge_human_cause": 12,
+      "advertorial_doubt_human_cause": 81
+    },
+    "outcome_type": "document_coding_by_source_type_not_people",
+    "has_original_microdata_in_repo": false,
+    "causal_effect_on_readers": null,
+    "source_scope": "ExxonMobil document corpus, 1977–2014; do not transport conclusions to all 1998 API draft participants",
+    "independent_followup_replication": null,
+    "advertorial_position_subset": {
+      "all_advertorial_documents": 36,
+      "taking_position_on_real_and_human_caused": 26,
+      "acknowledge_count": 3,
+      "doubt_count": 21,
+      "denominator_note": "12% (3/26) acknowledgement and 81% (21/26) doubt are among the 26 advertorials taking a position; 36 is the total examined advertorials, NOT the denominator for these two percentages."
+    }
+  },
+  "reported_preplan_survey": {
+    "source_id": "congressional_record_1998_04_27",
+    "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "online_lines": [
+      533,
+      549
+    ],
+    "named_pollster": "Charlton Research",
+    "reported_sample_size": 1100,
+    "reported_sample_description": "informed Americans",
+    "reported_response_percent": 58,
+    "reported_response": "more likely to oppose Kyoto after supplied scientist-uncertainty framing",
+    "methodology_or_original_poll_instruments_available": false,
+    "representativeness_verified": false,
+    "randomised_assignment_verified": false,
+    "verified_pre_post_outcome": false,
+    "causal_effect_of_1998_plan": null,
+    "kind": "quoted_plan_description_of_preplan_self_report_under_specific_prompt"
+  },
+  "planned_spending_not_receipts": {
+    "source_id": "congressional_record_1998_04_27",
+    "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "online_lines": [
+      599,
+      783
+    ],
+    "media_program_proposed_usd": 600000,
+    "science_center_two_year_proposed_usd": 5000000,
+    "direct_outreach_program_proposed_usd": 300000,
+    "total_required_through_nov_1998_proposed_usd": 2000000,
+    "actual_spent_usd": null,
+    "actual_authorised_usd": null,
+    "scope_note": "Different budget horizons and components must not be summed into a single paid receipt; all figures are proposals."
+  }
+}
