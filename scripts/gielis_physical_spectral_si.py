@@ -9,7 +9,7 @@ Scaling x->L x gives lambda_1(L Ω_3)=lambda_1(Ω_3)/L².
 Thus for an *assumed, not measured* characteristic SI length
 L in [L_low,L_high], all exact rational arithmetic gives
 
-  9/(4 L_high²) < lambda_1(L Ω_3) <
+  (224/55)/L_high² < lambda_1(L Ω_3) <
        1273/(264 L_low²)  [m^-2].
 
 Neither a physical resonant frequency nor any optical/gravity effect
@@ -23,7 +23,8 @@ import argparse
 import json
 from gielis_si_owner_adapter import canonical_speed_of_light_si, owner_receipt
 
-LOW = Q(9,4)
+from gielis_continuum_faber_krahn_bound import CLAIMED_LOWER
+LOW = CLAIMED_LOWER
 HIGH = Q(1273,264)
 
 def gielis_m3_physical_continuum_enclosure(length_low_m, length_high_m):
@@ -44,7 +45,7 @@ def gielis_m3_physical_continuum_enclosure(length_low_m, length_high_m):
         "first_dirichlet_eigenvalue_upper_m^-2_open":str(upper),
         "both_eigenvalue_bounds_strict":True,
         "lambda_dimension_MLT":(0,-2,0),
-        "proof":"Dirichlet square-domain monotonicity pi>3; H0^1 Rayleigh trial; dilation x↦Lx",
+        "proof":"Faber-Krahn using area=sqrt(2)pi and J0 first zero>12/5; H0^1 Rayleigh trial; dilation x↦Lx",
         "scale_interval_is_measured":False,
         "physical_resonant_frequency_inferred":False,
         "unitless_shape_physically_identified":False,
