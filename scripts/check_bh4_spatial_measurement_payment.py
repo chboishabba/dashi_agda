@@ -124,6 +124,8 @@ def read_assay(path):
         "original_source_sha256_declared": list(sources)[0][1],
         "original_source_digest_verified_by_independent_fetch": False,
         "original_csv_sha256": hashlib.sha256(raw).hexdigest(),
+        "source_id": list(sources)[0][0],
+        "source_sha256": hashlib.sha256(raw).hexdigest(),
         "original_measurement_rows": len(rows),
         "independent_specimens": len(specimens),
         "independent_test_experiments": len({
