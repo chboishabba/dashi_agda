@@ -71,6 +71,8 @@ def raster_boundary_tolerance(h):
     return min(1e-12,float(h)**2)
 
 
+from gielis_exact_rational_raster_geometry import exact_mask as exact_gielis_raster_mask
+
 def laplacian_eigenvalues(m, n=41, k=4):
     """Five-point Dirichlet approximation on a rasterized supershape domain."""
     from scipy.sparse import csr_matrix
@@ -80,7 +82,7 @@ def laplacian_eigenvalues(m, n=41, k=4):
     axes = np.linspace(-1.5,1.5,n)
     h = axes[1]-axes[0]
     x,y = np.meshgrid(axes,axes,indexing="ij")
-    inside = np.hypot(x,y) < gielis_radius(np.arctan2(y,x),m)-raster_boundary_tolerance(h)
+    inside = exact_gielis_raster_mask(m,n)  # Fraction-only, exact unshrunken Ω_m
     points = np.argwhere(inside)
     index = {tuple(p):j for j,p in enumerate(points)}
     row=[]; col=[]; data=[]
