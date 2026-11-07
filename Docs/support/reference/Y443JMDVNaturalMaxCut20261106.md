@@ -643,3 +643,20 @@ Reused source owners rather than treating notation as mathematical identity:
 **True representation-theoretic next cut:** instantiate the existing `Monster369ZetaSameObjectWeldExact` frontier by constructing a linear map I:H_zeta -> W_zeta satisfying I rho_H(h)=rho_W(h) I for all selected Heisenberg generators, and verify its evaluation against the SAME 3B-selected literal VOA phase. Then verify mode-one Griess product preservation and weight-two generation before full Aut(Vnatural) identification. Matching zeta scalars and C3 characters do not supply Heisenberg or Griess intertwining.
 
 Local runnable receipt: ChatGPT artifact `y443_zeta_frobenius_square.py`; JSON `y443_zeta_frobenius_square.json`. This doc claims a local run, not a repo-executed gate or Agda proof.
+
+
+### Stronger result: integral cyclotomic mod-2 Frobenius commuting square
+
+There is a **genuine ring map** rather than just an analogy:
+
+```
+Z[1/3,zeta] --cyclotomic conjugation--> Z[1/3,zeta]
+     |                                   |
+     | mod 2                             | mod 2
+     v                                   v
+    F4 -------- Frobenius x -> x^2 ----> F4
+```
+
+where F4=F2[t]/(t²+t+1), zeta maps to t and zeta² maps to t². Both routes send a+b zeta to its Frobenius conjugate. This is NOT a field map Q(zeta)->F4; the integral localization is essential. The Fourier projectors P_k=(I+zeta^{-k}T+zeta^{-2k}T²)/3 lie in the localized coefficient ring, so all three **reduce mod 2** and remain mutually orthogonal idempotents summing to the identity (all nine products and the full sum independently checked). Frobenius fixes P_1 and exchanges P_zeta,P_zeta². The reflection conjugation J P_zeta J = P_zeta² is independently checked; scalar conjugation and reflection should remain distinct operators.
+
+The key sign lesson: ordinary F2 identifies +1 and -1, but F4 **preserves distinct cube roots** t,t². Support-bit reduction of balanced ternary cannot descend the full C3 action; a full support/sign fibre can. This supplies an exact arithmetic C3-to-Frobenius square and a sharp information-loss theorem. It does not identify an integral form of Vnatural or a Monster-invariant Griess lattice. Python local receipt in `y443_zeta_frobenius_bundle.zip`.
