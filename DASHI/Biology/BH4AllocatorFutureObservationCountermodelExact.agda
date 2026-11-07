@@ -33,10 +33,12 @@ record BalancedBranchAllocation : Set where
 
 open BalancedBranchAllocation public
 
+positiveNat : Nat → Bool
+positiveNat zero = false
+positiveNat (suc _) = true
+
 branchResponse : BalancedBranchAllocation → Bool
-branchResponse (balanced-branch-allocation _ _ _ h _ _ _ _ _ _) with h
-... | zero = false
-... | suc _ = true
+branchResponse candidate = positiveNat (hydroxylaseBranch candidate)
 
 -- Both candidates have the same paid influx of one (same coarse supply),
 -- satisfy their finite balance equations, yet choose different demands.
