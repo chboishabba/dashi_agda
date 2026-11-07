@@ -2,6 +2,35 @@
 
 ## 2026-11-07: Future-sufficiency and catalytic-throughput exact cut
 
+### Same-source BH4 ↔ electrodiffusion all-history theorem
+
+`BH4PNPSamePhysicalHistoryBridgeExact.agda` imports the *existing*
+`BH4CompartmentKineticStateExact` and
+`PoissonNernstPlanckElectrodiffusionExact`, rather than constructing
+another metabolic or electrochemical state calculus.
+
+Its `SameSourceBH4PNPModel` requires **one** `PhysicalState`
+and original source/specimen/compartment/time references. Both the
+BH4 quantitative state and PNP coupled state are projections of that
+same carrier. The required `bh4StepCommutes` and
+`pnStepCommutes` fields are explicit original-physical
+model obligations, not postulates of real-world truth.
+
+`allBH4ControlledHistoriesSamePhysicalSource` and
+`allPNPControlledHistoriesSamePhysicalSource` prove their respective
+all-intervention-history compatibility. The independent
+`allHistoriesRemainOnOriginalBH4System` preserves the original
+BH4-system identity at every derived physical history state.
+
+This completes the formal **same-source history transport theorem**,
+not kinetic calibration or the proof that actual BH4 and ionic
+transport states satisfy the selected one-step laws. The corresponding
+all-history 54-bond tissue theorem is on separate developmental PR
+#1471. The two formal proof owners must be reconciled into one Golden
+tree before there can be a *joint* kernel acceptance receipt.
+
+
+
 The previous *resource-pool scalar* representation is now subjected to
 two independent source-written Agda falsification tests:
 
