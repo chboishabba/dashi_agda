@@ -195,3 +195,23 @@ Canonical G01–G21 exact remaining lemmas: Docs/support/reference/GielisBase369
 - [ ] Actual Bishop Round11 trigonometric object, C36 Fourier scalar and original SI optical source transfer physical semantic weld.
 
 The existing YM Mosco recovery/liminf owners are status inventories, not Gielis theorems. The full proof E27 and exact G12/G21 gate updates are in the existing canonical Gielis proof notebook and roadmap. CI/HTML are not active priorities.
+
+
+## 2026-11-07 Gielis decisive native/analytic tranche E28–E35
+
+- [x] E28: original Phase36 quarter-wave m9 rational Fourier, both native source-written inversions, exact Q(zeta36) interoperability (625 exact round trips).
+- [x] E29/E33: actual Round11 Bishop cosine/sine quadrupling reduced to ONE selected imaginary-axis complex exponential multiplication law; original Bishop real expAdd and trig setoid congruence reused.
+- [x] E30: native C6=C2×C3 selected phase Fourier, full two-sided inversion using existing C3CubeCyclotomicFourierExact; 729 exact cyclotomic sample/direct-DFT comparisons.
+- [x] E31: EXACT rational unshrunken integer-mode Gielis raster membership in original FD solver, eigenvalue referee and discrete energy script. Four legacy selected masks unchanged: 792/779/792/1788, zero classification mismatches; fixed binary64 boundary error removed from actual algorithm.
+- [x] E32: native signed original radiation-pressure angular lever `x*(in_y-eta*out_y)-y*(in_x-eta*out_x)`, typed SI N m value with nominal torque vs energy role and exact rational event tests.
+- [x] E34: same ORIGINAL Bishop complex algebra source now has native associative/commutative multiplication and distributivity proof terms, reusing existing real ring solver.
+- [x] E35: all-positive-integer-m mode continuum Dirichlet first eigenvalue LOWER `lambda1>224/55` from exact area sqrt(2)pi, Faber-Krahn and rational Bessel alternating bounds. Source-written native rational S5=608149/244140625, sqrt2 upper and scalar bound; SI physical scale consumer improved.
+- [ ] G-BISHOP: complete actual Bishop *complex* factorial Cauchy coefficient/limit and imaginary-axis sine/cosine identification; original Round11 Pythagorean same-object weld, pi, sqrt, radial derivatives/polar integration.
+- [ ] G-FOURIER36: native full 12D Q(zeta36) scalar and generic 36-mode resolution/inversion; selected C4/C6 are closed subcases only.
+- [ ] G-SPECTRAL: fully native raster operator/compactness/continuum min-max and quantitative finite-grid spectral error; exact membership + finite rational eigen brackets and paper convergence already paid.
+- [ ] G-SI-PHYSICAL: measured original source power/reflectivity/directions/impact coordinates/uncertainty, with physical evidence and replication if claims are empirical.
+- [ ] GOLDEN: Agda kernel acceptance of the 14 registered Gielis roots on the actual repository parallel checker. Source-written is not equivalent to typechecked.
+
+Current canonical docs: `Docs/support/reference/GielisBase369ProofTheorems.md` (E01–E35),
+`Docs/support/reference/GielisBase369Roadmap.md` (G01–G21; P0–P5; D0–D7).
+Per user request, CI chasing and historical HTML replay are not current active gates.
