@@ -20,6 +20,7 @@ import DASHI.Cognition.CCDCOEP3SituatedHistoryPNFExact
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact
 import DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact
+import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
