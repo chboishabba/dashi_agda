@@ -26,6 +26,7 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from scipy.sparse.linalg import eigsh
 import gielis_base369_experiments as G
+from gielis_exact_rational_raster_geometry import exact_mask as exact_gielis_raster_mask
 
 def ground_state_identity_exact(q,neighbors,x):
     """Exact universal algebraic identity (checked on this x).
@@ -64,7 +65,7 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
     axis=np.linspace(-1.5,1.5,n)
     x,y=np.meshgrid(axis,axis,indexing="ij")
     h=3/(n-1)
-    inside=np.hypot(x,y)<G.gielis_radius(np.arctan2(y,x),m)-G.raster_boundary_tolerance(h)
+    inside=exact_gielis_raster_mask(m,n)
     points=np.argwhere(inside)
     index={tuple(map(int,p)):j for j,p in enumerate(points)}
     neighbors=[]
@@ -122,8 +123,10 @@ def certify(m:int,n:int=41,scale:int=10**15)->dict:
     return {
         "status":"certified_finite_discrete_lambda1_enclosure",
         "mode":m,"axis_nodes":n,
-        "boundary_tolerance_normalized":G.raster_boundary_tolerance(h),
+        "boundary_tolerance_normalized":0,
         "boundary_tolerance_vanishes_with_grid_spacing":True,
+        "exact_unshrunken_domain_rational_predicate":True,
+        "fixed_binary64_boundary_error_in_membership":False,
         "interior_nodes":len(points),"adjacency_connected":True,
         "degree_diagonal":"4","off_diagonal":"-1 for adjacent",
         "h_inv_squared_exact":str(h_inv_sq),
