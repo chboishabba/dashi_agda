@@ -17,6 +17,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3CausalTrialecticRegressionExact.agda
   DASHI/Cognition/CCDCOEP3ClimateGenealogyCaseExact.agda
   DASHI/Cognition/CCDCOEP3API1998PrimaryPlanExact.agda
+  DASHI/Cognition/CCDCOEP3ClimateContestedAttributionExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
