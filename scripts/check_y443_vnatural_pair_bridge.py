@@ -44,6 +44,7 @@ ALL_TWELVE = ROOT / "DASHI/Moonshine/Y443JMDAllTwelveNodeWordCompilerExact.agda"
 PRESENTED_CAPSTONE = ROOT / "DASHI/Moonshine/Y443JMDPresentedVNaturalCapstoneExact.agda"
 SAME_OBJECT = ROOT / "DASHI/Moonshine/Y443MonsterGradedLiteralSameObjectCapstoneExact.agda"
 PATHS_SCRIPT = ROOT / "scripts/check_y443_jmd_11_path_shifts.py"
+RECOGNITION_SCRIPT = ROOT / "scripts/check_y443_3b_constructive_recognition.py"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -270,6 +271,7 @@ def main() -> None:
     assert_source_scope()
     subprocess.run([sys.executable, str(BETA_SCRIPT)], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(PATHS_SCRIPT)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(RECOGNITION_SCRIPT)], cwd=ROOT, check=True)
     if args.finite_only:
         print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
     else:
