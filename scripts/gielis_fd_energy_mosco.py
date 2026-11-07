@@ -19,6 +19,7 @@ import argparse, json
 from fractions import Fraction as Q
 import numpy as np
 import gielis_base369_experiments as G
+from gielis_exact_rational_raster_geometry import exact_mask as exact_gielis_raster_mask
 
 def mask(m,n):
     if type(m) is not int or m<=0 or type(n) is not int or n<17 or n%2==0:
@@ -27,7 +28,7 @@ def mask(m,n):
     h=3/(n-1)
     x,y=np.meshgrid(axis,axis,indexing="ij")
     r=G.gielis_radius(np.arctan2(y,x),m)
-    inside=np.hypot(x,y)<r-G.raster_boundary_tolerance(h)
+    inside=exact_gielis_raster_mask(m,n)
     legacy=np.hypot(x,y)<r-1e-12
     return inside, bool(np.array_equal(inside,legacy)), h
 
@@ -73,8 +74,10 @@ def receipt(m=3,n=41):
         "status":"exact_discrete_energy_identity_passed",
         "mode":m,"grid":n,"interior_cells":len(nodes),
         "legacy_1e_minus_12_mask_equal_at_selected_n":legacy_equal,
-        "boundary_tolerance_normalized":delta,
-        "boundary_tolerance_function":"min(1e-12,(3/(n-1))^2)",
+        "boundary_tolerance_normalized":0,
+        "exact_unshrunken_domain_rational_predicate":True,
+        "fixed_binary64_boundary_error_in_membership":False,
+        "boundary_tolerance_function":"zero: exact polynomial/sign root elimination",
         "boundary_tolerance_limit_zero":True,
         "exact_test_vectors":len(checks),
         "all_difference_squares_nonnegative":all(
