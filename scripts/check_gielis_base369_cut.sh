@@ -15,6 +15,7 @@ sources=(
   DASHI/Geometry/GielisNineModeFourierExact.agda
   DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda
   DASHI/Geometry/GielisExactRationalGridPredicateExact.agda
+  DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
@@ -32,6 +33,7 @@ python scripts/gielis_base369_source_audit.py > /dev/null
 python scripts/gielis_si_owner_adapter.py > /dev/null
 python scripts/gielis_physical_spectral_si.py --length-low-metres 99/100 --length-high-metres 101/100 > /dev/null
 python scripts/gielis_si_optical_interval.py > /dev/null
+python scripts/gielis_exact_signed_optical_torque.py > /dev/null
 python scripts/gielis_cyclotomic36_exact.py > /dev/null
 python scripts/gielis_nine_quarter_fourier_exact.py > /dev/null
 python scripts/gielis_six_phase_cyclotomic_exact.py > /dev/null
