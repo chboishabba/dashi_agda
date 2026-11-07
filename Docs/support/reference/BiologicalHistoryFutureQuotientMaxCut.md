@@ -255,6 +255,26 @@ validate independently measured controlled developmental histories
 against competing mechanisms. Full Agda kernel and
 `parallel_checker` receipts remain absent.
 
+### PNP same-object correction / 2026-11-07
+
+`SourcePhysicalTissueSimulation` has additionally been tightened to
+require a **literal selected PNP coupled-state projection**
+`pnState` from the selected physical carrier, a PNP evolution
+`pnStep`, and a source-paid commuting witness
+`physicalPNPStepCommutes`. Its new
+`physicalAndPNPRemainTheSameStateHistory` then proves same-PNP-state
+transport through every controlled history, independently of the
+existing 54-bond tissue projection.
+
+The compatible BH4-side theorem
+`BH4PNPSamePhysicalHistoryBridgeExact` now lives on unmerged
+Kitzerow PR #1454. Both the BH4 quantitative and PNP projections
+there refer to one selected source physical state, with their
+respective all-history commuting proofs. Reconciliation into one
+compiled Golden head, and an original physical dynamics inhabitant,
+are still required. No manufactured source-level equation, kinase
+rate or ion-transport observation has been inserted.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
