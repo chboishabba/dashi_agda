@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E27), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E29), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -67,14 +67,14 @@ means computational test/design only; **OPEN** means original theorem unproved.
 |---|---|---|---|---|
 | G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
 | G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Same Round11/Bishop sine-cosine owner found; classical-object weld and π sample calculation OPEN |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E25 native Bishop setoid 4(cos⁴+sin⁴)=3+cos(4x) implication SOURCE (actual configured trig); Round11 cosine quadruple-angle/same-object suppliers and kernel OPEN |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E25 Bishop same-object quartic conditional proof, E29 quadruple-angle reduced to concrete Round11 cosine/sine double-angle leaves; those source-native analytic producers and kernel OPEN |
 | G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 paper smoothness; Round11 derivative authority reusable only after same-object weld; sqrt/positivity kernel OPEN |
 | G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
-| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E05 paper proof; E13 exact Q(zeta36) 1296-pair PASS; Agda OPEN |
+| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E28 selected four-phase m9 rational Fourier forward/inverse on ACTUAL Phase36 SOURCE; full C36 cyclotomic native 36-mode resolution OPEN |
 | G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | E03 exact area paper proof; Bishop polar integration, π and inverse/sqrt OPEN |
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
-| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E13 exact cyclotomic seven-mode roundtrip PASS; native Agda Fourier OPEN |
+| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E28 selected m9 four-sample reconstruction plus E13 exact Q(zeta36) 1296 computational pairs; full 36-dimensional cyclotomic Agda inversion OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
 | G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E27 qualitative fixed-k Cartesian FD-to-continuum convergence PAPER PROVED for vanishing δ(h) and exact radial predicate; E14 sector O(m/N), E17 finite rational bounds; literal binary64 mask/quantitative rate/native Agda still OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
@@ -83,9 +83,9 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E24 strict rational assumed optical input interval propagation; matched IID comparison owner; empirical calibrated/uncertainty data OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
-| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E06/E13 exact 7-mode Fourier theorem/pass; native sampling owner OPEN |
+| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | Selected four-dimensional quarter-wave Fourier E28 SOURCE, full C36 12-coordinate cyclotomic scalar and 36-mode reconstruction OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E27 proof/source audit with seven Agda roots; exact-head kernel acceptance OPEN, CI and HTML explicitly DEFERRED |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E29 source audit, eight Agda Gielis roots in parallel checker; kernel acceptance OPEN; CI/HTML DEFERRED |
 
 ## Critical dependencies / max-cut
 
@@ -468,3 +468,53 @@ receipt modules, which themselves label recovery/liminf
 as not constructed.
 
 CI and historical HTML are deferred from the active cut.
+
+
+## E28–E29 native exact Fourier/Bishop narrowing
+
+**G07/G10/G19:** The existing Phase36 9th-mode Nyquist
+witness has now been lifted into the nontrivial 4x4 rational
+Fourier operator and its inverse on the actual chosen
+quarter-wave samples, j=0,1,2,3.
+GielisNineModeFourierExact.agda proves native
+source-written coefficient and signal round trips
+using coordinate extensionality and the original
+rational ring solver. Original Q(zeta36) cyclotomic
+arithmetic directly verifies the character rows
+cos9=[1,0,-1,0], sin9=[0,1,0,-1], cos18=[1,-1,1,-1].
+An independent exact Fraction cross-check enumerates
+625 complete forward/inverse signal round trips.
+The **selected m9 quarter-wave Fourier** is therefore
+SOURCE-WRITTEN, not a blanket claim of a native
+full 36-signal transform. Full C36 cyclotomic
+native field and 36-character resolution remain
+the exact unfinished G07/G10/G19 leaves.
+
+**G03:** New BishopConcreteDoubleAngleInputs is
+indexed by the identical original Bishop sine/cosine
+dataset and angle. The reducer
+bishopCosineQuadrupleFromTwoDoubleAngles transports
+cos(2x), sin(2x) and cos(4x) doubling through native
+Bishop congruence and the existing quartic solver.
+bishopGielisFromPythagoreanAndTwoDoubleAngles
+then proves the actual selected Gielis inverse-square
+trigonometric numerator CONDITIONAL on those inputs.
+The exact analytic remaining lemma is therefore the
+Round11 selected source-native two-angle sine/cosine
+addition/product-series identity (with 4x=2(2x)),
+plus the pre-existing same-function classical/Bishop
+identification, and kernel elaboration—not a
+new standalone superformula trig axiom.
+
+**Golden source implementation:** Eight Gielis Agda
+roots are registered in scripts/check_gielis_base369_cut.sh
+using the repository's parallel checker, alongside
+the exact selected Q(zeta36) interoperability script.
+The presence of source files does not constitute
+an Agda kernel receipt.
+
+**Still high-alpha:** Full original Bishop analytic
+double-angle proof, actual C36 native scalar/DFT,
+G12 original raster native compactness, and
+calibrated optical SI magnitude transfer.
+CI and historical HTML are out of current scope.
