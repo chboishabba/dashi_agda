@@ -20,6 +20,7 @@ sources=(
   DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda
   DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda
   DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda
+  DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
