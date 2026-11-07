@@ -19,6 +19,7 @@ sources=(
   DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda
   DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda
   DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda
+  DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
@@ -39,11 +40,13 @@ python scripts/gielis_continuum_faber_krahn_bound.py > /dev/null
 python scripts/gielis_si_optical_interval.py > /dev/null
 python scripts/gielis_exact_signed_optical_torque.py > /dev/null
 python scripts/gielis_cyclotomic36_exact.py > /dev/null
+python scripts/gielis_cyclotomic36_unrestricted_exact.py > /dev/null
 python scripts/gielis_nine_quarter_fourier_exact.py > /dev/null
 python scripts/gielis_six_phase_cyclotomic_exact.py > /dev/null
 python scripts/gielis_sector_spectral_certificate.py --m 9 --sectors 2048 > /dev/null
 python scripts/gielis_rayleigh_spectral_bound.py > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 3 --grid 41 > /dev/null
+python scripts/gielis_certified_continuum_fd_error.py --mode 3 --grid 41 > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 6 --grid 41 > /dev/null
 python scripts/gielis_raster_fd_positivity_certificate.py --m 9 --grid 41 > /dev/null
 python scripts/gielis_fd_energy_mosco.py --m 3 --grid 41 > /dev/null
@@ -65,10 +68,12 @@ python scripts/gielis_reflection_parity.py --m 3 --epsilon .12 \
 python scripts/gielis_optical_statistics.py --rays 24 --segments 128 \
   --bounces 2 --seed 369 > /dev/null
 if [[ -n "${KOZYREV_PR1404_DIR:-}" ]]; then
+  python scripts/gielis_kozyrev_same_event_original_owner.py \
+    --owner-path "$KOZYREV_PR1404_DIR/kozyrev_optical_event_ledger.py" > /dev/null
   python scripts/gielis_kozyrev_pr1404_bridge.py \
     --legacy-dir "$KOZYREV_PR1404_DIR" --require-legacy \
     --segments 256 --rays 24 > /dev/null
 else
-  echo "G13 PR1404 exact-source replay NOT CHECKED: supply KOZYREV_PR1404_DIR" >&2
+  echo "G13/G15 original Kozyrev same-event replay NOT CHECKED: supply KOZYREV_PR1404_DIR" >&2
 fi
 echo "Finite/math/simulation checks passed; native physics and G13 original HTML remain OPEN"
