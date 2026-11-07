@@ -619,3 +619,27 @@ Construct five target coordinate blocks, of sizes (65610,65610,65610,52,1), by t
 (5) source Y443/80 Monster group identification with precisely that same action.
 
 The local Python source and JSON receipts are available in the ChatGPT artifact bundle; this documentation does not falsely claim a repo-executed script or Agda kernel check.
+
+
+## 2026-11-07 exact zeta commuting square, binary sign loss and Frobenius C2 (local Python)
+
+Reused source owners rather than treating notation as mathematical identity:
+- `Monster369ZetaSameObjectWeldExact.agda`: same exact cyclotomic zeta in Fourier, Monster 3B phase, Schrodinger model and literal VOA-phase interface; **actual H_zeta/W_zeta linear recognition still open**.
+- `Monster3BPhaseTransportExact.agda`, `Base369Monster3BVOAActionPhaseAdapterBidiExact.agda`: an element inverting the selected 3B generator swaps zeta / zeta², fixes the invariant sector. Zero is the additive zero, **not** a fourth C3 phase.
+- `BalancedTernaryC2C3DihedralCodecBridgeExact.agda`: full binary support/sign fibre is a LOSSLESS ternary encoding and intertwines the C2 antipode; support-only forgets sign; C3 cyclic successor is separately intertwined with the qutrit Weyl X action.
+- `OggSSPP2F4CurveSheet9FrobeniusBidiExact.agda`, `OggSSPP3F9FrobeniusCandidateNoGoExact.agda`: arithmetic Frobenius/C2 actions are source-specific; not automatic identifications with 3B phase conjugation.
+- `Monster3BCyclotomicLinearAlgebraExact.agda`: exact rational-cyclotomic algebra Q[zeta3].
+
+**Executed exact local Python:** constructed 3×3 Q[zeta]/(zeta²+zeta+1) matrices T and R, proving T³=1, R²=1, RTR=T², and the full Fourier commuting square. All 9 projector products P_i P_j = delta_ij P_i; sum P_i=I; 3 eigen-equations T P_k=zeta^k P_k; reflection and scalar conjugation each exchange P_zeta,P_zeta²; their composite fixes each projector. No floating-point approximation.
+
+**Precise binary obstruction:** support(-1)=support(+1)=1, but support(T(-1))=0 and support(T(+1))=1. Therefore there is **no deterministic C3 action on support bits making the support quotient equivariant**; the support+sign pair is lossless and carries the action. This is distinct from the S5 equal-block-size obstruction for the chosen F2^5 chart.
+
+**Frobenius separation:**
+- F4/F2 with primitive 3rd root zeta: x->x² is order TWO, sends zeta->zeta² and swaps the two nontrivial C3 phases. This realizes the C2 outer inversion in S3=C3 semidirect C2.
+- F9/F3: x->x³ is also order TWO (a+bα)->(a-bα), with exactly 3 fixed and 3 paired orbits; but F9* has order 8 and **contains no primitive cube root**, so this Frobenius is NOT the same scalar-phase zeta map.
+
+**Full chart test:** lifted the low-digit C3 cycle and reversal to every coordinate in the 196883 finite model; exhaustive 196883 checks prove inversion relation R T R=T², with 65610 three-cycles and 53 fixed coordinates. Complex character is (65663,65610,65610), matching the existing 3B character **as a C3 module**, not as an explicit actual Monster representation.
+
+**True representation-theoretic next cut:** instantiate the existing `Monster369ZetaSameObjectWeldExact` frontier by constructing a linear map I:H_zeta -> W_zeta satisfying I rho_H(h)=rho_W(h) I for all selected Heisenberg generators, and verify its evaluation against the SAME 3B-selected literal VOA phase. Then verify mode-one Griess product preservation and weight-two generation before full Aut(Vnatural) identification. Matching zeta scalars and C3 characters do not supply Heisenberg or Griess intertwining.
+
+Local runnable receipt: ChatGPT artifact `y443_zeta_frobenius_square.py`; JSON `y443_zeta_frobenius_square.json`. This doc claims a local run, not a repo-executed gate or Agda proof.
