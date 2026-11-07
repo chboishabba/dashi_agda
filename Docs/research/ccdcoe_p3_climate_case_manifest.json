@@ -1,0 +1,111 @@
+{
+  "schema": "dashi.ccdcoe.p3.climate_case.v1",
+  "case_id": "oreskes-conway-bounded-tobacco-climate-continuity",
+  "scope": "Bounded published historical genealogy, not full primary-document event extraction or an identified causal effect.",
+  "citation_refs": [
+    {
+      "id": "merchants_of_doubt_2010",
+      "kind": "book",
+      "authors": [
+        "Naomi Oreskes",
+        "Erik M. Conway"
+      ],
+      "title": "Merchants of Doubt: How a Handful of Scientists Obscured the Truth on Issues from Tobacco Smoke to Global Warming",
+      "year": 2010,
+      "identifier": "ISBN 978-1-59691-610-4",
+      "source_owner": "DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda::merchantsOfDoubtHistory",
+      "original_document_span": null,
+      "original_revision_hash": null
+    },
+    {
+      "id": "nature_465686a",
+      "kind": "scholarly_commentary",
+      "authors": [
+        "Naomi Oreskes",
+        "Erik M. Conway"
+      ],
+      "title": "Defeating the merchants of doubt",
+      "year": 2010,
+      "identifier": "DOI 10.1038/465686a",
+      "source_owner": "DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda::oreskesConwayNatureCommentary",
+      "original_document_span": null,
+      "original_revision_hash": null
+    }
+  ],
+  "documented_edges": [
+    {
+      "id": "tobacco_to_climate",
+      "source_node": "tobacco industry R&D / influence infrastructure",
+      "target_node": "climate-change doubt / denial campaigns",
+      "relation": "personnelInstitutionalContinuity",
+      "evidence_grade": "B",
+      "source_ids": [
+        "merchants_of_doubt_2010",
+        "nature_465686a"
+      ],
+      "agda_owner": "DASHI/Governance/EvidenceGradedGenealogyCasesExact.agda::tobaccoToClimateHistoricalContinuity",
+      "bounded_claim": "Historically documented continuity of recurring people and doubt-production strategies across tobacco and climate controversies, not a single centrally directed network.",
+      "observed_campaign_effect": null,
+      "observed_command_structure": null
+    }
+  ],
+  "comparator": {
+    "id": "wellness_to_antivax",
+    "evidence_grade": "C",
+    "relation": "audienceContentAdjacency",
+    "agda_owner": "DASHI/Governance/EvidenceGradedGenealogyCasesExact.agda::wellnessToAntiVaxAdjacency",
+    "scope": "Separate historical topic and source, used only to test distinction between evidence grades; not a negative control population for climate."
+  },
+  "hypotheses": [
+    {
+      "id": "decentralised_continuity",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "not_established",
+      "source_supported": false
+    },
+    {
+      "id": "central_command",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "centralised",
+      "source_supported": false
+    },
+    {
+      "id": "mixed_relations",
+      "status": "candidate",
+      "historical_edge_id": "tobacco_to_climate",
+      "command_structure": "mixed",
+      "source_supported": false
+    }
+  ],
+  "observations": {
+    "published_historical_genealogy": "grade_B_documented",
+    "specific_campaign_command_records": [],
+    "intervention_or_exposure_records": [],
+    "outcome_measurements": [],
+    "control_groups": [],
+    "temporal_alignment_receipts": [],
+    "coherence_revision_measurements": [],
+    "institutional_voice_and_power_measurements": []
+  },
+  "promotion": {
+    "historical_continuity": "bounded_supported",
+    "single_central_command": "not_identified",
+    "causal_effect": "not_identified",
+    "hostile_intent": "not_identified",
+    "population_level_radicalisation": "not_identified"
+  },
+  "follow_up_discriminator": {
+    "id": "archive_command_record",
+    "description": "Locate independently attributable command/responsibility records and source-specific temporal connections; negative findings must account for incomplete archive coverage.",
+    "currently_observed": false,
+    "ethical_route": "public institutional documents only",
+    "expected_to_distinguish": [
+      "decentralised_continuity",
+      "central_command",
+      "mixed_relations"
+    ],
+    "source_type_required": "original_document_with_provenance"
+  }
+}
