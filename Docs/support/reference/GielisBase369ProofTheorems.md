@@ -1386,3 +1386,85 @@ those inputs, nor identify them with a new formal
 sine/cosine object. The analytic power-series
 product/addition theorem and exact-head Agda kernel
 check remain outstanding.
+
+
+## E30 — Native full six-phase Fourier via existing cyclotomic C3 and CRT
+
+The repository already proves **two-sided** Fourier inversion
+on the actual rational cyclotomic field
+\(\mathbb Q(\omega)=\mathbb Q[x]/(x^2+x+1)\)
+in DASHI/Biology/Physical/C3CubeCyclotomicFourierExact.agda.
+There is therefore no justification for rebuilding a
+new complex scalar to treat a six-phase selected Gielis
+signal: the cyclic Chinese-remainder isomorphism
+
+\[
+ C_6\xrightarrow{\cong} C_2\times C_3,\qquad
+ j\mapsto (j\bmod2,j\bmod3)
+\]
+makes a \(C_6\) transform the tensor of the
+two-point rational Hadamard transform and the
+already-existing native three-point cyclotomic transform.
+
+The *actual Phase18 sample indexing* is
+
+\[
+ \begin{array}{ll}
+  (\mathrm{even},0,1,2)&\leftrightarrow (0,4,2),\\
+  (\mathrm{odd},0,1,2)&\leftrightarrow (3,1,5).
+ \end{array}
+\]
+
+The new Agda module
+DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda
+uses these exact original Phase18 positions. For the
+two-point component it defines
+
+\[
+ F_2(x,y)=(x+y,x-y),\quad
+ F_2^{-1}(u,v)=((u+v)/2,(u-v)/2)
+\]
+
+over the original \(\mathbb Q(\omega)\) carrier.
+Both directions of this two-point inversion and
+their three-coordinate lifts have source-written
+proofs via the original rational ring solver.
+It then composes with
+C3.oneDimensionalFourierInversion and
+C3.oneDimensionalFourierForwardInverse
+to derive the literal original six-sample forward
+and inverse identities.
+
+The direct \(C_6\) DFT Fourier modes correspond to
+the CRT pair \((r,s)\) via
+\[
+ k=(3r+2s)\bmod6,
+ \quad k=(0,2,4,3,5,1).
+\]
+A separate exact interoperability computation,
+scripts/gielis_six_phase_cyclotomic_exact.py,
+compares the native-style \(C_2\times C_3\)
+transform to the **original**
+\(\mathbb Q(\zeta_{36})\) direct six-phase DFT,
+where the embedding of \(C_6\) is
+\(\zeta_{36}^6\) and the \(C_3\) root is
+\(\zeta_{36}^{12}\).
+For **729** six-sample vectors with each coordinate
+in \(\{-1,0,1\}\), the original exact quotient
+field gives perfect forward Fourier coefficient
+agreement and both directions of inversion, without
+any floating-point tolerance.
+
+**What E30 closes:** a genuine six-point
+cyclotomic signal Fourier operator and inversion
+source-written by reusing an existing native
+three-point Fourier theorem; its original
+Agda kernel acceptance remains to be established.
+
+**What E30 does not close:** the full arbitrary
+36-sample \(\mathbb Q(\zeta_{36})\) Fourier resolution,
+the ordinary-real Bishop cosine/sine sampling identity,
+or the actual continuum Shannon reconstruction
+theorem. Those are separate G07/G10/G19
+acceptance types, not consequences of selecting
+only six samples.
