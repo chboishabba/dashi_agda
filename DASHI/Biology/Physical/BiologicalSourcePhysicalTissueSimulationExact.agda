@@ -22,6 +22,17 @@ record SourcePhysicalTissueSimulation : Set₁ where
     specimenIdentity : String
     observationProtocol : String
     physicalStep : Bio.Intervention → PhysicalState → PhysicalState
+    pnState : PhysicalState →
+      PNP.CoupledState (PNP.fluxLaw selectedPNP)
+    pnStep : Bio.Intervention →
+      PNP.CoupledState (PNP.fluxLaw selectedPNP) →
+      PNP.CoupledState (PNP.fluxLaw selectedPNP)
+    -- Forces the selected micro-state and the selected PNP reaction /
+    -- ionic transport carrier to follow the SAME step and timeline.
+    physicalPNPStepCommutes :
+      (action : Bio.Intervention) (state : PhysicalState) →
+      pnState (physicalStep action state)
+        ≡ pnStep action (pnState state)
     tissueReadout : PhysicalState → Bio.TissueField
     -- This is the crucial NOT-YET-PAID PHYSICAL source obligation.
     physicalOneStep :
@@ -92,3 +103,31 @@ physicalHistoryProjectsToAll54Bonds model actions state =
   physicalAllControlledHistories model actions state
     (Bio.spatialProject (tissueReadout model state))
     (Agreement.initialFieldAgreement (tissueReadout model state))
+
+------------------------------------------------------------------------
+-- Exact same-object PNP transport through arbitrary controlled histories,
+-- rather than a PNP receipt merely sitting beside a tissue model.
+------------------------------------------------------------------------
+
+pnTrace :
+  (model : SourcePhysicalTissueSimulation) →
+  List Bio.Intervention →
+  PNP.CoupledState (PNP.fluxLaw (selectedPNP model)) →
+  PNP.CoupledState (PNP.fluxLaw (selectedPNP model))
+pnTrace model [] state = state
+pnTrace model (action ∷ rest) state =
+  pnTrace model rest (pnStep model action state)
+
+physicalAndPNPRemainTheSameStateHistory :
+  (model : SourcePhysicalTissueSimulation)
+  (actions : List Bio.Intervention)
+  (state : PhysicalState model) →
+  pnState model (physicalTrace model actions state)
+    ≡ pnTrace model actions (pnState model state)
+physicalAndPNPRemainTheSameStateHistory model [] state = refl
+physicalAndPNPRemainTheSameStateHistory model (action ∷ rest) state =
+  trans
+    (physicalAndPNPRemainTheSameStateHistory model rest
+      (physicalStep model action state))
+    (cong (pnTrace model rest)
+      (physicalPNPStepCommutes model action state))
