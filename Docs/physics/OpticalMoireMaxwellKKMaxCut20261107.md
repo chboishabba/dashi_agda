@@ -31,3 +31,27 @@ A finite-window numerical skyrmion integral need not be integer-valued without b
 An optical phase/topology experiment does not establish exotic gravity.
 Agda source present does not mean exact-head Agda kernel acceptance.
 No raw source paper arrays or same-apparatus empirical reproduction are claimed acquired by this branch.
+
+
+## 2026-11-07 source-exact functional-form advancement
+
+- The original Dev--Shen optical paper's primary identifier is DOI **10.1038/s41377-026-02533-w**, *Light: Science & Applications* **15**, article **396** (published 6 November 2026). The new Agda source atlas uses canonical `AttributedSourceCore`. The source retains all credit for the original Fourier-Gaussian interference and the observed topological phenomena.
+- Paper Eq (1) has Gaussian Fourier beamlets at `(α_j,β_j)=γ(cos δ_j,sin δ_j)`, `δ_j=π(2j−1)/N`, `γ=d/sqrt(2(1−cos(2π/N)))`, with circular components `e_R+μ exp(i(θ0+2πm(j−1)/N)) e_L`. This structure, including N=3,4,6, is implemented in `scripts/check_optical_moire_source_eq1.py`.
+- The numerical routine uses an explicit circular-to-Cartesian Jones convention, Cartesian angular-spectrum Maxwell propagation, longitudinal `E_z=−(k_x E_x+k_y E_y)/k_z` on the propagating support, and normalized Stokes directions. Synthetic source parameters are **not** claims about the experiment's absolute beam calibration.
+- A separate local implementation of the same source Eq(1) functional form passed N=3/4/6, helical-index/twist sensitivity, Maxwell transversality (~1.41e−17), spectral propagation norm (~1.39e−17), constant-polarization degree-zero and missing-intensity fail-closed checks. **The exact committed script has not yet been separately executed against this PR head.** No Agda kernel check has been run.
+- The paper reports C4 dark spots and a small LCP correction `δ` to remove singularities. The current replay intentionally refuses to promote any undefined-Stokes patch to a topological degree. Source-specific `δ` magnitude/phase and genuine topology preservation must be recovered from supplementary material before implementing a physically faithful correction.
+- Original experimental topological configurations include 13.2° (C6), 27.8° nested C6, 16.26° (C4), 30° quasicrystalline textures and measured propagation/obstruction. Naming the angles is **not** reproduction; selected synthetic computations are not the original physical arrays.
+- The article advertises a primary data repository at https://doi.org/10.21979/N9/AJB6FD . The file contents were **not** acquired or validated in this round.
+
+### Attribution and implementation separation
+
+Original external physics: Dev & Shen (2026), BM (2011) and the appropriate optical/geometric antecedents as cited in those original works.
+Original repository contribution: thin Agda specialization and independently coded Eq(1) numerical replay, source attribution, tests, same-object consumer boundary. They are **not** the original discovery of optical supertopologies or a novel Maxwell law.
+
+### True end-to-end terminal gates
+
+1. Source-exact supplementary beam parameters, intensity-null correction and polarization calibration.
+2. Source-array/figure acquisition with hashes, coordinates and instrument provenance.
+3. Numerically converged closed-cell/topological-boundary Stokes charge vs source observations, including measured uncertainties and singularities.
+4. Same model and source records for z-propagation and obstacle recovery, with convergence and no aliasing/diffraction claims beyond measured regimes.
+5. A separately motivated KK metric-reduction/physical same-source proof only if claiming KK physical identity. It is not a dependency for ordinary optical propagation.
