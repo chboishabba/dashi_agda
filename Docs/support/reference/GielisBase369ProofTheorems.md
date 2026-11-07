@@ -1665,3 +1665,83 @@ apparatus model and independent replication.
 A typed and dimensionally correct expression is
 not a measurement receipt. Agda kernel acceptance
 of the source-written E32 theorem also remains open.
+
+
+## E33 — One actual Bishop imaginary-axis exponential producer implies all Gielis doubling
+
+The native Round11 Bishop sine and cosine series are already
+the specified real-valued functions; the repository separately
+constructs complex values as Cartesian pairs of those same
+Bishop reals in BishopSetoidComplexExact.agda.
+Furthermore BishopExponentialCauchyProductExact.bishopExpAdd
+already proves exponential additivity for the **real**
+Bishop exponential series. It is a real analytic donor,
+not by itself complex analytic additivity.
+
+The new source
+DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda
+reduces the three concrete input identities from E29 to
+**one same-function imaginary-axis exponential multiplier**.
+Write the configured actual Bishop complex value
+\[
+ E_B(ix)=\cos_B(x)+i\sin_B(x).
+\]
+The only new analytic input needed for the doubling part is
+\[
+ \boxed{E_B(i\,2x)\simeq E_B(ix)\,E_B(ix).}
+\]
+This is a complex-setoid equality on the original
+BishopSetoidComplexExact carrier, *not* a
+syntactic assertion about an unrelated complex value.
+
+The proof extracts the REAL component of this equality
+using Complex.reEquivalent to obtain
+\[
+ \cos_B(2x)\simeq\cos_B(x)^2-\sin_B(x)^2.
+\]
+It extracts the IMAGINARY component with
+Complex.imEquivalent and applies the original Bishop
+ring solver's identity \(cs+sc=2cs\) to obtain
+\[
+ \sin_B(2x)\simeq2\cos_B(x)\sin_B(x).
+\]
+The existing Bishop sine/cosine setoid congruence
+theorem transports \(4x\simeq2(2x)\); the
+source proves this numeric angle identity by
+the existing Bishop real polynomial solver.
+
+The result
+concreteDoubleAngleInputsFromImaginaryExp then
+constructs **all three E29 double-angle source fields**
+from that single complex analytic law.
+Finally gielisRound11FromOneImaginaryExponentialLaw
+uses the pre-existing shared Round11 classical/Bishop
+Pythagorean weld plus the original Gielis polynomial
+normal-form proof to establish
+
+\[
+ \boxed{
+  4(\cos_B(x)^4+\sin_B(x)^4)
+  \simeq3+\cos_B(4x)
+ }
+\]
+on that actual same Bishop real/complex trigonometric
+object.
+
+The real exponent addition donor is imported and
+re-exported as realBishopExpAddAlreadyProved,
+without falsely asserting that a real exponential
+identity proves the **complex** series product.
+
+**Exactly one complex analytic leaf remains for
+the trigonometric doubling/quadrupling portion:**
+prove the imaginary-axis complex exponential
+multiplication law for the literal selected Bishop
+sine/cosine series, by complex factorial-series
+Cauchy products and tail/limit identification
+reusing the available real Bishop Cauchy machinery.
+The other analytic leaves remain the earlier
+shared Round11 Pythagorean same-object weld,
+positive real reciprocal square root and radial
+integration/derivatives. Agda kernel acceptance of
+this new source has not been verified here.
