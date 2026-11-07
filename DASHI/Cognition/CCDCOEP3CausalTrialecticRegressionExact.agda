@@ -17,6 +17,7 @@ import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact as API1998
+import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -145,3 +146,24 @@ primaryDraftAndActualImplementationWouldSeparate :
     API1998.unimplementedWorld API1998.implementedWorld
 primaryDraftAndActualImplementationWouldSeparate =
   API1998.implementationEvidenceSeparates
+
+-- Source-type and organisation-authority are NOT interchangeable claims.
+-- The 1998 API response and the historical Congressional draft remain
+-- distinct source objects; the existence of the draft does not settle
+-- the attributed dispute over corporate adoption.
+climateSourceTypeMustRemainDistinguishable :
+  NF.FactorsThrough Contested.flattenSource Contested.sourceDisposition → ⊥
+climateSourceTypeMustRemainDistinguishable =
+  Contested.sourceKindNotIdentifiedByTopic
+
+apiInstitutionalAuthorisationStillUnderidentified :
+  NF.FactorsThrough Contested.publishedDraft
+    Contested.authorityHypothesis → ⊥
+apiInstitutionalAuthorisationStillUnderidentified =
+  Contested.publishedDraftCannotProveInstitutionalAuthorisation
+
+originalApprovalRecordsWouldSeparateAlternatives :
+  Discriminator.BundleSeparates Contested.authorisationRecordProbe
+    Contested.unapprovedWorld Contested.approvedWorld
+originalApprovalRecordsWouldSeparateAlternatives =
+  Contested.authorisationRecordWouldSeparate
