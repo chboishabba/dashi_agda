@@ -107,6 +107,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "separate_campaign_public_materials": "source_bounded_documented",
         "document_content_divergence": "published_study_result",
         "1998_API_draft_identified_effect": "not_identified",
+        "preplan_survey": "reported_in_original_draft_not_independently_validated",
+        "actual_1998_plan_expenditure": "not_identified",
     }
     later = data["followup_evidence_20261107"]
     assert {item["id"] for item in later} == {
@@ -136,6 +138,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             "documented_separate_examples_not_API_draft_execution",
         "corporate_message_divergence_in_published_corpus":
             "quantified_document_content_not_causal_effect",
+        "charlton_preplan_survey_reported":
+            "reported_survey_not_causal_effect",
     }
     activities = data["independent_activity_and_document_measurements"]
     assert {e["id"] for e in activities} == {
@@ -182,6 +186,28 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "contested_not_identified")
     assert data["promotion"]["later_coalition_advocacy"] == (
         "bounded_reported")
+    survey = data["reported_preplan_survey"]
+    assert survey["source_id"] == primary["id"]
+    assert survey["named_pollster"] == "Charlton Research"
+    assert survey["reported_sample_size"] == 1100
+    assert survey["reported_response_percent"] == 58
+    assert survey["kind"] == "quoted_plan_description_of_preplan_self_report_under_specific_prompt"
+    assert all(survey[field] is False for field in (
+        "methodology_or_original_poll_instruments_available",
+        "representativeness_verified", "randomised_assignment_verified",
+        "verified_pre_post_outcome"))
+    assert survey["causal_effect_of_1998_plan"] is None
+    budgets = data["planned_spending_not_receipts"]
+    assert budgets["source_id"] == primary["id"]
+    assert budgets["media_program_proposed_usd"] == 600000
+    assert budgets["science_center_two_year_proposed_usd"] == 5000000
+    assert budgets["direct_outreach_program_proposed_usd"] == 300000
+    assert budgets["total_required_through_nov_1998_proposed_usd"] == 2000000
+    assert budgets["actual_spent_usd"] is None
+    assert budgets["actual_authorised_usd"] is None
+    assert data["promotion"]["preplan_survey"] == (
+        "reported_in_original_draft_not_independently_validated")
+    assert data["promotion"]["actual_1998_plan_expenditure"] == "not_identified"
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
         "original_document_with_provenance")
@@ -198,6 +224,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "separate_activities": len(activities),
         "published_communications_analysed": corpus["document_count"],
         "audience_effect_of_1998_API": "NOT_IDENTIFIED",
+        "preplan_survey_reported_n": survey["reported_sample_size"],
+        "reported_preplan_framing_response_pct": survey["reported_response_percent"],
         "contested_authorisation": "NOT_IDENTIFIED",
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
