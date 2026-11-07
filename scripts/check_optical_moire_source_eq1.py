@@ -91,9 +91,20 @@ def test():
     assert abs(patch_charge(s,valid))<1e-12
     s,valid,_=stokes(np.zeros((2,7,7),complex))
     assert patch_charge(s,valid) is None
+    # Belavin-Polyakov stereographic unit texture: finite OPEN window.
+    # It approaches degree -1 with increasing domain radius, while being
+    # noninteger for any selected finite rectangular window.
+    q=[]
+    for radius in (6.,12.):
+        coord=np.linspace(-radius,radius,101)
+        xx,yy=np.meshgrid(coord,coord)
+        rr=xx*xx+yy*yy
+        bp=np.stack((2*xx/(1+rr),2*yy/(1+rr),(rr-1)/(1+rr)))
+        q.append(patch_charge(bp,np.ones((101,101),bool)))
+    assert q[0]<-.95 and q[1]<-.99 and abs(q[1]+1)<abs(q[0]+1)
     return {"synthetic_regression":"PASS","source_doi":SOURCE["doi"],
             "maxwell_residual":max(e0,e1),"norm_delta":float(abs(np.linalg.norm(a)-np.linalg.norm(b))),
-            "tested_symmetries":[3,4,6]}
+            "tested_symmetries":[3,4,6], "finite_window_BP_charges":q}
 
 if __name__=="__main__":
     p=argparse.ArgumentParser()
