@@ -10,6 +10,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.BH4SystemStateExact as BH4
+import DASHI.Biology.BH4SpatialConnectivityCirculationExact as Spatial
 import DASHI.Biology.BH4CompartmentKineticStateExact as Kinetics
 import DASHI.Biology.BH4OpenMetabolicNetworkAdapterExact as Metabolic
 import DASHI.Physics.Electromagnetism.PoissonNernstPlanckElectrodiffusionExact as PNP
@@ -23,10 +24,19 @@ record SameSourceBH4PNPModel : Set₁ where
     selectedMeasurementTime : String
     selectedPNP : PNP.ElectrodiffusionApplicationReceipt
     selectedMetabolicNetwork : Metabolic.BH4OpenMetabolicNetworkAdapter
+    circulation : Spatial.ContextIndexedCirculation
+    locationOf : PhysicalState → Spatial.Location circulation
+    -- Physical transport from x to its successor must be reachable
+    -- by original-source permitted directed connections; a location
+    -- string or a nonzero global pool does not pay the route.
     bh4Quantitative : PhysicalState → Kinetics.BH4QuantitativeState
     pnState : PhysicalState →
       PNP.CoupledState (PNP.fluxLaw selectedPNP)
     physicalStep : Bool → PhysicalState → PhysicalState
+    permittedStepRoute :
+      (action : Bool) (state : PhysicalState) →
+      Spatial.FlowPath (Spatial.PermittedFlow circulation)
+        (locationOf state) (locationOf (physicalStep action state))
     bh4Step : Bool → Kinetics.BH4QuantitativeState →
       Kinetics.BH4QuantitativeState
     pnStep : Bool →
@@ -110,3 +120,33 @@ allHistoriesRemainOnOriginalBH4System :
     ≡ bh4SystemAt model (physicalRun model actions x)
 allHistoriesRemainOnOriginalBH4System model actions x =
   sameBH4State model (physicalRun model actions x)
+
+------------------------------------------------------------------------
+-- Source-selected reachability of the entire physical trajectory.
+-- No inverse circulation is inferred from the allowed forward paths.
+------------------------------------------------------------------------
+
+concatenatePermittedRoutes :
+  ∀ {Location : Set} {Flow : Location → Location → Set}
+    {a b c : Location} →
+  Spatial.FlowPath Flow a b →
+  Spatial.FlowPath Flow b c →
+  Spatial.FlowPath Flow a c
+concatenatePermittedRoutes (Spatial.here x) second = second
+concatenatePermittedRoutes (Spatial.thenFlow first remaining) second =
+  Spatial.thenFlow first (concatenatePermittedRoutes remaining second)
+
+physicalTrajectoryHasSourcePermittedRoute :
+  (model : SameSourceBH4PNPModel)
+  (actions : List Bool)
+  (x : PhysicalState model) →
+  Spatial.FlowPath (Spatial.PermittedFlow (circulation model))
+    (locationOf model x)
+    (locationOf model (physicalRun model actions x))
+physicalTrajectoryHasSourcePermittedRoute model [] x =
+  Spatial.here (locationOf model x)
+physicalTrajectoryHasSourcePermittedRoute model (action ∷ rest) x =
+  concatenatePermittedRoutes
+    (permittedStepRoute model action x)
+    (physicalTrajectoryHasSourcePermittedRoute model rest
+      (physicalStep model action x))
