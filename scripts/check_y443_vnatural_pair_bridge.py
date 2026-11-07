@@ -1,0 +1,285 @@
+#!/usr/bin/env python3
+"""Y443 finite-transcription regression and optional golden Agda gate.
+
+The finite check validates Ivanov/Bray/TauCeti source transcription arithmetic;
+it does not prove a Monster isomorphism, JMD's two-generator certificate,
+or an actual automorphism action. The default gate ALSO runs Agda and fails
+if no compiler is available. --finite-only is explicitly non-promotional.
+"""
+from __future__ import annotations
+
+import argparse
+from itertools import combinations
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+
+ROOT = Path(__file__).resolve().parents[1]
+PRESENTATION = ROOT / "DASHI/Moonshine/Y443CoxeterPresentationExact.agda"
+ACTION = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationExact.agda"
+TRACE = ROOT / "DASHI/Moonshine/Y443JMDTracePowerExact.agda"
+HEISENBERG = ROOT / "DASHI/Moonshine/Y443Monster3BTwelveDisjointExact.agda"
+ORBIT = ROOT / "DASHI/Moonshine/Y443ArmSwapOrbitMaxCutExact.agda"
+INDEXED = ROOT / "DASHI/Moonshine/Y443Relator72IndexedBidiExact.agda"
+NOGO = ROOT / "DASHI/Moonshine/Y443Nonary72EquivarianceNoGoExact.agda"
+JMD_SOURCE = ROOT / "DASHI/Moonshine/Y443JMDSourceWordInstantiationExact.agda"
+JMD_COMPILER = ROOT / "DASHI/Moonshine/Y443JMDConcretePairPowerCompilerExact.agda"
+JMD_POWERS = ROOT / "DASHI/Moonshine/Y443JMDPowerFiveSixAlgebraExact.agda"
+JMD_PATHS = ROOT / "DASHI/Moonshine/Y443JMDThreePathGraphCertificateExact.agda"
+JMD_SQUARE = ROOT / "DASHI/Moonshine/Y443JMDSquareFromPresentationExact.agda"
+JMD_NONADJ = ROOT / "DASHI/Moonshine/Y443JMDNonadjacentRelatorConsequencesExact.agda"
+JMD_FROM_RELATORS = ROOT / "DASHI/Moonshine/Y443JMDFromRelatorsToPowerExact.agda"
+BETA_FIVE = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveFiniteRewriteExact.agda"
+BETA_SCRIPT = ROOT / "scripts/check_y443_jmd_beta5_rewrite_certificate.py"
+BETA_SEMANTICS = ROOT / "DASHI/Moonshine/Y443JMDBetaFiveSemanticCompilerExact.agda"
+COXETER_LAWS = ROOT / "DASHI/Moonshine/Y443CoxeterRelatorSemanticLawsExact.agda"
+ACTUAL_BETA = ROOT / "DASHI/Moonshine/Y443JMDA4RulesFromPresentationExact.agda"
+ELEVEN_FINITE = ROOT / "DASHI/Moonshine/Y443JMDThreePathFiniteRewriteExact.agda"
+ELEVEN_SEMANTICS = ROOT / "DASHI/Moonshine/Y443JMDPathShiftSemanticCompilerExact.agda"
+ALL_GRAPH = ROOT / "DASHI/Moonshine/Y443AllCoxeterGraphLawsFrom80Exact.agda"
+PRESENTED_GENERATION = ROOT / "DASHI/Moonshine/Y443PresentedGroupNodeGenerationExact.agda"
+ALL_TWELVE = ROOT / "DASHI/Moonshine/Y443JMDAllTwelveNodeWordCompilerExact.agda"
+PRESENTED_CAPSTONE = ROOT / "DASHI/Moonshine/Y443JMDPresentedVNaturalCapstoneExact.agda"
+SAME_OBJECT = ROOT / "DASHI/Moonshine/Y443MonsterGradedLiteralSameObjectCapstoneExact.agda"
+PATHS_SCRIPT = ROOT / "scripts/check_y443_jmd_11_path_shifts.py"
+GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
+
+NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
+EDGES = {
+    frozenset((x, y)) for x, y in (
+        ("a", "b1"), ("b1", "c1"), ("c1", "d1"), ("d1", "e1"),
+        ("a", "b2"), ("b2", "c2"), ("c2", "d2"), ("d2", "e2"),
+        ("a", "b3"), ("b3", "c3"), ("c3", "d3"),
+    )
+}
+SPIDER = ("a", "b1", "c1", "a", "b2", "c2", "a", "b3", "c3")
+CENTRAL = ("a", "b3", "c3", "d3", "b1", "c1", "b2")
+
+
+def assert_finite_counts() -> None:
+    pairs = list(combinations(NODES, 2))
+    adjacent = [p for p in pairs if frozenset(p) in EDGES]
+    nonadjacent = [p for p in pairs if frozenset(p) not in EDGES]
+    assert (len(NODES), len(pairs), len(adjacent), len(nonadjacent)) == (12, 66, 11, 55)
+
+    # Relators are positive words because x^2=1 for each Coxeter node.
+    coxeter = [(x, x) for x in NODES]
+    coxeter += [
+        tuple(p) * (3 if frozenset(p) in EDGES else 2)
+        for p in pairs
+    ]
+    spider_word = SPIDER * 10
+    central_word = CENTRAL * 9
+    double = coxeter + [spider_word]
+    monster = double + [central_word]
+
+    assert (len(coxeter), len(double), len(monster)) == (78, 79, 80)
+    assert (len(spider_word), len(central_word)) == (90, 63)
+    assert (sum(map(len, coxeter)), sum(map(len, double)),
+            sum(map(len, monster))) == (310, 400, 463)
+    assert SPIDER == ("a", "b1", "c1", "a", "b2", "c2", "a", "b3", "c3")
+    assert CENTRAL == ("a", "b3", "c3", "d3", "b1", "c1", "b2")
+
+    # Independent C2 graph automorphism census: swap the two long arms.
+    swap = {n: (n[:-1] + "2" if n.endswith("1")
+                else n[:-1] + "1" if n.endswith("2") else n)
+            for n in NODES}
+    assert all(swap[swap[n]] == n for n in NODES)
+    assert all((frozenset((swap[a], swap[b])) in EDGES)
+               == (frozenset((a, b)) in EDGES) for a, b in pairs)
+    fixed_nodes = [n for n in NODES if swap[n] == n]
+    fixed_pairs = [p for p in pairs
+                   if frozenset(p) == frozenset((swap[p[0]], swap[p[1]]))]
+    fixed_edges = [p for p in fixed_pairs if frozenset(p) in EDGES]
+    fixed_nonedges = [p for p in fixed_pairs if frozenset(p) not in EDGES]
+    ordered_index = {tuple(p) for p in pairs}
+    canonical = lambda x, y: tuple(sorted((x, y), key=NODES.index))
+    assert all(canonical(swap[a], swap[b]) in ordered_index for a, b in pairs)
+    assert all(canonical(swap[canonical(swap[a], swap[b])[0]], swap[canonical(swap[a], swap[b])[1]]) == (a, b) for a, b in pairs)
+    assert (len(fixed_nodes), len(fixed_pairs),
+            len(fixed_edges), len(fixed_nonedges)) == (4, 10, 3, 7)
+    moving_nodes = [n for n in NODES if swap[n] != n]
+    moving_edges = [p for p in adjacent if p not in fixed_edges]
+    moving_nonedges = [p for p in nonadjacent if p not in fixed_nonedges]
+    assert (len(moving_nodes), len(moving_edges),
+            len(moving_nonedges)) == (8, 8, 48)
+
+    # The canonical 72 block is ALL 55 nonedges + 8 moving nodes
+    # + 8 moving edge relators + the UNIQUE trivalent central node a.
+    core = ([("nonedge", p) for p in nonadjacent]
+            + [("square", n) for n in moving_nodes]
+            + [("edge", p) for p in moving_edges]
+            + [("square", "a")])
+    residual = ([("square", n) for n in ("b3", "c3", "d3")]
+                + [("edge", p) for p in fixed_edges]
+                + [("spider", None), ("central", None)])
+    assert len(core) == 72 and len(residual) == 8
+    alltags = ([("square", n) for n in NODES]
+               + [("edge" if frozenset(p) in EDGES else "nonedge", p)
+                  for p in pairs]
+               + [("spider", None), ("central", None)])
+    assert set(core).isdisjoint(residual)
+    assert set(core) | set(residual) == set(alltags)
+    assert len(alltags) == len(set(alltags)) == 80
+    assert len(fixed_edges) == 3 and len(fixed_nonedges) == 7
+    assert 78 == 72 + 6 and 80 == 72 + 8
+    # This C2 quotient has 7 edge-orbits, 31 nonedge-orbits:
+    # NOT the 5 classes of 9, nor the 14 classes of 27.
+    assert len(fixed_edges) + len(moving_edges) // 2 == 7
+    assert len(fixed_nonedges) + len(moving_nonedges) // 2 == 31
+
+    # Independently evaluate all of JMD's literal paths against the Y443
+    # graph: neighboring pairs adjacent, all pairs distance >= 2 nonadjacent.
+    paths = (
+        ("d3", "c3", "b3", "a", "b1", "c1", "d1", "e1"),
+        ("b2", "c2", "d2", "e2"),
+        ("a", "b2", "c2", "d2", "e2"),
+    )
+    for path in paths:
+        assert len(path) == len(set(path))
+        assert all(frozenset((path[i], path[i + 1])) in EDGES
+                   for i in range(len(path) - 1))
+        assert all(frozenset((path[i], path[j])) not in EDGES
+                   for i in range(len(path)) for j in range(i + 2, len(path)))
+    assert all(frozenset(("e1", k)) not in EDGES for k in paths[1])
+    print("PASS JMD paths: all 3 graph paths and all 4 x4-beta commuting pairs")
+
+    print("PASS arm-swap: fixed (node,edge,nonedge)=(4,3,7); moving=(8,8,48)")
+    print("PASS canonical Y443: all 55 nonedges +8 nodes +8 edges +centre=72; residual=8")
+
+    print("PASS finite: 12 nodes / 11 edges / 55 nonedges / 78,79,80 relators / 310,400,463 letters")
+
+
+def assert_source_scope() -> None:
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, GOLDEN_ROOT):
+        if not file.is_file():
+            raise AssertionError(f"missing Agda source: {file}")
+        source = file.read_text()
+        for forbidden in (
+            "postulate\n", "{!", "!}", "--allow-unsolved-metas",
+            "--no-termination-check", "--no-positivity-check", "--unsafe",
+        ):
+            if forbidden in source:
+                raise AssertionError(f"forbidden trust escape {forbidden!r} in {file.name}")
+    a = PRESENTATION.read_text()
+    b = ACTION.read_text()
+    for symbol in (
+        "elevenEdges", "fiftyFiveNonedges", "coxeterRelatorCount",
+        "doubleMonsterRelatorCount", "monsterRelatorCount",
+        "doubleMonsterWrittenLength", "monsterWrittenLength",
+        "centralInvolutionRelator",
+    ):
+        if symbol not in a:
+            raise AssertionError(f"missing presentation theorem {symbol}")
+    for symbol in (
+        "pairWordsSurjective", "pairWordActionMatchesLiteral",
+        "NodeWordCertificate", "NodeGeneration",
+        "RelatorsSatisfied", "VN.VNaturalConstruction",
+    ):
+        if symbol not in b:
+            raise AssertionError(f"missing action theorem {symbol}")
+    t = TRACE.read_text()
+    for symbol in ("powerRepresented", "traceStepThreeX4", "traceStepFourBeta", "traceStepsThreeAndFour"):
+        if symbol not in t:
+            raise AssertionError(f"missing JMD trace theorem {symbol}")
+    h = HEISENBERG.read_text()
+    for symbol in ("axis0DoubleTranslationIsNotIdentity", "axis0TripleTranslationIsIdentity", "axis0TripleTranslationEverywhere"):
+        if symbol not in h:
+            raise AssertionError(f"missing order-3/order-2 disjointness theorem {symbol}")
+    for source, symbols in ((ORBIT, ("swapPreservesAdjacency", "fixedNonedgesAreSeven", "coreIsEightByNine", "fullCutIsSeventyTwoPlusEight")), (INDEXED, ("allTagsRecoverOriginal80Words", "coxeterCoreCount", "fullResidualCount"))):
+        txt = source.read_text()
+        for symbol in symbols:
+            if symbol not in txt:
+                raise AssertionError(f"missing Y443 orbit/indexed theorem {symbol} in {source.name}")
+    no_go = NOGO.read_text()
+    for symbol in ("centralCoreFixed", "reducedEightHasNoFixedPoint", "chartHasNoFixedPoint", "noNaiveEightByNineEquivariantChart"):
+        if symbol not in no_go:
+            raise AssertionError(f"missing Y443 8x9 equivariance no-go {symbol}")
+    for source, symbols in ((JMD_SOURCE, ("uPathHasEight", "betaPathHasFour", "thirdPathHasFive", "wIsX4Beta", "jmdWFromPair")), (JMD_COMPILER, ("concreteTrace", "sourceX4Word", "sourceBetaWord"))):
+        src = source.read_text()
+        for symbol in symbols:
+            if symbol not in src:
+                raise AssertionError(f"missing JMD source theorem {symbol}")
+    power_src = JMD_POWERS.read_text()
+    for symbol in ("commutesWithPowers", "powCommutingProduct", "fifthProductIsFirst", "sixthProductIsSecond", "deriveConcretePowers"):
+        if symbol not in power_src:
+            raise AssertionError(f"missing JMD power proof {symbol}")
+    path_src = JMD_PATHS.read_text()
+    for symbol in ("jmdFirstPathGraphValid", "jmdBetaPathGraphValid", "jmdThirdPathGraphValid", "x4IsNonadjacentToEntireBetaPath"):
+        if symbol not in path_src:
+            raise AssertionError(f"missing JMD three-path graph theorem {symbol}")
+    square_src = JMD_SQUARE.read_text()
+    for symbol in ("fifthNodeSquareRelator", "squareFromActualPresentation"):
+        if symbol not in square_src:
+            raise AssertionError(f"missing presentation-to-square theorem {symbol}")
+    for src, markers in ((JMD_NONADJ, ("relatorMembershipElim", "e1CommutesBeta")), (JMD_FROM_RELATORS, ("powerFromActualEightyRelators", "betaInJMDPairFromActualRelators")), (BETA_FIVE, ("betaFifthAllThirtyFiveMovesValid", "betaFifthReducesToEmpty"))):
+        content = src.read_text()
+        for marker in markers:
+            if marker not in content:
+                raise AssertionError(f"missing source theorem {marker}")
+    for src, markers in ((BETA_SEMANTICS, ("localSound", "runSound", "betaOrderFiveFromFiniteCertificate")), (COXETER_LAWS, ("edgeProductCube", "braidFromCoxeter", "edgeBraid")), (ACTUAL_BETA, ("betaFiveFromOriginal80Relators", "x4InPairWithNoExtraPowerPremise", "betaInPairWithNoExtraPowerPremise"))):
+        raw = src.read_text()
+        for marker in markers:
+            if marker not in raw:
+                raise AssertionError(f"missing source-backed Agda theorem {marker}")
+    for src, markers in ((ELEVEN_FINITE, ("pathP1Shift6Result", "pathP3Shift3Result")), (ELEVEN_SEMANTICS, ("elevenSourcePathShiftEquations", "evalReverse", "runSound")), (ALL_GRAPH, ("squareIndexCorrect", "canonicalPairAtCorrect", "allElevenShiftsFromActual80")), (PRESENTED_GENERATION, ("nodeGenerationFromPresentedSyntax", "inductionOnSourceWord")), (ALL_TWELVE, ("everyNodeRepresented", "actualNodeWordCertificate")), (PRESENTED_CAPSTONE, ("wholeGroupTwoGenerated", "sameLiteralVNaturalActionWord")), (SAME_OBJECT, ("actualActionTransported", "sameActualGradedMonsterActionTwoGenerated"))):
+        raw = src.read_text()
+        for marker in markers:
+            if marker not in raw:
+                raise AssertionError(f"missing capstone theorem {marker} in {src.name}")
+    print("PASS source: original 80 relators to 141-step full JMD generator capstone")
+
+
+def check_agda() -> None:
+    """Use the repository's Agda 2.9 parallel_checker, not a bare older Agda.
+
+    DASHI_Y443_DIRECT_AGDA=1 is a deliberate alternate entrypoint for
+    environments that already provide the matching Agda 2.9 libraries.
+    """
+    golden = str(GOLDEN_ROOT.relative_to(ROOT))
+    if os.environ.get("DASHI_Y443_DIRECT_AGDA", "0") == "1":
+        compiler = os.environ.get("AGDA_BIN", "agda")
+        if not shutil.which(compiler):
+            raise RuntimeError(f"Golden Agda NOT RUN: {compiler!r} not found")
+        cmd = [
+            compiler, "--safe", "--no-libraries", "--no-default-libraries",
+            "-i", ".", "-i", "DCHoTT-Agda", "-i", "vendor/bishop",
+            "-i", "cubical", "-i", os.environ.get("AGDA_STDLIB_SRC_29", ""),
+            golden,
+        ]
+    else:
+        wrapper = ROOT / "scripts/run_agda29_parallel_check.sh"
+        if not wrapper.is_file():
+            raise RuntimeError(
+                f"Golden Agda NOT RUN: parallel_checker wrapper missing {wrapper}"
+            )
+        cmd = ["bash", str(wrapper), "--safe", golden]
+    print("Golden Agda checker:", " ".join(cmd), flush=True)
+    subprocess.run(cmd, cwd=ROOT, check=True)
+    print("PASS golden Agda 2.9 parallel_checker: transitive capstone accepted")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--finite-only", action="store_true",
+                        help="run source arithmetic only; NOT a proof promotion")
+    args = parser.parse_args()
+    assert_finite_counts()
+    assert_source_scope()
+    subprocess.run([sys.executable, str(BETA_SCRIPT)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(PATHS_SCRIPT)], cwd=ROOT, check=True)
+    if args.finite_only:
+        print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
+    else:
+        check_agda()
+        print("STATUS: exact-head capstone kernel accepted; concrete Monster/Aut(Vnatural) authority still requires a selected inhabitant")
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (AssertionError, RuntimeError, subprocess.CalledProcessError) as exc:
+        print(f"FAIL: {exc}", file=sys.stderr)
+        sys.exit(1)
