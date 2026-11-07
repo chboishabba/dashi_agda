@@ -270,3 +270,88 @@ bishopGielisConfiguredTrigIdentity dataSet angle inputs =
       (BishopP.+-cong
         BishopP.≃-refl
         (BishopP.≃-symm cosineQuadruple)))
+
+
+------------------------------------------------------------------------
+-- Factor the four-angle obligation through TWO ordinary Bishop
+-- double-angle evaluations on the same configured sine/cosine source.
+-- This consumes no independent new analytic function. It replaces a
+-- single large cosine quadrupling source leaf by two concrete doubling
+-- leaves (including the selected 4x versus 2*(2x) argument).
+------------------------------------------------------------------------
+
+record BishopConcreteDoubleAngleInputs
+    (dataSet : Trig.BishopElementaryPowerSeriesData)
+    (angle : Bishop.ℝ) : Set where
+  field
+    cosineAtDouble :
+      Bishop._≃_
+        (Trig.bishopCos dataSet (Bishop._*_ two angle))
+        (bishopCosineDoublePolynomial
+          (Trig.bishopCos dataSet angle)
+          (Trig.bishopSin dataSet angle))
+
+    sineAtDouble :
+      Bishop._≃_
+        (Trig.bishopSin dataSet (Bishop._*_ two angle))
+        (bishopSineDoublePolynomial
+          (Trig.bishopCos dataSet angle)
+          (Trig.bishopSin dataSet angle))
+
+    cosineAtFourFromTwo :
+      Bishop._≃_
+        (Trig.bishopCos dataSet (Bishop._*_ four angle))
+        (bishopCosineDoublePolynomial
+          (Trig.bishopCos dataSet (Bishop._*_ two angle))
+          (Trig.bishopSin dataSet (Bishop._*_ two angle)))
+
+open BishopConcreteDoubleAngleInputs public
+
+bishopCosineQuadrupleFromTwoDoubleAngles :
+  ∀ dataSet angle →
+  BishopConcreteDoubleAngleInputs dataSet angle →
+  Bishop._≃_
+    (Trig.bishopCos dataSet (Bishop._*_ four angle))
+    (cosineQuadruplePolynomial
+      (Trig.bishopCos dataSet angle)
+      (Trig.bishopSin dataSet angle))
+bishopCosineQuadrupleFromTwoDoubleAngles dataSet angle W =
+  let
+    c = Trig.bishopCos dataSet angle
+    s = Trig.bishopSin dataSet angle
+    c₂ = Trig.bishopCos dataSet (Bishop._*_ two angle)
+    s₂ = Trig.bishopSin dataSet (Bishop._*_ two angle)
+    open BishopConcreteDoubleAngleInputs W
+  in
+  BishopP.≃-trans
+    cosineAtFourFromTwo
+    (BishopP.≃-trans
+      (BishopP.+-cong
+        (BishopP.*-cong cosineAtDouble cosineAtDouble)
+        (BishopP.-‿cong
+          (BishopP.*-cong sineAtDouble sineAtDouble)))
+      (bishopCosineQuadrupleFromDouble c s))
+
+bishopGielisFromPythagoreanAndTwoDoubleAngles :
+  ∀ (dataSet : Trig.BishopElementaryPowerSeriesData)
+    (angle : Bishop.ℝ) →
+  Bishop._≃_
+    (Bishop._+_
+      (square (Trig.bishopCos dataSet angle))
+      (square (Trig.bishopSin dataSet angle)))
+    one →
+  BishopConcreteDoubleAngleInputs dataSet angle →
+  Bishop._≃_
+    (Bishop._*_ four
+      (gielisFourthSum
+        (Trig.bishopCos dataSet angle)
+        (Trig.bishopSin dataSet angle)))
+    (Bishop._+_ three
+      (Trig.bishopCos dataSet (Bishop._*_ four angle)))
+bishopGielisFromPythagoreanAndTwoDoubleAngles dataSet angle pythagorean doubles =
+  bishopGielisConfiguredTrigIdentity dataSet angle
+    record
+      { BishopGielisConcreteTrigInputs.pythagorean = pythagorean
+      ; BishopGielisConcreteTrigInputs.cosineQuadruple =
+          bishopCosineQuadrupleFromTwoDoubleAngles dataSet angle doubles
+      }
