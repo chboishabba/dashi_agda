@@ -2175,3 +2175,53 @@ NOT YET CHECKED here. A Gielis solver-produced
 multi-hit event receipt and independent
 apparatus calibration remain separate physical
 acceptance gates.
+
+
+## E41 — Actual Round11 Bishop complex exponential on the imaginary axis
+
+The original BishopSetoidComplexExact.expC is NOT
+a new hypothetical complex series: it is defined
+from the literal Bishop real exp, cos and sin:
+\[
+ \exp_C(x+iy)
+  =\exp_B(x)\cos_B(y)
+   +i\,\exp_B(x)\sin_B(y).
+\]
+The original BishopExponentialPositiveOrderExact
+already proves the genuinely analytic identity
+\(\exp_B(0)\simeq1\).
+
+DASHI/Geometry/GielisRound11ActualComplexExponentialExact.agda
+constructs an actual
+BishopSetoidComplexTranscendentals instance on
+the original Round11 dataSet and
+termIdentification and chooses the already-built
+Bishop Machin π constant (not a new π oracle).
+The exact theorem actualRound11ExpCIsTrigPair
+projects original real multiplicative congruence
+and \(\exp_B(0)\simeq1\) into both components of
+\[
+ \boxed{
+ \exp_C(i\theta)\simeq
+ \cos_B(\theta)+i\sin_B(\theta)
+ }
+\]
+with identical configured Round11 functions.
+No second complex record or postulated zero
+exponential is needed.
+
+This closes the SOURCE-level selected expC
+versus sine/cosine-pair identity, separate
+from E37's exact transport between the
+two existing complex-series records.
+
+**What remains:** the truly analytic same-source
+product law
+\(\exp_C(i2\theta)\simeq
+ \exp_C(i\theta)^2\) (equivalently the
+selected sine/cosine addition formula);
+identifying chosen Machin π as the actual
+period/first positive sine zero; and the
+variable positive Bishop-root/integral
+producer. This source has not received an
+Agda kernel acceptance receipt here.
