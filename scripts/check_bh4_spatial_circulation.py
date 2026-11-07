@@ -51,6 +51,9 @@ def main():
         "reversePathNotProvided",
         "sameTotalBH4", "sameTotalBH2",
         "totalsAloneCannotDetermineLocalCofactor",
+        "bloodBrainBarrierTransfer", "vascularPerfusion",
+        "plasmaMembraneTransfer", "gapJunctionTransfer",
+        "classifyPermittedFlow",
     )
     for owner in owners:
         assert owner in content, f"missing original Agda physical proof owner {owner}"
