@@ -15,8 +15,10 @@ import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
+import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
+import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
 import DASHI.Wikimedia.IbrahimSnowballAnthropologyClimateDenialPoliticalTheologyExact as Climate
 
 -- The two axes have different indexed point carriers despite their
@@ -109,3 +111,23 @@ brownInstitutionalPowerIsOriginalAxis :
   ≡ Brown.institutionalPower
 brownInstitutionalPowerIsOriginalAxis =
   Source.brownPaperContainsInstitutionalHegemonyAxis
+
+-- The actual tobacco-to-climate historical continuity is grade B,
+-- rather than a certificate of central command or a belief-change effect.
+climateCaseHistoricallyStrong :
+  Genealogy.StrongEvidenceEdge ClimateCase.originalClimateContinuity
+climateCaseHistoricallyStrong =
+  ClimateCase.historicalContinuityHasStrongReceipt
+
+climateCaseCannotInferCentralCommand :
+  NF.FactorsThrough ClimateCase.publicHistoricalGrade
+    ClimateCase.commandHypothesis → ⊥
+climateCaseCannotInferCentralCommand =
+  ClimateCase.gradeBDoesNotIdentifyCentralCommand
+
+climateCaseHypotheticalCommandDiscriminator :
+  Discriminator.BundleSeparates
+    ClimateCase.candidateCommandProbe
+    ClimateCase.decentralisedCandidate ClimateCase.centralisedCandidate
+climateCaseHypotheticalCommandDiscriminator =
+  ClimateCase.centralisationHypothesesCanBeSeparatedIfEvidenceExists
