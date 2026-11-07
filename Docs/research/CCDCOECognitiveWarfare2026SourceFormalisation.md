@@ -278,3 +278,51 @@ all focused Agda modules and `DASHI/Cognition/Everything.agda`. The
 parallel checker owns Agda 2.9, cache and resource policy; do not run Nix
 directly. Its exact-head success receipt is still required; this repository
 edit is not a successful kernel execution.
+
+## 7 November — primary-document empirical max-cut: April 1998 API plan
+
+A primary-source discovery changes the case status. The Congressional Record
+(vol. 144, issue 48, April 27, 1998, pp. H2323-H2327) reproduces the **April 3,
+1998 draft Global Climate Science Communications Action Plan**. Authoritative
+published HTML: https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm.
+
+The original document contains an accompanying draft-circulation note and a
+proposed meeting (rendered lines 425-449), named contributors (550-560), an
+explicit objective to influence views and a proposed before/after evaluation
+(568-590), media training/outreach proposals (599-646), the proposed data
+centre (652-723), and planned tracking measures (788-795). These statements
+establish **documented coordinated planning by the identified draft group**,
+not executed campaign activities, achieved effects on attitudes, or a unified
+command structure for all historical climate-denial organisations.
+
+New original source owner: `CCDCOEP3API1998PrimaryPlanExact.agda`.
+It states the primary locator, separates proposed activity from observed
+implementation, constructs finite compatible implementation worlds, proves
+`draftDocumentDoesNotIdentifyImplementation`, and provides a conditional
+archive `ExperimentBundle` discriminator. The 1998 primary document is now a
+positive contrast to the existing Oreskes/Conway grade-B broader historical
+genealogy; **no unreviewed causal/direct-transfer join is invented** between
+them.
+
+The source manifest at `Docs/research/ccdcoe_p3_climate_case_manifest.json`
+now contains six source-span anchored plan claims and six proposed PNF intake
+rows with source event/publication dates and typed roles. Original scanned
+file digests, true parser character offsets, parser profiles, reviewer approval
+and ingestion/observation times are explicitly null; the rows are not presented
+as admitted `EventPNF` objects. The manifest validator rejects invented
+review receipts and fabricated implementation/impact measurements.
+
+**Original-source status:** public contemporaneous document and paragraph
+coordinates ACQUIRED; source-to-PNF *candidate* schema SOURCE-WRITTEN;
+canonical runtime PNF/parser and original content-digest admission OPEN.
+**Causal status:** actual draft-group coordination planning DOCUMENTED;
+execution, exposure, mechanism effects, institution-wide central command and
+population outcomes UNIDENTIFIED. The original plan suggests monitoring public
+opinion, but it does not establish a post-implementation effect estimate.
+
+**Highest-alpha remaining factual cut:** find approval/funding and campaign
+implementation records, dated delivery/exposure records and an actual
+pre/post or suitable comparative public-opinion/media outcome dataset. Follow
+with explicit overlap/selection/measurement validity, uncertainty and source
+attribution. Do not try to substitute another finite logical proof for those
+missing historical measurements.
