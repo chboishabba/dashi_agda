@@ -102,7 +102,44 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "population_level_radicalisation": "not_identified",
         "documented_joint_planning": "source_supported",
         "plan_execution": "not_identified",
+        "api_wide_authorisation": "contested_not_identified",
+        "later_coalition_advocacy": "bounded_reported",
     }
+    later = data["followup_evidence_20261107"]
+    assert {item["id"] for item in later} == {
+        "api_response_1998_05_01",
+        "coalition_investigation_2017_09_05",
+        "house_hearing_2019_10_23",
+    }
+    assert all(item["date"] and item["url"].startswith("https://")
+               and item["source_line_ranges"] for item in later)
+    assert all(item["operational_primary_receipt"] is False
+               for item in later)
+    assert later[0]["source_type"] == "contemporaneous_attributed_response"
+    assert later[1]["source_type"] == "later_investigative_reporting"
+    assert later[2]["source_type"] == "official_hearing_transcript_with_testimony"
+    question_status = {row["id"]: row["status"]
+                       for row in data["evidence_question_ledger"]}
+    assert question_status == {
+        "public_1998_draft": "documented_primary",
+        "planning_group_and_proposed_actions": "documented_primary",
+        "api_wide_authorisation_of_plan": "contested_not_identified",
+        "independently_reported_later_coalition_advocacy":
+            "reported_independent_later_activity",
+        "specific_1998_plan_implementation": "not_identified",
+        "campaign_exposure_and_impact": "not_identified",
+        "plan_caused_Kyoto_or_Paris_policy_outcome": "not_identified",
+    }
+    source_lookup = {c["id"] for c in later} | {primary["id"]}
+    assert all(set(q["source_ids"]) <= source_lookup
+               for q in data["evidence_question_ledger"])
+    assert data["integration_joins"][
+        "1998_draft_to_2017_later_coalition_activity"
+    ].startswith("no direct execution identity")
+    assert data["promotion"]["api_wide_authorisation"] == (
+        "contested_not_identified")
+    assert data["promotion"]["later_coalition_advocacy"] == (
+        "bounded_reported")
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
         "original_document_with_provenance")
@@ -115,6 +152,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "hostile_intent": "NOT_IDENTIFIED",
         "primary_record_span_anchors": len(claims),
         "candidate_pnf_intake_rows": len(intake),
+        "independent_followup_sources": len(later),
+        "contested_authorisation": "NOT_IDENTIFIED",
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
         "real_measured_outcomes": 0,
