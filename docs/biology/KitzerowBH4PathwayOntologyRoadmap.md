@@ -51,10 +51,10 @@ New original Agda source owners:
    are imported into `KitzerowBH4EvidenceEverything.agda`.
 
 **Primary physiological references and limitations:**
-- Tetrahydrobiopterin cardiovascular recycling and uptake review,
-  DOI 10.1016/j.tips.2011.02.003 (see article/review source for exact
-  bibliography; separate original-subject source identity remains
-  required).
+- Tetrahydrobiopterin endothelial recycling/transport review:
+  `https://pmc.ncbi.nlm.nih.gov/articles/PMC5357050/`.
+  A review source does not itself authenticate experimental
+  measurements from every original cited paper.
 - Redox, endothelial NOS and compartment-specific BH4/BH2:
   `https://pmc.ncbi.nlm.nih.gov/articles/PMC4038990/`.
 - Transport, intracerebral access and BBB:
