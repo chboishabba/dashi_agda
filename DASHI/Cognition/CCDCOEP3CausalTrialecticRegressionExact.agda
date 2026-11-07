@@ -194,3 +194,15 @@ publishedMessageDiscrepancyDoesNotMeasurePersuasion :
     Observed.originalPublishedCorpusMeasurement ≡ false
 publishedMessageDiscrepancyDoesNotMeasurePersuasion =
   Observed.documentContentIsNotPublicBeliefEffect
+
+preplanPollIsNotPostCampaignEffect :
+  API1998.ReportedPreplanSurvey.wasPostImplementationFollowup
+    API1998.charltonSurveyAsDescribedInDraft ≡ false
+preplanPollIsNotPostCampaignEffect =
+  API1998.surveyIsNotMeasuredPostImplementationImpact
+
+proposedBudgetDoesNotEqualPaidReceipt :
+  API1998.PlannedAmounts.actualPaidReceiptsAdmitted
+    API1998.amountsProposedInDraft ≡ false
+proposedBudgetDoesNotEqualPaidReceipt =
+  API1998.noPaymentEstablishedByDraft
