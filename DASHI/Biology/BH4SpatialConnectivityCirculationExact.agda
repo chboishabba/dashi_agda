@@ -137,3 +137,66 @@ reversePathNotProvided ()
 -- Under source-qualified physiological conditions flow might reverse,
 -- branch, or be regulated. The toy's absence of reverse flow is not
 -- a universal theorem about blood vessels or transport physiology.
+
+------------------------------------------------------------------------
+-- Same whole-system BH4 and BH2 inventories, different target-region
+-- cofactor/redox availability. This is an exact counterexample to any
+-- location-free proposed eNOS coupling proxy based only on totals.
+------------------------------------------------------------------------
+
+record TwoRegionBiopterin : Set where
+  constructor two-region-biopterin
+  field
+    regionABH4 : Nat
+    regionABH2 : Nat
+    regionBBH4 : Nat
+    regionBBH2 : Nat
+
+open TwoRegionBiopterin public
+
+totalBH4 : TwoRegionBiopterin → Nat
+totalBH4 state = regionABH4 state + regionBBH4 state
+
+totalBH2 : TwoRegionBiopterin → Nat
+totalBH2 state = regionABH2 state + regionBBH2 state
+
+-- Boolean proxy only: real coupling is not a thresholded count.
+targetHasReducedBH4 : TwoRegionBiopterin → Bool
+targetHasReducedBH4 state with regionBBH4 state
+... | zero = false
+... | suc _ = true
+
+targetDepleted targetSupplied : TwoRegionBiopterin
+targetDepleted = two-region-biopterin 1 0 0 1
+targetSupplied = two-region-biopterin 0 1 1 0
+
+sameTotalBH4 : totalBH4 targetDepleted ≡ totalBH4 targetSupplied
+sameTotalBH4 = refl
+
+sameTotalBH2 : totalBH2 targetDepleted ≡ totalBH2 targetSupplied
+sameTotalBH2 = refl
+
+targetDepletedReading : targetHasReducedBH4 targetDepleted ≡ false
+targetDepletedReading = refl
+
+targetSuppliedReading : targetHasReducedBH4 targetSupplied ≡ true
+targetSuppliedReading = refl
+
+totalsAloneCannotDetermineLocalCofactor :
+  (predict : Nat → Nat → Bool)
+  ((state : TwoRegionBiopterin) →
+    targetHasReducedBH4 state
+      ≡ predict (totalBH4 state) (totalBH2 state)) →
+  ⊥
+totalsAloneCannotDetermineLocalCofactor predict factor =
+  falseNotTrue
+    (trans
+      (sym targetDepletedReading)
+      (trans (factor targetDepleted)
+        (trans
+          (cong₂ predict sameTotalBH4 sameTotalBH2)
+          (trans (sym (factor targetSupplied))
+            targetSuppliedReading))))
+  where
+    falseNotTrue : false ≡ true → ⊥
+    falseNotTrue ()
