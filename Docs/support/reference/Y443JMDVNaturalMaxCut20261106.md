@@ -660,3 +660,37 @@ Z[1/3,zeta] --cyclotomic conjugation--> Z[1/3,zeta]
 where F4=F2[t]/(t²+t+1), zeta maps to t and zeta² maps to t². Both routes send a+b zeta to its Frobenius conjugate. This is NOT a field map Q(zeta)->F4; the integral localization is essential. The Fourier projectors P_k=(I+zeta^{-k}T+zeta^{-2k}T²)/3 lie in the localized coefficient ring, so all three **reduce mod 2** and remain mutually orthogonal idempotents summing to the identity (all nine products and the full sum independently checked). Frobenius fixes P_1 and exchanges P_zeta,P_zeta². The reflection conjugation J P_zeta J = P_zeta² is independently checked; scalar conjugation and reflection should remain distinct operators.
 
 The key sign lesson: ordinary F2 identifies +1 and -1, but F4 **preserves distinct cube roots** t,t². Support-bit reduction of balanced ternary cannot descend the full C3 action; a full support/sign fibre can. This supplies an exact arithmetic C3-to-Frobenius square and a sharp information-loss theorem. It does not identify an integral form of Vnatural or a Monster-invariant Griess lattice. Python local receipt in `y443_zeta_frobenius_bundle.zip`.
+
+
+## 2026-11-08 P0 improvement: constructive 729 x 90 Heisenberg recognition (local Python executed)
+
+The existing original owners already give the exact six translation and six modulation operators on X=F3^6 (`Monster3BFiniteHeisenbergGeneratorsExact`), the Fin 90 multiplicity decomposition (`Monster3BMultiplicityEvaluationExact`), and the interface requiring an actual selected 3B generator action (`IbrahimMonster3BLinearZetaSectorRestrictionExact` and `IbrahimMonster3BLinearMultiplicityHomSpaceExact`). This continuation **does not re-create a duplicate** character authority.
+
+**Highest-alpha finite theorem (source-aligned):** let K be a characteristic-zero field containing a primitive cube root zeta and let W be a finite-dimensional K-representation with operators T_a, M_b for a,b in F3^6 satisfying T_a T_c=T_{a+c}, M_b M_d=M_{b+d}, M_b T_a=zeta^{<b,a>} T_a M_b. Define the canonical joint projectors
+
+```
+P_x = (1/729) sum_{b in F3^6} zeta^{-<b,x>} M_b .
+```
+
+Finite Fourier orthogonality gives P_x P_y=delta_xy P_x, sum_x P_x=1, and T_a P_x=P_{x+a} T_a. If S=P_0 W, then the explicit maps
+
+```
+Phi : K[F3^6] tensor S -> W
+Phi(e_x tensor s) = T_x s
+
+Psi : W -> K[F3^6] tensor S
+Psi(w) = sum_x e_x tensor T_{-x} P_x(w)
+```
+
+are mutually inverse, and Phi intertwines all 12 Weyl generators. Thus, for any **inhabited actual** 3B source with these exact linear laws, an intertwiner is constructible from the actual selected matrices and joint weight space, rather than postulating a separate `ActualZetaSectorRecognition`. If dim W=65610, then dim S=90. No assumption of a hidden matching coordinate system is needed for the mathematical statement.
+
+**Local exact computational proof-of-algorithm:** constructed the 65,610-dimensional `K[F3^6] tensor K^90` model and hid its basis with a seeded arbitrary permutation plus independent cubic phase gauge factors. Recovered the 90-dimensional common zero-weight basis from the six modulations; propagated it using six translations to a complete 65,610-vector basis. Verified the two generator intertwining relations for EVERY basis vector and EACH of the 12 operators (787,320 exact checks), the 36 Weyl cross-commutators on all 729 position states (26,244 checks), and selected exact projector orthogonality by character sums. No floats, numerically guessed tolerance, or actual Monster generator matrices. The tool is a finite **model recognition** certificate, not a recovered Monster intertwiner.
+
+**Independent mathematical no-promotion counterexample:** on the same 3D rational C3 regular representation, two distinct associative commutative unital C3-invariant algebras exist:
+1. A=Q^3 with coordinatewise multiplication: Aut(A)=S3, of order six.
+2. B=Q 1 + U with U=sum-zero plane and U^2=0: Aut(B)=GL2(Q), infinite.
+Both have the identical C3 linear action and invariant unit. A contains no nonzero nilpotents but B has a square-zero vector (1,-1,0). A single C3 character, including the exact 3B 53 trace, therefore **cannot** determine the selected Griess multiplication, even up to algebra isomorphism. Local Python verified multiplication and C3 covariance, the square-zero witness, and multiple explicitly distinct radical automorphisms. This is a stronger negative-control gate than mere unmatched dimensions.
+
+**Exact shortest remaining P0 producer:** import the **actual** selected inertia/3B linear operators (not the reconstructed model) and their 12 Weyl relations + central character; use the projector formula above to construct `H_zeta tensor S_zeta <-> W_zeta` on those same operators. The separate Griess multiplication law must then be checked; weight-two VOA generation and VOA automorphism extension are still separate theorem owners. Bishop completion of analytic series does not itself yield any of those algebraic identity statements.
+
+**Execution:** local executable and exact machine report attached as `y443_3b_constructive_recognition.py` and `y443_3b_constructive_recognition_results.json`. This repository DOC is committed; the local executable is not silently claimed repo-executed.
