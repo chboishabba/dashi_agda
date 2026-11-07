@@ -29,3 +29,33 @@ import DASHI.Mathematics.Complexity.Karp21SparseEndpointConsistencySoundExact
 import DASHI.Mathematics.Complexity.Karp21FinFreeEndpointScanComparisonCountExact
 
 import DASHI.Mathematics.Complexity.Karp21FinFreePairwiseQuadraticCountExact
+
+-- Original-word input-length polynomial endpoint-comparison certificate.
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalWordComparisonBoundExact
+
+import DASHI.Mathematics.Complexity.Karp21N21SameWordCountedAcceptanceExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeRawValidatorComparisonCountExact
+
+import DASHI.Mathematics.Complexity.Karp21FinFreeOriginalGraphComparisonEnvelopeExact
+
+-- Native bit-weighted original-word comparison envelope (not a machine receipt).
+import DASHI.Mathematics.Complexity.Karp21N21BitWeightedComparisonEnvelopeExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryWordEqualityPrimitiveExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryEqualitySameValueExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordNumericalWeldExact
+
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeAllWordValidityExact
+
+-- All-word native signed-gamma structural inspection bound.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClockExact
+
+-- K05: original/native signed gamma all-word acceptance equivalence.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedAllWordValidityExact

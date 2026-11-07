@@ -59,6 +59,13 @@ python3 scripts/check_karp21_agda_stdlib_arity.py
 python3 scripts/check_karp21_e20_bitlength_bound.py --max-n 5
 python3 scripts/check_karp_binary_codec.py
 python3 scripts/check_karp21_binary_native_sparse_verifier.py
+python3 scripts/check_karp21_conway_gamma_reference.py
+python3 scripts/check_karp21_binary_word_equality.py
+python3 scripts/check_karp21_gamma_binary_native.py
+python3 scripts/check_karp21_gamma_binary_native_signed.py
+python3 scripts/check_karp21_native_bitword_sparse_verifier.py
+python3 scripts/check_karp21_finfree_word_comparison_bound.py
+python3 scripts/check_karp21_finfree_raw_primitive_comparisons.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
@@ -109,6 +116,15 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
       --entry "$root"
   done
 
+  check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21ConwayGammaChainCodecExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21N21BitWeightedComparisonEnvelopeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryWordEqualityPrimitiveExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryEqualitySameValueExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePayloadExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeAllWordNumericalWeldExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeAllWordValidityExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
@@ -125,6 +141,11 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21OriginalGammaGraphWordFieldsReplayExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21PositiveThresholdGammaExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeRawSparseWordVerifierExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeRawValidatorComparisonCountExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeAllWordValidationClockExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalWordComparisonBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalGraphComparisonEnvelopeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21N21SameWordCountedAcceptanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
 fi

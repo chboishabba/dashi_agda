@@ -1194,3 +1194,280 @@ The key affine signed-graph identity for fixed edges and labels is **`frustratio
 - In-repo finite same-object Max-Cut graph: in `dashi_agda` PR #1438 (not a general NP-completeness proof).
 - Ford–Fulkerson background: https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
 - Minimum k-cut distinction: https://en.wikipedia.org/wiki/Minimum_k-cut
+
+## 2026-11-06 — Conway / C3 / primorial crosswalk on updated Karp head
+
+Reference original branch head: `730f62ed27a0c45d71c89e5cdbc61bd9f1e6ab2c`.
+The separately derived integration branch imports the actual Karp original owners
+into `Karp21Everything` and records exact new gate status at
+[`Karp21ConwayC3GammaMaxCut20261106.md`](Karp21ConwayC3GammaMaxCut20261106.md).
+
+K01: source-written structurally recursive arbitrary finite Conway-chain
+evaluator and source rule-six equation, strictly-positive typed input.
+K02: source-written original Elias-gamma BitWord strict chain and
+four-prime exponent-vector roundtrips and exact wire length; not clock-certified.
+K04: `TriadicCube ≡ ThreeSuperThree` by definitional equality and actual
+`C3CubeFourier27Exact.Cube3` bidirectional lookup/additive transport.
+K03/K05/K06: all ORIGINAL signed E20/N21 cost and malformed-word
+obligations, original guarded Cook-Levin SAT lower bound, and network
+remain independently open; no synthetic C3 reduction substituted.
+K07: no Agda/`parallel_checker` executable receipt in this environment;
+source-written candidates and bounded independent tests are not kernel proofs.
+
+The new symbolic syntax is NOT interchangeable with an expanded integer
+word in a polynomial-time many-one reduction. The P != NP lower bound is
+not supplied by this bridge.
+
+## 2026-11-06 — full public Conway rule-five and factor codec strengthening
+
+On PR #1474 derived from the original updated Karp head, the
+`Karp21ConwayTotalChainExact.conwayDropAfterInternalOne` public theorem
+now states arbitrary-list prefix absorption:
+
+`evaluate (a :: (before ++ (1 :: after))) == evaluate (a :: before)`.
+
+It is derived from the actual prefix-machine invariant and the
+structural run/advance append proof. This strengthens internal
+`dropAfterOne` to a consumer-facing chain equality for every
+`before` and `after`.
+
+`Karp21ConwayGammaChainCodecExact` now has:
+- arbitrary-bit prefix-exclusion `chainFullBinaryNoProperPrefix`;
+- literal gamma chain injectivity `chainEncodeInjective`;
+- exact word lengths and strict positive-chain roundtrip.
+
+`Karp21ConwayPrimorialGammaAdapterExact` transports wire-size,
+injectivity, and arbitrary-bit prefix-exclusion to BOTH the original
+4-prime primorial coordinates and 15-prime SSP Gödel exponent vector.
+
+Independent tests: 327 successful finite Conway rewrite comparisons
+(103 short + 224 longer), 18 deliberately capped cases, 781 gamma
+roundtrips, and all 8,191 bitstrings through length 12 (133 accepted
+canonical/8,058 rejected). No Agda/parallel_checker acceptance; no
+polynomial Turing machine cost or P!=NP proof implied. The actual
+E20/N21 binary reduction and machine clock remain the original
+K03/K05/K06 critical path.
+
+## 2026-11-07 — total original N21 comparison-count resource bound
+
+The original-word N21 owner now defines `actualAllWordComparisonCount`
+on *every* binary graph word, returning zero endpoint comparisons on
+malformed raw input and the original `maxAddressComparisons m` after a
+successful parse. It proves `allWordComparisonCountBound` and
+`allWordComparisonPolynomialClock` from the source-owned read/parser,
+2m witness budget and native degree-two polynomial witness.
+
+This completes the **input-length polynomial endpoint-comparison-count
+subgate** without assuming n <= input-length or inventing any generic
+verifier cost oracle. The original `Karp21BinaryRuntimeEverything` and
+`Karp21Everything` roots import the new owner.
+
+Still required for full K05: native binary-value parsing and signed
+addition/equality bit costs, executable bit-tape instruction count,
+formal machine simulation and original `PR.polynomialTimeVerifier`
+instantiation. All new proofs remain source-written until checked by
+Agda 2.9 via the repository's parallel checker. No P != NP claim.
+
+## 2026-11-07 — rediscovered original all-word N21 semantic equivalence
+
+PR #1445 already contains the SOURCE-WRITTEN universal theorem
+`Karp21FinFreeAllWordDecoderAgreementExact.n21FinFreeVerifierSameWord`.
+It proves that the actual original typed N21 graph parser/verifier and
+the actual fin-free verifier return the same Boolean for *every*
+original binary graph word and *every* certificate word, including
+malformed words. This is considerably stronger than the older
+conditional E20 image equivalence. No different graph language or
+oracle is introduced.
+
+New owner `Karp21N21SameWordCountedAcceptanceExact` consumes this
+exact original theorem and the new native `ERQ.PolynomialBound` for
+the same original word's endpoint-comparison count. Its
+`allWordsSameVerifierAndPolynomialComparisonCount` packages both
+facts without extra assumptions, and both original `Karp21Everything`
+and `Karp21BinaryRuntimeEverything` import it.
+
+**Updated K06 source status:** original N21 all-word Boolean
+semantics are **SOURCE-WRITTEN** (including malformed graph and
+certificate words), not still awaiting a new semantic proof.
+**Remaining K06:** kernel acceptance, original E20 output compiler's
+fully costed all-word map and Cook–Levin transitive acceptance.
+**Remaining K05:** binary tape step cost of gamma/signed parsing,
+comparisons, signed score, and the explicit machine clock. The
+operation-count polynomial does NOT turn unary Nat operations into
+binary constant-time primitives.
+
+## 2026-11-07 — original raw graph validator cost folded into N21 cut
+
+Two new source-written ORIGINAL-source modules (imported by original
+Karp21Everything and Karp21BinaryRuntimeEverything):
+
+- `Karp21FinFreeRawValidatorComparisonCountExact` instruments the
+  ACTUAL `Runtime.validRawEdges` decisions `u<v`, `v<n` and
+  original `Graph.strictAfter`. `originalRawValidatorValueSame`
+  states literal Boolean equivalence on any raw edge list, including
+  invalid/unsorted/over-range edges. The actual short-circuiting
+  validation count is at most `3*m` top-level predicates.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact` composes
+  the validation count with the genuine `2m(m-1)` original sparse
+  history endpoint-equality count. For every original successfully
+  parsed graph word of length L, it proves the combined count is
+  bounded by `C(L)+5L` primitive comparisons, where `C(L)=2L(L-1)`.
+  Thus the combined number of address/order comparisons is bounded
+  by the explicit polynomial expression `2L(L-1)+5L`.
+
+No separate fabricated finite graph verifier is introduced.
+This joins the source-level original decision and address-operation
+resource accounting. It is NOT yet a binary bit-operation or Turing
+machine polynomial clock: gamma parsing, comparisons on arbitrary
+binary integers, signed cut arithmetic, all malformed parser branches,
+actual strict clock instantiation and Agda acceptance remain to pay.
+
+**2026-11-07 comparator-cost correction:** The source's `Graph.strictAfter`
+contains up to three primitive Nat comparisons (a<u, a=u, b<v),
+not one. The independent `countedStrictAfter`, `strictAfterValueSame`
+and `strictAfterPrimitiveCountBound` follow those exact branches.
+`countedRawValidatorPrimitive`, `primitiveValidatorValueSame`
+and `primitiveValidatorCountBound` now count the original u<v,
+v<n and strictAfter's internal comparisons, yielding 5m rather
+than the 3m *top-level predicate invocation* bound. The combined
+original successful-word envelope is the corrected
+`2L(L-1)+5L`. This is still not binary machine time.
+
+## 2026-11-07 — all-original-input N21 primitive-count polynomial
+
+The previous *successful graph word only* comparison envelope has now
+been strengthened without changing the original parser or graph domain.
+
+- `Karp21FinFreeAllWordValidationClockExact`: mirrors the ACTUAL
+  `readRawGraphWord` original gamma(n), gamma(m), 3m guard,
+  raw-edge read and positive W/suffix branches. It counts original
+  primitive raw-validator comparisons **even when that validator
+  rejects** a malformed graph, and proves for EVERY binary input word
+  `rawValidationCount(word) <= 5 * encodingSize(word)` from the
+  literal original source `readGammaSuffixWithinInput`,
+  `readRawEdgesCountExact` and 3m guard.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact`:
+  `allWordCombinedComparisonCount = original sparse consistency count
+  + original raw validator primitive count`; proves
+  `allWordCombinedComparisonBound` against
+  `C(L) + 5L = 2L(L-1) + 5L` and constructs an ACTUAL
+  `ERQ.PolynomialBound` with coefficient 7/exponent 2:
+  `count(word) <= 7*(1+L)^2` universally.
+- `Karp21N21SameWordCountedAcceptanceExact` now packages that exact
+  all-original-word primitive count with the original universal N21
+  typed/fin-free same-word Boolean theorem. In both Karp source roots.
+
+This is the strongest sound **operation-count** result of this tranche.
+It does NOT yet provide a proper bit-machine runtime: decoding
+`Nat` into unary values, binary comparisons and signed arithmetic
+cannot be treated as unit-cost steps. Nor does it typecheck itself
+without the exact Agda 2.9/parallel_checker receipt.
+
+**Updated K05 status:** original N21 raw validation + endpoint-history
+primitive-comparison count now SOURCE WRITTEN with an all-input
+native quadratic polynomial witness. Remaining: binary implementation,
+each arithmetic operation's bit-cost, end-to-end parser/score runtime,
+and original PolynomialCostModel/InNP certificate.
+**Updated K06 status:** original same-word verifier semantics source
+written, kernel acceptance and full E20/Cook compiler still pending.
+
+**Literal-source guard and referee:** The all-word raw-validator
+clock follows the original `m * 3` header guard exactly; this
+is deliberately not replaced by `3 * m` in Agda's dependent
+`with` branches. `m <= m * 3` is proved separately using native
+Nat order. The original `Graph.strictAfter` three-case decision
+tree is preserved and its internal primitive comparisons counted.
+
+A retained source-aligned independent Python model checked 26,214
+small original `strictAfter`/raw-validator input cases, with literal
+Boolean agreement and `cost <= 5m`. The repository's existing
+`referee_karp21_maxcut.sh` now executes this regression in preflight,
+alongside the prior 63,001 comparison-budget cases. These are
+differential tests only, not Agda kernel acceptance or a Turing-machine
+clock. The new all-word N21 sources are on PR #1474.
+
+**Agda source-alignment repair:** `Karp21FinFreeAllWordValidationClockExact`
+uses the EXACT original header guard `m * 3` and an explicit
+`inputListLengthIsWordSize` proof because the original gamma parser
+uses `Data.List.length`, while the existing complexity model uses
+`FiniteWordSizeExact.encodingSize`. No definitional equality between
+two separately recursive owners is assumed. This and the original
+strictAfter internal primitive-guard proof are part of the exact-head
+compiler acceptance cut, not already certified.
+
+## 2026-11-07 — K05 binary-native parser/comparison implementation (Conway integration PR)
+
+Original head context: `730f62ed27` and subsequent original Karp-21
+comparison-count owners as synchronized in PR #1474.
+
+New source owners:
+1. `Karp21N21BitWeightedComparisonEnvelopeExact` combines the
+   actual original all-word primitive-comparison count with a
+   1+|w|-bit schedule, proving a native degree-three PolynomialBound.
+   It does **not** manufacture a bit-TM implementation.
+2. `Karp21BinaryWordEqualityPrimitiveExact` implements a
+   bit-list equality machine, proves extensional equality and exact
+   symbol-inspection count <= 1+|left|.
+3. `Karp21GammaBinaryEqualitySameValueExact` proves bit-list equality
+   of the ORIGINAL gamma encoded numerals iff their actual Nat values
+   agree. Canonicality follows from existing gamma read/encode proof,
+   not a new encoding.
+4. `Karp21GammaBinaryNativePayloadExact` reads Elias-gamma headers
+   into binary payload words while preserving suffix. It is a
+   structurally terminating alternative to constructing the huge
+   unary `pow2 zeros` Nat in the original `readGamma` reader.
+   It proves roundtrip on actual original gamma encoder outputs
+   and an all-input bound of 1+|word| input-symbol inspections
+   for one gamma token.
+
+The original roots `Karp21Everything` and
+`Karp21BinaryRuntimeEverything` import these owners, and the
+original referee includes focused checks and executable independent
+controls.
+
+Independent checks ACTUALLY EXECUTED in this session:
+- original Conway/gamma reference: 103 Conway equalities, 18 capped,
+  and 781 gamma strict roundtrips;
+- new binary word equality: 16,129 bounded binary word pairs, exact
+  equality and bit-inspection-cost checks;
+- new binary gamma: ALL 8,191 words of lengths 0..12, exact
+  original parser numeric result and suffix agreement, linear
+  inspection bound, including malformed/truncated inputs.
+
+**Full remaining math**: The new gamma parser's *all-word*
+numeric correspondence (not just encoder images); native binary
+less-than/strictAfter transport for original endpoint validation;
+per-field operand width and tape movement accounting; original
+signed-zigzag score accumulation and comparison with threshold;
+whole graph parser/certificate loops; E20 all-word transducer and
+K00 original Cook–Levin clock; the other Karp-21 edges and memberships.
+No `PR.polynomialTimeVerifier` or `PR.InNP` inhabitant has been
+created. No Agda/parallel_checker kernel acceptance is available
+in the current connected GitHub environment.
+
+## 2026-11-07 — native signed parser, no unary-magnitude fabrication
+
+After the native gamma payload reader, the new
+`Karp21GammaBinaryNativeSignedExact` discharges the executable
+sign/magnitude *representation construction* for source-style
+zigzag using the LAST bit of the original Elias-gamma(n+1) payload.
+It retains the canonical literal suffix and proves a source
+encoder-image equality, with structurally linear last-bit extraction.
+No `pow2`-sized Peano Nat, repeated `even`/ `half` loops, or
+original graph-language replacement is used.
+
+The original source roots and golden referee now import this owner.
+All 8,191 binary strings through length 12 passed an independent
+signed-token/old-zigzag/suffix-equivalence check. This is a bounded
+regression, not a universal source proof of the original decoder's
+numeric semantics nor a kernel receipt.
+
+**Exact remaining N21 promotion (updated):**
+(1) all-word gamma / zigzag numerical weld for malformed and valid
+inputs, while retaining the binary-native execution path;
+(2) canonical binary less-than and `strictAfter` agreement on the
+same original graph fields; (3) bit-native signed add/threshold,
+certificate verifier, and actual bit-tape step budget over
+`|graphWord|+|certificate|`; (4) native `PR.InNP` polynomialTimeVerifier
+inhabitant under selected physical machine cost model and kernel
+acceptance. Karp E20 and original Cook–Levin clocks remain separate.
