@@ -326,3 +326,61 @@ pre/post or suitable comparative public-opinion/media outcome dataset. Follow
 with explicit overlap/selection/measurement validity, uncertainty and source
 attribution. Do not try to substitute another finite logical proof for those
 missing historical measurements.
+
+## 7 November follow-up: original 1998 API response and later independent activity
+
+A new contested-attribution tranche is integrated in
+`CCDCOEP3ClimateContestedAttributionExact.agda`.
+
+Source records, in **separate** evidentiary classes:
+
+1. The 27 April 1998 Congressional Record preserves the 3 April 1998
+   draft climate communications action plan and its proposed strategy.
+   Source: https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm
+2. The 1 May 1998 public-radio `Living on Earth` programme reports the
+   API vice-president's response that meetings and correspondence were
+   personal initiatives of a lower-level employee. This is an
+   **attributed contemporary institutional counterclaim** concerning
+   authorisation; it does not erase the document or prove non-adoption.
+   Source: https://www.loe.org/shows/segments.html?programID=98-P13-00018&segmentID=1
+3. The 5 September 2017 `Washington Post` investigation independently
+   reports later Cooler Heads Coalition advocacy, funding, interviews
+   and political activity. Its quoted denial of overarching funder
+   direction is retained as an attributed participant account. This is
+   not a dated implementation receipt for the *specific* 1998 plan.
+   Source: https://www.washingtonpost.com/investigations/a-two-decade-crusade-by-conservative-charities-fueled-trumps-exit-from-paris-climate-accord/2017/09/05/fcb8d9fe-6726-11e7-9928-22d00a47778f_story.html
+4. The 23 October 2019 House hearing is a primary record of **later
+   testimony and legislative scrutiny**, not proof that the 1998
+   plan was executed or causally effective.
+   Source: https://www.govinfo.gov/content/pkg/CHRG-116hhrg38304/html/CHRG-116hhrg38304.htm
+
+Original source-kind segregation and a positive discriminator are
+implemented. So is a finite pair of observationally equivalent
+authorisation worlds demonstrating that the published draft cannot
+identify API-wide approval. The new source code preserves
+the original candidate-source categories without fabricating an
+approval/funding/implementation receipt.
+
+The structured case manifest now includes a **seven-question status
+ledger** covering the public draft, planning, disputed API approval,
+independently reported later coalition activity, 1998 execution,
+campaign exposure/impact, and any purported link to Kyoto/Paris
+policy outcomes. Distinct time and source identity are mandatory.
+The fail-closed validator explicitly rejects a claim that source
+presence proves execution or measured impact. The updated Golden
+regression and checker import the contested-attribution owner.
+
+**Additional exact empirical frontier:** locate the source-pinned
+minutes/approvals for the proposed April 17 meeting, API governance
+adoption and funding authorisation; trace any particular plan budget
+through realised payments and communications activity; identify
+actual participants/recipient audiences and independent pre/post
+measurements; supply source review and time-specific PNF equivalence
+certificates; assess interference and confounding. A 2017 policy
+outcome cannot be assigned to an undocumented 1998 treatment sequence
+merely from shared participants and a similar objective.
+
+**Verification:** GitHub source read-back/manifest consistency checks
+are not a parallel_checker receipt. The canonical Agda and Python
+scripts have not been executed from a full checkout in this assistant
+environment, which has no network path to git and no Agda executable.
