@@ -106,7 +106,10 @@
     "documented_joint_planning": "source_supported",
     "plan_execution": "not_identified",
     "api_wide_authorisation": "contested_not_identified",
-    "later_coalition_advocacy": "bounded_reported"
+    "later_coalition_advocacy": "bounded_reported",
+    "separate_campaign_public_materials": "source_bounded_documented",
+    "document_content_divergence": "published_study_result",
+    "1998_API_draft_identified_effect": "not_identified"
   },
   "follow_up_discriminator": {
     "id": "implementation_and_command_archive",
@@ -340,7 +343,9 @@
     "congressional_draft_to_realised_policy_effect": "not_identified",
     "congressional_draft_to_implementation": "not_identified",
     "1998_draft_to_2017_later_coalition_activity": "no direct execution identity; distinct time, organisation and source scope",
-    "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect"
+    "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect",
+    "1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft": "independent events; no shared-execution identity admitted",
+    "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate"
   },
   "followup_evidence_20261107": [
     {
@@ -469,6 +474,98 @@
       "id": "plan_caused_Kyoto_or_Paris_policy_outcome",
       "status": "not_identified",
       "source_ids": []
+    },
+    {
+      "id": "separate_climate_advocacy_implemented_elsewhere",
+      "status": "documented_separate_examples_not_API_draft_execution",
+      "source_ids": [
+        "ice_1991_advertising",
+        "gcc_1995_public_handout",
+        "cooler_heads_1998_event_invitation",
+        "gcc_1996_primer_review"
+      ]
+    },
+    {
+      "id": "corporate_message_divergence_in_published_corpus",
+      "status": "quantified_document_content_not_causal_effect",
+      "source_ids": [
+        "supran_oreskes_2017"
+      ]
     }
-  ]
+  ],
+  "independent_activity_and_document_measurements": [
+    {
+      "id": "ice_1991_advertising",
+      "event_year": 1991,
+      "organisation": "Information Council for the Environment (ICE)",
+      "source_url": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "evidence_type": "archived_campaign_documents_and_ads",
+      "documented_observation": "Archived 1991 advertising materials and archive summary document a coal/utility-backed public media campaign; archive describes media material for named US locations.",
+      "implementation_class": "separately_documented_public_communication",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "archival_index_plus_original_material_links_not_yet_full_fidelity_PNF",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "archival index section May June 1991 ICE Campaign; internal links to advertisements"
+    },
+    {
+      "id": "gcc_1995_public_handout",
+      "event_year": 1995,
+      "organisation": "Global Climate Coalition",
+      "source_url": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "evidence_type": "archived_public_pamphlet",
+      "documented_observation": "1995 Global Climate Coalition public handout Climate Change: Your Passport to the Facts is indexed with image/document links; archive reports distribution at UN climate convention.",
+      "implementation_class": "separately_documented_published_material",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "archival_index_plus_original_material_links_not_yet_full_fidelity_PNF",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "archival index 1995 GCC handout, with linked source material"
+    },
+    {
+      "id": "cooler_heads_1998_event_invitation",
+      "event_date": "1998-10-09",
+      "organisation": "Cooler Heads Coalition",
+      "source_url": "https://climateinvestigations.org/wp-content/uploads/2017/09/CHPDF.pdf",
+      "evidence_type": "original_public_invitation_scan",
+      "documented_observation": "Contemporaneous invitation names a 9 October 1998 congressional/media briefing on extreme weather with announced guest lecturer and listed sponsoring organisations.",
+      "implementation_class": "invitation_and_scheduled_event_documented",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "original_invitation_document_observed_attendance_delivery_unverified",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "single-page Cooler Heads Coalition briefing invitation; Cannon House Office Building"
+    },
+    {
+      "id": "gcc_1996_primer_review",
+      "event_year": 1996,
+      "organisation": "Global Climate Coalition Science and Technology Advisory Committee",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1996-science-technology-january-february-meetings/",
+      "evidence_type": "archived_meeting_materials_and_draft_revision",
+      "documented_observation": "Archive synopsis reports the committee's deletion of a discussion of contrarian theories in a planned primer; editorial decision is source-scoped and does not measure public response.",
+      "implementation_class": "documented_editorial_revision_report",
+      "same_plan_as_1998_api": false,
+      "source_review_status": "source_archive_synopsis_meeting_scans_linked_but_not_transcribed",
+      "audience_persuasion_effect": null,
+      "primary_item_locator": "GCC 1996 STAC meeting materials archive"
+    }
+  ],
+  "published_document_content_measurement": {
+    "id": "supran_oreskes_2017",
+    "journal": "Environmental Research Letters",
+    "title": "Assessing ExxonMobil’s climate change communications (1977–2014)",
+    "publication_date": "2017-08-23",
+    "doi": "10.1088/1748-9326/aa815f",
+    "url": "https://doi.org/10.1088/1748-9326/aa815f",
+    "correction": "2020 Environ. Res. Lett. 15 119401 noted by publisher; precise coding correction not reanalysed here",
+    "document_count": 187,
+    "reported_percentages": {
+      "peer_reviewed_acknowledge_human_cause": 83,
+      "internal_acknowledge_human_cause": 80,
+      "advertorial_acknowledge_human_cause": 12,
+      "advertorial_doubt_human_cause": 81
+    },
+    "outcome_type": "document_coding_by_source_type_not_people",
+    "has_original_microdata_in_repo": false,
+    "causal_effect_on_readers": null,
+    "source_scope": "ExxonMobil document corpus, 1977–2014; do not transport conclusions to all 1998 API draft participants",
+    "independent_followup_replication": null
+  }
 }
