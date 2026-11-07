@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E32), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E33), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -66,9 +66,9 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | ID | Exact target (proposed proof-owner name) | Requirement | Depends | State |
 |---|---|---|---|---|
 | G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
-| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | Same Round11/Bishop sine-cosine owner found; classical-object weld and π sample calculation OPEN |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E25 Bishop same-object quartic conditional proof, E29 quadruple-angle reduced to concrete Round11 cosine/sine double-angle leaves; those source-native analytic producers and kernel OPEN |
-| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E02 paper smoothness; Round11 derivative authority reusable only after same-object weld; sqrt/positivity kernel OPEN |
+| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | E33 actual Bishop trig/complex value constructor and source-written reduction from ONE imaginary-axis complex exp multiplicativity; selected literal complex Cauchy series theorem OPEN |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E25/E29 E33 concrete Bishop Gielis quartic/quadruple-angle now reducible to shared Round11 Pythagorean + ONE imaginary exp additivity source; that complex analytic theorem and kernel OPEN |
+| G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | E33 source-native Bishop imaginary-axis multiplication reducer plus existing real expAdd; actual Bishop radial sqrt positivity and derivative/analytic source OPEN |
 | G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
 | G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E28 exact four-quarter m9 Fourier and E30 original-C3-derived six-phase CRT cyclotomic Fourier SOURCE; full 36-mode field/reconstruction OPEN |
@@ -85,7 +85,7 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E28 selected four-dimensional 9th-mode Fourier and E30 six-dimensional C6=C2×C3 exact transform SOURCE; full C36 36-character Agda scalar OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E32 ledger, eleven native Agda Gielis roots registered; independent exact finite rational checks; Agda kernel acceptance not available; CI/HTML deferred |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E33 ledger, twelve Gielis Agda source roots registered; no native kernel receipt; CI/HTML deferred |
 
 ## Critical dependencies / max-cut
 
@@ -648,3 +648,51 @@ promoted beyond the available measurement evidence.
 Gielis proof roots are now registered under the
 repository's existing parallel checker. An Agda
 kernel receipt has not been produced in this environment.
+
+
+## E33 — reduce Gielis trig to ONE actual imaginary-axis Bishop exponential law
+
+The original BishopExponentialCauchyProductExact
+already contains bishopExpAdd and
+bishopExpTimesNegativeIsOne for the REAL exponential.
+The selected BishopSetoidComplexExact constructs
+literal Cartesian Bishop complex values, while the
+selected Round11 power series provide the *actual*
+Bishop sine and cosine.
+
+DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda
+imports these original analytic donors and
+defines E_B(ix)=(cos_B x,sin_B x) in the existing
+Bishop complex carrier. Given **one** genuine
+same-source equality
+
+\[
+ E_B(i2x)\simeq E_B(ix)\,E_B(ix)
+\]
+
+its real/imaginary setoid projections yield both
+native cos(2x) and sin(2x) doubling formulae.
+The repository's existing Bishop sine/cosine
+setoid-congruence theorem transports the proven
+Bishop ring identity 4x≈2(2x). The E29
+consumer and E25 polynomial/quartic source then
+prove the selected Gielis 4(cos⁴+sin⁴)=3+cos4x
+identity on the literal selected Round11 object.
+
+**Highest-alpha analytic leaf:** Construct this
+imaginary-axis **COMPLEX** series Cauchy product
+and prove it identifies with the existing Bishop
+real sine/cosine power-series coefficients and
+limits; the real bishopExpAdd theorem is a
+donor, NOT a substitute. The previously
+identified shared Round11 same-function
+Pythagorean weld, Bishop pi/sqrt/radial
+integration and strict Agda acceptance remain.
+
+This reduces the G03 trig portion from
+three independent 'double-angle inputs' to
+one exact, falsifiable source-native analytic
+theorem. The reducer source is written,
+but the complex multiplication input itself
+has **not** been constructed as a proof
+and cannot be claimed closed.
