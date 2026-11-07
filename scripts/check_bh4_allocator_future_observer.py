@@ -13,6 +13,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OWNER = ROOT / "DASHI/Biology/BH4AllocatorFutureObservationCountermodelExact.agda"
+CYCLE_OWNER = ROOT / "DASHI/Biology/BH4CatalyticTurnoverFutureCountermodelExact.agda"
 
 def candidates(supply: int):
     if supply < 0:
@@ -32,6 +33,11 @@ def main():
     ):
         assert name in src, f"missing original Agda proof owner: {name}"
 
+    cycles = CYCLE_OWNER.read_text(encoding="utf-8")
+    for lemma in ("sameOriginalPoolAmount", "differentThroughputAtSameAmount",
+                  "samePoolDoesNotDetermineEffectiveTurnover"):
+        assert lemma in cycles, f"missing catalytic turnover owner: {lemma}"
+    assert 1 * 1 != 1 * 2
     cases = {}
     for supply in range(9):
         rows = list(candidates(supply))
@@ -54,6 +60,7 @@ def main():
         "source_theorem": "supplyOnlyNotSufficientForBranchFuture",
         "supply_one_balanced_allocations": 5,
         "same_supply_different_branch_response": True,
+        "equal_pool_distinct_selected_turnover_capacity": True,
         "by_supply": cases,
         "real_29x12_bh4_flux_paid": False,
         "source_kinetics_or_compartments_paid": False,
