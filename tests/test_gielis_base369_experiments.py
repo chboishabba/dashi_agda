@@ -670,3 +670,27 @@ def test_native_selected_fourier_and_bishop_double_angle_reuse():
     assert "BishopConcreteDoubleAngleInputs" in bishop
     assert "bishopCosineQuadrupleFromTwoDoubleAngles" in bishop
     assert "bishopGielisFromPythagoreanAndTwoDoubleAngles" in bishop
+
+
+def test_selected_six_phase_CRT_Fourier_reuses_native_C3():
+    from gielis_six_phase_cyclotomic_exact import receipt
+    r=receipt()
+    assert r["status"]=="exact_C6_CRT_cyclotomic_Fourier_reuse_passed"
+    assert r["sample_vectors_exact"]==729
+    assert r["site_index_even"]==[0,4,2]
+    assert r["site_index_odd"]==[3,1,5]
+    assert r["mode_indices"]==[0,2,4,3,5,1]
+    assert r["componentwise_full_C6_roundtrip"]
+    assert r["crosscheck_with_direct_Q_zeta36_DFT"]
+    assert not r["full_C36_DFT_accepted"]
+
+
+def test_selected_C6_native_source_imports_original_C3_cyclotomic_inversion():
+    source=(ROOT/"DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda").read_text()
+    assert "DASHI.Biology.Physical.C3CubeCyclotomicFourierExact" in source
+    for term in ("C3.oneDimensionalFourierInversion",
+                 "C3.oneDimensionalFourierForwardInverse",
+                 "sixFourierInversion","sixFourierForwardInverse",
+                 "reconstructSelectedSixSamples"):
+        assert term in source
+    assert "Phase.p18-4" in source and "Phase.p18-5" in source
