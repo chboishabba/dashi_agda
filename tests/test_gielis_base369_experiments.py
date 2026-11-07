@@ -737,3 +737,32 @@ def test_native_selected_exact_rational_gielis_classifier_source():
                    "positiveAxisBoundary9"):
         assert symbol in source
     assert "postulate" not in source.split("open import")[1]
+
+
+def test_exact_signed_photon_wall_torque_in_SI():
+    from gielis_exact_signed_optical_torque import receipt,torque_event
+    r=receipt()
+    assert r["status"]=="exact_SI_signed_angular_impulse_event_passed"
+    assert r["rotation_pi_invariant"]
+    assert r["interchange_in_out_negative_when_reflectivity_one"]
+    assert not r["actual_power_or_hit_measurement"]
+    from fractions import Fraction as F
+    assert F(r["positive_torque"]["exact_signed_torque_Nm"]) == F(18000,299792458)
+    assert F(r["negative_torque"]["exact_signed_torque_Nm"]) == -F(18000,299792458)
+    assert F(r["zero_torque"]["exact_signed_torque_Nm"]) == 0
+    with pytest.raises(ValueError):
+        torque_event(100,1,0,0,1,0,-1,"2")
+
+
+def test_native_original_cross_to_SI_torque_weld():
+    source=(ROOT/"DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda").read_text()
+    assert "DASHI.Physics.Foundations.R3HodgeCrossExact" in source
+    for theorem in ("wallLeverIsCrossZ","crossAntisymmetry",
+                    "noDeflectionNoImpulse",
+                    "swapIncomingOutgoingReversesSignedLever",
+                    "rotatePositionAndRayPiPreservesSignedLever",
+                    "modelWallTorqueSIMagnitude",
+                    "existingHodgeCrossConvention"):
+        assert theorem in source
+    assert "SIWeld.modelOpticalTorqueHasActualMagnitude" in source
+    assert "ExistingSI.mechanicalQuantityToSI" in source
