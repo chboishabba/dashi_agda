@@ -347,3 +347,49 @@ alone, but is NOT a quantitative numerical eigenvalue
 error guarantee for the existing binary64 run.
 Source-native Agda compactness and actual numerical
 boundary interval certification remain named leaves.
+
+
+## 2026-11-07 final current mathematical cut — E28–E35
+
+The selected existing Phase36 m9 Nyquist data now has a native rational
+4x4 Fourier operator and inverse (E28); selected C6 modes now
+have a full native C2×C3 Fourier transform/inverse using the pre-existing
+C3CubeCyclotomicFourierExact field/theorem (E30). Exact original
+Q(zeta36) interoperability checks covered 625+729 samples and
+729 direct C6 DFT comparisons, but these are SUBSPACES of the still
+outstanding full C36 Fourier operator.
+
+The actual original Gielis finite-difference solver now uses
+a strict Fraction-only unshrunken analytic rational grid classifier
+for EVERY positive integer mode; the selected m3/6/9 n41 and m3 n61
+masks agree with legacy (792,779,792,1788 sites) and contain no
+binary64 radial classification tolerance. E27's paper-level fixed-k
+continuum argument thus targets the literal ideal mathematical domain.
+The original finite matrix eigenvalue certificate remains a different
+exact result from any quantitative continuum error rate.
+
+The optical force/torque magnitude already uses canonical SI c and
+Mechanical.Quantity; E32 now replaces abstract deflection with the
+literal signed planar wall moment x(iy-eta oy)-y(ix-eta ox).
+It is right-hand-rule Hodge compatible and keeps torque N m distinct
+from energy J, without identifying a hypothetical input as measured.
+
+The same original Bishop complex carrier now has explicit algebra
+laws for Cauchy multiplication (E34), and the Gielis quartic trig
+identity reduces to one actual imaginary-axis complex exponential
+multiplication proof (E33), reusing the existing REAL exponential
+Cauchy theorem correctly rather than assuming it proves complex exp.
+
+For the continuum selected special Gielis domain,
+area(Ω_m)=sqrt(2)pi exactly for every positive integer m.
+E35 now proves the stronger paper bound λ1(Ω_m)>224/55
+by Faber-Krahn and exact alternating Bessel J0/J1 inequalities.
+Native finite rational Bessel checks are source-written; the
+physical inverse-square metre scaling consumer now uses this stronger
+lower bound. This does not assign a physical wave frequency.
+
+14 native Gielis Agda roots are in the pre-existing parallel checker.
+The full analytic Bishop trig/weld and native C36 scalar, native
+continuum compactness/quantitative mesh rate and independent measured
+optical source calibration remain exact outstanding acceptances.
+The source-written Agda terms have not been kernel-accepted here.
