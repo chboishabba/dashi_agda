@@ -234,3 +234,20 @@ Prior priority labels P0–P3 were too coarse: SOURCE-VERIFIED original owners a
 - [ ] Agda native Golden receipt outstanding; CI and HTML excluded from active priority by user direction.
 
 See `Docs/support/reference/GielisBase369ProofTheorems.md` E36 and `GielisBase369Roadmap.md` corrected G02/G03/G04/G08/G09/G10/G11/G12/G15/G16/G19/G21.
+
+
+## 2026-11-07 selected Gielis E37–E41 actual original theorem transport
+
+- [x] P0 twin-record Bishop complex ABI: `GielisBishopComplexSeriesSameCarrierExact` proves definitional to/from series and setoid records, same original +/*/units, and transports the *existing* `complexSeriesLimitConvergence`/`Unique`.
+- [x] P0 Round11 actual expC bridge: `GielisRound11ActualComplexExponentialExact` constructs the literal Round11 trig dataset and existing Machin pi on `BishopSetoidComplexTranscendentals`; original `bishopExpZero` implies `expC(iθ)≈cos_B θ+i sin_B θ` in both real/imag components.
+- [ ] P0 selected complex exponential multiplicativity `expC(i2θ)≈expC(iθ)^2`, Machin pi first sine-zero/period, variable 3+cos(mθ) reciprocal sqrt and polar integral. No reproof of original real exp Cauchy or complex series convergence.
+- [x] P1 exact algebraic full C36 Fourier inversion: all 1296 cyclotomic character kernel cells, all 36 forward/inverse basis vectors and arbitrary C36-valued input by linearity. `gielis_cyclotomic36_unrestricted_exact.py`.
+- [ ] P1 native Agda full 12D Q(zeta36) scalar and 36-character-resolution instance (reuses generic existing Shor/NSTriad Fourier).
+- [x] P2 first-eigenvalue error: exact rational a posteriori `|lambda_h-lambda_c|<max(0,1273/264-Lh,Uh-224/55)` for m3 original selected actual lattice; `gielis_certified_continuum_fd_error.py`.
+- [ ] P2 same-source native minmax/compactness, explicit mesh-order convergence constants; coarse quantitative upper is not an O(h^p) bound.
+- [x] P3 same-event original source adapter: `gielis_kozyrev_same_event_original_owner.py` loads Git-blob-verified PR1404 RayLedger, compares exact Fraction independent event force/torque/energy/angular outputs and fails closed without that source. Synthetic 2-hit model: tau=1080/149896229 Nm, absorption=2160 W, escape=6840 W, exact residuals zero.
+- [ ] P3 original PR1404 owner replay on actual checkout; original Gielis simulator-produced multi-hit event file and independently measured/calibrated physical source if empirical conclusion is asserted.
+- [ ] GOLDEN native Agda elaboration of 16 source roots; source-level audits are not kernel receipts. No CI or HTML work per current scope.
+
+Canonical G01–G21 P0–P5/D0–D7: `Docs/support/reference/GielisBase369Roadmap.md`.
+Canonical E01–E41 proof/acceptance notebook: `Docs/support/reference/GielisBase369ProofTheorems.md`.
