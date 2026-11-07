@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E36), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E41), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -66,26 +66,26 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | ID | Exact target (proposed proof-owner name) | Requirement | Depends | State |
 |---|---|---|---|---|
 | G01 | `gielisFiniteKernelAccepted` | Native `--safe` on `GielisBase369FiniteExact`, `NyquistPhase36Exact`, `ExistingOwnersWeldExact`; no banned pragmas/holes | owners | SOURCE; kernel receipt OPEN |
-| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | RECOVERED: BishopSetoidComplexExact.expC, BishopComplexSeriesConvergenceExact complexSeriesLimit/Unique, BishopExponentialCauchyProductExact.bishopExpAdd, BishopMachinPiRationalWindowExact (3<π_M<22/7); exact C18 selected sample value/π phase identity still OPEN |
-| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | RECOVERED genuine Bishop real exponential Cauchy theorem and complex componentwise convergence; E33 reduces to one selected imaginary-axis complex multiplication/sine-cosine power-series weld, NOT generic complex convergence |
+| G02 | `sampledCosine369SameObject` | Prove for each 18-point index `2 cos(2π m j/18) = signal_m j` on *ordinary Bishop ℝ* for m=3,6,9 | G01, Bishop π/trig | E37 proves explicit original Bishop complex twin-record ABI and transports existing complex series limit/unique; E41 proves actual Round11 expC(iθ)≈cosθ+i sinθ with existing bishopExpZero; selected π-period and exp multiplication remain |
+| G03 | `gielisSpecialCaseIdentity` | Prove cos⁴x+sin⁴x=(3+cos4x)/4 on same ordinary real carrier; introduce sqrt and reciprocal | Bishop trig | E41 connects Round11 literal expC to sine/cosine (not just synthetic pair), E33 reduces quartic to same-object complex exp double law; only exp addition/multiplication and concrete Bishop branch remain analytically OPEN |
 | G04 | `gielisPositiveSmooth` | 1≤r≤√2; positive denominator, existence and continuous/differentiable radial graph, nondegenerate tangent | G03 | RECOVERED BishopNatSquareRootSemanticSquareExact proves sqrt(N)^2=N for natural N; does NOT yet construct uniform positive reciprocal sqrt(3+cos mθ) or its differentiated graph |
 | G05 | `gielisCyclicDihedral` | Exact continuous rotation/reflection and compatibility with C18 maps; use existing dihedral owner | G02,G04 | Finite dihedral SOURCE and continuous paper theorem; Bishop same-object phase lift OPEN |
 | G06 | `phaseGridAliasingBoundary` | At N=18 sin(9θ_j)=sin(27θ_j)=0; at N=36 sin9(θ_1)=+1, sin27(θ_1)=-1; no unjustified bandlimited theorem | G01 | Finite witness SOURCE; exact symbolic receipt; kernel OPEN |
-| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E28 exact four-quarter m9 Fourier and E30 original-C3-derived six-phase CRT cyclotomic Fourier SOURCE; full 36-mode field/reconstruction OPEN |
+| G07 | `finiteFourierProjector` | Native ℚ^18/finite-character linearity, idempotence, self-adjointness and `P_a P_b=P_lcm`; reuse finite Fourier inversion owner | G01 | E38 full unrestricted Q(zeta36)^36 exact algebraic inversion via original 1296 character entries and all 36 basis vectors; native Agda C36 scalar/character instance OPEN |
 | G08 | `gielisEqualArea` | Area=(1/2)∫₀²πr² dθ=√2π for all positive integer m; real periodic integration | G03,G04 | RECOVERED BishopPolarJacobianSameTrigWeldCompilerExact pointwise determinant=radius; BishopPolarMeasureSourceWeldReducedExact explicitly flags remaining measure identification FALSE; Gielis integral/phase domain still OPEN |
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | RECOVERED same-trig Bishop polar Jacobian/derivative compiler; remaining exact Gielis star-boundary curvature/normal transport, not generic polar derivative |
-| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | RECOVERED ShorCyclicCharacterResolutionExact cyclic scalar reduction, ShorCyclicDFTLeanCrossProverWeldExact external normalized DFT proof, NSTriadKNLuoFiniteFourierInversionFromResolutionExact and Parseval; E28/E30 C4/C6 done; concrete C36 12D scalar+resolution remains |
-| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | RECOVERED BalabanClayGate4FiniteHermitianRayleighSpectrumExact finite Hermitian Rayleigh owners and Mosco route ledgers; E35 classical Faber–Krahn bound; actual Dirichlet form/density native instance OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | RECOVERED YM carrier Mosco/spectral transport interfaces but some explicitly flag physical density/normal resolvent FALSE; E31 exact grid mask, E27 mathematical fixed-k proof; selected native Gielis minmax/quantitative mesh error still OPEN |
+| G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E38 original 12-rational-coordinate Q(zeta36) arbitrary 36-signal full inversion exact computationally; Shor/NSTriad generic native Fourier already proved, only full scalar/character Agda instance OPEN |
+| G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E35 continuum m3 bounds 224/55<λc<1273/264; E39 a posteriori strict rational actual finite-grid continuum |λh−λc| upper from original E17 finite certificates, no mesh-order rate |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E39 quantitative rational selected m3 finite n41/n61 continuum eigenvalue error envelope now SOURCE, not O(h^p); exact original raster E31 and E27 qualitative convergence; native compactness/mesh-order interpolation remain |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | RECOVERED ORIGINAL Kozyrev PR #1404 scripts/kozyrev_optical_event_ledger.py RayLedger hit power/c, absorption and signed cross moment; E32 Agda signed SI law duplicates its physical formula; event-level same-object integration remains |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | RECOVERED PR #1404 geometry_optimizer, first_forward_intersection_referee, solar_bisolver, event ledger and synthetic/statistical checks; not an independently measured input or uncertainty receipt |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E40 exact original Kozyrev PR1404 RayLedger SAME-EVENT parity adapter using Git-blob-verified source, signed SI 2-hit torque exact; actual PR owner runtime replay requires separate original checkout; measured parameters OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E40 exact synthetic 2-hit force/torque/absorption/energy/angular budget, original RayLedger same-event test fail-closed; true apparatus observations, independent uncertainty and physical Pareto OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
-| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | RECOVERED ShorCyclicCharacterResolutionExact, Lean DFT weld, finite Fourier inversion-from-resolution and Parseval; native full C36 root-of-unity scalar-resolution remains narrow OPEN |
+| G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E38 complete original cyclotomic C36 arbitrary sampled-signal algebraic inversion; generic native Shor character-resolution+Parseval paid; native C36 scalar instance and continuous Shannon hypothesis OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E36 ledger; 14 Gielis native source roots; audit distinguishes paid source owners and genuinely missing identification; no Agda acceptance; CI/HTML deferred |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E41 exact proof/source audit, 16 Gielis Agda sources registered in existing parallel_checker; original Kozyrev PR1404 runtime parity NOT CHECKED without exact source checkout; no kernel acceptance |
 
 ## Critical dependencies / max-cut
 
@@ -795,3 +795,90 @@ receipts if empirical prediction is claimed.
 are not kernel-accepted merely because original imported owner
 files exist. Maintain CI and HTML outside the *active* priority
 cut per user request, without removing provenance constraints.
+
+
+## 2026-11-07 E37–E41 exact max-cut handoff: current phase and deliverables
+
+**P0 Bishop** — The generic complex-series convergence already existed;
+E37 now proves the explicit twin-record isomorphism, field operation
+compatibility and actual convergence/uniqueness transport.
+E41 proves the original Round11 configured
+\(\exp_C(i\theta)\simeq\cos_B\theta+i\sin_B\theta\)
+using the already-proved Bishop \(\exp_B(0)\simeq1\).
+The honest minimal remaining analytic leaf is **actual complex
+exponential multiplicativity on this configured function**,
+equivalently selected sine/cosine addition; also Machin
+π-period identification, variable positive reciprocal sqrt
+and selected Gielis polar integral. Do not reconstruct real
+exp Cauchy, complex convergence or pointwise polar Jacobian.
+
+**P1 Fourier** — E38 uses the original exact
+\(\mathbb Q[x]/(x^{12}-x^6+1)\) representation and
+all 1296 exact character-resolution entries to
+establish full two-sided 36-mode inversion on all 36
+basis vectors, hence arbitrary vectors by linearity.
+E28/E30 are valid subspaces. The sole native full
+C36 remaining is SAME-CARRIER Agda scalar construction
+and instantiation of existing Shor/NSTriad generic
+cyclic character resolution. The restricted seven-mode
+numerical test is no longer the full Fourier frontier.
+
+**P2 Spectrum** — E39 composes two **independent**
+rigorous rational theorem bounds into
+\[
+|\lambda_h-\lambda_c|<
+\max(0,1273/264-L_h,U_h-224/55)
+\]
+for any accepted m3 finite-grid E17 certificate.
+This is a quantitative finite n41/n61 absolute and
+relative error, not a mesh-order \(O(h^p)\) rate.
+The original mask is now exact rational. The true
+remaining native spectrum leaves are Gielis
+same-form minmax/compactness and sharper mesh-order
+interpolation constants, not generic Rayleigh/PF.
+
+**P3 physical** — Original Kozyrev PR1404
+already owns the conventional P/c event power,
+reflectivity, absorption, angular moment and
+first-forward collision. E40 adds a source-Git-blob-
+verified exact Fraction event replay of the actual
+original RayLedger with per-hit geometric data.
+The synthetic 2-bounce example gives
+\(\tau_z=1080/149896229\;\mathrm{N\,m}\),
+2160 W absorbed and 6840 W escaped, with exact
+zero momentum, angular and energy residuals.
+The original PR1404 RayLedger is on another Git
+ref; runtime parity is **NOT CHECKED** until that
+source worktree is supplied. No physical
+measurement/calibration or original multi-bounce
+Gielis-produced event stream was fabricated.
+
+### Phase P0–P5 / deliverable acceptance correction
+
+- P0 prior-owner identification: CLOSED, E36.
+- P1 exact finite Nyquist and original Fourier:
+  unrestricted C36 exact computational result E38;
+  original source Agda kernel acceptance OPEN.
+- P2 Bishop continuous geometry: actual series-record
+  and trig expC selected identity E37/E41;
+  complex exp multiplication and π/variable-root/
+  polar integration OPEN.
+- P3 spectral PDE: exact raster geometry and
+  same-shape finite first-eigenvalue bound E17/E26/E31,
+  qualitative continuum E27, explicit rational
+  a posteriori error E39; native continuum
+  convergence/rate-sharp proof OPEN.
+- P4 optical model: same-event original owner
+  adapter E40; actual PR1404 runtime receipt and
+  physical calibration/independent source OPEN.
+- P5 empirical publication: original theoretical
+  mathematics may be reported with explicit
+  acceptance; real-world claims require measured
+  original apparatus and uncertainties.
+
+D0–D7 remain listed in the canonical G01–G21
+table; this section clarifies evidence levels
+without renaming deliverables. Sixteen native
+Gielis Agda source roots are configured in
+the existing parallel checker, **not kernel
+accepted in this environment**.
