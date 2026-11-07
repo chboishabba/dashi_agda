@@ -109,7 +109,9 @@
     "later_coalition_advocacy": "bounded_reported",
     "separate_campaign_public_materials": "source_bounded_documented",
     "document_content_divergence": "published_study_result",
-    "1998_API_draft_identified_effect": "not_identified"
+    "1998_API_draft_identified_effect": "not_identified",
+    "preplan_survey": "reported_in_original_draft_not_independently_validated",
+    "actual_1998_plan_expenditure": "not_identified"
   },
   "follow_up_discriminator": {
     "id": "implementation_and_command_archive",
@@ -491,6 +493,13 @@
       "source_ids": [
         "supran_oreskes_2017"
       ]
+    },
+    {
+      "id": "charlton_preplan_survey_reported",
+      "status": "reported_survey_not_causal_effect",
+      "source_ids": [
+        "congressional_record_1998_04_27"
+      ]
     }
   ],
   "independent_activity_and_document_measurements": [
@@ -574,5 +583,39 @@
       "doubt_count": 21,
       "denominator_note": "12% (3/26) acknowledgement and 81% (21/26) doubt are among the 26 advertorials taking a position; 36 is the total examined advertorials, NOT the denominator for these two percentages."
     }
+  },
+  "reported_preplan_survey": {
+    "source_id": "congressional_record_1998_04_27",
+    "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "online_lines": [
+      533,
+      549
+    ],
+    "named_pollster": "Charlton Research",
+    "reported_sample_size": 1100,
+    "reported_sample_description": "informed Americans",
+    "reported_response_percent": 58,
+    "reported_response": "more likely to oppose Kyoto after supplied scientist-uncertainty framing",
+    "methodology_or_original_poll_instruments_available": false,
+    "representativeness_verified": false,
+    "randomised_assignment_verified": false,
+    "verified_pre_post_outcome": false,
+    "causal_effect_of_1998_plan": null,
+    "kind": "quoted_plan_description_of_preplan_self_report_under_specific_prompt"
+  },
+  "planned_spending_not_receipts": {
+    "source_id": "congressional_record_1998_04_27",
+    "source_locator": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "online_lines": [
+      599,
+      783
+    ],
+    "media_program_proposed_usd": 600000,
+    "science_center_two_year_proposed_usd": 5000000,
+    "direct_outreach_program_proposed_usd": 300000,
+    "total_required_through_nov_1998_proposed_usd": 2000000,
+    "actual_spent_usd": null,
+    "actual_authorised_usd": null,
+    "scope_note": "Different budget horizons and components must not be summed into a single paid receipt; all figures are proposals."
   }
 }
