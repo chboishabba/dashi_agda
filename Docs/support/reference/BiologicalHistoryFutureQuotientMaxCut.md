@@ -275,6 +275,15 @@ compiled Golden head, and an original physical dynamics inhabitant,
 are still required. No manufactured source-level equation, kinase
 rate or ion-transport observation has been inserted.
 
+### Golden checker alignment
+
+The Round-23 shell gate now runs `scripts/run_agda29_parallel_check.sh
+DASHI/EverythingBiologicalHistoryFutureRound23.agda` after all source
+safety and finite executable regressions, rather than invoking `agda`
+directly. This uses the repository-owned parallel checker interface;
+it neither claims that the checker has run in this session nor
+replaces the independent exact-head acceptance receipt.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
