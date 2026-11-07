@@ -766,3 +766,23 @@ def test_native_original_cross_to_SI_torque_weld():
         assert theorem in source
     assert "SIWeld.modelOpticalTorqueHasActualMagnitude" in source
     assert "ExistingSI.mechanicalQuantityToSI" in source
+
+
+def test_native_Bishop_one_complex_imaginary_exp_law_replaces_trig_assumptions():
+    source=(ROOT/"DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda").read_text()
+    for theorem in (
+       "ImaginaryAxisSameSourceExponentialDoubling",
+       "cosineDoubleFromImaginaryExponential",
+       "sineDoubleFromImaginaryExponential",
+       "fourIsTwiceTwice",
+       "concreteDoubleAngleInputsFromImaginaryExp",
+       "gielisRound11FromOneImaginaryExponentialLaw",
+       "realBishopExpAddAlreadyProved",
+    ):
+        assert theorem in source
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in source
+    assert "DASHI.Foundations.BishopExponentialCauchyProductExact" in source
+    assert "TrigCong.bishopCosCongruent" in source
+    assert "Round11.termIdentification" in source
+    assert "Complex.reEquivalent" in source
+    assert "Complex.imEquivalent" in source
