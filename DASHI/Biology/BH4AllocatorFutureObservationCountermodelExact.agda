@@ -22,6 +22,8 @@ record BalancedBranchAllocation : Set where
     otherBranch : Nat
     oxidativeLoss : Nat
     storedIncrement : Nat
+    commonSupplyIdentifiesSource :
+      commonSupply ≡ synthesisUse + recyclingUse
     sourceBalance :
       synthesisUse + recyclingUse
         ≡ hydroxylaseBranch + nitricOxideSynthaseBranch
@@ -32,7 +34,7 @@ record BalancedBranchAllocation : Set where
 open BalancedBranchAllocation public
 
 branchResponse : BalancedBranchAllocation → Bool
-branchResponse (balanced-branch-allocation _ _ _ h _ _ _ _ _) with h
+branchResponse (balanced-branch-allocation _ _ _ h _ _ _ _ _ _) with h
 ... | zero = false
 ... | suc _ = true
 
@@ -40,9 +42,9 @@ branchResponse (balanced-branch-allocation _ _ _ h _ _ _ _ _) with h
 -- satisfy their finite balance equations, yet choose different demands.
 hydroxylasePriority nitricOxidePriority : BalancedBranchAllocation
 hydroxylasePriority =
-  balanced-branch-allocation 1 1 0 1 0 0 0 0 refl
+  balanced-branch-allocation 1 1 0 1 0 0 0 0 refl refl
 nitricOxidePriority =
-  balanced-branch-allocation 1 1 0 0 1 0 0 0 refl
+  balanced-branch-allocation 1 1 0 0 1 0 0 0 refl refl
 
 sameCoarseSupply :
   commonSupply hydroxylasePriority
