@@ -1907,3 +1907,140 @@ external mathematical donors at the paper
 level, not formally completed native Agda
 theorems merely because their rational
 consequences were checked.
+
+
+## E36 — Prior-owner recovery and exact remaining same-object acceptance (audit, not a newly proved theorem)
+
+This section corrects the overbroad original P0–P3 "missing"
+table. The following are EXISTING source-level original
+Agda theorem owners or cross-PR interfaces. Their native
+proofs should be consumed, not duplicated.
+
+### P0 — Bishop real/complex algebra, series, π, root and polar
+
+- DASHI/Analysis/BishopComplexSeriesConvergenceExact.agda:
+  componentwise absolute-series input, complexSeriesLimit,
+  complexSeriesLimitConvergence, and complexSeriesLimitUnique.
+  This module's BishopComplex is its own record over actual
+  vendored reals. DASHI/Analysis/BishopSetoidComplexExact.agda
+  has a separately declared BishopComplex with actual expC,
+  powC and setoid congruence; literal record identity must
+  NOT be presumed despite matching coordinate semantics.
+- DASHI/Analysis/BishopComplexAlgebraExact.agda:
+  exact actual complex arithmetic and powers on the FIRST
+  complex record. E34's complex ring-law proof on the
+  SECOND complex record is an added convenience, not
+  evidence that the project lacked complex algebra.
+- DASHI/Foundations/BishopExponentialFiniteCauchyCoefficientExact.agda
+  and BishopExponentialCauchyProductExact.agda:
+  actual real factorial coefficients, Cauchy product,
+  limiting series and bishopExpAdd. All already owned.
+- DASHI/Foundations/BishopMachinPiRationalWindowExact.agda:
+  actual constructive Machin π_M bounded strictly
+  between 3 and 22/7. What remains is equality with
+  the selected trig period/first positive zero, NOT
+  construction of a π candidate from nothing. The
+  BishopSetoidComplexExact source explicitly sets
+  selectedPiIdentifiedWithClassicalPi=false.
+- DASHI/Foundations/BishopNatSquareRootSemanticSquareExact.agda:
+  semantic sqrt(N)^2=N on the actual Bishop carrier for
+  natural-number radicands. Variable 3+cos(mθ) is a
+  separate positive-real root/reciprocal application.
+- DASHI/Physics/QuantumVacuum/BishopPolarJacobianSameTrigWeldCompilerExact.agda:
+  original selected Round11 trig derivatives and
+  polar determinant equals radius.
+  BishopPolarMeasureSourceWeldReducedExact.agda
+  explicitly records measureTheoreticWeldClosed=false.
+  The remaining Gielis area step is genuine specific
+  measure/domain/integrand identification, not a new
+  generic polar Jacobian theorem.
+
+### P1 — Generic native Fourier machinery already exists
+
+- DASHI/Algebra/Quantum/ShorCyclicCharacterResolutionExact.agda:
+  generic Fin Q cyclic transform/inversion reducing the
+  QFT to concrete character-resolution laws.
+- DASHI/Algebra/Quantum/ShorCyclicDFTLeanCrossProverWeldExact.agda:
+  externally pinned Lean normalized cyclic DFT proof;
+  identifies index/coefficient same-object ABI as its
+  remaining obligation.
+- DASHI/Physics/Closure/NSTriadKNLuoFiniteFourierInversionFromResolutionExact.agda:
+  derives full generic finite Fourier inverse from a
+  specified kernel-resolution/character-orthogonality
+  datum. The associated ParsevalFromInversion owner
+  proves the generic finite Parseval transport.
+- DASHI/Biology/Physical/C3CubeCyclotomicFourierExact.agda:
+  original native Q(ω) C3 and tensor C3³ forward/inverse;
+  E28/E30 consume selected 4/6 subcarriers. The full
+  C36 coefficient model is **not** Q(ω): it needs the
+  original 12-rational-coordinate cyclotomic quotient
+  Q[x]/(x^12-x^6+1), its 36-character resolution, and
+  same-carrier normalized Fourier map.
+
+### P2 — Operator/spectrum reuse already exists
+
+The YM repo includes finite Hermitian Rayleigh,
+operator domain, Mosco recovery/liminf and
+spectral-transfer owners, e.g.
+BalabanClayGate4FiniteMatrixSpectrumDeterminantAssemblyExact.agda
+and CarrierMoscoConvergenceFromPhysicsReceipt.agda.
+The latter explicitly reports required domain/density
+proofs and failed norm-resolvent promotion rather than
+a complete generic spectral-convergence authority.
+Gielis E26/E27/E31 have already paid the exact finite
+matrix, correct-domain mask and paper-level fixed-mode
+convergence. The narrow remaining producer is the
+selected Gielis **same-form** native minmax/compactness
+instance and quantitative n=41/61 continuum error.
+
+### P3 — Original optical momentum/torque model already exists
+
+Kozyrev PR #1404 is the original owner, not an
+undocumented external apparatus:
+scripts/kozyrev_optical_event_ledger.py supplies
+RayLedger.emit, RayLedger.hit and RayLedger.close,
+where each hit computes
+\(p_{\rm in}=(P/c)d_{\rm in}\),
+\(p_{\rm out}=(P\eta/c)d_{\rm out}\),
+the wall-force increment and signed
+\(r\times\Delta p\) wall torque, and tracks
+absorption/power and terminal state.
+The same PR includes the log-spiral/segmented
+geometry optimizer, source-matched family
+comparison, first-forward independent polygonal
+intersection referee and optical/energy checks.
+E32 is the Agda signed-torque expression of
+that ALREADY EXISTING conventional physical law.
+
+The outstanding G15/G16 requirement is to match
+the selected Gielis finite event to the original
+Kozyrev event ledger and **physical calibration**
+of P, reflectivity, hit positions, directions,
+normal conventions, instrument errors and
+uncertainty/replication if the consumer asserts
+real apparatus behaviour. Synthetic or arbitrary
+rational input numbers cannot substitute for
+actual measurements.
+
+### Revised actual max-cut
+
+1. Bishop: original **complex** factorial-product
+   same-object relation with Round11 sine/cos,
+   selected Machin-π to trigonometric period,
+   variable Bishop positive root and Gielis
+   polar measure/integrand.
+2. Fourier: instantiate the existing general
+   cyclic/finite kernel-resolution theorems on
+   the original C36 cyclotomic scalar, not
+   write another Fourier theorem from scratch.
+3. Spectrum: original Dirichlet Gielis
+   same-form native eigenvalue transport and
+   quantified numerical finite-grid error.
+4. Physical: original RayLedger same-event
+   Gielis input and empirical calibration
+   receipt only if real-device conclusions
+   are intended.
+
+**Status:** this is a SOURCE ARCHAEOLOGY / REUSE
+correction, not an independent E36 proof of
+the four remaining promoted results.
