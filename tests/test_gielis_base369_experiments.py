@@ -647,3 +647,26 @@ def test_exact_original_fd_zero_extension_energy_identity(m,n):
     for c in r["checks"]:
         assert c["exact_identity"]
         assert c["operator_energy_integer"]==c["finite_difference_energy_integer"]
+
+
+def test_exact_selected_m9_quarter_wave_fourier_vs_original_zeta36():
+    from gielis_nine_quarter_fourier_exact import receipt
+    r=receipt()
+    assert r["status"]=="exact_quarter_wave_fourier_passed"
+    assert r["exact_rational_roundtrips"]==625
+    assert r["same_original_zeta36_characters"]
+    assert not r["full_C36_native_fourier_accepted"]
+    assert not r["agda_kernel_accepted"]
+
+
+def test_native_selected_fourier_and_bishop_double_angle_reuse():
+    src=(ROOT/"DASHI/Geometry/GielisNineModeFourierExact.agda").read_text()
+    for theorem in ("fourierFourRoundTrip","fourierFourCoefficientRoundTrip",
+                    "cosineNineIsPureFourierMode","sineNineIsPureFourierMode",
+                    "reconstructNineQuarterSamples"):
+        assert theorem in src
+    assert "DASHI.Geometry.GielisBase369NyquistPhase36Exact" in src
+    bishop=(ROOT/"DASHI/Geometry/GielisBishopPolynomialExact.agda").read_text()
+    assert "BishopConcreteDoubleAngleInputs" in bishop
+    assert "bishopCosineQuadrupleFromTwoDoubleAngles" in bishop
+    assert "bishopGielisFromPythagoreanAndTwoDoubleAngles" in bishop
