@@ -59,6 +59,7 @@ grep -q 'canonicalAllNeighboursFutureSafe' \
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
 grep -q 'differentRawMeanReadouts' \
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
+grep -q 'physicalHistoryProjectsToAll54Bonds' DASHI/Biology/Physical/BiologicalSourcePhysicalTissueSimulationExact.agda
 grep -q 'sourcePoissonChargeAgrees' DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
 grep -q 'sourceIonicFluxSplits' DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
 grep -q 'hamming9Symmetric' DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
