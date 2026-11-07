@@ -7,7 +7,7 @@ branch regression harness not run in this authoring environment. Never call
 source-written/type-unchecked source a Golden proof.
 
 **Primary formal record:** [GielisBase369Cut.md](GielisBase369Cut.md).
-**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E31), with strictly separated native/empirical acceptance.
+**Mathematical proof notebook:** [GielisBase369ProofTheorems.md](GielisBase369ProofTheorems.md) (E01–E32), with strictly separated native/empirical acceptance.
 **Original author:** Johan Gielis, 2003, DOI 10.3732/ajb.90.3.333.
 The selected exact *special case*, independent of its numerical experiments:
 
@@ -76,16 +76,16 @@ means computational test/design only; **OPEN** means original theorem unproved.
 | G09 | `gielisNormalCurvature` | r,dr/dθ, outward unit normal, curvature and uniform nondegeneracy; prove smooth-curve equivalence | G04 | E04 normal/curvature paper proof; native Bishop derivative authority requires same-object weld |
 | G10 | `complexFourierSameObject` | Complex characters, inversion/Parseval and oriented phase sector; account for m=9 Nyquist degeneracy | G06,G07 | E28 four-phase + E30 six-phase native Fourier roundtrips SOURCE, independently 625/729 exact vectors; original full C36 native field/DFT OPEN |
 | G11 | `gielisDomainDirichlet` | Bounded Lipschitz/star-shaped Ω_m, Dirichlet self-adjoint -Δ, compact resolvent | G04,G09 | E07 classical Dirichlet self-adjointness, E15 Rayleigh continuum bound and E23 exact SI inverse-area scaling SOURCE; actual native continuum operator OPEN |
-| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E31 exact Fraction-only unshrunken raster predicate for all integer m; original n41/n61 masks 0 mismatches, E26 exact energy, E27 fixed-k FD→continuum paper theorem; quantitative mesh error and native Agda compactness OPEN |
+| G12 | `gielisDiscreteSpectrumConverges` | Consistent/boundary-correct finite difference or FE scheme, spectral nonpollution and quantitative error; 41/61 images insufficient | G11 | E31 exact unshrunken Fraction-only grid membership for integer m in ORIGINAL FD/eigenvalue/energy sources; old n41/61 masks identical; E27 fixed-k convergence on paper; native Bishop geometry equivalence/quantitative continuum eigenvalue rate/Agda compactness OPEN |
 | G13 | `spiralBaselineSameObject` | Restore HTML SDF original scene/emitters/wall/aperture/forward ray intersection/absorber; exact collision replay comparison | actual legacy scene | PR #1404 ORIGINAL referee and RayLedger FOUND; epsilon=0 log centreline/normal-offset walls same-object E18; SHA-pinned cross-PR replay source COMMITTED; HTML SDF event parity OPEN |
 | G14 | `polygonReflectionConverges` | For nongrazing hit/finite bounces establish polygon→smooth event/trajectory and torque convergence, with singular set handled | G09,G13 | Original PR #1404 first-forward geometry referee located, new-scene analytic hit convergence E16; SDF thickness and grazing/higher-hit acceptance OPEN |
-| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E22 typed SI numeric magnitude proof (P/c×R×signed deflection), E19/E24 rational torque envelope with exact canonical c; measured physical coupling OPEN |
-| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E24 strict rational assumed optical input interval propagation; matched IID comparison owner; empirical calibrated/uncertainty data OPEN |
+| G15 | `physicalImpulseTorque` | Define optical momentum transfer, lever arm, time-power and units in SI; connect normalized impulse to existing SO(3) torque/Hodge | G13,G14 | E32 original signed ray r×(d_in−eta d_out) scalar lever algebra, right-hand rule, exact nominal SI torque magnitude SOURCE; original SI c reused; calibrated source inputs/hit geometry OPEN |
+| G16 | `opticalParetoValidated` | Source-matched 369/non369/freeform controls; focus/impulse/energy objective directions, uncertainty/CI, calibration and replication | G13–G15 | E24 exact interval input uncertainty and E32 signed ray torque; model interval accepted, empirical independent uncertainty/measurement OPEN |
 | G17 | `geometricInverseIdentifiability` | Parameter-to-boundary fitting with noise/MDL model class; equal-shape nonuniqueness or local full-rank identifiability | G04,G10 | E10 exact zero-modulation nonidentifiability; inverse estimation OPEN |
 | G18 | `productSymmetry27Bridge` | Explicit product action for C3³ on 27 fibre states; distinguish C27 cyclic and prove projection/phase compatibility | tower+hyperfabric | E11 nonisomorphism C27 vs C3^3 proved; positive product bridge OPEN |
 | G19 | `sampleRateShannonBoundary` | Selected spectral/bandlimited space, sample+reconstruction maps, threshold and aliasing/null counterexample; do not identify PNF query projection with a Shannon theorem | G06,G10 | E28 selected four-dimensional 9th-mode Fourier and E30 six-dimensional C6=C2×C3 exact transform SOURCE; full C36 36-character Agda scalar OPEN |
 | G20 | `gielisMDLKolmogorovBoundary` | Reversible prefix-free Elias-gamma parameter codec; remaining residual, precision uncertainty, weighted physical cost, ordinary Kolmogorov/Shannon theorem boundaries | MDL+Shannon owners | E10 operational codec SOURCE; Kolmogorov/Shannon optimality OPEN |
-| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E31 theorem/source ledger, ten Gielis Agda sources in parallel checker; no typecheck/kernel acceptance; CI/HTML deferred |
+| G21 | `gielisOpticalRunReceipt` | Direct run of **committed exact commit** script+test with provenance (toolchain/hash/seed/geometry), not the older standalone receipt | G13 optional for exploratory run, needed for sameness | E01–E32 ledger, eleven native Agda Gielis roots registered; independent exact finite rational checks; Agda kernel acceptance not available; CI/HTML deferred |
 
 ## Critical dependencies / max-cut
 
@@ -600,3 +600,51 @@ separate G12/Bishop proof obligations.
 
 Historical CI/HTML are deferred from the active
 user-requested max-cut.
+
+
+## E32 original signed-ray SI transfer and final narrowed mathematical cut
+
+The new
+DASHI/Geometry/GielisOpticalTorqueCrossSIExact.agda
+computes the **actual** planar signed angular lever
+
+\[
+ \ell_z=x(i_y-\eta o_y)-y(i_x-\eta o_x),
+ \qquad
+ \tau_z=(P/c)\ell_z\;\mathrm{N\,m}.
+\]
+
+It builds the result by reusing the same native typed
+Mechanical.Quantity and MechanicalSI.SIIndexedQuantity
+as E22, not by assuming an arbitrary signed
+dimensionless deflection factor. The source
+proves the cross identity, anti-symmetry, reversal
+under swapping in/out at full reflectivity,
+zero from unchanged direction and invariance
+under a 180-degree simultaneous rotation.
+Existing R3HodgeCrossExact supplies the right-handed
+Hodge/cross convention; the rational-to-axiomatic
+real carrier bridge remains a separate exact
+type identification. An independent Fraction
+SI event fixture proves the ±18000/299792458 N m
+signed cases and the zero-torque control.
+
+### Exact current leaf list — do not reopen paid donors
+
+| Active cut | Specific remaining producer | Already paid and reused |
+|---|---|---|
+| B-TRIG | Round11 **actual** complex/real exponential-to-sin/cos same-object identity and addition/doubling; consistent \(\pi\) | BishopExponentialCauchyProductExact.bishopExpAdd, BishopSineCosineSetoidCongruenceExact, E25/E29 ring and source reductions |
+| B-GEOM | Actual Bishop reciprocal/sqrt branch, radial derivative, polar integral and positive nonzero radius | Native Bishop quartic, E02–E04 paper analysis |
+| F-36 | Original \(\mathbb Q(\zeta_{36})\) 12-rational-coordinate native algebra, generic full 36-character orthogonality, DFT and reconstruction | Exact Python 1296 pairs, C3CubeCyclotomicFourierExact and NEW E28 C4 / E30 C6 native selected transforms |
+| S-NATIVE | Same-carrier Bishop real analytic domain, native exact raster enumeration/energy compactness/Dirichlet eigenvalue limits | E17/E26 exact rational eigenvalues, E27 paper fixed-k convergence and E31 original literal exact rational mask |
+| S-RATE | Quantified continuum **finite mesh** eigenvalue error, verified constants | Exact finite brackets, domain comparison and E27 qualitative convergence |
+| SI-REAL | Measured source power, reflectivity, normal/impact locations, physical torque and uncertainty matching original optical event carrier | Canonical BIPM SI c, E20/E22 typed quantity transport, E24 intervals, E32 signed ray law |
+
+**Deferred by user request:** CI and historical HTML
+scene replay. No engineering/physical conclusion is
+promoted beyond the available measurement evidence.
+
+**Agda acceptance:** eleven source-written native
+Gielis proof roots are now registered under the
+repository's existing parallel checker. An Agda
+kernel receipt has not been produced in this environment.
