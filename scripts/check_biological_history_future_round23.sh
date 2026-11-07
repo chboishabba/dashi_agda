@@ -85,6 +85,7 @@ python3 scripts/check_original_measured_context_transfer.py --self-test
 python3 scripts/check_biological_rna9_hamming.py
 python3 scripts/check_original_dmsc_exact_replicate_bootstrap.py
 python3 scripts/check_longitudinal_attractor_discrimination.py --self-test
+python3 scripts/check_biological_parametric_minimal18.py
 
 if ! command -v agda >/dev/null 2>&1; then
   echo "FAIL CLOSED: Agda unavailable; kernel and parallel_checker acceptance pending." >&2
