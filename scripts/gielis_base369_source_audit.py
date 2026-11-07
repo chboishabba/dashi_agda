@@ -24,6 +24,8 @@ FILES = (
     "DASHI/Geometry/GielisSIPerronOwnerWeldExact.agda",
     "DASHI/Geometry/GielisSpectralSIScaleExact.agda",
     "DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda",
+    "DASHI/Geometry/GielisNineModeFourierExact.agda",
+    "scripts/gielis_nine_quarter_fourier_exact.py",
     "scripts/gielis_fd_energy_mosco.py",
 )
 THEOREMS = (
@@ -159,6 +161,19 @@ def source_audit(root: Path = ROOT) -> dict:
     assert "boundary_tolerance_normalized" in fd_energy
     numerical=source["scripts/gielis_base369_experiments.py"]
     assert "raster_boundary_tolerance(h)" in numerical
+    selected_fourier=source["DASHI/Geometry/GielisNineModeFourierExact.agda"]
+    for theorem in (
+        "fourierFourRoundTrip",
+        "fourierFourCoefficientRoundTrip",
+        "reconstructNineQuarterSamples",
+        "cosineNineIsPureFourierMode",
+        "sineNineIsPureFourierMode",
+        "cosineEighteenIsPureFourierMode",
+    ):
+        assert theorem in selected_fourier,theorem
+    fourier_script=source["scripts/gielis_nine_quarter_fourier_exact.py"]
+    assert "gielis_cyclotomic36_exact" in fourier_script
+    assert "same_original_zeta36_characters" in fourier_script
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -166,7 +181,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,28):
+    for i in range(1,30):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -187,7 +202,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":27,
+        "paper_proof_sections":29,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
