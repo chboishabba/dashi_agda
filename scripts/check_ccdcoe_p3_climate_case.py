@@ -2,8 +2,8 @@
 """Fail-closed source-bound CCDCOE P3 climate genealogy demonstrator.
 
 This checks a bounded scholarly genealogy already represented in original
-Agda owners. It does NOT supply primary-document spans, identified causal
-effects, command records, or observed human psychological measurements.
+Agda owners. It checks source-location anchors but does NOT create raw document hashes,
+identified causal effects, command records, or psychological measurements.
 """
 from __future__ import annotations
 import json
@@ -104,6 +104,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "plan_execution": "not_identified",
         "api_wide_authorisation": "contested_not_identified",
         "later_coalition_advocacy": "bounded_reported",
+        "separate_campaign_public_materials": "source_bounded_documented",
+        "document_content_divergence": "published_study_result",
+        "1998_API_draft_identified_effect": "not_identified",
     }
     later = data["followup_evidence_20261107"]
     assert {item["id"] for item in later} == {
@@ -129,8 +132,35 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "specific_1998_plan_implementation": "not_identified",
         "campaign_exposure_and_impact": "not_identified",
         "plan_caused_Kyoto_or_Paris_policy_outcome": "not_identified",
+        "separate_climate_advocacy_implemented_elsewhere":
+            "documented_separate_examples_not_API_draft_execution",
+        "corporate_message_divergence_in_published_corpus":
+            "quantified_document_content_not_causal_effect",
     }
-    source_lookup = {c["id"] for c in later} | {primary["id"]}
+    activities = data["independent_activity_and_document_measurements"]
+    assert {e["id"] for e in activities} == {
+        "ice_1991_advertising", "gcc_1995_public_handout",
+        "cooler_heads_1998_event_invitation", "gcc_1996_primer_review"}
+    assert all(event["same_plan_as_1998_api"] is False for event in activities)
+    assert all(event["audience_persuasion_effect"] is None for event in activities)
+    assert all(event["source_url"].startswith("https://") and event["primary_item_locator"] for event in activities)
+    assert next(event for event in activities if event["id"] ==
+                "cooler_heads_1998_event_invitation")["implementation_class"] == (
+                "invitation_and_scheduled_event_documented")
+    corpus = data["published_document_content_measurement"]
+    assert corpus["doi"] == "10.1088/1748-9326/aa815f"
+    assert corpus["document_count"] == 187
+    assert corpus["reported_percentages"] == {
+        "peer_reviewed_acknowledge_human_cause": 83,
+        "internal_acknowledge_human_cause": 80,
+        "advertorial_acknowledge_human_cause": 12,
+        "advertorial_doubt_human_cause": 81}
+    assert corpus["outcome_type"] == "document_coding_by_source_type_not_people"
+    assert not corpus["has_original_microdata_in_repo"]
+    assert corpus["causal_effect_on_readers"] is None
+    assert data["integration_joins"]["1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft"].startswith("independent events")
+    assert data["integration_joins"]["2017_document_coding_to_1998_API_exposure_effect"].startswith("different observational outcome")
+    source_lookup = {c["id"] for c in later} | {primary["id"]} | {e["id"] for e in activities} | {corpus["id"]}
     assert all(set(q["source_ids"]) <= source_lookup
                for q in data["evidence_question_ledger"])
     assert data["integration_joins"][
@@ -153,6 +183,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "primary_record_span_anchors": len(claims),
         "candidate_pnf_intake_rows": len(intake),
         "independent_followup_sources": len(later),
+        "separate_activities": len(activities),
+        "published_communications_analysed": corpus["document_count"],
+        "audience_effect_of_1998_API": "NOT_IDENTIFIED",
         "contested_authorisation": "NOT_IDENTIFIED",
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
