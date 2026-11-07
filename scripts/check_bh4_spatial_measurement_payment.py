@@ -212,7 +212,9 @@ def main():
     parser.add_argument("--receipt", type=Path)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
-    if args.self_test:
+    # Aggregate regression runs this script with no CLI arguments. Its
+    # default mode must be a clearly labelled synthetic self-test.
+    if args.self_test or (args.assay is None and args.receipt is None):
         self_test()
         return
     if args.assay is None or args.receipt is None:
