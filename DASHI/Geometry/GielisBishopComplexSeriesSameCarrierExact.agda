@@ -66,7 +66,10 @@ setoidEqualityToSeries (Setoid.complex-equivalent re im) = re , im
 seriesEqualityToSetoid : ∀ {a b} →
   Series._≈C_ a b →
   Setoid._≈C_ (toSetoid a) (toSetoid b)
-seriesEqualityToSetoid (re , im) =
+seriesEqualityToSetoid
+  {a = Series.complex ar ai}
+  {b = Series.complex br bi}
+  (re , im) =
   Setoid.complex-equivalent re im
 
 -- Explicit termwise transport into the original, already proven
