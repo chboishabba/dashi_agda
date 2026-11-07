@@ -33,6 +33,7 @@ import DASHI.Analysis.BishopRound11ClassicalTrigObjectWeldExact as Shared
 import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Trig
 import DASHI.Foundations.BishopSineCosineSetoidCongruenceExact as TrigCong
 import DASHI.Foundations.BishopExponentialCauchyProductExact as RealExp
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Geometry.GielisBishopPolynomialExact as Gielis
 
 imaginaryAxisTrigExp :
@@ -162,9 +163,9 @@ gielisRound11FromOneImaginaryExponentialLaw P trigWeld expWeld angle =
 realBishopExpAddAlreadyProved :
   ∀ left right →
   Bishop._≃_
-    (DASHI.Foundations.BishopExponentialSeriesConvergenceExact.bishopExp
+    (Exp.bishopExp
       (Bishop._+_ left right))
     (Bishop._*_
-      (DASHI.Foundations.BishopExponentialSeriesConvergenceExact.bishopExp left)
-      (DASHI.Foundations.BishopExponentialSeriesConvergenceExact.bishopExp right))
+      (Exp.bishopExp left)
+      (Exp.bishopExp right))
 realBishopExpAddAlreadyProved = RealExp.bishopExpAdd
