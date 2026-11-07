@@ -19,6 +19,7 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
   DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+  DASHI/Biology/Physical/BiologicalSourcePhysicalTissueSimulationExact.agda
   DASHI/Biology/Physical/BiologicalElectrodiffusionTissueDonorExact.agda
   DASHI/Biology/Physical/BiologicalAtomicMolecularHammingReuseExact.agda
 )
