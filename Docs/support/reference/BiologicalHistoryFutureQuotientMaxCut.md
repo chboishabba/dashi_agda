@@ -199,6 +199,62 @@ It establishes an exact re-refinement requirement if subsequent
 source-supported biology introduces another observationally relevant
 state variable or intervention.
 
+## 2026-11-07 physical source / BH4 weld extension
+
+New Golden source owner
+`DASHI.Biology.Physical.BiologicalSourcePhysicalTissueSimulationExact`
+defines a selected physical source with explicit
+`PhysicalState`, an original
+`PNP.ElectrodiffusionApplicationReceipt`, assay/specimen/observation
+coordinates, an intervention update and a physical-to-cube observer.
+Its critical **uninhabited source-specific obligation** is
+`physicalOneStep`: the physical step must reproduce the actual
+nonperiodic 54-bond tissue rule at every voxel.
+
+From that proof, the new non-extensional theorems
+`physicalOneStepCoarse`,
+`physicalAllControlledHistories`, and
+`physicalHistoryProjectsToAll54Bonds` transport exact coarse
+agreement through every finite controlled intervention history.
+This closes the formal **induction / composition step**, not the
+source-specific PNP/chemistry measurement and model-selection step.
+
+A second exact rational Python regression,
+`scripts/check_biological_parametric_minimal18.py`, now tests all
+64 six-Boolean fine states, the exact 18 reachable morphology quotient
+classes, every individual selected intervention with four normalized
+rational probabilities, and every intervention word up to length
+three under time-varying selected probabilities. It also checks the
+new marker-sensitive counterexample. The original shell gate invokes
+this regression and requires the physical simulation theorem owner.
+
+**BH4 source specificity:** your separate Kitzerow stack PR #1454
+already owns the authentic 16-protein UniProt panel, 29×12 Rhea
+finite stoichiometric interface, 29 unresolved external exchanges,
+source-graded kinetics, QDPR/NOS/AAAH/AGMO and creator attribution.
+It cannot be imported into this PR's current head because the
+branches do not share those source files. The exact seam and no
+misleading cross-branch proof are documented at
+`Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md`.
+
+The BH4 branch now also has two finite countermodels:
+`supplyOnlyNotSufficientForBranchFuture` and
+`samePoolDoesNotDetermineEffectiveTurnover`.
+The first distinguishes different branch allocations for the same
+abstract capacity; the second distinguishes different catalytic
+turnover rates for the same BH4 pool amount. A recyclable cofactor
+is not an irreversibly consumed resource, so these are **different
+mechanistic hypotheses**, not one false mass-balance equation.
+
+**Exact remaining primary physical cut:** produce a *selected*
+compartment/time/same-object BH4/chemical + PNP physical kernel,
+pay original 29×12 flux/exchange bounds and enzyme/redox kinetics,
+prove `physicalOneStep` or construct and justify a refined tissue
+observer, identify calibrated stochastic transition rates, and
+validate independently measured controlled developmental histories
+against competing mechanisms. Full Agda kernel and
+`parallel_checker` receipts remain absent.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
