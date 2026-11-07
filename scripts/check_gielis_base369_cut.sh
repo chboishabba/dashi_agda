@@ -14,6 +14,7 @@ sources=(
   DASHI/Geometry/GielisFiniteGroundStateEdgeExact.agda
   DASHI/Geometry/GielisNineModeFourierExact.agda
   DASHI/Geometry/GielisSixPhaseCyclotomicFourierExact.agda
+  DASHI/Geometry/GielisExactRationalGridPredicateExact.agda
 )
 for source_file in "${sources[@]}"; do
   [[ -s "$source_file" ]] || { echo "missing Agda source: $source_file" >&2; exit 1; }
@@ -41,6 +42,10 @@ python scripts/gielis_raster_fd_positivity_certificate.py --m 6 --grid 41 > /dev
 python scripts/gielis_raster_fd_positivity_certificate.py --m 9 --grid 41 > /dev/null
 python scripts/gielis_fd_energy_mosco.py --m 3 --grid 41 > /dev/null
 python scripts/gielis_fd_energy_mosco.py --m 3 --grid 61 > /dev/null
+python scripts/gielis_exact_rational_raster_geometry.py --m 3 --grid 41 > /dev/null
+python scripts/gielis_exact_rational_raster_geometry.py --m 6 --grid 41 > /dev/null
+python scripts/gielis_exact_rational_raster_geometry.py --m 9 --grid 41 > /dev/null
+python scripts/gielis_exact_rational_raster_geometry.py --m 3 --grid 61 > /dev/null
 python scripts/gielis_optical_force_envelope.py --watts 9000 --radius 17/10 --bounces 8 --reflectivity 19/20 > /dev/null
 python scripts/gielis_base369_symbolic_certificates.py > /dev/null
 
