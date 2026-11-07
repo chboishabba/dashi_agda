@@ -31,6 +31,10 @@ FILES = (
     "DASHI/Geometry/GielisBishopImaginaryExponentialReducerExact.agda",
     "DASHI/Geometry/GielisBishopComplexCauchyAlgebraExact.agda",
     "DASHI/Geometry/GielisBesselFaberKrahnRationalExact.agda",
+    "DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda",
+    "scripts/gielis_cyclotomic36_unrestricted_exact.py",
+    "scripts/gielis_certified_continuum_fd_error.py",
+    "scripts/gielis_kozyrev_same_event_original_owner.py",
     "scripts/gielis_continuum_faber_krahn_bound.py",
     "scripts/gielis_exact_signed_optical_torque.py",
     "scripts/gielis_exact_rational_raster_geometry.py",
@@ -247,6 +251,26 @@ def source_audit(root: Path = ROOT) -> dict:
         assert theorem in bessel,theorem
     bessel_script=source["scripts/gielis_continuum_faber_krahn_bound.py"]
     assert "CLAIMED_LOWER=F(224,55)" in bessel_script
+    same_complex=source["DASHI/Geometry/GielisBishopComplexSeriesSameCarrierExact.agda"]
+    for theorem in (
+        "seriesRoundTrip","setoidRoundTrip",
+        "setoidPlusSameSeriesAlgebra","setoidMultiplySameSeriesAlgebra",
+        "setoidComplexSeriesLimitConverges",
+        "setoidComplexSeriesLimitUnique",
+    ):
+        assert theorem in same_complex,theorem
+    assert "DASHI.Analysis.BishopComplexSeriesConvergenceExact" in same_complex
+    assert "DASHI.Analysis.BishopSetoidComplexExact" in same_complex
+    assert "DASHI.Analysis.BishopComplexAlgebraExact" in same_complex
+    unrestricted=source["scripts/gielis_cyclotomic36_unrestricted_exact.py"]
+    assert "kernel_resolution" in unrestricted
+    assert "universal_arbitrary_signal_by_linearity_and_basis" in unrestricted
+    spectrum_error=source["scripts/gielis_certified_continuum_fd_error.py"]
+    assert "exact_error_enclosure" in spectrum_error
+    assert "mesh_order_rate_Oh_power_certified" in spectrum_error
+    original_event=source["scripts/gielis_kozyrev_same_event_original_owner.py"]
+    assert "ORIGINAL_GIT_BLOBS" in original_event
+    assert "compare_with_original" in original_event
     roadmap=source[FILES[3]]
     gates=re.findall(r"^\| (G\d\d) \|",roadmap,flags=re.M)
     assert gates==[f"G{i:02d}" for i in range(1,22)]
@@ -254,7 +278,7 @@ def source_audit(root: Path = ROOT) -> dict:
     for deliverable in range(8): assert f"D{deliverable}" in roadmap
 
     proof=source[FILES[4]]
-    for i in range(1,37):
+    for i in range(1,41):
         assert f"E{i:02d} —" in proof
     ray=source[FILES[5]]
     for token in (
@@ -275,7 +299,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "roadmap_exact_gates":21,
         "phases":6,
         "deliverables":8,
-        "paper_proof_sections":36,
+        "paper_proof_sections":40,
         "file_sha256":{
             path:hashlib.sha256(data.encode()).hexdigest()
             for path,data in source.items()
@@ -283,6 +307,7 @@ def source_audit(root: Path = ROOT) -> dict:
         "agda_kernel_accepted":False,
         "python_test_suite_executed_by_this_script":False,
         "physical_kozyrev_scene_parity":False,
+        "P3_same_event_actual_original_execution_by_this_script":False,
     }
 
 
