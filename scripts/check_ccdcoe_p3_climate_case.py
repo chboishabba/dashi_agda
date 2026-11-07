@@ -49,8 +49,26 @@ def validate(data: dict, cases: str, sources: str) -> dict:
     assert len({h["command_structure"] for h in data["hypotheses"]}) == 3
     assert edge["observed_campaign_effect"] is None
     assert edge["observed_command_structure"] is None
+    primary = data["primary_publication"]
+    assert primary["url"] == ("https://www.govinfo.gov/content/pkg/"
+                              "CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm")
+    assert primary["original_plan_date"] == "1998-04-03"
+    assert primary["publication_date"] == "1998-04-27"
+    assert primary["original_scan_sha256"] is None
+    claims = data["primary_plan_claims"]
+    assert len(claims) == 6
+    claim_ids = {claim["id"] for claim in claims}
+    assert len(claim_ids) == 6
+    for claim in claims:
+        assert claim["source_id"] == primary["id"]
+        assert 425 <= claim["line_start"] <= claim["line_end"] <= 795
+        assert claim["kind"] in ("documented_planning", "documented_intention",
+                                  "documented_proposal")
+        assert claim["implementation_status"] == "not_verified"
+    assert set(data["observations"]["documented_plan_content"]) == claim_ids
     for name, observations in data["observations"].items():
-        if name != "published_historical_genealogy":
+        if name not in ("published_historical_genealogy",
+                        "documented_plan_content"):
             assert observations == [], (name, "unpaid observation was fabricated")
     assert data["observations"]["published_historical_genealogy"] == "grade_B_documented"
     assert data["promotion"] == {
@@ -59,6 +77,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "causal_effect": "not_identified",
         "hostile_intent": "not_identified",
         "population_level_radicalisation": "not_identified",
+        "documented_joint_planning": "source_supported",
+        "plan_execution": "not_identified",
     }
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
@@ -70,7 +90,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "historical_hypotheses": 3,
         "causal_effect": "NOT_IDENTIFIED",
         "hostile_intent": "NOT_IDENTIFIED",
-        "actual_primary_spans": 0,
+        "primary_record_span_anchors": len(claims),
+        "original_scan_sha256_available": False,
+        "plan_execution": "NOT_IDENTIFIED",
         "real_measured_outcomes": 0,
     }
 
