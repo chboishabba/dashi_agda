@@ -147,3 +147,57 @@ noUnsupportedPromotion ()
 
 -- The generic two-model proof is transportable, but causality and
 -- downstream responsibility still need actual source/event receipts.
+
+------------------------------------------------------------------------
+-- The published plan describes a PRE-PLAN Charlton Research poll, not a
+-- post-exposure success measurement or randomised causal experiment.
+-- Congressional Record H2326, plan text lines 533-549.
+------------------------------------------------------------------------
+
+record ReportedPreplanSurvey : Set where
+  constructor reportedPreplanSurvey
+  field
+    surveyReference : String
+    reportedSampleSize : Nat
+    reportedMoreLikelyToOpposePercent : Nat
+    directlyVerifiedRandomAllocation : Bool
+    wasPostImplementationFollowup : Bool
+
+charltonSurveyAsDescribedInDraft : ReportedPreplanSurvey
+charltonSurveyAsDescribedInDraft =
+  reportedPreplanSurvey
+    "Charlton Research survey as quoted in the 1998 published plan; independent original questionnaire and microdata not admitted"
+    1100 58 false false
+
+surveyRespondentCount :
+  ReportedPreplanSurvey.reportedSampleSize
+    charltonSurveyAsDescribedInDraft ≡ 1100
+surveyRespondentCount = refl
+
+surveyIsNotMeasuredPostImplementationImpact :
+  ReportedPreplanSurvey.wasPostImplementationFollowup
+    charltonSurveyAsDescribedInDraft ≡ false
+surveyIsNotMeasuredPostImplementationImpact = refl
+
+-- The original plan lists distinct budgets with incompatible horizons.
+-- These are proposed figures, not invoices, appropriations, approvals
+-- or evidence that the named institutions actually disbursed money.
+record PlannedAmounts : Set where
+  constructor plannedAmounts
+  field
+    mediaBudgetExcludingAdvertising : Nat
+    dataCenterTwoYearProposedBudget : Nat
+    educationBudget : Nat
+    totalRequiredThroughNovember1998 : Nat
+    actualPaidReceiptsAdmitted : Bool
+
+amountsProposedInDraft : PlannedAmounts
+amountsProposedInDraft =
+  plannedAmounts 600000 5000000 300000 2000000 false
+
+noPaymentEstablishedByDraft :
+  PlannedAmounts.actualPaidReceiptsAdmitted amountsProposedInDraft ≡ false
+noPaymentEstablishedByDraft = refl
+
+-- Do not sum differing budget horizons into a verified spend; any
+-- component may require distinct source, period and funding authority.
