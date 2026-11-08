@@ -65,3 +65,38 @@ Locally executed prototype (seed 261108129, U=4, dt=0.03, 200,000 field draws):
 The committed file mirrors this checked construction; rerun from exact commit for release certification. This pays an explicit **one-step auxiliary-field propagation smoke test**, not the multi-step stabilized, importance-weighted, force-biased phaseless AFQMC simulation, nor the 16-qubit nickel reaction.
 
 Run: `python scripts/qcafqmc_hubbard_hs_projector_control.py`.
+
+
+## 9 November 2026: periodic-table/369/quantum reuse audit and multi-step computation
+
+### Exact previously implemented atomic/quantum ownership
+
+- `DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact` imports `AtomicFermionShellExact`, `AtomicValenceFermionBridgeExact` and the periodic-table recovery boundary. Its stated chain is: atomic identity -> physical orbital modes -> antisymmetric many-fermion state -> interacting energy -> shell selection. It does **not** derive electronic Hamiltonian integrals from the 3/6/9 alphabet.
+- `DASHI.Physics.Foundations.AtomicFermionShellExact` provides spin, orbitals, fermionic occupancy, exclusion and shell capacities, useful as a typed electron-count/occupation authority.
+- `DASHI.Physics.Foundations.FiniteFockExcitationExact` provides a finite single-mode Pauli/nilpotence example, not the full canonical anticommutation relations or an AFQMC integral tensor.
+- `DASHI.Physics.Chemistry.AtomicPeriodicTable369HeliumHartreeConvergenceExact` already owns a published numerical Hartree diagnostic and honest distinction between Hartree approximation and correlation. The executable `scripts/atomic_helium_hartree_scf.py` uses SciPy radial SCF. This is a *separate* atomic baseline, not a same-Hamiltonian nickel or Hubbard AFQMC comparator.
+- `DASHI.Algebra.Quantum.DASHIStructuredStateCompression` owns compressed trial-state semantics; Shor finite Born and QFT owners do not imply matchgate shadow chemistry.
+
+### Multi-step independent Hubbard comparator
+
+`scripts/qcafqmc_multistep_hubbard.py` advances **two independent occupied spin orbitals** by 2x2 one-body HS operators for 12 imaginary-time steps and averages 50,000 sampled field trajectories. The exact same four-state Hubbard Hamiltonian is separately propagated by the deterministic Trotter transfer matrix. A third exact diagonalization evaluates continuum-time imaginary-time evolution. This is a genuine *multi-step auxiliary-field projector*, though still a sign-free, uniformly sampled toy without production importance sampling, force bias, stabilization/branching, or phaseless projection.
+
+Executed local numerical experiment (seed 261108129, U=4, dt=0.025, 12 steps, 50,000 paths):
+- Ground-state eigenvalue: -0.82842712474619 (not yet converged by 0.3 imaginary-time units).
+- HS decomposition vs exactly composed symmetric Trotter operator: 2.4958088391930336e-15 (Frobenius norm).
+- Sampled final mixed energy: -0.6522069576089797.
+- Independently propagated exact Trotter final mixed energy: -0.6555331770399649.
+- Final mixed-energy deviation: 0.003326219430985211.
+- Final sampled-state versus exact Trotter L2 deviation: 0.008928605218271204.
+- Separate exact continuum-time mixed energy: -0.6560184225981847.
+- Negative controls: dropping the HS sector prefactor produces Frobenius error 0.20083350180517012; setting gamma to zero produces error 0.13466437048241114.
+
+These are source-run *prototype* outputs. The GitHub-committed file is a compact equivalent implementation and requires an exact-file rerun to certify its results. Importantly, a 4-seed sensitivity sweep found that a fixed strict state-L2 threshold sometimes fails, even with 50,000 samples. The threshold is a **smoke-test acceptance condition for one seed**, not a general statistical confidence statement.
+
+```bash
+python scripts/qcafqmc_multistep_hubbard.py
+```
+
+### Next non-substitutable empirical pieces
+
+The 2026 IonQ source describes a symmetry-constrained, noise-aware autoregressive transformer and matchgate shadows, rather than our four-amplitude least-squares toy. This repo still lacks original measured shadow arrays, the exact active-space nickel molecular integrals/trials and the published training/evaluation implementation. The latest targeted public search did not establish an author-released archive. The proper scientific comparison must preserve chemistry Hamiltonian, orbitals, walkers, trial state, statistical protocols and hardware-cost boundaries. No extrapolation from this two-site Hubbard result to the paper's 99% economic estimate is licensed.
