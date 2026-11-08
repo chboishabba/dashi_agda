@@ -112,6 +112,7 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "preplan_survey": "reported_in_original_draft_not_independently_validated",
         "actual_1998_plan_expenditure": "not_identified",
         "preexisting_1997_opinion_dynamics": "measured_published_descriptive",
+        "specific_1998_plan_nonimplementation": "direct_retrospective_participant_testimony_with_contemporaneous_support_financially_unverified",
     }
     later = data["followup_evidence_20261107"]
     assert {item["id"] for item in later} == {
@@ -152,6 +153,10 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             "attributed_secondary_statement_not_final_receipt",
         "named_1998_data_center_never_formed":
             "amicus_assertion_no_independent_registry_witness",
+        "former_API_executive_retrospective_nonfunding":
+            "direct_attributed_2021_interview_unverified_financially",
+        "former_API_executive_corroborates_multi_org_planning":
+            "retrospective_named_participant_corrob_primary_workshop",
     }
     activities = data["independent_activity_and_document_measurements"]
     assert {e["id"] for e in activities} == {
@@ -246,8 +251,29 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "independent_registry_certificate", "judicial_fact_finding"))
     assert amicus["proves_no_successor_or_equivalent_program"] is False
     assert amicus["proves_total_1998_plan_cancellation"] is False
+    interview = data["direct_former_executive_interview"]
+    assert interview["id"] == "okeefe_cook_interview_2021"
+    assert interview["date"] == "2021-04-20"
+    assert interview["url"] == "https://gelbspanfiles.com/?p=11851"
+    assert interview["primary_testimony_within_published_interview"] is True
+    assert interview["provenance_status"] == (
+        "published_named_interview_transcript_not_original_recording")
+    assert {r["id"] for r in interview["reported_claims"]} == {
+        "2021_direct_nonfunding", "2021_multi_org_workshop",
+        "2021_prior_loe_attribution_disputed",
+        "2021_no_official_policy_adoption"}
+    assert all(r["lines"][0] <= r["lines"][1]
+               for r in interview["reported_claims"])
+    assert all(interview[k] is None for k in (
+        "independent_financial_audit", "company_funding_closeout",
+        "independent_implementation_audit"))
+    assert data["integration_joins"]["2021_okeefe_to_finance"].startswith(
+        "first-person participant assertion")
+    assert data["promotion"]["specific_1998_plan_nonimplementation"] == (
+        "direct_retrospective_participant_testimony_with_contemporaneous_support_financially_unverified")
     source_lookup = (
-        {c["id"] for c in later} | {primary["id"], amicus["id"]} |
+        {c["id"] for c in later} | {primary["id"], amicus["id"],
+        interview["id"]} |
         {e["id"] for e in activities} | {corpus["id"], pre_api["id"],
         contemporary["id"], retrospective["id"]})
     assert all(set(q["source_ids"]) <= source_lookup
@@ -398,6 +424,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "source_gated_decisions": len(ladder),
         "archival_review_leads": len(leads),
         "stage_nonfactorability_witnesses": 4,
+        "direct_executive_interviews": 1,
+        "signed_financial_closeout": False,
         "published_study_cohorts": len(versions),
         "cohort_pooling_authorized": False,
     }
