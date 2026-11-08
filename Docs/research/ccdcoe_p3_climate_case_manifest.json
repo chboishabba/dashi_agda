@@ -114,7 +114,8 @@
     "actual_1998_plan_expenditure": "not_identified",
     "preexisting_1997_opinion_dynamics": "measured_published_descriptive",
     "contemporaneous_no_executive_funding_approach": "attributed_interview_as_of_apr_1998",
-    "organiser_retrospective_nonexecution": "attributed_secondary_not_independently_verified"
+    "organiser_retrospective_nonexecution": "attributed_secondary_not_independently_verified",
+    "specific_1998_plan_nonimplementation": "direct_retrospective_participant_testimony_with_contemporaneous_support_financially_unverified"
   },
   "follow_up_discriminator": {
     "id": "implementation_and_command_archive",
@@ -352,7 +353,9 @@
     "1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft": "independent events; no shared-execution identity admitted",
     "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate",
     "1997_climate_opinion_panel_to_1998_API_plan_effect": "temporal negative control; both survey waves ended prior to April 1998 draft; cannot infer plan-caused outcomes",
-    "2019_amicus_center_absence_to_1998_API_plan_execution": "amicus asserts named centre not formed; other plan components or renamed programmes require separate documents"
+    "2019_amicus_center_absence_to_1998_API_plan_execution": "amicus asserts named centre not formed; other plan components or renamed programmes require separate documents",
+    "2021_okeefe_to_1998_loe": "attributed statement conflicts over exact original interview/account; no automatic reconciliation or erasure",
+    "2021_okeefe_to_finance": "first-person participant assertion of nonfunding, no independent accounting document"
   },
   "followup_evidence_20261107": [
     {
@@ -532,6 +535,21 @@
       "status": "amicus_assertion_no_independent_registry_witness",
       "source_ids": [
         "amicus_9th_circuit_2019_03_20"
+      ]
+    },
+    {
+      "id": "former_API_executive_retrospective_nonfunding",
+      "status": "direct_attributed_2021_interview_unverified_financially",
+      "source_ids": [
+        "okeefe_cook_interview_2021"
+      ]
+    },
+    {
+      "id": "former_API_executive_corroborates_multi_org_planning",
+      "status": "retrospective_named_participant_corrob_primary_workshop",
+      "source_ids": [
+        "okeefe_cook_interview_2021",
+        "congressional_record_1998_04_27"
       ]
     }
   ],
@@ -885,5 +903,67 @@
     "judicial_fact_finding": null,
     "proves_no_successor_or_equivalent_program": false,
     "proves_total_1998_plan_cancellation": false
+  },
+  "direct_former_executive_interview": {
+    "id": "okeefe_cook_interview_2021",
+    "date": "2021-04-20",
+    "url": "https://gelbspanfiles.com/?p=11851",
+    "title": "Interview with William O’Keefe, former American Petroleum Institute executive",
+    "interviewer": "Russell Cook",
+    "interviewee": "William O'Keefe, former API executive VP/COO",
+    "evidence_class": "published_interview_with_named_first_person_participant_not_audited_accounting",
+    "editorial_position": "interviewer argues against treating the climate draft as disinformation; source and speaker have declared advocacy positions",
+    "reported_claims": [
+      {
+        "id": "2021_direct_nonfunding",
+        "lines": [
+          38,
+          43
+        ],
+        "claim": "The selected 1998 proposed action plan was never funded or implemented.",
+        "object": "specific_1998_plan",
+        "temporal_scope": "retrospective_first_person_claim",
+        "verified_company_financial_records": false
+      },
+      {
+        "id": "2021_multi_org_workshop",
+        "lines": [
+          35,
+          43
+        ],
+        "claim": "Joe Walker did not organise the brainstorming alone, and API hosted a meeting involving several organisations.",
+        "object": "planning_workshop",
+        "temporal_scope": "retrospective_first_person_claim",
+        "verified_meeting_minutes": false
+      },
+      {
+        "id": "2021_prior_loe_attribution_disputed",
+        "lines": [
+          31,
+          37
+        ],
+        "claim": "O'Keefe disputes the attribution or wording of the 1998 Living on Earth account and says he cannot recall being contacted.",
+        "object": "1998_loe_account",
+        "temporal_scope": "retrospective_conflicting_attribution",
+        "verified_original_interview_audio": false
+      },
+      {
+        "id": "2021_no_official_policy_adoption",
+        "lines": [
+          42,
+          50
+        ],
+        "claim": "O'Keefe says the draft was neither an official API nor Exxon policy document, though API organised the workshop and circulated results.",
+        "object": "specific_1998_plan",
+        "temporal_scope": "retrospective_first_person_claim",
+        "verified_governance_minutes": false
+      }
+    ],
+    "primary_testimony_within_published_interview": true,
+    "independent_financial_audit": null,
+    "company_funding_closeout": null,
+    "independent_implementation_audit": null,
+    "not_evidence_of": "absence of coordinated planning, all fossil-sector advocacy, or independent climate-science claims",
+    "provenance_status": "published_named_interview_transcript_not_original_recording"
   }
 }
