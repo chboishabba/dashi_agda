@@ -2,7 +2,7 @@ module DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact where
 
 open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 
 import Base369 as Base
