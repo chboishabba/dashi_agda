@@ -178,3 +178,83 @@ constructVNatural input assembly =
     { leechInput = input
     ; orbifoldAssembly = assembly
     }
+
+
+------------------------------------------------------------------------
+-- Actual source-specific direct-summand embedding properties.
+-- Unlike weight-two dimension accounting, these proofs identify the
+-- original fixed/twisted inclusion maps of the SAME orbifold assembly.
+------------------------------------------------------------------------
+
+open import Data.Empty using (⊥)
+
+cong : ∀ {A B : Set} (f : A → B) {x y : A} →
+  x ≡ y → f x ≡ f y
+cong f refl = refl
+
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
+trans : ∀ {A : Set} {x y z : A} →
+  x ≡ y → y ≡ z → x ≡ z
+trans refl q = q
+
+leftSumInjective : ∀ {A B : Set} {x y : A} →
+  (inj₁ {B = B} x ≡ inj₁ y) → x ≡ y
+leftSumInjective refl = refl
+
+rightSumInjective : ∀ {A B : Set} {x y : B} →
+  (inj₂ {A = A} x ≡ inj₂ y) → x ≡ y
+rightSumInjective refl = refl
+
+leftRightSumDistinct : ∀ {A B : Set} (x : A) (y : B) →
+  inj₁ x ≡ inj₂ y → ⊥
+leftRightSumDistinct x y ()
+
+module ActualSelectedSummandInclusions
+  (construction : VNaturalConstruction) where
+
+  input : LeechLatticeVOAInput
+  input = VNaturalConstruction.leechInput construction
+
+  assembly :
+    OrbifoldVOAAssembly
+      (LeechLatticeVOAInput.fixedPoint input)
+      (LeechLatticeVOAInput.canonicalTwistedModule input)
+      (LeechLatticeVOAInput.twistedEvenSector input)
+  assembly = VNaturalConstruction.orbifoldAssembly construction
+
+  Fixed : Set
+  Fixed = FixedPointVOA.fixedCarrier
+    (LeechLatticeVOAInput.fixedPoint input)
+
+  Twisted : Set
+  Twisted = TwistedEvenSector.CarrierPlus
+    (LeechLatticeVOAInput.twistedEvenSector input)
+
+  originalFixedInclusionInjective : (x y : Fixed) →
+    includeFixedSummand assembly x ≡ includeFixedSummand assembly y →
+    x ≡ y
+  originalFixedInclusionInjective x y eq =
+    leftSumInjective
+      (trans (sym (fixedSummandIdentifies assembly x))
+        (trans (cong (identifyCarrier assembly) eq)
+          (fixedSummandIdentifies assembly y)))
+
+  originalTwistedInclusionInjective : (x y : Twisted) →
+    includeTwistedSummand assembly x ≡ includeTwistedSummand assembly y →
+    x ≡ y
+  originalTwistedInclusionInjective x y eq =
+    rightSumInjective
+      (trans (sym (twistedSummandIdentifies assembly x))
+        (trans (cong (identifyCarrier assembly) eq)
+          (twistedSummandIdentifies assembly y)))
+
+  originalFixedTwistedDisjoint : (x : Fixed) (y : Twisted) →
+    includeFixedSummand assembly x ≡ includeTwistedSummand assembly y →
+    ⊥
+  originalFixedTwistedDisjoint x y eq =
+    leftRightSumDistinct x y
+      (trans (sym (fixedSummandIdentifies assembly x))
+        (trans (cong (identifyCarrier assembly) eq)
+          (twistedSummandIdentifies assembly y)))
