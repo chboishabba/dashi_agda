@@ -17281,3 +17281,24 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-11-08 Moonshine / Y443 / FLM highest-alpha active TODO router
+
+Canonical phase, deliverable, precise lemma and acceptance ledger:
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`.
+
+- [x] R0: audit and reuse PRs #190/#208/#433/#437/#479/#1472;
+  eliminate duplicate grade-two operation-rigidity wrappers; preserve
+  source-written DGL weak-certificate no-go.
+- [ ] V0: inhabit the **original selected** Leech-orbifold/VOA source-law
+  witnesses and `SourceNativeGriessLaws`, not a freely chosen Set flag.
+- [ ] V1: exhibit real selected-to-published FLM all-mode two-sided VOA
+  equivalence; direct original FLM selection or sound DGL route, not both.
+- [ ] V2: true selected-G ↔ Q80 ↔ Monster isomorphisms and original
+  selected-versus-published u/v action equations on real generators.
+- [ ] V3: instantiate the already-written direct same-object capstone using
+  V0–V2; do not add another conditional wrapper.
+
+194 character classes, physical KK/GR and the original 4D YM mass gap
+belong to separate PR endpoints; no proof-status promotion from finite
+196884 counts or arithmetic. Agda kernel acceptance not asserted here.
