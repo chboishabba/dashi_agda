@@ -17,6 +17,7 @@ import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
 import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact as API1998
+import DASHI.Cognition.CCDCOEP3EvidenceStageIdentificationExact as Ladder
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
@@ -206,3 +207,27 @@ proposedBudgetDoesNotEqualPaidReceipt :
     API1998.amountsProposedInDraft ≡ false
 proposedBudgetDoesNotEqualPaidReceipt =
   API1998.noPaymentEstablishedByDraft
+
+-- Successively different evidence/consumer requirements:
+-- draft != approval != funding != delivery != established effect.
+-- Each named non-factorability proof reuses the canonical owner.
+draftDoesNotIdentifyAPIApproval :
+  NF.FactorsThrough Ladder.draftKnown Ladder.approvalKnown → ⊥
+draftDoesNotIdentifyAPIApproval = Ladder.draftDoesNotDetermineApproval
+
+approvalDoesNotIdentifyDisbursement :
+  NF.FactorsThrough Ladder.approvalKnown Ladder.fundingKnown → ⊥
+approvalDoesNotIdentifyDisbursement = Ladder.approvalDoesNotDetermineFunding
+
+fundingDoesNotIdentifyCampaignDelivery :
+  NF.FactorsThrough Ladder.fundingKnown Ladder.deliveryKnown → ⊥
+fundingDoesNotIdentifyCampaignDelivery = Ladder.fundingDoesNotDetermineDelivery
+
+deliveryDoesNotIdentifyPersuasion :
+  NF.FactorsThrough Ladder.deliveryKnown Ladder.effectEstablished → ⊥
+deliveryDoesNotIdentifyPersuasion = Ladder.deliveryDoesNotDetermineEffect
+
+fundingRecordsWouldDiscriminate :
+  Discriminator.BundleSeparates Ladder.fundingSourceProbe
+    Ladder.approvedWithoutFunding Ladder.fundedWithoutDelivery
+fundingRecordsWouldDiscriminate = Ladder.fundingProbeSeparates
