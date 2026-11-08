@@ -389,3 +389,30 @@ noInventedIndustryAttributionForG20RG :
     (Compliance.study Compliance.brisbaneFinal2014) ≡ false
 noInventedIndustryAttributionForG20RG =
   Compliance.noReportedClimateCausalInfluence
+
+-- Additional real October 2015 sequence: an earlier Energy Ministers'
+-- communique cannot inherit the authorship of the later B20 Energy
+-- Forum Statement. Named corporate speakers and IEA/OECD/ICC inputs
+-- are not independently verified individual recommendation authors.
+energyMinistersAndB20SpeakersDistinct :
+  NF.FactorsThrough Institution.flattenTopic Institution.speaker → ⊥
+energyMinistersAndB20SpeakersDistinct =
+  Institution.b20BusinessSubmissionDoesNotFactorIntoG20Author
+
+b20ContributorsNotIdentifiedAsClauseAuthors :
+  Institution.B20OriginalDocumentAttribution.originalClauseAuthorsIndividuallyVerified
+    Institution.b20EnergyOriginalReceipt ≡ false
+b20ContributorsNotIdentifiedAsClauseAuthors =
+  Institution.b20KnownInputDoesNotEstablishIndividualAuthorship
+
+b20SourceInputsDoNotProveAntalyaInfluence :
+  Institution.B20OriginalDocumentAttribution.financeLobbyingTransmissionToLeadersVerified
+    Institution.b20EnergyOriginalReceipt ≡ false
+b20SourceInputsDoNotProveAntalyaInfluence =
+  Institution.b20NamedInputsDoNotEstablishG20Influence
+
+noLaterPublicationPromotedToPriorMinisterialAuthorship :
+  Institution.SequenceSourceDates.laterPublishedTextProvesEarlierMinisterialAuthorship
+    Institution.octoberToParisSequence ≡ false
+noLaterPublicationPromotedToPriorMinisterialAuthorship =
+  Institution.noBackdatedDocumentAuthorshipClaim
