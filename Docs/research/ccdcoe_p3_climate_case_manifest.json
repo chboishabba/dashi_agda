@@ -617,5 +617,83 @@
     "actual_spent_usd": null,
     "actual_authorised_usd": null,
     "scope_note": "Different budget horizons and components must not be summed into a single paid receipt; all figures are proposals."
-  }
+  },
+  "primary_plan_decision_gate": {
+    "source_id": "congressional_record_1998_04_27",
+    "source_url": "https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm",
+    "draft_circulation_line_range": [
+      434,
+      442
+    ],
+    "conditional_launch_line_range": [
+      659,
+      664
+    ],
+    "interpretation": "The covering note proposes April 17 review and search for funding champion; plan says initiatives start upon plan approval, funding and resources. Neither statement certifies those conditions were met.",
+    "observed_draft": true,
+    "observed_signed_approval": false,
+    "approval_receipt_id": null,
+    "observed_disbursement": false,
+    "financial_receipt_id": null,
+    "observed_same_plan_delivery": false,
+    "delivered_event_receipt_id": null,
+    "observed_causal_response": false,
+    "effect_study_id": null
+  },
+  "evidence_ladder": [
+    {
+      "stage": "published_draft",
+      "status": "observed_primary",
+      "source_id": "congressional_record_1998_04_27",
+      "actual_receipt": "congressional_record_1998_04_27"
+    },
+    {
+      "stage": "organizational_approval",
+      "status": "contested_not_identified",
+      "source_id": null,
+      "actual_receipt": null
+    },
+    {
+      "stage": "plan_funding",
+      "status": "not_identified",
+      "source_id": null,
+      "actual_receipt": null
+    },
+    {
+      "stage": "plan_specific_delivery",
+      "status": "not_identified",
+      "source_id": null,
+      "actual_receipt": null
+    },
+    {
+      "stage": "causal_belief_or_policy_effect",
+      "status": "not_identified",
+      "source_id": null,
+      "actual_receipt": null
+    }
+  ],
+  "additional_archival_discovery": [
+    {
+      "id": "api_feb_1998_rapid_response_draft",
+      "source_url": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "source_section": "February 1998 API Climate Change Strategy proposal",
+      "source_date": "1998-02-27",
+      "source_role": "archival-index secondary account of a DIFFERENT earlier API proposal",
+      "source_scope": "Index discusses proposed rapid-response media tactics; original underlying image not transcribed or independently reviewed here",
+      "evidence_status": "index_located_original_source_review_pending",
+      "same_as_april_plan_execution": null,
+      "effect_on_1998_api_plan": "possible chronology/predecessor to investigate; no identity, authorisation or delivery equivalence inferred"
+    },
+    {
+      "id": "gcc_jul_1995_board_report",
+      "source_url": "https://www.documentcloud.org/documents/21312427-1995-global-climate-coalition-communications-program-prepared-for-gcc-board-july-11-1995",
+      "source_index": "https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/",
+      "source_date": "1995-07-11",
+      "source_role": "separate GCC board report and budget",
+      "source_scope": "Archival index says the committee reported preparing and launching a GCC-sponsored Accu-Weather report; original DocumentCloud bytes not accessible in this run",
+      "evidence_status": "index_located_original_source_review_pending",
+      "same_as_april_plan_execution": false,
+      "effect_on_1998_api_plan": "none without a separately proven same-object connection"
+    }
+  ]
 }
