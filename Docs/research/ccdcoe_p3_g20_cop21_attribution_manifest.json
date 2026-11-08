@@ -294,7 +294,8 @@
     "summit_causal_influence_identified": false,
     "c20_visual_check": "Original C20 PDF cover screenshot inspected, printed text excerpt inspected; original PDF bytes not archived; exact extracted full text not re-coded",
     "b20_source_status": "B20 catalog locates September 2015 recommendations and October energy forum; no original submission text independently extracted",
-    "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix"
+    "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix",
+    "published_selected_commitment_compliance_observations_located": true
   },
   "remaining": [
     {
@@ -337,5 +338,72 @@
     "source": "https://treaties.un.org/pages/viewdetails.aspx?chapter=27&mtdsg_no=xxvii-7-d&src=ind",
     "legally_operational_NDC_obligations_verified_against": "UNFCCC article 4.2 treaty language and UN Treaty Collection entry into force dates",
     "no_assumption_of_country_specific_legal_or_emissions_compliance": true
+  },
+  "independent_compliance_studies": [
+    {
+      "id": "brisbane2014_final_G20RG",
+      "authors": "Krystel Montpetit, Theodora Mladenova, Mickael Deprez, Jonathan Tavone, Phil Gazaleh, Taylor Grott, Antonia Tsapralis (G20 Research Group), with Andrei Sakharov, Andrey Shelepov, Mark Rakhmangulov (IORI HSE)",
+      "source_url": "https://www.g20.utoronto.ca/compliance/2014brisbane-final/index.html",
+      "publication_date": "2015-11-12",
+      "evaluation_start": "2014-11-16",
+      "evaluation_end": "2015-10-01",
+      "total_summit_commitments": 205,
+      "selected_monitored_commitments": 17,
+      "method": "G20 Research Group -1/0/+1 source-coded selected-commitment compliance, presented as P=50*(S+1)",
+      "scores": [
+        {
+          "topic": "climate_change",
+          "reported_score_hundredths": 10,
+          "reported_percent": 55
+        },
+        {
+          "topic": "clean_energy_technology",
+          "reported_score_hundredths": 90,
+          "reported_percent": 95
+        },
+        {
+          "topic": "fossil_fuel_subsidies",
+          "reported_score_hundredths": -45,
+          "reported_percent": 28
+        }
+      ],
+      "full_original_member_level_reanalysis": false,
+      "original_evaluators_endorse_DASHI": false,
+      "independently_proven_emissions_effect": null
+    },
+    {
+      "id": "antalya2015_final_G20RG",
+      "authors": "Sarah Scott, Alissa Wang and the G20 Research Group, with Mark Rakhmangulov and the Center for International Institutions Research (RANEPA)",
+      "source_url": "https://g20.utoronto.ca/compliance/2015antalya-final/index.html",
+      "publication_date": "2016-09-03",
+      "revision_date": "2016-12-10",
+      "evaluation_start": "2015-11-16",
+      "evaluation_end": "2016-09-05",
+      "total_summit_commitments": 113,
+      "selected_monitored_commitments": 17,
+      "method": "G20 Research Group -1/0/+1 selected-commitment compliance; revision post original publication",
+      "scores": [
+        {
+          "topic": "fossil_fuel_subsidies",
+          "reported_score_hundredths": -35,
+          "reported_percent": 33
+        }
+      ],
+      "full_original_member_level_reanalysis": false,
+      "original_evaluators_endorse_DASHI": false,
+      "independently_proven_emissions_effect": null
+    }
+  ],
+  "compliance_scope_guard": {
+    "independent_secondary_source_not_original_G20_leaders": true,
+    "source_authorship_distinct_from_original_communique": true,
+    "one_selected_commitment_per_scored_topic": true,
+    "no_extrapolation_to_all_205_or_113_commitments": true,
+    "no_normalised_country_pooled_causal_comparison": true,
+    "different_periods_and_criteria_remain_explicit": true,
+    "fossil_subsidy_comparison_is_two_reported_scored_results_not_treatment_effect": true,
+    "emissions_change_inferred": null,
+    "original_author_endorsement_inferred": false,
+    "published_rounded_percentages_not_independent_recomputed": true
   }
 }
