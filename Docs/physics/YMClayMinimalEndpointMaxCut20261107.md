@@ -206,3 +206,17 @@ For ANY `b<1`, choose `n>1/(1-b)` and then `q_n^n>=1-1/n>b`. Hence there is **no
 **Correct minimal theorem target:** Given a genuine, noncollapsed original Wilson E1 continuum and its *one same* OS Hilbert/Hamiltonian `H_G`, prove `Spec(H_G)∩(0,Δ)=∅` for one `Δ>0` in physical units over the entire reconstructed non-vacuum sector, and prove the local fields/observables and Ward/source identification are dense enough that D1 estimates control that sector. Coupled with N1 physical nontriviality this would pay the fixed-G mass-gap endpoint. G1 extends the completed per-group construction to every compact simple gauge group; no universal gap constant across groups is required.
 
 **This exact no-go and source audit do NOT constitute a constructive 4D YM theory or a mass-gap proof.** D1's original nonlinear large-field error bound, physical cutoff-uniform decay, E1 noncollapsed limit/OS, D2 all-sector spectral completeness, N1, and G1 remain **uninhabited physical source lemmas**. No Agda, CI or physical source calibration is claimed in this run.
+
+## 2026-11-08 exact original YM physical lemma cut — cross-lane reconciliation
+
+This is a documentary reconciliation with #1440, #1460, #1241 and #1472, not a new proof or replacement of existing R443/R445/R320/R333 owners. Proposed physical source lemmas follow.
+
+**Y01 trueOriginalWilsonFamily:** construct actual continuous compact G Haar/Fubini and normalized original nonabelian Wilson Gibbs cylinder laws at varying UV a and volume L, with same theory/action, physical coupling and compatible blocked projections.
+**Y02 uniformPhysicalRGAndMoments:** prove cutoff- and volume-uniform original R445 moments, tails, large-field control, tightness and compatible original measure limits preserving reflection positivity and Ward constraints.
+**Y03 noncollapsedInteracting4DOS:** build from Y01-Y02 a nontrivial interacting 4D continuum Schwinger theory satisfying all required OS/QFT axioms, with surviving nonconstant local observable/correlation. This pays E1 and N1 only when genuinely inhabited.
+**Y04 fullOriginalWilsonPhysicalDecay:** for admissible actual local gauge-invariant F,H prove |Cov_{a,L}(F,H)| <= C(F,H) exp(-m d_phys(supp F,supp H)), one m>0 independent of cutoff/volume, and uniform source-appropriate C. Include BOTH original CMP116 small-field component and the original full Wilson large-field remainder, at one fixed positive physical block size. A microscopic q(a)<1 does not suffice.
+**Y05 actualFullOSDenseProbe:** identify physical Wilson correlation with <F,exp(-t H_OS)H> on one reconstructed OS H; prove an appropriate dense/cyclic full nonvacuum test sector, not just chosen-mode probes.
+**Y06 sameOSFullSectorGap:** derive Spec(H_OS) intersection (0,Delta)=empty with Delta>0 in physical units over the WHOLE nonvacuum space from Y03-Y05, or an independently proven full-sector bound. No change of Hamiltonian after reconstruction.
+**Y07 everyCompactSimpleGroup:** instantiate the same endpoint for every compact simple G, permitting G-dependent positive gaps.
+
+Logical priority: (Y01+Y02)->Y03; (Y03+Y04+Y05)->Y06; Y07 after fixed-group proof. Original Dobrushin physical cube and original full small/large source files are conditional producers, not Y04 proofs. Monster FLM, Monstrous M-theory spectrum, KK solutions and p-adic holography do not discharge any of these same-Wilson physical obligations. Status all physically OPEN, no kernel/parallel_checker/CI or Clay claim.
