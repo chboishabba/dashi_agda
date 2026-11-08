@@ -60,7 +60,11 @@ def validate():
     assert latest["critical_family_ids"] == list(expected_families)
     families = obj["latest_seven_family_cut"]
     assert [row["id"] for row in families] == list(expected_families)
-    assert latest["critical_path_owner"].endswith("YangMillsClayCriticalPathRound572Exact.agda")
+    assert latest["critical_path_owner"].endswith("YangMillsClayCriticalPathRound578Exact.agda")
+    assert obj["latest_selected_cut"].startswith("R578")
+    for advanced in obj["latest_advanced_sources"]:
+        assert (ROOT / advanced["owner"]).is_file(), advanced["owner"]
+        assert advanced["constructed"] and advanced["uninhabited"]
     for family in families:
         assert (ROOT / family["owner"]).is_file(), family["owner"]
         assert family["already_paid"] and family["original_remaining"]
@@ -68,7 +72,7 @@ def validate():
         assert family["id"] in body
     for lemma in obj["lemmas"]:
         assert lemma["already_paid"], f"forgot existing source for {lemma['id']}"
-    assert "R569" in body and "R572" in body, "missing latest actual-group and critical path audit"
+    assert all(tag in body for tag in ("R559","R563","R569","R577","R578","R581")), "missing latest source-native audit"
     assert "YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md" in old, (
         "the preexisting main max-cut reference must point to new canonical roadmap"
     )
