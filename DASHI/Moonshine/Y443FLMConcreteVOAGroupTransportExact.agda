@@ -323,16 +323,16 @@ module Transport (selected published : VOA.VertexOperatorAlgebra) where
             (preservesTranslation law (toMonster groupIso g)
               (toState iso a)))
           (trans
-            (sym (cong (fromState iso)
-              (toTranslation iso (fromState iso
-                (Action.act publishedAction
-                  (toMonster groupIso g) (toState iso a))))))
+            (cong (fromState iso)
+              (cong (VOA.translation P.Y)
+                (sym (toAfterFrom iso
+                  (Action.act publishedAction
+                    (toMonster groupIso g) (toState iso a))))))
             (trans
-              (cong (fromState iso)
-                (cong (VOA.translation P.Y)
-                  (sym (toAfterFrom iso
-                    (Action.act publishedAction
-                      (toMonster groupIso g) (toState iso a))))))
+              (sym (cong (fromState iso)
+                (toTranslation iso (fromState iso
+                  (Action.act publishedAction
+                    (toMonster groupIso g) (toState iso a))))))
               (fromAfterTo iso
                 (VOA.translation S.Y (transported g a))))))
 
