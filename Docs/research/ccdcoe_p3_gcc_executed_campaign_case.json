@@ -1,0 +1,286 @@
+{
+  "schema": "dashi.ccdcoe.p3.gcc_executed_case.v1",
+  "case_id": "gcc-ebruce-harrison-1993-1995",
+  "purpose": "Source-specific observed communication and media-coverage replication; neither PR self-assessed results nor archival examples are causal impact estimates.",
+  "primary_sources": [
+    {
+      "id": "harrison_case_history",
+      "source_type": "pr_firm_self_report",
+      "title": "Case Histories: Media Relations — Global Climate Coalition",
+      "original_date": "undated",
+      "archive_estimated_years": "1994–1995",
+      "archive_index_date": "2025-07-20",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/",
+      "source_text_line_range": [
+        22,
+        35
+      ],
+      "original_pdf_sha256": null,
+      "original_media_encoding": null,
+      "source_review_receipt": null
+    },
+    {
+      "id": "gcc_1993_media_hits",
+      "source_type": "gcc_held_media_clipping_archive",
+      "title": "1993 GCC Media Hits",
+      "original_date": "1993",
+      "archive_index_date": "1993-04-21",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/",
+      "source_text_line_range": [
+        15,
+        26
+      ],
+      "original_pdf_sha256": null,
+      "source_review_receipt": null
+    },
+    {
+      "id": "gcc_board_jul_11_1995",
+      "source_type": "board_communications_program_source_index",
+      "title": "Global Climate Coalition Communications Program prepared for GCC Board",
+      "original_date": "1995-07-11",
+      "archive_index_date": "2025-07-20",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1995-global-climate-coalition-communications-program-prepared-for-gcc-board-july-11-1995/",
+      "source_text_line_range": [
+        8,
+        21
+      ],
+      "original_pdf_sha256": null,
+      "source_review_receipt": null
+    },
+    {
+      "id": "brulle_2022",
+      "source_type": "peer_reviewed_historical_research",
+      "title": "Advocating inaction: a historical analysis of the Global Climate Coalition",
+      "original_date": "2022",
+      "doi": "10.1080/09644016.2022.2058815",
+      "url": "https://doi.org/10.1080/09644016.2022.2058815",
+      "original_pdf_sha256": null,
+      "source_review_receipt": null
+    },
+    {
+      "id": "frontline_2022",
+      "source_type": "reported_ex_employee_interviews",
+      "title": "The Power of Big Oil: GCC PR campaign and former Harrison staff",
+      "original_date": "2022",
+      "url": "https://www.pbs.org/wgbh/frontline/article/video-big-oil-campaign-against-climate-change-action/",
+      "original_pdf_sha256": null,
+      "source_review_receipt": null
+    }
+  ],
+  "agency_claims": [
+    {
+      "id": "science_uncertainty_message",
+      "kind": "reported_intended_message",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        28,
+        30
+      ],
+      "proposition": "Firm described scientific-uncertainty framing as a campaign message.",
+      "independent_outcome_observed": false
+    },
+    {
+      "id": "economic_cost_message",
+      "kind": "reported_intended_message",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        28,
+        30
+      ],
+      "proposition": "Firm described economic-cost framing as a campaign message.",
+      "independent_outcome_observed": false
+    },
+    {
+      "id": "media_tours_and_editorial",
+      "kind": "agency_reported_delivery",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        29,
+        30
+      ],
+      "proposition": "Firm reported arranging media tours, editorial-board meetings, op-eds, reporter briefings, press releases and newsletters.",
+      "independent_outcome_observed": false
+    },
+    {
+      "id": "coverage_changed",
+      "kind": "agency_self_assessed_effect",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        31,
+        32
+      ],
+      "proposition": "Firm claimed it shifted coverage of climate science.",
+      "independent_outcome_observed": false
+    },
+    {
+      "id": "carbon_tax_debate",
+      "kind": "agency_self_assessed_effect",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        32,
+        33
+      ],
+      "proposition": "Firm claimed influence on the US carbon-tax debate.",
+      "independent_outcome_observed": false
+    },
+    {
+      "id": "voluntary_policy_influence",
+      "kind": "agency_self_assessed_effect",
+      "source_id": "harrison_case_history",
+      "source_text_line_range": [
+        33,
+        34
+      ],
+      "proposition": "Firm claimed influence on voluntary rather than mandatory emissions measures.",
+      "independent_outcome_observed": false
+    }
+  ],
+  "media_observations": [
+    {
+      "id": "washington_post_satellite_vs_surface_1993",
+      "source_id": "gcc_1993_media_hits",
+      "kind": "archived_clipping_index",
+      "publication": "The Washington Post",
+      "year": 1993,
+      "month": 7,
+      "day": null,
+      "article_title": "Satellite vs. Surface: Two Points of View on Global Warming",
+      "attributed_authorship": null,
+      "mentioned_people": [
+        "John Christy",
+        "Roy Spencer"
+      ],
+      "associated_with_gcc_archive": true,
+      "gcc_direct_placement_identified": false,
+      "original_article_fulltext_reviewed": false,
+      "source_index_line_range": [
+        17,
+        19
+      ],
+      "claim_text_coded": false,
+      "observed_frame": null,
+      "comparison_sample_receipt": null
+    },
+    {
+      "id": "nashville_banner_christy_1993",
+      "source_id": "gcc_1993_media_hits",
+      "kind": "archived_clipping_index",
+      "publication": "Nashville Banner",
+      "year": 1993,
+      "month": null,
+      "day": null,
+      "article_title": "Let's cool the rhetoric about global warming",
+      "attributed_authorship": "John Christy",
+      "mentioned_people": [
+        "John Christy"
+      ],
+      "associated_with_gcc_archive": true,
+      "gcc_direct_placement_identified": false,
+      "original_article_fulltext_reviewed": false,
+      "source_index_line_range": [
+        19,
+        20
+      ],
+      "claim_text_coded": false,
+      "observed_frame": null,
+      "comparison_sample_receipt": null
+    }
+  ],
+  "archival_notice": {
+    "source_id": "gcc_1993_media_hits",
+    "source_index_line_range": [
+      18,
+      19
+    ],
+    "event": "GCC archive index states that the coalition highlighted the Washington Post article in its September Climate Watch Bulletin.",
+    "bulletin_fulltext_reviewed": false,
+    "source_document_identity_verified": false
+  },
+  "evidence_stage": {
+    "strategy_reported_by_firm": true,
+    "activity_delivery_reported_by_firm": true,
+    "specific_media_clippings_located": true,
+    "independent_media_prepost_change_measured": false,
+    "outlet_level_sampling_frame_defined": false,
+    "media_claim_codebook_applied": false,
+    "causal_counterfactual_identified": false,
+    "policy_impact_identified": false,
+    "unknowns_must_remain_null": true
+  },
+  "planned_measurement": {
+    "unit": "dated individual newspaper item × outlet × frame × source provenance",
+    "frame_categories": [
+      "science_uncertainty",
+      "economic_cost",
+      "consensus_acknowledgement",
+      "policy_mandate",
+      "other_or_undetermined"
+    ],
+    "historical_period": "1992-01 to 1996-12, subject to verified launch/delivery dates",
+    "time_bucket": "month",
+    "dependent_measure": "source-grounded coded share of each frame by outlet and month",
+    "possible_comparison_design": "interrupted time series or matched outlet/source comparison only after temporal coverage, baseline, intervention receipts and competing-event measurements exist",
+    "required_covariates": [
+      "major climate science announcements",
+      "other lobbying and PR campaigns",
+      "editorial policy and outlet",
+      "legislative calendar",
+      "document acquisition bias",
+      "regional and temporal selection"
+    ],
+    "estimand_status": "not_identified",
+    "confidence_intervals": null,
+    "measured_outcome": null,
+    "non_detection_not_zero_effect": true
+  },
+  "independent_replication": {
+    "id": "exxon_2021_180",
+    "title": "Rhetoric and frame analysis of ExxonMobil's climate change communications",
+    "doi": "10.1016/j.oneear.2021.04.014",
+    "journal": "One Earth",
+    "source_url": "https://doi.org/10.1016/j.oneear.2021.04.014",
+    "dataverse_doi": "10.7910/DVN/XXQUKJ",
+    "dataverse_url": "https://doi.org/10.7910/DVN/XXQUKJ",
+    "reported_documents": 180,
+    "original_catalog_in_supplement": "S7",
+    "original_pdf_reproduction_restricted_by_copyright": true,
+    "raw_text_and_analysis_code_deposited": true,
+    "access": "reasonable request by qualified researchers",
+    "in_repository_document_level_data": false,
+    "replication_executed": false,
+    "cannot_merge_with_gcc_case_without_source_crosswalk": true,
+    "original_2017_187_corpus_is_separate": true
+  },
+  "acceptance_gates": [
+    {
+      "id": "P0",
+      "target": "Read original Harrison PDF and 1993 GCC media-clipping original files; retain original raw digest, provenance, dates and transcript/extraction receipts",
+      "status": "index_text_only_raw_bytes_not_ingested"
+    },
+    {
+      "id": "P1",
+      "target": "Produce complete article-level dated sampling frame, candidate ITIR/SLR EventPNF and independent manual claim codebook with review receipts",
+      "status": "two_indexed_items_only"
+    },
+    {
+      "id": "P2",
+      "target": "Compute observed contemporaneous media-frame prevalence and uncertainty, not self-claimed impact",
+      "status": "not_measured"
+    },
+    {
+      "id": "P3",
+      "target": "Identify GCC campaign temporal intervention and compare with external drivers and documented counterfactual sources",
+      "status": "not_identified"
+    },
+    {
+      "id": "P4",
+      "target": "Download/review legally accessible 180-document dataset/catalog and rerun original framing analysis without mixing cohorts",
+      "status": "dataverse_access_not_established"
+    },
+    {
+      "id": "P5",
+      "target": "Assess generalisation, independent historical verification and institutional voice/power/agency without collapsing sources",
+      "status": "not_validated"
+    }
+  ]
+}
