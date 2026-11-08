@@ -23,6 +23,7 @@ import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact as GCC
 import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact as Trumbo
+import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact as Institution
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -328,3 +329,33 @@ trumboOriginalCausalEffectNotAdmitted :
     Trumbo.trumbo1996PublishedStudy ≡ false
 trumboOriginalCausalEffectNotAdmitted =
   Trumbo.independentBaselineDoesNotReportGCCEffect
+
+-- Independent G20/COP21 original document authorship preserved:
+-- Hamburg's United States statement must not be attributed to
+-- the other G20 leaders, nor B20/C20 recommendations to G20 adoption.
+hamburgUSOtherG20SpeakersNotFlattenable :
+  NF.FactorsThrough Institution.flattenTopic Institution.speaker → ⊥
+hamburgUSOtherG20SpeakersNotFlattenable =
+  Institution.hamburgAttributionCannotFactorThroughTopic
+
+c20RecommendationNotParisLegalDuty :
+  NF.FactorsThrough Institution.flattenTopic Institution.speechAct → ⊥
+c20RecommendationNotParisLegalDuty =
+  Institution.legalSpeechActCannotFactorThroughTopic
+
+gCCAgencyAccountNotParisLegalAuthority :
+  NF.FactorsThrough Institution.flattenTopic Institution.strength → ⊥
+gCCAgencyAccountNotParisLegalAuthority =
+  Institution.agencySelfAssessmentNotTreatyAuthority
+
+hamburgSeparateVoicesProbe :
+  Discriminator.BundleSeparates Institution.institutionalVoiceProbe
+    Institution.hamburgUS2017 Institution.hamburgOtherLeaders2017
+hamburgSeparateVoicesProbe =
+  Institution.hamburgSpeakerSeparation
+
+noEndorsementFromSummitCitation :
+  Institution.InstitutionallyScopedSource.externalAuthorsEndorseDASHI
+    Institution.hamburgSource ≡ false
+noEndorsementFromSummitCitation =
+  Institution.noEndorsementFromQuotation
