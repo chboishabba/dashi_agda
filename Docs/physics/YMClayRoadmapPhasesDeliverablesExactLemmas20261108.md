@@ -1,5 +1,16 @@
 # Yang–Mills Clay — canonical roadmap, phases, deliverables, exact remaining lemmas
 
+## 8 November — source audit update: BCH and CMP119 OS4 already implemented
+
+**BCH is paid as a formal compact Lie analysis package**, not a new construction obligation. `CompactLieAnalyticPackage.QuantitativeBCH` includes the local exponential product equality, BCH expansion and cubic remainder control; `CompactSimpleQuantitativeCoverage` covers classical and exceptional index classes; R569–R571 anchor the operations to the actual selected group. The remaining G1 obligation is to **inhabit original-group physical quantitative bounds** and five-block physical estimates, rather than redevelop the BCH formalism. `CompactLieAnalyticPackage.standardCompactLieAnalysisLevel = standardImported`: the underlying classical theorem is treated as imported authority.
+
+**CMP119 OS4 already has a precise same-object compiler**. R582 `YangMillsClayPublishedFiniteOSCoreMomentSourceRound582Exact` builds the preferred OS0/1/2/3/5 *pre-gap* core from original finite CMP119 moments and published finite RP; it does not require OS4 to construct H2 core. R583 `YangMillsClayCMP119H1OS4AttachmentRound583Exact` proves `selectedH1ClusteringMeansFullOS4` and constructs `asCoreOS4Attachment`, interpreting selected H1 continuum clustering as full OS4 on **the exact same Schwinger family**. `round583H1ToOS4CompilerLevel = machineChecked`. The final semantic source level `literalRound583SelectedClusteringMeansOS4Level = conditional`: the uninhabited work is the actual CMP119 H1 source bound, Wilson-product density and connected-covariance continuity used in the supplied `CMP119CoreH1OS4Meaning`. Do not ask for an independent OS4 theorem or another OS Hamiltonian.
+
+The current YM source-audit ordering is **R583 (OS4 attachment), R582 (pre-gap core), R581 (preferred finite source), R578 (seven-family scheduler), R577 (same-H), R569–R571 (same-group), R563 (Ward)**. This is source/law completeness accounting, not a new proof of a Clay continuum or positive mass gap.
+
+---
+
+
 ## 8 November — latest R578 correction: CMP119, reconstructed Hamiltonian, BCH and Ward already owned
 
 **R578 supersedes R572** as the preferred source-native seven-family scheduler. Preserve the seven existing source families (A3, T1, T5, B1, B2, G1, H6), but do NOT treat them as seven missing foundations:
