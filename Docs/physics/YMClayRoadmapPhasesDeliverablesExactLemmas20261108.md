@@ -165,3 +165,14 @@ Re-use, do not recreate: R443, R445, R320 (CMP116), R331/R333, original Wilson O
 **Prioritization:** PH1 YM02 and PH2 YM05 are the highest mathematical uncertainty. Advance them concurrently with the PH0 actual-source provider, then pay E1+N1, same-H_OS and dense full-sector gap. Avoid spending cycles rewriting already source-written finite algebra.
 
 **Attribution:** Wilson, Bałaban (CMP109/116/119/122), Osterwalder–Schrader, and the corresponding published group/analysis authors retain historical theorem credit. DASHI source compilers and finite nonpromotion models are separate formal implementation work.
+
+
+## 8 November — new R583 literal finite Wilson-span algebra (additive and scalar gate paid)
+
+**New source owner:** `DASHI/Physics/YangMills/YangMillsCMP119LiteralWilsonSpanAdditiveExact.agda`, imported by the existing `BalabanRGTOERegression` Golden. R583's actual `WilsonProduct = List (ℝ × List Loop)` is already a literal finite linear combination, but its `CMP119CoreH1OS4Meaning` still selected arbitrary `zeroWilson`, `addWilson`, `scaleWilson` and assumed `embedsZero`, `embedsSum`, `embedsScalar` as source fields.
+
+The new module **constructs these operators**, not hypotheses: `zeroSpan = []`; `addSpan = _++_`; `scaleSpan k = map (λ (a,loops) → (k*a,loops))`. It proves `emptySpanEmbedsZero`, `appendSpanEmbedsSum` and `scaleSpanEmbedsScalar` on the **same original** `R583.literalFiniteWilsonSpan` using only existing `RealAnalysisAxioms` associativity, identity and distributivity. These three fields no longer need independent source proofs when R583 adopts this canonical choice.
+
+**Remaining original R583 OS4 meaning:** genuine chosen Wilson-word constant `1`, multiplication/convolution and literal OS2 observable-product compatibility; original selected R281 left/right test representation as finite Wilson combinations; physically injective/unital time translation preserving Wilson words; density in the original H2 OS Gram topology; uniform-in-time connected covariance continuity; selected H1-R281 estimate genuinely covering all literal Wilson test products. The existing `selectedH1ClusteringMeansFullOS4` consumes those analytic leaves. None are paid merely by finite additive arithmetic. CMP119/R559/R581/R582/R583, BCH and OS H are already developed; avoid restarting them.
+
+The Clay source remains physically conditional and no Agda kernel test was performed.
