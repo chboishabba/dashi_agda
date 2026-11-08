@@ -43,6 +43,9 @@ claims.
 - Main current pressure point: `DASHI/Physics/Closure/`.
 - Canonical theorem-spine map: `Docs/support/reference/CanonicalProofSpine.md`.
 - Current cleanup roadmap: `Docs/RepoStructureCleanupRoadmap.md`.
+- Current Moonshine/VOA exact phase/deliverable/lemma max-cut:
+  `Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`
+  (PR #1472; R0 complete, V0/V1/V2 source-specific OPEN, V3 conditional compiler).
 - Live paper corpus router: `Docs/LiveSurfaceIndex.md`.
 - Proof-first organization policy: `Docs/ProofFirstRepoPolicy.md`.
 
