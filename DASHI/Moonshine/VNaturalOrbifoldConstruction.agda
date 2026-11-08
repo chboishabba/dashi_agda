@@ -1,6 +1,7 @@
 module DASHI.Moonshine.VNaturalOrbifoldConstruction where
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Product using (_×_; _,_)
@@ -492,3 +493,133 @@ module ActualSelectedSummandInclusions
         (VOA.VertexOperatorAlgebra.gradedModule
           (OrbifoldVOAAssembly.orbifoldVOA assembly)))
       fixedPreservesZero twistedPreservesZero
+
+
+------------------------------------------------------------------------
+-- V0.3: SAME-SOURCE GRADED PAIR CONSTRUCTION
+--
+-- The actual summand carriers are taken from the original selected
+-- Leech-orbifold input. Operations and gradings on those carriers MUST
+-- be supplied by the genuine original summand sources. This constructor
+-- is not a proof of their linear/VOA laws. Unlike the legacy tagged
+-- coproduct it does construct the exact paired GradedModule, with both
+-- sectors represented at every grade.
+------------------------------------------------------------------------
+
+module SelectedPairedGradedModule
+  (construction : VNaturalConstruction) where
+
+  input : LeechLatticeVOAInput
+  input = VNaturalConstruction.leechInput construction
+
+  fixed : FixedPointVOA
+      (LeechLatticeVOAInput.leechLatticeVOA input)
+      (LeechLatticeVOAInput.leechInvolution input)
+  fixed = LeechLatticeVOAInput.fixedPoint input
+
+  twisted : TwistedModule
+      (LeechLatticeVOAInput.leechLatticeVOA input)
+      (LeechLatticeVOAInput.leechInvolution input)
+  twisted = LeechLatticeVOAInput.canonicalTwistedModule input
+
+  plus : TwistedEvenSector twisted
+  plus = LeechLatticeVOAInput.twistedEvenSector input
+
+  Fixed : Set
+  Fixed = FixedPointVOA.fixedCarrier fixed
+
+  Twisted : Set
+  Twisted = TwistedEvenSector.CarrierPlus plus
+
+  -- Scalar carrier of the actual source fixed-point VOA. The twisted
+  -- sector must represent the same scalar action, not a second ring.
+  fixedGM : VOA.GradedModule
+  fixedGM =
+    VOA.VertexOperatorAlgebra.gradedModule
+      (FixedPointVOA.fixedVOA fixed)
+
+  Scalar : Set
+  Scalar = VOA.GradedModule.Scalar fixedGM
+
+  record SourceSectorGrading : Setω where
+    field
+      fixedZero : Fixed
+      twistedZero : Twisted
+      fixedAdd : Fixed → Fixed → Fixed
+      twistedAdd : Twisted → Twisted → Twisted
+      fixedScale : Scalar → Fixed → Fixed
+      twistedScale : Scalar → Twisted → Twisted
+      fixedGrade : Agda.Builtin.Nat.Nat → Set
+      twistedGrade : Agda.Builtin.Nat.Nat → Set
+      fixedIncludeGrade : (n : Agda.Builtin.Nat.Nat) →
+        fixedGrade n → Fixed
+      twistedIncludeGrade : (n : Agda.Builtin.Nat.Nat) →
+        twistedGrade n → Twisted
+
+  open SourceSectorGrading public
+
+  -- The original source dimensions are not replaced by a chosen
+  -- numeric grade profile. The graded piece is literally their product.
+  pairedGradedModule : SourceSectorGrading → VOA.GradedModule
+  pairedGradedModule source = record
+    { VOA.GradedModule.Scalar = Scalar
+    ; VOA.GradedModule.Carrier =
+        LinearOrbifoldCarrier fixed twisted plus
+    ; VOA.GradedModule.gradePiece = λ n →
+        fixedGrade source n × twistedGrade source n
+    ; VOA.GradedModule.includeGrade = λ n p →
+        fixedIncludeGrade source n (Data.Product.proj₁ p) ,
+        twistedIncludeGrade source n (Data.Product.proj₂ p)
+    ; VOA.GradedModule.zero =
+        fixedZero source , twistedZero source
+    ; VOA.GradedModule._+_ = λ x y →
+        fixedAdd source (Data.Product.proj₁ x) (Data.Product.proj₁ y) ,
+        twistedAdd source (Data.Product.proj₂ x) (Data.Product.proj₂ y)
+    ; VOA.GradedModule._·_ = λ s x →
+        fixedScale source s (Data.Product.proj₁ x) ,
+        twistedScale source s (Data.Product.proj₂ x)
+    }
+
+  originalPairedZero :
+    (source : SourceSectorGrading) →
+    VOA.GradedModule.zero (pairedGradedModule source)
+      ≡ (fixedZero source , twistedZero source)
+  originalPairedZero source = refl
+
+  originalPairedGradeInclusion :
+    (source : SourceSectorGrading)
+    (n : Agda.Builtin.Nat.Nat)
+    (x : fixedGrade source n)
+    (y : twistedGrade source n) →
+    VOA.GradedModule.includeGrade (pairedGradedModule source) n
+      (x , y)
+      ≡ (fixedIncludeGrade source n x ,
+         twistedIncludeGrade source n y)
+  originalPairedGradeInclusion source n x y = refl
+
+  originalPairedAddition :
+    (source : SourceSectorGrading)
+    (x x' : Fixed) (y y' : Twisted) →
+    VOA.GradedModule._+_ (pairedGradedModule source)
+      (x , y) (x' , y')
+      ≡ (fixedAdd source x x' , twistedAdd source y y')
+  originalPairedAddition source x x' y y' = refl
+
+  originalPairedScaling :
+    (source : SourceSectorGrading)
+    (s : Scalar) (x : Fixed) (y : Twisted) →
+    VOA.GradedModule._·_ (pairedGradedModule source)
+      s (x , y)
+      ≡ (fixedScale source s x , twistedScale source s y)
+  originalPairedScaling source s x y = refl
+
+  -- Strong source-local exclusion of the previous, incorrect A ⊎ B:
+  -- both canonical zero embeddings now coincide by definition.
+  pairedOriginalZerosAgree :
+    (source : SourceSectorGrading) →
+    let module L = LinearOrbifoldSummandInclusions
+          fixed twisted plus (fixedZero source) (twistedZero source)
+    in
+    L.includeFixedLinear (fixedZero source)
+      ≡ L.includeTwistedLinear (twistedZero source)
+  pairedOriginalZerosAgree source = refl
