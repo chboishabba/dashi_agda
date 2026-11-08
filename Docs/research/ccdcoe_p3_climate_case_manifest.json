@@ -111,7 +111,8 @@
     "document_content_divergence": "published_study_result",
     "1998_API_draft_identified_effect": "not_identified",
     "preplan_survey": "reported_in_original_draft_not_independently_validated",
-    "actual_1998_plan_expenditure": "not_identified"
+    "actual_1998_plan_expenditure": "not_identified",
+    "preexisting_1997_opinion_dynamics": "measured_published_descriptive"
   },
   "follow_up_discriminator": {
     "id": "implementation_and_command_archive",
@@ -347,7 +348,8 @@
     "1998_draft_to_2017_later_coalition_activity": "no direct execution identity; distinct time, organisation and source scope",
     "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect",
     "1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft": "independent events; no shared-execution identity admitted",
-    "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate"
+    "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate",
+    "1997_climate_opinion_panel_to_1998_API_plan_effect": "temporal negative control; both survey waves ended prior to April 1998 draft; cannot infer plan-caused outcomes"
   },
   "followup_evidence_20261107": [
     {
@@ -499,6 +501,13 @@
       "status": "reported_survey_not_causal_effect",
       "source_ids": [
         "congressional_record_1998_04_27"
+      ]
+    },
+    {
+      "id": "independent_1997_climate_opinion_dynamics",
+      "status": "measured_independent_pre_1998_API_draft_not_API_effect",
+      "source_ids": [
+        "krosnick_visser_holbrook_1997_debate"
       ]
     }
   ],
@@ -731,5 +740,66 @@
     "requires_document_id_crosswalk_and_coding_revision_receipt": true,
     "intercoder_reliability_note": "2020 addendum reports screening agreement and Krippendorff alpha; do not mistake document-screening reliability for experimental exposure effects",
     "causal_impact_estimate": null
+  },
+  "independent_pre_api_opinion_panel": {
+    "id": "krosnick_visser_holbrook_1997_debate",
+    "title": "American Opinion on Global Warming: The Impact of the Fall 1997 Debate",
+    "publisher": "Resources for the Future / Resources",
+    "published_date": "1998-10-31",
+    "url": "https://www.resources.org/archives/american-opinion-on-global-warming-the-impact-of-the-fall-1997-debate/",
+    "journal_link": "https://doi.org/10.1088/0963-6625/9/3/303",
+    "study_design": "two separate national telephone cross-sectional surveys, not a randomized API treatment",
+    "waves": [
+      {
+        "id": "pre_1997_debate",
+        "start": "1997-09-01",
+        "end": "1997-10-05",
+        "n": 688
+      },
+      {
+        "id": "post_1997_debate_pre_1998_API",
+        "start": "1997-12-20",
+        "end": "1998-02-13",
+        "n": 725
+      }
+    ],
+    "published_descriptive_percentages": [
+      {
+        "construct": "news_exposure_reported_last_4_months",
+        "pre": 48,
+        "post": 56,
+        "delta_percentage_points": 8
+      },
+      {
+        "construct": "thinking_a_lot_or_moderate",
+        "pre": 54,
+        "post": 65,
+        "delta_percentage_points": 11
+      },
+      {
+        "construct": "high_opinion_certainty",
+        "pre": 28,
+        "post": 34,
+        "delta_percentage_points": 6
+      },
+      {
+        "construct": "strong_party_gap_belief_warming_occurred",
+        "pre": 4,
+        "post": 17,
+        "delta_percentage_points": 13
+      },
+      {
+        "construct": "strong_party_gap_future_warming",
+        "pre": 8,
+        "post": 21,
+        "delta_percentage_points": 13
+      }
+    ],
+    "denominator_scope": "Published rounded sample and subgroup percentages; subgroup base sizes and weighting/complex survey design must govern precision estimates.",
+    "measured_prior_to_API_draft": true,
+    "cannot_measure_1998_API_plan_impact": true,
+    "author_interpretation": "Fall 1997 news and policy debate associated with increasing awareness and political differentiation; author-assessed change is specific to the 1997 debate, not later API draft.",
+    "quantitative_microdata_present_in_repo": false,
+    "causal_effect_of_API_plan": null
   }
 }
