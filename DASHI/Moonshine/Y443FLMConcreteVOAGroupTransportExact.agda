@@ -244,3 +244,51 @@ module Transport (selected published : VOA.VertexOperatorAlgebra) where
     agreementOn preexisting g =
       (x : S.State) →
       Action.act preexisting g x ≡ transported g x
+
+
+------------------------------------------------------------------------
+-- INHABITED IDENTITY CASE (same selected object, not just dimension 196884)
+------------------------------------------------------------------------
+
+module IdenticalVOASelection (V : VOA.VertexOperatorAlgebra) where
+  module T = Transport V V
+
+  reflexiveVOAIsomorphism : T.ExactFLMVOAIsomorphism
+  reflexiveVOAIsomorphism = record
+    { T.toState = λ x → x
+    ; T.fromState = λ x → x
+    ; T.fromAfterTo = λ x → refl
+    ; T.toAfterFrom = λ x → refl
+    ; T.toScalar = λ x → x
+    ; T.fromScalar = λ x → x
+    ; T.scalarFromTo = λ x → refl
+    ; T.scalarToFrom = λ x → refl
+    ; T.toGrade = λ n x → x
+    ; T.fromGrade = λ n x → x
+    ; T.gradeFromTo = λ n x → refl
+    ; T.gradeToFrom = λ n x → refl
+    ; T.toIncludes = λ n x → refl
+    ; T.fromIncludes = λ n x → refl
+    ; T.toVacuum = refl
+    ; T.toConformal = refl
+    ; T.toAdd = λ x y → refl
+    ; T.toScale = λ s x → refl
+    ; T.toMode = λ x n y → refl
+    ; T.toTranslation = λ x → refl
+    }
+
+module IdenticalMonsterSelection {G : Set}
+  (V : VOA.VertexOperatorAlgebra) (gi : TM.GroupWithInverse G) where
+  module T = Transport V V
+
+  reflexiveGroupIsomorphism :
+    T.ExactY443MonsterGroupIso gi gi
+  reflexiveGroupIsomorphism = record
+    { T.toMonster = λ x → x
+    ; T.fromMonster = λ x → x
+    ; T.fromMonsterAfterTo = λ x → refl
+    ; T.toMonsterAfterFrom = λ x → refl
+    ; T.preservesIdentity = refl
+    ; T.preservesProduct = λ x y → refl
+    ; T.preservesInverse = λ x → refl
+    }
