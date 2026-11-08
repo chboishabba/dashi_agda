@@ -14,6 +14,8 @@ module DASHI.Moonshine.Y443FLMCanonicalReferenceFromQuotientExact where
 ------------------------------------------------------------------------
 
 open import Agda.Primitive using (Setω)
+open import Agda.Builtin.Equality using (_≡_)
+open import Data.Integer.Base using (ℤ)
 
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.TwistedModuleModularity as TM
@@ -42,6 +44,28 @@ module Selected {G H Q : Set}
       actualPublishedMonsterAction :
         Actions.ActualGroupAction
           {H} {S.T.P.State} publishedMonsterGroup
+
+      -- Genuine FLM VOA automorphism laws, not merely group actions.
+      publishedVacuum : (h : H) →
+        Actions.act actualPublishedMonsterAction h
+          (VOA.vacuum S.T.P.Y)
+        ≡ VOA.vacuum S.T.P.Y
+      publishedConformal : (h : H) →
+        Actions.act actualPublishedMonsterAction h
+          (VOA.conformalVector S.T.P.Y)
+        ≡ VOA.conformalVector S.T.P.Y
+      publishedMode : (h : H)
+        (x : S.T.P.State) (n : ℤ) (y : S.T.P.State) →
+        Actions.act actualPublishedMonsterAction h
+          (VOA.mode S.T.P.Y x n y)
+        ≡ VOA.mode S.T.P.Y
+          (Actions.act actualPublishedMonsterAction h x) n
+          (Actions.act actualPublishedMonsterAction h y)
+      publishedTranslation : (h : H) (x : S.T.P.State) →
+        Actions.act actualPublishedMonsterAction h
+          (VOA.translation S.T.P.Y x)
+        ≡ VOA.translation S.T.P.Y
+          (Actions.act actualPublishedMonsterAction h x)
   open SourceAuthority public
 
   assembleCanonicalReference :
@@ -53,3 +77,29 @@ module Selected {G H Q : Set}
           (bothGroupsAreSameMonsterQuotient evidence)
     ; S.publishedMonsterActs = actualPublishedMonsterAction evidence
     }
+
+
+  module WithSource (source : SourceAuthority) where
+    module C = S.T.SourceActions
+      (JMD.groupWithInverse jmd)
+      publishedMonsterGroup
+      (QIso.composedMonsterIsomorphism
+        (bothGroupsAreSameMonsterQuotient source))
+      (originalVOAEqualsFLM source)
+      (actualPublishedMonsterAction source)
+
+    actualPublishedVOAAutomorphismLaws : C.PublishedActionVOALaws
+    actualPublishedVOAAutomorphismLaws = record
+      { C.preservesVacuum = publishedVacuum source
+      ; C.preservesConformal = publishedConformal source
+      ; C.preservesMode = publishedMode source
+      ; C.preservesTranslation = publishedTranslation source
+      }
+
+    realSelectedTransportedModePreserved :
+      (g : G) (x : S.T.S.State) (n : ℤ) (y : S.T.S.State) →
+      C.transported g (VOA.mode S.T.S.Y x n y)
+      ≡ VOA.mode S.T.S.Y
+          (C.transported g x) n (C.transported g y)
+    realSelectedTransportedModePreserved =
+      C.transportedPreservesMode actualPublishedVOAAutomorphismLaws
