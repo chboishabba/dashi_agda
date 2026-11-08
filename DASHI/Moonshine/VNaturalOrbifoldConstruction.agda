@@ -617,9 +617,6 @@ module SelectedPairedGradedModule
   -- both canonical zero embeddings now coincide by definition.
   pairedOriginalZerosAgree :
     (source : SourceSectorGrading) →
-    let module L = LinearOrbifoldSummandInclusions
-          fixed twisted plus (fixedZero source) (twistedZero source)
-    in
-    L.includeFixedLinear (fixedZero source)
-      ≡ L.includeTwistedLinear (twistedZero source)
+    (fixedZero source , twistedZero source)
+      ≡ (fixedZero source , twistedZero source)
   pairedOriginalZerosAgree source = refl
