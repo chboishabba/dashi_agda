@@ -21,6 +21,7 @@ import DASHI.Cognition.CCDCOEP3EvidenceStageIdentificationExact as Ladder
 import DASHI.Cognition.CCDCOEP3PreAPIOpinionTemporalControlExact as PreAPI
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
+import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact as GCC
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -287,3 +288,21 @@ namedExecutive2021DoesNotSupplyAccounting :
     Contested.okeefe2021AttributedAccount ≡ false
 namedExecutive2021DoesNotSupplyAccounting =
   Contested.directInterviewIsNotIndependentAccounting
+
+-- GCC Harrison agency case history and archived 1993 media objects
+-- MUST retain their original source-kind identity. The firms' own
+-- claimed policy/media effects are not observed causal estimates.
+gccAgencyReportIsNotIndependentMediaArchive :
+  NF.FactorsThrough GCC.flatten GCC.kind → ⊥
+gccAgencyReportIsNotIndependentMediaArchive =
+  GCC.evidenceKindDoesNotFactorThroughGenericTopic
+
+gccSourceKindProbeSeparates :
+  Discriminator.BundleSeparates GCC.sourceIdentityProbe
+    GCC.harrisonFirmCaseHistory GCC.gccHeldMediaClippings1993
+gccSourceKindProbeSeparates = GCC.sourceIdentitySeparates
+
+gccRealSourceDoesNotInventEffect :
+  GCC.GCCMediaReplicationGate.causalEffectAdmitted
+    GCC.selectedGCCCaseGate ≡ false
+gccRealSourceDoesNotInventEffect = GCC.noInventedCausalEstimate
