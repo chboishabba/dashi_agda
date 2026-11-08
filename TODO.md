@@ -17324,3 +17324,22 @@ Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 - [ ] Inhabit ORIGINAL identifyCarrier injectivity from actual source
   orbifold assembly. This is exactly equivalent to the previously
   requested reverse reconstruction law; neither has been assumed.
+
+### 2026-11-08 V0 corrective pivot — tagged coproduct is not FLM linear direct sum
+
+- [x] Source-native no-go: old OrbifoldCarrier=A ⊎ B with disjoint
+  summand injections cannot send both true summand zeros to same VOA zero.
+- [x] Define correct paired LinearOrbifoldCarrier=A × B on actual source
+  summands, its common-zero canonical embeddings and injection proofs;
+  expose VNaturalConstruction.VnaturalLinearCarrier alongside legacy tagged.
+- [ ] Populate original componentwise linear structure and genuine mixed
+  vertex-operator laws on the paired source, including grading, vacuum,
+  translation, conformal Jacobi/locality and true selected/FLM comparison.
+- [ ] Migrate the selected orbifold assembly and dependent same-object
+  consumers through actual mode-preserving linear equivalence, rather than
+  trying to establish an insufficient no-junk property for legacy A ⊎ B.
+
+The prior original identifyCarrier-injective/no-extra-states route is
+now **LEGACY SET-LEVEL ONLY** and does not close actual FLM V0.
+The precise proof/attribution and source no-go appear in canonical
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
