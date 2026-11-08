@@ -23,6 +23,7 @@ import DASHI.Cognition.CCDCOEP3CausalTrialecticRegressionExact
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact
 import DASHI.Cognition.CCDCOEP3EvidenceStageIdentificationExact
+import DASHI.Cognition.CCDCOEP3PreAPIOpinionTemporalControlExact
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact
 
