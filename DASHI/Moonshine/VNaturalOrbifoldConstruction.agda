@@ -90,6 +90,56 @@ OrbifoldCarrier :
 OrbifoldCarrier fixed twisted plus =
   FixedPointVOA.fixedCarrier fixed ⊎ TwistedEvenSector.CarrierPlus plus
 
+
+
+------------------------------------------------------------------------
+-- Correct *linear* direct-sum carrier, beside the legacy tagged sum.
+-- This is additive pair data A × B, NOT A ⊎ B. The old carrier is kept
+-- for compatibility until an original FLM sectorwise VOA structure
+-- and a source-native migration are proved. No physical model is
+-- asserted merely from this set-level product.
+------------------------------------------------------------------------
+
+LinearOrbifoldCarrier :
+  ∀ {V involution}
+  (fixed : FixedPointVOA V involution)
+  (twisted : TwistedModule V involution)
+  (plus : TwistedEvenSector twisted) → Set
+LinearOrbifoldCarrier fixed twisted plus =
+  FixedPointVOA.fixedCarrier fixed × TwistedEvenSector.CarrierPlus plus
+
+module LinearOrbifoldSummandInclusions
+  {V involution}
+  (fixed : FixedPointVOA V involution)
+  (twisted : TwistedModule V involution)
+  (plus : TwistedEvenSector twisted)
+  (fixedZero : FixedPointVOA.fixedCarrier fixed)
+  (twistedZero : TwistedEvenSector.CarrierPlus plus) where
+
+  Fixed : Set
+  Fixed = FixedPointVOA.fixedCarrier fixed
+
+  Twisted : Set
+  Twisted = TwistedEvenSector.CarrierPlus plus
+
+  Whole : Set
+  Whole = LinearOrbifoldCarrier fixed twisted plus
+
+  includeFixedLinear : Fixed → Whole
+  includeFixedLinear x = x , twistedZero
+
+  includeTwistedLinear : Twisted → Whole
+  includeTwistedLinear y = fixedZero , y
+
+  originalSummandZerosAgree :
+    includeFixedLinear fixedZero ≡ includeTwistedLinear twistedZero
+  originalSummandZerosAgree = refl
+
+  linearPairHasTwoComponents :
+    (x : Fixed) (y : Twisted) →
+    (x , y) ≡ (x , y)
+  linearPairHasTwoComponents x y = refl
+
 record OrbifoldVOAAssembly
   {V : VOA.VertexOperatorAlgebra}
   {involution : VOAInvolution V}
