@@ -919,3 +919,95 @@ This section reconciles #1472, #1162, #1179, #696, #1103, #1241, #1235, #1460, a
 **P06 physicalDiscriminator:** an uncertainty-bounded prediction on the selected theory and independently measured replication. No physical validation follows from arithmetic.
 
 Critical Monster chain: M01+M02+(M03 or M04)->M05; M06+M07+M08+M09+M10->M11. Critical gravity chain: P01+P02+P03+P05+P06; P04 independent. YM physical full-limit/mass-gap remains independent on #1444. Exact-head Agda/parallel_checker and original operator/measurement verification are NOT claimed.
+
+
+## 2026-11-08 cross-PR terminal SAME-OBJECT max-cut: exact remaining lemmas
+
+This is a RECONCILED STATEMENT LEDGER, not newly constructed theorem inhabitants. Labels M01-M07, K01-K07, Y01-Y05 below are **proposed theorem names, not declarations already present in Agda**. The Agda source is golden. Attribution stays with Ivanov/Bray, FLM/Griess/Tits, Dong--Griess--Lam, Carnahan/ATLAS, Chester--Marrani--Rios, the original KK/GR/OS/Balaban sources, and DASHI for its own formal implementations.
+
+### Paid donors / no duplicated scaffolding
+
+Y443 literal 80-relator syntax, JMD u/v words and conditional quotient/action composition and Griess-generator propagation are owned by PR #1472. Actual FLM orbifold weight-two dimensions and 26+1 Monstrous M-theory gravitational sector crosswalk **300+98280+98304=196884** are owned by MoonshineOrbifoldWeightTwoDecompositionExact and MonsterSpecialGravityKKWeightTwoCrosswalkExact on that branch; this is an exact *count*, not a gravity/FLM operator intertwiner. M24 duad carrier and 2B/Brauer sources are PR #1103. Conditional 5D KK reductions, sourced radion matching, Casimir candidates, faithful SU(3)^3/Z3 global quotient, nonliftable boundary bundles and local CS/WZ parity checks are PR #1241; CY/Hopf PR #1235. Observer signature/TSVF/KK/OS interface PR #1460; exceptional/3B entropy-gravity compiler PRs #1179 and #1162; CFT/VOA PRs #190/#208/#437; penumbral #142/#144. Original finite Wilson Gibbs, CMP116/OS/RG interfaces and physical countermodels PR #1444, route PR #1440.
+
+**Decisive source no-go:** Y443DGLWeakCertificateNoGoExact *inhabits both earlier putative DGL certificates for arbitrary weak VOAs*. The old HolomorphicC2Certificate / HigherGradeBoundCertificate are NOT sound evidence of actual published DGL assumptions until their module, C2 quotient and grading data are genuinely indexed by the original selected VOA. M03 must REPAIR this semantic problem, not instantiate it vacuously.
+
+### A. Monster/FLM selected-object critical path
+
+Let V be the actual selected VNaturalConstruction, W the published FLM V-natural, G the original selected Y443 group, Q the actual quotient of the twelve-generator free group by the normal closure of ALL 80 original relations, and M the published Monster. Let x_(n)y denote genuine VOA modes.
+
+**M01 (original selected VOA / mode-one).** Construct actual grading, locality/Jacobi, vacuum, translation, Virasoro and mode operations on V, and prove for x,y in V_2: x_(1)y lies in V_2; the original product is bilinear and commutative, with genuine conformal and invariant-pairing data. A free firstProduct field in a record is not payment.
+
+**M02 (genuine Griess algebra iso).** Construct f_2:V_2 ≅ W_2, two-sided inverse, with f_2(x_(1)y)=f_2(x)_(1)f_2(y), linearity, f_2(omega_V)=omega_W and the genuine invariant pairing preserved. Fin196884 coordinate equality is not enough. Owner: actual ActualCommonHypotheses of #1472, after M01.
+
+**M03a OR M03b (sound actual DGL route).** Prove c(V)=24 and V_1=0; define C_2(V)=span{a_(-2)b} on the real selected VOA and the actual selected module category. Either (a) dim(V/C_2(V))<infty and every irreducible V-module is V; or (b) V is simple and for every n>=3 dim V_n <= dim W_n. Rebuild both old certificate records with true selected carriers and prove no vacuous singleton/constant-zero instantiations qualify. This and M02 are obligations of Dong--Griess--Lam 2007, not consequences of matching graded counts.
+
+**M04 (full-mode published uniqueness instantiation).** With M01, M02, and ONE of M03a/M03b, inhabit a source-sound Dong--Griess--Lam theorem and obtain F:V ≅ W preserving vacuum, conformal vector, translation, all modes and all grades. The existing DGL theorem-authority record is a parameter, NOT independently a proof.
+
+**M05 (two true Q80 isomorphisms).** Construct G ≅ Q ≅ M as actual two-sided group isomorphisms, with images of source generators, original 80 relators, universal presentation/normal-closure and published Monster identification. Existing composed-isomorphism proof consumes these isomorphisms but does not provide them.
+
+**M06 (true Y443 action comparison).** Construct actual rho_G:G -> Aut_VOA(V) and rho_M:M -> Aut_VOA(W) preserving all modes. Find a real finite Griess generating family S for V_2 and prove for each g in {u,v}, s in S:
+\[
+F(\rho_G(g)s)=\rho_M((\psi\circ\phi)(g))F(s).
+\]
+Use Y443FLMGriessGeneratorUVExact to extend over actual V_2; use actual VOA generation/faithfulness to extend to all V. JMD historical source ownership preserved. This requires M04 + M05 + actual generator data.
+
+**M07 (independent 194-class / McKay--Thompson fidelity, not prerequisite for M04).** Construct exact source-indexed 194 conjugacy classes, actual cyclotomic 194x194 characters with genuine orthogonality laws, class fusion and twined graded traces
+\[
+T_g(q)=\sum_{n\ge-1}\operatorname{tr}(g|W_{n+1})q^n.
+\]
+MonsterCharacterTableExact currently postulates indexing/scalars and stores orthogonality as trivial Unit; MonsterMcKayThompsonClosure explicitly makes graded-trace realization optional. Existing #696 signatures alone do not discharge the full table.
+
+### B. Physics: one original KK/Monster-gravity action (independent of Clay YM)
+
+**K01 (one sourced 5D theory).** Select ONE complete differentiable S_5[g_5,Phi], including the same physical matter, radion, bulk/boundary couplings and regulator, and prove actual Euler--Lagrange equations, conservation, gauge/global-bundle and quantum anomaly consistency. For #1241 SU(3)^3/Z3 orbifold candidate the unresolved correlated U(1) flux, APS/eta/spin-torsion and globally quantized CS+WZ are live. A finite local parity check does not pay global quantum consistency.
+
+**K02 (regular compactified sourced solution).** Construct (g_5,Phi) solving delta S_5=0 with regular compactification and explicit reduction to physical (g_4,A,radion,matter), stabilized radion, satisfactory cosmological term, photon identification, physical source and bounded fifth-force tests. Do not confuse smooth S1 with orbifold interval models.
+
+**K03 (same physical observer cone and KK metric).** Derive actual retarded 4D measured cone and quadratic metric from the SAME #1460 microscopic observer dynamics and prove coincidence with the selected K02 reduced metric (including units, temporal orientation and physical calibration), not merely (3,1) signature.
+
+**K04 (same noncollapsed OS quantum clock, optional for standalone gravity).** Give a physical unitary U:H_observer ≅ H_OS intertwining actual strongly continuous real-time evolution with the SAME selected OS H, on its proper domains:
+\[
+Ue^{-itH_{\rm observer}/\hbar}=e^{-itH_{\rm OS}/\hbar}U.
+\]
+This is required if asserting the unified observer/YM dynamics, not simply a KK model. Do not conflate OS e^{-tau H} with real-time U(t).
+
+**K05 (real Monster action on physical gravitational fields).** Upgrade the paid 196884-dimensional gravity/FLM decomposition from sector cardinalities to a genuine Monster-equivariant, local, constraint- and kinetic-operator-preserving map Xi between a specified physical on-shell massless field-space and actual FLM weight two. Require Xi rho_grav(g)=rho_FLM(g) Xi, and source-realization of the actual physical representation; do NOT infer it from a 1+299 dimension split.
+
+**K06 (same-state stress and prediction).** Using one physically selected density/Hamiltonian state and same five-dimensional or reduced action, prove conserved renormalized T_mu nu, the relevant Einstein/controlled correction equation, and derive a parameter-fixed observable with controlled uncertainty and independent held-out empirical discrimination. Reuse #1179 MonsterExceptionalEntropyGravityCompilerExact and CMP119, not entropy-as-stress assumptions.
+
+**K07 (model-specific CFT/K3/umbral/holography optional branch).** If claimed, construct a real selected local/unitary CFT or K3 SCFT and a genuine operator/state/correlation preserving bulk-boundary map; supply a model-specific Monster/M24/umbral intertwiner. The bosonic FLM VOA, K3 Mathieu, umbral and penumbral structures are distinct without this. The 194 Monster classes are not an established classification of black holes.
+
+### C. Four-dimensional Yang--Mills Clay endpoint (separate)
+
+For each compact simple gauge group K, let mu^K_(a,L) be ACTUAL periodic Wilson measures, S^K a candidate R4 Schwinger family, and (H_K,Omega_K,Ham_K) its SAME OS reconstruction.
+
+**Y01 / E1 (original interacting R4 continuum).** Prove cutoff/volume-uniform moment/tightness, scale calibration, OS/QFT axioms, reflection positivity and genuine original Wilson family convergence S^K as a->0, L->infty. A conditional cylinder expectation has not proved its original physical limit.
+
+**Y02 / D1 (original full Wilson physical-length decay, chosen sufficient route).** On an explicitly normalized local observable class O_phys, prove
+\[
+|\operatorname{Cov}_{\mu^K_{a,L}}(O_x,O_y)|
+ \le C_K N(O_x,O_y)e^{-m_K |x-y|_{\rm phys}},
+\quad C_K,m_K>0,
+\]
+UNIFORM in cutoff and volume, paying actual small/large-field and RG estimates. Existing #1444 no-go shows q_a<1 separately for each a does not give fixed positive physical mass. D1 is a strong sufficient proof route, not itself an axiom of the Clay statement.
+
+**Y03 / D2 (actual full nonvacuum same-H gap).** Prove full physical/cyclic operator density and
+\[
+\operatorname{spec}(Ham_K|_{\Omega_K^\perp})\subseteq[\Delta_K,\infty),
+\qquad \Delta_K>0,
+\]
+on the SAME reconstructed H, including invisible-sector exclusion. Decay of one test state's correlation does not pay this.
+
+**Y04 / N1 (interacting local nontriviality).** Exhibit a surviving genuine continuum local gauge-invariant witness excluding the trivial/free theory (e.g. adequate nonzero connected higher correlation), on the exact Y01 limit, with controlled renormalization.
+
+**Y05 / G1 (every compact simple group).** For all compact simple K establish Y01, Y03, Y04, with either Y02 or another sound full-sector gap proof. A SU(N)-only result is not the Clay universal quantifier.
+
+### Explicit Pareto order / honest exit criteria
+
+Moonshine M01 -> M02 -> sound M03a OR M03b -> M04; in parallel M05; then M06. M07 is independently useful but not a substitute for M04/M06.
+KK K01 -> K02 -> K03; K04 only for same quantum observer claim; K05 -> K06 for physical Monster gravity, K07 optional.
+YM Y01/Y02 with source-uniform continuum controls -> Y04 and Y03 -> Y05. No Monster/KK/194/class-count shortcut is licensed for E1 or D2.
+
+Owners: #1472 Y443+Griess+DGL; #1179/#1162 Monster-3B physical gravity; #1241/#1235 KK+CY; #1460 TSVF observer; #1444/#1440 original YM; #1103 M24 2B; #696 194 classes; #190/#208/#437 CFT/VOA; #142/#144 penumbral. All original scholarly source and prior formal-work attribution retained.
+
+**Promotion guard:** these are exact mathematical theorem statements, not claims of inhabitation. No arbitrary Set/Unit route certificates, source-name strings, finite toy source replacements, cardinality coincidences, source-foreign dynamics, unexecuted exact-head kernel proofs, or single-probe spectral estimates can claim completion.
