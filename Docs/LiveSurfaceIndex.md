@@ -51,6 +51,9 @@ Use these as current support routers rather than browsing all of `Docs/`:
 - `Docs/support/reference/ClosurePipeline.md`
 - `Docs/support/reference/CanonicalProofSpine.md`
 - `Docs/roadmaps/CompleteVerifiedPhysicsUnificationRoadmap.md`
+- `Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`:
+  active 2026-11-08 VOA phases, original-source deliverables and exact remaining lemmas;
+  see PR #1472. Separate from the physics-unification roadmap.
 
 ## What Is Not A Live Entry Surface
 
