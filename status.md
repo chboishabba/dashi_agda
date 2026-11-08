@@ -9893,3 +9893,15 @@ VOA construction, with YnatG genuine nonzero Wbar and topPairs_one source;
 this is donor evidence, NOT an Agda theorem, and does not establish selected
 Monster action. TauCeti's Y443 presented-group equivalence likewise covers
 the presented quotient, NOT a source-verified Monster action.
+
+
+### 2026-11-08 pure source FT block reduction
+
+OriginalPureFTZeroLaws and the exact Agda originalPureFTModeIsNativeTwisted
+/ originalPureFTModeAgreesWithLeechTwistedModule proofs on the actual
+selected fixed-plus-even-twisted pair reduce its pure fixed/twisted
+four-block mode to the ORIGINAL Leech theta-twisted module mode through
+includePlus. Conditional native source zero equations remain explicit;
+the original TT and reverse cross intertwiners, full VOA axioms and
+LeanVOA-to-Agda canonical-source identification are NOT paid. Source
+committed, no Agda kernel verification executed.
