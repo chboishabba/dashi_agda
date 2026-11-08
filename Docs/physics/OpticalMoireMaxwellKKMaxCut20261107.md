@@ -95,3 +95,23 @@ python scripts/check_optical_moire_full_maxwell_propagation.py --test
 5. Optional KK same-source Einstein-matter metric reduction remains a separate physical identification task, not a prerequisite for Maxwell optics.
 
 No CI is required by this research task. Do not promote code presence, publication citation, synthetic numerical fit or self-selected parameters to an original experimental replication.
+
+## 8 November 2026 — Bloch and Poincare reused, no duplicate ontology
+
+Original source: Dev and Shen (2026), article DOI 10.1038/s41377-026-02533-w, original DR-NTU dataset DOI 10.21979/N9/AJB6FD. Prior Bloch-band and reciprocal-lattice literature remains separate. Existing DASHI physical donors include:
+- PR #1163 BM/magic-angle graphene first-shell Bloch plane-wave machinery;
+- DASHI/Physics/CondensedMatter/HexagonalSqrt3R30ReciprocalFoldingExact.agda exact determinant-three, M^T N=3I, and C3 folding classes;
+- DASHI/Physics/CondensedMatter/CoQuarterTaSeTwoPhysicalSymmetryExact.agda reciprocal-axis Bloch symmetry;
+- PR #1076 original magnetic Seitz/Bloch + same-object ARPES implementation;
+- PR #1115 isolated-subspace Berry/projector/Wilson diagnostics;
+- optics PR #1272 and Maxwell/KK donor owners #1460/#1241.
+
+New `scripts/check_optical_moire_bloch_poincare.py` tests the Jones->Poincare/Bloch-sphere map directly from normalized optical Jones pairs. Over 100 independent deterministic complex Jones pairs it checks norm-one, invariance under global Jones phase and the pure polarization identity
+`abs(<u,v>)^2 / (||u||^2||v||^2) == (1+dot(stokes(u),stokes(v)))/2`.
+Finite plane-wave Bloch translation test is `sum_j ||c_j||² |exp(i q_j·R)-exp(i k0·R)|² / sum_j ||c_j||²`: the commuting reciprocal integer-wave example is near zero, and adding an irrational x-frequency gives a nonzero residual for the **selected translation**. It does NOT prove no possible periods exist globally.
+
+Locally run analog of the committed test (100 samples, seeded): max Stokes-norm error 2.22e-16; global-phase 4.81e-16; fidelity formula 3.33e-16; commensurate translation 1.61e-15; selected irrational-mode translation 0.6571. No claim is made that an optical polarization sphere is a physical electronic Bloch band, nor that source experimental data have been reproduced.
+
+For the source's 30-degree quasicrystalline example, generic periodic Bloch-cell machinery is NOT silently applied: translation symmetry must be checked, with quasiperiodic reciprocal star and finite-window approximants when true periodic cells are unavailable. For supercell fields, Bloch translation pertains to the complex vector field and its common phase; Stokes textures can have a distinct/smaller periodicity owing to global-phase cancellation. The two periodicity claims require separate consumers. Native field-space electromagnetic diffraction is independent of electronic band-energy eigenvalues.
+
+Source paper explicitly reports measured n=7 bag interior 6.83, surrounding opposite-polarity -0.81 and total 6.02; these are **original Dev/Shen measurements** (not DASHI outputs). The topology count n-1=6 is their ideal relation and 30-degree higher-order quasi-crystal example has distinct boundary semantics. This provides an actual benchmark receipt target once original arrays are acquired; no numeric comparison can be asserted from source-angle settings alone.
