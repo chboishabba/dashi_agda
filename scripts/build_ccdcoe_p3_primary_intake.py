@@ -32,6 +32,8 @@ MANIFEST = ROOT / "Docs/research/ccdcoe_p3_climate_case_manifest.json"
 OFFICIAL_URL = ("https://www.govinfo.gov/content/pkg/CREC-1998-04-27/"
                 "html/CREC-1998-04-27-pt1-PgH2323.htm")
 MAX_SOURCE_BYTES = 8 * 1024 * 1024
+MEMO_OPENING = "To: Global Climate Science Team"
+MEMO_ENDING = "Total Funding Required"
 ANCHORS: dict[str, str] = {
     "document_circulation":
         "Subject: Draft Global Climate Science Communications Plan",
@@ -94,10 +96,20 @@ def prepare(raw: bytes, manifest: dict[str, Any]) -> dict[str, Any]:
     indexed = {row["candidate_id"].removeprefix("pnf-"): row for row in rows}
     if set(indexed) != set(ANCHORS):
         raise ValueError("Manifest candidate identities do not match anchors")
+    # The Congressional RECORD prints commentary BEFORE the memo that
+    # repeats several planned tactics (notably the science data center).
+    # Require the unique dated memo opening; search ONLY downstream of
+    # that boundary, while retaining full-document normalized offsets.
+    memo_start, memo_end = locate_unique(text, MEMO_OPENING)
+    memo_text = text[memo_start:]
+    if "April 3, 1998." not in memo_text[:2500]:
+        raise ValueError("Expected April 3, 1998 draft memo date missing")
     resolved = []
     previous_end = -1
     for claim_id, anchor in ANCHORS.items():
-        start, end = locate_unique(text, anchor)
+        relative_start, relative_end = locate_unique(memo_text, anchor)
+        start = memo_start + relative_start
+        end = memo_start + relative_end
         if start <= previous_end:
             raise ValueError("Claim anchors are not in original document order")
         previous_end = end
@@ -195,8 +207,10 @@ def write_archived_bytes(path: Path, raw: bytes) -> None:
 
 def self_test() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
-    fake = "<html><body>Global Climate Science\n" + "\n".join(
-        ANCHORS.values()) + "</body></html>"
+    fake = ("<html><body>Global Climate Science "
+            "Establish a Global Climate Science Data Center. "
+            + MEMO_OPENING + " April 3, 1998. "
+            + "\n".join(ANCHORS.values()) + "</body></html>")
     fixture = fake.encode()
     result = prepare(fixture, manifest)
     assert result["candidate_count"] == 6
@@ -217,14 +231,16 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Unrelated source was not rejected")
-    reordered = "<html>Global Climate Science " + "\n".join(reversed(list(ANCHORS.values()))) + "</html>"
+    reordered = ("<html>Global Climate Science " + MEMO_OPENING
+                 + " April 3, 1998. "
+                 + "\n".join(reversed(list(ANCHORS.values()))) + "</html>")
     try:
         prepare(reordered.encode(), manifest)
     except ValueError:
         pass
     else:
         raise AssertionError("Reordered source sections were not rejected")
-    print("PASS: six ordered candidate offsets, deterministic hashes, duplicate/reorder/source rejection")
+    print("PASS: memo-scoped six ordered offsets, repeated commentary, hashes, duplicate/reorder/source rejection")
 
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__)
