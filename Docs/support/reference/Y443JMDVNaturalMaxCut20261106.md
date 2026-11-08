@@ -849,3 +849,23 @@ actual FLM VOA iso + true Q80 selected/published group isos
      on ALL original VOA states and ALL source group elements.
 ```
 The italicized/actual source producers above are not yet inhabited in the inspected repository. No finite Python control, paper citation, abstract 3B character or raw 80-relator check is substituted for those actual witnesses. Strict sparse u/v comparator has a default complete 196884-column gate but has not been run on real canonical FLM matrices. These are the **only remaining high-alpha semantic producers**; the intermediate transport and two-generator proof compilers have been implemented.
+
+
+## 2026-11-08 follow-on real high-alpha max-cut: DGL uniqueness instead of constructing an all-mode iso by hand
+
+**Recheck of public primary literature (DOI 10.1353/ajm.2007.0009, arXiv:math/0506321):** Dong–Griess–Lam give two sufficient uniqueness theorems for the actual Moonshine VOA. Both demand central charge 24, V1=0, and **V2 isomorphic AS THE FIRST-PRODUCT GRIESS ALGEBRA**. Their route (a) also requires C2-cofiniteness and that V be the sole irreducible V-module; route (a') requires V simple and the ALL-higher-grade bound dim V_n<=dim Vnatural_n for n >=3. The repo's `MoonshineGradedTraceProbeExact` previously encoded the alternatives only as `Bool` requirement flags; no source-specific Agda theorem instantiation was present.
+
+**New owner:** `Y443DGLUniquenessSelectedFLMExact.agda` packages the hypotheses attached to the **actual selected** VOA: full bidirectional grade-two Griess algebra iso under genuine mode 1, conformal and linear preservation, selected c=24 and V1=0; and the distinct irreducible/C2 finite basis route versus every-grade true Nat `LessOrEqual` route. A published DGL theorem authority is explicit as an external-input function supplying `ExactFLMVOAIsomorphism` (ALL VOA modes) from the paid hypotheses. This is a genuine proof reduction, not a proof of DGL itself from Agda core. The C2 certificate and graded dimension count are source-input obligations, not arbitrary indicators of success.
+
+**Direct composition** added to `Y443FLMCanonicalReferenceFromQuotientExact.DongGriessLamRoute`: the `fromDGLC2` and `fromDGLHigherGradeBound` constructors produce an existing `CanonicalFLMReference` without supplying an independently built all-mode iso: they use DGL uniqueness and the SAME original Q80 group-to-selected group / Q80-to-Monster isomorphisms and the genuine canonical VOA mode-preserving action. This bypasses separate infinite-generation inverse maps, conditional on the proper uniqueness and actual Q80/VOA action receipts.
+
+**Explicit negative result** in `Y443FLMWeakVOACoreNoPromotionExact.agda`: the existing `VertexOperatorAlgebraCore` has bare `Set`-valued Jacobi, locality, vacuum and Virasoro law slots. Two fully constructed inhabitants of this weak core, with state carriers `Bool` and `Unit`, have NO two-sided state-space isomorphism; proof `noTwoSidedBoolUnitStateIso` uses finite carrier equality. Therefore a generic `VertexOperatorAlgebra` record cannot imply genuine VOA axioms, weight-two generation, canonical FLM identity or Monster group recognition. It is necessary to validate/provide honest semantic witnesses before claiming the selected independent object is canonical.
+
+**Original published mathematics remains attributable to its authors**: Dong/Griess/Lam uniqueness; FLM Moonshine VOA; Huang automorphism extension; Griess/Tits Monster aut; Ivanov/Bray Y443 group presentation; JMD original u/v generation. These are not newly proved classical theorems by the wrapper.
+
+**Truthful remaining blockers**:
+1. **DGL hypothesis evidence:** actual V2->Griess algebra isomorphism with multiplication, actual selected c24, V1=0, PLUS either actual C2 quotient/irreducible-module theorem or actual simple VOA and every-grade dimension upper bounds; and selected published DGL theorem acceptance.
+2. **Q80 identification evidence:** actual quotient Q80 and both two-sided isomorphisms to selected G and to canonical M, not an arbitrary extra-relations quotient; the exact classical classification data must be attached to these same objects.
+3. **Original action evidence:** original selected source is a genuine mode-preserving VOA action, canonical published action is genuinely mode-preserving, and u/v agree on an inhabited actual Griess generating family (or 196884 basis). The existing compilation code then gives all-element/all-state equality, not an additional gap.
+
+**Execution:** source-written, branch-committed and static-bracket inspected only. No Agda typecheck/CI, no external canonical FLM instance or complete u/v 196884-vector matrix arrays and hence no claim of a full selected-object theorem.
