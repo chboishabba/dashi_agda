@@ -37,3 +37,16 @@ scripts/run_agda29_parallel_check.sh \
   DASHI/Algebra/Quantum/ShadowTrainedAFQMCReuseExact.agda \
   DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda
 ```
+
+
+## Executable numerical control and dashiRTX provenance (9 November 2026)
+
+`scripts/qcafqmc_finite_hubbard_control.py` is a NumPy-only finite Hubbard control of Eq. (16)–(18), not an IonQ chemistry replication. It uses a two-site one-alpha/one-beta four-configuration Hubbard Hamiltonian, exact diagonalization, nonorthogonal spin-separated Slater walkers, Metropolis sampling of the magnitude-weighted state/walker overlap, and held-out synthetic attenuation-calibration labels.
+
+A locally executed predecessor gave exact ground energy -0.82842712474619, learned energy -0.8284201305390058, fitted attenuation 0.719630799182197 versus imposed 0.72, overlap RMSE 0.0006517398266170309, and mean six-query ratio errors 0.09191775 for 1,000 draws versus 0.02416042 for 16,000 draws. The committed script uses equivalent numerical construction but must be rerun independently to establish an exact-commit receipt.
+
+Run: `python scripts/qcafqmc_finite_hubbard_control.py`.
+
+**Not implemented:** the nickel system, matchgate shadow reconstruction from original device measurements, the 13k-parameter transformer, real AFQMC Hubbard–Stratonovich propagation, phaseless force-bias/population control, or independent AWS quantum/classical cost accounting.
+
+The separate [dashiRTX](https://github.com/chboishabba/dashiRTX) repository was inspected via its README; its documented scope includes NumPy-based PDA/MDL light transport and importance-weighted adaptive rendering. Repository code search for Metropolis/Monte Carlo/sampling returned no indexed matching source. Do not claim that a concrete dashiRTX Metropolis kernel was verified. The inspected source-owned Metropolis implementation remains `DASHI.Biology.MolecularMechanicsSamplingAlgorithms`. Retain source and cross-repository attribution.
