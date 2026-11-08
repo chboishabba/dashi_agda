@@ -19,8 +19,10 @@ import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 --
 --   V^natural = V_Λ^+ ⊕ (V_Λ^T)^+.
 --
--- The direct-sum carrier below is constructive.  Promotion to a VOA requires
--- the supplied closure, locality, Jacobi, conformal, and simplicity witnesses.
+-- The original tagged coproduct carrier below is only a set-level interface;
+-- the genuine two-summand linear carrier is the paired product defined below.
+-- Promotion to a VOA requires real original mixed-sector mode, Jacobi,
+-- locality, conformal, linear and simplicity witnesses.
 
 record VOAInvolution (V : VOA.VertexOperatorAlgebra) : Setω where
   field
