@@ -208,6 +208,66 @@ def validate(data: dict, cases: str, sources: str) -> dict:
     assert data["promotion"]["preplan_survey"] == (
         "reported_in_original_draft_not_independently_validated")
     assert data["promotion"]["actual_1998_plan_expenditure"] == "not_identified"
+    # The public April 1998 primary document itself orders the proposed
+    # launch AFTER approval, funding, and resource arrangements.
+    decision = data["primary_plan_decision_gate"]
+    assert decision["source_id"] == primary["id"]
+    assert decision["source_url"] == primary["url"]
+    assert decision["draft_circulation_line_range"] == [434, 442]
+    assert decision["conditional_launch_line_range"] == [659, 664]
+    assert decision["observed_draft"] is True
+    assert all(decision[name] is False for name in (
+        "observed_signed_approval",
+        "observed_disbursement",
+        "observed_same_plan_delivery",
+        "observed_causal_response",
+    ))
+    assert all(decision[name] is None for name in (
+        "approval_receipt_id", "financial_receipt_id",
+        "delivered_event_receipt_id", "effect_study_id",
+    ))
+    ladder = data["evidence_ladder"]
+    assert [row["stage"] for row in ladder] == [
+        "published_draft",
+        "organizational_approval",
+        "plan_funding",
+        "plan_specific_delivery",
+        "causal_belief_or_policy_effect",
+    ]
+    assert [row["status"] for row in ladder] == [
+        "observed_primary",
+        "contested_not_identified",
+        "not_identified",
+        "not_identified",
+        "not_identified",
+    ]
+    assert ladder[0]["actual_receipt"] == primary["id"]
+    assert all(row["actual_receipt"] is None for row in ladder[1:])
+    # Independently indexed API/GCC documents remain a *discovery* surface;
+    # no inferred same-object execution identity.
+    leads = data["additional_archival_discovery"]
+    assert {row["id"] for row in leads} == {
+        "api_feb_1998_rapid_response_draft", "gcc_jul_1995_board_report"
+    }
+    assert all(row["evidence_status"] ==
+               "index_located_original_source_review_pending"
+               for row in leads)
+    assert all(row["source_url"].startswith("https://") for row in leads)
+    assert all(row["same_as_april_plan_execution"] is not True for row in leads)
+    # Exact finite observation-ladder counterexamples corresponding to
+    # CCDCOEP3EvidenceStageIdentificationExact, not a real-world sample.
+    worlds = [
+        (True, False, False, False, False),
+        (True, True, False, False, False),
+        (True, True, True, False, False),
+        (True, True, True, True, False),
+        (True, True, True, True, True),
+    ]
+    for coarse, fine in ((0, 1), (1, 2), (2, 3), (3, 4)):
+        assert any(
+            left[coarse] == right[coarse] and left[fine] != right[fine]
+            for left in worlds for right in worlds
+        ), f"Unexpected stage factorisation: {coarse} -> {fine}"
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
         "original_document_with_provenance")
@@ -230,6 +290,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
         "real_measured_outcomes": 0,
+        "source_gated_decisions": len(ladder),
+        "archival_review_leads": len(leads),
+        "stage_nonfactorability_witnesses": 4,
     }
 
 def main():
