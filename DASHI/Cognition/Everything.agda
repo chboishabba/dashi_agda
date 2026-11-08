@@ -26,6 +26,7 @@ import DASHI.Cognition.CCDCOEP3EvidenceStageIdentificationExact
 import DASHI.Cognition.CCDCOEP3PreAPIOpinionTemporalControlExact
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact
+import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
