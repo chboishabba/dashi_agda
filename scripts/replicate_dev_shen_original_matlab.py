@@ -19,6 +19,7 @@ import json
 from pathlib import Path
 import numpy as np
 from scipy.io import loadmat, savemat
+from check_optical_moire_closed_stokes_degree import compute as closed_mesh_degree
 
 CHANNELS = ("IH", "IV", "ID", "IA", "IR", "IL")
 SOURCE = {
@@ -155,7 +156,9 @@ def run(root,case,outdir):
         "published_md5_verified":bool(checksums),
         "published_md5_source":"DR-NTU Dataverse dataset V2, DOI 10.21979/N9/AJB6FD, visible file metadata",
         "pixel_shape":list(n.shape[1:]), "quality":quality,
-        "topology":charge(n,valid), "experimental_replication_certified":False}
+        "topology":charge(n,valid),
+        "closed_boundary_topology_diagnostic":closed_mesh_degree(n,valid),
+        "experimental_replication_certified":False}
     target=Path(outdir);target.mkdir(parents=True,exist_ok=True)
     (target/"receipt.json").write_text(json.dumps(receipt,indent=2))
     np.savez_compressed(target/"stokes.npz",stokes=n,valid=valid)
