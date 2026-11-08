@@ -26,12 +26,6 @@ import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 import DASHI.Moonshine.Y443FLMGriessFullAutSelectedVOAExact as FLM
 
-sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-sym refl = refl
-
-trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-trans refl p = p
-
 module Selected (construction : VN.VNaturalConstruction) where
   originalVOA : VOA.VertexOperatorAlgebra
   originalVOA = VN.VNaturalConstruction.Vnatural construction
@@ -110,75 +104,3 @@ module Selected (construction : VN.VNaturalConstruction) where
         (S.firstProduct (actualSelectedGriess laws) y z)
   selectedModeOneIsLeftLinear laws x y z =
     modeOneLeftLinear laws x y z
-
-  -- Max-cut rigidity: the selected Griess first product is uniquely
-  -- determined by the ORIGINAL mode-one operator and injectivity of
-  -- the ORIGINAL grade-two embedding. No second picked multiplication
-  -- can differ while satisfying the same original mode equation.
-  selectedModeOnePreimageUnique :
-    (laws : SourceNativeGriessLaws)
-    (other : S.WeightTwo → S.WeightTwo → S.WeightTwo) →
-    ((x y : S.WeightTwo) →
-      S.include (other x y)
-      ≡ VOA.VertexOperatorData.mode S.Y
-          (S.include x) (+ 1) (S.include y)) →
-    (x y : S.WeightTwo) →
-    other x y ≡ modeOneGradeTwo laws x y
-  selectedModeOnePreimageUnique laws other correct x y =
-    includeIsInjective laws (other x y) (modeOneGradeTwo laws x y)
-      (trans (correct x y) (sym (modeOneReallyOriginal laws x y)))
-
-  -- In particular no independently supplied ConcreteGriessProduct
-  -- with the same source-native mode-one provenance can pick a
-  -- different first product.
-  selectedActualGriessProductRigid :
-    (laws : SourceNativeGriessLaws)
-    (candidate : S.ConcreteGriessProduct) →
-    (x y : S.WeightTwo) →
-    S.firstProduct candidate x y
-    ≡ S.firstProduct (actualSelectedGriess laws) x y
-  selectedActualGriessProductRigid laws candidate x y =
-    selectedModeOnePreimageUnique laws
-      (S.firstProduct candidate)
-      (S.firstProductIsModeOne candidate) x y
-
-  -- The same rigidity holds for the selected underlying linear
-  -- operations and the conformal vector. These facts eliminate
-  -- freedom to choose a fake grade-two algebra carrier operation.
-  selectedActualGradeTwoAdditionRigid :
-    (laws : SourceNativeGriessLaws)
-    (candidate : S.ConcreteGriessProduct) →
-    (x y : S.WeightTwo) →
-    S.weightTwoAdd candidate x y
-    ≡ S.weightTwoAdd (actualSelectedGriess laws) x y
-  selectedActualGradeTwoAdditionRigid laws candidate x y =
-    includeIsInjective laws
-      (S.weightTwoAdd candidate x y)
-      (additionOnGradeTwo laws x y)
-      (trans (S.includeWeightTwoAdd candidate x y)
-        (sym (actualAddition laws x y)))
-
-  selectedActualGradeTwoScalingRigid :
-    (laws : SourceNativeGriessLaws)
-    (candidate : S.ConcreteGriessProduct) →
-    (s : S.Scalar) (x : S.WeightTwo) →
-    S.weightTwoScale candidate s x
-    ≡ S.weightTwoScale (actualSelectedGriess laws) s x
-  selectedActualGradeTwoScalingRigid laws candidate s x =
-    includeIsInjective laws
-      (S.weightTwoScale candidate s x)
-      (scalarOnGradeTwo laws s x)
-      (trans (S.includeWeightTwoScale candidate s x)
-        (sym (actualScaling laws s x)))
-
-  selectedActualConformalRigid :
-    (laws : SourceNativeGriessLaws)
-    (candidate : S.ConcreteGriessProduct) →
-    S.conformalWeightTwo candidate
-    ≡ S.conformalWeightTwo (actualSelectedGriess laws)
-  selectedActualConformalRigid laws candidate =
-    includeIsInjective laws
-      (S.conformalWeightTwo candidate)
-      (selectedConformalGradeTwo laws)
-      (trans (S.conformalIsActual candidate)
-        (sym (conformalReallyOriginal laws)))
