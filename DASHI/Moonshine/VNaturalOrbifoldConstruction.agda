@@ -549,11 +549,11 @@ module SelectedPairedGradedModule
       twistedAdd : Twisted → Twisted → Twisted
       fixedScale : Scalar → Fixed → Fixed
       twistedScale : Scalar → Twisted → Twisted
-      fixedGrade : Agda.Builtin.Nat.Nat → Set
-      twistedGrade : Agda.Builtin.Nat.Nat → Set
-      fixedIncludeGrade : (n : Agda.Builtin.Nat.Nat) →
+      fixedGrade : Nat → Set
+      twistedGrade : Nat → Set
+      fixedIncludeGrade : (n : Nat) →
         fixedGrade n → Fixed
-      twistedIncludeGrade : (n : Agda.Builtin.Nat.Nat) →
+      twistedIncludeGrade : (n : Nat) →
         twistedGrade n → Twisted
 
   open SourceSectorGrading public
@@ -588,7 +588,7 @@ module SelectedPairedGradedModule
 
   originalPairedGradeInclusion :
     (source : SourceSectorGrading)
-    (n : Agda.Builtin.Nat.Nat)
+    (n : Nat)
     (x : fixedGrade source n)
     (y : twistedGrade source n) →
     VOA.GradedModule.includeGrade (pairedGradedModule source) n
