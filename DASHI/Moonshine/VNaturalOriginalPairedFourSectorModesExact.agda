@@ -245,3 +245,39 @@ module Selected (construction : VN.VNaturalConstruction)
             (toNativeTranslation blocks))
           p
   pairedVertexTranslationIsNativeOriginalTranslation blocks p = refl
+
+
+  -- Complete the normalization of duplicate source records: there is
+  -- exactly one ORIGINAL parity source and one translation source,
+  -- represented in two pre-existing owner modules.
+  -- Conversely, an already-built original native parity/translation
+  -- source reconstructs this module's record without adding any fields.
+
+  fromNativeSources :
+    N.OriginalMixedParitySource source →
+    N.OriginalEvenTwistedTranslation source →
+    OriginalMixedSectorIntertwiners
+  fromNativeSources cross time = record
+    { originalTwistIndex = N.integerTwistIndex cross
+    ; fixedTwisted = N.fixedTwistedMode cross
+    ; fixedTwistedIsOriginal = N.fixedTwistedIsOriginal cross
+    ; twistedFixed = N.twistedFixedMode cross
+    ; twistedTwisted = N.twistedTwistedMode cross
+    ; twistedTranslation = N.twistedTranslation time
+    }
+
+  nativeSourcesAfterFrom :
+    (cross : N.OriginalMixedParitySource source)
+    (time : N.OriginalEvenTwistedTranslation source) →
+    (toNativeMixedParity (fromNativeSources cross time)
+       ≡ cross)
+    × (toNativeTranslation (fromNativeSources cross time)
+       ≡ time)
+  nativeSourcesAfterFrom cross time = refl , refl
+
+  fromAfterNativeSources :
+    (blocks : OriginalMixedSectorIntertwiners) →
+    fromNativeSources (toNativeMixedParity blocks)
+      (toNativeTranslation blocks)
+      ≡ blocks
+  fromAfterNativeSources blocks = refl
