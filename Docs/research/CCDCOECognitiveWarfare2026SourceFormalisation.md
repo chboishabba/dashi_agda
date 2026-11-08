@@ -536,3 +536,119 @@ authority and governance voice. The 1991/1995 independent campaigns,
 1998 invitation and the 187-document publication already evidence
 some distinct communication and document-level outcomes, but not the
 missing causal effect of the 1998 API plan.
+
+## 8 November 2026 — source-exact approval/funding cut and versioned corpus
+
+### Public primary-document conditions that narrow the historical question
+
+The 3 April 1998 action-plan circulation text (Congressional Record,
+27 April 1998, H2325; online lines 434–442) proposes review at an April 17
+meeting, followed by seeking possible funding. The plan's own
+implementation section (H2326, lines 659–664) explicitly conditions
+future launch on plan approval, obtaining funding and arranging
+resources. These are **preconditions described in the original text**,
+not source receipts showing they happened.
+
+`CCDCOEP3EvidenceStageIdentificationExact.agda` proves the
+following finite witness chain using the canonical
+`IntersectionalNonFactorability` owner:
+
+- a published draft does not identify institutional authorisation;
+- authorisation alone does not identify a payment or resource delivery;
+- a payment does not by itself identify delivery of specific communications;
+- delivered communications do not identify causal audience/policy effects.
+
+The original `DiscriminatorSynthesisExact` experiment bundles now
+specify separate approval, funding, delivery and effect evidence queries
+for each edge. This is a source-relative **test specification**;
+their synthetic alternative worlds are not claimed to be historically
+observed. Imported by the Golden Cognition aggregate, P3 regression
+and canonical checker.
+
+The case manifest now contains a five-stage evidence ladder, with
+`actual_receipt=null` on all stages beyond the original published
+draft. Its validator checks the exact original-source conditional
+launch spans, all gate statuses, the absence of fabricated receipts,
+and four finite source-stage collisions.
+
+### Two further bounded archival leads — not fused into April execution
+
+The Climate Files documentary index locates a **27 February 1998
+API climate strategy proposal**, discussing rapid media response,
+and a **11 July 1995 Global Climate Coalition communications programme
+report and budget for its board**. These are potentially useful for
+chronology and comparing a separate realised communications programme,
+but the actual original images/document bytes are not available to the
+current reviewed PNF intake. Do not equate the February 1998 proposal
+or July 1995 GCC report to April 1998 API-plan execution without a
+document-identity, authorisation and delivery bridge.
+
+Index: https://www.climatefiles.com/climate-change-evidence/weather-denial-documents/
+GCC record: https://www.documentcloud.org/documents/21312427-1995-global-climate-coalition-communications-program-prepared-for-gcc-board-july-11-1995
+
+### 2017 and 2020 Supran–Oreskes have different sampling frames
+
+The published original 2017 ERL source (DOI 10.1088/1748-9326/aa815f)
+analysed **187 communications**. Of **36 advertorials**, the selected
+**26 that took a position** on warming as real and human-caused included
+**3 acknowledgements** and **21 expressions of doubt** (12% and 81%
+rounded, respectively). The expanded **2020 addendum**
+(DOI 10.1088/1748-9326/ab89d5) screened **1,448** newspaper records,
+identified **267** potentially relevant advertorials, and included
+**61** adverts expressing a position on the real-and-human-caused
+question. These counts have *different selection and search frames*
+and cannot be pooled without a document-level crosswalk, coding
+revision and denominator accounting.
+
+`CCDCOEP3ClimateObservedActivityAndCorpusExact.agda` now exposes a
+distinct `ExpandedAddendumCohort`, with exact 1448/267/61 selected
+summary counts and a source-frame distinction. The manifest retains
+both `document_analysis_versions`, with
+`direct_pooling_authorized=false` and no inferred effect on actual
+readers. The Python manifest validator separately checks both studies,
+rounding of 3/26 and 21/26, and the no-pooling firewall.
+
+### Real original byte acquisition now implemented
+
+`scripts/build_ccdcoe_p3_primary_intake.py` now has a **pinned**
+`--fetch-govinfo` mode. It retrieves only the exact official HTML
+page, validates response status/content type/redirect/size, archives
+unaltered bytes without overwriting earlier differing versions,
+computes source and normalized-text SHA256, locates six distinct
+source phrases in the correct order, and emits candidate-only PNF
+intake with explicit normalized character offsets. It distinguishes
+official-byte acquisition from unverified `--source` files. Its
+offline `--self-test` includes missing, duplicate and reordering
+negative fixtures. The earlier JSON trailing-newline escape defect
+has been repaired.
+
+Use in a network-enabled workspace:
+
+```sh
+python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
+python3 scripts/build_ccdcoe_p3_primary_intake.py \
+  --fetch-govinfo \
+  --archive .cache/ccdcoe-p3/CREC-1998-04-27.html \
+  --output .cache/ccdcoe-p3/intake-candidates.json
+bash scripts/check_ccdcoe_cognition_agda.sh
+```
+
+Raw-source download and actual exact hash **remain unexecuted in this
+assistant environment** (no external networking from container).
+Candidate source spans still require review and actual ITIR/SLR EventPNF
+admission; a hash or GovInfo page identity alone is not semantic
+acceptance or proof of historical causal effect.
+
+### Exact remaining primary-world acceptance cut (Agda separately)
+
+P0: Run and review actual pinned GovInfo byte acquisition and PNF
+source-span conversion. P1: Find signed April 17 follow-up/adoption and
+authorised expenditure for this **same** plan. P2: Trace paid and
+actually delivered communications, participants and recipients; avoid
+transferring separate GCC/ICE activity. P3: Obtain independent
+exposure/outcome microdata and a predeclared estimand; validate source
+cohorts and confounding. P4: Establish actor-specific responsibility
+and admissible coordination/intent evidence, not guilt by association.
+P5: Replicate on separate institutional settings with voice, power and
+custodianship controls. No finite theorem can substitute for absent
+original receipts.
