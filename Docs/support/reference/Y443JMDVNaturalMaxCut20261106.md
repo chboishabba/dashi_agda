@@ -1259,3 +1259,20 @@ All implemented within DASHI/Moonshine/VNaturalOrbifoldConstruction.agda, module
 | V3 | Inhabit existing real selected-object terminal capstone | V03/V04/V1/V2 | BLOCKED |
 
 **Attribution:** LeanVOA mathematical construction and TopPairs belong to Popov–Rastelli, not DASHI. DASHI implements the original Agda graded and parity interfaces and existing Y443 action transport. The existence of a Lean theorem does not automatically inhabit a different independently selected Agda record or prove the original Monster action.
+
+
+## 2026-11-08 newest high-alpha cut — **correct linear pair**, actual FF/FT mode sources (V0.4)
+
+**Do not attempt to make the legacy `A ⊎ B` tagged carrier into the FLM vector direct sum.** `VNaturalOrbifoldConstruction.ActualSelectedSummandInclusions.originalVOAZeroCannotBeBothSummandZeros` already proves that the original two disjoint tag images cannot both preserve the same VOA zero. The old `OriginalIdentificationInjective ↔ NoExtraSelectedStates` theorem is true **as set theory**, but it cannot alone produce the true (V_\Lambda^+\oplus(V_\Lambda^T)^+\) vector space. The canonical route uses `SelectedPairedGradedModule.actualSourceGradedPair`, which constructs the correct `Fixed × Twisted` graded carrier using original fixed-point VOA operations and source-owned twisted operations.
+
+**New source owner:** `DASHI/Moonshine/VNaturalOriginalPairedFourSectorModesExact.agda`, imported by the Y443 Golden root. The actual first pair-mode is defined by a four-block formula on the existing original paired graded carrier:
+```
+mode ((a,t),n,(b,s)) =
+  ( fixedAdd (FF_original_fixed_VOA a n b) (TT_original_intertwiner t n s)
+  , twistedAdd (FT_original_twisted_mode a n s) (TF_original_intertwiner t n b) )
+```
+`fixedModeIsOriginal` and `originalFFDecoded` prove the first fixed-fixed term is exactly the original `fixedPoint.fixedVOA` vertex mode, rather than a freely chosen algebra. `fixedTwistedIsOriginal` requires the first cross-sector term, after `includePlus`, to equal the real Leech theta-twisted module `twistedMode` at the explicitly transported original twisted-mode index (no silent integer/half-integer conversion). `pairedVertexData` constructs the actual paired `VertexOperatorData`: its vacuum, conformal element and fixed translation are transported directly from the original fixed VOA; `exactFourBlockExpansion` is reflexive on the constructed paired mode.
+
+**Exact remaining irreducible source leaves:** native fixedCarrier ↔ fixedVOA inverse and actual twisted-even linear/grading/closure (source still uninhabited), genuine TF and TT intertwiners, mode/grade closure, skew symmetry, mixed Jacobi/locality, conformal/Virasoro and selected VOA semantic proof. A paper statement that these operators exist is not a selected-object Agda witness. Correct original paired-mode identification to published FLM still unproved; original Y443 Monster group/action comparison remains independent. This moves the construction onto the mathematically correct carrier instead of continuing to promote a known-invalid tagged sum.
+
+**Status:** source-written constructor and exact FF mode agreement; FT requires original twisted-even closure evidence, TT/TF/VOA identities remain genuinely external physical/mathematical sources. No Agda kernel run, no claim that canonical FLM has been completely implemented.
