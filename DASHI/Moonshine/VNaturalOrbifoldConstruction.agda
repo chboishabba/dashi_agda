@@ -3,6 +3,7 @@ module DASHI.Moonshine.VNaturalOrbifoldConstruction where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 
@@ -288,3 +289,88 @@ module ActualSelectedSummandInclusions
     trans (sym (identifyAfterReconstruct s))
       (trans (cong (identifyCarrier assembly) eq)
         (identifyAfterReconstruct t))
+
+
+  ----------------------------------------------------------------------
+  -- ORIGINAL SOURCE FIBRE NORMALISATION / EXACT V0 NO-JUNK EQUIVALENCE
+  --
+  -- A retraction from the selected weak VOA carrier to the ACTUAL
+  -- orbifold tagged sum is already given by identifyAfterReconstruct.
+  -- The canonical state normalizer is therefore an idempotent, and
+  -- it distinguishes exactly the fibres of the original identify map.
+  -- The missing opposite inverse is EQUIVALENT to identify injectivity:
+  -- either one is an acceptable, source-specific V0 acceptance lemma.
+  ----------------------------------------------------------------------
+
+  normalizeSelectedState : SelectedState → SelectedState
+  normalizeSelectedState w =
+    reconstructTaggedState (identifyCarrier assembly w)
+
+  identifyAfterNormalize : (w : SelectedState) →
+    identifyCarrier assembly (normalizeSelectedState w)
+    ≡ identifyCarrier assembly w
+  identifyAfterNormalize w =
+    identifyAfterReconstruct (identifyCarrier assembly w)
+
+  normalizeSelectedStateIdempotent : (w : SelectedState) →
+    normalizeSelectedState (normalizeSelectedState w)
+    ≡ normalizeSelectedState w
+  normalizeSelectedStateIdempotent w =
+    cong reconstructTaggedState (identifyAfterNormalize w)
+
+  reconstructedStatesAlreadyNormal : (s : Fixed ⊎ Twisted) →
+    normalizeSelectedState (reconstructTaggedState s)
+    ≡ reconstructTaggedState s
+  reconstructedStatesAlreadyNormal s =
+    cong reconstructTaggedState (identifyAfterReconstruct s)
+
+  originalSameTagImpliesSameNormalization :
+    (x y : SelectedState) →
+    identifyCarrier assembly x ≡ identifyCarrier assembly y →
+    normalizeSelectedState x ≡ normalizeSelectedState y
+  originalSameTagImpliesSameNormalization x y eq =
+    cong reconstructTaggedState eq
+
+  sameNormalizationImpliesOriginalSameTag :
+    (x y : SelectedState) →
+    normalizeSelectedState x ≡ normalizeSelectedState y →
+    identifyCarrier assembly x ≡ identifyCarrier assembly y
+  sameNormalizationImpliesOriginalSameTag x y eq =
+    trans (sym (identifyAfterNormalize x))
+      (trans (cong (identifyCarrier assembly) eq)
+        (identifyAfterNormalize y))
+
+  -- The exact extra theorem needed for a bidirectional original
+  -- selected-carrier identification is injectivity of identifyCarrier.
+  -- Do NOT fill it with an arbitrary external Set label.
+  NoExtraSelectedStates : Set
+  NoExtraSelectedStates =
+    (w : SelectedState) → normalizeSelectedState w ≡ w
+
+  OriginalIdentificationInjective : Set
+  OriginalIdentificationInjective =
+    (x y : SelectedState) →
+    identifyCarrier assembly x ≡ identifyCarrier assembly y →
+    x ≡ y
+
+  noExtraStatesFromOriginalIdentificationInjective :
+    OriginalIdentificationInjective → NoExtraSelectedStates
+  noExtraStatesFromOriginalIdentificationInjective injective w =
+    injective (normalizeSelectedState w) w
+      (identifyAfterNormalize w)
+
+  originalIdentificationInjectiveFromNoExtraStates :
+    NoExtraSelectedStates → OriginalIdentificationInjective
+  originalIdentificationInjectiveFromNoExtraStates noExtra x y eq =
+    trans (sym (noExtra x))
+      (trans (cong reconstructTaggedState eq)
+        (noExtra y))
+
+  -- Exact two-way replacement for the outstanding V0 no-junk gate.
+  -- Neither direction asserts that the needed source evidence exists.
+  originalNoExtraStatesIffIdentificationInjective :
+    (OriginalIdentificationInjective → NoExtraSelectedStates)
+    × (NoExtraSelectedStates → OriginalIdentificationInjective)
+  originalNoExtraStatesIffIdentificationInjective =
+    noExtraStatesFromOriginalIdentificationInjective ,
+    originalIdentificationInjectiveFromNoExtraStates
