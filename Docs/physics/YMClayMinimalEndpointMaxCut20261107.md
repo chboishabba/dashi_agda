@@ -1,3 +1,17 @@
+## 8 November 2026 — canonical phase/deliverables and exact YM01–YM10 roadmap
+
+The **current canonical implementation plan**, exact targets and acceptance gates are now [YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md](YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) and machine-readable [YMClayEndpointPhaseLemmaManifest20261108.json](YMClayEndpointPhaseLemmaManifest20261108.json), with a source-owner consistency checker at `scripts/check_ym_clay_phase_lemma_manifest.py`.
+
+Five phases: **PH0** original SU(N) Haar/Wilson physical source (YM01); **PH1** original uniform R445 RG, interacting R4 limit and surviving local interaction (YM02, YM03, YM09); **PH2** actual physical boundary-pair coverage and complete original small/large Wilson decay (YM04, YM05; replaceable by another genuine full-sector gap proof); **PH3** the same continuum OS reconstruction, dense nonvacuum sector and strictly positive physical spectral gap (YM06, YM07, YM08); **PH4** every compact simple gauge group (YM10).
+
+**Latest audit against #1444/#1440/#1460:** Finite periodic original Wilson/Gibbs, R445 blocked pushforwards, source-written CMP116 envelope compilers, OS reflected-form pullback and R331/R333 mass-gap composition are already source-written. The **physical source estimates and original theorem instantiations remain open**: continuous actual Haar/physical scaling where conditional, UV/IR uniform R445, genuine original full Wilson large-field remainder and fixed-physical-scale decay, nontrivial R4 OS limit, dense full nonvacuum spectrum and all compact-simple-group scope. *Do not count a conditional record as an inhabited theorem.*
+
+**3+1** is a separate developed geometric/observer lane, not an additional Clay axiom. #1460 proves finite conditional directional signature and Euclidean-vs-Lorentzian Hodge results; the physically calibrated original observer state and Wick/OS generator link remain separate optional unification obligations. **#1241 KK and #1472 Monster** likewise are not prerequisites for the standalone Clay proof.
+
+This older max-cut ledger below is preserved as a detailed source audit. Its statuses should be read through the current canonical PH0–PH4 source list; it is **not** evidence that E1/D1/D2/N1/G1 is completed.
+
+---
+
 ## 7 November — D1 *full* original measure: published small-field/large-field separation
 
 The real source audit identified a necessary boundary that must not be silently elided. Bałaban CMP 109 I and CMP 116 II explicitly treat the **four-dimensional small-field approximation**. Source references: https://doi.org/10.1007/BF01215223 and https://doi.org/10.1007/BF01239022 . Bałaban CMP 119, https://doi.org/10.1007/BF01217741 , discusses large-field effective densities and notes convergent expansions **for superrenormalizable models**; this is NOT a free theorem that the complete original four-dimensional Wilson family satisfies a physical mass-gap clustering estimate.
