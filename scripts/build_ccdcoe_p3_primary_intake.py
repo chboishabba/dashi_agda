@@ -257,8 +257,10 @@ def main() -> None:
         write_archived_bytes(a.archive, raw)
         result["local_archive_path"] = str(a.archive)
         result["acquisition_mode"] = "exact-govinfo-url-with-byte-archive"
+        result["source_identity_status"] = "OFFICIAL_URL_BYTES_ACQUIRED_NOT_SEMANTICALLY_REVIEWED"
     else:
-        result["acquisition_mode"] = "user-supplied-original-byte-file"
+        result["acquisition_mode"] = "user-supplied-byte-file"
+        result["source_identity_status"] = "UNVERIFIED_USER_SUPPLIED_BYTES"
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(f"Source SHA256: {result['raw_sha256']}")
