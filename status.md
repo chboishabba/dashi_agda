@@ -9857,3 +9857,22 @@ silently breaking the legacy state owners. The old no-junk fibre equivalence
 remains a true set statement but is no longer the priority physical VOA
 source gate. Actual mixed-vertex VOA laws, migration and canonical FLM
 all-mode equivalence remain open. Source-written, Agda kernel not run.
+
+
+### 2026-11-08 VOA original source V03/V04 plus LeanVOA real donor
+
+DASHI/Moonshine/VNaturalOrbifoldConstruction now source-defines the actual
+selected paired GradedModule, the fixed operations and grading from the
+preexisting fixed-point VOA via original source maps, and the four original
+Z2 parity-sector mode channels. FF is transported from the fixed-point VOA;
+FT is required to match the original Leech twisted module; TF/TT require
+original source witnesses. The paired formula is implemented, NOT its full
+mixed Jacobi/locality law.
+
+External primary-source audit: Popov–Rastelli LeanVOA (arXiv:2611.06616,
+Nov 4 2026, source github.com/Fedor-Popov/Lean_VOA) contains an actual
+unconditional theorem VOA.Moonshine.moonshine and finite locality bridge
+TopPairs.top_pairs0, topPairs_one; the canonical Vnat carrier is a product,
+not a tagged sum. This is a major already-formalized donor but does not
+automatically yield Agda's selected original source or the Monster action.
+No Agda kernel execution or original FLM/Y443 same-object completion claimed.
