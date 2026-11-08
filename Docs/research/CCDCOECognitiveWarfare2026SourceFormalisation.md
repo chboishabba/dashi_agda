@@ -943,3 +943,142 @@ followed by source-to-PNF semantic review.
 these claims, proof statements and validators were written.
 Neither Agda kernel nor checked-out Python runtime receipts
 are claimed here. A named interview is not a company audit.
+
+## 8 November 2026 — highest-alpha pivot: GCC implemented media work / 2021 independent document replication
+
+The 1998 API action-plan case is now a **bounded historical
+counterexample** with an attributed nonimplementation disposition.
+Do not continue expanding its abstract proof inventory in lieu of
+source acquisition. The main empirical consumer is the **Global
+Climate Coalition (GCC) / E. Bruce Harrison Company media programme**.
+
+### Original source-backed case specification
+
+1. Agency's own undated `Case Histories: Media Relations — The Global
+   Climate Coalition`, archival source and transcription:
+   https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/
+   (published/archived online 20 July 2025, original undated,
+   archivist estimates 1994–95). The firm says it *designed and
+   implemented* a media programme emphasising uncertainty in climate
+   science and costs of regulation, and reports tours, editorial
+   meetings, third-party commentary, press releases and newsletters.
+   Its assertions of media, carbon-tax and voluntary-policy success
+   are **first-party client-service self-assessments** — they are not
+   observed independent causal effects.
+2. Original GCC-held **1993 media-hits** clipping index,
+   https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/
+   retains two specifically identifiable media objects:
+   `Satellite vs. Surface: Two Points of View on Global Warming`,
+   *Washington Post*, July 1993 (with John Christy/Roy Spencer);
+   and `Let's cool the rhetoric about global warming`,
+   *Nashville Banner* (by Christy). The archive further reports
+   GCC reference to the Washington Post item in a September 1993
+   Climate Watch bulletin. These are **indexed newspaper objects
+   and a reported bulletin reuse**, not proof the PR firm placed
+   them or that a representative outlet-wide coverage change
+   was measured. Exact article full text/primary PDF still require
+   review.
+3. A **11 July 1995 GCC Board Communications Program** original
+   document is indexed separately:
+   https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1995-global-climate-coalition-communications-program-prepared-for-gcc-board-july-11-1995/
+   It supplies a promising original budget/programme control;
+   the archived index does not alone give us authenticated
+   line-item amounts or disbursement receipts.
+4. Independent historical literature: Robert J. Brulle (2022),
+   `Advocating inaction: a historical analysis of the Global Climate
+   Coalition`, DOI 10.1080/09644016.2022.2058815.
+   Media-specific interviews with former Harrison workers
+   Terry Yosie and Don Rheem are reported by PBS Frontline
+   (2022), distinct from source-specific archival newspaper items.
+
+**New source-owner**
+`DASHI/Cognition/CCDCOEP3GCCExecutedCampaignSourceExact.agda`:
+retains five evidence kinds (agency case report; archive-held media;
+historical scholarly synthesis; ExxonMobil document analysis; prior
+unapproved API draft), enumerates four reported tactics and three
+agency-claimed impacts separately, keeps two indexed 1993 clipping
+objects, and proves the existing canonical
+`IntersectionalNonFactorability` source-kind distinction. The
+existing `DiscriminatorSynthesisExact` provides a positive source
+identity experiment. The original media/causal gate explicitly
+retains `causalEffectAdmitted = false`, without pretending a
+mathematically constructed object is observed media sampling.
+
+**Evidence manifest + fail-closed validator**
+`Docs/research/ccdcoe_p3_gcc_executed_campaign_case.json` stores
+original source IDs, dated and undated provenance, six scoped
+agency statements, two identifiable 1993 items, unobserved text
+coding, missing comparison frame, and six exact empirical gates.
+`scripts/check_ccdcoe_p3_gcc_campaign.py` rejects any conversion
+of self-reported impact into independent measured effect or
+unsourced mixing with ExxonMobil.
+
+### Actual media outcome consumer, not another abstract theorem
+
+`scripts/measure_ccdcoe_p3_gcc_media.py` implements a standard-
+library, reproducible review-gated document analysis. It requires
+actual item-by-item original-source SHA256, coder and review receipt,
+date, outlet, source-specific **intervention date and receipt**,
+reviewed full text and fixed frame classification. It builds
+GCC-linked and comparison outlet × before/after cells, reports
+source-counted frame frequencies, descriptive Wilson intervals
+and descriptive difference-in-differences. It fails closed on
+duplicates, missing source identity, unreviewed text, unsupported
+frame classes, undocumented intervention time and empty
+comparison/pre cells. The built-in `--self-test` uses clearly
+*SYNTHETIC-NOT-ACTUAL* rows to test the arithmetic and guards,
+never treating them as observed evidence.
+
+This is **not a causal identification theorem**; actual
+media-impact inference still requires a census or justified outlet
+sampling design, source-specific treatment delivery, parallel
+trends/competing communications, outlet clustering, uncertainty
+for the contrast, and sensitivity analysis. Wilson intervals
+are marginal descriptive intervals, not a causal effect CI.
+
+### Parallel independent ExxonMobil replication route
+
+Geoffrey Supran & Naomi Oreskes, `Rhetoric and frame analysis of
+ExxonMobil's climate change communications`, *One Earth*, 2021,
+DOI 10.1016/j.oneear.2021.04.014, reports **180 documents**.
+Its supplementary **S7** catalogs original document IDs/links;
+the publication says searchable .txt, document-term matrices,
+postprocessed materials and code were deposited at Harvard
+Dataverse DOI **10.7910/DVN/XXQUKJ**, subject to reasonable access
+request by qualified researchers; copyrighted original PDFs
+cannot simply be redistributed. Record `replication_executed=false`
+until legitimate data access and actual rerun receipts exist.
+Do not pool this 180-document corpus with the original 2017
+187-document corpus or the 2020 expanded advertorial search.
+
+### Revised exact empirical max-cut
+
+P0 **GCC archival acquisition:** original Harrison PDF,
+GCC-clipping originals and July 1995 board programme; hash,
+identify actual dates, funder/author, extract and review source spans.
+P1 **Media observation:** establish outlet-time sampling and
+manually/independently code actual full texts, including baseline
+and eligible comparison outlets; compile original EventPNF.
+P2 **Observed outcomes:** run the new frame consumer on those
+source-backed rows, add cluster-robust/temporal uncertainty
+and alternative frame coding.
+P3 **Causal identification:** independently dated intervention
+delivery and competing historical events; pretrend checks,
+negative controls, sensitivity to missing clippings and
+co-campaign interference; report bounds rather than
+post-hoc claims of agency success.
+P4 **Exxon replication:** acquire the actual 180-document corpus
+and analysis code through authorised access, source-identify
+frames, reproduce headline tables/figures and validate held-out
+coding/corpus revisions.
+P5 **Original integrated result:** controlled cross-case comparison
+of agency framing, documented dissemination and independently
+measured outcomes with explicit institutional authority, agency,
+voice and evidentiary revisability. The old 1998 API draft remains
+a **not-implemented-as-reported contrast**, not the causal treatment.
+
+All new Agda owners and Python scripts are wired into
+Cognition.Everything, P3 Golden regression and the original
+`scripts/check_ccdcoe_cognition_agda.sh` parallel_checker route.
+No actual article-level source bytes, positive measured frame
+difference, or Exxon Dataverse credential has been fabricated.
