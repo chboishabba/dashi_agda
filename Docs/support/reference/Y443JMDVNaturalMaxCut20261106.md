@@ -1196,3 +1196,22 @@ end{aligned}}
 **New exact mathematical proof target (not yet inhabited):** a source-native graded linear isomorphism H:Carrier(Vnatural) ≅ L preserving zero, addition, scalar multiplication, every mode, vacuum, conformal vector, grading and translation, together with original mixed-mode Jacobi/locality on L. The earlier tagged-sum state-fibre normaliser remains a correct *set-theoretic* theorem but is now explicitly **non-promoting for a genuine FLM vector direct sum**. This supersedes the old V0 'identifyCarrier injectivity first' operational advice.
 
 Status: original source-specific no-go PAID source-written, paired carrier with zero agreement PAID source-written; full positive VOA construction, selected-to-FLM identification, and Monster action still OPEN. Agda typechecking not run in this environment.
+
+## 2026-11-08 source head c93cc47 — V0 is an exact normalized carrier, not yet an equivalence
+
+Direct source verification at `c93cc473b4b6cf8be5473d8fa836c7c8a549e678`: `DASHI/Moonshine/VNaturalOrbifoldConstruction.agda` has the actual original fixed/twisted summand embeddings, their injectivity and mutual disjointness. In `ActualSelectedSummandInclusions`, `reconstructTaggedState : Fixed ⊎ Twisted → SelectedState` and `identifyCarrier assembly : SelectedState → Fixed ⊎ Twisted` satisfy
+
+```
+identifyAfterReconstruct s : identifyCarrier (reconstructTaggedState s) ≡ s
+normalizeSelectedState w = reconstructTaggedState (identifyCarrier w)
+normalizeSelectedStateIdempotent : P (P w) ≡ P w
+originalNoExtraStatesIffIdentificationInjective :
+    (OriginalIdentificationInjective → NoExtraSelectedStates)
+  × (NoExtraSelectedStates → OriginalIdentificationInjective)
+```
+
+**Already proved:** `I ∘ R = id`; thus I is surjective, R injective; the normalized image and fibres are classified exactly. **One genuinely missing V0 state-carrier lemma:** `OriginalIdentificationInjective` for the *actual original orbifold state map*, equivalently `NoExtraSelectedStates` (`R ∘ I = id`). Neither is derivable from a split-surjection alone. Do not rework normalisation/sector disjointness.
+
+**After V0:** mixed fixed/twisted mode and conformal compatibility, Jacobi/locality and genuine Leech VOA laws are still needed for M01/M02 and the source-sound DGL identification. `OrbifoldVOAAssembly.mixedVertexProductsClosed`, `localityAcrossSummands`, `JacobiAcrossSummands`, `centralCharge24`, `holomorphic` and `simple` are bare `Set` slots, not semantic proof receipts; a section/retraction does not fill them.
+
+**Cross-lane YM audit:** BCH is present in `CompactLieAnalyticPackage.QuantitativeBCH` and source-aligned R569–R571. CMP119 OS4 is already compiled from actual pre-gap R582 source via `YangMillsClayCMP119H1OS4AttachmentRound583Exact.selectedH1ClusteringMeansFullOS4`; original selected H1 density/continuity interpretation still `conditional` in R583. These are not new Monster lemmas or automatic same-object physical proofs.
