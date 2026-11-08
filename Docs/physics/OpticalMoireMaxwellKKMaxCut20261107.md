@@ -125,3 +125,20 @@ Prior art: Bloch phase, Jones/Poincare representation and solid-angle skyrmion t
 `scripts/replicate_dev_shen_original_matlab.py` now writes BOTH the prior `open_patch_charge` with `integer_degree_certified:false` and a separate `closed_boundary_topology_diagnostic`, only valid when that source case independently meets the boundary and triangle gates. Integer-degree claims must additionally certify physical domain compactification or periodic identification and field continuity between samples. Experimental source arrays remain unacquired due to direct endpoint access; the source data analyzer has not processed those bytes.
 
 **Maximum remaining cut:** no generic Bloch algebra is needed. Acquire original data bytes and confirm source authors' per-file simulation-versus-experiment labeling, image geometry, calibration, polarization handedness, dark/flat, singularity correction, contour and error model. Then compare genuine source topological counts/propagation observations. KK/EM same-source metric identification is separate and unnecessary for Maxwell optical reconstruction.
+
+## 8 November 2026 — terminal z-plane original-data comparator
+
+**Source-first comparison specification** from Dev & Shen, *Light: Science & Applications* 15, 396 (2026), DOI 10.1038/s41377-026-02533-w:
+- Fig. 4 coaxial propagation tests target C6 theta 13.2 and 16.4 degrees; C4 theta 10.35 and approximately 12.7 degrees; z=0 to 40 cm in the figure. These are published author measurements and remain theirs.
+- Fig. 3 source-defined skyrmion bag reports inner charge 6.83, surrounding -0.81, combined 6.02, ideal 6. Fig. 4 reports C4 n=25 and n=13 clusters, with separate details on how variation between 7 skyrmions generates error bars.
+- Self-healing arises primarily from surviving optical angular-spectrum components; Stokes topology is the tracked robust object, not itself a mechanism causing wave-optical reconstruction.
+- The publicly exposed V2 NTU dataset is labelled *simulation data* and has 690 files; its published MATLAB bytes remain inaccessible to the current environment. Do not call those files measured images without source-file validation.
+
+New script `scripts/compare_original_optical_moire_z.py` reuses the existing six-channel MATLAB parser in `replicate_dev_shen_original_matlab.py` with no second parser. It requires all six channels per z plane; checks common image shape, pair-intensity consistency and nonzero Stokes overlap; computes finite-open-patch charge, mean and 95th-percentile Poincare geodesic error relative to z0; records original-file SHA-256 and refuses to certify an integer degree or experimental replication. It refuses missing planes and calibration failures rather than substituting simulated results.
+
+**Executed local fixture:** independently coded parallel two-plane six-channel synthetic test passed, including fail-closed missing z=20. This verifies implementation shape only. Direct original dataset endpoint is not accessible here (web result redirects to non-fetchable NTU citation page and local container DNS fails); no original MATLAB bytes were processed and no original numerical topology comparison was made.
+
+Command (when source data are available):
+`python scripts/compare_original_optical_moire_z.py --root /data/NTU-V2 --prefix C4/10_35 --z 0 10 20 30 40 --out /tmp/C4-propagation.json`
+
+**Still unclosed:** original calibrated arrays, independently confirmed observed-vs-simulated status, within-plane spatial registration, topology segmentation and masks, experimental uncertainty and genuine replication of each cited measurement. Physically independent apparatus replication requires actual apparatus data and cannot be furnished by a numerical code or publication citation.
