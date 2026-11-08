@@ -55,3 +55,43 @@ Original repository contribution: thin Agda specialization and independently cod
 3. Numerically converged closed-cell/topological-boundary Stokes charge vs source observations, including measured uncertainties and singularities.
 4. Same model and source records for z-propagation and obstacle recovery, with convergence and no aliasing/diffraction claims beyond measured regimes.
 5. A separately motivated KK metric-reduction/physical same-source proof only if claiming KK physical identity. It is not a dependency for ordinary optical propagation.
+
+## 8 November 2026 — original-data and same-source Maxwell replication cut
+
+### Original research authority
+- Dev, Vasu and Shen, Yijie, Light: Science & Applications 15, article 396 (6 Nov 2026), DOI 10.1038/s41377-026-02533-w (article CC BY 4.0). Optical supertopologies and all published experiments remain credited solely to their original authors.
+- Dev and Shen, DR-NTU (Data) DOI 10.21979/N9/AJB6FD, V2, CC BY-NC 4.0; 690 original MATLAB files, classified by the repository as simulation data. The repository file-specific provenance must be verified before a file can be described as an observed detector measurement.
+- DASHI owns the independent analyzer, numerical same-field Maxwell implementation, source-file verification, receipts and formal adaptor. Citation does not import theorem authority, imply agreement or transfer physical results across graphene, KK and EM.
+
+### Public original-data discovery and checksum certificate
+The source V2 listing at https://researchdata.ntu.edu.sg/dataset.xhtml?persistentId=doi:10.21979/N9/AJB6FD identifies a six-channel case C4/10_35/0:
+IA.mat MD5 87654da380569dc738acf12cd395a053
+ID.mat MD5 6e076bcb8d703f227164dbcefbbdbbea
+IH.mat MD5 52ce9afe15061244e26913b4ce1fdb13
+IL.mat MD5 3a89e1788ae2db4822f3d921a8662d3a
+IR.mat MD5 4ab487441fbbb6cf8ac02f3bad983f76
+IV.mat MD5 d35cce39aced9ffee7463945a937a781
+These checksums belong to the original repository, not to DASHI. The data consumer rejects a downloaded selected case with nonmatching MD5 and separately records SHA-256. Direct file download was stopped by the publisher's anti-bot page in this environment; **no original MATLAB array bytes were processed**.
+
+### Implemented original research reuse / independent analysis
+- scripts/replicate_dev_shen_original_matlab.py: original six-polarizer MATLAB file intake; strict finite aligned arrays; Stokes reconstruction from H/V, D/A, R/L; validity gating; solid-angle open-domain topology; original MD5 and computed SHA-256; explicit source-data/simulation classification; synthetic stereographic BP test.
+- scripts/check_optical_moire_full_maxwell_propagation.py: source Eq(1) Gaussian Fourier ring; transverse and longitudinal E; B=(k cross E)/omega; independent divergence E/B, Faraday and Ampere residual checks; z propagation and circular-obstruction recovery, same-source and source-aligned for N=3/4/6.
+- scripts/check_optical_moire_source_eq1.py retains the canonical source-function-form owner; the real original data are never manufactured by the forward simulation.
+
+### Local execution results and limitations
+Independent local analogous numerical implementations executed: six-channel synthetic BP charge -0.9835863 (OPEN domain, no integer degree certificate), synthetic no-intensity fail-closed PASS, max vacuum Maxwell residual 1.6012e-16, synthetic obstacle local field error at z=0, 0.2, 0.5 m of 1.0, 0.052646, 0.002306 (128 grid). At z=.5 m for n=96/128/192/256, relative errors 0.002501/0.002306/0.002082/0.002228. This is selected wavelength 532 nm, transverse width 3 mm, selected angular spectrum, not an apparatus-calibrated comparison; FFT-periodic-domain effects are not excluded by these values. Additional eight reported angle/symmetry labels and 24 resolution/z points were computed synthetically. Exact committed HEAD Python script and Agda kernel acceptance have not been executed.
+
+### Original data analyzer command
+python scripts/replicate_dev_shen_original_matlab.py --test
+python scripts/replicate_dev_shen_original_matlab.py --root /original/NTU-V2 --list
+python scripts/replicate_dev_shen_original_matlab.py --root /original/NTU-V2 --case C4/10_35/0 --out /tmp/original-c4
+python scripts/check_optical_moire_full_maxwell_propagation.py --test
+
+### Precise unclosed experimental replication obligations
+1. Acquire the primary original MATLAB bytes for each selected source case and verify V2 MD5 plus computed SHA-256. The source site anti-bot restriction is a data-access blocker, not a theoretical lemma.
+2. Confirm per-file experimental-versus-simulation status, instrument dark/flat/polarization gain, optical axis/handedness and spatial registration; obtain supplementary singularity correction delta and boundary/contour definitions.
+3. Independently calculate closed-contour/cell topological counts for original C6 and C4 angle sweeps; quantify resolution convergence and source comparison, retaining error bars/replicate provenance. An OPEN field-of-view integral is never automatically an integer degree.
+4. Compare recorded z-series and obstruction sequences with a same-apparatus source model; compute honest uncertainty and predictive held-out fidelity. Synthetic recovery is not experimental recovery.
+5. Optional KK same-source Einstein-matter metric reduction remains a separate physical identification task, not a prerequisite for Maxwell optics.
+
+No CI is required by this research task. Do not promote code presence, publication citation, synthetic numerical fit or self-selected parameters to an original experimental replication.
