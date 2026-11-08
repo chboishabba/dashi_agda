@@ -2,9 +2,6 @@ module DASHI.Algebra.Quantum.ShadowTrainedAFQMCReuseExact where
 
 open import DASHI.Core.Prelude
 import DASHI.Algebra.Quantum.DASHIStructuredStateCompression as Compression
-import DASHI.Algebra.Quantum.FiniteQuantumRegister as Register
-import DASHI.Crypto.ShorFiniteVectorBornProbabilityExact as Born
-import DASHI.Biology.MolecularMechanicsSamplingAlgorithms as Metropolis
 
 ------------------------------------------------------------------------
 -- IonQ shadow-trained neural trial states: finite reuse and error cut.
@@ -112,5 +109,5 @@ energyBoundOnRun E R d n =
   stabilityCertificate E d (walk R n)
 
 -- Quantitative claims are deliberately not promoted from the unrelated
--- Shor or protein Monte Carlo modules. Their presence above records the
--- available reuse owners and enforces the distinct-domain boundary.
+-- Shor or protein Monte Carlo modules. Those upstream owners remain
+-- independent; see the source audit in docs/shadow_trained_afqmc_reuse.md.
