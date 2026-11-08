@@ -19,7 +19,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "antalya2015",
@@ -34,7 +35,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "parisDecision2015",
@@ -49,7 +51,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "parisArticle4",
@@ -64,7 +67,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "hamburgUS2017",
@@ -79,7 +83,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "hamburgOtherLeaders2017",
@@ -94,7 +99,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "c20Turkey2015",
@@ -109,13 +115,14 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
     },
     {
       "id": "b20Turkey2015",
       "author": "Business 20 Turkey taskforces",
       "speech_act": "business_recommendation",
-      "event_date": "2015-09-01",
+      "event_date": null,
       "date_exact": false,
       "url": "https://g20.utoronto.ca/b20/index.html",
       "locator": "2015_B20_Turkey_documents_index",
@@ -124,13 +131,14 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "unverified_original_date"
     },
     {
       "id": "gccHarrison",
       "author": "E. Bruce Harrison Company",
       "speech_act": "agency_self_report",
-      "event_date": "1994-01-01",
+      "event_date": null,
       "date_exact": false,
       "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/",
       "locator": "undated_company_case_history",
@@ -139,7 +147,8 @@
       "review_receipt": null,
       "attribution_from_document_only": true,
       "source_endorses_DASHI": false,
-      "independent_actor_policy_transmission": null
+      "independent_actor_policy_transmission": null,
+      "date_precision": "unverified_original_date"
     }
   ],
   "bounded_claims": [
