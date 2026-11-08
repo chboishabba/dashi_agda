@@ -9802,3 +9802,24 @@ unless a line explicitly says it describes the live monitor surface.
   `scripts/ym_reflection_positivity_consolidation_harness.py` and
   `scripts/ym_final_authority_packaging_harness.py`.
   These are diagnostic only; they do not prove theorems or promote any lane.
+
+## 2026-11-08 Moonshine / Y443 / VOA current exact phase status
+
+Canonical live theorem and deliverable ledger:
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`.
+
+- R0 original owner archaeology and redundant operation-rigidity cleanup: DONE.
+- V0 original selected Leech orbifold and actual VOA/source-native Griess laws:
+  OPEN source-specific proof (the conditional constructor exists).
+- V1 original selected VOA ↔ canonical published FLM all-mode iso:
+  OPEN real witness; direct and sound DGL routes are alternatives.
+- V2 selected Y443 group ↔ authentic Q80 ↔ published Monster and actual
+  JMD u/v operator agreement: OPEN original source/group/actions;
+  conditional propagation is implemented.
+- V3 direct same-object Monster/FLM action capstone: compiler EXISTS,
+  original selected-object provider not yet verified, thus not closed.
+- 194-class/cyclotomic character table, K3/umbral/CFT, physical 5D KK/GR,
+  and original 4D Clay YM continuum/full gap: independent source-specific
+  research frontiers, not results of numeric Moonshine decomposition.
+
+No Agda kernel run or new Clay/physics theorem is asserted by this status update.
