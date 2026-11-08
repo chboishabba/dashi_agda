@@ -33,88 +33,84 @@ cong₂ f refl refl = refl
 module Selected (V : VOA.VertexOperatorAlgebra) where
   module A = FLM.Selected V
 
-  module WithGriess (griess : A.ConcreteGriessProduct) where
+  module WithGenerators
+    (griess : A.ConcreteGriessProduct)
+    (Generator : Set)
+    (seed : Generator → A.WeightTwo) where
 
-    record TrueGriessGeneratingFamily : Setω where
+    data Expression : Set where
+      atom : Generator → Expression
+      sum : Expression → Expression → Expression
+      scale : A.Scalar → Expression → Expression
+      product : Expression → Expression → Expression
+
+    evaluate : Expression → A.WeightTwo
+    evaluate (atom g) = seed g
+    evaluate (sum x y) =
+      A.weightTwoAdd griess (evaluate x) (evaluate y)
+    evaluate (scale s x) =
+      A.weightTwoScale griess s (evaluate x)
+    evaluate (product x y) =
+      A.firstProduct griess (evaluate x) (evaluate y)
+
+    record ActualGeneration : Setω where
       field
-        Generator : Set
-        seed : Generator → A.WeightTwo
-
-      data Expression : Set where
-        atom : Generator → Expression
-        sum : Expression → Expression → Expression
-        scale : A.Scalar → Expression → Expression
-        product : Expression → Expression → Expression
-
-      evaluate : Expression → A.WeightTwo
-      evaluate (atom g) = seed g
-      evaluate (sum x y) =
-        A.weightTwoAdd griess (evaluate x) (evaluate y)
-      evaluate (scale s x) =
-        A.weightTwoScale griess s (evaluate x)
-      evaluate (product x y) =
-        A.firstProduct griess (evaluate x) (evaluate y)
-
-      field
-        -- Must be real source-backed generation, not merely labels.
         expressionFor : A.WeightTwo → Expression
         expressionEvaluates : (x : A.WeightTwo) →
           evaluate (expressionFor x) ≡ x
-    open TrueGriessGeneratingFamily public
+    open ActualGeneration public
 
     generatorAgreementPropagates :
-      (family : TrueGriessGeneratingFamily)
       (left right : A.SelectedVOAAutomorphism) →
-      ((g : Generator family) →
-        A.weightTwoAction left (seed family g)
-        ≡ A.weightTwoAction right (seed family g)) →
-      (t : Expression family) →
-      A.weightTwoAction left (evaluate family t)
-      ≡ A.weightTwoAction right (evaluate family t)
-    generatorAgreementPropagates family left right eq (atom g) = eq g
-    generatorAgreementPropagates family left right eq (sum x y) =
+      ((g : Generator) →
+        A.weightTwoAction left (seed g)
+        ≡ A.weightTwoAction right (seed g)) →
+      (t : Expression) →
+      A.weightTwoAction left (evaluate t)
+      ≡ A.weightTwoAction right (evaluate t)
+    generatorAgreementPropagates left right eq (atom g) = eq g
+    generatorAgreementPropagates left right eq (sum x y) =
       trans
         (A.restrictedAdditiveLaw griess left
-          (evaluate family x) (evaluate family y))
+          (evaluate x) (evaluate y))
         (trans
           (cong₂ (A.weightTwoAdd griess)
-            (generatorAgreementPropagates family left right eq x)
-            (generatorAgreementPropagates family left right eq y))
+            (generatorAgreementPropagates left right eq x)
+            (generatorAgreementPropagates left right eq y))
           (sym (A.restrictedAdditiveLaw griess right
-            (evaluate family x) (evaluate family y))))
-    generatorAgreementPropagates family left right eq (scale s x) =
+            (evaluate x) (evaluate y))))
+    generatorAgreementPropagates left right eq (scale s x) =
       trans
-        (A.restrictedScalarLaw griess left s (evaluate family x))
+        (A.restrictedScalarLaw griess left s (evaluate x))
         (trans
           (cong (A.weightTwoScale griess s)
-            (generatorAgreementPropagates family left right eq x))
-          (sym (A.restrictedScalarLaw griess right s
-            (evaluate family x))))
-    generatorAgreementPropagates family left right eq (product x y) =
+            (generatorAgreementPropagates left right eq x))
+          (sym (A.restrictedScalarLaw griess right s (evaluate x))))
+    generatorAgreementPropagates left right eq (product x y) =
       trans
         (A.restrictedProductLaw griess left
-          (evaluate family x) (evaluate family y))
+          (evaluate x) (evaluate y))
         (trans
           (cong₂ (A.firstProduct griess)
-            (generatorAgreementPropagates family left right eq x)
-            (generatorAgreementPropagates family left right eq y))
+            (generatorAgreementPropagates left right eq x)
+            (generatorAgreementPropagates left right eq y))
           (sym (A.restrictedProductLaw griess right
-            (evaluate family x) (evaluate family y))))
+            (evaluate x) (evaluate y))))
 
     generatorAgreementIsWholeWeightTwo :
-      (family : TrueGriessGeneratingFamily)
+      (generation : ActualGeneration)
       (left right : A.SelectedVOAAutomorphism) →
-      ((g : Generator family) →
-        A.weightTwoAction left (seed family g)
-        ≡ A.weightTwoAction right (seed family g)) →
+      ((g : Generator) →
+        A.weightTwoAction left (seed g)
+        ≡ A.weightTwoAction right (seed g)) →
       (x : A.WeightTwo) →
       A.weightTwoAction left x ≡ A.weightTwoAction right x
-    generatorAgreementIsWholeWeightTwo family left right eq x =
+    generatorAgreementIsWholeWeightTwo generation left right eq x =
       trans
         (sym (cong (A.weightTwoAction left)
-          (expressionEvaluates family x)))
+          (expressionEvaluates generation x)))
         (trans
-          (generatorAgreementPropagates family left right eq
-            (expressionFor family x))
+          (generatorAgreementPropagates left right eq
+            (expressionFor generation x))
           (cong (A.weightTwoAction right)
-            (expressionEvaluates family x)))
+            (expressionEvaluates generation x)))
