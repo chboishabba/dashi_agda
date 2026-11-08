@@ -761,3 +761,115 @@ The current evidence leans toward no execution but cannot certify
 the negative without approval/financial records. Completion of all
 factual gates is impossible without acquiring such missing evidence,
 and source-written alternatives do not constitute those receipts.
+
+## 8 November 2026 — exact historic financing and causal-status adjudication
+
+### The original document contains a contemporary report of nonapproval
+
+The same Congressional Record that reproduces the 3 April 1998 draft
+also reproduces *John H. Cushman Jr., New York Times, 26 April 1998,
+"Industrial Group Plans to Battle Climate Treaty"*. Its reporting
+attributes two decisive **as-of-publication** facts to the interviews:
+
+- Organiser **Joe Walker** said the document was still tentative,
+  and no industry executives had yet been approached to fund it.
+- Industry participants confirmed the planning document was genuine,
+  but said the participating organisations had **not formally
+  approved** it.
+
+These are *contemporary reported actor statements* about the specific
+April draft, not a completed company-books inspection, legal
+finding or a claim that separate climate-denial activity did not
+occur. They strongly constrain the stage as of 25–26 April 1998.
+
+A later SourceWatch profile attributes to Walker the retrospective
+belief that the project was never funded and did not proceed; it is a
+secondary republication without the original interview transcript or
+financial closeout. Retain it as a **nonexecution hypothesis supported
+by attributed testimony**, not a settled absence-of-funding fact.
+
+A 20 March 2019 amici brief, *City of Oakland et al v BP et al*,
+Ninth Circuit docket 18-16663, PDF page 39 / printed p. 26
+(https://climatecasechart.com/wp-content/uploads/case-documents/2019/20190320_docket-18-16663_amicus-brief-4.pdf)
+asserts that no organisation was ever formed under the planned
+`Global Climate Science Data Center` name. This is a legal
+advocacy filing, **not a verified corporate-registry certificate
+or judicial finding**. It cannot rule out activity by differently
+named groups or automatically prove the whole draft was cancelled.
+
+The original public statement, the organiser's later attributed
+belief and the amici assertion are three distinct provenance
+objects. Neither retrospective nor litigation-derived claims may
+silently upgrade the original contemporary source or constitute a
+funding audit. The structured manifest and Python validator now
+preserve these distinctions; the original
+`CCDCOEP3ClimateContestedAttributionExact.agda` source owner
+records the contemporary and retrospective categories, with regression
+proofs that final audited receipts remain missing.
+
+### Independent empirical observations occur BEFORE the April draft
+
+Krosnick, Visser and Holbrook published their original fall 1997
+national survey waves, N=688 (1 Sept–5 Oct 1997) and N=725
+(20 Dec 1997–13 Feb 1998). Real reported descriptive
+changes include recalled global-warming news 48%→56%, thinking
+a lot/moderately 54%→65%, high opinion certainty 28%→34%, and
+strong-party historical-warming belief gap 4pp→17pp. Both waves
+*pre-date* the API plan. Their differences give genuine evidence of
+pre-existing climate opinion and polarisation but are logically
+incapable of measuring the effect of a proposed April 1998
+campaign. Original source: RFF `American Opinion on Global Warming:
+The Impact of the Fall 1997 Debate`,
+https://www.resources.org/archives/american-opinion-on-global-warming-the-impact-of-the-fall-1997-debate/.
+
+`CCDCOEP3PreAPIOpinionTemporalControlExact.agda` is now
+source-written, directly imported in Cognition Everything/Golden and
+cross-checked in the P3 regression. Its selected actual percentages
+and sample dates are kept distinct from synthetic
+`laterPlanHasIndependentEstablishedImpact` counterexample worlds.
+The manifest validator forbids attributing the 1997 measurements
+to the 1998 draft or inventing respondent microdata.
+
+### Exact source-text ingestion defect repaired
+
+The official 27 April 1998 Congressional Record HTML contains
+a duplicate mention of the proposed science data centre in
+congressional commentary **before** the attached 3 April memo.
+An importer requiring global string uniqueness would incorrectly
+reject this genuine record. The intake parser now isolates the
+attached memo beginning `To: Global Climate Science Team`, requires
+the original April 3 date, searches ordered candidate anchors only
+inside that original memo context, and reports full-document
+normalised-text offset coordinates. A negative/positive fixture
+intentionally includes the earlier duplicate commentary reference.
+These candidate source offsets are not misrepresented as original
+HTML byte or canonical ITIR parser tokens.
+
+### Actual closure status
+
+- **Primary draft + contemporary nonapproval report**: source
+  publicly located, bounded claim and provenance interfaces written.
+- **Independent 1997 national public opinion response**: real
+  published descriptive measurements source-written, correctly
+  excluded from the later-plan causal estimand.
+- **Independent 1991/1995/1998 communications + 2017/2020 coded
+  documents**: separate source records; no automatic April plan
+  execution identity or audience-effect pooling.
+- **April 1998 specific-plan formal approval, direct payments,
+  delivered interventions and postcampaign outcomes**: not found
+  in the reviewed available sources; final verdict cannot be
+  authenticated without original organisational/financial archives.
+- **GovInfo original raw bytes**: official page accessible through
+  the public text source; container source download failed
+  (network/DNS unavailable). Source-hash receipt and source-specific
+  PNF admission remain unavailable, not fabricated.
+- **Python/Agda exact-head acceptance**: no executable full-checkout
+  receipts in this session; GitHub read-back and structural checks
+  are strictly weaker.
+
+The high-alpha remaining empirical test is now **a positive same-plan
+authorisation/funding record or reliable final negative accounting**,
+followed by actual exposure/outcome data *only if* implementation
+was established. If it was cancelled, the correct endpoint is
+a supported **nonimplementation determination**, not a manufactured
+causal campaign-effect estimate.
