@@ -374,3 +374,45 @@ module ActualSelectedSummandInclusions
   originalNoExtraStatesIffIdentificationInjective =
     noExtraStatesFromOriginalIdentificationInjective ,
     originalIdentificationInjectiveFromNoExtraStates
+
+
+  ----------------------------------------------------------------------
+  -- DECISIVE V0 NO-GO: A TAGGED COPRODUCT IS NOT A VECTOR DIRECT SUM.
+  --
+  -- A genuine linear embedding of both nonempty summand vector spaces
+  -- into one VOA state space must send both zeros to the SAME zero.
+  -- The original assembly's two tag-identification equations instead
+  -- force disjoint summand images. Hence the old A ⊎ B shape cannot
+  -- be promoted as the linear direct sum A ⊕ B with both embeddings
+  -- linear. This is not a choice-of-normal-form or kernel issue.
+  ----------------------------------------------------------------------
+
+  originalLinearSummandZerosImpossible :
+    (fixedZero : Fixed) (twistedZero : Twisted)
+    (selectedZero : SelectedState) →
+    includeFixedSummand assembly fixedZero ≡ selectedZero →
+    includeTwistedSummand assembly twistedZero ≡ selectedZero →
+    ⊥
+  originalLinearSummandZerosImpossible fixedZero twistedZero
+    selectedZero fixedPreservesZero twistedPreservesZero =
+    originalFixedTwistedDisjoint fixedZero twistedZero
+      (trans fixedPreservesZero (sym twistedPreservesZero))
+
+  originalVOAZeroCannotBeBothSummandZeros :
+    (fixedZero : Fixed) (twistedZero : Twisted) →
+    includeFixedSummand assembly fixedZero
+      ≡ VOA.GradedModule.zero
+          (VOA.VertexOperatorAlgebra.gradedModule
+            (OrbifoldVOAAssembly.orbifoldVOA assembly)) →
+    includeTwistedSummand assembly twistedZero
+      ≡ VOA.GradedModule.zero
+          (VOA.VertexOperatorAlgebra.gradedModule
+            (OrbifoldVOAAssembly.orbifoldVOA assembly)) →
+    ⊥
+  originalVOAZeroCannotBeBothSummandZeros fixedZero twistedZero
+    fixedPreservesZero twistedPreservesZero =
+    originalLinearSummandZerosImpossible fixedZero twistedZero
+      (VOA.GradedModule.zero
+        (VOA.VertexOperatorAlgebra.gradedModule
+          (OrbifoldVOAAssembly.orbifoldVOA assembly)))
+      fixedPreservesZero twistedPreservesZero
