@@ -1192,3 +1192,150 @@ Cognition.Everything, P3 Golden regression and the original
 `scripts/check_ccdcoe_cognition_agda.sh` parallel_checker route.
 No actual article-level source bytes, positive measured frame
 difference, or Exxon Dataverse credential has been fabricated.
+
+## 8 November 2026 — REAL independent media baseline, verified GCC media runtime and dual-coder bounded variation
+
+This round advances the higher-alpha GCC media/ExxonMobil programme;
+the 1998 API draft remains a bounded source-specific historical contrast.
+
+### First actual independent (non-agency) media measurement
+
+Craig Trumbo, `Constructing climate change: claims and frames in US
+news coverage of an environmental issue`, *Public Understanding of
+Science* 5(3), 1996, DOI **10.1088/0963-6625/5/3/006**.
+The publisher documents a five-national-newspaper content analysis.
+Selected published media-attention notes report approximately
+**400 column-inches** in January–June 1988, **1,200** in July–
+December 1989, **350** in January–June 1993. The paper reports
+**Scott's pi = 0.78** for its frame-coder agreement, and relates
+scientist sources to problem/cause framing versus politicians/
+special interests to judgment/remedy framing.
+
+This is an **observed historical news-content study**; it is NOT
+a Harrison campaign before/after estimate. Its date windows are
+nonadjacent and its column-inches are not the frame-share
+outcome the GCC agency claims to have changed. The original
+item-level coded text and weighting are not admitted here.
+Publisher: https://journals.sagepub.com/doi/10.1088/0963-6625/5/3/006
+
+`CCDCOEP3Trumbo1996IndependentMediaBaselineExact.agda` is
+source-written with the original five-paper study, three approximate
+volume summaries, reported coder pi and explicitly missing GCC
+intervention-specific effects. Native
+`IntersectionalNonFactorability` demonstrates how the same
+volume observations fit different candidate causal explanations.
+This is **underidentification given actual observations**,
+not a declaration that GCC had zero or positive effect.
+The new owner is imported into Cognition Everything,
+P3 Golden regression and canonical parallel checker.
+The GCC source manifest and validator separately keep the
+published real media-attention baseline and unknown GCC treatment
+effect.
+
+### Source-admission verification is now genuinely executable
+
+`scripts/measure_ccdcoe_p3_gcc_media.py` was upgraded
+to require `--source-root` and per-article relative
+`source_file`. In production, it actually reads bytes, hashes
+each original source, compares against the supplied SHA256,
+rejects changed hashes, symlinks, path traversal,
+and synthetic reviewer/intervention receipts. The original
+source onset still requires a separately specified date and
+an attached evidence receipt. Hashes prove byte integrity
+relative to archived local materials; they are not independently
+authenticated archival provenance or reviewer truth.
+
+`scripts/measure_ccdcoe_p3_gcc_dual_coder.py` provides a
+second original-byte-verified analysis of the SAME article
+population under two distinct coder IDs. It reports observed
+agreement, Scott's pi across five frame classes,
+per-cell lower/upper frame frequencies (both versus either
+coder), and a **partial-identification interval for the
+DESCRIPTIVE four-cell contrast** covering either interpretation
+of disputed frame codes. This does not replace the need
+for sampling uncertainty, outlet/time clustering, independent
+reviewer qualification or a causal identification design.
+
+The source manifest explicitly requires dual coding and
+denies that this newly computed pi is Trumbo's 1996 pi.
+The original data itself is still missing; all software
+regression fixtures are labelled synthetic and are not
+published as real historical results.
+
+### Actual execution receipts, not a GitHub source-only check
+
+I fetched the exact GitHub blobs into an isolated Python 3.13.5
+workspace and verified `git hash-object` byte-level identity
+with their repository blob SHA:
+
+- `measure_ccdcoe_p3_gcc_media.py` git blob
+  `ad7f8f6a1375bda4ecc26095e15ca994b9bfcf4c`,
+  source SHA256 `34aa9dbcea34c39c62cdb74b20a566c3883fd121772b9059428427a339c82985`;
+- `measure_ccdcoe_p3_gcc_dual_coder.py` git blob
+  `c2aaa631bcf86b22709e74709547623a15eaeccb`,
+  source SHA256 `b4477fbd43a50a5e7d76689a286925609548540c24816126877523b56549d771`.
+
+Both passed `python -m py_compile` and their
+**actual** `--self-test` runs, including negative tests for
+unverified bytes, missing arms, wrong reviewers and
+source path traversal. The exact scoped receipt is persisted
+in `Docs/research/ccdcoe_p3_gcc_runtime_receipts_20261108.json`.
+The full Agda parallel_checker and complete repo checkout
+were not executed in the isolated runtime.
+
+### Further original-source provenance warning
+
+The GCC 1993 media-hits archive page has an anomalous
+posted date **1993-04-21** but describes a **July 1993**
+Washington Post clipping and a **September 1993** GCC bulletin
+reference. Therefore this posted date **cannot** support
+original historical intervention chronology without reviewing
+the source archive itself. The manifest records a fail-closed
+`historical_date_conflict`; the validator rejects treating
+it as a verified primary event date.
+
+### 2021 independent ExxonMobil replication exact corpus composition
+
+The published Supran/Oreskes 2021 *One Earth* corpus of **180
+documents** consists of **32 internal company documents,
+72 peer-reviewed publications, and 76 advertorials** taking
+a position on aspects of anthropogenic climate change.
+This must not be accidentally pooled with the 2017 187
+communications, or the 2020 broader newspaper search.
+DOI 10.1016/j.oneear.2021.04.014.
+The source ledger now retains exact 32+72+76=180 counts
+and the study's risk/demand/responsibility frame targets.
+Its Dataverse dataset DOI `10.7910/DVN/XXQUKJ` is
+identified, but the 180 original texts and authors' analysis
+code were not accessed or run in this turn.
+
+### Revised remaining proof-of-fact max-cut
+
+1. **P0 Original source**: acquire the actual GCC-held clipping
+   text/PDF and Harrison one-pager bytes, resolve webpage date
+   contradictions, identify dated executed campaign onset from
+   independently attributable records.
+2. **P1 Real observed corpus**: collect original article sample
+   under a documented outlet-time frame, independently code
+   actual text twice and retain authentic reviewer/source receipts;
+   compute the implemented descriptive frame-shift and coder
+   bounds on the REAL sample.
+3. **P2 Inference**: pretrends, outlet clustering, time aggregation,
+   confounder/covariate fit, external campaign interference,
+   missing-clipping sensitivity and uncertainty of measured
+   contrast; only then consider a bounded causal statement.
+4. **P3 Independent replication**: obtain the authorised
+   ExxonMobil-180 source texts and original computational code,
+   rerun the 2021 source-type frame results and compare source-
+   bound mechanisms without assuming equal intervention dates.
+5. **P4 Transport**: use existing PNF/trialectic/source-power
+   machinery to test independent institutions, dissent, agency
+   and reviewable provenance; no new abstract lemmas before
+   observed source failures demand them.
+
+No public search or fabricated labels can supply unavailable
+original PDFs, authentic reviewed 1993 article text or an
+identified policy/reader effect. The source-backed original
+measurement of pre-existing media attention is now located,
+and the historical article-analysis pipeline is actually
+runtime-tested and ready for validated inputs.
