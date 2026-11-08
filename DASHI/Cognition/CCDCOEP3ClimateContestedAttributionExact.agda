@@ -16,6 +16,8 @@ module DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -169,3 +171,69 @@ noAutomaticLaterAdvocacyTo1998Implementation ()
 
 -- The original sources are still separately addressable in case
 -- evidence; no source-grade swap, temporal telescoping or auto-promotion.
+
+------------------------------------------------------------------------
+-- CONTEMPORANEOUS REPORTED FUNDING AND APPROVAL STATUS.
+-- NYT John H. Cushman Jr., 26 April 1998, reprinted in the 27 April
+-- 1998 Congressional Record ahead of the draft. Joe Walker reportedly
+-- told the journalist no industry executives had been approached to
+-- fund the still-tentative plan. Industry representatives reportedly
+-- said participating organisations had not formally approved it.
+--
+-- This is a dated ATTRIBUTED REPORT as of April 25–26, not proof of
+-- permanent absence of funding or subsequent campaign implementation.
+------------------------------------------------------------------------
+
+record Original1998FundingStatusReport : Set where
+  constructor original1998FundingStatusReport
+  field
+    sourceLocator : String
+    reportDate : String
+    organiserHadNotApproachedExecutiveFunders : Bool
+    organisationsReportedNoFormalApproval : Bool
+    actualFinalApprovalReceiptPresent : Bool
+    actualFinalFundingReceiptPresent : Bool
+
+contemporaneousNoApprovalReport : Original1998FundingStatusReport
+contemporaneousNoApprovalReport =
+  original1998FundingStatusReport
+    "NYT John H. Cushman Jr. 1998-04-26, reprinted Congressional Record H2325"
+    "1998-04-26"
+    true
+    true
+    false
+    false
+
+actualApprovalNotEstablished :
+  Original1998FundingStatusReport.actualFinalApprovalReceiptPresent
+    contemporaneousNoApprovalReport ≡ false
+actualApprovalNotEstablished = refl
+
+actualFundingNotEstablished :
+  Original1998FundingStatusReport.actualFinalFundingReceiptPresent
+    contemporaneousNoApprovalReport ≡ false
+actualFundingNotEstablished = refl
+
+-- The later Walker "never funded" statement is reproduced by
+-- SourceWatch. Without authentic original correspondence and independent
+-- accounting, it is attributed testimony only, not a certified negative.
+record RetrospectiveAttribution : Set where
+  constructor retrospectiveAttribution
+  field
+    secondarySource : String
+    speaker : String
+    originalInterviewAuthenticated : Bool
+    negativeAccountingIndependentReceipt : Bool
+
+walkerAttributedRetrospective : RetrospectiveAttribution
+walkerAttributedRetrospective =
+  retrospectiveAttribution
+    "SourceWatch Joseph L. Walker III, retrospective statement"
+    "Joseph L. Walker III"
+    false
+    false
+
+retrospectiveIsNotFundProof :
+  RetrospectiveAttribution.negativeAccountingIndependentReceipt
+    walkerAttributedRetrospective ≡ false
+retrospectiveIsNotFundProof = refl
