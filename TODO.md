@@ -1,3 +1,16 @@
+## 2026-11-08 — audit correction: R572 is preferred
+
+- [x] Inspect latest #1444, #1440, #1460 and existing R572, R569–R571, R566, R517, T3 Haar and preferred OS source; **do not classify SU(N), Haar, Wilson, RG, R4, OS or compact-simple algebra as absent**.
+- [x] Reconcile original YM01–YM10 *physical endpoint* table against R572's **seven** actual remaining producer families. The [roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) and [manifest](Docs/physics/YMClayEndpointPhaseLemmaManifest20261108.json) name each existing owner and its conditional frontier.
+- [ ] **A3:** pay original positive/event-Boolean/projective-consistent/continuity-at-empty Wilson finite projection (R566), not a redundant generic Lp/Prokhorov construction.
+- [ ] **T1/T5:** same original Wilson finite/RG/OS physical sources and genuine cutoff/volume-uniform CMP119 source bounds.
+- [ ] **B1/B2:** full Wilson small/large field WEXT and positive full-sector same-\(H_{OS}\) gap, no selected-probe promotion.
+- [ ] **G1:** instantiate actual compact-simple structural, local BCH/Haar quantitative and five-block source inputs for each group; R569–R571 align the group operations automatically.
+- [ ] **H6:** original same-family Gaussian/Ward kernel and surviving interacting continuum correlation.
+- [ ] Final Clay physical and Agda kernel certification remains unperformed; no CI claimed.
+
+---
+
 ## YM 2026-11-08 — canonical PH0–PH4 roadmap
 
 See [full exact-lemma roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) and [machine-readable manifest](Docs/physics/YMClayEndpointPhaseLemmaManifest20261108.json); static source check: `python scripts/check_ym_clay_phase_lemma_manifest.py --check`.
