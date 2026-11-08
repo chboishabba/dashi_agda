@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-08",
+  "repo": "chboishabba/dashi_agda",
+  "pr": 1444,
+  "source_branch": "research/ym-voyager2026-completeness-crosswalk-20261101",
+  "purpose": "Original Wilson SU(N) Yang-Mills Clay endpoint, no duplicate finite mechanisms",
+  "statuses": [
+    "existing_source_written",
+    "conditional_compiler",
+    "open_physical_input",
+    "open_external_extension"
+  ],
+  "terminal_status": "open_physical_input",
+  "phases": [
+    {
+      "id": "PH0",
+      "name": "Original physical finite source",
+      "deliverable": "The same normalized SU(N) variable-cutoff physical Wilson Gibbs family, with continuous Haar and real physical beta/geometry",
+      "acceptance": "True compact Haar one-link and Fubini; identical original normalized finite Wilson source at each cutoff; gauge invariance; physical n-to-(a,L) assignment; no rational SU2 surrogate",
+      "lemmas": [
+        "YM01"
+      ]
+    },
+    {
+      "id": "PH1",
+      "name": "Changing-cutoff R445 and interacting R4 continuum",
+      "deliverable": "Full original measure tightness/UV-IR limits, physical moments, OS continuum family and interacting local witness",
+      "acceptance": "Cutoff/volume independent marked-source bounds; limiting actual gauge invariant Schwinger functions on R4 with all required OS axioms; noncollapsed and demonstrably non-Gaussian/interacting",
+      "lemmas": [
+        "YM02",
+        "YM03",
+        "YM09"
+      ]
+    },
+    {
+      "id": "PH2",
+      "name": "Original Wilson physical clustering route (replaceable)",
+      "deliverable": "All physical boundary pairs admitted; original small AND large field contributions with one positive physical mass rate",
+      "acceptance": "Same full original measure and fixed positive physical cube size, q<1 uniformly; true CMP116 source interpretation; large-field remainder under control; physical-distance covariance bound",
+      "lemmas": [
+        "YM04",
+        "YM05"
+      ],
+      "optional_if": "YM08 established via a genuinely independent full-sector gap method"
+    },
+    {
+      "id": "PH3",
+      "name": "Single OS Hamiltonian and full-sector spectral exclusion",
+      "deliverable": "Reflection-positive continuum, same reconstructed H, dense gauge invariant nonvacuum state domain, strict real-unit spectral threshold",
+      "acceptance": "Same E1 original Schwinger source and OS action; positivity/cyclicity with no undetected soft sector; spec(H|Omega_perp) subset [Delta,infinity), Delta>0",
+      "lemmas": [
+        "YM06",
+        "YM07",
+        "YM08"
+      ]
+    },
+    {
+      "id": "PH4",
+      "name": "Clay gauge-group scope and final discharge",
+      "deliverable": "For every compact simple K one nontrivial 4D YM with positive mass gap",
+      "acceptance": "YM01-03,YM06-10 discharged for each compact simple K; YM04-05 or alternate valid route to YM08; exact original-source theorem, not conditional record",
+      "lemmas": [
+        "YM10"
+      ]
+    }
+  ],
+  "lemmas": [
+    {
+      "id": "YM01",
+      "target": "originalSUNHaarPhysicalMeasure",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClaySUNVariablePeriodicGibbsGaugeExact.agda",
+        "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda",
+        "DASHI/Physics/YangMills/YMClaySUNProductHaarGaugeFromOneLinkExact.agda"
+      ],
+      "missing": "Construct native continuous SU(N) trace/Haar/Fubini and physical beta/cutoff identification with the same real Wilson Gibbs measures",
+      "depends": []
+    },
+    {
+      "id": "YM02",
+      "target": "originalWilsonUniformRGEstimates",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayOriginalWilsonNativeOSPullbackExact.agda",
+        "DASHI/Physics/YangMills/BalabanClayGate4CombinedRGUVIterationExact.agda"
+      ],
+      "missing": "Uniform R445 moment/tail, large-field, reflection-compatible block and tightness bounds on the original changing-cutoff full measure",
+      "depends": [
+        "YM01"
+      ]
+    },
+    {
+      "id": "YM03",
+      "target": "originalWilsonInteractingR4Limit",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda",
+        "DASHI/Physics/YangMills/YMClayE1VariableCutoffCylinderLimitExact.agda",
+        "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda"
+      ],
+      "missing": "Noncollapsed R4 Schwinger limits for physically compatible local cylinders; Euclidean covariance, OS reflection positivity, regularity, and all other required axioms",
+      "depends": [
+        "YM01",
+        "YM02"
+      ]
+    },
+    {
+      "id": "YM04",
+      "target": "originalPhysicalRemotePairCoverage",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayD1PhysicalRemoteCoverageNoGoExact.agda",
+        "DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda"
+      ],
+      "missing": "Real positive-volume original Wilson boundary geometry and all physically required distinct remote pair admission, every cutoff/volume; no empty predicate",
+      "depends": [
+        "YM01"
+      ]
+    },
+    {
+      "id": "YM05",
+      "target": "originalFullWilsonSmallLargeUniformDecay",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda",
+        "DASHI/Physics/YangMills/YMClayD1PhysicalRemoteCoverageNoGoExact.agda"
+      ],
+      "missing": "Full covariance <= original CMP116 small-field envelope + actual large-field remainder, both uniform with one q<1 at fixed positive physical cube size",
+      "depends": [
+        "YM01",
+        "YM02",
+        "YM04"
+      ]
+    },
+    {
+      "id": "YM06",
+      "target": "originalWilsonSameOSReconstruction",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayOriginalWilsonNativeOSPullbackExact.agda",
+        "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
+        "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda"
+      ],
+      "missing": "Prove positive-time reflection compatibility and whole-form RP at changing scales, pass to the E1 continuum, and identify precisely the same reconstructed H_OS",
+      "depends": [
+        "YM03"
+      ]
+    },
+    {
+      "id": "YM07",
+      "target": "originalWilsonDenseNonvacuumDetection",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda"
+      ],
+      "missing": "Every nonvacuum spectral state detected by a physically dense set of genuine gauge-invariant local test vectors; exclude selected-probe-only interpretation",
+      "depends": [
+        "YM06"
+      ]
+    },
+    {
+      "id": "YM08",
+      "target": "originalWilsonFullOSSubgapExclusion",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+        "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda"
+      ],
+      "missing": "H_OS spectrum on all Omega_perp has uniform Delta>0 in physical units, using YM05 or alternate rigorous gap route, not shrinking lattice gaps",
+      "depends": [
+        "YM06",
+        "YM07"
+      ],
+      "preferred_support": [
+        "YM05"
+      ]
+    },
+    {
+      "id": "YM09",
+      "target": "originalInteractingLocalWitnessSurvives",
+      "status": "open_physical_input",
+      "source_owners": [
+        "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda",
+        "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda"
+      ],
+      "missing": "Explicit renormalized local continuum gauge invariant connected correlation that survives and excludes a trivial/free theory",
+      "depends": [
+        "YM03"
+      ]
+    },
+    {
+      "id": "YM10",
+      "target": "clayAllCompactSimpleGroups",
+      "status": "open_external_extension",
+      "source_owners": [
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda"
+      ],
+      "missing": "Original full-source construction and nontrivial spectral gap for every compact simple group, not only selected SU2/SUN or toy carrier",
+      "depends": [
+        "YM01",
+        "YM02",
+        "YM03",
+        "YM06",
+        "YM07",
+        "YM08",
+        "YM09"
+      ]
+    }
+  ],
+  "separate_non_clay_lanes": {
+    "signature31": {
+      "owner_pr": 1460,
+      "paid": "Finite intrinsic shell/causal signature/3+1 direction classifier and Euclidean vs Lorentzian Hodge algebra; source-written",
+      "open": [
+        "originalObserverRealizedDynamics",
+        "originalObserverMetricEqualsKKReduction",
+        "selectedEuclideanOSLorentzReconstruction",
+        "sameObserverClockAndOSHamiltonian"
+      ],
+      "clay_prerequisite": false
+    },
+    "five_dimensional_KK": {
+      "owner_pr": 1241,
+      "open": [
+        "actualCompleteFiveDimensionalAction",
+        "actualSourcedCompactifiedSolution",
+        "sameObserverMetricAndStress"
+      ],
+      "clay_prerequisite": false
+    },
+    "monster": {
+      "owner_pr": 1472,
+      "open": [
+        "selectedOriginalGriessAndDGLRoute",
+        "sameActualQ80GroupIsomorphisms",
+        "selectedOriginalVersusFLMUVAtion"
+      ],
+      "clay_prerequisite": false
+    }
+  },
+  "proof_status_policy": "Source-written, semantic-source-inhabited, Agda-kernel-accepted, and physical theorem complete are distinct labels; never infer a complete Clay theorem from any conditional compiler."
+}
