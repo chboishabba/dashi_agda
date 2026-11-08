@@ -783,3 +783,19 @@ After each update, report **exact lemma IDs, old versus new minimal dependency c
 **Pareto/alpha next:** pay S01→S02 first with *source-specific* observable spatial discrimination and independent retarded response, rather than another signature mask; in parallel pay an actual physical H/OS operator representation S08–S09 (not just abstract time-indexed maps), and P08 S05→S06 physical lift/source fields. Add a native BIDI non-injectivity theorem for the **original** KK horizontal reduction: different fifth-sector connections may have the identical reduced four-metric, so the reverse 4D→5D lift cannot be justified without independent fibre observables. This appendix is not a claim all future analytic lemmas are already known.
 
 **Closure threshold:** source-written only ≠ Agda kernel-accepted ≠ physically inhabited; no checkmark can be set by a Python fixture or a conditional source record. P05/P06 are not re-implemented here.
+
+## 2026-11-08 observer/KK and Monster gravity exact physical source aliases
+
+These proposed K-labels are cross-PR aliases of the existing P00-P11 and S01-S11 obligations, NOT a replacement of the canonical 186-row roadmap. Reuse #1241, #1235, #1162, #1179, #1472 and independent YM #1444. The 26+1 Monstrous M-theory massless count is not the same as a selected 5D KK Einstein solution.
+
+**K01 measuredOriginalObserverCone (S01-S04):** a real selected micro observer, independent spatial interventions, retarded responses, observed 4D cone, principal quadratic, Lorentz signature, scale and SI units.
+**K02 selectedFiveDAction (S05):** real smooth circle bundle, metric, gauge connection, radion/matter, globally consistent 5D action and precise boundary and conserved source laws.
+**K03 actualFullFieldSolution (S05):** regular nontrivial solution of all Einstein, scalar, matter and gauge equations, boundary/variation and stability conditions for K02.
+**K04 actualKKReducedMetricEqualsObserved (S06):** derived 4D metric and causal structure equals the independently observed K01 metric with stated coordinate/gauge and uncertainty semantics; source stress, charge and dynamics commute.
+**K05 globallyConsistentKKQuantumModes (S05/S10):** correct photon identification, complete scalar/odd/fermion vector KK tower, radion stabilization, gauge quotient, CS/WZ anomalies, spin bordism/eta/torsion and regulator for same action. #1241 supplies candidate-specific necessary tests, not global certification.
+**K06 sameObserverStoneOSOperator (S07-S09):** physically completed observer Hilbert and strongly continuous U(t), selfadjoint H_observer; genuine 4D YM OS H_OS from #1444; onto unitary J and dense domains with J H_observer J^{-1}=H_OS and justified Wick continuation in same SI units.
+**K07 selectedLimitOrderCompatibility (S10):** UV cutoff, IR volume, fibre radius and observer coarse-graining limits plus quantitative commutation/controlled errors for actual same selected systems.
+**K08 optionalActualMonsterGravityIntertwiner:** for #1472 M-theory, genuine physical Monster group action on real massless fields and inverse equivariant bridge to FLM V2 respecting the selected operator algebra; source-driven higher-dimensional reduction. Not entailed by the 196884 count.
+**K09 independentCalibratedDiscriminator:** parameter-fixed observable for one actual action, GR/QFT alternatives, uncertainty, experimental validation and independent replication.
+
+Priority: K02-K04 are the geometry heart; K01 is needed for physically measured identity; K05-K07 are full quantum/common-theory gates; K08-K09 optional separate physical predictions. No new Golden Agda, parallel_checker, or real physical completion is claimed.
