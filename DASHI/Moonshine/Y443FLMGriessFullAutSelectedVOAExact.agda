@@ -29,6 +29,7 @@ module DASHI.Moonshine.Y443FLMGriessFullAutSelectedVOAExact where
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Sigma using (Σ; _,_; fst; snd)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (ℤ; +_)
 
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
@@ -95,6 +96,15 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
       actionVacuum :
         action (VOA.VertexOperatorData.vacuum Y)
         ≡ VOA.VertexOperatorData.vacuum Y
+      actionConformal :
+        action (VOA.VertexOperatorData.conformalVector Y)
+        ≡ VOA.VertexOperatorData.conformalVector Y
+      actionPreservesEveryGrade :
+        (n : Nat) (x : VOA.GradedModule.gradePiece GM n) →
+        Σ (VOA.GradedModule.gradePiece GM n)
+          (λ y →
+            action (VOA.GradedModule.includeGrade GM n x)
+            ≡ VOA.GradedModule.includeGrade GM n y)
 
       actionAdd : (x y : State) →
         action (VOA.GradedModule._+_ GM x y)
@@ -229,6 +239,10 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
   record ConcreteGriessProduct : Setω where
     field
       firstProduct : WeightTwo → WeightTwo → WeightTwo
+      conformalWeightTwo : WeightTwo
+      conformalIsActual :
+        include conformalWeightTwo
+        ≡ VOA.VertexOperatorData.conformalVector Y
       -- Actual linear algebra operations on the original grade-two space.
       -- A multiplicative set bijection alone is NOT an algebra automorphism.
       weightTwoAdd : WeightTwo → WeightTwo → WeightTwo
@@ -259,6 +273,8 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
       scalarLaw : (s : Scalar) (x : WeightTwo) →
         onWeightTwo (weightTwoScale griess s x)
         ≡ weightTwoScale griess s (onWeightTwo x)
+      conformalFixed :
+        onWeightTwo (conformalWeightTwo griess) ≡ conformalWeightTwo griess
       productLaw : (x y : WeightTwo) →
         onWeightTwo (firstProduct griess x y)
         ≡ firstProduct griess (onWeightTwo x) (onWeightTwo y)
@@ -318,6 +334,19 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
               (sym (includeWeightTwoScale griess s
                 (weightTwoAction a x)))))))
 
+  restrictedConformalLaw :
+    (griess : ConcreteGriessProduct) →
+    (a : SelectedVOAAutomorphism) →
+    weightTwoAction a (conformalWeightTwo griess)
+    ≡ conformalWeightTwo griess
+  restrictedConformalLaw griess a =
+    gradeEmbeddingInjective griess
+      (weightTwoAction a (conformalWeightTwo griess))
+      (conformalWeightTwo griess)
+      (trans (sym (restrictionAgrees a (conformalWeightTwo griess)))
+        (trans (cong (action a) (conformalIsActual griess))
+          (trans (actionConformal a) (sym (conformalIsActual griess))))
+
   restrict :
     (griess : ConcreteGriessProduct) →
     SelectedVOAAutomorphism → GriessAutomorphism griess
@@ -328,6 +357,7 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
     ; rightInverse = weightTwoRightInverse a
     ; additiveLaw = restrictedAdditiveLaw griess a
     ; scalarLaw = restrictedScalarLaw griess a
+    ; conformalFixed = restrictedConformalLaw griess a
     ; productLaw = restrictedProductLaw griess a
     }
 
