@@ -1,0 +1,51 @@
+{
+  "schema": "dashi.ccdcoe.p3.local_runtime_receipt.v1",
+  "run_date": "2026-11-08",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "local isolated model Python runtime; source files copied byte-for-byte from GitHub fetch",
+    "github_checkout_present": false,
+    "agda_executable_present": false,
+    "original_1993_GCC_articles_present": false
+  },
+  "tests": [
+    {
+      "script": "scripts/measure_ccdcoe_p3_gcc_media.py",
+      "github_blob_sha": "ad7f8f6a1375bda4ecc26095e15ca994b9bfcf4c",
+      "local_git_hash_object": "ad7f8f6a1375bda4ecc26095e15ca994b9bfcf4c",
+      "source_sha256": "34aa9dbcea34c39c62cdb74b20a566c3883fd121772b9059428427a339c82985",
+      "compile": "passed",
+      "command": "python measure_ccdcoe_p3_gcc_media.py --self-test",
+      "result": "passed",
+      "tests_scope": [
+        "synthetic four-cell frame frequencies",
+        "descriptive Wilson intervals",
+        "negative missing comparison cell",
+        "negative unreviewed item",
+        "negative changed source SHA256",
+        "negative traversing article path"
+      ]
+    },
+    {
+      "script": "scripts/measure_ccdcoe_p3_gcc_dual_coder.py",
+      "github_blob_sha": "c2aaa631bcf86b22709e74709547623a15eaeccb",
+      "local_git_hash_object": "c2aaa631bcf86b22709e74709547623a15eaeccb",
+      "source_sha256": "b4477fbd43a50a5e7d76689a286925609548540c24816126877523b56549d771",
+      "compile": "passed",
+      "command": "python measure_ccdcoe_p3_gcc_dual_coder.py --self-test",
+      "result": "passed",
+      "tests_scope": [
+        "synthetic two-coder frame agreement",
+        "Scott pi with matched labels",
+        "disagreement partial identification bounds",
+        "negative same-coder role",
+        "negative changed article hash"
+      ]
+    }
+  ],
+  "verified_real_world_observations": 0,
+  "original_document_recode_executed": false,
+  "github_parallel_checker_run_executed": false,
+  "agda_kernel_certification": false,
+  "interpretation": "Runtime passes verify the two exact GitHub script blobs against synthetic local fixtures. They do not validate the underlying historical media documents or any observed or causal GCC impact."
+}
