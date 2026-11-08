@@ -917,3 +917,88 @@ module SelectedPairedGradedModule
       (actualSourcePairedVertexData source cross time) p k q
     ≡ originalParityPairMode source cross p k q
   actualPairedModeIsFourBlock source cross time p q k = refl
+
+
+  ----------------------------------------------------------------------
+  -- ORIGINAL PURE FIXED/TWISTED BLOCK REGRESSION:
+  --
+  -- The actual combined mode must reduce to the Leech twisted-module
+  -- field when applied to (fixed,0) and (0,twisted). This is not
+  -- automatic from four picked maps: it requires precisely the
+  -- original zero-compatibility/annihilation equations below.
+  ----------------------------------------------------------------------
+
+  record OriginalPureFTZeroLaws
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source) : Setω where
+    field
+      fixedFixedZero :
+        (x : Fixed) (k : ℤ) →
+        originalFixedSectorMode source x k
+          (fixedZero (nativeFixedAndTwistedGrading source))
+        ≡ fixedZero (nativeFixedAndTwistedGrading source)
+
+      twistedTwistedZero :
+        (y : Twisted) (k : ℤ) →
+        twistedTwistedMode cross (twistedZeroOriginal source) k y
+        ≡ fixedZero (nativeFixedAndTwistedGrading source)
+
+      twistedFixedZero :
+        (k : ℤ) →
+        twistedFixedMode cross (twistedZeroOriginal source) k
+          (fixedZero (nativeFixedAndTwistedGrading source))
+        ≡ twistedZeroOriginal source
+
+      fixedZeroPlusZero :
+        fixedAdd (nativeFixedAndTwistedGrading source)
+          (fixedZero (nativeFixedAndTwistedGrading source))
+          (fixedZero (nativeFixedAndTwistedGrading source))
+        ≡ fixedZero (nativeFixedAndTwistedGrading source)
+
+      twistedAddRightZero :
+        (y : Twisted) →
+        twistedAdd (nativeFixedAndTwistedGrading source)
+          y (twistedZeroOriginal source) ≡ y
+
+  open OriginalPureFTZeroLaws public
+
+  originalPureFTModeIsNativeTwisted :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (zeroLaws : OriginalPureFTZeroLaws source cross)
+    (x : Fixed) (y : Twisted) (k : ℤ) →
+    originalParityPairMode source cross
+      (x , twistedZeroOriginal source) k
+      (fixedZero (nativeFixedAndTwistedGrading source) , y)
+    ≡ ( fixedZero (nativeFixedAndTwistedGrading source)
+      , fixedTwistedMode cross x k y )
+  originalPureFTModeIsNativeTwisted source cross zeroLaws x y k
+    rewrite fixedFixedZero zeroLaws x k
+          | twistedTwistedZero zeroLaws y k
+          | twistedFixedZero zeroLaws k
+          | fixedZeroPlusZero zeroLaws
+          | twistedAddRightZero zeroLaws (fixedTwistedMode cross x k y)
+    = refl
+
+  originalPureFTModeAgreesWithLeechTwistedModule :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (zeroLaws : OriginalPureFTZeroLaws source cross)
+    (x : Fixed) (y : Twisted) (k : ℤ) →
+    TwistedEvenSector.includePlus plus
+      (Data.Product.proj₂
+        (originalParityPairMode source cross
+          (x , twistedZeroOriginal source) k
+          (fixedZero (nativeFixedAndTwistedGrading source) , y)))
+    ≡ TwistedModule.twistedMode twisted
+        (FixedPointVOA.includeFixed fixed x)
+        (integerTwistIndex cross k)
+        (TwistedEvenSector.includePlus plus y)
+  originalPureFTModeAgreesWithLeechTwistedModule
+    source cross zeroLaws x y k =
+    trans
+      (cong (TwistedEvenSector.includePlus plus)
+        (cong Data.Product.proj₂
+          (originalPureFTModeIsNativeTwisted
+            source cross zeroLaws x y k)))
+      (fixedTwistedIsOriginal cross x k y)
