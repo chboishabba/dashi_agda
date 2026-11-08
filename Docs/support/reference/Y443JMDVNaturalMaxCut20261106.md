@@ -832,3 +832,20 @@ All five source-level owners are imported into the Y443 validation root (one ext
 - **R2:** Instantiate genuine published Monster action and genuine original VOA action laws on their exact source objects; compare source-original with canonical transported action on u and v **only on a proved Griess generating family**, or on a real 196884-dimensional V2 spanning basis, with exact inputs. The new algebraic compilers then yield all-element/all-state equality. For an independently preexisting selected action, **do not** replace it with a different transported canonical action and call that an equality.
 
 **Engineering boundary:** these are exact source-written reduction theorems, with bracket/static owner checks and prior independent finite models. They are not a new executable implementation of the full FLM VOA, actual Griess product or published Monster matrices. No kernel run performed at user's request.
+
+
+### Final strictness tightening: canonical FLM source must be a genuine VOA action
+
+`Y443FLMCanonicalReferenceFromQuotientExact.SourceAuthority` now requires explicit, pointwise canonical Monster preservation of the FLM vacuum, conformal vector, every mode and translation, not just a selected group acting on a state set. `WithSource.actualPublishedVOAAutomorphismLaws` constructs the existing `PublishedActionVOALaws` record and `realSelectedTransportedModePreserved` derives the preservation of ALL selected VOA modes after actual same-object transport. This prevents an arbitrary permutation action or a `Set`-typed `preservesModes` label from being promoted to the Monster VOA action.
+
+**Mathematical status after this maximum cut:** The *implications* are source-written:
+```
+actual FLM VOA iso + true Q80 selected/published group isos
++ real canonical FLM Monster mode-preserving action
++ original source u/v VOA automorphisms agreeing on a proven
+  actual Griess algebra generating family (or real 196884 basis)
++ actual V2 mode-generation of selected Vnatural
+  => original Y443 action = canonical published Monster action
+     on ALL original VOA states and ALL source group elements.
+```
+The italicized/actual source producers above are not yet inhabited in the inspected repository. No finite Python control, paper citation, abstract 3B character or raw 80-relator check is substituted for those actual witnesses. Strict sparse u/v comparator has a default complete 196884-column gate but has not been run on real canonical FLM matrices. These are the **only remaining high-alpha semantic producers**; the intermediate transport and two-generator proof compilers have been implemented.
