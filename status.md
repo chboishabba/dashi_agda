@@ -9843,3 +9843,17 @@ original I injectivity iff the no-extra-states reconstruction law.
 This reduces the V0 *state-carrier* remaining lemma to source-specific
 injectivity of the actual identifyCarrier; no such inhabitant, true
 mixed-sector VOA, full FLM identification or Agda kernel pass claimed.
+
+### 2026-11-08 V0 genuine linear-orbifold structural no-go
+
+The original VNaturalOrbifoldConstruction used tagged A ⊎ B but called it
+V_Lambda^+ ⊕ (V_Lambda^T)^+. Actual old inclusion maps have disjoint images,
+which is incompatible with both being linear embeddings to a single
+vector-space zero. New Agda source proves this incompatibility on the
+actual selected assembly and defines source-tied paired LinearOrbifoldCarrier
+A × B with common-zero fixed/twisted inclusions and injection/coordinate
+recovery proofs. VnaturalLinearCarrier now exposes this carrier without
+silently breaking the legacy state owners. The old no-junk fibre equivalence
+remains a true set statement but is no longer the priority physical VOA
+source gate. Actual mixed-vertex VOA laws, migration and canonical FLM
+all-mode equivalence remain open. Source-written, Agda kernel not run.
