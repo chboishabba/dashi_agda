@@ -1,3 +1,10 @@
+## 2026-11-08 — CMP119/Hamiltonian/BCH/Ward audit; R578 supersedes R572
+
+Direct source re-audit confirms the user's corrections: CMP119 is not missing (`YangMillsLiteralCMP119QuantitativeMomentsRound559Exact`, `YangMillsClayPublishedFiniteOSMomentSourceRound581Exact`), the **same reconstructed OS Hamiltonian is chosen definitionally** (`YangMillsPreferredSameHamiltonianTransferRound577Exact`), BCH/local compact-simple packages and constructor-fixed same-group operations exist (R569–R571), and Ward/Maxwell classification already exists (`YangMillsSameFamilyWardKernelSourceRound563Exact`, `YangMillsSameSystemGaussianWardKernelTheoremExact`, R549). The current shortest preferred source scheduler is `YangMillsClayCriticalPathRound578Exact`, not R572. Use the updated canonical [roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) / manifest for complete R578 status.
+
+**Only genuine missing source instantiations**: literal original CMP119 exponential-moment producer and OS4 / regularity closure, B1 actual Wilson mixed-log cluster expansion and connecting weight tail, B2 real transfer-coordinate semantics and *full nonvacuum* positive spectral lower bound, H6 same-system Gaussian-to-local Ward theorem (not its Maxwell classifier), and G1 actual group quantitative local BCH/Haar inequalities / five-block physical laws. A3 projective-event real-source obligations persist. The endpoint remains conditional: R559, R581, R563 and R569 explicitly label those physical theorem leaves `conditional`; R578's `machineChecked` compiler level does not change their status. No fresh Clay proof claimed.
+
+---
 ## 2026-11-08 — audit correction: R572 is preferred
 
 - [x] Inspect latest #1444, #1440, #1460 and existing R572, R569–R571, R566, R517, T3 Haar and preferred OS source; **do not classify SU(N), Haar, Wilson, RG, R4, OS or compact-simple algebra as absent**.
