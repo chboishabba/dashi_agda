@@ -1229,3 +1229,13 @@ identified policy/reader effect. The source-backed original
 measurement of pre-existing media attention is now located,
 and the historical article-analysis pipeline is actually
 runtime-tested and ready for validated inputs.
+
+## 8 November 2026 — G20 Brisbane → Antalya → COP21 Paris → Hamburg; C20/B20 attribution cut
+
+Main comparison: original leaders' summit text (2014 Brisbane ¶19, 2015 Antalya ¶24), COP21 adoption decision 1/CP.21 and Paris Article 4.2 (adopted 2015, treaty effective from 4 November 2016), then 2017 Hamburg's explicitly separated US announcement and the other G20 leaders' continuing Paris support. The 2015 C20 Turkey civil society communiqué is a distinct proposed intervention (inclusive growth, sustainability, social/civic access and gender justice); 2015 B20 Turkey documents are an indexed distinct business voice, NOT the 2015 leaders' adopted text. Source citations and original institutional authorship preserved; no stakeholder author is implied to endorse DASHI.
+
+New source owner: `DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda`, reusing original `DASHI.Core.IntersectionalNonFactorability` and `DASHI.Core.DiscriminatorSynthesisExact`; original source/claim ledger `Docs/research/ccdcoe_p3_g20_cop21_attribution_manifest.json`; original-byte/claim-reviewed validator `scripts/check_ccdcoe_p3_g20_cop21.py`; full source atlas `Docs/research/CCDCOEP3G20COP21PrimarySourceAttribution20261108.md`. These are imported into Cognition Golden / P3 regression / the source-focussed parallel checker, not represented as new generic theorem ownership or kernel-verified.
+
+The existing GCC/Harrison (agency self-report) and ExxonMobil (published corporate-corpus study) sources remain separate from G20 leaders (adopted communiqué), C20/B20 (stakeholder proposals) and UNFCCC COP21 Parties (legal decision and procedural duties). **Any actor-to-summit document transmission remains OPEN** absent actual author/meeting/draft provenance. Similar policy or economic framing is NOT a same-actor bridge. Legal compliance requires national, dated, country-specific source data rather than treating COP adoption as emissions performance.
+
+I0: original bytes and independently reviewed source offsets; I1: full denominator and multi-coder institutional corpus; I2: dated stakeholder/industry-to-negotiator to-draft chain (not rhetorical resemblance); I3: country-level treaty status and recorded implementation; I4: counterfactual influence identification and uncertainty; I5: institutional representation, dissent, source licence/consent and Agda kernel receipt. See named source atlas and manifest. Status: SOURCE-WRITTEN and public source excerpt reviewed; **full original raw-byte/PDF replication and kernel certification OPEN**.
