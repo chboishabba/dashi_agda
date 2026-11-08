@@ -66,3 +66,5 @@ import DASHI.Moonshine.Y443PublishedQuotientIsoCompositionExact as Y443Published
 import DASHI.Moonshine.Y443FLMGriessGeneratorUVExact as FLMGriessGenerators
 import DASHI.Moonshine.Y443FLMGriessGeneratorsUVEndcapExact as FLMGriessSeedEndcap
 import DASHI.Moonshine.Y443FLMCanonicalReferenceFromQuotientExact as FLMTrueCanonicalReference
+import DASHI.Moonshine.Y443DGLUniquenessSelectedFLMExact as DGLSelectedUniqueness
+import DASHI.Moonshine.Y443FLMWeakVOACoreNoPromotionExact as WeakFLMCountermodel
