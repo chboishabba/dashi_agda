@@ -23,6 +23,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3ClimateObservedActivityAndCorpusExact.agda
   DASHI/Cognition/CCDCOEP3GCCExecutedCampaignSourceExact.agda
   DASHI/Cognition/CCDCOEP3Trumbo1996IndependentMediaBaselineExact.agda
+  DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
@@ -36,6 +37,8 @@ python3 scripts/check_ccdcoe_cognitive_multiplex.py
 python3 scripts/check_ccdcoe_p3_causal_trialectic.py
 python3 scripts/check_ccdcoe_p3_climate_case.py
 python3 scripts/check_ccdcoe_p3_gcc_campaign.py
+python3 scripts/check_ccdcoe_p3_g20_cop21.py --self-test
+python3 scripts/check_ccdcoe_p3_g20_cop21.py
 python3 scripts/measure_ccdcoe_p3_gcc_media.py --self-test
 python3 scripts/measure_ccdcoe_p3_gcc_dual_coder.py --self-test
 python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
