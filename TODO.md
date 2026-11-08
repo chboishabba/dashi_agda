@@ -17424,3 +17424,21 @@ Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
   and Agda pair-generation/VOA action capstone.
 
 See Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+### 2026-11-09 distinct Popov owners / same-source four-sector closure
+
+- [x] Inspect exact user-linked BalabanReducedFlatFaddeevPopovKernelExact:
+  its V. N. Popov is the Yang-Mills Faddeev-Popov author, NOT the Fedor
+  K. Popov of the Popov-Rastelli formal Moonshine VOA library.
+- [x] Complete two-sided original Agda four-sector source record equivalence:
+  fromNativeSources, nativeSourcesAfterFrom, fromAfterNativeSources,
+  atop the earlier mode/vacuum/conformal/translation equalities.
+- [x] Inspect dashi_lean4 #47 Monster representation theory as existing
+  post-recognition source; do not duplicate Maschke/Schur/Hom code.
+- [ ] Genuine original twisted-even linear/grade and mixed source laws;
+  actual selected all-mode correspondence to Popov-Rastelli Moonshine.
+- [ ] Actual Y443 selected group / Monster isomorphism and u/v action;
+  use existing capstone instead of another conditional wrapper.
+
+Canonical ledger: Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
