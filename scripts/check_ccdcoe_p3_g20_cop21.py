@@ -103,6 +103,17 @@ def validate(m: dict) -> dict:
         by_id["parisArticle4"]["speech_act"]=="treaty_legal_obligation" and
         by_id["c20Turkey2015"]["speech_act"]=="civil_society_recommendation",
         "A stakeholder request is not a treaty provision")
+    timing=m["legal_temporal_scope"]
+    assert_present_or_stop(
+        timing["paris_adoption"]=="2015-12-12" and
+        timing["paris_treaty_entry_into_force"]=="2016-11-04",
+        "Paris adoption must not be confused with legal entry into force")
+    assert_present_or_stop(
+        timing["hamburg_2017_us_statement"].startswith("2017-07-08 announcement"),
+        "Hamburg US announcement is not completed 2017 treaty exit")
+    assert_present_or_stop(
+        timing["no_assumption_of_country_specific_legal_or_emissions_compliance"],
+        "Legal agreement is not country emissions compliance")
     guards=m["admission_guards"]
     assert_present_or_stop(all(v is True for k,v in guards.items()
                                if k not in ("same_object_actor_to_negotiator_or_decision_trail",
@@ -112,6 +123,9 @@ def validate(m: dict) -> dict:
         "same_object_actor_to_negotiator_or_decision_trail",
         "financial_or_lobbying_direct_receipt","emissions_impact")),
         "Unsupported cross-institution influence")
+    assert_present_or_stop(guards["paris_adoption_date_is_not_entry_into_force"] and
+                           guards["us_announced_withdrawal_is_not_2017_effective_treaty_withdrawal"],
+                           "Treaty temporality collapsed")
     assert_present_or_stop(m["status"]["summit_causal_influence_identified"] is False,
                            "Do not infer campaign influence from shared language")
     counts=Counter(r["source"] for r in claims)
