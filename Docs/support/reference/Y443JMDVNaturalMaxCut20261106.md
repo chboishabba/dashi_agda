@@ -869,3 +869,25 @@ The italicized/actual source producers above are not yet inhabited in the inspec
 3. **Original action evidence:** original selected source is a genuine mode-preserving VOA action, canonical published action is genuinely mode-preserving, and u/v agree on an inhabited actual Griess generating family (or 196884 basis). The existing compilation code then gives all-element/all-state equality, not an additional gap.
 
 **Execution:** source-written, branch-committed and static-bracket inspected only. No Agda typecheck/CI, no external canonical FLM instance or complete u/v 196884-vector matrix arrays and hence no claim of a full selected-object theorem.
+
+
+## 2026-11-08: Monster special gravity, KK and Y443 / FLM source crosswalk
+
+**Primary-source check**: Chester, Marrani and Rios (2023), *Monstrous M-Theory*, `Symmetry` 15(2), 490, DOI `10.3390/sym15020490`, propose a 26+1 Einstein/p-form theory whose 25+1 circle-reduced massless spectrum has size `1+196883=196884`, with 1 called the dilaton. Witten's *Three-Dimensional Gravity Revisited* (2007, arXiv:0706.3359) proposes, but does **not prove**, a Monster-CFT/AdS3 pure-gravity duality. Neither source proves a 4D interacting YM mass gap, nor assigns each of the Monster's 194 classes to a separate physical black hole. SUSY is not a logical prerequisite for the original bosonic FLM/Borcherds Monster moonshine; K3/umbral moonshine is a mathematically related but separate module/symmetry lane.
+
+**Original DASHI donors**: `MoonshineOrbifoldWeightTwoDecompositionExact.agda` already proves the typed FLM source-sector split `300+98280+98304=196884`, with `300=dim Sym²(24)`, `98280=196560/2`, `98304=24*4096`, and a 1+196883 conformal-line split. `MoonshineMonsterLieStringBigradingExact.agda` already owns the first Borcherds root multiplicities `c(mn)`, while explicitly excluding a BRST/no-ghost construction. `MonsterIrrepCarrierDecompositionReceipt.agda` records 194 classes, the 15 Ogg prime lanes, and YM T7 compression as an **evidence** route, with explicit no-Clay-promotion; `MonstrousMoonshineSSPBoundaryReceipt.agda` is arithmetic-only.
+
+**New source-written exact crosswalk**: `MonsterSpecialGravityKKWeightTwoCrosswalkExact.agda` imports the original *typed* FLM orbifold weight-two owner and proves, by Agda numeric normalization,
+```
+  1 + 299 + 98280 + 98304 = 196884
+  299 + 98280 + 98304 = 196883
+  1 + 299 = 300
+  42504 + 4*10626 + 6*2024 + 4*276 + 24 = 98280.
+```
+The final expression is the paper's specific 24-dimensional transverse little-group p-form content, rather than a generic numerical coincidence. The new module keeps distinct typed gravity-side sector tags and explicitly records that no source physical action, original Griess first-product equivalence, KK Einstein-matter solution, AdS3 duality or 4D YM gap is constructed. The original FLM sector splitting remains separate from the gravity fields despite equal graded cardinality.
+
+**Meaning and highest-alpha next tests**: a genuine physics realization would need (1) a selected common Monster group action on the *actual p-form and FLM/Griess state spaces*, with an invertible equivariant linear intertwiner, (2) a source-derived gravity/KK field theory and physical Hilbert/metric interpretation, (3) if claiming VOA identity, preservation of the actual `u_1 v` Griess multiplication and all relevant modes. Equality of dimensions, the 1+196883 decomposition or a weak triality proposal does not supply those. YM remains an independent four-dimensional continuum/OS spectral-gap problem even if a high-dimensional Monster-field correspondence were established.
+
+**Additional proof-integrity correction:** `Y443DGLWeakCertificateNoGoExact.agda` explicitly inhabits the previous DGL `HolomorphicC2Certificate` and `HigherGradeBoundCertificate` for *arbitrary weak* VOA records, via singleton fake modules/C2 quotients or constant-zero grade dimensions. This proves those ad hoc certificate records do **not** ensure the actual Dong–Griess–Lam hypotheses. They must be replaced by actual source-indexed VOA modules, C2 quotient and honest grade-cardinality proofs (or import an already valid published exact selected VOA uniqueness isomorphism). No claim of an actual selected FLM theorem can be made from the older interfaces.
+
+**Status:** both source-written arithmetic crosswalk and non-promotion examples committed. No Agda kernel receipt, canonical FLM Monster operators, actual physical KK model, or full YM physical endpoints have been supplied. No CI requested.
