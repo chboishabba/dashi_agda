@@ -49,6 +49,7 @@ FLM_SELECTED = ROOT / "DASHI/Moonshine/Y443FLMGriessFullAutSelectedVOAExact.agda
 FLM_TWO = ROOT / "DASHI/Moonshine/Y443TwoGeneratorSameVOAActionExact.agda"
 FLM_SAME = ROOT / "DASHI/Moonshine/Y443FLMDirectSameObjectCapstoneExact.agda"
 FLM_FINITE = ROOT / "scripts/check_y443_flm_direct_finite_control.py"
+TRIE_FINITE = ROOT / "scripts/check_y443_relator_trie_same_object_gate.py"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -290,6 +291,7 @@ def main() -> None:
     subprocess.run([sys.executable, str(PATHS_SCRIPT)], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(RECOGNITION_SCRIPT)], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(FLM_FINITE)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(TRIE_FINITE)], cwd=ROOT, check=True)
     if args.finite_only:
         print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
     else:
