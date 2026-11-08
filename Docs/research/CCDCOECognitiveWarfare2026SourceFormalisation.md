@@ -652,3 +652,112 @@ and admissible coordination/intent evidence, not guilt by association.
 P5: Replicate on separate institutional settings with voice, power and
 custodianship controls. No finite theorem can substitute for absent
 original receipts.
+
+## 8 November 2026 — source-identity audit, contemporary nonapproval evidence and pre-API measured control
+
+**New decisive documentary finding:** The *New York Times* article by
+John H. Cushman Jr., April 26, 1998, is reproduced in the same
+Congressional Record entry as the April 3 draft. It reports organiser
+Joe Walker describing the plan as tentative with no executives yet
+approached for funding, and industry representatives as confirming
+that participating organisations had not formally approved it.
+These are **contemporaneous attributed statements as of 25–26 April**,
+not audited final approval/funding decisions. Source:
+https://www.govinfo.gov/content/pkg/CREC-1998-04-27/html/CREC-1998-04-27-pt1-PgH2323.htm
+
+A much later SourceWatch profile quotes Walker's retrospective belief
+that this particular project was not funded and did not proceed. The
+original correspondence/interview and corroborating final accounting
+were not obtained here. Treat the statement as a secondary attributed
+claim, not an authentic signed negative receipt. Source:
+https://www.sourcewatch.org/index.php?title=Joseph_L._Walker_III
+
+`CCDCOEP3ClimateContestedAttributionExact.agda` now source-writes
+`contemporaneousNoApprovalReport` and
+`walkerAttributedRetrospective`, with separate exact proof that no
+final certified funding or approval receipt is present in the new
+representations. The P3 regression imports those precise interfaces.
+The manifest and fail-closed validator represent the contemporary
+no-approval/no-executive-funder approach, the retrospective attribution,
+and the still-missing final accounting as **different** claims.
+The best bounded historical statement is **not formally approved
+as of the contemporary interviews, with later uncorroborated
+nonimplementation testimony**; no causal estimate of the proposed
+campaign may be reported.
+
+**Additional real measured opinion evidence, prior to the April plan:**
+Krosnick, Visser and Holbrook, *American Opinion on Global Warming:
+The Impact of the Fall 1997 Debate*, Resources for the Future,
+31 October 1998; original article and later journal version:
+https://www.resources.org/archives/american-opinion-on-global-warming-the-impact-of-the-fall-1997-debate/
+DOI 10.1088/0963-6625/9/3/303.
+
+Two US national cross-sections sampled 688 adults
+(1 Sept–5 Oct 1997) and 725 adults (20 Dec 1997–13 Feb 1998).
+The authors report 48→56% recalling relevant news coverage
+(+8 percentage points), 54→65% thinking about global warming
+a lot/moderately (+11 pp), 28→34% high opinion certainty (+6 pp),
+and 4→17 pp strong partisan gap in belief warming occurred
+(+13 pp). These are source-published rounded aggregate values
+with question/subgroup-specific denominators and unknown
+microdata/weights in this application. The second sample closed
+**before the 3 April 1998 API draft existed**. It cannot
+be used as a treatment response to that draft.
+
+`CCDCOEP3PreAPIOpinionTemporalControlExact.agda` source-writes
+these selected actual measurements, both source-specified dates and
+sample sizes, exact descriptive percentage-point equalities, and an
+existing `IntersectionalNonFactorability` witness against
+attributing earlier measured opinion dynamics to a later campaign.
+This is a real historical **temporal negative control**, not
+synthetic measured people or a post-plan persuasion estimate.
+Imported into cognition Golden root, P3 regression and canonical
+checker. The manifest and validator check the original sample
+sizes/dates/percentages and prohibit the later-plan causal inference.
+
+**Importer issue found by checking the actual public HTML**:
+The Congressional commentary (outside the reproduced plan) repeats
+the Data Center proposal. Thus a globally unique source-phrase search
+would incorrectly reject the official file. The source byte importer
+now searches the specific April 3 attached memo and plan starting
+from the unique `To: Global Climate Science Team` opening, retains
+full-document normalized character coordinates, requires
+the April 3 date and correct passage order, and has a negative
+fixture containing the duplicated commentary phrase.
+No actual original HTML byte digest is claimed absent an
+actual network-enabled source acquisition run.
+
+**Remaining decisive max-cut, excluding Agda certification:**
+
+P0 — Run pinned GovInfo acquisition against official source, retain
+immutable original bytes, verify extraction and semantic PNF candidates
+and actual original source/revision hashes.
+
+P1 — Obtain signed records of what happened **after** the 17 April
+meeting: adopted/denied plan, budget vote, funding request/receipt or
+documented administrative cancellation. These would test the organiser's
+contemporaneous and later accounts.
+
+P2 — If funded/adopted, identify programme-specific disbursement and
+actual communication/delivery records. ICE 1991, GCC 1995 and Cooler
+Heads 1998 remain distinct pre-existing/parallel activity unless
+document identity and authority are proved.
+
+P3 — For a causal claim, obtain plan-specific exposed recipients,
+question-harmonised comparable measured outcomes, exposure times,
+suitable counterfactual comparison, selection/interference control,
+uncertainty and source-grade receipts. The two 1997 survey waves
+demonstrate pre-existing public-opinion dynamics but cannot be the
+April 1998 plan's effects.
+
+P4 — Replication and transport of the institutional agency, voice,
+dissent, positionality and source-authority framework, distinguishing
+structural power from individual blame and documented planning from
+hostile-intent allegations.
+
+The first-order question is now quite narrow: **did the 1998 plan
+receive formal approval or any funding after the contemporary leak?**
+The current evidence leans toward no execution but cannot certify
+the negative without approval/financial records. Completion of all
+factual gates is impossible without acquiring such missing evidence,
+and source-written alternatives do not constitute those receipts.
