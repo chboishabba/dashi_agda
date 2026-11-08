@@ -13,11 +13,11 @@ differences; it is NOT a causal effect without a separate research design.
 """
 from __future__ import annotations
 import argparse
-from collections import Counter
 import hashlib
 import json
 from pathlib import Path
 from math import sqrt
+from datetime import date
 
 FRAMES = {"science_uncertainty", "economic_cost",
           "consensus_acknowledgement", "policy_mandate",
@@ -36,8 +36,15 @@ def wilson(success: int, n: int, z: float = 1.96) -> list[float]:
     half = z * sqrt(p*(1-p)/n + z*z/(4*n*n))/d
     return [round(max(0.0,center-half),6),round(min(1.0,center+half),6)]
 
-def analyse(rows: list[dict], focus: str, intervention_date: str,\n            intervention_receipt: str) -> dict:
-    from datetime import date\n    if not intervention_receipt or intervention_receipt.startswith("UNVERIFIED"):\n        raise ValueError("Source-specific intervention receipt required")\n    try:\n        cutoff = date.fromisoformat(intervention_date)\n    except (ValueError, TypeError):\n        raise ValueError("Invalid evidence-backed intervention date") from None\n    if focus not in FRAMES - {"other_or_undetermined"}:
+def analyse(rows: list[dict], focus: str, intervention_date: str,
+            intervention_receipt: str) -> dict:
+    if not intervention_receipt or intervention_receipt.startswith("UNVERIFIED"):
+        raise ValueError("Source-specific intervention receipt required")
+    try:
+        cutoff = date.fromisoformat(intervention_date)
+    except (ValueError, TypeError):
+        raise ValueError("Invalid evidence-backed intervention date") from None
+    if focus not in FRAMES - {"other_or_undetermined"}:
         raise ValueError("Invalid substantive frame")
     seen = set()
     cells: dict[tuple[str,str], list[bool]] = {
@@ -63,15 +70,14 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,\n            i
         if not isinstance(digest,str) or len(digest)!=64 or any(
             c not in "0123456789abcdef" for c in digest):
             raise ValueError("Original document SHA256 required")
-        from datetime import date
         try:
             dt=date.fromisoformat(row["date"])
         except (ValueError,TypeError):
             raise ValueError("Invalid article date") from None
-        if row["period"] == "before" and dt.year >= 1994:
-            raise ValueError("Before treatment marked after plausible 1993 campaign")
-        if row["period"] == "after" and dt.year < 1993:
-            raise ValueError("After treatment marked before 1993")
+        if row["period"] == "before" and dt >= cutoff:
+            raise ValueError("Before period not before documented intervention")
+        if row["period"] == "after" and dt < cutoff:
+            raise ValueError("After period precedes documented intervention")
         key=(row["treatment"],row["period"])
         cells[key].append(row["frame"]==focus)
         outlets[key].add(row["outlet"])
