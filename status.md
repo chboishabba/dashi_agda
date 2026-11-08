@@ -9833,3 +9833,13 @@ its selected orbifold VOA state carrier. The source identifyCarrier map is
 proved to be its left inverse. The converse (no-extra-states) identity is
 NOT proved; neither original mixed VOA identities nor FLM/Monster action
 isomorphism is thereby supplied. Code source-written; Agda kernel not run.
+
+### 2026-11-08 source-native V0 state-fibre refinement
+
+On existing VNaturalOrbifoldConstruction, original state normalization
+P=R∘identifyCarrier is idempotent and preserves original tagged sector
+state. Exact source proof establishes I(x)=I(y) iff P(x)=P(y), and
+original I injectivity iff the no-extra-states reconstruction law.
+This reduces the V0 *state-carrier* remaining lemma to source-specific
+injectivity of the actual identifyCarrier; no such inhabitant, true
+mixed-sector VOA, full FLM identification or Agda kernel pass claimed.
