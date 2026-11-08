@@ -183,3 +183,26 @@ Fix G first and allow G-dependent constants. Then quantify the **same per-group 
 A completed proof has an exact-head `parallel_checker` Agda receipt, transitive trust review identifying any postulates/external mathematical authorities, and a closed theorem whose constructor does not accept the missing endpoint properties as arbitrary user-supplied `Set` evidence. A generic record or conditional compiler is useful mathematics but cannot be presented as E1/D2/N1. At the time of writing no exact-head kernel check or physical endpoint witness has been obtained in this session.
 
 **Next implementation target:** E1 and D1 in parallel, then D2/N1; G1 is a group-index/scoping requirement throughout, not a demand for a uniform gap constant over all G.
+
+
+---
+
+## 2026-11-08: decisive D1/D2 physical-uniformity and full-H spectral non-promotion
+
+**Retained original sources**: `YMClaySUNVariablePhysicalCutoffFamilyExact` owns actual size-varying native SU(N) Wilson product/Haar links; `YMClayE1OriginalSUNFiniteCylinderLawsExact` owns the finite selected genuine normalized state; `YMClayD1OriginalFullWilsonSmallLargeFieldExact` owns the *true full original connected covariance* inequality, and deliberately requires both small-field CMP116 and large-field remainder physical calibration at ONE FIXED positive physical block size. `YMClayPhysicalCubeDobrushinFromGibbsExact` requires `actualUniformInfluenceEstimate` at the same common physical-cube scale. These are real **source obligations**, not finished physical estimates. The older R320/R333 compilers are legitimate exact dependencies but not the missing estimates.
+
+**New executable exact rational no-promotion regression:** `scripts/check_ym_physical_gap_two_nonpromotion_exact.py` (run independently with Fraction arithmetic). It proves two sharp requirements are *not optional*:
+
+**D1 / physical units:** set lattice spacing `a_n=1/n` and choose perfectly legitimate per-cutoff contraction `q_n=1-1/n²`, with `0<q_n<1` at every n. At physical separation `L=1`, the lattice-distance is n. Bernoulli's inequality gives
+
+```
+       (q_n)^n = (1-1/n²)^n >= 1-1/n --> 1 .
+```
+
+For ANY `b<1`, choose `n>1/(1-b)` and then `q_n^n>=1-1/n>b`. Hence there is **no** physical cutoff-independent contraction `b<1`, despite every finite cutoff exhibiting strict contraction. In a positive-time spectral setting, `b=e^{-m}` would represent a candidate `m>0`. The result is a *logical counterexample to an inference*, not a statement about the actual Yang–Mills q(n), for which the physical estimate remains open. It makes explicit why a microscopic q(n)<1 and a fixed size-four q cannot be silently promoted into the common `0<=commonQ<1` at physical cube length.
+
+**D2 / full non-vacuum sector:** let the finite positive Hamiltonian on `ℂ^n` be `H_n=diag(1,1/2,...,1/n)`. A selected cyclicity-*unproven* probe `e_1` has one positive mass equal to 1, and its Euclidean two-point function decays as `e^{-t}` at every n. But the actual entire non-vacuum spectrum starts at `1/n→0`. Therefore even a *uniform* selected-mode time-correlation estimate cannot prove the full OS Hamiltonian mass gap without a genuine dense physical probe sector (or an independent uniform whole-sector quadratic/spectral lower bound). This is the original **R333** spectrum/support obligation, not a consequence of just R320 selected source derivatives.
+
+**Correct minimal theorem target:** Given a genuine, noncollapsed original Wilson E1 continuum and its *one same* OS Hilbert/Hamiltonian `H_G`, prove `Spec(H_G)∩(0,Δ)=∅` for one `Δ>0` in physical units over the entire reconstructed non-vacuum sector, and prove the local fields/observables and Ward/source identification are dense enough that D1 estimates control that sector. Coupled with N1 physical nontriviality this would pay the fixed-G mass-gap endpoint. G1 extends the completed per-group construction to every compact simple gauge group; no universal gap constant across groups is required.
+
+**This exact no-go and source audit do NOT constitute a constructive 4D YM theory or a mass-gap proof.** D1's original nonlinear large-field error bound, physical cutoff-uniform decay, E1 noncollapsed limit/OS, D2 all-sector spectral completeness, N1, and G1 remain **uninhabited physical source lemmas**. No Agda, CI or physical source calibration is claimed in this run.
