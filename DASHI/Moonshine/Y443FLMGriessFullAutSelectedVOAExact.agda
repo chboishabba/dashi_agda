@@ -229,6 +229,16 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
   record ConcreteGriessProduct : Setω where
     field
       firstProduct : WeightTwo → WeightTwo → WeightTwo
+      -- Actual linear algebra operations on the original grade-two space.
+      -- A multiplicative set bijection alone is NOT an algebra automorphism.
+      weightTwoAdd : WeightTwo → WeightTwo → WeightTwo
+      weightTwoScale : Scalar → WeightTwo → WeightTwo
+      includeWeightTwoAdd : (x y : WeightTwo) →
+        include (weightTwoAdd x y)
+        ≡ VOA.GradedModule._+_ GM (include x) (include y)
+      includeWeightTwoScale : (s : Scalar) (x : WeightTwo) →
+        include (weightTwoScale s x)
+        ≡ VOA.GradedModule._·_ GM s (include x)
       firstProductIsModeOne : (x y : WeightTwo) →
         include (firstProduct x y) ≡
         VOA.VertexOperatorData.mode Y (include x) (+ 1) (include y)
@@ -243,6 +253,12 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
         inverseOnWeightTwo (onWeightTwo x) ≡ x
       rightInverse : (x : WeightTwo) →
         onWeightTwo (inverseOnWeightTwo x) ≡ x
+      additiveLaw : (x y : WeightTwo) →
+        onWeightTwo (weightTwoAdd griess x y)
+        ≡ weightTwoAdd griess (onWeightTwo x) (onWeightTwo y)
+      scalarLaw : (s : Scalar) (x : WeightTwo) →
+        onWeightTwo (weightTwoScale griess s x)
+        ≡ weightTwoScale griess s (onWeightTwo x)
       productLaw : (x y : WeightTwo) →
         onWeightTwo (firstProduct griess x y)
         ≡ firstProduct griess (onWeightTwo x) (onWeightTwo y)
@@ -266,6 +282,42 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
               (sym (firstProductIsModeOne griess
                 (weightTwoAction a x) (weightTwoAction a y))))))
 
+  restrictedAdditiveLaw :
+    (griess : ConcreteGriessProduct) →
+    (a : SelectedVOAAutomorphism) (x y : WeightTwo) →
+    weightTwoAction a (weightTwoAdd griess x y)
+    ≡ weightTwoAdd griess (weightTwoAction a x) (weightTwoAction a y)
+  restrictedAdditiveLaw griess a x y =
+    gradeEmbeddingInjective griess
+      (weightTwoAction a (weightTwoAdd griess x y))
+      (weightTwoAdd griess (weightTwoAction a x) (weightTwoAction a y))
+      (trans (sym (restrictionAgrees a (weightTwoAdd griess x y)))
+        (trans (cong (action a) (includeWeightTwoAdd griess x y))
+          (trans (actionAdd a (include x) (include y))
+            (trans
+              (cong₂ (VOA.GradedModule._+_ GM)
+                (restrictionAgrees a x) (restrictionAgrees a y))
+              (sym (includeWeightTwoAdd griess
+                (weightTwoAction a x) (weightTwoAction a y))))))
+
+  restrictedScalarLaw :
+    (griess : ConcreteGriessProduct) →
+    (a : SelectedVOAAutomorphism) (s : Scalar) (x : WeightTwo) →
+    weightTwoAction a (weightTwoScale griess s x)
+    ≡ weightTwoScale griess s (weightTwoAction a x)
+  restrictedScalarLaw griess a s x =
+    gradeEmbeddingInjective griess
+      (weightTwoAction a (weightTwoScale griess s x))
+      (weightTwoScale griess s (weightTwoAction a x))
+      (trans (sym (restrictionAgrees a (weightTwoScale griess s x)))
+        (trans (cong (action a) (includeWeightTwoScale griess s x))
+          (trans (actionScale a s (include x))
+            (trans
+              (cong (VOA.GradedModule._·_ GM s)
+                (restrictionAgrees a x))
+              (sym (includeWeightTwoScale griess s
+                (weightTwoAction a x))))))
+
   restrict :
     (griess : ConcreteGriessProduct) →
     SelectedVOAAutomorphism → GriessAutomorphism griess
@@ -274,6 +326,8 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
     ; inverseOnWeightTwo = weightTwoReverse a
     ; leftInverse = weightTwoLeftInverse a
     ; rightInverse = weightTwoRightInverse a
+    ; additiveLaw = restrictedAdditiveLaw griess a
+    ; scalarLaw = restrictedScalarLaw griess a
     ; productLaw = restrictedProductLaw griess a
     }
 
