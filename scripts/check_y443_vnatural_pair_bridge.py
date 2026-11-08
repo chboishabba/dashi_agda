@@ -59,6 +59,7 @@ FINITE_BASIS_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMFiniteBasisUVEndcapExact.ag
 PUBLISHED_QUOTIENT_ISO = ROOT / "DASHI/Moonshine/Y443PublishedQuotientIsoCompositionExact.agda"
 GRIESS_SEED = ROOT / "DASHI/Moonshine/Y443FLMGriessGeneratorUVExact.agda"
 GRIESS_SEED_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMGriessGeneratorsUVEndcapExact.agda"
+CANONICAL_QUOTIENT = ROOT / "DASHI/Moonshine/Y443FLMCanonicalReferenceFromQuotientExact.agda"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -168,7 +169,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, CANONICAL_QUOTIENT, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -310,6 +311,11 @@ def assert_source_scope() -> None:
         for symbol in markers:
             if symbol not in text:
                 raise AssertionError(f"missing actual Griess generator closure {symbol} in {owner.name}")
+    for symbol in ("SourceAuthority", "originalVOAEqualsFLM",
+                   "bothGroupsAreSameMonsterQuotient",
+                   "actualPublishedMonsterAction", "assembleCanonicalReference"):
+        if symbol not in CANONICAL_QUOTIENT.read_text():
+            raise AssertionError(f"missing canonical same-quotient FLM assembly {symbol}")
     print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
