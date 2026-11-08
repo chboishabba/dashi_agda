@@ -23,6 +23,7 @@ import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as JMD
 import DASHI.Moonshine.Y443FLMConcreteSameObjectActionClosureExact as Closure
 import DASHI.Moonshine.Y443PublishedQuotientIsoCompositionExact as Quotient
 import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as Actions
+import DASHI.Moonshine.Y443DGLUniquenessSelectedFLMExact as DGL
 
 module Selected {G H Q : Set}
   (jmd : JMD.PresentedY443VNaturalSource G)
@@ -103,3 +104,71 @@ module Selected {G H Q : Set}
           (C.transported g x) n (C.transported g y)
     realSelectedTransportedModePreserved =
       C.transportedPreservesMode actualPublishedVOAAutomorphismLaws
+
+
+------------------------------------------------------------------------
+-- ACTUAL DGL UNIQUENESS SHORTCUT: REPLACE MANUAL ALL-MODE ISO INPUT.
+------------------------------------------------------------------------
+
+  module DongGriessLamRoute where
+    module Unique = DGL.Selected S.actualSelectedVOA publishedFLM
+
+    record OtherRealSources : Setω where
+      field
+        sameQ80Monster : QIso.SamePublishedQuotient
+        publishedAction :
+          Actions.ActualGroupAction
+            {H} {S.T.P.State} publishedMonsterGroup
+        vacuumLaw : (h : H) →
+          Actions.act publishedAction h (VOA.vacuum S.T.P.Y)
+          ≡ VOA.vacuum S.T.P.Y
+        conformalLaw : (h : H) →
+          Actions.act publishedAction h (VOA.conformalVector S.T.P.Y)
+          ≡ VOA.conformalVector S.T.P.Y
+        modeLaw : (h : H)
+          (x : S.T.P.State) (n : ℤ) (y : S.T.P.State) →
+          Actions.act publishedAction h (VOA.mode S.T.P.Y x n y)
+          ≡ VOA.mode S.T.P.Y
+            (Actions.act publishedAction h x) n
+            (Actions.act publishedAction h y)
+        translationLaw : (h : H) (x : S.T.P.State) →
+          Actions.act publishedAction h (VOA.translation S.T.P.Y x)
+          ≡ VOA.translation S.T.P.Y
+            (Actions.act publishedAction h x)
+    open OtherRealSources public
+
+    withActualIso :
+      OtherRealSources →
+      S.T.ExactFLMVOAIsomorphism →
+      SourceAuthority
+    withActualIso rest iso = record
+      { originalVOAEqualsFLM = iso
+      ; bothGroupsAreSameMonsterQuotient = sameQ80Monster rest
+      ; actualPublishedMonsterAction = publishedAction rest
+      ; publishedVacuum = vacuumLaw rest
+      ; publishedConformal = conformalLaw rest
+      ; publishedMode = modeLaw rest
+      ; publishedTranslation = translationLaw rest
+      }
+
+    fromDGLC2 :
+      OtherRealSources →
+      (theorem : Unique.DongGriessLamTheoremAuthority) →
+      (common : Unique.ActualCommonHypotheses) →
+      Unique.HolomorphicC2Certificate →
+      S.CanonicalFLMReference
+    fromDGLC2 rest theorem common certificate =
+      assembleCanonicalReference
+        (withActualIso rest
+          (Unique.completeFLMIsoFromC2 theorem common certificate))
+
+    fromDGLHigherGradeBound :
+      OtherRealSources →
+      (theorem : Unique.DongGriessLamTheoremAuthority) →
+      (common : Unique.ActualCommonHypotheses) →
+      Unique.HigherGradeBoundCertificate →
+      S.CanonicalFLMReference
+    fromDGLHigherGradeBound rest theorem common certificate =
+      assembleCanonicalReference
+        (withActualIso rest
+          (Unique.completeFLMIsoFromDimensions theorem common certificate))
