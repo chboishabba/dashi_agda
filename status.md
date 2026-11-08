@@ -9876,3 +9876,20 @@ TopPairs.top_pairs0, topPairs_one; the canonical Vnat carrier is a product,
 not a tagged sum. This is a major already-formalized donor but does not
 automatically yield Agda's selected original source or the Monster action.
 No Agda kernel execution or original FLM/Y443 same-object completion claimed.
+
+
+### 2026-11-08 source-native paired VOA vertex-data assembly
+
+Added actualSourcePairedVertexData to the existing Agda
+VNaturalOrbifoldConstruction, using the actual original fixedVOA's
+vacuum, conformal and translation, an explicit twisted-even translation,
+and the source-tied four parity modes. The proofs decode the fixed source
+vacuum/conformal vector and establish exact four-channel mode equation.
+Agda kernel not executed; the actual mixed Jacobi/locality and original
+operator inhabitants remain open.
+
+The published Popov–Rastelli LeanVOA source unconditionally proves Moonshine
+VOA construction, with YnatG genuine nonzero Wbar and topPairs_one source;
+this is donor evidence, NOT an Agda theorem, and does not establish selected
+Monster action. TauCeti's Y443 presented-group equivalence likewise covers
+the presented quotient, NOT a source-verified Monster action.
