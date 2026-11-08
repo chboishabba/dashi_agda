@@ -5,7 +5,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Data.Integer.Base using (ℤ)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₁; proj₂)
 
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 
