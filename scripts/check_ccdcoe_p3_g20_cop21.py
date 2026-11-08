@@ -30,7 +30,7 @@ MANIFEST=ROOT/"Docs/research/ccdcoe_p3_g20_cop21_attribution_manifest.json"
 EXPECTED_DOC_IDS={
  "brisbane2014","antalya2015","parisDecision2015","parisArticle4",
  "hamburgUS2017","hamburgOtherLeaders2017","c20Turkey2015",
- "b20Turkey2015","gccHarrison"
+ "b20Turkey2015","gccHarrison","g20EnergyMinisters2015","b20EnergyForum2015"
 }
 SPEAKER_MAP={
  "brisbane2014":"G20 leaders",
@@ -41,12 +41,15 @@ SPEAKER_MAP={
  "hamburgOtherLeaders2017":"Other G20 leaders excluding the US",
  "c20Turkey2015":"Civil 20 Turkey participant organisations",
  "b20Turkey2015":"Business 20 Turkey taskforces",
- "gccHarrison":"E. Bruce Harrison Company"
+ "gccHarrison":"E. Bruce Harrison Company",
+ "g20EnergyMinisters2015":"G20 Energy Ministers",
+ "b20EnergyForum2015":"B20 Energy Forum participants and G20-B20 interaction participants"
 }
 SAFE_SPEECH_ACTS={
  "leaders_adopted","treaty_adoption_decision","treaty_legal_obligation",
  "explicit_dissent","leaders_adopted_excluding_US",
- "civil_society_recommendation","business_recommendation","agency_self_report"
+ "civil_society_recommendation","business_recommendation","agency_self_report",
+ "ministerial_communique","business_forum_recommendation"
 }
 
 def assert_present_or_stop(check: bool, message: str) -> None:
@@ -76,7 +79,7 @@ def validate(m: dict) -> dict:
             assert_present_or_stop(r["event_date"] is None,
                                    "Invented exact date: "+k)
     claims=m["bounded_claims"]
-    assert_present_or_stop(len(claims)==10, "Ten intentionally bounded rows required")
+    assert_present_or_stop(len(claims)==15, "15 intentionally bounded rows required")
     assert_present_or_stop(len({r["id"] for r in claims})==10,
                            "Claim IDs must be unique")
     for claim in claims:
@@ -103,6 +106,36 @@ def validate(m: dict) -> dict:
         by_id["parisArticle4"]["speech_act"]=="treaty_legal_obligation" and
         by_id["c20Turkey2015"]["speech_act"]=="civil_society_recommendation",
         "A stakeholder request is not a treaty provision")
+    chronology=m["ordered_source_events"]
+    assert_present_or_stop(
+        [e["date"] for e in chronology]==[
+            "2015-10-02","2015-10-12","2015-11-16","2015-12-12"] and
+        [e["source"] for e in chronology]==[
+            "g20EnergyMinisters2015","b20EnergyForum2015",
+            "antalya2015","parisDecision2015"],
+        "Ministerial to business to leaders to COP ordering lost")
+    stakeholders=m["b20_event_attribution"]
+    assert_present_or_stop(
+        stakeholders["document_id"]=="b20EnergyForum2015" and
+        stakeholders["original_date"]=="2015-10-12",
+        "Source-dated B20 original statement identity wrong")
+    for guard in (
+        "event_participation_does_not_prove_individual_clause_authorship",
+        "source_input_does_not_mean_institutional_endorsement_of_all_recommendations",
+        "business_participants_are_not_summit_leaders",
+        "october_12_submission_cannot_cause_october_2_ministerial_text"):
+        assert_present_or_stop(stakeholders[guard] is True,
+                               "B20 participants / chronology must not be fused")
+    assert_present_or_stop(
+        stakeholders["historically_confirmed_same_actor_to_November_G20_drafting"] is None and
+        stakeholders["speaker_specific_quotation_origin_identified"] is None,
+        "Original B20 speaker author and G20 drafting trail unproven")
+    assert_present_or_stop(
+        {r["id"] for r in claims if r["source"]=="b20EnergyForum2015"} == {
+            "b20_carbon_pricing","b20_participation","b20_subsidies"} and
+        {r["id"] for r in claims if r["source"]=="g20EnergyMinisters2015"} == {
+            "ministers_clean","ministers_cop21"},
+        "Original October 2015 document-level claim identity lost")
     timing=m["legal_temporal_scope"]
     assert_present_or_stop(
         timing["paris_adoption"]=="2015-12-12" and
@@ -234,13 +267,18 @@ def self_test() -> None:
     import tempfile
     m=json.loads(MANIFEST.read_text(encoding="utf-8"))
     out=validate(m)
-    assert out["selected_clause_rows"]==10
+    assert out["selected_clause_rows"]==15
     changed=json.loads(json.dumps(m))
     next(x for x in changed["bounded_claims"] if x["id"]=="hamburg_other")[
         "speaker"]=SPEAKER_MAP["hamburgUS2017"]
     try: validate(changed)
     except ValueError: pass
     else: raise AssertionError("Wrong Hamburg statement owner admitted")
+    changed=json.loads(json.dumps(m))
+    changed["b20_event_attribution"]["october_12_submission_cannot_cause_october_2_ministerial_text"]=False
+    try: validate(changed)
+    except ValueError: pass
+    else: raise AssertionError("Later B20 report promoted into earlier ministers text")
     changed=json.loads(json.dumps(m))
     next(x for x in changed["bounded_claims"] if x["id"]=="b20_index")[
         "action"]="adopted_communicated_position"
