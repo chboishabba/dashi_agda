@@ -1,3 +1,13 @@
+## 2026-11-08 — YM canonical PH0–PH4 deliverables and exact lemma ledger
+
+- New `Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md` is the canonical plain-language phase, deliverables, exact YM01–YM10 lemmas and dependency map. New JSON `YMClayEndpointPhaseLemmaManifest20261108.json` is the machine-readable status/source-owner crosswalk, and `scripts/check_ym_clay_phase_lemma_manifest.py` checks documentation, source paths and status conservatively. It does not prove Clay or kernel acceptance.
+- Reused #1444 original SU(N) finite link action/Haar interfaces, native blocked Gibbs/Wilson, R445, CMP116/R320 original small-field + actual large-field decomposition and nonvacuous physical remote-pair gate, and actual OS native reflected-quadratic pullback. #1440 R331/R333 same-reconstruction and direct-route mass-gap compilers are reused. No duplicate finite math added.
+- #1460 (3,1) geometric/conditional directional emergence and Euclidean/Lorentzian Hodge star proofs are recorded as **independent** of the standalone Clay task. Exact observer metric and clock-to-OS physical identity are still optional cross-lane obligations.
+- Still OPEN: actual physical Haar/rate realization, changing-cutoff uniform full R445/CMP116 analytic estimates, nontrivial R4 OS continuum, full-nonvacuum same-H spectral threshold and every compact simple group. Phase source documents are *planning/crosswalk artifacts*, not new constructed continuum/mass-gap source witnesses.
+- Original Wilson, Bałaban, Osterwalder–Schrader and related literature retain attribution.
+
+---
+
 ## 2026-11-06 — YM original native R445 reflected OS-form source identity
 
 - Added `YMClayOriginalWilsonNativeOSPullbackExact.agda`: `originalR445ReflectedQuadraticIsFineWilsonQuadratic` is the actual normalized fine Wilson/R445 pushed reflected-quadratic equality, and `originalR445OSReflectionPositiveFromSameFineWilson` derives coarse RP from same-source fine Wilson RP with explicit physical reflection/positive-time compatibility.
