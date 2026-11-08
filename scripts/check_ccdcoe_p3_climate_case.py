@@ -397,6 +397,19 @@ def validate(data: dict, cases: str, sources: str) -> dict:
                  original["advertorials_original_position_takers"]) == 12
     assert round(100 * original["doubt_original"] /
                  original["advertorials_original_position_takers"]) == 81
+    disposition = data["max_cut_case_disposition"]
+    assert disposition["selected_historical_question"].startswith(
+        "Was the particular April 3 1998")
+    assert disposition["planning_workshop"] == (
+        "documented_contemporaneous_draft_and_attested_by_named_participant")
+    assert disposition["retrospective_nonimplementation"] == (
+        "supported_by_two_named_participant_attributions_not_by_company_accounting")
+    assert disposition["epistemic_grade"] == (
+        "historically_supported_participant_account_not_independently_audited_final_negative")
+    assert disposition["independent_observed_causal_effect"] is None
+    assert disposition["future_persuasion_causal_estimand_status"] == (
+        "NOT_ADMISSIBLE_FOR_THIS_SPECIFIC_PLAN_UNLESS_IMPLEMENTATION_AND_EXPOSURE_ESTABLISHED")
+    assert len(disposition["final_certification_conditions"]) == 4
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
         "original_document_with_provenance")
@@ -426,6 +439,7 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "stage_nonfactorability_witnesses": 4,
         "direct_executive_interviews": 1,
         "signed_financial_closeout": False,
+        "case_disposition": disposition["epistemic_grade"],
         "published_study_cohorts": len(versions),
         "cohort_pooling_authorized": False,
     }
