@@ -250,7 +250,23 @@
     "in_repository_document_level_data": false,
     "replication_executed": false,
     "cannot_merge_with_gcc_case_without_source_crosswalk": true,
-    "original_2017_187_corpus_is_separate": true
+    "original_2017_187_corpus_is_separate": true,
+    "published_sample_composition": {
+      "internal_documents": 32,
+      "peer_reviewed_publications": 72,
+      "advertorials_taking_any_position": 76,
+      "sum": 180,
+      "source": "One Earth 2021 Experimental procedures, data and corpora; publisher excerpt",
+      "evidence_type": "published_corpus_construction_counts_not_original_document_recode",
+      "all_document_provenance_reviewed": false
+    },
+    "original_180_vs_2017_187_denominator_note": "2021 selected 32 internal/72 peer reviewed/76 advertorial 180 documents, NOT identical to 2017 original 187 or 2020 broad searched items",
+    "subjects_of_rhetorical_analysis": [
+      "climate-risk-as-uncertainty",
+      "consumer-demand-and-individual-responsibility",
+      "fossil-fuel-savior-frame"
+    ],
+    "original_180_article_text_available_for_replication": false
   },
   "acceptance_gates": [
     {
