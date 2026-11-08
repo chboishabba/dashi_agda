@@ -268,6 +268,36 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             left[coarse] == right[coarse] and left[fine] != right[fine]
             for left in worlds for right in worlds
         ), f"Unexpected stage factorisation: {coarse} -> {fine}"
+    # Supran/Oreskes 2020 is a NEW search frame. Do not present
+    # 2017 source-type denominators as pooled or revised 2020 estimates.
+    versions = data["document_analysis_versions"]
+    assert len(versions) == 2
+    original, addendum = versions
+    assert original["id"] == "supran_oreskes_2017"
+    assert original["doi"] == "10.1088/1748-9326/aa815f"
+    assert original["total_climate_communications"] == 187
+    assert original["advertorials_in_original_study"] == 36
+    assert original["advertorials_original_position_takers"] == 26
+    assert original["acknowledge_original"] == 3
+    assert original["doubt_original"] == 21
+    assert addendum["id"] == "supran_oreskes_2020_addendum"
+    assert addendum["doi"] == "10.1088/1748-9326/ab89d5"
+    assert addendum["retrieved_search_documents"] == 1448
+    assert addendum["classified_not_irrelevant_advertorials"] == 267
+    assert addendum["advertorials_taking_position_on_real_human_caused"] == 61
+    assert 0 < 61 <= 267 <= 1448
+    assert all(row["independent_audience_effect_estimate"] is None
+               for row in versions)
+    transport = data["document_analysis_transport_guard"]
+    assert transport["selected_owner"] == "2017_original_187_corpus"
+    assert transport["expanded_addendum_owner"] == "2020_newspaper_search"
+    assert transport["direct_pooling_authorized"] is False
+    assert transport["requires_document_id_crosswalk_and_coding_revision_receipt"]
+    assert transport["causal_impact_estimate"] is None
+    assert round(100 * original["acknowledge_original"] /
+                 original["advertorials_original_position_takers"]) == 12
+    assert round(100 * original["doubt_original"] /
+                 original["advertorials_original_position_takers"]) == 81
     assert not data["follow_up_discriminator"]["currently_observed"]
     assert data["follow_up_discriminator"]["source_type_required"] == (
         "original_document_with_provenance")
@@ -293,6 +323,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "source_gated_decisions": len(ladder),
         "archival_review_leads": len(leads),
         "stage_nonfactorability_witnesses": 4,
+        "published_study_cohorts": len(versions),
+        "cohort_pooling_authorized": False,
     }
 
 def main():
