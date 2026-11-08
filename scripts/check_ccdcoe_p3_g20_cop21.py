@@ -128,9 +128,62 @@ def validate(m: dict) -> dict:
                            "Treaty temporality collapsed")
     assert_present_or_stop(m["status"]["summit_causal_influence_identified"] is False,
                            "Do not infer campaign influence from shared language")
+    studies=m["independent_compliance_studies"]
+    assert_present_or_stop(len(studies)==2,
+                           "Two distinct original compliance research owners required")
+    first,second=studies
+    assert_present_or_stop(
+        first["id"]=="brisbane2014_final_G20RG" and
+        second["id"]=="antalya2015_final_G20RG",
+        "Research author/period assignment incorrect")
+    assert_present_or_stop(
+        (first["selected_monitored_commitments"],
+         first["total_summit_commitments"])==(17,205) and
+        (second["selected_monitored_commitments"],
+         second["total_summit_commitments"])==(17,113),
+        "Sampling frame/commitment denominator confusion")
+    a={r["topic"]:r for r in first["scores"]}
+    b={r["topic"]:r for r in second["scores"]}
+    assert_present_or_stop(
+        {k:(v["reported_score_hundredths"],v["reported_percent"]) for k,v in a.items()}=={
+        "climate_change":(10,55),
+        "clean_energy_technology":(90,95),
+        "fossil_fuel_subsidies":(-45,28)} and
+        {k:(v["reported_score_hundredths"],v["reported_percent"]) for k,v in b.items()}=={
+        "fossil_fuel_subsidies":(-35,33)},
+        "Original published topic-specific compliance summary mismatch")
+    for study in studies:
+        assert_present_or_stop(study["source_url"].startswith("https://g20.utoronto.ca/") or
+                               study["source_url"].startswith("https://www.g20.utoronto.ca/"),
+                               "Missing original research-report source")
+        assert_present_or_stop(
+            study["original_evaluators_endorse_DASHI"] is False and
+            study["independently_proven_emissions_effect"] is None and
+            study["full_original_member_level_reanalysis"] is False,
+            "Research scoring cannot be promoted into endorsement or physical effect")
+    assert_present_or_stop(
+        second["evaluation_start"]>first["evaluation_start"] and
+        second["evaluation_end"]>first["evaluation_end"],
+        "Longitudinal evaluation periods lost")
+    comp=m["compliance_scope_guard"]
+    assert_present_or_stop(
+        all(v is True for k,v in comp.items() if k not in (
+            "emissions_change_inferred","original_author_endorsement_inferred")) and
+        comp["emissions_change_inferred"] is None and
+        comp["original_author_endorsement_inferred"] is False,
+        "Original G20 Research Group measurement scope and authorship lost")
+    assert_present_or_stop(
+        m["status"]["published_selected_commitment_compliance_observations_located"],
+        "Published actual implementation measurement omitted")
     counts=Counter(r["source"] for r in claims)
     return {"schema":"dashi.ccdcoe.p3.institutional_bounded_comparison.v1",
             "distinct_source_objects":len(docs),"selected_clause_rows":len(claims),
+            "independent_scored_commitment_reports":len(studies),
+            "brisbane_climate_percent":a["climate_change"]["reported_percent"],
+            "brisbane_clean_energy_percent":a["clean_energy_technology"]["reported_percent"],
+            "brisbane_fossil_percent":a["fossil_fuel_subsidies"]["reported_percent"],
+            "antalya_fossil_percent":b["fossil_fuel_subsidies"]["reported_percent"],
+            "fossil_percent_difference_descriptive_only":b["fossil_fuel_subsidies"]["reported_percent"] - a["fossil_fuel_subsidies"]["reported_percent"],
             "claim_counts_by_original_author_source":dict(sorted(counts.items())),
             "us_position_and_other_leaders_remain_distinct":True,
             "stakeholder_recommendations_are_not_adoptions":True,
