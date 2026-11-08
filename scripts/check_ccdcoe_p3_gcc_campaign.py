@@ -32,6 +32,15 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert sources["harrison_case_history"]["original_date"] == "undated"
     assert sources["gcc_1993_media_hits"]["source_type"] == (
         "gcc_held_media_clipping_archive")
+    assert sources["gcc_1993_media_hits"]["archive_posted_metadata_date"] == "1993-04-21"
+    assert sources["gcc_1993_media_hits"]["archive_index_date_semantically_verified"] is False
+    assert sources["gcc_1993_media_hits"]["claims_original_document_precedes_july_1993"] is False
+    assert len(data["source_quality_alerts"]) == 1
+    alert = data["source_quality_alerts"][0]
+    assert alert["severity"] == "historical_date_conflict"
+    assert alert["source_id"] == "gcc_1993_media_hits"
+    assert alert["no_exposure_or_outcome_effect_claim"] is True
+
     assert sources["brulle_2022"]["doi"] == "10.1080/09644016.2022.2058815"
 
     claims = data["agency_claims"]
