@@ -965,5 +965,30 @@
     "independent_implementation_audit": null,
     "not_evidence_of": "absence of coordinated planning, all fossil-sector advocacy, or independent climate-science claims",
     "provenance_status": "published_named_interview_transcript_not_original_recording"
+  },
+  "max_cut_case_disposition": {
+    "decision_as_of": "2026-11-08",
+    "selected_historical_question": "Was the particular April 3 1998 Global Climate Science Communications Action Plan approved, funded and carried out?",
+    "planning_workshop": "documented_contemporaneous_draft_and_attested_by_named_participant",
+    "contemporaneous_funding_state": "organizer_reported_no_executive_funding_solicitation_as_of_1998_04_26",
+    "contemporaneous_approval_state": "participants_reported_no_formal_approval_as_of_1998_04_26",
+    "retrospective_nonimplementation": "supported_by_two_named_participant_attributions_not_by_company_accounting",
+    "proposition_selected": "specific_1998_plan_probably_not_formally_funded_or_implemented_based_on_named_participant_testimony",
+    "epistemic_grade": "historically_supported_participant_account_not_independently_audited_final_negative",
+    "does_not_conclude": [
+      "no coordinated cross-organisation workshop",
+      "no industry-wide climate communication",
+      "no other funded campaigns",
+      "no influence on 1998 political discourse",
+      "no motive from source classification"
+    ],
+    "final_certification_conditions": [
+      "signed adoption/rejection or termination records",
+      "company/accounting records covering the programme and funding routes",
+      "original follow-up meeting minutes or organisational decision",
+      "documented campaign ledger linked to original plan or a reliable comprehensive negative audit"
+    ],
+    "future_persuasion_causal_estimand_status": "NOT_ADMISSIBLE_FOR_THIS_SPECIFIC_PLAN_UNLESS_IMPLEMENTATION_AND_EXPOSURE_ESTABLISHED",
+    "independent_observed_causal_effect": null
   }
 }
