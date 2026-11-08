@@ -1138,3 +1138,30 @@ Existing source module: DASHI/Moonshine/VNaturalOrbifoldConstruction.agda, same 
 This precise **no-extra-states** law is not entailed by the current assembly's two identification fields: the underlying weak orbifold VOA could have additional states with the same sector tag. No actual bidirectional state-carrier isomorphism may be promoted until that opposite inverse law is source-derived. Separately, original mixed-mode Jacobi/locality, conformal/grade laws, grade-two mode closure and direct FLM all-mode identification remain open. This PAID sublemma does NOT close V0 or V1.
 
 Verification: the code was source-written and read back from GitHub; Agda 2.9 was not executed here. No new physical or Clay claim.
+
+
+## 2026-11-08 source-native V0 fibre-normalisation and no-junk iff lemma
+
+**Proof source:** DASHI/Moonshine/VNaturalOrbifoldConstruction.agda, module ActualSelectedSummandInclusions, commit ed7389c3110fabf8ef82955cf9dd4e76c23bc4ae. This is an ACTUAL original selected-orbifold carrier theorem, not a new abstract state-space record.
+
+Let I = identifyCarrier and R = reconstructTaggedState. Previously paid I∘R=id on the original tagged fixed-plus-twisted sum. Define P=R∘I on the preexisting selected Vnatural state carrier.
+
+- normalizeSelectedState: P=R∘I, the original selected-state normalization.
+- identifyAfterNormalize: I(Pw)=I(w), so normalization does not alter tagged source state.
+- normalizeSelectedStateIdempotent: P²=P.
+- reconstructedStatesAlreadyNormal: P(Rs)=Rs.
+- originalSameTagImpliesSameNormalization AND sameNormalizationImpliesOriginalSameTag: exact classification of selected state fibres by canonical representatives, I(x)=I(y) iff P(x)=P(y).
+- noExtraStatesFromOriginalIdentificationInjective: injectivity of actual I suffices to prove P=id.
+- originalIdentificationInjectiveFromNoExtraStates: the missing P=id law suffices to prove actual I injective.
+- originalNoExtraStatesIffIdentificationInjective: source-written two-way characterization of the single remaining state-carrier obstruction.
+
+**Precise maximal state-space frontier, now reduced to one source-native lemma:**
+
+\[
+ \operatorname{Injective}(\operatorname{identifyCarrier})
+ \quad\Longleftrightarrow\quad
+ \forall w,\quad
+ \operatorname{reconstructTaggedState}(\operatorname{identifyCarrier}(w))=w.
+\]
+
+The implication directions are proved; **neither side is yet inhabited**. This is a useful sharpening rather than a declaration that the real orbifold is constructed or that the vertex-mode structure descends through P. V0 still needs original true graded/mixed-sector VOA laws, and V1 still needs published FLM all-mode equivalence. Exact-head Agda kernel execution not yet observed.
