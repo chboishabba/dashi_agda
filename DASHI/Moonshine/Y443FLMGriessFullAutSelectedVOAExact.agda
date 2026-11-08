@@ -298,7 +298,7 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
               (cong₂ (VOA.GradedModule._+_ GM)
                 (restrictionAgrees a x) (restrictionAgrees a y))
               (sym (includeWeightTwoAdd griess
-                (weightTwoAction a x) (weightTwoAction a y))))))
+                (weightTwoAction a x) (weightTwoAction a y)))))))
 
   restrictedScalarLaw :
     (griess : ConcreteGriessProduct) →
