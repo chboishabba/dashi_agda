@@ -100,3 +100,18 @@ python scripts/qcafqmc_multistep_hubbard.py
 ### Next non-substitutable empirical pieces
 
 The 2026 IonQ source describes a symmetry-constrained, noise-aware autoregressive transformer and matchgate shadows, rather than our four-amplitude least-squares toy. This repo still lacks original measured shadow arrays, the exact active-space nickel molecular integrals/trials and the published training/evaluation implementation. The latest targeted public search did not establish an author-released archive. The proper scientific comparison must preserve chemistry Hamiltonian, orbitals, walkers, trial state, statistical protocols and hardware-cost boundaries. No extrapolation from this two-site Hubbard result to the paper's 99% economic estimate is licensed.
+
+
+### Ten-seed stochastic convergence check
+
+Companion `scripts/qcafqmc_multistep_sampling_sweep.py` repeats the 12-step two-site Hubbard projection for seeds 11-20 with 2,000 / 10,000 / 50,000 trajectories. This is an independent numerical sampling diagnostic, not a proof of a finite-sample confidence bound.
+
+Local results using equivalent prototype code:
+
+| Paths | Mean absolute mixed-energy error | Mixed-energy RMSE | Mean state L2 error |
+|---:|---:|---:|---:|
+| 2,000 | 0.0192148530 | 0.0211314804 | 0.0498977278 |
+| 10,000 | 0.0058745200 | 0.0068386881 | 0.0210087699 |
+| 50,000 | 0.0044811012 | 0.0051751590 | 0.0105186246 |
+
+The reduction is empirical across these ten seeds; it is not a claimed exact monotonic law. The committed sampling sweep uses the same seed/sample grid, and should be executed from its exact commit before these numbers are described as certified repository output.
