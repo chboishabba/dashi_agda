@@ -247,3 +247,23 @@ prePlanNewsAwarenessChange :
   ≡ PreAPI.reportedPercentage PreAPI.recalledNewsCoverage
     PreAPI.after1997DebateBeforeAPIDraft
 prePlanNewsAwarenessChange = PreAPI.newsExposureDifference
+
+-- The 26 April 1998 attributed journalistic account is a temporal
+-- status report, not certified final non-funding or final non-approval.
+contemporaneousFundingStillHasNoFinalReceipt :
+  Contested.Original1998FundingStatusReport.actualFinalFundingReceiptPresent
+    Contested.contemporaneousNoApprovalReport ≡ false
+contemporaneousFundingStillHasNoFinalReceipt =
+  Contested.actualFundingNotEstablished
+
+contemporaneousApprovalStillHasNoFinalReceipt :
+  Contested.Original1998FundingStatusReport.actualFinalApprovalReceiptPresent
+    Contested.contemporaneousNoApprovalReport ≡ false
+contemporaneousApprovalStillHasNoFinalReceipt =
+  Contested.actualApprovalNotEstablished
+
+laterOrganiserAttributionIsNotAuditedExpenditure :
+  Contested.RetrospectiveAttribution.negativeAccountingIndependentReceipt
+    Contested.walkerAttributedRetrospective ≡ false
+laterOrganiserAttributionIsNotAuditedExpenditure =
+  Contested.retrospectiveIsNotFundProof
