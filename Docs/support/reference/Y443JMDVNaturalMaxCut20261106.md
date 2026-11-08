@@ -1352,3 +1352,17 @@ F(\rho_{\rm sel}(u/v)x)=\rho_{\rm FLM}(\Phi(u/v))F(x).
 \]
 
 **Acceptance:** source-specific proofs and Agda kernel-check are required. A foreign Lean declaration provides a proof donor, not an Agda proof term. The dashi_lean4 #47 generic theorems cannot by themselves identify the original 80-relator quotient with the Monster.
+
+
+## 2026-11-09 exact Popov disambiguation and current source owners
+
+**Two different authors and two independent proof programs:**
+
+- User-provided https://github.com/chboishabba/dashi_agda/blob/master/DASHI/Physics/YangMills/BalabanReducedFlatFaddeevPopovKernelExact.agda explicitly credits L. D. Faddeev and V. N. Popov, “Feynman Diagrams for the Yang-Mills Field” (1967), DOI 10.1016/0370-2693(67)90067-6, and Tadeusz Bałaban (1985). Theorems flatFaddeevPopovKernelIsColourwiseConstant and anchoredFlatFaddeevPopovKernelTrivial are exact original finite-lattice *Yang–Mills* gauge-kernel results. This is NOT the Moonshine proof.
+- Fedor K. Popov and Leonardo Rastelli are the distinct authors of the formal Moonshine VOA donor https://github.com/Fedor-Popov/Lean_VOA. Existing foreign Lean declarations include Moonshine.moonshine, TopPairs.top_pairs0, topPairs_one, VnatCarrier.lean and VnatGenuine.lean.
+- Indexed default-branch GitHub source search in dashi_agda and dashi_lean4 for Rastelli, VnatCarrier and Lean_VOA returned no matching files. This **does not prove** absence from other branches, local worktrees, unindexed contents, or user-controlled vendor directories. Do not re-vendor before authentic local owner discovery.
+- dashi_lean4 PR #47 provides an existing post-recognition Monster representation tail (Maschke, original FDRep/module action, Schur and normalizer Hom). It does not supply the historical selected original action, full canonical VOA equivalence or source-filled Y443 group-to-Monster isomorphism.
+
+**New source-written two-sided Agda consolidation** (commit 57d20ec2e2f98b2a2fffb51ad1b6c1d936190e11): DASHI/Moonshine/VNaturalOriginalPairedFourSectorModesExact.agda now also has fromNativeSources, nativeSourcesAfterFrom and fromAfterNativeSources, inverse adapters between original OriginalMixedSectorIntertwiners and the existing SAME selected orbifold pair OriginalMixedParitySource × OriginalEvenTwistedTranslation. With the prior four-mode/vacuum/conformal/translation equations, the two Agda four-block surfaces can be treated as equivalent source records, not independent theorem gates. No kernel run was performed and no genuine source record was instantiated by these deductions.
+
+**Remaining high-alpha original endgame**: instantiate original selected twisted-even linear/graded and intertwiners, mixed Jacobi/locality on paired original carrier, prove all-mode genuine Popov/FLM correspondence, and attach original selected Y443 group action to the canonical Monster action through the honest same-group map and u/v equations. The above Faddeev–Popov source belongs to the independent Yang–Mills ghost/OS roadmap, not to the VOA source-locality proof.
