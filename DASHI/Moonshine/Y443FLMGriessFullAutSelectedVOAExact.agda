@@ -122,12 +122,10 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
 
   open SelectedVOAAutomorphism public
 
-  -- Everything about a generated state is determined by the action on V2.
-  actionOnTerm :
-    (a : SelectedVOAAutomorphism) (t : GeneratedTerm) →
-    action a (evaluate t) ≡ evaluate (mapTerm a t)
-    where
-      mapTerm : SelectedVOAAutomorphism → GeneratedTerm → GeneratedTerm
+  -- Everything about a generated state is determined by its weight-two
+  -- generator action. Structural recursion below is entirely source-native.
+
+  mapTerm : SelectedVOAAutomorphism → GeneratedTerm → GeneratedTerm
       mapTerm a vacuum = vacuum
       mapTerm a (sourceWeightTwo x) =
         sourceWeightTwo (weightTwoAction a x)
@@ -312,6 +310,12 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
         (x : WeightTwo) →
         onWeightTwo (monsterToGriess (griessToMonster g)) x
         ≡ onWeightTwo g x
+      -- Extensionality of the CONCRETE Griess automorphism-to-Monster
+      -- map, not global function extensionality as an axiom.
+      griessInverseExtensional :
+        (g h : GriessAutomorphism griess) →
+        ((x : WeightTwo) → onWeightTwo g x ≡ onWeightTwo h x) →
+        griessToMonster g ≡ griessToMonster h
   open SelectedMonsterGriessIdentification public
 
   fullMonsterAction :
@@ -337,10 +341,12 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
     recoverMonsterFromVOA griess ident
       (fullMonsterAction griess ext ident m) ≡ m
   monsterAfterVOA griess ext ident m =
-    -- This is an equality of Monster elements requiring that the Griess
-    -- classification inverse respects equality of automorphisms.  Field
-    -- below explicitly supplies its exact extensionality.
-    monsterRoundTrip ident m
+    trans
+      (griessInverseExtensional ident
+        (restrict griess (extend ext (monsterToGriess ident m)))
+        (monsterToGriess ident m)
+        (extensionRestricts ext (monsterToGriess ident m)))
+      (monsterRoundTrip ident m)
 
   fullVOAAfterMonsterOnStates :
     ∀ {Monster : Set} (griess : ConcreteGriessProduct)
