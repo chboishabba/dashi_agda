@@ -65,3 +65,4 @@ import DASHI.Moonshine.Y443FLMFiniteBasisUVEndcapExact as FLMBasisEndcap
 import DASHI.Moonshine.Y443PublishedQuotientIsoCompositionExact as Y443PublishedMonsterIso
 import DASHI.Moonshine.Y443FLMGriessGeneratorUVExact as FLMGriessGenerators
 import DASHI.Moonshine.Y443FLMGriessGeneratorsUVEndcapExact as FLMGriessSeedEndcap
+import DASHI.Moonshine.Y443FLMCanonicalReferenceFromQuotientExact as FLMTrueCanonicalReference
