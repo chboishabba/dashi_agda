@@ -1,3 +1,9 @@
+## 2026-11-08 — original paired orbifold four-sector modes
+
+Source-audited `VNaturalOrbifoldConstruction`: `originalVOAZeroCannotBeBothSummandZeros` already excludes promoting its tagged coproduct to a two-summand linear VOA, despite the valid normalization retraction/injectivity equivalence. Added `VNaturalOriginalPairedFourSectorModesExact.agda`, using `SelectedPairedGradedModule.actualSourceGradedPair`, original fixed-sector `fixedVOA` vertex modes and original theta-twisted module action for FT. Constructs exact paired `VertexOperatorData` and full four-block mode formula, isolating native TF/TT source operators and mixed Jacobi/locality as the physical mathematical frontier. No false selected FLM/Monster isomorphism; kernel verification not claimed.
+
+---
+
 # Changelog
 
 This changelog is append-only. Older mentions of `false` are historical wave
