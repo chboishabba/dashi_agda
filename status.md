@@ -9823,3 +9823,13 @@ Canonical live theorem and deliverable ledger:
   research frontiers, not results of numeric Moonshine decomposition.
 
 No Agda kernel run or new Clay/physics theorem is asserted by this status update.
+
+### 2026-11-08 original Moonshine orbifold V0 state-space partial result
+
+On Y443 PR #1472, the original VNaturalOrbifoldConstruction now proves
+fixed/twisted summand inclusion injectivity and disjointness and constructs
+an injection from its actual fixed-plus-even-twisted tagged carrier into
+its selected orbifold VOA state carrier. The source identifyCarrier map is
+proved to be its left inverse. The converse (no-extra-states) identity is
+NOT proved; neither original mixed VOA identities nor FLM/Monster action
+isomorphism is thereby supplied. Code source-written; Agda kernel not run.
