@@ -1,7 +1,7 @@
 module DASHI.Moonshine.VNaturalOrbifoldConstruction where
 
 open import Agda.Primitive using (Setω)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
