@@ -17381,3 +17381,13 @@ Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 - [ ] The TauCeti presented-group-to-Coxeter-quotient equivalence is NOT
   a genuine selected group-to-published-Monster action identification;
   original V2 group/action evidence remains open.
+
+
+- [x] Pure source FT parity reduction: originalPureFTModeIsNativeTwisted
+  and originalPureFTModeAgreesWithLeechTwistedModule show that the
+  four-block paired source mode on (x,0) and (0,y) reproduces the
+  original Leech theta-twisted module after includePlus, under explicit
+  source zero laws (OriginalPureFTZeroLaws).
+- [ ] Inhabit those original zero laws, the genuine Wbar twisted-twisted
+  and reversed mixed block, and strong mixed Jacobi/locality from the
+  Popov–Rastelli LeanVOA donor on the selected Agda carrier.
