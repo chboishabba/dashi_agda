@@ -53,6 +53,9 @@ TRIE_FINITE = ROOT / "scripts/check_y443_relator_trie_same_object_gate.py"
 CONJUGATE_FINITE = ROOT / "scripts/check_y443_flm_conjugate_transport.py"
 CONCRETE_TRANSPORT = ROOT / "DASHI/Moonshine/Y443FLMConcreteVOAGroupTransportExact.agda"
 CONCRETE_CLOSURE = ROOT / "DASHI/Moonshine/Y443FLMConcreteSameObjectActionClosureExact.agda"
+WEIGHT_TWO_UV = ROOT / "DASHI/Moonshine/Y443FLMWeightTwoOnlyUVExact.agda"
+WEIGHT_TWO_BASIS = ROOT / "DASHI/Moonshine/Y443FLMWeightTwoBasisUVExact.agda"
+FINITE_BASIS_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMFiniteBasisUVEndcapExact.agda"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -162,7 +165,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -269,7 +272,25 @@ def assert_source_scope() -> None:
         for name in markers:
             if name not in data:
                 raise AssertionError(f"missing concrete Y443/FLM transport owner {name} in {source}")
-    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
+    for owner, markers in (
+        (WEIGHT_TWO_UV, (
+            "TwoGeneratorVOAOperators", "TwoGeneratorVOAWitness",
+            "uAllStates", "vAllStates", "allGroupActionsAgreeFromWeightTwo",
+        )),
+        (WEIGHT_TWO_BASIS, (
+            "ActualWeightTwoSpan", "agreementOnTerm", "agreementOnAllWeightTwo",
+            "restrictedAdditiveLaw", "restrictedScalarLaw",
+        )),
+        (FINITE_BASIS_ENDCAP, (
+            "ActualFiniteBasisUVSource", "constructWeightTwoWitness",
+            "wholeMonsterOriginalActionFromFiniteBasis",
+        )),
+    ):
+        s = owner.read_text()
+        for symbol in markers:
+            if symbol not in s:
+                raise AssertionError(f"missing actual finite-basis u/v theorem {symbol} in {owner.name}")
+    print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
 def check_agda() -> None:
