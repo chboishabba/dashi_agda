@@ -695,5 +695,41 @@
       "same_as_april_plan_execution": false,
       "effect_on_1998_api_plan": "none without a separately proven same-object connection"
     }
-  ]
+  ],
+  "document_analysis_versions": [
+    {
+      "id": "supran_oreskes_2017",
+      "doi": "10.1088/1748-9326/aa815f",
+      "publication_year": 2017,
+      "measurement_type": "original_content_analysis",
+      "total_climate_communications": 187,
+      "advertorials_in_original_study": 36,
+      "advertorials_original_position_takers": 26,
+      "acknowledge_original": 3,
+      "doubt_original": 21,
+      "sampling_frame": "original source-selected company document and NYT paid advertising sample; 1977-2014 communications",
+      "independent_audience_effect_estimate": null
+    },
+    {
+      "id": "supran_oreskes_2020_addendum",
+      "doi": "10.1088/1748-9326/ab89d5",
+      "publication_year": 2020,
+      "measurement_type": "addendum_expanded_advertorial_search",
+      "retrieved_search_documents": 1448,
+      "classified_not_irrelevant_advertorials": 267,
+      "advertorials_taking_position_on_real_human_caused": 61,
+      "source_year_span": "1924–2013 search results",
+      "sampling_frame": "expanded ProQuest/newspaper search and document-level relevance coding; NOT original 2017 36-advertorial cohort",
+      "independent_audience_effect_estimate": null
+    }
+  ],
+  "document_analysis_transport_guard": {
+    "selected_owner": "2017_original_187_corpus",
+    "expanded_addendum_owner": "2020_newspaper_search",
+    "direct_pooling_authorized": false,
+    "original_2017_percentages_not_reestimated_for_2020": true,
+    "requires_document_id_crosswalk_and_coding_revision_receipt": true,
+    "intercoder_reliability_note": "2020 addendum reports screening agreement and Krippendorff alpha; do not mistake document-screening reliability for experimental exposure effects",
+    "causal_impact_estimate": null
+  }
 }
