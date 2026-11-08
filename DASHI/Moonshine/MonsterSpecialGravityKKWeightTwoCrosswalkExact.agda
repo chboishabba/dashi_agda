@@ -27,7 +27,7 @@ module DASHI.Moonshine.MonsterSpecialGravityKKWeightTwoCrosswalkExact where
 -- Monster Lie algebra/string theorem, not a four-dimensional YM gap.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; _+_)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; false)
 open import Data.Empty using (⊥)
@@ -70,6 +70,41 @@ nontrivialMonsterCountMatches :
     + twistedGravityComparisonCount
   ≡ FLM.monsterNontrivialWeightTwoDimension
 nontrivialMonsterCountMatches = refl
+
+------------------------------------------------------------------------
+-- CHester--Marrani--Rios p-FORM CONTENT, exact published equation (72):
+--   98280 = C(24,5) + 4*C(24,4) + 6*C(24,3)
+--                 + 4*C(24,2) + 24.
+-- This decomposes the 98280 COUNT; it does not turn p-form states into
+-- the actual FLM norm-four lattice vectors or their Monster action.
+------------------------------------------------------------------------
+
+fiveFormLittleGroupDimension : Nat
+fiveFormLittleGroupDimension = 42504
+
+fourFormLittleGroupDimension : Nat
+fourFormLittleGroupDimension = 10626
+
+threeFormLittleGroupDimension : Nat
+threeFormLittleGroupDimension = 2024
+
+twoFormLittleGroupDimension : Nat
+twoFormLittleGroupDimension = 276
+
+vectorLittleGroupDimension : Nat
+vectorLittleGroupDimension = 24
+
+masslessPFormLeechComparison : Nat
+masslessPFormLeechComparison =
+  fiveFormLittleGroupDimension
+  + 4 * fourFormLittleGroupDimension
+  + 6 * threeFormLittleGroupDimension
+  + 4 * twoFormLittleGroupDimension
+  + vectorLittleGroupDimension
+
+pFormSpectrumIsLeechNormFourOrbitCount :
+  masslessPFormLeechComparison ≡ FLM.pairedNormFourOrbitCount
+pFormSpectrumIsLeechNormFourOrbitCount = refl
 
 -- EXACT TYPED coordinate chart on the GRAVITY SIDE.
 GravityDilaton : Set
