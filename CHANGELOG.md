@@ -1,3 +1,12 @@
+## 2026-11-08 — latest R572 seven-family frontier reconciliation
+
+- Corrected YM PH0–PH4 / YM01–YM10 phase and acceptance ledger following repository-wide audit. Existing `YangMillsClayCriticalPathRound572Exact` owns **seven actual remaining producer families** A3, T1, T5, B1, B2, G1 and H6. Earlier ten endpoint targets are retained as a deliverables crosswalk, not ten absent constructions.
+- Reused `YangMillsClayPreferredA3FiniteProjectionRound566Exact`, `YangMillsConcreteStructuralSemanticsRound517Exact`, `YangMillsActualGroupQuantitativeConstructorRound569Exact` and `YangMillsActualGroupSourceFirstCompleteRound571Exact`, existing continuous Haar/projective R445 and native OS pullback. All seven-family module files checked on the #1444 branch.
+- Current source-specific analytic obligations: projective Wilson event semantics/continuity/factorization; original uniform CMP119 small/large moments and full Wilson WEXT; same-H full-nonvacuum continuum spectral gap; actual compact-simple quantitative/BCH/Haar and physical five-block source; original same-family Ward/nontriviality. Definitional R4 spacetime, matrix SU(N), compact-simple index tags and source-first actual group alignment are not renewed lemmas.
+- Updated the canonical readable roadmap, status JSON and static consistency checker; no Agda kernel or Clay proof certification claimed.
+
+---
+
 ## 2026-11-08 — YM canonical PH0–PH4 deliverables and exact lemma ledger
 
 - New `Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md` is the canonical plain-language phase, deliverables, exact YM01–YM10 lemmas and dependency map. New JSON `YMClayEndpointPhaseLemmaManifest20261108.json` is the machine-readable status/source-owner crosswalk, and `scripts/check_ym_clay_phase_lemma_manifest.py` checks documentation, source paths and status conservatively. It does not prove Clay or kernel acceptance.
