@@ -185,3 +185,54 @@ availableAnswer changedPolicyDecisions = unobserved
 
 -- Never define observational equivalence across wholly different
 -- campaigns as proof of one direct plan's authorisation or efficacy.
+
+------------------------------------------------------------------------
+-- VERSIONED 2020 ADDENDUM: not the original 2017 denominator.
+-- Supran/Oreskes ERL 15 (2020) 119401, DOI 10.1088/1748-9326/ab89d5.
+-- 1,448 gathered candidate adverts -> 267 not-irrelevant adverts;
+-- 61 of the expanded advertorial sample express positions on AGW as
+-- real and human-caused. These do NOT replace the 2017 original
+-- 187-communication / 36-advertorial cohort or its 26 denominator.
+------------------------------------------------------------------------
+
+record ExpandedAddendumCohort : Set where
+  constructor expandedAddendumCohort
+  field
+    sourceDOI : String
+    retrievedCandidateDocuments : Nat
+    notIrrelevantAdvertorials : Nat
+    advertorialsTakingPosition : Nat
+    isOriginal2017SamplingFrame : Bool
+
+addendum2020Source : ExpandedAddendumCohort
+addendum2020Source =
+  expandedAddendumCohort
+    "10.1088/1748-9326/ab89d5"
+    1448
+    267
+    61
+    false
+
+expandedAdvertorialCandidateCount :
+  ExpandedAddendumCohort.retrievedCandidateDocuments
+    addendum2020Source ≡ 1448
+expandedAdvertorialCandidateCount = refl
+
+expandedAdvertorialRelevantCount :
+  ExpandedAddendumCohort.notIrrelevantAdvertorials
+    addendum2020Source ≡ 267
+expandedAdvertorialRelevantCount = refl
+
+expandedAdvertorialPositions :
+  ExpandedAddendumCohort.advertorialsTakingPosition
+    addendum2020Source ≡ 61
+expandedAdvertorialPositions = refl
+
+addendumCannotAutoReplaceOriginalFrame :
+  ExpandedAddendumCohort.isOriginal2017SamplingFrame
+    addendum2020Source ≡ false
+addendumCannotAutoReplaceOriginalFrame = refl
+
+-- Cross-year cohort inclusion, revised document identities and common
+-- coding rules would need a source-level crosswalk not constructed
+-- by copying the two published aggregate summaries.
