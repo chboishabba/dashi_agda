@@ -135,10 +135,22 @@ module LinearOrbifoldSummandInclusions
     includeFixedLinear fixedZero ≡ includeTwistedLinear twistedZero
   originalSummandZerosAgree = refl
 
-  linearPairHasTwoComponents :
+  -- Pair carriers admit *both* summands in one state, unlike A ⊎ B.
+  recoverLinearComponents :
     (x : Fixed) (y : Twisted) →
-    (x , y) ≡ (x , y)
-  linearPairHasTwoComponents x y = refl
+    Data.Product.proj₁ (x , y) ≡ x
+    × Data.Product.proj₂ (x , y) ≡ y
+  recoverLinearComponents x y = refl , refl
+
+  linearFixedInclusionInjective :
+    (x y : Fixed) →
+    includeFixedLinear x ≡ includeFixedLinear y → x ≡ y
+  linearFixedInclusionInjective x y refl = refl
+
+  linearTwistedInclusionInjective :
+    (x y : Twisted) →
+    includeTwistedLinear x ≡ includeTwistedLinear y → x ≡ y
+  linearTwistedInclusionInjective x y refl = refl
 
 record OrbifoldVOAAssembly
   {V : VOA.VertexOperatorAlgebra}
