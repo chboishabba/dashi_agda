@@ -1107,3 +1107,34 @@ The narrower, nonduplicative actual selected VOA frontier is:
 | X194/XCFT/XKK/XYM | INDEPENDENT | #696/#208/#1241/#1444 and peers | Each domain's own original source endpoint |
 
 **Execution order:** V0 and V1 original source construction/identification; V2 authentic group and u/v source maps in parallel; V3 composition after both. Reject more numeric bookkeeping, generic record compilers, uniqueness wrappers, or fake theorem-authority fields as progress against V0–V3. Route physical goals to their separate PRs. This is the active VOA roadmap for PR #1472; the February .planning/ROADMAP.md documents a different historical geometry programme and is intentionally not overwritten.
+
+
+## 2026-11-08 V0 source-native orbifold state-space partial discharge
+
+Existing source module: DASHI/Moonshine/VNaturalOrbifoldConstruction.agda, same original VNaturalConstruction, updated in commits 08f46a28, 524a8920 and 2bf94788.
+
+**New original-source proof terms (not parallel replacement carriers):**
+- originalFixedInclusionInjective: original fixed-point inclusion injective;
+- originalTwistedInclusionInjective: original twisted-even inclusion injective;
+- originalFixedTwistedDisjoint: original fixed/twisted images have no common selected state;
+- reconstructTaggedState: actual sector-tagged sum maps into the original selected orbifold state carrier;
+- identifyAfterReconstruct: original identifyCarrier after reconstruction is identity on the ACTUAL tagged sum;
+- reconstructTaggedStateInjective: this actual tagged source sum injects into the original selected orbifold carrier.
+
+**New equation on the source carriers:**
+
+\[
+ \forall z\in V_\Lambda^+\uplus(V_\Lambda^T)^+,\quad
+ \mathrm{identifyCarrier}(\mathrm{reconstructTaggedState}(z))=z.
+\]
+
+**Still essential on the other side:**
+
+\[
+ \forall w\in \mathrm{Carrier}(V_{\rm sel}),\quad
+ \mathrm{reconstructTaggedState}(\mathrm{identifyCarrier}(w))=w.
+\]
+
+This precise **no-extra-states** law is not entailed by the current assembly's two identification fields: the underlying weak orbifold VOA could have additional states with the same sector tag. No actual bidirectional state-carrier isomorphism may be promoted until that opposite inverse law is source-derived. Separately, original mixed-mode Jacobi/locality, conformal/grade laws, grade-two mode closure and direct FLM all-mode identification remain open. This PAID sublemma does NOT close V0 or V1.
+
+Verification: the code was source-written and read back from GitHub; Agda 2.9 was not executed here. No new physical or Clay claim.
