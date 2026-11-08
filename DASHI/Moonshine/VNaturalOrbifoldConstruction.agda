@@ -620,3 +620,100 @@ module SelectedPairedGradedModule
     (fixedZero source , twistedZero source)
       ≡ (fixedZero source , twistedZero source)
   pairedOriginalZerosAgree source = refl
+
+
+  ----------------------------------------------------------------------
+  -- Stronger original-source producer: fixed-sector operations are NOT
+  -- picked afresh. They are transported from fixedPoint.fixedVOA.
+  -- Only the twisted-even sector has to supply still-missing native
+  -- linear/graded operations plus the actual fixedCarrier equivalence.
+  ----------------------------------------------------------------------
+
+  FixedOriginalState : Set
+  FixedOriginalState = VOA.GradedModule.Carrier fixedGM
+
+  record OriginalFixedVOAAndTwistedEvenSource : Setω where
+    field
+      fixedToOriginal : Fixed → FixedOriginalState
+      fixedFromOriginal : FixedOriginalState → Fixed
+      fixedOriginalAfterFrom : (w : FixedOriginalState) →
+        fixedToOriginal (fixedFromOriginal w) ≡ w
+      fixedFromAfterOriginal : (w : Fixed) →
+        fixedFromOriginal (fixedToOriginal w) ≡ w
+
+      twistedZeroOriginal : Twisted
+      twistedAddOriginal : Twisted → Twisted → Twisted
+      twistedScaleOriginal : Scalar → Twisted → Twisted
+      twistedGradeOriginal : Nat → Set
+      twistedIncludeGradeOriginal :
+        (n : Nat) → twistedGradeOriginal n → Twisted
+
+  open OriginalFixedVOAAndTwistedEvenSource public
+
+  nativeFixedAndTwistedGrading :
+    OriginalFixedVOAAndTwistedEvenSource → SourceSectorGrading
+  nativeFixedAndTwistedGrading source = record
+    { fixedZero =
+        fixedFromOriginal source (VOA.GradedModule.zero fixedGM)
+    ; twistedZero = twistedZeroOriginal source
+    ; fixedAdd = λ x y →
+        fixedFromOriginal source
+          (VOA.GradedModule._+_ fixedGM
+            (fixedToOriginal source x) (fixedToOriginal source y))
+    ; twistedAdd = twistedAddOriginal source
+    ; fixedScale = λ s x →
+        fixedFromOriginal source
+          (VOA.GradedModule._·_ fixedGM s (fixedToOriginal source x))
+    ; twistedScale = twistedScaleOriginal source
+    ; fixedGrade = VOA.GradedModule.gradePiece fixedGM
+    ; twistedGrade = twistedGradeOriginal source
+    ; fixedIncludeGrade = λ n x →
+        fixedFromOriginal source
+          (VOA.GradedModule.includeGrade fixedGM n x)
+    ; twistedIncludeGrade = twistedIncludeGradeOriginal source
+    }
+
+  originalFixedZeroDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource) →
+    fixedToOriginal source
+      (fixedZero (nativeFixedAndTwistedGrading source))
+    ≡ VOA.GradedModule.zero fixedGM
+  originalFixedZeroDecoded source =
+    fixedOriginalAfterFrom source (VOA.GradedModule.zero fixedGM)
+
+  originalFixedAdditionDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (x y : Fixed) →
+    fixedToOriginal source
+      (fixedAdd (nativeFixedAndTwistedGrading source) x y)
+    ≡ VOA.GradedModule._+_ fixedGM
+         (fixedToOriginal source x) (fixedToOriginal source y)
+  originalFixedAdditionDecoded source x y =
+    fixedOriginalAfterFrom source
+      (VOA.GradedModule._+_ fixedGM
+        (fixedToOriginal source x) (fixedToOriginal source y))
+
+  originalFixedScalingDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (s : Scalar) (x : Fixed) →
+    fixedToOriginal source
+      (fixedScale (nativeFixedAndTwistedGrading source) s x)
+    ≡ VOA.GradedModule._·_ fixedGM s (fixedToOriginal source x)
+  originalFixedScalingDecoded source s x =
+    fixedOriginalAfterFrom source
+      (VOA.GradedModule._·_ fixedGM s (fixedToOriginal source x))
+
+  originalFixedGradeDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (n : Nat) (x : VOA.GradedModule.gradePiece fixedGM n) →
+    fixedToOriginal source
+      (fixedIncludeGrade (nativeFixedAndTwistedGrading source) n x)
+    ≡ VOA.GradedModule.includeGrade fixedGM n x
+  originalFixedGradeDecoded source n x =
+    fixedOriginalAfterFrom source
+      (VOA.GradedModule.includeGrade fixedGM n x)
+
+  actualSourceGradedPair :
+    OriginalFixedVOAAndTwistedEvenSource → VOA.GradedModule
+  actualSourceGradedPair source =
+    pairedGradedModule (nativeFixedAndTwistedGrading source)
