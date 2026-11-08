@@ -316,6 +316,11 @@ def assert_source_scope() -> None:
                    "actualPublishedMonsterAction", "assembleCanonicalReference"):
         if symbol not in CANONICAL_QUOTIENT.read_text():
             raise AssertionError(f"missing canonical same-quotient FLM assembly {symbol}")
+    for symbol in ("publishedVacuum", "publishedConformal", "publishedMode",
+                   "publishedTranslation", "actualPublishedVOAAutomorphismLaws",
+                   "realSelectedTransportedModePreserved"):
+        if symbol not in CANONICAL_QUOTIENT.read_text():
+            raise AssertionError(f"missing actual published Monster VOA action law {symbol}")
     print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
