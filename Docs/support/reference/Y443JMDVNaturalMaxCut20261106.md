@@ -1215,3 +1215,47 @@ originalNoExtraStatesIffIdentificationInjective :
 **After V0:** mixed fixed/twisted mode and conformal compatibility, Jacobi/locality and genuine Leech VOA laws are still needed for M01/M02 and the source-sound DGL identification. `OrbifoldVOAAssembly.mixedVertexProductsClosed`, `localityAcrossSummands`, `JacobiAcrossSummands`, `centralCharge24`, `holomorphic` and `simple` are bare `Set` slots, not semantic proof receipts; a section/retraction does not fill them.
 
 **Cross-lane YM audit:** BCH is present in `CompactLieAnalyticPackage.QuantitativeBCH` and source-aligned R569–R571. CMP119 OS4 is already compiled from actual pre-gap R582 source via `YangMillsClayCMP119H1OS4AttachmentRound583Exact.selectedH1ClusteringMeansFullOS4`; original selected H1 density/continuity interpretation still `conditional` in R583. These are not new Monster lemmas or automatic same-object physical proofs.
+
+
+## 2026-11-08 V0.3/V0.4 source implementation and LeanVOA highest-alpha donor
+
+### Primary external formal proof owner: Popov–Rastelli LeanVOA
+
+Fedor K. Popov and Leonardo Rastelli, "Vertex Operator Algebras in Lean: a formal library and its companion book", arXiv:2611.06616 (submitted 2026-11-04); concrete GitHub repository https://github.com/Fedor-Popov/Lean_VOA, source snapshot 60304626558f9846e0284bc42bf244323cbf8407. The README claims Lean 4.30/Mathlib and only propext/Classical.choice/Quot.sound as underlying axioms. External author claim, not an Agda kernel receipt.
+
+**Actual Lean source owners checked:**
+
+- VOA/Moonshine/VnatCarrier.lean: Vnat = SkewVP × TP, gradingNat, gradingNat_isInternal, finrank_gradingNat_two, original vacuum and conformal carrier. This is real graded vector-space source data, confirming the paired-carrier rather than tagged-coproduct correction.
+- VOA/Moonshine/TopPairsCore.lean: TopPairs.top_pairs0 proves the explicit finite top-level twisted-twisted identity.
+- VOA/Moonshine/TopPairs.lean: topPairs_one proves correct epsilon=+1 normalization, and theorem moonshine states the genuine Vnat VOA unconditionally.
+- VOA/Moonshine/MainTopPairs.lean: moonshine_of_topPairs transports the finite identity through original triality, Frenkel–Zhu generation and fully sourced VOA assembly.
+- The unconditional moonshine conclusion includes Y = Ynat wbarL, vacuum/conformal vectors, central charge 24, V1=0, dim V2=196884, all graded JShift dimensions and simplicity.
+- VOA/Examples/MoonshineModule.lean contains a NONCOMPILED SKETCH of Aut(Vnatural) ≅ Monster; no actual Lean theorem proving the full Monster action was verified. V2 remains an independent same-group/action gate.
+
+**Highest-alpha decision:** explicitly reuse the actual LeanVOA source as the canonical mathematical donor for V0/V1 rather than reconstruct FLM from memory. Lean proofs cannot be called Agda kernel proofs without a genuine translated proof/semantic isomorphism. Keep Griess/Monster group attribution Ivanov/Bray/Griess/FLM/Huang; keep LeanVOA Moonshine attribution Popov–Rastelli.
+
+### Source-written Agda additions to original orbifold owner
+
+All implemented within DASHI/Moonshine/VNaturalOrbifoldConstruction.agda, module SelectedPairedGradedModule, parameterized by original selected VNaturalConstruction:
+
+- V0.3 SourceSectorGrading: defines native zero, addition, scaling and grade inclusions on the SAME selected fixed-point and twisted-even sector carriers.
+- V0.3 pairedGradedModule: constructs a bona fide pair-carrier VOA.GradedModule with gradePiece n = FixedGrade n × TwistedGrade n and explicitly checked original pair zero/add/scalar/grade projections.
+- V0.3 OriginalFixedVOAAndTwistedEvenSource: fixedToOriginal/fromOriginal are two-sided identification with the EXISTING fixedPoint.fixedVOA state carrier. nativeFixedAndTwistedGrading derives fixed zero, addition, scalar multiplication, grade n and inclusions FROM THAT ORIGINAL fixedVOA, rather than inventing independent algebra operations. The twisted-even sector's native linear/graded source and fixedCarrier-to-fixedVOA equivalence still require genuine witnesses.
+- V0.3 originalFixedZeroDecoded, originalFixedAdditionDecoded, originalFixedScalingDecoded and originalFixedGradeDecoded prove these transported operations agree with the original fixedVOA under decoding.
+- V0.4 originalFixedSectorMode and originalFixedModeDecoded transport the fixed-fixed VOA mode from the actual fixed-point VOA.
+- V0.4 OriginalMixedParitySource: requires the fixed-twisted operator to equal the original Leech theta-twisted module twistedMode under a genuine integer mode-index adapter, plus actual twisted-fixed and twisted-twisted operations. originalParityPairMode reconstructs the four parity channels: FF+TT in fixed output, FT+TF in twisted output. originalParityFixedOutput and originalParityTwistedOutput verify the exact source-defined formulas.
+- No genuine new VOA with all modes, translation, Jacobi, locality, and Virasoro has been constructed by these Agda functions. No Agda typecheck run was available.
+
+### Exact remaining high-alpha original selected source lemmas
+
+| Gate | Original missing lemma or witness | External/internal owner | Status |
+|---|---|---|---|
+| V03-A | Same original fixedCarrier is two-sided linear and graded equivalent to Carrier(fixedPoint.fixedVOA); inhabit fixedToOriginal/fromOriginal and inverses | Original FixedPointVOA; LeanVOA VnatCarrier | OPEN |
+| V03-B | Same twisted-even sector has source-defined zero/add/scalar and grade n inclusions compatible with the actual TwistedModule (not arbitrary operations) | TwistedEvenSector; LeanVOA TwistedPlus | OPEN |
+| V04-A | Integer twist index, native FT original mode, genuine TF and TT parity operators | OriginalMixedParitySource; LeanVOA VnatFields, WbarLeech, TopPairsCore | OPEN |
+| V04-B | Show paired parity operator is the actual source Ynat and transfer original full mixed Jacobi/locality/conformal/translation/graded laws | LeanVOA MainTopPairs, TopPairs | OPEN Agda, existing Lean proof donor |
+| V1 | All-mode source identification: original DASHI selected orbifold isomorphism to the genuine LeanVOA FLM model, or explicit honest canonical-source selection | Y443FLMConcreteVOAGroupTransportExact | OPEN |
+| V2 | True selected G↔Q80↔Monster and original JMD u/v operator equality on genuine generators | Y443PublishedQuotientIsoCompositionExact, direct same-object capstone | OPEN |
+| V3 | Inhabit existing real selected-object terminal capstone | V03/V04/V1/V2 | BLOCKED |
+
+**Attribution:** LeanVOA mathematical construction and TopPairs belong to Popov–Rastelli, not DASHI. DASHI implements the original Agda graded and parity interfaces and existing Y443 action transport. The existence of a Lean theorem does not automatically inhabit a different independently selected Agda record or prove the original Monster action.
