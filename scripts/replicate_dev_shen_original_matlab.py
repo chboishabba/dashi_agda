@@ -30,6 +30,23 @@ SOURCE = {
     "adapter": "DASHI independently written analysis"
 }
 
+# Published Dataverse V2 metadata (C4 / 10.35 degrees / 0 plane).
+# These are original repository checksums, not measurements made by DASHI.
+PUBLISHED_MD5 = {
+ "C4/10_35/0": {
+   "IA": "87654da380569dc738acf12cd395a053",
+   "ID": "6e076bcb8d703f227164dbcefbbdbbea",
+   "IH": "52ce9afe15061244e26913b4ce1fdb13",
+   "IL": "3a89e1788ae2db4822f3d921a8662d3a",
+   "IR": "4ab487441fbbb6cf8ac02f3bad983f76",
+   "IV": "d35cce39aced9ffee7463945a937a781"
+ }}
+def md5(path):
+    h=hashlib.md5()
+    with open(path,"rb") as f:
+        for chunk in iter(lambda:f.read(1 << 20),b""):h.update(chunk)
+    return h.hexdigest()
+
 def sha256(path):
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -123,12 +140,20 @@ def run(root,case,outdir):
     if case not in groups:
         raise ValueError(f"case {case!r} not found; available prefixes: {list(groups)[:10]}")
     paths=groups[case]
+    checksums=PUBLISHED_MD5.get(case)
+    if checksums:
+        for channel in CHANNELS:
+            actual=md5(paths[channel])
+            if actual != checksums[channel]:
+                raise ValueError(f"source V2 checksum mismatch: {case}/{channel}; expected {checksums[channel]} observed {actual}")
     img=channels(paths)
     n,valid,quality=stokes(img)
     receipt={"source": SOURCE, "case":case,
         "source_data_files":{k: {"path":str(paths[k].relative_to(root)), "sha256":sha256(paths[k])}
                              for k in CHANNELS},
         "data_provenance":"dataset describes data type as simulation; individual experimental status unverified",
+        "published_md5_verified":bool(checksums),
+        "published_md5_source":"DR-NTU Dataverse dataset V2, DOI 10.21979/N9/AJB6FD, visible file metadata",
         "pixel_shape":list(n.shape[1:]), "quality":quality,
         "topology":charge(n,valid), "experimental_replication_certified":False}
     target=Path(outdir);target.mkdir(parents=True,exist_ok=True)
