@@ -280,7 +280,7 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
               (cong₂ (λ u v → VOA.VertexOperatorData.mode Y u (+ 1) v)
                 (restrictionAgrees a x) (restrictionAgrees a y))
               (sym (firstProductIsModeOne griess
-                (weightTwoAction a x) (weightTwoAction a y))))))
+                (weightTwoAction a x) (weightTwoAction a y)))))))
 
   restrictedAdditiveLaw :
     (griess : ConcreteGriessProduct) →
@@ -316,7 +316,7 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
               (cong (VOA.GradedModule._·_ GM s)
                 (restrictionAgrees a x))
               (sym (includeWeightTwoScale griess s
-                (weightTwoAction a x))))))
+                (weightTwoAction a x)))))))
 
   restrict :
     (griess : ConcreteGriessProduct) →
