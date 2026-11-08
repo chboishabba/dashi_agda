@@ -17368,3 +17368,16 @@ Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 
 Canonical exact source named-lemma map:
 Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+- [x] Source-native paired VOA vertex-data assembly: genuine fixedVOA
+  vacuum/conformal/translation, even-twisted translation source, and actual
+  four-parity mode (actualSourcePairedVertexData), with original fixed
+  vacuum/conformal decoding and mode agreement proofs. Source-written,
+  not kernel-verified and NOT full VOA Jacobi/locality.
+- [ ] Port or substantively translate Popov–Rastelli LeanVOA YnatG/topPairs_one/
+  moonshine into the original Agda selected carrier with a real all-mode
+  isomorphism; authenticate the original V0/V1 source laws.
+- [ ] The TauCeti presented-group-to-Coxeter-quotient equivalence is NOT
+  a genuine selected group-to-published-Monster action identification;
+  original V2 group/action evidence remains open.
