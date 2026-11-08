@@ -1295,3 +1295,22 @@ Additional exact verified LeanVOA donor source:
 TauCeti Monster documentation at https://taucetiproject.org/docs/TauCeti/GroupTheory/SpecificGroups/CFSG/Sporadic/Monster.html exports an exact 80-relator presented group plus mulEquivPresentedGroupCoxeterAppend (a *presentation-to-quotient* group equivalence). The source itself states it does **not** establish order, finiteness or simplicity of that presented group. The historical original identification of this quotient with the Monster is Ivanov/Bray; don't misread the TauCeti equivalence as a formal proof of a selected group ≅ the actual published Monster acting on the same Vnatural. LeanVOA Moonshine.moonshine likewise establishes the VOA, NOT the group action by Monster. V2 therefore requires the true quotient-to-Monster group identification and a source-specific original action comparison; earlier JMD all-node/pair generation compilers already pay the abstract action propagation. No duplicate group enumeration or false automatic cross-prover import.
 
 The next highest-alpha action is an authenticated canonical *same-object bridge* between the genuine LeanVOA Ynat fields and the original selected Agda construction, with independent original Y443 quotient/action maps. The source-written paired vertex data is a nontrivial build target but is not itself that bridge.
+
+
+### 2026-11-08 original pure fixed/twisted Leech field regression
+
+Source commit fdaa5ff5774adbda7ec3e8aaf10af4bd3b295a6d updates existing VNaturalOrbifoldConstruction.SelectedPairedGradedModule:
+
+- OriginalPureFTZeroLaws explicitly isolates the genuine zero-action equations on the SAME original fixed and twisted sources (zero annihilation of FF/TT/TF sectors, fixed zero-add, twisted right-zero).
+- originalPureFTModeIsNativeTwisted computes the complete four-parity mode of the pure input (fixed x, 0) acting on (0, twisted y), proving the result lies in the even twisted coordinate and equals the native original fixedTwistedMode.
+- originalPureFTModeAgreesWithLeechTwistedModule further maps that result through the ACTUAL original includePlus and proves equality with the original Leech TwistedModule.twistedMode using the previously explicit fixedTwistedIsOriginal source equation.
+
+Exact consequence, conditional only on original laws listed above:
+
+[
+operatorname{includePlus}!left(pi_T,Y_{m pair}((x,0),k)(0,y)ight)
+  =Y^{T}_{m Leech}(operatorname{includeFixed}(x),operatorname{index}(k),
+     operatorname{includePlus}(y)).
+]
+
+This is stronger than a picked four-block formula because it proves the mixed block recovers the original twisted-module operator. The source zero laws and genuine original sector operations are still inputs rather than constructed Lean-to-Agda witnesses. An authentic original-source implementation must instantiate them, and TT/TF modes and mixed Jacobi/locality remain outstanding. No Agda typecheck or FLM full-mode same-object theorem is claimed.
