@@ -217,7 +217,7 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Unrelated source was not rejected")
-    reordered = "<html>Global Climate Science " + "\\n".join(reversed(list(ANCHORS.values()))) + "</html>"
+    reordered = "<html>Global Climate Science " + "\n".join(reversed(list(ANCHORS.values()))) + "</html>"
     try:
         prepare(reordered.encode(), manifest)
     except ValueError:
@@ -260,7 +260,7 @@ def main() -> None:
     else:
         result["acquisition_mode"] = "user-supplied-original-byte-file"
     a.output.parent.mkdir(parents=True, exist_ok=True)
-    a.output.write_text(json.dumps(result, indent=2) + "\\n", encoding="utf-8")
+    a.output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(f"Source SHA256: {result['raw_sha256']}")
     print(f"Candidate span output written: {a.output} (review remains OPEN)")
 
