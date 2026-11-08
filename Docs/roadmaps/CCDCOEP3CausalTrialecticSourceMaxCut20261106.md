@@ -983,3 +983,73 @@ followed by actual exposure/outcome data *only if* implementation
 was established. If it was cancelled, the correct endpoint is
 a supported **nonimplementation determination**, not a manufactured
 causal campaign-effect estimate.
+
+## 8 November 2026 — bounded case disposition from direct former-API executive testimony
+
+A newly identified **first-person published interview**, not merely a
+secondary paraphrase, materially narrows the 1998 April-plan frontier:
+
+- **Russell Cook**, "Interview with William O'Keefe, former American
+  Petroleum Institute executive", GelbspanFiles, **20 April 2021**,
+  https://gelbspanfiles.com/?p=11851, lines 20–50.
+- The named interviewee, former API executive VP/COO **William O'Keefe**,
+  says (i) the **specific proposed communications plan** was never
+  funded or implemented, (ii) API hosted/chaired a brainstorming
+  workshop involving several organisations, which **Joe Walker did
+  not convene entirely on his own**, and (iii) he contests the
+  original attribution of a 1998 `Living on Earth` response. He
+  says the resulting document was not an adopted API/Exxon policy.
+- The interview's publisher and interviewer adopt a sympathetic
+  position toward industry climate-policy arguments. The speaker is
+  an interested former executive. His answers are **direct named
+  participant testimony as printed**, not independent financial
+  records, authenticated audio, a company vote, or judicial fact
+  findings. Do not promote the speaker's other scientific claims
+  into empirical climate-science conclusions or infer the absence
+  of broader organised climate lobbying.
+- This source is in substantive agreement with the contemporaneous
+  April 1998 NYT record: no solicited executive funders and no
+  formal approval *as of those interviews*. Walker's later
+  SourceWatch-reproduced recollection also states the project did
+  not proceed, but retains a weaker chain of attribution.
+
+**New evidence type:** `direct_former_executive_interview` in
+`ccdcoe_p3_climate_case_manifest.json` has four independently
+scoped source claims, original interview date/locator/line ranges,
+the dispute with the 1998 radio account, and null original audio,
+company financial closeout and independent implementation audit.
+`CCDCOEP3ClimateContestedAttributionExact.agda` and its P3
+Golden regression retain the direct published assertions, real
+multi-organisation planning and missing accounting independently.
+The manifest validator checks this source type and refuses to
+promote financial certification.
+
+**Selected case disposition:** the April 1998 **specific** plan is
+*historically supported as probably not formally funded or
+implemented* based on contemporary status plus two named
+participant accounts, **without a complete independent
+financial/cancellation audit**. The planning meeting and draft
+were real. This is not a determination that all industry
+climate-communications ceased, nor a zero causal effect from
+other campaigns.
+
+**Next decisive proof-of-fact gate:** signed April 17 follow-up
+minutes and decision, program-specific company accounts and
+transfers, a documented cancellation/nonadoption or an actual
+same-plan delivery trail. Until such evidence is obtained,
+a causal-treatment study **of the alleged implemented April
+draft** is not an admissible identified estimand. Independent
+campaigns and real survey/document-content observations remain
+separate scientifically viable study units.
+
+**Importer:** The pinned GovInfo HTML source still lacks an
+official raw-byte digest in the repository because container
+networking cannot resolve the source host. The memo-scoped
+source-offset extractor has its necessary duplicate-commentary
+repair but still requires running on authentic fetched bytes,
+followed by source-to-PNF semantic review.
+
+**Verification boundary:** source read-back can establish that
+these claims, proof statements and validators were written.
+Neither Agda kernel nor checked-out Python runtime receipts
+are claimed here. A named interview is not a company audit.
