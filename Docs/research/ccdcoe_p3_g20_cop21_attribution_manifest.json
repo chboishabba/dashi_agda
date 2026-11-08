@@ -283,12 +283,14 @@
     "original_official_pages_located": true,
     "official_pdf_excerpt_reviewed": true,
     "web_citation_source_status": "public text reviewed, no immutable bytes or local parser receipt",
-    "agda_source_written": false,
+    "agda_source_written": true,
     "agda_kernel_accepted": false,
     "validation_script_runtime_accepted": false,
     "full_original_document_corpus_hashed": false,
     "quantitative_institutional_diff_in_diff": false,
-    "summit_causal_influence_identified": false
+    "summit_causal_influence_identified": false,
+    "c20_visual_check": "Original C20 PDF cover screenshot inspected, printed text excerpt inspected; original PDF bytes not archived; exact extracted full text not re-coded",
+    "b20_source_status": "B20 catalog locates September 2015 recommendations and October energy forum; no original submission text independently extracted"
   },
   "remaining": [
     {
