@@ -1,3 +1,11 @@
+## 2026-11-08 — R583 literal finite Wilson span product
+
+Added `YangMillsCMP119LiteralWilsonSpanAdditiveExact.agda`, imported into `BalabanRGTOERegression`. The previously arbitrary finite test `zeroWilson`, `addWilson`, `scaleWilson` and `multiplyWilson` can now be chosen as the **canonical original literal list operators**; proves their embedding laws directly using the original R583 Wilson word product, real associativity/distributivity and one explicit original word concatenation law. The exact original OS2 product remains to be identified with pointwise multiplication; original OS Gram density/uniform continuity/full physical clustering remain uninhabited.
+
+Exact independent Python control `scripts/check_ym_r583_literal_wilson_span.py`: 99,224 Fraction identities passed. No Agda or Clay endpoint accepted.
+
+---
+
 ## 2026-11-08 — CMP119/Hamiltonian/BCH/Ward audit; R578 supersedes R572
 
 Direct source re-audit confirms the user's corrections: CMP119 is not missing (`YangMillsLiteralCMP119QuantitativeMomentsRound559Exact`, `YangMillsClayPublishedFiniteOSMomentSourceRound581Exact`), the **same reconstructed OS Hamiltonian is chosen definitionally** (`YangMillsPreferredSameHamiltonianTransferRound577Exact`), BCH/local compact-simple packages and constructor-fixed same-group operations exist (R569–R571), and Ward/Maxwell classification already exists (`YangMillsSameFamilyWardKernelSourceRound563Exact`, `YangMillsSameSystemGaussianWardKernelTheoremExact`, R549). The current shortest preferred source scheduler is `YangMillsClayCriticalPathRound578Exact`, not R572. Use the updated canonical [roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) / manifest for complete R578 status.
