@@ -8,7 +8,7 @@ This is NOT nickel chemistry or phaseless AFQMC.
 import json
 import numpy as np
 
-def run(seed=261108129, samples=50000, steps=12, dt=0.025, U=4.):
+def run(seed=261108129, samples=50000, steps=12, dt=0.025, U=4., validate=True):
     rng = np.random.default_rng(seed)
     k = np.array([[0.,-1.],[-1.,0.]])
     ev, vec = np.linalg.eigh(k)
@@ -50,8 +50,9 @@ def run(seed=261108129, samples=50000, steps=12, dt=0.025, U=4.):
     wrong_normalization=float(np.linalg.norm(sum(np.kron(a,b) for a,b in zip(A,B))/4-Tref))
     wrong_gamma=float(np.linalg.norm(np.exp(-dt*U)*np.kron(half@half,half@half)-Tref))
     assert wrong_normalization>1e-3 and wrong_gamma>1e-3
-    assert history[-1]["state_l2_error"]<0.015
-    assert history[-1]["energy_error"]<0.08
+    if validate:
+        assert history[-1]["state_l2_error"]<0.015
+        assert history[-1]["energy_error"]<0.08
     evals, evecs=np.linalg.eigh(H)
     continuous=(evecs*np.exp(-steps*dt*evals))@evecs.T@psi0
     return {"scope":"finite Hubbard HS projector, not IonQ replication",
