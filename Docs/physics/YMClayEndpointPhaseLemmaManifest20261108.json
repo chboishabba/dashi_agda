@@ -184,7 +184,8 @@
         "R331/R333 same-H conditional semigroup compiler",
         "T1 original finite-OS source owner",
         "R582 pre-gap OS0/1/2/3/5 same-family core and R583 selected H1 clustering → full OS4 attachment compiler",
-        "Literal R583 Wilson finite-span zero, add, scalar operations and source embedding equalities from actual list semantics"
+        "Literal R583 Wilson finite-span zero, add, scalar operations and source embedding equalities from actual list semantics",
+        "Finite Wilson convolution (literal word concatenation) and exact pointwise source multiplication lemma from original Wilson word product law"
       ],
       "latest_reconciliation": "R581/R462/R559/R560 finite OS inputs and OS0/5 compiler exist, plus R577 selected reconstructed Hamiltonian is definitional. Only original physical source/equivalence, genuine continuum OS applicability and transfer coordinate semantics remain. R583 means OS4 is not an independently missing abstract axiom; selected original H1 clustering semantic coverage remains the physical leaf."
     },
@@ -475,8 +476,8 @@
     {
       "family": "T1/OS4 finite Wilson test algebra",
       "owner": "DASHI/Physics/YangMills/YangMillsCMP119LiteralWilsonSpanAdditiveExact.agda",
-      "constructed": "Original literal R583 Wilson test zero/append/scale operators and their exact embedding laws",
-      "uninhabited": "Original H1 full test density, covariance uniform continuity and original product/translation compatibility"
+      "constructed": "Canonical literal finite Wilson empty/concatenation/scaling PLUS full convolution product of loop words; exact zero, sum, scale and product pointwise embedding proofs by structural induction and real ring algebra.",
+      "uninhabited": "Original actualWilson word concatenation equality, same-OS2 cylinder multiplication identification/function extensionality, source R281 Wilson test representation, physical time translation, OS Gram density and uniform-time covariance continuity/H1-to-OS4 application"
     }
   ],
   "latest_source_corrections_20261108": [
@@ -495,8 +496,8 @@
     {
       "area": "R583 finite literal Wilson span",
       "owner": "DASHI/Physics/YangMills/YangMillsCMP119LiteralWilsonSpanAdditiveExact.agda",
-      "paid": "Canonical source-defined empty list, concatenation and coefficient scaling; exact zero, sum and scale preservation under original R583.literalFiniteWilsonSpan using existing real ring laws",
-      "remaining": "Original Wilson-word product/OS2 multiplication, selected literal test coverage, physical translation, H2 OS-Gram density, uniform-in-time covariance continuity and H1-to-OS4 application"
+      "paid": "Canonical literal finite Wilson empty/concatenation/scaling PLUS full convolution product of loop words; exact zero, sum, scale and product pointwise embedding proofs by structural induction and real ring algebra.",
+      "remaining": "Original actualWilson word concatenation equality, same-OS2 cylinder multiplication identification/function extensionality, source R281 Wilson test representation, physical time translation, OS Gram density and uniform-time covariance continuity/H1-to-OS4 application"
     }
   ]
 }
