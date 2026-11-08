@@ -37,6 +37,7 @@ python3 scripts/check_ccdcoe_p3_causal_trialectic.py
 python3 scripts/check_ccdcoe_p3_climate_case.py
 python3 scripts/check_ccdcoe_p3_gcc_campaign.py
 python3 scripts/measure_ccdcoe_p3_gcc_media.py --self-test
+python3 scripts/measure_ccdcoe_p3_gcc_dual_coder.py --self-test
 python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
 
 # The repo's canonical Agda 2.9 parallel checker owns compiler resolution,
