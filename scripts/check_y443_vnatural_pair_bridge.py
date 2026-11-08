@@ -62,6 +62,8 @@ GRIESS_SEED_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMGriessGeneratorsUVEndcapExac
 CANONICAL_QUOTIENT = ROOT / "DASHI/Moonshine/Y443FLMCanonicalReferenceFromQuotientExact.agda"
 DGL_UNIQUENESS = ROOT / "DASHI/Moonshine/Y443DGLUniquenessSelectedFLMExact.agda"
 WEAK_VOA_NO_GO = ROOT / "DASHI/Moonshine/Y443FLMWeakVOACoreNoPromotionExact.agda"
+DGL_WEAK_ROUTE_NO_GO = ROOT / "DASHI/Moonshine/Y443DGLWeakCertificateNoGoExact.agda"
+MONSTER_GRAVITY_CROSSWALK = ROOT / "DASHI/Moonshine/MonsterSpecialGravityKKWeightTwoCrosswalkExact.agda"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -171,7 +173,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, CANONICAL_QUOTIENT, DGL_UNIQUENESS, WEAK_VOA_NO_GO, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, CANONICAL_QUOTIENT, DGL_UNIQUENESS, WEAK_VOA_NO_GO, DGL_WEAK_ROUTE_NO_GO, MONSTER_GRAVITY_CROSSWALK, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -336,6 +338,19 @@ def assert_source_scope() -> None:
         for symbol in markers:
             if symbol not in filetext:
                 raise AssertionError(f"missing DGL true-canonical / no-promotion source {symbol}")
+    for owner, markers in (
+        (DGL_WEAK_ROUTE_NO_GO, ("vacuousHolomorphicC2",
+                                "vacuousHigherGradeBound")),
+        (MONSTER_GRAVITY_CROSSWALK, (
+            "gravitoDilatonSymmetricCountIs300", "nontrivialMonsterCountMatches",
+            "pFormSpectrumIsLeechNormFourOrbitCount",
+            "actualFourDimensionalYMMassGapProved",
+        )),
+    ):
+        data = owner.read_text()
+        for symbol in markers:
+            if symbol not in data:
+                raise AssertionError(f"missing Monster/FLM/KK source crosswalk {symbol}")
     print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
