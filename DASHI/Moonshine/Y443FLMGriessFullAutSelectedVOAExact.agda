@@ -136,31 +136,6 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
   -- generator action. Structural recursion below is entirely source-native.
 
   mapTerm : SelectedVOAAutomorphism → GeneratedTerm → GeneratedTerm
-      mapTerm a vacuum = vacuum
-      mapTerm a (sourceWeightTwo x) =
-        sourceWeightTwo (weightTwoAction a x)
-      mapTerm a (addTerm l r) = addTerm (mapTerm a l) (mapTerm a r)
-      mapTerm a (scaleTerm s l) = scaleTerm s (mapTerm a l)
-      mapTerm a (modeTerm l k r) = modeTerm (mapTerm a l) k (mapTerm a r)
-      mapTerm a (translateTerm l) = translateTerm (mapTerm a l)
-  actionOnTerm a vacuum = actionVacuum a
-  actionOnTerm a (sourceWeightTwo x) = restrictionAgrees a x
-  actionOnTerm a (addTerm l r) =
-    trans (actionAdd a (evaluate l) (evaluate r))
-      (cong₂ (VOA.GradedModule._+_ GM)
-        (actionOnTerm a l) (actionOnTerm a r))
-  actionOnTerm a (scaleTerm s l) =
-    trans (actionScale a s (evaluate l))
-      (cong (VOA.GradedModule._·_ GM s) (actionOnTerm a l))
-  actionOnTerm a (modeTerm l k r) =
-    trans (actionMode a (evaluate l) k (evaluate r))
-      (cong₂ (λ x y → VOA.VertexOperatorData.mode Y x k y)
-        (actionOnTerm a l) (actionOnTerm a r))
-  actionOnTerm a (translateTerm l) =
-    trans (actionTranslation a (evaluate l))
-      (cong (VOA.VertexOperatorData.translation Y) (actionOnTerm a l))
-
-  mapTerm : SelectedVOAAutomorphism → GeneratedTerm → GeneratedTerm
   mapTerm a vacuum = vacuum
   mapTerm a (sourceWeightTwo x) = sourceWeightTwo (weightTwoAction a x)
   mapTerm a (addTerm l r) = addTerm (mapTerm a l) (mapTerm a r)
