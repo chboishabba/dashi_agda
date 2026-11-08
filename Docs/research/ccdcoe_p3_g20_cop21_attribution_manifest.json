@@ -227,11 +227,12 @@
     {
       "id": "c20_voice",
       "source": "c20Turkey2015",
-      "anchor": "The C20 calls upon G20 leaders",
+      "anchor": "integrating inclusive growth, gender equality, sustainability",
       "frame": "civil_participation_and_sustainability",
       "action": "stakeholder_recommendation_only",
       "speaker": "Civil 20 Turkey participant organisations",
-      "source_type": "civil_society_recommendation"
+      "source_type": "civil_society_recommendation",
+      "source_locator_note": "C20 Turkey 2015 communiqué, summary recommendation paragraph; authored by C20 participant organisations, not leaders."
     },
     {
       "id": "b20_index",
@@ -292,7 +293,8 @@
     "quantitative_institutional_diff_in_diff": false,
     "summit_causal_influence_identified": false,
     "c20_visual_check": "Original C20 PDF cover screenshot inspected, printed text excerpt inspected; original PDF bytes not archived; exact extracted full text not re-coded",
-    "b20_source_status": "B20 catalog locates September 2015 recommendations and October energy forum; no original submission text independently extracted"
+    "b20_source_status": "B20 catalog locates September 2015 recommendations and October energy forum; no original submission text independently extracted",
+    "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix"
   },
   "remaining": [
     {
