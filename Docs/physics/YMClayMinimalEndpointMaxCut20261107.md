@@ -1,3 +1,11 @@
+## 8 November — corrected latest R572 / R571 source-first frontier
+
+**Source audit correction:** the earlier PH0–PH4 / YM01–YM10 lists describe ENDPOINT INPUTS, not ten missing mathematical constructions. The canonical [roadmap](YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) and [manifest](YMClayEndpointPhaseLemmaManifest20261108.json) now document what exists in SU(N), Haar, Wilson, R445 RG, chosen Euclidean \(\mathbb R^4\), native reflected OS, Cartan–Killing classification and all-group construction. The **actual preferred proof cut is seven source families in `YangMillsClayCriticalPathRound572Exact`: A3 (projective Wilson), T1 (same finite/RG/OS), T5 (CMP119 original moments), B1 (full Wilson WEXT), B2 (same-H gap), G1 (same actual compact simple group), H6 (same-family Ward kernel).** In particular, the R569–R571 constructor makes bracket/exp/log/Ad and five-block group alignment definitional; do not ask to rebuild these.
+
+**Still requires genuine physical input:** selected A3 positive/projective event semantics and finite-projection realization; real cutoff/volume-uniform CMP119 moments and large-field Wilson bounds; original same-source OS limits and full nonvacuum gap; per-group actual local BCH/Haar estimates and five-block physics; same-family Ward/nontrivial interaction. The R572 G1 endpoint remains `conditional`; a machine-checked *compiler* status is not proof of the actual Clay problem. The latest R572/R569–R571 files were directly verified as present on PR #1444's own branch.
+
+---
+
 ## 8 November 2026 — canonical phase/deliverables and exact YM01–YM10 roadmap
 
 The **current canonical implementation plan**, exact targets and acceptance gates are now [YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md](YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) and machine-readable [YMClayEndpointPhaseLemmaManifest20261108.json](YMClayEndpointPhaseLemmaManifest20261108.json), with a source-owner consistency checker at `scripts/check_ym_clay_phase_lemma_manifest.py`.
