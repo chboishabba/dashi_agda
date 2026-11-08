@@ -150,6 +150,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             "contemporaneous_report_organiser_executives_not_yet_approached",
         "retrospective_organiser_nonimplementation_account":
             "attributed_secondary_statement_not_final_receipt",
+        "named_1998_data_center_never_formed":
+            "amicus_assertion_no_independent_registry_witness",
     }
     activities = data["independent_activity_and_document_measurements"]
     assert {e["id"] for e in activities} == {
@@ -233,8 +235,19 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "original_communication_or_interview_receipt",
         "independent_corroboration", "actual_funding_receipt",
         "actual_implementation_receipt"))
+    amicus = data["litigation_amicus_unformed_center_claim"]
+    assert amicus["id"] == "amicus_9th_circuit_2019_03_20"
+    assert amicus["filing_date"] == "2019-03-20"
+    assert amicus["case_docket"] == "18-16663"
+    assert amicus["source_line_range"] == [1015, 1020]
+    assert amicus["document_kind"] == (
+        "amicus_brief_in_support_of_plaintiffs_appellants")
+    assert all(amicus[key] is None for key in (
+        "independent_registry_certificate", "judicial_fact_finding"))
+    assert amicus["proves_no_successor_or_equivalent_program"] is False
+    assert amicus["proves_total_1998_plan_cancellation"] is False
     source_lookup = (
-        {c["id"] for c in later} | {primary["id"]} |
+        {c["id"] for c in later} | {primary["id"], amicus["id"]} |
         {e["id"] for e in activities} | {corpus["id"], pre_api["id"],
         contemporary["id"], retrospective["id"]})
     assert all(set(q["source_ids"]) <= source_lookup
