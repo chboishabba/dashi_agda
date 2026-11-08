@@ -2,6 +2,7 @@ module DASHI.Moonshine.VNaturalOrbifoldConstruction where
 
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Integer.Base using (ℤ)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Product using (_×_; _,_)
@@ -717,3 +718,111 @@ module SelectedPairedGradedModule
     OriginalFixedVOAAndTwistedEvenSource → VOA.GradedModule
   actualSourceGradedPair source =
     pairedGradedModule (nativeFixedAndTwistedGrading source)
+
+
+  ----------------------------------------------------------------------
+  -- V0.4: ORIGINAL Z/2-PARITY FOUR-BLOCK MODE SOURCE
+  --
+  -- Fixed x fixed -> fixed is transported from the original fixedVOA.
+  -- Fixed x twisted -> twisted is tied to the ORIGINAL Leech theta-
+  -- twisted module via an explicit integer-index conversion and a
+  -- source-equality proof. The opposite mixed and twisted x twisted
+  -- operations remain genuine missing original FLM orbifold data.
+  -- The formula expands (x+y)_(n)(u+v) into its four parity channels.
+  -- This is NOT yet an all-mode VOA or a Jacobi/locality theorem.
+  ----------------------------------------------------------------------
+
+  FixedOriginalModes : Set
+  FixedOriginalModes = FixedOriginalState
+
+  originalFixedSectorMode :
+    (source : OriginalFixedVOAAndTwistedEvenSource) →
+    Fixed → ℤ → Fixed → Fixed
+  originalFixedSectorMode source x k y =
+    fixedFromOriginal source
+      (VOA.VertexOperatorData.mode
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed))
+        (fixedToOriginal source x) k (fixedToOriginal source y))
+
+  originalFixedModeDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (x y : Fixed) (k : ℤ) →
+    fixedToOriginal source (originalFixedSectorMode source x k y)
+    ≡ VOA.VertexOperatorData.mode
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed))
+        (fixedToOriginal source x) k (fixedToOriginal source y)
+  originalFixedModeDecoded source x y k =
+    fixedOriginalAfterFrom source
+      (VOA.VertexOperatorData.mode
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed))
+        (fixedToOriginal source x) k (fixedToOriginal source y))
+
+  record OriginalMixedParitySource
+    (source : OriginalFixedVOAAndTwistedEvenSource) : Setω where
+    field
+      integerTwistIndex :
+        ℤ → TwistedModule.TwistIndex twisted
+
+      -- Native original Leech twisted module's fixed-twisted mode.
+      fixedTwistedMode :
+        Fixed → ℤ → Twisted → Twisted
+
+      fixedTwistedIsOriginal :
+        (x : Fixed) (k : ℤ) (y : Twisted) →
+        TwistedEvenSector.includePlus plus (fixedTwistedMode x k y)
+        ≡ TwistedModule.twistedMode twisted
+            (FixedPointVOA.includeFixed fixed x)
+            (integerTwistIndex k)
+            (TwistedEvenSector.includePlus plus y)
+
+      -- Independent source laws needed by FLM cross/intertwining.
+      twistedFixedMode :
+        Twisted → ℤ → Fixed → Twisted
+      twistedTwistedMode :
+        Twisted → ℤ → Twisted → Fixed
+
+  open OriginalMixedParitySource public
+
+  originalParityPairMode :
+    (source : OriginalFixedVOAAndTwistedEvenSource) →
+    OriginalMixedParitySource source →
+    (Fixed × Twisted) →
+    ℤ →
+    (Fixed × Twisted) →
+    (Fixed × Twisted)
+  originalParityPairMode source cross (x , y) k (u , v) =
+    ( fixedAdd (nativeFixedAndTwistedGrading source)
+        (originalFixedSectorMode source x k u)
+        (twistedTwistedMode cross y k v)
+    , twistedAdd (nativeFixedAndTwistedGrading source)
+        (fixedTwistedMode cross x k v)
+        (twistedFixedMode cross y k u)
+    )
+
+  -- Two parity projections of the SAME explicitly constructed mode.
+  originalParityFixedOutput :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (x u : Fixed) (y v : Twisted)
+    (k : ℤ) →
+    Data.Product.proj₁
+      (originalParityPairMode source cross (x , y) k (u , v))
+    ≡ fixedAdd (nativeFixedAndTwistedGrading source)
+        (originalFixedSectorMode source x k u)
+        (twistedTwistedMode cross y k v)
+  originalParityFixedOutput source cross x u y v k = refl
+
+  originalParityTwistedOutput :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (x u : Fixed) (y v : Twisted)
+    (k : ℤ) →
+    Data.Product.proj₂
+      (originalParityPairMode source cross (x , y) k (u , v))
+    ≡ twistedAdd (nativeFixedAndTwistedGrading source)
+        (fixedTwistedMode cross x k v)
+        (twistedFixedMode cross y k u)
+  originalParityTwistedOutput source cross x u y v k = refl
