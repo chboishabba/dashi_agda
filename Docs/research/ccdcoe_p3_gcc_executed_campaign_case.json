@@ -232,7 +232,23 @@
     "estimand_status": "not_identified",
     "confidence_intervals": null,
     "measured_outcome": null,
-    "non_detection_not_zero_effect": true
+    "non_detection_not_zero_effect": true,
+    "original_byte_check_required": true,
+    "original_byte_check_implementation": "scripts/measure_ccdcoe_p3_gcc_media.py --source-root DIR, sha256 of each item relative source_file compared to source_sha256, rejects symlink and path traversal",
+    "dual_coder_protocol": {
+      "script": "scripts/measure_ccdcoe_p3_gcc_dual_coder.py",
+      "fields": [
+        "second_coder_id",
+        "second_frame",
+        "second_review_receipt"
+      ],
+      "description": "Two independently attributed frame codings per byte-verified article; finite coding-ambiguity bounds on descriptive four-cell frame contrast; Scott's pi, same-code agreement and disagreement count.",
+      "statistical_uncertainty_not_identified": true,
+      "causal_effect_not_identified": true,
+      "review_status": "code_and_synthetic_runtime_verified_original_articles_not_ingested",
+      "not_the_same_as_trumbo_1996_pi": true,
+      "no_pretense_of_independent_reviewer_audit": true
+    }
   },
   "independent_replication": {
     "id": "exxon_2021_180",
@@ -277,12 +293,12 @@
     {
       "id": "P1",
       "target": "Produce complete article-level dated sampling frame, candidate ITIR/SLR EventPNF and independent manual claim codebook with review receipts",
-      "status": "two_indexed_items_only"
+      "status": "original_indexed_items_only_dual_coder_and_source_digest_consumer_ready"
     },
     {
       "id": "P2",
       "target": "Compute observed contemporaneous media-frame prevalence and uncertainty, not self-claimed impact",
-      "status": "published_attention_baseline_located_article_level_GCC_prepost_not_measured"
+      "status": "independent_Trumbo_attention_baseline_located_coder_bounds_implemented_real_GCC_prepost_not_measured"
     },
     {
       "id": "P3",
