@@ -79,7 +79,7 @@ GravityTracelessMetric : Set
 GravityTracelessMetric = Fin reducedGravitonPolarizations
 
 GravityLeechComparison : Set
-GravityLeechComparison = FLM.UntwistedNonconformalCoordinate
+GravityLeechComparison = Fin leechEvenNormFourCount
 
 GravityTwistedComparison : Set
 GravityTwistedComparison = FLM.TwistedInvariantWeightTwoCoordinate
