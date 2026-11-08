@@ -36,8 +36,8 @@ def wilson(success: int, n: int, z: float = 1.96) -> list[float]:
     half = z * sqrt(p*(1-p)/n + z*z/(4*n*n))/d
     return [round(max(0.0,center-half),6),round(min(1.0,center+half),6)]
 
-def analyse(rows: list[dict], focus: str) -> dict:
-    if focus not in FRAMES - {"other_or_undetermined"}:
+def analyse(rows: list[dict], focus: str, intervention_date: str,\n            intervention_receipt: str) -> dict:
+    from datetime import date\n    if not intervention_receipt or intervention_receipt.startswith("UNVERIFIED"):\n        raise ValueError("Source-specific intervention receipt required")\n    try:\n        cutoff = date.fromisoformat(intervention_date)\n    except (ValueError, TypeError):\n        raise ValueError("Invalid evidence-backed intervention date") from None\n    if focus not in FRAMES - {"other_or_undetermined"}:
         raise ValueError("Invalid substantive frame")
     seen = set()
     cells: dict[tuple[str,str], list[bool]] = {
@@ -95,7 +95,7 @@ def analyse(rows: list[dict], focus: str) -> dict:
     descriptive_did=(proportion(t,"after")-proportion(t,"before")-
                      proportion(c,"after")+proportion(c,"before"))
     return {"schema":"dashi.ccdcoe.p3.gcc_media_descriptive.v1",
-            "focus":focus,"article_count":len(rows),
+            "focus":focus,"article_count":len(rows),\n            "intervention_date":intervention_date,\n            "intervention_receipt":intervention_receipt,
             "counts":counts,
             "descriptive_difference_in_differences":round(descriptive_did,6),
             "causal_attribution":"NOT_IDENTIFIED",
@@ -121,12 +121,12 @@ def self_test() -> None:
                         arm=="GCC-linked-outlet" and period=="after") else "other_or_undetermined",
                     "coder_id":"SYNTHETIC","review_receipt":"SYNTHETIC-NOT-ACTUAL",
                     "source_text_reviewed":True})
-    result=analyse(synthetic,"science_uncertainty")
+    result=analyse(synthetic,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
     assert result["article_count"]==12
     assert result["causal_attribution"]=="NOT_IDENTIFIED"
     assert result["descriptive_difference_in_differences"]==0.666667
     try:
-        analyse(synthetic[:-3],"science_uncertainty")
+        analyse(synthetic[:-3],"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
     except ValueError:
         pass
     else:
@@ -134,7 +134,7 @@ def self_test() -> None:
     broken=[dict(x) for x in synthetic]
     broken[0]["review_receipt"]=None
     try:
-        analyse(broken,"science_uncertainty")
+        analyse(broken,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
     except ValueError:
         pass
     else:
@@ -145,7 +145,7 @@ def main() -> None:
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--input",type=Path)
     p.add_argument("--output",type=Path)
-    p.add_argument("--focus",default="science_uncertainty")
+    p.add_argument("--focus",default="science_uncertainty")\n    p.add_argument("--intervention-date",help="YYYY-MM-DD backed by original source")\n    p.add_argument("--intervention-receipt",help="Source ID for actual intervention onset")
     p.add_argument("--self-test",action="store_true")
     a=p.parse_args()
     if a.self_test:
@@ -154,7 +154,7 @@ def main() -> None:
     if a.input is None or a.output is None:
         p.error("--input and --output required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
-    result=analyse(rows,a.focus)
+    result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,sort_keys=True,indent=2)+"\n",encoding="utf-8")
     print(f"Wrote descriptive results for {result['article_count']} reviewed items; causal attribution NOT IDENTIFIED")
