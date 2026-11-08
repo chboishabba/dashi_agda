@@ -170,7 +170,9 @@
         "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
         "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda",
         "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSMomentSourceRound581Exact.agda",
-        "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda"
+        "DASHI/Physics/YangMills/YangMillsPreferredSameHamiltonianTransferRound577Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSCoreMomentSourceRound582Exact.agda"
       ],
       "missing": "Inhabit original cutoff-changing positive-time reflection compatibility and same E1 limit reconstructed H_OS; no duplicate OS framework needed.",
       "depends": [
@@ -179,9 +181,10 @@
       "already_paid": [
         "Finite reflected Wilson/OS form pullback",
         "R331/R333 same-H conditional semigroup compiler",
-        "T1 original finite-OS source owner"
+        "T1 original finite-OS source owner",
+        "R582 pre-gap OS0/1/2/3/5 same-family core and R583 selected H1 clustering → full OS4 attachment compiler"
       ],
-      "latest_reconciliation": "R581/R462/R559/R560 finite OS inputs and OS0/5 compiler exist, plus R577 selected reconstructed Hamiltonian is definitional. Only original physical source/equivalence, genuine continuum OS applicability and transfer coordinate semantics remain."
+      "latest_reconciliation": "R581/R462/R559/R560 finite OS inputs and OS0/5 compiler exist, plus R577 selected reconstructed Hamiltonian is definitional. Only original physical source/equivalence, genuine continuum OS applicability and transfer coordinate semantics remain. R583 means OS4 is not an independently missing abstract axiom; selected original H1 clustering semantic coverage remains the physical leaf."
     },
     {
       "id": "YM07",
@@ -205,7 +208,9 @@
       "status": "open_physical_input",
       "source_owners": [
         "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
-        "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda"
+        "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSCoreMomentSourceRound582Exact.agda"
       ],
       "missing": "Original physical-rate spectrum bound on entire Omega-perp of H_OS in continuum physical units; no finite or selected-probe gap promotion.",
       "depends": [
@@ -217,9 +222,10 @@
       ],
       "already_paid": [
         "R333/R316 conditional original-source semigroup-to-gap compiler",
-        "same-family mass-gap endpoint interface"
+        "same-family mass-gap endpoint interface",
+        "R582 pre-gap OS0/1/2/3/5 same-family core and R583 selected H1 clustering → full OS4 attachment compiler"
       ],
-      "latest_reconciliation": "R577 eliminates posthoc H equality; R331 transfer-energy/decay coordinate must be physically realized, and entire nonvacuum full-sector strict positive spectrum bound must be established on that SAME reconstruction."
+      "latest_reconciliation": "R577 eliminates posthoc H equality; R331 transfer-energy/decay coordinate must be physically realized, and entire nonvacuum full-sector strict positive spectrum bound must be established on that SAME reconstruction. R583 means OS4 is not an independently missing abstract axiom; selected original H1 clustering semantic coverage remains the physical leaf."
     },
     {
       "id": "YM09",
@@ -248,7 +254,9 @@
         "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
         "DASHI/Physics/YangMills/YangMillsActualGroupSourceFirstCompleteRound571Exact.agda",
         "DASHI/Physics/YangMills/YangMillsActualGroupQuantitativeConstructorRound569Exact.agda",
-        "DASHI/Physics/YangMills/YangMillsConcreteStructuralSemanticsRound517Exact.agda"
+        "DASHI/Physics/YangMills/YangMillsConcreteStructuralSemanticsRound517Exact.agda",
+        "DASHI/Physics/YangMills/CompactLieAnalyticPackage.agda",
+        "DASHI/Physics/YangMills/CompactSimpleQuantitativeCoverage.agda"
       ],
       "missing": "No generic group classification or SU(N) extension rewrite. Supply actual per-group compact-simple structural witness, uniform local quantitative BCH/Haar estimates and same-group five-block physical data, then inhabit G1 full endpoint.",
       "depends": [
@@ -263,7 +271,8 @@
       "already_paid": [
         "Cartan–Killing classical and exceptional classification/index families",
         "R517 selected R4/compact-simple structural constructor",
-        "R569–R571 actual-group operation alignment and five-block compiler"
+        "R569–R571 actual-group operation alignment and five-block compiler",
+        "CompactLieAnalyticPackage.QuantitativeBCH and CompactSimpleQuantitativeCoverage exact compact-simple group-index elimination"
       ]
     }
   ],
@@ -343,11 +352,10 @@
       "id": "T1",
       "short": "Original finite/RG and OS same-family source",
       "owner": "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSMomentSourceRound581Exact.agda",
-      "already_paid": "R581 published finite Euclidean/bosonic/Wilson reflection positivity and literal R559 moments feed R462; independent OS0/OS5 inputs no longer required",
+      "already_paid": "R581 published finite Euclidean/bosonic/Wilson reflection positivity and literal R559 moments feed R462; independent OS0/OS5 inputs no longer required; R582 pre-gap core + R583 same-family H1→OS4 attachment",
       "original_remaining": [
-        "published_finite_Euclidean_bosonic_Wilson_RP_applicability_same_source",
-        "actual_literal_CMP119_exponential_moments",
-        "canonical_OS05_closure_and_physical_OS4_clustering"
+        "original_CMP119_finite_OS_applicability_and_literal_quantitative_moments",
+        "actual_same_system_selected_H1_clustering_and_dense_continuity_OS4_interpretation"
       ],
       "maps_to": [
         "YM01",
@@ -400,11 +408,10 @@
       "id": "G1",
       "short": "Actual compact-simple all-group source",
       "owner": "DASHI/Physics/YangMills/YangMillsActualGroupSourceFirstCompleteRound571Exact.agda",
-      "already_paid": "A/B/C/D and exceptional index coverage, constructor-fixed actual group bracket/exp/log/Ad and aligned five-block source",
+      "already_paid": "A/B/C/D and exceptional index coverage, constructor-fixed actual group bracket/exp/log/Ad and aligned five-block source; standard imported QuantitativeBCH package and compact-simple coverage present",
       "original_remaining": [
-        "actual_structural_compact_simple_source_for_each_group",
-        "actual_group_quantitative_local_BCH_Haar_bounds",
-        "actual_five_block_physical_group_data"
+        "actual_selected_group_specific_quantitative_BCH_Haar_bounds_inhabited",
+        "actual_5_block_physical_group_data"
       ],
       "maps_to": [
         "YM10"
@@ -425,7 +432,7 @@
       ]
     }
   ],
-  "latest_selected_cut": "R578 (supersedes R572)",
+  "latest_selected_cut": "R583 H1→OS4 atop R582 pre-gap OS core; R578 seven-family critical path remains",
   "latest_advanced_sources": [
     {
       "family": "T5",
@@ -456,6 +463,26 @@
       "owner": "DASHI/Physics/YangMills/YangMillsActualGroupQuantitativeConstructorRound569Exact.agda",
       "constructed": "Source-first bracket/exp/log/Ad and five-block alignment",
       "uninhabited": "literalRound569ActualGroupQuantitativeBoundsLevel = conditional"
+    },
+    {
+      "family": "T1/OS4",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda",
+      "constructed": "Selected H1 continuum clustering→full same-Schwinger OS4 proof and attachment compiler after R582 pre-gap OS core",
+      "uninhabited": "literalRound583SelectedClusteringMeansOS4Level = conditional"
+    }
+  ],
+  "latest_source_corrections_20261108": [
+    {
+      "area": "BCH",
+      "owner": "DASHI/Physics/YangMills/CompactLieAnalyticPackage.agda",
+      "paid": "QuantitativeBCH record gives same-group exp(bch X Y)=exp X exp Y, cubic remainder bounds, local chart; CompactSimpleQuantitativeCoverage delivers group-indexed packages; R569 constructor pins the chosen group operations.",
+      "remaining": "Actually inhabit the quantitative/local bound authority at original selected compact group and physically uniform cutoff, not a new abstract BCH theorem."
+    },
+    {
+      "area": "CMP119 OS4",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda",
+      "paid": "R582 constructs pre-gap OS0/1/2/3/5 core; R583's selectedH1ClusteringMeansFullOS4 and asCoreOS4Attachment compile H1 selected continuum clustering into full OS4 of that exact continuum Schwinger family, conditional on CMP119CoreH1OS4Meaning.",
+      "remaining": "Inhabit exact same-source H1 clustering semantic application, dense Wilson-product coverage, and continuity of connected covariance on original full physical observable family. R583 marks literalRound583SelectedClusteringMeansOS4Level conditional."
     }
   ]
 }
