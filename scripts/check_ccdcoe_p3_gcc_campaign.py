@@ -113,6 +113,23 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert second["doi"] == "10.1016/j.oneear.2021.04.014"
     assert second["dataverse_doi"] == "10.7910/DVN/XXQUKJ"
     assert second["reported_documents"] == 180
+    assert second["published_sample_composition"] == {
+        "internal_documents": 32,
+        "peer_reviewed_publications": 72,
+        "advertorials_taking_any_position": 76,
+        "sum": 180,
+        "source": "One Earth 2021 Experimental procedures, data and corpora; publisher excerpt",
+        "evidence_type": "published_corpus_construction_counts_not_original_document_recode",
+        "all_document_provenance_reviewed": False,
+    }
+    counts = second["published_sample_composition"]
+    assert counts["internal_documents"] + counts["peer_reviewed_publications"] + counts["advertorials_taking_any_position"] == counts["sum"]
+    assert second["original_180_article_text_available_for_replication"] is False
+    assert second["subjects_of_rhetorical_analysis"] == [
+        "climate-risk-as-uncertainty",
+        "consumer-demand-and-individual-responsibility",
+        "fossil-fuel-savior-frame",
+    ]
     assert second["original_catalog_in_supplement"] == "S7"
     assert second["access"] == "reasonable request by qualified researchers"
     assert second["original_pdf_reproduction_restricted_by_copyright"]
@@ -142,6 +159,9 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
         "independent_published_attention_windows": len(baseline["observations"]),
         "published_frame_coder_pi": baseline["reported_reliability"]["value"],
         "exxon_2021_documents_reported": second["reported_documents"],
+        "exxon_2021_internal_count": counts["internal_documents"],
+        "exxon_2021_scientific_count": counts["peer_reviewed_publications"],
+        "exxon_2021_advertorial_count": counts["advertorials_taking_any_position"],
         "exxon_2021_reanalysis": "NOT_EXECUTED",
         "remaining_empirical_gates": len(gates),
     }
