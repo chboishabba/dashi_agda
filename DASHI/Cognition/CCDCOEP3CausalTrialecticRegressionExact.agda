@@ -24,6 +24,7 @@ import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact as GCC
 import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact as Trumbo
 import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact as Institution
+import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact as Compliance
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -359,3 +360,32 @@ noEndorsementFromSummitCitation :
     Institution.hamburgSource ≡ false
 noEndorsementFromSummitCitation =
   Institution.noEndorsementFromQuotation
+
+-- Original empirical ownership: G20 Research Group, NOT leaders' own
+-- self-evaluation. Different selected topic and year denominators.
+brisbaneClimateG20RGObserved :
+  Compliance.reportedPercent Compliance.brisbaneClimate ≡ 55
+brisbaneClimateG20RGObserved =
+  Compliance.brisbaneClimateReported
+
+brisbaneFossilG20RGObserved :
+  Compliance.reportedPercent Compliance.brisbaneFossil ≡ 28
+brisbaneFossilG20RGObserved =
+  Compliance.brisbaneFossilReported
+
+antalyaFossilG20RGObserved :
+  Compliance.reportedPercent Compliance.antalyaFossil ≡ 33
+antalyaFossilG20RGObserved =
+  Compliance.antalyaFossilReported
+
+fossilScoreComparisonArithmeticOnly :
+  Compliance.reportedPercent Compliance.brisbaneFossil + 5
+  ≡ Compliance.reportedPercent Compliance.antalyaFossil
+fossilScoreComparisonArithmeticOnly =
+  Compliance.publishedFossilScoreDifference
+
+noInventedIndustryAttributionForG20RG :
+  Compliance.IndependentEvaluation.causalGCCOrExxonEffectMeasured
+    (Compliance.study Compliance.brisbaneFinal2014) ≡ false
+noInventedIndustryAttributionForG20RG =
+  Compliance.noReportedClimateCausalInfluence
