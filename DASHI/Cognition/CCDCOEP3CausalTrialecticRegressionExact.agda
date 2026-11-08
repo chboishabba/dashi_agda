@@ -267,3 +267,23 @@ laterOrganiserAttributionIsNotAuditedExpenditure :
     Contested.walkerAttributedRetrospective ≡ false
 laterOrganiserAttributionIsNotAuditedExpenditure =
   Contested.retrospectiveIsNotFundProof
+
+-- Source scope: direct published 2021 interview is first-person
+-- testimony, not a signed company financial closeout.
+namedExecutive2021SaysNonfunding :
+  Contested.FormerExecutive2021Account.saysSpecificPlanNeverFunded
+    Contested.okeefe2021AttributedAccount ≡ true
+namedExecutive2021SaysNonfunding =
+  Contested.publishedNamedParticipantSaysNoFunding
+
+namedExecutive2021SaysWorkshopOccurred :
+  Contested.FormerExecutive2021Account.saysMultiOrganisationWorkshopOccurred
+    Contested.okeefe2021AttributedAccount ≡ true
+namedExecutive2021SaysWorkshopOccurred =
+  Contested.publishedNamedParticipantSaysPlanningOccurred
+
+namedExecutive2021DoesNotSupplyAccounting :
+  Contested.FormerExecutive2021Account.independentCompanyAccountingAdmitted
+    Contested.okeefe2021AttributedAccount ≡ false
+namedExecutive2021DoesNotSupplyAccounting =
+  Contested.directInterviewIsNotIndependentAccounting
