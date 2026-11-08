@@ -88,6 +88,17 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert len(design["frame_categories"]) == 5
     assert "other_or_undetermined" in design["frame_categories"]
     assert "document acquisition bias" in design["required_covariates"]
+    assert design["original_byte_check_required"] is True
+    assert "sha256" in design["original_byte_check_implementation"]
+    dual = design["dual_coder_protocol"]
+    assert dual["script"] == "scripts/measure_ccdcoe_p3_gcc_dual_coder.py"
+    assert dual["fields"] == [
+        "second_coder_id", "second_frame", "second_review_receipt"]
+    assert dual["statistical_uncertainty_not_identified"] is True
+    assert dual["causal_effect_not_identified"] is True
+    assert dual["not_the_same_as_trumbo_1996_pi"] is True
+    assert dual["no_pretense_of_independent_reviewer_audit"] is True
+
 
     baseline = data["independent_media_baseline"]
     assert baseline["id"] == "trumbo_1996_five_newspaper_content_study"
@@ -140,6 +151,10 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
 
     gates = data["acceptance_gates"]
     assert [g["id"] for g in gates] == ["P0","P1","P2","P3","P4","P5"]
+    assert gates[1]["status"] == (
+        "original_indexed_items_only_dual_coder_and_source_digest_consumer_ready")
+    assert gates[2]["status"] == (
+        "independent_Trumbo_attention_baseline_located_coder_bounds_implemented_real_GCC_prepost_not_measured")
     assert all(g["status"] != "complete" for g in gates)
     assert "harrisonFirmCaseHistory" in agda
     assert "gccHeldMediaClippings1993" in agda
@@ -148,6 +163,7 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert "selectedExxonAccess" in agda
     assert "import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact" in golden
     assert "CCDCOEP3Trumbo1996IndependentMediaBaselineExact.agda" in focused
+    assert "measure_ccdcoe_p3_gcc_dual_coder.py --self-test" in focused
     assert "import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact" in golden
     assert "CCDCOEP3GCCExecutedCampaignSourceExact.agda" in focused
     return {
@@ -158,6 +174,7 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
         "measured_media_causal_effects": 0,
         "independent_published_attention_windows": len(baseline["observations"]),
         "published_frame_coder_pi": baseline["reported_reliability"]["value"],
+        "dual_coder_ambiguity_protocol": "SOURCE_BYTE_VERIFIED",
         "exxon_2021_documents_reported": second["reported_documents"],
         "exxon_2021_internal_count": counts["internal_documents"],
         "exxon_2021_scientific_count": counts["peer_reviewed_publications"],
