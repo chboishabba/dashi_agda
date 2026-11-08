@@ -237,3 +237,62 @@ retrospectiveIsNotFundProof :
   RetrospectiveAttribution.negativeAccountingIndependentReceipt
     walkerAttributedRetrospective ≡ false
 retrospectiveIsNotFundProof = refl
+
+------------------------------------------------------------------------
+-- DIRECT RETROSPECTIVE NAMED EXECUTIVE INTERVIEW, April 20, 2021:
+-- Russell Cook interviews William O'Keefe (former API VP/COO).
+-- Original publisher: https://gelbspanfiles.com/?p=11851
+--
+-- This source is a directly published first-person RESPONSE (stronger
+-- provenance than a secondary paraphrase). The interviewer is an
+-- advocate disputing public climate-influence allegations, and the
+-- participant's account is potentially interested. No independent
+-- financial records or original interview audio are admitted.
+--
+-- O'Keefe says the proposed API plan was never funded/implemented;
+-- API hosted a MULTI-ORGANISATION workshop, not just Walker acting alone;
+-- and disputes the wording of the 1998 Living on Earth account.
+-- Never collapse a planning workshop into plan implementation, or a
+-- nonimplementation claim into absence of parallel industry advocacy.
+------------------------------------------------------------------------
+
+record FormerExecutive2021Account : Set where
+  constructor formerExecutive2021Account
+  field
+    publishedTranscriptLocator : String
+    participantName : String
+    publishedInterviewDate : String
+    saysSpecificPlanNeverFunded : Bool
+    saysSpecificPlanNeverImplemented : Bool
+    saysMultiOrganisationWorkshopOccurred : Bool
+    disputesEarlierAttribution : Bool
+    originalAudioAuthenticated : Bool
+    independentCompanyAccountingAdmitted : Bool
+
+okeefe2021AttributedAccount : FormerExecutive2021Account
+okeefe2021AttributedAccount =
+  formerExecutive2021Account
+    "Russell Cook, William O'Keefe interview, GelbspanFiles, 2021-04-20"
+    "William O'Keefe"
+    "2021-04-20"
+    true true true true false false
+
+publishedNamedParticipantSaysNoFunding :
+  FormerExecutive2021Account.saysSpecificPlanNeverFunded
+    okeefe2021AttributedAccount ≡ true
+publishedNamedParticipantSaysNoFunding = refl
+
+publishedNamedParticipantSaysPlanningOccurred :
+  FormerExecutive2021Account.saysMultiOrganisationWorkshopOccurred
+    okeefe2021AttributedAccount ≡ true
+publishedNamedParticipantSaysPlanningOccurred = refl
+
+directInterviewIsNotIndependentAccounting :
+  FormerExecutive2021Account.independentCompanyAccountingAdmitted
+    okeefe2021AttributedAccount ≡ false
+directInterviewIsNotIndependentAccounting = refl
+
+originalInterviewAudioStillNotAuthenticated :
+  FormerExecutive2021Account.originalAudioAuthenticated
+    okeefe2021AttributedAccount ≡ false
+originalInterviewAudioStillNotAuthenticated = refl
