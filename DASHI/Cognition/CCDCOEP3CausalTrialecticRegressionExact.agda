@@ -22,6 +22,7 @@ import DASHI.Cognition.CCDCOEP3PreAPIOpinionTemporalControlExact as PreAPI
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact as GCC
+import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact as Trumbo
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -306,3 +307,24 @@ gccRealSourceDoesNotInventEffect :
   GCC.GCCMediaReplicationGate.causalEffectAdmitted
     GCC.selectedGCCCaseGate ≡ false
 gccRealSourceDoesNotInventEffect = GCC.noInventedCausalEstimate
+
+-- Actual independent 1996 five-newspaper media observations have real
+-- published volume summaries and coder agreement, but do NOT supply
+-- GCC programme-specific effects or establish the PR firm's claim.
+trumboPublishedCoverageNotGCCEffect :
+  NF.FactorsThrough Trumbo.sameReportedBaseline
+    Trumbo.differentUnobservedExplanations → ⊥
+trumboPublishedCoverageNotGCCEffect =
+  Trumbo.independentVolumeDoesNotIdentifyAgencyCausality
+
+trumboFrameReliabilityReported :
+  Trumbo.IndependentMediaContentStudy.sourceScopedFrameReliabilityNumerator
+    Trumbo.trumbo1996PublishedStudy ≡ 78
+trumboFrameReliabilityReported =
+  Trumbo.reportedScottPiTimes100
+
+trumboOriginalCausalEffectNotAdmitted :
+  Trumbo.IndependentMediaContentStudy.independentGCCEffectMeasured
+    Trumbo.trumbo1996PublishedStudy ≡ false
+trumboOriginalCausalEffectNotAdmitted =
+  Trumbo.independentBaselineDoesNotReportGCCEffect
