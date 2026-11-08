@@ -258,3 +258,33 @@ module ActualSelectedSummandInclusions
       (trans (sym (fixedSummandIdentifies assembly x))
         (trans (cong (identifyCarrier assembly) eq)
           (twistedSummandIdentifies assembly y)))
+
+
+  -- Original summands construct a section of the selected carrier
+  -- identification. This proves that every tagged direct-sum state is
+  -- realized by a selected orbifold state, without asserting that ALL
+  -- selected states are in the image (that needs the reverse law).
+  SelectedState : Set
+  SelectedState =
+    VOA.GradedModule.Carrier
+      (VOA.VertexOperatorAlgebra.gradedModule
+        (OrbifoldVOAAssembly.orbifoldVOA assembly))
+
+  reconstructTaggedState : Fixed ⊎ Twisted → SelectedState
+  reconstructTaggedState (inj₁ x) = includeFixedSummand assembly x
+  reconstructTaggedState (inj₂ y) = includeTwistedSummand assembly y
+
+  identifyAfterReconstruct :
+    (s : Fixed ⊎ Twisted) →
+    identifyCarrier assembly (reconstructTaggedState s) ≡ s
+  identifyAfterReconstruct (inj₁ x) = fixedSummandIdentifies assembly x
+  identifyAfterReconstruct (inj₂ y) = twistedSummandIdentifies assembly y
+
+  reconstructTaggedStateInjective :
+    (s t : Fixed ⊎ Twisted) →
+    reconstructTaggedState s ≡ reconstructTaggedState t →
+    s ≡ t
+  reconstructTaggedStateInjective s t eq =
+    trans (sym (identifyAfterReconstruct s))
+      (trans (cong (identifyCarrier assembly) eq)
+        (identifyAfterReconstruct t))
