@@ -101,7 +101,9 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
     descriptive_did=(proportion(t,"after")-proportion(t,"before")-
                      proportion(c,"after")+proportion(c,"before"))
     return {"schema":"dashi.ccdcoe.p3.gcc_media_descriptive.v1",
-            "focus":focus,"article_count":len(rows),\n            "intervention_date":intervention_date,\n            "intervention_receipt":intervention_receipt,
+            "focus":focus,"article_count":len(rows),
+            "intervention_date":intervention_date,
+            "intervention_receipt":intervention_receipt,
             "counts":counts,
             "descriptive_difference_in_differences":round(descriptive_did,6),
             "causal_attribution":"NOT_IDENTIFIED",
@@ -111,7 +113,6 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
                            "The measured contrast does not estimate policy or audience persuasion"]}
 
 def self_test() -> None:
-    from datetime import date
     synthetic=[]
     for arm in sorted(ARMS):
         for period in sorted(PERIODS):
@@ -151,14 +152,17 @@ def main() -> None:
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--input",type=Path)
     p.add_argument("--output",type=Path)
-    p.add_argument("--focus",default="science_uncertainty")\n    p.add_argument("--intervention-date",help="YYYY-MM-DD backed by original source")\n    p.add_argument("--intervention-receipt",help="Source ID for actual intervention onset")
+    p.add_argument("--focus",default="science_uncertainty")
+    p.add_argument("--intervention-date",help="YYYY-MM-DD backed by original source")
+    p.add_argument("--intervention-receipt",help="Source ID for actual intervention onset")
     p.add_argument("--self-test",action="store_true")
     a=p.parse_args()
     if a.self_test:
         self_test()
         return
-    if a.input is None or a.output is None:
-        p.error("--input and --output required")
+    if (a.input is None or a.output is None or
+        not a.intervention_date or not a.intervention_receipt):
+        p.error("--input --output --intervention-date and --intervention-receipt required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
     result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt)
     a.output.parent.mkdir(parents=True,exist_ok=True)
