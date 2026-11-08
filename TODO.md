@@ -17401,3 +17401,26 @@ Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
 - [ ] Inhabit those original zero laws, the genuine Wbar twisted-twisted
   and reversed mixed block, and strong mixed Jacobi/locality from the
   Popov–Rastelli LeanVOA donor on the selected Agda carrier.
+
+
+### 2026-11-09 native Lean group/VOA owner consolidation
+
+- [x] Audit existing dashi_lean4 PR #47 owners: Maschke Griess
+  complement, FDRep <-> group-algebra original-action map, Schur
+  isotypic coordinate and canonical normalizer Hom action. These are
+  already proof-coded in Lean; do not reimplement in Agda as new work.
+- [x] Deduplicate two Agda original paired four-sector modules by
+  proving they have identical source-data mode, vacuum, conformal,
+  translation and fixed source operator through source-preserving
+  toNativeMixedParity/toNativeTranslation.
+- [ ] Discover exact current worktree/vendor Popov location before any
+  additional source migration; default-branch code search cannot locate
+  Popov files, but the source may already be available on another
+  branch or in a local mounted/vendor tree.
+- [ ] Construct real selected-to-Popov FLM all-mode map and original
+  source law proofs; do not duplicate the conditional four-block owners.
+- [ ] Actual selected Y443 quotient-to-Monster iso and original u/v
+  operator equality; then apply existing Lean representation machinery
+  and Agda pair-generation/VOA action capstone.
+
+See Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
