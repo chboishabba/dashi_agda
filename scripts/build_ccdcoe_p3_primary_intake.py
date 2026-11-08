@@ -33,7 +33,6 @@ OFFICIAL_URL = ("https://www.govinfo.gov/content/pkg/CREC-1998-04-27/"
                 "html/CREC-1998-04-27-pt1-PgH2323.htm")
 MAX_SOURCE_BYTES = 8 * 1024 * 1024
 MEMO_OPENING = "To: Global Climate Science Team"
-MEMO_ENDING = "Total Funding Required"
 ANCHORS: dict[str, str] = {
     "document_circulation":
         "Subject: Draft Global Climate Science Communications Plan",
