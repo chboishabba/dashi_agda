@@ -163,3 +163,85 @@ module Selected (construction : VN.VNaturalConstruction)
       (VN.TwistedEvenSector.includePlus N.plus s)
   originalFTDecoded blocks a n s =
     fixedTwistedIsOriginal blocks a n s
+
+
+  ----------------------------------------------------------------------
+  -- DEDUPLICATE THE TWO ORIGINAL FOUR-BLOCK CONSTRUCTORS.
+  --
+  -- This module and the existing SelectedPairedGradedModule already
+  -- have the SAME source-fixed VOA, scalar, graded pair and parity
+  -- block signature. These adapters prove they carry exactly the same
+  -- source-mode data, including original Leech theta-twisted FT.
+  -- There is no third multiplication or independently chosen VOA.
+  ----------------------------------------------------------------------
+
+  toNativeMixedParity :
+    OriginalMixedSectorIntertwiners →
+    N.OriginalMixedParitySource source
+  toNativeMixedParity blocks = record
+    { N.integerTwistIndex = originalTwistIndex blocks
+    ; N.fixedTwistedMode = fixedTwisted blocks
+    ; N.fixedTwistedIsOriginal = fixedTwistedIsOriginal blocks
+    ; N.twistedFixedMode = twistedFixed blocks
+    ; N.twistedTwistedMode = twistedTwisted blocks
+    }
+
+  toNativeTranslation :
+    OriginalMixedSectorIntertwiners →
+    N.OriginalEvenTwistedTranslation source
+  toNativeTranslation blocks = record
+    { N.twistedTranslation = twistedTranslation blocks }
+
+  originalFFIsNativeFF :
+    (a b : Fixed) (n : ℤ) →
+    fixedMode a n b ≡ N.originalFixedSectorMode source a n b
+  originalFFIsNativeFF a b n = refl
+
+  pairedModesAreNativeOriginalModes :
+    (blocks : OriginalMixedSectorIntertwiners)
+    (p q : pairedCarrier) (n : ℤ) →
+    pairedMode blocks p n q
+      ≡ N.originalParityPairMode source
+          (toNativeMixedParity blocks) p n q
+  pairedModesAreNativeOriginalModes blocks (a , t) (b , s) n =
+    refl
+
+  pairedVertexModesAreNativeOriginalModes :
+    (blocks : OriginalMixedSectorIntertwiners)
+    (p q : pairedCarrier) (n : ℤ) →
+    VOA.VertexOperatorData.mode (pairedVertexData blocks) p n q
+      ≡ VOA.VertexOperatorData.mode
+          (N.actualSourcePairedVertexData source
+            (toNativeMixedParity blocks)
+            (toNativeTranslation blocks))
+          p n q
+  pairedVertexModesAreNativeOriginalModes blocks (a , t) (b , s) n =
+    refl
+
+  pairedVertexVacuumIsNativeOriginalVacuum :
+    (blocks : OriginalMixedSectorIntertwiners) →
+    VOA.VertexOperatorData.vacuum (pairedVertexData blocks)
+      ≡ VOA.VertexOperatorData.vacuum
+          (N.actualSourcePairedVertexData source
+            (toNativeMixedParity blocks)
+            (toNativeTranslation blocks))
+  pairedVertexVacuumIsNativeOriginalVacuum blocks = refl
+
+  pairedVertexConformalIsNativeOriginalConformal :
+    (blocks : OriginalMixedSectorIntertwiners) →
+    VOA.VertexOperatorData.conformalVector (pairedVertexData blocks)
+      ≡ VOA.VertexOperatorData.conformalVector
+          (N.actualSourcePairedVertexData source
+            (toNativeMixedParity blocks)
+            (toNativeTranslation blocks))
+  pairedVertexConformalIsNativeOriginalConformal blocks = refl
+
+  pairedVertexTranslationIsNativeOriginalTranslation :
+    (blocks : OriginalMixedSectorIntertwiners) (p : pairedCarrier) →
+    VOA.VertexOperatorData.translation (pairedVertexData blocks) p
+      ≡ VOA.VertexOperatorData.translation
+          (N.actualSourcePairedVertexData source
+            (toNativeMixedParity blocks)
+            (toNativeTranslation blocks))
+          p
+  pairedVertexTranslationIsNativeOriginalTranslation blocks p = refl
