@@ -1165,3 +1165,34 @@ Let I = identifyCarrier and R = reconstructTaggedState. Previously paid I∘R=id
 \]
 
 The implication directions are proved; **neither side is yet inhabited**. This is a useful sharpening rather than a declaration that the real orbifold is constructed or that the vertex-mode structure descends through P. V0 still needs original true graded/mixed-sector VOA laws, and V1 still needs published FLM all-mode equivalence. Exact-head Agda kernel execution not yet observed.
+
+
+## 2026-11-08 decisive original VOA carrier-type no-go and corrective phase pivot
+
+**HIGH-ALPHA SOURCE CORRECTION:** original OrbifoldCarrier was defined as the *disjoint tagged sum* of fixed-point and twisted-even sector *sets*, while the published FLM V-natural underlying vector space is the **additive direct sum** of both vector spaces. For two summands the appropriate underlying set representation is the paired product, with one common additive zero. This is a mathematical mismatch, not a missing boolean flag or dimension count.
+
+**Source-written NO-GO on the actual old assembly** (VNaturalOrbifoldConstruction.ActualSelectedSummandInclusions):
+- originalLinearSummandZerosImpossible: if fixed and twisted inclusion images are both equal to the same selected state, contradiction using originalFixedTwistedDisjoint;
+- originalVOAZeroCannotBeBothSummandZeros: both original summand embeddings **cannot** send their zero to the selected VOA zero. Thus the old tagged coproduct cannot simultaneously be the genuine vector-space direct sum with linear injections. No physical/FLM algebra can promote through that identification without fixing the carrier semantics.
+- This exposes why pursuing original identifyCarrier injectivity or no-extra-states *for the tagged carrier* was a wrong primary V0 target: its successful proof would not make the carrier the physical FLM additive direct sum.
+
+**Corrective source-native structure added** (same original VNaturalOrbifoldConstruction):
+- LinearOrbifoldCarrier: actual FixedPointVOA.fixedCarrier × TwistedEvenSector.CarrierPlus, the paired set underlying a two-vector-space direct sum;
+- LinearOrbifoldSummandInclusions.includeFixedLinear/includeTwistedLinear, using the actual summands' zero elements as data;
+- originalSummandZerosAgree: the two true zero embeddings coincide definitionally;
+- linearFixedInclusionInjective, linearTwistedInclusionInjective and recoverLinearComponents;
+- VNaturalConstruction.VnaturalLinearCarrier exports this correct paired carrier, keeping old VnaturalCarrier clearly tagged **legacy** to avoid breaking prior dependency imports prematurely.
+
+**Revised V0 maximal-cut, priority 0:** Construct actual original linear operations, graded projections, mixed vertex modes, conformal and vacuum on VnaturalLinearCarrier from the Leech fixed/twisted source and prove the genuine VOA laws (particularly mixed Jacobi/locality). Establish the actual original selected Vnatural carrier and this paired carrier are related by an all-mode, zero- and linearity-preserving two-sided equivalence; only then transport to canonical FLM. Do not adopt a single-pointed disjoint union as a substitute for the additive direct sum.
+
+[
+oxed{egin{aligned}
+L&:=V_Lambda^+	imes(V_Lambda^T)^+,\
+iota_+(x)&=(x,0_T),qquadiota_T(y)=(0_+,y),\
+iota_+(0_+)&=iota_T(0_T)=(0_+,0_T).
+end{aligned}}
+]
+
+**New exact mathematical proof target (not yet inhabited):** a source-native graded linear isomorphism H:Carrier(Vnatural) ≅ L preserving zero, addition, scalar multiplication, every mode, vacuum, conformal vector, grading and translation, together with original mixed-mode Jacobi/locality on L. The earlier tagged-sum state-fibre normaliser remains a correct *set-theoretic* theorem but is now explicitly **non-promoting for a genuine FLM vector direct sum**. This supersedes the old V0 'identifyCarrier injectivity first' operational advice.
+
+Status: original source-specific no-go PAID source-written, paired carrier with zero agreement PAID source-written; full positive VOA construction, selected-to-FLM identification, and Monster action still OPEN. Agda typechecking not run in this environment.
