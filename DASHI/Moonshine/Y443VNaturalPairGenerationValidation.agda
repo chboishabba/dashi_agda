@@ -53,3 +53,7 @@ import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as PresentedGenerat
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as AllTwelve
 import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as PresentedCapstone
 import DASHI.Moonshine.Y443MonsterGradedLiteralSameObjectCapstoneExact as ActualVnatural
+
+import DASHI.Moonshine.Y443FLMGriessFullAutSelectedVOAExact as FLMSelected
+import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as JMDTwoGeneratorAction
+import DASHI.Moonshine.Y443FLMDirectSameObjectCapstoneExact as FLMDirectCapstone
