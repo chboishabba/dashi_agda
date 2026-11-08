@@ -211,9 +211,21 @@ record VNaturalConstruction : Setω where
   Vnatural : VOA.VertexOperatorAlgebra
   Vnatural = OrbifoldVOAAssembly.orbifoldVOA orbifoldAssembly
 
+  -- Legacy tagged set-level carrier used by earlier source compilers.
+  -- NOT a linear direct sum: two linear summand zeroes cannot be disjoint.
   VnaturalCarrier : Set
   VnaturalCarrier =
     OrbifoldCarrier
+      (LeechLatticeVOAInput.fixedPoint leechInput)
+      (LeechLatticeVOAInput.canonicalTwistedModule leechInput)
+      (LeechLatticeVOAInput.twistedEvenSector leechInput)
+
+  -- Correct same-source finite vector-direct-sum carrier (pair shape).
+  -- This is a carrier target only: an all-mode VOA equivalence to
+  -- Vnatural must still be constructed from genuine mixed-sector laws.
+  VnaturalLinearCarrier : Set
+  VnaturalLinearCarrier =
+    LinearOrbifoldCarrier
       (LeechLatticeVOAInput.fixedPoint leechInput)
       (LeechLatticeVOAInput.canonicalTwistedModule leechInput)
       (LeechLatticeVOAInput.twistedEvenSector leechInput)
