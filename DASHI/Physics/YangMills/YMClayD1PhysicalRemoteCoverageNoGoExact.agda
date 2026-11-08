@@ -77,6 +77,15 @@ module Selected
         RequiredPhysicalRemotePair selectedCutoff selectedVolume
           selectedLeft selectedRight
       selectedPairIsDistinct : selectedLeft ≡ selectedRight → ⊥
+      -- The previous single witness only ruled out total emptiness.
+      -- This stronger per-(cutoff,volume) family prevents a phantom
+      -- physical domain at any selected source index.
+      distinctRequiredAtEachCutoffVolume :
+        ∀ cutoff volume →
+        Σ (BoundaryState cutoff volume) (λ left →
+          Σ (BoundaryState cutoff volume) (λ right →
+            Σ (RequiredPhysicalRemotePair cutoff volume left right)
+              (λ _ → left ≡ right → ⊥)))
   open ActualPhysicalPairCoverage public
 
   requiredOriginalConditionalRowsUniformlyContract :
@@ -111,6 +120,21 @@ module Selected
       cutoff volume left right
       (requiredAreAdmissible coverage cutoff volume left right perturbation)
       observable majorant nonnegative bounded
+
+  admissibleNonemptyAtEachCutoffVolume :
+    (coverage : ActualPhysicalPairCoverage) →
+    ∀ cutoff volume →
+    Σ (BoundaryState cutoff volume) (λ left →
+      Σ (BoundaryState cutoff volume) (λ right →
+        AdmissiblePerturbation cutoff volume left right))
+  admissibleNonemptyAtEachCutoffVolume coverage cutoff volume =
+    let witness =
+          distinctRequiredAtEachCutoffVolume coverage cutoff volume
+        left = fst witness
+        right = fst (snd witness)
+        required = fst (snd (snd witness))
+    in left , (right ,
+      requiredAreAdmissible coverage cutoff volume left right required)
 
   coverageCannotBeEmpty :
     (coverage : ActualPhysicalPairCoverage) →
