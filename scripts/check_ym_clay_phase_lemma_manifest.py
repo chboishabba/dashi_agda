@@ -74,6 +74,15 @@ def validate():
     assert obj["latest_source_corrections_20261108"][1]["area"] == "CMP119 OS4"
     assert (ROOT / "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda").is_file()
     assert (ROOT / "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSCoreMomentSourceRound582Exact.agda").is_file()
+    actual_span = ROOT / "DASHI/Physics/YangMills/YangMillsCMP119LiteralWilsonSpanAdditiveExact.agda"
+    assert actual_span.is_file(), "missing original literal Wilson-span Agda owner"
+    source = actual_span.read_text()
+    assert not source.startswith("{-# OPTIONS --safe #-}"), "real source ring uses imported axiom boundary"
+    for owner in ("emptySpanEmbedsZero", "appendSpanEmbedsSum",
+                  "scaleSpanEmbedsScalar", "coefficientExchange",
+                  "crossRowEmbedsProduct", "mulSpanEmbedsPointwise"):
+        assert owner in source, f"missing original R583 Wilson-span proof: {owner}"
+    assert (ROOT / "scripts/check_ym_r583_literal_wilson_span.py").is_file()
     assert "R583" in body and "BCH" in body
     for lemma in obj["lemmas"]:
         assert lemma["already_paid"], f"forgot existing source for {lemma['id']}"
