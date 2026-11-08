@@ -826,3 +826,94 @@ module SelectedPairedGradedModule
         (fixedTwistedMode cross x k v)
         (twistedFixedMode cross y k u)
   originalParityTwistedOutput source cross x u y v k = refl
+
+
+  ----------------------------------------------------------------------
+  -- V0.4: ACTUAL PAIRED VERTEX-DATA PRODUCER (NOT YET A VOA).
+  --
+  -- Vacuum and conformal vectors come from the ORIGINAL fixedVOA
+  -- using fixedFromOriginal. The twisted component of each is zero,
+  -- as in the concrete Popov–Rastelli/FLM Vnat. Fixed translation is
+  -- transported from the original fixedVOA; twisted translation must
+  -- be provided by the true original even-twisted source. The mode is
+  -- exactly the four-parity-block source constructed above.
+  ----------------------------------------------------------------------
+
+  record OriginalEvenTwistedTranslation
+    (source : OriginalFixedVOAAndTwistedEvenSource) : Setω where
+    field
+      twistedTranslation : Twisted → Twisted
+  open OriginalEvenTwistedTranslation public
+
+  actualSourcePairedVertexData :
+    (source : OriginalFixedVOAAndTwistedEvenSource) →
+    OriginalMixedParitySource source →
+    OriginalEvenTwistedTranslation source →
+    VOA.VertexOperatorData (actualSourceGradedPair source)
+  actualSourcePairedVertexData source cross time = record
+    { VOA.VertexOperatorData.vacuum =
+        ( fixedFromOriginal source
+            (VOA.VertexOperatorData.vacuum
+              (VOA.VertexOperatorAlgebra.vertexData
+                (FixedPointVOA.fixedVOA fixed)))
+        , twistedZeroOriginal source )
+    ; VOA.VertexOperatorData.conformalVector =
+        ( fixedFromOriginal source
+            (VOA.VertexOperatorData.conformalVector
+              (VOA.VertexOperatorAlgebra.vertexData
+                (FixedPointVOA.fixedVOA fixed)))
+        , twistedZeroOriginal source )
+    ; VOA.VertexOperatorData.mode =
+        originalParityPairMode source cross
+    ; VOA.VertexOperatorData.translation = λ p →
+        ( fixedFromOriginal source
+            (VOA.VertexOperatorData.translation
+              (VOA.VertexOperatorAlgebra.vertexData
+                (FixedPointVOA.fixedVOA fixed))
+              (fixedToOriginal source (Data.Product.proj₁ p)))
+        , twistedTranslation time (Data.Product.proj₂ p) )
+    }
+
+  actualPairedVacuumDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (time : OriginalEvenTwistedTranslation source) →
+    fixedToOriginal source
+      (Data.Product.proj₁
+        (VOA.VertexOperatorData.vacuum
+          (actualSourcePairedVertexData source cross time)))
+    ≡ VOA.VertexOperatorData.vacuum
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed))
+  actualPairedVacuumDecoded source cross time =
+    fixedOriginalAfterFrom source
+      (VOA.VertexOperatorData.vacuum
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed)))
+
+  actualPairedConformalDecoded :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (time : OriginalEvenTwistedTranslation source) →
+    fixedToOriginal source
+      (Data.Product.proj₁
+        (VOA.VertexOperatorData.conformalVector
+          (actualSourcePairedVertexData source cross time)))
+    ≡ VOA.VertexOperatorData.conformalVector
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed))
+  actualPairedConformalDecoded source cross time =
+    fixedOriginalAfterFrom source
+      (VOA.VertexOperatorData.conformalVector
+        (VOA.VertexOperatorAlgebra.vertexData
+          (FixedPointVOA.fixedVOA fixed)))
+
+  actualPairedModeIsFourBlock :
+    (source : OriginalFixedVOAAndTwistedEvenSource)
+    (cross : OriginalMixedParitySource source)
+    (time : OriginalEvenTwistedTranslation source)
+    (p q : Fixed × Twisted) (k : ℤ) →
+    VOA.VertexOperatorData.mode
+      (actualSourcePairedVertexData source cross time) p k q
+    ≡ originalParityPairMode source cross p k q
+  actualPairedModeIsFourBlock source cross time p q k = refl
