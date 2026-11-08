@@ -1011,3 +1011,12 @@ YM Y01/Y02 with source-uniform continuum controls -> Y04 and Y03 -> Y05. No Mons
 Owners: #1472 Y443+Griess+DGL; #1179/#1162 Monster-3B physical gravity; #1241/#1235 KK+CY; #1460 TSVF observer; #1444/#1440 original YM; #1103 M24 2B; #696 194 classes; #190/#208/#437 CFT/VOA; #142/#144 penumbral. All original scholarly source and prior formal-work attribution retained.
 
 **Promotion guard:** these are exact mathematical theorem statements, not claims of inhabitation. No arbitrary Set/Unit route certificates, source-name strings, finite toy source replacements, cardinality coincidences, source-foreign dynamics, unexecuted exact-head kernel proofs, or single-probe spectral estimates can claim completion.
+
+
+## 2026-11-08 M01 direct selected mode-one producer (not a new Griess algebra)
+
+The actual selected `VN.VNaturalConstruction.Vnatural` is now the explicit carrier of new `Y443SelectedNativeModeOneGriessExact.agda`, imported by the existing Y443 Golden root. Its `SourceNativeGriessLaws` requires original grade-2 mode closure, a specified grade-2 inclusion inverse on the mode-one image, injectivity, source-native addition/scaling, the actual conformal element, and exact commutativity/bilinearity witnesses. `actualSelectedGriess` **constructs** the existing `Y443FLMGriessFullAutSelectedVOAExact.ConcreteGriessProduct` entirely from these native laws, never from an independent chosen operation. Its projected first product is definitionally the original selected `mode (+1)` modulo grade inclusion.
+
+**Paid this round:** concrete value-level compiler tying M01's first product to the selected existing VOA, and proof transport of supplied commutativity/left linearity into the existing Griess owner. **Not paid:** producing a real selected `SourceNativeGriessLaws` inhabitant from genuine VOA Jacobi/skew symmetry, actual Leech orbifold mode tables, and proving a two-sided isomorphism to the published FLM Griess algebra. The current `VertexOperatorAlgebraCore` and `VNaturalOrbifoldConstruction` store essential VOA axioms as plain `Set` labels; the earlier Bool/Unit counterexample and DGL no-go show why these cannot be promoted. M02 and one complete source-sound M03 route remain open.
+
+The new YM #1444 counterpart pays a separate **physical remote-boundary coverage admission gate**. It neither supplies M01 nor a 4D gap. K01/K02 #1241 retain original correlated Z3-quotient and global-anomaly/frontier obligations; no same-action 5D solution was constructed in this round.
