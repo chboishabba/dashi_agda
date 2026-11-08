@@ -1,3 +1,13 @@
+## 2026-11-08 V0 paired orbifold correction
+
+- [x] Original tagged state `Fixed ⊎ Twisted` has an exact normalization/idempotence and injectivity criterion but **cannot** be the linear FLM direct sum: old disjoint embeddings cannot both preserve the VOA zero (proved in source).
+- [x] Existing `SelectedPairedGradedModule` constructs the correct `Fixed × Twisted` graded carrier using original fixed-point VOA operations and native twisted-even inputs.
+- [x] `VNaturalOriginalPairedFourSectorModesExact` constructs the canonical original paired-mode expansion, fixes **FF** from the original fixed VOA, and requires **FT** agreement with the original twisted-module mode.
+- [ ] Original twisted-even source linear/grade operations and closure; source-specific **TF/TT** intertwiners; cross-sector Jacobi/locality/translation/conformal laws; genuine original Griess mode-one; FLM same-object theorem and Y443 action equality.
+- [ ] Do not report old tagged `OriginalIdentificationInjective` alone as full linear V0 completion.
+
+---
+
 # FOR TODO GO TO '# TODO'
 
 Current NS Gate 1 / Gate 2 roadmap note for `2026-07-02`:
