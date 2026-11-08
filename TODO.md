@@ -17302,3 +17302,18 @@ Canonical phase, deliverable, precise lemma and acceptance ledger:
 194 character classes, physical KK/GR and the original 4D YM mass gap
 belong to separate PR endpoints; no proof-status promotion from finite
 196884 counts or arithmetic. Agda kernel acceptance not asserted here.
+
+### 2026-11-08 V0 state-space subcut from original orbifold (PR #1472)
+
+- [x] Actual original fixed-sector and twisted-even inclusion injectivity and
+  disjointness; exact section/reconstruction from the existing selected
+  orbifold direct-sum carrier (VNaturalOrbifoldConstruction module).
+- [ ] Prove the OPPOSITE selected-carrier reconstruction law on every
+  orbifold state: reconstructTaggedState (identifyCarrier w) = w.
+  Current assembly fields do not exclude additional/junk VOA carrier states.
+- [ ] Prove source-native actual cross-sector Jacobi/locality, conformal
+  and grade-two mode structure, then published FLM all-mode equivalence;
+  independent source-action u/v maps remain V2.
+
+Exact acceptance conditions and authorship in
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
