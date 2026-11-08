@@ -109,6 +109,7 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "1998_API_draft_identified_effect": "not_identified",
         "preplan_survey": "reported_in_original_draft_not_independently_validated",
         "actual_1998_plan_expenditure": "not_identified",
+        "preexisting_1997_opinion_dynamics": "measured_published_descriptive",
     }
     later = data["followup_evidence_20261107"]
     assert {item["id"] for item in later} == {
@@ -140,6 +141,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             "quantified_document_content_not_causal_effect",
         "charlton_preplan_survey_reported":
             "reported_survey_not_causal_effect",
+        "independent_1997_climate_opinion_dynamics":
+            "measured_independent_pre_1998_API_draft_not_API_effect",
     }
     activities = data["independent_activity_and_document_measurements"]
     assert {e["id"] for e in activities} == {
@@ -176,7 +179,33 @@ def validate(data: dict, cases: str, sources: str) -> dict:
     assert corpus["causal_effect_on_readers"] is None
     assert data["integration_joins"]["1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft"].startswith("independent events")
     assert data["integration_joins"]["2017_document_coding_to_1998_API_exposure_effect"].startswith("different observational outcome")
-    source_lookup = {c["id"] for c in later} | {primary["id"]} | {e["id"] for e in activities} | {corpus["id"]}
+    pre_api = data["independent_pre_api_opinion_panel"]
+    assert pre_api["url"] == ("https://www.resources.org/archives/"
+                              "american-opinion-on-global-warming-the-impact-of-the-fall-1997-debate/")
+    assert [row["n"] for row in pre_api["waves"]] == [688, 725]
+    assert [row["end"] for row in pre_api["waves"]] == [
+        "1997-10-05", "1998-02-13"]
+    assert all(row["end"] < primary["original_plan_date"]
+               for row in pre_api["waves"])
+    assert pre_api["measured_prior_to_API_draft"] is True
+    assert pre_api["cannot_measure_1998_API_plan_impact"] is True
+    assert not pre_api["quantitative_microdata_present_in_repo"]
+    assert pre_api["causal_effect_of_API_plan"] is None
+    values = {row["construct"]: row for row in
+              pre_api["published_descriptive_percentages"]}
+    assert values["news_exposure_reported_last_4_months"] == {
+        "construct": "news_exposure_reported_last_4_months",
+        "pre": 48, "post": 56, "delta_percentage_points": 8}
+    assert values["thinking_a_lot_or_moderate"] == {
+        "construct": "thinking_a_lot_or_moderate",
+        "pre": 54, "post": 65, "delta_percentage_points": 11}
+    assert values["strong_party_gap_belief_warming_occurred"] == {
+        "construct": "strong_party_gap_belief_warming_occurred",
+        "pre": 4, "post": 17, "delta_percentage_points": 13}
+    assert all(row["post"] - row["pre"] == row["delta_percentage_points"]
+               for row in values.values())
+    assert data["integration_joins"]["1997_climate_opinion_panel_to_1998_API_plan_effect"].startswith("temporal negative control")
+    source_lookup = {c["id"] for c in later} | {primary["id"]} | {e["id"] for e in activities} | {corpus["id"], pre_api["id"]}
     assert all(set(q["source_ids"]) <= source_lookup
                for q in data["evidence_question_ledger"])
     assert data["integration_joins"][
@@ -319,7 +348,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "contested_authorisation": "NOT_IDENTIFIED",
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
-        "real_measured_outcomes": 0,
+        "pre_api_survey_waves_measured": len(pre_api["waves"]),
+        "reported_pre_api_descriptive_contrasts": len(values),
+        "verified_API_attributable_outcomes": 0,
         "source_gated_decisions": len(ladder),
         "archival_review_leads": len(leads),
         "stage_nonfactorability_witnesses": 4,
