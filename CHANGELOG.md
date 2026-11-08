@@ -1,3 +1,10 @@
+## 2026-11-08 — CMP119/Hamiltonian/BCH/Ward audit; R578 supersedes R572
+
+Direct source re-audit confirms the user's corrections: CMP119 is not missing (`YangMillsLiteralCMP119QuantitativeMomentsRound559Exact`, `YangMillsClayPublishedFiniteOSMomentSourceRound581Exact`), the **same reconstructed OS Hamiltonian is chosen definitionally** (`YangMillsPreferredSameHamiltonianTransferRound577Exact`), BCH/local compact-simple packages and constructor-fixed same-group operations exist (R569–R571), and Ward/Maxwell classification already exists (`YangMillsSameFamilyWardKernelSourceRound563Exact`, `YangMillsSameSystemGaussianWardKernelTheoremExact`, R549). The current shortest preferred source scheduler is `YangMillsClayCriticalPathRound578Exact`, not R572. Use the updated canonical [roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) / manifest for complete R578 status.
+
+**Only genuine missing source instantiations**: literal original CMP119 exponential-moment producer and OS4 / regularity closure, B1 actual Wilson mixed-log cluster expansion and connecting weight tail, B2 real transfer-coordinate semantics and *full nonvacuum* positive spectral lower bound, H6 same-system Gaussian-to-local Ward theorem (not its Maxwell classifier), and G1 actual group quantitative local BCH/Haar inequalities / five-block physical laws. A3 projective-event real-source obligations persist. The endpoint remains conditional: R559, R581, R563 and R569 explicitly label those physical theorem leaves `conditional`; R578's `machineChecked` compiler level does not change their status. No fresh Clay proof claimed.
+
+---
 ## 2026-11-08 — latest R572 seven-family frontier reconciliation
 
 - Corrected YM PH0–PH4 / YM01–YM10 phase and acceptance ledger following repository-wide audit. Existing `YangMillsClayCriticalPathRound572Exact` owns **seven actual remaining producer families** A3, T1, T5, B1, B2, G1 and H6. Earlier ten endpoint targets are retained as a deliverables crosswalk, not ten absent constructions.
