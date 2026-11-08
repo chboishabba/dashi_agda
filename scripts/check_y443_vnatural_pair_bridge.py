@@ -56,6 +56,7 @@ CONCRETE_CLOSURE = ROOT / "DASHI/Moonshine/Y443FLMConcreteSameObjectActionClosur
 WEIGHT_TWO_UV = ROOT / "DASHI/Moonshine/Y443FLMWeightTwoOnlyUVExact.agda"
 WEIGHT_TWO_BASIS = ROOT / "DASHI/Moonshine/Y443FLMWeightTwoBasisUVExact.agda"
 FINITE_BASIS_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMFiniteBasisUVEndcapExact.agda"
+PUBLISHED_QUOTIENT_ISO = ROOT / "DASHI/Moonshine/Y443PublishedQuotientIsoCompositionExact.agda"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -165,7 +166,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -290,6 +291,13 @@ def assert_source_scope() -> None:
         for symbol in markers:
             if symbol not in s:
                 raise AssertionError(f"missing actual finite-basis u/v theorem {symbol} in {owner.name}")
+    for symbol in (
+        "SamePublishedQuotient", "selectedQuotientIsomorphism",
+        "ivanovQuotientMonsterIsomorphism", "fromPreservesProduct",
+        "fromPreservesInverse", "composedMonsterIsomorphism",
+    ):
+        if symbol not in PUBLISHED_QUOTIENT_ISO.read_text():
+            raise AssertionError(f"missing true quotient-to-Monster group certificate {symbol}")
     print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
