@@ -205,7 +205,8 @@
     "media_claim_codebook_applied": false,
     "causal_counterfactual_identified": false,
     "policy_impact_identified": false,
-    "unknowns_must_remain_null": true
+    "unknowns_must_remain_null": true,
+    "independent_historical_media_attention_measurements_located": true
   },
   "planned_measurement": {
     "unit": "dated individual newspaper item × outlet × frame × source provenance",
@@ -265,7 +266,7 @@
     {
       "id": "P2",
       "target": "Compute observed contemporaneous media-frame prevalence and uncertainty, not self-claimed impact",
-      "status": "not_measured"
+      "status": "published_attention_baseline_located_article_level_GCC_prepost_not_measured"
     },
     {
       "id": "P3",
@@ -282,5 +283,62 @@
       "target": "Assess generalisation, independent historical verification and institutional voice/power/agency without collapsing sources",
       "status": "not_validated"
     }
-  ]
+  ],
+  "independent_media_baseline": {
+    "id": "trumbo_1996_five_newspaper_content_study",
+    "title": "Constructing climate change: claims and frames in US news coverage of an environmental issue",
+    "author": "Craig Trumbo",
+    "year": 1996,
+    "doi": "10.1088/0963-6625/5/3/006",
+    "url": "https://journals.sagepub.com/doi/10.1088/0963-6625/5/3/006",
+    "outlet_scope": "five national US newspapers",
+    "document_type": "peer_reviewed_original_content_analysis",
+    "original_article_fulltext_available_here": false,
+    "source_page_reference": "publisher references/notes of original article",
+    "observations": [
+      {
+        "id": "1988_h1",
+        "period": "1988-01 to 1988-06",
+        "unit": "column_inches_approx",
+        "value": 400,
+        "source_note": "publisher page citation note"
+      },
+      {
+        "id": "1989_h2",
+        "period": "1989-07 to 1989-12",
+        "unit": "column_inches_approx",
+        "value": 1200,
+        "source_note": "publisher page citation note"
+      },
+      {
+        "id": "1993_h1",
+        "period": "1993-01 to 1993-06",
+        "unit": "column_inches_approx",
+        "value": 350,
+        "source_note": "publisher page citation note"
+      }
+    ],
+    "reported_reliability": {
+      "metric": "Scott_pi",
+      "value": 0.78,
+      "domain": "frame coding, reported inter-coder agreement",
+      "scope": "journal article's source coding study",
+      "not_harrison_recode": true
+    },
+    "described_source_frame_relationships": {
+      "scientists": "problems/causes",
+      "politicians_and_special_interests": "judgments/remedies",
+      "source": "abstract of peer-reviewed study"
+    },
+    "design_limitations": [
+      "Three selected half-years are NOT adjacent matched pre-post periods for GCC intervention",
+      "Published rounded column inches are media ATTENTION volume, not frame-specific percentages",
+      "Underlying article-level coded source data and dates not acquired",
+      "Intervention onset for Harrison has not been independently dated",
+      "The article's five-newspaper sample is not the GCC archive clipping sample"
+    ],
+    "reproduced_aggregate_statements": true,
+    "independent_recode_executed": false,
+    "measured_gcc_attributable_effect": null
+  }
 }
