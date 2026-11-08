@@ -277,7 +277,9 @@
     "international_legal_duty_is_not_completed_target": true,
     "same_object_actor_to_negotiator_or_decision_trail": null,
     "financial_or_lobbying_direct_receipt": null,
-    "emissions_impact": null
+    "emissions_impact": null,
+    "paris_adoption_date_is_not_entry_into_force": true,
+    "us_announced_withdrawal_is_not_2017_effective_treaty_withdrawal": true
   },
   "status": {
     "original_official_pages_located": true,
@@ -323,5 +325,15 @@
       "target": "Independent replication and institution/voice/power/consent review; Golden Agda kernel receipt",
       "status": "OPEN"
     }
-  ]
+  ],
+  "legal_temporal_scope": {
+    "paris_adoption": "2015-12-12",
+    "paris_treaty_entry_into_force": "2016-11-04",
+    "article_4_treaty_obligation_applies_to": "Parties under the operative Agreement; adopted text in 2015 is not itself proof the treaty entered into force on adoption",
+    "hamburg_2017_us_statement": "2017-07-08 announcement/position recorded in Leaders Declaration, NOT effective legal withdrawal that day",
+    "hamburg_2017_other_parties": "other G20 leaders maintained support and said the Paris Agreement was irreversible",
+    "source": "https://treaties.un.org/pages/viewdetails.aspx?chapter=27&mtdsg_no=xxvii-7-d&src=ind",
+    "legally_operational_NDC_obligations_verified_against": "UNFCCC article 4.2 treaty language and UN Treaty Collection entry into force dates",
+    "no_assumption_of_country_specific_legal_or_emissions_compliance": true
+  }
 }
