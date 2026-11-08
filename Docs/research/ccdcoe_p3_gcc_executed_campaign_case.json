@@ -31,7 +31,11 @@
         26
       ],
       "original_pdf_sha256": null,
-      "source_review_receipt": null
+      "source_review_receipt": null,
+      "archive_posted_metadata_date": "1993-04-21",
+      "archive_metadata_contradiction": "The webpage byline says 1993-04-21, but its contents describe a July 1993 Washington Post article and September 1993 GCC bulletin; the byline cannot be safely treated as the actual date the combined document was archived or created.",
+      "archive_index_date_semantically_verified": false,
+      "claims_original_document_precedes_july_1993": false
     },
     {
       "id": "gcc_board_jul_11_1995",
@@ -372,5 +376,15 @@
     "reproduced_aggregate_statements": true,
     "independent_recode_executed": false,
     "measured_gcc_attributable_effect": null
-  }
+  },
+  "source_quality_alerts": [
+    {
+      "id": "gcc_media_hits_page_date",
+      "severity": "historical_date_conflict",
+      "source_id": "gcc_1993_media_hits",
+      "conflict": "Page byline 1993-04-21 predates internally reported July 1993 article and September bulletin reuse",
+      "resolution": "Use original newspaper and bulletin issue dates; treat page metadata as anomalous until original archive history examined",
+      "no_exposure_or_outcome_effect_claim": true
+    }
+  ]
 }
