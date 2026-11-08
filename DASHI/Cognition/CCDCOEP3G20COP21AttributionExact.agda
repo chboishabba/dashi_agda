@@ -37,6 +37,8 @@ data OriginalDocument : Set where
   hamburgOtherLeaders2017 : OriginalDocument
   c20Turkey2015 : OriginalDocument
   b20Turkey2015 : OriginalDocument
+  g20EnergyMinisters2015 : OriginalDocument
+  b20EnergyForum2015 : OriginalDocument
   harrisonAgencyHistory : OriginalDocument
 
 data InstitutionalVoice : Set where
@@ -46,6 +48,8 @@ data InstitutionalVoice : Set where
   hamburgOtherG20Leaders : InstitutionalVoice
   civilSocietyC20 : InstitutionalVoice
   businessB20 : InstitutionalVoice
+  energyMinistersG20 : InstitutionalVoice
+  energyForumB20Participants : InstitutionalVoice
   prCompanyOwnAccount : InstitutionalVoice
 
 speaker : OriginalDocument → InstitutionalVoice
@@ -57,6 +61,8 @@ speaker hamburgUS2017 = hamburgUnitedStates
 speaker hamburgOtherLeaders2017 = hamburgOtherG20Leaders
 speaker c20Turkey2015 = civilSocietyC20
 speaker b20Turkey2015 = businessB20
+speaker g20EnergyMinisters2015 = energyMinistersG20
+speaker b20EnergyForum2015 = energyForumB20Participants
 speaker harrisonAgencyHistory = prCompanyOwnAccount
 
 data SourceSpeechAct : Set where
@@ -66,6 +72,8 @@ data SourceSpeechAct : Set where
   recordedDissent : SourceSpeechAct
   civilSocietyRecommendation : SourceSpeechAct
   businessRecommendation : SourceSpeechAct
+  energyMinisterCommunique : SourceSpeechAct
+  energyForumRecommendation : SourceSpeechAct
   agencySelfAssessment : SourceSpeechAct
 
 speechAct : OriginalDocument → SourceSpeechAct
@@ -77,6 +85,8 @@ speechAct hamburgUS2017 = recordedDissent
 speechAct hamburgOtherLeaders2017 = summitCommunique
 speechAct c20Turkey2015 = civilSocietyRecommendation
 speechAct b20Turkey2015 = businessRecommendation
+speechAct g20EnergyMinisters2015 = energyMinisterCommunique
+speechAct b20EnergyForum2015 = energyForumRecommendation
 speechAct harrisonAgencyHistory = agencySelfAssessment
 
 data Question : Set where
@@ -103,6 +113,8 @@ strength hamburgUS2017 = recordedInstitutionalPosition
 strength hamburgOtherLeaders2017 = recordedInstitutionalPosition
 strength c20Turkey2015 = stakeholderSubmissionOnly
 strength b20Turkey2015 = stakeholderSubmissionOnly
+strength g20EnergyMinisters2015 = recordedInstitutionalPosition
+strength b20EnergyForum2015 = stakeholderSubmissionOnly
 strength harrisonAgencyHistory = agencyClaimOnly
 
 -- The same summit includes an explicitly attributed US decision and
@@ -227,3 +239,85 @@ noActorTransmissionFromSharedLanguage :
   InstitutionallyScopedSource.specificActorDecisionTrailReviewed
     brisbaneSource ≡ false
 noActorTransmissionFromSharedLanguage = refl
+
+------------------------------------------------------------------------
+-- Dated original October 2015 source chain, not merged authorship.
+-- 2015-10-02 G20 Energy Ministers' adopted communique paragraph 11;
+-- 2015-10-12 B20 Energy Forum participant recommendation published
+-- after the October 2 G20-B20 interaction;
+-- 2015-11-16 G20 Antalya Leaders' communique;
+-- 2015-12-12 UNFCCC COP21 adoption decision.
+-- Original B20 PDF attributes preparation to forum participants and
+-- G20-B20 interaction participants, with inputs from IEA, OECD, ICC
+-- and B20 taskforce. Annex-speaker participation (e.g. BP, Dow,
+-- Glencore) is not authorship of any quoted recommendation and
+-- certainly not formal adoption by ministers, leaders or COP Parties.
+------------------------------------------------------------------------
+
+energyMinistersAndB20HaveDifferentAuthors :
+  speaker g20EnergyMinisters2015
+  ≡ speaker b20EnergyForum2015 → ⊥
+energyMinistersAndB20HaveDifferentAuthors ()
+
+b20BusinessSubmissionDoesNotFactorIntoG20Author :
+  NF.FactorsThrough flattenTopic speaker → ⊥
+b20BusinessSubmissionDoesNotFactorIntoG20Author =
+  NF.witnessRulesOutEveryFlatFactorisation
+    (NF.nonFactorabilityWitness
+      g20EnergyMinisters2015 b20EnergyForum2015
+      refl energyMinistersAndB20HaveDifferentAuthors)
+
+energyMinisterAndB20DifferentSpeechActs :
+  speechAct g20EnergyMinisters2015
+  ≡ speechAct b20EnergyForum2015 → ⊥
+energyMinisterAndB20DifferentSpeechActs ()
+
+record B20OriginalDocumentAttribution : Set where
+  constructor b20OriginalDocumentAttribution
+  field
+    originalStatementAuthor : String
+    originalPublicationDate : String
+    originalForumInteractionDate : String
+    receivesIEAAndOECDAndICCInputs : Bool
+    originalClauseAuthorsIndividuallyVerified : Bool
+    financeLobbyingTransmissionToLeadersVerified : Bool
+    speakerParticipationCountsAsClauseAuthorship : Bool
+
+b20EnergyOriginalReceipt : B20OriginalDocumentAttribution
+b20EnergyOriginalReceipt =
+  b20OriginalDocumentAttribution
+    "B20 Energy Forum participants and G20-B20 interaction participants"
+    "2015-10-12"
+    "2015-10-02"
+    true false false false
+
+b20KnownInputDoesNotEstablishIndividualAuthorship :
+  B20OriginalDocumentAttribution.originalClauseAuthorsIndividuallyVerified
+    b20EnergyOriginalReceipt ≡ false
+b20KnownInputDoesNotEstablishIndividualAuthorship = refl
+
+b20NamedInputsDoNotEstablishG20Influence :
+  B20OriginalDocumentAttribution.financeLobbyingTransmissionToLeadersVerified
+    b20EnergyOriginalReceipt ≡ false
+b20NamedInputsDoNotEstablishG20Influence = refl
+
+record SequenceSourceDates : Set where
+  constructor sequenceSourceDates
+  field
+    ministerialAdoptionDate : String
+    publishedB20StatementDate : String
+    antalyaLeadersAdoptionDate : String
+    parisCOPAdoptionDate : String
+    laterPublishedTextProvesEarlierMinisterialAuthorship : Bool
+    earlierInteractionWasInvestigatedForInfluence : Bool
+
+octoberToParisSequence : SequenceSourceDates
+octoberToParisSequence =
+  sequenceSourceDates
+    "2015-10-02" "2015-10-12" "2015-11-16" "2015-12-12"
+    false false
+
+noBackdatedDocumentAuthorshipClaim :
+  SequenceSourceDates.laterPublishedTextProvesEarlierMinisterialAuthorship
+    octoberToParisSequence ≡ false
+noBackdatedDocumentAuthorshipClaim = refl
