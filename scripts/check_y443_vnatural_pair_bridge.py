@@ -60,6 +60,8 @@ PUBLISHED_QUOTIENT_ISO = ROOT / "DASHI/Moonshine/Y443PublishedQuotientIsoComposi
 GRIESS_SEED = ROOT / "DASHI/Moonshine/Y443FLMGriessGeneratorUVExact.agda"
 GRIESS_SEED_ENDCAP = ROOT / "DASHI/Moonshine/Y443FLMGriessGeneratorsUVEndcapExact.agda"
 CANONICAL_QUOTIENT = ROOT / "DASHI/Moonshine/Y443FLMCanonicalReferenceFromQuotientExact.agda"
+DGL_UNIQUENESS = ROOT / "DASHI/Moonshine/Y443DGLUniquenessSelectedFLMExact.agda"
+WEAK_VOA_NO_GO = ROOT / "DASHI/Moonshine/Y443FLMWeakVOACoreNoPromotionExact.agda"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -169,7 +171,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, CANONICAL_QUOTIENT, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, CONCRETE_TRANSPORT, CONCRETE_CLOSURE, WEIGHT_TWO_UV, WEIGHT_TWO_BASIS, FINITE_BASIS_ENDCAP, PUBLISHED_QUOTIENT_ISO, GRIESS_SEED, GRIESS_SEED_ENDCAP, CANONICAL_QUOTIENT, DGL_UNIQUENESS, WEAK_VOA_NO_GO, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -321,6 +323,19 @@ def assert_source_scope() -> None:
                    "realSelectedTransportedModePreserved"):
         if symbol not in CANONICAL_QUOTIENT.read_text():
             raise AssertionError(f"missing actual published Monster VOA action law {symbol}")
+    for owner, markers in (
+        (DGL_UNIQUENESS, ("ActualCommonHypotheses", "HolomorphicC2Certificate",
+                          "HigherGradeBoundCertificate", "completeFLMIsoFromC2",
+                          "completeFLMIsoFromDimensions", "preservesFirstProduct")),
+        (WEAK_VOA_NO_GO, ("weakBoolVOA", "weakUnitVOA",
+                          "falseNotTrue", "noTwoSidedBoolUnitStateIso")),
+        (CANONICAL_QUOTIENT, ("fromDGLC2", "fromDGLHigherGradeBound",
+                               "actualPublishedVOAAutomorphismLaws")),
+    ):
+        filetext = owner.read_text()
+        for symbol in markers:
+            if symbol not in filetext:
+                raise AssertionError(f"missing DGL true-canonical / no-promotion source {symbol}")
     print("PASS Y443: same-object VOA/Monster action reduced to two finite Griess spanning-family comparisons")    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction, concrete same-VOA transport")
 
 
