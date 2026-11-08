@@ -57,3 +57,5 @@ import DASHI.Moonshine.Y443MonsterGradedLiteralSameObjectCapstoneExact as Actual
 import DASHI.Moonshine.Y443FLMGriessFullAutSelectedVOAExact as FLMSelected
 import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as JMDTwoGeneratorAction
 import DASHI.Moonshine.Y443FLMDirectSameObjectCapstoneExact as FLMDirectCapstone
+import DASHI.Moonshine.Y443FLMConcreteVOAGroupTransportExact as FLMConcreteTransport
+import DASHI.Moonshine.Y443FLMConcreteSameObjectActionClosureExact as FLMConcreteActionClosure
