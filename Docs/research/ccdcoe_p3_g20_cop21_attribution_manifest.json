@@ -376,38 +376,40 @@
     "b20_source_status": "Original B20 Energy Forum 12 Oct 2015 primary PDF source text and cover inspected; B20 September recommendations remain index-only",
     "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix",
     "published_selected_commitment_compliance_observations_located": true,
-    "b20_original_primary_pdf_excerpt_reviewed": true
+    "b20_original_primary_pdf_excerpt_reviewed": true,
+    "targeted_github_consistency_audit": "27 of 27 static schema/source-owner/wiring checks passed on 2026-11-08; not Python execution or Agda kernel",
+    "source_authority_vs_implementation": "original external authorship preserved; DASHI selected instantiation only"
   },
   "remaining": [
     {
       "gate": "I0",
       "target": "Byte-archived official source PDFs/HTML and signed source-revision hashes, exact chapter/paragraph offsets",
-      "status": "OPEN"
+      "status": "OFFICIAL_ORIGINAL_TEXT_LOCATED_ORIGINAL_BYTE_HASH_REVIEW_OPEN"
     },
     {
       "gate": "I1",
       "target": "Full G20, COP21, B20 and C20 corpus coded under source-specific consistent unit and reliability",
-      "status": "OPEN"
+      "status": "15_PURPOSIVELY_SELECTED_CLAIMS_SOURCE_ATTRIBUTED_FULL_CENSUS_OPEN"
     },
     {
       "gate": "I2",
       "target": "Trace concrete dated submissions and drafting revisions into adopted G20/COP text; no semantic-only promotion",
-      "status": "OPEN"
+      "status": "MINISTERS_B20_LEADERS_COP_CHRONOLOGY_VERIFIED_DIRECT_DRAFT_TRANSMISSION_OPEN"
     },
     {
       "gate": "I3",
       "target": "Join country-specific implementation, NDC and G20 compliance records with legal-time scopes",
-      "status": "OPEN"
+      "status": "ORIGINAL_G20RG_SELECTED_COMPLIANCE_OBSERVATIONS_REGISTERED_MEMBER_NDC_JOIN_OPEN"
     },
     {
       "gate": "I4",
       "target": "Causal identification design with alternative speakers, trends, events and interference, and uncertainty",
-      "status": "OPEN"
+      "status": "CAUSAL_EFFECT_NOT_IDENTIFIED"
     },
     {
       "gate": "I5",
       "target": "Independent replication and institution/voice/power/consent review; Golden Agda kernel receipt",
-      "status": "OPEN"
+      "status": "GOLDEN_SOURCE_WRITTEN_KERNEL_AND_EXTERNAL_REPLICATION_OPEN"
     }
   ],
   "legal_temporal_scope": {
