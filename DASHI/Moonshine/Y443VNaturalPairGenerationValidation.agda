@@ -69,3 +69,4 @@ import DASHI.Moonshine.Y443FLMCanonicalReferenceFromQuotientExact as FLMTrueCano
 import DASHI.Moonshine.Y443DGLUniquenessSelectedFLMExact as DGLSelectedUniqueness
 import DASHI.Moonshine.Y443FLMWeakVOACoreNoPromotionExact as WeakFLMCountermodel
 import DASHI.Moonshine.Y443DGLWeakCertificateNoGoExact as DGLWeakRouteNoGo
+import DASHI.Moonshine.MonsterSpecialGravityKKWeightTwoCrosswalkExact as MonsterSpecialGravityCrosswalk
