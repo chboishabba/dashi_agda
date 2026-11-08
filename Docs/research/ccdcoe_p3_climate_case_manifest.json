@@ -351,7 +351,8 @@
     "1998_draft_to_2019_hearing_claims": "later historical examination only, not proof of executed effect",
     "1991_ICE_1995_GCC_1998_CoolerHeads_to_1998_API_draft": "independent events; no shared-execution identity admitted",
     "2017_document_coding_to_1998_API_exposure_effect": "different observational outcome and corpus; not a causal effect estimate",
-    "1997_climate_opinion_panel_to_1998_API_plan_effect": "temporal negative control; both survey waves ended prior to April 1998 draft; cannot infer plan-caused outcomes"
+    "1997_climate_opinion_panel_to_1998_API_plan_effect": "temporal negative control; both survey waves ended prior to April 1998 draft; cannot infer plan-caused outcomes",
+    "2019_amicus_center_absence_to_1998_API_plan_execution": "amicus asserts named centre not formed; other plan components or renamed programmes require separate documents"
   },
   "followup_evidence_20261107": [
     {
@@ -524,6 +525,13 @@
       "status": "attributed_secondary_statement_not_final_receipt",
       "source_ids": [
         "walker_retrospective_sourcewatch"
+      ]
+    },
+    {
+      "id": "named_1998_data_center_never_formed",
+      "status": "amicus_assertion_no_independent_registry_witness",
+      "source_ids": [
+        "amicus_9th_circuit_2019_03_20"
       ]
     }
   ],
@@ -857,5 +865,25 @@
     "confidence_scope": "claim about speaker's stated belief, not independently verified final accounting",
     "actual_funding_receipt": null,
     "actual_implementation_receipt": null
+  },
+  "litigation_amicus_unformed_center_claim": {
+    "id": "amicus_9th_circuit_2019_03_20",
+    "url": "https://climatecasechart.com/wp-content/uploads/case-documents/2019/20190320_docket-18-16663_amicus-brief-4.pdf",
+    "filing_date": "2019-03-20",
+    "case_docket": "18-16663",
+    "document_kind": "amicus_brief_in_support_of_plaintiffs_appellants",
+    "filing_group": "Robert Brulle, Center for Climate Integrity, Justin Farrell, Benjamin Franta, Stephan Lewandowsky, Naomi Oreskes, Geoffrey Supran, Union of Concerned Scientists",
+    "page_in_document": 39,
+    "printed_page": 26,
+    "source_line_range": [
+      1015,
+      1020
+    ],
+    "assertion": "No group formed with the specific name Global Climate Science Data Center.",
+    "epistemic_scope": "attributed_claim_by_filing_amici; not independently verified corporate registry or court finding",
+    "independent_registry_certificate": null,
+    "judicial_fact_finding": null,
+    "proves_no_successor_or_equivalent_program": false,
+    "proves_total_1998_plan_cancellation": false
   }
 }
