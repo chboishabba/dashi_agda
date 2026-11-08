@@ -9924,3 +9924,22 @@ and genuine Y443-Monster group/action equality are OPEN. Popov paths
 weren't located in default branch index; do not infer absence from a
 search that excludes PR/worktree files. Source readback only, no
 Agda or Lean kernel result claimed.
+
+
+### 2026-11-09 distinct Popov owners and Agda four-sector convergence
+
+The user-linked BalabanReducedFlatFaddeevPopovKernelExact.agda is an
+original finite-lattice Yang-Mills proof attributed to Faddeev and
+V. N. Popov (1967), NOT Popov-Rastelli's different Moonshine formal
+VOA source. Its flat ghost-kernel and anchored trivial-kernel results
+are already paid on the finite SU(2) Yang-Mills source, not an FLM
+source-locality proof.
+
+Original paired four-sector Agda owner is now reconciled bidirectionally
+with the other original source record: fromNativeSources,
+nativeSourcesAfterFrom, fromAfterNativeSources, and same-mode
+vacuum/conformal/translation comparisons. Genuine original Leech
+twisted-even source laws, actual FLM all-mode isomorphism and original
+Y443/Monster group/action proof remain open. The dashi_lean4 #47
+Maschke/Schur/FDRep/Hom machinery is existing reusable code.
+No kernel run claimed.
