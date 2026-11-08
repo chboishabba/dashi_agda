@@ -18,6 +18,7 @@ import DASHI.Cognition.CCDCOEP3CausalTrialecticInteractionExact as P3
 import DASHI.Cognition.CCDCOEP3ClimateGenealogyCaseExact as ClimateCase
 import DASHI.Cognition.CCDCOEP3API1998PrimaryPlanExact as API1998
 import DASHI.Cognition.CCDCOEP3EvidenceStageIdentificationExact as Ladder
+import DASHI.Cognition.CCDCOEP3PreAPIOpinionTemporalControlExact as PreAPI
 import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact as Contested
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact as Observed
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
@@ -231,3 +232,18 @@ fundingRecordsWouldDiscriminate :
   Discriminator.BundleSeparates Ladder.fundingSourceProbe
     Ladder.approvedWithoutFunding Ladder.fundedWithoutDelivery
 fundingRecordsWouldDiscriminate = Ladder.fundingProbeSeparates
+
+-- Real historical survey measurements precede the selected 1998 plan.
+-- The exact 1997 survey response change is not an effect of the later
+-- plan, regardless of its interpretation as general climate concern.
+previousSurveysDoNotIdentifyLaterCampaignEffect :
+  NF.FactorsThrough PreAPI.observedEarlierWaves PreAPI.laterImpact → ⊥
+previousSurveysDoNotIdentifyLaterCampaignEffect =
+  PreAPI.earlierSurveyCannotIdentifyLaterCampaignEffect
+
+prePlanNewsAwarenessChange :
+  PreAPI.reportedPercentage PreAPI.recalledNewsCoverage
+    PreAPI.before1997KyotoDebate + 8
+  ≡ PreAPI.reportedPercentage PreAPI.recalledNewsCoverage
+    PreAPI.after1997DebateBeforeAPIDraft
+prePlanNewsAwarenessChange = PreAPI.newsExposureDifference
