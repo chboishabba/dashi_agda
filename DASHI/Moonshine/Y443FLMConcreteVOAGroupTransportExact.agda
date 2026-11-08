@@ -236,6 +236,106 @@ module Transport (selected published : VOA.VertexOperatorAlgebra) where
       ; Action.actsInverseRight = transportedInverseRight
       }
 
+    -- Pointwise VOA preservation on the canonical published action.
+    -- The older VOAGroupAction fields named preservesModes : Set do not
+    -- provide the equation; here the ORIGINAL canonical action does.
+    record PublishedActionVOALaws : Setω where
+      field
+        preservesVacuum : (h : H) →
+          Action.act publishedAction h (VOA.vacuum P.Y)
+          ≡ VOA.vacuum P.Y
+        preservesConformal : (h : H) →
+          Action.act publishedAction h (VOA.conformalVector P.Y)
+          ≡ VOA.conformalVector P.Y
+        preservesMode : (h : H) (a : P.State) (n : ℤ) (b : P.State) →
+          Action.act publishedAction h (VOA.mode P.Y a n b)
+          ≡ VOA.mode P.Y
+              (Action.act publishedAction h a) n
+              (Action.act publishedAction h b)
+        preservesTranslation : (h : H) (a : P.State) →
+          Action.act publishedAction h (VOA.translation P.Y a)
+          ≡ VOA.translation P.Y (Action.act publishedAction h a)
+    open PublishedActionVOALaws public
+
+    transportedPreservesVacuum :
+      (law : PublishedActionVOALaws) (g : G) →
+      transported g (VOA.vacuum S.Y) ≡ VOA.vacuum S.Y
+    transportedPreservesVacuum law g =
+      trans
+        (cong (λ v → fromState iso
+          (Action.act publishedAction (toMonster groupIso g) v))
+          (toVacuum iso))
+        (trans
+          (cong (fromState iso)
+            (preservesVacuum law (toMonster groupIso g)))
+          (trans
+            (sym (cong (fromState iso) (toVacuum iso)))
+            (fromAfterTo iso (VOA.vacuum S.Y))))
+
+    transportedPreservesConformal :
+      (law : PublishedActionVOALaws) (g : G) →
+      transported g (VOA.conformalVector S.Y)
+      ≡ VOA.conformalVector S.Y
+    transportedPreservesConformal law g =
+      trans
+        (cong (λ v → fromState iso
+          (Action.act publishedAction (toMonster groupIso g) v))
+          (toConformal iso))
+        (trans
+          (cong (fromState iso)
+            (preservesConformal law (toMonster groupIso g)))
+          (trans
+            (sym (cong (fromState iso) (toConformal iso)))
+            (fromAfterTo iso (VOA.conformalVector S.Y))))
+
+    transportedPreservesMode :
+      (law : PublishedActionVOALaws) (g : G)
+      (a : S.State) (n : ℤ) (b : S.State) →
+      transported g (VOA.mode S.Y a n b)
+      ≡ VOA.mode S.Y (transported g a) n (transported g b)
+    transportedPreservesMode law g a n b =
+      trans
+        (cong (λ state → fromState iso
+          (Action.act publishedAction (toMonster groupIso g) state))
+          (toMode iso a n b))
+        (trans
+          (cong (fromState iso)
+            (preservesMode law (toMonster groupIso g)
+              (toState iso a) n (toState iso b)))
+          (fromMode iso
+            (Action.act publishedAction
+              (toMonster groupIso g) (toState iso a))
+            n
+            (Action.act publishedAction
+              (toMonster groupIso g) (toState iso b))))
+
+    transportedPreservesTranslation :
+      (law : PublishedActionVOALaws) (g : G) (a : S.State) →
+      transported g (VOA.translation S.Y a)
+      ≡ VOA.translation S.Y (transported g a)
+    transportedPreservesTranslation law g a =
+      trans
+        (cong (λ state → fromState iso
+          (Action.act publishedAction (toMonster groupIso g) state))
+          (toTranslation iso a))
+        (trans
+          (cong (fromState iso)
+            (preservesTranslation law (toMonster groupIso g)
+              (toState iso a)))
+          (trans
+            (sym (cong (fromState iso)
+              (toTranslation iso (fromState iso
+                (Action.act publishedAction
+                  (toMonster groupIso g) (toState iso a))))))
+            (trans
+              (cong (fromState iso)
+                (cong (VOA.translation P.Y)
+                  (sym (toAfterFrom iso
+                    (Action.act publishedAction
+                      (toMonster groupIso g) (toState iso a))))))
+              (fromAfterTo iso
+                (VOA.translation S.Y (transported g a))))))
+
     -- This is the exact computable comparison on two JMD source generators.
     -- With an independently selected preexisting action, we must test
     -- these equations on the same selected state, not just compare traces.
