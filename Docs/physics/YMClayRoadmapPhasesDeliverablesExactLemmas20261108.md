@@ -1,5 +1,32 @@
 # Yang–Mills Clay — canonical roadmap, phases, deliverables, exact remaining lemmas
 
+## 8 November 2026 — *latest-repository correction*: R572 seven-family critical path
+
+**Correction to the older ten-target wording below:** the ten YM01–YM10 names describe remaining **physical theorem endpoints**, not ten missing formal constructions. A direct audit of the current DASHI repository found **R572** and **R569–R571** source-first actual-group work, plus existing compact-simple classification, SU(N), Haar, original Wilson, RG, selected \(\mathbb R^4\), OS and five-block modules. It is misleading to describe these as absent or as work to redo. The current machine-readable [manifest](YMClayEndpointPhaseLemmaManifest20261108.json) lists what is **already paid** under every old YM target and adds R572's preferred actual critical path.
+
+**Seven preferred original-source families — source-owner reconciliation (not seven new Agda targets):**
+
+| Family | Existing source owner / paid implementation | Decisive *uninhabited original-source result* |
+|---|---|---|
+| **A3 — finite-projective Wilson representation** | `YangMillsClayPreferredA3FiniteProjectionRound566Exact`: selected cylinder/limit compiler, no arbitrary-observable, all-\(L^p\) or Prokhorov requirement | Five original physical witnesses: positive selected event semantics, event Boolean algebra, projective consistency, continuity at empty, original Wilson finite-projection factorization |
+| **T1 — finite/RG/OS same family** | Original periodic Wilson/Haar/R445, finite reflected-form pullback and OS reconstruction compiler | Actual reflected positive-time geometry and all-scale **same-source** limit |
+| **T5 — original CMP119 moments** | Finite marked native Wilson moment and source/scale compilers | Full original physical cutoff/volume-uniform moment, tail and large-field estimates |
+| **B1 — Wilson WEXT** | Same covariance carrier/WEXT compiler, finite-to-continuum identity when its source inputs hold | Original real full-Wilson WEXT including large field, not only CMP116 small field |
+| **B2 — same OS \(H\)** | R331/R333 same-reconstruction spectral compiler | Actual original physical observer/test coordinate to same \(H_{OS}\), density of physical nonvacuum sector and strict uniform full-sector spectral lower bound |
+| **G1 — actual all-compact-simple groups** | R517 structural source; R569 constructor fixes bracket/exp/log/Ad to *actual* selected group; R570 selected five-block builder; R571 all-group source-first compilation | Actual `StructuralSourceBundle` for each group, actual local quantitative norm/BCH/Haar bounds **on those operations**, and five-block physical data — not group-index classification or another SU(N) algebra |
+| **H6 — same-family Ward/nontriviality** | R563/R572 minimal Gaussian-to-two-derivative-Ward-kernel compiler; extra OPE/stress can be deferred from minimal gap route | Actual same-family Ward-kernel input and physically nontrivial interacting continuum witness |
+
+**Direct source authority:** `YangMillsClayCriticalPathRound572Exact.agda` lists exactly seven `CriticalFamily` constructors and sets `round572CriticalPathCompilerLevel = machineChecked`, but its `g1SourceFirstActualGroup` is still `conditional` through `YangMillsActualGroupSourceFirstCompleteRound571Exact`. Likewise `YangMillsConcreteStructuralSemanticsRound517Exact.literalRound517AllGroupCompactSimpleSourceLevel` and `YangMillsActualGroupQuantitativeConstructorRound569Exact.literalRound569ActualGroupQuantitativeBoundsLevel` are `conditional`. A compiler-status enum cannot establish a Clay physical theorem.
+
+**R4 nuance:** `YangMillsConcreteStructuralSemanticsRound517Exact` already fixes the selected \(\mathbb R^4\) Euclidean spacetime with definitional equality. `YangMillsClayPreferredA3FiniteProjectionRound566Exact` supplies a narrower actual finite-to-represented-continuum construction route. What remains is **physical Wilson expectation/Schwinger measure existence and nontriviality on that chosen space**, not the definition of \(\mathbb R^4\) or a duplicate general-space measure construction.
+
+**Haar nuance:** continuous Haar/Gibbs/product-Haar owners exist, as does `BalabanClayT3CompactHaarLimitExact`; the latter explicitly marks original volume/scale-uniform Haar quadrature and domination as `conditional`. Retain only that **source-specific same-measure** requirement where needed, not a generic request to define Haar.
+
+**Clay outcome:** its necessary physical continuum, interaction, strict full-nonvacuum positive gap and all-group source estimates remain open despite the now extensive source-written reconstruction infrastructure. PH0–PH4 and YM01–YM10 below remain as *deliverable views* of the seven R572 families, not competing proof plans. No 3+1 rederivation is required.
+
+---
+
+
 **Reconciled:** 8 November 2026 · **Working PR:** [#1444](https://github.com/chboishabba/dashi_agda/pull/1444) · **Earlier Route-S donor:** [#1440](https://github.com/chboishabba/dashi_agda/pull/1440) · **3+1/OS/KK comparison:** [#1460](https://github.com/chboishabba/dashi_agda/pull/1460)
 
 **Machine-readable single source of status truth:** [`YMClayEndpointPhaseLemmaManifest20261108.json`](YMClayEndpointPhaseLemmaManifest20261108.json). The exact theorem target identifiers YM01–YM10 in this document are **proposed final inhabitants**, not existing theorem names or Agda-accepted statements. Existing source-written interfaces are explicitly indicated below. This ledger supersedes older *priority/status descriptions*, not their mathematical proofs.
