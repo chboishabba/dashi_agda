@@ -62,3 +62,4 @@ import DASHI.Moonshine.Y443FLMConcreteSameObjectActionClosureExact as FLMConcret
 import DASHI.Moonshine.Y443FLMWeightTwoOnlyUVExact as FLMWeightTwoUV
 import DASHI.Moonshine.Y443FLMWeightTwoBasisUVExact as FLMBasisUV
 import DASHI.Moonshine.Y443FLMFiniteBasisUVEndcapExact as FLMBasisEndcap
+import DASHI.Moonshine.Y443PublishedQuotientIsoCompositionExact as Y443PublishedMonsterIso
