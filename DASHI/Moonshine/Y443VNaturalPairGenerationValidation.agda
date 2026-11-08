@@ -68,3 +68,4 @@ import DASHI.Moonshine.Y443FLMGriessGeneratorsUVEndcapExact as FLMGriessSeedEndc
 import DASHI.Moonshine.Y443FLMCanonicalReferenceFromQuotientExact as FLMTrueCanonicalReference
 import DASHI.Moonshine.Y443DGLUniquenessSelectedFLMExact as DGLSelectedUniqueness
 import DASHI.Moonshine.Y443FLMWeakVOACoreNoPromotionExact as WeakFLMCountermodel
+import DASHI.Moonshine.Y443DGLWeakCertificateNoGoExact as DGLWeakRouteNoGo
