@@ -50,7 +50,7 @@ module ArbitraryWeakVOAs
     ; U.gradeDimensionIdentificationProved = tt
     ; U.selectedSimpleVOA = ⊤
     ; U.selectedSimpleVOAProved = tt
-    ; U.eachGradeBoundFromThree = λ _ → U.zeroLe
+    ; U.eachGradeBoundFromThree = λ _ → DGL.zeroLe
     }
 
 -- The only legitimate use of DGL uniqueness is with independently
