@@ -70,6 +70,11 @@ def validate():
         assert family["already_paid"] and family["original_remaining"]
         assert all(lemma_id in ids for lemma_id in family["maps_to"])
         assert family["id"] in body
+    assert obj["latest_source_corrections_20261108"][0]["area"] == "BCH"
+    assert obj["latest_source_corrections_20261108"][1]["area"] == "CMP119 OS4"
+    assert (ROOT / "DASHI/Physics/YangMills/YangMillsClayCMP119H1OS4AttachmentRound583Exact.agda").is_file()
+    assert (ROOT / "DASHI/Physics/YangMills/YangMillsClayPublishedFiniteOSCoreMomentSourceRound582Exact.agda").is_file()
+    assert "R583" in body and "BCH" in body
     for lemma in obj["lemmas"]:
         assert lemma["already_paid"], f"forgot existing source for {lemma['id']}"
     assert all(tag in body for tag in ("R559","R563","R569","R577","R578","R581")), "missing latest source-native audit"
