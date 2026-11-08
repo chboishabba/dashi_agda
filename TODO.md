@@ -17343,3 +17343,28 @@ The prior original identifyCarrier-injective/no-extra-states route is
 now **LEGACY SET-LEVEL ONLY** and does not close actual FLM V0.
 The precise proof/attribution and source no-go appear in canonical
 Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+### 2026-11-08 V0.3/V0.4 current source implementation and concrete formal donor
+
+- [x] Source-written pair-carrier graded module on the original fixed and
+  twisted-even sector carriers; actual fixed-point VOA operations/grades
+  transported through a demanded two-sided original-source identification.
+- [x] Original fixed-fixed vertex mode transport, explicit original
+  fixed-twisted theta-twisted-mode equation, and constructed four-channel
+  Z2-parity mode formula on the paired carrier.
+- [x] Find actual unconditional Popov–Rastelli LeanVOA theorem
+  VOA.Moonshine.moonshine (2026-11-04, arXiv:2611.06616),
+  with original Ynat, simplicity, c=24 and JShift grading; actual
+  TopPairs.top_pairs0 and topPairs_one source readback.
+- [ ] Inhabit fixedCarrier↔fixedPoint.fixedVOA actual grade/linear maps and
+  twisted-even genuine linear grade laws (SourceSectorGrading).
+- [ ] Inhabit actual original twisted-fixed and twisted-twisted operators,
+  mode-index map, top-pair source proof, and all-mode Agda-to-LeanVOA
+  same-object equivalence. Lean source theorem is NOT an Agda imported proof.
+- [ ] Same original 80-relator quotient group and published Monster action
+  on JMD u/v; no theorem inferred from the LeanVOA source's noncompiled
+  historical Aut(Moonshine)=Monster sketch.
+
+Canonical exact source named-lemma map:
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
