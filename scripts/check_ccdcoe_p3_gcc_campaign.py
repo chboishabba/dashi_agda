@@ -71,6 +71,7 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
         "strategy_reported_by_firm": True,
         "activity_delivery_reported_by_firm": True,
         "specific_media_clippings_located": True,
+        "independent_historical_media_attention_measurements_located": True,
         "independent_media_prepost_change_measured": False,
         "outlet_level_sampling_frame_defined": False,
         "media_claim_codebook_applied": False,
@@ -88,6 +89,25 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert "other_or_undetermined" in design["frame_categories"]
     assert "document acquisition bias" in design["required_covariates"]
 
+    baseline = data["independent_media_baseline"]
+    assert baseline["id"] == "trumbo_1996_five_newspaper_content_study"
+    assert baseline["doi"] == "10.1088/0963-6625/5/3/006"
+    assert baseline["outlet_scope"] == "five national US newspapers"
+    assert baseline["document_type"] == "peer_reviewed_original_content_analysis"
+    assert baseline["original_article_fulltext_available_here"] is False
+    assert [(r["id"], r["value"]) for r in baseline["observations"]] == [
+        ("1988_h1", 400), ("1989_h2", 1200), ("1993_h1", 350)]
+    assert all(r["unit"] == "column_inches_approx"
+               for r in baseline["observations"])
+    assert baseline["reported_reliability"]["metric"] == "Scott_pi"
+    assert baseline["reported_reliability"]["value"] == 0.78
+    assert baseline["reported_reliability"]["not_harrison_recode"] is True
+    assert baseline["reproduced_aggregate_statements"] is True
+    assert baseline["independent_recode_executed"] is False
+    assert baseline["measured_gcc_attributable_effect"] is None
+    assert "Published rounded column inches are media ATTENTION volume, not frame-specific percentages" in baseline["design_limitations"]
+    assert data["acceptance_gates"][2]["status"] == (
+        "published_attention_baseline_located_article_level_GCC_prepost_not_measured")
     second = data["independent_replication"]
     assert second["id"] == "exxon_2021_180"
     assert second["doi"] == "10.1016/j.oneear.2021.04.014"
@@ -109,6 +129,8 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
     assert "evidenceKindDoesNotFactorThroughGenericTopic" in agda
     assert "noInventedCausalEstimate" in agda
     assert "selectedExxonAccess" in agda
+    assert "import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact" in golden
+    assert "CCDCOEP3Trumbo1996IndependentMediaBaselineExact.agda" in focused
     assert "import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact" in golden
     assert "CCDCOEP3GCCExecutedCampaignSourceExact.agda" in focused
     return {
@@ -117,6 +139,8 @@ def validate(data: dict, agda: str, golden: str, focused: str) -> dict:
         "agency_self_assessed_impacts": 3,
         "indexed_media_objects": len(media),
         "measured_media_causal_effects": 0,
+        "independent_published_attention_windows": len(baseline["observations"]),
+        "published_frame_coder_pi": baseline["reported_reliability"]["value"],
         "exxon_2021_documents_reported": second["reported_documents"],
         "exxon_2021_reanalysis": "NOT_EXECUTED",
         "remaining_empirical_gates": len(gates),
