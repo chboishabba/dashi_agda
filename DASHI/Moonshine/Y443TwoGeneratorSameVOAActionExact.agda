@@ -85,7 +85,7 @@ actionsAgreeWord gi u v a b eu ev (Pair.wordMultiply w z) s =
         (cong (act b (Pair.evaluate gi u v w))
           (actionsAgreeWord gi u v a b eu ev z s))
         (sym (actsProduct b
-          (Pair.evaluate gi u v w) (Pair.evaluate gi u v z) s)))
+          (Pair.evaluate gi u v w) (Pair.evaluate gi u v z) s))))
 actionsAgreeWord gi u v a b eu ev (Pair.wordInverse w) s =
   actionsAgreeInverse gi a b (Pair.evaluate gi u v w)
     (actionsAgreeWord gi u v a b eu ev w) s
