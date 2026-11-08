@@ -149,6 +149,38 @@
       "source_endorses_DASHI": false,
       "independent_actor_policy_transmission": null,
       "date_precision": "unverified_original_date"
+    },
+    {
+      "id": "g20EnergyMinisters2015",
+      "author": "G20 Energy Ministers",
+      "speech_act": "ministerial_communique",
+      "event_date": "2015-10-02",
+      "date_exact": true,
+      "date_precision": "day",
+      "url": "https://www.g20.utoronto.ca/2015/151002-energy.html",
+      "locator": "ministerial_communique_climate_change_paragraph_11",
+      "evidence": "original_2015_energy_ministers_html_source_text_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null
+    },
+    {
+      "id": "b20EnergyForum2015",
+      "author": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "speech_act": "business_forum_recommendation",
+      "event_date": "2015-10-12",
+      "date_exact": true,
+      "date_precision": "day",
+      "url": "https://g20.utoronto.ca/b20/B20-Energy-Forum-Statement-121015-final1.pdf",
+      "locator": "2015_B20_energy_forum_statement_recommendations_1_to_5",
+      "evidence": "original_primary_pdf_excerpts_read_and_cover_visually_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null
     }
   ],
   "bounded_claims": [
@@ -242,6 +274,51 @@
       "action": "source_index_only",
       "speaker": "Business 20 Turkey taskforces",
       "source_type": "business_recommendation"
+    },
+    {
+      "id": "ministers_clean",
+      "source": "g20EnergyMinisters2015",
+      "anchor": "improving energy efficiency and increasing investments in clean energy technologies",
+      "frame": "clean_energy_investment",
+      "action": "ministerial_adopted_communique",
+      "speaker": "G20 Energy Ministers",
+      "source_type": "ministerial_communique"
+    },
+    {
+      "id": "ministers_cop21",
+      "source": "g20EnergyMinisters2015",
+      "anchor": "we are working together to achieve a positive and balanced outcome at COP 21",
+      "frame": "prospective_cop21_ambition",
+      "action": "ministerial_adopted_communique",
+      "speaker": "G20 Energy Ministers",
+      "source_type": "ministerial_communique"
+    },
+    {
+      "id": "b20_carbon_pricing",
+      "source": "b20EnergyForum2015",
+      "anchor": "Implement predictable international carbon pricing to enhance investor confidence",
+      "frame": "carbon_price_investment",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
+    },
+    {
+      "id": "b20_participation",
+      "source": "b20EnergyForum2015",
+      "anchor": "Establish formal B20 representation to the G20 Energy Sustainability Working Group",
+      "frame": "institutional_business_access",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
+    },
+    {
+      "id": "b20_subsidies",
+      "source": "b20EnergyForum2015",
+      "anchor": "Rationalise and phase-out inefficient energy subsidies",
+      "frame": "fossil_subsidy_reform",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
     }
   ],
   "primary_results": [
@@ -280,7 +357,10 @@
     "financial_or_lobbying_direct_receipt": null,
     "emissions_impact": null,
     "paris_adoption_date_is_not_entry_into_force": true,
-    "us_announced_withdrawal_is_not_2017_effective_treaty_withdrawal": true
+    "us_announced_withdrawal_is_not_2017_effective_treaty_withdrawal": true,
+    "earlier_ministerial_text_not_caused_by_later_B20_statement": true,
+    "speaker_presence_not_clause_authorship": true,
+    "iea_oecd_icc_inputs_not_entire_policy_endorsement": true
   },
   "status": {
     "original_official_pages_located": true,
@@ -293,9 +373,10 @@
     "quantitative_institutional_diff_in_diff": false,
     "summit_causal_influence_identified": false,
     "c20_visual_check": "Original C20 PDF cover screenshot inspected, printed text excerpt inspected; original PDF bytes not archived; exact extracted full text not re-coded",
-    "b20_source_status": "B20 catalog locates September 2015 recommendations and October energy forum; no original submission text independently extracted",
+    "b20_source_status": "Original B20 Energy Forum 12 Oct 2015 primary PDF source text and cover inspected; B20 September recommendations remain index-only",
     "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix",
-    "published_selected_commitment_compliance_observations_located": true
+    "published_selected_commitment_compliance_observations_located": true,
+    "b20_original_primary_pdf_excerpt_reviewed": true
   },
   "remaining": [
     {
@@ -405,5 +486,50 @@
     "emissions_change_inferred": null,
     "original_author_endorsement_inferred": false,
     "published_rounded_percentages_not_independent_recomputed": true
-  }
+  },
+  "b20_event_attribution": {
+    "document_id": "b20EnergyForum2015",
+    "original_date": "2015-10-12",
+    "identified_preparation_scope": "B20 Energy Forum participants and participants at G20-B20 interaction event during G20 Energy Ministers meeting on 2 October 2015, with inputs from IEA, OECD, ICC and 2015 B20 Infrastructure and Investment Taskforce",
+    "named_source_inputs": [
+      "International Energy Agency",
+      "Organisation for Economic Co-operation and Development",
+      "International Chamber of Commerce",
+      "B20 Infrastructure and Investment Taskforce"
+    ],
+    "document_annex_named_event_speakers": [
+      "Bud Fackrell (BP Turkey)",
+      "Hakan Turker (BP Turkey)",
+      "Howard Chase (Dow Chemical)",
+      "Mick Buffier (Glencore / World Coal Association)"
+    ],
+    "event_participation_does_not_prove_individual_clause_authorship": true,
+    "source_input_does_not_mean_institutional_endorsement_of_all_recommendations": true,
+    "business_participants_are_not_summit_leaders": true,
+    "october_12_submission_cannot_cause_october_2_ministerial_text": true,
+    "historically_confirmed_same_actor_to_November_G20_drafting": null,
+    "speaker_specific_quotation_origin_identified": null
+  },
+  "ordered_source_events": [
+    {
+      "date": "2015-10-02",
+      "source": "g20EnergyMinisters2015",
+      "stage": "ministerial_communique"
+    },
+    {
+      "date": "2015-10-12",
+      "source": "b20EnergyForum2015",
+      "stage": "business_forum_recommendation"
+    },
+    {
+      "date": "2015-11-16",
+      "source": "antalya2015",
+      "stage": "leaders_communique"
+    },
+    {
+      "date": "2015-12-12",
+      "source": "parisDecision2015",
+      "stage": "COP_adoption"
+    }
+  ]
 }
