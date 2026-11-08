@@ -37,7 +37,7 @@ module Selected
 
     module W = S.WithCanonical canonical
 
-    record TwoGeneratorVOAWitness : Setω where
+    record TwoGeneratorVOAOperators : Setω where
       field
         generation : A.WeightTwoGeneration
         oldU oldV newU newV : A.SelectedVOAAutomorphism
@@ -56,14 +56,19 @@ module Selected
         newVRealises :
           (x : A.State) →
           A.action newV x ≡ W.C.transported (Pair.v S.originalWeld) x
+    open TwoGeneratorVOAOperators public
 
-        -- Only two equality-of-linear-operators obligations, on grade 2.
+    record TwoGeneratorVOAWitness : Setω where
+      field
+        operators : TwoGeneratorVOAOperators
         weightTwoU :
           (w : A.WeightTwo) →
-          A.weightTwoAction oldU w ≡ A.weightTwoAction newU w
+          A.weightTwoAction (oldU operators) w
+          ≡ A.weightTwoAction (newU operators) w
         weightTwoV :
           (w : A.WeightTwo) →
-          A.weightTwoAction oldV w ≡ A.weightTwoAction newV w
+          A.weightTwoAction (oldV operators) w
+          ≡ A.weightTwoAction (newV operators) w
     open TwoGeneratorVOAWitness public
 
     uAllStates :
@@ -71,22 +76,22 @@ module Selected
       VOA.VOAGroupAction.act (JMD.action jmd) (Pair.u S.originalWeld) x
       ≡ W.C.transported (Pair.u S.originalWeld) x
     uAllStates e x =
-      trans (sym (oldURealises e x))
+      trans (sym (oldURealises (operators e) x))
         (trans
           (A.restrictionInjective
-            (generation e) (oldU e) (newU e) (weightTwoU e) x)
-          (newURealises e x))
+            (generation (operators e)) (oldU (operators e)) (newU (operators e)) (weightTwoU e) x)
+          (newURealises (operators e) x))
 
     vAllStates :
       (e : TwoGeneratorVOAWitness) (x : A.State) →
       VOA.VOAGroupAction.act (JMD.action jmd) (Pair.v S.originalWeld) x
       ≡ W.C.transported (Pair.v S.originalWeld) x
     vAllStates e x =
-      trans (sym (oldVRealises e x))
+      trans (sym (oldVRealises (operators e) x))
         (trans
           (A.restrictionInjective
-            (generation e) (oldV e) (newV e) (weightTwoV e) x)
-          (newVRealises e x))
+            (generation (operators e)) (oldV (operators e)) (newV (operators e)) (weightTwoV e) x)
+          (newVRealises (operators e) x))
 
     record ExistingActionGroupLaws : Setω where
       field
