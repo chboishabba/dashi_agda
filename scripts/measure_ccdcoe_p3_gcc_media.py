@@ -16,6 +16,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import tempfile
 from math import sqrt
 from datetime import date
 
@@ -25,7 +26,8 @@ FRAMES = {"science_uncertainty", "economic_cost",
 ARMS = {"GCC-linked-outlet", "comparison-outlet"}
 PERIODS = {"before", "after"}
 REQUIRED = {"id","source_sha256","outlet","date","treatment",
-            "period","frame","coder_id","review_receipt","source_text_reviewed"}
+            "period","frame","coder_id","review_receipt","source_text_reviewed",
+            "source_file"}
 
 def wilson(success: int, n: int, z: float = 1.96) -> list[float]:
     if n <= 0:
@@ -37,9 +39,18 @@ def wilson(success: int, n: int, z: float = 1.96) -> list[float]:
     return [round(max(0.0,center-half),6),round(min(1.0,center+half),6)]
 
 def analyse(rows: list[dict], focus: str, intervention_date: str,
-            intervention_receipt: str) -> dict:
+            intervention_receipt: str, source_root: Path | None = None,
+            synthetic_fixture: bool = False) -> dict:
     if not intervention_receipt or intervention_receipt.startswith("UNVERIFIED"):
         raise ValueError("Source-specific intervention receipt required")
+    if not synthetic_fixture and source_root is None:
+        raise ValueError("Source root required for real source-byte verification")
+    if not synthetic_fixture and "SYNTHETIC" in intervention_receipt.upper():
+        raise ValueError("Synthetic intervention receipt cannot back a real study")
+    if source_root is not None:
+        source_root = source_root.resolve(strict=True)
+        if not source_root.is_dir():
+            raise ValueError("Source root must be an existing directory")
     try:
         cutoff = date.fromisoformat(intervention_date)
     except (ValueError, TypeError):
@@ -70,6 +81,21 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
         if not isinstance(digest,str) or len(digest)!=64 or any(
             c not in "0123456789abcdef" for c in digest):
             raise ValueError("Original document SHA256 required")
+        if not synthetic_fixture:
+            if "SYNTHETIC" in str(row["review_receipt"]).upper():
+                raise ValueError("Synthetic reviewer receipt not admissible")
+            rel = Path(str(row["source_file"]))
+            if rel.is_absolute() or ".." in rel.parts:
+                raise ValueError("Source file must be relative and non-traversing")
+            path = source_root.joinpath(rel)
+            if path.is_symlink():
+                raise ValueError("Symlink source files not accepted")
+            checked_path = path.resolve(strict=True)
+            if not checked_path.is_relative_to(source_root) or not checked_path.is_file():
+                raise ValueError("Source file must belong to source root")
+            real_digest = hashlib.sha256(checked_path.read_bytes()).hexdigest()
+            if real_digest != digest:
+                raise ValueError("Source bytes do not match supplied SHA-256")
         try:
             dt=date.fromisoformat(row["date"])
         except (ValueError,TypeError):
@@ -101,6 +127,7 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
     descriptive_did=(proportion(t,"after")-proportion(t,"before")-
                      proportion(c,"after")+proportion(c,"before"))
     return {"schema":"dashi.ccdcoe.p3.gcc_media_descriptive.v1",
+            "source_bytes_verified":not synthetic_fixture,
             "focus":focus,"article_count":len(rows),
             "intervention_date":intervention_date,
             "intervention_receipt":intervention_receipt,
@@ -119,6 +146,7 @@ def self_test() -> None:
             for i in range(3):
                 synthetic.append({
                     "id":f"synthetic-{arm}-{period}-{i}",
+                    "source_file":f"synthetic-{arm}-{period}-{i}.txt",
                     "source_sha256":hashlib.sha256(
                         f"synthetic-{arm}-{period}-{i}".encode()).hexdigest(),
                     "outlet":f"SYNTHETIC {arm}","date":
@@ -128,12 +156,12 @@ def self_test() -> None:
                         arm=="GCC-linked-outlet" and period=="after") else "other_or_undetermined",
                     "coder_id":"SYNTHETIC","review_receipt":"SYNTHETIC-NOT-ACTUAL",
                     "source_text_reviewed":True})
-    result=analyse(synthetic,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
+    result=analyse(synthetic,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL", synthetic_fixture=True)
     assert result["article_count"]==12
     assert result["causal_attribution"]=="NOT_IDENTIFIED"
     assert result["descriptive_difference_in_differences"]==0.666667
     try:
-        analyse(synthetic[:-3],"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
+        analyse(synthetic[:-3],"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL", synthetic_fixture=True)
     except ValueError:
         pass
     else:
@@ -141,12 +169,40 @@ def self_test() -> None:
     broken=[dict(x) for x in synthetic]
     broken[0]["review_receipt"]=None
     try:
-        analyse(broken,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL")
+        analyse(broken,"science_uncertainty","1993-01-01","SYNTHETIC-NOT-ACTUAL", synthetic_fixture=True)
     except ValueError:
         pass
     else:
         raise AssertionError("Unreviewed document admitted")
-    print("PASS: synthetic 2x2 descriptives, Wilson limits, no-causality, missing-cell and review guards")
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        for row in synthetic:
+            path = root / row["source_file"]
+            path.write_bytes(row["id"].encode())
+            row["review_receipt"] = "LOCAL-FIXTURE-REVIEW-ONLY"
+        real_fixture = analyse(
+            synthetic, "science_uncertainty", "1993-01-01",
+            "LOCAL-FIXTURE-DATE-RECEIPT", source_root=root)
+        assert real_fixture["source_bytes_verified"] is True
+        damaged = [dict(r) for r in synthetic]
+        damaged[0]["source_sha256"] = "0"*64
+        try:
+            analyse(damaged, "science_uncertainty", "1993-01-01",
+                    "LOCAL-FIXTURE-DATE-RECEIPT", source_root=root)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Mismatched source bytes incorrectly admitted")
+        damaged = [dict(r) for r in synthetic]
+        damaged[0]["source_file"] = "../escape.txt"
+        try:
+            analyse(damaged, "science_uncertainty", "1993-01-01",
+                    "LOCAL-FIXTURE-DATE-RECEIPT", source_root=root)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("Traversing source path incorrectly admitted")
+    print("PASS: synthetic 2x2 descriptives, Wilson limits, no-causality, missing-cell, review, digest and path guards")
 
 def main() -> None:
     p=argparse.ArgumentParser(description=__doc__)
@@ -155,16 +211,19 @@ def main() -> None:
     p.add_argument("--focus",default="science_uncertainty")
     p.add_argument("--intervention-date",help="YYYY-MM-DD backed by original source")
     p.add_argument("--intervention-receipt",help="Source ID for actual intervention onset")
+    p.add_argument("--source-root",type=Path,help="Original, locally preserved article-byte root")
     p.add_argument("--self-test",action="store_true")
     a=p.parse_args()
     if a.self_test:
         self_test()
         return
     if (a.input is None or a.output is None or
-        not a.intervention_date or not a.intervention_receipt):
+        not a.intervention_date or not a.intervention_receipt or
+        a.source_root is None):
         p.error("--input --output --intervention-date and --intervention-receipt required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
-    result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt)
+    result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt,
+                   source_root=a.source_root)
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,sort_keys=True,indent=2)+"\n",encoding="utf-8")
     print(f"Wrote descriptive results for {result['article_count']} reviewed items; causal attribution NOT IDENTIFIED")
