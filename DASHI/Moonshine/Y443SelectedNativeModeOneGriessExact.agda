@@ -141,3 +141,44 @@ module Selected (construction : VN.VNaturalConstruction) where
     selectedModeOnePreimageUnique laws
       (S.firstProduct candidate)
       (S.firstProductIsModeOne candidate) x y
+
+  -- The same rigidity holds for the selected underlying linear
+  -- operations and the conformal vector. These facts eliminate
+  -- freedom to choose a fake grade-two algebra carrier operation.
+  selectedActualGradeTwoAdditionRigid :
+    (laws : SourceNativeGriessLaws)
+    (candidate : S.ConcreteGriessProduct) →
+    (x y : S.WeightTwo) →
+    S.weightTwoAdd candidate x y
+    ≡ S.weightTwoAdd (actualSelectedGriess laws) x y
+  selectedActualGradeTwoAdditionRigid laws candidate x y =
+    includeIsInjective laws
+      (S.weightTwoAdd candidate x y)
+      (additionOnGradeTwo laws x y)
+      (trans (S.includeWeightTwoAdd candidate x y)
+        (sym (actualAddition laws x y)))
+
+  selectedActualGradeTwoScalingRigid :
+    (laws : SourceNativeGriessLaws)
+    (candidate : S.ConcreteGriessProduct) →
+    (s : S.Scalar) (x : S.WeightTwo) →
+    S.weightTwoScale candidate s x
+    ≡ S.weightTwoScale (actualSelectedGriess laws) s x
+  selectedActualGradeTwoScalingRigid laws candidate s x =
+    includeIsInjective laws
+      (S.weightTwoScale candidate s x)
+      (scalarOnGradeTwo laws s x)
+      (trans (S.includeWeightTwoScale candidate s x)
+        (sym (actualScaling laws s x)))
+
+  selectedActualConformalRigid :
+    (laws : SourceNativeGriessLaws)
+    (candidate : S.ConcreteGriessProduct) →
+    S.conformalWeightTwo candidate
+    ≡ S.conformalWeightTwo (actualSelectedGriess laws)
+  selectedActualConformalRigid laws candidate =
+    includeIsInjective laws
+      (S.conformalWeightTwo candidate)
+      (selectedConformalGradeTwo laws)
+      (trans (S.conformalIsActual candidate)
+        (sym (conformalReallyOriginal laws)))
