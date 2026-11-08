@@ -1035,3 +1035,75 @@ The narrower, nonduplicative actual selected VOA frontier is:
 
 **Ordering:** no more conditional operation-rigidity, dimension, or source-label certificates. Work first on (V0,V1) original construction/data and (V2) original group maps, then compose. The physical KK and YM gates remain separate. These are outstanding research-level source-specific proofs; no Agda kernel run or canonical selected-object theorem is claimed by this documentation.
 
+
+
+## ACTIVE 2026-11-08 VOA PHASES, DELIVERABLES AND EXACT-LEMMA MAX-CUT
+
+**Authority and state:** This section supersedes earlier lists in this document where DGL was compulsory, or four-operation uniqueness wrappers were counted as new progress. Status vocabulary: DONE = source/docs delivered; CONDITIONAL = proved transport requiring explicit source inputs; OPEN = original selected-object proof not established; NO-GO = proved invalid promotion strategy; OPTIONAL = different endpoint. Source-written is not the same as Agda-kernel verified. Historical attribution: FLM/Griess/Tits/Huang/Dong–Griess–Lam for VOA; Ivanov/Bray for Monster presentation; James Michael DuPont for original Y443 Lean pair words; DASHI for its own implementation. No CI or Agda execution has been reported for this update.
+
+### R0 — completed archaeology and non-duplication
+
+- **R0.1 DONE**: PRs #190/#208 hold VOA/orbifold and modularity/Conway–Norton theorem surfaces; #433/#437 hold grade/Griess/modular finite probes; #479/#482 hold published FLM sector numbers and selected grade-one removal; #1472 holds original JMD import, conditional group/action comparisons, source-native Griess compiler and direct FLM capstone.
+- **R0.2 DONE**: removed five redundant uniqueness wrappers in commit 7df2bdbfb73de0b5165cd7aa74db30b31ad99575. The existing ConcreteGriessProduct mode/addition/scale/conformal inclusion laws plus original grade embedding injectivity already force uniqueness. Do not count duplicate wrappers as proof progress.
+- **R0.3 NO-GO preserved**: Y443DGLWeakCertificateNoGoExact inhabits both weak DGL certificate structures for arbitrary weak VOA sources; old unconstrained Set/constant-zero implementations cannot prove published uniqueness.
+
+### Phase V0 — genuine original selected orbifold (P0, OPEN)
+
+**Deliverable V0.1:** specify original actual Leech VOA, involution, fixed-point sector, theta-twisted sector, parity-even projection and prove their authentic algebraic compatibility, instead of merely supplying LeechLatticeVOAInput.
+
+**Deliverable V0.2:** provide an actual OrbifoldVOAAssembly on the same direct sum with source-defined mixed modes, Jacobi/locality, translation, vacuum, conformal/Virasoro and true graded embeddings. The current VertexOperatorAlgebraCore and OrbifoldVOAAssembly include freely chosen Set-valued semantic flags, which do not themselves prove these laws.
+
+**Deliverable V0.3:** inhabit Y443SelectedNativeModeOneGriessExact.Selected.SourceNativeGriessLaws from V0.1–V0.2, in particular modeOneReallyOriginal, includeIsInjective, actualAddition, actualScaling, conformalReallyOriginal, modeOneCommutative, modeOneLeftLinear, modeOneScalarLinear. These are precisely the missing source-law inputs; the source-native compiler already consumes them.
+
+**Deliverable V0.4:** source-backed selected central charge 24, grade-one zero, simplicity, invariant pairing and genuinely generated weight-two family. Finite grade-count checks are retained only as consistency tests.
+
+**Exact terminal lemma V0:** There exists one original construction v such that StrongVOA(Vnatural(v)), ActualOrbifoldLaws(v), SourceNativeGriessLaws(v) and correct c=24 and V1=0 hold. StrongVOA/ActualOrbifoldLaws are mathematical target descriptions, not existing Agda declaration names. Source-specific proof required.
+
+### Phase V1 — selected ↔ canonical FLM identification (P0, OPEN; two ALTERNATIVE routes)
+
+**V1a direct source route:** produce an actual two-sided all-modes/grades/vacuum/conformal/translation-preserving isomorphism from the original selected Vnatural construction to the published FLM orbifold; or select the canonical FLM object *explicitly* as the source object and make the identity identification honest. Existing Y443FLMConcreteVOAGroupTransportExact proves transport GIVEN this isomorphism. Avoid asserting an independently constructed selected VOA equals FLM from source labels.
+
+**V1b Dong–Griess–Lam route (optional alternative to V1a):** prove genuine original selected mode-one Griess isomorphism and c=24, V1=0; then either actual C2-cofiniteness plus unique irreducible module or actual simplicity plus all-grade dimension upper bounds. Rebuild the weak DGL certificate fields with actual selected quotient/module/grade carriers, and instantiate published theorem, not a freely chosen Set value. Existing Y443DGLWeakCertificateNoGoExact is a guard.
+
+**Exact terminal lemma V1:** There is a two-sided F:V_selected ≃_VOA V_FLM with F(vacuum)=vacuum, F(conformal)=conformal and F(x_(n)y)=F(x)_(n)F(y) for every mode, plus grading/translation/linearity preservation.
+
+### Phase V2 — actual Y443 same-group and original action (P0, OPEN; parallel to V0/V1)
+
+**Deliverable V2.1:** original 12 generators, all 80 relators, authentic JMD u/v words and original selected action attached to the SAME group. The syntax, finite relation enumeration, original imported path and conditional two-generator propagation are already implemented; selected genuine historical group/action source remains to be supplied.
+
+**Deliverable V2.2:** true two-sided G_selected ≃ Q80 ≃ Monster isomorphisms with the full 80-relator quotient universal property, not just relation evaluation. Existing Y443PublishedQuotientIsoCompositionExact is the conditional composition theorem.
+
+**Deliverable V2.3:** actual published Monster action by all-mode FLM automorphisms, actual selected action by genuine VOA automorphisms, and two original u/v intertwining equalities on the SAME real weight-two generating family (or genuine complete spanning basis). Existing Y443FLMGriessGeneratorUVExact and Y443FLMWeightTwoOnlyUVExact then propagate; no new abstract propagation proof needed.
+
+**Exact terminal lemma V2:** Have actual isos φ:G_selected≃Q80 and ψ:Q80≃Monster, and source-true F rho_selected(u/v)=rho_FLM(ψφ(u/v)) F.
+
+### Phase V3 — actual selected-object capstone (BLOCKED V0–V2)
+
+**Deliverable V3.1:** inhabit Y443FLMDirectSameObjectCapstoneExact.SameObject.PublishedFLMAndJMDSource: real genuineGriess, flmWeightTwoGeneration, huangFullExtension, griessTitsMonster, real original/classical VOA actions, published-extension compatibility and original u/v state equality. Alternatively use the sound source-filled quotient-and-DGL route.
+
+**Deliverable V3.2:** apply the ALREADY WRITTEN originalAndPublishedActionsAgreeEverywhere, everySelectedVOAAutomorphismIsOriginalY443Action and recoverOriginalMonsterElement to the original selected source. Do not implement another capstone wrapper.
+
+**Exact terminal lemma V3:** for ALL original selected g and VOA states x, F(rho_sel(g)(x))=rho_FLM(ψφ(g))(F(x)). CONDITIONAL transport implementation paid; original source-filled theorem OPEN.
+
+### Phase X — separate physical/classification gates; no illegal promotions
+
+**X194:** actual 194-class cyclotomic character table, nonvacuous orthogonality, fusion and graded-trace realization (PR #696). Existing postulated index carriers/trivial orthogonality are not a populated table.
+
+**XCFT:** exact original K3/Mathieu/umbral/penumbral/AdS or bulk-boundary same-object action (PRs #142/#144/#190/#208/#437). Distinct CFTs are not identified by dimension or coefficients.
+
+**XKK:** real complete 5D action, global anomaly consistency, sourced compactification, same measured (3,1) observer metric and physical Monster-equivariant graviton/field/stress map (PRs #1241/#1235/#1460/#1179). The existing FLM 196884 = 300 + 98280 + 98304 is a PAID numerical decomposition only.
+
+**XYM:** Clay original SU(N)/all compact-simple Wilson R4 continuum E1, actual physical original-source D1 estimates or alternative full-gap theorem, same non-vacuum OS-H D2, genuine N1 and all-group G1 (PR #1444); source-conditional finite lattice/Haar/RG/OS owners do not close it.
+
+### Phase/deliverable acceptance matrix
+
+| Phase | Status | Reused source owners | Promotion criteria |
+|---|---|---|---|
+| R0 audit / dedup | DONE | #1472, #190/#208/#433/#437/#479 | Existing owners indexed, redundant rigidity removed, vacuous DGL fenced |
+| V0 selected orbifold | OPEN | VNaturalOrbifoldConstruction; Y443SelectedNativeModeOneGriessExact | Real original source law inhabitants; not freely chosen Sets |
+| V1 published FLM iso | OPEN; conditional transport DONE | Y443FLMConcreteVOAGroupTransportExact; DGL optional | Actual all-mode bidirectional VOA iso |
+| V2 group+u/v actions | OPEN; propagation CONDITIONALLY PAID | Y443PublishedQuotientIsoCompositionExact; JMD/VOA generators | True group isos and original operator equalities |
+| V3 source-filled capstone | OPEN; generic compiler DONE | Y443FLMDirectSameObjectCapstoneExact | Real source inputs yield same-action theorem |
+| X194/XCFT/XKK/XYM | INDEPENDENT | #696/#208/#1241/#1444 and peers | Each domain's own original source endpoint |
+
+**Execution order:** V0 and V1 original source construction/identification; V2 authentic group and u/v source maps in parallel; V3 composition after both. Reject more numeric bookkeeping, generic record compilers, uniqueness wrappers, or fake theorem-authority fields as progress against V0–V3. Route physical goals to their separate PRs. This is the active VOA roadmap for PR #1472; the February .planning/ROADMAP.md documents a different historical geometry programme and is intentionally not overwritten.
