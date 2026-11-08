@@ -75,8 +75,13 @@
         "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda",
         "DASHI/Physics/YangMills/YMClaySUNProductHaarGaugeFromOneLinkExact.agda"
       ],
-      "missing": "Construct native continuous SU(N) trace/Haar/Fubini and physical beta/cutoff identification with the same real Wilson Gibbs measures",
-      "depends": []
+      "missing": "Not a request to construct SU(N), Wilson or Haar again. Materialize the selected physically normalized continuous group-Haar source and its scale-compatible original Wilson measure/limit as required by R443/R445.",
+      "depends": [],
+      "already_paid": [
+        "SU(N) matrix/link/plaquette Wilson source at every finite period",
+        "finite gauge invariance and source selection",
+        "Haar/product-Haar/compact-Haar conditional owners"
+      ]
     },
     {
       "id": "YM02",
@@ -86,9 +91,14 @@
         "DASHI/Physics/YangMills/YMClayOriginalWilsonNativeOSPullbackExact.agda",
         "DASHI/Physics/YangMills/BalabanClayGate4CombinedRGUVIterationExact.agda"
       ],
-      "missing": "Uniform R445 moment/tail, large-field, reflection-compatible block and tightness bounds on the original changing-cutoff full measure",
+      "missing": "R572 A3 projective positive events, Boolean/event compatibility, continuity at empty and selected Wilson factorization; T5 uniform actual physical CMP119 moments/tails and large-field control. No generic new R4/Lp/Prokhorov construction.",
       "depends": [
         "YM01"
+      ],
+      "already_paid": [
+        "R445 native blocked Wilson pushforward and marked cylinder moments",
+        "source-written UV RG same-object compiler",
+        "R566 selected Wilson finite projection-to-limit compiler"
       ]
     },
     {
@@ -98,12 +108,18 @@
       "source_owners": [
         "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda",
         "DASHI/Physics/YangMills/YMClayE1VariableCutoffCylinderLimitExact.agda",
-        "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda"
+        "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda",
+        "DASHI/Physics/YangMills/YangMillsClayPreferredA3FiniteProjectionRound566Exact.agda"
       ],
-      "missing": "Noncollapsed R4 Schwinger limits for physically compatible local cylinders; Euclidean covariance, OS reflection positivity, regularity, and all other required axioms",
+      "missing": "Inhabit actual R4 interacting OS Schwinger limit/axioms from same original Wilson family; R4 being selected as an object is not already a constructive interacting continuum measure.",
       "depends": [
         "YM01",
         "YM02"
+      ],
+      "already_paid": [
+        "R4 selected Euclidean spacetime object in R517",
+        "selected finite-to-continuum cylinder/OS interfaces",
+        "R566 preferred finite-projective continuum route"
       ]
     },
     {
@@ -114,9 +130,13 @@
         "DASHI/Physics/YangMills/YMClayD1PhysicalRemoteCoverageNoGoExact.agda",
         "DASHI/Physics/YangMills/YMClayPhysicalCubeDobrushinFromGibbsExact.agda"
       ],
-      "missing": "Real positive-volume original Wilson boundary geometry and all physically required distinct remote pair admission, every cutoff/volume; no empty predicate",
+      "missing": "Actual required physical Wilson remote-pair geometry and source-covered family at every cutoff/volume.",
       "depends": [
         "YM01"
+      ],
+      "already_paid": [
+        "Original source normalized Gibbs boundary conditional rows",
+        "nonempty physical remote-pair no-go and same-source bound transport"
       ]
     },
     {
@@ -127,11 +147,15 @@
         "DASHI/Physics/YangMills/YMClayD1OriginalFullWilsonSmallLargeFieldExact.agda",
         "DASHI/Physics/YangMills/YMClayD1PhysicalRemoteCoverageNoGoExact.agda"
       ],
-      "missing": "Full covariance <= original CMP116 small-field envelope + actual large-field remainder, both uniform with one q<1 at fixed positive physical cube size",
+      "missing": "Prove full physical original large-field remainder and cutoff/volume-uniform CMP119/CMP116 physical rate, not an arbitrary q<1 per lattice.",
       "depends": [
         "YM01",
         "YM02",
         "YM04"
+      ],
+      "already_paid": [
+        "CMP116 source small-field cluster formalism",
+        "Original full Wilson small-plus-large geometric clustering conditional compiler"
       ]
     },
     {
@@ -143,9 +167,14 @@
         "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
         "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda"
       ],
-      "missing": "Prove positive-time reflection compatibility and whole-form RP at changing scales, pass to the E1 continuum, and identify precisely the same reconstructed H_OS",
+      "missing": "Inhabit original cutoff-changing positive-time reflection compatibility and same E1 limit reconstructed H_OS; no duplicate OS framework needed.",
       "depends": [
         "YM03"
+      ],
+      "already_paid": [
+        "Finite reflected Wilson/OS form pullback",
+        "R331/R333 same-H conditional semigroup compiler",
+        "T1 original finite-OS source owner"
       ]
     },
     {
@@ -156,9 +185,12 @@
         "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda",
         "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda"
       ],
-      "missing": "Every nonvacuum spectral state detected by a physically dense set of genuine gauge-invariant local test vectors; exclude selected-probe-only interpretation",
+      "missing": "Prove genuine dense complete nonvacuum physical test domain of the identical E1 H_OS, excluding invisible soft modes.",
       "depends": [
         "YM06"
+      ],
+      "already_paid": [
+        "R333 OS indexed test-state and spectral transfer infrastructure"
       ]
     },
     {
@@ -169,13 +201,17 @@
         "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
         "DASHI/Physics/YangMills/BalabanCanonicalBOSIndexedCompletionRound333Exact.agda"
       ],
-      "missing": "H_OS spectrum on all Omega_perp has uniform Delta>0 in physical units, using YM05 or alternate rigorous gap route, not shrinking lattice gaps",
+      "missing": "Original physical-rate spectrum bound on entire Omega-perp of H_OS in continuum physical units; no finite or selected-probe gap promotion.",
       "depends": [
         "YM06",
         "YM07"
       ],
       "preferred_support": [
         "YM05"
+      ],
+      "already_paid": [
+        "R333/R316 conditional original-source semigroup-to-gap compiler",
+        "same-family mass-gap endpoint interface"
       ]
     },
     {
@@ -186,9 +222,13 @@
         "DASHI/Physics/YangMills/BalabanClayConcreteUVToMassGapDependencyExact.agda",
         "DASHI/Physics/YangMills/YMClayE1OriginalSUNDependentCylinderExact.agda"
       ],
-      "missing": "Explicit renormalized local continuum gauge invariant connected correlation that survives and excludes a trivial/free theory",
+      "missing": "Source-backed nontrivial interacting local continuum witness and H6 same-family Ward-kernel input; do not demand independent OPE/stress for the minimal gap route.",
       "depends": [
         "YM03"
+      ],
+      "already_paid": [
+        "Finite marked Wilson connected observables",
+        "H6 same-family Gaussian-to-Ward compiler and local-QFT interfaces"
       ]
     },
     {
@@ -196,9 +236,12 @@
       "target": "clayAllCompactSimpleGroups",
       "status": "open_external_extension",
       "source_owners": [
-        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda"
+        "DASHI/Physics/YangMills/YMClayDirectSourceOSMassGapFrontierExact.agda",
+        "DASHI/Physics/YangMills/YangMillsActualGroupSourceFirstCompleteRound571Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsActualGroupQuantitativeConstructorRound569Exact.agda",
+        "DASHI/Physics/YangMills/YangMillsConcreteStructuralSemanticsRound517Exact.agda"
       ],
-      "missing": "Original full-source construction and nontrivial spectral gap for every compact simple group, not only selected SU2/SUN or toy carrier",
+      "missing": "No generic group classification or SU(N) extension rewrite. Supply actual per-group compact-simple structural witness, uniform local quantitative BCH/Haar estimates and same-group five-block physical data, then inhabit G1 full endpoint.",
       "depends": [
         "YM01",
         "YM02",
@@ -207,6 +250,11 @@
         "YM07",
         "YM08",
         "YM09"
+      ],
+      "already_paid": [
+        "Cartan–Killing classical and exceptional classification/index families",
+        "R517 selected R4/compact-simple structural constructor",
+        "R569–R571 actual-group operation alignment and five-block compiler"
       ]
     }
   ],
@@ -241,5 +289,131 @@
       "clay_prerequisite": false
     }
   },
-  "proof_status_policy": "Source-written, semantic-source-inhabited, Agda-kernel-accepted, and physical theorem complete are distinct labels; never infer a complete Clay theorem from any conditional compiler."
+  "proof_status_policy": "Source-written, semantic-source-inhabited, Agda-kernel-accepted, and physical theorem complete are distinct labels; never infer a complete Clay theorem from any conditional compiler.",
+  "reconciled_against_latest_source": {
+    "date": "2026-11-08",
+    "source": "default-branch R572 and PR #1444/#1440/#1460 heads",
+    "note": "YM01–YM10 are endpoint research gates, not ten absent constructions; prefer seven-family R572 maximal cut.",
+    "critical_path_owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+    "critical_family_ids": [
+      "A3",
+      "T1",
+      "T5",
+      "B1",
+      "B2",
+      "G1",
+      "H6"
+    ],
+    "evidence_types": [
+      "source_written",
+      "actual_source_input_inhabited",
+      "published_external_theorem_instantiated",
+      "kernel_checked",
+      "clay_endpoint"
+    ]
+  },
+  "latest_seven_family_cut": [
+    {
+      "id": "A3",
+      "short": "Literal projective Wilson/continuum representation",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayPreferredA3FiniteProjectionRound566Exact.agda",
+      "already_paid": "Finite projection-to-cylinder/limit compiler, no generic Prokhorov or whole-Lp completion requirement",
+      "original_remaining": [
+        "actual_positive_event_semantics",
+        "actual_event_boolean_algebra",
+        "physical_projective_consistency",
+        "physical_continuity_at_empty",
+        "selected_Wilson_finite_projection_factorization"
+      ],
+      "maps_to": [
+        "YM02",
+        "YM03"
+      ]
+    },
+    {
+      "id": "T1",
+      "short": "Original finite/RG and OS same-family source",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+      "already_paid": "Original Wilson finite geometric model, Haar interfaces, finite reflected-form pullback",
+      "original_remaining": [
+        "actual_reflection_and_positive_time_compatibility",
+        "uniform_original_scale_limit"
+      ],
+      "maps_to": [
+        "YM01",
+        "YM02",
+        "YM06"
+      ]
+    },
+    {
+      "id": "T5",
+      "short": "Literal CMP119 physical Wilson moment source",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+      "already_paid": "Finite actual marked source/moment machinery and same-source compiler",
+      "original_remaining": [
+        "quantitative_original_CMP119_cutoff_volume_uniform_moments_and_large_field"
+      ],
+      "maps_to": [
+        "YM02",
+        "YM05"
+      ]
+    },
+    {
+      "id": "B1",
+      "short": "Source-first Wilson WEXT",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+      "already_paid": "Same-carrier covariance/WEXT transport compilers",
+      "original_remaining": [
+        "original_full_Wilson_connected_source_bound_not_only_CMP116_small_field"
+      ],
+      "maps_to": [
+        "YM05",
+        "YM09"
+      ]
+    },
+    {
+      "id": "B2",
+      "short": "Same OS Hamiltonian and full-sector spectral transport",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+      "already_paid": "R331/R333 same-H formal compositions, finite OS pullback and conditional spectral transfer",
+      "original_remaining": [
+        "actual_physical_OS_H_identification",
+        "cyclic_dense_gauge_invariant_nonvacuum_domain",
+        "uniform_positive_full_sector_spectral_threshold"
+      ],
+      "maps_to": [
+        "YM06",
+        "YM07",
+        "YM08"
+      ]
+    },
+    {
+      "id": "G1",
+      "short": "Actual compact-simple all-group source",
+      "owner": "DASHI/Physics/YangMills/YangMillsActualGroupSourceFirstCompleteRound571Exact.agda",
+      "already_paid": "A/B/C/D and exceptional index coverage, constructor-fixed actual group bracket/exp/log/Ad and aligned five-block source",
+      "original_remaining": [
+        "actual_structural_compact_simple_source_for_each_group",
+        "actual_group_quantitative_local_BCH_Haar_bounds",
+        "actual_five_block_physical_group_data"
+      ],
+      "maps_to": [
+        "YM10"
+      ]
+    },
+    {
+      "id": "H6",
+      "short": "Minimal same-family Gaussian/Ward witness",
+      "owner": "DASHI/Physics/YangMills/YangMillsClayCriticalPathRound572Exact.agda",
+      "already_paid": "Existing same-family Ward-kernel compiler; OPE/stress not part of this minimal gap compiler",
+      "original_remaining": [
+        "actual_same_family_Gaussian_to_local_two_derivative_Ward_kernel",
+        "nontrivial_interacting_local_continuum_witness"
+      ],
+      "maps_to": [
+        "YM03",
+        "YM09"
+      ]
+    }
+  ]
 }
