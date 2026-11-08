@@ -1,5 +1,22 @@
 # Yang–Mills Clay — canonical roadmap, phases, deliverables, exact remaining lemmas
 
+## 8 November — latest R578 correction: CMP119, reconstructed Hamiltonian, BCH and Ward already owned
+
+**R578 supersedes R572** as the preferred source-native seven-family scheduler. Preserve the seven existing source families (A3, T1, T5, B1, B2, G1, H6), but do NOT treat them as seven missing foundations:
+
+| Family | Already source-written | Remaining *source-specific physical input* |
+|---|---|---|
+| **T5 / CMP119** | `YangMillsLiteralCMP119QuantitativeMomentsRound559Exact` derives finite literal polynomial and exponential moment inequalities on the **same** CMP119 expectation sequence, with no after-the-fact equality. | Inhabit `LiteralCMP119PreOSQuantitativeMomentSource.moments` by a real original-finite-Wilson exponential-moment producer; module explicitly marks `literalRound559CMP119ExponentialMomentProducerLevel = conditional`. |
+| **T1 / OS** | R581 `YangMillsClayPublishedFiniteOSMomentSourceRound581Exact` compiles finite OS from published finite Euclidean/bosonic/Wilson reflection positivity + R559 moments + OS0/OS5 closure. Independent Haar/Peter-Weyl/Prokhorov reconstructions are not required by the preferred H2. | Actual selected published finite-source applicability, original moments/regularity, OS4 clustering and continuous Schwinger/OS reconstruction realization. `literalRound581PublishedFiniteOSMomentSourceLevel = conditional`. |
+| **B2 / Hamiltonian** | R577 `YangMillsPreferredSameHamiltonianTransferRound577Exact` chooses the **actual reconstructed OS Hamiltonian definitionally**; a posthoc equality to another Hamiltonian is no longer an outstanding lemma. | Physically instantiate the R331 same-H transfer-energy/decay coordinate, then show strict lower spectral bound on **all** nonvacuum states, not only selected probes. |
+| **G1 / BCH** | `YangMillsActualGroupQuantitativeConstructorRound569Exact` fixes bracket/exp/log/Ad to actual selected group operations. Existing BCH/local chart and all-compact-simple classification packages are present. | Inhabit actual group-specific quantitative norm/BCH remainders, local Haar and physical five-block inequalities. `literalRound569ActualGroupQuantitativeBoundsLevel = conditional`; no generic BCH reconstruction is requested. |
+| **H6 / Ward** | `YangMillsSameFamilyWardKernelSourceRound563Exact` transports the same-system Gaussian two-derivative Ward kernel into the exact Maxwell classifier; H6 nontriviality compilers are present. Full OPE/stress are not mandatory on the shortest route. | Supply the **actual selected continuum-system** Gaussian-to-Ward-kernel theorem and same-H Maxwell gapless-sector restriction. `literalRound563SameFamilyWardKernelSourceLevel = conditional`. |
+
+The genuinely unresolved most consequential analysis is still **A3 projective original Wilson existence, literal original finite CMP119 quantitative moment producer, B1 physical Wilson connected source/WEXT, B2 real transfer-coordinate/full-spectrum calibration**, plus the per-group physical bounds and original H6 hypothesis. These are *instantiations*, not empty Agda namespaces. Neither source-written `machineChecked` compiler labels nor arbitrary Set-valued source certificates constitute a completed Clay mass-gap theorem.
+
+---
+
+
 ## 8 November 2026 — *latest-repository correction*: R572 seven-family critical path
 
 **Correction to the older ten-target wording below:** the ten YM01–YM10 names describe remaining **physical theorem endpoints**, not ten missing formal constructions. A direct audit of the current DASHI repository found **R572** and **R569–R571** source-first actual-group work, plus existing compact-simple classification, SU(N), Haar, original Wilson, RG, selected \(\mathbb R^4\), OS and five-block modules. It is misleading to describe these as absent or as work to redo. The current machine-readable [manifest](YMClayEndpointPhaseLemmaManifest20261108.json) lists what is **already paid** under every old YM target and adds R572's preferred actual critical path.
