@@ -1314,3 +1314,41 @@ operatorname{includePlus}!left(pi_T,Y_{m pair}((x,0),k)(0,y)ight)
 ]
 
 This is stronger than a picked four-block formula because it proves the mixed block recovers the original twisted-module operator. The source zero laws and genuine original sector operations are still inputs rather than constructed Lean-to-Agda witnesses. An authentic original-source implementation must instantiate them, and TT/TF modes and mixed Jacobi/locality remain outstanding. No Agda typecheck or FLM full-mode same-object theorem is claimed.
+
+
+## 2026-11-09 provenance-aware existing Popov + dashi_lean4 max-cut convergence
+
+**User-specified prior owner:** Popov material is already available in the user's wider repository/worktree. Do not create another donor port or claim an upstream formal result as a DASHI original theorem. GitHub default-branch code search did not reveal indexed Popov/LeanVOA files in either dashi_agda or dashi_lean4, and neither checked-in main .gitmodules for dashi_agda nor the inspected dashi_lean4 branch establishes a LeanVOA vendor path. This is a *search-scope limitation*, not evidence the user is mistaken. Identify the existing vendor/worktree owner through local repository discovery before any vendor edit.
+
+**Real native Lean 4 existing owners, inspected on chboishabba/dashi_lean4 PR #47** (branch agent/e6-f3-exterior-square-maxcut-20261006):
+- Synthesis/MonsterRepresentationPostRecognitionEverything.lean: reusable full post-recognition Monster representation stack and precise authority firewall. Its generic Maschke theorem derives the Griess nonconformal 196883 complement from a genuine nonzero fixed conformal vector on an actual 196884-dimensional characteristic-zero Monster representation. Hence **do not** independently postulate a 196883 carrier or write another Schur/isotypic assembler.
+- Synthesis/MonsterWholeCharacterModuleAdapterLive.lean: fdrepAsModuleActionBridge and fdrepAsModuleSubmoduleStable identify the *same original FDRep action* with its group-algebra module and invariant subspaces.
+- Synthesis/MonsterNormalizerHomAction.lean: actHom and actHom_apply prove the actual induced conjugation formula on equivariant Hom, given the source normalizer lifts; no third freely chosen multiplicity action.
+- #47 explicitly retains the missing original full Monster group/action and same-carrier grade-two attachment; it does NOT prove the published Griess mode-one identification by dimension. PR #52's Griess1990/Albert/F4/E6 is a DIFFERENT 26/27-dimensional representation/construction and not a replacement for the 196884-dimensional FLM Griess algebra.
+- #84 is an independent cross-prover TOE/holographic/Monster chiral boundary, not an inhabited original FLM Monster action. #67 Ogg Fourier winding similarly is not the published Monster group identification. Do not overindex.
+
+**New Agda source consolidation (PR #1472 commit a870ac4765afa67e23bf9f77dd350035b59b1d20):** existing VNaturalOriginalPairedFourSectorModesExact.Selected now contains exact adapters to existing VNaturalOrbifoldConstruction.SelectedPairedGradedModule OriginalMixedParitySource and OriginalEvenTwistedTranslation:
+- toNativeMixedParity and toNativeTranslation: no duplicate source-selected operators;
+- originalFFIsNativeFF and pairedModesAreNativeOriginalModes: equality of original fixed VOA and complete four-channel pair modes;
+- pairedVertexModesAreNativeOriginalModes: equality of all integer modes on the SAME selected paired carrier;
+- pairedVertexVacuumIsNativeOriginalVacuum, pairedVertexConformalIsNativeOriginalConformal, pairedVertexTranslationIsNativeOriginalTranslation: exact source-data alignment.
+
+This is a **deduplication theorem for two pre-existing Agda constructions**. It does not supply any original source record inhabitant, the true Popov Ynat all-mode identity, or an actual historical Monster group isomorphism. Agda kernel not run.
+
+### Revised priority (no new abstract proof plumbing)
+
+1. **V0/V1 same-object operator ingress:** identify the already-available Popov original carrier and genuine Ynat / leechWbar / topPairs_one / moonshine on the repository's current vendor/worktree. Prove original fixed/twisted carrier equivalence and semantic preservation to the existing paired source. Avoid adding another four-sector mode/GradedModule compiler.
+2. **V0 source laws:** instantiate the real OriginalFixedVOAAndTwistedEvenSource, OriginalMixedParitySource and mixed-VOA Jacobi/locality from genuine original fixed/Leech twisted sources (or correctly attributed formal proof translation).
+3. **V2 same-group/action:** attach the original selected Y443/Griess grade-two representation to the actual Monster group action, then *reuse* the dashi_lean4 #47 Maschke/Schur/Hom/character machinery and existing Agda #1472 two-generator/whole-state propagators. Required: genuine group map and original u/v intertwiner, not another generic representation lemma.
+4. **V3:** instantiate the already-written selected-vs-published capstone with all real source witnesses. No dimension/numerology-only promotion.
+
+**Exact remaining terminal equations (not established in Agda):**
+
+\[
+F:Y_{\rm selected}\simeq_{\rm VOA}Y_{\rm Popov/FLM},\qquad
+F(x_{(n)}y)=F(x)_{(n)}F(y),\quad
+\Phi:G_{\rm Y443}\simeq\mathbb M,\quad
+F(\rho_{\rm sel}(u/v)x)=\rho_{\rm FLM}(\Phi(u/v))F(x).
+\]
+
+**Acceptance:** source-specific proofs and Agda kernel-check are required. A foreign Lean declaration provides a proof donor, not an Agda proof term. The dashi_lean4 #47 generic theorems cannot by themselves identify the original 80-relator quotient with the Monster.
