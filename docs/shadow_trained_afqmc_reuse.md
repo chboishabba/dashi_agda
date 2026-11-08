@@ -50,3 +50,18 @@ Run: `python scripts/qcafqmc_finite_hubbard_control.py`.
 **Not implemented:** the nickel system, matchgate shadow reconstruction from original device measurements, the 13k-parameter transformer, real AFQMC Hubbard–Stratonovich propagation, phaseless force-bias/population control, or independent AWS quantum/classical cost accounting.
 
 The separate [dashiRTX](https://github.com/chboishabba/dashiRTX) repository was inspected via its README; its documented scope includes NumPy-based PDA/MDL light transport and importance-weighted adaptive rendering. Repository code search for Metropolis/Monte Carlo/sampling returned no indexed matching source. Do not claim that a concrete dashiRTX Metropolis kernel was verified. The inspected source-owned Metropolis implementation remains `DASHI.Biology.MolecularMechanicsSamplingAlgorithms`. Retain source and cross-repository attribution.
+
+
+## Original auxiliary-field projector control
+
+`scripts/qcafqmc_hubbard_hs_projector_control.py` tests the four-field discrete Hubbard–Stratonovich decomposition in the two-site, two-electron sector against the *same* Hamiltonian's exact finite symmetric-Trotter evolution. Each one-body field updates a product of alpha/beta Slater orbitals. The finite quadrature agrees with the exact Trotter operator; the separate stochastic estimate samples those field choices uniformly.
+
+Locally executed prototype (seed 261108129, U=4, dt=0.03, 200,000 field draws):
+
+- Hubbard–Stratonovich vs symmetric-Trotter operator Frobenius error: 2.5057785680614238e-15.
+- Stochastic one-step state-vector L2 error: 0.00035833277814869804.
+- Symmetric-Trotter vs exact one-step Hamiltonian Frobenius error: 0.00010735521390075051.
+
+The committed file mirrors this checked construction; rerun from exact commit for release certification. This pays an explicit **one-step auxiliary-field propagation smoke test**, not the multi-step stabilized, importance-weighted, force-biased phaseless AFQMC simulation, nor the 16-qubit nickel reaction.
+
+Run: `python scripts/qcafqmc_hubbard_hs_projector_control.py`.
