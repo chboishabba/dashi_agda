@@ -345,7 +345,7 @@ module Selected (V : VOA.VertexOperatorAlgebra) where
       (conformalWeightTwo griess)
       (trans (sym (restrictionAgrees a (conformalWeightTwo griess)))
         (trans (cong (action a) (conformalIsActual griess))
-          (trans (actionConformal a) (sym (conformalIsActual griess))))
+          (trans (actionConformal a) (sym (conformalIsActual griess)))))
 
   restrict :
     (griess : ConcreteGriessProduct) →
