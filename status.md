@@ -9905,3 +9905,22 @@ includePlus. Conditional native source zero equations remain explicit;
 the original TT and reverse cross intertwiners, full VOA axioms and
 LeanVOA-to-Agda canonical-source identification are NOT paid. Source
 committed, no Agda kernel verification executed.
+
+
+### 2026-11-09 native Lean group/VOA owner consolidation
+
+Inspected dashi_lean4 PR #47 Synthesis/MonsterRepresentationPostRecognitionEverything,
+MonsterWholeCharacterModuleAdapterLive and MonsterNormalizerHomAction:
+Maschke fixed-conformal-line complement, original FDRep/module action,
+isotypic/Schur/normalizer-Hom machinery already exists, given genuine
+same-object representation sources. No extra 196883-dimensional matrix
+model or generic Hom assembler is needed.
+
+Agda #1472 VNaturalOriginalPairedFourSectorModesExact now has same-source
+toNativeMixedParity and toNativeTranslation and proof equalities of
+both existing paired four-sector mode/vertex-data owners. Remaining
+original source inhabitants, canonical Popov FLM all-mode identification
+and genuine Y443-Monster group/action equality are OPEN. Popov paths
+weren't located in default branch index; do not infer absence from a
+search that excludes PR/worktree files. Source readback only, no
+Agda or Lean kernel result claimed.
