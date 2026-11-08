@@ -1506,3 +1506,5 @@ open SUNPushforwardNoBare public using
 
 
 import DASHI.Physics.YangMills.YMClayD1PhysicalRemoteCoverageNoGoExact as YMPhysicalPairCoverage
+
+import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as CMP119LiteralSpan
