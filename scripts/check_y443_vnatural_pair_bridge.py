@@ -45,6 +45,10 @@ PRESENTED_CAPSTONE = ROOT / "DASHI/Moonshine/Y443JMDPresentedVNaturalCapstoneExa
 SAME_OBJECT = ROOT / "DASHI/Moonshine/Y443MonsterGradedLiteralSameObjectCapstoneExact.agda"
 PATHS_SCRIPT = ROOT / "scripts/check_y443_jmd_11_path_shifts.py"
 RECOGNITION_SCRIPT = ROOT / "scripts/check_y443_3b_constructive_recognition.py"
+FLM_SELECTED = ROOT / "DASHI/Moonshine/Y443FLMGriessFullAutSelectedVOAExact.agda"
+FLM_TWO = ROOT / "DASHI/Moonshine/Y443TwoGeneratorSameVOAActionExact.agda"
+FLM_SAME = ROOT / "DASHI/Moonshine/Y443FLMDirectSameObjectCapstoneExact.agda"
+FLM_FINITE = ROOT / "scripts/check_y443_flm_direct_finite_control.py"
 GOLDEN_ROOT = ROOT / "DASHI/Moonshine/Y443VNaturalPairGenerationValidation.agda"
 
 NODES = ("a", "b1", "c1", "d1", "e1", "b2", "c2", "d2", "e2", "b3", "c3", "d3")
@@ -154,7 +158,7 @@ def assert_finite_counts() -> None:
 
 
 def assert_source_scope() -> None:
-    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, GOLDEN_ROOT):
+    for file in (PRESENTATION, ACTION, TRACE, HEISENBERG, ORBIT, INDEXED, NOGO, JMD_SOURCE, JMD_COMPILER, JMD_POWERS, JMD_PATHS, JMD_SQUARE, JMD_NONADJ, JMD_FROM_RELATORS, BETA_FIVE, BETA_SEMANTICS, COXETER_LAWS, ACTUAL_BETA, ELEVEN_FINITE, ELEVEN_SEMANTICS, ALL_GRAPH, PRESENTED_GENERATION, ALL_TWELVE, PRESENTED_CAPSTONE, SAME_OBJECT, FLM_SELECTED, FLM_TWO, FLM_SAME, GOLDEN_ROOT):
         if not file.is_file():
             raise AssertionError(f"missing Agda source: {file}")
         source = file.read_text()
@@ -230,7 +234,20 @@ def assert_source_scope() -> None:
         for marker in markers:
             if marker not in raw:
                 raise AssertionError(f"missing capstone theorem {marker} in {src.name}")
-    print("PASS source: original 80 relators to 141-step full JMD generator capstone")
+    for source, markers in (
+        (FLM_SELECTED, ("restrictionInjective", "restrictedProductLaw", "restrictedAdditiveLaw",
+                        "restrictedScalarLaw", "extensionIsRightInverseOnStates",
+                        "monsterAfterVOA", "fullVOAAfterMonsterOnStates")),
+        (FLM_TWO, ("actionsAgreeInverse", "actionsAgreeWord", "actionsAgreeEntireY443")),
+        (FLM_SAME, ("originalAndPublishedActionsAgreeEverywhere",
+                    "everySelectedVOAAutomorphismIsOriginalY443Action",
+                    "recoverOriginalMonsterElement")),
+    ):
+        raw = source.read_text()
+        for marker in markers:
+            if marker not in raw:
+                raise AssertionError(f"missing FLM same-object source theorem {marker} in {source.name}")
+    print("PASS source: Y443 relators, JMD pair generation, FLM/Griess action restriction and composition")
 
 
 def check_agda() -> None:
@@ -272,6 +289,7 @@ def main() -> None:
     subprocess.run([sys.executable, str(BETA_SCRIPT)], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(PATHS_SCRIPT)], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(RECOGNITION_SCRIPT)], cwd=ROOT, check=True)
+    subprocess.run([sys.executable, str(FLM_FINITE)], cwd=ROOT, check=True)
     if args.finite_only:
         print("STATUS: finite-only / Agda NOT RUN / Y443 group isomorphism NOT CLAIMED")
     else:
