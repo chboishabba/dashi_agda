@@ -1,0 +1,45 @@
+# CCDCOE P3: G20–COP21 institutional source comparison (8 November 2026)
+
+**Selected original objects:** G20 Brisbane 16 November 2014 (leaders’ communiqué ¶19); G20 Antalya 16 November 2015 (leaders’ communiqué ¶24); COP21 decision 1/CP.21 adopted 12 December 2015 and Paris Agreement Article 4.2; G20 Hamburg 8 July 2017 (the US position **and the position of the other leaders separately**); C20 Turkey communiqué 16 September 2015; B20 Turkey 2015 submissions index.
+
+**Attribution invariant:** original institutions and original document authors retain their full priority and authorship. This file is a DASHI source classification and source-specific formalization, not an attribution of original ideas, legal provisions, empirical measurements or institutional decisions to DASHI, OpenAI, or any prior DASHI contributor. Original mathematical proof owner is `DASHI.Core.IntersectionalNonFactorability`, with source-discriminator machinery reused from `DASHI.Core.DiscriminatorSynthesisExact`. The new G20/COP21 module is a selected instantiation, not the original mathematical theorem, and quotations/citations do not signify endorsement by the original document authors.
+
+## Primary historical source comparison
+
+| Source | Original institutional author | Scope of demonstrated source claim | What it **does not** demonstrate |
+| --- | --- | --- | --- |
+| [G20 Brisbane 2014 ¶19](https://g20.utoronto.ca/2014/2014-1116-communique.html) | G20 leaders | Express support for climate action, growth and investment certainty, and intend a COP21 legal agreement; refer to finance | Legally binding national emissions delivery, industry authorship, or effect of GCC |
+| [G20 Antalya 2015 ¶24](https://g20.org.tr/g20-leaders-commenced-the-antalya-summit/index.html) | G20 leaders | Support a fair/ambitious Paris agreement, differentiated responsibilities, and constructive negotiation | That COP21 outcome was already adopted at Antalya; identity with B20 text or lobbying |
+| [COP21 decision 1/CP.21](https://unfccc.int/files/home/application/pdf/decision1cp21.pdf) | UNFCCC COP21 Conference of the Parties | Formal adoption of Paris Agreement on 12 December 2015 | That any signatory or Party already achieved its future emissions goal |
+| [UNFCCC Article 4 NDC interpretation](https://unfccc.int/process-and-meetings/the-paris-agreement/nationally-determined-contributions-ndcs) | Paris Agreement Parties, source explained by UNFCCC | Each Party has a procedural duty to prepare, communicate and maintain successive NDCs, and pursue domestic mitigation measures | Legally guaranteed achievement of the nationally intended target; implementation of every policy |
+| [Hamburg G20 2017](https://g20.utoronto.ca/2017/2017-G20-leaders-declaration.html) | The declaration records separately US and other G20 leaders | The US withdrawal position and the other leaders' support for Paris are visibly divergent | A common, unanimously shared Hamburg climate position |
+| [C20 Turkey 2015 communiqué](https://g20.utoronto.ca/c20/2015-C20%20Turkey%20Communique_FINAL_16.09.15.pdf) | Organisations of Civil 20 Turkey | A distinct civil-society recommendation: inclusive growth, sustainability, participation, gender justice, civic access to decisions; original PDF cover visually checked | Adoption by G20 leaders; endorsement of DASHI; proof C20 caused any particular 2015 summit sentence |
+| [B20 Turkey 2015 document index](https://g20.utoronto.ca/b20/index.html) | Business 20 Turkey taskforces | Existence of dated recommendations and an energy forum statement | Specific uninspected language of the original B20 submission, direct influence or adopted status |
+| [GCC/Harrison agency account](https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/) | E. Bruce Harrison Company | Its own claimed campaign strategy, activity and self-evaluation | That the PR firm wrote or caused G20 or COP21 provisions |
+
+This is a **purposively selected clause-level corpus**. The claim-count matrix computed from the ten selected rows is a documentary index only, not a quantitative prevalence estimate for each institution's entire communication universe.
+
+## Exactly implemented in this PR
+
+- **Golden Agda:** `DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda`. Retains eight institutional-source objects plus GCC agency provenance, distinct speaker and speech-act constructors, and concrete original-owner-based nonfactorability proofs: Hamburg US versus other leaders; C20 proposal versus Paris Article 4 obligation; agency self-report versus institutional legal authority. Provides a documented hypothetical source-identity discriminator and blocks automatic agency-to-treaty causal promotion.
+- **Manifest:** `Docs/research/ccdcoe_p3_g20_cop21_attribution_manifest.json`. Nine source objects, ten explicitly selected claims, original author/speech-act/date/source URI/paragraph scope; two uncertainty-dated provenance objects; null original hash, actual document-to-negotiator links and outcome estimates; every claim retains exact original institutional owner.
+- **Source-bound validator:** `scripts/check_ccdcoe_p3_g20_cop21.py`. Checks no actor reassignment, no US–other G20 fusion, no stakeholder-recommendation-as-leaders’-decision, and no B20 catalog promoted into its unread original text. Its optional `--source-map` takes archived original bytes and reviewed extracted text, verifies SHA-256 and each same-source clause anchor and retains each review/extraction receipt. It fails on missing bytes, invalid paths, unverified anchors or unsupported source identities. `--self-test` tests synthetic byte/hash fixtures, wrong Hamburg source identity and business-index promotion. Synthetic fixtures do not amount to real primary-source acceptance.
+- **Integrated:** `DASHI/Cognition/Everything.agda`, P3 Golden regression and canonical `scripts/check_ccdcoe_cognition_agda.sh` which delegates Agda kernel acceptance to `scripts/run_agda29_parallel_check.sh`. Do not substitute Nix or CI for the canonical parallel_checker.
+
+## Higher-alpha empirical hypotheses and acceptance checks
+
+**H-D (discourse persistence):** climate action framed alongside investment and growth in multiple institutional sources. This is testable at the original clause/document level; it is NOT direct historical actor/author continuity.
+
+**H-T (institutional transformation):** earlier G20 aspirational negotiation clauses and later Paris procedural NDC obligations have **different legal speech acts**. This source difference is directly established. Which negotiations or stakeholder submissions changed any particular draft still requires dated drafts and correspondence.
+
+**H-I (direct organised influence):** specific GCC/Harrison or ExxonMobil actors affected specific G20/COP21 language or compliance. **OPEN:** require meeting minutes, actor identity, funds/lobbying trail, dated draft version history, original submission identities and an independent same-object causal bridge. Semantic similarity, shared economics language, or a citation do not establish this.
+
+**H-Implementation:** document adoption or a country's Paris treaty status is not actual emissions or finance implementation. For each state and date, join the UN Treaty Collection, national NDC original files, official emissions/finance records, and source-specific G20 compliance reports with explicit date windows and measurement uncertainty.
+
+**H-Voice:** C20, B20, L20, W20 and Indigenous civil-society organisations have different voice, representation, power, consent and decision authority. C20's own primary source highlights civic space, unpaid work, distributional justice and access to governance. No unconsulted group or Indigenous source is claimed to endorse this comparative scheme.
+
+## Exact unresolved acceptance gates
+
+I0: archive authentic original G20/COP21/C20/B20 bytes, original revisions, extracted text and independently reviewed source-to-clause offsets. I1: extend from the selected 10 clauses to an explicitly enumerated full denominator, code categories and double-coder reliability. I2: establish a *specific* institutional drafting/transmission graph from source-version evidence (or mark no proved edge). I3: join each dated commitment to actual country-specific implementation and compliance observations. I4: causal and counterfactual identification, pre-trend and interference sensitivity, uncertainty, and third-party replication. I5: exact Agda Golden kernel receipt, source provenance/attribution audit and independent institutional voice review.
+
+**No claim of full empirical or Agda completion is made merely from source-written code.**
