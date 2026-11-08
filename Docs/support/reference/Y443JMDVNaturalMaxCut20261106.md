@@ -694,3 +694,61 @@ Both have the identical C3 linear action and invariant unit. A contains no nonze
 **Exact shortest remaining P0 producer:** import the **actual** selected inertia/3B linear operators (not the reconstructed model) and their 12 Weyl relations + central character; use the projector formula above to construct `H_zeta tensor S_zeta <-> W_zeta` on those same operators. The separate Griess multiplication law must then be checked; weight-two VOA generation and VOA automorphism extension are still separate theorem owners. Bishop completion of analytic series does not itself yield any of those algebraic identity statements.
 
 **Execution:** local executable and exact machine report attached as `y443_3b_constructive_recognition.py` and `y443_3b_constructive_recognition_results.json`. This repository DOC is committed; the local executable is not silently claimed repo-executed.
+
+
+## 2026-11-08 direct FLM/Griess/Tits/Huang max-cut (reuse-first)
+
+**Repository owner audit, not an absence claim:**
+- Exact 3B Heisenberg and Weyl operators ARE already source-written in `Monster3BFiniteHeisenbergGeneratorsExact`, `Monster3BFiniteSchrodingerFunctionModuleExact`, `Monster3BFiniteProjectorModelExact`; `Monster3BMultiplicityEvaluationExact` owns 729 x 90 and its finite model evaluation; `Monster3BActualKernelCharacterPromotionExact` owns the class-character and 90-fold isotypy compiler; `MonsterGradedVOAActual3BKernelSameElementBidiExact` ties the selected literal 3B object to the actual kernel-class source IF its class and linear recognition receipts are inhabited. The 65663/65610/65610 trace is already in `Monster3BPhaseTransportExact`. No repeat construction required.
+- `MoonshineGriessAutomorphismClassificationExact` already proves the **restriction** of a linear mode-one-preserving VOA automorphism to a Griess product automorphism. It does NOT inhabit a 196884-dimensional concrete Griess multiplication law or the reverse extension theorem for the selected `Vnatural`.
+- `VNaturalOrbifoldConstruction` provides the exact Leech fixed/twisted direct-sum schema, but its closure, Jacobi, simplicity and mixed-mode obligations are presently `Set` slots: a field of type `Set` is an abstract proposition **description**, not an inhabitant of that proposition. Likewise `VertexOperatorAlgebraCore.VOAGroupAction` presently stores `actionIdentity : Set` and `actionComposition : Set`, not functions with pointwise equations. This is why source-level group action laws still require a bridge.
+- The pre-existing `ConwayNortonTheorem.MonsterVOAAction` has fields `faithful : Set`, `fullAutomorphismGroup : Set`; neither is a proof of full automorphism-group recognition. `MonsterGradedVOABridgeExact` similarly has `monsterIsFullVOAAutomorphismGroup : Set`. No invented "existing proof" is accepted from these fields.
+
+**Verified published route** (classical theorem is already known in mathematics; this PR's task is SAME-object specialization, not re-proving it):
+- Griess, *The Friendly Giant*, 1982, DOI 10.1007/BF01389186: concrete 196884-dimensional nonassociative Griess algebra and Monster.
+- Tits (1983-1985) full Griess automorphism group; see also Höhn–Seysen 2025, arXiv:2508.01037, for an independent modern full-aut group theorem involving the actual Griess algebra and VOA.
+- FLM, *Vertex Operator Algebras and the Monster*, 1988: constructed Vnatural with weight-two Griess algebra.
+- Dong–Griess–Lam, *Uniqueness Results for the Moonshine Vertex Operator Algebra*, 2007, DOI 10.1353/ajm.2007.0009: explicitly records weight-two generation of Vnatural and two uniqueness routes requiring additional conditions on other VOAs.
+- Yi-Zhi Huang, *A nonmeromorphic extension of the moonshine module vertex operator algebra*, 1994, arXiv:hep-th/9406190, DOI/identifier not invented: constructed an abelian intertwining algebra and an extension of Griess automorphisms to the Moonshine VOA.
+
+**New proof owners attached to the selected original VN orbifold and original JMD source (not to new duplicate objects):**
+
+```
+Y443FLMGriessFullAutSelectedVOAExact.agda
+  - actual selected V.gradePiece 2 and V.mode(+,1,+) Griess product
+  - full linear automorphism (grade preserving, conformal, vacuum, modes)
+  - explicit free-mode-expression interpretation (vacuum, V2, sums,
+    scalar multiplication, every integer mode, translation)
+  - proof: V2 agreement -> agreement on EVERY interpreted expression
+  - proof: if every selected state has such an expression,
+    V2 restriction is injective on the entire VOA state action
+  - proof: restriction preserves Griess product, add, scalar and conformal
+  - selected Griess/Tits iso + Huang extension -> both directions
+    of full Monster <-> VOA automorphism map pointwise on states
+
+Y443TwoGeneratorSameVOAActionExact.agda
+  - from genuine pointwise action identity/product/inverse laws,
+    all JMD u/v word actions compare inductively
+  - Y443 cover(g) supplies an actual u/v word for EVERY group element g
+  - proof: agreement on u and v -> agreement for every G element
+
+Y443FLMDirectSameObjectCapstoneExact.agda
+  - selects the EXACT VN.Vnatural from the original JMD source
+  - composes the above with the already source-written Y443 pair compiler
+  - proof: published Monster action agrees with existing Y443 VOA action
+    on ALL g provided only it agrees on original u and v
+  - proof: every selected full VOA automorphism is the action of a
+    recovered element of the very same source group G
+  - proof: inverse recovery of that Monster element
+```
+
+The new formal mathematical cut is therefore **source-dependent and short**. To inhabit the selected endcap, the needed actual source witnesses are:
+1. Concrete `VNaturalConstruction` with VOA algebraic laws, and actual weight-two source evaluation (not merely record-level slots).
+2. Real 196884-dimensional weight-two complex Griess vector carrier, its actual linear structure and mode-one multiplication, plus its identification with the published Griess algebra.
+3. FLM weight-two generation witness on THIS selected object; can be transported from the published canonical VOA through a real VOA isomorphism, not from a dimension match.
+4. Huang Griess-to-VOA extension and Griess/Tits Monster identification transported along that SAME VOA / weight-two algebra isomorphism.
+5. Actual `Y443=Monster` selected group equivalence, honest group-action laws and ONLY TWO concrete source-action comparisons on JMD's u and v. The all-element agreement follows from the existing Y443 pair-word theorem.
+
+**Finite independent exact Python model:** `scripts/check_y443_flm_direct_finite_control.py` checks the FULL 120-automorphism group of the five-atom Q^5 coordinate-algebra control, recovers every element by a 5-cycle and a transposition, then checks 22,320 generated-term action equalities. Locally executed counterpart passed; this control validates the composition pattern, not the actual FLM theorem, and does not establish Griess/Vnatural construction.
+
+**Scope:** this commits proof compilers and a much narrower two-generator semantic frontier, NOT a newly established theorem that the selected abstract VN record is literally the canonical FLM VOA. No Agda kernel run requested or claimed.
