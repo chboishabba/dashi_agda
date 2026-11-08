@@ -102,7 +102,9 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "population_level_radicalisation": "not_identified",
         "documented_joint_planning": "source_supported",
         "plan_execution": "not_identified",
-        "api_wide_authorisation": "contested_not_identified",
+        "api_wide_authorisation": "contemporaneous_no_approval_report_final_unidentified",
+        "contemporaneous_no_executive_funding_approach": "attributed_interview_as_of_apr_1998",
+        "organiser_retrospective_nonexecution": "attributed_secondary_not_independently_verified",
         "later_coalition_advocacy": "bounded_reported",
         "separate_campaign_public_materials": "source_bounded_documented",
         "document_content_divergence": "published_study_result",
@@ -129,7 +131,8 @@ def validate(data: dict, cases: str, sources: str) -> dict:
     assert question_status == {
         "public_1998_draft": "documented_primary",
         "planning_group_and_proposed_actions": "documented_primary",
-        "api_wide_authorisation_of_plan": "contested_not_identified",
+        "api_wide_authorisation_of_plan":
+            "contemporaneous_report_of_no_approval; final_outcome_unidentified",
         "independently_reported_later_coalition_advocacy":
             "reported_independent_later_activity",
         "specific_1998_plan_implementation": "not_identified",
@@ -143,6 +146,10 @@ def validate(data: dict, cases: str, sources: str) -> dict:
             "reported_survey_not_causal_effect",
         "independent_1997_climate_opinion_dynamics":
             "measured_independent_pre_1998_API_draft_not_API_effect",
+        "specific_1998_draft_contemporaneous_no_funding_solicitation":
+            "contemporaneous_report_organiser_executives_not_yet_approached",
+        "retrospective_organiser_nonimplementation_account":
+            "attributed_secondary_statement_not_final_receipt",
     }
     activities = data["independent_activity_and_document_measurements"]
     assert {e["id"] for e in activities} == {
@@ -205,14 +212,38 @@ def validate(data: dict, cases: str, sources: str) -> dict:
     assert all(row["post"] - row["pre"] == row["delta_percentage_points"]
                for row in values.values())
     assert data["integration_joins"]["1997_climate_opinion_panel_to_1998_API_plan_effect"].startswith("temporal negative control")
-    source_lookup = {c["id"] for c in later} | {primary["id"]} | {e["id"] for e in activities} | {corpus["id"], pre_api["id"]}
+    contemporary = data["contemporaneous_reported_funding_status"]
+    assert contemporary["id"] == "nyt_cushman_apr_26_1998_report"
+    assert contemporary["source_id"] == primary["id"]
+    assert contemporary["publication_date"] == "1998-04-26"
+    assert contemporary["verified_accounting_ledger"] is None
+    assert contemporary["verified_final_approval_decision"] is None
+    claims = contemporary["reported_statements"]
+    assert {r["id"] for r in claims} == {
+        "joe_walker_no_approach_to_executives",
+        "participating_organisations_not_formally_approved"}
+    assert all(not r["proves_future_nonfunding"] if
+               "proves_future_nonfunding" in r else
+               not r["proves_future_nonapproval"] for r in claims)
+    retrospective = data["retrospective_plan_nonimplementation_account"]
+    assert retrospective["id"] == "walker_retrospective_sourcewatch"
+    assert retrospective["source_type"] == (
+        "secondary_republication_of_attributed_retrospective_statement")
+    assert all(retrospective[key] is None for key in (
+        "original_communication_or_interview_receipt",
+        "independent_corroboration", "actual_funding_receipt",
+        "actual_implementation_receipt"))
+    source_lookup = (
+        {c["id"] for c in later} | {primary["id"]} |
+        {e["id"] for e in activities} | {corpus["id"], pre_api["id"],
+        contemporary["id"], retrospective["id"]})
     assert all(set(q["source_ids"]) <= source_lookup
                for q in data["evidence_question_ledger"])
     assert data["integration_joins"][
         "1998_draft_to_2017_later_coalition_activity"
     ].startswith("no direct execution identity")
     assert data["promotion"]["api_wide_authorisation"] == (
-        "contested_not_identified")
+        "contemporaneous_no_approval_report_final_unidentified")
     assert data["promotion"]["later_coalition_advocacy"] == (
         "bounded_reported")
     survey = data["reported_preplan_survey"]
@@ -345,7 +376,7 @@ def validate(data: dict, cases: str, sources: str) -> dict:
         "audience_effect_of_1998_API": "NOT_IDENTIFIED",
         "preplan_survey_reported_n": survey["reported_sample_size"],
         "reported_preplan_framing_response_pct": survey["reported_response_percent"],
-        "contested_authorisation": "NOT_IDENTIFIED",
+        "contested_authorisation": "CONTEMPORANEOUS_NONAPPROVAL_REPORT_FINAL_UNKNOWN",
         "original_scan_sha256_available": False,
         "plan_execution": "NOT_IDENTIFIED",
         "pre_api_survey_waves_measured": len(pre_api["waves"]),
