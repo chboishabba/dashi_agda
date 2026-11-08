@@ -28,6 +28,7 @@ import DASHI.Cognition.CCDCOEP3ClimateContestedAttributionExact
 import DASHI.Cognition.CCDCOEP3ClimateObservedActivityAndCorpusExact
 import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact
 import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact
+import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
