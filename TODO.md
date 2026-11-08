@@ -1,3 +1,13 @@
+## 2026-11-08 R583 literal Wilson finite algebra complete
+
+- [x] Original finite CMP119 Wilson test carrier is `List (ℝ × List Loop)`; construct zero, sum, coefficient scale, and convolution multiplication with `YangMillsCMP119LiteralWilsonSpanAdditiveExact`.
+- [x] Prove embedding of zero, addition, scaling and convolution multiplication into original real scalar Wilson observables using structural induction plus original Wilson word-concatenation source law.
+- [x] Independent 99,224 exact Fraction checks in `scripts/check_ym_r583_literal_wilson_span.py` (finite control, not physical H1).
+- [ ] Original OS2 multiplication correspondence, the selected Wilson-word concatenation/source-semantic law, genuine R281 source-test coverage, time translation, Wilson OS Gram density, uniform connected-covariance continuity and physical selected H1→full OS4 interpretation.
+- [ ] Same physical continuum, complete nonvacuum OS gap and all-group quantitative G1 remain open.
+
+---
+
 ## 2026-11-08 — CMP119/Hamiltonian/BCH/Ward audit; R578 supersedes R572
 
 Direct source re-audit confirms the user's corrections: CMP119 is not missing (`YangMillsLiteralCMP119QuantitativeMomentsRound559Exact`, `YangMillsClayPublishedFiniteOSMomentSourceRound581Exact`), the **same reconstructed OS Hamiltonian is chosen definitionally** (`YangMillsPreferredSameHamiltonianTransferRound577Exact`), BCH/local compact-simple packages and constructor-fixed same-group operations exist (R569–R571), and Ward/Maxwell classification already exists (`YangMillsSameFamilyWardKernelSourceRound563Exact`, `YangMillsSameSystemGaussianWardKernelTheoremExact`, R549). The current shortest preferred source scheduler is `YangMillsClayCriticalPathRound578Exact`, not R572. Use the updated canonical [roadmap](Docs/physics/YMClayRoadmapPhasesDeliverablesExactLemmas20261108.md) / manifest for complete R578 status.
