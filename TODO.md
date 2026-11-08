@@ -17317,3 +17317,10 @@ belong to separate PR endpoints; no proof-status promotion from finite
 
 Exact acceptance conditions and authorship in
 Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+- [x] Original selected orbifold state-fibre normalizer P=R∘I,
+  P²=P, tag preservation and equal-tag iff equal-normal-form;
+  source proof of original I-injective iff no-extra-states (PR #1472).
+- [ ] Inhabit ORIGINAL identifyCarrier injectivity from actual source
+  orbifold assembly. This is exactly equivalent to the previously
+  requested reverse reconstruction law; neither has been assumed.
