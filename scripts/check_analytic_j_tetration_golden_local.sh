@@ -20,6 +20,7 @@ targets=(
   DASHI/Moonshine/AbelE8RootTriadic243CountComparisonExact.agda
   DASHI/Moonshine/AbelE8GeneratedRootNormTwoExact.agda
   DASHI/Moonshine/AbelE8ThetaParityProjectorExact.agda
+  DASHI/Moonshine/AbelE8HalfOddShellInvolutionExact.agda
   DASHI/Moonshine/AbelBishopMachinQuarterToQPeriodExact.agda
   DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda
   DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda
