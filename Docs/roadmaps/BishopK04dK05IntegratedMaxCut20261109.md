@@ -68,3 +68,26 @@ After P0, instantiate the original source-native `Re(s)>2` Dirichlet series usin
 | P3 (downstream) | Continuity/factor compiler partial | Genuine Gamma/prefactor, analytic continuation and completed-Xi same-object weld |
 
 No new theorem files, kernel check or P0/P1/P2 closure is claimed by this roadmap-only commit.
+
+## 9 November continuation: original finite exponential same-object transport
+
+New source owner `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpCrossWeightTransportExact.agda` (commit `a709f36ab19f8259fd552f81dcde1b7e42af8eaf`), imported by all three canonical TOE roots.
+
+For `F_N` the **actual** pinned original finite exponential and `E_N=F_N-(1-x)`, the new `originalFiniteExpCrossWeightIsOriginalErrorCrossWeight` proves by real-ring cancellation, for all `N,x,h`:
+
+```
+(1-x) F_N(x+h) - (1-x-h) F_N(x)
+    = (1-x) E_N(x+h) - (1-x-h) E_N(x).
+```
+
+`originalFiniteExpCrossWeightIsResidualPlusDefect` then consumes the existing original ODE and division-free error-derivative receipts to establish the same left-hand side equals
+
+```
+h * [ x^N F_N(x) + (1-x)(q_E(N,x,h)-E_N'(x)) ].
+```
+
+This removes the opportunity to substitute a synthetic exponential or an unrelated error function in the next weighted mesh analysis. **It does not prove the source quotient modulus, positive reciprocal endpoint telescope, convergence to `1-x`, or terminal `OriginalBishopNegativeLogExponentialGap`.**
+
+Remaining implementation sequence: (1) source uniform modulus for `q_E(N,x,h)-E_N'(x)` on `0<=x<=r<1` at fixed N; (2) positive Bishop reciprocal weighted finite telescope, preserving the modulus after refinement; (3) derive the integrated `r^(N+1)/((N+1)(1-r)^2)` bound, then source convergence/limit uniqueness; (4) Agda 2.9 transitive imports and TOE root typecheck. P1/P2/P3 still have the exact terminal obligations above.
+
+Verification: source-written Agda and committed imports; no kernel acceptance receipt. No claim of P0–P3 closure.
