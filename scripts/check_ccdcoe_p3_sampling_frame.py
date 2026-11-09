@@ -56,6 +56,16 @@ def check(frame, measured, expected_frame_sha256=None):
         require(u.get('arm') in ARMS and u.get('period') in PERIODS, 'invalid arm/period')
         require(type(u.get('eligible')) is bool, 'eligibility must be boolean')
         if u['eligible']:
+            # Freeze original-document identity, not merely an analyst's row ID.
+            # The comparison consumer verifies actual bytes separately.
+            sha = u.get('source_sha256')
+            require(isinstance(sha, str) and len(sha) == 64 and
+                    all(c in '0123456789abcdef' for c in sha),
+                    'eligible source SHA256 missing or malformed')
+            for field in ('source_file', 'outlet', 'date'):
+                require(isinstance(u.get(field), str) and u[field].strip(),
+                        'eligible original metadata: ' + field)
+        if u['eligible']:
             require(u.get('exclusion_reason') in (None, ''), 'eligible unit has exclusion')
             eligible.add(uid)
         else:
@@ -77,6 +87,9 @@ def check(frame, measured, expected_frame_sha256=None):
         u = registered[uid]
         require(m.get('treatment') == u['arm'] and m.get('period') == u['period'],
                 'measurement arm/period differs from frozen frame')
+        for field in ('source_sha256', 'source_file', 'outlet', 'date'):
+            require(m.get(field) == u[field],
+                    'measured original ' + field + ' differs from frozen frame')
         observed[uid] = m
     require(set(observed) == eligible, 'missing eligible original articles from measurements')
     counts = Counter((registered[uid]['arm'], registered[uid]['period']) for uid in eligible)
@@ -94,7 +107,10 @@ def check(frame, measured, expected_frame_sha256=None):
 
 
 def self_test():
-    units = [{'id': f'{a}:{p}', 'arm': a, 'period': p, 'eligible': True}
+    units = [{'id': f'{a}:{p}', 'arm': a, 'period': p, 'eligible': True,
+              'source_sha256': hashlib.sha256((a + ':' + p).encode('utf-8')).hexdigest(),
+              'source_file': f'{a}:{p}.txt', 'outlet': a,
+              'date': '1992-01-01' if p == 'before' else '1994-01-01'}
              for a in sorted(ARMS) for p in sorted(PERIODS)]
     units.append({'id': 'excluded', 'arm': 'comparison-outlet', 'period': 'before',
                   'eligible': False, 'exclusion_reason': 'predeclared out-of-scope edition'})
@@ -102,7 +118,10 @@ def self_test():
              'frozen_before_coding': True, 'inclusion_rule': 'fixture rule',
              'exclusion_rule': 'fixture exclusions', 'frame_provenance': 'fixture',
              'units': units}
-    measured = [{'id': u['id'], 'treatment': u['arm'], 'period': u['period']}
+    measured = [{'id': u['id'], 'treatment': u['arm'], 'period': u['period'],
+                 'source_sha256': u['source_sha256'],
+                 'source_file': u['source_file'], 'outlet': u['outlet'],
+                 'date': u['date']}
                 for u in units if u['eligible']]
     good = check(frame, measured)
     assert good['eligible_units'] == 4 and good['excluded_units'] == 1
@@ -133,6 +152,12 @@ def self_test():
         ('no_exclusion_reason', lambda f, m: f['units'][-1].update(exclusion_reason=' '), 'excluded unit must have reason'),
         ('duplicate_frame', lambda f, m: f['units'].append(dict(f['units'][0])), 'duplicate original unit'),
         ('missing_cell', lambda f, m: [u.update(eligible=False, exclusion_reason='frozen exclusion') for u in f['units'][:1]], 'missing eligible treatment-period cell'),
+        ('source_digest_swap', lambda f, m: m[0].update(source_sha256='0' * 64), 'measured original source_sha256 differs'),
+        ('source_file_swap', lambda f, m: m[0].update(source_file='different.txt'), 'measured original source_file differs'),
+        ('outlet_swap', lambda f, m: m[0].update(outlet='OTHER OUTLET'), 'measured original outlet differs'),
+        ('date_swap', lambda f, m: m[0].update(date='1999-01-01'), 'measured original date differs'),
+        ('frame_missing_source_digest', lambda f, m: f['units'][0].pop('source_sha256'), 'eligible source SHA256 missing'),
+        ('frame_missing_source_file', lambda f, m: f['units'][0].update(source_file='  '), 'eligible original metadata: source_file'),
     ]
     for name, mutate, message in cases:
         f, m = deepcopy(frame), deepcopy(measured)
