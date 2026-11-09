@@ -33,6 +33,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3GCC1993SourceChainExact.agda
   DASHI/Cognition/CCDCOEP3GCC1993DirectionDiscriminatorExact.agda
   DASHI/Cognition/CCDCOEP3GCC1993ClaimCodingAdmissionExact.agda
+  DASHI/Cognition/CCDCOEP3GCC1993PreResponseBaselineExact.agda
   DASHI/Culture/CriticalArtTemporalReceptionReuseExact.agda
   DASHI/Culture/CriticalArtSameSceneTransportExact.agda
   DASHI/Culture/CriticalArtTriadicFilmBoundaryExact.agda
@@ -67,6 +68,7 @@ python3 scripts/check_ccdcoe_p3_gcc1993_directional_control.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_directional_control.py
 python3 scripts/check_ccdcoe_p3_gcc1993_claim_comparison.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_claim_comparison.py
+python3 scripts/check_ccdcoe_p3_gcc1993_original_coding_receipts.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_claim_coding_protocol.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_claim_coding_protocol.py
 python3 scripts/check_critical_art_film_edition_intake.py --self-test
