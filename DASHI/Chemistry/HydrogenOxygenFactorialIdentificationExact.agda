@@ -13,23 +13,14 @@ open import Data.Nat.Base using (_<_)
 import DASHI.Physics.Units.SI as SI
 
 -- Diesel inputs are comparable only at exactly the same useful output,
--- engine operating point, and test-block boundary. The hidden assumptions
--- are explicit uninhabited source obligations, not silently discharged.
-record FactorialDieselBlock : Set₁ where
+-- engine operating point, and test-block boundary. Such assumptions belong to the separate CausalAdmission record and are
+-- not assumed by the pure four-number contrast.
+record FactorialDieselBlock : Set where
   field
     noHydrogenNoOxygen : Nat
     hydrogenOnly : Nat
     oxygenOnly : Nat
     hydrogenAndOxygen : Nat
-    pairedOutputSame : Set
-    pairedLoadSpeedAmbientSame : Set
-    hydrogenDoseSameInRelevantArms : Set
-    oxygenDoseSameInRelevantArms : Set
-    powerOnlyPlaceboControlled : Set
-    crossoverAndOrderControlled : Set
-    fuelMeterTraceable : Set
-    externalInputAndInventoryRecorded : Set
-
 open FactorialDieselBlock public
 
 -- More combined diesel displacement than the sum of separate effects
@@ -54,14 +45,7 @@ toyFactorialBlock = record
   ; hydrogenOnly = 92
   ; oxygenOnly = 94
   ; hydrogenAndOxygen = 80
-  ; pairedOutputSame = Nat
-  ; pairedLoadSpeedAmbientSame = Nat
-  ; hydrogenDoseSameInRelevantArms = Nat
-  ; oxygenDoseSameInRelevantArms = Nat
-  ; powerOnlyPlaceboControlled = Nat
-  ; crossoverAndOrderControlled = Nat
-  ; fuelMeterTraceable = Nat
-  ; externalInputAndInventoryRecorded = Nat
+
   }
 
 toyInteraction : PositiveInteraction toyFactorialBlock
@@ -76,6 +60,14 @@ toyInteraction = record
 record CausalAdmission (b : FactorialDieselBlock) : Set₁ where
   field
     factorial : PositiveInteraction b
+    pairedOutputSame : Set
+    pairedLoadSpeedAmbientSame : Set
+    hydrogenDoseSameInRelevantArms : Set
+    oxygenDoseSameInRelevantArms : Set
+    powerOnlyPlaceboControlled : Set
+    crossoverAndOrderControlled : Set
+    fuelMeterTraceable : Set
+    externalInputAndInventoryRecorded : Set
     reproducibleExperiment : Set
     noxAndParticleEmissionUncertainty : Set
     completeEnergyInputAndOutputReceipt : Set
