@@ -1,5 +1,86 @@
 # Kitzerow BH4 pathway ontology and executable-network roadmap (2026-11-02)
 
+## 2026-11-09 concrete spatial QDPR and future-minimality completion cut
+
+These are newly **constructed selected finite physical dynamics**,
+not just typed future interfaces:
+
+- `BH4SharedSourceTargetRedoxDynamicsExact.agda`: one *shared*
+  original source BH4/target BH4/target oxidized-pterin inventory.
+  Source delivery, local oxidation, recycling and external injection
+  all mutate the SAME state; `oneStepOpenSystemBalance` and
+  `allControlledHistoriesPreserveOpenBiopterinBalance` prove
+  conservative moiety transport (and paid external supply) for
+  every chronological intervention word. The witness
+  `deliveryAndOxidationDoNotCommute` proves location/control
+  timing matters: deliver then oxidize differs from oxidize then
+  deliver. The oxidized proxy is not automatically qDHB.
+- `BH4SpatialOriginalQDPRStoichiometryExact.agda`: original,
+  human cytosol source-pinned chemical reaction
+  `RHEA:32253`/`R-HSA-71130.5`:
+  **q-6,7-dihydrobiopterin + NADH + H+ -> BH4 + NAD+**.
+  Reuses `BH4MolecularStoichiometryExact.qdprAtomsConserved`
+  and `qdprChargeConserved` (C30 H41 N12 O17 P2,
+  net -1 both sides). `genericBH2IsNotExactQDHB`
+  prevents silently promoting an unspecified BH2 measurement
+  into the original reaction's qDHB substrate.
+  Source species, identities and cytosol are paid; measured
+  enzyme rate, transport and same-specimen time course are not.
+- `BH4OneMoleculeSpatialFutureMinimalityExact.agda`:
+  a selected invariant one-moiety physical subsystem has 3
+  local/redox states and 4 controls (hold, deliver,
+  oxidize, recycle). `selectedOriginalPhysicalStepCommutes`
+  shows the three-state subsystem is the same shared
+  redox transport update. Its target-oxidation readout
+  distinguishes **all three future classes**;
+  `futureEquivalentImpliesIdenticalPhysicalState` and
+  `identicalPhysicalStateImpliesFutureEquivalent` prove
+  exact minimality for the stated observation/intervention
+  language. `globalMoietyCountCannotPredictAllSelectedFutures`
+  proves a constant total cannot replace the located state.
+- Python strict source/finite regressions:
+  `check_bh4_shared_redox_dynamics.py`
+  exhausts 125 start states × all selected history words
+  of length 0..4 (97,625 exact history combinations).
+  `check_bh4_original_qdpr_spatial_reaction.py`
+  verifies actual Rhea/Reactome cytosol provenance,
+  original molecular species, exact CHNOP and net-charge
+  invariants, refuses fabricated plasma compartment and
+  reversed/unrelated identifiers.
+  `check_bh4_one_molecule_future_minimality.py`
+  enumerates all 5,461 controlled future words through
+  length 6 per state and checks the exact minimal
+  three-class partition.
+  All are registered in the original aggregate and in
+  `scripts/check_bh4_spatial_golden.sh`.
+
+**Independent source verification on 2026-11-09:**
+https://www.rhea-db.org/rhea/32253 ;
+https://reactome.org/content/detail/R-HSA-71130.5 ;
+https://www.uniprot.org/uniprotkb/P09417/entry .
+Rhea 32253 is the **specific directional form** related to
+the broader original UniProt 17869 QDPR chemistry.
+Source identity does not imply equivalent cellular contexts,
+measured rate, patient condition or a validated mechanism
+for Kitzerow's proposed allostatic hypotheses.
+
+**Remaining highest-value physical acceptance cut:**
+(1) Agda kernel /`parallel_checker` receipts for the exact
+new Golden heads; (2) merge/reconcile BH4 #1454 with
+developmental #1471 without source ownership loss;
+(3) a 27-site/54-bond shared-state Agda transfer with
+actual source-reaction/transport and explicit boundary
+supply (not merely edge-local proofs or Python fixtures);
+(4) measured same-object BH4/qDHB/BH2/NADH/NAD+,
+compartment volume, exchange, vascular and membrane
+time-course rates; (5) physical-to-tissue stochastic
+transition and heldout independent intervention
+predictions; (6) retained ITIR source-review/PNF gates.
+
+**This first physical event model is formally meaningful but
+not an independently calibrated physiological model, clinical
+therapy, diagnosis or proof of the entire mechanism.**
+
 ## 2026-11-07: Physical location, connectivity and circulation max-cut
 
 ### Source and Golden acceptance command
