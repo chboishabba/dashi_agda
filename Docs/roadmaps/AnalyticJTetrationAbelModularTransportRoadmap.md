@@ -406,3 +406,8 @@ The remaining real analytic cut, not concealed by these adapters:
 - [ ] **P0.B30** Agda 2.9 source + transitive import kernel check, including definition reduction and setoid equality. No checker run in this response.
 
 No shortcut to other open phases: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics` remain OPEN. The concrete exponential iterations are not tetration inverse nor Kneser normalization.
+
+
+## 2026-11-09 soundness repair: carrier fixed-point-freedom
+
+In `DASHI/Moonshine/AbelCarrierFixedLocusTransportExact.agda` commit `9b333d4c`, the previous `FixedPointFree` record had a caller-selected `Empty : Set`, so its alleged contradiction was potentially an inhabited set and did **not** certify actual fixed-point freedom. This was mathematically too weak. The record now has a concrete constructorless `data Empty : Set where` as the conclusion of `contradiction`, `fineCannotBeFixedWhenTranslationFree` and `coordinateCannotDescendWhenTranslationFree`. This is a **logical soundness correction**, not a new proof of any original analytic no-fixed-point hypothesis. Agda kernel acceptance still pending. The existing original level-3 no-fixed-point lemma targets its distinct original empty type and does not become automatically convertible to this new constructorless type without an explicit elimination adapter.
