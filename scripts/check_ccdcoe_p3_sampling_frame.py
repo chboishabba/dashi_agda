@@ -85,6 +85,13 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
         for field in ('outlet', 'date'):
             require(isinstance(u.get(field), str) and u[field].strip(),
                     'discovered unit metadata: ' + field)
+        try:
+            discovered_date = date.fromisoformat(u['date'])
+        except ValueError:
+            raise ValueError('invalid discovered article publication date') from None
+        require((discovered_date < cutoff) if u['period'] == 'before'
+                else (discovered_date >= cutoff),
+                'discovered article period disagrees with frozen intervention cutoff')
         if u['eligible']:
             # Freeze original-document identity, not merely an analyst's row ID.
             # The comparison consumer verifies actual bytes separately.
@@ -95,13 +102,7 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
             for field in ('source_file', 'outlet', 'date'):
                 require(isinstance(u.get(field), str) and u[field].strip(),
                         'eligible original metadata: ' + field)
-            try:
-                publication_date = date.fromisoformat(u['date'])
-            except ValueError:
-                raise ValueError('invalid eligible original publication date') from None
-            require((publication_date < cutoff) if u['period'] == 'before'
-                    else (publication_date >= cutoff),
-                    'article period disagrees with frozen intervention cutoff')
+
         if u['eligible']:
             require(u.get('exclusion_reason') in (None, ''), 'eligible unit has exclusion')
             eligible.add(uid)
@@ -216,12 +217,14 @@ def self_test():
         ('frame_missing_source_file', lambda f, m: f['units'][0].update(source_file='  '), 'eligible original metadata: source_file'),
         ('frozen_cutoff_missing', lambda f, m: f.pop('intervention_date'), 'frozen intervention date required'),
         ('frozen_receipt_missing', lambda f, m: f.update(intervention_receipt='  '), 'frozen intervention source receipt required'),
-        ('article_crosses_cutoff', lambda f, m: f['units'][0].update(date='1993-12-31' if f['units'][0]['period'] == 'before' else '1992-12-31'), 'article period disagrees with frozen intervention cutoff'),
-        ('invalid_article_date', lambda f, m: f['units'][0].update(date='not-a-date'), 'invalid eligible original publication date'),
+        ('article_crosses_cutoff', lambda f, m: f['units'][0].update(date='1993-12-31' if f['units'][0]['period'] == 'before' else '1992-12-31'), 'discovered article period disagrees with frozen intervention cutoff'),
+        ('invalid_article_date', lambda f, m: f['units'][0].update(date='not-a-date'), 'invalid discovered article publication date'),
         ('untraceable_exclusion', lambda f, m: f['units'][-1].update(discovery_locator='  '), 'source discovery locator required'),
         ('duplicate_locator', lambda f, m: f['units'][-1].update(discovery_locator=f['units'][0]['discovery_locator']), 'duplicate discovery locator in frame'),
         ('missing_excluded_outlet', lambda f, m: f['units'][-1].pop('outlet'), 'discovered unit metadata: outlet'),
         ('missing_excluded_date', lambda f, m: f['units'][-1].pop('date'), 'discovered unit metadata: date'),
+        ('invalid_excluded_date', lambda f, m: f['units'][-1].update(date='not-a-date'), 'invalid discovered article publication date'),
+        ('excluded_wrong_period', lambda f, m: f['units'][-1].update(date='1994-01-01'), 'discovered article period disagrees with frozen intervention cutoff'),
     ]
     for name, mutate, message in cases:
         f, m = deepcopy(frame), deepcopy(measured)
