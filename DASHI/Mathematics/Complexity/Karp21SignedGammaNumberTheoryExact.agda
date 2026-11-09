@@ -29,7 +29,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as
 positiveSuccessorZigzagNumerical :
   (magnitude : Nat) →
   Old.unzigzag
-    ((suc (Old.twice magnitude)) _∸_ suc zero)
+    (suc (Old.twice magnitude) ∸ suc zero)
     ≡ + magnitude
 positiveSuccessorZigzagNumerical magnitude =
   Old.unzigzagZigzag (+ magnitude)
@@ -39,14 +39,14 @@ positiveSuccessorZigzagNumerical magnitude =
 -- original integer -(k+1).
 negativeSuccessorPredecessor :
   (k : Nat) →
-  (Old.twice (suc k)) _∸_ suc zero
+  Old.twice (suc k) ∸ suc zero
     ≡ suc (Old.twice k)
 negativeSuccessorPredecessor k = refl
 
 negativeSuccessorZigzagNumerical :
   (k : Nat) →
   Old.unzigzag
-    ((Old.twice (suc k)) _∸_ suc zero)
+    (Old.twice (suc k) ∸ suc zero)
     ≡ -[1+ k ]
 negativeSuccessorZigzagNumerical k =
   trans
