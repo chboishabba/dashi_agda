@@ -231,3 +231,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact
 -- SSP/FRACTRAN sign projection, lossless binary residual, and no-go.
 -- Research crosswalk only; the actual N21 executable remains bit-native.
 import DASHI.Mathematics.Complexity.Karp21SignedSSPOrientationNoLosslessExact
+
+-- N21: decode original strictly positive gamma(W) as binary W, not W+1.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact
