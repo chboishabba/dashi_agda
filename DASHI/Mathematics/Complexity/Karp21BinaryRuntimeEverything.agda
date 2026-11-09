@@ -127,3 +127,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedGammaAllWordFrameExtractionExact
 -- Actual native signed-weight gamma token stream projected to original N21 readRawEdges and exact signed suffix.
 -- Original gamma Nat endpoints still used; all-bit native endpoint clock/open.
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact
+
+-- All-word original E20 signed item/strict partition numeric observation through actual native token parser.
+-- Proof-side count and signed value only: bit-costed E20 runtime remains OPEN.
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeItemStreamExact
