@@ -683,3 +683,10 @@ The earlier KPO-01–KPO-18 ontology and source obligations **remain**; the curr
 **Exact proposed unpaid declarations, in dependency order:** `original369LocalSignedContinuityExact`, `original29x12SpatialReactionBalance`, `sameSourcePhysicalReactionTransportStep`, `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, `physicalTissueOneStepRefinement`, `physicalKernelLumpsUnderInterventions`, `physicalFutureQuotientIsMinimal`, `sourceCalibratedParametersAdmissible`, `heldoutFuturePredictionsDiscriminate`.
 
 **Release gates D0–D6:** exact Agda receipts and branch reconciliation; genuine original reaction/exchange source payment; admissible chemical/PNP update; physical-to-tissue commuting proof; minimal intervention-safe stochastic quotient; independent longitudinal calibration/discrimination; attributed ITIR/PNF review. Do not promote biochemical source attribution into Kitzerow clinical causal validation.
+
+
+### 2026-11-09 same-inventory original-panel chronology update
+
+Source-consuming `check_bh4_original_panel_spatial_events.py` now checks a reaction→original native-bond transfer→return history for every source-acquired finite reaction column. The full strict test requires `artifacts/biology/rhea-kitzerow-bh4-reactions.json`; absent artifacts must remain OPEN. This makes no synthetic claim of 29 measured environmental exchange fluxes. QDPR selected one-column self-test is a separate chemistry fixture.
+
+Companion #1471 now has pointwise Agda local-debit/credit and original exterior-face-injection owner lemmas, but all-voxel original signed-current continuity and exact-head kernel receipts are unpaid. **Full remaining theorem sequence** remains `original369LocalSignedContinuityExact` → `original29x12SpatialReactionBalance` → `sameSourcePhysicalReactionTransportStep` → same-source BH4/PNP/tissue step commutation → intervention-safe future quotient/minimality → source-calibrated held-out predictions. Preserve all KPO-01–18 original source obligations, attribution and no-auto-promotion ITIR boundaries.
