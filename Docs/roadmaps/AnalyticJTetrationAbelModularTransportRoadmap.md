@@ -362,3 +362,23 @@ Remaining exact direct producers, now without a spurious second completeness tas
 **Correction to the earlier max-cut wording:** DASHI *already has* vendored Bishop Cauchy completeness and componentwise complex convergence. We do not need to construct a second unrelated completeness theory merely because `DASHI/Geometry/BanachFixedPoint.agda` is ultrametric. The outstanding analytic work is the **complex principal-Log contraction**, the genuine Koenigs increment-to-Cauchy conversion and uniform holomorphic limit (plus global Kneser); the independent ordinary Banach theorem may be specialized/constructed from the vendored metric if that fixed-point step cannot be reduced directly to the Cauchy iteration.
 
 **Other phases unchanged:** Kneser conjugate-pair gluing, punctured-sector logarithm cocycle, Bishop q-series T-period + renderer identification, original moving fine-level lift, and certified Kouznetsov numerics are still OPEN. No theorem status is promoted solely by constructing an abstract record, a Python receipt or a source-written Agda function.
+
+## 2026-11-09 native Bishop absolute-increment convergence compiler
+
+**Implementation:** `DASHI/Moonshine/AbelBishopKoenigsIncrementSeriesExact.agda` (new source written and pushed).
+
+This **reuses** the original Murray/Bishop `Sequence.absolute⇒isConvergent` and `Sequence.fast-convergent⇒cauchy`, via `DASHI/Foundations/BishopConstructiveRealBridgeExact.agda`, together with original complex componentwise convergence and P1.B02–B05. It does not create a new metric or a new completeness axiom.
+
+- [x] **P1.B12** `originalBishopKoenigsIncrementPrefix`: form actual Bishop series partial sums of the real and imaginary increment sequences on the native complex-pair carrier.
+- [x] **P1.B13** `originalBishopKoenigsFiniteTailToCauchy`: from existing native componentwise **absolute series convergence**, derive original Bishop `Sequence._isCauchy` of both signed partial-sum components. This is the genuine native tail/Cauchy transfer once the absolute majorant is proved.
+- [x] **P1.B14** `originalBishopKoenigsIncrementLimit`, `originalBishopKoenigsIncrementLimitConverges`, `originalBishopKoenigsIncrementLimitUnique`: construct and characterize the unique source Bishop complex limit, using native completeness/equality.
+- [ ] **P1.B15** `originalBishopKoenigsIncrementMagnitude`: prove for each actual source logarithmic Koenigs increment the complex modulus bound `(69/50)(311/1000)(552/625)^n |z-p|²`; do **not** substitute the measured Python residual.
+- [ ] **P1.B16** `originalBishopKoenigsComponentAbsoluteSummability`: convert the actual complex-norm geometric domination into both real/imaginary `SeriesOf_ConvergesAbsolutely`, using the existing Bishop ratio/comparison/series tail authorities and explicit radius certificate.
+- [ ] **P1.B17** `originalBishopKoenigsPrefixSameSource`: prove in the literal Bishop complex setoid that the original finite Koenigs sequence `h_N(z)` equals `h_0(z)+Σ_{n<N}(h_{n+1}(z)-h_n(z))` (beware equality is `_≈C_`, not `_≡_`).
+- [ ] **P1.B18** `originalBishopKoenigsUniformCauchy`: instantiate B13–B17 uniformly on the original punctured/closed disk, with the actual principal-log map and branch/radius hypotheses discharged; not just a pointwise absolutely summable arbitrary increment.
+- [ ] **P1.B19** `originalBishopKoenigsHolomorphicLimit`: apply a genuine native local-uniform-holomorphic convergence theorem and prove the Schröder equation and inverse derivative.
+- [ ] **P0.Accept** Typecheck new and transitive Agda modules with the pinned Agda 2.9 checker; none of the newly written owners in this series is yet kernel-accepted.
+
+Other phase gates stay exactly OPEN: `originalKneserConjugatePairGlobalNormalization`; `originalPuncturedSectorLogBranchCocycle`; `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`; `originalMovingLevelAbelWeldInstance`; `originalKouznetsovCertifiedNumerics`.
+
+**Execution receipt:** locally executed the exact rational fixed-point and Koenigs-tail scripts in this continuation and both PASS. These receipts certify their finite rational arithmetic only and are not Agda acceptance or the complete analytic P1 theorem.
