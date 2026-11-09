@@ -133,3 +133,37 @@ history, or generic fibre transport: those are already owned.
 New Agda file source-written and imported. No Agda executable or
 kernel/parallel-checker execution receipt was available in this
 GitHub-connector session; don't promote the status to VERIFIED.
+
+
+## 9 November 2026 — structural maximum cut for A1–A9
+
+**Repository changes:** `DASHI/Culture/CriticalArtSameSceneTransportExact.agda`,
+`DASHI/Culture/CriticalArtTriadicFilmBoundaryExact.agda`,
+`Docs/research/critical_art_film_edition_scene_intake_20261109.json`,
+and `scripts/check_critical_art_film_edition_intake.py`.
+Installed in `DASHI.Culture.Everything`, `DASHI.Cognition.Everything`, and
+`scripts/check_ccdcoe_cognition_agda.sh`. No ESD changes.
+
+### Precise status by original user gates
+
+| Gate | Source-written structural result | Still missing |
+| --- | --- | --- |
+| A0 | Existing temporal fibre, path, support, append-only revision and braid owners imported | Exact-head Agda 2.9 verification |
+| A1 | `EditionSceneSource`, `ReviewedOriginalScene`; original cut identifiers, timecodes, original-byte hash and reviewer receipt slots; candidate-vs-reviewed contradiction | Real cut-specific source bytes, independently verified reviewer receipts, rights/access context |
+| A2 | `SceneTemporalPath` indexes the **original** `FibreTransportPath` by history/time, with proofs of same work, edition, scene and terminal time; `scenePathComposition` delegates to original append | A real original edition/scene and a justified empirical-to-reception transport correspondence |
+| A3 | `sceneEvidenceSquareCommutes` on selected source-pair order and `sceneConflictIsBoth`; prior module proves coarse projection loses conflict/ignorance distinction | All-states update law and actual observation-to-support encoding at every temporal history stage |
+| A4 | `unaffectedPresentFutureSupportCanBeRetained`, `affectedAuthoritySupportReopensDownstream` reuse existing formal selectivity | Evidence-sensitive mapping from actual critical claims to affected coordinates; actual replay |
+| A5 | `artTriadicFaceDoesNotFactorThroughDyads` gives a **finite possibility-model** non-descent witness, and `readingAtReviewedScene` demands a reviewed source to attach a candidate reading | Two independently supported same-dyad/different-face film readings; no actual audience measurements |
+| A6 | `ArtPantsSeam` requires same work/edition/scene, two reviewed sources, original `Pants.InterfaceMatch`; `artPantsInterfaceAvailable` extracts the genuine interface | Actual artwork fibre channel interpretation and full higher-gluing/reorganisation receipt |
+| A7 | `ProposedPeirceFilmTranslation` with original attribution, passage locator, map and limit. Non-promotion counterexamples retain film roles separate from semeiotic roles | Primary Peircean passages, certified role translation, counterexamples and original theory review |
+| A8 | Distinct channel constructors, conditional source review and negative boundary types prohibit automatic promotion to authorial endorsement, actual audience effect or hostile operation | The source-based operational and empirical evidence tests for specific operations |
+| A9 | Three-work candidate-only manifest plus mechanical file hash/edition/claim checks and synthetic negative controls | Original film files, independent scene reviewers and actual shot/sequence measurement |
+| A10 | Golden roots and checker inputs extended | Kernel receipt and executed intake/self-tests in target environment |
+
+**Important epistemic distinction:** the negative-boundary empty datatypes show that *those specific assertion types are uninhabited*. They are not a proof that no possible real-world evidence could ever establish intent, effects or harm. Likewise the selected synthetic nonfactorability proof establishes a representational possibility, not historical audience observation.
+
+**Original scholarship attribution:** Peirce's semeiotic triad is not identical by fiat to character, construction, spectator. Peirce; Metz; Mulvey; Barthes; Baudry; Deleuze; Sobchack; Bordwell; Burch; Murray Smith; Carroll; Sedgwick, and the credited individual film writers/directors retain all original theoretical and creative authorship. Original passages not yet source-checked; no direct quotes or claimed permissions. DASHI owns only the formal cross-domain application.
+
+**Pareto remaining:** (1) obtain original scene/cut verification with independent receipts A1/A9; (2) instantiate existing temporal path and selective reopening to the real scene A2/A4; (3) prove all-states four-valued update square and genuine film-specific triadic witness A3/A5; (4) source-correct Peirce translation and actual pants seam A6/A7; (5) independent audience/intent causality A8 and exact-head Golden Agda acceptance A10.
+
+**Verification:** GitHub content commits and import/checker edits were made. The session cannot execute Agda 2.9 from the connector; no claimed kernel acceptance or positive original film intake result. The manifest's 0 scenes is deliberately fail-closed, not successful original film replication.
