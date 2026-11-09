@@ -356,7 +356,7 @@ swapAccumulatedCurrent :
 swapAccumulatedCurrent a b c =
   trans (sym (+-assoc a b c))
     (trans (cong (λ n → a + n) (+-comm b c))
-      (+-assoc a c b))
+      (sym (+-assoc a c b)))
 
 allLocatedNativeHistoriesPositiveBalance :
   (observer : F.Fin 27)
