@@ -354,7 +354,7 @@ runLocatedSignedNativeHistory observer
 swapAccumulatedCurrent :
   (a b c : Nat) → (a + b) + c ≡ (a + c) + b
 swapAccumulatedCurrent a b c =
-  trans (sym (+-assoc a b c))
+  trans (+-assoc a b c)
     (trans (cong (λ n → a + n) (+-comm b c))
       (sym (+-assoc a c b)))
 
