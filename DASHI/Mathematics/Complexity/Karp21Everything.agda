@@ -440,3 +440,11 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryFiniteRunExact
 -- Actual binary first-enabled rule strict potential, finite-run halt and original N21 terminal acceptance.
 -- SOURCE only: full original trace and physical bit-TM cost remain unpaid.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityRunAcceptanceExact
+
+-- E1 original ordered signed selected-edge event trace on actual first-enabled binary machine.
+-- Source-written proof candidate; Agda 2.9 and physical TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinarySelectedEventTraceExact
+
+-- E1 original ordered signed selected-edge event trace on actual first-enabled binary machine.
+-- Source-written proof candidate; Agda 2.9 and physical TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTraceRebuildExact
