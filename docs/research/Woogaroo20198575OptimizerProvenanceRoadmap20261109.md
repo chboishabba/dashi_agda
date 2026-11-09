@@ -1,0 +1,66 @@
+# EPBC 2019/8575 — optimisation provenance, roadmap, phase gates and exact remaining proof leaves
+Date: 9 November 2026. Owner: existing DASHI PR #1276 Woogaroo golden law/offset sources; SLR #59 is a separate evidence consumer. This is an adversarial, falsifiable investigation, **not** a finding that an optimiser was used for 2019/8575, that ecological inputs were manipulated, or that any approval is invalid.
+
+## Verified public-source capability (not case-specific deployment)
+1. Stockland corporate historical biodiversity calculator: 2026 academic review, https://www.tandfonline.com/doi/full/10.1080/10383441.2026.2688702 ; proprietary calculator with ecological-consultant partner; calculator ceased by 2023. The 2021 Stockland ESG Review reports biodiversity index scores and a definitions review: https://www.responsibilityreports.com/HostedData/ResponsibilityReportArchive/s/OTC_STKAF_2021.pdf .
+2. Stockland FY2024 Annual Report, p38, states the company was developing systematic biodiversity data management, decision-support criteria, and processes for investment/development decisions: https://www.stockland.com.au/globalassets/corporate/investor-centre/fy24/fy24/stockland-annual-report-fy24.pdf . A corporate tool or risk process is **not** the statutory EPBC OAG workbook.
+3. Saunders Havill Environmental Management advertises advice that integrates ecological constraints, offset costs and development potential: https://www.saundershavill.com/environmental-management . Public positioning is evidence of capability, not proof of an undisclosed optimisation implementation.
+4. Stockland Springview states it is the *proposed developer*, not the registered landowner, and lists offset-management-plan downloads without authenticated exact 15 October approved revision identities: https://www.stockland.com.au/residential/qld/springview . Do not merge Stockland, Cherish Enterprises, One Environment, BAAM, Saunders Havill, the regulator or landowners.
+5. Queensland Government describes offset requirements as additional to activities already occurring, funded or legally required: https://www.qld.gov.au/environment/management/environmental/offsets/provider . This general guidance is not itself a determination of federal 2019/8575 compliance.
+
+## Provenance levels (mandatory firewall)
+- **L0 public corporate capability:** historic biodiversity calculator, documented corporate processes and consultant service capabilities.
+- **L1 case-specific source author:** signed approval; January 2026 PD v5/A16 and consultant authorship; 14 AU source inputs.
+- **L2 case-specific calculation verified:** historical January OAG algebra, exact 14-AU coefficients, six-unit Pareto cut, 75% confidence and AU1/AU2 precision sensitivities. Independently computed exact Fractions; kernel and repository scripts separately unverified.
+- **L3 case-specific process identified:** *OPEN*: native OAG workbook, its formulas, metadata/version chain, alternatives, runs and instructions showing whether an optimiser/manual scenario-selection process was used.
+- **L4 source-calibrated ecology:** *OPEN*: direct field observations, AU mapping, independent forecast calibration and counterfactual.
+- **L5 decision consideration and legal conclusion:** *OPEN*: original s95B/95C/136 materials, advice about applicable law/grounds, authenticated operative OAMPs and outcome. No inferential jump L0->L3, L2->L4 or L3->L5.
+
+## Phases, deliverables, gates, owners
+
+| Phase | Exact deliverable | Evidence gate | Status |
+|---|---|---|---|
+| P0 | Actor and technology provenance ledger, dated and source-typed | Original corporate disclosures + confirmed case roles | Partial: capability established; original partner and project-use unknown |
+| P1 | Approved source/version manifest (July Issue F and Oct MWW 9612-E D, Esk BAAM v6, Avonvale Oes1:v1.2(e)); native XLSM extraction | File bytes, hash, sign-off, matching cells, formula/validation | OPEN |
+| P2 | Deterministic 14-row and six-unit OAG computation and bounded joint sensitivity | Pinned January source inputs and exact rational formula | Source arithmetic PAID; kernel OPEN |
+| P3 | Scenario-selection/optimisation provenance: original workbook versions, edit history, candidate outputs, constraints, commercial directives | Native files, correspondence, templates, source-linked cases; no inferred use | OPEN |
+| P4 | Six-unit future ecology and confidence calibration, especially MWW AU1/AU2 | MHQA raw surveys, with/without trajectories, independent review, actual delivery record | OPEN |
+| P5 | Avonvale prior/new offset legal and physical benefits allocation | 2018/8347, 2019/8575 parcels, legal obligations, works, funding and monitoring | OPEN |
+| P6 | Actual s95B comments, s95C recommendation, s136 consideration, conditions and review | Authenticated agency record, operative transition law | OPEN |
+| V | Agda 2.9 --safe, both golden roots, companion Python regressions, receipt hashes | Exact PR head/transitive imports and kernel logs | OPEN |
+
+## Exact mathematical and evidence proof leaves
+
+**EXISTING golden declarations** (source-written; require kernel receipt):
+- `DASHI.Law.SensibLawWoogarooQualityGainEvidenceCut20261106Exact.sixExceptionalReportedExact`
+- `...sixExceptionalPremiumExact`, `...originalVsOnePointCounterfactual`
+- `...mwwAt47Exact`, `...mwwAt48Exact`, `...mwwAt62Exact`, `...mwwAt63Exact`, `...mwwAtOriginal75Exact`
+- `DASHI.Law.SensibLawWoogarooKoalaQualityRoundingCut20261106Exact.mwwUnroundedAt75Exact`, `...mwwUnroundedAt76Exact`.
+- The separate two-parameter `SensibLawWoogarooMWWJointGainConfidence20261109Exact` and precise input calculations should be reused, never duplicated in a new competing formula owner.
+
+**PROPOSED NEW declarations/contracts, not yet implemented or proved** (precise required witnesses, no fake closed types):
+- `original20198575ApprovedPlanBytesMatchSignedCondition` — a content hash/version witness tying each OAMP to the signed approval's named revision.
+- `originalJulyIssueFApprovedOAGCellJoin` — formula/input identity or an explicit recorded difference for every relevant 14-AU original Jan vs July/Oct cell.
+- `originalMWWAUSourceScoreToAcceptedInputRounding` — source method plus calculation formula/validation proving admissible precision and rounding; may return a **counterexample**, not a predetermined answer.
+- `originalMWWConfidence75IndependentCalibration` — source-linked site/AU ecological forecasts + uncertainty + past delivery performance that actually supports 75% under the accepted assessment convention; no Bool literal substitutes for empirical evidence.
+- `originalSixHighGainAUWithWithoutSameTimeQuality` — same future time, measured site/context/stocking and management counterfactual for all six AUs.
+- `originalWoogarooSameFunctionHabitatTransport` — independently supported attribute-level comparison between lost mature/corridor/refuge functions and offset gains, not hectares alone.
+- `originalStocklandCalculatorIdentityAndProjectUse` — requires the historical tool's artefact/partner and a **case-specific link**; public capability alone cannot instantiate it.
+- `original20198575ScenarioRunProvenance` — original workbook version, input parameter vector, scenario output, author/date and trace to decision; available even when no specialist optimiser exists.
+- `original20198575ObjectiveConstraintSelectionWitness` — if proven, discriminate genuine empirical selection from threshold/least-cost input search using dated versions and constraints; do not encode the hypothesis as a proven fact.
+- `originalAvonvaleIncrementalBenefitNonOverlap` — legal duty, geography, funding and ecological attribution show new credited benefit beyond prior binding and delivered works.
+- `original95B95C136SameDecisionConsideration` — exact received packet, recommendation, official decision version and actual statutory consideration; access right alone is insufficient.
+- `original20198575ModelClaimsNotPromotedToIndependentFact` — typed admissibility rule keeping corporate capability, scenario calculations, physical observation, source assertions and official decision conclusions distinct.
+- `original20198575GoldenRootsKernelAccepted` — Agda 2.9 --safe certificates on both original roots and dependency closure at pinned SHA.
+
+**Noncommutation / negative controls:** Historic biodiversity tool != EPBC OAG; source-reported 75% != empirically calibrated frequency; 3.46/3.27 ecological scores != legally permitted fractional OAG cell; corporate ability != evidence of project use; 2018/8347 != 2019/8575; projected planted habitat != observed mature Woogaroo refuge; an absent publicly indexed file != non-compliance.
+
+## Next bounded execution sequence
+1. Identify actual 15 October approved OAMPs and raw July Issue F/OAG workbook, hash and compare to January versions.
+2. Recompute OAG with accepted cell types/rounding; preserve the original proponent 14-row base and exact comparisons; record both numerator and full discounted output.
+3. Acquire original MWW AU1/AU2 evidence justifying quality jumps and 75% confidence; evaluate proper same-time with/without comparison.
+4. Obtain s95C directly via the operative s135A route, and 95B/136 separately; review with counsel while retaining statutory timing.
+5. Obtain model provenance/alternate runs if lawfully disclosed; assess threshold search without presuming wrongdoing.
+6. Validate Avonvale incremental benefits, then execute Agda --safe/parallel_checker and Postgres/ITIR handoff with source hashes.
+
+No request, FOI, legal filing, regulator complaint, alteration of external sources or receipt of the missing October original has occurred in this pass.
