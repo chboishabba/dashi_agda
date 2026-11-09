@@ -302,3 +302,6 @@ import DASHI.Chemistry.HydrogenFuelCycleMolarThermochemistryExact
 import DASHI.Chemistry.HydrogenFuelCycleDeviceEvidenceExact
 import DASHI.Chemistry.HydrogenCarbonOpenCycleExact
 import DASHI.Chemistry.HydrogenFuelCycleSourceAuthorityExact
+
+-- NIST-attributed HHV reference-state measurements and conservative interval comparison.
+import DASHI.Chemistry.HydrogenFuelCycleNISTThermochemistryExact
