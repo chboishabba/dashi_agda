@@ -83,3 +83,7 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorExact
 
 -- K05: source-written all-word equivalence of grouped and original binary signed ledgers.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorSemanticExact
+
+-- FRACDASH priority/guard dependency cache: generic same-step theorem.
+-- N21 specialization and tape-clock receipt still open.
+import DASHI.Mathematics.Complexity.Karp21FractranPriorityFrontierExact
