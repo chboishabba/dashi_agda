@@ -325,3 +325,7 @@ import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNumericFrameExa
 -- P0-D original complete raw-edge/certificate cursor FRACTRAN machine, exact first-enabled step and halt.
 -- Final threshold and full typed graph decoder remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawListMachineExact
+
+-- Concrete N21 parsed raw-edge state: first-enabled FRACTRAN step includes actual binary terminal positive-threshold branch.
+-- Original all-word graph header / bit clock / InNP remain separate.
+import DASHI.Mathematics.Complexity.Karp21FractranParsedRawThresholdMachineExact
