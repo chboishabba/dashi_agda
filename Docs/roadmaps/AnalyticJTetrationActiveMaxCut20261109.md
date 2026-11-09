@@ -86,6 +86,39 @@ Original source owners found:
 
 **Revised P2 max-cut:** Bishop π/trig period → original q(τ) with unit-disk evidence → existing Bishop E4/E6; **parallel** native E8 theta identity (P2e.04–06) plus existing weight-12 discriminant → nonzero Δ and original same-object j → fine-level/Abel observer weld. E8 does not unblock P1 local Koenigs/Kneser itself. The existing generated 240 roots gives a **valuable first-coefficient negative control**, not the entire theta series.
 
+### P2e continuation — finite native norm-two and higher-shell receipts (2026-11-09)
+
+**P2e.04a SOURCE-WRITTEN, NOT KERNEL ACCEPTED:** `DASHI/Moonshine/AbelE8GeneratedRootNormTwoExact.agda` builds the explicit coordinate norm
+`doubledSquaredNorm([d₁,...,d₈]) = Σ (2dᵢ)²`, with values `4,1,0,1,4` on `HalfTritIndexed`. It establishes:
+- `allNormEightCheckSound`: any passing exact Boolean checker has an inductive `AllDoubledNormEight` witness for every root in the supplied list.
+- `generatedE8NormEightCheckIsTrue` and `generatedE8RootsAllHaveNormTwo`: all actual 240 *generated* indexed roots have norm square exactly 2 (doubled norm 8).
+- `integerGeneratedE8NormTwoShellCountIs112`, `halfGeneratedE8NormTwoShellCountIs128`, `generatedE8NormTwoShellCountIs240`: computes **actual norm-filtered shell sizes**, not just list lengths.
+- `generatedNormTwoShellMatchesOriginalE4FirstCoefficient`: original filtered theta-root coefficient equals `JInvariantEisensteinIncrementCoefficientBoundExact.e4IncrementCoefficient zero`.
+
+**P2e.04b FINITE EXACT ARITHMETIC REGRESSION (executed PASS):** `scripts/check_analytic_j_tetration_e8_theta_shells.py` independently enumerates the integer and half-integer E8 lattice coordinates by a finite DP constrained by `Σ dᵢ²=8n`, congruence `Σdᵢ ≡ 0 mod 4`, and coordinate parity. It verifies full shell coefficients **n = 0..8 only**, without floating point:
+
+| n | Integer vectors | Half-integer vectors | Theta coefficient | E4 coefficient |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 1 | 0 | 1 | 1 |
+| 1 | 112 | 128 | 240 | 240 |
+| 2 | 1136 | 1024 | 2160 | 2160 |
+| 3 | 3136 | 3584 | 6720 | 6720 |
+| 4 | 9328 | 8192 | 17520 | 17520 |
+| 5 | 14112 | 16128 | 30240 | 30240 |
+| 6 | 31808 | 28672 | 60480 | 60480 |
+| 7 | 38528 | 44032 | 82560 | 82560 |
+| 8 | 74864 | 65536 | 140400 | 140400 |
+
+**Remaining minimum mathematical cut (not replaced by finite checks):**
+1. **P2e.04c** `originalE8GeneratedRootsExhaustNativeNormTwoLattice`: prove every original E8 norm-two vector is represented by the same 240-indexed enumeration, with actual lattice integrality and parity. Shape-completeness alone is insufficient.
+2. **P2e.05a** `originalE8ThetaFunctionOnBishopUnitDisk`: construct the genuine original Bishop complex theta series for the full E8 lattice with convergence, transformation law and compatible `q(τ)`, not only generated roots.
+3. **P2e.05b** `originalBishopWeightFourModularFormsDimensionOne` **or** `originalE8ThetaCoefficientAllN`: prove modular uniqueness `M₄(SL₂ℤ)=⟨E₄⟩` in the same original analytic carrier or a genuine all-n shell-count theorem. The repository search did not identify a completed owner for either.
+4. **P2e.06** `originalBishopThetaE8EqualsE4`: *then* deduce global analytic equality, matching actual normalization, not just sampled coefficients.
+5. **P2e.09** Kernel-check new Agda norm module on exact head. No Agda compiler available here; a successful executable DP is not an Agda receipt.
+
+**Highest-alpha decision:** next P2e mathematical producer is the **native norm-two lattice exhaustion** and then the full theta modular transformation/dimension-one theorem. The 240↔243 count comparison is independent of that analytic proof.
+
+
 ## P2f. Actual generated E8 root count 240 versus triadic 243
 
 **Audited actual prior-art owners** (not inferred numeral analogies):
