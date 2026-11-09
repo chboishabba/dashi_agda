@@ -111,12 +111,44 @@ class WorldTests(unittest.TestCase):
           'DASHI.Hecke','',1,'old-source','local-pinned-Lean-checker')""",(key,))
         self.assertEqual(world.report(self.conn)["executed_kernel_passes"],0)
 
+    def test_image_search_uses_existing_agda_index(self):
+        self.seed()
+        p=Path(self.tmp.name)/"terms.json"
+        p.write_text(json.dumps({
+            "schema":"dashi-symbol-snowball-v1",
+            "groups":[{"lane":"JMD-G01","search_terms":["Hecke","tau"]}]
+        }))
+        self.assertEqual(world.image_owner_candidates(self.conn,p),1)
+        row=self.conn.execute("SELECT image_group,symbol_id,authority FROM jmd_world_image_candidates").fetchone()
+        self.assertEqual(row,("JMD-G01","DASHI.Hecke.tau","candidate-only"))
+
+    def test_native_gap_uses_existing_requirements(self):
+        self.seed()
+        self.conn.execute("""CREATE TABLE repo_requirements (
+          symbol_id TEXT, required_symbol TEXT, requirement_class TEXT,
+          requirement_kind TEXT, source TEXT)""")
+        self.conn.execute("""INSERT INTO repo_requirements VALUES
+          ('DASHI.Hecke.tau','Hecke tau','formal','lemma','source:agda')""")
+        self.assertEqual(world.ingest_native_gaps(self.conn),1)
+        self.assertEqual(world.report(self.conn)["native_gap_candidate_edges"],1)
+        self.assertEqual(world.report(self.conn)["executed_kernel_passes"],0)
+
+    def test_unpinned_agda_revision_rejected(self):
+        with self.assertRaisesRegex(ValueError, "full 40"):
+            world.import_agda(self.conn,revision="master")
+
+    def test_wrong_repository_name_rejected(self):
+        r={"repository_id":7,"repository":"u/evil","commit":"b"*40,
+           "module":"R.Main","declaration":"R.foo","type":"Nat -> Nat"}
+        with self.assertRaisesRegex(ValueError,"name disagrees"):
+            world.import_external(self.conn,self.file("evil.jsonl",[r]),{7:"u/original"})
+
     def test_duplicate_or_nonpositive_global_ids_rejected(self):
         csv=Path(self.tmp.name)/"global.csv"
-        csv.write_text("github_id\n1\n1\n")
+        csv.write_text("github_id,full_name\n1,user/r\n1,user/r\n")
         with self.assertRaises(ValueError):
             world.read_ids(csv)
-        csv.write_text("github_id\n0\n")
+        csv.write_text("github_id,full_name\n0,user/r\n")
         with self.assertRaises(ValueError):
             world.read_ids(csv)
 
