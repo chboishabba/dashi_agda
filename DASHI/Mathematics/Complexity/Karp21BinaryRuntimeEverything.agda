@@ -140,3 +140,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeSelectedSignedScoreExact
 -- SOURCE ONLY: complete graph grammar, physical clock and PR.InNP remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeLedgerIntegerScoreExact
 import DASHI.Mathematics.Complexity.Karp21NativeLedgerOriginalRawScoreExact
+
+-- P0-E/F original compareLE structural correctness, reflexivity and source inspection bound.
+-- General numeric atLeast theorem and physical bit-tape motion remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact
