@@ -248,3 +248,19 @@ The script's synthetic fixtures were tested during development. **The full 21,48
 | **P3.02** | Preserve private/unpublished DASHI material: **no external PR, issue, comment, message, or upstream source upload** unless separately authorised | Mandatory invariant |
 
 These gate labels are **integration milestones**, not newly defined Agda/Lean theorem names. The mathematics should be placed with its existing closest owner in the Agda/Lean formal dependency graph, not in a competing world-index package. SLR/PNF is optional for human navigation and never proof authority.
+
+
+### Implemented P0 image owner-search dispatch (2026-11-09)
+
+The new `Docs/roadmap/JMDImageOwnerSymbolSnowballTerms.json` encodes **12 image-topic groups and 40 real owner-search terms** using the already existing `dashi-symbol-snowball-v1` schema from `dashi_agda` PR #1212. It is a **term pack, not a new indexer or mathematical proof**. The canonical source of searchable Agda signatures remains the `dashi-repo` preflight database. The existing runner resides in PR #1212; do not assume it is on `master` or that this branch has imported that PR.
+
+Once the PR #1212 runner is present in a compatible checkout, run:
+
+```sh
+python scripts/run_openai_math_symbol_snowball.py \
+  --terms-file Docs/roadmap/JMDImageOwnerSymbolSnowballTerms.json \
+  --agda-root . --mode native --discover \
+  --max-terms 100 --out /tmp/jmd-owner-search.tsv
+```
+
+This yields **candidate owner search evidence**. Next P0 payment is to source-read each matched declaration's actual type and imports and classify it as exact owner, partial owner, negative control, or no proved owner. The 37 original SHA-256 image references remain in `Docs/roadmap/JMDImageSHA256Manifest.csv`; the search pack carries stable image IDs to group search. Avoid falsely claiming these 40 queries have already been run against the current full repository database.
