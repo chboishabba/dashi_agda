@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayD1OriginalPlaquetteSupportDecisionExact where
 
 ------------------------------------------------------------------------
