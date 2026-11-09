@@ -2,6 +2,62 @@
 
 ## 2026-11-09 concrete spatial QDPR and future-minimality completion cut
 
+### 2026-11-09: original five-species Rhea 27-site finite-volume instance
+
+New `scripts/bh4_original_qdpr_spatial_finite_volume.py` is a
+concrete, exactly source-identified **internal chemical
+reaction plus spatial material transport** model:
+
+- Original source: Rhea `RHEA:32253`, human-cytosol
+  Reactome `R-HSA-71130.5`; original five species
+  `CHEBI:43120` qDHB, `CHEBI:57945` NADH,
+  `CHEBI:15378` proton, `CHEBI:59560` BH4,
+  `CHEBI:57540` NAD+. No generic BH2 promotion.
+- A single **27-site × five-species shared nonnegative-integer
+  inventory**; 54 native actual nonperiodic 3D positive bonds,
+  both transfer directions, original species and independently
+  explicitly source-qualified transport permissions.
+- QDPR chemistry permits selected integer reaction events
+  ONLY in source-modelled human cytosol; it deducts all three
+  original reactants and credits both actual products.
+  Synthetic rate/event count is not measured.
+- Every internal selected event preserves the real source
+  **CHNOP atom vector and signed net electric charge**.
+  Environmental inflow/outflow has independently explicit
+  element and charge accounting; no silent exchange or
+  "plasma equals cytosol" promotion is possible.
+- Synthetic positive chain: source-cytosolic QDPR reaction
+  produces original BH4; then a separate *permitted* native
+  spatial transfer moves its original species identity to
+  another voxel. This does not establish human in-vivo
+  intracellular BH4 mobility or cell membrane permeability.
+- The self-test exercises all
+  **54 bonds × two directions × five actual molecular species =
+  540 source-typed internal transfer cases**, plus the original
+  QDPR molecular reaction, invalid compartment, denied
+  transport, wrong directional Rhea/Reactome identity,
+  missing substrate and overdraw.
+- Independently reproduced in local exact Python arithmetic:
+  540 source-species/edge chemical inventory and charge
+  conservation tests passed. This is **not** a run receipt
+  for the committed source file.
+- The script is registered in `check_kitzerow_bh4_priority_all.py`
+  and `check_bh4_spatial_golden.sh` (whose final step invokes
+  the native repository parallel Agda checker).
+
+**What L05 now means:** Original Rhea/Reactome *single QDPR
+reaction* is source-identified and exact finite molecular
+stoichiometry is conserved by the spatial executable model.
+The complete actual 29-species × 12-reaction internal panel,
+29 environmental exchange/transport intervals, source-qualified
+concentration/time-dependent kinetics, PNP coupling and
+clinical or physiological validation remain UNPAID. Importing
+the executable result into the Agda source-owner kernel
+requires a proved same-object refinement, not a receipt name.
+No numerical rate or tissue causal inference is asserted.
+
+
+
 ### Updated 2026-11-09 geometry closure in developmental companion
 
 The developmental PR #1471 has progressed past the previous
