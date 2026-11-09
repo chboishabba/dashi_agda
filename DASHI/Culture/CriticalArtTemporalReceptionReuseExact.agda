@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Culture.CriticalArtTemporalReceptionReuseExact where
 
 ------------------------------------------------------------------------
