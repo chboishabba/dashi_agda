@@ -21,6 +21,7 @@ module DASHI.Law.SensibLawWoogarooMWWJointGainConfidence20261109Exact where
 
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooKoalaOAGStatusSensitivity20261106Exact as Source
 import DASHI.Law.SensibLawWoogarooMWWGainThreshold20261107Exact as Existing
@@ -94,3 +95,59 @@ sixtyFiveAbove100Exact = refl
 existingCommonGainReference :
   Existing.mwwBothQualityPointCoefficient ≡ 116625
 existingCommonGainReference = Existing.perPointExactly
+
+------------------------------------------------------------------------
+-- 9 November 2026: REAL finite identifiability counterexample.
+-- No assumptions about the consultant's actual selection procedure.
+-- These are three hypothetical parameter choices, not three observed
+-- ecological forecasts or three legally accepted OAG inputs.
+------------------------------------------------------------------------
+
+originalAndThreeAtHundredSameCoefficient :
+  jointCoefficient 4 75 ≡ jointCoefficient 3 100
+originalAndThreeAtHundredSameCoefficient = refl
+
+originalAndFiveAtSixtySameCoefficient :
+  jointCoefficient 4 75 ≡ jointCoefficient 5 60
+originalAndFiveAtSixtySameCoefficient = refl
+
+originalAndThreeAtHundredSameNumerator :
+  jointNumerator 4 75 ≡ jointNumerator 3 100
+originalAndThreeAtHundredSameNumerator = refl
+
+-- These witnesses defeat a universal inverse mapping from output
+-- coefficient to a unique quality gain or unique confidence.
+fourIsNotThree : 4 ≡ 3 → ⊥
+fourIsNotThree ()
+
+seventyFiveIsNotHundred : 75 ≡ 100 → ⊥
+seventyFiveIsNotHundred ()
+
+symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+symEq refl = refl
+
+transEq : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+transEq refl q = q
+
+-- Stronger than merely exhibiting equal totals: no total decoder
+-- of the original common gain from ONLY the joint coefficient can
+-- satisfy every natural-number parameter pair.
+originalCoefficientCannotIdentifyGain :
+  (decode : Nat → Nat) →
+  ((g c : Nat) → decode (jointCoefficient g c) ≡ g) →
+  ⊥
+originalCoefficientCannotIdentifyGain decode exactDecode =
+  fourIsNotThree
+    (transEq (symEq (exactDecode 4 75)) (exactDecode 3 100))
+
+originalCoefficientCannotIdentifyConfidence :
+  (decode : Nat → Nat) →
+  ((g c : Nat) → decode (jointCoefficient g c) ≡ c) →
+  ⊥
+originalCoefficientCannotIdentifyConfidence decode exactDecode =
+  seventyFiveIsNotHundred
+    (transEq (symEq (exactDecode 4 75)) (exactDecode 3 100))
+
+-- Output non-identifiability is *not* evidence that an optimiser ran.
+-- Model-provenance records, independently calibrated habitat quality,
+-- confidence evidence and actual original OAG revisions remain open.
