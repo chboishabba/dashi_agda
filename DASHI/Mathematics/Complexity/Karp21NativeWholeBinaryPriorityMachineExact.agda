@@ -17,7 +17,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
@@ -208,5 +208,8 @@ originalGraphRejectsWhenBinaryInitialRejected :
   Graph.readNativeWholeBinaryGraphWord word ≡ nothing →
   Original.readRawGraphWord word ≡ nothing
 originalGraphRejectsWhenBinaryInitialRejected word certificate failed
-  rewrite failed =
+  with Graph.readNativeWholeBinaryGraphWord word
+... | nothing =
   sym (OriginalGraph.nativeWholeBinaryGraphWordSameOriginal word)
+... | just parsed with failed
+... | ()
