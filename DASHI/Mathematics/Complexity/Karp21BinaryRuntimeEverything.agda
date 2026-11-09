@@ -71,3 +71,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact
 
 -- K05: bit-native signed score vs original-shaped sign/magnitude threshold.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact
+
+-- N21: decode original strictly positive gamma(W) as binary W, not W+1.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact
