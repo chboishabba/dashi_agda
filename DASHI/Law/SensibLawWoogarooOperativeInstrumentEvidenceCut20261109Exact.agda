@@ -87,6 +87,35 @@ footprintVsFullMinusRetentionTenths :
   1349 + 1 ≡ 1350
 footprintVsFullMinusRetentionTenths = refl
 
+-- Operative Annexure A condition 4: 128ha of Koala / Grey-headed
+-- Flying-fox / Swift Parrot / Regent Honeyeater habitat each (not
+-- simply a historical OAG source input); Collared Delma 0.77ha.
+-- C1 Action/Clear/Construct prohibited OUTSIDE Action area;
+-- C2 Action/Clear/Construct prohibited WITHIN retention area;
+-- C3 Clear/Construct prohibited WITHIN LRSA buffer zone.
+data Matter : Set where
+  koala flyingFox swiftParrot regentHoneyeater collaredDelma : Matter
+
+habitatClearCapHundredthsHa : Matter → Nat
+habitatClearCapHundredthsHa koala = 12800
+habitatClearCapHundredthsHa flyingFox = 12800
+habitatClearCapHundredthsHa swiftParrot = 12800
+habitatClearCapHundredthsHa regentHoneyeater = 12800
+habitatClearCapHundredthsHa collaredDelma = 77
+
+fourProtectedSpeciesHabitatCapEqual :
+  habitatClearCapHundredthsHa koala ≡
+  habitatClearCapHundredthsHa regentHoneyeater
+fourProtectedSpeciesHabitatCapEqual = refl
+
+-- Footprint of 134.9ha and species-specific 128ha habitat-clearance
+-- ceilings differ by 6.9ha IN PRINTED SOURCE UNITS. It is a spatial
+-- accounting gate, not proof that the permitted clearing could exceed
+-- its species-specific maximum.
+habitatCapVsFootprintHundredths :
+  habitatClearCapHundredthsHa koala + 690 ≡ 13490
+habitatCapVsFootprintHundredths = refl
+
 -- The historical January 2026 OAG input was 128.0 ha of koala
 -- impacted habitat; 6.9 ha difference from signed footprint is real
 -- PRINTED-SCOPE arithmetic, not a conclusion of unoffset omission.
