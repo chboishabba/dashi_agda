@@ -610,3 +610,32 @@ noCrossOriginalCampaignIdentity :
   SameOperation.gcc1993 ≡ SameOperation.apiProposal1998 → ⊥
 noCrossOriginalCampaignIdentity =
   SameOperation.gccCaseNot1998Proposal
+
+-- General six-gate exact cut: failure to authenticate one original
+-- stage blocks admission for that same case, for arbitrary E.
+generalUnpaidExposureBlocksFullWarfareAdmission :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (c : SameOperation.OriginalCase) →
+  (E c SameOperation.recipientExposure → ⊥) →
+  SameOperation.AdmitsOneOriginalCase E c → ⊥
+generalUnpaidExposureBlocksFullWarfareAdmission =
+  SameOperation.blockedByMissingExposure
+
+generalUnpaidIntentBlocksFullWarfareAdmission :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (c : SameOperation.OriginalCase) →
+  (E c SameOperation.independentlySourcedIntent → ⊥) →
+  SameOperation.AdmitsOneOriginalCase E c → ⊥
+generalUnpaidIntentBlocksFullWarfareAdmission =
+  SameOperation.blockedByMissingIntent
+
+-- Countermodel: an easy-to-satisfy evidence interface cannot be
+-- promoted into an independently reviewed, more demanding interface.
+sourceWeakeningDoesNotGiveSourceUpgrade :
+  (SameOperation.AdmitsOneOriginalCase
+      SameOperation.WeakDemo SameOperation.gcc1993 →
+   SameOperation.AdmitsOneOriginalCase
+      SameOperation.StrongDemo SameOperation.gcc1993) → ⊥
+sourceWeakeningDoesNotGiveSourceUpgrade =
+  SameOperation.noReverseAdmissionImplication
+
