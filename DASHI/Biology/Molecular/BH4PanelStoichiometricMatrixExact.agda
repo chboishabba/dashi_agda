@@ -133,3 +133,188 @@ canonicalBH4PanelStoichiometricMatrixReceipt =
     "pins the executed species/reaction dimensions, exact finite reaction index, residual reaction IDs and deterministic/internal-only matrix contract while leaving the sparse executable entries in the generated JSON/CSV receipt"
     "missing chemistry is not a zero column; S does not create kinetics, compartment measurements, external exchange, allocator causality or disease mechanism"
     "python3 scripts/build_bh4_stoichiometric_matrix.py artifacts/biology/rhea-kitzerow-bh4-reactions.json --output-prefix artifacts/biology/bh4-stoichiometric-matrix"
+
+
+------------------------------------------------------------------------
+-- SOURCE-CONSUMING FINITE STOICHIOMETRIC REACTION THEOREM
+--
+-- A finite source column is explicitly reactants/products (no signed
+-- natural-number underflow), with a reactant-availability witness
+--  state[site] = reactants + residual.
+--
+-- Conservation is derived from executable vector addition and the
+-- literal per-column CHNOP left-kernel identities. No hand-filled
+-- 29x12 coefficients or measured kinetics enter this theorem.
+------------------------------------------------------------------------
+
+import Data.Vec.Base as V
+import Data.Fin.Base as F
+
+panelAdd :
+  ∀ {n} → V.Vec Nat n → V.Vec Nat n → V.Vec Nat n
+panelAdd V.[] V.[] = V.[]
+panelAdd (V._∷_ a xs) (V._∷_ b ys) =
+  V._∷_ (a + b) (panelAdd xs ys)
+
+panelWeighted :
+  ∀ {n} → V.Vec Nat n → V.Vec Nat n → Nat
+panelWeighted V.[] V.[] = 0
+panelWeighted (V._∷_ weight weights) (V._∷_ count counts) =
+  weight * count + panelWeighted weights counts
+
+-- Four-term exchange is the only arithmetic interchange required
+-- by the native 29-species weighted-inventory proof.
+panelShuffle :
+  (a b c d : Nat) →
+  (a + b) + (c + d) ≡ (a + c) + (b + d)
+panelShuffle a b c d =
+  trans (+-assoc a b (c + d))
+    (trans
+      (cong (λ n → a + n)
+        (trans
+          (sym (+-assoc b c d))
+          (trans
+            (cong (λ n → n + d) (+-comm b c))
+            (+-assoc c b d))))
+      (sym (+-assoc a c (b + d))))
+
+panelWeightedDistributes :
+  ∀ {n} (weights xs ys : V.Vec Nat n) →
+  panelWeighted weights (panelAdd xs ys)
+    ≡ panelWeighted weights xs + panelWeighted weights ys
+panelWeightedDistributes V.[] V.[] V.[] = refl
+panelWeightedDistributes
+  (V._∷_ w weights) (V._∷_ x xs) (V._∷_ y ys) =
+  trans
+    (cong (λ n → w * (x + y) + n)
+      (panelWeightedDistributes weights xs ys))
+    (trans
+      (cong (λ n → n + (panelWeighted weights xs
+        + panelWeighted weights ys))
+        (*-distribˡ-+ w x y))
+      (panelShuffle (w * x) (w * y)
+        (panelWeighted weights xs) (panelWeighted weights ys)))
+
+record OriginalFiniteReaction (n : Nat) : Set where
+  constructor original-finite-reaction
+  field
+    originalReactants : V.Vec Nat n
+    originalProducts : V.Vec Nat n
+open OriginalFiniteReaction public
+
+-- Executed reaction on the available residual inventory.
+panelReactionAfter :
+  ∀ {n} → OriginalFiniteReaction n →
+  V.Vec Nat n → V.Vec Nat n
+panelReactionAfter reaction residual =
+  panelAdd (originalProducts reaction) residual
+
+panelReactionBefore :
+  ∀ {n} → OriginalFiniteReaction n →
+  V.Vec Nat n → V.Vec Nat n
+panelReactionBefore reaction residual =
+  panelAdd (originalReactants reaction) residual
+
+panelReactionConserves :
+  ∀ {n} (weights : V.Vec Nat n)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n) →
+  panelWeighted weights (originalReactants reaction)
+    ≡ panelWeighted weights (originalProducts reaction) →
+  panelWeighted weights (panelReactionAfter reaction residual)
+    ≡ panelWeighted weights (panelReactionBefore reaction residual)
+panelReactionConserves weights reaction residual balanced =
+  trans
+    (panelWeightedDistributes
+      weights (originalProducts reaction) residual)
+    (trans
+      (cong (λ n → n + panelWeighted weights residual)
+        (sym balanced))
+      (sym (panelWeightedDistributes
+        weights (originalReactants reaction) residual)))
+
+panelSpatialWeighted :
+  ∀ {n sites} (weights : V.Vec Nat n) →
+  V.Vec (V.Vec Nat n) sites → Nat
+panelSpatialWeighted weights V.[] = 0
+panelSpatialWeighted weights (V._∷_ current rest) =
+  panelWeighted weights current + panelSpatialWeighted weights rest
+
+-- A reaction fires AT the selected voxel, preserving all other
+-- molecular inventories. The lookup equality is the genuine
+-- reactant-availability witness, not an asserted nonnegative rate.
+panelSpatialReactionConserves :
+  ∀ {n sites} (weights : V.Vec Nat n)
+  (site : F.Fin sites)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n)
+  (before : V.Vec (V.Vec Nat n) sites) →
+  V.lookup before site ≡ panelReactionBefore reaction residual →
+  panelWeighted weights (originalReactants reaction)
+    ≡ panelWeighted weights (originalProducts reaction) →
+  panelSpatialWeighted weights
+    (V.updateAt before site
+      (λ _ → panelReactionAfter reaction residual))
+    ≡ panelSpatialWeighted weights before
+panelSpatialReactionConserves weights F.zero reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (cong (λ n → n + panelSpatialWeighted weights rest)
+      (panelReactionConserves weights reaction residual balanced))
+    (cong (λ n → n + panelSpatialWeighted weights rest)
+      (sym (cong (panelWeighted weights) available)))
+panelSpatialReactionConserves weights (F.suc site) reaction residual
+  (V._∷_ current rest) available balanced =
+  cong (λ n → panelWeighted weights current + n)
+    (panelSpatialReactionConserves
+      weights site reaction residual rest available balanced)
+
+data OriginalCHNOPElement : Set where
+  carbonElement : OriginalCHNOPElement
+  hydrogenElement : OriginalCHNOPElement
+  nitrogenElement : OriginalCHNOPElement
+  oxygenElement : OriginalCHNOPElement
+  phosphorusElement : OriginalCHNOPElement
+
+-- The entire original 29x12 source is demanded explicitly.
+-- No data are fabricated to inhabit this record.
+record SourceCertifiedOriginal29x12 : Set where
+  field
+    sourceFiniteColumns : V.Vec (OriginalFiniteReaction 29) 12
+    sourceElementWeights : OriginalCHNOPElement → V.Vec Nat 29
+    sourceColumnLeftKernel :
+      (element : OriginalCHNOPElement) (column : F.Fin 12) →
+      panelWeighted (sourceElementWeights element)
+        (originalReactants (V.lookup sourceFiniteColumns column))
+        ≡ panelWeighted (sourceElementWeights element)
+          (originalProducts (V.lookup sourceFiniteColumns column))
+open SourceCertifiedOriginal29x12 public
+
+-- Exact P0 finite-volume SOURCE-CERTIFICATE-CONSUMING theorem:
+-- each original column fires in one of 27 sites, consumes only its
+-- actual reactants and preserves every CHNOP quantity across the
+-- COMPLETE cubical inventory. The certificate itself is UNPAID until
+-- constructed from the original byte-pinned Rhea/ChEBI matrix.
+original29x12SpatialReactionBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (element : OriginalCHNOPElement)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29)
+  (before : V.Vec (V.Vec Nat 29) 27) →
+  V.lookup before site ≡
+    panelReactionBefore
+      (V.lookup (sourceFiniteColumns certificate) column) residual →
+  panelSpatialWeighted (sourceElementWeights certificate element)
+    (V.updateAt before site
+      (λ _ → panelReactionAfter
+        (V.lookup (sourceFiniteColumns certificate) column) residual))
+    ≡ panelSpatialWeighted
+      (sourceElementWeights certificate element) before
+original29x12SpatialReactionBalance
+  certificate element column site residual before available =
+  panelSpatialReactionConserves
+    (sourceElementWeights certificate element)
+    site (V.lookup (sourceFiniteColumns certificate) column)
+    residual before available
+    (sourceColumnLeftKernel certificate element column)
