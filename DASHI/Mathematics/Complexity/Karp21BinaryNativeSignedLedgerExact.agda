@@ -21,7 +21,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
 open import Data.List.Base using (reverse; length; _++_)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -115,7 +115,7 @@ accumulatePositiveValue :
   positiveValue (accumulateSigned tokens ledger) ≡
     positiveValue ledger + sumPositive tokens
 accumulatePositiveValue [] ledger =
-  NatP.+-identityʳ (positiveValue ledger)
+  sym (NatP.+-identityʳ (positiveValue ledger))
 accumulatePositiveValue (Signed.positive magnitude ∷ rest) ledger =
   trans
     (accumulatePositiveValue rest
@@ -139,7 +139,7 @@ accumulateNegativeValue :
   negativeValue (accumulateSigned tokens ledger) ≡
     negativeValue ledger + sumNegative tokens
 accumulateNegativeValue [] ledger =
-  NatP.+-identityʳ (negativeValue ledger)
+  sym (NatP.+-identityʳ (negativeValue ledger))
 accumulateNegativeValue (Signed.positive magnitude ∷ rest) ledger =
   trans
     (accumulateNegativeValue rest
