@@ -9,6 +9,7 @@ open import Data.Fin.Base using (Fin; zero; suc)
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Ring
 import DASHI.Information.PNFFiniteCovarianceEconomicsExact as Matrix
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffOrbitGramAssembly as ExistingPSD
 
 record PositiveCone (K : Ring.ExactOrderedCommutativeRing) : Set₁ where
   private
@@ -77,3 +78,28 @@ finiteMatrixGramPositiveSemidefinite K P X v =
     (λ r → Scalar._*_ (Ring.orderedScalar K)
       (projection K X v r) (projection K X v r))
     (λ r → PositiveCone.squareNonnegative P (projection K X v r))
+
+-- Reuse the already established DASHI finite-Gram positivity authority.
+-- This is only an adapter between two identical finite ordered-ring
+-- interfaces; no new assumption about the source PNF data is introduced.
+positiveConeFromExistingPSD :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  ExistingPSD.FiniteGramOrderAuthority K →
+  PositiveCone K
+positiveConeFromExistingPSD K O = record
+  { zeroNonnegative = ExistingPSD.zeroNonnegative O
+  ; addNonnegative = ExistingPSD.addNonnegative O
+  ; squareNonnegative = ExistingPSD.squareNonnegative O
+  }
+
+finiteMatrixGramPSDFromExisting :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : ExistingPSD.FiniteGramOrderAuthority K) →
+  {n p : Nat} → (X : Matrix.FiniteMatrix K n p) →
+  (v : Fin p → Scalar.Scalar (Ring.orderedScalar K)) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (gramQuadratic K X v)
+finiteMatrixGramPSDFromExisting K O X v =
+  finiteMatrixGramPositiveSemidefinite
+    K (positiveConeFromExistingPSD K O) X v
