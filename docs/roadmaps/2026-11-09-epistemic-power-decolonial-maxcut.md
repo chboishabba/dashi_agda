@@ -436,3 +436,30 @@ All new Agda declarations are source-written and NOT kernel-checked. K0/K4 delib
 7. `historicalCarceralSamePersonMechanism`: source-paid longitudinal trace and historical mechanism; 2011–12 disciplinary cross-section alone cannot pay it.
 
 **Attribution:** reported numbers belong to the 2015 report authors and AAPF/CISPS; original data ownership to U.S. Department of Education OCR; algebraic identity proofs are DASHI original. Neither mathematical witness nor document title creates empirical authority.
+
+## Thirteenth pass — highest-alpha original CRDC row/denominator/overlap cut (2026-11-09)
+
+User scope remains K1–K3; K0/K4 and DOCX excluded.
+
+**New committed Agda owners:**
+- `DASHI/Governance/BlackGirlsMatterCRDCOriginalRowAdmissionExact.agda`: `VerifiedCRDCSource`, `MatchedOriginalCell`, `SamePopulationRateReceipt`, `ComparableRatePair`, `comparableRateCrossProducts`, `oneAndRepeatedSuspensionAreDifferent`, `differentDisabilityEligibilityIsNotSamePopulation`, `printedEnrollmentTableCannotReplaceOriginal2011Enrollment`, `suppressedNotZero`, `missingNotZero`.
+- `DASHI/Governance/BlackGirlsMatterCRDCAggregationBoundaryExact.agda`: `TwoIndicatorAggregation`, `disjointCountsRecoverUniqueStudents`, `sameTwoCategoryCountsCannotRecoverUniquePeople`, `differentCRDCMeasuresAreNotDefinitionalEqual`, `differentUnitsAreNotDefinitionalEqual`, `OriginalAggregationReceipt`.
+- `DASHI/Governance/CrenshawLegalAttributionCapstoneExact.agda`: now composes source-unit, suspension-indicator and suppressed-cell negative controls.
+
+**What changed substantively:**
+1. The rate admission record is now indexed by **2011–12 year, district, race/gender, disability-eligibility subgroup and discipline indicator**; numerator and denominator must share all those coordinates.
+2. CRDC observes students receiving one versus multiple out-of-school suspensions as **different** indicators; summing across other disciplinary indicators can double-count unique people unless overlap is source-audited.
+3. Original data status has three disjoint constructors: `observed n`, `suppressed`, `notReported`. Neither latter value is admitted as `observed 0`.
+4. A concrete finite countermodel shows that two identical category counts can describe one or two unique participants depending on overlap. A conditional theorem recovers uniqueness only after zero-overlap proof.
+5. The historical 2013–14 enrollment table cannot silently pay the 2011–12 discipline denominator.
+
+**External source confirmation:** Federal 2011–12 CRDC Q&A (https://www.ed.gov/laws-and-policy/civil-rights-laws/civil-rights-data-collection-crdc-2021-22-school-year/2011-12-civil-rights-data-collection-questions-and-answers) distinguishes students with one versus multiple out-of-school suspensions, expulsion, school arrests/referrals and disability disaggregation. DataLumos holds archived, separately grouped 2011–12 CRDC public-use school indicator files with and without disabilities: https://www.datalumos.org/datalumos/project/219563/version/V1/view . The original ZIP URL https://civilrightsdata.ed.gov/assets/ocr/docs/2011-12-crdc-data.zip could not be opened by either the container (DNS failure) or web tool (unavailable binary). This pass does **not** reconstruct original federal rows.
+
+**Remaining highest-alpha K1–K3 source/empirical receipts:**
+- `original2011CRDCReportRowSameDistrictYearIndicator`: source bytes + SHA256, exact LEA IDs, disability scope, per-measure unit/suppression handling, school-to-district aggregation.
+- `source2011EnrollmentDenominatorSamePopulation`: 2011–12 enrollment for each distinct district/race-gender/disability eligibility with disjointness/unique-person rule; validate ratio denominator.
+- `blackGirlsMatterActual2011DisparityReplication`: reproduce report aggregate counts, state exact indicator selection and overlaps, quantify source mismatches.
+- `observedFatigueAndCapacitySameHistory`: original subject consented, independent psychological/epistemic observations and causal alternatives.
+- `crenshawLegalAuthenticatedPrimaryIssue` and `historicalCarceralSamePersonMechanism`: authentic historical/legal sources, source-specific same-case attributions and warranted causal links.
+
+**Status:** All new modules committed as source-written; compiler acceptance was explicitly excluded, and none of the external original-row/causal evidence has been manufactured.
