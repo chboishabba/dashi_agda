@@ -179,3 +179,10 @@ The actual original SU(2) finite 4D Wilson pressure bound now also gives **bulk 
 These are uniform in finite periodic volume, without independence. They **do not** prevent an arbitrarily long sparse connected bad path: a length-`n` path among `6n⁴` plaquettes has vanishing density `1/(6n³)`. Hence the original D1.03 **connected** polymer/physical-cube estimate remains open, as do E1.03, D2.03/04, N1.02 and G1.03. [Original-Wilson derivation](https://github.com/chboishabba/dashi_agda/blob/research/ym-voyager2026-completeness-crosswalk-20261101/Docs/physics/YMClaySU2OriginalWilsonUniformPlaquetteDeficit20261109.md).
 
 **Max-cut next:** selected-group nonabelian kernel certificate (Monster); actual Leech TF/TT source (Moonshine); physical cluster-activity bound on original Wilson measure and interacting R4 source (YM). Source-written finite algebra is not terminal proof completion.
+
+
+## 9 November: fail-closed actual-evaluation proof repair
+
+The newly source-written Y443 `original80HasNoNontrivialMod2Character` proof was inspected again. The auxiliary `parityWord` normalization was **not** definitional equality with the real relator evaluator. Commit `fbca70f3bf1268c405cf369afb9be9eff8a4265c` adds the *actual* `boolEvaluationIsParity` induction, then `oddEdgeWordEvaluation` and `sourceCentralPowerNineEvaluation` so all eleven original edge and central-relator projections use `Pair.evaluateCoxeterWord` itself. The first `ab1` projection and explicit `zero` pattern were corrected in separate source commits. This fixes an identifiable proof-level mismatch, not a generic wrapper.
+
+The original 79/80 finite source regression passes independently (ranks **11/12**; all **4,096** Boolean generator assignments; character counts **2/1**). The new Agda proof candidate has **NO pinned kernel acceptance receipt**. Do not promote it beyond source-written status or infer nonabelian `NoExtraSelectedRelations.reflectsEquality`. All remaining Monster, mixed Leech TF/TT, FLM all-mode, and physical YM endpoints in this master ledger are unchanged.
