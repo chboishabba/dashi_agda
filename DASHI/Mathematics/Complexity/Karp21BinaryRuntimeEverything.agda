@@ -238,3 +238,9 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryOriginalExa
 -- Complete executable original N21 bit-register graph/certificate/signed-score/threshold path.
 -- All-word original correctness kernel receipt and selected bit-TM clock remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryVerifierExact
+
+-- B6 original signed edge stream via input-bounded binary count/fuel, source candidate only.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountFuelOriginalExact
+
+-- B6 original signed edge stream via input-bounded binary count/fuel, source candidate only.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountBudgetFuelExact
