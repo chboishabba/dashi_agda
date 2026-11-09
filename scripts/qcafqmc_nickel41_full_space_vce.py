@@ -104,6 +104,8 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     mf.conv_tol=float(config.get("scf_tolerance",1.e-9))
     energy=mf.kernel()
     if not mf.converged:raise RuntimeError("RHF did not converge")
+    from qcafqmc_molecular_scf_certificate import from_pyscf_restricted
+    rhf_certificate=from_pyscf_restricted(mol,mf,tolerance=float(config.get("RHF_residual_tolerance",1e-5)))
     from qcafqmc_nickel41_integrals import PUBLISHED_RHF_HARTREE
     source_delta=float(energy-PUBLISHED_RHF_HARTREE[config["geometry"]])
     if abs(source_delta)>float(config.get("max_RHF_source_discrepancy_hartree",0.05)):
@@ -156,6 +158,7 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
                     "active_MO_columns_sorted":[ncore,ncore+7],
                     "selected_mo_sha256":selected_mo_sha256,
                     "SCF_energy_hartree":float(energy),
+                    "molecular_scf_certificate":rhf_certificate,
                     "source_RHF_hartree":PUBLISHED_RHF_HARTREE[config["geometry"]],
                     "RHF_minus_source_hartree":source_delta,
                     "trial_energy_hartree":float(np.real(trial.energy)),
