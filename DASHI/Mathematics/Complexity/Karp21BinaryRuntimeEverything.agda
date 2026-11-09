@@ -80,3 +80,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeEndpointPrefixTrieExact
 
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeMultiplicityScaleExact
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorExact
+
+-- K05: source-written all-word equivalence of grouped and original binary signed ledgers.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorSemanticExact
