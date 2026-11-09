@@ -15,6 +15,7 @@ module DASHI.Moonshine.AbelBishopGeometricPowerSeriesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -26,6 +27,7 @@ import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Foundations.BishopNonnegativeSquareReflectionExact as Reflection
 import DASHI.Moonshine.AbelBishopKoenigsGeometricAbsoluteExact as Geometric
 import DASHI.Foundations.BishopPolynomialGeometricDominationConvergenceExact as Geom
+import DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact as Log
 
 originalBishopGeometricPowerTerm :
   Complex.BishopComplex → Nat → Complex.BishopComplex
@@ -108,3 +110,28 @@ originalBishopGeometricPowerLimit {w} {ratio} interval norm =
   Complex.complexSeriesLimit
     (originalBishopGeometricPowerTerm w)
     (originalBishopGeometricPowerAbsoluteConvergence interval norm)
+
+
+originalBishopGeometricPowerLimitConverges :
+  ∀ {w ratio} →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (norm : BishopReal._≃_
+    (Norm.normSqC w)
+    (Norm.square ratio)) →
+  Complex.ComplexSeriesConvergesTo
+    (originalBishopGeometricPowerTerm w)
+    (originalBishopGeometricPowerLimit interval norm)
+originalBishopGeometricPowerLimitConverges {w} interval norm =
+  Complex.complexSeriesLimitConvergence
+    (originalBishopGeometricPowerTerm w)
+    (originalBishopGeometricPowerAbsoluteConvergence interval norm)
+
+-- The power factor of the genuine logarithm term is definitionally
+-- exactly the power used by the new convergent geometric source.
+originalBishopLogPowerTermSameSource :
+  ∀ w n →
+  Log.originalBishopLogOnePlusTerm w n ≡
+  Algebra.scaleC
+    (Log.logCoefficient n)
+    (originalBishopGeometricPowerTerm w n)
+originalBishopLogPowerTermSameSource w n = refl
