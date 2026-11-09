@@ -28,6 +28,15 @@ python3 scripts/check_bh4_spatial_circulation.py
 python3 scripts/check_bh4_shared_redox_dynamics.py
 python3 scripts/check_bh4_original_qdpr_spatial_reaction.py
 python3 scripts/bh4_original_qdpr_spatial_finite_volume.py --self-test
+python3 scripts/check_bh4_original_panel_spatial_events.py --self-test
+# Real 29×12 check requires the source-acquired certificate; absence
+# remains an explicit physical/source residual, not a synthetic payment.
+if [ -f artifacts/biology/rhea-kitzerow-bh4-reactions.json ]; then
+  python3 scripts/check_bh4_original_panel_spatial_events.py \
+    --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json
+else
+  echo "OPEN SOURCE GATE: original 29×12 acquired Rhea certificate not mounted; synthetic QDPR self-test only" >&2
+fi
 python3 scripts/check_bh4_one_molecule_future_minimality.py
 python3 scripts/check_bh4_spatial_measurement_payment.py --self-test
 
