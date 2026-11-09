@@ -809,3 +809,123 @@ or physically scoped continuation if demanded; source-selected
 six-face reactive boundary work; true BH4/PNP/54-bond same-object
 physical observer commutation; Golden/ITIR and independent
 longitudinal biological calibration.
+
+
+### 2026-11-09 P0.05 stronger topological closure: ALL-timestep existence and strict positivity
+
+For the **closed** original 27-voxel, 54-native-bond, six-face
+**blocking-species** reactive PNP model with strictly positive
+initial concentrations, constant positive dielectric/temperature/mesh,
+finite source-real valences/diffusivities, and nonnegative-integer
+**gross** mass-action reaction sides, the source-preserved CHNOP atom
+inventory supplies a mathematically stronger P0.05 result.
+
+**Additional required original-source hypothesis:** each selected
+species has a strictly positive integer weight `w_s>0` (for
+example the count of original CHNOP atoms), and for every original
+finite reaction column `r`,
+`sum_s w_s (beta_rs-alpha_rs) = 0` EXACTLY. The existing original
+Rhea checker already checks source-level CHNOP conservation;
+the new adapter independently checks this selected positive
+aggregate before issuing a source-weighted existence contract.
+If a species has no such weight or a reaction changes it, the
+result does not apply without an explicit additional reservoir.
+
+Let `W=sum_{v,s} w_s c0_vs>0`,
+`Q=W/min_s w_s` and
+`K={c in [0,infinity)^(27*n): sum_v,s w_s c_vs=W}`.
+This is a nonempty compact convex finite-dimensional simplex;
+every component of every state in `K` is at most `Q`.
+The selected original grounded Poisson operator is invertible
+by the exact SOS theorem. Hence the self-consistent potential
+`phi(c)` and Bernoulli factors are bounded and continuous
+on `K`. Write `Bmax=1+U`, where
+
+```text
+Cphi = h² sqrt(27)/(3 epsilon)
+P = Cphi [ F (sum_s |z_s|) Q + |rho_fixed| ]
+U = 2 F (max_s |z_s|) P / RT.
+```
+
+For any voxel and species, the original Scharfetter–Gummel
+transport loss is at most `6 D_s Bmax c_vs/h²` (six native
+incident bonds, with each gain nonnegative). For an original
+reaction with net coefficient `nu_rs=beta_rs-alpha_rs<0`,
+its forward consuming rate carries a factor `c_vs`,
+bounded by `kf_r (Q*)^(sum alpha_r-1) c_vs`;
+when `nu_rs>0`, its reverse consuming rate has the analogous
+`kb_r (Q*)^(sum beta_r-1)c_vs`, where
+`Q*=max(1,Q)`. Gains are nonnegative. Thus the exact
+source closed-model RHS satisfies the *global linear loss bound*
+
+```text
+RHS_vs(c) >= -Kloss c_vs,  for all c in K,
+
+Kloss = max_s [
+  6 D_s (1+U)/h²
+  + sum_{r: nu_rs<0} (-nu_rs) kf_r (Q*)^(sum alpha_r-1)
+  + sum_{r: nu_rs>0} nu_rs kb_r (Q*)^(sum beta_r-1)
+].
+```
+
+Internal native-face flux cancellation and
+`sum_s w_s nu_rs=0` imply
+`sum_v,s w_s RHS_vs(c)=0` for all states in `K`.
+For **every** `dt>0` define the continuous map
+
+```text
+H_dt(c) = [ c0 + dt (RHS(c) + Kloss c) ] / (1+dt Kloss).
+```
+
+The linear loss bound gives
+`H_dt(c)>=c0/(1+dt Kloss)>0` componentwise,
+and exact conservation gives
+`sum_v,s w_s H_dt(c)_vs=W`; hence
+`H_dt:K -> K`. By the finite-dimensional
+**Brouwer fixed-point theorem**, it has some `c1 in K`
+with `H_dt(c1)=c1`. Cancelling the harmless
+`Kloss c1` term yields the **original implicit PNP equation**
+
+```text
+c1-c0 = dt RHS(c1), with
+c1_vs >= c0_vs/(1+dt Kloss) > 0.
+```
+
+This proves **existence and strict positivity for every positive
+timestep**, mathematically, on the specified *closed,
+weighted-conserved finite model*, with **no global uniqueness
+claim**. The earlier positive-root conditional free-energy
+derivation now applies to at least one existing exact positive
+implicit root for every `dt>0` in this closed model.
+
+**Implementation:** The existing
+`scripts/reactive_pnp_369.py` now contains
+`global_positive_implicit_brouwer_bounds` with the exact
+conservation-weight and sign preconditions; the original source
+adapter `scripts/bh4_original_reactive_pnp_adapter.py`
+now contains `source_bound_closed_brouwer_existence`,
+which uses actual Rhea formula CHNOP atom counts and checks their
+29×12 signed-matrix conservation by **integer arithmetic**.
+Synthetic-only positive and adversarial tests were added in
+the existing two original test owners.
+
+**Proof authority:** This is a complete mathematical derivation
+under the above hypotheses; the numerical code reports candidate
+floating majorants that are NOT outward interval certified. It is
+not an Agda/Bishop kernel-accepted theorem, an executable exact
+numerical root, a globally unique implicit solution, a convergence
+proof of SciPy's nonlinear root finder, or evidence of authentic
+measured BH4 29×12 rates. The PR code/tests have not been
+run at this head in the present session.
+
+**Revised decisive cut:** P0.05 finite **closed**
+all-timestep *existence+positivity* is mathematically paid under
+strictly positive conserved source weights. The remaining original
+gates are (i) Agda 2.9/Bishop/Brouwer trusted formalization of
+this theorem, (ii) source-authenticated original 29×12 source
+and physical parameter inhabitant, (iii) actual reactive boundary/
+reservoir/variable-compartment extension (where the invariant
+simplex argument may not apply), (iv) physical BH4/PNP/tissue
+same-object step and longitudinal empirical validation,
+(v) numerical root computation/verified residual rather than
+existence alone, and (vi) Golden/ITIR trusted referee receipts.
