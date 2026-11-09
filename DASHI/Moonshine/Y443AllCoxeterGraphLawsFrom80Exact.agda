@@ -26,6 +26,7 @@ import DASHI.Moonshine.Y443JMDThreePathFiniteRewriteExact as Finite
 import DASHI.Moonshine.Y443Nonary72EquivarianceNoGoExact as Canon
 import DASHI.Moonshine.Y443JMDPathShiftSemanticCompilerExact as Path
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as All
+import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as Words
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.TwistedModuleModularity as TM
 
@@ -1402,3 +1403,18 @@ braidAdjacent Y.d3 Y.d3 ()
   allElevenShiftsFromActual80 =
     Path.Semantic.elevenSourcePathShiftEquations
       gi nodes all allGraphLaws
+
+  ------------------------------------------------------------------------
+  -- The genuine all-node JMD word certificate follows from the SAME
+  -- original 80-relator witness, without a second path-shift assumption.
+  -- It does not prove that the selected group IS the presented quotient.
+  ------------------------------------------------------------------------
+
+  allTwelveNodeWordsFromActual80 :
+    Pair.NodeWordCertificate gi
+      (Words.uElement gi nodes)
+      (Words.vElement gi nodes)
+      nodes
+  allTwelveNodeWordsFromActual80 =
+    All.Recover.actualNodeWordCertificate
+      gi nodes all allElevenShiftsFromActual80
