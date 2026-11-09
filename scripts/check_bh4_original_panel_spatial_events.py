@@ -595,6 +595,8 @@ def main():
                 json.loads(args.parameters.read_text(encoding="utf-8")),
                 json.loads(args.candidate.read_text(encoding="utf-8")))
         print(json.dumps(result,indent=2,sort_keys=True))
+        if args.parameters is not None and result["original_flux_candidate"]["status"] != "feasible-algebraic-only":
+            raise SystemExit(2)
     elif args.self_test or args.certificate is None:
         self_test()
 
