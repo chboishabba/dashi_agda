@@ -56,12 +56,12 @@ federal8575Priority : LegalPriorityCoordinate
 federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
-  "EPBC 2019/8575 Part 9 decision: 15 October 2026 public Commonwealth notice says APPROVED WITH CONDITIONS; operative signed approval, authorisation and full conditions still to acquire"
-  "official 15 October approval notice plus original 2 September extension signed Declan OConnor-Cox to 1 October and superseding 25 September extension signed Mark Hall to 16 October; section 95B(2) 23 July notice records 1786 comments; extension officials are not proven signatories on final approval"
-  "signed approval and delegate identity; statement of reasons and section 95C recommendation report requested under section 135A(2); final s95B(1) PD/summary of comment response AND transmitted copies of public comments; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
-  "approval status is not the signed decision; dated public comment count is not the decision-maker's complete evidentiary consideration; Minister's portfolio responsibility does not by itself prove Minister personally signed"
+  "EPBC 2019/8575 Part 9 signed 50-page approval dated 16 October 2026 by Mark Hall, with Annexure A conditions; public decision notice dated 15 October. Exact final 15 October OAMP versions and decision consideration are still unreceived"
+  "signed original approval, recorded SHA-256 f9b591f230458939dbeafc8b6178c148dbbec3e68e5e75f66fd187e2a402b808; 2 September extension signed Declan OConnor-Cox and 25 September extension signed Mark Hall; section 95B(2) notice records 1786 comments"
+  "delegate authority and decision briefing; section 95C recommendation available for request under section 135A(2) but not received; final s95B(1) PD/summary of comment response AND transmitted copies of public comments; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
+  "signed approval and its source status do not establish accepted expert reliability, full decision briefing, consideration of every objection or any judicial finding"
   "mere consideration of economic/social housing factors under section 136(1)(b), housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
-  "urgent counsel filing/standing/possible interim orders assessment; obtain original signed notice, targeted section 95C report via post-decision section 135A(2) request, and section 95B document/comment-transmission receipts; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
+  "urgent counsel filing/standing/possible interim orders assessment; retain authenticated signed notice; obtain actual section 95C report via post-decision section 135A(2) request, and section 95B document/comment-transmission receipts; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
 
 -- The pre-decision s130 clock witnesses remain historically valid source receipts,
 -- but the original 1 October extension was superseded by Mark Hall's signed 25 September section 130(1A) extension to 16 October 2026; neither extension itself pays the approval signatory.
@@ -171,3 +171,58 @@ politicalAlignmentDoesNotCreateStatutoryPayment ()
 celebrityAttentionDoesNotCreatePreservationOutcome :
   CelebrityAttentionCreatesPreservationOutcome → ⊥
 celebrityAttentionDoesNotCreatePreservationOutcome ()
+
+------------------------------------------------------------------------
+-- 9 November 2026: commercial optimisation evidence firewall.
+-- Source: docs/research/Woogaroo20198575OptimizerProvenanceRoadmap20261109.md
+-- The following values record the CURRENT state of source acquisition.
+-- They are not proofs that Stockland or a consultant optimised this
+-- action, nor substitutes for original worksheets, emails or ecology.
+------------------------------------------------------------------------
+
+record OptimisationProvenanceStatus : Set where
+  constructor optimisation-provenance-status
+  field
+    stocklandHistoricalCorporateCalculatorPubliclyDocumented : Bool
+    saundersHavillOffsetCommercialTradeoffAdvertised : Bool
+    springviewDirectDeveloperLandownerIdentitySeparated : Bool
+    original20198575OptimizerUseAuthenticated : Bool
+    original20198575ScenarioRunVersionsAuthenticated : Bool
+    originalJulyIssueFOAGWorkbookAuthenticated : Bool
+    originalOctoberMWWIssueDAuthenticated : Bool
+    originalMWWConfidence75IndependentlyCalibrated : Bool
+    original95CReportReceived : Bool
+    agdaKernelAcceptanceEstablishedHere : Bool
+open OptimisationProvenanceStatus public
+
+currentOptimisationEvidenceStatus : OptimisationProvenanceStatus
+currentOptimisationEvidenceStatus = optimisation-provenance-status
+  true true true false false false false false false false
+
+corporateCapabilityKnown :
+  stocklandHistoricalCorporateCalculatorPubliclyDocumented
+    currentOptimisationEvidenceStatus ≡ true
+corporateCapabilityKnown = refl
+
+caseSpecificOptimiserUseStillUnproven :
+  original20198575OptimizerUseAuthenticated
+    currentOptimisationEvidenceStatus ≡ false
+caseSpecificOptimiserUseStillUnproven = refl
+
+mwwEcologicalConfidenceCalibrationOpen :
+  originalMWWConfidence75IndependentlyCalibrated
+    currentOptimisationEvidenceStatus ≡ false
+mwwEcologicalConfidenceCalibrationOpen = refl
+
+-- Missing source-bearing proof contracts (do not pretend inhabited):
+-- originalStocklandCalculatorIdentityAndProjectUse
+-- original20198575ScenarioRunProvenance
+-- original20198575ObjectiveConstraintSelectionWitness
+-- originalJulyIssueFApprovedOAGCellJoin
+-- originalMWWAUSourceScoreToAcceptedInputRounding
+-- originalMWWConfidence75IndependentCalibration
+-- originalSixHighGainAUWithWithoutSameTimeQuality
+-- originalWoogarooSameFunctionHabitatTransport
+-- originalAvonvaleIncrementalBenefitNonOverlap
+-- original95B95C136SameDecisionConsideration
+-- original20198575GoldenRootsKernelAccepted
