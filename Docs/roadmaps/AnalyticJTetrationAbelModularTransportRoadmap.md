@@ -109,7 +109,9 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [x] **P0b.05** `asOriginalInvariantBaseAttempt`, `originalJNoDescentConsumed`: construct the prior DASHI `JInvariant369LevelNonDescentThroughJExact.InvariantBaseTranslationAttempt` and apply its existing `fibreCannotDescendThroughInvariantBase`.
 - [x] **P0b.06** `asCarrier`, `originalTransportEqualsCarrierTransport`: embed the P0 exponential/modular-j record into generic carriers.
 - [ ] **P0b.07** Kernel-check both owners, investigate legacy unsafe/transitive imports, run negative-control examples where translation *has* a fixed point, and report exact SHA/compiler receipt.
-- [ ] **P0b.08** Explicitly instantiate *selected* existing p-adic, Cayley–Dickson, quaternion, contextual PNF and 369 fibre carriers with their genuine translation and quotient maps; do not count an arbitrary-set parameter as an instantiated algebra.
+- [~] **P0b.08** Concrete existing level-3 modular cusp fibre instantiated in `AbelOriginalLevel3CarrierInstanceExact.agda`; p-adic, Cayley–Dickson, quaternion, contextual PNF and 9/27 instances still open. Finite level-3 translation is **not** the complex exponential.
+- [x] **P0b.08a** `level3CoarseInvariant`, `level3CannotBeFixed`, `level3CoordinateCannotDescend`: specialize generic carrier theorem to the original level-3 cusp translation and consume its no-fixed-point proof (source-written, kernel-check pending).
+- [x] **P0b.08b** `identityTranslationHasFixedPoint`, `identityCoordinateDoesDescend`: witness that a fixed-point-bearing identity action permits a decoder (source-written, kernel-check pending).
 - [ ] **P0b.09** Refactor `AbelTetrationModularSymmetryExact.FixedPointFreeTranslation` to consume the generic owner or an adapter; preserve proof semantics while removing duplication.
 
 **Prior-art references:** `DASHI/Moonshine/JInvariant369LevelNonDescentThroughJExact.agda`; `DASHI/Moonshine/JInvariant369PhaseLevelSeparationExact.agda`; `DASHI/Cognition/PNF/HypercomplexRequestedFractranComponentExact.agda`; `DASHI/Mathematics/Algebra/CayleyDicksonRationalComplexQuaternionExact.agda`; `DASHI/Codec/TriadicPAdicCodec.agda`.
@@ -134,7 +136,7 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 
 ## Current proof status
 
-**P0 and P0b conditional algebraic transport and original-owner non-descent bridge source-written; kernel acceptance pending. Concrete carrier instances P0b.08, P1/P1b, P2, P3 and P4 remain open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
+**P0 and P0b conditional algebraic transport and original-owner non-descent bridge source-written; the original level-3 carrier instance and identity negative control are source-written, not yet kernel-checked. Other concrete carrier instances P0b.08, P1/P1b, P2, P3 and P4 remain open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
 
 ## 2026-11-09 continuation receipt
 
@@ -151,3 +153,11 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - A fine fixed point forces a *coordinate* translation fixed point; an invariant *base* is not itself a fine fixed point. The implication in general is not the reverse.
 - `originalLocalAbelCoordinateExists` is not solved merely by abstract carrier-polymorphism. Actual Kneser complex tetration requires the original analytic domain, branches, normalization and convergence.
 - Both new owners are **source-written, not kernel-checked** in this session. No executable source, scientific evidence or compiler acceptance has been invented.
+
+## 2026-11-09 concrete-carrier continuation
+
+- `DASHI/Moonshine/AbelOriginalLevel3CarrierInstanceExact.agda` consumes the existing `JInvariant369CanonicalLevelObserverTowerExact.translateLevel3Residue` action and `JInvariant369PhaseLevelSeparationExact.level3TranslationNoFixedPoint` theorem on the original cusp fibre, with a unit-valued invariant quotient.
+- The exact claims are **finite modular-level orbit/quotient facts**, not a concrete solution of the complex Abel functional equation or Kneser normalization.
+- Negative control: an identity coordinate action has fixed points and its coordinate descends through the identity quotient. Thus the non-descent obstruction must never be generalized to all quotient carriers.
+- **Verification gate:** the Agda binary is absent locally. These new source declarations need Agda 2.9 typechecking before any proof-owner promotion. The existing legacy imports may impose additional dependency constraints.
+- **Next highest physical/analytic cut** remains `originalSelectedAbelSemiconjugacy` for a genuine nontrivial analytic exponential carrier, then `originalLocalAbelCoordinateExists`. The finite level-3 instance does not discharge either.
