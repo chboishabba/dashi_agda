@@ -985,3 +985,16 @@ wrong weights, nonintegral sides and Boolean coordinates.
   tissue readout and physical time, reactive/open boundary
   extensions, exact-head Agda verification, and independent
   longitudinal evidence.
+
+
+## 2026-11-09 P0.06 chronological energy-budget composition (new source-written owner)
+
+**Owner:** `DASHI/Biology/BH4PNPEnergyBudgetCompositionExact.agda` is now imported by `DASHI/Biology/KitzerowBH4EvidenceEverything.agda` on BH4 PR #1454. These are assistant-authored *proof-source* additions; **Agda 2.9 kernel acceptance is still OPEN**. No source-specific Rhea/PNP parameter or measurement was supplied.
+
+**Exact mathematical scope:** `EnergyBudgetStep initial final` holds nonnegative Nat-valued `loss` and `credit` together with a proof `final + loss ≡ initial + credit`. `composeEnergyBudget` proves exact telescoping for two receipts sharing the **same indexed intermediate energy**. `EnergyBudgetHistory` represents a nonempty chronological sequence, and `allStepsEnergyBudgetExact` collapses any such history to a single exact receipt with accumulated losses/credits. `zeroCreditHistoryHasExactLossWitness` gives `final + loss ≡ initial` whenever cumulative credit is independently proven zero. The arguments use only Nat associativity/commutativity and transitivity; there is no postulate, hole or source physics assertion in the new owner.
+
+**Important limitation:** a Nat-valued budget is an **abstract additive certificate**; it is NOT the real-valued chemical entropy and electrostatic Bregman energy of the original 27 × 29 system. To instantiate it with physical or numerical data, first provide a same-source compatible order-preserving encoding with certified rounding/error bounds. In particular, `credit` may include exterior work and residual error only if independently justified; no actual kinetic dissipation, positive implicit root, Dirichlet time-dependent work, or detailed balance was established by the composition lemma. The next higher-alpha cut is the physical one-step receipt, *then* its repeated-time composition.
+
+**Remaining gates explicitly unchanged:** G0.01–04 Agda receipts; S0.01–04 original source and thermodynamic data; P0.01–05 source well-posedness, SG transport, conserved reaction and positivity; P0.06 physical chemical-plus-electrostatic free-energy link; P0.07 physical boundary work; P0.08 original same-state step; P1–P3 empirical and quotient consequences. Do not promote `allStepsEnergyBudgetExact` to any of these source-gated declarations without a same-source model proof.
+
+**Required verification:** `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPEnergyBudgetCompositionExact.agda` and `scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`. These commands are prescribed, not execution receipts.
