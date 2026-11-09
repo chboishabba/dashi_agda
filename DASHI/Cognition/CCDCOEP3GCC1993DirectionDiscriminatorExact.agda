@@ -28,6 +28,7 @@ import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as Source
 data OriginalSourceObject : Set where
   rensbergerWashingtonPostJune1 : OriginalSourceObject
   shlaesGCCResponseJune30 : OriginalSourceObject
+  hansenIndependentRebuttalJune8 : OriginalSourceObject
   julyWashingtonPostClipping : OriginalSourceObject
   septemberGCCBulletin : OriginalSourceObject
 
@@ -38,6 +39,7 @@ data OriginalAuthor : Set where
 originalAuthor : OriginalSourceObject → OriginalAuthor
 originalAuthor rensbergerWashingtonPostJune1 = washingtonPostJournalist
 originalAuthor shlaesGCCResponseJune30 = gccCommunicationsOffice
+originalAuthor hansenIndependentRebuttalJune8 = washingtonPostJournalist
 originalAuthor julyWashingtonPostClipping = washingtonPostJournalist
 originalAuthor septemberGCCBulletin = gccCommunicationsOffice
 
@@ -48,6 +50,10 @@ journalistNotGCCHistoricalAuthor ()
 
 data HistoricalSourceRelation : OriginalSourceObject →
                                 OriginalSourceObject → Set where
+  juneArticleAnsweredByIndependentHansenLetter :
+    HistoricalSourceRelation
+      rensbergerWashingtonPostJune1
+      hansenIndependentRebuttalJune8
   juneArticleReferencedByGCCResponse :
     HistoricalSourceRelation
       rensbergerWashingtonPostJune1
@@ -55,6 +61,10 @@ data HistoricalSourceRelation : OriginalSourceObject →
   juneArticleAlsoReferencedInSeptemberBulletin :
     HistoricalSourceRelation
       rensbergerWashingtonPostJune1
+      septemberGCCBulletin
+  hansenReplyPrecedesSeptemberWithoutUptakeProof :
+    HistoricalSourceRelation
+      hansenIndependentRebuttalJune8
       septemberGCCBulletin
   julyClippingReferencedInSeptemberBulletin :
     HistoricalSourceRelation
@@ -99,6 +109,23 @@ data ArticleVoice : Set where
 hansenNotMichaels : quotedJamesHansen ≡ quotedPatrickMichaels → ⊥
 hansenNotMichaels ()
 
+data ResponsePrecedence : Set where
+  earlierIndependentCorrection : ResponsePrecedence
+  laterGCCSelection : ResponsePrecedence
+
+data CounterevidenceVisibility : Set where
+  publiclyPublished : CounterevidenceVisibility
+  originalActorReadAndConsidered : CounterevidenceVisibility
+
+hansenRebuttalPublished : CounterevidenceVisibility
+hansenRebuttalPublished = publiclyPublished
+
+publishedNotProofOfGCCKnowledge :
+  hansenRebuttalPublished ≡ originalActorReadAndConsidered → ⊥
+publishedNotProofOfGCCKnowledge ()
+
+-- Independent correction predates original selected GCC promotional
+-- responses; temporal accessibility does not imply actual uptake.
 data SourceLinkGrade : Set where
   sourceMentionsEarlierText : SourceLinkGrade
   independentEditorialUptake : SourceLinkGrade
