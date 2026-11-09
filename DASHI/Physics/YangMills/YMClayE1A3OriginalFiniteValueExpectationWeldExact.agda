@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteValueExpectationWeldExact
 
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -102,4 +102,4 @@ module _
     trans
       (originalDirectFiniteValueExpectationIsOriginalWilson
         n (selected n))
-      (Agda.Builtin.Equality.refl)
+      refl
