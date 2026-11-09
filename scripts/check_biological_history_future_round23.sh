@@ -20,6 +20,7 @@ MODULES=(
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
   DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
   DASHI/Biology/Physical/Biological369CubicalOpenSignedChargeExact.agda
+  DASHI/Biology/Physical/Biological369MixedNativeFaceSignedContinuityExact.agda
   DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
   DASHI/Biology/Physical/Biological369OriginalThreeWayPantsFluxExact.agda
   DASHI/Biology/Physical/Biological369PantsPhysicalSeamExact.agda
