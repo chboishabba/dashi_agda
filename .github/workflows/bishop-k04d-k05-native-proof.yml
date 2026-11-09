@@ -37,6 +37,7 @@ on:
       - 'DASHI/Analysis/BishopOriginalExpOriginDividedDifferenceSeriesExact.agda'
       - 'DASHI/Analysis/BishopOriginalExpOriginDerivativeClosedExact.agda'
       - 'DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda'
+      - 'DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
@@ -165,6 +166,7 @@ jobs:
             DASHI/Analysis/BishopOriginalExpOriginDividedDifferenceSeriesExact.agda
             DASHI/Analysis/BishopOriginalExpOriginDerivativeClosedExact.agda
             DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda
+            DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
             DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
             DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
