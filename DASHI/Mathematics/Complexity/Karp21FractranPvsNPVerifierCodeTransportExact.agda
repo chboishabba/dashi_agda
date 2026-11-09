@@ -43,15 +43,15 @@ karpTraceCodeRealizesOriginalTypedN21 :
   PNP.ExecutableVerifierCode OriginalTraceVerifier →
   PNP.ExecutableVerifierCode OriginalTypedVerifier
 karpTraceCodeRealizesOriginalTypedN21 traceCode = record
-  { PNP.Code = PNP.Code traceCode
-  ; PNP.code = PNP.code traceCode
-  ; PNP.run = PNP.run traceCode
-  ; PNP.runExact = λ word certificate →
+  { PNP.ExecutableVerifierCode.Code = PNP.ExecutableVerifierCode.Code traceCode
+  ; PNP.ExecutableVerifierCode.code = PNP.ExecutableVerifierCode.code traceCode
+  ; PNP.ExecutableVerifierCode.run = PNP.ExecutableVerifierCode.run traceCode
+  ; PNP.ExecutableVerifierCode.runExact = λ word certificate →
       trans
-        (PNP.runExact traceCode word certificate)
+        (PNP.ExecutableVerifierCode.runExact traceCode word certificate)
         (Same.karpOriginalTraceSameTypedN21AllWords
           word certificate)
-  ; PNP.codeSize = PNP.codeSize traceCode
+  ; PNP.ExecutableVerifierCode.codeSize = PNP.ExecutableVerifierCode.codeSize traceCode
   }
 
 -- The same result in the opposite direction: any executable N21
@@ -60,15 +60,15 @@ karpTypedCodeRealizesOriginalTrace :
   PNP.ExecutableVerifierCode OriginalTypedVerifier →
   PNP.ExecutableVerifierCode OriginalTraceVerifier
 karpTypedCodeRealizesOriginalTrace typedCode = record
-  { PNP.Code = PNP.Code typedCode
-  ; PNP.code = PNP.code typedCode
-  ; PNP.run = PNP.run typedCode
-  ; PNP.runExact = λ word certificate →
+  { PNP.ExecutableVerifierCode.Code = PNP.ExecutableVerifierCode.Code typedCode
+  ; PNP.ExecutableVerifierCode.code = PNP.ExecutableVerifierCode.code typedCode
+  ; PNP.ExecutableVerifierCode.run = PNP.ExecutableVerifierCode.run typedCode
+  ; PNP.ExecutableVerifierCode.runExact = λ word certificate →
       trans
-        (PNP.runExact typedCode word certificate)
+        (PNP.ExecutableVerifierCode.runExact typedCode word certificate)
         (sym (Same.karpOriginalTraceSameTypedN21AllWords
           word certificate))
-  ; PNP.codeSize = PNP.codeSize typedCode
+  ; PNP.ExecutableVerifierCode.codeSize = PNP.ExecutableVerifierCode.codeSize typedCode
   }
 
 -- A P-vs-NP refined witness can transport to typed N21 ONLY
