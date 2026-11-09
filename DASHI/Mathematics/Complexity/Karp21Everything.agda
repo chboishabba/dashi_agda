@@ -448,3 +448,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinarySelectedEventTraceExa
 -- E1 original ordered signed selected-edge event trace on actual first-enabled binary machine.
 -- Source-written proof candidate; Agda 2.9 and physical TM cost OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTraceRebuildExact
+
+-- D2 essential negative control: original raw-list 'finished' ignores W, while binary whole machine threshold-rejects.
+-- Therefore require a threshold-aware terminal observer/stuttering simulation, not phase equality.
+import DASHI.Mathematics.Complexity.Karp21OriginalRawVsBinaryTerminalCounterexampleExact
