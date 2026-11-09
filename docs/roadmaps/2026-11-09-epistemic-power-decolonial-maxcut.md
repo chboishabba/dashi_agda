@@ -187,3 +187,29 @@ Remaining exact blockers are K0 executable/kernel receipts, K1 cryptographically
 | 4 | K4 | `itirSelectiveReopenReplay`: PNF/SLR claim authority and lineage controls, idempotence, unaffected-cases negative controls and canonical runtime receipts |
 
 **Do not re-prove** `IntersectionalNonFactorability.rechartingCannotRecoverErasedPhenomenon`, `LacanIrigarayTernaryGrammarBridgeExact.noTernaryRelabellingPreservesGrammar`, `TrialecticAttachedTwoCellExact.attachedFaceDoesNotFactorThroughBoundary`, or the existing tetralemma/four-view alignment. They are reused as imported proof owners.
+
+## Sixth implementation pass — user's scoped maximum cut K1–K3 (2026-11-09)
+
+**Scope instruction:** K0 and K4 explicitly deprioritised. No DOCX output. Do not treat absence of kernel check as a blocker for writing these source-level contracts, but continue to label them source-written rather than accepted.
+
+### Committed artifacts
+
+1. `docs/roadmaps/2026-11-09-epistemic-power-source-admission-ledger.md` — primary-text claim inventory S-01–S-06 and TY-01–TY-05; article sections/page references, exact accessible HTML/indexed-text locations and source-to-formal-consumer correspondence. Original source PDF screenshot/digest is not available: exact-byte source-weld remains open.
+2. `DASHI/Governance/EpistemicPowerClaimAdmissionExact.agda` — `Supports`, `Admission`, and the negative lemmas `sourceLocationDoesNotAdmitFatigue`, `sourceLocationDoesNotAdmitCausation`, `fatigueObservationDoesNotAdmitCausation`, `landReceiptDoesNotAdmitSovereignty`, `sovereigntyReceiptDoesNotAdmitLand`, `inclusionOrTextCannotAdmitLand`. This is a taxonomy of evidence types; the synthetic examples **are not genuine empirical receipts**.
+3. `DASHI/Governance/EpistemicPowerEmpiricalGateExact.agda` — `EmpiricalValidators`, `AuditedCase`, the independent evidence projections `auditedCaseRequiresIndependentFatigue`, `auditedCaseRequiresCausalAlternatives`, `auditedCaseRequiresDecisionSource`, `auditedCaseRequiresMaterialSource`, `auditedCaseRequiresEthicalStanding`; negative control `missingFatigueBlocksCaseAdmission`; existing ESD proof reuse `esdScoreCannotReplaceSituatedCase`. The validator predicates are *external requirements*, not generated evidence.
+
+### Exact revised K1–K3 leaves
+
+| Priority | Gate | Source-written result | Missing input / remaining theorem |
+|---|---|---|---|
+| K1a | Passage-location grounding | S-01–S-06, TY-01–TY-05 anchored in source ledger | Local source bytes plus SHA256 and page/offset verification (`sourceMatchedSattaSubspan`, `sourceMatchedTuckYangSubspan`) |
+| K1b | Distinguish textual citation vs empirical truth | `sourceLocationDoesNotAdmitFatigue`, `sourceLocationDoesNotAdmitCausation` | Interpretation-level independent reviewer adjudication (`interpretiveReceiptReviewerAgreement`) |
+| K2a | Fatigue not inferred from work count | `missingFatigueBlocksCaseAdmission`, earlier workload/fatigue collision | Original independent observation receipts for each case (`observedFatigueAndCapacitySameHistory`) |
+| K2b | Causal alternatives not inferred from fatigue | `fatigueObservationDoesNotAdmitCausation`, `auditedCaseRequiresCausalAlternatives` | Actual causal comparison/alternatives, consent and access |
+| K3a | ESD scores not sufficient | `esdScoreCannotReplaceSituatedCase` using original ESD owner | Case-specific original source, named time-indexed decisions, institutional power and material outcome records (`originalESDCaseHistoryCountermodel`) |
+| K3b | Ethical standing | `auditedCaseRequiresEthicalStanding` | Participant consent/access and domain-specific sovereignty/land validation |
+| K3c | Negative controls | `missingFatigueBlocksCaseAdmission` plus prior good-faith versus obstructive review countermodel | Independently documented legitimate-review and confounder cases |
+
+### Source/material limitations
+
+The Cambridge primary HTML was read directly and source descriptions in the ledger are human-level grounded. The Edinburgh-hosted PDF returned 403 for direct fetch/screenshot; an indexed text extraction and a published repository record were available. No PDF screenshot or file digest is claimed. For all K2/K3 cases, evidence is absent from this branch and cannot be created by a closed finite model. Thus **K1 passage anchoring advanced; K2/K3 formal admission gates advanced; primary byte receipts and real empirical case closure remain open**.
