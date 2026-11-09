@@ -112,7 +112,8 @@ actualAccumulateSignedWidthBudget :
   (ledger : Ledger.SignedLedger) →
   actualLedgerWidth (Ledger.accumulateSigned selected ledger)
     ≤ actualLedgerWidth ledger + selectedTokenCharges selected
-actualAccumulateSignedWidthBudget [] ledger = NatP.≤-refl
+actualAccumulateSignedWidthBudget [] ledger =
+  NatP.m≤m+n (actualLedgerWidth ledger) zero
 actualAccumulateSignedWidthBudget (token ∷ rest) ledger =
   subst
     (λ bound →
