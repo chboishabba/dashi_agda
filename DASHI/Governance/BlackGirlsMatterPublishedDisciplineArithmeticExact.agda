@@ -51,39 +51,34 @@ newYorkBoysCasesFivefoldPlus1118 = refl
 data MeasuredShare : Set where
   femaleEnrollmentShare femaleDisciplineShare : MeasuredShare
 
+data FemaleGroup : Set where
+  blackGirlGroup whiteGirlGroup : FemaleGroup
+
 reportedRoundedPercent :
-  District → MeasuredShare → ReportedGroup → Nat
-reportedRoundedPercent boston femaleEnrollmentShare blackGirls = 28
-reportedRoundedPercent boston femaleEnrollmentShare whiteGirls = 15
-reportedRoundedPercent boston femaleEnrollmentShare blackBoys = 0
-reportedRoundedPercent boston femaleEnrollmentShare whiteBoys = 0
-reportedRoundedPercent boston femaleDisciplineShare blackGirls = 61
-reportedRoundedPercent boston femaleDisciplineShare whiteGirls = 5
-reportedRoundedPercent boston femaleDisciplineShare blackBoys = 0
-reportedRoundedPercent boston femaleDisciplineShare whiteBoys = 0
-reportedRoundedPercent newYorkCity femaleEnrollmentShare blackGirls = 34
-reportedRoundedPercent newYorkCity femaleEnrollmentShare whiteGirls = 13
-reportedRoundedPercent newYorkCity femaleEnrollmentShare blackBoys = 0
-reportedRoundedPercent newYorkCity femaleEnrollmentShare whiteBoys = 0
-reportedRoundedPercent newYorkCity femaleDisciplineShare blackGirls = 56
-reportedRoundedPercent newYorkCity femaleDisciplineShare whiteGirls = 5
-reportedRoundedPercent newYorkCity femaleDisciplineShare blackBoys = 0
-reportedRoundedPercent newYorkCity femaleDisciplineShare whiteBoys = 0
+  District → MeasuredShare → FemaleGroup → Nat
+reportedRoundedPercent boston femaleEnrollmentShare blackGirlGroup = 28
+reportedRoundedPercent boston femaleEnrollmentShare whiteGirlGroup = 15
+reportedRoundedPercent boston femaleDisciplineShare blackGirlGroup = 61
+reportedRoundedPercent boston femaleDisciplineShare whiteGirlGroup = 5
+reportedRoundedPercent newYorkCity femaleEnrollmentShare blackGirlGroup = 34
+reportedRoundedPercent newYorkCity femaleEnrollmentShare whiteGirlGroup = 13
+reportedRoundedPercent newYorkCity femaleDisciplineShare blackGirlGroup = 56
+reportedRoundedPercent newYorkCity femaleDisciplineShare whiteGirlGroup = 5
 
 -- Cross-product comparisons of ROUNDED within-girl shares. They do
 -- NOT prove exact suspension probabilities or individual risks.
 bostonFemaleShareCrossProductGap :
-  reportedRoundedPercent boston femaleDisciplineShare blackGirls *
-  reportedRoundedPercent boston femaleEnrollmentShare whiteGirls ≡
-  reportedRoundedPercent boston femaleDisciplineShare whiteGirls *
-  reportedRoundedPercent boston femaleEnrollmentShare blackGirls + 775
+  reportedRoundedPercent boston femaleDisciplineShare blackGirlGroup *
+  reportedRoundedPercent boston femaleEnrollmentShare whiteGirlGroup ≡
+  reportedRoundedPercent boston femaleDisciplineShare whiteGirlGroup *
+  reportedRoundedPercent boston femaleEnrollmentShare blackGirlGroup + 775
 bostonFemaleShareCrossProductGap = refl
 
 newYorkFemaleShareCrossProductGap :
-  reportedRoundedPercent newYorkCity femaleDisciplineShare blackGirls *
-  reportedRoundedPercent newYorkCity femaleEnrollmentShare whiteGirls ≡
-  reportedRoundedPercent newYorkCity femaleDisciplineShare whiteGirls *
-  reportedRoundedPercent newYorkCity femaleEnrollmentShare blackGirls + 558
+  reportedRoundedPercent newYorkCity femaleDisciplineShare blackGirlGroup *
+  reportedRoundedPercent newYorkCity femaleEnrollmentShare whiteGirlGroup ≡
+  reportedRoundedPercent newYorkCity femaleDisciplineShare whiteGirlGroup *
+  reportedRoundedPercent newYorkCity femaleEnrollmentShare blackGirlGroup + 558
 newYorkFemaleShareCrossProductGap = refl
 
 -- Table 1 explicitly cites a DIFFERENT year (2013-14) than the discipline
