@@ -275,3 +275,20 @@ one-step and tissue observer commuting square; exact-head Agda Golden
 and production ITIR receipts; independent biological trajectory data.
 The new Python tests are committed but NOT executed in this connector
 session; therefore no test success is asserted.
+
+
+### 2026-11-09 fail-closed constitutive admission hardening
+
+`scripts/reactive_pnp_369.py.Model.__post_init__` no longer
+uses Python `assert` for numerical-source admission: all
+dimensions, finite coefficients, integer gross reaction orders,
+nonnegative diffusion, positive reaction rates, finite electrostatic
+scales and fixed charge now cause explicit `ValueError` rejection
+when malformed. These checks remain active under optimized Python.
+`scripts/test_reactive_pnp_369.py` adds malformed coefficient,
+nonfinite and shape negative controls.
+
+This closes the narrow programmatic input-guard issue, *not*
+P0.05 (general existence/positivity), P0.06 (analytic energy
+inequality) or P0.08 (measured original physical state). No test
+execution or Agda kernel acceptance is claimed at this head.
