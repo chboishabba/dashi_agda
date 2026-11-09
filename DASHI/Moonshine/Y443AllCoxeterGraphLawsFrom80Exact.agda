@@ -27,6 +27,7 @@ import DASHI.Moonshine.Y443Nonary72EquivarianceNoGoExact as Canon
 import DASHI.Moonshine.Y443JMDPathShiftSemanticCompilerExact as Path
 import DASHI.Moonshine.Y443JMDAllTwelveNodeWordCompilerExact as All
 import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as Words
+import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.TwistedModuleModularity as TM
 
@@ -1419,3 +1420,23 @@ braidAdjacent Y.d3 Y.d3 ()
       nodes
   allTwelveNodeWordsFromActual80 =
     Recovered.actualNodeWordCertificate
+
+  ------------------------------------------------------------------------
+  -- Whole-group two-generation: one original relator witness + the
+  -- ORIGINAL presented-carrier signed-word surjectivity. In particular,
+  -- neither an independent JMD path-shift oracle nor an independently
+  -- assumed NodeGeneration field is required by this endpoint.
+  ------------------------------------------------------------------------
+
+  everyPresentedElementHasUVWord :
+    Presented.PresentedByY443Nodes gi nodes →
+    (g : G) →
+    Pair.RepresentedByPair gi
+      (Words.uElement gi nodes)
+      (Words.vElement gi nodes) g
+  everyPresentedElementHasUVWord presented g =
+    Pair.pairWordsSurjective gi
+      (Words.uElement gi nodes) (Words.vElement gi nodes)
+      nodes allTwelveNodeWordsFromActual80
+      (Presented.nodeGenerationFromPresentedSyntax gi nodes presented)
+      g
