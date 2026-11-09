@@ -72,15 +72,16 @@ differentUnitsAreNotDefinitionalEqual ()
 record OriginalAggregationReceipt
   (src : OCR.VerifiedCRDCSource)
   (d : OCR.District)
-  (g : OCR.Population) : Set₁ where
+  (g : OCR.Population)
+  (eligibility : OCR.DisabilityScope) : Set₁ where
   constructor original-aggregation-receipt
   field
     oneSuspension :
       OCR.MatchedOriginalCell src OCR.y2011to2012 d g
-        OCR.oneOutOfSchoolSuspension
+        eligibility OCR.oneOutOfSchoolSuspension
     repeatedSuspension :
       OCR.MatchedOriginalCell src OCR.y2011to2012 d g
-        OCR.multipleOutOfSchoolSuspensions
+        eligibility OCR.multipleOutOfSchoolSuspensions
     bothCountingUnitMatches :
       OCR.sourceCountingUnit src
         (OCR.MatchedOriginalCell.selectedRow oneSuspension)
