@@ -124,3 +124,10 @@ Use actual Dong–Griess–Lam published uniqueness hypothesis alternatives and 
 5. Exact-head Agda `--safe` / `parallel_checker`, transitive physical-source authority audit, numerical negative controls, synchronized docs and attribution.
 
 Status at authoring: the universal 80-relator **setoid group and conditional selected-group two-sided correspondence** are source-written in `Y443Universal80RelatorCongruenceExact.agda`; their Agda kernel receipt is not observed, and **M2-01 kernel reflection remains OPEN**. The genuine TF/TT and physical YM estimates have not been established in this documentation pass.
+
+
+## Latest source-only SU(2) B1/D1 refinement from #1444
+
+[Original SU(2) Wilson one-link coherent-staple tail (9 November)](https://github.com/chboishabba/dashi_agda/blob/research/ym-voyager2026-completeness-crosswalk-20261101/Docs/physics/YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md) derives an original one-link *conditional* bound `P(t(UV)≤0 | staples) ≤ 3 exp(-βR/2)` for staple resultant norm `R≤6`, and the genuine pointwise action penalty `D₆ ≥ 6-R`. It separately exhibits a bare-link ultraviolet Dobrushin limitation; that does **not** rule out blocked gauge-invariant CMP116 clustering. The missing D1.03 original full-Gibbs source is now sharp: prove a uniform frustrated-staple probability bound **and** distance-dependent connecting polymer/bridge entropy estimate for the full Wilson covariance. A conditional single-link tail is not this result.
+
+This source audit was added after the original five-frontier inventory and does not change the open Clay physical status.
