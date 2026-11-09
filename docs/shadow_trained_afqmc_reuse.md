@@ -115,3 +115,14 @@ Local results using equivalent prototype code:
 | 50,000 | 0.0044811012 | 0.0051751590 | 0.0105186246 |
 
 The reduction is empirical across these ten seeds; it is not a claimed exact monotonic law. The committed sampling sweep uses the same seed/sample grid, and should be executed from its exact commit before these numbers are described as certified repository output.
+
+
+## 9 November 2026: same atomic-generator energy estimator proof cut
+
+Source module `DASHI/Algebra/Quantum/Atomic369AFQMCSameEnergySourceExact.agda` is now imported by `DASHIQuantumComputationProgram`. This directly reuses `AtomicPeriodicTable369GenerativeExact.AtomicGenerator`, especially the existing `AtomicIndex`, `ManyElectronState`, `InteractingEnergy` and `interactingEnergy` fields, rather than introducing a second chemistry carrier.
+
+The new `SameSource.AtomicWalkerEnergySource` requires source-backed maps from AFQMC walkers into the **original** atomic many-electron states, an energy observation, and equality of the physical atomic energy observation with the ideal local energy for the same selected walker. Under that equality and the existing `EnergyTransport.stabilityCertificate`, `SameSource.atomicSourceEnergyBoundOnRun` derives the estimator error bound at every generated walker, by direct rewrite into the pre-existing `AF.energyBoundOnRun`. No new assumption about walker statistics is added beyond the explicit producer fields.
+
+**Still open**: actual orbital/basis and molecular integrals, actual fermionic Hamiltonian matrix elements and their relation to the atomic generator, original shadow-training measurements and certified overlap fitting, force-bias/phaseless AFQMC dynamics, sample-uncertainty certificates, independent same-Hamiltonian chemistry comparison and the published economic boundary. The selected atomic generator itself does NOT supply a measured Hamiltonian or numeric AFQMC engine. Agda 2.9 kernel acceptance of this new source is **not yet observed**. Existing two-site Hubbard scripts and statistical controls remain the numerical prototype; they do not imply the published nickel reproduction.
+
+**Proof owner and next maximum cut:** instantiate one concrete shared Hubbard (or measured nickel active-space) Hamiltonian into both the atomic generator and the AFQMC walker source, then establish the real-valued (rather than `Nat` proxy) stability/error bound and independently rerun the numerical comparator. Preserve Provazza/Knitter attribution and keep 369 cardinalities distinct from physical quantum numbers.
