@@ -2,6 +2,75 @@
 
 ## 2026-11-09 concrete spatial QDPR and future-minimality completion cut
 
+## 2026-11-09 source-guarded original 29×12 spatial chemistry cut
+
+The existing original BH4 acquisition and stoichiometry pipeline is
+reused, not forked:
+
+- `acquire_rhea_chebi_bh4_reactions.py` owns the original
+  16-protein Rhea/ChEBI source certificate;
+- `build_bh4_stoichiometric_matrix.py` owns the original
+  deterministic **29-species × 12 finite reaction** matrix and
+  three independently retained nonfinite MTOR residuals;
+- `run_bh4_reaction_network.py` owns source-specific
+  molecular element and charge audits.
+
+New `check_bh4_original_panel_spatial_events.py`
+consumes that *actual certificate* (when supplied):
+
+1. Rebuilds the existing matrix and refuses a source
+   schema, reaction identity, species count, reaction
+   count or residual discrepancy.
+2. Re-audits original participants, molecular formulas
+   and charges; a mismatched species or unbalanced
+   Rhea column is rejected. Zero columns cannot
+   silently pay missing chemistry.
+3. Constructs **one shared 3×3×3 physical inventory
+   with all original source species**.
+   Every selected original reaction may execute as
+   a finite nonnegative event at a selected voxel
+   only if all original reactants exist.
+4. Recomputes original CHNOP and native signed
+   electric charge before and after each reaction.
+   Performs all 54 native bonds × both directions
+   × all original source species as one shared-state
+   conservative transfer experiment.
+5. Explicitly refuses to infer original 29 external
+   exchange rates or physiological enzyme/transport
+   rates from the internal stoichiometric matrix.
+
+Its source-only `--self-test` consumes real
+`RHEA:32253` QDPR molecular chemistry (5 species,
+1 original reaction), NOT a fabricated 29×12.
+The dedicated `check_bh4_spatial_golden.sh` additionally
+runs the strict full 29×12 checker **only when**
+`artifacts/biology/rhea-kitzerow-bh4-reactions.json`
+is actually present; otherwise it reports an explicit
+source-artifact-open residual. The aggregate regression
+also runs the nonpromoting QDPR self-test.
+
+The developmental companion #1471 now keeps the semantic
+3D cube, pants gluing, six original exterior faces
+and exact source/sink signed charge separately from
+its lossless `Vec Nat 27` material chart. Its
+`allOriginalBoundaryExchangeHistoriesBalance` and
+`originalFullSpatialOpenSignedChargeBalance`
+provide the formal original-cube open-system
+conservation architecture needed by a multi-species
+physical source-weld. No automatic informational
+pants seam → measured flux is asserted.
+
+**Still outstanding:** actual original certificate
+must be mounted and the full 29×12 audit executed;
+all 29 environmental exchange rates must be
+physically source-paid for a specified shared
+specimen/compartment/time; transport/PNP kinetics,
+whole-tissue phenotype reduction and independent
+measured outcomes remain open. Neither a self-test
+nor source-written Agda is kernel/physiology proof.
+
+
+
 ### 2026-11-09: original five-species Rhea 27-site finite-volume instance
 
 New `scripts/bh4_original_qdpr_spatial_finite_volume.py` is a
