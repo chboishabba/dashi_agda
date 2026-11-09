@@ -161,3 +161,21 @@ The source is updated to use Prelude-supported `¬ (_≡_)`; **no Agda executabl
 **Original 29×12 certificate availability:** connected GitHub lookup on PR #1454 of `artifacts/biology/rhea-kitzerow-bh4-reactions.json` returned 404. That verifies the artifact is not present at that tracked path on the branch; it does **not** prove it is absent from a private machine, earlier acquisition store, or other source. The original-panel full test has not been run. Re-acquire or supply the byte-pinned primary certificate before claiming 29×12 completeness. No measured exchange flux is inferred.
 
 P1 actual BH4/PNP/tissue physical same-object steps, P2 physically observed stochastic quotient and P3 rates/held-out data/Golden reconciliation remain OPEN.
+
+
+### 2026-11-09 P0 executed-current advance (source-written, not yet kernel accepted)
+
+The original 369 P0 cut now has **executed moved-quantum** identities, not just unrelated local debit/credit operations:
+
+- `BiologicalSharedFiniteVectorTransferExact.lookupTransferSourcePaid` proves the *actual* `transferOne` source is debited by its 0/1 available quantum, for distinct endpoints.
+- `lookupTransferTargetReceivesActualSource` proves the actual destination is credited by precisely that same amount, also in the empty-source case.
+- `BiologicalOriginal54BondSharedVectorExact.tritGridStepNeverStationary`, `originalPositiveBondEndpointsDistinct` and `originalDirectedNativeEndpointsDistinct` discharge the geometric distinctness premise from the **original ternary 3×3×3 native bonds and injective 27-chart**.
+- `original369NativeSourceFluxExact`, `original369NativeTargetFluxExact` and `originalNativeVoxelIncidenceBalance` establish the original-bond per-voxel balance `after + actual outgoing = before + actual incoming`, by native source/target/off-endpoint roles.
+- `Biological369CubicalOpenSignedChargeExact.original369SignedNativeOneStepContinuity` uses positive/negative ion vectors and the existing integer `integerSignedCharge` to prove signed per-voxel conservation of *one* native ionic bond event.
+- `Biological369CubicalBoundaryMaterialExact.originalBoundaryDischargeLocalReceipt` now proves face withdrawal removes precisely the actual available quantum at its source voxel (complementing prior face injection and off-site locality).
+
+A separate local exact-rational/integer diagnostic (not the repository Golden or Agda kernel) enumerated 11,664 physical bond/direction/source-amount/observer combinations: 54 native bonds × 2 directions × 4 source amounts × 27 observers. All satisfied the pointwise unsigned incidence identity. The changed Agda declarations have **not** been checked with Agda 2.9 here; source-writing/spot diagnostics are not kernel receipts.
+
+**Precise remaining lemma for P0:** `original369LocalSignedContinuityExact` now narrows to *role classification at all 27 voxels, the same chronological signed source/target/face current ledger and mixed-history induction*. Do not label it closed from the one-step theorem. The original 29×12 compiled source certificate/matrix, source-specific 29 external exchanges, `sameSourcePhysicalReactionTransportStep`, physical BH4/PNP/tissue commutation, stochastic-physical minimality and held-out validation are still OPEN.
+
+Golden runner: `scripts/check_biological_history_future_round23.sh` now checks that newly named source declarations exist before running its repository parallel-checker; no actual checker execution occurred in this session.
