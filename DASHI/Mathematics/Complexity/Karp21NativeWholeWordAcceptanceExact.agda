@@ -54,8 +54,8 @@ nativeWholeWordAccepts word certificate
 RawEdgeParseReceipt : Native.NativeParsedRawGraph → Set
 RawEdgeParseReceipt parsed =
   Σ Nat (λ m →
-    Data.Product.Σ Word.BitWord (λ afterM →
-      Data.Product.Σ Word.BitWord (λ afterEdges →
+    Σ Word.BitWord (λ afterM →
+      Σ Word.BitWord (λ afterEdges →
         Edges.readNativePairedRawEdges m afterM
           ≡ just (Native.nativePairedEdges parsed , afterEdges))))
 
