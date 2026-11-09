@@ -1,5 +1,23 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 P0 direct finite Bishop endpoint telescope (current implementation)
+
+Two source-written original-carrier proof owners are committed:
+
+1. `DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda` uses genuine `Factor.BishopFactorDerivativeAt` at **each selected finite-walk vertex**. Theorems `finiteIncrementTelescopes`, `finiteIncrementIsFactor`, `finiteFactorSumIsIncrementSum`, and `originalBishopFactorFiniteEndpointFTC` prove exactly `f(x_m)-f(x_0) ≃ Σ_(j<m) h_j q_j` on the actual Bishop `Real.ℝ`, without postulating a global FTC or choosing a classical mean-value point. This is a **finite endpoint identity**; it does not yet provide a continuum FTC or a uniform bound on the quotients.
+2. `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda` instantiates those finite endpoint receipts for the literal `F_N(x)=Exp.bishopExp(-Seq.SeriesOf(sourceNegativeLogTerm x) N)`, using `originalFiniteNegativeLogExpDerivative` at every mesh vertex and `originalFiniteNegativeLogExpAtZero`. The theorem `originalFiniteLogExpEndpointFromMesh` establishes the **actual** original finite LOG exponential endpoint. `originalFiniteLogExpErrorFromMesh` then derives, for any original finite walk `0=x_0, x_(j+1)=x_j+h_j`,
+   [
+   F_N(x_m)-(1-x_m)
+     simeq sum_{j<m} h_j,igl(q_{N,x_j}(h_j)+1igr).
+   ]
+   The `q` are literally the selected original `Factor.quotient` functions of the existing source derivative certificates; no synthetic exp or log.
+
+**Still decisive and NOT hidden by this identity:** construct *quantitative, mesh-uniform control* of `q_{N,x_j}(h_j)+1` (accounting for `(1-x)F_N'(x)+F_N(x)=x^N F_N(x)`) sufficient to make its finite weighted sum tend to zero, followed by the existing source finite-stage limit transport to `OriginalBishopNegativeLogExponentialGap`. The compact-uniform differential residual controls derivative **values**, not arbitrary difference quotients at finite mesh spacing. A uniform modulus / constructive finite-interval FTC remains an actual analytic leaf.
+
+P1: original atan-to-Cayley two-point analytic equalities remain. P2: P0 is needed to instantiate `FromOriginalNegativeLog`; same-object identification with the **independently defined** `ZetaHalfPlaneLayer.zetaHalfPlane` remains. Both new modules are imported in all three TOE roots and the Bishop checker; exact-head Agda 2.9 kernel acceptance has **not** been observed. Do not promote source-written code to checked proof.
+
+---
+
 ## 2026-11-09 cross-PR source archaeology: FTC/MVT genuinely present, but scope matters
 
 This replaces the earlier blanket assertion that the repository has no constructive FTC/mean-value content. **It does.** We inspected the actual source owners (not only PR titles):
