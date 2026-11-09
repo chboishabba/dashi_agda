@@ -387,6 +387,21 @@ sourceBoundMissingIntentBlocks E Reference sourceCase c missing admitted =
   blockedByMissingIntent E c missing
     (sourceBoundImpliesStageAdmission E Reference sourceCase c admitted)
 
+-- Reuse the canonical observer-collision obstruction for ALL cases,
+-- stages and receipt carriers: an observed source-identity collision
+-- cannot be reconciled with a separating original-stage observer.
+sourceBoundReceiptCollisionImpossible :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  (admitted : SourceBoundAdmission E Reference sourceCase c) →
+  Observer.ObserverCollision
+    (SourceBoundAdmission.receiptReference admitted) → ⊥
+sourceBoundReceiptCollisionImpossible E Reference sourceCase c admitted collision =
+  Observer.collisionBlocksSeparation collision
+    (SourceBoundAdmission.referenceSeparating admitted)
+
 exposureAndIntentMustHaveDifferentReceipt :
   (E : OriginalCase → EvidenceStage → Set)
   (Reference : Set)
@@ -460,7 +475,7 @@ oneReceiptCannotSupportSixGates :
   (c : OriginalCase) →
   SourceBoundAdmission E OneReceipt sourceCase c → ⊥
 oneReceiptCannotSupportSixGates E sourceCase c admitted =
-  Observer.collisionBlocksSeparation
+  sourceBoundReceiptCollisionImpossible E OneReceipt sourceCase c admitted
     (Observer.observerCollision
       recipientExposure
       independentlySourcedIntent
@@ -468,7 +483,6 @@ oneReceiptCannotSupportSixGates E sourceCase c admitted =
         (SourceBoundAdmission.receiptReference admitted recipientExposure)
         (SourceBoundAdmission.receiptReference admitted independentlySourcedIntent))
       exposureIsNotIntent)
-    (SourceBoundAdmission.referenceSeparating admitted)
 
 -- In particular the weak fixture can fill AdmitsOneOriginalCase, but
 -- cannot fill SourceBoundAdmission using a singleton source reference.
