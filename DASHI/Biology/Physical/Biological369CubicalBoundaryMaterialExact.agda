@@ -372,3 +372,63 @@ originalBoundaryInjectionLocalReceipt event state =
   lookupAfterFaceInjection
     (Index.originalPointIndex (physicalVoxel event))
     (incomingMaterial event) state
+
+
+-- Localized physical boundary support: no new material appears at
+-- an unrelated cubical voxel when the certified face event fires.
+lookupFaceInjectionAwayFromEvent :
+  ∀ {n} (source observer : F.Fin n) (q : Nat)
+  (state : V.Vec Nat n) →
+  source ≢ observer →
+  V.lookup (injectAtIndex source q state) observer
+    ≡ V.lookup state observer
+lookupFaceInjectionAwayFromEvent F.zero F.zero q state different =
+  ⊥-elim (different refl)
+lookupFaceInjectionAwayFromEvent F.zero (F.suc observer) q
+  (V._∷_ amount rest) different = refl
+lookupFaceInjectionAwayFromEvent (F.suc source) F.zero q
+  (V._∷_ amount rest) different = refl
+lookupFaceInjectionAwayFromEvent (F.suc source) (F.suc observer) q
+  (V._∷_ amount rest) different =
+  lookupFaceInjectionAwayFromEvent source observer q rest
+    (λ equality → different (cong F.suc equality))
+
+originalFaceInjectionLeavesOtherVoxelUnchanged :
+  (event : OriginalOuterFaceInjection)
+  (observer : F.Fin 27) (state : V.Vec Nat 27) →
+  Index.originalPointIndex (physicalVoxel event) ≢ observer →
+  V.lookup (applyBoundaryInjection event state) observer
+    ≡ V.lookup state observer
+originalFaceInjectionLeavesOtherVoxelUnchanged
+  event observer state different =
+  lookupFaceInjectionAwayFromEvent
+    (Index.originalPointIndex (physicalVoxel event))
+    observer (incomingMaterial event) state different
+
+-- Discharge uses the *actual* available amount. The event never
+-- removes material at a voxel distinct from its OnFace-certified site.
+originalFaceDischargeLeavesOtherVoxelUnchanged :
+  (event : OriginalOuterFaceDischarge)
+  (observer : F.Fin 27) (state : V.Vec Nat 27) →
+  dischargeIndex event ≢ observer →
+  V.lookup (applyBoundaryDischarge event state) observer
+    ≡ V.lookup state observer
+originalFaceDischargeLeavesOtherVoxelUnchanged
+  event observer state different =
+  dischargeOther (dischargeIndex event) observer state different
+  where
+    dischargeOther :
+      ∀ {n} (source target : F.Fin n) (xs : V.Vec Nat n) →
+      source ≢ target →
+      V.lookup (V.updateAt xs source pred) target
+        ≡ V.lookup xs target
+    dischargeOther F.zero F.zero xs neq =
+      ⊥-elim (neq refl)
+    dischargeOther F.zero (F.suc target)
+      (V._∷_ amount rest) neq = refl
+    dischargeOther (F.suc source) F.zero
+      (V._∷_ amount rest) neq = refl
+    dischargeOther (F.suc source) (F.suc target)
+      (V._∷_ amount rest) neq =
+      dischargeOther source target rest
+        (λ equality → neq (cong F.suc equality))
