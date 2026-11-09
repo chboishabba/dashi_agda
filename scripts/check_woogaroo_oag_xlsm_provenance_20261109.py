@@ -83,7 +83,7 @@ def scan(path:Path)->dict:
                 'sheet_cells':extracted,
                 'declared_sheet_links_resolved':bool(sheets) and all(x['worksheet_part'] for x in sheets),
                 'worksheet_relationships_checked':bool(relmap),
-                'formula_count':sum(sum(c['formula'] is not None for c in s['cells'])
+                'formula_count':sum(sum(c['formula_attributes'] is not None for c in s['cells'])
                                     for s in extracted),
                 'vba_present':any(n.lower().endswith('vbaproject.bin') for n in names),
                 'external_links_present':any('externallinks/' in n.lower() for n in names),
@@ -109,6 +109,16 @@ def selftest():
         assert good['sheet_cells'][0]['cells'][1]['formula']=='A1*4'
         assert good['sheets_declared'][0]['worksheet_part']=='xl/worksheets/sheet1.xml'
         assert good['declared_sheet_links_resolved']
+        # A shared-formula continuation has an f tag but no formula text.
+        shared_ws=ws.replace('</row>', '<c r="C1"><f t="shared" si="1"/><v>300</v></c></row>')
+        with ZipFile(p,'w',compression=ZIP_DEFLATED) as z:
+            z.writestr('[Content_Types].xml','<Types/>')
+            z.writestr('xl/workbook.xml',wb)
+            z.writestr('xl/_rels/workbook.xml.rels',rels)
+            z.writestr('xl/worksheets/sheet1.xml',shared_ws)
+        shared=scan(p)
+        assert shared['formula_count']==2
+        assert shared['sheet_cells'][0]['cells'][2]['formula_attributes']=={'t':'shared','si':'1'}
         # Missing relationship mapping must fail closed.
         bad_wb=wb.replace('r:id="rId5"','r:id="rId999"')
         with ZipFile(p,'w',compression=ZIP_DEFLATED) as z:
@@ -138,7 +148,7 @@ def selftest():
         p.write_bytes(b'')
         try:scan(p);raise AssertionError('empty input accepted')
         except ValueError as e:assert 'Empty' in str(e)
-    return {'tests':5,'passed':5,'synthetic_fixtures_only':True,
+    return {'tests':6,'passed':6,'synthetic_fixtures_only':True,
             'accepted_OAG_workbook_obtained':False}
 
 def main():
