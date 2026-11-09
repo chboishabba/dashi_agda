@@ -17,7 +17,7 @@ module DASHI.Moonshine.AbelE8GeneratedRootNormTwoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Data.List.Base using (List; []; _∷_)
 import Data.Vec as Vec
@@ -26,6 +26,7 @@ import Data.Nat.Properties as NatP
 
 import DASHI.Algebra.Trit.HalfTritIndexed as Indexed
 import DASHI.Algebra.Trit.E8RootEnumeration as E8
+import DASHI.Moonshine.JInvariantEisensteinIncrementCoefficientBoundExact as Coeff
 
 doubledCoordinateSquare : Indexed.HalfTritIndexed → Nat
 doubledCoordinateSquare Indexed.indexedNegOne = 4
@@ -122,3 +123,11 @@ generatedIntegerE8NormTwoShellCountIs112 = refl
 generatedHalfE8NormTwoShellCountIs128 :
   countGeneratedNormTwo E8.halfIndexedRoots ≡ 128
 generatedHalfE8NormTwoShellCountIs128 = refl
+
+generatedNormTwoShellMatchesOriginalE4FirstCoefficient :
+  countGeneratedNormTwo E8.combinedIndexedRoots
+  ≡ Coeff.e4IncrementCoefficient 0
+generatedNormTwoShellMatchesOriginalE4FirstCoefficient =
+  trans
+    generatedE8NormTwoShellCountIs240
+    (sym refl)
