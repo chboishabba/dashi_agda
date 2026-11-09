@@ -683,3 +683,16 @@ oneRecycledReferenceCannotAdmitCognitiveWarfare :
     SameOperation.gcc1993 → ⊥
 oneRecycledReferenceCannotAdmitCognitiveWarfare =
   SameOperation.weakDemoSingleReceiptFailsSourceBoundAdmission
+
+-- Reuse the existing generic DASHI observer-refinement collision owner
+-- instead of adding a bespoke singleton separation calculus.
+genericEvidenceReceiptCollisionCannotPass :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → SameOperation.OriginalCase)
+  (c : SameOperation.OriginalCase) →
+  (admitted : SameOperation.SourceBoundAdmission E Reference sourceCase c) →
+  SameOperation.Observer.ObserverCollision
+    (SameOperation.SourceBoundAdmission.receiptReference admitted) → ⊥
+genericEvidenceReceiptCollisionCannotPass =
+  SameOperation.sourceBoundReceiptCollisionImpossible
