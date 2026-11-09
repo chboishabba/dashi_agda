@@ -75,3 +75,39 @@ data OriginalPrecisionReceipt : Set where
 
 -- No value of OriginalPrecisionReceipt is constructed from paper
 -- numbers or hypothetical arithmetic alone.
+
+-- Joint quality-precision and common-confidence sensitivity.
+-- This reuses the SAME original 14 January AU rows, the two source
+-- hundredths gains (346, 327), and original 20-year discount.
+-- Other twelve rows contribute 543850 coefficient (scaled *100 here).
+-- This is a controlled counterfactual, NOT a claim that the approved
+-- OAG accepts real-valued rather than integer quality inputs.
+mwwUnroundedConfidenceSlopeHundredths : Nat
+mwwUnroundedConfidenceSlopeHundredths =
+  508 * 346 + 1047 * 327
+
+mwwUnroundedSlopeExact :
+  mwwUnroundedConfidenceSlopeHundredths ≡ 518137
+mwwUnroundedSlopeExact = refl
+
+mwwUnroundedWithConfidenceHundredths : Nat → Nat
+mwwUnroundedWithConfidenceHundredths c =
+  54385000 + mwwUnroundedConfidenceSlopeHundredths * c
+
+mwwUnroundedAt75Exact :
+  mwwUnroundedWithConfidenceHundredths 75 ≡ 93245275
+mwwUnroundedAt75Exact = refl
+
+mwwUnroundedAt74Exact :
+  mwwUnroundedWithConfidenceHundredths 74 ≡ 92727138
+mwwUnroundedAt74Exact = refl
+
+mwwUnroundedAt76Exact :
+  mwwUnroundedWithConfidenceHundredths 76 ≡ 93763412
+mwwUnroundedAt76Exact = refl
+
+-- Discounted exact-Fraction companion proves, with the historical
+-- January denominator and survival factor unchanged:
+-- C(75) < 100 < C(76); exact threshold ~75.01475506.
+-- Thus 75% is just below the 100% modeled boundary at unrounded
+-- quality gains. No unverified physical or statutory conclusion.
