@@ -259,3 +259,6 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTypedAcceptanceExact
 
 -- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryAdderWidthBoundExact
+
+-- Actual original-wire binary state machine, first-enabled priority, terminal halt (source only).
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact
