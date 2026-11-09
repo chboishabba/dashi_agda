@@ -34,6 +34,7 @@ import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
 import DASHI.Cognition.CCDCOEP3GCC1993PreResponseBaselineExact as Baseline
+import DASHI.Cognition.CCDCOEP3GCC1993PreResponseExpandedExact as Expanded
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -567,3 +568,24 @@ originalMarchGCCReleasePrecedesJuneReply = Baseline.marchBeforeJune
 preResponseCatalogueNotQuantitativeBaseline :
   Baseline.marchGrade ≡ Baseline.independentlyCodedOriginalText → ⊥
 preResponseCatalogueNotQuantitativeBaseline = Baseline.catalogueNotCodedBaseline
+
+-- March 8 GCC policy statement is an earlier, source-attributed
+-- archive candidate than March 10 model release. The circa-1993
+-- expert-quotation brochure has no certified exact date.
+earlierOriginalPolicyStatement :
+  Expanded.ArchivedBefore
+    Expanded.marchEightPolicyStatement Expanded.marchTenModelRelease
+earlierOriginalPolicyStatement =
+  Expanded.marchEightBeforeMarchTen
+
+undatedExpertBrochureCannotBeOrderedToADay :
+  Expanded.datePrecision Expanded.undatedExpertSelectionBrochure
+  ≡ Expanded.exactArchiveCalendarDay → ⊥
+undatedExpertBrochureCannotBeOrderedToADay =
+  Expanded.undatedBrochureNotAnExactDay
+
+archiveSelectedPolicyExcerptIsNotOriginalFullText :
+  Expanded.selectedPolicyGrade
+  ≡ Expanded.independentlyReviewedWholeOriginal → ⊥
+archiveSelectedPolicyExcerptIsNotOriginalFullText =
+  Expanded.marchPolicySelectedQuoteNotCompleteOriginal
