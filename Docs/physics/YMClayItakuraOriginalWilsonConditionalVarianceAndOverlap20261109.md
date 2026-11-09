@@ -104,3 +104,34 @@ This is a source-specific exact NEGATIVE CONTROL, not a refutation of a physical
 - **G1.03 (OPEN):** supply genuine all-compact-simple-group continuum E1/D2/N1 witnesses, beyond the finite Haar representation estimates.
 
 **Formalization status:** analytic proof, grounded in the actual original Wilson SU(2) conditional; no Lean4 code imported into Agda, and no native Agda 2.9 kernel receipt. The Itakura source uses CC BY 4.0; attribution must persist if these ideas are formalized, and no incorrect physics promotion is authorized.
+
+
+## Stronger new theorem: GAUGE-INVARIANT original beta>=1 random-scan spectral-gap upper bound
+
+The beta-zero example above is **not necessary** to demonstrate volume degeneration. On the **actual interacting beta>=1 original finite SU(2) Wilson law**, fix an original gauge-invariant plaquette trace `X=t(U_p)` and center it: `F=X-E_mu X`. By the original conditional-variance theorem above, `||F||²=Var_mu(X)>0` uniformly at each finite beta, so F is a *genuine nonzero vector of the gauge-invariant vacuum-orthogonal sector*. It depends on exactly four original boundary link variables, for L>=3.
+
+For each original link ell, let `P_ell F=E_mu[F | all links except ell]` be the **actual orthogonal conditional-expectation projector in L²(mu)**. Then:
+
+- If ell is not one of the four boundary links of p, **P_ell F=F**. This is exact conditional-measurability, irrespective of Wilson correlations.
+- For any ell, orthogonal projection gives `0<=||F-P_ell F||²<=||F||²`.
+- The original Gibbs random-scan one-link heat-bath Markov operator is `K_E=(1/E) sum_ell P_ell`, E=4L^4. It is self-adjoint, positive, preserves constants and commutes with gauge transformations because the Wilson measure and the selected complete link update are gauge covariant. In the invariant sector, its generator `I-K_E` has quadratic form:
+
+```
+  <F,(I-K_E)F>
+   = (1/E) sum_ell ||F-P_ell F||²
+   <= (4/E) ||F||² = (1/L^4)||F||².
+```
+
+Since F is **nonzero**, its Rayleigh quotient is at most `1/L^4`. Therefore the bottom of the spectrum of `I-K_E` on the genuine original **nonvacuum gauge-invariant L²(mu)** sector obeys
+
+```
+boxed:   inf sigma((I-K_E)|gauge-invariant Omega-perp) <= 1/L^4.
+```
+
+As L→infinity this upper bound goes to zero. **Consequently no strictly positive L-independent coercivity constant can hold for UNRESCALED random-scan, one-link-per-step heat-bath dynamics on the original full gauge-invariant Wilson state space.** This is a rigorous original source no-go for every beta>=1, not an artifact of taking beta=0 or choosing a gauge-variant test.
+
+This does NOT refute a physical Yang–Mills mass gap, a **properly rescaled per-sweep block dynamics**, a genuine real-time Hamiltonian or an OS reconstructed H; `K_E` is an algorithmic Markov transition not the E1 same-physical-time semigroup. It *does* forbid directly promoting a finite-size `1/324` random-scan gap or a scale-independent heat-bath coercivity assertion in that unrescaled operator to Clay D2. The chosen physical time normalization and operator identification must be proved.
+
+**Revised highest-alpha D2 source:** rather than trying to prove the false `inf spectrum(I-K_E)>=m>0` uniformly in L for each-link random scan, source-prove a common physical-time autocorrelation decay exponent on a norm-dense E1/OS test family as in `YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md`, including noncollapsed gauge-invariant continuum vectors and the real E1 reconstruction. If exploring sweep-normalized heat-bath generators, explicitly distinguish `E(I-K_E)` from physical OS H and supply a correct scaling/semigroup comparison theorem. The 4/E variational upper bound on a single plaquette does **not** provide a lower gap for the sweep-normalized generator either.
+
+**Source attribution:** Itakura's exact finite conditional-variance/heat-bath projection machinery (see links above); DASHI's original SU(2) positive plaquette-variance theorem; standard variational spectral bound. The quantitative gauge-invariant all-beta no-go is derived in this DASHI crosswalk and is distinct from Itakura's beta-zero sharp 1/324 proof.
