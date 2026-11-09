@@ -1852,3 +1852,16 @@ Exact new declarations:
 **Semantics and limitation:** Original publication, source reference identity and actual independence are distinct. A caller may fabricate six unique labels for copies of the same source, or supply a constant ownership map; the Agda theorem cannot authenticate real original bytes, reviewer independence, shared command intent, or causal effects. The next scientific step must anchor each reference to source SHA256, edition, provenance, independently reviewed receipt, specific target and original intervention. The newly strengthened theorem is a necessary structural guard, NOT an empirical cognitive-warfare identification.
 
 **Exact outstanding physical/empirical and kernel frontier:** CW0 original-source authentication (March/June/September GCC plus independent journalism), CW1 distribution/exposure same-case, CW2 independently coded complete original-document sampling frame with appropriate reliability, CW3 causal mechanism discrimination with rival explanations, CW4 genuine unique original source receipts per stage plus independence and intent, CW5 measured cognitive effect and time-indexed multiplex transport, CW6 exact-head Agda 2.9 and Python acceptance with original review receipts. No postulates, meta escape hatches or invented empirical stages were added; Agda kernel receipt remains OPEN. Original authors, scientists, community critics and archive owners retain credit. No ESD edits.
+
+
+## 9 November 2026 — Existing GOLDEN observer-collision proof reused
+
+The earlier `oneReceiptCannotSupportSixGates` was an unnecessarily specialised formulation. Its generic mathematical content is **already proved** in `DASHI/Core/ObserverRefinementLatticeExact.agda`:
+
+`Observer.collisionBlocksSeparation : ObserverCollision observe → Separating observe → ⊥`.
+
+The CCDCOE owner `CCDCOEP3SameOperationIndexedAdmissionExact.agda` now imports that canonical Agda module, states receipt uniqueness by **`Observer.Separating receiptReference`** instead of a duplicate stage-pair inequality field, and proves `sourceBoundReceiptCollisionImpossible` *directly by invoking* `Observer.collisionBlocksSeparation`. `oneReceiptCannotSupportSixGates` is kept solely as a backward-compatible finite test: it manufactures the particular collision witness between exposure and intent for a one-point reference carrier and calls the general theorem. No independent no-collapse machinery was newly invented. `CCDCOEP3CausalTrialecticRegressionExact.agda` now also consumes the general proof directly.
+
+Mathematical restriction: `Separating` requires injectivity of the **reference-label observation of stage identity**. This prevents literal reference reuse, NOT two labels referring to the same underlying source, nor a historical document legitimately supporting multiple claims. Source-grade and independent corroboration still need external review; do not interpret the type as a requirement that six physically different publications exist or as proof of reviewer independence.
+
+**Status:** source-written and connector-reviewed; pending Agda 2.9 kernel acceptance on current PR head. The highest-alpha remaining work is now empirical authentication, actual causal controls and kernel checking, not any further singleton no-injection lemma.
