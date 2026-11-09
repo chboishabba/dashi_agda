@@ -38,21 +38,30 @@ def check(manifest_path: Path) -> dict:
         raise ValueError("artifacts must be a list")
     by_role = {}
     for entry in artifacts:
+        if not isinstance(entry, dict):
+            raise ValueError("each artifact must be an object")
         role = entry.get("role")
-        if not isinstance(role, str) or role in by_role:
+        if not isinstance(role, str) or role in by_role or role not in EXPECTED:
             raise ValueError("missing or duplicate artifact role")
         by_role[role] = entry
     results = []
+    used_paths = set()
     for role, expected_revision in EXPECTED.items():
         entry = by_role.get(role)
         if entry is None:
             results.append({"role":role,"status":"MISSING", "expected_revision":expected_revision})
             continue
-        p = (manifest_path.resolve().parent / entry.get("path","")).resolve()
+        relative = entry.get("path")
+        if not isinstance(relative, str) or not relative.strip():
+            raise ValueError("missing or invalid artifact path")
+        p = (manifest_path.resolve().parent / relative).resolve()
         if not p.is_relative_to(manifest_path.resolve().parent):
             raise ValueError("source bytes must be within the manifest directory")
+        if p in used_paths:
+            raise ValueError("one file path cannot discharge two independent document roles")
+        used_paths.add(p)
         # A download listing without local bytes is NOT a received source.
-        if not p.is_file():
+        if not p.is_file() or p.stat().st_size == 0:
             results.append({"role":role,"status":"NO_BYTES","expected_revision":expected_revision})
             continue
         claimed = entry.get("sha256")
@@ -107,7 +116,33 @@ def selftest():
         manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
         missing=check(manifest)
         assert not missing["bytes_and_claims_pass"]
-    return {"tests":4,"passed":4,"synthetic_fixtures_only":True,
+        # Adversarial controls distinguish separate source roles and reject
+        # an unrecognised role, rather than silently ignoring it.
+        entries.append({"role":"unapproved_extra", "path":"july_pd.pdf", "sha256":digest(root/"july_pd.pdf")})
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
+        try:
+            check(manifest)
+            assert False, "unexpected extra role accepted"
+        except ValueError as exc:
+            assert "role" in str(exc)
+        entries.pop()
+        entries.append(dict(entries[0],role="avonvale_omp"))
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
+        try:
+            check(manifest)
+            assert False, "same file used for two different document roles"
+        except ValueError as exc:
+            assert "one file path" in str(exc)
+        entries.pop()
+        entries.append({"role":"avonvale_omp", "path":"../escape.pdf",
+                        "sha256":"0"*64, "claimed_revision":EXPECTED["avonvale_omp"]})
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
+        try:
+            check(manifest)
+            assert False, "directory escape accepted"
+        except ValueError as exc:
+            assert "within" in str(exc)
+    return {"tests":7,"passed":7,"synthetic_fixtures_only":True,
             "authentic_case_originals_obtained":False}
 
 def main():
