@@ -274,3 +274,96 @@ restriction recovery are SOURCE-WRITTEN. Unpaid: original independent
 edge-stalk `InterfaceMatch`, topology mutation/reorganization
 preserving incidence and restriction, and justified nontrivial
 Grothendieck covers / full matching-family descent.
+
+
+## Max-cut continuation: nonvacuous seam quotient and two-chart cover
+
+**This pass targets the two independently outstanding H2.02 leaves rather
+than adding another cardinal-only interface.** Both modules are
+source-written, not Agda-kernel checked.
+
+### H2.02 seam — real incidence merge, not vacuous boundary matching
+
+`DASHI/Reasoning/TypedHyperfabricPantsNonvacuousSeamQuotientExact.agda`
+
+- Source: **original** `RelationalBranchCobordismGeometry.outerInnerMatch`,
+  `selectedChannel2`, `innerInputChannel2`; original
+  `TypedHyperfabricCore.TypedHyperfabric` and `GlobalSection`.
+- `SeamSignature`, `boundarySignature`,
+  `interfaceMatchImpliesSignatureEquality`: construct and prove equality
+  of the exact five matched observables (proposition, capacity, phase,
+  wave, openness), **not** full channel records or source labels.
+- `BeforeIncidence`: two *real* vertex–edge incidences,
+  distinct edge identities and source channels.
+- `AfterIncidence`: the two original vertices both incident to
+  **one** seam edge; `mergeEdge`, `mergeIncidence` map the
+  original incidence geometry.
+- `beforePantsFabric`, `beforePantsSection`,
+  `afterPantsFabric`, `afterPantsSection`: actual original
+  `TypedHyperfabric` and compatible `GlobalSection` values.
+- `seamRestrictionPreserved`, `seamEdgeValuePreserved`:
+  prove transport of the five-field source edge values and vertex
+  restrictions through the noninjective edge quotient.
+- `sourceEdgesDistinct`, `sourceEdgesHaveSameMergedAddress`,
+  `mergedOuterProvenanceRetained`,
+  `outerIsIncidentAfterMerge`, `innerIsIncidentAfterMerge`.
+- Source branch commit: `cda3dbf`.
+
+**Limit:** the quotient is a *specific original two-channel specimen*.
+A free theorem merging arbitrary original hyperfabric edges requires
+their specific stalk interpretation, five-field `InterfaceMatch`,
+and a stated strategy to preserve full original edge values that the
+five-field signature intentionally forgets.
+
+### H2.02 overlap — genuine proper two-chart matching family
+
+`DASHI/Foundations/TernaryThirteenTwoChartOverlapGluingExact.agda`
+
+- `LeftChartAxis` indexes original stage axes 0..6, and
+  `RightChartAxis` indexes original axes 6..11: both are proper
+  subcharts and they overlap at **axis 6**, unlike the previous
+  maximal-only discrete site. They cover all twelve atlas axes.
+- `TwoChartCentralFamily` retains separate valuations and central
+  trits; `TwoChartMatches` requires *both* same valuation at axis 6
+  **and** equality of the two centres.
+- `glueTwoChartCentral`, `twoChartLeftRestricts`,
+  `twoChartRightRestricts`, `twoChartLeftCentreRestricts`,
+  `twoChartRightCentreRestricts`: construct a single original
+  `SourceCentralCompletionCarrier` and prove exact chart recovery.
+- `restrictToTwoCharts`, `restrictedTwoChartsMatch`,
+  `sourceTwoChartGluingRoundTripPointwise`,
+  `sourceTwoChartGluingCentreRoundTrip`: global-to-local-to-global
+  pointwise and central inverse.
+- `badOverlapCannotGlue` and `badCentreCannotGlue` distinguish
+  the valuation-overlap obstruction from a contradictory shared
+  central-coordinate obstruction.
+- `twoChartPunctureGluing` transports the selected puncture.
+- `glueTwoChartsToOriginalPants`,
+  `twoChartPantsLeftRestrictions`,
+  `twoChartPantsRightRestrictions`,
+  `twoChartPantsCentreRestrictions`: transport the nontrivial
+  matching-family glue into the **original** depth-13 pants frontier
+  with exact re-restriction.
+- Source commits `92f6a7c`, `c2a3c53`.
+
+The two source modules are imported into all three TOE roots
+(`24d8348`, `8f2e4c8`, `fc46aae`).
+
+### Narrowed exact remaining maximum cut
+
+| Gate | Exact narrowest unpaid theorem | Status |
+|---|---|---|
+| H2.02 selected finite seam | Nonvacuous topology change, incidence and five-field restriction preserved in original source pants specimen | SOURCE-WRITTEN |
+| H2.02 selected finite overlap | Two proper overlapping original atlas charts and exact centre/valuation matching, glue/restrict, pants transport | SOURCE-WRITTEN |
+| H2.02 general nontrivial site | Build an independently justified **full** Grothendieck topology of nontrivial covering sieves over original chart objects, and show stability/transitivity and all-cover descent; a single two-chart set cover is not yet this theorem | OPEN |
+| H2.02 arbitrary seam | Arbitrary selected original edge stalk `InterfaceMatch` plus incidence/restriction preservation under selected noninjective edge quotient, including source-bound provenance semantics | OPEN |
+| H1.01 semantic | Independently select and identify intended relational/group completion with actual original StageAtlas valuation × central trit, not merely finite address or pattern count | OPEN |
+| H2.01 operational | Transport non-descent to independently selected full world/relational observer+consumer, not only the source StageAtlas and pants models | OPEN |
+| B-P1 | Actual Bishop original nested atan/exponential same-object analytic Cayley identity and both Machin evaluations | OPEN |
+| B-P2 | Original canonical Nat-power and independent selected zeta equality | OPEN |
+| B-P3 | Original Gamma/Mellin, continuation, functional equation, completed Xi | OPEN |
+
+**Important boundary:** these are finite, theorem-bearing reorganisation
+and gluing examples. They neither establish a smooth pants/cobordism
+surface nor identify the group completion, the original world model,
+analytic modular j, or the source Bishop zeta/Xi objects.
