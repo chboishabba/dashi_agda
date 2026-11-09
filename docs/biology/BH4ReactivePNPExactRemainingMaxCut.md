@@ -1078,3 +1078,22 @@ while `original369ClosedWeightedSimplexCompact`,
 and `original369ClosedRootFreeEnergyDecreases`
 remain unverified **real/analytic kernel** obligations.
 No Agda kernel execution was obtained in this session.
+
+
+## 2026-11-09 P0.06 second cut — order bounds and separately accounted credits
+
+**New source-written commits on BH4 PR #1454:** `BH4PNPEnergyBudgetCompositionExact.agda` now adds `initialBelowInitialPlus`, `stepFinalBoundedByInitialAndCredit`, `allStepsFinalBoundedByInitialAndCredit`, `zeroCreditHistoryNonincreasing`, and the positive-credit counterexample `positiveCreditCanIncreaseEnergy`. New owner `DASHI/Biology/BH4PNPSeparatedEnergyLedgerExact.agda` is imported into the same BH4 Golden root.
+
+**Separated exact accounting:** `SeparatedEnergyStep` records four distinct Nat-valued nonnegative accounting categories: `transportAndReactionDissipation`, `convexityRemainder`, `numericalResidualAllowance`, `exteriorWorkAllowance`. Its exact equation is `final + (dissipation + convexity) ≡ initial + (residual + exterior)`. `toEnergyBudget` recovers the existing generic receipt, `pairRegroup` is a four-term exact additive regrouping lemma, and `composeSeparatedEnergy` proves chronological two-step composition preserving each category separately. `SeparatedEnergyHistory` / `allSeparatedStepsExact` generalize to arbitrary nonempty histories. `allSeparatedStepsFinalBound` proves `final ≤ initial + (sum residual + sum exterior)`; `noResidualNoExteriorWorkHistoryNonincreasing` requires **separate explicit zero witnesses** for both credit categories before concluding `final ≤ initial`. `positiveExteriorWorkCanIncreaseEnergy` is the deliberate open-system negative control.
+
+**Critical scope restriction:** these are algebraic proofs over `Nat`, not a real-valued electrochemical energy functional. The separate field called `numericalResidualAllowance` does *not* automatically bound the real residual-work term; the original chemical/electrical operator must provide a certified bound, an order-preserving encoding and rounding guarantee, and its independently measured/selected exterior-work receipts. Physical P0.06, P0.07, S0.04, P0.05 and P0.08 remain open. In particular no actual positive original implicit root, SG flux entropy production, full 29x12 detailed-balanced rate law, or chemical/electrostatic free-energy proof is implied by these synthetic-free pure algebra lemmas.
+
+**Verification:** committed source and Golden import are present; Agda 2.9 executable unavailable here. *Source-written* is not *kernel-accepted*. Needed commands:
+```bash
+scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPEnergyBudgetCompositionExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPSeparatedEnergyLedgerExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+```
+Existing user geometry and prior PNP/SG thermodynamic sources retain attribution; these additions are assistant implementation assistance in exact additive proof bookkeeping.
+
+**Next highest-alpha:** attach original physical positive-entropy/Poisson one-step derivations to an *ordered real energy* accounting receipt; source-pay boundary work, residual bound, and Rhea detailed balance; then kernel check physical owner at a reconciled #1454/#1471 head. No K0 or generic deduplication detour.
