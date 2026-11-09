@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Foundations.BishopMachinOriginalCayleyRationalPointAlgebraExact where
 
 ------------------------------------------------------------------------
