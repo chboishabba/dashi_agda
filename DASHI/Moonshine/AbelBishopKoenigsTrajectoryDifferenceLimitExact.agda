@@ -11,7 +11,8 @@ module DASHI.Moonshine.AbelBishopKoenigsTrajectoryDifferenceLimitExact where
 -- The original Bishop Log still has to produce these bounds.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero)
+open import Data.Product.Base using (proj₁; proj₂)
 import Real as BishopReal
 import Sequence as BishopSequence
 
@@ -52,11 +53,11 @@ originalBishopKoenigsDifferenceConverges h constant ratio bounds =
   Completion.original-bishop-pointwise-complex-converges
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
       (λ n {{_}} →
-        Complex.proj₁ (Telescope.originalBishopKoenigsPrefixSameSource h n))
+        proj₁ (Telescope.originalBishopKoenigsPrefixSameSource h n))
       (Completion.realConverges prefixConverges))
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
       (λ n {{_}} →
-        Complex.proj₂ (Telescope.originalBishopKoenigsPrefixSameSource h n))
+        proj₂ (Telescope.originalBishopKoenigsPrefixSameSource h n))
       (Completion.imaginaryConverges prefixConverges))
   where
     prefixConverges =
