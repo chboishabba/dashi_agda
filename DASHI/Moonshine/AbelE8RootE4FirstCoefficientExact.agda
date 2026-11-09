@@ -13,7 +13,7 @@ module DASHI.Moonshine.AbelE8RootE4FirstCoefficientExact where
 -- remain required separately.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; trans; sym)
 open import Agda.Builtin.Nat using (Nat)
 
 import Real as Bishop
@@ -37,11 +37,9 @@ originalE8RootListEqualsE4FirstCoefficient :
   Roots.indexedRootListLength Roots.combinedIndexedRoots
   ≡ Coeff.e4IncrementCoefficient 0
 originalE8RootListEqualsE4FirstCoefficient =
-  let open import Agda.Builtin.Equality using (trans)
-  in trans
+  trans
     originalE8GeneratedRootCount
-    (let open import Agda.Builtin.Equality using (sym)
-     in sym originalBishopE4FirstCoefficientIs240)
+    (sym originalBishopE4FirstCoefficientIs240)
 
 originalBishopE4FirstCoefficientMatchesE8RootCount :
   Bishop._≃_
