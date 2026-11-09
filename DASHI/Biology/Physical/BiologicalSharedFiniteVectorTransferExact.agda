@@ -230,3 +230,42 @@ originalNativeBondTargetCredit :
     ≡ suc (V.lookup state (targetIndex geometry bond))
 originalNativeBondTargetCredit geometry bond state =
   lookupAfterCredit (targetIndex geometry bond) state
+
+
+------------------------------------------------------------------------
+-- LOCALITY: unrelated voxels are unaffected by each primitive debit
+-- and credit. These witnesses are needed to assemble a genuine
+-- incidence-divergence law, rather than merely a total-mass identity.
+------------------------------------------------------------------------
+
+lookupDebitAwayFromSource :
+  ∀ {n} (source observer : F.Fin n) (state : V.Vec Nat n) →
+  source ≢ observer →
+  V.lookup (debitAt source state) observer ≡ V.lookup state observer
+lookupDebitAwayFromSource F.zero F.zero state different =
+  ⊥-elim (different refl)
+lookupDebitAwayFromSource F.zero (F.suc observer)
+  (V._∷_ zero rest) different = refl
+lookupDebitAwayFromSource F.zero (F.suc observer)
+  (V._∷_ (suc amount) rest) different = refl
+lookupDebitAwayFromSource (F.suc source) F.zero
+  (V._∷_ amount rest) different = refl
+lookupDebitAwayFromSource (F.suc source) (F.suc observer)
+  (V._∷_ amount rest) different =
+  lookupDebitAwayFromSource source observer rest
+    (λ equality → different (cong F.suc equality))
+
+lookupCreditAwayFromTarget :
+  ∀ {n} (target observer : F.Fin n) (state : V.Vec Nat n) →
+  target ≢ observer →
+  V.lookup (creditAt target state) observer ≡ V.lookup state observer
+lookupCreditAwayFromTarget F.zero F.zero state different =
+  ⊥-elim (different refl)
+lookupCreditAwayFromTarget F.zero (F.suc observer)
+  (V._∷_ amount rest) different = refl
+lookupCreditAwayFromTarget (F.suc target) F.zero
+  (V._∷_ amount rest) different = refl
+lookupCreditAwayFromTarget (F.suc target) (F.suc observer)
+  (V._∷_ amount rest) different =
+  lookupCreditAwayFromTarget target observer rest
+    (λ equality → different (cong F.suc equality))
