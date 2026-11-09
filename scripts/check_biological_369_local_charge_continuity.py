@@ -67,6 +67,16 @@ def apply(state,action,divergence,external):
             new_external[IDX[p]]-=sign*actual
     else:
         raise ValueError("untyped physical event")
+    # Strict support check independently of the charge-divergence formula:
+    # a real bond may alter ONLY its actual geometric endpoints, and a
+    # certified environmental event may alter ONLY its OnFace voxel.
+    # In particular this rejects compensating fictional remote changes
+    # that could leave a global conservation check falsely satisfied.
+    allowed={IDX[action[2]],IDX[action[3]]} if action[0]=="bond" else {IDX[action[3]]}
+    for charge_sign in (+1,-1):
+        changed={i for i in range(27)
+                 if new[charge_sign][i]!=state[charge_sign][i]}
+        assert changed.issubset(allowed),(action,charge_sign,changed)
     after=local_charge(new)
     # The global divergence/exchange arrays are cumulative since
     # the start of this transport history. Per-event check separately
