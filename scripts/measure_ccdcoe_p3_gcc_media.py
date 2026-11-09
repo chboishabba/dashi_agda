@@ -278,6 +278,8 @@ def main() -> None:
     p.add_argument("--intervention-receipt",help="Source ID for actual intervention onset")
     p.add_argument("--source-root",type=Path,help="Original, locally preserved article-byte root")
     p.add_argument("--frame",type=Path,help="Required predeclared article-frame census JSON")
+    p.add_argument("--expected-frame-sha256", required=False,
+                   help="Digest of pre-registered frame independently retained before coding")
     p.add_argument("--self-test",action="store_true")
     a=p.parse_args()
     if a.self_test:
@@ -285,10 +287,11 @@ def main() -> None:
         return
     if (a.input is None or a.output is None or
         not a.intervention_date or not a.intervention_receipt or
-        a.source_root is None or a.frame is None):
+        a.source_root is None or a.frame is None or a.expected_frame_sha256 is None):
         p.error("--input --output --intervention-date and --intervention-receipt required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
-    census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows)
+    census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows,
+                 a.expected_frame_sha256)
     result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt,
                    source_root=a.source_root)
     a.output.parent.mkdir(parents=True,exist_ok=True)
