@@ -45,20 +45,14 @@ originalComplexSeriesLimitExtensional :
   Complex._≈C_ leftLimit rightLimit
 originalComplexSeriesLimitExtensional {left} {right}
     termwise leftProof rightProof =
-  Seq.uniqueness-of-limits
-    (Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
-      (λ n {{_}} →
-        Ext.seriesPartialSumsCongruent
-          (λ k → proj₁ (termwise k)) n)
-      (Complex.realConverges leftProof))
+  Ext.termwiseEquivalentSeriesHaveEquivalentLimits
+    (λ k → proj₁ (termwise k))
+    (Complex.realConverges leftProof)
     (Complex.realConverges rightProof)
   ,
-  Seq.uniqueness-of-limits
-    (Seq.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
-      (λ n {{_}} →
-        Ext.seriesPartialSumsCongruent
-          (λ k → proj₂ (termwise k)) n)
-      (Complex.imagConverges leftProof))
+  Ext.termwiseEquivalentSeriesHaveEquivalentLimits
+    (λ k → proj₂ (termwise k))
+    (Complex.imagConverges leftProof)
     (Complex.imagConverges rightProof)
 
 originalBishopE4TailSetoidInvariant :
