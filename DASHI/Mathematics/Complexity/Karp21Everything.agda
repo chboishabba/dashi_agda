@@ -272,3 +272,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranPvsNPVerifierCodeTransportExac
 -- Original/native signed-gamma suffix identity on every word, including rejection.
 -- Signed integer magnitude/value equality remains unproved.
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedSuffixExact
+
+-- Exact original gamma encoded-frame readouts in native token and original signed ℤ, suffix-preserving.
+-- Original binary token arithmetic identity remains the P0 owner.
+import DASHI.Mathematics.Complexity.Karp21GammaBinarySignedPayloadValueCutExact
