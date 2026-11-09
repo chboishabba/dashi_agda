@@ -235,7 +235,8 @@ originalFinitePowerQuadratureEndpointReciprocalBound
       (R.pow (Mesh.sourceVertex steps cells) (suc power))
       (R.pow (Mesh.sourceVertex steps zero) (suc power))
     scaleBound = RP.≤-respˡ-≃
-      (sourceFinitePowerScaledSumIsEmbeddedNat steps power cells)
+      (RP.≃-symm
+        (sourceFinitePowerScaledSumIsEmbeddedNat steps power cells))
       (originalFinitePowerQuadratureEndpointBound
         steps power cells vertexNN stepNN)
     multiplied = RP.*-monoˡ-≤-nonNeg
