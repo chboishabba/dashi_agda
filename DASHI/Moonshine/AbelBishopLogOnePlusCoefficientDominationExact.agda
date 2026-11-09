@@ -32,6 +32,7 @@ import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Moonshine.AbelBishopKoenigsGeometricAbsoluteExact as Geom
 import DASHI.Moonshine.AbelBishopGeometricPowerSeriesExact as Powers
 import DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact as Log
+import DASHI.Foundations.BishopNegativeExponentialInterlacingExact as Reciprocal
 
 originalBishopScalarMagnitudeAtMostOne :
   (scalar x : BishopReal.ℝ) →
@@ -139,3 +140,68 @@ originalBishopLogOnePlusAbsoluteFromCoefficientOrder {w} {ratio} interval norm c
     ratio
     ratio
     (originalBishopLogComponentGeometricBounds interval norm coefficientBound)
+
+
+------------------------------------------------------------------------
+-- PAY THE REMAINING COEFFICIENT ORDER FROM ORIGINAL VENDORED
+-- BISHOP RATIONAL RECIPROCAL PRIOR ART. NO INPUT FIELD REMAINS.
+------------------------------------------------------------------------
+
+originalBishopLogCoefficientMagnitudeAtMostOne :
+  ∀ n →
+  BishopReal._≤_
+    (BishopReal.∣ Log.logCoefficient n ∣)
+    BishopReal.1ℝ
+originalBishopLogCoefficientMagnitudeAtMostOne n
+  with Log.alternate n
+... | false =
+  BishopP.≤-respˡ-≃
+    (BishopP.nonNegx⇒∣x∣≃x
+      (Reciprocal.reciprocalNonnegative n))
+    (Reciprocal.unitReciprocalBelowOne n)
+... | true =
+  BishopP.≤-respˡ-≃
+    (BishopP.≃-trans
+      BishopP.∣-x∣≃∣x∣
+      (BishopP.nonNegx⇒∣x∣≃x
+        (Reciprocal.reciprocalNonnegative n)))
+    (Reciprocal.unitReciprocalBelowOne n)
+
+-- This discharges the literal log-term absolute convergence from a
+-- source-selected norm-square radius and the *existing* Bishop geometric
+-- comparison; no arbitrary coefficient-order record is required.
+originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk :
+  ∀ {w ratio} →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (norm : BishopReal._≃_
+    (Norm.normSqC w)
+    (Norm.square ratio)) →
+  Complex.ComponentwiseAbsoluteSeriesConvergent
+    (Log.originalBishopLogOnePlusTerm w)
+originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk interval norm =
+  originalBishopLogOnePlusAbsoluteFromCoefficientOrder
+    interval norm originalBishopLogCoefficientMagnitudeAtMostOne
+
+originalBishopLogOnePlusCanonicalLimitOnUnitDisk :
+  ∀ {w ratio} →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (norm : BishopReal._≃_
+    (Norm.normSqC w)
+    (Norm.square ratio)) →
+  Complex.BishopComplex
+originalBishopLogOnePlusCanonicalLimitOnUnitDisk {w} interval norm =
+  Log.originalBishopLogOnePlusSeriesValue w
+    (originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk interval norm)
+
+originalBishopLogOnePlusCanonicalLimitConvergesOnUnitDisk :
+  ∀ {w ratio} →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (norm : BishopReal._≃_
+    (Norm.normSqC w)
+    (Norm.square ratio)) →
+  Complex.ComplexSeriesConvergesTo
+    (Log.originalBishopLogOnePlusTerm w)
+    (originalBishopLogOnePlusCanonicalLimitOnUnitDisk interval norm)
+originalBishopLogOnePlusCanonicalLimitConvergesOnUnitDisk {w} interval norm =
+  Log.originalBishopLogOnePlusSeriesConverges w
+    (originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk interval norm)
