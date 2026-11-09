@@ -52,3 +52,19 @@ The last line combines the already established original one-link conditional SU(
 **Not paid:** the β-versus-lattice-spacing renormalized scaling trajectory, per-*physical*-block control of the growing number of links, a bound on spatially *connected* bad-field polymers with entropy, CMP116 applicability on original marked directions, long-distance full Wilson covariance clustering, original interacting R4 Schwinger limits, positive same-H spectral gap, continuum nontriviality or extension to all compact simple G. Union-bounding O(a^{-4}) individual link failures is not enough when β(a) grows slowly. The shrinking of the bare plaquette expectation toward 1 alone does **not** prove or disprove continuum nontriviality.
 
 **Numerical/finite regression:** `scripts/check_ym_su2_original_wilson_pressure_uniform_20261109.py` independently checks algebraic parameter ratios and exact-rational quaternion plaquette triangle/deviation witnesses. It is an independent negative/finite control, not an integration or Agda-kernel proof. Attribution: original Wilson finite-lattice action, SU(2) Haar/quaternion geometry, elementary finite-volume Gibbs pressure convexity; DASHI combines these with the existing actual conditional one-link source.
+
+
+## Further theorem: volume-uniform fraction-of-bad-plaquettes control
+
+The same **original** finite Wilson probability measure gives a stronger *bulk-density* statement without assuming independence. Fix `0<ε≤2` and let `B_ε(U) = # {p : 1−t(U_p)≥ε}/P`, the proportion of plaquettes with deficit at least ε among all `P=6V` unoriented plaquettes. The pointwise bound `ε·1_{d_p≥ε}≤d_p` gives `ε·B_ε(U)≤(1/P)Σ_p d_p`. For β≥16, the pressure theorem thus yields
+
+```
+E_β[B_ε] ≤ [8+(2/3)log24+logβ]/(βε).
+
+P_β(B_ε≥η) ≤ [8+(2/3)log24+logβ]/(βεη),
+                                             η>0.
+```
+
+These inequalities hold **uniformly over the periodic finite volume** and make no assumption that bad plaquettes are independent. They establish that the expected density, and the probability of a fixed positive density, tends to zero as β→∞. The second is Markov's inequality on a nonnegative physical observable.
+
+**Sharp limitation:** density control is not connected-polymer control. On an `n×n×n×n` periodic torus, a geometrically traversing connected path of `n` distinct bad plaquettes can occupy a fraction `n/(6n⁴)=1/(6n³)` of all plaquettes. This tends to zero, so vanishing bad-plaquette density permits arbitrarily long sparse connections. An actual Peierls/polymer activity or block mixing estimate must bound *connected bad supports*, rather than just `B_ε`. Neither E1 continuum convergence nor D1 full covariance clustering follows from this density theorem.
