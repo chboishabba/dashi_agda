@@ -32,6 +32,7 @@ import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact
 import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact
 import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact
 import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact
+import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
