@@ -57,3 +57,31 @@ original18ClassProjectionNotSafeUnderNewDynamics safe =
 
 -- This is why the source/evidence revision loop must be permitted to reopen
 -- and refine a quotient when new intervention measurements discriminate it.
+
+-- Stronger necessary condition, for ANY candidate replacement quotient.
+-- A new quotient cannot be future-safe if it still identifies this pair.
+-- This does not presume a minimal replacement partition.
+everySafeMarkerProjectionSeparatesWitness :
+  (Q : Set) (project : Bio.BiologicalState → Q) →
+  Future.FutureLanguageSafeProjection
+    (Bridge.deterministicSystem markerSensitiveStep markerActionLabel)
+    Bio.observe project →
+  project Bio.withoutMemory ≡ project Bio.differentMarker →
+  ⊥
+everySafeMarkerProjectionSeparatesWitness Q project safe same =
+  Bio.false≢true
+    (Bridge.canonicalFutureEquivalentImpliesTraceEquivalent
+      (Future.kernelContainedInFutureEquivalence safe same)
+      (markerProbe ∷ []))
+
+-- The previous 18-class counterexample is a direct specialization of
+-- this general separation requirement. No new observer carrier is needed.
+original18ClassFailureFromNecessarySeparation :
+  Future.FutureLanguageSafeProjection
+    (Bridge.deterministicSystem markerSensitiveStep markerActionLabel)
+    Bio.observe Minimal.minimalProject →
+  ⊥
+original18ClassFailureFromNecessarySeparation safe =
+  everySafeMarkerProjectionSeparatesWitness
+    Minimal.MorphologyFutureCode Minimal.minimalProject safe
+    sameMinimal18ClassBeforeMarkerProbe
