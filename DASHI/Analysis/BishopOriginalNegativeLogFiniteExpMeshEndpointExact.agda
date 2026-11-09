@@ -191,3 +191,34 @@ originalFiniteLogExpErrorFromMesh stage steps cells =
         (sourceFiniteMeshWalkIsStepSum steps cells))
       (RP.≃-symm
         (sourceFiniteMeshErrorSumDecomposition steps q cells)))
+
+-- The exact P0 target error is now bounded by an original-Bishop
+-- finite weighted sum of the ACTUAL source factor-quotient defects.
+-- To show the right side vanishes one still needs a genuine
+-- mesh-uniform quotient modulus, not pointwise residual convergence.
+originalFiniteLogExpErrorMeshAbsoluteBound :
+  (stage : Nat) →
+  (steps : Nat → R.ℝ) →
+  (cells : Nat) →
+  let
+    x = Telescope.finiteWalk R.0ℝ steps cells
+    f = Finite.originalNegativeLogFiniteExponential x stage
+  in
+  R._≤_
+    (R.∣ R._-_ f (R._-_ R.1ℝ x) ∣)
+    (Telescope.sumFinite
+      (λ n → R.∣ R._*_ (steps n)
+        (R._+_
+          (sourceFiniteLogExpMeshQuotient stage steps n)
+          R.1ℝ) ∣)
+      cells)
+originalFiniteLogExpErrorMeshAbsoluteBound stage steps cells =
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (originalFiniteLogExpErrorFromMesh stage steps cells))
+    (Telescope.sumFiniteAbsoluteTriangle
+      (λ n → R._*_ (steps n)
+        (R._+_
+          (sourceFiniteLogExpMeshQuotient stage steps n)
+          R.1ℝ))
+      cells)
