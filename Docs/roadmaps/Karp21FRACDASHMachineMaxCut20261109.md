@@ -1,7 +1,7 @@
 
 # Karp-21 / FRACDASH compiled-machine maximum cut — 2026-11-09
 
-**Current state:** The full max-cut is NOT complete. Signed-gamma suffix and native-control numerical-view source lemmas are new; the executable token value, original N21 full verifier, polynomial clock, InNP, E20, Cook–Levin, network and P-vs-NP lower bound remain OPEN. No Agda kernel receipt is claimed.
+**Current state:** The full max-cut is NOT complete. Exact encoded-frame original/native signed readout is newly source-written; signed-gamma suffix and native-control numerical-view source lemmas are present; the executable token value, original N21 full verifier, polynomial clock, InNP, E20, Cook–Levin, network and P-vs-NP lower bound remain OPEN. No Agda kernel receipt is claimed.
 
 ## Governance and sources
 
@@ -49,6 +49,31 @@ No theorem assumes all rules commute, that priority can be reordered, or that a 
 * Original N21 all-word typed/Fin-free same-word and primitive comparison envelopes exist at source level.
 
 FRACDASH's DA51 corpus reports 15,658 raw bytes → 9,275 aggregate → 5,387 below-shard with exact reconstruction **on that corpus**. This demonstrates operation/trace reuse, not a guaranteed generic N21 compression or complexity improvement. The separate 256 × 1,025-bit signed-weight example reduced arithmetic stages but did not improve total accounted key+addition work.
+
+## Current exact P0 reduction — original signed-gamma same-wire payload (9 November 2026)
+
+**Status: SOURCE-WRITTEN, NOT KERNEL-ACCEPTED; FULL MAX-CUT OPEN.**
+
+New `Karp21GammaBinarySignedPayloadValueCutExact.agda` reuses the **actual original** gamma frame `Old.zeroPrefix(length payload) ++ (true ∷ (payload ++ suffix))`, `Native.readGammaBinaryPayloadExact`, `Signed.splitLastAppendExact`, and `Old.readGammaPayloadExact`. On every complete encoded frame, with arbitrary binary payload and suffix:
+
+- `karpNativeSignedPayloadFrameExact` identifies the literal executable `Signed.readSignedBinary` result as `Signed.positive/negative (true ∷ prefix)` with EXACT unchanged suffix, for payload `prefix ++ [last]`.
+- `karpOriginalSignedPayloadFrameExact` computes the same input's actual original `Old.readSignedGamma` to `Old.unzigzag ((Old.pow2(length payload) + Old.payloadValue payload) ∸ 1)`, with EXACT same suffix.
+- Zero-gamma fixtures check actual `positive []` and original `unzigzag zero`. These cannot be elided: zero is the one-bit successor numeral `[true]`.
+- The separate source-written `karpNativeSignedGammaSuffixSameOriginal` covers **all malformed/truncated** words, whereas the new payload readout specifies complete gamma frames. This distinction is deliberate.
+
+**Precise next arithmetic lemma (UNPAID):** Let `interpretSignedMagnitude` be the actual mathematical `ℤ` value of `Signed.positive/negative magnitude` using `Value.valueLE (reverse magnitude)`. Prove for all prefix and last bits that
+
+```text
+interpretSignedMagnitude (signedTokenFromLast prefix last)
+  ≡ Old.unzigzag
+      (originalPayloadSignedNat (prefix ++ (last ∷ [])))
+```
+
+then separately handle zero gamma's `Signed.positive []`. Only this value equality, followed by all-original-words signed edge cursor alignment and source `Graph.readRawEdges` can pay `karpNativeSignedTokenValueMatchesOriginal` unconditionally. No numeric identity is manufactured from a suffix equality. Existing paired-edge selected trace then pays the native ledger score observation once per-edge signed values and thresholds are welded. Existing original typed N21 same-word proof and P-vs-NP executable-code refinement can be consumed only after the true bit-machine clock.
+
+**Proof acceptance:** new Agda statements are source-written and imported in both original Karp roots / focused referee; no Agda 2.9 or `parallel_checker` receipt obtained. Source-written ≠ verified. Local finite regressions rerun in this turn: 38,860 priority, 13,440 N21-edge, 449,895 original raw-trace PASS; they do not cover this Agda source theorem or certify all-word arithmetic.
+
+**Remaining full maximum cut:** native signed token `ℤ` value theorem; original signed graph reader native token and suffix alignment; native ledger versus `rawSparseScore`; full original N21 FRACDASH simulation/acceptance/trace; physical polynomial bit-machine clock and original `PR.InNP`; original E20 + Cook–Levin; 19 reductions/20 memberships and `CertifiedKarpNetwork`; independent P-vs-NP behavioural self-specialization + strict resource closure + `SATNotInP`. No Clay completion claim.
 
 ## Phases, deliverables, exact remaining lemmas
 
