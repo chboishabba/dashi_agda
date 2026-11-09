@@ -24,7 +24,7 @@ def source_digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
-        time_step=.005,eq_blocks=50,seed=20261109,chol_threshold=1e-5):
+        time_step=.005,eq_blocks=0,analysis_discard_blocks=50,seed=20261109,chol_threshold=1e-5):
     import numpy as np
     receipt_file=Path(receipt_file).resolve()
     receipt=json.loads(receipt_file.read_text())
@@ -39,7 +39,11 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
     if min(walkers,blocks,steps_per_block)<1 or time_step<=0:
         raise ValueError("invalid AFQMC parameters")
     if not 0<=eq_blocks<blocks:
-        raise ValueError("equilibration blocks invalid")
+        raise ValueError("explicit equilibration blocks invalid")
+    if not 0<=analysis_discard_blocks<blocks:
+        raise ValueError("analysis discard blocks invalid")
+    if blocks!=300 or steps_per_block!=20 or abs(time_step-.005)>1e-12:
+        raise ValueError("this original-source protocol expects 300 blocks, 20 steps, dt=.005")
 
     # Production document route. No ad-hoc chemists'/physicists'
     # ERI transposition or Cholesky factorization is introduced here.
@@ -91,7 +95,9 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
             "orbital_selection_source":receipt["orbital_selection_source"],
             "orbital_frame_verified_original":receipt["original_ionq_orbital_frame_verified"],
             "trial_variational_energy_hartree":float(np.real(trial.energy)),
-            "walkers":walkers,"blocks":blocks,"equilibration_blocks":eq_blocks,
+            "walkers":walkers,"blocks":blocks,"explicit_equilibration_blocks":eq_blocks,
+            "analysis_discard_blocks":analysis_discard_blocks,
+            "analysis_retained_blocks":blocks-analysis_discard_blocks,
             "steps_per_block":steps_per_block,"time_step":time_step,
             "elapsed_seconds":elapsed,"estimator":str(estimator),
             "original_ionq_nickel_replication":False,
