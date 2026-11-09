@@ -30,6 +30,7 @@ import RealProperties as RP
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteExplicitQuotientExact as Explicit
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteDerivativeExact as LogFinite
+import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geometric
 
 -- The next coefficient of the quotient defect is a source-native
 -- finite polynomial, even when h=0.
@@ -125,3 +126,46 @@ originalFiniteLogQuotientSecondOrder x h (suc n) =
         ⊜ (old ⊕ (cc ⊗ pp))
           ⊕ (hh ⊗ (tail ⊕ (cc ⊗ ss))))
       RP.≃-refl q0 h t coeff p0 ps)
+
+------------------------------------------------------------------------
+-- SAME SOURCE: the zero-step quotient is EXACTLY the previously
+-- proved finite LOG derivative polynomial. This is not an
+-- arbitrary selected derivative or a limit argument.
+------------------------------------------------------------------------
+
+originalFiniteLogQuotientAtZeroIsDerivativePolynomial :
+  (x : R.ℝ) (n : Nat) →
+  R._≃_
+    (Explicit.originalSourceFiniteLogQuotient n x R.0ℝ)
+    (Geometric.negativeLogDerivativePolynomial x n)
+originalFiniteLogQuotientAtZeroIsDerivativePolynomial x zero =
+  RP.≃-refl
+originalFiniteLogQuotientAtZeroIsDerivativePolynomial x (suc n) =
+  RP.+-cong
+    (originalFiniteLogQuotientAtZeroIsDerivativePolynomial x n)
+    (RP.≃-trans
+      (RP.*-cong RP.≃-refl
+        (RP.≃-symm
+          (Power.powerDerivativeIsDifferenceQuotientAtZero
+            x n)))
+      (LogFinite.originalLogTermDerivativeCoefficient x n))
+
+-- The precise defect factorisation needed for P0.01:
+--    q_L,N(x,h) = L'_N(x) + h * S_N(x,h).
+--
+-- Thus the ONLY additional inequality input needed for a
+-- compact-uniform modulus is a common bound on |S_N(x,h)|
+-- over |x|,|x+h|<=r; no generic derivative uniqueness is needed.
+originalFiniteLogPolynomialQuotientExactDefect :
+  (x h : R.ℝ) (n : Nat) →
+  R._≃_
+    (Explicit.originalSourceFiniteLogQuotient n x h)
+    (R._+_
+      (Geometric.negativeLogDerivativePolynomial x n)
+      (R._*_ h (sourceFiniteLogSecondQuotient x h n)))
+originalFiniteLogPolynomialQuotientExactDefect x h n =
+  RP.≃-trans
+    (originalFiniteLogQuotientSecondOrder x h n)
+    (RP.+-cong
+      (originalFiniteLogQuotientAtZeroIsDerivativePolynomial x n)
+      RP.≃-refl)
