@@ -163,3 +163,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawListMachineExact
 -- Concrete N21 parsed raw-edge state: first-enabled FRACTRAN step includes actual binary terminal positive-threshold branch.
 -- Original all-word graph header / bit clock / InNP remain separate.
 import DASHI.Mathematics.Complexity.Karp21FractranParsedRawThresholdMachineExact
+
+-- Original whole-word gamma(n), gamma(m), signed native weights, positive native threshold, strict original validation/suffix.
+-- All-word observed graph equality and native binary endpoints remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeRawGraphWordExact
