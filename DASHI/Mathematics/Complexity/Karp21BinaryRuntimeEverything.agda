@@ -65,3 +65,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderExact
 
 -- K05: proof-side Nat value semantics of executable bitwise ripple adder.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact
+
+-- K05: executable two-lane binary signed-weight fold and total invariants.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact
