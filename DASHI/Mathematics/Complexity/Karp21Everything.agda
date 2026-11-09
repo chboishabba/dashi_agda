@@ -341,3 +341,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeOriginalWholeGraphFieldsWeldExac
 -- P0-F parsed original signed N21 machine: each enabled first-priority cursor step strictly lowers edge-count+1 potential.
 -- NOT a physical bit-tape polynomial clock.
 import DASHI.Mathematics.Complexity.Karp21FractranParsedRawStepPotentialExact
+
+-- P1 original concrete tape same-run weld: canonical six-cell codec, run CNF path, identical flat tableau assignment and input-row pullback.
+-- Global clause placement/accepting-run CNF/clock remains OPEN.
+import DASHI.Mathematics.Complexity.Karp21ConcreteTapeCanonicalRunFlatWeldExact
