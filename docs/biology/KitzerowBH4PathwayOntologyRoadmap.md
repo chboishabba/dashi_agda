@@ -672,3 +672,14 @@ Version/assay/source release still must be pinned in acquired receipts. No stand
     scripts/run_agda29_parallel_check.sh DASHI/Everything.agda
 
 No exact-head Agda type-check, remote ontology verification or SBML parser receipt is asserted by this PR.
+
+
+## 2026-11-09 — current spatial biology completion ledger (cross-PR)
+
+The earlier KPO-01–KPO-18 ontology and source obligations **remain**; the current mathematical priority is the shared physical-state slice, not another parallel ontology. Detailed synchronized table: `docs/biology/BH4PhysicalTissueFutureObservationMaxCut.md` on this branch and `Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md` on developmental PR #1471.
+
+**New confirmed source owner:** `scripts/check_bh4_original_panel_spatial_events.py` consumes the existing acquired original 16-protein Rhea/ChEBI 29-species/12-finite-reaction certificate; it does *not* write a substitute 29×12 matrix. Three nonfinite source residuals are retained. The strict certificate-backed run is gated on the original artifact; a five-species QDPR fixture is a separate finite self-test. Permissible geometric events do not justify physiological transport or kinetics.
+
+**Exact proposed unpaid declarations, in dependency order:** `original369LocalSignedContinuityExact`, `original29x12SpatialReactionBalance`, `sameSourcePhysicalReactionTransportStep`, `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, `physicalTissueOneStepRefinement`, `physicalKernelLumpsUnderInterventions`, `physicalFutureQuotientIsMinimal`, `sourceCalibratedParametersAdmissible`, `heldoutFuturePredictionsDiscriminate`.
+
+**Release gates D0–D6:** exact Agda receipts and branch reconciliation; genuine original reaction/exchange source payment; admissible chemical/PNP update; physical-to-tissue commuting proof; minimal intervention-safe stochastic quotient; independent longitudinal calibration/discrimination; attributed ITIR/PNF review. Do not promote biochemical source attribution into Kitzerow clinical causal validation.
