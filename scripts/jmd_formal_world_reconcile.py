@@ -544,7 +544,9 @@ def main(argv=None):
             changed=set()
             if args.goals:
                 _,changed=upsert_goals(conn,args.goals)
-                candidates(conn,limit=args.max_candidates)
+            # Recompute candidates whenever sources change, even if goals were
+            # already imported by an earlier run.
+            candidates(conn,limit=args.max_candidates)
             changed.update(r[0] for r in conn.execute(
                "SELECT symbol_id FROM jmd_world_source_changes"))
             changed_closure(conn,changed)
