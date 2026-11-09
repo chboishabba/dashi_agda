@@ -109,3 +109,21 @@ No cross-domain assumption is needed to prove the original Wilson greedy finite 
 This resolves **fuel-budget semantic stability** at the source-written proof-contract level; it does not prove extensional equality with the earlier potentially non-terminating un-fuelled greedy function. The number-19 conclusion still requires the actual original closed-neighbourhood size bound and degree-18 removal instance. No Agda kernel receipt was available.
 
 Remaining physical high-alpha unchanged: selected original Wilson 4D sparse/frustrated two-mark polymer activity estimate and its original CMP116 charge sum, followed by full covariance decay, E1, D2, N1 and G1.
+
+
+## All-period original Wilson 19-neighbour theorem — mathematical proof completed, Agda certificate outstanding
+
+For each periodic side `L=suc n>=1`, each original positive link is `b=(x,mu)`; each original plaquette `p=(y,{alpha,beta})` uses exactly the positive-variable supports
+`(y,alpha)`, `(y+e_alpha,beta)`, `(y+e_beta,alpha)`, `(y,beta)`, with periodic coordinates.
+
+**Exhaustive incidence classification.** If `b` occurs in `p`, then `mu` must be `alpha` or `beta`, and the unordered axis-pair is `{mu,nu}` for one of the three `nu != mu`. Its site `y` is either `x` (first or fourth variable) or `x-e_nu` (second or third variable). Conversely, both of these plaquettes contain `b` by direct substitution. Thus the incident-plaquette **set** is exactly the six-candidate union
+`{(x,{mu,nu}), (x-e_nu,{mu,nu}) : nu != mu}`.
+For periods 1 and 2 this is a *set* of at most six, not an assertion that the two candidates are distinct.
+
+**Counting.** Each candidate plaquette contains the centre `b`, and its original four-bond list therefore contains at most three other distinct link variables. The union of the six candidate supports, after removing `b`, has cardinality at most `6*3=18`. The original closed link-star conflict neighbourhood, by the sound and complete source graph module, is exactly that union, hence has cardinality at most 19. If `a ∷ as` contains no duplicates, the greedy filter discards at most 18 entries of `as`: every discarded `b` conflicts with `a`, and `a` is absent from `as`. Consequently `length as <= 18 + length (filterOriginalStarFree a as)`; this is precisely the `OriginalStar18RemovalBound` field. Structural fuel-greedy counting then yields the 19-packing inequality for the canonical deduplicated marked-link set.
+
+The preceding paragraph is a **complete combinatorial mathematics proof** valid at all positive periods, including degenerate periods. However, it is NOT YET a completed **native Agda proof** of the user's D1 geometry gate: the same-carrier 6-candidate characterization, no-duplicate finite original bond enumeration and union-cardinality lemmas must be expressed as proof terms and accepted by Agda 2.9. We must not describe D1 geometry as kernel closed until that check succeeds.
+
+Executable source regression `scripts/check_ym_original_link_star_all_period.py` independently exhausts the actual original positive-link/plaquette supports for periods L=1,2,3,4,5, checks equality with the six candidates for **every** link, and verifies at most 18 other conflicts. Measured maximum other-link conflicts: L1=3, L2=15, L3=18, L4=18, L5=18. Such finite tests do not replace the universal proof.
+
+This reduction closes the *mathematical* uncertainty about the coefficient 19. It does not solve original Wilson polymer activity suppression, E1, D2, N1 or G1. The actual Clay theorem remains open.
