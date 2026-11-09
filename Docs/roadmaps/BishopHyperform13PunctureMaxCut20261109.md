@@ -445,3 +445,109 @@ Root imports committed `f73607c`, `fdaaf93`, `feb63c5`.
 All statuses describe **source-written** statements without a
 kernel acceptance receipt. No analytic gate is marked paid by the
 hyperfabric lemmas.
+
+
+## 2026-11-09: prior-art pullback/pushforward correction and original triadic-site glue
+
+**Crucial correction to earlier roadmap:** the non-discrete Grothendieck
+category and topology are ALREADY owned by
+`DASHI/Foundations/RelationalStageTwelveGrothendieckExtensionExact.agda`:
+`RelObj` includes global ABC, edge charts AB/BC/CA, and overlap
+vertices A/B/C; `RelHom` includes nonidentity restrictions.
+`relationalPatchCategory`, `triadicRelationalSieve`,
+`relationalTriadicTopology`, `triadicRelationalSieveCovers`,
+`pullbackOfMaximalIsMaximal`, `stableTriadic` and
+`transitiveCover` supply a genuine non-discrete site with
+pullback stability and transitivity through the original Stage-12
+`SmallCategory` / `Sieve` / `GrothendieckTopology` APIs.
+**Never count constructing a new category/topology as an unpaid lemma.**
+
+### Source-written: glued selected central fibre over existing triadic cover
+
+New owner
+`DASHI/Foundations/TernaryThirteenOriginalTriadicSiteGluingExact.agda`.
+
+- `GlobalTwelveCentre = (Block4 × (Block4 × Block4)) × TriTruth`
+  gives twelve actual trits grouped A/B/C as 4+4+4 and the
+  independently retained thirteenth central value.
+- `restrictAB`, `restrictBC`, `restrictCA`, and
+  `TriadicMatching`: agreement at all three four-coordinate
+  overlaps (A/B/C) and **two independent central matching laws**.
+- `glueTriadic`, `triadicABGlueRestricts`,
+  `triadicBCGlueRestricts`, `triadicCAGlueRestricts`:
+  explicit constructive descent for the **selected original
+  triadic covering family**.
+- `triadicGlobalRestrictionMatches`,
+  `triadicGlobalRoundTrip`: full global-to-local-to-global
+  identity on the grouped source carrier.
+- `selectedOriginalTriadicCover`,
+  `selectedOriginalTriadicPullbackStable`: direct theorem reuse
+  of the already existing non-discrete Grothendieck site.
+- `globalToSource`, `sourceToGlobal`,
+  `sourceGlobalPointwiseRoundTrip`,
+  `sourceGlobalCentreRoundTrip`, `globalSourceRoundTrip`
+  connect the 4+4+4 grouping to actual original
+  `StageAtlasZeroToEleven` valuation and central `TriTruth`;
+  valuation recovery remains pointwise without assuming functional
+  extensionality.
+- `originalTriadicGlueToPants`,
+  `originalTriadicPantsRecoverAtlas`,
+  `originalTriadicPantsRecoverCentre`: source triadic-site
+  matched local charts glue into the ORIGINAL depth-13 pants
+  frontier with atlas/centre recovery.
+- `triadicPunctureGlue`: nonneutral central match persists.
+
+Commits: `82538ec` initial source; `8346538` source typed
+atlas import; `5490be6` original pants gluing transport.
+
+### Source-written: use genuine existing pullback / representative
+### pushforward / residual operator, not newly invented adapters
+
+New owner
+`DASHI/Foundations/TernaryThirteenOriginalPullbackPushforwardWeldExact.agda`.
+
+- `sourceCentralSectionedProjection` instantiates the **original**
+  `SectionedProjectionProvenanceBridgeExact.SectionedProjection`
+  with the chosen neutral section.
+- `sourcePullbackObservable`,
+  `selectedRepresentativePushforward`,
+  `pushforwardAfterPullback`,
+  `pullbackOfPushforwardForFibreConstant` reuse the original
+  pullback/fibre-constant and representative operations.
+  The 'pushforward' here is the **chosen representative**
+  `observable ∘ sourceNeutralSection`, not a claim of a
+  categorical direct-image functor or Kan extension.
+- `sourcePullbackPredicate`, `sourcePullbackMeet`,
+  `sourcePullbackJoin` reuse
+  `PredicatePullbackLatticeExact`, with true pointwise
+  meet/join transport.
+- `sourceCentralResidual`, `sourceCentralReopen`,
+  `sourceResidualExact`, `sourceCentralResidualReopening`,
+  `sourceCentralProvenanceBearingQuotient` provide the
+  original provenance-bearing full fine-state reopening by
+  retaining the actually omitted central trit. This is the
+  missing exact inverse beyond neutral section alone.
+
+Commits: `a247bb9` original pullback/pushforward weld;
+`8316f39` explicit original quotient type signature.
+All three canonical TOE import roots updated:
+`47b09b1`, `bf73a63`, `4016fff`.
+
+### Corrected narrowest unpaid mathematical cut
+
+| Gate | Updated source state | Exact next unpaid theorem |
+|---|---|---|
+| H2.02 non-discrete topology | EXISTING ORIGINAL OWNER | `RelationalStageTwelveGrothendieckExtensionExact` already pays the actual A/B/C category, nontrivial sieve, pullback stability and transitivity; DO NOT repeat |
+| H2.02 triadic selected-cover central gluing | SOURCE-WRITTEN | Extend matched local sections and descent from the selected 3-chart triadic cover to **every** covering sieve of the original non-discrete site, with explicit restriction functoriality and uniqueness |
+| H2.02 typed pants seams | SOURCE-WRITTEN in two-edge matched-channel specimen | Independently select and interpret original heterogeneous world/relational edge stalks, pay `Pants.InterfaceMatch` from their original properties, then prove topology quotient on the selected full fabric |
+| H1.01 semantic | OPEN | Independently prove the intended relational/group completion equals the original 12-axis valuation + centre, including selected context/provenance |
+| H2.01 operational | OPEN | Identify and use the independently intended world-model state, observer and consumer; transport the actual non-descent counterexample |
+| Bishop P1 | OPEN | Original analytic nested exp(2i atan) = rational Cayley; 1/5, 1/239 analytic Machin witnesses |
+| Zeta P2 | OPEN | Actual source Nat-power and independent selected zeta function same-object identification |
+| Gamma/Xi P3 | OPEN | Source Gamma, continuation, functional equation, Xi |
+
+**Verification status:** source-written, no Agda kernel execution
+claimed. The installed environment did not expose an `agda`
+executable; keep all kernel-acceptance flags open. The original
+non-discrete site is not the maximal-only discrete site; the two
+owners must remain distinguished.
