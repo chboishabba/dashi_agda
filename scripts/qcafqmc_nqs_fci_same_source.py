@@ -26,7 +26,16 @@ def trial_from_checkpoint(checkpoint,states,n,na,nb):
     data=torch.load(checkpoint,map_location="cpu",weights_only=True)
     if int(data["n_alpha"])!=na or int(data["n_beta"])!=nb:
         raise ValueError("checkpoint electron sector differs from Hamiltonian")
-    model=AutoregressiveNQS()
+    architecture=data.get("architecture","")
+    if architecture=="paired-spatial-v1":
+        from qcafqmc_paired_nqs import PairedSpatialNQS
+        if na!=nb or na!=4 or n!=8:
+            raise ValueError("seniority-zero checkpoint needs 8 orbitals, 4 pairs")
+        model=PairedSpatialNQS()
+    elif architecture in ("independent fixed-sector autoregressive transformer",""):
+        model=AutoregressiveNQS()
+    else:
+        raise ValueError("unsupported neural checkpoint architecture")
     model.load_state_dict(data["weights"])
     model.eval()
     with torch.no_grad():
