@@ -123,5 +123,54 @@ class ConditionalModelTests(unittest.TestCase):
         energy_kwh = voltage * current * hours / 1000
         self.assertEqual(energy_kwh, Fraction(3, 10))
 
+
+class PhysicalSteelmanIdentificationTests(unittest.TestCase):
+    """Synthetic falsification tests; NOT observed device results."""
+
+    def test_same_diesel_and_output_different_mechanism(self):
+        # Candidate A: F=70, H=0, eta=1/2 gives W=35.
+        # Candidate B: F=70, H=10, eta=7/16 also gives W=35.
+        self.assertEqual(Fraction(1, 2) * 70, Fraction(35))
+        self.assertEqual(Fraction(7, 16) * (70 + 10), Fraction(35))
+        self.assertNotEqual(Fraction(1, 2), Fraction(7, 16))
+        # Diesel and output alone cannot identify combustion mechanism.
+
+    def test_30_percent_claim_with_external_hydrogen(self):
+        diesel = engine_diesel(
+            100, Fraction(35, 100), Fraction(70, 161),
+            Fraction(21, 2), 0
+        )
+        self.assertEqual(diesel, Fraction(70))
+        self.assertEqual(diesel + Fraction(15), Fraction(85))
+        self.assertEqual(Fraction(21, 2) / Fraction(15), Fraction(7, 10))
+
+    def test_genuinely_tiny_hydrogen_requires_high_efficiency(self):
+        # F1 = 70; H = 1; W = 35: eta = 35/71 ~= 49.3%.
+        eta = Fraction(35, 71)
+        self.assertEqual(eta * (70 + 1), 35)
+        self.assertGreater(eta, Fraction(49, 100))
+
+    def test_hydrogen_oxygen_interaction_contrast(self):
+        # Synthetic factorial data, matched output assumed.
+        no_gases, hydrogen_only, oxygen_only, combined = 100, 92, 94, 80
+        extra_synergy = hydrogen_only + oxygen_only - no_gases - combined
+        self.assertEqual(extra_synergy, 6)
+        self.assertNotEqual(extra_synergy, 0)
+        # These numbers do NOT imply a real causal interaction.
+
+    def test_heat_assisted_input_boundary(self):
+        # H=12 output is NOT constrained by electricity-only input of 10:
+        # there is 5 energy units of imported heat and 3 rejected units.
+        electricity, imported_heat, hydrogen, rejects = 10, 5, 12, 3
+        self.assertEqual(electricity + imported_heat, hydrogen + rejects)
+        self.assertGreater(hydrogen, electricity)
+        self.assertLess(hydrogen, electricity + imported_heat)
+
+    def test_similar_diesel_saving_not_same_net_input(self):
+        # Independently metered auxiliaries affect net performance.
+        fossil0, fossil1 = 100, 70
+        self.assertTrue(fossil1 + 15 < fossil0)
+        self.assertFalse(fossil1 + 35 < fossil0)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
