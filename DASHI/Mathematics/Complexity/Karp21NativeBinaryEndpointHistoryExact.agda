@@ -10,6 +10,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
 
