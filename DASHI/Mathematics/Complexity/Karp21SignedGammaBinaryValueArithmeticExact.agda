@@ -76,7 +76,11 @@ nativeMagnitudeSameOriginalBinaryValue :
   Value.valueLE (reverse (true ∷ prefix)) ≡
     Original.pow2 (length prefix) + Original.payloadValue prefix
 nativeMagnitudeSameOriginalBinaryValue prefix =
-  reverseValueSameOriginalPayload (true ∷ prefix)
+  trans
+    (reverseValueSameOriginalPayload (true ∷ prefix))
+    (cong
+      (λ n → n + Original.payloadValue prefix)
+      (NatP.+-identityʳ (Original.pow2 (length prefix))))
 
 
 ------------------------------------------------------------------------
