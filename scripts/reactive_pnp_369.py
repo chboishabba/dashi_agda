@@ -93,6 +93,69 @@ def poisson_matrix(h):
     return L
 
 
+
+def original_grounded_poisson_coercivity_certificate():
+    """Exact integer SOS identity for the original 27-cell Dirichlet operator.
+
+    For unit h: 2*L = 6*I + sum_{27 native axis lines}
+       [v_minus*v_minus.T + v_plus*v_plus.T],
+    with v_minus = 2 e_minus - e_zero and v_plus = 2 e_plus - e_zero.
+    All entries are integers; this is not a floating-point eigentest.
+    For h,eps>0 this algebraically yields L_h >= 3/h^2 I,
+    eps*L_h SPD, unique Poisson solution and inverse norm <=h^2/(3eps).
+    The sharp equality mode is (1,2,1) tensor (1,2,1) tensor (1,2,1).
+    """
+    L = np.zeros((27,27), dtype=np.int64)
+    boundary_faces = 0
+    for i,p in enumerate(POINTS):
+        for axis in range(3):
+            for sign in (-1,1):
+                q=list(p);q[axis]+=sign
+                if q[axis] not in (-1,0,1):
+                    L[i,i] += 2
+                    boundary_faces += 1
+                else:
+                    L[i,i] += 1
+                    L[i,INDEX[tuple(q)]] -= 1
+    sos = np.zeros((27,27), dtype=np.int64)
+    lines = 0
+    for axis in range(3):
+        for cross in ((a,b) for a in (-1,0,1) for b in (-1,0,1)):
+            endpoints=[]
+            for position in (-1,0,1):
+                site=list(cross)
+                site.insert(axis,position)
+                endpoints.append(INDEX[tuple(site)])
+            for end in (0,2):
+                v=np.zeros(27,dtype=np.int64)
+                v[endpoints[end]]=2
+                v[endpoints[1]]=-1
+                sos += np.outer(v,v)
+            lines += 1
+    if boundary_faces != 54 or lines != 27:
+        raise RuntimeError('native grounded cubical geometry mismatch')
+    if not np.array_equal(2*L,6*np.eye(27,dtype=np.int64)+sos):
+        raise RuntimeError('exact grounded Poisson sum-of-squares identity failed')
+    sharp=np.array([
+        np.prod([2 if coordinate == 0 else 1 for coordinate in site])
+        for site in POINTS
+    ],dtype=np.int64)
+    if not np.array_equal(L@sharp,3*sharp):
+        raise RuntimeError('sharp grounded Poisson equality mode mismatch')
+    return {
+        'native_points':27, 'native_bonds':54, 'exterior_half_faces':54,
+        'native_axis_lines':27,
+        'exact_integer_matrix_identity':True,
+        'sharp_unit_mesh_eigenvalue':3,
+        'sharp_mode':sharp.tolist(),
+        'coercivity_constant':'3 * epsilon / h^2',
+        'inverse_norm_bound':'h^2 / (3 * epsilon)',
+        'scope':'constant-positive-permittivity, all-six-face grounded Dirichlet',
+        'discrete_finite_linear_poisson_only':True,
+        'coupled_implicit_pnp_existence_proved':False,
+        'agda_kernel_checked':False,
+    }
+
 def poisson(c,m):
     # Solve the same self-consistent Poisson equation at EVERY step.
     rho=m.F*np.einsum('xs,s->x',c,m.z)+m.fixed_charge
