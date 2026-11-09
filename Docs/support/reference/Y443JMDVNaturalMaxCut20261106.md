@@ -1366,3 +1366,33 @@ F(\rho_{\rm sel}(u/v)x)=\rho_{\rm FLM}(\Phi(u/v))F(x).
 **New source-written two-sided Agda consolidation** (commit 57d20ec2e2f98b2a2fffb51ad1b6c1d936190e11): DASHI/Moonshine/VNaturalOriginalPairedFourSectorModesExact.agda now also has fromNativeSources, nativeSourcesAfterFrom and fromAfterNativeSources, inverse adapters between original OriginalMixedSectorIntertwiners and the existing SAME selected orbifold pair OriginalMixedParitySource × OriginalEvenTwistedTranslation. With the prior four-mode/vacuum/conformal/translation equations, the two Agda four-block surfaces can be treated as equivalent source records, not independent theorem gates. No kernel run was performed and no genuine source record was instantiated by these deductions.
 
 **Remaining high-alpha original endgame**: instantiate original selected twisted-even linear/graded and intertwiners, mixed Jacobi/locality on paired original carrier, prove all-mode genuine Popov/FLM correspondence, and attach original selected Y443 group action to the canonical Monster action through the honest same-group map and u/v equations. The above Faddeev–Popov source belongs to the independent Yang–Mills ghost/OS roadmap, not to the VOA source-locality proof.
+
+
+## 2026-11-09 source-first max-cut correction: Y443 versus Bimonster
+
+**Do not equate the Y443 spider quotient with the Bimonster.**
+The Bimonster (Monster wreath C2) is `(M x M) semidirect C2`, with the involution interchanging Monster factors; its order is `2*|M|^2`. The Y443 **79-relator** spider presentation recorded in `Y443CoxeterPresentationExact` is the historical `M x C2` object of order `2*|M|`. The **80th** central-word relator selects the Monster quotient `M`. Neither finite transcription nor a satisfying action in some group certifies that the selected group is that *universal presented quotient*. Source authorities: Ivanov 1999, Bray's presentation, TauCeti; retain JMD ownership of the recovered path proof and Popov–Rastelli ownership of the independent VOA construction.
+
+**New mathematical source join:** `Y443AllCoxeterGraphLawsFrom80Exact.Source.allTwelveNodeWordsFromActual80` composes `allElevenShiftsFromActual80` with `Y443JMDAllTwelveNodeWordCompilerExact.Recover.actualNodeWordCertificate`. Thus, from ONE actual `RelatorsSatisfied gi nodes Y.monsterRelators` witness, the code constructs all twelve source node `u,v` words. There is no longer a separate path-shift record in the exported endpoint. This is a source-written proof term; **Agda 2.9 --safe kernel acceptance was not executed**. No claim of the Monster group isomorphism is made.
+
+### Updated exact remaining gates
+
+| Gate | Existing paid owner | Actual missing producer |
+|---|---|---|
+| Y0: finite presentation | `Y443CoxeterPresentationExact`, 78/79/80 words and all graph laws | Kernel receipt of the present source head; no need for another Coxeter graph or spider enumeration |
+| Y1: two-generator extraction | JMD source words, A4, 11 shifts from all 80 and new 12-node composite | Actual SAME selected group's 80-relator evaluation and node-word surjectivity; kernel receipt |
+| Y2: universal quotient identity | `Y443PresentedGroupNodeGenerationExact`, `Y443PublishedQuotientIsoCompositionExact` | Construct original quotient carrier or source-identifying two-sided isomorphism; do not infer iso from satisfied relators |
+| Y3: genuine Moonshine | paired four-sector data and dual adapters, Popov–Rastelli/FLM external donor | actual twisted-even vector-space source, TF/TT intertwiners, mixed Jacobi/locality and all-mode selected isomorphism |
+| Y4: original action | existing Griess mode-one, UV and conditional transport owners | source-selected action on actual generators, equivariance against canonical Monster, full Aut theorem |
+| Y5: capstone | existing composed conditional endpoint | fully inhabit Y2–Y4 on the same group/VOA carrier; original kernel checked proof |
+
+**P0 execution:** prioritize group quotient *faithfulness/injectivity* and the actual original VOA intertwiners, not more word-list arithmetic. The 80-relator source already gives the useful node-word transport conditionally. Preserve the full Bimonster as a **separate** wreath/swap object; existing `FiniteWreathRefinementExact` is a possible generic syntax donor, not a historical Bimonster isomorphism.
+
+### Cross-PR reuse, no promotion between independent scientific frontiers
+
+- [#1476 AFQMC](https://github.com/chboishabba/dashi_agda/pull/1476): compressed-state finite-walker interfaces, actual two-site Hubbard multi-step and sampling-sweep scripts; outstanding original shadow arrays, nickel Hamiltonian/trial, phaseless importance sampling, statistical uncertainty and same-source chemistry comparison. No generic quantum reimplementation.
+- [#1444 YM](https://github.com/chboishabba/dashi_agda/pull/1444) and [#1470 integration](https://github.com/chboishabba/dashi_agda/pull/1470): keep the original Wilson/CMP119 full-clustering, R583 OS4 source inputs, E1 continuum and B2 full-sector gap separate from conditional observer/KK/signature transports. Existing BCH/OS4/Hamiltonian and generic compact-simple machinery reused.
+- [#1474 Conway/Karp](https://github.com/chboishabba/dashi_agda/pull/1474) and [#1445 Karp](https://github.com/chboishabba/dashi_agda/pull/1445): native binary gamma all-word numerical and validity bridges, comparison-count bounds already source-written. Remaining binary-machine clock, signed operations, E20 full-word transducer, Cook–Levin, historical network and independent P≠NP lower bound. Do not reopen old canonical codec tasks.
+- [#1472 Y443/VOA](https://github.com/chboishabba/dashi_agda/pull/1472): JMD words and source graph laws are not absent; selected isomorphism and VOA laws remain the real gates.
+
+No ESD surfaces or attribution ownership changed.
