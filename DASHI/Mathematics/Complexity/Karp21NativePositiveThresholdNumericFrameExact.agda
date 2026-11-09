@@ -20,7 +20,8 @@ open import Data.List.Base using (reverse; _++_; length)
 import Data.List.Properties as ListP
 import Data.Nat.Properties as NatP
 open import Data.Nat.Base using (_∸_)
-open import Data.Product using (Σ; _,_)
+open import Data.Maybe.Base using (Maybe; nothing; just)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -29,6 +30,10 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21GammaBinarySignedPayloadValueCutExact as Frame
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
+import DASHI.Mathematics.Complexity.Karp21SignedGammaAllWordFrameExtractionExact as Extract
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedSuffixExact as Suffix
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact as SignedValue
+import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNonzeroExact as Nonzero
 import DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact as Binary
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
 
@@ -81,3 +86,84 @@ nativePredecessorValueSameOriginalGamma payload
 -- arithmetic proof above therefore identifies the exact original
 -- source threshold magnitude that the positive-only native parser
 -- is supposed to return.
+
+------------------------------------------------------------------------
+-- Strict original positive gamma threshold: SAME WORD, SAME suffix,
+-- rejection at zero and malformed/truncated words. No new codec.
+------------------------------------------------------------------------
+
+observedPositiveGamma :
+  Maybe (Word.BitWord × Word.BitWord) →
+  Maybe (Nat × Word.BitWord)
+observedPositiveGamma nothing = nothing
+observedPositiveGamma (just (magnitude , suffix)) =
+  just (Value.valueLE magnitude , suffix)
+
+originalStrictPositiveGamma :
+  Word.BitWord → Maybe (Nat × Word.BitWord)
+originalStrictPositiveGamma word with Old.readGamma word
+... | nothing = nothing
+... | just (zero , suffix) = nothing
+... | just (suc k , suffix) = just (suc k , suffix)
+
+nativeGammaCanonicalFrame :
+  (payload suffix : Word.BitWord) →
+  Gamma.readGammaBinary (Frame.originalGammaFrame payload suffix)
+    ≡ just (true ∷ payload , suffix)
+nativeGammaCanonicalFrame payload suffix
+  rewrite Frame.originalGoldenZeroPrefixSame (length payload)
+        | Gamma.readGammaBinaryPayloadExact payload suffix = refl
+
+-- Every complete original gamma frame: exact value and cursor, with
+-- correctly rejected threshold zero and redundant zero representations.
+nativePositiveGammaCanonicalFrameSameOriginal :
+  (payload suffix : Word.BitWord) →
+  observedPositiveGamma
+    (Positive.readPositiveGammaLE
+      (Frame.originalGammaFrame payload suffix))
+    ≡ originalStrictPositiveGamma
+      (Frame.originalGammaFrame payload suffix)
+nativePositiveGammaCanonicalFrameSameOriginal payload suffix
+  rewrite nativeGammaCanonicalFrame payload suffix
+        | Old.readGammaPayloadExact payload suffix
+        | sym (nativePredecessorValueSameOriginalGamma payload)
+  with Positive.anyOne
+    (Positive.predecessorLE (reverse (true ∷ payload))) in nonzero
+... | false
+  rewrite Nonzero.anyOneFalseMeansZero
+    (Positive.predecessorLE (reverse (true ∷ payload))) nonzero = refl
+... | true
+  with Nonzero.anyOneTrueMeansPositive
+    (Positive.predecessorLE (reverse (true ∷ payload))) nonzero
+... | k , positive
+  rewrite positive = refl
+
+-- On source gamma failure the ORIGINAL readGamma also fails, not
+-- merely its signed reader. This uses the earlier all-word suffix
+-- theorem and forbids a native-only false positive.
+originalGammaFailureFromNativeFailure :
+  (word : Word.BitWord) →
+  Gamma.readGammaBinary word ≡ nothing →
+  Old.readGamma word ≡ nothing
+originalGammaFailureFromNativeFailure word failed =
+  SignedValue.suffixNoneImpliesNothing (Old.readGamma word)
+    (trans
+      (sym (Suffix.nativeGammaOriginalSuffixAllWords word))
+      (cong Suffix.suffixBits failed))
+
+-- All possible source input words, including malformed gamma headers,
+-- incomplete payloads, zero-positive threshold and arbitrary suffix.
+-- This does NOT yet validate the original complete graph-word fields.
+nativePositiveThresholdParserSameOriginal :
+  (word : Word.BitWord) →
+  observedPositiveGamma (Positive.readPositiveGammaLE word)
+    ≡ originalStrictPositiveGamma word
+nativePositiveThresholdParserSameOriginal word
+  with Gamma.readGammaBinary word in parsed
+... | nothing
+  rewrite originalGammaFailureFromNativeFailure word parsed = refl
+... | just (numeral , suffix)
+  with Extract.nativeGammaSuccessIsOriginalCanonicalFrame
+    word numeral suffix parsed
+... | payload , canonical rewrite canonical =
+  nativePositiveGammaCanonicalFrameSameOriginal payload suffix
