@@ -29,6 +29,9 @@ import DASHI.Analysis.BishopOriginalFiniteLogQuotientUniformModulusExact as Modu
 import DASHI.Analysis.BishopOriginalFiniteLogExpQuotientDefectSplitExact as Delta
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
 import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geo
+import DASHI.Analysis.BishopOriginalShiftedFactorialUniformModulusExact as Shift
+import DASHI.Analysis.BishopOriginalExpOriginDividedDifferenceSeriesExact as Origin
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 open import Data.Rational.Unnormalised using (1ℚᵘ)
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
 
@@ -188,3 +191,57 @@ originalNegativeLogIncrementUniformRadiusBound
         (originalSourceFiniteLogQuotientRadiusDominance
           x h radius xNN yNN xInside yInside n)
         (RP.nonNeg∣x∣ h)))
+
+------------------------------------------------------------------------
+-- Original shifted-factorial quotient controlled by an explicit
+-- COMMON mesh radius, not an independent epsilon at every vertex.
+------------------------------------------------------------------------
+
+originalFiniteLogRadiusDerivativeNonnegative :
+  (radius : R.ℝ) →
+  R.NonNegative radius →
+  (n : Nat) →
+  R.NonNegative (Geo.negativeLogDerivativePolynomial radius n)
+originalFiniteLogRadiusDerivativeNonnegative radius radiusNN n =
+  RP.nonNeg-cong
+    (Second.originalFiniteLogQuotientAtZeroIsDerivativePolynomial
+      radius n)
+    (sourceFiniteLogQuotientNonnegative
+      radius R.0ℝ radiusNN
+      (RP.nonNeg-cong
+        (RP.≃-symm (RP.+-identityʳ radius)) radiusNN)
+      n)
+
+originalFiniteLogShiftedFactorialStagewiseMeshBound :
+  (n : Nat) (radius x h : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (yNN : R.NonNegative (R._+_ x h)) →
+  (xInside : R._≤_ x radius) →
+  (yInside : R._≤_ (R._+_ x h) radius) →
+  let
+    p = Geo.negativeLogDerivativePolynomial radius n
+    rho = R._*_ (R.∣ h ∣) p
+    delta = Delta.sourceOriginalNegativeLogDelta n x h
+  in
+  R._≤_
+    (R.∣ R._-_
+      (Origin.originalExpOriginQuotient delta)
+      R.1ℝ ∣)
+    (R._-_ (Exp.bishopExp rho) R.1ℝ)
+originalFiniteLogShiftedFactorialStagewiseMeshBound
+    n radius x h xNN yNN xInside yInside =
+  let
+    p = Geo.negativeLogDerivativePolynomial radius n
+    rho = R._*_ (R.∣ h ∣) p
+    delta = Delta.sourceOriginalNegativeLogDelta n x h
+    radiusNN = Modulus.sourceRadiusNonnegative
+      x radius xNN xInside
+    rhoNN = RP.nonNegx,y⇒nonNegx*y
+      (RP.nonNeg∣x∣ h)
+      (originalFiniteLogRadiusDerivativeNonnegative
+        radius radiusNN n)
+  in
+  Shift.originalShiftedFactorialExpQuotientUniformModulus
+    rho rhoNN delta
+    (originalNegativeLogIncrementUniformRadiusBound
+      n radius x h xNN yNN xInside yInside)
