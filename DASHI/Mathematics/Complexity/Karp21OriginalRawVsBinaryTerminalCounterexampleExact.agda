@@ -23,12 +23,13 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (just)
 
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawListMachineExact as Raw
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact as Binary
 
-oneLE : DASHI.Mathematics.Complexity.FiniteWordSizeExact.BitWord
+oneLE : Word.BitWord
 oneLE = true ∷ []
 
 oldCompletedCursor : Raw.State
