@@ -622,3 +622,93 @@ conditions. This result does **not** solve the nonlinear implicit
 reaction–transport PNP fixed point P0.05, entropy dissipation P0.06,
 or open/reactive face work P0.07. The native 369/pants geometry is
 preserved; flattening is only an integer matrix computation chart.
+
+
+### 2026-11-09 P0.06 conditional CLOSED-BOUNDARY entropy theorem (exact derivation)
+
+Under the existing selected positive and constant physical parameters,
+**strictly positive** source concentrations, original 54 native
+Scharfetter–Gummel bonds, **blocking ion boundary**, all-six-face
+zero Dirichlet potential, source-provided charge-neutral gross
+stoichiometric sides, strictly positive detailed-balanced reversible
+rate pairs, and constant positive `epsilon, RT, F, h`, we can
+discharge the mathematical **conditional** free-energy inequality
+for every *positive EXACT* coupled backward-Euler root.
+
+Let `A = epsilon L_h`; the exact native integer sum-of-squares
+coercivity decomposition established above proves `A` is
+symmetric positive definite, so `phi(c)=A^{-1}rho(c)` is
+uniquely defined. Define
+
+```text
+G(c) = h³ [ RT∑_{v,s} c_vs(log c_vs−1)
+            + ∑_{v,s} mu0_s c_vs
+            + (1/2) rho(c)^T A^{-1} rho(c) ],
+rho_v(c) = F∑_s z_s c_vs + rho_fixed.
+```
+
+The `h³` outside the electrostatic term agrees with the exact
+`free_energy` implementation. Its gradient is
+`∂G/∂c_vs=h³ (RT log c_vs+mu0_s+F z_s phi_v)=h³ mu_vs`.
+The ideal chemical contribution has diagonal positive Hessian
+`h³ RT/c_vs` and the electrostatic contribution has a
+positive semidefinite Hessian. Therefore `G` is convex for
+strictly positive `c`.
+
+For a native face `a→b`, let
+`u_s=z_s F(phi_b−phi_a)/RT`, `q_a=c_as B(u_s)>0`,
+`q_b=c_bs B(−u_s)>0` and `B(u)=u/(exp(u)−1)`.
+The exact identity `B(−u)=exp(u) B(u)` gives
+`J_ab,s=(D_s/h)(q_a−q_b)` and
+`mu_bs−mu_as=RT(log q_b−log q_a)`. Thus
+
+```text
+J_ab,s (mu_bs−mu_as)
+ = −(D_s RT/h)(q_a−q_b)(log q_a−log q_b) <= 0.
+```
+
+For a real bulk reaction `r`, original gross substrate/product
+exponents `alpha_r,beta_r` determine the strictly positive
+forward/back activities `f_r,b_r` and net rate `v_r=f_r−b_r`.
+Detailed balance
+`log(kf_r/kb_r)=−(nu_r·mu0)/RT` together with source-paid
+`nu_r·z=0` proves
+`nu_r·mu=−RT(log f_r−log b_r)`, hence
+`v_r(nu_r·mu)=−RT(f_r−b_r)(log f_r−log b_r)<=0`.
+
+Summing the native finite-volume divergence and reaction terms,
+using internal-bond antisymmetry and zero species boundary flux,
+proves `<grad G(c),RHS(c)> <= 0` for every positive `c`.
+
+If a positive `c1` satisfies the **exact** implicit Euler equation
+`c1−c0 = dt RHS(c1)`, `dt>0`, convexity gives
+
+```text
+G(c1)−G(c0) <= <grad G(c1),c1−c0>
+             = dt <grad G(c1),RHS(c1)> <= 0.
+```
+
+No additional small-timestep restriction is needed for this
+**conditional inequality**. This does **not** establish existence
+of a strictly positive exact root (`P0.05`); a floating-point
+nonzero residual does not satisfy the exact equation. It also does
+not cover nonzero boundary exchanges, reactive electrodes,
+spatially varying dielectric without proof, arbitrary rate laws,
+or concentration zeros requiring limit/subgradient treatment.
+
+The original `scripts/reactive_pnp_369.py` now includes
+`closed_pnp_entropy_factorization` with per-bond and
+per-reaction numerical assays of the displayed exact algebraic
+identities. Committed regressions check the 54 source-native bonds,
+27 selected reaction instances, and explicit invalid activities.
+**Neither the new Python suite nor Agda was run at this head.**
+
+**Gate split:** P0.01 grounded-Dirichlet finite Poisson and P0.06
+**exact-positive-root conditional closed free-energy inequality**
+are mathematically established in this source derivation and
+source-written numeric checks; their Agda kernel certificates are
+OPEN. P0.05 root existence/positive continuation, original
+source kinetics and P0.07 real open/reactive boundary work remain
+OPEN. The proof should be ported into the existing appropriate
+Agda Bishop/PNP owner using original certified real inequalities
+rather than asserting an unconditional P0.06 closure.
