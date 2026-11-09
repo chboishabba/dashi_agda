@@ -3,7 +3,7 @@ module DASHI.Governance.CrenshawLegalAttributionCapstoneExact where
 -- Explicit attribution ladder:
 -- judicial opinion -> Crenshaw's academic interpretation -> DASHI model
 -- -> DASHI mathematical construction -> external legal adjudication.
--- Crenshaw's featured 1989 cases are DeGraffenreid, Moore, Payne.\n-- Jefferies is an independently selected DASHI positive comparator.\n-- These stages are distinct. None is automatically promoted by a citation.
+-- Crenshaw's featured 1989 cases are DeGraffenreid, Moore, Payne.\n-- Jefferies is Crenshaw-cited (1989 p.143 n.13), selected by DASHI\n-- for a detailed positive comparison, but not a featured case study.\n-- These stages are distinct. None is automatically promoted by a citation.
 open import DASHI.Core.Prelude
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Law.LegalAuthorityCitationExact as Legal
@@ -11,6 +11,8 @@ import DASHI.Core.IntersectionalNonFactorability as INF
 import DASHI.Governance.CrenshawLegalPrimaryCaseAtlasExact as Cases
 import DASHI.Governance.CrenshawLegalCaseComparisonExact as Comparison
 import DASHI.Governance.CrenshawLegalRepresentationRemedyExact as Rep
+import DASHI.Governance.Crenshaw1989PassageWeldExact as CrenshawSource
+import DASHI.Governance.CrenshawJudicialDisagreementExact as Disagreement
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -43,6 +45,12 @@ record LegalCrossCaseCut : Set₁ where
     separateMoorePayneDispositions :
       Rep.reportedDisposition Rep.moore
         ≡ Rep.reportedDisposition Rep.payne → ⊥
+    jefferiesCitedAsCounterexample :
+      CrenshawSource.crenshaw1989Role CrenshawSource.jefferies
+      ≡ CrenshawSource.citedContraryExample
+    payneMajorityDisagreementNotCollapsed :
+      INF.FactorsThrough
+        Disagreement.caseOnly Disagreement.position → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -57,4 +65,6 @@ crenshawLegalCrossCaseCut =
     Rep.classScopeCannotDetermineRemedy
     Comparison.jefferiesIntersectionalRecognitionPositiveControl
     Rep.mooreAndPayneHaveDistinctAppellateDispositions
+    CrenshawSource.jefferiesIsCitedByCrenshaw
+    Disagreement.caseCitationCannotSelectJudicialPosition
     refl refl
