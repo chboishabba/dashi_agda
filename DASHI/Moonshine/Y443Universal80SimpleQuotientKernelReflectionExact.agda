@@ -28,6 +28,8 @@ import DASHI.Moonshine.Y443JMDPowerFiveSixAlgebraExact as Algebra
 import DASHI.Moonshine.TwistedModuleModularity as TM
 import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as Actions
 import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as JMD
+import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
+import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
@@ -223,6 +225,38 @@ module OriginalSelectedJMDSource
     (JMD.groupWithInverse source)
     (JMD.nodes source)
     (JMD.relatorsHold source)
+
+
+  -- This is THE LITERAL source selected group action on the actual
+  -- selected Vnatural carrier. The older VOAGroupAction has only a
+  -- Set-valued identity-law field, so we request just the single
+  -- genuine identity action equation needed at the moved state.
+  SelectedState : Set
+  SelectedState =
+    VOA.GradedModule.Carrier
+      (VOA.VertexOperatorAlgebra.gradedModule
+        (VN.VNaturalConstruction.Vnatural (JMD.construction source)))
+
+  literalSelectedAction : G → SelectedState → SelectedState
+  literalSelectedAction =
+    VOA.VOAGroupAction.act (JMD.action source)
+
+  oneOriginalMovedStateImpliesNontrivialNode :
+    (n : Y.Node) (state : SelectedState) →
+    literalSelectedAction
+      (Pair.identity (JMD.groupWithInverse source)) state ≡ state →
+    literalSelectedAction (JMD.nodes source n) state ≢ state →
+    Real.ActualSelectedNontrivialNode
+  oneOriginalMovedStateImpliesNontrivialNode n state identityAt moves =
+    record
+      { Real.ActualSelectedNontrivialNode.witnessNode = n
+      ; Real.ActualSelectedNontrivialNode.witnessNonidentity =
+          λ equality →
+            moves (Algebra.trans
+              (Algebra.cong
+                (λ g → literalSelectedAction g state) equality)
+              identityAt)
+      }
 
   module FromHistoricalAndMovedState
     (simple : Original80SimpleCongruenceAuthority)
