@@ -87,17 +87,19 @@ nativeBinaryCountFuelSameOriginal (suc fuel) mLE word budget
       subst (λ m → m ≤ fuel) (sym predecessorEq)
         smallerBudget
   in
-  countFuelStep mLE word fuel k mEq predecessorEq recursiveBudget
+  countFuelStep mLE word fuel k nonzero mEq predecessorEq recursiveBudget
   where
     countFuelStep :
       (mLE word : Word.BitWord) (fuel k : Nat) →
+      Positive.anyOne mLE ≡ true →
       Value.valueLE mLE ≡ suc k →
       Value.valueLE (Positive.predecessorLE mLE) ≡ k →
       Value.valueLE (Positive.predecessorLE mLE) ≤ fuel →
       Edge.observeBinaryEdgeStream
         (Whole.readBinaryRawEdgesFuel (suc fuel) mLE word)
         ≡ Original.readRawEdges (Value.valueLE mLE) word
-    countFuelStep mLE word fuel k mEq predEq bound
+    countFuelStep mLE word fuel k positive mEq predEq bound
+      rewrite positive
       with Edge.readOneBinaryRawEdge word
          | Edge.oneBinaryEndpointRawEdgeSameOriginal word
     ... | nothing | firstEq
