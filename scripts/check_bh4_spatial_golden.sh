@@ -26,6 +26,7 @@ if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
 fi
 MODULES=(
   DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
+  DASHI/Biology/Molecular/BH4PanelRateWeightedConservationExact.agda
   DASHI/Biology/BH4OneMoleculeSpatialFutureMinimalityExact.agda
   DASHI/Biology/BH4SpatialOriginalQDPRStoichiometryExact.agda
   DASHI/Biology/BH4SharedSourceTargetRedoxDynamicsExact.agda
@@ -55,6 +56,11 @@ grep -q 'original29x12SpatialAllHistorySignedChargeBalance' \
   DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
 grep -q 'import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact' \
   DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+grep -q 'import DASHI.Biology.Molecular.BH4PanelRateWeightedConservationExact' \
+  DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+for lemma in original29x12RateWeightedCHNOPBalance original29x12RateWeightedSignedChargeBalance original369x29x12SpatialRateCHNOPBalance original369x29x12SpatialRateSignedChargeBalance; do
+  grep -q "$lemma" DASHI/Biology/Molecular/BH4PanelRateWeightedConservationExact.agda
+done
 
 python3 scripts/check_bh4_allocator_future_observer.py
 python3 scripts/check_bh4_spatial_circulation.py
