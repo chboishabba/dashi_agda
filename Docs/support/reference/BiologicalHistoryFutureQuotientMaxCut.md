@@ -881,3 +881,86 @@ The full methods/counts are recorded in
 PNF mutation was introduced.** Both require source-specific review and
 physical data; fitting arbitrary trajectories or promoting ontology
 labels would violate the source-trust boundary.
+
+
+## 2026-11-09 cross-PR reuse-first frontier and exact phase ledger
+
+**Scope/authority:** This section is a cross-PR coordination ledger, not a declaration
+that a theorem on another open branch has been imported or kernel-certified.
+Original owners remain in their own repositories. Do not edit ESD sources,
+create a second orchestrator/PNF store, or promote operational receipts to proofs.
+
+### Current verified source owners and boundaries
+
+- Biology PR #1471: `BiologicalMinimalMorphologyFutureQuotientExact`
+  already proves both directions of canonical future equivalence for its selected
+  18-class morphology code, and a depth-four finite compiler owner exists.
+  `BiologicalMinimalMorphologyAdversarialRefinementExact` already proves
+  `original18ClassProjectionNotSafeUnderNewDynamics`.
+- This head adds `everySafeMarkerProjectionSeparatesWitness`: for any candidate
+  projection of the *same* biological-state carrier, future-language safety
+  for the selected marker-sensitive transition forces it to distinguish
+  `withoutMemory` from `differentMarker`. The direct specialization
+  `original18ClassFailureFromNecessarySeparation` rederives the original
+  no-go result without another observer framework.
+- TSVF/KK PR #1460 owns `originalPastReconstructedFromSection`,
+  `originalLateTerminalNotFibreConstant`,
+  `noLaterTerminalDecoderFromPast`, and
+  `originalObserverResidualReopening`. The carrier/consumer identity
+  needed to apply these to biological observations is **not proved**.
+- Agda PR #1442 owns signed-history expert transport and stale-history/model
+  rejection. Agda PR #1447 owns authenticated source admission.
+  Agda PR #1462 owns `SLRNoPathFirewallExact` negative authority routes.
+- Lean PR #91 owns `Integration/ResidualTaxonomy.lean`, including
+  `reconstructive_injective`, transfer-consumer factorization and a
+  concrete relational nonfactorability theorem. Lean does not certify Agda.
+- ITIR-suite #35/#37/#58/#64 own operator workflow, fleet lanes,
+  PostgreSQL formal receipts and event replay. ITIR-suite #72 owns the
+  candidate-only GO-CAM/SBML/spatial source bridge. The end-to-end run
+  has not been independently verified here.
+- Digital-ESD #1458/#1465 provide *prior art only* for dependency-scoped
+  revision and source-numeric firewalls. Keep that domain and its files
+  independent; import only after an exact typed correspondence.
+
+### Phases and precise remaining obligations
+
+| Phase | Priority | Exact obligation | Canonical reuse / exit evidence |
+| --- | --- | --- | --- |
+| P0 owner reconcile | P0 | `canonicalObserverCarrierSameObject`; `canonicalObservationConsumerCorrespondence`; `canonicalHistoryActionCorrespondence`; branch-safe imports | Pinned source SHAs and actual commuting maps; do not infer from names |
+| P1 quotient | P0 | `futureSafeIffConsumerFactors`; `newObservationRefinesOldEquivalence`; `unaffectedClassesPreserved`; `refinementIsCoarsestSafeExtension`; `finiteCompilerComputesRequiredRefinement` | Reuse existing 18-class equivalence and compiler; all chosen future histories quantified |
+| P1 adverse control | completed source / kernel pending | `everySafeMarkerProjectionSeparatesWitness`; `original18ClassFailureFromNecessarySeparation` | Same biological carrier, explicit marker probe and `false≢true` witness |
+| P1 TSVF transport | P0 | `lostInformationPreventsDecoder`; `sectionedResidualReopeningEquivalent` | Actual same-object carrier and consumer map; no generic-to-physical promotion |
+| P2 dependency scope | P0 | `changedObservationDeterminesAffectedFibres`; `dependencyClosureOfChangedFibres`; `independentCertificateRemainsValid`; `affectedCertificateRequiresRecheck`; `withdrawnEvidenceReopensExactlyDependents`; `selectiveRecheckSoundAndComplete` | A complete, source-bound declared dependency graph is a precondition |
+| P3 governance | P1 | `sourceIdentityPreservedUnderTransport`; `historyRevisionMismatchRejects`; `modelRevisionMismatchRejects`; `authenticatedEvidenceRequiredForAdmission`; `candidateCannotPromoteItself`; `forbiddenRouteCannotYieldCertificate`; `formalCertificateRequiresGoldenReceipt` | Existing #1442/#1447/#1462 owners and kernel receipt identity |
+| P4 fleet | P1 | FLT-01..09: input identity, PG lookup, selective event, disjoint lane, exact-SHA checker, receipt, idempotent replay, withdrawal replay, negative tests | Existing ITIR #35/#37/#58/#64; real execution receipts |
+| P5 physical evidence | P2 | BIO-01..08: real model semantics, source joins, compartments and circulation, kinetics, parameters, assay comparison and reviewed PNF reconciliation | Biology #1471, BH4 #1454, ITIR #72; no physical calibration presumed |
+| P6 acceptance/TOE | continuous | GOLD-01..08: branch closure, Agda `--safe`, no escape, focused regressions, Lean comparison, existing Unified/Unifier/TOE root import, receipt-linked docs | Exact-head locally executed Golden referee and trusted repository commit |
+
+### Execution and acceptance order
+
+1. Reuse the source-proved necessary marker separation instead of implementing
+   a new generic quotient. Test this head with the existing Golden entrypoint.
+2. Reconcile same-object carrier and observation maps before trying to
+   transport TSVF, Lean or ESD results. No false cross-domain isomorphism.
+3. Implement dependency-scoped rechecking against canonical source identities;
+   distinguish invalidated certificates from false theorems.
+4. Use existing ITIR fleet/runtime and PostgreSQL receipts, with negative
+   admission and replay tests. Do not invent a parallel ledger or scheduler.
+5. Calibrate original physical biology separately; keep GO-CAM/SBML and
+   spatial joins candidate-only pending native review.
+6. Normalize accepted results into *existing* canonical TOE roots only when
+   imports and exact-head Agda acceptance have been demonstrated.
+
+### Golden status and explicit non-promotion
+
+The two new marker-projection lemmas have been **source-written** on this
+branch. No local Agda 2.9/parallel_checker run has been performed in this
+connector session. The original 18-class source result does not prove
+physical organismal future equivalence. No actual cross-PR merges, measured
+physical calibration, independent fleet execution, or theorem acceptance
+have been claimed by this section.
+
+Other independent Clay fronts remain separate: YM E1/D1/D2/N1/G1,
+Lorentz/KK physical metric and OS identification, Monster/Y443 group/VOA
+same-action identification, Karp-21 complete compiler and reduction network,
+and the original-source numerical AFQMC replication.
