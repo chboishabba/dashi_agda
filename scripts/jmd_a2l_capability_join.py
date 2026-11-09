@@ -70,7 +70,7 @@ def verify_source(conn: sqlite3.Connection, capability: dict) -> bool:
 def ingest(conn: sqlite3.Connection, capability: dict) -> bool:
     ready=verify_source(conn,capability)
     conn.execute("""INSERT INTO jmd_world_a2l_capabilities
-       VALUES(?,?,?,?,?,?,?,?,?,?,'translation-capability-only',0)
+       VALUES(?,?,?,?,?,?,?,?,?,'translation-capability-only',0)
        ON CONFLICT(declaration) DO UPDATE SET
          module=excluded.module,mode=excluded.mode,
          object_hash=excluded.object_hash,
