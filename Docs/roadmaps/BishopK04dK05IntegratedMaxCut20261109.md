@@ -686,3 +686,38 @@ semantic identification of the original world/group completion,
 or the original Bishop analytic P1/P2/P3 theorems. See
 `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for the maintained exact unpaid cut and commit receipts.
+
+
+### 2026-11-09: reuse already-proved non-discrete pullback/topology
+
+Correcting the previous proof inventory: the original
+`RelationalStageTwelveGrothendieckExtensionExact` already owns
+the seven-object A/B/C category, nonidentity restriction arrows,
+three-chart covering sieve, `pullbackSieve` via the Stage-12 API,
+stability and transitivity. This *pre-existing* topology should
+not have been listed as an unproved construction.
+
+New source work now specializes the original 4+4+4 twelve-axis
+valuation plus independently retained central `TriTruth` to that
+actual triadic cover. It constructs the compatible local triple,
+genuine glue and restrictions, uniqueness, pullback-stability reuse,
+and depth-13 pants transport. A separate indexed
+`Section : RelObj → Set` presheaf has restriction maps on all
+original relational arrows with identity/composition laws.
+
+The original `SectionedProjectionProvenanceBridgeExact` and
+`PredicatePullbackLatticeExact` now implement the same-source
+central projection's observable/predicate pullback,
+representative-based projection ('selected pushforward'), and
+exact fine-state reopening using the residual central trit.
+A representative pushforward is **not** advertised as a
+general categorical direct-image functor.
+
+The only outstanding H2.02 site theorem is **all-covering-sieve
+descent and uniqueness** for the already-built topology; source
+semantic identification and independent world-model consumers
+remain separate. Original Bishop Cayley, zeta and Gamma/Xi
+analytical gates remain OPEN.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and per-commit receipts.
