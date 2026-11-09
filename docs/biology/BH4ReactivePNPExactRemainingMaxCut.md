@@ -506,3 +506,63 @@ physical parameters or original measurements are supplied by this
 documentation. The CLI has **not** been executed at the updated head.
 Its output, if accepted, remains a closed-boundary numerical
 candidate, not `sameSourcePhysicalReactionTransportStep` in Agda.
+
+
+## 2026-11-09 P0.06: exact convexity/remainder theorem for closed grounded PNP
+
+**New source-written numerical theorem checker** (assistant-authored verification
+assistance, not original BH4 physical evidence):
+`scripts/bh4_closed_pnp_free_energy_remainder.py`.
+The four-test suite `scripts/test_bh4_closed_pnp_free_energy_remainder.py`
+has been wired into the native `check_bh4_spatial_golden.sh` preflight.
+
+For the selected **closed, blocking-material, zero-Dirichlet grounded**
+discretization with positive concentrations and fixed `mu0`, `RT`,
+`h`, `F`, `epsilon`, write `F(c)` for the ideal chemical and
+quadratic electrostatic free energy and `mu1` for its electrochemical
+gradient at positive candidate `c1`. For any positive `c0,c1` and
+positive timestep `dt`, define the actual implicit residual
+`delta = c1-c0-dt*L(c1)`. Then the **exact mathematical identity** is
+
+`F(c1)-F(c0) = dt*(P_transport(c1)+P_reaction(c1))
+                + h^3*sum(mu1*delta) - K_chemical - K_electrostatic`,
+
+where
+`K_chemical = h^3*RT*sum(c0*log(c0/c1)-c0+c1) >= 0` and
+`K_electrostatic = (h^3/2)*(rho0-rho1)^T*A^-1*(rho0-rho1) >= 0`.
+`A = epsilon*L_grounded` is strictly positive definite by the
+previous P0.01 grounded certificate. The transport/reaction powers
+are computed from the **same state** and 54-bond solver operator.
+For source-independent detailed balance and positive coefficients
+both powers are nonpositive. Consequently an **exact** implicit root
+obeys `F(c1)<=F(c0)`, conditional on the stated model.
+
+For a numerical candidate the proof does **not** erase `delta`:
+`F(c1)-F(c0) <= dt*(P_transport+P_reaction)
+                  + h^3*sum(abs(mu1))*max(abs(delta))`.
+The script now returns the exact decomposition diagnostics,
+nonnegative Bregman gaps, residual work, absolute residual-work bound,
+and total energy upper bound. It never marks root existence or Agda
+kernel acceptance true. A local independent 27-site/3-species
+positive-state reconstruction checked the convexity/remainder identity
+to approximately `1.1e-14` residual; the committed four-test suite
+has **not yet been executed in this environment**. The repository
+Golden command is now configured to run it before Agda.
+
+**New named acceptance leaves:**
+- P0.06a `original369GroundedPNPConvexityRemainderExact`: formalize
+  the displayed identity and nonnegative Bregman gaps in the pinned
+  analytic/finite-matrix theory; no imported proof beyond mathematics
+  and Python diagnostics. **OPEN Agda kernel**.
+- P0.06b `original369GroundedPNPExactRootDissipates`: from a
+  **witnessed exact implicit root**, the SG transport sign, reaction
+  detailed balance and zero boundary work, infer `F1<=F0`.
+  Analytical implication established, **OPEN Agda kernel/root witness**.
+- P0.06c `original369PNPDiscreteFreeEnergyDissipation`:
+  extend to original 29x12 source rates, genuinely selected boundary
+  reactions/reservoir energy and independently source-supported
+  parameters. **OPEN S0.01–04, P0.05 and P0.07**.
+
+No physical step existence, independent measurements, original source
+certificate, continuum/physiological identification or ITIR promotion
+has been achieved by this conditional analytic implication.
