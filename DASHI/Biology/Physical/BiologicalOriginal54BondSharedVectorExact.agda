@@ -268,3 +268,93 @@ originalBondLocalTargetCreditIsPaid :
 originalBondLocalTargetCreditIsPaid bond state =
   Transfer.lookupAfterCredit
     (originalPointIndex (Grid.bondEnd bond)) state
+
+
+------------------------------------------------------------------------
+-- PHYSICALLY TYPED DIRECTED HISTORIES. Unlike an unconstrained list
+-- of Fin 27 pairs, each constructor carries a genuine original
+-- nearest-neighbour bond, either forward or reversed.
+------------------------------------------------------------------------
+
+data OriginalDirectedNativeBond : Set where
+  forwardNative : Grid.PositiveBond → OriginalDirectedNativeBond
+  reverseNative : Grid.PositiveBond → OriginalDirectedNativeBond
+
+nativeDirectedSource : OriginalDirectedNativeBond → F.Fin 27
+nativeDirectedSource (forwardNative bond) =
+  originalPointIndex (Grid.bondStart bond)
+nativeDirectedSource (reverseNative bond) =
+  originalPointIndex (Grid.bondEnd bond)
+
+nativeDirectedTarget : OriginalDirectedNativeBond → F.Fin 27
+nativeDirectedTarget (forwardNative bond) =
+  originalPointIndex (Grid.bondEnd bond)
+nativeDirectedTarget (reverseNative bond) =
+  originalPointIndex (Grid.bondStart bond)
+
+applyNativeDirectedBond :
+  OriginalDirectedNativeBond → V.Vec Nat 27 → V.Vec Nat 27
+applyNativeDirectedBond action state =
+  Transfer.transferOne
+    (nativeDirectedSource action) (nativeDirectedTarget action) state
+
+runOriginalDirectedNativeHistory :
+  List OriginalDirectedNativeBond → V.Vec Nat 27 → V.Vec Nat 27
+runOriginalDirectedNativeHistory [] state = state
+runOriginalDirectedNativeHistory (action ∷ rest) state =
+  runOriginalDirectedNativeHistory rest
+    (applyNativeDirectedBond action state)
+
+everyNativeDirectedBondConserves :
+  (action : OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) →
+  V.sum (applyNativeDirectedBond action state) ≡ V.sum state
+everyNativeDirectedBondConserves action state =
+  Transfer.everyDirectedPairConservesSharedInventory
+    (nativeDirectedSource action) (nativeDirectedTarget action) state
+
+everyChronologicalOriginalDirectedHistoryConserves :
+  (history : List OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) →
+  V.sum (runOriginalDirectedNativeHistory history state)
+    ≡ V.sum state
+everyChronologicalOriginalDirectedHistoryConserves [] state = refl
+everyChronologicalOriginalDirectedHistoryConserves
+  (action ∷ rest) state =
+  trans
+    (everyChronologicalOriginalDirectedHistoryConserves rest
+      (applyNativeDirectedBond action state))
+    (everyNativeDirectedBondConserves action state)
+
+-- The *same observer voxel* is outside every certified physical
+-- movement in the history. The evidence is recursively indexed by
+-- the actual directed-bond list and cannot silently admit remote
+-- synthetic pair actions.
+data NativeHistoryAvoids (observer : F.Fin 27) :
+  List OriginalDirectedNativeBond → Set where
+  avoidsEmpty : NativeHistoryAvoids observer []
+  avoidsCons :
+    ∀ {action rest} →
+    ¬ (nativeDirectedSource action ≡ observer) →
+    ¬ (nativeDirectedTarget action ≡ observer) →
+    NativeHistoryAvoids observer rest →
+    NativeHistoryAvoids observer (action ∷ rest)
+
+nativeHistoryLeavesUnvisitedVoxelUnchanged :
+  (observer : F.Fin 27)
+  (history : List OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) →
+  NativeHistoryAvoids observer history →
+  V.lookup (runOriginalDirectedNativeHistory history state) observer
+    ≡ V.lookup state observer
+nativeHistoryLeavesUnvisitedVoxelUnchanged observer [] state
+  avoidsEmpty = refl
+nativeHistoryLeavesUnvisitedVoxelUnchanged observer (action ∷ rest)
+  state (avoidsCons sourceAway targetAway restAway) =
+  trans
+    (nativeHistoryLeavesUnvisitedVoxelUnchanged observer rest
+      (applyNativeDirectedBond action state) restAway)
+    (Transfer.lookupTransferAwayFromEndpoints
+      (nativeDirectedSource action)
+      (nativeDirectedTarget action)
+      observer state sourceAway targetAway)
