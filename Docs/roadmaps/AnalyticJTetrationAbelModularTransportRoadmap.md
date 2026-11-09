@@ -92,8 +92,8 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 
 **Deliverable:** reproducible comparisons to the Kouznetsov image, not pixel resemblance masquerading as proof.
 
-- [ ] **P4.01** `originalTetrationContourLevelSets`: define `|F(z)|=r` and `arg F(z)=θ` with explicit zeros and phase branch rules.
-- [ ] **P4.02** `originalContourUnderOneHeightShift`: derive contour transformation from `F(z+1)=exp(F(z))`.
+- [~] **P4.01** `originalTetrationContourLevelSets`: `JInvariantTetrationOriginalComplexContourExact.agda` now source-writes exact **squared-modulus** level sets on the original `ConcreteComplex.normSqC`, plus `nextModulusLevel`; square-root modulus, comparison/positivity, phase branch and original Kneser construction remain open.
+- [~] **P4.02** `originalContourUnderOneHeightShift`: `nextModulusSquared`, `nextModulusFromCartesian` and `nextPhase` are source-written for a chart whose tetration equation is explicit; kernel acceptance and concrete analytic chart remain open.
 - [ ] **P4.03** `originalContourCriticalAndSingularLoci`: identify analytically certified critical/branch loci and separate numerical evidence.
 - [ ] **P4.04** `originalKouznetsovCalibrationReceipt`: record source provenance, normalization, parameter and plotting method; cross-check generated samples.
 - [ ] **P4.05** `originalContourObserverRetainsAnalyticFibre`: verify finite colours/ternary labels do not assert reversible reconstruction of full complex phase.
@@ -138,7 +138,7 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 
 ## Current proof status
 
-**P0 and P0b conditional algebraic transport and original-owner non-descent bridge source-written; original level-3/9/27 carrier instances, 27→9→3 naturality, and identity negative control are source-written, not yet kernel-checked. Nonfinite p-adic/hypercomplex carrier instances, P1/P1b, P2, P3 and P4 remain open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
+**P0 and P0b conditional algebraic transport and original-owner non-descent bridge source-written; original level-3/9/27 carrier instances, 27→9→3 naturality, identity negative control and P4's constructed-complex conditional contour shift are source-written, not kernel-checked. Actual nonfinite Abel carrier, P1/P1b/P2/P3 and original Kneser contour realization remain open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
 
 ## 2026-11-09 continuation receipt
 
@@ -171,3 +171,12 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - Original no-fixed-point results `level9TranslationNoFixedPoint` and `level27TranslationNoFixedPoint` are consumed; observer/residue roundtrips are reexported with local theorem names.
 - Kernel acceptance and transitive import verification remain open. GitHub connector successfully wrote the sources; the local container cannot resolve github.com and has no Agda executable. No compiler status is claimed.
 - **Decisive analytic frontier unchanged:** actual `originalSelectedAbelSemiconjugacy`, `originalLocalAbelCoordinateExists`, `originalExponentiationJInvariantSameObject` and Kneser calibration. Extending the finite tower does not discharge these analytic gates.
+
+## 2026-11-09 original-complex contour continuation
+
+- New `DASHI/Moonshine/JInvariantTetrationOriginalComplexContourExact.agda` consumes the actual `DASHI.Analysis.ConcreteComplex` constructed complex package and `normSqC`; the chart takes an explicit tetration recurrence rather than manufacturing a Kneser function.
+- `nextModulusSquared` and `nextModulusLevel` transport genuine original-carrier squared-modulus contours across one height step. `nextModulusFromCartesian` uses the supplied original `expCartesian` law to express the resulting contour through real exponential, cosine and sine.
+- `nextPhase` is explicitly phase-chart-indexed; no global argument exists without a zero/branch exclusion. The phase-map implementation is **not** an original Kneser argument construction.
+- The original analytic package includes `ConcreteComplex`, `PrincipalComplexLog`, `OrdinaryComplexPolar`, `TerminalConstructedAnalyticModel`; the terminal singleton complex model is **not** a faithful analytic complex field and must not be promoted as Kneser validation.
+- **Still to implement:** `originalComplexTetrationChartInstance` with source-constructed analytic `F`; `originalComplexHeightAdvanceSameObject`, `originalLocalAbelCoordinateExists`, `originalSelectedAbelSemiconjugacy`, `originalModularJTranslationInvariance`, `originalExponentiationJInvariantSameObject`, `originalFiniteObserverTransportSquare`, `originalPrincipalPhaseContourBranch`, `originalKouznetsovCalibrationReceipt`.
+- **Kernel:** this source, like earlier PR additions, remains unverified until an Agda compiler runs. This is a correctness gate, not a CI requirement.
