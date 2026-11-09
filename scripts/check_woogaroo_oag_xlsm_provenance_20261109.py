@@ -10,7 +10,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile, ZIP_DEFLATED
-from posixpath import normpath, dirname, join
+from posixpath import normpath, join
 
 M='{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
 R='{http://schemas.openxmlformats.org/officeDocument/2006/relationships}'
@@ -52,13 +52,18 @@ def scan(path:Path)->dict:
             for rel in relroot.findall(PR+'Relationship'):
                 rid=rel.get('Id')
                 target=rel.get('Target','')
-                if rel.get('TargetMode')=='External':
+                if rel.get('TargetMode')=='External' or not rid or not target:
                     continue
-                candidate=normpath(join('xl',target.lstrip('/'))) if not target.startswith('/') else target.lstrip('/')
+                candidate=normpath(join('xl',target)) if not target.startswith('/') else target.lstrip('/')
                 if candidate.startswith('xl/worksheets/') and candidate in names:
                     relmap[rid]=candidate
         for sheet in sheets:
             sheet['worksheet_part']=relmap.get(sheet['relationshipId'])
+        unresolved=[s['name'] for s in sheets if s['worksheet_part'] is None]
+        # Do not silently accept a workbook where the reported logical
+        # sheet name has no authenticated-in-package worksheet join.
+        if not sheets or unresolved:
+            raise ValueError('Unresolved declared worksheet relationship: '+repr(unresolved))
         extracted=[]
         for name in sorted(n for n in names if n.startswith('xl/worksheets/')
                            and n.endswith('.xml') and '/_rels/' not in n):
@@ -70,6 +75,7 @@ def scan(path:Path)->dict:
                 if f is not None or v is not None:
                     cells.append({'cell':c.get('r'),'type':c.get('t'),
                                   'formula':f.text if f is not None else None,
+                                  'formula_attributes':dict(f.attrib) if f is not None else None,
                                   'cached_value':v.text if v is not None else None})
             extracted.append({'part':name,'cells':cells})
         return {'case':'EPBC 2019/8575','status':'UNVERIFIED_WORKBOOK_CANDIDATE',
@@ -102,6 +108,25 @@ def selftest():
         assert good['formula_count']==1 and not good['approved_original_authenticated']
         assert good['sheet_cells'][0]['cells'][1]['formula']=='A1*4'
         assert good['sheets_declared'][0]['worksheet_part']=='xl/worksheets/sheet1.xml'
+        assert good['declared_sheet_links_resolved']
+        # Missing relationship mapping must fail closed.
+        bad_wb=wb.replace('r:id="rId5"','r:id="rId999"')
+        with ZipFile(p,'w',compression=ZIP_DEFLATED) as z:
+            z.writestr('[Content_Types].xml','<Types/>')
+            z.writestr('xl/workbook.xml',bad_wb)
+            z.writestr('xl/_rels/workbook.xml.rels',rels)
+            z.writestr('xl/worksheets/sheet1.xml',ws)
+        try:
+            scan(p)
+            raise AssertionError('missing sheet relationship accepted')
+        except ValueError as exc:
+            assert 'Unresolved' in str(exc)
+        # Restore a valid package and test macro/external-part flagging.
+        with ZipFile(p,'w',compression=ZIP_DEFLATED) as z:
+            z.writestr('[Content_Types].xml','<Types/>')
+            z.writestr('xl/workbook.xml',wb)
+            z.writestr('xl/_rels/workbook.xml.rels',rels)
+            z.writestr('xl/worksheets/sheet1.xml',ws)
         with ZipFile(p,'a') as z:
             z.writestr('xl/vbaProject.bin',b'FAKE-VBA-NOT-EXECUTED')
             z.writestr('xl/externalLinks/externalLink1.xml',b'<externalLink/>')
@@ -113,7 +138,7 @@ def selftest():
         p.write_bytes(b'')
         try:scan(p);raise AssertionError('empty input accepted')
         except ValueError as e:assert 'Empty' in str(e)
-    return {'tests':4,'passed':4,'synthetic_fixtures_only':True,
+    return {'tests':5,'passed':5,'synthetic_fixtures_only':True,
             'accepted_OAG_workbook_obtained':False}
 
 def main():
