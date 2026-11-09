@@ -25,6 +25,7 @@ import DASHI.Cognition.CCDCOEP3GCCExecutedCampaignSourceExact as GCC
 import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact as Trumbo
 import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact as Institution
 import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact as Compliance
+import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact as Country
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -416,3 +417,16 @@ noLaterPublicationPromotedToPriorMinisterialAuthorship :
     Institution.octoberToParisSequence ≡ false
 noLaterPublicationPromotedToPriorMinisterialAuthorship =
   Institution.noBackdatedDocumentAuthorshipClaim
+
+
+-- Country implementation evidence cannot be promoted from a candidate
+-- stage into an independently reviewed original observation.
+countryCandidateDoesNotCountAsReviewed :
+  Country.candidate ≡ Country.reviewedOriginal → ⊥
+countryCandidateDoesNotCountAsReviewed = Country.candidateNotReviewed
+
+-- A reused fossil-subsidy metric is not an equality of original
+-- 2014 Brisbane and 2015 Antalya assessment populations.
+countryStudyOwnersDistinct :
+  Country.brisbane2014 ≡ Country.antalya2015 → ⊥
+countryStudyOwnersDistinct = Country.notSameStudy
