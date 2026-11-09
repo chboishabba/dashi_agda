@@ -13,6 +13,10 @@ import DASHI.Governance.CrenshawLegalCaseComparisonExact as Comparison
 import DASHI.Governance.CrenshawLegalRepresentationRemedyExact as Rep
 import DASHI.Governance.Crenshaw1989PassageWeldExact as CrenshawSource
 import DASHI.Governance.CrenshawJudicialDisagreementExact as Disagreement
+import DASHI.Governance.CrenshawSituatedStandpointExact as Standpoint
+import DASHI.Governance.CrenshawRightsReformDualEffectExact as Rights
+import DASHI.Governance.CrenshawHistoricalCarceralSourceAtlasExact as HistSources
+import DASHI.Governance.CrenshawCrossInstitutionalEvidenceExact as CrossInstitution
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -51,6 +55,21 @@ record LegalCrossCaseCut : Set₁ where
     payneMajorityDisagreementNotCollapsed :
       INF.FactorsThrough
         Disagreement.caseOnly Disagreement.position → ⊥
+    scholarRoleNotClientCounsel :
+      Standpoint.authorityOfRole Standpoint.scholarRole
+      ≡ Standpoint.authorityOfRole Standpoint.counselRole → ⊥
+    rosterDoesNotPayVoice :
+      INF.FactorsThrough
+        Standpoint.reportedPeople Standpoint.effectiveVoice → ⊥
+    formalRightsDoNotDetermineMaterialTransfer :
+      INF.FactorsThrough
+        Rights.formalRecognition Rights.materialReallocation → ⊥
+    institutionalSchoolReceiptCannotPayCustody :
+      CrossInstitution.Supports CrossInstitution.schoolRecord
+        CrossInstitution.custodialOutcome → ⊥
+    citedCarceralAtlasDoesNotCreateAuthority :
+      Attr.atlasCreatesAuthority HistSources.historicalInstitutionalSourceAtlas
+        ≡ false
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -67,4 +86,9 @@ crenshawLegalCrossCaseCut =
     Rep.mooreAndPayneHaveDistinctAppellateDispositions
     CrenshawSource.jefferiesIsCitedByCrenshaw
     Disagreement.caseCitationCannotSelectJudicialPosition
+    Standpoint.scholarlyInterpretationIsNotClientRepresentation
+    Standpoint.courtRosterNotSufficientToInferAuthority
+    Rights.formalRightDoesNotGuaranteeMaterialTransformation
+    CrossInstitution.schoolDisciplineDoesNotByItselfPayCustodialOutcome
+    HistSources.historicalCitationDoesNotCreateAuthority
     refl refl
