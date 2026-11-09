@@ -377,6 +377,39 @@ def local_positive_implicit_contraction_bounds(c0,m):
 
 
 
+
+def exact_positive_conservation_weights(reactants, products, weights):
+    """Check the complete gross reaction sides with exact Python integers.
+
+    Float dot products can round a nonzero conservation defect to zero.
+    Reject such a witness; this routine does not use numpy float algebra.
+    """
+    A=np.asarray(reactants)
+    B=np.asarray(products)
+    w=np.asarray(weights)
+    if A.ndim!=2 or B.shape!=A.shape or w.shape!=(A.shape[1],):
+        raise ValueError("gross reaction sides and source weights dimensions disagree")
+    def exact_integer(value, name, strictly_positive=False):
+        if isinstance(value, (bool, np.bool_)):
+            raise ValueError(f"{name}: invalid Boolean integer")
+        if not isinstance(value, (int, np.integer)):
+            raise ValueError(f"{name}: actual integer required, never a rounded float")
+        result=int(value)
+        if result<0 or (strictly_positive and result==0):
+            raise ValueError(f"{name}: invalid sign")
+        return result
+    ws=[exact_integer(x, "atomic weight", True) for x in w]
+    for j in range(A.shape[0]):
+        balance=0
+        for s in range(A.shape[1]):
+            a=exact_integer(A[j,s], "gross substrate count")
+            b=exact_integer(B[j,s], "gross product count")
+            balance+=(b-a)*ws[s]
+        if balance!=0:
+            raise ValueError(f"original reaction {j}: nonzero exact weighted conservation defect")
+    return tuple(ws)
+
+
 def global_positive_implicit_brouwer_bounds(c0,m,conserved_weights,dt):
     """All-dt existence/strict positivity for an exactly conserved closed network.
 
@@ -401,22 +434,18 @@ def global_positive_implicit_brouwer_bounds(c0,m,conserved_weights,dt):
     outward-rounded proof or an explicit numerical root finder.
     """
     c0=np.asarray(c0,dtype=float)
-    w=np.asarray(conserved_weights,dtype=float)
+    exact_weights=exact_positive_conservation_weights(
+        m.reactants,m.products,conserved_weights)
+    w=np.asarray(exact_weights,dtype=float)
     if c0.shape!=(27,len(m.z)) or not np.all(np.isfinite(c0)) or np.any(c0<=0):
         raise ValueError("strictly positive original 27-site initial state required")
-    if (w.shape!=(len(m.z),) or not np.all(np.isfinite(w))
-            or np.any(w<=0) or not np.all(w==np.floor(w))):
-        raise ValueError("each species requires a positive integer source-conserved atom weight")
     if not np.isfinite(dt) or dt<=0:
         raise ValueError("positive finite original physical timestep required")
-    # Integer or exact positive weights are required for the mathematical
-    # equality; floating source weights are only numerical diagnostics.
+    # The source's exact gross integer sides were independently checked
+    # above; the floating matrices below only compute numerical majorants.
     A=np.asarray(m.reactants,dtype=float)
     B=np.asarray(m.products,dtype=float)
     nu=B-A
-    weighted_stoich=nu@w
-    if not np.array_equal(weighted_stoich,np.zeros(len(m.kf))):
-        raise ValueError("claimed source conservation weights do not annihilate exact reaction matrix")
     W=float(np.sum(c0*w[None,:]))
     Q=W/float(w.min())
     if not np.isfinite(W) or not np.isfinite(Q) or W<=0 or Q<=0:
