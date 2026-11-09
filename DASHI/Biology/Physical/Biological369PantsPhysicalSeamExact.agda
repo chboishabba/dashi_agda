@@ -17,6 +17,7 @@ module DASHI.Biology.Physical.Biological369PantsPhysicalSeamExact where
 open import DASHI.Core.Prelude
 
 import Data.Vec.Base as V
+import Data.Fin.Base as F
 import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact as Grid
@@ -165,3 +166,103 @@ data PantsMatchAutomaticallyPaysPhysicalFlow : Set where
 noAutomaticPhysicalFlowFromPants :
   PantsMatchAutomaticallyPaysPhysicalFlow → ⊥
 noAutomaticPhysicalFlowFromPants ()
+
+------------------------------------------------------------------------
+-- ALL 27 original Cartesian 3×3 one-to-one-to-one axis-line seams.
+-- These are native cubical paths, each with exactly two positive
+-- original bonds. All seams use the existing original pants interface
+-- but material conservation is proved from shared 3D voxels.
+------------------------------------------------------------------------
+
+xAxisLineSeam :
+  (y z : SSP.SSPTrit) → PhysicalPantsBondSeam
+xAxisLineSeam y z =
+  physical-pants-bond-seam
+    (Grid.xBond Grid.lower y z)
+    (Grid.xBond Grid.upper y z)
+    refl
+    Pants.selectedChannel2
+    Pants.innerInputChannel2
+    Pants.outerInnerMatch
+
+yAxisLineSeam :
+  (x z : SSP.SSPTrit) → PhysicalPantsBondSeam
+yAxisLineSeam x z =
+  physical-pants-bond-seam
+    (Grid.yBond x Grid.lower z)
+    (Grid.yBond x Grid.upper z)
+    refl
+    Pants.selectedChannel2
+    Pants.innerInputChannel2
+    Pants.outerInnerMatch
+
+zAxisLineSeam :
+  (x y : SSP.SSPTrit) → PhysicalPantsBondSeam
+zAxisLineSeam x y =
+  physical-pants-bond-seam
+    (Grid.zBond x y Grid.lower)
+    (Grid.zBond x y Grid.upper)
+    refl
+    Pants.selectedChannel2
+    Pants.innerInputChannel2
+    Pants.outerInnerMatch
+
+allXLineSeams : List PhysicalPantsBondSeam
+allXLineSeams =
+  Grid.flatMap (λ y → Grid.mapList (xAxisLineSeam y) Grid.trits)
+    Grid.trits
+
+allYLineSeams : List PhysicalPantsBondSeam
+allYLineSeams =
+  Grid.flatMap (λ x → Grid.mapList (yAxisLineSeam x) Grid.trits)
+    Grid.trits
+
+allZLineSeams : List PhysicalPantsBondSeam
+allZLineSeams =
+  Grid.flatMap (λ x → Grid.mapList (zAxisLineSeam x) Grid.trits)
+    Grid.trits
+
+all27PhysicalPantsSeams : List PhysicalPantsBondSeam
+all27PhysicalPantsSeams =
+  Grid.append allXLineSeams
+    (Grid.append allYLineSeams allZLineSeams)
+
+allOriginalPantsSeamLinesCount27 :
+  Grid.countList all27PhysicalPantsSeams ≡ 27
+allOriginalPantsSeamLinesCount27 = refl
+
+-- No independent edge-local material stocks: every two-bond seam
+-- is written into the same original 27-voxel vector at each step.
+twoOriginalBondActions :
+  PhysicalPantsBondSeam →
+  List (F.Fin 27 × F.Fin 27)
+twoOriginalBondActions seam =
+  ( Vector369.originalPointIndex (Grid.bondStart (incomingBond seam))
+  , Vector369.originalPointIndex (Grid.bondEnd (incomingBond seam)) )
+  ∷ ( Vector369.originalPointIndex (Grid.bondStart (outgoingBond seam))
+     , Vector369.originalPointIndex (Grid.bondEnd (outgoingBond seam)) )
+  ∷ []
+
+all54PhysicalPantsBondActions :
+  List (F.Fin 27 × F.Fin 27)
+all54PhysicalPantsBondActions =
+  Grid.flatMap twoOriginalBondActions all27PhysicalPantsSeams
+
+everyPantsSeamHasTwoOriginalBondActions :
+  (seam : PhysicalPantsBondSeam) →
+  Grid.countList (twoOriginalBondActions seam) ≡ 2
+everyPantsSeamHasTwoOriginalBondActions seam = refl
+
+originalPantsBondActionsCount54 :
+  Grid.countList all54PhysicalPantsBondActions ≡ 54
+originalPantsBondActionsCount54 = refl
+
+allPantsGluedPhysicalBondHistoryConserves :
+  (state : V.Vec Nat 27) →
+  V.sum (Transfer.runTransfers all54PhysicalPantsBondActions state)
+    ≡ V.sum state
+allPantsGluedPhysicalBondHistoryConserves =
+  Transfer.all27SharedSitesConserve all54PhysicalPantsBondActions
+
+-- The seam matching predicate concerns five ORIGINAL informational
+-- channel values; it is not a biological flux coefficient.
