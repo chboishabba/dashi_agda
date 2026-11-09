@@ -109,6 +109,9 @@ else
   echo "OPEN PHYSICAL RATE GATE: no original quantitative candidate and complete source-paid bounds supplied" >&2
 fi
 
+# P0.06 closed-grounded finite-difference energy remainder; synthetic
+# regression only. A numerical receipt does not close source P0 or Agda.
+python3 -m unittest discover -s scripts -p 'test_bh4_closed_pnp_free_energy_remainder.py'
 python3 scripts/check_bh4_one_molecule_future_minimality.py
 python3 scripts/check_bh4_spatial_measurement_payment.py --self-test
 
