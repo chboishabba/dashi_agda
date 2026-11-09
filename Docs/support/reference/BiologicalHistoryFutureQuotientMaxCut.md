@@ -544,6 +544,92 @@ a proved same-source map from the ChEBI reaction/transport
 state to the exact 27-voxel Agda material and
 bioelectric/tissue response carriers.
 
+## 2026-11-09: ORIGINAL 3×3×3 / 369 pants-gluing correction and max-cut
+
+**Correct geometry:** `Cube.Ternary27Point` is the actual
+`SSPTrit × SSPTrit × SSPTrit` 3×3×3 cubical physical
+domain, with original 54 positive nearest-neighbour bonds
+and 36 elementary squares. `Vec Nat 27` is a lossless
+enumerated **storage chart**, not a substitute topology,
+a 27-dimensional flat physical space, a Euclidean pants
+surface or a new canonical base geometry.
+
+The new Agda source owners are:
+
+1. `Biological369CubicalMaterialFieldExact`.
+   `CubicalMaterialField = Cube.Ternary27Point → Nat`;
+   `materialAt` reads a vector at an original (x,y,z)
+   point through the explicit inverse 27-point index.
+   `originalCubeReadoutRoundTrip` and
+   `originalVectorReadoutRoundTrip` show neither
+   coordinate information nor amount is lost.
+   `cubicalBondTransferConservesTotal` updates the
+   **same shared state** on a genuine original bond,
+   and original 54 bonds / 36 squares stay visible.
+2. `Biological369PantsPhysicalSeamExact`.
+   Reuses the **existing** original
+   `RelationalBranchCobordismGeometry.InterfaceMatch`
+   and `TypedHyperfabricPantsGluingBridgeExact`,
+   together with original
+   `TernaryCylinderPantsGeometryExact`, not a replacement
+   pants calculus. `PhysicalPantsBondSeam` requires
+   both the native physical middle-point equality
+   `bondEnd incomingBond ≡ bondStart outgoingBond`
+   **and** the original five-channel interface match:
+   proposition, capacity, phase, wave, openness.
+   `canonical369PhysicalPantsSeam` is the exact
+   physical -1→0→+1 x-axis line at y=z=0, using
+   the original selected leg / inner waist match.
+   `gluedSeamTransportPreservesOriginalTotal`
+   proves that the two actual incident bonds share
+   and conserve the same 27-cell inventory.
+   All three Cartesian axes are now covered:
+   `all27PhysicalPantsSeams` enumerates 27 native
+   full 3-voxel axis lines (3 axes × 3 × 3),
+   `originalPantsBondActionsCount54` proves
+   those use precisely 54 original bond events, and
+   `allPantsGluedPhysicalBondHistoryConserves`
+   proves every selected 54-event sequential sweep
+   conserves the original shared-material total.
+   This is the **3D geometric/pants incidence composition**,
+   not an assertion that original informational-channel
+   capacity equals actual molar flux.
+
+Regressions: new
+`scripts/check_biological_369_pants_physical_seam.py`
+checks all 27 3D coordinates, all 54 native positive
+bonds, all 36 squares, the x-axis canonical seam,
+27 axes/pants lines, no missing/repeated physical bond,
+and 27×54 exact shared-state transfer actions
+under genuine native geometry.
+The Round-23 Golden shell runs it before the
+repository-owned Agda parallel checker.
+An independent arithmetic evaluation likewise found
+27 axis-line seams and all 54 original native bonds,
+with **1,458** exact shared-state transfer checks.
+
+**Important theorem boundary:** PANTS gluing compares
+typed branch-channel interfaces, not physical membrane
+conductance. A match of proposition, capacity, phase,
+wave and openness does NOT establish physical
+permeability, flow rate, biochemical exchange,
+electrical impedance, vascular lumen or a smooth
+topological pair-of-pants surface. Those require
+original source-specific boundary/transport evidence.
+The physical model uses the seam only where genuine
+shared-voxel incidence is independently proved.
+
+**Outstanding physical max-cut remains:**
+exact-head Agda kernel/parallel checker acceptance;
+29×12 original same-species/compartment reaction
+matrix with 29 external exchange terms; local signed
+charge+boundary-current continuity and PNP fields;
+source-specific kinetic law and validated circulation;
+a same-source physical-to-tissue transition witness;
+full stochastic future-quotient/minimality on that
+physical model; and held-out independent developmental
+prediction. None is paid by the pants interface alone.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
