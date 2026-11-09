@@ -12,7 +12,8 @@ module DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact where
 -- are separate source and measurement gates.
 
 open import DASHI.Core.Prelude
-  using (Nat; _+_; _∸_; _≡_; refl; rewrite; +-identityʳ)
+  using (Nat; _+_; _∸_; _≡_; refl; +-identityʳ)
+open import Agda.Builtin.List using (List)
 import DASHI.Analysis.StoichiometricConservation as SC
 import DASHI.Chemistry.HydrogenFuelCycleExact as Fuel
 
@@ -106,7 +107,7 @@ selectedFuelCycleCertificate =
     elementalProjectedSystem elementalLeftKernel
 
 selectedFuelCyclePathConserves :
-  (reactions : SC.List SelectedReaction) →
+  (reactions : List SelectedReaction) →
   (initialAtoms : Fuel.CHO) →
   SC.quantity elementalProjectedSystem
     (SC.runReactionPath elementalProjectedSystem reactions initialAtoms)
