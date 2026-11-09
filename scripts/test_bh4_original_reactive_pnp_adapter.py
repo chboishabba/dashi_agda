@@ -222,3 +222,40 @@ def test_same_step_receipt_rejects_nonfinite_or_missing_diagnostics(monkeypatch)
         Adapter.source_bound_closed_implicit_step(
             source, manifest, pinned_sha256=sha,
             initial_concentrations=before, dt=0.01)
+
+
+def test_original_formula_weighted_brouwer_contract(monkeypatch):
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    certificate=Adapter.load_original_receipt_json(source)
+    matrix,_=Adapter.check_certificate(certificate,full_panel=True)
+    paid={s:({"C":1},0) for s in species}
+    monkeypatch.setattr(Adapter,"check_certificate",
+                        lambda *args,**kw: (matrix,paid))
+    receipt=Adapter.source_bound_closed_brouwer_existence(
+        source,manifest,pinned_sha256=sha,
+        initial_concentrations=np.ones((27,29)),dt=2.0)
+    assert receipt["exact_integer_source_weighted_reactions_verified"]
+    assert len(receipt["conserved_original_CHNOP_weights"])==29
+    theorem=receipt["mathematical_root_existence_contract"]
+    assert theorem["positive_root_component_lower_bound"]>0
+    assert theorem["finite_dimensional_topological_existence"]
+    assert not receipt["explicit_root_computed"]
+    assert not receipt["agda_kernel_checked"]
+
+
+def test_original_formula_weighted_brouwer_rejects_missing_atom_or_unbalance(monkeypatch):
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    certificate=Adapter.load_original_receipt_json(source)
+    matrix,_=Adapter.check_certificate(certificate,full_panel=True)
+    good={s:({"C":1},0) for s in species}
+    for bad in (
+        {**good,species[0]:({},0)},
+        {**good,species[0]:({"C":2},0)},
+        {**good,species[0]:({"C":0.5},0)},
+    ):
+        monkeypatch.setattr(Adapter,"check_certificate",
+                            lambda *a, **kw: (matrix,bad))
+        with pytest.raises(ValueError):
+            Adapter.source_bound_closed_brouwer_existence(
+                source,manifest,pinned_sha256=sha,
+                initial_concentrations=np.ones((27,29)),dt=1.0)
