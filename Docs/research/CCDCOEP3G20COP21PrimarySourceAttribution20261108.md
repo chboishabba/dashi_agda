@@ -102,3 +102,37 @@ The independently published **G20 Energy Ministers' Communiqué of 2 October 201
 Exact remaining **real-world** obligations: ORIGINAL_COUNTRY_ROWS, ORIGINAL_DIGEST_AND_SPAN_RECEIPTS, ORIGINAL_COUNTRY_COMMITMENT_CROSSWALK, NDC_VERSION_DATES, EMISSIONS_BASELINE_AND_SCOPE, FINANCE_CURRENCY_PRICE_BASIS, AUDITED_TRANSMISSION_DRAFT_HISTORY, IDENTIFICATION_AND_ALTERNATIVE_EXPLANATIONS, INDEPENDENT_EMPIRICAL_REPRODUCTION, AGDA_KERNEL_ACCEPTANCE. In particular, the fact that original published fossil-subsidy percentages differ by five points does **not** establish a commensurate within-country change or an identified emissions effect.
 
 **Attribution:** All empirical authors and original institutional speakers retain authorship; DASHI owns only its formal adapters and validators. No GCC/Harrison, ExxonMobil, B20, C20 or G20 participant is credited with treaty authorship or demonstrated causal influence without original specific evidence. No ESD source changed.
+
+
+## 9 November — source-member panel and documented stakeholder delivery (second implementation cut)
+
+### Original G20RG member-level empirical result
+
+The University of Toronto G20 Research Group final-report online tables contain **20 assessed-member positions each**, including the European Union as a distinct reported member. The exact two source-specified energy/fossil-subsidy lines have been transcribed into `Docs/research/ccdcoe_p3_g20rg_fossil_member_transcription.json` and examined by `scripts/check_ccdcoe_p3_g20rg_member_panel.py`. No invented country/emissions/finance claims. Both original original-report authorship and study-specific commitment/assessment time remain explicit.
+
+- Brisbane 2014 energy/fossil: 11 scores −1, seven zero, two +1. Sum −9 / 20 = **−0.45**, corresponding to 27.5% and rounded **28%**.
+- Antalya 2015 energy/fossil: ten −1, seven zero, three +1. Sum −7 / 20 = **−0.35**, corresponding to 32.5% and rounded **33%**.
+- Member-aligned score transitions between these **different** study-specific assessed commitments: seven higher, six lower, seven unchanged. These are descriptive changes in published score positions, **not** a harmonized same-policy longitudinal estimate or reduction in subsidies/emissions.
+- **Source inconsistency:** the Brisbane final HTML Table 2 printed aggregate alongside the original 20 scores is **−0.40 (30%)**, inconsistent with the row arithmetic **−0.45** and the report narrative **−0.45 (28%)**. Both printed and derived fields are retained, and the checker fails if the discrepancy is silently erased. Seek original detailed score PDF/erratum for editorial adjudication. This discrepancy must not disappear behind a rounded five-percentage-point cross-summit comparison.
+- **Provenance:** online table contents located and manually transcribed with original URLs; independent immutable raw HTML/PDF SHA-256 and line-level external reviewer receipt remain OPEN, despite the independently checkable arithmetic.
+
+Owner `DASHI/Cognition/CCDCOEP3G20RGMemberPanelExact.agda` encodes the 40 original member scores and proof targets (20 per study; each count distribution; 11−2=9 and 10−3=7). The selected Golden regression and canonical parallel-checker entrypoint import that owner. Source-written is NOT kernel acceptance.
+
+### Institutional delivery is now evidenced, not merely hypothesized
+
+Two different evidence grades remain separate:
+
+1. **C20 actual receipt:** the 2015 Turkish G20 Presidency retrospective records that Deputy Prime Minister Cevdet Yılmaz, former Deputy Prime Minister Ali Babacan and Turkish G20 Sherpa Ayşe Sinirlioğlu attended the 15–16 September C20 summit closing session and received its communiqué on behalf of the presidency. Original owner: Turkish G20 Presidency's report and C20's actual recommendations. URL: https://g20.org.tr/main-achievements-of-turkeys-2015-g20-presidency-2/index.html . The contemporaneous IKV description https://www.ikv.org.tr/ikv.asp?id=1030&lng=en&ust_id=2048 independently identifies the same delivery.
+2. **B20 attributed presentation:** ICC reports that 19 B20 recommendations were presented to Turkey's president in September 2015, and separately describes ICC's own role in the B20 process; this is ICC's participant account of delivery, not independent proof that a specific line was inserted into a leaders' draft. URL: https://iccwbo.org/news-publications/policies-reports/icc-summary-of-the-antalya-g20-leaders-declaration/ .
+
+New ledger `ccdcoe_p3_stakeholder_handoff_evidence.json`, fail-closed `check_ccdcoe_p3_stakeholder_handoff.py`, and `CCDCOEP3StakeholderHandoffExact.agda` distinguish recommendation, presentation, official receipt, adopted speech and independently proven draft uptake. Source review and independent archival byte receipts remain OPEN. All actors keep original authorship; no stakeholder view is converted into G20 or COP authorship, causality or endorsement by delivery.
+
+### Current max-cut exit conditions
+
+- **P3.1 partially paid:** 40 original-source attributed scores and their exact member identities are transcribed, aggregate error discovered, five negative arithmetic/identity controls source-written; original hash/archive and independent human review remain.
+- **P3.2 partially paid:** 20-member correspondence, 7/6/7 descriptive score transitions and study-specific crosswalk; underlying **country action narratives**, subsidies quantities, NDC revision genealogy, original country emissions and finance records still absent.
+- **P3.3 partially paid:** a genuine C20 Sherpa/ministerial receipt and ICC-attributed B20 delivery established. Specific same-proposal drafting/version history and individual institutional uptake still unproved.
+- **P3.4 open:** robust causal effects, pretrend/controls/measurement reliability, GCC article-level and Exxon microdata replication.
+- **P3.5 open:** exact-head 2.9 Agda kernel acceptance and independent original-source runtime receipts (the connector writes source files only).
+
+No ESD surfaces changed. Keep PR draft.
