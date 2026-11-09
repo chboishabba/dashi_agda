@@ -79,3 +79,40 @@ originalNegativeConflictHasLiteralFourBondWitness :
 originalNegativeConflictHasLiteralFourBondWitness a b notDisjoint =
   originalSharedPlaquetteHasBothNativeBonds a b
     (originalConflictExhibitsSharedPlaquette a b notDisjoint)
+
+
+------------------------------------------------------------------------
+-- End-to-end native greedy coverage certificate.
+-- EVERY marked original bond is either selected by the greedy independent
+-- set or is charged to an actual original plaquette shared with a
+-- SELECTED bond. The latter witness is stronger than negative conflict.
+------------------------------------------------------------------------
+
+OriginalLiteralGreedyCoverage :
+  ∀ {n} (marked : List (Original.Bond n))
+    (b : Original.Bond n) → Set
+OriginalLiteralGreedyCoverage {n} marked b =
+  Torus._∈_ b (Original.greedyOriginalDisjointStars marked)
+  ⊎
+  Σ (Original.Bond n)
+    (λ chosen → Torus.Product
+      (Torus._∈_ chosen (Original.greedyOriginalDisjointStars marked))
+      (Σ (Plaquette.PeriodicPlaquette n)
+        (λ p → Torus.Product
+          (Torus._∈_ chosen (Support.originalFourPositiveBonds p))
+          (Torus._∈_ b (Support.originalFourPositiveBonds p)))))
+
+originalGreedyMaximalityHasNativePlaquetteCoverage :
+  ∀ {n} (marked : List (Original.Bond n))
+    (b : Original.Bond n) →
+  Torus._∈_ b marked →
+  OriginalLiteralGreedyCoverage marked b
+originalGreedyMaximalityHasNativePlaquetteCoverage marked b inMarked
+  with Original.greedyOriginalDisjointStarsMaximal marked b inMarked
+... | inj₁ selected = inj₁ selected
+... | inj₂ (chosen , witness) =
+  inj₂
+    (chosen , Torus.pair
+      (Torus.first witness)
+      (originalNegativeConflictHasLiteralFourBondWitness
+        chosen b (Torus.second witness)))
