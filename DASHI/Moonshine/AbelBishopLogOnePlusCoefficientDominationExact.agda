@@ -205,3 +205,24 @@ originalBishopLogOnePlusCanonicalLimitConvergesOnUnitDisk :
 originalBishopLogOnePlusCanonicalLimitConvergesOnUnitDisk {w} interval norm =
   Log.originalBishopLogOnePlusSeriesConverges w
     (originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk interval norm)
+
+
+originalBishopLogOnePlusCanonicalLimitUniqueOnUnitDisk :
+  ∀ {w ratio} →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (norm : BishopReal._≃_
+    (Norm.normSqC w)
+    (Norm.square ratio)) →
+  (other : Complex.BishopComplex) →
+  Complex.ComplexSeriesConvergesTo
+    (Log.originalBishopLogOnePlusTerm w)
+    other →
+  Complex._≈C_
+    (originalBishopLogOnePlusCanonicalLimitOnUnitDisk interval norm)
+    other
+originalBishopLogOnePlusCanonicalLimitUniqueOnUnitDisk {w} interval norm other convergence =
+  Log.originalBishopLogOnePlusSeriesLimitUnique
+    w
+    (originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk interval norm)
+    other
+    convergence
