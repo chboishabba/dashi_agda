@@ -78,3 +78,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalMarkedLinkDedupExact as D1Origina
 
 -- E1/A3: original changing-cutoff all-word Wilson values depend only on finite ACTUAL signed-path positive-link support.
 import DASHI.Physics.YangMills.YMClayE1A3OriginalAllWordPathSupportExtensionalExact as E1A3AllWordSupport
+
+-- E1/A3 literal finite List SUN-link-value coordinate projection and source-real Wilson word factorization.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteCoordinateProjectionExact as E1A3ActualFiniteProjection
