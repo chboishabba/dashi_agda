@@ -68,3 +68,46 @@ P_β(B_ε≥η) ≤ [8+(2/3)log24+logβ]/(βεη),
 These inequalities hold **uniformly over the periodic finite volume** and make no assumption that bad plaquettes are independent. They establish that the expected density, and the probability of a fixed positive density, tends to zero as β→∞. The second is Markov's inequality on a nonnegative physical observable.
 
 **Sharp limitation:** density control is not connected-polymer control. On an `n×n×n×n` periodic torus, a geometrically traversing connected path of `n` distinct bad plaquettes can occupy a fraction `n/(6n⁴)=1/(6n³)` of all plaquettes. This tends to zero, so vanishing bad-plaquette density permits arbitrarily long sparse connections. An actual Peierls/polymer activity or block mixing estimate must bound *connected bad supports*, rather than just `B_ε`. Neither E1 continuum convergence nor D1 full covariance clustering follows from this density theorem.
+
+
+## 9 November — stronger original Wilson macroscopic-bad-density LARGE-DEVIATION theorem
+
+The original finite-volume partition-function lower bound already derived above gives **more than the first-moment/Markov estimates**. Retain the exact periodic four-dimensional SU(2) Wilson action and normalized product Haar law, with `P=6V` unoriented plaquettes and `L=4V` positive links. Define the *unrenormalized original plaquette deficits*
+
+```
+d_p(U) = 1 - (1/2) Re Tr U_p,       0 <= d_p <= 2,
+D(U) = sum_{p} d_p(U),             P = 6V,
+B_epsilon(U) = # {p : d_p(U) >= epsilon} / P.
+```
+
+The exactly selected original Gibbs measure is
+`dmu_beta(U) = exp(beta(P-D(U))) dH^L(U) / Z(beta)`.
+For `beta>=16` the original identity-link cap proof gives, **uniformly in finite periodic volume**,
+
+```
+Z(beta) >= exp(beta P - C(beta) P),
+C(beta) = 8 + (2/3) log 24 + log beta.
+```
+
+For any real `epsilon>0` and `eta>0`, on the extensive-bad-density event `{B_epsilon >= eta}`, the deterministic inequality
+`D(U) >= epsilon * eta * P` holds. Since normalized product Haar has total mass **one**, the restricted numerator is bounded without any independence assumption:
+
+```
+int_{B_epsilon >= eta} exp(beta(P-D(U))) dH^L(U)
+ <= exp(beta P - beta epsilon eta P).
+```
+
+Divide by the lower bound on the **same original** `Z(beta)`. This proves the explicit volume-exponential bound:
+
+```
+P_mu_beta(B_epsilon >= eta)
+ <= min(1, exp(-P * (beta epsilon eta - C(beta)))),
+
+P=6V,   beta>=16,   0<epsilon<=2,   0<eta<=1.
+```
+
+In particular, if the actual selected bare coupling satisfies `beta epsilon eta > C(beta)`, the probability of an **extensive positive bad-plaquette density** is exponentially small in the original total number of plaquettes, **uniformly with respect to the periodic-volume choice**. It tends to zero along any original path for which `P*(beta epsilon eta - C(beta)) -> +infinity`.
+
+**Proof status:** elementary original-measure analytic theorem with explicit constants; source derivation only, no new Agda analytic formalization or independent numerical integration. This is stronger than the previous bound `P(B_epsilon>=eta)<=C(beta)/(beta epsilon eta)`. It does not insert an assumed polymer activity or a synthetic measure.
+
+**Sharp unchanged D1.03 obstacle:** a connected spanning path of `n` bad plaquettes in the original `n^4` periodic geometry occupies only fraction `1/(6n^3)`, so even volume-exponential suppression at every FIXED positive density does **not** control the probability that a sparse bad cluster crosses arbitrary physical distance. A Peierls/cluster-expansion/chessboard or original blocked-gauge-covariant conditional argument must assign a small probability to *each connected contour*, with a uniform activity-versus-entropy budget. The bare-link Dobrushin negative control remains applicable. No E1 convergence, B1 full Wilson covariance decay, D2 same-H spectral gap, N1 noncollapse or G1 all-groups conclusion is claimed.
