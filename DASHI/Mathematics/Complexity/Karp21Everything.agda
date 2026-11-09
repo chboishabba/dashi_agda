@@ -345,3 +345,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranParsedRawStepPotentialExact
 -- P1 original concrete tape same-run weld: canonical six-cell codec, run CNF path, identical flat tableau assignment and input-row pullback.
 -- Global clause placement/accepting-run CNF/clock remains OPEN.
 import DASHI.Mathematics.Complexity.Karp21ConcreteTapeCanonicalRunFlatWeldExact
+
+-- P0-E signed terminal inequality for ACTUAL atLeast/addBits and two-register ledger, original Int <=b.
+-- Source proof candidate: full word acceptance/bit clock remain separate.
+import DASHI.Mathematics.Complexity.Karp21NativeThresholdOriginalSignedDecisionExact
