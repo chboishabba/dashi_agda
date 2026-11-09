@@ -1,5 +1,21 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 compact-uniform finite LOG residual payment
+
+**New original owner:** `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda`.
+
+- `originalLogFinitePartialAtLeastPoint` proves for *every* (N>=1) the actual source finite negative-log sum (L_N(x)>=x) at (x>=0), using original source term monotonicity and the first literal coefficient.
+- `originalLogFinitePartialStrictlyPositive`, `originalFiniteNegativeLogExpPositive`, and `originalFiniteNegativeLogExpBelowOne` derive (0<F_N(x)<1) for (x>0) using the preexisting global negative-exponential theorem, not a new exp monotonicity assumption.
+- `originalFiniteNegativeLogExpResidualNonnegative` and `originalFiniteNegativeLogExpUniformResidualBound` establish the genuine pointwise-to-uniform **signed and absolute** estimate ( |x^N F_N(x)| <= r^N) for **all** (0<x<=r), (N>=1).
+- `originalFiniteExpLogResidualCutoff` and `originalFiniteExpLogUniformResidualSmall` extract one original vendor/Bishop Cauchy precision cutoff from (r^N→0) for **all** original points simultaneously on (0<x<=r<1).
+
+This materially sharpens the P0 proof frontier: the original finite LOG ODE residual is now constructively compact-uniform and has an effective modulus independent of the point. Source written, no postulates or artificial integral authority; pinned Agda kernel receipt remains outstanding.
+
+**Mathematically indispensable unproved terminal step:** use an actual constructive scalar finite-residual stability bound (e.g. an interval-integrated residual inequality tied to (F_N(0)=1) and the finite ODE) to deduce (F_N(x)→1-x). Such a theorem requires a legitimate Bishop integration/mean-value implementation or a direct source formal nested-series evaluation. Uniform residual →0 *alone* does not imply the value equality absent initial data and a correct uniqueness argument.
+
+P1 remains the analytic atan-to-original-imaginary-exponential equality at 1/5 and 1/239; preexisting finite atan geometric residual controls derivative series, but original sine/cosine differentiation-to-limit and an original analytic uniqueness/evaluation remain open. P2 source-Dirichlet ζ is still conditional on completing P0, and separately selected `ZetaHalfPlaneLayer.zetaHalfPlane` cannot be identified by definition alone.
+
+
 ## 2026-11-09 exact-leaf audit: what is known versus what is not
 
 **Direct answer: we know the existing terminal type names, the source owners and the necessary analytic *categories* of proof, but not a proven exhaustive minimal basis of new lemmas.** In particular P3's continuation and gamma implementation may expose further domain, branch, normalisation, holomorphy and pole-removal lemmas once the actual functions are chosen. Claiming that five or six invented lemma names suffice would be unjustified. Do not count proposed lemma names as implementation or Agda acceptance.
