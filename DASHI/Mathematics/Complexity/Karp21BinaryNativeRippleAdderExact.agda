@@ -17,6 +17,9 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+open import Data.List.Base using (length)
+import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 
@@ -83,9 +86,16 @@ additionInspectionWork [] (_ ∷ bs) =
 additionInspectionWork (_ ∷ as) (_ ∷ bs) =
   suc (additionInspectionWork as bs)
 
--- The exact two-input schedule can be evaluated independently of bit
--- values and carries: it is a structural clock for the actual adder.
-additionWorkCarryIndependent :
-  (xs ys : Word.BitWord) (a b : Bool) →
-  additionInspectionWork xs ys ≡ additionInspectionWork xs ys
-additionWorkCarryIndependent xs ys a b = refl
+-- Each ripple stage consumes at least one source bit; the exact
+-- schedule is bounded by the total encoded input width plus one.
+additionInspectionLinear :
+  (xs ys : Word.BitWord) →
+  additionInspectionWork xs ys ≤ suc (length xs + length ys)
+additionInspectionLinear [] [] = s≤s z≤n
+additionInspectionLinear (a ∷ as) [] =
+  s≤s (additionInspectionLinear as [])
+additionInspectionLinear [] (b ∷ bs) =
+  s≤s (additionInspectionLinear [] bs)
+additionInspectionLinear (a ∷ as) (b ∷ bs)
+  rewrite NatP.+-suc (length as) (length bs) =
+  s≤s (NatP.≤-step (additionInspectionLinear as bs))
