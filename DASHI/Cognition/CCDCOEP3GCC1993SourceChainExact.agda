@@ -102,10 +102,16 @@ data CandidateGrade : GCC1993Document → EvidenceStage → Set where
     (doc : GCC1993Document) →
     CandidateGrade doc archivalLocator
 
-data OriginalReceipt (doc : GCC1993Document)
-    : EvidenceStage → Set where
-  -- Intentionally no constructors: real receipts are external inputs.
-  -- An empty type is not a proof that no real-world record can exist.
+record OriginalReceipt (doc : GCC1993Document)
+    (stage : EvidenceStage) : Set where
+  constructor originalReceipt
+  field
+    originalSourceIdentifier : Nat
+    externalEvidenceReference : Nat
+    independentReviewReference : Nat
+  -- These are receipt fields, not cryptographic authentication. No
+  -- concrete receipt is constructed for a historical case in this file.
+  -- Runtime byte-level validation is a separate empirical obligation.
 
 record VerifiedGCCCommunication (doc : GCC1993Document) : Set where
   constructor verifiedGCCCommunication
