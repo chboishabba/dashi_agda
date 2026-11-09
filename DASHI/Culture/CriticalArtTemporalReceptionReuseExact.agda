@@ -24,6 +24,10 @@ import DASHI.Culture.IntellectualReceptionComposableFibreTransportPathExact as P
 import DASHI.Reasoning.TrialecticThreeStrandBraidHistoryExact as Braid
 import DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact as Face
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import DASHI.Interop.WikidataDerivationSupportSquareExact as Square
+import DASHI.Algebra.DisagreementFourViewBoundary as Four
+import DASHI.Algebra.TetralemmaBridge as Tet
+import DASHI.Ontology.EpistemicTrit as Trit
 
 -- The evidence owner and selected edition/scene must be paid separately.
 -- The time-indexed fibre is the ORIGINAL installed owner; this record only
@@ -118,3 +122,24 @@ noAudienceEffectPromotion ()
 noWarfarePromotion :
   LiteraryCritiqueIdentifiesHostileOperation → ⊥
 noWarfarePromotion ()
+
+-- Original evidence-support fourfold results are imported, not rebuilt.
+-- The support square is a claim-evidence object; it must not be mistaken
+-- for a four-agent perspective matrix or for a complete reception history.
+conflictingSupportRemainsBoth :
+  Four.polarPosition Square.conflictSquare ≡ Tet.both
+conflictingSupportRemainsBoth = Square.conflictPositionIsBoth
+
+missingSupportRemainsNeither :
+  Four.polarPosition Square.ignoranceSquare ≡ Tet.neither
+missingSupportRemainsNeither = Square.ignorancePositionIsNeither
+
+coarseThreeWayObserverConfusesConflictWithIgnorance :
+  Square.collapseSquare Square.conflictSquare
+  ≡ Square.collapseSquare Square.ignoranceSquare
+coarseThreeWayObserverConfusesConflictWithIgnorance =
+  Square.conflictAndIgnoranceBothCollapseToUnresolved
+
+originalConflictAndIgnoranceDiffer :
+  Square.conflictSquare ≡ Square.ignoranceSquare → ⊥
+originalConflictAndIgnoranceDiffer = Square.conflictIsNotIgnorance
