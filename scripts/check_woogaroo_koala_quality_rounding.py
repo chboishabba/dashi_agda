@@ -24,7 +24,29 @@ def run():
     new=modified/F(8960)*discount
     assert old>100 and F(99)<new<100
     assert F(8)<old-new<F(9)
+    # Joint sensitivity: vary only the same confidence on the two MWW
+    # rows while using their source-reported hundredths gains.
+    slope=508*346+1047*327
+    assert slope==518137
+    def joint_at(confidence):
+        coefficient_hundredths=54385000+slope*confidence
+        return F(coefficient_hundredths,100*8960)*discount
+    assert 54385000+slope*75==93245275
+    assert joint_at(75)==new
+    assert joint_at(75)<100<joint_at(76)
+    # In this continuous linear counterfactual confidence scale:
+    threshold_100=(F(100*100*8960,1)/discount-54385000)/slope
+    assert 75<threshold_100<76
+    threshold_90=(F(90*100*8960,1)/discount-54385000)/slope
+    assert 57<threshold_90<58
     return {
+        "joint_unrounded_confidence_slope_hundredths":slope,
+        "joint_at_75_exact":f"{joint_at(75).numerator}/{joint_at(75).denominator}",
+        "joint_at_76_exact":f"{joint_at(76).numerator}/{joint_at(76).denominator}",
+        "joint_100_percent_confidence_threshold_exact":f"{threshold_100.numerator}/{threshold_100.denominator}",
+        "joint_90_percent_confidence_threshold_exact":f"{threshold_90.numerator}/{threshold_90.denominator}",
+        "joint_100_percent_confidence_threshold_approx":f"{float(threshold_100):.10f}",
+        "joint_sensitivity_is_not_approved_OAG_or_field_probability":True,
         "case":"EPBC 2019/8575",
         "source":"PD v5 Mount Walker West OAMP Table 13 / Part A.i A76",
         "original_koala_percentage":format(float(old),".12f"),
@@ -44,7 +66,7 @@ def main():
     args=ap.parse_args()
     if args.agda_file:
         s=args.agda_file.read_text()
-        for marker in ("mwwAU1RoundedInflationHundredths","mwwAU2RoundedInflationHundredths","unroundedOnlyTwoMWWAUCoefficient"):
+        for marker in ("mwwAU1RoundedInflationHundredths","mwwAU2RoundedInflationHundredths","unroundedOnlyTwoMWWAUCoefficient", "mwwUnroundedAt75Exact", "mwwUnroundedAt76Exact"):
             assert marker in s
         assert "postulate " not in s and "{!!}" not in s
     o=run()
