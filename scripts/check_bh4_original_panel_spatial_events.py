@@ -158,6 +158,33 @@ def test_source(certificate,*,full_panel):
         after=reaction_event(before,matrix,species,col,start,1,metadata)
         assert totals(before,metadata)==totals(after,metadata)
         event_cases+=1
+    # A genuinely shared chronological chemical/transport history for
+    # EACH original finite reaction: react at a source voxel, transport one
+    # generated product over a real neighbour, and return it. This checks
+    # that the two operators consume the SAME inventory, rather than merely
+    # testing unrelated single-event fixtures.
+    source,target=BONDS[0]
+    mixed_history_cases=0
+    for col in range(len(original["reaction_index"])):
+        initial=inventory(species)
+        for i,key in enumerate(species):
+            if matrix[i][col]<0:
+                initial[source,key]=-int(matrix[i][col])
+        reacted=reaction_event(initial,matrix,species,col,source,1,metadata)
+        products=[species[i] for i in range(len(species))
+                  if matrix[i][col]>0]
+        if not products:
+            raise ValueError("original reaction lacks movable product")
+        key=products[0]
+        outward=transport_event(reacted,species,source,target,key,metadata)
+        returned=transport_event(outward,species,target,source,key,metadata)
+        if returned != reacted:
+            raise AssertionError("roundtrip on original native bond changed physical inventory")
+        if not (totals(initial,metadata)==totals(outward,metadata)==totals(returned,metadata)):
+            raise AssertionError("combined original reaction/transport breaks atom or charge balance")
+        if any(v<0 for v in outward.values()):
+            raise AssertionError("negative inventory in same-state spatial history")
+        mixed_history_cases+=1
     transferred=0
     for origin,target in BONDS:
         for source,destination in ((origin,target),(target,origin)):
@@ -174,6 +201,7 @@ def test_source(certificate,*,full_panel):
         "source_finite_reactions":len(original["reaction_index"]),
         "source_nonfinite_residuals":len(original["finite_formula_residuals"]),
         "original_reaction_event_checks":event_cases,
+        "original_reaction_transport_roundtrip_histories":mixed_history_cases,
         "original_native_bond_species_transfer_checks":transferred,
         "same_physical_shared_inventory":True,
         "source_CHNOP_and_signed_charge_balanced":True,
@@ -195,6 +223,7 @@ def self_test():
     result=test_source(cert,full_panel=False)
     assert result["source_species"]==5
     assert result["source_finite_reactions"]==1
+    assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
     print(json.dumps(result,indent=2,sort_keys=True))
 
