@@ -773,3 +773,28 @@ See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for exact declarations and source receipts. This does not
 discharge original Bishop Cayley P1, independent zeta P2 or
 Gamma/Xi P3.
+
+
+### 2026-11-09 H2.02 selected original heterogeneous pants seam completed in source
+
+A substantive P0 **selected finite relational-pants** instance is now
+source-complete in
+`DASHI/Reasoning/TypedHyperfabricOriginalHeterogeneousPantsSeamExact.agda`.
+
+The before-fabric has genuinely different source edge-stalk
+types: original `BoundaryInterface` on its selected outer edge
+and original `BranchChannel` on its inner edge. The source
+interprets both original values as the actual canonical donor
+channels, proves the donor `outerInnerMatch` is the selected
+`HyperfabricPantsGluing` interface, and merges two nonempty
+incidences into one seam. The after-fabric has a compatible global
+section, both source-to-seam restrictions and edge values
+preserved at the exact five-field match boundary, and the
+concatenation of both original provenance lists.
+
+This pays the selected finite H2.02 source seam, not a full
+world/ITIR heterogeneous fabric or an independently intended
+group completion. **Agda kernel checking remains unperformed.**
+The separate original Bishop analytic P1, zeta P2 and Gamma/Xi
+P3 theorems remain OPEN. Complete proof inventory and receipts
+are in `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
