@@ -97,6 +97,8 @@ def produce(config_path):
     mf.conv_tol=float(config.get("scf_tolerance",1e-9))
     energy=mf.kernel()
     if not mf.converged:raise RuntimeError("nickel RHF failed to converge")
+    from qcafqmc_molecular_scf_certificate import from_pyscf_restricted
+    rhf_certificate=from_pyscf_restricted(mol,mf,tolerance=float(config.get("RHF_residual_tolerance",1e-5)))
     source_delta=float(energy-PUBLISHED_RHF_HARTREE[label])
     if abs(source_delta)>float(config.get("max_RHF_source_discrepancy_hartree",0.05)):
         raise ValueError(f"RHF energy {energy:.8f} disagrees with original Table 2 {PUBLISHED_RHF_HARTREE[label]:.8f}; verify physical state/basis/orbitals")
@@ -135,6 +137,7 @@ def produce(config_path):
              "selected_mo_file":str(selected_mo),
              "selected_mo_sha256":selected_mo_sha256,
              "ncore":ncore,"scf_energy_hartree":float(energy),
+             "molecular_scf_certificate":rhf_certificate,
              "source_RHF_energy_hartree":PUBLISHED_RHF_HARTREE[label],
              "RHF_minus_source_hartree":source_delta,
              "nuclear_repulsion_hartree":float(mol.energy_nuc()),
