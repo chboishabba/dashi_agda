@@ -25,11 +25,17 @@ def run(include_torch=False):
     from qcafqmc_nickel_cost_source_reconciliation import audit as cost_audit
     from qcafqmc_vce_full_space_overlap_check import validate as validate_vce
     from qcafqmc_mixed_energy_error_certificate import self_test as check_ratio
+    from qcafqmc_autocorrelation_reblocking import self_test as check_autocorr
+    from qcafqmc_nickel_doci_trial import self_test as check_doci
     source=verify_nickel_source()
     targets=verify_targets()
     costs=cost_audit()
     vce=validate_vce()
     ratio=check_ratio()
+    autocorr=check_autocorr()
+    doci=check_doci()
+    if not (autocorr["passed"] and doci["small_hubbard_projected_matrix_matches_FCI"]):
+        raise AssertionError("autocorrelation or DOCI projection regression")
     if costs["retained_measured_blocks"]!=250:
         raise AssertionError("nickel 300 measured blocks with 50 discarded")
     if not vce["passed"] or not ratio["near_node_rejected"]:
@@ -49,6 +55,11 @@ def run(include_torch=False):
       "VCE_mixed_core_negative_control":vce["naive_active_overlap_failure_under_core_mixing"],
       "mixed_energy_near_node_rejected":ratio["near_node_rejected"],
       "torch_70_state_tests_executed":include_torch,
+      "autocorrelation_AR1_negative_control_passed":autocorr["passed"],
+      "autocorrelation_blocking_to_naive_SE_ratio":(
+          autocorr["B_blocked_SE"]/autocorr["B_naive_IID_SE"]),
+      "DOCI_projected_Hubbard_matches_exact_FCI_subblock":doci["small_hubbard_projected_matrix_matches_FCI"],
+      "DOCI_vs_FCI_seniority_gap_positive":doci["seniority_zero_approximation_gap_positive"],
       "PySCF_ipie_nickel_runs_executed":False,
       "original_ionq_replication":False,
       "checked_files":checked
