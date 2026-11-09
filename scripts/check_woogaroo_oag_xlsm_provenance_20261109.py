@@ -10,9 +10,11 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile, ZIP_DEFLATED
+from posixpath import normpath, dirname, join
 
 M='{http://schemas.openxmlformats.org/spreadsheetml/2006/main}'
 R='{http://schemas.openxmlformats.org/officeDocument/2006/relationships}'
+PR='{http://schemas.openxmlformats.org/package/2006/relationships}'
 MAX_BYTES=150*1024*1024
 MAX_MEMBER=40*1024*1024
 MAX_TOTAL=200*1024*1024
@@ -42,6 +44,21 @@ def scan(path:Path)->dict:
         sheets=[{'name':s.get('name'),'sheetId':s.get('sheetId'),
                  'relationshipId':s.get(R+'id')}
                 for s in root.findall('.//'+M+'sheets/'+M+'sheet')]
+        # XLSX/XLSM sheet names are linked through workbook.xml.rels.
+        # Never guess that sheet1.xml means the first named worksheet.
+        relmap={}
+        if 'xl/_rels/workbook.xml.rels' in names:
+            relroot=ET.fromstring(z.read('xl/_rels/workbook.xml.rels'))
+            for rel in relroot.findall(PR+'Relationship'):
+                rid=rel.get('Id')
+                target=rel.get('Target','')
+                if rel.get('TargetMode')=='External':
+                    continue
+                candidate=normpath(join('xl',target.lstrip('/'))) if not target.startswith('/') else target.lstrip('/')
+                if candidate.startswith('xl/worksheets/') and candidate in names:
+                    relmap[rid]=candidate
+        for sheet in sheets:
+            sheet['worksheet_part']=relmap.get(sheet['relationshipId'])
         extracted=[]
         for name in sorted(n for n in names if n.startswith('xl/worksheets/')
                            and n.endswith('.xml') and '/_rels/' not in n):
@@ -58,6 +75,8 @@ def scan(path:Path)->dict:
         return {'case':'EPBC 2019/8575','status':'UNVERIFIED_WORKBOOK_CANDIDATE',
                 'sha256':h.hexdigest(),'bytes':size,'sheets_declared':sheets,
                 'sheet_cells':extracted,
+                'declared_sheet_links_resolved':bool(sheets) and all(x['worksheet_part'] for x in sheets),
+                'worksheet_relationships_checked':bool(relmap),
                 'formula_count':sum(sum(c['formula'] is not None for c in s['cells'])
                                     for s in extracted),
                 'vba_present':any(n.lower().endswith('vbaproject.bin') for n in names),
@@ -71,14 +90,18 @@ def selftest():
     with TemporaryDirectory() as d:
         p=Path(d)/'example.xlsm'
         wb='<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheets><sheet name="Inputs" sheetId="1"/></sheets></workbook>'
+        rels='<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId5" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'
+        wb=wb.replace('sheetId="1"', 'sheetId="1" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId5"')
         ws='<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData><row r="1"><c r="A1"><v>75</v></c><c r="B1"><f>A1*4</f><v>300</v></c></row></sheetData></worksheet>'
         with ZipFile(p,'w',compression=ZIP_DEFLATED) as z:
             z.writestr('[Content_Types].xml','<Types/>')
             z.writestr('xl/workbook.xml',wb)
+            z.writestr('xl/_rels/workbook.xml.rels',rels)
             z.writestr('xl/worksheets/sheet1.xml',ws)
         good=scan(p)
         assert good['formula_count']==1 and not good['approved_original_authenticated']
         assert good['sheet_cells'][0]['cells'][1]['formula']=='A1*4'
+        assert good['sheets_declared'][0]['worksheet_part']=='xl/worksheets/sheet1.xml'
         with ZipFile(p,'a') as z:
             z.writestr('xl/vbaProject.bin',b'FAKE-VBA-NOT-EXECUTED')
             z.writestr('xl/externalLinks/externalLink1.xml',b'<externalLink/>')
