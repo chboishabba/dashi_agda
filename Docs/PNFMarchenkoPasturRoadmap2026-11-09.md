@@ -35,7 +35,7 @@ dashiTRADE comparison: `scripts/phase07_eigen_boundary_check.py` uses action/tra
 ### Phase A — exact finite carrier [P0 maximum cut]
 
 A1 `finiteGramPositiveSemidefinite`: IMPLEMENTED as theorem conditional on finite-sum laws; kernel check PENDING.
-A2 `sampleCovarianceIsGramQuadratic`: PARTIAL. `PNFCentredCovarianceExact` now constructs centred finite rows from the same input matrix and source-specific column means; `scaledCovariance` and `scaledGramQuadratic` reuse that centred matrix with the same explicit scale. Still OPEN: actual mean=sum/n and scale=1/(n−1), a same-operator quadratic identity, and source-owned data receipt. Previously: `PNFFiniteGramPositiveExact.gramQuadratic` is an explicitly finite sum of squares, and `finiteMatrixGramPositiveSemidefinite` derives its nonnegativity by actual finite-sum induction using the stated positive-cone laws. The equality with the same source-normalized centred sample covariance matrix remains OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
+A2 `sampleCovarianceIsGramQuadratic`: FINITE SAME-OPERATOR QUADRATIC IDENTITY AUTHORED (kernel unverified). `PNFCovarianceQuadraticIdentityExact.scaledCovarianceQuadraticEqualsScaledGramQuadratic` and `covarianceOperatorPositiveSemidefinite` bridge to existing PSD authority. Selected source means, n−1 inverse and input receipt still OPEN. Earlier note: `PNFCentredCovarianceExact` now constructs centred finite rows from the same input matrix and source-specific column means; `scaledCovariance` and `scaledGramQuadratic` reuse that centred matrix with the same explicit scale. Still OPEN: actual mean=sum/n and scale=1/(n−1), a same-operator quadratic identity, and source-owned data receipt. Previously: `PNFFiniteGramPositiveExact.gramQuadratic` is an explicitly finite sum of squares, and `finiteMatrixGramPositiveSemidefinite` derives its nonnegativity by actual finite-sum induction using the stated positive-cone laws. The equality with the same source-normalized centred sample covariance matrix remains OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
 A3 `sampleCovarianceSymmetric`: WRITTEN FOR CENTRED SCALED FINITE MATRIX, KERNEL UNVERIFIED. `PNFCentredCovarianceExact.scaledCovarianceSymmetric` composes finite Gram symmetry with scalar multiplication. Previously: `PNFFiniteCovarianceEconomicsExact.sampleGramSymmetric` proves symmetry of the unscaled finite row Gram matrix using the canonical finite-sum and ring machinery; centring/source scaling remains OPEN. Derive symmetry from that actual construction, rather than supplying it as a field.
 A4 `sampleCovarianceRankBound`: OPEN. Choose existing in-repo finite linear algebra, prove rank(C)≤min(p,n−1) for the *same centred matrix*.
 A5 `sampleCovarianceForcedZeroMultiplicity`: OPEN. Derive max(0,p−n+1) zero eigenvalues from A4 and an actual spectral theorem.
@@ -185,3 +185,30 @@ A 200×120, rho=0.25 seeded synthetic diagnostic was run locally using NumPy, wi
 - P0 Agda 2.9 checker acceptance of all new modules and transitive imports: OPEN.
 
 **Source and authority rule:** The synthetic check tests mathematics/software behavior, not PNF semantics or real portfolio performance. The external Fleet spectral labels remain candidate/planning evidence only. The numeric ABI remains non-promotable by its established empty promotion type.
+
+## 9. Existing PSD reuse and exact operator identity continuation (2026-11-09)
+
+**Correction to dependency ownership:** DASHI already supplies `DASHI.Physics.Closure.NSTriadKNPhysicalCutoffOrbitGramAssembly.FiniteGramOrderAuthority`, with zero/additive/square positivity and additive monotonicity laws. Its finite ordered-ring and `sumFin` infrastructure belong to `NSTriadKNPhysicalCutoffInnerProduct`. We reuse this existing PSD order authority: `PNFFiniteGramPositiveExact.positiveConeFromExistingPSD` and `finiteMatrixGramPSDFromExisting`; `PNFCentredCovarianceExact.centredCovarianceGramPSDFromExisting`. The PNF-specific `PositiveCone` is now an adapter for compatibility, not a newly required proof source. This does not imply signed residual Laplacians are PSD: the signed and unsigned operators remain distinct.
+
+### New exact algebra authored and committed
+- `PNFFiniteBilinearExpansionExact.sumFinMulRight`, `rowProjectionScale`, `finiteCovarianceSumExchange`.
+- `PNFCovarianceQuadraticIdentityExact.gramActionEqualsRowProjection`: finite Fubini + distributivity.
+- `PNFCovarianceQuadraticIdentityExact.unscaledGramQuadraticEqualsSquares`: vᵀ(XᵀX)v equals finite rowwise sum of squares.
+- `PNFCovarianceQuadraticIdentityExact.covarianceScaleOut`, `scaledCovarianceQuadraticEqualsScaledGramQuadratic`: same-source centred scaled operator quadratic equals scaled Gram sum of squares.
+- `PNFCovarianceQuadraticIdentityExact.covarianceOperatorPositiveSemidefinite`: transport the existing finite Gram PSD authority through the equality for nonnegative scale.
+- `PNFEquicorrelationPositiveExact.equiQuadraticDecomposition`: equicorrelation risk quadratic decomposes into (1−rho)·∑vᵢ² + rho·(∑vᵢ)².
+- `PNFEquicorrelationPositiveExact.equiQuadraticNonnegativeForPositiveRho`: proves sufficient PSD for 0≤rho≤1 expressed as rho≥0 and 1−rho≥0. The full rho≥−1/(p−1) range remains OPEN.
+
+**All new Agda proof terms are authored, NOT Agda 2.9 kernel-accepted**. Lightweight delimiter checks passed; this is NOT a typechecker substitute. A2's *finite same-operator identity* is now authored, but the normalization/empirical alignment still remains open and the kernel gate has not been discharged.
+
+### Revised maximum-cut accounting
+- P0 `kernelAcceptsPNFCovarianceQuadraticIdentityExact` and all imports: OPEN (run pinned Agda + repair).
+- P0 `sampleMeanDefiningEquation` and `positiveUnbiasedScale`: OPEN (selected n>1, field inverse, source-specific mean).
+- P0 `sampleCovarianceRankBound`, `sampleCovarianceForcedZeroMultiplicity`: OPEN (exact linear algebra).
+- P0 `equiResidualSpaceDimension`, `equiPopulationPSDRange`: OPEN beyond rho≥0 sufficient PSD.
+- P1 B1–B10 full MP distribution, moments, resolvent, weak limit: OPEN.
+- P1 C1–C9 same-source PNF null and operator spectral reconstruction: OPEN except finite algebra sublemmas.
+- P2 D1–D5 source replay and semantic admission; F1, F3–F11 economics risk/costed market validation: OPEN.
+- P3 dashiTRADE Nashi no-bypass & action-cost ledger: OPEN.
+
+**No false closure:** existing PSD establishes the relevant ordered-scalar finite positivity law. It does NOT establish iid MP assumptions, empirical PNF source identity, positive signed-Laplacian behavior, finite-sample market eigenvalue outlier significance, or semantic/economic promotion.
