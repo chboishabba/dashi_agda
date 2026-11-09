@@ -199,14 +199,35 @@ def main(argv=None):
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument("--source-sha256", required=True)
     parser.add_argument("--receipt", type=Path, required=True)
+    parser.add_argument("--initial-state", type=Path,
+                        help="Explicit original 27x29 concentration JSON; requires --dt and --state-output")
+    parser.add_argument("--dt", type=float,
+                        help="Physical step duration; no implicit default")
+    parser.add_argument("--state-output", type=Path,
+                        help="Write accepted candidate next-state 27x29 JSON")
     args = parser.parse_args(argv)
     source_bytes = args.source.read_bytes()
     manifest = load_original_receipt_json(args.manifest.read_text(encoding="utf-8"))
-    _, receipt = make_candidate(
-        source_bytes, manifest, pinned_sha256=args.source_sha256)
+    if args.initial_state is None and args.dt is None and args.state_output is None:
+        _, receipt = make_candidate(
+            source_bytes, manifest, pinned_sha256=args.source_sha256)
+        args.receipt.write_text(
+            json.dumps(receipt, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+        print("candidate-only source-gated PNP model validated; no physical promotion")
+        return 0
+    if args.initial_state is None or args.dt is None or args.state_output is None:
+        parser.error("--initial-state, --dt and --state-output must all be specified")
+    initial = load_original_receipt_json(
+        args.initial_state.read_text(encoding="utf-8"))
+    after, receipt = source_bound_closed_implicit_step(
+        source_bytes, manifest, pinned_sha256=args.source_sha256,
+        initial_concentrations=initial, dt=args.dt)
+    # Write outputs only after all source/physical receipt checks completed.
+    args.state_output.write_text(
+        json.dumps(after.tolist(), indent=2) + "\n", encoding="utf-8")
     args.receipt.write_text(
         json.dumps(receipt, sort_keys=True, indent=2) + "\n", encoding="utf-8")
-    print("candidate-only source-gated PNP model validated; no physical promotion")
+    print("source-bound closed PNP candidate accepted; no empirical or Agda promotion")
     return 0
 
 
