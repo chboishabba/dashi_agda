@@ -81,3 +81,6 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalAllWordPathSupportExtensionalEx
 
 -- E1/A3 literal finite List SUN-link-value coordinate projection and source-real Wilson word factorization.
 import DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteCoordinateProjectionExact as E1A3ActualFiniteProjection
+
+-- E1/A3: actual original positive-link tuple evaluator reconstructs signed path holonomy and every real SU(N) plaquette word.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalSignedPathValueEvaluatorExact as E1A3DirectWordEvaluator
