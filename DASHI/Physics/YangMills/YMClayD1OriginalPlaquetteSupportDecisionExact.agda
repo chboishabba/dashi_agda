@@ -459,9 +459,9 @@ filterOriginalStarFreeComplete a (first ∷ rest) b
 
 OriginalStarDominated :
   ∀ {n} (b : Bond n) → List (Bond n) → Set
-OriginalStarDominated b selected =
+OriginalStarDominated {n} b selected =
   Torus._∈_ b selected ⊎
-  Σ (Bond _)
+  Σ (Bond n)
     (λ chosen →
       Torus.Product
         (Torus._∈_ chosen selected)
