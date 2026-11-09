@@ -523,3 +523,38 @@ and then identify evaluation on the selected half-ball. Only after that
 can the existing `OriginalAtanFiveCayleyEvaluation` and
 `OriginalAtan239CayleyEvaluation` be inhabited. No assertion of
 analytic completion or kernel acceptance is made by the new source.
+
+
+## P1 algebraic expansion and stage-13 provenance boundary
+
+Source owner: `DASHI/Foundations/BishopMachinCayleyFourCycleJanko13BoundaryExact.agda`.
+
+New source-written statements (kernel check intentionally deferred):
+
+- `originalCayleyCoefficientFourPeriod` proves the canonical Cayley
+  rational-complex coefficients have `c_(n+5)=c_(n+1)` for all
+  `n : Nat`; `c0=1` remains the exceptional constant term.
+- `originalCayleyThirteenSameAsOne` and
+  `originalCayleyThirteenIsTwoImaginaryUnits` prove `c13=c1=2i`.
+- `originalEquationForcesFourPeriod` proves that ANY coefficient stream
+  satisfying the previous original `(1-iX)F=1+iX` all-degree equation
+  has that same four-period, by transporting the established unique
+  coefficient identification; no independently supplied recurrence.
+- `originalEquationForcesStage13Phase` specializes to stage 13.
+- The existing `SecondRevolutionJankoTarotExact` supplies the
+  independent exact ordinal charts `J3 -> 13=10+3=9+4`.
+  Those are merely common Nat indices. The group, modular j function,
+  principal modular level, stage carrier, and coefficient stream remain
+  distinct typed objects; `JChartSuccessorBoundary` already
+  enforces distinct chart/modular/representation roles.
+
+This is a stronger finite-algebra slice of **P1.01** and a provenance-safe
+index bridge. It is not `exp_C(2i atan_B(t)) = Cayley(t)`.
+The remaining decisive original-source obligations are (a) derive the
+same all-degree denominator identity from actual nested original
+exp/atan coefficients with the justified Cauchy/reindex theorem, or
+(b) prove a same-source ODE uniqueness theorem with full derivative
+and initial-value transport; then (c) produce genuine convergent
+half-ball evaluation and the two original pointwise witnesses.
+P2 selected-zeta semantic equality and P3 Gamma/continuation/Xi
+remain open independently.
