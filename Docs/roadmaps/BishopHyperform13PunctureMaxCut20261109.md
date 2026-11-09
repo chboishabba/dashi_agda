@@ -817,3 +817,100 @@ Do not say the *entire H2.02 source-world programme* is closed:
 this payment specifically closes the **original relational-pants
 selected finite specimen**, not unsourced world-model semantics.
 The mandatory source/kernal distinction remains explicit.
+
+
+## Highest-alpha next tranche: signature-complete heterogeneous seam and Machin exact points
+
+Source-writing date: 2026-11-09. **Neither new module has an Agda kernel
+acceptance receipt.** Explicit tests, witness assumptions and attribution
+boundaries are preserved below.
+
+### H2.02 — original five-field signature is complete for InterfaceMatch
+
+`DASHI/Reasoning/TypedHyperfabricPantsSignatureCompletenessExact.agda`
+(source commit `55e311c`) proves
+`signatureEqualityImpliesInterfaceMatch`:
+equality of the original packed five-field boundary signature implies
+the ORIGINAL
+`RelationalBranchCobordismGeometry.InterfaceMatch`, by projecting
+each of proposition, capacity, phase, wave and openness.
+
+The converse is the original pre-existing
+`TypedHyperfabricPantsNonvacuousSeamQuotientExact.interfaceMatchImpliesSignatureEquality`.
+The new owner reuses it as
+`signatureMatchSound` and `signatureMatchComplete`; additionally
+`signatureMismatchBlocksInterfaceMatch` rules out any certificate
+when packed signatures differ. This makes *one proved signature equality*
+a sufficient source proof of the interface, rather than an unrelated
+opaque field for each original observable. Labels/provenance are not
+promoted into equalities.
+
+### H2.02 — independent heterogeneous stalk types and all needed transport
+
+`DASHI/Reasoning/TypedHyperfabricPantsSourceHeterogeneousTransportExact.agda`
+(source commit `dcb9d9a`) contains parameterized
+`HeterogeneousMatchedSource` with:
+- independent types `LeftStalk` and `RightStalk`;
+- original chosen `leftValue`, `rightValue`;
+- original-source interpretation maps to existing
+  `Pants.BranchChannel`;
+- a **paid equality of the original five-field signatures**;
+- two separately retained original source provenance lists.
+
+For *every* such source payment, it constructs
+`beforeFabric`, `beforeSection`,
+`originalInterface`,
+`admittedOriginalPantsSeam`,
+`afterFabric`, `afterSection`,
+`incidencePreserved`, `restrictionPreserved`,
+`edgeValuePreserved`, `entireSourceProvenanceRetained`
+and `bothSourceEdgesReallyMerge`.
+This is a true two-incidence noninjective edge quotient on
+the ORIGINAL `TypedHyperfabric` interface with genuinely
+differently typed stalks. The named
+`OriginalRelationalPants` specialization uses the original
+`BoundaryInterface` / `BranchChannel` pair, original
+`selectedBoundary2`, `innerInputChannel2`, original donor
+realization, original `sourceRealizedEdgesMatch`, and actual
+source provenance from the preceding selected H2.02 owner.
+**No ITIR-world node, physical observation or group carrier is asserted.**
+
+### P1 — original rational Gaussian Cayley evaluations at Machin points
+
+`DASHI/Foundations/BishopMachinOriginalCayleyRationalPointAlgebraExact.agda`
+(source commit `5779296`, import-mode correction `25e96c9`) proves
+the ORIGINAL rational (Q[i]) denominator equations
+`originalCayleyFiveDenominatorEquation` and
+`originalCayley239DenominatorEquation` at the selected
+original inputs (1/5) and (1/239).
+
+The explicit target pairs are
+`cayleyAtOneFifth = (12/13, 5/13)` and
+`cayleyAtOneTwoHundredThirtyNinth = (28560/28561, 239/28561)`,
+with all four coordinate declarations.
+They solve ((1-it)z=1+it) using the repo's ORIGINAL rational
+complex multiplication and solver. They are **finite rational
+point algebra**, not evaluations of the original Bishop
+`exp_B(2i atan_B(t))` analytic functions.
+The convergence/composition/reindexing and actual source
+same-function analytic identity remain OPEN.
+
+Both H2.02 and P1 owners were imported in the three canonical TOE roots:
+`c3df083`, `8dd914f`, `b305474`.
+
+### Narrow exact remaining maximum cut
+
+| Priority | Gate | Remaining actual theorem/evidence | Status |
+|---|---|---|---|
+| P0 | H2.02 selected typed heterogeneous pants | Original 5-field comparison ↔ InterfaceMatch, two source types, actual signature-paid seam, nonempty incidence quotient, restrictions, full source provenance lists | SOURCE-WRITTEN |
+| P0 | H2.02 independently selected world fabric | Original ITIR/world edge-stalk interpretations, independently evidenced signature agreement, authentic topology/provenance transport beyond the two-incidence template | OPEN |
+| P0 | H1.01 semantic | Original independent relational/group central completion as the constructed source 12+1 carrier, actual same-object identification | OPEN |
+| P0 | H2.01 world | Independently supplied real world nodes and commuting observation/consumer maps to instantiate `OriginalWorldCentralTransport` | OPEN |
+| P1 | Machin rational Cayley points | Original finite (Q[i]) denominator equations at 1/5 and 1/239 | SOURCE-WRITTEN |
+| P1 | Bishop actual analytic Cayley | **Original nested** exp_C(2i atan_B(t)) identity as an analytic Bishop same-object equality; genuine limit/composition and the two actual analytic point witnesses | OPEN |
+| P2 | Zeta | Source canonical-power identification and independently selected zeta equality | OPEN |
+| P3 | Gamma/Xi | Original Mellin integral, continuation, functional equation and completed Xi | OPEN |
+
+**No Agda 2.9 typechecking performed** on this tranche. Do not
+promote SOURCE-WRITTEN into KERNEL-CHECKED or promote the finite
+rational-point Cayley result into original analytic Machin.
