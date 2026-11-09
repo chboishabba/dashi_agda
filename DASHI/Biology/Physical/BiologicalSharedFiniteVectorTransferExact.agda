@@ -240,7 +240,7 @@ originalNativeBondTargetCredit geometry bond state =
 
 lookupDebitAwayFromSource :
   ∀ {n} (source observer : F.Fin n) (state : V.Vec Nat n) →
-  source ≢ observer →
+  ¬ (source ≡ observer) →
   V.lookup (debitAt source state) observer ≡ V.lookup state observer
 lookupDebitAwayFromSource F.zero F.zero state different =
   ⊥-elim (different refl)
@@ -257,7 +257,7 @@ lookupDebitAwayFromSource (F.suc source) (F.suc observer)
 
 lookupCreditAwayFromTarget :
   ∀ {n} (target observer : F.Fin n) (state : V.Vec Nat n) →
-  target ≢ observer →
+  ¬ (target ≡ observer) →
   V.lookup (creditAt target state) observer ≡ V.lookup state observer
 lookupCreditAwayFromTarget F.zero F.zero state different =
   ⊥-elim (different refl)
@@ -278,7 +278,7 @@ lookupCreditAwayFromTarget (F.suc target) (F.suc observer)
 lookupTransferAwayFromEndpoints :
   ∀ {n} (source target observer : F.Fin n)
   (state : V.Vec Nat n) →
-  source ≢ observer → target ≢ observer →
+  ¬ (source ≡ observer) → ¬ (target ≡ observer) →
   V.lookup (transferOne source target state) observer
     ≡ V.lookup state observer
 lookupTransferAwayFromEndpoints F.zero F.zero observer
@@ -319,8 +319,8 @@ originalNativeBondUnchangedOutsideEndpoints :
   (geometry : Original54BondIndexing)
   (bond : Grid.PositiveBond) (observer : F.Fin 27)
   (state : V.Vec Nat 27) →
-  sourceIndex geometry bond ≢ observer →
-  targetIndex geometry bond ≢ observer →
+  ¬ (sourceIndex geometry bond ≡ observer) →
+  ¬ (targetIndex geometry bond ≡ observer) →
   V.lookup
     (transferOne (sourceIndex geometry bond)
       (targetIndex geometry bond) state) observer
