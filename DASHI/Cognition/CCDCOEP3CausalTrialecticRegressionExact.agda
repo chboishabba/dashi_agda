@@ -28,6 +28,7 @@ import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact as Compliance
 import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact as Country
 import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
 import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
+import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -453,3 +454,16 @@ b20ReportedPresentationNotDraftUptake :
   Handoff.EvidenceItem.level Handoff.b20ICCPresentationAccount
   ≡ Handoff.provedDraftUptake → ⊥
 b20ReportedPresentationNotDraftUptake = Handoff.b20PresentationNotDraftUptake
+
+-- Scholarly genealogy, policy proposal, documentary assertion and
+-- fictional satire retain separate epistemic status.
+filmFictionIsNotIndependentlyMeasured :
+  Culture.CulturalWork.status Culture.dontLookUp2021
+  ≡ Culture.independentlyVerifiedObservation → ⊥
+filmFictionIsNotIndependentlyMeasured = Culture.satireNotEmpiricalObservation
+
+greenNewDealPolicyProposalNotHistoricalEvidence :
+  Culture.CulturalWork.kind Culture.chomskyPollin2020
+  ≡ Culture.historicalResearch → ⊥
+greenNewDealPolicyProposalNotHistoricalEvidence =
+  Culture.policyProposalNotHistoricalObservation
