@@ -1571,3 +1571,36 @@ Evidence grades are distinct:
 distinct reviewer receipts and a scene-version concordance; source-backed
 interpretive reading pairs and their retained time-indexed paths;
 exact-head Agda kernel and executable Python receipts.
+
+
+## 9 Nov 2026 — RETURN TO THE ORIGINAL COGNITIVE-WARFARE RESEARCH QUESTION
+
+**Priority correction:** The case-specific film theory is a consumer and methodological negative-control family, not the primary inference target. The original question is whether independently evidenced communication operations changed evidence responsiveness, agency, identity, trust, revision or institutional relationships; legitimate advocacy and social disagreement must not be classified as hostile solely because they alter attitudes. Country-level climate-policy outcomes remain distal.
+
+**New actual repo implementation:** `DASHI/Cognition/CCDCOEP3CognitiveWarfareArtDiscriminatorExact.agda`. No parallel causal calculus was invented: it imports original `CCDCOEP3CausalTrialecticInteractionExact`, `CCDCOEP3GCCExecutedCampaignSourceExact`, `CCDCOEP3ClimateObservedActivityAndCorpusExact`, `DiscriminatorSynthesisExact`, and the previously added critical-art genre/edition distinctions. The consumer reuses exact formal non-identification and original source-type discrimination results:
+
+- `originalGCCHistoricalSourceTypesDoNotCollapse`: agency retrospective ≠ archived newspaper clipping when both share the generic label 'climate communication'.
+- `sourceKindDiscriminatesAgencyReportFromArchivedPress`: selected original source provenance is genuinely discriminating.
+- `publishedDocumentStatisticsNotHumanTreatmentEffect`: published 187-document 2017 Supran/Oreskes counts concern communications, not actual population response.
+- `observationalCooccurrenceCannotIdentifyCause`: two explicit causal models with the same observed distribution differ under a controlled intervention.
+- `measuredEffectAloneCannotIdentifyHostilePurpose`: evidence of an effect alone cannot infer hostile targeting or intent.
+- `publicNarrativeAgreementCannotDetermineRevisability` and `prospectiveEvidenceResponseDiscriminator`: public message agreement is not proof of preserved/eroded capacity to revise beliefs; the original finite discriminating experiment separates hypothetical models only.
+- `fictionalSatireNotIndependentAudienceObservation` and `filmEditionMetadataNotMeasuredAudienceResponse`: film metadata or fiction does not provide audience impact.
+- `OperationAdmission`: required sources for original intervention, independent exposure, valid mechanism measurement, causal discrimination, independent targeting/intent and historical attribution. THIS RECORD HAS NO HISTORICAL INSTANCE. The requirements are only a type, not evidence that any original operation qualifies.
+
+`Docs/research/ccdcoe_p3_cognitive_warfare_case_discriminator_20261109.json` now maps seven historically distinct original source cases (GCC PR firm's own self-report; GCC-held 1993 clippings; April 1998 API draft; Supran/Oreskes 2017 published content analysis; `Léon`; `Don't Look Up`; `Planet of the Humans`) to their evidence grade and specific non-promotion conditions. Its source identifiers are reference locators; no new underlying web-source bytes authenticated by this registration.
+
+`scripts/check_ccdcoe_p3_cognitive_warfare_discriminator.py` mechanistically checks case identity, stage, provenance and four missing original-operation gates (independent exposure; measured epistemic/cognitive mechanism; defensible causal design; separately sourced intent/targeting). Seven programmed mutation cases must fail: duplicate cases, self-report promotion, fictional audience-effect promotion, content-category error, fabricated hostile purpose, missing causal gate and fabricated completed gate. Negative controls and manifest content are source-written, not yet executed in canonical checkout.
+
+**Attribution:** Original PR history remains with Harrison's firm/GCC; 1993 media articles with their original journalists/outlets; draft with its original named proponents; the Supran/Oreskes paper with its authors and original cohort; films with their credited original creators and individual critical arguments with the relevant theorists/critics. DASHI owns new formal consumer lemmas and evidence provenance constraints. Mere presence in shared media institutions does NOT establish one command network or that the 1998 proposal caused an earlier GCC activity.
+
+**What remains / Pareto max-cut:**
+1. **CW0 original corpus admission:** materialise verified bytes and independent reviewer receipts for selected GCC archive / 1993 article, 1998 plan, Exxon original documents or film cuts. Existing citations not source-byte review.
+2. **CW1 original intervention/exposure join:** dated and attributable who-transmitted-what-to-whom; independently documented audience/institutional exposure; do not infer from a publication URL or press clipping.
+3. **CW2 evidence-responsiveness measurement:** reproducible source-aware coding of scientific uncertainty/responsibility/agency, blinded reviewer reliability and independently validated response/revision observations; preserve source denominators.
+4. **CW3 historical causal discriminator:** define contemporaneous alternative causes and measurable negative controls with pretrends/uncertainty; prospective synthetic SCM discrimination already exists but its original historical instantiation does NOT.
+5. **CW4 independently documented targeting and intent:** triangulate genuine original actor records, autonomy/coercion/hostile-purpose criteria; any media influence remains ordinary advocacy unless separately supported.
+6. **CW5 multiplex and art nonpromotion:** map measured response to 5-layer fibre/trialectic residual with genuine evidence; documentary/satire remain interpretation sources unless separate audience-study receipts are available.
+7. **CW6 Golden:** Agda 2.9 exact-head kernel receipts + Python canonical source-checker, independently reproduced published metrics, source-review signed receipts. No checks claimed in this connector session.
+
+The previous A1–A9 critical-art max-cut is **preserved but subordinate**: cut-specific source review is necessary for those film hypotheses, not a dependency for the original 1993/1998/2017 historical communications experiment. No ESD files edited; PR remains draft.
