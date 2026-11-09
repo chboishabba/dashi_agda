@@ -15,8 +15,10 @@ module DASHI.Moonshine.Y443Mod2OddEdgeCentralCharacterExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
+open import Agda.Builtin.Nat using (Nat; suc)
 
 infixl 6 _⊕_
 _⊕_ : Bool → Bool → Bool
@@ -41,6 +43,59 @@ sevenOdd : ∀ x →
 sevenOdd false = refl
 sevenOdd true = refl
 
+
+------------------------------------------------------------------------
+-- Normalize the ACTUAL source central relation (the 9th power of its
+-- seven-node word) using characteristic-two word parity. This discharges
+-- the central-word transcription rather than assuming the 7-bit parity.
+------------------------------------------------------------------------
+
+parityWord : (Y.Node → Bool) → Y.Word → Bool
+parityWord q [] = false
+parityWord q (n ∷ ns) = q n ⊕ parityWord q ns
+
+xorAssoc : ∀ a b c → (a ⊕ b) ⊕ c ≡ a ⊕ (b ⊕ c)
+xorAssoc false false false = refl
+xorAssoc false false true = refl
+xorAssoc false true false = refl
+xorAssoc false true true = refl
+xorAssoc true false false = refl
+xorAssoc true false true = refl
+xorAssoc true true false = refl
+xorAssoc true true true = refl
+
+xorTwice : ∀ a b → a ⊕ (a ⊕ b) ≡ b
+xorTwice false false = refl
+xorTwice false true = refl
+xorTwice true false = refl
+xorTwice true true = refl
+
+cong : ∀ {A B : Set} (f : A → B) {x y : A} →
+  x ≡ y → f x ≡ f y
+cong f refl = refl
+
+parityAppend :
+  (q : Y.Node → Bool) (left right : Y.Word) →
+  parityWord q (Y._++_ left right)
+    ≡ parityWord q left ⊕ parityWord q right
+parityAppend q [] ys = refl
+parityAppend q (x ∷ xs) ys =
+  trans
+    (cong (λ z → q x ⊕ z) (parityAppend q xs ys))
+    (sym (xorAssoc (q x) (parityWord q xs) (parityWord q ys)))
+
+parityPowerTwoStep :
+  (q : Y.Node → Bool) (w : Y.Word) (n : Nat) →
+  parityWord q (Y.powerWord w (suc (Agda.Builtin.Nat.suc n)))
+    ≡ parityWord q (Y.powerWord w n)
+parityPowerTwoStep q w n =
+  trans
+    (parityAppend q w (Y.powerWord w (Agda.Builtin.Nat.suc n)))
+    (trans
+      (cong (λ z → parityWord q w ⊕ z)
+        (parityAppend q w (Y.powerWord w n)))
+      (xorTwice (parityWord q w) (parityWord q (Y.powerWord w n))))
+
 module Selected (charge : Y.Node → Bool) where
 
   centralParity : Bool
@@ -52,6 +107,18 @@ module Selected (charge : Y.Node → Bool) where
     (charge Y.b1 ⊕
     (charge Y.c1 ⊕
     (charge Y.b2 ⊕ false))))))
+
+  sourceCentralPowerNineParity :
+    parityWord charge Y.centralInvolutionRelator ≡ centralParity
+  sourceCentralPowerNineParity =
+    trans (parityPowerTwoStep charge Y.centralBase 7)
+      (trans (parityPowerTwoStep charge Y.centralBase 5)
+        (trans (parityPowerTwoStep charge Y.centralBase 3)
+          (trans (parityPowerTwoStep charge Y.centralBase 1) refl)))
+
+  -- This removes the previously open central side of the
+  -- source-word -> parity-record bridge. Only actual eleven edge
+  -- relator membership/odd exponent transport remains to be welded.
 
   record SourceEdgeCentralParity : Set where
     field
