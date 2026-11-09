@@ -80,6 +80,7 @@ python3 scripts/check_critical_art_film_edition_intake.py --self-test
 python3 scripts/check_critical_art_film_edition_intake.py
 python3 scripts/check_critical_art_original_edition_authorities.py --self-test
 python3 scripts/check_critical_art_original_edition_authorities.py
+python3 scripts/check_ccdcoe_p3_sampling_frame.py --self-test
 python3 scripts/measure_ccdcoe_p3_gcc_media.py --self-test
 python3 scripts/measure_ccdcoe_p3_gcc_dual_coder.py --self-test
 python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
