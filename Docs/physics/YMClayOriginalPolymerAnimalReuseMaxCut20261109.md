@@ -56,3 +56,14 @@ This audit reads original GitHub source on PR #1444, not merely PR descriptions.
 **Further narrowed maximum cut:** (1) select original Wilson literal physical support into P06/R429 and prove the actual instance of its geometric/model fields; (2) original full Gibbs sparse-frustrated activity/scale bound with a uniform entropy margin and two-mark charge; (3) same-source physical-shell sum calibration. Only then consume the already-existing KP/FP, P11, Step V, CMP116, R320, R333 compilers.
 
 This narrows obligations; it does not prove the missing original-Wilson analytic inputs.
+
+
+## 2026-11-09 original-link P06 concrete graph implementation
+
+New source module `YMClayD1OriginalLinkStarFiniteNeighbourGraphExact.agda`, imported by `YMClayOriginalWilsonPhysicalRegression.agda`.
+
+It constructs the original 4D positive-link graph on the source carrier `Torus.PositiveBond (suc n)` instead of substituting the eight-neighbour **block** graph. Its `OriginalLinkStarConflict a b` means that the actual incident original plaquette stars are not disjoint. It supplies `originalAllPositiveLinksComplete`, constructive `originalLinkStarConflictDec`, `originalConflictingFilterSound`, `originalConflictingFilterComplete`, `originalNeighbourConflictSound`, `originalNeighbourConflictComplete`, `originalNeighbourHasLiteralSharedPlaquette`, and an instance `originalLinkStarFiniteNeighbourGraph : Nat → P06.FiniteNeighbourGraph`. Thus existing `P06.concreteDegree` can count the **actual enumerated link-star conflicts**, with the original shared-plaquette witness intact.
+
+**Critical counting convention:** the conflict graph has self-conflict, so a closed neighbourhood has size at most 19 (one centre plus up to 18 other links); it is NOT the same as the existing P06 periodic block nearest-neighbour degree eight. Native proof of the 19 closed-neighbourhood bound and its distinct-marked 18-removal corollary is outstanding. Do not silently substitute a block-graph degree-eight estimate.
+
+This is finite source construction and proof terms only. `P06.FiniteNeighbourGraph` does not imply a physical P06ModelLeafDischargePackage; that still needs real original Wilson polymers, source-preserving support/tree/decorations and Gibbs activity suppression. Likewise `chargeSumBelowPhysicalRootedShell` remains unpaid. Current turn produced GitHub source, not an Agda 2.9 kernel acceptance receipt.
