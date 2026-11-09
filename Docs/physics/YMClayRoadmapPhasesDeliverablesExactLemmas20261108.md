@@ -265,3 +265,18 @@ The original one-link Haar tail therefore admits an explicit closed `β` bound f
 **D1.03 still OPEN:** a volume-uniform *single-link probability* does NOT provide spatially connecting polymer suppression at fixed physical scale, especially with a diverging number of UV links in each physical block. No CMP116 original long-distance full-covariance estimate, E1 4D interacting continuum, or mass gap follows. This is a genuine original finite-measure pressure theorem, not a theorem that the physical scaling uses any prescribed `β(a)`. Source receipt: original analytic derivation in the linked doc; rational finite quaternion regression script `scripts/check_ym_su2_original_wilson_pressure_uniform_20261109.py` had 2,401 rational plaquette-product controls locally. **No native Agda 2.9 kernel proof** yet.
 
 **Exact next D1-03A (new):** obtain a cutoff-uniform bound on *connected geometrically spanning frustrated polymers* using an admissible gauge-invariant block event; quantify polymer entropy against the actual original Wilson weight/pressure, not independent bare-link failures. **Exact next D1-03B:** prove original full Wilson small+large-field covariance decomposition and CMP116 marked-source applicability with physical distance exponent. Both are mathematically unproved and not replaced by the local result.
+
+
+## 9 November 2026 — D1 quantitative bulk-density bound and sparse-spanning counterexample
+
+The same original four-dimensional SU(2) Wilson pressure argument now yields, for `β≥16`, `0<ε≤2`, and `η>0`, the finite-volume-uniform bounds
+
+```
+B_ε = (# {original plaquettes p : 1−t(U_p)≥ε}) / N_p
+E_original[B_ε] ≤ [8+(2/3)ln24+lnβ]/(βε)
+P_original(B_ε≥η) ≤ [8+(2/3)ln24+lnβ]/(βεη).
+```
+
+This follows pointwise from `ε 1_{d_p≥ε}≤d_p`, finite summation and the already-proved original pressure theorem. It is independent of plaquette correlations, and is a **new volume-uniform bulk statistic**, not merely a local conditional one-link tail. [Derivation and sharp obstruction](YMClaySU2OriginalWilsonUniformPlaquetteDeficit20261109.md).
+
+**D1.03 physical endpoint still OPEN.** A path spanning a periodic `n^4` lattice can consist of just `n` bad plaquettes, with density `1/(6n³)→0`, so even an arbitrarily strong vanishing-*density* theorem does not imply nonpercolation or distant Wilson-covariance clustering. The needed original source is a connected-polymer/contour **activity-versus-entropy** estimate with physical block scaling, and original full-Wilson small/large decomposition and CMP116 applicability. E1/D2/N1/G1 unchanged. No Agda kernel or Clay theorem claim.
