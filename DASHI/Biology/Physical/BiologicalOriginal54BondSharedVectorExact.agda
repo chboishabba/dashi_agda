@@ -387,3 +387,65 @@ nativeDirectedBondTargetQuantityPaid action state different =
   Transfer.lookupTransferTargetReceivesActualSource
     (nativeDirectedSource action) (nativeDirectedTarget action)
     state different
+
+
+------------------------------------------------------------------------
+-- NO-LOOP CERTIFICATE FROM ORIGINAL CUBICAL GEOMETRY.
+-- Discharge the source/target distinctness premise using genuine
+-- ternary grid steps and the existing original 27-index injection.
+------------------------------------------------------------------------
+
+tritGridStepNeverStationary :
+  ∀ {a b} → Cube.TritGridStep a b → ¬ (a ≡ b)
+tritGridStepNeverStationary Cube.negToZero ()
+tritGridStepNeverStationary Cube.zeroToNeg ()
+tritGridStepNeverStationary Cube.zeroToPos ()
+tritGridStepNeverStationary Cube.posToZero ()
+
+originalPositiveBondEndpointsDistinct :
+  (bond : Grid.PositiveBond) →
+  ¬ (Grid.bondStart bond ≡ Grid.bondEnd bond)
+originalPositiveBondEndpointsDistinct (Grid.xBond segment y z) equality =
+  tritGridStepNeverStationary (Grid.forwardWitness segment)
+    (cong Cube.x equality)
+originalPositiveBondEndpointsDistinct (Grid.yBond x segment z) equality =
+  tritGridStepNeverStationary (Grid.forwardWitness segment)
+    (cong Cube.y equality)
+originalPositiveBondEndpointsDistinct (Grid.zBond x y segment) equality =
+  tritGridStepNeverStationary (Grid.forwardWitness segment)
+    (cong Cube.z equality)
+
+originalDirectedNativeEndpointsDistinct :
+  (action : OriginalDirectedNativeBond) →
+  ¬ (nativeDirectedSource action ≡ nativeDirectedTarget action)
+originalDirectedNativeEndpointsDistinct (forwardNative bond) equality =
+  originalPositiveBondEndpointsDistinct bond
+    (originalIndexIsInjective
+      (Grid.bondStart bond) (Grid.bondEnd bond) equality)
+originalDirectedNativeEndpointsDistinct (reverseNative bond) equality =
+  originalPositiveBondEndpointsDistinct bond
+    (originalIndexIsInjective
+      (Grid.bondStart bond) (Grid.bondEnd bond)
+      (sym equality))
+
+-- No free geometric premise now remains in these *actual* source/
+-- destination flow equalities.
+original369NativeSourceFluxExact :
+  (action : OriginalDirectedNativeBond) (state : V.Vec Nat 27) →
+  V.lookup (applyNativeDirectedBond action state)
+    (nativeDirectedSource action)
+    + Transfer.actualSourceDebit (nativeDirectedSource action) state
+    ≡ V.lookup state (nativeDirectedSource action)
+original369NativeSourceFluxExact action state =
+  nativeDirectedBondSourceQuantityPaid action state
+    (originalDirectedNativeEndpointsDistinct action)
+
+original369NativeTargetFluxExact :
+  (action : OriginalDirectedNativeBond) (state : V.Vec Nat 27) →
+  V.lookup (applyNativeDirectedBond action state)
+    (nativeDirectedTarget action)
+    ≡ V.lookup state (nativeDirectedTarget action)
+      + Transfer.actualSourceDebit (nativeDirectedSource action) state
+original369NativeTargetFluxExact action state =
+  nativeDirectedBondTargetQuantityPaid action state
+    (originalDirectedNativeEndpointsDistinct action)
