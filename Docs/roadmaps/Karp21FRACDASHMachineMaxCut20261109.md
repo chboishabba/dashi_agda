@@ -1,4 +1,7 @@
+
 # Karp-21 / FRACDASH compiled-machine maximum cut — 2026-11-09
+
+**Current state:** The full max-cut is NOT complete. Signed-gamma suffix and native-control numerical-view source lemmas are new; the executable token value, original N21 full verifier, polynomial clock, InNP, E20, Cook–Levin, network and P-vs-NP lower bound remain OPEN. No Agda kernel receipt is claimed.
 
 ## Governance and sources
 
@@ -52,11 +55,11 @@ FRACDASH's DA51 corpus reports 15,658 raw bytes → 9,275 aggregate → 5,387 be
 | Phase | Gate | Exact owner/target | Status |
 |---|---|---|---|
 | P0.0 | Compiled priority | `refreshStoredCorrect`, `firstRefreshedCorrect`, `cachedStepCorrect` | SOURCE WRITTEN generic; Agda receipt OPEN |
-| P0.1 | Original signed score | `karpSignedIRSameOriginalSparseScore` — same original selected edges, original gamma values, two binary lanes | OPEN original-object weld |
-| P0.2 | N21 rule implementation | Construct N21-specific `State`, `Rule`, `enabled`, `apply`, `affected`, independence witnesses | OPEN |
+| P0.1 | Signed-gamma and score | `karpNativeSignedGammaSuffixSameOriginal` and `karpSignedNativeControlNumericViewSameOriginal` SOURCE; actual `SignedMagnitudeBits` numerical value and `karpSignedIRSameOriginalSparseScore` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
+| P0.2 | N21 rule implementation | Original endpoint-guard/binary-ledger one-edge N21 instantiation in `Karp21FractranN21EndpointScoreStepExact`; full graph/cursor machine OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.3 | First-enabled simulation | `karpFractranFirstEnabledSameVerifierStep` — instantiate the generic machine and match original N21 next step including rejection/halting | OPEN |
-| P0.4 | Readout/acceptance | `karpFractranDecodePreservesAcceptance` on **all** original graph and certificate words, malformed included | OPEN |
-| P0.5 | Reproducible trace/residual | `karpFractranTraceRebuildExact` with lossless decoder or sufficient decision-preserving quotient, and actual trace replay | OPEN |
+| P0.4 | Readout/acceptance | `karpOriginalRawTraceAllWordAcceptance`, `karpOriginalTraceSameTypedN21AllWords` source-written for original ℤ; binary `karpFractranDecodePreservesAcceptance` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
+| P0.5 | Reproducible trace/residual | `rawSelectedTraceRebuildsOriginalScore`, `pairedTraceProjectsToOriginal`, `pairedTraceOriginalScoreExact` source-written; native binary factor/trace reconstruction OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.6 | Cost model | `karpFractranBitMachineClockPolynomial` with program size, guard scans/frontier updates, bit widths, writes, allocations, pointer/tape motion, trace/residual cost | OPEN |
 | P0.7 | Original graph weld | `trieAdmitIffOriginalHistoryConsistency`; `nativeGraphEndpointsConsumeInputBits`; `nativeSparseScoreSameOriginalRawSparseScore`; `nativeN21SameWordAndClock` | OPEN |
 | P0.8 | Membership | Construct the original N21 `PR.InNP` via its actual polynomialTimeVerifier / witness bound | OPEN |
@@ -154,3 +157,34 @@ The new module is imported by the original `Karp21Everything` root (not marked `
 **Exact remaining maximum cut, unchanged by code-transport:** source signed-gamma `readRawEdges` and native bit-token value/suffix alignment; binary two-lane numeric representation equal to original signed-ℤ `rawSparseScore`; actual complete N21 FRACTRAN first-enabled original machine; native all-word acceptance and residual trace reconstruction; concrete bit-machine execution/bit width/heap/tape/head/priority-frontier polynomial cost; `PR.polynomialTimeVerifier` and original `PR.InNP`; E20, Cook–Levin original Cell/Bits and remaining E01–E19/N01–N20 network; independent behavioural self-specializer and resource fixed point to derive `SATNotInP` in separate P-vs-NP lane. Source written ≠ kernel accepted ≠ Clay result.
 
 **Provenance:** Stephen Cook, Leonid Levin, Richard Karp, Elias gamma/Conway FRACTRAN; reuse of repository's original PR #1129 and PR #1445 authorship and FRACDASH compiled-machine work. No ESD paths touched.
+
+
+## Current P0 adjudication — 2026-11-09 signed-gamma all-word cut
+
+**Do not treat the earlier original signed-ℤ trace successes as native-binary equivalence.** This section and the updated table above supersede historical status lines in older chronological entries.
+
+### Newly delivered owner and exact results
+
+`DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedSuffixExact.agda` (`--safe` source-written, **not Agda-kernel accepted**):
+
+1. `nativeScanNumericSuffixSame`: actual native `scanZeros` and the previous original-number numeric-observation scanner return identical optional suffixes for all `count` and all input words, including truncation.
+2. `nativeGammaOriginalSuffixAllWords`: actual native gamma parser and original gamma parser select exactly the same optional suffix for **every** input word.
+3. `nativeSignedSuffixEqualsNativeGamma`: actual binary sign/magnitude splitting cannot change the suffix of a successful original gamma token; rejected input remains rejected, using the source-owned actual leading-one and nonempty-split proofs.
+4. `karpNativeSignedGammaSuffixSameOriginal`: all-word original-versus-native **SIGNED** gamma suffix equality, including success, rejection, and trailing suffix.
+5. `karpSignedNativeControlNumericViewSameOriginal`: an all-word original signed-ℤ numerical observation theorem on the **native gamma prefix/payload control flow**. Numerical observation uses `Old.unzigzag` only on the proof side; it does NOT read the executable `SignedMagnitudeBits` magnitude.
+
+The module is included in both original Karp import roots and the Golden referee. `scripts/check_karp21_signed_gamma_suffix_values.py` added to preflight: independently transcribed literal source original gamma(n+1), zigzag, native sign/prefix and suffix algorithms. **65,735 cases executed PASS**, including every bitword of length 0..15 and 200 additional large (256/1024/2048-bit magnitude class) payloads with suffixes. These tests empirically compare SIGN, VALUE, SUFFIX AND REJECTION, but the Agda source theorem only proves suffix and the separate proof-side integer numerical observation. The unsigned numerical theorem reused was already present in `Karp21GammaBinaryNativeAllWordNumericalWeldExact`. **Do not claim full signed binary value proof based on tests.**
+
+### Exact remaining P0 lemma chain
+
+The narrowest next theorem is `karpNativeSignedTokenValueMatchesOriginal`, stating that whenever the actual `Signed.readSignedBinary word` yields token `t` and suffix `s`, the original `Old.readSignedGamma word` yields `(interpretNativeSigned t,s)` with **actual binary** `valueLE (reverse magnitude)`; handle both sign constructors and zero explicitly. It requires a proved binary-numeral equation for the actual `splitLast` and the source `Old.half`/`Old.even` zigzag decoder, not merely two accepted parses or identical suffixes.
+
+Then implement and prove the all-original-word `Graph.readRawEdges` native binary frame, preserving exact gamma cursor, signed edge weights, strict endpoint ordering, positive gamma threshold and malformed rejection. Use paired original/native token trace, binary ledger fold, factor replay and threshold comparator to inhabit `karpSignedIRSameOriginalSparseScore`, `karpFractranFirstEnabledSameVerifierStep`, `karpFractranDecodePreservesAcceptance` and `karpFractranTraceRebuildExact`. Only a genuine all-word bit-tape cost including program representation, first-enabled priority, bit arithmetic, parser cursor, heap allocations and trace/residual data discharges `karpFractranBitMachineClockPolynomial` and the actual original `PR.InNP` membership witness.
+
+Original E20 and Cook–Levin, the remaining 19 Karp edges and 20 memberships, and separate P-vs-NP behavioural self-specialization/resource fixed point / `SATNotInP` **all remain OPEN**.
+
+### Evidence and toolchain boundary
+
+- Source-written Agda declarations: committed to PR #1474; **no Agda 2.9 or `parallel_checker` executable available in this execution container**, therefore no new kernel receipt.
+- Finite regression: 65,735 directly executed cases PASS (not a complete original source Agda runtime, not an NP proof).
+- No CI requirement imposed; no ESD surfaces modified; original source attribution retained.
