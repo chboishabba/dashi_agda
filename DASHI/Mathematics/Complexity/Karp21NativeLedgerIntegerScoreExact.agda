@@ -18,7 +18,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (reverse)
 open import Data.Product using (_×_; _,_)
-open import Data.Integer.Base as Int using (ℤ; +_; _+_; -_)
+open import Data.Integer.Base as Int using (ℤ; +_; _+_; -_; -[1+_])
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
@@ -65,9 +65,9 @@ integerPositiveStep :
 integerPositiveStep m p n =
   RingZ.solve 3
     (λ x y z →
-      ((x ⊕ y) ⊕ (Κ (Int.- (+ (suc zero))) ⊗ z))
+      ((x ⊕ y) ⊕ (Κ (-[1+ zero ]) ⊗ z))
       ,
-      (x ⊕ (y ⊕ (Κ (Int.- (+ (suc zero))) ⊗ z))))
+      (x ⊕ (y ⊕ (Κ (-[1+ zero ]) ⊗ z))))
     refl (+ m) (+ p) (+ n)
 
 integerNegativeStep :
@@ -77,10 +77,10 @@ integerNegativeStep :
 integerNegativeStep m p n =
   RingZ.solve 3
     (λ x y z →
-      (y ⊕ (Κ (Int.- (+ (suc zero))) ⊗ (x ⊕ z)))
+      (y ⊕ (Κ (-[1+ zero ]) ⊗ (x ⊕ z)))
       ,
-      ((Κ (Int.- (+ (suc zero))) ⊗ x) ⊕
-        (y ⊕ (Κ (Int.- (+ (suc zero))) ⊗ z))))
+      ((Κ (-[1+ zero ]) ⊗ x) ⊕
+        (y ⊕ (Κ (-[1+ zero ]) ⊗ z))))
     refl (+ m) (+ p) (+ n)
 
 -- The existing original signed decoder stores a magnitude, not an
@@ -97,16 +97,16 @@ negativeTokenInteger magnitude
 
 -- All source signed tokens, including noncanonical zero bitwords:
 -- signed class totals equal exactly the original mathematical ℤ fold.
+signedTrace : List Signed.SignedMagnitudeBits → ℤ
+signedTrace [] = + zero
+signedTrace (token ∷ rest) =
+  TokenValue.interpretNativeToken token + signedTrace rest
+
 tokenClassesEqualOriginalSignedTrace :
   (tokens : List Signed.SignedMagnitudeBits) →
   integerFromTwoLaneTotals
     (Ledger.sumPositive tokens) (Ledger.sumNegative tokens)
     ≡ signedTrace tokens
-  where
-    signedTrace : List Signed.SignedMagnitudeBits → ℤ
-    signedTrace [] = + zero
-    signedTrace (token ∷ rest) =
-      TokenValue.interpretNativeToken token + signedTrace rest
 
 tokenClassesEqualOriginalSignedTrace [] = refl
 tokenClassesEqualOriginalSignedTrace
