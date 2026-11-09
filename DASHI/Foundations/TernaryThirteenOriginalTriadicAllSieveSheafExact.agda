@@ -77,11 +77,17 @@ triadicMatchingFromSieve :
 triadicMatchingFromSieve sieve family hab hbc hca =
   P.cover-triple-matches agreeA agreeB agreeC
   where
+    aAB : Stage12.Sieve.contains sieve Site.aToGlobal
     aAB = Stage12.Sieve.closed sieve Site.abToGlobal hab Site.aToAB
+    aCA : Stage12.Sieve.contains sieve Site.aToGlobal
     aCA = Stage12.Sieve.closed sieve Site.caToGlobal hca Site.aToCA
+    bAB : Stage12.Sieve.contains sieve Site.bToGlobal
     bAB = Stage12.Sieve.closed sieve Site.abToGlobal hab Site.bToAB
+    bBC : Stage12.Sieve.contains sieve Site.bToGlobal
     bBC = Stage12.Sieve.closed sieve Site.bcToGlobal hbc Site.bToBC
+    cBC : Stage12.Sieve.contains sieve Site.cToGlobal
     cBC = Stage12.Sieve.closed sieve Site.bcToGlobal hbc Site.cToBC
+    cCA : Stage12.Sieve.contains sieve Site.cToGlobal
     cCA = Stage12.Sieve.closed sieve Site.caToGlobal hca Site.cToCA
 
     agreeA :
@@ -152,11 +158,16 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
   sym (T.triadicGluingUnique ab bc ca matching candidate
     candidateAB candidateBC candidateCA)
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : T.TriadicMatching ab bc ca
     matching = P.coverTripleToTriadicMatching ab bc ca
       (triadicMatchingFromSieve sieve family hab hbc hca)
+    candidate : P.Section Site.globalABC
     candidate = value family (Site.idR Site.globalABC) pf
 
     candidateAB : T.restrictAB candidate ≡ ab
@@ -189,9 +200,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
     (P.glueCoverTripleAB ab bc ca matching)
     (proofIndependent family Site.abToGlobal hab pf)
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 triadicGlueRestrictsEveryMember sieve family hab hbc hca
@@ -200,9 +215,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
     (P.glueCoverTripleBC ab bc ca matching)
     (proofIndependent family Site.bcToGlobal hbc pf)
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 triadicGlueRestrictsEveryMember sieve family hab hbc hca
@@ -211,9 +230,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
     (P.glueCoverTripleCA ab bc ca matching)
     (proofIndependent family Site.caToGlobal hca pf)
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 triadicGlueRestrictsEveryMember sieve family hab hbc hca
@@ -227,9 +250,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
         (Stage12.Sieve.closed sieve Site.abToGlobal hab Site.aToAB)
         pf))
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 triadicGlueRestrictsEveryMember sieve family hab hbc hca
@@ -243,9 +270,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
         (Stage12.Sieve.closed sieve Site.abToGlobal hab Site.bToAB)
         pf))
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 triadicGlueRestrictsEveryMember sieve family hab hbc hca
@@ -259,9 +290,13 @@ triadicGlueRestrictsEveryMember sieve family hab hbc hca
         (Stage12.Sieve.closed sieve Site.bcToGlobal hbc Site.cToBC)
         pf))
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : P.CoverTripleMatches ab bc ca
     matching = triadicMatchingFromSieve sieve family hab hbc hca
 
 -- Every declared covering sieve, not only the three named
@@ -311,9 +346,13 @@ allCoverGlueUnique sieve (Site.triadicGlobalCover hab hbc hca)
     (paid Site.bcToGlobal hbc)
     (paid Site.caToGlobal hca)
   where
+    ab : P.Section Site.edgeAB
     ab = value family Site.abToGlobal hab
+    bc : P.Section Site.edgeBC
     bc = value family Site.bcToGlobal hbc
+    ca : P.Section Site.edgeCA
     ca = value family Site.caToGlobal hca
+    matching : T.TriadicMatching ab bc ca
     matching = P.coverTripleToTriadicMatching ab bc ca
       (triadicMatchingFromSieve sieve family hab hbc hca)
 
