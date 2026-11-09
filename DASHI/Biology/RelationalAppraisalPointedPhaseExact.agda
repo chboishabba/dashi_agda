@@ -17,6 +17,8 @@ module DASHI.Biology.RelationalAppraisalPointedPhaseExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Biology.TernaryHypercubeHyperfabricExact as Hyper
+import DASHI.Foundations.StageAtlasZeroToEleven
+import Base369
 
 ------------------------------------------------------------------------
 -- Axis counts.
@@ -236,3 +238,44 @@ canonicalRelationalPointedPhaseBoundary =
     false refl
     false refl
     true refl
+
+------------------------------------------------------------------------
+-- SOURCE-GROUNDED 12-AXIS VALUATION CARRIER AND A CHOSEN CENTRAL TRIT.
+--
+-- StageAtlasZeroToEleven supplies the original twelve typed addresses;
+-- Base369.TriTruth supplies the original three observational values.
+-- This is a CONSTRUCTED relational central-completion model, not an
+-- identification with a Monster module or symplectic quotient.
+------------------------------------------------------------------------
+
+SourceTwelveAxisValuation : Set
+SourceTwelveAxisValuation =
+  DASHI.Foundations.StageAtlasZeroToEleven.StageAtlasZeroToEleven →
+  Base369.TriTruth
+
+SourceCentralCompletionCarrier : Set
+SourceCentralCompletionCarrier =
+  SourceTwelveAxisValuation × Base369.TriTruth
+
+sourceCentralProjection :
+  SourceCentralCompletionCarrier → SourceTwelveAxisValuation
+sourceCentralProjection = proj₁
+
+sourceCentralCoordinate :
+  SourceCentralCompletionCarrier → Base369.TriTruth
+sourceCentralCoordinate = proj₂
+
+sourceNeutralSection :
+  SourceTwelveAxisValuation → SourceCentralCompletionCarrier
+sourceNeutralSection valuation = valuation , Base369.tri-mid
+
+sourceNeutralSectionProjects :
+  (valuation : SourceTwelveAxisValuation) →
+  sourceCentralProjection (sourceNeutralSection valuation) ≡ valuation
+sourceNeutralSectionProjects valuation = refl
+
+sourceNeutralSectionIsNeutral :
+  (valuation : SourceTwelveAxisValuation) →
+  sourceCentralCoordinate (sourceNeutralSection valuation)
+  ≡ Base369.tri-mid
+sourceNeutralSectionIsNeutral valuation = refl
