@@ -602,3 +602,69 @@ presheaf with the intended relational/world/Monster completion.
 
 No top-level original analytic Bishop P1, zeta P2 or Gamma/Xi P3
 status changes.
+
+
+## Highest-alpha source tranche: ALL original relational covering sieves
+
+New owner:
+`DASHI/Foundations/TernaryThirteenOriginalTriadicAllSieveSheafExact.agda`.
+
+The previously open **all-covering-sieve** mathematical obligation
+has a source-written proof construction on the already existing
+`RelationalStageTwelveGrothendieckExtensionExact.relationalTriadicTopology`.
+It does NOT build another site.
+
+Exact declarations:
+- `SieveMatching sieve`: value for every sieve arrow, proof-of-
+  membership independence, and compatibility with the ACTUAL
+  `RelHom` restrictions and `Site.composeRel`.
+- `restrictToSieve`: any global presheaf section restricts to a
+  matching family on any original sieve.
+- `triadicMatchingFromSieve`: derive AB/BC/CA overlap equality
+  from arrow-natural matching and proof independence at the
+  original vertex overlap arrows.
+- `glueSieve`: case distinction on original
+  `Site.RelCover` constructors. The maximal case reconstructs
+  from the identity arrow; the genuine nontrivial global
+  triadic case calls the existing concrete matching/gluing
+  theorem.
+- `triadicGlueRestrictsEveryMember`: full recovery at every
+  original sieve member, including the global identity if
+  admitted, the three chart maps and the three vertex-to-global
+  maps. The proof uses the original `Sieve.closed` and
+  `proofIndependent`.
+- `allCoverGlueRestricts`: selected glue restricts to every
+  local value of an arbitrary **covering sieve**.
+- `allCoverGlueUnique`: an arbitrary competing global section
+  with the same sieve restrictions is equal to the constructed
+  glue, using the selected triple's
+  `triadicGluingUnique` theorem.
+
+These declarations are quantified over the original `Site.RelCover`,
+not only a fixed ABC triple or a binary set cover. Thus H2.02
+**all-covering-sieve sheaf descent on the constructed central-trit
+presheaf** is now **SOURCE-WRITTEN**, while Agda kernel acceptance
+remains unverified as requested.
+
+Commits: `8be0475` source, `f5bef7d` typed topology
+alias repair, `0a83255` locally scoped exact type contracts;
+golden roots `b024523`, `cfdd31f`, `661228f`.
+
+### Current remaining decisive original maximum cut
+
+| Priority | Gate | Exact unpaid proof |
+|---|---|---|
+| P0 | H1.01 semantic | The independently intended **original** relational/group completion is the constructed `StageAtlasZeroToEleven → TriTruth` plus central `TriTruth` source carrier; evidence of semantic equivalence, not count |
+| P0 | H2.01 independent operational | The actual world-model/relational observer and consumer map commute with or are equivalent to the selected StageAtlas/pants observer, so the concrete non-descent witness is valid for the same state |
+| P0 | H2.02 source seams | Independent heterogeneous original edge-stalk interpretations and genuine five-coordinate `InterfaceMatch` on the selected larger hyperfabric; preserve actual full topology/provenance semantics under induced quotient |
+| P0 | H2.02 formal acceptance | Agda kernel check (deferred); source-written all-sieve proof should not be described as kernel certified |
+| P1 | Bishop Cayley | Original nested Bishop exp/atan analytic same-object identity; its actual 1/5 and 1/239 evaluations |
+| P2 | Zeta | Canonical Nat powers and identification with independently selected original zeta |
+| P3 | Gamma/Xi | Source Gamma integral, analytic continuation, functional equation and completed Xi |
+
+The original A/B/C topology and `pullbackSieve` laws were
+previously paid and must remain attributed to
+`RelationalStageTwelveGrothendieckExtensionExact`.
+The source of `selectedRepresentativePushforward` is still
+the original sectioned representative operation, not a claim
+about a categorical pushforward on arbitrary sheaves.
