@@ -333,3 +333,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranParsedRawThresholdMachineExact
 -- Original whole-word gamma(n), gamma(m), signed native weights, positive native threshold, strict original validation/suffix.
 -- All-word observed graph equality and native binary endpoints remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeRawGraphWordExact
+
+-- All-original-word Fin-free graph parser field equality: source gamma n/m, native signed weights and positive threshold, canonical validation/rejection.
+-- Proof-side Nat endpoints and physical clock still OPEN; exact Agda kernel pending.
+import DASHI.Mathematics.Complexity.Karp21NativeOriginalWholeGraphFieldsWeldExact
