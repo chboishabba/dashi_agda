@@ -337,3 +337,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeRawGraphWordExact
 -- All-original-word Fin-free graph parser field equality: source gamma n/m, native signed weights and positive threshold, canonical validation/rejection.
 -- Proof-side Nat endpoints and physical clock still OPEN; exact Agda kernel pending.
 import DASHI.Mathematics.Complexity.Karp21NativeOriginalWholeGraphFieldsWeldExact
+
+-- P0-F parsed original signed N21 machine: each enabled first-priority cursor step strictly lowers edge-count+1 potential.
+-- NOT a physical bit-tape polynomial clock.
+import DASHI.Mathematics.Complexity.Karp21FractranParsedRawStepPotentialExact
