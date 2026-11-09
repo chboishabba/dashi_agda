@@ -102,3 +102,30 @@ Commits: `252838299697a666fd83bbb24fbdf21c8a0d7ac2` and `b38b43f83154745ce201ab8
 2. **SOURCE**: anchor the Satta mechanisms and Tuck–Yang obligations at passage granularity, then construct source-attributed data, not only labelled constructors.
 3. **EMPIRICAL**: observed review events, fatigue/capacity measures, power/decision data, confounders and legitimate-demand negative controls; no inference of deliberate cognitive warfare from workload.
 4. **INTEGRATION**: only after kernel acceptance, Golden import, PNF/SLR governance and ITIR replay with idempotence and unaffected controls.
+
+## Third implementation pass — source and cross-domain maximum cut
+
+**New committed modules (not kernel-checked):**
+
+- `DASHI/Governance/EpistemicPowerQueryAdequacyCapstoneExact.agda` — `inclusionQueryAdequate`, `landQueryDefect`, `sovereigntyQueryDefect`, `landQueryInadequate`, `sovereigntyQueryInadequate`, `inclusionDoesNotSubstituteForDecolonialCommitments`. The exact same inclusion report is sufficient for the *inclusion-reported* query and insufficient for *land* or *sovereignty* queries. Reuses `QueryIndexedProjectionAdequacyExact`.
+- `DASHI/Governance/EpistemicPowerSourceAtlasExact.agda` — `satta2024`, `tuckYang2012`, `epistemicPowerSources`, six source-indexed `SourceBoundReading` declarations and `sourceAtlasIsNonPromoting`. Source identity is explicit; text-to-model interpretation is not automatically verified.
+- `DASHI/Governance/EpistemicPowerCrossDomainCapstoneExact.agda` — `epistemicPowerCrossDomainCapstone`, composing existing original Digital ESD score/full-state obstruction, ternary Irigaray/Lacan non-permutation, attached trialectic face, institutional authority/participation, historic capacity loss, and land/sovereignty query defects. This composition is a *formal interface* and does not assert philosophical identity.
+
+**Source anchor scope, verified at bibliographic/section level:**
+
+- Satta, *Hypatia* 39(3) (2024), 510–529, section “The nature of epistemic exhaustion”: distinct determination, retention, communication; the article makes a further normative distinction that epistemic costs may sometimes accompany epistemic improvement. See https://doi.org/10.1017/hyp.2024.1. Section/topic receipts are not passage hash or line-offset checks.
+- Tuck and Yang, *Decolonization Is Not a Metaphor* (2012), 1–40, abstract p. 1: repatriation of Indigenous land and life, settler moves to innocence, and an ethic of incommensurability. See https://ikdll.nau.edu/id/eprint/84/. The logical independence countermodels are *not* sufficient to characterize Indigenous sovereignty or the authors' normative argument.
+
+**Precisely unpaid terminal gates:**
+
+| Gate | Exact outstanding contract | Why open |
+|---|---|---|
+| K0 | `agda --safe -i . DASHI/Governance/EpistemicPowerStructuralRetentionExact.agda` and same on HistoryAndNonSubstitution, CapacityDynamics, QueryAdequacyCapstone, SourceAtlas, CrossDomainCapstone | No Agda executable in current runtime; committed source is not kernel evidence |
+| K1 | `primaryPassageChecked`-grade source receipts for all six readings (exact primary passage spans/digests) and no unverified promotion into domain truth | Only metadata/section indexing paid |
+| K2 | `sourceMatchedEpistemicFatigueObservation` under actual situated histories and independently collected observations | Finite budget model is not psychology or evidence of fatigue |
+| K3 | `originalESDCaseHistoryCountermodel` with audited source receipts and matched decisions, protected counterexamples/alternative explanations | No original empirical case history supplied to this branch |
+| K4 | `itirSelectiveReopenReplay` and Golden governance import with negative controls, idempotence and source-indexed receipts | Canonical execution receipts and kernel check absent |
+
+**Important negative controls retained:** high effort is not necessarily oppression; repeated reviewing is not necessarily deliberate cognitive warfare; increased inclusion is not sufficient evidence of changes to Indigenous land or sovereignty; the relational-grammar graph does not exhaust Lacan or Irigaray; the four support states are not an identification of classical logic with historical catuṣkoṭi.
+
+**Runtime status:** this pass created git commits, with no Agda typecheck or ITIR execution, and no unearned claim of exhaustive completion.
