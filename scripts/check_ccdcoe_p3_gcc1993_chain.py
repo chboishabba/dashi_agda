@@ -13,12 +13,14 @@ from pathlib import Path
 MANIFEST=Path(__file__).resolve().parents[1]/"Docs/research/ccdcoe_p3_gcc1993_intervention_chain_20261109.json"
 ORIGINAL={
  "january_expertise":("1993-01-04","gcc_communication","journalists","1993-climate-expertise-news-release"),
+ "march_pre_response":("1993-03-10","gcc_communication","public_unspecified","1993-natural-warming-models-national-action-plan"),
  "may_reporters":("1993-05-03","gcc_communication","journalists","1993-response-clinton-earth-day-pledge"),
  "july_doe":("1993-07-08","gcc_communication","department_of_energy","1993-national-action-plan-doe-letter"),
  "july_whitehouse":("1993-07-19","gcc_communication","white_house","1993-white-house-cos-letter"),
  "archived_clippings":(None,"original_news_authors","public_readers_not_verified","1993-media-hits")}
 EDGES=[
- ("january_expertise","may_reporters"),
+ ("january_expertise","march_pre_response"),
+ ("march_pre_response","may_reporters"),
  ("may_reporters","july_doe"),
  ("july_doe","july_whitehouse")]
 def require(c,m):
@@ -72,7 +74,9 @@ def self_test(m):
         ("wrong_source",modify("may_reporters","source_url","https://example.org")),
         ("promoted_archive_grade",modify("july_doe","stage","authenticated_original_bytes")),
         ("clippings_fake_single_date",modify("archived_clippings","date","1993-07-01")),
-        ("wrong_actor_target",modify("july_doe","target_role","journalists"))]
+        ("wrong_actor_target",modify("july_doe","target_role","journalists")),
+        ("wrong_march_date",modify("march_pre_response","date","1993-06-10")),
+        ("march_false_recipient",modify("march_pre_response","target_role","journalists"))]
     for label,mutator in cases:
         d=copy.deepcopy(m);mutator(d)
         try:verify(d)
