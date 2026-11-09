@@ -10,6 +10,7 @@ open import Data.Empty using (⊥)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y443
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443PresentedWordKernelCongruenceExact as WordKernel
+import DASHI.Moonshine.Y443Universal80RelatorCongruenceExact as Universal80
 import DASHI.Moonshine.Y443JMDTracePowerExact as JMD
 import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as JMDSource
 import DASHI.Moonshine.Y443JMDConcretePairPowerCompilerExact as JMDCertificate
