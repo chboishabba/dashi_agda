@@ -61,3 +61,23 @@ The geometry leaf is transparently a field of `OriginalStar18RemovalBound`:
 for `DistinctMarked (a ∷ as)`. No instance is manufactured. The degree proof must use the **actual** plaquette-star incidence, not a generic graph with degree chosen as a parameter.
 
 Status split: greedy arithmetic and duplicate preservation **source-written, kernel verification pending**; literal degree-18 removal field **uninhabited**. All physical D1, E1, D2, N1, G1 analytic obligations remain open; no Yang--Mills Clay closure claimed.
+
+
+## Follow-up: total fuel-indexed implementation and proof contracts
+
+The new `YMClayD1OriginalFuelGreedyTerminationExact.agda` addresses the unsafe termination pattern in the older `greedyOriginalDisjointStars`, which structurally recurses on the result of `filterOriginalStarFree`.
+
+The `fuelGreedyOriginalDisjointStars fuel marked` recursion is visibly structural in `fuel`. Source-written proof declarations include:
+
+- `fuelGreedyOriginalSubset`: output belongs to the actual marked source links;
+- `fuelGreedyOriginalIndependent`: source-native selected stars are pairwise disjoint;
+- `filterOriginalStarLengthBound`: original star filtering does not increase marked length;
+- `fuelGreedyOriginalMaximal`: if input length does not exceed fuel, every marked original link is selected or conflicts with a selected link;
+- `fuelGreedyWithFullLengthIsMaximal`: input-length fuel is sufficient for maximality;
+- `fuelGreedyOriginal19Packing` / `fuelGreedyOriginal19PackingFullLength`: source-written 19-count proof by structural induction on fuel, reusing the exact `OriginalStar18RemovalBound` field from the original native counting module.
+
+The finite geometric **degree-18 field remains uninhabited**, so the number 19 is still a rigorously conditional physical-source count, not yet an Agda theorem of the four-dimensional lattice for every period. The fuel-indexed implementation deliberately does not claim definitional or extensional equivalence with the earlier un-fuelled greedy function. The earlier function and its transitive import closure still need Agda 2.9 termination/typechecking. No new axioms or empty eligibility classes were used.
+
+Actual original-Wilson polymer and continuum physics remain separate: `chargeSumBelowPhysicalRootedShell`, full physical covariance decay, nontrivial continuum Schwinger convergence, same reconstructed OS Hamiltonian, continuum variance and compact-simple group completeness remain open.
+
+Verification: source committed/read back; no Agda compiler available. Never infer accepted Golden status from GitHub write/readback.
