@@ -94,3 +94,18 @@ def test_synthetic_29_species_12_reaction_instantaneous_dissipation():
     with pytest.raises(ValueError):
         Model(z=z,D=np.full(29,0.1),reactants=A,products=invalid,
               kf=np.full(12,0.02),kb=np.full(12,0.02),standard_mu=np.zeros(29))
+
+
+def test_sg_per_edge_electrochemical_dissipation_sign():
+    """Per-edge sign test on original 54 bonds; synthetic 29-species states."""
+    rng=np.random.default_rng(1454)
+    z=np.array(([1,-1,0]*10)[:29]); A=np.zeros((12,29),int); B=np.zeros((12,29),int)
+    for j in range(12): A[j,j]=1;B[j,j+3]=1
+    m=Model(z=z,D=rng.uniform(0.01,0.3,29),reactants=A,products=B,
+            kf=np.full(12,0.04),kb=np.full(12,0.04),standard_mu=np.zeros(29))
+    for _ in range(12):
+        c=rng.uniform(0.1,2.5,size=(27,29));ph=poisson(c,m)
+        J=native_flux(c,ph,m)
+        for e,(a,b) in enumerate(BONDS):
+            dmu=m.RT*np.log(c[b]/c[a])+m.z*m.F*(ph[b]-ph[a])
+            assert np.max(J[e]*dmu)<1e-9
