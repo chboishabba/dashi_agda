@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Chemistry.HydrogenFuelCycleExact where
 
 -- Source lineage / provenance (2026-11-09):
