@@ -18,6 +18,7 @@ targets=(
   DASHI/Moonshine/AbelBishopRound11QPeriodInstanceExact.agda
   DASHI/Moonshine/AbelE8RootE4FirstCoefficientExact.agda
   DASHI/Moonshine/AbelE8RootTriadic243CountComparisonExact.agda
+  DASHI/Moonshine/AbelE8GeneratedRootNormTwoExact.agda
   DASHI/Moonshine/AbelBishopMachinQuarterToQPeriodExact.agda
   DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda
   DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda
@@ -50,6 +51,12 @@ if [[ ! -x scripts/run_agda29_parallel_check.sh ]]; then
   echo "FAIL pinned local Agda checker runner missing or not executable" >&2
   exit 5
 fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "FAIL python3 unavailable for independent exact E8 shell regression" >&2
+  exit 6
+fi
+python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
 
 echo "Running pinned Agda 2.9 --safe checker on ${#targets[@]} explicit source owners"
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh --safe "${targets[@]}"
