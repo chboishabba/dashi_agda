@@ -379,7 +379,7 @@ originalBoundaryInjectionLocalReceipt event state =
 lookupFaceInjectionAwayFromEvent :
   ∀ {n} (source observer : F.Fin n) (q : Nat)
   (state : V.Vec Nat n) →
-  source ≢ observer →
+  ¬ (source ≡ observer) →
   V.lookup (injectAtIndex source q state) observer
     ≡ V.lookup state observer
 lookupFaceInjectionAwayFromEvent F.zero F.zero q state different =
@@ -396,7 +396,7 @@ lookupFaceInjectionAwayFromEvent (F.suc source) (F.suc observer) q
 originalFaceInjectionLeavesOtherVoxelUnchanged :
   (event : OriginalOuterFaceInjection)
   (observer : F.Fin 27) (state : V.Vec Nat 27) →
-  Index.originalPointIndex (physicalVoxel event) ≢ observer →
+  ¬ (Index.originalPointIndex (physicalVoxel event) ≡ observer) →
   V.lookup (applyBoundaryInjection event state) observer
     ≡ V.lookup state observer
 originalFaceInjectionLeavesOtherVoxelUnchanged
@@ -410,7 +410,7 @@ originalFaceInjectionLeavesOtherVoxelUnchanged
 originalFaceDischargeLeavesOtherVoxelUnchanged :
   (event : OriginalOuterFaceDischarge)
   (observer : F.Fin 27) (state : V.Vec Nat 27) →
-  dischargeIndex event ≢ observer →
+  ¬ (dischargeIndex event ≡ observer) →
   V.lookup (applyBoundaryDischarge event state) observer
     ≡ V.lookup state observer
 originalFaceDischargeLeavesOtherVoxelUnchanged
@@ -419,7 +419,7 @@ originalFaceDischargeLeavesOtherVoxelUnchanged
   where
     dischargeOther :
       ∀ {n} (source target : F.Fin n) (xs : V.Vec Nat n) →
-      source ≢ target →
+      ¬ (source ≡ target) →
       V.lookup (V.updateAt xs source pred) target
         ≡ V.lookup xs target
     dischargeOther F.zero F.zero xs neq =
