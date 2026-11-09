@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Moonshine.Y443Mod2OddEdgeCentralCharacterExact where
 
 ------------------------------------------------------------------------
