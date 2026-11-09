@@ -50,6 +50,7 @@ def validate(manifest, source_root, *, synthetic=False):
     fixed_reviewers=None
     source_digests={}
     source_pairings={}
+    per_source_coder_counts={}
     grades={}
     pairings={name: [] for name in VALID}
     for p in items:
@@ -81,13 +82,16 @@ def validate(manifest, source_root, *, synthetic=False):
             demand(set(r['codes'])==set(VALID),'six coding dimensions')
             for name,value in r['codes'].items(): demand(value in VALID[name], 'invalid code: '+name)
         within=source_pairings.setdefault(document_key,{name:[] for name in VALID})
+        coded=per_source_coder_counts.setdefault(document_key,{name:{'reviewer_1':Counter(),'reviewer_2':Counter()} for name in VALID})
         for name in VALID:
             pair=(r1['codes'][name],r2['codes'][name])
             pairings[name].append(pair)
             within[name].append(pair)
+            coded[name]['reviewer_1'][pair[0]]+=1
+            coded[name]['reviewer_2'][pair[1]]+=1
         demand(not p.get('claims_audience_effect',False) and not p.get('claims_hostile_intent',False),'unearned promotion')
         grades[p['id']]={'original_bytes_sha256':digest, 'reviewers': [r1['reviewer_id'],r2['reviewer_id']]}
-    return {'passages':len(items),'validated_hashes':len(grades),'reliability':{name:kappa(pairs) for name,pairs in pairings.items()},'within_source_reliability':{source+'@'+edition:{name:kappa(pairs) for name,pairs in dimensions.items()} for (source,edition),dimensions in source_pairings.items()},'pooled_reliability_is_descriptive_not_causal':True,'human_independence_authenticated':False,'audience_effect_identified':False,'hostile_intent_identified':False}
+    return {'passages':len(items),'validated_hashes':len(grades),'reliability':{name:kappa(pairs) for name,pairs in pairings.items()},'within_source_reliability':{source+'@'+edition:{name:kappa(pairs) for name,pairs in dimensions.items()} for (source,edition),dimensions in source_pairings.items()},'source_stratified_counts':{source+'@'+edition:{name:{coder:dict(counts) for coder,counts in coders.items()} for name,coders in dimensions.items()} for (source,edition),dimensions in per_source_coder_counts.items()},'pooled_reliability_is_descriptive_not_causal':True,'human_independence_authenticated':False,'audience_effect_identified':False,'hostile_intent_identified':False}
 
 def self_test():
     with tempfile.TemporaryDirectory() as tmp:
@@ -98,6 +102,8 @@ def self_test():
         p={'id':'test1','source_id':'gcc_march8_policy_statement','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':len(raw),'passage_sha256':hashlib.sha256(raw).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
         item={'schema':'dashi.ccdcoe.p3.dual_coder_receipts.v1','passages':[p]}
         positive=validate(item,root,synthetic=True); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
+        demand(len(positive['source_stratified_counts'])==1,'synthetic source stratification')
+        demand(all(sum(v['reviewer_1'].values())==1 and sum(v['reviewer_2'].values())==1 for source in positive['source_stratified_counts'].values() for v in source.values()), 'source counts / denominator')
         import copy
         tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
         (root/'other.bin').write_bytes(b'MUTATED')
