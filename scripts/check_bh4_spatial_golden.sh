@@ -61,6 +61,9 @@ python3 scripts/bh4_original_qdpr_spatial_finite_volume.py --self-test
 # Python owner. This catches literal escaped-newline source corruption
 # even when the original 29x12 certificate is not mounted.
 python3 -c 'import ast, pathlib; p=pathlib.Path("scripts/check_bh4_original_panel_spatial_events.py"); ast.parse(p.read_text(encoding="utf-8"), filename=str(p))'
+# Check source-release drift diagnostics offline. Live acquisition requires
+# --require-rhea-release when reproducing a particular historical vintage.
+python3 scripts/acquire_rhea_chebi_bh4_reactions.py --release-guard-self-test
 python3 scripts/check_bh4_original_panel_spatial_events.py --self-test
 # Real 29×12 check requires the source-acquired certificate; absence
 # remains an explicit physical/source residual, not a synthetic payment.
