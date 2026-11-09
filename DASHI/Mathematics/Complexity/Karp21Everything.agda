@@ -482,3 +482,11 @@ import DASHI.Mathematics.Complexity.Karp21NativeActualEventSubsequenceExact
 -- F2.1 same ORIGINAL graph word: actual binary n/m reader, first-enabled event subsequence and real two-lane signed ledger width budget.
 -- SOURCE candidate only; physical bit-TM head/tape clock and Agda receipt OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeFirstEnabledLedgerWordBoundExact
+
+-- F2.2 every original gamma u/v and native signed w bit register is charged to the same whole source graph input word.
+-- No original physical TM clock or exact-head Agda kernel receipt implied.
+import DASHI.Mathematics.Complexity.Karp21NativeFullEdgeFieldInputBoundExact
+
+-- F2.2 every original gamma u/v and native signed w bit register is charged to the same whole source graph input word.
+-- No original physical TM clock or exact-head Agda kernel receipt implied.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact
