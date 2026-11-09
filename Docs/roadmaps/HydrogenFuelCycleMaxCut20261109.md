@@ -277,3 +277,42 @@ These three sources are committed to PR #1481 and imported into `DASHI.Chemistry
 7. Obtain independent physical replication and scientific/provenance review. K0 remains explicitly not pursued per user instruction.
 
 Attribution remains unchanged: chemistry/thermodynamics from original scientific sources; repository owners credited for prior SI/Atomic369/conservation machinery; user directs integration, ChatGPT authors the new source; vendor/patent claims and independent scientific evidence are separate authority categories.
+
+## Final SI electrical input seam, 2026-11-09
+
+`HydrogenElectricalInputIntegrationExact` is imported by Chemistry.Everything.
+It reuses the existing BIPM-attributed SI Energy carrier and represents the
+exact finite arithmetic of a constant-DC voltage×current×elapsed-time window.
+`finiteDCTraceJoules` accumulates a selected series of windows.
+
+A **15 V** line at **100 A** for **3600 s** is **5.4 MJ = 1.5 kWh**;
+the same voltage at **1000 A** for the same duration is **54 MJ = 15 kWh**.
+`voltageDoesNotDetermineEnergy` explicitly blocks treating the common
+15 V rating as an energy budget. The rectangular numerical integration
+does *not* establish actual waveform sampling accuracy, AC real-power flow,
+inverter efficiency, signed battery SOC, power-factor losses, or calibrated
+current; `ElectricalTraceReceipt` leaves those source obligations open.
+
+**Physical maximum-cut synthesis:** The first-law full input boundary,
+signed/different-source hydrogen-vs-diesel substitution, mechanistic
+non-identification counterexample, H2/O2 factorial contrast, finite carbon
+inventory, uncertainty-bounded matched-output criterion, and DC energy
+integration are source-written. The exact experiment and independent
+replication needed to identify a physically realised improvement remain
+unpaid. K0 remains excluded by user request, not declared complete.
+
+**Revised counts:** 22 new Agda modules on PR #1481, all imported into
+DASHI.Chemistry.Everything. The 17-case repo arithmetic script was source-
+updated but has not been executed in this assistant runtime. The separate
+eight-case five-arm acceptance analyzer was locally executed (8/8 pass) and
+is now also committed as `scripts/hydrogen_physical_acceptance.py`;
+the committed file was updated to label interval savings conditional and
+source/calibration verification false. No actual apparatus dataset was
+available. The blank CSV schema lives at
+`Docs/roadmaps/HydrogenPhysicalMeasurementsTemplate.csv`.
+
+**Remaining externally supplied gates:** measured, source-linked electric
+and chemical input, real calibrated H2/O2 and engine output/NOx/PM readings,
+cross-over evidence with timing/dose, true hydrocarbon synthesis and
+carbon closure, actual patent-specific title documents, and independent
+replication. Neither static declarations nor accepted unit tests pay these.
