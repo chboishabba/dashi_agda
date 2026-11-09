@@ -125,3 +125,25 @@ Physical B1: source-first KP cluster bidegree (1,1) germ, original marked log-je
 This completes the *finite source-link-value projection factorization and word-extension algebra* proof contract at the source-written level (Agda kernel receipt outstanding). It **does not** discharge R568's external selected-projective-system identification: that requires an actual continuum projective configuration carrier and compatible refinement projections, not just the finite source list. Nor does finite-coordinate concatenation prove measure/projective consistency of original Gibbs distributions at different cutoffs. Keep R566 A3 projective event consistency and continuity-at-empty, R576 original mixed-log and connecting polymer bound, R577 reconstructed OS physical-time transfer, R563 Ward noncollapse, and R571 all-group physical source open.
 
 Implementation also imported to `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`. Verification state: committed/readback only; no Agda 2.9 compiler available.
+
+
+## 2026-11-09: original signed-link positive-value DIRECT evaluator (E1/A3)
+
+New source file: `DASHI/Physics/YangMills/YMClayE1A3OriginalSignedPathValueEvaluatorExact.agda`; imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+This strengthens previous E1/A3 finite-support extensionality and equality-under-projection results: it constructs a *direct computational evaluator* on the actually sampled finite positive-link values, with no full original field hidden inside the coordinate.
+
+- `SignedPositiveLinkValues`: indexed by the actual signed-axis path, but stores values of underlying **positive** bonds only.
+- `orientSample`: positive direction uses the sampled group element; negative direction applies the actual source inverse to the sampled predecessor-positive-link group element.
+- `sampleOriginalSignedPath`: recursively reads exactly the same source bonds as the original nonabelian path evaluation; `evaluateOriginalSignedPath`: independently computes the ordered group product from those sampled values.
+- `sampledOriginalSignedPathComputesHolonomy`: direct induction, ordered nonabelian multiplication preserved, proves equality with the actual `Bond.pathHolonomy`.
+- `OriginalWordPositiveLinkValues`, `sampleOriginalWilsonWord`, `evaluateOriginalWilsonWord`: finite dependent tuple of all original plaquette-path positive-link samples and their real Wilson trace word evaluator.
+- `originalWilsonWordDirectFiniteEvaluation`: original SU(N) signed Wilson word equals the finite tuple evaluator at every cutoff, by induction and the existing original `periodicSUNPositivePlaquette` trace semantics. The two sides are actual original Wilson functions, not newly invented continuum coordinates.
+
+**Critical independence:** none of this invokes a generalized measure/projective authority or new source-specific physical hypothesis. The proof is finite lattice algebra only. It is the necessary R568 selected finite-coordinate *evaluation* ingredient, not the R568 assertion that this coordinate is a coordinate of the independently defined CONTINUUM projective system.
+
+**Exact next E1/R566 consumer:** produce the selected continuum projective coordinate family and its refinement/forgetting maps from the existing repository original-lattice projection owner; identify each finite sampled original Wilson word with a compatible member of that family, then prove consistency of the **original cutoff-dependent interacting Gibbs expectations**. The finite evaluator is now available to phrase this identity without hidden full-field witnesses. It does not assert projective consistency of distinct Wilson Gibbs measures: an interacting RG/coarse-graining estimate is still needed.
+
+**B1/B2/H6/G1:** unchanged mathematical original-source obligations in R576/R577/R563/R571. No source-dependent analytic bound is manufactured from this algebraic improvement.
+
+**Verification:** GitHub source commits and readback; no Agda 2.9 binary available in working container. These declarations are **not** kernel-accepted until their regression and transitive imports typecheck.
