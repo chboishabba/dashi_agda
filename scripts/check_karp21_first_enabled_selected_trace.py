@@ -153,6 +153,13 @@ def main():
             for certificate in certificates:
                 check(word, certificate)
                 checked += 1
+    # D2 negative control: old raw cursor finishes, but positive W=1
+    # rejects empty score. Both structurally valid selected traces exist.
+    empty_below = gamma(0) + gamma(0) + gamma(1)
+    assert original_trace(empty_below, ()) == []
+    assert binary_first_enabled_events(empty_below, ()) == []
+    assert sum(original_trace(empty_below, ())) < 1
+    checked += 1
     rng = Random(1972)
     below = 0
     for _ in range(5000):
