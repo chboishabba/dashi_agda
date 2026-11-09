@@ -76,3 +76,39 @@ The following exact proposed analytic lemmas, separated from the original Agda d
 - **E1.03/D2-OS-03/N1.02/G1.03 (HARD)** unchanged original continuum, dense-OS decay, noncollapse and group-complete physics.
 
 **Verification:** the proof above is analytic mathematics; companion explicit lattice-incidence/greedy-packing script covers concrete 4D periodic source geometry and bounded combinatorics. Neither this document nor a finite regression is a native Agda 2.9 kernel proof. The original full-Clay mass gap remains unsolved.
+
+
+## Further D1-FRU original-source theorem — extensive frustrated-link large deviations
+
+Let \(F_r(U)=\{\ell\in E:R_\ell(U)<r\}\), \(0<r<6\), where each \(R_\ell\) is the *actual original* SU(2) six-staple quaternion resultant norm, and let \(d_p=1-t(U_p)\ge0\). Since \(D_6(\ell)=\sum_{p\ni\ell}d_p=6-t(U_\ell S_\ell)\ge6-R_\ell\), every frustrated link satisfies \(D_6(\ell)>6-r\). Summing over ALL frustrated links and using nonnegative plaquette deficits gives
+
+\[
+(6-r)|F_r(U)|\le\sum_{\ell\in F_r}D_6(\ell)
+\le\sum_{\ell\in E}D_6(\ell)
+=4\sum_{p\in P}d_p.
+\]
+
+The final equality is **exact original lattice incidence**: every plaquette has four links, so it appears in precisely four six-star sums. This is a deterministic, joint all-link energy penalty; it requires no independence of frustration events.
+
+Because \(|E|=4V\), \(|P|=6V\), an original configuration with \(|F_r(U)|\ge\eta|E|\) has total Wilson action deficit
+
+\[
+D(U)=\sum_p d_p\ge
+\frac{(6-r)\eta|E|}{4}
+=\frac{(6-r)\eta}{6}\,|P|.
+\]
+
+Using the **same original Wilson partition lower bound** \(Z_\beta\ge\exp(\beta|P|-C(\beta)|P|)\), with \(C(\beta)=8+\frac23\log24+\log\beta\), and the normalized product Haar reference probability \(\le1\), gives for \(\beta\ge16\), \(0<r<6\), \(0<\eta\le1\):
+
+\[
+\boxed{\Pr_{\mu_\beta}\left\{
+\frac{|F_r|}{|E|}\ge\eta\right\}
+\le\min\left\{1,
+\exp\left[-|P|\left(
+\frac{\beta(6-r)\eta}{6}-C(\beta)
+\right)\right]\right\}.}
+\]
+
+Thus the original Wilson model has exponential-in-volume suppression of configurations with a **fixed positive fraction of frustrated links** once \(\beta(6-r)\eta/6>C(\beta)\). This is genuinely *joint* frustration control (not a union bound of single-link probabilities), but it is only an **extensive-density** bound: it cannot suppress a connected sparse frustrated path with \(O(L)\) links inside \(O(L^4)\) volume.
+
+**D1-FRU revised cut:** `D1-FRU-01a` (joint extensive frustration density) is analytically proved here. `D1-FRU-01b` (uniform probability of **specific sparse connected frustrated supports**, with physical scale and activity-versus-entropy estimates) remains the decisive missing original-source estimate. Without 01b, coherent-only cluster decay plus 01a does NOT imply full Wilson connected covariance, even when beta→infinity.
