@@ -502,3 +502,59 @@ original29x12SpatialSignedChargeBalance
     site (V.lookup (sourceFiniteColumns certificate) column)
     residual before available
     (sourceColumnSignedCharge certificate column)
+
+
+------------------------------------------------------------------------
+-- ORIGINAL 29x12 CERTIFIED CHRONOLOGICAL REACTION HISTORIES.
+-- The dependent history constructor carries ACTUAL availability at
+-- each intermediate state: negative inventories cannot be conjured.
+------------------------------------------------------------------------
+
+Original29x12SpatialState : Set
+Original29x12SpatialState = V.Vec (V.Vec Nat 29) 27
+
+applyOriginal29x12Reaction :
+  (certificate : SourceCertifiedOriginal29x12)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29) →
+  Original29x12SpatialState → Original29x12SpatialState
+applyOriginal29x12Reaction certificate column site residual state =
+  V.updateAt state site
+    (λ _ → panelReactionAfter
+      (V.lookup (sourceFiniteColumns certificate) column) residual)
+
+data SourceCertifiedOriginal29x12History
+  (certificate : SourceCertifiedOriginal29x12) :
+  Original29x12SpatialState → Original29x12SpatialState → Set where
+  emptyOriginalReactionHistory :
+    ∀ {state} →
+    SourceCertifiedOriginal29x12History certificate state state
+  nextOriginalReactionHistory :
+    ∀ {before after}
+    (column : F.Fin 12) (site : F.Fin 27)
+    (residual : V.Vec Nat 29) →
+    V.lookup before site ≡
+      panelReactionBefore
+        (V.lookup (sourceFiniteColumns certificate) column) residual →
+    SourceCertifiedOriginal29x12History certificate
+      (applyOriginal29x12Reaction certificate column site residual before)
+      after →
+    SourceCertifiedOriginal29x12History certificate before after
+
+original29x12SpatialAllHistoryCHNOPBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (element : OriginalCHNOPElement)
+  {before after : Original29x12SpatialState} →
+  SourceCertifiedOriginal29x12History certificate before after →
+  panelSpatialWeighted (sourceElementWeights certificate element) after
+    ≡ panelSpatialWeighted (sourceElementWeights certificate element) before
+original29x12SpatialAllHistoryCHNOPBalance
+  certificate element emptyOriginalReactionHistory = refl
+original29x12SpatialAllHistoryCHNOPBalance
+  certificate element {before}
+  (nextOriginalReactionHistory column site residual available rest) =
+  trans
+    (original29x12SpatialAllHistoryCHNOPBalance certificate element rest)
+    (original29x12SpatialReactionBalance
+      certificate element column site residual before available)
