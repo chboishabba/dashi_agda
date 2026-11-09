@@ -721,3 +721,29 @@ analytical gates remain OPEN.
 
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for exact declarations and per-commit receipts.
+
+
+### 2026-11-09 final H2.02 source update: original all-sieve gluing
+
+The original non-discrete A/B/C `RelCover` Grothendieck topology,
+its `pullbackSieve` stability and transitivity were already
+proved by `RelationalStageTwelveGrothendieckExtensionExact`.
+`TernaryThirteenOriginalTriadicPresheafExact` now provides
+the actual object-indexed original restriction functor on all
+`RelHom`; `TernaryThirteenOriginalTriadicAllSieveSheafExact`
+source-writes sieve-indexed proof-independent matching families,
+restrictions of global sections, glue for **both** coverage
+constructors, recovery on every sieve member, and uniqueness
+of the matched global section.
+
+Consequently the H2.02 constructed central-valuation **all-cover
+sheaf condition is source-written**, with kernel acceptance
+unverified (no Agda executable available here). Unpaid
+highest-alpha seams are original independent semantic equality,
+actual world-observer transport, and heterogeneous original
+edge-stalk `InterfaceMatch`/topology rewrite. The separate Bishop
+analytic P1 Cayley, P2 selected zeta and P3 Gamma/Xi proofs
+remain mathematically OPEN.
+
+Detailed receipts:
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
