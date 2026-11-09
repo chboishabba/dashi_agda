@@ -197,9 +197,44 @@ initialBinaryGraphEndpointCapacityBound word certificate
         word n threshold edges parsed))
     NatP.≤-refl
 
--- A useful exact output bound on the LIVE chronological endpoint
--- history of the actual source machine, after its finite run.
--- This is the real F2.2 endpoint-history source-input charge.
+-- The historical LE endpoint addresses plus their original
+-- certificate labels are one nonnegative component of the total
+-- source storage invariant, for EVERY possible state.
+historyPayloadAtMostSourceStorage :
+  (state : Machine.State) →
+  historyPayloadWidth (Machine.history state)
+    ≤ stateEndpointStorageCapacity state
+historyPayloadAtMostSourceStorage
+  (Machine.state phase edges bits hist ledger threshold) =
+  NatP.m≤m+n
+    (historyPayloadWidth hist)
+    (remainingEndpointWidth edges + length bits)
+
+-- Strong F2.2 result: the ACTUAL binary N21 priority machine cannot
+-- grow its chronological endpoint-history payload beyond both source
+-- input WORD lengths at ANY intermediate step. This is not merely a
+-- bound on the terminal state.
+actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords :
+  (fuel : Nat) (word certificate : Word.BitWord) →
+  historyPayloadWidth
+    (Machine.history
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    ≤ length word + length certificate
+actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords fuel word certificate =
+  NatP.≤-trans
+    (historyPayloadAtMostSourceStorage
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    (NatP.≤-trans
+      (NatP.≤-reflexive
+        (actualFirstEnabledFiniteRunEndpointCapacityInvariant
+          fuel (Machine.initialBinaryWholeWordState word certificate)))
+      (initialBinaryGraphEndpointCapacityBound word certificate))
+
+-- At source fuel equal to the real edge-count-plus-one first-enabled
+-- machine potential, the same invariant yields the exact originally
+-- selected completed-run history capacity bound.
 actualBinaryFirstEnabledEndpointHistoryFitsInputs :
   (word certificate : Word.BitWord) →
   historyPayloadWidth
@@ -210,26 +245,7 @@ actualBinaryFirstEnabledEndpointHistoryFitsInputs :
         (Machine.initialBinaryWholeWordState word certificate)))
     ≤ length word + length certificate
 actualBinaryFirstEnabledEndpointHistoryFitsInputs word certificate =
-  NatP.≤-trans
-    (NatP.m≤m+n
-      (historyPayloadWidth
-        (Machine.history (Run.runBinaryWithFuel
-          (Potential.binaryStatePotential
-            (Machine.initialBinaryWholeWordState word certificate))
-          (Machine.initialBinaryWholeWordState word certificate))))
-      (remainingEndpointWidth
-        (Machine.edges (Run.runBinaryWithFuel
-          (Potential.binaryStatePotential
-            (Machine.initialBinaryWholeWordState word certificate))
-          (Machine.initialBinaryWholeWordState word certificate))) +
-       length (Machine.bits (Run.runBinaryWithFuel
-          (Potential.binaryStatePotential
-            (Machine.initialBinaryWholeWordState word certificate))
-          (Machine.initialBinaryWholeWordState word certificate)))))
-    (NatP.≤-trans
-      (NatP.≤-reflexive
-        (actualFirstEnabledFiniteRunEndpointCapacityInvariant
-          (Potential.binaryStatePotential
-            (Machine.initialBinaryWholeWordState word certificate))
-          (Machine.initialBinaryWholeWordState word certificate))))
-      (initialBinaryGraphEndpointCapacityBound word certificate))
+  actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords
+    (Potential.binaryStatePotential
+      (Machine.initialBinaryWholeWordState word certificate))
+    word certificate
