@@ -44,8 +44,8 @@ noRightDecoderAtCollision :
 noRightDecoderAtCollision f {a = a} {a′ = a′} {b = b} {b′ = b′}
   same distinct decode correct =
   distinct
-    (transEq (symEq (correct _ _))
-      (transEq (congEq decode same) (correct _ _)))
+    (transEq (symEq (correct a b))
+      (transEq (congEq decode same) (correct a′ b′)))
 
 -- Specialisation to an arbitrary affine product coefficient.
 -- The coefficient a and scale b are not specific to the OAG.
