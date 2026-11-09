@@ -419,3 +419,70 @@ source delimiters are **not** kernel acceptance. The new P0.01/P0.03
 declarations are *source-written with concrete proofs*, **not
 confirmed accepted**; check their transitive Agda elaboration before
 claiming a terminal closure.
+
+
+## 2026-11-09 exact-branch reconciliation: source proof versus kernel receipt
+
+The older “Next exact semantic leaves” paragraph above is historical and
+must not be read as the current implementation status. Exact-head readback
+now confirms the following concrete **source-written** declarations:
+
+- `BishopOriginalFiniteNegativeLogExpEndpointBoundExact.originalFiniteNegativeLogExpUniformEndpointBound`:
+  `|exp_B(-L_N(x))-(1-x)| <= inv(1-(x+1)/2)^2 * x^(N+1)/(N+1)`
+  for original proof-bearing `0<=x<1`. The midpoint factor is
+  `4/(1-x)^2`, weaker than the earlier desired compact-radius constant but
+  sufficient for convergence.
+- `BishopOriginalNegativeLogTerminalFromMeshExact.originalNegativeLogFiniteEvaluationConvergesToOneMinus`:
+  consumes the stagewise endpoint bound, native power and reciprocal
+  convergence, and vanishing-difference convergence.
+- `BishopOriginalNegativeLogTerminalFromMeshExact.originalBishopNegativeLogExponentialGap`:
+  feeds the actual source finite evaluation into the pre-existing
+  `originalNegativeLogTerminalFromFiniteEvaluation`.
+- `BishopOriginalZetaAboveTwoFromMeshLogExact.FromOriginalBishopMeshLog.originalAboveTwoZetaFromCompletedLog`:
+  instantiates the original above-two Dirichlet construction with that
+  LOG witness. This is P2.01 only, not selected external zeta equality.
+
+The focused Agda workflow was amended to include these exact terminal
+modules and their endpoint prerequisites as explicit targets; the three
+canonical TOE root checks remain required. Missing `0ℚᵘ` scope imports
+were corrected in the original finite-power quadrature, finite-error
+equal-mesh comparison, normalized endpoint quadrature, and terminal LOG
+source modules. These corrections are **not** proof of kernel acceptance.
+
+### Current decisive cuts (do not re-list the already source-written P0 leaves)
+
+1. **P0-V**: execute the pinned Agda 2.9 `--safe` checker over all
+   changed terminal owners plus transitive imports and three TOE roots;
+   repair actual compiler errors, and store exact-head kernel receipts.
+2. **P1.01–P1.03**: prove a same-original-carrier analytic identity
+   `exp_C(2 i atan_B(t)) = Cayley(t)` on the selected half-ball.
+   The repository already supplies the source atan uniform tail,
+   geometric finite derivative, derivative-limit cancellation,
+   rational Cayley differential polynomial, formal coefficients, and
+   pointwise rational phases. It does **not** yet exhibit the analytic
+   composite coefficient/evaluation or constructive ODE uniqueness
+   across the independently selected original series.
+3. **P1.04–P1.05**: specialize that genuine result to the existing
+   `OriginalAtanFiveCayleyEvaluation` and
+   `OriginalAtan239CayleyEvaluation` targets; the downstream Machin
+   first-zero consumer is already implemented.
+4. **P2.02–P2.04**: re-use
+   `BishopRiemannOriginalNatLogTermCoherenceExact` and
+   `BishopRiemannDirichletBaselSameObjectExact` for termwise and
+   majorant-independent original values. Equality with the separately
+   selected `ZetaHalfPlaneLayer.zetaHalfPlane` remains semantically
+   **underdetermined** by the current opaque interface: see
+   `RiemannOpaqueZetaHalfPlaneCountermodelExact`. Add a real
+   original-Dirichlet identification to the concrete selected
+   implementation, not a free proof field or fiat.
+5. **P3.01–P3.07**: the original Gamma Mellin construction, prefactor,
+   meromorphic continuation, functional equation, factor equality,
+   entireness and reflection are still genuine analytic work. The
+   current Xi continuity compiler is conditional and the existing
+   opaque completed-Xi countermodel rules out semantic closure by
+   interface projection alone.
+
+**Verification status**: GitHub source readback and workflow coverage
+confirmed. No exact-head Agda kernel result, completion of the P1
+analytic composition, independent selected-zeta equality, or P3
+completed-Xi proof is claimed by this reconciliation.
