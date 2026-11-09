@@ -157,3 +157,11 @@ Commits: `252838299697a666fd83bbb24fbdf21c8a0d7ac2` and `b38b43f83154745ce201ab8
 - **K4** Golden import and canonical ITIR/PNF selective-reopening replay. Open until K0 and relevant source receipts close.
 
 **Safety of claims:** This branch never infers malicious intent from burden, diagnoses fatigue from task count, identifies inclusion with land repatriation, or promotes mathematical finite countermodels to a conclusion about real communities.
+
+## K0 local preflight instrument (fourth pass conclusion)
+
+Added `tools/epistemic-power/check-golden.sh` at commit `0e082a0de1edaa698a9768bcf665d94d91808039`. Execute at repo root with `bash tools/epistemic-power/check-golden.sh` in the canonical pinned Agda 2.9 environment. This checks all seven modules with `agda --safe -i .` and exits on first error. No CI dependency or Green claim is implied.
+
+GitHub connector static source audit for all seven new Agda modules: module header/path match 7/7; no visible `postulate` declarations 7/7; no `= ?` or `: ?` holes 7/7; no unsafe OPTIONS pragma 7/7. **This does not establish syntax, scope, termination, positivity, universe or definitional equality checks.**
+
+Remaining exact blockers are K0 executable/kernel receipts, K1 cryptographically grounded primary subspans and interpretation adjudication, K2 genuinely observed fatigue and causal context, K3 original audited ESD/cognitive warfare histories, and K4 Golden and ITIR selective-reopening replay. The new contextual cost-payoff theorem is explicitly a constructed countermodel, not a diagnosis or an observation.
