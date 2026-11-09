@@ -108,9 +108,11 @@ originalFinitePowerQuadratureEndpointBound :
       (R.pow (Mesh.sourceVertex steps zero) (suc power)))
 originalFinitePowerQuadratureEndpointBound
     steps power zero vertexNN stepNN =
+  let
+    initial = R.pow (Mesh.sourceVertex steps zero) (suc power)
+  in
   RP.≤-respʳ-≃
-    (RP.≃-symm
-      (RP.-‿cong RP.≃-refl))
+    (RP.≃-symm (RP.+-inverseʳ initial))
     RP.≤-refl
 originalFinitePowerQuadratureEndpointBound
     steps power (suc cells) vertexNN stepNN =
