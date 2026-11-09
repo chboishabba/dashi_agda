@@ -116,12 +116,23 @@ def self_test():
         demand(len(positive['source_stratified_counts'])==1,'synthetic source stratification')
         demand(all(sum(v['reviewer_1'].values())==1 and sum(v['reviewer_2'].values())==1 for source in positive['source_stratified_counts'].values() for v in source.values()), 'source counts / denominator')
         import copy
-        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('overlapping_span',lambda x:x['passages'].append(dict(x['passages'][0],id='overlap',start_byte=1,passage_sha256=hashlib.sha256(raw[1:split]).hexdigest()))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=split,end_byte=len(raw),passage_sha256=hashlib.sha256(raw[split:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
+        second=copy.deepcopy(p)
+        second.update(id='disjoint-second-half',start_byte=split,end_byte=len(raw),
+                      passage_sha256=hashlib.sha256(raw[split:]).hexdigest())
+        valid_two={'schema':item['schema'],'passages':[p,second]}
+        validated_two=validate(valid_two,root,synthetic=True)
+        demand(validated_two['passages']==2, 'two disjoint original passages should both be admitted')
+        demand(all(sum(coders['reviewer_1'].values())==2
+                   for source in validated_two['source_stratified_counts'].values()
+                   for coders in source.values()), 'two-passage denominators')
+        (root/'alias.bin').symlink_to(root/'text.bin')
+        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('symlink_source',lambda x:x['passages'][0].update(relative_path='alias.bin')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('overlapping_span',lambda x:x['passages'].append(dict(x['passages'][0],id='overlap',start_byte=1,passage_sha256=hashlib.sha256(raw[1:split]).hexdigest()))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=split,end_byte=len(raw),passage_sha256=hashlib.sha256(raw[split:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
         (root/'other.bin').write_bytes(b'MUTATED')
         expected_failures = {
             'bytes_hash':'original bytes digest',
             'passage_hash':'passage digest',
             'path_traversal':'source path traversal',
+            'symlink_source':'source symlink not permitted',
             'same_reviewer':'reviewer independence ID',
             'effect':'unearned promotion',
             'fake_intent':'unearned promotion',
@@ -148,7 +159,7 @@ def self_test():
         else:raise AssertionError('synthetic owner accepted as real historical author')
         demand(kappa([('a','a'),('b','b')])['kappa']==1,'agreement test')
         demand(kappa([('a','b'),('b','a')])['kappa']==-1,'disagreement test')
-        return {'synthetic_passage_positive':True,'negative_controls':len(tests),'kappa_cases':3,'real_historical_passages_admitted':0}
+        return {'synthetic_passage_positive':True,'disjoint_two_passage_positive':True,'negative_controls':len(tests),'kappa_cases':3,'real_historical_passages_admitted':0}
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--self-test',action='store_true');ap.add_argument('--receipts',type=Path);ap.add_argument('--source-root',type=Path);args=ap.parse_args()
