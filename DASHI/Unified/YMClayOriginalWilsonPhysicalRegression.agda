@@ -63,3 +63,6 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as 
 
 -- D1 constructive source conflict: actual shared native plaquette witness.
 import DASHI.Physics.YangMills.YMClayD1OriginalConflictPlaquetteWitnessExact as D1NativeConflictWitness
+
+-- D1 distinct original marked-link 19-count transport, with native degree-18 leaf explicit.
+import DASHI.Physics.YangMills.YMClayD1OriginalGreedy19CountingExact as D1NativeGreedyCounting
