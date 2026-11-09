@@ -110,3 +110,18 @@ Physical B1: source-first KP cluster bidegree (1,1) germ, original marked log-je
 **Acceptance:** code committed and source read back. Agda command missing from environment; kernel acceptance unresolved. Do not claim original interacting continuum E1 or any Clay terminal gate from this finite locality lemma.
 
 **Additional finite A3 size theorem:** `YMClayE1A3OriginalAllWordPathSupportExtensionalExact.originalWordActualLookupSlotsExactlyFourPerPlaquette` gives exactly four native signed-path positive-link lookup slots per original plaquette for all finite source words and every periodic side length. It composes `sourceLookupSlotsAppend` with the existing original four-slot path theorem; read-slot count is not confused with number of distinct positive-link variables. Source-written only, kernel receipt pending.
+
+
+## 2026-11-09 E1/A3 concrete finite-list projection and extension consistency
+
+`YMClayE1A3OriginalFiniteCoordinateProjectionExact.agda` now supplies a concrete, source-paid finite projective coordinate `originalWilsonWordFiniteValues`: a **List (SUNMatrixElement theory)** of the actual original positive-link values read by the signed path of each selected original plaquette word. It does not use a full link field disguised as a finite coordinate. The following declarations are source-written:
+
+1. `consHeadInjective` / `consTailInjective`: constructive list equality destructors.
+2. `sameOriginalFiniteBondValuesImpliesPointwiseAgreement`: if the actual sampled group-value lists agree, the original link fields agree at each bond on the selected finite list; repeated bonds are allowed.
+3. `originalWilsonWordFactorsThroughActualFiniteValues`: use the existing all-word actual signed-path extensional theorem to prove equality of real Wilson-word observables whenever those actual sampled value lists agree.
+4. `originalFiniteValuesAppend`: restriction to a concatenation of source support lists equals concatenation of the actual sampled coordinate lists.
+5. `originalWilsonWordFiniteCoordinateCons`: prepending an original plaquette to a Wilson word prepends precisely its four signed-path positive-link values to the earlier word projection.
+
+This completes the *finite source-link-value projection factorization and word-extension algebra* proof contract at the source-written level (Agda kernel receipt outstanding). It **does not** discharge R568's external selected-projective-system identification: that requires an actual continuum projective configuration carrier and compatible refinement projections, not just the finite source list. Nor does finite-coordinate concatenation prove measure/projective consistency of original Gibbs distributions at different cutoffs. Keep R566 A3 projective event consistency and continuity-at-empty, R576 original mixed-log and connecting polymer bound, R577 reconstructed OS physical-time transfer, R563 Ward noncollapse, and R571 all-group physical source open.
+
+Implementation also imported to `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`. Verification state: committed/readback only; no Agda 2.9 compiler available.
