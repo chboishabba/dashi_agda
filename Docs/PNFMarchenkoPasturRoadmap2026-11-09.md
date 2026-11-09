@@ -261,3 +261,23 @@ The committed script has been revised to test diagonal correction; the revised G
 - **P0 all modules:** no Agda 2.9 binary available in this execution environment; not kernel-verified. Do not treat committed proof text as accepted theorem.
 
 **Further cut choice:** connect the actual sample-mean and unbiased-scale receipts to the source-bound same-window activation/returns loaders; use existing finite ordered-linear algebra for rank/nullity; choose a concrete PSD spectral-decomposition owner for filtered covariance, then attach the genuinely probabilistic MP law separately.
+
+## 12. Further finite rank constructive cut — centred row dependency
+
+Added `DASHI/Information/PNFCentredRankDependencyExact.agda` (authored, Agda kernel NOT checked):
+- `addInverseRight`: derived from existing ordered-ring commutativity and inverse.
+- `sumToZeroDeterminesFirst`: if a+b=0, a=−b.
+- `zeroSumFirstDeterminedByTail`: any zero-sum Fin(suc n) vector has first coordinate equal to minus the finite sum of the remaining coordinates.
+- `centredFirstRowDeterminedByRemainingRows`: instantiates this for every column of the *same source-paid centred matrix* using `sampleMeanDefiningEquation`.
+
+This is an explicit finite linear dependence certificate establishing that the first centred observation row is algebraically determined by the n−1 remaining observation rows. It is the constructive geometric content behind `rank(X_centered)≤n−1`, but DOES NOT itself prove a formal matrix rank bound or zero eigenvalue multiplicity: those still require a selected finite field/vector-space dimension-and-rank owner and eigenspace/nullity connection.
+
+P0 status:
+1. Repair and kernel-check all new Agda declarations and dependencies — OPEN.
+2. Instantiate actual means and nonnegative inverse-(n−1) from source-selective real coefficients — OPEN.
+3. Connect centred dependency to a field-based finite rank/dimension theorem and covariance nullity/eigenvalue multiplicity — OPEN.
+4. Complete negative-rho equicorrelation PSD range with existing finite Cauchy–Schwarz/Jensen owner (investigate `NSTriadKNLuoFiniteJensenSquareExact`), with exact same coefficient carrier — OPEN.
+5. Instantiate filtered eigenvector reconstruction and positive diagonal normalisation — OPEN.
+6. MP measure law/limits and real PNF/economics source evidence — OPEN.
+
+No external eigenvalue label is promoted by any of these algebraic results.
