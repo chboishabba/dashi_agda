@@ -558,3 +558,65 @@ original29x12SpatialAllHistoryCHNOPBalance
     (original29x12SpatialAllHistoryCHNOPBalance certificate element rest)
     (original29x12SpatialReactionBalance
       certificate element column site residual before available)
+
+
+------------------------------------------------------------------------
+-- COMPOSITION OF SIGNED MOLECULAR REACTION HISTORIES.
+-- Two cross-sum charge balances compose after cancellation of the
+-- intermediate positive/negative charge pair. This is deliberately
+-- not a claim that positive and negative ion counts are each fixed.
+------------------------------------------------------------------------
+
+panelSwap3 :
+  (a b c : Nat) → (a + b) + c ≡ (a + c) + b
+panelSwap3 a b c =
+  trans (+-assoc a b c)
+    (trans
+      (cong (λ n → a + n) (+-comm b c))
+      (sym (+-assoc a c b)))
+
+panelSignedCrossTrans :
+  (p0 n0 p1 n1 p2 n2 : Nat) →
+  p0 + n1 ≡ p1 + n0 →
+  p1 + n2 ≡ p2 + n1 →
+  p0 + n2 ≡ p2 + n0
+panelSignedCrossTrans p0 n0 p1 n1 p2 n2 first second =
+  +-cancelʳ-≡ n1 (p0 + n2) (p2 + n0)
+    (trans
+      (panelSwap3 p0 n2 n1)
+      (trans
+        (cong (λ n → n + n2) first)
+        (trans
+          (panelSwap3 p1 n0 n2)
+          (trans
+            (cong (λ n → n + n0) second)
+            (panelSwap3 p2 n1 n0)))))
+
+original29x12SpatialAllHistorySignedChargeBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  {before after : Original29x12SpatialState} →
+  SourceCertifiedOriginal29x12History certificate before after →
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate) after)
+    ≡
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) after
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate) before)
+original29x12SpatialAllHistorySignedChargeBalance
+  certificate emptyOriginalReactionHistory = refl
+original29x12SpatialAllHistorySignedChargeBalance
+  certificate {before} {after}
+  (nextOriginalReactionHistory column site residual available rest) =
+  panelSignedCrossTrans
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before)
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate) before)
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate)
+      (applyOriginal29x12Reaction
+        certificate column site residual before))
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate)
+      (applyOriginal29x12Reaction
+        certificate column site residual before))
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate) after)
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate) after)
+    (original29x12SpatialSignedChargeBalance
+      certificate column site residual before available)
+    (original29x12SpatialAllHistorySignedChargeBalance certificate rest)
