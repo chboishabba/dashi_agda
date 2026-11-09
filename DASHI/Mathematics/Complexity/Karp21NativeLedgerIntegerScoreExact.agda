@@ -18,7 +18,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (reverse)
 open import Data.Product using (_×_; _,_)
-open import Data.Integer.Base as Int using (ℤ; +_; _+_; -_; -[1+_])
+open import Data.Integer.Base as Int using (ℤ; +_; -_; -[1+_])
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
 import Data.Integer.Tactic.RingSolver as IntRS
 import Tactic.RingSolver.NonReflective as NR
@@ -34,7 +34,7 @@ open RingZ using (_⊕_; _⊗_; Κ)
 
 integerFromTwoLaneTotals : Nat → Nat → ℤ
 integerFromTwoLaneTotals positive negative =
-  (+ positive) + (- (+ negative))
+  Int._+_ (+ positive) (- (+ negative))
 
 observeActualNativeLedger : Ledger.SignedLedger → ℤ
 observeActualNativeLedger ledger =
@@ -61,7 +61,7 @@ nativeLedgerMatchesClassTotals tokens =
 integerPositiveStep :
   (m p n : Nat) →
   integerFromTwoLaneTotals (m + p) n
-    ≡ (+ m) + integerFromTwoLaneTotals p n
+    ≡ Int._+_ (+ m) (integerFromTwoLaneTotals p n)
 integerPositiveStep m p n =
   RingZ.solve 3
     (λ x y z →
@@ -73,7 +73,7 @@ integerPositiveStep m p n =
 integerNegativeStep :
   (m p n : Nat) →
   integerFromTwoLaneTotals p (m + n)
-    ≡ (- (+ m)) + integerFromTwoLaneTotals p n
+    ≡ Int._+_ (- (+ m)) (integerFromTwoLaneTotals p n)
 integerNegativeStep m p n =
   RingZ.solve 3
     (λ x y z →
@@ -100,7 +100,7 @@ negativeTokenInteger magnitude
 signedTrace : List Signed.SignedMagnitudeBits → ℤ
 signedTrace [] = + zero
 signedTrace (token ∷ rest) =
-  TokenValue.interpretNativeToken token + signedTrace rest
+  Int._+_ (TokenValue.interpretNativeToken token) (signedTrace rest)
 
 tokenClassesEqualOriginalSignedTrace :
   (tokens : List Signed.SignedMagnitudeBits) →
@@ -117,7 +117,7 @@ tokenClassesEqualOriginalSignedTrace
       (Ledger.sumPositive rest)
       (Ledger.sumNegative rest))
     (cong
-      (λ total → (+ (Value.valueLE (reverse magnitude))) + total)
+      (λ total → Int._+_ (+ (Value.valueLE (reverse magnitude))) total)
       (tokenClassesEqualOriginalSignedTrace rest))
 tokenClassesEqualOriginalSignedTrace
   (Signed.negative magnitude ∷ rest) =
@@ -128,10 +128,10 @@ tokenClassesEqualOriginalSignedTrace
       (Ledger.sumNegative rest))
     (trans
       (cong
-        (λ total → (- (+ (Value.valueLE (reverse magnitude)))) + total)
+        (λ total → Int._+_ (- (+ (Value.valueLE (reverse magnitude)))) total)
         (tokenClassesEqualOriginalSignedTrace rest))
       (cong
-        (λ z → z + signedTrace rest)
+        (λ z → Int._+_ z (signedTrace rest))
         (sym (negativeTokenInteger magnitude))))
 
 -- P0-C: the real executable two-register binary fold, observed in
