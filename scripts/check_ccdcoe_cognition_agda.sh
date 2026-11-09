@@ -64,6 +64,8 @@ python3 scripts/check_ccdcoe_p3_gcc1993_chain.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_chain.py
 python3 scripts/check_ccdcoe_p3_gcc1993_directional_control.py --self-test
 python3 scripts/check_ccdcoe_p3_gcc1993_directional_control.py
+python3 scripts/check_ccdcoe_p3_gcc1993_claim_comparison.py --self-test
+python3 scripts/check_ccdcoe_p3_gcc1993_claim_comparison.py
 python3 scripts/check_critical_art_film_edition_intake.py --self-test
 python3 scripts/check_critical_art_film_edition_intake.py
 python3 scripts/check_critical_art_original_edition_authorities.py --self-test
