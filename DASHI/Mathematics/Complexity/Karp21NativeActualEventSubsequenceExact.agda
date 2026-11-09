@@ -28,7 +28,7 @@ open import Data.List.Base using (length)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
-import DASHI.Mathematics.Complexity.Karp21BinaryNativeEndpointRawEdgeStreamExact as Edge
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact as Edge
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact as History
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
