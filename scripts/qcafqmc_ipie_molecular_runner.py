@@ -32,6 +32,22 @@ def run(config_path):
         raise ValueError("atoms must be non-empty list")
     for entry in configuration["atoms"]:
         if len(entry)!=4:raise ValueError("atom is [element,x,y,z]")
+    if "nickel_structure" in configuration:
+        from qcafqmc_nickel41_integrals import GEOMETRY_DIR,read_xyz
+        name=configuration["nickel_structure"]
+        if name not in ("B","BC","C"):
+            raise ValueError("invalid original nickel geometry label")
+        original_path=GEOMETRY_DIR/(name+".xyz")
+        original=read_xyz(original_path)
+        original_digest=hashlib.sha256(original_path.read_bytes()).hexdigest()
+        if configuration.get("geometry_source_sha256")!=original_digest:
+            raise ValueError("original nickel geometry hash mismatch")
+        selected=[(atom[0],tuple(float(v) for v in atom[1:]))
+                  for atom in configuration["atoms"]]
+        if selected!=original:
+            raise ValueError("source nickel geometry coordinates/order modified")
+        if configuration["basis"].lower()!="sto-3g":
+            raise ValueError("nickel benchmark requires STO-3G")
     import numpy as np
     from pyscf import gto,scf
     from ipie.qmc.afqmc import AFQMC
