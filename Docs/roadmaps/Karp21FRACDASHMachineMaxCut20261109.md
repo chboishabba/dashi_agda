@@ -96,3 +96,7 @@ A short FRACTRAN program or collapsed DA51 shard does **not** establish polynomi
 5. Build a concrete bit-tape implementation and its all-word polynomial clock; instantiate original `PR.InNP`.
 
 No synthetic N21 result should be promoted from the generic theorem.
+
+### Bounded independent regression — 2026-11-09
+
+`script/check_karp21_fractran_priority_frontier.py` (actual tracked path: `scripts/check_karp21_fractran_priority_frontier.py`) is included in `referee_karp21_maxcut.sh`. Executed independently here on 38,860 finite guard/frontier cases for 1–3 Boolean lanes and 0–3 ordered rules, with exact agreement between incremental cache refresh, full recomputation, and first-enabled priority; it also rejects an affected-rule stale-cache negative control. **These are finite Python checks, not Agda kernel receipts, not original N21 tests, and not evidence of a bit-machine polynomial clock.**
