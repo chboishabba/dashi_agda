@@ -97,6 +97,7 @@ python3 scripts/check_biological_parametric_minimal18.py
 python3 scripts/check_biological_spatial_circulation.py
 python3 scripts/biological_shared_spatial_finite_volume.py --self-test
 python3 scripts/check_biological_signed_charge_27.py
+python3 scripts/check_biological_369_pants_physical_seam.py
 
 # Run the repository-owned parallel Agda checker, never an ad hoc local
 # direct Agda invocation. Its exact-head result remains a separate receipt
