@@ -130,3 +130,16 @@ P_original(B_ε≥η) ≤ [8+(2/3)ln24+lnβ]/(βεη).
 This follows pointwise from `ε 1_{d_p≥ε}≤d_p`, finite summation and the already-proved original pressure theorem. It is independent of plaquette correlations, and is a **new volume-uniform bulk statistic**, not merely a local conditional one-link tail. [Derivation and sharp obstruction](YMClaySU2OriginalWilsonUniformPlaquetteDeficit20261109.md).
 
 **D1.03 physical endpoint still OPEN.** A path spanning a periodic `n^4` lattice can consist of just `n` bad plaquettes, with density `1/(6n³)→0`, so even an arbitrarily strong vanishing-*density* theorem does not imply nonpercolation or distant Wilson-covariance clustering. The needed original source is a connected-polymer/contour **activity-versus-entropy** estimate with physical block scaling, and original full-Wilson small/large decomposition and CMP116 applicability. E1/D2/N1/G1 unchanged. No Agda kernel or Clay theorem claim.
+
+
+## 9 November — original D2 max-cut shortened using the already-owned OS spectral theorem
+
+[Complete positive-time autocorrelation → full nonvacuum gap proof](YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md) gives the decisive analytic fact, with all quantifiers explicit: if the *same* E1-reconstructed positive OS semigroup `e^{-tH}` has a **norm-dense nonvacuum source test subspace** `D`, and there exists ONE common physical exponent `m>0` such that `<psi,e^{-tH}psi> ≤ C_psi e^{-mt}` for **every** `psi∈D` and `t≥0`, then `sigma(H|Omega^perp)⊆[m,∞)`. The source-dependent prefactor `C_psi` need **not** be uniform in `psi`. A positive subgap spectral projection would force `e^{-lambda t}||E_[0,lambda]psi||²` below an exponentially faster bound for every dense `psi`, hence vanish; bounded projections and density eliminate continuous as well as point subgap spectrum.
+
+**Revised physical D2 endpoints (without deleting the original 23 producer identifiers):**
+- `D2.01/D2.02`: one genuine E1 OS Hamiltonian and one uniform physical-time decay exponent `m>0` in original units.
+- `D2.03`: source OS positive-time cylinder test vectors dense in the **complete nonvacuum Hilbert space** (not a selected proper subspace); genuine Euclidean autocorrelation identity.
+- `D2.04`: mathematically follows from D2.01–03 by the spectral theorem; no additional independent physical “full-sector detector” is needed once density is established.
+- `D2.05`: vacuum uniqueness, domains/units and original Clay interpretation remain to establish.
+
+**Do not duplicate** `BalabanOSExponentialClusteringImpliesHamiltonianGapExact.OSExponentialClusteringImpliesHamiltonianGap` or the already-owned spectral closure R333. Their current `Set`-valued OS and spectral inputs are conditional; they are not proof that the original Wilson family supplies dense tests and physical-time autocorrelation. The full Wilson D1.03 connecting-polymer and E1.03 interacting continuum are still the major *physical* original work.
