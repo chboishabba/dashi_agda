@@ -56,10 +56,10 @@ section135AAssessmentChange = applicable-rule
 
 section135APublication : ApplicableRule
 section135APublication = applicable-rule
-  "EPBC s 135A(2)-(4) — publication of recommendation reports"
-  "Environment Protection Reform Act 2025 Sch 1 Pt 3 item 689"
-  postReformApplies
-  "The publication amendments apply to a recommendation report given to the Minister on or after 24 August 2026, even if the report was prepared before commencement."
+  "EPBC s 135A(2)-(4) — later website publication amendment"
+  "Environment Protection Reform Act 2025 Sch 1 items 232-234, 689; exact commencement proclamation must be checked"
+  mixedOrProvisionSpecific
+  "Item 689 supplies an application rule only once items 232-234 commence. It does NOT itself prove they commenced 24 August 2026. Under the 1 July 2026 compilation the existing s135A(2)-(3) instead requires the Secretary, after approval, to provide the 95C report to a person who asks, subject to s135A(4)-(5) exemptions and possible reasonable charges."
   false
 
 section136Paragraphs : ApplicableRule
@@ -167,3 +167,15 @@ remainingCounselResidual : CounselResidual
 remainingCounselResidual = counsel-residual
   "Confirm the exact text/version of each operative pre-reform provision governing EPBC 2019/8575 at the 1 October 2026 decision, and identify any later transitional rule, instrument, court authority or commencement item that modifies the item-683/item-690 mapping."
   "Provision buckets are source-mapped; final legal construction remains counsel-owned."
+
+-- Direct access under the unreplaced July 2026 s135A(2)-(3) is
+-- analytically separate from later website-publication amendments.
+-- The public has NOT been shown the original EPBC 2019/8575 s95C
+-- document, nor has any agency request or FOI been sent here.
+section135APreDecisionOnRequest : ApplicableRule
+section135APreDecisionOnRequest = applicable-rule
+  "EPBC s135A(2)-(5), 1 July 2026 compilation — request access to s95C report after approval"
+  "https://www.legislation.gov.au/C2004A00485/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_1/document_1.html"
+  preReformPreserved
+  "After a decision on each controlling provision, on-request copy subject to prescribed exclusions/charges; no received document, new automatic publication, disclosure decision or FOI outcome inferred."
+  false
