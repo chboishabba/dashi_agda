@@ -1,3 +1,29 @@
+## 9 November 2026 — authoritative 23-lemma / 10-owner / five-phase crosswalk
+
+**The 23 exact physical producers are now explicitly documented** in [YMClay23PhysicalProducersCurrentMaxCut20261109.md](YMClay23PhysicalProducersCurrentMaxCut20261109.md). They refine rather than replace the original **ten terminal source-owner IDs YM01–YM10** in [YMClayEndpointPhaseLemmaManifest20261108.json](YMClayEndpointPhaseLemmaManifest20261108.json). The phase plan remains **PH0–PH4**. All five Clay physical endpoints E1/D1/D2/N1/G1 are **OPEN**. Do not treat source-written finite algebra or a conditional compiler as an inhabited physical theorem.
+
+| Phase | Existing terminal owners | Exact 23-producer work consumed | Required deliverable and acceptance |
+|---|---|---|---|
+| **PH0 — original source** | YM01 | E1.01; prerequisite for D1.01, G1.02 | Source-selected original compact-group Haar and normalized **changing-cutoff/volume** physical Wilson measures, actual physical scale and UV/IR trajectory; source kernel and transitive real/compact-group trust receipt |
+| **PH1 — interacting continuum** | YM02, YM03, YM09 | E1.02–E1.05, E1.07; D1.04; N1.01–N1.03 | Fixed-physical-support admissible local gauge-invariant observable and scaling realization; genuine continuum Schwinger correlation convergence, required axioms and nontrivial same-system local witness |
+| **PH2 — replaceable direct decay route** | YM04, YM05 | D1.01–D1.03; D1.04 shared with PH1 | All physically required remote pairs admitted, original finite marked directions inside actual CMP119/122 analytic domain; full original Gibbs **small+large field** decomposition and genuinely uniform physical-space exponential decay for both contributions, not merely a small-field compiler |
+| **PH3 — original OS physical gap** | YM06, YM07, YM08 | E1.04–E1.06; D2.01–D2.05 | Same E1 Schwinger family, full reflection-positive continuum GNS/OS reconstruction, strongly continuous translations and correct same H; selected observable tests dense/spectrally complete on nonvacuum sector; physical-scale strictly positive gap with no invisible slow modes |
+| **PH4 — every compact simple G** | YM10 | G1.01–G1.04; completed E1/N1/D2 and route-dependent D1 for each group | Externally specified compact simple Lie groups including valid global forms, **each** with original physical construction and positive group-dependent mass gap; exact-head Agda receipt, non-vacuity and transitive source-meaning audit |
+
+**Serial proof dependencies:** PH0 -> PH1 (Schwinger existence); PH0+PH1 -> PH2 (chosen uniform clustering), PH1+PH2 -> PH3 for the CMP116/R333 route; PH3 with N1 and fixed-group physical source -> PH4. An independently valid PH3 gap proof may bypass PH2. R581/R582 pre-gap OS and R583 H1-to-OS4 are existing compilers, not separate requests to reconstruct OS4 from scratch.
+
+**Concrete source progress (not a physical closure):**
+- \`YMClayE1OriginalSUNFiniteCylinderLawsExact\` already provides original finite state laws and a selected origin-Wilson polynomial algebra, with explicit epsilon–N *conditional* limit laws.
+- \`YMClayOriginalVariableWilsonCovarianceSourceExact\` supplies original \`ℝ\`-valued covariance and gauge-invariant local plaquettes at every cutoff.
+- \`YMClayE1D1OriginalVariablePlaquetteWordsExact\` (9 November) supplies **all finite ordered original Wilson plaquette words** with genuine gauge invariance by induction; E1 finite word-pair covariance exactly equals the existing original D1 covariance and its literal finite two-J **formal marked source**. No independent measure and no rational T5 carrier. The two-source expression uses \`Cumulant.sourceDirectionOf\` of the original jet, not a raw test function; corrected on the source head.
+- \`YMClayD1OriginalRealCMP116VariableCutoffExact\` conditionally compiles differentiated CMP116 into actual original real cutoff-uniform bounds.
+- \`YMClayD1OriginalFullWilsonSmallLargeFieldExact\` conditionally compiles full original Gibbs from physical small and large field estimates. **This is the central still-missing PH2 physical estimate**, particularly its genuine large-field remainder and fixed-physical-size q<1.
+- \`YMClayD1PhysicalRemoteCoverageNoGoExact\` excludes proof by an empty remote class; the selected-observable spectral negative control excludes proof of a full H gap from invisible-mode selected tests.
+
+**Machine-check status:** all new Agda source proofs are **SOURCE_WRITTEN / KERNEL_OPEN** absent an exact-head Agda 2.9 \`parallel_checker\` receipt. All five terminal Clay gates **PHYSICAL_OPEN**. The [23-producer ledger](YMClay23PhysicalProducersCurrentMaxCut20261109.md) owns detailed source names; the original JSON manifest owns YM01–YM10. These are deliberately linked, not duplicated.
+
+---
+
 # Yang–Mills Clay — canonical roadmap, phases, deliverables, exact remaining lemmas
 
 ## 8 November — source audit update: BCH and CMP119 OS4 already implemented
