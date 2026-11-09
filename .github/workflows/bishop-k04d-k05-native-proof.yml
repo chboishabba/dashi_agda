@@ -40,6 +40,7 @@ on:
       - 'DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda'
       - 'DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda'
       - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
@@ -171,6 +172,7 @@ jobs:
             DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
             DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
             DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
