@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Chemistry.CarbonFuelRegenerationExact where
 
 -- Prior art: Sabatier 1902 methanation reaction and conventional water
