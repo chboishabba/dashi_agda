@@ -6,6 +6,7 @@ cd "$(dirname "$0")/.."
 
 ROOT=DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 MODULES=(
+  DASHI/Biology/BH4OneMoleculeSpatialFutureMinimalityExact.agda
   DASHI/Biology/BH4SpatialOriginalQDPRStoichiometryExact.agda
   DASHI/Biology/BH4SharedSourceTargetRedoxDynamicsExact.agda
   DASHI/Biology/BH4SpatialConnectivityCirculationExact.agda
