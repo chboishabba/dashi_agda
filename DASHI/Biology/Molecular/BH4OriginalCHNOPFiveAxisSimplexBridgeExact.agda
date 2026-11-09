@@ -111,3 +111,131 @@ original369x29x12EveryCHNOPBalance :
     (Panel.sourceFiniteColumns certificate) multiplicities
 original369x29x12EveryCHNOPBalance =
   Rate.original369x29x12SpatialRateCHNOPBalance
+
+------------------------------------------------------------------------
+-- The original Brouwer positive-weight simplex uses ONE aggregate mass
+-- coordinate. Build it from the five source CHNOP coordinates; do not
+-- invent a sixth chemical invariant or infer positivity from atom counts.
+------------------------------------------------------------------------
+
+panelWeightedAddWeights :
+  ∀ {n} (left right counts : V.Vec Nat n) →
+  Panel.panelWeighted (Panel.panelAdd left right) counts
+    ≡ Panel.panelWeighted left counts + Panel.panelWeighted right counts
+panelWeightedAddWeights V.[] V.[] V.[] = refl
+panelWeightedAddWeights
+  (V._∷_ a left) (V._∷_ b right) (V._∷_ count counts) =
+  trans
+    (cong (λ t → (a + b) * count + t)
+      (panelWeightedAddWeights left right counts))
+    (trans
+      (cong (λ t → t +
+        (Panel.panelWeighted left counts +
+         Panel.panelWeighted right counts))
+        (*-distribʳ-+ count a b))
+      (Panel.panelShuffle
+        (a * count) (b * count)
+        (Panel.panelWeighted left counts)
+        (Panel.panelWeighted right counts)))
+
+combineOriginalLeftKernel :
+  ∀ {n}
+  (left right : V.Vec Nat n)
+  (reaction : Panel.OriginalFiniteReaction n) →
+  Panel.panelWeighted left (Panel.originalReactants reaction)
+    ≡ Panel.panelWeighted left (Panel.originalProducts reaction) →
+  Panel.panelWeighted right (Panel.originalReactants reaction)
+    ≡ Panel.panelWeighted right (Panel.originalProducts reaction) →
+  Panel.panelWeighted (Panel.panelAdd left right)
+    (Panel.originalReactants reaction)
+    ≡ Panel.panelWeighted (Panel.panelAdd left right)
+      (Panel.originalProducts reaction)
+combineOriginalLeftKernel left right reaction leftBalance rightBalance =
+  trans
+    (panelWeightedAddWeights left right
+      (Panel.originalReactants reaction))
+    (trans
+      (cong₂ _+_ leftBalance rightBalance)
+      (sym (panelWeightedAddWeights left right
+        (Panel.originalProducts reaction))))
+
+-- Build the original 29-component aggregate without assigning any
+-- measured rates, source concentrations, or independent physiology.
+totalCHNOPSourceWeights :
+  (certificate : Panel.SourceCertifiedOriginal29x12) →
+  V.Vec Nat 29
+totalCHNOPSourceWeights certificate =
+  Panel.panelAdd
+    (Panel.sourceElementWeights certificate Panel.carbonElement)
+    (Panel.panelAdd
+      (Panel.sourceElementWeights certificate Panel.hydrogenElement)
+      (Panel.panelAdd
+        (Panel.sourceElementWeights certificate Panel.nitrogenElement)
+        (Panel.panelAdd
+          (Panel.sourceElementWeights certificate Panel.oxygenElement)
+          (Panel.sourceElementWeights certificate Panel.phosphorusElement))))
+
+sourceTotalCHNOPLeftKernel :
+  (certificate : Panel.SourceCertifiedOriginal29x12)
+  (column : Data.Fin.Base.Fin 12) →
+  Panel.panelWeighted (totalCHNOPSourceWeights certificate)
+    (Panel.originalReactants
+      (V.lookup (Panel.sourceFiniteColumns certificate) column))
+    ≡
+  Panel.panelWeighted (totalCHNOPSourceWeights certificate)
+    (Panel.originalProducts
+      (V.lookup (Panel.sourceFiniteColumns certificate) column))
+sourceTotalCHNOPLeftKernel certificate column =
+  combineOriginalLeftKernel
+    (Panel.sourceElementWeights certificate Panel.carbonElement)
+    (Panel.panelAdd
+      (Panel.sourceElementWeights certificate Panel.hydrogenElement)
+      (Panel.panelAdd
+        (Panel.sourceElementWeights certificate Panel.nitrogenElement)
+        (Panel.panelAdd
+          (Panel.sourceElementWeights certificate Panel.oxygenElement)
+          (Panel.sourceElementWeights certificate Panel.phosphorusElement))))
+    (V.lookup (Panel.sourceFiniteColumns certificate) column)
+    (Panel.sourceColumnLeftKernel certificate Panel.carbonElement column)
+    (combineOriginalLeftKernel
+      (Panel.sourceElementWeights certificate Panel.hydrogenElement)
+      (Panel.panelAdd
+        (Panel.sourceElementWeights certificate Panel.nitrogenElement)
+        (Panel.panelAdd
+          (Panel.sourceElementWeights certificate Panel.oxygenElement)
+          (Panel.sourceElementWeights certificate Panel.phosphorusElement)))
+      (V.lookup (Panel.sourceFiniteColumns certificate) column)
+      (Panel.sourceColumnLeftKernel certificate Panel.hydrogenElement column)
+      (combineOriginalLeftKernel
+        (Panel.sourceElementWeights certificate Panel.nitrogenElement)
+        (Panel.panelAdd
+          (Panel.sourceElementWeights certificate Panel.oxygenElement)
+          (Panel.sourceElementWeights certificate Panel.phosphorusElement))
+        (V.lookup (Panel.sourceFiniteColumns certificate) column)
+        (Panel.sourceColumnLeftKernel certificate Panel.nitrogenElement column)
+        (combineOriginalLeftKernel
+          (Panel.sourceElementWeights certificate Panel.oxygenElement)
+          (Panel.sourceElementWeights certificate Panel.phosphorusElement)
+          (V.lookup (Panel.sourceFiniteColumns certificate) column)
+          (Panel.sourceColumnLeftKernel certificate Panel.oxygenElement column)
+          (Panel.sourceColumnLeftKernel certificate Panel.phosphorusElement column))))
+
+-- This is the exact original 27-site x 12-column aggregate CHNOP
+-- conservation used by a weighted-mass simplex, for arbitrary natural
+-- reaction multiplicity at each site. The actual positive-species
+-- hypothesis is deliberately NOT produced here.
+original369x29x12AggregateCHNOPBalance :
+  (certificate : Panel.SourceCertifiedOriginal29x12)
+  (multiplicities : V.Vec (V.Vec Nat 12) 27) →
+  Rate.spatialRateWeightedReactants
+    (totalCHNOPSourceWeights certificate)
+    (Panel.sourceFiniteColumns certificate) multiplicities
+    ≡
+  Rate.spatialRateWeightedProducts
+    (totalCHNOPSourceWeights certificate)
+    (Panel.sourceFiniteColumns certificate) multiplicities
+original369x29x12AggregateCHNOPBalance certificate multiplicities =
+  Rate.allSitesRateWeightedConserve
+    (totalCHNOPSourceWeights certificate)
+    (Panel.sourceFiniteColumns certificate) multiplicities
+    (sourceTotalCHNOPLeftKernel certificate)
