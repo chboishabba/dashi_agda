@@ -174,6 +174,7 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21FractranN21EndpointScoreStepExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FractranOriginalRawTraceReplayExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FractranOriginalTypedTraceAcceptanceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FractranPairedBinaryTraceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedSSPOrientationNoLosslessExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
