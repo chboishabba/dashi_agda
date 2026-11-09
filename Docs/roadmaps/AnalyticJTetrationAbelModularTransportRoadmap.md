@@ -291,3 +291,19 @@ The degree-four through six expressions and zero residuals are reproducible with
 - [ ] **P4.K3** `originalKouznetsovCertifiedNumerics`: original paper integral solver, complex interval arithmetic and branch/phase error bounds remain open.
 
 **Status correction:** Classical local analytic existence via a Koenigs argument is mathematically specified with explicit sufficient inequalities; actual DASHI Agda kernel existence, Kneser-global chart, modular j same-object and certified original contour computation have **not** been completed. All new Agda code is source-written and pending 2.9 checking. Keep every substantive phase OPEN until its original instance and kernel receipts exist.
+
+## 2026-11-09 rational fixed-point certificate and constructive P1 reduction
+
+**New original evidence:** `scripts/analytic_j_tetration_fixed_point_rational.py`. All inequalities below passed using exact `fractions.Fraction` arithmetic (no floating-point comparisons).
+
+- [x] **P1.K1a — rational Banach centre:** `c=318/1000+(1337/1000)i`, `1.374<|c|<1.375`. Finite series intervals (artanh-log with positive tail, arctan alternating tail, Machin π) establish `|Log(c)-c|<3/10000`.
+- [x] **P1.K1b — explicit contraction criterion:** on the closed disk `D(c,1/100)`, `|z|>1.364>4/3`, `|Log'(z)|<3/4`, and `|Log(z)-c|<3/10000+(3/4)(1/100)<1/100`. Ordinary complex Banach contraction yields a unique upper fixed point `Log(p)=p` and `exp(p)=p` with `|p-c|<12/10000`, hence `1.37<|p|<1.38`. **The exact rational inequalities are computed; the analytic identities/Banach theorem are conventional mathematics but have not been kernel-checked in Agda.**
+- [x] **P1.K2k — explicit local Koenigs constants:** `D(p,1/10)`, `q=4/5`, `M<0.311`, `|p|q²<0.8832`, with telescoping geometric Cauchy bound for `p^n(Log^n(z)-p)` in `Docs/roadmaps/AnalyticJTetrationKoenigsLocalConstructionProofCut.md`.
+- [ ] **P1.K1c** `originalRationalLogAtanMachinBoundsAgda`: port precise finite Fraction interval arithmetic, standard analytic series identities and Machin identity to native Bishop real/setoid semantics.
+- [ ] **P1.K1d** `originalBishopLogBanachFixedPoint`: build the actual complete complex closed-disk metric and Banach fixed-point witness in `BishopSetoidComplexExact` with `Log(p)=p`.
+- [ ] **P1.K2l** `originalBishopKoenigsUniformCauchy`: prove the uniform limit and holomorphic derivative/inverse chart in original Bishop analytic owners.
+- [ ] **P1.K3e** `originalPuncturedSectorLogBranchCocycle`: genuine log-branch and winding witnesses for `originalSelectedAbelSemiconjugacy`.
+- [ ] **P1.K4c** `originalKneserConjugatePairGlobalNormalization`: glue the two local fixed-point charts and prove Kneser's original normalization and uniqueness conditions.
+- [ ] **P2/P3/P4** `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalKneserToModularLevelLift`, `originalKouznetsovCertifiedNumerics`: unaffected mathematically; all OPEN.
+
+**Proof promotion boundary:** this is new precise mathematics and reproducible exact arithmetic, not an assertion that the local analytic fixed point is kernel-constructed or that global Kneser tetration is finished. No Agda available. Keep P1/P1b/P2/P3/P4 open pending genuine source construction and acceptance.
