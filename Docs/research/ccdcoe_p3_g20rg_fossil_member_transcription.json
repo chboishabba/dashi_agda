@@ -1,0 +1,244 @@
+{
+  "schema": "dashi.ccdcoe.p3.g20rg.fossil_member_transcription.v1",
+  "status": "source_web_table_transcription_not_independent_raw_byte_review",
+  "original_research_credit": "G20 Research Group and named original report authors; not G20 leaders or DASHI",
+  "source_rows": [
+    {
+      "study_id": "brisbane2014_final_G20RG",
+      "url": "https://www.g20.utoronto.ca/compliance/2014brisbane-final/index.html",
+      "table": "Table 2; Energy: Fossil Fuels; 20 member columns",
+      "assessment_window": [
+        "2014-11-16",
+        "2015-10-01"
+      ],
+      "commitment_id": "brisbane_2014_fossil_subsidy_reform",
+      "reported_table_score_hundredths": -40,
+      "reported_narrative_score_hundredths": -45,
+      "reported_narrative_percent": 28,
+      "member_scores": [
+        {
+          "member": "Argentina",
+          "code": "ARG",
+          "score": -1
+        },
+        {
+          "member": "Australia",
+          "code": "AUS",
+          "score": -1
+        },
+        {
+          "member": "Brazil",
+          "code": "BRA",
+          "score": 0
+        },
+        {
+          "member": "Canada",
+          "code": "CAN",
+          "score": -1
+        },
+        {
+          "member": "China",
+          "code": "CHN",
+          "score": -1
+        },
+        {
+          "member": "France",
+          "code": "FRA",
+          "score": 1
+        },
+        {
+          "member": "Germany",
+          "code": "DEU",
+          "score": -1
+        },
+        {
+          "member": "India",
+          "code": "IND",
+          "score": 0
+        },
+        {
+          "member": "Indonesia",
+          "code": "IDN",
+          "score": 0
+        },
+        {
+          "member": "Italy",
+          "code": "ITA",
+          "score": -1
+        },
+        {
+          "member": "Japan",
+          "code": "JPN",
+          "score": -1
+        },
+        {
+          "member": "Korea",
+          "code": "KOR",
+          "score": 0
+        },
+        {
+          "member": "Mexico",
+          "code": "MEX",
+          "score": 0
+        },
+        {
+          "member": "Russia",
+          "code": "RUS",
+          "score": -1
+        },
+        {
+          "member": "Saudi Arabia",
+          "code": "SAU",
+          "score": -1
+        },
+        {
+          "member": "South Africa",
+          "code": "ZAF",
+          "score": -1
+        },
+        {
+          "member": "Turkey",
+          "code": "TUR",
+          "score": -1
+        },
+        {
+          "member": "United Kingdom",
+          "code": "GBR",
+          "score": 0
+        },
+        {
+          "member": "United States",
+          "code": "USA",
+          "score": 1
+        },
+        {
+          "member": "European Union",
+          "code": "EU",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "study_id": "antalya2015_final_G20RG",
+      "url": "https://www.g20.utoronto.ca/compliance/2015antalya-final/index.html",
+      "table": "Table 2; Energy: Fossil Fuel Subsidies; 20 member columns",
+      "assessment_window": [
+        "2015-11-16",
+        "2016-09-05"
+      ],
+      "commitment_id": "antalya_2015_fossil_subsidy_reform",
+      "reported_table_score_hundredths": -35,
+      "reported_narrative_score_hundredths": -35,
+      "reported_narrative_percent": 33,
+      "member_scores": [
+        {
+          "member": "Argentina",
+          "code": "ARG",
+          "score": 1
+        },
+        {
+          "member": "Australia",
+          "code": "AUS",
+          "score": -1
+        },
+        {
+          "member": "Brazil",
+          "code": "BRA",
+          "score": -1
+        },
+        {
+          "member": "Canada",
+          "code": "CAN",
+          "score": 0
+        },
+        {
+          "member": "China",
+          "code": "CHN",
+          "score": 0
+        },
+        {
+          "member": "France",
+          "code": "FRA",
+          "score": 0
+        },
+        {
+          "member": "Germany",
+          "code": "DEU",
+          "score": 0
+        },
+        {
+          "member": "India",
+          "code": "IND",
+          "score": 1
+        },
+        {
+          "member": "Indonesia",
+          "code": "IDN",
+          "score": -1
+        },
+        {
+          "member": "Italy",
+          "code": "ITA",
+          "score": 0
+        },
+        {
+          "member": "Japan",
+          "code": "JPN",
+          "score": -1
+        },
+        {
+          "member": "Korea",
+          "code": "KOR",
+          "score": 0
+        },
+        {
+          "member": "Mexico",
+          "code": "MEX",
+          "score": -1
+        },
+        {
+          "member": "Russia",
+          "code": "RUS",
+          "score": -1
+        },
+        {
+          "member": "Saudi Arabia",
+          "code": "SAU",
+          "score": 0
+        },
+        {
+          "member": "South Africa",
+          "code": "ZAF",
+          "score": -1
+        },
+        {
+          "member": "Turkey",
+          "code": "TUR",
+          "score": -1
+        },
+        {
+          "member": "United Kingdom",
+          "code": "GBR",
+          "score": -1
+        },
+        {
+          "member": "United States",
+          "code": "USA",
+          "score": 1
+        },
+        {
+          "member": "European Union",
+          "code": "EU",
+          "score": -1
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "These are member-specific original study evaluations, not physical fossil subsidy quantities, NDC targets, or emissions outcomes.",
+    "Member-level values transcribed from public HTML representation, not yet independently verified against immutable original bytes.",
+    "Inter-summit changes reflect distinct legal commitments, assessment windows and methods; not causal effects.",
+    "2014 Table 2 printed mean -0.40 contradicts its 20-member arithmetic (-0.45) and narrative (-0.45).",
+    "EU is an assessed member separate from national jurisdictions; not additive to 19 national members."
+  ]
+}
