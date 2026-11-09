@@ -191,3 +191,15 @@ import DASHI.Mathematics.Complexity.Karp21NativeParsedRawAcceptanceExact
 -- P0-E all-original-input-word native signed graph + binary ledger acceptance vs ORIGINAL Fin-free verifier.
 -- Kernel receipt, native endpoint bit clock, original PR.InNP and typed N21 bridge remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeWordAcceptanceExact
+
+-- P0-B/F actual binary endpoint/address reader, original raw-edge stream, strict bit-only validator.
+-- Semantic observation source candidates; full original graph-validator equivalence, m/header and physical TM clock OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeUnsignedEndpointBitReaderExact
+
+-- P0-B/F actual binary endpoint/address reader, original raw-edge stream, strict bit-only validator.
+-- Semantic observation source candidates; full original graph-validator equivalence, m/header and physical TM clock OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact
+
+-- P0-B/F actual binary endpoint/address reader, original raw-edge stream, strict bit-only validator.
+-- Semantic observation source candidates; full original graph-validator equivalence, m/header and physical TM clock OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointValidatorExact
