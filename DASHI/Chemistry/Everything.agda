@@ -311,3 +311,6 @@ import DASHI.Chemistry.HydrogenFuelCycleNISTThermochemistryExact
 import DASHI.Chemistry.HydrogenCombustionIdentifiabilityExact
 import DASHI.Chemistry.HydrogenProcessFullBoundaryExact
 import DASHI.Chemistry.HydrogenOxygenFactorialIdentificationExact
+
+-- DC voltage-current-duration energy-integral negative control (not a meter).
+import DASHI.Chemistry.HydrogenElectricalInputIntegrationExact
