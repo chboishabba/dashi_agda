@@ -1,3 +1,5 @@
+**Fail-closed static ledger guard:** `python3 scripts/check_ym_clay_23_physical_producers_20261109.py` checks the actual 23 E1/D1/D2/N1/G1 producer IDs, distinct YM01–YM10 owner manifest, PH0–PH4 phase coverage, original all-word Wilson gauge/marked source declarations and physical regression import. It is a source/roadmap audit, not an Agda typecheck, not an E1 or D1 proof and not a mass-gap certificate. Run it before the exact-head `parallel_checker` with Nix/Agda 2.9; terminal physical facts must be independently proved. 
+
 # 9 November 2026 — exact 23 Clay physical producer audit
 
 Scope is solely Clay four-dimensional Yang–Mills: existence of a nontrivial axiomatic quantum theory and a strictly positive mass gap for every compact simple Lie group. No TSVF, observer, KK or Bishop theorem is a prerequisite. D1 is a chosen direct-decay route, not an extra official Clay condition.
