@@ -20,6 +20,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Maybe using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_)
 open import Data.Integer.Base using (ℤ)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
