@@ -9,7 +9,7 @@ from itertools import product
 from karp21_native_prefix_trie_consistency import (
     prefix_trie_consistent, verify_original_native_word_via_trie,
 )
-from karp21_native_bitword_sparse_verifier import verify_native_sparse_word
+from karp21_native_bitword_sparse_verifier import verify_native_sparse_word, parse_graph
 from karp21_signed_cut_binary_codec import CutGraph, encode_graph
 
 
@@ -47,6 +47,15 @@ def check_original_graph_words():
             graph = CutGraph(n, tuple((u, v, weights[i])
                           for i, (u, v) in enumerate(edge_pairs)), 1)
             word = encode_graph(graph)
+            parsed = parse_graph(word)
+            all_endpoints = [(u, 0) for u, v, sign, weight in parsed.edges] + [
+                (v, 0) for u, v, sign, weight in parsed.edges
+            ]
+            _, address_cost = prefix_trie_consistent(all_endpoints)
+            # Every original endpoint gamma token contains these successor
+            # address bits, plus an equal-length zero prefix. Every edge
+            # appears once, so total trie descent < total original word bits.
+            assert address_cost.bit_transitions <= len(word)
             for cert in product((0, 1), repeat=2 * len(edge_pairs)):
                 assert verify_original_native_word_via_trie(
                     word, cert
@@ -55,6 +64,12 @@ def check_original_graph_words():
     huge_n = 1 << 1024
     graph = CutGraph(huge_n, ((0, huge_n - 1, 3),), 1)
     word = encode_graph(graph)
+    native = parse_graph(word)
+    _, address_cost = prefix_trie_consistent(
+        [(u, 0) for u, v, sign, weight in native.edges] +
+        [(v, 0) for u, v, sign, weight in native.edges]
+    )
+    assert address_cost.bit_transitions <= len(word)
     for cert in ((), (0,), (0, 1), (1, 0), (1, 1), (0, 0)):
         assert verify_original_native_word_via_trie(
             word, cert
