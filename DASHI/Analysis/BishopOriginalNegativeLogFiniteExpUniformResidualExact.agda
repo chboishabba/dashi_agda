@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Analysis.BishopOriginalNegativeLogFiniteExpUniformResidualExact where
 
 ------------------------------------------------------------------------
@@ -21,11 +20,18 @@ module DASHI.Analysis.BishopOriginalNegativeLogFiniteExpUniformResidualExact whe
 -- The cutoff r^N -> 0 is independent of x: this is the actual
 -- uniform ODE residual, not just pointwise coefficient convergence.
 --
+-- This imports the existing non-safe-marked original Log/NegativeExp
+-- modules, so no unsupported --safe flag is asserted here.
 -- This does not postulate FTC, integration, global ODE uniqueness,
 -- nor identify exp(-L)=1-x merely from small residuals.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Product.Base using (proj₁; proj₂)
+import Data.Nat.Base as Nat using (NonZero; _≥_)
+import Data.Nat.Properties as NatP
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
@@ -144,12 +150,6 @@ originalFiniteNegativeLogExpUniformResidualBound
 -- finite exponential-LOG differential residual. It pays the
 -- uniformity missing from the earlier pointwise ODE residual.
 ------------------------------------------------------------------------
-
-open import Data.Product.Base using (proj₁; proj₂)
-import Data.Nat.Base as Nat using (NonZero; _≥_)
-import Data.Nat.Properties as NatP
-open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ)
 
 originalFiniteExpLogResidualCutoff :
   (radius : R.ℝ) →
