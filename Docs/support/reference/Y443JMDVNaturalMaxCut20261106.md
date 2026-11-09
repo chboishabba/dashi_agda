@@ -1508,3 +1508,21 @@ Code commit `00e5ff496cccad971b0c292abeb916feeeadf70c` adds `OriginalSelectedJMD
 Code commit `ad77c670dbc23d777e40a7452cd3cc35b5171a62` adds an exact **negative graph-symmetry test** `this72SplitNotLongArmEquivariant`: swapping the two length-four Y443 arms takes core square `e1` to residual square `e2`. Therefore the convenient literal original **72+8** relator partition is **not invariant even under this actual Coxeter graph automorphism**, much less automatically a Monster-equivariant (mathbb P^1(mathbb F_9)) projective representation. Use the 71+9/72+8 sources for bookkeeping and test indexing only until a real original action-preserving transport is supplied. This prevents numerical coincidences from being upgraded to Monster isomorphism hypotheses.
 
 Kernel-check of the new Agda modules and original selected-object source instantiation remains OPEN. None of Moonshine V0.4/V1 or Yang–Mills E1/D1/D2/N1/G1 changes status.
+
+
+## 9 November — new concrete V0.4 TF from existing original FT; M2 literal moved-state
+
+**New source owner** `DASHI/Moonshine/VNaturalOriginalFTToTFSkewFiniteExact.agda` (imported by the focused Y443/Vnatural golden root). This does **not** assume an independent TF map: for `n:ℤ`, it constructs an actual finite coefficient sum on the **original selected twisted-even carrier** using `N.twistedAddOriginal`, `N.twistedScaleOriginal`, the existing *literal original* Leech FT mode, and iterated selected twisted translation. The mathematical VOA skew-symmetry formula used is
+`t_(n) a = Σ_{j≥0} (-1)^(n+j+1)/j! T^j (a_(n+j) t)`.
+Its `OriginalFTSkewData.originalFTVanishesAtAndAboveBound` is a genuine **truncation proof premise**; the chosen finite cutoff is not accepted without verifying actual FT vanishing. `Derive.withOriginalTT` builds the existing `OriginalMixedSectorIntertwiners` with this **constructed** TF, leaving only the genuine original Leech TT as an independent mixed-channel function, and `originalTFUniqueFromSameFTSkew` proves pointwise uniqueness among candidates satisfying this exact formula.
+
+**Remaining exact V0.4 original-source proof cut:**
+- **V04-FTSKEW-01:** instantiate the actual original `signedFactorialCoefficient n j = (-1)^(n+j+1)/j!` over the Leech fixed-VOA characteristic-zero scalar carrier, including signed integer mode convention and scalar inverses.
+- **V04-FTSKEW-02:** original theta-twisted-even `twistedTranslation` is genuine `L_{-1}), with linearity, zero preservation and graded action.
+- **V04-FTSKEW-03:** prove the **selected original FT upper-truncation bound** and the original Leech skew-symmetry identity equating its actual TF operator with this finite formula; the weak `VOA.LowerTruncation.modeVanishesAboveBound : Set` does not provide a theorem by itself.
+- **V04-TT-01:** construct actual original twisted×twisted→fixed intertwiner from Leech cocycles/invariant pairing and twisted vertex operators, proving its closure in the selected fixed even sector.
+- **V04-AXIOMS-01/02:** original mixed Jacobi/locality, translation/vacuum, grading and linear laws for the resulting original four-mode paired VOA. Only these support V1 FLM all-mode comparison.
+
+**New Monster M2 source reduction:** `Y443Universal80SimpleQuotientKernelReflectionExact.OriginalSelectedJMDSource.oneOriginalMovedStateImpliesNontrivialNode` uses precisely `JMD.action source`, `JMD.nodes source`, `JMD.groupWithInverse source` and the literal selected `VNaturalConstruction.Vnatural` carrier. It turns **one selected state moved by a Y443 node** plus the identity law at the same state into `ActualSelectedNontrivialNode`—without choosing a second group action, or assuming globally faithful automorphisms. **M2-MOVE** still demands a concrete weight-two state/vector from the original selected Leech/Griess construction; the unrefined `VOAGroupAction.actionIdentity : Set` does not itself supply a typed equality.
+
+These source-written constructors and the original finite SU2 large-deviation theorem are *not* their own missing mathematical axioms. Agda 2.9 kernel acceptance, genuine original source instantiation, nonabelian Monster historical simplicity transfer, Leech TT and all-mode VOA remain outstanding.
