@@ -305,3 +305,9 @@ import DASHI.Chemistry.HydrogenFuelCycleSourceAuthorityExact
 
 -- NIST-attributed HHV reference-state measurements and conservative interval comparison.
 import DASHI.Chemistry.HydrogenFuelCycleNISTThermochemistryExact
+
+-- Physical steelman falsification: mechanism under-identification, imported
+-- heat/chemical inputs, and H2/O2 factorial interaction identification.
+import DASHI.Chemistry.HydrogenCombustionIdentifiabilityExact
+import DASHI.Chemistry.HydrogenProcessFullBoundaryExact
+import DASHI.Chemistry.HydrogenOxygenFactorialIdentificationExact
