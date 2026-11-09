@@ -1,5 +1,10 @@
 # Analytic modular j × carrier-parametric Abel transport × complex tetration: roadmap, phases, deliverables and exact lemmas
 
+> **Controlling live maximum cut (2026-11-09):** [AnalyticJTetrationActiveMaxCut20261109.md](AnalyticJTetrationActiveMaxCut20261109.md). That document is the active P0–P4 phase/deliverable/dependency checklist; this file preserves the historical detailed declaration ledger. Resolve conflicting statuses in favour of the active cut and an exact-head Agda kernel receipt. New source-written modules are **not** accepted theorem closures.
+
+**2026-11-09 substantive source repair / new donor receipts:** `AbelBishopQSeriesSetoidPeriodTransportExact.originalComplexSeriesLimitExtensional` now invokes existing `BishopFiniteSeriesExtensionalityExact.termwiseEquivalentSeriesHaveEquivalentLimits` (commit `c2fdf65e`), rather than an incorrectly shaped direct convergence-transport call; `AbelBishopKoenigsTrajectoryDifferenceLimitExact.originalBishopKoenigsDifferenceConverges` now supplies the missing limit/convergence pairs in `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` (commit `37ec86cc`). The new `AbelBishopMachinQuarterToQPeriodExact.agda` consumes `BishopMachinQuarterAngleBranchExact.fourTimesQuarterIsMachinPi` to source-write `2*pi_M ≃ 8*theta_M` and pin the Round11 q parameter to Machin pi, **not** a proof of `exp_C(2*pi_M*i)=1` (commit `41598b59`). No new Agda kernel run was performed.
+
+
 **Date:** 2026-11-09  
 **Branch:** `chatgpt/analytic-j-tetration-abel-transport`  
 **Theorem owner:** `DASHI/Moonshine/JInvariantTetrationAbelModularTransportExact.agda`  
