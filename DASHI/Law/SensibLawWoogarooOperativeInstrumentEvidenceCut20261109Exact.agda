@@ -108,6 +108,22 @@ fourProtectedSpeciesHabitatCapEqual :
   habitatClearCapHundredthsHa regentHoneyeater
 fourProtectedSpeciesHabitatCapEqual = refl
 
+-- Conserved source-area inequality if C4's Koala habitat cap is
+-- applied to the full 162.3 ha approval-map Koala habitat:
+-- At least 34.3 ha Koala habitat must not be cleared. Since the
+-- labelled retention zone is only 27.3 ha, at least 7.0 ha of
+-- habitat protection/non-clearing must be outside that retention zone,
+-- EVEN under the most favourable assumption that its entire 27.3 ha
+-- overlaps the mapped Koala habitat. This is a conditional geometry
+-- accounting obligation, not an actual certified polygon intersection.
+minimumUnclearedKoalaAreaIfFullHabitatMap :
+  habitatClearCapHundredthsHa koala + 3430 ≡ 16230
+minimumUnclearedKoalaAreaIfFullHabitatMap = refl
+
+minimumOutsideRetentionUnclearedKoalaArea :
+  2730 + 700 ≡ 3430
+minimumOutsideRetentionUnclearedKoalaArea = refl
+
 -- Footprint of 134.9ha and species-specific 128ha habitat-clearance
 -- ceilings differ by 6.9ha IN PRINTED SOURCE UNITS. It is a spatial
 -- accounting gate, not proof that the permitted clearing could exceed
