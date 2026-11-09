@@ -37,6 +37,7 @@ from check_bh4_spatial_measurement_payment import REQUIRED as ORIGINAL_ASSAY_FIE
 import csv
 import tempfile
 from decimal import Decimal, InvalidOperation
+from fractions import Fraction
 
 ROOT=Path(__file__).resolve().parents[1]
 CANONICAL_OWNER=ROOT/"DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
@@ -471,6 +472,55 @@ def require_exact_flux_candidate_axes(original,candidate):
                 raise ValueError(f"invalid original {name} value for {key!r}")
 
 
+def audit_original_reaction_flux_bounds(original,parameters):
+    """Fail closed on ambiguous/invalid source-bound original flux bounds.
+
+    Reuse the original feasibility checker for S*v+e=0; this is a strict
+    boundary audit on its parameter input, not a duplicate flux solver.
+    Missing and unresolved rows are left for its underdetermined result.
+    No declared status or source string is independent evidence of rates.
+    """
+    if not isinstance(parameters,dict) or not isinstance(parameters.get("parameters"),list):
+        raise ValueError("original parameter receipt must contain a parameter list")
+    rows={}
+    for row in parameters["parameters"]:
+        if not isinstance(row,dict):
+            raise ValueError("original parameter row is not an object")
+        key=row.get("parameter_id")
+        if not isinstance(key,str) or not key.strip():
+            raise ValueError("original parameter row has no identifier")
+        if key in rows:
+            raise ValueError(f"duplicate original parameter identifier {key!r}")
+        rows[key]=row
+    for rid in original["reaction_index"]:
+        aliases=(f"REACTION_FLUX:{rid}",f"FLUX:{rid}",rid)
+        paid=[rows[key] for key in aliases if key in rows and
+              rows[key].get("payment_status")!="unresolved"]
+        if len(paid)>1:
+            raise ValueError(f"ambiguous multiple original paid flux bounds for {rid}")
+        if not paid:
+            continue
+        row=paid[0]
+        if row.get("payment_status") not in ("measured","derived","source-paid","source_paid"):
+            raise ValueError(f"unrecognized original flux payment status for {rid}")
+        for coord in ("lower","upper"):
+            if coord not in row or isinstance(row[coord],bool):
+                raise ValueError(f"missing or invalid original {coord} flux bound for {rid}")
+        try:
+            lower=Fraction(str(row["lower"]))
+            upper=Fraction(str(row["upper"]))
+        except (ValueError,ZeroDivisionError,TypeError) as exc:
+            raise ValueError(f"invalid original rational flux bounds for {rid}") from exc
+        if lower>upper:
+            raise ValueError(f"inverted original source flux bounds for {rid}")
+        source_ref=row.get("source_reference")
+        if not isinstance(source_ref,str) or not source_ref.strip():
+            raise ValueError(f"source reference absent for paid original flux {rid}")
+    return {"original_parameter_identities_unique":True,
+            "original_paid_bound_ranges_consistent":True,
+            "original_bound_sources_independently_verified":False}
+
+
 def bind_original_quantitative_candidate_to_assay(candidate,assay_path):
     """Require one supplied candidate to point to a real parsed assay row.
 
@@ -539,6 +589,7 @@ def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
     """
     original,metadata=check_certificate(certificate,full_panel=True)
     require_exact_flux_candidate_axes(original,candidate)
+    bounds_audit=audit_original_reaction_flux_bounds(original,parameters)
     receipt=evaluate_original_flux_candidate(original,parameters,candidate)
     if receipt["reaction_count"]!=12 or receipt["species_count"]!=29:
         raise AssertionError("original source 29x12 matrix identity lost")
@@ -632,6 +683,28 @@ def self_test():
                  "species_index":finite["species_index"]}
     require_exact_flux_candidate_axes(sample_axes,
         {"reaction_flux":{},"external_exchange":{}})
+    original_rid=sample_axes["reaction_index"][0]
+    parameter_fixture={"parameters":[{
+        "parameter_id":f"REACTION_FLUX:{original_rid}",
+        "payment_status":"derived","lower":"0","upper":"1",
+        "source_reference":"synthetic bounds test; not a measured rate"}]}
+    audit_original_reaction_flux_bounds(sample_axes,parameter_fixture)
+    for broken in (
+        {"parameters":parameter_fixture["parameters"]*2},
+        {"parameters":[dict(parameter_fixture["parameters"][0],upper="-1")]},
+        {"parameters":[dict(parameter_fixture["parameters"][0],
+                             payment_status="inferred")]},
+        {"parameters":[dict(parameter_fixture["parameters"][0],
+                             source_reference="")]},
+        {"parameters":[dict(parameter_fixture["parameters"][0],
+                             lower="NaN")]},
+    ):
+        try:
+            audit_original_reaction_flux_bounds(sample_axes,broken)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("ambiguous or unsupported original flux bounds admitted")
     for wrong in (
         {"reaction_flux":{"RHEA:INVENTED":0},"external_exchange":{}},
         {"reaction_flux":{},"external_exchange":{"CHEBI:INVENTED":1}},
