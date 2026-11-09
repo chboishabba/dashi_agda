@@ -65,7 +65,7 @@ middleToTargetConservesSharedInventory :
     ≡ totalSharedInventory x
 middleToTargetConservesSharedInventory (sharedChain3 a zero c) = refl
 middleToTargetConservesSharedInventory (sharedChain3 a (suc b) c)
-  = cong (λ v → a + v) (sym (+-suc b c))
+  = cong (λ v → a + v) (+-suc b c)
 
 supplyBalance :
   (q : Nat) (x : SharedChain3) →
