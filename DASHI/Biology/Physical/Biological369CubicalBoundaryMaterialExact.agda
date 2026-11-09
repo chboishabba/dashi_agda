@@ -432,3 +432,38 @@ originalFaceDischargeLeavesOtherVoxelUnchanged
       (V._∷_ amount rest) neq =
       dischargeOther source target rest
         (λ equality → neq (cong F.suc equality))
+
+
+------------------------------------------------------------------------
+-- ACTUAL LOCAL EXTERIOR OUTFLOW: a selected outer-face withdrawal
+-- debits exactly the available (zero-or-one) source quantum.
+------------------------------------------------------------------------
+
+boundaryActualDebitAgreesWithSharedTransfer :
+  ∀ {n} (index : F.Fin n) (state : V.Vec Nat n) →
+  oneIfNonzero (V.lookup state index)
+    ≡ Transfer.actualSourceDebit index state
+boundaryActualDebitAgreesWithSharedTransfer index state
+  with V.lookup state index
+... | zero = refl
+... | suc amount = refl
+
+originalBoundaryDischargeLocalReceipt :
+  (event : OriginalOuterFaceDischarge) (state : V.Vec Nat 27) →
+  V.lookup (applyBoundaryDischarge event state) (dischargeIndex event)
+    + actualDischargedAmount event state
+    ≡ V.lookup state (dischargeIndex event)
+originalBoundaryDischargeLocalReceipt event state =
+  trans
+    (cong
+      (λ after → V.lookup after (dischargeIndex event)
+        + actualDischargedAmount event state)
+      (dischargeIsOriginalDebit (dischargeIndex event) state))
+    (trans
+      (cong
+        (λ debit → V.lookup
+          (Transfer.debitAt (dischargeIndex event) state)
+          (dischargeIndex event) + debit)
+        (boundaryActualDebitAgreesWithSharedTransfer
+          (dischargeIndex event) state))
+      (Transfer.lookupAfterDebit (dischargeIndex event) state))
