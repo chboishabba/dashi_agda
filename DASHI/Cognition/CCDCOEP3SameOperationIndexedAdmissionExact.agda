@@ -491,3 +491,137 @@ weakDemoSingleReceiptFailsSourceBoundAdmission :
   SourceBoundAdmission WeakDemo OneReceipt sourceCase gcc1993 → ⊥
 weakDemoSingleReceiptFailsSourceBoundAdmission sourceCase =
   oneReceiptCannotSupportSixGates WeakDemo sourceCase gcc1993
+
+------------------------------------------------------------------------
+-- CLAIM-SPECIFIC SOURCE PROVENANCE (GENERAL ADMISSION POLICY).
+--
+-- Distinct propositions do not necessarily require distinct documents.
+-- A primary source may properly substantiate more than one stage.
+-- What is required is an independently paid *stage-specific support*
+-- judgment, with the source attributed to the SAME original case.
+-- Such judgments are externally supplied and are not fabricated here.
+--
+-- SourceBoundAdmission above is retained as an OPTIONAL stricter
+-- policy and its singleton obstruction remains a regression for that
+-- policy, not a necessary condition for every empirical investigation.
+------------------------------------------------------------------------
+
+record ClaimBoundAdmission
+    (E : OriginalCase → EvidenceStage → Set)
+    (Reference : Set)
+    (sourceCase : Reference → OriginalCase)
+    (Supports : OriginalCase → EvidenceStage → Reference → Set)
+    (c : OriginalCase) : Set where
+  field
+    stages : AdmitsOneOriginalCase E c
+    sourceFor : EvidenceStage → Reference
+    sourceBelongsToCase :
+      (stage : EvidenceStage) →
+      sourceCase (sourceFor stage) ≡ c
+    claimSupported :
+      (stage : EvidenceStage) →
+      Supports c stage (sourceFor stage)
+
+claimBoundImpliesStageAdmission :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (Supports : OriginalCase → EvidenceStage → Reference → Set)
+  (c : OriginalCase) →
+  ClaimBoundAdmission E Reference sourceCase Supports c →
+  AdmitsOneOriginalCase E c
+claimBoundImpliesStageAdmission E Reference sourceCase Supports c admitted =
+  ClaimBoundAdmission.stages admitted
+
+claimBoundMissingExposureBlocks :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (Supports : OriginalCase → EvidenceStage → Reference → Set)
+  (c : OriginalCase) →
+  (E c recipientExposure → ⊥) →
+  ClaimBoundAdmission E Reference sourceCase Supports c → ⊥
+claimBoundMissingExposureBlocks E Reference sourceCase Supports c missing admitted =
+  blockedByMissingExposure E c missing
+    (claimBoundImpliesStageAdmission E Reference sourceCase Supports c admitted)
+
+-- Every source-bound admission can meet the general policy if a
+-- substantive support judgment is additionally supplied for its
+-- references. Injectivity alone never creates those judgments.
+strictReceiptPolicyRequiresClaimSupport :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (Supports : OriginalCase → EvidenceStage → Reference → Set)
+  (c : OriginalCase) →
+  (strict : SourceBoundAdmission E Reference sourceCase c) →
+  ((stage : EvidenceStage) →
+    Supports c stage (SourceBoundAdmission.receiptReference strict)) →
+  ClaimBoundAdmission E Reference sourceCase Supports c
+strictReceiptPolicyRequiresClaimSupport E Reference sourceCase Supports c strict supported =
+  record
+    { stages = SourceBoundAdmission.stages strict
+    ; sourceFor = SourceBoundAdmission.receiptReference strict
+    ; sourceBelongsToCase = SourceBoundAdmission.referenceBelongsToCase strict
+    ; claimSupported = supported
+    }
+
+------------------------------------------------------------------------
+-- NEGATIVE CONTROL: ONE SOURCE MAY SUPPORT MANY DISTINCT CLAIMS.
+-- Synthetic only; the uniformly inhabited test predicates do not
+-- authenticate any GCC document, exposure, effect, intent or actor.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Unit using (⊤; tt)
+
+oneReceiptOwner : OneReceipt → OriginalCase
+oneReceiptOwner onlyReceipt = gcc1993
+
+data SyntheticStageSupport :
+    OriginalCase → EvidenceStage → OneReceipt → Set where
+  syntheticStageSupport :
+    {stage : EvidenceStage} →
+    SyntheticStageSupport gcc1993 stage onlyReceipt
+
+sharedSourceCanSupportSeveralDifferentStageClaims :
+  ClaimBoundAdmission
+    WeakDemo OneReceipt oneReceiptOwner
+    SyntheticStageSupport gcc1993
+sharedSourceCanSupportSeveralDifferentStageClaims =
+  record
+    { stages = weakDemoAdmitsGCC
+    ; sourceFor = λ stage → onlyReceipt
+    ; sourceBelongsToCase = λ stage → refl
+    ; claimSupported = λ stage → syntheticStageSupport
+    }
+
+-- Reusing the canonical Golden collision theorem, the shared-source
+-- example proves that claim-specific support does NOT imply receipt
+-- identifier injectivity. This corrects the previous over-restriction.
+claimSpecificSupportDoesNotForceDistinctReferences :
+  ((admitted : ClaimBoundAdmission
+      WeakDemo OneReceipt oneReceiptOwner
+      SyntheticStageSupport gcc1993) →
+    Observer.Separating (ClaimBoundAdmission.sourceFor admitted)) → ⊥
+claimSpecificSupportDoesNotForceDistinctReferences assumeSeparating =
+  Observer.collisionBlocksSeparation
+    (Observer.observerCollision
+      recipientExposure
+      independentlySourcedIntent
+      refl
+      exposureIsNotIntent)
+    (assumeSeparating sharedSourceCanSupportSeveralDifferentStageClaims)
+
+-- Under any actually selected original inventory, the universal
+-- missing-exposure obstruction remains operative even though source
+-- references may be reused for independently justified claims.
+selectedGCCNotClaimBoundUnderCurrentInventory :
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (Supports : OriginalCase → EvidenceStage → Reference → Set) →
+  ClaimBoundAdmission
+    CurrentlyLocatedEvidence Reference sourceCase Supports gcc1993 → ⊥
+selectedGCCNotClaimBoundUnderCurrentInventory Reference sourceCase Supports =
+  claimBoundMissingExposureBlocks
+    CurrentlyLocatedEvidence Reference sourceCase Supports gcc1993
+    currentGCCExposureUnavailable
