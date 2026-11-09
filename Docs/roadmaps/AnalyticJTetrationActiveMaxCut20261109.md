@@ -269,3 +269,18 @@ The direct geometric majorant replaces the derivative-integral proof requirement
 Added \`scripts/analytic_j_tetration_koenigs_log_series_majorant.py\` and invoked it from \`scripts/check_analytic_j_tetration_golden_local.sh\`. The equivalent exact rational test was run in this session and passed: \(100/127<4/5\), \(M=5000/17399<311/1000\), \(\beta=552/625\), and \(C=4312500/1270127\). The repository's newly committed version has **not** independently been executed in a checked-out exact-head environment; pinned Agda acceptance is OPEN. These arithmetic receipts test bounds conditional on the original analytic source identity; they cannot construct it.
 
 **Next mandatory formal producer:** \`originalBishopLogOnePlusPowerSeriesOnDisk\` with the genuine principal-log same-object branch identity. Only after it is constructed should \`originalBishopLogInverseDiskIteration\`, \`originalBishopKoenigsIncrementMagnitude\` and the existing Cauchy/limit pipeline be promoted. No additional E8 numerical coincidences should preempt this cut.
+
+
+## P1 implementation delta — native source term sequence (2026-11-09)
+
+New Agda owner: \`DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda\`, added to the fail-closed pinned local acceptance target list. It now defines the actual **original Bishop-series-carrier** coefficients
+\[
+a_n(w)=(-1)^n\,\frac{w^{n+1}}{n+1},
+\]
+with positive denominator \`suc n\`, explicit alternating parity, real scalar multiplication of actual complex powers, setoid congruence, canonical componentwise series limit **when absolute convergence is provided**, and uniqueness of that limit via the existing Bishop convergence backend.
+
+**What this closes at source-written level:** the identity of the exact intended coefficient sequence; it does not replace the analytic logarithm by an arbitrary selected map, and it fixes the denominator-minus-one pitfall in raw \`mkℚᵘ\` by using standard \`_/_\` with nonzero denominator. It reuses existing Bishop complex powers and limit machinery, not a new formal authority.
+
+**What remains genuinely OPEN and highest priority:** prove \`originalBishopLogOnePlusAbsoluteConvergenceOnDisk\` (original componentwise domination of these exact coefficients), \`originalBishopLogOnePlusPrincipalBranchIdentity\` (the series limit agrees on the actual cut-avoiding disk with the selected original principal logarithm), and \`originalBishopLogOnePlusSeriesQuadraticBound\` (original Bishop norm/order majorants). These then supply actual Koenigs increment bounds for \`AbelBishopKoenigsGeometricAbsoluteExact\`; derive uniform convergence, derivative and local Schröder chart from the existing backend. P1b/P1g global branch and Kneser gluing are still open. P2 authentic q/Delta/j and P3 observer weld remain separate original-task gates.
+
+**Verification:** source written to PR #1478; no Agda binary or local Nix environment was available in the execution container. The new Agda module is **not yet kernel-accepted**; potential compile errors require the pinned Agda checker, and must not be concealed.
