@@ -17,10 +17,13 @@ module DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Nat.Base using (_∸_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.List.Base using (_++_; reverse; length)
+open import Data.Product using (Σ; _,_)
+import Data.Nat.Properties as NatP
 import Data.List.Properties as ListP
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Data.Nat.Tactic.RingSolver using (solve)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -122,3 +125,45 @@ originalSuccessorNumberDecomposes prefix last
     (Original.pow2 (length prefix) ∷
      Original.payloadValue prefix ∷
      Original.bitNat last ∷ [])
+
+
+------------------------------------------------------------------------
+-- Original zigzag's twice is the same numeral 2 * n used by the
+-- actual native binary-value observation. This is the explicit
+-- arithmetic seam between the original Peano decoder and binary bits.
+------------------------------------------------------------------------
+
+originalTwiceIsTwoTimes : (n : Nat) →
+  Original.twice n ≡ Value.two * n
+originalTwiceIsTwoTimes zero = refl
+originalTwiceIsTwoTimes (suc n)
+  rewrite originalTwiceIsTwoTimes n =
+  solve (n ∷ [])
+
+twoTimesOnePredecessor :
+  (n : Nat) →
+  (Value.two * n + suc zero) ∸ suc zero
+    ≡ Original.twice n
+twoTimesOnePredecessor n
+  rewrite NatP.+-suc (Value.two * n) zero
+        | NatP.+-identityʳ (Value.two * n)
+        | originalTwiceIsTwoTimes n = refl
+
+-- Unlike a signed-zero hand-wave, the leading-one binary magnitude
+-- is provably suc(k); hence the negative branch is genuinely <0.
+pow2NonZero :
+  (n : Nat) →
+  Σ Nat (λ k → Original.pow2 n ≡ suc k)
+pow2NonZero zero = zero , refl
+pow2NonZero (suc n) with pow2NonZero n
+... | k , equation rewrite equation =
+  (suc (k + k)) , solve (k ∷ [])
+
+sourceMagnitudePositive :
+  (prefix : Word.BitWord) →
+  Σ Nat (λ k →
+    Original.pow2 (length prefix) + Original.payloadValue prefix
+      ≡ suc k)
+sourceMagnitudePositive prefix with pow2NonZero (length prefix)
+... | k , equation rewrite equation =
+  (k + Original.payloadValue prefix) , refl
