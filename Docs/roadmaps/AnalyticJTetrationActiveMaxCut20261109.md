@@ -213,3 +213,22 @@ Existing donors `JInvariantAnalyticJCoarseFineObserverExact`, `JInvariant369Cano
 - Commit `90357fc4`: `AbelBishopRound11QPeriodInstanceExact` specializes the earlier E4/E6 T-period compiler to `Tτ := τ +_C 1_C` and literal `round11MachinQAtForSeries`. No arbitrary q-valued map is admitted. The **two precisely unpaid inputs** are `periodEvidence` for the actual original q and `diskEvidence` on the upper half-plane; these are P2.04/P2.05. Source-written only.
 - Commit `4005f4f7`: `scripts/check_analytic_j_tetration_golden_local.sh` runs fail-closed source hygiene then delegates to the repo's own pinned `scripts/run_agda29_parallel_check.sh --safe`. No local Agda or Nix executable available in this environment; it has **not** returned a kernel-green receipt.
 - Source audit: `AbelOriginalMovingLevelObserverTransportExact` references real names/compatible result types from `JInvariant369CanonicalLevelObserverTowerExact` and `JInvariant369ModularLevelCuspObserversExact`. This is a static signature review, **not** formal typechecking nor a genuine Abel/modular point weld.
+
+
+## 2026-11-09 continuation — norm-two exhaustion mathematical proof (commit 590d937a)
+
+**New proof owner:** [E8NativeNormTwoExhaustionProof20261109.md](../proofs/E8NativeNormTwoExhaustionProof20261109.md).
+
+**Mathematical result established for the standard E8 coordinate model:** norm-two vectors are **exhaustively** the 112 integral two-unit-coordinate vectors and 128 half-integral even-negative-sign vectors. This is an all-vector argument using integrality and the sharp lower bound on eight half-coordinate squares, not a finite coefficient regression. Exact cardinality: 240.
+
+**Status: mathematical proof documented, original-source Agda weld OPEN.** The mathematical proof does not establish that the independently selected Agda E8 carrier is definitionally this coordinate model or that its generated list is complete for the native carrier. It is therefore **not** P2e.04c kernel closure. The immediate named proof obligations are:
+1. \`originalNativeE8MembershipIffDoubledParityAndSumModFour\`.
+2. \`originalIntegerNormEightImpliesTwoUnitCoordinates\`.
+3. \`originalHalfNormEightImpliesAllUnitCoordinates\`.
+4. \`originalHalfLatticeSumEvenIffEvenNegativeSigns\`.
+5. \`originalE8GeneratedRootsExhaustNativeNormTwoLattice\`.
+6. \`originalE8NativeNormTwoRootsComplete\` — derive original-carrier 240 count by the preceding lemmas.
+
+**Already source-written in #1478:** \`AbelE8HalfOddShellInvolutionExact\` has an all-index norm-preserving parity-flipping involution, and \`AbelE8ThetaParityProjectorExact\` supplies the all-index coefficient algebra. Do not reopen the abstract H0/H2 cancellation as a new axiom. The decisive next P2e cut after source E8-carrier welding is actual finite cardinality transport into the Jacobi theta coefficients, Bishop analytic convergence/reindexing, and Jacobi-to-E4 or weight-4 modular uniqueness.
+
+**Acceptance:** no new Agda module was compiled or claimed complete in this continuation. Pin a fresh exact-head Agda 2.9 \`--safe\` receipt before upgrading any P2e code status. P1 original logarithm/Koenigs, P2 source q-period/Delta nonvanishing, P3 actual level-27 lift, and P4 certified contours remain OPEN.
