@@ -417,3 +417,37 @@ open/reactive boundary work, physical stochastic continuation,
 and longitudinal prediction discrimination remain unpaid.
 Both branch kernels and repository Python suites remain unverified
 in this session.
+
+
+### 2026-11-09 PR #1454 P0.05 source-weighted Brouwer advancement
+
+Companion BH4/PNP PR #1454 now records a mathematically
+**all-positive-timestep** existence and strict-positive
+backward-Euler root theorem for the selected **finite, closed,
+six-face blocking**, constant-dielectric 27×n native reactive-PNP
+model, assuming all original species have strictly positive
+source-derived conserved integer CHNOP weights. Its new
+`global_positive_implicit_brouwer_bounds` proves a finite
+species linear loss majorant on the source-weighted compact
+simplex, and exhibits a Brouwer self-map
+`H_dt(c)=(c0+dt(RHS(c)+Kloss*c))/(1+dt*Kloss)`.
+Every fixed point is an original exact implicit root and
+`c1_vs >= c0_vs/(1+dt*Kloss)>0`.
+The original source adapter
+`source_bound_closed_brouwer_existence` checks the positive
+Rhea molecular formula atom counts and exact 29×12 signed
+stoichiometric conservation before issuing a candidate theorem
+input receipt. This is a proof derivation, not Agda kernel
+acceptance, original measured parameter payment, an actually
+computed root or a uniqueness theorem.
+
+This improves the PNP *closed-system mathematical* P0.05
+max-cut over the earlier small-timestep contraction result.
+It does **not** discharge either biological
+`physicalOneStep` or `physicalPNPStepCommutes`, because no
+original source-calibrated physical state with a justified
+tissue readout has been constructed. The existing 54-native
+bond/pants and brain/body observation owners remain canonical.
+Original reactive boundaries, independent longitudinal
+measurements and Golden/ITIR source-verified receipts remain
+open.
