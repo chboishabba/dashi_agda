@@ -27,6 +27,7 @@ def run(include_torch=False):
     from qcafqmc_mixed_energy_error_certificate import self_test as check_ratio
     from qcafqmc_autocorrelation_reblocking import self_test as check_autocorr
     from qcafqmc_nickel_doci_trial import self_test as check_doci
+    from qcafqmc_existing_hartree_fock_reuse import verify_hf_reuse
     source=verify_nickel_source()
     targets=verify_targets()
     costs=cost_audit()
@@ -34,6 +35,9 @@ def run(include_torch=False):
     ratio=check_ratio()
     autocorr=check_autocorr()
     doci=check_doci()
+    hf_reuse=verify_hf_reuse()
+    if not hf_reuse["one_orbital_HF_and_exact_FCI_same_Hamiltonian"]:
+        raise AssertionError("existing helium Hartree/RHF equivalence not preserved")
     if not (autocorr["passed"] and doci["small_hubbard_projected_matrix_matches_FCI"]):
         raise AssertionError("autocorrelation or DOCI projection regression")
     if costs["retained_measured_blocks"]!=250:
@@ -58,6 +62,8 @@ def run(include_torch=False):
       "autocorrelation_AR1_negative_control_passed":autocorr["passed"],
       "autocorrelation_blocking_to_naive_SE_ratio":(
           autocorr["B_blocked_SE"]/autocorr["B_naive_IID_SE"]),
+      "existing_Hartree_one_orbital_RHF_reused":hf_reuse["one_orbital_HF_and_exact_FCI_same_Hamiltonian"],
+      "new_HF_solver_claimed":False,
       "DOCI_projected_Hubbard_matches_exact_FCI_subblock":doci["small_hubbard_projected_matrix_matches_FCI"],
       "DOCI_vs_FCI_seniority_gap_positive":doci["seniority_zero_approximation_gap_positive"],
       "PySCF_ipie_nickel_runs_executed":False,
