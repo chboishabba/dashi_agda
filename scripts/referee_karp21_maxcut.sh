@@ -79,6 +79,7 @@ python3 scripts/check_karp21_fractran_priority_frontier.py
 python3 scripts/check_karp21_fractran_n21_edge.py
 python3 scripts/check_karp21_fractran_original_raw_trace.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
+python3 scripts/check_karp21_signed_gamma_number_theory.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
