@@ -27,6 +27,7 @@ open import Data.Rational.Unnormalised using (1ℚᵘ)
 
 import Real as R
 import RealProperties as RP
+import Sequence as Seq
 import DASHI.Analysis.BishopFactorDerivativeExact as Factor
 import DASHI.Analysis.BishopFactorDerivativeChainExact as Chain
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteDerivativeExact as LogFinite
@@ -35,6 +36,7 @@ import DASHI.Analysis.BishopOriginalExpOriginDerivativeClosedExact as ExpDeriv
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopExponentialSetoidCongruenceExact as ExpCong
 import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geo
+import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as Log
 
 -- The original negative sign, expressed on the SAME pinned Bishop
 -- real carrier, agrees with the existing source `R.-_`.
@@ -119,3 +121,34 @@ originalFiniteNegativeLogExpODEResidual x n =
         (solve 1
           (λ power → Κ 1ℚᵘ ⊖ (Κ 1ℚᵘ ⊖ power) ⊜ power)
           RP.≃-refl z)))
+
+-- The EXACT residual of the finite original compositions tends to
+-- ZERO pointwise in the original source limit, because the finite
+-- composition is convergent and |x|<1 implies x^N -> 0. This is
+-- stronger than mere coefficientwise vanishing of its formal jet.
+originalFiniteNegativeLogExpODEResidualConvergesZero :
+  (x : R.ℝ) →
+  (positive : R._<_ R.0ℝ x) →
+  (belowOne : R._<_ x R.1ℝ) →
+  (absInside : R._<_ (R.∣ x ∣) R.1ℝ) →
+  Seq._ConvergesTo_
+    (λ n →
+      R._*_
+        (Finite.originalNegativeLogFiniteExponential x n)
+        (R.pow x n))
+    R.0ℝ
+originalFiniteNegativeLogExpODEResidualConvergesZero
+    x positive belowOne absInside =
+  Seq.xₙ→x∧x≃y⇒xₙ→y
+    (Seq.xₙyₙ→x₀y₀
+      (Exp.bishopExp
+        (R.-_ (Log.sourceNegativeLogValue x positive belowOne)) ,
+        Finite.originalNegativeLogFiniteExponentialConverges
+          x positive belowOne)
+      (R.0ℝ , Seq.∣r∣<1⇒rⁿ→0 absInside))
+    (let open RP.ℝ-Solver in
+     solve 1
+       (λ value → value ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+       RP.≃-refl
+       (Exp.bishopExp
+         (R.-_ (Log.sourceNegativeLogValue x positive belowOne))))
