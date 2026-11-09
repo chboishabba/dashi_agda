@@ -4,6 +4,7 @@ open import Agda.Builtin.Bool using (true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
+open import Agda.Builtin.String using (String)
 
 import Base369 as Base
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -33,6 +34,7 @@ import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3SameOperationIndexedAdmissionExact as SameOperation
 import DASHI.Cognition.CCDCOEP3CanonicalClaimAuditReuseExact as AuditReuse
+import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
@@ -732,10 +734,10 @@ currentOriginalGCCInventoryFailsClaimBoundAdmission =
 -- No historical primary/causal authority can be fabricated by this bridge.
 canonicalClaimAdmissionWithoutExposureStillBlocked :
   (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
-  (owner : AuditReuse.Source.EmpiricalFactAdmission →
+  (owner : Diligence.EmpiricalFactAdmission →
     SameOperation.OriginalCase)
   (claimKey : SameOperation.OriginalCase →
-    SameOperation.EvidenceStage → Agda.Builtin.String.String)
+    SameOperation.EvidenceStage → String)
   (c : SameOperation.OriginalCase) →
   (E c SameOperation.recipientExposure → ⊥) →
   AuditReuse.CanonicalClaimAdmission E owner claimKey c → ⊥
