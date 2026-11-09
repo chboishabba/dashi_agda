@@ -78,3 +78,27 @@ The independently published **G20 Energy Ministers' Communiqué of 2 October 201
 `DASHI/Cognition/CCDCOEP3G20COP21AttributionExact.agda` now has **distinct original owners** for the ministers, B20 Forum participants, B20 catalog-only material, C20 civil society, leaders and COP Parties. It implements source-kind/speaker nonfactorability using existing DASHI mathematical donor modules (their original proof ownership unchanged), a dated October-to-Paris record, explicit participant/quote/endorsement limitations and separate non-inference to lobbying causality. The case manifest now contains 11 source identities and 15 selected original-content/index clauses, plus precise attendance and temporal-provenance guards. `scripts/check_ccdcoe_p3_g20_cop21.py` adds source-bounded review and negative regression against reverse-dating B20 influence on ministers. Golden regression and research source ledgers updated. Full original-PDF raw bytes/revision hashes and independent negotiation-draft records remain OPEN.
 
 **New discriminatory experiment:** document-level B20→Antalya/COP21 influence requires (1) an actual B20 version before the relevant negotiating draft, (2) a named representative-to-negotiator documented contact, (3) draft-version or minute-level uptake, and (4) counterfactual discrimination from already-existing G20 ministerial/UNFCCC views. The comparison cannot be resolved from carbon-pricing vocabulary alone.
+
+
+## 9 November 2026 — P3 country-level implementation max-cut (new)
+
+**Branch source receipt:** PR #1467, feat/ccdcoe-cognitive-multiplex-source-weld-20261104. The earlier 11 institutional source identities, 15 intentionally selected clause rows, independently published Brisbane and Antalya selected-commitment compliance summaries, and attribution limitations remain intact. The validator now correctly requires 15 **distinct** claim IDs: the previous count of ten unique identifiers was a defect, not a valid sampling rule.
+
+### Current phase / Pareto ordering
+
+1. **P3.1 original-evidence admission (active)** — immutable bytes, SHA-256, reviewed exact spans, original author, source/claim identity, observation interval and units. Pass with actual archived sources, not fixture-only positives.
+2. **P3.2 original country implementation panel (active)** — country ISO3 × exact commitment × original reporting window × metric × unit × original study, with independent-review receipts. The new fail-closed validator admits only source-digest-confirmed exact text observations and rejects duplicate observations, path escapes, invented causal attributions, and unit confusion. Real country rows have not yet been supplied or independently reproduced.
+3. **P3.3 provenance-rich transmission (open)** — candidate B20/C20→ministerial/leaders/COP21 links require contemporaneous original draft versions, actual documented contact and actor identity, adopted text comparison, and rival-explanation tests. October 12 publication cannot author October 2 ministerial text.
+4. **P3.4 independent replication/causal discrimination (open)** — distinguish descriptive frame continuity, procedural compliance, emissions/finance outcomes and identifiable campaign effects. GCC article and ExxonMobil original-document replication remain independent parallel lanes.
+5. **P3.5 Golden check (open)** — exact-head Agda 2.9 parallel_checker, runtime original-data reproduction and updated source/proof receipts. Script self-tests do not establish Agda or empirical acceptance.
+
+### New deliverables, explicit owners and exact obligations
+
+- **Owner:** `DASHI/Cognition/CCDCOEP3CountryImplementationJoinExact.agda`. Study-indexed observations, metric-indexed units, candidate/review separation and original-study nonidentity. The `Admission` type is conditional on an externally supplied original-review witness. Does not prove authenticity of bytes by itself; no synthetic country results.
+- **Runtime:** `scripts/check_ccdcoe_p3_country_implementation.py`: independently checked source-byte digest, reviewed exact text span, explicit original attribution, country/commitment/study/metric/unit/period, negative controls and a fail-closed empty-data rejection. Binary originals need a separately reviewed extraction; do not pretend raw PDF equals reviewed text.
+- **Golden:** imports in `DASHI/Cognition/Everything.agda` and P3 regression; tests wired to `scripts/check_ccdcoe_cognition_agda.sh`, which retains the repository's canonical Agda parallel checker.
+- **Bug fix:** `scripts/check_ccdcoe_p3_g20_cop21.py` requires every one of its 15 selected claim rows to have a distinct ID.
+
+Exact remaining **real-world** obligations: ORIGINAL_COUNTRY_ROWS, ORIGINAL_DIGEST_AND_SPAN_RECEIPTS, ORIGINAL_COUNTRY_COMMITMENT_CROSSWALK, NDC_VERSION_DATES, EMISSIONS_BASELINE_AND_SCOPE, FINANCE_CURRENCY_PRICE_BASIS, AUDITED_TRANSMISSION_DRAFT_HISTORY, IDENTIFICATION_AND_ALTERNATIVE_EXPLANATIONS, INDEPENDENT_EMPIRICAL_REPRODUCTION, AGDA_KERNEL_ACCEPTANCE. In particular, the fact that original published fossil-subsidy percentages differ by five points does **not** establish a commensurate within-country change or an identified emissions effect.
+
+**Attribution:** All empirical authors and original institutional speakers retain authorship; DASHI owns only its formal adapters and validators. No GCC/Harrison, ExxonMobil, B20, C20 or G20 participant is credited with treaty authorship or demonstrated causal influence without original specific evidence. No ESD source changed.
