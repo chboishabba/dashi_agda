@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Analysis.BishopOriginalFiniteLogExpUniformDefectNullModulusExact where
 
 ------------------------------------------------------------------------
@@ -46,7 +45,7 @@ originalNullScaledConvergesZero :
   (scale : R.ℝ) →
   ∀ {h : Nat → R.ℝ} →
   Seq._ConvergesTo_ h R.0ℝ →
-  Seq._ConvergesTo_ (λ k → R._*_ h k scale) R.0ℝ
+  Seq._ConvergesTo_ (λ k → R._*_ (h k) scale) R.0ℝ
 originalNullScaledConvergesZero scale {h} hConverges =
   Seq.xₙ→x∧x≃y⇒xₙ→y
     (Seq.xₙyₙ→x₀y₀
