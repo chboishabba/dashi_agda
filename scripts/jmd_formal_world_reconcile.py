@@ -109,6 +109,10 @@ def init(conn: sqlite3.Connection) -> None:
       changed_symbol TEXT NOT NULL, affected_symbol TEXT NOT NULL,
       PRIMARY KEY(changed_symbol,affected_symbol)
     );
+    CREATE TABLE IF NOT EXISTS jmd_world_source_changes (
+      symbol_id TEXT PRIMARY KEY, old_statement_hash TEXT NOT NULL,
+      new_statement_hash TEXT NOT NULL
+    );
     CREATE TABLE IF NOT EXISTS jmd_world_image_candidates (
       image_group TEXT NOT NULL, symbol_id TEXT NOT NULL,
       matching_terms INTEGER NOT NULL, authority TEXT NOT NULL
@@ -176,6 +180,16 @@ def import_agda(conn, *, revision: str, max_rows: int = 0) -> int:
     if max_rows:
         sql += " LIMIT " + str(max_rows)
     rows = conn.execute(sql).fetchall()
+    previous = {name: fp for name, fp in conn.execute(
+        "SELECT declaration,statement_hash FROM jmd_world_sources "
+        "WHERE repository='chboishabba/dashi_agda'")}
+    conn.execute("DELETE FROM jmd_world_source_changes")
+    if previous:
+        latest = {name: (fp or digest(typ)) for name,_,typ,fp in rows}
+        for name in sorted(set(previous) | set(latest)):
+            if previous.get(name, "") != latest.get(name, ""):
+                conn.execute("INSERT INTO jmd_world_source_changes VALUES(?,?,?)",
+                     (name,previous.get(name, ""),latest.get(name, "")))
     # Historical source records remain in original git history, not in the
     # current live mathematical candidate world after a new Agda revision.
     conn.execute("DELETE FROM jmd_world_sources WHERE repository=? AND source_commit<>?",
@@ -346,6 +360,7 @@ def check_lean(conn, *, root: Path, limit: int = 4, timeout: int = 120) -> dict:
 
 def changed_closure(conn, changed: set[str]) -> int:
     """Use the existing dependency relation. Record impact, never refute proof."""
+    conn.execute("DELETE FROM jmd_world_affected")
     if not changed:
         return 0
     n = 0
@@ -469,6 +484,7 @@ def report(conn) -> dict:
         "external_coordinates":"SELECT count(*) FROM jmd_world_external_coordinates",
         "executed_kernel_passes":"SELECT count(*) FROM jmd_world_attempts a JOIN jmd_world_goals g ON g.goal_id=a.goal_id JOIN jmd_world_sources s ON s.source_key=a.source_key WHERE a.proof_accepted=1 AND a.goal_fingerprint=g.fingerprint AND a.statement_hash=s.statement_hash AND a.source_revision=s.source_commit",
         "affected_nodes":"SELECT count(*) FROM jmd_world_affected",
+        "changed_source_declarations":"SELECT count(*) FROM jmd_world_source_changes",
         "image_owner_candidate_edges":"SELECT count(*) FROM jmd_world_image_candidates",
         "native_requirement_leads":"SELECT count(*) FROM jmd_world_native_gaps",
         "native_gap_candidate_edges":"SELECT count(*) FROM jmd_world_gap_candidates"
@@ -529,7 +545,9 @@ def main(argv=None):
             if args.goals:
                 _,changed=upsert_goals(conn,args.goals)
                 candidates(conn,limit=args.max_candidates)
-                changed_closure(conn,changed)
+            changed.update(r[0] for r in conn.execute(
+               "SELECT symbol_id FROM jmd_world_source_changes"))
+            changed_closure(conn,changed)
             image_owner_candidates(conn,args.image_terms,
                                    limit=args.max_candidates)
             ingest_native_gaps(conn,max_gaps=args.native_gap_limit,
