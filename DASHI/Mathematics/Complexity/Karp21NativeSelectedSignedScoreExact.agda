@@ -32,6 +32,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact as
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact as Stream
+import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Gamma
 
 data RawTokenAligned : List Paired.PairedRawEdge → Set where
   alignedNil : RawTokenAligned []
@@ -176,14 +177,28 @@ originalNativeOneEdgeIsAligned :
   Stream.readOneNativePairedRawEdge word ≡ just (pair , suffix) →
   RawTokenAligned (pair ∷ [])
 originalNativeOneEdgeIsAligned word pair suffix successful
-  with Stream.readOneNativePairedRawEdge word in observed
-... | nothing with successful
-... | ()
-... | just ((Graph.raw-edge u v w , token) , rest)
-  with successful
-... | refl
-  with Runtime.endpointConsistent u true []
-... | _ = alignedCons refl alignedNil
+  with Gamma.readGamma word
+... | nothing = contradiction successful
+  where
+    contradiction : ∀ {A : Set} {x : A} →
+      nothing ≡ just x → RawTokenAligned (pair ∷ [])
+    contradiction ()
+... | just (u , afterU)
+  with Gamma.readGamma afterU
+... | nothing = contradiction successful
+  where
+    contradiction : ∀ {A : Set} {x : A} →
+      nothing ≡ just x → RawTokenAligned (pair ∷ [])
+    contradiction ()
+... | just (v , afterV)
+  with Signed.readSignedBinary afterV
+... | nothing = contradiction successful
+  where
+    contradiction : ∀ {A : Set} {x : A} →
+      nothing ≡ just x → RawTokenAligned (pair ∷ [])
+    contradiction ()
+... | just (token , rest) with successful
+... | refl = alignedCons refl alignedNil
 
 -- Original per-edge pair constructor is the only source of the
 -- RawTokenAligned proof; recursion follows actual count and cursor.
