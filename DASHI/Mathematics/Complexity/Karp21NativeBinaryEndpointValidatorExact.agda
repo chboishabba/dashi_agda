@@ -129,3 +129,46 @@ nativeStrictLessNumerical xs ys
 ... | Compare.greater | (gap , equal)
   rewrite equal =
   sym (natStrictReverseFalse (Value.valueLE ys) gap)
+
+
+------------------------------------------------------------------------
+-- B5: actual binary vertex identity agrees with NUMERICAL equality.
+-- This is the exact key for reusing original chronological endpoint
+-- consistency without constructing unary Nat at executable runtime.
+------------------------------------------------------------------------
+
+natEqualReflexive :
+  (n : Nat) → Nat._≡ᵇ_ n n ≡ true
+natEqualReflexive zero = refl
+natEqualReflexive (suc n) = natEqualReflexive n
+
+natGapDifferentLeft :
+  (n gap : Nat) →
+  Nat._≡ᵇ_ (suc (n + gap)) n ≡ false
+natGapDifferentLeft zero gap = refl
+natGapDifferentLeft (suc n) gap =
+  natGapDifferentLeft n gap
+
+natGapDifferentRight :
+  (n gap : Nat) →
+  Nat._≡ᵇ_ n (suc (n + gap)) ≡ false
+natGapDifferentRight zero gap = refl
+natGapDifferentRight (suc n) gap =
+  natGapDifferentRight n gap
+
+nativeEqualNumerical :
+  (xs ys : Word.BitWord) →
+  equalNativeLE xs ys ≡
+    Nat._≡ᵇ_ (Value.valueLE xs) (Value.valueLE ys)
+nativeEqualNumerical xs ys
+  with Compare.compareLE xs ys
+     | Numeric.compareLENumericalCorrect xs ys
+... | Compare.less | (gap , equality)
+  rewrite equality =
+  sym (natGapDifferentRight (Value.valueLE xs) gap)
+... | Compare.equal | equality
+  rewrite equality =
+  sym (natEqualReflexive (Value.valueLE xs))
+... | Compare.greater | (gap , equality)
+  rewrite equality =
+  sym (natGapDifferentLeft (Value.valueLE ys) gap)
