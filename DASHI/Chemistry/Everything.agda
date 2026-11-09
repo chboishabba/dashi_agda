@@ -290,3 +290,6 @@ import DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact
 -- These bridges do not infer isotope mass, empirical efficiency, or patent title.
 import DASHI.Chemistry.HydrogenFuelCycleSIExact
 import DASHI.Chemistry.HydrogenFuelCycleAtomicIdentityExact
+
+-- Derived finite-path mass-weight convention invariance from existing C/H/O proofs.
+import DASHI.Chemistry.HydrogenFuelCycleAtomicMassConservationExact
