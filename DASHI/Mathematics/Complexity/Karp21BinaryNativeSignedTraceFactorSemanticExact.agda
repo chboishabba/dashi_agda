@@ -14,6 +14,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.List.Base using (List; reverse)
+open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Nat.Tactic.RingSolver using (solve)
 import Data.Nat.Properties as NatP
