@@ -33,20 +33,21 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Native
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact as Value
 
--- Each token is produced by the ACTUAL executable native binary reader.
+-- Each token is produced by the ACTUAL executable native binary reader;
+-- its value is observed through the source-owned observeNativeSigned.
 -- ℤ conversion is intentionally proof-side only, to test same-object
 -- original stream semantics before the bit-runtime certification.
 readNativeObservedItems :
   Nat → Word.BitWord → Maybe (List ℤ × Word.BitWord)
 readNativeObservedItems zero bits = just ([] , bits)
 readNativeObservedItems (suc count) bits
-  with Native.readSignedBinary bits
+  with Value.observeNativeSigned (Native.readSignedBinary bits)
 ... | nothing = nothing
-... | just (token , suffix)
+... | just (value , suffix)
   with readNativeObservedItems count suffix
 ... | nothing = nothing
 ... | just (values , after) =
-  just (Value.interpretNativeToken token ∷ values , after)
+  just (value ∷ values , after)
 
 -- Same success/rejection, full SIGNED values, and final suffix for
 -- arbitrary counts and source words. No encoder-image premise.
