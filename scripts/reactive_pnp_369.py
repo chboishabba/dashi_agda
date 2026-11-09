@@ -160,6 +160,8 @@ def dissipation_diagnostics(c,phi,m):
     rates=reaction_rates(c,m)
     affinity=mu@(m.products-m.reactants).T
     power_reaction=m.h**3*float(np.sum(rates*affinity))
+    if not np.isfinite(power_transport) or not np.isfinite(power_reaction):
+        raise RuntimeError('nonfinite transport/reaction power')
     if power_transport>1e-9 or power_reaction>1e-9:
         raise RuntimeError('transport/reaction thermodynamic dissipation sign failed')
     return {'transport_power':float(power_transport),
@@ -184,19 +186,26 @@ def implicit_step(c0,dt,m,rtol=1e-8):
         ph=poisson(c,m)
         return ((c-c0)-dt*vector_rhs(c,m,ph)).ravel()
     sol=root(residual,np.log(c0).ravel(),method='hybr',options={'xtol':1e-10})
-    if not sol.success and np.max(np.abs(residual(sol.x)))>rtol:
+    if not np.all(np.isfinite(sol.x)):
+        raise RuntimeError('nonfinite implicit log-root candidate')
+    sol_residual=np.max(np.abs(residual(sol.x)))
+    if not np.isfinite(sol_residual):
+        raise RuntimeError('nonfinite implicit residual')
+    if not sol.success and sol_residual>rtol:
         raise RuntimeError(f'implicit coupled PNP did not converge: {sol.message}')
     if np.any(np.abs(sol.x)>69): raise RuntimeError('log-iterate clipping invalidated root')
     c=np.exp(sol.x.reshape(c0.shape)); ph=poisson(c,m)
     defect=c-c0-dt*vector_rhs(c,m,ph)
     err=np.max(np.abs(defect))
-    if err>rtol or not np.all(np.isfinite(c)):
+    if not np.isfinite(err) or err>rtol or not np.all(np.isfinite(c)) or not np.all(np.isfinite(ph)):
         raise RuntimeError(f'coupled residual not paid: {err}')
     e0=free_energy(c0,ph0,m); e1=free_energy(c,ph,m)
+    if not np.isfinite(e0) or not np.isfinite(e1):
+        raise RuntimeError('nonfinite original PNP free energy')
     if e1>e0+max(1e-9,rtol*max(1,abs(e0))):
         raise RuntimeError(f'free-energy inequality failed: {e0} -> {e1}')
     charge_defect=abs(float(np.dot((c-c0).sum(axis=0),m.z)))
-    if charge_defect>max(1e-9,100*rtol):
+    if not np.isfinite(charge_defect) or charge_defect>max(1e-9,100*rtol):
         raise RuntimeError('closed bulk total charge was not conserved')
     dissipation=dissipation_diagnostics(c,ph,m)
     return c,{**dissipation,'numerical_residual_max':float(err),'free_energy_before':float(e0),
