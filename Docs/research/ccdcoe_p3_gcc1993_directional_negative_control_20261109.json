@@ -42,18 +42,18 @@
       "later": "gcc_shlaes_19930630",
       "original_source_relationship": "GCC authored a response to previously published journalism",
       "evidence_kind": "archive_description_of_reference",
-      "journalist_reached_by_GCC": false,
-      "article_caused_by_GCC": false,
-      "audience_response_measured": false
+      "journalist_exposure_verified": false,
+      "original_article_GCC_causation_verified": false,
+      "audience_effect_verified": false
     },
     {
       "earlier": "wp_christy_spencer_199307",
       "later": "gcc_september_bulletin_1993",
       "original_source_relationship": "GCC newsletter later highlighted existing article",
       "evidence_kind": "archive_description_of_later_amplification",
-      "journalist_reached_by_GCC": false,
-      "article_caused_by_GCC": false,
-      "audience_response_measured": false
+      "journalist_exposure_verified": false,
+      "original_article_GCC_causation_verified": false,
+      "audience_effect_verified": false
     }
   ],
   "limits": [
