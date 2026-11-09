@@ -400,3 +400,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact
 
 -- B5 actual binary endpoint history equals the original NatP Dec vertex chronology (SOURCE ONLY).
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryOriginalExact
+
+-- Complete executable original N21 bit-register graph/certificate/signed-score/threshold path.
+-- All-word original correctness kernel receipt and selected bit-TM clock remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryVerifierExact
