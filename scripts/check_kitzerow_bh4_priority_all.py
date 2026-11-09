@@ -19,6 +19,7 @@ for name in [
     "check_bh4_exchange_identifiability.py",
     "check_bh4_allocator_future_observer.py",
     "check_bh4_spatial_circulation.py",
+    "check_bh4_shared_redox_dynamics.py",
     "check_bh4_spatial_measurement_payment.py",
 ]:
     runpy.run_path(str(root / "scripts" / name), run_name="__main__")
