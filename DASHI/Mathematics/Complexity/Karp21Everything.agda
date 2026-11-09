@@ -397,3 +397,6 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact
 -- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
 -- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact
+
+-- B5 actual binary endpoint history equals the original NatP Dec vertex chronology (SOURCE ONLY).
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryOriginalExact
