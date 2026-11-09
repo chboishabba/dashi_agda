@@ -382,7 +382,8 @@ def test_source(certificate,*,full_panel):
         ]
         final,ledger=run_original_spatial_event_history(
             initial,matrix,species,metadata,events)
-        if (ledger["history_length"]!=4 or ledger["local_voxel_event_checks"]!=108\n                or any(v<0 for v in final.values())):
+        if (ledger["history_length"]!=4 or ledger["local_voxel_event_checks"]!=108
+                or any(v<0 for v in final.values())):
             raise AssertionError("mixed source history failed")
         mixed_boundary_cases+=1
     transferred=0
@@ -402,7 +403,8 @@ def test_source(certificate,*,full_panel):
         "source_nonfinite_residuals":len(original["finite_formula_residuals"]),
         "original_reaction_event_checks":event_cases,
         "original_reaction_coordinate_checks":local_coordinate_checks,
-        "original_mixed_face_reaction_history_checks":mixed_boundary_cases,\n        "original_mixed_local_voxel_checks":mixed_boundary_cases*4*27,
+        "original_mixed_face_reaction_history_checks":mixed_boundary_cases,
+        "original_mixed_local_voxel_checks":mixed_boundary_cases*4*27,
         "original_reaction_transport_roundtrip_histories":mixed_history_cases,
         "original_native_bond_species_transfer_checks":transferred,
         "same_physical_shared_inventory":True,
@@ -468,7 +470,8 @@ def self_test():
     assert result["source_finite_reactions"]==1
     assert result["original_reaction_event_checks"]==27
     assert result["original_reaction_coordinate_checks"]==27*27*5
-    assert result["original_mixed_face_reaction_history_checks"]==1\n    assert result["original_mixed_local_voxel_checks"]==108
+    assert result["original_mixed_face_reaction_history_checks"]==1
+    assert result["original_mixed_local_voxel_checks"]==108
     assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
     # Fail-closed negative controls: no fictional interior boundary,
