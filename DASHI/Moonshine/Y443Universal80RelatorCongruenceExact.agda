@@ -16,6 +16,7 @@ module DASHI.Moonshine.Y443Universal80RelatorCongruenceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Data.Product using (_×_; _,_)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
@@ -62,6 +63,56 @@ data _≈₈₀_ : Expr → Expr → Set where
 infix 4 _∼_
 _∼_ : Expr → Expr → Set
 _∼_ = _≈₈₀_
+
+-- Universal property: any congruence respecting group axioms and the
+-- ORIGINAL 80 relator equations contains the generated presentation
+-- congruence. This is the least-congruence theorem, not a cardinality
+-- or finite-regression inference.
+record AdmissibleCongruence : Set₁ where
+  field
+    R : Expr → Expr → Set
+    rRefl : ∀ x → R x x
+    rSym : ∀ {x y} → R x y → R y x
+    rTrans : ∀ {x y z} → R x y → R y z → R x z
+    rMul : ∀ {x x' y y'} →
+      R x x' → R y y' →
+      R (Presented.multiply x y) (Presented.multiply x' y')
+    rInv : ∀ {x y} → R x y →
+      R (Presented.inverse x) (Presented.inverse y)
+    rAssoc : ∀ x y z →
+      R (Presented.multiply (Presented.multiply x y) z)
+        (Presented.multiply x (Presented.multiply y z))
+    rLeftId : ∀ x → R (Presented.multiply Presented.empty x) x
+    rRightId : ∀ x → R (Presented.multiply x Presented.empty) x
+    rLeftInverse : ∀ x →
+      R (Presented.multiply (Presented.inverse x) x) Presented.empty
+    rRightInverse : ∀ x →
+      R (Presented.multiply x (Presented.inverse x)) Presented.empty
+    rSourceRelator : ∀ w →
+      Consequences._∈_ w Y.monsterRelators →
+      R (wordExpr w) Presented.empty
+
+open AdmissibleCongruence public
+
+least80Congruence :
+  (C : AdmissibleCongruence) →
+  ∀ {x y} → x ≈₈₀ y → R C x y
+least80Congruence C eqRefl = rRefl C _
+least80Congruence C (eqSym p) =
+  rSym C (least80Congruence C p)
+least80Congruence C (eqTrans p q) =
+  rTrans C (least80Congruence C p) (least80Congruence C q)
+least80Congruence C (mulCong p q) =
+  rMul C (least80Congruence C p) (least80Congruence C q)
+least80Congruence C (invCong p) =
+  rInv C (least80Congruence C p)
+least80Congruence C (groupAssoc x y z) = rAssoc C x y z
+least80Congruence C (groupLeftId x) = rLeftId C x
+least80Congruence C (groupRightId x) = rRightId C x
+least80Congruence C (groupLeftInverse x) = rLeftInverse C x
+least80Congruence C (groupRightInverse x) = rRightInverse C x
+least80Congruence C (sourceRelator w member) =
+  rSourceRelator C w member
 
 module Interpretation {G : Set}
     (gi : TM.GroupWithInverse G)
