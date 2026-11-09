@@ -337,6 +337,96 @@ originalStarsDisjointSymmetric :
 originalStarsDisjointSymmetric separate p inB inA =
   separate p inA inB
 
+
+------------------------------------------------------------------------
+-- CONSTRUCTIVE ORIGINAL LINK-STAR GREEDY PACKING.
+-- This is the genuine independent plaquette-star set computed from
+-- native source links, with a PROOF of independence and subset.
+-- The quantitative 19-packing lower cardinal bound still requires
+-- the actual degree-18 finite combinatorics lemma.
+------------------------------------------------------------------------
+
+filterOriginalStarFree :
+  ∀ {n} (a : Bond n) → List (Bond n) → List (Bond n)
+filterOriginalStarFree a [] = []
+filterOriginalStarFree a (b ∷ bs)
+  with decideOriginalStarsDisjoint a b
+... | Torus.yes _ = b ∷ filterOriginalStarFree a bs
+... | Torus.no _ = filterOriginalStarFree a bs
+
+filterOriginalStarFreeSubset :
+  ∀ {n} (a : Bond n) (bs : List (Bond n)) →
+  ∀ {b} → Torus._∈_ b (filterOriginalStarFree a bs) →
+  Torus._∈_ b bs
+filterOriginalStarFreeSubset a [] ()
+filterOriginalStarFreeSubset a (b ∷ bs) member
+  with decideOriginalStarsDisjoint a b
+... | Torus.yes _ with member
+...   | Torus.here = Torus.here
+...   | Torus.there tailMember =
+      Torus.there (filterOriginalStarFreeSubset a bs tailMember)
+... | Torus.no _ =
+  Torus.there (filterOriginalStarFreeSubset a bs member)
+
+filterOriginalStarFreeSound :
+  ∀ {n} (a : Bond n) (bs : List (Bond n))
+    (b : Bond n) →
+  Torus._∈_ b (filterOriginalStarFree a bs) →
+  OriginalStarsDisjoint a b
+filterOriginalStarFreeSound a [] b ()
+filterOriginalStarFreeSound a (first ∷ rest) b member
+  with decideOriginalStarsDisjoint a first
+... | Torus.yes separate with member
+...   | Torus.here = separate
+...   | Torus.there tailMember =
+      filterOriginalStarFreeSound a rest b tailMember
+... | Torus.no _ =
+  filterOriginalStarFreeSound a rest b member
+
+-- The greedy procedure is genuinely executable on any finite list of
+-- literal native 4D Wilson positive links, including duplicates.
+greedyOriginalDisjointStars :
+  ∀ {n} → List (Bond n) → List (Bond n)
+greedyOriginalDisjointStars [] = []
+greedyOriginalDisjointStars (a ∷ as) =
+  a ∷ greedyOriginalDisjointStars (filterOriginalStarFree a as)
+
+greedyOriginalDisjointStarsSubset :
+  ∀ {n} (as : List (Bond n)) (b : Bond n) →
+  Torus._∈_ b (greedyOriginalDisjointStars as) →
+  Torus._∈_ b as
+greedyOriginalDisjointStarsSubset [] b ()
+greedyOriginalDisjointStarsSubset (a ∷ as) b Torus.here =
+  Torus.here
+greedyOriginalDisjointStarsSubset (a ∷ as) b
+  (Torus.there inTail) =
+  Torus.there
+    (filterOriginalStarFreeSubset a as
+      (greedyOriginalDisjointStarsSubset
+        (filterOriginalStarFree a as) b inTail))
+
+data AllOriginalStarsIndependent {n} :
+    List (Bond n) → Set where
+  noStars : AllOriginalStarsIndependent []
+  addFreeStar :
+    ∀ {a bs} →
+    (∀ b → Torus._∈_ b bs → OriginalStarsDisjoint a b) →
+    AllOriginalStarsIndependent bs →
+    AllOriginalStarsIndependent (a ∷ bs)
+
+greedyOriginalDisjointStarsIndependent :
+  ∀ {n} (as : List (Bond n)) →
+  AllOriginalStarsIndependent (greedyOriginalDisjointStars as)
+greedyOriginalDisjointStarsIndependent [] = noStars
+greedyOriginalDisjointStarsIndependent (a ∷ as) =
+  addFreeStar
+    (λ b member →
+      filterOriginalStarFreeSound a as b
+        (greedyOriginalDisjointStarsSubset
+          (filterOriginalStarFree a as) b member))
+    (greedyOriginalDisjointStarsIndependent
+      (filterOriginalStarFree a as))
+
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
 -- 1. DONE SOURCE-WRITTEN: enumerate all original source plaquettes,
@@ -344,8 +434,7 @@ originalStarsDisjointSymmetric separate p inB inA =
 --    one actually incident plaquette exists for every native bond.
 -- 2. DONE SOURCE-WRITTEN: proof-producing decision whether two\n--    actual source link stars share an original plaquette, with\n--    constructive nonempty self-conflict and symmetry.\n-- 3. REMAINING: exactly-six incidence (for side >= 3), original
 --    degree-18 plaquette conflict, and a source-native 19-packing proof.
--- 4. REMAINING: choose a full original link-set with disjoint incident
---    plaquette stars and prove source-specific packing witnesses.
+-- 4. DONE SOURCE-WRITTEN: compute a greedy actually source-star\n--    independent subset and prove independence + input membership.\n--    REMAINING: the original degree-18 quantitative 19-packing bound.
 -- 5. REMAINING: consume the actual original Wilson Gibbs product-Haar
 --    Fubini/disintegration laws and the SU(2) coherent one-link bound.
 -- 6. REMAINING PHYSICAL: sparse frustrated/mixed connected contour
