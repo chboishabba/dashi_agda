@@ -16,7 +16,7 @@ module DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteValueExpectationWeldExact
 
 open import Agda.Builtin.List using (List)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -29,6 +29,7 @@ import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact
 import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 import DASHI.Physics.YangMills.YMClayE1A3OriginalSignedPathValueEvaluatorExact as Evaluator
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
 open import Relation.Binary.PropositionalEquality using (trans)
 
@@ -103,3 +104,63 @@ module _
       (originalDirectFiniteValueExpectationIsOriginalWilson
         n (selected n))
       refl
+
+  -- Fixed-cutoff original Wilson measure, applied to the prefix of a
+  -- *longer* actual sampled word. Projection compatibility of samples
+  -- is source-proved (not an independently postulated projective law).
+  originalPrefixFromExtendedFiniteSample :
+    (n : Nat)
+    (prefix suffix : List (Plaquette.PeriodicPlaquette n)) →
+    Wilson.Test theory traceData exponential beta oneLink bilateral divide n
+  originalPrefixFromExtendedFiniteSample n prefix suffix links =
+    Evaluator.evaluateOriginalWilsonWord
+      (Native.sunExactSignedLinkGroup theory)
+      (Trace.matrixWilsonValue traceData)
+      prefix
+      (Evaluator.forgetOriginalWordSuffix prefix suffix
+        (Evaluator.originalWilsonWordSampledValues
+          theory traceData exponential beta oneLink bilateral divide
+          n (Evaluator.appendPlaquetteWords prefix suffix) links))
+
+  originalPrefixFromExtendedSampleEqualsDirect :
+    (n : Nat)
+    (prefix suffix : List (Plaquette.PeriodicPlaquette n))
+    (links : Variable.SUNPeriodicLinks theory n) →
+    originalPrefixFromExtendedFiniteSample n prefix suffix links
+      ≡ directFiniteWilsonWord n prefix links
+  originalPrefixFromExtendedSampleEqualsDirect n prefix suffix links =
+    cong
+      (Evaluator.evaluateOriginalWilsonWord
+        (Native.sunExactSignedLinkGroup theory)
+        (Trace.matrixWilsonValue traceData)
+        prefix)
+      (Evaluator.sampleOriginalWordPrefixCommuting
+        (Evaluator.originalWilsonRealization
+          theory traceData exponential beta oneLink bilateral divide
+          n links)
+        prefix suffix)
+
+  originalPrefixFromExtendedSampleExpectationIsWilson :
+    (n : Nat)
+    (prefix suffix : List (Plaquette.PeriodicPlaquette n)) →
+    Wilson.expectation
+      theory traceData exponential beta oneLink bilateral divide n
+      (originalPrefixFromExtendedFiniteSample n prefix suffix)
+    ≡
+    Wilson.expectation
+      theory traceData exponential beta oneLink bilateral divide n
+      (Words.originalWordObservable
+        theory traceData exponential beta oneLink bilateral divide
+        n prefix)
+  originalPrefixFromExtendedSampleExpectationIsWilson
+    n prefix suffix =
+    trans
+      (Wilson.originalWilsonExpectationExtensional
+        theory traceData exponential beta oneLink bilateral divide
+        n
+        (originalPrefixFromExtendedFiniteSample n prefix suffix)
+        (directFiniteWilsonWord n prefix)
+        (originalPrefixFromExtendedSampleEqualsDirect
+          n prefix suffix))
+      (originalDirectFiniteValueExpectationIsOriginalWilson
+        n prefix)
