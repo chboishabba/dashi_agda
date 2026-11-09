@@ -5,8 +5,9 @@ Method attribution:
   Zhao et al., Phys Rev Research 8, 033061 (2026), arXiv:2506.22408
   Provazza et al., arXiv:2611.08129 (2026)
   ipie developers (see https://ipie.readthedocs.io/en/latest/python_api.html)
-No IonQ data/circuit/geometry is bundled or inferred. This is a classical
-single-determinant reference unless a separate documented NQS trial is supplied.
+No IonQ data/circuit/geometry is bundled or inferred. By default this is a
+classical single-determinant reference. With a compatible full 16-qubit
+checkpoint it can use an exact, exponentially costly ParticleHole expansion.
 """
 import argparse
 import hashlib
@@ -62,7 +63,18 @@ def run(config_path):
         trial_coeff=np.hstack(orbitals)
     else:
         trial_coeff=np.hstack([orbitals,orbitals])
-    trial=SingleDet(trial_coeff,mol.nelec,coeff.shape[-1])
+    trial_checkpoint=configuration.get("nqs_checkpoint")
+    if trial_checkpoint is not None:
+        from qcafqmc_nqs_ipie_particle_hole import make_ipie_trial
+        checkpoint=(source.parent/trial_checkpoint).resolve()
+        if not checkpoint.is_file():raise ValueError("NQS checkpoint not found")
+        if coeff.shape[-1]!=8:
+            raise ValueError("NQS checkpoint requires exactly 8 spatial molecular orbitals")
+        if not configuration.get("nqs_orbital_frame_verified",False):
+            raise ValueError("Explicitly verify NQS occupations use the same PySCF MO orbital frame")
+        trial=make_ipie_trial(checkpoint,mol.nelec,coeff.shape[-1])
+    else:
+        trial=SingleDet(trial_coeff,mol.nelec,coeff.shape[-1])
     trial.compute_trial_energy=True
     trial.build()
     trial.half_rotate(ham)
@@ -81,11 +93,15 @@ def run(config_path):
     elapsed=time.perf_counter()-start
     afqmc.finalise(verbose=True)
     result={
-      "scope":"PySCF + ipie classical determinant-trial molecular phaseless AFQMC",
+      "scope":"PySCF + ipie molecular phaseless AFQMC, classical Slater or full 16-qubit CI trial",
       "original_IonQ_NQS_trial":False,
+      "nqs_trial_used":trial_checkpoint is not None,
+      "nqs_trial_approximation":"full finite CI expansion; exponential cost" if trial_checkpoint else None,
       "source_geometry":configuration["source_url"],
       "source_kind":configuration["source_kind"],
       "configuration_sha256":hashlib.sha256(source.read_bytes()).hexdigest(),
+      "nqs_checkpoint_sha256":(hashlib.sha256(checkpoint.read_bytes()).hexdigest()
+                                  if trial_checkpoint else None),
       "number_of_atoms":len(configuration["atoms"]),
       "electron_numbers":list(mol.nelec),
       "mean_field_hartree":float(e_scf),
