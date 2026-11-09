@@ -67,3 +67,22 @@ For each fixed compact simple G with faithful unitary normalized Wilson trace \(
 with the group-specific original source constant \(C_G(\beta)=8L_G^2+\frac23\log(1/c_G)+\frac{\dim G}{3}\log\beta\). This is a *finite original G1.02 / N1 no-go*, not the all-group continuum N1 witness.
 
 Attribution: Wilson finite gauge theory, finite Haar pressure convexity and elementary bounded-product inequality. Agda original all-length word source exists, but this analytic inequality has not been kernel checked in the source real-inequality APIs. No Clay endpoint is claimed.
+
+
+## Exact original two-word covariance and D2 nonvacuity corollary
+
+Let `w,v` be any two original source plaquette words, of lengths `k,l`, and let `C_beta=8+(2/3)log24+log beta`. The original connected covariance is precisely the `YMClayOriginalVariableWilsonCovarianceSourceExact` same-measure covariance (and matches the finite mixed formal source jet). Ordinary Cauchy–Schwarz in `L²(mu_beta)`, the already proved fixed-word variance bounds, and no assumption on *any* spatial separation yield
+
+```
+|Cov_{original Wilson}(W_w,W_v)|
+  <= sqrt(Var(W_w) Var(W_v))
+  <= (2 C_beta/beta) sqrt(k l),   beta>=16.
+```
+
+This holds uniformly over periodic finite volume, source plaquette positions and their separation, even if the words overlap or repeat. It is a **genuine original two-word connected-covariance amplitude inequality**, not a physical exponential-in-distance bound (the RHS has NO distance factor). It is also not the original CMP116 analytic differentiated-source identity, which remains a separate source theorem.
+
+**D2 original-sector nonvacuity consequence:** along `beta_n→∞`, every bounded-length bare plaquette word has `Var(W_w)→0`, so its mean-subtracted original `L²` vector collapses. If the E1 OS continuum cylinder map identifies those centered words with vectors in the OS Hilbert space via reflection-positive correlations, their norms must be handled carefully: a vector whose norm tends to zero cannot detect an invisible subgap spectral sector. Therefore using only fixed-length original bare words as the claimed *dense* nonvacuum test family would be a false D2 proof, even if a fast-decay estimate for their vanishing correlators were available. The actual D2-OS-02/03 must use renormalized physical-scale observables with noncollapsed continuum vectors. Source-normalization, reflection and reconstruction still must be proved before asserting actual OS null vectors.
+
+**G1 extension:** the same bound holds for each fixed compact simple G with the group-specific `C_G(beta)` from the finite Haar pressure theorem, once true Hilbert-space Cauchy–Schwarz is used on the original normalized finite Wilson probability measure. No universal uniform-in-G constant is asserted.
+
+This clarifies why D1 small amplitude + E1 weak cylinder convergence is not the Clay full-sector mass gap. Physical-time exponent and nontrivial OS test density must both be source-proved.
