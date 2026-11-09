@@ -41,3 +41,21 @@ Columbia university scholarly record https://scholarship.law.columbia.edu/facult
 ## Attribution discipline
 
 Retain court author / scholarly author / research staff / participant / data agency / DASHI mathematical owner as separate reference identities. Source citation is metadata and bounded textual evidence, not imported legal, political or empirical authority. No generic white-court claim should be inferred from an individual judge's assumed race.
+
+## Published-discipline arithmetic and reporting-period audit — 9 November 2026
+
+**Original source:** *Black Girls Matter* (2015), Columbia Law School hosted PDF https://www.law.columbia.edu/sites/default/files/2021-05/black_girls_matter_report_2.4.15.pdf . The accessible PDF text was read, including printed pp. 18–21 and p.45 methodology. Web screenshot of PDF pages 18/19 was attempted but the image service returned a 400 size-limit error. **No successful source image authentication or archived SHA claim** is made.
+
+- Printed p.19, disciplinary case figures: Boston girls Black 340, white 30; New York City girls Black 9,076, white 884. Printed p.20 boys Boston Black 637, white 81; NYC boys Black 13,823, white 2,541.
+- DASHI source-specific exact arithmetic: Boston 340 = 11·30 + 10; New York 9,076 = 10·884 + 236; Boston boys 637 = 7·81 + 70; New York boys 13,823 = 5·2,541 + 1,118. These are **counts/cases**, not individual probabilities, risk-ratios or causality.
+- Printed p.19 figures 3–4: rounded within-girl proportion profiles: Boston enrollment Black 28%, white 15%, discipline Black 61%, white 5%; NYC enrollment Black 34%, white 13%, discipline Black 56%, white 5%. Cross-product gaps Boston 61·15 − 5·28 = 775; NYC 56·13 − 5·34 = 558. This is **rounded percentage arithmetic**; it cannot be labelled an exact probability or a raw CRDC reconstruction.
+- Printed p.18 Table 1 expressly uses **2013–2014** all-student enrollment; printed pp.19–20 discipline and related figures refer to **2011–2012**. Original CRDC year, unit, school/district, subgroup and denominator harmonization is unpaid. **Do not divide 2011–12 discipline numerators by 2013–14 total enrollments**.
+- Printed p.21 expulsion rates: zero recorded white-girl expulsions in both districts. The report illustrates New York 53:1 and Boston 10:1 by **hypothetically assigning one** white-girl expulsion in each district. These are pedagogical counterfactual ratios, not observed ratios with positive denominators. No finite observed Black-to-white count quotient is licensed by a zero actual white denominator.
+- Sources remain report-level transcriptions; raw OCR/CRDC rows and individual denominators have not been independently downloaded or matched.
+
+**Committed original formal owners:**
+- `DASHI/Governance/BlackGirlsMatterPublishedDisciplineArithmeticExact.agda`: `bostonGirlsCasesElevenfoldPlusTen`, `newYorkGirlsCasesTenfoldPlus236`, `bostonBoysCasesSevenfoldPlus70`, `newYorkBoysCasesFivefoldPlus1118`, `bostonFemaleShareCrossProductGap`, `newYorkFemaleShareCrossProductGap`, `tableOneIsNotDisciplineFigurePeriod`. Uses `FemaleGroup` with no invented male zero-share fixtures.
+- `DASHI/Governance/BlackGirlsMatterExpulsionDenominatorExact.agda`: `newYorkWhiteGirlActualCountIsZero`, `bostonWhiteGirlActualCountIsZero`, `newYorkAuthorsHypotheticalFiftyThreeToOne`, `bostonAuthorsHypotheticalTenToOne`, `newYorkObservedExpulsionRatioBlocked`, `bostonObservedExpulsionRatioBlocked`.
+- `CrenshawLegalAttributionCapstoneExact.agda` now consumes source-count arithmetic, incompatible table/figure time labels, and the observed-denominator impossibility.
+
+**Highest-alpha remaining K3 leaf:** original OCR/CRDC 2011–12 reported subgroup cell(s), exact disciplinary-event definition, same-year per-subgroup unique student denominator, suppression codes, method differences in Boston and NYC, and source version/digest. Only after those receipts is an individual probability or a truly denominator-adjusted disparity admissible.
