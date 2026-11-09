@@ -179,3 +179,16 @@ Additional Agda (directly on PR #1474, not sidecar hypothetical interfaces):
 This is a real semantics-reuse advance, not a full N21 completion. Exact-head Agda 2.9 acceptance is still missing; the source proof terms might require changes after compiler diagnostics. The full original same-graph-word `rawSparseScore` weld still needs the arbitrary-word signed gamma numerical/suffix theorem, selected edge cut observation, endpoint guard and positive threshold. The model-dependent cost of building the weight dictionary and replay is not yet a bit-Turing-machine polynomial proof. Some traces will be *slower* to factor, and a shorter factor description does not automatically yield a faster execution. Do not promote P0 `PR.InNP`, E20, Cook–Levin, or E01–E19 / N01–N20.
 
 Recheck local compiler with the repository's authoritative `scripts/run_agda29_parallel_check.sh` on the exact PR head; the current isolated environment has Python but not Agda/Nix or a network-reachable Git clone. The new GitHub source and bounded Python tests are not kernel receipts.
+
+
+## 2026-11-09 — FRACDASH compiled priority-frontier max-cut (PR #1474)
+
+Canonical detailed phase/deliverable/exact-lemma ledger: [Karp21FRACDASHMachineMaxCut20261109.md](../roadmaps/Karp21FRACDASHMachineMaxCut20261109.md).
+
+Read `chboishabba/FRACDASH` as a three-layer source → signed executable IR → compiled exponent-vector FRACTRAN machine; not merely as a prime-power integer or two-lane sign metaphor. Its compiled first-enabled guard/delta semantics and exact-reconstruction DA51 codec are reusable, but its earlier 41-shard compression measurements are not a complexity bound for original N21.
+
+New `--safe` source: `Karp21FractranPriorityFrontierExact.agda`, with `refreshEntryCorrect`, `refreshPopulationCorrect`, `refreshStoredCorrect`, `firstPopulatedCorrect`, `firstRefreshedCorrect` and `cachedStepCorrect`. This proves correctness of a selectively refreshed ordered guard cache conditional on a genuine unaffected-guard stability witness, and same selected successor/halt as full evaluation. Imported by both original Karp roots and added to focused Golden referee.
+
+**Status:** source-written GENERIC frontier only; no N21 `Machine` instantiation, no original verifier-step equivalence, no original all-word decoder acceptance, no trace/residual compiler, no bit-tape polynomial runtime, no `PR.InNP`, and no Agda 2.9/parallel_checker receipt. Remaining exact original-owner goals are `karpSignedIRSameOriginalSparseScore`, `karpFractranFirstEnabledSameVerifierStep`, `karpFractranDecodePreservesAcceptance`, `karpFractranTraceRebuildExact`, `karpFractranBitMachineClockPolynomial`, `trieAdmitIffOriginalHistoryConsistency`, `nativeGraphEndpointsConsumeInputBits`, `nativeSparseScoreSameOriginalRawSparseScore`, `nativeN21SameWordAndClock`, original `PR.InNP`, E20, Cook–Levin and remaining Karp-21. The P != NP SAT lower bound is separate.
+
+No new runtime regression or kernel acceptance is claimed for this generic-source cut.
