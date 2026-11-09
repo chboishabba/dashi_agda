@@ -87,6 +87,10 @@ def read_data(path):
     if wa.ndim!=2 or wa.shape[1]!=len(occ) or labels.shape!=(len(wa),):
         raise ValueError("walker/label shapes inconsistent")
     if not 0<=na<=8 or not 0<=nb<=8:raise ValueError("electron numbers invalid")
+    from math import comb
+    expected=comb(8,na)*comb(8,nb)
+    if len(occ)!=expected:
+        raise ValueError("need complete fixed-particle sector for normalized overlap evaluation")
     if len(occ)>5000:raise ValueError("unsafe enumeration; use stochastic overlap evaluation")
     if not str(data["source_url"]).strip():raise ValueError("source URL required")
     return data
