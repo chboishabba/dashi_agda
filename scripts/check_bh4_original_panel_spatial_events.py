@@ -52,9 +52,14 @@ def reject_duplicate_json_keys(pairs):
     return result
 
 
+def reject_nonfinite_json_constant(value):
+    raise ValueError(f"nonfinite source JSON numeric literal: {value}")
+
+
 def load_original_receipt_json(data):
-    """JSON decoder that fails before duplicate-key overwrite is possible."""
-    return json.loads(data,object_pairs_hook=reject_duplicate_json_keys)
+    """Reject duplicate source keys and non-standard NaN/Infinity literals."""
+    return json.loads(data,object_pairs_hook=reject_duplicate_json_keys,
+                      parse_constant=reject_nonfinite_json_constant)
 
 
 def check_certificate(certificate, *, full_panel):
@@ -513,6 +518,8 @@ def self_test():
     for duplicated in (
         '{"reaction_flux":{"RHEA:1":0,"RHEA:1":1}}',
         '{"external_exchange":{"species":0,"species":1}}',
+        '{"reaction_flux":{"RHEA:1":NaN}}',
+        '{"external_exchange":{"species":Infinity}}',
     ):
         try:
             load_original_receipt_json(duplicated)
