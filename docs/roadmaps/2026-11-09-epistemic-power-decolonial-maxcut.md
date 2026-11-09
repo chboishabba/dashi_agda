@@ -316,3 +316,25 @@ unverifiedLocatorCannotAdmitJefferiesHolding.
 **No further abstract witness is sufficient to close K2 empirical exhaustion**: direct independently gathered evidence of exhaustion is still lacking. In particular, court proceedings and legal grievances may establish workload and access barriers, but not psychological fatigue, malign intent, or institutional causality automatically.
 
 K1 textual source provenance is at the publisher-record/opinion-transcription level, not authenticated original artifact and independently reviewed passage interpretations. K3 has a four-case case-issue formal comparison, but external source-authentication receipts remain unpaid. No claim of Agda acceptance (K0 was explicitly excluded). ESD and canonical donor files were not edited.
+
+## Ninth pass — primary scholarly PDF adjudication and majority/dissent split (2026-11-09)
+
+User excludes K0/K4 and requests highest-alpha K1–K3. No DOCX.
+
+**Primary scholarly source directly inspected**: University of Chicago Legal Forum 1989, Article 8, by Crenshaw, accessed as reproduced PDF https://ideas.wharton.upenn.edu/wp-content/uploads/2018/07/Crenshaw-1989.pdf . PDF page 3 (printed 141) specifies exactly three featured Title VII decisions: DeGraffenreid, Moore and Payne. PDF page 5 (printed 143), footnote 13, **explicitly cites Jefferies as a contrasting court recognition case**. Earlier "Jefferies not discussed by Crenshaw" insinuation corrected. Jefferies is a DASHI-extended comparator, sourced in Crenshaw but not her main three-section example. PDF pages 8–10 (printed 146–148) discuss the Moore proof burden and Payne remedies, including Goldberg's dissent; full independent source-byte digests still open.
+
+**Judicial attribution correction:** Payne, 673 F.2d 798, majority upheld exclusion of Black male class members through a potential-conflict/representation analysis, while Judge Goldberg's separate partial dissent objected to exclusion and absent notice. Earlier "actual conflict" language was too strong and is corrected in the legal citation source and ledger. The case also upheld some discrimination findings and modified concrete remedies; none of these stages establishes plaintiff fatigue or intentional obstruction.
+
+**New exact source-written modules:**
+- `DASHI/Governance/Crenshaw1989PassageWeldExact.agda`: `jefferiesIsCitedByCrenshaw`, `jefferiesIsNotOneOfThreeFeaturedCases`, `threeOriginalCaseExamples`, `caseAnalysisNotJudicialAuthorship`, `formalAdapterNotCrenshawAuthorship`; printed-page topic atlas.
+- `DASHI/Governance/CrenshawJudicialDisagreementExact.agda`: `payneDisagreementIsSameIssue`, `payneMajorityNotGoldberg`, `payneDissentNotMajorityHolding`, `caseCitationDoesNotRecoverJudicialPosition`, `caseCitationCannotSelectJudicialPosition`, `anyCaseCitationRechartStillLosesDissent`, and existing Payne remedy-scope proof reuse.
+- `CrenshawLegalAttributionCapstoneExact.agda` now explicitly imports both source owners and requires the cited-Jefferies role and same-case majority/dissent non-collapse.
+
+**Current exact remaining K1–K3 cut:**
+- K1 primary scholarly *text/location* for featured cases and Jefferies citation now checked visually; stable exact PDF hash, locally preserved reproduction and verified source parity remain OPEN.
+- K1 court-transcription checks for Payne majority, dissent, class scope, rulings and remedies advanced; authenticated original court issue spans and version digest remain OPEN.
+- K2 original independent psychological fatigue observation and causal comparator remain OPEN; the legal opinions are not a proxy.
+- K3 original-source judicial issue admission remains blocked on the external original-artifact and contradictory-reason review predicates; additional mathematical wrappers cannot replace empirical receipts.
+- K0/K4 deliberately excluded, therefore no Agda kernel acceptance or ITIR receipt is asserted.
+
+**Attribution firewall:** judicial holdings belong to judges and their issuing courts; Crenshaw's 1989 scholarship owns its doctrinal interpretation and explicit citations; original DASHI finite mathematics belongs to pre-existing owners or the new named modules as appropriate. The documentary source does not prove independent fatigue, discriminatory intent beyond a decision's holdings, or contemporary precedent applicability.
