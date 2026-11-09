@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Analysis.BishopRiemannOriginalZetaAboveTwoExact where
 
 ------------------------------------------------------------------------
@@ -16,6 +15,8 @@ module DASHI.Analysis.BishopRiemannOriginalZetaAboveTwoExact where
 --   (b) genuine analytic continuation / original externally selected
 --       zeta-function identification: NOT deduced here.
 --
+-- This file does not assert Agda --safe certification: it imports the
+-- existing non-safe-marked BishopDirichletUniformBaselTailsExact.
 -- Cauchy/Riemann/Dirichlet; Bishop-Bridges; Murray/Csimma pinned
 -- Bishop Real/Sequence; DASHI original Basel and Round11 owners.
 ------------------------------------------------------------------------
