@@ -433,7 +433,11 @@ def self_test():
     # no unreferenced environmental flux, and no extraction of material
     # that is not actually available in the selected cubical voxel.
     finite,metadata=check_certificate(cert,full_panel=False)
-    key=finite["species_index"][0]
+    key=next((candidate for candidate in finite["species_index"]
+              if any(metadata[candidate][0][element] for element in ELEMENTS)
+                 or metadata[candidate][1]!=0),None)
+    if key is None:
+        raise AssertionError("no source chemical quantity for local negative control")
     empty=inventory(finite["species_index"])
     for bad in (
         dict(face=(0,-1),point=(0,0,0),key=key,
