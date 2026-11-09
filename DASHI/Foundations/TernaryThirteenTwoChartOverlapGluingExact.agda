@@ -18,6 +18,8 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import Base369 as Base
+import DASHI.Foundations.TernaryThirteenOriginalPantsFrontierBridgeExact as Pants
+import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 
 data LeftChartAxis : Set where
   left0 left1 left2 left3 left4 left5 left6 : LeftChartAxis
@@ -211,3 +213,54 @@ twoChartPunctureGluing :
   ¬ (leftCentre charts ≡ Base.tri-mid) →
   ¬ (proj₂ (glueTwoChartCentral charts matching) ≡ Base.tri-mid)
 twoChartPunctureGluing charts matching punctured = punctured
+
+------------------------------------------------------------------------
+-- Actual original pants frontier consumer of the two-chart glue.
+------------------------------------------------------------------------
+
+glueTwoChartsToOriginalPants :
+  (charts : TwoChartCentralFamily) →
+  TwoChartMatches charts →
+  Frontier.PantsPath 13
+glueTwoChartsToOriginalPants charts matching =
+  Pants.sourceCentralToPants13 (glueTwoChartCentral charts matching)
+
+twoChartPantsLeftRestrictions :
+  (charts : TwoChartCentralFamily)
+  (matching : TwoChartMatches charts)
+  (axis : LeftChartAxis) →
+  proj₁ (Pants.pants13ToSourceCentral
+    (glueTwoChartsToOriginalPants charts matching))
+    (leftAxis axis)
+  ≡ leftValue charts axis
+twoChartPantsLeftRestrictions charts matching axis =
+  trans
+    (Pants.sourcePantsRoundTripOnAxis
+      (glueTwoChartCentral charts matching) (leftAxis axis))
+    (twoChartLeftRestricts charts matching axis)
+
+twoChartPantsRightRestrictions :
+  (charts : TwoChartCentralFamily)
+  (matching : TwoChartMatches charts)
+  (axis : RightChartAxis) →
+  proj₁ (Pants.pants13ToSourceCentral
+    (glueTwoChartsToOriginalPants charts matching))
+    (rightAxis axis)
+  ≡ rightValue charts axis
+twoChartPantsRightRestrictions charts matching axis =
+  trans
+    (Pants.sourcePantsRoundTripOnAxis
+      (glueTwoChartCentral charts matching) (rightAxis axis))
+    (twoChartRightRestricts charts matching axis)
+
+twoChartPantsCentreRestrictions :
+  (charts : TwoChartCentralFamily)
+  (matching : TwoChartMatches charts) →
+  proj₂ (Pants.pants13ToSourceCentral
+    (glueTwoChartsToOriginalPants charts matching))
+  ≡ rightCentre charts
+twoChartPantsCentreRestrictions charts matching =
+  trans
+    (Pants.sourcePantsRoundTripOnCentre
+      (glueTwoChartCentral charts matching))
+    (twoChartRightCentreRestricts charts matching)
