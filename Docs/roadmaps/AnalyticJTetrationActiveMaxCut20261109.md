@@ -18,7 +18,7 @@
 | P0.02 | Bishop (q)-series limit uniqueness API correction | **SOURCE-WRITTEN repair** | `AbelBishopQSeriesSetoidPeriodTransportExact.originalComplexSeriesLimitExtensional` now reuses vendored `BishopFiniteSeriesExtensionalityExact.termwiseEquivalentSeriesHaveEquivalentLimits` (commit `c2fdf65e`) |
 | P0.03 | Bishop trajectory limit API correction | **SOURCE-WRITTEN repair** | `AbelBishopKoenigsTrajectoryDifferenceLimitExact.originalBishopKoenigsDifferenceConverges` now provides explicit limit/convergence pairs to `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` (commit `37ec86cc`) |
 
-## P1. Local Schröder/Koenigs (highest-alpha analytic producer)
+**P0 static source correction (2026-11-09):** discovered and repaired an invalid import form in five newly authored E8 modules. `Agda.Builtin.Equality` only supplies `_≡_`/`refl`; `sym`, `trans` and `cong` must come from `Relation.Binary.PropositionalEquality`. Patched `AbelE8HalfOddShellInvolutionExact`, `AbelE8ThetaParityProjectorExact`, `AbelE8RootE4FirstCoefficientExact`, `AbelE8RootTriadic243CountComparisonExact`, and `AbelE8GeneratedRootNormTwoExact`. Commits `e4a197df`, `3cf3e23c`, `d056195b`, `08b8af91`, `fdbc2267`. This removes a real static import error but does **not** constitute a kernel acceptance receipt.\n\n## P1. Local Schröder/Koenigs (highest-alpha analytic producer)
 
 | ID | Exact remaining theorem | Status / dependencies |
 | --- | --- | --- |
