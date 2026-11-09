@@ -447,3 +447,23 @@ With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite tele
 - [ ] **Global P1 / P1b / P2 / P3 / P4:** unchanged: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics`.
 
 **Reuse precedence established:** original vendored real/complex sequence completion → original finite signed telescoping → original scaled-geometric comparison → actual original logarithm increment estimate. Do not reopen an unneeded separate 'build Bishop completeness' workstream. The Agda kernel and log-specific proofs remain the adjudicators.
+
+## 2026-11-09 exact geometric bound → actual trajectory convergence
+
+**Source-written additions:**
+1. `DASHI/Moonshine/AbelBishopKoenigsGeometricAbsoluteExact.agda`: native Bishop comparison theorem turns a proved original componentwise bound `|Re δ_n|,|Im δ_n| ≤ Mρⁿ` and source `BishopScaledGeometricInputs M ρ` into true `Sequence.SeriesOf_ConvergesAbsolutely` for both components, without assuming summability. It feeds the existing componentwise Cauchy and unique-limit construction.
+2. `DASHI/Moonshine/AbelBishopKoenigsTrajectoryDifferenceLimitExact.agda`: combines source-native finite Bishop telescoping with `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` to transfer the increment-series convergence onto the **literal original trajectory** `h_N-h_0`, componentwise in Bishop setoid equality.
+
+**New/advanced precise lemmas:**
+- [x] **P1.B31** `originalBishopGeometricAbsoluteFromBound` — Bishop absolute convergence from geometric component magnitude bound via native comparison.
+- [x] **P1.B32** `originalBishopKoenigsComponentAbsoluteSummability` — assemble original Bishop complex absolute-series witness.
+- [x] **P1.B33** `originalBishopKoenigsGeometricCauchy`, `originalBishopKoenigsGeometricLimit`, `originalBishopKoenigsGeometricLimitConverges` — native Cauchy/limit once a geometric component bound is proved.
+- [x] **P1.B34** `originalBishopDifferenceTrajectory`, `originalBishopKoenigsDifferenceLimit`, `originalBishopKoenigsDifferenceConverges` — convergence of `h_N-h_0` rather than merely an anonymous increment-series prefix, using original Bishop finite telescoping/extensional limit transport.
+- [ ] **P1.B35** `originalBishopKoenigsIncrementMagnitude`: produce the **real original principal Log** on a rigorously cut-avoiding Bishop-complex disk and prove the analytic increment inequality; convert that complex magnitude into the two source componentwise geometric bounds consumed by B31–B34.
+- [ ] **P1.B36** `originalBishopKoenigsUniformCauchy`: parameterize B31–B34 by the actual selected source disk and prove a **common** modulus of convergence across all points in it, together with a holomorphic limit.
+- [ ] **P1.B37** Kernel-check all new modules and transitive imports with the pinned Agda 2.9 checker. Source-written is NOT a kernel receipt.
+- [ ] **P1.K4 / P1b / P2 / P3 / P4:** `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics` all still open.
+
+**High-alpha frontier sharpened:** The remaining conditional input to the native Bishop convergence lane is now a single original **complex principal-log iterate magnitude bound** (plus a proof that it holds uniformly across the source disk). Reuse and real/imaginary completion are already source-written; no new generic completeness/tail assumption is warranted.
+
+**Verification:** All new Agda declarations are source-written, kernel-check pending. Previous rational/Koenigs scripts are diagnostics or exact arithmetic certificates under analytic hypotheses, not evidence of the full mathematical Kneser claim.
