@@ -16,7 +16,8 @@ module DASHI.Moonshine.Y443Original72Plus8RelatorPartitionExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Data.Empty using (⊥)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
@@ -111,3 +112,46 @@ seventyOnePlusTen = refl
 -- 2) an action-compatible isomorphism (if any) between the
 --    projective F9 80 labels and original Y443 relator labels;
 -- 3) selected group nonabelian kernel reflection (separate source).
+
+
+------------------------------------------------------------------------
+-- NEGATIVE CONTROL: this convenient 72/8 split is NOT invariant
+-- under the Coxeter graph automorphism swapping its two long arms.
+-- Hence cardinality 72+8 is not a canonical Monster-equivariant codec.
+------------------------------------------------------------------------
+
+swapLongArms : Y.Node → Y.Node
+swapLongArms Y.a = Y.a
+swapLongArms Y.b1 = Y.b2
+swapLongArms Y.c1 = Y.c2
+swapLongArms Y.d1 = Y.d2
+swapLongArms Y.e1 = Y.e2
+swapLongArms Y.b2 = Y.b1
+swapLongArms Y.c2 = Y.c1
+swapLongArms Y.d2 = Y.d1
+swapLongArms Y.e2 = Y.e1
+swapLongArms Y.b3 = Y.b3
+swapLongArms Y.c3 = Y.c3
+swapLongArms Y.d3 = Y.d3
+
+isCoreNode : Y.Node → Bool
+isCoreNode Y.a = true
+isCoreNode Y.b1 = true
+isCoreNode Y.c1 = true
+isCoreNode Y.d1 = true
+isCoreNode Y.e1 = true
+isCoreNode Y.b2 = true
+isCoreNode Y.c2 = true
+isCoreNode Y.d2 = true
+isCoreNode Y.e2 = false
+isCoreNode Y.b3 = false
+isCoreNode Y.c3 = false
+isCoreNode Y.d3 = false
+
+trueNotFalse : true ≡ false → ⊥
+trueNotFalse ()
+
+this72SplitNotLongArmEquivariant :
+  ((n : Y.Node) → isCoreNode n ≡ isCoreNode (swapLongArms n)) → ⊥
+this72SplitNotLongArmEquivariant invariant =
+  trueNotFalse (invariant Y.e1)
