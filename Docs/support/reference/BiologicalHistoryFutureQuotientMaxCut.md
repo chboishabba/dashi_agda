@@ -351,6 +351,85 @@ The Round-23 shell gate now requires this source owner and
 repository-owned parallel Agda checker. Neither Agda nor
 `parallel_checker` has been run in the current execution environment.
 
+## 2026-11-09: first concrete shared-state physical slice (L03 cut)
+
+**Original source-written Agda owners:**
+- `BiologicalSharedChainFiniteVolumeExact` uses one single
+  three-compartment source/middle/target inventory. The middle pool
+  is shared by *both* selected directed edges. It proves
+  `sourceToMiddleConservesSharedInventory`,
+  `middleToTargetConservesSharedInventory`,
+  `physicalStepBalance` and
+  `allControlledHistoriesRespectOpenBalance` for every finite
+  chronological sequence including explicit external supply.
+  `noGlobalTotalPredictorForLocalDelivery` is its distinct exact
+  same-total/different-middle-delivery counterexample.
+- `BiologicalSharedFiniteChainConservationExact` upgrades from
+  three sites to a **single arbitrary-length shared list inventory**,
+  with conservative `moveAtIndex`, exact site-count preservation,
+  and `everySharedTransportHistoryConserves`. Its 27-cell
+  specialization preserves 27 physical positions for all histories.
+  It is a *linear indexed chain*, not yet a formal same-state
+  realization of all 54 3D bonds.
+- `scripts/biological_shared_spatial_finite_volume.py --self-test`
+  implements a **single shared nonperiodic 27-voxel inventory** of
+  BH4 and an unspecified BH2 proxy, supporting all 54 original local
+  bonds, separate directed vascular, gated membrane/interstitial
+  edges, selected redox conversion and explicitly balanced
+  boundary injections/removals. It enumerates both orientations
+  of all 54 bonds and both species and runs redox events on each
+  of the 27 sites, with negative tests for fictional edges,
+  missing permission and overdraw. Exact integer moiety balance:
+  `totalAfter + removed = totalBefore + injected`.
+  This is a **synthetic finite chemical transport** instance with
+  no calibrated flow or kinetic laws; it is not yet a formal Agda
+  proof of all 54 shared-site transitions.
+- Both Agda owners and the Python execution fixture are attached
+  to the Round-23 Golden root/source gate before the original
+  parallel Agda checker.
+
+**Independent companion original chemistry:** Kitzerow BH4 PR #1454
+contains `BH4SharedSourceTargetRedoxDynamicsExact`,
+`BH4SpatialOriginalQDPRStoichiometryExact`, and
+`BH4OneMoleculeSpatialFutureMinimalityExact`. The latter
+identifies the exact THREE minimal future classes of a selected
+one-moiety, source/target, reduced/oxidized model, rather than
+mistakenly equating global chemical inventory with its future
+behaviour. Source RHEA:32253 original cytosolic QDPR chemistry,
+including qDHB + NADH + H+ -> BH4 + NAD+, is kept separate
+from the coarse generic BH2 proxy.
+
+**Updated proof cut status:**
+- L03 **paid for three shared compartments and arbitrary linear
+  chains**; full 54-bond 27-site Agda conservation still OPEN.
+- L05 **paid for selected cofactor moiety redox/transport and for
+  original cytosolic QDPR CHNOP/charge identity**; source-matched
+  physical stoichiometric flux over the full 29×12 matrix remains OPEN.
+- L07 **paid for the nonnegative finite-event update** only;
+  calibrated reaction/electrodiffusion/vascular continuous-time
+  evolution and admissibility are OPEN.
+- L12 **paid for an exact three-state selected finite model**,
+  not for the full 18-class phenotype quotient under original
+  physical intervention laws.
+- L08–L11 and L13–L14 still require genuine same-source physical
+  transition/refinement, original rates, heldout and independent data.
+
+Original sources:
+RHEA:32253, https://www.rhea-db.org/rhea/32253;
+human cytosolic Reactome R-HSA-71130.5,
+https://reactome.org/content/detail/R-HSA-71130.5;
+UniProt P09417 QDPR, https://www.uniprot.org/uniprotkb/P09417/entry.
+Do NOT identify generic BH2 with qDHB, assign an endothelial
+source from a generic cytosolic record, or treat Rhea chemistry
+as a measured patient enzyme rate.
+
+**Verification status:** independent local arithmetic enumeration
+verified 97,625 redox input/history cases and 5,461 future
+words per one-molecule state. No current-head `parallel_checker`,
+Agda kernel, original 29×12 numerical acquisition or real
+biological longitudinal experiment has been executed.
+The branch remains draft pending source/kernel acceptance.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
