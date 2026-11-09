@@ -32,6 +32,7 @@ import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3SameOperationIndexedAdmissionExact as SameOperation
+import DASHI.Cognition.CCDCOEP3CanonicalClaimAuditReuseExact as AuditReuse
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
@@ -725,3 +726,18 @@ currentOriginalGCCInventoryFailsClaimBoundAdmission :
      Reference owner Supports SameOperation.gcc1993 → ⊥
 currentOriginalGCCInventoryFailsClaimBoundAdmission =
   SameOperation.selectedGCCNotClaimBoundUnderCurrentInventory
+
+-- Use the EXISTING generic source-diligence admission, PNF assertion
+-- obligation and design-admissibility owners for original same-case claims.
+-- No historical primary/causal authority can be fabricated by this bridge.
+canonicalClaimAdmissionWithoutExposureStillBlocked :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (owner : AuditReuse.Source.EmpiricalFactAdmission →
+    SameOperation.OriginalCase)
+  (claimKey : SameOperation.OriginalCase →
+    SameOperation.EvidenceStage → Agda.Builtin.String.String)
+  (c : SameOperation.OriginalCase) →
+  (E c SameOperation.recipientExposure → ⊥) →
+  AuditReuse.CanonicalClaimAdmission E owner claimKey c → ⊥
+canonicalClaimAdmissionWithoutExposureStillBlocked =
+  AuditReuse.canonicalAdmissionBlockedByMissingExposure
