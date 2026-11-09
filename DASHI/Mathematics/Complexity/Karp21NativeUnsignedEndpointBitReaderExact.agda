@@ -17,7 +17,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeUnsignedEndpointBitReaderExact w
 -- original graph/certificate/trie/clock transport remains separate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; suc; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
