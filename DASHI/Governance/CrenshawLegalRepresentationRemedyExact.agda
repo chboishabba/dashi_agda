@@ -30,7 +30,7 @@ payneAppeal = Legal.legal-citation
   1982
   (Legal.bibliographicLegalFallback "673 F.2d 798")
   "802-811, class scope and terms of injunctive decree"
-  "Affirmed exclusion of Black male class members on an actual-conflict reasoning while separately reviewing relief and discrimination findings"
+  "Majority upheld exclusion after accepting a potential conflict rationale; Goldberg separately dissented; discrimination findings and remedial changes reviewed independently"
   false refl
 
 data ClassQuestion : Set where
