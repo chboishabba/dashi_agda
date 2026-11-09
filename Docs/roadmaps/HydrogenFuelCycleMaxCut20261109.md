@@ -126,3 +126,38 @@ Thus the **source-written abstract mathematical leaves** K1a, K1b (for the selec
 8. **K8 — independent checks**: signed source, compiler, measurement, legal and review receipts kept disjoint under attribution policy.
 
 The new nine Agda files were fetched back successfully from the PR branch; no explicit `postulate`, `TERMINATING`, `NON_TERMINATING` or `trustMe` in executable declarations was found by static inspection. **No kernel check or independently replicated device experiment was performed.**
+
+## 2026-11-09 SI / Atomic369 integration extension
+
+**Inspected existing owners directly:** `DASHI.Physics.Units.SI`, `DASHI.Physics.Units.SIMetrologyBridge`, `DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact`, `DASHI.Promotion.ChemistryFiniteRuleTargets`, and `DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticConfigurationExact`. The SI source is the BIPM 9th-edition brochure (DOI 10.59161/AUEZ1291); periodic-table proton-number identity is an existing DASHI owner; atomic standard-weight source is Prohaska et al. (DOI 10.1515/pac-2019-0603). The additional bridges do not reassign prior mathematical/scientific authorship.
+
+### New modules and declarations
+
+- `HydrogenFuelCycleSIExact`: `kilowattHourToJoule` gives 1 kWh = 3,600,000 J as an exact integer conventional conversion. `SIHydrogenProcessReceipt` requires all four measurement roles in `SI.Measurement SI.Energy SI.unitScale`, source/version/uncertainty carried by the existing SI type, explicit nonnegative signs, and a first-law balance. `siToElectrolyserFirstLaw` transports it into the existing hydrogen bound; `siHydrogenEnergyBound` reuses that theorem. The receipt has **no actual measurement inhabitant** in this tranche.
+- `HydrogenFuelCycleAtomicIdentityExact`: `hIndex`, `cIndex`, `oIndex` are existing Atomic369 `neutralAt` instances, with proton numbers exactly equal to the repository's established finite H/C/O periodic targets. `hMassMilliU`, `cMassMilliU`, `oMassMilliU` refer directly to the already attributed atomistic convention; water, methane and CO2 derived *rounded convention* masses are 18015, 16043 and 44009 milli-u respectively. These are **not exact isotopic masses, empirical molar masses, nor HHV values**.
+- `HydrogenFuelCycleAtomicMassConservationExact`: `oneStepConventionMassConserved` and `pathConventionMassConserved` apply the existing guarded molecular C/H/O conservation to any fixed weighted elemental mass functional, using the existing source's standard-atomic-weight constants. The result concerns a source convention along the **ideal, closed five-species reaction network**, not lossless capture, measured mass, or energy.
+- All three modules imported into `DASHI.Chemistry.Everything`.
+
+### High-priority outstanding verification and source maximum cut
+
+| Gate | Required payment | Why it stays open |
+|---|---|---|
+| K0 | Agda kernel check for all 12 new modules, exact-head Chemistry.Everything and imports | No Agda/Nix toolchain in current execution runtime; static file fetch is not typechecking |
+| SI-01 | Instrument-calibrated power→energy integration and timing | `SI.Measurement` carries source/version/uncertainty fields but no measured run is supplied |
+| SI-02 | Real H2 flow measured as amount/time and converted to HHV chemical energy using attributed thermochemical source with uncertainty | Periodic-table identity/atomic mass is **not** the H2 heating value |
+| SI-03 | Tight unit-aware inequality with uncertainty interval propagation, storage delta and auxiliaries | Current proof assumes nonnegative losses and an exact source-provided energy equality |
+| AT-01 | Element identity + molecular species resolution for actual reactor products beyond H2O/H2/O2/CO2/CH4 | Existing network is selected ideal chemistry only |
+| AT-02 | Actual isotope/atomic weight convention for measured inventories and calibrated gas-flow-to-moles bridge | Existing abridged weights do not prove a gas-flow instrument conversion |
+| PH-01 | Real H2/O2 injection rates, generator load/speed and paired efficiency responses, including NOx/particulate uncertainty | Vendor/patent disclosures are not actual measurement certificates |
+| PH-02 | Source-selected CO2 capture/reactor conversion/heat/plasma and inventory trajectory, when the corresponding architecture exists | No source-specific apparatus proven |
+| IP-01 | 2026 patent grant number, claims, inventor and chain of assignment | Corporate narratives alone do not identify a legally operative claim |
+| V-01 | Independent scientific, legal and kernel-verification receipts | The formal code cannot confer those on itself |
+
+### Absolute negative controls
+
+- Dimensional validity does not imply accuracy of measurement or physical process identity.
+- `AtomicIndex` identifies proton number, and `ElementEquivalent` does not imply neutron/isotope equivalence.
+- The Prohaska rounded standard atomic-weight convention must never be promoted into an exact single-isotope mass or into a fuel enthalpy.
+- Reaction balance is neither reaction feasibility nor demonstrated reactor performance.
+- Hydrogen may change flame kinetics yet its chemical energy input cannot be erased as a 'catalyst'.
+- Source code, independent checker run, empirical reproducibility and patent title remain disjoint provenance receipts.
