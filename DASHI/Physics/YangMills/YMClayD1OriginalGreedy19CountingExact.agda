@@ -8,7 +8,7 @@ module DASHI.Physics.YangMills.YMClayD1OriginalGreedy19CountingExact where
 -- of lists containing duplicates, and is NOT a physical Gibbs estimate.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 open import Data.Nat.Properties using (≤-trans; ≤-refl; +-mono-≤)
