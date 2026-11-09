@@ -75,3 +75,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalLinkStarFiniteNeighbourGraphExact
 
 -- Canonical original-positive-bond deduplication: maximal independent greedy selection, set-cardinality 19 bound conditional on real degree-18.
 import DASHI.Physics.YangMills.YMClayD1OriginalMarkedLinkDedupExact as D1OriginalMarkedLinkDedup
+
+-- E1/A3: original changing-cutoff all-word Wilson values depend only on finite ACTUAL signed-path positive-link support.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalAllWordPathSupportExtensionalExact as E1A3AllWordSupport
