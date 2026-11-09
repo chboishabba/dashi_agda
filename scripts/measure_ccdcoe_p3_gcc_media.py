@@ -58,6 +58,8 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
     if focus not in FRAMES - {"other_or_undetermined"}:
         raise ValueError("Invalid substantive frame")
     seen = set()
+    seen_originals = set()
+    outlet_arms = {}
     cells: dict[tuple[str,str], list[bool]] = {
         (arm,period):[] for arm in ARMS for period in PERIODS}
     outlets: dict[tuple[str,str], set[str]] = {
@@ -77,11 +79,20 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
             raise ValueError("Only original full-text reviewed observations admitted")
         if not row["coder_id"] or not row["outlet"]:
             raise ValueError("Coder/outlet required")
+        assigned_arm = outlet_arms.setdefault(row["outlet"], row["treatment"])
+        if assigned_arm != row["treatment"]:
+            raise ValueError("Same outlet assigned to both treatment and comparison arms")
         digest = row["source_sha256"]
         if not isinstance(digest,str) or len(digest)!=64 or any(
             c not in "0123456789abcdef" for c in digest):
             raise ValueError("Original document SHA256 required")
         if not synthetic_fixture:
+            # Document identity is not the submitter's arbitrary row ID.
+            # The same original byte stream cannot be counted twice,
+            # including in different treatment or period cells.
+            if digest in seen_originals:
+                raise ValueError("Duplicate original bytes counted as separate articles")
+            seen_originals.add(digest)
             if "SYNTHETIC" in str(row["review_receipt"]).upper():
                 raise ValueError("Synthetic reviewer receipt not admissible")
             rel = Path(str(row["source_file"]))
@@ -134,6 +145,7 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
             "counts":counts,
             "descriptive_difference_in_differences":round(descriptive_did,6),
             "causal_attribution":"NOT_IDENTIFIED",
+            "historical_original_authenticity_established":False,
             "limitations":["Sampling frame selection has not been validated by this code",
                            "The treatment contrast can be confounded by concurrent events",
                            "Article clustering/outlet dependence not addressed by Wilson intervals",
@@ -202,6 +214,32 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("Traversing source path incorrectly admitted")
+    # The same source may support several claims, but it cannot be
+    # recounted as two independent original articles in a frame denominator.
+    with tempfile.TemporaryDirectory() as td:
+        root = Path(td)
+        for row in synthetic:
+            (root / row["source_file"]).write_bytes(row["id"].encode())
+        duplicate = [dict(x) for x in synthetic]
+        duplicate[1]["source_sha256"] = duplicate[0]["source_sha256"]
+        duplicate[1]["source_file"] = duplicate[0]["source_file"]
+        try:
+            analyse(duplicate, "science_uncertainty", "1993-01-01",
+                    "LOCAL-FIXTURE-DATE-RECEIPT", source_root=root)
+        except ValueError as e:
+            assert "Duplicate original bytes" in str(e)
+        else:
+            raise AssertionError("Recounted original article was admitted")
+        arms = [dict(x) for x in synthetic]
+        # One outlet across both arms is a contaminated comparison.
+        arms[0]["outlet"] = arms[-1]["outlet"]
+        try:
+            analyse(arms, "science_uncertainty", "1993-01-01",
+                    "LOCAL-FIXTURE-DATE-RECEIPT", source_root=root)
+        except ValueError as e:
+            assert "both treatment and comparison arms" in str(e)
+        else:
+            raise AssertionError("Contradictory outlet arm accepted")
     print("PASS: synthetic 2x2 descriptives, Wilson limits, no-causality, missing-cell, review, digest and path guards")
 
 def main() -> None:
