@@ -454,3 +454,71 @@ original369LocatedNativeSignedHistoryContinuity observer actions state =
   cong₂ Ionic.integerSignedCharge
     (allLocatedNativeHistoriesPositiveBalance observer actions state)
     (allLocatedNativeHistoriesNegativeBalance observer actions state)
+
+
+------------------------------------------------------------------------
+-- REMOVE MANUAL VOXEL ROLE EVIDENCE: stdlib decidable Fin equality
+-- assigns source, target or spectator at EVERY original voxel.
+-- No classical choice, no 27-case hardcoding, no unconstrained edge.
+------------------------------------------------------------------------
+
+import Data.Fin.Properties as FinProps
+import Relation.Nullary as Nullary
+
+classifyOriginalNativeVoxel :
+  (action : OriginalSignedNativeBondAction) →
+  (observer : F.Fin 27) →
+  Native.NativeVoxelRole (signedNativeBond action) observer
+classifyOriginalNativeVoxel action observer
+  with FinProps._≟_ (Native.nativeDirectedSource (signedNativeBond action))
+         observer
+... | Nullary.yes sourceProof = Native.atNativeSource sourceProof
+... | Nullary.no sourceDifferent
+  with FinProps._≟_ (Native.nativeDirectedTarget (signedNativeBond action))
+         observer
+...   | Nullary.yes targetProof = Native.atNativeTarget targetProof
+...   | Nullary.no targetDifferent =
+  Native.offNativeEndpoints sourceDifferent targetDifferent
+
+locateEveryOriginalNativeEvent :
+  (observer : F.Fin 27) →
+  List OriginalSignedNativeBondAction →
+  List (LocatedSignedNativeAction observer)
+locateEveryOriginalNativeEvent observer [] = []
+locateEveryOriginalNativeEvent observer (action ∷ rest) =
+  located-signed-native-action action
+    (classifyOriginalNativeVoxel action observer)
+    ∷ locateEveryOriginalNativeEvent observer rest
+
+-- Final per-voxel integer current balance for any chronological
+-- original signed-bond history, with role classification constructed
+-- from original source/target indices rather than supplied by caller.
+original369AllVoxelNativeSignedHistoryContinuity :
+  (observer : F.Fin 27)
+  (actions : List OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) →
+  Ionic.integerSignedCharge
+    (positiveAtVoxel observer
+      (finalNativeIons (runLocatedSignedNativeHistory observer
+        (locateEveryOriginalNativeEvent observer actions) state))
+      + cumulativePositiveOut
+        (runLocatedSignedNativeHistory observer
+          (locateEveryOriginalNativeEvent observer actions) state))
+    (negativeAtVoxel observer
+      (finalNativeIons (runLocatedSignedNativeHistory observer
+        (locateEveryOriginalNativeEvent observer actions) state))
+      + cumulativeNegativeOut
+        (runLocatedSignedNativeHistory observer
+          (locateEveryOriginalNativeEvent observer actions) state))
+    ≡ Ionic.integerSignedCharge
+      (positiveAtVoxel observer state
+        + cumulativePositiveIn
+          (runLocatedSignedNativeHistory observer
+            (locateEveryOriginalNativeEvent observer actions) state))
+      (negativeAtVoxel observer state
+        + cumulativeNegativeIn
+          (runLocatedSignedNativeHistory observer
+            (locateEveryOriginalNativeEvent observer actions) state))
+original369AllVoxelNativeSignedHistoryContinuity observer actions state =
+  original369LocatedNativeSignedHistoryContinuity observer
+    (locateEveryOriginalNativeEvent observer actions) state
