@@ -35,8 +35,8 @@ dashiTRADE comparison: `scripts/phase07_eigen_boundary_check.py` uses action/tra
 ### Phase A — exact finite carrier [P0 maximum cut]
 
 A1 `finiteGramPositiveSemidefinite`: IMPLEMENTED as theorem conditional on finite-sum laws; kernel check PENDING.
-A2 `sampleCovarianceIsGramQuadratic`: PARTIAL. `PNFFiniteGramPositiveExact.gramQuadratic` is an explicitly finite sum of squares, and `finiteMatrixGramPositiveSemidefinite` derives its nonnegativity by actual finite-sum induction using the stated positive-cone laws. The equality with the same source-normalized centred sample covariance matrix remains OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
-A3 `sampleCovarianceSymmetric`: PARTIAL. `PNFFiniteCovarianceEconomicsExact.sampleGramSymmetric` proves symmetry of the unscaled finite row Gram matrix using the canonical finite-sum and ring machinery; centring/source scaling remains OPEN. Derive symmetry from that actual construction, rather than supplying it as a field.
+A2 `sampleCovarianceIsGramQuadratic`: PARTIAL. `PNFCentredCovarianceExact` now constructs centred finite rows from the same input matrix and source-specific column means; `scaledCovariance` and `scaledGramQuadratic` reuse that centred matrix with the same explicit scale. Still OPEN: actual mean=sum/n and scale=1/(n−1), a same-operator quadratic identity, and source-owned data receipt. Previously: `PNFFiniteGramPositiveExact.gramQuadratic` is an explicitly finite sum of squares, and `finiteMatrixGramPositiveSemidefinite` derives its nonnegativity by actual finite-sum induction using the stated positive-cone laws. The equality with the same source-normalized centred sample covariance matrix remains OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
+A3 `sampleCovarianceSymmetric`: WRITTEN FOR CENTRED SCALED FINITE MATRIX, KERNEL UNVERIFIED. `PNFCentredCovarianceExact.scaledCovarianceSymmetric` composes finite Gram symmetry with scalar multiplication. Previously: `PNFFiniteCovarianceEconomicsExact.sampleGramSymmetric` proves symmetry of the unscaled finite row Gram matrix using the canonical finite-sum and ring machinery; centring/source scaling remains OPEN. Derive symmetry from that actual construction, rather than supplying it as a field.
 A4 `sampleCovarianceRankBound`: OPEN. Choose existing in-repo finite linear algebra, prove rank(C)≤min(p,n−1) for the *same centred matrix*.
 A5 `sampleCovarianceForcedZeroMultiplicity`: OPEN. Derive max(0,p−n+1) zero eigenvalues from A4 and an actual spectral theorem.
 A6 `correlationDiagonalAndTrace`: OPEN. Connect standardisation to Cᵢᵢ=1 and tr(C)=p, with nonconstant column assumptions.
@@ -113,7 +113,7 @@ The reel (00:00–00:55) asserts: (ECO-S1) most patterns in S&P 500 sample corre
 ### Phase F — economics / quantitative-finance research [P1–P3; independent of PNF semantic promotion]
 
 F1 `stockReturnsCorrelationSameWindow`: OPEN. Explicit asset universe, return convention, missing observations, corporate actions, survival bias, and chronology.
-F2 `equicorrelationPopulationSpectrum`: PARTIAL. `PNFFiniteCovarianceEconomicsExact` supplies `equiOperator`, `equiZeroSumEigen`, `equiMarketEigen`, `sumConstantOne`, and `equiZeroCorrelationIsIdentity` (Agda kernel check PENDING). Remaining: simplify (1−ρ)+ρp to 1+(p−1)ρ with a correct finite-dimensional scalar injection; establish residual eigenspace dimension p−1, orthogonal eigenspace decomposition, and PSD condition −1/(p−1)≤ρ≤1 for p>1. Derive for p assets with common off-diagonal correlation r the eigenvalues 1+(p−1)r and 1−r (multiplicity p−1), including PSD constraints and correct r→0 and p/T→0 interpretations. This provides exact algebraic meaning to the reel's final 'drop correlation' illustration, without confusing finite-sample MP with population spectra.
+F2 `equicorrelationPopulationSpectrum`: PARTIAL. The exact market-eigenvalue equality `marketEigenvalueClosedForm` and `equiMarketEigenClosedForm` are now written, yielding 1+(p−1)ρ for p=suc k. Residual eigenvalue 1−ρ is proven as an eigenvector identity for sum-zero vectors, conditional only on the existing exact ring carrier. Multiplicity p−1, orthogonality and PSD parameter range are still OPEN (kernel unverified). Previously: `PNFFiniteCovarianceEconomicsExact` supplies `equiOperator`, `equiZeroSumEigen`, `equiMarketEigen`, `sumConstantOne`, and `equiZeroCorrelationIsIdentity` (Agda kernel check PENDING). Remaining: simplify (1−ρ)+ρp to 1+(p−1)ρ with a correct finite-dimensional scalar injection; establish residual eigenspace dimension p−1, orthogonal eigenspace decomposition, and PSD condition −1/(p−1)≤ρ≤1 for p>1. Derive for p assets with common off-diagonal correlation r the eigenvalues 1+(p−1)r and 1−r (multiplicity p−1), including PSD constraints and correct r→0 and p/T→0 interpretations. This provides exact algebraic meaning to the reel's final 'drop correlation' illustration, without confusing finite-sample MP with population spectra.
 F3 `independentReturnsNullSpectralCalibration`: OPEN. Compare iid MP, time-shuffled, block-shuffled and volatility-preserving controls; distinguish sample-vs-population statements and edge uncertainty.
 F4 `marketAndSectorModeIdentification`: OPEN. Determine whether empirical outliers map to broad market/sector exposures using independent sector labels and factor-model diagnostics, not merely large eigenvalues.
 F5 `economicCovarianceCleaningPreservesPSD`: OPEN. With a nonnegative spectral filter prove PSD of the reconstructed covariance; verify re-scaling/diagonal restoration where correlation matrices are required.
@@ -142,3 +142,23 @@ Committed to PR #1480:
 **Verification:** These are authored Agda proof terms in a GitHub draft PR. Agda executable was not available in the current environment. Do not call them kernel-checked or promote unverified types/identities. The full finite spectral decomposition, correlation normalisation, MP probability law, original numerical PNF evidence and economic outcomes remain open.
 
 **Priority refinement:** the exact source-indexed and normalised covariance construction A2 is the common blocker to both PNF and finance. F2's market/residual eigenvector laws do NOT establish sector modes, distributional MP predictions, or empirical financial factor interpretation. Follow with A4 rank and B1–B5 formal real-measure interface. Keep the economic F6–F11 walk-forward ledger independent of PNF semantic authority.
+
+## 7. Follow-on exact finite cut
+
+New source: `DASHI/Information/PNFCentredCovarianceExact.agda` constructs a centred matrix from explicitly supplied raw data/column mean, symmetric scaled covariance and PSD of the *scaled sum-of-squares* quadratic for a nonnegative scale. This is not yet the proof equating the quadratic with `vᵀCv` for the operator `scaledCovariance`; finish via finite-sum reordering/distributivity. It also does not establish that supplied means are true sample means.
+
+New equations in `PNFFiniteCovarianceEconomicsExact.agda`:
+- `marketEigenvalueClosedForm` derives (1−ρ)+ρp=1+(p−1)ρ for p≥1.
+- `equiMarketEigenClosedForm` transports this to the all-ones eigenvector.
+- `equiZeroSumEigen` gives eigenvalue 1−ρ for every zero-sum vector.
+- `equiZeroCorrelationIsIdentity` proves the population rho=0 operator identity. **This is not convergence of finite-sample spectra to 1.**
+
+Next maximum-cut leaves, in order:
+1. P0 `kernelAcceptsPNFFiniteCovarianceEconomicsExact`, `kernelAcceptsPNFFiniteGramPositiveExact`, `kernelAcceptsPNFCentredCovarianceExact` — actual Agda 2.9 compilation and source/API repairs.
+2. P0 `sampleMeanDefiningEquation`, `positiveUnbiasedScale`, `scaledCovarianceQuadraticEqualsScaledGramQuadratic` — finish same-object covariance PSD, not just two separately positive definitions.
+3. P0 `equiResidualSpaceDimension`, `equiPopulationPSDRange` — complete F2 including finite dimension and rho constraints.
+4. P1 `mpVarianceAspectExact`, `mpEdgeOrderDerived`, `mpZeroAtomAndNormalization` — real carrier and probability law.
+5. P1 `empiricalPNFNullSpecific`, `independentEconomicNullSpecific` — two separately paid scientific models.
+6. P2 `originalPNFRebuildAndSpectralReplay`, `economicOutOfSampleRiskAblation` — actual data receipts, independent semantic/economic outcomes.
+
+No testing, market claims or historical PNF covariance assertions were invented from the finite algebra.
