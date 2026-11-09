@@ -76,3 +76,16 @@ record CleanedOperatorEquality
       operatorQuadratic v ≡ spectrallyCleanedQuadratic K F v
 
 open CleanedOperatorEquality public
+
+cleanedOperatorPositiveSemidefinite :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : ExistingPSD.FiniteGramOrderAuthority K) →
+  {m : Nat} → (F : FilteredFiniteSpectrum K m) →
+  (E : CleanedOperatorEquality K F) →
+  (v : FilteredFiniteSpectrum.Vector F) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (CleanedOperatorEquality.operatorQuadratic E v)
+cleanedOperatorPositiveSemidefinite K O F E v
+  rewrite CleanedOperatorEquality.quadraticEqualsFiltered E v =
+  nonnegativeSpectralFilterPreservesPSD K O F v
