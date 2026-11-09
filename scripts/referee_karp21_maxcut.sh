@@ -66,6 +66,11 @@ python3 scripts/check_karp21_gamma_binary_native_signed.py
 python3 scripts/check_karp21_native_bitword_sparse_verifier.py
 python3 scripts/check_karp21_finfree_word_comparison_bound.py
 python3 scripts/check_karp21_finfree_raw_primitive_comparisons.py
+# Native gamma, binary addition, signed ledger and threshold regressions.
+python3 scripts/check_karp21_signed_gamma_allwords.py
+python3 scripts/check_karp21_binary_native_ripple.py
+python3 scripts/check_karp21_native_signed_ledger.py
+python3 scripts/check_karp21_binary_native_threshold.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
@@ -125,6 +130,12 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeAllWordNumericalWeldExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeAllWordValidityExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedAllWordValidityExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedInspectionClockExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeRippleAdderExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeRippleAdderValueExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedLedgerExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeThresholdExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
