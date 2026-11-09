@@ -29,6 +29,8 @@ import DASHI.Analysis.BishopOriginalExpOriginDividedDifferenceSeriesExact as Ori
 import DASHI.Analysis.BishopOriginalExpOriginDerivativeClosedExact as ExpClosed
 import DASHI.Foundations.BishopExponentialNonnegativeMonotoneExact as ExpMono
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as PositiveUnit
+open import Data.Rational.Unnormalised using (1ℚᵘ)
 
 originalShiftedFactorialExpQuotientUniformModulus :
   (radius : R.ℝ) →
@@ -77,3 +79,56 @@ originalNegativeLogShiftedFactorialUniformModulus
     (Explicit.originalSourceNegativeLogIncrement
       stage x h)
     deltaInside
+
+------------------------------------------------------------------------
+-- Uniform control of the original *whole quotient*, not only its
+-- first-order defect:
+--
+-- |Q(u)| <= exp_B(rho)  whenever |u|<=rho and rho>=0.
+--
+-- This is obtained by the literal identity Q=(Q-1)+1 and the
+-- already established source |Q-1| bound; no additional series.
+------------------------------------------------------------------------
+
+originalShiftedFactorialAbsoluteBelowExpBall :
+  (radius : R.ℝ) →
+  (radiusNN : R.NonNegative radius) →
+  (u : R.ℝ) →
+  R._≤_ (R.∣ u ∣) radius →
+  R._≤_
+    (R.∣ Origin.originalExpOriginQuotient u ∣)
+    (Exp.bishopExp radius)
+originalShiftedFactorialAbsoluteBelowExpBall
+    radius radiusNN u inside =
+  let
+    q = Origin.originalExpOriginQuotient u
+    e = Exp.bishopExp radius
+    oneNN = RP.0≤x⇒nonNegx
+      (RP.<⇒≤ PositiveUnit.onePositive)
+    open RP.ℝ-Solver
+    splitQ =
+      solve 1
+        (λ qq →
+          qq ⊜ (qq ⊖ Κ 1ℚᵘ) ⊕ Κ 1ℚᵘ)
+        RP.≃-refl q
+    upper =
+      RP.≤-trans
+        (RP.∣x+y∣≤∣x∣+∣y∣
+          (R._-_ q R.1ℝ) R.1ℝ)
+        (RP.+-mono-≤
+          (originalShiftedFactorialExpQuotientUniformModulus
+            radius radiusNN u inside)
+          RP.≤-refl)
+    target =
+      RP.≃-trans
+        (RP.+-cong
+          RP.≃-refl
+          (RP.nonNegx⇒∣x∣≃x oneNN))
+        (solve 1
+          (λ ee →
+            (ee ⊖ Κ 1ℚᵘ) ⊕ Κ 1ℚᵘ ⊜ ee)
+          RP.≃-refl e)
+  in
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong splitQ)
+    (RP.≤-respʳ-≃ target upper)
