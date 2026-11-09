@@ -47,24 +47,21 @@ open NativeWholeBinaryGraph public
 readBinaryRawEdgesFuel :
   Nat → Word.BitWord → Word.BitWord →
   Maybe (List Edge.BinaryRawEdge × Word.BitWord)
-readBinaryRawEdgesFuel fuel mLE word
+readBinaryRawEdgesFuel zero mLE word
   with Positive.anyOne mLE
 ... | false = just ([] , word)
-... | true = readPositiveBinaryRawEdgesFuel fuel mLE word
-  where
-    readPositiveBinaryRawEdgesFuel :
-      Nat → Word.BitWord → Word.BitWord →
-      Maybe (List Edge.BinaryRawEdge × Word.BitWord)
-    readPositiveBinaryRawEdgesFuel zero mLE word = nothing
-    readPositiveBinaryRawEdgesFuel (suc remainingFuel) mLE word
-      with Edge.readOneBinaryRawEdge word
-    ... | nothing = nothing
-    ... | just (edge , rest)
-      with readBinaryRawEdgesFuel remainingFuel
-        (Positive.predecessorLE mLE) rest
-    ... | nothing = nothing
-    ... | just (edges , suffix) =
-      just (edge ∷ edges , suffix)
+... | true = nothing
+readBinaryRawEdgesFuel (suc remainingFuel) mLE word
+  with Positive.anyOne mLE
+... | false = just ([] , word)
+... | true with Edge.readOneBinaryRawEdge word
+... | nothing = nothing
+... | just (edge , rest)
+  with readBinaryRawEdgesFuel remainingFuel
+    (Positive.predecessorLE mLE) rest
+... | nothing = nothing
+... | just (edges , suffix) =
+  just (edge ∷ edges , suffix)
 
 -- The whole original source grammar, with every potentially
 -- enormous source gamma address/count kept as a native binary word.
