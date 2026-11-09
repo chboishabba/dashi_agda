@@ -410,3 +410,29 @@ Latest status: source-written on the existing PR branch, no K0 or K4 work reques
 All new Agda declarations are source-written and NOT kernel-checked. K0/K4 deliberately excluded. **Do not repeat generic no-factorisation theory or create unearned empirical receipts.**
 
 **Attribution refinement:** `CrenshawHistoricalCarceralSourceAtlasExact.agda` now separately preserves the original 2015 publisher byline (“By Kimberlé Williams Crenshaw / with Priscilla Ocen and Jyoti Nanda”) and Columbia's indexed three-contributor catalogue surface. The two metadata views have different provenance and must not be flattened into a claim about credit beyond their own sources. This is a provenance correction, not empirical validation.
+
+## Twelfth implementation pass — report-specific numeric claims and original CRDC discovery
+
+**Scope K1–K3 only**; K0, K4, DOCX explicitly excluded.
+
+**New committed Agda owners:**
+- `DASHI/Governance/BlackGirlsMatterPublishedDisciplineArithmeticExact.agda`: `bostonGirlsCasesElevenfoldPlusTen`, `newYorkGirlsCasesTenfoldPlus236`, `bostonBoysCasesSevenfoldPlus70`, `newYorkBoysCasesFivefoldPlus1118`, `bostonFemaleShareCrossProductGap`, `newYorkFemaleShareCrossProductGap`, `tableOneIsNotDisciplineFigurePeriod`, with an unfilled `OriginalCRDCWeld`.
+- `DASHI/Governance/BlackGirlsMatterExpulsionDenominatorExact.agda`: `newYorkWhiteGirlActualCountIsZero`, `bostonWhiteGirlActualCountIsZero`, `newYorkAuthorsHypotheticalFiftyThreeToOne`, `bostonAuthorsHypotheticalTenToOne`, `newYorkObservedExpulsionRatioBlocked`, `bostonObservedExpulsionRatioBlocked`.
+- `CrenshawLegalAttributionCapstoneExact.agda` now imports both: `bostonDisciplineCountSourceArithmetic`, `newYorkDisciplineCountSourceArithmetic`, `crossYearEnrollmentTableNotEquivalent`, `zeroObservedExpulsionDenominatorBlocksRatio`.
+
+**New original-source reproduction path:** `docs/roadmaps/2026-11-09-black-girls-matter-original-crdc-reproduction-contract.md` identifies the official 2011–12 Office for Civil Rights CRDC download directory, historical ZIP, data notes and definitions. Discovery is DONE; downloading original rows and source hash is **NOT DONE**. See https://ocrdata.ed.gov/data and https://www.ed.gov/laws-and-policy/civil-rights-laws/civil-rights-data-collection-crdc/civil-rights-data .
+
+**Primary 2015 report:** Columbia Law School posted PDF, pp.19–21 and appendix p.45. Reported Boston Black/white girls 340/30; NYC 9076/884; Boston boys 637/81; NYC boys 13823/2541. Rounded within-girl share cross-products and reporting-period mismatch preserve distinct units. NYC 53:1 and Boston 10:1 expulsion presentations are **illustrative one-count pseudodenominator comparisons** because zero white-girl expulsions were reported, not measured observed count ratios.
+
+**Important access limitation:** web PDF source text accessible and source page screenshot attempted, but screenshot failed due to 19MB content-length limit. No document-image authentication claimed. The original CRDC ZIP/data were not materialized. No source-specific observed individual probabilities, custody trajectories or epidemiological estimates claimed.
+
+**Outstanding high-alpha K1–K3 leaves:**
+1. `original2011CRDCReportRowSameDistrictYearIndicator`: official data bytes/hash; Boston/NYC LEA IDs; exactly selected disciplinary indicators and race-gender cell definitions; suppression/zero handling.
+2. `source2011EnrollmentDenominatorSamePopulation`: correct 2011–12 denominator, student versus episode definitions and same-source unit, not 2013–14 Table 1.
+3. `blackGirlsMatterActual2011DisparityReplication`: independently compute original aggregate records and compare to four published girls/boys figures, preserve any discrepancies and rounded figures.
+4. `whiteGirlZeroExpulsionCounterfactualBoundary`: source-written finite proof exists; to promote beyond report text verify original CRDC observation and whether zero is suppressed/missing, not inferred.
+5. `observedFatigueAndCapacitySameHistory`: genuine participant fatigue and temporal causal controls, no inferences from discipline totals.
+6. `crenshawLegalAuthenticatedPrimaryIssue`: original opinion text digest, issue/source stage and authorial majority/dissent attribution.
+7. `historicalCarceralSamePersonMechanism`: source-paid longitudinal trace and historical mechanism; 2011–12 disciplinary cross-section alone cannot pay it.
+
+**Attribution:** reported numbers belong to the 2015 report authors and AAPF/CISPS; original data ownership to U.S. Department of Education OCR; algebraic identity proofs are DASHI original. Neither mathematical witness nor document title creates empirical authority.
