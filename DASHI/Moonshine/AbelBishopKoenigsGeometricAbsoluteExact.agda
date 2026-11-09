@@ -24,7 +24,7 @@ import DASHI.Moonshine.AbelBishopKoenigsComponentwiseCompletionExact as Completi
 
 record OriginalBishopGeometricComponentBounds
     (terms : Nat → Complex.BishopComplex)
-    (constant ratio : Bishop.ℝ) : Set where
+    (constant ratio : Bishop.ℝ) : Set₁ where
   field
     geometricInputs :
       Geom.BishopScaledGeometricInputs constant ratio
