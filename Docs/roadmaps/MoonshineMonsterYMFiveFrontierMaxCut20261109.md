@@ -65,7 +65,7 @@ Use actual Dong–Griess–Lam published uniqueness hypothesis alternatives and 
 
 ## Yang–Mills: authoritative physical 23-producer / PH0–PH4 ledger
 
-**Canonical full detail:** [YMClay23PhysicalProducersCurrentMaxCut20261109.md](../physics/YMClay23PhysicalProducersCurrentMaxCut20261109.md) on **PR #1444**. The YM ledger names 23 concrete physical producer IDs, more precise than this five-frontier summary. These are *proposed exact obligations* (not verified source declaration names). No term below is promoted from a conditional interface.
+**Canonical full detail:** [YMClay23PhysicalProducersCurrentMaxCut20261109.md](https://github.com/chboishabba/dashi_agda/blob/research/ym-voyager2026-completeness-crosswalk-20261101/Docs/physics/YMClay23PhysicalProducersCurrentMaxCut20261109.md) on **PR #1444**. The YM ledger names 23 concrete physical producer IDs, more precise than this five-frontier summary. These are *proposed exact obligations* (not verified source declaration names). No term below is promoted from a conditional interface.
 
 ### E1 — 7 exact obligations (PH0/PH1/PH3)
 
