@@ -6,7 +6,7 @@ module DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact whe
 -- No uniform decay or continuum convergence is asserted.
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 1ℝ; _*ℝ_; _-ℝ_)
@@ -17,6 +17,8 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as Haar
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
+import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
+import DASHI.Physics.YangMills.YMClayD1OriginalPeriodicPlaquetteFourBondSupportExact as FourBond
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Wilson
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Jet
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
@@ -34,6 +36,36 @@ module _
 
   PlaquetteWord : Nat → Set
   PlaquetteWord n = List (Plaquette.PeriodicPlaquette n)
+
+
+  -- SOURCE EXACT: every literal original Wilson word carries its
+  -- original four-positive-bond plaquette dependency lists. No
+  -- alternative geometry or synthetic observables are constructed.
+  originalWordPositiveBondSupports :
+    (n : Nat) → PlaquetteWord n →
+    List (List (Torus.PositiveBond (suc n)))
+  originalWordPositiveBondSupports n [] = []
+  originalWordPositiveBondSupports n (p ∷ rest) =
+    FourBond.originalFourPositiveBonds p ∷
+    originalWordPositiveBondSupports n rest
+
+  data EveryOriginalPlaquetteHasFour {A : Set} :
+    List (List A) → Set where
+    emptySupport : EveryOriginalPlaquetteHasFour []
+    appendFour :
+      ∀ {head tail} →
+      FourBond.length head ≡ 4 →
+      EveryOriginalPlaquetteHasFour tail →
+      EveryOriginalPlaquetteHasFour (head ∷ tail)
+
+  originalWordAllPositiveBondSupportsHaveFour :
+    (n : Nat) (word : PlaquetteWord n) →
+    EveryOriginalPlaquetteHasFour
+      (originalWordPositiveBondSupports n word)
+  originalWordAllPositiveBondSupportsHaveFour n [] = emptySupport
+  originalWordAllPositiveBondSupportsHaveFour n (p ∷ rest) =
+    appendFour (FourBond.originalPlaquetteReadsExactlyFourBondSlots p)
+      (originalWordAllPositiveBondSupportsHaveFour n rest)
 
   originalWordObservable :
     (n : Nat) → PlaquetteWord n →
