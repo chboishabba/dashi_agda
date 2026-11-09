@@ -23,6 +23,7 @@ done
 
 python3 scripts/check_bh4_allocator_future_observer.py
 python3 scripts/check_bh4_spatial_circulation.py
+python3 scripts/check_bh4_shared_redox_dynamics.py
 python3 scripts/check_bh4_spatial_measurement_payment.py --self-test
 
 if [ ! -f scripts/run_agda29_parallel_check.sh ]; then
