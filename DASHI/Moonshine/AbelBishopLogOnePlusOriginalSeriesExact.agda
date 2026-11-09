@@ -99,3 +99,24 @@ originalBishopLogOnePlusSeriesConverges w absolute =
   Complex.complexSeriesLimitConvergence
     (originalBishopLogOnePlusTerm w)
     absolute
+
+
+-- An independently proposed Bishop limit must agree with this canonical
+-- concrete series limit, using Murray/Bishop uniqueness rather than a
+-- new chosen "log" authority field.
+originalBishopLogOnePlusSeriesLimitUnique :
+  (w : Complex.BishopComplex) →
+  (absolute : Complex.ComponentwiseAbsoluteSeriesConvergent
+    (originalBishopLogOnePlusTerm w)) →
+  (other : Complex.BishopComplex) →
+  Complex.ComplexSeriesConvergesTo
+    (originalBishopLogOnePlusTerm w) other →
+  Complex._≈C_
+    (originalBishopLogOnePlusSeriesValue w absolute)
+    other
+originalBishopLogOnePlusSeriesLimitUnique w absolute other convergence =
+  Complex.complexSeriesLimitUnique
+    (originalBishopLogOnePlusTerm w)
+    absolute
+    other
+    convergence
