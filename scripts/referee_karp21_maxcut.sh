@@ -80,6 +80,7 @@ python3 scripts/check_karp21_fractran_n21_edge.py
 python3 scripts/check_karp21_fractran_original_raw_trace.py
 python3 scripts/check_karp21_native_two_lane_raw_score.py
 python3 scripts/check_karp21_native_comparator_exact.py
+python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
 
