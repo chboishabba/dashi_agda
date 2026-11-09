@@ -285,3 +285,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact
 -- Actual native signed token ℤ value matches original zigzag value on complete original gamma frames.
 -- Still requires all-word successful-frame lifting and original raw-edge stream alignment.
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact
+
+-- Actual native gamma successful-frame decomposition: exact zero prefix, consumed payload count and suffix.
+-- Feeds all-word original/native signed integer representation agreement.
+import DASHI.Mathematics.Complexity.Karp21SignedGammaAllWordFrameExtractionExact
