@@ -157,3 +157,68 @@ def test_original_inventory_negative_nonfinite_and_shape(monkeypatch):
         Adapter.check_original_closed_inventory(source,sha,a,a[:26])
     with pytest.raises(ValueError):
         Adapter.check_original_closed_inventory(source,sha,a,a,atol=float("inf"))
+
+
+def test_source_bound_one_step_same_state_candidate(monkeypatch):
+    source, sha, manifest, species, reactions = fixture(monkeypatch)
+    before = np.ones((27,29))
+    called = []
+    def synthetic_solver(c, dt, model, rtol):
+        called.append((dt, c.shape, model.reactants.shape, rtol))
+        return c.copy(), {
+            "numerical_residual_max": 0.0,
+            "free_energy_before": 0.0,
+            "free_energy_after": 0.0,
+            "charge_defect": 0.0,
+            "minimum_concentration": 1.0,
+            "poisson_residual_max": 0.0,
+            "transport_power": 0.0,
+            "reaction_power": 0.0,
+        }
+    monkeypatch.setattr(Adapter, "implicit_step", synthetic_solver)
+    after, receipt = Adapter.source_bound_closed_implicit_step(
+        source, manifest, pinned_sha256=sha,
+        initial_concentrations=before, dt=0.01)
+    assert np.array_equal(after, before)
+    assert called == [(0.01, (27,29), (12,29), 1e-8)]
+    assert receipt["source_bound_same_step"]
+    assert receipt["source_inventory_audit"]["max_inventory_defect"] == 0.0
+    assert not receipt["physical_one_step_agda_proven"]
+    assert not receipt["original_parameters_independently_authenticated"]
+
+
+def test_same_step_receipt_rejects_nonfinite_or_missing_diagnostics(monkeypatch):
+    source, sha, manifest, species, reactions = fixture(monkeypatch)
+    before = np.ones((27,29))
+    good = {
+        "numerical_residual_max": 0.0,
+        "free_energy_before": 0.0,
+        "free_energy_after": 0.0,
+        "charge_defect": 0.0,
+        "minimum_concentration": 1.0,
+        "poisson_residual_max": 0.0,
+        "transport_power": 0.0,
+        "reaction_power": 0.0,
+    }
+    for key, value in (
+        ("free_energy_after", float("nan")),
+        ("numerical_residual_max", float("nan")),
+        ("transport_power", float("inf")),
+        ("poisson_residual_max", 0.1),
+        ("reaction_power", 0.01),
+        ("minimum_concentration", -1.0),
+    ):
+        diagnostics = dict(good); diagnostics[key] = value
+        monkeypatch.setattr(Adapter, "implicit_step",
+                            lambda *a, **k: (before.copy(), diagnostics))
+        with pytest.raises(ValueError):
+            Adapter.source_bound_closed_implicit_step(
+                source, manifest, pinned_sha256=sha,
+                initial_concentrations=before, dt=0.01)
+    diagnostics = dict(good); del diagnostics["charge_defect"]
+    monkeypatch.setattr(Adapter, "implicit_step",
+                        lambda *a, **k: (before.copy(), diagnostics))
+    with pytest.raises(ValueError):
+        Adapter.source_bound_closed_implicit_step(
+            source, manifest, pinned_sha256=sha,
+            initial_concentrations=before, dt=0.01)
