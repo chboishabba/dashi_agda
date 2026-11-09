@@ -174,3 +174,52 @@ originalDiscountedNumeratorCannotIdentifyConfidence =
     otherSourceContribution mwwAreaTenths 4 75 3 100
     (λ z → z * Source.powNat 1000 20)
     originalProductCollision seventyFiveIsNotHundred
+
+------------------------------------------------------------------------
+-- Full source-rational output, rather than only its numerator.
+-- The denominator is the source-selected vulnerable/listing,
+-- habitat-quantum and time-horizon denominator, held fixed.
+-- A tagged numerator/denominator is a mathematical model output, not
+-- an original signed workbook or an ecological field observation.
+------------------------------------------------------------------------
+
+record OriginalOAGFraction : Set where
+  constructor original-oag-fraction
+  field
+    numerator : Nat
+    denominator : Nat
+
+sourceFractionObservation : Nat → OriginalOAGFraction
+sourceFractionObservation coefficient =
+  original-oag-fraction
+    (coefficient * Source.powNat 1000 20)
+    jointDenominator
+
+jointFullFraction : Nat → Nat → OriginalOAGFraction
+jointFullFraction g c =
+  sourceFractionObservation (jointCoefficient g c)
+
+originalFullFractionCollision :
+  jointFullFraction 4 75 ≡ jointFullFraction 3 100
+originalFullFractionCollision = refl
+
+originalFullFractionCannotIdentifyGain :
+  (decode : OriginalOAGFraction → Nat) →
+  ((g c : Nat) → decode (jointFullFraction g c) ≡ g) → ⊥
+originalFullFractionCannotIdentifyGain =
+  Abstract.noGainDecoderAfterObservation
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    sourceFractionObservation originalProductCollision fourIsNotThree
+
+originalFullFractionCannotIdentifyConfidence :
+  (decode : OriginalOAGFraction → Nat) →
+  ((g c : Nat) → decode (jointFullFraction g c) ≡ c) → ⊥
+originalFullFractionCannotIdentifyConfidence =
+  Abstract.noConfidenceDecoderAfterObservation
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    sourceFractionObservation originalProductCollision seventyFiveIsNotHundred
+
+-- This type is deliberately only the historical JANUARY OAG model.
+-- No old-source fraction can serve as a received October workbook,
+-- proof of input selection, independent ecological success, or
+-- actual s95C/136 consideration.
