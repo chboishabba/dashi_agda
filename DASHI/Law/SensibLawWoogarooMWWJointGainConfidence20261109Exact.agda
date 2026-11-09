@@ -107,15 +107,22 @@ existingCommonGainReference = Existing.perPointExactly
 
 originalAndThreeAtHundredSameCoefficient :
   jointCoefficient 4 75 ≡ jointCoefficient 3 100
-originalAndThreeAtHundredSameCoefficient = refl
+originalAndThreeAtHundredSameCoefficient =
+  Abstract.sameProductSameAffine
+    otherSourceContribution mwwAreaTenths 4 75 3 100 refl
 
 originalAndFiveAtSixtySameCoefficient :
   jointCoefficient 4 75 ≡ jointCoefficient 5 60
-originalAndFiveAtSixtySameCoefficient = refl
+originalAndFiveAtSixtySameCoefficient =
+  Abstract.sameProductSameAffine
+    otherSourceContribution mwwAreaTenths 4 75 5 60 refl
 
 originalAndThreeAtHundredSameNumerator :
   jointNumerator 4 75 ≡ jointNumerator 3 100
-originalAndThreeAtHundredSameNumerator = refl
+originalAndThreeAtHundredSameNumerator =
+  Abstract.sameProductSameObservedOutput
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    (λ z → z * Source.powNat 1000 20) refl
 
 -- These witnesses defeat a universal inverse mapping from output
 -- coefficient to a unique quality gain or unique confidence.
@@ -201,7 +208,10 @@ jointFullFraction g c =
 
 originalFullFractionCollision :
   jointFullFraction 4 75 ≡ jointFullFraction 3 100
-originalFullFractionCollision = refl
+originalFullFractionCollision =
+  Abstract.sameProductSameObservedOutput
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    sourceFractionObservation originalProductCollision
 
 originalFullFractionCannotIdentifyGain :
   (decode : OriginalOAGFraction → Nat) →
