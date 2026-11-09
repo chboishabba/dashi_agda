@@ -109,8 +109,14 @@ module _
     Cumulant.literalMixedSecondLogDerivative
       (Jet.originalWilsonLiteralJetDirections
         theory traceData exponential beta oneLink bilateral divide n)
-      (originalWordObservable n left)
-      (originalWordObservable n right)
+      (Cumulant.sourceDirectionOf
+        (Jet.originalWilsonLiteralJetDirections
+          theory traceData exponential beta oneLink bilateral divide n)
+        (originalWordObservable n left))
+      (Cumulant.sourceDirectionOf
+        (Jet.originalWilsonLiteralJetDirections
+          theory traceData exponential beta oneLink bilateral divide n)
+        (originalWordObservable n right))
     ≡
     Wilson.originalWilsonConnectedCovariance
       theory traceData exponential beta oneLink bilateral divide n
