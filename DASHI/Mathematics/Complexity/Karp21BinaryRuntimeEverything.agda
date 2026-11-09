@@ -59,3 +59,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClock
 
 -- K05: original/native signed gamma all-word acceptance equivalence.
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedAllWordValidityExact
+
+-- K05: native ripple-carry sum and concrete linear inspection clock.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderExact
