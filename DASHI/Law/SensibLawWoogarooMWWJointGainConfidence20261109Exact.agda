@@ -153,3 +153,24 @@ originalCoefficientCannotIdentifyConfidence =
 
 -- Universal decoder failures above are instances of the abstract
 -- affine-product theorem, not separate project-specific proofs.
+
+-- The original 20-year deterministic discount does not recover
+-- either lost coordinate. The Nat numerator of the discounted OAG
+-- remains non-identifying even before dividing by its common denominator.
+originalDiscountedNumeratorCannotIdentifyGain :
+  (decode : Nat → Nat) →
+  ((g c : Nat) → decode (jointNumerator g c) ≡ g) → ⊥
+originalDiscountedNumeratorCannotIdentifyGain =
+  Abstract.noGainDecoderAfterObservation
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    (λ z → z * Source.powNat 1000 20)
+    originalProductCollision fourIsNotThree
+
+originalDiscountedNumeratorCannotIdentifyConfidence :
+  (decode : Nat → Nat) →
+  ((g c : Nat) → decode (jointNumerator g c) ≡ c) → ⊥
+originalDiscountedNumeratorCannotIdentifyConfidence =
+  Abstract.noConfidenceDecoderAfterObservation
+    otherSourceContribution mwwAreaTenths 4 75 3 100
+    (λ z → z * Source.powNat 1000 20)
+    originalProductCollision seventyFiveIsNotHundred
