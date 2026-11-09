@@ -18,6 +18,8 @@ import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.TernaryThirteenFibreSplitExact as Words
 import DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact as Source
 import DASHI.Foundations.TernaryThirteenFibrePunctureExact as Puncture
+import DASHI.Foundations.TernaryThirteenOriginalPantsFrontierBridgeExact as Pants
+import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import Base369 as Base
 
@@ -196,3 +198,38 @@ triadicPunctureGlue :
   ¬ (globalCentre (glueTriadic ab bc ca matching)
     ≡ Base.tri-mid)
 triadicPunctureGlue ab bc ca matching neq = neq
+
+------------------------------------------------------------------------
+-- Non-discrete triadic site -> original depth-13 pants frontier.
+------------------------------------------------------------------------
+
+originalTriadicGlueToPants :
+  (ab bc ca : PairChart) →
+  TriadicMatching ab bc ca → Frontier.PantsPath 13
+originalTriadicGlueToPants ab bc ca matching =
+  Pants.sourceCentralToPants13
+    (globalToSource (glueTriadic ab bc ca matching))
+
+originalTriadicPantsRecoverAtlas :
+  (ab bc ca : PairChart)
+  (matching : TriadicMatching ab bc ca)
+  (axis : Atlas.StageAtlasZeroToEleven) →
+  proj₁
+    (Pants.pants13ToSourceCentral
+      (originalTriadicGlueToPants ab bc ca matching))
+    axis
+  ≡ proj₁ (globalToSource (glueTriadic ab bc ca matching)) axis
+originalTriadicPantsRecoverAtlas ab bc ca matching axis =
+  Pants.sourcePantsRoundTripOnAxis
+    (globalToSource (glueTriadic ab bc ca matching)) axis
+
+originalTriadicPantsRecoverCentre :
+  (ab bc ca : PairChart)
+  (matching : TriadicMatching ab bc ca) →
+  proj₂
+    (Pants.pants13ToSourceCentral
+      (originalTriadicGlueToPants ab bc ca matching))
+  ≡ chartCentre ab
+originalTriadicPantsRecoverCentre ab bc ca matching =
+  Pants.sourcePantsRoundTripOnCentre
+    (globalToSource (glueTriadic ab bc ca matching))
