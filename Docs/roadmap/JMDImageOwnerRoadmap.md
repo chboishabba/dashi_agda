@@ -337,3 +337,31 @@ selective reopening with the existing ITIR gap script only.
 
 A generic conditional inverse-law theorem is NOT a proof that either
 translator preserves arbitrary declarations. No such claim is made.
+
+
+## 2026-11-09 correction — mathematical gap discovery is P0; translators are NOT P0
+
+**This ordering supersedes any round-trip-centric priority that appears in
+earlier sections.** The translator-specific roadmap in
+`agda2lean/docs/BIDIRECTIONAL_ROUNDTRIP_MAX_CUT.md` remains useful
+**inside that optional research lane**, but its R0–R6 is not the global
+DASHI mathematical-discovery priority.
+
+| Priority | Exact unpaid operational/lemma gate | Existing owner |
+|---|---|---|
+| **P0.1** | Run real source-index and declaration-identity reconciliations: admitted Lean repo IDs → pinned Lean declaration records, plus original Agda goal owners | `dashi_lean4` PR #105; `dashi-repo` |
+| **P0.2** | Join **source-extracted Lean theorem types** against **actual unpaid Agda and Lean obligations** without promoting names/QIDs/OEIS or candidate status to proof | `ITIR-suite/scripts/formal_gap_join.py`, existing `itir.formal.inspect/route`, Lean #78, `repo_requirements` |
+| **P0.3** | Output a deterministic source-pinned maximum cut: obligation, exact type, linked source candidate, dependency/axiom closure, priority/relatedness, failure/absence reason; no LLM | AO **gap-finding only**, `repo_refs`, ITIR formal tools |
+| **P1.1** | For selected matched Lean declarations, establish a *kernel-checked* exact theorem reuse or source-hypothesis-preserving implication in Lean | `dashi_lean4` `Integration/JMD/CertifiedWorld.lean` and `Agda2Lean.Manifest` |
+| **P1.2** | Preserve every independent proof's provenance; never merge theorem types based on source/ontology label alone | `ProofDebtRouterExact`, `CrossLaneProofArchaeologyLedgerExact`, Lean checked world |
+| **P2** | On actual declaration revision delta, selectively reopen dependent goals, leave unaffected proofs untouched | `DependencyDerivedMinimalInvalidationBidiExact`, source-hash delta script |
+| **P3** | Selected cross-language transfer **only when** an Agda consumer needs an already certified Lean theorem and a faithful translation is available | `agda2lean`, upstream `lean2agda` (read-only reference), original Agda owner |
+| **P4** | Broader Lean→Agda→Lean fixed-point benchmark and translator capability expansion | Separate `agda2lean` round-trip roadmap |
+
+**Immediate decisive demo:** take one original unpaid DASHI mathematical
+obligation, automatically discover its strongest existing **Lean** donor,
+produce a checked Lean implication/reuse, and show the proof debt reduced
+or a precise fail-closed residual. The current source-written scripts have
+not demonstrated this real end-to-end payment, and this document makes no
+claim that a source candidate is a theorem proof. The script may be called
+by an orchestrator; it neither invokes nor implements orchestration.
