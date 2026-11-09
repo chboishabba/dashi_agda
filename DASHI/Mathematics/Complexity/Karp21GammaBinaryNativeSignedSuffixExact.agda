@@ -71,10 +71,8 @@ nativeSignedSuffixEqualsNativeGamma word
   with Valid.scanGammaLeadingOne zero word numeral suffix refl
 ... | payload , refl
   with Valid.splitLastNonempty true payload
-... | (prefix , last) , equation rewrite equation
-  with last
-... | true = refl
-... | false = refl
+... | (prefix , true) , equation rewrite equation = refl
+... | (prefix , false) , equation rewrite equation = refl
 
 originalSignedSuffixEqualsOriginalGamma :
   (word : Word.BitWord) →
