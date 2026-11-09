@@ -21,7 +21,7 @@ LABELS=("B","BC","C")
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def load_seed(receipt_path,discard=50):
+def load_seed(receipt_path,discard=50,autocorrelation=True):
     receipt_path=Path(receipt_path).resolve()
     receipt=json.loads(receipt_path.read_text())
     label=receipt.get("structure")
@@ -39,11 +39,17 @@ def load_seed(receipt_path,discard=50):
     if not np.isfinite(values).all() or np.max(abs(values.imag))>1e-4:
         raise ValueError("non-finite or unexpectedly complex energy estimates")
     retained=values.real[discard:]
+    blocked=None
+    if autocorrelation:
+        from qcafqmc_autocorrelation_reblocking import blocking_estimate
+        blocked=blocking_estimate(retained)
     return {
       "label":label,
       "seed":receipt.get("seed"),
       "energy_mean_hartree":float(retained.mean()),
       "n_retained_blocks":len(retained),
+      "blocked_within_seed_SE_hartree":blocked["standard_error"] if blocked else None,
+      "blocking_tau_diagnostic":blocked["tau_int_lower_estimate"] if blocked else None,
       "geometry_sha256":receipt["geometry_sha256"],
       "trial_type":receipt.get("trial_type"),
       "hamiltonian_source_sha256":
@@ -52,12 +58,12 @@ def load_seed(receipt_path,discard=50):
       "receipt_sha256":sha(receipt_path)
     }
 
-def combine(receipt_files,discard=50):
-    records=[load_seed(x,discard) for x in receipt_files]
+def combine(receipt_files,discard=50,autocorrelation=True):
+    records=[load_seed(x,discard,autocorrelation) for x in receipt_files]
     grouped={x:[r for r in records if r["label"]==x] for x in LABELS}
     for label,rs in grouped.items():
-        if len(rs)<2:
-            raise ValueError(label+": need >=2 independent seed trajectories for reported SEM")
+        if len(rs)<3:
+            raise ValueError(label+": need >=3 independent seed trajectories for uncertainty diagnostic")
         ids=[r["seed"] for r in rs]
         if any(x is None for x in ids) or len(set(ids))!=len(ids):
             raise ValueError(label+": duplicate or unreported random seeds")
@@ -75,9 +81,14 @@ def combine(receipt_files,discard=50):
     moments={}
     for label,rs in grouped.items():
         numbers=np.array([r["energy_mean_hartree"] for r in rs])
+        seed_se=float(np.std(numbers,ddof=1)/np.sqrt(len(numbers)))
+        blocked_se=(float(np.sqrt(np.mean([r["blocked_within_seed_SE_hartree"]**2
+                               for r in rs])/len(rs))) if autocorrelation else 0.)
         moments[label]={
           "mean_hartree":float(np.mean(numbers)),
-          "standard_error_hartree":float(np.std(numbers,ddof=1)/np.sqrt(len(numbers))),
+          "standard_error_hartree":max(seed_se,blocked_se),
+          "independent_seed_SE_hartree":seed_se,
+          "within_seed_blocking_SE_hartree":blocked_se,
           "n_independent_seeds":len(numbers),
           "geometry_sha256":rs[0]["geometry_sha256"],
           "hamiltonian_source_sha256":rs[0]["hamiltonian_source_sha256"]
@@ -91,13 +102,13 @@ def combine(receipt_files,discard=50):
                 "delta_kcal_per_mol":float(d*KCAL_MOL_PER_HARTREE),
                 "SE_kcal_per_mol":float(error*KCAL_MOL_PER_HARTREE)}
     return {
-      "scope":"independent AFQMC run estimates, reblocked within seeds NOT presumed",
+      "scope":"independent AFQMC seed means with optional dyadic autocorrelation blocking",
       "trial_type":next(iter(trials.values())),
       "first_n_measured_blocks_discarded":discard,
       "per_geometry":moments,
       "activation_barrier":contrast("BC"),
       "reaction_energy":contrast("C"),
-      "statistical_caveat":"seed means should be autocorrelation-reblocked individually for tighter error control; multiple independent seeds required",
+      "statistical_caveat":"uncertainty diagnostic, not a validated confidence interval; blocking plateau and systematic biases unverified",
       "original_IonQ_energy_values_substituted":False,
       "records":records
     }
@@ -105,5 +116,7 @@ if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("receipts",nargs="+")
     p.add_argument("--discard",type=int,default=50)
+    p.add_argument("--no-autocorr",action="store_true",
+                   help="diagnostic-only: suppress within-seed blocking analysis")
     a=p.parse_args()
-    print(json.dumps(combine(a.receipts,a.discard),indent=2))
+    print(json.dumps(combine(a.receipts,a.discard,not a.no_autocorr),indent=2))
