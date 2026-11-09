@@ -130,3 +130,10 @@ Companion #1471 has source-written `OriginalDirectedNativeBond` (only genuine or
 **Source gate:** Lookup of `artifacts/biology/rhea-kitzerow-bh4-reactions.json` on this GitHub branch returned 404. Its absence from the tracked branch prevents reproducing strict original-panel execution here; this says nothing about off-repo acquisition receipts. A 29×12 Rhea/ChEBI identity list and a five-species QDPR self-test are not replacements for the byte-pinned full original source matrix. Maintain three nonfinite original residuals and all 29 environmental exchange obligations explicitly.
 
 **Open:** entire signed local charge-current theorem, source-paid 29×12/29 exchange model, physically admissible same-object time evolution, actual BH4/PNP/tissue step, original controlled stochastic kernel/minimality, independent calibration/holdout, two-branch Golden and reviewed ITIR reconciliation.
+
+
+### 2026-11-09 native signed-current cross-branch proof update
+
+Developmental #1471 adds source-written `original369NativeSourceFluxExact` / `original369NativeTargetFluxExact` (actual shared-state moved quantum, 0/1 including empty source); `originalDirectedNativeEndpointsDistinct` removes external no-loop assumptions using genuine 3×3×3 ternary geometry; `originalNativeVoxelIncidenceBalance` and `original369SignedNativeOneStepContinuity` give selected role-based per-voxel and integer signed cation/anion conservation for **one** original directed native bond event; `originalBoundaryDischargeLocalReceipt` supplies matching actual exterior face debit. No Agda kernel execution receipt has been obtained.
+
+**Still open:** complete signed/local/mixed boundary history induction; source byte-pinned 29×12 original chemistry execution and 29 physiological exchange coordinates; source-calibrated kinetics and permeability; selected physical one-step BH4/PNP/tissue commuting theorems; physical intervention-safe quotient/minimality; independent longitudinal model discrimination; reconciled Golden + authorized ITIR evidence.
