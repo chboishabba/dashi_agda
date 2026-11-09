@@ -70,6 +70,7 @@ python3 scripts/check_karp21_finfree_raw_primitive_comparisons.py
 python3 scripts/check_karp21_signed_gamma_allwords.py
 python3 scripts/check_karp21_binary_native_ripple.py
 python3 scripts/check_karp21_native_signed_ledger.py
+python3 scripts/check_karp21_ssp_residual.py
 python3 scripts/check_karp21_binary_native_threshold.py
 
 if [[ "$mode" == "preflight" ]]; then
@@ -158,6 +159,7 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalGraphComparisonEnvelopeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21N21SameWordCountedAcceptanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21SignedSSPOrientationNoLosslessExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
 fi
 
