@@ -177,6 +177,14 @@ jobs:
             DASHI/Analysis/BishopRiemannOriginalZetaAboveTwoExact.agda
             DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda
+            DASHI/Analysis/BishopOriginalClippedEqualMeshExact.agda
+            DASHI/Analysis/BishopOriginalClippedMeshDefectRemainderExact.agda
+            DASHI/Analysis/BishopOriginalFinitePowerQuadratureExact.agda
+            DASHI/Analysis/BishopOriginalFiniteNormalizedEndpointQuadratureRemainderExact.agda
+            DASHI/Analysis/BishopOriginalFiniteErrorEqualMeshComparisonExact.agda
+            DASHI/Analysis/BishopOriginalFiniteNegativeLogExpEndpointBoundExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogTerminalFromMeshExact.agda
+            DASHI/Analysis/BishopOriginalZetaAboveTwoFromMeshLogExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteExpInitialValueExact.agda
