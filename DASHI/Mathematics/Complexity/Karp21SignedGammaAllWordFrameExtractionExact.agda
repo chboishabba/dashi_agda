@@ -18,7 +18,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.List.Base using (length; _++_)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Nat.Properties as NatP
 
@@ -96,12 +96,8 @@ scanSuccessExtractsFrame seen (true ∷ word) numeral suffix agreement
 nativeGammaSuccessIsOriginalCanonicalFrame :
   (word numeral suffix : Word.BitWord) →
   Native.readGammaBinary word ≡ just (numeral , suffix) →
-  (Word.BitWord ×
-    (word ≡ Frame.originalGammaFrame
-        (ScanFrame.payload
-          (scanSuccessExtractsFrame zero word numeral suffix
-            (Native.readGammaBinary word ≡ just (numeral , suffix))))
-        suffix))
+  Σ Word.BitWord
+    (λ payload → word ≡ Frame.originalGammaFrame payload suffix)
 nativeGammaSuccessIsOriginalCanonicalFrame word numeral suffix agreement
   with scanSuccessExtractsFrame zero word numeral suffix agreement
 ... | scan-frame zeros payload numeralEq wordEq countEq =
