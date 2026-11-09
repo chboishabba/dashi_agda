@@ -133,9 +133,9 @@ originalBishopLogOnePlusAbsoluteFromCoefficientOrder :
       BishopReal.1ℝ) →
   Complex.ComponentwiseAbsoluteSeriesConvergent
     (Log.originalBishopLogOnePlusTerm w)
-originalBishopLogOnePlusAbsoluteFromCoefficientOrder interval norm coefficientBound =
+originalBishopLogOnePlusAbsoluteFromCoefficientOrder {w} {ratio} interval norm coefficientBound =
   Geom.originalBishopKoenigsComponentAbsoluteSummability
-    (Log.originalBishopLogOnePlusTerm _)
-    _
-    _
+    (Log.originalBishopLogOnePlusTerm w)
+    ratio
+    ratio
     (originalBishopLogComponentGeometricBounds interval norm coefficientBound)
