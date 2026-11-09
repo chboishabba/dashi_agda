@@ -30,10 +30,10 @@ def make_configs(output_dir,charge,spin,statement,provenance_kind):
                   "atoms":[[symbol,*position] for symbol,position in atoms],
                   "basis":"sto-3g","unit":"Angstrom",
                   "charge":int(charge),"spin":int(spin),
-                  "walkers":1280,"blocks":600,
+                  "walkers":1280,"blocks":300,
                   "steps_per_block":20,"time_step":0.005,
                   "stabilize_freq":5,"pop_control_freq":5,
-                  "equilibration_blocks":300,"seed":20261109,
+                  "equilibration_blocks":50,"seed":20261109,
                   "nqs_trial_used":False,
                   "original_nickel_qcafqmc_replication":False}
         target=output/(name+".ipie.json")
