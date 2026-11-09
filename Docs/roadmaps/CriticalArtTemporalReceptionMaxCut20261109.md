@@ -374,3 +374,27 @@ The key negative control is that **an independently published correction already
 **Remaining maximum cut:** CW0 independently preserve and check archive GCC 30 June response and September bulletin original PDF bytes and original publisher article/reply text; CW1 independently document GCC editors' actual awareness, recipients and distribution (only if demonstrated); CW2 blinded claim coding of original and GCC documents with reliability and selection denominators; CW3 appropriate historical controls and statistical identification rather than awareness inferred from chronological order; CW4 independent documentary targeting/coordination/intent; CW5 measured audience/multiplex effect; CW6 actual Python and Agda 2.9 runtime receipts. The bounded source-ledger comparison **advances historical content analysis** but remains below any empirical cognitive-warfare operation finding.
 
 Original newspaper and letter authors, scientists quoted, GCC and original critics retain individual attribution. DASHI owns only the formal artefacts and source-stage consumer proofs. No ESD edits; no CI dependence.
+
+
+## 9 November 2026 — CW2 original-claim coding measurement cut
+
+**Research priority:** cognitive-warfare mechanism discrimination, not stand-alone film aesthetics or full G20 country-policy tracking. The original selected 1993 chain now supports a *pre-registered, source-graded comparison protocol* but does not yet support a replicated causal effect.
+
+**Original authors and provenance:** Boyce Rensberger (original article); James E. Hansen (independent 8 June corrective letter); John Shlaes and the GCC (30 June response and September `Climate Watch` Vol 1 Issue 9); Climate Files/Climate Investigations Center (archive descriptions). They own their respective source claims. DASHI's contribution is only the source admission, formal non-promotion, coding protocol and falsification controls. Do not identify a separate academic study as original data from this corpus, or treat Peirce/Mulvey/Barthes as authors of this empirical protocol.
+
+**New source-written deliverables:**
+- `Docs/research/ccdcoe_p3_gcc1993_claim_coding_protocol_20261109.json`: fixed original objects, six distinct ordinal/nominal coding dimensions (uncertainty, scientific voice, risk horizon, responsibility, agency, selective reuse), explicit `undeterminable` for all dimensions, source-provenanced bounded passage as sampling unit, independent double coding, original-span SHA/offset requirements, retained initial scores and adjudication, and predeclared rival causes/negative controls.
+- `scripts/check_ccdcoe_p3_gcc1993_claim_coding_protocol.py`: validates source grade, admission status, dimensions, two-coder design, no fabricated original text/causal estimate, and nine tampered-control cases. Includes exact finite fixtures for Cohen's kappa: two balanced agreement cases (kappa=1), balanced disagreement (kappa=-1), and one constant-label case (kappa **undefined/null**, not incorrectly promoted to 1). **These are synthetic arithmetic tests, not real reliability receipts.**
+- `DASHI/Cognition/CCDCOEP3GCC1993ClaimCodingAdmissionExact.agda`: negative lemmas for unread original media ≠ publisher-rendered original, missing source ≠ proved silence, reporter's quoted Hansen ≠ Hansen's separately authored letter, archive reference ≠ independent audience exposure or hostile purpose. Those are finite source-stage semantics; there are still **no real, source-reviewed GCC original passages or coded reviewer outcomes**.
+- Imported into `DASHI.Cognition.Everything`, P3 causal-trialectic regression and canonical `scripts/check_ccdcoe_cognition_agda.sh`.
+
+**Exact remaining payment:**
+1. **CW0:** obtain authentic independent snapshots/raw bytes for GCC 30 June and September primary texts; preserve publisher-rendered reporter and Hansen primary passages with hash, edition and reader receipt.
+2. **CW1:** source-verified distribution and original editorial reception. The GCC responses are documented producer communications; publication and later quotation do not prove journalist/audience exposure or authorial knowledge of Hansen's 8 June letter.
+3. **CW2:** independently code and adjudicate reviewed original GCC passages and source-comparable control passages; publish denominator, agreement by dimension, kappa (including undefined cases), uncertainty intervals, source offset and external reviewer receipts; preserve disagreement and lack of knowledge.
+4. **CW3:** historical matching against rival explanations (issue attention, contemporaneous science, editorial choice, archive selection) with temporal negative controls, baseline and sensitivity.
+5. **CW4:** original direct evidence of coordination, targeting and *hostile purpose* distinguished from routine advocacy, not inferred from selective framing.
+6. **CW5:** empirical cognitive/relational impact, if measured, welded into existing five-layer temporally indexed multiplex without inferring human psychology from message coding.
+7. **CW6:** Python checker actual runtime + Agda 2.9 exact-head kernel receipts on the updated import graph. A GitHub connector write/readback does **not** execute Python or Agda.
+
+**Latest status:** source-written and integrated; no original GCC raw bytes, independent coders or causal audience outcomes admitted. Formal first-order missingness and source-grade safeguards advanced. Critical Art A1–A9 remains a subordinate analogue/negative-control track, not a prerequisite to CW0–CW4. No ESD surfaces changed.
