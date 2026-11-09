@@ -133,6 +133,22 @@ class WorldTests(unittest.TestCase):
         self.assertEqual(world.report(self.conn)["native_gap_candidate_edges"],1)
         self.assertEqual(world.report(self.conn)["executed_kernel_passes"],0)
 
+    def test_agda_source_delta_selectively_reopens_dependents(self):
+        self.seed()
+        self.conn.execute("""UPDATE repo_symbol_signatures
+             SET signature=?,signature_sha256=?
+             WHERE symbol_id='DASHI.Hecke.tau'""",
+                          ("new Hecke type", "cccc"))
+        world.import_agda(self.conn,revision="b"*40)
+        changed={r[0] for r in self.conn.execute(
+            "SELECT symbol_id FROM jmd_world_source_changes")}
+        self.assertEqual(changed,{"DASHI.Hecke.tau"})
+        self.assertEqual(world.changed_closure(self.conn,changed),2)
+        self.assertEqual(world.report(self.conn)["executed_kernel_passes"],0)
+        world.import_agda(self.conn,revision="b"*40)
+        self.assertEqual(world.report(self.conn)["changed_source_declarations"],0)
+        self.assertEqual(world.changed_closure(self.conn,set()),0)
+
     def test_unpinned_agda_revision_rejected(self):
         with self.assertRaisesRegex(ValueError, "full 40"):
             world.import_agda(self.conn,revision="master")
