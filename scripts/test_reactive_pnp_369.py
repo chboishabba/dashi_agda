@@ -1,0 +1,69 @@
+# Synthetic numerical regression, not BH4 measurements or Agda acceptance.
+"""Non-biological regression tests for the 3x3x3 reactive-PNP reference solver."""
+import numpy as np
+import pytest
+from reactive_pnp_369 import (BONDS, INDEX, Model, implicit_step, native_flux,
+                               poisson, synthetic_demo, vector_rhs)
+
+
+def model():
+    return Model(z=np.array([1,-1,0]), D=np.array([0.12,0.1,0.08]),
+                 reactants=np.array([[1,1,0]]), products=np.array([[0,0,1]]),
+                 kf=np.array([0.04]), kb=np.array([0.04]),
+                 standard_mu=np.zeros(3))
+
+
+def test_geometry_exact():
+    assert len(BONDS)==54
+    assert len(set(BONDS))==54
+    assert all(sum(abs(a-b) for a,b in zip(pa,pb))==1
+               for ia,ib in BONDS
+               for pa,pb in [(list(INDEX)[ia],list(INDEX)[ib])])
+
+
+def test_thermodynamic_synthetic_step():
+    d=synthetic_demo()
+    assert d['charge_defect']<1e-10
+    assert d['free_energy_after']<=d['free_energy_before']
+    assert d['minimum_concentration']>0
+
+
+def test_homogeneous_equilibrium():
+    m=model(); c=np.ones((27,3))
+    # A=B=C=1; zero net ionic charge and reaction rate.
+    phi=poisson(c,m)
+    assert np.max(np.abs(phi))<1e-12
+    assert np.max(np.abs(native_flux(c,phi,m)))<1e-12
+    assert np.max(np.abs(vector_rhs(c,m,phi)))<1e-12
+    final,r=implicit_step(c,0.1,m)
+    assert np.max(np.abs(final-c))<1e-9
+    assert r['numerical_residual_max']<1e-9
+
+
+def test_two_sequential_transient_steps():
+    m=model(); c=np.ones((27,3)); c[:,2]=0.5
+    c[INDEX[(-1,0,0)],0]+=0.3
+    c[INDEX[(1,0,0)],1]+=0.2
+    e=[]
+    for _ in range(2):
+        c,receipt=implicit_step(c,0.02,m)
+        e.append(receipt['free_energy_after'])
+        assert receipt['numerical_residual_max']<1e-8
+        assert receipt['charge_defect']<1e-8
+    assert e[1]<=e[0]
+
+
+def test_invalid_charge_or_detailed_balance_fails():
+    for products,kf in [(np.array([[0,1,1]]),np.array([0.04])),
+                        (np.array([[0,0,1]]),np.array([0.08]))]:
+        with pytest.raises(ValueError):
+            Model(z=np.array([1,-1,0]), D=np.ones(3),
+                  reactants=np.array([[1,1,0]]),products=products,
+                  kf=kf,kb=np.array([0.04]),standard_mu=np.zeros(3))
+
+
+def test_no_negative_input_or_zero_timestep():
+    m=model();c=np.ones((27,3));c[0,0]=0
+    with pytest.raises(ValueError):implicit_step(c,0.1,m)
+    c[0,0]=1
+    with pytest.raises(ValueError):implicit_step(c,0,m)
