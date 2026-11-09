@@ -14,6 +14,7 @@ module DASHI.Physics.YangMills.YMClayD1OriginalLinkStarFiniteNeighbourGraphExact
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Sum using (_⊎_; inj₁; inj₂)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
@@ -207,3 +208,22 @@ originalNonConflictIffStarSeparation a b noConflict
   with Original.decideOriginalStarsDisjoint a b
 ... | Torus.yes separate = separate
 ... | Torus.no conflict = Original.emptyElim (noConflict conflict)
+
+-- Exact cover of every marked original positive bond by the greedy
+-- survivors or the ACTUAL original closed conflict neighbourhood.
+-- The counting problem is hence *only* a finite cardinality comparison:
+-- this theorem already proves the underlying elementwise cover.
+originalMarkedBondFreeOrNativeNeighbour :
+  ∀ {n} (a : Original.Bond n)
+    (marked : List (Original.Bond n)) (b : Original.Bond n) →
+  Torus._∈_ b marked →
+  (Torus._∈_ b (Original.filterOriginalStarFree a marked))
+  ⊎
+  (Torus._∈_ b (originalLinkStarNeighbourList a))
+originalMarkedBondFreeOrNativeNeighbour a marked b membership
+  with Original.decideOriginalStarsDisjoint a b
+... | Torus.yes separate =
+  inj₁ (Original.filterOriginalStarFreeComplete
+    a marked b membership separate)
+... | Torus.no conflict =
+  inj₂ (originalNeighbourConflictComplete a b conflict)
