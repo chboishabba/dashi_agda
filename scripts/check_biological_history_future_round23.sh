@@ -104,6 +104,7 @@ python3 scripts/check_biological_369_pants_physical_seam.py
 python3 scripts/check_biological_369_threeway_pants.py
 python3 scripts/check_biological_369_face_exchange.py
 python3 scripts/check_biological_369_open_signed_charge.py
+python3 scripts/check_biological_369_local_charge_continuity.py
 
 # Run the repository-owned parallel Agda checker, never an ad hoc local
 # direct Agda invocation. Its exact-head result remains a separate receipt
