@@ -1436,3 +1436,24 @@ New owner `Y443Universal80RelatorCongruenceExact.agda`, imported by `Y443VNatura
 **Precise status:** the universal **setoid quotient** is now given by raw `SignedNodeExpression` with relation `_≈₈₀_`. This is a genuine inductively presented object, but not a quotient `Set` with definitional equality or a completed selected Monster group isomorphism. For V2 closure, prove a setoid-group structure and the group-isomorphism carrier bridge as needed, construct the *original selected G* identification and source-backed historical quotient-to-Monster isomorphism, then the selected action and all-mode FLM equality. The selected-group injectivity is NOT discharged by a theorem record asking for `NoExtraSelectedRelations`.
 
 **Exact-head Agda 2.9 --safe kernel acceptance unobserved.** The source and Golden import were committed, but no claims of a checked theorem or group recognition are made. Retain Ivanov/Bray, TauCeti, JMD, Popov–Rastelli attribution and do not conflate `Y443+spider ≅ M × C2` with Bimonster `M wr C2`.
+
+
+## 9 November 2026 — canonical synchronized exact-five-frontier ledger
+
+**Master roadmap:** [Monster V2 + Moonshine V0.4/V1 + YM B1/E1/B2: exact source-owner max-cut](../../roadmaps/MoonshineMonsterYMFiveFrontierMaxCut20261109.md). The full **23-producer** Yang–Mills E1/D1/D2/N1/G1 inventory lives on its own #1444 branch; do not reduce it to five generic endpoint labels or confuse proposed producer IDs with actual Agda declarations.
+
+**New actual Monster V2 source** `Y443Universal80RelatorCongruenceExact.agda` (now imported by the focused Golden root):
+- `wordExpr`, `_≈₈₀_` construct the **least** original 80-relator group congruence, using real original Y443 words.
+- `AdmissibleCongruence`, `least80Congruence` prove its universal leastness property.
+- `SetoidGroup`, `canonical80SetoidGroup`, `original80IsAdmissible`, `canonical80IsLeast` construct the actual setoid-group carrier and verify its laws.
+- `Interpretation.wordSound`, `sound`, `interpretationUnit`, `interpretationProduct`, `interpretationInverse` establish homomorphism soundness on any original-relator-respecting selected group.
+- `Interpretation.selectedSurjection` derives source-word surjectivity *provided actual selected-G `PresentedByY443Nodes`*, rather than deriving it from bare relation satisfaction.
+- `SelectedEquivalence.fromSelected`, `toAfterFrom`, `fromAfterTo`, `fromRespectsSelectedEquality`, `fromPreservesProductModulo80`, `fromPreservesInverseModulo80` give constructive **two-sided** setoid equivalence **only after** the real `NoExtraSelectedRelations.reflectsEquality` is inhabited.
+
+**Exact remaining M2 boundary:** `NoExtraSelectedRelations.reflectsEquality` for the actual selected G; actual selected presented-word surjectivity; historical quotient-to-published Monster isomorphism; faithful same VOA action. The setoid group is source-written, but no quotient `Set` is silently invented and no Ivanov/Bray theorem is claimed proved anew.
+
+**Exact Moonshine V0.4 boundary:** original twisted-even linear/graded source, TF/TT original Leech operators, their grading/linearity/vacuum/translation, all mixed locality/Jacobi and conformal laws. Original FF/FT source adapters and bidirectional normalization already exist. **V1 boundary:** original two-way selected/FLM state maps with actual all-mode preservation, DGL original hypotheses/uniqueness where applicable, original Monster action and complete automorphism group.
+
+**Exact YM source boundary (cross-branch):** E1.01–07, D1.01–04, D2.01–05, N1.01–03, G1.01–04, described in the linked 23-producer ledger. All physical endpoints remain open. R583 OS4 conditional compiler and original-Wilson real covariance selected bound already exist; their physical source hypotheses are not paid by the formal transport.
+
+**Verification:** source-written GitHub commits/readback only; Agda 2.9 `--safe` kernel receipt not observed. No ESD work, no unrelated branch rewrites.
