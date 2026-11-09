@@ -37,6 +37,7 @@ import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact
+import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact
 import DASHI.Culture.CriticalArtTemporalReceptionReuseExact
 import DASHI.Culture.CriticalArtSameSceneTransportExact
 import DASHI.Culture.CriticalArtTriadicFilmBoundaryExact
