@@ -41,6 +41,14 @@ def check():
             "comparison_target_percent":target,"relation":relation,
             "exact_nat_witness":str(diff),
             "model_compensation_percent":f"{float(percent(gain,confidence)):.10f}"})
+    # Finite no-inverse counterexample: the coefficient and discounted
+    # outcome alone cannot identify gain, confidence or scenario selection.
+    indistinguishable=[(4,75),(3,100),(5,60)]
+    coefficients=[OTHER+MWW_AREA_TENTHS*g*c for g,c in indistinguishable]
+    assert coefficients==[1010350]*3
+    assert len({g for g,c in indistinguishable})==3
+    assert len({c for g,c in indistinguishable})==3
+    assert len({percent(g,c) for g,c in indistinguishable})==1
     assert percent(4,75) > 100
     assert percent(3,75) > 90 > percent(2,75)
     assert 47 < required_confidence(90,4) < 48
@@ -48,6 +56,12 @@ def check():
     return {"case":"EPBC 2019/8575","source":"30 January 2026 PD v5; NOT accepted 15 October workbook",
       "target_90_percent_required_confidence_given_gain4":f"{float(required_confidence(90,4)):.10f}",
       "target_100_percent_required_confidence_given_gain4":f"{float(required_confidence(100,4)):.10f}",
+      "same_output_distinct_parameters":{
+          "parameter_pairs":[{"gain":g,"confidence_percent":c} for g,c in indistinguishable],
+          "common_coefficient":coefficients[0],
+          "same_discounted_output":True,
+          "cannot_identify_optimiser_or_scientific_justification_from_output_alone":True
+      },
       "proponent_january_assumption":{"MWW_AU1_AU2_common_gain":4,"confidence_percent":75},
       "exact_integer_witnesses":rows,
       "scientific_probability_calibration_or_independent_koala_evidence_obtained":False,
@@ -61,7 +75,9 @@ def main():
     if args.agda_file:
         content=args.agda_file.read_text()
         for marker in ("fiftyAbove90Exact","fiftyBelow100Exact",
-                       "sixtyBelow100Exact","sixtyFiveAbove100Exact"):
+                       "sixtyBelow100Exact","sixtyFiveAbove100Exact",
+                       "originalCoefficientCannotIdentifyGain",
+                       "originalCoefficientCannotIdentifyConfidence"):
             assert marker in content, marker
         assert "{!!}" not in content and "postulate " not in content
     result=check()
