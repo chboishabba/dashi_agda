@@ -68,6 +68,55 @@ prior2024ComplianceClaim = primary-fact
   "2018/8347 approval condition 13a required >=183ha Avonvale and Cherry Gully secured pre-commencement; 2024 compliance report claims minister notified 23 December 2022."
   "https://www.stockland.com.au/globalassets/residential/qld/providence/offset-management-plan/providence-east-epbc-acr--year-1-13032024.pdf"
 
+-- NEW official negative control from the SAME *older* Providence
+-- approval, NOT a decision on Woogaroo 2019/8575.
+-- The National EPA official directed-variations register states that
+-- on 31 March 2025 the Minister directed a condition variation in
+-- response to failure to secure an ONSITE conservation area on time
+-- and continuing clearing absent approved management plans.
+-- The signed original s143 variation is by Toni Hart on that date
+-- for AW Bidco 6, EPBC 2018/8347. Its original effect changes
+-- conditions 5,6,8,10,11,12,17,19,23, revokes 18 and 26,
+-- and replaces the original Appendix B map. That enforcement does
+-- NOT establish the previously declared 2022 Avonvale/Cherry Gully
+-- s19F offset was itself unregistered or that Cherish 2019/8575 has
+-- committed any breach. It *does* make historical performance and
+-- earlier obligation status appropriate independent review subjects.
+
+data AdministrativeOutcome : Set where
+  federalDirectedVariation otherMatterOnly : AdministrativeOutcome
+
+record OfficialAction : Set where
+  constructor official-action
+  field
+    actionMatter : Matter
+    outcome : AdministrativeOutcome
+    decisionDayYYYYMMDD : Nat
+    administrativeOrderMade : Bool
+    courtJudgmentMade : Bool
+    proves20198575Breach : Bool
+open OfficialAction public
+
+officialProvidenceVariation : OfficialAction
+officialProvidenceVariation =
+  official-action providence20188347 federalDirectedVariation
+    20250331 true false false
+
+signedOtherMatterVariation : PrimaryFact
+signedOtherMatterVariation = primary-fact
+  providence20188347 governmentOriginalReproducedInProponentPDF
+  textVerifiedInOriginalPublishedDocument
+  "Signed 31 March 2025 EPBC Act s143 directed conditions variation, Toni Hart, AW Bidco 6, EPBC 2018/8347; replaces site conditions and Appendix B map. Original government instrument available directly."
+  "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/125d74c5-530f-f011-998a-00224811099e/2ab10dab-d681-4911-b881-cc99413f07b6?file=2018-8347-Variation-to-Conditions.pdf"
+
+olderEnforcementNotThisCase :
+  proves20198575Breach officialProvidenceVariation ≡ false
+olderEnforcementNotThisCase = refl
+
+olderVariationNotJudgment :
+  courtJudgmentMade officialProvidenceVariation ≡ false
+olderVariationNotJudgment = refl
+
 later2026AdjacentClaim : PrimaryFact
 later2026AdjacentClaim = primary-fact
   springfield20198575 proponent2026PreliminaryDocumentation
