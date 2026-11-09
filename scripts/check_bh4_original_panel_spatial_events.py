@@ -419,6 +419,33 @@ def test_source(certificate,*,full_panel):
     return result
 
 
+def require_exact_flux_candidate_axes(original,candidate):
+    """Reject missing, surplus or duplicated original quantitative axes.
+
+    The existing feasibility checker intentionally reports missing axes as
+    underdetermined; it may ignore surplus keys. Here, only reject surplus
+    keys and malformed coordinate maps. Missing source-paid coordinates
+    remain explicitly underdetermined in its existing tri-state result.
+    """
+    if not isinstance(candidate,dict):
+        raise ValueError("original flux candidate must be an object")
+    expected_reactions=set(original["reaction_index"])
+    expected_species=set(original["species_index"])
+    for name,expected in (("reaction_flux",expected_reactions),
+                          ("external_exchange",expected_species)):
+        coordinates=candidate.get(name)
+        if not isinstance(coordinates,dict):
+            raise ValueError(f"original {name} coordinate map required")
+        extras=set(coordinates)-expected
+        if extras:
+            raise ValueError(
+                f"original {name} has unrecognized source coordinates: "
+                f"{sorted(extras)!r}")
+        for key,value in coordinates.items():
+            if isinstance(value,bool) or value is None:
+                raise ValueError(f"invalid original {name} value for {key!r}")
+
+
 def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
     """Reuse the existing original 29×12 flux/bound/exchange checker.
 
@@ -427,6 +454,7 @@ def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
     model or causal hypothesis.
     """
     original,metadata=check_certificate(certificate,full_panel=True)
+    require_exact_flux_candidate_axes(original,candidate)
     receipt=evaluate_original_flux_candidate(original,parameters,candidate)
     if receipt["reaction_count"]!=12 or receipt["species_count"]!=29:
         raise AssertionError("original source 29x12 matrix identity lost")
@@ -501,6 +529,24 @@ def self_test():
         direction="extract",amount=100,source_reference="synthetic negative control")
     assert unchanged==empty and actual==0
     assert ledger==((0,)*len(ELEMENTS),0)
+    # The original full-panel strict path additionally refuses invented
+    # reaction/species keys. Exercise the pure coordinate guard against
+    # the genuine one-column QDPR receipt without posing as a full panel.
+    sample_axes={"reaction_index":finite["reaction_index"],
+                 "species_index":finite["species_index"]}
+    require_exact_flux_candidate_axes(sample_axes,
+        {"reaction_flux":{},"external_exchange":{}})
+    for wrong in (
+        {"reaction_flux":{"RHEA:INVENTED":0},"external_exchange":{}},
+        {"reaction_flux":{},"external_exchange":{"CHEBI:INVENTED":1}},
+    ):
+        try:
+            require_exact_flux_candidate_axes(sample_axes,wrong)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("unrecognized original flux axis admitted")
+
     # Adversarial failure: moving a molecule between two original voxels
     # with no declared incidence current preserves global atoms/charge.
     # The *local* theorem must nevertheless detect this hidden transfer.
