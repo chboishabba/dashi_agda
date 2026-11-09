@@ -1,55 +1,47 @@
-# E8 norm-two exhaustion: mathematical proof and source-weld contract
+# E8 norm-two exhaustion — exact mathematical classification
 
-**Scope:** non-computational, all-vector classification of the standard coordinate model of the positive-definite E8 lattice. This is a mathematical proof, **not** an Agda 2.9 kernel receipt, and does not identify an independently selected repository carrier without an explicit map.
+**Evidence level:** complete mathematical proof for the standard coordinate definition; **not yet** an Agda-checked theorem about the repository's selected original carrier.
 
-## Definition and normalization
+## Carrier and normalization
 
-Let
-[
-L = {xinmathbb Z^8:sum_{i=1}^8x_iin 2mathbb Z}
-cup
-{xin(mathbb Z+	frac12)^8:sum_{i=1}^8x_iin 2mathbb Z}.
-]
-The norm is the Euclidean (xcdot x=sum_i x_i^2).
-Set (d_i=2x_i). The two cases correspond to all (d_i) even or all (d_i) odd, together with (sum_i d_iequiv0pmod4).
-The norm-two condition is precisely (sum_i d_i^2=8).
+Define
+\[
+L=\{x\in\mathbb Z^8:\sum_{i=1}^8x_i\in2\mathbb Z\}
+\;\cup\;
+\{x\in(\mathbb Z+\tfrac12)^8:\sum_{i=1}^8x_i\in2\mathbb Z\}.
+\]
+Let \(\|x\|^2=\sum_i x_i^2\). In doubled coordinates \(d_i=2x_i\), membership means all entries have the same parity and \(\sum_i d_i\equiv0\pmod4\); norm two is \(\sum_i d_i^2=8\).
 
-## Theorem (all native norm-two vectors)
+## Theorem — exactly 240 norm-two vectors
 
-Every (xin L) with (xcdot x=2) has exactly one of the following shapes:
+Every \(x\in L\) of squared norm 2 belongs to precisely one family:
 
-1. **Integer family:** exactly two coordinates equal (pm1), the other six zero. Each choice is allowed by the even coordinate-sum condition. There are (inom82cdot 2^2=112) vectors.
-2. **Half-integer family:** every coordinate is (pm	frac12), and the number of negative coordinates is even. There are (sum_{k mathrm{even}}inom8k=2^7=128) vectors.
+1. **Integral:** two nonzero coordinates, each \(\pm1\), remaining six zero. Their sum is always even. There are \(\binom82 2^2=112\).
+2. **Half integral:** all eight coordinates equal \(\pm\tfrac12\), with an even number of negative signs. There are \(\sum_{k\text{ even}}\binom8k=2^7=128\).
 
-Consequently the complete norm-two shell has exactly (112+128=240) vectors.
+These two families are disjoint. Their union is the entire norm-two shell, of cardinality **240**.
 
 ### Proof
 
-If (x) is integral, each (x_i^2) is a nonnegative integer. Since the sum is 2, the only possibilities for the multiset of nonzero squares are ({2}) or ({1,1}). A square of an integer cannot be 2, so only ({1,1}) occurs. Thus exactly two coordinates have absolute value 1; their sum is one of (-2,0,2), hence even, and all four signs at each selected pair are allowed.
+For integral \(x\), every squared coordinate is a nonnegative integer. The only decomposition of 2 as a sum of integer squares is \(1+1\): an integer square cannot equal 2. Thus exactly two coordinates are \(\pm1\). All four sign patterns have even coordinate sum, so every selection of two positions is admitted.
 
-If (x) is half-integral, (|x_i|ge1/2), so (sum_i x_i^2ge8/4=2). Equality forces each (|x_i|=1/2), since every summand is at least (1/4). If (k) of the eight signs are negative, (sum_i x_i=(8-2k)/2=4-k). This is even iff (k) is even. Flipping one prescribed sign pairs even-(k) and odd-(k) choices, so there are exactly half of all (2^8) sign choices, namely 128. The integral and half-integral families are disjoint. This proves both completeness and the count. QED.
+For half-integral \(x\), each \(|x_i|\ge\tfrac12\); hence \(\sum_i x_i^2\ge8(\tfrac12)^2=2\). Equality forces all eight absolute values to be \(\tfrac12\). With \(k\) negative signs, the coordinate sum is \(4-k\), which is an even integer precisely when \(k\) is even. Flipping the sign of the first coordinate is a bijection between even- and odd-\(k\) sign strings; therefore exactly half of the \(2^8\) strings qualify. This yields 128. No third family exists by the all-integer/all-half-integer definition. QED.
 
-This proof does **not** infer a correspondence between 240 E8 roots and the distinct 243-element triadic carrier. It does not use any numerical theta coefficients beyond the norm-two shell.
+**Important:** this theorem does not infer that 240 E8 roots equal a selected 240-subset of any independent 243-state triadic carrier. Nor does the norm-two shell determine all Fourier coefficients of \(\Theta_{E8}\).
 
-## Exact Agda source-weld obligations
+## Exact original-Agda bridge obligations (proposed names)
 
-The following are **proposed declaration names/contracts**, not assertions that they exist:
+- \`originalNativeE8MembershipIffDoubledParityAndSumModFour\`: independently selected E8 lattice membership iff the doubled-coordinate conditions.
+- \`originalIntegerNormEightImpliesTwoUnitCoordinates\`: classification of all even doubled-coordinate vectors with squared norm 8 as two entries \(\pm2\), six zeros.
+- \`originalHalfNormEightImpliesAllUnitCoordinates\`: classification of all odd doubled-coordinate vectors with squared norm 8 as eight entries \(\pm1\).
+- \`originalHalfLatticeSumEvenIffEvenNegativeSigns\`: match half-integer membership to even number of negative signs.
+- \`originalE8GeneratedRootsExhaustNativeNormTwoLattice\`: explicit two-way match between this shell and the original indexed 112+128 root generator, including no duplicates.
+- \`originalE8NativeNormTwoRootsComplete\`: conclude exactly 240 for the independently selected source carrier.
 
-- `originalNativeE8MembershipIffDoubledParityAndSumModFour`: the selected original carrier is equivalent to the all-even/all-odd doubled-coordinate model with total residue 0 mod 4.
-- `originalIntegerNormEightImpliesTwoUnitCoordinates`: for all-even doubled vectors, norm 8 implies exactly two entries equal ±2 and six entries zero.
-- `originalHalfNormEightImpliesAllUnitCoordinates`: for all-odd doubled vectors, norm 8 implies each entry ±1.
-- `originalHalfLatticeSumEvenIffEvenNegativeSigns`: parity of negative signs is exactly the half-integer E8 integrality requirement.
-- `originalE8GeneratedRootsExhaustNativeNormTwoLattice`: two-way membership and injective/no-duplicate match to the existing 112+128 generated indexed root list.
-- `originalE8NativeNormTwoRootsComplete`: derive 240 from the source-selected shell, not from an assumed count or a finite sample.
+These declarations are **not claimed to exist or to compile**. In particular, it would be incorrect to close P2e.04c at the repository/kernel level without the map to the original carrier.
 
-## Relation to the already-written all-index results
+## Connection to existing all-index Agda developments
 
-`AbelE8HalfOddShellInvolutionExact` gives an all-index norm-preserving sign-flip on the half family and an explicit two-sided transport of parity-selected coordinate shells. `AbelE8ThetaParityProjectorExact` gives the algebraic signed theta projector for arbitrary shell indices. Neither requires the present norm-two classification, and neither establishes `Theta_E8=E4` without the finite-shell cardinality transport and the analytic Jacobi theta identity or modular uniqueness.
+\`AbelE8HalfOddShellInvolutionExact\` already defines a sign flip on arbitrary odd doubled-coordinate magnitudes and establishes its involutivity, norm preservation, parity flip, and coordinate-level two-sided transports for all shell indices. \`AbelE8ThetaParityProjectorExact\` supplies the all-index signed coefficient equation conditional on actual counts satisfying half-family parity cancellation. Neither theorem is merely an \(n\le8\) regression.
 
-## Unpaid analytic leaves
-
-1. Same-source equivalence between these doubled coordinates and the original Agda E8 lattice, plus the proof that the root generator enumerates the two cases above with no omissions or collisions.
-2. For every (n), finite enumerability and cancellation of half-family E8 shell counts via the existing involution; exact coefficient identification with Jacobi theta power series.
-3. Bishop-complex convergence and reindexing of theta series, and either the source-native Jacobi-to-Eisenstein identity or weight-four modularity plus (dim M_4(SL_2(mathbb Z))=1).
-4. Original unit-disk equality with Bishop E4, then discriminant nonvanishing / same-source j.
-5. Pinned Agda 2.9 `--safe` exact-head acceptance. No gate is promoted to *kernel complete* by this note.
+The unresolved chain is: original E8 shell equivalence → finite shell cardinality transport → identification with genuine Jacobi theta coefficients → Bishop analytic convergence and Jacobi/Eisenstein identity (or source-native modular uniqueness) → original \(\Theta_{E8}=E4\) → nonvanishing discriminant / same-source \(j\). No promotion to Agda-kernel completion is justified without exact-head Agda 2.9 \`--safe\` acceptance.
