@@ -82,3 +82,20 @@ Thus 1.37<|p|<1.38, and local Koenigs ratio <0.8832
 ```
 
 Unlike floating-point residual tests, all inequality comparisons in this script use Python `fractions.Fraction` and mathematically explicit alternating/geometric tail enclosures. The script assumes standard analytic series identities and the Machin identity; the scripts' assertions are **not** themselves a proof of those identities in the DASHI kernel. On ordinary complex numbers, the usual theorems together with the finite rational bounds establish existence of the selected upper fixed point in D₀, and the local Koenigs-limit argument establishes a nonconstant holomorphic Schröder coordinate near it. The remaining frontier is faithful constructive formalization, punctured-sector branch gluing and global Kneser normalization.
+
+## 2026-11-09 exact Koenigs Cauchy-tail arithmetic (new)
+
+The executable `scripts/analytic_j_tetration_koenigs_tail_certificate.py` checks the *rational geometric estimate*, not the analytic hypotheses. Assume `Log(p)=p`, `|p|<69/50`, `|Log(z)-p|≤(4/5)|z-p|` on `D(p,1/10)`, and `|Log(p+t)-p-t/p|≤(311/1000)|t|²`.
+
+Then writing `h_n(z)=pⁿ(Logⁿ(z)-p)` and `β=(69/50)(4/5)²=552/625`, the telescoping estimate is
+
+```text
+|h_(n+1)(z)-h_n(z)| ≤ (69/50)(311/1000) βⁿ |z-p|²
+|χ(z)-h_N(z)| ≤ (21459/5840) (552/625)^N |z-p|².
+```
+
+**Checked exact arithmetic:** `β=552/625`, `21459/5840=(69/50)(311/1000)/(1-β)`, the finite geometric sum identity, the monotone tail update, and `upper(200,1/10)<10^-10`. The script ran successfully with Python's exact `Fraction`.
+
+Example *upper bounds* (derived from exact fractions, decimal representations rounded only for display): at `|z-p|≤1/1000`, `N=40` gives `2.5559894×10^-8`, and `N=80` gives `1.7779579×10^-10`.
+
+The analytic hypotheses follow by ordinary complex differential calculus and the proven fixed-point disk under standard theorems. **Still unpaid for Agda:** `originalBishopLogDerivativeBound`, `originalBishopLogQuadraticRemainderBound`, `originalBishopGeometricCompleteness`, `originalBishopKoenigsUniformCauchy`, `originalBishopKoenigsHolomorphicLimit`. No claim that exact Fraction arithmetic establishes the complex derivative theorem or convergence in an unconstructed setoid.
