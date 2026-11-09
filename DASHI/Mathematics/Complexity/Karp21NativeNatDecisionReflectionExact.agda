@@ -12,7 +12,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeNatDecisionReflectionExact where
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Nat.Base using (_<_; z≤n; s≤s)
+open import Data.Nat.Base using (_<_; _≤_; z≤n; s≤s)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
 open import Data.Empty using (⊥-elim)
@@ -78,4 +78,41 @@ natEqualDecisionSameBoolean m n with NatP._≟_ m n
 ... | no notEqual with Nat._≡ᵇ_ m n in result
 ... | true = ⊥-elim
   (notEqual (natBooleanEqualWitness m n result))
+... | false = refl
+
+
+------------------------------------------------------------------------
+-- The original graph header uses NatP._≤?_ (m*3) inputSuffixLength.
+-- A Boolean Nat <= test is NOT definitionally the same branch.
+------------------------------------------------------------------------
+
+originalNatLessEqualDecision : Nat → Nat → Bool
+originalNatLessEqualDecision m n with NatP._≤?_ m n
+... | yes _ = true
+... | no _ = false
+
+natBooleanLEWitness :
+  (m n : Nat) →
+  Nat._≤ᵇ_ m n ≡ true →
+  _≤_ m n
+natBooleanLEWitness zero n eq = z≤n
+natBooleanLEWitness (suc m) zero ()
+natBooleanLEWitness (suc m) (suc n) eq =
+  s≤s (natBooleanLEWitness m n eq)
+
+natLEWitnessBoolean :
+  (m n : Nat) →
+  _≤_ m n →
+  Nat._≤ᵇ_ m n ≡ true
+natLEWitnessBoolean zero n z≤n = refl
+natLEWitnessBoolean (suc m) (suc n) (s≤s proof) =
+  natLEWitnessBoolean m n proof
+
+natLEDecisionSameBoolean :
+  (m n : Nat) →
+  Nat._≤ᵇ_ m n ≡ originalNatLessEqualDecision m n
+natLEDecisionSameBoolean m n with NatP._≤?_ m n
+... | yes proof = natLEWitnessBoolean m n proof
+... | no notLE with Nat._≤ᵇ_ m n in answer
+... | true = ⊥-elim (notLE (natBooleanLEWitness m n answer))
 ... | false = refl
