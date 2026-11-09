@@ -9,7 +9,41 @@
       "date_precision": "day_of_original_article",
       "role": "independent_newspaper_article",
       "creator": "Boyce Rensberger / The Washington Post",
-      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/"
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/",
+      "original_publisher_url": "https://www.washingtonpost.com/archive/politics/1993/06/01/greenhouse-effect-seems-benign-so-far/af0c956a-8d96-4737-9750-43fcf898c0db/",
+      "page_display_date": "1993-05-31",
+      "archive_url_date": "1993-06-01",
+      "publisher_byline": "Boyce Rensberger",
+      "source_grade": "original_publisher_rendered_article_not_independent_binary_archive",
+      "original_content_observations": [
+        {
+          "section": "opening and claims",
+          "attributed_speaker": "Boyce Rensberger (reporter framing)",
+          "observation": "Opening describes warming as seemingly relatively benign so far, then reports scientific uncertainties.",
+          "original_page_lines": [
+            11,
+            24
+          ]
+        },
+        {
+          "section": "optimistic report",
+          "attributed_speaker": "Patrick Michaels (scientist quoted by reporter)",
+          "observation": "Predicts relatively less damaging near-term warming and possible longer growing seasons, an attributed scientific view not an editorial proof of the whole field.",
+          "original_page_lines": [
+            19,
+            22
+          ]
+        },
+        {
+          "section": "contrasting scientific interpretation",
+          "attributed_speaker": "James Hansen (scientist quoted by reporter)",
+          "observation": "Agrees some observed warming concentrates at night but disputes Michaels on pollution-related cloud effects and longer-term warming.",
+          "original_page_lines": [
+            32,
+            41
+          ]
+        }
+      ]
     },
     {
       "id": "gcc_shlaes_19930630",
@@ -54,6 +88,15 @@
       "journalist_exposure_verified": false,
       "original_article_GCC_causation_verified": false,
       "audience_effect_verified": false
+    },
+    {
+      "earlier": "wp_rensberger_19930601",
+      "later": "gcc_september_bulletin_1993",
+      "original_source_relationship": "Climate Files archive says GCC September Climate Watch bulletin highlighted earlier Rensberger article under a separate headline",
+      "evidence_kind": "archive_description_of_later_amplification",
+      "journalist_exposure_verified": false,
+      "original_article_GCC_causation_verified": false,
+      "audience_effect_verified": false
     }
   ],
   "limits": [
@@ -61,6 +104,8 @@
     "A later response cannot be causal origin of an earlier article, while independent earlier influence by other actions remains an open historical question.",
     "Referencing an article later in a bulletin demonstrates selection/secondary amplification, not original article placement.",
     "Neither archival metadata nor article quotation authenticates independent original PDF bytes or delivery/exposure data.",
-    "Do not infer that disagreement with policy/scientific claims alone constitutes cognitive warfare."
+    "Do not infer that disagreement with policy/scientific claims alone constitutes cognitive warfare.",
+    "Washington Post original page displays May 31 1993 while its archive path and Climate Files refer to June 1 1993; preserve both metadata values, do not silently reconcile.",
+    "Two September references may not necessarily identify the same numbered bulletin issue; index/issue page confirmation remains open."
   ]
 }
