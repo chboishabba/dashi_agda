@@ -411,3 +411,23 @@ No shortcut to other open phases: `originalKneserConjugatePairGlobalNormalizatio
 ## 2026-11-09 soundness repair: carrier fixed-point-freedom
 
 In `DASHI/Moonshine/AbelCarrierFixedLocusTransportExact.agda` commit `9b333d4c`, the previous `FixedPointFree` record had a caller-selected `Empty : Set`, so its alleged contradiction was potentially an inhabited set and did **not** certify actual fixed-point freedom. This was mathematically too weak. The record now has a concrete constructorless `data Empty : Set where` as the conclusion of `contradiction`, `fineCannotBeFixedWhenTranslationFree` and `coordinateCannotDescendWhenTranslationFree`. This is a **logical soundness correction**, not a new proof of any original analytic no-fixed-point hypothesis. Agda kernel acceptance still pending. The existing original level-3 no-fixed-point lemma targets its distinct original empty type and does not become automatically convertible to this new constructorless type without an explicit elimination adapter.
+
+## 2026-11-09 maximum-cut continuation — original Bishop finite telescoping
+
+**New original proof owner:** `DASHI/Moonshine/AbelBishopKoenigsFiniteTelescopingExact.agda`, commits `463dce40`, `7832fced`. Reuses the actual vendored Murray/Bishop `Sequence.SeriesOf`, `RealProperties.ℝ-Solver` and `BishopComplexSeriesConvergenceExact`/native complex arithmetic.
+
+- [x] **P1.B28a** `originalBishopFiniteScalarTelescope`: by induction, original scalar finite increments telescope in Bishop setoid equality:
+  `SeriesOf (λn → h(n+1)-h(n)) N ≃ h(N)-h(0)`.
+- [x] **P1.B28b** `originalBishopComplexStepDifference`: literal original complex step increment `h(n+1)-h(n)`, not uninterpreted user-supplied contributions.
+- [x] **P1.B28c** `originalBishopKoenigsPrefixSameSource`: the real and imaginary native Bishop finite-prefix equalities combine into `Complex._≈C_` for the original complex increment series. Requires no analytic convergence, and does not replace `_≈C_` with propositional equality.
+- [ ] **P1.B28d** Kernel-check these three declarations with pinned Agda and transitive vendor imports. **Source-written, unchecked** in this pass.
+
+With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite telescoping), and P1.B02 (vendored componentwise complex completeness), the remaining actual analytic leaves are sharply localized:
+- [ ] **P1.B24** `originalBishopPrincipalLogOnSeries`: source-native principal logarithm, explicit cut avoidance and inverse.
+- [ ] **P1.B25** `originalBishopLogInverseDiskIteration`: source-native disk fixed point/contraction and quadratic remainder.
+- [ ] **P1.B26** `originalBishopKoenigsIncrementMagnitude`: actual bound, without importing numeric Python tests as proofs.
+- [ ] **P1.B27** `originalBishopKoenigsComponentAbsoluteSummability`: geometric comparison to both native Bishop real absolute series.
+- [ ] **P1.B29** `originalBishopKoenigsUniformCauchy`: instantiate B13/B28c/B02 uniformly with the real original analytic trajectory, then prove the uniform holomorphic limit.
+- [ ] **P1.K4c** `originalKneserConjugatePairGlobalNormalization`, plus **P1b** `originalPuncturedSectorLogBranchCocycle`, **P2** `originalBishopQSeriesTPeriod`/`originalRendererAbelWeldInstance`, **P3** `originalMovingLevelAbelWeldInstance`, **P4** `originalKouznetsovCertifiedNumerics`.
+
+**No theorem overclaim:** telescoping is a finite algebraic theorem. It does not produce Kneser's holomorphic function. The main high-alpha frontier remains the *actual original Bishop principal logarithm with quantitative disk estimates*; all new Agda sources are awaiting local Agda 2.9 kernel acceptance.
