@@ -161,3 +161,67 @@ on the same physical Wilson measure. Constants may depend on the externally sele
 ### Exact D2-OS residual lemma owners after dense-test reduction
 
 The authoritative D2 producer labels `D2.01–D2.05` are unchanged. The current sharper sublemmas are `D2-OS-01` (same E1 self-adjoint OS H and physical time), `D2-OS-02` (genuinely norm-dense full-nonvacuum original cylinder tests), `D2-OS-03` (a single strictly positive decay exponent for **each** dense test's original Euclidean-time autocorrelation, with test-dependent finite prefactor) and `D2-OS-04` (vacuum uniqueness/no hidden zero-modes and correct full Clay interpretation). Once D2-OS-01/02/03 are supplied, the spectral theorem **derives** full D2.04 subgap exclusion. The complete mathematical proof is in `YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md`; it is not a selected-Wilson source witness and not a prize claim.
+
+
+## 9 November 2026 13:35+10 continuation — NEW ORIGINAL PHYSICAL D1 + N1 progress, precise open gates
+
+### D1: actual SU(2) full-Wilson coherent connected-cluster suppression
+
+[Exact derivation and explicit remaining sparse-frustration cut](YMClayOriginalWilsonCoherentConnectedPolymerPacking20261109.md) operates on the **same original** four-dimensional periodic SU(2) Wilson normalized product-Haar Gibbs measure, with lattice side L>=3. Every marked original link belongs to six original plaquettes; its plaquette conflict degree is 18, and link endpoint adjacency degree is 14. The original full Gibbs law **conditionally factorizes** over any marked subfamily with disjoint incident plaquette stars, selected by a greedy >=|S|/19 packing. Combining the already-proved original one-link coherent-staple Haar tail `q=min(1,3exp(-beta*r/2))` with that genuine conditional factorization proves
+
+```
+P_original(all links in S simultaneously misaligned AND R_l>=r)
+     <= q^ceil(|S|/19)    (0<r<=6).
+
+P_original(exists coherent-misaligned connected link animal
+           of size >=m rooted at l0)
+     <= q^(1/19) [196 q^(1/19)]^(m-1) /
+                       (1-196 q^(1/19)),
+     whenever 196 q^(1/19)<1.
+```
+
+**This is a genuine original-Wilson connected-polymer bound for the entirely coherent-staple portion,** not a full B1/CMP116 covariance theorem. An original incidence/greedy-packing source regression `scripts/check_ym_original_wilson_connected_star_packing_20261109.py` was committed; independently executed equivalent Python geometry checks passed **112** instances on sides 3/4, giving 324/1024 original links and degrees 18/14.
+
+The same exact original Wilson action also gives a **joint extensive frustrated-link large-deviation theorem**. With `F_r={original links l:R_l<r}`, each frustrated six-star costs at least `6-r` in original plaquette deficit, and each original plaquette is counted in exactly four link stars. Thus for `beta>=16`, `0<r<6`, `0<eta<=1`, `C(beta)=8+(2/3)ln24+ln beta`:
+
+```
+P_original(|F_r|/|E| >= eta)
+  <= min(1, exp[-|P|*(beta*eta*(6-r)/6-C(beta))]).
+```
+
+**D1.03 genuinely unpaid** `D1-FRU-01b`: source-true suppression for a **specific sparse geometrically connected frustrated/mixed contour**, uniform in original cutoff/volume at fixed *physical* distance; `D1-FRU-02`: full small/large field original CMP116/119 marked-source identity, connected bridge entropy, R445 remote domain and decay. Bulk high-beta frustration density cannot control a 1D path across a 4D box; do not upgrade coherent-cluster plus bulk-frustration estimates to full covariance.
+
+### E1/N1: actual original Wilson word collapse and a positive beta-rescaled variance witness
+
+[Bounded original bare-word collapse / same-measure covariance proof](YMClayOriginalWilsonFixedWordCollapseAndN1Witness20261109.md) uses the EXISTING `YMClayE1D1OriginalVariablePlaquetteWordsExact.originalWordObservable` (arbitrary original plaquette-word length) and `YMClayOriginalVariableWilsonCovarianceSourceExact`. For an original k-plaquette normalized trace product W_w, every finite volume and beta>=16 satisfy
+
+```
+E_original|W_w-1|² <= 2k*C(beta)/beta,
+Var_original(W_w) <= 2k*C(beta)/beta,
+|Cov_original(W_w,W_v)| <= 2*C(beta)*sqrt(k*l)/beta
+  (|w|=k, |v|=l).
+```
+
+Consequently **every bounded-length unrenormalized UV plaquette word collapses** under beta->infinity; those alone cannot certify N1 or a dense nonvacuum OS family. Independent exact rational telescope checks: **19,531** finite words passed. This does NOT imply physical-scale Wilson-loop triviality or free continuum: the actual physically embedded word length grows.
+
+[NEW original SU(2) conditional renormalized plaquette variance theorem](YMClayOriginalSU2ConditionalVarianceNoncollapse20261109.md) proves a positive uniform finite-Gibbs lower bound for the **same original normalized Wilson one-link Haar conditional**. For any original plaquette p, beta>=1, side L>=3:
+
+```
+Var_original(t(U_p)) >= 1/[73728*(1+6*beta)^2]
+
+E_original{[beta*(t(U_p)-E_original t(U_p))]^2}
+           >= 1/3612672  >0.
+```
+
+This uses the **actual** conditional SU(2) quaternion von-Mises-Fisher density `exp(kappa*q0)`, kappa=beta R<=6 beta, a pair of disjoint fixed y=kappa(1-q0) intervals with explicit positive conditional masses, rotational invariance of three imaginary coordinates, and total variance under the true full Wilson measure. No independent plaquettes or arbitrary source-normalization witnesses are invented. Independent numerical checks of the two exact covariance eigenvalues at kappa=0,0.5,1,6,60,600 verified the conservative analytic constants; the analytic proof is in the linked source note.
+
+**N1.02 still unpaid** `N1-SU2-01`: weld original Wilson one-link disintegration and conditional Haar measure to the exact original Agda SUN carrier; `N1-SU2-02`: kernel-prove lower bound in pinned real/Haar APIs; `N1-SU2-03`: construct a fixed-*physical*-support renormalized cylinder test with continuum tightness, upper moments/uniform integrability and same-E1 nonzero limiting variance; `N1-SU2-04`: actual surviving interacting/non-Gaussian multi-point witness. A local UV beta-rescaled variance lower bound is a **finite-volume N1 precursor**, not E1 continuum nontriviality.
+
+### E1/D2/G1 exits unchanged but sharper
+
+- `E1-LOC-01`: use truly fixed-physical-support refined gauge-invariant loops, not bounded-length UV plaquette products.
+- `E1-CONV-01`: source-prove all Schwinger multi-point convergence with QFT axioms, original reflection/OS dictionary and interacting meaning.
+- `D2-OS-02/03`: genuine **norm-dense noncollapsed** same-E1-H cylinder vectors and ONE common strictly positive physical-time autocorrelation decay exponent. Existing R333 spectral calculus closes D2.04 *after* these are paid; bare fixed-word collapse gives a negative density-control example.
+- `G1.03`: the group-general finite original Wilson pressure bound is only G1.02; the group-specific E1/D2/N1 interacting `R^4` physics is unconstructed.
+
+**VERIFICATION:** source math and regression checks as specified, no new Agda 2.9 kernel receipt, and no Clay physical endpoint claim. Keep the 23 original producer IDs E1.01–07, D1.01–04, D2.01–05, N1.01–03, G1.01–04 authoritative; the new hyphenated names above are exact sub-obligations/targets, NOT invented pre-existing Agda declarations.
