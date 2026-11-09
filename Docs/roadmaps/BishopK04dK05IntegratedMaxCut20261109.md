@@ -747,3 +747,29 @@ remain mathematically OPEN.
 
 Detailed receipts:
 `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-09: ITIR original-world consumer transport, paid gate
+
+H2.01 continuation now uses the existing
+`ITIRFederatedTypedWorldProjectionExact.SourceAddressableSemanticNode`
+as its ORIGINAL operational world carrier instead of inventing
+world states. The implemented
+`TernaryThirteenOriginalConsumerRepairAndWorldTransportExact`
+source constructs the canonical original observer-pair repair
+(12-stage projection plus central trit), proves sufficiency,
+strict refinement and necessity of separating its explicit
+non-descent pair. The `OriginalWorldCentralTransport`
+source-admission record requires actual world nodes, a
+source-valuation correspondence and *commuting* selected
+world-observer/world-consumer maps before its conditional
+non-descent and factorization obstruction can be invoked.
+
+No canonical world-node witness has been fabricated. Therefore
+the **world-source admission/identification leaf remains open**,
+even though transport *given payment* is implemented.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and source receipts. This does not
+discharge original Bishop Cayley P1, independent zeta P2 or
+Gamma/Xi P3.
