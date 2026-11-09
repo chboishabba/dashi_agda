@@ -14,7 +14,7 @@ deGraffenreidTrial = Legal.legal-citation
   "United States District Court for the Eastern District of Missouri"
   "DeGraffenreid v General Motors Assembly Division"
   1976
-  (Legal.authorisedReportCitation "413 F. Supp. 142")
+  (Legal.bibliographicLegalFallback "413 F. Supp. 142")
   "143-145, combined race-and-sex claim"
   "District court declined a combined race-and-sex Title VII cause of action"
   false refl
@@ -26,7 +26,7 @@ deGraffenreidAppeal = Legal.legal-citation
   "United States Court of Appeals for the Eighth Circuit"
   "DeGraffenreid v General Motors Assembly Division"
   1977
-  (Legal.authorisedReportCitation "558 F.2d 480")
+  (Legal.bibliographicLegalFallback "558 F.2d 480")
   "480-487, opening and disposition"
   "Affirmed in part, reversed in part and remanded, on grounds requiring stage-specific analysis"
   false refl
@@ -38,7 +38,7 @@ jefferiesAppeal = Legal.legal-citation
   "United States Court of Appeals for the Fifth Circuit"
   "Jefferies v Harris County Community Action Association"
   1980
-  (Legal.authorisedReportCitation "615 F.2d 1025")
+  (Legal.bibliographicLegalFallback "615 F.2d 1025")
   "1032-1034, combined claim and remand"
   "Recognised combined race-and-sex discrimination claims and remanded for findings"
   false refl
