@@ -27,6 +27,7 @@ import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact as Institution
 import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact as Compliance
 import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact as Country
 import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
+import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -442,3 +443,13 @@ brisbaneNetMinusNine = MemberPanel.brisbaneNineNetMinus
 antalyaNetMinusSeven : MemberPanel.minusCount MemberPanel.antalyaFossilMembers
   ≡ MemberPanel.plusCount MemberPanel.antalyaFossilMembers + 7
 antalyaNetMinusSeven = MemberPanel.antalyaSevenNetMinus
+
+c20ReceiptNotG20Adoption :
+  Handoff.EvidenceItem.level Handoff.c20PresidencyReceipt
+  ≡ Handoff.adoptedPolicyText → ⊥
+c20ReceiptNotG20Adoption = Handoff.c20ReceiptNotPolicyAdoption
+
+b20ReportedPresentationNotDraftUptake :
+  Handoff.EvidenceItem.level Handoff.b20ICCPresentationAccount
+  ≡ Handoff.provedDraftUptake → ⊥
+b20ReportedPresentationNotDraftUptake = Handoff.b20PresentationNotDraftUptake
