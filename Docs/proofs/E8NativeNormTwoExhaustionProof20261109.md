@@ -1,6 +1,6 @@
 # E8 norm-two exhaustion — exact mathematical classification
 
-**Evidence level:** complete mathematical proof for the standard coordinate definition; **not yet** an Agda-checked theorem about the repository's selected original carrier.
+**Evidence level:** complete mathematical proof for the standard coordinate definition; **not yet** an Agda-checked theorem about the repository's finite generated root carrier or an independently constructed unbounded E8 lattice carrier.
 
 ## Carrier and normalization
 
@@ -45,3 +45,7 @@ These declarations are **not claimed to exist or to compile**. In particular, it
 \`AbelE8HalfOddShellInvolutionExact\` already defines a sign flip on arbitrary odd doubled-coordinate magnitudes and establishes its involutivity, norm preservation, parity flip, and coordinate-level two-sided transports for all shell indices. \`AbelE8ThetaParityProjectorExact\` supplies the all-index signed coefficient equation conditional on actual counts satisfying half-family parity cancellation. Neither theorem is merely an \(n\le8\) regression.
 
 The unresolved chain is: original E8 shell equivalence → finite shell cardinality transport → identification with genuine Jacobi theta coefficients → Bishop analytic convergence and Jacobi/Eisenstein identity (or source-native modular uniqueness) → original \(\Theta_{E8}=E4\) → nonvanishing discriminant / same-source \(j\). No promotion to Agda-kernel completion is justified without exact-head Agda 2.9 \`--safe\` acceptance.
+
+## Critical carrier audit
+
+`DASHI/Algebra/Trit/E8RootEnumeration.agda` actually declares `E8IndexedRootCarrier = Vec HalfTritIndexed 8` with coordinate alphabet `indexedNegOne`, `indexedNegHalf`, `indexedZero`, `indexedPosHalf`, `indexedPosOne`. This is a **finite root-vector representation**, not the full lattice, whose higher shells have coordinates outside that alphabet. The original generator is the candidate enumeration for precisely the norm-two slice. A new unbounded carrier is required for analytic theta. Do not state an equivalence between the entire full E8 lattice and `E8IndexedRootCarrier`.
