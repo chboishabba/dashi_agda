@@ -234,3 +234,6 @@ import DASHI.Mathematics.Complexity.Karp21SignedSSPOrientationNoLosslessExact
 
 -- N21: decode original strictly positive gamma(W) as binary W, not W+1.
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact
+
+-- N21 binary-prefix trie identity sharing; equivalence and tape clock remain open.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeEndpointPrefixTrieExact
