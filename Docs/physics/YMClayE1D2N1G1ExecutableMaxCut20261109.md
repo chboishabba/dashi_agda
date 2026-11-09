@@ -77,3 +77,18 @@ Priority ordering:
 - Gate status is determined by proof evidence, not whether the roadmap line or conditional compiler exists.
 
 **Precise critical dependency:** G1 requires a functorial parametric continuation of the completed same-source E1/D2/N1 theory; E1 is not automatically proved by existence of finite Wilson Gibbs measures, D2 not by positivity of finite weights, N1 not by finite positive variance.
+
+
+## 2026-11-09 execution update — preferred Round578 and actual original-source E1 unit base case
+
+**Correction of canonical path:** `YangMillsClayCriticalPathRound578Exact.agda` is newer and narrower than Round562. It imports `YangMillsClayPreferredA3FiniteProjectionRound566Exact`, `YangMillsWilsonPathFiniteFactorizationRound568Exact`, `YangMillsPreferredWilsonWEXTSourceRound576Exact`, `YangMillsPreferredSameHamiltonianTransferRound577Exact`, `YangMillsActualGroupSourceFirstCompleteRound571Exact`, and `YangMillsSameFamilyWardKernelSourceRound563Exact`. For all follow-on implementation, **use Round578 as the shortest preferred critical route**; Round562 remains historical comparison, not the canonical remaining cut.
+
+**Repaid finite E1 source leaf:** `YMClayE1OriginalSUNDependentCylinderExact.agda` now contains:
+- `originalWilsonUnitCylinderExpectationIsOne`: transports **the existing actual original Wilson** R445 `originalWilsonExpectationOfUnitIsOne` for every changing-cutoff link carrier. Inputs are actual selected one-link Haar ordered laws, strict positivity, strict-to-weak order and scalar self-division cancellation. Not an arbitrary finite-state normalisation assertion.
+- `originalWilsonUnitCylinderConverges`: uses `SelectedScalarConvergence.convergenceCongruent` and `constantConverges` to show the literal original Wilson *unit cylinder* converges to `1ℝ` on every cutoff. It does not assume an E1 all-observable limit.
+
+This is the source-level **normalisation/convergence base case**. It does not establish the nonconstant gauge-invariant Wilson finite-projection factorization on the independently selected continuum projective configuration system, projective event consistency, continuity at empty, or the actual continuum convergence of interacting Wilson products. Avoid counting this as E1 closure.
+
+**Revised highest-alpha E1 exact leaves:** construct the original selected Wilson path-to-projective-coordinate identification (R568 remaining `literalRound568PathProjectionBelongsToSelectedProjectiveSystemLevel`), prove A3 event consistency and continuity at empty (R566), and recover nonconstant selected expectations with an original-source uniform/Cauchy or projective representation theorem. Reuse R568 finite-path word factorization; do not rewrite it. B1 remains the R576 actual two-source mixed-log cluster expansion and connected-weight tail; B2 remains the R577 physical transfer coordinate of *the reconstructed* Hamiltonian; G1 remains R571, H6 R563.
+
+**Verification honesty:** source written and repository readback only; no Agda kernel receipt. The E1 constant-cylinder proof is a nontrivial finite integration/same-source consumer but not a Clay continuum construction.
