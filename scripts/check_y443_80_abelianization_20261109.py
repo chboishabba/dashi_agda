@@ -48,12 +48,17 @@ def main():
     assert (len(r79),len(r80))==(79,80)
     assert (sum(map(len,r79)),sum(map(len,r80)))==(400,463)
     b79=list(map(mask,r79));b80=list(map(mask,r80))
+    expected_edge_positions={("a","b1"):12,("b1","c1"):23,("c1","d1"):33,("d1","e1"):42,("a","b2"):16,("b2","c2"):57,("c2","d2"):63,("d2","e2"):68,("a","b3"):20,("b3","c3"):75,("c3","d3"):77}
+    for edge, idx in expected_edge_positions.items():
+        assert r80[idx]==list(edge)*3, (edge,idx)
+    assert r80[79]==CENTRAL
     assert mask(SPIDER)==0
     assert rank(b79)==11 and rank(b80)==12
     chars79=[i for i in range(1<<12) if character_vanishes(i,b79)]
     chars80=[i for i in range(1<<12) if character_vanishes(i,b80)]
     assert chars79==[0,(1<<12)-1] and chars80==[0]
     print("PASS: Y443 original relator counts 79/80 and word lengths 400/463")
+    print("PASS: all 11 Agda source-edge projection indexes and central index 79")
     print("PASS: original F2 parity ranks 11 (79) and 12 (80)")
     print("PASS: 79 relators admit exactly two mod-2 characters; 80 only trivial")
     print("SCOPE: abelian character test only; Monster and selected kernel OPEN")
