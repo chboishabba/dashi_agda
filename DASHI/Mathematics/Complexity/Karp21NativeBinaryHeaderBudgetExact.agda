@@ -19,11 +19,14 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.List.Base using (length)
 open import Data.Product using (_×_; _,_)
+open import Relation.Nullary.Decidable.Core using (yes; no)
+import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21NativeUnsignedEndpointBitReaderExact as Reader
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountBudgetExact as Budget
+import DASHI.Mathematics.Complexity.Karp21NativeNatDecisionReflectionExact as Decisions
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Original
 import Data.Nat.Base as Nat
@@ -109,10 +112,10 @@ readOriginalBudgetedHeader word
   with readOriginalNumericGraphHeader word
 ... | nothing = nothing
 ... | just (numeric-header n m afterM)
-  with Nat._≤ᵇ_ (suc (suc (suc zero)) * m)
+  with NatP._≤?_ (suc (suc (suc zero)) * m)
        (length afterM)
-... | false = nothing
-... | true = just (numeric-header n m afterM)
+... | no _ = nothing
+... | yes _ = just (numeric-header n m afterM)
 
 nativeBinaryBudgetedHeadersSameOriginal :
   (word : Word.BitWord) →
@@ -126,7 +129,10 @@ nativeBinaryBudgetedHeadersSameOriginal word
 ... | just (binary-header n m afterM) | headEq
   rewrite sym headEq
         | Budget.binaryCountBudgetSameOriginal m afterM
-  with Nat._≤ᵇ_ (suc (suc (suc zero)) * Value.valueLE m)
+        | Decisions.natLEDecisionSameBoolean
+            (suc (suc (suc zero)) * Value.valueLE m)
+            (length afterM)
+  with NatP._≤?_ (suc (suc (suc zero)) * Value.valueLE m)
        (length afterM)
-... | false = refl
-... | true = refl
+... | no _ = refl
+... | yes _ = refl
