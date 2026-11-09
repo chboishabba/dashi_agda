@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact where
 
 ------------------------------------------------------------------------
@@ -55,11 +54,24 @@ wordToValuation word Atlas.atlas-11 = toSource (proj₁ (proj₂ (proj₂ (proj�
 valuationToWord : Rel.SourceTwelveAxisValuation → F.TritWord 12
 valuationToWord valuation = (fromSource (valuation Atlas.atlas-0) , (fromSource (valuation Atlas.atlas-1) , (fromSource (valuation Atlas.atlas-2) , (fromSource (valuation Atlas.atlas-3) , (fromSource (valuation Atlas.atlas-4) , (fromSource (valuation Atlas.atlas-5) , (fromSource (valuation Atlas.atlas-6) , (fromSource (valuation Atlas.atlas-7) , (fromSource (valuation Atlas.atlas-8) , (fromSource (valuation Atlas.atlas-9) , (fromSource (valuation Atlas.atlas-10) , (fromSource (valuation Atlas.atlas-11) , tt))))))))))))
 
+mapTritWord :
+  (n : Nat) → (F.Trit → F.Trit) →
+  F.TritWord n → F.TritWord n
+mapTritWord zero map tt = tt
+mapTritWord (suc n) map (x , xs) =
+  map x , mapTritWord n map xs
+
+mapFromToRoundTrip :
+  (n : Nat) (word : F.TritWord n) →
+  mapTritWord n (λ x → fromSource (toSource x)) word ≡ word
+mapFromToRoundTrip zero tt = refl
+mapFromToRoundTrip (suc n) (x , xs) =
+  cong₂ _,_ (fromToSource x) (mapFromToRoundTrip n xs)
+
 valuationWordRoundTrip :
   (word : F.TritWord 12) →
   valuationToWord (wordToValuation word) ≡ word
-valuationWordRoundTrip (x0 , (x1 , (x2 , (x3 , (x4 , (x5 , (x6 , (x7 , (x8 , (x9 , (x10 , (x11 , tt)))))))))))) =
-  refl
+valuationWordRoundTrip word = mapFromToRoundTrip 12 word
 
 valuationPointwiseRoundTrip :
   (valuation : Rel.SourceTwelveAxisValuation)
