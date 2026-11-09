@@ -249,3 +249,7 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorC2Exact
 
 -- Source-written first-enabled FRACTRAN cache/step invariance.
 import DASHI.Mathematics.Complexity.Karp21FractranPriorityFrontierExact
+
+-- Actual original N21 endpointConsistent/boolEqual + binary-ledger FRACDASH edge transition.
+-- One-edge same-step and cached-score-update theorems; full rawSparseScore weld open.
+import DASHI.Mathematics.Complexity.Karp21FractranN21EndpointScoreStepExact
