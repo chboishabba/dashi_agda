@@ -28,10 +28,11 @@ noLeftDecoderAtCollision :
   (a ≡ a′ → ⊥) →
   (decode : O → A) →
   ((x : A) (y : B) → decode (f x y) ≡ x) → ⊥
-noLeftDecoderAtCollision f same distinct decode correct =
+noLeftDecoderAtCollision f {a = a} {a′ = a′} {b = b} {b′ = b′}
+  same distinct decode correct =
   distinct
-    (transEq (symEq (correct _ _))
-      (transEq (congEq decode same) (correct _ _)))
+    (transEq (symEq (correct a b))
+      (transEq (congEq decode same) (correct a′ b′)))
 
 noRightDecoderAtCollision :
   ∀ {A B O : Set} (f : A → B → O)
@@ -40,7 +41,8 @@ noRightDecoderAtCollision :
   (b ≡ b′ → ⊥) →
   (decode : O → B) →
   ((x : A) (y : B) → decode (f x y) ≡ y) → ⊥
-noRightDecoderAtCollision f same distinct decode correct =
+noRightDecoderAtCollision f {a = a} {a′ = a′} {b = b} {b′ = b′}
+  same distinct decode correct =
   distinct
     (transEq (symEq (correct _ _))
       (transEq (congEq decode same) (correct _ _)))
