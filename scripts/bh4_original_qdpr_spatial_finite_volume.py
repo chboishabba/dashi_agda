@@ -279,6 +279,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
-    if not args.self_test:
-        parser.error("only --self-test: no source-calibrated flux dataset shipped")
+    # No external calibrated dataset is accepted by this fixture yet.
+    # Default operation is the same explicitly synthetic self-test so the
+    # existing source-regression aggregate can run it via runpy.run_path.
     self_test()
