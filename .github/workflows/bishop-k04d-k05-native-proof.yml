@@ -45,6 +45,7 @@ on:
       - 'DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda'
       - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda'
       - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda'
+      - 'DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda'
       - 'DASHI/Analysis/BishopOriginalLogAtanDerivativeLimitValuesExact.agda'
       - 'DASHI/Analysis/BishopK04dNatLogFromOriginalGapExact.agda'
       - 'DASHI/Analysis/BishopK04dConcreteAboveTwoPolynomialChartExact.agda'
@@ -181,6 +182,7 @@ jobs:
             DASHI/Analysis/BishopOriginalFactorIncrementFiniteTelescopeExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteExpMeshEndpointExact.agda
             DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda
+            DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda
             DASHI/Analysis/BishopOriginalLogAtanUniformDerivativeRemainderExact.agda
             DASHI/Analysis/BishopOriginalExponentialUniformCompactTailExact.agda
             DASHI/Analysis/BishopOriginalExponentialSequentialContinuityExact.agda
