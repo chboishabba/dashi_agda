@@ -62,3 +62,52 @@
 **Local numerical baseline:** 6/6 synthetic `reactive_pnp_369.py` tests rerun successfully on 2026-11-09. That solver has 27 original voxels, 54 native bonds, only three synthetic species, closed blocking mass boundaries and grounded electrostatics. It has not been committed to the repo or accepted as a source-specific P0 constitutive law as of initial audit. Do not fill source gaps with simulated data.
 
 **Next exact cut:** implement source-identity-gated 29-species numerical adapter on the same 54 bonds, add source attribution/negative controls, then run exact-head Agda check on G0.01–04. The P0.05–07 physical proofs remain open independently of numerical simulation.
+
+
+## 2026-11-09 P0.03 exact-incidence continuation (assistant-authored verification)
+
+**Implemented in this branch:** `scripts/check_bh4_native_incidence_exact.py` and
+`scripts/test_bh4_native_incidence_exact.py`. The exact rational checker is a
+native 27-site/54-edge linear-algebra certificate, not original-Rhea biological
+data, not Agda kernel acceptance, and not an original PNP constitutive proof.
+It uses the existing DASHI ternary geometric carrier and does not replace
+pants-gluing semantics with a flat-vector ontology.
+
+**Proved at the mathematical/algebraic level:** for the native oriented
+incidence matrix `B`, each of its 54 columns has exactly one `-1` and one
+`+1`, hence `1^T B = 0`. Therefore `1^T B J = 0` for every
+54-by-n finite current matrix `J`, regardless of entries or rate laws.
+For an n-by-r reaction matrix `S`, site reaction rates `v`,
+valences `z`, and explicit exchange `X`, the exact identity is
+`dQ/dt = sum_site z^T S v_site + sum_site z^T X_site`.
+If `z^T S=0` and `X=0`, global charge is invariant; otherwise
+the charged reaction or boundary term must remain visible. The implemented
+checker evaluates the identities using Python `Fraction`, rather than
+floating-point tolerances.
+
+**Verification boundary:** the five committed unit tests cover the native
+graph, arbitrary signed rational 29-species currents, nonzero boundary work,
+a deliberately charge-violating reaction, and malformed dimensions. They were
+source-written in this pass; execution of these exact GitHub files and Agda
+kernel compilation has **not been verified** in this environment. A pure
+algebraic proof does not imply the original 29x12 source satisfies `z^T S=0`.
+
+**Refined proof obligations:**
+- P0.03a `native369IncidenceColumnCancellationExact`: port the exact
+  27x54 oriented-column cancellation into Agda, prove it at the selected
+  geometry and obtain exact-head kernel receipt. OPEN (Python exact checker).
+- P0.03b `native369AllSpeciesInternalFluxCancellationExact`: derive
+  arbitrary-current all-species cancellation in Agda. OPEN (algebra
+  established, kernel not run).
+- P0.03c `original369ChargeContinuityWithExplicitExchangeExact`: weld
+  original-source `z^T S` certificates, boundary currents, and the
+  same physical state. OPEN; blocked by S0.01/S0.03 and P0.07.
+- P0.02 native SG constitutive identification remains OPEN; incidence
+  cancellation holds for currents independently of this identification.
+- P0.05/06 full implicit positivity and energy dissipation remain OPEN.
+
+**Next alpha:** obtain G0.01-04 exact-head kernel receipts; port P0.03a/b
+to Agda using the native geometry owner; recover S0.01 source bytes and
+S0.02-04 actual chemical/kinetic certificates; instantiate P0.03c and
+P0.07 against the same source-specific state. Never promote these
+conditional exact-arithmetic statements to physical P0.08 or P1-P3.
