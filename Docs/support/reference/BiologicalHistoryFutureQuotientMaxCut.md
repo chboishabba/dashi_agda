@@ -964,3 +964,29 @@ Other independent Clay fronts remain separate: YM E1/D1/D2/N1/G1,
 Lorentz/KK physical metric and OS identification, Monster/Y443 group/VOA
 same-action identification, Karp-21 complete compiler and reduction network,
 and the original-source numerical AFQMC replication.
+
+
+### 2026-11-09 finite positive repair after the adversarial no-go
+
+The existing adversarial owner now also defines
+`markerAwareProject`, `markerAwareStep`,
+`markerAwareObservationCommutes`, `markerAwareStepCommutes`,
+`markerAwareAfterTrace`, `markerAwareCodeImpliesTraceEquivalence`,
+and `markerAwareFutureSafe`. The repair pairs the original minimal
+morphology code with the previously discarded chromatin-marker Boolean.
+It proves step/observation commutation and derives all finite-word
+future-language safety for **the selected markerProbe-only system**.
+
+This complements the general `everySafeMarkerProjectionSeparatesWitness`
+necessity: the old code is inadequate, while the explicit marker-aware
+code is sufficient in the selected synthetic transition family.
+It does NOT establish that the revised code is minimal for a larger
+intervention language, that observed molecular chromatin effects follow
+this transition law, or that either proof has passed Agda in this session.
+
+**Outstanding direct verification:** run the current PR head through
+`scripts/run_agda29_parallel_check.sh` on the focused owner and
+`DASHI/EverythingBiologicalHistoryFutureRound23.agda`, then source-pin
+the success receipt. No compiler is available in the current connector
+environment. Do not close GOLD-02, GOLD-04, BIO-04 or BIO-07 on source
+inspection alone.
