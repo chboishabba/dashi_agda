@@ -379,6 +379,29 @@ def self_test():
     assert result["original_mixed_face_reaction_history_checks"]==1
     assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
+    # Fail-closed negative controls: no fictional interior boundary,
+    # no unreferenced environmental flux, and no extraction of material
+    # that is not actually available in the selected cubical voxel.
+    finite,metadata=check_certificate(cert,full_panel=False)
+    key=finite["species_index"][0]
+    empty=inventory(finite["species_index"])
+    for bad in (
+        dict(face=(0,-1),point=(0,0,0),key=key,
+             direction="inject",amount=1,source_reference="synthetic fixture"),
+        dict(face=(0,-1),point=POINTS[0],key=key,
+             direction="inject",amount=1,source_reference=""),
+    ):
+        try:
+            boundary_species_event(empty,metadata,**bad)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("unpaid/nongeometric original exchange admitted")
+    unchanged,ledger,actual=boundary_species_event(
+        empty,metadata,face=(0,-1),point=POINTS[0],key=key,
+        direction="extract",amount=100,source_reference="synthetic negative control")
+    assert unchanged==empty and actual==0
+    assert ledger==((0,)*len(ELEMENTS),0)
     print(json.dumps(result,indent=2,sort_keys=True))
 
 
