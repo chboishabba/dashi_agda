@@ -287,3 +287,30 @@ No external eigenvalue label is promoted by any of these algebraic results.
 Inspection identifies a directly relevant exact theorem: `DASHI.Physics.Closure.NSTriadKNLuoFiniteJensenSquareExact.finiteJensenSquare` proves `(∑a_i)² ≤ (∑a_i²)·length` for finite lists over `Data.Rational.Base.ℚ`, reusing `NSTriadKNRationalOrderedFiniteL2.finiteCauchySchwarzSquared`. Its statement is real mathematics, not a receipt-only Set field.
 
 For the equicorrelation full PSD range, the maximum cut is therefore **not** to reinvent Cauchy–Schwarz. It is to instantiate the finance equicorrelation quadratic over the same rational carrier and finite-list summation, connect the existing Jensen bound and rational order multiplication by nonpositive rho, and finish necessity using the all-ones and a nonzero zero-sum vector for p>1. No full-range theorem has been authored in this round. Do not transfer this rational theorem automatically to arbitrary `ExactOrderedScalar` without a real carrier/ordered-field embedding.
+
+## 14. MP reuse and executable null backend (2026-11-09)
+
+**Reused source owners:** `DASHI.Information.PNFSpectralGeometry.SpectralNoiseBand`, `NoiseClassifier` and `DASHI.Information.PNFMarchenkoPasturFiniteExact.MPFiniteCalibration`; source-owned non-promotion remains `DASHI.Interop.PNFSpectralNumericABICore.pnfSpectralNumericABIPromotionImpossible`. Default branch search did **not** identify a separate complete Marchenko–Pastur density/weak-limit implementation.
+
+**New committed code:**
+- `DASHI/Information/PNFMarchenkoPasturAdmissionExact.agda`: `MPPNFCandidate` links an existing MP calibration to the existing PNF classifier with a definitional classification-equality proof. `mpCandidateAboveEdge` delegates to the original `above-null-band` theorem. `mpCandidateCannotPromoteNumericABI` directly reuses the canonical empty promotion type. Agda kernel acceptance OPEN.
+- `scripts/pnf_marchenko_pastur_numeric.py`: numerical MP endpoints, continuous density, zero atom, finite centered covariance/correlation, bulk eigenvalue clipping, PSD-preserving reconstructed operator with explicit diagonal restoration, source-labelled receipt and forced-zero lower-bound calculation.
+- `tests/test_pnf_marchenko_pastur_numeric.py`: 4 synthetic/unit tests checking density+atom normalization numerically, finite rank/trace/PSD/diagonal preservation, invalid data rejection, and common-factor versus independently shuffled samples.
+- An independent local sibling numerical module with the same MP and covariance-cleaning mathematical functionality passed 4/4 tests under Python 3.13 / NumPy on 2026-11-09. The exact committed GitHub module/tests have NOT been run from a checked-out branch in this environment; run them in the repository and record their actual result before treating that implementation as tested.
+
+**MP convention:** \(\gamma=p/(n-1)\) for centered sample covariance, edges \(\sigma^2(1\pm\sqrt\gamma)^2\), zero atom \(\max(0,1-1/\gamma)\). For correlation matrices \(\sigma^2=1\) is the explicitly chosen baseline, NOT a fitted PNF noise variance. MP density normalization is numerically tested, not formally proved in Agda. A finite-dimensional MP edge is a heuristic reference unless the relevant edge uncertainty, dependence assumptions and multiple-testing questions are addressed.
+
+**New PNF/economics assertions enabled in software (not empirical conclusions):**
+1. PNF explicit predicate activations and financial returns can pass through the same finite numeric covariance procedure when each has independently selected source, units, missing-data and dependence conventions.
+2. A statistically unusual mode is only a candidate; candidate status never bypasses PNF provenance/semantic gates or dashiTRADE cost/action gates.
+3. Correlation cleaning requires a diagonal repair after bulk spectral clipping. A cleaned covariance PSD theorem does not prove unit diagonal, out-of-sample risk benefit, sector identity or trading alpha.
+4. If p>n-1, finite centered covariance has at least p-(n-1) zero eigenvalues. An exact proof of this multiplicity in Agda still needs rank/nullity, despite the constructive centred-row dependence lemma.
+
+**Next exact maximum cut:**
+P0 kernel-check all draft PR modules and repair any failures; run exact GitHub numeric tests.
+P0 bridge existing finite rank/nullity to `centredFirstRowDeterminedByRemainingRows`; complete rational equicorrelation PSD interval using the repo's proven finite Jensen/Cauchy result.
+P1 source-verified, explicit orthogonal eigendecomposition and diagonal correlation restoration (not merely generic PSD). Full MP measure-normalization, moments, Stieltjes equation and asymptotic weak limit remain OPEN in Agda.
+P2 recover original PNF eigenvalue-generating inputs and run independently justified null controls; run actual financial-market data and held-out covariance-risk assessment.
+P3 integrate the clean risk estimate as an optional upstream observation to Nashi with a source-specific no-bypass and costed walk-forward ledger.
+
+**Attribution:** external Fleet values 74.5526/18.8350/5.5865 are planning labels, not proven eigenvalues from one 120-column correlation matrix. Do not infer an 82.48% explained-variance claim. The reel itself motivates the null-versus-signal comparison, but it does not establish applicability of iid MP to PNF data.
