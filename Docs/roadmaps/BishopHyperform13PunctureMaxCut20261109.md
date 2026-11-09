@@ -97,3 +97,39 @@ New code is a **constructed trit-word model**. `Rank.fixedTernaryProfileCount ra
 - golden root imports: `e2e390a`, `9b7710f`, `9b9448b`
 
 Agda kernel check deferred at user request. No proof of H1.01, original source observer descent, H2.02 or remaining Bishop analytic/zeta/Xi gates is claimed.
+
+
+## Max-cut continuation: source StageAtlas valuation construction and transport
+
+Source committed after the preceding execution receipt:
+
+- `DASHI/Biology/RelationalAppraisalPointedPhaseExact.agda`: now **constructs** `SourceTwelveAxisValuation = StageAtlasZeroToEleven → Base369.TriTruth` and `SourceCentralCompletionCarrier = SourceTwelveAxisValuation × Base369.TriTruth`, plus central projection/coordinate and chosen neutral section. This is a source-grounded **valuation model** and is NOT identified with the pre-existing numeric `centralCompletionGroupOrderPattern` by group/Monster semantics.
+- `DASHI/Foundations/TernaryThirteenOriginalAxisValuationBridgeExact.agda`: exact original-truth/trit bijection, `wordToValuation`, `valuationToWord`, `valuationWordRoundTrip`, `valuationPointwiseRoundTrip`; `sourceCentralToThirteen`, `thirteenToSourceCentral`, `sourceCentralRoundTripOnAxis`, `sourceCentralRoundTripOnCentre`, `thirteenSourceRoundTrip`, `sourceNeutralSectionCommutes`. Function-valued valuation round-trip is intentionally *pointwise*: no extensionality postulate is introduced.
+- `DASHI/Foundations/TernaryThirteenOriginalSourceObserverDescentExact.agda`: explicit pair of original `StageAtlasZeroToEleven` valuation states differing only in the central original `TriTruth`; `originalSourceCentralNonDescentWitness`, `originalCentralPunctureObserverDescent` and `originalCentralPunctureObserverCannotFactor` reuse the original DASHI consumer-descent theorem and record.
+- `DASHI/Foundations/TernaryThirteenOriginalSourceRefinementExact.agda`: a concrete involutive original-axis chart permutation; `centralProjectionCommutesWithRefinement`, `centralCoordinatePreservedByRefinement`, `neutralSectionCommutesWithRefinement`, `punctureRefinementForward`, `punctureRefinementBackward`, `refineTwicePointwise`. This is a **specific chart-refinement naturality test**, not proof of all original site coverings or sheaf gluing.
+- Canonical three TOE root imports updated; temporary `--safe` options removed from three new finite-model modules because their existing `DASHI.Core.Prelude` imports are not declared safe.
+
+### Revised precise obligations
+
+| Gate | New state | Narrowest unpaid mathematical leaf |
+|---|---|---|
+| H1.01 model | SOURCE | A source-grounded 12-axis valuation × central original `TriTruth` carrier exists, and has full word-side and pointwise valuation-side inverses. |
+| H1.01 semantic | **OPEN** | Construct and prove that the **original intended relational/group central completion** is this particular valuation model, rather than merely sharing the number `3^13`. Requires actual source semantics or a selected identification. |
+| H2.01 model | SOURCE | Non-descent is proved on the original atlas/tri-truth **constructed completion carrier**, and on the generic 13-word representation. |
+| H2.01 original operational | **OPEN** | Establish the same non-descent for an independently selected full relational or world-model observer/consumer, if its domain differs from the constructed source valuation model. |
+| H2.02 concrete | SOURCE | Central coordinate and puncture predicate commute with one explicit involutive chart change. |
+| H2.02 site | **OPEN** | Full site morphisms, cover families, restriction maps, central-section compatibility and sheaf matching-family gluing; cannot be derived from one chart permutation. |
+| B-P1.01–05 | OPEN | Original analytic exp_C(2i atan_B) = Cayley t and selected Machin 1/5, 1/239. |
+| B-P2.02–04 | OPEN | Original canonical powers and independently selected zeta equality. |
+| B-P3.01–07 | OPEN | Gamma, analytic continuation, functional equation and Xi. |
+
+All new implementations are **source-written; Agda 2.9 acceptance deliberately unclaimed**. Names in the table not implemented remain proposals, not fake discharge receipts.
+
+### Continuation commits
+
+- `4bc4936` source original StageAtlas valuation/centre
+- `9ba4dea`, `6db4a0c` original 12-axis/13-trit round-trip and generic inverse correction
+- `6e25017` original DASHI consumer non-descent
+- `1114e5d` concrete original-axis chart refinement naturality
+- `ec9aa35`, `ade7b0b`, `964fa62` source module option alignment
+- `cf00a3f`, `71b7b61`, `a6ead48` root imports
