@@ -20,6 +20,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Product using (Σ; _,_)
 open import Data.List.Base using (reverse)
+open import Data.Nat.Tactic.RingSolver using (solve)
 open import Data.Maybe.Base using (just; nothing)
 open import Relation.Binary.PropositionalEquality using (cong)
 
@@ -50,7 +51,7 @@ anyOneTrueMeansPositive (true ∷ rest) observed =
 anyOneTrueMeansPositive (false ∷ rest) observed
   with anyOneTrueMeansPositive rest observed
 ... | k , equality rewrite equality =
-  (suc (Value.two * k)) , refl
+  (suc (Value.two * k)) , solve (k ∷ [])
 
 -- The ACTUAL gamma-prefix scan and binary predecessor reject zero
 -- and return only positive threshold values; no premise about the
