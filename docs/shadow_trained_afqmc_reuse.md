@@ -441,3 +441,26 @@ The new `scripts/qcafqmc_existing_hartree_fock_reuse.py` **imports those existin
 `scripts/qcafqmc_source_acceptance.py` now explicitly runs the one-orbital RHF/FCI identity regression while retaining the older helium owners as the source of the theoretical/numerical convergence evidence.
 
 **Remaining actual proof**, not mere reuse: execute verified original nickel charge/spin/geometries through PySCF, independently certify `C^T S C = I`, RHF fixed-point self-consistency `F[P]C=SC\varepsilon`, and both the AO→MO one- and two-electron basis-transform identities before admitting the active-space CASCI and full-space iPie integrals. Full original VCE/upCCD/QPU NQS remains independent and open.
+
+
+## 9 November 2026: pre-existing DASHI Hartree–Fock reuse, not a duplicated HF implementation
+
+The user correctly identified that the DASHI repository **already owned an HF-equivalent atomic numerical implementation**. Verified originals: scripts/atomic_helium_hartree_scf.py (closed-shell one-spatial-orbital two-electron radial Hartree), scripts/atomic_helium_hartree_convergence.py (grid/Richardson comparison to the published neutral-helium RHF limit), AtomicPeriodicTable369HeliumHartreeConvergenceExact.agda and its physical validation root. The existing convergence report itself says “restricted closed-shell spherical Hartree / RHF-equivalent He 1s2”; no novel HF solver should be attributed to the nickel PR.
+
+**New reuse bridge, not a new HF method:** scripts/qcafqmc_existing_hartree_fock_reuse.py imports the original atomic owners and checks the one-spatial-orbital identity, the one-dimensional full-CI energy and the RHF energy 2(h+J)-J = 2h+J on a single, same-source one-orbital electronic Hamiltonian. AtomicPeriodicTable369HartreeFockReuseExact.agda imports the pre-existing helium receipt and directly preserves its measured convergence, unpaid electron correlation and unpaid multi-orbital-state-tracking status. This module is linked into AtomicPeriodicTable369AFQMCSameSourceExact.agda, rather than duplicating a standalone SCF theorem.
+
+**Highest-alpha missing physical step is molecular, not the definition of HF.** A 168-electron nickel/P/C/O/H multi-centre RHF calculation uses a Gaussian AO basis and requires MO orthonormality in S, convergence of the generalized eigenproblem F C = S C diag(epsilon), and the correct trace(D S)=N. The new scripts/qcafqmc_molecular_scf_certificate.py checks those identities, Hermiticity/symmetry, and optionally AO/MO one- and two-electron integral transforms. It fails on wrong orbital order and non-finite data. Both the 41-atom CASCI integral producer and the full-space VCE-style runner now invoke this certificate on the actual PySCF RHF output **before** accepting molecular orbital or active-space data. The source acceptance runner also invokes its three-orbital numerical positive/negative controls.
+
+**Independent local test, not exact Git acceptance:** on a randomly generated positive AO overlap and analytically constructed generalized-eigenproblem, the 3-orbital prototype gave orthonormality Frobenius residual ~2.251e-15, Roothaan residual ~6.954e-15, electron count 1.9999999999999964, AO-to-MO one-/two-body transform errors 0, and refused a permuted orbital order. This checks the algebraic numerical test; the exact committed code must still be run, and no 41-atom molecular PySCF calculation has been executed here.
+
+### Revised exact remaining lemmas
+
+- HF0 (existing, paid): helium single-orbital radial closed-shell Hartree/RHF-equivalent numerical convergence and calibrated approximation boundary. Reuse original receipt.
+- HF1 (source-written, execution open): nickel PySCF multi-centre 168-electron RHF fixed-point certificate (C^T S C=I, F C=S C epsilon, trace(D S)=168) for each B/BC/C source geometry, in the selected STO-3G basis.
+- HF2 (source-written, execution open): correct AO/MO integral transformation and CASCI core-contracted Hamiltonian on the selected eight orbitals, independently checked against a physical reference.
+- HF3 (source source-identity open): author-selected 80-87 orbital correspondence and original nickel charge/spin across three geometries. Exact original active-space identity cannot be inferred from a matching RHF energy alone.
+- AFQMC1 (execution open): fully source-matched HF/DOCI/NQS trial calculations on the same accepted original physical Hamiltonian, multiple seeds and autocorrelation diagnostics.
+- AFQMC2 (source open): original matchgate hardware snapshots, upCCD trial coefficients, original trained 13,096-parameter NQS, full-space VCE reproduction, and independent end-to-end cost receipts.
+- KERNEL (open): Agda 2.9 acceptance for the new import graph; a source-written theorem is not automatically a verified kernel proof.
+
+**No PySCF, ipie or Agda is available in this execution container**, and these formal/physical gates must not be declared paid without acceptance receipts.
