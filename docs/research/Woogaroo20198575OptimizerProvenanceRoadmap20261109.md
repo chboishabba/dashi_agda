@@ -23,7 +23,7 @@ Date: 9 November 2026. Owner: existing DASHI PR #1276 Woogaroo golden law/offset
 | P0 | Actor and technology provenance ledger, dated and source-typed | Original corporate disclosures + confirmed case roles | Partial: capability established; original partner and project-use unknown |
 | P1 | Approved source/version manifest (July Issue F and Oct MWW 9612-E D, Esk BAAM v6, Avonvale Oes1:v1.2(e)); native XLSM extraction | File bytes, hash, sign-off, matching cells, formula/validation | OPEN |
 | P2 | Deterministic 14-row and six-unit OAG computation and bounded joint sensitivity | Pinned January source inputs and exact rational formula | Source arithmetic PAID; kernel OPEN |
-| P3 | Scenario-selection/optimisation provenance: original workbook versions, edit history, candidate outputs, constraints, commercial directives | Native files, correspondence, templates, source-linked cases; no inferred use | OPEN |
+| P3 | Scenario-selection/optimisation provenance: original workbook versions, edit history, candidate outputs, constraints, commercial directives | Native files, correspondence, templates, source-linked cases; no inferred use | Finite same-output counterexample PAID; case-specific process evidence OPEN |
 | P4 | Six-unit future ecology and confidence calibration, especially MWW AU1/AU2 | MHQA raw surveys, with/without trajectories, independent review, actual delivery record | OPEN |
 | P5 | Avonvale prior/new offset legal and physical benefits allocation | 2018/8347, 2019/8575 parcels, legal obligations, works, funding and monitoring | OPEN |
 | P6 | Actual s95B comments, s95C recommendation, s136 consideration, conditions and review | Authenticated agency record, operative transition law | OPEN |
@@ -37,6 +37,7 @@ Date: 9 November 2026. Owner: existing DASHI PR #1276 Woogaroo golden law/offset
 - `...mwwAt47Exact`, `...mwwAt48Exact`, `...mwwAt62Exact`, `...mwwAt63Exact`, `...mwwAtOriginal75Exact`
 - `DASHI.Law.SensibLawWoogarooKoalaQualityRoundingCut20261106Exact.mwwUnroundedAt75Exact`, `...mwwUnroundedAt76Exact`.
 - The separate two-parameter `SensibLawWoogarooMWWJointGainConfidence20261109Exact` and precise input calculations should be reused, never duplicated in a new competing formula owner.
+- **New source-written exact negative controls:** `originalAndThreeAtHundredSameCoefficient`, `originalAndFiveAtSixtySameCoefficient`, `originalCoefficientCannotIdentifyGain`, `originalCoefficientCannotIdentifyConfidence`; kernel verification outstanding.
 
 **PROPOSED NEW declarations/contracts, not yet implemented or proved** (precise required witnesses, no fake closed types):
 - `original20198575ApprovedPlanBytesMatchSignedCondition` — a content hash/version witness tying each OAMP to the signed approval's named revision.
@@ -64,3 +65,16 @@ Date: 9 November 2026. Owner: existing DASHI PR #1276 Woogaroo golden law/offset
 6. Validate Avonvale incremental benefits, then execute Agda --safe/parallel_checker and Postgres/ITIR handoff with source hashes.
 
 No request, FOI, legal filing, regulator complaint, alteration of external sources or receipt of the missing October original has occurred in this pass.
+
+## 9 November — executed finite non-identifiability cut (P3 mathematical leaf)
+
+The January source reconstruction uses `jointCoefficient(g,c) = 543850 + 1555*g*c`, with `c` an integer percentage confidence. Three *hypothetical* distinct assignments `(g,c)=(4,75),(3,100),(5,60)` all produce `1010350` and therefore the **same discounted model output**. Under the plain mathematical domain Nat×Nat there can be no universally correct inverse `coefficient → g` or `coefficient → c`; original Agda constructs explicit no-inverse counterexamples for both using distinct numeral equalities. The source-reported submitted scenario remains only `(4,75)`. The other cases illustrate information loss, not scientifically validated forecasts, permitted inputs or evidence of a spreadsheet optimiser.
+
+Source-written golden in existing `SensibLawWoogarooMWWJointGainConfidence20261109Exact.agda`:
+- `originalAndThreeAtHundredSameCoefficient`, `originalAndFiveAtSixtySameCoefficient`, `originalAndThreeAtHundredSameNumerator`
+- `fourIsNotThree`, `seventyFiveIsNotHundred`
+- `originalCoefficientCannotIdentifyGain`, `originalCoefficientCannotIdentifyConfidence`.
+
+Matching repository checker: `scripts/check_woogaroo_mww_joint_gain_confidence_20261109.py`, now asserts three identical coefficients and discounted outputs despite distinct inputs. Independent container Python exact-Fraction check **PASS**. Repository script and Agda 2.9 kernel have **not** been executed: no false compiler or CI certificate. No proof of actual project-specific optimiser use, intent or manipulation follows.
+
+**Highest-alpha next external proof:** a native versioned 2019/8575 OAG XLSM (with hashes, formula/cell validation and inputs), scenario/alternative-run history, decision version join and independent 75% confidence evidence. The regulator says final OAG scores are determined by the minister, although proponents may use the OAG for planning: https://www.nationalepa.gov.au/epbc/approvals/offsets/guidance/offsets-assessment-guide . Hence the original submitted and accepted values cannot be inferred from the final percentage alone.
