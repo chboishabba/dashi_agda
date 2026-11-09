@@ -95,3 +95,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranN21EndpointScoreStepExact
 -- Full raw-edge-list selected signed trace, same original rawSparseScore.
 -- Source-written all-list equality; native binary token weld remains open.
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact
+
+-- Actual original selected-edge signed trace equals typed N21 for every word.
+-- This is ORIGINAL ℤ replay, not the native binary machine-clock result.
+import DASHI.Mathematics.Complexity.Karp21FractranOriginalTypedTraceAcceptanceExact
