@@ -175,12 +175,14 @@ dischargeIndex :
   OriginalOuterFaceDischarge → F.Fin 27
 dischargeIndex event = Index.originalPointIndex (dischargeVoxel event)
 
+oneIfNonzero : Nat → Nat
+oneIfNonzero zero = 0
+oneIfNonzero (suc _) = 1
+
 actualDischargedAmount :
   OriginalOuterFaceDischarge → V.Vec Nat 27 → Nat
-actualDischargedAmount event state
-  with V.lookup state (dischargeIndex event)
-... | zero = 0
-... | suc n = 1
+actualDischargedAmount event state =
+  oneIfNonzero (V.lookup state (dischargeIndex event))
 
 applyBoundaryDischarge :
   OriginalOuterFaceDischarge →
@@ -223,9 +225,7 @@ outflowIndexBalance :
   (index : F.Fin n)
   (state : V.Vec Nat n) →
   V.sum (Transfer.debitAt index state)
-    + (case V.lookup state index of λ where
-         zero → 0
-         (suc _) → 1)
+    + oneIfNonzero (V.lookup state index)
     ≡ V.sum state
 outflowIndexBalance index state with V.lookup state index
 ... | zero =
