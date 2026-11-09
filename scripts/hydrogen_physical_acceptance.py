@@ -77,6 +77,8 @@ class Run:
             raise ValueError('synthetic provenance cannot be admitted as measured')
         if self.q('shaft_work') < self.q('output'):
             raise ValueError('net output exceeds source-reported shaft work')
+        if self.q('shaft_work') > self.q('diesel') + self.q('h2_burned') + self.q('synth_burned'):
+            raise ValueError('engine shaft work exceeds counted combustible chemical energy')
 
 def analyze(records: list[dict], output_tolerance=Decimal('0.005')):
     runs = [Run(record) for record in records]
@@ -119,7 +121,8 @@ def analyze(records: list[dict], output_tolerance=Decimal('0.005')):
             'engine_shaft_efficiency_by_arm': mechanism,
             'net_energy_saving_interval_kwh':
                 [str(base_lower - assisted_upper), str(base_upper - assisted_lower)],
-            'robust_positive_net_input_saving': robust_saving,
+            'conditional_interval_input_saving': robust_saving,
+            'source_and_calibration_ids_independently_verified': False,
             'causal_combustion_mechanism_proven': False,
             'independent_replication_proven': False,
             'note': 'Meter/source fields are identifiers; documentary verification and replication are external.',
@@ -148,7 +151,7 @@ class Tests(unittest.TestCase):
     def test_full_block_interaction(self):
         r=analyze(self.full())[0]
         self.assertEqual(r['hydrogen_oxygen_interaction_kwh'],'6')
-        self.assertTrue(r['robust_positive_net_input_saving'])
+        self.assertTrue(r['conditional_interval_input_saving'])
         self.assertFalse(r['causal_combustion_mechanism_proven'])
     def test_unmatched_output_rejected(self):
         rows=self.full(); rows[2]['output_kwh']='34'
@@ -163,10 +166,10 @@ class Tests(unittest.TestCase):
             analyze(rows)
     def test_diluted_savings_not_robust(self):
         rows=self.full(); rows[-1]['external_electric_kwh']='25'
-        self.assertFalse(analyze(rows)[0]['robust_positive_net_input_saving'])
+        self.assertFalse(analyze(rows)[0]['conditional_interval_input_saving'])
     def test_external_h2_not_double_counted(self):
         rows=self.full(); rows[-1]['external_h2_kwh']='8'
-        self.assertFalse(analyze(rows)[0]['robust_positive_net_input_saving'])
+        self.assertFalse(analyze(rows)[0]['conditional_interval_input_saving'])
     def test_bad_external_hydrogen_rejected(self):
         rows=self.full(); rows[-1]['external_h2_kwh']='15'
         with self.assertRaisesRegex(ValueError,'external H2 exceeds'):
