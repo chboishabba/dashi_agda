@@ -486,3 +486,40 @@ source modules. These corrections are **not** proof of kernel acceptance.
 confirmed. No exact-head Agda kernel result, completion of the P1
 analytic composition, independent selected-zeta equality, or P3
 completed-Xi proof is claimed by this reconciliation.
+
+
+## 2026-11-09 P1.01 forced formal coefficient uniqueness (source implementation)
+
+New original carrier owner:
+`DASHI/Foundations/BishopMachinCayleyEquationForcesCoefficientsExact.agda`;
+imported by all three canonical TOE roots.
+
+For any stream `c : Nat → RationalComplex`, define the literal coefficient
+of `(1-iX) c` by `c₀` at degree zero and
+`c_(n+1) - i*c_n` at degree `n+1`. The new proof constructs
+`originalEquationForcesRecurrence`: assuming this coefficient agrees
+at **every degree** with the original finite polynomial `1+iX`
+automatically implies:
+
+```
+c₀ = 1;
+c₁ = 2i;
+c_(n+2) = i*c_(n+1).
+```
+
+Then `originalCayleyEquationCoefficientUnique` invokes the already
+existing original canonical recurrence uniqueness theorem and proves
+
+```
+forall n, c n = BishopMachinOriginalCayleyFormalSeriesExact.cayleyFormalCoefficient n.
+```
+
+This discharges a stronger finite-algebra part of P1.01, removing any
+independent recurrence assumption. The decisive **analytic** part of
+P1.01/P1.02 remains: construct the coefficient stream of the actual
+nested `exp_C(2i atan_B(t))`, show that its analytic composition has
+the original denominator equation (with valid convergence/reindexing),
+and then identify evaluation on the selected half-ball. Only after that
+can the existing `OriginalAtanFiveCayleyEvaluation` and
+`OriginalAtan239CayleyEvaluation` be inhabited. No assertion of
+analytic completion or kernel acceptance is made by the new source.
