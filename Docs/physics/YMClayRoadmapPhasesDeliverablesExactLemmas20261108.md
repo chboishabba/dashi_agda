@@ -178,3 +178,24 @@ The new module **constructs these operators**, not hypotheses: `zeroSpan = []`; 
 The Clay source remains physically conditional and no Agda kernel test was performed.
 
 **Further finite product payment:** the same module now adds `WithOriginalWordProduct.mulSpan`, using ordered concatenation/convolution of actual Wilson words; `coefficientExchange`, `crossRowEmbedsProduct` and `mulSpanEmbedsPointwise` prove the product embedding by structural induction. Its only extra selected physics assumption is `actualWordConcat`, asserting that concatenating original Wilson loop words gives the product of their real scalar observables. The final equality to the actual R583 OS2 `multiplyObservable` still needs OS2 pointwise-product semantics and function extensionality; it is not silently assumed. The independent `scripts/check_ym_r583_literal_wilson_span.py` finite rational control passed **99,224 exact checks** across 157 spans and two configurations. This is original *finite algebra* validation, not CMP119 H1/OS4.
+
+
+## 9 November 2026 — physical source/negative-control max-cut (same-original-family audit)
+
+Current owner inspection confirms the physically meaningful D1 statement is already source-written at `YMClayD1OriginalRealCMP116VariableCutoffExact.originalWilsonRealCovarianceGeometricBound`. Its input `OriginalRealCMP116PhysicalSelection` must be populated by an actual published CMP116 differentiated-localization result, physical test geometry, cutoff/volume-uniform envelope, and calibrated block-distance/contraction. This theorem is **conditional**; there is no justification for turning `physicalUpper` or `uniformSourceEnvelope` into source-free constants.
+
+An essential anti-vacuity guard already exists in `YMClayD1PhysicalRemoteCoverageNoGoExact.ActualPhysicalPairCoverage`, requiring nonempty and distinct remote pairs at **every** physical cutoff/volume. An empty admissible-pair predicate makes the original influence inequality vacuously true. Reuse this guard when instantiating B1; do not count the existence of its record type as physical coverage.
+
+For E1, `YMClayE1OriginalSUNFiniteCylinderLawsExact` already constructs finite normalized zero/one/add/scale/positive laws for the true variable-sized SU(N) Wilson/Haar measure under actual integration and nonzero partition witnesses. Its `PhysicalRealConverges` is an epsilon--N criterion, not an arbitrary limit function. `YMClayE1VariableCutoffCylinderLimitExact` transports proven finite laws **plus actual original finite-expectation convergence** into continuum linear/positive laws. Neither constructs the missing cutoff-uniform tightness, original-limit convergence, OS nontriviality or an interacting `R^4` state from scratch.
+
+### Exact source producers now decisive
+
+| Phase | Source owner already reusable | Exact missing proof/witness |
+|---|---|---|
+| B1 / PH2 | `YMClayD1OriginalRealCMP116VariableCutoffExact`; `YMClayD1PhysicalRemoteCoverageNoGoExact` | Same-original-Wilson CMP116 differentiated-localization estimates **and** real required remote-pair coverage at all cutoffs, uniform physical decay scale and all-Wilson connected-product closure |
+| R583 / OS4 | `YangMillsClayCMP119H1OS4AttachmentRound583Exact` | Real CMP119 H1 over physical Wilson-product dense class, OS2 literal-product semantics, OS Gram density/continuity and original OS4 hypotheses |
+| E1 / PH1 | `YMClayE1OriginalSUNFiniteCylinderLawsExact`; `YMClayE1VariableCutoffCylinderLimitExact` | Cutoff-consistent original SU(N) integration/positivity, physically admissible convergence on a separating observable algebra, interacting/nontrivial Euclidean `R^4` realization |
+| B2 / PH3 | R577 same-Hamiltonian and R333 OS donor | Actual continuum time/energy calibration and **full** nonvacuum-sector positive spectral threshold, not selected-test-only finite exponent |
+| G1 / N1 | R569 compact-simple BCH/group donor, R563 Ward | Actual per-group physical constants and same-continuum nonzero local observable |
+
+This pass is an exact-head *source audit and proof ledger correction*, not a newly established physical inequality. No CI or kernel receipt is inferred. Keep Yang--Mills/Clay independent of TSVF Lorentz/KK physical transfer and of Moonshine/Monster group actions.
