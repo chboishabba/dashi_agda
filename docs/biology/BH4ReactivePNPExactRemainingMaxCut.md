@@ -469,3 +469,40 @@ This is a **contract-level** fixture, not execution of a real 783-variable
 **Execution status:** committed and fetched back from GitHub;
 no repository-local Python test or Agda kernel run in this session,
 and no independent source-rate authentication occurred.
+
+
+### 2026-11-09 source-bound candidate executable entrypoint
+
+The original `scripts/bh4_original_reactive_pnp_adapter.py` CLI
+now has an optional closed-source **physical candidate step** mode.
+The three options `--initial-state`, `--dt`, and
+`--state-output` are jointly mandatory in this mode.
+The initial-state input must contain the complete original
+positive finite 27×29 concentrations with the exact 29-source-species
+ordering from the separately SHA-pinned full original certificate.
+The model and source receipt must pass before calling the
+existing `reactive_pnp_369.implicit_step`.
+The accepted output is checked against the original CHNOP and
+signed-charge chart before a candidate state and numerical receipt
+are written. The entrypoint is deliberately located after the
+source-bound function definitions to support actual CLI execution.
+
+Example invocation (all files and time step must be independently supplied):
+
+```bash
+python3 scripts/bh4_original_reactive_pnp_adapter.py \
+  --source original-rhea-certificate.json \
+  --source-sha256 ORIGINAL_64_CHARACTER_HEX_DIGEST \
+  --manifest original-physical-parameters.json \
+  --initial-state original-27x29-concentrations.json \
+  --dt 0.01 \
+  --state-output candidate-next-state.json \
+  --receipt candidate-pnp-receipt.json
+```
+
+The numeric `0.01` above is merely a command-form illustration,
+not an original experimentally justified timestep. No source files,
+physical parameters or original measurements are supplied by this
+documentation. The CLI has **not** been executed at the updated head.
+Its output, if accepted, remains a closed-boundary numerical
+candidate, not `sameSourcePhysicalReactionTransportStep` in Agda.
