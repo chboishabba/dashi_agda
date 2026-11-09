@@ -257,12 +257,16 @@ originalEveryPositiveLinkHasIncidentPlaquette {n} bond =
 
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
--- 1. Enumerate every original plaquette incident on each original bond.
--- 2. Prove the exact 6/18/19 combinatorial packing inequalities.
--- 3. Use this decision theorem to construct witness certificates of
---    plaquette-star-disjoint original link subsets.
--- 4. Consume the exact original Wilson Gibbs product-Haar Fubini
---    disintegration and the full nonperturbative SU2 one-link bound.
--- 5. Prove original sparse frustrated/mixed contour activity, not
---    only the coherent conditional subevent.
+-- 1. DONE SOURCE-WRITTEN: enumerate all original source plaquettes,
+--    select genuinely incident plaquettes, prove soundness, and prove
+--    one actually incident plaquette exists for every native bond.
+-- 2. REMAINING: exactly-six incidence (for side >= 3), original
+--    degree-18 plaquette conflict, and a source-native 19-packing proof.
+-- 3. REMAINING: choose a full original link-set with disjoint incident
+--    plaquette stars and prove source-specific packing witnesses.
+-- 4. REMAINING: consume the actual original Wilson Gibbs product-Haar
+--    Fubini/disintegration laws and the SU(2) coherent one-link bound.
+-- 5. REMAINING PHYSICAL: sparse frustrated/mixed connected contour
+--    suppression and full physical-distance CMP116 marked-source decay.
+-- Agda 2.9 exact-head kernel acceptance has NOT been observed.
 ------------------------------------------------------------------------
