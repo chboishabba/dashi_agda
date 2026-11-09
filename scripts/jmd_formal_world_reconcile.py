@@ -423,12 +423,20 @@ def ingest_native_gaps(conn, *, max_gaps: int = 200, max_candidates: int = 6) ->
     source_rows=conn.execute("""SELECT source_key,declaration,formal_type
       FROM jmd_world_sources ORDER BY source_key""").fetchall()
     source_terms=[(src,words(decl+" "+typ)) for src,decl,typ in source_rows]
-    for key,required in conn.execute("""SELECT gap_key,required_symbol
+    for key,owner,required in conn.execute("""SELECT gap_key,owner_symbol,required_symbol
        FROM jmd_world_native_gaps ORDER BY gap_key""").fetchall():
         tokens=words(required)
+        # Native AO-relatedness via existing typed reference edges.
+        neighbors={owner}
+        neighbors.update(x[0] for x in conn.execute(
+           "SELECT to_symbol FROM repo_refs WHERE from_symbol=?", (owner,)))
+        neighbors.update(x[0] for x in conn.execute(
+           "SELECT from_symbol FROM repo_refs WHERE to_symbol=?", (owner,)))
         scores=[]
-        for src,source_words in source_terms:
+        for (src,decl,typ),(same_src,source_words) in zip(source_rows,source_terms):
             n=len(tokens & source_words)
+            if decl in neighbors:
+                n+=8
             if n: scores.append((-n,src))
         for minus,src in sorted(scores)[:max_candidates]:
             conn.execute("""INSERT INTO jmd_world_gap_candidates
