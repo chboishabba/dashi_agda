@@ -24,6 +24,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans)
 open import Agda.Builtin.Maybe using (Maybe; nothing; just)
 open import Data.Product using (_×_; _,_)
 
@@ -181,10 +182,11 @@ karpFractranFirstEnabledSameRawCursorStep
 karpRawCursorCachedSameOriginalStep :
   (s : State) →
   OriginalMachine.cachedStep
-    (OriginalMachine.populate rules s) s
+    (OriginalMachine.refreshCache
+      (OriginalMachine.populate rules s) s s) s
     ≡ originalRawListOneStep s
 karpRawCursorCachedSameOriginalStep s =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (OriginalMachine.cachedStepCorrect
       rules (OriginalMachine.populate rules s) s s refl)
     (karpFractranFirstEnabledSameRawCursorStep s)
