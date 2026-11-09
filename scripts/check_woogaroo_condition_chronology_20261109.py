@@ -36,7 +36,10 @@ def before(declaration, activity, declaration_name, activity_name, condition):
         return {'condition': condition, 'status': 'UNRESOLVED_SOURCE',
                 'missing': missing, 'temporal_comparison_only': True}
     return {'condition': condition,
-            'status': 'PRIOR_DATE_SHOWN' if d < a else 'PRIOR_DATE_NOT_SHOWN',
+            'date_granularity_only': True,
+            'status': ('PRIOR_DATE_SHOWN' if d < a else
+                       'SAME_DAY_ORDER_UNRESOLVED' if d == a else
+                       'PRIOR_DATE_NOT_SHOWN'),
             'declaration_date': d.isoformat(), 'activity_date': a.isoformat(),
             'temporal_comparison_only': True}
 
@@ -87,9 +90,22 @@ def selftest():
     late['events']['mww_vdec'] = event('2026-12-20')
     assert audit(late)['C25_mww']['status'] == 'PRIOR_DATE_NOT_SHOWN'
     tests += 1
+    # Later declaration is a negative chronological comparison, not a
+    # court/agency finding of a breach.
+    late_esk = copy.deepcopy(base)
+    late_esk['events']['esk_vdec'] = event('2026-11-21')
+    assert audit(late_esk)['C24_esk']['status'] == 'PRIOR_DATE_NOT_SHOWN'
+    assert audit(late_esk)['condition_breach_adjudicated'] is False
+    tests += 1
     same = copy.deepcopy(base)
     same['events']['avonvale_vdec'] = event('2026-11-20')
-    assert audit(same)['C24_avonvale']['status'] == 'PRIOR_DATE_NOT_SHOWN'
+    assert audit(same)['C24_avonvale']['status'] == 'SAME_DAY_ORDER_UNRESOLVED'
+    tests += 1
+    # A same-day declaration may be earlier or later than a works event.
+    # A date-only record cannot choose the temporal order.
+    same_mww = copy.deepcopy(base)
+    same_mww['events']['mww_vdec'] = event('2026-12-15')
+    assert audit(same_mww)['C25_mww']['status'] == 'SAME_DAY_ORDER_UNRESOLVED'
     tests += 1
     unverified = copy.deepcopy(base)
     unverified['events']['esk_vdec']['authenticated'] = False
@@ -115,6 +131,7 @@ def selftest():
     except ValueError as exc:
         assert 'invalid ISO' in str(exc)
     tests += 1
+    assert tests == 10
     return {'tests': tests, 'passed': tests, 'synthetic_only': True,
             'real_vdec_or_commencement_receipts_acquired': False}
 
