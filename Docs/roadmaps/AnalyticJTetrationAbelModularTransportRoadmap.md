@@ -49,6 +49,8 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [x] `exponentialPreservesObserverFibre`: finite observer fibres preserved.
 - [ ] **P0.01** Run Agda 2.9 `--safe` on this module and all new transitive imports, record exact command, compiler version, exit status and SHA.
 - [ ] **P0.02** Add separate named regression consumers for exponential iterate 0/1/2 and observer-fibre transport, then kernel-check.
+- [x] **P0.04** Source-write `transportedInversionSquared` and `transportedJInvariantUnderInversion` in `AbelTetrationModularSymmetryExact`, conditional on an actual involution, j-invariance and two-sided section. Kernel acceptance still pending.
+- [x] **P0.05** Source-write `exponentialHasNoFixedPointInAbelChart`: fixed-point-free translation obstructs exp fixed points inside an Abel chart. Kernel acceptance still pending.
 - [ ] **P0.03** Import the proven theorem owner into the selected Moonshine/TOE aggregation path after verifying its import policy and compile cost.
 
 ### P1 — Genuine local complex Abel chart
@@ -56,6 +58,7 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 **Deliverable:** a nonempty complex analytic domain and independently justified Abel coordinate.
 
 - [ ] **P1.01** `originalComplexExponentialSameObject`: Bishop complex exponential agrees with the independently selected analytic exponential, including convergence and multiplication law.
+- [ ] **P1.02a** `originalExpFixedPointExclusion`: use the P0.05 obstruction to show the chosen analytic domain excludes all exponential fixed points, or use an atlas whose Abel coordinate is partial at them.
 - [ ] **P1.02** `originalExponentialInvariantAbelDomain`: explicit `D` with `exp(D) ⊆ D` or a partial-domain formulation for exactly the required iterates.
 - [ ] **P1.03** `originalLocalAbelCoordinateExists`: construct `A : D → H` with well-defined chosen branch, upper-half-plane codomain and `A(exp w)=A(w)+1`.
 - [ ] **P1.04** `originalAbelCoordinateBranchIndependence`: prove the claimed invariant is branch-independent where appropriate; otherwise index branch as part of the fibre.
@@ -72,6 +75,7 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [ ] **P2.02** `originalModularJInversionInvariance`: prove `j(-1/τ)=j(τ)` on its valid domain.
 - [ ] **P2.03** `originalAbelToModularCoordinateSameObject`: identify Abel codomain `H` with the independently constructed modular parameter, not merely with an abstract type.
 - [ ] **P2.04** `originalExponentiationJInvariantSameObject`: instantiate P0 with actual `exp`, `A`, modular `j` and the source-normalization choice.
+- [ ] **P2.05a** `originalModularInversionChartInstance`: discharge the `ModularInversionChart` assumptions using actual modular inversion plus a genuine two-sided Abel inverse on the selected chart (source-written conditional transport now exists).
 - [ ] **P2.05** `originalTransportedSInvolution`: construct `F ∘ S ∘ A` on its proper domain, prove involution and compatibility with the transported invariant. Requires local inverse and domain closure, not only P0.
 
 ### P3 — Analytic observer, 369 / pants / hyperfabric
@@ -104,4 +108,11 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 
 ## Current proof status
 
-**P0 source-written, kernel acceptance pending. P1, P2, P3, P4 open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
+**P0 transport and conditional modular-inversion/fixed-point-obstruction source-written, kernel acceptance pending. P1, P2, P3, P4 open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
+
+## 2026-11-09 continuation receipt
+
+- `DASHI/Moonshine/AbelTetrationModularSymmetryExact.agda` adds conditional two-sided modular S transport, `transportedInversionSquared`, `transportedJInvariantUnderInversion`, and `exponentialHasNoFixedPointInAbelChart`.
+- Fixed-point obstruction is a genuine mathematical restriction: if `exp(w)=w` and `A(exp(w))=A(w)+1` in a fixed-point-free translation space, contradiction. This means the analytic domain cannot indiscriminately include exponential fixed points.
+- The S transport assumes a two-sided inverse `section`; the earlier generic P0 theory alone does not provide one.
+- No Agda 2.9 binary is present in this execution environment; neither new module has been kernel checked here. Do not promote its statements to verified proof receipts.
