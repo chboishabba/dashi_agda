@@ -16,7 +16,7 @@ module DASHI.Moonshine.Y443Universal80RelatorCongruenceExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
