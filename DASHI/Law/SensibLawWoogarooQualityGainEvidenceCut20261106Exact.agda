@@ -148,3 +148,39 @@ record ExceptionalGainJustification : Set where
 
 originalEcologicalChallenge : Tests.Challenge
 originalEcologicalChallenge = Tests.challengeFor Tests.temporalSurvivalAndTimeLag
+
+-- 9 November 2026, additional maximum-cut: confidence sensitivity for
+-- precisely the two MWW original koala AUs, with other 12 source
+-- rows, claimed gains, lag and survival factor unchanged.
+-- Confidence is represented as an integer percentage, not a measured
+-- ecological frequency. The comparison with 90 and 100 percent is a
+-- hypothetical OAG model boundary, NOT a binding legal threshold.
+otherSiteOriginalCoefficient : Nat
+otherSiteOriginalCoefficient = 543850
+
+mwwBothAtConfidence : Nat → Nat
+mwwBothAtConfidence confidence =
+  otherSiteOriginalCoefficient + (508 * 4 + 1047 * 4) * confidence
+
+mwwAt47Exact : mwwBothAtConfidence 47 ≡ 836190
+mwwAt47Exact = refl
+
+mwwAt48Exact : mwwBothAtConfidence 48 ≡ 842410
+mwwAt48Exact = refl
+
+mwwAt62Exact : mwwBothAtConfidence 62 ≡ 929490
+mwwAt62Exact = refl
+
+mwwAt63Exact : mwwBothAtConfidence 63 ≡ 935710
+mwwAt63Exact = refl
+
+mwwAtOriginal75Exact :
+  mwwBothAtConfidence 75 ≡ Koala.inputSum Koala.allRows
+mwwAtOriginal75Exact = refl
+
+-- The companion exact-Fraction verifier, not these Nat equalities,
+-- supplies the threshold comparisons after discounting:
+-- 47% -> 89.6690%, 48% -> 90.3360%;
+-- 62% -> 99.6741%, 63% -> 100.3411%.
+-- No empirical confidence estimate or actual approved October
+-- OAG cell is inferred.
