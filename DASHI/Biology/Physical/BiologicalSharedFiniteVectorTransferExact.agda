@@ -281,8 +281,8 @@ lookupTransferAwayFromEndpoints :
   source ≢ observer → target ≢ observer →
   V.lookup (transferOne source target state) observer
     ≡ V.lookup state observer
-lookupTransferAwayFromEndpoints F.zero F.zero observer state
-  sourceDifferent targetDifferent = refl
+lookupTransferAwayFromEndpoints F.zero F.zero observer
+  (V._∷_ amount rest) sourceDifferent targetDifferent = refl
 lookupTransferAwayFromEndpoints F.zero (F.suc target) F.zero
   state sourceDifferent targetDifferent =
   ⊥-elim (sourceDifferent refl)
