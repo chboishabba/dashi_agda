@@ -19,11 +19,14 @@ module DASHI.Mathematics.Complexity.Karp21SignedSSPOrientationNoLosslessExact wh
 open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
+open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Biology.SignedSSPFRACTRANWeaveExact as SSP
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Binary
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 
 -- A finite three-orientation projection, not a numerical conversion.
 binarySignOrientation :
@@ -88,3 +91,34 @@ noLosslessOrientationDecoder decode roundtrip =
     (trans
       (sym (roundtrip (Binary.positive [])))
       (roundtrip (Binary.positive (true ∷ []))))
+
+------------------------------------------------------------------------
+-- Correct reuse: keep the original binary magnitude as a residual.
+-- No prime-power exponent conversion or unary magnitude reconstruction.
+------------------------------------------------------------------------
+
+SSPPolarityWithResidual : Set
+SSPPolarityWithResidual =
+  SSP.FibreOrientation × Word.BitWord
+
+encodeWithResidual :
+  Binary.SignedMagnitudeBits → SSPPolarityWithResidual
+encodeWithResidual (Binary.positive magnitude) =
+  SSP.forwardOrientation , magnitude
+encodeWithResidual (Binary.negative magnitude) =
+  SSP.inverseOrientation , magnitude
+
+decodeWithResidual :
+  SSPPolarityWithResidual → Maybe Binary.SignedMagnitudeBits
+decodeWithResidual (SSP.forwardOrientation , magnitude) =
+  just (Binary.positive magnitude)
+decodeWithResidual (SSP.inverseOrientation , magnitude) =
+  just (Binary.negative magnitude)
+decodeWithResidual (SSP.mediatedOrientation , magnitude) =
+  nothing
+
+sspPolarityResidualRoundtrip :
+  (w : Binary.SignedMagnitudeBits) →
+  decodeWithResidual (encodeWithResidual w) ≡ just w
+sspPolarityResidualRoundtrip (Binary.positive magnitude) = refl
+sspPolarityResidualRoundtrip (Binary.negative magnitude) = refl
