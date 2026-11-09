@@ -428,3 +428,16 @@ scripts/qcafqmc_source_acceptance.py now imports the DOCI projection and synthet
     python scripts/qcafqmc_nickel41_ipie_from_fcidump.py output/qcafqmc_nickel41/B/B.receipt.json --doci-npz output/qcafqmc_nickel41/B/B_doci.npz
 
 No original 41-atom nickel SCF, DOCI or AFQMC electronic energies have yet been produced by the source-written branch. Remaining original charge/spin and MO frame, author upCCD and NQS checkpoint, QPU matchgate snapshots, full-space VCE computation, multi-seed real AFQMC estimates, Agda typechecking, exact committed script runtime and independent cloud cost evidence remain OPEN.
+
+
+## Existing Hartree–Fock ownership — correction and direct reuse
+
+**Do not claim DASHI first acquired Hartree–Fock in this nickel PR.** The repository already contained `scripts/atomic_helium_hartree_scf.py`, `scripts/atomic_helium_hartree_convergence.py`, `DASHI.Physics.Chemistry.AtomicPeriodicTable369HeliumHartreeConvergenceExact` and their execution/convergence receipts. The original helium radial code explicitly uses one occupied spatial orbital with opposite-spin electrons and the self-interaction-corrected Coulomb contribution; its converged limit approaches the independently published **restricted Hartree–Fock helium energy** (although the producer names the numerical method “Hartree”). For a *single* doubly occupied spatial orbital the restricted Hartree product and RHF expression coincide because same-spin exchange cancels the self term.
+
+The new `scripts/qcafqmc_existing_hartree_fock_reuse.py` **imports those existing owners** and independently checks the exact one-spatial-orbital electronic identity: the FCI sector has dimension one, and `2h+J+Ecore = 2(h+J)-J+Ecore`. This is not a new HF solver. The Agda owner `AtomicPeriodicTable369HartreeFockReuseExact.agda` imports the original converged helium receipt and its unpaid-correlation/multi-orbital boundaries, and requires explicit source geometry, orbital-frame and integral identity for any nickel molecular admission. It is linked into `AtomicPeriodicTable369AFQMCSameSourceExact`.
+
+**The genuine nickel difference:** the repo's already-validated helium Hartree/RHF-equivalent solver has a one-dimensional radial 1s orbital, not a multi-centre nickel/P/C/O/H **Gaussian molecular basis**, a complete nuclear-electron/electron-electron integral tensor, or a self-consistent 168-electron multi-orbital RHF solution. These are supplied by the molecule-specific PySCF engine and validated against original published RHF energies and an orbital-frame fingerprint, while the existing DASHI proof, units and numerical provenance are reused. A helium HF benchmark is not itself a same-source nickel Fock-matrix result.
+
+`scripts/qcafqmc_source_acceptance.py` now explicitly runs the one-orbital RHF/FCI identity regression while retaining the older helium owners as the source of the theoretical/numerical convergence evidence.
+
+**Remaining actual proof**, not mere reuse: execute verified original nickel charge/spin/geometries through PySCF, independently certify `C^T S C = I`, RHF fixed-point self-consistency `F[P]C=SC\varepsilon`, and both the AO→MO one- and two-electron basis-transform identities before admitting the active-space CASCI and full-space iPie integrals. Full original VCE/upCCD/QPU NQS remains independent and open.
