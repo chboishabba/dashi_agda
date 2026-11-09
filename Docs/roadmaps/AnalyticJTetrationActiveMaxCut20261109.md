@@ -262,3 +262,10 @@ The direct geometric majorant replaces the derivative-integral proof requirement
 **Interface audit:** \`DASHI/Analysis/PrincipalComplexLog.agda\` defines a \`PrincipalComplexLogBranch\` *record with supplied fields*, and \`PrincipalComplexLogRealization.agda\` constructs it from a \`PrincipalPolarAuthority\` *record*. Neither is by itself a new source-native proof of the \`log(1+w)\` expansion in the Bishop-complex series carrier. \`DASHI/Analysis/PowerSeriesTranscendentals.agda\` does have real exp/trig series convergence and functional laws but does not discharge this original complex log lemma. An adapter from either authority record is not acceptable evidence for gate 1 without constructing its original analytic inhabitant.
 
 **Status:** ordinary-complex mathematical lemma documented; **Agda implementation/verification remains OPEN**. The critical next action is to prove the complex \`log(1+w)\` source identity and componentwise geometric domination using the vendored Bishop power-series and limit APIs. P1b winding and P1g global Kneser remain separately unpaid, as do original P2 q-period/Delta/j and P3/P4.
+
+
+### P1 proof receipt and local checker integration (2026-11-09)
+
+Added \`scripts/analytic_j_tetration_koenigs_log_series_majorant.py\` and invoked it from \`scripts/check_analytic_j_tetration_golden_local.sh\`. The equivalent exact rational test was run in this session and passed: \(100/127<4/5\), \(M=5000/17399<311/1000\), \(\beta=552/625\), and \(C=4312500/1270127\). The repository's newly committed version has **not** independently been executed in a checked-out exact-head environment; pinned Agda acceptance is OPEN. These arithmetic receipts test bounds conditional on the original analytic source identity; they cannot construct it.
+
+**Next mandatory formal producer:** \`originalBishopLogOnePlusPowerSeriesOnDisk\` with the genuine principal-log same-object branch identity. Only after it is constructed should \`originalBishopLogInverseDiskIteration\`, \`originalBishopKoenigsIncrementMagnitude\` and the existing Cauchy/limit pipeline be promoted. No additional E8 numerical coincidences should preempt this cut.
