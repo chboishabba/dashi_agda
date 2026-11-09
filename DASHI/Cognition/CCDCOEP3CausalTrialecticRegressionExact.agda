@@ -639,3 +639,37 @@ sourceWeakeningDoesNotGiveSourceUpgrade :
 sourceWeakeningDoesNotGiveSourceUpgrade =
   SameOperation.noReverseAdmissionImplication
 
+
+-- Stronger CW4 consumer requires distinct original-source receipt keys,
+-- a source/case ownership mapping and all six same-case stage proofs.
+-- Current closed original GCC and API inventories cannot meet it.
+selectedGCCCannotPassSourceBoundSixGateCut :
+  (Reference : Set)
+  (owner : Reference → SameOperation.OriginalCase) →
+  SameOperation.SourceBoundAdmission
+    SameOperation.CurrentlyLocatedEvidence Reference owner
+    SameOperation.gcc1993 → ⊥
+selectedGCCCannotPassSourceBoundSixGateCut =
+  SameOperation.selectedGCCCannotBeSourceBoundAdmitted
+
+selectedAPICannotPassSourceBoundSixGateCut :
+  (Reference : Set)
+  (owner : Reference → SameOperation.OriginalCase) →
+  SameOperation.SourceBoundAdmission
+    SameOperation.CurrentlyLocatedEvidence Reference owner
+    SameOperation.apiProposal1998 → ⊥
+selectedAPICannotPassSourceBoundSixGateCut =
+  SameOperation.selectedAPICannotBeSourceBoundAdmitted
+
+sameReceiptCannotServeExposureAndIntent :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (Reference : Set)
+  (owner : Reference → SameOperation.OriginalCase)
+  (c : SameOperation.OriginalCase) →
+  (admitted : SameOperation.SourceBoundAdmission E Reference owner c) →
+  SameOperation.SourceBoundAdmission.receiptReference admitted
+    SameOperation.recipientExposure ≡
+  SameOperation.SourceBoundAdmission.receiptReference admitted
+    SameOperation.independentlySourcedIntent → ⊥
+sameReceiptCannotServeExposureAndIntent =
+  SameOperation.exposureAndIntentMustHaveDifferentReceipt
