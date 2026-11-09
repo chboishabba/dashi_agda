@@ -43,6 +43,12 @@ def check():
             "model_compensation_percent":f"{float(percent(gain,confidence)):.10f}"})
     # Finite no-inverse counterexample: the coefficient and discounted
     # outcome alone cannot identify gain, confidence or scenario selection.
+    # Finite regression of the abstract affine-product factorisation
+    # across unrelated offsets/scales (not a substitute for Agda --safe).
+    for intercept in (0,7,543850):
+        for scale in (0,1,1555):
+            values = [intercept+scale*g*c for g,c in ((4,75),(3,100),(5,60))]
+            assert values == [intercept+scale*300]*3
     indistinguishable=[(4,75),(3,100),(5,60)]
     coefficients=[OTHER+MWW_AREA_TENTHS*g*c for g,c in indistinguishable]
     assert coefficients==[1010350]*3
@@ -77,7 +83,8 @@ def main():
         for marker in ("fiftyAbove90Exact","fiftyBelow100Exact",
                        "sixtyBelow100Exact","sixtyFiveAbove100Exact",
                        "originalCoefficientCannotIdentifyGain",
-                       "originalCoefficientCannotIdentifyConfidence"):
+                       "originalCoefficientCannotIdentifyConfidence",
+                       "Abstract.noGainDecoderForAffineProduct"):
             assert marker in content, marker
         assert "{!!}" not in content and "postulate " not in content
     result=check()
