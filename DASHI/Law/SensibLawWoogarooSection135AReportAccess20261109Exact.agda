@@ -13,6 +13,10 @@ module DASHI.Law.SensibLawWoogarooSection135AReportAccess20261109Exact where
 -- later substitutes website publication of recommendations. Sch1
 -- item689 says which recommendation reports the amendments apply to
 -- *once they commence*. It does NOT specify a commencement day.
+-- The authoritative 24 August 2026 compilation No. 70 STILL retains
+-- s135A(2)-(3) on-request report access. Thus items232-234 had NOT
+-- displaced that mechanism as at that compilation date.
+-- Source: https://www.legislation.gov.au/C2004A00485/2026-08-24/2026-08-24/text/original/epub/OEBPS/document_1/document_1.html
 -- Exact commencement for items232-234 (and any relevant savings)
 -- remains a separate source obligation; do not silently assume it
 -- was 24 August, 16 October, or 1 December 2026.
@@ -41,6 +45,7 @@ record OriginalAccessGate : Set where
     approvalSignedYYYYMMDD : Nat
     decisionHasOccurred : Bool
     originalCompilationRequestRouteExists : Bool
+    august24CompilationRetainsOnRequestText : Bool
     amendment232to234CommencementVerified : Bool
     recommendationReportActuallyReceived : Bool
     publicReportPDFAuthenticated : Bool
@@ -50,11 +55,15 @@ open OriginalAccessGate public
 
 reportedState : OriginalAccessGate
 reportedState = original-access-gate
-  20261016 true true false false false false false
+  20261016 true true true false false false false false
 
 directRequestRouteHistoricallyAvailable :
   originalCompilationRequestRouteExists reportedState ≡ true
 directRequestRouteHistoricallyAvailable = refl
+
+august24CompilationStillHasRequestRoute :
+  august24CompilationRetainsOnRequestText reportedState ≡ true
+august24CompilationStillHasRequestRoute = refl
 
 no135AReportReceived :
   recommendationReportActuallyReceived reportedState ≡ false
