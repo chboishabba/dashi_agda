@@ -92,3 +92,31 @@ A local Python enumeration checked all 24 Boolean parity invariant cases and the
 - `finiteCyclicStationIndexClosure`: selected exact numeral turn closures done; arbitrary `Fin N` group action remains open.
 - `signedPitchErrorTelescopes`: remains open at Agda kernel level; do not equate nominal reference proofs with measured nonuniform spacing.
 - Input/output measurement, magnet retention, actual CAD extraction, and all physics gate proofs remain open.
+
+## 2026-11-09 continuation II: nonuniform signed angular walk
+
+Committed `DASHI.Physics.Motors.Resonate369SignedPitchTelescopingExact` at commit `10953bb0673533b7ab75c05f6accfb8f873f37b3`.
+
+- `AngularGroup`: an explicit abstract group receipt for unwrapped angular coordinates; all required group laws are fields, not silently assumed.
+- `Walk.difference`: relative displacement `neg a ⊕ b`.
+- `Walk.signedIncrementSum`: finite sum along any selected ordered list of angular samples, including nonuniform station spacing.
+- `Walk.cancelFirst`: algebraic cancellation of the first increment.
+- `Walk.signedPitchTelescopes`: start angle plus all signed increments equals the final sampled angle.
+- `Walk.leftCancelToZero`: explicit left cancellation, used for closed walks.
+- `Walk.closedWalkSignedPitchZero`: a walk returning to exactly the same **unwrapped** angle has zero net signed increment.
+- `Walk.rigidRotationPreservesDisplacement`: a rigid coordinate translation transports any established relative displacement.
+
+**Important distinction:** a one-turn *unwrapped* rotor path ends at its initial angle plus one full turn, not at its initial angle; it is not covered by the zero-increment closed-walk assertion. For a full turn, instantiate the endpoint displacement as 360000 millidegrees and compare a list of selected nominal increments using a separately proven pointwise-error summation theorem. A circle quotient may identify endpoints but must not lose the winding number.
+
+### Verification status for this continuation
+- Local brute-force model checks across finite modular groups and balanced-parentheses check passed. These are not Agda kernel checks.
+- No `agda` executable was present in the current available container. **Kernel acceptance is open**, and this PR remains draft.
+- The theorem signatures are mathematical contracts in Agda source but have not yet been accepted by the pinned toolchain.
+
+### Next hard leaves, in order
+1. `measuredPitchErrorListSumsToZero`: select unwrapped CAD station sequence and prove pointwise measured-minus-nominal pitch-error sum zero for one full turn, retaining winding number.
+2. `originalC07TwoOffsetStationsSameCAD`: original-source coordinate witness for the two specifically angled C07 stations.
+3. `finiteCyclicStationIndexClosure`: integrate generic `Fin N` modular successor with the existing finite phase carrier and the new list walk; the new list telescope is only a partial closure.
+4. `derivedGeometryKernelChecked`: run Agda 2.9 on all four new source modules and imports.
+5. `sameRevisionCoilMagnetAxisAirgap` and real polarity wiring remain measurement dependent.
+6. Same-cycle electrical/magnetic/mechanical power accounting remains a separate original physical experiment gate.
