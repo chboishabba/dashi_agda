@@ -84,3 +84,6 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteCoordinateProjectionExact
 
 -- E1/A3: actual original positive-link tuple evaluator reconstructs signed path holonomy and every real SU(N) plaquette word.
 import DASHI.Physics.YangMills.YMClayE1A3OriginalSignedPathValueEvaluatorExact as E1A3DirectWordEvaluator
+
+-- E1/A3: actual original Gibbs/Haar normalized expectation of finite positive-link tuple evaluation is the original Wilson E1 cylinder expectation.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteValueExpectationWeldExact as E1A3RealExpectationWeld
