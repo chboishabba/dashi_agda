@@ -113,6 +113,21 @@ def init(conn: sqlite3.Connection) -> None:
       symbol_id TEXT PRIMARY KEY, old_statement_hash TEXT NOT NULL,
       new_statement_hash TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS jmd_world_a2l_capabilities (
+      declaration TEXT PRIMARY KEY, module TEXT NOT NULL,
+      mode TEXT NOT NULL CHECK(mode IN ('exact','encoded','reconstruct','quarantined','unsupported')),
+      object_hash TEXT NOT NULL, checked_source_sha256 TEXT NOT NULL,
+      source_file TEXT NOT NULL, source_start_line INTEGER NOT NULL,
+      source_end_line INTEGER NOT NULL, current_source_matches INTEGER NOT NULL
+        CHECK(current_source_matches IN (0,1)),
+      authority TEXT NOT NULL CHECK(authority='translation-capability-only'),
+      establishes_proof INTEGER NOT NULL CHECK(establishes_proof=0)
+    );
+    CREATE TABLE IF NOT EXISTS jmd_world_a2l_dependencies (
+      declaration TEXT NOT NULL REFERENCES jmd_world_a2l_capabilities(declaration)
+        ON DELETE CASCADE, dependency TEXT NOT NULL,
+      PRIMARY KEY(declaration,dependency)
+    );
     CREATE TABLE IF NOT EXISTS jmd_world_image_candidates (
       image_group TEXT NOT NULL, symbol_id TEXT NOT NULL,
       matching_terms INTEGER NOT NULL, authority TEXT NOT NULL
@@ -486,6 +501,8 @@ def report(conn) -> dict:
         "affected_nodes":"SELECT count(*) FROM jmd_world_affected",
         "changed_source_declarations":"SELECT count(*) FROM jmd_world_source_changes",
         "image_owner_candidate_edges":"SELECT count(*) FROM jmd_world_image_candidates",
+        "a2l_capabilities":"SELECT count(*) FROM jmd_world_a2l_capabilities",
+        "a2l_source_fresh":"SELECT count(*) FROM jmd_world_a2l_capabilities WHERE current_source_matches=1",
         "native_requirement_leads":"SELECT count(*) FROM jmd_world_native_gaps",
         "native_gap_candidate_edges":"SELECT count(*) FROM jmd_world_gap_candidates"
     }.items():
