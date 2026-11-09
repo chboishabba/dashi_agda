@@ -120,3 +120,10 @@ Committed `DASHI.Physics.Motors.Resonate369SignedPitchTelescopingExact` at commi
 4. `derivedGeometryKernelChecked`: run Agda 2.9 on all four new source modules and imports.
 5. `sameRevisionCoilMagnetAxisAirgap` and real polarity wiring remain measurement dependent.
 6. Same-cycle electrical/magnetic/mechanical power accounting remains a separate original physical experiment gate.
+
+### Additional generic full-turn lemmas, commit 03bd40f9
+
+- `Walk.leftCancellation`: cancellativity for two arbitrary relative displacements in a common angular group.
+- `Walk.fullTurnSignedPitch`: the measured ordered samples have signed increment sum exactly `turn` whenever the unwrapped last sample is the initial angle plus `turn`. This closes the **abstract** full-turn telescope with a supplied endpoint witness, but not the concrete C07 station list, nominal-pitch error sum, or geometric measurement.
+- The name `closedWalkSignedPitchZero` applies only to equal *unwrapped* endpoints; do not use it to erase 360 degrees.
+- Both new lemmas are unverified by Agda and require pinned-toolchain acceptance.
