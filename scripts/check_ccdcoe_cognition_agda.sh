@@ -27,6 +27,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3G20ComplianceObservedExact.agda
   DASHI/Cognition/CCDCOEP3CountryImplementationJoinExact.agda
   DASHI/Cognition/CCDCOEP3G20RGMemberPanelExact.agda
+  DASHI/Cognition/CCDCOEP3StakeholderHandoffExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
@@ -45,6 +46,8 @@ python3 scripts/check_ccdcoe_p3_g20_cop21.py
 python3 scripts/check_ccdcoe_p3_country_implementation.py --self-test
 python3 scripts/check_ccdcoe_p3_g20rg_member_panel.py --self-test
 python3 scripts/check_ccdcoe_p3_g20rg_member_panel.py
+python3 scripts/check_ccdcoe_p3_stakeholder_handoff.py --self-test
+python3 scripts/check_ccdcoe_p3_stakeholder_handoff.py
 python3 scripts/measure_ccdcoe_p3_gcc_media.py --self-test
 python3 scripts/measure_ccdcoe_p3_gcc_dual_coder.py --self-test
 python3 scripts/build_ccdcoe_p3_primary_intake.py --self-test
