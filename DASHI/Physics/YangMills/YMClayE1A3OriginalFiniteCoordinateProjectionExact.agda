@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteCoordinateProjectionExact
 
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
-open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Equality using (_≡_; refl; cong)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -32,6 +32,7 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
 import DASHI.Physics.YangMills.YMClayE1A3OriginalAllWordPathSupportExtensionalExact as Support
+import DASHI.Physics.YangMills.YMClayD1OriginalWilsonPathSupportExtensionalExact as Path
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 
 -- Elementary injectivity of list constructors; no equality axioms.
@@ -74,6 +75,25 @@ sameOriginalFiniteBondValuesImpliesPointwiseAgreement
   (head ∷ tail) left right same bond (Torus.there member) =
   sameOriginalFiniteBondValuesImpliesPointwiseAgreement
     tail left right (consTailInjective same) bond member
+
+
+-- Restriction of an actual link field to a concatenated source-support
+-- list commutes with concatenation of the finite coordinate values.
+-- This is an actual finite-coordinate compatibility theorem and does
+-- not assume probability-measure projective consistency.
+originalFiniteValuesAppend :
+  ∀ {n : Nat} {Value : Set}
+    (left right : List (Torus.PositiveBond (suc n)))
+    (field : Torus.PositiveBond (suc n) → Value) →
+  originalNativeFiniteBondValues
+    (Support.appendSource left right) field
+  ≡ Support.appendSource
+      (originalNativeFiniteBondValues left field)
+      (originalNativeFiniteBondValues right field)
+originalFiniteValuesAppend [] right field = refl
+originalFiniteValuesAppend (head ∷ rest) right field =
+  cong (λ tail → field head ∷ tail)
+    (originalFiniteValuesAppend rest right field)
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -122,3 +142,22 @@ module _
   -- The number of lookup slots is 4 times the plaquette word length,
   -- as proved in Support.originalWordActualLookupSlotsExactlyFourPerPlaquette.
   -- Periodic identifications may make some slots duplicate coordinates.
+
+  -- For each original word extension, its actual finite projection is
+  -- exactly the head-plaquette projection concatenated with the
+  -- previously selected tail-word projection. No new chosen projection
+  -- or carrier appears at the inductive step.
+  originalWilsonWordFiniteCoordinateCons :
+    (n : Nat) (p : Plaquette.PeriodicPlaquette n)
+    (rest : List (Plaquette.PeriodicPlaquette n))
+    (links : Variable.SUNPeriodicLinks theory n) →
+    originalWilsonWordFiniteValues n (p ∷ rest) links
+    ≡ Support.appendSource
+        (originalNativeFiniteBondValues
+          (Path.sourcePlaquettePositiveBondSupport p) links)
+        (originalWilsonWordFiniteValues n rest links)
+  originalWilsonWordFiniteCoordinateCons n p rest links =
+    originalFiniteValuesAppend
+      (Path.sourcePlaquettePositiveBondSupport p)
+      (Support.originalWordActualFlatPositiveBondSupport rest)
+      links
