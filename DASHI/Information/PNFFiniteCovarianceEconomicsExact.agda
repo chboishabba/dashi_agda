@@ -123,3 +123,15 @@ equiMarketEigen K {p} rho i
         (Scalar._+_ (Ring.orderedScalar K)
           (Scalar.one (Ring.orderedScalar K))
           (Scalar.neg (Ring.orderedScalar K) rho))))
+
+-- The *population* equicorrelation operator becomes the identity at rho=0,
+-- independent of the sample-size / MP asymptotic regime.
+equiZeroCorrelationIsIdentity :
+  (K : Ring.ExactOrderedCommutativeRing) → {p : Nat} →
+  (v : Fin p → SOf K) → (i : Fin p) →
+  equiOperator K (Scalar.zero (Ring.orderedScalar K)) v i ≡ v i
+equiZeroCorrelationIsIdentity K v i
+  rewrite Ring.mulZeroLeft K (Ring.sumFin (Ring.orderedScalar K) v)
+        | Ring.addZeroRight K (Scalar.one (Ring.orderedScalar K))
+        | Ring.mulOneLeft K (v i) =
+  Ring.addZeroRight K (v i)
