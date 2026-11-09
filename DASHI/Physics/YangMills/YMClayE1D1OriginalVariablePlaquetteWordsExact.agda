@@ -19,6 +19,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact 
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.YMClayD1OriginalPeriodicPlaquetteFourBondSupportExact as FourBond
+import DASHI.Physics.YangMills.YMClayD1OriginalPlaquetteSupportDecisionExact as DisjointSupport
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Wilson
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Jet
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
@@ -66,6 +67,17 @@ module _
   originalWordAllPositiveBondSupportsHaveFour n (p ∷ rest) =
     appendFour (FourBond.originalPlaquetteReadsExactlyFourBondSlots p)
       (originalWordAllPositiveBondSupportsHaveFour n rest)
+
+
+  -- This native original two-plaquette decision procedure returns an
+  -- actual PROOF of disjoint positive-bond support when successful.
+  -- It is a dependency on the SAME native Wilson source, not a
+  -- new synthetic link graph or assumed independence condition.
+  originalPlaquettesHaveDisjointLinkSupports :
+    (n : Nat) (left right : Plaquette.PeriodicPlaquette n) →
+    Torus.Dec (DisjointSupport.OriginalPlaquettesDisjoint left right)
+  originalPlaquettesHaveDisjointLinkSupports n left right =
+    DisjointSupport.decideOriginalPlaquettesDisjoint left right
 
   originalWordObservable :
     (n : Nat) → PlaquetteWord n →
