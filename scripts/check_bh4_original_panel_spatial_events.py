@@ -33,6 +33,9 @@ from build_bh4_stoichiometric_matrix import build_matrix, participant_key
 from run_bh4_reaction_network import QDPR, audit_reaction, parse_formula
 from run_bh4_flux_feasibility import evaluate as evaluate_original_flux_candidate
 from check_bh4_spatial_measurement_payment import read_assay as read_original_spatial_assay
+from check_bh4_spatial_measurement_payment import REQUIRED as ORIGINAL_ASSAY_FIELDS
+import csv
+import tempfile
 from decimal import Decimal, InvalidOperation
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -502,6 +505,11 @@ def bind_original_quantitative_candidate_to_assay(candidate,assay_path):
         raise ValueError("held-out test measurement cannot calibrate candidate")
     if candidate.get("experiment_id")!=matched["experiment"]:
         raise ValueError("candidate experiment identity differs from original assay")
+    if candidate.get("source_id")!=receipt["original_source"]:
+        raise ValueError("candidate original assay source identity mismatch")
+    if candidate.get("original_source_sha256")!=receipt["original_source_sha256_declared"]:
+        raise ValueError("candidate original upstream-source digest differs from assay")
+
     if not isinstance(candidate.get("measurement_reference"),str) or not candidate["measurement_reference"].strip():
         raise ValueError("explicit measurement reference required")
     return {
@@ -656,6 +664,51 @@ def self_test():
     else:
         raise AssertionError(
             "local signed/element continuity missed undeclared transport")
+    # Source-context contract regression: the existing assay parser
+    # requires longitudinal matching and independent train/test splits.
+    # All source strings below are explicitly synthetic negative controls.
+    with tempfile.TemporaryDirectory() as temp_dir:
+        assay=Path(temp_dir)/"synthetic-original-assay.csv"
+        with assay.open("w",newline="",encoding="utf-8") as handle:
+            writer=csv.writer(handle)
+            writer.writerow(ORIGINAL_ASSAY_FIELDS)
+            for experiment in range(4):
+                split="train" if experiment<2 else "test"
+                for when in (0,5):
+                    for region,compartment in (("blood","plasma"),
+                                               ("cell","cytosol")):
+                        writer.writerow((
+                            "SYNTHETIC:NO-ASSAY","a"*64,
+                            str(experiment),f"specimen-{experiment}",split,
+                            str(when),region,compartment,"0.001","0.000002",
+                            "0.000001","demo-route","plasma_membrane",
+                            "synthetic, not a measured flux"))
+        _,assay_receipt=read_original_spatial_assay(assay)
+        sample={"measurement_csv_sha256":assay_receipt["original_csv_sha256"],
+                "source_id":"SYNTHETIC:NO-ASSAY",
+                "original_source_sha256":"a"*64,
+                "specimen_id":"specimen-0","experiment_id":"0",
+                "region":"blood","compartment":"plasma","time_s":"0",
+                "measurement_reference":"synthetic unit test"}
+        linked=bind_original_quantitative_candidate_to_assay(sample,assay)
+        assert linked["original_split"]=="train"
+        assert not linked["rate_identified_from_concentration"]
+        for change in (
+            {"measurement_csv_sha256":"0"*64},
+            {"region":"invented"},
+            {"time_s":"99"},
+            {"experiment_id":"3"},
+            {"original_source_sha256":"0"*64},
+            {"specimen_id":"specimen-2","experiment_id":"2"},
+        ):
+            bad=dict(sample,**change)
+            try:
+                bind_original_quantitative_candidate_to_assay(bad,assay)
+            except ValueError:
+                pass
+            else:
+                raise AssertionError(
+                    f"unmatched or held-out original assay accepted: {change}")
     print(json.dumps(result,indent=2,sort_keys=True))
 
 
