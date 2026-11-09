@@ -158,3 +158,113 @@ originalFullSpatialOpenSignedChargeBalance actions system =
           (negativeResult (afterNativeInternalTransport actions system)))
         (Ionic.allIonHistoriesPreserveNegativeTotal actions
           (initialIons system))))
+
+
+------------------------------------------------------------------------
+-- TRUE SIGNED LOCAL NATIVE CURRENT: the original directed geometric
+-- bond and its executed 0/1 moved quantum select the current. This
+-- combines per-voxel cation (+) and anion (-) contributions without
+-- interpreting a global unsigned magnitude as signed charge.
+--
+-- Current equation at one actual bond event, in an integer ledger:
+-- Q_after + signedOutgoing = Q_before + signedIncoming.
+-- This is exact finite-state transport, not measured PNP kinetics.
+------------------------------------------------------------------------
+
+import Data.Fin.Base as F
+import DASHI.Biology.Physical.BiologicalOriginal54BondSharedVectorExact as Native
+
+data OriginalSignedNativeBondAction : Set where
+  moveCation : Native.OriginalDirectedNativeBond →
+    OriginalSignedNativeBondAction
+  moveAnion : Native.OriginalDirectedNativeBond →
+    OriginalSignedNativeBondAction
+
+signedNativeBond :
+  OriginalSignedNativeBondAction → Native.OriginalDirectedNativeBond
+signedNativeBond (moveCation bond) = bond
+signedNativeBond (moveAnion bond) = bond
+
+applyOriginalSignedNativeBond :
+  OriginalSignedNativeBondAction →
+  Ionic.TwoIonSharedGrid → Ionic.TwoIonSharedGrid
+applyOriginalSignedNativeBond (moveCation bond)
+  (Ionic.two-ion-shared-grid pos neg) =
+  Ionic.two-ion-shared-grid (Native.applyNativeDirectedBond bond pos) neg
+applyOriginalSignedNativeBond (moveAnion bond)
+  (Ionic.two-ion-shared-grid pos neg) =
+  Ionic.two-ion-shared-grid pos (Native.applyNativeDirectedBond bond neg)
+
+positiveNativeOut :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27) →
+  Native.NativeVoxelRole (signedNativeBond action) observer → Nat
+positiveNativeOut (moveCation bond) state observer role =
+  Native.nativeRoleOutgoing bond (Ionic.positiveIon state) observer role
+positiveNativeOut (moveAnion bond) state observer role = 0
+
+negativeNativeOut :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27) →
+  Native.NativeVoxelRole (signedNativeBond action) observer → Nat
+negativeNativeOut (moveCation bond) state observer role = 0
+negativeNativeOut (moveAnion bond) state observer role =
+  Native.nativeRoleOutgoing bond (Ionic.negativeIon state) observer role
+
+positiveNativeIn :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27) →
+  Native.NativeVoxelRole (signedNativeBond action) observer → Nat
+positiveNativeIn (moveCation bond) state observer role =
+  Native.nativeRoleIncoming bond (Ionic.positiveIon state) observer role
+positiveNativeIn (moveAnion bond) state observer role = 0
+
+negativeNativeIn :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27) →
+  Native.NativeVoxelRole (signedNativeBond action) observer → Nat
+negativeNativeIn (moveCation bond) state observer role = 0
+negativeNativeIn (moveAnion bond) state observer role =
+  Native.nativeRoleIncoming bond (Ionic.negativeIon state) observer role
+
+nativeSignedChargeAfterWithOut :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27)
+  (role : Native.NativeVoxelRole (signedNativeBond action) observer) →
+  Int.ℤ
+nativeSignedChargeAfterWithOut action state observer role =
+  Ionic.integerSignedCharge
+    (V.lookup (Ionic.positiveIon (applyOriginalSignedNativeBond action state))
+      observer + positiveNativeOut action state observer role)
+    (V.lookup (Ionic.negativeIon (applyOriginalSignedNativeBond action state))
+      observer + negativeNativeOut action state observer role)
+
+nativeSignedChargeBeforeWithIn :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27)
+  (role : Native.NativeVoxelRole (signedNativeBond action) observer) →
+  Int.ℤ
+nativeSignedChargeBeforeWithIn action state observer role =
+  Ionic.integerSignedCharge
+    (V.lookup (Ionic.positiveIon state) observer
+      + positiveNativeIn action state observer role)
+    (V.lookup (Ionic.negativeIon state) observer
+      + negativeNativeIn action state observer role)
+
+original369SignedNativeOneStepContinuity :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27)
+  (role : Native.NativeVoxelRole (signedNativeBond action) observer) →
+  nativeSignedChargeAfterWithOut action state observer role
+    ≡ nativeSignedChargeBeforeWithIn action state observer role
+original369SignedNativeOneStepContinuity
+  (moveCation bond) (Ionic.two-ion-shared-grid pos neg)
+  observer role =
+  cong₂ Ionic.integerSignedCharge
+    (Native.originalNativeVoxelIncidenceBalance bond pos observer role)
+    refl
+original369SignedNativeOneStepContinuity
+  (moveAnion bond) (Ionic.two-ion-shared-grid pos neg)
+  observer role =
+  cong₂ Ionic.integerSignedCharge refl
+    (Native.originalNativeVoxelIncidenceBalance bond neg observer role)
