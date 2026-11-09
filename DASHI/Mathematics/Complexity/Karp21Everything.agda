@@ -243,3 +243,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorExact
 
 -- K05: source-written all-word equivalence of grouped and original binary signed ledgers.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorSemanticExact
+
+-- SSP sign-inversion operation reuse on the original signed Karp factors.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorC2Exact
