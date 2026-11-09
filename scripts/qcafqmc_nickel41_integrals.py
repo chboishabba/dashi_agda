@@ -27,7 +27,7 @@ def checked_source_bytes(path):
     path=Path(path).resolve()
     raw=path.read_bytes()
     if path.parent==GEOMETRY_DIR.resolve() and path.stem in EXPECTED_XYZ_GIT_BLOBS:
-        digest=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\x00"+raw).hexdigest()
+        digest=hashlib.sha1(b"blob "+str(len(raw)).encode()+bytes([0])+raw).hexdigest()
         if digest!=EXPECTED_XYZ_GIT_BLOBS[path.stem]:
             raise ValueError("source-coordinate XYZ blob differs from pinned transcription")
     return raw
