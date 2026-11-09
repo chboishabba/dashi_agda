@@ -30,14 +30,30 @@ def kappa(pairs):
     expected=sum(counts_a[c]*counts_b[c] for c in (set(counts_a)|set(counts_b)))/(n*n)
     return {'n': n, 'agreement': observed, 'kappa': None if expected == 1 else (observed-expected)/(1-expected)}
 
-def validate(manifest, source_root):
+ORIGINAL_OWNERS = {
+    'rensberger_original': 'Boyce Rensberger',
+    'hansen_original_correction': 'James E. Hansen',
+    'gcc_june_response': 'Global Climate Coalition',
+    'gcc_september_bulletin': 'Global Climate Coalition',
+    'gcc_march_baseline': 'Global Climate Coalition',
+}
+
+def validate(manifest, source_root, *, synthetic=False):
     demand(manifest.get('schema')=='dashi.ccdcoe.p3.dual_coder_receipts.v1', 'schema')
     root=Path(source_root).resolve(); items=manifest.get('passages',[])
+    demand(bool(items) or synthetic, 'real intake requires nonempty passages')
     demand(len(items)==len({p['id'] for p in items}), 'duplicate passage')
+    passage_keys=set()
     grades={}
     pairings={name: [] for name in VALID}
     for p in items:
         demand(p['source_id'] in ('rensberger_original','hansen_original_correction','gcc_june_response','gcc_september_bulletin','gcc_march_baseline'), 'source cohort')
+        if not synthetic:
+            demand(ORIGINAL_OWNERS[p['source_id']] in p['original_author'], 'source-specific author attribution')
+            demand(p['edition'].strip().lower() != 'synthetic', 'synthetic edition not historical source')
+        span_key=(p['source_id'],p['edition'],p['start_byte'],p['end_byte'])
+        demand(span_key not in passage_keys, 'same source passage double counted')
+        passage_keys.add(span_key)
         local=p['relative_path']; demand(isinstance(local,str) and local and not Path(local).is_absolute(), 'relative path')
         file=(root/local).resolve(); demand(file.is_relative_to(root) and file.is_file(), 'source file traversal/missing')
         raw=file.read_bytes(); digest=hashlib.sha256(raw).hexdigest()
@@ -64,14 +80,17 @@ def self_test():
         codes_b=codes_a.copy()
         p={'id':'test1','source_id':'gcc_march_baseline','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':len(raw),'passage_sha256':hashlib.sha256(raw).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
         item={'schema':'dashi.ccdcoe.p3.dual_coder_receipts.v1','passages':[p]}
-        positive=validate(item,root); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
+        positive=validate(item,root,synthetic=True); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
         import copy
-        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10))]
+        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span')))]
         for name,change in tests:
             changed=copy.deepcopy(item); change(changed)
-            try:validate(changed,root)
+            try:validate(changed,root,synthetic=True)
             except (ValueError,KeyError,TypeError):continue
             raise AssertionError('negative test accepted: '+name)
+        try:validate(item,root)
+        except ValueError:pass
+        else:raise AssertionError('synthetic owner accepted as real historical author')
         demand(kappa([('a','a'),('b','b')])['kappa']==1,'agreement test')
         demand(kappa([('a','b'),('b','a')])['kappa']==-1,'disagreement test')
         return {'synthetic_passage_positive':True,'negative_controls':len(tests),'kappa_cases':3,'real_historical_passages_admitted':0}
