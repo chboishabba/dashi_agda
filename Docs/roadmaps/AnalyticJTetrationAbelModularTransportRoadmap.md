@@ -91,7 +91,7 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [~] **P3.01** `originalStructuredObserverFactorsThroughTransportedJ` **or** a weaker explicit equivariant-square theorem; do not assert factorization if the existing structured observer sees additional data.
 - [~] **P3.02** `originalLocal27UnderExponentiation`: source-written in `AbelOriginalStructuredObserverWeldExact.agda` as a theorem consuming the original structured observer and `localJObserver`, conditional on `OriginalFineObserverAbelSquare`. A true T-equivariance receipt for the selected fine-point observer remains outstanding.
 - [ ] **P3.02a** `originalStructuredFineTranslationInstance`: derive `fineTranslation` from an actual modular-point action, and prove its relationship with the Abel image.
-- [ ] **P3.02b** `originalStructuredFineObserverAction`: show whether the genuine observer is T-invariant or equivariant by a *nontrivial* finite chart action, rather than assuming invariance.
+- [~] **P3.02b** `originalStructuredFineObserverAction`: `AbelOriginalMovingLevelObserverTransportExact.agda` now source-writes genuine original modular cusp-level T-equivariance on 27/9/3 observers via the pre-existing `Level27TranslationLift` and its derived `observer27TranslationCommutes`, `observer9TranslationCommutes`, `level3TranslationDerived`. Still need an actual `OriginalMovingLevelAbelWeld` connecting Abel coordinate values to the original Klein-j renderer points; this source-written theorem is conditional, not a complete structured fine point instance.
 - [ ] **P3.02legacy** `originalLocal27UnderExponentiation`: establish the exact conditional observer update, using the existing structured 27-state owner.
 - [ ] **P3.03** `originalPantsPathTransportNaturality`: commute the certified observer relation through the existing finite PantsPath 3.
 - [ ] **P3.04** `originalAnalyticHyperformSeamCompatibility`: reuse q/lattice chart gluing and preserve the analytic payload outside finite codecs.
@@ -197,3 +197,25 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - `AbelOriginalStructuredObserverWeldExact.agda` uses the existing analytic JCoarse/JFine observer and original `localJObserver`; the input `fineObserverTranslation` is **not** automatic from modular `j` invariance. The original level-27 cusp fibre can move under modular T, so a T-invariance assumption may be false for that observer; P3 must allow a nontrivial equivariant action.
 - Kernel-check all three new modules and imports; no compiler receipt yet. P1/P1b/P2/P3 remain substantively open on actual analyticity/source-instance hypotheses; P4 source analytic contour recurrence remains conditional.
 - Exact next highest mathematical cut: a holomorphic nonterminal Kneser Abel chart, or a genuinely source-constructed local Koenigs/Schröder linearization with proven analytic log branch and conjugacy, then an authentic modular-j normalization/observer welding.
+
+
+## 2026-11-09 next mathematical maximum-cut receipt
+
+**New source:** `DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda`.
+
+- [x] `originalMovingLevel27UnderExp`: given a paid Abel-to-original-Klein point square, the original finite level-27 observer rotates under exp via `translateObserver27`.
+- [x] `originalMovingLevel9UnderExp`: the same selected original source induces a moving level-9 observer via `translateObserver9`.
+- [x] `originalMovingLevel3UnderExp`: same-square level-3 translation via `translateTriadic Q.one`.
+- [ ] **P3.06** `originalMovingLevelAbelWeldInstance`: provide actual analytic source-point and prove `sourcePoint (T tau)=translatePoint(sourcePoint tau)` on a selected Kneser Abel chart. The new `OriginalMovingLevelAbelWeld` record requires this as an explicit input; it has NOT been constructed.
+- [ ] **P3.07** `originalStructuredLevel27ObserverIdentifies`: match the original `AnalyticJStructuredObserver.observeLocal27` with the actual cusp-level `canonicalObserver27At`, or produce an explicit counterexample/nonidentification; colour-derived 27 labels are not automatically level-27 lift labels.
+- [ ] **P1.07** `originalHolomorphicAbelDomainWithIterateClosure`: prove a nonempty analytic domain with the required iterate invariance and complex holomorphic coordinate, not just a formally inhabited Set.
+- [ ] **P1.08** `originalKoenigsLinearizationAtSelectedExponentialFixedPoint`: if using a local repelling fixed point route, prove actual local linearization, nonzero multiplier/log-branch choice and the induced Abel chart on a punctured branch domain. The fixed point itself cannot lie in a fixed-point-free additive Abel chart.
+- [ ] **P1.09** `originalKneserGlobalGluingAndNormalization`: prove overlap/monodromy consistency and the specific Kneser normalization rather than declaring any local linearization to be Kneser's tetration.
+- [ ] **P2.06** `originalJSetoidEqualityTransport`: bridge the actual Bishop setoid complex `_≈C_` to the chosen modular renderer equivalence; do not silently substitute intensional `_≡_`.
+- [ ] **P2.07** `originalQSeriesLatticeTranslationAtT`: use the real original `BishopQSeriesLatticeSameObject` and its E4/E6 transport on the selected upper-half-plane parameter to establish the actual (j(τ+1)=j(τ)) same-source property.
+- [ ] **P4.06** `originalTetrationNonzeroArgumentDomain`: build the nonzero/branch-indexed argument map from a real principal-polar authority, with phase and winding changes tracked on overlaps.
+- [ ] **P4.07** `originalKneserContourSamplingErrorBound`: use certified analytic truncation plus domain/branch error bounds; numerical plotting without these remains diagnostic only.
+
+**Critical type/semantics distinction:** current `ConcreteComplex` is a package interface and `TerminalConstructedAnalyticModel` is a singleton witness, not the analytic complex field. Meanwhile `BishopSetoidComplexExact` supplies a genuine Bishop setoid complex with `_≈C_`; a proposed literal `_≡_` bridge must be justified. `ModularCurveJFrickeInterfaceExact` is a modular interface rather than a completed analytic Hauptmodul. The immediate outstanding mathematical input is a genuinely nondegenerate holomorphic Kneser chart and its same-source modular-(j) parameterization.
+
+**Status:** P1, P1b, P2 remain open; P3 original moving-level equivariance is source-written *conditional on Abel-to-fine point selection*; P4 contour transport is source-written *conditional on tetration*. No new source was compiled in this execution pass; safe kernel acceptance and any actual numeric calibration remain open.
