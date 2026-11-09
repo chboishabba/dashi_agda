@@ -29,6 +29,7 @@ import RealProperties as RP
 import DASHI.Analysis.BishopOriginalNegativeLogExpFiniteStageLimitExact as Finite
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteErrorDerivativeExact as Error
 import DASHI.Analysis.BishopOriginalNegativeLogCrossWeightedIncrementExact as Cross
+import DASHI.Analysis.BishopOriginalNegativeLogFiniteExpCrossWeightTransportExact as Transport
 
 sourceCrossAt :
   (stage : Nat) (a b : R.ℝ) → R.ℝ
@@ -101,3 +102,68 @@ originalSourceCrossThreeVertexCocycle stage a b c =
           (((Κ 1ℚᵘ ⊖ aa) ⊗ ffb)
             ⊖ ((Κ 1ℚᵘ ⊖ bb) ⊗ ffa))))
     RP.≃-refl a b c fa fb fc
+
+------------------------------------------------------------------------
+-- Source residual on two consecutive cells x -> x+h -> x+h+k.
+-- This preserves every quotient defect, in contrast to replacing
+-- a positive-step quotient by its derivative at finite mesh size.
+------------------------------------------------------------------------
+
+sourceCrossAtIncrement :
+  (stage : Nat) (x h : R.ℝ) →
+  R._≃_
+    (sourceCrossAt stage x (R._+_ x h))
+    (Transport.sourceFiniteExpCrossWeightedIncrement stage x h)
+sourceCrossAtIncrement stage x h = RP.≃-refl
+
+sourceCrossAtResidualPlusDefect :
+  (stage : Nat) (x h : R.ℝ) →
+  R._≃_
+    (sourceCrossAt stage x (R._+_ x h))
+    (R._*_ h
+      (R._+_
+        (Cross.sourceODEForcing stage x)
+        (R._*_ (Cross.oneMinus x)
+          (R._-_
+            (Cross.sourceErrorQuotient stage x h)
+            (Cross.sourceErrorSlope stage x)))))
+sourceCrossAtResidualPlusDefect stage x h =
+  RP.≃-trans
+    (sourceCrossAtIncrement stage x h)
+    (Transport.originalFiniteExpCrossWeightIsResidualPlusDefect
+      stage x h)
+
+-- The exact two-cell endpoint transport, in terms of original
+-- F_N local residual and original quotient defect at each cell.
+originalSourceCrossTwoStepResidual :
+  (stage : Nat) (x h k : R.ℝ) →
+  let
+    y = R._+_ x h
+    z = R._+_ y k
+    local = λ point step →
+      R._*_ step
+        (R._+_
+          (Cross.sourceODEForcing stage point)
+          (R._*_ (Cross.oneMinus point)
+            (R._-_
+              (Cross.sourceErrorQuotient stage point step)
+              (Cross.sourceErrorSlope stage point))))
+  in
+  R._≃_
+    (R._*_ (Cross.oneMinus y)
+      (sourceCrossAt stage x z))
+    (R._+_
+      (R._*_ (Cross.oneMinus x) (local y k))
+      (R._*_ (Cross.oneMinus z) (local x h)))
+originalSourceCrossTwoStepResidual stage x h k =
+  let
+    y = R._+_ x h
+    z = R._+_ y k
+  in
+  RP.≃-trans
+    (originalSourceCrossThreeVertexCocycle stage x y z)
+    (RP.+-cong
+      (RP.*-cong RP.≃-refl
+        (sourceCrossAtResidualPlusDefect stage y k))
+      (RP.*-cong RP.≃-refl
+        (sourceCrossAtResidualPlusDefect stage x h)))
