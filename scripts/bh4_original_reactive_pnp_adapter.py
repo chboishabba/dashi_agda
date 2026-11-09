@@ -231,8 +231,6 @@ def main(argv=None):
     return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())
 
 
 def check_original_closed_inventory(
@@ -366,3 +364,7 @@ def source_bound_closed_implicit_step(
         "independent_longitudinal_validation": False,
         "agda_kernel_checked": False,
     }
+
+
+if __name__ == "__main__":
+    sys.exit(main())
