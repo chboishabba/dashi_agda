@@ -22,7 +22,8 @@ module DASHI.Moonshine.AbelE8ThetaParityProjectorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:*_; _:+_; con; _:=_)
 
