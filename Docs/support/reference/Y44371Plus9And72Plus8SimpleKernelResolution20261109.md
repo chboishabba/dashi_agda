@@ -128,3 +128,18 @@ RelatorsSatisfied gi nodes Y.monsterRelators
 The second uses structural `appendSatisfied` / `mergeAppendSatisfied` proofs on **Y._++_**, with `original79AndCentralFrom80` and `original80From79AndCentral`; no abstract postulated “central quotient” record. `ExistingOriginalJMD.literalOriginal79Satisfied`, `literalOriginalCentralSatisfied` and `reconstructedOriginal80From79AndCentral` consume precisely the existing JMD selected G, its original relators and the literal Ivanov `f312` word.
 
 **Paid source-level**: the exact list-level historical presentation passage from 79 to 80 and the exact 72+8 relation satisfaction equivalence. **Still required**: prove the **group-theoretic** historic identification of the quotient of the 79-relator group by the normal closure of `f312` with the published Monster, and transfer its simplicity to `Original80SimpleCongruenceAuthority`. Satisfying the *same relations* alone does not prove a selected-group isomorphism. Agda kernel acceptance remains pending.
+
+
+## 9 November source-level historical presentation isomorphism — 79+central congruence ≡ 80 congruence
+
+**Important M2-SIMPLE progress beyond word counts or satisfaction transport:** `DASHI/Moonshine/Y443Original79CentralQuotientIs80Exact.agda` now constructs the least **group-congruence** `_≈₇₉⁺_` on the existing original `SignedNodeExpression` using only (i) the literal 79 source Coxeter/spider words `Y.doubleMonsterRelators`, and (ii) Ivanov's actual central source word `Y.centralInvolutionRelator`, with all original associativity, identity, inverse and multiplication-congruence laws. No new selected group or manufactured abstract quotient object is introduced.
+
+The source-witness functions `membershipLeft`, `membershipRight` and `membershipSplit` are structural inductions over the *literal* `Y._++_` source relator list. Consequently `historicalTo80` and `original80ToHistorical` recurse over every proof constructor and establish, for **all** original signed node expressions `x,y`:
+
+```
+U._≈₈₀_ x y   iff   x ≈₇₉⁺ y .
+```
+
+The theorem `original80IffHistorical79Central` gives both directions, and `historical79PlusCentralSetoidGroup` constructs the matching historical quotient **group object in setoids**. The new module is imported into `Y443VNaturalPairGenerationValidation.agda`. This is a structural proof of **the actual presented group's quotient equivalence**, stronger than merely proving that selected group models satisfy the two lists.
+
+**M2-SIMPLE remaining source:** transport the external published Ivanov/Bray theorem that the historical `Y443 / <f312>` group is the **published simple Monster** onto the **same actual setoid**; the source-level historical-presentation equivalence needed for that transport is now constructed. This does **not** itself build a canonical Monster group carrier, a closed term of `Original80SimpleCongruenceAuthority`, a nonidentity selected-node action, or the actual Vnatural all-mode isomorphism. Exact-head Agda 2.9 kernel acceptance remains unobserved. Updated highest-alpha next: published-source historical group iso and simple-congruence elimination, one selected JMD w5 nontriviality or moved-weight-two witness, then composition with existing `OriginalSelectedJMDSource`. Attribution: Ivanov, Bray, TauCeti and JMD preserved.
