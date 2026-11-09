@@ -24,7 +24,7 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (_×_; _,_)
 open import Data.Integer.Base as Int using (ℤ; +_; _+_)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; cong)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
@@ -90,3 +90,38 @@ rawSelectedTraceRebuildsOriginalScore
 ...   | just selected | induction with Boolean.boolEqual a b
 ...     | true rewrite sym induction = refl
 ...     | false rewrite sym induction = refl
+
+------------------------------------------------------------------------
+-- Whole ORIGINAL gamma graph-word and sparse certificate decision.
+-- The grammar is not changed: use Runtime.readRawGraphWord itself,
+-- including its positive-threshold and exact-end-of-word policy.
+------------------------------------------------------------------------
+
+verifyOriginalGraphWordByTrace :
+  Word.BitWord → Word.BitWord → Bool
+verifyOriginalGraphWordByTrace word certificate
+  with Runtime.readRawGraphWord word
+... | nothing = false
+... | just graph
+  with rawSelectedTrace (Runtime.rawEdges graph) certificate []
+...   | nothing = false
+...   | just trace =
+  Int._≤ᵇ_ (+ (Runtime.positiveThreshold graph))
+    (replayOriginalSignedTrace trace)
+
+-- This is an exact all-word ACCEPTANCE theorem for the original-ℤ
+-- trace replay against the original Fin-free rawScore verifier.
+-- It deliberately does NOT assert binary-native gamma-value equality.
+karpOriginalRawTraceAllWordAcceptance :
+  (word certificate : Word.BitWord) →
+  verifyOriginalGraphWordByTrace word certificate
+    ≡ Runtime.verifyFinFreeSparseGraphWord word certificate
+karpOriginalRawTraceAllWordAcceptance word certificate
+  with Runtime.readRawGraphWord word
+... | nothing = refl
+... | just graph
+  with rawSelectedTrace (Runtime.rawEdges graph) certificate []
+     | rawSelectedTraceRebuildsOriginalScore
+         (Runtime.rawEdges graph) certificate []
+...   | nothing | equation rewrite sym equation = refl
+...   | just trace | equation rewrite sym equation = refl
