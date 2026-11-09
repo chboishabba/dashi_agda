@@ -37,6 +37,7 @@ import DASHI.Biology.BH4SharedSourceTargetRedoxDynamicsExact
 import DASHI.Biology.BH4SpatialConnectivityCirculationExact
 import DASHI.Biology.BH4PNPSamePhysicalHistoryBridgeExact
 import DASHI.Biology.BH4PNPEnergyBudgetCompositionExact
+import DASHI.Biology.BH4PNPSeparatedEnergyLedgerExact
 import DASHI.Biology.BH4CatalyticTurnoverFutureCountermodelExact
 import DASHI.Biology.BH4AllocatorFutureObservationCountermodelExact
 import DASHI.Biology.BH4ExchangeIdentifiabilityExact
