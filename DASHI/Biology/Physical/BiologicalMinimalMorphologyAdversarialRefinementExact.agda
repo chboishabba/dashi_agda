@@ -14,6 +14,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
 import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact as Minimal
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
+import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 
 data MarkerSensitiveAction : Set where
@@ -85,3 +86,81 @@ original18ClassFailureFromNecessarySeparation safe =
   everySafeMarkerProjectionSeparatesWitness
     Minimal.MorphologyFutureCode Minimal.minimalProject safe
     sameMinimal18ClassBeforeMarkerProbe
+
+-- Selected finite positive repair: retain the marker coordinate while
+-- keeping the original minimal morphology code. No physical optimality
+-- or real biochemical validity is implied.
+markerAwareProject :
+  Bio.BiologicalState → Minimal.MorphologyFutureCode × Bool
+markerAwareProject state@(Bio.biologicalState g c h j e p) =
+  Minimal.minimalProject state , c
+
+markerAwareObserve : Minimal.MorphologyFutureCode × Bool → Bool
+markerAwareObserve (code , c) = Minimal.minimalObserve code
+
+replaceMorphology :
+  Minimal.MorphologyFutureCode → Bool → Minimal.MorphologyFutureCode
+replaceMorphology (Minimal.inactive p) c = Minimal.inactive c
+replaceMorphology (Minimal.active h j e p) c = Minimal.active h j e c
+
+markerAwareStep :
+  MarkerSensitiveAction →
+  Minimal.MorphologyFutureCode × Bool →
+  Minimal.MorphologyFutureCode × Bool
+markerAwareStep markerProbe (code , c) =
+  replaceMorphology code c , c
+
+markerAwareObservationCommutes :
+  (state : Bio.BiologicalState) →
+  markerAwareObserve (markerAwareProject state) ≡ Bio.observe state
+markerAwareObservationCommutes (Bio.biologicalState false c h j e p) = refl
+markerAwareObservationCommutes (Bio.biologicalState true c h j e p) = refl
+
+markerAwareStepCommutes :
+  (a : MarkerSensitiveAction) (state : Bio.BiologicalState) →
+  markerAwareProject (markerSensitiveStep a state)
+    ≡ markerAwareStep a (markerAwareProject state)
+markerAwareStepCommutes markerProbe
+  (Bio.biologicalState false c h j e p) = refl
+markerAwareStepCommutes markerProbe
+  (Bio.biologicalState true c h j e p) = refl
+
+markerAwareAfterTrace :
+  (actions : List MarkerSensitiveAction) (state : Bio.BiologicalState) →
+  markerAwareProject (Refinement.run markerSensitiveStep actions state)
+    ≡ Refinement.run markerAwareStep actions (markerAwareProject state)
+markerAwareAfterTrace [] state = refl
+markerAwareAfterTrace (a ∷ rest) state =
+  trans
+    (markerAwareAfterTrace rest (markerSensitiveStep a state))
+    (cong (Refinement.run markerAwareStep rest)
+      (markerAwareStepCommutes a state))
+
+markerAwareCodeImpliesTraceEquivalence :
+  ∀ {left right} →
+  markerAwareProject left ≡ markerAwareProject right →
+  Bridge.TraceEquivalent Bio.observe markerSensitiveStep left right
+markerAwareCodeImpliesTraceEquivalence {left} {right} same actions =
+  trans
+    (sym (markerAwareObservationCommutes
+      (Refinement.run markerSensitiveStep actions left)))
+    (trans
+      (cong markerAwareObserve (markerAwareAfterTrace actions left))
+      (trans
+        (cong
+          (λ code → markerAwareObserve (Refinement.run markerAwareStep actions code))
+          same)
+        (trans
+          (sym (cong markerAwareObserve (markerAwareAfterTrace actions right)))
+          (markerAwareObservationCommutes
+            (Refinement.run markerSensitiveStep actions right)))))
+
+markerAwareFutureSafe :
+  Future.FutureLanguageSafeProjection
+    (Bridge.deterministicSystem markerSensitiveStep markerActionLabel)
+    Bio.observe markerAwareProject
+markerAwareFutureSafe =
+  Future.futureLanguageSafeProjection
+    (λ {left} {right} same →
+      Bridge.traceEquivalentImpliesCanonicalFutureEquivalent
+        (markerAwareCodeImpliesTraceEquivalence same))
