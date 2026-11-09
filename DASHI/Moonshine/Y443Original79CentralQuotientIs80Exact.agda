@@ -15,6 +15,7 @@ module DASHI.Moonshine.Y443Original79CentralQuotientIs80Exact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Sum using (_⊎_; inj₁; inj₂)
 open import Data.Product using (_×_; _,_)
 
@@ -22,6 +23,9 @@ import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443JMDNonadjacentRelatorConsequencesExact as Consequences
 import DASHI.Moonshine.Y443Universal80RelatorCongruenceExact as U
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
+import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
+import DASHI.Moonshine.TwistedModuleModularity as TM
+import DASHI.Moonshine.Y443Original72Plus8RelatorSatisfactionExact as Split
 
 infix 4 _≈₇₉⁺_
 
@@ -164,3 +168,41 @@ historical79PlusCentralSetoidGroup = record
   ; U.SetoidGroup.leftInverse = leftInv79
   ; U.SetoidGroup.rightInverse = rightInv79
   }
+
+
+------------------------------------------------------------------------
+-- HISTORICAL SOURCE INTERPRETATION: 79 + central -> original selected
+-- evaluation, using the SAME signed words and SAME 80-relator owner.
+------------------------------------------------------------------------
+
+module OriginalHistoricalInterpretation
+  {G : Set}
+  (gi : TM.GroupWithInverse G)
+  (nodes : Y.Node → G)
+  (first79 :
+    Pair.RelatorsSatisfied gi nodes Y.doubleMonsterRelators)
+  (central :
+    Pair.evaluateCoxeterWord gi nodes Y.centralInvolutionRelator
+      ≡ Pair.identity gi) where
+
+  module S = Split.UnderOriginalGroup gi nodes
+
+  literalOriginal80 :
+    Pair.RelatorsSatisfied gi nodes Y.monsterRelators
+  literalOriginal80 = S.original80From79AndCentral first79 central
+
+  module E = U.Interpretation gi nodes literalOriginal80
+
+  -- No new selected group or invented reinterpretation. The original
+  -- historical derivation is consumed by the SAME U.wordExpr evaluator
+  -- and its already-proved 80-relator semantic soundness theorem.
+  historicalWordSound :
+    ∀ {x y : U.Expr} →
+    x ≈₇₉⁺ y → E.eval x ≡ E.eval y
+  historicalWordSound proof =
+    E.sound (historicalTo80 proof)
+
+  original80WordSound :
+    ∀ {x y : U.Expr} →
+    U._≈₈₀_ x y → E.eval x ≡ E.eval y
+  original80WordSound = E.sound
