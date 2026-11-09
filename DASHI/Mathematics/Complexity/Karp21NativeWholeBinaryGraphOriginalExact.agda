@@ -19,7 +19,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.List.Base using (length)
+open import Data.List.Base using (List; length)
 open import Data.Product using (_×_; _,_)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
@@ -83,6 +83,9 @@ originalGraphViaBudgetedHeaderSameOriginal word
 ... | just (n , afterN) with Gamma.readGamma afterN
 ... | nothing = refl
 ... | just (m , afterM)
+  -- The original literally uses m*3; the binary budget's Nat
+  -- reflection uses 3*m. Pay this commutativity explicitly.
+  rewrite sym (NatP.*-comm m (suc (suc (suc zero))))
   with NatP._≤?_ (m * suc (suc (suc zero))) (length afterM)
 ... | no _ = refl
 ... | yes _ with Graph.readRawEdges m afterM
@@ -101,7 +104,7 @@ originalGraphViaBudgetedHeaderSameOriginal word
 -- native threshold parser, including zero W, trailing suffix,
 -- reversed/duplicate edges and noncanonical zero-padded LE fields.
 binaryTerminal :
-  Word.BitWord → Data.List.Base.List Edge.BinaryRawEdge →
+  Word.BitWord → List Edge.BinaryRawEdge →
   Word.BitWord → Maybe Original.ParsedRawGraph
 binaryTerminal nLE edges bits
   with Positive.readPositiveGammaLE bits
@@ -115,7 +118,7 @@ binaryTerminal nLE edges bits
 
 binaryTerminalSameOriginal :
   (nLE : Word.BitWord)
-  (edges : Data.List.Base.List Edge.BinaryRawEdge)
+  (edges : List Edge.BinaryRawEdge)
   (bits : Word.BitWord) →
   binaryTerminal nLE edges bits ≡
     Fields.originalTerminal (Value.valueLE nLE)
@@ -128,7 +131,7 @@ binaryTerminalSameOriginal nLE edges bits =
   where
     binaryTerminalSameStrict :
       (n : Word.BitWord)
-      (es : Data.List.Base.List Edge.BinaryRawEdge)
+      (es : List Edge.BinaryRawEdge)
       (suffix : Word.BitWord) →
       binaryTerminal n es suffix ≡
       Fields.strictTerminal (Value.valueLE n)
