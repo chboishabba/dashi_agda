@@ -55,7 +55,7 @@ sourceNormalizedCellComparisonBudget stage radius steps receipts j =
         (R.∣ forcing ∣)
         (R._*_
           (R.∣ Cross.oneMinus x ∣)
-          (R._*_ (R.∣ f ∣) b)))))
+          (R._*_ (R.∣ f ∣) b))))
 
 originalNormalizedMeshCellConsumesUniformDefect :
   (stage : Nat) (radius : R.ℝ) →
