@@ -13,7 +13,8 @@ module DASHI.Moonshine.AbelE8RootE4FirstCoefficientExact where
 -- remain required separately.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; trans; sym)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (trans; sym)
 open import Agda.Builtin.Nat using (Nat)
 
 import Real as Bishop
