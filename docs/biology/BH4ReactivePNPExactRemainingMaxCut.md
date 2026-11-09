@@ -181,3 +181,62 @@ type-check and source-bound referee receipt. These remain OPEN.
 branch, *not kernel-checked or numerically executed in this session*.
 The adapter is a candidate constitutive interface and deliberately
 cannot complete the original physical law without authentic inputs.
+
+
+## 2026-11-09 continuation: P0.01 grounded finite operator, and cross-PR reuse
+
+Cross-PR geometry audit found that Biology PR #1471 already contains
+`BiologicalFullCubeIncidenceExact.PositiveBond`,
+`allPositiveBonds`, `completeBondCount`,
+`BiologicalOriginal54BondSharedVectorExact.originalPointIndex`,
+and `Biological369MixedNativeFaceSignedContinuityExact.original369LocalSignedContinuityExact`.
+These must be imported/welded rather than recreated as competing source
+definitions. The native 3x3x3 cube is user pre-existing prior art.
+
+**New BH4 branch artifacts:**
+- `scripts/check_bh4_grounded_poisson_exact.py`: exact rational
+  A = (epsilon/h²)(B Bᵀ + 2M) with M counting boundary-face incidences.
+  The 54 native edges and 54 exterior face incidences come from the
+  27-point ternary cube. The exact quadratic identity
+  vᵀAv = (epsilon/h²)[sum_edges(v_a-v_b)² + 2sum_i M_ii v_i²]
+  proves strict positive definiteness for positive h,epsilon;
+  the graph is connected and has boundary faces. The script also
+  supplies exact rational LDL positivity and a rational Poisson solver.
+- `scripts/test_bh4_grounded_poisson_exact.py`: four test methods
+  on SPD, energy identity, exact rational residual and negative controls.
+  These committed test bodies have not been executed here.
+- Independent local reconstruction *was* executed: 54 bonds, 54 exterior
+  face incidences, 27/27 strictly positive rational LDL pivots, constant
+  unit-potential energy 108 for h=epsilon=1.
+
+**Acceptance boundary:** This establishes the *finite grounded
+Dirichlet specialization* of P0.01 at the mathematical level. There is
+no Agda kernel acceptance, no original source-selected BC, no proof of
+a general reactive-electrode/Neumann mixed boundary model, and no
+source-specific Poisson right-hand-side receipt. No P0.08/P1/P2/P3
+physical gate is closed.
+
+**Refined named leaves and maximal-cut action:**
+- P0.01a `native369GroundedPoissonQuadraticIdentityExact`:
+  port the 54-bond quadratic identity to Agda from the *native*
+  Biology #1471 `PositiveBond` and face owners (OPEN kernel).
+- P0.01b `native369GroundedPoissonKernelTrivialExact`:
+  use positive epsilon,h and boundary squares to deduce the zero
+  kernel (OPEN kernel).
+- P0.01c `original369PNPPoissonBoundaryWellPosed`: prove the
+  **source-selected** Poisson equation with genuine boundary/gauge
+  compatibility (OPEN and cannot inherit generic grounded conditions).
+- G0.01–04: run Agda 2.9 exact-head checks on the existing modules,
+  correct any real compiler failures, and bring the owner to one
+  governed PR head before ITIR promotion (OPEN).
+- S0.01–04 original certificate/kinetics/electrode source evidence
+  remain an independent decisive physical cut (OPEN).
+- The previous P0.03a/b exact rational checker remains committed,
+  but its geometric cancellation is already substantially subsumed
+  by #1471's native incidence/transfer constructions; no competing
+  geometric Agda owner should be introduced.
+
+**Attribution:** exact rational checker and tests are assistant-authored
+verification assistance, not a claim of discovery of finite-volume
+Poisson algebra. No unsupported physiology or original Rhea parameter
+identity is implied.
