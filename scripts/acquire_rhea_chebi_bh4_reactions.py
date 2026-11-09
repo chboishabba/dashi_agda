@@ -58,7 +58,7 @@ def parse_rhea_release_banner(raw: bytes) -> dict:
     readable=" ".join(html.unescape(re.sub(
         r"<[^>]*>", " ", raw.decode("utf-8",errors="replace"))).split())
     matches=re.findall(
-        r"Current\\s+release\\s+(\\d+)\\s*\\((\\d{4}-\\d{2}-\\d{2})\\)",
+        r"Current\s+release\s+(\d+)\s*\((\d{4}-\d{2}-\d{2})\)",
         readable,flags=re.IGNORECASE)
     if len(matches)!=1:
         raise ValueError("Rhea REST homepage release cannot be uniquely pinned")
