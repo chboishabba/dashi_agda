@@ -364,3 +364,39 @@ python scripts/qcafqmc_paired_nqs_check.py
 - **N3 — learned trial original**: obtain raw QPU matchgate shadow/circuit labels, processed overlap datasets, trained 13,096-param NQS, ensemble/fidelity and regularisation records. Our native seniority-zero independent model does not inherit the original coefficients.
 - **N4 — reproducible nickel energetics**: on a common verified Hamiltonian, run enough timestep/walker/block/seed trials for independently reblocked error bars, compare HF versus learned paired trial, evaluate B→BC barrier and B→C energy and compare to original Table 2.
 - **N5 — cost**: independently verify actual CPU/GPU hours, AWS instance prices and differences in normalization of imaginary-time step/length. Original $90,600/$596 figures exclude QPU cost and remain source-reported.
+
+
+## 2026-11-09: physical VCE, source-identity, and acceptance repair cut
+
+The current head adds the following new accepted **source artifacts** (not yet accepted external numerical runs):
+
+1. `scripts/qcafqmc_nickel41_full_space_vce.py`: an independent **full-orbital** STO-3G PySCF → iPie phaseless pathway with core ⊗ eight-spatial-orbital seniority-zero NQS ⊗ virtual-vacuum trial. Unlike CASCI-active-space AFQMC, its Hamiltonian retains the molecular virtual and occupied orbital space, so correlation outside the NQS active space can be sampled. It is a construction in the mathematical class of Zhao et al. §II.7, Eq. (30), but does not reproduce the authors' proprietary fast VCE overlap routine, upCCD coefficients, exact orbital frame, or shadow data. Default CLI is a source-only dry run; `--execute` is required for costly quantum chemistry.
+2. `scripts/qcafqmc_vce_full_space_overlap_check.py`: finite algebraic positive and negative controls for full-space Slater minors. Local mathematical prototype execution gives zero difference under block-separated core/active walkers, versus **0.10333915078928797** deviation from naive active-only overlap when core/active walker rows mix. This proves why a bare active-space projection is invalid for a generic full-space walker.
+3. Corrected nickel run semantics: the paper uses **300 total measured blocks**, with the **first 50 measured blocks discarded** and 250 analyzed. Earlier source code instead set `num_eq_blocks=50` while also requesting 300 production blocks, incorrectly adding a separate equilibration period. `qcafqmc_nickel41_prepare_ipie.py` and `qcafqmc_nickel41_ipie_from_fcidump.py` now set separate `analysis_discard_blocks=50` and no additional ipie equilibration blocks. One 2026 run is therefore 6000 propagation steps, of which 1000 occur before the analysis window. Any old notes treating 300+50 blocks as author-equivalent are superseded.
+4. `scripts/qcafqmc_nickel_cost_source_reconciliation.py`: independently recalculates source **arithmetic** from the original 2026 Table 3 rates: 13,200 H200 GPU hours at $54.92 per eight-GPU instance hour gives $90,618, rounding to the published $90,600; 4 H200 training GPU hours plus 6680 physical CPU core-hours at $5.44 per 64-core instance hour give $595.26, rounding to the published $596. This is published AWS **rate arithmetic**, not invoicing or a new hardware benchmark. Both rates and the reported hours are externally sourced and QPU is explicitly excluded.
+5. `scripts/qcafqmc_nickel_reaction_from_ipie.py`: consumes real per-run iPie HDF5 energy estimators/receipts and reports B→BC activation and B→C signed reaction energies in Hartree/kcal/mol from **independent seed means**. It rejects missing outputs, duplicate seeds, inconsistent source geometry/hamiltonian fingerprints, mixed trial types and insufficient measured blocks. It does not pretend 250 adjacent autocorrelated blocks provide 250 independent statistical observations; further per-seed autocorrelation reblocking still improves uncertainty claims.
+6. Source RHF identity: Zhao et al. 2025 Table 2 gives B `-2737.810245`, BC `-2737.686838`, C `-2737.822695` Hartree. Both PySCF CASCI and full-space builders now **refuse to proceed** if the new computed RHF energy differs by more than 0.05 Hartree. This is a negative identification check for incorrect charge/spin, SCF root, source geometry or basis. Passing it would strengthen, but not prove, exact MO frame identity. No such executed nickel SCF receipt has yet been obtained.
+7. **Actual selected molecular orbital basis identity**: the CASCI producer now saves `<label>.selected_mo.npy`, records its SHA256 and the unchanged source geometry SHA. Paired NQS training optionally records those physical identities and **requires them for any data labelled original**. Active-space and full-space NQS+iPie runners reject a learned checkpoint if the saved geometry/MO fingerprints disagree with the actual integrals. An operator-set boolean by itself no longer licenses a same-source neural trial. Earlier synthetic checkpoints without identifiers are still legitimate *synthetic learning controls*, but cannot enter the nickel source-locked propagator.
+8. `DASHI.Physics.Chemistry.AtomicPeriodicTable369Nickel41ElectronAccountingExact.agda` provides concrete source composition 41 atoms and nuclear charge 168 for each geometry. Under a clearly named **neutral-singlet hypothesis**, 80 inactive electron pairs plus four up and four down active electrons recover 168 electrons. It also defines elementary binomial recursion proving `C(8,4)=70`, `70²=4900` and `4900−70=4830`. The existing same-source AFQMC atomic module imports this owner. These are concrete combinatorial proofs *source-written* but **Agda kernel acceptance is still unverified**.
+9. `scripts/qcafqmc_source_acceptance.py`: **no CI dependency**, pure local runner compiling all `qcafqmc_*.py` source files, verifying original XYZ composition, rounded published DFT and 2026 energy references, reported cost arithmetic, VCE overlap factorization and negative control, and mixed-energy overlap-node obstruction. `--with-torch` adds synthetic 70-determinant NQS checks. Running it from the exact checked-out PR is required for an acceptance receipt.
+
+### Commands and unresolved leaves
+
+```bash
+# Source/regression receipts, no PySCF or ipie required
+python scripts/qcafqmc_source_acceptance.py
+python scripts/qcafqmc_source_acceptance.py --with-torch
+
+# Inspect the source and physical choices without expensive calculations
+python scripts/qcafqmc_nickel41_full_space_vce.py examples/qcafqmc_nickel41_B_independent_hypothesis.json
+
+# Full-space chemical AFQMC, only once PySCF/ipie and source identity
+# settings are validated, with appropriate compute resources
+python scripts/qcafqmc_nickel41_full_space_vce.py examples/qcafqmc_nickel41_B_independent_hypothesis.json --execute
+
+# Kernel acceptance (not run here)
+agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369Nickel41ElectronAccountingExact.agda
+agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AFQMCSameSourceExact.agda
+```
+
+**Outstanding highest-alpha physical gates, no implied success:** (a) run the exact committed source acceptance and Agda checks; (b) run charge/spin and same-MO-frame validated PySCF RHF on B/BC/C, then independent full-space iPie runs with documented HPC resources; (c) obtain an original or independently source-paid 70-coefficient upCCD/learned NQS for *each* matching molecular frame, plus original matchgate records for IonQ replication; (d) run multi-seed 300-block 50-discarded trajectory comparisons, reblock correlated estimates and compare with original numerical energy targets; (e) independently verify actual cloud utilization/rates and include the QPU cost when making any end-to-end advantage claim. Numerical FCI checks and atomic/369 declarations alone cannot supply these external physical inputs.
