@@ -67,6 +67,8 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
     assert F("162.3")-F("27.3")==F("135.0")
     assert F("135.0")-F("134.9")==F("0.1")
     assert F("134.9")-F("128.0")==F("6.9")
+    assert F("162.3")-F("128.0")==F("34.3")
+    assert F("34.3")-F("27.3")==F("7.0")
     assert F("134.9")-F("56.4")==F("78.5")
     assert all(v is None for v in KNOWN_UNVERIFIED.values())
     if signed_pdf is not None:
@@ -76,6 +78,7 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
         src=agda.read_text()
         for marker in (
           "definedImpactFootprintTenths","historicalOAGImpactVsDefinedFootprint",
+          "minimumUnclearedKoalaAreaIfFullHabitatMap", "minimumOutsideRetentionUnclearedKoalaArea",
           "phaseOneDoesNotRequireMWWDeclarationUnderC25",
           "outsidePhaseOneNeedsMWWDeclaration",
           "currentPubliclyAcquiredEvidence",
@@ -94,6 +97,10 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
       "later_preliminary_documentation_issue_F":APPROVED_PD,
       "historical_calculator_input_source":"Jan 2026 preliminary documentation v5",
       "historical_calculator_not_assumed_approved":True,
+      "operative_condition4_per_species_maximum_habitat_clearing_ha":{"Koala":"128.0","Grey-headed Flying-fox":"128.0","Swift Parrot":"128.0","Regent Honeyeater":"128.0","Collared Delma":"0.77"},
+      "conditionally_required_un-cleared_mapped_koala_habitat_ha":"34.3",
+      "minimum_koala_habitat_uncleared_outside_27_3ha_retention_ha":"7.0",
+      "these_area_numbers_are_not_independently_overlaid_GIS":True,
       "approved_impact_footprint_ha":"134.9",
       "mapped_koala_habitat_in_action_area_ha":"162.3",
       "retained_vegetation_ha":"27.3",
