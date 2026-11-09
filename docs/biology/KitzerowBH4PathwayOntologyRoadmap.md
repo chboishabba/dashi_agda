@@ -1,5 +1,7 @@
 # Kitzerow BH4 pathway ontology and executable-network roadmap (2026-11-02)
 
+**Source-artifact reproducibility audit (same branch):** the tracked paths `artifacts/biology/uniprot-kitzerow-bh4-panel-certificate.json`, `artifacts/biology/rhea-kitzerow-bh4-reactions.json`, and `artifacts/biology/bh4-stoichiometric-matrix.json` were not fetchable through GitHub at this head. The original acquisition program `scripts/acquire_rhea_chebi_bh4_reactions.py` **is present**. Re-execute the source-owned acquisition/build chain with versioned original records and independently review byte hashes; do not infer absent historical acquisition, or claim full-panel Golden execution from stored dimension counts.
+
 ## 2026-11-09 continued P0 original 29×12 spatial chemistry cut
 
 **Latest implementation:** companion BH4 PR #1454 extends `scripts/check_bh4_original_panel_spatial_events.py` without writing a substitute reaction matrix. For each *source-acquired finite original Rhea column*, the validator now checks the stoichiometric delta at **every one of the original 27 cubical positions**, at every molecular coordinate: the selected location changes by exactly the source-column coefficient; every off-location species/voxel pair remains unchanged. It independently audits global CHNOP and integer charge before/after each step. With all 12 original finite columns this implies 324 reaction-location checks and 253,692 coordinate comparisons (29 species × 27 observer voxels × 27 reaction locations × 12 columns). These are **expected counts**, not reported successful runs.
