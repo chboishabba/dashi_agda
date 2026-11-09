@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Culture.CriticalArtTriadicFilmBoundaryExact where
 
 ------------------------------------------------------------------------
