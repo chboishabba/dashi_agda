@@ -59,9 +59,9 @@ Here \(\beta=(69/50)(4/5)^2=552/625<1\). The uniform Cauchy modulus is
 |h_m(z)-h_N(z)|
 \le \frac{69}{50}\frac{5000}{17399}
      \frac{\beta^N}{1-\beta}|z-p|^2
-
+=\frac{4312500}{1270127}\beta^N|z-p|^2.
 \]
-The **unreduced expression** \((69/50)(5000/17399)/(1-552/625)\) is the authoritative exact rational constant; all arithmetic should be checked by an executable Fraction receipt before using a reduced value. (No guessed reduced fraction is to be imported as a lemma.)
+The reduced constant follows from exact rational arithmetic: \((69/50)(5000/17399)/(1-552/625)=4312500/1270127\).
 
 Therefore \(h_n\) converges uniformly on the closed disk and defines \(\chi\), under the standard completeness and uniform-holomorphic-limit theorem. From \(h_n(gz)=h_{n+1}(z)/p\), the limit satisfies \(\chi(gz)=\chi(z)/p\). Since the coefficient of \(t\) in each \(h_n(p+t)\) is 1, the limit has \(\chi'(p)=1\) by uniform holomorphic convergence. A local inverse function theorem supplies a smaller injectivity disk. For \(z\) and \(\exp(z)\) in that disk, \(\chi(\exp z)=p\chi(z)\). **This is local Schröder linearization, not global Kneser normalization.**
 
