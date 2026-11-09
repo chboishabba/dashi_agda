@@ -182,10 +182,9 @@ originalFiniteNegativeLogExpUniformForcingAllNonnegative
       RP.≤-respʳ-≃
         (RP.*-identityˡ power)
         (RP.*-monoʳ-≤-nonNeg
-          (RP.≤-respˡ-≃
-            (RP.nonNegx⇒∣x∣≃x fNN)
-            (originalFiniteNegativeLogExpAtMostOneNonnegative
-              x xNN n))
+          (originalNegativeExpAtMostOneForNonnegative
+            (Finite.originalLogFinitePartial x n)
+            (originalFiniteLogNonnegative x xNN n))
           powerNN)
     powerRadius = Seq.x≤y∧nonNegx⇒xⁿ≤yⁿ n inside xNN
   in
