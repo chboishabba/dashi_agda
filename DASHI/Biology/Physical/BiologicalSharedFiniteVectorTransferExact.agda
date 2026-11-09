@@ -330,3 +330,59 @@ originalNativeBondUnchangedOutsideEndpoints geometry bond
   lookupTransferAwayFromEndpoints
     (sourceIndex geometry bond) (targetIndex geometry bond)
     observer state sourceDifferent targetDifferent
+
+
+------------------------------------------------------------------------
+-- ACTUAL EXECUTED TRANSFER SOURCE AND TARGET ACCOUNTING.
+-- Distinct indices are essential: transferOne on an equal pair is
+-- intentionally stationary, and its current must not be double-counted.
+------------------------------------------------------------------------
+
+lookupTransferSourcePaid :
+  ∀ {n} (source target : F.Fin n)
+  (state : V.Vec Nat n) →
+  ¬ (source ≡ target) →
+  V.lookup (transferOne source target state) source
+    + actualSourceDebit source state
+    ≡ V.lookup state source
+lookupTransferSourcePaid F.zero F.zero state different =
+  ⊥-elim (different refl)
+lookupTransferSourcePaid F.zero (F.suc target)
+  (V._∷_ zero rest) different = refl
+lookupTransferSourcePaid F.zero (F.suc target)
+  (V._∷_ (suc amount) rest) different =
+  +-comm amount 1
+lookupTransferSourcePaid (F.suc source) F.zero
+  (V._∷_ amount rest) different
+  with V.lookup rest source
+... | zero = refl
+... | suc count = lookupAfterDebit source rest
+lookupTransferSourcePaid (F.suc source) (F.suc target)
+  (V._∷_ amount rest) different =
+  lookupTransferSourcePaid source target rest
+    (λ equality → different (cong F.suc equality))
+
+lookupTransferTargetReceivesActualSource :
+  ∀ {n} (source target : F.Fin n)
+  (state : V.Vec Nat n) →
+  ¬ (source ≡ target) →
+  V.lookup (transferOne source target state) target
+    ≡ V.lookup state target + actualSourceDebit source state
+lookupTransferTargetReceivesActualSource F.zero F.zero state different =
+  ⊥-elim (different refl)
+lookupTransferTargetReceivesActualSource F.zero (F.suc target)
+  (V._∷_ zero rest) different =
+  sym (+-identityʳ (V.lookup rest target))
+lookupTransferTargetReceivesActualSource F.zero (F.suc target)
+  (V._∷_ (suc amount) rest) different =
+  trans (lookupAfterCredit target rest)
+    (+-comm 1 (V.lookup rest target))
+lookupTransferTargetReceivesActualSource (F.suc source) F.zero
+  (V._∷_ amount rest) different
+  with V.lookup rest source
+... | zero = sym (+-identityʳ amount)
+... | suc count = +-comm 1 amount
+lookupTransferTargetReceivesActualSource (F.suc source) (F.suc target)
+  (V._∷_ amount rest) different =
+  lookupTransferTargetReceivesActualSource source target rest
+    (λ equality → different (cong F.suc equality))
