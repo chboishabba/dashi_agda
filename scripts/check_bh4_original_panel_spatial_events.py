@@ -622,10 +622,20 @@ def main():
         result=test_source(certificate,full_panel=True)
         result["original_certificate_sha256"]=hashlib.sha256(raw).hexdigest()
         if args.parameters is not None:
+            parameters_bytes=args.parameters.read_bytes()
+            candidate_bytes=args.candidate.read_bytes()
             result["original_flux_candidate"]=evaluate_source_paid_physical_candidate(
                 certificate,
-                load_original_receipt_json(args.parameters.read_text(encoding="utf-8")),
-                load_original_receipt_json(args.candidate.read_text(encoding="utf-8")))
+                load_original_receipt_json(parameters_bytes),
+                load_original_receipt_json(candidate_bytes))
+            result["strict_quantitative_input_receipt"]={
+                "certificate_sha256":result["original_certificate_sha256"],
+                "parameter_receipt_sha256":hashlib.sha256(parameters_bytes).hexdigest(),
+                "candidate_receipt_sha256":hashlib.sha256(candidate_bytes).hexdigest(),
+                "source_digest_independently_verified":False,
+                "kinetic_measurements_independently_validated":False,
+                "itir_pnf_promotion_performed":False,
+            }
         print(json.dumps(result,indent=2,sort_keys=True))
         if args.parameters is not None and result["original_flux_candidate"]["status"] != "feasible-algebraic-only":
             raise SystemExit(2)
