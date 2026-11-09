@@ -1511,3 +1511,37 @@ Installed in `DASHI.Culture.Everything`, `DASHI.Cognition.Everything`, and
 ### 9 November — A3 stronger closure
 
 `allEvidenceSupportSquaresCommute` in `CriticalArtSameSceneTransportExact.agda` now establishes equality of the two update orders for **all four** possible original `Four.PolarAssessment` states, by four constructor cases. This supersedes the preceding row's 'all-states law remains'. Still missing are actual original scene→support mapping and same-object transport compatibility with observed histories; Agda kernel acceptance OPEN. The evidence inventory's commutativity does not imply ordered spectator interpretation commutes.
+
+
+## 9 Nov 2026 — edition-authority source weld and tightened review controls
+
+**New original-authority edition corpus:** `Docs/research/critical_art_original_edition_authorities_20261109.json` contains original institutional/distributor metadata, each uniquely keyed and attributed:
+- *Léon*, 110-minute Australian public exhibition classification dated 26 October 1994, original Australian Government classification number 00719356198E, https://www.classification.gov.au/titles/leon-12.
+- *Léon (version longue)*, Gaumont producer-reported 1996 edition, 133 minutes, https://www.gaumont.com/en/movie/leon-version-longue.
+- *Don't Look Up*, Australian Government 2021 original online classified 138-minute edition, record 294721, https://www.classification.gov.au/titles/dont-look-1; Netflix's own release page https://media.netflix.com/en/only-on-netflix/81252357.
+- *Planet of the Humans*, Australian Apple TV 2020 listing, 100 minutes, https://tv.apple.com/au/movie/planet-of-the-humans/umc.cmc.2f8w1eeetfqqpettlfx80jkh9; original filmmaker information https://planetofthehumans.com/faqs/.
+
+The independent sources establish **bibliographic/edition-level identity only**, not shot-level observations, identical runtimes across media, complete cuts, or independent scientific conclusions. Do not confuse a classification's complete disc/package duration with the exact feature runtime.
+
+**New Golden code:** `DASHI/Culture/CriticalArtEditionAuthorityExact.agda` uses four disjoint original-edition constructors, original-work projections and nominal duration projections. `twoLeonCutsNotSameEdition` protects distinct cuts of the same work; `sourceMetadataNotVerifiedScene` and `sourceMetadataNotMeasuredAudience` protect evidence grades. This module explicitly labels external sources as original owners. Its values are human transcriptions, not cryptographic archive certification. This new module is included in `DASHI.Culture.Everything`, `DASHI.Cognition.Everything`, and the focused CCDCOE checker.
+
+**Mechanical integrity control:** `scripts/check_critical_art_original_edition_authorities.py` checks four immutable source identity tuples (original URL, authority record ID, source work, advertised duration), original attribution fields, and five synthetic negative controls for duplicate edition identity, misrepresented source-grade, merged cuts, wrong work, and swapped authority URL. It is source-written, but not yet run with canonical Python checkout in this connector session.
+
+**Reviewer bug repaired:** `scripts/check_critical_art_film_edition_intake.py` previously compared first reviewer's ID against a second *review receipt*, which cannot establish reviewer independence. It now requires first and second reviewer IDs to differ and requires separate receipts. These fields are **claims of review**, not signature authentication or proof of professional independence; a separate verified human/source process remains required.
+
+### Revised gates after source-weld
+
+| Gate | Advance | Remaining decisive evidence/proof |
+| --- | --- | --- |
+| A1 | Four original institution/distributor edition identifiers located and source-written into typed owner | Exact actual film source copies / hashes, verified scene timecodes and independent passage reviewers |
+| A2 | Existing indexed path transport contract | Source-indexed real film-to-path observation commutation |
+| A3 | All four support-polarity evidence update cases source-written | Actual claim-specific support encoding, history path compatibility |
+| A4 | Existing selective reopening results imported | Actual scene/interpretation dependency witnesses, replay |
+| A5 | Original triadic non-descent reused + synthetic two-reading witness | Source-supported film triad and spectator evidence |
+| A6 | Typed same-work/edition/scene seam gate | Actual compatible measured fibre channels and qualified seam |
+| A7 | Proposed map with attribution and no automatic Peirce equivalence | Original passage-led, justified sign/object/interpretant map |
+| A8 | No automatic audience/intent promotion; two-reviewer fields | Authentic independent review and original reception/intent observations |
+| A9 | Three film IDs plus four externally located editions | Independently inspected film/cut corpus, actual selected scene observations |
+| A10 | Golden script wiring complete at source level | Exact-head Agda 2.9 kernel and executable Python receipts |
+
+**Highest alpha now:** authenticated source copies and reviewed *Léon* 110/133 scene concordance (especially the refusal, comic milk reaction and cinematographic framing) with original timecodes; then source-faithful scene-to-path transport, selective reopening and same-object triadic evidence. No new generic temporality or invented audience psychology is required. Agda and Python kernel/runtime acceptance cannot be asserted in this session.
