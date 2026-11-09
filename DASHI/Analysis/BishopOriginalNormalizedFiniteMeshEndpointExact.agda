@@ -154,3 +154,32 @@ originalNormalizedFiniteMeshEndpointIsSourceResidualBudget
         (sourceNormalizedMeshAt stage steps receipts) cells))
     (originalNormalizedMeshResidualSumIsIncrementSum
       stage steps receipts cells)
+
+------------------------------------------------------------------------
+-- Absolute finite endpoint budget for the SAME normalized Bishop
+-- source. This is the first order-valued output of P0.05, and the
+-- recipient of the P0.03 original uniform quotient modulus.
+------------------------------------------------------------------------
+
+originalNormalizedFiniteMeshEndpointAbsoluteBudget :
+  (stage : Nat) (steps : Nat → R.ℝ) →
+  (receipts : (j : Nat) →
+    Gap.BishopUnitIntervalRatio (Mesh.sourceVertex steps j)) →
+  (cells : Nat) →
+  R._≤_
+    (R.∣ R._-_
+      (sourceNormalizedMeshAt stage steps receipts cells)
+      (sourceNormalizedMeshAt stage steps receipts zero) ∣)
+    (Walk.sumFinite
+      (λ j → R.∣ sourceNormalizedMeshResidualCell
+        stage steps receipts j ∣)
+      cells)
+originalNormalizedFiniteMeshEndpointAbsoluteBudget
+    stage steps receipts cells =
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (originalNormalizedFiniteMeshEndpointIsSourceResidualBudget
+        stage steps receipts cells))
+    (Walk.sumFiniteAbsoluteTriangle
+      (sourceNormalizedMeshResidualCell stage steps receipts)
+      cells)
