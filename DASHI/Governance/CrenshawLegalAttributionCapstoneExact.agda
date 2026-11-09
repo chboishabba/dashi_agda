@@ -3,7 +3,7 @@ module DASHI.Governance.CrenshawLegalAttributionCapstoneExact where
 -- Explicit attribution ladder:
 -- judicial opinion -> Crenshaw's academic interpretation -> DASHI model
 -- -> DASHI mathematical construction -> external legal adjudication.
--- These stages are distinct. None is automatically promoted by a citation.
+-- Crenshaw's featured 1989 cases are DeGraffenreid, Moore, Payne.\n-- Jefferies is an independently selected DASHI positive comparator.\n-- These stages are distinct. None is automatically promoted by a citation.
 open import DASHI.Core.Prelude
 import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Law.LegalAuthorityCitationExact as Legal
