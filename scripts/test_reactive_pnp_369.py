@@ -129,3 +129,31 @@ def test_source_parameter_admission_not_python_assert_dependent():
         data.update(patch)
         with pytest.raises(ValueError):
             Model(**data)
+
+
+def test_original_grounded_poisson_sharp_integer_sos():
+    from reactive_pnp_369 import (
+        original_grounded_poisson_coercivity_certificate, poisson_matrix, POINTS)
+    result = original_grounded_poisson_coercivity_certificate()
+    assert result["exact_integer_matrix_identity"]
+    assert result["exterior_half_faces"] == 54
+    assert result["native_axis_lines"] == 27
+    assert result["sharp_unit_mesh_eigenvalue"] == 3
+    sharp = np.array(result["sharp_mode"], dtype=np.int64)
+    for h in (0.25, 1., 3.):
+        L = poisson_matrix(h)
+        assert np.allclose(L @ sharp, (3/h**2)*sharp, atol=1e-10)
+    assert result["discrete_finite_linear_poisson_only"]
+    assert not result["coupled_implicit_pnp_existence_proved"]
+    assert not result["agda_kernel_checked"]
+
+
+def test_grounded_poisson_sharp_inverse_stability():
+    from reactive_pnp_369 import poisson_matrix
+    L=poisson_matrix(1.0)
+    # Analytic exact-integer SOS from the preceding test establishes the
+    # bound. This numerical check guards the implementation of the solve.
+    for rhs in (np.ones(27), np.arange(27,dtype=float)-13):
+        x=np.linalg.solve(2.0*L,rhs)
+        assert np.linalg.norm(x) <= np.linalg.norm(rhs)/6 + 1e-12
+        assert np.max(np.abs(2.0*L@x-rhs)) < 1e-11
