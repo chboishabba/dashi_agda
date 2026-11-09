@@ -52,6 +52,10 @@ data HistoricalSourceRelation : OriginalSourceObject →
     HistoricalSourceRelation
       rensbergerWashingtonPostJune1
       shlaesGCCResponseJune30
+  juneArticleAlsoReferencedInSeptemberBulletin :
+    HistoricalSourceRelation
+      rensbergerWashingtonPostJune1
+      septemberGCCBulletin
   julyClippingReferencedInSeptemberBulletin :
     HistoricalSourceRelation
       julyWashingtonPostClipping
@@ -71,6 +75,30 @@ septemberBulletinNotProvenSourceOfJulyPublication :
 septemberBulletinNotProvenSourceOfJulyPublication ()
 
 -- Distinguish kinds of temporal evidence from measured mechanisms.
+-- Source date conflict: The Washington Post original article page displays
+-- 31 May 1993, whereas the archive URL and Climate Files identify 1 June.
+-- This metadata conflict is retained: either date is before June 30.
+-- Both appearances remain as distinct source-specific observations;
+-- neither is a proof of original publication bytes being authenticated.
+
+data ArticleDateAssertion : Set where
+  washingtonPostPageMay31 : ArticleDateAssertion
+  washingtonPostArchiveJune1 : ArticleDateAssertion
+
+sourceDateAssertionDistinct :
+  washingtonPostPageMay31 ≡ washingtonPostArchiveJune1 → ⊥
+sourceDateAssertionDistinct ()
+
+-- The newspaper article itself reports competing scientific positions.
+-- The reader must not fuse the journalist with either interview subject.
+data ArticleVoice : Set where
+  originalJournalist : ArticleVoice
+  quotedPatrickMichaels : ArticleVoice
+  quotedJamesHansen : ArticleVoice
+
+hansenNotMichaels : quotedJamesHansen ≡ quotedPatrickMichaels → ⊥
+hansenNotMichaels ()
+
 data SourceLinkGrade : Set where
   sourceMentionsEarlierText : SourceLinkGrade
   independentEditorialUptake : SourceLinkGrade
