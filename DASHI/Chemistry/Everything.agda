@@ -278,3 +278,6 @@ import DASHI.Chemistry.HydrogenElectrolyserEnergyExact
 
 -- Same-run join: fixed-load engine certificate meets energy-saving criterion.
 import DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact
+
+-- Guarded molecule-resolved electrolysis/methanation/combustion inventory and paths.
+import DASHI.Chemistry.HydrogenMolecularInventoryExact
