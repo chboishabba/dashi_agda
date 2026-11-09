@@ -131,3 +131,33 @@ Compare to existing original O(m^2) endpoint equality-count owners, rather than 
 6. Only then the original E20 bit compiler, Cook-Levin uniform compiler, remaining Karp edges and memberships.
 
 All new Agda declarations are source written. No compiler receipt is inferred. Agda remains Golden.
+
+
+## 2026-11-09 signed SSP / Monster *Karp trace* factorisation (not a Monster quotient)
+
+The user's proposal concerns original Karp traces and large gamma integers, not arbitrary Monster elements. Audited source owners:
+- `DASHI.Combinatorics.MonsterSSPFractranProjection`: selected 15-lane exponent state, Monster-to-SSP candidate projection, preservation contracts; **no inhabitant of the required computational compiler/simulation**.
+- `DASHI.Interop.VerifiedFractranCrankPipeline`: actual `MicroOp` IR and compiler simulation, explicit `CostVector` versus `MDLVector`, receipt-governed verified crank.
+- `DASHI.Combinatorics.SSP15FractranCompression`: outcome equivalence, optional lossless residual, step congruence, MDL receipts.
+- Original `scripts/karp21_native_bitword_sparse_verifier.py`: binary signed magnitudes, original gamma graph parser, 2m certificate and positive threshold.
+
+### Concrete source implementations committed on PR #1474
+
+1. `scripts/karp21_native_signed_trace_factor.py`: factor selected original cut-edge contributions by EXACT original binary sign+magnitude keys; count repetitions using BINARY counters; replay each factor using binary shift/add; maintain separate positive and negative lanes; preserve original word, certificate and positive threshold by delegating graph parsing and endpoint consistency to existing original native owner.
+2. `DASHI/Mathematics/Complexity/Karp21BinaryNativeMultiplicityScaleExact.agda`: `scaleBits`, structurally recursive on original binary multiplicity bits, and universal source-written `scaleBitsValue` proof that the returned bitword denotes binary weight times binary count. This is an actual runnable bit operator, not a Nat exponent-vector evaluator.
+3. `DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedTraceFactorExact.agda`: actual signed token equality, duplicate-weight class insertion via a binary occurrence counter, and positive/negative binary replay via the native scaling. All imported by original Karp21Everything and Karp21BinaryRuntimeEverything. Source-written Agda, exact-head kernel receipt OPEN.
+4. `scripts/check_karp21_native_signed_trace_factor.py`: original-word differential graph/certificate regression and repeated huge-weight operation count, committed to fail-closed referee. **Original-source integration script not executed here** because repository Python imports are not installed in the execution environment.
+
+### Local mathematical comparison (separate reproduction)
+
+An independent Python reproduction tested 19,531 signed integer traces (each length 0..6 over {-5,-1,0,1,5}); grouped and original two-lane totals were equal. For 256 identical positive weights of 1,025-bit width, repeated addition took 263,946 counted binary addition stages, versus 3,868 stages for binary-count grouping. **But** grouping also charged 262,656 binary key bits. Together these accounted operations were 266,524 versus 263,946, so there is **no certified speedup** for that example when key processing is included. Dictionary hashing/lookup/collision checks, allocations and tape head motion were not yet fully costed. Parsing the original wire already requires reading these repeated tokens; do not claim sublinear input consumption.
+
+### How SSP/VOA/Monster could help rather than decorate the implementation
+
+The reusable object is an **operation orbit / trace signature**, not a bare subgroup of Monster and not an arbitrary prime-power integer. A legitimate further quotient must give:
+- exact equivariance or decision-preserving congruence for the concrete operation on the original N21 signed score; not merely a symmetry name;
+- a source-word-to-label+residual codec and replay in all cases (or a proved decision-only quotient);
+- an amortized key-building/lookup schedule including bit comparison, shared-prefix trie, allocation and memory motion;
+- an actual improvement in `MDLVector` or `CostVector` under selected input families or a worst-case envelope, with transcript/binary-replay evidence.
+
+The next substantive theorem cut: `factorSignedTraceReplaySameOriginal` and `originalGammaWordTraceFactorizationSameScore` for ALL words, then a costed word-scan compiler into this representation. The earlier `trieAdmitIffOriginalHistoryConsistency`, `nativeGraphEndpointsConsumeInputBits`, full original N21 `PR.InNP`, E20, Cook-Levin and remaining 19 reductions/20 NP-memberships are still OPEN. No source-written Agda is promoted without an exact-head Agda 2.9 receipt.
