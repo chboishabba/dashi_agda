@@ -11,6 +11,7 @@ import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Ring
 import DASHI.Information.PNFFiniteCovarianceEconomicsExact as Matrix
 import DASHI.Information.PNFFiniteGramPositiveExact as PSD
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffOrbitGramAssembly as ExistingPSD
 
 record FiniteCentredData
     (K : Ring.ExactOrderedCommutativeRing)
@@ -81,3 +82,21 @@ scaledGramQuadraticNonnegative K P X scale scaleNonnegative v =
   Scalar.multiplicationPreservesNonnegative (Ring.orderedScalar K)
     scaleNonnegative
     (PSD.finiteMatrixGramPositiveSemidefinite K P (centredMatrix K X) v)
+
+-- Existing DASHI PSD authority is the owner; this lemma transfers its
+-- finite Gram positivity to the centred *same matrix* and nonnegative scale.
+centredCovarianceGramPSDFromExisting :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : ExistingPSD.FiniteGramOrderAuthority K) →
+  {n p : Nat} → (X : FiniteCentredData K n p) →
+  (scale : Scalar.Scalar (Ring.orderedScalar K)) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K)) scale →
+  (v : Fin p → Scalar.Scalar (Ring.orderedScalar K)) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (scaledGramQuadratic K X scale v)
+centredCovarianceGramPSDFromExisting K O X scale scaleNonnegative v =
+  scaledGramQuadraticNonnegative
+    K (PSD.positiveConeFromExistingPSD K O)
+    X scale scaleNonnegative v
