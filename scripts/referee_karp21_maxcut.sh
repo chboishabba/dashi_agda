@@ -160,6 +160,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21FractranOriginalRawListMachineExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FractranParsedRawThresholdMachineExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeRawGraphWordExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalWholeGraphFieldsWeldExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedGammaNativeRawEdgeStreamExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedInspectionClockExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeRippleAdderExact.agda
