@@ -5,8 +5,9 @@ module DASHI.Physics.YangMills.YMClayD1OriginalPeriodicPlaquetteFourBondSupportE
 --
 -- This is the SAME positive-bond carrier used in the original native
 -- varying-cutoff SU(N) Wilson measure, not a new graph or synthetic
--- action. Each positively oriented plaquette uses four positive bond
--- variables, with the two negative oriented steps reading their
+-- action. Each positively oriented plaquette uses four positive-bond
+-- SLOTS (which may coincide on very small periodic sides), with the
+-- two negative oriented steps reading their
 -- original corresponding positive link in inverse orientation.
 --
 -- The source paths and plane ordering are those of
