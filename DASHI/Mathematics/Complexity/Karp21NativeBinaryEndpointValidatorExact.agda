@@ -18,10 +18,15 @@ module DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointValidatorExact whe
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Relation.Binary.PropositionalEquality using (sym)
+import Data.Nat.Base as Nat
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact as Compare
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact as Structural
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdNumericalExact as Numeric
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact as Edge
 
 -- Compare encoded natural addresses WITHOUT interpreting them as Nat.
@@ -80,3 +85,47 @@ strictSelfEdgeRejected :
   lessNativeLE vertex vertex ≡ false
 strictSelfEdgeRejected vertex
   rewrite Structural.compareLEReflexive vertex = refl
+
+
+------------------------------------------------------------------------
+-- NUMERICAL REFLECTION of strict binary endpoint inequality.
+-- The original compareLE trichotomy already supplies explicit Nat
+-- distance witnesses; unlike the executable path, this uses unary
+-- Nat booleans ONLY as a proof-side observer.
+------------------------------------------------------------------------
+
+natStrictLessGap :
+  (x gap : Nat) →
+  Nat._≤ᵇ_ (suc x) (suc (x + gap)) ≡ true
+natStrictLessGap zero gap = refl
+natStrictLessGap (suc x) gap = natStrictLessGap x gap
+
+natStrictSelfFalse :
+  (x : Nat) → Nat._≤ᵇ_ (suc x) x ≡ false
+natStrictSelfFalse zero = refl
+natStrictSelfFalse (suc x) = natStrictSelfFalse x
+
+natStrictReverseFalse :
+  (y gap : Nat) →
+  Nat._≤ᵇ_ (suc (suc (y + gap))) y ≡ false
+natStrictReverseFalse zero gap = refl
+natStrictReverseFalse (suc y) gap = natStrictReverseFalse y gap
+
+-- This closes the actual comparison NUMERIC seam for all binary
+-- endpoint widths including redundant most-significant zero bits.
+nativeStrictLessNumerical :
+  (xs ys : Word.BitWord) →
+  lessNativeLE xs ys ≡
+    Nat._≤ᵇ_ (suc (Value.valueLE xs)) (Value.valueLE ys)
+nativeStrictLessNumerical xs ys
+  with Compare.compareLE xs ys
+     | Numeric.compareLENumericalCorrect xs ys
+... | Compare.less | (gap , equal)
+  rewrite equal =
+  sym (natStrictLessGap (Value.valueLE xs) gap)
+... | Compare.equal | equal
+  rewrite equal =
+  sym (natStrictSelfFalse (Value.valueLE xs))
+... | Compare.greater | (gap , equal)
+  rewrite equal =
+  sym (natStrictReverseFalse (Value.valueLE ys) gap)
