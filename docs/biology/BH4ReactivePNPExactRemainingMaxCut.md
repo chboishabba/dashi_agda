@@ -712,3 +712,100 @@ source kinetics and P0.07 real open/reactive boundary work remain
 OPEN. The proof should be ported into the existing appropriate
 Agda Bishop/PNP owner using original certified real inequalities
 rather than asserting an unconditional P0.06 closure.
+
+
+### 2026-11-09 P0.05: quantitative **local positive implicit-root existence** (small timesteps)
+
+The existing original 54-bond solver `scripts/reactive_pnp_369.py` now
+implements `local_positive_implicit_contraction_bounds` for its
+**actual** finite 27-cell, `n`-species closed reactive PNP vector field
+`F(c)=vector_rhs(c,model,poisson(c,model))`.
+
+For any selected finite, **strictly positive** `c0` and the admitted
+constant-`epsilon`, constant-positive `h,RT,F`, finite nonnegative
+species diffusion, nonnegative integer gross mass-action reaction
+orders, strictly positive detailed-balanced rates, and source-neutral
+bulk reaction charges, set
+
+```text
+r    = min_{v,s} c0_vs / 2 > 0
+Q    = max_{v,s} c0_vs + r
+Q*   = max(1,Q)
+Cphi = h² sqrt(27)/(3 epsilon)
+P    = Cphi (F Σ_s |z_s| Q + |rho_fixed|)
+Kphi = Cphi F Σ_s |z_s|
+U    = 2 max_s |z_s| F P / RT
+Bs   = 1+U
+Ku_s = 2 |z_s| F Kphi / RT
+Ar   = Σ_s alpha_rs       (original GROSS substrate orders)
+Br   = Σ_s beta_rs        (original GROSS product orders)
+Er+  = kf_r (Q*)^Ar
+Er-  = kb_r (Q*)^Br
+nu_rs = beta_rs − alpha_rs
+```
+
+For each species `s`, the following conservative explicit bounds
+hold on the closed infinity-norm ball `K=B∞(c0,r)`:
+
+```text
+M_s = 12 D_s Q Bs / h²
+        + Σ_r |nu_rs|(Er+ + Er-)
+L_s = 12 D_s (Bs + Q Ku_s) / h²
+        + Σ_r |nu_rs|(Ar Er+ + Br Er-)
+M = max_s M_s
+L = max_s L_s.
+```
+
+Proof: the prior exact 27-cell Poisson SOS inequality gives
+`||phi||∞ ≤ Cphi ||rho||∞` and
+`Lip∞(phi)≤Kphi`. At any native bond,
+`|u|≤U` and `Lip∞(u_s)≤Ku_s`.
+The entire Bernoulli function obeys `0<B(u)≤1+|u|` and is
+globally 1-Lipschitz (`−1≤B'(u)≤0`). Each 3D voxel has at
+most six incident original bonds, so the corresponding two-end
+SG flux differences yield the factors `12 D_s/h²`.
+For each gross mass-action monomial, telescoping the factors on
+`[0,Q]` gives the bounds `Er±` and
+`Lip∞≤Ar Er+, Br Er-`, respectively.
+Every original reaction contributes its *signed net* `nu_rs`
+to the species RHS; the absolute coefficients give the displayed
+global amplitude and Lipschitz majorants. Hence
+`||F(c)||∞≤M` and
+`||F(c)−F(d)||∞≤L ||c−d||∞` for all `c,d∈K`.
+
+For any `dt>0` with `dt M≤r/2` and `dt L≤1/2`,
+the actual original `T(c)=c0+dt F(c)` maps the complete
+closed ball `K` into itself, is a strict contraction, and satisfies
+`T(c)_{vs}≥min(c0)−r=r>0`.
+The Banach fixed-point theorem therefore produces **one and only
+one** strictly positive fixed point **within K**, solving
+`c1−c0=dt F(c1)` exactly. The previously derived closed-system
+convex free-energy inequality then applies to that exact positive
+root, so `G(c1)≤G(c0)`.
+
+**Accurate closure:** P0.05 has now a *local-in-time,
+finite-dimensional mathematical existence/strict-positivity theorem*
+with explicit conservative data-dependent conditions; the general
+all-timestep existence/uniqueness theorem remains OPEN.
+The constants are returned by floating-point calculation and are
+**not outward-rounded interval certificates**, so numerical output
+is a candidate timestep majorant until separately formally bounded.
+No Agda kernel has checked the Banach, Bernoulli derivative,
+reaction monomial or selected PNP root obligations. This is a
+source-written mathematical derivation, not a discharged Agda theorem
+or an independently calibrated original biological physical law.
+
+`test_local_positive_implicit_contraction_bound_and_native_residual`
+now exercises the selected native source RHS by Picard iteration on
+a synthetic three-species model; its finite convergence observations
+are only a regression of the implementation, never proof of Banach's
+hypotheses. The updated repository tests have not been run in the
+current session.
+
+**Remaining decisive maximum cut:** rigorous kernel/interval
+formalization of this local theorem; an original Rhea 29×12 source
+parameter inhabitant and real initial state; unrestricted timestep
+or physically scoped continuation if demanded; source-selected
+six-face reactive boundary work; true BH4/PNP/54-bond same-object
+physical observer commutation; Golden/ITIR and independent
+longitudinal biological calibration.
