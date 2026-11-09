@@ -369,3 +369,31 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact
 -- P0-B/F actual binary endpoint/address reader, original raw-edge stream, strict bit-only validator.
 -- Semantic observation source candidates; full original graph-validator equivalence, m/header and physical TM clock OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointValidatorExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeNatDecisionReflectionExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryStrictAfterOriginalExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryValidRawEdgesOriginalExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountBudgetExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryHeaderBudgetExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact
+
+-- N21 original bit-native header/m/count, lex strict ordering, endpoint-history and whole runtime.
+-- Proof candidates pending exact-head Agda; original typed bridge + physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact
