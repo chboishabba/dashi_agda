@@ -73,6 +73,7 @@ python3 scripts/check_karp21_native_signed_ledger.py
 python3 scripts/check_karp21_ssp_residual.py
 python3 scripts/check_karp21_positive_gamma.py
 python3 scripts/check_karp21_native_prefix_trie_consistency.py
+python3 scripts/check_karp21_native_signed_trace_factor.py
 python3 scripts/check_karp21_binary_native_threshold.py
 
 if [[ "$mode" == "preflight" ]]; then
@@ -141,6 +142,8 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeThresholdExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePositiveThresholdExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeEndpointPrefixTrieExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeMultiplicityScaleExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedTraceFactorExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
