@@ -32,6 +32,7 @@ import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
+import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -533,3 +534,24 @@ publishedHansenCorrectionNotProofOfGCCKnowledge :
   ≡ Direction.originalActorReadAndConsidered → ⊥
 publishedHansenCorrectionNotProofOfGCCKnowledge =
   Direction.publishedNotProofOfGCCKnowledge
+
+-- A missing original GCC PDF is not evidence the communication was silent
+-- about Hansen. Archive-described secondary circulation is not measured
+-- readership or hostile purpose.
+unreviewedGCCSourceCannotProveOmission :
+  Coding.missingJuneDocument
+  ≡ Coding.explicitlyAbsentInCompleteReviewedDocument → ⊥
+unreviewedGCCSourceCannotProveOmission =
+  Coding.missingSourceNotProvedSilence
+
+GCCAmplificationNotAudienceExposure :
+  Coding.resultConsumer Coding.archivalGCCReference
+  ≡ Coding.independentReaderExposure → ⊥
+GCCAmplificationNotAudienceExposure =
+  Coding.archiveResultNotExposure
+
+GCCAmplificationNotHostilePurpose :
+  Coding.resultConsumer Coding.archivalGCCReference
+  ≡ Coding.hostileIntention → ⊥
+GCCAmplificationNotHostilePurpose =
+  Coding.secondaryAmplificationNotHostilePurpose
