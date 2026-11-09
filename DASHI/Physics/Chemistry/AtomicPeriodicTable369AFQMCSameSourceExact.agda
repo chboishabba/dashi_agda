@@ -2,6 +2,7 @@ module DASHI.Physics.Chemistry.AtomicPeriodicTable369AFQMCSameSourceExact where
 
 open import DASHI.Core.Prelude
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as Atomic
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369Nickel41ElectronAccountingExact as Nickel41
 
 ------------------------------------------------------------------------
 -- Same-source atomic interacting-energy transport.
