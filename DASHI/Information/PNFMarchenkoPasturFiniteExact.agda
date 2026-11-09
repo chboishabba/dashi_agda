@@ -6,6 +6,8 @@ module DASHI.Information.PNFMarchenkoPasturFiniteExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Data.Empty using (⊥)
+import DASHI.Interop.PNFSpectralNumericABICore as NumericABI
 open import DASHI.Information.PNFSpectralGeometry
 
 ------------------------------------------------------------------------
@@ -126,6 +128,17 @@ promotionRequiresStability :
   (p : PNFModeEvidence Candidate Source Structural Stability) →
   Stability (PNFModeEvidence.selectedCandidate p)
 promotionRequiresStability p = PNFModeEvidence.stabilityPaid p
+
+-- Exact reuse of the canonical fail-closed numeric ABI theorem.
+-- A spectral evidence bundle cannot become numeric ABI promotion authority.
+mpEvidenceCannotPromoteNumericABI :
+  {Candidate : Set} →
+  {Source Structural Stability : Candidate → Set} →
+  PNFModeEvidence Candidate Source Structural Stability →
+  NumericABI.PNFSpectralNumericABIPromotion →
+  ⊥
+mpEvidenceCannotPromoteNumericABI _ =
+  NumericABI.pnfSpectralNumericABIPromotionImpossible
 
 ------------------------------------------------------------------------
 -- Historical matrix-shape check only; not a spectral analysis receipt.
