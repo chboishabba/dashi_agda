@@ -60,9 +60,37 @@ submittedScenarioMatchesSource = refl
 -- 60% => 98.34008..%, below full 100.
 -- 65% => 101.67510..%, above full 100.
 -- No claims about actual ecological delivery or permitted confidence.
-fiftyAbove90Difference : Nat
-fiftyAbove90Difference =
-  jointNumerator 4 50 - 90 * jointDenominator
+fiftyAbove90Exact :
+  90 * jointDenominator +
+    15573718717785965077071123936135752170135771728773576333564313600
+    ≡ jointNumerator 4 50
+fiftyAbove90Exact = refl
 
--- We avoid subtraction in the proof by using normalized addition
--- witnesses with exact difference constants defined below.
+fiftyBelow100Exact :
+  jointNumerator 4 50 +
+    77679201424682261025476528959849164255404698079140470740484096000
+    ≡ 100 * jointDenominator
+fiftyBelow100Exact = refl
+
+sixtyBelow100Exact :
+  jointNumerator 4 60 +
+    15479201424682261025476528959849164255404698079140470740484096000
+    ≡ 100 * jointDenominator
+sixtyBelow100Exact = refl
+
+sixtyFiveAbove100Exact :
+  100 * jointDenominator +
+    15620798575317738974523471040150835744595301920859529259515904000
+    ≡ jointNumerator 4 65
+sixtyFiveAbove100Exact = refl
+
+-- Joint feasible region with fixed other-site inputs is bounded by
+-- product g*c. For full modeled coverage:
+--   543850 + 1555*g*c >= 100*denominator / 1000^20.
+-- For 90% direct, replace 100 by 90. Do not assert this is the
+-- physically warranted probability, lawfulness, or measured habitat.
+-- Rational thresholds are reconstructed in the companion verifier.
+
+existingCommonGainReference :
+  Existing.mwwBothQualityPointCoefficient ≡ 116625
+existingCommonGainReference = Existing.perPointExactly
