@@ -19,6 +19,8 @@ MODULES=(
   DASHI/Biology/Physical/BiologicalAllNeighbourTissueDynamicsExact.agda
   DASHI/Biology/Physical/OriginalDmscTwoGenotypeMeasuredExact.agda
   DASHI/Biology/Physical/BiologicalRNA9HammingExact.agda
+  DASHI/Biology/Physical/Biological369PantsPhysicalSeamExact.agda
+  DASHI/Biology/Physical/Biological369CubicalMaterialFieldExact.agda
   DASHI/Biology/Physical/BiologicalSignedIonicSharedGridExact.agda
   DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
   DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
