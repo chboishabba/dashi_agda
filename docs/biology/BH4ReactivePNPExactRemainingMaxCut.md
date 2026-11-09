@@ -998,3 +998,83 @@ wrong weights, nonintegral sides and Boolean coordinates.
 **Remaining gates explicitly unchanged:** G0.01–04 Agda receipts; S0.01–04 original source and thermodynamic data; P0.01–05 source well-posedness, SG transport, conserved reaction and positivity; P0.06 physical chemical-plus-electrostatic free-energy link; P0.07 physical boundary work; P0.08 original same-state step; P1–P3 empirical and quotient consequences. Do not promote `allStepsEnergyBudgetExact` to any of these source-gated declarations without a same-source model proof.
 
 **Required verification:** `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPEnergyBudgetCompositionExact.agda` and `scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`. These commands are prescribed, not execution receipts.
+
+
+### 2026-11-09 existing simplex search and original CHNOP weighted-simplex reuse
+
+Repository search located several distinct existing simplex owners:
+
+- `DASHI.Visualisation.FiveClassSimplexColourExact`:
+  five nonnegative normalized *rational/numerator display weights*
+  and an exact finite denominator-ten closure, **not** the
+  original 783-coordinate concentration carrier.
+- `DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact`:
+  finite normalized rational probability atoms, including exact
+  joint/deviation mass factorization, **not** source-paid
+  electrochemical/stoichiometric geometry.
+- `DASHI.Physics.YangMills.BalabanP33DuhamelOrderedSimplexMeasureExact`:
+  exact rational integration on the **ordered two-time simplex**,
+  not a probability or CHNOP concentration simplex.
+- `DASHI.GameTheory.FiniteMixedNashProductCorrectionExact`,
+  `GameTheoryIntrospectiveCompletionCutExact` and
+  `Nash1950CorrectedExistenceAlignmentExact` explicitly state
+  that the genuine finite probability simplex/fixed-point
+  realisation is **still a transcription/proof debt**. Nash
+  existence receipts are not Brouwer inhabitants.
+
+The **correct source-reuse owner** for our original PNP
+mass invariant is actually
+`DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact`
+and `DASHI.Biology.Molecular.BH4PanelRateWeightedConservationExact`.
+These already prove each original CHNOP coordinate is
+preserved by arbitrary finite natural reaction multiplicities
+at each of the **27 original voxels**, using the same
+`SourceCertifiedOriginal29x12` and real gross 29×12 reaction
+sides. This is substantially closer to the physical weighted
+simplex than importing a 5-class colour/probability carrier.
+
+**New source-written Agda consumer, registered in existing BH4
+evidence Golden root:**
+`DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact`.
+It provides:
+
+- `original369x29x12FiveAxisSpatialBalance`: the five
+  source-conditional CHNOP invariants together for **one**
+  27-site source reaction-multiplicity history, not five
+  unrelated examples.
+- `panelWeightedAddWeights`: proves the linearity of
+  the **original** `Panel.panelWeighted` under the **original**
+  `Panel.panelAdd` on weights.
+- `combineOriginalLeftKernel`: combines any two certified
+  source stoichiometric left-kernel weights exactly.
+- `totalCHNOPSourceWeights`: the single 29-component
+  `C+H+N+O+P` atomic weight chart, derived from the
+  certified original per-element vectors.
+- `sourceTotalCHNOPLeftKernel`: proves that combined
+  chart annihilates **each** of the 12 original finite
+  source reaction columns.
+- `original369x29x12AggregateCHNOPBalance`: reuses the
+  existing all-27-site rate-weighted conservation theorem
+  for that aggregate weight with arbitrary natural reaction
+  multiplicities.
+
+**Critical distinction:** the source certificate itself is an
+explicit *input*; the file does not invent it. A separate
+strict-positive-weight witness is still required for every
+source species; an atomic sum can be zero for an electron or
+a missing/unsupported source species. These are exact **Nat**
+stoichiometric event invariants, not continuous `ℝ^(27×29)`
+compactness, measured concentrations, source-approved noninteger
+mass-action rates or a verified Brouwer theorem.
+
+Therefore the maximum cut is narrower:
+the algebraic 29×12 aggregate conserved left-kernel is now
+**source-written as an Agda theorem composition**,
+while `original369ClosedWeightedSimplexCompact`,
+`original369BrouwerMapContinuous`,
+`original369BrouwerMapPreservesSimplex`,
+`original369BrouwerFixedPointExists`,
+`original369ImplicitFixedPointIsPositiveRoot`
+and `original369ClosedRootFreeEnergyDecreases`
+remain unverified **real/analytic kernel** obligations.
+No Agda kernel execution was obtained in this session.
