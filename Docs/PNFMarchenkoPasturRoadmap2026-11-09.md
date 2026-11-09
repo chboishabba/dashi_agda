@@ -281,3 +281,9 @@ P0 status:
 6. MP measure law/limits and real PNF/economics source evidence — OPEN.
 
 No external eigenvalue label is promoted by any of these algebraic results.
+
+## 13. Existing finite Cauchy–Schwarz / Jensen owner (economics F2)
+
+Inspection identifies a directly relevant exact theorem: `DASHI.Physics.Closure.NSTriadKNLuoFiniteJensenSquareExact.finiteJensenSquare` proves `(∑a_i)² ≤ (∑a_i²)·length` for finite lists over `Data.Rational.Base.ℚ`, reusing `NSTriadKNRationalOrderedFiniteL2.finiteCauchySchwarzSquared`. Its statement is real mathematics, not a receipt-only Set field.
+
+For the equicorrelation full PSD range, the maximum cut is therefore **not** to reinvent Cauchy–Schwarz. It is to instantiate the finance equicorrelation quadratic over the same rational carrier and finite-list summation, connect the existing Jensen bound and rational order multiplication by nonpositive rho, and finish necessity using the all-ones and a nonzero zero-sum vector for p>1. No full-range theorem has been authored in this round. Do not transfer this rational theorem automatically to arbitrary `ExactOrderedScalar` without a real carrier/ordered-field embedding.
