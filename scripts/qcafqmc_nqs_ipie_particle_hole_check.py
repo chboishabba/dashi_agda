@@ -21,9 +21,11 @@ def test_same_sector_export():
         ci,occ_a,occ_b=export_particle_hole("synthetic-model",8,1,1)
     assert ci.shape==(64,)
     assert occ_a.shape==(64,1) and occ_b.shape==(64,1)
-    assert np.allclose(ci,exact)
-    for k,state in enumerate(states):
-        assert state==((1<<int(occ_a[k,0]))|(1<<(8+int(occ_b[k,0]))))
+    assert np.all(np.diff(abs(ci))<=1e-12)
+    for k in range(len(ci)):
+        state=(1<<int(occ_a[k,0]))|(1<<(8+int(occ_b[k,0])))
+        original_index=states.index(state)
+        assert np.allclose(ci[k],exact[original_index])
     assert abs(np.vdot(ci,ci)-1)<1e-12
     assert np.max(abs(ci))>0
     with patch("qcafqmc_nqs_ipie_particle_hole.trial_from_checkpoint",
