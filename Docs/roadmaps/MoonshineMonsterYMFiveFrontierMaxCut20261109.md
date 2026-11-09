@@ -253,3 +253,22 @@ The latest `Y443Universal80SimpleQuotientKernelReflectionExact.Selected.original
 - Common: the true historical 80-relator Q80→Monster/simple-congruence source and the original JMD selected-group selection/generation when upgrading image to all G.
 
 All are original-source gaps; a numerical group order, parity rank, or trace pasted from a *different* group does not satisfy them. V0.4 FT-derived TF is source-written; TT mixed Jacobi remains. YM D2 common-exponent dense-OS spectral reduction and finite G1.02 Haar pressure group coverage are documented on #1444, without promoting their E1/D1/D2/N1/G1 physical terminals.
+
+
+## 9 November — **actual source 80 ⇔ 72+8 RELATOR SATISFACTION** now source-written
+
+The earlier 72+8 inventory was **only** a literal word-multiset count. New `DASHI/Moonshine/Y443Original72Plus8RelatorSatisfactionExact.agda` closes the stronger finite semantic transport, independently of Monster simplicity: `partitionAt` splits the *actual canonical* `Y443CoxeterPresentationExact.monsterRelators` list in its native order. It extracts precisely the eight residual source positions `8,9,10,11,68,75,77,79`: four generator squares, three original order-three edges and the 80th original Ivanov central relation. All other 72 words are retained without changing their meaning.
+
+For **every** original `GroupWithInverse G` and node map, `UnderOriginalGroup.splitAll` and `mergeAll` are structural inductive proofs of
+
+```
+Pair.RelatorsSatisfied gi nodes Y.monsterRelators
+  iff
+Pair.RelatorsSatisfied gi nodes original72
+  AND
+Pair.RelatorsSatisfied gi nodes original8 .
+```
+
+`source72Count` and `source8Count` prove 72/8 on the **literal computed source**, not an independently rewritten relator list. `ExistingOriginalJMD.literalOriginal72Satisfied`, `literalOriginal8Satisfied`, and `recombinedSameOriginal80` instantiate this equivalence on the **same existing `PresentedY443VNaturalSource`**, reusing its group, node map and `relatorsHold` exactly. Added to focused Golden root `Y443VNaturalPairGenerationValidation.agda`.
+
+An independent local Python check of the original 12 squares / 66 pairs / spider / central source enumeration confirmed the eight residual positions and their semantic types. The new Agda source has **not** received an Agda 2.9 kernel typecheck and therefore is SOURCE-WRITTEN, not kernel-certified. This proof **does not** settle the historical Q80 ≅ Monster theorem or the selected-group nonabelian kernel reflection, which require actual historical simplicity and real selected nontriviality. It does pay a previously missing **original relation-preservation** step for all further 72+8 source proofs. The 71+9 and projective F9 numerical codings remain independent from this now-exact actual-relator partition.
