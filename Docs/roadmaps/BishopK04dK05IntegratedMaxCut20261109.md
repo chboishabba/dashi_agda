@@ -160,3 +160,59 @@ This resolves the **all-cell algebraic accumulation** subgate, subject to kernel
 6. **P3**: Genuine source Gamma, prefactor, continuation and completed-Xi equality.
 
 **Verification**: declaration and import readback, static holes/postulates check, plus exact-head Agda 2.9 test are separate gates. Source-only work may not be marked accepted until an Agda kernel receipt. This commit does not close P0/P1/P2/P3.
+
+## P0.01/P0.03 original-source implementation pass (9 November 2026)
+
+**Implemented source declarations, kernel acceptance still pending:**
+
+- `DASHI/Analysis/BishopOriginalFiniteLogQuotientSecondOrderExact.agda`:
+  `sourcePowerSecondQuotient`, `originalPowerQuotientSecondOrder`,
+  `sourceFiniteLogSecondQuotient`, `originalFiniteLogQuotientSecondOrder`,
+  `originalFiniteLogQuotientAtZeroIsDerivativePolynomial`, and
+  `originalFiniteLogPolynomialQuotientExactDefect`.
+  Last theorem proves for every N,x,h:
+  `q_L,N(x,h) ≃ P_N(x) + h*S_N(x,h)`, where P_N is the actual
+  `negativeLogDerivativePolynomial` and S_N is the explicit source
+  reciprocal-weighted finite polynomial. This is algebraic *factorization*,
+  **not** the requested compact-uniform inequality.
+- `DASHI/Analysis/BishopOriginalFiniteLogExpQuotientDefectSplitExact.agda`:
+  `originalFiniteLogErrorQuotientDefectSplit` states
+  `q_E-d_E ≃ -F_N * [h*S_N*Q(delta) + P_N*(Q(delta)-1)]`,
+  where delta is the actual source negative finite-log increment, Q is
+  `Origin.originalExpOriginQuotient`, F_N is the original bishopExp
+  of the actual finite partial. `originalSourceShiftedFactorialErrorBound`
+  reuses the existing P0.02 majorant
+  `ExpClosed.originalExpQuotientMinusOneAbsBound`, which proves
+  `|Q(delta)-1| <= exp_B(|delta|)-1`.
+- Both new modules imported into `EverythingTOESymmetryResolved369`,
+  `Unifier` and `Unified/Everything`.
+
+**Independent finite regression**: 1,377 exact-rational triples (N,x,h),
+N=0..16, 9x9 rational grid, checked both power/log quotient recurrences,
+the zero-step derivative equality, and the composite-defect algebra for
+two independent rational selections of F,Q (2,754 composite checks).
+The mathematical identity passes; these tests do not replace the Agda kernel.
+
+**New sharpened next inequality target (not yet formalized)**: for
+`0<=x,x+h<=r<1`, the finite polynomial S_N is nonnegative and its
+coefficientwise upper bound satisfies
+
+```
+0 <= S_N(x,h) <= sum_{k=2}^N (k-1)*r^(k-2)/2
+              <= 1/[2*(1-r)^2].
+|q_L,N(x,h)-P_N(x)| <= |h|/[2*(1-r)^2].
+```
+
+This is uniform in N, not merely a fixed-N modulus. A Bishop-order proof
+needs nonnegative finite powers, rational coefficient embedding,
+`T_k <= binomial(k,2) r^(k-2)`, and the geometric derivative-square
+majorant with positive apartness of 1-r. The original shifted-factorial
+bound then controls the remaining `Q(delta)-1` term. No general FTC
+assumption is introduced.
+
+**Still unpaid:** make the above order bound Agda-kernel accepted;
+control `|delta| <= |h|/(1-r)` and exp_B on the source compact;
+combine both in the P0.03 error bound; positivity/conditioning of mesh
+weights; actual normalized endpoint comparison and convergence to 1-x;
+the independently selected original P1 Cayley evaluations, P2 same-object
+zeta value, and P3 Gamma/continuation/xi. Do not mark them closed.
