@@ -113,3 +113,47 @@ def test_original_gross_catalyst_orders_are_retained(monkeypatch):
     assert model.products[0,28] == 1
     assert model.reactants[0,0] == 1
     assert model.products[0,12] == 1
+
+
+def test_original_source_specific_closed_inventory_audit(monkeypatch):
+    source, sha, manifest, species, reactions = fixture(monkeypatch)
+    certificate = Adapter.load_original_receipt_json(source)
+    matrix, _ = Adapter.check_certificate(certificate, full_panel=True)
+    paid_formula = {s: ({"C": 1}, 0) for s in species}
+    paid_formula[species[0]] = ({"C": 2, "H": 1}, 1)
+    paid_formula[species[1]] = ({"C": 2, "H": 1}, 1)
+    monkeypatch.setattr(Adapter, "check_certificate",
+                        lambda *a, **kw: (matrix, paid_formula))
+    before = np.ones((27,29))
+    after = before.copy()
+    after[0,0] -= 0.25
+    after[1,0] += 0.25
+    result = Adapter.check_original_closed_inventory(
+        source, sha, before, after)
+    assert result["max_inventory_defect"] < 1e-12
+    assert not result["agda_kernel_checked"]
+    assert not result["independent_source_authenticated"]
+    after[2,0] += 0.5
+    with pytest.raises(ValueError, match="inventory"):
+        Adapter.check_original_closed_inventory(
+            source, sha, before, after)
+    with pytest.raises(ValueError, match="digest"):
+        Adapter.check_original_closed_inventory(
+            source, "0"*64, before, before)
+
+
+def test_original_inventory_negative_nonfinite_and_shape(monkeypatch):
+    source, sha, manifest, species, reactions = fixture(monkeypatch)
+    a = np.ones((27,29))
+    q = a.copy()
+    q[0,0] = -1
+    with pytest.raises(ValueError):
+        Adapter.check_original_closed_inventory(source,sha,a,q)
+    q = a.copy()
+    q[0,0] = float("nan")
+    with pytest.raises(ValueError):
+        Adapter.check_original_closed_inventory(source,sha,a,q)
+    with pytest.raises(ValueError):
+        Adapter.check_original_closed_inventory(source,sha,a,a[:26])
+    with pytest.raises(ValueError):
+        Adapter.check_original_closed_inventory(source,sha,a,a,atol=float("inf"))
