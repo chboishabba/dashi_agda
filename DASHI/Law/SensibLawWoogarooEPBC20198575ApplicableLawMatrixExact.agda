@@ -176,6 +176,6 @@ section135APreDecisionOnRequest : ApplicableRule
 section135APreDecisionOnRequest = applicable-rule
   "EPBC s135A(2)-(5), 1 July 2026 compilation — request access to s95C report after approval"
   "https://www.legislation.gov.au/C2004A00485/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_1/document_1.html"
-  preReformPreserved
+  mixedOrProvisionSpecific
   "After a decision on each controlling provision, on-request copy subject to prescribed exclusions/charges; no received document, new automatic publication, disclosure decision or FOI outcome inferred."
   false
