@@ -17,6 +17,11 @@ module DASHI.Law.SensibLawWoogarooSection135AReportAccess20261109Exact where
 -- s135A(2)-(3) on-request report access. Thus items232-234 had NOT
 -- displaced that mechanism as at that compilation date.
 -- Source: https://www.legislation.gov.au/C2004A00485/2026-08-24/2026-08-24/text/original/epub/OEBPS/document_1/document_1.html
+-- Federal Register versions page (checked 9 November 2026) still lists
+-- C70, 24 August 2026, as the latest in-force compilation; the
+-- remaining amendments appear in the non-operative future-law section.
+-- This is a dated REGISTER observation, not a kernel-derived legal fact.
+-- https://www.legislation.gov.au/Series/C2004A00485
 -- Exact commencement for items232-234 (and any relevant savings)
 -- remains a separate source obligation; do not silently assume it
 -- was 24 August, 16 October, or 1 December 2026.
@@ -46,6 +51,7 @@ record OriginalAccessGate : Set where
     decisionHasOccurred : Bool
     originalCompilationRequestRouteExists : Bool
     august24CompilationRetainsOnRequestText : Bool
+    november09RegisterLatestIsAugust24C70 : Bool
     amendment232to234CommencementVerified : Bool
     recommendationReportActuallyReceived : Bool
     publicReportPDFAuthenticated : Bool
@@ -55,7 +61,7 @@ open OriginalAccessGate public
 
 reportedState : OriginalAccessGate
 reportedState = original-access-gate
-  20261016 true true true false false false false false
+  20261016 true true true true false false false false false
 
 directRequestRouteHistoricallyAvailable :
   originalCompilationRequestRouteExists reportedState ≡ true
@@ -64,6 +70,10 @@ directRequestRouteHistoricallyAvailable = refl
 august24CompilationStillHasRequestRoute :
   august24CompilationRetainsOnRequestText reportedState ≡ true
 august24CompilationStillHasRequestRoute = refl
+
+november09RegisterLatestCompilation :
+  november09RegisterLatestIsAugust24C70 reportedState ≡ true
+november09RegisterLatestCompilation = refl
 
 no135AReportReceived :
   recommendationReportActuallyReceived reportedState ≡ false
