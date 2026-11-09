@@ -58,8 +58,17 @@ For the original *selected* Y443 node interpretation (n↦g_n) in the selected g
 
 1. **Kernel-check** the new `Y443Universal80SimpleQuotientKernelReflectionExact.agda`, `Y443Original72Plus8RelatorPartitionExact.agda` and their transitive import root on Agda 2.9 before calling them verified.
 2. **Original historical bridge:** implement `publishedY443Simple80Congruence` from actual Ivanov/Bray/Monster simplicity and original word/congruence identification.
-3. **Original moved-state:** implement `actualY443NodeMovesGriessState` from one concrete original `V^natural_2) action and state. No chosen fake action/empty carrier.
+3. **Original moved-state:** implement `actualY443NodeMovesGriessState` from one concrete original `V^natural_2` action and state. No chosen fake action/empty carrier.
 4. **Same selected generation:** produce original `PresentedByY443Nodes` from actual selected (G) source.
 5. **Compose:** `actualKernelReflectionFromPublishedSimplicity`, selected-to-Q80 bidirectional setoid iso and published Monster iso; only then the Y443/FLM full action theorem.
 
 Other terminal gates E1.03, D1.03, D2.03–04, N1.02, G1.03, V0.4 and V1 remain open; no prize claim. This is an explicit reduction to the shortest genuine source inputs, not a numerical proof of Monster.
+
+
+### 9 November direct original-source integration and symmetry negative control
+
+Code commit `00e5ff496cccad971b0c292abeb916feeeadf70c` adds `OriginalSelectedJMDSource` to `Y443Universal80SimpleQuotientKernelReflectionExact.agda`. It imports the **existing** `Y443JMDPresentedVNaturalCapstoneExact.PresentedY443VNaturalSource` and consumes its literal original `groupWithInverse`, `nodes`, `relatorsHold` and `presentationSurjective`. The nested `FromHistoricalAndMovedState.originalKernelReflection`, `actualSelectedToAfterFrom` and `actualPresentedFromAfterTo` are now source-written exactly on that existing selected object. No alternative group/action carrier and no duplicate JMD generation lemma have been constructed. The uninhabited source authority remains the true published Ivanov/Bray Q80 ≅ M/simple quotient and one actual moved selected weight-two state.
+
+Code commit `ad77c670dbc23d777e40a7452cd3cc35b5171a62` adds an exact **negative graph-symmetry test** `this72SplitNotLongArmEquivariant`: swapping the two length-four Y443 arms takes core square `e1` to residual square `e2`. Therefore the convenient literal original **72+8** relator partition is **not invariant even under this actual Coxeter graph automorphism**, much less automatically a Monster-equivariant (mathbb P^1(mathbb F_9)) projective representation. Use the 71+9/72+8 sources for bookkeeping and test indexing only until a real original action-preserving transport is supplied. This prevents numerical coincidences from being upgraded to Monster isomorphism hypotheses.
+
+Kernel-check of the new Agda modules and original selected-object source instantiation remains OPEN. None of Moonshine V0.4/V1 or Yang–Mills E1/D1/D2/N1/G1 changes status.
