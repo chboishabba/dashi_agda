@@ -176,3 +176,57 @@ allOriginalIndexedBondHistoriesConserve :
   V.sum (runTransfers actions state) ≡ V.sum state
 allOriginalIndexedBondHistoriesConserve geometry actions state =
   all27SharedSitesConserve actions state
+
+
+------------------------------------------------------------------------
+-- POINTWISE MATERIAL LEDGER: a source debit is exactly zero or one
+-- unit, at the indexed voxel. This is the local ingredient absent from
+-- a proof of only V.sum conservation. The destination credit is
+-- precisely one unit when invoked. No fluid rate is inferred.
+------------------------------------------------------------------------
+
+actualSourceDebit : ∀ {n} → F.Fin n → V.Vec Nat n → Nat
+actualSourceDebit index state with V.lookup state index
+... | zero = zero
+... | suc _ = 1
+
+lookupAfterDebit :
+  ∀ {n} (index : F.Fin n) (state : V.Vec Nat n) →
+  V.lookup (debitAt index state) index
+    + actualSourceDebit index state ≡ V.lookup state index
+lookupAfterDebit F.zero (V._∷_ zero xs) = refl
+lookupAfterDebit F.zero (V._∷_ (suc a) xs) =
+  +-comm a 1
+lookupAfterDebit (F.suc index) (V._∷_ a xs) =
+  lookupAfterDebit index xs
+
+lookupAfterCredit :
+  ∀ {n} (index : F.Fin n) (state : V.Vec Nat n) →
+  V.lookup (creditAt index state) index
+    ≡ suc (V.lookup state index)
+lookupAfterCredit F.zero (V._∷_ a xs) = refl
+lookupAfterCredit (F.suc index) (V._∷_ a xs) =
+  lookupAfterCredit index xs
+
+-- Specialize the local source ledger to a genuine native bond, whose
+-- source index is certified as an original ternary-cube voxel.
+originalNativeBondSourceLedger :
+  (geometry : Original54BondIndexing)
+  (bond : Grid.PositiveBond)
+  (state : V.Vec Nat 27) →
+  V.lookup (debitAt (sourceIndex geometry bond) state)
+    (sourceIndex geometry bond)
+    + actualSourceDebit (sourceIndex geometry bond) state
+    ≡ V.lookup state (sourceIndex geometry bond)
+originalNativeBondSourceLedger geometry bond state =
+  lookupAfterDebit (sourceIndex geometry bond) state
+
+originalNativeBondTargetCredit :
+  (geometry : Original54BondIndexing)
+  (bond : Grid.PositiveBond)
+  (state : V.Vec Nat 27) →
+  V.lookup (creditAt (targetIndex geometry bond) state)
+    (targetIndex geometry bond)
+    ≡ suc (V.lookup state (targetIndex geometry bond))
+originalNativeBondTargetCredit geometry bond state =
+  lookupAfterCredit (targetIndex geometry bond) state
