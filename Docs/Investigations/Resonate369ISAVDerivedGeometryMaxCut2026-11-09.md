@@ -65,3 +65,30 @@ Inspect and reuse instead of duplicating:
 
 ## Next maximum cut
 The greatest evidence gain comes from the same-revision measured C07 station coordinates and coil-axis/polarity map, then exact cyclic comparison. The greatest physical gain comes from loaded simultaneous voltage/current and shaft torque/speed with storage boundary accounted. Avoid spending the next cycle on unconditional over-unity claims, unjustified 250-coil identification or vendor-file redistribution.
+
+## 2026-11-09 continuation: conditional polarity and common refinement
+
+Added `DASHI.Physics.Motors.Resonate369ConditionalPolarityExact`:
+- `flipInvolution`
+- `pairedReversalPreservesSign`: flipping both magnet pole and winding sign leaves selected-terminal parity unchanged.
+- `reversingTerminalFlipsSign`
+- `reversingOnlyPoleFlipsSign` (negative control).
+- These are explicit symbolic hypotheses; no actual winding or polarity correspondence was observed from CAD.
+
+Added `DASHI.Physics.Motors.Resonate369CommonRefinementExact`:
+- 3000 nominal sectors × 120 millidegrees = 360 degrees;
+- C07 station step = 375 sectors, 8 × 375 = 3000;
+- Dodecatron step = 250 sectors, 12 × 250 = 3000;
+- Historical 250-position claim step = 12 sectors, 250 × 12 = 3000;
+- independent first-station and full-turn exact numeral witnesses for all three.
+- Common grid is mathematically useful for comparison but is NOT evidence that physical coils or magnets are actually aligned to that grid.
+
+A local Python enumeration checked all 24 Boolean parity invariant cases and the common-grid integer arithmetic; **that is not Agda kernel acceptance**. The Agda toolchain was not available in the current container. All three Agda modules therefore remain kernel-verification pending.
+
+### Updated cut status
+
+- `c07DodecatronMG10RefinementComparison`: **nominal common-grid arithmetic closed; actual measured coordinate mapping remains open**.
+- `alternatingWindingSameOutputPolarity`: **conditional sign parity closed; source measured polarity, terminal and waveform correspondence remain open**.
+- `finiteCyclicStationIndexClosure`: selected exact numeral turn closures done; arbitrary `Fin N` group action remains open.
+- `signedPitchErrorTelescopes`: remains open at Agda kernel level; do not equate nominal reference proofs with measured nonuniform spacing.
+- Input/output measurement, magnet retention, actual CAD extraction, and all physics gate proofs remain open.
