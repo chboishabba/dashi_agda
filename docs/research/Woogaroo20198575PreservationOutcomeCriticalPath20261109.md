@@ -65,3 +65,13 @@ No communication has been sent. Names such as Stockland and Cherish retain disti
 - Existing original DASHI research: `docs/research/Woogaroo20198575OperativeInstrumentAcquisitionCut20261109.md`, `docs/research/Woogaroo20198575QualityGainScientificExceptionMaxCut20261106.md`, and source-aware QUT/QCC/RSPCA attribution owners.
 
 **Not accomplished:** no regulator request, FOI, filing, approval-holder request, site visit, direct survey or verified 2026 source acquisition undertaken here. Also no new physical conservation outcome occurred by writing this document.
+
+## 9 November — material three-action Avonvale additionality source lead
+
+**New first-party published consultant source**: One Environment 26 November 2024 `OEs1:v1.3(a)` plan for EPBC **2021/8975 Hunt Road Burpengary**, hosted at https://www.cedarwoods.com.au/sage/mvc/config/getattachment/252eb986-749b-44a8-befb-483b12da7180/sage_epbc-management-plan-2022.pdf?lang=en-au . The indexed original-source PDF says a **14-ha** area of the wider Avonvale/Cherry Gully property was proposed separately for Hunt Road, with other approved offset areas elsewhere on the stations; the consultant states this 14 ha was not allocated to *earlier* offsets as at November 2024. This **adds a third project-specific legal and GIS allocation**, beyond Providence 2018/8347 and the Woogaroo Springview 2019/8575 approval. It neither proves nor excludes overlapping 2026 boundaries; exact source PDF bytes were not authenticated because the direct PDF screenshot endpoint returned 404.
+
+**New exact leaves:** `originalAvonvaleThreeActionParcelAllocation`, `originalAvonvaleThreeActionLegalDutyTimeline`, `originalAvonvale2021HuntRoad14HaOriginalApprovalJoin`, and `originalAvonvaleSharedManagementActionsIncrementalAttribution` must feed the existing `originalAvonvaleIncrementalBenefitNonOverlap`. Their correct positive or counterexample answer depends on official VDEC polygons, credited AU maps, funding/legal duty and separately selected source records.
+
+**Register interpretation repair:** https://www.qld.gov.au/environment/management/environmental/offsets/registers (displayed current to 28 Aug 2026) explicitly excludes **Commonwealth legislation offsets**. No listing there cannot prove a federal 2019/8575 offset or its VDEC does not exist. Source-specific VDEC title/registration retrieval is still a primary A0 preservation cut.
+
+Canonical detailed evidence ledger: [Woogaroo20198575AvonvaleThreeActionAdditionalityCut20261109.md](Woogaroo20198575AvonvaleThreeActionAdditionalityCut20261109.md). No new legal breach, physical overlap, biological success or agency receipt is inferred.
