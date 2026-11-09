@@ -16,6 +16,8 @@ module DASHI.Physics.YangMills.YMClayD1OriginalFuelGreedyTerminationExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Nat using (_≤_; z≤n; s≤s)
 open import Data.Nat.Properties using (≤-trans; ≤-refl; +-mono-≤)
 open import Data.Sum using (inj₁; inj₂)
@@ -173,3 +175,41 @@ fuelGreedyOriginal19PackingFullLength :
 fuelGreedyOriginal19PackingFullLength degree marked distinct =
   fuelGreedyOriginal19Packing
     degree (Source.length marked) marked ≤-refl distinct
+
+------------------------------------------------------------------------
+-- Full-input fuel exhaustiveness / extra-fuel stability.
+--
+-- Reuses the same structural-fuel proof discipline as the existing
+-- P/NP/FRAC/Karp execution carriers: no recursion on an opaque filter.
+--
+-- The proof is about the *actual* original Wilson positive-link
+-- selector, not arbitrary symbolic machine fuel.
+------------------------------------------------------------------------
+
+fuelGreedyOriginalExtraFuelStable :
+  ∀ {n} (fuel extra : Nat)
+    (marked : List (Original.Bond n)) →
+  Source.length marked ≤ fuel →
+  fuelGreedyOriginalDisjointStars (fuel + extra) marked
+    ≡ fuelGreedyOriginalDisjointStars fuel marked
+fuelGreedyOriginalExtraFuelStable zero extra [] lengthBound = refl
+fuelGreedyOriginalExtraFuelStable zero extra (a ∷ as) () 
+fuelGreedyOriginalExtraFuelStable (suc fuel) extra [] lengthBound = refl
+fuelGreedyOriginalExtraFuelStable (suc fuel) extra (a ∷ as)
+  lengthBound =
+  cong (λ selected → a ∷ selected)
+    (fuelGreedyOriginalExtraFuelStable fuel extra
+      (Original.filterOriginalStarFree a as)
+      (≤-trans
+        (filterOriginalStarLengthBound a as)
+        (sucBoundInverse lengthBound)))
+
+fuelGreedyOriginalFullLengthExtraFuelStable :
+  ∀ {n} (extra : Nat) (marked : List (Original.Bond n)) →
+  fuelGreedyOriginalDisjointStars
+    (Source.length marked + extra) marked
+    ≡ fuelGreedyOriginalDisjointStars
+      (Source.length marked) marked
+fuelGreedyOriginalFullLengthExtraFuelStable extra marked =
+  fuelGreedyOriginalExtraFuelStable
+    (Source.length marked) extra marked ≤-refl
