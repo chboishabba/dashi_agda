@@ -558,3 +558,24 @@ and initial-value transport; then (c) produce genuine convergent
 half-ball evaluation and the two original pointwise witnesses.
 P2 selected-zeta semantic equality and P3 Gamma/continuation/Xi
 remain open independently.
+
+
+## Cross-programme maximum cut: 13-coordinate hyperfabric / puncture
+
+For the exact 12+1 and 9+3+1 fibre decomposition, constructive
+zero-section/last-coordinate complement, globally punctured-origin
+counterexample, canonical prefix-observer non-descent, source commit
+receipts, and independently outstanding Bishop analytic work, see:
+
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+
+Implementation owners:
+`DASHI/Foundations/TernaryThirteenFibreSplitExact.agda`,
+`DASHI/Foundations/TernaryThirteenFibrePunctureExact.agda`, and
+`DASHI/Foundations/TernaryThirteenFibreObserverNonDescentExact.agda`.
+
+The new finite-word proofs do not close the original-source
+`centralCompletionIsThirteenTritFibre` equivalence, semantic
+observer/gluing transport, Bishop P1 atan–exponential–Cayley
+same-object identity, independently selected zeta equality or
+Gamma/Xi construction.
