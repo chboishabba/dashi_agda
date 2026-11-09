@@ -92,3 +92,84 @@ insertNegativePositivePreserved magnitude ledger = refl
 -- observation, not an operation executed by accumulateSigned.
 -- The complete graph verifier must still compare the two lanes,
 -- incorporate signed threshold semantics and prove an actual clock.
+
+-- Whole-list observation lemmas use only the actual executable fold.
+-- These are separate from the future bit-tape complexity proof.
+
+sumPositive : List Signed.SignedMagnitudeBits → Nat
+sumPositive [] = zero
+sumPositive (Signed.positive magnitude ∷ rest) =
+  Value.valueLE (reverse magnitude) + sumPositive rest
+sumPositive (Signed.negative magnitude ∷ rest) =
+  sumPositive rest
+
+sumNegative : List Signed.SignedMagnitudeBits → Nat
+sumNegative [] = zero
+sumNegative (Signed.positive magnitude ∷ rest) =
+  sumNegative rest
+sumNegative (Signed.negative magnitude ∷ rest) =
+  Value.valueLE (reverse magnitude) + sumNegative rest
+
+accumulatePositiveValue :
+  (tokens : List Signed.SignedMagnitudeBits) (ledger : SignedLedger) →
+  positiveValue (accumulateSigned tokens ledger) ≡
+    positiveValue ledger + sumPositive tokens
+accumulatePositiveValue [] ledger =
+  NatP.+-identityʳ (positiveValue ledger)
+accumulatePositiveValue (Signed.positive magnitude ∷ rest) ledger =
+  trans
+    (accumulatePositiveValue rest
+      (insertSigned (Signed.positive magnitude) ledger))
+    (trans
+      (cong (λ x → x + sumPositive rest)
+        (insertPositiveValue magnitude ledger))
+      (NatP.+-assoc
+        (positiveValue ledger)
+        (Value.valueLE (reverse magnitude))
+        (sumPositive rest)))
+accumulatePositiveValue (Signed.negative magnitude ∷ rest) ledger =
+  trans
+    (accumulatePositiveValue rest
+      (insertSigned (Signed.negative magnitude) ledger))
+    (cong (λ x → x + sumPositive rest)
+      (insertNegativePositivePreserved magnitude ledger))
+
+accumulateNegativeValue :
+  (tokens : List Signed.SignedMagnitudeBits) (ledger : SignedLedger) →
+  negativeValue (accumulateSigned tokens ledger) ≡
+    negativeValue ledger + sumNegative tokens
+accumulateNegativeValue [] ledger =
+  NatP.+-identityʳ (negativeValue ledger)
+accumulateNegativeValue (Signed.positive magnitude ∷ rest) ledger =
+  trans
+    (accumulateNegativeValue rest
+      (insertSigned (Signed.positive magnitude) ledger))
+    (cong (λ x → x + sumNegative rest)
+      (insertPositiveNegativePreserved magnitude ledger))
+accumulateNegativeValue (Signed.negative magnitude ∷ rest) ledger =
+  trans
+    (accumulateNegativeValue rest
+      (insertSigned (Signed.negative magnitude) ledger))
+    (trans
+      (cong (λ x → x + sumNegative rest)
+        (insertNegativeValue magnitude ledger))
+      (NatP.+-assoc
+        (negativeValue ledger)
+        (Value.valueLE (reverse magnitude))
+        (sumNegative rest)))
+
+-- A canonical zero ledger therefore has precisely the positive and
+-- negative totals of the original signed-token sequence.
+accumulateEmptyPositive :
+  (tokens : List Signed.SignedMagnitudeBits) →
+  positiveValue (accumulateSigned tokens emptyLedger) ≡
+    sumPositive tokens
+accumulateEmptyPositive tokens =
+  accumulatePositiveValue tokens emptyLedger
+
+accumulateEmptyNegative :
+  (tokens : List Signed.SignedMagnitudeBits) →
+  negativeValue (accumulateSigned tokens emptyLedger) ≡
+    sumNegative tokens
+accumulateEmptyNegative tokens =
+  accumulateNegativeValue tokens emptyLedger
