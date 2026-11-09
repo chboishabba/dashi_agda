@@ -212,3 +212,21 @@ A 200×120, rho=0.25 seeded synthetic diagnostic was run locally using NumPy, wi
 - P3 dashiTRADE Nashi no-bypass & action-cost ledger: OPEN.
 
 **No false closure:** existing PSD establishes the relevant ordered-scalar finite positivity law. It does NOT establish iid MP assumptions, empirical PNF source identity, positive signed-Laplacian behavior, finite-sample market eigenvalue outlier significance, or semantic/economic promotion.
+
+## 10. Generic PSD-preserving spectral cleaning (2026-11-09)
+
+Added `DASHI/Information/PNFSpectralCleaningPSDExact.agda` using canonical `FiniteGramOrderAuthority`:
+- `FilteredFiniteSpectrum`: actual finite mode-indexed coefficients, filtered eigenvalue weights and per-mode nonnegativity proof.
+- `spectrallyCleanedQuadratic`: explicit finite sum ∑λᵢ(v·uᵢ)² (coefficient is supplied as a genuine per-mode coordinate, not an assumed eigenvector).
+- `nonnegativeSpectralFilterPreservesPSD`: finite-sum square positivity from the canonical PSD owner.
+- `CleanedOperatorEquality`: requires a literal equality from the selected operator quadratic to the finite spectral sum (NOT mere Set-valued placeholder).
+- `cleanedOperatorPositiveSemidefinite`: PSD transport along that explicit equality.
+
+The generic algebraic part of C5/F5 is now **AUTHORED, KERNEL UNVERIFIED**. The actual cleaned PNF covariance and cleaned economic correlation must still supply genuine orthogonal eigenvectors, reconstruct the original operator, prove the displayed quadratic equality and, for a correlation matrix, restore/check diagonal 1. These are **not** consequences of nonnegative filtering alone.
+
+### Revised sharp cut
+P0: Run Agda 2.9 with pinned stdlib to typecheck all seven new modules and dependencies; correct any failures before claiming kernel acceptance.
+P0: Pay same-source actual means and scale identities and prove finite covariance rank/nullity and equicorrelation residual subspace dimension/negative rho bound.
+P1: Instantiate spectral cleaning with reconstructed matrices and diagonal restoration; formal MP density/zero mass/moments/transforms/weak convergence remains independent.
+P2: Replay the historical PNF data with source metadata and independently test the S&P 500 economic claims; quantitative outliers alone have no PNF truth or trading-alpha authority.
+P3: Consume the cleaned economic risk estimate in dashiTRADE's existing no-bypass support/cost pipeline, with held-out ledger.
