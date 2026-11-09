@@ -316,3 +316,27 @@ Source-specific catalogued objects:
 | CW6 | Actual Python self-tests, original byte-review receipts and Agda 2.9 exact-head kernel acceptance | OPEN (GitHub edits inspected; no local checkout/Agda) |
 
 The A1–A9 **film-art** case remains a subordinate interpretive and negative-control lane. It does not need to be empirically finished before original cognitive-warfare CW0–CW4. The original temporal fibre, braid, residual and path machinery is already present; do not construct a parallel temporal kernel or hallucinate a completed causal result. Commit states are source-written, not kernel-verified.
+
+
+## 9 Nov — Directed GCC 1993 control: source response and secondary amplification
+
+**New original evidence:** [Climate Files' Patrick Michaels GCC release](https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/) explicitly identifies Boyce Rensberger's 1 June 1993 *Washington Post* article as preceding the 30 June 1993 GCC communication written by John Shlaes. The [1993 media-hits collection](https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/) describes GCC's September newsletter later highlighting a *Washington Post* article published in July. Respect full original author attribution and distinct direction.
+
+**High-value falsifying observation:** GCC's June 30 response cannot be an antecedent cause of the June 1 original published article. A later bulletin's selection of a previously published article is evidence of downstream reuse, *not* prior journalistic capture or original article authorship. This does not exclude other GCC actions preceding those articles; such earlier influence is a separate unproved hypothesis requiring original sources.
+
+**Exact new source-written Agda:** `DASHI/Cognition/CCDCOEP3GCC1993DirectionDiscriminatorExact.agda`, with four original source objects, two documented reference directions, `responseCannotBeSourceOfEarlierArticle`, `septemberBulletinNotProvenSourceOfJulyPublication`, `journalistNotGCCHistoricalAuthor`, `sourceMentionNotEditorialUptake`, and `sourceMentionNotAudienceEffect`. These are finite source-relation and evidence-grade restrictions, not a universal historical proof of absent influence. Imported into `DASHI.Cognition.Everything` and selected P3 regression.
+
+**Source ledger and executable candidate checks:** `Docs/research/ccdcoe_p3_gcc1993_directional_negative_control_20261109.json`, `scripts/check_ccdcoe_p3_gcc1993_directional_control.py` with nine programmed negative controls (reverse edge, backdated response, fused authorship, fabricated exposure/effect, false source-grade, duplicate object). Registered in `scripts/check_ccdcoe_cognition_agda.sh`. Eight live connector-side consistency assertions passed: four original objects, original time order, authorship separation, no unsupported effect flags and checker/Agda integration. This is not a local Python execution or Agda 2.9 kernel receipt.
+
+**Max-cut delta:**
+- **CW0:** Original archive pages identified, but authentic PDF/article *bytes*, source SHA256 and independent reviewer receipts still OPEN.
+- **CW1:** Two source-reference arrows identified as historical ordering; independent delivery/uptake/exposure remains OPEN.
+- **CW2:** Select first observed *primary original journalist article* and *separate original GCC response* for independently coded uncertainty/responsibility/evidence framing. Prior/journalist content must not be called induced by the later response.
+- **CW3:** Directional negative control now source-written. Identifying any **earlier** GCC exposure, journalist/reader causal response, common issues, outlet timing, or baseline variation remains OPEN.
+- **CW4:** Hostility, coordination, manipulation and targeting are independent evidence gates and remain OPEN.
+- **CW5:** Actual measured cognitive-response multiplex weld remains OPEN; do not substitute artwork or textual rhetorical coding for the population data.
+- **CW6:** Exact-head Agda kernel, Python scripts and original-byte audit must execute in reproducible runtime. OPEN.
+
+**Attribution:** Boyce Rensberger and independent *Washington Post* journalists own their works; GCC/John Shlaes own the GCC communication and bulletin; Climate Files/Climate Investigations Center owns the catalogue; DASHI owns the finite chronology/logic consumer. Peirce, Mulvey, Barthes and critical art theorists retain their original theoretical contributions. No ESD surface edits.
+
+**Next highest-alpha cut:** authenticate the two original 1993 texts; code the article and response separately using a common codebook and dual reviewers; trace GCC **post-publication** amplification as a distinct intervention; test alternative causal explanations before any audience influence or cognitive-warfare classification.
