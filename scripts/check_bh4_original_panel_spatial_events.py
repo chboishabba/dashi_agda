@@ -149,15 +149,33 @@ def test_source(certificate,*,full_panel):
     original,metadata=check_certificate(certificate,full_panel=full_panel)
     matrix=original["matrix"];species=original["species_index"]
     start=POINTS[0]
+    # All 27 ORIGINAL cubical positions must support the SAME
+    # source-certified finite reaction, without changing any other voxel.
+    # Verify every molecular coordinate, not only a global sum: a
+    # compensating remote mutation could conserve totals but still be
+    # physically unrelated to the selected localized reaction.
     event_cases=0
+    local_coordinate_checks=0
     for col in range(len(original["reaction_index"])):
-        before=inventory(species)
-        for i,key in enumerate(species):
-            if matrix[i][col]<0:
-                before[start,key]=-int(matrix[i][col])
-        after=reaction_event(before,matrix,species,col,start,1,metadata)
-        assert totals(before,metadata)==totals(after,metadata)
-        event_cases+=1
+        for point in POINTS:
+            before=inventory(species)
+            for i,key in enumerate(species):
+                if matrix[i][col]<0:
+                    before[point,key]=-int(matrix[i][col])
+            after=reaction_event(before,matrix,species,col,point,1,metadata)
+            assert totals(before,metadata)==totals(after,metadata)
+            for other in POINTS:
+                for i,key in enumerate(species):
+                    expected=before[other,key]
+                    if other==point:
+                        expected+=int(matrix[i][col])
+                    if after[other,key]!=expected:
+                        raise AssertionError(
+                            "original spatial reaction changes nonlocal/incorrect species "
+                            f"at {other}: reaction={original['reaction_index'][col]} species={key}"
+                        )
+                    local_coordinate_checks+=1
+            event_cases+=1
     # A genuinely shared chronological chemical/transport history for
     # EACH original finite reaction: react at a source voxel, transport one
     # generated product over a real neighbour, and return it. This checks
@@ -201,6 +219,7 @@ def test_source(certificate,*,full_panel):
         "source_finite_reactions":len(original["reaction_index"]),
         "source_nonfinite_residuals":len(original["finite_formula_residuals"]),
         "original_reaction_event_checks":event_cases,
+        "original_reaction_coordinate_checks":local_coordinate_checks,
         "original_reaction_transport_roundtrip_histories":mixed_history_cases,
         "original_native_bond_species_transfer_checks":transferred,
         "same_physical_shared_inventory":True,
@@ -223,6 +242,8 @@ def self_test():
     result=test_source(cert,full_panel=False)
     assert result["source_species"]==5
     assert result["source_finite_reactions"]==1
+    assert result["original_reaction_event_checks"]==27
+    assert result["original_reaction_coordinate_checks"]==27*27*5
     assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
     print(json.dumps(result,indent=2,sort_keys=True))
