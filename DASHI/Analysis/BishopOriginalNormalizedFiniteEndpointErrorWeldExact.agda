@@ -128,3 +128,62 @@ originalFiniteNormalizedEndpointErrorWeld stage x ratio =
         (RP.-‿cong
           (RP.≃-symm
             (originalFiniteNormalizedExpAtZeroIsOne stage)))))
+
+------------------------------------------------------------------------
+-- Proof-relevant origin ratio. A mesh's own proof of 0<1 must be
+-- reusable without asserting judgmental equality with the
+-- canonical sourceOriginUnitIntervalRatio record.
+------------------------------------------------------------------------
+
+originalBishopOriginInverseWithAnyRatioIsOne :
+  (ratio : Gap.BishopUnitIntervalRatio R.0ℝ) →
+  R._≃_ (Gap.oneMinusInverse ratio) R.1ℝ
+originalBishopOriginInverseWithAnyRatioIsOne ratio =
+  RP.≃-symm
+    (Inv.⁻¹-unique
+      R.1ℝ
+      (Cross.oneMinus R.0ℝ)
+      (Gap.oneMinusNonzero ratio)
+      (let open RP.ℝ-Solver in
+       solve 0
+         (Κ 1ℚᵘ ⊗ (Κ 1ℚᵘ ⊖ Κ 0ℚᵘ)
+           ⊜ Κ 1ℚᵘ)
+         RP.≃-refl))
+
+originalFiniteNormalizedExpAtZeroAnyRatioIsOne :
+  (stage : Nat) →
+  (ratio : Gap.BishopUnitIntervalRatio R.0ℝ) →
+  R._≃_
+    (Norm.originalNormalizedFiniteExp stage R.0ℝ ratio)
+    R.1ℝ
+originalFiniteNormalizedExpAtZeroAnyRatioIsOne stage ratio =
+  RP.≃-trans
+    (RP.*-cong
+      (Initial.originalFiniteNegativeLogExpAtZero stage)
+      (originalBishopOriginInverseWithAnyRatioIsOne ratio))
+    (RP.*-identityˡ R.1ℝ)
+
+originalFiniteNormalizedEndpointErrorWithAnyOriginRatio :
+  (stage : Nat) (x : R.ℝ) →
+  (xRatio : Gap.BishopUnitIntervalRatio x) →
+  (originRatio : Gap.BishopUnitIntervalRatio R.0ℝ) →
+  R._≃_
+    (Error.originalFiniteLogExpError stage x)
+    (R._*_
+      (Cross.oneMinus x)
+      (R._-_
+        (Norm.originalNormalizedFiniteExp stage x xRatio)
+        (Norm.originalNormalizedFiniteExp
+          stage R.0ℝ originRatio)))
+originalFiniteNormalizedEndpointErrorWithAnyOriginRatio
+    stage x xRatio originRatio =
+  RP.≃-trans
+    (RP.≃-symm
+      (originalFiniteNormalizedExpErrorWeld stage x xRatio))
+    (RP.*-cong
+      RP.≃-refl
+      (RP.+-cong RP.≃-refl
+        (RP.-‿cong
+          (RP.≃-symm
+            (originalFiniteNormalizedExpAtZeroAnyRatioIsOne
+              stage originRatio)))))
