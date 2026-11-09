@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Chemistry.IndustrialReactiveEnergyBalanceExact where
 
 -- Source and ownership:
