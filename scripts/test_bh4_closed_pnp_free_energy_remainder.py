@@ -32,6 +32,8 @@ class GroundedFreeEnergyRemainderTests(unittest.TestCase):
         self.assertAlmostEqual(receipt["identity_defect"], 0., places=9)
         self.assertGreaterEqual(receipt["chemical_bregman_gap"], -1e-12)
         self.assertGreaterEqual(receipt["electrostatic_bregman_gap"], -1e-12)
+        self.assertLessEqual(receipt["energy_change"], receipt["energy_change_upper_bound"] + 1e-9)
+        self.assertLessEqual(abs(receipt["residual_work"]), receipt["residual_work_absolute_bound"] + 1e-10)
 
     def test_implicit_root_energy_dissipation(self):
         m = synthetic_model()
