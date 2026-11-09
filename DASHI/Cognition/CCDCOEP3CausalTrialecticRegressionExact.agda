@@ -697,3 +697,31 @@ genericEvidenceReceiptCollisionCannotPass :
     (SameOperation.SourceBoundAdmission.receiptReference admitted) → ⊥
 genericEvidenceReceiptCollisionCannotPass =
   SameOperation.sourceBoundReceiptCollisionImpossible
+
+-- Claim-specific original support is the scientifically appropriate
+-- general consumer: a single genuine document may support several
+-- distinct stage claims, provided each use is independently justified.
+-- The old globally injective receipt policy is OPTIONAL, not necessary.
+validStageSupportNeedNotHaveDistinctSourceFiles :
+  ((admitted : SameOperation.ClaimBoundAdmission
+      SameOperation.WeakDemo SameOperation.OneReceipt
+      SameOperation.oneReceiptOwner
+      SameOperation.SyntheticStageSupport SameOperation.gcc1993) →
+    Observer.Separating (SameOperation.ClaimBoundAdmission.sourceFor admitted)) →
+  ⊥
+validStageSupportNeedNotHaveDistinctSourceFiles =
+  SameOperation.claimSpecificSupportDoesNotForceDistinctReferences
+
+-- This is the unchanged, source-indexed actual evidence cut: the
+-- repository's current selected GCC inventory has no independent
+-- observed exposure, irrespective of the evidence-ref citation policy.
+currentOriginalGCCInventoryFailsClaimBoundAdmission :
+  (Reference : Set)
+  (owner : Reference → SameOperation.OriginalCase)
+  (Supports : SameOperation.OriginalCase →
+     SameOperation.EvidenceStage → Reference → Set) →
+  SameOperation.ClaimBoundAdmission
+     SameOperation.CurrentlyLocatedEvidence
+     Reference owner Supports SameOperation.gcc1993 → ⊥
+currentOriginalGCCInventoryFailsClaimBoundAdmission =
+  SameOperation.selectedGCCNotClaimBoundUnderCurrentInventory
