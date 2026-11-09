@@ -20,7 +20,20 @@ def spectrum(x):
     assert abs(np.trace(c) - p) < 1e-8
     assert eigenvalues.min() > -1e-8
     assert cleaned.min() > -1e-8
+    # Spectral clipping preserves PSD but generally does NOT preserve the
+    # correlation diagonal. Explicit congruence is a separate operation.
+    eigvecs = np.linalg.eigh(c)[1]
+    cleaned_cov = (eigvecs * cleaned) @ eigvecs.T
+    raw_diag_error = float(np.max(np.abs(np.diag(cleaned_cov) - 1)))
+    d = np.diag(cleaned_cov)
+    assert np.all(d > 0), "diagonal normalization needs strictly positive diagonal"
+    normalized = cleaned_cov / np.sqrt(np.outer(d, d))
+    assert np.min(np.linalg.eigvalsh(normalized)) >= -1e-8
+    assert np.max(np.abs(np.diag(normalized) - 1)) < 1e-8
     return {
+        "raw_cleaned_max_diagonal_error": raw_diag_error,
+        "normalized_min_eigenvalue": float(np.linalg.eigvalsh(normalized)[0]),
+        "normalized_max_diagonal_error": float(np.max(np.abs(np.diag(normalized)-1))),
         "max_eigenvalue": float(eigenvalues[-1]),
         "min_eigenvalue": float(eigenvalues[0]),
         "above_MP_edge": int(np.count_nonzero(eigenvalues > upper)),
