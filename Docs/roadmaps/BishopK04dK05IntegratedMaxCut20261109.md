@@ -91,3 +91,34 @@ This removes the opportunity to substitute a synthetic exponential or an unrelat
 Remaining implementation sequence: (1) source uniform modulus for `q_E(N,x,h)-E_N'(x)` on `0<=x<=r<1` at fixed N; (2) positive Bishop reciprocal weighted finite telescope, preserving the modulus after refinement; (3) derive the integrated `r^(N+1)/((N+1)(1-r)^2)` bound, then source convergence/limit uniqueness; (4) Agda 2.9 transitive imports and TOE root typecheck. P1/P2/P3 still have the exact terminal obligations above.
 
 Verification: source-written Agda and committed imports; no kernel acceptance receipt. No claim of P0–P3 closure.
+
+## Further 9 November implementation: exact multi-cell P0 composition
+
+New owner: `DASHI/Analysis/BishopOriginalNegativeLogCrossWeightCocycleExact.agda`, wired into `EverythingTOESymmetryResolved369`, `Unifier` and `Unified/Everything`. This reuses the original exp/log finite-stage owner and the preceding source-cross-weight module.
+
+Write `w(x)=1-x`, `F_N(x)=exp_B(-L_N(x))`, `D_N(a,b)=w(a)F_N(b)-w(b)F_N(a)`. A source-written ring proof now establishes the *three-vertex weighted cocycle*
+
+```
+w(b) D_N(a,c) = w(a) D_N(b,c) + w(c) D_N(a,b).
+```
+
+The same file proves `D_N(a,b)` equals the original target-error determinant, and refines the cocycle to the two-cell residual identity for `y=x+h`, `z=y+k`:
+
+```
+w(y) D_N(x,z)
+ = w(x)*k*(R_N(y)+w(y)*(q_E(y,k)-E_N'(y)))
+ + w(z)*h*(R_N(x)+w(x)*(q_E(x,h)-E_N'(x))).
+```
+
+**Specific new reduction:** a two-cell normalized cross-weight endpoint is now an exact polynomial combination of *actual original source local residuals and the actual original source quotient defects*, without inserting or assuming an FTC/integral, arbitrary selected function or reciprocal. Repeated finite composition is supported algebraically by this three-vertex law; a general mesh-majorant/positivity theorem is still needed. No bound on the quotient defects was fabricated.
+
+### Remaining terminal proof leaves (unchanged)
+
+- **P0.1**: derive a compact-uniform `q_E(N,x,h)-E_N'(x)` modulus on the original Bishop carrier from the explicit finite polynomial quotient and shifted-factorial exponential series; avoid claiming `h->0` pointwise suffices uniformly.
+- **P0.2**: prove positive weight/reciprocal monotonicity for all mesh vertices `x<=r<1`, then sum the cocycle without losing the quotient remainder.
+- **P0.3**: produce the original Bishop sharp endpoint error and effective common stage cutoff, then use existing `originalNegativeLogTerminalFromFiniteEvaluation`.
+- **P1**: original nested atan-to-complex-exp coefficient evaluation at `1/5`, `1/239` or equivalent constructive ODE uniqueness; rational Cayley evaluations alone are insufficient.
+- **P2**: feed P0 to already-existing `BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog` and prove selected external/opaque zeta same-object value equality, not fiat.
+- **P3**: genuine Gamma factor, prefactor, continuation, reflection and completed Xi same-object identification.
+
+**Verification status:** new source declarations and three imports committed, exact branch file readback planned; `agda` executable unavailable in working container. No kernel acceptance or terminal P0/P1/P2/P3 discharge is claimed.
