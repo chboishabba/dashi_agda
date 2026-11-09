@@ -97,14 +97,38 @@ fictionalSatireNotIndependentAudienceObservation =
 -- A substantive real-world cognitive-warfare finding requires all
 -- listed independent gates. The type below is a REQUIREMENT, not
 -- a proof that they are satisfied by any selected historical actor.
-record OperationAdmission (Evidence : Set) : Set₁ where
+record OperationEvidenceSignature : Set₁ where
   field
-    originalIntervention : Evidence
-    independentExposureReceipt : Evidence
-    validatedMechanismMeasurement : Evidence
-    causalDiscriminationReceipt : Evidence
-    independentlySourcedIntentAndTargeting : Evidence
-    historicalAttributionReceipt : Evidence
+    OriginalIntervention : Set
+    IndependentExposure : Set
+    ValidatedMechanism : Set
+    CausalDiscrimination : Set
+    IntentAndTargeting : Set
+    HistoricalAttribution : Set
+
+-- Each required receipt has its own owner-selected proposition. Unlike
+-- the previous common Evidence parameter, supplying a generic single
+-- token no longer fills every gate by definitional reuse. A caller
+-- still must establish that the selected propositions are independent
+-- and grounded in the *same original historical intervention*.
+record OperationAdmission (signature : OperationEvidenceSignature) : Set where
+  field
+    originalIntervention :
+      OperationEvidenceSignature.OriginalIntervention signature
+    independentExposureReceipt :
+      OperationEvidenceSignature.IndependentExposure signature
+    validatedMechanismMeasurement :
+      OperationEvidenceSignature.ValidatedMechanism signature
+    causalDiscriminationReceipt :
+      OperationEvidenceSignature.CausalDiscrimination signature
+    independentlySourcedIntentAndTargeting :
+      OperationEvidenceSignature.IntentAndTargeting signature
+    historicalAttributionReceipt :
+      OperationEvidenceSignature.HistoricalAttribution signature
+
+-- The signature can still be mis-specified: type distinction is not a
+-- substitute for independent original-byte and historical review.
+-- No specific signature or operation-admission witness is constructed.
 
 -- No specific GCC/API/Exxon/film case is instantiated as an operation.
 -- The existing 1998 proposal is never merged with a separate 1993 GCC
