@@ -668,3 +668,83 @@ previously paid and must remain attributed to
 The source of `selectedRepresentativePushforward` is still
 the original sectioned representative operation, not a claim
 about a categorical pushforward on arbitrary sheaves.
+
+
+## Continuation: original ITIR semantic-node observer transport and minimal repair
+
+This pass targeted H2.01 on the **actual** original ITIR world-node
+carrier, rather than building a fabricated world/Monster semantic
+completion. The original selected type is
+`DASHI.Interop.ITIRFederatedTypedWorldProjectionExact.SourceAddressableSemanticNode`,
+with source identity, revision, anchors, producer/reviewer references
+and projection/authority boundaries. Its data cannot be interpreted
+as 12 ternary valuations plus a thirteenth central trit by
+cardinality or string labels.
+
+New owner:
+`DASHI/Foundations/TernaryThirteenOriginalConsumerRepairAndWorldTransportExact.agda`.
+
+Source-written proofs on the constructed source-valuation carrier:
+- `repairedCentralObserver`: canonical
+  `ObserverRefinementLatticeExact.pairObserver` of source
+  12-coordinate projection and original `Base369.TriTruth` centre.
+- `centralRepairIsSufficient`,
+  `centralRepairFactors`: selected consumer becomes sufficient
+  and factors through the *repaired* observer, reusing original
+  `ConsumerDescentMinimalObserverExact` and
+  `SectionedProjectionProvenanceBridgeExact`.
+- `sourceTwelveAloneCannotSuffice`,
+  `centralRepairStrictlyRefinesTwelve`:
+  original StageAtlas projection alone remains insufficient, and
+  the repaired observer strictly refines it by explicit neutral/
+  positive central collision.
+- `everySufficientRepairSeparatesCentralCollision`,
+  `centralCoordinateIsNecessaryForThisRepair`:
+  any alternative repair for this consumer must separate the
+  original witnessed collision; separation alone is NOT claimed
+  to prove global sufficiency.
+
+Conditional exact original-world transport:
+- `ITIRWorldState`: aliases the actual
+  `ITIR.SourceAddressableSemanticNode`.
+- `OriginalWorldCentralTransport` is a **source-admission record**,
+  requiring an independent `worldToSource` map, actual
+  `worldNeutral/worldPositive` nodes whose source-state identities
+  match the selected pair, and commuting actual
+  `worldObserve/worldConsume` maps.
+- `worldPairSameObservation`,
+  `worldPairDifferentConsumer`,
+  `originalWorldNonDescentFromPaidCorrespondence`,
+  `originalWorldCannotFactorAfterPaidCorrespondence`,
+  `originalWorldObserverInsufficientAfterPaidCorrespondence`:
+  genuine original-world consumer non-descent **conditional upon**
+  the above original-source witness record being instantiated.
+
+There is deliberately **no canonical inhabitant** of
+`OriginalWorldCentralTransport`. This pass pays the transport
+lemma but not the empirical/operational identification of two
+independent semantic-world nodes or their source evidence.
+
+Source commit receipts: `d06fdaa` original world/repair contract;
+`cce2df5` import repair; `b5783f4` strict-refinement and
+repair necessity; three canonical TOE imports `69bb637`,
+`bb334be`, `4b7c53d`.
+
+### Revised outstanding mathematical gates
+
+| Gate | Most precise remaining work | Source status |
+|---|---|---|
+| H2.01 selected source repair | Strict refinement, sufficient repaired consumer and necessity of separating central collision | SOURCE-WRITTEN |
+| H2.01 original-world transport | Conditional non-descent on the ACTUAL ITIR semantic-node type after paid selection of original world nodes and commuting observers | SOURCE-WRITTEN CONDITIONAL |
+| H2.01 independent instantiation | Select and justify genuine original world nodes and actual world-observer / consumer mapping; instantiate `OriginalWorldCentralTransport` | OPEN |
+| H1.01 semantics | Independently identify the intended full relational/group completion with the source StageAtlas 12+1 central model, not from equal counts | OPEN |
+| H2.02 source seams | Actual heterogeneous selected world/relational edge-stalk interpretations and `Pants.InterfaceMatch` in the selected full fabric, beyond abstract matched pairs | OPEN |
+| Bishop P1 | Original nested analytic exponential/atan Cayley identity and both original Machin point witnesses | OPEN |
+| Zeta P2 | Original canonical Nat powers and selected independently sourced zeta | OPEN |
+| Gamma/Xi P3 | Original Gamma integral, analytic continuation, functional equation, entire completed Xi | OPEN |
+
+All commits remain **source-written, not Agda-kernel accepted**.
+The all-sieve non-discrete constructed-site theorem of the prior
+round remains source-written; no assertion about full original
+world semantics, modular j, Monster representation or analytic
+Bishop objects follows from this observer bridge.
