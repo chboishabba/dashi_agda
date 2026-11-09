@@ -16,6 +16,16 @@
 
 **Implementation principle / fastest cut:** A → C1 is the highest shared return; run B independently; do C2 and then D on actual source carriers. Do not implement new finite derivatives, Basel sums, generic continuity, ad hoc atan/pi definitions or abstract gamma authorities. Lean `dashi_lean4` PR #104 is a mathematical donor, not same-object Agda evidence. Agda #1466 supplies native complex-series/trig ABI; RH #1419/#1434 supply pole-quotient/route infrastructure but **not** native Gamma or completed xi analytic values.
 
+### 2026-11-09 implementation addition: original Nat-log term/limit coherence
+
+New **source-written** `DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda` proves:
+
+- `originalDirichletExponentialRespectsNatLog`: for every original Bishop complex `s` and Nat index `n`, pointwise native setoid equivalence of two Nat-log histories transports through both coordinates of the actual `bishopDirichletExponentialTerm`, using `bishopAnalyticExpCongruent`.
+- `configuredRound11TermsAreCanonical`: instantiates the previous theorem from preexisting `sourceOriginalConfiguredNatLogAgreement`, with no new arbitrary Nat-log equality input.
+- `originalDirichletLimitsRespectNatLog`: using the existing `dirichletValuesRespectTermwiseEquality`, transports original real and imaginary Bishop series limits between the two actual logarithm representations, given authentic majorant receipts.
+
+This reduces a **specific P2 representation/evaluation seam** but does not create the external selected `ZetaHalfPlaneLayer` same-object equality. It is a proof term subject to exact-head Agda typecheck (no receipt yet). It has been imported into the three TOE roots and the dedicated Bishop checker. No expansion of P0/P1/P3 scope is justified by this change.
+
 ### Exact remaining lemma graph (proposed names where no original declaration exists)
 
 `originalLogExpCompositionCoefficients` → `originalLogExpCompositionAbsoluteConvergence` → `originalLogExpCompositionLimitEquality` → **existing** `OriginalBishopNegativeLogExponentialGap` → **existing** `sourceCanonicalNatLogAllIndicesExpInverse` → **existing** `sourceRegionBaselFromOneNativeLogIdentity` → **existing** `FromOriginalNegativeLog.originalZetaAboveTwo` and `originalZetaIsSourceDirichletLimit`.
