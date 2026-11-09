@@ -111,3 +111,73 @@ to Agda using the native geometry owner; recover S0.01 source bytes and
 S0.02-04 actual chemical/kinetic certificates; instantiate P0.03c and
 P0.07 against the same source-specific state. Never promote these
 conditional exact-arithmetic statements to physical P0.08 or P1-P3.
+
+
+## 2026-11-09 original-PNP PR recheck and implemented cut
+
+The canonical PNP physical source is PR #1454, not a newly introduced
+third PNP stack. PR #1471 already carries the native 54-bond, six-face,
+signed continuity and pants-seam proof owners. Their branches are still
+distinct: do not claim an Agda import of #1471 from #1454 without a
+compatible branch merge and kernel receipt.
+
+**Source-written now on PR #1454:**
+
+- `BH4PNPSamePhysicalHistoryBridgeExact`:
+  `allBH4AndPNPControlledHistoriesSamePhysicalSource` pairs the BH4
+  kinetic and PNP electrodiffusion commuting statements for precisely
+  one source-selected physical history.
+  `allSameSourceBH4PNPAndRoute` additionally carries the original
+  source-permitted cumulative circulation route. Both are conditional
+  on an inhabited `SameSourceBH4PNPModel`; neither constructs the
+  source-verified physical kernel or original measured kinetics.
+- `scripts/bh4_original_reactive_pnp_adapter.py`:
+  newly committed fail-closed adapter to the **existing**
+  `check_bh4_original_panel_spatial_events.check_certificate` and
+  `reactive_pnp_369.Model`. Requires actual source certificate bytes
+  with a pinned digest and **exact** original 29×12 matrix, all 29
+  source-identified species, all 12 original reaction columns, 27
+  explicitly selected voxel compartments, original ionic valences,
+  each species diffusion and chemical reference, each reaction pair
+  of forward/reverse rates, energy/dielectric/mesh parameters and
+  explicit source-reference strings. No implicit zeros or synthetic
+  biological parameter fill.
+- The adapter reconstructs forward/back mass-action **gross**
+  substrate and product matrices from exact Rhea participant sides,
+  not the signed net `S` alone. This preserves species occurring on
+  both sides (e.g. unchanged catalyst) and checks net
+  `products - reactants = S.T` before passing to the original solver.
+- It explicitly rejects non-blocking exchanges, reactive electrodes,
+  multiple voxel compartments, unsupported boundary conditions,
+  missing/extra species or rates, incorrect ionic charge, nonfinite
+  parameters, and failed original detailed-balance checks.
+  Input source references are syntactic only; receipt flags remain
+  `parameter_sources_independently_authenticated=false`,
+  `original_rates_independently_measured=false`,
+  `physical_observer_commutation_proven=false`,
+  `agda_kernel_checked=false`.
+- `scripts/test_bh4_original_reactive_pnp_adapter.py` provides
+  a synthetic-only matrix fixture with strict negative controls and
+  original-gross-catalyst preservation regression. The fixture mocks
+  only the source certificate validator; it is NOT an authentic Rhea
+  acceptance, and no numerical tests have been run in this session.
+
+**Revised remaining maximum cut:** S0.01 acquired original Rhea bytes
+and actual 29×12/3 residual certificate; S0.02 physical parameters with
+separate independent source authentication; S0.03 source-paid charge or
+reservoir/electrode accounting; S0.04 detailed balance under actual units;
+P0.01 actual Poisson boundary-value existence/uniqueness;
+P0.02--04 source-selected original 54-bond SG and mass action;
+P0.05 positivity/existence of implicit coupled root;
+P0.06 rigorous dissipation with open-boundary work;
+P0.07 genuine six-face open/reactive boundary conditions;
+P0.08 physical reaction-transport state;
+P1.01--03 cross-branch BH4/PNP/tissue same-state observer commutation;
+P2 stochastic all-intervention lumpability and minimality;
+P3 independent original assay/longitudinal comparison; G0 Agda
+type-check and source-bound referee receipt. These remain OPEN.
+
+**Validation:** Source-written and committed to the existing BH4
+branch, *not kernel-checked or numerically executed in this session*.
+The adapter is a candidate constitutive interface and deliberately
+cannot complete the original physical law without authentic inputs.
