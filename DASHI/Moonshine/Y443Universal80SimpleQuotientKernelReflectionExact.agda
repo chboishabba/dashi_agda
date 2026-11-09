@@ -27,6 +27,7 @@ import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443JMDPowerFiveSixAlgebraExact as Algebra
 import DASHI.Moonshine.TwistedModuleModularity as TM
 import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as Actions
+import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as JMD
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
@@ -204,3 +205,45 @@ module Selected
       (w : U.Expr) →
       U._≈₈₀_ (Iso.fromSelected (I.eval w)) w
     presentedFromAfterTo = Iso.fromAfterTo
+
+
+------------------------------------------------------------------------
+-- DIRECT REUSE OF THE EXISTING ORIGINAL SELECTED JMD/VNATURAL OWNER.
+-- No parallel choice of G, no independent node map, and no rebuilt
+-- signed-word generation source. The three genuinely uninhabited
+-- sources (actual JMD selection, historical simplicity, moved state)
+-- remain visible.
+------------------------------------------------------------------------
+
+module OriginalSelectedJMDSource
+    {G : Set}
+    (source : JMD.PresentedY443VNaturalSource G) where
+
+  module Real = Selected
+    (JMD.groupWithInverse source)
+    (JMD.nodes source)
+    (JMD.relatorsHold source)
+
+  module FromHistoricalAndMovedState
+    (simple : Original80SimpleCongruenceAuthority)
+    (moved : Real.ActualSelectedNontrivialNode) where
+
+    originalKernelReflection : ∀ x y →
+      Real.I.eval x ≡ Real.I.eval y → U._≈₈₀_ x y
+    originalKernelReflection =
+      Real.simpleQuotientAndOneNonidentityNodeReflectsAllWords
+        simple moved
+
+    module SameJMD = Real.WithOriginalSources
+      simple moved (JMD.presentationSurjective source)
+
+    actualSelectedToAfterFrom :
+      (g : G) →
+      Real.I.eval (SameJMD.Iso.fromSelected g) ≡ g
+    actualSelectedToAfterFrom = SameJMD.selectedToAfterFrom
+
+    actualPresentedFromAfterTo :
+      (w : U.Expr) →
+      U._≈₈₀_
+        (SameJMD.Iso.fromSelected (Real.I.eval w)) w
+    actualPresentedFromAfterTo = SameJMD.presentedFromAfterTo
