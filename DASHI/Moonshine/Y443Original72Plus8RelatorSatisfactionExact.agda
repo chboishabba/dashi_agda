@@ -112,6 +112,55 @@ module UnderOriginalGroup
       (mergeAll (suc index) words
         (Pair._∧_.right left) right)
 
+
+  -- Generic exact source append transport: in particular the
+  -- historical 79 original double-Monster relators + the Ivanov
+  -- central quotient form the TRUE original 80 list.
+  appendSatisfied :
+    (left right : List Y.Word) →
+    Pair.RelatorsSatisfied gi nodes (Y._++_ left right) →
+    Pair.RelatorsSatisfied gi nodes left
+      × Pair.RelatorsSatisfied gi nodes right
+  appendSatisfied [] right h = tt , h
+  appendSatisfied (w ∷ ws) right h =
+    let rest = appendSatisfied ws right (Pair._∧_.right h)
+    in Pair._,,_ (Pair._∧_.left h) (proj₁ rest) , proj₂ rest
+
+  mergeAppendSatisfied :
+    (left right : List Y.Word) →
+    Pair.RelatorsSatisfied gi nodes left →
+    Pair.RelatorsSatisfied gi nodes right →
+    Pair.RelatorsSatisfied gi nodes (Y._++_ left right)
+  mergeAppendSatisfied [] right leftSatisfied rightSatisfied =
+    rightSatisfied
+  mergeAppendSatisfied (w ∷ ws) right leftSatisfied rightSatisfied =
+    Pair._,,_ (Pair._∧_.left leftSatisfied)
+      (mergeAppendSatisfied ws right
+        (Pair._∧_.right leftSatisfied) rightSatisfied)
+
+  -- This is the literal central f312 word from the original
+  -- published presentation; no invented centre or selected equality.
+  original79AndCentralFrom80 :
+    Pair.RelatorsSatisfied gi nodes Y.monsterRelators →
+    Pair.RelatorsSatisfied gi nodes Y.doubleMonsterRelators
+      × (Pair.evaluateCoxeterWord gi nodes
+          Y.centralInvolutionRelator ≡ Pair.identity gi)
+  original79AndCentralFrom80 source =
+    let split =
+          appendSatisfied Y.doubleMonsterRelators
+            (Y.centralInvolutionRelator ∷ []) source
+    in proj₁ split , Pair._∧_.left (proj₂ split)
+
+  original80From79AndCentral :
+    Pair.RelatorsSatisfied gi nodes Y.doubleMonsterRelators →
+    Pair.evaluateCoxeterWord gi nodes
+      Y.centralInvolutionRelator ≡ Pair.identity gi →
+    Pair.RelatorsSatisfied gi nodes Y.monsterRelators
+  original80From79AndCentral original79 central =
+    mergeAppendSatisfied Y.doubleMonsterRelators
+      (Y.centralInvolutionRelator ∷ [])
+      original79 (Pair._,,_ central tt)
+
   original80ImpliesOriginal72And8 :
     Pair.RelatorsSatisfied gi nodes Y.monsterRelators →
     Pair.RelatorsSatisfied gi nodes original72
@@ -170,3 +219,28 @@ module ExistingOriginalJMD
   recombinedSameOriginal80 =
     Split.original72And8ImplyOriginal80
       literalOriginal72Satisfied literalOriginal8Satisfied
+
+  literalOriginal79Satisfied :
+    Pair.RelatorsSatisfied
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) Y.doubleMonsterRelators
+  literalOriginal79Satisfied =
+    proj₁ (Split.original79AndCentralFrom80
+      (JMD.relatorsHold source))
+
+  literalOriginalCentralSatisfied :
+    Pair.evaluateCoxeterWord
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) Y.centralInvolutionRelator
+    ≡ Pair.identity (JMD.groupWithInverse source)
+  literalOriginalCentralSatisfied =
+    proj₂ (Split.original79AndCentralFrom80
+      (JMD.relatorsHold source))
+
+  reconstructedOriginal80From79AndCentral :
+    Pair.RelatorsSatisfied
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) Y.monsterRelators
+  reconstructedOriginal80From79AndCentral =
+    Split.original80From79AndCentral
+      literalOriginal79Satisfied literalOriginalCentralSatisfied
