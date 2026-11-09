@@ -91,32 +91,41 @@ calibratedMPBand 𝕂 c = record
 -- Evidence separation: a candidate signal does not itself promote a claim.
 ------------------------------------------------------------------------
 
-record PNFModePromotion (Candidate : Set) : Set₁ where
+-- The evidence predicates are chosen by the source-owning PNF authority,
+-- not invented as freely choosable Set fields by an arbitrary candidate.
+-- This is NOT a constructor for the separate numeric ABI promotion type:
+-- PNFSpectralNumericABICore explicitly proves that type empty.
+record PNFModeEvidence
+  (Candidate : Set)
+  (Source Structural Stability : Candidate → Set) : Set where
   field
     selectedCandidate : Candidate
-    SourceReceipt : Set
-    StructuralReceipt : Set
-    StabilityReceipt : Set
-    sourcePaid : SourceReceipt
-    structurePaid : StructuralReceipt
-    stabilityPaid : StabilityReceipt
+    sourcePaid : Source selectedCandidate
+    structurePaid : Structural selectedCandidate
+    stabilityPaid : Stability selectedCandidate
 
-open PNFModePromotion public
+open PNFModeEvidence public
 
 promotionRequiresSource :
-  {Candidate : Set} (p : PNFModePromotion Candidate) →
-  PNFModePromotion.SourceReceipt p
-promotionRequiresSource p = PNFModePromotion.sourcePaid p
+  {Candidate : Set} →
+  {Source Structural Stability : Candidate → Set} →
+  (p : PNFModeEvidence Candidate Source Structural Stability) →
+  Source (PNFModeEvidence.selectedCandidate p)
+promotionRequiresSource p = PNFModeEvidence.sourcePaid p
 
 promotionRequiresStructure :
-  {Candidate : Set} (p : PNFModePromotion Candidate) →
-  PNFModePromotion.StructuralReceipt p
-promotionRequiresStructure p = PNFModePromotion.structurePaid p
+  {Candidate : Set} →
+  {Source Structural Stability : Candidate → Set} →
+  (p : PNFModeEvidence Candidate Source Structural Stability) →
+  Structural (PNFModeEvidence.selectedCandidate p)
+promotionRequiresStructure p = PNFModeEvidence.structurePaid p
 
 promotionRequiresStability :
-  {Candidate : Set} (p : PNFModePromotion Candidate) →
-  PNFModePromotion.StabilityReceipt p
-promotionRequiresStability p = PNFModePromotion.stabilityPaid p
+  {Candidate : Set} →
+  {Source Structural Stability : Candidate → Set} →
+  (p : PNFModeEvidence Candidate Source Structural Stability) →
+  Stability (PNFModeEvidence.selectedCandidate p)
+promotionRequiresStability p = PNFModeEvidence.stabilityPaid p
 
 ------------------------------------------------------------------------
 -- Historical matrix-shape check only; not a spectral analysis receipt.
