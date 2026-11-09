@@ -22,6 +22,7 @@ from check_bh4_original_panel_spatial_events import (
     check_certificate, load_original_receipt_json,
 )
 from reactive_pnp_369 import Model
+from build_bh4_stoichiometric_matrix import participant_key
 
 _REQUIRED_PHYSICS = ("epsilon", "RT", "F", "h")
 _ALLOWED_BOUNDARY = {
@@ -129,11 +130,38 @@ def make_candidate(source_bytes: bytes, manifest: dict, *, pinned_sha256: str):
         _exact_keys(entry, ("value", "source_reference"), key)
         physics_values[key] = _finite_number(
             entry["value"], key, positive=key != "fixed_charge")
-    # Every finite reaction column has canonical consumed/produced counts.
-    reactants = np.maximum(-S.T, 0)
-    products = np.maximum(S.T, 0)
+    # Mass-action orders require original gross sides, not net S:
+    # unchanged catalysts may occur on BOTH sides of a Rhea equation.
+    reactants = np.zeros((12, 29), dtype=np.int64)
+    products = np.zeros((12, 29), dtype=np.int64)
+    species_pos = {key: i for i, key in enumerate(species)}
+    reaction_pos = {key: j for j, key in enumerate(reactions)}
+    seen_reactions = set()
+    for row in certificate["reactions"]:
+        if not row.get("formula_charge_ready"):
+            continue
+        rid = str(row.get("rhea_id", ""))
+        if rid not in reaction_pos or rid in seen_reactions:
+            raise ValueError("unmatched or duplicated original reaction")
+        seen_reactions.add(rid)
+        j = reaction_pos[rid]
+        for participant in row["participants"]:
+            key = participant_key(participant)
+            if key not in species_pos:
+                raise ValueError("unmatched original reaction participant")
+            coeff = int(str(participant.get("coefficient", 1)))
+            if coeff <= 0:
+                raise ValueError("nonpositive original reaction stoichiometry")
+            if participant.get("side") == "substrate":
+                reactants[j, species_pos[key]] += coeff
+            elif participant.get("side") == "product":
+                products[j, species_pos[key]] += coeff
+            else:
+                raise ValueError("untyped original reaction side")
+    if seen_reactions != set(reactions):
+        raise ValueError("original 12 reaction identities incomplete")
     if not np.array_equal(products - reactants, S.T):
-        raise AssertionError("original signed matrix orientation failure")
+        raise ValueError("original source participants disagree with signed S")
     model = Model(
         z=np.asarray(z, dtype=float), D=np.asarray(D, dtype=float),
         reactants=reactants, products=products,
