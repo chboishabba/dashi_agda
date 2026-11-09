@@ -157,3 +157,44 @@ physicalTrajectoryHasSourcePermittedRoute model (action ∷ rest) x =
     (permittedStepRoute model action x)
     (physicalTrajectoryHasSourcePermittedRoute model rest
       (physicalStep model action x))
+
+------------------------------------------------------------------------
+-- One SAME selected physical history with BOTH chemical and ionic
+-- projections. No independent BH4/PNP state histories are substituted.
+-- The source-specific physical step and both commuting squares remain
+-- explicit fields of SameSourceBH4PNPModel, not fabricated inhabitants.
+------------------------------------------------------------------------
+
+allBH4AndPNPControlledHistoriesSamePhysicalSource :
+  (model : SameSourceBH4PNPModel)
+  (actions : List Bool)
+  (x : PhysicalState model) →
+  (bh4Quantitative model (physicalRun model actions x)
+    ≡ bh4Run model actions (bh4Quantitative model x))
+  ×
+  (pnState model (physicalRun model actions x)
+    ≡ pnRun model actions (pnState model x))
+allBH4AndPNPControlledHistoriesSamePhysicalSource model actions x =
+  allBH4ControlledHistoriesSamePhysicalSource model actions x
+  , allPNPControlledHistoriesSamePhysicalSource model actions x
+
+-- The same selected source history also carries the actual permitted
+-- physical route. This is NOT the separate developmental 54-bond
+-- branch and does not assert those cross-branch types already agree.
+allSameSourceBH4PNPAndRoute :
+  (model : SameSourceBH4PNPModel)
+  (actions : List Bool)
+  (x : PhysicalState model) →
+  (bh4Quantitative model (physicalRun model actions x)
+    ≡ bh4Run model actions (bh4Quantitative model x))
+  ×
+  ((pnState model (physicalRun model actions x)
+    ≡ pnRun model actions (pnState model x))
+  ×
+  Spatial.FlowPath (Spatial.PermittedFlow (circulation model))
+    (locationOf model x)
+    (locationOf model (physicalRun model actions x)))
+allSameSourceBH4PNPAndRoute model actions x =
+  allBH4ControlledHistoriesSamePhysicalSource model actions x
+  , (allPNPControlledHistoriesSamePhysicalSource model actions x
+  , physicalTrajectoryHasSourcePermittedRoute model actions x)
