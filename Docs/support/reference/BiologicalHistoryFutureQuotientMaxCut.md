@@ -738,6 +738,40 @@ pass verified conservation for 21 initial source amounts
 through the three physical branches. Agda kernel and
 the committed regression scripts have NOT been run here.
 
+### 2026-11-09: stricter per-voxel native signed continuity regression
+
+The new `scripts/check_biological_369_local_charge_continuity.py`
+tests the **actual signed net-charge continuity at each of the
+27 original (x,y,z) voxels**. For each selected directed native
+bond and signed ion transfer, it independently computes physical
+inventory change and the signed incidence divergence, checking:
+
+```text
+Q_after(p) - Q_before(p) + div J(p) = q_external(p).
+```
+
+Only six original outer faces can carry external current;
+an unfilled physical source cannot move a fictitious ion.
+The test covers 27 starting points × 2 signs ×
+2 directions × 54 original bonds = **5,832 directed
+native transport events**, each checked on all 27 sites,
+plus a mixed internal/cation/anion boundary history
+and negative controls for fictional bonds/interior
+sources/unphysical negative inputs.
+
+This source-written Python regression is registered in
+the Round-23 gate; it has **not** been executed on the
+committed repository head here. Native Agda
+`Biological369CubicalOpenSignedChargeExact`
+currently proves **global** signed open boundary
+charge conservation, not yet the per-voxel local
+divergence equation. Thus the local regression is an
+implementation progress result for L04, **not a
+kernel-checked local PNP theorem**.
+Measured mobility, voltage/Poisson potential,
+boundary currents and original physical rates remain
+independent required gates.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
