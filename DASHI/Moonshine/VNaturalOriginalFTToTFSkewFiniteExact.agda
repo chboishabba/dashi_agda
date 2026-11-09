@@ -26,13 +26,13 @@ open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Integer.Base using (ℤ; +_; _+_)
 
 sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
 sym refl = refl
 
 trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl eq = eq
-open import Data.Integer.Base using (ℤ; +_; _+_)
 
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
 import DASHI.Moonshine.VNaturalOriginalPairedFourSectorModesExact as Paired
