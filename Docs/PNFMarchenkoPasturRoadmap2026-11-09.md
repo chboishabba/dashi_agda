@@ -104,3 +104,30 @@ Practical next cut: kernel-check the new finite module; implement exact finite s
 - S&P 500 correlation behaviour is not evidence that PNF has the same ensemble law.
 - dashiTRADE's 'eigen-event' classification is an action boundary, not literally a covariance eigenmode.
 - The new finite Agda file has not been accepted by Agda 2.9 in this environment.
+
+## 5. Economic strand retained from the supplied S&P 500 reel
+
+### Exact transcript assertions, not expanded claims
+The reel (00:00–00:55) asserts: (ECO-S1) most patterns in S&P 500 sample correlations fail its noise test; (ECO-S2) with an independent-stock idealized null, population correlations are identity and finite history spreads sample eigenvalues; (ECO-S3) shuffling stock-specific dates destroys cross-correlations and brings the spectrum to an MP-like noise curve; (ECO-S4) a few sector modes and a much larger market principal component exceed the noise edge; (ECO-S5) modes within the edge cannot be separated from null noise by that test; (ECO-S6) quants often clip noise-compatible eigenvalues to an average; and (ECO-S7) reducing correlation and lengthening history tends to collapse the observed spectrum toward one. These are the reel's explanatory assertions, not independent quantitative results validated by this PR.
+
+### Phase F — economics / quantitative-finance research [P1–P3; independent of PNF semantic promotion]
+
+F1 `stockReturnsCorrelationSameWindow`: OPEN. Explicit asset universe, return convention, missing observations, corporate actions, survival bias, and chronology.
+F2 `equicorrelationPopulationSpectrum`: OPEN. Derive for p assets with common off-diagonal correlation r the eigenvalues 1+(p−1)r and 1−r (multiplicity p−1), including PSD constraints and correct r→0 and p/T→0 interpretations. This provides exact algebraic meaning to the reel's final 'drop correlation' illustration, without confusing finite-sample MP with population spectra.
+F3 `independentReturnsNullSpectralCalibration`: OPEN. Compare iid MP, time-shuffled, block-shuffled and volatility-preserving controls; distinguish sample-vs-population statements and edge uncertainty.
+F4 `marketAndSectorModeIdentification`: OPEN. Determine whether empirical outliers map to broad market/sector exposures using independent sector labels and factor-model diagnostics, not merely large eigenvalues.
+F5 `economicCovarianceCleaningPreservesPSD`: OPEN. With a nonnegative spectral filter prove PSD of the reconstructed covariance; verify re-scaling/diagonal restoration where correlation matrices are required.
+F6 `cleaningImprovesOutOfSampleRiskForecast`: OPEN. Walk-forward covariance forecast versus raw sample, diagonal, shrinkage and factor-model benchmarks. Report realized portfolio variance, calibration, turnover and stability.
+F7 `portfolioRiskAndDiversificationBridge`: OPEN. Verify wᵀΣw risk, market-factor exposure, residual/sector exposure, effective diversification, and uncertainty of estimated minimum-variance weights.
+F8 `covariancePrecisionRegularisation`: OPEN. Establish invertibility/eigenvalue-floor requirements for covariance inversion; measure sensitivity of optimization to small eigenvalues, weight constraints and estimation error.
+F9 `riskVersusAlphaNonpromotion`: OPEN. A better risk estimator or eigenvalue outlier is not a return-predictive trading strategy; no claim of economic net surplus without held-out execution evidence.
+F10 `sameLedgerDashiTradeComparison`: OPEN. Compare unchanged Nashi policy with cleaned-covariance risk controller and MP market/sector regime feature; preserve support gates and action cost ledger, test friction, regimes and no-lookahead.
+F11 `temporalRegimeNonstationarity`: OPEN. Test changing covariance, rolling estimation horizon, regime-dependent factor loadings, and instability of MP calibration under dependence/heteroskedasticity.
+
+**Economic deliverables:** (i) a replayable returns-and-spectrum experiment matching the reel's S&P 500 claim if the original data, period and universe can be independently recovered; otherwise a separate, explicitly labelled independent example; (ii) MP-versus-permutation null diagnostics; (iii) PSD/correlation-cleaning receipts; (iv) walk-forward risk-forecast and portfolio allocation comparisons; (v) costed dashiTRADE ablation with no signal/promotion shortcuts.
+
+### Cross-domain comparison and non-identity
+Same matrix mathematics may be reused, but stock returns, PNF predicate activations and signed-residual graph/Laplacian weights are different measured objects with different nulls, semantics and admission owners. Economic market modes and PNF structural motifs are analogies, not the same objects. Portfolio-risk improvement does not prove PNF semantic truth; PNF spectral outliers do not prove economic alpha.
+
+### Updated priority / dependencies
+Run finite Gram/covariance proof A2–A6 and economic equicorrelation theorem F2 as parallel finite-theorem lanes. Then build exact MP law B1–B10. Economic F1/F3/F4 and PNF C1/C2/C3 must each pay separate data/null-model assumptions. Cleaning C5/F5 shares a generic PSD theorem but each needs its own diagonal/provenance contract. Economic risk validation F6–F8 does not depend on PNF semantic promotion D5. dashiTRADE F10/E1–E4 requires its own no-lookahead and action-cost receipts.
