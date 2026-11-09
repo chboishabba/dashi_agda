@@ -86,3 +86,77 @@
 4. Distinguish evidence statuses `FOUND`, `KERNEL`, `REUSED`, `BRIDGED`, `OBSERVED`, `ATTRIBUTED`, `OPEN`. Do not treat a passing browser screenshot or historical quote as kernel evidence.
 5. No unsolicited migration from Agda to Lean: the Agdas are the golden, Lean is a selected external source and interoperability lane.
 6. Keep current ESD surfaces untouched; reuse existing imports; no CI dependence for local verification; no Docker requirement.
+
+## 2026-11-09 correction: formal-first worlding and AO reconciliation
+
+**Priority correction:** Agda and Lean source declarations and checked proofs are **the primary/sole mathematical substrate**. Do **not** put SLR, PNF, embeddings, Rust, dashboards, or language-as-algebra extraction in the critical path to mathematical matching. Those are optional projections and indexes. The programme is **link → cross-pollinate → deduplicate → world** all source declarations, while preserving the difference between exact equality, definitional equality, proven equivalence, implication, reuse, conjectural analogy, and source-only resemblance.
+
+The objective is a provenance-indexed **formal declaration world**, not a flat list of repositories:
+
+`source repo + revision + file + declaration + type + universe parameters + hypotheses + axioms + imports + proof status`
+→ typed edges (`dependsOn`, `definitionallyEqual`, `provedEquivalent`, `implies`, `isTransportOf`, `sameSource`, `suggestedAnalogy`, `refutes`)
+→ reusable mathematical objects / explicit residual goals.
+
+**No semantic equivalence from hashes alone:** repository ID identifies a GitHub repository; blob SHA identifies bytes; declaration fingerprints identify normalized syntax only relative to an explicitly recorded Lean/Agda version, imports, elaboration context and normalization protocol. They cannot establish theorem equivalence without checked correspondence.
+
+### AO owners to reuse in Agda before introducing interfaces
+
+| Existing owner | Intended use |
+|---|---|
+| `DASHI/Core/ProofDebtRouterExact.agda` | classify the outstanding result: mathematics, formalization, source parity, missing data, or already-owned dependency |
+| `DASHI/Interop/ProofArchaeologyCoarseFineAdapterExact.agda` | coarse candidate identification followed by exact statement and hypothesis checks |
+| `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda` | source-specific proof-owner ledger |
+| `DASHI/Core/DependencyDerivedMinimalInvalidationBidiExact.agda` | affected dependents only when new proofs or revisions arrive |
+| `DASHI/Core/DependencyWeightedDiagnosisSchedulerBidiExact.agda` | prioritise shared blocker discharge |
+| `DASHI/Reasoning/AristotleSelectiveImplicationReopeningExact.agda` | selective implication/certificate reopening |
+| `DASHI/Interop/BroadMathProvenanceDependencyGraphExact.agda` | mathematical dependency and attribution graph |
+| `DASHI/Wikimedia/JmdLeanIntegratedMachineLineageExact.agda` | JMD source and cross-prover lineage |
+| `.autonomous-orchestrator/registry.json` | reuse assigned worker owners; no new orchestration substrate |
+
+These are **located source files**, not assertions of ready-made whole-corpus support. Kernel check and inspect their precise reusable signatures before extending anything.
+
+### Updated priorities and exact deliverables
+
+- **P0:** finish image→Agda declaration ownership; pin and validate both Lean corpus exports; inventory existing `dashi_agda` and `dashi_lean4` declarations and corresponding provenance.
+- **P1:** build declaration-level import/assumption/proof-dependency edges directly from elaborated Lean and parsed/checked Agda. Avoid treating repo names, theorem names, or README descriptions as proofs.
+- **P2:** partition duplicate claims into `same bytes`, `same AST under context`, `same mathematical statement`, `one implies other`, `transport with proof`, or `unverified candidate`. Keep all source identities and licenses.
+- **P3:** world the connected components: canonical mathematical referent (where justified), every original declaration, exact transport paths, unsatisfied hypotheses and affected downstream lemmas. Never quotient by an unproved equivalence.
+- **P4:** AO search and reuse across components, trace shortest justified proof dependencies, select highest shared missing lemma, then kernel-check in the owner language. Agda adjudicates DASHI; Lean adjudicates source Lean. The cross-prover relation itself needs an explicit theorem/interpretation check.
+- **P5:** optional SLR/PNF/Blaze interfaces for presentation/navigation and runtime observation, **not** formal-proof authority.
+
+**Exact remaining bridge contracts (proposed signatures, not discharged lemmas):**
+`leanDeclarationExtractMatchesElaboratedType`;
+`agdaDeclarationExtractMatchesKernelCheckedType`;
+`assumptionClosurePreservedUnderCrossLanguageBridge`;
+`sameNormalizedSyntaxRequiresSameContext`;
+`provedEquivalentDeclarationsCanBeSafelyWorlded`;
+`unprovedAnalogyNeverPromotedToEquivalence`;
+`sourceProvenanceSurvivesWorldDedup`;
+`foreignProofDischargesOnlyMatchedGoal`;
+`minimalDependencyReopeningAfterCorpusUpdate`;
+`existingOwnerDominatesNewConstruction`.
+
+### Live corpus correction
+
+At this tranche, JMD's **starred repositories** export is reported committed in `dashi_lean4` PR #105 with **8,764** total and **1,996** Lean-primary-language starred repositories. The **independent GitHub-wide** Lean search displayed **20.4k** results in the user's latest observation; the separately running partitioned collector had previously reported **16,604** unique entries at 178 pages / 27 partitions. These are distinct observation instants/scopes, not a discrepancy that may be erased by changing one count into the other. GitHub search results are mutable.
+
+### First-page GitHub-wide Lean triage (2026-11-09)
+
+These ten repositories were located as public, non-archived GitHub repositories. This is **repository discovery only**; no theorem signatures, Lean build receipts or mathematical equivalences are asserted.
+
+| Repository | Candidate formal-work lane | Next evidence required |
+|---|---|---|
+| `VladimirMarko/conaled` | unknown pending source inspection | inspect `lakefile`, declarations and domain |
+| `itakura-hidetoshi/4d-mass-gap` | candidate Yang–Mills / mass-gap comparison | inspect exact 4D hypotheses and independence of source proofs; no Clay promotion |
+| `TauCetiProject/TauCetiRoadmapJobs` | roadmap/worker coordination | distinguish task metadata from verified Lean declarations |
+| `grwtsk/math` | mathematical discovery/provenance | pin actual theorem statements, proof status and imports |
+| `emberian/minidregg` | zk/fhe/effect semantics candidate | inspect exact structures and theorems |
+| `the-omega-institute/trureturing` | automated discovery and proof frontiers | inspect checked theorem objects versus discovery metadata |
+| `scottnarmstrong/KAM-dev` | KAM analytic dynamics | discover exact positive-measure KAM lemma signatures |
+| `TauCetiProject/TauCetiRoadmap` | human/AI Lean task routing | keep roadmap tasks distinct from proof declarations |
+| `Verified-zkEVM/PolyFun` | polynomial functors, interaction trees, algebraic effects | direct high-alpha match candidate for JMD syntax/laws/handlers; theorem-by-theorem comparison required |
+| `SolidiKeY/solidity-lean` | executable semantics and formal compiler contracts | identify language semantics/verified correspondence, not runtime claims |
+
+**Highest-alpha first-page cross-pollination candidate:** `Verified-zkEVM/PolyFun` ↔ JMD's program syntax/laws/handlers ↔ existing DASHI program-semantics/effects machinery. **Highest-risk overclaim:** `itakura-hidetoshi/4d-mass-gap` is only a candidate comparison; repo name cannot discharge YM E1/D1/D2/N1/G1.
+
+Reference: https://github.com/search?q=lang%3Alean&type=repositories&s=updated&o=desc . User-provided 20.4k display is not a stable GitHub-wide count.
