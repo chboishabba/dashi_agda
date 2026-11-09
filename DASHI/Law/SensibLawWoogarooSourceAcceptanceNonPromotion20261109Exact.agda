@@ -59,10 +59,7 @@ original20198575HashEncodingCannotProveAgencyAcceptance
 -- An independent receipt requires a same-document authority link,
 -- approval action, revision and actual source bytes. No constructor
 -- for those receipt fields is fabricated here.
-record OriginalAgencyAcceptanceReceipt : Set where
-  field
-    originalDocumentSHA256 : Set
-    originalSignedConditionJoin : Set
-    originalAgencyProvenanceJoin : Set
+data OriginalAgencyAcceptanceReceipt : Set where
 
--- The record above names proof obligations, not achieved receipts.
+-- No constructor: this declaration is a deliberately UNPAID
+-- evidence obligation, not a vacuous, filled receipt or a postulate.
