@@ -404,8 +404,9 @@ def global_positive_implicit_brouwer_bounds(c0,m,conserved_weights,dt):
     w=np.asarray(conserved_weights,dtype=float)
     if c0.shape!=(27,len(m.z)) or not np.all(np.isfinite(c0)) or np.any(c0<=0):
         raise ValueError("strictly positive original 27-site initial state required")
-    if w.shape!=(len(m.z),) or not np.all(np.isfinite(w)) or np.any(w<=0):
-        raise ValueError("each molecular species needs strictly positive conserved weight")
+    if (w.shape!=(len(m.z),) or not np.all(np.isfinite(w))
+            or np.any(w<=0) or not np.all(w==np.floor(w))):
+        raise ValueError("each species requires a positive integer source-conserved atom weight")
     if not np.isfinite(dt) or dt<=0:
         raise ValueError("positive finite original physical timestep required")
     # Integer or exact positive weights are required for the mathematical
