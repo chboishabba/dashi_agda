@@ -212,3 +212,63 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def check_original_closed_inventory(
+    source_bytes: bytes, pinned_sha256: str,
+    before: np.ndarray, after: np.ndarray, *, atol: float = 1e-8,
+):
+    """Numerically audit original Rhea CHNOP/charge inventory after a step.
+
+    Checks the real original-panel certificate again; a candidate time step
+    cannot inherit atom/charge validity from synthetically named species.
+    Finite floating-point tolerance is an audit, not an Agda equality proof.
+    """
+    if not isinstance(source_bytes, bytes):
+        raise ValueError("original source bytes required")
+    digest = hashlib.sha256(source_bytes).hexdigest()
+    if not isinstance(pinned_sha256, str) or digest != pinned_sha256.lower():
+        raise ValueError("original source digest mismatch")
+    if not isinstance(atol, (int, float)) or isinstance(atol, bool):
+        raise ValueError("finite nonnegative audit tolerance required")
+    if not math.isfinite(float(atol)) or atol < 0:
+        raise ValueError("finite nonnegative audit tolerance required")
+    certificate = load_original_receipt_json(source_bytes.decode("utf-8"))
+    matrix, by_species = check_certificate(certificate, full_panel=True)
+    species = matrix["species_index"]
+    a = np.asarray(before, dtype=float)
+    b = np.asarray(after, dtype=float)
+    if a.shape != (27, len(species)) or b.shape != a.shape:
+        raise ValueError("same complete original 27x29 concentration chart required")
+    if not np.all(np.isfinite(a)) or not np.all(np.isfinite(b)):
+        raise ValueError("nonfinite original state concentrations")
+    if np.any(a < 0) or np.any(b < 0):
+        raise ValueError("negative original source concentration")
+    elements = ("C", "H", "N", "O", "P")
+    atom_matrix = np.asarray([
+        [by_species[key][0].get(el, 0) for el in elements]
+        for key in species
+    ], dtype=float)
+    charge = np.asarray([by_species[key][1] for key in species], dtype=float)
+    if np.any(~np.isfinite(atom_matrix)) or not np.all(np.isfinite(charge)):
+        raise ValueError("invalid original molecular formula or charge")
+    # Rates are concentration per volume. Uniform h^3 cancels from the
+    # equality comparison; this checks relative inventory, not mole amounts.
+    delta = np.sum(b - a, axis=0)
+    atom_defect = delta @ atom_matrix
+    charge_defect = float(delta @ charge)
+    max_defect = max(float(np.max(np.abs(atom_defect))), abs(charge_defect))
+    if max_defect > float(atol):
+        raise ValueError("source-specific closed CHNOP/charge audit failed")
+    return {
+        "source_sha256": digest,
+        "original_species_count": len(species),
+        "voxel_count": 27,
+        "atom_inventory_defect": dict(zip(elements, map(float, atom_defect))),
+        "charge_inventory_defect": charge_defect,
+        "max_inventory_defect": max_defect,
+        "numerical_tolerance": float(atol),
+        "numerical_candidate_only": True,
+        "agda_kernel_checked": False,
+        "independent_source_authenticated": False,
+    }
