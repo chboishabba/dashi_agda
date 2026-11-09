@@ -186,13 +186,20 @@ fuelGreedyOriginal19PackingFullLength degree marked distinct =
 -- selector, not arbitrary symbolic machine fuel.
 ------------------------------------------------------------------------
 
+fuelGreedyOriginalEmpty :
+  ∀ {n} (fuel : Nat) →
+  fuelGreedyOriginalDisjointStars fuel ([] {Original.Bond n}) ≡ []
+fuelGreedyOriginalEmpty zero = refl
+fuelGreedyOriginalEmpty (suc fuel) = refl
+
 fuelGreedyOriginalExtraFuelStable :
   ∀ {n} (fuel extra : Nat)
     (marked : List (Original.Bond n)) →
   Source.length marked ≤ fuel →
   fuelGreedyOriginalDisjointStars (fuel + extra) marked
     ≡ fuelGreedyOriginalDisjointStars fuel marked
-fuelGreedyOriginalExtraFuelStable zero extra [] lengthBound = refl
+fuelGreedyOriginalExtraFuelStable zero extra [] lengthBound =
+  fuelGreedyOriginalEmpty extra
 fuelGreedyOriginalExtraFuelStable zero extra (a ∷ as) () 
 fuelGreedyOriginalExtraFuelStable (suc fuel) extra [] lengthBound = refl
 fuelGreedyOriginalExtraFuelStable (suc fuel) extra (a ∷ as)
