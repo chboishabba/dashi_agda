@@ -27,11 +27,17 @@ def analyse_dual(rows: list[dict], focus: str, intervention_date: str,
                  synthetic_fixture: bool = False) -> dict:
     if not rows:
         raise ValueError("No actual article rows")
+    reviewer_panel = None
     for row in rows:
         if not DUAL_REQUIRED <= row.keys():
             raise ValueError("Second independent coding receipt required")
         if not row["second_coder_id"] or row["second_coder_id"] == row.get("coder_id"):
             raise ValueError("Coding must be independently attributed")
+        panel = (row.get("coder_id"), row["second_coder_id"])
+        if reviewer_panel is None:
+            reviewer_panel = panel
+        if panel != reviewer_panel:
+            raise ValueError("Pooled Scott pi requires a stable ordered reviewer panel")
         if not row["second_review_receipt"] or row["second_frame"] not in base.FRAMES:
             raise ValueError("Second coding source and valid frame required")
         if not synthetic_fixture and "SYNTHETIC" in str(row["second_review_receipt"]).upper():
@@ -100,6 +106,9 @@ def analyse_dual(rows: list[dict], focus: str, intervention_date: str,
         "descriptive_did_coder2": second["descriptive_difference_in_differences"],
         "descriptive_did_partial_coding_interval":
             [round(did_lower, 6), round(did_upper, 6)],
+        "historical_original_authenticity_established": False,
+        "reviewer_independence_authenticated": False,
+        "stable_ordered_reviewer_panel": list(reviewer_panel),
         "causal_effect": None,
         "causal_attribution": "NOT_IDENTIFIED",
         "interpretation": "Agreement and finite coding-ambiguity bounds; no sampling, outlet-cluster, time-series or causal confidence interval",
@@ -156,6 +165,22 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("Same person given two independent coding roles")
+        bad = [dict(r) for r in rows]
+        bad[0]["second_coder_id"] = "fixture-reviewer-C"
+        try:
+            analyse_dual(bad, "science_uncertainty", **kwargs)
+        except ValueError as e:
+            assert "stable ordered reviewer panel" in str(e)
+        else:
+            raise AssertionError("Reviewer-panel drift admitted into pooled agreement")
+        bad = [dict(r) for r in rows]
+        bad[0]["coder_id"] = "fixture-reviewer-C"
+        try:
+            analyse_dual(bad, "science_uncertainty", **kwargs)
+        except ValueError as e:
+            assert "stable ordered reviewer panel" in str(e)
+        else:
+            raise AssertionError("First reviewer-panel drift admitted")
         bad = [dict(r) for r in rows]
         bad[0]["source_sha256"] = "a" * 64
         try:
