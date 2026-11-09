@@ -296,3 +296,23 @@ The Cambridge primary HTML was read directly and source descriptions in the ledg
 - Browser transcriptions are *unverified source manifestations*, not authenticated court-issued byte artifacts; bibliographic references do not prove claim truth, applicability or legal authority.
 
 **Remaining K1–K3:** authentic opinion image or official-source manifestation matching; Crenshaw passage-to-case interpretation receipts; source-bound case issue and separate relief/merits labels; independently consented fatigue evidence (none supplied); comparative justification and true negative controls. User explicitly excludes K0 and K4 from immediate work.
+
+## Eighth pass — source-owned legal case gate and admission receipts
+
+Committed:
+- DASHI/Governance/CrenshawLegalIssueReceiptExact.agda: ExternalCaseChecks, AuthenticatedCasePassage, authenticatedRequiresOriginalArtifact, authenticatedRequiresPassageCorrespondence, authenticatedRequiresContraryReasonReview, unverifiedLocatorCannotAdmitDistrictHolding, unverifiedLocatorCannotAdmitJefferiesHolding.
+- docs/roadmaps/2026-11-09-crenshaw-case-source-ledger.md: issue-bounded links and attribution ownership for Crenshaw's **three featured 1989 cases** (DeGraffenreid, Moore, Payne) plus separately sourced DASHI comparator Jefferies.
+
+K3 finite proof terms now source-written in this branch:
+deGraffenreidTrialVsAppealClaimSameCase;
+jefferiesIntersectionalRecognitionPositiveControl;
+jefferiesRecognisedNotProved;
+mooreClassRepresentationNotClaimIdentity;
+payneReliefNotEquivalentToRepresentationScope;
+crenshawLegalCrossCaseCut;
+unverifiedLocatorCannotAdmitDistrictHolding;
+unverifiedLocatorCannotAdmitJefferiesHolding.
+
+**No further abstract witness is sufficient to close K2 empirical exhaustion**: direct independently gathered evidence of exhaustion is still lacking. In particular, court proceedings and legal grievances may establish workload and access barriers, but not psychological fatigue, malign intent, or institutional causality automatically.
+
+K1 textual source provenance is at the publisher-record/opinion-transcription level, not authenticated original artifact and independently reviewed passage interpretations. K3 has a four-case case-issue formal comparison, but external source-authentication receipts remain unpaid. No claim of Agda acceptance (K0 was explicitly excluded). ESD and canonical donor files were not edited.
