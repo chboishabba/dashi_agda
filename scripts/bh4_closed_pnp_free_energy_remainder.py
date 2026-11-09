@@ -43,6 +43,8 @@ def remainder_receipt(before, after, dt, model):
     energy_change = float(free_energy(c1, phi1, model)
                           - free_energy(c0, phi0, model))
     residual_work = model.h**3 * float(np.sum(mu1*defect))
+    residual_work_bound = (model.h**3 * float(np.sum(np.abs(mu1)))
+                           * float(np.max(np.abs(defect))))
     reconstructed = (dt*(power["transport_power"]+power["reaction_power"])
                      + residual_work - chemical_gap - electrostatic_gap)
     if not np.all(np.isfinite([energy_change,reconstructed,chemical_gap,
@@ -56,6 +58,8 @@ def remainder_receipt(before, after, dt, model):
         "chemical_bregman_gap": float(chemical_gap),
         "electrostatic_bregman_gap": float(electrostatic_gap),
         "residual_work": float(residual_work),
+        "residual_work_absolute_bound": float(residual_work_bound),
+        "energy_change_upper_bound": float(dt*(power["transport_power"]+power["reaction_power"]) + residual_work_bound),
         "implicit_residual_max": float(np.max(np.abs(defect))),
         "root_existence_proven": False,
         "original_source_parameters_authenticated": False,
