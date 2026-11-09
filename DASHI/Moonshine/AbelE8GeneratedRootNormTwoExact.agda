@@ -1,0 +1,100 @@
+module DASHI.Moonshine.AbelE8GeneratedRootNormTwoExact where
+
+------------------------------------------------------------------------
+-- GENUINE FINITE E8 ROOT NORM CERTIFICATE
+--
+-- The upstream indexed E8 root generator uses coordinates
+--    -1, -1/2, 0, +1/2, +1
+-- (native HalfTritIndexed). For doubled coordinates, their exact
+-- integer squares are 4,1,0,1,4.
+--
+-- Every enumerated root has sum of doubled-coordinate squares = 8,
+-- hence original Euclidean squared norm = 8/4 = 2.
+--
+-- The Boolean exhaustive check is paired with an inductive proof
+-- lifting it to every item. This does NOT characterize ALL vectors
+-- of the genuine E8 lattice or prove theta_E8 = E4.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; zero; _+_)
+open import Data.List.Base using (List; []; _∷_)
+open import Data.Vec using (Vec; []; _∷_)
+open import Relation.Nullary using (yes; no)
+import Data.Nat.Properties as NatP
+
+import DASHI.Algebra.Trit.HalfTritIndexed as Indexed
+import DASHI.Algebra.Trit.E8RootEnumeration as E8
+
+doubledCoordinateSquare : Indexed.HalfTritIndexed → Nat
+doubledCoordinateSquare Indexed.indexedNegOne = 4
+doubledCoordinateSquare Indexed.indexedNegHalf = 1
+doubledCoordinateSquare Indexed.indexedZero = 0
+doubledCoordinateSquare Indexed.indexedPosHalf = 1
+doubledCoordinateSquare Indexed.indexedPosOne = 4
+
+doubledSquaredNorm : ∀ {n} → Vec Indexed.HalfTritIndexed n → Nat
+doubledSquaredNorm [] = zero
+doubledSquaredNorm (coordinate ∷ rest) =
+  doubledCoordinateSquare coordinate + doubledSquaredNorm rest
+
+-- Root square length=2 is represented without rational arithmetic
+-- by the provably equivalent integer relation 4 * ||root||² = 8.
+data AllDoubledNormEight : List E8.E8IndexedRootCarrier → Set where
+  allNil : AllDoubledNormEight []
+  allCons :
+    ∀ {root rest} →
+    doubledSquaredNorm root ≡ 8 →
+    AllDoubledNormEight rest →
+    AllDoubledNormEight (root ∷ rest)
+
+allNormEightCheck : List E8.E8IndexedRootCarrier → Bool
+allNormEightCheck [] = true
+allNormEightCheck (root ∷ rest) with NatP._≟_ (doubledSquaredNorm root) 8
+... | yes _ = allNormEightCheck rest
+... | no _ = false
+
+allNormEightCheckSound :
+  (roots : List E8.E8IndexedRootCarrier) →
+  allNormEightCheck roots ≡ true →
+  AllDoubledNormEight roots
+allNormEightCheckSound [] _ = allNil
+allNormEightCheckSound (root ∷ rest) valid
+  with NatP._≟_ (doubledSquaredNorm root) 8
+... | yes normEq = allCons normEq (allNormEightCheckSound rest valid)
+... | no notEq with valid
+...   | ()
+
+generatedE8NormEightCheckIsTrue :
+  allNormEightCheck E8.combinedIndexedRoots ≡ true
+generatedE8NormEightCheckIsTrue = refl
+
+generatedE8RootsAllHaveNormTwo :
+  AllDoubledNormEight E8.combinedIndexedRoots
+generatedE8RootsAllHaveNormTwo =
+  allNormEightCheckSound
+    E8.combinedIndexedRoots
+    generatedE8NormEightCheckIsTrue
+
+integerGeneratedE8NormEightCheckIsTrue :
+  allNormEightCheck E8.integerIndexedRoots ≡ true
+integerGeneratedE8NormEightCheckIsTrue = refl
+
+halfGeneratedE8NormEightCheckIsTrue :
+  allNormEightCheck E8.halfIndexedRoots ≡ true
+halfGeneratedE8NormEightCheckIsTrue = refl
+
+integerGeneratedE8RootsAllHaveNormTwo :
+  AllDoubledNormEight E8.integerIndexedRoots
+integerGeneratedE8RootsAllHaveNormTwo =
+  allNormEightCheckSound
+    E8.integerIndexedRoots
+    integerGeneratedE8NormEightCheckIsTrue
+
+halfGeneratedE8RootsAllHaveNormTwo :
+  AllDoubledNormEight E8.halfIndexedRoots
+halfGeneratedE8RootsAllHaveNormTwo =
+  allNormEightCheckSound
+    E8.halfIndexedRoots
+    halfGeneratedE8NormEightCheckIsTrue
