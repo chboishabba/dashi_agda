@@ -165,3 +165,25 @@ Added `tools/epistemic-power/check-golden.sh` at commit `0e082a0de1edaa698a9768b
 GitHub connector static source audit for all seven new Agda modules: module header/path match 7/7; no visible `postulate` declarations 7/7; no `= ?` or `: ?` holes 7/7; no unsafe OPTIONS pragma 7/7. **This does not establish syntax, scope, termination, positivity, universe or definitional equality checks.**
 
 Remaining exact blockers are K0 executable/kernel receipts, K1 cryptographically grounded primary subspans and interpretation adjudication, K2 genuinely observed fatigue and causal context, K3 original audited ESD/cognitive warfare histories, and K4 Golden and ITIR selective-reopening replay. The new contextual cost-payoff theorem is explicitly a constructed countermodel, not a diagnosis or an observation.
+
+## Fifth implementation pass — positive observer repair and tetralemma reuse (2026-11-09)
+
+**New source files (branch/PR #1479):**
+- `EpistemicPowerMinimalObserverRepairExact.agda`: `repairedInclusionQueryAdequate`, `repairedLandQueryAdequate`, `repairedSovereigntyQueryAdequate`; `landOnlyCannotAnswerSovereignty`, `sovereigntyOnlyCannotAnswerLand`; `landRechartCannotRecoverSovereignty`, `sovereigntyRechartCannotRecoverLand`, `finiteMinimalObserverRepair`. **Interpretation:** The selected *finite* two-coordinate observer answers three deliberately restricted Boolean queries. Neither coordinate alone answers the other. This does not prove a uniquely minimal observer among all encodings nor offer a substantive metric of Indigenous sovereignty.
+- `EpistemicPowerTetralemmaBridgeExact.agda`: `statusPositionRoundTrip`, `positionStatusRoundTrip`, `matchesExistingPolarAssessment`, `firstOrderReportCannotRecoverSecondOrderModel`, `firstOrderRechartCannotRecoverSecondOrderModel`. Reuses `DASHI.Algebra.TetralemmaBridge` and `DASHI.Algebra.DisagreementFourViewBoundary`; finite carrier alignment **does not identify** its philosophical semantics with historical catuṣkoṭi or reduce second-order subject models to polar truth statuses.
+- `EpistemicPowerCrossDomainCapstoneExact.agda` now composes both new owners.
+- `tools/epistemic-power/check-golden.sh` now enumerates **nine** Agda modules to check with the canonical pinned Agda 2.9 environment.
+
+**Verification:** No Agda binary or Nix executable was present in the available container; direct git cloning failed on DNS. The GitHub connector can commit source but cannot provide a kernel proof receipt. All newly authored lemmas remain **SOURCE-WRITTEN, NOT KERNEL-ACCEPTED**. No CI or Golden acceptance is asserted.
+
+**Next terminal cut (non-duplicative):**
+
+| Rank | Gate | Exact remaining artifact and acceptance criterion |
+|---|---|---|
+| 0 | K0 | Run `bash tools/epistemic-power/check-golden.sh` in repo's pinned Agda 2.9 environment; repair first failing declaration and repeat across nine modules; import into Golden only after kernel acceptance |
+| 1 | K1 | `sourceMatchedSattaSubspan`, `sourceMatchedTuckYangSubspan`: primary PDF/HTML version, digest, exact source offsets, quotation limits, reviewer-validated interpretive alignment. Current `SourceBoundReading` uses only `passageLocated` |
+| 2 | K2 | `observedFatigueAndCapacitySameHistory`: independent, appropriately consented observations and a nontrivial mapping from finite model cost to evidence, with uncertainty and alternative explanations |
+| 3 | K3 | `originalESDCaseHistoryCountermodel`: source-traceable decisions, participants, land/authority material outcomes, provenance and legitimate demanding-review negative controls |
+| 4 | K4 | `itirSelectiveReopenReplay`: PNF/SLR claim authority and lineage controls, idempotence, unaffected-cases negative controls and canonical runtime receipts |
+
+**Do not re-prove** `IntersectionalNonFactorability.rechartingCannotRecoverErasedPhenomenon`, `LacanIrigarayTernaryGrammarBridgeExact.noTernaryRelabellingPreservesGrammar`, `TrialecticAttachedTwoCellExact.attachedFaceDoesNotFactorThroughBoundary`, or the existing tetralemma/four-view alignment. They are reused as imported proof owners.
