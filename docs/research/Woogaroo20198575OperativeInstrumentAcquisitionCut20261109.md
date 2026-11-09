@@ -36,6 +36,18 @@ The published source arithmetic is \`123.0+8.2+1.2+2.5=134.9\`. Also \`162.3-27.
 
 **Additional exact bound:** Phase One is **56.4 ha** in Attachment A1. The signed 134.9-ha footprint exceeds Phase One by **78.5 ha** of differently phased footprint, not itself proof of clearing outside Phase One. This prevents conflating the declaration triggers.
 
+
+
+## 2A. Operative habitat-clearance caps and additional retention invariant
+
+**CRITICAL correction:** the signed **Annexure A condition 4** does not leave the 128-ha number as a mere January preliminary OAG modelling input. It expressly requires the approval holder **not to clear more than 128 ha of Koala habitat, 128 ha of Grey-headed Flying-fox habitat, 128 ha of Swift Parrot habitat and 128 ha of Regent Honeyeater habitat**, and **0.77 ha of Collared Delma habitat**. These are **separate species-habitat limits** and cannot be summed as if disjoint. Condition 1 bars action/clearing/construction outside the action area; condition 2 bars action/clearing/construction within the 27.3-ha *retention area*; condition 3 prohibits clearing/construction within LRSA TEC buffer zone. All are binding separately.
+
+Thus the signed defined footprint is **134.9 ha** and the species habitat-clearance cap is **128 ha**, a **6.9-ha printed area difference** requiring GIS category/phase explanation—not proof of omitted offset, and no assumption that all development footprint land is protected koala habitat. The original Jan OAG happened also to use 128 ha, but this number is independently **binding in the signed operative C4**. Do not say 128 ha is "only historical".
+
+Furthermore, condition 4 with the signed Attachment C2 **162.3-ha mapped koala habitat within Action area** implies **at least 34.3 ha mapped koala habitat uncleared** if that map and cap are compared on a common area basis. The A2 *retention area* is **27.3 ha**; even assuming all 27.3 ha overlaps koala habitat, **at least 7.0 ha of koala habitat beyond that retention area must remain uncleared**. The exact habitat polygon, permitted/forbidden clearing footprints, rounding and species-habitat areas still require original spatial overlay. The arithmetic does NOT prove that any vegetation was cleared, a breach happened or a specific extra parcel was physically protected. These are **source-conditional spatial-accounting constraints for subsequent GIS and dated clearing evidence**.
+
+**Source counterfactual priority:** test the independent QUT/QCC and experienced local professional concerns about clearing ~134–136 ha against signed 134.9-ha development footprint **and** the legally operative C4 128-ha *species-habitat* ceilings, not the old assumption that 128 and 134.9 must denote identical land objects.
+
 ## 3. Immediate statutory / evidence-conditioned dates and gating
 
 **Condition 24:** before *any Action commencement*, **both Avonvale and Esk** offset sites must have genuine Queensland Voluntary Declarations; source-specific date and registered title/plan must be received. After declaration, evidence due to agency within 5 business days and shapefiles within 20 business days under its subclauses. Not proof they were or were not made.
