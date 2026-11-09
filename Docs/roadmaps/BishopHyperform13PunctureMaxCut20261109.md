@@ -47,3 +47,53 @@ B-P0 terminal Bishop log and source above-two zeta are source-written in their e
 4. B-P1 analytic same-object exp/atan Cayley identity; then B-P2 source zeta and B-P3 Gamma/Xi.
 
 Record actual commit IDs and update states after every source implementation; **no synthetic postulates** or record fields asserting the result without construction.
+
+
+## Execution receipt: source-written H0/H1/H2, 2026-11-09
+
+The implementation follows the initial maximum cut above. It is *not* a proof of full semantic completion or kernel acceptance.
+
+### Source modules and completed *source-level* lemmas
+
+1. `DASHI/Foundations/TernaryThirteenFibreSplitExact.agda`
+   - `splitTritAfterJoin`, `joinTritAfterSplit`: general inverse laws on actual finite length-indexed trit words.
+   - `ternaryThirteenSplitTwelvePlusOne`, `ternaryThirteenJoinTwelvePlusOne`;
+     `ternaryThirteenSplitRoundTrip`, `ternaryThirteenJoinRoundTrip`.
+   - `ternaryThirteenSplitNineThreeOne`, `ternaryThirteenJoinNineThreeOne`;
+     `ternaryNineThreeOneSplitRoundTrip`, `ternaryNineThreeOneJoinRoundTrip`.
+   - H0.01–H0.03: **SOURCE**.
+2. `DASHI/Foundations/TernaryThirteenFibrePunctureExact.agda`
+   - `centralCoordinateZeroSection` and `centralCoordinateZeroSectionSplit`.
+   - `nonzeroFromNotNeutralRoundTrip` and `nonzeroToFromNotNeutral`.
+   - `centralCoordinatePunctureComplement`, `centralCoordinatePunctureSplit`,
+     `centralPunctureSplitRoundTrip`, `centralPunctureJoinRoundTrip`.
+   - `lastCoordinatePunctureImpliesGlobalPuncture` and
+     `globalPunctureDoesNotForceLastPuncture`: explicit counterexample to the reverse implication.
+   - H1.02–H1.04: **SOURCE on the constructed word carrier**.
+3. `DASHI/Foundations/TernaryThirteenFibreObserverNonDescentExact.agda`
+   - `centralPunctureObserverDescent`: any map factoring the selected final-coordinate consumer through the 12-prefix observer is impossible, by two explicit 13-words.
+   - H2.01: **SOURCE for the constructed prefix observer**; the original 12-axis semantic observer is not yet identified.
+4. The three canonical `EverythingTOESymmetryResolved369`, `Unifier`, `Unified/Everything` import roots now import these modules.
+
+### Revised *decisive* unpaid maximum cut
+
+| Priority | ID | Exact next mathematical obligation | State |
+|---|---|---|---|
+| P0 | H1.01 | `centralCompletionIsThirteenTritFibre`: build/select the source semantic completion *carrier* (currently only `centralCompletionGroupOrderPattern : Nat` is present) and prove actual equivalence with the trit word model | OPEN |
+| P0 | H2.01-source | `originalCentralPunctureObserverDescent`: transport the non-descent witnesses through actual source observer and consumer identifications | OPEN |
+| P0 | H2.02 | `centralPunctureGluingCompatibility`: construct original site/refinement morphisms and the commuting condition for the particular central complement | OPEN |
+| P1 | B-P1.01–05 | Original nested Bishop exp/atan finite coefficient identity; absolute evaluation; half-ball Cayley; then genuine five and 239 point witnesses | OPEN |
+| P2 | B-P2.02–04 | source canonical power, independently selected zeta semantic identity, analytic equality | OPEN |
+| P3 | B-P3.01–07 | Gamma Mellin, continuation, functional equation and completed Xi | OPEN |
+
+New code is a **constructed trit-word model**. `Rank.fixedTernaryProfileCount rank13 = 1594323` and `Rel.centralCompletionGroupOrderPattern = 1594323` remain original count identities, not a claimed carrier equality. The new two puncture notions are distinct. The proposed original thirteenth-coordinate puncture remains a semantic question, not an established consequence of the count.
+
+### Source commit receipts
+
+- roadmap created: `17be788`
+- generic typed factorisations: `3c29724`
+- puncture and complement: `b7189aa`
+- finite non-descent initial source: `012c572`, proof transport correction `8b4d6eb`
+- golden root imports: `e2e390a`, `9b7710f`, `9b9448b`
+
+Agda kernel check deferred at user request. No proof of H1.01, original source observer descent, H2.02 or remaining Bishop analytic/zeta/Xi gates is claimed.
