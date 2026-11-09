@@ -18,6 +18,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact whe
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.List.Base using (length; reverse)
 open import Data.Product using (_×_; _,_; proj₁; proj₂)
