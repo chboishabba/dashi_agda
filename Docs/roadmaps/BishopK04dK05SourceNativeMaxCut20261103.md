@@ -1,5 +1,31 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 cross-PR source archaeology: FTC/MVT genuinely present, but scope matters
+
+This replaces the earlier blanket assertion that the repository has no constructive FTC/mean-value content. **It does.** We inspected the actual source owners (not only PR titles):
+
+| Reusable owner | Actual mathematical payment | Remaining Bishop P0 compatibility |
+| --- | --- | --- |
+| `DASHI/Analysis/MarxExteriorIntegration.agda` | `RiemannIntegralStructure` and `FundamentalTheoremBridge` explicitly expose `integralOfDerivative` and `derivativeOfIntegral`; `MarxFiniteRiemannSumLaws.agda` supplies finite constant/addition/scaling Riemann sum algebra | `FundamentalTheoremBridge` is a **record field**, not an original Bishop `Real._≃_` endpoint FTC proof. `MarxFactorisation` uses its own algebra carrier and propositional equality, so the original `BishopFactorDerivativeAt` needs a nontrivial concrete interpretation/transport. |
+| `DASHI/Physics/Closure/NSContinuousFrequencyStateVariationExact.agda` | Reuses the Marx FTC bridge to prove `segmentFundamentalTheoremRaw` for the modeled frequency segment | Its theorem is **conditional on an supplied `FTC : FundamentalTheoremBridge R`**, not a concrete Bishop FTC inhabitant. |
+| `DASHI/Physics/Closure/NSCompactGammaRealAnalysisGalerkinCompletion.agda` and `NSCompactGammaStandardAnalysisCompletion.agda` | Rich `AbsolutelyContinuousRealAnalysis`, integral linearity and selected `RealFundamentalTheoremLeaves` | The real-integration and endpoint FTC laws are **fields/input leaves**; no identification with pinned original Bishop partials or analytic derivative semantics established. |
+| `DASHI/Physics/Closure/NSTriadKNSelfFluxScalarFTCBoundaryRound564Exact.agda` | Exact scalar endpoint transport conditional on `ScalarFundamentalTheorem564` | Source itself explicitly records `round564ConcreteScalarFTCInhabitantInstalled = false`. It documents the boundary rather than supplying a complete FT of calculus. |
+| `DASHI/Physics/Closure/NSTriadKNLuoFiniteMeanValueGronwallExact.agda` and finite weighted sibling | Proven finite rational **discrete** mean-value selection and Gronwall induction, no divisions | This is selection from finite `ℚ` lists plus a discrete recurrence; **not** the continuous constructive mean-value inequality for a Bishop differentiable function. |
+
+**Result:** the repository contains substantial, attributable calculus/FTC *interfaces*, finite Riemann sum laws and discrete stability results. Our previous 'no existing FTC content' phrasing was inaccurate. None of the inspected actual definitions is yet a direct *unconditional* endpoint inequality on pinned Bishop `Real.ℝ` for the original `F_N` and its factor derivative. The fastest remaining P0 cut is either:
+1. Construct the concrete Bishop realization of Marx's `FundamentalTheoremBridge` **with a proof of compatibility with `BishopFactorDerivativeAt`**, and integrate the established uniform residual; or
+2. Prove the original nested `Q[[X]]` analytic reindexing/evaluation theorem, avoiding a new Bishop integral realization.
+
+**New original boundary witness committed:** `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpInitialValueExact.agda` proves `originalNegativeLogTermAtZero`, `originalNegativeLogFiniteAtZero`, and `originalFiniteNegativeLogExpAtZero`: the actual Bishop source finite sums vanish at zero and `F_N(0) ≃ 1` for every finite stage. This supplies the missing *exact initial condition* for either stability proof route without creating a second LOG carrier. It is connected into all three TOE golden roots and the dedicated Bishop checker, kernel acceptance still pending.
+
+### Formal algebra boundary
+
+`BishopNegativeLogExpFormalRecurrenceUniquenessExact.allFormalCoefficientsCanonical` only says **any supplied coefficient stream obeying** `FormalLogExpSolvedRecurrence` equals `(1,-1,0,…)`. It does not prove the *actual nested analytic* `Exp.bishopExp(-sourceNegativeLogValue x)` has those coefficients, and does not itself provide infinite composition rearrangement or same-object limit. The formal series route therefore has a genuine additional analytic witness, not simply a one-line invocation of coefficient uniqueness. No proof status is upgraded on the basis of the degree-32 symbolic regression.
+
+**Acceptance:** all new proof terms are source-written and unverified under Agda 2.9 at this branch head; no terminal P0, P1, P2 is claimed kernel-closed. Preserve source attribution for Marx calculus, Luo/NS finite selections and Bishop/Bridges–Murray–Csimma backend.
+
+---
+
 ## 2026-11-09 compact-uniform finite LOG residual payment
 
 **New original owner:** `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda`.
