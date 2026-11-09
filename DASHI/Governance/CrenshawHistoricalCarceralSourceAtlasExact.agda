@@ -72,10 +72,22 @@ historicalCitationDoesNotCreateAuthority :
   Attr.atlasCreatesAuthority historicalInstitutionalSourceAtlas ≡ false
 historicalCitationDoesNotCreateAuthority = refl
 
-blackGirlsMatterIsCoauthored :
+-- Preserve *two independently owned displays* without rewriting the PDF.
+-- Columbia's faculty repository indexes all three scholar contributors.
+blackGirlsMatterCatalogContributorIndex :
   Attr.sourceAuthor blackGirlsMatter2015 ≡
     "Kimberle Williams Crenshaw, Priscilla Ocen and Jyoti Nanda"
-blackGirlsMatterIsCoauthored = refl
+blackGirlsMatterCatalogContributorIndex = refl
+
+-- The publisher PDF's original byline makes the lead/with credit explicit.
+blackGirlsMatterOriginalPrintedByline : String
+blackGirlsMatterOriginalPrintedByline =
+  "By Kimberle Williams Crenshaw / with Priscilla Ocen and Jyoti Nanda"
+
+blackGirlsMatterPrintedCreditPreserved :
+  blackGirlsMatterOriginalPrintedByline ≡
+  "By Kimberle Williams Crenshaw / with Priscilla Ocen and Jyoti Nanda"
+blackGirlsMatterPrintedCreditPreserved = refl
 
 -- The reports must not be reduced to their most visible scholarly author;
 -- communities, interview participants and stakeholders contribute testimony,
