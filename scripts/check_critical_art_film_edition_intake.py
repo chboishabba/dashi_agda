@@ -97,7 +97,56 @@ def self_test():
         try:check(d)
         except (ValueError,KeyError):pass
         else:raise AssertionError("negative fixture admitted "+modifier)
-    return dict(positive,negative_controls=4)
+    # Positive nonempty synthetic admission and adversarial file-integrity
+    # checks. This tests the program; it certifies NO real film/source review.
+    import tempfile
+    with tempfile.TemporaryDirectory() as directory:
+        root=Path(directory)
+        original=root/"synthetic.txt"
+        original.write_text("SYNTHETIC TEST TRANSCRIPT ONLY",encoding="utf-8")
+        fixture=copy.deepcopy(m)
+        fixture["works"][0]["editions"]=[dict(
+            edition_id="synthetic_edition",work_id="leon_1994",
+            edition_label="synthetic-only",original_source_url="https://example.org/synthetic-test",
+            sha256=hashlib.sha256(original.read_bytes()).hexdigest(),
+            relative_path="synthetic.txt",license_or_access_note="self-test only; not licensed footage")]
+        claim=dict(claim_id="synthetic_claim",edition_id="synthetic_edition",
+            channel="cinematic_form",start_seconds=0,end_seconds=1,
+            original_observation="SYNTHETIC TEST TRANSCRIPT ONLY",
+            source_evidence_locator="synthetic.txt:0-30",
+            original_claim_author="automated synthetic test",review_stage="candidate",
+            measured_audience_effect=None,hostile_operation_identified=None)
+        fixture["works"][0]["claims"]=[claim]
+        admitted=check(fixture,root)
+        assert admitted["verifiable_local_edition_files"]==1
+        assert admitted["scene_claims"]==1
+        synthetic_negative=0
+        for defect in ("tamper_bytes","path_escape","sha_mismatch","same_reviewer"):
+            bad=copy.deepcopy(fixture)
+            source=bad["works"][0]["editions"][0]
+            if defect=="tamper_bytes":
+                original.write_text("CHANGED SYNTHETIC BYTES",encoding="utf-8")
+            elif defect=="path_escape":
+                source["relative_path"]="../outside/synthetic.txt"
+            elif defect=="sha_mismatch":
+                source["sha256"]="0"*64
+            elif defect=="same_reviewer":
+                claim2=bad["works"][0]["claims"][0]
+                claim2.update(review_stage="reviewed_original",reviewer_id="R",
+                    review_receipt="R claimed review",
+                    independent_second_review="R second claimed review",
+                    independent_second_reviewer_id="R",
+                    independent_second_review_receipt="R second receipt")
+            try:
+                check(bad,root)
+            except (ValueError,KeyError):
+                synthetic_negative+=1
+            else:
+                raise AssertionError("synthetic negative control admitted "+defect)
+            if defect=="tamper_bytes":
+                original.write_text("SYNTHETIC TEST TRANSCRIPT ONLY",encoding="utf-8")
+    return dict(positive,negative_controls=4+synthetic_negative,
+                synthetic_positive_admission_tested=True)
 
 if __name__=="__main__":
     p=argparse.ArgumentParser();p.add_argument("--self-test",action="store_true")
