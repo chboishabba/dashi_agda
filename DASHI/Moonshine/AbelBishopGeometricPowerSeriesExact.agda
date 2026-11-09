@@ -69,8 +69,14 @@ originalBishopPowerGeometricBounds :
 originalBishopPowerGeometricBounds {w} {ratio} interval norm =
   record
     { geometricInputs = originalBishopPowerGeometricInputs interval
-    ; realComponentBound = Norm.realPowerBound envelope
-    ; imaginaryComponentBound = Norm.imagPowerBound envelope
+    ; realComponentBound = λ n →
+        BishopP.≤-respʳ-≃
+          (BishopP.*-comm (BishopReal.pow ratio n) ratio)
+          (Norm.realPowerBound envelope n)
+    ; imaginaryComponentBound = λ n →
+        BishopP.≤-respʳ-≃
+          (BishopP.*-comm (BishopReal.pow ratio n) ratio)
+          (Norm.imagPowerBound envelope n)
     }
   where
     envelope : Norm.BishopQPowerComponentEnvelope w ratio
