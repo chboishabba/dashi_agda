@@ -35,7 +35,8 @@ data Matter : Set where
   providence20188347 springfield20198575 : Matter
 
 data SourceClass : Set where
-  governmentOriginalReproducedInProponentPDF
+  governmentDirectOriginal
+    governmentOriginalReproducedInProponentPDF
     proponent2024ComplianceReport
     proponent2026PreliminaryDocumentation : SourceClass
 
@@ -104,7 +105,7 @@ officialProvidenceVariation =
 
 signedOtherMatterVariation : PrimaryFact
 signedOtherMatterVariation = primary-fact
-  providence20188347 governmentOriginalReproducedInProponentPDF
+  providence20188347 governmentDirectOriginal
   textVerifiedInOriginalPublishedDocument
   "Signed 31 March 2025 EPBC Act s143 directed conditions variation, Toni Hart, AW Bidco 6, EPBC 2018/8347; replaces site conditions and Appendix B map. Original government instrument available directly."
   "https://epbcpublicportal.environment.gov.au/_entity/sharepointdocumentlocation/125d74c5-530f-f011-998a-00224811099e/2ab10dab-d681-4911-b881-cc99413f07b6?file=2018-8347-Variation-to-Conditions.pdf"
