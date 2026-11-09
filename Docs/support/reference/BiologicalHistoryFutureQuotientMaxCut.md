@@ -691,6 +691,53 @@ valences and source-specific kinetic coupling.
 A global signed ledger is not a substitute for the
 local PDE or any physiological rate.
 
+### 2026-11-09: faithful ORIGINAL 1→3 pants branching (not just serial seams)
+
+`Biological369OriginalThreeWayPantsFluxExact` now
+instantiates the original **one-to-three** pants capacity
+at an actual **three-way native 3D cubical junction**:
+`Cube.origin = (0,0,0)`, with the positive x/y/z
+native bonds to `(+1,0,0)`, `(0,+1,0)`,
+and `(0,0,+1)`.
+`originalThreeBranchesSharePhysicalOrigin` and
+the three `...PhysicalNeighbour` proofs establish
+genuine original hypervoxel geometric incidence.
+
+The selected material fixture uses a **single shared
+27-site vector chart of the original physical cube**,
+initially carrying three material quanta at the middle
+physical origin. Three source-certified native directed
+bond updates produce exactly **1+1+1** at the selected
+targets and 0 at origin, while
+`originalThreeWayPantsConservesSameInventory`
+and `selectedBranchedMaterialAmountExactlyThree`
+prove mass balance.
+
+This particular concrete integer fixture matches
+the existing original `Pants.composedOneToThree`
+input capacity 3, three outputs capacity 1,
+and `CylinderPants.canonicalPantsCapacityConservative`
+without redefining pants or imagining a flat 27D topology.
+The two earlier serial-seam proofs are retained as
+gluing/incidence compositions, not passed off as a
+physical one-to-three branch.
+
+**CRITICAL BOUNDARY:** Equality of a selected 3-to-1+1+1
+integer fixture and formal branch-channel capacities
+does not assert that information-theoretic pants
+capacity equals measured molar flux, flow resistance,
+membrane permeability, or a biological vascular branch
+law. No real vascular perfusion coefficient is inferred.
+
+New regression
+`scripts/check_biological_369_threeway_pants.py`
+is in the Round-23 acceptance shell, alongside
+the 27-axis-line seam, six-face open-boundary and
+signed ionic source tests. A separate finite arithmetic
+pass verified conservation for 21 initial source amounts
+through the three physical branches. Agda kernel and
+the committed regression scripts have NOT been run here.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
