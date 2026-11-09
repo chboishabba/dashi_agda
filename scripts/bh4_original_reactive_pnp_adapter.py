@@ -21,7 +21,7 @@ import numpy as np
 from check_bh4_original_panel_spatial_events import (
     check_certificate, load_original_receipt_json,
 )
-from reactive_pnp_369 import Model
+from reactive_pnp_369 import Model, implicit_step
 from build_bh4_stoichiometric_matrix import participant_key
 
 _REQUIRED_PHYSICS = ("epsilon", "RT", "F", "h")
@@ -271,4 +271,67 @@ def check_original_closed_inventory(
         "numerical_candidate_only": True,
         "agda_kernel_checked": False,
         "independent_source_authenticated": False,
+    }
+
+
+def source_bound_closed_implicit_step(
+    source_bytes: bytes, manifest: dict, *, pinned_sha256: str,
+    initial_concentrations: np.ndarray, dt: float,
+    residual_tolerance: float = 1e-8,
+    inventory_tolerance: float = 1e-7,
+):
+    """Run ONE original-certificate-bound numerical PNP candidate step.
+
+    No empirical promotion: model inputs still require independent
+    source authentication, and root convergence is not analytic existence.
+    The source certificate, 27x29 before/after pair, solver and atomic
+    inventory audit all refer to this one selected candidate step.
+    """
+    model, source_receipt = make_candidate(
+        source_bytes, manifest, pinned_sha256=pinned_sha256)
+    before = np.asarray(initial_concentrations, dtype=float)
+    if before.shape != (27, 29) or not np.all(np.isfinite(before)):
+        raise ValueError("one complete finite 27x29 original physical initial state required")
+    if np.any(before <= 0):
+        raise ValueError("existing logarithmic implicit solver requires positive initial concentrations")
+    residual_tolerance = _finite_number(
+        residual_tolerance, "residual tolerance", positive=True)
+    inventory_tolerance = _finite_number(
+        inventory_tolerance, "inventory tolerance", nonnegative=True)
+    dt = _finite_number(dt, "physical timestep", positive=True)
+    # A separate synthetic solver with the right number of variables is
+    # not substituted: this is the selected native 369 PNP operator.
+    after, numerical = implicit_step(
+        before, dt, model, rtol=residual_tolerance)
+    inventory = check_original_closed_inventory(
+        source_bytes, pinned_sha256, before, after,
+        atol=inventory_tolerance)
+    if not (isinstance(numerical, dict)
+            and numerical.get("numerical_residual_max", float("inf"))
+                <= residual_tolerance):
+        raise ValueError("same-step original PNP residual receipt missing or invalid")
+    if numerical.get("free_energy_after", float("inf")) > (
+        numerical.get("free_energy_before", float("-inf"))
+        + max(1e-9, residual_tolerance *
+              max(1.0, abs(numerical.get("free_energy_before", 0.0))))
+    ):
+        raise ValueError("same-step original PNP energy receipt invalid")
+    # Re-audit the candidate output shape and physical domain before any
+    # receipt: do not let an arbitrary test double supply a malformed state.
+    after = np.asarray(after, dtype=float)
+    if after.shape != before.shape or not np.all(np.isfinite(after)) or np.any(after <= 0):
+        raise ValueError("same-step PNP output state invalid")
+    return after, {
+        "kind": "dashi.bh4.original-closed-pnp-step-candidate.v1",
+        "source_receipt": source_receipt,
+        "solver_diagnostics": numerical,
+        "source_inventory_audit": inventory,
+        "initial_state_shape": [27, 29],
+        "physical_dt": dt,
+        "source_bound_same_step": True,
+        "candidate_only": True,
+        "physical_one_step_agda_proven": False,
+        "original_parameters_independently_authenticated": False,
+        "independent_longitudinal_validation": False,
+        "agda_kernel_checked": False,
     }
