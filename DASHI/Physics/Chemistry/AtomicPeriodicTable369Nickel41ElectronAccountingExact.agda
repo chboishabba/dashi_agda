@@ -109,3 +109,28 @@ fullSpinDownCountIfNeutral = refl
 
 -- No claims about the independent source's actual physical charge/spin
 -- follow from these neutral-sector numerical equalities.
+
+------------------------------------------------------------------------
+-- Finite active-space dimensions, constructively reduced in Agda.
+-- The upCCD/seniority-zero sector has 4 doubly occupied orbitals among 8.
+-- The unrestricted Sz=0 sector independently chooses 4 up and 4 down
+-- orbitals and has 70*70 = 4900 configurations.
+------------------------------------------------------------------------
+
+binomial : Nat → Nat → Nat
+binomial zero zero = 1
+binomial zero (suc k) = 0
+binomial (suc n) zero = 1
+binomial (suc n) (suc k) =
+  binomial n k + binomial n (suc k)
+
+pairedConfigurationsCount : binomial 8 4 ≡ 70
+pairedConfigurationsCount = refl
+
+fullSpinConfigurationsCount :
+  binomial 8 4 * binomial 8 4 ≡ 4900
+fullSpinConfigurationsCount = refl
+
+numberOfNonpairedConfigurations :
+  4900 ∸ binomial 8 4 ≡ 4830
+numberOfNonpairedConfigurations = refl
