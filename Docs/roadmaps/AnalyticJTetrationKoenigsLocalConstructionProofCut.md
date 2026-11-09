@@ -1,6 +1,6 @@
 # Original exponential local Schröder construction: analytic maximum cut
 
-Date: 2026-11-09. Status: **classical conditional proof and exact formal/numerical diagnostics; NOT Agda 2.9 kernel checked or Kneser-global construction.**
+Date: 2026-11-09. Status: **explicit classical local fixed-point/Koenigs construction with a rational interval certificate for the needed numerical inequality; NOT Agda 2.9 kernel checked or Kneser-global construction.**
 
 ## Source identity and normalization
 
@@ -20,7 +20,7 @@ Choose `g(z)=Log(z)`, the principal complex logarithm, in a disk centred on p. U
 
 The following is a conventional complex-analytic proof *conditional on the stated fixed-point and modulus bounds*. Its realization through the Bishop setoid complex remains an Agda task.
 
-1. Prove a complex enclosure `1.37 < |p| < 1.38`, `Log(p)=p` and exp(p)=p using a branch-certified interval or constructive complex proof. Define `D={z : |z-p|<1/10}`. It is disjoint from the principal logarithm cut and zero.
+1. First construct p from an explicit contraction disk without assuming the Lambert-W value: let c=318/1000+1337/1000 i, D₀={z : |z-c|≤1/100}. The rational interval script `scripts/analytic_j_tetration_fixed_point_rational.py` proves `|Log(c)-c|<3/10000` by finite exact-Fraction bounds: the positive artanh expansion of log(|c|), alternating atan of x/y, and Machin π=16 atan(1/5)-4 atan(1/239). It also proves `1.374<|c|<1.375`. Thus on D₀ the principal Log is analytic, `|Log'(z)|=1/|z|<3/4`, and `|Log(z)-c|<3/10000+(3/4)(1/100)<1/100`. Banach's theorem yields a unique p∈D₀ with Log(p)=p, hence exp(p)=p; `|p-c|< (3/10000)/(1-3/4)=12/10000`. The rational bounds imply `1.37<|p|<1.38`. This is a mathematically substantive classical complex proof *conditional only on the standard analyticity/series/Machin/Banach results*, all of which must be carried into Bishop Agda for a kernel receipt. Now define D={z : |z-p|<1/10}; it avoids the cut and zero.
 2. For z in D, `|g'(z)|=1/|z| ≤ 1/(1.37-0.1)=1/1.27<0.8=:q`. Since D is convex and `g(p)=p`, the straight-segment integral gives `|g(z)-p|≤q|z-p|`. Thus `g(D)⊂D`.
 3. With `lambda=p`, `g'(p)=1/lambda`, and the second derivative `g''(z)=-1/z²`, the Taylor remainder on D satisfies
 
@@ -47,7 +47,7 @@ This is a **local** Abel chart with a restricted one-step domain; it does not ye
 
 ## Exact remaining proof gates
 
-- `originalExpFixedPointComplexExistence`: produce p, exp(p)=p, Log(p)=p and a certified enclosure on the original Bishop setoid complex.
+- `originalExpFixedPointComplexExistence`: port the now explicit rational-disk Banach construction and the finite log/atan/Machin bounds to the original Bishop setoid complex; the numerical inequality is verified by exact rational computation, but its series identities and Banach principle still need Agda proof.
 - `originalLogInverseDiskRadiusBound`: prove disk cut avoidance, derivative bound q=4/5 and image containment for g.
 - `originalLogQuadraticRemainderBound`: prove the M remainder from actual complex derivatives or an equivalent constructive power-series tail.
 - `originalKoenigsSequenceGeometricCauchy`: prove the displayed uniform tail in the source analysis infrastructure.
@@ -68,3 +68,17 @@ This is a **local** Abel chart with a restricted one-step domain; it does not ye
 - Dmitrii Kouznetsov, *Solution of F(z+1)=exp(F(z)) in complex z-plane*, Mathematics of Computation 78 (2009), 1647–1670. DOI: 10.1090/S0025-5718-09-02188-7.
 
 The sourced existence/uniqueness and numerical approaches remain credited to their authors. DASHI's new contribution is the explicit Agda proof-cut, same-object renderer/observer transport and reproducible formal/numerical testing.
+
+## Exact rational centre certificate (added in the continuation)
+
+Run `python scripts/analytic_j_tetration_fixed_point_rational.py`. This produced:
+
+```text
+PASS: EXACT rational inequalities for principal Log centre enclosure
+centre=0.318+1.337i
+abs upper displacement <0.0003
+Banach radius 0.01, contraction q=0.75, |p-c|<0.0012
+Thus 1.37<|p|<1.38, and local Koenigs ratio <0.8832
+```
+
+Unlike floating-point residual tests, all inequality comparisons in this script use Python `fractions.Fraction` and mathematically explicit alternating/geometric tail enclosures. The script assumes standard analytic series identities and the Machin identity; the scripts' assertions are **not** themselves a proof of those identities in the DASHI kernel. On ordinary complex numbers, the usual theorems together with the finite rational bounds establish existence of the selected upper fixed point in D₀, and the local Koenigs-limit argument establishes a nonconstant holomorphic Schröder coordinate near it. The remaining frontier is faithful constructive formalization, punctured-sector branch gluing and global Kneser normalization.
