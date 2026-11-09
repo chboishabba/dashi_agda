@@ -244,3 +244,34 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 **Scientific caution:** a numerical residual of ~1e-14 reported by the 2009 paper is evidence about *that numerical scheme*, not an Agda certificate of Kneser existence or global uniqueness. The original `BishopSetoidComplexExact` uses setoid equality; converting it to propositional equality or to the terminal complex singleton is not authorized. The published uniqueness theorem requires its exact geometric/holomorphic hypotheses.
 
 **Most decisive outstanding gate:** `originalSchroederHolomorphicLocalLinearization` followed by `originalKneserFundamentalRegionGluing`. Once the concrete Abel chart exists, P1b/P2/P3 transport lemmas become concrete instantiation work; before that they remain conditional.
+
+## 2026-11-09 Schröder-to-Abel compiler and exact formal jet
+
+**New theorem source:** `DASHI/Moonshine/AbelSchroederLogCocycleTransportExact.agda`.
+
+- [x] `originalLogMultiplierBranchAndCocycle`: from a selected Schröder map χ and a *specified, branch-correct* logarithm cocycle, derive the log-level relation at the same fine point; **conditional** on those maps and proofs.
+- [x] `originalSelectedAbelSemiconjugacy`: compose the proved log cocycle with a normalization commuting with the additive successor. **Conditional** on an actual multiplier, nonzero logarithm, branch and source chart.
+- [x] `windingCorrectedAbel`: make the required branch/winding normalization visible and exact. It does not claim all branch corrections vanish.
+
+**New computational diagnostic:** `scripts/analytic_j_tetration_schroeder_formal.py`.
+
+- [x] **P1.K2a** Exact symbolic coefficient recurrence for the formal germ `E_a(t)=a(exp(t)-1)` at a hypothetical fixed point `exp(a)=a`, with multiplier `λ=a`. It computes `χ(E_a(t))=λχ(t) mod t^(N+1)` without floating point.
+- [x] **P1.K2b** Explicit exact finite-jet checks through degree six, run on 2026-11-09 using local SymPy 1.14.0, all six symbolic residual coefficients **zero**.
+- [ ] **P1.K2c** `originalSchroederFiniteJetKernelProof`: translate the exact coefficient recurrence and polynomial identities into Agda's original rational-function/polynomial owners and kernel-check (diagnostic Python is NOT an Agda receipt).
+- [ ] **P1.K2d** `originalExpFixedPointComplexExistence`: prove a nonreal complex fixed point of the genuine Bishop exp and establish `λ^(n-1)≠1` for all `n≥2` in the applicable linearization chart. The finite symbolic rational functions are only conditionally defined away from resonances.
+- [ ] **P1.K2e** `originalSchroederConvergentPowerSeries`: supply a constructive coefficient majorant, explicit convergence radius, nonconstant holomorphic linearization and local injectivity. **Finite jets alone are insufficient.**
+- [ ] **P1.K3a** `originalSchroederNonzeroPuncturedBranch`: select punctured region χ≠0 and genuine logarithm branches with overlap/winding receipts.
+- [ ] **P1.K3b** `originalAbelLogMultiplierNonzero`: source-construct λ-log and its inverse/normalization; prove the actual additive Abel equation in the original complex/setoid semantics.
+- [ ] **P1.K4a** `originalKneserGluingMonodromy`: recover Kneser global/real-normalized Abel chart from the selected conjugate fixed-point pair and matched strips; this is NOT an immediate consequence of local χ.
+
+**Formal coefficients found:**
+
+```text
+c_1 = 1
+c_2 = -1 / (2 (λ - 1))
+c_3 = (2λ + 1) / (6 (λ - 1)^2 (λ + 1))
+```
+
+The degree-four through six expressions and zero residuals are reproducible with `python scripts/analytic_j_tetration_schroeder_formal.py --degree 6`. This is meaningful exact algebra but **does not close** `originalSchroederHolomorphicLocalLinearization`, `originalLocalAbelCoordinateExists`, `originalKneserFundamentalRegionGluing`, `originalRendererAbelWeldInstance`, `originalKneserToModularLevelLift`, or `originalKouznetsovCertifiedNumerics`.
+
+**Verification status:** GitHub source pushed. This environment has no Agda executable. The Python exact-symbolic result was executed locally; Agda theorem sources remain source-written, not kernel-checked. P2 original Bishop-setoid modular `j` and P4 numerical Kneser calibration remain open.
