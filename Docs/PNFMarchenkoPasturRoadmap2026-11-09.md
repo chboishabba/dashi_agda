@@ -35,8 +35,8 @@ dashiTRADE comparison: `scripts/phase07_eigen_boundary_check.py` uses action/tra
 ### Phase A — exact finite carrier [P0 maximum cut]
 
 A1 `finiteGramPositiveSemidefinite`: IMPLEMENTED as theorem conditional on finite-sum laws; kernel check PENDING.
-A2 `sampleCovarianceIsGramQuadratic`: OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
-A3 `sampleCovarianceSymmetric`: OPEN. Derive symmetry from that actual construction, rather than supplying it as a field.
+A2 `sampleCovarianceIsGramQuadratic`: PARTIAL. `PNFFiniteGramPositiveExact.gramQuadratic` is an explicitly finite sum of squares, and `finiteMatrixGramPositiveSemidefinite` derives its nonnegativity by actual finite-sum induction using the stated positive-cone laws. The equality with the same source-normalized centred sample covariance matrix remains OPEN. Construct actual finite centred activation matrix and show the covariance quadratic equals sum of squares divided by n−1, with positive scale.
+A3 `sampleCovarianceSymmetric`: PARTIAL. `PNFFiniteCovarianceEconomicsExact.sampleGramSymmetric` proves symmetry of the unscaled finite row Gram matrix using the canonical finite-sum and ring machinery; centring/source scaling remains OPEN. Derive symmetry from that actual construction, rather than supplying it as a field.
 A4 `sampleCovarianceRankBound`: OPEN. Choose existing in-repo finite linear algebra, prove rank(C)≤min(p,n−1) for the *same centred matrix*.
 A5 `sampleCovarianceForcedZeroMultiplicity`: OPEN. Derive max(0,p−n+1) zero eigenvalues from A4 and an actual spectral theorem.
 A6 `correlationDiagonalAndTrace`: OPEN. Connect standardisation to Cᵢᵢ=1 and tr(C)=p, with nonconstant column assumptions.
@@ -113,7 +113,7 @@ The reel (00:00–00:55) asserts: (ECO-S1) most patterns in S&P 500 sample corre
 ### Phase F — economics / quantitative-finance research [P1–P3; independent of PNF semantic promotion]
 
 F1 `stockReturnsCorrelationSameWindow`: OPEN. Explicit asset universe, return convention, missing observations, corporate actions, survival bias, and chronology.
-F2 `equicorrelationPopulationSpectrum`: OPEN. Derive for p assets with common off-diagonal correlation r the eigenvalues 1+(p−1)r and 1−r (multiplicity p−1), including PSD constraints and correct r→0 and p/T→0 interpretations. This provides exact algebraic meaning to the reel's final 'drop correlation' illustration, without confusing finite-sample MP with population spectra.
+F2 `equicorrelationPopulationSpectrum`: PARTIAL. `PNFFiniteCovarianceEconomicsExact` supplies `equiOperator`, `equiZeroSumEigen`, `equiMarketEigen`, `sumConstantOne`, and `equiZeroCorrelationIsIdentity` (Agda kernel check PENDING). Remaining: simplify (1−ρ)+ρp to 1+(p−1)ρ with a correct finite-dimensional scalar injection; establish residual eigenspace dimension p−1, orthogonal eigenspace decomposition, and PSD condition −1/(p−1)≤ρ≤1 for p>1. Derive for p assets with common off-diagonal correlation r the eigenvalues 1+(p−1)r and 1−r (multiplicity p−1), including PSD constraints and correct r→0 and p/T→0 interpretations. This provides exact algebraic meaning to the reel's final 'drop correlation' illustration, without confusing finite-sample MP with population spectra.
 F3 `independentReturnsNullSpectralCalibration`: OPEN. Compare iid MP, time-shuffled, block-shuffled and volatility-preserving controls; distinguish sample-vs-population statements and edge uncertainty.
 F4 `marketAndSectorModeIdentification`: OPEN. Determine whether empirical outliers map to broad market/sector exposures using independent sector labels and factor-model diagnostics, not merely large eigenvalues.
 F5 `economicCovarianceCleaningPreservesPSD`: OPEN. With a nonnegative spectral filter prove PSD of the reconstructed covariance; verify re-scaling/diagonal restoration where correlation matrices are required.
@@ -130,4 +130,15 @@ F11 `temporalRegimeNonstationarity`: OPEN. Test changing covariance, rolling est
 Same matrix mathematics may be reused, but stock returns, PNF predicate activations and signed-residual graph/Laplacian weights are different measured objects with different nulls, semantics and admission owners. Economic market modes and PNF structural motifs are analogies, not the same objects. Portfolio-risk improvement does not prove PNF semantic truth; PNF spectral outliers do not prove economic alpha.
 
 ### Updated priority / dependencies
-Run finite Gram/covariance proof A2–A6 and economic equicorrelation theorem F2 as parallel finite-theorem lanes. Then build exact MP law B1–B10. Economic F1/F3/F4 and PNF C1/C2/C3 must each pay separate data/null-model assumptions. Cleaning C5/F5 shares a generic PSD theorem but each needs its own diagonal/provenance contract. Economic risk validation F6–F8 does not depend on PNF semantic promotion D5. dashiTRADE F10/E1–E4 requires its own no-lookahead and action-cost receipts.
+Finite source-independent Gram positivity and symmetry and market/residual equicorrelation eigenvector identities are now written, but unverified by Agda. Finish original-source centred covariance identity A2 and F2 spectral multiplicity/PSD thresholds as parallel lanes. Then build exact MP law B1–B10. Economic F1/F3/F4 and PNF C1/C2/C3 must each pay separate data/null-model assumptions. Cleaning C5/F5 shares a generic PSD theorem but each needs its own diagonal/provenance contract. Economic risk validation F6–F8 does not depend on PNF semantic promotion D5. dashiTRADE F10/E1–E4 requires its own no-lookahead and action-cost receipts.
+
+## 6. Continuation 2026-11-09 — exact finite theorem implementation
+
+Committed to PR #1480:
+- `DASHI/Information/PNFFiniteCovarianceEconomicsExact.agda`: actual finite row Gram, symmetry theorem, population equicorrelation operator, zero-sum eigenvector theorem, all-ones market eigenvector theorem, number-of-coordinate scalar definition, and zero-correlation identity.
+- `DASHI/Information/PNFFiniteGramPositiveExact.agda`: explicit finite matrix projection and sum of squares, positive-cone assumptions, proof of sum nonnegativity by induction over `Fin n`, Gram quadratic PSD.
+- Earlier `DASHI/Information/PNFMarchenkoPasturFiniteExact.agda`: conditional Gram positivity interface, MP edge calibration, externally owned PNF evidence predicates, and canonical numeric-ABI non-promotion weld.
+
+**Verification:** These are authored Agda proof terms in a GitHub draft PR. Agda executable was not available in the current environment. Do not call them kernel-checked or promote unverified types/identities. The full finite spectral decomposition, correlation normalisation, MP probability law, original numerical PNF evidence and economic outcomes remain open.
+
+**Priority refinement:** the exact source-indexed and normalised covariance construction A2 is the common blocker to both PNF and finance. F2's market/residual eigenvector laws do NOT establish sector modes, distributional MP predictions, or empirical financial factor interpretation. Follow with A4 rank and B1–B5 formal real-measure interface. Keep the economic F6–F11 walk-forward ledger independent of PNF semantic authority.
