@@ -34,7 +34,8 @@ originalPowerZeroStepQuotientNonnegative x xNN (suc n) =
   RP.nonNegx,y⇒nonNegx+y
     (RP.nonNegx,y⇒nonNegx*y
       (originalPowerZeroStepQuotientNonnegative x xNN n)
-      (RP.nonNeg-cong (RP.+-identityʳ x) xNN))
+      (RP.nonNeg-cong
+        (RP.≃-symm (RP.+-identityʳ x)) xNN))
     (Seq.nonNegx⇒nonNegxⁿ n xNN)
 
 originalPowerSecondQuotientNonnegative :
