@@ -187,3 +187,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeThresholdOriginalSignedDecisionE
 -- P0-E actual binary two-lane signed threshold acceptance exactly original signed rawSparseScore for source-parsed raw edges.
 -- Full all-word graph validator and physical bit-TM clock still OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeParsedRawAcceptanceExact
+
+-- P0-E all-original-input-word native signed graph + binary ledger acceptance vs ORIGINAL Fin-free verifier.
+-- Kernel receipt, native endpoint bit clock, original PR.InNP and typed N21 bridge remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeWordAcceptanceExact
