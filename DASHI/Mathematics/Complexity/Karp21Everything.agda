@@ -455,3 +455,6 @@ import DASHI.Mathematics.Complexity.Karp21OriginalRawVsBinaryTerminalCounterexam
 
 -- D2 real original paired-raw-list machine state/step weld: binary nonterminal and terminal threshold quotient separately.
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryToOriginalRawMachineStepExact
+
+-- F2 real two-lane signed ledger register width <= initial width + selected binary token charge; Agda kernel OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact
