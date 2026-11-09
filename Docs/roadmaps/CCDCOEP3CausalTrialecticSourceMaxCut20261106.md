@@ -1835,3 +1835,20 @@ The maximum cut this pass is **source-evidence correctness**, not additional unv
 - CW5: source-backed measured human cognition / agency / revision and same-object temporal multiplex witness.
 - CW6: exact-head Python, Agda 2.9, Golden/ITIR independent acceptance receipts.
 Film analysis stays secondary; no ESD edits. Attribution remains with the original participants, reporters, scientists and archives.
+
+
+## 9 Nov — High-alpha source-bound six-gate extension
+
+**Formal source-written completion:** `DASHI/Cognition/CCDCOEP3SameOperationIndexedAdmissionExact.agda` now includes `SourceBoundAdmission E Reference sourceCase c`: an admitted six-stage operation, a receipt reference per evidence stage, an original-case ownership equality for each receipt, and a typed proof that stage-distinct requirements carry distinct references. This closes the previous **single receipt-token reused across different gates** loophole at the selected reference level.
+
+Exact new declarations:
+- `sourceBoundImpliesStageAdmission` — forget source-reference fields, preserving six original same-case evidence stages.
+- `sourceBoundMissingExposureBlocks`, `sourceBoundMissingIntentBlocks` — general unpaid-gate proofs for the stronger source-bound admission.
+- `exposureAndIntentMustHaveDifferentReceipt`, `interventionAndCausalMustHaveDifferentReceipt` — explicit no-shared-reference consequences for two high-risk conflations.
+- `selectedGCCCannotBeSourceBoundAdmitted`, `selectedAPICannotBeSourceBoundAdmitted` — selected closed-inventory non-admission persists for both original historical cases.
+- `oneReceiptEquality`, `oneReceiptCannotSupportSixGates`, `weakDemoSingleReceiptFailsSourceBoundAdmission` — finite singleton-reference counterexample that rejects admission even when the evidence predicate itself admits an all-stage `weakToken`.
+- Original P3 regression consumes the two selected-inventory negative results and the exposure/intent no-shared-reference lemma.
+
+**Semantics and limitation:** Original publication, source reference identity and actual independence are distinct. A caller may fabricate six unique labels for copies of the same source, or supply a constant ownership map; the Agda theorem cannot authenticate real original bytes, reviewer independence, shared command intent, or causal effects. The next scientific step must anchor each reference to source SHA256, edition, provenance, independently reviewed receipt, specific target and original intervention. The newly strengthened theorem is a necessary structural guard, NOT an empirical cognitive-warfare identification.
+
+**Exact outstanding physical/empirical and kernel frontier:** CW0 original-source authentication (March/June/September GCC plus independent journalism), CW1 distribution/exposure same-case, CW2 independently coded complete original-document sampling frame with appropriate reliability, CW3 causal mechanism discrimination with rival explanations, CW4 genuine unique original source receipts per stage plus independence and intent, CW5 measured cognitive effect and time-indexed multiplex transport, CW6 exact-head Agda 2.9 and Python acceptance with original review receipts. No postulates, meta escape hatches or invented empirical stages were added; Agda kernel receipt remains OPEN. Original authors, scientists, community critics and archive owners retain credit. No ESD edits.
