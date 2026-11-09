@@ -18,6 +18,7 @@ module DASHI.Analysis.BishopOriginalFiniteErrorEqualMeshComparisonExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 import Real as R
 import RealProperties as RP
 
