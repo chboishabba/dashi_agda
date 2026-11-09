@@ -17,7 +17,7 @@ The latter does **not** establish the full abelianization is trivial over every 
 
 ## Artifacts and proof acceptance
 
-- `DASHI/Moonshine/Y443Mod2OddEdgeCentralCharacterExact.agda` is a source-written `--safe` Agda module: `SourceEdgeCentralParity` takes the exact graph's 11 explicit odd-edge parity equations and the odd central-word parity equation; `allNodesSameParity`, `centralParityIsRoot`, `allNodeChargesTrivial` constructively prove all 12 node charges vanish. The **transfer from original 80 relation witnesses to these parity equations is now source-written** as `originalRelatorsImplyParity`, by structural `dropSatisfied` projections at the actual 12,23,33,42,16,57,63,68,20,75,77 edge positions and final 79th central position. `oddEdgeWordParity` and `sourceCentralPowerNineParity` normalize those source words. `original80HasNoNontrivialMod2Character` composes the source witness to force every generator to map to `false`. Agda 2.9 typechecking is still unavailable, so this is source-written rather than kernel-certified.
+- `DASHI/Moonshine/Y443Mod2OddEdgeCentralCharacterExact.agda` is a source-written Agda module (transitive `--safe` acceptance unverified): `SourceEdgeCentralParity` takes the exact graph's 11 explicit odd-edge parity equations and the odd central-word parity equation; `allNodesSameParity`, `centralParityIsRoot`, `allNodeChargesTrivial` constructively prove all 12 node charges vanish. The **transfer from original 80 relation witnesses to these parity equations is now source-written** as `originalRelatorsImplyParity`, by structural `dropSatisfied` projections at the actual 12,23,33,42,16,57,63,68,20,75,77 edge positions and final 79th central position. `oddEdgeWordParity` and `sourceCentralPowerNineParity` normalize those source words. `original80HasNoNontrivialMod2Character` composes the source witness to force every generator to map to `false`. Agda 2.9 typechecking is still unavailable, so this is source-written rather than kernel-certified.
 - `scripts/check_y443_80_abelianization_20261109.py` independently reconstructs and exhaustively validates all **4,096** 12-bit characters, actual 79/80 source word counts and length sums, plus F₂ ranks **11 and 12**. It runs using integer bit operations, no probabilistic checking.
 - The exact source code has been committed and read back, but the Agda 2.9 kernel has not been run. The independently executed finite checker is not a substitute for a kernel acceptance receipt.
 
@@ -29,3 +29,16 @@ The latter does **not** establish the full abelianization is trivial over every 
 4. **V0.4/V1 OPEN:** original Leech TF/TT and mixed Jacobi/locality, then selected↔FLM all-mode and genuine action equivalence.
 
 **Methodological cross-pollination with YM:** a finite SU(2) Wilson plaquette expectation or a finite abelian character constraint can rule out particular failure modes, but does not establish a global physical continuum covariance inequality or a global nonabelian group isomorphism respectively. Both require their exact original-source completion theorem.
+
+
+## 9 November update — literal source-relator bridge paid in Agda source
+
+The former bridging obligation is now source-written, not merely a numerical comparison:
+
+- `boolInverseGroup` is the explicit `C₂` group structure on `Bool`.
+- `dropSatisfied` projects proof terms from `Pair.RelatorsSatisfied boolInverseGroup charge Y.monsterRelators` at their **actual** source positions.
+- `oddEdgeWordParity` normalizes each original order-three Coxeter word, and `sourceCentralPowerNineParity` normalizes the **actual ninefold original central word**.
+- `originalRelatorsImplyParity` constructs all eleven edge premises and the odd central premise from original 80-relator satisfaction alone.
+- `original80HasNoNontrivialMod2Character` proves that any `Bool` node interpretation satisfying those original relators maps every original node to `false`.
+
+The independent regression was extended to check those precise eleven Agda projection indices against the actual canonical enumeration and the central index 79, in addition to all 4,096 characters. This **discharges the previous M2-parity-source proof at source level**. It still does **not** prove `NoExtraSelectedRelations.reflectsEquality`, the Monster isomorphism or actual selected-group faithfulness. Kernel acceptance remains unobserved.
