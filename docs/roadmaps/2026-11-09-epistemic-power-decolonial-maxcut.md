@@ -214,7 +214,7 @@ Remaining exact blockers are K0 executable/kernel receipts, K1 cryptographically
 
 The Cambridge primary HTML was read directly and source descriptions in the ledger are human-level grounded. The Edinburgh-hosted PDF returned 403 for direct fetch/screenshot; an indexed text extraction and a published repository record were available. No PDF screenshot or file digest is claimed. For all K2/K3 cases, evidence is absent from this branch and cannot be created by a closed finite model. Thus **K1 passage anchoring advanced; K2/K3 formal admission gates advanced; primary byte receipts and real empirical case closure remain open**.
 
-## Candidate primary institutional corpus — Crenshaw case-law comparison
+## Candidate primary institutional corpus — Crenshaw featured cases with Jefferies contrast
 
 **Candidate status only (not empirical case admission).** Recommended order:
 1. *DeGraffenreid v General Motors*, 413 F. Supp. 142 (E.D. Mo. 1976), aff'd on Title VII grounds 558 F.2d 480 (8th Cir. 1977): district court single-axis doctrinal restriction, separately encode appellate procedural/statutory holding. Sources: https://law.justia.com/cases/federal/appellate-courts/F2/558/480/165330/
@@ -283,4 +283,16 @@ The Cambridge primary HTML was read directly and source descriptions in the ledg
 | K3.2 | Empirical normative evaluation | Judicial outcome must not be promoted to psychological oppression, social-justice success, decolonial sovereignty, universal legal precedent, or causal intention. |
 | K3.3 | Extension beyond four cases | Cases must be source-compatible and comparisons query-specific; add external institutional/Indigenous case only with independent authority and relevant source-specific evidence. |
 
-**Recommended next input:** Archive exact court opinions and Crenshaw 1989 paper; validate in-text passage-level provenance and same-case mapping. The four-case corpus is now substantially advanced as a formal source-indexed institutional comparison, not yet case-level empirical K2 closure.
+**Recommended next input:** Archive exact court opinions and Crenshaw 1989 paper; validate in-text passage-level provenance and same-case mapping. The three featured cases plus one comparator corpus is now substantially advanced as a formal source-indexed institutional comparison, not yet case-level empirical K2 closure.
+
+## Attribution correction and K3 source-status pass (2026-11-09)
+
+**Crenshaw's own 1989 article, Part I.A**, explicitly names *DeGraffenreid*, *Moore* and *Payne* as the three Title VII examples she will analyse. *Jefferies* is a useful **DASHI-selected comparative decision**, NOT one of these three featured examples; do not attribute this four-case comparison design to Crenshaw. The underlying first-party journal record is https://chicagounbound.uchicago.edu/uclf/vol1989/iss1/8/ and the accessible text is https://ideas.wharton.upenn.edu/wp-content/uploads/2018/07/Crenshaw-1989.pdf (not digest verified). No unverified DOI has been asserted for the 1989 article.
+
+**Source ownership:**
+- Court authors own opinion wording/holdings, each at its own court and procedural stage.
+- Crenshaw owns intersectional interpretation, not the opinions, our selected Jefferies comparator, or the rectangle proof.
+- DASHI's existing modules own the finite nonfactorability/interaction proofs; this PR's new modules own adapter instances only.
+- Browser transcriptions are *unverified source manifestations*, not authenticated court-issued byte artifacts; bibliographic references do not prove claim truth, applicability or legal authority.
+
+**Remaining K1–K3:** authentic opinion image or official-source manifestation matching; Crenshaw passage-to-case interpretation receipts; source-bound case issue and separate relief/merits labels; independently consented fatigue evidence (none supplied); comparative justification and true negative controls. User explicitly excludes K0 and K4 from immediate work.
