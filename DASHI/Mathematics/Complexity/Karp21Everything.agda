@@ -218,3 +218,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClock
 
 -- K05: native ripple-carry sum and concrete linear inspection clock.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderExact
+
+-- K05: proof-side Nat value semantics of executable bitwise ripple adder.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact
