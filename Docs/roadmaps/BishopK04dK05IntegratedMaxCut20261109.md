@@ -636,3 +636,30 @@ Remaining decisive physical/semantic gluing: original edge-stalk
 selection. No implication for Bishop analytic Cayley P1, canonical
 zeta P2, or Gamma/Xi P3 is inferred from the pants address
 correspondence. Source-written; kernel receipt not requested.
+
+
+### 2026-11-09: original pants seam quotient and nontrivial chart overlap
+
+The current H2.02 implementation now goes beyond the previously
+vacuous typed-hyperfabric seam certificate. New owner
+`DASHI/Reasoning/TypedHyperfabricPantsNonvacuousSeamQuotientExact.agda`
+constructs two actually incident original pants boundary channels,
+merges their edge addresses, and preserves exactly the five fields
+paid by the original `InterfaceMatch` in a new compatible
+`TypedHyperfabric.GlobalSection`. Full channel-label/provenance
+equality is not falsely claimed; both source provenance labels are
+retained at the merged edge.
+
+`DASHI/Foundations/TernaryThirteenTwoChartOverlapGluingExact.agda`
+adds two proper charts of the original 12-axis carrier, with true
+overlap at atlas-6 and independent centre matching. It constructs
+their source valuation/centre glue, proves exact local restrictions,
+provides negative cases for mismatched overlap and centre, and
+transports the glue to original depth-13 pants paths.
+
+These are finite case constructions, not the all-cover theorem for
+an independently selected nontrivial Grothendieck topology. See
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact names, commits, and remaining original semantic seams.
+The analytic Bishop P1 atan–Cayley, P2 selected zeta and P3
+Gamma/Xi obligations are unchanged and open.
