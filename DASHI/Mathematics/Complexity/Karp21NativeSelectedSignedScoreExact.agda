@@ -31,6 +31,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranPairedBinaryTraceExact as Pair
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact as Original
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact as Stream
 
 data RawTokenAligned : List Paired.PairedRawEdge → Set where
   alignedNil : RawTokenAligned []
@@ -161,3 +162,76 @@ nativeAlignedScoreSameOriginalRawSparseScore paired bits history coherent
     (alignedSelectedSignedSum selected
       (selectedTraceRetainsNativeNumericalAlignment
         paired bits history coherent selected refl))
+
+
+------------------------------------------------------------------------
+-- The ACTUAL original gamma/native signed-weight parser, not a
+-- caller-supplied arbitrary pair, produces numerically aligned tokens.
+------------------------------------------------------------------------
+
+originalNativeOneEdgeIsAligned :
+  (word : Word.BitWord)
+  (pair : Paired.PairedRawEdge)
+  (suffix : Word.BitWord) →
+  Stream.readOneNativePairedRawEdge word ≡ just (pair , suffix) →
+  RawTokenAligned (pair ∷ [])
+originalNativeOneEdgeIsAligned word pair suffix successful
+  with Stream.readOneNativePairedRawEdge word in observed
+... | nothing with successful
+... | ()
+... | just ((Graph.raw-edge u v w , token) , rest)
+  with successful
+... | refl
+  with Runtime.endpointConsistent u true []
+... | _ = alignedCons refl alignedNil
+
+-- Original per-edge pair constructor is the only source of the
+-- RawTokenAligned proof; recursion follows actual count and cursor.
+nativeRawEdgeStreamIsAligned :
+  (count : Nat)
+  (word : Word.BitWord)
+  (paired : List Paired.PairedRawEdge)
+  (suffix : Word.BitWord) →
+  Stream.readNativePairedRawEdges count word ≡ just (paired , suffix) →
+  RawTokenAligned paired
+nativeRawEdgeStreamIsAligned 0 word [] word refl = alignedNil
+nativeRawEdgeStreamIsAligned (suc count) word paired suffix success
+  with Stream.readOneNativePairedRawEdge word in one
+... | nothing with success
+... | ()
+... | just (edge , rest)
+  with Stream.readNativePairedRawEdges count rest in next
+... | nothing with success
+... | ()
+... | just (edges , suffix′) with success
+... | refl =
+  let alignedHead = originalNativeOneEdgeIsAligned word edge rest one
+      alignedTail = nativeRawEdgeStreamIsAligned
+        count rest edges suffix′ next
+  in combineAlignedHead alignedHead alignedTail
+  where
+    combineAlignedHead :
+      ∀ {edge : Paired.PairedRawEdge}
+        {edges : List Paired.PairedRawEdge} →
+      RawTokenAligned (edge ∷ []) →
+      RawTokenAligned edges →
+      RawTokenAligned (edge ∷ edges)
+    combineAlignedHead (alignedCons eq alignedNil) tail =
+      alignedCons eq tail
+
+-- NO arbitrary aligned-pair assumption remains: the premise is now
+-- the ACTUAL parsed source raw signed-edge stream success equation.
+nativeRawStreamSignedScoreSameOriginal :
+  (count : Nat)
+  (word : Word.BitWord)
+  (paired : List Paired.PairedRawEdge)
+  (suffix bits : Word.BitWord)
+  (history : List (Nat × Bool)) →
+  Stream.readNativePairedRawEdges count word ≡ just (paired , suffix) →
+  nativePairedScoreObservation paired bits history
+    ≡ Runtime.rawSparseScore (Paired.rawFromPairs paired) bits history
+nativeRawStreamSignedScoreSameOriginal
+  count word paired suffix bits history parsed =
+  nativeAlignedScoreSameOriginalRawSparseScore
+    paired bits history
+    (nativeRawEdgeStreamIsAligned count word paired suffix parsed)
