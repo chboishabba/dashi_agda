@@ -27,7 +27,7 @@ crenshaw1991 = Attr.mkDOISource
   "Stanford Law Review 43(6), 1241-1299"
   "1991"
   "10.2307/1229039"
-  "https://scholarship.law.columbia.edu/faculty_scholarship/3007/"
+  "https://web.usca.edu/media/usca/departments/institutional-culture-amp-belonging/Crenshaw-MappingMarginsIntersectionality-1991.pdf"
   Attr.academicArticleSource
   "Situated structural/political/representational intersectionality; no presumption that documented barriers measure fatigue"
   Attr.publicAttribution
