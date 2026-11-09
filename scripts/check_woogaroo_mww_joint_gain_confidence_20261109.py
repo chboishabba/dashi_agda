@@ -55,6 +55,14 @@ def check():
     assert len({g for g,c in indistinguishable})==3
     assert len({c for g,c in indistinguishable})==3
     assert len({percent(g,c) for g,c in indistinguishable})==1
+    # Full exact source rational output (not just the coefficient).
+    # An agreed denominator cannot restore gain or confidence.
+    full_ratio_pairs=[
+        ((OTHER+MWW_AREA_TENTHS*g*c)*P, D)
+        for g,c in indistinguishable
+    ]
+    assert len(set(full_ratio_pairs))==1
+    assert F(*full_ratio_pairs[0])==percent(4,75)
     assert percent(4,75) > 100
     assert percent(3,75) > 90 > percent(2,75)
     assert 47 < required_confidence(90,4) < 48
@@ -65,6 +73,8 @@ def check():
       "same_output_distinct_parameters":{
           "parameter_pairs":[{"gain":g,"confidence_percent":c} for g,c in indistinguishable],
           "common_coefficient":coefficients[0],
+          "full_ratio_numerator":str(full_ratio_pairs[0][0]),
+          "full_ratio_denominator":str(full_ratio_pairs[0][1]),
           "same_discounted_output":True,
           "cannot_identify_optimiser_or_scientific_justification_from_output_alone":True
       },
@@ -84,7 +94,9 @@ def main():
                        "sixtyBelow100Exact","sixtyFiveAbove100Exact",
                        "originalCoefficientCannotIdentifyGain",
                        "originalCoefficientCannotIdentifyConfidence",
-                       "Abstract.noGainDecoderForAffineProduct"):
+                       "Abstract.noGainDecoderForAffineProduct",
+                       "originalFullFractionCannotIdentifyGain",
+                       "originalFullFractionCannotIdentifyConfidence"):
             assert marker in content, marker
         assert "{!!}" not in content and "postulate " not in content
     result=check()
