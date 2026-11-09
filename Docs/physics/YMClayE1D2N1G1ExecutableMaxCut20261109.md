@@ -92,3 +92,19 @@ This is the source-level **normalisation/convergence base case**. It does not es
 **Revised highest-alpha E1 exact leaves:** construct the original selected Wilson path-to-projective-coordinate identification (R568 remaining `literalRound568PathProjectionBelongsToSelectedProjectiveSystemLevel`), prove A3 event consistency and continuity at empty (R566), and recover nonconstant selected expectations with an original-source uniform/Cauchy or projective representation theorem. Reuse R568 finite-path word factorization; do not rewrite it. B1 remains the R576 actual two-source mixed-log cluster expansion and connected-weight tail; B2 remains the R577 physical transfer coordinate of *the reconstructed* Hamiltonian; G1 remains R571, H6 R563.
 
 **Verification honesty:** source written and repository readback only; no Agda kernel receipt. The E1 constant-cylinder proof is a nontrivial finite integration/same-source consumer but not a Clay continuum construction.
+
+
+## 2026-11-09 E1/A3 source-native arbitrary-word finite-support proof
+
+New module `YMClayE1A3OriginalAllWordPathSupportExtensionalExact.agda`, imported into `YMClayOriginalWilsonPhysicalRegression.agda`, reuses actual original signed Wilson path support rather than assuming independent finite coordinates.
+
+The module defines `appendSource` with constructive `appendSourceLeft`/`appendSourceRight` membership transports, and `originalWordActualFlatPositiveBondSupport` (the recursively flattened **actual** positive-link lookup list for a sequence of original source plaquettes). It then supplies:
+
+- `originalPlaquetteTraceSourceExtensional`: original SU(N) one-plaquette *real trace* equality whenever actual underlying positive-link fields agree on the signed path lookup support, via existing `originalWilsonPlaquetteHolonomyExtensional`;
+- `originalWordRealSourceExtensional`: induction over the original all-length source plaquette word. If two actual cutoff-n link configurations agree on **every positive bond genuinely read by the full word**, their actual real Wilson word values agree. This includes negative-step predecessor links, not just geometric endpoint adjacency.
+
+This discharges the *all-word finite support/locality* proof obligation in the actual changing-cutoff SU(N) source. It **does not** identify that support with an independently selected continuum projective coordinate. The still-open R568/R566 producer is `literalRound568PathProjectionBelongsToSelectedProjectiveSystemLevel` plus A3 positive event semantics, Boolean algebra, projective consistency, continuity-at-empty, and the finite-to-continuum expectation/measure comparison. In particular, finite path dependence cannot itself prove equality of independently selected cutoff Gibbs marginals.
+
+Physical B1: source-first KP cluster bidegree (1,1) germ, original marked log-jet equality, pointwise source Wilson localization and `localizedLiteralShellChargeSum` remain to be instantiated (R578/B1Source); the generic P06 polymer-animal counting is already available. B2: R577 transfer of actual reconstructed H. H6: R563 non-Gaussian Ward kernel on the same E1 system. G1: R571 actual group data and physical five-block bounds, not classification alone.
+
+**Acceptance:** code committed and source read back. Agda command missing from environment; kernel acceptance unresolved. Do not claim original interacting continuum E1 or any Clay terminal gate from this finite locality lemma.
