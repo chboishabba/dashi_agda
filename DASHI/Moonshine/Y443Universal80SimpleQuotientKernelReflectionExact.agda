@@ -25,6 +25,7 @@ import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443JMDPowerFiveSixAlgebraExact as Algebra
 import DASHI.Moonshine.TwistedModuleModularity as TM
+import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as Actions
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
@@ -88,6 +89,23 @@ module Selected
       witnessNonidentity :
         nodes witnessNode ≢ Pair.identity gi
   open ActualSelectedNontrivialNode public
+
+  -- A single MOVED STATE of the actual typed selected group action
+  -- proves the original witness is not the identity. This is much
+  -- weaker than assuming faithful action or an all-word isomorphism.
+  nonidentityNodeFromMovingState :
+    ∀ {S : Set} →
+    (action : Actions.ActualGroupAction {G} {S} gi) →
+    (n : Y.Node) (state : S) →
+    Actions.act action (nodes n) state ≢ state →
+    ActualSelectedNontrivialNode
+  nonidentityNodeFromMovingState action n state moves = record
+    { witnessNode = n
+    ; witnessNonidentity = λ eq →
+        moves (Algebra.trans
+          (Algebra.cong (λ g → Actions.act action g state) eq)
+          (Actions.actsIdentity action state))
+    }
 
   simpleQuotientAndOneNonidentityNodeReflectsAllWords :
     Original80SimpleCongruenceAuthority →
