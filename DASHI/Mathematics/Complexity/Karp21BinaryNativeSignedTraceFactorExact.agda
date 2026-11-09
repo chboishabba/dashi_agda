@@ -23,7 +23,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (List; length; reverse)
-open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import Data.Nat.Properties as NatP
 open import Data.Product using (_×_; _,_)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -173,7 +173,7 @@ insertFactorPositiveValue (Signed.positive magnitude , count)
       (Scale.scaleBitsValue (reverse magnitude) count))
 insertFactorPositiveValue (Signed.negative magnitude , count)
   (positive , negative) =
-  NatP.+-identityʳ (Value.valueLE positive)
+  sym (NatP.+-identityʳ (Value.valueLE positive))
 
 insertFactorNegativeValue :
   (factor : SignedWeightClass) (ledger : Ledger.SignedLedger) →
@@ -181,7 +181,7 @@ insertFactorNegativeValue :
     Ledger.negativeValue ledger + negativeClassTotal factor
 insertFactorNegativeValue (Signed.positive magnitude , count)
   (positive , negative) =
-  NatP.+-identityʳ (Value.valueLE negative)
+  sym (NatP.+-identityʳ (Value.valueLE negative))
 insertFactorNegativeValue (Signed.negative magnitude , count)
   (positive , negative) =
   trans
@@ -195,7 +195,7 @@ replayFactorsPositiveValue :
   Ledger.positiveValue (replayFactors factors ledger) ≡
     Ledger.positiveValue ledger + positiveFactorTotal factors
 replayFactorsPositiveValue [] ledger =
-  NatP.+-identityʳ (Ledger.positiveValue ledger)
+  sym (NatP.+-identityʳ (Ledger.positiveValue ledger))
 replayFactorsPositiveValue (factor ∷ rest) ledger =
   trans
     (replayFactorsPositiveValue rest (insertFactor factor ledger))
@@ -212,7 +212,7 @@ replayFactorsNegativeValue :
   Ledger.negativeValue (replayFactors factors ledger) ≡
     Ledger.negativeValue ledger + negativeFactorTotal factors
 replayFactorsNegativeValue [] ledger =
-  NatP.+-identityʳ (Ledger.negativeValue ledger)
+  sym (NatP.+-identityʳ (Ledger.negativeValue ledger))
 replayFactorsNegativeValue (factor ∷ rest) ledger =
   trans
     (replayFactorsNegativeValue rest (insertFactor factor ledger))
