@@ -50,6 +50,9 @@ def main():
         "seamPropositionAgrees", "seamCapacityAgrees",
         "seamPhaseAgrees", "seamWaveAgrees",
         "seamOpennessAgrees", "noAutomaticPhysicalFlowFromPants",
+        "all27PhysicalPantsSeams", "allOriginalPantsSeamLinesCount27",
+        "originalPantsBondActionsCount54",
+        "allPantsGluedPhysicalBondHistoryConserves",
     ):
         assert symbol in source1, symbol
     for symbol in (
@@ -78,6 +81,32 @@ def main():
     assert blocked[IDX[c]]==0
     assert sum(blocked)==sum(observed)==1
 
+    # All 27 axis-line pants seams: three axes × 3 × 3 orthogonal
+    # positions. The resulting 54 edges are a partition of the original
+    # 3D native positive bonds, not a second flat invented graph.
+    all_seams = []
+    all_seam_bonds = []
+    for axis in range(3):
+        for fixed1 in (-1,0,1):
+            for fixed2 in (-1,0,1):
+                route = []
+                for val in (-1,0,1):
+                    other = iter((fixed1, fixed2))
+                    route.append(tuple(val if i == axis else next(other) for i in range(3)))
+                all_seams.append(route)
+                all_seam_bonds.extend(((route[0],route[1]),(route[1],route[2])))
+    assert len(all_seams)==27
+    assert len(all_seam_bonds)==54
+    assert set(all_seam_bonds)==set(BONDS)
+    shared_history_checks=0
+    for source_idx in range(27):
+        chain=[0]*27
+        chain[source_idx]=3
+        for x,y in all_seam_bonds:
+            chain=move(chain,x,y)
+            assert sum(chain)==3
+            shared_history_checks+=1
+
     # Count actual elementary squares on three axes:
     squares=tuple(
         (p, ax, ay) for p in PTS for ax in range(3)
@@ -95,6 +124,9 @@ def main():
         "native_plaquettes":len(squares),
         "physically_incident_seam_bonds":[[a,b],[b,c]],
         "shared_inventory_traces_checked":count,
+        "native_pants_axis_lines":len(all_seams),
+        "all_seams_use_exact_original_54_bonds":True,
+        "full_native_pants_history_events_checked":shared_history_checks,
         "same_total_gated_vs_passable_distinct_target":True,
         "pants_five_coordinate_interface_is_not_physiological_permeability":True,
         "source_paid_flow_rate":False,
