@@ -333,3 +333,32 @@ For `|z-p|≤1/1000`, exact rational upper bounds are approximately `2.5559894e-
 - [ ] `originalKneserConjugatePairGlobalNormalization`: global conjugate chart gluing and Kneser normalization; still open.
 
 **P2/P3/P4 status unchanged:** actual upper-half-plane modular-j same-object, moving fine modular lift, and certified original Kouznetsov contour calibration remain OPEN; the new exact tail certificate only concerns the local inverse-log Koenigs sequence.
+
+## 2026-11-09 vendored Bishop reuse / complex Koenigs completion tranche
+
+**Concrete source-written theorem owner:** `DASHI/Moonshine/AbelBishopKoenigsComponentwiseCompletionExact.agda`; commit `3d160c0`.
+
+Direct reused owners (no replacement metric axioms):
+- `DASHI/Foundations/BishopConstructiveRealBridgeExact.agda`: already defines `bishopCauchyComplete`, `bishopLimitUnique`, original `BishopCauchy`, `BishopConvergesTo` on the imported `Real` / `Sequence`.
+- `DASHI/Analysis/BishopComplexSeriesConvergenceExact.agda`: literal real/imaginary Bishop complex pair and componentwise setoid equality `_≈C_`.
+- `DASHI/Analysis/BishopConstructedRealBackendExact.agda`: native `SetoidOrderedCompleteReal` instance with vendored sequence completeness.
+- `DASHI/Analysis/ContractiveCompartmentTailExact.agda`, `DASHI/Analysis/PolynomialGeometricTailDominationExact.agda`, `DASHI/Analysis/TailModulusCauchyBridgeExact.agda`: existing finite-tail domination, tail-smallness and a **conditional** conversion into the backend's Cauchy predicate.
+
+Source-written declarations (require Agda 2.9 kernel run):
+- [x] **P1.B01** `OriginalBishopComplexCauchy`: componentwise original Bishop Cauchy predicates on `Nat→BishopComplex`.
+- [x] **P1.B02** `originalBishopComplexCauchyLimit`: construct an actual Bishop-complex limit via the **existing** vendored real completeness theorem applied to each component.
+- [x] **P1.B03** `originalBishopComplexCauchyConverges`: prove componentwise original Bishop convergence to that limit.
+- [x] **P1.B04** `originalBishopComplexCauchyLimitUnique`: uniqueness in the original Bishop complex setoid, not unjustified propositional equality.
+- [x] **P1.B05** `originalBishopKoenigsLimitFromCauchy`, `originalBishopKoenigsLimitConverges`: specialize the complex completion results to a Koenigs trajectory. The actual Koenigs **Cauchy evidence is still an input**; the declaration must not be mistaken for `originalBishopKoenigsUniformCauchy`.
+
+Remaining exact direct producers, now without a spurious second completeness task:
+- [ ] **P1.B06** `originalBishopKoenigsIterateSameSource`: define the actual `h_n(z)=p^n(Log^n(z)-p)` on the existing `BishopSetoidComplexExact` / `BishopComplexSeriesConvergenceExact` equality surface and specify the source principal-log branch.
+- [ ] **P1.B07** `originalBishopKoenigsIncrementMagnitude`: prove original setoid/ordered-real `|h_{n+1}-h_n|≤(69/50)(311/1000)(552/625)^n|z-p|²` from the original Log remainder and contraction.
+- [ ] **P1.B08** `originalBishopKoenigsFiniteTailToCauchy`: use the existing dominated-tail machinery and establish the actual Bishop `Sequence._isCauchy` (real and imaginary) from the signed complex increments, **not** an opaque `TailVanishesToCauchyBridge` left uninhabited.
+- [ ] **P1.B09** `originalBishopKoenigsUniformCauchy`: prove the preceding step uniformly over the explicit disk; use the P1.B02–B05 completion and the existing `Sequence.fast-cauchy⇒convergent`.
+- [ ] **P1.B10** `originalBishopKoenigsHolomorphicLimit`: establish uniform-local convergence and analytic derivative transport in source semantics; existing `SetoidDerivativeLimitInterchangeBidiExact` explicitly marks such interchange as still conditional.
+- [ ] **P1.B11** Run `agda --safe` (pinned version and imports) on the new owner, record exact SHA, errors/acceptance and relevant preflight checks. **Not run here; no Agda executable.**
+
+**Correction to the earlier max-cut wording:** DASHI *already has* vendored Bishop Cauchy completeness and componentwise complex convergence. We do not need to construct a second unrelated completeness theory merely because `DASHI/Geometry/BanachFixedPoint.agda` is ultrametric. The outstanding analytic work is the **complex principal-Log contraction**, the genuine Koenigs increment-to-Cauchy conversion and uniform holomorphic limit (plus global Kneser); the independent ordinary Banach theorem may be specialized/constructed from the vendored metric if that fixed-point step cannot be reduced directly to the Cauchy iteration.
+
+**Other phases unchanged:** Kneser conjugate-pair gluing, punctured-sector logarithm cocycle, Bishop q-series T-period + renderer identification, original moving fine-level lift, and certified Kouznetsov numerics are still OPEN. No theorem status is promoted solely by constructing an abstract record, a Python receipt or a source-written Agda function.
