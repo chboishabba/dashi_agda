@@ -4,6 +4,7 @@ module DASHI.Governance.EpistemicPowerCrossDomainCapstoneExact where
 -- query-adequacy owners. This does NOT equate their domain-specific meanings.
 open import DASHI.Core.Prelude
 import DASHI.Core.IntersectionalNonFactorability as INF
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.QueryIndexedProjectionAdequacyExact as Query
 import DASHI.Core.LacanIrigarayTernaryGrammarBridgeExact as Grammar
 import DASHI.Core.TernaryRoleCarrierExact as Ternary
@@ -66,6 +67,6 @@ epistemicPowerCrossDomainCapstone = cross-domain-cut
 -- Citation metadata is anchored in the same package but grants none of
 -- the domain-specific epistemic/ethical conclusions above.
 sourceAtlasDoesNotCreateDomainAuthority :
-  Sources.Attr.atlasCreatesAuthority
+  Attr.atlasCreatesAuthority
     Sources.epistemicPowerSources ≡ false
 sourceAtlasDoesNotCreateDomainAuthority = refl
