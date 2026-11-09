@@ -67,7 +67,7 @@ class FibreIndex:
 
     @staticmethod
     def fingerprint(d: Declaration) -> tuple[str, str]:
-        return (d.profile, sha256(d.canonical_type).hexdigest())
+        return ("\\x1f".join((d.profile, d.type_head, d.universe_shape)),\n                sha256(d.canonical_type).hexdigest())
 
     def admit(self, d: Declaration) -> bool:
         if not all((d.source.repository, d.source.revision, d.source.declaration,
