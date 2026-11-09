@@ -213,3 +213,27 @@ Remaining exact blockers are K0 executable/kernel receipts, K1 cryptographically
 ### Source/material limitations
 
 The Cambridge primary HTML was read directly and source descriptions in the ledger are human-level grounded. The Edinburgh-hosted PDF returned 403 for direct fetch/screenshot; an indexed text extraction and a published repository record were available. No PDF screenshot or file digest is claimed. For all K2/K3 cases, evidence is absent from this branch and cannot be created by a closed finite model. Thus **K1 passage anchoring advanced; K2/K3 formal admission gates advanced; primary byte receipts and real empirical case closure remain open**.
+
+## Candidate primary institutional corpus — Crenshaw case-law comparison
+
+**Candidate status only (not empirical case admission).** Recommended order:
+1. *DeGraffenreid v General Motors*, 413 F. Supp. 142 (E.D. Mo. 1976), aff'd on Title VII grounds 558 F.2d 480 (8th Cir. 1977): district court single-axis doctrinal restriction, separately encode appellate procedural/statutory holding. Sources: https://law.justia.com/cases/federal/appellate-courts/F2/558/480/165330/
+2. *Jefferies v Harris County Community Action Association*, 615 F.2d 1025 (5th Cir. 1980): positive comparator recognizing race-plus-sex subclass claims; partial affirmance/remand, not an automatic merits victory. Source: https://law.justia.com/cases/federal/appellate-courts/F2/615/1025/415505/
+3. *Moore v Hughes Helicopters*, 708 F.2d 475 (9th Cir. 1983): separate claim identity, class representation, qualification pools and adverse judgment. Source: https://law.justia.com/cases/federal/appellate-courts/F2/708/475/330286/
+4. *Payne v Travenol Laboratories*, 673 F.2d 798 (5th Cir. 1982): standing/representation conflicts, remedies, and partial relief; do not miscode restriction of class scope as erasure of the entire discrimination claim. Source: https://www.neochart.com/catalog/cases/f2d/volume_673/0798_01/index.html
+
+**Interpretive key:** Kimberlé W. Crenshaw, *Demarginalizing the Intersection of Race and Sex*, 1989 University of Chicago Legal Forum 139, https://scholarship.law.columbia.edu/faculty_scholarship/3007/. The cases are analysed by Crenshaw; do not characterize her as counsel or author of the judicial opinions.
+
+**Adjacent K2 candidate:** Crenshaw, *Mapping the Margins* (1991), 43 Stanford Law Review 1241, section on immigrant women facing language and immigration barriers to domestic-violence services: institutional access costs and interlocking structural barriers. Described cases are not direct observations of clinical fatigue or exhausted capacity. https://careprogram.ucla.edu/education/readings/crenshaw1991
+
+### Exact proposed case proof obligations (not source-written yet)
+
+- `deGraffenreidTrialVsAppealClaimSameCase`: distinguish district-court combined-category rejection from Eighth Circuit disposition and legal bases.
+- `jefferiesIntersectionalRecognitionPositiveControl`: capture recognition of race-and-sex discrimination in principle without inferring liability on merits.
+- `mooreClassRepresentationNotClaimIdentity`: distinguish plaintiff situated status, Rule 23 class scope, statistical qualification requirements and outcome.
+- `payneReliefNotEquivalentToRepresentationScope`: separate recognised discrimination, class representation limits and material remedy.
+- `crenshawCaseLawQueryIndexedComparison`: show observation adequacy for specific legal questions relative to **documented court formulations**, not retrospective invented court motives.
+- `mappingMarginsInstitutionalAccessBurdenEvidence`: source-grounded access impediments with no unsupported inference to psychological exhaustion.
+- `goodFaithLegalProcedureNegativeControl`: legal procedural constraints may be legitimate; structural exclusion/retained authority does not by itself demonstrate bad faith.
+
+**K2 and K3 distinction:** Judicial records pay legal framing, institutional procedure and judgments. They do not themselves establish lived psychological exhaustion. Any K2 claim requires independent material (interviews, testimony, contemporaneous records, triangulated observations) and ethically appropriate handling of private/sensitive detail. Case judgments alone cannot discharge K2 fatigue receipts.
