@@ -264,3 +264,31 @@ python scripts/run_openai_math_symbol_snowball.py \
 ```
 
 This yields **candidate owner search evidence**. Next P0 payment is to source-read each matched declaration's actual type and imports and classify it as exact owner, partial owner, negative control, or no proved owner. The 37 original SHA-256 image references remain in `Docs/roadmap/JMDImageSHA256Manifest.csv`; the search pack carries stable image IDs to group search. Avoid falsely claiming these 40 queries have already been run against the current full repository database.
+
+
+## 2026-11-09 implemented deterministic formal-world execution slice
+
+This supersedes the earlier **planned-only** P0–P6 entries. Actual source is
+in [dashi_agda PR #1477](https://github.com/chboishabba/dashi_agda/pull/1477)
+and the pinned Lean corpus + extractor in
+[dashi_lean4 PR #105](https://github.com/chboishabba/dashi_lean4/pull/105).
+
+| Gate | Implemented owner | Precise acceptance still open |
+|---|---|---|
+| P0 | \`jmd_formal_world_reconcile.py\` validates manifest repository IDs/names; reads existing Agda AST/signature tables; 12 image-topic groups route to indexed symbol candidates | Full local 21,481-row ingress + 12-group execution receipts |
+| P1 | Native \`repo_requirements\` and \`repo_refs\` gap discovery; direct dependency neighbourhood prioritized over lexical hits | Real full-repo gap-status comparison to AO proof-debt owners |
+| P2 | \`jmd_attach_wikidata_oeis.py\` source-span QID/OEIS references, plus optional attributed external-coordinate records | Source-read same-object mathematical semantics |
+| P3 | Persistent candidate-only links in **existing** \`.dashi/repository.sqlite3\`, with revision hashes and source provenance; selected pinned Lean \`#check\`/\`#print axioms\` extractor | Environment-faithful selected external theorem inventory at scale |
+| P4 | Actual opt-in \`lake env lean\` exact-donor probes; reject nonzero, \`sorryAx\`, dirty revisions and injected goal text | A locally executed accepted proof and independently checked Agda transport |
+| P5 | \`JMDFormalWorldReconciliationExact.agda\`: proof-term implication composition, equivalence with both sources preserved, candidate ≠ proof; world groups keep distinct accepted donor witnesses | Agda 2.9 --safe acceptance and a nontrivial source-to-target equivalence witness |
+| P6 | Source signature deltas plus existing reverse \`repo_refs\` dependency closure; re-evaluate candidates on every ingestion; unaffected edges not marked refuted | Local delta replay, native reference completeness and production validation |
+
+**Execution is not yet certified:** these modules/scripts/tests are written to
+GitHub and have source-inspection and regression fixtures, but the assistant
+environment has no installed Agda/Lean or the user's local full repository
+checkout/index. No kernel run or complete integration replay has been claimed.
+A checked Lean-local proof is not an Agda theorem until an explicit Agda
+translation or consumer proof passes its own checker.
+
+Authoritative full command guide:
+[Docs/roadmap/JMDFormalWorldAutomaticExecution.md](https://github.com/chboishabba/dashi_agda/blob/chatgpt/jmd-image-owner-roadmap-20261109/Docs/roadmap/JMDFormalWorldAutomaticExecution.md).
