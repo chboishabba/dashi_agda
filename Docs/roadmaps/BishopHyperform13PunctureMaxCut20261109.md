@@ -748,3 +748,72 @@ The all-sieve non-discrete constructed-site theorem of the prior
 round remains source-written; no assertion about full original
 world semantics, modular j, Monster representation or analytic
 Bishop objects follows from this observer bridge.
+
+
+## 2026-11-09 decisive highest-alpha gate: H2.02 selected heterogeneous original relational pants seam
+
+**Selected finite original-source H2.02 gate: SOURCE-COMPLETE.**
+This specifically pays the previously missing heterogeneity + exact donor match
++ nonvacuous incidence rewrite + source provenance transport in the ORIGINAL
+selected relational-pants specimen. Kernel acceptance is **NOT** claimed.
+
+Owner:
+`DASHI/Reasoning/TypedHyperfabricOriginalHeterogeneousPantsSeamExact.agda`.
+
+Unlike the earlier uniform `BranchChannel` specimen, this new source uses
+`OriginalHeterogeneousEdgeStalk outerEdge = Pants.BoundaryInterface`
+and `OriginalHeterogeneousEdgeStalk innerEdge = Pants.BranchChannel`.
+These are *different source types*, with real original selected values
+`Pants.selectedBoundary2`, `Pants.selectedChannel2` and
+`Pants.innerInputChannel2`.
+
+Exact source proof inventory:
+- `realizeOriginalBoundary` and `realizeSourceEdge`: reconstruct
+  the original selected-leg channel from the boundary stalk and the
+  actually original selected-leg wave, basin and receipt; interpret
+  the other original edge stalk directly.
+- `originalOuterRealization`, `originalInnerRealization`: exact
+  same-source identities of BOTH original channel values.
+- `heterogeneousBeforeFabric`, `heterogeneousBeforeSection`:
+  actual two-edge heterogeneous original `TypedHyperfabric` and
+  compatible `GlobalSection` with two nonempty incidences.
+- `selectedHeterogeneousPantsGluing` and
+  `originalHeterogeneousInterfaceIsDonor`: an **inhabited**
+  original `TypedHyperfabricPantsGluingBridgeExact.HyperfabricPantsGluing`
+  using `Pants.outerInnerMatch` rather than inventing five
+  equalities or assuming all arbitrary boundary channels match.
+- `sourceRealizedEdgesMatch`: the actual admitted original seam
+  preserves the full five-coordinate matched signature.
+- `heterogeneousMergedFabric`, `heterogeneousMergedSection`:
+  new single-seam edge, with both original endpoints incident,
+  exact five-field transport and a compatible global section.
+- `heterogeneousMergeIncidence`,
+  `heterogeneousMergePreservesRestrictions`,
+  `heterogeneousMergePreservesEdgeValues`: source-bound
+  incidence and section/restriction commutation on BOTH edges.
+- `heterogeneousMergedProvenanceExact`: provenance after the
+  quotient is exactly the concatenation of BOTH original source
+  provenance lists, not a generic claim of erasure or
+  unsupported one-to-one full-channel equality.
+- `heterogeneousEdgesReallyMerge` and the two
+  `heterogeneous*IncidenceNonempty` declarations: merge is real.
+
+Source commits: `cc75fba`, `610c2b5`. Canonical TOE imports:
+`1abdc73`, `c3b7ba6`, `7ee44f8`.
+
+### What is now closed and what is not
+
+| Gate | Source-level verdict | Remaining qualification |
+|---|---|---|
+| **H2.02 selected original relational-pants heterogeneous seam** | **SOURCE-COMPLETE**: actual source-selected unequal edge stalks, full original five-field match, topology quotient, both restrictions and both original provenance lists | Agda 2.9 kernel check still open |
+| H2.02 arbitrary heterogeneous *world* fabric | OPEN | independent ITIR/world original edge stalk maps, own empirical/source-proven channel match, full selected-world topology/provenance identification |
+| H1.01 semantic | OPEN | original independent relational/group/Monster intended carrier equivalence, not numerical count or pants-address similarity |
+| H2.01 operational | OPEN | genuine original ITIR nodes and selected commuting witness inhabiting `OriginalWorldCentralTransport` |
+| Bishop P1 | OPEN | original source nested exp/atan analytic identity and Machin 1/5, 1/239 |
+| Zeta P2 | OPEN | source canonical Nat powers and independently selected zeta equality |
+| Gamma/Xi P3 | OPEN | source Gamma integral/continuation/functional equation/completed Xi |
+
+Do not say the *entire H2.02 source-world programme* is closed:
+this payment specifically closes the **original relational-pants
+selected finite specimen**, not unsourced world-model semantics.
+The mandatory source/kernal distinction remains explicit.
