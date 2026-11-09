@@ -391,8 +391,8 @@ panelSpatialSignedReactionConserves
           (λ _ → panelReactionAfter reaction residual))))
     (trans
       (cong
-        (λ n → n + (panelWeighted positiveWeights current
-          + panelWeighted negativeWeights current))
+        (λ n → (panelWeighted positiveWeights current
+          + panelWeighted negativeWeights current) + n)
         (panelSpatialSignedReactionConserves
           positiveWeights negativeWeights site reaction residual
           rest available balanced))
