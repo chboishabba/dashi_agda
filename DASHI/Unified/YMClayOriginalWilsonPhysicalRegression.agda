@@ -69,3 +69,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalGreedy19CountingExact as D1Native
 
 -- D1 structurally terminating fuel-greedy, original-link maximality and 19-count transport.
 import DASHI.Physics.YangMills.YMClayD1OriginalFuelGreedyTerminationExact as D1FuelGreedy
+
+-- D1/P06 concrete same-Wilson-positive-bond conflict graph (nonempty original plaquette witness).
+import DASHI.Physics.YangMills.YMClayD1OriginalLinkStarFiniteNeighbourGraphExact as D1P06OriginalLinkGraph
