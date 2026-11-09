@@ -68,11 +68,17 @@ centralPunctureObserverDescent :
   ((word : F.TritWord 13) →
     f (prefixObserver word) ≡ lastCoordinateConsumer word) →
   ⊥
-centralPunctureObserverDescent f supposed
-  rewrite neutralPrefixIsBase
-        | positivePrefixIsBase
-        | neutralLastIsNeutral
-        | positiveLastIsPositive =
-  neutralIsNotPositive
-    (trans (sym (supposed neutralExtension))
-           (supposed positiveExtension))
+centralPunctureObserverDescent f supposed =
+  neutralIsNotPositive (trans (sym neutralEval) positiveEval)
+  where
+  neutralEval : f baseTwelve ≡ F.neutral
+  neutralEval =
+    trans
+      (sym (cong f neutralPrefixIsBase))
+      (trans (supposed neutralExtension) neutralLastIsNeutral)
+
+  positiveEval : f baseTwelve ≡ F.positive
+  positiveEval =
+    trans
+      (sym (cong f positivePrefixIsBase))
+      (trans (supposed positiveExtension) positiveLastIsPositive)
