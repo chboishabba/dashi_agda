@@ -95,16 +95,16 @@ def selftest():
         assert good["bytes_and_claims_pass"]
         assert not good["approved_originals_authenticity_established"]
         entries[0]["sha256"]="0"*64
-        manifest.write_text(json.dumps({"artifacts":entries}))
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
         bad=check(manifest)
         assert not bad["bytes_and_claims_pass"]
         entries[0]["sha256"]=digest(root/"july_pd.pdf")
         entries[1]["claimed_revision"]="January 2026 substitute"
-        manifest.write_text(json.dumps({"artifacts":entries}))
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
         wrong=check(manifest)
         assert not wrong["bytes_and_claims_pass"]
         entries.pop()
-        manifest.write_text(json.dumps({"artifacts":entries}))
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
         missing=check(manifest)
         assert not missing["bytes_and_claims_pass"]
     return {"tests":4,"passed":4,"synthetic_fixtures_only":True,
