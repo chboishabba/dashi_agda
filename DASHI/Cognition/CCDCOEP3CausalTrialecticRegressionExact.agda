@@ -31,6 +31,7 @@ import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
+import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -503,3 +504,18 @@ originalNewspaperBylinesRemainDistinctFromGCC :
   ≡ GCC1993.originalOwner GCC1993.mayReporterLetter → ⊥
 originalNewspaperBylinesRemainDistinctFromGCC =
   GCC1993.articleAuthorNotGCCHistoricalAuthor
+
+-- An independently authored June 1 article is the object of a later
+-- GCC response, not an original article authored by GCC on June 30.
+laterGCCResponseNotCauseOfPriorArticle :
+  Direction.HistoricalSourceRelation
+    Direction.shlaesGCCResponseJune30
+    Direction.rensbergerWashingtonPostJune1 → ⊥
+laterGCCResponseNotCauseOfPriorArticle =
+  Direction.responseCannotBeSourceOfEarlierArticle
+
+originalJournalistAndGCCAuthorsRemainDistinct :
+  Direction.originalAuthor Direction.rensbergerWashingtonPostJune1
+  ≡ Direction.originalAuthor Direction.shlaesGCCResponseJune30 → ⊥
+originalJournalistAndGCCAuthorsRemainDistinct =
+  Direction.journalistNotGCCHistoricalAuthor
