@@ -707,3 +707,10 @@ Companion #1471 now source-writes true forward/reverse native-bond action histor
 ### 2026-11-09 physical P0 transport-current dependency update
 
 Original geometric/cubical companion PR #1471 has now source-written exact executed source/target transfer quantum lemmas, geometric non-loop proofs, per-role native voxel incidence conservation, one-step **integer signed** cation/anion continuity, and original face discharge local balance. No Agda typecheck or branch integration is claimed. This strengthens the local-current mathematical dependencies but leaves arbitrary mixed-current history induction unpaid. Rhea 29×12 original source bytes, 29 exchange flux measurements, physiological model calibration, same-source BH4/PNP/tissue refinement, original stochastic quotient, held-out validation and stacked Golden reconciliation remain OPEN. Existing KPO-01–KPO-18 source/attribution obligations are unchanged.
+
+
+## 2026-11-09 source-written signed mixed-history 369 theorem owner
+
+Companion biology PR #1471 now has a source-written original 27-voxel/54-bond/6-face ionic history theorem candidate `original369LocalSignedContinuityExact` in new `Biological369MixedNativeFaceSignedContinuityExact.agda`, imported into its Round-23 Golden and acceptance script. It consumes original geometric incident edges and actual face-selected exchange currents, derives signed charge from separate cation/anion ledgers and proves chronological balance by natural-number induction in source. No exact-head Agda checker has run: mark as **kernel pending**.
+
+The high-value P0 source obligation is still to recover/execute the original byte-pinned 29×12 Rhea certificate, carry its 3 nonfinite residuals and all 29 separately measured exchange rates into a physical 3D model; then construct `sameSourcePhysicalReactionTransportStep`. P1–P3 phenotype, stochastic quotient, empirical evidence and the stacked root remain OPEN. Do not confuse source-written transport conservation with measured permeability or a proved clinical Kitzerow allocation mechanism.
