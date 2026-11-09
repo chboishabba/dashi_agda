@@ -268,3 +268,189 @@ original369SignedNativeOneStepContinuity
   observer role =
   cong₂ Ionic.integerSignedCharge refl
     (Native.originalNativeVoxelIncidenceBalance bond neg observer role)
+
+
+------------------------------------------------------------------------
+-- CHRONOLOGICAL SIGNED NATIVE TRANSPORT HISTORY: each history entry
+-- includes its actual original 54-bond action and the observed voxel's
+-- certified source/target/spectator role. Two separate natural current
+-- ledgers retain the actual positive and negative ion currents.
+-- The final theorem transports both exact balances into integer signed
+-- charge. Boundary face events remain a separate pending mixed-history
+-- owner: they are NOT silently treated as internal zero-current events.
+------------------------------------------------------------------------
+
+record LocatedSignedNativeAction (observer : F.Fin 27) : Set where
+  constructor located-signed-native-action
+  field
+    locatedAction : OriginalSignedNativeBondAction
+    locatedRole : Native.NativeVoxelRole (signedNativeBond locatedAction) observer
+open LocatedSignedNativeAction public
+
+positiveAtVoxel : F.Fin 27 → Ionic.TwoIonSharedGrid → Nat
+positiveAtVoxel observer state =
+  V.lookup (Ionic.positiveIon state) observer
+
+negativeAtVoxel : F.Fin 27 → Ionic.TwoIonSharedGrid → Nat
+negativeAtVoxel observer state =
+  V.lookup (Ionic.negativeIon state) observer
+
+positiveNativeOneStepBalance :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27)
+  (role : Native.NativeVoxelRole (signedNativeBond action) observer) →
+  positiveAtVoxel observer (applyOriginalSignedNativeBond action state)
+    + positiveNativeOut action state observer role
+    ≡ positiveAtVoxel observer state
+      + positiveNativeIn action state observer role
+positiveNativeOneStepBalance (moveCation bond)
+  (Ionic.two-ion-shared-grid pos neg) observer role =
+  Native.originalNativeVoxelIncidenceBalance bond pos observer role
+positiveNativeOneStepBalance (moveAnion bond)
+  (Ionic.two-ion-shared-grid pos neg) observer role = refl
+
+negativeNativeOneStepBalance :
+  (action : OriginalSignedNativeBondAction)
+  (state : Ionic.TwoIonSharedGrid) (observer : F.Fin 27)
+  (role : Native.NativeVoxelRole (signedNativeBond action) observer) →
+  negativeAtVoxel observer (applyOriginalSignedNativeBond action state)
+    + negativeNativeOut action state observer role
+    ≡ negativeAtVoxel observer state
+      + negativeNativeIn action state observer role
+negativeNativeOneStepBalance (moveCation bond)
+  (Ionic.two-ion-shared-grid pos neg) observer role = refl
+negativeNativeOneStepBalance (moveAnion bond)
+  (Ionic.two-ion-shared-grid pos neg) observer role =
+  Native.originalNativeVoxelIncidenceBalance bond neg observer role
+
+record NativeSignedVoxelHistoryLedger : Set where
+  constructor native-signed-voxel-history-ledger
+  field
+    finalNativeIons : Ionic.TwoIonSharedGrid
+    cumulativePositiveOut : Nat
+    cumulativePositiveIn : Nat
+    cumulativeNegativeOut : Nat
+    cumulativeNegativeIn : Nat
+open NativeSignedVoxelHistoryLedger public
+
+runLocatedSignedNativeHistory :
+  (observer : F.Fin 27) →
+  List (LocatedSignedNativeAction observer) →
+  Ionic.TwoIonSharedGrid → NativeSignedVoxelHistoryLedger
+runLocatedSignedNativeHistory observer [] state =
+  native-signed-voxel-history-ledger state 0 0 0 0
+runLocatedSignedNativeHistory observer
+  (located-signed-native-action action role ∷ rest) state
+  with runLocatedSignedNativeHistory observer rest
+    (applyOriginalSignedNativeBond action state)
+... | native-signed-voxel-history-ledger final posOut posIn negOut negIn =
+  native-signed-voxel-history-ledger final
+    (positiveNativeOut action state observer role + posOut)
+    (positiveNativeIn action state observer role + posIn)
+    (negativeNativeOut action state observer role + negOut)
+    (negativeNativeIn action state observer role + negIn)
+
+-- Rearrange (a+b)+c without cancellation or subtraction.
+swapAccumulatedCurrent :
+  (a b c : Nat) → (a + b) + c ≡ (a + c) + b
+swapAccumulatedCurrent a b c =
+  trans (sym (+-assoc a b c))
+    (trans (cong (λ n → a + n) (+-comm b c))
+      (+-assoc a c b))
+
+allLocatedNativeHistoriesPositiveBalance :
+  (observer : F.Fin 27)
+  (actions : List (LocatedSignedNativeAction observer))
+  (state : Ionic.TwoIonSharedGrid) →
+  positiveAtVoxel observer
+    (finalNativeIons (runLocatedSignedNativeHistory observer actions state))
+    + cumulativePositiveOut (runLocatedSignedNativeHistory observer actions state)
+    ≡ positiveAtVoxel observer state
+      + cumulativePositiveIn (runLocatedSignedNativeHistory observer actions state)
+allLocatedNativeHistoriesPositiveBalance observer [] state = refl
+allLocatedNativeHistoriesPositiveBalance observer
+  (located-signed-native-action action role ∷ rest) state
+  with runLocatedSignedNativeHistory observer rest
+         (applyOriginalSignedNativeBond action state)
+     | allLocatedNativeHistoriesPositiveBalance observer rest
+         (applyOriginalSignedNativeBond action state)
+... | native-signed-voxel-history-ledger final pOut pIn nOut nIn | induction =
+  trans
+    (Faces.exchangeAssociative
+      (positiveAtVoxel observer final)
+      (positiveNativeOut action state observer role) pOut)
+    (trans
+      (cong (λ n → n + positiveNativeOut action state observer role)
+        induction)
+      (trans
+        (swapAccumulatedCurrent
+          (positiveAtVoxel observer
+            (applyOriginalSignedNativeBond action state))
+          pIn (positiveNativeOut action state observer role))
+        (trans
+          (cong (λ n → n + pIn)
+            (positiveNativeOneStepBalance action state observer role))
+          (+-assoc
+            (positiveAtVoxel observer state)
+            (positiveNativeIn action state observer role) pIn))))
+
+allLocatedNativeHistoriesNegativeBalance :
+  (observer : F.Fin 27)
+  (actions : List (LocatedSignedNativeAction observer))
+  (state : Ionic.TwoIonSharedGrid) →
+  negativeAtVoxel observer
+    (finalNativeIons (runLocatedSignedNativeHistory observer actions state))
+    + cumulativeNegativeOut (runLocatedSignedNativeHistory observer actions state)
+    ≡ negativeAtVoxel observer state
+      + cumulativeNegativeIn (runLocatedSignedNativeHistory observer actions state)
+allLocatedNativeHistoriesNegativeBalance observer [] state = refl
+allLocatedNativeHistoriesNegativeBalance observer
+  (located-signed-native-action action role ∷ rest) state
+  with runLocatedSignedNativeHistory observer rest
+         (applyOriginalSignedNativeBond action state)
+     | allLocatedNativeHistoriesNegativeBalance observer rest
+         (applyOriginalSignedNativeBond action state)
+... | native-signed-voxel-history-ledger final pOut pIn nOut nIn | induction =
+  trans
+    (Faces.exchangeAssociative
+      (negativeAtVoxel observer final)
+      (negativeNativeOut action state observer role) nOut)
+    (trans
+      (cong (λ n → n + negativeNativeOut action state observer role)
+        induction)
+      (trans
+        (swapAccumulatedCurrent
+          (negativeAtVoxel observer
+            (applyOriginalSignedNativeBond action state))
+          nIn (negativeNativeOut action state observer role))
+        (trans
+          (cong (λ n → n + nIn)
+            (negativeNativeOneStepBalance action state observer role))
+          (+-assoc
+            (negativeAtVoxel observer state)
+            (negativeNativeIn action state observer role) nIn))))
+
+original369LocatedNativeSignedHistoryContinuity :
+  (observer : F.Fin 27)
+  (actions : List (LocatedSignedNativeAction observer))
+  (state : Ionic.TwoIonSharedGrid) →
+  Ionic.integerSignedCharge
+    (positiveAtVoxel observer
+      (finalNativeIons (runLocatedSignedNativeHistory observer actions state))
+      + cumulativePositiveOut
+        (runLocatedSignedNativeHistory observer actions state))
+    (negativeAtVoxel observer
+      (finalNativeIons (runLocatedSignedNativeHistory observer actions state))
+      + cumulativeNegativeOut
+        (runLocatedSignedNativeHistory observer actions state))
+    ≡ Ionic.integerSignedCharge
+      (positiveAtVoxel observer state
+        + cumulativePositiveIn
+          (runLocatedSignedNativeHistory observer actions state))
+      (negativeAtVoxel observer state
+        + cumulativeNegativeIn
+          (runLocatedSignedNativeHistory observer actions state))
+original369LocatedNativeSignedHistoryContinuity observer actions state =
+  cong₂ Ionic.integerSignedCharge
+    (allLocatedNativeHistoriesPositiveBalance observer actions state)
+    (allLocatedNativeHistoriesNegativeBalance observer actions state)
