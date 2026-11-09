@@ -25,7 +25,6 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayT2PeriodicBlockPolymerCarrierExact as Blocks
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
-import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Native
 
 length : ∀ {A : Set} → List A → Nat
 length [] = 0
@@ -63,27 +62,6 @@ originalPositivePlanesPerSite :
   ∀ {n} (block : Blocks.PeriodicBlock n) →
   length (Plaquette.ownedPeriodicPlaquettes block) ≡ 6
 originalPositivePlanesPerSite block = refl
-
--- The source selected finite Wilson trace truly consumes the
--- *original* PeriodicPlaquette n, not a test-only alternate carrier.
-originalPlaquetteNativeSourceType :
-  ∀ {Matrix Complex : Set} {N : Nat}
-  (theory : DASHI.Physics.YangMills.SUNMatrixCarrier.CertifiedSUNMatrixTheory
-      N Matrix Complex)
-  (n : Nat) →
-  Plaquette.PeriodicPlaquette n → Set
-originalPlaquetteNativeSourceType theory n p =
-  ∀ (links : Native.SUNPeriodicLinks theory n) →
-  Native.periodicSUNPositivePlaquette theory n links p
-    ≡ Native.periodicSUNPositivePlaquette theory n links p
-
-originalPlaquetteNativeReflexive :
-  ∀ {Matrix Complex : Set} {N : Nat}
-  (theory : DASHI.Physics.YangMills.SUNMatrixCarrier.CertifiedSUNMatrixTheory
-      N Matrix Complex)
-  (n : Nat) (p : Plaquette.PeriodicPlaquette n) →
-  originalPlaquetteNativeSourceType theory n p
-originalPlaquetteNativeReflexive theory n p links = refl
 
 -- Remaining *real* D1 geometry proof (not smuggled as a field):
 -- prove every literal original positive link belongs to exactly six
