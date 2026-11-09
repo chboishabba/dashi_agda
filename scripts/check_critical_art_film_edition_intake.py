@@ -63,11 +63,15 @@ def check(data,base=ROOT):
             require(claim["source_evidence_locator"].strip(),"missing source locator")
             require(claim["original_claim_author"].strip(),"missing interpretation owner")
             require(claim["review_stage"] in ("candidate","reviewed_original"),"stage")
+            # Review receipt fields are attestations only: the validator does not
+            # authenticate signatures or establish independent human review.
             if claim["review_stage"]=="reviewed_original":
                 require(bool(claim.get("reviewer_id","").strip()),"reviewer identity required")
                 require(bool(claim.get("review_receipt","").strip()),"reviewer receipt required")
-                require(bool(claim.get("independent_second_review","").strip()),"independent review required")
-                require(claim["reviewer_id"] != claim["independent_second_review"],"self-review only")
+                require(bool(claim.get("independent_second_review","").strip()),"independent review record required")
+                require(bool(claim.get("independent_second_reviewer_id","").strip()),"second reviewer identity required")
+                require(bool(claim.get("independent_second_review_receipt","").strip()),"second review receipt required")
+                require(claim["reviewer_id"] != claim["independent_second_reviewer_id"],"self-review only")
                 # Independent receipt still requires separate human confirmation.
             require(claim.get("measured_audience_effect") is None,"audience effect asserted")
             require(claim.get("hostile_operation_identified") is None,"warfare effect asserted")
