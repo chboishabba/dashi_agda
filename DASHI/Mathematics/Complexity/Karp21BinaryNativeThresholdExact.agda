@@ -18,6 +18,7 @@ module DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.List.Base using (reverse)
 open import Data.Product using (_,_)
