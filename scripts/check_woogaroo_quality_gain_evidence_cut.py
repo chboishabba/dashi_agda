@@ -81,6 +81,28 @@ def run():
     assert results["cap_3"]["above_90_direct_threshold"]
     assert not results["cap_2"]["above_90_direct_threshold"]
     assert not results["cap_1"]["above_90_direct_threshold"]
+    # Exact historical MWW AU1/AU2 common-confidence boundary.
+    # Other 12 original rows are fixed; no legal cap is assumed.
+    mww_other=543850
+    mww_per_confidence=4*(508+1047)
+    assert mww_other + mww_per_confidence*75 == EXPECTED_COEFFICIENTS[None]
+    confidence_boundary={}
+    for c, expected in ((47,836190),(48,842410),(62,929490),(63,935710),(75,1010350)):
+        coefficient=mww_other+mww_per_confidence*c
+        assert coefficient==expected
+        amount=F(coefficient*MULTIPLIER,DENOMINATOR)
+        confidence_boundary[str(c)]={
+            "coefficient":coefficient,
+            "modelled_compensation_percent_exact":f"{amount.numerator}/{amount.denominator}",
+            "modelled_compensation_percent_decimal":f"{float(amount):.10f}"
+        }
+    assert F(836190*MULTIPLIER,DENOMINATOR)<90<F(842410*MULTIPLIER,DENOMINATOR)
+    assert F(929490*MULTIPLIER,DENOMINATOR)<100<F(935710*MULTIPLIER,DENOMINATOR)
+    # Smallest common MWW confidence within the continuous linear
+    # January source model, expressed in original confidence points.
+    threshold_90=(F(90*DENOMINATOR,MULTIPLIER)-mww_other)/mww_per_confidence
+    threshold_100=(F(100*DENOMINATOR,MULTIPLIER)-mww_other)/mww_per_confidence
+    assert 47<threshold_90<48 and 62<threshold_100<63
     return {
        "case":"EPBC 2019/8575",
        "source_stage":"proponent reported, not independent ecological verification",
@@ -93,6 +115,10 @@ def run():
        "zero_avoided_loss_only":True,
        "results":results,
        "six_exceptional_units":exceptional_detail,
+       "mww_common_confidence_boundary":confidence_boundary,
+       "mww_threshold_for_90_confidence_points_exact":f"{threshold_90.numerator}/{threshold_90.denominator}",
+       "mww_threshold_for_100_confidence_points_exact":f"{threshold_100.numerator}/{threshold_100.denominator}",
+       "confidence_thresholds_are_model_sensitivity_not_field_probabilities":True,
        "six_exceptional_weighted_coefficient":exceptional_weight,
        "six_exceptional_premium_coefficient":exceptional_premium,
        "six_exceptional_credit_percentage_points":f"{float(F(exceptional_weight*MULTIPLIER,DENOMINATOR)):.10f}",
@@ -115,7 +141,7 @@ def main():
     if args.agda_file:
         contents=args.agda_file.read_text()
         for marker in ("onePointCoefficient","twoPointCoefficient",
-                       "threePointCoefficient","ExceptionalGainJustification"):
+                       "threePointCoefficient","ExceptionalGainJustification", "mwwAt47Exact", "mwwAt63Exact"):
             assert marker in contents,marker
         assert not any(marker in contents for marker in ("postulate ","{!!}","allow-unsolved-metas"))
     obj=run()
