@@ -131,3 +131,48 @@ physicalAndPNPRemainTheSameStateHistory model (action ∷ rest) state =
       (physicalStep model action state))
     (cong (pnTrace model rest)
       (physicalPNPStepCommutes model action state))
+
+------------------------------------------------------------------------
+-- Highest-alpha same-source consumer: the physical trajectory carries
+-- BOTH the original PNP electrodiffusion history and the original 54-bond
+-- coarse tissue history. These are NOT separate witness histories.
+--
+-- This consumes the existing selected physicalOneStep and
+-- physicalPNPStepCommutes fields. They remain unpaid original physical
+-- source obligations; this composition does not inhabit either field.
+------------------------------------------------------------------------
+
+physicalPNPAndTissueSameHistory :
+  (model : SourcePhysicalTissueSimulation)
+  (actions : List Bio.Intervention)
+  (state : PhysicalState model) →
+  (pnState model (physicalTrace model actions state)
+    ≡ pnTrace model actions (pnState model state))
+  ×
+  Agreement.FieldsAgree
+    (tissueReadout model (physicalTrace model actions state))
+    (Tissue.fullCoarseRun actions
+      (Bio.spatialProject (tissueReadout model state)))
+physicalPNPAndTissueSameHistory model actions state =
+  physicalAndPNPRemainTheSameStateHistory model actions state
+  , physicalHistoryProjectsToAll54Bonds model actions state
+
+-- A native-voxel specialization avoids treating a Vec 27 storage chart
+-- as the semantic geometry. All original 3×3×3 positions are quantified.
+physicalPNPAndTissueAtOriginalVoxel :
+  (model : SourcePhysicalTissueSimulation)
+  (actions : List Bio.Intervention)
+  (state : PhysicalState model)
+  (voxel : Cube.Ternary27Point) →
+  (pnState model (physicalTrace model actions state)
+    ≡ pnTrace model actions (pnState model state))
+  ×
+  (Bio.project
+    (tissueReadout model (physicalTrace model actions state) voxel)
+    ≡
+    Tissue.fullCoarseRun actions
+      (Bio.spatialProject (tissueReadout model state)) voxel)
+physicalPNPAndTissueAtOriginalVoxel model actions state voxel =
+  physicalAndPNPRemainTheSameStateHistory model actions state
+  , Agreement.atEveryVoxel
+      (physicalHistoryProjectsToAll54Bonds model actions state) voxel
