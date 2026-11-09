@@ -17,6 +17,7 @@ targets=(
   DASHI/Moonshine/AbelBishopOriginalQParameterExact.agda
   DASHI/Moonshine/AbelBishopRound11QPeriodInstanceExact.agda
   DASHI/Moonshine/AbelE8RootE4FirstCoefficientExact.agda
+  DASHI/Moonshine/AbelE8RootTriadic243CountComparisonExact.agda
   DASHI/Moonshine/AbelBishopMachinQuarterToQPeriodExact.agda
   DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda
   DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda
