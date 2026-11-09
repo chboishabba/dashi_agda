@@ -42,3 +42,22 @@ Revised decisive order:
 7. **P!=NP:** separate SAT lower bound; not implied by the completed representation or NP-completeness chain.
 
 Do not conflate source-written Agda with checked code or a local primitive step count with an actual multi-tape machine cost.
+
+
+## 2026-11-09 second implementation cut: original-form signed arithmetic
+
+**New executable owners on PR #1474**:
+- `Karp21BinaryNativeSignedLedgerExact`: for each native `SignedMagnitudeBits`, append its magnitude to the selected little-endian positive or negative accumulation lane, using the existing ripple adder. No unary integer reconstruction in the executable loop. `insertPositiveValue`, `insertNegativeValue` and the preserved-opposite-lane lemmas use the original adder's source-written value theorem. The whole-input proofs `accumulatePositiveValue` / `accumulateNegativeValue` and empty-ledger specialisations state exact nonnegative totals. Source-level correction to base-case identity orientation included. **No kernel receipt**.
+- `Karp21BinaryNativeThresholdExact`: signed threshold comparator on the accumulated two-lane word and the selected native signed gamma magnitude. It reduces `P-N>=+t` to `P>=N+t` and `P-N>=-t` to `P+t>=N`, using the actual bit-native adder and a high-bit-first recursive comparison on little-endian words. There is no unary Nat conversion in the executable path. All-word numeric-order correctness of `compareLE` is **still to be proved in Agda**.
+- Both owners imported through the existing original `Karp21BinaryRuntimeEverything` and `Karp21Everything`; no duplicate N21 verifier or graph language.
+- Independent exact Python runs: **137,257** signed-token lists (length 0..6 from 7 signed values), and **377,856** signed-score/threshold triples. All matched mathematical integer semantics. Committed reference scripts: `scripts/check_karp21_native_signed_ledger.py` and `scripts/check_karp21_binary_native_threshold.py`. These do not constitute kernel proofs.
+
+**Critical original-object welds still unpaid**:
+1. `readSignedBinary` must provably represent the same signed **value and suffix**, not merely accept/reject behavior, as original `readSignedGamma` on *every* input.
+2. `compareLE` must be proved equal to the Nat binary-value ordering for **every** bitword, including redundant zeros and differing widths; then threshold comparison must match original signed-score test.
+3. Cost the actual `reverse`, ripple addition, persistent-list copies and allocations, all-token repeated accumulation, graph gamma parser, sparse consistency/validation, and certificate scan on a specified **tape** machine. The local inspection costs alone are not a certified whole-machine polynomial clock.
+4. Attach the new signed ledger to the literal original graph-edge weighted cut score with original E20 output words and N21 certificate words; verify all signed negative weights, malformed words and threshold conventions.
+5. Construct original `PR.InNP`, then the uniform original signed E20 reduction and Cook–Levin Cell/Bits runtime; cover E01–E19, N01–N20 and source-head kernel checks.
+6. Keep original SAT lower bound for P!=NP separate; Karp reductions cannot supply it.
+
+**Trust status:** source-written Agda imported, independent Python tests executed, **Agda 2.9 and parallel_checker not available in this execution environment**. These modules are not promoted to checked theorems.
