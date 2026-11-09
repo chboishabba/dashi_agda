@@ -12,6 +12,13 @@ Two source-written original-carrier proof owners are committed:
    ]
    The `q` are literally the selected original `Factor.quotient` functions of the existing source derivative certificates; no synthetic exp or log.
 
+**Further source-paid bound:** `BishopOriginalFactorIncrementFiniteTelescopeExact.sumFiniteAbsoluteTriangle` and `originalBishopFiniteEndpointAbsoluteBound` instantiate the original Bishop triangle inequality to bound finite endpoint increments by sums of absolute local factor terms. `BishopOriginalNegativeLogFiniteExpMeshEndpointExact.originalFiniteLogExpErrorMeshAbsoluteBound` proves the exact analytic target-error envelope
+[
+|F_N(x_m)-(1-x_m)| le
+sum_{j<m}|h_j(q_{N,x_j}(h_j)+1)|
+]
+for every finite original Bishop walk from 0. This is **not** yet a vanishing envelope: the pointwise derivative residual estimate must be converted into a mesh-uniform bound for the actual source factor quotients. Do not infer the analytic limit from this finite inequality alone.
+
 **Still decisive and NOT hidden by this identity:** construct *quantitative, mesh-uniform control* of `q_{N,x_j}(h_j)+1` (accounting for `(1-x)F_N'(x)+F_N(x)=x^N F_N(x)`) sufficient to make its finite weighted sum tend to zero, followed by the existing source finite-stage limit transport to `OriginalBishopNegativeLogExponentialGap`. The compact-uniform differential residual controls derivative **values**, not arbitrary difference quotients at finite mesh spacing. A uniform modulus / constructive finite-interval FTC remains an actual analytic leaf.
 
 P1: original atan-to-Cayley two-point analytic equalities remain. P2: P0 is needed to instantiate `FromOriginalNegativeLog`; same-object identification with the **independently defined** `ZetaHalfPlaneLayer.zetaHalfPlane` remains. Both new modules are imported in all three TOE roots and the Bishop checker; exact-head Agda 2.9 kernel acceptance has **not** been observed. Do not promote source-written code to checked proof.
