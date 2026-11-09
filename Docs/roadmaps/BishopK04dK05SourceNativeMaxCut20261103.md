@@ -1,5 +1,25 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+### Non-circular stability warning (P0 acceptance)
+
+The explicit quotient formula is **not by itself a fast proof** that (q_{F,N}(x,h)+1→0). Its derivative limit equals (E'_N(x)), while the exact error ODE is
+[
+(1-x)E'_N(x)+E_N(x)=x^N F_N(x).
+]
+Consequently, naively bounding `q_{F,N}+1` by replacing it with the small forcing (x^NF_N) **drops the (E_N) term** and is circular. The correct desired endpoint error follows from the *integrating-factor* identity, for (0le xle r<1),
+[
+\frac{d}{dx}\left(\frac{E_N(x)}{1-x}\right)
+=\frac{x^NF_N(x)}{(1-x)^2},
+quad
+E_N(0)=0,
+quad
+|E_N(x)|\le \frac{x r^N}{(1-r)^2}.
+]
+This calculation is a mathematical **target**, NOT an Agda theorem: a constructive Bishop reciprocal, differentiability-of-the-selected quotient, valid endpoint Riemann-sum or integration bound must still be supplied. The final bound's conclusion is enough to pay the exact original `Finite.originalNegativeLogTerminalFromFiniteEvaluation` theorem; the existing uniform forcing majorant and initial value supply its two quantitative inputs. Prefer this one concrete original-carrier integrating-factor estimate over attempting to prove the error derivative tiny without error control.
+
+P1 and P2 are **not** consequences of this P0 algebra. The two original analytic Cayley evaluations and independent original selected zeta equality remain separate genuine leaves. No Agda kernel run is available on this branch.
+
+
 ## 2026-11-09 explicit source quotient: narrowed P0 analytic estimate
 
 New `DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda`, integrated into all three TOE roots and the Bishop checker, pays the source-to-quotient expansion rather than introducing another arbitrary derivative interface.
