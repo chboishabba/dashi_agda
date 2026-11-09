@@ -84,3 +84,22 @@ Conway's numeric `a -> b` is `a^b`;
 `a -> b -> c` is `a ↑^c b`.
 This meaning is **not** inherited by a pipeline arrow,
 e.g. source → physical state → quotient → observation.
+
+
+## 2026-11-09 synchronized cross-branch remaining maximum cut
+
+PR #1454 and developmental PR #1471 are **not** one compiled physical state. The latter now includes a same-inventory two-native-bond conservation composition (`twoNativeCubicalBondTransfersConserveTotal`), genuine original 1→3 pants geometry, exterior face balances and finite voxelwise charge-continuity regression. **None of these establish the original physiological transport coefficients.**
+
+| Gate | BH4 source state | Remaining lemma / source payment |
+| --- | --- | --- |
+| G0 | Five-species QDPR, 3D source/target spatial events, selected three-state future minimality | Exact-head Agda/parallel checker receipts and integration with developmental Golden |
+| G1 | Original panel consumer `scripts/check_bh4_original_panel_spatial_events.py` reads existing Rhea/ChEBI acquired certificate; rejects fake zeros | `original29x12SpatialReactionBalance` using all 12 finite source columns, 3 nonfinite residuals and explicit 29 environmental exchange coordinates; run only with actual certificate |
+| G2 | Finite shared-state transfers and source-qualified reactions | `sameSourcePhysicalReactionTransportStep` with measured rates, compartment/membrane permissions, turnover and signed currents |
+| G3 | All-history conditional source bridge and QDPR redox ordering counterexample | `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, `physicalTissueOneStepRefinement` on same physical specimen/state/time |
+| G4 | Selected chemical future-minimality counterexample | `physicalKernelLumpsUnderInterventions`, `physicalFutureQuotientIsMinimal` for physically admissible observations |
+| G5 | Source-aware measurement intake | `sourceCalibratedParametersAdmissible`, `heldoutFuturePredictionsDiscriminate`; distinguish resource allocation, redox and independent regulation |
+| G6 | Separate roadmap and governance owners | Stacked #1159/#1226/#1454 + #1471 reconciliation, source-review ITIR #72, exact-head acceptance |
+
+**Deliverables:** D0 kernel and merged-tree receipt; D1 source-paid 29×12 and local continuity; D2 admissible reaction–transport–PNP dynamics; D3 tissue observation refinement; D4 future-safe minimal quotient; D5 calibrated held-out prediction; D6 governed evidence lineage.
+
+**Integrity controls:** geometry is original ternary 3×3×3 with a 27-vector as chart; a pants interface is not a transport coefficient; BH2 and qDHB are not conflated; an exchange coordinate is not a measured flux; exact integer event checks are not longitudinal experiments; no clinical Kitzerow causal conclusion is certified. Both PRs remain draft until independent proofs and data pay the gates.
