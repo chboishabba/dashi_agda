@@ -28,6 +28,10 @@ def export_particle_hole(checkpoint, n_spatial, n_alpha, n_beta,
     amplitudes,_=trial_from_checkpoint(checkpoint,states,8,n_alpha,n_beta)
     if cutoff<0:raise ValueError("negative cutoff")
     indices=np.flatnonzero(abs(amplitudes)>cutoff)
+    # iPie uses the leading determinant as its reference and the first N
+    # determinants for its mean-field density. Sort by decreasing weight,
+    # retaining each coefficient and its occupation indices together.
+    indices=indices[np.argsort(-abs(amplitudes[indices]),kind="stable")]
     if indices.size==0:raise ValueError("cutoff removes all states")
     coefficients=amplitudes[indices].astype(np.complex128)
     coefficients/=np.linalg.norm(coefficients)
