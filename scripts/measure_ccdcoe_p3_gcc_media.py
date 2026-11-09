@@ -75,10 +75,17 @@ def analyse(rows: list[dict], focus: str, intervention_date: str,
             raise ValueError("Unrecognised study arm or period")
         if row["frame"] not in FRAMES:
             raise ValueError("Unknown frame")
-        if not row["source_text_reviewed"] or not row["review_receipt"]:
-            raise ValueError("Only original full-text reviewed observations admitted")
-        if not row["coder_id"] or not row["outlet"]:
-            raise ValueError("Coder/outlet required")
+        # JSON values such as "false" and 1 are truthy in Python.
+        # A self-attested original-text review must be a literal true Bool,
+        # not an arbitrary nonempty value.
+        if row["source_text_reviewed"] is not True:
+            raise ValueError("Original full-text review must be literal boolean true")
+        if not isinstance(row["review_receipt"], str) or not row["review_receipt"].strip():
+            raise ValueError("Nonempty textual original reviewer receipt required")
+        if not isinstance(row["coder_id"], str) or not row["coder_id"].strip():
+            raise ValueError("Nonempty textual coder identity required")
+        if not isinstance(row["outlet"], str) or not row["outlet"].strip():
+            raise ValueError("Nonempty textual outlet identity required")
         assigned_arm = outlet_arms.setdefault(row["outlet"], row["treatment"])
         if assigned_arm != row["treatment"]:
             raise ValueError("Same outlet assigned to both treatment and comparison arms")
@@ -186,6 +193,25 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Unreviewed document admitted")
+    false_review = [dict(x) for x in synthetic]
+    for bogus in ("false", 1, [], None):
+        false_review[0]["source_text_reviewed"] = bogus
+        try:
+            analyse(false_review, "science_uncertainty", "1993-01-01",
+                    "SYNTHETIC-NOT-ACTUAL", synthetic_fixture=True)
+        except ValueError as exc:
+            assert "literal boolean true" in str(exc)
+        else:
+            raise AssertionError("Non-boolean review state admitted")
+    false_review[0]["source_text_reviewed"] = True
+    false_review[0]["review_receipt"] = "  "
+    try:
+        analyse(false_review, "science_uncertainty", "1993-01-01",
+                "SYNTHETIC-NOT-ACTUAL", synthetic_fixture=True)
+    except ValueError as exc:
+        assert "textual original reviewer receipt" in str(exc)
+    else:
+        raise AssertionError("Blank reviewer receipt admitted")
     with tempfile.TemporaryDirectory() as td:
         root = Path(td)
         for row in synthetic:
