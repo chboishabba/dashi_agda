@@ -22,6 +22,8 @@ import DASHI.Governance.Crenshaw1988SituatedVoiceExact as Voice
 import DASHI.Governance.BlackGirlsMatterStudyScopeExact as BGM
 import DASHI.Governance.BlackGirlsMatterPublishedDisciplineArithmeticExact as BGMCounts
 import DASHI.Governance.BlackGirlsMatterExpulsionDenominatorExact as BGMExpulsion
+import DASHI.Governance.BlackGirlsMatterCRDCOriginalRowAdmissionExact as CRDC
+import DASHI.Governance.BlackGirlsMatterCRDCAggregationBoundaryExact as CRDCAgg
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -97,6 +99,13 @@ record LegalCrossCaseCut : Set₁ where
       BGMCounts.tableOnePeriod ≡ BGMCounts.disciplineFigurePeriod → ⊥
     zeroObservedExpulsionDenominatorBlocksRatio :
       BGMExpulsion.ObservedRatioAdmission BGMExpulsion.newYorkCity → ⊥
+    rawSuppressionIsNotActualZero :
+      CRDC.suppressed ≡ CRDC.observed 0 → ⊥
+    originalOneSuspensionNotRepeated :
+      CRDC.oneOutOfSchoolSuspension ≡
+        CRDC.multipleOutOfSchoolSuspensions → ⊥
+    crossIndicatorEventsAreNotUniqueStudents :
+      CRDC.disciplinaryEvents ≡ CRDC.uniqueStudents → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -126,4 +135,7 @@ crenshawLegalCrossCaseCut =
     BGMCounts.newYorkGirlsCasesTenfoldPlus236
     BGMCounts.tableOneIsNotDisciplineFigurePeriod
     BGMExpulsion.newYorkObservedExpulsionRatioBlocked
+    CRDC.suppressedNotZero
+    CRDC.oneAndRepeatedSuspensionAreDifferent
+    CRDCAgg.differentUnitsAreNotDefinitionalEqual
     refl refl
