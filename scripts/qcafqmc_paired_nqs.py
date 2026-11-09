@@ -86,6 +86,12 @@ def read_paired_dataset(path):
         raise ValueError("nonfinite shadow overlap data")
     if len(labels)<8:raise ValueError("insufficient independent overlap observations")
     if not str(d["source_url"]).strip():raise ValueError("missing source")
+    for optional in ("orbital_frame_sha256","geometry_sha256"):
+        with np.load(path,allow_pickle=False) as z:
+            if optional in z.files:d[optional]=str(z[optional])
+    if str(d["dataset_kind"])=="original" and not all(
+            d.get(k) for k in ("orbital_frame_sha256","geometry_sha256")):
+        raise ValueError("original-source labels need geometry and MO frame hashes")
     return d
 
 def train_paired(path,checkpoint,epochs=100,seed=17,lr=.0025,ridge=0.):
@@ -126,11 +132,15 @@ def train_paired(path,checkpoint,epochs=100,seed=17,lr=.0025,ridge=0.):
     checkpoint=Path(checkpoint).resolve()
     checkpoint.parent.mkdir(parents=True,exist_ok=True)
     torch.save({"architecture":"paired-spatial-v1",
-                "weights":best_model,"n_alpha":4,"n_beta":4},checkpoint)
+                "weights":best_model,"n_alpha":4,"n_beta":4,
+                "orbital_frame_sha256":d.get("orbital_frame_sha256"),
+                "geometry_sha256":d.get("geometry_sha256")},checkpoint)
     receipt={"scope":"independent seniority-zero constrained NQS",
              "source_sha256":hashlib.sha256(source.read_bytes()).hexdigest(),
              "dataset_kind":str(d["dataset_kind"]),
              "source_url":str(d["source_url"]),
+             "orbital_frame_sha256":d.get("orbital_frame_sha256"),
+             "geometry_sha256":d.get("geometry_sha256"),
              "train_walkers":int(len(tr)),"validation_walkers":int(len(va)),
              "validation_mse":best,
              "parameter_count":sum(p.numel() for p in model.parameters()),
