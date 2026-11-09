@@ -37,6 +37,22 @@ if [ -f artifacts/biology/rhea-kitzerow-bh4-reactions.json ]; then
 else
   echo "OPEN SOURCE GATE: original 29×12 acquired Rhea certificate not mounted; synthetic QDPR self-test only" >&2
 fi
+# Optional strictly source-paid original 29x12 quantitative witness.
+# Do NOT auto-promote a synthetic event fixture into measured kinetics.
+# Caller must supply both source-bound original inputs explicitly.
+if [ -n "${BH4_ORIGINAL_PARAMETERS_PATH:-}" ] ||
+   [ -n "${BH4_ORIGINAL_CANDIDATE_PATH:-}" ]; then
+  test -f "${BH4_ORIGINAL_PARAMETERS_PATH:?Original parameter receipt required}"
+  test -f "${BH4_ORIGINAL_CANDIDATE_PATH:?Original candidate receipt required}"
+  test -f artifacts/biology/rhea-kitzerow-bh4-reactions.json
+  python3 scripts/check_bh4_original_panel_spatial_events.py \
+    --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json \
+    --parameters "$BH4_ORIGINAL_PARAMETERS_PATH" \
+    --candidate "$BH4_ORIGINAL_CANDIDATE_PATH"
+else
+  echo "OPEN PHYSICAL RATE GATE: no original quantitative candidate and complete source-paid bounds supplied" >&2
+fi
+
 python3 scripts/check_bh4_one_molecule_future_minimality.py
 python3 scripts/check_bh4_spatial_measurement_payment.py --self-test
 
