@@ -20,7 +20,9 @@ open import Agda.Builtin.Bool using (true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Maybe.Base using (Maybe; just; nothing)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (_×_; _,_; proj₂)
+open import Data.List.Base using (length)
+open import Agda.Builtin.Nat using (Nat)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
@@ -122,3 +124,21 @@ sspPolarityResidualRoundtrip :
   decodeWithResidual (encodeWithResidual w) ≡ just w
 sspPolarityResidualRoundtrip (Binary.positive magnitude) = refl
 sspPolarityResidualRoundtrip (Binary.negative magnitude) = refl
+
+-- This honest SSP reuse carries the original binary residual intact.
+-- Therefore its residual bit count is exactly the original payload
+-- length; no claim of shorter source code or execution time follows.
+residualBitCount : SSPPolarityWithResidual → Nat
+residualBitCount pair = length (proj₂ pair)
+
+residualBitCountPositiveExact :
+  (bits : Word.BitWord) →
+  residualBitCount (encodeWithResidual (Binary.positive bits))
+    ≡ length bits
+residualBitCountPositiveExact bits = refl
+
+residualBitCountNegativeExact :
+  (bits : Word.BitWord) →
+  residualBitCount (encodeWithResidual (Binary.negative bits))
+    ≡ length bits
+residualBitCountNegativeExact bits = refl
