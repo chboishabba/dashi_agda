@@ -1410,11 +1410,12 @@ braidAdjacent Y.d3 Y.d3 ()
   -- It does not prove that the selected group IS the presented quotient.
   ------------------------------------------------------------------------
 
+  module Recovered = All.Recover gi nodes all allElevenShiftsFromActual80
+
   allTwelveNodeWordsFromActual80 :
     Pair.NodeWordCertificate gi
       (Words.uElement gi nodes)
       (Words.vElement gi nodes)
       nodes
   allTwelveNodeWordsFromActual80 =
-    All.Recover.actualNodeWordCertificate
-      gi nodes all allElevenShiftsFromActual80
+    Recovered.actualNodeWordCertificate
