@@ -269,6 +269,141 @@ panelSpatialReactionConserves weights (F.suc site) reaction residual
     (panelSpatialReactionConserves
       weights site reaction residual rest available balanced)
 
+
+------------------------------------------------------------------------
+-- SIGNED MOLECULAR CHARGE. Conservation of positive and negative
+-- magnitudes separately would be false for general redox chemistry.
+-- Instead p_before + n_after = p_after + n_before is the constructive
+-- cross-sum encoding of net signed-charge equality.
+------------------------------------------------------------------------
+
+panelReactionSignedChargeConserves :
+  ∀ {n}
+  (positiveWeights negativeWeights : V.Vec Nat n)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n) →
+  (panelWeighted positiveWeights (originalReactants reaction)
+    + panelWeighted negativeWeights (originalProducts reaction))
+    ≡
+  (panelWeighted positiveWeights (originalProducts reaction)
+    + panelWeighted negativeWeights (originalReactants reaction)) →
+  (panelWeighted positiveWeights (panelReactionBefore reaction residual)
+    + panelWeighted negativeWeights (panelReactionAfter reaction residual))
+    ≡
+  (panelWeighted positiveWeights (panelReactionAfter reaction residual)
+    + panelWeighted negativeWeights (panelReactionBefore reaction residual))
+panelReactionSignedChargeConserves
+  positiveWeights negativeWeights reaction residual balanced =
+  trans
+    (cong₂ _+_
+      (panelWeightedDistributes positiveWeights
+        (originalReactants reaction) residual)
+      (panelWeightedDistributes negativeWeights
+        (originalProducts reaction) residual))
+    (trans
+      (panelShuffle
+        (panelWeighted positiveWeights (originalReactants reaction))
+        (panelWeighted positiveWeights residual)
+        (panelWeighted negativeWeights (originalProducts reaction))
+        (panelWeighted negativeWeights residual))
+      (trans
+        (cong
+          (λ n → n + (panelWeighted positiveWeights residual
+            + panelWeighted negativeWeights residual))
+          balanced)
+        (trans
+          (sym (panelShuffle
+            (panelWeighted positiveWeights (originalProducts reaction))
+            (panelWeighted positiveWeights residual)
+            (panelWeighted negativeWeights (originalReactants reaction))
+            (panelWeighted negativeWeights residual)))
+          (cong₂ _+_
+            (sym (panelWeightedDistributes positiveWeights
+              (originalProducts reaction) residual))
+            (sym (panelWeightedDistributes negativeWeights
+              (originalReactants reaction) residual))))))
+
+-- Cross-sum equality is preserved in all 27 sites even when another
+-- voxel has arbitrary unrelated molecular inventory.
+panelSpatialSignedReactionConserves :
+  ∀ {n sites}
+  (positiveWeights negativeWeights : V.Vec Nat n)
+  (site : F.Fin sites)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n)
+  (before : V.Vec (V.Vec Nat n) sites) →
+  V.lookup before site ≡ panelReactionBefore reaction residual →
+  (panelWeighted positiveWeights (originalReactants reaction)
+    + panelWeighted negativeWeights (originalProducts reaction))
+    ≡
+  (panelWeighted positiveWeights (originalProducts reaction)
+    + panelWeighted negativeWeights (originalReactants reaction)) →
+  (panelSpatialWeighted positiveWeights before
+    + panelSpatialWeighted negativeWeights
+      (V.updateAt before site
+        (λ _ → panelReactionAfter reaction residual)))
+    ≡
+  (panelSpatialWeighted positiveWeights
+    (V.updateAt before site
+      (λ _ → panelReactionAfter reaction residual))
+    + panelSpatialWeighted negativeWeights before)
+panelSpatialSignedReactionConserves
+  positiveWeights negativeWeights F.zero reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (panelShuffle
+      (panelWeighted positiveWeights current)
+      (panelSpatialWeighted positiveWeights rest)
+      (panelWeighted negativeWeights (panelReactionAfter reaction residual))
+      (panelSpatialWeighted negativeWeights rest))
+    (trans
+      (cong
+        (λ n → n + (panelSpatialWeighted positiveWeights rest
+          + panelSpatialWeighted negativeWeights rest))
+        (trans
+          (cong
+            (λ n → n + panelWeighted negativeWeights
+              (panelReactionAfter reaction residual))
+            (cong (panelWeighted positiveWeights) available))
+          (trans
+            (panelReactionSignedChargeConserves
+              positiveWeights negativeWeights reaction residual balanced)
+            (cong
+              (λ n → panelWeighted positiveWeights
+                (panelReactionAfter reaction residual) + n)
+              (sym (cong (panelWeighted negativeWeights) available))))))
+      (sym (panelShuffle
+        (panelWeighted positiveWeights
+          (panelReactionAfter reaction residual))
+        (panelSpatialWeighted positiveWeights rest)
+        (panelWeighted negativeWeights current)
+        (panelSpatialWeighted negativeWeights rest))))
+panelSpatialSignedReactionConserves
+  positiveWeights negativeWeights (F.suc site) reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (panelShuffle
+      (panelWeighted positiveWeights current)
+      (panelSpatialWeighted positiveWeights rest)
+      (panelWeighted negativeWeights current)
+      (panelSpatialWeighted negativeWeights
+        (V.updateAt rest site
+          (λ _ → panelReactionAfter reaction residual))))
+    (trans
+      (cong
+        (λ n → n + (panelWeighted positiveWeights current
+          + panelWeighted negativeWeights current))
+        (panelSpatialSignedReactionConserves
+          positiveWeights negativeWeights site reaction residual
+          rest available balanced))
+      (sym (panelShuffle
+        (panelWeighted positiveWeights current)
+        (panelSpatialWeighted positiveWeights
+          (V.updateAt rest site
+            (λ _ → panelReactionAfter reaction residual)))
+        (panelWeighted negativeWeights current)
+        (panelSpatialWeighted negativeWeights rest))))
+
 data OriginalCHNOPElement : Set where
   carbonElement : OriginalCHNOPElement
   hydrogenElement : OriginalCHNOPElement
