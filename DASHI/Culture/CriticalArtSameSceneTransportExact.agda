@@ -8,6 +8,7 @@ module DASHI.Culture.CriticalArtSameSceneTransportExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (true; false)
 open import Data.Empty using (⊥)
 
 import DASHI.Culture.CriticalArtTemporalReceptionReuseExact as Art
@@ -133,3 +134,20 @@ artPantsInterfaceAvailable seam = ArtPantsSeam.interface seam
 
 -- An actual film witness requires an original, independently reviewed
 -- source receipt. We intentionally provide no fabricated witness.
+
+-- Stronger all-four-states result: the independent Boolean evidence
+-- coordinates commute for EVERY selected polar assessment, not merely
+-- for the empty initial state. Film reception paths remain ordered.
+allEvidenceSupportSquaresCommute :
+  (assessment : Four.PolarAssessment) →
+  Square.mergeSquare
+    (Square.mergeSquare assessment Square.supportSquare)
+    Square.contradictionSquare
+  ≡
+  Square.mergeSquare
+    (Square.mergeSquare assessment Square.contradictionSquare)
+    Square.supportSquare
+allEvidenceSupportSquaresCommute (Four.assess true true) = refl
+allEvidenceSupportSquaresCommute (Four.assess true false) = refl
+allEvidenceSupportSquaresCommute (Four.assess false true) = refl
+allEvidenceSupportSquaresCommute (Four.assess false false) = refl
