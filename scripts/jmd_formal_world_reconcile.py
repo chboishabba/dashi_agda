@@ -109,6 +109,12 @@ def init(conn: sqlite3.Connection) -> None:
       changed_symbol TEXT NOT NULL, affected_symbol TEXT NOT NULL,
       PRIMARY KEY(changed_symbol,affected_symbol)
     );
+    CREATE TABLE IF NOT EXISTS jmd_world_image_candidates (
+      image_group TEXT NOT NULL, symbol_id TEXT NOT NULL,
+      matching_terms INTEGER NOT NULL, authority TEXT NOT NULL
+        CHECK(authority='candidate-only'),
+      PRIMARY KEY(image_group,symbol_id)
+    );
     CREATE TABLE IF NOT EXISTS jmd_world_native_gaps (
       gap_key TEXT PRIMARY KEY, owner_symbol TEXT NOT NULL,
       required_symbol TEXT NOT NULL, requirement_class TEXT NOT NULL,
@@ -352,6 +358,41 @@ def changed_closure(conn, changed: set[str]) -> int:
 
 
 
+
+
+def image_owner_candidates(conn, term_pack: Path | None, *, limit: int = 8) -> int:
+    """Resolve image search terms against native dashi-repo symbols.
+
+    This is an exact SQL consumer of the canonical parser inventory, not a
+    new source index. Candidate counts never establish theorem identity.
+    """
+    if term_pack is None:
+        return 0
+    payload = json.loads(term_pack.read_text(encoding="utf-8"))
+    if payload.get("schema") != "dashi-symbol-snowball-v1":
+        raise ValueError("Wrong canonical term-pack schema")
+    conn.execute("DELETE FROM jmd_world_image_candidates")
+    total=0
+    for group in payload["groups"]:
+        lane=group["lane"]
+        counts={}
+        for term in group["search_terms"]:
+            if len(term)<3:
+                continue
+            needle="%"+term.lower().replace("%", r"\%").replace("_", r"\_")+"%"
+            query="""SELECT s.symbol_id FROM repo_symbols s
+                 LEFT JOIN repo_symbol_signatures sig ON sig.symbol_id=s.symbol_id
+                 WHERE lower(s.symbol_id) LIKE ? ESCAPE '\'
+                    OR lower(sig.signature) LIKE ? ESCAPE '\'
+                 ORDER BY s.symbol_id LIMIT 200"""
+            for (symbol,) in conn.execute(query,(needle,needle)):
+                counts[symbol]=counts.get(symbol,0)+1
+        for symbol,num in sorted(counts.items(),key=lambda x:(-x[1],x[0]))[:limit]:
+            conn.execute("INSERT INTO jmd_world_image_candidates VALUES(?,?,?,'candidate-only')",
+                         (lane,symbol,num))
+            total+=1
+    return total
+
 def ingest_native_gaps(conn, *, max_gaps: int = 200, max_candidates: int = 6) -> int:
     """Read existing formal requirement debts; never assert they're all open.
 
@@ -412,6 +453,7 @@ def report(conn) -> dict:
         "external_coordinates":"SELECT count(*) FROM jmd_world_external_coordinates",
         "executed_kernel_passes":"SELECT count(*) FROM jmd_world_attempts a JOIN jmd_world_goals g ON g.goal_id=a.goal_id JOIN jmd_world_sources s ON s.source_key=a.source_key WHERE a.proof_accepted=1 AND a.goal_fingerprint=g.fingerprint AND a.statement_hash=s.statement_hash AND a.source_revision=s.source_commit",
         "affected_nodes":"SELECT count(*) FROM jmd_world_affected",
+        "image_owner_candidate_edges":"SELECT count(*) FROM jmd_world_image_candidates",
         "native_requirement_leads":"SELECT count(*) FROM jmd_world_native_gaps",
         "native_gap_candidate_edges":"SELECT count(*) FROM jmd_world_gap_candidates"
     }.items():
@@ -430,6 +472,7 @@ def main(argv=None):
     p.add_argument("--goals",type=Path,help="Optional kernel-goal shortlist; native gaps are read from repo_requirements")
     p.add_argument("--native-gap-limit",type=int,default=200)
     p.add_argument("--external-coordinates",type=Path)
+    p.add_argument("--image-terms",type=Path,help="Existing dashi-symbol-snowball-v1 image term pack")
     p.add_argument("--agda-revision",help="Pinned Agda repository HEAD (40 hex)")
     p.add_argument("--max-agda-rows",type=int,default=0)
     p.add_argument("--max-candidates",type=int,default=8)
@@ -455,6 +498,8 @@ def main(argv=None):
                 _,changed=upsert_goals(conn,args.goals)
                 candidates(conn,limit=args.max_candidates)
                 changed_closure(conn,changed)
+            image_owner_candidates(conn,args.image_terms,
+                                   limit=args.max_candidates)
             ingest_native_gaps(conn,max_gaps=args.native_gap_limit,
                                max_candidates=args.max_candidates)
         probe=None
