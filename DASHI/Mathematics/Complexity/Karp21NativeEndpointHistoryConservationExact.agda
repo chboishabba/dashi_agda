@@ -28,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.List.Base using (length)
 open import Data.Product using (_×_; _,_)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 open import Data.Nat.Tactic.RingSolver using (solve)
@@ -249,3 +249,44 @@ actualBinaryFirstEnabledEndpointHistoryFitsInputs word certificate =
     (Potential.binaryStatePotential
       (Machine.initialBinaryWholeWordState word certificate))
     word certificate
+
+
+------------------------------------------------------------------------
+-- F2.2 actual chronological history LIST NODE COUNT.
+-- Every vertex-history entry contains at least the source cut-label
+-- Boolean, in addition to any original binary endpoint address bits.
+-- Thus the input-word history payload bound also caps the number
+-- of actual history cons/list entries at EVERY machine time.
+------------------------------------------------------------------------
+
+historyEntriesAtMostPayload :
+  (history : History.BinaryEndpointHistory) →
+  length history ≤ historyPayloadWidth history
+historyEntriesAtMostPayload [] = NatP.≤-refl
+historyEntriesAtMostPayload ((vertex , label) ∷ rest) =
+  s≤s
+    (NatP.≤-trans
+      (historyEntriesAtMostPayload rest)
+      (NatP.≤-trans
+        (NatP.m≤m+n
+          (historyPayloadWidth rest) (length vertex))
+        (NatP.≤-reflexive
+          (NatP.+-comm
+            (historyPayloadWidth rest) (length vertex)))))
+
+actualFirstEnabledHistoryNodeCountAtEveryFuelFitsOriginalWords :
+  (fuel : Nat) (word certificate : Word.BitWord) →
+  length
+    (Machine.history
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    ≤ length word + length certificate
+actualFirstEnabledHistoryNodeCountAtEveryFuelFitsOriginalWords
+  fuel word certificate =
+  NatP.≤-trans
+    (historyEntriesAtMostPayload
+      (Machine.history
+        (Run.runBinaryWithFuel fuel
+          (Machine.initialBinaryWholeWordState word certificate))))
+    (actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords
+      fuel word certificate)
