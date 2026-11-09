@@ -89,6 +89,11 @@ grep -q 'originalNativeBondUnchangedOutsideEndpoints' \
   DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
 grep -q 'originalBondLocalSourceDebitIsPaid' \
   DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+grep -q 'everyChronologicalOriginalDirectedHistoryConserves' \
+  DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+grep -q 'nativeHistoryLeavesUnvisitedVoxelUnchanged' \
+  DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+
 grep -q 'originalFaceInjectionLeavesOtherVoxelUnchanged' \
   DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
 grep -q 'originalFaceDischargeLeavesOtherVoxelUnchanged' \
