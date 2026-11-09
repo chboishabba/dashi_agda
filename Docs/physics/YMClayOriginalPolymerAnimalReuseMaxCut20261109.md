@@ -43,3 +43,16 @@ This is the missing physical quantitative input. Do NOT replace it with `postula
 ## Acceptance
 
 This audit reads original GitHub source on PR #1444, not merely PR descriptions. It claims neither Agda kernel acceptance nor an all-Clay result. Existing source already pays counting and finite mixed-derivative transport conditional on model identification. The genuine remaining work is original Wilson physical activity and its source identification, then E1/D2/N1/G1.
+
+
+## Additional source-owner check: P06 physical constructor and P11
+
+`BalabanP06PhysicalModelLeafExact.agda` already defines `p06ModelLeafFromPhysicalInputs` and `p06PhysicalModelLeafReceipt`. Its record `P06PhysicalModelLeafInputs` supplies the support/reduced-skeleton/decoration/decomposition, concrete neighbour graph and finite-range summation components. Several interfaces carry propositions as `Set` plus evidence fields. This is a *constructor requiring proofs*, not an automatic derivation of original Wilson geometry.
+
+`BalabanP11PhysicalPrefixTailEntropyExact.agda` already consumes the same canonical P06 animal constant in `canonicalAnimalConstantForP11`, and `p11AbsorptionFromPhysicalPrefixTail` transports P11 analytic input to the imported large-field absorption condition. The module explicitly classifies its finite prefix bound, asymptotic tail estimate and entropy payment as conditional. Therefore **P11 entropy absorption also must not be reconstructed from scratch**.
+
+`BalabanStepVGeometricInfluenceSummationExact.agda` already implements `uniformInfluenceBoundFromGeometricSummation` from the A1/A2/A3 input and a majorant partial-sum bound. There is no missing finite-sum comparison theorem in this route.
+
+**Further narrowed maximum cut:** (1) select original Wilson literal physical support into P06/R429 and prove the actual instance of its geometric/model fields; (2) original full Gibbs sparse-frustrated activity/scale bound with a uniform entropy margin and two-mark charge; (3) same-source physical-shell sum calibration. Only then consume the already-existing KP/FP, P11, Step V, CMP116, R320, R333 compilers.
+
+This narrows obligations; it does not prove the missing original-Wilson analytic inputs.
