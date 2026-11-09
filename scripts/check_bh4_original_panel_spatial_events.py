@@ -192,55 +192,99 @@ def boundary_species_event(state,metadata,*,face,point,key,direction,
     return after,external,actual
 
 
-def run_original_spatial_event_history(initial,matrix,species,metadata,events):
-    """Single chronological state and explicit signed environmental ledger.
+def site_conserved_quantities(state,metadata,point):
+    """Exact local C/H/N/O/P and signed integer charge at one 3D voxel."""
+    atoms=tuple(sum(state[point,key]*metadata[key][0][element]
+                    for key in metadata) for element in ELEMENTS)
+    charge=sum(state[point,key]*metadata[key][1] for key in metadata)
+    return atoms+(charge,)
 
-    Event records are discrete *structural* events, not calibrated kinetic
-    laws. Reaction IDs are resolved against the acquired matrix, and
-    transport is limited to genuine native 3D bonds.
+
+def run_original_spatial_event_history(initial,matrix,species,metadata,events):
+    """Chronological *local* conservation of real Rhea chemistry and flux.
+
+    Accumulates transport divergence and boundary sources for EACH of the
+    original 27 voxels, not just global totals. Reaction increments must
+    annihilate each local CHNOP/charge quantity. Native current follows
+    actual (not requested) one-quantum movement; face output is capped by
+    available material. All inputs remain synthetic until source-paid.
     """
+    if set(metadata)!=set(species) or set(initial)!={(p,key) for p in POINTS for key in species}:
+        raise ValueError("physical history must use exact original species and 3D state")
+    if any(type(v) is not int or v<0 for v in initial.values()):
+        raise ValueError("invalid original nonnegative molecular inventory")
     state=initial.copy()
-    ext_atoms=[0]*len(ELEMENTS)
-    ext_charge=0
+    source={point:[0]*6 for point in POINTS}
+    divergence={point:[0]*6 for point in POINTS}
+    event_checks=0
     for event in events:
         if not isinstance(event,dict):
             raise ValueError("original spatial event must be a typed record")
         event_kind=event.get("kind")
-        old=totals(state,metadata)
+        previous=state
         if event_kind=="reaction":
-            state=reaction_event(state,matrix,species,event["column"],
-                                 event["point"],event["count"],metadata)
+            col=event["column"]
+            point=event["point"]
+            count=event["count"]
+            if type(col) is not int or not 0<=col<len(matrix[0]):
+                raise ValueError("reaction column not in original acquired finite matrix")
+            state=reaction_event(state,matrix,species,col,point,count,metadata)
         elif event_kind=="native_transport":
-            state=transport_event(state,species,event["source"],
-                                  event["target"],event["species"],metadata)
+            point=event["source"]
+            target=event["target"]
+            key=event["species"]
+            if key not in metadata:
+                raise ValueError("nonoriginal transport species")
+            if (point,target) not in BONDS and (target,point) not in BONDS:
+                raise ValueError("not an original 54-bond native transfer")
+            moved=int(state[point,key]>0)
+            state=transport_event(state,species,point,target,key,metadata)
+            atom_counts,charge=metadata[key]
+            flux=[moved*atom_counts[element] for element in ELEMENTS]+[moved*charge]
+            for i,value in enumerate(flux):
+                divergence[point][i]+=value
+                divergence[target][i]-=value
         elif event_kind=="outer_face_exchange":
+            point=event["point"]
             state,external,_=boundary_species_event(
-                state,metadata,face=event["face"],point=event["point"],
+                state,metadata,face=event["face"],point=point,
                 key=event["species"],direction=event["direction"],
                 amount=event["amount"],
                 source_reference=event["source_reference"])
-            ext_atoms=[ext_atoms[i]+external[0][i]
-                       for i in range(len(ELEMENTS))]
-            ext_charge+=external[1]
+            for i,value in enumerate(external[0]+(external[1],)):
+                source[point][i]+=value
         else:
             raise ValueError("unrecognized original chemistry/transport event")
-        current=totals(state,metadata)
-        if (tuple(current[0][i]-old[0][i] for i in range(len(ELEMENTS))),
-            current[1]-old[1]) != (
-                external if event_kind=="outer_face_exchange"
-                else ((0,)*len(ELEMENTS),0)):
-            raise AssertionError("one-step source/transport conservation failed")
+        # The exact finite-volume law must hold at EACH voxel, including
+        # voxels untouched by a reaction, transfer or environmental event.
+        for point_check in POINTS:
+            after=site_conserved_quantities(state,metadata,point_check)
+            before=site_conserved_quantities(initial,metadata,point_check)
+            for i in range(6):
+                if after[i]-before[i]+divergence[point_check][i]!=source[point_check][i]:
+                    raise AssertionError(
+                        f"local original CHNOP/charge continuity failed: "
+                        f"voxel={point_check}, coordinate={i}, event={event_kind}"
+                    )
+            event_checks+=1
         if any(v<0 for v in state.values()):
             raise AssertionError("negative inventory in chronological history")
-    origin_atoms,origin_charge=totals(initial,metadata)
-    final_atoms,final_charge=totals(state,metadata)
-    if (tuple(final_atoms[i]-origin_atoms[i]
-              for i in range(len(ELEMENTS))),
-        final_charge-origin_charge)!=(tuple(ext_atoms),ext_charge):
+    ext_atoms=tuple(sum(source[point][i] for point in POINTS)
+                    for i in range(len(ELEMENTS)))
+    ext_charge=sum(source[point][-1] for point in POINTS)
+    original=totals(initial,metadata)
+    final=totals(state,metadata)
+    if (tuple(final[0][i]-original[0][i] for i in range(len(ELEMENTS))),
+        final[1]-original[1])!=(ext_atoms,ext_charge):
         raise AssertionError("all-history environmental balance failed")
-    return state,{"external_CHNOP":tuple(ext_atoms),
+    if any(sum(divergence[point][i] for point in POINTS)!=0 for i in range(6)):
+        raise AssertionError("native cubical bond currents fail global cancellation")
+    return state,{"external_CHNOP":ext_atoms,
                   "external_signed_charge":ext_charge,
-                  "history_length":len(events)}
+                  "history_length":len(events),
+                  "local_voxel_event_checks":event_checks,
+                  "native_divergence_zero_global":True,
+                  "local_CHNOP_and_signed_charge":True}
 
 
 def test_source(certificate,*,full_panel):
@@ -331,7 +375,7 @@ def test_source(certificate,*,full_panel):
         ]
         final,ledger=run_original_spatial_event_history(
             initial,matrix,species,metadata,events)
-        if ledger["history_length"]!=4 or any(v<0 for v in final.values()):
+        if (ledger["history_length"]!=4 or ledger["local_voxel_event_checks"]!=108\n                or any(v<0 for v in final.values())):
             raise AssertionError("mixed source history failed")
         mixed_boundary_cases+=1
     transferred=0
@@ -351,7 +395,7 @@ def test_source(certificate,*,full_panel):
         "source_nonfinite_residuals":len(original["finite_formula_residuals"]),
         "original_reaction_event_checks":event_cases,
         "original_reaction_coordinate_checks":local_coordinate_checks,
-        "original_mixed_face_reaction_history_checks":mixed_boundary_cases,
+        "original_mixed_face_reaction_history_checks":mixed_boundary_cases,\n        "original_mixed_local_voxel_checks":mixed_boundary_cases*4*27,
         "original_reaction_transport_roundtrip_histories":mixed_history_cases,
         "original_native_bond_species_transfer_checks":transferred,
         "same_physical_shared_inventory":True,
@@ -376,7 +420,7 @@ def self_test():
     assert result["source_finite_reactions"]==1
     assert result["original_reaction_event_checks"]==27
     assert result["original_reaction_coordinate_checks"]==27*27*5
-    assert result["original_mixed_face_reaction_history_checks"]==1
+    assert result["original_mixed_face_reaction_history_checks"]==1\n    assert result["original_mixed_local_voxel_checks"]==108
     assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
     # Fail-closed negative controls: no fictional interior boundary,
