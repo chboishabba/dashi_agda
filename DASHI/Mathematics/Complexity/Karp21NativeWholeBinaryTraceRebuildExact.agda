@@ -19,7 +19,8 @@ module DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTraceRebuildExact whe
 open import Agda.Builtin.Nat using (suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Maybe.Base using (Maybe; nothing; just)
-open import Data.List.Base using (length)
+open import Data.List.Base using (List; length)
+open import Data.Integer.Base using (ℤ)
 open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -35,7 +36,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact as
 -- enabled binary source events. No Nat endpoint decoding at runtime.
 nativeWholeBinarySelectedTrace :
   Word.BitWord → Word.BitWord →
-  Maybe (Agda.Builtin.List.List Data.Integer.Base.ℤ)
+  Maybe (List ℤ)
 nativeWholeBinarySelectedTrace word certificate
   with Graph.readNativeWholeBinaryGraphWord word
 ... | nothing = nothing
@@ -49,7 +50,7 @@ nativeWholeBinarySelectedTrace word certificate
 -- The original independent source execution is used only here.
 originalWholeWordSelectedTrace :
   Word.BitWord → Word.BitWord →
-  Maybe (Agda.Builtin.List.List Data.Integer.Base.ℤ)
+  Maybe (List ℤ)
 originalWholeWordSelectedTrace word certificate
   with Original.readRawGraphWord word
 ... | nothing = nothing
