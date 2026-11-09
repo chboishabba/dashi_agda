@@ -169,6 +169,7 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalWordComparisonBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalGraphComparisonEnvelopeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21N21SameWordCountedAcceptanceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FractranN21EndpointScoreStepExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedSSPOrientationNoLosslessExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
