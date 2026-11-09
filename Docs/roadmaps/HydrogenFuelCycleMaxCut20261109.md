@@ -56,3 +56,39 @@ agda -i . -i /path/to/agda-stdlib DASHI/Chemistry/Everything.agda
 ```
 
 Check under the project's pinned Nix/Agda 2.9 environment and record commit SHA, import graph, kernel output, and independent validation separately. No postulates, unsolved metas or termination/positivity escapes were intentionally introduced.
+
+## 2026-11-09 continuation: new mathematical leaves
+
+New files:
+- `DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact`: a **concrete projection to elemental-total state** for all three selected reactions. The signed molecular stoichiometric matrix, feed availability, and kinetic state transition still remain open. `selectedFuelCycleCertificate` consumes the existing DASHI `SC.certifyStoichiometricConservation` theorem. The residual is computed from literal C/H/O input/output counts.
+- `DASHI.Chemistry.HydrogenFuelCycleBreakEvenExact`: `energySavingIffDisplacementExceedsElectricity` gives both directions of the energy-input criterion for a supplied fossil displacement identity, using constructive strict-order cancellation, not an assumed efficiency measurement.
+- `DASHI.Chemistry.HydrogenElectrolyserEnergyExact`: `hydrogenHHVWithinElectricity` derives an energy bound when a **source-supplied** first-law equality and nonnegative heat/storage residual are provided. It does not supply an experimental input/output record.
+
+These files have been added to `DASHI.Chemistry.Everything`.
+
+### Updated exact cut (status is proof-source, not kernel acceptance)
+
+| Gate | Narrow leaf | Source-written status | Still unpaid |
+|---|---|---|---|
+| K0 | Exact-head Agda kernel typechecking, including consumer | **OPEN** | Run under pinned project Agda 2.9 and standard library; record full output |
+| K1a | `reactionResidual` for three balanced reactions + projected `elementalLeftKernel`, finite path proof | **WRITTEN** | Kernel check |
+| K1b | Molecule-resolved inventory, source reaction-column `ν`, and valid nonnegative reaction step `x→x+ν` with feed guards | **OPEN** | Native molecule inventory and guarded transition weld |
+| K2a | `hydrogenHHVWithinElectricity`, assuming the metered first-law equality | **WRITTEN** | Kernel check |
+| K2b | Calibrated Joule/kWh unit bridge, heating value, water/H2 flow, process conditions and uncertainty intervals | **OPEN** | External measured/source receipt |
+| K3 | Actual hydrogen partition and provenance across engine, synthesis, storage, venting | **OPEN** | Metered flow/hold-up, not constructed sample partition |
+| K4a | `energySavingIffDisplacementExceedsElectricity` | **WRITTEN** | Kernel check |
+| K4b | General rational efficiency relation with positive denominator and additive fuel substitution; derivation of engine-efficiency break-even from matched output | **OPEN** | Ordered-rational constitutive abstraction |
+| K5 | Replicated baseline/device/no-H2/H2-only/O2-only matched-output tests | **OPEN** | Experiment |
+| K6 | Carbon product identity, flow, carbon isotope/mass inventory, energy, separated heat/work losses | **OPEN** | Experiment |
+| K7 | Patent claims + inventor/assignment chain | **OPEN** | Authoritative legal records |
+| K8 | Independent scientific, mathematical and provenance review | **OPEN** | Independent verification |
+
+### Precisely what the new theorems do *not* prove
+
+`electrolyserProductionWithinInput` is represented by `hydrogenHHVWithinElectricity`; its source balance is an **input proof obligation**, not discovered evidence.
+
+The atom residual is a zero discrepancy in the atomic projection of standard balanced reaction formulae. It is not an assertion that a particular plasma, palladium, electrolyser, intake or CO2 conversion mechanism implements those formulae.
+
+`energySavingIffDisplacementExceedsElectricity` compares input-energy totals for a prescribed fuel displacement. It does not establish that a hydrogen retrofit causes any efficiency rise. The full physical experiment must hold useful work constant and include changing battery/tank inventory.
+
+Do not conflate "source written", "Agda kernel accepted", "executably simulated", "independently measured", "patent disclosed", or "legal title verified". This separation implements the existing DASHI attribution policy.
