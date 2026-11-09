@@ -114,6 +114,19 @@ grep -q 'originalNativeVoxelIncidenceBalance' \
 grep -q 'original369SignedNativeOneStepContinuity' \
   DASHI/Biology/Physical/Biological369CubicalOpenSignedChargeExact.agda
 
+# The mixed native-bond + original outer-face theorem is part of the
+# Round-23 Golden import graph; presence is only a preflight assertion.
+grep -q 'original369LocalSignedContinuityExact' \
+  DASHI/Biology/Physical/Biological369MixedNativeFaceSignedContinuityExact.agda
+grep -q 'positiveMixedHistoryBalance' \
+  DASHI/Biology/Physical/Biological369MixedNativeFaceSignedContinuityExact.agda
+grep -q 'negativeMixedHistoryBalance' \
+  DASHI/Biology/Physical/Biological369MixedNativeFaceSignedContinuityExact.agda
+grep -q 'originalFaceEveryVoxelBalance' \
+  DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
+grep -q 'original369AllVoxelNativeSignedHistoryContinuity' \
+  DASHI/Biology/Physical/Biological369CubicalOpenSignedChargeExact.agda
+
 python3 scripts/check_biological_history_future_quotient.py
 python3 scripts/check_biological_spatial_stochastic.py
 python3 scripts/check_biological_minimal_cube.py
