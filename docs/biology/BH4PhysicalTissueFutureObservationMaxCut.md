@@ -1,5 +1,14 @@
 # BH4 ↔ physical-tissue future-observation max-cut
 
+## Canonical reactive-PNP P0–P3 exact lemma inventory — 2026-11-09
+
+**Current owner:** [BH4ReactivePNPExactRemainingMaxCut.md](https://github.com/chboishabba/dashi_agda/blob/feat/kitzerow-bh4-pathway-ontology-interop/docs/biology/BH4ReactivePNPExactRemainingMaxCut.md). It enumerates G0.01–04, S0.01–04, P0.01–08, P1.01–03, P2.01–02 and P3.01–03; existing declarations are distinguished from proposed declarations and from source/empirical receipts. It supersedes older repeated status summaries below without converting any open physical gate into a proof.
+
+**Attribution:** the user's 369/ternary 3×3×3/pants and actual 54-bond cubical semantics are pre-existing prior art; the externally published reactive-PNP, mass-action thermodynamics and SG method are credited to their researchers; the assistant's three-species numerical reference is implementation assistance and an explicitly synthetic fixture, not BH4 measurement or scientific priority.
+
+**New work:** numerical reference and its 8 tests committed to the BH4 branch; 4 additional local source-adapter negative-control tests passed but adapter remains a local artifact. 12/12 combined local tests; no original 29×12 execution or Agda 2.9 kernel receipt. Strict nonzero-exchange/reactive-electrode and multi-compartment cases remain unimplemented, not 'assumed blocking'. See the canonical gate table before writing new status updates.
+
+
 ## P0 highest-alpha source/math advance — 9 November 2026
 
 **Mathematical source, BH4 PR #1454:** `DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda` now contains constructive vector-addition/weighted-dot conservation proofs for an actually available finite reaction; `original29x12SpatialReactionBalance` establishes any of five CHNOP invariants at any of the original 27 cubical voxels; `original29x12SpatialSignedChargeBalance` establishes the **net** signed molecular charge cross-sum (not false separate +/− charge-magnitude conservation); and `original29x12SpatialAllHistoryCHNOPBalance` / `original29x12SpatialAllHistorySignedChargeBalance` compose the invariants across arbitrary chronological reactions. The indexed history requires an available-reactant witness at every intermediate state, so no unearned molecule depletion is permitted. **All four statements explicitly require a `SourceCertifiedOriginal29x12` argument. The original source certificate instance remains missing. These newly written Agda declarations are NOT kernel accepted.**
