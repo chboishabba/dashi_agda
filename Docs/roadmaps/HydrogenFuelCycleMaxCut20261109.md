@@ -196,3 +196,20 @@ Google Patents https://patents.google.com/patent/US9809774B2/en explicitly ident
 ### Necessary energy-bound qualification
 
 `hydrogenHHVWithinElectricity` assumes a *selected electricity-only boundary with nonnegative heat/storage residual*. For a high-temperature steam electrolyser or plasma/heat-assisted process, **imported process heat and chemical fuel must appear on the input side**. One must not apply this specialised bound to such a system without those additional energies. Oxygen injection may change combustion kinetics but oxygen is not a fuel. No claimed combustibility-enhancement factor is inferred from patent/marketing text.
+
+## Source-paid reference thermochemistry (not a device measurement)
+
+`HydrogenFuelCycleNISTThermochemistryExact` adds **attributed** literature numbers rather than invented fuel constants:
+
+- NIST water liquid standard enthalpy of formation at 298.15 K: −285.830 ± 0.040 kJ/mol. Under H2(g)+0.5 O2(g)→H2O(l), the reported HHV magnitude is represented by 285830 ± 40 J/mol, with explicit source and phase.
+- NIST methane gas combustion: Prosen/Rossini measured −890.35 ± 0.30 kJ/mol, represented by 890350 ± 300 J/mol under the specified combustion/product-water convention.
+- `fourHydrogenVersusMethaneHHVDifference` proves, as an exact identity of these **reported numerals**, 4×285830 = 890350+252970 J/mol of CH4 production; `conservativeHHVGap` uses 4×285790 = 890650+252510. This is **not a measured Sabatier synthesis thermal yield or plant efficiency**.
+- NIST literature records and numerical uncertainty are independently attributed; the Agda equation is a user-directed ChatGPT integration. Neither is McLaren's original scientific contribution.
+
+Primary locators:
+https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=187&Units=SI
+https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=1
+
+**SI-02 status:** reference-state H2 and methane HHVs sourced; device-specific H2 molar flow, gas composition and calorimetry still external. Source uncertainty is not a claim that reactor-level uncertainty is ±0.040 kJ/mol. The measurement-dependent gates SI-01, SI-03 field acquisition, AL-01, PH-01, PH-02, C-01, IP-01 and V-01 remain open. The interval theorem is conditional on actual admitted readings.
+
+**Total source tranche:** 18 new Agda modules plus an independent no-CI Python regression source file, 2026-11-09. K0 not prioritised in this iteration per user instruction; its actual kernel status is unchanged.
