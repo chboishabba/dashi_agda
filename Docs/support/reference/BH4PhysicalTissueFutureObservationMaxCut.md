@@ -114,3 +114,18 @@ Source audit: PR #1471 head observed at `d9f5dd931517a86542b498648e41cb6aea9094c
 - **D6 (governance):** G7 lineage and independently reviewed evidence.
 
 **No closure claimed** for Agda acceptance, entire 29×12 source certificate execution, calibrated physiological flux, full PNP evolution, real phenotype prediction, causal Kitzerow hypothesis, or branch reconciliation. Local charge continuity currently has a Python regression, **not** an Agda proof.
+
+
+### 2026-11-09 continuation — substantive P0 local components, exact residual
+
+**Source-written Agda work (no kernel receipt yet):**
+- `BiologicalSharedFiniteVectorTransferExact.lookupAfterDebit`: indexed voxel post-debit + actual (0/1) local outflow = original amount; and `lookupAfterCredit`: indexed target gains one.
+- `BiologicalOriginal54BondSharedVectorExact.originalBondLocalSourceDebitIsPaid` and `originalBondLocalTargetCreditIsPaid`: specialize those results to actual original nearest-neighbour bond endpoints in ternary 3×3×3 geometry.
+- `Biological369CubicalBoundaryMaterialExact.lookupAfterFaceInjection` and `originalBoundaryInjectionLocalReceipt`: exactly account at the exterior voxel, using `OnFace`-qualified original events.
+- Existing `originalFullSpatialOpenSignedChargeBalance` still supplies **global** signed open charge; the Python regression still checks **voxelwise** charge continuity.
+
+**Do not prematurely close `original369LocalSignedContinuityExact`.** It still needs a single Agda source for per-voxel integer signed currents combining *executed* cation/anion native-bond histories, boundary withdrawals and injections, a signed incidence divergence, and the all-27-voxel step/history induction. The pointwise local source/target/face lemmas above remove its lowest-level arithmetic obligations only. G1 remains PARTIAL.
+
+**Other progress on companion #1454:** `check_bh4_original_panel_spatial_events.py` now composes each certified original finite reaction event with an actual original native-bond transport and its reverse on the **same** 3×3×3×species inventory, checking nonnegative molecular amounts and conserved CHNOP/charge. The full 29×12 execution remains gated on mounted source certificate and does not claim any of the 29 physiological external fluxes. G2 remains PARTIAL.
+
+**Updated immediate proof order:** local all-voxel charge-current ledger → source-certificate 29×12 same-state histories with explicitly separately tracked environmental exchanges → admissible physical step → PNP/BH4/tissue commutation → intervention-safe stochastic quotient → independent measurements. No rate or clinical causal claim arises from this structural conservation work.
