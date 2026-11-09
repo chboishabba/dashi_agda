@@ -35,7 +35,10 @@ ORIGINAL_OWNERS = {
     'hansen_original_correction': 'James E. Hansen',
     'gcc_june_response': 'Global Climate Coalition',
     'gcc_september_bulletin': 'Global Climate Coalition',
-    'gcc_march_baseline': 'Global Climate Coalition',
+    'gcc_march8_policy_statement': 'Global Climate Coalition',
+    'gcc_march10_model_release': 'Global Climate Coalition',
+    'gcc_january4_press_outreach': 'Global Climate Coalition',
+    'gcc_undated_expert_brochure': 'Global Climate Coalition',
 }
 
 def validate(manifest, source_root, *, synthetic=False):
@@ -50,7 +53,7 @@ def validate(manifest, source_root, *, synthetic=False):
     grades={}
     pairings={name: [] for name in VALID}
     for p in items:
-        demand(p['source_id'] in ('rensberger_original','hansen_original_correction','gcc_june_response','gcc_september_bulletin','gcc_march_baseline'), 'source cohort')
+        demand(p['source_id'] in ORIGINAL_OWNERS, 'source cohort')
         if not synthetic:
             demand(ORIGINAL_OWNERS[p['source_id']] in p['original_author'], 'source-specific author attribution')
             demand(p['edition'].strip().lower() != 'synthetic', 'synthetic edition not historical source')
@@ -92,7 +95,7 @@ def self_test():
         (root/'text.bin').write_bytes(raw)
         codes_a={key:sorted(values)[0] for key,values in VALID.items()}
         codes_b=codes_a.copy()
-        p={'id':'test1','source_id':'gcc_march_baseline','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':len(raw),'passage_sha256':hashlib.sha256(raw).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
+        p={'id':'test1','source_id':'gcc_march8_policy_statement','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':len(raw),'passage_sha256':hashlib.sha256(raw).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
         item={'schema':'dashi.ccdcoe.p3.dual_coder_receipts.v1','passages':[p]}
         positive=validate(item,root,synthetic=True); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
         import copy
