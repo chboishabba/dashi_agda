@@ -306,3 +306,12 @@ python scripts/qcafqmc_ipie_molecular_runner.py SOURCE_IDENTIFIED_8_ORBITAL_CONF
 - **P2:** Acquire original 16-qubit matchgate measurement records, circuit settings, calibration, train/validation split and weights. Absence in current audit means no original-source replication.
 - **P3:** Acquire selected nickel chemistry structures B/[B-C]‡/C and exact truncation/active orbital selection and electronic integral tensor; run consistent same-geometry reaction reference and AFQMC statistical/cost comparison.
 - **P0:** Kernel-check Agda 2.9 import graph and complete actual source-specific physical generator witness; none of the executable numerical results alone inhabits the abstract Agda source equality.
+
+
+### Determinant reference-order repair
+
+The finite NQS→iPie export now sorts each retained CI determinant by descending coefficient modulus while transporting its alpha/beta occupation row and complex coefficient together. This matters because iPie uses the leading determinant as its reference and a leading prefix for trial-density intermediates. The accompanying regression asserts monotone weight ordering and, for every exported row, exact lookup identity with the source NQS fixed-sector coefficient; it also tests the explicit determinant budget. No truncation is applied when the default zero cutoff is used. Runtime validation against ipie itself is still unpaid.
+
+### Algebraic proof versus runtime boundary
+
+The overlap certificate is an exact *mathematical inequality* derived from ratio perturbation and Cauchy–Schwarz. The NumPy implementation checks its hypotheses and numerical conclusion in floating point; it is **not an Agda 2.9 proof of floating-point operations**. The earlier Agda same-source energy theorem still requires both kernel acceptance and an original physically instantiated atomic generator. The new full-CI trial route leverages iPie's existing force bias and phaseless code, but the original IonQ shadow-trained model and nickel input records remain unacquired. Next important execution is a seeded iPie NQS versus HF trial comparison with the same source geometry, integral basis and exact-FCI reference.
