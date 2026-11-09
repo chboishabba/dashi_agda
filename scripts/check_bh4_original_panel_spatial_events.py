@@ -200,6 +200,20 @@ def site_conserved_quantities(state,metadata,point):
     return atoms+(charge,)
 
 
+def assert_original_voxel_continuity(initial,state,metadata,divergence,source,
+                                    *,event_kind="audited"):
+    """Check the exact six-coordinate balance on ALL original 27 sites."""
+    for point in POINTS:
+        after=site_conserved_quantities(state,metadata,point)
+        before=site_conserved_quantities(initial,metadata,point)
+        for i in range(6):
+            if after[i]-before[i]+divergence[point][i]!=source[point][i]:
+                raise AssertionError(
+                    f"local original CHNOP/charge continuity failed: "
+                    f"voxel={point}, coordinate={i}, event={event_kind}"
+                )
+
+
 def run_original_spatial_event_history(initial,matrix,species,metadata,events):
     """Chronological *local* conservation of real Rhea chemistry and flux.
 
@@ -221,7 +235,6 @@ def run_original_spatial_event_history(initial,matrix,species,metadata,events):
         if not isinstance(event,dict):
             raise ValueError("original spatial event must be a typed record")
         event_kind=event.get("kind")
-        previous=state
         if event_kind=="reaction":
             col=event["column"]
             point=event["point"]
@@ -257,16 +270,9 @@ def run_original_spatial_event_history(initial,matrix,species,metadata,events):
             raise ValueError("unrecognized original chemistry/transport event")
         # The exact finite-volume law must hold at EACH voxel, including
         # voxels untouched by a reaction, transfer or environmental event.
-        for point_check in POINTS:
-            after=site_conserved_quantities(state,metadata,point_check)
-            before=site_conserved_quantities(initial,metadata,point_check)
-            for i in range(6):
-                if after[i]-before[i]+divergence[point_check][i]!=source[point_check][i]:
-                    raise AssertionError(
-                        f"local original CHNOP/charge continuity failed: "
-                        f"voxel={point_check}, coordinate={i}, event={event_kind}"
-                    )
-            event_checks+=1
+        assert_original_voxel_continuity(
+            initial,state,metadata,divergence,source,event_kind=event_kind)
+        event_checks+=len(POINTS)
         if any(v<0 for v in state.values()):
             raise AssertionError("negative inventory in chronological history")
     ext_atoms=tuple(sum(source[point][i] for point in POINTS)
@@ -446,6 +452,27 @@ def self_test():
         direction="extract",amount=100,source_reference="synthetic negative control")
     assert unchanged==empty and actual==0
     assert ledger==((0,)*len(ELEMENTS),0)
+    # Adversarial failure: moving a molecule between two original voxels
+    # with no declared incidence current preserves global atoms/charge.
+    # The *local* theorem must nevertheless detect this hidden transfer.
+    displaced=empty.copy()
+    source,target=BONDS[0]
+    displaced[source,key]=2
+    fake_before=displaced.copy()
+    displaced[source,key]-=1
+    displaced[target,key]+=1
+    assert totals(displaced,metadata)==totals(fake_before,metadata)
+    declared_div={point:[0]*6 for point in POINTS}
+    declared_ext={point:[0]*6 for point in POINTS}
+    try:
+        assert_original_voxel_continuity(
+            fake_before,displaced,metadata,declared_div,declared_ext,
+            event_kind="adversarial undeclared remote redistribution")
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError(
+            "local signed/element continuity missed undeclared transport")
     print(json.dumps(result,indent=2,sort_keys=True))
 
 
