@@ -474,6 +474,7 @@ def main(argv=None):
     p.add_argument("--external-coordinates",type=Path)
     p.add_argument("--image-terms",type=Path,help="Existing dashi-symbol-snowball-v1 image term pack")
     p.add_argument("--agda-revision",help="Pinned Agda repository HEAD (40 hex)")
+    p.add_argument("--agda-root",type=Path,help="Local checked-out Agda root for source-span QID/OEIS extraction")
     p.add_argument("--max-agda-rows",type=int,default=0)
     p.add_argument("--max-candidates",type=int,default=8)
     p.add_argument("--verify-lean-root",type=Path,help="Opt-in local kernel run; no network fetch")
@@ -488,11 +489,22 @@ def main(argv=None):
     try:
         init(conn)
         with conn:
-            if args.agda_revision:
-                import_agda(conn,revision=args.agda_revision,max_rows=args.max_agda_rows)
+            revision=args.agda_revision
+            if args.agda_root:
+                checked=args.agda_root.resolve()
+                head=subprocess.run(["git","rev-parse","HEAD"],cwd=checked,
+                  capture_output=True,text=True,check=True).stdout.strip()
+                if revision and revision != head:
+                    raise ValueError("Requested Agda revision does not match local checkout")
+                revision=head
+            if revision:
+                import_agda(conn,revision=revision,max_rows=args.max_agda_rows)
             if args.external_declarations:
                 import_external(conn,args.external_declarations,admitted)
             import_coordinates(conn,args.external_coordinates)
+            if args.agda_root:
+                from jmd_attach_wikidata_oeis import attach
+                attach(args.agda_root.resolve(),conn)
             changed=set()
             if args.goals:
                 _,changed=upsert_goals(conn,args.goals)
