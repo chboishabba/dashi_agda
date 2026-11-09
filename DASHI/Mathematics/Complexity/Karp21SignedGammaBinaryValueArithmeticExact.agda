@@ -62,8 +62,7 @@ reverseValueSameOriginalPayload (b ∷ bits)
   rewrite ListP.reverse-++ (b ∷ []) bits
         | valueLEAppendBit (reverse bits) b
         | ListP.length-reverse bits
-        | reverseValueSameOriginalPayload bits
-        | sameBitNumber b =
+        | reverseValueSameOriginalPayload bits =
   solve
     (Original.bitNat b ∷
      Original.pow2 (length bits) ∷
