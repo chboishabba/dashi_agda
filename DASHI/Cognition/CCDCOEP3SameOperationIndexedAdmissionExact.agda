@@ -323,3 +323,112 @@ strongDemoRefinesWeakDemo :
   StagewiseEvidenceRefinement StrongDemo WeakDemo
 strongDemoRefinesWeakDemo =
   record { weaken = λ c s evidence → weakToken }
+
+------------------------------------------------------------------------
+-- SOURCE-BOUND SIX-STAGE ADMISSION (RECEIPT NON-REUSE).
+--
+-- A case-index alone does not ensure that six stage witnesses are
+-- backed by six independent original-source receipts. This *stronger*
+-- consumer demands explicit receipt identities, same-original-case
+-- ownership, and distinct receipt keys at unequal evidence stages.
+-- Receipt identities and the source-owner map are supplied by an
+-- external reviewer; this module does not authenticate either one.
+------------------------------------------------------------------------
+
+record SourceBoundAdmission
+    (E : OriginalCase → EvidenceStage → Set)
+    (Reference : Set)
+    (sourceCase : Reference → OriginalCase)
+    (c : OriginalCase) : Set where
+  field
+    stages : AdmitsOneOriginalCase E c
+    receiptReference : EvidenceStage → Reference
+    referenceBelongsToCase :
+      (stage : EvidenceStage) →
+      sourceCase (receiptReference stage) ≡ c
+    distinctStagesDistinctReceipts :
+      (first second : EvidenceStage) →
+      (first ≡ second → ⊥) →
+      receiptReference first ≡ receiptReference second → ⊥
+
+sourceBoundImpliesStageAdmission :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  SourceBoundAdmission E Reference sourceCase c →
+  AdmitsOneOriginalCase E c
+sourceBoundImpliesStageAdmission E Reference sourceCase c admitted =
+  SourceBoundAdmission.stages admitted
+
+sourceBoundMissingExposureBlocks :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  (E c recipientExposure → ⊥) →
+  SourceBoundAdmission E Reference sourceCase c → ⊥
+sourceBoundMissingExposureBlocks E Reference sourceCase c missing admitted =
+  blockedByMissingExposure E c missing
+    (sourceBoundImpliesStageAdmission E Reference sourceCase c admitted)
+
+sourceBoundMissingIntentBlocks :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  (E c independentlySourcedIntent → ⊥) →
+  SourceBoundAdmission E Reference sourceCase c → ⊥
+sourceBoundMissingIntentBlocks E Reference sourceCase c missing admitted =
+  blockedByMissingIntent E c missing
+    (sourceBoundImpliesStageAdmission E Reference sourceCase c admitted)
+
+exposureAndIntentMustHaveDifferentReceipt :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  (admitted : SourceBoundAdmission E Reference sourceCase c) →
+  SourceBoundAdmission.receiptReference admitted recipientExposure ≡
+  SourceBoundAdmission.receiptReference admitted independentlySourcedIntent →
+  ⊥
+exposureAndIntentMustHaveDifferentReceipt E Reference sourceCase c admitted =
+  SourceBoundAdmission.distinctStagesDistinctReceipts admitted
+    recipientExposure independentlySourcedIntent exposureIsNotIntent
+
+interventionAndCausalMustHaveDifferentReceipt :
+  (E : OriginalCase → EvidenceStage → Set)
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase)
+  (c : OriginalCase) →
+  (admitted : SourceBoundAdmission E Reference sourceCase c) →
+  SourceBoundAdmission.receiptReference admitted originalIntervention ≡
+  SourceBoundAdmission.receiptReference admitted causalDiscrimination →
+  ⊥
+interventionAndCausalMustHaveDifferentReceipt E Reference sourceCase c admitted =
+  SourceBoundAdmission.distinctStagesDistinctReceipts admitted
+    originalIntervention causalDiscrimination sourceTextIsNotCausalEffect
+
+selectedGCCCannotBeSourceBoundAdmitted :
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase) →
+  SourceBoundAdmission CurrentlyLocatedEvidence Reference sourceCase gcc1993 → ⊥
+selectedGCCCannotBeSourceBoundAdmitted Reference sourceCase =
+  sourceBoundMissingExposureBlocks
+    CurrentlyLocatedEvidence Reference sourceCase gcc1993
+    currentGCCExposureUnavailable
+
+selectedAPICannotBeSourceBoundAdmitted :
+  (Reference : Set)
+  (sourceCase : Reference → OriginalCase) →
+  SourceBoundAdmission CurrentlyLocatedEvidence Reference sourceCase apiProposal1998 → ⊥
+selectedAPICannotBeSourceBoundAdmitted Reference sourceCase =
+  sourceBoundMissingExposureBlocks
+    CurrentlyLocatedEvidence Reference sourceCase apiProposal1998
+    currentAPIExposureUnavailable
+
+-- Distinct receipt references are necessary but not sufficient for
+-- actual independent confirmation. They may point to duplicated copies
+-- of one original record. Independent provenance, reviewer checks,
+-- matched exposure/causal measurements and external source validation
+-- remain unpaid empirical obligations.
