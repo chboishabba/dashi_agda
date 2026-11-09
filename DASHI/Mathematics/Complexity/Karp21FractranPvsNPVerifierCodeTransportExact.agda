@@ -20,7 +20,7 @@ module DASHI.Mathematics.Complexity.Karp21FractranPvsNPVerifierCodeTransportExac
 open import Agda.Builtin.Bool using (Bool)
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using (trans; sym)
-open import Data.Product using (_×_; _,_; proj₁; proj₂)
+open import Data.Product using (_×_; _,_)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.PolynomialReductionExact as PR
