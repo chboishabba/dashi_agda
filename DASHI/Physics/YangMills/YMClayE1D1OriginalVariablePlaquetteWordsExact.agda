@@ -20,6 +20,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.YMClayD1OriginalPeriodicPlaquetteFourBondSupportExact as FourBond
 import DASHI.Physics.YangMills.YMClayD1OriginalPlaquetteSupportDecisionExact as DisjointSupport
+import DASHI.Physics.YangMills.YMClayD1OriginalWilsonPathSupportExtensionalExact as ActualPath
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Wilson
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Jet
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
@@ -49,6 +50,20 @@ module _
   originalWordPositiveBondSupports n (p ∷ rest) =
     FourBond.originalFourPositiveBonds p ∷
     originalWordPositiveBondSupports n rest
+
+
+  -- Unlike the compact four-bond normal form above, these are
+  -- generated directly by the actual signed Bond.pathHolonomy
+  -- evaluator, including inverse negative-step link lookups.
+  -- ActualPath.originalWilsonPlaquetteHolonomyExtensional proves the
+  -- original nonabelian holonomy changes only on these source slots.
+  originalWordActualPathBondSupports :
+    (n : Nat) → PlaquetteWord n →
+    List (List (Torus.PositiveBond (suc n)))
+  originalWordActualPathBondSupports n [] = []
+  originalWordActualPathBondSupports n (p ∷ rest) =
+    ActualPath.sourcePlaquettePositiveBondSupport p ∷
+    originalWordActualPathBondSupports n rest
 
   data EveryOriginalPlaquetteHasFour {A : Set} :
     List (List A) → Set where
