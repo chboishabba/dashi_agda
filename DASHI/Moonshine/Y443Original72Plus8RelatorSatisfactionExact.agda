@@ -26,6 +26,7 @@ open import Data.Product using (_×_; _,_; proj₁; proj₂)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.TwistedModuleModularity as TM
+import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as JMD
 
 -- Index positions in the original coxeter squares ++ pair words
 -- ++ spider ++ central enumeration, all ZERO-BASED:
@@ -132,3 +133,40 @@ module UnderOriginalGroup
     original72And8ImplyOriginal80
       (proj₁ (original80ImpliesOriginal72And8 h))
       (proj₂ (original80ImpliesOriginal72And8 h))
+
+------------------------------------------------------------------------
+-- SAME-OBJECT CONSUMER: the original JMD selected G, no new carrier,
+-- no invented group and no replacement 80-relator certificate.
+------------------------------------------------------------------------
+
+module ExistingOriginalJMD
+  {G : Set}
+  (source : JMD.PresentedY443VNaturalSource G) where
+
+  module Split = UnderOriginalGroup
+    (JMD.groupWithInverse source)
+    (JMD.nodes source)
+
+  literalOriginal72Satisfied :
+    Pair.RelatorsSatisfied
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) original72
+  literalOriginal72Satisfied =
+    proj₁ (Split.original80ImpliesOriginal72And8
+      (JMD.relatorsHold source))
+
+  literalOriginal8Satisfied :
+    Pair.RelatorsSatisfied
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) original8
+  literalOriginal8Satisfied =
+    proj₂ (Split.original80ImpliesOriginal72And8
+      (JMD.relatorsHold source))
+
+  recombinedSameOriginal80 :
+    Pair.RelatorsSatisfied
+      (JMD.groupWithInverse source)
+      (JMD.nodes source) Y.monsterRelators
+  recombinedSameOriginal80 =
+    Split.original72And8ImplyOriginal80
+      literalOriginal72Satisfied literalOriginal8Satisfied
