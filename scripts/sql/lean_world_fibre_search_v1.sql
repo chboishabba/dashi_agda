@@ -42,29 +42,47 @@ CREATE TABLE IF NOT EXISTS lean_world_occurrence (
 CREATE INDEX IF NOT EXISTS lean_world_occurrence_fibre_cursor_idx
   ON lean_world_occurrence (fibre_id, repository, revision, declaration);
 
--- Maintain exact fibre counts only for *new* occurrences. A duplicate origin
--- does not fire this INSERT trigger; conflicting origins must be rejected by
--- the ingestion transaction rather than silently updated.
-CREATE OR REPLACE FUNCTION lean_world_occurrence_count_change()
+-- Bulk-friendly exact counts: statement-level transition tables update each
+-- affected fibre ONCE PER SQL INSERT/DELETE statement, not once per row.
+-- This reduces hot-row contention when COPY/batched INSERT is used.
+-- An update of occurrence identity/fibre is not a supported mutation: delete
+-- and reinsert in the same transaction after explicitly checking ownership.
+CREATE OR REPLACE FUNCTION lean_world_count_insert_batch()
 RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
-  IF TG_OP = 'INSERT' THEN
-    UPDATE lean_world_fibre SET occurrence_count = occurrence_count + 1
-      WHERE fibre_id = NEW.fibre_id;
-    RETURN NEW;
-  ELSIF TG_OP = 'DELETE' THEN
-    UPDATE lean_world_fibre SET occurrence_count = occurrence_count - 1
-      WHERE fibre_id = OLD.fibre_id;
-    RETURN OLD;
-  END IF;
-  RAISE EXCEPTION 'unsupported occurrence mutation: %', TG_OP;
+  UPDATE lean_world_fibre AS f
+     SET occurrence_count = f.occurrence_count + batch.n
+    FROM (SELECT fibre_id, count(*)::bigint AS n FROM inserted_rows
+          GROUP BY fibre_id) AS batch
+   WHERE f.fibre_id = batch.fibre_id;
+  RETURN NULL;
 END
 $$;
-DROP TRIGGER IF EXISTS lean_world_occurrence_count_trigger
+
+CREATE OR REPLACE FUNCTION lean_world_count_delete_batch()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  UPDATE lean_world_fibre AS f
+     SET occurrence_count = f.occurrence_count - batch.n
+    FROM (SELECT fibre_id, count(*)::bigint AS n FROM removed_rows
+          GROUP BY fibre_id) AS batch
+   WHERE f.fibre_id = batch.fibre_id;
+  RETURN NULL;
+END
+$$;
+DROP TRIGGER IF EXISTS lean_world_occurrence_count_trigger\n  ON lean_world_occurrence;\nDROP TRIGGER IF EXISTS lean_world_occurrence_insert_count_trigger
   ON lean_world_occurrence;
-CREATE TRIGGER lean_world_occurrence_count_trigger
-AFTER INSERT OR DELETE ON lean_world_occurrence
-FOR EACH ROW EXECUTE FUNCTION lean_world_occurrence_count_change();
+DROP TRIGGER IF EXISTS lean_world_occurrence_delete_count_trigger
+  ON lean_world_occurrence;
+CREATE TRIGGER lean_world_occurrence_insert_count_trigger
+AFTER INSERT ON lean_world_occurrence
+REFERENCING NEW TABLE AS inserted_rows
+FOR EACH STATEMENT EXECUTE FUNCTION lean_world_count_insert_batch();
+
+CREATE TRIGGER lean_world_occurrence_delete_count_trigger
+AFTER DELETE ON lean_world_occurrence
+REFERENCING OLD TABLE AS removed_rows
+FOR EACH STATEMENT EXECUTE FUNCTION lean_world_count_delete_batch();
 
 -- Example bounded query (bind exact values, no string interpolation):
 -- SELECT repository, revision, declaration, statement_id, proof_term_digest,
