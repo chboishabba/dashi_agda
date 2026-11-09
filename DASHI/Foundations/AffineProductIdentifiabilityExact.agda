@@ -114,7 +114,7 @@ noConfidenceDecoderAfterObservation :
   (observe : Nat → O) →
   x * y ≡ u * v →
   (y ≡ v → ⊥) →
-  (decode : Nat → Nat) →
+  (decode : O → Nat) →
   ((g c : Nat) →
      decode (observe (affineProduct a b g c)) ≡ c) → ⊥
 noConfidenceDecoderAfterObservation a b x y u v observe same distinct =
