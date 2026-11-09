@@ -209,7 +209,7 @@ nativeRawEdgeStreamIsAligned :
   (suffix : Word.BitWord) →
   Stream.readNativePairedRawEdges count word ≡ just (paired , suffix) →
   RawTokenAligned paired
-nativeRawEdgeStreamIsAligned 0 word [] word refl = alignedNil
+nativeRawEdgeStreamIsAligned 0 word [] .word refl = alignedNil
 nativeRawEdgeStreamIsAligned (suc count) word paired suffix success
   with Stream.readOneNativePairedRawEdge word in one
 ... | nothing with success
