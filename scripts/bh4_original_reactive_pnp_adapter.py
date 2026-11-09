@@ -21,7 +21,8 @@ import numpy as np
 from check_bh4_original_panel_spatial_events import (
     check_certificate, load_original_receipt_json,
 )
-from reactive_pnp_369 import Model, implicit_step
+from reactive_pnp_369 import (Model, implicit_step,
+    global_positive_implicit_brouwer_bounds)
 from build_bh4_stoichiometric_matrix import participant_key
 
 _REQUIRED_PHYSICS = ("epsilon", "RT", "F", "h")
@@ -192,6 +193,62 @@ def make_candidate(source_bytes: bytes, manifest: dict, *, pinned_sha256: str):
         "agda_kernel_checked": False,
     }
 
+
+
+
+def source_bound_closed_brouwer_existence(
+    source_bytes: bytes, manifest: dict, *, pinned_sha256: str,
+    initial_concentrations: np.ndarray, dt: float,
+):
+    """Original-panel-weighted all-positive-time-step existence contract.
+
+    The original Rhea acquired participant formulas supply a *positive*
+    atomic count for each selected species. The exact 29x12 signed matrix
+    must annihilate these weights by Python integer arithmetic.
+    Only then reuse the original 54-bond closed PNP Brouwer theorem.
+    The result is a theorem-input/candidate receipt, not a root or
+    independent source/Agda referee certificate.
+    """
+    model, candidate = make_candidate(
+        source_bytes, manifest, pinned_sha256=pinned_sha256)
+    certificate = load_original_receipt_json(source_bytes.decode("utf-8"))
+    matrix, by_species = check_certificate(certificate, full_panel=True)
+    species = matrix["species_index"]
+    matrix_rows = matrix["matrix"]
+    elements = ("C","H","N","O","P")
+    weights = []
+    for key in species:
+        formula = by_species[key][0]
+        if not isinstance(formula, dict):
+            raise ValueError("original molecular elemental formula required")
+        weight = 0
+        for element in elements:
+            value = formula.get(element,0)
+            if type(value) is not int or value < 0:
+                raise ValueError("nonnegative exact integer original atomic count required")
+            weight += value
+        if weight<=0:
+            raise ValueError("source species without positive CHNOP inventory needs a new physical reservoir")
+        weights.append(weight)
+    if len(weights)!=29 or len(matrix_rows)!=29:
+        raise ValueError("original 29-species finite source matrix required")
+    for reaction in range(12):
+        if sum(int(matrix_rows[i][reaction])*weights[i]
+               for i in range(29))!=0:
+            raise ValueError("source-weighted original reaction conservation failed")
+    theorem = global_positive_implicit_brouwer_bounds(
+        initial_concentrations,model,weights,dt)
+    return {
+        "kind":"dashi.bh4.original-closed-pnp-brouwer.v1",
+        "source_receipt":candidate,
+        "conserved_original_CHNOP_weights":dict(zip(species,weights)),
+        "exact_integer_source_weighted_reactions_verified":True,
+        "mathematical_root_existence_contract":theorem,
+        "explicit_root_computed":False,
+        "original_parameters_independently_authenticated":False,
+        "original_tissue_observer_one_step_proven":False,
+        "agda_kernel_checked":False,
+    }
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
