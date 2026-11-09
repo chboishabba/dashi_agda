@@ -60,6 +60,32 @@ Reuse `OggPrimeFourierWindingExact` (#1140), `TernaryPantsRecursiveWreathActionE
 
 Existing owners: `BishopMachinQuarterAngleBranchExact`, `BishopMachinPiArchimedesWindowExact`, `BishopRound11MachinSetoidComplexInstanceExact`, `BishopRound11ClassicalTrigObjectWeldExact`, `JInvariantBishopTrigUnitPhaseExact`, `JInvariantBishopUpperHalfPlaneEisensteinFromUnitPhaseExact`, `JInvariantBishopPuncturedLatticeEisensteinCompilerExact`, `JInvariantBishopUnitDiskEisensteinCompletionExact`.
 
+## P2e. Original E8 theta → Bishop E4 (new cross-PR reuse)
+
+**Important distinction:** E8 is the exceptional rank-eight root lattice; its theta series is a **weight-4** modular form and satisfies the classical identity `Θ_E8=E4`. It is *not* the weight-eight Eisenstein series `E8(τ)` (classically `E8=E4²`). The ordinary `E6` is weight six. Do not conflate the rank label E8 with a modular-form weight.
+
+Original source owners found:
+- `DASHI/Algebra/Trit/E8RootEnumeration.agda`: **actual generated** indexed 112 integer-shape + 128 even-sign half-shape root lists; executable duplicate/disjointness/parity checks, complete for its specified shape predicates; residual native E8 lattice-membership/norm/theta series still explicitly open.
+- `DASHI/Physics/Closure/LilaE8ThetaJBridgeSurface.agda`: explicitly names `thetaE8EqualsE4`, q-normalization, lattice carrier and j identity as **unpaid** promotion leaves.
+- `DASHI/Moonshine/JInvariantEisensteinIncrementCoefficientBoundExact.agda` and `JInvariantEisensteinBishopSetoidSeriesExact.agda`: genuine original `E4(q)=1+240σ3(1)q+...` coefficient source, original Bishop complex series.
+- `DASHI/Moonshine/EisensteinDiscriminantWeight12Exact.agda` / `DeltaNormalizedWeight12SameObjectExact.agda`: already prove weight-twelve discriminant **transport** from original all-SL₂(ℤ) lattice Eisenstein transformation; `Δ=η²⁴` has an external pinned Lean closure, not the internal Agda same-Bishop-object lift.
+
+**New source-written bridge:** `DASHI/Moonshine/AbelE8RootE4FirstCoefficientExact.agda` (commits `18283296`, `85d2adf5`). It consumes the original *generated list length* rather than the expected count as an assumed parameter and targets the first exact coefficient of the literal Bishop E4 source.
+
+| ID | Exact remaining theorem / deliverable | Status |
+| --- | --- | --- |
+| P2e.01 | `originalE8GeneratedRootCount`: source E8 generated 240-element list | **SOURCE-WRITTEN**, reuses original `combinedIndexedRootsLengthIs240`; kernel pending |
+| P2e.02 | `originalBishopE4FirstCoefficientIs240`: calculate source `e4IncrementCoefficient zero` | **SOURCE-WRITTEN**, relies on executable reduction of source divisor kernel; kernel pending |
+| P2e.03 | `originalE8RootListEqualsE4FirstCoefficient`, `originalBishopE4FirstCoefficientMatchesE8RootCount` | **SOURCE-WRITTEN**, Agda kernel pending |
+| P2e.04 | `originalE8NativeNormTwoRootsComplete`: all native E8 norm-two vectors correspond exactly to generated root list and no extra vectors | **OPEN**; shape completeness alone is not the native lattice characterization |
+| P2e.05 | `originalE8ThetaCoefficientAllN`: construct native lattice theta `Σ_{v∈E8}q^{⟨v,v⟩/2}` and prove shell count `r_{E8}(2n)=240σ₃(n)` for **all n**, or use a genuinely same-source modular-forms dimension-one theorem | **OPEN** |
+| P2e.06 | `originalBishopThetaE8EqualsE4`: transport the full analytic equality to the **same original Bishop unit-disk q carrier** | **OPEN**; matching first coefficient is necessary, not sufficient |
+| P2e.07 | `originalBishopWeightEightE4Square`: only if the separately requested modular weight-eight `E8` is desired, prove `E8=E4²` on the same Bishop q carrier; **not** supplied by the E8 root-lattice first-shell calculation | **OPEN** |
+| P2e.08 | `originalE8ThetaJDiscriminantWeld`: combine genuine theta/E4, existing E6 and original normalized Delta/j with nonvanishing, so the original E8/J carrier and renderer match | **OPEN** |
+| P2e.09 | Pin Agda 2.9 acceptance of first-shell owner and transitive sources; no compiler receipt currently | **OPEN** |
+
+**Revised P2 max-cut:** Bishop π/trig period → original q(τ) with unit-disk evidence → existing Bishop E4/E6; **parallel** native E8 theta identity (P2e.04–06) plus existing weight-12 discriminant → nonzero Δ and original same-object j → fine-level/Abel observer weld. E8 does not unblock P1 local Koenigs/Kneser itself. The existing generated 240 roots gives a **valuable first-coefficient negative control**, not the entire theta series.
+
 ## P3. Relative-fine modular observers and refinement/RG
 
 | ID | Exact remaining theorem | Status / donor |
