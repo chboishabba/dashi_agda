@@ -54,9 +54,9 @@ def self_test(base):
     mutations=[
       ("duplicate_case",lambda x:x["cases"].append(copy.deepcopy(x["cases"][0]))),
       ("self_report_promoted",lambda x:x["cases"][0].update(causal_effect_identified=True)),
-      ("fiction_promoted",lambda x:x["cases"][5].update(measured_audience_response=True)),
-      ("corpus_reclassified",lambda x:x["cases"][3].update(measured_content_change=False)),
-      ("intent_promoted",lambda x:x["cases"][1].update(hostile_intent_identified=True)),
+      ("fiction_promoted",lambda x:next(r for r in x["cases"] if r["id"]=="dont_look_up_satire").update(measured_audience_response=True)),
+      ("corpus_reclassified",lambda x:next(r for r in x["cases"] if r["id"]=="supran_oreskes_2017").update(measured_content_change=False)),
+      ("intent_promoted",lambda x:next(r for r in x["cases"] if r["id"]=="gcc_reporter_letter_1993").update(hostile_intent_identified=True)),
       ("missing_control",lambda x:x["discriminator_requirements"].pop()),
       ("unverified_control",lambda x:x["discriminator_requirements"][2].update(observed=True))]
     for label,change in mutations:
