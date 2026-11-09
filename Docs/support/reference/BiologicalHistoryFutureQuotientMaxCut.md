@@ -520,6 +520,30 @@ or multi-valence actual chemistry. All are still live
 physical L04/L05/L07 obligations. Agda proofs are
 source-written but exact-head kernel acceptance still pending.
 
+### 2026-11-09 cross-branch original five-species chemistry available
+
+The companion original-source Kitzerow BH4 PR #1454 now ships
+`scripts/bh4_original_qdpr_spatial_finite_volume.py`,
+an **original ChEBI/Reactome/Rhea five-species internal
+reaction plus shared 27-site native-bond transport** runner.
+The source is the specific human cytosolic QDPR reaction
+RHEA:32253 / R-HSA-71130.5. Each full original
+qDHB+NADH+H+ → BH4+NAD+ event preserves CHNOP and
+native signed charge, and selected molecule transfer on any
+of the original 54 bonds preserves the same inventory.
+Explicit boundary injection/clearance is not mistaken
+for internal conservation. 540 distinct species/directed
+bond cases independently passed exact local arithmetic.
+
+This is a **separate BH4 branch**, not yet imported into
+the original developmental #1471 Golden. The chemistry is
+source identified, but event rates, membrane permeability,
+circulatory physiology and original tissue future responses
+are synthetic/UNPAID. The mathematical bridge still needs
+a proved same-source map from the ChEBI reaction/transport
+state to the exact 27-voxel Agda material and
+bioelectric/tissue response carriers.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
