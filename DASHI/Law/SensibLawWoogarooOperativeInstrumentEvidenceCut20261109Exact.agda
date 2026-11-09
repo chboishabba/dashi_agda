@@ -282,6 +282,32 @@ offsetPlanNotAutomaticallyCoveredByC43 = refl
 -- holder-specific site, prior publication, a valid written Minister
 -- exception, and actual records must be reviewed first.
 
+-- ORIGINAL applicable EPBC Act 1999 (pre-reform) s95B(1), s95C(1),
+-- and s136(2)(bc)(i)-(ii) are not interchangeable:
+-- (1) proponent must give final response and all comments to Minister
+--     (payment proviso in s95B(1A));
+-- (2) Secretary must prepare/give a separate recommendation report;
+-- (3) for preliminary-documentation assessments the Minister must
+--     take BOTH s95B material and s95C recommendation into account.
+-- The official 1-page s95B(2) *publication notice* and signed Part9
+-- approval do not themselves furnish the received packet, recommend-
+-- ation report or their actual decision briefing/consideration.
+-- A source report is different from proving consideration or invalidity.
+data DecisionEvidence : Set where
+  final95BResponsesAndAllComments
+    original95CSecretaryRecommendation
+    original1362bcDecisionConsideration : DecisionEvidence
+
+mandatoryOriginalDecisionStages : DecisionEvidence → Evidence
+mandatoryOriginalDecisionStages final95BResponsesAndAllComments = unknownOriginal
+mandatoryOriginalDecisionStages original95CSecretaryRecommendation = unknownOriginal
+mandatoryOriginalDecisionStages original1362bcDecisionConsideration = unknownOriginal
+
+actual95CNotAcquired :
+  mandatoryOriginalDecisionStages original95CSecretaryRecommendation
+    ≡ unknownOriginal
+actual95CNotAcquired = refl
+
 -- C49 plans must remain downloadable, current and superseded.
 -- C52 commencement notice within five business days after commencement.
 -- C24 Avonvale and Esk declarations must precede commencement.
