@@ -26,6 +26,10 @@ import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteExplicitQuotientExact as Explicit
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteDerivativeExact as LogFinite
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientUniformModulusExact as Modulus
+import DASHI.Analysis.BishopOriginalFiniteLogExpQuotientDefectSplitExact as Delta
+import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
+import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geo
+open import Data.Rational.Unnormalised using (1ℚᵘ)
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
 
 sourcePowerQuotientNonnegative :
@@ -116,3 +120,71 @@ originalSourceFiniteLogQuotientRadiusDominance
       (sourcePowerQuotientRadiusDominance
         x h radius xNN yNN xInside yInside (suc n))
       (Recip.reciprocalNonnegative n))
+
+------------------------------------------------------------------------
+-- The original negative LOG increment's absolute value is bounded
+-- by an actual, stagewise-uniform original LOG derivative at r.
+-- The source proof does NOT assume h>=0.
+------------------------------------------------------------------------
+
+originalNegativeLogIncrementAbsoluteIsStepTimesQuotient :
+  (n : Nat) (x h : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (yNN : R.NonNegative (R._+_ x h)) →
+  R._≃_
+    (R.∣ Delta.sourceOriginalNegativeLogDelta n x h ∣)
+    (R._*_
+      (R.∣ h ∣)
+      (Explicit.originalSourceFiniteLogQuotient n x h))
+originalNegativeLogIncrementAbsoluteIsStepTimesQuotient
+    n x h xNN yNN =
+  let
+    q = Explicit.originalSourceFiniteLogQuotient n x h
+    open RP.ℝ-Solver
+    negativeFactor :
+      R._≃_ (R._*_ (R.-_ R.1ℝ) q) (R.-_ q)
+    negativeFactor =
+      solve 1
+        (λ qq → (⊝ Κ 1ℚᵘ) ⊗ qq ⊜ ⊝ qq)
+        RP.≃-refl q
+  in
+  RP.≃-trans
+    (RP.∣-∣-cong
+      (Delta.originalSourceNegativeLogDeltaIsFiniteQuotient
+        n x h))
+    (RP.≃-trans
+      (RP.∣x*y∣≃∣x∣*∣y∣ h (R._*_ (R.-_ R.1ℝ) q))
+      (RP.*-cong
+        RP.≃-refl
+        (RP.≃-trans
+          (RP.∣-∣-cong negativeFactor)
+          (RP.≃-trans
+            (RP.∣-x∣≃∣x∣ {x = q})
+            (RP.nonNegx⇒∣x∣≃x
+              (sourceFiniteLogQuotientNonnegative
+                x h xNN yNN n))))))
+
+originalNegativeLogIncrementUniformRadiusBound :
+  (n : Nat) (radius x h : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (yNN : R.NonNegative (R._+_ x h)) →
+  (xInside : R._≤_ x radius) →
+  (yInside : R._≤_ (R._+_ x h) radius) →
+  R._≤_
+    (R.∣ Delta.sourceOriginalNegativeLogDelta n x h ∣)
+    (R._*_
+      (R.∣ h ∣)
+      (Geo.negativeLogDerivativePolynomial radius n))
+originalNegativeLogIncrementUniformRadiusBound
+    n radius x h xNN yNN xInside yInside =
+  RP.≤-respˡ-≃
+    (originalNegativeLogIncrementAbsoluteIsStepTimesQuotient
+      n x h xNN yNN)
+    (RP.≤-respʳ-≃
+      (RP.*-cong RP.≃-refl
+        (Second.originalFiniteLogQuotientAtZeroIsDerivativePolynomial
+          radius n))
+      (RP.*-monoˡ-≤-nonNeg
+        (originalSourceFiniteLogQuotientRadiusDominance
+          x h radius xNN yNN xInside yInside n)
+        (RP.nonNeg∣x∣ h)))
