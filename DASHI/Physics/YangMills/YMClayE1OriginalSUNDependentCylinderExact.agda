@@ -12,7 +12,7 @@ module DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact where
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _<ℝ_; _≤ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -23,6 +23,7 @@ import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bila
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YMClayE1VariableCutoffCylinderLimitExact as E1
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -99,3 +100,49 @@ module _
   -- Target remains SOURCE convergence of this exact varying-carrier
   -- sequence for its gauge-invariant cylinder algebra; those witnesses
   -- are deliberately NOT manufactured by the finite identity above.
+
+  ----------------------------------------------------------------------
+  -- E1 finite source NORMALIZATION and its genuine convergent
+  -- constant-cylinder base case. Reuse the existing R445 original
+  -- Wilson partition proof, not the mere formal definition of a
+  -- PhysicalFiniteYMMeasure.
+  --
+  -- Ordered one-link Haar and strict positivity are actual selectable
+  -- physical integration hypotheses. The source-specific cancellation
+  -- of divide is explicit. No continuum convergence of nonconstant
+  -- observables is being assumed or asserted.
+  ----------------------------------------------------------------------
+
+  originalWilsonUnitCylinderExpectationIsOne :
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideSelf : ∀ denominator →
+      0ℝ <ℝ denominator → divide denominator denominator ≡ 1ℝ)
+    (n : Nat) →
+    actualOriginalWilsonCylinderExpectation n oneCylinder ≡ 1ℝ
+  originalWilsonUnitCylinderExpectationIsOne
+    ordered strictToWeak strict divideSelf n =
+    Original.originalWilsonExpectationOfUnitIsOne
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak strict divideSelf n
+
+  originalWilsonUnitCylinderConverges :
+    (laws : E1.SelectedScalarConvergence ℝ)
+    (ordered : Ordered.OneLinkOrderedHaarAlgebra oneLink)
+    (strictToWeak : ∀ {value} → 0ℝ <ℝ value → 0ℝ ≤ℝ value)
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideSelf : ∀ denominator →
+      0ℝ <ℝ denominator → divide denominator denominator ≡ 1ℝ) →
+    E1.Converges laws
+      (λ n → actualOriginalWilsonCylinderExpectation n oneCylinder)
+      1ℝ
+  originalWilsonUnitCylinderConverges
+    laws ordered strictToWeak strict divideSelf =
+    E1.convergenceCongruent laws
+      (λ n → actualOriginalWilsonCylinderExpectation n oneCylinder)
+      (λ _ → 1ℝ)
+      1ℝ
+      (originalWilsonUnitCylinderExpectationIsOne
+        ordered strictToWeak strict divideSelf)
+      (E1.constantConverges laws 1ℝ)
