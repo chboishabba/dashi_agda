@@ -77,3 +77,12 @@ Fourth cumulant / Ward–Maxwell are ALTERNATIVE strategies. Clay need not requi
 **Kernel gate:** exact-head Agda 2.9 parallel_checker, transitive proof trust (RealAnalysisAxioms, group matrix and Haar authorities), no postulated endpoint predicate. **Physical gate:** genuinely inhabited original UV/IR, analytic clustering, spectral and local nontriviality proofs. All remain OPEN; neither finite source identities nor conditional records solve the Clay problem.
 
 New source-owner progress: DASHI/Physics/YangMills/YMClayE1D1OriginalVariablePlaquetteWordsExact.agda, imported by DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda. Both #1460 unification and Bishop work are independent and not imported.
+
+ 
+## 9 November 2026 — sync with original Y443/FLM five-frontier max-cut
+
+**Cross-program master roadmap:** [Monster V2 / Moonshine V0.4–V1 / YM B1–E1–B2 exact source-owner phases](https://github.com/chboishabba/dashi_agda/blob/agent/y443-monster-vnatural-maxcut-20261106/Docs/roadmaps/MoonshineMonsterYMFiveFrontierMaxCut20261109.md). The present **23 physical producer IDs and PH0–PH4** remain canonical for YM and take priority over any generic five-endpoint summary. Those IDs are proposed obligations, not verified Agda declaration names.
+
+Current highest-alpha original physics: E1.02/E1.03 **fixed-physical-support original Wilson-cylinder Schwinger convergence** and D1.01/D1.03 **all-real original CMP116 marked domain, nonempty physical remote pairs, and cutoff/volume-uniform *small-plus-large-field* decay**. D1.02 finite original mixed-log-jet equality is source-written; the physical original CMP116 analytic source witness remains OPEN. R583 original H1/OS4 attachment requires original Wilson OS-product semantics and density/continuity. D2.01–D2.05 require actual E1-reconstructed physical-time H, full nonvacuum spectral detection and stable positive lower spectral bound; no amount of finite observable checking alone proves this.
+
+**Do not rebuild** finite arbitrary-length Wilson-word algebra, original source finite measure laws, R581/R582/R583 conditional OS, R577 same Hamiltonian, compact-group BCH, or conditional D1 geometric-bound compiler. Do not turn the separate Monster universal group/setoid construction or Moonshine TF/TT mode problem into a physical Yang–Mills source witness. Exact-head Agda kernel receipt and physical source instantiation are separate gates. No physical Clay endpoint is closed by this documentation update.
