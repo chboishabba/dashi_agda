@@ -240,3 +240,38 @@ physical gate is closed.
 verification assistance, not a claim of discovery of finite-volume
 Poisson algebra. No unsupported physiology or original Rhea parameter
 identity is implied.
+
+
+### 2026-11-09 original CHNOP/charge candidate-step audit
+
+`scripts/bh4_original_reactive_pnp_adapter.py` now also implements
+`check_original_closed_inventory`. It reacquires the strict original
+certificate validation path, checks a pinned certificate SHA, constructs
+the original 29×5 CHNOP and 29-element signed-charge arrays from the
+actual source formula/charge carrier, and audits the complete 27×29
+before/after concentration chart. It fails closed on shape mismatch,
+negative/nonfinite values, source digest mismatch, or a componentwise
+inventory defect larger than the declared finite numerical tolerance.
+This is a numerical **closed-system** diagnostic only: it does not
+support source flux boundary work or prove the implicit PNP theorem.
+
+`scripts/test_bh4_original_reactive_pnp_adapter.py` adds synthetic-only
+positive spatial redistribution, material creation/charge defect,
+wrong-source and malformed input controls. The synthetic checker mock
+is never an authentic source-acquisition receipt; the runtime
+`check_original_closed_inventory` invokes the strict acquired panel
+checker in normal use.
+
+**Current source-written result:** original 29×12 gross reactant/product
+sides preserved; source-pinned candidate PNP parameters required; same
+BH4/PNP/circulation physical-history induction composed; selected
+27×29 candidate-step CHNOP/charge diagnostic added.
+
+**Unpaid:** exact original panel bytes + actual independently sourced
+rates/diffusion/compartments and source authentication; PNP nonlinear
+implicit positive root existence; fully justified electrochemical
+free-energy dissipation and six-face boundary work; original physical
+one-step and tissue observer commuting square; exact-head Agda Golden
+and production ITIR receipts; independent biological trajectory data.
+The new Python tests are committed but NOT executed in this connector
+session; therefore no test success is asserted.
