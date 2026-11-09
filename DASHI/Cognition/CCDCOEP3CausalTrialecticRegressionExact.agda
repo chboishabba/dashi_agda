@@ -673,3 +673,13 @@ sameReceiptCannotServeExposureAndIntent :
     SameOperation.independentlySourcedIntent → ⊥
 sameReceiptCannotServeExposureAndIntent =
   SameOperation.exposureAndIntentMustHaveDifferentReceipt
+
+-- Synthetic falsification: a weak all-stage token admits a bare record,
+-- but one recycled reference cannot satisfy source-bound admission.
+oneRecycledReferenceCannotAdmitCognitiveWarfare :
+  (sourceCase : SameOperation.OneReceipt → SameOperation.OriginalCase) →
+  SameOperation.SourceBoundAdmission
+    SameOperation.WeakDemo SameOperation.OneReceipt sourceCase
+    SameOperation.gcc1993 → ⊥
+oneRecycledReferenceCannotAdmitCognitiveWarfare =
+  SameOperation.weakDemoSingleReceiptFailsSourceBoundAdmission
