@@ -566,3 +566,59 @@ Golden command is now configured to run it before Agda.
 No physical step existence, independent measurements, original source
 certificate, continuum/physiological identification or ITIR promotion
 has been achieved by this conditional analytic implication.
+
+
+### 2026-11-09 P0.01 **finite constant-permittivity grounded Poisson** exact coercivity cut
+
+The original `scripts/reactive_pnp_369.py` now contains
+`original_grounded_poisson_coercivity_certificate`. It uses only the
+user's existing native 3×3×3 ternary Cartesian points, the 54
+nearest-neighbour directed bonds and 54 outward half-faces (six exterior
+faces times nine face cells). Unlike a numerical eigenvalue check, its
+verification is an **exact 27×27 integer matrix identity**:
+
+```text
+2 L_1 = 6 I_27 +
+        sum_{axis in {x,y,z}, cross in {-1,0,1}²}
+          [(2 e_minus - e_zero)(2 e_minus - e_zero)^T
+           +(2 e_plus  - e_zero)(2 e_plus  - e_zero)^T].
+```
+
+Here `L_1` is the source's **actual** `poisson_matrix(1)`.
+There are 27 native 3-site axis lines and precisely 54 indicated
+rank-one positive-semidefinite terms. Consequently for **all**
+`h>0`, constant `epsilon>0`, and `x∈ℝ^27`,
+
+```text
+x^T (epsilon L_h) x
+ = (3 epsilon/h²)||x||²
+   +(epsilon/(2h²)) ∑_27_lines [(2x_-−x_0)²+(2x_+−x_0)²]
+ >= (3 epsilon/h²)||x||².
+```
+
+The inequality is **sharp**: the nonzero 27-field
+`u(x,y,z)=w(x)w(y)w(z)`, with `w(-1)=w(+1)=1`,
+`w(0)=2`, obeys `L_h u=(3/h²)u`.
+Thus the original selected **linear** grounded Poisson problem
+`epsilon L_h phi = rho` has a unique solution for every
+`rho∈ℝ²⁷`, and its `ℓ²` inverse satisfies
+`||(epsilon L_h)^{-1}||_2 <= h²/(3 epsilon)`.
+
+The exact integer sum-of-squares matrix equality and equality
+eigenmode were independently checked by a separate local Python
+calculation before committing. The committed regression
+`test_original_grounded_poisson_sharp_integer_sos` and
+`test_grounded_poisson_sharp_inverse_stability` protect the
+implementation, but the updated repository tests have **not** been
+executed in this session.
+
+**Correct gate reclassification:** the original fixed-Dirichlet,
+constant-dielectric **finite** P0.01 linear Poisson uniqueness/coercivity
+mathematics is paid (source-written exact integer certificate);
+Agda kernel acceptance is OPEN. General original physical P0.01
+still requires source-paid dielectric spatial heterogeneity,
+actual membrane/electrode faces and alternative potential boundary
+conditions. This result does **not** solve the nonlinear implicit
+reaction–transport PNP fixed point P0.05, entropy dissipation P0.06,
+or open/reactive face work P0.07. The native 369/pants geometry is
+preserved; flattening is only an integer matrix computation chart.
