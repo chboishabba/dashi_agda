@@ -1,7 +1,7 @@
 
 # Karp-21 / FRACDASH compiled-machine maximum cut — 2026-11-09
 
-**Current state:** Full max-cut remains OPEN. The actual signed binary token ↔ original signed ℤ value theorem is now SOURCE-WRITTEN **for every complete canonical original gamma frame**, including zero and both sign bits. All-word parser promotion, original full signed graph, N21 step, physical machine clock, InNP, E20, Cook–Levin, Karp network and P-vs-NP lower bound remain OPEN. No Agda kernel receipt.
+**Current state:** Full max-cut remains OPEN. The actual native signed-bit-token ↔ original signed-ℤ theorem `karpNativeSignedTokenValueMatchesOriginal` is now SOURCE-WRITTEN for ALL original input bitwords, using successful-frame decomposition and failure preservation. Exact-head Agda kernel receipt remains OPEN. Original complete signed graph, native score, N21 machine, physical polynomial clock, InNP, E20, Cook–Levin, Karp network and P-vs-NP lower bound remain OPEN.
 
 ## Governance and sources
 
@@ -75,6 +75,18 @@ then separately handle zero gamma's `Signed.positive []`. Only this value equali
 
 **Remaining full maximum cut:** native signed token `ℤ` value theorem; original signed graph reader native token and suffix alignment; native ledger versus `rawSparseScore`; full original N21 FRACDASH simulation/acceptance/trace; physical polynomial bit-machine clock and original `PR.InNP`; original E20 + Cook–Levin; 19 reductions/20 memberships and `CertifiedKarpNetwork`; independent P-vs-NP behavioural self-specialization + strict resource closure + `SATNotInP`. No Clay completion claim.
 
+## Latest P0-A all-input-bitword numerical lift — source-written 9 November 2026
+
+**Authoritative change:** `karpNativeSignedTokenValueMatchesOriginal` has now been SOURCE-WRITTEN as a proof candidate for **EVERY original signed-gamma input bitword** (including malformed/truncated failures and arbitrary suffix), rather than merely every complete canonical frame. It remains NOT Agda 2.9 kernel-checked.
+
+- New `Karp21SignedGammaAllWordFrameExtractionExact.agda`: `payloadSuccessSplitsWord` follows the **actual** native `readPayload`, proves exact consumption of the requested number of input bits, then `scanSuccessExtractsFrame` follows **actual** `scanZeros` and identifies zero-prefix length, leading-one, exact payload, remaining suffix and length; `nativeGammaSuccessIsOriginalCanonicalFrame` constructs a witness of the exact source `Frame.originalGammaFrame` on every successful native read. No canonical-frame axiom.
+- Strengthened `Karp21SignedGammaNativeOriginalValueExact.agda`: `nonemptyPayloadHasLast`, `karpCompleteGammaFrameSignedValueExact`, `karpNativeSignedValueOnAllSuccessfulWords`, `nativeGammaFailureImpliesOriginalSignedFailure` (consuming the prior actual original/native suffix theorem), and final `karpNativeSignedTokenValueMatchesOriginal`. The final equality is of optional **signed-ℤ value AND suffix** results of `observeNativeSigned (Signed.readSignedBinary word)` and original `Old.readSignedGamma word`.
+- The proof-side `interpretNativeToken` uses the ACTUAL binary token bits interpreted with `Value.valueLE(reverse bits)`, not a substituted natural-number simulator. Empty gamma, both sign bits, nonzero negative magnitude, malformed frame rejection and suffix are handled separately.
+- Both Golden Karp import roots and `scripts/referee_karp21_maxcut.sh` were updated. All new declarations are **source-written candidate proofs, not kernel accepted**. Independent finite mathematical regression of 66,334 cases passed; it is not universal proof verification.
+- **Next decisive owner P0-B:** build the same-object original `Graph.readRawEdges` versus actual native graph-weight token / endpoint address stream, including every original signed weight, threshold, ordering, malformed suffix and field count. Only then can P0-C bind ledger's two-lane numerical observations to the original `Runtime.rawSparseScore` for all graph/certificate words. P0-D/E/F/G, E20/Cook–Levin, remaining Karp-21 and independent P-vs-NP `SATNotInP` remain OPEN.
+
+**Audit caution:** earlier chronological entries describing the all-word signed token numerical theorem as OPEN are superseded **at source level only**; lack of an Agda receipt still prevents any certified closure claim.
+
 ## Highest-alpha numerical result — source-written 9 November 2026
 
 **This section supersedes earlier historical entries saying the literal binary signed-token value has not been addressed.** The source-written proof candidate now implements this exact numerical value on **complete original Elias-gamma frames**, not merely suffix agreement.
@@ -92,7 +104,7 @@ Both original Karp roots import all three Agda owners. The focused `referee_karp
 
 | Phase | Exact target | Required next evidence | Status |
 |---|---|---|---|
-| P0-A | `karpNativeSignedTokenValueMatchesOriginal` | Lift the proved complete-frame theorem through the **actual original/native successful gamma-frame decomposition**, preserving truncated/malformed rejection and suffix; consume `karpNativeSignedGammaSuffixSameOriginal` | OPEN all-word lift; complete-frame theorem SOURCE |
+| P0-A | `karpNativeSignedTokenValueMatchesOriginal` | `payloadSuccessSplitsWord`, `scanSuccessExtractsFrame`, `nativeGammaSuccessIsOriginalCanonicalFrame` and full actual signed-result equality (including malformed failure via prior all-word suffix theorem) SOURCE-WRITTEN; exact-head Agda 2.9 kernel receipt required | SOURCE-WRITTEN full all-word result; KERNEL OPEN |
 | P0-B | `nativeReadRawEdgesSameOriginal` / `nativeGraphEndpointsConsumeInputBits` | Original `Graph.readRawEdges` three-field/edge parser versus native input-bit endpoint/signed-weight stream, exact suffix, strict order and all malformed cases | OPEN |
 | P0-C | `karpSignedIRSameOriginalSparseScore` / `nativeSparseScoreSameOriginalRawSparseScore` | Use actual paired selected native tokens, the P0-A/B value/equivalence and original `rawSelectedTraceRebuildsOriginalScore` to identify **signed numeric scores**, not merely rejection | OPEN |
 | P0-D | `karpFractranFirstEnabledSameVerifierStep` | Complete original N21 state machine (graph/witness cursors, endpoint-history/trie, active/accept/reject, score/threshold), ordered concrete rules and true next-step simulation | OPEN |
