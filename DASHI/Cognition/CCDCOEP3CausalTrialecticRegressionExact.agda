@@ -30,6 +30,7 @@ import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
 import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
+import DASHI.Cognition.CCDCOEP3SameOperationIndexedAdmissionExact as SameOperation
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
@@ -589,3 +590,23 @@ archiveSelectedPolicyExcerptIsNotOriginalFullText :
   ≡ Expanded.independentlyReviewedWholeOriginal → ⊥
 archiveSelectedPolicyExcerptIsNotOriginalFullText =
   Expanded.marchPolicySelectedQuoteNotCompleteOriginal
+
+-- All six receipts must belong to the same selected original case.
+-- Current 1993 GCC archive and 1998 API draft inventories do not
+-- supply independently observed original recipient exposures.
+originalGCC1993InventoryCannotIdentifyOperation :
+  SameOperation.AdmitsOneOriginalCase
+    SameOperation.CurrentlyLocatedEvidence SameOperation.gcc1993 → ⊥
+originalGCC1993InventoryCannotIdentifyOperation =
+  SameOperation.selectedGCCDoesNotAdmitFullOperation
+
+originalAPI1998InventoryCannotIdentifyOperation :
+  SameOperation.AdmitsOneOriginalCase
+    SameOperation.CurrentlyLocatedEvidence SameOperation.apiProposal1998 → ⊥
+originalAPI1998InventoryCannotIdentifyOperation =
+  SameOperation.selectedAPIDraftDoesNotAdmitFullOperation
+
+noCrossOriginalCampaignIdentity :
+  SameOperation.gcc1993 ≡ SameOperation.apiProposal1998 → ⊥
+noCrossOriginalCampaignIdentity =
+  SameOperation.gccCaseNot1998Proposal
