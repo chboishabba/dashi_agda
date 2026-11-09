@@ -67,3 +67,30 @@ def test_no_negative_input_or_zero_timestep():
     with pytest.raises(ValueError):implicit_step(c,0.1,m)
     c[0,0]=1
     with pytest.raises(ValueError):implicit_step(c,0,m)
+
+def test_synthetic_29_species_12_reaction_instantaneous_dissipation():
+    """Geometry/size stress, NOT the acquired 29x12 Rhea chemistry."""
+    from reactive_pnp_369 import dissipation_diagnostics
+    rng=np.random.default_rng(369)
+    z=np.array(([1,-1,0]*10)[:29])
+    A=np.zeros((12,29),dtype=int)
+    B=np.zeros((12,29),dtype=int)
+    for r in range(12):
+        A[r,r]=1
+        B[r,r+3]=1  # same valence, intentionally SYNTHETIC
+    m=Model(z=z,D=np.full(29,0.1),reactants=A,products=B,
+            kf=np.full(12,0.02),kb=np.full(12,0.02),standard_mu=np.zeros(29))
+    for _ in range(20):
+        c=rng.uniform(0.3,1.8,(27,29))
+        phi=poisson(c,m)
+        rates=dissipation_diagnostics(c,phi,m)
+        assert rates['transport_power']<=1e-9
+        assert rates['reaction_power']<=1e-9
+        change=vector_rhs(c,m,phi)
+        assert abs(np.sum(change@m.z))<1e-10
+    invalid=B.copy()
+    invalid[0,3]=0
+    invalid[0,4]=1
+    with pytest.raises(ValueError):
+        Model(z=z,D=np.full(29,0.1),reactants=A,products=invalid,
+              kf=np.full(12,0.02),kb=np.full(12,0.02),standard_mu=np.zeros(29))
