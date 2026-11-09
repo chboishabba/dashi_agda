@@ -10,6 +10,7 @@ module DASHI.Chemistry.HydrogenFuelCycleMolarThermochemistryExact where
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Bool using (false)
 open import Data.Nat.Base using (_≤_)
 open import Data.Nat.Properties as NP using (m≤m+n)
 open import Relation.Binary.PropositionalEquality using (sym; subst)
@@ -52,7 +53,7 @@ record HydrogenFlowReceipt : Set₁ where
       ≡ totalHydrogenMoles
     nonnegativeReading :
       SI.Quantity.negative (SI.Measurement.value flowMeasurement)
-      ≡ Agda.Builtin.Bool.false
+      ≡ false
     calibratedFlowIntegration : Set
     exactSameRunAndReferenceState : Set
 
