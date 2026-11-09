@@ -451,3 +451,35 @@ bond/pants and brain/body observation owners remain canonical.
 Original reactive boundaries, independent longitudinal
 measurements and Golden/ITIR source-verified receipts remain
 open.
+
+
+### 2026-11-09 exact-conservation PNP proof acceptance correction
+
+Companion PNP PR #1454 now checks **every** proposed
+positive conserved atomic weight and gross reaction-side
+stoichiometric coefficient using Python integers rather than
+float64. The previous floating `nu@w==0` test could
+silently accept a genuine exact-integer defect beyond 2^53;
+`exact_positive_conservation_weights` and an adversarial
+precision-boundary regression now reject that risk.
+
+The all-timestep positive-root Brouwer theorem remains a
+**mathematical implication under exact source-paid conservation**,
+not an Agda kernel proof nor independently calibrated Rhea
+reactive transport. In particular:
+`original369ClosedWeightedSimplexCompact`,
+`original369BrouwerMapContinuous`,
+`original369BrouwerMapPreservesSimplex`,
+`original369BrouwerFixedPointExists`,
+`original369ImplicitFixedPointIsPositiveRoot`,
+`original369ClosedRootFreeEnergyDecreases`
+are proposed *unpaid Agda declarations*. The numeric
+`Kloss` bounds have not been outward-interval certified.
+A source-panel reaction containing an atomic-zero species,
+an externally exchanged electron or an unpaid source sink
+cannot be admitted to the compact-simplex proof as if all
+weights were positive. Require a true reservoir extension.
+
+The physical one-step `physicalOneStep`, source-calibrated
+BH4/PNP/tissue observation identity, independently measured
+compartments/trajectory, and Golden/ITIR still remain open.
