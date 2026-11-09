@@ -81,4 +81,6 @@ if __name__=='__main__':
     if args.self_test:print(json.dumps(self_test(),indent=2))
     else:
         demand(args.receipts is not None and args.source_root is not None,'--receipts and --source-root required')
-        print(json.dumps(validate(json.loads(args.receipts.read_text()),args.source_root),indent=2))
+        manifest=json.loads(args.receipts.read_text())
+        demand(bool(manifest.get('passages')), 'no original passages supplied')
+        print(json.dumps(validate(manifest,args.source_root),indent=2))
