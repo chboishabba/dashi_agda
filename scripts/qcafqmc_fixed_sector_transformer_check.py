@@ -8,7 +8,8 @@ import json
 import tempfile
 from pathlib import Path
 import numpy as np
-from qcafqmc_fixed_sector_transformer import read_data,train
+from qcafqmc_fixed_sector_transformer import read_data,train,AutoregressiveNQS
+import torch
 
 def main():
     rng=np.random.default_rng(20261109)
@@ -32,6 +33,11 @@ def main():
                  source_url="internal:qcafqmc_synthetic_transformer_check")
         d=read_data(path)
         assert len(d["occupations"])==64
+        model=AutoregressiveNQS()
+        assert sum(p.numel() for p in model.parameters())==12892
+        with torch.no_grad():
+            norm=float((model(torch.as_tensor(x),1,1).abs()**2).sum())
+        assert abs(norm-1.)<1e-5
         result=train(path,Path(temp)/"model.pt",epochs=2,seed=17)
         assert result["dataset_kind"]=="synthetic"
         assert result["original_ionq_weights"] is False
