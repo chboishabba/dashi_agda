@@ -21,6 +21,7 @@ import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact
 import DASHI.Biology.Physical.BiologicalMorphologyPartitionDepth4Exact
 import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact
 import DASHI.Biology.Physical.BiologicalAllNeighbourTissueDynamicsExact
+import DASHI.Biology.Physical.Biological369CubicalBoundaryMaterialExact
 import DASHI.Biology.Physical.Biological369PantsPhysicalSeamExact
 import DASHI.Biology.Physical.Biological369CubicalMaterialFieldExact
 import DASHI.Biology.Physical.BiologicalSignedIonicSharedGridExact
