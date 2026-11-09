@@ -17,6 +17,7 @@ module DASHI.Moonshine.Y443Universal80RelatorCongruenceExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Product using (_×_; _,_)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.Y443PresentedGroupNodeGenerationExact as Presented
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
@@ -114,6 +115,80 @@ least80Congruence C (groupRightInverse x) = rRightInverse C x
 least80Congruence C (sourceRelator w member) =
   rSourceRelator C w member
 
+
+------------------------------------------------------------------------
+-- THE ORIGINAL PRESENTED QUOTIENT AS A SETOID GROUP.
+--
+-- A quotient setoid is a mathematically genuine group object without
+-- converting the proof-relevant equivalence into definitional equality.
+-- Every field below is inhabited by a constructor of the least 80
+-- congruence, not by an oracle for a group-isomorphism.
+------------------------------------------------------------------------
+
+record SetoidGroup : Set₁ where
+  field
+    Carrier : Set
+    Equivalent : Carrier → Carrier → Set
+    unit : Carrier
+    product : Carrier → Carrier → Carrier
+    inverse : Carrier → Carrier
+    reflexive : ∀ x → Equivalent x x
+    symmetric : ∀ {x y} → Equivalent x y → Equivalent y x
+    transitive : ∀ {x y z} →
+      Equivalent x y → Equivalent y z → Equivalent x z
+    productCongruent : ∀ {x x' y y'} →
+      Equivalent x x' → Equivalent y y' →
+      Equivalent (product x y) (product x' y')
+    inverseCongruent : ∀ {x y} →
+      Equivalent x y → Equivalent (inverse x) (inverse y)
+    associative : ∀ x y z →
+      Equivalent (product (product x y) z) (product x (product y z))
+    leftUnit : ∀ x → Equivalent (product unit x) x
+    rightUnit : ∀ x → Equivalent (product x unit) x
+    leftInverse : ∀ x → Equivalent (product (inverse x) x) unit
+    rightInverse : ∀ x → Equivalent (product x (inverse x)) unit
+
+canonical80SetoidGroup : SetoidGroup
+canonical80SetoidGroup = record
+  { SetoidGroup.Carrier = Expr
+  ; SetoidGroup.Equivalent = _≈₈₀_
+  ; SetoidGroup.unit = Presented.empty
+  ; SetoidGroup.product = Presented.multiply
+  ; SetoidGroup.inverse = Presented.inverse
+  ; SetoidGroup.reflexive = λ x → eqRefl
+  ; SetoidGroup.symmetric = eqSym
+  ; SetoidGroup.transitive = eqTrans
+  ; SetoidGroup.productCongruent = mulCong
+  ; SetoidGroup.inverseCongruent = invCong
+  ; SetoidGroup.associative = groupAssoc
+  ; SetoidGroup.leftUnit = groupLeftId
+  ; SetoidGroup.rightUnit = groupRightId
+  ; SetoidGroup.leftInverse = groupLeftInverse
+  ; SetoidGroup.rightInverse = groupRightInverse
+  }
+
+original80IsAdmissible : AdmissibleCongruence
+original80IsAdmissible = record
+  { R = _≈₈₀_
+  ; rRefl = λ x → eqRefl
+  ; rSym = eqSym
+  ; rTrans = eqTrans
+  ; rMul = mulCong
+  ; rInv = invCong
+  ; rAssoc = groupAssoc
+  ; rLeftId = groupLeftId
+  ; rRightId = groupRightId
+  ; rLeftInverse = groupLeftInverse
+  ; rRightInverse = groupRightInverse
+  ; rSourceRelator = sourceRelator
+  }
+
+-- The quotient is initial among 80-relator setoid congruences:
+-- it maps into any admissible group congruence with the same raw words.
+canonical80IsLeast :
+  ∀ {x y} → x ≈₈₀ y → R original80IsAdmissible x y
+canonical80IsLeast = least80Congruence original80IsAdmissible
+
 module Interpretation {G : Set}
     (gi : TM.GroupWithInverse G)
     (nodes : Y.Node → G)
@@ -167,3 +242,34 @@ module Interpretation {G : Set}
            × (eval x ≡ eval y → x ≈₈₀ y)
   exactKernelIffNoExtra noExtra x y =
     sound , reflectsEquality noExtra x y
+
+  ------------------------------------------------------------------------
+  -- Universal interpretation of the presented 80-relator SETOID
+  -- group into the actual selected group, including full operator
+  -- preservation. Genuine group isomorphism still requires reflection.
+  ------------------------------------------------------------------------
+
+  interpretationUnit :
+    eval (SetoidGroup.unit canonical80SetoidGroup) ≡ Pair.identity gi
+  interpretationUnit = refl
+
+  interpretationProduct :
+    (x y : Expr) →
+    eval (SetoidGroup.product canonical80SetoidGroup x y)
+    ≡ Pair.multiply gi (eval x) (eval y)
+  interpretationProduct x y = refl
+
+  interpretationInverse :
+    (x : Expr) →
+    eval (SetoidGroup.inverse canonical80SetoidGroup x)
+    ≡ Pair.inverse gi (eval x)
+  interpretationInverse x = refl
+
+  selectedSurjection :
+    Presented.PresentedByY443Nodes gi nodes →
+    (g : G) →
+    Σ Expr (λ x → eval x ≡ g)
+  selectedSurjection source g
+    with Presented.allElementsHaveSourceWords source g
+  ... | Presented.witnessed word proof = word , proof
+
