@@ -432,3 +432,38 @@ selectedAPICannotBeSourceBoundAdmitted Reference sourceCase =
 -- of one original record. Independent provenance, reviewer checks,
 -- matched exposure/causal measurements and external source validation
 -- remain unpaid empirical obligations.
+
+------------------------------------------------------------------------
+-- ONE-RECEIPT FINITE COUNTERMODEL
+--
+-- Even if the caller chooses a trivially inhabited E and a sourceCase
+-- map, a singleton receipt-reference carrier cannot discharge a
+-- source-bound operation. The ordinary six-stage record did allow this.
+------------------------------------------------------------------------
+
+data OneReceipt : Set where
+  onlyReceipt : OneReceipt
+
+oneReceiptEquality :
+  (left right : OneReceipt) → left ≡ right
+oneReceiptEquality onlyReceipt onlyReceipt = refl
+
+oneReceiptCannotSupportSixGates :
+  (E : OriginalCase → EvidenceStage → Set)
+  (sourceCase : OneReceipt → OriginalCase)
+  (c : OriginalCase) →
+  SourceBoundAdmission E OneReceipt sourceCase c → ⊥
+oneReceiptCannotSupportSixGates E sourceCase c admitted =
+  exposureAndIntentMustHaveDifferentReceipt
+    E OneReceipt sourceCase c admitted
+    (oneReceiptEquality
+      (SourceBoundAdmission.receiptReference admitted recipientExposure)
+      (SourceBoundAdmission.receiptReference admitted independentlySourcedIntent))
+
+-- In particular the weak fixture can fill AdmitsOneOriginalCase, but
+-- cannot fill SourceBoundAdmission using a singleton source reference.
+weakDemoSingleReceiptFailsSourceBoundAdmission :
+  (sourceCase : OneReceipt → OriginalCase) →
+  SourceBoundAdmission WeakDemo OneReceipt sourceCase gcc1993 → ⊥
+weakDemoSingleReceiptFailsSourceBoundAdmission sourceCase =
+  oneReceiptCannotSupportSixGates WeakDemo sourceCase gcc1993
