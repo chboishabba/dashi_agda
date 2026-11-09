@@ -25,6 +25,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Law.SensibLawWoogarooKoalaOAGStatusSensitivity20261106Exact as Source
 import DASHI.Law.SensibLawWoogarooMWWGainThreshold20261107Exact as Existing
+import DASHI.Foundations.AffineProductIdentifiabilityExact as Abstract
 
 otherSourceContribution : Nat
 otherSourceContribution = Source.inputSum Source.eskRows +
@@ -41,7 +42,8 @@ mwwAreaTenthsCorrect = refl
 
 jointCoefficient : Nat → Nat → Nat
 jointCoefficient commonGain confidencePercent =
-  otherSourceContribution + mwwAreaTenths * commonGain * confidencePercent
+  Abstract.affineProduct otherSourceContribution mwwAreaTenths
+    commonGain confidencePercent
 
 jointNumerator : Nat → Nat → Nat
 jointNumerator gain confidence =
@@ -123,31 +125,31 @@ fourIsNotThree ()
 seventyFiveIsNotHundred : 75 ≡ 100 → ⊥
 seventyFiveIsNotHundred ()
 
-symEq : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
-symEq refl = refl
-
-transEq : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-transEq refl q = q
-
 -- Stronger than merely exhibiting equal totals: no total decoder
 -- of the original common gain from ONLY the joint coefficient can
 -- satisfy every natural-number parameter pair.
+-- The only source-specific work is producing a finite collision
+-- and observing that its two coordinates differ.
+originalProductCollision : 4 * 75 ≡ 3 * 100
+originalProductCollision = refl
+
 originalCoefficientCannotIdentifyGain :
   (decode : Nat → Nat) →
   ((g c : Nat) → decode (jointCoefficient g c) ≡ g) →
   ⊥
-originalCoefficientCannotIdentifyGain decode exactDecode =
-  fourIsNotThree
-    (transEq (symEq (exactDecode 4 75)) (exactDecode 3 100))
+originalCoefficientCannotIdentifyGain =
+  Abstract.noGainDecoderForAffineProduct
+    otherSourceContribution mwwAreaTenths
+    4 75 3 100 originalProductCollision fourIsNotThree
 
 originalCoefficientCannotIdentifyConfidence :
   (decode : Nat → Nat) →
   ((g c : Nat) → decode (jointCoefficient g c) ≡ c) →
   ⊥
-originalCoefficientCannotIdentifyConfidence decode exactDecode =
-  seventyFiveIsNotHundred
-    (transEq (symEq (exactDecode 4 75)) (exactDecode 3 100))
+originalCoefficientCannotIdentifyConfidence =
+  Abstract.noConfidenceDecoderForAffineProduct
+    otherSourceContribution mwwAreaTenths
+    4 75 3 100 originalProductCollision seventyFiveIsNotHundred
 
--- Output non-identifiability is *not* evidence that an optimiser ran.
--- Model-provenance records, independently calibrated habitat quality,
--- confidence evidence and actual original OAG revisions remain open.
+-- Universal decoder failures above are instances of the abstract
+-- affine-product theorem, not separate project-specific proofs.
