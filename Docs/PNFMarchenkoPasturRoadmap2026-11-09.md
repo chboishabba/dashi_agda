@@ -162,3 +162,26 @@ Next maximum-cut leaves, in order:
 6. P2 `originalPNFRebuildAndSpectralReplay`, `economicOutOfSampleRiskAblation` — actual data receipts, independent semantic/economic outcomes.
 
 No testing, market claims or historical PNF covariance assertions were invented from the finite algebra.
+
+## 8. Maximum-cut continuation — exact exchange, standardisation, synthetic economics check (2026-11-09)
+
+### New committed implementation
+- `DASHI/Information/PNFFiniteSumExchangeExact.agda`: `finiteSumExchange`, a genuine finite Fubini lemma by induction and existing `sumFinAdd`. Algebraic precursor to the missing `vᵀCv = scale·∑ᵣ(∑ᵢXᵣᵢvᵢ)²` proof.
+- `DASHI/Information/PNFStandardisedCovarianceExact.agda`: `correlationDiagonalOne` and `correlationTraceEqualsDimension` for a `StandardisedWindow` which explicitly supplies each column's unit-diagonal normalization receipt. Does not assume arbitrary centered columns are standardized.
+- `scripts/pnf_mp_economic_synthetic_check.py`: deterministic synthetic-only iid/common-factor/shuffled spectral comparison, preserving correlation trace and PSD; clipped-eigenvalue covariance is not claimed to have unit diagonal.
+
+### Local synthetic sanity receipt (independently authored local test; not a source-specific PNF or market replay)
+A 200×120, rho=0.25 seeded synthetic diagnostic was run locally using NumPy, with sample-covariance denominator 199, giving MP upper edge ≈3.1561. In that local run, independent null max eigenvalue ≈2.9738; one-factor panel max ≈31.7247; shuffled panel max ≈2.9954. All sample correlation traces were 120. The script committed above implements the same classes of tests but was not rerun from the GitHub checkout. These outcomes support only a software/mechanical sanity check, NOT S&P 500 data or PNF evidence.
+
+### Accounting and exact next leaves
+- `finiteSumExchange`: authored proof, kernel UNVERIFIED.
+- A6 `correlationTraceEqualsDimension`: conditional on independently paid unit-diagonal source normalization, authored proof, kernel UNVERIFIED.
+- A2 `scaledCovarianceQuadraticEqualsScaledGramQuadratic`: OPEN; this must be proved using actual finite exchange + multiplication distribution, not inferred from two definitions.
+- A2 `sampleMeanDefiningEquation`, `positiveUnbiasedScale`: OPEN.
+- F2 `equiResidualSpaceDimension`, `equiPopulationPSDRange`: OPEN.
+- B1–B10 MP density/measure/transform/limit law: OPEN.
+- D1–D5 same-source PNF replay and authority: OPEN.
+- F1/F3–F11 empirical economics and costed trade ablation: OPEN.
+- P0 Agda 2.9 checker acceptance of all new modules and transitive imports: OPEN.
+
+**Source and authority rule:** The synthetic check tests mathematics/software behavior, not PNF semantics or real portfolio performance. The external Fleet spectral labels remain candidate/planning evidence only. The numeric ABI remains non-promotable by its established empty promotion type.
