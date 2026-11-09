@@ -293,3 +293,16 @@ This follows pointwise from `ε 1_{d_p≥ε}≤d_p`, finite summation and the al
 - `D2.05`: vacuum uniqueness, domains/units and original Clay interpretation remain to establish.
 
 **Do not duplicate** `BalabanOSExponentialClusteringImpliesHamiltonianGapExact.OSExponentialClusteringImpliesHamiltonianGap` or the already-owned spectral closure R333. Their current `Set`-valued OS and spectral inputs are conditional; they are not proof that the original Wilson family supplies dense tests and physical-time autocorrelation. The full Wilson D1.03 connecting-polymer and E1.03 interacting continuum are still the major *physical* original work.
+
+
+## 9 November — original G1.02 finite Wilson pressure theorem for each compact simple group
+
+New independent mathematical source derivation: [YMClayCompactSimpleOriginalWilsonFiniteHaarPressure20261109.md](YMClayCompactSimpleOriginalWilsonFiniteHaarPressure20261109.md). For each selected compact connected/simple Lie group G with a faithful finite-dimensional unitary Wilson representation, the actual original normalized product-Haar 4D Wilson partition function has a finite-volume-uniform plaquette expectation bound of form
+`E_G[1-ReTr(rho(U_p))/dim(rho)] ≤ [8L_G²+(2/3)log(1/c_G)+(dim G/3)log β]/β` for sufficiently large β.
+It uses **actual Lie geodesic unitary norm control** and a positive normalized Haar small-ball lower bound `H_G(B_delta)≥c_G delta^(dim G)`; these are standard finite compact Lie geometry, not continuum estimates. An original-Gibbs extensive-bad-density probability has bound
+`P_G(B_epsilon≥eta)≤min(1,exp[-N_p(β εη-C_G(β))])`
+on the same physical Wilson measure. Constants may depend on the externally selected G and representation, **not** finite volume.
+
+**Paid analytic finite mathematical lane:** the SU(2) original Wilson pressure argument has a sound compact-simple-G generalization and no extra independent plaquette probability assumptions.
+
+**Unpaid G1.02 source welding and full G1.03:** identify the actual chosen Wilson representation/normalization and Haar small-ball geometry with the repository's **original selected compact-simple group**, formalize this argument in native Agda, and—decisively—construct the same group's interacting R4 limit, long-range/cutoff uniform clustering route as needed, full OS H gap, and surviving nontrivial observable. This is **not** all-compact-simple-group Clay coverage. No other program's Lorentz/KK/observer bridge is inserted.
