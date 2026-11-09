@@ -17,6 +17,7 @@ import DASHI.Governance.CrenshawSituatedStandpointExact as Standpoint
 import DASHI.Governance.CrenshawRightsReformDualEffectExact as Rights
 import DASHI.Governance.CrenshawHistoricalCarceralSourceAtlasExact as HistSources
 import DASHI.Governance.CrenshawCrossInstitutionalEvidenceExact as CrossInstitution
+import DASHI.Governance.CrenshawCarceralMissingnessExact as Missingness
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -70,6 +71,9 @@ record LegalCrossCaseCut : Set₁ where
     citedCarceralAtlasDoesNotCreateAuthority :
       Attr.atlasCreatesAuthority HistSources.historicalInstitutionalSourceAtlas
         ≡ false
+    unrecordedDoesNotImplyNoPolicingHarm :
+      INF.FactorsThrough
+        Missingness.entryInSelectedCorpus Missingness.independentHarm → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -91,4 +95,5 @@ crenshawLegalCrossCaseCut =
     Rights.formalRightDoesNotGuaranteeMaterialTransformation
     CrossInstitution.schoolDisciplineDoesNotByItselfPayCustodialOutcome
     HistSources.historicalCitationDoesNotCreateAuthority
+    Missingness.recordAbsenceDoesNotProveAbsenceOfHarm
     refl refl
