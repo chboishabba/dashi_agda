@@ -1526,3 +1526,15 @@ Its `OriginalFTSkewData.originalFTVanishesAtAndAboveBound` is a genuine **trunca
 **New Monster M2 source reduction:** `Y443Universal80SimpleQuotientKernelReflectionExact.OriginalSelectedJMDSource.oneOriginalMovedStateImpliesNontrivialNode` uses precisely `JMD.action source`, `JMD.nodes source`, `JMD.groupWithInverse source` and the literal selected `VNaturalConstruction.Vnatural` carrier. It turns **one selected state moved by a Y443 node** plus the identity law at the same state into `ActualSelectedNontrivialNode`—without choosing a second group action, or assuming globally faithful automorphisms. **M2-MOVE** still demands a concrete weight-two state/vector from the original selected Leech/Griess construction; the unrefined `VOAGroupAction.actionIdentity : Set` does not itself supply a typed equality.
 
 These source-written constructors and the original finite SU2 large-deviation theorem are *not* their own missing mathematical axioms. Agda 2.9 kernel acceptance, genuine original source instantiation, nonabelian Monster historical simplicity transfer, Leech TT and all-mode VOA remain outstanding.
+
+
+## 9 November — even shorter M2 selected-nonidentity fork from literal JMD trace
+
+The latest `Y443Universal80SimpleQuotientKernelReflectionExact.Selected.originalJMDW5NonidentityFromRelators` builds `ActualSelectedNontrivialNode` for `x4=e1` from the **actual original 80 relators**, existing `JMDFromRelatorsToPowerExact.powerFromActualEightyRelators`, native A4 `beta^5=1` and a **real selected-group witness** `(w^5≢1)`. The existing `JMDConcretePairPowerCompilerExact.sourceX4Fifth` supplies `x4=w^5`. The historical JMD trace mentions an element w of order ten, but the current native `JMDStepsTwoToFour` record does **not** itself prove that exact order: its source-specific kernel certificate remains open. This is a potentially easier M2-MOVE alternative to one original Griess weight-two moved-state.
+
+**M2 exit choices:**
+- `M2-NONTRIV-A`: one original selected weight-two vector moved by one node plus literal identity action at that vector; OR
+- `M2-NONTRIV-B`: exact original selected JMD `w^5≢1` together with original `beta^5=1` A4 Coxeter path proof;
+- Common: the true historical 80-relator Q80→Monster/simple-congruence source and the original JMD selected-group selection/generation when upgrading image to all G.
+
+All are original-source gaps; a numerical group order, parity rank, or trace pasted from a *different* group does not satisfy them. V0.4 FT-derived TF is source-written; TT mixed Jacobi remains. YM D2 common-exponent dense-OS spectral reduction and finite G1.02 Haar pressure group coverage are documented on #1444, without promoting their E1/D1/D2/N1/G1 physical terminals.
