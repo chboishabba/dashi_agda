@@ -318,3 +318,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdNumericalExact
 -- Strictly positive N21 original threshold: actual native predecessor/nonzero test gives a positive Nat observation on every success.
 -- SOURCE only; complete graph-word and original threshold value match OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNonzeroExact
+
+-- Exact positive N21 gamma source-frame numerical equality for actual binary predecessorLE (n, not n+1).
+import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNumericFrameExact
