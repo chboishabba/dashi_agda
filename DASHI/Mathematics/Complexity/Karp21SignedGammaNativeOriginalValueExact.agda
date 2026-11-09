@@ -23,7 +23,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Nat.Base using (_∸_)
 open import Data.List.Base using (reverse; length; _++_)
 open import Data.Maybe.Base using (Maybe; nothing; just)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (Σ; _×_; _,_)
 open import Data.Integer.Base using (ℤ; +_; -[1+_])
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import Data.Nat.Properties as NatP
@@ -32,6 +32,9 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Old
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21GammaBinarySignedPayloadValueCutExact as Frame
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Native
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedSuffixExact as Suffix
+import DASHI.Mathematics.Complexity.Karp21SignedGammaAllWordFrameExtractionExact as Extract
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNumberTheoryExact as Number
 import DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact as Binary
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
@@ -147,3 +150,94 @@ karpNativeSignedZeroValueMatchesOriginal :
     (Signed.readSignedBinary (Frame.originalGammaFrame [] []))
     ≡ Old.readSignedGamma (Frame.originalGammaFrame [] [])
 karpNativeSignedZeroValueMatchesOriginal = refl
+
+
+------------------------------------------------------------------------
+-- ALL-WORD lift: a successful ACTUAL gamma parse is a genuine original
+-- complete frame. Exhaustively split its payload into zero or a last
+-- sign bit; a failed gamma parse has no signed result on either side.
+------------------------------------------------------------------------
+
+nonemptyPayloadHasLast :
+  (head : Bool) (tail : Word.BitWord) →
+  Σ Word.BitWord (λ prefix →
+    Σ Bool (λ last →
+      head ∷ tail ≡ prefix ++ (last ∷ [])))
+nonemptyPayloadHasLast head [] =
+  [] , (head , refl)
+nonemptyPayloadHasLast head (b ∷ tail)
+  with nonemptyPayloadHasLast b tail
+... | prefix , (last , equation) =
+  (head ∷ prefix) , (last , cong (head ∷_) equation)
+
+karpCompleteGammaFrameSignedValueExact :
+  (payload suffix : Word.BitWord) →
+  observeNativeSigned
+    (Signed.readSignedBinary (Frame.originalGammaFrame payload suffix))
+    ≡ Old.readSignedGamma (Frame.originalGammaFrame payload suffix)
+karpCompleteGammaFrameSignedValueExact [] suffix = refl
+karpCompleteGammaFrameSignedValueExact (head ∷ tail) suffix
+  with nonemptyPayloadHasLast head tail
+... | prefix , (last , equation)
+  rewrite equation =
+  karpNativeSignedTokenValueMatchesOriginalEncodedFrame
+    prefix suffix last
+
+karpNativeSignedValueOnAllSuccessfulWords :
+  (word numeral suffix : Word.BitWord) →
+  Native.readGammaBinary word ≡ just (numeral , suffix) →
+  observeNativeSigned (Signed.readSignedBinary word)
+    ≡ Old.readSignedGamma word
+karpNativeSignedValueOnAllSuccessfulWords word numeral suffix success
+  with Extract.nativeGammaSuccessIsOriginalCanonicalFrame
+    word numeral suffix success
+... | payload , exact rewrite exact =
+  karpCompleteGammaFrameSignedValueExact payload suffix
+
+nativeGammaFailureImpliesNativeSignedFailure :
+  (word : Word.BitWord) →
+  Native.readGammaBinary word ≡ nothing →
+  Signed.readSignedBinary word ≡ nothing
+nativeGammaFailureImpliesNativeSignedFailure word failure
+  rewrite failure = refl
+
+suffixNoneImpliesNothing :
+  {A : Set} (result : Maybe (A × Word.BitWord)) →
+  Suffix.suffixBits result ≡ nothing →
+  result ≡ nothing
+suffixNoneImpliesNothing nothing eq = refl
+suffixNoneImpliesNothing (just (value , suffix)) ()
+
+nativeGammaFailureImpliesOriginalSignedFailure :
+  (word : Word.BitWord) →
+  Native.readGammaBinary word ≡ nothing →
+  Old.readSignedGamma word ≡ nothing
+nativeGammaFailureImpliesOriginalSignedFailure word failure =
+  suffixNoneImpliesNothing
+    (Old.readSignedGamma word)
+    (trans
+      (sym (Suffix.karpNativeSignedGammaSuffixSameOriginal word))
+      (cong Suffix.suffixBits
+        (nativeGammaFailureImpliesNativeSignedFailure word failure)))
+
+-- FULL original vs actual-native signed numeric+suffix outcome,
+-- not merely agreement of acceptance flags. In the successful case
+-- the original exact frame (including its suffix) is reconstructed
+-- from the actual binary reader. In the failing case the existing
+-- all-word suffix theorem prevents original-only acceptance.
+--
+-- Kernel acceptance remains subject to exact-head Agda 2.9 referee.
+karpNativeSignedTokenValueMatchesOriginal :
+  (word : Word.BitWord) →
+  observeNativeSigned (Signed.readSignedBinary word)
+    ≡ Old.readSignedGamma word
+karpNativeSignedTokenValueMatchesOriginal word
+  with Native.readGammaBinary word in parsed
+... | nothing =
+  trans
+    (cong observeNativeSigned
+      (nativeGammaFailureImpliesNativeSignedFailure word parsed))
+    (sym (nativeGammaFailureImpliesOriginalSignedFailure word parsed))
+... | just (numeral , suffix) =
+  karpNativeSignedValueOnAllSuccessfulWords
+    word numeral suffix parsed
