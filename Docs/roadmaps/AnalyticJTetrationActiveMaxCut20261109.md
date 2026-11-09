@@ -321,3 +321,10 @@ Inspecting \`DASHI.Analysis.InverseLogarithmFromExponential\` and \`DASHI.Analys
 4. The existing norm bounds and Koenigs geometric/Cauchy/telescoping machine can consume the resulting original \(g\). Still prove the fixed point, reciprocal/radius certificate, uniform holomorphic limit and inverse function theorem on the Bishop carrier.
 
 This is a genuine dependency reduction, not a claim that \(\exp_C L(w)=1+w\) has been formalized. An analytic inverse identity remains essential; a record with fields \`expLog\`/ \`logExp\` is not a substitute. All P1b/P1g global Kneser, P2 original modular \(q/\Delta/j\), P3 moving observer and P4 contours remain open.
+
+
+### Receipt boundary after latest P1 source commits
+
+Added \`originalBishopLogOnePlusCanonicalLimitUniqueOnUnitDisk\`: with a *genuine* selected radius certificate the constructed alternating Bishop-series limit is unique in the original componentwise setoid, by reusing the existing Bishop uniqueness theorem. This lemma does **not** establish that \`exp_C\` of the series is \`1+w\`; it only prevents multiple incompatible values for the *same* convergent term sequence.
+
+Static GitHub source inspection of \`AbelBishopLogOnePlusOriginalSeriesExact.agda\`, \`AbelBishopGeometricPowerSeriesExact.agda\`, and \`AbelBishopLogOnePlusCoefficientDominationExact.agda\` found no \`postulate\` declarations or Agda goal holes in those new files. **Static inspection is not Agda kernel typechecking**. The exact head still needs a pinned local Agda 2.9 \`--safe\` receipt and repairs before any completion mark.
