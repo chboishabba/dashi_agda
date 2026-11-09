@@ -236,3 +236,21 @@ This pass is an exact-head *source audit and proof ledger correction*, not a new
 Current highest-alpha original physics: E1.02/E1.03 **fixed-physical-support original Wilson-cylinder Schwinger convergence** and D1.01/D1.03 **all-real original CMP116 marked domain, nonempty physical remote pairs, and cutoff/volume-uniform *small-plus-large-field* decay**. D1.02 finite original mixed-log-jet equality is source-written; the physical original CMP116 analytic source witness remains OPEN. R583 original H1/OS4 attachment requires original Wilson OS-product semantics and density/continuity. D2.01–D2.05 require actual E1-reconstructed physical-time H, full nonvacuum spectral detection and stable positive lower spectral bound; no amount of finite observable checking alone proves this.
 
 **Do not rebuild** finite arbitrary-length Wilson-word algebra, original source finite measure laws, R581/R582/R583 conditional OS, R577 same Hamiltonian, compact-group BCH, or conditional D1 geometric-bound compiler. Do not turn the separate Monster universal group/setoid construction or Moonshine TF/TT mode problem into a physical Yang–Mills source witness. Exact-head Agda kernel receipt and physical source instantiation are separate gates. No physical Clay endpoint is closed by this documentation update.
+
+
+## 9 November 2026 — original SU(2) D1.03 frustrated-staple source reduction (NEW)
+
+A new analytic result strengthens the existing original one-link tail without inventing the missing full spatial decay:
+
+`1_{R<r} ≤ D₆/(6-r)` pointwise for `0<r<6`, since the original action satisfies `D₆≥6-R`. Therefore, under **the exact same original finite Wilson measure**,
+
+```
+P(R<r) ≤ E[D₆]/(6-r)
+P(t(UV)≤0) ≤ E[D₆]/(6-r)+3exp(−βr/2).
+```
+
+On a periodic translation-invariant four-dimensional Wilson finite lattice, `E[D₆]=6(1−p'_L(β))` for normalized per-plaquette log-partition pressure `p_L=(1/N_p)log Z_L`, giving a concrete original free-energy-slope target. The unknown uniform pressure slope and **spatially connecting large-field polymer suppression** remain genuinely physical D1.03 obligations; the bound above can be vacuous. It is not a Clay mass-gap result or a direct mixed-source CMP116 estimate.
+
+Proof and assumptions: [YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md](YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md). New exact-rational finite control: `scripts/check_ym_su2_original_staple_frustration_action_20261109.py`, executed independently with **187,500** event/action checks (including **110,010** frustrated-event cases) on rational unit SU(2) quaternions. The source code and documentation are committed; this calculation has **no Agda-kernel receipt**.
+
+**Master priority correction from attached worker audit:** the Clay endpoint is E1 existence + N1 nontriviality + D2 positive spectral gap + G1 group scope. D1 remains only the *chosen R320/R333 or CMP116 decay-route input*, not an independent official Clay requirement. B1 is a strategy label, not an independent axiom. The 23 source producers remain a useful proof-work inventory, not 23 independent Clay conditions. Observer/OS/KK and Bishop are separate programmes, not prerequisites.
