@@ -51,7 +51,7 @@ mooreAnalysis =
 
 payneAnalysis : LocatedCrenshawPassage
 payneAnalysis =
-  located payne featuredDoctrinalExample p147 framedCaseAnalysis
+  located payne featuredDoctrinalExample p146 framedCaseAnalysis
     "Payne numbered 3; class scope and remedial consequence"
 
 jefferiesFootnote : LocatedCrenshawPassage
