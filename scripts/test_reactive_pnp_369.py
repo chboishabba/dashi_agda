@@ -260,3 +260,32 @@ def test_global_brouwer_rejects_unpaid_or_wrong_atom_invariant():
             global_positive_implicit_brouwer_bounds(c0,m,weights,1.)
     with pytest.raises(ValueError):
         global_positive_implicit_brouwer_bounds(c0,m,[1,1,2],0.)
+
+
+def test_brouwer_conservation_requires_exact_python_integers():
+    from reactive_pnp_369 import exact_positive_conservation_weights
+    a=np.array([[1,1,0]],dtype=np.int64)
+    b=np.array([[0,0,1]],dtype=np.int64)
+    assert exact_positive_conservation_weights(a,b,[1,1,2])==(1,1,2)
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a,b,[1.0,1.0,2.0])
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a.astype(float),b,[1,1,2])
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a,b,[1,1,1])
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a,b,[1,0,1])
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a,b,[True,1,2])
+
+
+def test_brouwer_conservation_detects_float_rounding_counterexample():
+    from reactive_pnp_369 import exact_positive_conservation_weights
+    # Float64 cannot distinguish 2**53 and 2**53+1. A source-side
+    # equality test must use integer arithmetic and reject the latter.
+    a=np.array([[2**53,0]],dtype=np.int64)
+    b=np.array([[2**53+1,0]],dtype=np.int64)
+    with pytest.raises(ValueError):
+        exact_positive_conservation_weights(a,b,[1,1])
+    # Deliberately demonstrates why the previous floating check was unsafe.
+    assert float(2**53)==float(2**53+1)
