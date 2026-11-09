@@ -74,3 +74,51 @@ nativeMagnitudeSameOriginalBinaryValue :
     Original.pow2 (length prefix) + Original.payloadValue prefix
 nativeMagnitudeSameOriginalBinaryValue prefix =
   reverseValueSameOriginalPayload (true ∷ prefix)
+
+
+------------------------------------------------------------------------
+-- Original gamma successor numeral n+1 on a nonempty signed payload.
+-- This is the second genuine arithmetic identity needed by the P0
+-- value proof: appending the sign bit doubles the original BE prefix.
+------------------------------------------------------------------------
+
+lengthAppendOne :
+  (prefix : Word.BitWord) (last : Bool) →
+  length (prefix ++ (last ∷ [])) ≡ suc (length prefix)
+lengthAppendOne [] last = refl
+lengthAppendOne (b ∷ prefix) last =
+  cong suc (lengthAppendOne prefix last)
+
+originalPayloadAppendBit :
+  (prefix : Word.BitWord) (last : Bool) →
+  Original.payloadValue (prefix ++ (last ∷ [])) ≡
+    Value.two * Original.payloadValue prefix + Original.bitNat last
+originalPayloadAppendBit [] false = refl
+originalPayloadAppendBit [] true = refl
+originalPayloadAppendBit (b ∷ prefix) last
+  rewrite lengthAppendOne prefix last
+        | originalPayloadAppendBit prefix last =
+  solve
+    (Original.bitNat b ∷
+     Original.pow2 (length prefix) ∷
+     Original.payloadValue prefix ∷
+     Original.bitNat last ∷ [])
+
+-- Original gamma's (n+1) numerator on prefix++[last] is exactly
+-- 2*valueBE(true::prefix)+last; it is NOT merely equal in suffix.
+-- The preceding reverseValueSameOriginalPayload also shows this
+-- magnitude equals the literal native ledger Value.valueLE reverse.
+originalSuccessorNumberDecomposes :
+  (prefix : Word.BitWord) (last : Bool) →
+  Original.pow2 (length (prefix ++ (last ∷ []))) +
+    Original.payloadValue (prefix ++ (last ∷ [])) ≡
+  Value.two *
+    (Original.pow2 (length prefix) + Original.payloadValue prefix) +
+    Original.bitNat last
+originalSuccessorNumberDecomposes prefix last
+  rewrite lengthAppendOne prefix last
+        | originalPayloadAppendBit prefix last =
+  solve
+    (Original.pow2 (length prefix) ∷
+     Original.payloadValue prefix ∷
+     Original.bitNat last ∷ [])
