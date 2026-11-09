@@ -35,6 +35,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact as Hi
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryOriginalExact as HistoryOriginal
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact as Machine
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Graph
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact as Original
@@ -46,8 +47,14 @@ actualFirstEnabledSelectedEvents :
   Nat → Machine.State → Maybe (List Signed.SignedMagnitudeBits)
 actualFirstEnabledSelectedEvents zero state = nothing
 actualFirstEnabledSelectedEvents (suc fuel)
-  (Machine.state Machine.active [] [] history ledger threshold) =
-  just []
+  (Machine.state Machine.active [] [] history ledger threshold)
+  with Machine.Compiled.directStep Machine.rules
+    (Machine.state Machine.active [] [] history ledger threshold)
+... | nothing = nothing
+... | just next with Machine.phase next
+... | Machine.accepted = just []
+... | Machine.rejected = just []
+... | Machine.active = nothing
 actualFirstEnabledSelectedEvents (suc fuel)
   (Machine.state Machine.active
     (Edge.binary-edge u v token ∷ rest)
@@ -96,7 +103,10 @@ nativeFirstEnabledSelectedEventsSameOriginal :
   ≡ Original.rawSelectedTrace
       (Edge.originalEdgeListObservation edges)
       certificate (History.observedBinaryHistory history)
-nativeFirstEnabledSelectedEventsSameOriginal [] [] history ledger threshold = refl
+nativeFirstEnabledSelectedEventsSameOriginal [] [] history ledger threshold
+  with Positive.meetsOriginalPositiveThreshold ledger threshold
+... | true = refl
+... | false = refl
 nativeFirstEnabledSelectedEventsSameOriginal [] (_ ∷ _) history ledger threshold = refl
 nativeFirstEnabledSelectedEventsSameOriginal (_ ∷ _) [] history ledger threshold = refl
 nativeFirstEnabledSelectedEventsSameOriginal (_ ∷ _) (_ ∷ []) history ledger threshold = refl
