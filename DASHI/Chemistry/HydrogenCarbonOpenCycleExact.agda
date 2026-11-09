@@ -44,48 +44,44 @@ totalEmitted :
 totalEmitted (empty _) = 0
 totalEmitted (thenStep s rest) = emittedCarbon s + totalEmitted rest
 
-reassociateCarbon :
-  (a b c d e : Nat) →
-  a + b ≡ c + d →
-  c + e ≡ d + c → a + b ≡ c + d
-reassociateCarbon a b c d e p q = p
+-- Pure polynomial reassociation needed for an ordered finite path.
+carbonAssoc :
+  (a b c : Nat) → a + (b + c) ≡ (a + b) + c
+carbonAssoc a b c =
+  solve 3
+    (λ a b c → a :+ (b :+ c) := (a :+ b) :+ c)
+    refl a b c
+
+carbonSwap :
+  (a b c : Nat) → (a + b) + c ≡ (a + c) + b
+carbonSwap a b c =
+  solve 3
+    (λ a b c → (a :+ b) :+ c := (a :+ c) :+ b)
+    refl a b c
+
+carbonFinish :
+  (a b c : Nat) → (a + b) + c ≡ a + (c + b)
+carbonFinish a b c =
+  solve 3
+    (λ a b c → (a :+ b) :+ c := a :+ (c :+ b))
+    refl a b c
 
 carbonPathBalance :
-  ∀ {before after} (path : CarbonPath before after) →
-  before + totalMakeup path ≡ after + totalEmitted path
+  ∀ {before after} (p : CarbonPath before after) →
+  before + totalMakeup p ≡ after + totalEmitted p
 carbonPathBalance (empty stock) = refl
-carbonPathBalance {before} {after} (thenStep {middle = middle} s rest) =
+carbonPathBalance {before} {after}
+  (thenStep {middle = middle} s rest) =
   trans
-    (cong (λ n → n + totalMakeup rest) (balance s))
+    (carbonAssoc before (makeupCarbon s) (totalMakeup rest))
     (trans
-      (cong (λ n → (middle + emittedCarbon s) + totalMakeup rest)
-        refl)
+      (cong (λ n → n + totalMakeup rest) (balance s))
       (trans
-        (carbonRearrangeLeft middle (emittedCarbon s)
-          (totalMakeup rest))
+        (carbonSwap middle (emittedCarbon s) (totalMakeup rest))
         (trans
           (cong (λ n → n + emittedCarbon s)
             (carbonPathBalance rest))
-          (carbonRearrangeRight after (totalEmitted rest)
-            (emittedCarbon s)))))
-  where
-  carbonRearrangeLeft :
-    (m emitted extra : Nat) →
-    (m + emitted) + extra ≡ (m + extra) + emitted
-  carbonRearrangeLeft m emitted extra =
-    solve 3
-      (λ m emitted extra →
-        (m :+ emitted) :+ extra := (m :+ extra) :+ emitted)
-      refl m emitted extra
-
-  carbonRearrangeRight :
-    (a b c : Nat) →
-    (a + b) + c ≡ a + (c + b)
-  carbonRearrangeRight a b c =
-    solve 3
-      (λ a b c →
-        (a :+ b) :+ c := a :+ (c :+ b))
-      refl a b c
+          (carbonFinish after (totalEmitted rest) (emittedCarbon s)))))
 
 -- Required stable inventory is a source condition, not a consequence of
 -- repeated capture. If the total before=after, the recovered carbon does
