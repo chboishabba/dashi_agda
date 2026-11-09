@@ -16,20 +16,6 @@ data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
   formalDASHITheorem externallyAdjudicated : AttributionStage
 
-data SourceOwner : Set where
-  districtCourtOwner eighthCircuitOwner fifthCircuitOwner
-  ninthCircuitOwner crenshawOwner dashiOwner : SourceOwner
-
-stageOwner : AttributionStage → SourceOwner
-stageOwner judicialText = districtCourtOwner
-stageOwner scholarlyAnalysis = crenshawOwner
-stageOwner finiteDASHIReconstruction = dashiOwner
-stageOwner formalDASHITheorem = dashiOwner
-stageOwner externallyAdjudicated = fifthCircuitOwner
-
--- This assignment is only a demonstrative owner-function, not a universal
--- definition of who can judicially adjudicate. No legal authority derives
--- from this constructor map.
 courtTextIsNotCrenshawTheorem :
   judicialText ≡ formalDASHITheorem → ⊥
 courtTextIsNotCrenshawTheorem ()
