@@ -126,3 +126,46 @@ The new `SameSource.AtomicWalkerEnergySource` requires source-backed maps from A
 **Still open**: actual orbital/basis and molecular integrals, actual fermionic Hamiltonian matrix elements and their relation to the atomic generator, original shadow-training measurements and certified overlap fitting, force-bias/phaseless AFQMC dynamics, sample-uncertainty certificates, independent same-Hamiltonian chemistry comparison and the published economic boundary. The selected atomic generator itself does NOT supply a measured Hamiltonian or numeric AFQMC engine. Agda 2.9 kernel acceptance of this new source is **not yet observed**. Existing two-site Hubbard scripts and statistical controls remain the numerical prototype; they do not imply the published nickel reproduction.
 
 **Proof owner and next maximum cut:** instantiate one concrete shared Hubbard (or measured nickel active-space) Hamiltonian into both the atomic generator and the AFQMC walker source, then establish the real-valued (rather than `Nat` proxy) stability/error bound and independently rerun the numerical comparator. Preserve Provazza/Knitter attribution and keep 369 cardinalities distinct from physical quantum numbers.
+
+
+## 9 November 2026: importance-sampled phaseless finite-Hubbard cut
+
+The new `scripts/qcafqmc_importance_phaseless_hubbard.py` goes beyond the earlier uniformly sampled HS paths. At every walker and step it computes all four candidate one-body HS evolutions, their complex overlaps against a selected trial state, and an overlap-guided **discrete categorical force-bias analogue**
+
+```
+q(field | walker) = |<trial | B(field) walker>| / sum_field' |<trial | B(field') walker>|
+importance_factor = [p(field) / q(field | walker)] *
+                    [<trial | B(field) walker> / <trial | walker>]
+phaseless_factor = |importance_factor| * max(0, cos(arg(importance_factor)))
+```
+
+The walker is normalized to trial overlap 1 after each update. Systematic resampling controls the positive population. A same-Hamiltonian deterministic transfer matrix and exact diagonalization are independently available. `scripts/qcafqmc_importance_phaseless_check.py` tests four fixed seeds and a complex-trial negative control which discards the cosine. The code also records effective sample size.
+
+**Important limit:** this is **finite discrete-field overlap-based importance sampling**, not a validated production molecular AFQMC force-bias from Cholesky- or density-fitted two-electron molecular integrals. In the real sign-free Hubbard case the phaseless cosine is typically trivial; a complex trial makes phase suppression visible but does not validate actual transition-metal phase bias or its thermodynamic/continuum error. This cannot be promoted to the paper's production implementation.
+
+Local executable precursor tests (2,400 walkers, 8 steps, seeds 10–13, no branching) reported absolute energy errors 0.00818169, 0.01204027, 0.01551706, 0.00087013, mean 0.00915229, against the exactly propagated symmetric-Trotter mixed energy -0.53139847. For 300 walkers with complex trial, the phaseless-versus-deliberately-wrong magnitude-only estimator differed by 0.00068949. These are locally tested precursors to the committed equivalent scripts, **not exact-Git-commit run receipts**, and the chosen smoke acceptance bounds are not confidence intervals.
+
+Run from repository root:
+
+```bash
+python scripts/qcafqmc_importance_phaseless_hubbard.py
+python scripts/qcafqmc_importance_phaseless_check.py
+python scripts/qcafqmc_original_data_cost_audit.py
+```
+
+## Exact original-data and cost-audit cut
+
+`scripts/qcafqmc_original_data_cost_audit.py` has two independent functions:
+
+1. Reports the 2026 paper's *claimed* classical per-structure cost arithmetic: $90,600 to $596, a reported $90,004 or 99.34216% reduction (about 152.0134x). **Quantum hardware charges are excluded.** The GPU-hour and CPU-core-hour figures are source claims, not independent cloud billing measurements. A rate-sensitivity calculation accepts both actual hourly rates supplied by the operator, and explicitly labels them as not independently verified.
+2. Fail-closed admission for six indispensable original-source artifacts: matchgate shadow measurements; the nickel active-space one-/two-body integrals; original trial preparation circuit; trained checkpoint; training split; and original AFQMC run configuration. Each needs a relative local file, a SHA256 digest, a nonempty source locator, and a declared `kind: original`. Missing files, invalid paths, or hashes prevent original-replication certification. **This checks provenance/integrity only, not that the file contents actually represent the claimed physical experiment.**
+
+No matching original shadow measurements, nickel active-space integral dataset, upCCD circuit, checkpoint, or full reproduction bundle was established by the public author/paper searches or indexed `dashi_agda` and `dashiRTX` scans on 9 November 2026. Absence from search is not proof that they have never been released. The original 16-qubit matchgate-shadow model and nickel reaction are therefore **still open**; the source-gated validation and cost arithmetic are implemented.
+
+## Updated bounded max-cut
+
+- **P0 implemented as finite-system control:** overlap-guided discrete force-bias, likelihood correction, cosine phaseless, population resampling, exact same-Hamiltonian comparator, negative controls.
+- **P0 physical production unresolved:** continuous/chemical auxiliary fields, numerical stabilization, generalized Slater determinants, Cholesky molecular integrals, trial-specific phaseless biases and credible uncertainty assessment.
+- **P1 original 16-qubit data/checkpoint unavailable in audited sources:** explicit admission validator implemented; no original transformer weights generated or represented as replicated.
+- **P2 nickel reaction/source-independent AWS accounting unavailable:** mathematical headline arithmetic reproduced but not chemistry energies or bills; do not confuse the reported 99% computational cost reduction with end-to-end quantum-hardware savings.
+- **Agda kernel and exact Git-revision runtime:** not checked in the current environment; `agda` executable absent.
