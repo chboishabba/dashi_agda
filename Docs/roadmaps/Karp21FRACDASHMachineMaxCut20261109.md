@@ -80,10 +80,10 @@ then separately handle zero gamma's `Signed.positive []`. Only this value equali
 | Phase | Gate | Exact owner/target | Status |
 |---|---|---|---|
 | P0.0 | Compiled priority | `refreshStoredCorrect`, `firstRefreshedCorrect`, `cachedStepCorrect` | SOURCE WRITTEN generic; Agda receipt OPEN |
-| P0.1 | Signed-gamma and score | `karpNativeSignedGammaSuffixSameOriginal` and `karpSignedNativeControlNumericViewSameOriginal` SOURCE; actual `SignedMagnitudeBits` numerical value and `karpSignedIRSameOriginalSparseScore` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
+| P0.1 | Signed-gamma and score | All-word suffix and native-control signed numeric view SOURCE; exact complete encoded-frame native token/original ℤ readouts SOURCE; paired native ledger same original rejection SOURCE; actual binary-token ℤ numeric value and score equality OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.2 | N21 rule implementation | Original endpoint-guard/binary-ledger one-edge N21 instantiation in `Karp21FractranN21EndpointScoreStepExact`; full graph/cursor machine OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.3 | First-enabled simulation | `karpFractranFirstEnabledSameVerifierStep` — instantiate the generic machine and match original N21 next step including rejection/halting | OPEN |
-| P0.4 | Readout/acceptance | `karpOriginalRawTraceAllWordAcceptance`, `karpOriginalTraceSameTypedN21AllWords` source-written for original ℤ; binary `karpFractranDecodePreservesAcceptance` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
+| P0.4 | Readout/acceptance | Original ℤ all-word trace and typed N21 equality SOURCE; `nativePairedLedgerSameOriginalRejection` SOURCE; native binary threshold acceptance `karpFractranDecodePreservesAcceptance` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.5 | Reproducible trace/residual | `rawSelectedTraceRebuildsOriginalScore`, `pairedTraceProjectsToOriginal`, `pairedTraceOriginalScoreExact` source-written; native binary factor/trace reconstruction OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.6 | Cost model | `karpFractranBitMachineClockPolynomial` with program size, guard scans/frontier updates, bit widths, writes, allocations, pointer/tape motion, trace/residual cost | OPEN |
 | P0.7 | Original graph weld | `trieAdmitIffOriginalHistoryConsistency`; `nativeGraphEndpointsConsumeInputBits`; `nativeSparseScoreSameOriginalRawSparseScore`; `nativeN21SameWordAndClock` | OPEN |
@@ -213,3 +213,11 @@ Original E20 and Cook–Levin, the remaining 19 Karp edges and 20 memberships, a
 - Source-written Agda declarations: committed to PR #1474; **no Agda 2.9 or `parallel_checker` executable available in this execution container**, therefore no new kernel receipt.
 - Finite regression: 65,735 directly executed cases PASS (not a complete original source Agda runtime, not an NP proof).
 - No CI requirement imposed; no ESD surfaces modified; original source attribution retained.
+
+## 2026-11-09 — Actual native ledger all-raw-list rejection preservation
+
+The canonical `Karp21FractranPairedBinaryTraceExact.agda` now imports and EXECUTES the prior `Karp21BinaryNativeSignedLedgerExact.accumulateSigned` over selected native signed tokens on an original `Graph.RawEdge`/native-token paired list. This is **not** a proxy sign scorer. `nativePairedLedger` returns `nothing` precisely when original `Runtime.endpointConsistent` or certificate-length validation rejects; otherwise it returns a real executable `SignedLedger`. New source-written `nativePairedLedgerSameOriginalRejection` states the exact original `rawSparseScore` success/rejection shape for every aligned raw edge list, arbitrary initial history, and arbitrary original certificate word. Its proof uses the existing `pairedTraceOriginalScoreExact` theorem; it does **not** assume signed numerical equality to obtain rejection parity.
+
+**Closed only as source candidate:** native ledger construction from original selected binary-token trace, and exact original raw-score rejection under supplied raw-token alignment. **OPEN**: token/original signed-ℤ value equality; raw graph *source-read* token alignment (do not silently supply arbitrary paired tokens); native two-lane integer observation equals raw signed score; threshold comparator equality; full original N21 same-step and all-word acceptance; machine time; original `PR.InNP`; E20, Cook–Levin, Karp network and separate `SATNotInP`. The new implementation is already reached by the original Karp roots and focused Agda referee. **Kernel acceptance still unverified**.
+
+This status supersedes stale chronological entries above: no full native score/acceptance theorem and no P-vs-NP separation theorem is established.
