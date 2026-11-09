@@ -56,3 +56,7 @@ import DASHI.Physics.YangMills.YMClayE1OriginalSUNFiniteCylinderLawsExact as E1N
 import DASHI.Physics.YangMills.YMClayD1OriginalRealCMP116VariableCutoffExact as D1OriginalRealCMP116
 
 import DASHI.Physics.YangMills.YMClayD1OriginalFullWilsonSmallLargeFieldExact as D1FullWilsonSmallLarge
+
+-- E1.02 / D1.02: all finite gauge-invariant plaquette words on actual
+-- changing-cutoff Wilson Gibbs measure; same original real two-J jet.
+import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as VariablePlaquetteWords
