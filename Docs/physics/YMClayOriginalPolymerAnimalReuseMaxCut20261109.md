@@ -95,3 +95,17 @@ A further repository source reuse was identified: `BalabanP33PhysicalWilsonPlaqu
 Highest-alpha remaining finite geometry proof: prove in the **same original variable-carrier** that the distinct closed plaquette-star neighbour list has ≤19 elements, with the link itself present; then derive the 18-removal bound using the already constructed actual-set cover and nonduplication. Highest-alpha physical proof: original Wilson sparse frustrated/mixed activities with cutoff-independent animal entropy margin, inhabiting `chargeSumBelowPhysicalRootedShell`. E1/D2/N1/G1 remain untouched open.
 
 All changes source-written and GitHub-readback only; Agda 2.9 compiler receipt is unavailable, so the new declarations and their transitive imports are not yet kernel-verified.
+
+## 2026-11-09 P-vs-NP / Karp fuel reuse review and theorem advance
+
+Relevant established structural recursion idioms:
+
+- `DASHI/ComputerScience/CountdownExecutionPathComplexityExact.agda`: `traceFuel` structurally recurses on a Nat step budget.
+- `DASHI/Combinatorics/FractranCOL.agda`: fuelled iteration separated from well-founded descent.
+- `DASHI/Mathematics/Complexity/PNotEqualsNPBoundedSelfReferenceWellFoundedExact.agda`: whole-state `recursiveMeasure` and genuine strict-descent/well-founded termination rather than an arbitrary resource budget.
+
+No cross-domain assumption is needed to prove the original Wilson greedy finite algorithm. The latter already has a structurally recursive `fuelGreedyOriginalDisjointStars`, plus length preservation, independence and maximality once the fuel is sufficient. Its new lemmas `fuelGreedyOriginalEmpty`, `fuelGreedyOriginalExtraFuelStable` and `fuelGreedyOriginalFullLengthExtraFuelStable` establish that additional fuel after the full original marked-link input length does not change the selected original positive-link list. The stabilisation proof is an induction on the budget with the previously proved actual original filter-length inequality; it does not assume the numerical 18-bound, P06, or any Gibbs input.
+
+This resolves **fuel-budget semantic stability** at the source-written proof-contract level; it does not prove extensional equality with the earlier potentially non-terminating un-fuelled greedy function. The number-19 conclusion still requires the actual original closed-neighbourhood size bound and degree-18 removal instance. No Agda kernel receipt was available.
+
+Remaining physical high-alpha unchanged: selected original Wilson 4D sparse/frustrated two-mark polymer activity estimate and its original CMP116 charge sum, followed by full covariance decay, E1, D2, N1 and G1.
