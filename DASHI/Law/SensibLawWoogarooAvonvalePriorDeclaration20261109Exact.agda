@@ -133,6 +133,48 @@ data ProposedParcel : Set where
   newLot2SP330365 newLot3SP327519 newLot1RP75222
     newLot98CA31786 newLot61CA31716 : ProposedParcel
 
+-- Original One Environment offset service provider Year-2 report
+-- appended to 2018/8347 ACR dated 7 March 2025, printed pp 10-15.
+-- These are **source-author reported** management actions: fencing
+-- upgrades on adjacent offset benefited old offset, coordinated cool
+-- burns in 2024, and 96ha May 2023 planting with 1-2m trees in 2024.
+-- A report from the service provider is NOT independent ground truth.
+-- This matters for avoiding a duplicate *benefit* claim even when the
+-- named new 2019/8575 lot numbers do not overlap the older lots.
+
+data SharedOperation : Set where
+  sharedFenceBenefit coordinatedColdBurn sourcePlanting2023 : SharedOperation
+
+record SourceManagementClaim : Set where
+  constructor management-claim
+  field
+    sourceMatter : Matter
+    operation : SharedOperation
+    attributedAuthor : String
+    sourceReported : Bool
+    independentlyVerified : Bool
+    reusedFor20198575CreditProved : Bool
+open SourceManagementClaim public
+
+adjoiningFenceClaim : SourceManagementClaim
+adjoiningFenceClaim = management-claim providence20188347
+  sharedFenceBenefit "One Environment, Year-2 Offset Area Annual Report"
+  true false false
+
+coordinatedBurnClaim : SourceManagementClaim
+coordinatedBurnClaim = management-claim providence20188347
+  coordinatedColdBurn "One Environment, Year-2 Offset Area Annual Report"
+  true false false
+
+historicalPlantingClaim : SourceManagementClaim
+historicalPlantingClaim = management-claim providence20188347
+  sourcePlanting2023 "One Environment, Year-2 Offset Area Annual Report"
+  true false false
+
+noCrossActionRecreditEstablished :
+  reusedFor20198575CreditProved adjoiningFenceClaim ≡ false
+noCrossActionRecreditEstablished = refl
+
 -- The two finite cadastral lists have distinguishable references
 -- and are for different action/offset records. This is not proof of
 -- a topological no-overlap without both ORIGINAL signed polygons.
