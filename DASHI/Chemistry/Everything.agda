@@ -293,3 +293,12 @@ import DASHI.Chemistry.HydrogenFuelCycleAtomicIdentityExact
 
 -- Derived finite-path mass-weight convention invariance from existing C/H/O proofs.
 import DASHI.Chemistry.HydrogenFuelCycleAtomicMassConservationExact
+
+-- Source-bounded interval / thermochemical / experiment / carbon / IP cut.
+-- These are explicitly conditional on meter, reactor, and patent-specific
+-- source receipts. K0 compiler checks are tracked separately, not asserted.
+import DASHI.Chemistry.HydrogenFuelCycleIntervalBoundsExact
+import DASHI.Chemistry.HydrogenFuelCycleMolarThermochemistryExact
+import DASHI.Chemistry.HydrogenFuelCycleDeviceEvidenceExact
+import DASHI.Chemistry.HydrogenCarbonOpenCycleExact
+import DASHI.Chemistry.HydrogenFuelCycleSourceAuthorityExact
