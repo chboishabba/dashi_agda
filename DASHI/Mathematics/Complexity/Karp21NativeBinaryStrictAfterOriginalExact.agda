@@ -16,7 +16,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 import Data.Nat.Base as Nat
 import Data.Nat.Properties as NatP
 open import Relation.Nullary.Decidable.Core using (yes; no)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Original
@@ -91,7 +91,7 @@ nativeBinaryStrictAfterSameOriginal :
     ≡ Original.strictAfter
         (observePrevious previous) (Value.valueLE u) (Value.valueLE v)
 nativeBinaryStrictAfterSameOriginal previous u v =
-  Relation.Binary.PropositionalEquality.trans
+  trans
     (strictAfterBinarySameNumeric previous u v)
     (strictAfterNumericSameOriginal
       (observePrevious previous) (Value.valueLE u) (Value.valueLE v))
