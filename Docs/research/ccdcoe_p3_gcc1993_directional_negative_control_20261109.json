@@ -46,6 +46,22 @@
       ]
     },
     {
+      "id": "hansen_rebuttal_19930608",
+      "date": "1993-06-08",
+      "date_precision": "publisher_date",
+      "role": "independently_authored_scientist_rebuttal",
+      "creator": "James E. Hansen / The Washington Post letters to the editor",
+      "source": "https://www.washingtonpost.com/archive/opinions/1993/06/08/the-heat-is-still-on/8aa70284-cba2-47a6-8759-f4b6236bf53c/",
+      "publisher_derived_observations": [
+        {
+          "speaker": "James E. Hansen",
+          "summary": "Explicitly contests impression of benign effects and disputes the earlier reporter framing; describes potential severe effects even while accepting nighttime/winter concentration.",
+          "line_reference": "original publisher rendered letter, lines 5–15"
+        }
+      ],
+      "original_byte_digest_verified": false
+    },
+    {
       "id": "gcc_shlaes_19930630",
       "date": "1993-06-30",
       "date_precision": "archive_index_date",
@@ -67,10 +83,20 @@
       "date_precision": "bulletin_month_per_archive_description",
       "role": "gcc_republishes_reference_to_article",
       "creator": "Global Climate Coalition",
-      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/"
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-climate-watch-vol-1-issue-9/",
+      "archived_edition": "Climate Watch Volume 1, Issue 9"
     }
   ],
   "links": [
+    {
+      "earlier": "wp_rensberger_19930601",
+      "later": "hansen_rebuttal_19930608",
+      "original_source_relationship": "Hansen original published rebuttal explicitly responds to Rensberger's earlier article",
+      "evidence_kind": "original_publisher_authored_reply",
+      "journalist_exposure_verified": false,
+      "original_article_GCC_causation_verified": false,
+      "audience_effect_verified": false
+    },
     {
       "earlier": "wp_rensberger_19930601",
       "later": "gcc_shlaes_19930630",
@@ -97,6 +123,15 @@
       "journalist_exposure_verified": false,
       "original_article_GCC_causation_verified": false,
       "audience_effect_verified": false
+    },
+    {
+      "earlier": "hansen_rebuttal_19930608",
+      "later": "gcc_september_bulletin_1993",
+      "original_source_relationship": "Chronology-only negative control: rebuttal publicly predates bulletin, but there is no established bulletin quotation or editor knowledge of this rebuttal",
+      "evidence_kind": "preexisting_counterevidence_not_proven_seen_or_selected",
+      "journalist_exposure_verified": false,
+      "original_article_GCC_causation_verified": false,
+      "audience_effect_verified": false
     }
   ],
   "limits": [
@@ -106,6 +141,7 @@
     "Neither archival metadata nor article quotation authenticates independent original PDF bytes or delivery/exposure data.",
     "Do not infer that disagreement with policy/scientific claims alone constitutes cognitive warfare.",
     "Washington Post original page displays May 31 1993 while its archive path and Climate Files refer to June 1 1993; preserve both metadata values, do not silently reconcile.",
-    "Two September references may not necessarily identify the same numbered bulletin issue; index/issue page confirmation remains open."
+    "September GCC bulletin original catalogue identifies Volume 1, Issue 9; this is source-located exact edition metadata, though the original PDF bytes remain unauthenticated.",
+    "The 8 June Hansen reply is independently published and earlier than GCC's 30 June reply; the fact of accessible rebuttal cannot prove any GCC communicator actually read or knowingly suppressed it."
   ]
 }
