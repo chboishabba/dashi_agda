@@ -109,12 +109,17 @@ equiMarketEigen :
       (Scalar.one (Ring.orderedScalar K))
       (Scalar.neg (Ring.orderedScalar K) rho))
     (Scalar._*_ (Ring.orderedScalar K) rho (dimensionScalar K p))
-equiMarketEigen K rho i
-  rewrite sumConstantOne K =
+equiMarketEigen K {p} rho i
+  rewrite sumConstantOne K {p} =
   cong (λ a → Scalar._+_ (Ring.orderedScalar K) a
-      (Scalar._*_ (Ring.orderedScalar K) rho (dimensionScalar K _)))
-    (Ring.mulCommutative K
-      (Scalar._+_ (Ring.orderedScalar K)
-        (Scalar.one (Ring.orderedScalar K))
-        (Scalar.neg (Ring.orderedScalar K) rho))
-      (Scalar.one (Ring.orderedScalar K)))
+      (Scalar._*_ (Ring.orderedScalar K) rho (dimensionScalar K p)))
+    (trans
+      (Ring.mulCommutative K
+        (Scalar._+_ (Ring.orderedScalar K)
+          (Scalar.one (Ring.orderedScalar K))
+          (Scalar.neg (Ring.orderedScalar K) rho))
+        (Scalar.one (Ring.orderedScalar K)))
+      (Ring.mulOneLeft K
+        (Scalar._+_ (Ring.orderedScalar K)
+          (Scalar.one (Ring.orderedScalar K))
+          (Scalar.neg (Ring.orderedScalar K) rho))))
