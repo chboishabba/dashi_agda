@@ -306,15 +306,25 @@ def source_bound_closed_implicit_step(
     inventory = check_original_closed_inventory(
         source_bytes, pinned_sha256, before, after,
         atol=inventory_tolerance)
-    if not (isinstance(numerical, dict)
-            and numerical.get("numerical_residual_max", float("inf"))
-                <= residual_tolerance):
-        raise ValueError("same-step original PNP residual receipt missing or invalid")
-    if numerical.get("free_energy_after", float("inf")) > (
-        numerical.get("free_energy_before", float("-inf"))
-        + max(1e-9, residual_tolerance *
-              max(1.0, abs(numerical.get("free_energy_before", 0.0))))
-    ):
+    if not isinstance(numerical, dict):
+        raise ValueError("same-step numerical PNP receipt required")
+    required = ("numerical_residual_max", "free_energy_before",
+                "free_energy_after", "charge_defect", "minimum_concentration",
+                "poisson_residual_max", "transport_power", "reaction_power")
+    metrics = {name: _finite_number(numerical.get(name), name)
+               for name in required}
+    if (metrics["numerical_residual_max"] < 0
+            or metrics["numerical_residual_max"] > residual_tolerance
+            or metrics["poisson_residual_max"] < 0
+            or metrics["poisson_residual_max"] > residual_tolerance
+            or metrics["charge_defect"] < 0
+            or metrics["minimum_concentration"] <= 0):
+        raise ValueError("same-step original PNP residual/positivity receipt invalid")
+    if (metrics["transport_power"] > 1e-9
+            or metrics["reaction_power"] > 1e-9):
+        raise ValueError("same-step PNP dissipation sign invalid")
+    e0, e1 = metrics["free_energy_before"], metrics["free_energy_after"]
+    if e1 > e0 + max(1e-9, residual_tolerance * max(1.0, abs(e0))):
         raise ValueError("same-step original PNP energy receipt invalid")
     # Re-audit the candidate output shape and physical domain before any
     # receipt: do not let an arbitrary test double supply a malformed state.
