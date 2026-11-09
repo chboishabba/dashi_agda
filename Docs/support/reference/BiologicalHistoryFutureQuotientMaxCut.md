@@ -630,6 +630,67 @@ full stochastic future-quotient/minimality on that
 physical model; and held-out independent developmental
 prediction. None is paid by the pants interface alone.
 
+### 2026-11-09: exact open 3D boundary and native signed-charge composition
+
+On the original **3×3×3 / 369 cubical carrier**,
+`Biological369CubicalBoundaryMaterialExact` now proves more
+than a boundary-source marker:
+
+- `originalOuterFacePoints` lists the exact six
+  original geometry faces, each of **nine voxels**.
+- `OriginalOuterFaceInjection` and
+  `OriginalOuterFaceDischarge` require an original
+  `Cube.OnFace face physicalVoxel` witness.
+  This prevents declaring an interior point to be an
+  external supply or clearance location by accident.
+- `applyBoundaryInjection` uses original lossless
+  `pointIndex` to increase one shared voxel inventory;
+  `applyBoundaryDischarge` removes at most one
+  *actually available* quantum, so empty cells do not
+  become negative.
+- `originalFaceExchangeBalance` and
+  `allOriginalBoundaryExchangeHistoriesBalance`
+  prove the entire source/sink history law
+  `sum(final) + actualRemoved = sum(initial) + injected`
+  with distinct original-source event identities.
+
+`Biological369CubicalOpenSignedChargeExact` consumes the
+existing `BiologicalSignedIonicSharedGridExact` and
+those original faces:
+- `positiveOpenMaterialBalance` and
+  `negativeOpenMaterialBalance` keep cation and anion
+  material independently balanced.
+- `nativeSignedChargeWithEnvironmentalSourcesAndSinks`
+  interprets their totals in native signed integer charge
+  `positive - negative`.
+- `originalFullSpatialOpenSignedChargeBalance`
+  composes arbitrary original internal ion transport
+  histories with explicit six-face positive/negative
+  source/clearance events, preserving native integer
+  signed net charge **after including actual outputs
+  and inputs**.
+
+Both modules now appear in the Round-23 Golden root
+and fail-closed checker. Additional candidate-only
+regressions `check_biological_369_face_exchange.py`
+and `check_biological_369_open_signed_charge.py`
+test the original cubic geometry, external source
+positions and exact discrete conservation.
+An independent finite arithmetic pass verified the
+six faces, 9 voxels/face and 1,728 nonnegative
+single-face event balances. Committed scripts and
+exact-head Agda kernel have **not** run here.
+
+**L04 precise revised state:** source-written native
+closed internal two-ion transport PLUS open global
+signed charge with actual face current sources and
+sinks. What remains is **local** signed continuity
+per voxel, full PNP/Poisson electric potential,
+measured membrane and circulation laws, real ion
+valences and source-specific kinetic coupling.
+A global signed ledger is not a substitute for the
+local PDE or any physiological rate.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
