@@ -1,5 +1,32 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 explicit source quotient: narrowed P0 analytic estimate
+
+New `DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda`, integrated into all three TOE roots and the Bishop checker, pays the source-to-quotient expansion rather than introducing another arbitrary derivative interface.
+
+The source finite logarithm's actual factor quotient is
+[
+q_{L,N}(x,h)=sum_{k<N}rac{Q_{k+1}(x,h)}{k+1},
+qquad Q_m(x,h)=rac{(x+h)^m-x^m}{h}
+]
+where **division is only mathematical notation**: `Power.powerDifferenceQuotient` is a finite recursive polynomial with an exact factorization at `h=0` too. Agda exposes `originalSourceFiniteLogQuotientZero` and `originalSourceFiniteLogQuotientSuccessor`, and identifies it with the quotient of the original finite `sourceNegativeLogTerm` partials.
+
+The actual original `exp_B(-L_N)` factor quotient is, without division:
+[
+q_{F,N}(x,h)
+ simeq -q_{L,N}(x,h),F_N(x),
+ Q_{exp}(-[L_N(x+h)-L_N(x)]),
+quad Q_{exp}(t)=sum_{kge0}rac{t^k}{(k+1)!}.
+]
+The source term `originalFiniteLogExpQuotientIsExplicit` uses the already-proved Bishop chain-rule quotient, and `originalFiniteLogErrorQuotientIsExplicit` makes its *target-error* quotient exactly this expression plus 1. This reuses the **same** `originalExpOriginQuotient` already constructed as the actual convergent shifted-factorial series, not a new exponent definition.
+
+**One genuinely missing quantitative source lemma:** prove a **joint stage-and-mesh estimate** on the displayed explicit (q_{F,N}(x,h)+1) over original (0le xle r<1), (|h|) uniformly small, sufficient for the weighted finite-mesh error bound to vanish as both N increases and the mesh refines. This should proceed through finite power-difference quotient bounds and a source (Q_{exp}) Taylor remainder bound; source Taylor coefficient identity or interval FTC is an alternative, not another prerequisite. Then consume `originalNegativeLogTerminalFromFiniteEvaluation` to inhabit `OriginalBishopNegativeLogExponentialGap`.
+
+**P1 remains** two original analytic atan–Cayley value equalities. **P2 remains** original LOG-dependent zeta instantiation followed by independent selected `ZetaHalfPlaneLayer.zetaHalfPlane` value identification. No theorem added here closes any P0/P1/P2 terminal; `RP.≃-refl` proofs are source-level definitional reductions, not Agda kernel receipts. No exact-head compiler run is available.
+
+
+---
+
 ## 2026-11-09 P0 original error derivative and literal mesh defect weld
 
 New original source owner: `DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda`, imported in all three TOE roots and the pinned Bishop checker.
