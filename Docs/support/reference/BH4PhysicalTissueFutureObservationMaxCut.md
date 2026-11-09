@@ -84,3 +84,33 @@ Conway's numeric `a -> b` is `a^b`;
 `a -> b -> c` is `a ↑^c b`.
 This meaning is **not** inherited by a pipeline arrow,
 e.g. source → physical state → quotient → observation.
+
+
+## 2026-11-09 — current-head integration and exact remaining lemmas
+
+Source audit: PR #1471 head observed at `d9f5dd931517a86542b498648e41cb6aea9094cf` before this continuation; PR #1454 at `fdad652d4c9409106d37384cc2bc06112ea60936`. These are **separate draft branches**. This continuation adds `twoNativeCubicalBondTransfersConserveTotal` on PR #1471: a genuine two-step shared-inventory proof using original `Grid.PositiveBond` and the semantic `Cube.Ternary27Point` geometry. This is source-written only: no Agda kernel receipt was obtained in this session.
+
+### Exact maximum-cut register (proposed targets unless an owner is cited)
+
+| Gate | Already source-written / executable | Exact remaining obligation and exit condition |
+| --- | --- | --- |
+| G0 kernel | Original 3×3×3 field, 54 native bonds, cubical/pants seams, open boundary ledger, selected finite reaction fixtures; two-step shared-state transfer | Run exact-head Agda 2.9 / `parallel_checker` against Golden roots and all transitive imports; archive stdout/stderr and SHA |
+| G1 local continuity | `Biological369CubicalOpenSignedChargeExact` establishes **global** open signed charge balance; `check_biological_369_local_charge_continuity.py` tests finite voxelwise cases | `original369LocalSignedContinuityExact`: for every original voxel, integer charge difference + signed incidence-current divergence equals explicit face source/sink, including all native directed histories; verify in Agda |
+| G2 original chemistry | `BH4SpatialOriginalQDPRStoichiometryExact` selected five-species QDPR; `check_bh4_original_panel_spatial_events.py` consumes the **original** source certificate when mounted | `original29x12SpatialReactionBalance`: all source-certified 29 species × 12 finite reactions, three nonfinite residuals, and 29 exchange coordinates on **one** 3×3×3 shared inventory, preserving elemental and charge ledgers; no fabricated zero fluxes |
+| G3 physical step | Finite nonnegative reaction/transport events and face exchange available | `sameSourcePhysicalReactionTransportStep`: compose source-specific rates, admissible compartments, membrane/vascular permissions, ionic transport, reaction stoichiometry and actual environmental sources into one well-defined evolution |
+| G4 same-source refinement | `BiologicalSourcePhysicalTissueSimulationExact` gives all-history consequences **conditional** on one-step premises | `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, `physicalTissueOneStepRefinement`; if old Boolean tissue rule fails, refine observation rather than assert false commutation |
+| G5 future sufficiency | Selected 18-class stochastic quotient and BH4 three-state minimal example | `physicalKernelLumpsUnderInterventions` and `physicalFutureQuotientIsMinimal` for actual admissible interventions, transition kernel and observation language |
+| G6 evidence | Source-aware BH4 measurement intake and finite diagnostics | `sourceCalibratedParametersAdmissible` and `heldoutFuturePredictionsDiscriminate`: same-sample compartment/time calibration, model uncertainty, alternatives, independent prospective test |
+| G7 integration | Separate Golden roots and source provenance | Reconcile stacked #1159/#1226/#1454 with #1471; source-review ITIR #72 without auto-PNF promotion; combined Golden exact-head acceptance |
+
+### Proof dependency and phased deliverables
+
+- **D0 (acceptance):** exact-head checker receipts for both independent roots, then a reconciled joint root. A source-written declaration is never labelled kernel accepted without its receipt.
+- **D1 (shared chemistry):** G1 + G2. Reuse original incidence and molecular matrix owners, without replacing the real 3D cube by a semantic 27-vector.
+- **D2 (physical evolution):** G3 with explicit admissibility, time, boundary currents, permeability and energy assumptions.
+- **D3 (physical-to-observed):** G4 commutation and consequent history transport, or a recorded physical counterexample.
+- **D4 (future quotient):** G5 exact lumpability/refinement and minimality relative to the declared interventions.
+- **D5 (science):** G6 measured original kinetics and held-out, uncertainty-bounded longitudinal comparison.
+- **D6 (governance):** G7 lineage and independently reviewed evidence.
+
+**No closure claimed** for Agda acceptance, entire 29×12 source certificate execution, calibrated physiological flux, full PNP evolution, real phenotype prediction, causal Kitzerow hypothesis, or branch reconciliation. Local charge continuity currently has a Python regression, **not** an Agda proof.
