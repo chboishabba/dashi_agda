@@ -151,3 +151,188 @@ selectedOriginalBoundaryEvent =
 
 originalBoundaryDoesNotAutomaticallyPayPhysiology : Bool
 originalBoundaryDoesNotAutomaticallyPayPhysiology = false
+
+------------------------------------------------------------------------
+-- Actual finite-volume outflow: selected boundary voxel, debit a
+-- SINGLE available quantum or remain stationary if empty.
+-- The external loss is the amount actually debited, not a requested
+-- but impossible flux. Original rates, valences and chemical species
+-- have to be supplied by the later physical model.
+------------------------------------------------------------------------
+
+record OriginalOuterFaceDischarge : Set where
+  constructor original-outer-face-discharge
+  field
+    dischargeFace : Cube.Face6
+    dischargeVoxel : Cube.Ternary27Point
+    dischargeMembership : Cube.OnFace dischargeFace dischargeVoxel
+    originalDischargeReference : String
+
+open OriginalOuterFaceDischarge public
+
+dischargeIndex :
+  OriginalOuterFaceDischarge → F.Fin 27
+dischargeIndex event = Index.originalPointIndex (dischargeVoxel event)
+
+actualDischargedAmount :
+  OriginalOuterFaceDischarge → V.Vec Nat 27 → Nat
+actualDischargedAmount event state
+  with V.lookup state (dischargeIndex event)
+... | zero = 0
+... | suc n = 1
+
+applyBoundaryDischarge :
+  OriginalOuterFaceDischarge →
+  V.Vec Nat 27 → V.Vec Nat 27
+applyBoundaryDischarge event state =
+  V.updateAt state (dischargeIndex event)
+    (λ n → pred n)
+
+-- Reuse the original generic source-debit conservation proof owner.
+import DASHI.Biology.Physical.BiologicalSharedFiniteVectorTransferExact as Transfer
+
+-- pred(suc n)=n and pred(0)=0 is definitionally equal to the
+-- original debitAt, at every finite vector index.
+dischargeIsOriginalDebit :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.updateAt state index pred ≡ Transfer.debitAt index state
+dischargeIsOriginalDebit F.zero (V._∷_ zero xs) = refl
+dischargeIsOriginalDebit F.zero (V._∷_ (suc a) xs) = refl
+dischargeIsOriginalDebit (F.suc index) (V._∷_ a xs) =
+  cong (V._∷_ a) (dischargeIsOriginalDebit index xs)
+
+failedDebitConserves :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.lookup state index ≡ zero →
+  V.sum (Transfer.debitAt index state) ≡ V.sum state
+failedDebitConserves F.zero (V._∷_ zero xs) refl = refl
+failedDebitConserves F.zero (V._∷_ (suc a) xs) ()
+failedDebitConserves (F.suc index) (V._∷_ a xs) proof =
+  cong (λ n → a + n)
+    (failedDebitConserves index xs proof)
+
+rightOneIsSucc : (n : Nat) → n + 1 ≡ suc n
+rightOneIsSucc n =
+  trans (+-suc n zero) (cong suc (+-identityʳ n))
+
+outflowMaterialBalance :
+  (event : OriginalOuterFaceDischarge)
+  (state : V.Vec Nat 27) →
+  V.sum (applyBoundaryDischarge event state)
+    + actualDischargedAmount event state
+    ≡ V.sum state
+outflowMaterialBalance event state
+  rewrite dischargeIsOriginalDebit (dischargeIndex event) state
+  with V.lookup state (dischargeIndex event)
+... | zero =
+  trans
+    (+-identityʳ (V.sum (Transfer.debitAt (dischargeIndex event) state)))
+    (failedDebitConserves (dischargeIndex event) state refl)
+... | suc k =
+  trans
+    (rightOneIsSucc (V.sum (Transfer.debitAt
+      (dischargeIndex event) state)))
+    (Transfer.successfulDebitDecreasesTotalByOne
+      (dischargeIndex event) state k refl)
+
+data OriginalFaceExchange : Set where
+  addAtOuterFace : OriginalOuterFaceInjection → OriginalFaceExchange
+  removeAtOuterFace : OriginalOuterFaceDischarge → OriginalFaceExchange
+
+applyOriginalFaceExchange :
+  OriginalFaceExchange →
+  V.Vec Nat 27 → V.Vec Nat 27
+applyOriginalFaceExchange (addAtOuterFace event) state =
+  applyBoundaryInjection event state
+applyOriginalFaceExchange (removeAtOuterFace event) state =
+  applyBoundaryDischarge event state
+
+faceExchangeInput : OriginalFaceExchange → Nat
+faceExchangeInput (addAtOuterFace event) = incomingMaterial event
+faceExchangeInput (removeAtOuterFace event) = 0
+
+faceExchangeOutput :
+  OriginalFaceExchange → V.Vec Nat 27 → Nat
+faceExchangeOutput (addAtOuterFace event) state = 0
+faceExchangeOutput (removeAtOuterFace event) state =
+  actualDischargedAmount event state
+
+originalFaceExchangeBalance :
+  (event : OriginalFaceExchange)
+  (state : V.Vec Nat 27) →
+  V.sum (applyOriginalFaceExchange event state)
+    + faceExchangeOutput event state
+    ≡ V.sum state + faceExchangeInput event
+originalFaceExchangeBalance (addAtOuterFace event) state =
+  trans
+    (+-identityʳ (V.sum (applyBoundaryInjection event state)))
+    (eachOriginalBoundaryInjectionIsPaid event state)
+originalFaceExchangeBalance (removeAtOuterFace event) state =
+  trans
+    (outflowMaterialBalance event state)
+    (sym (+-identityʳ (V.sum state)))
+
+record BoundaryHistoryResult : Set where
+  constructor boundary-history-result
+  field
+    finalMaterial : V.Vec Nat 27
+    totalExternalInput : Nat
+    totalExternalOutput : Nat
+
+open BoundaryHistoryResult public
+
+runOriginalBoundaryExchange :
+  List OriginalFaceExchange →
+  V.Vec Nat 27 → BoundaryHistoryResult
+runOriginalBoundaryExchange [] state =
+  boundary-history-result state 0 0
+runOriginalBoundaryExchange (event ∷ rest) state
+  with runOriginalBoundaryExchange rest
+    (applyOriginalFaceExchange event state)
+... | boundary-history-result final incoming outgoing =
+  boundary-history-result
+    final
+    (faceExchangeInput event + incoming)
+    (faceExchangeOutput event state + outgoing)
+
+exchangeAssociative :
+  (a b c : Nat) → a + (b + c) ≡ (a + c) + b
+exchangeAssociative a b c =
+  trans
+    (cong (λ x → a + x) (+-comm b c))
+    (sym (+-assoc a c b))
+
+allOriginalBoundaryExchangeHistoriesBalance :
+  (events : List OriginalFaceExchange)
+  (state : V.Vec Nat 27) →
+  V.sum (finalMaterial (runOriginalBoundaryExchange events state))
+    + totalExternalOutput (runOriginalBoundaryExchange events state)
+    ≡
+  V.sum state
+    + totalExternalInput (runOriginalBoundaryExchange events state)
+allOriginalBoundaryExchangeHistoriesBalance [] state =
+  sym (+-identityʳ (V.sum state))
+allOriginalBoundaryExchangeHistoriesBalance (event ∷ rest) state
+  with runOriginalBoundaryExchange rest
+    (applyOriginalFaceExchange event state)
+    | allOriginalBoundaryExchangeHistoriesBalance rest
+        (applyOriginalFaceExchange event state)
+... | boundary-history-result final incoming outgoing | induction =
+  trans
+    (exchangeAssociative
+      (V.sum final) (faceExchangeOutput event state) outgoing)
+    (trans
+      (cong (λ n → n + faceExchangeOutput event state) induction)
+      (trans
+        (exchangeAssociative
+          (V.sum (applyOriginalFaceExchange event state))
+          incoming (faceExchangeOutput event state))
+        (trans
+          (cong (λ n → n + incoming)
+            (originalFaceExchangeBalance event state))
+          (+-assoc (V.sum state)
+            (faceExchangeInput event) incoming))))
