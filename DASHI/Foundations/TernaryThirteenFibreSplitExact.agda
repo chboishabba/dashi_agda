@@ -30,8 +30,9 @@ joinTrit (suc m) n (x , xs) ys =
 splitTrit : (m n : Nat) →
   TritWord (m + n) → TritWord m × TritWord n
 splitTrit zero n ys = tt , ys
-splitTrit (suc m) n (x , rest) with splitTrit m n rest
-... | xs , ys = (x , xs) , ys
+splitTrit (suc m) n (x , rest) =
+  (x , proj₁ (splitTrit m n rest)) ,
+  proj₂ (splitTrit m n rest)
 
 -- Generic two-sided equivalence, no cardinality or choice.
 splitTritAfterJoin :
@@ -83,8 +84,9 @@ splitTriple :
   (a b c : Nat) →
   TritWord (a + (b + c)) →
   TritWord a × (TritWord b × TritWord c)
-splitTriple a b c xs with splitTrit a (b + c) xs
-... | first , rest = first , splitTrit b c rest
+splitTriple a b c xs =
+  proj₁ (splitTrit a (b + c) xs) ,
+  splitTrit b c (proj₂ (splitTrit a (b + c) xs))
 
 joinTriple :
   (a b c : Nat) →
