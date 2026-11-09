@@ -595,6 +595,7 @@ def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
         raise AssertionError("original source 29x12 matrix identity lost")
     if receipt["status"]!="feasible":
         return {"status":receipt["status"],
+                "original_bound_audit":bounds_audit,
                 "source_29x12_consistent":True,
                 "physical_rate_validated":False,
                 "missing_flux_bounds":receipt.get("missing_flux_bounds",[]),
@@ -612,6 +613,7 @@ def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
     if witness is None:
         raise AssertionError("feasible result lacked its complete algebraic witness")
     return {"status":"feasible-algebraic-only",
+            "original_bound_audit":bounds_audit,
             "source_29x12_consistent":True,
             "complete_12_reaction_flux_coordinates":True,
             "complete_29_environmental_exchange_coordinates":True,
