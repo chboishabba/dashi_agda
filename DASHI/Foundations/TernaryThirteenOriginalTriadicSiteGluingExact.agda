@@ -14,6 +14,7 @@ module DASHI.Foundations.TernaryThirteenOriginalTriadicSiteGluingExact where
 open import DASHI.Core.Prelude
 import DASHI.Foundations.RelationalStageTwelveGrothendieckExtensionExact as Site
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Stage12
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.TernaryThirteenFibreSplitExact as Words
 import DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact as Source
 import DASHI.Foundations.TernaryThirteenFibrePunctureExact as Puncture
@@ -163,7 +164,7 @@ sourceToGlobal (valuation , centre) =
 
 sourceGlobalPointwiseRoundTrip :
   (state : Rel.SourceCentralCompletionCarrier)
-  (axis : DASHI.Foundations.StageAtlasZeroToEleven.StageAtlasZeroToEleven) →
+  (axis : Atlas.StageAtlasZeroToEleven) →
   proj₁ (globalToSource (sourceToGlobal state)) axis
   ≡ proj₁ state axis
 sourceGlobalPointwiseRoundTrip (valuation , centre) axis
