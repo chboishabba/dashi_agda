@@ -269,3 +269,64 @@ lookupCreditAwayFromTarget (F.suc target) (F.suc observer)
   (V._∷_ amount rest) different =
   lookupCreditAwayFromTarget target observer rest
     (λ equality → different (cong F.suc equality))
+
+
+-- A COMPLETE one-step locality statement for the existing native
+-- transferOne implementation, including no-op empty-source cases.
+-- An observer outside both endpoints is unchanged. The proof follows
+-- the actual transferOne constructor cases, not an asserted current.
+lookupTransferAwayFromEndpoints :
+  ∀ {n} (source target observer : F.Fin n)
+  (state : V.Vec Nat n) →
+  source ≢ observer → target ≢ observer →
+  V.lookup (transferOne source target state) observer
+    ≡ V.lookup state observer
+lookupTransferAwayFromEndpoints F.zero F.zero observer state
+  sourceDifferent targetDifferent = refl
+lookupTransferAwayFromEndpoints F.zero (F.suc target) F.zero
+  state sourceDifferent targetDifferent =
+  ⊥-elim (sourceDifferent refl)
+lookupTransferAwayFromEndpoints F.zero (F.suc target)
+  (F.suc observer) (V._∷_ zero rest)
+  sourceDifferent targetDifferent = refl
+lookupTransferAwayFromEndpoints F.zero (F.suc target)
+  (F.suc observer) (V._∷_ (suc amount) rest)
+  sourceDifferent targetDifferent =
+  lookupCreditAwayFromTarget target observer rest
+    (λ equality → targetDifferent (cong F.suc equality))
+lookupTransferAwayFromEndpoints (F.suc source) F.zero F.zero
+  state sourceDifferent targetDifferent =
+  ⊥-elim (targetDifferent refl)
+lookupTransferAwayFromEndpoints (F.suc source) F.zero
+  (F.suc observer) (V._∷_ amount rest)
+  sourceDifferent targetDifferent
+  with V.lookup rest source
+... | zero = refl
+... | suc k =
+  lookupDebitAwayFromSource source observer rest
+    (λ equality → sourceDifferent (cong F.suc equality))
+lookupTransferAwayFromEndpoints (F.suc source) (F.suc target)
+  F.zero (V._∷_ amount rest)
+  sourceDifferent targetDifferent = refl
+lookupTransferAwayFromEndpoints (F.suc source) (F.suc target)
+  (F.suc observer) (V._∷_ amount rest)
+  sourceDifferent targetDifferent =
+  lookupTransferAwayFromEndpoints source target observer rest
+    (λ equality → sourceDifferent (cong F.suc equality))
+    (λ equality → targetDifferent (cong F.suc equality))
+
+originalNativeBondUnchangedOutsideEndpoints :
+  (geometry : Original54BondIndexing)
+  (bond : Grid.PositiveBond) (observer : F.Fin 27)
+  (state : V.Vec Nat 27) →
+  sourceIndex geometry bond ≢ observer →
+  targetIndex geometry bond ≢ observer →
+  V.lookup
+    (transferOne (sourceIndex geometry bond)
+      (targetIndex geometry bond) state) observer
+    ≡ V.lookup state observer
+originalNativeBondUnchangedOutsideEndpoints geometry bond
+  observer state sourceDifferent targetDifferent =
+  lookupTransferAwayFromEndpoints
+    (sourceIndex geometry bond) (targetIndex geometry bond)
+    observer state sourceDifferent targetDifferent
