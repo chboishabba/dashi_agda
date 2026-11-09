@@ -155,3 +155,55 @@ originalNeighbourHasLiteralSharedPlaquette :
 originalNeighbourHasLiteralSharedPlaquette a b member =
   Witness.originalConflictExhibitsSharedPlaquette a b
     (originalNeighbourConflictSound a b member)
+
+------------------------------------------------------------------------
+-- Physical support facts: the finite-neighbour relation is symmetric,
+-- reflexive (closed star), and matches the actual original greedy filter.
+-- These propositions need NO model leaf or source-independent graph.
+------------------------------------------------------------------------
+
+originalLinkStarConflictSymmetric :
+  ∀ {n} {a b : Original.Bond n} →
+  OriginalLinkStarConflict a b →
+  OriginalLinkStarConflict b a
+originalLinkStarConflictSymmetric {a = a} {b = b} conflict separate =
+  conflict (Original.originalStarsDisjointSymmetric separate)
+
+originalLinkStarConflictReflexive :
+  ∀ {n} (a : Original.Bond n) →
+  OriginalLinkStarConflict a a
+originalLinkStarConflictReflexive =
+  Original.originalStarNeverDisjointFromItself
+
+originalNeighbourListContainsSelf :
+  ∀ {n} (a : Original.Bond n) →
+  Torus._∈_ a (originalLinkStarNeighbourList a)
+originalNeighbourListContainsSelf a =
+  originalNeighbourConflictComplete a a
+    (originalLinkStarConflictReflexive a)
+
+originalGreedyFilteredLinkHasNoSourceConflict :
+  ∀ {n} (a : Original.Bond n)
+    (bs : List (Original.Bond n)) (b : Original.Bond n) →
+  Torus._∈_ b (Original.filterOriginalStarFree a bs) →
+  OriginalLinkStarConflict a b → Torus.Empty
+originalGreedyFilteredLinkHasNoSourceConflict a bs b selected conflict =
+  conflict (Original.filterOriginalStarFreeSound a bs b selected)
+
+originalGreedyFilteredLinkNotInClosedNeighbourhood :
+  ∀ {n} (a : Original.Bond n)
+    (bs : List (Original.Bond n)) (b : Original.Bond n) →
+  Torus._∈_ b (Original.filterOriginalStarFree a bs) →
+  Torus._∈_ b (originalLinkStarNeighbourList a) → Torus.Empty
+originalGreedyFilteredLinkNotInClosedNeighbourhood a bs b free neighbour =
+  originalGreedyFilteredLinkHasNoSourceConflict
+    a bs b free (originalNeighbourConflictSound a b neighbour)
+
+originalNonConflictIffStarSeparation :
+  ∀ {n} (a b : Original.Bond n) →
+  (OriginalLinkStarConflict a b → Torus.Empty) →
+  Original.OriginalStarsDisjoint a b
+originalNonConflictIffStarSeparation a b noConflict
+  with Original.decideOriginalStarsDisjoint a b
+... | Torus.yes separate = separate
+... | Torus.no conflict = Original.emptyElim (noConflict conflict)
