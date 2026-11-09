@@ -129,3 +129,20 @@ Source audit: PR #1471 head observed at `d9f5dd931517a86542b498648e41cb6aea9094c
 **Other progress on companion #1454:** `check_bh4_original_panel_spatial_events.py` now composes each certified original finite reaction event with an actual original native-bond transport and its reverse on the **same** 3×3×3×species inventory, checking nonnegative molecular amounts and conserved CHNOP/charge. The full 29×12 execution remains gated on mounted source certificate and does not claim any of the 29 physiological external fluxes. G2 remains PARTIAL.
 
 **Updated immediate proof order:** local all-voxel charge-current ledger → source-certificate 29×12 same-state histories with explicitly separately tracked environmental exchanges → admissible physical step → PNP/BH4/tissue commutation → intervention-safe stochastic quotient → independent measurements. No rate or clinical causal claim arises from this structural conservation work.
+
+
+### 2026-11-09 next P0 maximum-cut: actual support locality
+
+This pass adds structural *Agda source* lemmas in the existing original physical owners, not a new parallel physical carrier:
+- `lookupDebitAwayFromSource` and `lookupCreditAwayFromTarget`: independent spectator voxels do not change during primitive source debit / target credit.
+- `lookupTransferAwayFromEndpoints` and `originalNativeBondUnchangedOutsideEndpoints`: **the existing actual `transferOne` implementation** leaves any observer outside both original native-bond endpoints unchanged, including zero-source/no-op cases.
+- `lookupFaceInjectionAwayFromEvent` and `originalFaceInjectionLeavesOtherVoxelUnchanged`: verified `OnFace` influx modifies no off-face selected site.
+- `originalFaceDischargeLeavesOtherVoxelUnchanged`: actual available-material extraction modifies no off-event site.
+- `scripts/check_biological_369_local_charge_continuity.py` now has an independent event-support negative control, checking absence of remote state changes in addition to signed `ΔQ + div J = q_external` arithmetic.
+- `scripts/check_biological_history_future_round23.sh` requires these owner declarations before invoking its preexisting parallel checker.
+
+The source is updated to use Prelude-supported `¬ (_≡_)`; **no Agda executable or exact-head acceptance receipt was available in this session**. The checker script has not been executed on the new head.
+
+**P0 STILL OPEN:** `original369LocalSignedContinuityExact` must prove the actual per-voxel *signed* incidence-current and boundary-event identity for every chronological history, not merely locality and global charge conservation. `original29x12SpatialReactionBalance` additionally needs acquired original matrix bytes and source-consistent compartment/charge bookkeeping; `sameSourcePhysicalReactionTransportStep` needs rates and admissible PNP/circulation couplings. P1–P3 physical and empirical gates unchanged.
+
+**Highest next step:** prove at each source and target the exact executed `transferOne` debit/credit (including empty-source and reversed bonds), and then sum those signed local event receipts through histories. This is now well isolated by the off-endpoint proof and original-face support.
