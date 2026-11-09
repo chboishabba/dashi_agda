@@ -1,0 +1,65 @@
+{
+  "schema": "dashi.critical_art.edition_external_authority.v1",
+  "original_attribution": "Original creators, producers, distributors, and Australian Classification each own their source assertions; DASHI owns only registration and logical boundaries.",
+  "edition_records": [
+    {
+      "edition_id": "leon_au_1994_110",
+      "work_id": "leon_1994",
+      "edition_label": "Australian 1994 classified theatrical public-exhibition copy",
+      "duration_seconds": 6600,
+      "source_kind": "Australian Government classification record",
+      "source_url": "https://www.classification.gov.au/titles/leon-12",
+      "record_id": "00719356198E",
+      "source_date": "1994-10-26",
+      "creator": "Luc Besson; Gaumont and credited collaborators",
+      "evidence_grade": "institutional_edition_metadata",
+      "scene_verified": false
+    },
+    {
+      "edition_id": "leon_gaumont_1996_133",
+      "work_id": "leon_1994",
+      "edition_label": "Gaumont Léon version longue, 1996",
+      "duration_seconds": 7980,
+      "source_kind": "original film producer listing",
+      "source_url": "https://www.gaumont.com/en/movie/leon-version-longue",
+      "record_id": "Gaumont Léon (version longue)",
+      "source_date": "1996",
+      "creator": "Luc Besson; Gaumont and credited collaborators",
+      "evidence_grade": "producer_edition_metadata",
+      "scene_verified": false
+    },
+    {
+      "edition_id": "dont_look_up_au_2021_138",
+      "work_id": "dont_look_up_2021",
+      "edition_label": "Australian 2021 original classified online release",
+      "duration_seconds": 8280,
+      "source_kind": "Australian Government classification record; Netflix Media Center",
+      "source_url": "https://www.classification.gov.au/titles/dont-look-1",
+      "record_id": "294721",
+      "source_date": "2021-10-27",
+      "creator": "Adam McKay; Kevin Messick; Netflix and credited collaborators",
+      "evidence_grade": "institutional_edition_metadata",
+      "scene_verified": false
+    },
+    {
+      "edition_id": "planet_of_humans_apple_2020_100",
+      "work_id": "planet_of_the_humans_2020",
+      "edition_label": "Apple TV Australia 2020 1h40m listing",
+      "duration_seconds": 6000,
+      "source_kind": "Apple TV film listing; filmmakers' original release information",
+      "source_url": "https://tv.apple.com/au/movie/planet-of-the-humans/umc.cmc.2f8w1eeetfqqpettlfx80jkh9",
+      "record_id": "umc.cmc.2f8w1eeetfqqpettlfx80jkh9",
+      "source_date": "2020",
+      "creator": "Jeff Gibbs; Huron Mountain Films and credited collaborators",
+      "evidence_grade": "distributor_edition_metadata",
+      "scene_verified": false
+    }
+  ],
+  "nonpromotion": [
+    "Duration is nominal metadata, not evidence about precise cuts/frames.",
+    "Australian LEON 2010 DVD classification showing 185 min is not assumed to be 185 min of film, as bundled extras may be included.",
+    "Documentary claims remain contested until original empirical sources reviewed.",
+    "Original metadata locator alone does not certify a local file hash or human review.",
+    "No claimed author endorsement or historical audience effect."
+  ]
+}
