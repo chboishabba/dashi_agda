@@ -10,7 +10,7 @@ not Agda kernel checking or a physical tape-clock proof.
 from itertools import product
 from random import Random
 from check_karp21_whole_binary_graph import (
-    original_graph, native_unsigned, native_edges, gamma, zigzag,
+    original_graph, native_unsigned, gamma_scan, pred_le, gamma, zigzag,
     compare_le, ripple_add, length_le, val,
 )
 
@@ -36,6 +36,45 @@ def original_trace(word, certificate):
     # Selected trace is defined even when total score misses threshold.
     return selected
 
+def read_native_signed_bits(word):
+    parsed = gamma_scan(word)
+    if parsed is None:
+        return None
+    successor_be, suffix = parsed
+    # Actual Signed.splitLast on original gamma(z+1) BIG-ENDIAN successor.
+    # Last bit TRUE is positive, FALSE is negative.
+    prefix_be, is_positive = successor_be[:-1], successor_be[-1]
+    return (is_positive, tuple(prefix_be)), suffix
+
+def observe_signed_token(token):
+    positive, prefix_be = token
+    magnitude = 0
+    for bit in prefix_be:
+        magnitude = (magnitude << 1) | int(bit)
+    return magnitude if positive else -magnitude
+
+def native_signed_edges(mle, word, fuel):
+    edges = []
+    while val(mle):
+        if fuel == 0:
+            return None
+        fuel -= 1
+        uread = native_unsigned(word)
+        if uread is None:
+            return None
+        u, word = uread
+        vread = native_unsigned(word)
+        if vread is None:
+            return None
+        v, word = vread
+        wread = read_native_signed_bits(word)
+        if wread is None:
+            return None
+        token, word = wread
+        edges.append((u, v, token))
+        mle = pred_le(mle)
+    return edges, word
+
 def native_graph_bits(word):
     first = native_unsigned(word)
     if first is None:
@@ -47,7 +86,7 @@ def native_graph_bits(word):
     m, rest = second
     if compare_le(length_le(rest), ripple_add(m, ripple_add(m, m))) < 0:
         return None
-    parsed = native_edges(m, rest, len(rest))
+    parsed = native_signed_edges(m, rest, len(rest))
     if parsed is None:
         return None
     edges, rest = parsed
@@ -82,7 +121,7 @@ def binary_first_enabled_events(word, certificate):
     # Source priority: advance, finish, reject.  Halt after <= m+1.
     for _ in range(len(edges) + 1):
         if not edges:
-            return selected if not remaining else None
+            return [observe_signed_token(token) for token in selected] if not remaining else None
         if len(remaining) < 2:
             return None
         u, v, w = edges[0]
