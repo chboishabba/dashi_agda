@@ -102,3 +102,32 @@ This is **NOT** an unconditional all-word Agda kernel receipt or the graph-level
 ### Exact original Python owner for native threshold (attribution correction)
 
 The binary-positive-threshold algorithm is **already implemented** in `scripts/karp21_native_bitword_sparse_verifier.py`: `successor_to_nat_bits` performs the non-unary successor-to-natural predecessor, `parse_graph` rejects zero W, and `verify_native_sparse_graph` already checks `positive_sum >= negative_sum + graph.threshold`. The new Agda `Karp21GammaBinaryNativePositiveThresholdExact` is a proof-oriented *formal transport of that original implementation* into the selected Agda runtime graph, not a novel replacement. The immediate new obligation is a kernel-accepted all-word equality to this original binary operator plus source-owned numeric gamma and an actual tape-cost proof. The independent local Python test checks a transcription, not a re-execution of the repository source through the GitHub connector.
+
+
+## 2026-11-09 shared-operation symmetry / SSP / Monster max-cut
+
+The user's SSP/Monster suggestion concerns **operation reuse and symmetry factorisation**, not simply replacing a signed numeral by a fixed prime tag. The existing `DASHI.Foundations.PrimeLaneUnitActionQuotient` has source-owned p7/C6, p11/C10 and p13/C12 unit-action candidates; `DASHI.Combinatorics.FractranComputationEquivalence` requires step/halt/run preservation for a real FRACTRAN representation, and `DASHI.Combinatorics.SSP15FractranCompression` separates quotient outcomes, lossless residuals and transition congruence. Source ownership remains with those modules, and Monster/VOA operations cannot be promoted to an N21 subroutine without an explicit effective encoding and simulation theorem.
+
+Mathematical caveat: a prime p dividing |G| supplies a subgroup of order p by Cauchy's theorem, **not** necessarily a quotient. The Monster is simple, so it has no nontrivial proper quotient. Its SSP prime lanes and group representations can still supply subgroup actions or reusable invariant operations. The p7/C6 surface uses multiplicative units modulo 7 (order 6), which must not be conflated with the additive C7 group.
+
+### Concrete operation-reuse implementation
+
+New `DASHI.Mathematics.Complexity.Karp21BinaryNativeEndpointPrefixTrieExact` is an executable Agda binary-prefix trie: each original gamma successor bitword follows a shared prefix path; repeated endpoint labels are stored on the terminal node, and conflicting labels are rejected. Source-written only: all-word equivalence to the original `endpointConsistent` and bit-Turing-machine costs still open.
+
+New `scripts/karp21_native_prefix_trie_consistency.py` contains an instrumented Python trie and `verify_original_native_word_via_trie`, reusing the **actual original** `karp21_native_bitword_sparse_verifier.parse_graph`, `add_unsigned`, `compare_unsigned` and the same 2m sparse witness and strictly positive W. No new graph-language encoding. Local independent trie-vs-pairwise enumeration: **37,449** histories over four distinct binary addresses and two labels, plus one 1025-bit address and deliberate conflict, all PASS.
+
+`scripts/check_karp21_native_prefix_trie_consistency.py` adds a repository-integration regression: original-versus-trie-backed native verifier over signed graphs, malformed words, 2^1024 vertices, and certificate variants. It additionally checks `sum(endpoint successor bit lengths) <= length(original graph word)` in the tested parsed graphs. This **repository integration regression was committed but not executed in the current offline environment** (no local repository checkout). The focused referee now invokes it and includes the new Agda trie owner.
+
+Resource insight for this concrete implementation: on one successful word, one traversal of each endpoint successor bit gives at most L trie path edges (and at most L+1 allocated nodes). This bound is a **candidate for formal proof** by pairing each trie edge traversal with its distinct source gamma endpoint token bit. It is not yet an accepted Agda lemma. A heap/pointer machine still must price lookup, node allocation, and tape movement: in a pointer-RAM model a trie can have O(L) structural operations; a naive one-tape encoding of the same trie need not have O(L) head movements. Either yields a polynomial clock after an explicit simulation proof.
+
+Compare to existing original O(m^2) endpoint equality-count owners, rather than deleting them. They remain valid for the old algorithm. The optimized trie is a *different implementation of the same decision problem* and needs a checked universal same-word equivalence before promotion to `PR.InNP`.
+
+### Mandatory next exact Agda lemmas
+1. `trieAdmitIffOriginalHistoryConsistency`: for all original binary endpoint occurrences (including conflicts), prove trie decision equals the original history comparator decision.
+2. `nativeGraphEndpointsConsumeInputBits`: for successful original gamma parsing, sum of lengths of u/v successor bitwords <= |word|; signed weights/count/threshold occupy other positive-length original tokens.
+3. `trieMachineStepsPolynomial`: bind an actual selected memory/tape representation, allocate/update cost and bounded head movement to the trie implementation; do not confuse Python dict lookup with a zero-cost oracle.
+4. `nativeSparseScoreSameOriginalRawSparseScore`: pair original signed gamma values, two-lane ledger and positive W with source-owned signed score, including the malformed-word branches.
+5. `nativeN21SameWordAndClock`: universal decision equality, certificate bound, and full actual machine runtime => original `PR.InNP`.
+6. Only then the original E20 bit compiler, Cook-Levin uniform compiler, remaining Karp edges and memberships.
+
+All new Agda declarations are source written. No compiler receipt is inferred. Agda remains Golden.
