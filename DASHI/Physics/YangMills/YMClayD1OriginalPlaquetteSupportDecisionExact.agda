@@ -18,6 +18,7 @@ module DASHI.Physics.YangMills.YMClayD1OriginalPlaquetteSupportDecisionExact whe
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Sigma using (Σ; _,_)
 
 import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
@@ -178,6 +179,81 @@ originalIncidentPlaquetteSound :
   Torus._∈_ bond (Source.originalFourPositiveBonds p)
 originalIncidentPlaquetteSound {n} bond p =
   incidentFilterSound bond (originalAllPlaquettes n) p
+
+
+------------------------------------------------------------------------
+-- NONVACUOUS ORIGINAL LINK/PLAQUETTE INCIDENCE.
+-- For every native positive link, choose one literal coordinate plane
+-- that contains that link as a positive boundary variable.
+------------------------------------------------------------------------
+
+sourceCoveringPlane : Torus.Axis4 → Plaquette.PositivePlane4
+sourceCoveringPlane Torus.zeroᵢ = Torus.zeroᵢ
+sourceCoveringPlane (Torus.sucᵢ Torus.zeroᵢ) = Torus.zeroᵢ
+sourceCoveringPlane (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)) =
+  Torus.sucᵢ Torus.zeroᵢ
+sourceCoveringPlane
+  (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) =
+  Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)
+
+sourcePlaquetteContainingBond :
+  ∀ {n} → Bond n → Plaquette.PeriodicPlaquette n
+sourcePlaquetteContainingBond (Torus.pair site axis) =
+  Torus.pair site (sourceCoveringPlane axis)
+
+sourceCoveringPlaquetteActuallyContainsBond :
+  ∀ {n} (bond : Bond n) →
+  Torus._∈_ bond
+    (Source.originalFourPositiveBonds
+      (sourcePlaquetteContainingBond bond))
+sourceCoveringPlaquetteActuallyContainsBond
+  (Torus.pair site Torus.zeroᵢ) =
+  Torus.here
+sourceCoveringPlaquetteActuallyContainsBond
+  (Torus.pair site (Torus.sucᵢ Torus.zeroᵢ)) =
+  Torus.there (Torus.there (Torus.there Torus.here))
+sourceCoveringPlaquetteActuallyContainsBond
+  (Torus.pair site
+    (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ))) =
+  Torus.there (Torus.there (Torus.there Torus.here))
+sourceCoveringPlaquetteActuallyContainsBond
+  (Torus.pair site
+    (Torus.sucᵢ (Torus.sucᵢ (Torus.sucᵢ Torus.zeroᵢ)))) =
+  Torus.there (Torus.there (Torus.there Torus.here))
+
+emptyElim : ∀ {A : Set} → Torus.Empty → A
+emptyElim ()
+
+incidentFilterComplete :
+  ∀ {n} (bond : Bond n)
+    (ps : List (Plaquette.PeriodicPlaquette n))
+    (p : Plaquette.PeriodicPlaquette n) →
+  Torus._∈_ p ps →
+  Torus._∈_ bond (Source.originalFourPositiveBonds p) →
+  Torus._∈_ p (originalIncidentPlaquettesFilter bond ps)
+incidentFilterComplete bond [] p () bondMember
+incidentFilterComplete bond (first ∷ rest) p Torus.here bondMember
+  with decideBondIn bond (Source.originalFourPositiveBonds first)
+... | Torus.yes _ = Torus.here
+... | Torus.no absent = emptyElim (absent bondMember)
+incidentFilterComplete bond (first ∷ rest) p
+  (Torus.there inRest) bondMember
+  with decideBondIn bond (Source.originalFourPositiveBonds first)
+... | Torus.yes _ =
+  Torus.there (incidentFilterComplete bond rest p inRest bondMember)
+... | Torus.no _ =
+  incidentFilterComplete bond rest p inRest bondMember
+
+originalEveryPositiveLinkHasIncidentPlaquette :
+  ∀ {n} (bond : Bond n) →
+  Σ (Plaquette.PeriodicPlaquette n)
+    (λ p → Torus._∈_ p (originalIncidentPlaquettes bond))
+originalEveryPositiveLinkHasIncidentPlaquette {n} bond =
+  sourcePlaquetteContainingBond bond ,
+  incidentFilterComplete bond (originalAllPlaquettes n)
+    (sourcePlaquetteContainingBond bond)
+    (originalAllPlaquettesComplete (sourcePlaquetteContainingBond bond))
+    (sourceCoveringPlaquetteActuallyContainsBond bond)
 
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
