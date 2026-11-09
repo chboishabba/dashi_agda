@@ -246,3 +246,34 @@ The dependency-free Python script `scripts/check_hydrogen_fuel_cycle_maxcut.py` 
 **Stop conditions**: A 30% reduction in diesel-only flow is not proof of 30% energy saving, 30% relative engine efficiency gain, a catalytically regenerated H2 species, or a CO2-neutral fuel lifecycle. Even a robust positive input-energy difference is not an emissions, cost, or operational-safety certificate. Never treat the factorial toy values, the exact rational threshold or a patent publication as an instrument observation.
 
 All traditional chemistry, BIPM SI, NIST data and original DASHI theorem/provenance owners retain attribution. This tranche records user direction and ChatGPT source drafting separately. K0 remains unchanged and out of this iteration's priority order.
+
+## Executed external acceptance prototype (distinct from unexecuted repo source)
+
+A dependency-free Python acceptance prototype was generated and executed locally in the active session as `/mnt/data/hydrogen_physical_acceptance.py`; all **8/8** local unit tests passed. It is not represented as a GitHub commit or Agda kernel proof. The prototype accepts CSV rows with one complete five-arm experimental block and calculates:
+- interval-based total externally supplied input (diesel, electricity, imported heat, auxiliary chemical fuel, external hydrogen/synthetic fuel, and beginning/end storage inventory);
+- calibrated-generator/engine *shaft* efficiency from `shaft_work/(diesel+burned_H2+burned_synthetic)`;
+- H2/O2 diesel-use interaction contrast from the power-on, neither-gas baseline;
+- robust net-energy saving only when the highest assisted total is below the lowest baseline total;
+- data rejection for missing control arms, unmatched useful output, unsupported HHV convention, negative meter values, synthetic source IDs, or externally sourced H2 greater than H2 actually burned.
+
+The analyzer deliberately reports `causal_combustion_mechanism_proven=false` and `independent_replication_proven=false` regardless of the arithmetic. A CSV source or calibration **identifier** is not an independently verified instrument receipt.
+
+### New physical steelman source modules
+
+- `HydrogenCombustionIdentifiabilityExact`: two explicit observationally identical fuel-output scenarios with different hydrogen and efficiency contributions; the data alone cannot determine mechanism.
+- `HydrogenProcessFullBoundaryExact`: externally imported *heat* and chemical feed, not only electricity, are included in the overall first-law hydrogen energy bound.
+- `HydrogenOxygenFactorialIdentificationExact`: mathematical interaction contrast and a separate unfilled `CausalAdmission` for randomisation, dose matching, calibration, output matching and replication.
+
+These three sources are committed to PR #1481 and imported into `DASHI.Chemistry.Everything`. The GitHub source's original dependency-free `scripts/check_hydrogen_fuel_cycle_maxcut.py` also now contains 17 declared checks; its full runner has **not** been executed in this context.
+
+### Last outstanding physical leaves (no fabricated closures)
+
+1. Acquire genuine five-arm repeated matched-load block dataset with independent raw-meter asset references and verified calibration certificates; include H2/O2 concentrations, pressure, temperature, elapsed durations, flow composition and gas cylinder/plant inventories.
+2. Distinguish net generator output, gross generator output and **shaft work**. An engine thermal-efficiency claim requires the actual appropriate work numerator and full H2/synthetic-fuel intake denominator.
+3. Recover dose-response and combustion-phasing identification from direct in-cylinder pressure/heat-release data, ignition/injection timing and exhaust/NOx/PM; hydrogen or oxygen causality cannot be inferred from the factorial contrast alone.
+4. Compare diesel + all genuinely external energy + storage inventory changes at matched useful output, with conservative correlated instrument uncertainties if source calibration correlations are known.
+5. Demonstrate actual carbon-to-hydrocarbon product by compound analysis, yields, carbon isotope/material accounting and independent cycle-restart/battery/SOC measurements.
+6. Verify claimed 2026 patent documents and executed patent-specific chain of title; corporate affiliation is not title.
+7. Obtain independent physical replication and scientific/provenance review. K0 remains explicitly not pursued per user instruction.
+
+Attribution remains unchanged: chemistry/thermodynamics from original scientific sources; repository owners credited for prior SI/Atomic369/conservation machinery; user directs integration, ChatGPT authors the new source; vendor/patent claims and independent scientific evidence are separate authority categories.
