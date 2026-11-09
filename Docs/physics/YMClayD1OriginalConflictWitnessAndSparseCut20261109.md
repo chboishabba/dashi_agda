@@ -41,3 +41,23 @@ Independent executable regression `scripts/check_ym_original_star_6_18_19.py` pa
 **Decisive physical leaf unchanged:** source-proved original R445/CMP116 `chargeSumBelowPhysicalRootedShell`, for actual cutoff-uniform sparse frustrated/mixed activities. The mathematical source field is present in `BalabanLiteralTwoWilsonCMP116ConnectingTailExact`; it must be inhabited, not repeated under a different name. Subsequent physical obligations are selected UV/IR continuum convergence, same-family OS reconstruction and spectral decay, observable noncollapse, and all compact simple groups.
 
 **Verification:** GitHub contents write/readback only for the new Agda declaration. Agda 2.9 was not installed in this execution container, so kernel acceptance and a transitive safe import check are not claimed.
+
+
+## 2026-11-09 native list-cardinality continuation (precise non-promotion)
+
+`YMClayD1OriginalGreedy19CountingExact.agda` is source-written and imported by `YMClayOriginalWilsonPhysicalRegression.agda`.
+
+Concrete declarations:
+- `DistinctMarked`: recursive proof that no original positive bond occurs twice in the marked list.
+- `filterOriginalStarFreePreservesDistinct` and `filterOriginalStarFreeKeepsSelectedHeadDistinct`: the literal original conflict-free filter preserves the correct nonduplicate premise.
+- `nineteenTimes`: primitive recursive cardinality coefficient, not a chosen phantom bound.
+- `originalGreedy19PackingFromNativeDegree18`: **actual Agda proof expression** of
+  `length marked ≤ nineteenTimes (length (greedyOriginalDisjointStars marked))`
+  for every distinct original marked-link list, derived inductively using
+  `Data.Nat.Properties.≤-trans`, `+-mono-≤`, and `s≤s`.
+
+The geometry leaf is transparently a field of `OriginalStar18RemovalBound`:
+`originalDistinctStarRemovalBound : length as ≤ 18 + length (filterOriginalStarFree a as)`,
+for `DistinctMarked (a ∷ as)`. No instance is manufactured. The degree proof must use the **actual** plaquette-star incidence, not a generic graph with degree chosen as a parameter.
+
+Status split: greedy arithmetic and duplicate preservation **source-written, kernel verification pending**; literal degree-18 removal field **uninhabited**. All physical D1, E1, D2, N1, G1 analytic obligations remain open; no Yang--Mills Clay closure claimed.
