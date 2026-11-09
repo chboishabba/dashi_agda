@@ -86,3 +86,11 @@ The original Commonwealth **2012 *How to use the Offsets Assessment Guide***, se
 
 The historical January 2026 cap-1/cap-2/cap-3 calculations and joint-gain/confidence thresholds are retained as **counterfactual sensitivity tests only**. The original 2012 guide expressly permits considering >1-point changes where warranted. The highest-value original evidentiary cut is **scientifically justified same-time, same-species assessment** of future *with* and *without* quality, including stocking rates, landscape context, ecological function, 75% model confidence, restoration delivery track record, and the exact accepted 15 October 2026 OAMP revision. Source: https://www.dcceew.gov.au/sites/default/files/documents/offsets-how-use.pdf (sections 2C and 2G). No finding of fraud, statutory breach or actual habitat equivalence is inferred.
 
+
+
+## 9 November exact original six-unit Pareto receipt
+
+The 14-row historical January PD OAG can be prioritised without an invented scientific discount. The **six** above-one-point Koala gains and their respective *percentage points of total modeled compensation* are: Esk AU2 **7.20621**; Avonvale AU1 **11.89507**, AU2 **4.88993**, AU4 **13.96203**; MWW AU1 **16.34265**, AU2 **33.68259**. Sum **87.97847818** points, source weighted numerator **820425**. Premium **beyond one point in those same six rows** = exact weight **556725** = **59.70054333 percentage points**. The remaining eight OAG AU credit coefficient is **189925**. Proofs are finite original source arithmetic: `sixExceptionalReportedExact`, `sixExceptionalPremiumExact`, `originalVsOnePointCounterfactual`, `sixExceptionalVsOtherRows`, `mwwAU1AU2Premium` in the existing golden source owner; the same existing Python checker has per-AU exact-Fraction data and assertion gates. No kernel acceptance claimed before Agda 2.9 run.
+
+Scientific evidence is **not** replaced by an arbitrary one-point cap. Rank highest by absolute original credited output: MWW AU2, MWW AU1, Avonvale AU4, Avonvale AU1, Esk AU2, Avonvale AU2. Request exact final October AU source, contemporaneous original baseline data, confidence method, empirical growth/fire/drought/koala viability, full original with-versus-without counterfactual and applicable impact-site like-for-like comparison, with independent QUT/QCC original ecological objections preserved.
+
