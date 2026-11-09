@@ -16,6 +16,7 @@ module DASHI.Cognition.CCDCOEP3SameOperationIndexedAdmissionExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 
 data OriginalCase : Set where
   gcc1993 : OriginalCase
@@ -331,8 +332,10 @@ strongDemoRefinesWeakDemo =
 -- backed by six independent original-source receipts. This *stronger*
 -- consumer demands explicit receipt identities, same-original-case
 -- ownership, and distinct receipt keys at unequal evidence stages.
--- Receipt identities and the source-owner map are supplied by an
--- external reviewer; this module does not authenticate either one.
+-- Observer separation is reused from the Golden owner
+-- DASHI.Core.ObserverRefinementLatticeExact; it is not redefined
+-- as a fresh singleton/no-collapse principle here. Receipt identities
+-- and the source-owner map still require external authentication.
 ------------------------------------------------------------------------
 
 record SourceBoundAdmission
@@ -346,10 +349,11 @@ record SourceBoundAdmission
     referenceBelongsToCase :
       (stage : EvidenceStage) →
       sourceCase (receiptReference stage) ≡ c
-    distinctStagesDistinctReceipts :
-      (first second : EvidenceStage) →
-      (first ≡ second → ⊥) →
-      receiptReference first ≡ receiptReference second → ⊥
+    -- Canonical DASHI observer separation, rather than an ad-hoc
+    -- per-pair inequality field. Equating receipt references would
+    -- force equality of the corresponding evidence-stage coordinates.
+    referenceSeparating :
+      Observer.Separating receiptReference
 
 sourceBoundImpliesStageAdmission :
   (E : OriginalCase → EvidenceStage → Set)
@@ -393,8 +397,9 @@ exposureAndIntentMustHaveDifferentReceipt :
   SourceBoundAdmission.receiptReference admitted independentlySourcedIntent →
   ⊥
 exposureAndIntentMustHaveDifferentReceipt E Reference sourceCase c admitted =
-  SourceBoundAdmission.distinctStagesDistinctReceipts admitted
-    recipientExposure independentlySourcedIntent exposureIsNotIntent
+  exposureIsNotIntent
+    (SourceBoundAdmission.referenceSeparating admitted
+      recipientExposure independentlySourcedIntent)
 
 interventionAndCausalMustHaveDifferentReceipt :
   (E : OriginalCase → EvidenceStage → Set)
@@ -406,8 +411,9 @@ interventionAndCausalMustHaveDifferentReceipt :
   SourceBoundAdmission.receiptReference admitted causalDiscrimination →
   ⊥
 interventionAndCausalMustHaveDifferentReceipt E Reference sourceCase c admitted =
-  SourceBoundAdmission.distinctStagesDistinctReceipts admitted
-    originalIntervention causalDiscrimination sourceTextIsNotCausalEffect
+  sourceTextIsNotCausalEffect
+    (SourceBoundAdmission.referenceSeparating admitted
+      originalIntervention causalDiscrimination)
 
 selectedGCCCannotBeSourceBoundAdmitted :
   (Reference : Set)
@@ -434,7 +440,7 @@ selectedAPICannotBeSourceBoundAdmitted Reference sourceCase =
 -- remain unpaid empirical obligations.
 
 ------------------------------------------------------------------------
--- ONE-RECEIPT FINITE COUNTERMODEL
+-- ONE-RECEIPT FINITE REGRESSION OF EXISTING OBSERVER COLLISION
 --
 -- Even if the caller chooses a trivially inhabited E and a sourceCase
 -- map, a singleton receipt-reference carrier cannot discharge a
@@ -454,11 +460,15 @@ oneReceiptCannotSupportSixGates :
   (c : OriginalCase) →
   SourceBoundAdmission E OneReceipt sourceCase c → ⊥
 oneReceiptCannotSupportSixGates E sourceCase c admitted =
-  exposureAndIntentMustHaveDifferentReceipt
-    E OneReceipt sourceCase c admitted
-    (oneReceiptEquality
-      (SourceBoundAdmission.receiptReference admitted recipientExposure)
-      (SourceBoundAdmission.receiptReference admitted independentlySourcedIntent))
+  Observer.collisionBlocksSeparation
+    (Observer.observerCollision
+      recipientExposure
+      independentlySourcedIntent
+      (oneReceiptEquality
+        (SourceBoundAdmission.receiptReference admitted recipientExposure)
+        (SourceBoundAdmission.receiptReference admitted independentlySourcedIntent))
+      exposureIsNotIntent)
+    (SourceBoundAdmission.referenceSeparating admitted)
 
 -- In particular the weak fixture can fill AdmitsOneOriginalCase, but
 -- cannot fill SourceBoundAdmission using a singleton source reference.
