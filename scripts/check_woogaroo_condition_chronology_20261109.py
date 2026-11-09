@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Conditional EPBC 2019/8575 C24/C25 timeline evidence join.
 
-Consumes a manifest of *independently authenticated* dates. It does NOT
-verify that authentication; unverified or missing facts remain unresolved.
+Consumes dates asserted in a manifest, requiring actual local source bytes and
+matching SHA-256. It does NOT verify the document issuer, legal effectiveness,
+or whether the claimed date is correctly extracted from the source.
 Temporal order is not a full legal compliance determination. No network.
 """
 import argparse
@@ -88,8 +89,9 @@ def audit(data, root=None):
         'C25_does_not_by_itself_require_MWW_before_phase_one': True,
         'chronology_is_not_complete_legal_compliance_proof': True,
         'original_documents_authenticated_by_this_script': False,
-        'source_bytes_sha256_verified_before_comparison': True,
+        'source_byte_verification_required_for_date_comparison': True,
         'manifest_event_dates_independently_verified': False,
+        'same_day_effective_order_not_inferred': True,
         'condition_breach_adjudicated': False,
     }
 
