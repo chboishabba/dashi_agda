@@ -157,3 +157,37 @@ def test_grounded_poisson_sharp_inverse_stability():
         x=np.linalg.solve(2.0*L,rhs)
         assert np.linalg.norm(x) <= np.linalg.norm(rhs)/6 + 1e-12
         assert np.max(np.abs(2.0*L@x-rhs)) < 1e-11
+
+
+def test_native_sg_and_reaction_entropy_factorizations():
+    from reactive_pnp_369 import (
+        closed_pnp_entropy_factorization, poisson, INDEX)
+    m=model()
+    c=np.ones((27,3))
+    c[:,2]=0.7
+    c[INDEX[(-1,0,0)],0]+=0.6
+    c[INDEX[(1,0,0)],1]+=0.3
+    ph=poisson(c,m)
+    report=closed_pnp_entropy_factorization(c,ph,m)
+    assert report["bond_terms"] == 54
+    assert report["reaction_terms"] == 27
+    assert report["transport_power"] <= 1e-9
+    assert report["reaction_power"] <= 1e-9
+    assert report["finite_numerical_factorization_checked"]
+    assert not report["general_implicit_positive_root_existence_proved"]
+
+
+def test_entropy_factorization_rejects_invalid_activity():
+    from reactive_pnp_369 import closed_pnp_entropy_factorization, poisson
+    m=model()
+    c=np.ones((27,3))
+    ph=poisson(c,m)
+    for invalid in (0.0,-1.0,float("nan"),float("inf")):
+        bad=c.copy()
+        bad[0,0]=invalid
+        with pytest.raises(ValueError):
+            closed_pnp_entropy_factorization(bad,ph,m)
+    badph=ph.copy()
+    badph[0]=float("nan")
+    with pytest.raises(ValueError):
+        closed_pnp_entropy_factorization(c,badph,m)
