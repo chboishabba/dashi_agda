@@ -80,12 +80,12 @@ tetrationStepFromInverseAbel :
 tetrationStepFromInverseAbel C h =
   trans
     (cong (InverseAbelChart.tetration C)
-      (symLocal (InverseAbelChart.abelStep C
-        (InverseAbelChart.tetration C h))))
+      (cong (InverseAbelChart.successor C)
+        (symLocal (InverseAbelChart.abelTetration C h))))
     (trans
       (cong (InverseAbelChart.tetration C)
-        (cong (InverseAbelChart.successor C)
-          (symLocal (InverseAbelChart.abelTetration C h))))
+        (symLocal (InverseAbelChart.abelStep C
+          (InverseAbelChart.tetration C h))))
       (InverseAbelChart.tetrationAbel C
         (InverseAbelChart.exponential C
           (InverseAbelChart.tetration C h))))
