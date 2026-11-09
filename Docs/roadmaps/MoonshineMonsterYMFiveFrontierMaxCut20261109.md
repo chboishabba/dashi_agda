@@ -131,3 +131,27 @@ Status at authoring: the universal 80-relator **setoid group and conditional sel
 [Original SU(2) Wilson one-link coherent-staple tail (9 November)](https://github.com/chboishabba/dashi_agda/blob/research/ym-voyager2026-completeness-crosswalk-20261101/Docs/physics/YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md) derives an original one-link *conditional* bound `P(t(UV)≤0 | staples) ≤ 3 exp(-βR/2)` for staple resultant norm `R≤6`, and the genuine pointwise action penalty `D₆ ≥ 6-R`. It separately exhibits a bare-link ultraviolet Dobrushin limitation; that does **not** rule out blocked gauge-invariant CMP116 clustering. The missing D1.03 original full-Gibbs source is now sharp: prove a uniform frustrated-staple probability bound **and** distance-dependent connecting polymer/bridge entropy estimate for the full Wilson covariance. A conditional single-link tail is not this result.
 
 This source audit was added after the original five-frontier inventory and does not change the open Clay physical status.
+
+
+## 9 November 2026 — attached YM-worker reconciliation and new original-action bound
+
+The user's attached worker audit is incorporated with the correct **minimal Clay endpoint**: **C1/E1** interacting 4D continuum QFT with its axioms; **C2/N1** genuine nontrivial local observable; **C3/D2** actual same-H full nonvacuum spectral gap; **C4/G1** all externally selected compact simple gauge groups; **V** trusted proof verification. **D1/B1** is a *proof-strategy intermediate* for our R320/R333/CMP116 clustering route, not a fifth official Clay axiom. The detailed 23 E1/D1/D2/N1/G1 proof-producer list remains a source-specific work inventory rather than 23 official requirements. No observer Hilbert/OS, KK, Lorentz 3+1 or Bishop transfer requirement is inserted into Clay.
+
+**New original SU(2) same-measure analytic lemma (PR #1444):** for `0<r<6`, the original six-staple norm `R` and local six-plaquette Wilson deficit `D₆` satisfy `1_{R<r}≤D₆/(6-r)`, hence `P_original(R<r)≤E_original[D₆]/(6-r)`. Combining the already proved conditional Haar tail gives
+
+```
+P_original(t(UV)≤0)
+  ≤ E_original[D₆]/(6-r) + 3 exp(−βr/2).
+```
+
+With periodic translation invariance and `p_L(β)=(1/N_p)log Z_L(β)` for the `exp(β∑_p t_p)` convention, `E_original[D₆]=6(1−p'_L(β))`, reducing *local frustration* to a genuine original plaquette/pressure slope. Original source proof: [SU(2) action derivation](https://github.com/chboishabba/dashi_agda/blob/research/ym-voyager2026-completeness-crosswalk-20261101/Docs/physics/YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md). Its exact-rational regression `scripts/check_ym_su2_original_staple_frustration_action_20261109.py` passed **187,500** finite rational checks independently. This is a legitimate **finite local analytic reduction**, not the unproved cutoff/volume-uniform **distance-dependent full-Wilson connecting-polymer covariance bound**. A favorable `p'_L` or localized polymer suppression estimate is still missing.
+
+### Cross-pollination without false dependencies
+
+1. **Monster M2:** original 80 relators satisfied in the selected group gives a sound quotient homomorphism, **not** selected-kernel reflection. Same logical pattern as a real original-Wilson single-link tail giving a sound local reduction, **not** full spatial covariance decay.
+2. **Moonshine V0.4/V1:** existing original FF/FT and four-sector pair mode adapters give literal same-object syntax, but TF/TT genuine operator identities and all-mode preservation need their own mathematical source. Do not substitute finite Griess/grade data.
+3. **YM D2:** the attached worker's invisible-sector counterexample prevents inferring the full reconstructed-H gap from decay on a selected non-dense observable family. D2.03 source-specific spectral detection is essential to our chosen route.
+4. **Observer/OS/KK #1460:** legitimate independent HIL07/HIL08/KK questions; not Clay prerequisites.
+5. **Bishop K04d/K05 #104:** legitimate separate infinite-series and Agda carrier/Lean acceptance questions; no physical Yang–Mills dependency.
+
+The terminal open results **remain** M2-01 selected-kernel reflection, V0.4 actual TF/TT and mixed Jacobi/locality, V1 all-mode original FLM equivalence, E1 actual interacting `R^4` limit, D1 optional original full-Wilson long-distance decay route, D2 full same-H spectral gap, N1 noncollapse, and G1 all compact simple groups. The source-readback and exact-rational regression do not certify those mathematical terminals.
