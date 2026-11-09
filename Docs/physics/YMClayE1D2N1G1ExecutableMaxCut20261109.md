@@ -161,3 +161,20 @@ The direct source-value evaluator `YMClayE1A3OriginalSignedPathValueEvaluatorExa
 This pays a concrete *same-lattice word-index* projective naturality lemma; no additional abstract projective axioms, fake measure, or complete-field-as-coordinate trick.
 
 **Do not promote as R566 probability consistency:** the group-valued sample forgetting diagram is not equality of `μ_n` original Wilson Gibbs marginals at distinct lattice cutoffs. The remaining P0 E1 cut is a selected common continuum projective carrier with physical-scale refinement maps and source-selected original expectation comparisons plus continuity-at-empty. The existing R538/R539/R534 and `YangMillsLiteralProjectiveCylinderSourceExact` compilers consume those source facts. This pass produced GitHub code only; no Agda binary or kernel acceptance available. 
+
+
+## 2026-11-09 E1/A3 normalized original Gibbs expectation weld
+
+New: `DASHI/Physics/YangMills/YMClayE1A3OriginalFiniteValueExpectationWeldExact.agda`, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+This is the first source-written *measure-level* E1/A3 finite-coordinate result, not another abstract cylinder record. It reuses `YMClayOriginalVariableWilsonCovarianceSourceExact.originalWilsonExpectationExtensional`, itself proved from the genuine source one-link product Haar integral congruence, and `YMClayE1A3OriginalSignedPathValueEvaluatorExact.originalWilsonWordDirectFiniteEvaluation`:
+
+- `directFiniteWilsonWord`: real-valued Wilson word evaluated entirely through the sampled source positive-link group values and original signed group inverse/holonomy operations;
+- `originalDirectFiniteValueExpectationIsOriginalWilson`: for **every** cutoff, original word and finite-value evaluator have equal expectations under the **same actual normalized Wilson Gibbs/Haar measure**;
+- `originalDirectFiniteValueExpectationIsOriginalE1Cylinder`: the expectation is precisely the actually selected E1 original cutoff-dependent plaquette-word cylinder expectation, not an alternative probability law;
+- `originalPrefixFromExtendedFiniteSample` and `originalPrefixFromExtendedSampleEqualsDirect`: evaluate a selected word prefix by forgetting the suffix from a longer actual original sampled-value word; the evaluation is pointwise equal to direct prefix evaluation, via the native prefix commuting proof;
+- `originalPrefixFromExtendedSampleExpectationIsWilson`: apply the actual source Wilson expectation extensionality to establish equality of normalized Gibbs expectations of those two fixed-cutoff representations.
+
+**Sharp maximal cut after this:** the normalized *same-cutoff*, same-Gibbs, same-word finite-coordinate and prefix naturality calculation is now source-written. It does NOT imply a change-of-cutoff consistency theorem `E_{mu_upper}[f∘pi_{upper→lower}] = E_{mu_lower}[f]`. The actual Wilson RG blocking/pushforward and its physical scaling must discharge that statement, or one must prove convergence via the alternative marginal compactness/subsequence route with a selected continuum-limit identification. R566 A3 event consistency/continuity-at-empty, R576 B1 actual connecting activities, R577 B2 physical transfer, R563 H6 noncollapse and R571 G1 group physics remain live.
+
+**Verification:** committed and read back from GitHub; no Agda 2.9 typecheck has been run. Neither same-cutoff source-written lemma nor roadmap is a Clay terminal proof.
