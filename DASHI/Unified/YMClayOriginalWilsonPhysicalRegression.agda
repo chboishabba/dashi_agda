@@ -60,3 +60,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalFullWilsonSmallLargeFieldExact as
 -- E1.02 / D1.02: all finite gauge-invariant plaquette words on actual
 -- changing-cutoff Wilson Gibbs measure; same original real two-J jet.
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as VariablePlaquetteWords
+
+-- D1 constructive source conflict: actual shared native plaquette witness.
+import DASHI.Physics.YangMills.YMClayD1OriginalConflictPlaquetteWitnessExact as D1NativeConflictWitness
