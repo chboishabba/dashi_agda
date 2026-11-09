@@ -52,3 +52,35 @@ def prefix_trie_consistent(occurrences):
         if not trie.admit(key, label):
             return False, trie.cost
     return True, trie.cost
+
+
+def verify_original_native_word_via_trie(graph_word, certificate):
+    """Original native gamma graph parser, same 2m certificate, trie endpoint guard.
+
+    This adapter reuses the already-authoritative Python parser and arithmetic.
+    No alternative graph grammar or numerical bigint decoding is introduced.
+    """
+    from karp21_native_bitword_sparse_verifier import (
+        InvalidWord, add_unsigned, compare_unsigned, parse_graph, strict_bits,
+    )
+    try:
+        graph = parse_graph(graph_word)
+        bits = strict_bits(certificate)
+        if len(bits) != 2 * len(graph.edges):
+            return False
+        history = EndpointTrie()
+        positive_sum, negative_sum = (), ()
+        for i, (u, v, positive, weight) in enumerate(graph.edges):
+            a, b = bits[2 * i], bits[2 * i + 1]
+            if not history.admit(u, a) or not history.admit(v, b):
+                return False
+            if a != b:
+                if positive:
+                    positive_sum = add_unsigned(positive_sum, weight)
+                else:
+                    negative_sum = add_unsigned(negative_sum, weight)
+        return compare_unsigned(
+            positive_sum, add_unsigned(negative_sum, graph.threshold)
+        ) >= 0
+    except (InvalidWord, ValueError, TypeError):
+        return False
