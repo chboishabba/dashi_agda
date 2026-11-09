@@ -1,5 +1,34 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## Canonical live P0–P3 max-cut · 2026-11-09 · HEAD before this update 0edb692863ea4a879cc9476ee372b1558034f223
+
+**Authority:** the exact original Bishop functions and their setoid equalities, not a formal recurrence without analytic evaluation, a freely chosen `Set` proposition, or a classical Lean result presumed to be an Agda proof. **Acceptance:** source-written ≠ Agda 2.9 kernel accepted. This section supersedes older progress summaries below when they conflict.
+
+| Phase | Direct, typed terminal target | Reuse already paid | Exact remaining original proof | Deliverable |
+| --- | --- | --- | --- | --- |
+| V0 | exact-head `parallel_checker` | all three TOE imports and Bishop source owners | run pinned Agda 2.9 and resolve errors in the current source closure; no workflow receipt yet | compiler-checkable baseline |
+| A/P0 LOG | `BishopK04dNatLogFromOriginalGapExact.OriginalBishopNegativeLogExponentialGap`: for every original `0<x<1`, `Exp.bishopExp (R.- (Log.sourceNegativeLogValue x …)) ≃ 1-x` | original log converges, finite derivative, LOG compact-uniform value tails, exponential Cauchy product, source-written exp factor derivative; `BishopNegativeLogExpFormalRecurrenceUniquenessExact` | **one original infinite-series composition/evaluation theorem**: identify coefficients of the *actual nested* original exp/log and justify analytic rearrangement/limit; alternatively original log derivative-limit interchange plus same-ODE uniqueness, but **not both** by default | original LOG theorem and `sourceCanonicalNatLogAllIndicesExpInverse` |
+| C1/P2 local ζ | `BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog.originalZetaAboveTwo` and `originalZetaIsSourceDirichletLimit` | literal `expC(-s L_n)`, `BishopRiemannComplexAboveTwoBaselExact`, `BishopDirichletUniformBaselTailsExact`, region-uniform error | instantiate the existing `FromOriginalNegativeLog` module with **P0** and typecheck | unconditional original source ζ on `Re(s)>2` |
+| B/P1 Cayley (parallel) | `OriginalAtanFiveCayleyEvaluation inputs` and `OriginalAtan239CayleyEvaluation inputs` in `BishopMachinTwoPointCayleyCompositionExact` | signed-factorial product, original atan series and finite derivatives, formal Cayley recurrence, PR #1466 native complex/trig ABI, existing first-zero compiler | **one** actual original analytic `expC(2i atan_B(t)) = (1+it)/(1-it)` on the half-ball, specialized at `1/5` and `1/239`; select direct power-series or ODE, not both | 2 terminal witnesses and `originalMachinFirstPositiveSineZeroFromTwoAtanCayleyValues` |
+| C2/P2 global identification | `BishopRiemannDirichletBaselSameObjectExact.OriginalHalfPlaneDirichletAgreement` at the selected actual original half-plane zeta | native source ζ, unique limit, region uniformity | independently specify the *actual* `ZetaHalfPlaneLayer.zetaHalfPlane` meaning and prove real/imag value equalities, not an arbitrary `Set` inhabitant; continuation if target exceeds `Re(s)>2` | original selected zeta same-object weld |
+| D/P3 completed ξ | `BishopOriginalCompletedXiFactorContinuityCompilerExact.OnOriginalXiChart.XiIsOriginalFactorProduct` | Bishop complex multiplication, native chart continuity compiler, RH G2 Gamma/Mellin *test/action interfaces* | construct original complex `Gamma(s/2)` with convergence/normalization; actual `π^{-s/2}` prefactor; genuine zeta analytic continuation; selected xi source equality; factor continuity. Existing `GammaMellinLayer.gamma` is a field, **not** the construction. | source Gamma/prefactor/xi and actual completed factor equality |
+| V1 | exact-head `parallel_checker` + three TOE roots | current Agda owners | record successful exact SHA, Agda 2.9 version, all terminal owner receipts | kernel acceptance; never infer from `--safe` headers |
+
+**Implementation principle / fastest cut:** A → C1 is the highest shared return; run B independently; do C2 and then D on actual source carriers. Do not implement new finite derivatives, Basel sums, generic continuity, ad hoc atan/pi definitions or abstract gamma authorities. Lean `dashi_lean4` PR #104 is a mathematical donor, not same-object Agda evidence. Agda #1466 supplies native complex-series/trig ABI; RH #1419/#1434 supply pole-quotient/route infrastructure but **not** native Gamma or completed xi analytic values.
+
+### Exact remaining lemma graph (proposed names where no original declaration exists)
+
+`originalLogExpCompositionCoefficients` → `originalLogExpCompositionAbsoluteConvergence` → `originalLogExpCompositionLimitEquality` → **existing** `OriginalBishopNegativeLogExponentialGap` → **existing** `sourceCanonicalNatLogAllIndicesExpInverse` → **existing** `sourceRegionBaselFromOneNativeLogIdentity` → **existing** `FromOriginalNegativeLog.originalZetaAboveTwo` and `originalZetaIsSourceDirichletLimit`.
+
+In parallel, `originalAtanCayleyAnalyticSeriesIdentity` (or *instead* `originalAtanCayleyODEUniqueness`) → **existing** `OriginalAtanFiveCayleyEvaluation` + `OriginalAtan239CayleyEvaluation` → **existing** `originalMachinFirstPositiveSineZeroFromTwoAtanCayleyValues`.
+
+P2 external value bridge `originalZetaHalfPlaneDirichletValueEquality` → **existing** `OriginalHalfPlaneDirichletAgreement` → already existing chart continuity compiler. P3 `originalGammaMellinIntegralConverges` → `originalGammaFactorValue`; together with `originalComplexPiPowerValue` and analytic continuation → **existing** `XiIsOriginalFactorProduct` → **existing** `originalXiContinuityFromActualFactors`.
+
+**Negative tests / non-promotion:** `RiemannOpaqueZetaHalfPlaneCountermodelExact` demonstrates the free `Set`-valued zeta and completed-definition interfaces cannot imply same-value equality. No automatic transport from Lean/classical Riemann to the original Bishop `Real._≃_`. P3 does not become solved by defining `xi := prefactor * gamma * zeta` unless this is identified with the original selected xi function and the required analytic continuation is established.
+
+---
+
+
 ## Objective and evidence boundary
 
 Close the **original** Bishop negative-log / Round11 signed-factorial / Riemann Dirichlet / Machin-pi obligations without introducing a second carrier, theorem-shaped `Set` placeholders, a classical proof imported without semantic equality, postulates, or fabricated kernel receipts.
