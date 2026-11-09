@@ -11,6 +11,7 @@ import DASHI.Core.BinaryInteractionNonseparabilityExact as Interaction
 import DASHI.Cognition.CCDCOEP3TypedIntersectionalAxisExact as Axis
 import DASHI.Cognition.CCDCOEP3SituatedHistoryPNFExact as History
 import DASHI.Core.DiscriminatorSynthesisExact as Discriminator
+import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Cognition.PNF.EventAlgebra as PNF
 import DASHI.Foundations.TernaryEndomorphismConjugacyExact as Perm
 import DASHI.Foundations.TernaryPermutationS3LawsExact as S3
@@ -692,7 +693,7 @@ genericEvidenceReceiptCollisionCannotPass :
   (sourceCase : Reference → SameOperation.OriginalCase)
   (c : SameOperation.OriginalCase) →
   (admitted : SameOperation.SourceBoundAdmission E Reference sourceCase c) →
-  SameOperation.Observer.ObserverCollision
+  Observer.ObserverCollision
     (SameOperation.SourceBoundAdmission.receiptReference admitted) → ⊥
 genericEvidenceReceiptCollisionCannotPass =
   SameOperation.sourceBoundReceiptCollisionImpossible
