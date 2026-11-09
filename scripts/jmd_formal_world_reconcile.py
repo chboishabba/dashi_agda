@@ -109,6 +109,17 @@ def init(conn: sqlite3.Connection) -> None:
       changed_symbol TEXT NOT NULL, affected_symbol TEXT NOT NULL,
       PRIMARY KEY(changed_symbol,affected_symbol)
     );
+    CREATE TABLE IF NOT EXISTS jmd_world_native_gaps (
+      gap_key TEXT PRIMARY KEY, owner_symbol TEXT NOT NULL,
+      required_symbol TEXT NOT NULL, requirement_class TEXT NOT NULL,
+      requirement_kind TEXT NOT NULL, original_source TEXT NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS jmd_world_gap_candidates (
+      gap_key TEXT NOT NULL REFERENCES jmd_world_native_gaps(gap_key) ON DELETE CASCADE,
+      source_key TEXT NOT NULL REFERENCES jmd_world_sources(source_key) ON DELETE CASCADE,
+      overlap INTEGER NOT NULL, status TEXT NOT NULL CHECK(status='candidate-only'),
+      PRIMARY KEY(gap_key,source_key)
+    );
     """)
     conn.execute("PRAGMA foreign_keys=ON")
 
@@ -339,6 +350,58 @@ def changed_closure(conn, changed: set[str]) -> int:
     return n
 
 
+
+
+def ingest_native_gaps(conn, *, max_gaps: int = 200, max_candidates: int = 6) -> int:
+    """Read existing formal requirement debts; never assert they're all open.
+
+    Requirement rows can be historical or satisfied: AO classification remains
+    authoritative. This joins them as discovery leads, not as payable goals.
+    """
+    if max_gaps < 0:
+        raise ValueError("Negative gap limit")
+    tables = {r[0] for r in conn.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    if "repo_requirements" not in tables:
+        return 0
+    rows = conn.execute("""SELECT symbol_id,required_symbol,requirement_class,
+                                  requirement_kind,source FROM repo_requirements
+                           ORDER BY symbol_id,required_symbol LIMIT ?""",
+                        (max_gaps,)).fetchall()
+    for owner,required,cls,kind,source in rows:
+        key=digest("\x1f".join((owner,required,cls,kind,source)))
+        conn.execute("""INSERT OR REPLACE INTO jmd_world_native_gaps
+        VALUES(?,?,?,?,?,?)""",(key,owner,required,cls,kind,source))
+    source_rows=conn.execute("""SELECT source_key,declaration,formal_type
+      FROM jmd_world_sources ORDER BY source_key""").fetchall()
+    conn.execute("DELETE FROM jmd_world_gap_candidates")
+    for key,required in conn.execute("""SELECT gap_key,required_symbol
+       FROM jmd_world_native_gaps ORDER BY gap_key""").fetchall():
+        tokens=words(required)
+        scores=[]
+        for src,decl,typ in source_rows:
+            n=len(tokens & words(decl+" "+typ))
+            if n: scores.append((-n,src))
+        for minus,src in sorted(scores)[:max_candidates]:
+            conn.execute("""INSERT INTO jmd_world_gap_candidates
+                 VALUES(?,?,?,'candidate-only')""",(key,src,-minus))
+    return len(rows)
+
+
+def worlded_goal_proofs(conn):
+    """Group distinct pinned proofs of ONE accepted Lean goal proposition.
+
+    Proof-source diversity is retained. Never equate their original theorem
+    types, nor create cross-language equivalence from these groups.
+    """
+    return conn.execute("""SELECT a.goal_id,count(DISTINCT a.source_key) AS donors
+       FROM jmd_world_attempts a
+       JOIN jmd_world_goals g ON g.goal_id=a.goal_id
+       JOIN jmd_world_sources s ON s.source_key=a.source_key
+       WHERE a.proof_accepted=1 AND a.goal_fingerprint=g.fingerprint
+         AND a.statement_hash=s.statement_hash
+         AND a.source_revision=s.source_commit
+       GROUP BY a.goal_id HAVING donors>=2 ORDER BY a.goal_id""").fetchall()
+
 def report(conn) -> dict:
     result = {"schema":"jmd-formal-world-v1","llm_required":False,
               "external_publication":False,"proof_authority":"Lean/Agda kernels only"}
@@ -348,9 +411,12 @@ def report(conn) -> dict:
         "candidate_edges":"SELECT count(*) FROM jmd_world_candidates",
         "external_coordinates":"SELECT count(*) FROM jmd_world_external_coordinates",
         "executed_kernel_passes":"SELECT count(*) FROM jmd_world_attempts a JOIN jmd_world_goals g ON g.goal_id=a.goal_id JOIN jmd_world_sources s ON s.source_key=a.source_key WHERE a.proof_accepted=1 AND a.goal_fingerprint=g.fingerprint AND a.statement_hash=s.statement_hash AND a.source_revision=s.source_commit",
-        "affected_nodes":"SELECT count(*) FROM jmd_world_affected"
+        "affected_nodes":"SELECT count(*) FROM jmd_world_affected",
+        "native_requirement_leads":"SELECT count(*) FROM jmd_world_native_gaps",
+        "native_gap_candidate_edges":"SELECT count(*) FROM jmd_world_gap_candidates"
     }.items():
         result[key] = conn.execute(sql).fetchone()[0]
+    result["distinct_proof_goal_groups"] = len(worlded_goal_proofs(conn))
     result["cross_prover_proofs_asserted"] = 0
     result["unverified_candidates_promoted"] = 0
     return result
@@ -361,7 +427,8 @@ def main(argv=None):
     p.add_argument("--database",type=Path,default=Path(".dashi/repository.sqlite3"))
     p.add_argument("--global-csv",type=Path,required=True)
     p.add_argument("--external-declarations",type=Path)
-    p.add_argument("--goals",type=Path,required=True)
+    p.add_argument("--goals",type=Path,help="Optional kernel-goal shortlist; native gaps are read from repo_requirements")
+    p.add_argument("--native-gap-limit",type=int,default=200)
     p.add_argument("--external-coordinates",type=Path)
     p.add_argument("--agda-revision",help="Pinned Agda repository HEAD (40 hex)")
     p.add_argument("--max-agda-rows",type=int,default=0)
@@ -371,7 +438,7 @@ def main(argv=None):
     args=p.parse_args(argv)
     if not args.database.is_file():
         p.error("Missing canonical DB; run dashi-repo index first")
-    if args.max_candidates<1 or args.max_probes<0 or args.max_agda_rows<0:
+    if args.max_candidates<1 or args.max_probes<0 or args.max_agda_rows<0 or args.native_gap_limit<0:
         p.error("Limits must be non-negative; candidates at least one")
     admitted=read_ids(args.global_csv)
     conn=sqlite3.connect(args.database)
@@ -383,9 +450,13 @@ def main(argv=None):
             if args.external_declarations:
                 import_external(conn,args.external_declarations,admitted)
             import_coordinates(conn,args.external_coordinates)
-            _,changed=upsert_goals(conn,args.goals)
-            candidates(conn,limit=args.max_candidates)
-            changed_closure(conn,changed)
+            changed=set()
+            if args.goals:
+                _,changed=upsert_goals(conn,args.goals)
+                candidates(conn,limit=args.max_candidates)
+                changed_closure(conn,changed)
+            ingest_native_gaps(conn,max_gaps=args.native_gap_limit,
+                               max_candidates=args.max_candidates)
         probe=None
         if args.verify_lean_root:
             with conn:
