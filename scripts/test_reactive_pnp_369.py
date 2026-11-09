@@ -234,3 +234,29 @@ def test_local_contraction_rejects_nonpositive_or_nonfinite_initial_state():
         bad=c.copy();bad[0,0]=value
         with pytest.raises(ValueError):
             local_positive_implicit_contraction_bounds(bad,m)
+
+
+def test_global_brouwer_positive_root_source_weighted_simplex():
+    from reactive_pnp_369 import global_positive_implicit_brouwer_bounds
+    m=model()  # synthetic A+ + B- <-> C, atom weights 1+1=2
+    c0=np.ones((27,3))
+    c0[:,2]=0.5
+    for dt in (0.001,0.1,3.0,100.0):
+        report=global_positive_implicit_brouwer_bounds(c0,m,[1,1,2],dt)
+        assert report["global_species_upper_bound"]>=c0.max()
+        assert report["positive_root_component_lower_bound"]>0
+        assert report["finite_dimensional_topological_existence"]
+        assert report["closed_blocking_native_bonds"]==54
+        assert not report["global_uniqueness_proved"]
+        assert not report["agda_kernel_checked"]
+
+
+def test_global_brouwer_rejects_unpaid_or_wrong_atom_invariant():
+    from reactive_pnp_369 import global_positive_implicit_brouwer_bounds
+    m=model()
+    c0=np.ones((27,3))
+    for weights in ([1,1,1],[1,0,1],[1,1,float("nan")],[1,1,1.5]):
+        with pytest.raises(ValueError):
+            global_positive_implicit_brouwer_bounds(c0,m,weights,1.)
+    with pytest.raises(ValueError):
+        global_positive_implicit_brouwer_bounds(c0,m,[1,1,2],0.)
