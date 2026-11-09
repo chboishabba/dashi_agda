@@ -237,3 +237,28 @@ Existing donors `JInvariantAnalyticJCoarseFineObserverExact`, `JInvariant369Cano
 ### P2e carrier correction — finite roots are not the infinite theta lattice
 
 Direct audit of \`DASHI/Algebra/Trit/E8RootEnumeration.agda\`: \`E8IndexedRootCarrier = Vec HalfTritIndexed 8\` with coordinates restricted to the five symbols \(-1,-\frac12,0,\frac12,1\). It is a **finite norm-two root enumeration carrier**, not the unbounded coordinate lattice of the analytic theta series. The former may be equivalent to the **norm-two shell** of the latter, but cannot be equivalent to the entire lattice. Correct the proposed first lemma name to \`originalUnboundedE8LatticeMembershipIffDoubledParityAndSumModFour\` and separately define \`originalNativeNormTwoShellToFiniteIndexedRootEquivalence\`. Do not redefine the infinite theta sum as a polynomial over 240 root vectors. This correction is incorporated in the proof owner (commit \`b84a6015\`).
+
+
+## 2026-11-09 P1 highest-alpha continuation: one-series producer, not E8 diversion
+
+**Original deliverable remains** Kneser-normalized holomorphic tetration for the ordinary exponential, the original Bishop modular \`j\` observable, and analytic fine-observer compatibility. P2e E8/240/243 is an auxiliary route and does **not** outrank P1/P2.
+
+**Committed mathematical proof:** [AnalyticKoenigsLogSeriesProducer20261109.md](../proofs/AnalyticKoenigsLogSeriesProducer20261109.md). On the actual original complex fixed-point disk, once \`Log(p)=p\`, \(|p|>137/100\) and the source-local branch identity are established, *the same* absolutely convergent \`log(1+w)\` series proves
+\[
+|Log(p+t)-p|\le(100/127)|t|<(4/5)|t|,\quad
+|Log(p+t)-p-t/p|\le(5000/17399)|t|^2.
+\]
+The direct geometric majorant replaces the derivative-integral proof requirement. The corresponding Koenigs tail is bounded by \((4312500/1270127)(552/625)^N|z-p|^2\). These are exact rational constants, **not** computational substitutes for Bishop analytic premises.
+
+**Exact new source dependency chain:**
+1. \`originalBishopLogOnePlusPowerSeriesOnDisk\`: actual series and branch identity.
+2. \`originalBishopLogOnePlusSeriesGeometricBound\`: majorant, actual setoid inequality.
+3. \`originalBishopLogOnePlusSeriesQuadraticBound\`: majorant of k≥2 tail.
+4. \`originalBishopLogInverseDiskIteration\`: instantiate contraction for actual Log and selected original fixed point.
+5. \`originalBishopKoenigsIncrementMagnitude\`: instantiate the existing \`OriginalBishopGeometricComponentBounds\` with genuine component bounds.
+6. \`originalBishopKoenigsUniformCauchy\`: consume existing \`AbelBishopKoenigsGeometricAbsoluteExact\`, \`FiniteTelescopingExact\`, \`TrajectoryDifferenceLimitExact\`; do not rewrite them.
+7. \`originalSchroederHolomorphicLocalLinearization\`: holomorphic convergence, derivative 1, inverse and local Schröder equation.
+
+**Interface audit:** \`DASHI/Analysis/PrincipalComplexLog.agda\` defines a \`PrincipalComplexLogBranch\` *record with supplied fields*, and \`PrincipalComplexLogRealization.agda\` constructs it from a \`PrincipalPolarAuthority\` *record*. Neither is by itself a new source-native proof of the \`log(1+w)\` expansion in the Bishop-complex series carrier. \`DASHI/Analysis/PowerSeriesTranscendentals.agda\` does have real exp/trig series convergence and functional laws but does not discharge this original complex log lemma. An adapter from either authority record is not acceptable evidence for gate 1 without constructing its original analytic inhabitant.
+
+**Status:** ordinary-complex mathematical lemma documented; **Agda implementation/verification remains OPEN**. The critical next action is to prove the complex \`log(1+w)\` source identity and componentwise geometric domination using the vendored Bishop power-series and limit APIs. P1b winding and P1g global Kneser remain separately unpaid, as do original P2 q-period/Delta/j and P3/P4.
