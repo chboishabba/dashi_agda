@@ -42,3 +42,18 @@ The former bridging obligation is now source-written, not merely a numerical com
 - `original80HasNoNontrivialMod2Character` proves that any `Bool` node interpretation satisfying those original relators maps every original node to `false`.
 
 The independent regression was extended to check those precise eleven Agda projection indices against the actual canonical enumeration and the central index 79, in addition to all 4,096 characters. This **discharges the previous M2-parity-source proof at source level**. It still does **not** prove `NoExtraSelectedRelations.reflectsEquality`, the Monster isomorphism or actual selected-group faithfulness. Kernel acceptance remains unobserved.
+
+
+## 9 November — original evaluation bridge correction (critical source fix)
+
+A subsequent exact-source review found the earlier `originalRelatorsImplyParity` was not syntactically justified: it compared an auxiliary `parityWord` value with a premise from `Pair.RelatorsSatisfied`, which refers to the ORIGINAL `Pair.evaluateCoxeterWord`. These are extensionally equal but not definitionally interchangeable without a proof.
+
+**Fixed in code commit `fbca70f3bf1268c405cf369afb9be9eff8a4265c`:**
+- `boolEvaluationIsParity` is a structural induction on the actual original `Y.Word`, showing `Pair.evaluateCoxeterWord boolInverseGroup q w ≡ parityWord q w`.
+- `oddEdgeWordEvaluation` composes that equality with the exact third-power source word normalization, to yield an equality in the *same* original selected evaluation function that the relator witness uses.
+- `sourceCentralPowerNineEvaluation` analogously proves the central equality using original `Pair.evaluateCoxeterWord`.
+- The 11 edge projections and 80th central projection in `originalRelatorsImplyParity` now consume these original-evaluation lemmas. The direct `ab1` projection was separately repaired and `dropWords` uses the explicit Agda `zero` constructor.
+
+**Exact acceptance status:** source-level proof candidate, not Agda 2.9 kernel-accepted. The separately executed finite model check on the actual 79/80 word lists confirms ranks 11/12 and 2/1 C₂ characters; it does not establish that the new Agda term typechecks or settle the nonabelian source-kernel reflection.
+
+**Next source check:** run pinned Agda 2.9 on `Y443VNaturalPairGenerationValidation.agda`; reject any unresolved metas, termination errors, postulates, or transitive unsafety. M2 kernel reflection and historical Monster equality are still the terminal missing original mathematics.
