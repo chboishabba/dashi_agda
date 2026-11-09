@@ -16,6 +16,7 @@ modules=(
   DASHI/Governance/EpistemicPowerCostPayoffExact.agda
   DASHI/Governance/EpistemicPowerQueryAdequacyCapstoneExact.agda
   DASHI/Governance/EpistemicPowerMinimalObserverRepairExact.agda
+  DASHI/Governance/EpistemicPowerTetralemmaBridgeExact.agda
   DASHI/Governance/EpistemicPowerSourceAtlasExact.agda
   DASHI/Governance/EpistemicPowerCrossDomainCapstoneExact.agda
 )
