@@ -317,3 +317,32 @@ Golden runner: `scripts/check_biological_history_future_round23.sh` now checks t
 - P3 source-calibrated physiological rates, heldout model discrimination, integrated Golden/ITIR evidence reconciliation: **OPEN**.
 
 **Next highest-alpha cut:** execute exact-head Agda Golden checker; repair any type failures in the new original continuity owner, then reconcile the complete real Rhea 29×12 source certificate and chemistry/exchange on the SAME 3×3×3 inventory. Preserve qDHB ≠ generic BH2, attribution, and external sources. Never promote synthetic event arithmetic into empirical Kitzerow clinical causality.
+
+
+## 2026-11-09 cross-PR PNP source recheck
+
+Companion PR #1454 (`feat/kitzerow-bh4-pathway-ontology-interop`)
+now source-writes a same-history BH4/PNP/path triple theorem in
+`BH4PNPSamePhysicalHistoryBridgeExact.agda` and introduces the
+strict source-original 29×12 candidate numerical adapter
+`scripts/bh4_original_reactive_pnp_adapter.py` with synthetic-only
+fail-closed tests. It consumes exact Rhea participant sides, not
+only net S, so unchanged species on both sides are preserved in
+mass-action rates. It refuses imputed rates, wrong source digest,
+unsupported external exchanges and multicompartment PNP claims.
+
+The original geometry and proof owners on this biology branch are
+`Biological369MixedNativeFaceSignedContinuityExact`,
+`Biological369PantsPhysicalSeamExact`,
+`BiologicalSourcePhysicalTissueSimulationExact` and the original
+54-bond shared-state modules; do not flatten the 3×3×3/pants
+geometry to an unrelated Vec 27.
+
+**Unpaid cross-branch theorem:** select one physical state/step whose
+BH4, PNP and 54-bond tissue projections are all defined and whose
+three one-step commuting squares are supported by the same original
+kinetic and observation source. The two PR heads remain unmerged and
+no common state has been constructed. The original physical
+`physicalOneStep`, calibrated rates and real longitudinal assay
+remain uninstantiated. No Agda Golden/ITIR receipts were produced
+by this connector update.
