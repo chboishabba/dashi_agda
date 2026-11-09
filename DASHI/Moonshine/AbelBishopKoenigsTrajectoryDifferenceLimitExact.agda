@@ -54,11 +54,13 @@ originalBishopKoenigsDifferenceConverges h constant ratio bounds =
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
       (λ n {{_}} →
         proj₁ (Telescope.originalBishopKoenigsPrefixSameSource h n))
-      (Completion.realConverges prefixConverges))
+      (Complex.re (originalBishopKoenigsDifferenceLimit h constant ratio bounds)
+       , Completion.realConverges prefixConverges))
     (BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
       (λ n {{_}} →
         proj₂ (Telescope.originalBishopKoenigsPrefixSameSource h n))
-      (Completion.imaginaryConverges prefixConverges))
+      (Complex.im (originalBishopKoenigsDifferenceLimit h constant ratio bounds)
+       , Completion.imaginaryConverges prefixConverges))
   where
     prefixConverges =
       Geom.originalBishopKoenigsGeometricLimitConverges
