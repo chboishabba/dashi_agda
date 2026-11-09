@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """CCDCOE P3 census check: exact equality with a predeclared article frame.
 
-V2 requires digest, source file, outlet and publication date for each eligible\nunit. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
+V3 binds original document metadata AND the intervention cutoff/receipt. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
 verify that the frame contains every historical article or that treatment was
 assigned independently of outcome. No historical GCC case is admitted here.
 """
 import argparse
 import json
 import hashlib
+from datetime import date
 from collections import Counter
 from copy import deepcopy
 from pathlib import Path
 
 ARMS = {'GCC-linked-outlet', 'comparison-outlet'}
 PERIODS = {'before', 'after'}
-SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v2'
+SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v3'
 
 
 def require(condition, reason):
@@ -28,7 +29,8 @@ def canonical_frame_sha256(frame):
     return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
 
 
-def check(frame, measured, expected_frame_sha256=None):
+def check(frame, measured, expected_frame_sha256=None, expected_intervention_date=None,
+          expected_intervention_receipt=None):
     require(isinstance(frame, dict), 'frame must be an object')
     require(frame.get('schema') == SCHEMA, 'frame schema')
     actual_digest = canonical_frame_sha256(frame)
@@ -42,6 +44,21 @@ def check(frame, measured, expected_frame_sha256=None):
     require(frame.get('frozen_before_coding') is True, 'frame must be frozen before coding')
     for name in ('frame_id', 'inclusion_rule', 'exclusion_rule', 'frame_provenance'):
         require(isinstance(frame.get(name), str) and frame[name].strip(), 'frame field: ' + name)
+    cutoff_text = frame.get('intervention_date')
+    receipt = frame.get('intervention_receipt')
+    require(isinstance(cutoff_text, str), 'frozen intervention date required')
+    try:
+        cutoff = date.fromisoformat(cutoff_text)
+    except ValueError:
+        raise ValueError('invalid frozen intervention date') from None
+    require(isinstance(receipt, str) and receipt.strip(),
+            'frozen intervention source receipt required')
+    if expected_intervention_date is not None:
+        require(expected_intervention_date == cutoff_text,
+                'analysis intervention date differs from frozen frame')
+    if expected_intervention_receipt is not None:
+        require(expected_intervention_receipt == receipt,
+                'analysis intervention receipt differs from frozen frame')
     units = frame.get('units')
     require(isinstance(units, list) and units, 'nonempty predeclared frame')
     registered = {}
@@ -65,6 +82,13 @@ def check(frame, measured, expected_frame_sha256=None):
             for field in ('source_file', 'outlet', 'date'):
                 require(isinstance(u.get(field), str) and u[field].strip(),
                         'eligible original metadata: ' + field)
+            try:
+                publication_date = date.fromisoformat(u['date'])
+            except ValueError:
+                raise ValueError('invalid eligible original publication date') from None
+            require((publication_date < cutoff) if u['period'] == 'before'
+                    else (publication_date >= cutoff),
+                    'article period disagrees with frozen intervention cutoff')
         if u['eligible']:
             require(u.get('exclusion_reason') in (None, ''), 'eligible unit has exclusion')
             eligible.add(uid)
@@ -94,6 +118,8 @@ def check(frame, measured, expected_frame_sha256=None):
     require(set(observed) == eligible, 'missing eligible original articles from measurements')
     counts = Counter((registered[uid]['arm'], registered[uid]['period']) for uid in eligible)
     return {'schema': SCHEMA, 'frame_id': frame['frame_id'],
+            'intervention_date': cutoff_text,
+            'intervention_receipt': receipt,
             'canonical_frame_sha256': actual_digest,
             'frame_commitment_checked': expected_frame_sha256 is not None,
             'declared_units': len(units), 'eligible_units': len(eligible),
@@ -117,6 +143,8 @@ def self_test():
     frame = {'schema': SCHEMA, 'frame_id': 'SYNTHETIC-ONLY',
              'frozen_before_coding': True, 'inclusion_rule': 'fixture rule',
              'exclusion_rule': 'fixture exclusions', 'frame_provenance': 'fixture',
+             'intervention_date': '1993-01-01',
+             'intervention_receipt': 'SYNTHETIC-CUTOFF-RECEIPT',
              'units': units}
     measured = [{'id': u['id'], 'treatment': u['arm'], 'period': u['period'],
                  'source_sha256': u['source_sha256'],
@@ -141,6 +169,18 @@ def self_test():
         assert '64 lowercase hex' in str(error)
     else:
         raise AssertionError('Malformed commitment was accepted')
+    # A matching frame digest is not enough if a consumer changes the
+    # asserted historical onset date or source receipt.
+    for expected_date, expected_receipt, reason in (
+        ('1994-01-01', None, 'analysis intervention date differs'),
+        (None, 'DIFFERENT-ORIGINAL', 'analysis intervention receipt differs'),
+    ):
+        try:
+            check(frame, measured, committed, expected_date, expected_receipt)
+        except ValueError as error:
+            assert reason in str(error)
+        else:
+            raise AssertionError('Intervention identity drift accepted')
     cases = [
         ('unfrozen', lambda f, m: f.update(frozen_before_coding='true'), 'frame must be frozen'),
         ('missing', lambda f, m: m.pop(), 'missing eligible original articles'),
@@ -158,6 +198,10 @@ def self_test():
         ('date_swap', lambda f, m: m[0].update(date='1999-01-01'), 'measured original date differs'),
         ('frame_missing_source_digest', lambda f, m: f['units'][0].pop('source_sha256'), 'eligible source SHA256 missing'),
         ('frame_missing_source_file', lambda f, m: f['units'][0].update(source_file='  '), 'eligible original metadata: source_file'),
+        ('frozen_cutoff_missing', lambda f, m: f.pop('intervention_date'), 'frozen intervention date required'),
+        ('frozen_receipt_missing', lambda f, m: f.update(intervention_receipt='  '), 'frozen intervention source receipt required'),
+        ('article_crosses_cutoff', lambda f, m: f['units'][0].update(date='1993-12-31' if f['units'][0]['period'] == 'before' else '1992-12-31'), 'article period disagrees with frozen intervention cutoff'),
+        ('invalid_article_date', lambda f, m: f['units'][0].update(date='not-a-date'), 'invalid eligible original publication date'),
     ]
     for name, mutate, message in cases:
         f, m = deepcopy(frame), deepcopy(measured)
@@ -168,7 +212,7 @@ def self_test():
             assert message in str(error), (name, str(error))
         else:
             raise AssertionError(name + ' should fail')
-    return {'positive_synthetic_frame': True, 'targeted_negative_controls': len(cases) + 2,
+    return {'positive_synthetic_frame': True, 'targeted_negative_controls': len(cases) + 4,
             'historical_articles_admitted': 0}
 
 
@@ -178,15 +222,19 @@ def main():
     parser.add_argument('--frame', type=Path)
     parser.add_argument('--measurements', type=Path)
     parser.add_argument('--expected-frame-sha256', required=False)
+    parser.add_argument('--intervention-date')
+    parser.add_argument('--intervention-receipt')
     args = parser.parse_args()
     if args.self_test:
         print(json.dumps(self_test(), indent=2))
         return
-    if args.frame is None or args.measurements is None or args.expected_frame_sha256 is None:
+    if (args.frame is None or args.measurements is None or args.expected_frame_sha256 is None
+            or args.intervention_date is None or args.intervention_receipt is None):
         parser.error('--frame JSON, --measurements JSONL and --expected-frame-sha256 are required')
     frame = json.loads(args.frame.read_text(encoding='utf-8'))
     rows = [json.loads(line) for line in args.measurements.read_text(encoding='utf-8').splitlines() if line.strip()]
-    print(json.dumps(check(frame, rows, args.expected_frame_sha256), indent=2))
+    print(json.dumps(check(frame, rows, args.expected_frame_sha256,
+                           args.intervention_date, args.intervention_receipt), indent=2))
 
 
 if __name__ == '__main__':
