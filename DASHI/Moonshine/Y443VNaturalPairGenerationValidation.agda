@@ -78,3 +78,4 @@ import DASHI.Moonshine.MonsterSpecialGravityKKWeightTwoCrosswalkExact as Monster
 import DASHI.Moonshine.Y443SelectedNativeModeOneGriessExact as NativeGriess
 
 import DASHI.Moonshine.VNaturalOriginalPairedFourSectorModesExact as OriginalFourSectorModes
+import DASHI.Moonshine.VNaturalOriginalFTToTFSkewFiniteExact as OriginalFTDerivedTF
