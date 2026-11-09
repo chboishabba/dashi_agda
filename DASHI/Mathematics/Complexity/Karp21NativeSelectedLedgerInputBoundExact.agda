@@ -16,6 +16,8 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Data.List.Base using (length)
+open import Data.Maybe.Base using (just)
+open import Data.Product using (_,_ )
 open import Data.Nat.Base using (_≤_)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (subst)
@@ -78,7 +80,7 @@ selectedActualTokenChargesFitOriginalWord :
   (word suffix mLE : Word.BitWord)
   (fuel : Nat) →
   Whole.readBinaryRawEdgesFuel fuel mLE word
-    ≡ Data.Maybe.Base.just (edges , suffix) →
+    ≡ just (edges , suffix) →
   Width.selectedTokenCharges tokens ≤ length word
 selectedActualTokenChargesFitOriginalWord
   {tokens} {edges} selected word suffix mLE fuel parsed =
@@ -100,7 +102,7 @@ actualSelectedLedgerWidthFromOriginalInput :
   (fuel : Nat)
   (ledger : Ledger.SignedLedger) →
   Whole.readBinaryRawEdgesFuel fuel mLE word
-    ≡ Data.Maybe.Base.just (edges , suffix) →
+    ≡ just (edges , suffix) →
   Width.actualLedgerWidth (Ledger.accumulateSigned tokens ledger)
     ≤ Width.actualLedgerWidth ledger + length word
 actualSelectedLedgerWidthFromOriginalInput
