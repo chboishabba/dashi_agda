@@ -1,5 +1,22 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 P0 original error derivative and literal mesh defect weld
+
+New original source owner: `DASHI/Analysis/BishopOriginalNegativeLogFiniteErrorDerivativeExact.agda`, imported in all three TOE roots and the pinned Bishop checker.
+
+- `originalFiniteLogExpError n x = F_N(x) - (1-x)` on the literal Bishop `Real.ℝ`, not a synthetic error.
+- `originalFiniteLogExpErrorDerivative`: constructs `BishopFactorDerivativeAt (originalFiniteLogExpError n) x (F'_N(x)+1)` using the existing original finite LOG-EXP derivative and exact division-free factorization. Its quotient is **definitionally** the old `Factor.quotient` plus 1; therefore this is the same local mesh defect proved in `originalFiniteLogExpErrorFromMesh`, not a second approximation.
+- `originalFiniteLogExpErrorAtZero`: actual source `E_N(0) ≃ 0`, using `originalFiniteNegativeLogExpAtZero`.
+- `originalFiniteLogExpErrorODE`: exact
+  `(1-x) E'_N(x) + E_N(x) ≃ x^N F_N(x)` on the original Bishop carrier, reusing original finite ODE residual and ring algebra.
+
+**Remaining genuine terminal P0 obstruction:** a source-derived *quantitative* mesh-uniform bound on `Factor.quotient (originalFiniteLogExpErrorDerivative N x) h` for points in `[0,r]` and small mesh steps, which makes the finite weighted absolute-error budget tend to zero. Equivalently, a concrete original Bishop FTC/integrated residual estimate or a source-identifying formal analytic composition theorem. Neither the pointwise derivative residual nor the uniform `r^N` forcing bound alone yields the endpoint equality.
+
+**P1 still open:** two actual atan-series to rational Cayley exponential equalities; rational endpoint arithmetic and original complex product are not a substitute. **P2 still open:** instantiate LOG-dependent above-two zeta after P0, then an independent selected-function same-value identification. No P0/P1/P2 terminal declaration has been inhabited by the new module. No exact-head Agda 2.9 typecheck receipt.
+
+
+---
+
 ## 2026-11-09 P0 direct finite Bishop endpoint telescope (current implementation)
 
 Two source-written original-carrier proof owners are committed:
