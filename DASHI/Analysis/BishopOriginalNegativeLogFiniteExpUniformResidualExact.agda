@@ -149,7 +149,7 @@ open import Data.Product.Base using (proj₁; proj₂)
 import Data.Nat.Base as Nat using (NonZero; _≥_)
 import Data.Nat.Properties as NatP
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Unnormalised using (_/_)
+open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ)
 
 originalFiniteExpLogResidualCutoff :
   (radius : R.ℝ) →
@@ -190,7 +190,10 @@ originalFiniteExpLogUniformResidualSmall
     rPowerBelowAbsoluteError =
       RP.≤-respʳ-≃
         (RP.∣-∣-cong
-          (RP.≃-symm (RP.x-0≃x {x = rPower})))
+          (RP.≃-symm ((let open RP.ℝ-Solver in
+           solve 1
+             (λ value → value ⊖ Κ 0ℚᵘ ⊜ value)
+             RP.≃-refl rPower))))
         (RP.x≤∣x∣ {x = rPower})
   in
   RP.≤-trans
