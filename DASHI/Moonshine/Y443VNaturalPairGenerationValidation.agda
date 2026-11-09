@@ -12,6 +12,8 @@ import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
 import DASHI.Moonshine.Y443PresentedWordKernelCongruenceExact as WordKernel
 import DASHI.Moonshine.Y443Universal80RelatorCongruenceExact as Universal80
 import DASHI.Moonshine.Y443Mod2OddEdgeCentralCharacterExact as Mod2Character
+import DASHI.Moonshine.Y443Original72Plus8RelatorPartitionExact as Relator72Plus8
+import DASHI.Moonshine.Y443Universal80SimpleQuotientKernelReflectionExact as SimpleKernel
 import DASHI.Moonshine.Y443JMDTracePowerExact as JMD
 import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as JMDSource
 import DASHI.Moonshine.Y443JMDConcretePairPowerCompilerExact as JMDCertificate
