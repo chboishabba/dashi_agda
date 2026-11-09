@@ -20,6 +20,36 @@ This calculation is a mathematical **target**, NOT an Agda theorem: a constructi
 P1 and P2 are **not** consequences of this P0 algebra. The two original analytic Cayley evaluations and independent original selected zeta equality remain separate genuine leaves. No Agda kernel run is available on this branch.
 
 
+## 2026-11-09 P0 source cross-weighted integrating-factor payment
+
+Committed `DASHI/Analysis/BishopOriginalNegativeLogCrossWeightedIncrementExact.agda` (source-written, **kernel check pending**). Reuses exact native `originalFiniteLogExpErrorDerivative` and `originalFiniteLogExpErrorODE` on the original Bishop carrier, and proves:
+
+```text
+crossWeightedIncrement N x h
+  = (1-x)*E_N(x+h) - (1-x-h)*E_N(x)
+
+originalCrossWeightedIncrementIsQuotient:
+  crossWeightedIncrement N x h
+    ≃ h * ((1-x)*q_E(N,x,h) + E_N(x))
+
+originalCrossWeightedIncrementIsResidualPlusDefect:
+  crossWeightedIncrement N x h
+    ≃ h * (x^N*F_N(x)
+           + (1-x)*(q_E(N,x,h)-E'_N(x))).
+```
+
+The error value `E_N(x)` cancels **algebraically** after inserting the exact ODE; this corrects the earlier *circular* temptation to regard `E'_N` as small solely from the forcing. No inverse of `h` or `1-x` has been assumed, and the identities hold even at `h=0`. The exact residual and quotient-minus-slope are separately visible, so P0 now has one mathematical implementation route:
+
+1. Establish a **joint uniform modulus** for the literal factor-derivative remainder `q_E(N,x,h)-E'_N(x)` on original Bishop mesh points `0≤x≤r<1`, using the already explicit original finite log polynomial power quotients and original shifted factorial exponential `Q`; the modulus must be controlled with stage `N` and mesh size `h` jointly.
+2. Use the actual original positive inverse / finite cross-product telescope to sum the normalized increments `E_N(x)/(1-x)` without a global, assumption-only FTC. Control the forcing by the earlier uniform `r^N` receipt and the bounded positive reciprocals for `1-x≥1-r>0`.
+3. Deduce `F_N(x)→1-x`, and inhabit **the existing** `OriginalBishopNegativeLogExponentialGap` from `originalNegativeLogTerminalFromFiniteEvaluation`, then instantiate **the existing** Bishop original above-two zeta. No new LOG or zeta definition.
+4. P1 is independent: two genuinely original complex exponential/arctan evaluations, not rational phase arithmetic or the formal Cayley recurrence alone. P2 external selected zeta still needs an independently constructed source-identified meaning of `ZetaHalfPlaneLayer.zetaHalfPlane`; an arbitrary record choice is not an identification.
+
+The currently committed new result **does not** prove items 1–4. P0–P2 terminal goals remain OPEN until source proof terms and Agda 2.9 exact-head kernel acceptance exist. The last successful checks were static only (parentheses, no explicit metas or postulates), which do not establish Agda semantics.
+
+
+---
+
 ## 2026-11-09 explicit source quotient: narrowed P0 analytic estimate
 
 New `DASHI/Analysis/BishopOriginalNegativeLogFiniteExplicitQuotientExact.agda`, integrated into all three TOE roots and the Bishop checker, pays the source-to-quotient expansion rather than introducing another arbitrary derivative interface.
