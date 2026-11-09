@@ -42,6 +42,21 @@ assert len(POINTS)==27 and len(BONDS)==54
 ELEMENTS=("C","H","N","O","P")
 
 
+def reject_duplicate_json_keys(pairs):
+    """Keep original source and candidate coordinates unambiguous."""
+    result={}
+    for key,value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate key in source JSON: {key!r}")
+        result[key]=value
+    return result
+
+
+def load_original_receipt_json(data):
+    """JSON decoder that fails before duplicate-key overwrite is possible."""
+    return json.loads(data,object_pairs_hook=reject_duplicate_json_keys)
+
+
 def check_certificate(certificate, *, full_panel):
     if not isinstance(certificate,dict) or not isinstance(certificate.get("reactions"),list):
         raise ValueError("acquired Rhea certificate reactions required")
@@ -495,6 +510,16 @@ def self_test():
           "reactions":[dict(QDPR, formula_charge_ready=True)]}
     result=test_source(cert,full_panel=False)
     assert result["source_species"]==5
+    for duplicated in (
+        '{"reaction_flux":{"RHEA:1":0,"RHEA:1":1}}',
+        '{"external_exchange":{"species":0,"species":1}}',
+    ):
+        try:
+            load_original_receipt_json(duplicated)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("duplicate source or candidate JSON key admitted")
     assert result["source_finite_reactions"]==1
     assert result["original_reaction_event_checks"]==27
     assert result["original_reaction_coordinate_checks"]==27*27*5
@@ -586,14 +611,14 @@ def main():
         parser.error("real original --certificate required with candidate flux")
     if args.certificate is not None:
         raw=args.certificate.read_bytes()
-        certificate=json.loads(raw)
+        certificate=load_original_receipt_json(raw)
         result=test_source(certificate,full_panel=True)
         result["original_certificate_sha256"]=hashlib.sha256(raw).hexdigest()
         if args.parameters is not None:
             result["original_flux_candidate"]=evaluate_source_paid_physical_candidate(
                 certificate,
-                json.loads(args.parameters.read_text(encoding="utf-8")),
-                json.loads(args.candidate.read_text(encoding="utf-8")))
+                load_original_receipt_json(args.parameters.read_text(encoding="utf-8")),
+                load_original_receipt_json(args.candidate.read_text(encoding="utf-8")))
         print(json.dumps(result,indent=2,sort_keys=True))
         if args.parameters is not None and result["original_flux_candidate"]["status"] != "feasible-algebraic-only":
             raise SystemExit(2)
