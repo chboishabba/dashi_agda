@@ -145,6 +145,104 @@ def transport_event(state,species,origin,target,key,by_species):
     return current
 
 
+
+# Explicit original cubical exterior interfaces; the face is NOT an
+# assumed cellular membrane or measured vascular route.
+OUTER_FACES={(axis,side): frozenset(
+    point for point in POINTS if point[axis]==side)
+    for axis in range(3) for side in (-1,1)}
+
+
+def boundary_species_event(state,metadata,*,face,point,key,direction,
+                           amount,source_reference):
+    """Apply one provenance-labelled external event, returning its ledger.
+
+    The return ledger is in CHNOP atoms and signed electric charge.
+    A requested extraction removes only *available* molecules; missing
+    original physiological flux is never represented by a fake zero.
+    """
+    if (face not in OUTER_FACES or point not in OUTER_FACES[face]
+            or key not in metadata or direction not in ("inject","extract")
+            or type(amount) is not int or amount<0
+            or not isinstance(source_reference,str)
+            or not source_reference.strip()):
+        raise ValueError("unpaid or non-geometric original exterior exchange")
+    actual=(amount if direction=="inject"
+            else min(amount,state[point,key]))
+    direction_sign=1 if direction=="inject" else -1
+    after=state.copy()
+    after[point,key]+=direction_sign*actual
+    if after[point,key]<0:
+        raise AssertionError("external exchange produced negative inventory")
+    for other in POINTS:
+        for species_key in metadata:
+            if (other,species_key)!=(point,key):
+                if after[other,species_key]!=state[other,species_key]:
+                    raise AssertionError("external event changed unrelated voxel/species")
+    formula,charge=metadata[key]
+    external=(tuple(direction_sign*actual*formula[element]
+                    for element in ELEMENTS),
+              direction_sign*actual*charge)
+    old_elements,old_charge=totals(state,metadata)
+    new_elements,new_charge=totals(after,metadata)
+    if (tuple(new_elements[i]-old_elements[i]
+              for i in range(len(ELEMENTS))),
+        new_charge-old_charge)!=external:
+        raise AssertionError("source-paid external CHNOP/charge ledger inconsistent")
+    return after,external,actual
+
+
+def run_original_spatial_event_history(initial,matrix,species,metadata,events):
+    """Single chronological state and explicit signed environmental ledger.
+
+    Event records are discrete *structural* events, not calibrated kinetic
+    laws. Reaction IDs are resolved against the acquired matrix, and
+    transport is limited to genuine native 3D bonds.
+    """
+    state=initial.copy()
+    ext_atoms=[0]*len(ELEMENTS)
+    ext_charge=0
+    for event in events:
+        if not isinstance(event,dict):
+            raise ValueError("original spatial event must be a typed record")
+        event_kind=event.get("kind")
+        old=totals(state,metadata)
+        if event_kind=="reaction":
+            state=reaction_event(state,matrix,species,event["column"],
+                                 event["point"],event["count"],metadata)
+        elif event_kind=="native_transport":
+            state=transport_event(state,species,event["source"],
+                                  event["target"],event["species"],metadata)
+        elif event_kind=="outer_face_exchange":
+            state,external,_=boundary_species_event(
+                state,metadata,face=event["face"],point=event["point"],
+                key=event["species"],direction=event["direction"],
+                amount=event["amount"],
+                source_reference=event["source_reference"])
+            ext_atoms=[ext_atoms[i]+external[0][i]
+                       for i in range(len(ELEMENTS))]
+            ext_charge+=external[1]
+        else:
+            raise ValueError("unrecognized original chemistry/transport event")
+        current=totals(state,metadata)
+        if (tuple(current[0][i]-old[0][i] for i in range(len(ELEMENTS))),
+            current[1]-old[1]) != (
+                external if event_kind=="outer_face_exchange"
+                else ((0,)*len(ELEMENTS),0)):
+            raise AssertionError("one-step source/transport conservation failed")
+        if any(v<0 for v in state.values()):
+            raise AssertionError("negative inventory in chronological history")
+    origin_atoms,origin_charge=totals(initial,metadata)
+    final_atoms,final_charge=totals(state,metadata)
+    if (tuple(final_atoms[i]-origin_atoms[i]
+              for i in range(len(ELEMENTS))),
+        final_charge-origin_charge)!=(tuple(ext_atoms),ext_charge):
+        raise AssertionError("all-history environmental balance failed")
+    return state,{"external_CHNOP":tuple(ext_atoms),
+                  "external_signed_charge":ext_charge,
+                  "history_length":len(events)}
+
+
 def test_source(certificate,*,full_panel):
     original,metadata=check_certificate(certificate,full_panel=full_panel)
     matrix=original["matrix"];species=original["species_index"]
@@ -203,6 +301,39 @@ def test_source(certificate,*,full_panel):
         if any(v<0 for v in outward.values()):
             raise AssertionError("negative inventory in same-state spatial history")
         mixed_history_cases+=1
+    # One actual mixed chemistry/native-transport/exterior-face history.
+    # Provenance label is explicitly SYNTHETIC unless independently paid.
+    # The demonstration never claims a real physiological exchange rate.
+    mixed_boundary_cases=0
+    for col in range(len(original["reaction_index"])):
+        source,target=BONDS[0]
+        initial=inventory(species)
+        for i,key in enumerate(species):
+            if matrix[i][col]<0:
+                initial[source,key]=-int(matrix[i][col])
+        product=next((species[i] for i in range(len(species))
+                      if matrix[i][col]>0),None)
+        if product is None:
+            raise ValueError("original finite reaction has no product")
+        face=(0,-1)
+        if source not in OUTER_FACES[face]:
+            raise AssertionError("selected native source not a true outer-face site")
+        events=[
+            {"kind":"reaction","column":col,"point":source,"count":1},
+            {"kind":"native_transport","source":source,
+             "target":target,"species":product},
+            {"kind":"outer_face_exchange","face":face,"point":source,
+             "species":product,"direction":"inject","amount":2,
+             "source_reference":"synthetic fixture; no empirical exchange rate"},
+            {"kind":"outer_face_exchange","face":face,"point":source,
+             "species":product,"direction":"extract","amount":3,
+             "source_reference":"synthetic fixture; no empirical exchange rate"},
+        ]
+        final,ledger=run_original_spatial_event_history(
+            initial,matrix,species,metadata,events)
+        if ledger["history_length"]!=4 or any(v<0 for v in final.values()):
+            raise AssertionError("mixed source history failed")
+        mixed_boundary_cases+=1
     transferred=0
     for origin,target in BONDS:
         for source,destination in ((origin,target),(target,origin)):
@@ -220,6 +351,7 @@ def test_source(certificate,*,full_panel):
         "source_nonfinite_residuals":len(original["finite_formula_residuals"]),
         "original_reaction_event_checks":event_cases,
         "original_reaction_coordinate_checks":local_coordinate_checks,
+        "original_mixed_face_reaction_history_checks":mixed_boundary_cases,
         "original_reaction_transport_roundtrip_histories":mixed_history_cases,
         "original_native_bond_species_transfer_checks":transferred,
         "same_physical_shared_inventory":True,
@@ -244,6 +376,7 @@ def self_test():
     assert result["source_finite_reactions"]==1
     assert result["original_reaction_event_checks"]==27
     assert result["original_reaction_coordinate_checks"]==27*27*5
+    assert result["original_mixed_face_reaction_history_checks"]==1
     assert result["original_reaction_transport_roundtrip_histories"]==1
     assert result["original_native_bond_species_transfer_checks"]==540
     print(json.dumps(result,indent=2,sort_keys=True))
