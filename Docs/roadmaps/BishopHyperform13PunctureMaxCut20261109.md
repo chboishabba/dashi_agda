@@ -198,3 +198,49 @@ naturality, `6291999` source import repair; three TOE imports
 `bbe7fac`, `3fffa4d`, `33cd80b`. The statements are
 **source-written**, not Agda-kernel accepted (deferred per user
 request). This pass does **not** discharge P1–P3.
+
+
+## 2026-11-09 highest-alpha follow-through: original pants/cylinder frontier
+
+**Donor audit** (reuse original owners instead of duplicating pants):
+- `DASHI/Topology/TernaryCylinderPantsGeometryExact.agda` proves `Digit369 ↔ BranchSlot`, three explicit outputs of the actual composed finite 1→3 pants carrier and refinement-prefix compatibility. Its cobordism statements are finite combinatorial statements; no smooth surface is established.
+- `DASHI/Topology/TernaryPantsFrontierExact.agda` gives `Address n ↔ PantsPath n`, both round trips, and `addressToPantsPathAppend` and `pantsPathToAddressAppend` for every finite depth.
+- `DASHI/Reasoning/TypedHyperfabricPantsGluingBridgeExact.agda` requires a **five-coordinate `InterfaceMatch`** on *interpreted edge stalks* before a seam can be admitted; a seam certificate does not construct a new `TypedHyperfabric`. That side condition remains in force here.
+- `DASHI/Foundations/HyperformChartGluingExact.agda` likewise distinguishes chart overlap, observer fibres, and independent fabric context. Do not promote a matching profile count to a same-object theorem.
+
+### New exact source declarations
+
+`DASHI/Foundations/TernaryThirteenOriginalPantsFrontierBridgeExact.agda`:
+
+- `tritToSlot`, `slotToTrit`, `tritSlotRoundTrip`, `slotTritRoundTrip`.
+- `wordToPants`, `pantsToWord`, `wordPantsRoundTrip`, `pantsWordRoundTrip` for **all n**.
+- `wordToCylinder`, `cylinderToWord`, `wordCylinderRoundTrip`, `cylinderWordRoundTrip` reuse the pre-existing original Frontier cylinder/pants isomorphism for all n.
+- `sourceCentralToPants13`, `pants13ToSourceCentral`, `pants13SourceRoundTrip`, `sourcePantsRoundTripOnAxis`, `sourcePantsRoundTripOnCentre` carry the original StageAtlas/tri-truth central valuation representation to actual depth-13 pants paths. Valuation equality is pointwise; no function extensionality axiom.
+- `wordToPantsAppend`, `originalTwelvePlusOnePantsGluing`, and `originalCentralBranchNegative`/`Neutral`/`Positive` prove that the *new central trit is literally the original ternary pants refinement branch*. The three branch slots are `slot3`, `slot6`, `slot9`, respectively, and all match the actual original cylinder refinement via the Frontier theorem.
+- `neutralSourcePantsEndsAtMiddleSlot` and `sourceCentralPantsCentreCanBeNeutral` witness that a valid global state may have a neutral (not punctured) centre.
+
+`DASHI/Foundations/TernaryThirteenOriginalPantsObserverPunctureExact.agda`:
+
+- `originalPantsCentralNonDescentWitness`, `originalPantsCentralCannotFactor` and `originalPantsCentralObserverInsufficient` provide genuine explicit-witness DASHI consumer non-descent on the **existing pants-path carrier**.
+- `pantsPunctureFromWord`, `pantsPunctureToWord`, `pantsPuncturePreservedUnderCylinder` prove preservation of the selected final-coordinate puncture across the *original* path/cylinder round trip. This is not the global-origin puncture.
+
+The three golden TOE import roots now reuse both modules.
+
+### Updated decisive cut
+
+| Priority | Gate | Remaining precise statement | Status |
+|---|---|---|---|
+| P0 | H1.01 address-level | Original StageAtlas central valuation ↔ `TritWord 13` ↔ original `PantsPath 13` ↔ original `Address 13` with constructive word and path round trips, and pointwise valuation round trips | SOURCE-WRITTEN |
+| P0 | H1.01 semantic | Show the independently intended **relational/group/Monster or actual world-model completion** has precisely this selected valuation and its pant seams, including source-bound identification of boundary channels | OPEN |
+| P0 | H2.01 pants operational | Source-pants-path central observer non-descent and puncture transport | SOURCE-WRITTEN |
+| P0 | H2.01 independent operational | Select original world-model observers/consumers and prove their actual state and observation maps factor through (or commute with) the pants carrier; avoid inventing attribution | OPEN |
+| P0 | H2.02 discrete StageBundleSheaf | Explicit matching, nontrivial compatibility, gluing, chart naturality and puncture preservation on original conservative stage site | SOURCE-WRITTEN |
+| P0 | H2.02 original pants seam | Construct independently justified `Pants.InterfaceMatch` for the source's actual edge stalk values and prove the post-gluing fabric's incidence/restriction laws; the original donor explicitly warns the seam itself doesn't construct a new fabric | OPEN |
+| P0 | H2.02 nontrivial site | Prove matching-family gluing for selected nontrivial cover families beyond maximal-only discrete topology, if sourced | OPEN |
+| P1 | Bishop Cayley | Original analytic nested `exp_C(2i atan_B(t))` Cayley identity at both Machin points | OPEN |
+| P2 | Zeta | Canonical power identity; original-source selected zeta same-object theorem | OPEN |
+| P3 | Gamma/Xi | Original Gamma and analytic continuation, functional equation, completed Xi | OPEN |
+
+**Commits:** `8c324c3` new original all-depth pants bridge, `c267f7d` original 12+1 append/refinement, `1256f30` pants observer non-descent/puncture; TOE roots `2bbe1ab`, `ac67a39`, `2fd3c13`. Source-written only; no Agda kernel receipt claimed. Crucially the 13th trit is the *selected branch*, not intrinsically punctured: `slot6` is a legal central neutral branch.
+
+This advancement addresses the highest-alpha finite **pants gluing** reuse but cannot solve mathematical analysis P1–P3 by index coincidence.
