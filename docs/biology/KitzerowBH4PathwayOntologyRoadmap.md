@@ -695,3 +695,10 @@ Companion #1471 now has pointwise Agda local-debit/credit and original exterior-
 ### 2026-11-09 P0 geometry/flux and evidence status
 
 Companion developmental branch #1471 now has actual native-bond off-endpoint local invariance, certified exterior-face event off-site locality and stricter voxelwise signed-current regression guards. The local current law `original369LocalSignedContinuityExact` **is still open** for Agda histories, as is the source-certificated `original29x12SpatialReactionBalance` (not a zero-filled synthetic replacement). The physical reaction/transport step, BH4–PNP–tissue commutation, intervention-safe minimality and held-out measurements remain downstream open gates. Preserve KPO-01–18 and all Kitzerow-original-chemistry attribution boundaries.
+
+
+### 2026-11-09 strict Rhea source artifact and native-history audit
+
+The connected GitHub PR #1454 branch did not contain the tracked path `artifacts/biology/rhea-kitzerow-bh4-reactions.json` (404). This is a **tracked-branch reproducibility gate**, not a claim that the earlier acquired material never existed. The existing `BH4ExecutedPanelReactionReceiptExact` records 12 finite IDs, three nonfinite residuals and 29 species, but this typed receipt alone does not execute the original matrix or supply measured fluxes. Keep the strict 29×12 validator fail-closed on absent source bytes.
+
+Companion #1471 now source-writes true forward/reverse native-bond action histories, global conservation for those histories, and off-endpoint spectator invariance. Signed local current/face history induction remains unproved; original chemical rates, source-specific exchanges, clinical hypotheses and independent longitudinal predictions remain open. Retain KPO-01–18 and original-source attribution.
