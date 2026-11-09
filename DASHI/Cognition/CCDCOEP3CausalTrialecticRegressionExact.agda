@@ -29,6 +29,7 @@ import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact as Country
 import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
 import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
+import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -467,3 +468,22 @@ greenNewDealPolicyProposalNotHistoricalEvidence :
   ≡ Culture.historicalResearch → ⊥
 greenNewDealPolicyProposalNotHistoricalEvidence =
   Culture.policyProposalNotHistoricalObservation
+
+-- The CCDCOE cognitive-warfare criterion is strictly stronger than
+-- document presence, message similarity, measured content or satire.
+agencyHistoryNotOriginalPressArchive :
+  Discriminator.BundleSeparates GCC.sourceIdentityProbe
+    GCC.harrisonFirmCaseHistory GCC.gccHeldMediaClippings1993
+agencyHistoryNotOriginalPressArchive =
+  CW.sourceKindDiscriminatesAgencyReportFromArchivedPress
+
+fictionDoesNotMeasureAudience :
+  Culture.CulturalWork.status Culture.dontLookUp2021
+  ≡ Culture.independentlyVerifiedObservation → ⊥
+fictionDoesNotMeasureAudience =
+  CW.fictionalSatireNotIndependentAudienceObservation
+
+effectDoesNotDetermineWarfareIntent :
+  NF.FactorsThrough P3.observedEffect P3.worldPurpose → ⊥
+effectDoesNotDetermineWarfareIntent =
+  CW.measuredEffectAloneCannotIdentifyHostilePurpose
