@@ -346,3 +346,35 @@ no common state has been constructed. The original physical
 `physicalOneStep`, calibrated rates and real longitudinal assay
 remain uninstantiated. No Agda Golden/ITIR receipts were produced
 by this connector update.
+
+
+### 2026-11-09 same-physical-history PNP/tissue maximum cut
+
+`BiologicalSourcePhysicalTissueSimulationExact` now source-writes
+`physicalPNPAndTissueSameHistory` and
+`physicalPNPAndTissueAtOriginalVoxel`. Both reuse the existing
+`physicalAndPNPRemainTheSameStateHistory` and
+`physicalHistoryProjectsToAll54Bonds` theorems for the very same
+`physicalTrace`. The latter specialization quantifies the original
+`Cube.Ternary27Point`; the vector index chart is not substituted
+for the native 3×3×3 cubical geometry.
+
+**Scope:** This is a logical composition for any *inhabited*
+`SourcePhysicalTissueSimulation`. It does not construct that
+instance or discharge its `physicalPNPStepCommutes`,
+`physicalOneStep` fields. No original calibrated PNP solver,
+BH4 29×12 measured rate, six-face chemical boundary condition,
+Agda kernel check, or original longitudinal observation is supplied.
+
+**Next exact physical cross-branch cut:**
+(1) reconcile original PR #1454 `SameSourceBH4PNPModel` and
+PR #1471 `SourcePhysicalTissueSimulation` under a single selected
+physical `PhysicalState` and action/time schedule;
+(2) source-pay all three one-step commuting squares on that state;
+(3) prove native signed divergence and chemical/ionic current
+balance for the original 54-bond plus six-face network;
+(4) discharge the selected PNP implicit step positivity,
+free-energy dissipation, and compatible boundary-work terms;
+(5) kernel-check the merged root, then validate original
+calibrated and held-out data. No interface pairing is the
+original physical identification theorem by itself.
