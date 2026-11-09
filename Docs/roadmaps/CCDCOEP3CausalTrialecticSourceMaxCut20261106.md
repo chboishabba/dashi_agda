@@ -1604,3 +1604,18 @@ exact-head Agda kernel and executable Python receipts.
 7. **CW6 Golden:** Agda 2.9 exact-head kernel receipts + Python canonical source-checker, independently reproduced published metrics, source-review signed receipts. No checks claimed in this connector session.
 
 The previous A1–A9 critical-art max-cut is **preserved but subordinate**: cut-specific source review is necessary for those film hypotheses, not a dependency for the original 1993/1998/2017 historical communications experiment. No ESD files edited; PR remains draft.
+
+
+### 9 Nov original-source refinement: GCC reporter-directed communication (CW0/CW1)
+
+The Climate Files archival entry `1993 GCC Response to Clinton Earth Day Pledge News Release and Attachments` (dated 3 May 1993 in the archive) describes a **GCC-authored original letter addressed to reporters**, with the GCC news release and two separately authored New York Times articles. Original archive: https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-response-clinton-earth-day-pledge/ . Treat the archive's description as a source-locator/summary until its underlying scanned original bytes have been independently authenticated, checked and attributed. It documents a bounded reporter-directed communication, not proved receipt, actual audience exposures, message adoption or persuasion. It predates the separately authored April 1998 API draft, so it cannot be that draft's implementation.
+
+The new ledger entry `gcc_reporter_letter_1993` uses evidence grade `archived_original_reporter_letter`, separate from PR-firm self-report, preserved news clippings and independent academic corpus. The cognitive-warfare source panel now contains **eight** distinct candidate/historical cases. Checker negative controls are keyed to stable case identifiers, not array indices. This is an **actual externally located original communication**, but content-level original-byte verification, exposure records and mechanisms remain OPEN.
+
+Additional archive provenance:
+- E. Bruce Harrison PR firm undated 1994/95 retrospective: https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/ . Media tactics and self-reported success are separately attributed claims.
+- Original 1993 GCC-held media clippings: https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/ .
+- Geoffrey Supran and Naomi Oreskes (2017), `Assessing ExxonMobil's climate change communications (1977–2014)`, DOI 10.1088/1748-9326/aa815f, 187 originally coded documents. The 2020 correction/expanded advertorial investigation and its different denominator must remain distinct.
+- An industry-affiliated counteranalysis of the Supran/Oreskes sample exists (Energy in Depth); evaluate its different collection window, search design and source ownership, but it is not automatically an independent validation of causal population effects. The original authors' correction is independently credited.
+
+**Research priority:** establish same-original-item message, actual delivery/exposure, peer-reviewed content coding, comparative historical chronology, credible alternative explanation and independently evidenced intent/targeting. Film theory is a useful epistemic non-promotion negative control, not a substitute for these primary empirical materials.
