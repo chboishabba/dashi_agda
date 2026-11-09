@@ -483,3 +483,44 @@ weights were positive. Require a true reservoir extension.
 The physical one-step `physicalOneStep`, source-calibrated
 BH4/PNP/tissue observation identity, independently measured
 compartments/trajectory, and Golden/ITIR still remain open.
+
+
+### 2026-11-09 rechecked existing finite simplex / PNP original stoichiometry cross-PR
+
+User-identified simplex infrastructure exists in this repo:
+`DASHI.Visualisation.FiveClassSimplexColourExact`
+(finite rational five-class display weights);
+`DASHI.GameTheory.FiniteMixedStrategyExpectedUtilityExact`
+(normalized rational strategy/profile probabilities);
+`DASHI.Physics.YangMills.BalabanP33DuhamelOrderedSimplexMeasureExact`
+(two-time ordered simplex integral). None is a proof of real
+compactness/Brouwer for the 27×29 PNP concentration simplex.
+Game-theory Nash existence modules explicitly retain the
+mixed simplex/fixed-point transcription as proof debt.
+
+Companion original BH4/PNP PR #1454 has a **closer original
+source proof donor**:
+`DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact`
+and `BH4PanelRateWeightedConservationExact`. Its new
+`BH4OriginalCHNOPFiveAxisSimplexBridgeExact` module (registered
+in `KitzerowBH4EvidenceEverything`) reuses exactly these
+existing owners, and provides a five-coordinate simultaneous
+27-site CHNOP conservation package. More decisively,
+`panelWeightedAddWeights` +
+`combineOriginalLeftKernel` and four compositions prove the
+29-component `C+H+N+O+P` aggregate source weight annihilates
+each of the 12 original reaction columns. The existing
+all-site theorem then yields
+`original369x29x12AggregateCHNOPBalance` for any
+27×12 natural reaction-multiplicity field.
+
+This advances the algebraic source left-kernel for the
+Brouwer weighted simplex **without repeating a separate
+stoichiometric engine**. It remains conditional on the
+real `Panel.SourceCertifiedOriginal29x12` inhabitant,
+and needs a source-paid strict-positive aggregate mass
+weight at every 29-species coordinate. It is **Nat-valued
+discrete-event conservation**, not an original continuous
+mass-action/SG conservation theorem, real compactness,
+Brouwer existence or biological calibration. No Agda
+kernel receipt was obtained on these branch heads.
