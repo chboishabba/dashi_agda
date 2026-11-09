@@ -1,4 +1,6 @@
-{-# OPTIONS --safe #-}
+-- Integration proof candidate: transitive original gamma/graph owner safety
+-- not yet kernel certified. Do not assert Agda --safe until its
+-- dependency closure is checked under pinned Agda 2.9.
 module DASHI.Mathematics.Complexity.Karp21NativeBinaryCountBudgetExact where
 
 ------------------------------------------------------------------------
