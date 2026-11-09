@@ -28,6 +28,10 @@ python3 scripts/check_bh4_spatial_circulation.py
 python3 scripts/check_bh4_shared_redox_dynamics.py
 python3 scripts/check_bh4_original_qdpr_spatial_reaction.py
 python3 scripts/bh4_original_qdpr_spatial_finite_volume.py --self-test
+# Syntax must be validated before executing the source-aware original
+# Python owner. This catches literal escaped-newline source corruption
+# even when the original 29x12 certificate is not mounted.
+python3 -c 'import ast, pathlib; p=pathlib.Path("scripts/check_bh4_original_panel_spatial_events.py"); ast.parse(p.read_text(encoding="utf-8"), filename=str(p))'
 python3 scripts/check_bh4_original_panel_spatial_events.py --self-test
 # Real 29×12 check requires the source-acquired certificate; absence
 # remains an explicit physical/source residual, not a synthetic payment.
