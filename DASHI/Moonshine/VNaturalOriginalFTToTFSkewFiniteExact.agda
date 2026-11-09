@@ -22,7 +22,9 @@ module DASHI.Moonshine.VNaturalOriginalFTToTFSkewFiniteExact where
 -- DASHI source-specific finite coefficient constructor.
 ------------------------------------------------------------------------
 
+open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Data.Nat using (_≤_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer.Base using (ℤ; +_; _+_)
 
@@ -71,6 +73,14 @@ module Selected
       -- the weak Core.LowerTruncation Set-valued field.
       finiteTruncationBound :
         N.Fixed → ℤ → N.Twisted → Nat
+
+      -- The bound must be a TRUE original FT upper-truncation
+      -- certificate, not merely a chosen finite length.
+      originalFTVanishesAtAndAboveBound :
+        (a : N.Fixed) (n : ℤ) (t : N.Twisted) (j : Nat) →
+        finiteTruncationBound a n t ≤ j →
+        fixedTwisted a (n + (+ j)) t
+          ≡ N.twistedZeroOriginal source
 
   open OriginalFTSkewData public
 
