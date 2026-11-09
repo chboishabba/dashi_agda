@@ -237,3 +237,50 @@ The Cambridge primary HTML was read directly and source descriptions in the ledg
 - `goodFaithLegalProcedureNegativeControl`: legal procedural constraints may be legitimate; structural exclusion/retained authority does not by itself demonstrate bad faith.
 
 **K2 and K3 distinction:** Judicial records pay legal framing, institutional procedure and judgments. They do not themselves establish lived psychological exhaustion. Any K2 claim requires independent material (interviews, testimony, contemporaneous records, triangulated observations) and ethically appropriate handling of private/sensitive detail. Case judgments alone cannot discharge K2 fatigue receipts.
+
+## Seventh pass — Crenshaw's institutional legal cases and attribution discipline (2026-11-09)
+
+**User scope:** K1–K3 priority; K0 (Agda kernel) and K4 (ITIR) not pursued this pass. ESD files strictly read-only/import-only. Roadmap stays GitHub-native; no DOCX output.
+
+### Attribution owners / prior art
+
+1. *DeGraffenreid* district opinion: 413 F. Supp. 142 (E.D. Mo. 1976); appellate opinion: 558 F.2d 480 (8th Cir. 1977). Different court-authored holdings and dispositions. Trial rejected combined category; appellate affirmed in part / reversed and remanded in part on other grounds. The appeal must not be represented as a blanket adoption of every district rationale. Original online judicial transcriptions are **not** byte-authenticated court PDF receipts.
+2. *Jefferies* 615 F.2d 1025 (5th Cir. 1980): Fifth Circuit opinion recognises Black-women-specific Title VII claim as cognizable, and remands for factual evaluation; no assumption that recognition establishes liability or remedy. Preserve differences within the opinion, including judicial disagreement.
+3. *Moore* 708 F.2d 475 (9th Cir. 1983): class representativeness and burden of proof are distinct from protected-class membership; the appellate court affirmed limitation of the class and dismissal.
+4. *Payne* 673 F.2d 798 (5th Cir. 1982): class scope, conflicting representation interests, original liability findings, injunctive relief, and remedial terms must remain separately typed.
+5. Kimberlé W. Crenshaw (1989, 1991) owns the analysis of these legal patterns; she did **not** author the court judgments. Existing DASHI `IntersectionalNonFactorability`, `IntersectionalBinaryInteractionBridgeExact`, `LegalAuthorityCitationExact` own canonical algebra/receipt machinery. New finite legal comparison and model capstones are **DASHI-original reconstructions**, not Crenshaw-authored mathematics.
+
+### Committed source-level Agda modules and exact leaves
+
+- `DASHI/Governance/CrenshawLegalPrimaryCaseAtlasExact.agda`:
+  `deGraffenreidTrial`, `deGraffenreidAppeal`, `jefferiesAppeal`, `crenshawDemarginalizing`, `districtNotAppellate`, `jefferiesRecognitionAtRemand`, `jefferiesCombinationMeritsNotEstablishedAtRemand`. They use fallback bibliographic reporter citations, not mischaracterised 'authorised report' identifiers.
+- `DASHI/Governance/CrenshawLegalCaseComparisonExact.agda`:
+  `recognitionCannotDecideLiability`, `recognitionDoesNotEstablishMerits`, `anyRecognitionRechartCannotDecideLiability`, `deGraffenreidTrialVsAppealClaimSameCase`, `jefferiesIntersectionalRecognitionPositiveControl`, `jefferiesRecognisedNotProved`, `deGraffenreidDistrictNotJefferiesAppellate`, `jointOnlyInteractionHasExistingObstruction`.
+- `DASHI/Governance/CrenshawLegalRepresentationRemedyExact.agda`:
+  `mooreAppeal`, `payneAppeal`, `mooreClassRepresentationNotClaimIdentity`, `classMembershipCannotDecideRepresentativeAdequacy`, `payneReliefNotEquivalentToRepresentationScope`, `classScopeCannotDetermineRemedy`, `mooreAndPayneHaveDistinctAppellateDispositions`.
+- `DASHI/Governance/CrenshawLegalAttributionCapstoneExact.agda`:
+  `crenshawLegalCrossCaseCut` joins stage separation, merits-vs-recognition, class-vs-representation, scope-vs-relief, Jefferies positive control and bounded citation non-promotion.
+
+**Crucial status:** All constructions source-written; neither court claims nor Agda proofs are asserted to be kernel-verified or externally adjudicated. Finite logical independence worlds are *synthetic*, not parties, judicial findings, or experimental evidence.
+
+### Legal primary-text links inspected
+
+- DeGraffenreid district: https://www.neochart.com/catalog/cases/f-supp/volume_413/0142_01/index.html
+- DeGraffenreid appeal: https://law.justia.com/cases/federal/appellate-courts/F2/558/480/165330/
+- Jefferies appeal: https://law.justia.com/cases/federal/appellate-courts/F2/615/1025/415505/
+- Moore appeal: https://law.justia.com/cases/federal/appellate-courts/F2/708/475/330286/
+- Payne appeal: https://www.neochart.com/catalog/cases/f2d/volume_673/0798_01/index.html
+
+### Revised K1–K3 maximum cut
+
+| Priority | Gate | Narrowest unpaid substantive obligation |
+|---|---|---|
+| K1.1 | Legal opinion textual provenance | Exact quotation/pinpoint verification against original publisher/court copies, SHA for archived snapshots, and source-version correspondence. Current case atlas is court *text locator*, not authenticated court-document receipt. |
+| K1.2 | Crenshaw commentary weld | Bound 1989/1991 passages on these exact cases to each source claim and separately record Crenshaw's analytic interpretation, objections and any later legal shifts. No merger of court text with theory. |
+| K2.1 | Direct epistemic fatigue evidence | Source-identifiable, ethically acquired accounts of burden and sustained fatigue in legal/ESD practices, matched in time to procedure. Court opinion alone does not pay this. |
+| K2.2 | Causal comparator | Good-faith, onerous legal review and dissimilar case confounders as negative controls; observed delay or unsuccessful litigation does not demonstrate deliberate exhaustion tactics. |
+| K3.1 | Real case admission | Bind opinion passages to claim/proceeding/decision/remedy and same-case stage; distinguish court text, allegation, procedural ruling, statutory interpretation, factual finding, merits and awarded relief. |
+| K3.2 | Empirical normative evaluation | Judicial outcome must not be promoted to psychological oppression, social-justice success, decolonial sovereignty, universal legal precedent, or causal intention. |
+| K3.3 | Extension beyond four cases | Cases must be source-compatible and comparisons query-specific; add external institutional/Indigenous case only with independent authority and relevant source-specific evidence. |
+
+**Recommended next input:** Archive exact court opinions and Crenshaw 1989 paper; validate in-text passage-level provenance and same-case mapping. The four-case corpus is now substantially advanced as a formal source-indexed institutional comparison, not yet case-level empirical K2 closure.
