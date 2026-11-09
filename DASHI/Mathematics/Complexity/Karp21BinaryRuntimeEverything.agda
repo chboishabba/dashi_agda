@@ -87,3 +87,7 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorSemanticE
 -- FRACDASH priority/guard dependency cache: generic same-step theorem.
 -- N21 specialization and tape-clock receipt still open.
 import DASHI.Mathematics.Complexity.Karp21FractranPriorityFrontierExact
+
+-- Actual original N21 endpointConsistent/boolEqual + binary-ledger FRACDASH edge transition.
+-- One-edge same-step and cached-score-update theorems; full rawSparseScore weld open.
+import DASHI.Mathematics.Complexity.Karp21FractranN21EndpointScoreStepExact
