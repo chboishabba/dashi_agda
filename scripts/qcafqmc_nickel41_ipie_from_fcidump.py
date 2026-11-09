@@ -26,7 +26,7 @@ import time
 def source_digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
-def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
+def run(receipt_file,checkpoint=None,doci_npz=None,walkers=1280,blocks=300,steps_per_block=20,
         time_step=.005,eq_blocks=0,analysis_discard_blocks=50,seed=20261109,chol_threshold=1e-5):
     import numpy as np
     receipt_file=Path(receipt_file).resolve()
@@ -39,6 +39,8 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
     if (receipt.get("ncore") is None or
             receipt.get("active_orbital_indices_zero_based") is None):
         raise ValueError("missing inactive-core or orbital-frame certificate")
+    if checkpoint and doci_npz:
+        raise ValueError("choose either learned NQS or independent DOCI, not both")
     if min(walkers,blocks,steps_per_block)<1 or time_step<=0:
         raise ValueError("invalid AFQMC parameters")
     if not 0<=eq_blocks<blocks:
@@ -86,6 +88,22 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
             raise ValueError("neural checkpoint and CASCI selected orbital/geometry frame differ or are unverified")
         trial=make_ipie_trial(str(checkpoint),(4,4),8,cutoff=0.)
         trial_type="paired_NQS_full_CI"
+    elif doci_npz:
+        from ipie.trial_wavefunction.particle_hole import ParticleHole
+        with np.load(doci_npz,allow_pickle=False) as z:
+            if z["fcidump_sha256"].item()!=source_digest(fcidump):
+                raise ValueError("DOCI FCIDUMP does not match nickel Hamiltonian")
+            if z["orbital_frame_sha256"].item()!=receipt.get("selected_mo_sha256") or (
+                    z["geometry_sha256"].item()!=receipt.get("geometry_sha256")):
+                raise ValueError("DOCI source geometry/MO frame differs")
+            coeffs=z["coefficients"].copy()
+            occa=z["occ_alpha"].copy()
+            occb=z["occ_beta"].copy()
+        order=np.argsort(-np.abs(coeffs),kind="stable")
+        trial=ParticleHole((coeffs[order],occa[order],occb[order]),
+                            (4,4),8,num_dets_for_trial=-1,
+                            num_dets_for_props=len(coeffs))
+        trial_type="independent_DOCI"
     else:
         occupied=np.eye(8,dtype=np.complex128)[:,:4]
         trial=SingleDet(np.hstack((occupied,occupied)),(4,4),8)
@@ -109,6 +127,7 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
             "integral_sha256":source_digest(fcidump),
             "ipie_hamiltonian_sha256":source_digest(out),
             "trial_checkpoint_sha256":source_digest(checkpoint) if checkpoint else None,
+            "DOCI_source_sha256":source_digest(doci_npz) if doci_npz else None,
             "geometry_sha256":receipt["geometry_sha256"],
             "charge_spin_source":receipt["charge_spin_source"],
             "orbital_selection_source":receipt["orbital_selection_source"],
@@ -130,9 +149,10 @@ if __name__=="__main__":
     p=argparse.ArgumentParser()
     p.add_argument("nickel_casci_receipt")
     p.add_argument("--nqs-checkpoint")
+    p.add_argument("--doci-npz")
     p.add_argument("--walkers",type=int,default=1280)
     p.add_argument("--blocks",type=int,default=300)
     p.add_argument("--seed",type=int,default=20261109)
     a=p.parse_args()
-    print(json.dumps(run(a.nickel_casci_receipt,a.nqs_checkpoint,
+    print(json.dumps(run(a.nickel_casci_receipt,a.nqs_checkpoint,a.doci_npz,
                          a.walkers,a.blocks,seed=a.seed),indent=2))
