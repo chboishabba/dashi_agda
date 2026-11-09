@@ -291,7 +291,8 @@ def main() -> None:
         p.error("--input --output --intervention-date and --intervention-receipt required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
     census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows,
-                 a.expected_frame_sha256)
+                 a.expected_frame_sha256,
+                 a.intervention_date, a.intervention_receipt)
     result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt,
                    source_root=a.source_root)
     a.output.parent.mkdir(parents=True,exist_ok=True)
