@@ -119,6 +119,32 @@ data OriginalWordPositiveLinkValues
     OriginalWordPositiveLinkValues Value ps →
     OriginalWordPositiveLinkValues Value (p ∷ ps)
 
+------------------------------------------------------------------------
+-- Word-prefix inverse-system maps on the actual finite source values.
+-- These commute with sampling, not with cross-cutoff Gibbs measures.
+------------------------------------------------------------------------
+
+appendPlaquetteWords :
+  ∀ {n : Nat} →
+  List (Plaquette.PeriodicPlaquette n) →
+  List (Plaquette.PeriodicPlaquette n) →
+  List (Plaquette.PeriodicPlaquette n)
+appendPlaquetteWords [] suffix = suffix
+appendPlaquetteWords (p ∷ prefix) suffix =
+  p ∷ appendPlaquetteWords prefix suffix
+
+forgetOriginalWordSuffix :
+  ∀ {n : Nat} {Value : Set}
+    (prefix suffix : List (Plaquette.PeriodicPlaquette n)) →
+  OriginalWordPositiveLinkValues Value
+    (appendPlaquetteWords prefix suffix) →
+  OriginalWordPositiveLinkValues Value prefix
+forgetOriginalWordSuffix [] suffix samples = wordValuesStop
+forgetOriginalWordSuffix (p ∷ prefix) suffix
+    (wordValuesStep head tail) =
+  wordValuesStep head
+    (forgetOriginalWordSuffix prefix suffix tail)
+
 sampleOriginalWilsonWord :
   ∀ {n : Nat} {Value : Set} {group : Bond.ExactLinkGroup Value} →
   (realization : Bond.PeriodicBondGaugeRealization n Value group) →
@@ -131,6 +157,24 @@ sampleOriginalWilsonWord realization (p ∷ ps) =
       (Torus.first p)
       (Bond.plaquetteBoundaryDirections (Torus.second p)))
     (sampleOriginalWilsonWord realization ps)
+
+sampleOriginalWordPrefixCommuting :
+  ∀ {n : Nat} {Value : Set} {group : Bond.ExactLinkGroup Value}
+    (realization : Bond.PeriodicBondGaugeRealization n Value group)
+    (prefix suffix : List (Plaquette.PeriodicPlaquette n)) →
+  forgetOriginalWordSuffix prefix suffix
+    (sampleOriginalWilsonWord realization
+      (appendPlaquetteWords prefix suffix))
+  ≡ sampleOriginalWilsonWord realization prefix
+sampleOriginalWordPrefixCommuting realization [] suffix = refl
+sampleOriginalWordPrefixCommuting realization
+    (p ∷ prefix) suffix =
+  cong
+    (wordValuesStep
+      (sampleOriginalSignedPath realization
+        (Torus.first p)
+        (Bond.plaquetteBoundaryDirections (Torus.second p))))
+    (sampleOriginalWordPrefixCommuting realization prefix suffix)
 
 evaluateOriginalWilsonWord :
   ∀ {n : Nat} {Value : Set}
