@@ -929,3 +929,59 @@ simplex argument may not apply), (iv) physical BH4/PNP/tissue
 same-object step and longitudinal empirical validation,
 (v) numerical root computation/verified residual rather than
 existence alone, and (vi) Golden/ITIR trusted referee receipts.
+
+
+### 2026-11-09 exact integer conservation repair / formal acceptance frontier
+
+The all-timestep Brouwer existence CONTRACT is conditional on a
+true, positive, exactly conserved molecular weighting. Previously,
+`global_positive_implicit_brouwer_bounds` checked
+`(products-reactants)@weights==0` after converting those numbers
+to binary floats. This is **not** a valid exact conservation
+certificate: for example, `float(2**53)==float(2**53+1)` although
+the two original integer counts differ.
+
+The original PNP numerical owner now defines
+`exact_positive_conservation_weights`. It requires genuine
+Python integers (not integer-valued floats or booleans) for every
+gross Rhea substrate/product stoichiometric count and each strictly
+positive molecular weight; for each reaction it evaluates
+`sum_s (beta_rs-alpha_rs)*w_s` with exact integer arithmetic
+and rejects every nonzero remainder. The `global_positive_implicit_brouwer_bounds`
+consumer now invokes this exact admission gate **before** using
+floating-point envelopes for `Kloss`, so a rounded false
+conservation relation cannot enable the existence receipt.
+Synthetic regressions include the 2**53 precision boundary,
+wrong weights, nonintegral sides and Boolean coordinates.
+
+**Precise status:**
+
+- Original chemical **exact integer conservation precondition**:
+  implemented as a fail-closed check, independent of float64
+  equality (repository test execution still pending).
+- Original closed finite PNP **all-timestep Brouwer mathematical
+  implication**: source-written under positivity, stoichiometric
+  conservation, 54 native bonds, blocking mass boundary, finite
+  positive material scales; not Agda kernel-proved.
+- Reported `Kloss` and positivity lower bounds are computed
+  with floating-point arithmetic **without directed rounding**.
+  They are NOT formally certified numerical bounds. To pay
+  numeric safety, build exact rational or outward-rounded
+  interval majorants at the original selected source parameters.
+- The repository contains no identified trustworthy
+  **constructive finite Brouwer proof** that can be reused
+  immediately as an Agda theorem. Do not use an unrelated
+  conditional/contraction receipt as if it discharged Brouwer.
+  The remaining exact lemmas are
+  `original369ClosedWeightedSimplexCompact`,
+  `original369BrouwerMapContinuous`,
+  `original369BrouwerMapPreservesSimplex`,
+  `original369BrouwerFixedPointExists`,
+  `original369ImplicitFixedPointIsPositiveRoot` and
+  `original369ClosedRootFreeEnergyDecreases`. These are
+  proposed proof contracts, not existing Agda declarations.
+- Full selected BH4 physiology still needs actual original
+  Rhea/parameter source authentication, a matched spatial
+  tissue readout and physical time, reactive/open boundary
+  extensions, exact-head Agda verification, and independent
+  longitudinal evidence.
