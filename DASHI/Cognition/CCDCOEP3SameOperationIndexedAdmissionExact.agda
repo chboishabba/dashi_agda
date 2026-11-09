@@ -96,15 +96,53 @@ transportCaseStage :
   c ≡ d → CaseStage c → CaseStage d
 transportCaseStage refl x = x
 
--- If an alleged transport from GCC 1993 to API 1998 explicitly
--- requires original-case identity, that assumption is contradictory.
-noGCC1993ToAPI1998IdentityTransport :
-  (gcc1993 ≡ apiProposal1998) →
-  CaseStage gcc1993 → CaseStage apiProposal1998
-noGCC1993ToAPI1998IdentityTransport proof _ =
-  transportCaseStage proof (indexedClaim gcc1993 originalIntervention)
+-- There is no case-equality witness authorising transport of
+-- 1993 GCC receipts into the 1998 API case.
+noGCC1993ToAPI1998Identity :
+  gcc1993 ≡ apiProposal1998 → ⊥
+noGCC1993ToAPI1998Identity = gccCaseNot1998Proposal
 
 -- This theorem does NOT assert all E are nontrivial: if callers set
 -- every E c stage to the unit type, evidence still becomes trivial.
 -- A scientific instance must supply externally verified, distinct,
 -- source-indexed evidence predicates and original review receipts.
+
+------------------------------------------------------------------------
+-- CLOSED INVENTORY NEGATIVE CONTROL.
+--
+-- The source-located inventory currently admits a catalogue stage
+-- for the 1993 GCC communication and 1998 API draft, and attribution
+-- of the 2017 content study. It does NOT admit independently measured
+-- audience exposure. This says nothing about future historical finds.
+------------------------------------------------------------------------
+
+data CurrentlyLocatedEvidence : OriginalCase → EvidenceStage → Set where
+  gcc1993OriginalCatalogued :
+    CurrentlyLocatedEvidence gcc1993 originalIntervention
+  api1998ProposalCatalogued :
+    CurrentlyLocatedEvidence apiProposal1998 originalIntervention
+  exxon2017StudyAttributed :
+    CurrentlyLocatedEvidence exxonCorpus2017 originalAttribution
+
+currentGCCExposureUnavailable :
+  CurrentlyLocatedEvidence gcc1993 recipientExposure → ⊥
+currentGCCExposureUnavailable ()
+
+currentAPIExposureUnavailable :
+  CurrentlyLocatedEvidence apiProposal1998 recipientExposure → ⊥
+currentAPIExposureUnavailable ()
+
+selectedGCCDoesNotAdmitFullOperation :
+  AdmitsOneOriginalCase CurrentlyLocatedEvidence gcc1993 → ⊥
+selectedGCCDoesNotAdmitFullOperation admission =
+  currentGCCExposureUnavailable
+    (AdmitsOneOriginalCase.exposure admission)
+
+selectedAPIDraftDoesNotAdmitFullOperation :
+  AdmitsOneOriginalCase CurrentlyLocatedEvidence apiProposal1998 → ⊥
+selectedAPIDraftDoesNotAdmitFullOperation admission =
+  currentAPIExposureUnavailable
+    (AdmitsOneOriginalCase.exposure admission)
+
+-- These negative proofs concern the declared closed *inventory* only;
+-- neither proves a historical absence of delivery, intention or impact.
