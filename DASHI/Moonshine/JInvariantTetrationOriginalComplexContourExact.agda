@@ -33,8 +33,7 @@ record OriginalComplexTetrationChart : Set₁ where
 
 open OriginalComplexTetrationChart public
 
-private
-  module Local (C : OriginalComplexTetrationChart) where
+module Contours (C : OriginalComplexTetrationChart) where
     private
       P = complexPackage C
       R = Real.real (Complex.realPackage P)
@@ -93,4 +92,4 @@ private
     nextPhase O z =
       cong (OriginalPhaseChart.phase O) (originalTetrationEquation C z)
 
-open Local public
+open Contours public
