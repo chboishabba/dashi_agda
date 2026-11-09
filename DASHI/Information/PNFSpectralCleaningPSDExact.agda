@@ -89,3 +89,21 @@ cleanedOperatorPositiveSemidefinite :
 cleanedOperatorPositiveSemidefinite K O F E v
   rewrite CleanedOperatorEquality.quadraticEqualsFiltered E v =
   nonnegativeSpectralFilterPreservesPSD K O F v
+
+-- PSD survives any linear congruence map represented as a vector
+-- transformation T: the new quadratic is Q(Tv). This is the algebraic
+-- foundation for positive diagonal covariance/correlation rescaling;
+-- the concrete diagonal roots/inverses and reconstruction are not assumed.
+diagonalCongruencePreservesPSD :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : ExistingPSD.FiniteGramOrderAuthority K) →
+  {m : Nat} → (F : FilteredFiniteSpectrum K m) →
+  (E : CleanedOperatorEquality K F) →
+  (transform : FilteredFiniteSpectrum.Vector F →
+               FilteredFiniteSpectrum.Vector F) →
+  (v : FilteredFiniteSpectrum.Vector F) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (CleanedOperatorEquality.operatorQuadratic E (transform v))
+diagonalCongruencePreservesPSD K O F E transform v =
+  cleanedOperatorPositiveSemidefinite K O F E (transform v)
