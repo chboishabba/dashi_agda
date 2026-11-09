@@ -13,6 +13,7 @@ import DASHI.Governance.EpistemicPowerHistoryAndNonSubstitutionExact as History
 import DASHI.Governance.EpistemicPowerCapacityDynamicsExact as Capacity
 import DASHI.Governance.EpistemicPowerCostPayoffExact as CostPayoff
 import DASHI.Governance.EpistemicPowerQueryAdequacyCapstoneExact as Commitment
+import DASHI.Governance.EpistemicPowerMinimalObserverRepairExact as Repair
 import DASHI.Governance.EpistemicPowerStructuralRetentionExact as Retention
 import DASHI.Governance.EpistemicPowerSourceAtlasExact as Sources
 import DASHI.Reasoning.TrialecticAttachedTwoCellExact as Trialectic
@@ -45,6 +46,8 @@ record EpistemicPowerCrossDomainCut : Set₁ where
     nominalTaskCountCannotDetermineCostAndPayoff :
       INF.FactorsThrough
         CostPayoff.nominalTaskCount CostPayoff.costPayoff → ⊥
+    addedCommitmentCoordinatesRepairSpecifiedQueries :
+      Repair.FiniteMinimalObserverRepair
     originalESDScoreNotFullState :
       INF.FactorsThrough
         ESD.coarseVisibilityProfile ESD.fullAuditState → ⊥
@@ -65,6 +68,7 @@ epistemicPowerCrossDomainCapstone = cross-domain-cut
   Commitment.landQueryInadequate
   Commitment.sovereigntyQueryInadequate
   CostPayoff.taskCountCannotRecoverCostPayoff
+  Repair.finiteMinimalObserverRepair
   ESD.coarseVisibilityProfileCannotDetermineFullAuditState
   Grammar.noTernaryRelabellingPreservesGrammar
   Trialectic.attachedFaceDoesNotFactorThroughBoundary
