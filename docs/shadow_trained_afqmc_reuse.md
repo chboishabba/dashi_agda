@@ -250,3 +250,19 @@ python scripts/qcafqmc_fixed_sector_transformer_check.py
 python scripts/qcafqmc_ipie_molecular_runner.py examples/qcafqmc_ipie_h2_reference.json
 python scripts/qcafqmc_nqs_fci_same_source.py ORIGINAL_8_ORBITAL.FCIDUMP output/nqs.pt
 ```
+
+
+## 16-qubit learned-trial-guided physical propagation (finite test only)
+
+`scripts/qcafqmc_nqs_guided_hubbard16.py` is a **same-source end-to-end finite phaseless** trial-guided projector, not just a trial energy oracle. Given an 8-spatial-orbital FCIDUMP whose electron interactions are strictly *on-site Hubbard* `U_i n_up,i n_down,i`, a compatible learned 16-qubit NQS and fixed particle counts, it constructs the *identical* FCI Hamiltonian for the independent energy reference, updates spin-resolved Slater matrices through a fully enumerated discrete Hirsch–Stratonovich field distribution with each site's proper occupancy-shift prefactor, uses NQS trial-overlap ratios for field importance sampling, applies the discrete `p/q` likelihood correction and cosine phaseless weight, measures the NQS mixed local energy and branches by systematic resampling. Near-node walkers and unsupported general nonlocal molecular ERIs fail closed.
+
+`scripts/qcafqmc_nqs_hubbard16_end_to_end_check.py` constructs its own eight-orbital/two-electron on-site Hubbard FCIDUMP, 64 complete configurations, entirely **synthetic** complex overlap labels, independently trains the ~13k parameter NQS, and launches a short finite NQS-guided HS projector using the *same* integrals and wavefunction. Outputs are explicitly marked synthetic; no original IonQ record is asserted.
+
+An independent algebraic numerical control (two sites, U=4, timestep 0.025) confirms the site-resolved HS shift used by this algorithm agrees with the exact finite symmetric-Trotter operator with Frobenius error `2.48e-15`. The **committed** end-to-end script remains unexecuted in this environment and therefore is an implementation, not a successful test receipt.
+
+```bash
+python scripts/qcafqmc_nqs_hubbard16_end_to_end_check.py
+python scripts/qcafqmc_nqs_guided_hubbard16.py SYNTHETIC_8_ORBITAL.FCIDUMP SYNTHETIC_NQS.pt
+```
+
+**Still not production QC-AFQMC for nickel**: the finite HS algorithm handles onsite interactions only and no Gaussian Cholesky field generalisation, reorthogonalization or optimized multi-determinant NQS callback. For production molecular force bias, stabilized Slater walkers and phaseless propagation, the separate, source-cited iPie adapter is the correct software route; it currently runs a classical determinant trial only. Original matchgate data, hardware calibration and training checkpoint remain externally missing.
