@@ -144,3 +144,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeLedgerOriginalRawScoreExact
 -- P0-E/F original compareLE structural correctness, reflexivity and source inspection bound.
 -- General numeric atLeast theorem and physical bit-tape motion remain OPEN.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact
+
+-- P0-E: constructive Nat gap witnesses for the ACTUAL compareLE on ALL bitwords, including noncanonical zero padding.
+-- Agda kernel and complete original positive-threshold grammar remain outstanding.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdNumericalExact
