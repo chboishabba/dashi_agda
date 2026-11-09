@@ -123,6 +123,8 @@ originalFiniteNormalizedEndpointErrorWeld stage x ratio =
       (originalFiniteNormalizedExpErrorWeld stage x ratio))
     (RP.*-cong
       RP.≃-refl
-      (RP.-‿cong
-        (RP.≃-symm
-          (originalFiniteNormalizedExpAtZeroIsOne stage))))
+      (RP.+-cong
+        RP.≃-refl
+        (RP.-‿cong
+          (RP.≃-symm
+            (originalFiniteNormalizedExpAtZeroIsOne stage)))))
