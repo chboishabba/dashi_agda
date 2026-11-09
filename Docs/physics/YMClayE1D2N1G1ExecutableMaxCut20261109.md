@@ -147,3 +147,17 @@ This strengthens previous E1/A3 finite-support extensionality and equality-under
 **B1/B2/H6/G1:** unchanged mathematical original-source obligations in R576/R577/R563/R571. No source-dependent analytic bound is manufactured from this algebraic improvement.
 
 **Verification:** GitHub source commits and readback; no Agda 2.9 binary available in working container. These declarations are **not** kernel-accepted until their regression and transitive imports typecheck.
+
+
+## Same-cutoff original Wilson *finite* projective prefix seam (2026-11-09)
+
+The direct source-value evaluator `YMClayE1A3OriginalSignedPathValueEvaluatorExact.agda` has been extended with actual dependent finite-coordinate inverse-system maps:
+- `appendPlaquetteWords`: original plaquette-word concatenation;
+- `forgetOriginalWordSuffix`: take the actual sampled values on a longer word `prefix ++ suffix` and forget precisely the suffix, returning the correctly indexed prefix sample;
+- `sampleOriginalWordPrefixCommuting`: proves the commuting diagram
+  `forgetOriginalWordSuffix prefix suffix (sampleOriginalWilsonWord realization (prefix ++ suffix)) ≡ sampleOriginalWilsonWord realization prefix`
+  for **every** actual finite Wilson link realization, arbitrary original plaquette words and every periodic side length.
+
+This pays a concrete *same-lattice word-index* projective naturality lemma; no additional abstract projective axioms, fake measure, or complete-field-as-coordinate trick.
+
+**Do not promote as R566 probability consistency:** the group-valued sample forgetting diagram is not equality of `μ_n` original Wilson Gibbs marginals at distinct lattice cutoffs. The remaining P0 E1 cut is a selected common continuum projective carrier with physical-scale refinement maps and source-selected original expectation comparisons plus continuity-at-empty. The existing R538/R539/R534 and `YangMillsLiteralProjectiveCylinderSourceExact` compilers consume those source facts. This pass produced GitHub code only; no Agda binary or kernel acceptance available. 
