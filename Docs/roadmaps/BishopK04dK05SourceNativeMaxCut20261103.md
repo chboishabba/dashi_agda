@@ -1,5 +1,46 @@
 # Bishop K04d/K05 same-object max-cut — 2026-11-03
 
+## 2026-11-09 exact-leaf audit: what is known versus what is not
+
+**Direct answer: we know the existing terminal type names, the source owners and the necessary analytic *categories* of proof, but not a proven exhaustive minimal basis of new lemmas.** In particular P3's continuation and gamma implementation may expose further domain, branch, normalisation, holomorphy and pole-removal lemmas once the actual functions are chosen. Claiming that five or six invented lemma names suffice would be unjustified. Do not count proposed lemma names as implementation or Agda acceptance.
+
+### P0 source-level advance: finite differential residual
+
+New owner `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpDerivativeResidualExact.agda` is imported by `EverythingTOESymmetryResolved369`, `Unifier`, `Unified/Everything` and the pinned Bishop checker. It reuses the *actual* native `originalLogFinitePartialFactorDerivative`, `originalBishopExponentialFactorDerivative`, `factorDerivativeChain`, `bishopExpCongruent` and `negativeLogDerivativeFiniteResidual`.
+
+Exact declarations:
+
+- `originalFiniteNegativeLogDerivative`: factor derivative of the original negative log partial is minus the original geometric partial.
+- `originalFiniteNegativeLogExpDerivative`: factor derivative of the original finite `exp_B(-L_N)`, no generic differentiation authority.
+- `originalFiniteNegativeLogExpODEResidual`: **all Nat N, all Bishop x**, the exact finite identity
+  `(1-x) F_N'(x) + F_N(x) ≃ x^N F_N(x)`.
+- `originalFiniteNegativeLogExpODEResidualConvergesZero`: for source `0<x<1` and explicit `|x|<1`, its literal finite residual tends to original Bishop zero, using existing `originalNegativeLogFiniteExponentialConverges` and pinned geometric power decay.
+
+**Unpaid decisive P0 leaf:** deduce the source function's original value at each x from initial value and finite residual *with a uniform integrated error/constructive ODE uniqueness theorem*, OR instead evaluate the actual nested exp/log formal coefficients and justify convergence. A proof that the residual tends to zero *pointwise* does **not** establish uniqueness or `F(x)=1-x`; uniform control near an interval and fundamental theorem of calculus/integral estimate may still be needed. Do not mistake `originalFiniteNegativeLogExpODEResidualConvergesZero` for the terminal `OriginalBishopNegativeLogExponentialGap`.
+
+### Remaining exact obligations, with minimal route decision
+
+| Terminal gate | Exact existing names / required source equations | What must actually be implemented | Anti-duplication |
+| --- | --- | --- | --- |
+| P0 | `OriginalBishopNegativeLogExponentialGap`; `sourceCanonicalNatLogAllIndicesExpInverse` | **Either** constructive finite residual bound integrated with an initial value at x=0 (including x=0 extension / boundary continuity), **or** native evaluated nested power-series coefficient plus rearrangement/limit; this is one terminal source identity, not a free function interface | exp and finite log derivatives, finite ODE residual, uniform source tails are written |
+| P1 | `OriginalAtanFiveCayleyEvaluation`, `OriginalAtan239CayleyEvaluation` in `BishopMachinTwoPointCayleyCompositionExact` | original atan source-to-imaginary-exp phase identity on the half-ball, including nonzero complex denominator, source convergence/derivative or formal composition transport, then both literal witnesses; verify agreement with PR #1466's complex carrier | formal Cayley recurrence, finite atan derivatives, signed factorial product, trig product already present |
+| P2 C1 | `FromOriginalNegativeLog.originalZetaAboveTwo`, `originalZetaIsSourceDirichletLimit` | instantiate existing original LOG receipt and actual all-angle Pythagorean recipient; exact-head Agda typecheck | real/imag Basel bounds, uniform tails and Nat-log term/limit coherence now written |
+| P2 C2 | `OriginalHalfPlaneDirichletAgreement`, selected original `ZetaHalfPlaneLayer.zetaHalfPlane` | construct/identify the **independent actual original analytic zeta**. Value equality on Re>2 from termwise source identity; if global ζ intended: analytic continuation and uniqueness on connected domain | do NOT choose the same source zeta by definitional fiat and call it an independent same-object proof |
+| P3 | `GammaMellinLayer.gamma`; `CompletedRiemannZeta.xi`; `XiIsOriginalFactorProduct` | concretely define Gamma on a source domain, integral/product convergence, gamma extension/functional equation, analytic continuation ζ, branch-consistent `pi^(-s/2)`, selected xi factor equality, then pole removals/entire extension and continuity | G2 Gamma/Mellin Test interfaces are **not** gamma analytic values; use original Bishop complex carrier |
+
+### Acceptance receipts / deliverables
+
+- **A:** actual LOG `OriginalBishopNegativeLogExponentialGap` inhabited; exact-head Agda 2.9 typechecks.
+- **B:** both actual Machin Cayley witnesses inhabited; source first-positive-zero consumer kernel checks.
+- **C1:** original `Re(s)>2` ζ owner instantiated without P0 parameter; common Basel cutoff and true original limit kernel check.
+- **C2:** independently chosen original zeta analytic function identified with source Dirichlet value; continuation if global goal.
+- **D:** original genuine Gamma + prefactor and selected xi factor/entire extension.
+- **V:** exact commit SHA, local pinned Agda version, successful `parallel_checker` output for terminal owners and all three TOE roots; no CI-only substitution.
+
+The shortest actual implementation path remains **P0 finite-integrated error** before new general analytic theory; P1 can run in parallel; P2 C1 follows P0; P3's construction is materially larger and not reducible to an existing Set-valued gamma field.
+
+---
+
 ## Canonical live P0–P3 max-cut · 2026-11-09 · HEAD before this update 0edb692863ea4a879cc9476ee372b1558034f223
 
 **Authority:** the exact original Bishop functions and their setoid equalities, not a formal recurrence without analytic evaluation, a freely chosen `Set` proposition, or a classical Lean result presumed to be an Agda proof. **Acceptance:** source-written ≠ Agda 2.9 kernel accepted. This section supersedes older progress summaries below when they conflict.
