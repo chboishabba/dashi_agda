@@ -240,3 +240,31 @@ allOriginal54BondHistoriesConserve :
   V.sum (Transfer.runTransfers actions state) ≡ V.sum state
 allOriginal54BondHistoriesConserve =
   Transfer.all27SharedSitesConserve
+
+
+------------------------------------------------------------------------
+-- SAME ORIGINAL 3D GEOMETRY, POINTWISE SOURCE AND TARGET LEDGERS
+-- (not a separate artificial per-edge inventory).
+------------------------------------------------------------------------
+
+originalBondLocalSourceDebitIsPaid :
+  (bond : Grid.PositiveBond) (state : V.Vec Nat 27) →
+  V.lookup
+    (Transfer.debitAt (originalPointIndex (Grid.bondStart bond)) state)
+    (originalPointIndex (Grid.bondStart bond))
+    + Transfer.actualSourceDebit
+        (originalPointIndex (Grid.bondStart bond)) state
+    ≡ V.lookup state (originalPointIndex (Grid.bondStart bond))
+originalBondLocalSourceDebitIsPaid bond state =
+  Transfer.lookupAfterDebit
+    (originalPointIndex (Grid.bondStart bond)) state
+
+originalBondLocalTargetCreditIsPaid :
+  (bond : Grid.PositiveBond) (state : V.Vec Nat 27) →
+  V.lookup
+    (Transfer.creditAt (originalPointIndex (Grid.bondEnd bond)) state)
+    (originalPointIndex (Grid.bondEnd bond))
+    ≡ suc (V.lookup state (originalPointIndex (Grid.bondEnd bond)))
+originalBondLocalTargetCreditIsPaid bond state =
+  Transfer.lookupAfterCredit
+    (originalPointIndex (Grid.bondEnd bond)) state
