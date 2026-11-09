@@ -210,6 +210,6 @@ originalGraphRejectsWhenBinaryInitialRejected :
 originalGraphRejectsWhenBinaryInitialRejected word certificate failed
   with Graph.readNativeWholeBinaryGraphWord word
 ... | nothing =
-  sym (OriginalGraph.nativeWholeBinaryGraphWordSameOriginal word)
+  OriginalGraph.nativeWholeBinaryGraphWordSameOriginal word
 ... | just parsed with failed
 ... | ()
