@@ -21,7 +21,7 @@ import DASHI.Moonshine.Y443CoxeterPresentationExact as Y
 import DASHI.Moonshine.GradedRepresentation as GR
 import DASHI.Moonshine.TwistedModuleModularity as TM
 import DASHI.Moonshine.Y443VNaturalPairGenerationExact as Pair
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 
 infixl 6 _⊕_
 _⊕_ : Bool → Bool → Bool
@@ -122,7 +122,7 @@ boolInverseGroup = record
   }
 
 dropWords : Nat → List Y.Word → List Y.Word
-dropWords 0 words = words
+dropWords zero words = words
 dropWords (suc n) [] = []
 dropWords (suc n) (_ ∷ xs) = dropWords n xs
 
@@ -133,7 +133,7 @@ dropSatisfied :
   (n : Nat) → {words : List Y.Word} →
   Pair.RelatorsSatisfied boolInverseGroup charge words →
   Pair.RelatorsSatisfied boolInverseGroup charge (dropWords n words)
-dropSatisfied charge 0 h = h
+dropSatisfied charge zero h = h
 dropSatisfied charge (suc n) {words = []} h = tt
 dropSatisfied charge (suc n) {words = _ ∷ xs} h =
   dropSatisfied charge n (Pair._∧_.right h)
