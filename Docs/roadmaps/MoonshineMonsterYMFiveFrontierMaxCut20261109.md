@@ -241,3 +241,15 @@ These source-written constructors and the original finite SU2 large-deviation th
 **True physical unpaid cut:** source original E1 Euclidean limit/OS H, full nonvacuum OS cylinder density, a genuine common physical-time autocorrelation exponent on those source tests (potentially from original Wilson D1 space-time clustering), and vacuum uniqueness/no hidden zero-energy states. D2.04 no longer needs a separate independent analysis when these are proven. The previous invisible-sector negative control remains decisive for why a mere *proper selected observable subspace* cannot substitute for the dense OS family.
 
 The current Moonshine V0.4 original FT-derived finite skew constructor is source-written and *not* a proof of the native Leech skew-symmetry law or actual TT modes. Likewise, Monster M2 literal selected moved-state still has no genuine nonfixed weight-two vector and original Ivanov/Bray formal simplicity certificate. All original terminal gates remain open.
+
+
+## 9 November — even shorter M2 selected-nonidentity fork from literal JMD trace
+
+The latest `Y443Universal80SimpleQuotientKernelReflectionExact.Selected.originalJMDW5NonidentityFromRelators` builds `ActualSelectedNontrivialNode` for `x4=e1` from the **actual original 80 relators**, existing `JMDFromRelatorsToPowerExact.powerFromActualEightyRelators`, native A4 `beta^5=1` and a **real selected-group witness** `(w^5≢1)`. The existing `JMDConcretePairPowerCompilerExact.sourceX4Fifth` supplies `x4=w^5`. The historical JMD trace mentions an element w of order ten, but the current native `JMDStepsTwoToFour` record does **not** itself prove that exact order: its source-specific kernel certificate remains open. This is a potentially easier M2-MOVE alternative to one original Griess weight-two moved-state.
+
+**M2 exit choices:**
+- `M2-NONTRIV-A`: one original selected weight-two vector moved by one node plus literal identity action at that vector; OR
+- `M2-NONTRIV-B`: exact original selected JMD `w^5≢1` together with original `beta^5=1` A4 Coxeter path proof;
+- Common: the true historical 80-relator Q80→Monster/simple-congruence source and the original JMD selected-group selection/generation when upgrading image to all G.
+
+All are original-source gaps; a numerical group order, parity rank, or trace pasted from a *different* group does not satisfy them. V0.4 FT-derived TF is source-written; TT mixed Jacobi remains. YM D2 common-exponent dense-OS spectral reduction and finite G1.02 Haar pressure group coverage are documented on #1444, without promoting their E1/D1/D2/N1/G1 physical terminals.
