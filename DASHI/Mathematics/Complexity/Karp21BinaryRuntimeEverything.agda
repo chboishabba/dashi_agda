@@ -262,3 +262,15 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryAdderWidthBoundExact
 
 -- Actual original-wire binary state machine, first-enabled priority, terminal halt (source only).
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact
+
+-- Actual binary first-enabled rule strict potential, finite-run halt and original N21 terminal acceptance.
+-- SOURCE only: full original trace and physical bit-TM cost remain unpaid.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact
+
+-- Actual binary first-enabled rule strict potential, finite-run halt and original N21 terminal acceptance.
+-- SOURCE only: full original trace and physical bit-TM cost remain unpaid.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryFiniteRunExact
+
+-- Actual binary first-enabled rule strict potential, finite-run halt and original N21 terminal acceptance.
+-- SOURCE only: full original trace and physical bit-TM cost remain unpaid.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityRunAcceptanceExact
