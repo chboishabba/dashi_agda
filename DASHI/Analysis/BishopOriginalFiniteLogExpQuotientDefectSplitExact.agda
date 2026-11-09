@@ -21,6 +21,8 @@ import Real as R
 import RealProperties as RP
 
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
+import DASHI.Analysis.BishopFactorDerivativeExact as Factor
+import DASHI.Analysis.BishopOriginalNegativeLogFiniteExpDerivativeResidualExact as Residual
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteExplicitQuotientExact as Explicit
 import DASHI.Analysis.BishopOriginalNegativeLogCrossWeightedIncrementExact as Cross
 import DASHI.Analysis.BishopOriginalNegativeLogExpFiniteStageLimitExact as Finite
@@ -121,3 +123,51 @@ originalSourceShiftedFactorialErrorBound :
 originalSourceShiftedFactorialErrorBound stage x h =
   ExpClosed.originalExpQuotientMinusOneAbsBound
     (sourceOriginalNegativeLogDelta stage x h)
+
+------------------------------------------------------------------------
+-- The negative-log input delta is *itself* an actual original
+-- increment. Its factor quotient is the same one whose exact
+-- second-order factor has been constructed in P0.01.
+------------------------------------------------------------------------
+
+originalSourceNegativeLogDeltaIsFiniteQuotient :
+  (stage : Nat) (x h : R.ℝ) →
+  R._≃_
+    (sourceOriginalNegativeLogDelta stage x h)
+    (R._*_ h
+      (R._*_
+        (R.-_ R.1ℝ)
+        (Explicit.originalSourceFiniteLogQuotient stage x h)))
+originalSourceNegativeLogDeltaIsFiniteQuotient stage x h =
+  Factor.incrementFactorisation
+    (Residual.originalFiniteNegativeLogDerivative x stage)
+    h
+
+originalSourceNegativeLogDeltaIsSecondOrder :
+  (stage : Nat) (x h : R.ℝ) →
+  R._≃_
+    (sourceOriginalNegativeLogDelta stage x h)
+    (R._*_
+      (R.-_ h)
+      (R._+_
+        (Geometric.negativeLogDerivativePolynomial x stage)
+        (R._*_ h
+          (sourceOriginalPolynomialDefect stage x h))))
+originalSourceNegativeLogDeltaIsSecondOrder stage x h =
+  let
+    p = Geometric.negativeLogDerivativePolynomial x stage
+    s = sourceOriginalPolynomialDefect stage x h
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (originalSourceNegativeLogDeltaIsFiniteQuotient stage x h)
+    (RP.≃-trans
+      (RP.*-cong RP.≃-refl
+        (RP.*-cong RP.≃-refl
+          (Second.originalFiniteLogPolynomialQuotientExactDefect
+            x h stage)))
+      (solve 3
+        (λ hh pp ss →
+          hh ⊗ ((⊝ Κ 1ℚᵘ) ⊗ (pp ⊕ (hh ⊗ ss)))
+          ⊜ (⊝ hh) ⊗ (pp ⊕ (hh ⊗ ss)))
+        RP.≃-refl h p s))
