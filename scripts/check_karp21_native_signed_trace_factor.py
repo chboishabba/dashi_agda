@@ -29,6 +29,9 @@ def check_signed_replay():
             pb, nb, grouped = replay_signed_trace(trace, grouped=True)
             assert (pa, na) == (pb, nb)
             assert numeric(pb) - numeric(nb) == sum(values)
+            flipped = [(not sign, weight) for sign, weight in trace]
+            fp, fn, _ = replay_signed_trace(flipped, grouped=True)
+            assert (fp, fn) == (nb, pb)
             assert grouped.group_entries <= len(values)
             cases += 1
     return cases
