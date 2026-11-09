@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 
 SOURCE="https://arxiv.org/html/2506.22408#S6.SS9.SSS2"
+PUBLISHED_RHF_HARTREE={"B":-2737.810245,"BC":-2737.686838,"C":-2737.822695}
 ATOMS={"Ni":28,"P":15,"O":8,"C":6,"H":1}
 ROOT=Path(__file__).resolve().parents[1]
 GEOMETRY_DIR=ROOT/"data/nickel_ionq_2025_reduced41"
@@ -96,6 +97,9 @@ def produce(config_path):
     mf.conv_tol=float(config.get("scf_tolerance",1e-9))
     energy=mf.kernel()
     if not mf.converged:raise RuntimeError("nickel RHF failed to converge")
+    source_delta=float(energy-PUBLISHED_RHF_HARTREE[label])
+    if abs(source_delta)>float(config.get("max_RHF_source_discrepancy_hartree",0.05)):
+        raise ValueError(f"RHF energy {energy:.8f} disagrees with original Table 2 {PUBLISHED_RHF_HARTREE[label]:.8f}; verify physical state/basis/orbitals")
     if max(indices)>=mf.mo_coeff.shape[1]:
         raise ValueError("active orbital index exceeds MO count")
     ncore=(mol.nelectron-8)//2
@@ -123,6 +127,8 @@ def produce(config_path):
              "orbital_selection_source":config["orbital_selection_source"],
              "active_orbital_indices_zero_based":indices,
              "ncore":ncore,"scf_energy_hartree":float(energy),
+             "source_RHF_energy_hartree":PUBLISHED_RHF_HARTREE[label],
+             "RHF_minus_source_hartree":source_delta,
              "nuclear_repulsion_hartree":float(mol.energy_nuc()),
              "inactive_core_plus_nuclear_hartree":float(effective_core),
              "integral_fcidump":str(fcidump),
