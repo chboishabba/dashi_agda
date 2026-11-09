@@ -216,3 +216,60 @@ combine both in the P0.03 error bound; positivity/conditioning of mesh
 weights; actual normalized endpoint comparison and convergence to 1-x;
 the independently selected original P1 Cayley evaluations, P2 same-object
 zeta value, and P3 Gamma/continuation/xi. Do not mark them closed.
+
+## Further P0 implementation: original positive reciprocals and all-cell normalized endpoint
+
+New source owners (all imported into three canonical TOE roots):
+
+- `DASHI/Analysis/BishopOriginalFiniteMeshPositiveGapExact.agda`
+  provides `originalBishopMeshVertexRatio`, `originalBishopMeshWeightsPositive`,
+  `originalBishopMeshWeightNonzero`,
+  `originalBishopMeshWeightInverse`,
+  `originalBishopMeshWeightInversePositive`,
+  `originalBishopMeshWeightInverseCancels`.
+  Consumes **existing** `BishopFiniteDegreeOneGeometricBoundExact`
+  `BishopUnitIntervalRatio` and native `Inverse.*-inverseˡ`, requiring real
+  supplied evidence that each original vertex lies in `[0,1)`.
+  The **uniform inverse upper bound** for a radius `r<1` is not proved here.
+- `DASHI/Analysis/BishopOriginalNormalizedExpIncrementExact.agda`
+  proves `originalNormalizedFiniteExpCrossIsSourceCross`,
+  `originalNormalizedFiniteExpIncrementIsResidualPlusDefect`,
+  and `originalNormalizedFiniteExpUnweightedIncrement`.
+  Let `G_N(x)=F_N(x)*inv(1-x)`; it establishes the exact *local* equality
+  `G_N(x+h)-G_N(x) = inv(1-x)*inv(1-x-h)*h*(R_N(x)+(1-x)*(q_E-d_E))`.
+- `DASHI/Analysis/BishopOriginalNormalizedFiniteMeshEndpointExact.agda`
+  proves `sourceFiniteSequenceIncrementTelescope`,
+  `originalNormalizedMeshIncrementIsResidualCell`,
+  `originalNormalizedMeshResidualSumIsIncrementSum`,
+  and `originalNormalizedFiniteMeshEndpointIsSourceResidualBudget`.
+  For any finite original walk and a proof-bearing ratio for each vertex,
+  this is the exact endpoint equality
+  ```
+  G_N(v_m)-G_N(v_0)
+    = Σ(j<m) inv(1-v_j)*inv(1-v_(j+1))*h_j*
+        [v_j^N F_N(v_j)+(1-v_j)*(q_E(N,v_j,h_j)-E'_N(v_j))].
+  ```
+  Every quotient and exponential is the *original pinned* one.
+
+This **supersedes the older P_n product-weight algebra as the preferred
+P0 endpoint route**: local inverses are bounded by one common
+`inv(1-r)` when `v_j<=r<1`, whereas a mesh-wide product may
+degenerate under refinement.
+
+**What is and isn't paid:** P0.01 and P0.03 algebraic decompositions,
+P0.04 exact pointwise reciprocal existence/cancellation and P0.05
+finite normalized endpoint transport are newly source-written.
+The following are still real mathematical obligations and *cannot*
+be replaced by the above equalities: construct an actual Bishop-order
+uniform S_N bound (proposed `S_N <= 1/[2(1-r)^2]`), an original
+`|delta| <= |h|/(1-r)` bound, uniform exponential error control,
+the reciprocal antitonicity/radius comparison, passage from finite
+mesh quadrature to the proper endpoint majorant, the sharp stage error
+bound and terminal convergence. P1 original two Machin analytic
+equalities, P2 selected zeta semantics and P3 Gamma/continuation
+remain independent open leaves. No Agda kernel receipt is claimed.
+
+**No document-only gate can be marked an Agda theorem.** Run exact-head
+Agda 2.9 typecheck of each new owner and transitive imports. In
+particular examine native solver goal conversion and proof irrelevance
+of the positive inverse witnesses.
