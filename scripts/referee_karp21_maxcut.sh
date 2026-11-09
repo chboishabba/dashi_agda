@@ -145,6 +145,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeMultiplicityScaleExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedTraceFactorExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedTraceFactorSemanticExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeSignedTraceFactorC2Exact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda
