@@ -28,6 +28,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Runtime
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact as Original
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 
 PairedRawEdge : Set
 PairedRawEdge = Graph.RawEdge × Signed.SignedMagnitudeBits
@@ -130,3 +131,40 @@ pairedTraceOriginalScoreExact paired certificate history
   rewrite pairedTraceProjectsToOriginal paired certificate history =
   Original.rawSelectedTraceRebuildsOriginalScore
     (rawFromPairs paired) certificate history
+
+------------------------------------------------------------------------
+-- Fully executable native two-lane score ledger *after* the actual
+-- original endpoint/2m certificate history guards succeed. This
+-- reproduces success/rejection exactly. Numerical score agreement
+-- remains gated on source signed-gamma token value identity.
+------------------------------------------------------------------------
+
+nativePairedLedger :
+  List PairedRawEdge →
+  Word.BitWord →
+  List (Nat × Bool) →
+  Maybe Ledger.SignedLedger
+nativePairedLedger paired bits history
+  with selectPairedTrace paired bits history
+... | nothing = nothing
+... | just selected =
+  just (Ledger.accumulateSigned
+    (nativeProjection selected) Ledger.emptyLedger)
+
+maybeAccepted : {A : Set} → Maybe A → Bool
+maybeAccepted nothing = false
+maybeAccepted (just _) = true
+
+nativePairedLedgerSameOriginalRejection :
+  (paired : List PairedRawEdge)
+  (bits : Word.BitWord)
+  (history : List (Nat × Bool)) →
+  maybeAccepted (nativePairedLedger paired bits history)
+    ≡ maybeAccepted
+        (Runtime.rawSparseScore
+          (rawFromPairs paired) bits history)
+nativePairedLedgerSameOriginalRejection paired bits history
+  with selectPairedTrace paired bits history
+     | pairedTraceOriginalScoreExact paired bits history
+... | nothing | equation rewrite sym equation = refl
+... | just selected | equation rewrite sym equation = refl
