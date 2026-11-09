@@ -56,10 +56,32 @@ original20198575HashEncodingCannotProveAgencyAcceptance
        encode (intakeProjection hashAgreement accepted))
     refl falseIsNotTrue decode correct
 
--- An independent receipt requires a same-document authority link,
--- approval action, revision and actual source bytes. No constructor
--- for those receipt fields is fabricated here.
-data OriginalAgencyAcceptanceReceipt : Set where
+-- This record is *inhabitable only given external proof terms of two
+-- separate types selected by the eventual original-source owner*.
+-- An empty, permanently uninhabitable datatype was wrong: it would
+-- prevent future real evidence from ever closing the gate.
+-- No terms of AgencySignedJoin or ApprovedBytesJoin are supplied here.
+record OriginalAgencyAcceptanceReceipt
+  (AgencySignedJoin ApprovedBytesJoin : Set) : Set where
+  constructor original-agency-acceptance-receipt
+  field
+    signedApprovalToRevision : AgencySignedJoin
+    receivedBytesToApprovedOriginal : ApprovedBytesJoin
 
--- No constructor: this declaration is a deliberately UNPAID
--- evidence obligation, not a vacuous, filled receipt or a postulate.
+open OriginalAgencyAcceptanceReceipt public
+
+-- A paid receipt necessarily supplies BOTH independently specified
+-- evidentiary joins. This is projection, not authentication.
+originalAcceptanceRequiresSignedJoin :
+  {A B : Set} →
+  OriginalAgencyAcceptanceReceipt A B → A
+originalAcceptanceRequiresSignedJoin = signedApprovalToRevision
+
+originalAcceptanceRequiresBytesJoin :
+  {A B : Set} →
+  OriginalAgencyAcceptanceReceipt A B → B
+originalAcceptanceRequiresBytesJoin = receivedBytesToApprovedOriginal
+
+-- Only an original authority/source-owner can select and validate A/B;
+-- replacing these obligations with unchecked claims or trivial types
+-- would be unsound as an ecological/legal evidence method.
