@@ -13,6 +13,10 @@ if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
     echo "FAIL CLOSED: strict BH4 source requires original Rhea certificate" >&2
     exit 2
   }
+  test -n "${BH4_ORIGINAL_CERT_SHA256:-}" || {
+    echo "FAIL CLOSED: strict Rhea-to-Agda requires independently pinned BH4_ORIGINAL_CERT_SHA256" >&2
+    exit 2
+  }
   for required in BH4_ORIGINAL_PARAMETERS_PATH BH4_ORIGINAL_CANDIDATE_PATH BH4_ORIGINAL_ASSAY_PATH; do
     test -n "${!required:-}" && test -s "${!required}" || {
       echo "FAIL CLOSED: strict BH4 source requires $required input" >&2
@@ -64,6 +68,8 @@ python3 -c 'import ast, pathlib; p=pathlib.Path("scripts/check_bh4_original_pane
 # Check source-release drift diagnostics offline. Live acquisition requires
 # --require-rhea-release when reproducing a particular historical vintage.
 python3 scripts/acquire_rhea_chebi_bh4_reactions.py --release-guard-self-test
+python3 -c 'import ast, pathlib; p=pathlib.Path("scripts/generate_bh4_original29x12_agda.py"); ast.parse(p.read_text(encoding="utf-8"), filename=str(p))'
+python3 scripts/generate_bh4_original29x12_agda.py --self-test
 python3 scripts/check_bh4_original_panel_spatial_events.py --self-test
 # Real 29×12 check requires the source-acquired certificate; absence
 # remains an explicit physical/source residual, not a synthetic payment.
@@ -106,6 +112,16 @@ if [ ! -f scripts/run_agda29_parallel_check.sh ]; then
 fi
 bash scripts/run_agda29_parallel_check.sh "$ROOT"
 if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
+  # Build the real original 29x12 source vectors and all 72 (60
+  # CHNOP + 12 signed charge) kernel-computable per-column witnesses.
+  # Never create a fake module in the default synthetic regression.
+  python3 scripts/generate_bh4_original29x12_agda.py \
+    --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json \
+    --expected-certificate-sha256 "$BH4_ORIGINAL_CERT_SHA256" \
+    --output DASHI/Biology/Molecular/BH4Original29x12GeneratedSourceExact.agda
+  bash scripts/run_agda29_parallel_check.sh \
+    DASHI/Biology/KitzerowBH4Original29x12SourcePaidEverything.agda
+
   echo "BH4 SOURCE-QUALIFIED INPUT CHECKS AND NATIVE GOLDEN COMPLETED; independent rate and causal verification remain OPEN."
 else
   echo "BH4 FINITE/AGDA GOLDEN COMPLETED; original 29x12 source and physical rates remain separate OPEN gates."
