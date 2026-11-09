@@ -26,11 +26,21 @@ open import Data.Nat.Base using (_∸_)
 open import Data.Product using (_×_; _,_)
 open import Data.Maybe.Base using (Maybe; just)
 open import Data.Integer.Base using (ℤ)
+open import Relation.Binary.PropositionalEquality using (cong)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Golden
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Native
 import DASHI.Mathematics.Complexity.Karp21GammaZigzagPartitionWordDecodeExact as Original
+
+-- Separate original and native gamma encoders use distinct definitions
+-- of zeroPrefix; this is the necessary SAME-WIRE structural weld.
+originalGoldenZeroPrefixSame :
+  (n : Nat) → Original.zeroPrefix n ≡ Golden.zeroPrefix n
+originalGoldenZeroPrefixSame zero = refl
+originalGoldenZeroPrefixSame (suc n) =
+  cong (λ rest → false ∷ rest) (originalGoldenZeroPrefixSame n)
 
 originalGammaFrame :
   Word.BitWord → Word.BitWord → Word.BitWord
@@ -52,11 +62,13 @@ karpNativeSignedPayloadFrameExact :
     (originalGammaFrame (prefix ++ (last ∷ [])) suffix)
   ≡ just (signedTokenFromLast prefix last , suffix)
 karpNativeSignedPayloadFrameExact prefix suffix true
-  rewrite Native.readGammaBinaryPayloadExact
+  rewrite originalGoldenZeroPrefixSame (length (prefix ++ (true ∷ [])))
+        | Native.readGammaBinaryPayloadExact
     (prefix ++ (true ∷ [])) suffix
         | Signed.splitLastAppendExact (true ∷ prefix) true = refl
 karpNativeSignedPayloadFrameExact prefix suffix false
-  rewrite Native.readGammaBinaryPayloadExact
+  rewrite originalGoldenZeroPrefixSame (length (prefix ++ (false ∷ [])))
+        | Native.readGammaBinaryPayloadExact
     (prefix ++ (false ∷ [])) suffix
         | Signed.splitLastAppendExact (true ∷ prefix) false = refl
 
