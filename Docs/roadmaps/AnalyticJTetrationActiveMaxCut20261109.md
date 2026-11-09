@@ -86,6 +86,25 @@ Original source owners found:
 
 **Revised P2 max-cut:** Bishop π/trig period → original q(τ) with unit-disk evidence → existing Bishop E4/E6; **parallel** native E8 theta identity (P2e.04–06) plus existing weight-12 discriminant → nonzero Δ and original same-object j → fine-level/Abel observer weld. E8 does not unblock P1 local Koenigs/Kneser itself. The existing generated 240 roots gives a **valuable first-coefficient negative control**, not the entire theta series.
 
+## P2f. Actual generated E8 root count 240 versus triadic 243
+
+**Audited actual prior-art owners** (not inferred numeral analogies):
+- `DASHI/Algebra/Trit/E8RootEnumeration.agda`: generated E8 indexed root lists, exactly 112+128=240 and shape-completeness/no-duplicate bridges.
+- `DASHI/Moonshine/JInvariant369RHAtomicTriadicCoefficientCrossPollinationExact.agda`: `fourTritCountIs81`, `puncturedFourTritCountIs80`, `fiveTritCountIs243`, `twoFortyIsThreeTimesPuncturedFour`, plus a distinct RH primitive coefficient `kernelOIs243`. Its source explicitly forbids a non-proven T⁹→T⁵ marginal.
+- `DASHI/Reasoning/Trialectic369DyadicLocalComplementFactorizationExact.agda`: actual *two-sided* 3×3 observer-matrix rechart into four local trits × five complementary trits. Its 243 complements are not E8 roots.
+- `DASHI/Foundations/TernaryGolay/PuncturedPerfectCode.agda`: **different** independently proven appearance of 243: radius-two Hamming sphere size in the punctured ternary Golay code, yielding 729 × 243 = 3¹¹. Do not treat Golay error patterns, the five-trit observer and E8 root set as identical carriers.
+
+**New original-source exact count lemma owner:** `DASHI/Moonshine/AbelE8RootTriadic243CountComparisonExact.agda`, commit `dd3a7bdc`:
+- [x] **P2f.01** `originalE8GeneratedRootCountIs240` consumes actual *generated list length*, not a typed expectation.
+- [x] **P2f.02** `originalFiveTritCountIs243`, `originalPuncturedFourTritCountIs80` reuse paid original source.
+- [x] **P2f.03** `originalE8RootCountIsThreeTimesPuncturedFourTrit`, `originalE8RootCountPlusThreeIsFiveTritCount`, `originalFiveTritMinusThreeEqualsGeneratedE8Count` are exact cross-source Nat arithmetic.
+- [ ] **P2f.04** `originalE8RootToFiveTritComplementEmbedding`: only if substantively needed, define an explicit 240-element subset of Kernel 5 (including the *selected three excluded* states), prove injection, exact image and a source-compatible inverse. **No such map is currently provided.**
+- [ ] **P2f.05** `originalE8RootTriadicActionCompatibility`: to assert real E8/triadic geometry, exhibit and prove an action/symmetric form/inner-product-compatible map, not merely equality of cardinalities.
+- [ ] **P2f.06** Pin Agda 2.9 --safe checker receipt for this module. Source-written only.
+- [ ] **P2f.07** Full original `Θ_E8=E4` and Bishop `j` same-object remains **P2e.04–P2e.08 OPEN**, not closed by matching counts 240, 243 or 240σ₃(1).
+
+**Highest-alpha consequence:** the numerical bridge offers a finite negative-control consistency check across the E8 and 369 hyperfabric domains; it does *not* discharge the analytical Koenigs increment bound, all-shell E8 theta identity, or the Abel-to-modular fine-point lift. Avoid diverting the maximum cut to a forced 240↔243 bijection.
+
 ## P3. Relative-fine modular observers and refinement/RG
 
 | ID | Exact remaining theorem | Status / donor |
