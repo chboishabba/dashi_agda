@@ -77,6 +77,7 @@ python3 scripts/check_karp21_native_signed_trace_factor.py
 python3 scripts/check_karp21_binary_native_threshold.py
 python3 scripts/check_karp21_fractran_priority_frontier.py
 python3 scripts/check_karp21_fractran_n21_edge.py
+python3 scripts/check_karp21_fractran_original_raw_trace.py
 
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
@@ -171,6 +172,7 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21FinFreeOriginalGraphComparisonEnvelopeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21N21SameWordCountedAcceptanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21FractranN21EndpointScoreStepExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21FractranOriginalRawTraceReplayExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryRuntimeEverything.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedSSPOrientationNoLosslessExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
