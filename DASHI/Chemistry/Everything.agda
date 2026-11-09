@@ -284,3 +284,9 @@ import DASHI.Chemistry.HydrogenMolecularInventoryExact
 
 -- Denominator-safe matched-output efficiency identity, no float arithmetic.
 import DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact
+
+-- SI/atomic owner welds: metrology is BIPM-attributed; atomic-number and
+-- standard atomic-weight ownership stays with existing DASHI source modules.
+-- These bridges do not infer isotope mass, empirical efficiency, or patent title.
+import DASHI.Chemistry.HydrogenFuelCycleSIExact
+import DASHI.Chemistry.HydrogenFuelCycleAtomicIdentityExact
