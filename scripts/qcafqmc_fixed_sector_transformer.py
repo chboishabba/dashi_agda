@@ -25,7 +25,7 @@ import torch
 from torch import nn
 
 class AutoregressiveNQS(nn.Module):
-    def __init__(self,n=16,width=24,heads=4,layers=1,ff=48):
+    def __init__(self,n=16,width=32,heads=4,layers=1,ff=120):
         super().__init__()
         self.n=n
         self.embedding=nn.Embedding(3,width)
