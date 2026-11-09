@@ -62,7 +62,11 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [ ] **P1.02** `originalExponentialInvariantAbelDomain`: explicit `D` with `exp(D) ⊆ D` or a partial-domain formulation for exactly the required iterates.
 - [ ] **P1.03** `originalLocalAbelCoordinateExists`: construct `A : D → H` with well-defined chosen branch, upper-half-plane codomain and `A(exp w)=A(w)+1`.
 - [ ] **P1.04** `originalAbelCoordinateBranchIndependence`: prove the claimed invariant is branch-independent where appropriate; otherwise index branch as part of the fibre.
-- [ ] **P1.05** `originalAnalyticTetrationRightInverse`: establish `A(F(z))=z` locally and the corresponding `F(z+1)=exp(F(z))`.
+- [~] **P1.05** `originalAnalyticTetrationRightInverse`: source-written `abelExponentialFromInverseTetration` and `tetrationStepFromInverseAbel` in `AbelInverseTetrationSemiconjugacyExact.agda`, requiring explicit two-sided inverse/recurrence inputs, not genuine Kneser existence. Original analyticity and normalization remain open.
+- [ ] **P1.05a** `originalNontrivialInverseChartAnalyticity`: instantiate on the independently constructed holomorphic Kneser height domain and value range with branch/winding controls.
+- [ ] **P1.05b** `originalKneserNormalizationSource`: establish the selected Kneser normalization using original analytic authority or constructive convergence, including uniqueness on the selected admissible domain.
+- [ ] **P1.05c** `originalAbelCoordinateNondegeneracy`: exclude terminal/singleton or other collapsed chart models from the complex analytic completion gate.
+- [ ] **P1.05legacy** `originalAnalyticTetrationRightInverse`: establish `A(F(z))=z` locally and the corresponding `F(z+1)=exp(F(z))`.
 - [ ] **P1.06** `originalKneserNormalizationUniqueness`: establish the specified Kneser normalization and uniqueness/continuation claims, not just an arbitrary local Abel chart.
 
 **Risk:** a global total analytic `A` into the upper half-plane with exp-invariant domain cannot be assumed. Use partial domain-indexed maps where necessary.
@@ -74,7 +78,9 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - [ ] **P2.01** `originalModularJTranslationInvariance`: prove `j(τ+1)=j(τ)` from the original q-series or Eisenstein model on the upper half-plane.
 - [ ] **P2.02** `originalModularJInversionInvariance`: prove `j(-1/τ)=j(τ)` on its valid domain.
 - [ ] **P2.03** `originalAbelToModularCoordinateSameObject`: identify Abel codomain `H` with the independently constructed modular parameter, not merely with an abstract type.
-- [ ] **P2.04** `originalExponentiationJInvariantSameObject`: instantiate P0 with actual `exp`, `A`, modular `j` and the source-normalization choice.
+- [~] **P2.04** `originalExponentiationJInvariantSameObject`: `originalRendererJUnderExponential`, `originalRendererColourUnderExponential`, `originalRendererObserver27UnderExponential` now source-written using the original `JInvariantFormulaic369RendererExact.jValue`, `JInvariantFormulaic369ModularReplicationExact.jInvariant`, and explicit `RendererAbelWeld` hypotheses. The genuine source-identified Abel map/modular T action still must be supplied.
+- [ ] **P2.04a** `originalRendererAbelWeldInstance`: construct `RendererAbelWeld` for source-selected actual analytic Abel coordinates and independently checked modular j identity; avoid assuming same-source j equality for free.
+- [ ] **P2.04legacy** `originalExponentiationJInvariantSameObject`: instantiate P0 with actual `exp`, `A`, modular `j` and the source-normalization choice.
 - [ ] **P2.05a** `originalModularInversionChartInstance`: discharge the `ModularInversionChart` assumptions using actual modular inversion plus a genuine two-sided Abel inverse on the selected chart (source-written conditional transport now exists).
 - [ ] **P2.05** `originalTransportedSInvolution`: construct `F ∘ S ∘ A` on its proper domain, prove involution and compatibility with the transported invariant. Requires local inverse and domain closure, not only P0.
 
@@ -82,8 +88,11 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 
 **Deliverable:** factor the exact analytic transported invariant into the prior observer without erasing its fibres.
 
-- [ ] **P3.01** `originalStructuredObserverFactorsThroughTransportedJ` **or** a weaker explicit equivariant-square theorem; do not assert factorization if the existing structured observer sees additional data.
-- [ ] **P3.02** `originalLocal27UnderExponentiation`: establish the exact conditional observer update, using the existing structured 27-state owner.
+- [~] **P3.01** `originalStructuredObserverFactorsThroughTransportedJ` **or** a weaker explicit equivariant-square theorem; do not assert factorization if the existing structured observer sees additional data.
+- [~] **P3.02** `originalLocal27UnderExponentiation`: source-written in `AbelOriginalStructuredObserverWeldExact.agda` as a theorem consuming the original structured observer and `localJObserver`, conditional on `OriginalFineObserverAbelSquare`. A true T-equivariance receipt for the selected fine-point observer remains outstanding.
+- [ ] **P3.02a** `originalStructuredFineTranslationInstance`: derive `fineTranslation` from an actual modular-point action, and prove its relationship with the Abel image.
+- [ ] **P3.02b** `originalStructuredFineObserverAction`: show whether the genuine observer is T-invariant or equivariant by a *nontrivial* finite chart action, rather than assuming invariance.
+- [ ] **P3.02legacy** `originalLocal27UnderExponentiation`: establish the exact conditional observer update, using the existing structured 27-state owner.
 - [ ] **P3.03** `originalPantsPathTransportNaturality`: commute the certified observer relation through the existing finite PantsPath 3.
 - [ ] **P3.04** `originalAnalyticHyperformSeamCompatibility`: reuse q/lattice chart gluing and preserve the analytic payload outside finite codecs.
 - [ ] **P3.05** `originalFrickeAndTetrationCompatibility`: specify and prove a joint modular/exp square; Fricke is *not* automatically the modular S generator.
@@ -180,3 +189,11 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 - The original analytic package includes `ConcreteComplex`, `PrincipalComplexLog`, `OrdinaryComplexPolar`, `TerminalConstructedAnalyticModel`; the terminal singleton complex model is **not** a faithful analytic complex field and must not be promoted as Kneser validation.
 - **Still to implement:** `originalComplexTetrationChartInstance` with source-constructed analytic `F`; `originalComplexHeightAdvanceSameObject`, `originalLocalAbelCoordinateExists`, `originalSelectedAbelSemiconjugacy`, `originalModularJTranslationInvariance`, `originalExponentiationJInvariantSameObject`, `originalFiniteObserverTransportSquare`, `originalPrincipalPhaseContourBranch`, `originalKouznetsovCalibrationReceipt`.
 - **Kernel:** this source, like earlier PR additions, remains unverified until an Agda compiler runs. This is a correctness gate, not a CI requirement.
+
+## 2026-11-09 analytic-J / observer continuation cut
+
+- `AbelInverseTetrationSemiconjugacyExact.agda` supplies the **two directions** of the selected two-sided inverse/recurrence correspondence. It is a theorem about a chosen inverse chart, NOT proof that the chart exists or that it is holomorphic. Source-written, not kernel-checked.
+- `JInvariantTetrationOriginalRendererTransportExact.agda` consumes the original formulaic Klein-j renderer and its existing modular replication theorem; proves conditional original `jValue`, colour and 27-state invariance through a sourced modular point action. The `sameSourceJ` field is intentionally a **paid bridge**, not yet supplied by an actual source instance.
+- `AbelOriginalStructuredObserverWeldExact.agda` uses the existing analytic JCoarse/JFine observer and original `localJObserver`; the input `fineObserverTranslation` is **not** automatic from modular `j` invariance. The original level-27 cusp fibre can move under modular T, so a T-invariance assumption may be false for that observer; P3 must allow a nontrivial equivariant action.
+- Kernel-check all three new modules and imports; no compiler receipt yet. P1/P1b/P2/P3 remain substantively open on actual analyticity/source-instance hypotheses; P4 source analytic contour recurrence remains conditional.
+- Exact next highest mathematical cut: a holomorphic nonterminal Kneser Abel chart, or a genuinely source-constructed local Koenigs/Schröder linearization with proven analytic log branch and conjugacy, then an authentic modular-j normalization/observer welding.
