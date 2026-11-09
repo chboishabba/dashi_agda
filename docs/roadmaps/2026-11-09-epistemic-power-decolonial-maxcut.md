@@ -129,3 +129,31 @@ Commits: `252838299697a666fd83bbb24fbdf21c8a0d7ac2` and `b38b43f83154745ce201ab8
 **Important negative controls retained:** high effort is not necessarily oppression; repeated reviewing is not necessarily deliberate cognitive warfare; increased inclusion is not sufficient evidence of changes to Indigenous land or sovereignty; the relational-grammar graph does not exhaust Lacan or Irigaray; the four support states are not an identification of classical logic with historical catuṣkoṭi.
 
 **Runtime status:** this pass created git commits, with no Agda typecheck or ITIR execution, and no unearned claim of exhaustive completion.
+
+## Fourth implementation pass — contextual cost/payoff and kernel preflight (2026-11-09)
+
+**New exact module:** `DASHI/Governance/EpistemicPowerCostPayoffExact.agda`.
+
+**New source-written declarations:**
+- `sameNominalTasksDifferentContextualCost` — equal nominal task count with distinct contextual cost.
+- `sameNominalTasksDifferentExpectedReturn` — equal nominal task count with distinct expected return.
+- `sameNominalTasksDifferentCostPayoff` — bundled cost/return obstruction.
+- `taskCountCannotRecoverCostPayoff`, `anyTaskCountRechartStillLosesCostPayoff` — no factorisation through count or any postprocessing of it.
+- `costPayoffInversionWitness` — concrete finite comparison with high cost/low expected return and low cost/high expected return.
+- `sameReviewTasksDoNotDeterminePurpose` — original intentionality negative control transported into this module.
+- Cross-domain capstone field `nominalTaskCountCannotDetermineCostAndPayoff` is now supplied from this new exact module.
+
+**Primary text inspected, with source anchors:**
+- Mark Satta (2024), Cambridge Core full HTML, section **The nature of epistemic exhaustion**: three epistemic activities and exclusion of workload-only interpretation; section **Conversational behavior and epistemic exhaustion**: cost increases / return reduction. Stable article DOI: `10.1017/hyp.2024.1`. The text explicitly recognizes contexts where epistemically demanding change is valuable. HTML was manually inspected; a local cryptographic source-span receipt has **not** been produced.
+- Tuck and Yang (2012), Indigenous Knowledges Digital Learning Library article record, published abstract: repatriation of Indigenous land and life, settler moves to innocence and an ethic of incommensurability; the settler–Native–slave triad is not interchangeable with an abstract symmetric 3-cycle. Passage-level PDF byte-offset receipts remain unpaid.
+
+**Kernel preflight:** Current container does not have an `agda` binary, `nix`, `ghc` or cached apt package lists; local GitHub cloning failed due to unavailable DNS. No GitHub Actions run was returned for prior branch commit. Thus no genuine Agda type-check receipt can be claimed. Static inspection of text and importer declarations is not a substitute.
+
+**Remaining decisive cut (updated):**
+- **K0** compiler acceptance for seven source modules, with exact imports and pinned Agda 2.9. This is the first mandatory condition for promotion.
+- **K1** machine-verifiable source subspan/digest receipts; independent interpretation review. Metadata and section anchors now present, but no byte-accurate correspondence.
+- **K2** source-matched fatigue/capacity observations and warranted causal model. Finite work-count, capacity and contextual return models remain demonstrations rather than measured functions.
+- **K3** audited ESD / cognitive-warfare case histories, binding-authority records and legitimate-review controls. No empirical original history has been supplied to this PR.
+- **K4** Golden import and canonical ITIR/PNF selective-reopening replay. Open until K0 and relevant source receipts close.
+
+**Safety of claims:** This branch never infers malicious intent from burden, diagnoses fatigue from task count, identifies inclusion with land repatriation, or promotes mathematical finite countermodels to a conclusion about real communities.
