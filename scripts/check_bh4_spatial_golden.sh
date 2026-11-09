@@ -27,6 +27,7 @@ python3 scripts/check_bh4_allocator_future_observer.py
 python3 scripts/check_bh4_spatial_circulation.py
 python3 scripts/check_bh4_shared_redox_dynamics.py
 python3 scripts/check_bh4_original_qdpr_spatial_reaction.py
+python3 scripts/bh4_original_qdpr_spatial_finite_volume.py --self-test
 python3 scripts/check_bh4_one_molecule_future_minimality.py
 python3 scripts/check_bh4_spatial_measurement_payment.py --self-test
 
