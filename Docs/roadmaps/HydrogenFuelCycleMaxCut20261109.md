@@ -104,3 +104,25 @@ The complete new import tranche is now six Agda modules plus the roadmap, all re
 The formalism permits an efficiency improvement as an input; it does not prove one occurs. In particular, the matched-output equation includes the combined combustible energy `diesel + hydrogen + synthetic fuel`. Neither flamespeed assertions nor corporate disclosures discharge `K5`. The next source-specific work is to calibrate engine efficiency and gas/fuel flow at identical load, output and inventory boundary with uncertainties, and to distinguish the three architectures.
 
 The next **unproved mathematical** leaves after this tranche remain: molecular nonnegative-guarded reaction transitions (K1b), explicit SI unit/higher-heating-value transport (K2b), and source-paid ordered-rational engine efficiency algebra (K4b). Kernel acceptance K0 remains unpaid for all new source.
+
+## 2026-11-09 final source tranche: molecular conservation and efficiency fractions
+
+The following subsequent modules supersede the earlier statement that a molecule-resolved reaction model had not been supplied:
+
+- `DASHI.Chemistry.HydrogenMolecularInventoryExact` defines a 5-species water/H2/O2/CO2/CH4 molecule inventory, guarded reaction constructors for water splitting, Sabatier methanation and methane combustion, and `stepConservesCarbon`, `stepConservesHydrogen`, `stepConservesOxygen`. Finite-path preservation is transported by `pathConservesCarbon`, `pathConservesHydrogen`, `pathConservesOxygen`; each algebraic reaction conservation identity is solved with the already-used Agda standard-library `Data.Nat.Solver`.
+- `DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact` defines positive-denominator efficiency ratios from independent measured-work equalities and derives the exact `matchedOutputCrossMultiplies` identity without floating point. The numerators and denominators remain source obligations, and the theorem does not infer actual efficiency gain.
+
+Thus the **source-written abstract mathematical leaves** K1a, K1b (for the selected finite ideal reactions), K2a, K4a and matched-output rational cross-product K4b are represented. This is **not** an Agda-kernel acceptance declaration. For K1b, kinetics, transport, thermodynamic work and physical reaction feasibility are separately unpaid.
+
+### Final exact maximum cut, without false closure
+
+1. **K0 — kernel**: independently type-check each of the nine new Agda modules, their transitive imports and `DASHI.Chemistry.Everything` under repository-pinned Agda 2.9/Nix. Current execution environment has no Agda compiler. Resolve actual reported errors rather than treating static import checks as typechecking.
+2. **K2b — SI/source**: provide source-specific measured water/H2/O2 flow, HHV convention, calibrated electrical supply, storage delta and heat rejection and bind them to an `ElectrolyserFirstLaw` instance. Unit conversion and uncertainty propagation must be verified.
+3. **K3 — stream identification**: source-bound each actual H2/O2 flow to a unique combustion/synthesis/storage/vent route; distinguish true consumption from catalyst-like *effect*.
+4. **K4c — physical efficiency admission**: supply measured true matched-output efficiency across loads, air/fuel stoichiometry and oxygen-enrichment controls. Algebraic cross-multiplication and saving iff cannot establish `η_assisted > η_baseline`.
+5. **K5 — causal identification**: independent randomized/crossover baseline, powered-no-flow, H2-only, O2-only and full-system arms with measured NOx, particulate emissions and uncertainties.
+6. **K6 — carbon/reaction identity**: identify reactor, products and yields; demonstrate carbon mass closure and energy/enthalpy/auxiliary losses over cycles (including any plasma or palladium mode *only if physically present*).
+7. **K7 — intellectual-property title**: independent patent grant numbers, claim text, inventors, ownership records and corporate assignment transactions.
+8. **K8 — independent checks**: signed source, compiler, measurement, legal and review receipts kept disjoint under attribution policy.
+
+The new nine Agda files were fetched back successfully from the PR branch; no explicit `postulate`, `TERMINATING`, `NON_TERMINATING` or `trustMe` in executable declarations was found by static inspection. **No kernel check or independently replicated device experiment was performed.**
