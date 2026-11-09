@@ -281,3 +281,6 @@ import DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact
 
 -- Guarded molecule-resolved electrolysis/methanation/combustion inventory and paths.
 import DASHI.Chemistry.HydrogenMolecularInventoryExact
+
+-- Denominator-safe matched-output efficiency identity, no float arithmetic.
+import DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact
