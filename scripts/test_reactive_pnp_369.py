@@ -191,3 +191,46 @@ def test_entropy_factorization_rejects_invalid_activity():
     badph[0]=float("nan")
     with pytest.raises(ValueError):
         closed_pnp_entropy_factorization(c,badph,m)
+
+
+def test_local_positive_implicit_contraction_bound_and_native_residual():
+    from reactive_pnp_369 import (
+        local_positive_implicit_contraction_bounds, vector_rhs, poisson,
+        INDEX)
+    m=model()
+    c0=np.ones((27,3),dtype=float)
+    c0[:,2]=0.7
+    c0[INDEX[(-1,0,0)],0]+=0.2
+    bound=local_positive_implicit_contraction_bounds(c0,m)
+    r,M,L=(bound["radius"],bound["rhs_sup_bound"],
+           bound["rhs_lipschitz_bound"])
+    dt=bound["sufficient_dt_max"]/2
+    assert dt>0 and dt*M<=r/2+1e-12 and dt*L<=0.5+1e-12
+    assert bound["closed_grounded_constant_permittivity_only"]
+    assert not bound["all_timestep_existence_proved"]
+    assert not bound["agda_kernel_checked"]
+    # Picard iterates use the actual original 54-bond PNP RHS.
+    # Contraction is justified by the analytical uniform majorants above,
+    # not inferred from this finite numerical convergence trace.
+    c=c0.copy()
+    for _ in range(80):
+        next_c=c0+dt*vector_rhs(c,m,poisson(c,m))
+        assert np.min(next_c)>=np.min(c0)-r-1e-10
+        assert np.max(np.abs(next_c-c0))<=r+1e-10
+        if np.max(np.abs(next_c-c))<1e-12:
+            c=next_c
+            break
+        c=next_c
+    defect=c-c0-dt*vector_rhs(c,m,poisson(c,m))
+    assert np.max(np.abs(defect))<1e-10
+    assert np.min(c)>0
+
+
+def test_local_contraction_rejects_nonpositive_or_nonfinite_initial_state():
+    from reactive_pnp_369 import local_positive_implicit_contraction_bounds
+    m=model()
+    c=np.ones((27,3))
+    for value in (0.0,-1.0,float("inf"),float("nan")):
+        bad=c.copy();bad[0,0]=value
+        with pytest.raises(ValueError):
+            local_positive_implicit_contraction_bounds(bad,m)
