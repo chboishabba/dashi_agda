@@ -405,3 +405,67 @@ reaction lemmas is P0 highest value. The finite bond-order adapter,
 grounded Dirichlet SPD checker, and original-source provenance gates
 retain their distinct statuses. No physical P0.08/P1–P3 theorem is
 closed by adding a Golden import.
+
+
+### 2026-11-09 original-source same-step PNP composition and nonfinite audit
+
+The existing `scripts/bh4_original_reactive_pnp_adapter.py`
+now source-writes `source_bound_closed_implicit_step`:
+one selected full-panel source certificate and digest, one
+27×29 original positive concentration chart, source-provided
+29-species/12-reaction parameters, the existing
+`reactive_pnp_369.implicit_step`, and the original
+`check_original_closed_inventory` are composed on the SAME
+before/after candidate. The returned candidate receipt contains
+the solver diagnostics and original CHNOP/charge source audit,
+with all independent source authentication, clinical validation,
+Agda and physical observation-commutation flags FALSE.
+
+The native PNP solver now explicitly rejects nonfinite log roots,
+unclipped residuals, potentials, concentrations, chemical or
+electrostatic energies, charge defects, and instantaneous transport
+or reaction power. The source-bound wrapper separately checks every
+required diagnostic field for finiteness and required numerical
+bounds. Earlier `NaN > tolerance` comparisons could silently
+evaluate false; they are no longer admission criteria.
+
+Synthetic-only regression functions
+`test_source_bound_one_step_same_state_candidate` and
+`test_same_step_receipt_rejects_nonfinite_or_missing_diagnostics`
+exercise same-source candidate receipt composition and corrupt
+diagnostics using a deliberately monkeypatched numerical operator.
+This is a **contract-level** fixture, not execution of a real 783-variable
+29-species implicit root nor a supplied original Rhea parameter set.
+
+**Narrowest remaining cut:**
+
+1. `originalRhea29x12ExactSourceParameterJoin`: independently
+   authenticate source release, all participant sides and chemical
+   charges, 12 reversible kinetic pairs, 29 diffusion/standard
+   chemical potentials, 27 voxel compartments, six-face physical
+   boundary data and organism/specimen/time correspondence.
+2. `original369PNPImplicitStepExistsAndPositive`: construct a
+   positive implicit root under explicitly stated finite
+   constitutive assumptions and prove its uniqueness if claimed.
+   Numeric solver convergence alone is a different statement.
+3. `original369PNPDiscreteFreeEnergyDissipation`: same original
+   discrete chemical+electric free energy, true SG transport and
+   original detailed-balanced reaction term; pay the selected
+   Dirichlet/Neumann/reactive boundary work rather than assuming zero.
+4. `sameSourcePhysicalReactionTransportStep`: instantiate a genuine
+   original physical carrier with the source-paid PNP solution and
+   original 29×12 chemistry. Reject a synthetic three-species or
+   unmeasured 29×12 parameter fixture as an inhabitant.
+5. `physicalBH4StepCommutes`,
+   `physicalPNPStepCommutesOriginal`,
+   `physicalTissueOneStepRefinement`: reconcile PR #1454 and
+   PR #1471 on the exact same specimen, physical state and action
+   schedule; then consume their already-written all-history
+   theorems.
+6. Golden Agda exact-head kernel and PostgreSQL/ITIR referee receipts,
+   independent longitudinal model discrimination and calibrated
+   stochastic future quotient remain unpaid.
+
+**Execution status:** committed and fetched back from GitHub;
+no repository-local Python test or Agda kernel run in this session,
+and no independent source-rate authentication occurred.
