@@ -24,11 +24,13 @@ module DASHI.Analysis.BishopOriginalNegativeLogFiniteExplicitQuotientExact where
 -- synthetic exponential or postulated uniform modulus.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 import Real as R
 import RealProperties as RP
 
 import DASHI.Analysis.BishopFactorDerivativeExact as Factor
+import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
+import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as NatRecip
 import DASHI.Analysis.BishopFactorDerivativeChainExact as Chain
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteDerivativeExact as LogFinite
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteExpDerivativeResidualExact as Residual
@@ -92,3 +94,24 @@ originalFiniteLogErrorQuotientIsExplicit n x h =
   RP.+-cong
     (originalFiniteLogExpQuotientIsExplicit n x h)
     RP.≃-refl
+
+-- No source-log quotient is left as an opaque record selector:
+-- the finite source polynomial quotient is a literal sum of the
+-- already-verified power difference quotients.
+originalSourceFiniteLogQuotientZero :
+  (x h : R.ℝ) →
+  R._≃_ (originalSourceFiniteLogQuotient 0 x h) R.0ℝ
+originalSourceFiniteLogQuotientZero x h =
+  RP.≃-refl
+
+originalSourceFiniteLogQuotientSuccessor :
+  (n : Nat) (x h : R.ℝ) →
+  R._≃_
+    (originalSourceFiniteLogQuotient (suc n) x h)
+    (R._+_
+      (originalSourceFiniteLogQuotient n x h)
+      (R._*_
+        (R._⋆ (NatRecip.reciprocalNatRational n))
+        (Power.powerDifferenceQuotient x h (suc n))))
+originalSourceFiniteLogQuotientSuccessor n x h =
+  RP.≃-refl
