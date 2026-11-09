@@ -458,3 +458,15 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryToOriginalRawMachineStepEx
 
 -- F2 real two-lane signed ledger register width <= initial width + selected binary token charge; Agda kernel OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact
+
+-- F2.1 actual source gamma consumption; original raw-edge token charges; same-source selected ripple ledger width.
+-- All new proof candidates require exact-head Agda acceptance; emitted-event subsequence witness remains OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeSignedGammaInputChargeExact
+
+-- F2.1 actual source gamma consumption; original raw-edge token charges; same-source selected ripple ledger width.
+-- All new proof candidates require exact-head Agda acceptance; emitted-event subsequence witness remains OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeRawEdgeInputChargeExact
+
+-- F2.1 actual source gamma consumption; original raw-edge token charges; same-source selected ripple ledger width.
+-- All new proof candidates require exact-head Agda acceptance; emitted-event subsequence witness remains OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeSelectedLedgerInputBoundExact
