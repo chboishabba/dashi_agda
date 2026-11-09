@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Culture.CriticalArtSameSceneTransportExact where
 
 ------------------------------------------------------------------------
