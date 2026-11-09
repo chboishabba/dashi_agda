@@ -230,3 +230,34 @@ P0: Pay same-source actual means and scale identities and prove finite covarianc
 P1: Instantiate spectral cleaning with reconstructed matrices and diagonal restoration; formal MP density/zero mass/moments/transforms/weak convergence remains independent.
 P2: Replay the historical PNF data with source metadata and independently test the S&P 500 economic claims; quantitative outliers alone have no PNF truth or trading-alpha authority.
 P3: Consume the cleaned economic risk estimate in dashiTRADE's existing no-bypass support/cost pipeline, with held-out ledger.
+
+## 11. Continued exact finite maximum cut — sourced means, unbiased covariance and diagonal repair
+
+**New Agda declarations (authored, NOT Agda-kernel-checked)**
+
+- `DASHI/Information/PNFSampleMeanExact.agda`: `sumConstantValue`, `ActualFiniteMean`, and `sampleMeanDefiningEquation`. Exact finite mean receipt `sum(rawColumn)=n·mean` is enough to derive `sum(centeredColumn)=0` via existing `sumFinAdd`, `sumFinNeg` and ring inverses. This is a real algebraic implication, but the receipt still needs instantiation for a selected PNF or financial dataset.
+- `DASHI/Information/PNFUnbiasedCovarianceExact.agda`: `UnbiasedCovarianceWindow` fixes n=suc(suc k), supplies a proof of scale·(n−1)=1 and nonnegative scale, and derives `unbiasedCenteredColumnSumZero`, `unbiasedCovarianceOperatorPSD`, `unbiasedCovarianceSymmetric`. Actual field inversion and source data certificates remain unpaid.
+- `DASHI/Information/PNFSpectralCleaningPSDExact.diagonalCongruencePreservesPSD`: cleaned operator quadratic remains PSD under an explicitly provided vector-coordinate transform. This is an operator-level congruence theorem, NOT a derivation of strictly positive diagonal, inverse square roots, or trace preservation.
+
+**Economic/PNF numerical negative control:**
+`scripts/pnf_mp_economic_synthetic_check.py` now explicitly reconstructs the clipped covariance, records raw diagonal error, uses positive-diagonal congruence normalization, and verifies PSD and unit diagonal numerically. Separately executed local NumPy seeded fixture (n=200,p=120,rho=0.25) returned:
+- MP upper edge: 3.1560959816749232.
+- Largest eigenvalues: independent 2.973781095949251; common-factor 31.724663532759376; independently shuffled 2.9953737602923094.
+- All three sample correlation traces: 120.
+- Common-factor cleaned covariance raw diagonal max deviation: 0.12508710519166777, demonstrating why spectral clipping alone does not produce a correlation matrix.
+The committed script has been revised to test diagonal correction; the revised GitHub script itself has not been executed from a checkout here.
+
+**Exact remaining max-cut ledger (supersedes earlier open descriptions where stated):**
+- A2 source-selected mean law `sampleMeanDefiningEquation`: conditional algebraic proof **authored**, source instantiation OPEN; unbiased inverse/positivity carried as explicit `UnbiasedCovarianceWindow` receipts; field-level construction OPEN.
+- A2 finite quadratic operator equality and PSD: algebraic proof **authored**, actual kernel acceptance OPEN.
+- A3 symmetry: algebraic proof **authored**, kernel acceptance OPEN.
+- A4/A5 rank≤min(p,n−1) and forced-zero multiplicity: OPEN. From centered-column-zero sums we have a constructive left-null candidate, but a rank-nullity/eigenspace theorem still must be connected.
+- A6 correlation diagonal/trace: proof conditional on unit-diagonal receipts **authored**, real standardisation OPEN.
+- F2 equicorrelation market/residual eigenvectors and rho≥0 sufficient PSD: **authored**, full negative-rho interval, dimension and kernel checks OPEN.
+- C5/F5 nonnegative spectral PSD and generic congruence preservation: **authored**; source-owned eigen-reconstruction and strictly-positive diagonal/inverse square roots OPEN.
+- B1–B10 actual Marchenko–Pastur distribution and convergence: OPEN.
+- C/D PNF source-data replay and independent semantic promotion: OPEN. Existing numeric ABI remains non-promotable.
+- F/E independently evaluated financial risk forecast, real economic data, and costed dashiTRADE action ledger: OPEN.
+- **P0 all modules:** no Agda 2.9 binary available in this execution environment; not kernel-verified. Do not treat committed proof text as accepted theorem.
+
+**Further cut choice:** connect the actual sample-mean and unbiased-scale receipts to the source-bound same-window activation/returns loaders; use existing finite ordered-linear algebra for rank/nullity; choose a concrete PSD spectral-decomposition owner for filtered covariance, then attach the genuinely probabilistic MP law separately.
