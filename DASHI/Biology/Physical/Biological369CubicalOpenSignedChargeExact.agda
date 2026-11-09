@@ -472,12 +472,13 @@ classifyOriginalNativeVoxel :
 classifyOriginalNativeVoxel action observer
   with FinProps._≟_ (Native.nativeDirectedSource (signedNativeBond action))
          observer
-... | Nullary.yes sourceProof = Native.atNativeSource sourceProof
-... | Nullary.no sourceDifferent
-  with FinProps._≟_ (Native.nativeDirectedTarget (signedNativeBond action))
+     | FinProps._≟_ (Native.nativeDirectedTarget (signedNativeBond action))
          observer
-...   | Nullary.yes targetProof = Native.atNativeTarget targetProof
-...   | Nullary.no targetDifferent =
+... | Nullary.yes sourceProof | _ =
+  Native.atNativeSource sourceProof
+... | Nullary.no sourceDifferent | Nullary.yes targetProof =
+  Native.atNativeTarget targetProof
+... | Nullary.no sourceDifferent | Nullary.no targetDifferent =
   Native.offNativeEndpoints sourceDifferent targetDifferent
 
 locateEveryOriginalNativeEvent :
