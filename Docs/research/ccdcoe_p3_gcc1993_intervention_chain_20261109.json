@@ -14,6 +14,16 @@
       "claim_scope": "Archive identifies an executive-director 'Dear Journalist' mailing with profiles and press material."
     },
     {
+      "id": "march_pre_response",
+      "date": "1993-03-10",
+      "date_kind": "archive_catalogue_date_not_verified_dispatch",
+      "author_role": "gcc_communication",
+      "target_role": "public_unspecified",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-natural-warming-models-national-action-plan/",
+      "claim_scope": "Archive identifies a GCC 10 March 1993 release about natural warming, models and the National Action Plan; no full original passage certified. Predates May/June reporter chain; not evidence of recipient exposure or effect."
+    },
+    {
       "id": "may_reporters",
       "date": "1993-05-03",
       "date_kind": "archive_catalogue_date_not_verified_dispatch",
@@ -57,6 +67,14 @@
   "links": [
     {
       "from": "january_expertise",
+      "to": "march_pre_response",
+      "relationship": "archive_date_order_only",
+      "independent_delivery_verified": false,
+      "media_reuse_verified": false,
+      "mechanism_effect_verified": false
+    },
+    {
+      "from": "march_pre_response",
       "to": "may_reporters",
       "relationship": "archive_date_order_only",
       "independent_delivery_verified": false,
@@ -85,6 +103,7 @@
     "Do not treat catalogue dates as independently certified dispatch/receipt.",
     "Do not attribute the separate April 1998 API proposed plan as the cause of a 1993 activity.",
     "Do not promote archive possession to independently corroborated publication influence.",
-    "Do not classify agency communication or policy disagreement as hostile warfare without independent evidence."
+    "Do not classify agency communication or policy disagreement as hostile warfare without independent evidence.",
+    "GCC March 10 1993 modelling release predates June original newspaper and response; June response is not the first recorded GCC climate-modelling communication."
   ]
 }
