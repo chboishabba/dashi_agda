@@ -427,6 +427,70 @@ greedyOriginalDisjointStarsIndependent (a ∷ as) =
     (greedyOriginalDisjointStarsIndependent
       (filterOriginalStarFree a as))
 
+
+------------------------------------------------------------------------
+-- SOURCE-TRUE GREEDY MAXIMALITY: Every ORIGINAL marked link is
+-- chosen or actually conflicts with a chosen source link.
+-- This pays the dominating-set combinatorial theorem, without
+-- assuming the still-unproved literal degree-18 incidence bound.
+------------------------------------------------------------------------
+
+open import Data.Sum using (_⊎_; inj₁; inj₂)
+
+filterOriginalStarFreeComplete :
+  ∀ {n} (a : Bond n) (as : List (Bond n))
+    (b : Bond n) →
+  Torus._∈_ b as →
+  OriginalStarsDisjoint a b →
+  Torus._∈_ b (filterOriginalStarFree a as)
+filterOriginalStarFreeComplete a [] b () separate
+filterOriginalStarFreeComplete a (first ∷ rest) b
+  Torus.here separate
+  with decideOriginalStarsDisjoint a first
+... | Torus.yes _ = Torus.here
+... | Torus.no notSeparate = emptyElim (notSeparate separate)
+filterOriginalStarFreeComplete a (first ∷ rest) b
+  (Torus.there inTail) separate
+  with decideOriginalStarsDisjoint a first
+... | Torus.yes _ =
+  Torus.there (filterOriginalStarFreeComplete a rest b inTail separate)
+... | Torus.no _ =
+  filterOriginalStarFreeComplete a rest b inTail separate
+
+OriginalStarDominated :
+  ∀ {n} (b : Bond n) → List (Bond n) → Set
+OriginalStarDominated b selected =
+  Torus._∈_ b selected ⊎
+  Σ (Bond _)
+    (λ chosen →
+      Torus.Product
+        (Torus._∈_ chosen selected)
+        (OriginalStarsDisjoint chosen b → Torus.Empty))
+
+greedyOriginalDisjointStarsMaximal :
+  ∀ {n} (marked : List (Bond n)) (b : Bond n) →
+  Torus._∈_ b marked →
+  OriginalStarDominated b (greedyOriginalDisjointStars marked)
+greedyOriginalDisjointStarsMaximal [] b ()
+greedyOriginalDisjointStarsMaximal (a ∷ as) b Torus.here =
+  inj₁ Torus.here
+greedyOriginalDisjointStarsMaximal (a ∷ as) b
+  (Torus.there inInput)
+  with decideOriginalStarsDisjoint a b
+... | Torus.no conflict =
+  inj₂ (a , Torus.pair Torus.here conflict)
+... | Torus.yes separate
+  with greedyOriginalDisjointStarsMaximal
+    (filterOriginalStarFree a as) b
+    (filterOriginalStarFreeComplete a as b inInput separate)
+... | inj₁ selected =
+  inj₁ (Torus.there selected)
+... | inj₂ (chosen , witness) =
+  inj₂ (chosen ,
+    Torus.pair
+      (Torus.there (Torus.first witness))
+      (Torus.second witness))
+
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
 -- 1. DONE SOURCE-WRITTEN: enumerate all original source plaquettes,
@@ -434,7 +498,7 @@ greedyOriginalDisjointStarsIndependent (a ∷ as) =
 --    one actually incident plaquette exists for every native bond.
 -- 2. DONE SOURCE-WRITTEN: proof-producing decision whether two\n--    actual source link stars share an original plaquette, with\n--    constructive nonempty self-conflict and symmetry.\n-- 3. REMAINING: exactly-six incidence (for side >= 3), original
 --    degree-18 plaquette conflict, and a source-native 19-packing proof.
--- 4. DONE SOURCE-WRITTEN: compute a greedy actually source-star\n--    independent subset and prove independence + input membership.\n--    REMAINING: the original degree-18 quantitative 19-packing bound.
+-- 4. DONE SOURCE-WRITTEN: compute a greedy actually source-star\n--    independent subset and prove independence + input membership,\n--    plus exact maximality: each unchosen original link conflicts\n--    with one genuinely selected original source link.\n--    REMAINING: the original degree-18 quantitative 19-packing bound.
 -- 5. REMAINING: consume the actual original Wilson Gibbs product-Haar
 --    Fubini/disintegration laws and the SU(2) coherent one-link bound.
 -- 6. REMAINING PHYSICAL: sparse frustrated/mixed connected contour
