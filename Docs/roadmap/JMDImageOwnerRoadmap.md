@@ -365,3 +365,8 @@ or a precise fail-closed residual. The current source-written scripts have
 not demonstrated this real end-to-end payment, and this document makes no
 claim that a source candidate is a theorem proof. The script may be called
 by an orchestrator; it neither invokes nor implements orchestration.
+
+
+## 2026-11-09 AST-first corrected P0 source owner
+
+The canonical first task is now to ingest all *available* pinned Lean declaration exports into one native expression DAG world in the existing `.dashi/repository.sqlite3`, **before** AO-relatedness and exact theorem gap matching. Source-written implementation and precise W01–W13 acceptance obligations: [dashi_lean4/docs/roadmap/JMDLeanASTWorldMaxCut.md](https://github.com/chboishabba/dashi_lean4/blob/chatgpt/jmd-image-owner-roadmap-20261109/docs/roadmap/JMDLeanASTWorldMaxCut.md). The 21,481 global and 1,996 Lean-starred repository IDs are already harvested, but they are **not yet 21,481 AST-indexed theorem libraries**. The source-accurate Lean AST world is the primary donor substrate; the existing Agda preflight symbol and gap index is the original target-owner substrate. Only *after* P0 source coverage and AST imports are measured should existing `itir.formal.inspect/route` and AO gap finding join them. Translator round-trip stability remains P4. This supersedes any earlier plan placing translator checking or image-oriented source routing ahead of native Lean AST ingestion.
