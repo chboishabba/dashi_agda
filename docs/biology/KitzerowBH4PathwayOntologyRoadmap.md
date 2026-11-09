@@ -2,6 +2,32 @@
 
 ## 2026-11-09 concrete spatial QDPR and future-minimality completion cut
 
+### Updated 2026-11-09 geometry closure in developmental companion
+
+The developmental PR #1471 has progressed past the previous
+27-site Python-only conservation fixture:
+`BiologicalSharedFiniteVectorTransferExact` now supplies
+a generic **shared `Vec Nat n`** source/target transfer
+with exact nonnegative sequential material conservation, and
+`BiologicalOriginal54BondSharedVectorExact` builds the
+**actual inverse 27-point↔Fin indexing**, transfers original
+nearest-neighbour proof witnesses and identifies all 54
+native bonds. Its original forward/reverse bond sweeps
+and arbitrary histories share one 27-site material state.
+
+This discharges the *source-written single-species original
+spatial-incidence conservation* portion of L03, not the
+real multi-species 29×12 mass/charge/energy,
+membrane permeability, circulation or QDPR kinetic proof.
+As #1454 does not yet include the full #1471 Golden
+head, these are **cross-branch** owners only; no compiled
+merged same-head certificate or original physical law
+is asserted. The next highest-value cut is the exact
+original QDPR cytosolic chemistry plus selected
+species-specific boundary transport and measured rates.
+
+
+
 These are newly **constructed selected finite physical dynamics**,
 not just typed future interfaces:
 
