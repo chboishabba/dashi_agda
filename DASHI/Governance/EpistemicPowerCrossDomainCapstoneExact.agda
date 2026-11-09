@@ -11,6 +11,7 @@ import DASHI.Core.TernaryRoleCarrierExact as Ternary
 import DASHI.Education.DigitalESDSourceAuditHyperfabricExact as ESD
 import DASHI.Governance.EpistemicPowerHistoryAndNonSubstitutionExact as History
 import DASHI.Governance.EpistemicPowerCapacityDynamicsExact as Capacity
+import DASHI.Governance.EpistemicPowerCostPayoffExact as CostPayoff
 import DASHI.Governance.EpistemicPowerQueryAdequacyCapstoneExact as Commitment
 import DASHI.Governance.EpistemicPowerStructuralRetentionExact as Retention
 import DASHI.Governance.EpistemicPowerSourceAtlasExact as Sources
@@ -41,6 +42,9 @@ record EpistemicPowerCrossDomainCut : Set₁ where
         History.inclusionReport
         Commitment.commitmentSemantics
         Commitment.sovereigntyRequirement → ⊥
+    nominalTaskCountCannotDetermineCostAndPayoff :
+      INF.FactorsThrough
+        CostPayoff.nominalTaskCount CostPayoff.costPayoff → ⊥
     originalESDScoreNotFullState :
       INF.FactorsThrough
         ESD.coarseVisibilityProfile ESD.fullAuditState → ⊥
@@ -60,6 +64,7 @@ epistemicPowerCrossDomainCapstone = cross-domain-cut
   Commitment.inclusionQueryAdequate
   Commitment.landQueryInadequate
   Commitment.sovereigntyQueryInadequate
+  CostPayoff.taskCountCannotRecoverCostPayoff
   ESD.coarseVisibilityProfileCannotDetermineFullAuditState
   Grammar.noTernaryRelabellingPreservesGrammar
   Trialectic.attachedFaceDoesNotFactorThroughBoundary
