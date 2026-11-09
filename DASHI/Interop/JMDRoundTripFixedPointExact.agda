@@ -1,8 +1,19 @@
 {-# OPTIONS --safe #-}
 module DASHI.Interop.JMDRoundTripFixedPointExact where
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Primitive using (Level; _⊔_)
+
+private
+  cong :
+    {ℓA ℓB : Level} {A : Set ℓA} {B : Set ℓB} →
+    (f : A → B) → {x y : A} → x ≡ y → f x ≡ f y
+  cong f refl = refl
+
+  trans :
+    {ℓ : Level} {A : Set ℓ} {x y z : A} →
+    x ≡ y → y ≡ z → x ≡ z
+  trans refl refl = refl
 
 ------------------------------------------------------------------------
 -- Conditional semantic fixed points.
