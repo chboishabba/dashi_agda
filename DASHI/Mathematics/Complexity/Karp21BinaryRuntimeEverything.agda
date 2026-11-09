@@ -91,3 +91,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranPriorityFrontierExact
 -- Actual original N21 endpointConsistent/boolEqual + binary-ledger FRACDASH edge transition.
 -- One-edge same-step and cached-score-update theorems; full rawSparseScore weld open.
 import DASHI.Mathematics.Complexity.Karp21FractranN21EndpointScoreStepExact
+
+-- Full raw-edge-list selected signed trace, same original rawSparseScore.
+-- Source-written all-list equality; native binary token weld remains open.
+import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact
