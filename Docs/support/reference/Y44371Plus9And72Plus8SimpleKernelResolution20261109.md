@@ -72,3 +72,20 @@ Code commit `00e5ff496cccad971b0c292abeb916feeeadf70c` adds `OriginalSelectedJMD
 Code commit `ad77c670dbc23d777e40a7452cd3cc35b5171a62` adds an exact **negative graph-symmetry test** `this72SplitNotLongArmEquivariant`: swapping the two length-four Y443 arms takes core square `e1` to residual square `e2`. Therefore the convenient literal original **72+8** relator partition is **not invariant even under this actual Coxeter graph automorphism**, much less automatically a Monster-equivariant (mathbb P^1(mathbb F_9)) projective representation. Use the 71+9/72+8 sources for bookkeeping and test indexing only until a real original action-preserving transport is supplied. This prevents numerical coincidences from being upgraded to Monster isomorphism hypotheses.
 
 Kernel-check of the new Agda modules and original selected-object source instantiation remains OPEN. None of Moonshine V0.4/V1 or Yang–Mills E1/D1/D2/N1/G1 changes status.
+
+
+## 9 November — original JMD trace provides an alternative one-node nonidentity certificate
+
+The fresh M2 implementation `Y443Universal80SimpleQuotientKernelReflectionExact.Selected.originalJMDW5NonidentityFromRelators` consumes the **existing** `Y443JMDFromRelatorsToPowerExact.powerFromActualEightyRelators` and the literal `Y443JMDSourceWordInstantiationExact.wElement`. It proves:
+```
+(original beta^5 = 1 from true Y443 A4 path)
+  and (original selected w^5 != 1)
+    => original selected node x4=e1 != 1
+    => selected 80-relator word-evaluation kernel reflects,
+       IF actual original Q80 historical simplicity is imported.
+```
+The source term uses `Y443JMDConcretePairPowerCompilerExact.sourceX4Fifth` to identify the **same** selected `x4 = w^5` and transports a genuine `w^5 != identity` proof to `x4 != identity`. This is an alternative to a selected Griess moved-state matrix, not an additional independent Clay or Moonshine obligation.
+
+The actual quoted JMD **order-ten report** would supply the needed `w^5 != identity` if it were an exact-order-ten theorem **for this selected group and literal w**, not merely a trace from a separate implementation. The native Agda record `Y443JMDTracePowerExact.JMDStepsTwoToFour` currently stores `x4=w^5` and `beta=w^6`, but **does not encode exact order ten or w^5 nonidentity**. Thus the route still needs the authentic selected-order certificate, and the native A4 path `beta^5=1` source. Neither is silently assumed proved.
+
+**M2 smallest source options after this pass:** EITHER (a) literal selected Griess weight-two moved-state witness plus identity action at that state, OR (b) real original selected JMD order-ten `w^5!=1` plus the actual A4 beta^5 source. Both feed the **same** historical simplicity-to-kernel theorem. The historical Q80↔Monster published proof bridge remains common.
