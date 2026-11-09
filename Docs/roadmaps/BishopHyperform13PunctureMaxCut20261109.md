@@ -367,3 +367,81 @@ The two source modules are imported into all three TOE roots
 and gluing examples. They neither establish a smooth pants/cobordism
 surface nor identify the group completion, the original world model,
 analytic modular j, or the source Bishop zeta/Xi objects.
+
+
+## 2026-11-09 maximum-cut generalization: arbitrary matched seam and binary covers
+
+This continuation replaces two isolated examples with **quantified theorem
+sources**, without collapsing the original semantic firewalls.
+
+### H2.02 arbitrary *matched* two-edge seam — source-written
+
+`DASHI/Reasoning/TypedHyperfabricPantsParametricSeamQuotientExact.agda`
+committed as `aa675839`.
+
+`module MatchedSeam (left right : Pants.BranchChannel)
+(matched : Pants.InterfaceMatch left right)` constructs **for
+every such original channel pair**:
+- `beforeFabric` and `beforeSection` with two real incidences;
+- `afterFabric` and `afterSection` with one seam edge and both
+  original vertices incident;
+- `matchedSignatures` proved by the original
+  `interfaceMatchImpliesSignatureEquality`;
+- `preserveIncidence`, `preserveVertexRestriction`,
+  `preserveEdgeValue` and `bothOriginalEdgesIdentify`;
+- exact specialization to the canonical donor's
+  `selectedChannel2`, `innerInputChannel2`,
+  `outerInnerMatch`.
+
+No equality of full `BranchChannel` data is assumed: the seam
+stalk is precisely the five-field signature. The remaining
+**independent edge-source** obligation is a theorem turning actual
+heterogeneous `TypedHyperfabric.edgeStalk` values into this
+`Pants.InterfaceMatch` with source provenance, plus a general
+incidence rewrite for a selected larger fabric.
+
+### H2.02 arbitrary decidable *binary* site cover — source-written
+
+`DASHI/Foundations/TernaryThirteenArbitraryBinaryCoverDescentExact.agda`
+committed as `f4ef9ed`.
+
+- `BinaryCover` supplies arbitrary predicates for left/right
+  chart membership at each ORIGINAL `StageAtlasZeroToEleven`
+  axis, with a constructive proof every axis is in at least
+  one chart. No fixed {0..6}/{6..11} partition remains.
+- `BinaryLocalFamily`, `BinaryMatching` require the
+  left/right valuations to agree on *every overlapping axis*
+  and both local centres to agree.
+- `glueValue`, `glueBinaryCentral`, `leftRecovers`,
+  `rightRecovers`, `leftGlobalRestriction`,
+  `rightGlobalRestriction`, `leftCentralRestriction`,
+  `rightCentralRestriction` prove constructive gluing and
+  local recovery for **every binary cover** and matching family.
+- `restrictBinaryCentral`, `restrictedBinaryMatches`,
+  `glueRestrictedPointwise`, `glueRestrictedCentre`
+  prove global-to-local-to-global recovery.
+- `binaryCoverPuncturePreserved` proves the common centre
+  remains nonneutral when punctured before gluing.
+
+This is stronger than a fixed two-chart overlap. It does NOT
+give arbitrary covering *sieves* in the original
+`StageTwelveGrothendieckRelationHyperformExact.SmallCategory`,
+or cover stability/transitivity under pullback. That is the
+precisely outstanding Grothendieck-topology theorem.
+
+### Remaining decisive leaves (after this pass)
+
+| Gate | Source status | Exact outstanding source proof |
+|---|---|---|
+| H2.02 two-edge seam for any five-field matched channels | SOURCE-WRITTEN | Supply actual heterogeneous hyperfabric edge-stalk-to-channel interpretation and `InterfaceMatch` from independently selected world/relational edge data; implement generalized fabric topology rewrite beyond the two-edge specimen |
+| H2.02 binary original-axis covering descent | SOURCE-WRITTEN | Build a coherent nontrivial Grothendieck topology over original chart morphisms, prove pullback stability/transitivity and all-sieve matching-family uniqueness/descent |
+| H1.01 | OPEN | Independently identify intended relational/group completion with constructed 12-stage valuation plus centre and original pants path |
+| H2.01 world | OPEN | Transport non-descent to independently selected world-model observer, original state and actual consumer |
+| Bishop P1 | OPEN | Prove actual nested original exponential–atan same-object analytic identity and 1/5,1/239 Machin witnesses |
+| Zeta P2 | OPEN | All Nat canonical powers, independent selected zeta function equality |
+| Gamma/Xi P3 | OPEN | Genuine source Gamma integral, continuation, functional equation, entire completed Xi |
+
+Root imports committed `f73607c`, `fdaaf93`, `feb63c5`.
+All statuses describe **source-written** statements without a
+kernel acceptance receipt. No analytic gate is marked paid by the
+hyperfabric lemmas.
