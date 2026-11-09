@@ -35,11 +35,12 @@ data OriginalSourceObject : Set where
 data OriginalAuthor : Set where
   washingtonPostJournalist : OriginalAuthor
   gccCommunicationsOffice : OriginalAuthor
+  independentScientificLetterAuthor : OriginalAuthor
 
 originalAuthor : OriginalSourceObject → OriginalAuthor
 originalAuthor rensbergerWashingtonPostJune1 = washingtonPostJournalist
 originalAuthor shlaesGCCResponseJune30 = gccCommunicationsOffice
-originalAuthor hansenIndependentRebuttalJune8 = washingtonPostJournalist
+originalAuthor hansenIndependentRebuttalJune8 = independentScientificLetterAuthor
 originalAuthor julyWashingtonPostClipping = washingtonPostJournalist
 originalAuthor septemberGCCBulletin = gccCommunicationsOffice
 
@@ -144,3 +145,16 @@ sourceMentionNotAudienceEffect ()
 
 -- No source-specific instance of audience effects or operational
 -- targeting is constructed in this bounded historical stage owner.
+
+-- Independent opinion letter is not authored by either the journalist
+-- whose report it addresses or the trade coalition amplifying that
+-- report. This statement concerns source credits, not scientific truth.
+independentHansenLetterNotGCCAuthored :
+  originalAuthor hansenIndependentRebuttalJune8
+  ≡ originalAuthor shlaesGCCResponseJune30 → ⊥
+independentHansenLetterNotGCCAuthored ()
+
+independentHansenLetterNotReporterAuthored :
+  originalAuthor hansenIndependentRebuttalJune8
+  ≡ originalAuthor rensbergerWashingtonPostJune1 → ⊥
+independentHansenLetterNotReporterAuthored ()
