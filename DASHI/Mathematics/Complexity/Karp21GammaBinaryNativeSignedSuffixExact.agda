@@ -95,3 +95,28 @@ karpNativeSignedGammaSuffixSameOriginal word =
     (trans
       (nativeGammaOriginalSuffixAllWords word)
       (sym (originalSignedSuffixEqualsOriginalGamma word)))
+
+
+------------------------------------------------------------------------
+-- All-word SIGNED NUMERICAL OBSERVATION of the genuine native gamma
+-- control path. It follows the existing unsigned all-word numerical
+-- equivalence and original zigzag inverse; it does NOT observe the
+-- executable SignedMagnitudeBits payload yet. That is the final
+-- numerical representation lemma needed by the binary ledger.
+------------------------------------------------------------------------
+
+open import Data.Integer.Base using (ℤ)
+
+signedNativeControlNumericView :
+  Word.BitWord → Maybe (ℤ × Word.BitWord)
+signedNativeControlNumericView word
+  with Numeric.scanNativeNumericView zero word
+... | nothing = nothing
+... | just (number , suffix) =
+  just (Old.unzigzag number , suffix)
+
+karpSignedNativeControlNumericViewSameOriginal :
+  (word : Word.BitWord) →
+  signedNativeControlNumericView word ≡ Old.readSignedGamma word
+karpSignedNativeControlNumericViewSameOriginal word
+  rewrite Numeric.originalGammaSameAllWordNumericalObservation word = refl
