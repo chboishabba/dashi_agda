@@ -314,3 +314,7 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact
 -- P0-E: constructive Nat gap witnesses for the ACTUAL compareLE on ALL bitwords, including noncanonical zero padding.
 -- Agda kernel and complete original positive-threshold grammar remain outstanding.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdNumericalExact
+
+-- Strictly positive N21 original threshold: actual native predecessor/nonzero test gives a positive Nat observation on every success.
+-- SOURCE only; complete graph-word and original threshold value match OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNonzeroExact
