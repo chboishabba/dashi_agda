@@ -20,7 +20,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
-open import Data.Product using (_×_; _,_)
+open import Data.Product using (Σ; _×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 open import Relation.Nullary.Decidable.Core using (yes; no)
 import Data.Nat.Properties as NatP
@@ -31,6 +31,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaZigzagGraphWordDecodeExact as Gra
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact as Edges
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
 import DASHI.Mathematics.Complexity.Karp21NativeWholeRawGraphWordExact as Native
+import DASHI.Mathematics.Complexity.Karp21FractranPairedBinaryTraceExact as Paired
 import DASHI.Mathematics.Complexity.Karp21NativeOriginalWholeGraphFieldsWeldExact as Fields
 import DASHI.Mathematics.Complexity.Karp21NativeParsedRawAcceptanceExact as Accepted
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Original
@@ -47,30 +48,68 @@ nativeWholeWordAccepts word certificate
 ... | just (Native.native-parsed-raw-graph n paired thresholdLE) =
   Accepted.nativeParsedRawAccepts paired certificate thresholdLE
 
--- A genuine successful native full-graph parse necessarily carries
--- the exact original signed raw-edge stream receipt: it is obtained
--- by FOLLOWING the actual gamma n,m, 3m length guard and edge parser.
+-- Proof receipt extracted from the actual full original wire parser:
+-- its edge count, cursor and suffix are existentially reconstructed
+-- from successful source execution, never arbitrarily supplied.
+RawEdgeParseReceipt : Native.NativeParsedRawGraph → Set
+RawEdgeParseReceipt parsed =
+  Σ Nat (λ m →
+    Data.Product.Σ Word.BitWord (λ afterM →
+      Data.Product.Σ Word.BitWord (λ afterEdges →
+        Edges.readNativePairedRawEdges m afterM
+          ≡ just (Native.nativePairedEdges parsed , afterEdges))))
+
 nativeWholeSuccessContainsActualEdgeReceipt :
   (word : Word.BitWord)
   (parsed : Native.NativeParsedRawGraph) →
   Native.readNativeWholeRawGraphWord word ≡ just parsed →
-  ΣEdgeReceipt word parsed
-  where
-    ΣEdgeReceipt :
-      Word.BitWord → Native.NativeParsedRawGraph → Set
-    ΣEdgeReceipt source parsed =
-      Nat × (Word.BitWord ×
-        (Word.BitWord ×
-          (Edges.readNativePairedRawEdges
-            (Data.Product.proj₁ projected)
-            (Data.Product.proj₁ (Data.Product.proj₂ projected))
-            ≡ just (Native.nativePairedEdges parsed ,
-                    (Data.Product.proj₁
-                      (Data.Product.proj₂ (Data.Product.proj₂ projected)))))))
-      where
-        projected : Nat × (Word.BitWord × Word.BitWord)
-        projected = zero , ([] , [])
+  RawEdgeParseReceipt parsed
+nativeWholeSuccessContainsActualEdgeReceipt word parsed successful
+  with Gamma.readGamma word
+... | nothing with successful
+... | ()
+... | just (n , afterN)
+  with Gamma.readGamma afterN
+... | nothing with successful
+... | ()
+... | just (m , afterM)
+  with NatP._≤?_ (m * suc (suc (suc zero))) (length afterM)
+... | no _ with successful
+... | ()
+... | yes _
+  with Edges.readNativePairedRawEdges m afterM in parsedEdges
+... | nothing with successful
+... | ()
+... | just (paired , afterEdges)
+  with Positive.readPositiveGammaLE afterEdges
+... | nothing with successful
+... | ()
+... | just (thresholdLE , _ ∷ _) with successful
+... | ()
+... | just (thresholdLE , [])
+  with Original.validRawEdges n Graph.noPrevious
+    (Paired.rawFromPairs paired)
+... | false with successful
+... | ()
+... | true with successful
+... | refl =
+  m , (afterM , (afterEdges , parsedEdges))
 
--- Source-level projected receipt above must not invent an m, afterM
--- or cursor: the implementing proof below uses a dependent Sigma
--- witness in its own type rather than an unconstrained pair.
+-- Original source verification is reached only through the same
+-- parser outcome, never a separately assumed graph or certificate.
+karpFractranDecodePreservesAcceptance :
+  (word certificate : Word.BitWord) →
+  nativeWholeWordAccepts word certificate
+    ≡ Original.verifyFinFreeSparseGraphWord word certificate
+karpFractranDecodePreservesAcceptance word certificate
+  with Native.readNativeWholeRawGraphWord word in parsed
+     | Fields.nativeOriginalGraphWordFieldsSame word
+... | nothing | fields
+  rewrite sym fields = refl
+... | just (Native.native-parsed-raw-graph n paired thresholdLE) | fields
+  with nativeWholeSuccessContainsActualEdgeReceipt
+    word (Native.native-parsed-raw-graph n paired thresholdLE) parsed
+... | m , (afterM , (afterEdges , receipt))
+  rewrite sym fields =
+  Accepted.karpNativeParsedRawAcceptanceSameOriginal
+    m afterM paired afterEdges certificate thresholdLE receipt
