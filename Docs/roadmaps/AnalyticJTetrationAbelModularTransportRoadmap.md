@@ -467,3 +467,33 @@ With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite tele
 **High-alpha frontier sharpened:** The remaining conditional input to the native Bishop convergence lane is now a single original **complex principal-log iterate magnitude bound** (plus a proof that it holds uniformly across the source disk). Reuse and real/imaginary completion are already source-written; no new generic completeness/tail assumption is warranted.
 
 **Verification:** All new Agda declarations are source-written, kernel-check pending. Previous rational/Koenigs scripts are diagnostics or exact arithmetic certificates under analytic hypotheses, not evidence of the full mathematical Kneser claim.
+
+## 2026-11-09 punctured and q-series prior-art reconciliation / first native T-period compiler
+
+**Existing owners found and inspected:**
+- `JInvariantPuncturedLatticeReindexExact.agda`: actual `SL₂(ℤ)` reindexing of `ℤ² ∖ {(0,0)}`, including forward/inverse nonorigin preservation.
+- `JInvariantBishopPuncturedLatticeEisensteinCompilerExact.agda`: native Bishop raw/normalized Eisenstein modularity; the `BishopQSeriesPuncturedLatticeSameObject` interface requires real Fourier E4/E6 equality. Its `canonicalPreferredPuncturedEisensteinFrontier` explicitly records `concretePuncturedAbsoluteSumPaidHere=false`, `concreteG4G6NormalizationConstantsPaidHere=false`, `qSeriesEqualsNormalizedLatticePaidHere=false`.
+- `JInvariantBishopUnitDiskEisensteinCompletionExact.agda`: original Bishop `E₄(q)`, `E₆(q)` with source `BishopUnitDiskQ`, certified componentwise absolute convergence and limits.
+- `JInvariantBishopUpperHalfPlaneRadiusExact.agda`: original real bound `0<exp_B(-2π_B Imτ)<1` and E4/E6 majorant convergence for `Imτ>0`. **π_B (Machin) must still be identified with the complex trig π used by the original q exponential.**
+- `DASHI.Analysis.PrincipalComplexLog.agda` and `PrincipalComplexLogRealization.agda`: branch-aware **constructed-complex package interfaces**, not a supplied principal logarithm on original Bishop setoid complex.
+- `DASHI.Foundations.BishopExponentialCauchyProductExact.agda`: existing Bishop real exponential addition product theorem; no original Bishop complex `exp_C(2πi)=1` was identified.
+
+**Important disambiguation:** puncturing the integer lattice at the origin to define Eisenstein sums is not the same as removing the exponential fixed point / complex branch cut to define a local Abel logarithm. The former is source-written/proved separately; it does NOT close `originalPuncturedSectorLogBranchCocycle`.
+
+**New source-written module:** `DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda`, commit `4fa7d228`, consumes the already-constructed Bishop unit-disk Eisenstein limits, not a redefined E4/E6 or invented convergence carrier:
+- [x] **P2.Q01** `originalE4TermCongruent`, `originalE6TermCongruent`: source-native finite E4/E6 term congruence from `q ≈C r`.
+- [x] **P2.Q02** `originalComplexSeriesLimitExtensional`: original vendored Bishop termwise series extensionality and uniqueness of limits for both complex components; retains setoid equality.
+- [x] **P2.Q03** `originalBishopE4TailSetoidInvariant`, `originalBishopE6TailSetoidInvariant`: prove invariance of actual source Bishop E4/E6 tail limits under equal q.
+- [x] **P2.Q04** `originalBishopE4SetoidInvariant`, `originalBishopE6SetoidInvariant`: transport the full normalized E4=1+tail, E6=1-tail values.
+- [x] **P2.Q05** `originalBishopQSeriesTPeriodE4`, `originalBishopQSeriesTPeriodE6`: original source E4/E6 period **conditional only on** a genuine same-source `qAt(Tτ)≈CqAt(τ)` and real unit-disk proofs. That period witness is a field in `OriginalBishopQPeriodSource` and has **not** been instantiated.
+- [ ] **P2.Q06** `originalBishopComplexExpAddition`: transport already existing real Bishop exponential product and sine/cosine addition identities into original `BishopSetoidComplexExact.expC`; do not assume trig identities which have not been proven for the chosen `BishopSetoidComplexTranscendentals`.
+- [ ] **P2.Q07** `originalBishopComplexTwoPiPeriod`: identify the real Machin π with the complex sine/cosine period `π` in the *same* original Bishop setoid complex, then prove `exp_C(2πi)≈1`.
+- [ ] **P2.Q08** `originalBishopQAtTranslationPeriod`: construct genuine `q(τ)=exp_C(2πiτ)` and actual `q(τ+1)≈q(τ)` using Q06/Q07, domain positivity, setoid congruence and explicit period action.
+- [ ] **P2.Q09** `originalBishopQSeriesTPeriod`: instantiate `OriginalBishopQPeriodSource` with Q08, obtaining E4/E6 T-invariance and the original unit-disk radius evidence; currently an uninstantiated same-source input.
+- [ ] **P2.Q10** `originalBishopJInvariantFromE4E6`: prove numerator/denominator and Δ/j formation in Bishop setoid, nonvanishing of Δ, and quotient congruence; then `originalRendererAbelWeldInstance` links the original Abel chart and renderer.
+- [ ] **P2.Q11** `originalBishopPuncturedFourierSameObject`: discharge the already-owned `BishopQSeriesPuncturedLatticeSameObject` on the actual punctured absolutely convergent lattice sum and correct G4/G6 normalization constants, to get full modularity beyond generator T.
+- [ ] **P2.Q12** Kernel-check new module and all transitive imports. The entire new Q01–Q05 tranche is SOURCE-WRITTEN only and not Agda 2.9 kernel-accepted.
+
+**Priority by max-cut:** P1 original Bishop principal Log / Koenigs increment remains the analytic critical path to a nontrivial Kneser Abel chart. P2 Q06–Q08 can proceed independently using established Bishop trig/exponential owners. P3 original moving fine observer and P4 numerical certification still depend on the actual selected analytic source.
+
+**No false gate closures:** source-written code and conditional q-period instances are not the same as proving `q(τ+1)=q(τ)` on the original Bishop upper-half-plane. Global Kneser and actual contour certification remain open.
