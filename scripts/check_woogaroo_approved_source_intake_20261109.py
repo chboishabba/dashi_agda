@@ -21,7 +21,6 @@ EXPECTED = {
     "esk_omp": "15 October 2026 0102-059 Version 6",
     "avonvale_omp": "15 October 2026 Oes1:v1.2(e)",
 }
-ALLOWED_KINDS = {"application/pdf", "application/vnd.ms-excel.sheet.macroEnabled.12"}
 
 def digest(path: Path) -> str:
     h = hashlib.sha256()
@@ -32,6 +31,8 @@ def digest(path: Path) -> str:
 
 def check(manifest_path: Path) -> dict:
     data = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if data.get("case") != "EPBC 2019/8575":
+        raise ValueError("manifest must explicitly identify EPBC 2019/8575")
     artifacts = data.get("artifacts")
     if not isinstance(artifacts, list):
         raise ValueError("artifacts must be a list")
@@ -47,7 +48,9 @@ def check(manifest_path: Path) -> dict:
         if entry is None:
             results.append({"role":role,"status":"MISSING", "expected_revision":expected_revision})
             continue
-        p = (manifest_path.parent / entry.get("path","")).resolve()
+        p = (manifest_path.resolve().parent / entry.get("path","")).resolve()
+        if not p.is_relative_to(manifest_path.resolve().parent):
+            raise ValueError("source bytes must be within the manifest directory")
         # A download listing without local bytes is NOT a received source.
         if not p.is_file():
             results.append({"role":role,"status":"NO_BYTES","expected_revision":expected_revision})
@@ -87,7 +90,7 @@ def selftest():
                             "claimed_revision":version,
                             "original_agency_acceptance_receipt":""})
         manifest=root/"sources.json"
-        manifest.write_text(json.dumps({"artifacts":entries}))
+        manifest.write_text(json.dumps({"case":"EPBC 2019/8575","artifacts":entries}))
         good=check(manifest)
         assert good["bytes_and_claims_pass"]
         assert not good["approved_originals_authenticity_established"]
