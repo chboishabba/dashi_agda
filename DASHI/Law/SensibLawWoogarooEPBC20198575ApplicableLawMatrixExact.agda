@@ -7,7 +7,7 @@ open import Agda.Builtin.String using (String)
 ------------------------------------------------------------------------
 -- EPBC 2019/8575 APPLICABLE-LAW MATRIX
 --
--- Provision-by-provision transition audit for the pending Part 9 decision.
+-- Provision-by-provision transition audit for signed 16 October 2026 Part 9 decision.
 -- Source basis: Environment Protection Reform Act 2025, Schedule 1 Part 3,
 -- especially items 683, 689 and 690, plus the August 2026 transitional rules.
 -- This is a source-bounded reconstruction for counsel review, not legal advice.
@@ -165,7 +165,7 @@ record CounselResidual : Set where
 
 remainingCounselResidual : CounselResidual
 remainingCounselResidual = counsel-residual
-  "Confirm the exact text/version of each operative pre-reform provision governing EPBC 2019/8575 at the 1 October 2026 decision, and identify any later transitional rule, instrument, court authority or commencement item that modifies the item-683/item-690 mapping."
+  "Confirm the exact text/version of each operative pre-reform provision governing EPBC 2019/8575 at the signed 16 October 2026 decision, and identify any later transitional rule, instrument, court authority or commencement item that modifies the item-683/item-690 mapping."
   "Provision buckets are source-mapped; final legal construction remains counsel-owned."
 
 -- Direct access under the unreplaced July 2026 s135A(2)-(3) is
@@ -179,3 +179,44 @@ section135APreDecisionOnRequest = applicable-rule
   mixedOrProvisionSpecific
   "After a decision on each controlling provision, on-request copy subject to prescribed exclusions/charges; no received document, new automatic publication, disclosure decision or FOI outcome inferred."
   false
+
+------------------------------------------------------------------------
+-- Source-dated National Environmental Standard (Environmental Offsets)
+-- registration must not be promoted into 16 Oct project applicability.
+-- Source: FRL F2026L01093 registered 21 Aug 2026;
+-- DCCEEW National Environmental Standards (17 Sep 2026 update);
+-- National EPA 24 Aug 2026 news; DCCEEW transitional arrangements
+-- (20 Aug 2026 update), all source observations as of 9 Nov 2026.
+--
+-- New approval tests had NOT commenced for individual project decisions
+-- as at 16 Oct 2026, according to the two original government notices.
+-- This is the original-government applicability reconstruction,
+-- not a declaration that a later standard has no relevance at all
+-- to future variations, new referrals or other legal mechanisms.
+------------------------------------------------------------------------
+
+offsetsNES2026RegisteredButNotOctoberApprovalTest : ApplicableRule
+offsetsNES2026RegisteredButNotOctoberApprovalTest = applicable-rule
+  "National Environmental Standard (Environmental Offsets) 2026, Principle 8, s15"
+  "F2026L01093 registered 21 Aug 2026; DCCEEW 17 Sep 2026 Standards; National EPA 24 Aug 2026 news; DCCEEW 20 Aug 2026 transitional arrangements"
+  preReformPreserved
+  "Although the Standard had commenced as an instrument on 22 August, Commonwealth guidance expressly states it did not apply to individual project assessment/approval decisions until new approval tests commenced, on or before 1 December 2026. The signed Springview 16 Oct 2026 approval predates that application. Do not use the new s15 securing-and-management-before-impact standard as a retrospective direct ground; enforce original approval C24/C25 and independently applicable law."
+  false
+
+record OffsetsNES2026Boundary : Set where
+  constructor offsets-nes-boundary
+  field
+    instrumentRegisteredAugust21 : Bool
+    registeredInstrumentMeansOctoberProjectTestApplied : Bool
+    october20198575SignedBeforeNewTests : Bool
+    oldC24C25RemainOperativeApprovalConditions : Bool
+    laterVariationOrOtherApplicationNeedsSeparateTest : Bool
+    standardProvidesAutomaticJudicialFinding : Bool
+
+currentOffsetsNES2026Boundary : OffsetsNES2026Boundary
+currentOffsetsNES2026Boundary = offsets-nes-boundary
+  true false true true true false
+
+-- A Bool summary records original published source classification.
+-- It is NOT a kernel proof of commencement, transitional applicability,
+-- judicial invalidity, current clearing, or any particular breach.
