@@ -124,3 +124,55 @@ originalDirichletLimitsRespectNatLog
     (λ n → proj₂
       (originalDirichletExponentialRespectsNatLog
         T first second logSame s n))
+
+-- Terminal source-to-configured-value weld: the original configured
+-- Round11 negative-log sum and the canonical source series have the
+-- SAME real and imaginary Dirichlet values, once actual comparison
+-- bounds have been produced on their corresponding literal terms.
+-- This is stronger than only identifying each finite coefficient.
+configuredRound11DirichletValueIsCanonical :
+  (T : Complex.BishopSetoidComplexTranscendentals) →
+  (inside : (n : Nat) →
+    Elementary.InOpenUnitInterval
+      (Complex.dataSet T) (Terms.natLogArgument n)) →
+  ((n index : Nat) →
+    R._≃_
+      (Elementary.negativeLogOneMinusTerm
+        (Complex.dataSet T) (Terms.natLogArgument n) index)
+      (SourceLog.sourceNegativeLogTerm
+        (Terms.natLogArgument n) index)) →
+  (s : BC.BishopComplex) →
+  (configuredBound : Dirichlet.BishopDirichletBaselMajorantAt
+    (Terms.bishopDirichletExponentialTerm T
+      (Terms.natLogViaOriginalNegativeLog T inside)) s) →
+  (canonicalBound : Dirichlet.BishopDirichletBaselMajorantAt
+    (Terms.bishopDirichletExponentialTerm T
+      Terms.sourceCanonicalNatLogCandidate) s) →
+  (R._≃_
+    (BC.re (Dirichlet.dirichletValue
+      (Terms.bishopDirichletExponentialTerm T
+        (Terms.natLogViaOriginalNegativeLog T inside))
+      s configuredBound))
+    (BC.re (Dirichlet.dirichletValue
+      (Terms.bishopDirichletExponentialTerm T
+        Terms.sourceCanonicalNatLogCandidate)
+      s canonicalBound)))
+  ×
+  (R._≃_
+    (BC.im (Dirichlet.dirichletValue
+      (Terms.bishopDirichletExponentialTerm T
+        (Terms.natLogViaOriginalNegativeLog T inside))
+      s configuredBound))
+    (BC.im (Dirichlet.dirichletValue
+      (Terms.bishopDirichletExponentialTerm T
+        Terms.sourceCanonicalNatLogCandidate)
+      s canonicalBound)))
+configuredRound11DirichletValueIsCanonical
+    T inside coefficientsAgree s configuredBound canonicalBound =
+  originalDirichletLimitsRespectNatLog
+    T
+    (Terms.natLogViaOriginalNegativeLog T inside)
+    Terms.sourceCanonicalNatLogCandidate
+    (Terms.sourceOriginalConfiguredNatLogAgreement
+      T inside coefficientsAgree)
+    s configuredBound canonicalBound
