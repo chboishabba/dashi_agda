@@ -221,3 +221,7 @@ The canonical `Karp21FractranPairedBinaryTraceExact.agda` now imports and EXECUT
 **Closed only as source candidate:** native ledger construction from original selected binary-token trace, and exact original raw-score rejection under supplied raw-token alignment. **OPEN**: token/original signed-ℤ value equality; raw graph *source-read* token alignment (do not silently supply arbitrary paired tokens); native two-lane integer observation equals raw signed score; threshold comparator equality; full original N21 same-step and all-word acceptance; machine time; original `PR.InNP`; E20, Cook–Levin, Karp network and separate `SATNotInP`. The new implementation is already reached by the original Karp roots and focused Agda referee. **Kernel acceptance still unverified**.
 
 This status supersedes stale chronological entries above: no full native score/acceptance theorem and no P-vs-NP separation theorem is established.
+
+### Source audit correction — symbolic zero-prefix identity
+
+The signed-gamma complete-frame owner now includes `originalGoldenZeroPrefixSame`, a structural Nat induction establishing the exact equality of the **distinct original** `Old.zeroPrefix` and native `Golden.zeroPrefix` constructors. Both native payload-frame proof branches explicitly rewrite this equality before using `Native.readGammaBinaryPayloadExact`, rather than assuming that separate stuck recursive definitions are judgmentally identical at a variable input length. Committed in the same PR. Source-written only; needs Agda kernel checking.
