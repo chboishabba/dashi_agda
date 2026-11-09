@@ -51,17 +51,18 @@ def records(path: Path):
                 yield row
 
 
-def read_ids(path: Path) -> set[int]:
+def read_ids(path: Path) -> dict[int, str]:
     with path.open(newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-        if not reader.fieldnames or "github_id" not in reader.fieldnames:
+        if not reader.fieldnames or not {"github_id", "full_name"} <= set(reader.fieldnames):
             raise ValueError("Manifest missing github_id")
-        found = set()
+        found = {}
         for row in reader:
             value = int(row["github_id"])
-            if value <= 0 or value in found:
-                raise ValueError("Duplicate or invalid GitHub repository ID")
-            found.add(value)
+            name = row["full_name"].strip()
+            if value <= 0 or value in found or len(name.split("/")) != 2:
+                raise ValueError("Duplicate/invalid GitHub repository ID or name")
+            found[value] = name
     return found
 
 
@@ -116,7 +117,7 @@ def source_key(repo: str, commit: str, decl: str) -> str:
     return digest("\x1f".join([repo, commit, decl]))
 
 
-def import_external(conn, path: Path, global_ids: set[int]) -> int:
+def import_external(conn, path: Path, global_ids: dict[int, str]) -> int:
     count = 0
     for r in records(path):
         for f in ("repository_id", "repository", "commit", "module", "declaration", "type"):
@@ -125,6 +126,8 @@ def import_external(conn, path: Path, global_ids: set[int]) -> int:
         rid = int(r["repository_id"])
         if rid not in global_ids:
             raise ValueError(f"External repository ID not in admitted global corpus: {rid}")
+        if str(r["repository"]) != global_ids[rid]:
+            raise ValueError("External repository name disagrees with admitted ID")
         for field in ("module", "declaration"):
             if not MODULE.fullmatch(str(r[field])):
                 raise ValueError(f"Invalid {field}: {r[field]}")
@@ -156,6 +159,10 @@ def import_agda(conn, *, revision: str, max_rows: int = 0) -> int:
     if max_rows:
         sql += " LIMIT " + str(max_rows)
     rows = conn.execute(sql).fetchall()
+    # Historical source records remain in original git history, not in the
+    # current live mathematical candidate world after a new Agda revision.
+    conn.execute("DELETE FROM jmd_world_sources WHERE repository=? AND source_commit<>?",
+                 ("chboishabba/dashi_agda", revision))
     for name, module, typ, fp in rows:
         key = source_key("chboishabba/dashi_agda", revision, name)
         conn.execute("""INSERT INTO jmd_world_sources VALUES(?,?,?,?,?,?,?,?,?,?)
@@ -280,7 +287,14 @@ def check_lean(conn, *, root: Path, limit: int = 4, timeout: int = 120) -> dict:
             continue
         # Goal proposition is provided by a source declaration consumer.
         # Its exact elaboration is checked by Lean, not by Python.
-        probe = f"import {gmod}\nimport {smod}\nexample : {prop} := by\n  exact {decl}\n"
+        # Reject code injection, admitted placeholders, and multiline commands.
+        bad = ("\n", "\r", ":=", "sorry", "admit", "unsafe", "#", "--", "/-", ";")
+        if any(token in prop for token in bad) or not prop.strip():
+            continue
+        probe = (f"import {gmod}\nimport {smod}\n"
+                 "set_option autoImplicit false\n"
+                 "set_option warningAsError true\n"
+                 f"example : {prop} := by\n  exact {decl}\n")
         with tempfile.NamedTemporaryFile(mode="w",suffix=".lean",dir=root,
                                          prefix="JMDProbe_",delete=False) as f:
             f.write(probe)
