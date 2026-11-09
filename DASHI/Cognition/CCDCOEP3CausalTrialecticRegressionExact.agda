@@ -30,6 +30,7 @@ import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
 import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact as Handoff
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact as Culture
 import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
+import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -487,3 +488,18 @@ effectDoesNotDetermineWarfareIntent :
   NF.FactorsThrough P3.observedEffect P3.worldPurpose → ⊥
 effectDoesNotDetermineWarfareIntent =
   CW.measuredEffectAloneCannotIdentifyHostilePurpose
+
+-- The 3 May reporter-directed mailing and July DOE communication
+-- share the originating GCC but retain distinct original addressees.
+-- Archival catalogue records do not identify actual message receipt.
+gcc1993MayToJulyCannotFuseRecipients :
+  GCC1993.addressedTo GCC1993.julyDepartmentOfEnergyLetter
+  ≡ GCC1993.addressedTo GCC1993.mayReporterLetter → ⊥
+gcc1993MayToJulyCannotFuseRecipients =
+  GCC1993.doeLetterDifferentDestination
+
+originalNewspaperBylinesRemainDistinctFromGCC :
+  GCC1993.originalOwner GCC1993.archivedMediaClippings
+  ≡ GCC1993.originalOwner GCC1993.mayReporterLetter → ⊥
+originalNewspaperBylinesRemainDistinctFromGCC =
+  GCC1993.articleAuthorNotGCCHistoricalAuthor
