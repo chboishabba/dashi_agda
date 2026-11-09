@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessEx
 import DASHI.Physics.YangMills.BalabanClayGate4PeriodicBondPathBianchiExact as Bond
 import DASHI.Physics.YangMills.YMClayD1OriginalWilsonPathSupportExtensionalExact as Source
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Variable
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as Native
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 
 data SignedPositiveLinkValues (Value : Set)
@@ -163,7 +164,7 @@ module _
     (n : Nat) (links : Variable.SUNPeriodicLinks theory n) →
     Bond.PeriodicBondGaugeRealization n
       (SUN.SUNMatrixElement theory)
-      (Variable.Native.sunExactSignedLinkGroup theory)
+      (Native.sunExactSignedLinkGroup theory)
   originalWilsonRealization n links =
     Variable.periodicSUNRealization theory n links
       (λ _ → SUN.sunIdentity theory)
@@ -179,7 +180,7 @@ module _
     (n : Nat) (word : List (Plaquette.PeriodicPlaquette n))
     (links : Variable.SUNPeriodicLinks theory n) →
     evaluateOriginalWilsonWord
-      (Variable.Native.sunExactSignedLinkGroup theory)
+      (Native.sunExactSignedLinkGroup theory)
       (Trace.matrixWilsonValue traceData)
       word
       (originalWilsonWordSampledValues n word links)
