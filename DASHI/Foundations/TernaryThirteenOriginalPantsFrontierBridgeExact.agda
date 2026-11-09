@@ -171,3 +171,62 @@ sourceCentralPantsCentreCanBeNeutral valuation =
     (sourcePantsRoundTripOnCentre
       (Rel.sourceNeutralSection valuation))
     refl
+
+------------------------------------------------------------------------
+-- Original FRONTIER refinement: extending a twelve-trit prefix by
+-- any central trit is literally the all-depth pants appendSlot.
+------------------------------------------------------------------------
+
+wordToPantsAppend :
+  (n : Nat) (prefix : Word.TritWord n) (last : Word.Trit) →
+  wordToPants (suc n)
+    (Word.joinTrit n 1 prefix (Puncture.singleTrit last))
+  ≡
+  Frontier.appendSlot (wordToPants n prefix) (tritToSlot last)
+wordToPantsAppend zero tt last = refl
+wordToPantsAppend (suc n) (head , tail) last =
+  cong (λ xs → tritToSlot head vcons xs)
+    (wordToPantsAppend n tail last)
+
+originalTwelvePlusOnePantsGluing :
+  (valuation : Rel.SourceTwelveAxisValuation)
+  (centre : Base.TriTruth) →
+  sourceCentralToPants13 (valuation , centre)
+  ≡
+  Frontier.appendSlot
+    (wordToPants 12 (Source.valuationToWord valuation))
+    (tritToSlot (Source.fromSource centre))
+originalTwelvePlusOnePantsGluing valuation centre =
+  wordToPantsAppend 12 (Source.valuationToWord valuation)
+    (Source.fromSource centre)
+
+-- Canonical source-negative, -neutral, -positive branches are
+-- the original three pants output slots, without loss of the
+-- local 12-trit parent (the original Frontier append theorem
+-- supplies the corresponding cylinder-prefix compatibility).
+originalCentralBranchNegative :
+  (valuation : Rel.SourceTwelveAxisValuation) →
+  sourceCentralToPants13 (valuation , Base.tri-low)
+  ≡ Frontier.appendSlot
+       (wordToPants 12 (Source.valuationToWord valuation))
+       Junction.slot3
+originalCentralBranchNegative valuation =
+  originalTwelvePlusOnePantsGluing valuation Base.tri-low
+
+originalCentralBranchNeutral :
+  (valuation : Rel.SourceTwelveAxisValuation) →
+  sourceCentralToPants13 (valuation , Base.tri-mid)
+  ≡ Frontier.appendSlot
+       (wordToPants 12 (Source.valuationToWord valuation))
+       Junction.slot6
+originalCentralBranchNeutral valuation =
+  originalTwelvePlusOnePantsGluing valuation Base.tri-mid
+
+originalCentralBranchPositive :
+  (valuation : Rel.SourceTwelveAxisValuation) →
+  sourceCentralToPants13 (valuation , Base.tri-high)
+  ≡ Frontier.appendSlot
+       (wordToPants 12 (Source.valuationToWord valuation))
+       Junction.slot9
+originalCentralBranchPositive valuation =
+  originalTwelvePlusOnePantsGluing valuation Base.tri-high
