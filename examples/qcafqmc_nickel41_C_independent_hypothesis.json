@@ -1,0 +1,20 @@
+{
+  "geometry": "C",
+  "basis": "sto-3g",
+  "charge": 0,
+  "spin": 0,
+  "electronic_state_source": "Independent neutral-singlet hypothesis based on 168 neutral electrons; not author-verified charge or spin",
+  "orbital_selection_source": "Zhao et al. arXiv:2506.22408 §III.3: orbitals 80-87; interpreted here as zero-based SCF indices, original orbital frame/order not certified",
+  "active_orbitals_zero_based": [
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87
+  ],
+  "scf_tolerance": 1e-9,
+  "output_dir": "output/qcafqmc_nickel41/C"
+}
