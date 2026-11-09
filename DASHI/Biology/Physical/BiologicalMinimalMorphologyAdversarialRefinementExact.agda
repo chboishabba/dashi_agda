@@ -15,6 +15,7 @@ import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
 import DASHI.Biology.Physical.BiologicalMinimalMorphologyFutureQuotientExact as Minimal
 import DASHI.Core.StablePartitionCanonicalFutureBridgeExact as Bridge
 import DASHI.Core.GenericFuturePartitionRefinementExact as Refinement
+import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Section
 import DASHI.Core.FutureObservationLanguageQuotientExact as Future
 
 data MarkerSensitiveAction : Set where
@@ -164,3 +165,48 @@ markerAwareFutureSafe =
     (λ {left} {right} same →
       Bridge.traceEquivalentImpliesCanonicalFutureEquivalent
         (markerAwareCodeImpliesTraceEquivalence same))
+
+-- Cross-domain same-interface weld: instantiate the EXACT canonical
+-- SectionedProjection/ResidualReopening types used by the original TSVF
+-- observer, without identifying their different physical state carriers.
+markerCodeSection :
+  Section.SectionedProjection
+    (Minimal.MorphologyFutureCode × Bool)
+    Minimal.MorphologyFutureCode
+markerCodeSection = record
+  { Section.SectionedProjection.project = proj₁
+  ; Section.SectionedProjection.representative = λ code → code , false
+  ; Section.SectionedProjection.section = λ _ → refl
+  }
+
+markerCodeResidual :
+  Section.ResidualReopening markerCodeSection
+markerCodeResidual = record
+  { Section.ResidualReopening.Residual = Bool
+  ; Section.ResidualReopening.residual = proj₂
+  ; Section.ResidualReopening.reopen = λ code marker → code , marker
+  ; Section.ResidualReopening.reopenExact = λ { (code , marker) → refl }
+  }
+
+markerCodeReopensExactly :
+  (state : Minimal.MorphologyFutureCode × Bool) →
+  Section.reopen markerCodeResidual
+    (Section.project markerCodeSection state)
+    (Section.residual markerCodeResidual state) ≡ state
+markerCodeReopensExactly =
+  Section.reopenExact markerCodeResidual
+
+-- The same old coarse code carries the two different marker values.
+-- The impossibility is constructive and requires no injection/choice.
+oldMorphologyCodeCannotDecodeMarker :
+  (decode : Minimal.MorphologyFutureCode → Bool) →
+  ((state : Bio.BiologicalState) →
+    decode (Minimal.minimalProject state) ≡ Bio.chromatinMarker state) →
+  ⊥
+oldMorphologyCodeCannotDecodeMarker decode correct =
+  Bio.false≢true
+    (trans
+      (sym (correct Bio.withoutMemory))
+      (trans
+        (cong decode sameMinimal18ClassBeforeMarkerProbe)
+        (correct Bio.differentMarker)))
