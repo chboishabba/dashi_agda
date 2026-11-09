@@ -321,3 +321,7 @@ import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNonzeroExact
 
 -- Exact positive N21 gamma source-frame numerical equality for actual binary predecessorLE (n, not n+1).
 import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdNumericFrameExact
+
+-- P0-D original complete raw-edge/certificate cursor FRACTRAN machine, exact first-enabled step and halt.
+-- Final threshold and full typed graph decoder remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21FractranOriginalRawListMachineExact
