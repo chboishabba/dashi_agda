@@ -169,3 +169,57 @@ No matching original shadow measurements, nickel active-space integral dataset, 
 - **P1 original 16-qubit data/checkpoint unavailable in audited sources:** explicit admission validator implemented; no original transformer weights generated or represented as replicated.
 - **P2 nickel reaction/source-independent AWS accounting unavailable:** mathematical headline arithmetic reproduced but not chemistry energies or bills; do not confuse the reported 99% computational cost reduction with end-to-end quantum-hardware savings.
 - **Agda kernel and exact Git-revision runtime:** not checked in the current environment; `agda` executable absent.
+
+
+## 9 November 2026: source-to-physical-integral / iPie / 16-qubit implementation cut
+
+### Source-specific Hamiltonian, not abstract 369 energy
+
+The new `scripts/qcafqmc_molecular_fcidump.py` parses real spatial-orbital FCIDUMP records (NORB, NELEC, MS2, one-body `h[p,q]`, two-body chemist's `(pq|rs)`, constant `Ecore`) with index, particle-number and tensor checks. It constructs the fixed `(Nα,Nβ)` fermionic occupation basis, applies antisymmetric creation/annihilation operators with exact parity signs, forms the Hermitian second-quantized electronic Hamiltonian, and supplies Slater-determinant amplitudes and a small-system full-CI diagonalizer.
+
+The canonical internal synthetic two-site Hubbard instance satisfies the expected four-state matrix with exact ground energy `2 - 2 sqrt(2)` Hartree; a separately executed four-state mathematical control confirmed these signs/eigenvalues. The **committed** script has not been run from its Git revision. General FCIDUMP interpretation remains subject to the supplied source's orbital basis and integral convention; do not mix physicists' and chemists' tensor indices.
+
+`scripts/qcafqmc_molecular_reaction.py` accepts two explicitly supplied geometry-specific FCIDUMPs and calculates `E_product - E_reactant` and its kcal/mol conversion with a bounded FCI dimension. It makes no fake original nickel geometry or reaction coordinate, and explicitly excludes unprovided thermochemical corrections. For general large molecular active spaces use a scalable AFQMC method, not exponential FCI.
+
+`DASHI.Physics.Chemistry.AtomicPeriodicTable369AFQMCSameSourceExact` imports the **original** 369 atomic generator and proves `sameSourceEnergyAt` from a caller-supplied equality identifying AFQMC walker energy with that generator's interacting energy at the same electron state and atomic index. Imported into `DASHIQuantumComputationProgram`. This is a valid **conditional transport**, not an executable FCI-to-Agda-equality instantiation or proof of nickel chemical accuracy. Agda acceptance unverified.
+
+### Real production molecular AFQMC path: reuse iPie
+
+The published 2025 IonQ experimental workflow explicitly says the group used PySCF and **iPie** for the molecular AFQMC computation, plus open-source `zhao-andrew/symmetry-adjusted-classical-shadows` for matchgate-related reconstruction routines. Keep that source attribution. The appropriate reuse path is therefore not a bespoke, unvalidated reimplementation of the production phaseless propagator. The open-source iPie 0.7.1 Python API documents production molecular Cholesky Hamiltonians, Gaussian force bias, cosine phaseless constraint, numerical stabilization and population control.
+
+`scripts/qcafqmc_ipie_molecular_runner.py` is an independent DASHI source-conditioned PySCF→iPie driver. It requires sourced molecular atom coordinates, units, basis, charge, spin, walkers, blocks, steps, timestep, seed, and source identifier. It obtains SCF orbitals and electronic integrals from PySCF, creates an iPie molecular Hamiltonian, constructs a single-Slater trial, and invokes iPie's own phaseless AFQMC with stabilization/population controls and HDF5 estimator output. The runner writes a JSON receipt with input SHA256, source attribution, mean-field/trial energy, RNG seed and timing. It **deliberately uses a classical single-determinant trial**, not the IonQ upCCD/NQS; convergence and reblocking remain required. Current first implementation handles closed-shell RHF, rejecting open-shell UHF without explicit common-basis transformations.
+
+Dependency citations:
+- iPie API: https://ipie.readthedocs.io/en/latest/python_api.html
+- iPie method: https://ipie.readthedocs.io/en/latest/theory.html
+- matchgate/symmetry-adjusted-shadow upstream: https://github.com/zhao-andrew/symmetry-adjusted-classical-shadows
+- IonQ original quantum-chemistry method: https://arxiv.org/abs/2506.22408
+- IonQ NQS preprint: https://arxiv.org/abs/2611.08129
+
+`pyscf`, `ipie` and the Agda executable are absent in this execution environment; the code is committed, but its actual molecular run and Agda check are not falsely claimed as passing.
+
+### Independent source-conditioned 16-qubit transformer implementation
+
+`scripts/qcafqmc_fixed_sector_transformer.py` provides a new independent PyTorch complex-amplitude autoregressive transformer on a full 16-bit fixed-number electron sector (8 alpha/8 beta orbital slots). It applies causal attention, legal fixed-particle prefix masking, complex phases and trainable scalar attenuation. Its training loss fits trial/walker complex overlaps on a seeded train/holdout partition; the source NPZ must carry the **full particle-number sector** and source-identified, already-estimated complex overlap labels. Model snapshots and JSON receipts record the parameter count, fitted attenuation, validation MSE and source SHA256.
+
+This is NOT a reconstruction of IonQ's unpublished transformer architecture, parameters or matchgate-shadow inversion. Its inputs are **post-processed overlap labels**, not raw bitstrings from their device. Those labels must first be computed by a validated matchgate protocol from original data. The repo does not have the authors' exact code, circuit seed/settings, noise calibrations, device snapshots, or training checkpoint. The existing original-source manifest gate remains mandatory to call any result an original replication. The synthetic `scripts/qcafqmc_fixed_sector_transformer_check.py` deliberately labels its generated 16-qubit, 1+1-electron dataset `synthetic` and tests training without misrepresenting it as quantum-hardware data.
+
+### New run commands
+
+```bash
+python scripts/qcafqmc_molecular_fcidump.py
+python scripts/qcafqmc_molecular_reaction.py
+python scripts/qcafqmc_molecular_reaction.py --before ORIGINAL_B.FCIDUMP --after ORIGINAL_C.FCIDUMP
+python scripts/qcafqmc_fixed_sector_transformer_check.py
+python scripts/qcafqmc_fixed_sector_transformer.py ORIGINAL_POSTPROCESSED_OVERLAPS.npz --output output/nqs.pt
+python scripts/qcafqmc_ipie_molecular_runner.py ORIGINAL_GEOMETRY_AND_RUN.json
+scripts/run_agda29_parallel_check.sh \
+    DASHI/Physics/Chemistry/AtomicPeriodicTable369AFQMCSameSourceExact.agda \
+    DASHI/Algebra/Quantum/DASHIQuantumComputationProgram.agda
+```
+
+### Evidence gate, still unresolved
+
+The public paper and original published methods were searched again, including publication references and source repositories. A verified downloadable archive of the **original IonQ 16-qubit measurement arrays, their individual circuit settings, matchgate calibration, the exact trained transformer checkpoint, and original published nickel molecular input bundle** was not located. The paper identifies geometries B, transition state [B-C]‡ and C from its cited reaction source, with a 77→41 atom truncation in the 2025 experiment; independently recreating that truncation requires original geometries and documented modifications, not visually guessed coordinates.
+
+Do not promote: (1) molecular AFQMC with HF trial to QC-AFQMC with IonQ's NQS, (2) a source-conditional Hamiltonian into a source-identified nickel Hamiltonian, (3) synthetic overlap labels into quantum device shadows, or (4) the stated $90,600/$596 classical economics into independent AWS billing.
