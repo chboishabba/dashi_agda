@@ -179,3 +179,22 @@ A separate local exact-rational/integer diagnostic (not the repository Golden or
 **Precise remaining lemma for P0:** `original369LocalSignedContinuityExact` now narrows to *role classification at all 27 voxels, the same chronological signed source/target/face current ledger and mixed-history induction*. Do not label it closed from the one-step theorem. The original 29×12 compiled source certificate/matrix, source-specific 29 external exchanges, `sameSourcePhysicalReactionTransportStep`, physical BH4/PNP/tissue commutation, stochastic-physical minimality and held-out validation are still OPEN.
 
 Golden runner: `scripts/check_biological_history_future_round23.sh` now checks that newly named source declarations exist before running its repository parallel-checker; no actual checker execution occurred in this session.
+
+
+## 2026-11-09 P0 finite signed-local continuity closure candidate — exact-head check outstanding
+
+**Source-written same-object mathematics advanced:** `Biological369MixedNativeFaceSignedContinuityExact.agda` is now imported by `DASHI/EverythingBiologicalHistoryFutureRound23.agda` and registered in `scripts/check_biological_history_future_round23.sh`. Its precise result is `original369LocalSignedContinuityExact`: for any original voxel (`Fin 27` chart for `Ternary27Point`), any chronological sequence of *typed* positive/negative ion transfers over the genuine original 54 cubical bonds, and any sequence of actual six-face `OnFace`-certified ion injections/withdrawals interleaved with those transfers, the integer signed charge of **final local inventory + cumulative local outgoing currents** equals that of **initial local inventory + cumulative incoming currents**. The current magnitude is the actual transported 0/1 quantum for bond transfers, the requested amount for inlet injection, and the available amount for boundary withdrawal; zero-source events are stationary. The signed ledger retains positive and negative ions separately before applying the original `integerSignedCharge` operation. Neither current nor boundary quantity is an invented physiological rate.
+
+**Dependencies source-written this pass:** `lookupTransferSourcePaid`, `lookupTransferTargetReceivesActualSource`, `originalDirectedNativeEndpointsDistinct`, `originalNativeVoxelIncidenceBalance`, `original369SignedNativeOneStepContinuity`, `original369AllVoxelNativeSignedHistoryContinuity`, `originalBoundaryDischargeLocalReceipt`, `originalFaceEveryVoxelBalance`, `positiveMixedHistoryBalance`, `negativeMixedHistoryBalance`. Existing ternary-27/54-bond original geometry, exterior face receipts and historical material/charge owners are reused.
+
+**Acceptance state:** all listed declarations and the Golden import were committed through GitHub. **No Agda executable, original native parallel checker, or exact-head kernel receipt was available here**. The claimed finite theorem is therefore **SOURCE-WRITTEN / KERNEL-PENDING**, not proved accepted. An independent finite arithmetic diagnostic checked 11,664 unsigned and 23,328 signed one-event original-bond/site combinations; this does not verify the newly committed arbitrary-history Agda source. The original physics remains the separate EVIDENCE OPEN gate.
+
+**Revised P0:**
+- `original369LocalSignedContinuityExact`: source-written, imported into Golden; kernel typecheck and regression execution **pending**.
+- `original29x12SpatialReactionBalance`: **OPEN**, strict byte-pinned 29×12 Rhea source certificate unavailable at the tracked BH4 branch path; do not substitute the selected QDPR self-test. 29 external exchanges and source context unpaid.
+- `sameSourcePhysicalReactionTransportStep`: **OPEN**, requires actual 29-species reactions, source-paid rates and boundary/permeability/PNP laws on one state.
+- P1 physical BH4, PNP and tissue commuting squares: **OPEN**.
+- P2 physical intervention-safe stochastic quotient and minimality: **OPEN**.
+- P3 source-calibrated physiological rates, heldout model discrimination, integrated Golden/ITIR evidence reconciliation: **OPEN**.
+
+**Next highest-alpha cut:** execute exact-head Agda Golden checker; repair any type failures in the new original continuity owner, then reconcile the complete real Rhea 29×12 source certificate and chemistry/exchange on the SAME 3×3×3 inventory. Preserve qDHB ≠ generic BH2, attribution, and external sources. Never promote synthetic event arithmetic into empirical Kitzerow clinical causality.
