@@ -75,6 +75,16 @@ then separately handle zero gamma's `Signed.positive []`. Only this value equali
 
 **Remaining full maximum cut:** native signed token `ℤ` value theorem; original signed graph reader native token and suffix alignment; native ledger versus `rawSparseScore`; full original N21 FRACDASH simulation/acceptance/trace; physical polynomial bit-machine clock and original `PR.InNP`; original E20 + Cook–Levin; 19 reductions/20 memberships and `CertifiedKarpNetwork`; independent P-vs-NP behavioural self-specialization + strict resource closure + `SATNotInP`. No Clay completion claim.
 
+## Latest P0-B original N21 signed-weight graph-stream weld — source-written 9 November 2026
+
+Added `DASHI/Mathematics/Complexity/Karp21SignedGammaNativeRawEdgeStreamExact.agda` (integration root does **not** claim transitive `--safe` across original graph code). It consumes actual `Graph.readOneRawEdge`'s original source grammar: `Gamma.readGamma` for u then v, followed by the **actual bit-native** `Signed.readSignedBinary` for weight. The constructed paired edge retains original `Graph.raw-edge u v (interpretNativeToken token)` alongside its actual native token. `oneNativePairedRawEdgeSameOriginal` reuses the all-word native-token/source-signed-ℤ theorem to source-write exact projection equality with original `Graph.readOneRawEdge`, including malformed/truncated and suffix outcomes.
+
+`readNativePairedRawEdges` follows the actual `Graph.readRawEdges m` edge-count recursion. `nativePairedRawEdgesSameOriginal` is the source-written full-list theorem for any count m and any original bitword: pair projection equals the exact original signed-ℤ RawEdge list with identical u/v values, signed weights, rejection and final suffix. No input-lane oracle, no alternative graph language. Both original Karp roots and focused referee now import/check it.
+
+**Do not misread P0-B as finished:** The parser STILL executes the original `Gamma.readGamma` Nat-producing endpoint reads, so `nativeGraphEndpointsConsumeInputBits` and a physically binary endpoint runtime remain OPEN. Nor is the original full `readRawGraphWord` header+validator+positive-threshold parser transported. The native paired graph stream has been source-aligned, but the full numerical ledger versus `rawSparseScore` P0-C, FRACTRAN original verifier, machine-clock, original `PR.InNP`, E20/Cook–Levin, Karp network and P-vs-NP lower bound remain OPEN.
+
+**Agda:** The new all-list proofs are source-written candidates only; exact-head Agda 2.9/parallel_checker not available.
+
 ## Latest P0-A all-input-bitword numerical lift — source-written 9 November 2026
 
 **Authoritative change:** `karpNativeSignedTokenValueMatchesOriginal` has now been SOURCE-WRITTEN as a proof candidate for **EVERY original signed-gamma input bitword** (including malformed/truncated failures and arbitrary suffix), rather than merely every complete canonical frame. It remains NOT Agda 2.9 kernel-checked.
@@ -105,7 +115,7 @@ Both original Karp roots import all three Agda owners. The focused `referee_karp
 | Phase | Exact target | Required next evidence | Status |
 |---|---|---|---|
 | P0-A | `karpNativeSignedTokenValueMatchesOriginal` | `payloadSuccessSplitsWord`, `scanSuccessExtractsFrame`, `nativeGammaSuccessIsOriginalCanonicalFrame` and full actual signed-result equality (including malformed failure via prior all-word suffix theorem) SOURCE-WRITTEN; exact-head Agda 2.9 kernel receipt required | SOURCE-WRITTEN full all-word result; KERNEL OPEN |
-| P0-B | `nativeReadRawEdgesSameOriginal` / `nativeGraphEndpointsConsumeInputBits` | Original `Graph.readRawEdges` three-field/edge parser versus native input-bit endpoint/signed-weight stream, exact suffix, strict order and all malformed cases | OPEN |
+| P0-B | `nativePairedRawEdgesSameOriginal` / `nativeGraphEndpointsConsumeInputBits` | Actual source `Gamma.readGamma` endpoint cursor and **native binary signed-weight third field**; `oneNativePairedRawEdgeSameOriginal`, full counted `nativePairedRawEdgesSameOriginal` projection of ℤ weight/endpoint/suffix SOURCE; genuinely bit-native endpoint storage, full graph header, ordering and bit-TM clock OPEN | PARTIAL SOURCE; KERNEL OPEN |
 | P0-C | `karpSignedIRSameOriginalSparseScore` / `nativeSparseScoreSameOriginalRawSparseScore` | Use actual paired selected native tokens, the P0-A/B value/equivalence and original `rawSelectedTraceRebuildsOriginalScore` to identify **signed numeric scores**, not merely rejection | OPEN |
 | P0-D | `karpFractranFirstEnabledSameVerifierStep` | Complete original N21 state machine (graph/witness cursors, endpoint-history/trie, active/accept/reject, score/threshold), ordered concrete rules and true next-step simulation | OPEN |
 | P0-E | `karpFractranDecodePreservesAcceptance`, `karpFractranTraceRebuildExact`, `nativeN21SameWordAndClock` | Original graph/certificate all-word, malformed/termination and trace/residual readout plus numeric threshold comparison | OPEN |
