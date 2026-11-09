@@ -111,6 +111,16 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     cas=mcscf.CASCI(mf,8,8)
     ordered=mcscf.sort_mo(cas,[x+1 for x in indices],base=1)
     assert ordered.shape==(nmo,nmo)
+    import io
+    buffer=io.BytesIO()
+    np.save(buffer,np.asarray(ordered,dtype="<f8"))
+    selected_mo_sha256=hashlib.sha256(buffer.getvalue()).hexdigest()
+    if checkpoint:
+        import torch
+        metadata=torch.load(checkpoint,map_location="cpu",weights_only=True)
+        if (metadata.get("orbital_frame_sha256")!=selected_mo_sha256
+                or metadata.get("geometry_sha256")!=receipt["geometry_sha256"]):
+            raise ValueError("NQS checkpoint does not belong to this full-space MO frame and source geometry")
     # Important: no CASCI active-orbital contraction here: the ipie
     # Hamiltonian still includes every virtual and occupied orbital.
     ham=generate_hamiltonian(mol,ordered,mf.get_hcore(),ordered)
@@ -144,6 +154,7 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     receipt.update({"executed":True,"full_basis_functions":nmo,
                     "ncore_doubly_occupied_trial":ncore,
                     "active_MO_columns_sorted":[ncore,ncore+7],
+                    "selected_mo_sha256":selected_mo_sha256,
                     "SCF_energy_hartree":float(energy),
                     "source_RHF_hartree":PUBLISHED_RHF_HARTREE[config["geometry"]],
                     "RHF_minus_source_hartree":source_delta,
