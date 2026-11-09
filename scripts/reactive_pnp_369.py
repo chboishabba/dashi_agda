@@ -295,6 +295,87 @@ def closed_pnp_entropy_factorization(c,phi,m):
     }
 
 
+
+def local_positive_implicit_contraction_bounds(c0,m):
+    """Explicit sufficient *small-dt* contractivity bounds for native PNP.
+
+    If c0>0, r=min(c0)/2, Q=max(c0)+r and
+       dt*M <= r, dt*L < 1,
+    then T(c)=c0+dt*vector_rhs(c,m,poisson(c,m)) maps the closed
+    sup-norm ball B_infty(c0,r) into itself and is a contraction.
+    Hence Banach yields exactly one strictly positive implicit root in
+    this ball; c>=r. This is a finite analytical existence theorem
+    conditional on these explicit source-parameter inequalities. It is
+    NOT a universal timestep claim, nor an Agda kernel proof.
+
+    Derivation:
+    epsilon L_h >=3epsilon/h² in l2 gives
+      ||phi||_inf <=h² sqrt(27)/(3epsilon)*||rho||_inf
+      Lip_inf(phi) <=h² sqrt(27) F sum|z|/(3epsilon).
+    The Bernoulli function is positive, B(u)<=1+|u|,
+    and globally 1-Lipschitz since -1<=B'(u)<=0.
+    Six incident native bonds bound every voxel divergence.
+    Product telescoping bounds reversible mass action on [0,Q].
+    """
+    c0=np.asarray(c0,dtype=float)
+    if c0.shape!=(27,len(m.z)) or not np.all(np.isfinite(c0)) or np.any(c0<=0):
+        raise ValueError("positive finite full 27-species field required")
+    r=float(c0.min())/2.0
+    Q=float(c0.max())+r
+    z=np.asarray(m.z,dtype=float)
+    D=np.asarray(m.D,dtype=float)
+    nu=np.asarray(m.products-m.reactants,dtype=float)
+    A=np.asarray(m.reactants,dtype=float)
+    B=np.asarray(m.products,dtype=float)
+    Acount=A.sum(axis=1)
+    Bcount=B.sum(axis=1)
+    Qstar=max(1.0,Q)
+    geometric=m.h**2*np.sqrt(27.0)/(3.0*m.epsilon)
+    phi_bound=geometric*(m.F*np.sum(np.abs(z))*Q+abs(m.fixed_charge))
+    phi_lipschitz=geometric*m.F*np.sum(np.abs(z))
+    u_bound=2.0*np.max(np.abs(z))*m.F*phi_bound/m.RT
+    bmax=1.0+u_bound
+    u_lipschitz=2.0*np.abs(z)*m.F*phi_lipschitz/m.RT
+    # On [0,Q], |prod(x_i^a_i)|<=Qstar^sum a.
+    # Mean-value/product telescoping bound:
+    # Lip_inf(prod x_i^a_i)<=sum(a_i)*Qstar^sum(a_i).
+    forward_envelope=np.asarray(m.kf)*Qstar**Acount
+    backward_envelope=np.asarray(m.kb)*Qstar**Bcount
+    reaction_amplitude=np.abs(nu).T@(forward_envelope+backward_envelope)
+    reaction_lipschitz=np.abs(nu).T@(
+        forward_envelope*Acount+backward_envelope*Bcount)
+    transport_amplitude=12.0*D*Q*bmax/m.h**2
+    transport_lipschitz=12.0*D*(bmax+Q*u_lipschitz)/m.h**2
+    M=float(np.max(transport_amplitude+reaction_amplitude))
+    L=float(np.max(transport_lipschitz+reaction_lipschitz))
+    if not np.all(np.isfinite([r,Q,phi_bound,phi_lipschitz,u_bound,bmax,M,L])):
+        raise ValueError("nonfinite analytic majorant: physical scales too extreme")
+    if r<=0 or M<0 or L<0:
+        raise ValueError("invalid strict positive-ball bounds")
+    # Conservative sufficient interval avoids floating-point strictness
+    # ambiguities at the mathematical endpoints:
+    # dt <= r/(2M) and dt <=1/(2L), for M,L positive.
+    dt_upper=min(r/(2*M) if M>0 else np.inf,
+                 1/(2*L) if L>0 else np.inf)
+    if not np.isfinite(dt_upper) or dt_upper<=0:
+        raise ValueError("no finite positive timestep bound constructed")
+    return {
+        "radius":r, "upper_concentration":Q,
+        "poisson_potential_bound":float(phi_bound),
+        "poisson_lipschitz_bound":float(phi_lipschitz),
+        "max_dimensionless_potential_jump":float(u_bound),
+        "rhs_sup_bound":M,"rhs_lipschitz_bound":L,
+        "sufficient_dt_max":float(dt_upper),
+        "theorem":"dt*M<=r/2 and dt*L<=1/2 imply a unique positive exact "
+                  "implicit PNP root inside B_inf(c0,r)",
+        "uniqueness_scope":"only within the stated positive ball",
+        "closed_grounded_constant_permittivity_only":True,
+        "computed_float_bounds_not_outward_interval_certified":True,
+        "agda_kernel_checked":False,
+        "all_timestep_existence_proved":False,
+    }
+
+
 def implicit_step(c0,dt,m,rtol=1e-8):
     """Fully coupled implicit Euler with log concentrations, checked receipt.
 
