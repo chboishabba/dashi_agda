@@ -230,6 +230,71 @@ def dissipation_diagnostics(c,phi,m):
     return {'transport_power':float(power_transport),
             'reaction_power':float(power_reaction)}
 
+
+def closed_pnp_entropy_factorization(c,phi,m):
+    """Independent numerical assay of the exact closed-system entropy signs.
+
+    The *mathematical* factorization uses B(-u)=exp(u)B(u):
+      J_ab*(mu_b-mu_a)
+       = -(D*RT/h)*(q_left-q_right)*log(q_left/q_right),
+      q_left=c_a B(u), q_right=c_b B(-u), both strictly positive.
+    Detailed balance plus nu.z=0 similarly gives
+      reaction_rate * (nu.mu) = -RT*(f-b)*log(f/b).
+    Since (a-b)(log(a)-log(b))>=0 for a,b>0, each term <=0.
+    This function checks the factorization for finite positive input;
+    the proof is algebraic and does not rely on random samples.
+    """
+    c=np.asarray(c,dtype=float)
+    phi=np.asarray(phi,dtype=float)
+    if c.shape!=(27,len(m.z)) or phi.shape!=(27,) or (
+        not np.all(np.isfinite(c)) or not np.all(np.isfinite(phi))
+        or np.any(c<=0)):
+        raise ValueError("positive finite native PNP state/potential required")
+    mu=m.standard_mu[None,:]+m.RT*np.log(c)+m.F*phi[:,None]*m.z[None,:]
+    J=native_flux(c,phi,m)
+    per_bond=[]
+    for edge,(a,b) in enumerate(BONDS):
+        u=m.z*m.F*(phi[b]-phi[a])/m.RT
+        left=c[a]*bernoulli(u)
+        right=c[b]*bernoulli(-u)
+        if not (np.all(np.isfinite(left)) and np.all(np.isfinite(right))
+                and np.all(left>0) and np.all(right>0)):
+            raise ValueError("nonpositive/nonfinite original SG Bernoulli weights")
+        exact_form=-(m.D*m.RT/m.h)*(left-right)*(np.log(left)-np.log(right))
+        actual=J[edge]*(mu[b]-mu[a])
+        if not np.allclose(exact_form,actual,rtol=1e-9,atol=1e-10):
+            raise RuntimeError("source PNP SG entropy factorization mismatch")
+        per_bond.append(float(np.sum(actual)*m.h**2))
+    nu=m.products-m.reactants
+    forward=m.kf[None,:]*np.prod(c[:,None,:]**m.reactants[None,:,:],axis=2)
+    backward=m.kb[None,:]*np.prod(c[:,None,:]**m.products[None,:,:],axis=2)
+    if not (np.all(np.isfinite(forward)) and np.all(np.isfinite(backward))
+            and np.all(forward>0) and np.all(backward>0)):
+        raise ValueError("positive finite reaction activities required")
+    exact_reaction=-m.RT*(forward-backward)*(np.log(forward)-np.log(backward))
+    actual_reaction=(forward-backward)*(mu@nu.T)
+    if not np.allclose(exact_reaction,actual_reaction,rtol=1e-9,atol=1e-10):
+        raise RuntimeError("source PNP detailed-balanced entropy factorization mismatch")
+    if np.any(exact_reaction>1e-9):
+        raise RuntimeError("reaction entropy inequality violated")
+    total_reaction=float(np.sum(actual_reaction)*m.h**3)
+    total_transport=float(np.sum(per_bond))
+    if total_reaction>1e-9 or total_transport>1e-9:
+        raise RuntimeError("source PNP closed entropy production violated")
+    return {
+        "bond_terms": len(per_bond),
+        "reaction_terms": int(actual_reaction.size),
+        "transport_power": total_transport,
+        "reaction_power": total_reaction,
+        "exact_analytic_hypotheses":
+            "positive concentrations, positive RT/h, nonnegative diffusion, "
+            "charge-neutral bulk stoichiometry, detailed-balanced positive rates",
+        "finite_numerical_factorization_checked": True,
+        "general_implicit_positive_root_existence_proved": False,
+        "agda_kernel_checked": False,
+    }
+
+
 def implicit_step(c0,dt,m,rtol=1e-8):
     """Fully coupled implicit Euler with log concentrations, checked receipt.
 
