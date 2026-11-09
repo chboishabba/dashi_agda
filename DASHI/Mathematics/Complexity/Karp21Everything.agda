@@ -264,3 +264,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranOriginalTypedTraceAcceptanceEx
 
 -- Original raw signed ℤ trace projection from aligned native binary tokens.
 import DASHI.Mathematics.Complexity.Karp21FractranPairedBinaryTraceExact
+
+-- Reuse PR #1129 original executable verifier-code refinement for typed N21.
+-- Code/size transport is exact; a polynomial clock must be supplied separately.
+import DASHI.Mathematics.Complexity.Karp21FractranPvsNPVerifierCodeTransportExact
