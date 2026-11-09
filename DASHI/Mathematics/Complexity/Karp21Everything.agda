@@ -301,3 +301,8 @@ import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeItemStreamExact
 -- Native selected-token signed ℤ score matches original rawSparseScore under exact paired raw-edge numeric alignment.
 -- Native two-lane ledger-to-signed-ℤ observation and whole graph still OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeSelectedSignedScoreExact
+
+-- Actual binary signed ledger's two-register integer observation and original rawSparseScore correspondence.
+-- SOURCE ONLY: complete graph grammar, physical clock and PR.InNP remain OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeLedgerIntegerScoreExact
+import DASHI.Mathematics.Complexity.Karp21NativeLedgerOriginalRawScoreExact
