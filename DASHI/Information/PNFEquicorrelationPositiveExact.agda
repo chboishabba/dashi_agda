@@ -87,3 +87,33 @@ equiQuadraticDecomposition K rho v =
               (λ i → Scalar._*_ S (v i) total))
             (cong (Scalar._*_ S rho)
               (Bilinear.sumFinMulRight K v total))))))
+
+-- Sufficient PSD region: rho ≥ 0 and 1-rho ≥ 0. This deliberately
+-- does NOT claim the complete admissible region for negative rho.
+equiQuadraticNonnegativeForPositiveRho :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (P : PSD.PositiveCone K) →
+  {p : Nat} → (rho : SOf K) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K)) rho →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (Scalar._+_ (Ring.orderedScalar K)
+      (Scalar.one (Ring.orderedScalar K))
+      (Scalar.neg (Ring.orderedScalar K) rho)) →
+  (v : Fin p → SOf K) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (equiQuadratic K rho v)
+equiQuadraticNonnegativeForPositiveRho K P rho rhoNonnegative alphaNonnegative v
+  rewrite equiQuadraticDecomposition K rho v =
+  PSD.PositiveCone.addNonnegative P
+    (Scalar.multiplicationPreservesNonnegative (Ring.orderedScalar K)
+      alphaNonnegative
+      (PSD.sumFinNonnegative K P
+        (λ i → Scalar._*_ (Ring.orderedScalar K) (v i) (v i))
+        (λ i → PSD.PositiveCone.squareNonnegative P (v i))))
+    (Scalar.multiplicationPreservesNonnegative (Ring.orderedScalar K)
+      rhoNonnegative
+      (PSD.PositiveCone.squareNonnegative P
+        (Ring.sumFin (Ring.orderedScalar K) v)))
