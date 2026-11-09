@@ -20,6 +20,8 @@ import DASHI.Governance.CrenshawCrossInstitutionalEvidenceExact as CrossInstitut
 import DASHI.Governance.CrenshawCarceralMissingnessExact as Missingness
 import DASHI.Governance.Crenshaw1988SituatedVoiceExact as Voice
 import DASHI.Governance.BlackGirlsMatterStudyScopeExact as BGM
+import DASHI.Governance.BlackGirlsMatterPublishedDisciplineArithmeticExact as BGMCounts
+import DASHI.Governance.BlackGirlsMatterExpulsionDenominatorExact as BGMExpulsion
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -85,6 +87,16 @@ record LegalCrossCaseCut : Set₁ where
     missingDisabilityAnalysisCannotProveNoHarm :
       INF.FactorsThrough
         BGM.availableDisabilityResult BGM.actualDisabilityHarm → ⊥
+    bostonDisciplineCountSourceArithmetic :
+      BGMCounts.disciplineCases BGMCounts.boston BGMCounts.blackGirls ≡
+        11 * BGMCounts.disciplineCases BGMCounts.boston BGMCounts.whiteGirls + 10
+    newYorkDisciplineCountSourceArithmetic :
+      BGMCounts.disciplineCases BGMCounts.newYorkCity BGMCounts.blackGirls ≡
+        10 * BGMCounts.disciplineCases BGMCounts.newYorkCity BGMCounts.whiteGirls + 236
+    crossYearEnrollmentTableNotEquivalent :
+      BGMCounts.tableOnePeriod ≡ BGMCounts.disciplineFigurePeriod → ⊥
+    zeroObservedExpulsionDenominatorBlocksRatio :
+      BGMExpulsion.ObservedRatioAdmission BGMExpulsion.newYorkCity → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -110,4 +122,8 @@ crenshawLegalCrossCaseCut =
     Voice.bibliographicLabelCannotRecoverSituatedVoice
     BGM.districtDataDoesNotPayParticipantTestimony
     BGM.reportScopeCannotDecideUnstudiedHarm
+    BGMCounts.bostonGirlsCasesElevenfoldPlusTen
+    BGMCounts.newYorkGirlsCasesTenfoldPlus236
+    BGMCounts.tableOneIsNotDisciplineFigurePeriod
+    BGMExpulsion.newYorkObservedExpulsionRatioBlocked
     refl refl
