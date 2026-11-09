@@ -12,7 +12,7 @@ module DASHI.Chemistry.CarbonFuelRegenerationExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
-import DASHI.Chemistry.HydrogenFuelCycleExact as Fuel
+import DASHI.Chemistry.IndustrialReactiveEnergyBalanceExact as Ledger
 
 -- In one capture/regeneration cycle, all departing carbon must be
 -- allocated to recovered, emitted or stored carbon. Separate the portion
@@ -76,7 +76,7 @@ noPositiveWorkUnderZeroInputs (suc useful) rejected ()
 -- Two materially different physical configurations cannot share
 -- one inferred device-identity witness without external evidence.
 plasmaMembraneNotIntakeElectrolysis :
-  Fuel.Ledger.plasmaMembrane ≡ Fuel.Ledger.intakeElectrolysis → ⊥
+  Ledger.plasmaMembrane ≡ Ledger.intakeElectrolysis → ⊥
 plasmaMembraneNotIntakeElectrolysis ()
 
 -- Fuel-carbon regeneration is not hydrogen-energy regeneration:
