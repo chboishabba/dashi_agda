@@ -61,3 +61,21 @@ Do not conflate source-written Agda with checked code or a local primitive step 
 6. Keep original SAT lower bound for P!=NP separate; Karp reductions cannot supply it.
 
 **Trust status:** source-written Agda imported, independent Python tests executed, **Agda 2.9 and parallel_checker not available in this execution environment**. These modules are not promoted to checked theorems.
+
+
+## 2026-11-09 signed SSP/FRACTRAN audit — reuse without exponential runtime
+
+Primary owners inspected:
+- `DASHI.Biology.SignedSSPFRACTRANWeaveExact`: fifteen SSP prime lanes, `SignedMultiplicity`, `FibreOrientation`, `negateMultiplicity`, and separate program, execution and normal-form lengths.
+- `DASHI.Biology.FRACTRANSSPTransitionExact`: fixed-priority finite step examples, not an arbitrary binary integer arithmetic implementation.
+- `DASHI.Combinatorics.SSP15FractranCompression`: an outcome quotient or label-plus-residual codec needs a real roundtrip, transition congruence and MDL receipt; a bare fifteen-label compression is not asserted lossless.
+
+New `Karp21SignedSSPOrientationNoLosslessExact.agda` directly reuses the *original* SSP polarity/orientation type and original Karp signed-binary token. It source-writes `binaryOrientationIsSSPOrientation`, `flipMatchesSSPNegation`, `flipBinaryInvolutive`, and a constructive `noLosslessOrientationDecoder` collision: distinct signed binary payloads share `forwardOrientation`. It also constructs the correct lossless `SSPPolarityWithResidual` pair and `sspPolarityResidualRoundtrip` while retaining the entire binary magnitude as residual. This is a semantic/provenance bridge only; it is **not** a replacement for the binary N21 score machine and provides **no compression or step-cost advantage** by itself.
+
+`scripts/check_karp21_ssp_residual.py` passed 4,094 finite signed-token roundtrips over widths 0..10 plus a concrete sign-only collision and mediated-token rejection, using local Python. It is independent of Agda. The new bridge is attached to the original `Karp21Everything` import graph, not the bit-native runtime root.
+
+**Reason for not switching the original N21 runtime to FRACTRAN:** the selected SSP `Nat` multiplicities and prime-power semantics have no admitted all-binary-word simulation or polynomial bit-machine clock. Arbitrary binary weights cannot be reconstructed from one of three orientations (or fifteen prime labels) without a residual. Prime exponent/value expansion could cost far more than the literal bit length. Do not infer constant-time arithmetic from short FRACTRAN source programs.
+
+**Current exact kernel boundary:** the attached local Agda-2.9 receipts at historical Karp PR #1445 heads establish selected historical modules, not all present integration modules. On 2026-11-09 the GitHub connector reported #1445 at `b3915126edd096cd09ce7cc1b1b195e75d9e9e87` and #1474 at `100949a4548aa8b73533c1b24239959c889f252f`, with no workflow runs/statuses returned for either head. New bridge commits remain **SOURCE-WRITTEN**, not kernel-accepted.
+
+**Highest alpha after this audit:** stop adding lossy representation layers. Finish Agda 2.9 exact-head referee diagnostics; prove `readSignedBinary` all-word value/suffix semantics; prove two-lane score to the *original* signed weighted-edge decision; charge actual parser, bitstring copying/allocation, endpoint equality, signed threshold and malformed-input rejection under a concrete binary tape machine; construct original `PR.InNP`; then E20 and Cook-Levin costed original transducers, then E01–E19 and N01–N20. No P != NP lower bound follows from the Karp network.
