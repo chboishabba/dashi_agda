@@ -1581,3 +1581,10 @@ The following native *original 3×3×3* Agda owner declarations were added sourc
 On companion PR #1454 the original acquired-panel source validator now checks a reaction → genuine native-bond product transport → reverse transport chronology on one chemical inventory for each available finite reaction column. This is an executable source-written regression, not a compiled original Agda stoichiometric proof and not measured turnover.
 
 D0 kernel/merge open; D1 local identities partial and original source matrix run open; D2 coupled admissible physical evolution open; D3 BH4/PNP/tissue one-step open; D4 original intervention-safe minimal quotient open; D5 held-out physiological predictive test open; D6 ITIR/PNF source review open. See `Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md` for the full theorem ledger.
+
+
+### 2026-11-09 original 369 off-endpoint max-cut advance
+
+`BiologicalSharedFiniteVectorTransferExact` now source-writes `lookupTransferAwayFromEndpoints` and `originalNativeBondUnchangedOutsideEndpoints`, consuming the actual prior `transferOne` cases. It also writes `lookupDebitAwayFromSource` / `lookupCreditAwayFromTarget`. `Biological369CubicalBoundaryMaterialExact` adds off-event voxel invariance for exterior injection and actual extraction. These are real original 3×3×3 geometric-support obligations, not arbitrary edge copies. The signed continuity regression independently checks absence of remote voxel changes; the Golden script now checks owner declaration presence before existing `parallel_checker`.
+
+**Remaining exact sequence:** (1) per-source/per-target `transferOne` local moved-amount identity, (2) native positive/negative signed-incidence current at all voxels and all histories = `original369LocalSignedContinuityExact`, (3) source-mounted `original29x12SpatialReactionBalance`, (4) `sameSourcePhysicalReactionTransportStep`, (5) original BH4/PNP/tissue commutation, (6) physical future kernel/minimality, (7) calibrated held-out discrimination and reviewed ITIR/Golden integration. No head Agda execution, measured physiologic rates or branch reconciliation is claimed.
