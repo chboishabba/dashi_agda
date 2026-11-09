@@ -244,3 +244,33 @@ The three golden TOE import roots now reuse both modules.
 **Commits:** `8c324c3` new original all-depth pants bridge, `c267f7d` original 12+1 append/refinement, `1256f30` pants observer non-descent/puncture; TOE roots `2bbe1ab`, `ac67a39`, `2fd3c13`. Source-written only; no Agda kernel receipt claimed. Crucially the 13th trit is the *selected branch*, not intrinsically punctured: `slot6` is a legal central neutral branch.
 
 This advancement addresses the highest-alpha finite **pants gluing** reuse but cannot solve mathematical analysis P1–P3 by index coincidence.
+
+
+### Direct original pants ↔ source sheaf gluing transport
+
+`DASHI/Foundations/TernaryThirteenPantsSheafGluingTransportExact.agda`
+adds `glueCompatibleLocalsToPants`,
+`gluedPantsSelectsCommonCentralBranch`,
+`originalPantsGlueRestricts`,
+and `neutralGlobalPantsLastSlot`.
+
+For every original `StageAtlasZeroToEleven` local matching family
+`locals : Axis12 → TriTruth × TriTruth` with a common central trit,
+construct the original depth-13 `TernaryPantsFrontier.PantsPath`
+through `BundleSheaf.glue`, then prove the decoded original local
+restrictions equal the supplied locals **at every axis**. The path
+chooses exactly the matching family's common central branch, while
+the neutral source section remains an admissible `slot6`.
+
+This is a genuine local-to-pants-frontier commuting theorem. It does
+not construct physical pants surfaces, nontrivial covers, arbitrary
+typed-hyperfabric boundary `InterfaceMatch` or group equality.
+Source commits: `4ac0860` followed by `e7033e4` import correction;
+TOE imports `d1139a1`, `d4c5bab`, `8b221cd`.
+
+**Updated H2.02 maximal cut:** Source StageBundleSheaf matching/gluing,
+actual pants frontier refinement and source matching-family-to-pants
+restriction recovery are SOURCE-WRITTEN. Unpaid: original independent
+edge-stalk `InterfaceMatch`, topology mutation/reorganization
+preserving incidence and restriction, and justified nontrivial
+Grothendieck covers / full matching-family descent.
