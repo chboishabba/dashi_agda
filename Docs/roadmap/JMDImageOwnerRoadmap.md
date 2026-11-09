@@ -160,3 +160,48 @@ These ten repositories were located as public, non-archived GitHub repositories.
 **Highest-alpha first-page cross-pollination candidate:** `Verified-zkEVM/PolyFun` ↔ JMD's program syntax/laws/handlers ↔ existing DASHI program-semantics/effects machinery. **Highest-risk overclaim:** `itakura-hidetoshi/4d-mass-gap` is only a candidate comparison; repo name cannot discharge YM E1/D1/D2/N1/G1.
 
 Reference: https://github.com/search?q=lang%3Alean&type=repositories&s=updated&o=desc . User-provided 20.4k display is not a stable GitHub-wide count.
+
+
+## 2026-11-09 formal-world completion cut — privacy-preserving, declaration-first
+
+**Scope:** Only formal Agda/Lean sources and mathematical dependencies belong in the critical path. The GitHub-wide search landing page (20.4k dynamic matches reported 2026-11-09) was an *illustrative sample*, **not** a task to evaluate or contact each recently updated repository. In particular, `itakura-hidetoshi/4d-mass-gap` is not an approved collaboration target or evidence of resolving a Clay gap. **Do not open external PRs, file external issues, message external maintainers, upload unpublished DASHI material, or push private work to third-party repositories.** Internal source comparisons must respect authorship and repository visibility. Public PRs may contain source pointers and generic interfaces, but not unpublished mathematical content.
+
+### Phase gates: formal mathematical world, not metadata index
+
+| Phase | Deliverable | Acceptance tests / exact remaining result | Status |
+|---|---|---|---|
+| **F0: sources** | Immutable image-to-claim pointers; Agda/Lean repo+commit inventory, independent starred/global corpus imports | F0.1 `allJmdImageClaimsHaveOwnerOrOpenClassification`; F0.2 `starsManifestRepoIdsUnique`; F0.3 `globalLeanPartitionReceiptsComplete`; F0.4 `sourceVisibilityAndAttributionPreserved` | images and starred export available, global full export and exact image declarations OPEN |
+| **F1: declarations** | Versioned Lean and Agda declaration inventories with elaborated type, universe parameters, parameters/implicit instance assumptions, axioms, import closure and declaration/term identifiers | F1.1 `leanDeclarationIndexFaithfulToPinnedKernelEnvironment`; F1.2 `agdaDeclarationIndexFaithfulToPinnedKernelEnvironment`; F1.3 `declarationImportClosureSound` | OPEN |
+| **F2: typed edges** | Direct formal dependencies and candidate cross-library edges; distinguish verbatim duplicate, definitional equality, mathematical equivalence, implication, interpretation, and analogy | F2.1 `edgeKindDoesNotPromoteUnprovedCandidate`; F2.2 `directImportDependencyEdgesAreSourceFaithful`; F2.3 `crossProverTranslationPreservesAssumptions` | OPEN |
+| **F3: dedup/world** | Shared mathematical referents only after proof; preserve multiple proofs, licenses, and declarations as separate source identities | F3.1 `provedEquivalenceWorldingIsCongruent`; F3.2 `distinctProofAndProvenanceNotCollapsed`; F3.3 `unverifiedCandidateNeverDefinesQuotient` | OPEN |
+| **F4: AO max-cut** | Existing-owner lookup followed by proof-debt classification, dependency cone computation, shared missing-lemma selection | F4.1 `ownerFirstNoUnnecessaryReproof`; F4.2 `proofDebtRoutingRespectsCertificateStatus`; F4.3 `minimalDependencyReopeningPreservesUnaffectedNodes`; F4.4 `chosenGapHasExplicitDownstreamConsumers` | partial prior AO modules, corpus instantiation OPEN |
+| **F5: certified transports** | At least one end-to-end selected Hecke witness and then Monster/VOA/Karp/categorical target comparison | F5.1 `selectedHeckeCrossRepoStatementParity`; F5.2 `selectedHeckeTransportKernelChecked`; F5.3 `negativeControlDistinguishesNonEquivalentStatements`; downstream open lemmas separately tracked | OPEN |
+| **F6: optional projections** | SLR/PNF/Blaze/game navigation of the *already checked* world | F6.1 `projectionDoesNotBecomeProofAuthority` | DEFERRED |
+
+All `F*.x` names above are **proposed new integration contracts**, not existing checked declarations. Avoid writing dozens of wrappers: each should be an actual lemma or a concrete ingestion/runtime acceptance predicate, with its source evidence specified.
+
+### Existing AO theorem owners and exact reuse points
+
+- `DASHI/Core/ProofDebtRouterExact.agda`: `routeDebt`, `sourceEstablishedAlignedDeferredIsCertificationDebt`, `sourceEstablishedAlignedDeferredIsNotMathematicalDebt`, `SourceIdentity`, `StatementAlignmentReceipt`, `FullyAligned`, `SourceAlignedDeferredTheorem`, `CertifiedKnownTheorem`. **Do not treat a source receipt as an inhabitant of the target theorem.**
+- `DASHI/Interop/ProofArchaeologyCoarseFineAdapterExact.agda`: `proofAnchorReopenExact`, `proofAnchorObserverSeparating`, `surfacePlusResidualDeterminesAnchor`. The coarse view is not enough without the fine historical/provenance residual.
+- `DASHI/Interop/CrossLaneProofArchaeologyLedgerExact.agda`: `IdentityStatus` (`sameObjectProved`, `structuralAncestor`, `candidateAlias`, `notSameObject`, `unresolvedIdentity`) and `PaymentStatus` (`paid`, `conditionalPayment`, `unpaid`, `notApplicable`); canonical Ibrahim policy favours explicit owner → typed dependency → typed generalisation. **Adapt** the typed classification, do not pass unproved candidate aliases as same-object proofs.
+- `DASHI/Core/DependencyDerivedMinimalInvalidationBidiExact.agda`: `AffectedSemanticAxis`, `derivedExplicitInvalidation`, `derivedInvalidationIsContainedInEveryCover`, `canonicalMinimalInvalidationReceipt`.
+- `DASHI/Core/DependencyWeightedDiagnosisSchedulerBidiExact.agda`: `DependencyPriorityPolicy`, `WeightedDebugCandidate`; dependency weight is declared priority, **not** truth/confidence probability.
+- `DASHI/Reasoning/AristotleSelectiveImplicationReopeningExact.agda`: `semanticChangeReopensAristotleSearchPolicy`, `semanticChangeReopensAristotleActionTransitively`, `reopenableNotRefuted`, `reopenableNotProved`.
+- `DASHI/Wikimedia/JmdLeanIntegratedMachineLineageExact.agda`: `IntegratedDeclarationBinding`, `mkIntegratedDeclarationBinding` retain attribution; source presence alone is not execution or an imported Agda proof.
+
+### First two vertical slices, exact residual dependencies
+
+**Slice H — existing Hecke owners, cheapest proof-bearing regression.** Starting owners: `AristotleHeckeRecurrenceCoreExact`, `AristotleHeckeGeneralPrimePowerDecompositionExact`, `AristotleHeckeWordsSourceParityExact`, and `AristotleMathSourceParityExact`. Do not rebuild squarefree multiplicativity. Unpaid: extract source/target statement signatures and normalization, prove the selected same-statement receipt, record the original `Nat` Hecke packaging / raw prime-power grouping / finite separating bound as separate outstanding statements where still unpaid, and produce checked positive and negative controls. The source-side arithmetic theorem is a donor, not proof of any executable representation or whole operator algebra by itself.
+
+**Slice W — nontrivial mathematical world.** Establish a typed world component that contains two original source declarations plus a *checked* interpretation/implication path; preserve their distinct proofs, source identifiers, assumptions and any open hypotheses. Feed a genuinely remaining target back to `ProofDebtRouterExact` and `DependencyDerivedMinimalInvalidationBidiExact`. Repeat on Monster/Y443, Popov VOA, Stacks indexed fibres and Karp/FRACTRAN only after searching their current existing owners. No source-name-based promotion.
+
+### Definition of done for the next PR iteration
+
+1. Extract a small real Lean/Agda declaration corpus at pinned commits **directly through each proof system**, rather than inferring theorem types from GitHub search descriptions.
+2. Emit a machine-readable identity/dependency ledger with source SHA, original declaration names and types, checker version, axioms, explicit equivalence/implication receipts, and unresolved obligations.
+3. Prove or kernel-check at least one nontrivial selected bridge; add one deliberately non-equivalent negative-control pair.
+4. Show AO finds a previously owned theorem rather than generating a redundant proof; separately show how an unpaid target is routed without being declared solved.
+5. Record the precise integration gate results and provenance in the roadmaps, without sending the work to an external repository.
+
+**Privacy rule:** repo search and normal reading of publicly available declarations are fine. Distribution of DASHI's unpublished material to unaffiliated repositories is forbidden unless separately and explicitly authorized.
