@@ -83,7 +83,7 @@ def audit(data, root=None):
         'C24_avonvale': before(events.get('avonvale_vdec'), commencement,
                                'Avonvale VDEC', 'Action commencement', 'C24', root),
         'C24_esk': before(events.get('esk_vdec'), commencement,
-                          'Esk VDEC', 'Action commencement', 'C24'),
+                          'Esk VDEC', 'Action commencement', 'C24', root),
         'C25_mww': before(events.get('mww_vdec'), outside,
                           'MWW VDEC', 'outside-Phase-One clearing/construction', 'C25', root),
         'C25_does_not_by_itself_require_MWW_before_phase_one': True,
