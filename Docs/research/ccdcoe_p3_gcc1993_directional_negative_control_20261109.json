@@ -1,0 +1,66 @@
+{
+  "schema": "dashi.ccdcoe.p3.gcc1993_directed_original_source_relations.v1",
+  "evidence_level": "archive_catalogue_descriptions_not_original_PDF_bytes",
+  "original_credit": "Boyce Rensberger and The Washington Post retain authorship of June 1 article; GCC and John Shlaes retain authorship of later media response; original July journalist(s) retain authorship of original press clipping; GCC retains authorship of its later bulletin. DASHI only encodes typed source roles and chronology.",
+  "objects": [
+    {
+      "id": "wp_rensberger_19930601",
+      "date": "1993-06-01",
+      "date_precision": "day_of_original_article",
+      "role": "independent_newspaper_article",
+      "creator": "Boyce Rensberger / The Washington Post",
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/"
+    },
+    {
+      "id": "gcc_shlaes_19930630",
+      "date": "1993-06-30",
+      "date_precision": "archive_index_date",
+      "role": "gcc_response_to_existing_article",
+      "creator": "John Shlaes / Global Climate Coalition",
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/"
+    },
+    {
+      "id": "wp_christy_spencer_199307",
+      "date": "1993-07",
+      "date_precision": "month_of_article",
+      "role": "independent_newspaper_article",
+      "creator": "The Washington Post original journalist(s), distinct from GCC",
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/"
+    },
+    {
+      "id": "gcc_september_bulletin_1993",
+      "date": "1993-09",
+      "date_precision": "bulletin_month_per_archive_description",
+      "role": "gcc_republishes_reference_to_article",
+      "creator": "Global Climate Coalition",
+      "source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/"
+    }
+  ],
+  "links": [
+    {
+      "earlier": "wp_rensberger_19930601",
+      "later": "gcc_shlaes_19930630",
+      "original_source_relationship": "GCC authored a response to previously published journalism",
+      "evidence_kind": "archive_description_of_reference",
+      "journalist_reached_by_GCC": false,
+      "article_caused_by_GCC": false,
+      "audience_response_measured": false
+    },
+    {
+      "earlier": "wp_christy_spencer_199307",
+      "later": "gcc_september_bulletin_1993",
+      "original_source_relationship": "GCC newsletter later highlighted existing article",
+      "evidence_kind": "archive_description_of_later_amplification",
+      "journalist_reached_by_GCC": false,
+      "article_caused_by_GCC": false,
+      "audience_response_measured": false
+    }
+  ],
+  "limits": [
+    "The source page's apparent archived issue date of 21 April is not an authenticated July press publication date.",
+    "A later response cannot be causal origin of an earlier article, while independent earlier influence by other actions remains an open historical question.",
+    "Referencing an article later in a bulletin demonstrates selection/secondary amplification, not original article placement.",
+    "Neither archival metadata nor article quotation authenticates independent original PDF bytes or delivery/exposure data.",
+    "Do not infer that disagreement with policy/scientific claims alone constitutes cognitive warfare."
+  ]
+}
