@@ -309,3 +309,15 @@ For \`originalBishopLogOnePlusAbsoluteConvergenceOnDisk\`, reuse \`DASHI.Analysi
 This is **real progress on P1.01b**, not on P1.01c. The principal-branch identification \`originalBishopLogOnePlusPrincipalBranchIdentity\` remains OPEN: it must prove that the constructed series is the selected original principal \`Log(1+w)\` on a cut-avoiding disk, not name it \`Log\`. The further original fixed point / inverse \(w=t/p\) / contraction / Koenigs increment and holomorphic limit are still OPEN until source-instantiated. No Kneser global continuation, Bishop \(q\)-period / \(\Delta,j\), level-27 observer or Kouznetsov contour gate has been closed.
 
 **Verification:** source committed to PR #1478 and pinned local Agda checker target list amended; no exact-head Agda 2.9 \`--safe\` acceptance has been obtained in this session. This proof must be marked SOURCE-WRITTEN, not kernel-complete, until checked.
+
+
+### P1 branch-independent highest-alpha route (2026-11-09 continuation)
+
+Inspecting \`DASHI.Analysis.InverseLogarithmFromExponential\` and \`DASHI.Analysis.PrincipalComplexLogRealization\` confirms these are **authority-parametric** (the former for positive real exp, the latter for polar complex log); they do not pay the concrete original Bishop-complex principal branch. We can avoid making an independent principal-log construction a *prerequisite* for local Koenigs as follows:
+
+1. Take the now source-written absolutely convergent actual series \(L(w)=\sum_{n\ge0}(-1)^n w^{n+1}/(n+1)\) for a genuine unit-disk radius certificate. **OPEN \`originalBishopLogOnePlusExpInverseOnUnitDisk\`:** derive \(\exp_C(L(w))≈_C1_C+w\) by the actual power-series derivative/Cauchy-product recurrence and Bishop limit transport, not a record asserting inverse.
+2. **OPEN \`originalBishopLocalLogAtSelectedFixedPoint\`:** for the actual fixed point \(p\), source-construct a nonzero inverse \(p^{-1}\) and let \(g(z)=p+L((z-p)/p)\) on \(D(p,1/10)\); prove \(\exp_C(gz)≈_Cz\) using original Bishop exp addition and \(\exp_C(p)≈_Cp\). This supplies a *local inverse* without first identifying a global principal Log.
+3. **OPEN \`originalBishopSelectedLocalLogBranchIdentifiesPrincipal\`:** only when a principal-branch claim is requested, show that this \(g\) has the selected strip/continuation normalization and hence agrees with original principal Log. This is a later uniqueness/branch-selection seam, not a prerequisite for local Schröder if the local inverse suffices.
+4. The existing norm bounds and Koenigs geometric/Cauchy/telescoping machine can consume the resulting original \(g\). Still prove the fixed point, reciprocal/radius certificate, uniform holomorphic limit and inverse function theorem on the Bishop carrier.
+
+This is a genuine dependency reduction, not a claim that \(\exp_C L(w)=1+w\) has been formalized. An analytic inverse identity remains essential; a record with fields \`expLog\`/ \`logExp\` is not a substitute. All P1b/P1g global Kneser, P2 original modular \(q/\Delta/j\), P3 moving observer and P4 contours remain open.
