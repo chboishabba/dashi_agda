@@ -25,7 +25,9 @@ sumConstantValue K {n} a =
   let S = Ring.orderedScalar K in
   trans
     (Ring.sumFinCong S
-      (λ i → sym (Ring.mulOneLeft K a)))
+      (λ i → sym (trans
+        (Ring.mulCommutative K a (Scalar.one S))
+        (Ring.mulOneLeft K a))))
     (trans
       (Ring.sumFinMulLeft K a
         (λ (_ : Fin n) → Scalar.one S))
