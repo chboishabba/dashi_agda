@@ -104,6 +104,10 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     mf.conv_tol=float(config.get("scf_tolerance",1.e-9))
     energy=mf.kernel()
     if not mf.converged:raise RuntimeError("RHF did not converge")
+    from qcafqmc_nickel41_integrals import PUBLISHED_RHF_HARTREE
+    source_delta=float(energy-PUBLISHED_RHF_HARTREE[config["geometry"]])
+    if abs(source_delta)>float(config.get("max_RHF_source_discrepancy_hartree",0.05)):
+        raise ValueError("RHF does not match the original nickel Table 2 benchmark; stop before costly AFQMC")
     cas=mcscf.CASCI(mf,8,8)
     ordered=mcscf.sort_mo(cas,[x+1 for x in indices],base=1)
     assert ordered.shape==(nmo,nmo)
@@ -141,6 +145,8 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
                     "ncore_doubly_occupied_trial":ncore,
                     "active_MO_columns_sorted":[ncore,ncore+7],
                     "SCF_energy_hartree":float(energy),
+                    "source_RHF_hartree":PUBLISHED_RHF_HARTREE[config["geometry"]],
+                    "RHF_minus_source_hartree":source_delta,
                     "trial_energy_hartree":float(np.real(trial.energy)),
                     "trial_type":kind,"estimates_hdf5":str(out),
                     "original_ionq_trial":False})
