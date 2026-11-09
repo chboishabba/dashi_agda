@@ -32,6 +32,8 @@ from pathlib import Path
 from build_bh4_stoichiometric_matrix import build_matrix, participant_key
 from run_bh4_reaction_network import QDPR, audit_reaction, parse_formula
 from run_bh4_flux_feasibility import evaluate as evaluate_original_flux_candidate
+from check_bh4_spatial_measurement_payment import read_assay as read_original_spatial_assay
+from decimal import Decimal, InvalidOperation
 
 ROOT=Path(__file__).resolve().parents[1]
 CANONICAL_OWNER=ROOT/"DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
@@ -466,6 +468,60 @@ def require_exact_flux_candidate_axes(original,candidate):
                 raise ValueError(f"invalid original {name} value for {key!r}")
 
 
+def bind_original_quantitative_candidate_to_assay(candidate,assay_path):
+    """Require one supplied candidate to point to a real parsed assay row.
+
+    Reuses the independent source/split/longitudinal validator. It does not
+    turn concentrations into reaction rates or membrane permeabilities.
+    The candidate and assay must agree on the byte-pinned measurement file
+    and exact specimen/time/region/compartment coordinate. Calibration
+    evidence must not be drawn from held-out test experiments.
+    """
+    rows,receipt=read_original_spatial_assay(assay_path)
+    expected=receipt["original_csv_sha256"]
+    declared=candidate.get("measurement_csv_sha256")
+    if not isinstance(declared,str) or declared.lower()!=expected:
+        raise ValueError("candidate measurement SHA256 does not match original assay")
+    specimen=candidate.get("specimen_id")
+    region=candidate.get("region")
+    compartment=candidate.get("compartment")
+    if not all(isinstance(v,str) and v.strip()
+               for v in (specimen,region,compartment)):
+        raise ValueError("candidate requires source specimen, region, compartment")
+    try:
+        when=Decimal(str(candidate["time_s"]))
+    except (KeyError,InvalidOperation,TypeError) as exc:
+        raise ValueError("candidate requires original measured time_s") from exc
+    if not when.is_finite() or when<0:
+        raise ValueError("invalid source-matched candidate time")
+    key=(specimen,when,region,compartment)
+    if key not in rows:
+        raise ValueError("candidate does not identify any original assay context")
+    matched=rows[key]
+    if matched["split"]=="test":
+        raise ValueError("held-out test measurement cannot calibrate candidate")
+    if candidate.get("experiment_id")!=matched["experiment"]:
+        raise ValueError("candidate experiment identity differs from original assay")
+    if not isinstance(candidate.get("measurement_reference"),str) or not candidate["measurement_reference"].strip():
+        raise ValueError("explicit measurement reference required")
+    return {
+        "status":"same-original-assay-row-identified-not-kinetics",
+        "original_measurement_csv_sha256":expected,
+        "original_specimen_id":specimen,
+        "original_experiment_id":matched["experiment"],
+        "original_time_s":str(when),
+        "original_region":region,
+        "original_compartment":compartment,
+        "original_split":matched["split"],
+        "bh4_amount_mol":str(matched["bh4_mol"]),
+        "bh2_amount_mol":str(matched["bh2_mol"]),
+        "source_digest_independently_verified":False,
+        "rate_identified_from_concentration":False,
+        "chemical_to_PNP_same_step_proved":False,
+        "heldout_prediction_validated":False,
+    }
+
+
 def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
     """Reuse the existing original 29×12 flux/bound/exchange checker.
 
@@ -611,11 +667,15 @@ def main():
                         help="original source-qualified Rhea flux bounds")
     parser.add_argument("--candidate",type=Path,
                         help="complete original 12-flux/29-exchange candidate")
+    parser.add_argument("--assay",type=Path,
+                        help="optional original BH4/BH2 longitudinal assay for same-context identity")
     args=parser.parse_args()
     if (args.parameters is None)!=(args.candidate is None):
         parser.error("--parameters and --candidate must be supplied together")
     if args.parameters is not None and args.certificate is None:
         parser.error("real original --certificate required with candidate flux")
+    if args.assay is not None and args.candidate is None:
+        parser.error("--assay requires original --certificate, --parameters and --candidate")
     if args.certificate is not None:
         raw=args.certificate.read_bytes()
         certificate=load_original_receipt_json(raw)
@@ -636,6 +696,12 @@ def main():
                 "kinetic_measurements_independently_validated":False,
                 "itir_pnf_promotion_performed":False,
             }
+            if args.assay is not None:
+                candidate_receipt=load_original_receipt_json(candidate_bytes)
+                result["original_matched_assay_context"] = (
+                    bind_original_quantitative_candidate_to_assay(
+                        candidate_receipt,args.assay))
+
         print(json.dumps(result,indent=2,sort_keys=True))
         if args.parameters is not None and result["original_flux_candidate"]["status"] != "feasible-algebraic-only":
             raise SystemExit(2)
