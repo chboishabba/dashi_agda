@@ -131,7 +131,8 @@ equiZeroCorrelationIsIdentity :
   (v : Fin p → SOf K) → (i : Fin p) →
   equiOperator K (Scalar.zero (Ring.orderedScalar K)) v i ≡ v i
 equiZeroCorrelationIsIdentity K v i
-  rewrite Ring.mulZeroLeft K (Ring.sumFin (Ring.orderedScalar K) v)
+  rewrite Ring.negZero K
         | Ring.addZeroRight K (Scalar.one (Ring.orderedScalar K))
-        | Ring.mulOneLeft K (v i) =
+        | Ring.mulOneLeft K (v i)
+        | Ring.mulZeroLeft K (Ring.sumFin (Ring.orderedScalar K) v) =
   Ring.addZeroRight K (v i)
