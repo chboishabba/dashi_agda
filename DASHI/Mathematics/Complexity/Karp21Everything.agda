@@ -237,3 +237,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExac
 
 -- N21 binary-prefix trie identity sharing; equivalence and tape clock remain open.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeEndpointPrefixTrieExact
+
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeMultiplicityScaleExact
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorExact
