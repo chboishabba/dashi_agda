@@ -15,7 +15,7 @@ module DASHI.Analysis.BishopOriginalMeshInverseRadiusExact where
 -- unit-interval midpoint; not an independent selected constant.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 import Real as R
 import RealProperties as RP
 import Inverse as Inv
@@ -84,3 +84,48 @@ originalBishopMeshInverseDominatedByRadiusInverse
       (originalBishopMidpointRadiusRatio radius radiusRatio)
       (RP.≤-<-trans inside
         (Mid.ratioBelowMidpoint radiusRatio)))
+
+------------------------------------------------------------------------
+-- Two LOCAL reciprocal factors, common midpoint radius bound.
+-- No long product of mesh gaps is inverted or used as a modulus.
+------------------------------------------------------------------------
+
+originalBishopMeshPairInverseDominatedByRadiusSquare :
+  (steps : Nat → R.ℝ) (j : Nat) (radius : R.ℝ) →
+  (receipts : (k : Nat) →
+    Gap.BishopUnitIntervalRatio (Mesh.sourceVertex steps k)) →
+  (radiusRatio : Gap.BishopUnitIntervalRatio radius) →
+  (vertexInside : (k : Nat) →
+    R._≤_ (Mesh.sourceVertex steps k) radius) →
+  let
+    common =
+      Gap.oneMinusInverse
+        (originalBishopMidpointRadiusRatio radius radiusRatio)
+  in
+  R._≤_
+    (R._*_
+      (Gap.oneMinusInverse (receipts j))
+      (Gap.oneMinusInverse (receipts (suc j))))
+    (R._*_ common common)
+originalBishopMeshPairInverseDominatedByRadiusSquare
+    steps j radius receipts radiusRatio vertexInside =
+  let
+    q = originalBishopMidpointRadiusRatio radius radiusRatio
+    common = Gap.oneMinusInverse q
+    first = Gap.oneMinusInverse (receipts j)
+    second = Gap.oneMinusInverse (receipts (suc j))
+    firstBelow =
+      originalBishopMeshInverseDominatedByRadiusInverse
+        steps j radius (receipts j) radiusRatio (vertexInside j)
+    secondBelow =
+      originalBishopMeshInverseDominatedByRadiusInverse
+        steps (suc j) radius
+        (receipts (suc j)) radiusRatio
+        (vertexInside (suc j))
+  in
+  RP.≤-trans
+    (RP.*-monoʳ-≤-nonNeg firstBelow
+      (Gap.oneMinusInverseNonnegative
+        (receipts (suc j))))
+    (RP.*-monoˡ-≤-nonNeg secondBelow
+      (Gap.oneMinusInverseNonnegative q))
