@@ -15,6 +15,7 @@ open import DASHI.Core.Prelude
 import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
 import DASHI.Foundations.TernaryThirteenCentralCompletionBundleSheafExact as Sheaf
 import DASHI.Foundations.TernaryThirteenOriginalPantsFrontierBridgeExact as Pants
+import DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact as Source
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Topology.TernaryPantsFrontierExact as Frontier
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Junction
@@ -37,10 +38,10 @@ gluedPantsSelectsCommonCentralBranch :
   ≡
   Frontier.appendSlot
     (Pants.wordToPants 12
-      (DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact.valuationToWord
+      (Source.valuationToWord
         (λ axis → proj₁ (locals axis))))
     (Pants.tritToSlot
-      (DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact.fromSource
+      (Source.fromSource
         (proj₂ (locals Atlas.atlas-0))))
 gluedPantsSelectsCommonCentralBranch locals matching =
   Pants.originalTwelvePlusOnePantsGluing
@@ -77,7 +78,7 @@ neutralGlobalPantsLastSlot :
   ≡
   Frontier.appendSlot
     (Pants.wordToPants 12
-      (DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact.valuationToWord valuation))
+      (Source.valuationToWord valuation))
     Junction.slot6
 neutralGlobalPantsLastSlot =
   Pants.originalCentralBranchNeutral
