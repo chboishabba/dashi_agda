@@ -286,3 +286,6 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTraceRebuildExact
 -- D2 essential negative control: original raw-list 'finished' ignores W, while binary whole machine threshold-rejects.
 -- Therefore require a threshold-aware terminal observer/stuttering simulation, not phase equality.
 import DASHI.Mathematics.Complexity.Karp21OriginalRawVsBinaryTerminalCounterexampleExact
+
+-- D2 real original paired-raw-list machine state/step weld: binary nonterminal and terminal threshold quotient separately.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryToOriginalRawMachineStepExact
