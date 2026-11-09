@@ -67,6 +67,10 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
     assert F("162.3")-F("27.3")==F("135.0")
     assert F("135.0")-F("134.9")==F("0.1")
     assert F("134.9")-F("128.0")==F("6.9")
+    assert F("134.9")-F("7.6")==F("127.3")
+    assert F("128.0")-F("127.3")==F("0.7")
+    assert F("6.86")-F("6.78")==F("0.08")
+    assert F("6.78")-F("6.71")==F("0.07")
     assert F("162.3")-F("128.0")==F("34.3")
     assert F("34.3")-F("27.3")==F("7.0")
     assert F("134.9")-F("56.4")==F("78.5")
@@ -85,7 +89,8 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
         src=agda.read_text()
         for marker in (
           "definedImpactFootprintTenths","historicalOAGImpactVsDefinedFootprint",
-          "minimumUnclearedKoalaAreaIfFullHabitatMap", "minimumOutsideRetentionUnclearedKoalaArea",
+          "minimumUnclearedKoalaAreaIfFullHabitatMap",
+          "tentativeRemainderAfterHistoricalExclusion", "minimumOutsideRetentionUnclearedKoalaArea",
           "phaseOneDoesNotRequireMWWDeclarationUnderC25",
           "outsidePhaseOneNeedsMWWDeclaration",
           "currentPubliclyAcquiredEvidence",
@@ -115,6 +120,15 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
       "habitat_minus_retention_ha":"135.0",
       "difference_habitat_minus_retention_to_footprint_ha":"0.1",
       "difference_footprint_to_historical_koala_OAG_input_ha":"6.9",
+      "other_action_2014_7306_approx_exclusion_in_2019_8575_January_PD_ha":"7.6",
+      "historical_exclusion_is_source_claim_not_earlier_approval_original":True,
+      "indicative_134_9_minus_7_6_ha":"127.3",
+      "residual_comparison_to_128_ha":"0.7",
+      "january_impacted_koala_quality_unrounded":"6.78",
+      "january_MWW_AU1_future_quality_unrounded":"6.86",
+      "january_MWW_AU2_future_quality_unrounded":"6.71",
+      "MWW_AU2_future_below_impacted_quality_before_rounding":"0.07",
+      "rounding_OAG_all_these_scores_to_7_legally_permitted_verified":False,
       "action_phase_one_ha":"56.4",
       "other_phases_within_footprint_difference_ha":"78.5",
       "condition_24":"Avonvale + Esk Voluntary Declarations prior to ANY commencement",
