@@ -5,7 +5,7 @@ module DASHI.Moonshine.AbelCarrierOriginalJNonDescentBridgeExact where
 -- pragma: legacy dependency graph must be audited before promotion.
 
 open import Agda.Primitive using (Set; Set₁)
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Moonshine.AbelCarrierFixedLocusTransportExact as Carrier
 import DASHI.Moonshine.JInvariant369LevelNonDescentThroughJExact as Existing
 import DASHI.Moonshine.JInvariant369PhaseLevelSeparationExact as Separation
@@ -73,4 +73,4 @@ originalTransportEqualsCarrierTransport :
   (S : T.AbelModularExpSystem) →
   (w : T.Point S) →
   T.transportedJ S w ≡ Carrier.observed (asCarrier S) w
-originalTransportEqualsCarrierTransport S w = Agda.Builtin.Equality.refl
+originalTransportEqualsCarrierTransport S w = refl
