@@ -268,3 +268,7 @@ import DASHI.Mathematics.Complexity.Karp21FractranPairedBinaryTraceExact
 -- Reuse PR #1129 original executable verifier-code refinement for typed N21.
 -- Code/size transport is exact; a polynomial clock must be supplied separately.
 import DASHI.Mathematics.Complexity.Karp21FractranPvsNPVerifierCodeTransportExact
+
+-- Original/native signed-gamma suffix identity on every word, including rejection.
+-- Signed integer magnitude/value equality remains unproved.
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedSuffixExact
