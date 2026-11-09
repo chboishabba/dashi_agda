@@ -15,6 +15,7 @@ bulk Poisson electric field or biochemical membrane channel inferred.
 """
 from __future__ import annotations
 import json
+import random
 from itertools import product
 from pathlib import Path
 
@@ -102,6 +103,41 @@ def check_trace(state,actions):
     return state,div,ext
 
 
+def seeded_mixed_native_face_stress():
+    """Deterministic original 3D signed-current history stress.
+
+    This is an executable *finite arithmetic* regression, not an Agda
+    kernel receipt and not a physical or measured-rate model.
+    """
+    rng=random.Random(369)
+    faces=tuple((face,tuple(sorted(voxels)))
+                for face,voxels in sorted(FACES.items()))
+    trials=256
+    events_per_trial=128
+    for _ in range(trials):
+        state={sign:[rng.randrange(4) for _ in range(27)]
+               for sign in (+1,-1)}
+        actions=[]
+        for _ in range(events_per_trial):
+            sign=rng.choice((+1,-1))
+            kind=rng.randrange(3)
+            if kind==0:
+                a,b=rng.choice(BONDS)
+                if rng.randrange(2):
+                    a,b=b,a
+                actions.append(("bond",sign,a,b))
+            else:
+                face,points=rng.choice(faces)
+                point=rng.choice(points)
+                amount=rng.randrange(5)
+                actions.append(("face",sign,face,point,amount,
+                                "inject" if kind==1 else "extract"))
+        check_trace(state,actions)
+    return {"seeded_mixed_histories":trials,
+            "events_per_history":events_per_trial,
+            "voxelwise_history_checks":trials*events_per_trial*27}
+
+
 def main():
     content=OWNER.read_text()
     for name in (
@@ -155,7 +191,9 @@ def main():
         else:
             raise AssertionError("nonphysical divergence/face event admitted")
 
+    stress=seeded_mixed_native_face_stress()
     print(json.dumps({
+      **stress,
       "status":"passed-synthetic-local-3d-signed-charge-continuity",
       "original_cube":[3,3,3],
       "native_bonds":len(BONDS),
