@@ -136,3 +136,47 @@ equiZeroCorrelationIsIdentity K v i
         | Ring.mulOneLeft K (v i)
         | Ring.mulZeroLeft K (Ring.sumFin (Ring.orderedScalar K) v) =
   Ring.addZeroRight K (v i)
+
+-- For positive dimension p = suc k, simplify the market eigenvalue
+-- (1-rho)+rho*p to the familiar 1+k*rho. Here k is exactly p-1.
+marketEigenvalueClosedForm :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (rho : SOf K) → (k : Nat) →
+  Scalar._+_ (Ring.orderedScalar K)
+    (Scalar._+_ (Ring.orderedScalar K)
+      (Scalar.one (Ring.orderedScalar K))
+      (Scalar.neg (Ring.orderedScalar K) rho))
+    (Scalar._*_ (Ring.orderedScalar K) rho
+      (dimensionScalar K (suc k)))
+  ≡
+  Scalar._+_ (Ring.orderedScalar K)
+    (Scalar.one (Ring.orderedScalar K))
+    (Scalar._*_ (Ring.orderedScalar K) rho
+      (dimensionScalar K k))
+marketEigenvalueClosedForm K rho k =
+  let S = Ring.orderedScalar K
+      d = dimensionScalar K k
+      a = Scalar.one S
+      b = Scalar.neg S rho
+      c = Scalar._*_ S rho d
+  in
+  trans
+    (cong (Scalar._+_ S (Scalar._+_ S a b))
+      (Ring.mulDistributesOverAdditionRight K rho a d))
+    (trans
+      (cong (λ q → Scalar._+_ S
+               (Scalar._+_ S a b)
+               (Scalar._+_ S q c))
+        (trans
+          (Ring.mulCommutative K rho a)
+          (Ring.mulOneLeft K rho)))
+      (trans
+        (Ring.addAssociative K a b (Scalar._+_ S rho c))
+        (trans
+          (cong (Scalar._+_ S a)
+            (sym (Ring.addAssociative K b rho c)))
+          (trans
+            (cong (λ q → Scalar._+_ S a (Scalar._+_ S q c))
+              (Ring.addInverseLeft K rho))
+            (cong (Scalar._+_ S a)
+              (Ring.addZeroLeft K c))))))
