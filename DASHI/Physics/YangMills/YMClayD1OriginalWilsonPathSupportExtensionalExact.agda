@@ -50,7 +50,7 @@ sourcePathPositiveBondSupport site (direction ∷ directions) =
 
 -- Exact group-valued original positive/negative source-step locality.
 originalOrientedLinkExtensional :
-  ∀ {n Value : Set} {group : Bond.ExactLinkGroup Value}
+  ∀ {n : Nat} {Value : Set} {group : Bond.ExactLinkGroup Value}
     (left right : Bond.PeriodicBondField n Value)
     (site : Blocks.PeriodicBlock n)
     (direction : Rooted.SignedAxis4) →
@@ -66,7 +66,7 @@ originalOrientedLinkExtensional {group = group} left right site
 
 -- All actual original source paths, not an assumed opaque cylinder.
 originalPathHolonomyExtensional :
-  ∀ {n Value : Set} {group : Bond.ExactLinkGroup Value}
+  ∀ {n : Nat} {Value : Set} {group : Bond.ExactLinkGroup Value}
     (left right : Bond.PeriodicBondGaugeRealization n Value group)
     (site : Blocks.PeriodicBlock n)
     (directions : List Rooted.SignedAxis4) →
@@ -107,7 +107,7 @@ originalWilsonPlaquettePathReadsFourBondSlots :
 originalWilsonPlaquettePathReadsFourBondSlots p = refl
 
 originalWilsonPlaquetteHolonomyExtensional :
-  ∀ {n Value : Set} {group : Bond.ExactLinkGroup Value}
+  ∀ {n : Nat} {Value : Set} {group : Bond.ExactLinkGroup Value}
     (left right : Bond.PeriodicBondGaugeRealization n Value group)
     (p : Plaquette.PeriodicPlaquette n) →
   (∀ bond →
