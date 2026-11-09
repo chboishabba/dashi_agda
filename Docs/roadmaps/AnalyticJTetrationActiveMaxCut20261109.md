@@ -232,3 +232,8 @@ Existing donors `JInvariantAnalyticJCoarseFineObserverExact`, `JInvariant369Cano
 **Already source-written in #1478:** \`AbelE8HalfOddShellInvolutionExact\` has an all-index norm-preserving parity-flipping involution, and \`AbelE8ThetaParityProjectorExact\` supplies the all-index coefficient algebra. Do not reopen the abstract H0/H2 cancellation as a new axiom. The decisive next P2e cut after source E8-carrier welding is actual finite cardinality transport into the Jacobi theta coefficients, Bishop analytic convergence/reindexing, and Jacobi-to-E4 or weight-4 modular uniqueness.
 
 **Acceptance:** no new Agda module was compiled or claimed complete in this continuation. Pin a fresh exact-head Agda 2.9 \`--safe\` receipt before upgrading any P2e code status. P1 original logarithm/Koenigs, P2 source q-period/Delta nonvanishing, P3 actual level-27 lift, and P4 certified contours remain OPEN.
+
+
+### P2e carrier correction — finite roots are not the infinite theta lattice
+
+Direct audit of \`DASHI/Algebra/Trit/E8RootEnumeration.agda\`: \`E8IndexedRootCarrier = Vec HalfTritIndexed 8\` with coordinates restricted to the five symbols \(-1,-\frac12,0,\frac12,1\). It is a **finite norm-two root enumeration carrier**, not the unbounded coordinate lattice of the analytic theta series. The former may be equivalent to the **norm-two shell** of the latter, but cannot be equivalent to the entire lattice. Correct the proposed first lemma name to \`originalUnboundedE8LatticeMembershipIffDoubledParityAndSumModFour\` and separately define \`originalNativeNormTwoShellToFiniteIndexedRootEquivalence\`. Do not redefine the infinite theta sum as a polynomial over 240 root vectors. This correction is incorporated in the proof owner (commit \`b84a6015\`).
