@@ -136,3 +136,64 @@ originalFiniteNegativeLogExpUniformResidualBound
       (originalFiniteNegativeLogExpResidualNonnegative
         x xPositive n))
     (RP.≤-trans boundExpByOne boundPower)
+
+
+------------------------------------------------------------------------
+-- EFFECTIVE SHARED CUTOFF FOR ALL 0<x<=r<1.
+-- This is a genuine, source-derived common modulus of the original
+-- finite exponential-LOG differential residual. It pays the
+-- uniformity missing from the earlier pointwise ODE residual.
+------------------------------------------------------------------------
+
+open import Data.Product.Base using (proj₁; proj₂)
+import Data.Nat.Base as Nat using (NonZero; _≥_)
+import Data.Nat.Properties as NatP
+open import Data.Integer.Base using (+_)
+open import Data.Rational.Unnormalised using (_/_)
+
+originalFiniteExpLogResidualCutoff :
+  (radius : R.ℝ) →
+  R._<_ (R.∣ radius ∣) R.1ℝ →
+  (k : Nat) → .{{_ : Nat.NonZero k}} →
+  Nat
+originalFiniteExpLogResidualCutoff radius inside k =
+  suc (proj₁
+    (Seq.convergence-getter
+      (R.0ℝ , Seq.∣r∣<1⇒rⁿ→0 inside)
+      k))
+
+originalFiniteExpLogUniformResidualSmall :
+  (radius : R.ℝ) →
+  (radiusInside : R._<_ (R.∣ radius ∣) R.1ℝ) →
+  (k : Nat) → .{{_ : Nat.NonZero k}} →
+  (x : R.ℝ) →
+  (xPositive : R._<_ R.0ℝ x) →
+  (xInside : R._≤_ x radius) →
+  (n : Nat) →
+  (suc n) Nat.≥
+    originalFiniteExpLogResidualCutoff radius radiusInside k →
+  R._≤_
+    (R.∣ R._*_
+      (Finite.originalNegativeLogFiniteExponential x (suc n))
+      (R.pow x (suc n)) ∣)
+    (R._⋆ (+ 1 / k))
+originalFiniteExpLogUniformResidualSmall
+    radius radiusInside k x xPositive xInside n pastCutoff =
+  let
+    rPower = R.pow radius (suc n)
+    receipt = Seq.convergence-getter
+      (R.0ℝ , Seq.∣r∣<1⇒rⁿ→0 radiusInside) k
+    radiusError =
+      proj₂ receipt (suc n) pastCutoff
+    rPowerBelowAbsoluteError : R._≤_ rPower
+      (R.∣ R._-_ rPower R.0ℝ ∣)
+    rPowerBelowAbsoluteError =
+      RP.≤-respʳ-≃
+        (RP.∣-∣-cong
+          (RP.≃-symm (RP.-identityʳ rPower)))
+        (RP.x≤∣x∣ {x = rPower})
+  in
+  RP.≤-trans
+    (originalFiniteNegativeLogExpUniformResidualBound
+      radius x xPositive xInside n)
+    (RP.≤-trans rPowerBelowAbsoluteError radiusError)
