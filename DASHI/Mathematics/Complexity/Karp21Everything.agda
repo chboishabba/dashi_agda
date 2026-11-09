@@ -281,3 +281,7 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinarySignedPayloadValueCutExact
 -- Source-written, not yet original all-word signed-token ℤ theorem or Agda receipt.
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNumberTheoryExact
 import DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact
+
+-- Actual native signed token ℤ value matches original zigzag value on complete original gamma frames.
+-- Still requires all-word successful-frame lifting and original raw-edge stream alignment.
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact
