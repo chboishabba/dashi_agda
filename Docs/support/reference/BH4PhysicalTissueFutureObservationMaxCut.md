@@ -378,3 +378,42 @@ free-energy dissipation, and compatible boundary-work terms;
 (5) kernel-check the merged root, then validate original
 calibrated and held-out data. No interface pairing is the
 original physical identification theorem by itself.
+
+
+### 2026-11-09 companion PR #1454 sharp grounded-Poisson / conditional entropy proof
+
+The original BH4/PNP physical owner (PR #1454) now exposes an
+**exact integer sum-of-squares** representation of the existing
+all-six-face grounded 27-cell Poisson stiffness matrix:
+`2L_1=6I+∑_{27 axis lines}[(2e_-−e_0)(2e_-−e_0)^T
++(2e_+−e_0)(2e_+−e_0)^T]`. This yields sharp
+`L_h >= (3/h²)I` and bounded unique finite linear Poisson
+solve for all positive constant `epsilon,h`.
+The equality mode is the original Cartesian product of
+`(1,2,1)` along all three native axes.
+
+The same PR records a full algebraic **conditional** dissipativity
+derivation for any strictly positive *exact* backward-Euler
+coupled PNP root using
+`B(−u)=exp(u)B(u)`,
+`(x−y)(log x−log y)>=0`, reaction detailed balance,
+charge-neutral bulk stoichiometry, constant positive dielectric,
+blocking mass faces, and zero Dirichlet electrostatic boundary.
+The original code includes
+`original_grounded_poisson_coercivity_certificate`,
+`closed_pnp_entropy_factorization` and regressions.
+This closes mathematical **finite constant-ε grounded Poisson
+coercivity** and **closed-boundary exact-positive-root conditional
+free-energy descent** at source/derivation level, NOT Agda kernel
+acceptance or the physical P0.05 root-existence theorem.
+
+No original #1454 29×12 kinetic parameters or independently
+measured chemistry have been inferred. This branch continues
+to require one original same-state source model joining BH4/PNP
+and the 54-native-bond tissue observer:
+`physicalOneStep`, `physicalPNPStepCommutes`, original
+compartment and time selection, actual six-face
+open/reactive boundary work, physical stochastic continuation,
+and longitudinal prediction discrimination remain unpaid.
+Both branch kernels and repository Python suites remain unverified
+in this session.
