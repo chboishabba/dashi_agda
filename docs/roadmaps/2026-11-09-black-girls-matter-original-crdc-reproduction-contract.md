@@ -31,3 +31,18 @@ Owner policy: CRDC primary data belong to U.S. Department of Education Office fo
 - DASHI/Governance/BlackGirlsMatterStudyScopeExact.agda: explicit sample, administrative-data versus testimony separation, disability/LEP omissions and negative controls.
 
 **Current status:** Primary dataset identified; raw files, source SHA, denominator/indicator correspondence and arithmetic reproduction from original rows remain OPEN. Report-level arithmetic proof terms source-written only, not source-data reconstruction.
+
+## Thirteenth pass — exact source-row and indicator-overlap interfaces (2026-11-09)
+
+**Repository additions:**
+- `DASHI/Governance/BlackGirlsMatterCRDCOriginalRowAdmissionExact.agda`: `VerifiedCRDCSource`, `MatchedOriginalCell`, `SamePopulationRateReceipt`, `ComparableRatePair`, `comparableRateCrossProducts`, `oneAndRepeatedSuspensionAreDifferent`, `printedEnrollmentTableCannotReplaceOriginal2011Enrollment`, `suppressedNotZero`, `missingNotZero`.
+- `DASHI/Governance/BlackGirlsMatterCRDCAggregationBoundaryExact.agda`: `TwoIndicatorAggregation`, `disjointCountsRecoverUniqueStudents`, `sameTwoCategoryCountsCannotRecoverUniquePeople`, `differentCRDCMeasuresAreNotDefinitionalEqual`, `differentUnitsAreNotDefinitionalEqual`, `OriginalAggregationReceipt`.
+- `CrenshawLegalAttributionCapstoneExact.agda` now imports original-row and aggregation owners; source-unit and suppression gates become part of the composite proof obligation.
+
+**Crucial identification boundary:** Original 2011–12 CRDC separates students receiving one out-of-school suspension and more than one; the survey also gathers different discipline measurements for expulsions, law enforcement referrals and school-related arrests. Even when measure labels and race/gender cells match, the unit may be students counted once by indicator or disciplinary occurrences, and different measures may overlap the same student. Neither sums nor source-matched rates are admissible without correct unit and overlap/denominator receipts. See https://www.ed.gov/laws-and-policy/civil-rights-laws/civil-rights-data-collection-crdc-2021-22-school-year/2011-12-civil-rights-data-collection-questions-and-answers .
+
+**Data-access audit:** The official ZIP URL was discovered through the historical-data landing page and independent archival record. The current container's direct DNS request to civilrightsdata.ed.gov failed; opening the ZIP through the web source also failed. Neither original row bytes nor digest nor denominator alignment has been obtained. Alternate archival 2011–12 CRDC mirror with detailed school-indicator files: https://www.datalumos.org/datalumos/project/219563/version/V1/view (historic federal data archived, not equivalent to having verified original federal ZIP). A mirrored file's institutional custodian and version must be recorded separately.
+
+**Important remaining paid gate:** `source2011EnrollmentDenominatorSamePopulation` requires full independent census-year enrollment denominator and unit-consistent Black/white population by district. `blackGirlsMatterActual2011DisparityReplication` then requires actual school-aggregated original row sums and an explicit rule for indicator overlap. The formal modules deliberately supply no `VerifiedCRDCSource` instance, and no actual report-value replication is claimed.
+
+**Attribution:** The CRDC source schema is a representation of OCR's official data collection; the 2015 report's narrative is Crenshaw with Ocen/Nanda; the constructive typed-source interfaces and counterexamples are DASHI. Source provenance does not imply report interpretation truth or real-world causal conclusions.
