@@ -21,11 +21,11 @@ module DASHI.Mathematics.Complexity.Karp21FractranN21EndpointScoreStepExact wher
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.List using (List)
+open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Maybe using (Maybe; just)
 open import Data.Product using (_×_)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (trans)
 
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
 import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as Original
@@ -161,4 +161,4 @@ module N21Edge
     in
     -- `eq` identifies cached and direct execution; the latter is
     -- the selected original N21 one-edge guarded operation.
-    cong (λ x → x) eq
+    trans eq (karpFractranFirstEnabledSameN21EdgeStep after)
