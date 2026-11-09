@@ -14,6 +14,7 @@ PATH=Path(__file__).resolve().parents[1]/"Docs/research/ccdcoe_p3_cognitive_warf
 CASES={
  "gcc_harrison_1993_1995":("historical_actor_self_report",False),
  "gcc_clippings_1993":("source_indexed_media_archive",False),
+ "gcc_reporter_letter_1993":("archived_original_reporter_letter",False),
  "api_draft_1998":("contemporaneous_proposed_plan",False),
  "supran_oreskes_2017":("published_document_metrics_not_reanalysed_microdata",True),
  "leon_films":("edition_metadata_only",False),
