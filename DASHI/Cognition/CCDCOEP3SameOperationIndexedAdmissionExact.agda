@@ -326,12 +326,13 @@ strongDemoRefinesWeakDemo =
   record { weaken = λ c s evidence → weakToken }
 
 ------------------------------------------------------------------------
--- SOURCE-BOUND SIX-STAGE ADMISSION (RECEIPT NON-REUSE).
+-- OPTIONAL STRICT SOURCE-BOUND SIX-STAGE ADMISSION (RECEIPT NON-REUSE).
 --
--- A case-index alone does not ensure that six stage witnesses are
--- backed by six independent original-source receipts. This *stronger*
--- consumer demands explicit receipt identities, same-original-case
--- ownership, and distinct receipt keys at unequal evidence stages.
+-- A case-index alone does not authenticate the underlying receipts.
+-- This OPTIONAL injective-reference policy prohibits reuse of a label
+-- across stages, but legitimate investigations may need the later
+-- ClaimBoundAdmission to permit one original source supporting several
+-- independently justified stage-specific claims.
 -- Observer separation is reused from the Golden owner
 -- DASHI.Core.ObserverRefinementLatticeExact; it is not redefined
 -- as a fresh singleton/no-collapse principle here. Receipt identities
@@ -448,9 +449,10 @@ selectedAPICannotBeSourceBoundAdmitted Reference sourceCase =
     CurrentlyLocatedEvidence Reference sourceCase apiProposal1998
     currentAPIExposureUnavailable
 
--- Distinct receipt references are necessary but not sufficient for
--- actual independent confirmation. They may point to duplicated copies
--- of one original record. Independent provenance, reviewer checks,
+-- Distinct receipt references under this OPTIONAL strict policy are
+-- not necessary for every valid claim, nor sufficient for independent
+-- confirmation: distinct IDs may point to duplicate original records.
+-- Independent provenance, reviewer checks,
 -- matched exposure/causal measurements and external source validation
 -- remain unpaid empirical obligations.
 
