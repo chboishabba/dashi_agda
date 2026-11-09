@@ -17,10 +17,24 @@ SOURCE="https://arxiv.org/html/2506.22408#S6.SS9.SSS2"
 ATOMS={"Ni":28,"P":15,"O":8,"C":6,"H":1}
 ROOT=Path(__file__).resolve().parents[1]
 GEOMETRY_DIR=ROOT/"data/nickel_ionq_2025_reduced41"
+# Pinned Git blob identities of the 41-line XYZ transcriptions from §VI.9.2.
+EXPECTED_XYZ_GIT_BLOBS={
+    "B":"8e3e562a9565c5814c9719a5fc1dba285a702e9e",
+    "BC":"6556a19b11b65aa7ee563851158be8a4cc924842",
+    "C":"a468c9eefba59c7211ed702ec5d7808678ba2cfd"}
+
+def checked_source_bytes(path):
+    path=Path(path).resolve()
+    raw=path.read_bytes()
+    if path.parent==GEOMETRY_DIR.resolve() and path.stem in EXPECTED_XYZ_GIT_BLOBS:
+        digest=hashlib.sha1(b"blob "+str(len(raw)).encode()+b"\\x00"+raw).hexdigest()
+        if digest!=EXPECTED_XYZ_GIT_BLOBS[path.stem]:
+            raise ValueError("source-coordinate XYZ blob differs from pinned transcription")
+    return raw
 
 def read_xyz(path):
     path=Path(path).resolve()
-    lines=path.read_text().splitlines()
+    lines=checked_source_bytes(path).decode("utf-8").splitlines()
     if len(lines)<2:raise ValueError("truncated XYZ file")
     count=int(lines[0])
     coordinates=[]
