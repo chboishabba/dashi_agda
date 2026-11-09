@@ -50,12 +50,25 @@ class Model:
         A=np.asarray(self.reactants); B=np.asarray(self.products)
         kf=np.asarray(self.kf,dtype=float); kb=np.asarray(self.kb,dtype=float)
         mu0=np.asarray(self.standard_mu,dtype=float)
-        assert z.ndim==1 and len(z)>0 and len(D)==len(z)
-        assert A.shape==B.shape and A.ndim==2 and A.shape[1]==len(z)
-        assert len(kf)==len(kb)==A.shape[0] and len(mu0)==len(z)
-        assert np.all(A>=0) and np.all(B>=0) and np.all(A==np.floor(A)) and np.all(B==np.floor(B))
-        assert np.all(D>=0) and np.all(kf>0) and np.all(kb>0)
-        assert min(self.epsilon,self.RT,self.F,self.h)>0
+        if z.ndim!=1 or len(z)==0 or D.shape!=z.shape or mu0.shape!=z.shape:
+            raise ValueError('species, diffusivity and chemical potentials require common 1D dimensions')
+        if A.ndim!=2 or B.shape!=A.shape or A.shape[1]!=len(z):
+            raise ValueError('gross source reaction sides must be matching 2D species matrices')
+        if kf.shape!=(A.shape[0],) or kb.shape!=(A.shape[0],):
+            raise ValueError('each reaction needs a forward and reverse rate')
+        if not (np.all(np.isfinite(z)) and np.all(np.isfinite(D))
+                and np.all(np.isfinite(mu0)) and np.all(np.isfinite(kf))
+                and np.all(np.isfinite(kb)) and np.all(np.isfinite(A))
+                and np.all(np.isfinite(B))):
+            raise ValueError('nonfinite PNP species, rate or reaction parameter')
+        if not (np.all(A>=0) and np.all(B>=0)
+                and np.all(A==np.floor(A)) and np.all(B==np.floor(B))):
+            raise ValueError('gross reaction orders must be nonnegative integers')
+        if not (np.all(D>=0) and np.all(kf>0) and np.all(kb>0)):
+            raise ValueError('diffusion and reaction parameters violate sign domain')
+        physics=(self.epsilon,self.RT,self.F,self.h,self.fixed_charge)
+        if not all(np.isfinite(p) for p in physics) or not all(p>0 for p in physics[:4]):
+            raise ValueError('finite positive electrostatic/thermal/mesh scales required')
         nu=B-A
         if not np.allclose(nu@z,0,rtol=0,atol=1e-12):
             raise ValueError('bulk reactions violate signed charge conservation; supply electron/reservoir explicitly')
