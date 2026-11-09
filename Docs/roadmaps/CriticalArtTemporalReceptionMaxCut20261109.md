@@ -466,3 +466,24 @@ The maximum cut this pass is **source-evidence correctness**, not additional unv
 **Remaining highest alpha**: CW0 source-byte authenticity + independent reviewers; CW1 documented original delivery/distribution/exposure; CW2 predeclared full eligible source frame, independent passage coding and sampling uncertainty, now with disjoint source spans; CW3 defensible historical comparison and competing explanations; CW4 independently source-bearing six-gate operation admission, including same-intervention coherence; CW5 actual measured human revision/agency and multiplex transport; CW6 canonical Python and Agda 2.9 exact-head kernel receipts. Do not infer cognitive warfare from ordinary media disagreement, rhetoric or satire.
 
 **Execution boundary:** The updated Python dual-coder checker was locally executed with synthetic bytes. The GitHub branch was updated through connector and its source code read back, but canonical full-repository Python and Agda compiler acceptance are not established.
+
+
+## 9 November 2026 — same-original-case indexed six-gate proof cut
+
+**Completed at source level:** `DASHI/Cognition/CCDCOEP3SameOperationIndexedAdmissionExact.agda`. It requires an original case `c` and six *case- and evidence-stage-indexed propositions* `E c stage`: original intervention, exposure, mechanism, causal discriminator, independent intent, attribution. This prevents an accident of **definitional coercion** from mixing stages of the 1993 GCC media records, a separate April 1998 API draft, the 2017 ExxonMobil document study and film art. `transportCaseStage` requires explicit original-case identity. `gccCaseNot1998Proposal`, `gccCaseNot2017Corpus`, `originalCaseNotFiction`, `exposureIsNotIntent` and `sourceTextIsNotCausalEffect` are finite typed negatives, not empirical denials of contact.
+
+**Highest-alpha concrete theorems:** `CurrentlyLocatedEvidence` is an explicitly CLOSED selected evidence inventory. It contains only the original GCC 1993 catalogue communication, the original API 1998 draft as a proposal, and the attributed 2017 corpus study. `currentGCCExposureUnavailable` and `currentAPIExposureUnavailable` are negative matches against the CLOSED inventory's constructors. Therefore `selectedGCCDoesNotAdmitFullOperation` and `selectedAPIDraftDoesNotAdmitFullOperation` genuinely rule out a full six-gate operation admission under currently represented evidence. This does **not** prove exposure was historically absent, nor that no other unlocated evidence can exist; adding authenticated receipts can change the source-indexed inventory, which will reopen the conclusion.
+
+**Important nontriviality limitation:** An arbitrary caller can choose `E` to be a trivially inhabited proposition for all cases and stages. Source type separation is necessary but not sufficient to prove independent authentication, common historical operation, negative controls or causal intent. Full CW4 needs a calibrated externally reviewed `E` and genuinely independent receipts. No universal theorem of warfare causation or historic hostility has been claimed.
+
+**Integration:** Added to `DASHI/Cognition/Everything.agda`, exact regression `CCDCOEP3CausalTrialecticRegressionExact.agda`, and the canonical checker script. The regression uses the actual selected-inventory non-admission lemmas, not a generic wrapper. Agda 2.9 kernel receipt for THIS head remains OPEN: the working container lacks an Agda executable and cannot DNS-resolve GitHub for a fresh repository clone, while connector edits can read/write individual repository files.
+
+**Remaining exact decisive gates:**
+- CW0: original source-bytes and independent reviewer receipts for March 8/10, June 30, Sept `Climate Watch` and external journalist/Hansen items; no archive excerpt promoted to complete source.
+- CW1: historical distribution/recipients/exposure for the SAME explicitly indexed original campaign; distinguish 1993 GCC, 1998 API and 2017 scientific communications.
+- CW2: source- and edition-consistent non-overlapping passage sampling, blinded dual coding and uncertainties; rerun the latest Python-head checker.
+- CW3: original time-indexed pre/post causal alternatives, exogenous issue attention and independent journalism counterfactuals, uncertainty bounds.
+- CW4: instantiate a nontrivial `E` with six *independent original receipts* and identify a same-case operation only if its evidence supports the claim; do not equate selective framing with hostile intent.
+- CW5: source-backed measured human cognition / agency / revision and same-object temporal multiplex witness.
+- CW6: exact-head Python, Agda 2.9, Golden/ITIR independent acceptance receipts.
+Film analysis stays secondary; no ESD edits. Attribution remains with the original participants, reporters, scientists and archives.
