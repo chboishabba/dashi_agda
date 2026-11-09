@@ -47,6 +47,7 @@ def validate(manifest, source_root, *, synthetic=False):
     demand(bool(items) or synthetic, 'real intake requires nonempty passages')
     demand(len(items)==len({p['id'] for p in items}), 'duplicate passage')
     passage_keys=set()
+    intervals_by_source={}
     fixed_reviewers=None
     source_digests={}
     source_pairings={}
@@ -71,6 +72,9 @@ def validate(manifest, source_root, *, synthetic=False):
         demand(digest==p['sha256'], 'original bytes digest')
         a,b=p['start_byte'],p['end_byte']; demand(type(a) is int and type(b) is int and 0<=a<b<=len(raw),'byte interval')
         demand(hashlib.sha256(raw[a:b]).hexdigest()==p['passage_sha256'],'passage digest')
+        selected=intervals_by_source.setdefault(document_key, [])
+        demand(all(b<=start or end<=a for start,end in selected),'overlapping source passages would double count evidence')
+        selected.append((a,b))
         demand(bool(p['original_author'].strip()) and bool(p['edition'].strip()), 'original ownership')
         demand(len(p['reviews'])==2,'independent review count')
         r1,r2=p['reviews']; demand(r1['reviewer_id']!=r2['reviewer_id'], 'reviewer independence ID')
@@ -105,7 +109,7 @@ def self_test():
         demand(len(positive['source_stratified_counts'])==1,'synthetic source stratification')
         demand(all(sum(v['reviewer_1'].values())==1 and sum(v['reviewer_2'].values())==1 for source in positive['source_stratified_counts'].values() for v in source.values()), 'source counts / denominator')
         import copy
-        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
+        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('overlapping_span',lambda x:x['passages'].append(dict(x['passages'][0],id='overlap',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest()))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
         (root/'other.bin').write_bytes(b'MUTATED')
         for name,change in tests:
             changed=copy.deepcopy(item); change(changed)
