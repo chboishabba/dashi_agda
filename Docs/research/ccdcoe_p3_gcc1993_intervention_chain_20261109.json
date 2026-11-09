@@ -1,0 +1,90 @@
+{
+  "schema": "dashi.ccdcoe.p3.gcc1993_intervention_chain.v1",
+  "source_boundary": "Archive catalogue facts are not authenticated original bytes, actual postal delivery, uptake by the press, independent audience effects or hostile purpose.",
+  "original_attribution": "Global Climate Coalition and John Shlaes originally authored GCC letters; distinct newspaper authors own articles; Nicky Sundt's preserved collection is catalogued by Climate Files/Climate Investigations Center. DASHI claims only the typed evidentiary comparison.",
+  "objects": [
+    {
+      "id": "january_expertise",
+      "date": "1993-01-04",
+      "date_kind": "archive_catalogue_date_not_verified_dispatch",
+      "author_role": "gcc_communication",
+      "target_role": "journalists",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-climate-expertise-news-release/",
+      "claim_scope": "Archive identifies an executive-director 'Dear Journalist' mailing with profiles and press material."
+    },
+    {
+      "id": "may_reporters",
+      "date": "1993-05-03",
+      "date_kind": "archive_catalogue_date_not_verified_dispatch",
+      "author_role": "gcc_communication",
+      "target_role": "journalists",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-response-clinton-earth-day-pledge/",
+      "claim_scope": "Archive identifies a GCC letter addressed to reporters and enclosure of a GCC press release and two separately authored newspaper articles."
+    },
+    {
+      "id": "july_doe",
+      "date": "1993-07-08",
+      "date_kind": "archive_catalogue_date_not_verified_dispatch",
+      "author_role": "gcc_communication",
+      "target_role": "department_of_energy",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-national-action-plan-doe-letter/",
+      "claim_scope": "Archive describes a letter to DOE Deputy Assistant Secretary Abe Haspel, referring to a prior meeting; archival claim about a meeting is not an independently authenticated participation record."
+    },
+    {
+      "id": "july_whitehouse",
+      "date": "1993-07-19",
+      "date_kind": "archive_catalogue_date_not_verified_dispatch",
+      "author_role": "gcc_communication",
+      "target_role": "white_house",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-white-house-cos-letter/",
+      "claim_scope": "Archive describes a letter from John Shlaes to White House Chief of Staff Thomas F. McLarty, copied to interagency groups."
+    },
+    {
+      "id": "archived_clippings",
+      "date": null,
+      "date_kind": "multiple_article_dates_not_one_discrete_event",
+      "author_role": "original_news_authors",
+      "target_role": "public_readers_not_verified",
+      "stage": "catalogue_listing",
+      "source_url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/",
+      "claim_scope": "Archive holds original newspaper clippings with different bylines and article publication dates; archive possession does not establish GCC placement of or causal influence on the independent stories."
+    }
+  ],
+  "links": [
+    {
+      "from": "january_expertise",
+      "to": "may_reporters",
+      "relationship": "archive_date_order_only",
+      "independent_delivery_verified": false,
+      "media_reuse_verified": false,
+      "mechanism_effect_verified": false
+    },
+    {
+      "from": "may_reporters",
+      "to": "july_doe",
+      "relationship": "archive_date_order_only",
+      "independent_delivery_verified": false,
+      "media_reuse_verified": false,
+      "mechanism_effect_verified": false
+    },
+    {
+      "from": "july_doe",
+      "to": "july_whitehouse",
+      "relationship": "archive_date_order_only",
+      "independent_delivery_verified": false,
+      "media_reuse_verified": false,
+      "mechanism_effect_verified": false
+    }
+  ],
+  "negative_controls": [
+    "Never identify the attached newspaper articles with GCC-authored documents.",
+    "Do not treat catalogue dates as independently certified dispatch/receipt.",
+    "Do not attribute the separate April 1998 API proposed plan as the cause of a 1993 activity.",
+    "Do not promote archive possession to independently corroborated publication influence.",
+    "Do not classify agency communication or policy disagreement as hostile warfare without independent evidence."
+  ]
+}
