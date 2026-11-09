@@ -282,3 +282,21 @@ Source owner `YMClayPhysicalCubeDobrushinFromGibbsExact.OriginalPhysicalCubeCond
 **Still required for Clay Y02:** derive the nonempty required-pair class from original physical Wilson/RG geometry at a fixed positive cube size; prove its actual small/large-field weight ratios and contraction rate uniformly in changing cutoff/volume; establish spatial tensorization or rooted-shell iteration and physically normalized original real Wilson covariance, plus genuine E1 continuum limits. This sharpens R445→R320 source coverage; it does not resolve E1, D1, D2, N1 or G1, nor substitute for full-sector R333 original OS spectral evidence.
 
 **Admission refinement:** `distinctRequiredAtEachCutoffVolume` and `admissibleNonemptyAtEachCutoffVolume` establish actual admitted physical remote pairs at **every** index of the selected original cutoff/volume family, not just once. The pair's relation to actual remote physical boundary geometry is still an external source-owned responsibility; a formal nonempty family alone is not a D1 estimate.
+
+
+## 9 November 2026 — original SU(2) D1.03 frustrated-staple source reduction (NEW)
+
+A new analytic result strengthens the existing original one-link tail without inventing the missing full spatial decay:
+
+`1_{R<r} ≤ D₆/(6-r)` pointwise for `0<r<6`, since the original action satisfies `D₆≥6-R`. Therefore, under **the exact same original finite Wilson measure**,
+
+```
+P(R<r) ≤ E[D₆]/(6-r)
+P(t(UV)≤0) ≤ E[D₆]/(6-r)+3exp(−βr/2).
+```
+
+On a periodic translation-invariant four-dimensional Wilson finite lattice, `E[D₆]=6(1−p'_L(β))` for normalized per-plaquette log-partition pressure `p_L=(1/N_p)log Z_L`, giving a concrete original free-energy-slope target. The unknown uniform pressure slope and **spatially connecting large-field polymer suppression** remain genuinely physical D1.03 obligations; the bound above can be vacuous. It is not a Clay mass-gap result or a direct mixed-source CMP116 estimate.
+
+Proof and assumptions: [YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md](YMClaySU2OriginalOneLinkCoherentStapleTail20261109.md). New exact-rational finite control: `scripts/check_ym_su2_original_staple_frustration_action_20261109.py`, executed independently with **187,500** event/action checks (including **110,010** frustrated-event cases) on rational unit SU(2) quaternions. The source code and documentation are committed; this calculation has **no Agda-kernel receipt**.
+
+**Master priority correction from attached worker audit:** the Clay endpoint is E1 existence + N1 nontriviality + D2 positive spectral gap + G1 group scope. D1 remains only the *chosen R320/R333 or CMP116 decay-route input*, not an independent official Clay requirement. B1 is a strategy label, not an independent axiom. The 23 source producers remain a useful proof-work inventory, not 23 independent Clay conditions. Observer/OS/KK and Bishop are separate programmes, not prerequisites.
