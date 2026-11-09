@@ -348,3 +348,27 @@ allOriginalBoundaryExchangeHistoriesBalance (event ∷ rest) state
             (originalFaceExchangeBalance event state))
           (+-assoc (V.sum state)
             (faceExchangeInput event) incoming))))
+
+
+------------------------------------------------------------------------
+-- POINTWISE ORIGINAL FACE FLUX: complement the earlier global ledger
+-- with the amount actually entering the selected exterior voxel.
+------------------------------------------------------------------------
+
+lookupAfterFaceInjection :
+  ∀ {n} (i : F.Fin n) (q : Nat) (xs : V.Vec Nat n) →
+  V.lookup (injectAtIndex i q xs) i ≡ q + V.lookup xs i
+lookupAfterFaceInjection F.zero q (V._∷_ a xs) = refl
+lookupAfterFaceInjection (F.suc i) q (V._∷_ a xs) =
+  lookupAfterFaceInjection i q xs
+
+originalBoundaryInjectionLocalReceipt :
+  (event : OriginalOuterFaceInjection) (state : V.Vec Nat 27) →
+  V.lookup (applyBoundaryInjection event state)
+    (Index.originalPointIndex (physicalVoxel event))
+    ≡ incomingMaterial event
+      + V.lookup state (Index.originalPointIndex (physicalVoxel event))
+originalBoundaryInjectionLocalReceipt event state =
+  lookupAfterFaceInjection
+    (Index.originalPointIndex (physicalVoxel event))
+    (incomingMaterial event) state
