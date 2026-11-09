@@ -51,13 +51,13 @@ liftStrictLess :
   OrderingWitness Compare.less
     (Add.bitValue a + two * x)
     (Add.bitValue b + two * y)
-liftStrictLess false false x .(suc (x + gap)) (gap , refl) =
+liftStrictLess false false x y (gap , equation) rewrite equation =
   suc (two * gap) , solve (x ∷ gap ∷ [])
-liftStrictLess false true x .(suc (x + gap)) (gap , refl) =
+liftStrictLess false true x y (gap , equation) rewrite equation =
   suc (suc (two * gap)) , solve (x ∷ gap ∷ [])
-liftStrictLess true false x .(suc (x + gap)) (gap , refl) =
+liftStrictLess true false x y (gap , equation) rewrite equation =
   two * gap , solve (x ∷ gap ∷ [])
-liftStrictLess true true x .(suc (x + gap)) (gap , refl) =
+liftStrictLess true true x y (gap , equation) rewrite equation =
   suc (two * gap) , solve (x ∷ gap ∷ [])
 
 liftStrictGreater :
@@ -76,12 +76,12 @@ liftEqualTails :
   OrderingWitness (Compare.orderBit a b)
     (Add.bitValue a + two * x)
     (Add.bitValue b + two * y)
-liftEqualTails false false x .x refl = refl
-liftEqualTails false true x .x refl =
+liftEqualTails false false x y equation rewrite equation = refl
+liftEqualTails false true x y equation rewrite equation =
   zero , solve (x ∷ [])
-liftEqualTails true false x .x refl =
+liftEqualTails true false x y equation rewrite equation =
   zero , solve (x ∷ [])
-liftEqualTails true true x .x refl = refl
+liftEqualTails true true x y equation rewrite equation = refl
 
 -- This is the exact local extension rule used by compareLE:
 -- higher bits override lower bits only when their order is decided.
