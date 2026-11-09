@@ -39,14 +39,14 @@ def charge(species):
 def initial():
     return {
         (site, chem): 0
-        for site in ("plasma", "endothelial-cytosol")
+        for site in ("plasma", "human-cytosol")
         for chem in SPECIES
     }
 
 
 def original_qdpr_event(state, *, compartment, events, source_rhea, source_reactome):
-    if compartment != "endothelial-cytosol":
-        raise ValueError("this source-matched instance requires cytosolic compartment")
+    if compartment != "human-cytosol":
+        raise ValueError("source Reactome specifies cytosol but does not establish endothelial cell identity")
     if (source_rhea, source_reactome) != (RHEA, REACTOME):
         raise ValueError("source reaction crosswalk not established")
     if type(events) is not int or events < 0:
@@ -63,19 +63,19 @@ def original_qdpr_event(state, *, compartment, events, source_rhea, source_react
         current[compartment, species] += events
     before_formula = tuple(sum(
         state[site, species] * SPECIES[species]["formula"][i]
-        for site in ("plasma", "endothelial-cytosol")
+        for site in ("plasma", "human-cytosol")
         for species in SPECIES) for i in range(5))
     after_formula = tuple(sum(
         current[site, species] * SPECIES[species]["formula"][i]
-        for site in ("plasma", "endothelial-cytosol")
+        for site in ("plasma", "human-cytosol")
         for species in SPECIES) for i in range(5))
     before_charge = sum(
         state[site, species] * SPECIES[species]["charge"]
-        for site in ("plasma", "endothelial-cytosol")
+        for site in ("plasma", "human-cytosol")
         for species in SPECIES)
     after_charge = sum(
         current[site, species] * SPECIES[species]["charge"]
-        for site in ("plasma", "endothelial-cytosol")
+        for site in ("plasma", "human-cytosol")
         for species in SPECIES)
     if before_formula != after_formula or before_charge != after_charge:
         raise AssertionError("source-specific reaction changed atoms or net charge")
@@ -87,20 +87,20 @@ def self_test():
     assert charge(REACTANTS) == charge(PRODUCTS) == -1
     s = initial()
     for chem in REACTANTS:
-        s["endothelial-cytosol", chem] = 3
+        s["human-cytosol", chem] = 3
     original = s.copy()
     after = original_qdpr_event(
-        s, compartment="endothelial-cytosol", events=2,
+        s, compartment="human-cytosol", events=2,
         source_rhea=RHEA, source_reactome=REACTOME)
-    assert after["endothelial-cytosol", "CHEBI:59560"] == 2
-    assert after["endothelial-cytosol", "CHEBI:43120"] == 1
+    assert after["human-cytosol", "CHEBI:59560"] == 2
+    assert after["human-cytosol", "CHEBI:43120"] == 1
     assert after["plasma", "CHEBI:59560"] == 0
-    assert original["endothelial-cytosol", "CHEBI:59560"] == 0
+    assert original["human-cytosol", "CHEBI:59560"] == 0
     for invalid in (
         dict(compartment="plasma", events=1, source_rhea=RHEA, source_reactome=REACTOME),
-        dict(compartment="endothelial-cytosol", events=4, source_rhea=RHEA, source_reactome=REACTOME),
-        dict(compartment="endothelial-cytosol", events=1, source_rhea="RHEA:17869", source_reactome=REACTOME),
-        dict(compartment="endothelial-cytosol", events=1, source_rhea=RHEA, source_reactome="other"),
+        dict(compartment="human-cytosol", events=4, source_rhea=RHEA, source_reactome=REACTOME),
+        dict(compartment="human-cytosol", events=1, source_rhea="RHEA:17869", source_reactome=REACTOME),
+        dict(compartment="human-cytosol", events=1, source_rhea=RHEA, source_reactome="other"),
     ):
         try:
             original_qdpr_event(s, **invalid)
