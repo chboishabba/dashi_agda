@@ -91,3 +91,45 @@ zeroCreditHistoryHasExactLossWitness {initial} history zeroCredit =
     (trans
       (cong (λ x → initial + x) zeroCredit)
       (+-identityʳ initial))
+
+
+------------------------------------------------------------------------
+-- Order-theoretic extraction: an exact budget really bounds final energy.
+-- This proof does not assume that all credit is zero.
+------------------------------------------------------------------------
+
+initialBelowInitialPlus : (a b : Nat) → a ≤ a + b
+initialBelowInitialPlus zero b = z≤n
+initialBelowInitialPlus (suc a) b =
+  s≤s (initialBelowInitialPlus a b)
+
+stepFinalBoundedByInitialAndCredit :
+  ∀ {initial final} (step : EnergyBudgetStep initial final) →
+  final ≤ initial + credit step
+stepFinalBoundedByInitialAndCredit {final = final} step =
+  subst (λ x → final ≤ x)
+    (exactBudget step)
+    (initialBelowInitialPlus final (loss step))
+
+allStepsFinalBoundedByInitialAndCredit :
+  ∀ {initial final} (history : EnergyBudgetHistory initial final) →
+  final ≤ initial + credit (allStepsEnergyBudgetExact history)
+allStepsFinalBoundedByInitialAndCredit history =
+  stepFinalBoundedByInitialAndCredit
+    (allStepsEnergyBudgetExact history)
+
+zeroCreditHistoryNonincreasing :
+  ∀ {initial final} (history : EnergyBudgetHistory initial final) →
+  credit (allStepsEnergyBudgetExact history) ≡ 0 →
+  final ≤ initial
+zeroCreditHistoryNonincreasing {initial} {final} history zeroCredit =
+  subst (λ x → final ≤ x)
+    (trans
+      (cong (λ x → initial + x) zeroCredit)
+      (+-identityʳ initial))
+    (allStepsFinalBoundedByInitialAndCredit history)
+
+-- Counterexample to any claim that an unqualified positive-credit step
+-- must decrease: energy can increase if work/residual credits pay for it.
+positiveCreditCanIncreaseEnergy : EnergyBudgetStep 0 1
+positiveCreditCanIncreaseEnergy = energy-budget-step 0 1 refl
