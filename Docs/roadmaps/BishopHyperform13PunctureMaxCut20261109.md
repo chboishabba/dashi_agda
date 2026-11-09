@@ -133,3 +133,68 @@ All new implementations are **source-written; Agda 2.9 acceptance deliberately u
 - `1114e5d` concrete original-axis chart refinement naturality
 - `ec9aa35`, `ade7b0b`, `964fa62` source module option alignment
 - `cf00a3f`, `71b7b61`, `a6ead48` root imports
+
+
+## 2026-11-09 continuation: source StageBundleSheaf matching and puncture gluing
+
+This pass advances H2.02 from a lone chart permutation to a **genuine instance
+of the original `StageValuationBundleAtlas.BundleSheaf`**, on the existing
+`StageAtlasZeroToEleven` and `Base369.TriTruth` carriers. It does
+**not** claim a sheaf on an independently sourced nontrivial covering
+topology, on a Monster group, or on the original 144-*relation-cell*
+carrier. The stage-site owner already provides `maximalOnlyStageTopology`
+(a conservative discrete site), which is the only topology selected here.
+
+New owner:
+`DASHI/Foundations/TernaryThirteenCentralCompletionBundleSheafExact.agda`.
+
+Exact newly source-written declarations:
+- `centralFamilyCompatible`: local observations `(axis value, centre)`
+  at all twelve axes must agree on their central trit at `atlas-0`.
+- `restrictCentral`, `glueCentral`, `centralGlueRestricts`:
+  actual restrictions, compatible gluing, and pointwise restriction law.
+- `sourceCentralCompletionBundleSheaf` and
+  `sourceCentralCompletionStageSheaf`: reuse BOTH original sheaf
+  interfaces, not a replacement record.
+- `centralRestrictsCompatible`,
+  `centralGlueReturnsCentre`,
+  `centralGlueReturnsValuationPointwise`: genuine local/global
+  reciprocity without function-extensionality postulates.
+- `neutralSectionGluedCentre`: neutral section is globally
+  valid; full completion is therefore not inherently punctured.
+- `centralPunctureGluingForward`,
+  `centralPunctureGluingBackward`,
+  `centralPunctureGluingAtEveryAxis`: compatibility of the
+  nonneutral central puncture with matching/gluing.
+- `badLocalFamilyNotCompatible`: an explicit incompatible family
+  with two different central trits; matching is substantive.
+
+Second owner:
+`DASHI/Foundations/TernaryThirteenCentralCompletionSheafNaturalityExact.agda`.
+
+- `refineLocalFamilyCompatible`: the existing stage 0↔1 chart
+  involution preserves the exact matching-family predicate.
+- `refineRestrictPointwise`,
+  `refineGlueValuationPointwise`, `refineGlueCentre`:
+  restriction and gluing commute with chart reindexing in the
+  appropriate pointwise / centre senses.
+- `refineMatchingPuncturePreservation`: puncture survives the
+  chart change **after gluing**, not just on individual states.
+
+### Decisive remaining maximum cut (supersedes earlier H2.02 wording)
+
+| Priority | Gate | Narrowest remaining obligation | Status |
+|---|---|---|---|
+| P0 | H2.02 constructed 12-axis site | Original `StageBundleSheaf` restriction, nontrivial matching, gluing, chart naturality, puncture preservation | SOURCE-WRITTEN |
+| P0 | H1.01 semantic | Show independently intended relational/group central-completion semantics is the constructed 12-axis valuation × central trit *carrier*, not merely equal in cardinality | OPEN |
+| P0 | H2.01 operational | Transport counterexample to independently selected world/relational observer and consumer on its actual state | OPEN |
+| P0 | H2.02 independent topology | Upgrade from the conservative **discrete maximal-only** original site to the actually selected nontrivial covers/restrictions, if justified, and prove matching-family gluing on those covers | OPEN |
+| P1 | B-P1.01–05 | Original nested atan-exp coefficients, absolutely justified evaluation, half-ball Cayley, two original point witnesses | OPEN |
+| P2 | B-P2.02–04 | Original canonical Nat powers and selected zeta same-object identification | OPEN |
+| P3 | B-P3.01–07 | Original Gamma/continuation/completed Xi | OPEN |
+
+Source commits: `4f30630` central `BundleSheaf`, `e663b38`
+naturality, `6291999` source import repair; three TOE imports
+`bbe7fac`, `3fffa4d`, `33cd80b`. The statements are
+**source-written**, not Agda-kernel accepted (deferred per user
+request). This pass does **not** discharge P1–P3.
