@@ -123,3 +123,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact
 -- Actual native gamma successful-frame decomposition: exact zero prefix, consumed payload count and suffix.
 -- Feeds all-word original/native signed integer representation agreement.
 import DASHI.Mathematics.Complexity.Karp21SignedGammaAllWordFrameExtractionExact
+
+-- Actual native signed-weight gamma token stream projected to original N21 readRawEdges and exact signed suffix.
+-- Original gamma Nat endpoints still used; all-bit native endpoint clock/open.
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact
