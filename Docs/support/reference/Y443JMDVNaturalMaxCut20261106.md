@@ -1421,3 +1421,18 @@ It composes `allTwelveNodeWordsFromActual80`, `nodeGenerationFromPresentedSyntax
 **Current source state:** concrete kernel congruence implemented (commit `1ebd0d3621b6b543a647d0cbbc6e1f571f25d4f7`), focused validation root imported (commit `e5b6a46808e5716568112b338a3d4dc94abab366`); the **universal** presentation quotient, selected-group faithfulness, and all-mode VOA action remain OPEN. No Agda 2.9 kernel receipt obtained. Earlier `Y443JMDPresentedVNaturalCapstoneExact` already owns the same-group all-word-to-literal-VOA-action compiler; no need for a duplicate.
 
 **Moonshine V0.4/V1 source audit:** `VNaturalOriginalPairedFourSectorModesExact.Selected.OriginalMixedSectorIntertwiners` contains genuine FF original fixed-point and FT twisted-module comparison, with explicit TF/TT operators still chosen fields. `fromNativeSources` and its two-sided identities already deduplicate the native parity interface. Physical source TF/TT, mixed Jacobi/locality, and all-mode Popov–Rastelli same-object maps remain OPEN, and an arbitrary declaration of TF/TT functions does not pay them.
+
+
+## 2026-11-09: universal original 80-relator setoid built (new V2 source)
+
+New owner `Y443Universal80RelatorCongruenceExact.agda`, imported by `Y443VNaturalPairGenerationValidation.agda`.
+
+- `wordExpr` converts **original** Coxeter positive words to the existing signed-node expression grammar; this is the actual `Y443CoxeterPresentationExact.monsterRelators` list, not an invented alternate group.
+- `_≈₈₀_` is the *inductively generated* group congruence from associativity, identities, inverses, the original 80 word relations, and congruence/equivalence closure. It does **not** define the relation in terms of any selected group and therefore avoids circular selected-group identification.
+- `AdmissibleCongruence` and `least80Congruence` prove a true leastness/universal elimination principle: every group congruence satisfying these same relations contains `_≈₈₀_`.
+- `Interpretation.sound` and `semanticKernelContainsUniversal` establish well-definedness of original word interpretation into any `GroupWithInverse G` satisfying the original 80 relators. The proof uses the original `RelatorsSatisfied` and source membership elimination.
+- `NoExtraSelectedRelations.reflectsEquality` explicitly isolates the unpaid **reverse** kernel inclusion. With it, `exactKernelIffNoExtra` identifies the two congruences.
+
+**Precise status:** the universal **setoid quotient** is now given by raw `SignedNodeExpression` with relation `_≈₈₀_`. This is a genuine inductively presented object, but not a quotient `Set` with definitional equality or a completed selected Monster group isomorphism. For V2 closure, prove a setoid-group structure and the group-isomorphism carrier bridge as needed, construct the *original selected G* identification and source-backed historical quotient-to-Monster isomorphism, then the selected action and all-mode FLM equality. The selected-group injectivity is NOT discharged by a theorem record asking for `NoExtraSelectedRelations`.
+
+**Exact-head Agda 2.9 --safe kernel acceptance unobserved.** The source and Golden import were committed, but no claims of a checked theorem or group recognition are made. Retain Ivanov/Bray, TauCeti, JMD, Popov–Rastelli attribution and do not conflate `Y443+spider ≅ M × C2` with Bimonster `M wr C2`.
