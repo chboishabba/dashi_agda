@@ -31,6 +31,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3CulturalSourceGenreExact.agda
   DASHI/Cognition/CCDCOEP3CognitiveWarfareArtDiscriminatorExact.agda
   DASHI/Cognition/CCDCOEP3SameOperationIndexedAdmissionExact.agda
+  DASHI/Cognition/CCDCOEP3CanonicalClaimAuditReuseExact.agda
   DASHI/Cognition/CCDCOEP3GCC1993SourceChainExact.agda
   DASHI/Cognition/CCDCOEP3GCC1993DirectionDiscriminatorExact.agda
   DASHI/Cognition/CCDCOEP3GCC1993ClaimCodingAdmissionExact.agda
