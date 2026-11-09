@@ -103,3 +103,14 @@ PR #1454 and developmental PR #1471 are **not** one compiled physical state. The
 **Deliverables:** D0 kernel and merged-tree receipt; D1 source-paid 29×12 and local continuity; D2 admissible reaction–transport–PNP dynamics; D3 tissue observation refinement; D4 future-safe minimal quotient; D5 calibrated held-out prediction; D6 governed evidence lineage.
 
 **Integrity controls:** geometry is original ternary 3×3×3 with a 27-vector as chart; a pants interface is not a transport coefficient; BH2 and qDHB are not conflated; an exchange coordinate is not a measured flux; exact integer event checks are not longitudinal experiments; no clinical Kitzerow causal conclusion is certified. Both PRs remain draft until independent proofs and data pay the gates.
+
+
+### 2026-11-09 P0 reaction/transport composition continuation
+
+`scripts/check_bh4_original_panel_spatial_events.py` now constructs, **per genuine original finite Rhea column**, a chemically allowed starting inventory and executes original reaction → native nearest-neighbour product transfer → reverse nearest-neighbour transfer. It asserts return to the postreaction inventory, exact conservation of C/H/N/O/P and integer charge throughout the shared original 3×3×3 state, and absence of negative molecule counts. QDPR self-test expects one composed history; the strict 29×12 path still requires the actual original acquired certificate and three explicit nonfinite residuals.
+
+This is a stronger executable chronology test than isolated reaction and bond fixtures but is **not** physiological kinetics, membrane permeability, 29 source-paid exchange fluxes, an Agda kernel theorem, or proof of same-specimen tissue dynamics.
+
+PR #1471 now source-writes native-bond source debit/target credit and outer-face local injection identities in Agda; these are prerequisites, **not yet** the full 27-voxel signed charge-current continuity theorem. D1 remains PARTIAL; G1/G2 still OPEN for full physical completion.
+
+**Next exact original-P0 cut:** `original369LocalSignedContinuityExact` followed by `original29x12SpatialReactionBalance`, then `sameSourcePhysicalReactionTransportStep`. Only then seek `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, and `physicalTissueOneStepRefinement` on one selected physical state.
