@@ -17,9 +17,11 @@ module DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointValidatorExact whe
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact as Compare
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact as Structural
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact as Edge
 
 -- Compare encoded natural addresses WITHOUT interpreting them as Nat.
@@ -74,9 +76,7 @@ validNativeBinaryEdges n prev (Edge.binary-edge u v w ∷ rest)
 -- Reflexive comparator facts guarantee a vertex cannot be its own
 -- strictly ordered edge endpoint, with arbitrary high zero padding.
 strictSelfEdgeRejected :
-  (vertex n : Word.BitWord) →
+  (vertex : Word.BitWord) →
   lessNativeLE vertex vertex ≡ false
-strictSelfEdgeRejected vertex n
-  with Compare.compareLE vertex vertex
-     | DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdStructuralExact.compareLEReflexive vertex
-... | Compare.equal | refl = refl
+strictSelfEdgeRejected vertex
+  rewrite Structural.compareLEReflexive vertex = refl
