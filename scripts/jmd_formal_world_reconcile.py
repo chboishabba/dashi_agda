@@ -233,6 +233,7 @@ def candidates(conn, *, limit: int = 8) -> int:
     """Deterministic *candidate-only* routing, not theorem matching."""
     sources = conn.execute("""SELECT source_key,declaration,formal_type
                               FROM jmd_world_sources ORDER BY source_key""").fetchall()
+    source_terms = [(key, words(decl + " " + typ)) for key,decl,typ in sources]
     coords = {}
     for key, coord in conn.execute("SELECT source_key,coordinate FROM jmd_world_external_coordinates"):
         coords.setdefault(key, set()).add(coord)
@@ -240,8 +241,8 @@ def candidates(conn, *, limit: int = 8) -> int:
     for goal_id, proposition in conn.execute("SELECT goal_id,proposition FROM jmd_world_goals ORDER BY goal_id"):
         tokens, goal_ids = words(proposition), set(QID.findall(proposition)) | set(OEIS.findall(proposition))
         ranking = []
-        for key, decl, typ in sources:
-            overlap = tokens & words(decl + " " + typ)
+        for key, source_words in source_terms:
+            overlap = tokens & source_words
             related_ids = goal_ids & coords.get(key, set())
             if not overlap and not related_ids:
                 continue
@@ -421,12 +422,13 @@ def ingest_native_gaps(conn, *, max_gaps: int = 200, max_candidates: int = 6) ->
         VALUES(?,?,?,?,?,?)""",(key,owner,required,cls,kind,source))
     source_rows=conn.execute("""SELECT source_key,declaration,formal_type
       FROM jmd_world_sources ORDER BY source_key""").fetchall()
+    source_terms=[(src,words(decl+" "+typ)) for src,decl,typ in source_rows]
     for key,required in conn.execute("""SELECT gap_key,required_symbol
        FROM jmd_world_native_gaps ORDER BY gap_key""").fetchall():
         tokens=words(required)
         scores=[]
-        for src,decl,typ in source_rows:
-            n=len(tokens & words(decl+" "+typ))
+        for src,source_words in source_terms:
+            n=len(tokens & source_words)
             if n: scores.append((-n,src))
         for minus,src in sorted(scores)[:max_candidates]:
             conn.execute("""INSERT INTO jmd_world_gap_candidates
