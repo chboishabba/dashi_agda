@@ -34,6 +34,23 @@
       ]
     },
     {
+      "id": "gcc_reporter_letter_1993",
+      "subject": "GCC 1993 response to Clinton Earth Day pledge: contemporaneous letter addressed to reporters with news release and two articles",
+      "primary_source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-response-clinton-earth-day-pledge/",
+      "reported_kind": "contemporaneous_reporter_directed_communication",
+      "evidence_grade": "archived_original_reporter_letter",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Original letter is evidence of a written reporter-directed communication, not independent proof a given reporter received or was persuaded by it",
+        "Original archive summary is not a digest-verified transcription of scanned original letter",
+        "Article attachments are distinct third-party authored objects and not GCC-authored publications",
+        "The source predates the separate April 1998 API proposal"
+      ]
+    },
+    {
       "id": "api_draft_1998",
       "subject": "April 1998 API Global Climate Science Communications Team plan",
       "primary_source": "https://www.congress.gov/106/crec/1999/11/02/CREC-1999-11-02-pt1-PgS13483-2.pdf",
