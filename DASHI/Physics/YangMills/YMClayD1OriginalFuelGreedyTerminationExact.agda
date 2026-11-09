@@ -188,7 +188,7 @@ fuelGreedyOriginal19PackingFullLength degree marked distinct =
 
 fuelGreedyOriginalEmpty :
   ∀ {n} (fuel : Nat) →
-  fuelGreedyOriginalDisjointStars fuel ([] {Original.Bond n}) ≡ []
+  fuelGreedyOriginalDisjointStars {n} fuel [] ≡ []
 fuelGreedyOriginalEmpty zero = refl
 fuelGreedyOriginalEmpty (suc fuel) = refl
 
