@@ -49,10 +49,18 @@ if [ -n "${BH4_ORIGINAL_PARAMETERS_PATH:-}" ] ||
   test -f "${BH4_ORIGINAL_PARAMETERS_PATH:?Original parameter receipt required}"
   test -f "${BH4_ORIGINAL_CANDIDATE_PATH:?Original candidate receipt required}"
   test -f artifacts/biology/rhea-kitzerow-bh4-reactions.json
-  python3 scripts/check_bh4_original_panel_spatial_events.py \
-    --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json \
-    --parameters "$BH4_ORIGINAL_PARAMETERS_PATH" \
+  BH4_SOURCE_ARGS=(
+    --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json
+    --parameters "$BH4_ORIGINAL_PARAMETERS_PATH"
     --candidate "$BH4_ORIGINAL_CANDIDATE_PATH"
+  )
+  if [ -n "${BH4_ORIGINAL_ASSAY_PATH:-}" ]; then
+    test -f "$BH4_ORIGINAL_ASSAY_PATH"
+    BH4_SOURCE_ARGS+=(--assay "$BH4_ORIGINAL_ASSAY_PATH")
+  else
+    echo "OPEN MATCHED ASSAY GATE: no original longitudinal assay linked; flux remains algebraic only" >&2
+  fi
+  python3 scripts/check_bh4_original_panel_spatial_events.py "${BH4_SOURCE_ARGS[@]}"
 else
   echo "OPEN PHYSICAL RATE GATE: no original quantitative candidate and complete source-paid bounds supplied" >&2
 fi
