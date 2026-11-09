@@ -166,3 +166,59 @@ originalBishopFactorFiniteEndpointFTC f start steps derivative receipts n =
       (finiteIncrementTelescopes f start steps n))
     (finiteFactorSumIsIncrementSum
       f start steps derivative receipts n)
+
+------------------------------------------------------------------------
+-- QUANTITATIVE FINITE INTEGRATION: TRIANGLE MAJORANT.
+--
+-- The exact endpoint telescope plus the Bishop triangle inequality
+-- gives a finite error budget. This is the proof-bearing recipient
+-- for a future mesh-uniform source quotient modulus.
+------------------------------------------------------------------------
+
+sumFiniteAbsoluteTriangle :
+  (terms : Nat → R.ℝ) →
+  (n : Nat) →
+  R._≤_
+    (R.∣ sumFinite terms n ∣)
+    (sumFinite (λ j → R.∣ terms j ∣) n)
+sumFiniteAbsoluteTriangle terms zero =
+  RP.≤-reflexive (RP.nonNegx⇒∣x∣≃x RP.nonNeg0)
+sumFiniteAbsoluteTriangle terms (suc n) =
+  RP.≤-trans
+    (RP.∣x+y∣≤∣x∣+∣y∣
+      (sumFinite terms n)
+      (terms n))
+    (RP.+-mono-≤
+      (sumFiniteAbsoluteTriangle terms n)
+      RP.≤-refl)
+
+-- Direct original Bishop endpoint inequality, with NO real/complex
+-- carrier transport or assumption that derivative values can replace
+-- factor quotients at a positive step.
+originalBishopFiniteEndpointAbsoluteBound :
+  (f : R.ℝ → R.ℝ) →
+  (start : R.ℝ) →
+  (steps derivative : Nat → R.ℝ) →
+  (receipts : (n : Nat) →
+    Factor.BishopFactorDerivativeAt
+      f (finiteWalk start steps n)
+      (derivative n)) →
+  (cells : Nat) →
+  R._≤_
+    (R.∣ R._-_
+      (f (finiteWalk start steps cells))
+      (f start) ∣)
+    (sumFinite
+      (λ j → R.∣ R._*_ (steps j)
+        (finiteFactorQuotient f start steps derivative receipts j) ∣)
+      cells)
+originalBishopFiniteEndpointAbsoluteBound
+    f start steps derivative receipts cells =
+  RP.≤-respˡ-≃
+    (RP.∣-∣-cong
+      (originalBishopFactorFiniteEndpointFTC
+        f start steps derivative receipts cells))
+    (sumFiniteAbsoluteTriangle
+      (λ j → R._*_ (steps j)
+        (finiteFactorQuotient f start steps derivative receipts j))
+      cells)
