@@ -307,3 +307,29 @@ The degree-four through six expressions and zero residuals are reproducible with
 - [ ] **P2/P3/P4** `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalKneserToModularLevelLift`, `originalKouznetsovCertifiedNumerics`: unaffected mathematically; all OPEN.
 
 **Proof promotion boundary:** this is new precise mathematics and reproducible exact arithmetic, not an assertion that the local analytic fixed point is kernel-constructed or that global Kneser tetration is finished. No Agda available. Keep P1/P1b/P2/P3/P4 open pending genuine source construction and acceptance.
+
+## 2026-11-09 independently executed quantitative Cauchy-tail check and Banach reuse audit
+
+**New exact arithmetic file:** `scripts/analytic_j_tetration_koenigs_tail_certificate.py`; committed and executed. It proves via rational arithmetic the identity `β=(69/50)(4/5)^2=552/625`, the exact prefactor `21459/5840`, and finite geometric-sum consistency. Conditional on the original analytic logarithm bounds, the actual uniform estimate is
+
+```text
+|χ(z)-h_N(z)| ≤ (21459/5840)(552/625)^N |z-p|².
+```
+
+For `|z-p|≤1/1000`, exact rational upper bounds are approximately `2.5559894e-8` at N=40 and `1.7779579e-10` at N=80. For `|z-p|≤1/10`, N=200 yields `5.98423596e-13`. These are **conditional analytic majorants**, not globally certified Kouznetsov-contour errors.
+
+**Existing Agda reuse discovered:** `DASHI/Geometry/BanachFixedPoint.agda` and `BanachFixedPointNat.agda` have an ultrametric Banach interface. The ordinary Bishop complex norm is generally not ultrametric, so these cannot discharge `originalBishopLogBanachFixedPoint` by a carrier substitution. Reuse only the abstract fixed-point/no-go pattern, or build an honest ordinary-complete-metric Banach theorem. The original `DASHI/Analysis/BishopSetoidComplexExact.agda` supplies a setoid complex and exponential, while `DASHI/Analysis/RiemannBishopComplexAnalyticCarrierExact.agda` is an ordinary Bishop complex *carrier* plus an abstract analytic-function layer (not an actual holomorphic construction).
+
+**Exact remaining P1 compiler cut (kernel proof):**
+
+- [ ] `originalOrdinaryBishopComplexMetricComplete`: genuine complete metric over Bishop-complex setoid, not a declared package or ultrametric substitution.
+- [ ] `originalOrdinaryBanachContractionFromCauchy`: prove Banach's theorem for that metric with explicit geometric rate.
+- [ ] `originalPrincipalBishopLogAtRationalCentre`: internalize the exact rational log/atan/Machin interval certificates, branch and logarithm semantics.
+- [ ] `originalBishopLogContractionOnRationalDisk`: prove the principal log derivative bound and disk self-map; this plus the ordinary Banach theorem constructs the actual source fixed point.
+- [ ] `originalBishopLogSecondOrderRemainder`: prove M=311/1000 on `D(p,1/10)`.
+- [ ] `originalBishopKoenigsUniformCauchy`: internalize the displayed exact geometric tail and construct the source Bishop limit.
+- [ ] `originalBishopKoenigsHolomorphicLimit`: prove local uniform holomorphicity and derivative 1, then a genuine local inverse.
+- [ ] `originalPuncturedSectorLogBranchCocycle`: prove the nonzero log/winding correction, yielding a local Abel chart.
+- [ ] `originalKneserConjugatePairGlobalNormalization`: global conjugate chart gluing and Kneser normalization; still open.
+
+**P2/P3/P4 status unchanged:** actual upper-half-plane modular-j same-object, moving fine modular lift, and certified original Kouznetsov contour calibration remain OPEN; the new exact tail certificate only concerns the local inverse-log Koenigs sequence.
