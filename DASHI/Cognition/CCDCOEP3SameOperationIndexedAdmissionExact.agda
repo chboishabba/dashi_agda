@@ -262,3 +262,64 @@ selectedGCCBlockedByGeneralMissingGate :
 selectedGCCBlockedByGeneralMissingGate =
   blockedByMissingExposure
     CurrentlyLocatedEvidence gcc1993 currentGCCExposureUnavailable
+
+------------------------------------------------------------------------
+-- FINITE NEGATIVE CONTROL: WEAK EVIDENCE DOES NOT UPGRADE ITSELF.
+--
+-- Both predicates below are purely mathematical TEST FIXTURES.
+-- WeakDemo has a receipt at every stage, StrongDemo has no valid
+-- independent exposure. Consequently WeakDemo admits an operation
+-- while StrongDemo does not, proving that the reverse implication of
+-- admissionWeakens is invalid without additional evidentiary work.
+------------------------------------------------------------------------
+
+data WeakDemo : OriginalCase → EvidenceStage → Set where
+  weakToken : {c : OriginalCase} {s : EvidenceStage} → WeakDemo c s
+
+data StrongDemo : OriginalCase → EvidenceStage → Set where
+  strongOriginal :
+    (c : OriginalCase) → StrongDemo c originalIntervention
+  strongAttribution :
+    (c : OriginalCase) → StrongDemo c originalAttribution
+
+weakDemoAdmitsGCC :
+  AdmitsOneOriginalCase WeakDemo gcc1993
+weakDemoAdmitsGCC =
+  record
+    { intervention = weakToken
+    ; exposure = weakToken
+    ; mechanism = weakToken
+    ; causal = weakToken
+    ; intent = weakToken
+    ; attribution = weakToken
+    }
+
+strongDemoMissingExposure :
+  StrongDemo gcc1993 recipientExposure → ⊥
+strongDemoMissingExposure ()
+
+strongDemoDoesNotAdmitGCC :
+  AdmitsOneOriginalCase StrongDemo gcc1993 → ⊥
+strongDemoDoesNotAdmitGCC =
+  blockedByMissingExposure StrongDemo gcc1993 strongDemoMissingExposure
+
+-- We cannot construct a universal converse from weak to strong:
+-- even with a weak GCC receipt for recipient exposure, there is
+-- provably no corresponding StrongDemo exposure receipt.
+noAutomaticUpgradeFromWeakToStrong :
+  ((c : OriginalCase) (s : EvidenceStage) →
+    WeakDemo c s → StrongDemo c s) → ⊥
+noAutomaticUpgradeFromWeakToStrong upgrade =
+  strongDemoMissingExposure
+    (upgrade gcc1993 recipientExposure weakToken)
+
+noReverseAdmissionImplication :
+  (AdmitsOneOriginalCase WeakDemo gcc1993 →
+    AdmitsOneOriginalCase StrongDemo gcc1993) → ⊥
+noReverseAdmissionImplication promote =
+  strongDemoDoesNotAdmitGCC (promote weakDemoAdmitsGCC)
+
+strongDemoRefinesWeakDemo :
+  StagewiseEvidenceRefinement StrongDemo WeakDemo
+strongDemoRefinesWeakDemo =
+  record { weaken = λ c s evidence → weakToken }
