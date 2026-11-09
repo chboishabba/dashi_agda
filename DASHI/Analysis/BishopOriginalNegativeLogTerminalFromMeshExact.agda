@@ -20,6 +20,7 @@ module DASHI.Analysis.BishopOriginalNegativeLogTerminalFromMeshExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; suc)
+open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as R
 import RealProperties as RP
 import Sequence as Seq
