@@ -1471,3 +1471,12 @@ certificate verifier, and actual bit-tape step budget over
 `|graphWord|+|certificate|`; (4) native `PR.InNP` polynomialTimeVerifier
 inhabitant under selected physical machine cost model and kernel
 acceptance. Karp E20 and original Cook–Levin clocks remain separate.
+
+
+## 2026-11-09 FRACDASH machine integration
+
+Dedicated roadmap: [Karp21FRACDASHMachineMaxCut20261109.md](Karp21FRACDASHMachineMaxCut20261109.md).
+
+New original-head `Karp21FractranPriorityFrontierExact.agda`: generic source-written `--safe` first-enabled FRACTRAN guard-cache refresh correctness and successor/halt preservation, under explicit unaffected-guard stability premises. Imported in both original Karp roots; focused Golden referee covers the new source.
+
+This is *not* an original N21 instantiation or a polynomial-time Turing-machine witness. Preserve the existing gamma reader, signed ledger, trace factors, endpoint trie, original `rawSparseScore`, and original `PR.InNP` ownership. Exact unpaid lemma phases and FRACDASH source/attribution details live in the linked roadmap. Agda 2.9/parallel_checker acceptance OPEN; E20, Cook–Levin, remaining edges/memberships, independent SAT lower bound OPEN.
