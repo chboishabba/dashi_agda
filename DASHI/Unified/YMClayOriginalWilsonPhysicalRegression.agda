@@ -72,3 +72,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalFuelGreedyTerminationExact as D1F
 
 -- D1/P06 concrete same-Wilson-positive-bond conflict graph (nonempty original plaquette witness).
 import DASHI.Physics.YangMills.YMClayD1OriginalLinkStarFiniteNeighbourGraphExact as D1P06OriginalLinkGraph
+
+-- Canonical original-positive-bond deduplication: maximal independent greedy selection, set-cardinality 19 bound conditional on real degree-18.
+import DASHI.Physics.YangMills.YMClayD1OriginalMarkedLinkDedupExact as D1OriginalMarkedLinkDedup
