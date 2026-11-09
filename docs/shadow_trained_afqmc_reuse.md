@@ -315,3 +315,52 @@ The finite NQS→iPie export now sorts each retained CI determinant by descendin
 ### Algebraic proof versus runtime boundary
 
 The overlap certificate is an exact *mathematical inequality* derived from ratio perturbation and Cauchy–Schwarz. The NumPy implementation checks its hypotheses and numerical conclusion in floating point; it is **not an Agda 2.9 proof of floating-point operations**. The earlier Agda same-source energy theorem still requires both kernel acceptance and an original physically instantiated atomic generator. The new full-CI trial route leverages iPie's existing force bias and phaseless code, but the original IonQ shadow-trained model and nickel input records remain unacquired. Next important execution is a seeded iPie NQS versus HF trial comparison with the same source geometry, integral basis and exact-FCI reference.
+
+
+## 9 Nov 2026: primary-source nickel coordinate → integral → iPie max-cut
+
+**New source closure.** Directly transcribed the original three *reduced 41-atom* XYZ geometries, B, BC (transition structure), C, from L. Zhao et al., [arXiv:2506.22408 §VI.9.2](https://arxiv.org/html/2506.22408), to
+`data/nickel_ionq_2025_reduced41/{B,BC,C}.xyz`.
+All contain Ni1 P2 C13 O1 H24 (total 41 atoms, neutral nuclear charge sum Z=168). Their exact Git blob SHAs are pinned in `scripts/qcafqmc_nickel41_integrals.py`, which fails if source bytes are altered. This prevents coordinate substitutions disguised by unchanged atom counts.
+
+**Source-identified basis and active space.** The 2026 paper, [arXiv:2611.08129v1 §IV.2](https://arxiv.org/html/2611.08129v1), specifies STO-3G, (8 electrons, 8 spatial orbitals), and 60,365/58,375/61,118 measured shadows for B/BC/C. The 2025 paper reports correlated orbital numbers 80–87. The latter are **not self-certifying PySCF zero-based orbital indices** in a newly converged RHF calculation; MO ordering and orbital overlaps must be cross-checked. Geometry XYZ carries neither total charge nor spin. Our independent three-state input hypotheses assume charge=0 and spin=0, with source flags explicitly stating *not author verified*. Do not promote these hypotheses to the original physical protocol.
+
+**New executable physical Hamiltonian producer.** `scripts/qcafqmc_nickel41_integrals.py` loads a pinned XYZ, runs PySCF RHF/STO-3G, selects eight **explicit supplied** zero-based MO indices, and uses PySCF CASCI `get_h1eff`/`get_h2eff` to include the inactive-core contribution. It produces an eight-orbital/8-electron FCIDUMP with `Ecore=E_nuclear+E_inactive`, plus a JSON receipt identifying source geometry hash, charge/spin evidence, MO choice, SCF energy, integrals SHA and a flag that the *original orbital frame remains unverified*. This is a real electronic Hamiltonian when the source parameters are provided; it is not an invocation of the abstract atomic/369 interacting-energy carrier. The existing `AtomicPeriodicTable369AFQMCSameSourceExact.agda` remains **conditional** until its selected generator/physical inputs are independently identified and kernel checked.
+
+**Numerical source regressions.** `scripts/qcafqmc_nickel41_source_check.py` verifies source atom counts/composition and the published 41-atom STO-3G PBE0/B3LYP/M06-2X/wB97X electronic reaction energies from the original §VI.6 Table 8, admitting the exact decimal-rounding discrepancy of printed absolute energies. `scripts/qcafqmc_nickel_published_targets.py` records the 2026 paper's Table 2 ideal-upCCD, NQS-AFQMC, shadow QC-AFQMC, classical ph-AFQMC, and CCSD(T) energy/uncertainty anchors with rounding-aware consistency checks. They are *source expectations*, not recomputed Ni DFT or AFQMC.
+
+**Production settings correction:** nickel NQS-AFQMC uses 1,280 walkers, 300 blocks × 20 steps, step size 0.005 Hartree^-1, 50 discarded equilibration blocks, and stabilisation/population control every five steps (Provazza §IV.2 and §III.2). The N2 calculation, in contrast, uses 600 blocks/300 discarded. Earlier generic 600/300 descriptions must not be used for nickel. `scripts/qcafqmc_nickel41_prepare_ipie.py` carries the corrected nickel settings.
+
+**Seniority-zero correction (high alpha).** The original nickel upCCD NQS is confined to 70 paired determinants `C(8,4)` within the full spin sector `C(8,4)^2=4900`. An independent native constrained `PairedSpatialNQS` in `scripts/qcafqmc_paired_nqs.py` now enforces support **during autoregressive training**, fits complex postprocessed walker-overlap labels with scalar calibration and ridge regularization, and emits a clearly non-original checkpoint. `trial_from_checkpoint` in `qcafqmc_nqs_fci_same_source.py` recognises `paired-spatial-v1`; the existing full-CI-to-iPie adapter exports only the 70 nonzero determinants without post-hoc approximation. Its `qcafqmc_paired_nqs_check.py` smoke test assesses normalization, rejection of broken pairs, synthetic training, and exact 70/4900 support counts. This is still **not** the authors' exact 13,096-parameter transformer or their checkpoint.
+
+**Native FCIDUMP→iPie physical weld.** `scripts/qcafqmc_nickel41_ipie_from_fcidump.py` validates the CASCI receipt and integral SHA, uses ipie's **documented** `fcidump_to_afqmc.py` modified-Cholesky converter, loads the resulting Hamiltonian with `get_hamiltonian`, and invokes standard `AFQMC.build` with either a reference HF Slater determinant or the exact 70-determinant NQS `ParticleHole` trial. Both trial choices are tied to the **same source FCIDUMP**, so Hamiltonian differences cannot masquerade as trial-state improvements. This is **active-space** phaseless AFQMC, not the paper's full-space VCE projection; the latter remains separate. iPie API/source: https://ipie.readthedocs.io/en/latest/python_api.html and https://ipie.readthedocs.io/en/latest/advanced.html .
+
+### Exact selected input commands (not executed in this checkout)
+
+```bash
+# Source verification: no external packages except Python required
+python scripts/qcafqmc_nickel41_integrals.py
+python scripts/qcafqmc_nickel41_source_check.py
+python scripts/qcafqmc_nickel_published_targets.py
+
+# Explicit unverified *independent* neutral-singlet, MO 80..87 hypotheses
+python scripts/qcafqmc_nickel41_integrals.py --config examples/qcafqmc_nickel41_B_independent_hypothesis.json
+python scripts/qcafqmc_nickel41_integrals.py --config examples/qcafqmc_nickel41_BC_independent_hypothesis.json
+python scripts/qcafqmc_nickel41_integrals.py --config examples/qcafqmc_nickel41_C_independent_hypothesis.json
+
+# Via *actual sourced* CASCI FCIDUMP; requires ipie Cholesky CLI on PATH.
+python scripts/qcafqmc_nickel41_ipie_from_fcidump.py output/qcafqmc_nickel41/B/B.receipt.json
+# Learned paired trial in same integrals if a valid compatible checkpoint exists:
+python scripts/qcafqmc_nickel41_ipie_from_fcidump.py output/qcafqmc_nickel41/B/B.receipt.json --nqs-checkpoint output/paired_B.pt
+
+python scripts/qcafqmc_paired_nqs_check.py
+```
+
+### Exact remaining irreducible gates
+
+- **N0 — kernel/runtime acceptance**: compile the new Python source files, run source geometry and target checks, exercise PySCF STO-3G on the three 41-atom geometries and run the ipie 0.7.1 FCIDUMP/NQS entrypoint; type-check the atomic/369 Agda import graph with Agda 2.9. No result is certified before its actual test receipt.
+- **N1 — original electronic state**: establish B/BC/C total charge, spin multiplicity and exact orbital indexing from published supplementary chemistry or original run artifacts. Independently hypothesised neutral singlet cannot be promoted to the selected original.
+- **N2 — orbital identity**: check the actual selection 80–87 and MO basis/frame across all three structures against the original entanglement-selected ordering, occupied partition and VCE embedding. A CASCI 8e8o Hamiltonian alone does not reproduce VCE full-space projection.
+- **N3 — learned trial original**: obtain raw QPU matchgate shadow/circuit labels, processed overlap datasets, trained 13,096-param NQS, ensemble/fidelity and regularisation records. Our native seniority-zero independent model does not inherit the original coefficients.
+- **N4 — reproducible nickel energetics**: on a common verified Hamiltonian, run enough timestep/walker/block/seed trials for independently reblocked error bars, compare HF versus learned paired trial, evaluate B→BC barrier and B→C energy and compare to original Table 2.
+- **N5 — cost**: independently verify actual CPU/GPU hours, AWS instance prices and differences in normalization of imaginary-time step/length. Original $90,600/$596 figures exclude QPU cost and remain source-reported.
