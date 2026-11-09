@@ -94,3 +94,21 @@ The 14-row historical January PD OAG can be prioritised without an invented scie
 
 Scientific evidence is **not** replaced by an arbitrary one-point cap. Rank highest by absolute original credited output: MWW AU2, MWW AU1, Avonvale AU4, Avonvale AU1, Esk AU2, Avonvale AU2. Request exact final October AU source, contemporaneous original baseline data, confidence method, empirical growth/fire/drought/koala viability, full original with-versus-without counterfactual and applicable impact-site like-for-like comparison, with independent QUT/QCC original ecological objections preserved.
 
+
+## 9 November 2026 — exact MWW confidence-boundary maximum cut
+
+**Original January 2026 model only.** Holding every other historical input fixed (including Esk/Avonvale gains/confidences, MWW gains of four, 20-year delay, p=0.002, 89.6 adjusted hectares), vary only the **common** confidence point value `c` for MWW AU1/AU2. The original source coefficient decomposes exactly as `543850 + 6220*c`; c=75 reconstructs `1010350`.
+
+The source-same discounting gives:
+
+| Hypothetical common MWW confidence | Exact original coefficient | Modelled koala compensation |
+|---|---:|---:|
+| 47% | 836190 | 89.66904186% |
+| 48% | 842410 | 90.33604510% |
+| 62% | 929490 | 99.67409048% |
+| 63% | 935710 | 100.34109372% |
+| Original 75% | 1010350 | 108.34513262% |
+
+Exact rational boundary formula for threshold T percentage points: `c(T) = [T * 8960 * (1002/1000)^20 - 543850] / 6220`. It yields approximately **47.49618670 confidence points for 90%**, and **62.48861759 confidence points for 100%**. Thus at the original proposed four-point gain the 100% result depends materially on the **75% confidence** claim for the two 155.5-ha MWW units, even before testing unrounded AU quality or physical maturity. The 90% and 100% comparisons are illustrative OAG compensation benchmarks; they are not established legal minima or independent ecological success probabilities.
+
+**Proof alignment:** the existing golden `SensibLawWoogarooQualityGainEvidenceCut20261106Exact.agda` now includes `mwwBothAtConfidence` and exact coefficient witnesses `mwwAt47Exact`, `mwwAt48Exact`, `mwwAt62Exact`, `mwwAt63Exact`, `mwwAtOriginal75Exact`. The matching Python checker now asserts exact discounted Fraction inequalities and calculates both rational thresholds. Source commits were read back, but **Agda kernel and repository checker execution remain unverified**. The scientific obligation remains the actual final OAMP, supporting AU-specific success-confidence evidence, management track record and original 95C reasoning; nothing here establishes approval invalidity or a condition breach.
