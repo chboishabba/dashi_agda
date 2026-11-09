@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 import DASHI.Core.PredicatePullbackLatticeExact as Pred
+import DASHI.Core.ProvenanceBearingQuotient as Quotient
 import Base369 as Base
 
 sourceCentralSectionedProjection :
@@ -121,6 +122,9 @@ sourceCentralResidualReopening =
 
 -- This reuses the ORIGINAL provenance-bearing quotient certificate
 -- instead of defining any substitute categorical pushforward.
+sourceCentralProvenanceBearingQuotient :
+  Quotient.ProvenanceBearingQuotient
+    (Sectioned.sectionedProjectionCore sourceCentralSectionedProjection)
 sourceCentralProvenanceBearingQuotient =
   Sectioned.residualReopeningGivesProvenanceBearingQuotient
     sourceCentralResidualReopening
