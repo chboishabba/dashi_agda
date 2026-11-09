@@ -376,6 +376,94 @@ def local_positive_implicit_contraction_bounds(c0,m):
     }
 
 
+
+def global_positive_implicit_brouwer_bounds(c0,m,conserved_weights,dt):
+    """All-dt existence/strict positivity for an exactly conserved closed network.
+
+    Mathematical theorem (not an Agda proof): if positive weights w_s
+    satisfy w @ (products-reactants).T == 0 *exactly*, all species are
+    present in the strict-positive c0, and the native 54-bond flux is
+    blocking on exterior faces, there exists at least one positive
+    backward-Euler root for every dt>0. NO GLOBAL UNIQUENESS CLAIM.
+
+    Write W=sum_vs w_s c0_vs, Q=W/min_s w_s. On compact simplex
+    K={c_vs>=0, sum_vs w_s c_vs=W}, native Poisson is continuous and
+    bounded; B(u)<=1+|u|. There is a finite explicit loss bound K_loss
+    with RHS_vs(c)>=-K_loss*c_vs for every c in K.
+
+    Define H(c)=(c0+dt*(RHS(c)+K_loss*c))/(1+dt*K_loss).
+    H:K->K is continuous, since the numerator is nonnegative and
+    w-weighted mass is invariant. Brouwer yields a fixed point.
+    Cancelling K_loss*c proves c=c0+dt*RHS(c); since c0>0,
+    c_vs>=c0_vs/(1+dt*K_loss)>0.
+
+    Floating-point computation of K_loss here is *not* a certified
+    outward-rounded proof or an explicit numerical root finder.
+    """
+    c0=np.asarray(c0,dtype=float)
+    w=np.asarray(conserved_weights,dtype=float)
+    if c0.shape!=(27,len(m.z)) or not np.all(np.isfinite(c0)) or np.any(c0<=0):
+        raise ValueError("strictly positive original 27-site initial state required")
+    if w.shape!=(len(m.z),) or not np.all(np.isfinite(w)) or np.any(w<=0):
+        raise ValueError("each molecular species needs strictly positive conserved weight")
+    if not np.isfinite(dt) or dt<=0:
+        raise ValueError("positive finite original physical timestep required")
+    # Integer or exact positive weights are required for the mathematical
+    # equality; floating source weights are only numerical diagnostics.
+    A=np.asarray(m.reactants,dtype=float)
+    B=np.asarray(m.products,dtype=float)
+    nu=B-A
+    weighted_stoich=nu@w
+    if not np.array_equal(weighted_stoich,np.zeros(len(m.kf))):
+        raise ValueError("claimed source conservation weights do not annihilate exact reaction matrix")
+    W=float(np.sum(c0*w[None,:]))
+    Q=W/float(w.min())
+    if not np.isfinite(W) or not np.isfinite(Q) or W<=0 or Q<=0:
+        raise ValueError("finite positive original elemental inventory required")
+    Qstar=max(1.0,Q)
+    Cphi=m.h**2*np.sqrt(27.0)/(3.0*m.epsilon)
+    phi_bound=Cphi*(m.F*float(np.sum(np.abs(m.z)))*Q+abs(m.fixed_charge))
+    U=2.0*float(np.max(np.abs(m.z)))*m.F*phi_bound/m.RT
+    Bmax=1.0+U
+    species_loss=6.0*np.asarray(m.D,dtype=float)*Bmax/m.h**2
+    for j in range(len(m.kf)):
+        alpha_count=float(np.sum(A[j]))
+        beta_count=float(np.sum(B[j]))
+        for s in range(len(m.z)):
+            if nu[j,s]<0:
+                # Since nu<0, alpha_s>=1; forward consumption
+                species_loss[s]+=(-nu[j,s])*m.kf[j]*Qstar**(alpha_count-1)
+            elif nu[j,s]>0:
+                # Since nu>0, beta_s>=1; reverse consumption
+                species_loss[s]+=nu[j,s]*m.kb[j]*Qstar**(beta_count-1)
+    loss=float(np.max(species_loss))
+    scale=dt*loss
+    lower=c0.min()/(1.0+scale)
+    if not np.all(np.isfinite([phi_bound,U,Bmax,loss,scale,lower])):
+        raise ValueError("nonfinite global closed-simplex loss bound")
+    if loss<0 or lower<=0:
+        raise ValueError("strict positivity lower bound not representable")
+    return {
+        "total_weighted_inventory":W,
+        "global_species_upper_bound":float(Q),
+        "poisson_potential_bound":float(phi_bound),
+        "dimensionless_face_drop_bound":float(U),
+        "global_linear_loss_bound":loss,
+        "physical_dt":float(dt),
+        "positive_root_component_lower_bound":float(lower),
+        "mathematical_statement":
+            "Brouwer guarantees >=1 strictly positive exact backward Euler "
+            "root for every positive dt in the closed conserved simplex; "
+            "every such root has c_vs >= c0_vs/(1+dt*loss)",
+        "closed_blocking_native_bonds":54,
+        "finite_dimensional_topological_existence":True,
+        "global_uniqueness_proved":False,
+        "floating_point_majorants_outward_certified":False,
+        "original_source_weights_independently_authenticated":False,
+        "agda_kernel_checked":False,
+    }
+
+
 def implicit_step(c0,dt,m,rtol=1e-8):
     """Fully coupled implicit Euler with log concentrations, checked receipt.
 
