@@ -358,3 +358,32 @@ nativeHistoryLeavesUnvisitedVoxelUnchanged observer (action ∷ rest)
       (nativeDirectedSource action)
       (nativeDirectedTarget action)
       observer state sourceAway targetAway)
+
+
+-- The source and destination balances are proven for the *executed*
+-- native transfer, when distinctness is supplied for the geometric
+-- endpoints. This keeps the geometric inequality as an explicit
+-- obligation rather than implicitly assuming a graph has no loops.
+nativeDirectedBondSourceQuantityPaid :
+  (action : OriginalDirectedNativeBond) (state : V.Vec Nat 27) →
+  ¬ (nativeDirectedSource action ≡ nativeDirectedTarget action) →
+  V.lookup (applyNativeDirectedBond action state)
+    (nativeDirectedSource action)
+    + Transfer.actualSourceDebit (nativeDirectedSource action) state
+    ≡ V.lookup state (nativeDirectedSource action)
+nativeDirectedBondSourceQuantityPaid action state different =
+  Transfer.lookupTransferSourcePaid
+    (nativeDirectedSource action) (nativeDirectedTarget action)
+    state different
+
+nativeDirectedBondTargetQuantityPaid :
+  (action : OriginalDirectedNativeBond) (state : V.Vec Nat 27) →
+  ¬ (nativeDirectedSource action ≡ nativeDirectedTarget action) →
+  V.lookup (applyNativeDirectedBond action state)
+    (nativeDirectedTarget action)
+    ≡ V.lookup state (nativeDirectedTarget action)
+      + Transfer.actualSourceDebit (nativeDirectedSource action) state
+nativeDirectedBondTargetQuantityPaid action state different =
+  Transfer.lookupTransferTargetReceivesActualSource
+    (nativeDirectedSource action) (nativeDirectedTarget action)
+    state different
