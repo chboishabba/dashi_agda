@@ -98,3 +98,33 @@ module Walk {A : Set} (G : AngularGroup A) where
 
   -- Signed closure is a separate boundary assumption; measurements
   -- must specify the unwrapped station order and terminal sample.
+
+  -- Cancellation between two arbitrary target displacements, rather
+  -- than cancellation only to zero.
+  leftCancellation :
+    (a x y : A) → a ⊕ x ≡ a ⊕ y → x ≡ y
+  leftCancellation a x y proof =
+    trans (sym (leftUnit x))
+      (trans
+        (cong (λ t → t ⊕ x) (sym (leftInverse a)))
+        (trans
+          (assoc (neg a) a x)
+          (trans
+            (cong (λ t → neg a ⊕ t) proof)
+            (trans
+              (sym (assoc (neg a) a y))
+              (trans
+                (cong (λ t → t ⊕ y) (leftInverse a))
+                (leftUnit y))))))
+
+  -- A physically unwrapped turn *does not* have zero signed sum.
+  -- If its sampled endpoint is exactly one period past the start,
+  -- the finite signed increment sum is exactly that period.
+  fullTurnSignedPitch :
+    (start turn : A) (samples : List A) →
+    finalAngle start samples ≡ start ⊕ turn →
+    signedIncrementSum start samples ≡ turn
+  fullTurnSignedPitch start turn samples endpoint =
+    leftCancellation start
+      (signedIncrementSum start samples) turn
+      (trans (signedPitchTelescopes start samples) endpoint)
