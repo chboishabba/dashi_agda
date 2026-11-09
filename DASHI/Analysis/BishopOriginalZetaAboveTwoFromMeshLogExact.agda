@@ -29,13 +29,9 @@ module FromOriginalBishopMeshLog
 
   open Actual public
 
-originalAboveTwoZetaFromCompletedLog :
-  (inputs : Round11.Round11BishopCutset) →
-  (s : BC.BishopComplex) →
-  Zeta.FromOriginalNegativeLog.sourceRegion
-    inputs Log.originalBishopNegativeLogExponentialGap s →
-  BC.BishopComplex
-originalAboveTwoZetaFromCompletedLog inputs s aboveTwo =
-  Zeta.FromOriginalNegativeLog.originalZetaAboveTwo
-    inputs Log.originalBishopNegativeLogExponentialGap
-    s aboveTwo
+  originalAboveTwoZetaFromCompletedLog :
+    (s : BC.BishopComplex) →
+    Actual.sourceRegion s →
+    BC.BishopComplex
+  originalAboveTwoZetaFromCompletedLog =
+    Actual.originalZetaAboveTwo
