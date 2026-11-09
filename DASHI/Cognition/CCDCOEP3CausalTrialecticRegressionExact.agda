@@ -519,3 +519,17 @@ originalJournalistAndGCCAuthorsRemainDistinct :
   ≡ Direction.originalAuthor Direction.shlaesGCCResponseJune30 → ⊥
 originalJournalistAndGCCAuthorsRemainDistinct =
   Direction.journalistNotGCCHistoricalAuthor
+
+-- Original 8 June 1993 James Hansen correction is authored by neither
+-- the original Washington Post reporter nor the later GCC communicator.
+independentPublishedCorrectionNotCoalitionAuthored :
+  Direction.originalAuthor Direction.hansenIndependentRebuttalJune8
+  ≡ Direction.originalAuthor Direction.shlaesGCCResponseJune30 → ⊥
+independentPublishedCorrectionNotCoalitionAuthored =
+  Direction.independentHansenLetterNotGCCAuthored
+
+publishedHansenCorrectionNotProofOfGCCKnowledge :
+  Direction.hansenRebuttalPublished
+  ≡ Direction.originalActorReadAndConsidered → ⊥
+publishedHansenCorrectionNotProofOfGCCKnowledge =
+  Direction.publishedNotProofOfGCCKnowledge
