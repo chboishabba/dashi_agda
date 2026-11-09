@@ -31,6 +31,7 @@ from pathlib import Path
 
 from build_bh4_stoichiometric_matrix import build_matrix, participant_key
 from run_bh4_reaction_network import QDPR, audit_reaction, parse_formula
+from run_bh4_flux_feasibility import evaluate as evaluate_original_flux_candidate
 
 ROOT=Path(__file__).resolve().parents[1]
 CANONICAL_OWNER=ROOT/"DASHI/Biology/Molecular/BH4ExecutedPanelReactionReceiptExact.agda"
@@ -416,6 +417,47 @@ def test_source(certificate,*,full_panel):
     return result
 
 
+def evaluate_source_paid_physical_candidate(certificate,parameters,candidate):
+    """Reuse the existing original 29×12 flux/bound/exchange checker.
+
+    A feasible algebraic S*v+e=0 candidate is *not* a dynamic physical
+    update, compartment identification, validated transport rate, PNP
+    model or causal hypothesis.
+    """
+    original,metadata=check_certificate(certificate,full_panel=True)
+    receipt=evaluate_original_flux_candidate(original,parameters,candidate)
+    if receipt["reaction_count"]!=12 or receipt["species_count"]!=29:
+        raise AssertionError("original source 29x12 matrix identity lost")
+    if receipt["status"]!="feasible":
+        return {"status":receipt["status"],
+                "source_29x12_consistent":True,
+                "physical_rate_validated":False,
+                "missing_flux_bounds":receipt.get("missing_flux_bounds",[]),
+                "missing_flux_values":receipt.get("missing_flux_values",[]),
+                "missing_external_exchange":receipt.get("missing_external_exchange",[]),
+                "candidate_flux_balance_witness":False}
+    # Required for *referential* same-state provenance, not proof that
+    # submitted numerical values were actually measured.
+    if not all(isinstance(candidate.get(key),str) and
+               candidate[key].strip() and
+               "synthetic" not in candidate[key].lower()
+               for key in ("same_state_reference","measurement_reference")):
+        raise ValueError("flux candidate lacks source-specific same-state provenance")
+    witness=receipt.get("candidate_flux_balance_witness")
+    if witness is None:
+        raise AssertionError("feasible result lacked its complete algebraic witness")
+    return {"status":"feasible-algebraic-only",
+            "source_29x12_consistent":True,
+            "complete_12_reaction_flux_coordinates":True,
+            "complete_29_environmental_exchange_coordinates":True,
+            "candidate_flux_balance_witness":True,
+            "same_state_reference":candidate["same_state_reference"],
+            "measurement_reference":candidate["measurement_reference"],
+            "physical_rate_validated":False,
+            "transport_PNP_same_step_proved":False,
+            "clinical_causality_proved":False}
+
+
 def self_test():
     # One genuine, source-pinned RHEA:32253 directional QDPR reaction,
     # not a synthetic 29×12 panel or claim that all 29 rates are known.
@@ -484,11 +526,25 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--certificate",type=Path)
     parser.add_argument("--self-test",action="store_true")
+    parser.add_argument("--parameters",type=Path,
+                        help="original source-qualified Rhea flux bounds")
+    parser.add_argument("--candidate",type=Path,
+                        help="complete original 12-flux/29-exchange candidate")
     args=parser.parse_args()
+    if (args.parameters is None)!=(args.candidate is None):
+        parser.error("--parameters and --candidate must be supplied together")
+    if args.parameters is not None and args.certificate is None:
+        parser.error("real original --certificate required with candidate flux")
     if args.certificate is not None:
         raw=args.certificate.read_bytes()
-        result=test_source(json.loads(raw),full_panel=True)
+        certificate=json.loads(raw)
+        result=test_source(certificate,full_panel=True)
         result["original_certificate_sha256"]=hashlib.sha256(raw).hexdigest()
+        if args.parameters is not None:
+            result["original_flux_candidate"]=evaluate_source_paid_physical_candidate(
+                certificate,
+                json.loads(args.parameters.read_text(encoding="utf-8")),
+                json.loads(args.candidate.read_text(encoding="utf-8")))
         print(json.dumps(result,indent=2,sort_keys=True))
     elif args.self_test or args.certificate is None:
         self_test()
