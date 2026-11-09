@@ -144,3 +144,65 @@ flipHalfOddShellReversesParity :
   ≡ not (oddSumModFourBit (coordinates shell))
 flipHalfOddShellReversesParity (half-odd-shell coords norm) =
   flipFirstOddReversesParity coords
+
+------------------------------------------------------------------------
+-- Genuine two-sided parity-selected shell equivalence on unbounded
+-- signed-half coordinates. This removes the abstract H0=H2 assumption
+-- AT THE COORDINATE-CARRIER LEVEL for every fixed n.
+------------------------------------------------------------------------
+
+data SelectedHalfOddShell (n : Nat) (parity : Bool) : Set where
+  selected-half-odd-shell :
+    (shell : HalfOddShell n) →
+    oddSumModFourBit (coordinates shell) ≡ parity →
+    SelectedHalfOddShell n parity
+
+flipSelectedHalfOddShell :
+  ∀ {n parity} →
+  SelectedHalfOddShell n parity →
+  SelectedHalfOddShell n (not parity)
+flipSelectedHalfOddShell (selected-half-odd-shell shell parityProof) =
+  selected-half-odd-shell
+    (flipHalfOddShell shell)
+    (trans
+      (flipHalfOddShellReversesParity shell)
+      (cong not parityProof))
+
+EvenHalfOddShell : Nat → Set
+EvenHalfOddShell n = SelectedHalfOddShell n false
+
+OddHalfOddShell : Nat → Set
+OddHalfOddShell n = SelectedHalfOddShell n true
+
+evenHalfShellToOdd :
+  ∀ {n} → EvenHalfOddShell n → OddHalfOddShell n
+evenHalfShellToOdd = flipSelectedHalfOddShell
+
+oddHalfShellToEven :
+  ∀ {n} → OddHalfOddShell n → EvenHalfOddShell n
+oddHalfShellToEven = flipSelectedHalfOddShell
+
+selectedHalfShellCoordinates :
+  ∀ {n parity} →
+  SelectedHalfOddShell n parity →
+  Vec.Vec OddSignedCoordinate 8
+selectedHalfShellCoordinates (selected-half-odd-shell shell _) =
+  coordinates shell
+
+evenHalfShellTwoSidedOnCoordinates :
+  ∀ {n} (shell : EvenHalfOddShell n) →
+  selectedHalfShellCoordinates
+    (oddHalfShellToEven (evenHalfShellToOdd shell))
+  ≡ selectedHalfShellCoordinates shell
+evenHalfShellTwoSidedOnCoordinates
+  (selected-half-odd-shell shell parityProof) =
+  flipHalfOddShellInvolutive shell
+
+oddHalfShellTwoSidedOnCoordinates :
+  ∀ {n} (shell : OddHalfOddShell n) →
+  selectedHalfShellCoordinates
+    (evenHalfShellToOdd (oddHalfShellToEven shell))
+  ≡ selectedHalfShellCoordinates shell
+oddHalfShellTwoSidedOnCoordinates
+  (selected-half-odd-shell shell parityProof) =
+  flipHalfOddShellInvolutive shell
