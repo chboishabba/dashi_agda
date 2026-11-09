@@ -205,3 +205,46 @@ All `F*.x` names above are **proposed new integration contracts**, not existing 
 5. Record the precise integration gate results and provenance in the roadmaps, without sending the work to an external repository.
 
 **Privacy rule:** repo search and normal reading of publicly available declarations are fine. Distribution of DASHI's unpublished material to unaffiliated repositories is forbidden unless separately and explicitly authorized.
+
+
+## 2026-11-09 maximum-cut reconciliation after full PR archaeology
+
+**This section supersedes earlier speculative F0–F5 missing-capability rows.** Source archaeology identified existing implementations. Do not reimplement them. The next proof work begins at *integration of those implementations with actual source declarations*.
+
+### Confirmed existing owners, not gaps
+
+- `dashi_agda/tools/agda_preflight/agda_preflight/ast_index.py`: Agda AST signatures, imports, clauses and record/data structures.
+- `repository_discovery.py` / `semantic_extension.py`: repository DB `normalized_signature`, `signature_sha256`, `body_sha256`, `repo_refs`, `related_symbols`, `discovery_receipt` and candidate evidence.
+- `proof_router.py` / `external_proof_bridge.py`: proof debt and external source/verification receipt routing, explicitly not automatic theorem proof.
+- `dashi_agda` PR **#1212**: OpenAI math corpus source atlas, symbol snowball and owner routing; `dashi_lean4` PR **#78**: source declaration index, candidate-owner matrix, reviewed same-object boundaries and statement-integrity checks.
+- `dashi_agda` PR **#1437** (alongside #1415–#1417): hierarchical spectral Pareto, world-eigen stratification, sublinear conductor and max-cut ownership. Lean PR **#102** mirrors the formal contract. These are **existing mathematics**, not conjectural new machinery.
+- Lean PR **#71** already has scoped verifier same-object evaluation.
+- The original Hecke recurrence, prime-power assembly and related Agda owners are existing; no reproof of squarefree multiplicativity.
+
+### New full-corpus input now committed
+
+`dashi_lean4` PR **#105** committed two independent GitHub corpora at retrieval time 2026-11-09: **8,764 JMD public stars**, of which **1,996** are primary-language Lean, and **21,481 GitHub-wide `language:Lean` repositories** across **34 disjoint creation-date partitions**, with **231 pages** and **298 raw count/page receipts** (reported from completed collector validation). These are moving GitHub-index observations, not all formally checked Lean declarations.
+
+New **`scripts/audit_jmd_formal_corpus.py`** joins the two sources only by numeric GitHub repository ID, validates exported counts, subset identity, checkpoint ID/name agreement, disjoint contiguous date windows and expected page counts, and writes `docs/roadmap/jmd_formal_ingress/audit.json` plus `starred_global_overlap.tsv`. `scripts/test_audit_jmd_formal_corpus.py` contains positive and fail-closed negative controls. The integration **does not classify mathematical theorems** and must never promote metadata to proof. Run locally from the Lean repo root:
+
+```sh
+python -m unittest discover -s scripts -p 'test_audit_jmd_formal_corpus.py' -v
+python scripts/audit_jmd_formal_corpus.py
+```
+
+The script's synthetic fixtures were tested during development. **The full 21,481-row live ingress audit has not yet been run in the repository environment.** Its outputs should not be described as present before execution.
+
+### Corrected exact remaining max-cut
+
+| Gate | Decisive result (avoid duplicate tools) | Status |
+|---|---|---|
+| **P0.01** | Run the new full-corpus audit against both committed CSVs and actual checkpoint; inspect any coverage mismatch rather than suppressing it | OPEN for production execution |
+| **P0.02** | Apply existing `dashi-repo symbol / related_symbols / discover` against **each distinct** JMD image claim and record exact declaration, full type, imports and source commit; distinguish non-mathematical images | OPEN: module candidates already indexed |
+| **P1.01** | Extend **existing** OpenAI-math source candidate-router/statement-audit pattern to selected corpus **declarations**, not repository names; preserve branch/version and no-claim defaults | OPEN: generic integration, source implementations present |
+| **P1.02** | Obtain authoritative selected Lean elaborated theorem types and axiom/opaque dependency closure, using pinned Lean environments, and compare with Agda original owners | OPEN for selected external formal proofs |
+| **P2.01** | One *source-inspected* and *kernel-checked* same-object equality or hypothesis-preserving implication, with a deliberately non-equivalent negative control and original author credit | OPEN; source comparison precedent exists |
+| **P2.02** | Join that certified relation into existing proof-debt and dependency-scheduler owners; show actual paid gap and unchanged unrelated cones | OPEN for this corpus instance |
+| **P3.01** | Repeat the verified route for Hecke, selected Monster/Y443, Popov VOA, CFSG, Stacks or Karp only if a **precise** consumer and actual source declaration warrant it | OPEN by consumer |
+| **P3.02** | Preserve private/unpublished DASHI material: **no external PR, issue, comment, message, or upstream source upload** unless separately authorised | Mandatory invariant |
+
+These gate labels are **integration milestones**, not newly defined Agda/Lean theorem names. The mathematics should be placed with its existing closest owner in the Agda/Lean formal dependency graph, not in a competing world-index package. SLR/PNF is optional for human navigation and never proof authority.
