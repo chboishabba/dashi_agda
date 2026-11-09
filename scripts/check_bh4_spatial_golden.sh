@@ -21,6 +21,7 @@ if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
   done
 fi
 MODULES=(
+  DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
   DASHI/Biology/BH4OneMoleculeSpatialFutureMinimalityExact.agda
   DASHI/Biology/BH4SpatialOriginalQDPRStoichiometryExact.agda
   DASHI/Biology/BH4SharedSourceTargetRedoxDynamicsExact.agda
@@ -37,6 +38,19 @@ for path in "${MODULES[@]}"; do
     exit 1
   fi
 done
+
+# Original 29x12 conditional reaction history owner must remain in the
+# existing Golden import and contain the complete CHNOP/signed proofs.
+grep -q 'original29x12SpatialReactionBalance' \
+  DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
+grep -q 'original29x12SpatialSignedChargeBalance' \
+  DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
+grep -q 'original29x12SpatialAllHistoryCHNOPBalance' \
+  DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
+grep -q 'original29x12SpatialAllHistorySignedChargeBalance' \
+  DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
+grep -q 'import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact' \
+  DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 
 python3 scripts/check_bh4_allocator_future_observer.py
 python3 scripts/check_bh4_spatial_circulation.py
