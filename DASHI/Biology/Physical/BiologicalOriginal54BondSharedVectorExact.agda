@@ -449,3 +449,76 @@ original369NativeTargetFluxExact :
 original369NativeTargetFluxExact action state =
   nativeDirectedBondTargetQuantityPaid action state
     (originalDirectedNativeEndpointsDistinct action)
+
+
+------------------------------------------------------------------------
+-- TRUE NATIVE PER-VOXEL INCIDENCE LEDGER FOR ONE ACTUAL BOND.
+-- The physically supported current is the ACTUAL 0/1 moved amount.
+-- For the role supplied by original cubical endpoint incidence,
+-- after + outgoing = before + incoming, including empty sources.
+------------------------------------------------------------------------
+
+data NativeVoxelRole (action : OriginalDirectedNativeBond)
+  (observer : F.Fin 27) : Set where
+  atNativeSource :
+    nativeDirectedSource action ≡ observer →
+    NativeVoxelRole action observer
+  atNativeTarget :
+    nativeDirectedTarget action ≡ observer →
+    NativeVoxelRole action observer
+  offNativeEndpoints :
+    ¬ (nativeDirectedSource action ≡ observer) →
+    ¬ (nativeDirectedTarget action ≡ observer) →
+    NativeVoxelRole action observer
+
+nativeRoleOutgoing :
+  (action : OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) (observer : F.Fin 27) →
+  NativeVoxelRole action observer → Nat
+nativeRoleOutgoing action state observer (atNativeSource equality) =
+  Transfer.actualSourceDebit (nativeDirectedSource action) state
+nativeRoleOutgoing action state observer (atNativeTarget equality) = 0
+nativeRoleOutgoing action state observer
+  (offNativeEndpoints sourceAway targetAway) = 0
+
+nativeRoleIncoming :
+  (action : OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) (observer : F.Fin 27) →
+  NativeVoxelRole action observer → Nat
+nativeRoleIncoming action state observer (atNativeSource equality) = 0
+nativeRoleIncoming action state observer (atNativeTarget equality) =
+  Transfer.actualSourceDebit (nativeDirectedSource action) state
+nativeRoleIncoming action state observer
+  (offNativeEndpoints sourceAway targetAway) = 0
+
+originalNativeVoxelIncidenceBalance :
+  (action : OriginalDirectedNativeBond)
+  (state : V.Vec Nat 27) (observer : F.Fin 27)
+  (role : NativeVoxelRole action observer) →
+  V.lookup (applyNativeDirectedBond action state) observer
+    + nativeRoleOutgoing action state observer role
+    ≡ V.lookup state observer
+      + nativeRoleIncoming action state observer role
+originalNativeVoxelIncidenceBalance action state observer
+  (atNativeSource equality) rewrite sym equality =
+  trans (original369NativeSourceFluxExact action state)
+    (sym (+-identityʳ
+      (V.lookup state (nativeDirectedSource action))))
+originalNativeVoxelIncidenceBalance action state observer
+  (atNativeTarget equality) rewrite sym equality =
+  trans
+    (+-identityʳ
+      (V.lookup (applyNativeDirectedBond action state)
+        (nativeDirectedTarget action)))
+    (original369NativeTargetFluxExact action state)
+originalNativeVoxelIncidenceBalance action state observer
+  (offNativeEndpoints sourceAway targetAway) =
+  trans
+    (+-identityʳ
+      (V.lookup (applyNativeDirectedBond action state) observer))
+    (trans
+      (Transfer.lookupTransferAwayFromEndpoints
+        (nativeDirectedSource action)
+        (nativeDirectedTarget action)
+        observer state sourceAway targetAway)
+      (sym (+-identityʳ (V.lookup state observer))))
