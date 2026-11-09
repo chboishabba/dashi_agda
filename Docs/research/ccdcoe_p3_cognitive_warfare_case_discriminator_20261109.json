@@ -1,0 +1,144 @@
+{
+  "schema": "dashi.ccdcoe.p3.cognitive_warfare_discrimination.v1",
+  "scope": "Named original evidence sources and explicit identification limits; not original article microdata or a finding of an actual hostile operation.",
+  "original_source_credit": "Original communications were produced by their credited authors/organisations; historical and empirical analyses remain credited to their researchers. DASHI owns the formal tests and provenance graph only.",
+  "cases": [
+    {
+      "id": "gcc_harrison_1993_1995",
+      "subject": "GCC/E. Bruce Harrison agency media activities 1993–1995",
+      "primary_source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/",
+      "reported_kind": "agency_retrospective_of_communications_and_claimed_impact",
+      "evidence_grade": "historical_actor_self_report",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Agency-authored impact claims are not externally measured changes",
+        "GCC actions may not be attributed to the distinct April 1998 API proposal"
+      ]
+    },
+    {
+      "id": "gcc_clippings_1993",
+      "subject": "GCC-held 1993 media clipping archive",
+      "primary_source": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/",
+      "reported_kind": "archived_media_items",
+      "evidence_grade": "source_indexed_media_archive",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Archived clippings are not a representative outlet sample",
+        "A media appearance is not proof of audience persuasion"
+      ]
+    },
+    {
+      "id": "api_draft_1998",
+      "subject": "April 1998 API Global Climate Science Communications Team plan",
+      "primary_source": "https://www.congress.gov/106/crec/1999/11/02/CREC-1999-11-02-pt1-PgS13483-2.pdf",
+      "reported_kind": "planning_document",
+      "evidence_grade": "contemporaneous_proposed_plan",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "The documented draft is not evidence of implementation or endorsement by every named participant"
+      ]
+    },
+    {
+      "id": "supran_oreskes_2017",
+      "subject": "1977–2014 ExxonMobil communications: 187-document published analysis",
+      "primary_source": "https://doi.org/10.1088/1748-9326/aa815f",
+      "reported_kind": "independent_published_content_analysis",
+      "evidence_grade": "published_document_metrics_not_reanalysed_microdata",
+      "measured_content_change": true,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "The original 187-document cohort and 26 relevant advertorial denominator must not be fused with the expanded 2020 corpus",
+        "Comparative document coding is not an audience treatment effect"
+      ]
+    },
+    {
+      "id": "leon_films",
+      "subject": "Léon distinct theatrical/extended versions and situated cinematic interpretations",
+      "primary_source": "https://www.gaumont.com/en/movie/leon-version-longue",
+      "reported_kind": "original_film_metadata_and_unverified_scene_interpretation",
+      "evidence_grade": "edition_metadata_only",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Edition metadata is not source-authenticated footage",
+        "Interpretations of gaze or milk-spitting are not author intent or observed audience response"
+      ]
+    },
+    {
+      "id": "dont_look_up_satire",
+      "subject": "Don't Look Up fictional satire",
+      "primary_source": "https://media.netflix.com/en/only-on-netflix/81252357",
+      "reported_kind": "fictional_artwork",
+      "evidence_grade": "film_metadata_only",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Fiction is not an observation of a historical influence operation"
+      ]
+    },
+    {
+      "id": "planet_humans_documentary",
+      "subject": "Planet of the Humans documentary argument",
+      "primary_source": "https://planetofthehumans.com/faqs/",
+      "reported_kind": "documentary_claims_require_adversarial_review",
+      "evidence_grade": "author_publication_and_claims_not_independently_reviewed",
+      "measured_content_change": false,
+      "measured_audience_response": false,
+      "causal_effect_identified": false,
+      "hostile_intent_identified": false,
+      "cautions": [
+        "Original documentary assertions need proposition-specific independent testing",
+        "No automatic audience-response or operations attribution"
+      ]
+    }
+  ],
+  "discriminator_requirements": [
+    {
+      "gate": "exposure",
+      "question": "Did target people/institutions encounter specified original intervention?",
+      "necessary": "dated distribution plus independently attributable exposure record",
+      "observed": false
+    },
+    {
+      "gate": "mechanism",
+      "question": "Did scrutinising evidence, responsibility frames, trust, agency or revision response change?",
+      "necessary": "original coded baseline, reproducible blinded coding, independent reviewer disagreement and uncertainty",
+      "observed": false
+    },
+    {
+      "gate": "causality",
+      "question": "Could common issue attention, prior trends, ordinary persuasion or contemporaneous events explain the difference?",
+      "necessary": "matched observational design or ethically permitted controlled exposure, negative controls and sensitivity analysis",
+      "observed": false
+    },
+    {
+      "gate": "intent_targeting",
+      "question": "What independent historical documents support intention, coordination and targeting of a hostile operation?",
+      "necessary": "actor-origin primary records and independently checked chronology, not retrospective inferred motive",
+      "observed": false
+    }
+  ],
+  "claim": "No named case currently has the full independently validated operation-identification chain in this repository.",
+  "excluded_inferences": [
+    "Message content does not prove population belief change",
+    "Public agreement does not prove evidence-responsive revision",
+    "Effect does not establish hostile purpose",
+    "Institutional contact does not prove draft uptake",
+    "Artwork does not certify historical cognition or audience manipulation"
+  ]
+}
