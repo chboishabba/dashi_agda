@@ -29,6 +29,7 @@ modules=(
   DASHI/Cognition/CCDCOEP3G20RGMemberPanelExact.agda
   DASHI/Cognition/CCDCOEP3StakeholderHandoffExact.agda
   DASHI/Cognition/CCDCOEP3CulturalSourceGenreExact.agda
+  DASHI/Culture/CriticalArtTemporalReceptionReuseExact.agda
 )
 for file in "${modules[@]}"; do
   test -s "$file" || { echo "Missing owner: $file" >&2; exit 1; }
