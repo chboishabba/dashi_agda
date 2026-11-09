@@ -292,3 +292,80 @@ This closes the narrow programmatic input-guard issue, *not*
 P0.05 (general existence/positivity), P0.06 (analytic energy
 inequality) or P0.08 (measured original physical state). No test
 execution or Agda kernel acceptance is claimed at this head.
+
+
+## 2026-11-09 high-alpha pass: all-site stoichiometric left kernels and native bond-order weld
+
+**New Agda proof owner:** `DASHI/Biology/Molecular/BH4PanelRateWeightedConservationExact.agda`
+(commits `efa1fdfd`, `6e54c0c9` on BH4 PR #1454). All proof
+declarations are source-written, **not kernel-accepted**. The module
+imports the existing `BH4PanelStoichiometricMatrixExact` and consumes
+the original-source certificate; it does not define a substitute panel.
+
+The generic finite lemmas `allFiniteColumnsRateWeightedConserve` and
+`allFiniteColumnsRateWeightedSignedConserve` extend per-column
+left-kernel identities to arbitrary Nat-valued multiplicities. The
+spatial lemmas `allSitesRateWeightedConserve` and
+`allSitesRateWeightedSignedConserve` extend them to any finite number
+of sites, retaining the signed cross-sum rather than falsely assuming
+separate positive/negative charge conservation.
+
+Original 29x12 and 27x29x12 specializations:
+- `original29x12RateWeightedCHNOPBalance`
+- `original29x12RateWeightedSignedChargeBalance`
+- `original369x29x12SpatialRateCHNOPBalance`
+- `original369x29x12SpatialRateSignedChargeBalance`
+
+These establish **source-conditional linear batch stoichiometric
+balance** for finite event multiplicities. They do not construct the
+original 12 real-valued rates `v_r(c)`, a nonnegative physical state,
+or the P0.04 mass-action constitutive map. P0.04 physical acceptance
+therefore remains OPEN. A 2,000-case independent synthetic signed
+cross-sum integer regression passed locally. The Agda module was
+re-fetched from GitHub; parentheses balanced and no explicit holes
+or postulates were found. Structural checks do not imply typechecking.
+
+**New bond-index weld:** `scripts/check_bh4_original_bond_order_weld.py`
+and `scripts/test_bh4_original_bond_order_weld.py`
+(commits `b756ee77`, `c120f7ba`, test correction `f7246edc`).
+The previous Python PNP numerical reference enumerates bonds in
+lexicographic `(voxel,axis)` order. Biology PR #1471's native Agda
+`BiologicalFullCubeIncidenceExact.allPositiveBonds` enumerates
+`xBonds ++ yBonds ++ zBonds` by segment first. These **are not the
+same indexed current vector**, even though both describe exactly the
+same set of 54 positively oriented native bonds. The new bijection
+maps indices in both directions without changing endpoints.
+
+A local independent reconstruction passed 54/54 basis-vector exact
+divergence identities, an arbitrary signed-rational-current identity,
+a nonidentity order check and an unpermuted-current counterexample.
+The committed Python test file has been source-written and re-fetched,
+but not executed as such in this environment. Full 29-species and
+physical-parameter identification remain separate. This closes the
+finite combinatorial **permutation specification**, not Agda
+acceptance of the correspondence or physical P1.03.
+
+**New exact remaining gates:**
+1. `original369NativeBondIndexPermutationExact`: Agda-bijective
+   indexing map from #1471's 54 `PositiveBond` constructors to the
+   numerical list; prove inversion and incidence preservation on
+   the actual same geometry. OPEN; requires stacked branch import.
+2. `original369x29x12RateBalanceKernelAccepted`: kernel-check the
+   four new specializations and their generic dependencies under
+   Agda 2.9 against the exact BH4 head. OPEN; requires toolchain.
+3. `original29x12SourceMassActionRateVectorExact`: instantiate
+   original chemically identified rate constants, reversible
+   affinities and admissible concentrations to produce genuine
+   27x12 **real** rates. OPEN; source S0.01/02/04 unpaid.
+4. `original369SourceReactionTransportContinuityWeldExact`:
+   combine source-certified reaction left kernels, genuine
+   boundary exchange and correctly permuted native bond currents
+   on one physical state. OPEN; depends on G0, S0 and P0.07.
+5. The pre-existing P0.05–P0.08, P1–P3 remain OPEN and cannot
+   be inferred from a Nat-weighted stoichiometry lemma or permutation.
+
+**Canonical attribution:** the 369 geometry/pants gluing and source
+chemical programme remain user prior work; original Rhea identities
+and measurements remain source-owned; the Agda implementation and
+index-weld scripts above are assistant-authored assistance. No claim
+of exact-head compilation, calibrated physiology, or ITIR promotion.
