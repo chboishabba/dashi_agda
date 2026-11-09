@@ -17,6 +17,7 @@ import DASHI.Foundations.SSPTritCarrier as SSP
 import DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact as Cube
 import DASHI.Biology.Physical.BiologicalOriginal54BondSharedVectorExact as Index
 import DASHI.Biology.Physical.BiologicalFullCubeIncidenceExact as Grid
+import DASHI.Biology.Physical.BiologicalSharedFiniteVectorTransferExact as Transfer
 
 originalOuterFacePoints : Cube.Face6 → List Cube.Ternary27Point
 originalOuterFacePoints Cube.xNegativeFace =
@@ -189,8 +190,6 @@ applyBoundaryDischarge event state =
     (λ n → pred n)
 
 -- Reuse the original generic source-debit conservation proof owner.
-import DASHI.Biology.Physical.BiologicalSharedFiniteVectorTransferExact as Transfer
-
 -- pred(suc n)=n and pred(0)=0 is definitionally equal to the
 -- original debitAt, at every finite vector index.
 dischargeIsOriginalDebit :
@@ -219,25 +218,38 @@ rightOneIsSucc : (n : Nat) → n + 1 ≡ suc n
 rightOneIsSucc n =
   trans (+-suc n zero) (cong suc (+-identityʳ n))
 
+outflowIndexBalance :
+  ∀ {n}
+  (index : F.Fin n)
+  (state : V.Vec Nat n) →
+  V.sum (Transfer.debitAt index state)
+    + (case V.lookup state index of λ where
+         zero → 0
+         (suc _) → 1)
+    ≡ V.sum state
+outflowIndexBalance index state with V.lookup state index
+... | zero =
+  trans
+    (+-identityʳ (V.sum (Transfer.debitAt index state)))
+    (failedDebitConserves index state refl)
+... | suc k =
+  trans
+    (rightOneIsSucc (V.sum (Transfer.debitAt index state)))
+    (Transfer.successfulDebitDecreasesTotalByOne index state k refl)
+
 outflowMaterialBalance :
   (event : OriginalOuterFaceDischarge)
   (state : V.Vec Nat 27) →
   V.sum (applyBoundaryDischarge event state)
     + actualDischargedAmount event state
     ≡ V.sum state
-outflowMaterialBalance event state
-  rewrite dischargeIsOriginalDebit (dischargeIndex event) state
-  with V.lookup state (dischargeIndex event)
-... | zero =
+outflowMaterialBalance event state =
   trans
-    (+-identityʳ (V.sum (Transfer.debitAt (dischargeIndex event) state)))
-    (failedDebitConserves (dischargeIndex event) state refl)
-... | suc k =
-  trans
-    (rightOneIsSucc (V.sum (Transfer.debitAt
-      (dischargeIndex event) state)))
-    (Transfer.successfulDebitDecreasesTotalByOne
-      (dischargeIndex event) state k refl)
+    (cong
+      (λ vector →
+        V.sum vector + actualDischargedAmount event state)
+      (dischargeIsOriginalDebit (dischargeIndex event) state))
+    (outflowIndexBalance (dischargeIndex event) state)
 
 data OriginalFaceExchange : Set where
   addAtOuterFace : OriginalOuterFaceInjection → OriginalFaceExchange
