@@ -22,7 +22,7 @@ module DASHI.Moonshine.AbelE8ThetaParityProjectorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; _+_; _*_)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl; cong; sym)
 open import Data.Nat.Solver using (module +-*-Solver)
 open +-*-Solver using (solve; _:*_; _:+_; con; _:=_)
 
@@ -83,7 +83,7 @@ e8ThetaSignedJacobiProjector :
     + thetaFourEighthPowerPositiveCoefficient C
     + thetaTwoEighthPowerCoefficient C
 e8ThetaSignedJacobiProjector C
-  rewrite halfParityCancellation C =
+  rewrite sym (halfParityCancellation C) =
     thetaParityProjectorArithmetic
       (integerResidueZero C)
       (integerResidueTwo C)
