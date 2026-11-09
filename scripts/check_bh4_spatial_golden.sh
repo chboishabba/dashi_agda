@@ -5,6 +5,21 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 ROOT=DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+# Default mode checks synthetic finite regressions and the Agda Golden,
+# but does NOT certify missing original Rhea or physiological evidence.
+# Opt-in strict source mode never accepts an incomplete original dataset.
+if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
+  test -s artifacts/biology/rhea-kitzerow-bh4-reactions.json || {
+    echo "FAIL CLOSED: strict BH4 source requires original Rhea certificate" >&2
+    exit 2
+  }
+  for required in BH4_ORIGINAL_PARAMETERS_PATH BH4_ORIGINAL_CANDIDATE_PATH BH4_ORIGINAL_ASSAY_PATH; do
+    test -n "${!required:-}" && test -s "${!required}" || {
+      echo "FAIL CLOSED: strict BH4 source requires $required input" >&2
+      exit 2
+    }
+  done
+fi
 MODULES=(
   DASHI/Biology/BH4OneMoleculeSpatialFutureMinimalityExact.agda
   DASHI/Biology/BH4SpatialOriginalQDPRStoichiometryExact.agda
@@ -73,4 +88,8 @@ if [ ! -f scripts/run_agda29_parallel_check.sh ]; then
   exit 2
 fi
 bash scripts/run_agda29_parallel_check.sh "$ROOT"
-echo "BH4 SPATIAL GOLDEN CHECKER COMPLETED; exact-head receipt required."
+if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
+  echo "BH4 SOURCE-QUALIFIED INPUT CHECKS AND NATIVE GOLDEN COMPLETED; independent rate and causal verification remain OPEN."
+else
+  echo "BH4 FINITE/AGDA GOLDEN COMPLETED; original 29x12 source and physical rates remain separate OPEN gates."
+fi
