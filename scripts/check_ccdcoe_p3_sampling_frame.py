@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CCDCOE P3 census check: exact equality with a predeclared article frame.
 
-V3 binds original document metadata AND the intervention cutoff/receipt. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
+V4 also requires unique discovery locators and publication metadata for excluded units. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
 verify that the frame contains every historical article or that treatment was
 assigned independently of outcome. No historical GCC case is admitted here.
 """
@@ -15,7 +15,7 @@ from pathlib import Path
 
 ARMS = {'GCC-linked-outlet', 'comparison-outlet'}
 PERIODS = {'before', 'after'}
-SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v3'
+SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v4'
 
 
 def require(condition, reason):
@@ -62,6 +62,7 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
     units = frame.get('units')
     require(isinstance(units, list) and units, 'nonempty predeclared frame')
     registered = {}
+    seen_discovery_locators = set()
     eligible = set()
     excluded = set()
     expected_cells = {(a, p) for a in ARMS for p in PERIODS}
@@ -72,6 +73,18 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
         require(uid not in registered, 'duplicate original unit in frame')
         require(u.get('arm') in ARMS and u.get('period') in PERIODS, 'invalid arm/period')
         require(type(u.get('eligible')) is bool, 'eligibility must be boolean')
+        # Denominators cannot include untraceable or duplicated exclusions.
+        # A locator identifies an article edition found by the search frame,
+        # not an assertion that its text was downloaded or authenticated.
+        locator = u.get('discovery_locator')
+        require(isinstance(locator, str) and locator.strip(),
+                'source discovery locator required for every frame unit')
+        require(locator not in seen_discovery_locators,
+                'duplicate discovery locator in frame')
+        seen_discovery_locators.add(locator)
+        for field in ('outlet', 'date'):
+            require(isinstance(u.get(field), str) and u[field].strip(),
+                    'discovered unit metadata: ' + field)
         if u['eligible']:
             # Freeze original-document identity, not merely an analyst's row ID.
             # The comparison consumer verifies actual bytes separately.
@@ -134,11 +147,14 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
 
 def self_test():
     units = [{'id': f'{a}:{p}', 'arm': a, 'period': p, 'eligible': True,
+              'discovery_locator': f'fixture://{a}/{p}',
               'source_sha256': hashlib.sha256((a + ':' + p).encode('utf-8')).hexdigest(),
               'source_file': f'{a}:{p}.txt', 'outlet': a,
               'date': '1992-01-01' if p == 'before' else '1994-01-01'}
              for a in sorted(ARMS) for p in sorted(PERIODS)]
     units.append({'id': 'excluded', 'arm': 'comparison-outlet', 'period': 'before',
+                  'discovery_locator': 'fixture://excluded',
+                  'outlet': 'comparison-outlet', 'date': '1992-01-01',
                   'eligible': False, 'exclusion_reason': 'predeclared out-of-scope edition'})
     frame = {'schema': SCHEMA, 'frame_id': 'SYNTHETIC-ONLY',
              'frozen_before_coding': True, 'inclusion_rule': 'fixture rule',
@@ -202,6 +218,10 @@ def self_test():
         ('frozen_receipt_missing', lambda f, m: f.update(intervention_receipt='  '), 'frozen intervention source receipt required'),
         ('article_crosses_cutoff', lambda f, m: f['units'][0].update(date='1993-12-31' if f['units'][0]['period'] == 'before' else '1992-12-31'), 'article period disagrees with frozen intervention cutoff'),
         ('invalid_article_date', lambda f, m: f['units'][0].update(date='not-a-date'), 'invalid eligible original publication date'),
+        ('untraceable_exclusion', lambda f, m: f['units'][-1].update(discovery_locator='  '), 'source discovery locator required'),
+        ('duplicate_locator', lambda f, m: f['units'][-1].update(discovery_locator=f['units'][0]['discovery_locator']), 'duplicate discovery locator in frame'),
+        ('missing_excluded_outlet', lambda f, m: f['units'][-1].pop('outlet'), 'discovered unit metadata: outlet'),
+        ('missing_excluded_date', lambda f, m: f['units'][-1].pop('date'), 'discovered unit metadata: date'),
     ]
     for name, mutate, message in cases:
         f, m = deepcopy(frame), deepcopy(measured)
