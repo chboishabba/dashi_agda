@@ -63,7 +63,13 @@ def validate(manifest, source_root, *, synthetic=False):
         demand(span_key not in passage_keys, 'same source passage double counted')
         passage_keys.add(span_key)
         local=p['relative_path']; demand(isinstance(local,str) and local and not Path(local).is_absolute(), 'relative path')
-        file=(root/local).resolve(); demand(file.is_relative_to(root) and file.is_file(), 'source file traversal/missing')
+        rel=Path(local)
+        demand('..' not in rel.parts,'source path traversal')
+        candidate=root/rel
+        demand(not any(node.is_symlink() for node in (candidate,*candidate.parents) if node != root and root in node.parents),
+               'source symlink not permitted')
+        file=candidate.resolve()
+        demand(file.is_relative_to(root) and file.is_file(), 'source file traversal/missing')
         raw=file.read_bytes(); digest=hashlib.sha256(raw).hexdigest()
         document_key=(p['source_id'],p['edition'])
         prior=source_digests.get(document_key)
@@ -101,20 +107,41 @@ def self_test():
     with tempfile.TemporaryDirectory() as tmp:
         root=Path(tmp); raw=b'Original SYNTHETIC passage. Not original historical footage.'
         (root/'text.bin').write_bytes(raw)
+        split=len(raw)//2
         codes_a={key:sorted(values)[0] for key,values in VALID.items()}
         codes_b=codes_a.copy()
-        p={'id':'test1','source_id':'gcc_march8_policy_statement','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':len(raw),'passage_sha256':hashlib.sha256(raw).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
+        p={'id':'test1','source_id':'gcc_march8_policy_statement','relative_path':'text.bin','sha256':hashlib.sha256(raw).hexdigest(), 'start_byte':0,'end_byte':split,'passage_sha256':hashlib.sha256(raw[:split]).hexdigest(), 'original_author':'SYNTHETIC GCC test only','edition':'synthetic', 'reviews':[{'reviewer_id':'A','receipt':'synthetic A', 'codes':codes_a},{'reviewer_id':'B','receipt':'synthetic B', 'codes':codes_b}]}
         item={'schema':'dashi.ccdcoe.p3.dual_coder_receipts.v1','passages':[p]}
         positive=validate(item,root,synthetic=True); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
         demand(len(positive['source_stratified_counts'])==1,'synthetic source stratification')
         demand(all(sum(v['reviewer_1'].values())==1 and sum(v['reviewer_2'].values())==1 for source in positive['source_stratified_counts'].values() for v in source.values()), 'source counts / denominator')
         import copy
-        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('overlapping_span',lambda x:x['passages'].append(dict(x['passages'][0],id='overlap',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest()))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
+        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('overlapping_span',lambda x:x['passages'].append(dict(x['passages'][0],id='overlap',start_byte=1,passage_sha256=hashlib.sha256(raw[1:split]).hexdigest()))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=split,end_byte=len(raw),passage_sha256=hashlib.sha256(raw[split:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
         (root/'other.bin').write_bytes(b'MUTATED')
+        expected_failures = {
+            'bytes_hash':'original bytes digest',
+            'passage_hash':'passage digest',
+            'path_traversal':'source path traversal',
+            'same_reviewer':'reviewer independence ID',
+            'effect':'unearned promotion',
+            'fake_intent':'unearned promotion',
+            'no_second_coder':'independent review count',
+            'bad_code':'invalid code: uncertainty',
+            'fake_source':'source cohort',
+            'invalid_span':'byte interval',
+            'duplicate_span':'same source passage double counted',
+            'overlapping_span':'overlapping source passages would double count evidence',
+            'reviewer_panel_drift':'pooled kappa requires same ordered reviewer panel',
+            'same_edition_conflicting_bytes':'same original edition has contradictory bytes',
+        }
         for name,change in tests:
             changed=copy.deepcopy(item); change(changed)
-            try:validate(changed,root,synthetic=True)
-            except (ValueError,KeyError,TypeError):continue
+            try:
+                validate(changed,root,synthetic=True)
+            except ValueError as error:
+                demand(expected_failures[name] in str(error),
+                       'wrong rejection path for '+name+': '+str(error))
+                continue
             raise AssertionError('negative test accepted: '+name)
         try:validate(item,root)
         except ValueError:pass
