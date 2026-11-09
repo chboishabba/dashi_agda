@@ -131,3 +131,7 @@ import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeRawEdgeStreamExact
 -- All-word original E20 signed item/strict partition numeric observation through actual native token parser.
 -- Proof-side count and signed value only: bit-costed E20 runtime remains OPEN.
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeItemStreamExact
+
+-- Native selected-token signed ℤ score matches original rawSparseScore under exact paired raw-edge numeric alignment.
+-- Native two-lane ledger-to-signed-ℤ observation and whole graph still OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeSelectedSignedScoreExact
