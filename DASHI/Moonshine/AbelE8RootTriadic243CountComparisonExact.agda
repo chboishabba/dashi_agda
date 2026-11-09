@@ -15,7 +15,8 @@ module DASHI.Moonshine.AbelE8RootTriadic243CountComparisonExact where
 -- theta/modular analyticity inferred from the matching cardinalities.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; sym; trans)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Agda.Builtin.Nat using (Nat; _+_; _*_; _∸_)
 
 import DASHI.Algebra.Trit.E8RootEnumeration as Roots
