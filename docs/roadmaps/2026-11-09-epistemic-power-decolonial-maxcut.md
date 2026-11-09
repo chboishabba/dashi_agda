@@ -408,3 +408,5 @@ Latest status: source-written on the existing PR branch, no K0 or K4 work reques
 - K3-04 source-paid historical racial formation/courtroom power mechanisms; no simplistic inference from demographics to role or institutional ideology.
 
 All new Agda declarations are source-written and NOT kernel-checked. K0/K4 deliberately excluded. **Do not repeat generic no-factorisation theory or create unearned empirical receipts.**
+
+**Attribution refinement:** `CrenshawHistoricalCarceralSourceAtlasExact.agda` now separately preserves the original 2015 publisher byline (“By Kimberlé Williams Crenshaw / with Priscilla Ocen and Jyoti Nanda”) and Columbia's indexed three-contributor catalogue surface. The two metadata views have different provenance and must not be flattened into a claim about credit beyond their own sources. This is a provenance correction, not empirical validation.
