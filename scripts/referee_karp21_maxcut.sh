@@ -85,6 +85,7 @@ python3 scripts/check_karp21_binary_header_budget.py
 python3 scripts/check_karp21_whole_binary_verifier.py
 python3 scripts/check_karp21_first_enabled_selected_trace.py
 python3 scripts/check_karp21_original_raw_machine_step.py
+python3 scripts/check_karp21_signed_ledger_width.py
 python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
@@ -175,6 +176,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryCountBudgetFuelExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryAdderWidthBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeSignedLedgerWidthBudgetExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTypedAcceptanceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierOriginalExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda
