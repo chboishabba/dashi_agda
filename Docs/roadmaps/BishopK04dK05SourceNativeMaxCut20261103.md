@@ -16,6 +16,19 @@
 
 **Implementation principle / fastest cut:** A → C1 is the highest shared return; run B independently; do C2 and then D on actual source carriers. Do not implement new finite derivatives, Basel sums, generic continuity, ad hoc atan/pi definitions or abstract gamma authorities. Lean `dashi_lean4` PR #104 is a mathematical donor, not same-object Agda evidence. Agda #1466 supplies native complex-series/trig ABI; RH #1419/#1434 supply pole-quotient/route infrastructure but **not** native Gamma or completed xi analytic values.
 
+### 2026-11-09 P0 implementation: source-exponential finite-stage limit
+
+New `DASHI/Analysis/BishopOriginalNegativeLogExpFiniteStageLimitExact.agda` (source-written, Agda kernel pending), integrated with all three golden TOE roots and Bishop checker:
+
+- `originalNegativeLogFiniteInputsConverge`: actual negatives of original `Sequence.SeriesOf (sourceNegativeLogTerm x)` converge to negative of original `sourceNegativeLogValue` for every `0<x<1`.
+- `originalNegativeLogFiniteExponentialConverges`: original `Exp.bishopExp` applied to these finite negative sums converges to the **same** actual `Exp.bishopExp (-sourceNegativeLogValue)`, using the previously established native `originalBishopExpSequentiallyContinuous`. This is unconditional.
+- `originalNegativeLogTerminalFromFiniteEvaluation`: a finite-stage source evaluation limit `exp_B(-L_N(x))→1-x` gives the actual required K04d LOG equality via pinned Bishop `Sequence.uniqueness-of-limits`.
+- `originalNegativeLogFiniteEvaluationFromTerminal`: converse convergence transport, proving the terminal identity and literal finite-stage convergence goal are equivalent.
+
+**Reduced remaining P0 leaf:** prove
+`Sequence._ConvergesTo_ (originalNegativeLogFiniteExponential x) (1-x)`
+for original `0<x<1`. This is an explicit *actual finite-stage limit* involving the literal original logarithmic coefficients, not an arbitrary record field or a new logarithm. The theorem must be proved by genuine finite-stage inequalities or validated analytic coefficient composition; this source owner does NOT provide that last limit. Neither P0 nor P1/P2/P3 is marked closed merely because this analytic reduction is available.
+
 ### 2026-11-09 implementation addition: original Nat-log term/limit coherence
 
 New **source-written** `DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceExact.agda` proves:
