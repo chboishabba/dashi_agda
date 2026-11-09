@@ -273,3 +273,68 @@ module Interpretation {G : Set}
     with Presented.allElementsHaveSourceWords source g
   ... | Presented.witnessed word proof = word , proof
 
+
+
+  ------------------------------------------------------------------------
+  -- TWO-SIDED SETOID EQUIVALENCE WHEN THE ACTUAL SELECTED GROUP
+  -- HAS NO ADDITIONAL RELATIONS. The reverse kernel comparison is
+  -- explicitly required. No quotient group equality is postulated.
+  ------------------------------------------------------------------------
+
+  module SelectedEquivalence
+    (generated : Presented.PresentedByY443Nodes gi nodes)
+    (faithful : NoExtraSelectedRelations) where
+
+    fromSelected : G → Expr
+    fromSelected g =
+      Presented.sourceWord
+        (Presented.allElementsHaveSourceWords generated g)
+
+    toAfterFrom : (g : G) → eval (fromSelected g) ≡ g
+    toAfterFrom g =
+      Presented.interpretation
+        (Presented.allElementsHaveSourceWords generated g)
+
+    fromAfterTo : (x : Expr) → fromSelected (eval x) ≈₈₀ x
+    fromAfterTo x =
+      reflectsEquality faithful
+        (fromSelected (eval x)) x (toAfterFrom (eval x))
+
+    fromRespectsSelectedEquality :
+      ∀ {g h : G} → g ≡ h →
+      fromSelected g ≈₈₀ fromSelected h
+    fromRespectsSelectedEquality {g} {h} equality =
+      reflectsEquality faithful
+        (fromSelected g) (fromSelected h)
+        (Algebra.trans
+          (toAfterFrom g)
+          (Algebra.trans equality
+            (Algebra.sym (toAfterFrom h))))
+
+    fromPreservesProductModulo80 :
+      (g h : G) →
+      fromSelected (Pair.multiply gi g h)
+        ≈₈₀
+      Presented.multiply (fromSelected g) (fromSelected h)
+    fromPreservesProductModulo80 g h =
+      reflectsEquality faithful
+        (fromSelected (Pair.multiply gi g h))
+        (Presented.multiply (fromSelected g) (fromSelected h))
+        (Algebra.trans
+          (toAfterFrom (Pair.multiply gi g h))
+          (Algebra.cong₂ (Pair.multiply gi)
+            (Algebra.sym (toAfterFrom g))
+            (Algebra.sym (toAfterFrom h))))
+
+    fromPreservesInverseModulo80 :
+      (g : G) →
+      fromSelected (Pair.inverse gi g)
+        ≈₈₀ Presented.inverse (fromSelected g)
+    fromPreservesInverseModulo80 g =
+      reflectsEquality faithful
+        (fromSelected (Pair.inverse gi g))
+        (Presented.inverse (fromSelected g))
+        (Algebra.trans
+          (toAfterFrom (Pair.inverse gi g))
+          (Algebra.cong (Pair.inverse gi)
+            (Algebra.sym (toAfterFrom g))))
