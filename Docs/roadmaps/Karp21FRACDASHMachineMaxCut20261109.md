@@ -1,7 +1,29 @@
 
 # Karp-21 / FRACDASH compiled-machine maximum cut — 2026-11-09
 
-**Current state:** Full max-cut remains OPEN. The actual native signed-bit-token ↔ original signed-ℤ theorem `karpNativeSignedTokenValueMatchesOriginal` is now SOURCE-WRITTEN for ALL original input bitwords, using successful-frame decomposition and failure preservation. Exact-head Agda kernel receipt remains OPEN. Original complete signed graph, native score, N21 machine, physical polynomial clock, InNP, E20, Cook–Levin, Karp network and P-vs-NP lower bound remain OPEN.
+**Current state (9 November 2026, latest PR head):** Full max-cut remains OPEN. SOURCE-WRITTEN only: all-word actual native signed-token ↔ original signed-ℤ equality, successful-gamma canonical frame extraction, signed original raw-edge stream alignment, and newly source-written E20 counted signed-item/strict-partition numeric observation. **No exact-head Agda 2.9 / parallel_checker kernel receipts.** Complete binary endpoints/whole validated graph, native signed ledger score, full N21 machine/acceptance, physical polynomial clock, PR.InNP, E20 costed compiler, Cook–Levin, remaining Karp network and independent P-vs-NP SAT lower bound remain OPEN.
+
+
+## CURRENT CANONICAL PHASE / DELIVERABLE / EXACT-LEMMA CUT (supersedes historical notes)
+
+| Phase | Completed/source-written input | NEXT exact unpaid lemma or deliverable | Closure receipt |
+|---|---|---|---|
+| P0-A signed numerics | `reverseValueSameOriginalPayload`, `originalSuccessorNumberDecomposes`, `positivePayloadValueCorrect`, `negativePayloadValueCorrect`, `karpNativeSignedTokenValueMatchesOriginal`, `nativeGammaSuccessIsOriginalCanonicalFrame` | Kernel-check transitive --safe import graph; retain actual `Signed.readSignedBinary` and original `Old.readSignedGamma` | Agda 2.9 exact-head + parallel_checker **OPEN** |
+| P0-B signed raw-edge stream | `oneNativePairedRawEdgeSameOriginal`, `nativePairedRawEdgesSameOriginal` | `nativeGraphEndpointsConsumeInputBits`: replace proof-side unary `Gamma.readGamma` u/v with actual bit-native addresses; `nativeOriginalGraphWordFieldsSame` full header, order, threshold, suffix, malformed frame | OPEN |
+| P0-C ledger signed score | `nativePairedLedger`, `nativePairedLedgerSameOriginalRejection`, `accumulateEmptyPositive`, `accumulateEmptyNegative` | `nativeSelectedTokensRespectRawWeights`; `nativeSignedLedgerIntegerEqualsOriginalTraceScore`; `nativeSparseScoreSameOriginalRawSparseScore` | OPEN |
+| P0-D original N21 machine | `karpFractranFirstEnabledSameN21EdgeStep` one-edge; generic `cachedStepCorrect` | `karpFractranFirstEnabledSameVerifierStep` original full graph / history / witness cursor / signed ledger, with malformed and halt branches | OPEN |
+| P0-E acceptance/trace | `karpOriginalTraceSameTypedN21AllWords`, `pairedTraceOriginalScoreExact` | `karpNativeThresholdDecisionSameOriginal`; `karpFractranDecodePreservesAcceptance`; `karpFractranTraceRebuildExact` | OPEN |
+| P0-F bit machine | `gammaNativeInspectionLinear`, `splitLastInspectionLinear`, `additionInspectionLinear`; polynomial *primitive comparison counts* | `karpFractranBitMachineClockPolynomial` with all parser scans, big-int ops, trie, head motion, allocated bits, rule scheduling, residual and output | OPEN |
+| P0-G membership | `karpWeightedMaxCutInNPFromMachineReceipts` conditional constructor and original same-word iff | instantiate actual `PR.polynomialTimeVerifier`, original length-bound `polynomialCertificateBound`, then original `PR.InNP` | OPEN |
+| P1 E20 | `nativeObservedItemsSameOriginal`, `nativeObservedPartitionSameOriginal` SOURCE numerical stream after genuine token parser | original E20 compiler with bit-native count and cost; canonical Cell/Bits Cook–Levin accepting-run compiler and costed inverse | OPEN |
+| P2 Karp-21 | original E01–E19/N01–N20 owner modules and historical network | verified original reductions + remaining 20 NP memberships + `CertifiedKarpNetwork` under same cost | OPEN |
+| Separate P != NP | PR #1129 coded finite TM, quiescent runtime and resource quotation boundary | actual code-consuming behavioural self-specializer; same-object strict resource fixed point; universal `SATNotInP`; only then `PNotEqualsNP` | OPEN |
+
+**Status semantics:** SOURCE-WRITTEN is a committed candidate, not a kernel proof; test PASS is finite evidence; OPEN has no valid terminal receipt. A code/score observation using proof-side Nat is not a physical binary-Turing-machine clock. P≠NP is *independent* of Karp-21 NP membership and NP-completeness.
+
+### New original E20 all-word item-stream deliverable
+
+`Karp21SignedGammaNativeItemStreamExact.agda` adds `readNativeObservedItems` (actual `Native.readSignedBinary` per token plus proof-side `interpretNativeToken`), `nativeObservedItemsSameOriginal` (all counts/words, signed values/rejection/suffix), and `decodePartitionViaNativeObservedItems` / `nativeObservedPartitionSameOriginal` (strict original `Old.readGamma` count/remaining-length test and suffix exhaustion). **Source-written, no Agda receipt.** This is not a new production binary counter or a replacement E20 grammar and cannot discharge `PR.polynomialTimeVerifier`.
 
 ## Governance and sources
 
@@ -133,15 +155,15 @@ Both original Karp roots import all three Agda owners. The focused `referee_karp
 | Phase | Gate | Exact owner/target | Status |
 |---|---|---|---|
 | P0.0 | Compiled priority | `refreshStoredCorrect`, `firstRefreshedCorrect`, `cachedStepCorrect` | SOURCE WRITTEN generic; Agda receipt OPEN |
-| P0.1 | Signed-gamma and score | `karpNativeSignedTokenValueMatchesOriginalEncodedFrame` SOURCE: complete-frame actual native `SignedMagnitudeBits` ℤ value = original `readSignedGamma` (zero/± and suffix); `reverseValueSameOriginalPayload`, `originalSuccessorNumberDecomposes`, `sourceMagnitudePositive` SOURCE. All-word successful-frame lift, `readRawEdges` alignment, full score equality OPEN | PARTIAL SOURCE; Agda receipt OPEN |
+| P0.1 | Native signed-gamma original arithmetic | `karpNativeSignedTokenValueMatchesOriginal` ALL-WORD SOURCE; `nativeGammaSuccessIsOriginalCanonicalFrame` SOURCE; `nativePairedRawEdgesSameOriginal` ORIGINAL SIGNED-EDGE STREAM SOURCE; `nativeObservedItemsSameOriginal` / `nativeObservedPartitionSameOriginal` E20 STREAM SOURCE. Native **binary endpoint/count**, full graph, ledger score and bit clock OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.2 | N21 rule implementation | Original endpoint-guard/binary-ledger one-edge N21 instantiation in `Karp21FractranN21EndpointScoreStepExact`; full graph/cursor machine OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.3 | First-enabled simulation | `karpFractranFirstEnabledSameVerifierStep` — instantiate the generic machine and match original N21 next step including rejection/halting | OPEN |
 | P0.4 | Readout/acceptance | Original ℤ all-word trace and typed N21 equality SOURCE; `nativePairedLedgerSameOriginalRejection` SOURCE; native binary threshold acceptance `karpFractranDecodePreservesAcceptance` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.5 | Reproducible trace/residual | `rawSelectedTraceRebuildsOriginalScore`, `pairedTraceProjectsToOriginal`, `pairedTraceOriginalScoreExact` source-written; native binary factor/trace reconstruction OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.6 | Cost model | `karpFractranBitMachineClockPolynomial` with program size, guard scans/frontier updates, bit widths, writes, allocations, pointer/tape motion, trace/residual cost | OPEN |
-| P0.7 | Original graph weld | `trieAdmitIffOriginalHistoryConsistency`; `nativeGraphEndpointsConsumeInputBits`; `nativeSparseScoreSameOriginalRawSparseScore`; `nativeN21SameWordAndClock` | OPEN |
+| P0.7 | Original graph weld | Signed-weight edge-stream `nativePairedRawEdgesSameOriginal` SOURCE (still source Nat endpoints); `trieAdmitIffOriginalHistoryConsistency`, `nativeGraphEndpointsConsumeInputBits`, full validated graph/signed-ledger `nativeSparseScoreSameOriginalRawSparseScore`, `nativeN21SameWordAndClock` OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P0.8 | Membership | Construct the original N21 `PR.InNP` via its actual polynomialTimeVerifier / witness bound | OPEN |
-| P1.1 | E20 | Uniform original complete-graph word compiler and all-word clock (including malformed cases) | OPEN |
+| P1.1 | E20 | `nativeObservedItemsSameOriginal`, `nativeObservedPartitionSameOriginal` SOURCE for strict original signed item/partition word numeric and suffix equivalence; **runtime remains Nat-count proof-side**. Original E20 costed source compiler and full bit clock OPEN | PARTIAL SOURCE; Agda receipt OPEN |
 | P1.2 | Cook–Levin | Original Cell/Bits accepting-run compiler, canonical specialization and polynomial clock | OPEN |
 | P2 | Historical Karp network | E01–E19 reductions, N01–N20 membership and `CertifiedKarpNetwork` | OPEN |
 | P3 | Referee | Agda 2.9 exact-head Golden plus original `parallel_checker` receipts, no CI dependence | OPEN |
