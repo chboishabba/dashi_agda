@@ -111,6 +111,74 @@ originalPlaquetteNeverDisjointFromItself p disjoint =
           (Torus.first (Plaquette.planeAxes (Torus.second p)))
   in disjoint head Torus.here Torus.here
 
+
+------------------------------------------------------------------------
+-- ACTUAL FINITE ORIGINAL FOUR-TORUS PLAQUETTE ENUMERATION.
+-- Every source plaquette is in this list; incident support is computed
+-- by filtering with a proof-producing positive-link membership decision.
+-- This is NOT a user-selected subset and cannot be vacuously empty
+-- when the original link has an actual incident plaquette.
+------------------------------------------------------------------------
+
+originalAllPlaquettes :
+  (n : Nat) → List (Plaquette.PeriodicPlaquette n)
+originalAllPlaquettes n =
+  Torus.cartesian
+    (Torus.elements (Torus.periodicTorus4Finite (suc n)))
+    (Torus.allCyclicIndices Plaquette.six)
+
+originalAllPlaquettesComplete :
+  ∀ {n} (p : Plaquette.PeriodicPlaquette n) →
+  Torus._∈_ p (originalAllPlaquettes n)
+originalAllPlaquettesComplete {n} p =
+  Torus.cartesianMembership
+    (Torus.complete (Torus.periodicTorus4Finite (suc n))
+      (Torus.first p))
+    (Torus.allCyclicIndicesComplete (Torus.second p))
+
+originalIncidentPlaquettesFilter :
+  ∀ {n} (bond : Bond n) →
+  List (Plaquette.PeriodicPlaquette n) →
+  List (Plaquette.PeriodicPlaquette n)
+originalIncidentPlaquettesFilter bond [] = []
+originalIncidentPlaquettesFilter bond (p ∷ rest)
+  with decideBondIn bond (Source.originalFourPositiveBonds p)
+... | Torus.yes _ = p ∷ originalIncidentPlaquettesFilter bond rest
+... | Torus.no _ = originalIncidentPlaquettesFilter bond rest
+
+originalIncidentPlaquettes :
+  ∀ {n} (bond : Bond n) →
+  List (Plaquette.PeriodicPlaquette n)
+originalIncidentPlaquettes {n} bond =
+  originalIncidentPlaquettesFilter bond (originalAllPlaquettes n)
+
+-- Every output plaquette really has the original indicated positive
+-- link among its four boundary variables, with a native membership
+-- witness. No abstract incident-to-source bridge is postulated.
+incidentFilterSound :
+  ∀ {n} (bond : Bond n)
+    (ps : List (Plaquette.PeriodicPlaquette n))
+    (p : Plaquette.PeriodicPlaquette n) →
+  Torus._∈_ p (originalIncidentPlaquettesFilter bond ps) →
+  Torus._∈_ bond (Source.originalFourPositiveBonds p)
+incidentFilterSound bond [] p ()
+incidentFilterSound bond (first ∷ rest) p membership
+  with decideBondIn bond (Source.originalFourPositiveBonds first)
+... | Torus.yes member with membership
+...   | Torus.here = member
+...   | Torus.there tailMember =
+      incidentFilterSound bond rest p tailMember
+... | Torus.no _ =
+      incidentFilterSound bond rest p membership
+
+originalIncidentPlaquetteSound :
+  ∀ {n} (bond : Bond n)
+    (p : Plaquette.PeriodicPlaquette n) →
+  Torus._∈_ p (originalIncidentPlaquettes bond) →
+  Torus._∈_ bond (Source.originalFourPositiveBonds p)
+originalIncidentPlaquetteSound {n} bond p =
+  incidentFilterSound bond (originalAllPlaquettes n) p
+
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
 -- 1. Enumerate every original plaquette incident on each original bond.
