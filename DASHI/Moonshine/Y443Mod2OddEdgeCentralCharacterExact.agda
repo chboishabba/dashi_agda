@@ -89,7 +89,7 @@ parityAppend q (x ∷ xs) ys =
 
 parityPowerTwoStep :
   (q : Y.Node → Bool) (w : Y.Word) (n : Nat) →
-  parityWord q (Y.powerWord w (suc (Agda.Builtin.Nat.suc n)))
+  parityWord q (Y.powerWord w (suc (suc n)))
     ≡ parityWord q (Y.powerWord w n)
 parityPowerTwoStep q w n =
   trans
@@ -260,7 +260,8 @@ module Selected (charge : Y.Node → Bool) where
     Pair.RelatorsSatisfied boolInverseGroup charge Y.monsterRelators →
     SourceEdgeCentralParity
   originalRelatorsImplyParity holds = record
-    { ab1 = edge 12 Y.a Y.b1
+    { ab1 = trans (sym (oddEdgeWordParity charge Y.a Y.b1))
+        (Pair._∧_.left (dropSatisfied charge 12 holds))
     ; b1c1 = trans (sym (oddEdgeWordParity charge Y.b1 Y.c1))
         (Pair._∧_.left (dropSatisfied charge 23 holds))
     ; c1d1 = trans (sym (oddEdgeWordParity charge Y.c1 Y.d1))
