@@ -18,12 +18,12 @@ module DASHI.Mathematics.Complexity.Karp21FractranOriginalRawTraceReplayExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
-open import Agda.Builtin.Nat using (zero)
+open import Agda.Builtin.Nat using (Nat; zero)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (_×_; _,_)
-open import Data.Integer.Base as Int using (ℤ; +_; _+_)
+open import Data.Integer.Base as Int using (ℤ; +_; _+_; _≤ᵇ_)
 open import Relation.Binary.PropositionalEquality using (sym; cong)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -36,7 +36,7 @@ import DASHI.Mathematics.Complexity.Karp21FinFreeRawSparseWordVerifierExact as R
 rawSelectedTrace :
   List Graph.RawEdge →
   Word.BitWord →
-  List (Agda.Builtin.Nat.Nat × Bool) →
+  List (Nat × Bool) →
   Maybe (List ℤ)
 rawSelectedTrace [] [] history = just []
 rawSelectedTrace [] (_ ∷ _) history = nothing
@@ -69,7 +69,7 @@ decodeTraceScore (just selected) = just (replayOriginalSignedTrace selected)
 rawSelectedTraceRebuildsOriginalScore :
   (edges : List Graph.RawEdge)
   (bits : Word.BitWord)
-  (history : List (Agda.Builtin.Nat.Nat × Bool)) →
+  (history : List (Nat × Bool)) →
   decodeTraceScore (rawSelectedTrace edges bits history)
     ≡ Runtime.rawSparseScore edges bits history
 rawSelectedTraceRebuildsOriginalScore [] [] history = refl
