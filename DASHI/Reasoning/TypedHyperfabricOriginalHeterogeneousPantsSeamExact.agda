@@ -21,6 +21,7 @@ module DASHI.Reasoning.TypedHyperfabricOriginalHeterogeneousPantsSeamExact where
 ------------------------------------------------------------------------
 
 open import DASHI.Core.Prelude
+open import Data.List.Base using (_++_)
 import DASHI.Reasoning.TypedHyperfabricCore as Fabric
 import DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact as Gluing
 import DASHI.Reasoning.TypedHyperfabricPantsNonvacuousSeamQuotientExact as Seam
