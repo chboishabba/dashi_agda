@@ -261,3 +261,11 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseGuardedCalib
 -- fill missing per-state energies, make a visual readout exact, or turn relative
 -- free energy into absolute thermodynamic free energy.
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamicsUncertaintyExact
+
+
+-- Hydrogen-assisted combustion/carbon-regeneration conditional audit (2026-11-09).
+-- Reuses existing conservation owners; claims, measured performance,
+-- inventor/assignee records and kernel validation remain separate.
+import DASHI.Chemistry.IndustrialReactiveEnergyBalanceExact
+import DASHI.Chemistry.HydrogenFuelCycleExact
+import DASHI.Chemistry.CarbonFuelRegenerationExact
