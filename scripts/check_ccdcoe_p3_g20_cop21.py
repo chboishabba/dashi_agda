@@ -80,8 +80,8 @@ def validate(m: dict) -> dict:
                                    "Invented exact date: "+k)
     claims=m["bounded_claims"]
     assert_present_or_stop(len(claims)==15, "15 intentionally bounded rows required")
-    assert_present_or_stop(len({r["id"] for r in claims})==10,
-                           "Claim IDs must be unique")
+    assert_present_or_stop(len({r["id"] for r in claims})==len(claims),
+                           "Every claim row must have a unique ID")
     for claim in claims:
         r=by_id[claim["source"]]
         assert_present_or_stop(claim["speaker"]==r["author"] and
