@@ -116,6 +116,12 @@ def produce(config_path):
         raise ValueError("non-symmetric core-contracted one-electron tensor")
     out_dir=Path(config.get("output_dir",config_path.parent/"nickel_integrals")).resolve()
     out_dir.mkdir(parents=True,exist_ok=True)
+    # The selected MO basis is part of the physical input, not only its index list.
+    # Preserve the exact sorted coefficient matrix for independently checked
+    # shadow/walker/FCIDUMP frame identity.
+    selected_mo=out_dir/(label+".selected_mo.npy")
+    np.save(selected_mo,np.asarray(sorted_coeff,dtype="<f8"))
+    selected_mo_sha256=hashlib.sha256(selected_mo.read_bytes()).hexdigest()
     fcidump=out_dir/(label+".FCIDUMP")
     tools.fcidump.from_integrals(str(fcidump),h1,eri,8,8,nuc=effective_core,ms=0)
     receipt={"scope":"41-atom nickel source-geometry, RHF/STO-3G active (8e,8o)",
@@ -126,6 +132,8 @@ def produce(config_path):
              "charge_spin_source":config["electronic_state_source"],
              "orbital_selection_source":config["orbital_selection_source"],
              "active_orbital_indices_zero_based":indices,
+             "selected_mo_file":str(selected_mo),
+             "selected_mo_sha256":selected_mo_sha256,
              "ncore":ncore,"scf_energy_hartree":float(energy),
              "source_RHF_energy_hartree":PUBLISHED_RHF_HARTREE[label],
              "RHF_minus_source_hartree":source_delta,
