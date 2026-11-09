@@ -18,6 +18,9 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import os
+import sys
+import importlib.util
 import time
 
 def source_digest(path):
@@ -47,10 +50,20 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
 
     # Production document route. No ad-hoc chemists'/physicists'
     # ERI transposition or Cholesky factorization is introduced here.
-    converter=shutil.which("fcidump_to_afqmc.py")
-    if not converter:raise RuntimeError("ipie fcidump_to_afqmc.py not on PATH")
+    converter=os.environ.get("IPIE_FCIDUMP_CONVERTER") or shutil.which("fcidump_to_afqmc.py")
+    if not converter:
+        spec=importlib.util.find_spec("ipie")
+        if spec and spec.origin:
+            package_root=Path(spec.origin).resolve().parent
+            candidates=(package_root.parent/"tools"/"fcidump_to_afqmc.py",
+                        package_root/"tools"/"fcidump_to_afqmc.py")
+            converter=next((str(p) for p in candidates if p.is_file()),None)
+    if not converter or not Path(converter).is_file():
+        raise RuntimeError("pin ipie tools/fcidump_to_afqmc.py with IPIE_FCIDUMP_CONVERTER")
     out=receipt_file.parent/(receipt["structure"]+"_active_ipie.h5")
-    subprocess.run([converter,"-i",str(fcidump),"-o",str(out),
+    command=([sys.executable,str(converter)] if str(converter).endswith(".py")
+             else [str(converter)])
+    subprocess.run(command+["-i",str(fcidump),"-o",str(out),
                     "-t",str(float(chol_threshold)),"-s","8"],check=True)
     if not out.is_file():raise RuntimeError("ipie Hamiltonian conversion produced no file")
     from ipie.utils.mpi import MPIHandler
