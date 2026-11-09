@@ -23,6 +23,7 @@ New **source-written** `DASHI/Analysis/BishopRiemannOriginalNatLogTermCoherenceE
 - `originalDirichletExponentialRespectsNatLog`: for every original Bishop complex `s` and Nat index `n`, pointwise native setoid equivalence of two Nat-log histories transports through both coordinates of the actual `bishopDirichletExponentialTerm`, using `bishopAnalyticExpCongruent`.
 - `configuredRound11TermsAreCanonical`: instantiates the previous theorem from preexisting `sourceOriginalConfiguredNatLogAgreement`, with no new arbitrary Nat-log equality input.
 - `originalDirichletLimitsRespectNatLog`: using the existing `dirichletValuesRespectTermwiseEquality`, transports original real and imaginary Bishop series limits between the two actual logarithm representations, given authentic majorant receipts.
+- `configuredRound11DirichletValueIsCanonical`: specializes both original coordinates and the actual Bishop limits to the original configured Round11 negative-log presentation versus the source-canonical Nat-log history; consumes authentic Basel bounds, not an opaque zeta equality field.
 
 This reduces a **specific P2 representation/evaluation seam** but does not create the external selected `ZetaHalfPlaneLayer` same-object equality. It is a proof term subject to exact-head Agda typecheck (no receipt yet). It has been imported into the three TOE roots and the dedicated Bishop checker. No expansion of P0/P1/P3 scope is justified by this change.
 
