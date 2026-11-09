@@ -25,7 +25,7 @@ class OriginalBondOrderWeldTests(unittest.TestCase):
 
     def test_untranslated_flux_can_change_observations(self):
         native = [0] * 54
-        native[0] = 1
+        native[1] = 1
         self.assertNotEqual(divergence(AGDA_EDGES, native),
                             divergence(SOLVER_EDGES, native))
 
