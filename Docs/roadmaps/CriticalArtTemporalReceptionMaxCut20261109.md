@@ -167,3 +167,7 @@ Installed in `DASHI.Culture.Everything`, `DASHI.Cognition.Everything`, and
 **Pareto remaining:** (1) obtain original scene/cut verification with independent receipts A1/A9; (2) instantiate existing temporal path and selective reopening to the real scene A2/A4; (3) prove all-states four-valued update square and genuine film-specific triadic witness A3/A5; (4) source-correct Peirce translation and actual pants seam A6/A7; (5) independent audience/intent causality A8 and exact-head Golden Agda acceptance A10.
 
 **Verification:** GitHub content commits and import/checker edits were made. The session cannot execute Agda 2.9 from the connector; no claimed kernel acceptance or positive original film intake result. The manifest's 0 scenes is deliberately fail-closed, not successful original film replication.
+
+### 9 November — A3 stronger closure
+
+`allEvidenceSupportSquaresCommute` in `CriticalArtSameSceneTransportExact.agda` now establishes equality of the two update orders for **all four** possible original `Four.PolarAssessment` states, by four constructor cases. This supersedes the preceding row's 'all-states law remains'. Still missing are actual original scene→support mapping and same-object transport compatibility with observed histories; Agda kernel acceptance OPEN. The evidence inventory's commutativity does not imply ordered spectator interpretation commutes.
