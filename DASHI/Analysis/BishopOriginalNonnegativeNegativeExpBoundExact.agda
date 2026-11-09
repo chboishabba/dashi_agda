@@ -26,6 +26,10 @@ import DASHI.Foundations.BishopExponentialCauchyProductExact as Product
 import DASHI.Foundations.BishopNegativeExponentialGlobalUnitIntervalExact as Positive
 import DASHI.Foundations.BishopNegativeLogGeometricSourceConvergenceExact as Log
 import DASHI.Analysis.BishopOriginalNegativeLogExpFiniteStageLimitExact as Finite
+import DASHI.Analysis.BishopOriginalFiniteLogExpStagewiseUniformDefectExact as Defect
+import DASHI.Analysis.BishopOriginalFiniteLogQuotientUniformModulusExact as Modulus
+import DASHI.Analysis.BishopOriginalFiniteLogExpQuotientDefectSplitExact as Split
+import DASHI.Analysis.BishopOriginalNegativeLogCrossWeightedIncrementExact as Cross
 
 originalPositiveExpOfNonnegative :
   (u : R.ℝ) →
@@ -120,3 +124,71 @@ originalFiniteNegativeLogExpAtMostOneNonnegative x xNN stage =
   RP.≤-respˡ-≃
     (RP.nonNegx⇒∣x∣≃x fNN)
     (originalNegativeExpAtMostOneForNonnegative u uNN)
+
+------------------------------------------------------------------------
+-- The ACTUAL P0.03 stagewise modulus now includes the origin x=0,
+-- and *every* finite stage including N=0. The positive-open-interval
+-- special case is no longer needed in the normalized mesh proof.
+------------------------------------------------------------------------
+
+originalFiniteLogErrorQuotientUniformModulusAtNonnegative :
+  (n : Nat) (radius x h : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (yNN : R.NonNegative (R._+_ x h)) →
+  (xInside : R._≤_ x radius) →
+  (yInside : R._≤_ (R._+_ x h) radius) →
+  R._≤_
+    (R.∣ Split.sourceOriginalErrorSlopeDefect n x h ∣)
+    (Defect.sourceOriginalUniformErrorBudget n radius h)
+originalFiniteLogErrorQuotientUniformModulusAtNonnegative
+    n radius x h xNN yNN xInside yInside =
+  let
+    f = Finite.originalNegativeLogFiniteExponential x n
+    b = Defect.sourceOriginalUniformErrorBudget n radius h
+    radiusNN = Modulus.sourceRadiusNonnegative
+      x radius xNN xInside
+    direct =
+      Defect.originalFiniteLogExpStagewiseUniformDefectWithFactor
+        n radius x h xNN yNN xInside yInside
+    upper =
+      RP.*-monoʳ-≤-nonNeg
+        (originalFiniteNegativeLogExpAtMostOneNonnegative x xNN n)
+        (Defect.sourceOriginalUniformErrorBudgetNonnegative
+          n radius h radiusNN)
+  in
+  RP.≤-trans direct
+    (RP.≤-respʳ-≃ (RP.*-identityˡ b) upper)
+
+originalFiniteNegativeLogExpUniformForcingAllNonnegative :
+  (n : Nat) (radius x : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (inside : R._≤_ x radius) →
+  R._≤_
+    (R.∣ Cross.sourceODEForcing n x ∣)
+    (R.pow radius n)
+originalFiniteNegativeLogExpUniformForcingAllNonnegative
+    n radius x xNN inside =
+  let
+    f = Finite.originalNegativeLogFiniteExponential x n
+    power = R.pow x n
+    powerNN = Seq.nonNegx⇒nonNegxⁿ n xNN
+    fNN = RP.0≤x⇒nonNegx
+      (RP.<⇒≤
+        (originalNegativeExpPositiveForNonnegative
+          (Finite.originalLogFinitePartial x n)
+          (originalFiniteLogNonnegative x xNN n)))
+    productNN = RP.nonNegx,y⇒nonNegx*y fNN powerNN
+    boundProduct =
+      RP.≤-respʳ-≃
+        (RP.*-identityˡ power)
+        (RP.*-monoʳ-≤-nonNeg
+          (RP.≤-respˡ-≃
+            (RP.nonNegx⇒∣x∣≃x fNN)
+            (originalFiniteNegativeLogExpAtMostOneNonnegative
+              x xNN n))
+          powerNN)
+    powerRadius = Seq.x≤y∧nonNegx⇒xⁿ≤yⁿ n inside xNN
+  in
+  RP.≤-respˡ-≃
+    (RP.nonNegx⇒∣x∣≃x productNN)
+    (RP.≤-trans boundProduct powerRadius)
