@@ -183,3 +183,7 @@ import DASHI.Mathematics.Complexity.Karp21ConcreteTapeCanonicalRunFlatWeldExact
 -- P0-E signed terminal inequality for ACTUAL atLeast/addBits and two-register ledger, original Int <=b.
 -- Source proof candidate: full word acceptance/bit clock remain separate.
 import DASHI.Mathematics.Complexity.Karp21NativeThresholdOriginalSignedDecisionExact
+
+-- P0-E actual binary two-lane signed threshold acceptance exactly original signed rawSparseScore for source-parsed raw edges.
+-- Full all-word graph validator and physical bit-TM clock still OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeParsedRawAcceptanceExact
