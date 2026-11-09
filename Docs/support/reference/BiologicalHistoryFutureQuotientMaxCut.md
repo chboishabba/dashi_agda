@@ -1572,3 +1572,12 @@ Refer to `Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md` fo
 7. Exact-head `parallel_checker` receipts, BH4 stacked-branch reconciliation, source-bound ITIR/PNF review.
 
 **Execution order:** Agda acceptance → local continuity + original chemistry → unified physical step → observation commuting square → intervention-safe minimal quotient → calibration/held-out tests. Preserve original 369/3×3×3 semantics, real pants junctions, source attribution, nonpromoting evidence boundaries and existing Golden imports. No CI-dependent acceptance surrogate.
+
+
+### 2026-11-09 P0 pointwise continuation — exact remaining lemmas
+
+The following native *original 3×3×3* Agda owner declarations were added source-first: `lookupAfterDebit`, `lookupAfterCredit`, `originalBondLocalSourceDebitIsPaid`, `originalBondLocalTargetCreditIsPaid`, `lookupAfterFaceInjection`, `originalBoundaryInjectionLocalReceipt`. They now supply source, target, and true exterior-face **local amount** identities. The existing global signed-charge theorem remains intact. **Unpaid:** combine these pointwise identities into `original369LocalSignedContinuityExact` for arbitrary actual 54-bond signed ionic histories and all six exterior face currents; then incorporate 29×12 chemistry and the full physical update. No exact-head Agda execution was possible in this connector pass.
+
+On companion PR #1454 the original acquired-panel source validator now checks a reaction → genuine native-bond product transport → reverse transport chronology on one chemical inventory for each available finite reaction column. This is an executable source-written regression, not a compiled original Agda stoichiometric proof and not measured turnover.
+
+D0 kernel/merge open; D1 local identities partial and original source matrix run open; D2 coupled admissible physical evolution open; D3 BH4/PNP/tissue one-step open; D4 original intervention-safe minimal quotient open; D5 held-out physiological predictive test open; D6 ITIR/PNF source review open. See `Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md` for the full theorem ledger.
