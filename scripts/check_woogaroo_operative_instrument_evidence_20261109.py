@@ -71,6 +71,13 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
     assert F("34.3")-F("27.3")==F("7.0")
     assert F("134.9")-F("56.4")==F("78.5")
     assert all(v is None for v in KNOWN_UNVERIFIED.values())
+    # C43 expedited revision category is limited to plans under 16-19,23;
+    # original offset plans in C27 are not in that listed class.
+    assert 27 not in set(range(16,20)) | {23}
+    # Year-20 clocks differ as defined in original approval Part C.
+    clock = {"Avonvale":"action_commencement","Esk":"action_commencement",
+             "Mount Walker West":"MWW_Voluntary_Declaration"}
+    assert clock["Esk"] == clock["Avonvale"] != clock["Mount Walker West"]
     if signed_pdf is not None:
         digest=hashlib.sha256(signed_pdf.read_bytes()).hexdigest()
         assert digest==PDF_SHA256,digest
@@ -82,7 +89,8 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
           "phaseOneDoesNotRequireMWWDeclarationUnderC25",
           "outsidePhaseOneNeedsMWWDeclaration",
           "currentPubliclyAcquiredEvidence",
-          "ordinary15thBusinessDayYYYYMMDD",
+          "ordinary15thBusinessDayYYYYMMDD", "offsetPlanNotAutomaticallyCoveredByC43",
+          "mountWalkerMonitoringClock",
           "avonvaleFinal","eskFinal","mountWalkerFinal"):
             assert marker in src,marker
         assert "postulate " not in src and "{!!}" not in src
@@ -114,6 +122,12 @@ def audit(signed_pdf:Path|None=None,agda:Path|None=None):
       "condition_27":"offset plan implementation at the times specified in signed approval",
       "condition_48":"named plans published within 15 business days of decision unless Minister agrees otherwise in writing",
       "condition_49":"current/superseded plans easily accessible and downloadable",
+      "condition_40":"all site-specific approved projected habitat-quality scores must be achieved by their milestone dates",
+      "condition_41":"each site offset outcome achieved by its separately defined Year 20 and maintained to expiry",
+      "condition_43":"unsubmitted revision route limited to plans under C16-C19 or C23; does not include C27 offset OAMPs",
+      "offset_milestone_time_origins":{"Avonvale":"action_commencement","Esk":"action_commencement","Mount Walker West":"its_Voluntary_Declaration"},
+      "independent_surveys_5_10_15_20_years":True,
+      "original_OAMP_revision_may_require_minister_written_approval":True,
       "condition_52":"notice to agency within 5 business days after action commencement",
       "ordinary_condition_48_deadline":str(deadline),
       "workdays_counted":[str(d) for d in dates],
