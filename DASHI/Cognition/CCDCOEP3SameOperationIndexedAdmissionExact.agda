@@ -146,3 +146,119 @@ selectedAPIDraftDoesNotAdmitFullOperation admission =
 
 -- These negative proofs concern the declared closed *inventory* only;
 -- neither proves a historical absence of delivery, intention or impact.
+
+------------------------------------------------------------------------
+-- UNIVERSAL MISSING-GATE CUT (not restricted to a chosen inventory).
+--
+-- Unlike a theorem which only pattern matches a closed data inventory,
+-- this works for EVERY externally selected indexed evidence predicate.
+-- If ONE scientifically required stage is uninhabited for a particular
+-- case, full operation admission for precisely that case is impossible.
+-- A newly located genuine receipt can change the premise, not the law.
+------------------------------------------------------------------------
+
+blockedByMissingExposure :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c recipientExposure → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingExposure E c missing admission =
+  missing (AdmitsOneOriginalCase.exposure admission)
+
+blockedByMissingMechanism :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c cognitiveMechanism → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingMechanism E c missing admission =
+  missing (AdmitsOneOriginalCase.mechanism admission)
+
+blockedByMissingCausalDiscriminator :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c causalDiscrimination → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingCausalDiscriminator E c missing admission =
+  missing (AdmitsOneOriginalCase.causal admission)
+
+blockedByMissingIntent :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c independentlySourcedIntent → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingIntent E c missing admission =
+  missing (AdmitsOneOriginalCase.intent admission)
+
+blockedByMissingOriginalIntervention :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c originalIntervention → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingOriginalIntervention E c missing admission =
+  missing (AdmitsOneOriginalCase.intervention admission)
+
+blockedByMissingAttribution :
+  (E : OriginalCase → EvidenceStage → Set)
+  (c : OriginalCase) →
+  (E c originalAttribution → ⊥) →
+  AdmitsOneOriginalCase E c → ⊥
+blockedByMissingAttribution E c missing admission =
+  missing (AdmitsOneOriginalCase.attribution admission)
+
+------------------------------------------------------------------------
+-- INDEPENDENT EVIDENCE INTERPRETATION / CONSERVATIVE REFINEMENT.
+--
+-- An empirically stricter evidence admissibility predicate Strong can
+-- be mapped stage-by-stage to Weak. Hence admitted Strong operations
+-- imply admitted Weak ones. The converse is NOT asserted. A mere
+-- archived catalogue can never be upgraded to a verified causal stage
+-- by this theorem; the refinement map must be supplied separately.
+------------------------------------------------------------------------
+
+record StagewiseEvidenceRefinement
+    (Strong Weak : OriginalCase → EvidenceStage → Set) : Set where
+  field
+    weaken :
+      (c : OriginalCase) (stage : EvidenceStage) →
+      Strong c stage → Weak c stage
+
+admissionWeakens :
+  (Strong Weak : OriginalCase → EvidenceStage → Set)
+  (refinement : StagewiseEvidenceRefinement Strong Weak)
+  (c : OriginalCase) →
+  AdmitsOneOriginalCase Strong c →
+  AdmitsOneOriginalCase Weak c
+admissionWeakens Strong Weak refinement c evidence =
+  record
+    { intervention = StagewiseEvidenceRefinement.weaken refinement
+        c originalIntervention (AdmitsOneOriginalCase.intervention evidence)
+    ; exposure = StagewiseEvidenceRefinement.weaken refinement
+        c recipientExposure (AdmitsOneOriginalCase.exposure evidence)
+    ; mechanism = StagewiseEvidenceRefinement.weaken refinement
+        c cognitiveMechanism (AdmitsOneOriginalCase.mechanism evidence)
+    ; causal = StagewiseEvidenceRefinement.weaken refinement
+        c causalDiscrimination (AdmitsOneOriginalCase.causal evidence)
+    ; intent = StagewiseEvidenceRefinement.weaken refinement
+        c independentlySourcedIntent (AdmitsOneOriginalCase.intent evidence)
+    ; attribution = StagewiseEvidenceRefinement.weaken refinement
+        c originalAttribution (AdmitsOneOriginalCase.attribution evidence)
+    }
+
+-- Non-admission of a weakly sourced operation passes to any stronger
+-- predicate that admits a stagewise map to the weak predicate.
+nonAdmissionPersistsUnderStrongerStandards :
+  (Strong Weak : OriginalCase → EvidenceStage → Set)
+  (refinement : StagewiseEvidenceRefinement Strong Weak)
+  (c : OriginalCase) →
+  (AdmitsOneOriginalCase Weak c → ⊥) →
+  AdmitsOneOriginalCase Strong c → ⊥
+nonAdmissionPersistsUnderStrongerStandards Strong Weak refinement c blocked strong =
+  blocked (admissionWeakens Strong Weak refinement c strong)
+
+-- Concrete instance of the universal theorem, not a separate
+-- hypothetical "no exposure ever existed" claim.
+selectedGCCBlockedByGeneralMissingGate :
+  AdmitsOneOriginalCase CurrentlyLocatedEvidence gcc1993 → ⊥
+selectedGCCBlockedByGeneralMissingGate =
+  blockedByMissingExposure
+    CurrentlyLocatedEvidence gcc1993 currentGCCExposureUnavailable
