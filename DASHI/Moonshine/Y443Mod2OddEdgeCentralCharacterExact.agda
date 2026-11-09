@@ -262,27 +262,30 @@ module Selected (charge : Y.Node → Bool) where
     SourceEdgeCentralParity
   originalRelatorsImplyParity holds = record
     { ab1 = edge 12 Y.a Y.b1
-    ; b1c1 = edge 23 Y.b1 Y.c1
-    ; c1d1 = edge 33 Y.c1 Y.d1
-    ; d1e1 = edge 42 Y.d1 Y.e1
-    ; ab2 = edge 16 Y.a Y.b2
-    ; b2c2 = edge 57 Y.b2 Y.c2
-    ; c2d2 = edge 63 Y.c2 Y.d2
-    ; d2e2 = edge 68 Y.d2 Y.e2
-    ; ab3 = edge 20 Y.a Y.b3
-    ; b3c3 = edge 75 Y.b3 Y.c3
-    ; c3d3 = edge 77 Y.c3 Y.d3
+    ; b1c1 = trans (sym (oddEdgeWordParity charge Y.b1 Y.c1))
+        (Pair._∧_.left (dropSatisfied charge 23 holds))
+    ; c1d1 = trans (sym (oddEdgeWordParity charge Y.c1 Y.d1))
+        (Pair._∧_.left (dropSatisfied charge 33 holds))
+    ; d1e1 = trans (sym (oddEdgeWordParity charge Y.d1 Y.e1))
+        (Pair._∧_.left (dropSatisfied charge 42 holds))
+    ; ab2 = trans (sym (oddEdgeWordParity charge Y.a Y.b2))
+        (Pair._∧_.left (dropSatisfied charge 16 holds))
+    ; b2c2 = trans (sym (oddEdgeWordParity charge Y.b2 Y.c2))
+        (Pair._∧_.left (dropSatisfied charge 57 holds))
+    ; c2d2 = trans (sym (oddEdgeWordParity charge Y.c2 Y.d2))
+        (Pair._∧_.left (dropSatisfied charge 63 holds))
+    ; d2e2 = trans (sym (oddEdgeWordParity charge Y.d2 Y.e2))
+        (Pair._∧_.left (dropSatisfied charge 68 holds))
+    ; ab3 = trans (sym (oddEdgeWordParity charge Y.a Y.b3))
+        (Pair._∧_.left (dropSatisfied charge 20 holds))
+    ; b3c3 = trans (sym (oddEdgeWordParity charge Y.b3 Y.c3))
+        (Pair._∧_.left (dropSatisfied charge 75 holds))
+    ; c3d3 = trans (sym (oddEdgeWordParity charge Y.c3 Y.d3))
+        (Pair._∧_.left (dropSatisfied charge 77 holds))
     ; centralOddZero =
         trans (sym sourceCentralPowerNineParity)
           (Pair._∧_.left (dropSatisfied charge 79 holds))
     }
-    where
-    edge : (index : Nat) (x y : Y.Node) →
-      charge x ⊕ charge y ≡ false
-    edge index x y =
-      trans (sym (oddEdgeWordParity charge x y))
-        (Pair._∧_.left (dropSatisfied charge index holds))
-
   original80HasNoNontrivialMod2Character :
     Pair.RelatorsSatisfied boolInverseGroup charge Y.monsterRelators →
     (n : Y.Node) → charge n ≡ false
