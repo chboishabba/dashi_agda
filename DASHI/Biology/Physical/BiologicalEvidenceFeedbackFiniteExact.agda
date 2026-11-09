@@ -15,6 +15,7 @@ open import Agda.Builtin.String using (String)
 
 import DASHI.Biology.Physical.BiologicalHistoryFutureQuotientExact as Bio
 import DASHI.Governance.PhenomenonEvidenceFibreOverTimeExact as Evidence
+import DASHI.Core.AffectedDependencyClosureExact as Affected
 
 data CandidateMechanism : Set where
   retainedMemoryMatters : CandidateMechanism
@@ -173,3 +174,37 @@ record EvidenceFeedbackBoundary : Set where
 canonicalEvidenceFeedbackBoundary : EvidenceFeedbackBoundary
 canonicalEvidenceFeedbackBoundary =
   evidenceFeedbackBoundary false refl false refl false refl false refl
+
+------------------------------------------------------------------------
+-- Source-revision dependency transport via the ORIGINAL canonical closure.
+-- This finite graph is a proof fixture, not an ITIR runtime graph.
+------------------------------------------------------------------------
+
+data BiologicalProofArtifact : Set where
+  sourceObservation : BiologicalProofArtifact
+  mechanismCertificate : BiologicalProofArtifact
+  futurePredictionCertificate : BiologicalProofArtifact
+  unrelatedMeasurement : BiologicalProofArtifact
+
+data BiologicalDirectDependency :
+  BiologicalProofArtifact → BiologicalProofArtifact → Set where
+  observationSupportsMechanism :
+    BiologicalDirectDependency sourceObservation mechanismCertificate
+  mechanismSupportsPrediction :
+    BiologicalDirectDependency mechanismCertificate futurePredictionCertificate
+
+mechanismRequiresRecheck :
+  Affected.ReopeningObligation BiologicalDirectDependency
+    sourceObservation mechanismCertificate
+mechanismRequiresRecheck =
+  Affected.oneEdgeCreatesReopeningObligation
+    observationSupportsMechanism
+
+predictionRequiresTransitiveRecheck :
+  Affected.ReopeningObligation BiologicalDirectDependency
+    sourceObservation futurePredictionCertificate
+predictionRequiresTransitiveRecheck =
+  Affected.obligationsCompose
+    mechanismRequiresRecheck
+    (Affected.oneEdgeCreatesReopeningObligation
+      mechanismSupportsPrediction)
