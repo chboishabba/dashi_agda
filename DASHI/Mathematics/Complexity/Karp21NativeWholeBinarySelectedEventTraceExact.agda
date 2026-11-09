@@ -103,25 +103,36 @@ nativeFirstEnabledSelectedEventsSameOriginal (_ ∷ _) (_ ∷ []) history ledger
 nativeFirstEnabledSelectedEventsSameOriginal
   (Edge.binary-edge u v token ∷ rest)
   (a ∷ b ∷ bits) history ledger threshold
-  rewrite
-    HistoryOriginal.nativeBinaryEndpointHistorySameOriginal u a history
-  | HistoryOriginal.nativeBinaryEndpointHistorySameOriginal v b history
   with History.endpointConsistentBinary u a history
      | History.endpointConsistentBinary v b history
-... | false | _ = refl
-... | true | false = refl
-... | true | true
+     | HistoryOriginal.nativeBinaryEndpointHistorySameOriginal
+         u a history
+     | HistoryOriginal.nativeBinaryEndpointHistorySameOriginal
+         v b history
+... | false | _ | uEq | vEq
+  rewrite sym uEq | sym vEq = refl
+... | true | false | uEq | vEq
+  rewrite sym uEq | sym vEq = refl
+... | true | true | uEq | vEq
+  rewrite sym uEq | sym vEq
   with Boolean.boolEqual a b
-... | true =
-  nativeFirstEnabledSelectedEventsSameOriginal
-    rest bits (History.recordBinaryEndpointPair u v a b history)
-    (Machine.addSelectedBinaryToken a b
-      (Edge.binary-edge u v token) ledger)
-    threshold
-... | false =
-  cong (λ result → just (Weight.interpretNativeToken token ∷ result))
-    (nativeFirstEnabledSelectedEventsSameOriginal
-      rest bits (History.recordBinaryEndpointPair u v a b history)
+... | same
+  with actualFirstEnabledSelectedEvents (suc (length rest))
+    (Machine.state Machine.active rest bits
+      (History.recordBinaryEndpointPair u v a b history)
       (Machine.addSelectedBinaryToken a b
         (Edge.binary-edge u v token) ledger)
       threshold)
+     | nativeFirstEnabledSelectedEventsSameOriginal
+         rest bits
+         (History.recordBinaryEndpointPair u v a b history)
+         (Machine.addSelectedBinaryToken a b
+           (Edge.binary-edge u v token) ledger)
+         threshold
+... | nothing | tailEq
+  rewrite sym tailEq = refl
+... | just selected | tailEq
+  rewrite sym tailEq
+  with same
+... | true = refl
+... | false = refl
