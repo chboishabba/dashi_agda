@@ -89,3 +89,33 @@ sameProductSameObservedOutput :
   observe (affineProduct a b u v)
 sameProductSameObservedOutput a b x y u v observe same =
   congEq observe (sameProductSameAffine a b x y u v same)
+
+-- No deterministic reporting, discounting or normalisation function
+-- can restore a coordinate discarded at the product stage.
+noGainDecoderAfterObservation :
+  (a b x y u v : Nat) →
+  (observe : Nat → Nat) →
+  x * y ≡ u * v →
+  (x ≡ u → ⊥) →
+  (decode : Nat → Nat) →
+  ((g c : Nat) →
+     decode (observe (affineProduct a b g c)) ≡ g) → ⊥
+noGainDecoderAfterObservation a b x y u v observe same distinct =
+  noLeftDecoderAtCollision
+    (λ g c → observe (affineProduct a b g c))
+    (sameProductSameObservedOutput a b x y u v observe same)
+    distinct
+
+noConfidenceDecoderAfterObservation :
+  (a b x y u v : Nat) →
+  (observe : Nat → Nat) →
+  x * y ≡ u * v →
+  (y ≡ v → ⊥) →
+  (decode : Nat → Nat) →
+  ((g c : Nat) →
+     decode (observe (affineProduct a b g c)) ≡ c) → ⊥
+noConfidenceDecoderAfterObservation a b x y u v observe same distinct =
+  noRightDecoderAtCollision
+    (λ g c → observe (affineProduct a b g c))
+    (sameProductSameObservedOutput a b x y u v observe same)
+    distinct
