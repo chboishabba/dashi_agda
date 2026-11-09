@@ -12,7 +12,7 @@ from pathlib import Path
 
 PATH=Path(__file__).resolve().parents[1]/"Docs/research/ccdcoe_p3_gcc_original_pre_response_baseline_20261109.json"
 EXPECTED={
-"gcc_1993_01_04_press_outreach":("1993-01-04","archive_description","1993-climate-expertise-news-release"),
+"gcc_1993_01_04_press_outreach":("1993-01-04","archive_quoted_original_excerpt","1993-climate-expertise-news-release"),
 "gcc_1993_03_08_policy_statement":("1993-03-08","archive_quoted_original_excerpt","1993-us-national-action-plan-recommendations"),
 "gcc_1993_03_10_model_release":("1993-03-10","archive_description","1993-natural-warming-models-national-action-plan"),
 "gcc_1993_undated_expert_brochure":(None,"archive_quoted_original_excerpt","1993-selected-climate-change-quotes")}
@@ -41,7 +41,7 @@ def check(m):
     require(len(claims)==len(must) and {c["claim_id"] for c in claims}==must,"claims identities")
     require(all(c["causal_link_established"] is False for c in claims),"date or quote promoted to effect")
     require(len(m["negative_controls"])>=5,"adversarial controls removed")
-    return {"distinct_original_source_catalogue_objects":len(rows),"archive_quoted_excerpt_sources":2,
+    return {"distinct_original_source_catalogue_objects":len(rows),"archive_quoted_excerpt_sources":3,
             "authenticated_original_PDF_bytes":0,"independent_coded_original_passages":0,
             "identified_communications_effects":0}
 def self_test(data):
