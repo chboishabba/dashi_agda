@@ -19,6 +19,7 @@ import DASHI.Physics.YangMills.BalabanPeriodicTorus4Carrier as Torus
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YMClayD1OriginalPlaquetteSupportDecisionExact as Original
 import DASHI.Physics.YangMills.BalabanP06FiniteNeighbourGraphExact as P06
+import DASHI.Physics.YangMills.YMClayD1OriginalConflictPlaquetteWitnessExact as Witness
 
 -- A complete literal positive-bond enumeration from the SAME fourfold
 -- periodic carrier as the original finite Wilson lattice action.
@@ -105,8 +106,8 @@ originalNeighbourConflictSound :
   ∀ {n} (a b : Original.Bond n) →
   Torus._∈_ b (originalLinkStarNeighbourList a) →
   OriginalLinkStarConflict a b
-originalNeighbourConflictSound a b =
-  originalConflictingFilterSound a (originalAllPositiveLinks _) b
+originalNeighbourConflictSound {n} a b =
+  originalConflictingFilterSound a (originalAllPositiveLinks n) b
 
 originalNeighbourConflictComplete :
   ∀ {n} (a b : Original.Bond n) →
@@ -144,3 +145,13 @@ originalLinkStarGraphDegreeIsLiteralCount bond = refl
 -- P06.ConcreteBoundedDegree ... 19 (including self-conflict) is the
 -- next native finite theorem. Excluding the vertex itself yields 18.
 -- It is NOT inhabited here. Nor is the original Gibbs/cluster activity.
+
+-- Every enumerated neighbour conflict yields the same ORIGINAL
+-- four-positive-bond plaquette witnessing the shared Wilson dependency.
+originalNeighbourHasLiteralSharedPlaquette :
+  ∀ {n} (a b : Original.Bond n) →
+  Torus._∈_ b (originalLinkStarNeighbourList a) →
+  Witness.SharedOriginalPlaquette a b
+originalNeighbourHasLiteralSharedPlaquette a b member =
+  Witness.originalConflictExhibitsSharedPlaquette a b
+    (originalNeighbourConflictSound a b member)
