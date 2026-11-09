@@ -67,3 +67,18 @@ It constructs the original 4D positive-link graph on the source carrier `Torus.P
 **Critical counting convention:** the conflict graph has self-conflict, so a closed neighbourhood has size at most 19 (one centre plus up to 18 other links); it is NOT the same as the existing P06 periodic block nearest-neighbour degree eight. Native proof of the 19 closed-neighbourhood bound and its distinct-marked 18-removal corollary is outstanding. Do not silently substitute a block-graph degree-eight estimate.
 
 This is finite source construction and proof terms only. `P06.FiniteNeighbourGraph` does not imply a physical P06ModelLeafDischargePackage; that still needs real original Wilson polymers, source-preserving support/tree/decorations and Gibbs activity suppression. Likewise `chargeSumBelowPhysicalRootedShell` remains unpaid. Current turn produced GitHub source, not an Agda 2.9 kernel acceptance receipt.
+
+
+## 2026-11-09 original link-graph source partition progress
+
+The native D1/P06 original positive-bond graph module now carries the following exact proof terms:
+
+- `originalLinkStarConflictSymmetric`: original plaquette-overlap conflict is symmetric, using the original symmetric star-separation lemma;
+- `originalLinkStarConflictReflexive` and `originalNeighbourListContainsSelf`: the graph is **closed-neighbourhood** counting, including the marked link itself;
+- `originalGreedyFilteredLinkHasNoSourceConflict` and `originalGreedyFilteredLinkNotInClosedNeighbourhood`: every native greedy-filter survivor is excluded from the actual source conflict neighbourhood;
+- `originalNonConflictIffStarSeparation`: constructive recovery of original star disjointness from failure of conflict using the existing finite decider;
+- `originalMarkedBondFreeOrNativeNeighbour`: a constructive, non-vacuous membership cover of each original marked positive bond by the actual source greedy-filter survivors or source enumerated closed conflict neighbours.
+
+**Updated finite maximum cut:** Prove uniqueness/no-duplicates of `originalAllPositiveLinks`, exactly six original plaquettes incident to each link, and source list bound `length (originalLinkStarNeighbourList a) ≤ 19`. Then finite intersection/list-subtraction cardinality converts `originalMarkedBondFreeOrNativeNeighbour` + separation into the existing `OriginalStar18RemovalBound`, after excluding selected head (self-neighbour). The structurally recursive `fuelGreedyOriginal19PackingFullLength` already transports this into the 19-packing conclusion *conditional on that bound*. No new abstract polymer counting is necessary.
+
+The original Wilson sparse-frustrated/mixed activity estimate that inhabits `chargeSumBelowPhysicalRootedShell`, plus E1/D2/N1/G1, remains a genuinely separate physical mathematical frontier. These changes are GitHub source-written, not kernel-accepted; run Agda 2.9/type-check the complete dependency graph before promotion.
