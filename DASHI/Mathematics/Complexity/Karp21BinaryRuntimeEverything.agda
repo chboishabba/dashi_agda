@@ -324,3 +324,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeFullEdgeFieldInputBoundExact
 -- F2.2 every original gamma u/v and native signed w bit register is charged to the same whole source graph input word.
 -- No original physical TM clock or exact-head Agda kernel receipt implied.
 import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact
+
+-- F2.2 SAME real binary first-enabled run: endpoint-history + remaining edge/certificate payload conserved;
+-- original graph+certificate words bound final history bit register storage. Source candidate; Agda/tape clock OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeEndpointHistoryConservationExact
