@@ -16,6 +16,14 @@ This is a genuinely derived finite-volume-uniform SU(2) *conditional* large-fiel
 
 The second contribution is derived. The original Wilson frustrated-staple probability P(R<r₀) is NOT yet bounded, and neither term by itself provides distant gauge-invariant covariance decay. The needed CMP116 large-field polymer estimate concerns physically localized *connecting regions*, not simply the bad link event.
 
+## Additional original-action pointwise inequality: frustration costs Wilson energy
+
+Let u, v₁,…,v₆ be the actual unit SU(2) quaternion coordinates of the link and its oriented staples. The original six adjacent Wilson deficits (one minus normalized real plaquette trace) sum exactly to
+`D₆(u;v)=Σ(1−Re(u vⱼ))=6−<u,S>` with `S=Σvⱼ` (orientation may use conjugates to express the real trace as the Euclidean dot product). Cauchy–Schwarz for the four real quaternion coordinates gives `<u,S>≤||S||=R`. Hence the **pointwise original physical action inequality**
+`D₆(u;v)≥6−R` holds for every original SU(2) link/staple configuration, with no probabilistic premise. In particular, any frustrated event `R<r₀` necessarily has `D₆>6−r₀` at the incident link.
+
+This identifies a genuine large-field energy penalty, but **does not** establish the Gibbs probability of that event: a finite-volume lower bound on the original partition function relative to the bad set, or a local gauge-compatible surgery/polymer entropy argument, is needed. Merely exponentiating the pointwise action inequality and ignoring the integration/normalization of all neighboring links would be invalid. The missing **distance-dependent large-field polymer/bridge estimate** remains D1.03.
+
 ## UV bare-link Dobrushin limitation (not a Clay no-go)
 
 Fix all six staples to +I versus −I; the conditional densities are exp(±6βt). The event {t>0} gives total variation ≥1−6 exp(−3β), and L¹ conditional row distance ≥2(1−6 exp(−3β)), approaching 2 with increasing β. Therefore an original *bare-link* L¹ Dobrushin contraction q<1 cannot remain uniform for every such boundary condition along a diverging-β trajectory. This says nothing against the physically blocked-cube CMP119/R445 route, nor against gauge-invariant Wilson tests: the distinguishing bare-link event is gauge variant.
