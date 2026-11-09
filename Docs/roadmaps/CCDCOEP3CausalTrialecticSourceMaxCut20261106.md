@@ -1545,3 +1545,29 @@ The independent sources establish **bibliographic/edition-level identity only**,
 | A10 | Golden script wiring complete at source level | Exact-head Agda 2.9 kernel and executable Python receipts |
 
 **Highest alpha now:** authenticated source copies and reviewed *Léon* 110/133 scene concordance (especially the refusal, comic milk reaction and cinematographic framing) with original timecodes; then source-faithful scene-to-path transport, selective reopening and same-object triadic evidence. No new generic temporality or invented audience psychology is required. Agda and Python kernel/runtime acceptance cannot be asserted in this session.
+
+
+### A1/A9 executable-admission test strengthening (9 Nov)
+
+The film intake self-test now constructs a temporary synthetic source file,
+computes its actual SHA-256 and checks **one nonempty edition plus one
+candidate scene record**, then rejects four adversarial mutations:
+original bytes changed after hashing, source path escape, incorrect digest,
+and two purported reviews with the same reviewer identity. These checks
+are explicitly synthetic, do not access actual copyrighted footage,
+and do not establish independently reviewed original film evidence.
+The initial four missing/invalid-identity fixtures remain, for eight
+programmed negative cases total. Python source-written, actual runtime
+test receipt still OPEN.
+
+Evidence grades are distinct:
+(1) original institution/distributor edition metadata now source-located;
+(2) local original-byte integrity checks supported by code;
+(3) independent critical-scene passage review remains absent;
+(4) measured viewer impact and causal cognitive operations absent.
+
+**Remaining decisive highest-alpha cut:** original, legally accessible
+110-minute and 133-minute Léon versions with reviewable scene positions,
+distinct reviewer receipts and a scene-version concordance; source-backed
+interpretive reading pairs and their retained time-indexed paths;
+exact-head Agda kernel and executable Python receipts.
