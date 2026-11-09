@@ -1758,3 +1758,7 @@ Original newspaper and letter authors, scientists quoted, GCC and original criti
 - CW6: local synthetic receipt-audit PASS; all changed Agda owners and canonical full-head Python check OPEN.
 
 **Use:** `python3 scripts/check_ccdcoe_p3_gcc1993_original_coding_receipts.py --self-test` exercises synthetic receipt checks. Real use requires `--receipts /path/to/reviewed-receipts.json --source-root /path/to/original-bytes`; no real film or historical original is stored in repository. The tool checks integrity/format, not historical truth. No ESD edits; attribution preserved. The art-theory A1–A9 addendum remains subordinate to the cognitive-warfare investigation.
+
+### Receipt admission fail-closed refinement
+
+The real-data CLI of `scripts/check_ccdcoe_p3_gcc1993_original_coding_receipts.py` now rejects empty `passages` instead of returning a valid zero-size empirical audit, while `--self-test` exercises an actual nonempty synthetic byte file. Locally rerun: Python compile PASS; 1 synthetic admission PASS; 10/10 mutation controls rejected; 3 kappa cases PASS. GitHub-head source verification is not Agda kernel acceptance. Underlying authenticity and reviewer independence still require independently reviewed material.
