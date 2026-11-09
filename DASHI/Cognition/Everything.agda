@@ -35,6 +35,8 @@ import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact
 import DASHI.Cognition.CCDCOEP3StakeholderHandoffExact
 import DASHI.Cognition.CCDCOEP3CulturalSourceGenreExact
 import DASHI.Culture.CriticalArtTemporalReceptionReuseExact
+import DASHI.Culture.CriticalArtSameSceneTransportExact
+import DASHI.Culture.CriticalArtTriadicFilmBoundaryExact
 
 import DASHI.Cognition.PNF.PNFIRLearningEverything
 import DASHI.Cognition.PNF.NumericPNFHyperfabricEverything
