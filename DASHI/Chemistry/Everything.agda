@@ -275,3 +275,6 @@ import DASHI.Chemistry.CarbonFuelRegenerationExact
 import DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact
 import DASHI.Chemistry.HydrogenFuelCycleBreakEvenExact
 import DASHI.Chemistry.HydrogenElectrolyserEnergyExact
+
+-- Same-run join: fixed-load engine certificate meets energy-saving criterion.
+import DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact
