@@ -219,3 +219,28 @@ The finite observer only factors through `j ∘ A` when an explicit factorizatio
 **Critical type/semantics distinction:** current `ConcreteComplex` is a package interface and `TerminalConstructedAnalyticModel` is a singleton witness, not the analytic complex field. Meanwhile `BishopSetoidComplexExact` supplies a genuine Bishop setoid complex with `_≈C_`; a proposed literal `_≡_` bridge must be justified. `ModularCurveJFrickeInterfaceExact` is a modular interface rather than a completed analytic Hauptmodul. The immediate outstanding mathematical input is a genuinely nondegenerate holomorphic Kneser chart and its same-source modular-(j) parameterization.
 
 **Status:** P1, P1b, P2 remain open; P3 original moving-level equivariance is source-written *conditional on Abel-to-fine point selection*; P4 contour transport is source-written *conditional on tetration*. No new source was compiled in this execution pass; safe kernel acceptance and any actual numeric calibration remain open.
+
+## 2026-11-09 source-based Kneser/conformal calibration gate
+
+**Peer-reviewed reference inputs (not internal theorem receipts):**
+
+1. Hellmuth Kneser, *Reelle analytische Lösungen der Gleichung φ(φ(x)) = e^x und verwandter Funktionalgleichungen*, Journal für die reine und angewandte Mathematik **187** (1949), 56–67 (original existence/construction).
+2. Henryk Trappmann and Dmitrii Kouznetsov, *Uniqueness of holomorphic Abel functions at a complex fixed point pair*, Aequationes Mathematicae **81** (2011), 65–76, DOI **10.1007/s00010-010-0021-6**. Their uniqueness criterion selects Kneser's Abel function under specific fixed-point-pair hypotheses; the naked Abel equation does **not** have a unique analytic solution.
+3. Dmitrii Kouznetsov, *Solution of F(z+1)=exp(F(z)) in complex z-plane*, Mathematics of Computation **78** (2009), 1647–1670, DOI **10.1090/S0025-5718-09-02188-7**. Supplies a contour-integral/numerical approach, normalization F(0)=1, and documented precision estimates. This is the source linked to the supplied Wikimedia contour image.
+
+**Exact proof/implementation max-cut (no missing functions hidden behind a theorem name):**
+
+- [ ] **P1.K1** `originalExponentialConjugateFixedPair`: isolate the two selected nonreal exp fixed points and their multipliers on the *original* Bishop complex carrier; prove they satisfy exp(L)=L with complex setoid equality.
+- [ ] **P1.K2** `originalSchroederHolomorphicLocalLinearization`: produce a nonconstant holomorphic χ satisfying χ(exp w)=λχ(w) on a witnessed neighbourhood, with injectivity/nonzero and radius estimates. No abstract `record` instance counts unless the function is actually constructed.
+- [ ] **P1.K3** `originalLogMultiplierBranchAndCocycle`: construct the logarithm branch of χ and λ, prove the overlap cocycle and branch corrections; deduce a valid **local** Abel coordinate A(exp w)=A(w)+1.
+- [ ] **P1.K4** `originalKneserFundamentalRegionGluing`: prove biholomorphic fundamental-region mapping/analytic continuation and monodromy compatibility across the two fixed-point regions.
+- [ ] **P1.K5** `originalKneserRealAxisNormalization`: impose F(0)=1 and analytic reality/monotonicity conditions, then prove the Trappmann–Kouznetsov uniqueness criterion applies to the actual constructed function (no claim that the bare Abel equation has unique solutions).
+- [ ] **P2.K1** `originalUpperHalfPlaneAbelImage`: explicitly identify the open domain where A(w) lies in the upper half-plane. Outside it, ordinary analytic modular j(τ) is *not* automatically defined.
+- [ ] **P2.K2** `originalBishopQSeriesTPeriod`: derive q(τ+1)=q(τ) on the selected original complex carrier via a proof-bearing exp periodicity, and transport E4/E6, Δ and j with nonvanishing denominator and setoid-congruence conditions.
+- [ ] **P3.K1** `originalKneserToModularLevelLift`: supply the selected source-point map and commuting modular T law, then instantiate `OriginalMovingLevelAbelWeld`; compare its actual level-27 observation to the existing JCoarse/JFine local-27 observation without assuming equivalence.
+- [ ] **P4.K1** `originalKouznetsovContourNormalization`: pin the correct source F(0)=1, selected branches and level-value conventions of the actual SVG, including abs(F)=exp(k) and argument contours.
+- [ ] **P4.K2** `originalKouznetsovCertifiedNumerics`: implement paper-faithful integral-equation/iteration with independently bounded truncation and arithmetic errors, then calibrate recorded complex test values against the figure. A visual resemblance is not a proof.
+
+**Scientific caution:** a numerical residual of ~1e-14 reported by the 2009 paper is evidence about *that numerical scheme*, not an Agda certificate of Kneser existence or global uniqueness. The original `BishopSetoidComplexExact` uses setoid equality; converting it to propositional equality or to the terminal complex singleton is not authorized. The published uniqueness theorem requires its exact geometric/holomorphic hypotheses.
+
+**Most decisive outstanding gate:** `originalSchroederHolomorphicLocalLinearization` followed by `originalKneserFundamentalRegionGluing`. Once the concrete Abel chart exists, P1b/P2/P3 transport lemmas become concrete instantiation work; before that they remain conditional.
