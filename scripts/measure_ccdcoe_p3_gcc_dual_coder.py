@@ -31,15 +31,21 @@ def analyse_dual(rows: list[dict], focus: str, intervention_date: str,
     for row in rows:
         if not DUAL_REQUIRED <= row.keys():
             raise ValueError("Second independent coding receipt required")
-        if not row["second_coder_id"] or row["second_coder_id"] == row.get("coder_id"):
+        if not isinstance(row["second_coder_id"], str) or not row["second_coder_id"].strip():
+            raise ValueError("Second reviewer ID must be a nonempty string")
+        if row["second_coder_id"] == row.get("coder_id"):
             raise ValueError("Coding must be independently attributed")
+        if not isinstance(row["second_review_receipt"], str) or not row["second_review_receipt"].strip():
+            raise ValueError("Second reviewer receipt must be a nonempty string")
+        if row["second_review_receipt"] == row.get("review_receipt"):
+            raise ValueError("Two reviewer observations must have distinct review receipts")
         panel = (row.get("coder_id"), row["second_coder_id"])
         if reviewer_panel is None:
             reviewer_panel = panel
         if panel != reviewer_panel:
             raise ValueError("Pooled Scott pi requires a stable ordered reviewer panel")
-        if not row["second_review_receipt"] or row["second_frame"] not in base.FRAMES:
-            raise ValueError("Second coding source and valid frame required")
+        if row["second_frame"] not in base.FRAMES:
+            raise ValueError("Second coding frame must be valid")
         if not synthetic_fixture and "SYNTHETIC" in str(row["second_review_receipt"]).upper():
             raise ValueError("Synthetic second-coder receipt not admissible")
     first = base.analyse(rows, focus, intervention_date, intervention_receipt,
@@ -157,6 +163,23 @@ def self_test() -> None:
             disputed["descriptive_did_coder2"])
         assert disputed["descriptive_did_partial_coding_interval"][1] >= (
             disputed["descriptive_did_coder1"])
+        bad = [dict(r) for r in rows]
+        bad[0]["second_review_receipt"] = bad[0]["review_receipt"]
+        try:
+            analyse_dual(bad, "science_uncertainty", **kwargs)
+        except ValueError as exc:
+            assert "distinct review receipts" in str(exc)
+        else:
+            raise AssertionError("Recycled reviewer receipt accepted as independent coding")
+        for bogus in (" ", 1, None):
+            bad = [dict(r) for r in rows]
+            bad[0]["second_review_receipt"] = bogus
+            try:
+                analyse_dual(bad, "science_uncertainty", **kwargs)
+            except ValueError as exc:
+                assert "nonempty string" in str(exc)
+            else:
+                raise AssertionError("Nontextual second reviewer receipt admitted")
         bad = [dict(r) for r in rows]
         bad[0]["second_coder_id"] = bad[0]["coder_id"]
         try:
