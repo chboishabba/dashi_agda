@@ -22,6 +22,7 @@ import Data.Integer.Base as Int
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21SignedGammaNativeOriginalValueExact as Weight
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
@@ -109,10 +110,10 @@ nativeBinaryCutLedgerSameOriginal
     HistoryOriginal.nativeBinaryEndpointHistorySameOriginal u a history
   | HistoryOriginal.nativeBinaryEndpointHistorySameOriginal v b history
   with Original.endpointConsistent
-      (DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact.valueLE u)
+      (Value.valueLE u)
       a (History.observedBinaryHistory history)
      | Original.endpointConsistent
-      (DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact.valueLE v)
+      (Value.valueLE v)
       b (History.observedBinaryHistory history)
 ... | false | _ = refl
 ... | true | false = refl
