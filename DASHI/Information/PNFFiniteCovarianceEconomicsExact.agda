@@ -180,3 +180,16 @@ marketEigenvalueClosedForm K rho k =
               (Ring.addInverseLeft K rho))
             (cong (Scalar._+_ S a)
               (Ring.addZeroLeft K c))))))
+
+equiMarketEigenClosedForm :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (rho : SOf K) → (k : Nat) → (i : Fin (suc k)) →
+  equiOperator K rho
+    (λ (_ : Fin (suc k)) → Scalar.one (Ring.orderedScalar K)) i
+  ≡
+  Scalar._+_ (Ring.orderedScalar K)
+    (Scalar.one (Ring.orderedScalar K))
+    (Scalar._*_ (Ring.orderedScalar K) rho (dimensionScalar K k))
+equiMarketEigenClosedForm K rho k i =
+  trans (equiMarketEigen K rho i)
+    (marketEigenvalueClosedForm K rho k)
