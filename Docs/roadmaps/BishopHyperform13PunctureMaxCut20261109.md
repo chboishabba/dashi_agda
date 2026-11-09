@@ -551,3 +551,54 @@ claimed. The installed environment did not expose an `agda`
 executable; keep all kernel-acceptance flags open. The original
 non-discrete site is not the maximal-only discrete site; the two
 owners must remain distinguished.
+
+
+### 2026-11-09 addendum: original morphism-indexed presheaf and UNIQUE descent
+
+`DASHI/Foundations/TernaryThirteenOriginalTriadicPresheafExact.agda`
+is now the actual original-site indexed operator, not just a stand-alone
+cover-family construction:
+
+- `Section : RelObj → Set` assigns the 12+centre carrier at
+  `globalABC`, paired four-trit charts at `edgeAB/BC/CA`,
+  and four-trit-plus-centre overlap stalks at `vertexA/B/C`.
+- `restrictAlong : RelHom V U → Section U → Section V`
+  supplies explicit restriction maps on **every** original
+  `RelationalStageTwelveGrothendieckExtensionExact.RelHom`,
+  including six proper overlap morphisms and three global-to-chart
+  morphisms.
+- `restrictIdentity` and `restrictComposition`:
+  source-written contravariant presheaf functoriality, including
+  actual two-stage restriction composites.
+- `aOverlapAgrees`, `bOverlapAgrees`, `cOverlapAgrees`:
+  matching for restrictions of any global source state.
+- `CoverTripleMatches`, `coverTripleToTriadicMatching`:
+  full equality of actual overlap stalks implies both the
+  corresponding four-coordinate overlaps and the matching
+  centre; no independent agreement law is silently assumed.
+- `glueCoverTriple`, `glueCoverTripleAB/BC/CA`:
+  construct and re-restrict the selected original triadic
+  covering-family glue.
+
+Existing selected-cover owner
+`TernaryThirteenOriginalTriadicSiteGluingExact.agda` now has
+`triadicGluingUnique`: **every** global state having these three
+prescribed chart restrictions equals the constructed glue.
+That closes existence AND uniqueness for this selected cover,
+on the constructed same-object source section family.
+
+Commits: `9310ae6` (original presheaf),
+`6cb6f23` (uniqueness), golden roots
+`f774a45`, `b424d5f`, `e794452`.
+
+**Revised H2.02 status:** original seven-object A/B/C topology,
+pullback stability, transitivity: ALREADY OWNED; original indexed
+presheaf restrictions, functoriality, selected nontrivial triadic
+cover matching, unique gluing and pants transport: SOURCE-WRITTEN.
+Remaining: prove sheaf descent for **all covering sieves**, not
+only the distinguished triadic generator, and supply independently
+intended source semantics to identify the constructed section
+presheaf with the intended relational/world/Monster completion.
+
+No top-level original analytic Bishop P1, zeta P2 or Gamma/Xi P3
+status changes.
