@@ -66,3 +66,6 @@ import DASHI.Physics.YangMills.YMClayD1OriginalConflictPlaquetteWitnessExact as 
 
 -- D1 distinct original marked-link 19-count transport, with native degree-18 leaf explicit.
 import DASHI.Physics.YangMills.YMClayD1OriginalGreedy19CountingExact as D1NativeGreedyCounting
+
+-- D1 structurally terminating fuel-greedy, original-link maximality and 19-count transport.
+import DASHI.Physics.YangMills.YMClayD1OriginalFuelGreedyTerminationExact as D1FuelGreedy
