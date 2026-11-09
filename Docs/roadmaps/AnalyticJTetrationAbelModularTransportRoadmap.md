@@ -382,3 +382,27 @@ This **reuses** the original Murray/Bishop `Sequence.absolute⇒isConvergent` an
 Other phase gates stay exactly OPEN: `originalKneserConjugatePairGlobalNormalization`; `originalPuncturedSectorLogBranchCocycle`; `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`; `originalMovingLevelAbelWeldInstance`; `originalKouznetsovCertifiedNumerics`.
 
 **Execution receipt:** locally executed the exact rational fixed-point and Koenigs-tail scripts in this continuation and both PASS. These receipts certify their finite rational arithmetic only and are not Agda acceptance or the complete analytic P1 theorem.
+
+
+## 2026-11-09 actual Bishop exponential-to-Koenigs carrier weld
+
+Two new source owners:
+- `DASHI/Moonshine/AbelBishopOriginalComplexCarrierWeldExact.agda` (commit `59ccaeec`) directly identifies the two original Bishop complex record presentations **by two explicit inverse maps**, not by asserting propositional equality of their types. The one from `BishopSetoidComplexExact` owns the **actual power-series exponential**, and the one from `BishopComplexSeriesConvergenceExact` owns the original Murray/Bishop componentwise Cauchy completion. It proves round-trips, addition/subtraction/multiplication/zero/one preservation, setoid equivalence transport and `originalBishopExpOnSeriesCongruent` via the source's actual `expCongruent`.
+- `DASHI/Moonshine/AbelBishopOriginalExponentialIteratesExact.agda` (commit `b8b88b6e`) gives source-exponential finite iterations in both presentations and proves the source's setoid congruence and `originalBishopExpIterSameSource` for all finite iteration counts.
+
+Concrete declarations now source-written, requiring kernel acceptance:
+- [x] **P1.B20** `toSeries`, `toExponential`, `toExpAfterSeries`, `toSeriesAfterExp`.
+- [x] **P1.B21** `originalExpEquivalenceToSeries`, `originalSeriesEquivalenceToExp`, and original complex +-*/zero/one transport.
+- [x] **P1.B22** `originalBishopExpOnSeries`, `originalBishopExpOnSeriesCongruent`, `originalBishopExpSameSource`: genuine original Bishop setoid complex power-series exponential, no fresh uninterpreted exp.
+- [x] **P1.B23** `originalBishopExpIter`, `originalBishopExpSeriesIter`, both setoid congruence lemmas, `originalBishopExpIterSameSource`.
+
+The remaining real analytic cut, not concealed by these adapters:
+- [ ] **P1.B24** `originalBishopPrincipalLogOnSeries`: supply an actual principal-log function on an explicitly defined nonzero/cut-avoiding Bishop complex domain, with a genuine `Exp` inverse proof. The currently inspected `PrincipalComplexLog` package is an interface for a separate generic constructed complex; a source-owning Bishop setoid implementation is still required.
+- [ ] **P1.B25** `originalBishopLogInverseDiskIteration`: prove the selected source principal log is a self-map/contraction of the rational disk from the explicit rational enclosure.
+- [ ] **P1.B26** `originalBishopKoenigsIncrementMagnitude`: build `h_{n+1}-h_n` from the actual Bishop principal-log iteration and establish the `552/625` geometric majorant.
+- [ ] **P1.B27** `originalBishopKoenigsComponentAbsoluteSummability`: use native Bishop comparison/absolute convergence on the actual increments, then feed the existing `AbelBishopKoenigsIncrementSeriesExact.originalBishopKoenigsFiniteTailToCauchy`.
+- [ ] **P1.B28** `originalBishopKoenigsPrefixSameSource`: prove finite telescoping in native `_≈C_`, then identify the actual (p^n(\Log^n(z)-p)) prefix with the proven Cauchy increment series.
+- [ ] **P1.B29** `originalBishopKoenigsUniformCauchy`: finish the disk-uniform Cauchy estimate and analytic limit, then branch-corrected Abel and Kneser global continuation.
+- [ ] **P0.B30** Agda 2.9 source + transitive import kernel check, including definition reduction and setoid equality. No checker run in this response.
+
+No shortcut to other open phases: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics` remain OPEN. The concrete exponential iterations are not tetration inverse nor Kneser normalization.
