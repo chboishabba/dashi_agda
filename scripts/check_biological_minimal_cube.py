@@ -106,6 +106,67 @@ def lattice():
     return len(bonds), len(squares)
 
 
+
+def marker_step(state):
+    g, chromatin, h, j, e, _p = state
+    return (g, chromatin, h, j, e, chromatin)
+
+
+def marker_code(state):
+    return (code(state), state[1])
+
+
+def marker_code_step(pair):
+    coarse, chromatin = pair
+    if coarse[0] == "inactive":
+        return (("inactive", chromatin), chromatin)
+    _active, h, j, e, _p = coarse
+    return (("active", h, j, e, chromatin), chromatin)
+
+
+def marker_repair_and_dependency_controls():
+    # Exhaustive positive repair for the ONE selected synthetic marker action.
+    assert len({marker_code(s) for s in STATES}) == 36
+    assert all(marker_code(marker_step(s)) == marker_code_step(marker_code(s))
+               for s in STATES)
+    ordered_collisions = sum(
+        code(a) == code(b) and a[1] != b[1]
+        for a in STATES for b in STATES
+    )
+    assert ordered_collisions == 288
+
+    for state in STATES:
+        physical, reduced = state, marker_code(state)
+        for _ in range(6):
+            assert physical[-1] == reduced[0][-1]
+            assert reduced == marker_code(physical)
+            physical, reduced = marker_step(physical), marker_code_step(reduced)
+
+    # Strict fixture-only dependency closure:
+    # source -> mechanism -> prediction, unrelated node is not reachable.
+    edges = (("source", "mechanism"), ("mechanism", "prediction"))
+    affected = {"source"}
+    while True:
+        expanded = affected | {target for source, target in edges if source in affected}
+        if expanded == affected:
+            break
+        affected = expanded
+    assert affected == {"source", "mechanism", "prediction"}
+    assert "unrelated" not in affected
+
+    # Replaying the same source revision yields the same affected set.
+    def replay(changes):
+        opened = set(changes)
+        while True:
+            new = opened | {t for s, t in edges if s in opened}
+            if new == opened:
+                return frozenset(opened)
+            opened = new
+
+    assert replay({"source"}) == replay(set(replay({"source"})))
+    assert replay({"unrelated"}) == frozenset({"unrelated"})
+    return ordered_collisions
+
 def main():
     classes, sizes = refine()
     assert len(set(code(s) for s in STATES)) == 18
@@ -116,8 +177,10 @@ def main():
                for s in STATES for t in STATES)
     assert all(code(step(a, s)) == code(step(a, (s[0], not s[1], *s[2:])))
                for s in STATES for a in ACTIONS)
+    collision_count = marker_repair_and_dependency_controls()
     bonds, squares = lattice()
-    print("PASS: states=64 future-classes=18")
+    print("PASS: states=64 future-classes=18 marker-aware-classes=36")
+    print(f"PASS: marker collisions={collision_count}, selected-action repair, dependency closure and replay")
     print("PASS: partition refinement sizes=" + ",".join(map(str, sizes)))
     print("PASS: 5 diagnostic histories exactly recover the minimal quotient")
     print(f"PASS: nonperiodic cube has {bonds} bonds and {squares} squares")
