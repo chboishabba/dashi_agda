@@ -254,18 +254,101 @@ originalEveryPositiveLinkHasIncidentPlaquette {n} bond =
     (originalAllPlaquettesComplete (sourcePlaquetteContainingBond bond))
     (sourceCoveringPlaquetteActuallyContainsBond bond)
 
+
+------------------------------------------------------------------------
+-- ORIGINAL LINK-STAR CONFLICT / NO-CONFLICT DECISION.
+-- A link conflict is actual common ORIGINAL plaquette membership,
+-- not endpoint adjacency or disjointness of two plaquette boundaries.
+------------------------------------------------------------------------
+
+plaquetteEq :
+  ∀ {n} (p q : Plaquette.PeriodicPlaquette n) →
+  Torus.Dec (p ≡ q)
+plaquetteEq {n} =
+  Torus.productDecidableEquality
+    (Torus.periodicTorus4DecidableEquality (suc n))
+    Torus.cyclicIndexDecidableEquality
+
+decidePlaquetteIn :
+  ∀ {n} (p : Plaquette.PeriodicPlaquette n)
+    (ps : List (Plaquette.PeriodicPlaquette n)) →
+  Torus.Dec (Torus._∈_ p ps)
+decidePlaquetteIn p [] = Torus.no (λ ())
+decidePlaquetteIn p (q ∷ qs) with plaquetteEq p q
+... | Torus.yes refl = Torus.yes Torus.here
+... | Torus.no unequal with decidePlaquetteIn p qs
+...   | Torus.yes member = Torus.yes (Torus.there member)
+...   | Torus.no absent =
+  Torus.no (λ { Torus.here → unequal refl
+              ; (Torus.there member) → absent member })
+
+OriginalStarsDisjoint :
+  ∀ {n} → Bond n → Bond n → Set
+OriginalStarsDisjoint a b =
+  ∀ p →
+  Torus._∈_ p (originalIncidentPlaquettes a) →
+  Torus._∈_ p (originalIncidentPlaquettes b) →
+  Torus.Empty
+
+decideOriginalStarsDisjointOn :
+  ∀ {n} (a b : Bond n)
+    (as : List (Plaquette.PeriodicPlaquette n)) →
+  Torus.Dec
+    (∀ p → Torus._∈_ p as →
+      Torus._∈_ p (originalIncidentPlaquettes b) → Torus.Empty)
+decideOriginalStarsDisjointOn a b [] =
+  Torus.yes (λ p ())
+decideOriginalStarsDisjointOn a b (p ∷ rest)
+  with decidePlaquetteIn p (originalIncidentPlaquettes b)
+... | Torus.yes present =
+  Torus.no (λ separate → separate p Torus.here present)
+... | Torus.no absent with decideOriginalStarsDisjointOn a b rest
+...   | Torus.yes tailSeparate =
+  Torus.yes
+    (λ { p Torus.here inB → absent inB
+       ; p (Torus.there inRest) inB →
+           tailSeparate p inRest inB })
+...   | Torus.no notTail =
+  Torus.no
+    (λ allSeparate →
+      notTail
+        (λ p inRest inB →
+          allSeparate p (Torus.there inRest) inB))
+
+decideOriginalStarsDisjoint :
+  ∀ {n} (a b : Bond n) →
+  Torus.Dec (OriginalStarsDisjoint a b)
+decideOriginalStarsDisjoint a b =
+  decideOriginalStarsDisjointOn a b (originalIncidentPlaquettes a)
+
+-- Actual self-conflict is constructively proved using the real
+-- nonempty source incidence, not an assumed reflexivity axiom.
+originalStarNeverDisjointFromItself :
+  ∀ {n} (bond : Bond n) →
+  OriginalStarsDisjoint bond bond → Torus.Empty
+originalStarNeverDisjointFromItself bond separate with
+  originalEveryPositiveLinkHasIncidentPlaquette bond
+... | p , member = separate p member member
+
+-- Reversing link order does not change the original star-separation.
+originalStarsDisjointSymmetric :
+  ∀ {n} {a b : Bond n} →
+  OriginalStarsDisjoint a b → OriginalStarsDisjoint b a
+originalStarsDisjointSymmetric separate p inB inA =
+  separate p inA inB
+
 ------------------------------------------------------------------------
 -- Next source-native D1 proof:
 -- 1. DONE SOURCE-WRITTEN: enumerate all original source plaquettes,
 --    select genuinely incident plaquettes, prove soundness, and prove
 --    one actually incident plaquette exists for every native bond.
--- 2. REMAINING: exactly-six incidence (for side >= 3), original
+-- 2. DONE SOURCE-WRITTEN: proof-producing decision whether two\n--    actual source link stars share an original plaquette, with\n--    constructive nonempty self-conflict and symmetry.\n-- 3. REMAINING: exactly-six incidence (for side >= 3), original
 --    degree-18 plaquette conflict, and a source-native 19-packing proof.
--- 3. REMAINING: choose a full original link-set with disjoint incident
+-- 4. REMAINING: choose a full original link-set with disjoint incident
 --    plaquette stars and prove source-specific packing witnesses.
--- 4. REMAINING: consume the actual original Wilson Gibbs product-Haar
+-- 5. REMAINING: consume the actual original Wilson Gibbs product-Haar
 --    Fubini/disintegration laws and the SU(2) coherent one-link bound.
--- 5. REMAINING PHYSICAL: sparse frustrated/mixed connected contour
+-- 6. REMAINING PHYSICAL: sparse frustrated/mixed connected contour
 --    suppression and full physical-distance CMP116 marked-source decay.
 -- Agda 2.9 exact-head kernel acceptance has NOT been observed.
 ------------------------------------------------------------------------
