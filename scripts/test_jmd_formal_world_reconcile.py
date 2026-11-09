@@ -57,8 +57,8 @@ class WorldTests(unittest.TestCase):
            "module":"R.Main","declaration":"R.foo","type":"Nat -> Nat"}
         p=self.file("lean.jsonl",[r])
         with self.assertRaisesRegex(ValueError,"not in admitted"):
-            world.import_external(self.conn,p,{8})
-        self.assertEqual(world.import_external(self.conn,p,{7}),1)
+            world.import_external(self.conn,p,{8: 'u/other'})
+        self.assertEqual(world.import_external(self.conn,p,{7: 'u/r'}),1)
 
     def test_source_keys_stable_and_distinct(self):
         self.assertEqual(world.source_key("r","a"*40,"x"),world.source_key("r","a"*40,"x"))
