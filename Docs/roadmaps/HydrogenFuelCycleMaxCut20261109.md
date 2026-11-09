@@ -213,3 +213,36 @@ https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=1
 **SI-02 status:** reference-state H2 and methane HHVs sourced; device-specific H2 molar flow, gas composition and calorimetry still external. Source uncertainty is not a claim that reactor-level uncertainty is ±0.040 kJ/mol. The measurement-dependent gates SI-01, SI-03 field acquisition, AL-01, PH-01, PH-02, C-01, IP-01 and V-01 remain open. The interval theorem is conditional on actual admitted readings.
 
 **Total source tranche:** 18 new Agda modules plus an independent no-CI Python regression source file, 2026-11-09. K0 not prioritised in this iteration per user instruction; its actual kernel status is unchanged.
+
+## 2026-11-09 20:36+10:00 steelman-versus-physical maximum-cut continuation
+
+The question is now **mechanistic identification, not just admissibility**. The strongest physically plausible hypothesis is that a small externally powered H2/O2 input modifies real combustion phasing, ignition delay, temperature distribution, knock/pressure-rise limits or other dynamics enough to change the fraction of the hydrocarbon input converted into useful engine work. This is possible in principle but not a verified McLaren/XFuel effect. The amount of H2 burned remains a fuel-energy term even when it changes combustion chemistry.
+
+### Three additional source-written modules
+
+1. `HydrogenCombustionIdentifiabilityExact`: a *constructive non-identification counterexample* with the same 70-kWh diesel input and 35-kWh useful output:
+   - 0-kWh H2 + 50% engine efficiency;
+   - 10-kWh H2 + 43.75% engine efficiency.
+   Both give 35 kWh. Thus *diesel burn and useful output alone* do not identify the hydrogen-substitution versus combustion-efficiency mechanism. Also supplies exact 30% diesel displacement with 10.5-kWh H2 (15-kWh electric at a **hypothetical** 70%-HHV electrolysis efficiency), implying 70/161 = about 43.48% assisted engine efficiency.
+2. `HydrogenProcessFullBoundaryExact`: the first-law ledger explicitly counts electricity + imported process heat + chemical feed + initial stored energy, compared with H2 HHV + useful/exported energy + reject heat + final stored energy. Its nonnegative-energy consequence `hydrogenBoundedByAllInputs` **does not assume electricity is the sole hydrogen-production input**. It avoids wrongly applying the electricity-only result to heated electrolysers/plasma systems.
+3. `HydrogenOxygenFactorialIdentificationExact`: a 2×2 power-on controlled fuel-use contrast for H-only, O-only, both, and neither. The pure toy numbers (100,92,94,80; extra combined interaction 6) are explicitly separate from `CausalAdmission`, which requires same-output/load, equal doses, power-only placebo, crossover/randomisation, independently calibrated measurements, emissions and replication.
+
+The dependency-free Python script `scripts/check_hydrogen_fuel_cycle_maxcut.py` now has 17 declared tests, including six physical-steelman counterexamples. **No test execution is attested in the GitHub commit**. No new real measurements were supplied. All three modules are wired into `DASHI.Chemistry.Everything`.
+
+### Exact remaining maximum cut (K0 excluded at user's request)
+
+| Order | Gate | What a defensible closure requires |
+|---|---|---|
+| P0 | EFF-IDENT-01 | Independent same-run H2 chemical-energy flow + diesel HHV input + true useful engine/generator work; positive denominator and metered gross/net boundary; derive `η=W/(F+H+S)` and its uncertainty |
+| P0 | EFF-CAUSAL-02 | Power-only, H-only, O-only, H+O; identical work/loads, actual gas dose and injection phasing, crossover/randomised blocks, replication and uncertainty-controlled interaction |
+| P0 | EFF-ROBUST-03 | Compare *all external input energies* (battery SOC, grid/PV, thermal process heat, chemical fuel, compressed/storage streams) with the diesel displacement, using interval-wide inequalities and matched useful output |
+| P0 | MECH-04 | Measure pressure/heat-release, injection/ignition timing and engine exhaust; distinguish ignition phasing versus mere H2 calorific substitution; account for NOx, particulates, thermal stress |
+| P1 | CARBON-05 | Assay actual synthetic hydrocarbon product and all stream inventories; repeated-state carbon makeup/emissions and hydrogen/electricity/separation/capture/heat duty |
+| P1 | TECH-06 | Verify which of electrolysis-intake, plasma-membrane or carbon-synthesis architecture is physically present and pay only its actual auxiliaries |
+| P1 | THERM-07 | Transport the NIST reference-state HHV/uncertainty to the device-selected operating state/phase through source-paid calorimetry or appropriate enthalpy corrections |
+| P2 | IP-08 | Exact asserted 2026 grant ID, claims, inventors, registered assignee and patent-specific Converde/Cycle/Olenox assignments |
+| P2 | REPL-09 | Independent mathematical, physical/instrumental and legal verification receipts with role-separated attribution |
+
+**Stop conditions**: A 30% reduction in diesel-only flow is not proof of 30% energy saving, 30% relative engine efficiency gain, a catalytically regenerated H2 species, or a CO2-neutral fuel lifecycle. Even a robust positive input-energy difference is not an emissions, cost, or operational-safety certificate. Never treat the factorial toy values, the exact rational threshold or a patent publication as an instrument observation.
+
+All traditional chemistry, BIPM SI, NIST data and original DASHI theorem/provenance owners retain attribution. This tranche records user direction and ChatGPT source drafting separately. K0 remains unchanged and out of this iteration's priority order.
