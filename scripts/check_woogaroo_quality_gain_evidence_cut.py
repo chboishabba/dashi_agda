@@ -58,6 +58,23 @@ def run():
     assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>1)==6
     assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>2)==4
     assert sum(1 for rows in ROWS.values() for _,gain,_ in rows if gain>3)==3
+    exceptional=[("Esk AU2",448,2,75),("Avonvale AU1",493,3,75),
+                 ("Avonvale AU2",152,4,75),("Avonvale AU4",868,2,75),
+                 ("MWW AU1",508,4,75),("MWW AU2",1047,4,75)]
+    exceptional_weight=sum(a*g*conf for _,a,g,conf in exceptional)
+    exceptional_premium=sum(a*(g-1)*conf for _,a,g,conf in exceptional)
+    assert exceptional_weight==820425
+    assert exceptional_premium==556725
+    assert EXPECTED_COEFFICIENTS[None]==EXPECTED_COEFFICIENTS[1]+exceptional_premium
+    assert exceptional_weight+189925==EXPECTED_COEFFICIENTS[None]
+    assert (508+1047)*3*75==349875
+    exceptional_detail=[{
+       "assessment_unit":name,
+       "reported_gain":gain,
+       "coefficient":area*gain*confidence,
+       "credit_percentage_points":f"{float(F(area*gain*confidence*MULTIPLIER,DENOMINATOR)):.10f}",
+       "premium_over_one_point":f"{float(F(area*(gain-1)*confidence*MULTIPLIER,DENOMINATOR)):.10f}"
+       } for name,area,gain,confidence in exceptional]
     results={("source" if cap is None else "cap_"+str(cap)):scenario(cap)
              for cap in (None,3,2,1)}
     assert results["source"]["above_100_full_compensation"]
@@ -75,6 +92,12 @@ def run():
        "time_until_benefit_years":20,
        "zero_avoided_loss_only":True,
        "results":results,
+       "six_exceptional_units":exceptional_detail,
+       "six_exceptional_weighted_coefficient":exceptional_weight,
+       "six_exceptional_premium_coefficient":exceptional_premium,
+       "six_exceptional_credit_percentage_points":f"{float(F(exceptional_weight*MULTIPLIER,DENOMINATOR)):.10f}",
+       "premium_over_one_point_percentage_points":f"{float(F(exceptional_premium*MULTIPLIER,DENOMINATOR)):.10f}",
+       "premiums_are_conditionals_not_disallowed_claims":True,
        "above_one_gain_rows":6,
        "above_two_gain_rows":4,
        "above_three_gain_rows":3,
