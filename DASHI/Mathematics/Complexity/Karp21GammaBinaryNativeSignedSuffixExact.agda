@@ -19,6 +19,7 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (_×_; _,_)
+open import Data.Integer.Base using (ℤ)
 open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
@@ -104,8 +105,6 @@ karpNativeSignedGammaSuffixSameOriginal word =
 -- executable SignedMagnitudeBits payload yet. That is the final
 -- numerical representation lemma needed by the binary ledger.
 ------------------------------------------------------------------------
-
-open import Data.Integer.Base using (ℤ)
 
 signedNativeControlNumericView :
   Word.BitWord → Maybe (ℤ × Word.BitWord)
