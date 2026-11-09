@@ -30,6 +30,9 @@ import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
 import DASHI.Analysis.BishopOriginalFiniteLogSecondQuotientPositiveExact as Positive
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopSetoidPowerDerivativeNormalisationExact as Scale
+import DASHI.Analysis.BishopNaturalScaleEmbeddingBridgeExact as ScaleBridge
+import DASHI.Foundations.BishopCubicTranslationIteratedExact as NatReal
+import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as Recip
 import DASHI.Analysis.BishopOriginalFactorIncrementFiniteTelescopeExact as Walk
 import DASHI.Analysis.BishopOriginalNegativeLogFiniteWeightedMeshRecurrenceExact as Mesh
 
@@ -140,3 +143,115 @@ originalFinitePowerQuadratureEndpointBound
         RP.≃-refl initial old last
   in
   RP.≤-respʳ-≃ telescope inductive
+
+------------------------------------------------------------------------
+-- EXACT NATIVE RATIONAL COEFFICIENT NORMALIZATION.
+-- The pinned bishop reciprocalNatRational n is literally 1/(n+1);
+-- NatReal.natReal (suc n) is literally n+1. Their cancellation
+-- has an existing original proof, not a new order axiom.
+------------------------------------------------------------------------
+
+sourceRawPowerQuadratureCell :
+  (steps : Nat → R.ℝ) (n j : Nat) → R.ℝ
+sourceRawPowerQuadratureCell steps n j =
+  R._*_
+    (steps j)
+    (R.pow (Mesh.sourceVertex steps j) n)
+
+sourceFinitePowerScaledCellIsEmbeddedNat :
+  (steps : Nat → R.ℝ) (n j : Nat) →
+  R._≃_
+    (sourcePowerQuadratureCell steps n j)
+    (R._*_
+      (NatReal.natReal (suc n))
+      (sourceRawPowerQuadratureCell steps n j))
+sourceFinitePowerScaledCellIsEmbeddedNat steps n j =
+  let
+    step = steps j
+    power = R.pow (Mesh.sourceVertex steps j) n
+    count = NatReal.natReal (suc n)
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.*-cong RP.≃-refl
+      (ScaleBridge.recursiveScaleIsEmbeddedNaturalMultiply
+        (suc n) power))
+    (solve 3
+      (λ hh cc pp →
+        hh ⊗ (cc ⊗ pp)
+        ⊜ cc ⊗ (hh ⊗ pp))
+      RP.≃-refl step count power)
+
+sourceFinitePowerScaledSumIsEmbeddedNat :
+  (steps : Nat → R.ℝ) (n cells : Nat) →
+  R._≃_
+    (Walk.sumFinite (sourcePowerQuadratureCell steps n) cells)
+    (R._*_
+      (NatReal.natReal (suc n))
+      (Walk.sumFinite (sourceRawPowerQuadratureCell steps n) cells))
+sourceFinitePowerScaledSumIsEmbeddedNat steps n zero =
+  let open RP.ℝ-Solver in
+  solve 1
+    (λ cc → Κ 0ℚᵘ ⊜ cc ⊗ Κ 0ℚᵘ)
+    RP.≃-refl (NatReal.natReal (suc n))
+sourceFinitePowerScaledSumIsEmbeddedNat steps n (suc cells) =
+  let
+    count = NatReal.natReal (suc n)
+    old = Walk.sumFinite (sourceRawPowerQuadratureCell steps n) cells
+    next = sourceRawPowerQuadratureCell steps n cells
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.+-cong
+      (sourceFinitePowerScaledSumIsEmbeddedNat steps n cells)
+      (sourceFinitePowerScaledCellIsEmbeddedNat steps n cells))
+    (solve 3
+      (λ cc oo nn →
+        (cc ⊗ oo) ⊕ (cc ⊗ nn)
+        ⊜ cc ⊗ (oo ⊕ nn))
+      RP.≃-refl count old next)
+
+originalFinitePowerQuadratureEndpointReciprocalBound :
+  (steps : Nat → R.ℝ) (power cells : Nat) →
+  (vertexNN : (j : Nat) →
+    R.NonNegative (Mesh.sourceVertex steps j)) →
+  (stepNN : (j : Nat) → R.NonNegative (steps j)) →
+  let
+    reciprocal = R._⋆ (Recip.reciprocalNatRational power)
+    endpoint = R._-_
+      (R.pow (Mesh.sourceVertex steps cells) (suc power))
+      (R.pow (Mesh.sourceVertex steps zero) (suc power))
+  in
+  R._≤_
+    (Walk.sumFinite (sourceRawPowerQuadratureCell steps power) cells)
+    (R._*_ reciprocal endpoint)
+originalFinitePowerQuadratureEndpointReciprocalBound
+    steps power cells vertexNN stepNN =
+  let
+    count = NatReal.natReal (suc power)
+    reciprocal = R._⋆ (Recip.reciprocalNatRational power)
+    rawSum = Walk.sumFinite (sourceRawPowerQuadratureCell steps power) cells
+    endpoint = R._-_
+      (R.pow (Mesh.sourceVertex steps cells) (suc power))
+      (R.pow (Mesh.sourceVertex steps zero) (suc power))
+    scaleBound = RP.≤-respˡ-≃
+      (sourceFinitePowerScaledSumIsEmbeddedNat steps power cells)
+      (originalFinitePowerQuadratureEndpointBound
+        steps power cells vertexNN stepNN)
+    multiplied = RP.*-monoˡ-≤-nonNeg
+      scaleBound
+      (Recip.reciprocalNonnegative power)
+    cancel = Recip.embeddedReciprocalNatCancels power
+    open RP.ℝ-Solver
+    leftNormal =
+      RP.≃-trans
+        (solve 3
+          (λ rr cc ss →
+            rr ⊗ (cc ⊗ ss)
+            ⊜ (rr ⊗ cc) ⊗ ss)
+          RP.≃-refl reciprocal count rawSum)
+        (RP.≃-trans
+          (RP.*-cong cancel RP.≃-refl)
+          (RP.*-identityˡ rawSum))
+  in
+  RP.≤-respˡ-≃ (RP.≃-symm leftNormal) multiplied
