@@ -82,3 +82,23 @@ originalCubicalPlaquetteCount = Grid.completePlaquetteCount
 -- Pants gluing is a separate *physical interface witness*, not a
 -- reinterpretation of the three Cartesian dimensions as a flat
 -- algebraic index, nor proof of any physiological flow coefficient.
+
+
+------------------------------------------------------------------------
+-- SAME-STATE COMPOSITION: two genuine native geometric transfers share
+-- one inventory, rather than independent per-bond inventories.
+-- This remains a purely finite conservative geometric statement;
+-- neither step asserts a measured permeability or reaction rate.
+------------------------------------------------------------------------
+
+twoNativeCubicalBondTransfersConserveTotal :
+  (first second : Grid.PositiveBond) →
+  (inventory : SharedCubicalStorage) →
+  V.sum (moveAlongOriginalBond second
+           (moveAlongOriginalBond first inventory))
+    ≡ V.sum inventory
+twoNativeCubicalBondTransfersConserveTotal first second inventory =
+  trans
+    (cubicalBondTransferConservesTotal second
+      (moveAlongOriginalBond first inventory))
+    (cubicalBondTransferConservesTotal first inventory)
