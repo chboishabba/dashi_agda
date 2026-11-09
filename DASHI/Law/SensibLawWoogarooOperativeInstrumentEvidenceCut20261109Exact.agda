@@ -199,6 +199,65 @@ dateOfApprovalYYYYMMDD = 20261016
 ordinary15thBusinessDayYYYYMMDD : Nat
 ordinary15thBusinessDayYYYYMMDD = 20261106
 
+-- Conditions 34-42: the restoration clocks are distinct by offset
+-- site. Avonvale/Esk year 5/10/15/20 measured from commencement.
+-- Mount Walker West milestones measured from its Voluntary
+-- Declaration; it may be secured later than action commencement (but
+-- BEFORE any outside-Phase-One clearing or construction). This time
+-- lag may matter physically even if modeled quality credit used t=20.
+data Trigger : Set where
+  actionCommencement mwwVoluntaryDeclaration : Trigger
+
+monitoringClock : Site → Trigger
+monitoringClock avonvale = actionCommencement
+monitoringClock esk = actionCommencement
+monitoringClock mountWalkerWest = mwwVoluntaryDeclaration
+
+avonvaleMonitoringClock :
+  monitoringClock avonvale ≡ actionCommencement
+avonvaleMonitoringClock = refl
+
+eskMonitoringClock :
+  monitoringClock esk ≡ actionCommencement
+eskMonitoringClock = refl
+
+mountWalkerMonitoringClock :
+  monitoringClock mountWalkerWest ≡ mwwVoluntaryDeclaration
+mountWalkerMonitoringClock = refl
+
+-- C34 and C35: independent ecological survey at each 5,10,15,20-
+-- year anniversary plus at most 60 BUSINESS DAYS; C36 and C37 require
+-- independent report publication in 80 BUSINESS DAYS of anniversary.
+-- C40 requires each projected quality milestone at its own timeframe.
+-- C41 Year 20 outcomes maintained through approval expiry.
+data Milestone : Set where
+  year5 year10 year15 year20 : Milestone
+
+data PlanClass : Set where
+  management16to19or23 originalOffsetManagementPlan : PlanClass
+
+-- C43 allows only plans REQUIRED UNDER conditions 16-19,23 to be
+-- revised without submitting them for ministerial approval, provided
+-- further strict consistency and no-new-impact conditions are met.
+-- The ORIGINAL C27 offset OAMPs are not enumerated. The approval
+-- definitions instead allow a later version "approved in writing by
+-- the Minister". This is a narrow scope classification; not a
+-- blanket claim no other lawful process can ever revise an OAMP.
+c43EligibleForUnsubmittedRevision : PlanClass → Bool
+c43EligibleForUnsubmittedRevision management16to19or23 = true
+c43EligibleForUnsubmittedRevision originalOffsetManagementPlan = false
+
+offsetPlanNotAutomaticallyCoveredByC43 :
+  c43EligibleForUnsubmittedRevision originalOffsetManagementPlan ≡ false
+offsetPlanNotAutomaticallyCoveredByC43 = refl
+
+-- C48 is a separate public-access clock. A publicly listed file
+-- without source bytes cannot prove this exact approved revision
+-- was downloadable by the original deadline. Conversely a
+-- broken publisher link alone cannot prove C48 noncompliance:
+-- holder-specific site, prior publication, a valid written Minister
+-- exception, and actual records must be reviewed first.
+
 -- C49 plans must remain downloadable, current and superseded.
 -- C52 commencement notice within five business days after commencement.
 -- C24 Avonvale and Esk declarations must precede commencement.
