@@ -269,3 +269,9 @@ import DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseMetadynamics
 import DASHI.Chemistry.IndustrialReactiveEnergyBalanceExact
 import DASHI.Chemistry.HydrogenFuelCycleExact
 import DASHI.Chemistry.CarbonFuelRegenerationExact
+
+-- Extended max-cut: concrete projected elemental left-kernel, general
+-- natural-number break-even iff, and conditional electrolyser first law.
+import DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact
+import DASHI.Chemistry.HydrogenFuelCycleBreakEvenExact
+import DASHI.Chemistry.HydrogenElectrolyserEnergyExact
