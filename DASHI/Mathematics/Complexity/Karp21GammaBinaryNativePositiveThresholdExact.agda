@@ -17,17 +17,22 @@ module DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExac
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Maybe.Base using (Maybe; just; nothing)
 open import Data.Product using (_×_; _,_)
 open import Data.List.Base using (reverse)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
+open import Data.Nat.Tactic.RingSolver using (solve)
+import Data.Nat.Properties as NatP
 
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Native
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact as Compare
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderExact as Add
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact as Value
 
 -- One-pass predecessor on an LSB-first positive binary successor.
 -- If the head is 0, borrow continues; if the head is 1, it stops.
@@ -85,3 +90,30 @@ gammaTwoThresholdAccepted :
   readPositiveGammaLE (false ∷ true ∷ true ∷ [])
     ≡ just (false ∷ true ∷ [] , [])
 gammaTwoThresholdAccepted = refl
+
+------------------------------------------------------------------------
+-- The bit-native predecessor is correct on every positive input
+-- (anyOne = true). This is the mathematical observation of the
+-- executable source, not a unary operation inside the decoder.
+------------------------------------------------------------------------
+
+two : Nat
+two = suc (suc 0)
+
+predecessorStepAlgebra :
+  (x : Nat) →
+  (suc 0 + two * x) + suc 0 ≡ two * (x + suc 0)
+predecessorStepAlgebra x = solve (x ∷ [])
+
+predecessorLEValue :
+  (bits : Word.BitWord) →
+  anyOne bits ≡ true →
+  Value.valueLE (predecessorLE bits) + suc 0 ≡ Value.valueLE bits
+predecessorLEValue [] ()
+predecessorLEValue (true ∷ rest) accepted =
+  NatP.+-comm (two * Value.valueLE rest) (suc 0)
+predecessorLEValue (false ∷ rest) accepted =
+  trans
+    (predecessorStepAlgebra (Value.valueLE (predecessorLE rest)))
+    (cong (λ n → two * n)
+      (predecessorLEValue rest accepted))
