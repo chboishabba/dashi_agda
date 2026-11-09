@@ -304,3 +304,15 @@ import DASHI.Mathematics.Complexity.Karp21NativeRawEdgeInputChargeExact
 -- F2.1 actual source gamma consumption; original raw-edge token charges; same-source selected ripple ledger width.
 -- All new proof candidates require exact-head Agda acceptance; emitted-event subsequence witness remains OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeSelectedLedgerInputBoundExact
+
+-- F2.1 same ORIGINAL graph word: actual binary n/m reader, first-enabled event subsequence and real two-lane signed ledger width budget.
+-- SOURCE candidate only; physical bit-TM head/tape clock and Agda receipt OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphLedgerInputBoundExact
+
+-- F2.1 same ORIGINAL graph word: actual binary n/m reader, first-enabled event subsequence and real two-lane signed ledger width budget.
+-- SOURCE candidate only; physical bit-TM head/tape clock and Agda receipt OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeActualEventSubsequenceExact
+
+-- F2.1 same ORIGINAL graph word: actual binary n/m reader, first-enabled event subsequence and real two-lane signed ledger width budget.
+-- SOURCE candidate only; physical bit-TM head/tape clock and Agda receipt OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeFirstEnabledLedgerWordBoundExact
