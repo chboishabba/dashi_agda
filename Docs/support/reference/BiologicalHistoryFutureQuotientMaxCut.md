@@ -1075,3 +1075,62 @@ cross-check, not an Agda kernel execution receipt and not original
 biological measurement. The model has only one new markerProbe
 action in this diagnostic; the real physical action language is not
 represented by these counts.
+
+
+### 2026-11-09 seven-gate max-cut: source audit and finite replay regression
+
+The existing `scripts/check_biological_minimal_cube.py` now includes
+`marker_repair_and_dependency_controls`. It enumerates all 64 synthetic
+Boolean states and the 36 marker-aware coarse states, checks every selected
+marker-probe one-step commutation, performs bounded repeated-action checks,
+counts 288 **ordered** previously collapsed marker-distinguished pairs, and
+checks the selected reverse-dependency graph
+`source → mechanism → prediction` with `unrelated` as a negative control.
+The idempotent replay test operates on **pure finite sets**, not the
+canonical ITIR PostgreSQL store. This is an implementation regression;
+the latest committed script has not received an independently executed
+exact-head test receipt in this connector session. Earlier independently
+executed in-memory finite assertions on the same model did pass.
+
+Seven gates, strictly separated:
+
+1. **Golden P0 OPEN:** Agda 2.9 / `parallel_checker` with exact SHA,
+   transitive imports and proof receipts. No kernel executable here.
+2. **TSVF P0 PARTIAL:** actual selected biology projection now instantiates
+   the same canonical `SectionedProjection` and `ResidualReopening`
+   interfaces as TSVF. Neither a bijection nor a physically observed
+   same-object map between original TSVF history records and biological
+   state is claimed.
+3. **Dependency P1 PARTIAL:** source-written `AffectedDependencyClosureExact`
+   composition and an executable finite negative-control regression.
+   Production graph completeness, revision scope and authoritative
+   source-identity mapping remain unverified.
+4. **Fleet replay P1 OPEN:** ITIR #58 already owns the PostgreSQL
+   `formal.referee_receipt` authority and idempotent/conflicting-replay
+   tests; ITIR #64 owns PG operation events for ChatGPT turns, which are
+   NOT automatically proof-reopening events. Need a tested, source-scoped
+   dependency→verified-referee replay within existing AO/ITIR operators,
+   without creating a duplicate receipt database.
+5. **Physical P1 OPEN:** `BiologicalSourcePhysicalTissueSimulationExact`
+   demands original `physicalPNPStepCommutes` and `physicalOneStep`;
+   its all-history induction is already constructed conditionally. No
+   calibrated selected native PNP/chemical physical inhabitant is supplied.
+6. **Calibration P2 OPEN:** reuse `GenomeSensorimotorConnectomeBridge`,
+   `BidirectionalBrainObservationQuotient`,
+   `CellBrainTransducerBridgeExact`,
+   `SIBioelectricNetworkAdapterExact`, and
+   `BiologicalSpatialCirculationIncidenceExact`. Canonical SI update
+   is the identity fixture, not a fitted neural/tissue dynamic law.
+   Original specimen-, region-, compartment- and time-indexed voltage,
+   transport, circulation and phenotype observations remain required.
+7. **Independent validation P2 OPEN:** original dmsC RNA9 assays support
+   bounded molecular prediction comparisons, not independently measured
+   controlled longitudinal planarian or brain/body causal validation.
+
+**Highest next executable cut:** run the focused Agda checker and existing
+finite scripts against the current commit; source-pin their receipts. For
+ITIR runtime tests, require a configured canonical PostgreSQL DSN and a
+real trusted-referee identity; otherwise fail closed instead of claiming
+the finite replay is a database roundtrip. For physics, use the existing
+source physical simulation record and demand a calibrated `physicalOneStep`
+rather than constructing an artificial instance.
