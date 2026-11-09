@@ -273,3 +273,33 @@ remain independent open leaves. No Agda kernel receipt is claimed.
 Agda 2.9 typecheck of each new owner and transitive imports. In
 particular examine native solver goal conversion and proof irrelevance
 of the positive inverse witnesses.
+
+## P0.02 compact-uniform original shifted-factorial bound (further 9 November)
+
+Added `DASHI/Analysis/BishopOriginalShiftedFactorialUniformModulusExact.agda`
+and wired it into all three canonical TOE roots. The theorem
+`originalShiftedFactorialExpQuotientUniformModulus` directly composes
+the already existing source owners
+`ExpClosed.originalExpQuotientMinusOneAbsBound` and
+`ExpMono.bishopExpMonotoneNonnegative`. It gives, with a genuine
+nonnegative Bishop radius rho,
+
+```
+|u| <= rho => |Q(u)-1| <= bishopExp(rho)-1
+```
+
+for the **literal** original shifted-factorial source Q. The
+`originalNegativeLogShiftedFactorialUniformModulus` specialization
+feeds the *actual* finite LOG increment delta as u.
+
+This is a uniform **argument-ball** bound. To produce a full mesh
+modulus as h->0, combine the existing
+`originalSourceNegativeLogDeltaIsSecondOrder` with a genuine original
+Bishop radius estimate `|delta_N(x,h)|<=rho_N(h)`, uniformly over
+the mesh compact. Do not mark P0.03 or terminal P0.06 complete merely
+because P0.02's argument-ball comparison is source-written.
+
+Independent exact-rational finite checks: 14,520 source second-order
+modulus instances (N through 30, four r values, 11x11 endpoint grid)
+and 14 normalized endpoint meshes passed. No Agda 2.9 kernel receipt
+is available. Keep P1/P2/P3 semantic leaves unchanged.
