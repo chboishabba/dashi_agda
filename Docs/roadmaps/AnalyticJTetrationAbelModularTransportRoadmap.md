@@ -431,3 +431,19 @@ With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite tele
 - [ ] **P1.K4c** `originalKneserConjugatePairGlobalNormalization`, plus **P1b** `originalPuncturedSectorLogBranchCocycle`, **P2** `originalBishopQSeriesTPeriod`/`originalRendererAbelWeldInstance`, **P3** `originalMovingLevelAbelWeldInstance`, **P4** `originalKouznetsovCertifiedNumerics`.
 
 **No theorem overclaim:** telescoping is a finite algebraic theorem. It does not produce Kneser's holomorphic function. The main high-alpha frontier remains the *actual original Bishop principal logarithm with quantitative disk estimates*; all new Agda sources are awaiting local Agda 2.9 kernel acceptance.
+
+## 2026-11-09 highest-alpha Bishop comparison / summability continuation
+
+**New source-written module:** `DASHI/Moonshine/AbelBishopKoenigsGeometricAbsoluteExact.agda`, commit `b31602de`. No manufactured convergence or theorem-field: it actually invokes the existing native Bishop `Sequence.proposition-3-5` comparison theorem and the proven `BishopPolynomialGeometricDominationConvergenceExact.scaledGeometricSeriesConvergent`. Its subject is the **original componentwise Bishop complex series**, not the unrelated generic `ConcreteComplex` carrier.
+
+- [x] **P1.B27a** `OriginalBishopGeometricComponentBounds`: precise original Bishop-real `|Re increments(n)|≤Mρ^n` and `|Im increments(n)|≤Mρ^n` proof obligations, with the source `BishopScaledGeometricInputs` requiring nonnegative M and ratio 0≤ρ<1.
+- [x] **P1.B27b** `originalBishopGeometricAbsoluteFromBound`: uses actual `Sequence.proposition-3-5` and Bishop absolute-value nonnegativity/idempotence to derive `SeriesOf_ConvergesAbsolutely` from the pointwise bound. No new ratio-test theorem or completeness axiom.
+- [x] **P1.B27c** `originalBishopKoenigsComponentAbsoluteSummability`: assembles the native original Bishop complex componentwise absolute-convergence witness.
+- [x] **P1.B27d** `originalBishopKoenigsGeometricCauchy`: reuses `AbelBishopKoenigsIncrementSeriesExact.originalBishopKoenigsFiniteTailToCauchy` without assuming absolute-convergence evidence as an input; it derives evidence from quantitative componentwise geometric bounds.
+- [x] **P1.B27e** `originalBishopKoenigsGeometricLimit`, `originalBishopKoenigsGeometricLimitConverges`: consume the previously built native Bishop complex completion machinery.
+- [ ] **P1.B27f** Kernel-check the new module/transitive imports; all source-written results above remain unverified by Agda 2.9.
+- [ ] **P1.B26 — physical/original analytic producer unchanged:** `originalBishopKoenigsIncrementMagnitude`. Build the actual complex principal-log trajectory and prove the geometric upper bound as a Bishop norm inequality; derive the real/imaginary bounds consumed by B27a. **This is the first genuinely unpaid quantitative inequality.**
+- [ ] **P1.B29 — genuine local uniform convergence:** derive disk-uniform `originalBishopKoenigsUniformCauchy` and the *holomorphic* limit using native function/derivative convergence, after B26. The B27e pointwise sequence limit does not by itself prove local uniform holomorphicity.
+- [ ] **Global P1 / P1b / P2 / P3 / P4:** unchanged: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics`.
+
+**Reuse precedence established:** original vendored real/complex sequence completion → original finite signed telescoping → original scaled-geometric comparison → actual original logarithm increment estimate. Do not reopen an unneeded separate 'build Bishop completeness' workstream. The Agda kernel and log-specific proofs remain the adjudicators.
