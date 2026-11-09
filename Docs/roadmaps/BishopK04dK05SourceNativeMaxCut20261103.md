@@ -4,6 +4,8 @@
 
 **New original owner:** `DASHI/Analysis/BishopOriginalNegativeLogFiniteExpUniformResidualExact.agda`.
 
+**Source admission:** the new owner imports the existing non-safe-marked original negative-log and global negative-exponential modules and deliberately carries no unsupported `{-# OPTIONS --safe #-}` declaration. Typechecking its transitive dependencies with the pinned Agda 2.9 checker is still mandatory.
+
 - `originalLogFinitePartialAtLeastPoint` proves for *every* (N>=1) the actual source finite negative-log sum (L_N(x)>=x) at (x>=0), using original source term monotonicity and the first literal coefficient.
 - `originalLogFinitePartialStrictlyPositive`, `originalFiniteNegativeLogExpPositive`, and `originalFiniteNegativeLogExpBelowOne` derive (0<F_N(x)<1) for (x>0) using the preexisting global negative-exponential theorem, not a new exp monotonicity assumption.
 - `originalFiniteNegativeLogExpResidualNonnegative` and `originalFiniteNegativeLogExpUniformResidualBound` establish the genuine pointwise-to-uniform **signed and absolute** estimate ( |x^N F_N(x)| <= r^N) for **all** (0<x<=r), (N>=1).
