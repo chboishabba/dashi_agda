@@ -82,8 +82,9 @@ noConfidenceDecoderForAffineProduct a b x y u v same distinct =
 -- Collision is exact Nat arithmetic; discounting or any downstream
 -- deterministic observation function preserves it by congruence.
 sameProductSameObservedOutput :
+  ∀ {O : Set} →
   (a b x y u v : Nat) →
-  (observe : Nat → Nat) →
+  (observe : Nat → O) →
   x * y ≡ u * v →
   observe (affineProduct a b x y) ≡
   observe (affineProduct a b u v)
@@ -93,11 +94,12 @@ sameProductSameObservedOutput a b x y u v observe same =
 -- No deterministic reporting, discounting or normalisation function
 -- can restore a coordinate discarded at the product stage.
 noGainDecoderAfterObservation :
+  ∀ {O : Set} →
   (a b x y u v : Nat) →
-  (observe : Nat → Nat) →
+  (observe : Nat → O) →
   x * y ≡ u * v →
   (x ≡ u → ⊥) →
-  (decode : Nat → Nat) →
+  (decode : O → Nat) →
   ((g c : Nat) →
      decode (observe (affineProduct a b g c)) ≡ g) → ⊥
 noGainDecoderAfterObservation a b x y u v observe same distinct =
@@ -107,8 +109,9 @@ noGainDecoderAfterObservation a b x y u v observe same distinct =
     distinct
 
 noConfidenceDecoderAfterObservation :
+  ∀ {O : Set} →
   (a b x y u v : Nat) →
-  (observe : Nat → Nat) →
+  (observe : Nat → O) →
   x * y ≡ u * v →
   (y ≡ v → ⊥) →
   (decode : Nat → Nat) →
