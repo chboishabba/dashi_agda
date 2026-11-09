@@ -113,3 +113,48 @@ selectedNativeOpenIonicFixtureBalances :
 selectedNativeOpenIonicFixtureBalances =
   nativeSignedChargeWithEnvironmentalSourcesAndSinks
     selectedNativeOpenIonicFixture
+
+------------------------------------------------------------------------
+-- COMPOSITION: native closed internal ion transport may precede
+-- ANY source-paid external face exchange. Original signed charge
+-- then differs from its prior physical inventory only by explicit
+-- face-indexed positive/negative environmental inputs and outputs.
+------------------------------------------------------------------------
+
+afterNativeInternalTransport :
+  List Ionic.IonMovement →
+  OriginalCubicalOpenIonSystem →
+  OriginalCubicalOpenIonSystem
+afterNativeInternalTransport actions system =
+  original-cubical-open-ion-system
+    (Ionic.runIonHistory actions (initialIons system))
+    (positiveOuterFaceEvents system)
+    (negativeOuterFaceEvents system)
+
+originalFullSpatialOpenSignedChargeBalance :
+  (actions : List Ionic.IonMovement)
+  (system : OriginalCubicalOpenIonSystem) →
+  openChargeAfterPlusOutputs (afterNativeInternalTransport actions system)
+    ≡
+  Ionic.integerSignedCharge
+    (Ionic.positiveTotal (initialIons system)
+      + Faces.totalExternalInput
+          (positiveResult (afterNativeInternalTransport actions system)))
+    (Ionic.negativeTotal (initialIons system)
+      + Faces.totalExternalInput
+          (negativeResult (afterNativeInternalTransport actions system)))
+originalFullSpatialOpenSignedChargeBalance actions system =
+  trans
+    (nativeSignedChargeWithEnvironmentalSourcesAndSinks
+      (afterNativeInternalTransport actions system))
+    (cong₂ Ionic.integerSignedCharge
+      (cong
+        (λ n → n + Faces.totalExternalInput
+          (positiveResult (afterNativeInternalTransport actions system)))
+        (Ionic.allIonHistoriesPreservePositiveTotal actions
+          (initialIons system)))
+      (cong
+        (λ n → n + Faces.totalExternalInput
+          (negativeResult (afterNativeInternalTransport actions system)))
+        (Ionic.allIonHistoriesPreserveNegativeTotal actions
+          (initialIons system))))
