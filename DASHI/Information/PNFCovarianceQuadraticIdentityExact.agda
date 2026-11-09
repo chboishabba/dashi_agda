@@ -15,6 +15,7 @@ import DASHI.Information.PNFFiniteGramPositiveExact as Positive
 import DASHI.Information.PNFCentredCovarianceExact as Centre
 import DASHI.Information.PNFFiniteSumExchangeExact as Exchange
 import DASHI.Information.PNFFiniteBilinearExpansionExact as Bilinear
+import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffOrbitGramAssembly as ExistingPSD
 
 private
   SOf : Ring.ExactOrderedCommutativeRing → Set
@@ -165,3 +166,23 @@ scaledCovarianceQuadraticEqualsScaledGramQuadratic K X scale v =
     (cong (Scalar._*_ (Ring.orderedScalar K) scale)
       (unscaledGramQuadraticEqualsSquares K
         (Centre.centredMatrix K X) v))
+
+-- End-to-end same-operator positive semidefiniteness.
+-- It derives the operator quadratic's positivity by transporting the
+-- canonical DASHI finite Gram PSD order authority across the exact equality.
+covarianceOperatorPositiveSemidefinite :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : ExistingPSD.FiniteGramOrderAuthority K) →
+  {n p : Nat} → (X : Centre.FiniteCentredData K n p) →
+  (scale : SOf K) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K)) scale →
+  (v : Fin p → SOf K) →
+  Scalar._≤_ (Ring.orderedScalar K)
+    (Scalar.zero (Ring.orderedScalar K))
+    (covarianceOperatorQuadratic K X scale v)
+covarianceOperatorPositiveSemidefinite K O X scale scaleNonnegative v
+  rewrite scaledCovarianceQuadraticEqualsScaledGramQuadratic
+    K X scale v =
+  Centre.centredCovarianceGramPSDFromExisting
+    K O X scale scaleNonnegative v
