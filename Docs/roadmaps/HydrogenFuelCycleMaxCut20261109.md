@@ -161,3 +161,38 @@ The new nine Agda files were fetched back successfully from the PR branch; no ex
 - Reaction balance is neither reaction feasibility nor demonstrated reactor performance.
 - Hydrogen may change flame kinetics yet its chemical energy input cannot be erased as a 'catalyst'.
 - Source code, independent checker run, empirical reproducibility and patent title remain disjoint provenance receipts.
+
+## 2026-11-09 maximum-cut continuation (user expressly deprioritised K0)
+
+Do not treat K0 as the current work blocker or claim it is complete. The following **five additional conditional modules**, plus one local independent arithmetic script, advance the *non-kernel* cut:
+
+| File / declaration | Completed construction | Required external witness |
+|---|---|---|
+| `HydrogenFuelCycleIntervalBoundsExact`: `addInterval`, `insideSum`, `robustSavingAtEveryAdmittedReading`, `actualInputReduction` | General interval sum, true-value inclusion and guaranteed strict saving whenever upper assisted fuel + upper electrical input is below lower baseline fuel | Calibrated source uncertainty envelopes, equal engine/generator work and correct run alignment |
+| `HydrogenFuelCycleMolarThermochemistryExact`: `MolarHHVSource`, `hydrogenBulkEnergy`, `HydrogenFlowReceipt`, `HydrogenProcessAllocation`, `CarbonSynthesisReceipt` | Typed J/mol→bulk-J for measured mol count, source-demand for HHV, and exact 4 H2 : 1 CH4 allocation with product identity as a separate condition | Primary thermochemistry value, temperature/phase/HHV scope, flow-to-moles calibration, actual chromatographic synthesis yield |
+| `HydrogenFuelCycleDeviceEvidenceExact`: `ModeAuxiliaries`, `PairedPerformanceStudy`, `AdmittedStudySavings` | Intake-electrolysis, plasma/membrane, carbon-synthesis auxiliaries have disjoint device-specific constructors; five experimental arms and interval-savings consumer | Independent matched-output and electrical/thermal/chemical inputs, output/emissions readings, controls and reproducibility |
+| `HydrogenCarbonOpenCycleExact`: `CarbonPath`, `carbonPathBalance`, `cyclicCarbonMakeupEqualsEmissions` | General ordered multi-step carbon inventory identity including external makeup and vented losses; no indefinite self-recycling claim | Measured recovered/vented/added carbon, products, storage, water/O2, and complete energy/auxiliary balance |
+| `HydrogenFuelCycleSourceAuthorityExact` | Specific source metadata for US9809774B2 versus US20150118145A1; grant-unresolved, patent/vendor evidence not promoted to independent measurement; patent-specific title receipt | Authoritative 2026 grant publication and claim text; executed patent-specific assignment documents (Converde/Cycle/Olenox etc.) |
+| `scripts/check_hydrogen_fuel_cycle_maxcut.py` | 11 self-contained Python unittest numerical checks committed; no CI or external dependencies | **Execution result not supplied** in this environment; should run locally |
+
+### Externally confirmed patent anchor
+
+Google Patents https://patents.google.com/patent/US9809774B2/en explicitly identifies Olev Trass and Michael David McLaren as inventors of *Method of separating solids using bio-oils*, grants on 2017-11-07, and shows the Converde 2016 assignment at 037501/0239. This is a patent-publication anchor with a registered event, **not** a verified transfer into a later Olenox entity or proof of any claimed 2026 artificial-photosynthesis grant. Search did not positively establish the 2026 grant.
+
+### Updated physical/informational maximum cut (no K0 focus)
+
+1. **SI-01** meter AC/DC power and time; integrate battery/grid/solar plus thermal/chemical inputs and changes in stored energy. Input *energy*, not voltage or installed power, is the invariant.
+2. **SI-02** acquire source-specific H2 HHV (J mol^-1) including reference state, calibration and uncertainty; gas flow, pressure, composition and temperature produce admitted molar amounts.
+3. **SI-03** assign interval uncertainties conservatively for fossil fuel, electricity and outputs; use `robustSavingAtEveryAdmittedReading` rather than nominal 30% marketing.
+4. **AL-01** source-identify all H2 streams and keep direct combustion, 4:1 methane synthesis, storage and losses disjoint.
+5. **PH-01** obtain actual paired baseline, powered-no-H2, independent H2, O2 control and full device results; verify equivalent useful output, exhaust NOx and particulate emissions.
+6. **PH-02** establish device-specific plasma/heater/thermal/electrolysis and compression duties rather than applying historical patents to unknown hardware.
+7. **C-01** demonstrate actual exhaust carbon capture, physical product identity, measured methane/hydrocarbon output, net process heat/storage and cycle losses.
+8. **IP-01** obtain the newly claimed 2026 patent number and check claim/assignment chain at the publication level, preserving corporate legal distinctions.
+9. **V-01** independent instrument/scientific replication and original proof/verification attribution, separately from this drafted code.
+
+**No empirical observation, thermochemistry constant, patent grant number, instrument uncertainty, or signed independent receipt was fabricated.** Source-level conditional record types and symbolic theorems are meaningful mathematical deliverables but they cannot themselves establish a commercial claim.
+
+### Necessary energy-bound qualification
+
+`hydrogenHHVWithinElectricity` assumes a *selected electricity-only boundary with nonnegative heat/storage residual*. For a high-temperature steam electrolyser or plasma/heat-assisted process, **imported process heat and chemical fuel must appear on the input side**. One must not apply this specialised bound to such a system without those additional energies. Oxygen injection may change combustion kinetics but oxygen is not a fuel. No claimed combustibility-enhancement factor is inferred from patent/marketing text.
