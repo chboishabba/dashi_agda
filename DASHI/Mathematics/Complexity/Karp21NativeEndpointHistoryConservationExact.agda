@@ -40,6 +40,10 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact as 
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact as Machine
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryFiniteRunExact as Run
 import DASHI.Mathematics.Complexity.Karp21NativeFullEdgeFieldInputBoundExact as Fields
+import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact as Width
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact as Potential
 import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact as OriginalWord
 
 -- Every historical vertex costs its ACTUAL LE address register
@@ -85,7 +89,7 @@ originalBinaryStepEndpointCapacityInvariant
   (Machine.state Machine.rejected es bits hist ledger threshold) next ()
 originalBinaryStepEndpointCapacityInvariant
   (Machine.state Machine.active [] [] hist ledger threshold) next step
-  with DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact.meetsOriginalPositiveThreshold ledger threshold
+  with Positive.meetsOriginalPositiveThreshold ledger threshold
 ... | true with step
 ... | refl = refl
 ... | false with step
@@ -149,7 +153,7 @@ actualFirstEnabledFiniteRunEndpointCapacityInvariant (suc fuel) state
 -- parsed u/v/signed-w edge registers.
 oneEdgeEndpointChargeAtMostAllFields :
   (u v : Word.BitWord)
-  (token : DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact.SignedMagnitudeBits) →
+  (token : Signed.SignedMagnitudeBits) →
   length u + length v
     ≤ Fields.binaryRawEdgeRegisterCharge
         (Edge.binary-edge u v token)
@@ -157,11 +161,11 @@ oneEdgeEndpointChargeAtMostAllFields u v token =
   NatP.≤-trans
     (NatP.m≤m+n
       (length u + length v)
-      (DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact.signedTokenBitCharge token))
+      (Width.signedTokenBitCharge token))
     (NatP.≤-reflexive
       (NatP.+-assoc
         (length u) (length v)
-        (DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact.signedTokenBitCharge token)))
+        (Width.signedTokenBitCharge token)))
 
 remainingEndpointWidthAtMostAllFieldCharge :
   (edges : List Edge.BinaryRawEdge) →
@@ -201,7 +205,7 @@ actualBinaryFirstEnabledEndpointHistoryFitsInputs :
   historyPayloadWidth
     (Machine.history
       (Run.runBinaryWithFuel
-        (DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact.binaryStatePotential
+        (Potential.binaryStatePotential
           (Machine.initialBinaryWholeWordState word certificate))
         (Machine.initialBinaryWholeWordState word certificate)))
     ≤ length word + length certificate
@@ -210,22 +214,22 @@ actualBinaryFirstEnabledEndpointHistoryFitsInputs word certificate =
     (NatP.m≤m+n
       (historyPayloadWidth
         (Machine.history (Run.runBinaryWithFuel
-          (DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact.binaryStatePotential
+          (Potential.binaryStatePotential
             (Machine.initialBinaryWholeWordState word certificate))
           (Machine.initialBinaryWholeWordState word certificate))))
       (remainingEndpointWidth
         (Machine.edges (Run.runBinaryWithFuel
-          (DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact.binaryStatePotential
+          (Potential.binaryStatePotential
             (Machine.initialBinaryWholeWordState word certificate))
           (Machine.initialBinaryWholeWordState word certificate))) +
        length (Machine.bits (Run.runBinaryWithFuel
-          (DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact.binaryStatePotential
+          (Potential.binaryStatePotential
             (Machine.initialBinaryWholeWordState word certificate))
           (Machine.initialBinaryWholeWordState word certificate)))))
     (NatP.≤-trans
       (NatP.≤-reflexive
-        (sym (actualFirstEnabledFiniteRunEndpointCapacityInvariant
-          (DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact.binaryStatePotential
+        (actualFirstEnabledFiniteRunEndpointCapacityInvariant
+          (Potential.binaryStatePotential
             (Machine.initialBinaryWholeWordState word certificate))
           (Machine.initialBinaryWholeWordState word certificate))))
       (initialBinaryGraphEndpointCapacityBound word certificate))
