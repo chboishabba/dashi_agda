@@ -33,7 +33,7 @@ x ≢ y = x ≡ y → ⊥
 -- simplicity is equivalently a dichotomy for GROUP CONGRUENCES containing
 -- the original 80 relations. This is NOT a statement of the C2 parity
 -- theorem: perfectness alone does not imply this dichotomy.
-record Original80SimpleCongruenceAuthority : Set₁ where
+record Original80SimpleCongruenceAuthority : Set₂ where
   field
     everyGroupCongruenceIsTrivialOrTotal :
       (C : U.AdmissibleCongruence) →
