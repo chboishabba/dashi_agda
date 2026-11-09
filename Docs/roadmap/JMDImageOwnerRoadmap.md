@@ -292,3 +292,48 @@ translation or consumer proof passes its own checker.
 
 Authoritative full command guide:
 [Docs/roadmap/JMDFormalWorldAutomaticExecution.md](https://github.com/chboishabba/dashi_agda/blob/chatgpt/jmd-image-owner-roadmap-20261109/Docs/roadmap/JMDFormalWorldAutomaticExecution.md).
+
+## 2026-11-09 bidirectional translator round-trip max-cut (latest)
+
+The **canonical** phase/deliverables/exact-lemma ledger is
+[agda2lean/docs/BIDIRECTIONAL_ROUNDTRIP_MAX_CUT.md](https://github.com/chboishabba/agda2lean/blob/main/docs/BIDIRECTIONAL_ROUNDTRIP_MAX_CUT.md).
+Do not create a second competing phase numbering here.
+
+Existing source-writing:
+
+- `dashi_lean4/Integration/JMD/RoundTripFixedPoint.lean`:
+  `CertifiedRoundTrip`, `lean_agda_lean_stable`,
+  `agda_lean_agda_stable`, `roundtrip_idempotent_left`,
+  `roundtrip_idempotent_right`, `predicate_roundtrip`,
+  `observer_roundtrip`, `trans`, `trans_source_stable`.
+- `dashi_agda/DASHI/Interop/JMDRoundTripFixedPointExact.agda`:
+  `CertifiedRoundTrip`, `leanAgdaLeanStable`,
+  `agdaLeanAgdaStable`, `roundTripIdempotentLeft`,
+  `roundTripIdempotentRight`, `observerRoundTrip`,
+  `composeRoundTrip`, `composedRoundTripStable`.
+  Its existing `Interop/Everything.agda` includes the module.
+- `agda2lean/scripts/bidirectional_conformance.py` and
+  `docs/roundtrip_feature_crosswalk.tsv`: fail-closed comparison of
+  actual existing conformance corpora and reviewed candidate-only aliases.
+- The separate `formalverification/lean2agda` upstream is referenced
+  read-only, including its foundational profiles and original corpus
+  manifest. No outbound publication, PR or user work transfer.
+
+**Observed source counts:** agda2lean PR #7: 19 cases, 0 positive,
+11 reconstruction, 8 unsupported. lean2agda upstream manifest:
+12 `translated` entries (1 T0, 7 T1, 4 T2). Its corpus successes
+are **not** successful translator round trips in our toolchain. The eight
+reviewed taxonomy edges yield **42 candidate pairs, zero literal tag
+matches**, with **10 Cubical/K-UIP conflict cases**, under the current
+source manifests. Every pair remains unverified.
+
+**Immediate exact unpaid acceptance:** M00a locally run tests and both
+kernel checks; M00b source-faithful selected elaborated-normal-form
+comparison; M01/M02 construct actual real translator witness maps;
+M03/M04/M05/M06 prove source statement, axiom, dependency and
+computation preservation; M07 instantiate fixed-point laws for a
+selected original theorem; M08/M09/M10 validate negative controls and
+selective reopening with the existing ITIR gap script only.
+
+A generic conditional inverse-law theorem is NOT a proof that either
+translator preserves arbitrary declarations. No such claim is made.
