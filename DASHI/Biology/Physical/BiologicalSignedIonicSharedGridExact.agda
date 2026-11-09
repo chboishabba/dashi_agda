@@ -9,6 +9,7 @@ module DASHI.Biology.Physical.BiologicalSignedIonicSharedGridExact where
 
 open import DASHI.Core.Prelude
 
+import Data.Integer.Base as Int
 import Data.Vec.Base as V
 import Data.Fin.Base as F
 import DASHI.Biology.Physical.BiologicalSharedFiniteVectorTransferExact as Transfer
@@ -168,3 +169,37 @@ allOriginal54NegativeTransportHistoriesPreserveSignedCharge
   signedCharge state =
   allIonHistoriesPreserveSignedCharge signedCharge
     all54NegativeActions state
+
+------------------------------------------------------------------------
+-- Native integer-valued signed net charge; not merely an abstract
+-- unsigned charge-magnitude witness.
+------------------------------------------------------------------------
+
+integerSignedCharge : Nat → Nat → Int.ℤ
+integerSignedCharge positive negative =
+  Int._-_ (Int.+ positive) (Int.+ negative)
+
+originalNetSignedCharge : TwoIonSharedGrid → Int.ℤ
+originalNetSignedCharge state =
+  integerSignedCharge (positiveTotal state) (negativeTotal state)
+
+nativeSignedChargeConservedByEveryHistory :
+  (actions : List IonMovement)
+  (state : TwoIonSharedGrid) →
+  originalNetSignedCharge (runIonHistory actions state)
+    ≡ originalNetSignedCharge state
+nativeSignedChargeConservedByEveryHistory actions state =
+  allIonHistoriesPreserveSignedCharge integerSignedCharge actions state
+
+nativeOriginal54BondSignedChargeConserved :
+  (state : TwoIonSharedGrid) →
+  originalNetSignedCharge
+    (runIonHistory all54PositiveActions
+      (runIonHistory all54NegativeActions state))
+    ≡ originalNetSignedCharge state
+nativeOriginal54BondSignedChargeConserved state =
+  trans
+    (nativeSignedChargeConservedByEveryHistory
+      all54PositiveActions (runIonHistory all54NegativeActions state))
+    (nativeSignedChargeConservedByEveryHistory
+      all54NegativeActions state)
