@@ -266,3 +266,43 @@ python scripts/qcafqmc_nqs_guided_hubbard16.py SYNTHETIC_8_ORBITAL.FCIDUMP SYNTH
 ```
 
 **Still not production QC-AFQMC for nickel**: the finite HS algorithm handles onsite interactions only and no Gaussian Cholesky field generalisation, reorthogonalization or optimized multi-determinant NQS callback. For production molecular force bias, stabilized Slater walkers and phaseless propagation, the separate, source-cited iPie adapter is the correct software route; it currently runs a classical determinant trial only. Original matchgate data, hardware calibration and training checkpoint remain externally missing.
+
+
+## 9 Nov: Maximum-cut proof strengthening — overlap conditioning and exact iPie CI weld
+
+### P0 quantitative learned-trial error transport (new)
+
+`scripts/qcafqmc_mixed_energy_error_certificate.py` supplies an executable instance of a mathematical upper bound for a learned trial's finite-state local energy. On the SAME H and walker, with D=<ideal|w>, N=<ideal|Hw>, d>=|Dlearn-D|, m>=|Nlearn-N| and |D|>d, the bound is
+
+```
+|Nlearn/Dlearn - N/D| <= (m*|D| + |N|*d) / (|D|*(|D|-d)).
+```
+
+The code obtains rigorous-in-exact-arithmetic conservative d and m from state-2norm error times the walker or H-walker norm, checks the Hermiticity and numerical domains, and **rejects near-zero overlaps** for which the denominator can cross zero. It makes no prediction about out-of-sample NQS generalization or accumulated phaseless projection bias. `scripts/qcafqmc_nqs_fci_error_audit.py` connects this exact inequality to the selected eight-orbital FCI eigenvector and trained NQS, after canonical global-phase alignment, using the actual same integral Hamiltonian.
+
+Independent numerical check: a 3x3 complex finite-state example had observed mixed-energy difference ~1.41752831e-4 vs bound ~1.34906143e-3; the prescribed near-node counterexample fails the admission condition. The committed scripts still need exact-revision rerun for a source-verified receipt.
+
+### P1 source-aligned learned trial for production iPie (new)
+
+**Research improvement:** iPie 0.7.1's documented `ParticleHole` trial consumes a CI coefficient array plus occupied alpha/beta orbital indices, using all determinants for overlaps, force bias and local energy. Rather than claiming a novel unverified custom neural trial callback, `scripts/qcafqmc_nqs_ipie_particle_hole.py` evaluates the finite 16-qubit NQS once on its **complete fixed-particle sector**, exports every occupied determinant and complex coefficient in DASHI's original FCI basis order, and instantiates the canonical iPie `ParticleHole` class with `num_dets_for_trial=-1`. Thus iPie's existing phaseless molecular propagator can consume the finite learned trial WITHOUT refitting a Slater proxy or dropping all but one determinant.
+
+The molecular runner `scripts/qcafqmc_ipie_molecular_runner.py` now accepts an optional `nqs_checkpoint` path relative to its source-locked JSON file. It **fails closed** unless PySCF's selected molecular orbital frame has eight spatial orbitals and the operator has explicitly verified that the NQS was trained in the SAME orbital frame (`nqs_orbital_frame_verified=true`). It includes checkpoint SHA256 in the AFQMC receipt. Default remains classical single-determinant HF trial. `scripts/qcafqmc_nqs_ipie_particle_hole_check.py` gives a 64-configuration/1+1-electron exact ordering/norm/export and determinant-budget negative control (mocked amplitude producer to isolate adapter).
+
+**Important qualification:** full CI expansion scales as binomial(8,Nalpha)*binomial(8,Nbeta), generally exponentially in orbital number. It is an **exact bounded 16-spin-orbital representation weld**, not the scalable 13k parameter neural-state online overlap oracle from IonQ. The source paper's 16-qubit device snapshots and original trained weights are still not in our custody. Production iPie execution of this particular class combination remains to be validated against pinned ipie runtime; method source: https://ipie.readthedocs.io/en/latest/python_api.html .
+
+### Concrete commands
+
+```bash
+python scripts/qcafqmc_mixed_energy_error_certificate.py --self-test
+python scripts/qcafqmc_nqs_ipie_particle_hole_check.py
+python scripts/qcafqmc_nqs_fci_error_audit.py SAME_8_ORBITAL.FCIDUMP SAME_ORBITAL_NQS.pt
+python scripts/qcafqmc_ipie_molecular_runner.py SOURCE_IDENTIFIED_8_ORBITAL_CONFIG.json
+```
+
+### Exact remaining original/production leaves
+
+- **P1a:** Validate iPie `ParticleHole` learned NQS trial on physically sourced 8-spatial-orbital molecular integrals, with independent exact FCI, timestep/walker/branching convergence, and overlap normalization.
+- **P1b:** Implement online 13k-NQS overlap/Green's/force-bias/local-energy evaluation without exponential determinant expansion, with a compatible custom iPie trial/walker interface and stability/phaseless bias checks.
+- **P2:** Acquire original 16-qubit matchgate measurement records, circuit settings, calibration, train/validation split and weights. Absence in current audit means no original-source replication.
+- **P3:** Acquire selected nickel chemistry structures B/[B-C]‡/C and exact truncation/active orbital selection and electronic integral tensor; run consistent same-geometry reaction reference and AFQMC statistical/cost comparison.
+- **P0:** Kernel-check Agda 2.9 import graph and complete actual source-specific physical generator witness; none of the executable numerical results alone inhabits the abstract Agda source equality.
