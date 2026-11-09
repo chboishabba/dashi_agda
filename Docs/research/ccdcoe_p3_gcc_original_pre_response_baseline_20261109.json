@@ -1,0 +1,109 @@
+{
+  "schema": "dashi.ccdcoe.p3.original_gcc_pre_response_baseline.v1",
+  "source_classification": "Catalogue and archive-selected quotations only; not authenticated original PDF bytes or independent passage review.",
+  "attribution": "Global Climate Coalition owns original 1993 positions and releases; individual scientific contributors own their original statements and attribution; Nicky Sundt collection and Climate Files provide archive context and transcribed excerpts; DASHI owns only the evidence-stage/coding apparatus.",
+  "objects": [
+    {
+      "id": "gcc_1993_01_04_press_outreach",
+      "date": "1993-01-04",
+      "day_precision": "archive_calendar_date",
+      "original_actor": "Global Climate Coalition / John Shlaes",
+      "source_grade": "archive_description",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-climate-expertise-news-release/",
+      "topic_tags": [
+        "press_outreach",
+        "scientific_dispute"
+      ],
+      "archive_excerpt_present": true,
+      "original_bytes_authenticated": false,
+      "independent_coding_complete": false
+    },
+    {
+      "id": "gcc_1993_03_08_policy_statement",
+      "date": "1993-03-08",
+      "day_precision": "archive_calendar_date",
+      "original_actor": "Global Climate Coalition",
+      "source_grade": "archive_quoted_original_excerpt",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-us-national-action-plan-recommendations/",
+      "topic_tags": [
+        "scientific_uncertainty",
+        "mitigation_delay",
+        "economic_impacts",
+        "voluntary_policy"
+      ],
+      "archive_excerpt_present": true,
+      "original_bytes_authenticated": false,
+      "independent_coding_complete": false,
+      "attributed_archive_summary": "The archived statement criticises a specific emissions-stabilisation commitment, citing scientific uncertainty and the absence of sufficient international implementation mechanisms."
+    },
+    {
+      "id": "gcc_1993_03_10_model_release",
+      "date": "1993-03-10",
+      "day_precision": "archive_calendar_date",
+      "original_actor": "Global Climate Coalition",
+      "source_grade": "archive_description",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-natural-warming-models-national-action-plan/",
+      "topic_tags": [
+        "climate_models",
+        "natural_warming",
+        "national_action_plan"
+      ],
+      "archive_excerpt_present": false,
+      "original_bytes_authenticated": false,
+      "independent_coding_complete": false
+    },
+    {
+      "id": "gcc_1993_undated_expert_brochure",
+      "date": null,
+      "day_precision": "circa_1993_unordered",
+      "original_actor": "Global Climate Coalition",
+      "source_grade": "archive_quoted_original_excerpt",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-selected-climate-change-quotes/",
+      "topic_tags": [
+        "expert_quote_selection",
+        "scientific_uncertainty",
+        "mitigation_delay"
+      ],
+      "archive_excerpt_present": true,
+      "original_bytes_authenticated": false,
+      "independent_coding_complete": false
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "baseline_8march_beyond_10march",
+      "kind": "date_precedence",
+      "evidence": "archive dated original-source catalogue",
+      "outcome": "8 March GCC position statement precedes 10 March model release",
+      "causal_link_established": false
+    },
+    {
+      "claim_id": "baseline_before_newspaper",
+      "kind": "date_precedence",
+      "evidence": "archive dated original-source catalogue",
+      "outcome": "GCC 8/10 March source descriptions precede the original late May/early June Rensberger reporting",
+      "causal_link_established": false
+    },
+    {
+      "claim_id": "brochure_undated",
+      "kind": "unknown_position",
+      "evidence": "archive circa-year only",
+      "outcome": "Do not place expert-quotation brochure at a specific day or before/after June press response without further metadata",
+      "causal_link_established": false
+    },
+    {
+      "claim_id": "catalogue_quote_not_verified_full_document",
+      "kind": "evidence_grade",
+      "evidence": "archive selected quotations",
+      "outcome": "No claim of full context, representative selection, raw source SHA256, or independently coded original passages",
+      "causal_link_established": false
+    }
+  ],
+  "negative_controls": [
+    "A pre-existing public policy position is not proof that later newspaper reporting copied GCC.",
+    "Quoted scientists are independently attributed speakers, not automatically GCC-origin scientific authors.",
+    "The brochure has circa-year dating and must not be assigned a precise before/after order.",
+    "A selected archival quotation cannot be treated as exhaustive source review.",
+    "A documented lobbying position cannot establish population effects or hostile cognitive intent."
+  ]
+}
