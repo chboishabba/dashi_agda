@@ -244,3 +244,18 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountFuelOriginalExact
 
 -- B6 original signed edge stream via input-bounded binary count/fuel, source candidate only.
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryCountBudgetFuelExact
+
+-- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphOriginalExact
+
+-- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryCutLedgerOriginalExact
+
+-- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryVerifierOriginalExact
+
+-- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryTypedAcceptanceExact
+
+-- Current real binary B6 graph/verifier/typed correspondence and F2 adder width; proof candidates only.
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryAdderWidthBoundExact
