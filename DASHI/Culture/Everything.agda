@@ -124,6 +124,7 @@ import DASHI.Culture.BlochfieldAcquisitionResidualSnowballExact
 import DASHI.Culture.CriticalArtTemporalReceptionReuseExact
 import DASHI.Culture.CriticalArtSameSceneTransportExact
 import DASHI.Culture.CriticalArtTriadicFilmBoundaryExact
+import DASHI.Culture.CriticalArtEditionAuthorityExact
 
 module DASHI.Culture.Everything where
 
