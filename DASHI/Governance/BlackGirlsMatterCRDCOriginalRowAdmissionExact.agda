@@ -30,6 +30,9 @@ data Measure : Set where
   referralToLawEnforcement
   schoolRelatedArrest : Measure
 
+data DisabilityScope : Set where
+  allStudents studentsWithoutDisabilities studentsWithDisabilities : DisabilityScope
+
 data CountingUnit : Set where
   uniqueStudents studentsPerIndicator disciplinaryEvents : CountingUnit
 
@@ -53,6 +56,7 @@ record VerifiedCRDCSource : Set₁ where
     sourceRow : SchoolYear → District → Population → Measure → Row
     sourceCell : Row → ReportedCell
     sourceCountingUnit : Row → CountingUnit
+    sourceDisabilityScope : Row → DisabilityScope
     sourcePeriod : Row → SchoolYear
     sourceDistrict : Row → District
     sourcePopulation : Row → Population
@@ -68,6 +72,7 @@ record MatchedOriginalCell
   (year : SchoolYear)
   (district : District)
   (group : Population)
+  (eligibility : DisabilityScope)
   (measure : Measure) : Set where
   constructor matched-original-cell
   field
@@ -78,9 +83,14 @@ record MatchedOriginalCell
     periodMatches : sourcePeriod src selectedRow ≡ year
     districtMatches : sourceDistrict src selectedRow ≡ district
     groupMatches : sourcePopulation src selectedRow ≡ group
+    eligibilityMatches : sourceDisabilityScope src selectedRow ≡ eligibility
     measureMatches : sourceMeasure src selectedRow ≡ measure
 
 open MatchedOriginalCell public
+
+differentDisabilityEligibilityIsNotSamePopulation :
+  studentsWithoutDisabilities ≡ allStudents → ⊥
+differentDisabilityEligibilityIsNotSamePopulation ()
 
 -- A raw cell source alone does not establish a student denominator:
 -- the counting unit is a separate required receipt.
@@ -88,13 +98,14 @@ record SamePopulationRateReceipt
   (src : VerifiedCRDCSource)
   (district : District)
   (group : Population)
+  (eligibility : DisabilityScope)
   (measure : Measure) : Set where
   constructor same-population-rate-receipt
   field
     numeratorRow :
-      MatchedOriginalCell src y2011to2012 district group measure
+      MatchedOriginalCell src y2011to2012 district group eligibility measure
     denominatorRow :
-      MatchedOriginalCell src y2011to2012 district group schoolEnrollment
+      MatchedOriginalCell src y2011to2012 district group eligibility schoolEnrollment
     numerator : Nat
     denominator : Nat
     numeratorIsObserved :
@@ -133,13 +144,14 @@ missingNotZero ()
 record ComparableRatePair
   (src : VerifiedCRDCSource)
   (district : District)
+  (eligibility : DisabilityScope)
   (measure : Measure) : Set where
   constructor comparable-rate-pair
   field
     blackGirlsRate :
-      SamePopulationRateReceipt src district blackGirls measure
+      SamePopulationRateReceipt src district blackGirls eligibility measure
     whiteGirlsRate :
-      SamePopulationRateReceipt src district whiteGirls measure
+      SamePopulationRateReceipt src district whiteGirls eligibility measure
 
 open ComparableRatePair public
 
@@ -149,9 +161,10 @@ open ComparableRatePair public
 comparableRateCrossProducts :
   (src : VerifiedCRDCSource)
   (district : District)
+  (eligibility : DisabilityScope)
   (measure : Measure) →
-  ComparableRatePair src district measure → Nat × Nat
-comparableRateCrossProducts src district measure p =
+  ComparableRatePair src district eligibility measure → Nat × Nat
+comparableRateCrossProducts src district eligibility measure p =
   (numerator (blackGirlsRate p) * denominator (whiteGirlsRate p)) ,
   (numerator (whiteGirlsRate p) * denominator (blackGirlsRate p))
 
