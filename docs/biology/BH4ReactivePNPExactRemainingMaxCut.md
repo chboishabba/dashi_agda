@@ -369,3 +369,39 @@ chemical programme remain user prior work; original Rhea identities
 and measurements remain source-owned; the Agda implementation and
 index-weld scripts above are assistant-authored assistance. No claim
 of exact-head compilation, calibrated physiology, or ITIR promotion.
+
+
+## 2026-11-09 Golden reachability repair — current continuation
+
+**Found acceptance defect:** the newly source-written
+`BH4PanelRateWeightedConservationExact.agda` was neither imported by
+`KitzerowBH4EvidenceEverything.agda` nor enumerated in
+`scripts/check_bh4_spatial_golden.sh`. Consequently a successful
+pre-existing Golden run could not have constituted a kernel receipt
+for its four new 29x12/27x12 declarations.
+
+**Repaired in BH4 PR #1454:** commit `42f94aa4` adds the new
+module to the actual evidence Golden import DAG. Commit `31a8f5ec`
+adds that module to the fail-closed escape checker and asserts the
+presence of all four terminal declaration names. These are real
+repository writes. The source has been fetched, but no local Agda
+binary or working GitHub clone is available in this execution
+environment; therefore no kernel acceptance is claimed.
+
+**Next executable acceptance command on the exact BH4 head:**
+`bash scripts/check_bh4_spatial_golden.sh`
+(the repository script invokes
+`bash scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`).
+The result must be a terminal process exit code and a pinned head,
+not merely a PR diff or structural source scan. Upon an Agda failure,
+repair the first compiler-reported declaration and rerun; do not
+change the source certificate requirements or admit unchecked
+postulates/metas. Exact original 29x12 chemical source still needs
+`BH4_REQUIRE_SOURCE_PAID=1`, a pinned genuine Rhea SHA, and all
+independently required original parameter/candidate/assay receipts.
+
+**Current alpha:** verification of the newly imported conditional
+reaction lemmas is P0 highest value. The finite bond-order adapter,
+grounded Dirichlet SPD checker, and original-source provenance gates
+retain their distinct statuses. No physical P0.08/P1–P3 theorem is
+closed by adding a Golden import.
