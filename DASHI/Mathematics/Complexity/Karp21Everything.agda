@@ -215,3 +215,6 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedAllWordValidity
 
 -- K05: conservative two-pass signed gamma inspection schedule.
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedInspectionClockExact
+
+-- K05: native ripple-carry sum and concrete linear inspection clock.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderExact
