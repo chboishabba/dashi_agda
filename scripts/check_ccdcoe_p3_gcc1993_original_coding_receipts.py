@@ -44,6 +44,9 @@ def validate(manifest, source_root, *, synthetic=False):
     demand(bool(items) or synthetic, 'real intake requires nonempty passages')
     demand(len(items)==len({p['id'] for p in items}), 'duplicate passage')
     passage_keys=set()
+    fixed_reviewers=None
+    source_digests={}
+    source_pairings={}
     grades={}
     pairings={name: [] for name in VALID}
     for p in items:
@@ -57,20 +60,31 @@ def validate(manifest, source_root, *, synthetic=False):
         local=p['relative_path']; demand(isinstance(local,str) and local and not Path(local).is_absolute(), 'relative path')
         file=(root/local).resolve(); demand(file.is_relative_to(root) and file.is_file(), 'source file traversal/missing')
         raw=file.read_bytes(); digest=hashlib.sha256(raw).hexdigest()
+        document_key=(p['source_id'],p['edition'])
+        prior=source_digests.get(document_key)
+        demand(prior is None or prior==digest,'same original edition has contradictory bytes')
+        source_digests[document_key]=digest
         demand(digest==p['sha256'], 'original bytes digest')
         a,b=p['start_byte'],p['end_byte']; demand(type(a) is int and type(b) is int and 0<=a<b<=len(raw),'byte interval')
         demand(hashlib.sha256(raw[a:b]).hexdigest()==p['passage_sha256'],'passage digest')
         demand(bool(p['original_author'].strip()) and bool(p['edition'].strip()), 'original ownership')
         demand(len(p['reviews'])==2,'independent review count')
         r1,r2=p['reviews']; demand(r1['reviewer_id']!=r2['reviewer_id'], 'reviewer independence ID')
+        current_reviewers=(r1['reviewer_id'],r2['reviewer_id'])
+        if fixed_reviewers is None: fixed_reviewers=current_reviewers
+        demand(current_reviewers==fixed_reviewers,'pooled kappa requires same ordered reviewer panel across all passages')
         for r in (r1,r2):
             demand(bool(r['reviewer_id'].strip()) and bool(r['receipt'].strip()),'review receipt')
             demand(set(r['codes'])==set(VALID),'six coding dimensions')
             for name,value in r['codes'].items(): demand(value in VALID[name], 'invalid code: '+name)
-        for name in VALID: pairings[name].append((r1['codes'][name],r2['codes'][name]))
+        within=source_pairings.setdefault(document_key,{name:[] for name in VALID})
+        for name in VALID:
+            pair=(r1['codes'][name],r2['codes'][name])
+            pairings[name].append(pair)
+            within[name].append(pair)
         demand(not p.get('claims_audience_effect',False) and not p.get('claims_hostile_intent',False),'unearned promotion')
         grades[p['id']]={'original_bytes_sha256':digest, 'reviewers': [r1['reviewer_id'],r2['reviewer_id']]}
-    return {'passages':len(items),'validated_hashes':len(grades),'reliability':{name:kappa(pairs) for name,pairs in pairings.items()},'human_independence_authenticated':False,'audience_effect_identified':False,'hostile_intent_identified':False}
+    return {'passages':len(items),'validated_hashes':len(grades),'reliability':{name:kappa(pairs) for name,pairs in pairings.items()},'within_source_reliability':{source+'@'+edition:{name:kappa(pairs) for name,pairs in dimensions.items()} for (source,edition),dimensions in source_pairings.items()},'pooled_reliability_is_descriptive_not_causal':True,'human_independence_authenticated':False,'audience_effect_identified':False,'hostile_intent_identified':False}
 
 def self_test():
     with tempfile.TemporaryDirectory() as tmp:
@@ -82,7 +96,8 @@ def self_test():
         item={'schema':'dashi.ccdcoe.p3.dual_coder_receipts.v1','passages':[p]}
         positive=validate(item,root,synthetic=True); demand(all(x['kappa'] is None for x in positive['reliability'].values()),'constant kappa undefined')
         import copy
-        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span')))]
+        tests=[('bytes_hash',lambda x:x['passages'][0].update(sha256='0'*64)),('passage_hash',lambda x:x['passages'][0].update(passage_sha256='0'*64)),('path_traversal',lambda x:x['passages'][0].update(relative_path='../outside')),('same_reviewer',lambda x:x['passages'][0]['reviews'][1].update(reviewer_id='A')),('effect',lambda x:x['passages'][0].update(claims_audience_effect=True)),('fake_intent',lambda x:x['passages'][0].update(claims_hostile_intent=True)),('no_second_coder',lambda x:x['passages'][0].update(reviews=x['passages'][0]['reviews'][:1])),('bad_code',lambda x:x['passages'][0]['reviews'][0]['codes'].update(uncertainty='promoted')),('fake_source',lambda x:x['passages'][0].update(source_id='invented')),('invalid_span',lambda x:x['passages'][0].update(end_byte=len(raw)+10)),('duplicate_span',lambda x:x['passages'].append(dict(x['passages'][0],id='duplicate_span'))),('reviewer_panel_drift',lambda x:x['passages'].append(dict(x['passages'][0],id='other',start_byte=1,passage_sha256=hashlib.sha256(raw[1:]).hexdigest(),reviews=[x['passages'][0]['reviews'][0],dict(x['passages'][0]['reviews'][1],reviewer_id='C')]))),('same_edition_conflicting_bytes',lambda x:x['passages'].append(dict(x['passages'][0],id='other',relative_path='other.bin',start_byte=1,passage_sha256=hashlib.sha256(b'MUTATED'[1:]).hexdigest(),sha256=hashlib.sha256(b'MUTATED').hexdigest())))]
+        (root/'other.bin').write_bytes(b'MUTATED')
         for name,change in tests:
             changed=copy.deepcopy(item); change(changed)
             try:validate(changed,root,synthetic=True)
