@@ -33,6 +33,7 @@ import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
+import DASHI.Cognition.CCDCOEP3GCC1993PreResponseBaselineExact as Baseline
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -555,3 +556,14 @@ GCCAmplificationNotHostilePurpose :
   ≡ Coding.hostileIntention → ⊥
 GCCAmplificationNotHostilePurpose =
   Coding.secondaryAmplificationNotHostilePurpose
+
+-- GCC's catalogued 10 March 1993 public model/policy release predates
+-- both the independently authored press article and its June GCC reply.
+-- It cannot serve as an authenticated passage-coded numerical baseline.
+originalMarchGCCReleasePrecedesJuneReply :
+  Baseline.Before Baseline.marchGCCRelease Baseline.juneGCCResponse
+originalMarchGCCReleasePrecedesJuneReply = Baseline.marchBeforeJune
+
+preResponseCatalogueNotQuantitativeBaseline :
+  Baseline.marchGrade ≡ Baseline.independentlyCodedOriginalText → ⊥
+preResponseCatalogueNotQuantitativeBaseline = Baseline.catalogueNotCodedBaseline
