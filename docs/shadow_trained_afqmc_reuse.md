@@ -400,3 +400,31 @@ agda -i . DASHI/Physics/Chemistry/AtomicPeriodicTable369AFQMCSameSourceExact.agd
 ```
 
 **Outstanding highest-alpha physical gates, no implied success:** (a) run the exact committed source acceptance and Agda checks; (b) run charge/spin and same-MO-frame validated PySCF RHF on B/BC/C, then independent full-space iPie runs with documented HPC resources; (c) obtain an original or independently source-paid 70-coefficient upCCD/learned NQS for *each* matching molecular frame, plus original matchgate records for IonQ replication; (d) run multi-seed 300-block 50-discarded trajectory comparisons, reblock correlated estimates and compare with original numerical energy targets; (e) independently verify actual cloud utilization/rates and include the QPU cost when making any end-to-end advantage claim. Numerical FCI checks and atomic/369 declarations alone cannot supply these external physical inputs.
+
+
+## 9 November 2026 — next mathematical and computational maximum cut
+
+### Autocorrelated Monte Carlo uncertainty
+
+scripts/qcafqmc_autocorrelation_reblocking.py implements dyadic blocking of successive imaginary-time energy samples. For each independently seeded run it compares the variance of the sample mean across block lengths; retaining the maximum tested variance yields a cautious **diagnostic**, NOT a rigorous confidence interval. scripts/qcafqmc_nickel_reaction_from_ipie.py now integrates these within-seed diagnostics with independent seed SEM, chooses the larger estimate, discards the first 50 nickel blocks, and requires at least three distinct independent replicas for B, BC and C.
+
+An independently executed mathematical AR(1) control with persistence coefficient 0.9 showed an IID naive SE 0.00067705597 versus dyadically blocked SE 0.00246150094 (3.64 times larger), with autocorrelation-time diagnostic 6.61. This is not an exact-commit script receipt or a real nickel AFQMC run. At 250 retained measured blocks, a stable long-lag variance plateau is not established.
+
+### An independent 70-determinant DOCI chemistry trial
+
+scripts/qcafqmc_nickel_doci_trial.py now projects the **same source-specific one-/two-body FCIDUMP Hamiltonian** into the 70-state seniority-zero electronic subspace, respecting fermionic creation/annihilation parity signs, and diagonalizes that projected electronic Hamiltonian. This yields an independently computed classical paired trial, DOCI (doubly occupied CI), and its projected variational energy. The file can save coefficients and alpha/beta orbital occupations with source integral, geometry and molecular-orbital SHA fingerprints.
+
+scripts/qcafqmc_nickel41_ipie_from_fcidump.py accepts --doci-npz as a third trial protocol alongside HF Slater and NQS particle-hole. It rejects any mismatched FCIDUMP or MO/geometry fingerprint. The regression in the DOCI module checks its projected 2-site Hubbard Hamiltonian against the paired subblock of the existing full FCI Hamiltonian.
+
+**DOCI is not upCCD**, is not full unrestricted FCI and is not the original IonQ learned trial. The DOCI Rayleigh quotient is variational only relative to the identical finite molecular Hamiltonian, while a phaseless AFQMC mixed estimator is not generally variational. This is an original independent classical *seniority-zero baseline* that can be executed without QPU measurements.
+
+### Local acceptance and execution
+
+scripts/qcafqmc_source_acceptance.py now imports the DOCI projection and synthetic autocorrelation controls as well as the geometry, published Table 2/8 anchors, cost arithmetic, VCE and near-node tests. No CI or Docker required.
+
+    python scripts/qcafqmc_source_acceptance.py
+    python scripts/qcafqmc_source_acceptance.py --with-torch
+    python scripts/qcafqmc_nickel_doci_trial.py --fcidump output/qcafqmc_nickel41/B/B.FCIDUMP --receipt output/qcafqmc_nickel41/B/B.receipt.json --save output/qcafqmc_nickel41/B/B_doci.npz
+    python scripts/qcafqmc_nickel41_ipie_from_fcidump.py output/qcafqmc_nickel41/B/B.receipt.json --doci-npz output/qcafqmc_nickel41/B/B_doci.npz
+
+No original 41-atom nickel SCF, DOCI or AFQMC electronic energies have yet been produced by the source-written branch. Remaining original charge/spin and MO frame, author upCCD and NQS checkpoint, QPU matchgate snapshots, full-space VCE computation, multi-seed real AFQMC estimates, Agda typechecking, exact committed script runtime and independent cloud cost evidence remain OPEN.
