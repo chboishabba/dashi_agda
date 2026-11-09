@@ -482,6 +482,44 @@ Both new modules are source-written; no Agda kernel or
 `parallel_checker` receipt has been obtained on this
 latest GitHub head, so acceptance is conditional.
 
+### 2026-11-09: L04 finite signed ionic charge cut
+
+New Agda owner `BiologicalSignedIonicSharedGridExact` is
+imported into the Round-23 Golden root. Two **separate actual
+`Vec Nat 27` inventories** represent positive and negative
+carriers at the same spatial sites; each original native 54-bond
+transport selects source/destination indices from the genuine
+`canonical54BondIndexing`.
+
+- `positiveIonTotalPreserved` and
+  `negativeIonTotalPreserved` establish the two independent
+  internal amount balances.
+- `allIonHistoriesPreserveSignedCharge` transports any
+  signed-charge interpretation through all finite histories.
+- `integerSignedCharge` instantiates native
+  `Data.Integer.Base.ℤ`: **positive ions minus negative ions**,
+  not absolute unsigned charge magnitude.
+- `nativeSignedChargeConservedByEveryHistory` and
+  `nativeOriginal54BondSignedChargeConserved` prove
+  the original 54-bond cation/anion paired sweeps preserve
+  that integer-valued signed net charge.
+
+`scripts/check_biological_signed_charge_27.py` was attached
+to the Golden shell gate, exhaustive in all 54 native bonds,
+both directions, two monovalent charge signs and 27 initial
+locations. An independent container-side calculation of the
+same finite semantics passed **5,832 transfers** with
+net signed charge conserved.
+
+**Gate status:** L04 closed **for finite closed-system internal
+transport of two monovalent species** at the selected 27
+shared sites. It does NOT establish spatially local
+Gauss-law charge flux continuity, external charge current
+accounting, Poisson field solutions, original PNP mobilities
+or multi-valence actual chemistry. All are still live
+physical L04/L05/L07 obligations. Agda proofs are
+source-written but exact-head kernel acceptance still pending.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
