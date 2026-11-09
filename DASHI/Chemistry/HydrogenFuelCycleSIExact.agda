@@ -12,6 +12,7 @@ open import Agda.Builtin.Bool using (false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 
+open import Data.Nat.Base using (_≤_)
 import DASHI.Physics.Units.SI as SI
 import DASHI.Chemistry.HydrogenElectrolyserEnergyExact as Electrolyser
 
@@ -88,6 +89,6 @@ siToElectrolyserFirstLaw s = record
 siHydrogenEnergyBound :
   (s : SIHydrogenProcessReceipt) →
   Electrolyser.generatedHydrogenHHV (siToElectrolyserFirstLaw s)
-  Electrolyser.≤ Electrolyser.electricalWork (siToElectrolyserFirstLaw s)
+  ≤ Electrolyser.electricalWork (siToElectrolyserFirstLaw s)
 siHydrogenEnergyBound s =
   Electrolyser.hydrogenHHVWithinElectricity (siToElectrolyserFirstLaw s)
