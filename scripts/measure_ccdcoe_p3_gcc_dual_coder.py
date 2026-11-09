@@ -14,6 +14,7 @@ import argparse
 from collections import Counter
 import json
 from pathlib import Path
+import check_ccdcoe_p3_sampling_frame as census
 from tempfile import TemporaryDirectory
 import hashlib
 
@@ -221,6 +222,7 @@ def main() -> None:
     p.add_argument("--input", type=Path)
     p.add_argument("--output", type=Path)
     p.add_argument("--source-root", type=Path)
+    p.add_argument("--frame", type=Path, help="Predeclared full eligible article census JSON")
     p.add_argument("--intervention-date")
     p.add_argument("--intervention-receipt")
     p.add_argument("--focus", default="science_uncertainty")
@@ -228,11 +230,12 @@ def main() -> None:
     if args.self_test:
         self_test()
         return
-    if not all((args.input, args.output, args.source_root,
+    if not all((args.input, args.output, args.source_root, args.frame,
                 args.intervention_date, args.intervention_receipt)):
         p.error("All source root, date, receipt, input and output arguments required")
     rows = [json.loads(line) for line in args.input.read_text(
         encoding="utf-8").splitlines() if line.strip()]
+    census.check(json.loads(args.frame.read_text(encoding="utf-8")), rows)
     result = analyse_dual(
         rows, args.focus, args.intervention_date,
         args.intervention_receipt, source_root=args.source_root)
