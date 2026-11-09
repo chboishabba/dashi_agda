@@ -190,7 +190,7 @@ originalFiniteExpLogUniformResidualSmall
     rPowerBelowAbsoluteError =
       RP.≤-respʳ-≃
         (RP.∣-∣-cong
-          (RP.≃-symm (RP.-identityʳ rPower)))
+          (RP.≃-symm (RP.x-0≃x {x = rPower})))
         (RP.x≤∣x∣ {x = rPower})
   in
   RP.≤-trans
