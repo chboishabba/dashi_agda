@@ -99,6 +99,20 @@ grep -q 'originalFaceInjectionLeavesOtherVoxelUnchanged' \
 grep -q 'originalFaceDischargeLeavesOtherVoxelUnchanged' \
   DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
 
+# Source-owner gates for exact executed native quanta, geometry-paid
+# distinctness, and signed one-step current. Kernel acceptance below
+# remains authoritative; grep does not discharge a theorem.
+grep -q 'lookupTransferSourcePaid' \
+  DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
+grep -q 'lookupTransferTargetReceivesActualSource' \
+  DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
+grep -q 'originalDirectedNativeEndpointsDistinct' \
+  DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+grep -q 'originalNativeVoxelIncidenceBalance' \
+  DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+grep -q 'original369SignedNativeOneStepContinuity' \
+  DASHI/Biology/Physical/Biological369CubicalOpenSignedChargeExact.agda
+
 python3 scripts/check_biological_history_future_quotient.py
 python3 scripts/check_biological_spatial_stochastic.py
 python3 scripts/check_biological_minimal_cube.py
