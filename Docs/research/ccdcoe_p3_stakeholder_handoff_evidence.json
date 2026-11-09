@@ -1,0 +1,61 @@
+{
+  "schema": "dashi.ccdcoe.p3.stakeholder_handoff.v1",
+  "original_source_ownership": "G20 Turkish Presidency, ICC, IKV and original C20/B20 authors retain authorship; self-reports distinguished from external institutional sources",
+  "events": [
+    {
+      "id": "c20_2015_handoff",
+      "event_date": "2015-09-16",
+      "actor": "C20 Turkey participating organisations",
+      "recipient": "Deputy Prime Minister Cevdet Yilmaz, former Deputy Prime Minister Ali Babacan and G20 Sherpa Ayse Sinirlioglu",
+      "source_kind": "turkish_presidency_report_of_receipt",
+      "source_url": "https://g20.org.tr/main-achievements-of-turkeys-2015-g20-presidency-2/index.html",
+      "evidentiary_stage": "documented_receipt",
+      "draft_version_identity": null,
+      "adopted_clause_uptake": null,
+      "causal_policy_influence": null
+    },
+    {
+      "id": "b20_2015_reported_presentation",
+      "event_date": "2015-09",
+      "actor": "B20 Turkey participants",
+      "recipient": "President Recep Tayyip Erdogan",
+      "source_kind": "ICC_participant_retrospective_report",
+      "source_url": "https://iccwbo.org/news-publications/policies-reports/icc-summary-of-the-antalya-g20-leaders-declaration/",
+      "evidentiary_stage": "attributed_report_of_presentation",
+      "draft_version_identity": null,
+      "adopted_clause_uptake": null,
+      "causal_policy_influence": null
+    },
+    {
+      "id": "ministerial_2015_prior_text",
+      "event_date": "2015-10-02",
+      "actor": "G20 Energy Ministers",
+      "recipient": "public_communique",
+      "source_kind": "original_ministerial_adopted_text",
+      "source_url": "https://g20.utoronto.ca/2015/151002-energy.html",
+      "evidentiary_stage": "published_adopted_text",
+      "draft_version_identity": null,
+      "adopted_clause_uptake": null,
+      "causal_policy_influence": null
+    },
+    {
+      "id": "b20_energy_2015_statement",
+      "event_date": "2015-10-12",
+      "actor": "B20 Energy Forum participants",
+      "recipient": "public_recommendations",
+      "source_kind": "original_stakeholder_document",
+      "source_url": "https://g20.utoronto.ca/b20/B20-Energy-Forum-Statement-121015-final1.pdf",
+      "evidentiary_stage": "published_recommendation",
+      "draft_version_identity": null,
+      "adopted_clause_uptake": null,
+      "causal_policy_influence": null
+    }
+  ],
+  "constraints": [
+    "Receipt of a communique is demonstrated engagement, not clause uptake.",
+    "ICC participant report does not prove every individual business authored a clause.",
+    "The B20 October 12 publication cannot cause the earlier October 2 published text.",
+    "Shared climate vocabulary is not a verified causal path.",
+    "C20 source's original contributions remain C20-authored, never G20-adopted merely by receipt."
+  ]
+}
