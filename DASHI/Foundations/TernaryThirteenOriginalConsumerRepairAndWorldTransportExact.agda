@@ -19,6 +19,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 import DASHI.Core.ConsumerFibreRepairExact as Repair
+import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
 import DASHI.Core.ObserverRefinementLatticeExact as Observer
 import DASHI.Foundations.TernaryThirteenOriginalSourceObserverDescentExact as Source
 import DASHI.Foundations.TernaryThirteenOriginalPullbackPushforwardWeldExact as Pull
@@ -52,11 +53,11 @@ centralRepairFactors =
     centralRepairIsSufficient
   where
     sectionedRepair :
-      DASHI.Core.SectionedProjectionProvenanceBridgeExact.SectionedProjection
+      Sectioned.SectionedProjection
         Rel.SourceCentralCompletionCarrier
         (Rel.SourceTwelveAxisValuation × Base.TriTruth)
     sectionedRepair =
-      DASHI.Core.SectionedProjectionProvenanceBridgeExact.sectionedProjection
+      Sectioned.sectionedProjection
         repairedCentralObserver
         (λ p → p)
         (λ p → refl)
