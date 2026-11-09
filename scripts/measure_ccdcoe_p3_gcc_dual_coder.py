@@ -238,7 +238,8 @@ def main() -> None:
     rows = [json.loads(line) for line in args.input.read_text(
         encoding="utf-8").splitlines() if line.strip()]
     census.check(json.loads(args.frame.read_text(encoding="utf-8")), rows,
-                 args.expected_frame_sha256)
+                 args.expected_frame_sha256,
+                 args.intervention_date, args.intervention_receipt)
     result = analyse_dual(
         rows, args.focus, args.intervention_date,
         args.intervention_receipt, source_root=args.source_root)
