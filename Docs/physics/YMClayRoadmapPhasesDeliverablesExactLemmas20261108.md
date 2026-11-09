@@ -1,3 +1,5 @@
+**Fail-closed static ledger guard:** `python3 scripts/check_ym_clay_23_physical_producers_20261109.py` checks the actual 23 E1/D1/D2/N1/G1 producer IDs, distinct YM01–YM10 owner manifest, PH0–PH4 phase coverage, original all-word Wilson gauge/marked source declarations and physical regression import. It is a source/roadmap audit, not an Agda typecheck, not an E1 or D1 proof and not a mass-gap certificate. Run it before the exact-head `parallel_checker` with Nix/Agda 2.9; terminal physical facts must be independently proved. 
+
 ## 9 November 2026 — authoritative 23-lemma / 10-owner / five-phase crosswalk
 
 **The 23 exact physical producers are now explicitly documented** in [YMClay23PhysicalProducersCurrentMaxCut20261109.md](YMClay23PhysicalProducersCurrentMaxCut20261109.md). They refine rather than replace the original **ten terminal source-owner IDs YM01–YM10** in [YMClayEndpointPhaseLemmaManifest20261108.json](YMClayEndpointPhaseLemmaManifest20261108.json). The phase plan remains **PH0–PH4**. All five Clay physical endpoints E1/D1/D2/N1/G1 are **OPEN**. Do not treat source-written finite algebra or a conditional compiler as an inhabited physical theorem.
