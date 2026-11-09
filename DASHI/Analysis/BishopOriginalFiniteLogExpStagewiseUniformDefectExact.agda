@@ -75,10 +75,7 @@ sourceOriginalUniformErrorBudgetNonnegative n radius h radiusNN =
     expLower = ExpOrder.bishopExpAtLeastOneOnNonnegative rhoNN
     expNN = RP.0≤x⇒nonNegx
       (RP.≤-trans
-        (RP.nonNegx⇒0≤x
-          (RP.0≤x⇒nonNegx
-            (RP.<⇒≤
-              PositiveUnit.onePositive)))
+        (RP.<⇒≤ PositiveUnit.onePositive)
         expLower)
     expMinusOneNN = RP.0≤x⇒nonNegx
       (Seq.x≤y⇒0≤y-x expLower)
