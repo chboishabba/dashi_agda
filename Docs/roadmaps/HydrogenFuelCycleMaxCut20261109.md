@@ -92,3 +92,15 @@ The atom residual is a zero discrepancy in the atomic projection of standard bal
 `energySavingIffDisplacementExceedsElectricity` compares input-energy totals for a prescribed fuel displacement. It does not establish that a hydrogen retrofit causes any efficiency rise. The full physical experiment must hold useful work constant and include changing battery/tank inventory.
 
 Do not conflate "source written", "Agda kernel accepted", "executably simulated", "independently measured", "patent disclosed", or "legal title verified". This separation implements the existing DASHI attribution policy.
+
+### Same-run source/consumer weld
+
+`DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact` introduces `SameRunFuelSaving` with explicit field equalities between the fossil-displacement source and the matched-output engine source. `sameRunEnergySavingIff` consumes the canonical net-input theorem through this joined record. Its sample 35%→50% engine-efficiency construction is **only an arithmetic fixture** and must not be interpreted as an XFuel observation.
+
+The complete new import tranche is now six Agda modules plus the roadmap, all reached through `DASHI.Chemistry.Everything`.
+
+### Precise theorem-to-observation boundary
+
+The formalism permits an efficiency improvement as an input; it does not prove one occurs. In particular, the matched-output equation includes the combined combustible energy `diesel + hydrogen + synthetic fuel`. Neither flamespeed assertions nor corporate disclosures discharge `K5`. The next source-specific work is to calibrate engine efficiency and gas/fuel flow at identical load, output and inventory boundary with uncertainties, and to distinguish the three architectures.
+
+The next **unproved mathematical** leaves after this tranche remain: molecular nonnegative-guarded reaction transitions (K1b), explicit SI unit/higher-heating-value transport (K2b), and source-paid ordered-rational engine efficiency algebra (K4b). Kernel acceptance K0 remains unpaid for all new source.
