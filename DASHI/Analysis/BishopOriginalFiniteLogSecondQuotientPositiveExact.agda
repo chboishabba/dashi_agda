@@ -22,6 +22,9 @@ import Sequence as Seq
 
 import DASHI.Analysis.BishopPowerFirstOrderDifferenceFactorisationExact as Power
 import DASHI.Analysis.BishopOriginalFiniteLogQuotientSecondOrderExact as Second
+import DASHI.Analysis.BishopOriginalNegativeLogFiniteExplicitQuotientExact as Explicit
+import DASHI.Foundations.BishopLogAtanFiniteDerivativeGeometricExact as Geo
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 import DASHI.Foundations.BishopNatRealReciprocalSquareBaselExact as NatRecip
 
 originalPowerZeroStepQuotientNonnegative :
@@ -68,3 +71,50 @@ originalFiniteLogSecondQuotientNonnegative x h xNN yNN (suc n) =
       (NatRecip.reciprocalNonnegative n)
       (originalPowerSecondQuotientNonnegative
         x h xNN yNN (suc n)))
+
+------------------------------------------------------------------------
+-- The exact original finite logarithm secant defect has sign h
+-- whenever both original endpoints are nonnegative.
+-- This is a genuine original Bishop order result; its magnitude
+-- still needs the uniform upper majorant on S_N.
+------------------------------------------------------------------------
+
+originalFiniteLogPolynomialQuotientDefectEqualsStep :
+  (x h : R.ℝ) (n : Nat) →
+  R._≃_
+    (R._-_
+      (Explicit.originalSourceFiniteLogQuotient n x h)
+      (Geo.negativeLogDerivativePolynomial x n))
+    (R._*_ h (Second.sourceFiniteLogSecondQuotient x h n))
+originalFiniteLogPolynomialQuotientDefectEqualsStep x h n =
+  RP.≃-trans
+    (RP.-‿cong
+      (Second.originalFiniteLogPolynomialQuotientExactDefect
+        x h n))
+    (let
+      p = Geo.negativeLogDerivativePolynomial x n
+      hs = R._*_ h (Second.sourceFiniteLogSecondQuotient x h n)
+      open RP.ℝ-Solver
+     in
+     solve 2
+       (λ pp yy → (pp ⊕ yy) ⊖ pp ⊜ yy)
+       RP.≃-refl p hs)
+
+originalFiniteLogPolynomialQuotientDefectNonnegative :
+  (x h : R.ℝ) (n : Nat) →
+  R.NonNegative x →
+  R.NonNegative (R._+_ x h) →
+  R.NonNegative h →
+  R.NonNegative
+    (R._-_
+      (Explicit.originalSourceFiniteLogQuotient n x h)
+      (Geo.negativeLogDerivativePolynomial x n))
+originalFiniteLogPolynomialQuotientDefectNonnegative
+    x h n xNN yNN hNN =
+  RP.nonNeg-cong
+    (RP.≃-symm
+      (originalFiniteLogPolynomialQuotientDefectEqualsStep x h n))
+    (RP.nonNegx,y⇒nonNegx*y
+      hNN
+      (originalFiniteLogSecondQuotientNonnegative
+        x h xNN yNN n))
