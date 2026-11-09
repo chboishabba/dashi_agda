@@ -279,3 +279,40 @@ Additional archive provenance:
 - An industry-affiliated counteranalysis of the Supran/Oreskes sample exists (Energy in Depth); evaluate its different collection window, search design and source ownership, but it is not automatically an independent validation of causal population effects. The original authors' correction is independently credited.
 
 **Research priority:** establish same-original-item message, actual delivery/exposure, peer-reviewed content coding, comparative historical chronology, credible alternative explanation and independently evidenced intent/targeting. Film theory is a useful epistemic non-promotion negative control, not a substitute for these primary empirical materials.
+
+
+## 9 November 2026 — ORIGINAL GCC 1993 LETTER-TO-MEDIA MAX-CUT (source-first)
+
+### Actual original-source observations located
+
+Original historical authorship/credit: Global Climate Coalition (GCC) and then executive director John Shlaes authored GCC letters; original reporters/newspapers own the separate news articles; the preserved collection originally belongs to Nicky Sundt and is catalogued by Climate Files/Climate Investigations Center. DASHI contributes only source-stage and causal non-promotion machinery.
+
+Source-specific catalogued objects:
+1. 4 January 1993, GCC "Climate Expertise" mailing headed to journalists, https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-climate-expertise-news-release/ .
+2. 3 May 1993, GCC Earth Day response letter addressed to reporters, with GCC release and two separately authored New York Times article attachments, https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-response-clinton-earth-day-pledge/ .
+3. 8 July 1993, letter to Department of Energy deputy assistant secretary Abe Haspel, referring to a prior meeting; the reference to a meeting is a claim in an original letter, not third-party proof of an identified exposure, https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-national-action-plan-doe-letter/ .
+4. 19 July 1993, GCC letter to White House Chief of Staff Thomas F. McLarty, https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-white-house-cos-letter/ .
+5. Independent newspaper texts preserved in GCC-held 1993 clippings, https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-media-hits/ .
+
+**Archive dates are catalogue metadata** and do not automatically certify posting, arrival, newspaper placement or actual exposure. The May source's PDF and plaintext links on DocumentCloud return HTTP 403 during this verification attempt. Consequently the page summary and attribution can be located, but the original scanned bytes and precise passages **were not independently authenticated** in this pass. Article attachments are authored independently of the enclosing GCC mailing.
+
+### New exact formal/data/software deliverables
+
+- `DASHI/Cognition/CCDCOEP3GCC1993SourceChainExact.agda`: five source-index objects, independent original author/recipient roles, archive-date projections, exact same-owner/different-recipient distinction, typed `VerifiedGCCCommunication`, `VerifiedMediaTransmission`, `VerifiedAudienceEffect` records with separately required independent original bytes/delivery/reuse/response receipts. No historical instance of these records is supplied. Source receipt fields are untrusted entries until independently reviewed outside the kernel; typed gates alone do not authenticate facts.
+- `Docs/research/ccdcoe_p3_gcc1993_intervention_chain_20261109.json`: five catalogued objects, three chronologically ordered source-stage edges, all marked *archive_date_order_only* and no claimed recipient effects.
+- `scripts/check_ccdcoe_p3_gcc1993_chain.py`: fail-closed audit of original URLs, dates, individual actor/recipient roles, exact chronological edges and ten adversarial source tampering/non-promotion controls.
+- Added to `DASHI.Cognition.Everything`, `CCDCOEP3CausalTrialecticRegressionExact`, and `scripts/check_ccdcoe_cognition_agda.sh`. Original general-purpose nonfactorability, discriminators, temporal fibres and selective reopening remain owned by their prior modules. No ESD edits.
+
+### Revised Pareto front
+
+| Priority | Exact remaining gate | Status |
+| --- | --- | --- |
+| CW0 | Authenticate a selected original GCC 3 May 1993 letter + enclosing release + original independently authored press texts, record byte SHA256 and reviewer receipts | OPEN (archive metadata found; raw PDF/text HTTP 403) |
+| CW1 | Original communication + independent delivery/actual editorial intake + newspaper publication timing, with a recipient-specific match not merely same vocabulary | OPEN |
+| CW2 | Matched actual original article text, pre/post sources, issue attention and uncertainty/agency/responsibility coding with independent reviewers and reliability | OPEN |
+| CW3 | Contemporaneous rival explanations, negative-control outlets and dates, credible comparison sampling and uncertainty/sensitivity | OPEN |
+| CW4 | Separately attributable coordinated targeting/hostile-purpose documents; distinguish public advocacy and contested science from coercion/deception | OPEN |
+| CW5 | If a real measured cognitive effect is identified, map it to the five-layer history-indexed multiplex and non-descent/revision without conflating theory and audience | OPEN |
+| CW6 | Actual Python self-tests, original byte-review receipts and Agda 2.9 exact-head kernel acceptance | OPEN (GitHub edits inspected; no local checkout/Agda) |
+
+The A1–A9 **film-art** case remains a subordinate interpretive and negative-control lane. It does not need to be empirically finished before original cognitive-warfare CW0–CW4. The original temporal fibre, braid, residual and path machinery is already present; do not construct a parallel temporal kernel or hallucinate a completed causal result. Commit states are source-written, not kernel-verified.
