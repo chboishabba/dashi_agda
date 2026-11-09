@@ -1396,3 +1396,17 @@ The Bimonster (Monster wreath C2) is `(M x M) semidirect C2`, with the involutio
 - [#1472 Y443/VOA](https://github.com/chboishabba/dashi_agda/pull/1472): JMD words and source graph laws are not absent; selected isomorphism and VOA laws remain the real gates.
 
 No ESD surfaces or attribution ownership changed.
+
+
+### 2026-11-09 second proof join: whole presented group from u,v
+
+The same `Y443AllCoxeterGraphLawsFrom80Exact.Source` now exports `everyPresentedElementHasUVWord`. The proof consumes:
+
+1. the **same selected group's** evaluation of all original 80 relators (already a module parameter);
+2. `Y443PresentedGroupNodeGenerationExact.PresentedByY443Nodes`, requiring that every group element has a signed original-node expression in that group.
+
+It composes `allTwelveNodeWordsFromActual80`, `nodeGenerationFromPresentedSyntax`, and `pairWordsSurjective` to return a **constructive TwoWord expression and equality for any g**. Thus the historical JMD all-twelve certificate, eleven path-shift proofs, and abstract node-generation eliminator are no longer independent endpoint premises on a correctly presented group.
+
+**Not yet paid:** a constructed quotient carrier with the original universal property, source identification of selected G with that quotient, and the selected action/FLM same-object identification. The `PresentedByY443Nodes` record remains a genuine witness, not silently constructed from arbitrary `RelatorsSatisfied`. Source-written only: exact-head Agda kernel acceptance not observed.
+
+**Y555/Bimonster discovery guard:** the user reports additional 555 content. Default-branch code search did not expose a verified `Y555` or `Bimonster` proof owner in this audit, which is inconclusive for other branches/worktrees. Before creating Y555 files, inspect those existing owners. The historical Bimonster uses the *swap* wreath `(M x M) semidirect C2`, not the direct product `M x C2` of the spider-quotiented Y443 lane. Generic finite `FiniteWreathRefinementExact` gives only a two-site involution example, not the universal Bimonster presentation.
