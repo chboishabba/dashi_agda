@@ -1442,3 +1442,26 @@ New ledger `ccdcoe_p3_stakeholder_handoff_evidence.json`, fail-closed `check_ccd
 - **P3.5 open:** exact-head 2.9 Agda kernel acceptance and independent original-source runtime receipts (the connector writes source files only).
 
 No ESD surfaces changed. Keep PR draft.
+
+
+## 9 November 2026 — comparative cultural corpus, cognition/attribution boundaries
+
+**Original historical reuse:** `DASHI/Governance/DevelopmentalInfluenceSourceAtlas.agda` already owns the Oreskes–Conway `merchantsOfDoubtHistory` bibliographic source; `EvidenceGradedGenealogyCasesExact.agda` already owns bounded historical-continuity reasoning. No duplicate mathematical genealogy created.
+
+**New case-specific bibliographic source ledger:** `Docs/research/ccdcoe_p3_cultural_source_atlas_20261109.json`, with 12 credited entries: Oreskes–Conway *Merchants of Doubt* (2010) and *The Big Myth* (2023); Klein–Taylor *End Times Fascism and the Fight for the Living World* (2026); Klein *Doppelganger* (2023), *The Shock Doctrine* (2007); Chomsky–Pollin, edited by Polychroniou, *Climate Crisis and the Global Green New Deal* (2020); Mann *The New Climate War* (2021); Michaels *Doubt Is Their Product* (2008); Washington–Cook *Climate Change Denial: Heads in the Sand* (2011); Gibbs *Planet of the Humans* (2020); McKay *Don't Look Up* (2021); Kenner's *Merchants of Doubt* documentary (2014).
+
+**Source limits:** only original institutional/author/publisher metadata and synopses are examined for most additions. This is NOT full-text exegesis or a validated transcription of 2026 book chapters. The 2026 Klein–Taylor publication was independently checked at the Australian publisher (29 September 2026 trade paperback), the authors' site and the US publisher. Other distinct works remain separate by author, year and genre.
+
+**Formal owners:** `DASHI/Cognition/CCDCOEP3CulturalSourceGenreExact.agda` makes historical research, political interpretation, policy proposals, documentary argument and fictional satire distinct constructors, while bibliographic locator, published interpretation, independently verified observation and identified causal effect are separate source stages. Proofs block particular film/book source objects from silently becoming documented real-world treatment effects. `scripts/check_ccdcoe_p3_cultural_sources.py` audits the 12 source records, checks 5 negative tampering controls and forbids full-text review, causal effect and author endorsement promotion. Integrated into the Golden root, P3 regression and canonical checker, with kernel acceptance still OPEN.
+
+**Cognitive warfare discrimination:**
+- *Merchants of Doubt* historically investigates organised production of public scientific uncertainty (retain original academic claim, report-level source provenance and competing explanations). The presence of historical influence operations does not warrant identifying all dissent as hostile.
+- *The Big Myth* adds the authors' historical account of free-market narratives in education and mass communication, not a claim that particular modern actors are a single controller.
+- *End Times Fascism* and *Doppelganger* contribute Klein/Taylor's own interpretive hypotheses about crisis narratives, mirror identity and collective future imagination; neither publisher synopsis demonstrates a measured causal treatment effect.
+- *The Climate Crisis and the Global Green New Deal* is an authored programme for public policy/economic choices, not original empirical evidence of cognitive control.
+- *Planet of the Humans* is an authored documentary argument with independently checkable factual claims, not a blanket observational verdict on all renewable technologies or on its audiences.
+- *Don't Look Up* is fiction/satire illustrating potential media and institutional failure; fictional narrative events are NEVER source evidence of a real intervention.
+
+**Remaining exact proof/data gates:** (CULT-0) obtain licensed complete texts or independently reviewed attributable original passages; (CULT-1) author-owned chapter/scene proposition extraction and contrary primary evidence; (CULT-2) stable source→claim→evidence mapping with counterexamples and uncertainty; (CULT-3) original observations measuring cognitive mechanism and communication exposure; (CULT-4) causal discrimination from nonmalicious dissent, satire, shared language and ordinary institutional debate; (CULT-5) exact-head Agda 2.9 kernel acceptance and executable empirical receipts. An atlas of citations alone pays none of these gates.
+
+**Attribution:** no authorial endorsement, shared authorship, intellectual ownership transfer, invented quotations, uncontrolled full-text reproduction, or automatic inference from political position to intent. No ESD files edited.
