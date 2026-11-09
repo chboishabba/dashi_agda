@@ -85,9 +85,10 @@ stepPreservesFibre :
 stepPreservesFibre C b x witness =
   trans (quotientStepInvariant C x) witness
 
+data Empty : Set where
+
 record FixedPointFree (C : AbelCarrier) : Set₁ where
   field
-    Empty : Set
     contradiction : (z : Coordinate C) →
       Fixed (translate C) z → Empty
 
@@ -95,7 +96,7 @@ open FixedPointFree public
 
 fineCannotBeFixedWhenTranslationFree :
   (C : AbelCarrier) → (F : FixedPointFree C) →
-  (x : Fine C) → Fixed (step C) x → Empty F
+  (x : Fine C) → Fixed (step C) x → Empty
 fineCannotBeFixedWhenTranslationFree C F x fixed =
   contradiction F (abel C x)
     (fixedFineMapsToFixedCoordinate C x fixed)
@@ -125,7 +126,7 @@ coordinateDescentForcesTranslationFixed C D x =
 
 coordinateCannotDescendWhenTranslationFree :
   (C : AbelCarrier) → (F : FixedPointFree C) →
-  (D : CoordinateDescent C) → (x : Fine C) → Empty F
+  (D : CoordinateDescent C) → (x : Fine C) → Empty
 coordinateCannotDescendWhenTranslationFree C F D x =
   contradiction F (abel C x)
     (coordinateDescentForcesTranslationFixed C D x)
