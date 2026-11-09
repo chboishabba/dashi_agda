@@ -246,3 +246,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorSemanticE
 
 -- SSP sign-inversion operation reuse on the original signed Karp factors.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedTraceFactorC2Exact
+
+-- Source-written first-enabled FRACTRAN cache/step invariance.
+import DASHI.Mathematics.Complexity.Karp21FractranPriorityFrontierExact
