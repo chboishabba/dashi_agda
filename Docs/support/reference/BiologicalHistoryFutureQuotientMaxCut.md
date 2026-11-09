@@ -1059,3 +1059,19 @@ inspection alone.
 finite transitive dependency reopening **source-written**; production
 same-object identification **open**; live replay **open**; original
 physical biological calibration **open**; exact-head Agda **unverified**.
+
+
+### Independent finite diagnostic of the marker-aware repair (2026-11-09)
+
+An independent in-memory Python enumeration of all 64 six-Boolean
+biological fixture states checked the selected single marker-probe
+step/observation commutation and marker-aware trace observations
+for probe lengths 0 through 5. All assertions passed. The enumerated
+original `minimalProject` has 18 distinct codes; pairing it with the
+marker produces 36 distinct codes. There are 288 **ordered** state
+pairs that collide under the original 18-class code but disagree in
+their marker coordinate. This is an independent finite semantic
+cross-check, not an Agda kernel execution receipt and not original
+biological measurement. The model has only one new markerProbe
+action in this diagnostic; the real physical action language is not
+represented by these counts.
