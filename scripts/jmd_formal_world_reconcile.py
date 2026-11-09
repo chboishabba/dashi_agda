@@ -273,6 +273,10 @@ def check_lean(conn, *, root: Path, limit: int = 4, timeout: int = 120) -> dict:
         raise ValueError("Explicit Lean checkout with lakefile required")
     if not (root / ".git").exists():
         raise ValueError("Refuse to treat an unpinned/non-git checkout as a source environment")
+    dirty=subprocess.run(["git","status","--porcelain","--","*.lean","lakefile.toml","lakefile.lean"],
+         cwd=root,text=True,capture_output=True,check=True).stdout.strip()
+    if dirty:
+        raise ValueError("Source Lean checkout is dirty; refuse pinned proof claim")
     if not shutil.which("lake"):
         raise RuntimeError("Lean Lake missing; no proof promotion")
     revision = subprocess.run(["git","rev-parse","HEAD"],cwd=root,
@@ -311,7 +315,8 @@ def check_lean(conn, *, root: Path, limit: int = 4, timeout: int = 120) -> dict:
         probe = (f"import {gmod}\nimport {smod}\n"
                  "set_option autoImplicit false\n"
                  "set_option warningAsError true\n"
-                 f"example : {prop} := by\n  exact {decl}\n")
+                 f"example : {prop} := by\n  exact {decl}\n"
+                 f"#print axioms {decl}\n")
         with tempfile.NamedTemporaryFile(mode="w",suffix=".lean",dir=root,
                                          prefix="JMDProbe_",delete=False) as f:
             f.write(probe)
@@ -319,7 +324,7 @@ def check_lean(conn, *, root: Path, limit: int = 4, timeout: int = 120) -> dict:
         try:
             run = subprocess.run(["lake","env","lean",name.name],cwd=root,
                                  text=True,capture_output=True,timeout=timeout,check=False)
-            ok = run.returncode == 0
+            ok = run.returncode == 0 and not re.search(r"\bsorryAx\b", run.stdout + run.stderr)
             msg = (run.stdout + "\n" + run.stderr)[:1500]
         except subprocess.TimeoutExpired:
             ok,msg=False,"CHECKER_TIMEOUT"
@@ -408,13 +413,14 @@ def ingest_native_gaps(conn, *, max_gaps: int = 200, max_candidates: int = 6) ->
                                   requirement_kind,source FROM repo_requirements
                            ORDER BY symbol_id,required_symbol LIMIT ?""",
                         (max_gaps,)).fetchall()
+    conn.execute("DELETE FROM jmd_world_gap_candidates")
+    conn.execute("DELETE FROM jmd_world_native_gaps")
     for owner,required,cls,kind,source in rows:
         key=digest("\x1f".join((owner,required,cls,kind,source)))
         conn.execute("""INSERT OR REPLACE INTO jmd_world_native_gaps
         VALUES(?,?,?,?,?,?)""",(key,owner,required,cls,kind,source))
     source_rows=conn.execute("""SELECT source_key,declaration,formal_type
       FROM jmd_world_sources ORDER BY source_key""").fetchall()
-    conn.execute("DELETE FROM jmd_world_gap_candidates")
     for key,required in conn.execute("""SELECT gap_key,required_symbol
        FROM jmd_world_native_gaps ORDER BY gap_key""").fetchall():
         tokens=words(required)
@@ -496,6 +502,10 @@ def main(argv=None):
                   capture_output=True,text=True,check=True).stdout.strip()
                 if revision and revision != head:
                     raise ValueError("Requested Agda revision does not match local checkout")
+                dirty=subprocess.run(["git","status","--porcelain","--","DASHI","Ontology"],
+                    cwd=checked,capture_output=True,text=True,check=True).stdout.strip()
+                if dirty:
+                    raise ValueError("Agda source worktree is dirty; cannot bind index to a pinned revision")
                 revision=head
             if revision:
                 import_agda(conn,revision=revision,max_rows=args.max_agda_rows)
