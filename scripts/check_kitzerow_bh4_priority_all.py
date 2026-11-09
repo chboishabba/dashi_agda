@@ -22,6 +22,7 @@ for name in [
     "check_bh4_shared_redox_dynamics.py",
     "check_bh4_original_qdpr_spatial_reaction.py",
     "bh4_original_qdpr_spatial_finite_volume.py",
+    "check_bh4_original_panel_spatial_events.py",
     "check_bh4_one_molecule_future_minimality.py",
     "check_bh4_spatial_measurement_payment.py",
 ]:
