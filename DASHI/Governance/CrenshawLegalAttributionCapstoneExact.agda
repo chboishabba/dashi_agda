@@ -18,6 +18,8 @@ import DASHI.Governance.CrenshawRightsReformDualEffectExact as Rights
 import DASHI.Governance.CrenshawHistoricalCarceralSourceAtlasExact as HistSources
 import DASHI.Governance.CrenshawCrossInstitutionalEvidenceExact as CrossInstitution
 import DASHI.Governance.CrenshawCarceralMissingnessExact as Missingness
+import DASHI.Governance.Crenshaw1988SituatedVoiceExact as Voice
+import DASHI.Governance.BlackGirlsMatterStudyScopeExact as BGM
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -74,6 +76,15 @@ record LegalCrossCaseCut : Set₁ where
     unrecordedDoesNotImplyNoPolicingHarm :
       INF.FactorsThrough
         Missingness.entryInSelectedCorpus Missingness.independentHarm → ⊥
+    authorialSituatedVoiceNotRecoveredFromPublicationLabel :
+      INF.FactorsThrough
+        Voice.publicationLabel Voice.voice → ⊥
+    administrativeDataCannotBeSubstitutedForFocusGroupTestimony :
+      BGM.Supports BGM.districtAdministrativeData
+        BGM.participantReportedSchoolExperience → ⊥
+    missingDisabilityAnalysisCannotProveNoHarm :
+      INF.FactorsThrough
+        BGM.availableDisabilityResult BGM.actualDisabilityHarm → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -96,4 +107,7 @@ crenshawLegalCrossCaseCut =
     CrossInstitution.schoolDisciplineDoesNotByItselfPayCustodialOutcome
     HistSources.historicalCitationDoesNotCreateAuthority
     Missingness.recordAbsenceDoesNotProveAbsenceOfHarm
+    Voice.bibliographicLabelCannotRecoverSituatedVoice
+    BGM.districtDataDoesNotPayParticipantTestimony
+    BGM.reportScopeCannotDecideUnstudiedHarm
     refl refl
