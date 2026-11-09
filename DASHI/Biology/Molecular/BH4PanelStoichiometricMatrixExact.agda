@@ -423,6 +423,19 @@ record SourceCertifiedOriginal29x12 : Set where
         (originalReactants (V.lookup sourceFiniteColumns column))
         ≡ panelWeighted (sourceElementWeights element)
           (originalProducts (V.lookup sourceFiniteColumns column))
+    sourcePositiveChargeWeights : V.Vec Nat 29
+    sourceNegativeChargeWeights : V.Vec Nat 29
+    sourceColumnSignedCharge :
+      (column : F.Fin 12) →
+      (panelWeighted sourcePositiveChargeWeights
+        (originalReactants (V.lookup sourceFiniteColumns column))
+        + panelWeighted sourceNegativeChargeWeights
+          (originalProducts (V.lookup sourceFiniteColumns column)))
+        ≡
+      (panelWeighted sourcePositiveChargeWeights
+        (originalProducts (V.lookup sourceFiniteColumns column))
+        + panelWeighted sourceNegativeChargeWeights
+          (originalReactants (V.lookup sourceFiniteColumns column)))
 open SourceCertifiedOriginal29x12 public
 
 -- Exact P0 finite-volume SOURCE-CERTIFICATE-CONSUMING theorem:
@@ -453,3 +466,39 @@ original29x12SpatialReactionBalance
     site (V.lookup (sourceFiniteColumns certificate) column)
     residual before available
     (sourceColumnLeftKernel certificate element column)
+
+
+-- This is SIGNED charge (positive minus negative molecular charge);
+-- positive and negative atomic-charge totals need not be conserved
+-- separately during a balanced redox reaction. The cross-sum form
+-- avoids unproven integer homomorphisms and permits any true 29x12
+-- source reaction with original signed charges.
+original29x12SpatialSignedChargeBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29)
+  (before : V.Vec (V.Vec Nat 29) 27) →
+  V.lookup before site ≡
+    panelReactionBefore
+      (V.lookup (sourceFiniteColumns certificate) column) residual →
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate)
+      (V.updateAt before site
+        (λ _ → panelReactionAfter
+          (V.lookup (sourceFiniteColumns certificate) column) residual)))
+    ≡
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate)
+    (V.updateAt before site
+      (λ _ → panelReactionAfter
+        (V.lookup (sourceFiniteColumns certificate) column) residual))
+    + panelSpatialWeighted
+      (sourceNegativeChargeWeights certificate) before)
+original29x12SpatialSignedChargeBalance
+  certificate column site residual before available =
+  panelSpatialSignedReactionConserves
+    (sourcePositiveChargeWeights certificate)
+    (sourceNegativeChargeWeights certificate)
+    site (V.lookup (sourceFiniteColumns certificate) column)
+    residual before available
+    (sourceColumnSignedCharge certificate column)
