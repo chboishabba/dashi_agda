@@ -28,7 +28,7 @@ dashiTRADE comparison: `scripts/phase07_eigen_boundary_check.py` uses action/tra
 
 **T5 (finite data caveat).** For p=120,n=200, γ=0.6, unit variance MP edges are approximately 0.0508067 and 3.1491933. Earlier 2.7500 upper-edge reports are not equal to the unit-variance edge. Reconstruct the original calibration rather than silently replacing it.
 
-**T6 (reported spectrum caveat).** Reported values 74.5526, 18.8350, 5.5865 sum to 98.9741. Only IF they are eigenvalues of a p=120 *correlation* matrix with trace 120 does their trace fraction equal 98.9741/120≈0.8247842. Historical experiment has not been rerun or independently validated in this branch.
+**T6 (external planning-label warning).** Values 74.5526, 18.8350, 5.5865 are recorded in `DASHI/Unified/FleetFormalGapTargetTOEExact.agda` as *external planning labels* for Balaban RG, NS BM2 and Quantum Mereology. The source explicitly denies theorem-authority promotion. Their sum is 98.9741, but treating them as the top three eigenvalues of a shared p=120 correlation matrix (and assigning 82.4784% of its trace) is ONLY a counterfactual arithmetic illustration. No shared covariance matrix or trace receipt is established. `DASHI/Interop/PNFSpectralNumericABICore.agda` additionally defines `PNFSpectralNumericABIPromotion → ⊥`: numerical ABI materialization is candidate-only and cannot itself authorise promotion.
 
 ## 2. Phases, exact remaining declarations and deliverables
 
@@ -73,9 +73,9 @@ Deliverable: replayable timestamped spectral diagnostics with source and null re
 
 D1 `historicalPNFReplaySameSource`: OPEN. Recover 319,211 items / 1,931 fibres and the selected 200×120 activation sample, including exact normalisation and null model; historical reports are NOT proof.
 D2 `historicalUpperEdgeCalibrationReconciled`: OPEN. Explain historic 2.7500 against unit-scale 3.1491933 (or correct the source).
-D3 `historicalEigenvalueTraceConsistency`: OPEN. Check all 120 eigenvalues, trace=120 if correlation, empirical uncertainty.
+D3 `historicalEigenvalueTraceConsistency`: OPEN. First identify the actual eigenvalue-generating data product, if any; planning labels are not automatically matrix eigenvalues. Then check all eigenvalues and trace=120 only if it is truly a 120-column correlation matrix.
 D4 `sourcePreservingNullNegativeControls`: OPEN. Hold representation source and temporal constraints fixed while testing residual structure.
-D5 `PNFSemanticPromotionReceipt`: OPEN. Explicit independent source, semantic, stability, and non-artifact warrants; no eigenvalue-only promotion.
+D5 `PNFSemanticPromotionReceipt`: OPEN. Reuse canonical `PNFSpectralNumericABICore` candidate-only, rebuildability and non-promotion owners. Independent source/semantic/stability warrants must enter *outside* the forbidden numeric-ABI promotion boundary; no eigenvalue-only promotion.
 Deliverable: PNF claims table separating theorem, data observation, null-relative candidate and admitted semantic claim.
 
 ### Phase E — dashiTRADE reuse, only after PNF calibration [P3]
@@ -99,6 +99,7 @@ Practical next cut: kernel-check the new finite module; implement exact finite s
 
 - MP does not establish that bulk modes are semantic nonsense.
 - Outliers do not prove concepts, causal relationships, or stable latent ontology.
+- External Fleet planning labels must not be silently reclassified as a common PNF correlation-matrix spectrum.
 - An eigenvalue-only threshold is not a finite-sample hypothesis-test p-value.
 - S&P 500 correlation behaviour is not evidence that PNF has the same ensemble law.
 - dashiTRADE's 'eigen-event' classification is an action boundary, not literally a covariance eigenmode.
