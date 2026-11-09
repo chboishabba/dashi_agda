@@ -108,3 +108,23 @@ Pair.RelatorsSatisfied gi nodes original8 .
 `source72Count` and `source8Count` prove 72/8 on the **literal computed source**, not an independently rewritten relator list. `ExistingOriginalJMD.literalOriginal72Satisfied`, `literalOriginal8Satisfied`, and `recombinedSameOriginal80` instantiate this equivalence on the **same existing `PresentedY443VNaturalSource`**, reusing its group, node map and `relatorsHold` exactly. Added to focused Golden root `Y443VNaturalPairGenerationValidation.agda`.
 
 An independent local Python check of the original 12 squares / 66 pairs / spider / central source enumeration confirmed the eight residual positions and their semantic types. The new Agda source has **not** received an Agda 2.9 kernel typecheck and therefore is SOURCE-WRITTEN, not kernel-certified. This proof **does not** settle the historical Q80 ≅ Monster theorem or the selected-group nonabelian kernel reflection, which require actual historical simplicity and real selected nontriviality. It does pay a previously missing **original relation-preservation** step for all further 72+8 source proofs. The 71+9 and projective F9 numerical codings remain independent from this now-exact actual-relator partition.
+
+
+## 9 November continuation — exact historical 79→80 quotient step in original Agda source
+
+The **same** new `Y443Original72Plus8RelatorSatisfactionExact.agda` now proves two exact original-list equivalences for all actual `TM.GroupWithInverse G` and node maps:
+
+```
+RelatorsSatisfied gi nodes Y.monsterRelators
+  <=> RelatorsSatisfied gi nodes original72
+      AND RelatorsSatisfied gi nodes original8
+
+RelatorsSatisfied gi nodes Y.monsterRelators
+  <=> RelatorsSatisfied gi nodes Y.doubleMonsterRelators
+      AND (evaluateCoxeterWord gi nodes
+              Y.centralInvolutionRelator ≡ Pair.identity gi).
+```
+
+The second uses structural `appendSatisfied` / `mergeAppendSatisfied` proofs on **Y._++_**, with `original79AndCentralFrom80` and `original80From79AndCentral`; no abstract postulated “central quotient” record. `ExistingOriginalJMD.literalOriginal79Satisfied`, `literalOriginalCentralSatisfied` and `reconstructedOriginal80From79AndCentral` consume precisely the existing JMD selected G, its original relators and the literal Ivanov `f312` word.
+
+**Paid source-level**: the exact list-level historical presentation passage from 79 to 80 and the exact 72+8 relation satisfaction equivalence. **Still required**: prove the **group-theoretic** historic identification of the quotient of the 79-relator group by the normal closure of `f312` with the published Monster, and transfer its simplicity to `Original80SimpleCongruenceAuthority`. Satisfying the *same relations* alone does not prove a selected-group isomorphism. Agda kernel acceptance remains pending.
