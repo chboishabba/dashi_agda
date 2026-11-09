@@ -20,7 +20,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; _+_)
 open import Data.List.Base using (List; []; _∷_)
-open import Data.Vec using (Vec; []; _∷_)
+import Data.Vec as Vec
 open import Relation.Nullary using (yes; no)
 import Data.Nat.Properties as NatP
 
@@ -34,9 +34,9 @@ doubledCoordinateSquare Indexed.indexedZero = 0
 doubledCoordinateSquare Indexed.indexedPosHalf = 1
 doubledCoordinateSquare Indexed.indexedPosOne = 4
 
-doubledSquaredNorm : ∀ {n} → Vec Indexed.HalfTritIndexed n → Nat
-doubledSquaredNorm [] = zero
-doubledSquaredNorm (coordinate ∷ rest) =
+doubledSquaredNorm : ∀ {n} → Vec.Vec Indexed.HalfTritIndexed n → Nat
+doubledSquaredNorm Vec.[] = zero
+doubledSquaredNorm (coordinate Vec.∷ rest) =
   doubledCoordinateSquare coordinate + doubledSquaredNorm rest
 
 -- Root square length=2 is represented without rational arithmetic
@@ -61,10 +61,10 @@ allNormEightCheckSound :
   AllDoubledNormEight roots
 allNormEightCheckSound [] _ = allNil
 allNormEightCheckSound (root ∷ rest) valid
-  with NatP._≟_ (doubledSquaredNorm root) 8
-... | yes normEq = allCons normEq (allNormEightCheckSound rest valid)
-... | no notEq with valid
-...   | ()
+  with NatP._≟_ (doubledSquaredNorm root) 8 | valid
+... | yes normEq | accepted =
+  allCons normEq (allNormEightCheckSound rest accepted)
+... | no notEq | ()
 
 generatedE8NormEightCheckIsTrue :
   allNormEightCheck E8.combinedIndexedRoots ≡ true
