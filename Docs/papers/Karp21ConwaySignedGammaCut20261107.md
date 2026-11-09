@@ -161,3 +161,21 @@ The reusable object is an **operation orbit / trace signature**, not a bare subg
 - an actual improvement in `MDLVector` or `CostVector` under selected input families or a worst-case envelope, with transcript/binary-replay evidence.
 
 The next substantive theorem cut: `factorSignedTraceReplaySameOriginal` and `originalGammaWordTraceFactorizationSameScore` for ALL words, then a costed word-scan compiler into this representation. The earlier `trieAdmitIffOriginalHistoryConsistency`, `nativeGraphEndpointsConsumeInputBits`, full original N21 `PR.InNP`, E20, Cook-Levin and remaining 19 reductions/20 NP-memberships are still OPEN. No source-written Agda is promoted without an exact-head Agda 2.9 receipt.
+
+
+## 2026-11-09 continuation: complete factor-list semantics and SSP C2 operation reuse (source-written)
+
+Additional Agda (directly on PR #1474, not sidecar hypothetical interfaces):
+- `Karp21BinaryNativeSignedTraceFactorExact.sameSignedTokenSound`: bitwise original signed-token equality has a genuine constructor-equality proof; a hash collision or SSP sign tag is not used as an equality oracle.
+- `binaryCounterIncrementValue`: the class multiplicity is incremented by actual ripple addition; proof-side value increases by exactly one.
+- `replayFactorsPositiveValue`, `replayFactorsNegativeValue`: the executable group-replay fold yields precisely the sum of each factor's (binary weight × binary count) in the two selected lanes.
+- `Karp21BinaryNativeSignedTraceFactorSemanticExact`: source-written universal `insertPositivePreservesTotal`, `insertNegativePreservesTotal`, complete `factorPositiveTotalCorrect` / `factorNegativeTotalCorrect`, and `factorReplayPositiveEqualsOriginalLedger` / `factorReplayNegativeEqualsOriginalLedger`. This identifies the **actual original bit-native signed ledger**, not yet the original unary-\(\mathbb Z\) `Runtime.rawSparseScore`. Proof status: SOURCE, NOT KERNEL.
+- `Karp21BinaryNativeSignedTraceFactorC2Exact`: reuses `Karp21SignedSSPOrientationNoLosslessExact.flipBinarySign` (SSP sign orientation), proves involution on classes, sign-invariant identical-weight keys and concrete `factorReplayCommutesWithSignFlip`, i.e. replaying a sign-flipped class list swaps positive/negative accumulator lanes. The unfactored insert operation satisfies the same action. It uses the non-safe historical SSP import route, so is **not** advertised as `--safe`.
+- The original Golden roots import the complete source-written semantics; C2 is exposed only through the non-safe original `Karp21Everything` root. The fail-closed referee now includes both.
+- The finite Python audit also checks the sign-flip law. A local independent reproducer passed 19,531 signed traces and the same number of sign-flip comparisons.
+
+### Verification and mathematical honesty
+
+This is a real semantics-reuse advance, not a full N21 completion. Exact-head Agda 2.9 acceptance is still missing; the source proof terms might require changes after compiler diagnostics. The full original same-graph-word `rawSparseScore` weld still needs the arbitrary-word signed gamma numerical/suffix theorem, selected edge cut observation, endpoint guard and positive threshold. The model-dependent cost of building the weight dictionary and replay is not yet a bit-Turing-machine polynomial proof. Some traces will be *slower* to factor, and a shorter factor description does not automatically yield a faster execution. Do not promote P0 `PR.InNP`, E20, Cook–Levin, or E01–E19 / N01–N20.
+
+Recheck local compiler with the repository's authoritative `scripts/run_agda29_parallel_check.sh` on the exact PR head; the current isolated environment has Python but not Agda/Nix or a network-reachable Git clone. The new GitHub source and bounded Python tests are not kernel receipts.
