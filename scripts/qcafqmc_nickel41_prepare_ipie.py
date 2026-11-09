@@ -33,8 +33,8 @@ def make_configs(output_dir,charge,spin,statement,provenance_kind):
                   "walkers":1280,"blocks":300,
                   "steps_per_block":20,"time_step":0.005,
                   "stabilize_freq":5,"pop_control_freq":5,
-                  "equilibration_blocks":50,"seed":20261109,
-                  "nqs_trial_used":False,
+                  "equilibration_blocks":0,"analysis_discard_blocks":50,"seed":20261109,
+                  "analysis_blocks":250,"nqs_trial_used":False,
                   "original_nickel_qcafqmc_replication":False}
         target=output/(name+".ipie.json")
         target.write_text(json.dumps(settings,indent=2)+"\n")
