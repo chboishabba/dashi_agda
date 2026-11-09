@@ -146,3 +146,18 @@ The source is updated to use Prelude-supported `¬ (_≡_)`; **no Agda executabl
 **P0 STILL OPEN:** `original369LocalSignedContinuityExact` must prove the actual per-voxel *signed* incidence-current and boundary-event identity for every chronological history, not merely locality and global charge conservation. `original29x12SpatialReactionBalance` additionally needs acquired original matrix bytes and source-consistent compartment/charge bookkeeping; `sameSourcePhysicalReactionTransportStep` needs rates and admissible PNP/circulation couplings. P1–P3 physical and empirical gates unchanged.
 
 **Highest next step:** prove at each source and target the exact executed `transferOne` debit/credit (including empty-source and reversed bonds), and then sum those signed local event receipts through histories. This is now well isolated by the off-endpoint proof and original-face support.
+
+
+### 2026-11-09 typed original-bond history advance (last P0 pass)
+
+**New Agda source owners on PR #1471:**
+- `OriginalDirectedNativeBond` with `forwardNative` and `reverseNative` constructors taking genuine `Grid.PositiveBond`; `applyNativeDirectedBond`, `runOriginalDirectedNativeHistory` execute the existing native `transferOne` on one 3×3×3 inventory.
+- `everyChronologicalOriginalDirectedHistoryConserves`: conservation along every typed, chronological actual-bond history, not arbitrary unvalidated Fin pairs.
+- `NativeHistoryAvoids` and `nativeHistoryLeavesUnvisitedVoxelUnchanged`: source- and target-avoiding proofs for an original observer voxel persist across all such histories.
+- Original source/debit, target/credit and certified outer-face injection/extraction support lemmas are source-written; the Golden script now checks the new exact declarations before invoking the existing parallel checker. The Python signed charge regression checks that every simulated change stays on the selected bond endpoints or face voxel.
+
+**Remaining true P0 lemma frontier:** `original369LocalSignedContinuityExact` still needs source/target *actual moved quantum* equality with signed ion valence, a signed incidence divergence at every voxel, cumulative face inflow/outflow, and induction over mixed original charge-event histories. The new support and typed-history theorems do not establish it by themselves. Source-writing is not Agda 2.9 kernel acceptance.
+
+**Original 29×12 certificate availability:** connected GitHub lookup on PR #1454 of `artifacts/biology/rhea-kitzerow-bh4-reactions.json` returned 404. That verifies the artifact is not present at that tracked path on the branch; it does **not** prove it is absent from a private machine, earlier acquisition store, or other source. The original-panel full test has not been run. Re-acquire or supply the byte-pinned primary certificate before claiming 29×12 completeness. No measured exchange flux is inferred.
+
+P1 actual BH4/PNP/tissue physical same-object steps, P2 physically observed stochastic quotient and P3 rates/held-out data/Golden reconciliation remain OPEN.
