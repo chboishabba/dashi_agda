@@ -66,13 +66,12 @@ atLeastSameLowBit :
   (b : Bool) (xs ys : Word.BitWord) →
   Compare.atLeast (b ∷ xs) (b ∷ ys)
     ≡ Compare.atLeast xs ys
-atLeastSameLowBit b xs ys =
-  cong decide (compareLESameLowBit b xs ys)
-  where
-    decide : Compare.BitOrdering → Bool
-    decide Compare.less = false
-    decide Compare.equal = true
-    decide Compare.greater = true
+atLeastSameLowBit b xs ys
+  rewrite compareLESameLowBit b xs ys
+  with Compare.compareLE xs ys
+... | Compare.less = refl
+... | Compare.equal = refl
+... | Compare.greater = refl
 
 -- This counts EXACT structural compareLE recursive frames, including
 -- zero-extension and the terminating []/[] observation. It does NOT
