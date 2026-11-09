@@ -1555,3 +1555,20 @@ real trusted-referee identity; otherwise fail closed instead of claiming
 the finite replay is a database roundtrip. For physics, use the existing
 source physical simulation record and demand a calibrated `physicalOneStep`
 rather than constructing an artificial instance.
+
+
+## 2026-11-09 continuation: cubical biology exact-lemma and deliverable ledger
+
+**Golden-first status:** This branch now source-writes `twoNativeCubicalBondTransfersConserveTotal` in `Biological369CubicalMaterialFieldExact`. Two successive native `Grid.PositiveBond` transfers operate on the **same** original 3×3×3 inventory; the proof composes the original one-bond conservation witnesses. This proves neither biological permeability nor an arbitrary 29×12 reaction/transport system. Exact-head Agda acceptance was **not** run here.
+
+Refer to `Docs/support/reference/BH4PhysicalTissueFutureObservationMaxCut.md` for the synchronized seven-gate G0–G7 ledger, proposed exact lemma names, D0–D6 deliverables and falsification conditions. Do not mark the following as discharged:
+
+1. `original369LocalSignedContinuityExact` (voxelwise integer signed charge and current; Python finite regression is not kernel proof).
+2. `original29x12SpatialReactionBalance` (original Rhea certificate, 12 finite columns, three nonfinite residuals, 29 explicit exchange coordinates; no unknown=zero).
+3. `sameSourcePhysicalReactionTransportStep` (admissible **single** chemical/ionic/boundary/flow evolution).
+4. `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, `physicalTissueOneStepRefinement` (original same-state projection).
+5. `physicalKernelLumpsUnderInterventions`, `physicalFutureQuotientIsMinimal` (measured or justified transition/observation language).
+6. `sourceCalibratedParametersAdmissible`, `heldoutFuturePredictionsDiscriminate` (independent measurement and model discrimination).
+7. Exact-head `parallel_checker` receipts, BH4 stacked-branch reconciliation, source-bound ITIR/PNF review.
+
+**Execution order:** Agda acceptance → local continuity + original chemistry → unified physical step → observation commuting square → intervention-safe minimal quotient → calibration/held-out tests. Preserve original 369/3×3×3 semantics, real pants junctions, source attribution, nonpromoting evidence boundaries and existing Golden imports. No CI-dependent acceptance surrogate.
