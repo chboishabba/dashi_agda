@@ -79,6 +79,7 @@ python3 scripts/check_karp21_fractran_priority_frontier.py
 python3 scripts/check_karp21_fractran_n21_edge.py
 python3 scripts/check_karp21_fractran_original_raw_trace.py
 python3 scripts/check_karp21_native_two_lane_raw_score.py
+python3 scripts/check_karp21_native_comparator_exact.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
 
@@ -151,6 +152,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeSelectedSignedScoreExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLedgerIntegerScoreExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLedgerOriginalRawScoreExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeThresholdStructuralExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedGammaNativeRawEdgeStreamExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedInspectionClockExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeRippleAdderExact.agda
