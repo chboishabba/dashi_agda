@@ -78,6 +78,12 @@ def run(receipt_file,checkpoint=None,walkers=1280,blocks=300,steps_per_block=20,
         from qcafqmc_nqs_ipie_particle_hole import make_ipie_trial
         checkpoint=Path(checkpoint).resolve()
         if not checkpoint.is_file():raise ValueError("neural trial checkpoint absent")
+        import torch
+        metadata=torch.load(checkpoint,map_location="cpu",weights_only=True)
+        if not receipt.get("selected_mo_sha256") or (
+                metadata.get("orbital_frame_sha256")!=receipt["selected_mo_sha256"]
+                or metadata.get("geometry_sha256")!=receipt["geometry_sha256"]):
+            raise ValueError("neural checkpoint and CASCI selected orbital/geometry frame differ or are unverified")
         trial=make_ipie_trial(str(checkpoint),(4,4),8,cutoff=0.)
         trial_type="paired_NQS_full_CI"
     else:
