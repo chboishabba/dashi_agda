@@ -798,3 +798,30 @@ group completion. **Agda kernel checking remains unperformed.**
 The separate original Bishop analytic P1, zeta P2 and Gamma/Xi
 P3 theorems remain OPEN. Complete proof inventory and receipts
 are in `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-09 H2.02 signature iff match and P1 exact rational Machin points
+
+The original five pants-boundary observables now have a genuinely
+bidirectional source-level theorem:
+`TypedHyperfabricPantsSignatureCompletenessExact` derives the
+ORIGINAL `InterfaceMatch` from complete signature equality
+and reuses the already existing converse. A second owner
+`TypedHyperfabricPantsSourceHeterogeneousTransportExact`
+constructs a typed two-incidence seam for independently typed
+original edge stalks when their signature equality and source
+provenance are actually supplied. Original donor
+`BoundaryInterface` / `BranchChannel` instantiation is included.
+
+The Bishop P1 programme separately advances at the finite arithmetic
+seam. `BishopMachinOriginalCayleyRationalPointAlgebraExact`
+implements direct source Q[i] denominator equations at the
+original 1/5 and 1/239 Machin arguments with exact target
+coordinates (12/13,5/13) and (28560/28561,239/28561).
+This is NOT the original analytic exp(2i atan_B) identity:
+absolute/convergent nested composition and the same-source
+Bishop equality remain open, as do independent zeta/Gamma/Xi.
+
+All new modules are source-written only, NOT kernel checked.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact names, source receipts and narrowed high-alpha obligations.
