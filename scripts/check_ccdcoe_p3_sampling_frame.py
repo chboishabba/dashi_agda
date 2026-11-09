@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CCDCOE P3 census check: exact equality with a predeclared article frame.
 
-This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
+V2 requires digest, source file, outlet and publication date for each eligible\nunit. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
 verify that the frame contains every historical article or that treatment was
 assigned independently of outcome. No historical GCC case is admitted here.
 """
@@ -14,7 +14,7 @@ from pathlib import Path
 
 ARMS = {'GCC-linked-outlet', 'comparison-outlet'}
 PERIODS = {'before', 'after'}
-SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v1'
+SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v2'
 
 
 def require(condition, reason):
