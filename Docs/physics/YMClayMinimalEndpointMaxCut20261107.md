@@ -311,3 +311,16 @@ The original one-link Haar tail therefore admits an explicit closed `β` bound f
 **D1.03 still OPEN:** a volume-uniform *single-link probability* does NOT provide spatially connecting polymer suppression at fixed physical scale, especially with a diverging number of UV links in each physical block. No CMP116 original long-distance full-covariance estimate, E1 4D interacting continuum, or mass gap follows. This is a genuine original finite-measure pressure theorem, not a theorem that the physical scaling uses any prescribed `β(a)`. Source receipt: original analytic derivation in the linked doc; rational finite quaternion regression script `scripts/check_ym_su2_original_wilson_pressure_uniform_20261109.py` had 2,401 rational plaquette-product controls locally. **No native Agda 2.9 kernel proof** yet.
 
 **Exact next D1-03A (new):** obtain a cutoff-uniform bound on *connected geometrically spanning frustrated polymers* using an admissible gauge-invariant block event; quantify polymer entropy against the actual original Wilson weight/pressure, not independent bare-link failures. **Exact next D1-03B:** prove original full Wilson small+large-field covariance decomposition and CMP116 marked-source applicability with physical distance exponent. Both are mathematically unproved and not replaced by the local result.
+
+
+## 9 November — original D2 max-cut shortened using the already-owned OS spectral theorem
+
+[Complete positive-time autocorrelation → full nonvacuum gap proof](YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md) gives the decisive analytic fact, with all quantifiers explicit: if the *same* E1-reconstructed positive OS semigroup `e^{-tH}` has a **norm-dense nonvacuum source test subspace** `D`, and there exists ONE common physical exponent `m>0` such that `<psi,e^{-tH}psi> ≤ C_psi e^{-mt}` for **every** `psi∈D` and `t≥0`, then `sigma(H|Omega^perp)⊆[m,∞)`. The source-dependent prefactor `C_psi` need **not** be uniform in `psi`. A positive subgap spectral projection would force `e^{-lambda t}||E_[0,lambda]psi||²` below an exponentially faster bound for every dense `psi`, hence vanish; bounded projections and density eliminate continuous as well as point subgap spectrum.
+
+**Revised physical D2 endpoints (without deleting the original 23 producer identifiers):**
+- `D2.01/D2.02`: one genuine E1 OS Hamiltonian and one uniform physical-time decay exponent `m>0` in original units.
+- `D2.03`: source OS positive-time cylinder test vectors dense in the **complete nonvacuum Hilbert space** (not a selected proper subspace); genuine Euclidean autocorrelation identity.
+- `D2.04`: mathematically follows from D2.01–03 by the spectral theorem; no additional independent physical “full-sector detector” is needed once density is established.
+- `D2.05`: vacuum uniqueness, domains/units and original Clay interpretation remain to establish.
+
+**Do not duplicate** `BalabanOSExponentialClusteringImpliesHamiltonianGapExact.OSExponentialClusteringImpliesHamiltonianGap` or the already-owned spectral closure R333. Their current `Set`-valued OS and spectral inputs are conditional; they are not proof that the original Wilson family supplies dense tests and physical-time autocorrelation. The full Wilson D1.03 connecting-polymer and E1.03 interacting continuum are still the major *physical* original work.
