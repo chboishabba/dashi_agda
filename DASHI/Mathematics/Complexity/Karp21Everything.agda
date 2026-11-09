@@ -276,3 +276,8 @@ import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedSuffixExact
 -- Exact original gamma encoded-frame readouts in native token and original signed ℤ, suffix-preserving.
 -- Original binary token arithmetic identity remains the P0 owner.
 import DASHI.Mathematics.Complexity.Karp21GammaBinarySignedPayloadValueCutExact
+
+-- Actual source zigzag (2M)/(2M−1) integer arithmetic, and BE gamma / native LE ledger value and signed successor decomposition.
+-- Source-written, not yet original all-word signed-token ℤ theorem or Agda receipt.
+import DASHI.Mathematics.Complexity.Karp21SignedGammaNumberTheoryExact
+import DASHI.Mathematics.Complexity.Karp21SignedGammaBinaryValueArithmeticExact
