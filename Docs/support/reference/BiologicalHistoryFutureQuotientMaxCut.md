@@ -430,6 +430,58 @@ Agda kernel, original 29×12 numerical acquisition or real
 biological longitudinal experiment has been executed.
 The branch remains draft pending source/kernel acceptance.
 
+### 2026-11-09: exact original 54-bond shared 27-voxel conservation weld
+
+The initial linear-chain L03 limitation has now been strengthened by
+two **new original Agda owners**, both imported into the Round-23
+Golden root:
+
+1. `BiologicalSharedFiniteVectorTransferExact`: genuine
+   `Vec Nat n` physical material carrier, with a total `Fin n`
+   source→target operator `transferOne`. It debits the selected
+   source, credits the selected target, avoids negative state and is
+   stationary for empty sources and same-site transfers.
+   `everyDirectedPairConservesSharedInventory` proves preservation
+   of `Vec.sum` for **every** source and target index; its
+   induction `allSharedVectorTransportHistoriesConserve`
+   covers arbitrary chronological directed transfers on one shared
+   state. It specializes to `all27SharedSitesConserve`.
+
+2. `BiologicalOriginal54BondSharedVectorExact`: an **explicit
+   bijection** between the original
+   `Cube.Ternary27Point` 3×3×3 carrier and `Fin 27`.
+   `originalPointRoundTrip`, `originalIndexRoundTrip`
+   and `originalIndexIsInjective` show physical sites are
+   neither conflated nor invented. A concrete
+   `canonical54BondIndexing` now instantiates both endpoints
+   of each original `Grid.PositiveBond`.
+   `originalIndexedBondIsGenuineNeighbour` transports
+   the original native adjacency witness.
+   `indexedForwardBondCountExactly54` and the reverse
+   counterpart prove full original 54-bond coverage.
+   `oneFullOriginal54BondSweepConserves` and
+   `oneFullOriginalReverse54BondSweepConserves` are
+   original same-27-site sweep theorems. Arbitrary directed
+   bond histories are likewise covered.
+
+Independent finite check:
+`index(x,y,z)=9x+3y+z`, 27 distinct positions,
+54 unique native nearest-neighbour edges, and 2,916
+single-shared-27-state transport events over forward/reverse
+54-bond action words with exact total preservation.
+
+**L03 now has a source-written exact full-geometry realization**
+for a single conservative material quantum and arbitrary
+sequential transport actions. Unlike the older 54 separate
+edge-local `IonPairState` objects, this is a genuinely shared
+27-site state. This is still **not** the full original
+species-specific 29×12 open-chemical reactor, measured signed
+ion currents, PNP numerical boundary model or
+source-calibrated vascular flow; those remain L04–L10.
+Both new modules are source-written; no Agda kernel or
+`parallel_checker` receipt has been obtained on this
+latest GitHub head, so acceptance is conditional.
+
 ## Latest exact P0–P5 acceptance ledger — source head 6 November 2026
 
 This table **supersedes** earlier Round-23 provisional descriptions
