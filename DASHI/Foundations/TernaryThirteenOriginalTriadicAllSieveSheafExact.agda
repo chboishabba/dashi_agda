@@ -319,5 +319,6 @@ allCoverGlueUnique sieve (Site.triadicGlobalCover hab hbc hca)
 
 -- Source site topology ALREADY had these axioms. The proof above
 -- adds sheaf gluing/uniqueness, not another fake Grothendieck receipt.
+selectedTopology : Stage12.GrothendieckTopology Site.relationalPatchCategory
 selectedTopology =
   Site.relationalTriadicTopology
