@@ -377,3 +377,34 @@ User excludes K0/K4 and requests highest-alpha K1–K3. No DOCX.
 Added `DASHI/Governance/CrenshawCarceralMissingnessExact.agda`: `missingRecordCannotDecideHarm`, `recordAbsenceDoesNotProveAbsenceOfHarm`, `anyRecordRechartStillCannotEstablishAbsence` and parametric `CoverageVerification`. Inspired by the explicitly non-exhaustive *Say Her Name* (2015) documentation, this is a finite DASHI countermodel. It does **not** demonstrate that an unrecorded real incident happened; it refutes inference of nonoccurrence from absence in a limited corpus. Integrated as `unrecordedDoesNotImplyNoPolicingHarm` in `CrenshawLegalAttributionCapstoneExact.agda`.
 
 Latest status: source-written on the existing PR branch, no K0 or K4 work requested. Outstanding K1–K3 empirical/archival and case-level source receipts remain as enumerated above.
+
+## Eleventh pass — concrete primary-source scope findings and original standpoint (K1–K3)
+
+**New committed original DASHI modules:**
+
+1. `DASHI/Governance/Crenshaw1988SituatedVoiceExact.agda`:
+   `samePublicationLabelDifferentVoice`, `publicationLabelCannotRecoverAuthorPosition`, `bibliographicLabelCannotRecoverSituatedVoice`, `standpointDoesNotManufactureRepresentation`, `crenshaw1988PrefatoryNote`.
+   **Source:** Crenshaw, *Race, Reform and Retrenchment* (1988), printed p. 1331, footnote 2. Crenshaw expressly reflects on “they/them” versus “we” as a Black scholar facing conventions of apparently detached knowledge production. The finite worlds are DASHI's, not Crenshaw's own measured experiences, and not appointment evidence for counsel in the three 1970s–80s cases.
+
+2. `DASHI/Governance/BlackGirlsMatterStudyScopeExact.agda`:
+   `reportStatedScope`, `twentyYoungWomenReported`, `fifteenStakeholdersReported`, `disabilityAndLEPExcludedFromReportedDisciplineAnalysis`, `focusGroupNotNationallyRepresentative`, `districtDataDoesNotPayParticipantTestimony`, `focusGroupDoesNotPayNationalRepresentativeness`, `focusGroupDoesNotPayIndividualCustodyTrace`, `districtAnalysisDoesNotPayDisabilitySpecificClaim`, `districtAnalysisDoesNotPayLEPClaim`, `notStudiedDoesNotMeanNoDisabilityHarm`, `reportScopeCannotDecideUnstudiedHarm`.
+   **Source:** *Black Girls Matter* (2015), lead “By Kimberlé W. Crenshaw / with Priscilla Ocen and Jyoti Nanda”; printed p. 2 acknowledgments; p. 9 empirical data/focus-group differentiation; pp. 26, 45–46 and note 26. Report says 20 young women and 15 adults participated in the qualitative research, while the CRDC administrative comparison uses 2011–12 data from Boston and NYC released 2014. Disability and LEP are explicitly not analysed in that discipline appendix. The report notes methodological disparities in data and modest, not nationally representative, focus groups. No causal subject-by-subject custody trajectories are reported.
+
+3. `CrenshawLegalAttributionCapstoneExact.agda` now imports these two modules and adds `authorialSituatedVoiceNotRecoveredFromPublicationLabel`, `administrativeDataCannotBeSubstitutedForFocusGroupTestimony`, `missingDisabilityAnalysisCannotProveNoHarm`. This is composition of existing original proof owners with new source-specific countermodels.
+
+4. New in-repo source-claim ledger `docs/roadmaps/2026-11-09-crenshaw-1988-2015-primary-scope-ledger.md` records exact print pages, primary PDF links, limited claims and the evidence still needed.
+
+**K1 impact:** 1988 first-person authorial self-positioning and 2015 report methodology are now anchored to *specific passages of primary publisher publications*. This is narrower and stronger than generic biography or assumptions of appearing as litigation counsel. Source bytes/digest verification is still unpaid (model container has no outbound DNS).
+
+**K2/K3 impact:** We now have explicit real-report scope facts and negative controls preventing: (a) district statistics from paying participant voice; (b) a small qualitative sample from paying national representativeness; (c) a school discipline analysis from paying disability/LEP harms it omitted; (d) a school record from paying an individual's later custodial outcome. Crucially, no observed fatigue is inferred from reported discipline.
+
+**Narrow remaining highest-alpha leaves, excluding K0/K4 as requested:**
+- K1-01 archived publisher bytes/hash and page-image correspondence for 1988 and 2015 sources; independently reviewed claim mapping.
+- K1-02 coauthor and participant-voice provenance, ethically appropriate individual quotations/consent if going beyond the published report.
+- K2-01 direct independent measures of fatigue, costs, capacity and causal alternatives, time-indexed with the same actor and procedure.
+- K3-01 original 2011–12 CRDC tables/definitions, district-specific indicators, denominator and disability/LEP limitations.
+- K3-02 same-case longitudinal school-police-custody evidence, with individual match and alternate causes if any person-level causal assertion is intended.
+- K3-03 independently authenticated original court reports, case/issue/voice/decision/outcome passages for the Crenshaw legal trio and Jefferies positive comparator.
+- K3-04 source-paid historical racial formation/courtroom power mechanisms; no simplistic inference from demographics to role or institutional ideology.
+
+All new Agda declarations are source-written and NOT kernel-checked. K0/K4 deliberately excluded. **Do not repeat generic no-factorisation theory or create unearned empirical receipts.**
