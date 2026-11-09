@@ -24,3 +24,20 @@ This is a stronger finite witness than merely counting links or asserting `¬ di
 ## Gate discipline
 
 No Clay continuum theorem or full Wilson covariance decay is claimed. In particular, neither an original six-star incidence witness nor the original coherent-only polymer tail can infer sparse frustrated contour suppression. The finite witness theorem is a reusable producer, not the physical estimate.
+
+
+## 2026-11-09 continuation: quantified finite precursor and actual greedy witness
+
+The existing original link-star greedy maximality theorem has now been composed with its **actual** source plaquette-conflict witness:
+
+- `OriginalLiteralGreedyCoverage` is a proof-relevant statement about every marked original positive bond.
+- `originalGreedyMaximalityHasNativePlaquetteCoverage` produces either membership in the selected conflict-free greedy set or (i) a selected original positive bond and (ii) an original four-bond plaquette containing **both** the selected link and marked link.
+- The theorem has no new analytic source or postulate: it consumes `greedyOriginalDisjointStarsMaximal` and `originalNegativeConflictHasLiteralFourBondWitness`.
+
+Independent executable regression `scripts/check_ym_original_star_6_18_19.py` passed on L=3,4,5 torus carriers, with (links,plaquettes,max conflict degree) equal to (324,486,18), (1024,1536,18), (2500,3750,18). Each original positive link had six incident plaquettes, and 16 test marked lists per volume satisfied the 19-packing, maximality and independence assertions. This checks the intended finite combinatorics, not a native Agda cardinal bound.
+
+**Precise remaining finite Agda proof:** `originalNativeConflictDegreeAtMost18` and its list-cardinality corollary `originalGreedy19Packing`, with distinct-marked/no-duplicate input. The independent regression does not discharge these declarations.
+
+**Decisive physical leaf unchanged:** source-proved original R445/CMP116 `chargeSumBelowPhysicalRootedShell`, for actual cutoff-uniform sparse frustrated/mixed activities. The mathematical source field is present in `BalabanLiteralTwoWilsonCMP116ConnectingTailExact`; it must be inhabited, not repeated under a different name. Subsequent physical obligations are selected UV/IR continuum convergence, same-family OS reconstruction and spectral decay, observable noncollapse, and all compact simple groups.
+
+**Verification:** GitHub contents write/readback only for the new Agda declaration. Agda 2.9 was not installed in this execution container, so kernel acceptance and a transitive safe import check are not claimed.
