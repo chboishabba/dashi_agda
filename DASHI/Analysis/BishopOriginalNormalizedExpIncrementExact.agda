@@ -118,3 +118,77 @@ originalNormalizedFiniteExpIncrementIsResidualPlusDefect
     (originalNormalizedFiniteExpCrossIsSourceCross
       stage x (R._+_ x h) xInside yInside)
     (Cocycle.sourceCrossAtResidualPlusDefect stage x h)
+
+------------------------------------------------------------------------
+-- Cancel both POSITIVE local gap factors with their original
+-- inverses. This is a genuine unweighted normalized increment:
+--
+--  G_N(x+h)-G_N(x)
+--   = inv(1-x)*inv(1-x-h) * h *
+--       [x^N*F_N(x)+(1-x)*(q_E-d_E)].
+--
+-- No product over mesh cells occurs, so no vanishing P_n factor
+-- needs to be inverted. The bound on the quotient defect is still
+-- an independent original source-order theorem.
+------------------------------------------------------------------------
+
+originalNormalizedFiniteExpUnweightedIncrement :
+  (stage : Nat) (x h : R.ℝ) →
+  (xInside : Gap.BishopUnitIntervalRatio x) →
+  (yInside : Gap.BishopUnitIntervalRatio (R._+_ x h)) →
+  let
+    y = R._+_ x h
+    ix = Gap.oneMinusInverse xInside
+    iy = Gap.oneMinusInverse yInside
+    residual =
+      R._+_
+        (Cross.sourceODEForcing stage x)
+        (R._*_ (Cross.oneMinus x)
+          (R._-_
+            (Cross.sourceErrorQuotient stage x h)
+            (Cross.sourceErrorSlope stage x)))
+  in
+  R._≃_
+    (R._-_
+      (originalNormalizedFiniteExp stage y yInside)
+      (originalNormalizedFiniteExp stage x xInside))
+    (R._*_
+      (R._*_ ix iy)
+      (R._*_ h residual))
+originalNormalizedFiniteExpUnweightedIncrement
+    stage x h xInside yInside =
+  let
+    y = R._+_ x h
+    wa = Cross.oneMinus x
+    wb = Cross.oneMinus y
+    ia = Gap.oneMinusInverse xInside
+    ib = Gap.oneMinusInverse yInside
+    ga = originalNormalizedFiniteExp stage x xInside
+    gb = originalNormalizedFiniteExp stage y yInside
+    dg = R._-_ gb ga
+    cancelA = Inv.*-inverseˡ wa (Gap.oneMinusNonzero xInside)
+    cancelB = Inv.*-inverseˡ wb (Gap.oneMinusNonzero yInside)
+    cancelPair : R._≃_
+      (R._*_ (R._*_ ia wa) (R._*_ ib wb))
+      R.1ℝ
+    cancelPair =
+      RP.≃-trans
+        (RP.*-cong cancelA cancelB)
+        (RP.*-identityˡ R.1ℝ)
+    open RP.ℝ-Solver
+  in
+  RP.≃-trans
+    (RP.≃-symm (RP.*-identityˡ dg))
+    (RP.≃-trans
+      (RP.*-cong
+        (RP.≃-symm cancelPair)
+        RP.≃-refl)
+      (RP.≃-trans
+        (solve 5
+          (λ aa bb ww vv dd →
+            ((aa ⊗ ww) ⊗ (bb ⊗ vv)) ⊗ dd
+            ⊜ (aa ⊗ bb) ⊗ ((ww ⊗ vv) ⊗ dd))
+          RP.≃-refl ia ib wa wb dg)
+        (RP.*-cong RP.≃-refl
+          (originalNormalizedFiniteExpIncrementIsResidualPlusDefect
+            stage x h xInside yInside))))
