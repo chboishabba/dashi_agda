@@ -34,7 +34,7 @@ disjointCountsRecoverUniqueStudents :
     ≡ uniqueStudentsAcrossIndicators a
 disjointCountsRecoverUniqueStudents a zeroOverlap
   rewrite zeroOverlap =
-  countConservation a
+  trans (countConservation a) (+-identityʳ (uniqueStudentsAcrossIndicators a))
 
 -- Two datasets with EXACTLY the same two category totals can have
 -- distinct unique-person counts because overlap differs.
@@ -72,7 +72,7 @@ differentUnitsAreNotDefinitionalEqual ()
 record OriginalAggregationReceipt
   (src : OCR.VerifiedCRDCSource)
   (d : OCR.District)
-  (g : OCR.Population) : Set where
+  (g : OCR.Population) : Set₁ where
   constructor original-aggregation-receipt
   field
     oneSuspension :
