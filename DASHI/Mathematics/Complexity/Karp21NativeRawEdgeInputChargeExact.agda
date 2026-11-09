@@ -133,12 +133,18 @@ nativeRawEdgeStreamSignedChargesFitInput (suc fuel) mLE word suffix edges accept
 ... | just (following , after) with accepted
 ... | refl =
   NatP.≤-trans
-    (NatP.+-mono-≤ NatP.≤-refl
-      (nativeRawEdgeStreamSignedChargesFitInput
-        fuel (Positive.predecessorLE mLE) rest after
-        following continuation))
-    (oneOriginalBinaryEdgeSignedChargeBound
-      word rest edge first)
+    (NatP.≤-reflexive
+      (NatP.+-assoc
+        (edgeSignedCharge edge)
+        (rawEdgeSignedCharges following)
+        (length after)))
+    (NatP.≤-trans
+      (NatP.+-mono-≤ NatP.≤-refl
+        (nativeRawEdgeStreamSignedChargesFitInput
+          fuel (Positive.predecessorLE mLE) rest after
+          following continuation))
+      (oneOriginalBinaryEdgeSignedChargeBound
+        word rest edge first))
 
 -- A source-successful WHOLE binary graph has been assembled from
 -- a raw-edge list already bounded by its input source word; this
