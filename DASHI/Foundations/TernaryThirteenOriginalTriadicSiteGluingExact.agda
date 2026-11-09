@@ -233,3 +233,28 @@ originalTriadicPantsRecoverCentre :
 originalTriadicPantsRecoverCentre ab bc ca matching =
   Pants.sourcePantsRoundTripOnCentre
     (globalToSource (glueTriadic ab bc ca matching))
+
+
+------------------------------------------------------------------------
+-- UNIQUENESS of the selected triadic covering-family glue:
+-- AB fixes A,B and the centre, BC additionally fixes C; CA is the
+-- overlap check. No function extensionality or proof irrelevance.
+------------------------------------------------------------------------
+
+triadicGluingUnique :
+  (ab bc ca : PairChart)
+  (matching : TriadicMatching ab bc ca)
+  (candidate : GlobalTwelveCentre) →
+  restrictAB candidate ≡ ab →
+  restrictBC candidate ≡ bc →
+  restrictCA candidate ≡ ca →
+  candidate ≡ glueTriadic ab bc ca matching
+triadicGluingUnique ab bc ca matching
+  ((a , (b , c)) , centre) eqAB eqBC eqCA =
+  cong₂ _,_
+    (cong₂ _,_
+      (cong (λ p → proj₁ (proj₁ p)) eqAB)
+      (cong₂ _,_
+        (cong (λ p → proj₂ (proj₁ p)) eqAB)
+        (cong (λ p → proj₂ (proj₁ p)) eqBC)))
+    (cong proj₂ eqAB)
