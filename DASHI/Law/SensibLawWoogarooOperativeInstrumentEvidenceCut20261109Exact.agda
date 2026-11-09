@@ -75,6 +75,30 @@ definedImpactFootprintTenths :
   1230 + 82 + 12 + 25 ≡ 1349
 definedImpactFootprintTenths = refl
 
+-- Historical January 2026 PD v5 Part A.i, pp 184-185, supplies
+-- an EXPLICIT exclusion explanation: approximately 7.6ha was
+-- "approved to be impacted" under DIFFERENT EPBC 2014/7306 and
+-- "therefore has not been included in residual impacts" for 2019/8575.
+-- The other action's actual signed approval, selected coordinates,
+-- legal no-double-counting rules and completed physical clearing are
+-- NOT acquired merely from this author's description.
+historicalOtherActionExcludedTenths : Nat
+historicalOtherActionExcludedTenths = 76
+
+tentativeRemainderAfterHistoricalExclusion :
+  1273 + historicalOtherActionExcludedTenths ≡ 1349
+tentativeRemainderAfterHistoricalExclusion = refl
+
+tentativeRemainderVsHistoricalOAG128Ha :
+  1273 + 7 ≡ 1280
+tentativeRemainderVsHistoricalOAG128Ha = refl
+
+-- Thus the 7.6ha attributed to OTHER action is an explicit original
+-- source EXPLANATION of most of the 6.9ha printed area gap, with a
+-- residual 0.7ha between the two simplified subtraction estimates.
+-- This neither proves map identity, earlier approval entitlement,
+-- actual clearing nor a legal offset exclusion decision.
+
 -- Signed approval Attachments C2/A2:
 -- 162.3 ha koala critical habitat mapped within Action area; 27.3 ha
 -- reported retained vegetation. Difference = 135.0 ha, not exactly
