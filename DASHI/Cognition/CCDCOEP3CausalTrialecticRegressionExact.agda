@@ -26,6 +26,7 @@ import DASHI.Cognition.CCDCOEP3Trumbo1996IndependentMediaBaselineExact as Trumbo
 import DASHI.Cognition.CCDCOEP3G20COP21AttributionExact as Institution
 import DASHI.Cognition.CCDCOEP3G20ComplianceObservedExact as Compliance
 import DASHI.Cognition.CCDCOEP3CountryImplementationJoinExact as Country
+import DASHI.Cognition.CCDCOEP3G20RGMemberPanelExact as MemberPanel
 import DASHI.Cognition.CCDCOEP3SourcePowerEvidenceWeldExact as Source
 import DASHI.Culture.JohnAnthonyBrownChildReligiousPowerBidiExact as Brown
 import DASHI.Governance.EvidenceGradedGenealogyCore as Genealogy
@@ -430,3 +431,14 @@ countryCandidateDoesNotCountAsReviewed = Country.candidateNotReviewed
 countryStudyOwnersDistinct :
   Country.brisbane2014 ≡ Country.antalya2015 → ⊥
 countryStudyOwnersDistinct = Country.notSameStudy
+
+-- Source-attributed G20RG member scores count to the printed narrative
+-- (Brisbane -0.45, Antalya -0.35), with the Brisbane Table 2 printed
+-- -0.40 discrepancy retained separately for documentary audit.
+brisbaneNetMinusNine : MemberPanel.minusCount MemberPanel.brisbaneFossilMembers
+  ≡ MemberPanel.plusCount MemberPanel.brisbaneFossilMembers + 9
+brisbaneNetMinusNine = MemberPanel.brisbaneNineNetMinus
+
+antalyaNetMinusSeven : MemberPanel.minusCount MemberPanel.antalyaFossilMembers
+  ≡ MemberPanel.plusCount MemberPanel.antalyaFossilMembers + 7
+antalyaNetMinusSeven = MemberPanel.antalyaSevenNetMinus
