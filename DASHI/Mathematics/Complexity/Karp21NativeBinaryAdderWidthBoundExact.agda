@@ -14,6 +14,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.List.Base using (length)
+open import Data.Product using (_,_ )
 open import Data.Nat.Base using (_≤_; z≤n; s≤s)
 import Data.Nat.Properties as NatP
 
