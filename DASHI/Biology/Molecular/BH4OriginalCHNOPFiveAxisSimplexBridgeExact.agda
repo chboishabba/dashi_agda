@@ -16,6 +16,7 @@ module DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact where
 
 open import DASHI.Core.Prelude
 import Data.Vec.Base as V
+import Data.Fin.Base as F
 
 import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Panel
 import DASHI.Biology.Molecular.BH4PanelRateWeightedConservationExact as Rate
@@ -177,7 +178,7 @@ totalCHNOPSourceWeights certificate =
 
 sourceTotalCHNOPLeftKernel :
   (certificate : Panel.SourceCertifiedOriginal29x12)
-  (column : Data.Fin.Base.Fin 12) →
+  (column : F.Fin 12) →
   Panel.panelWeighted (totalCHNOPSourceWeights certificate)
     (Panel.originalReactants
       (V.lookup (Panel.sourceFiniteColumns certificate) column))
