@@ -180,3 +180,41 @@ originalWorldObserverInsufficientAfterPaidCorrespondence :
 originalWorldObserverInsufficientAfterPaidCorrespondence selected =
   Descent.nonDescentWitnessBlocksSufficiency
     (originalWorldNonDescentFromPaidCorrespondence selected)
+
+
+------------------------------------------------------------------------
+-- The actual original consumer-repair calculus also records that the
+-- refined observation strictly distinguishes the explicit collision.
+------------------------------------------------------------------------
+
+centralRepairStrictlyRefinesTwelve :
+  Observer.StrictRefinement
+    Rel.sourceCentralProjection repairedCentralObserver
+centralRepairStrictlyRefinesTwelve =
+  Observer.strictRefinement
+    (Observer.pairRefinesLeft
+      Rel.sourceCentralProjection Rel.sourceCentralCoordinate)
+    Source.neutralSourceState
+    Source.positiveSourceState
+    Source.sourceSameTwelveObservation
+    (λ samePair →
+      Source.sourceDifferentCentralCoordinate
+        (cong proj₂ samePair))
+
+centralCoordinateIsNecessaryForThisRepair :
+  {Refinement : Set}
+  (candidate : Rel.SourceCentralCompletionCarrier → Refinement) →
+  Repair.RefinementRepairs
+    Rel.sourceCentralProjection candidate
+    Rel.sourceCentralCoordinate →
+  candidate Source.neutralSourceState
+    ≡ candidate Source.positiveSourceState → ⊥
+centralCoordinateIsNecessaryForThisRepair =
+  everySufficientRepairSeparatesCentralCollision
+
+worldObservationNotSufficientWhenPaid :
+  (transport : OriginalWorldCentralTransport) →
+  Descent.ConsumerSufficient
+    (worldObserve transport) (worldConsume transport) → ⊥
+worldObservationNotSufficientWhenPaid =
+  originalWorldObserverInsufficientAfterPaidCorrespondence
