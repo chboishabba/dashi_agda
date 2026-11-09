@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.YMClayE1A3OriginalAllWordPathSupportExtensionalEx
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; _*ℝ_)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -63,6 +63,46 @@ originalWordActualFlatPositiveBondSupport [] = []
 originalWordActualFlatPositiveBondSupport (p ∷ ps) =
   appendSource (Source.sourcePlaquettePositiveBondSupport p)
     (originalWordActualFlatPositiveBondSupport ps)
+
+
+------------------------------------------------------------------------
+-- Quantitative native source-support size. The concatenated actual
+-- signed-path lookup list has EXACTLY four slots per original
+-- plaquette, regardless of periodic collisions between link variables.
+-- This counts read slots; the support SET may be smaller.
+------------------------------------------------------------------------
+
+sourceLookupSlotsAppend :
+  ∀ {A : Set} (left right : List A) →
+  Source.sourceLength (appendSource left right)
+    ≡ Source.sourceLength left + Source.sourceLength right
+sourceLookupSlotsAppend [] right = refl
+sourceLookupSlotsAppend (x ∷ xs) right =
+  cong suc (sourceLookupSlotsAppend xs right)
+
+fourTimesWordLength :
+  ∀ {n} → List (Plaquette.PeriodicPlaquette n) → Nat
+fourTimesWordLength [] = 0
+fourTimesWordLength (_ ∷ ps) = 4 + fourTimesWordLength ps
+
+originalWordActualLookupSlotsExactlyFourPerPlaquette :
+  ∀ {n} (word : List (Plaquette.PeriodicPlaquette n)) →
+  Source.sourceLength (originalWordActualFlatPositiveBondSupport word)
+    ≡ fourTimesWordLength word
+originalWordActualLookupSlotsExactlyFourPerPlaquette [] = refl
+originalWordActualLookupSlotsExactlyFourPerPlaquette (p ∷ ps) =
+  trans
+    (sourceLookupSlotsAppend
+      (Source.sourcePlaquettePositiveBondSupport p)
+      (originalWordActualFlatPositiveBondSupport ps))
+    (trans
+      (cong
+        (λ slots →
+          slots + Source.sourceLength
+            (originalWordActualFlatPositiveBondSupport ps))
+        (Source.originalWilsonPlaquettePathReadsFourBondSlots p))
+      (cong (λ restSlots → 4 + restSlots)
+        (originalWordActualLookupSlotsExactlyFourPerPlaquette ps)))
 
 module _
     {Matrix Complex : Set} {N : Nat}
