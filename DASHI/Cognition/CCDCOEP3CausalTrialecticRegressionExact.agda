@@ -35,6 +35,8 @@ import DASHI.Cognition.CCDCOEP3CognitiveWarfareArtDiscriminatorExact as CW
 import DASHI.Cognition.CCDCOEP3SameOperationIndexedAdmissionExact as SameOperation
 import DASHI.Cognition.CCDCOEP3CanonicalClaimAuditReuseExact as AuditReuse
 import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Diligence
+import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
+import DASHI.Cognition.CCDCOEP3CanonicalClaimAuditReuseExact as AuditReuse
 import DASHI.Cognition.CCDCOEP3GCC1993SourceChainExact as GCC1993
 import DASHI.Cognition.CCDCOEP3GCC1993DirectionDiscriminatorExact as Direction
 import DASHI.Cognition.CCDCOEP3GCC1993ClaimCodingAdmissionExact as Coding
@@ -743,3 +745,37 @@ canonicalClaimAdmissionWithoutExposureStillBlocked :
   AuditReuse.CanonicalClaimAdmission E owner claimKey c → ⊥
 canonicalClaimAdmissionWithoutExposureStillBlocked =
   AuditReuse.canonicalAdmissionBlockedByMissingExposure
+
+-- Terminal same-case operation assessment must be FULLY admissible
+-- for the particular PNF claim. The generic design owner deliberately
+-- allows partly admissible findings only under narrowing; that route
+-- does not close the unqualified six-stage historical operation gate.
+canonicalTerminalStageIsFullyPaid :
+  (E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set)
+  (owner : Diligence.EmpiricalFactAdmission → SameOperation.OriginalCase)
+  (claimKey : SameOperation.OriginalCase →
+     SameOperation.EvidenceStage → String)
+  (c : SameOperation.OriginalCase)
+  (admitted : AuditReuse.CanonicalClaimAdmission E owner claimKey c)
+  (stage : SameOperation.EvidenceStage) →
+  Design.EvidenceForObligation.finding
+    (AuditReuse.CanonicalStagePayment.assessment
+      (SameOperation.ClaimBoundAdmission.claimSupported admitted stage))
+  ≡ Design.fullyAdmissible
+canonicalTerminalStageIsFullyPaid =
+  AuditReuse.canonicalAdmissionRequiresStageDesignPayment
+
+partlyAdmissibleStageCannotCloseTerminalOperation :
+  {E : SameOperation.OriginalCase → SameOperation.EvidenceStage → Set}
+  {owner : Diligence.EmpiricalFactAdmission → SameOperation.OriginalCase}
+  {claimKey : SameOperation.OriginalCase →
+     SameOperation.EvidenceStage → String}
+  {c : SameOperation.OriginalCase}
+  (admitted : AuditReuse.CanonicalClaimAdmission E owner claimKey c)
+  (stage : SameOperation.EvidenceStage) →
+  Design.EvidenceForObligation.finding
+    (AuditReuse.CanonicalStagePayment.assessment
+      (SameOperation.ClaimBoundAdmission.claimSupported admitted stage))
+  ≡ Design.partiallyAdmissible → ⊥
+partlyAdmissibleStageCannotCloseTerminalOperation =
+  AuditReuse.partialFindingCannotPayTerminalAdmission
