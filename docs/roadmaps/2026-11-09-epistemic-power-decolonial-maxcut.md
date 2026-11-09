@@ -371,3 +371,9 @@ User excludes K0/K4 and requests highest-alpha K1–K3. No DOCX.
 8. `crenshawCaseLawAuthenticatedPassageBundle`: court primary copies/issue-specific citations, disagreement, class scope, relief and interpretation, as already enumerated. Source-written case modules are not authenticated document proofs.
 
 **K1 bibliographic/interpretive source grounding advanced; K2/K3 original empirical and archival receipts remain unpaid.** These cannot be closed by another synthetic finite-model constructor.
+
+### K3 incremental missingness proof
+
+Added `DASHI/Governance/CrenshawCarceralMissingnessExact.agda`: `missingRecordCannotDecideHarm`, `recordAbsenceDoesNotProveAbsenceOfHarm`, `anyRecordRechartStillCannotEstablishAbsence` and parametric `CoverageVerification`. Inspired by the explicitly non-exhaustive *Say Her Name* (2015) documentation, this is a finite DASHI countermodel. It does **not** demonstrate that an unrecorded real incident happened; it refutes inference of nonoccurrence from absence in a limited corpus. Integrated as `unrecordedDoesNotImplyNoPolicingHarm` in `CrenshawLegalAttributionCapstoneExact.agda`.
+
+Latest status: source-written on the existing PR branch, no K0 or K4 work requested. Outstanding K1–K3 empirical/archival and case-level source receipts remain as enumerated above.
