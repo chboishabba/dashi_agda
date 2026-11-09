@@ -990,3 +990,72 @@ this transition law, or that either proof has passed Agda in this session.
 the success receipt. No compiler is available in the current connector
 environment. Do not close GOLD-02, GOLD-04, BIO-04 or BIO-07 on source
 inspection alone.
+
+
+### 2026-11-09 second cut: genuine reuse of the TSVF projection type and dependency closure
+
+**Source-written on this branch, not Agda accepted:**
+
+1. `BiologicalMinimalMorphologyAdversarialRefinementExact` now imports
+   `DASHI.Core.SectionedProjectionProvenanceBridgeExact`, the original
+   generic owner used by TSVF PR #1460, and supplies the actual
+   `markerCodeSection : SectionedProjection (MorphologyFutureCode × Bool) MorphologyFutureCode`.
+   The `markerCodeResidual : ResidualReopening markerCodeSection` has
+   exact reassembly `markerCodeReopensExactly`. An explicit
+   `oldMorphologyCodeCannotDecodeMarker` proves no function of the
+   original 18-class code recovers both original marker values.
+   This is a **same abstract interface** theorem: the original TSVF
+   carrier `ObserverRecord` and the biological `BiologicalState`
+   remain distinct, and no physical same-object identification is asserted.
+2. `BiologicalEvidenceFeedbackFiniteExact` now imports
+   `DASHI.Core.AffectedDependencyClosureExact` and constructs
+   `mechanismRequiresRecheck` and
+   `predictionRequiresTransitiveRecheck` along the actual two-edge
+   `sourceObservation → mechanismCertificate → futurePredictionCertificate`
+   witness graph. The original `obligationsCompose` pays transitivity.
+   This is the formal dependency obligation; it is NOT a runtime ITIR
+   replay, an exhaustive production dependency graph, or an authority
+   to revoke already accepted kernel theorem statements.
+3. Reviewed additional original biology/brain/body prior art:
+   `DASHI.Biology.GenomeSensorimotorConnectomeBridge`,
+   `DASHI.Physics.Closure.BidirectionalBrainObservationQuotient`,
+   `DASHI.Biology.Physical.CellBrainTransducerBridgeExact`,
+   `DASHI.Biology.Physical.SIBioelectricNetworkAdapterExact`,
+   `DASHI.Biology.Physical.BiologicalSpatialCirculationIncidenceExact`,
+   and `DASHI.Biology.Physical.BiologicalSourcePhysicalTissueSimulationExact`.
+   These already provide developmental constraints, explicitly lossy
+   fMRI/percept/behaviour/body-resource readouts, stateful bioelectric
+   transducer signatures, SI units, directed 54-bond circulation and
+   the PNP-to-tissue all-history induction **conditional** on
+   `physicalOneStep` and `physicalPNPStepCommutes`.
+   The canonical SI bioelectric network's update is literally the identity,
+   so it cannot be used as a calibrated dynamical physical law.
+
+**Residual priority and exact remaining acceptance:**
+
+- CROSS-01: transport/interpret the two SectionedProjection instances under
+  an explicit *selected* cross-domain carrier/consumer map. Similarity of
+  interface does not give an isomorphism of TSVF histories and biology.
+  Current milestone: exact same-interface reuse, NOT same-physical-object.
+- FLT-01: build and run a dependency-scoped, source-authenticated PostgreSQL
+  receipt replay against ITIR #35/#37/#58/#64. Supply a complete declared
+  dependency graph, a changed canonical source identity, an affected
+  receipt closure, an unaffected negative control, idempotent replay,
+  withdrawal replay, and a trusted referee receipt.
+  Current milestone: typed finite transitive graph, NOT executed fleet.
+- BIO-01: instantiate the existing physical simulation source with actual
+  PNP reaction/transport kinetics, original specimen/region/time,
+  inter-compartment circulation, observed voltage/ion/phenotype trajectories,
+  model uncertainty, and `physicalOneStep` or a justified revised
+  observer commutation theorem. Existing brain/body lossy quotients
+  constrain instrumentation, but do not make fMRI or behavioural report
+  ground truth.
+- GOLD-01: independently run `agda --safe` / exact-head
+  `parallel_checker` on the changed owner modules and the original
+  biology aggregate; record exact commit, compiler version, full imports,
+  stdout/stderr and acceptance receipt.
+
+**Honest status:** Cross-domain generic interface reuse **source-written**;
+finite transitive dependency reopening **source-written**; production
+same-object identification **open**; live replay **open**; original
+physical biological calibration **open**; exact-head Agda **unverified**.
