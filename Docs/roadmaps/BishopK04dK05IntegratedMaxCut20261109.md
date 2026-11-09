@@ -613,3 +613,26 @@ for source filenames, declarations, commits and strict remaining cut.
 The discrete StageAtlas sheaf is **not** independent identification
 of the original intended group/relational completion, a general
 nontrivial Grothendieck covering site, or a proof of Bishop P1/P2/P3.
+
+
+### 2026-11-09: original pants-gluing reuse for central 13
+
+The H2.02 source lane now reuses **the original**
+`TernaryCylinderPantsGeometryExact`,
+`TernaryPantsFrontierExact`,
+`StageValuationBundleAtlas.BundleSheaf`, and
+`ConsumerDescentMinimalObserverExact` instead of introducing
+another pants analogue. Actual `TritWord n ↔ PantsPath n ↔
+SSP369Ultrametric.Address n` inverse laws and source 12+1
+append/refinement are implemented for the finite carriers.
+Compatible original-stage local sections are glued into original
+depth-13 pants paths and pointwise re-restricted. An explicit
+pants-path observer non-descent witness is also implemented.
+
+These results are tracked in
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+Remaining decisive physical/semantic gluing: original edge-stalk
+`InterfaceMatch` and topology mutation, plus nontrivial cover
+selection. No implication for Bishop analytic Cayley P1, canonical
+zeta P2, or Gamma/Xi P3 is inferred from the pants address
+correspondence. Source-written; kernel receipt not requested.
