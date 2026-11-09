@@ -138,6 +138,15 @@ dropSatisfied charge (suc n) {words = []} h = tt
 dropSatisfied charge (suc n) {words = _ ∷ xs} h =
   dropSatisfied charge n (Pair._∧_.right h)
 
+-- This bridge is essential: the literal original relators are evaluated
+-- with Pair.evaluateCoxeterWord, not our auxiliary parityWord.
+boolEvaluationIsParity :
+  (q : Y.Node → Bool) (w : Y.Word) →
+  Pair.evaluateCoxeterWord boolInverseGroup q w ≡ parityWord q w
+boolEvaluationIsParity q [] = refl
+boolEvaluationIsParity q (n ∷ ns) =
+  cong (λ z → q n ⊕ z) (boolEvaluationIsParity q ns)
+
 oddEdgeWordParity :
   (charge : Y.Node → Bool) (x y : Y.Node) →
   parityWord charge (Y.powerWord (x ∷ y ∷ []) 3)
@@ -147,6 +156,16 @@ oddEdgeWordParity charge x y with charge x | charge y
 ... | false | true = refl
 ... | true | false = refl
 ... | true | true = refl
+
+oddEdgeWordEvaluation :
+  (q : Y.Node → Bool) (x y : Y.Node) →
+  Pair.evaluateCoxeterWord boolInverseGroup q
+    (Y.powerWord (x ∷ y ∷ []) 3)
+    ≡ q x ⊕ q y
+oddEdgeWordEvaluation q x y =
+  trans
+    (boolEvaluationIsParity q (Y.powerWord (x ∷ y ∷ []) 3))
+    (oddEdgeWordParity q x y)
 
 module Selected (charge : Y.Node → Bool) where
 
@@ -167,6 +186,14 @@ module Selected (charge : Y.Node → Bool) where
       (trans (parityPowerTwoStep charge Y.centralBase 5)
         (trans (parityPowerTwoStep charge Y.centralBase 3)
           (trans (parityPowerTwoStep charge Y.centralBase 1) refl)))
+
+  sourceCentralPowerNineEvaluation :
+    Pair.evaluateCoxeterWord boolInverseGroup charge
+      Y.centralInvolutionRelator ≡ centralParity
+  sourceCentralPowerNineEvaluation =
+    trans
+      (boolEvaluationIsParity charge Y.centralInvolutionRelator)
+      sourceCentralPowerNineParity
 
   -- This removes the previously open central side of the
   -- source-word -> parity-record bridge. Only actual eleven edge
@@ -260,30 +287,30 @@ module Selected (charge : Y.Node → Bool) where
     Pair.RelatorsSatisfied boolInverseGroup charge Y.monsterRelators →
     SourceEdgeCentralParity
   originalRelatorsImplyParity holds = record
-    { ab1 = trans (sym (oddEdgeWordParity charge Y.a Y.b1))
+    { ab1 = trans (sym (oddEdgeWordEvaluation charge Y.a Y.b1))
         (Pair._∧_.left (dropSatisfied charge 12 holds))
-    ; b1c1 = trans (sym (oddEdgeWordParity charge Y.b1 Y.c1))
+    ; b1c1 = trans (sym (oddEdgeWordEvaluation charge Y.b1 Y.c1))
         (Pair._∧_.left (dropSatisfied charge 23 holds))
-    ; c1d1 = trans (sym (oddEdgeWordParity charge Y.c1 Y.d1))
+    ; c1d1 = trans (sym (oddEdgeWordEvaluation charge Y.c1 Y.d1))
         (Pair._∧_.left (dropSatisfied charge 33 holds))
-    ; d1e1 = trans (sym (oddEdgeWordParity charge Y.d1 Y.e1))
+    ; d1e1 = trans (sym (oddEdgeWordEvaluation charge Y.d1 Y.e1))
         (Pair._∧_.left (dropSatisfied charge 42 holds))
-    ; ab2 = trans (sym (oddEdgeWordParity charge Y.a Y.b2))
+    ; ab2 = trans (sym (oddEdgeWordEvaluation charge Y.a Y.b2))
         (Pair._∧_.left (dropSatisfied charge 16 holds))
-    ; b2c2 = trans (sym (oddEdgeWordParity charge Y.b2 Y.c2))
+    ; b2c2 = trans (sym (oddEdgeWordEvaluation charge Y.b2 Y.c2))
         (Pair._∧_.left (dropSatisfied charge 57 holds))
-    ; c2d2 = trans (sym (oddEdgeWordParity charge Y.c2 Y.d2))
+    ; c2d2 = trans (sym (oddEdgeWordEvaluation charge Y.c2 Y.d2))
         (Pair._∧_.left (dropSatisfied charge 63 holds))
-    ; d2e2 = trans (sym (oddEdgeWordParity charge Y.d2 Y.e2))
+    ; d2e2 = trans (sym (oddEdgeWordEvaluation charge Y.d2 Y.e2))
         (Pair._∧_.left (dropSatisfied charge 68 holds))
-    ; ab3 = trans (sym (oddEdgeWordParity charge Y.a Y.b3))
+    ; ab3 = trans (sym (oddEdgeWordEvaluation charge Y.a Y.b3))
         (Pair._∧_.left (dropSatisfied charge 20 holds))
-    ; b3c3 = trans (sym (oddEdgeWordParity charge Y.b3 Y.c3))
+    ; b3c3 = trans (sym (oddEdgeWordEvaluation charge Y.b3 Y.c3))
         (Pair._∧_.left (dropSatisfied charge 75 holds))
-    ; c3d3 = trans (sym (oddEdgeWordParity charge Y.c3 Y.d3))
+    ; c3d3 = trans (sym (oddEdgeWordEvaluation charge Y.c3 Y.d3))
         (Pair._∧_.left (dropSatisfied charge 77 holds))
     ; centralOddZero =
-        trans (sym sourceCentralPowerNineParity)
+        trans (sym sourceCentralPowerNineEvaluation)
           (Pair._∧_.left (dropSatisfied charge 79 holds))
     }
   original80HasNoNontrivialMod2Character :
