@@ -15,6 +15,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc; _*_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Maybe.Base using (Maybe; just; nothing)
+open import Data.List.Base using (length)
 open import Data.Product using (_×_; _,_)
 open import Relation.Binary.PropositionalEquality using (sym)
 
@@ -107,7 +108,7 @@ readOriginalBudgetedHeader word
 ... | nothing = nothing
 ... | just (numeric-header n m afterM)
   with Nat._≤ᵇ_ (suc (suc (suc zero)) * m)
-       (Data.List.Base.length afterM)
+       (length afterM)
 ... | false = nothing
 ... | true = just (numeric-header n m afterM)
 
@@ -124,6 +125,6 @@ nativeBinaryBudgetedHeadersSameOriginal word
   rewrite sym headEq
         | Budget.binaryCountBudgetSameOriginal m afterM
   with Nat._≤ᵇ_ (suc (suc (suc zero)) * Value.valueLE m)
-       (Data.List.Base.length afterM)
+       (length afterM)
 ... | false = refl
 ... | true = refl
