@@ -114,3 +114,10 @@ This is a stronger executable chronology test than isolated reaction and bond fi
 PR #1471 now source-writes native-bond source debit/target credit and outer-face local injection identities in Agda; these are prerequisites, **not yet** the full 27-voxel signed charge-current continuity theorem. D1 remains PARTIAL; G1/G2 still OPEN for full physical completion.
 
 **Next exact original-P0 cut:** `original369LocalSignedContinuityExact` followed by `original29x12SpatialReactionBalance`, then `sameSourcePhysicalReactionTransportStep`. Only then seek `physicalBH4StepCommutes`, `physicalPNPStepCommutesOriginal`, and `physicalTissueOneStepRefinement` on one selected physical state.
+
+
+### 2026-11-09 companion original-369 locality status
+
+Developmental PR #1471 adds pointwise original 3×3×3 bond-support invariance for actual `transferOne` (`lookupTransferAwayFromEndpoints`, `originalNativeBondUnchangedOutsideEndpoints`) and certified exterior-face injection/extraction off-site invariance. Its signed-current regression now refuses remote compensating state mutations; native Golden owner-presence gates were added. **These are source-written proof candidates without exact-head Agda acceptance** and do not close local integer signed-current continuity.
+
+BH4 PR #1454's `check_bh4_original_panel_spatial_events.py` still provides original source-consuming reaction→native transport→return regression, not a source-paid 29×12 physiological rate model. The 29 source-specific exchange fluxes, all P0 signed/current/kinetic coupling, P1 tissue/PNP/BH4 commutation, P2 physical minimality, P3 held-out evidence, and combined Golden acceptance all remain OPEN.
