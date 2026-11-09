@@ -16,6 +16,7 @@ open import DASHI.Core.Prelude
 open import Agda.Builtin.String using (String)
 
 import DASHI.Core.EmpiricalSourceDiligenceAdmissionExact as Source
+import DASHI.Core.AttributedSourceCore as Attr
 import DASHI.Core.EvidenceHyperfabricExact as Hyper
 import DASHI.Reasoning.EvidenceDesignAdmissibilityExact as Design
 import DASHI.Reasoning.PredicateNormalFormEvidenceAuditExact as PNF
@@ -35,9 +36,20 @@ record CanonicalStagePayment
     (fact : Source.EmpiricalFactAdmission) : Set where
   field
     assessment : Design.EvidenceForObligation
-    designAdmissible :
-      Design.AdmissibleForPromotion
-        (Design.EvidenceForObligation.finding assessment)
+    -- The generic design owner also admits a partial finding with
+    -- narrowed scope. That does NOT justify an unqualified six-stage
+    -- historical-operation finding. Require its fully admissible case.
+    fullyPaidFinding :
+      Design.EvidenceForObligation.finding assessment ≡
+      Design.fullyAdmissible
+    -- A common assertion key alone does not identify the original
+    -- cited source: pay the source citation join explicitly.
+    assessmentCitesDiligenceSource :
+      Design.EvidenceReceipt.sourceCitation
+        (Design.EvidenceForObligation.evidence assessment) ≡
+      Attr.canonicalURL
+        (Source.SourceDiligence.selectedSource
+          (Source.EmpiricalFactAdmission.diligence fact))
     diligenceClaimMatchesStage :
       Source.SourceDiligence.claimReference
         (Source.EmpiricalFactAdmission.diligence fact) ≡
@@ -79,12 +91,12 @@ canonicalAdmissionRequiresStageDesignPayment :
   (c : Case.OriginalCase)
   (admitted : CanonicalClaimAdmission E sourceCase claimKey c)
   (stage : Case.EvidenceStage) →
-  Design.AdmissibleForPromotion
-    (Design.EvidenceForObligation.finding
-      (CanonicalStagePayment.assessment
-        (Case.ClaimBoundAdmission.claimSupported admitted stage)))
+  Design.EvidenceForObligation.finding
+    (CanonicalStagePayment.assessment
+      (Case.ClaimBoundAdmission.claimSupported admitted stage))
+  ≡ Design.fullyAdmissible
 canonicalAdmissionRequiresStageDesignPayment E sourceCase claimKey c admitted stage =
-  CanonicalStagePayment.designAdmissible
+  CanonicalStagePayment.fullyPaidFinding
     (Case.ClaimBoundAdmission.claimSupported admitted stage)
 
 canonicalAdmissionBlockedByMissingExposure :
@@ -116,3 +128,50 @@ sharedLineageCannotPayIndependentCorroboration graph left right sameLineage corr
 -- six-stage operation admission remain THREE distinct obligations.
 -- No historical GCC sample, exposure, counterfactual or intent proof
 -- is introduced or inferred by these generic transport lemmas.
+
+-- A valid case-specific payment also retains an exact citation URL
+-- agreement with the Diligence-selected original source. No mere
+-- shared assertion key can stand in for this source-identity join.
+canonicalAdmissionCitesSelectedSource :
+  (E : Case.OriginalCase → Case.EvidenceStage → Set)
+  (sourceCase : Source.EmpiricalFactAdmission → Case.OriginalCase)
+  (claimKey : Case.OriginalCase → Case.EvidenceStage → String)
+  (c : Case.OriginalCase)
+  (admitted : CanonicalClaimAdmission E sourceCase claimKey c)
+  (stage : Case.EvidenceStage) →
+  Design.EvidenceReceipt.sourceCitation
+    (Design.EvidenceForObligation.evidence
+      (CanonicalStagePayment.assessment
+        (Case.ClaimBoundAdmission.claimSupported admitted stage)))
+  ≡
+  Attr.canonicalURL
+    (Source.SourceDiligence.selectedSource
+      (Source.EmpiricalFactAdmission.diligence
+        (Case.ClaimBoundAdmission.sourceFor admitted stage)))
+canonicalAdmissionCitesSelectedSource E sourceCase claimKey c admitted stage =
+  CanonicalStagePayment.assessmentCitesDiligenceSource
+    (Case.ClaimBoundAdmission.claimSupported admitted stage)
+
+-- The original design owner distinguishes partial-from-full
+-- admissibility by constructors. An unqualified terminal admission
+-- cannot be built from its partial finding.
+partialFindingCannotPayTerminalAdmission :
+  {E : Case.OriginalCase → Case.EvidenceStage → Set}
+  {owner : Source.EmpiricalFactAdmission → Case.OriginalCase}
+  {claimKey : Case.OriginalCase → Case.EvidenceStage → String}
+  {c : Case.OriginalCase}
+  (admitted : CanonicalClaimAdmission E owner claimKey c)
+  (stage : Case.EvidenceStage) →
+  Design.EvidenceForObligation.finding
+    (CanonicalStagePayment.assessment
+      (Case.ClaimBoundAdmission.claimSupported admitted stage))
+  ≡ Design.partiallyAdmissible → ⊥
+partialFindingCannotPayTerminalAdmission admitted stage partial =
+  let full = CanonicalStagePayment.fullyPaidFinding
+        (Case.ClaimBoundAdmission.claimSupported admitted stage)
+  in
+  fullFindingNotPartial (trans (sym full) partial)
+  where
+    fullFindingNotPartial :
+      Design.fullyAdmissible ≡ Design.partiallyAdmissible → ⊥
+    fullFindingNotPartial ()
