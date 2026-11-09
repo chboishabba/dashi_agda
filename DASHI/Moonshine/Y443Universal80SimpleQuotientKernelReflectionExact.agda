@@ -30,6 +30,10 @@ import DASHI.Moonshine.Y443TwoGeneratorSameVOAActionExact as Actions
 import DASHI.Moonshine.Y443JMDPresentedVNaturalCapstoneExact as JMD
 import DASHI.Moonshine.VertexOperatorAlgebraCore as VOA
 import DASHI.Moonshine.VNaturalOrbifoldConstruction as VN
+import DASHI.Moonshine.Y443JMDTracePowerExact as Trace
+import DASHI.Moonshine.Y443JMDConcretePairPowerCompilerExact as Compiler
+import DASHI.Moonshine.Y443JMDFromRelatorsToPowerExact as JMDRelators
+import DASHI.Moonshine.Y443JMDSourceWordInstantiationExact as JMDWords
 
 _≢_ : ∀ {A : Set} → A → A → Set
 x ≢ y = x ≡ y → ⊥
@@ -110,6 +114,41 @@ module Selected
           (Algebra.cong (λ g → Actions.act action g state) eq)
           (Actions.actsIdentity action state))
     }
+
+
+  -- SECOND source-native M2 nontriviality path, exploiting the actual
+  -- JMD w=x4*beta relation and x4=w^5. This avoids requiring
+  -- original Griess weight-two matrices when a genuine selected
+  -- order-ten trace certificate already establishes w^5 != identity.
+  originalW : G
+  originalW = JMDWords.wElement gi nodes
+
+  jmdW5NonidentityProvesX4Nonidentity :
+    (powers : Compiler.JMDConcretePowers gi nodes) →
+    Trace.groupPower gi originalW 5 ≢ Pair.identity gi →
+    ActualSelectedNontrivialNode
+  jmdW5NonidentityProvesX4Nonidentity powers w5Nonid = record
+    { witnessNode = JMDWords.x4
+    ; witnessNonidentity = λ x4IsIdentity →
+        w5Nonid
+          (Algebra.trans
+            (Algebra.sym (Compiler.sourceX4Fifth powers))
+            x4IsIdentity)
+    }
+
+  -- The ORIGINAL 80 relators supply the x4-square and all x4-beta
+  -- commutations. The remaining original path-source theorem is
+  -- beta^5=identity. It is consumed from the existing JMD owner,
+  -- not made into a new arbitrary fifth-power compiler.
+  originalJMDW5NonidentityFromRelators :
+    (betaOrderFive : JMDRelators.JMDBetaOrderFive gi nodes) →
+    Trace.groupPower gi originalW 5 ≢ Pair.identity gi →
+    ActualSelectedNontrivialNode
+  originalJMDW5NonidentityFromRelators betaOrderFive w5Nonid =
+    jmdW5NonidentityProvesX4Nonidentity
+      (JMDRelators.powerFromActualEightyRelators gi nodes
+        originalRelators betaOrderFive)
+      w5Nonid
 
   simpleQuotientAndOneNonidentityNodeReflectsAllWords :
     Original80SimpleCongruenceAuthority →
