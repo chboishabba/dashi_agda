@@ -122,3 +122,41 @@ w(y) D_N(x,z)
 - **P3**: genuine Gamma factor, prefactor, continuation, reflection and completed Xi same-object identification.
 
 **Verification status:** new source declarations and three imports committed, exact branch file readback planned; `agda` executable unavailable in working container. No kernel acceptance or terminal P0/P1/P2/P3 discharge is claimed.
+
+## 9 November: all-finite-mesh induction (P0 next implementation)
+
+Committed original Agda source owner `DASHI/Analysis/BishopOriginalNegativeLogFiniteWeightedMeshRecurrenceExact.agda` (first commit `a591ed24fb65f7a67b57c1cb1960a0c9b395b4f6`). All three TOE root import graphs now consume it. This generalizes the earlier two-cell source cocycle to an **arbitrary finite** walk rather than adding a new selected integrating-factor record.
+
+For `v_n = finiteWalk 0 steps n`, `w_n=1-v_n`, `F_N=exp_B(-L_N)` and `D_N(a,b)=w(a)F_N(b)-w(b)F_N(a)`, define
+
+```
+P_0 = 1; P_(n+1) = P_n * w_(n+1)
+B_0 = D_N(v_0,v_1)
+B_(n+1) = (P_n*w_0)*D_N(v_(n+1),v_(n+2)) + w_(n+2)*B_n.
+```
+
+The new source declarations state the fully quantitative *finite algebraic* endpoint equality
+
+```
+P_n * D_N(v_0,v_(n+1)) = B_n,
+```
+
+then recursively replace every local determinant by its **actual** original source residual-plus-quotient-defect,
+
+```
+D_N(v_j,v_(j+1)) = h_j * [v_j^N * F_N(v_j)
+                          + w_j*(q_E(N,v_j,h_j)-E_N'(v_j))].
+```
+
+The terminal source-level consumer `originalFiniteSourceScaledEndpointIsResidualBudget` unifies these two recursions. No reciprocal, FTC, MVT, positivity premise, or derivative-limit substitution is smuggled into the finite induction.
+
+This resolves the **all-cell algebraic accumulation** subgate, subject to kernel acceptance, but **not** the source quotient modulus. Exact terminal leaves now:
+
+1. **P0.a**: Original same-stage compact-uniform factor-quotient defect estimate from `BishopOriginalNegativeLogFiniteExplicitQuotientExact` (finite LOG polynomial quotient × shifted-factorial exp quotient) with explicit dependence on stage, radius and increment.
+2. **P0.b**: Prove positive `w_j` and quantitative inverse bounds on `0<=v_j<=r<1`; transform the algebraic weighted budget into the normalized endpoint estimate *without losing uniform control as the mesh is refined*. Be attentive to products `P_n` tending to zero: never divide by them without independent conditioning.
+3. **P0.c**: Apply an actual constructive endpoint integration comparison to obtain `0<=E_N(x)<=r^(N+1)/((N+1)*(1-r)^2)` and a common effective convergence cutoff; apply `originalNegativeLogTerminalFromFiniteEvaluation`.
+4. **P1**: Original nested atan-to-complex-exp evaluation at both `1/5` and `1/239`, using already verified finite polynomial and corrected odd/odd Cauchy-owner.
+5. **P2**: Supply the P0 identity to `BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog` and prove original selected zeta same-object equality independent of its opaque substrate.
+6. **P3**: Genuine source Gamma, prefactor, continuation and completed-Xi equality.
+
+**Verification**: declaration and import readback, static holes/postulates check, plus exact-head Agda 2.9 test are separate gates. Source-only work may not be marked accepted until an Agda kernel receipt. This commit does not close P0/P1/P2/P3.
