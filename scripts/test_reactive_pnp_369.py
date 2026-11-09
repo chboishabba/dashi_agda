@@ -109,3 +109,23 @@ def test_sg_per_edge_electrochemical_dissipation_sign():
         for e,(a,b) in enumerate(BONDS):
             dmu=m.RT*np.log(c[b]/c[a])+m.z*m.F*(ph[b]-ph[a])
             assert np.max(J[e]*dmu)<1e-9
+
+
+def test_source_parameter_admission_not_python_assert_dependent():
+    """Malformed PNP coefficients reject via ValueError, including under -O."""
+    m = model()
+    for patch in (
+        {"z": np.array([float("nan"), -1.0, 0.0])},
+        {"D": np.array([0.1, float("inf"), 0.1])},
+        {"kf": np.array([float("nan")])},
+        {"kb": np.array([-0.1])},
+        {"reactants": np.array([[1.5, 1, 0]])},
+        {"reactants": np.array([[1, 1]])},
+        {"epsilon": float("nan")},
+        {"h": -1.0},
+        {"fixed_charge": float("inf")},
+    ):
+        data = {k: getattr(m, k) for k in m.__dataclass_fields__}
+        data.update(patch)
+        with pytest.raises(ValueError):
+            Model(**data)
