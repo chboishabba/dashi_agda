@@ -156,3 +156,8 @@ on the same physical Wilson measure. Constants may depend on the externally sele
 **Paid analytic finite mathematical lane:** the SU(2) original Wilson pressure argument has a sound compact-simple-G generalization and no extra independent plaquette probability assumptions.
 
 **Unpaid G1.02 source welding and full G1.03:** identify the actual chosen Wilson representation/normalization and Haar small-ball geometry with the repository's **original selected compact-simple group**, formalize this argument in native Agda, and—decisively—construct the same group's interacting R4 limit, long-range/cutoff uniform clustering route as needed, full OS H gap, and surviving nontrivial observable. This is **not** all-compact-simple-group Clay coverage. No other program's Lorentz/KK/observer bridge is inserted.
+
+
+### Exact D2-OS residual lemma owners after dense-test reduction
+
+The authoritative D2 producer labels `D2.01–D2.05` are unchanged. The current sharper sublemmas are `D2-OS-01` (same E1 self-adjoint OS H and physical time), `D2-OS-02` (genuinely norm-dense full-nonvacuum original cylinder tests), `D2-OS-03` (a single strictly positive decay exponent for **each** dense test's original Euclidean-time autocorrelation, with test-dependent finite prefactor) and `D2-OS-04` (vacuum uniqueness/no hidden zero-modes and correct full Clay interpretation). Once D2-OS-01/02/03 are supplied, the spectral theorem **derives** full D2.04 subgap exclusion. The complete mathematical proof is in `YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md`; it is not a selected-Wilson source witness and not a prize claim.
