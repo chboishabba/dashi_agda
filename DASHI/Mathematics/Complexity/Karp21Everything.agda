@@ -227,3 +227,7 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact
 
 -- K05: bit-native signed score vs original-shaped sign/magnitude threshold.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact
+
+-- SSP/FRACTRAN sign projection, lossless binary residual, and no-go.
+-- Research crosswalk only; the actual N21 executable remains bit-native.
+import DASHI.Mathematics.Complexity.Karp21SignedSSPOrientationNoLosslessExact
