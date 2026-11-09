@@ -245,3 +245,37 @@ originalFiniteLogShiftedFactorialStagewiseMeshBound
     rho rhoNN delta
     (originalNegativeLogIncrementUniformRadiusBound
       n radius x h xNN yNN xInside yInside)
+
+------------------------------------------------------------------------
+-- The original geometric derivative polynomial itself is monotone.
+-- Derive this from the SOURCE finite LOG quotient radius dominance,
+-- never from an independent polynomial authority.
+------------------------------------------------------------------------
+
+originalFiniteLogDerivativeRadiusDominance :
+  (x radius : R.ℝ) →
+  (xNN : R.NonNegative x) →
+  (xInside : R._≤_ x radius) →
+  (n : Nat) →
+  R._≤_
+    (Geo.negativeLogDerivativePolynomial x n)
+    (Geo.negativeLogDerivativePolynomial radius n)
+originalFiniteLogDerivativeRadiusDominance
+    x radius xNN xInside n =
+  let
+    yNN = RP.nonNeg-cong
+      (RP.≃-symm (RP.+-identityʳ x)) xNN
+    yInside =
+      RP.≤-respˡ-≃
+        (RP.+-identityʳ x)
+        xInside
+  in
+  RP.≤-respʳ-≃
+    (Second.originalFiniteLogQuotientAtZeroIsDerivativePolynomial
+      radius n)
+    (RP.≤-respˡ-≃
+      (RP.≃-symm
+        (Second.originalFiniteLogQuotientAtZeroIsDerivativePolynomial
+          x n))
+      (originalSourceFiniteLogQuotientRadiusDominance
+        x R.0ℝ radius xNN yNN xInside yInside n))
