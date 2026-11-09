@@ -119,6 +119,43 @@ Original source owners found:
 **Highest-alpha decision:** next P2e mathematical producer is the **native norm-two lattice exhaustion** and then the full theta modular transformation/dimension-one theorem. The 240↔243 count comparison is independent of that analytic proof.
 
 
+### P2e highest-alpha all-shell theta parity cut (2026-11-09 continuation)
+
+**New source-written owner** `DASHI/Moonshine/AbelE8ThetaParityProjectorExact.agda` (commits `6cc02621`, `71b2154e`).
+
+The actual E8 lattice is the union of the integral even-sum and half-integral even-sum cosets. For each fixed theta coefficient index `n`, partition the integer vectors by doubled-coordinate sum residues `0`, `2` mod 4 (`I₀,I₂`) and the half vectors similarly (`H₀,H₂`). Parity projection gives
+[
+    r_{E8}(2n)=I₀(n)+H₀(n),quad
+    [q^n]θ₃^8=I₀(n)+I₂(n),quad
+    [q^n]θ₄^8=I₀(n)-I₂(n),quad
+    [q^n]θ₂^8=H₀(n)+H₂(n).
+]
+The half-family involution reversing the first odd doubled coordinate `d₀↦−d₀` preserves squared norm and toggles residue class mod 4. Hence mathematically `H₀(n)=H₂(n)` for every n. The **formal Agda source** currently takes this equality as a field of `E8ShellParityCounts`; it has **not yet proved the involution on the actual Bishop/E8 unbounded lattice shell**.
+
+Given that specific equality, new `e8ThetaSignedJacobiProjectorAllN` proves the subtraction-free exact Nat identity
+[
+  2r_{E8}(2n)+I₂(n)=
+  ig(I₀(n)+I₂(n)ig)+I₀(n)+ig(H₀(n)+H₂(n)ig).
+]
+This is equivalent to the classical Jacobi theta decomposition
+[
+ Theta_{E8}=	frac12(artheta_3^8+artheta_4^8+artheta_2^8),
+]
+**only once** the genuine shell-count functions/series and sign interpretation have been instantiated. The source does not assert this analytic equation as proved.
+
+- [x] **P2e.10** `thetaParityProjectorArithmetic`: all-Nat 3-variable ring identity via existing `Data.Nat.Solver`; **source-written, Agda 2.9 unchecked**.
+- [x] **P2e.11** `e8ThetaSignedJacobiProjector` and `e8ThetaSignedJacobiProjectorAllN`: an all-index algebraic coefficient projector consuming an explicit half-parity-cancellation witness; **source-written, unchecked**.
+- [ ] **P2e.12** `originalE8HalfOddParityInvolution`: genuine norm-preserving, sign-reversing involution on each actual E8 *unbounded integer* shell, proves `H₀(n)=H₂(n)` and is not merely the record field.
+- [ ] **P2e.13** `originalE8ThetaJacobiCoefficientSameSource`: define the actual `I₀,I₂,H₀,H₂` from the source lattice, prove their identification with the literal `θ₂^8,θ₃^8,θ₄^8` coefficients, and instantiate P2e.11 without axioms.
+- [ ] **P2e.14** `originalBishopThetaJacobiE4Identity`: prove the selected Bishop theta constants and their quartic/eighth-power identities and normalizations match the source's `E4=1+240Σσ₃(n)q^n`; equivalently provide a source-native weight-four modular-form one-dimensionality theorem. This is the final true analytic identity leaf.
+- [ ] **P2e.15** `originalE8ThetaConvergesAndReindexes`: justify infinite E8 lattice/theta sum convergence and the parity reindexing in **original Bishop complex** semantics, not only coefficientwise finite calculations.
+- [ ] **P2e.16** Kernel-check the above new Agda source and exact-source independent theta regressions.
+
+**Independent regression extended**: `scripts/check_analytic_j_tetration_e8_theta_shells.py` now checks exact θ₂/θ₃/θ₄ parity projections against E8 shell counts for `n=0..8` in addition to `240σ₃(n)`. I independently executed this calculation with the same parity/coordinate recurrence; nine indices passed. The new repository script was pushed but has not been executed via the pinned Agda acceptance harness here. Do **not** call any of these finite checks an all-n analytic theorem.
+
+**Maximum cut improvement:** There is now an explicit binary choice for P2e: (A) pay the native E8 half-coordinate involution + Jacobi theta identities and convergence, or (B) prove actual theta modularity plus `dim M₄=1`. Avoid claiming both routes are independently required. The original Bishop Koenigs/Abel/Kneser and P2 q-period gates remain independently OPEN.
+
+
 ## P2f. Actual generated E8 root count 240 versus triadic 243
 
 **Audited actual prior-art owners** (not inferred numeral analogies):
