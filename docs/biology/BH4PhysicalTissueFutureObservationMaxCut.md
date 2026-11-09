@@ -121,3 +121,12 @@ PR #1471 now source-writes native-bond source debit/target credit and outer-face
 Developmental PR #1471 adds pointwise original 3×3×3 bond-support invariance for actual `transferOne` (`lookupTransferAwayFromEndpoints`, `originalNativeBondUnchangedOutsideEndpoints`) and certified exterior-face injection/extraction off-site invariance. Its signed-current regression now refuses remote compensating state mutations; native Golden owner-presence gates were added. **These are source-written proof candidates without exact-head Agda acceptance** and do not close local integer signed-current continuity.
 
 BH4 PR #1454's `check_bh4_original_panel_spatial_events.py` still provides original source-consuming reaction→native transport→return regression, not a source-paid 29×12 physiological rate model. The 29 source-specific exchange fluxes, all P0 signed/current/kinetic coupling, P1 tissue/PNP/BH4 commutation, P2 physical minimality, P3 held-out evidence, and combined Golden acceptance all remain OPEN.
+
+
+### 2026-11-09 typed-history and original source-artifact audit
+
+Companion #1471 has source-written `OriginalDirectedNativeBond` (only genuine original nearest-neighbour forward/reverse steps), `everyChronologicalOriginalDirectedHistoryConserves` and `nativeHistoryLeavesUnvisitedVoxelUnchanged`. They constrain native 3D transport support, not PNP kinetics or measured BH4 transport, and are not exact-head kernel accepted.
+
+**Source gate:** Lookup of `artifacts/biology/rhea-kitzerow-bh4-reactions.json` on this GitHub branch returned 404. Its absence from the tracked branch prevents reproducing strict original-panel execution here; this says nothing about off-repo acquisition receipts. A 29×12 Rhea/ChEBI identity list and a five-species QDPR self-test are not replacements for the byte-pinned full original source matrix. Maintain three nonfinite original residuals and all 29 environmental exchange obligations explicitly.
+
+**Open:** entire signed local charge-current theorem, source-paid 29×12/29 exchange model, physically admissible same-object time evolution, actual BH4/PNP/tissue step, original controlled stochastic kernel/minimality, independent calibration/holdout, two-branch Golden and reviewed ITIR reconciliation.
