@@ -467,3 +467,101 @@ originalBoundaryDischargeLocalReceipt event state =
         (boundaryActualDebitAgreesWithSharedTransfer
           (dischargeIndex event) state))
       (Transfer.lookupAfterDebit (dischargeIndex event) state))
+
+
+------------------------------------------------------------------------
+-- COMPLETE EXTERIOR-FACE LOCAL CONTINUITY: each real face event
+-- selects exactly one original voxel. Actual debits, actual inlets
+-- and all off-face sites are accounted for in one identity.
+------------------------------------------------------------------------
+
+import Data.Fin.Properties as FinProps
+import Relation.Nullary as Nullary
+
+faceEventIndex : OriginalFaceExchange → F.Fin 27
+faceEventIndex (addAtOuterFace event) =
+  Index.originalPointIndex (physicalVoxel event)
+faceEventIndex (removeAtOuterFace event) = dischargeIndex event
+
+data FaceVoxelRole (event : OriginalFaceExchange)
+  (observer : F.Fin 27) : Set where
+  atSelectedFace : faceEventIndex event ≡ observer →
+    FaceVoxelRole event observer
+  awayFromSelectedFace : ¬ (faceEventIndex event ≡ observer) →
+    FaceVoxelRole event observer
+
+classifyFaceVoxel :
+  (event : OriginalFaceExchange) (observer : F.Fin 27) →
+  FaceVoxelRole event observer
+classifyFaceVoxel event observer
+  with FinProps._≟_ (faceEventIndex event) observer
+... | Nullary.yes equal = atSelectedFace equal
+... | Nullary.no different = awayFromSelectedFace different
+
+localFaceOut :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) → FaceVoxelRole event observer → Nat
+localFaceOut (addAtOuterFace event) state observer role = 0
+localFaceOut (removeAtOuterFace event) state observer
+  (atSelectedFace equal) = actualDischargedAmount event state
+localFaceOut (removeAtOuterFace event) state observer
+  (awayFromSelectedFace different) = 0
+
+localFaceIn :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) → FaceVoxelRole event observer → Nat
+localFaceIn (addAtOuterFace event) state observer
+  (atSelectedFace equal) = incomingMaterial event
+localFaceIn (addAtOuterFace event) state observer
+  (awayFromSelectedFace different) = 0
+localFaceIn (removeAtOuterFace event) state observer role = 0
+
+originalFaceVoxelBalance :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) (role : FaceVoxelRole event observer) →
+  V.lookup (applyOriginalFaceExchange event state) observer
+    + localFaceOut event state observer role
+    ≡ V.lookup state observer + localFaceIn event state observer role
+originalFaceVoxelBalance (addAtOuterFace event) state observer
+  (atSelectedFace equality) rewrite sym equality =
+  trans
+    (+-identityʳ
+      (V.lookup (applyBoundaryInjection event state)
+        (Index.originalPointIndex (physicalVoxel event))))
+    (trans (originalBoundaryInjectionLocalReceipt event state)
+      (+-comm (incomingMaterial event)
+        (V.lookup state
+          (Index.originalPointIndex (physicalVoxel event)))))
+originalFaceVoxelBalance (addAtOuterFace event) state observer
+  (awayFromSelectedFace different) =
+  trans
+    (+-identityʳ (V.lookup (applyBoundaryInjection event state) observer))
+    (trans
+      (originalFaceInjectionLeavesOtherVoxelUnchanged
+        event observer state different)
+      (sym (+-identityʳ (V.lookup state observer))))
+originalFaceVoxelBalance (removeAtOuterFace event) state observer
+  (atSelectedFace equality) rewrite sym equality =
+  trans
+    (originalBoundaryDischargeLocalReceipt event state)
+    (sym (+-identityʳ
+      (V.lookup state (dischargeIndex event))))
+originalFaceVoxelBalance (removeAtOuterFace event) state observer
+  (awayFromSelectedFace different) =
+  trans
+    (+-identityʳ (V.lookup (applyBoundaryDischarge event state) observer))
+    (trans
+      (originalFaceDischargeLeavesOtherVoxelUnchanged
+        event observer state different)
+      (sym (+-identityʳ (V.lookup state observer))))
+
+originalFaceEveryVoxelBalance :
+  (event : OriginalFaceExchange) (state : V.Vec Nat 27)
+  (observer : F.Fin 27) →
+  V.lookup (applyOriginalFaceExchange event state) observer
+    + localFaceOut event state observer (classifyFaceVoxel event observer)
+    ≡ V.lookup state observer
+      + localFaceIn event state observer (classifyFaceVoxel event observer)
+originalFaceEveryVoxelBalance event state observer =
+  originalFaceVoxelBalance event state observer
+    (classifyFaceVoxel event observer)
