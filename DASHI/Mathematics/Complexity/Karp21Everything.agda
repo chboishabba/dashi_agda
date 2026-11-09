@@ -224,3 +224,6 @@ import DASHI.Mathematics.Complexity.Karp21BinaryNativeRippleAdderValueExact
 
 -- K05: executable two-lane binary signed-weight fold and total invariants.
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact
+
+-- K05: bit-native signed score vs original-shaped sign/magnitude threshold.
+import DASHI.Mathematics.Complexity.Karp21BinaryNativeThresholdExact
