@@ -18,7 +18,8 @@ EXPECTED={
  "gcc_september_bulletin_1993":("1993-09","gcc_republishes_reference_to_article")}
 EDGES=[
  ("wp_rensberger_19930601","gcc_shlaes_19930630","archive_description_of_reference"),
- ("wp_christy_spencer_199307","gcc_september_bulletin_1993","archive_description_of_later_amplification")]
+ ("wp_christy_spencer_199307","gcc_september_bulletin_1993","archive_description_of_later_amplification"),
+ ("wp_rensberger_19930601","gcc_september_bulletin_1993","archive_description_of_later_amplification")]
 
 def require(ok,reason):
     if not ok: raise ValueError(reason)
@@ -37,6 +38,14 @@ def review(m):
         else:require(len(d)==7,"month precision")
     require("Boyce Rensberger" in byid["wp_rensberger_19930601"]["creator"],"journalist credit")
     require("John Shlaes" in byid["gcc_shlaes_19930630"]["creator"],"GCC author credit")
+    r=byid["wp_rensberger_19930601"]
+    require(r["page_display_date"]=="1993-05-31" and r["archive_url_date"]=="1993-06-01", "publisher/archive disagreement erased")
+    require(r["original_publisher_url"].startswith("https://www.washingtonpost.com/archive/politics/1993/06/01/"),"original publisher locator")
+    require(r["source_grade"]=="original_publisher_rendered_article_not_independent_binary_archive","false source-byte verification")
+    voices=r["original_content_observations"]
+    require(len(voices)==3,"original article multiple speakers")
+    require(all(len(c["original_page_lines"])==2 and c["original_page_lines"][0]<c["original_page_lines"][1] for c in voices),"original article line references")
+    require("Patrick Michaels" in voices[1]["attributed_speaker"] and "James Hansen" in voices[2]["attributed_speaker"],"opposing source voices conflated")
     links=m["links"]
     require(len(links)==len(EDGES),"link count")
     for link,(a,b,grade) in zip(links,EDGES):
@@ -46,6 +55,7 @@ def review(m):
         for k in ("journalist_exposure_verified","original_article_GCC_causation_verified","audience_effect_verified"):
             require(link[k] is False,"unsupported causal promotion: "+k)
     return {"source_objects":len(objs),"directional_source_mentions":len(links),
+            "original_publisher_articles":1,"original_publisher_date_discrepancies":1,
             "verified_article_causation":0,"verified_audience_exposure":0,
             "verified_population_effect":0}
 
@@ -60,7 +70,9 @@ def self_test(m):
       ("promote_exposure",lambda x:x["links"][1].update(journalist_exposure_verified=True)),
       ("promote_effect",lambda x:x["links"][1].update(audience_effect_verified=True)),
       ("fake_grade",lambda x:x["links"][0].update(evidence_kind="independent_causal_inference")),
-      ("duplicate",lambda x:x["objects"].append(copy.deepcopy(x["objects"][0])))]
+      ("duplicate",lambda x:x["objects"].append(copy.deepcopy(x["objects"][0]))),
+      ("date_discrepancy_erased",lambda x:next(o for o in x["objects"] if o["id"]=="wp_rensberger_19930601").update(page_display_date="1993-06-01")),
+      ("Hansen_voice_erased",lambda x:next(o for o in x["objects"] if o["id"]=="wp_rensberger_19930601")["original_content_observations"][2].update(attributed_speaker="GCC"))]
     for label,modify in mods:
         changed=copy.deepcopy(m);modify(changed)
         try: review(changed)
