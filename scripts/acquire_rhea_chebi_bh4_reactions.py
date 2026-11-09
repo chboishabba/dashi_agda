@@ -20,6 +20,8 @@ from __future__ import annotations
 import argparse
 import csv
 import hashlib
+import html
+import re
 import io
 import json
 import sys
@@ -47,6 +49,47 @@ QDPR_EXPECTED = {
         {"side": "product", "coefficient": 1, "chebi_id": "CHEBI:57540", "broader_chebi_id": "CHEBI:57540", "name": "NAD+", "formula": "C21H26N7O14P2", "charge": -1},
     ],
 }
+
+
+def parse_rhea_release_banner(raw: bytes) -> dict:
+    """Parse the actual REST homepage release, never a hard-coded vintage."""
+    if not isinstance(raw,bytes):
+        raise ValueError("Rhea homepage must be captured as original bytes")
+    readable=" ".join(html.unescape(re.sub(
+        r"<[^>]*>", " ", raw.decode("utf-8",errors="replace"))).split())
+    matches=re.findall(
+        r"Current\\s+release\\s+(\\d+)\\s*\\((\\d{4}-\\d{2}-\\d{2})\\)",
+        readable,flags=re.IGNORECASE)
+    if len(matches)!=1:
+        raise ValueError("Rhea REST homepage release cannot be uniquely pinned")
+    release,date=matches[0]
+    return {"rhea_rest_release_number":int(release),
+            "rhea_rest_release_date":date,
+            "rhea_rest_homepage_sha256":hashlib.sha256(raw).hexdigest(),
+            "rhea_rest_release_observed":True,
+            "rhea_sparql_release_verified":False}
+
+
+def observe_live_rhea_release() -> dict:
+    return parse_rhea_release_banner(_get("https://www.rhea-db.org/"))
+
+
+def release_guard_self_test() -> None:
+    sample=b"<h1>Current release <strong>143</strong> (2026-11-04)</h1>"
+    observed=parse_rhea_release_banner(sample)
+    assert observed["rhea_rest_release_number"]==143
+    assert observed["rhea_rest_release_date"]=="2026-11-04"
+    assert not observed["rhea_sparql_release_verified"]
+    for broken in (
+        b"<h1>Rhea release unverified</h1>",
+        b"Current release 142 (2026-09-02); Current release 143 (2026-11-04)",
+    ):
+        try:
+            parse_rhea_release_banner(broken)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("unverifiable Rhea source release admitted")
 
 
 def _retry(operation, label: str):
@@ -207,7 +250,10 @@ def acquire_qdpr() -> dict:
     return {
         "schema": "dashi.rhea-chebi-bh4.v2",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
-        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
+        "rhea_release_reference": "Rhea live REST/SPARQL release unverified",
+        "rhea_rest_release_verified": False,
+        "rhea_sparql_release_verified": False,
+        "rhea_release_verified": False,
         "reaction": QDPR_EXPECTED,
         "generic": generic,
         "directed": directed,
@@ -251,7 +297,10 @@ def acquire_panel(panel_path: Path) -> tuple[dict, int]:
     return {
         "schema": "dashi.rhea-chebi-bh4-panel.v2",
         "acquired_at_utc": datetime.now(timezone.utc).isoformat(),
-        "rhea_release_reference": "Rhea release 142 (2026-09-02); SPARQL release 2026_03",
+        "rhea_release_reference": "Rhea live REST/SPARQL release unverified",
+        "rhea_rest_release_verified": False,
+        "rhea_sparql_release_verified": False,
+        "rhea_release_verified": False,
         "source_uniprot_panel": str(panel_path),
         "network_retry_policy": {"attempts": NETWORK_ATTEMPTS, "initial_backoff_seconds": NETWORK_BACKOFF_SECONDS, "exponential": True},
         "protein_reaction_links": links,
@@ -374,19 +423,48 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--qdpr", action="store_true", help="acquire the QDPR Rhea/ChEBI witness")
+    mode.add_argument("--release-guard-self-test",action="store_true",help="offline source-version parsing and negative controls")
     mode.add_argument("--from-uniprot-panel", type=Path, metavar="PATH", help="acquire all Rhea xrefs found in the exact UniProt panel certificate")
     mode.add_argument("--from-source-chart", type=Path, metavar="PATH",
                       help="acquire source-observed creator chart Rhea IDs; preserves separate source provenance")
+    parser.add_argument("--require-rhea-release",type=int,
+                        help="fail BEFORE acquisition if live REST release differs; does not pin SPARQL")
     parser.add_argument("-o", "--output", type=Path)
     args = parser.parse_args()
+    if args.release_guard_self_test:
+        release_guard_self_test()
+        print("PASS: explicit Rhea REST release parser and mismatch controls")
+        return 0
+    observed=None
+    if args.require_rhea_release is not None:
+        if args.require_rhea_release<=0:
+            parser.error("required Rhea release must be a positive version")
+        observed=observe_live_rhea_release()
+        if observed["rhea_rest_release_number"]!=args.require_rhea_release:
+            parser.error(
+                f"Rhea REST vintage drift: required {args.require_rhea_release}, "
+                f"observed {observed['rhea_rest_release_number']}; "
+                "recover original archived source bytes rather than silently rebuilding")
     if args.qdpr:
         payload = acquire_qdpr()
+        if observed is not None:
+            payload["rhea_rest_release_observation"]=observed
+            payload["rhea_rest_release_verified"]=True
+            payload["rhea_release_reference"]=(
+                f"Rhea REST release {observed['rhea_rest_release_number']} "
+                f"({observed['rhea_rest_release_date']}); SPARQL release unverified")
         render(payload, args.output)
         return 0 if payload["specific_chebi_fixture_paid"] else 3
     if args.from_source_chart:
         payload, code = acquire_source_chart(args.from_source_chart)
     else:
         payload, code = acquire_panel(args.from_uniprot_panel)
+    if observed is not None:
+        payload["rhea_rest_release_observation"]=observed
+        payload["rhea_rest_release_verified"]=True
+        payload["rhea_release_reference"]=(
+            f"Rhea REST release {observed['rhea_rest_release_number']} "
+            f"({observed['rhea_rest_release_date']}); SPARQL release unverified")
     render(payload, args.output)
     return code
 
