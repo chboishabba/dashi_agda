@@ -303,3 +303,119 @@ Independent exact-rational finite checks: 14,520 source second-order
 modulus instances (N through 30, four r values, 11x11 endpoint grid)
 and 14 normalized endpoint meshes passed. No Agda 2.9 kernel receipt
 is available. Keep P1/P2/P3 semantic leaves unchanged.
+
+## 2026-11-09 P0.01–P0.03 SOURCE-WRITTEN ANALYTIC MODULUS PASS
+
+The following are **new concrete Agda definitions and proof terms** on the original pinned Bishop real. Each remains subject to Agda 2.9 kernel acceptance; static readback/regression is not such acceptance.
+
+1. `BishopOriginalFiniteLogSecondQuotientPositiveExact.agda`:
+   `originalPowerZeroStepQuotientNonnegative`,
+   `originalPowerSecondQuotientNonnegative`,
+   `originalFiniteLogSecondQuotientNonnegative`,
+   `originalFiniteLogPolynomialQuotientDefectEqualsStep`,
+   `originalFiniteLogPolynomialQuotientDefectNonnegative`.
+   Nonnegative endpoint polynomials and positive-step source secant sign.
+2. `BishopOriginalFiniteLogQuotientUniformModulusExact.agda`:
+   `sourcePowerZeroQuotientMonotone`,
+   `sourcePowerSecondQuotientMonotone`,
+   `sourceFiniteLogSecondQuotientMonotone`,
+   `originalFiniteLogPolynomialQuotientUniformModulus`.
+   **Fixed-stage compact-uniform** original log quotient:
+   ```
+   0<=x,x+h<=r =>
+   |q_L,N(x,h)-P_N(x)| <= |h| S_N(r,0).
+   ```
+   Handles negative h; no division by h. The stronger single
+   N-independent bound `S_N(r,0)<=1/(2(1-r)^2)` remains **not
+   implemented** in original Bishop order.
+3. `BishopOriginalFiniteLogQuotientRadiusDominanceExact.agda`:
+   `sourcePowerQuotientRadiusDominance`,
+   `originalSourceFiniteLogQuotientRadiusDominance`,
+   `originalNegativeLogIncrementAbsoluteIsStepTimesQuotient`,
+   `originalNegativeLogIncrementUniformRadiusBound`,
+   `originalFiniteLogRadiusDerivativeNonnegative`,
+   `originalFiniteLogDerivativeRadiusDominance`,
+   `originalFiniteLogShiftedFactorialStagewiseMeshBound`.
+   Proves on nonnegative source endpoints `|Delta_N(x,h)|<=|h| P_N(r)`
+   and `|Q(Delta_N)-1|<=exp_B(|h|P_N(r))-1`.
+4. Existing `BishopOriginalShiftedFactorialUniformModulusExact.agda`
+   strengthened by `originalShiftedFactorialAbsoluteBelowExpBall`:
+   `|u|<=rho => |Q(u)|<=exp_B(rho)`, reusing original source
+   monotonicity and the previously established
+   `originalShiftedFactorialExpQuotientUniformModulus`.
+5. `BishopOriginalFiniteLogExpQuotientTriangleExact.agda`:
+   `originalFiniteLogErrorQuotientAbsoluteTriangle`,
+   `originalFiniteLogErrorFirstTermRadiusBound`,
+   `originalFiniteLogErrorSecondTermRadiusBound`,
+   `originalFiniteLogErrorQuotientRadiusTriangle`.
+   An actual source absolute-triangle proof for the original composite
+   quotient defect, with no abstract "bound" field.
+6. `BishopOriginalFiniteLogExpStagewiseUniformDefectExact.agda`:
+   `sourceOriginalUniformErrorBudget`,
+   `sourceOriginalUniformErrorBudgetNonnegative`,
+   `originalFiniteLogExpStagewiseUniformDefectWithFactor`,
+   `originalFiniteLogErrorQuotientUniformModulus`.
+   For `N=suc n`, `0<x<=r`, `0<=x+h<=r`, source writes
+   ```
+   |q_E,N(x,h)-E_N'(x)| <=
+      |h| S_N(r,0) exp_B(|h| P_N(r))
+      +P_N(r)[exp_B(|h| P_N(r))-1].
+   ```
+   Stagewise uniform in x and the sign of h. Uses ORIGINAL
+   `F_N(x)>0` and `F_N(x)<1`, not a synthetic exp.
+7. `BishopOriginalFiniteLogExpUniformDefectNullModulusExact.agda`:
+   `originalNullAbsoluteConvergesZero`,
+   `originalNullScaledConvergesZero`,
+   `originalNullExpOfScaledAbsConvergesOne`,
+   `originalNullExpOfScaledAbsMinusOneConvergesZero`,
+   `originalFiniteLogStagewiseUniformBudgetConvergesZero`.
+   Source proof that the displayed common budget tends to zero
+   for **every original null sequence h** at fixed degree/radius,
+   via native Bishop exp continuity and Sequence product/sum laws.
+8. `BishopOriginalNormalizedFiniteMeshEndpointExact.agda` gained
+   `originalNormalizedFiniteMeshEndpointAbsoluteBudget`: actual
+   `|G_N(v_m)-G_N(v_0)|<=sum_j |localOriginalResidualCell_j|`,
+   using finite source `sumFiniteAbsoluteTriangle` without FTC.
+
+All seven new mathematical source modules, the strengthened original
+Q module and normalized endpoint are now imported (directly or
+transitively) by `EverythingTOESymmetryResolved369`, `Unifier`,
+`Unified/Everything`. The exact-rational first/second quotient and
+modulus regression was executed against a matching source recurrence
+for **10,164** cases (four radii, 11x11 endpoints, degrees 0..20);
+all checks passed, including negative h. The script is committed as
+`scripts/check_bishop_original_log_quotient_uniform_modulus.py`.
+This supports the finite algebra only; **not an Agda receipt**.
+
+### Next exact semantic leaves, not mere wrapper work
+
+- `originalBishopMeshInverseDominatedByRadiusInverse`:
+  derive `0<1-r<=1-v_j` and quantitative native Bishop
+  `inv(1-v_j)<=inv(1-r)` for all actual mesh vertices, including
+  proof-relevant inverses, from original order laws.
+- `originalBishopFiniteNormalizedEndpointResidualComparison`:
+  apply original `originalFiniteLogErrorQuotientUniformModulus` to
+  the SOURCE normalized mesh summands and bound the forcing by
+  `v_j^N F_N(v_j)`, maintaining one common modulus for all cells.
+- `originalBishopFinitePowerQuadratureEndpointBound`:
+  bound original finite quadrature of `t^N` by
+  `x^(N+1)/(N+1)`, with a constructive finite-mesh refinement
+  theorem; cannot introduce an uninhabited FTC.
+- `originalFiniteNegativeLogExpUniformEndpointBound` and
+  `originalNegativeLogFiniteEvaluationConvergesToOneMinus`:
+  compose these to yield the existing
+  `OriginalBishopNegativeLogExponentialGap` via original
+  `originalNegativeLogTerminalFromFiniteEvaluation`.
+- Independently, original analytic P1 Cayley nested composition,
+  P2 selected-zeta same-object value identification and P3 original
+  Gamma/continuation/Xi remain genuinely unpaid. Do not mark them
+  closed merely because the conditional compilers exist.
+
+## Verification boundary
+
+The container lacks `agda` and `nix`, and this pass obtained no
+exact-head Agda 2.9 kernel run. Direct GitHub readback and balanced
+source delimiters are **not** kernel acceptance. The new P0.01/P0.03
+declarations are *source-written with concrete proofs*, **not
+confirmed accepted**; check their transitive Agda elaboration before
+claiming a terminal closure.
