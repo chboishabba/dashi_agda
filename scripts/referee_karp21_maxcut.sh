@@ -153,6 +153,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLedgerIntegerScoreExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLedgerOriginalRawScoreExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeThresholdStructuralExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeThresholdNumericalExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21SignedGammaNativeRawEdgeStreamExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedInspectionClockExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryNativeRippleAdderExact.agda
