@@ -81,6 +81,19 @@ grep -q 'sourceQualifiedCellObservation' \
 grep -q 'withdrawalReopensModelCandidate' \
   DASHI/Biology/Physical/BiologicalEvidenceFeedbackFiniteExact.agda
 
+# P0 source-owner presence gates; the real parallel checker below remains
+# the kernel authority. These checks only prevent stale Golden imports.
+grep -q 'lookupTransferAwayFromEndpoints' \
+  DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
+grep -q 'originalNativeBondUnchangedOutsideEndpoints' \
+  DASHI/Biology/Physical/BiologicalSharedFiniteVectorTransferExact.agda
+grep -q 'originalBondLocalSourceDebitIsPaid' \
+  DASHI/Biology/Physical/BiologicalOriginal54BondSharedVectorExact.agda
+grep -q 'originalFaceInjectionLeavesOtherVoxelUnchanged' \
+  DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
+grep -q 'originalFaceDischargeLeavesOtherVoxelUnchanged' \
+  DASHI/Biology/Physical/Biological369CubicalBoundaryMaterialExact.agda
+
 python3 scripts/check_biological_history_future_quotient.py
 python3 scripts/check_biological_spatial_stochastic.py
 python3 scripts/check_biological_minimal_cube.py
