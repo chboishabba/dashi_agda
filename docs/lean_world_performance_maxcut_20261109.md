@@ -1,5 +1,52 @@
 # Lean World throughput and memory gate — independent performance tranche
 
+## 10 November 2026 revised six-gate maximum-cut implementation status
+
+This paragraph supersedes older remarks in this document that the remote streaming tests, migration and worker had no executable test surfaces. **Code/test sources have advanced substantially; the real live services have NOT been tested by this session.**
+
+| Priority | New source implementation | Actual validation standing |
+| --- | --- | --- |
+| 1. PostgreSQL migration | Repaired SQL escaped newline; immutable occurrence UPDATE and TRUNCATE guards; `tests/test_lean_world_postgres_migration.py` reapplies migration twice in an isolated schema, checks batch INSERT/DELETE counts, composite FK, provenance conflict, keyset and rejected UPDATE/TRUNCATE; `scripts/run_lean_world_pg_ephemeral.sh` starts and cleans a private-socket PG16 instance from the pinned Nix shell | **Not executed here**: this container has no `psql`/`postgres`/`nix`. PostgreSQL 15 syntax for statement transition tables is documented, but actual DB receipt OPEN |
+| 2. Streaming + comparative benchmark | Fixed literal escaped-newline syntax in `lean_remote_archive_stream.py`; source callbacks in both archive and REST ingestion; tar uncompressed-byte cap now counts ALL regular members (including non-Lean); callback, skipped/oversized, non-Lean archive, digest and malformed negative-control tests; `bench_lean_world_acquisition.py` offline and pinned live modes | **Offline exploratory transport model executed** (below); exact repository test suite and real HTTP latency not executed here |
+| 3. No-checkout to world | `lean_world_source_world.py` admits original provenance receipts, verifies original Git blob/SHA256 bytes and forwards verified bounded source to a consumer; `run_lean_world_no_checkout.py` wires both actual acquisition paths to source-world output and optional Lean worker | Source world **implemented**, no real remote acquisition run; it never treats source hashes as elaborated proof terms |
+| 4. Ephemeral Nix Lean worker | Existing `flake.nix` reused via `devShells.lean-world` without changing Agda shell; `lean_ephemeral_elaboration.py` materializes one temporary source at a time, hashes actual compiled OLean dependency directory and `flake.lock`, uses atomic content-addressed OLean receipt/cache, sanitizes subprocess environment; mock tests + `smoke_lean_ephemeral_real.py` | Real pinned Nix Lean compiler/cache smoke **not run** in this container; no exporter or kernel-certified declaration receipts |
+| 5. DAG/fibre/hyperfabric | `lean_world_canonical_dag.py` exact canonical byte-equality after hash lookup, preserved independent proof/source occurrences, exporter-supplied acyclic dependency graph, generation-pinned bounded keyset fibre search and context-indexed dependency incidence with truncation; compatibility with actual PR #1483 `FibreIndex`; `run_lean_world_export_admission.py` requires complete original source manifest and independent canonical Lean exporter JSONL | Source and tests **authored**, not run here. Projection fibre is NOT equivalence, source ingestion is NOT elaboration, and source-given dependency edges are NOT new proven gluing |
+| 6. Representative source-to-world performance | `bench_lean_world_acquisition.py` measures original verified source bytes through the real no-checkout source-world builder (network bytes/requests, wall, source count, traced peak bytes); `bench_lean_world_corpus.py` requires 3 distinct pinned repository classes and archive/REST exact coverage agreement | **Real representative corpus measurement OPEN**: no permitted network/runtime here. Peak PostgreSQL storage, actual Lean elaboration time, and full source→elaborated world throughput remain separately OPEN |
+
+### Local no-CI execution in the existing flake
+
+```bash
+nix develop .#lean-world --command bash scripts/run_lean_world_maxcut_local.sh offline
+nix develop .#lean-world --command bash scripts/run_lean_world_maxcut_local.sh postgres
+nix develop .#lean-world --command bash scripts/run_lean_world_maxcut_local.sh lean
+nix develop .#lean-world --command bash scripts/run_lean_world_maxcut_local.sh corpus pinned-repositories.json
+```
+
+The corpus manifest must supply **exact 40-hex commit IDs** for distinct small/medium/large Lean repositories; moving branches and inferred revision IDs are rejected. No Docker or CI required. For direct acquisition use `scripts/run_lean_world_no_checkout.py OWNER/REPO SHA --transport archive|rest`. Opt-in `--compile --flake . --cache DIR --closure-digest 64HEX` invokes the ephemeral worker; a successful compilation is explicitly marked `lean-compiled-not-exported`. Use `scripts/run_lean_world_export_admission.py --sources source.jsonl --exports exporter.jsonl [--index-path PR1483/scripts/lean_world_fibre_index.py]` only with independent original Lean exporter output. No source-only rows are promoted to theorem facts.
+
+### Independent exploratory local transport-model measurements (NOT PR exact-code or remote benchmarks)
+
+A small standalone Python transport model was actually executed in this container for the same synthetic 1 KiB Lean-source payloads, 3 repeated runs, no network latency and highly compressible repeated bytes:
+
+| Files | Archive median / compressed bytes | REST JSON/base64 median / bytes | Network HTTP requests |
+| ---: | ---: | ---: | --- |
+| 100 | 0.0065 s / 1,335 B | 0.0018 s / 149,800 B | archive 1 / REST 101 |
+| 1,000 | 0.0923 s / 11,715 B | 0.0176 s / 1,498,000 B | archive 1 / REST 1,001 |
+| 3,000 | 0.2992 s / 34,850 B | 0.0605 s / 4,494,000 B | archive 1 / REST 3,001 |
+
+Archive reduces simulated transfer dramatically on these trivially compressible sources; in-memory JSON/base64 processing was faster in this local model. **No remote call, PostgreSQL, Lean elaboration, or actual repository implementation is measured by those figures.** Do not extrapolate the measured ratios to real GitHub/Lean repositories.
+
+### Strict highest-alpha unpaid receipts
+
+1. **PG01** Execute `run_lean_world_pg_ephemeral.sh` under pinned Nix and preserve exact real server version, migrations, count/concurrency/index-plan receipts (the current harness does not yet test concurrent admission).
+2. **STREAM01** Run entire exact-head offline suite and pinned live REST/archive benchmark; measure actual failed/skipped coverage, network latency and compression over representative sources.
+3. **WORLD01** Feed real source bytes into the existing production world builder/validated Lean exporter; source-world manifests and optional PR #1483 index adapter are not yet a kernel-term exporter.
+4. **LEAN01** Run the actual pinned Lean smoke, build/reuse a representative compiled dependency closure, and validate an exporter for typed canonical terms/dependencies; no proof equivalence without kernel receipts.
+5. **DAG01** Persist canonical nodes/edges into the intended PostgreSQL world, test duplicate/conflicting producers/concurrency, and validate source-to-exporter provenance and full hyperfabric commuting maps (the current context incidence view makes no gluing theorem).
+6. **PERF01–06** Run 3+ exact-pinned corpus inputs end-to-end through elaboration and PostgreSQL; record p50/p95/p99, throughput, peak RSS/disk, typed-declaration count and incomplete/failed receipts by stage.
+
+
+
 This branch is separate from PR #1483. It does not touch the worker's dirty
 Karp21 checkout or change PR #1483's index implementation.
 
