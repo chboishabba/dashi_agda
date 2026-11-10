@@ -104,3 +104,5 @@ YK8: compare RG-depth distance to the actual original observer spatial metric at
 YK9: source-complete metric-space transfer (real completeness/topology/Borel measure), including zero/positive measure subtleties and avoidance of unproved global ultrametric/euclidean identification.
 YK10: original tube direction, segment incidence and scale-distortion bridge, or an independently selected Euclidean Kakeya image.
 YK11: use source-pinned external Lean unconditional Kakeya theorem through a theorem-type/domain correspondence; keep Lean/Agda kernel trust separate.
+
+Additional original-source no-go closed in the new module: `addressOnlyProjectionCannotRepresentBothContexts` shows no single address-only decoder can agree with both independently defined contextual projections at the same actual fine address. This is proved by equality transport into the preexisting context difference, not by assuming the p-adic carrier determines a physical metric.
