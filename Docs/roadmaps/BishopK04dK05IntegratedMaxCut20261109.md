@@ -825,3 +825,27 @@ Bishop equality remain open, as do independent zeta/Gamma/Xi.
 All new modules are source-written only, NOT kernel checked.
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for exact names, source receipts and narrowed high-alpha obligations.
+
+
+### 2026-11-10: full rational Gaussian Machin phase and canonical-power prior art
+
+`BishopMachinOriginalCayleyPhaseCompositionExact.agda` now
+source-writes the exact original `Q[i]` phase equation
+`C(1/5)^4 × conjugate(C(1/239)) = i`, with the stronger
+`C(1/5)^4 = i × C(1/239)` and coordinate consequences.
+The original Cayley point owner pays the denominator equations.
+This is strictly finite algebra, not the original Bishop
+`exp_C(2i atan_B)` analytic same-function identity.
+
+**Correction:** `BishopNatEmbeddingPowerExact.natRealPowNat`
+already proves arbitrary canonical natural powers commute with
+the actual `Nat → BishopReal` embedding; the validation module
+already crosschecks it. Do not keep listing P2 canonical powers
+as unpaid. The actual P2 unpaid leaf is independently selected
+analytic Riemann-zeta function equality, its source convergence
+and analytic continuation. P3 Gamma/Xi remains analytically open.
+
+Source changes `866ad95`, `1185469`; golden imports
+`68afac0`, `cab8a39`, `541dcc7`.
+Full proof ledger: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+No new Agda kernel receipt.
