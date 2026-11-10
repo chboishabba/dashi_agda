@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Foundations.KakeyaYMUltrametricPhysicalComparisonExact where
 
 ------------------------------------------------------------------------
@@ -15,6 +14,8 @@ module DASHI.Physics.Foundations.KakeyaYMUltrametricPhysicalComparisonExact wher
 -- Sources: Wang and Zahl (2025, arXiv:2502.17655);
 -- Guth, Wang and Zahl (2026, arXiv:2601.14411);
 -- original DASHI RG/ultrametric/physical projection theorem owners.
+-- This module cannot be --safe while importing existing unmarked source
+-- owners (RG, pants and context projection). It adds no postulates.
 -- This is a conditional finite metric *inequality*, not a Kakeya
 -- dimension theorem or a physical metric-construction certificate.
 ------------------------------------------------------------------------
