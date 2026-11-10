@@ -328,6 +328,13 @@ def main():
             "original Rhea certificate byte hash differs from pinned source; refuse Agda generation")
     certificate = load_original_receipt_json(raw)
     generated = render_agda(raw, certificate)
+    # The machine-readable result is independently computed from the
+    # strict checked original certificate, not inferred from code text.
+    original_matrix, original_metadata = check_certificate(
+        certificate, full_panel=True)
+    original_elements, _, _ = source_weights(
+        original_metadata, original_matrix)
+    _, simplex_status = rendered_source_simplex_admission(original_elements)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(generated, encoding="utf-8")
     print(json.dumps({
@@ -337,6 +344,11 @@ def main():
         "original_species": 29,
         "original_finite_reactions": 12,
         "original_nonfinite_residuals": 3,
+        "source_CHNOP_all_29_weights_positive": simplex_status["all_positive"],
+        "source_CHNOP_zero_weight_species_indices": simplex_status["zero_weight_species_indices"],
+        "source_literal_positive_simplex_agda_emitted": simplex_status["all_positive"],
+        "source_literal_zero_weight_obstruction_agda_emitted": not simplex_status["all_positive"],
+        "source_CHNOP_positivity_agda_kernel_checked": False,
         "original_release_independently_verified": False,
         "physical_kinetic_flux_proved": False,
         "agda_kernel_accepted": False,
