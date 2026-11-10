@@ -118,7 +118,8 @@ def run(repo: str, revision: str, *, max_file_bytes: int,
     with urllib.request.urlopen(req, timeout=60) as resp:
         yield from stream_archive(resp, repo, revision,
                                   max_file_bytes=max_file_bytes,
-                                  max_total_bytes=max_total_bytes,\n                                  max_transfer_bytes=max_transfer_bytes)
+                                  max_total_bytes=max_total_bytes,
+                                  max_transfer_bytes=max_transfer_bytes)
 
 
 def main() -> int:
@@ -126,12 +127,14 @@ def main() -> int:
     p.add_argument("repository")
     p.add_argument("revision")
     p.add_argument("--max-file-bytes", type=int, default=8 * 1024 * 1024)
-    p.add_argument("--max-total-bytes", type=int, default=4 * 1024 * 1024 * 1024)\n    p.add_argument("--max-transfer-bytes", type=int, default=2 * 1024 * 1024 * 1024)
+    p.add_argument("--max-total-bytes", type=int, default=4 * 1024 * 1024 * 1024)
+    p.add_argument("--max-transfer-bytes", type=int, default=2 * 1024 * 1024 * 1024)
     args = p.parse_args()
     try:
         for item in run(args.repository, args.revision,
                         max_file_bytes=args.max_file_bytes,
-                        max_total_bytes=args.max_total_bytes,\n                        max_transfer_bytes=args.max_transfer_bytes):
+                        max_total_bytes=args.max_total_bytes,
+                        max_transfer_bytes=args.max_transfer_bytes):
             print(json.dumps(item, sort_keys=True), flush=True)
         return 0
     except (ValueError, ArchiveError, OSError, tarfile.TarError) as exc:
