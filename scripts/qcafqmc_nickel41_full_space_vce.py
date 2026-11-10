@@ -130,12 +130,23 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     nalpha=nbeta=mol.nelectron//2
     if checkpoint:
         ci,alpha,beta=export_particle_hole(checkpoint,8,4,4,cutoff=0.)
-        core=np.tile(np.arange(ncore,dtype=np.int32),(len(ci),1))
-        oa=np.hstack((core,alpha+ncore))
-        ob=np.hstack((core,beta+ncore))
-        trial=ParticleHole((ci,oa,ob),(nalpha,nbeta),nmo,
+        # iPie ParticleHole.setup_basic_wavefunction automatically inserts
+        # the ncore 'melting' orbitals when the supplied determinants have
+        # fewer electrons than its full-system (nalpha,nbeta) specification.
+        # Supplying only the original 4+4 active indices is essential:
+        # use_active_space=True keeps the Wick's-theorem excitation maps
+        # confined to eight correlated orbitals rather than the entire MO
+        # basis. The resulting many-electron trial is still precisely
+        # |core occupied> tensor |active NQS> tensor |virtual vacuum>.
+        trial=ParticleHole((ci,alpha,beta),(nalpha,nbeta),nmo,
                            num_dets_for_trial=-1,
-                           num_dets_for_props=len(ci))
+                           num_dets_for_props=len(ci),
+                           use_active_space=True)
+        if trial.nfrozen!=ncore or trial.nact!=8:
+            raise RuntimeError("ipie core/active melting construction is inconsistent")
+        if not (np.all(trial.occa[:,:ncore] == np.arange(ncore)[None,:])
+                and np.all(trial.occb[:,:ncore] == np.arange(ncore)[None,:])):
+            raise RuntimeError("ipie melted core occupation differs from reference")
         kind="paired_NQS_full_space_trial"
     else:
         orb=np.eye(nmo,dtype=np.complex128)[:,:nalpha]
@@ -155,6 +166,9 @@ def run(config_path,checkpoint=None,execute=False,max_basis=220,
     if not out.is_file():raise RuntimeError("missing ipie energy estimates")
     receipt.update({"executed":True,"full_basis_functions":nmo,
                     "ncore_doubly_occupied_trial":ncore,
+                    "ipie_active_space_acceleration":True,
+                    "ipie_trial_nact":trial.nact if checkpoint else None,
+                    "ipie_trial_nfrozen":trial.nfrozen if checkpoint else None,
                     "active_MO_columns_sorted":[ncore,ncore+7],
                     "selected_mo_sha256":selected_mo_sha256,
                     "SCF_energy_hartree":float(energy),
