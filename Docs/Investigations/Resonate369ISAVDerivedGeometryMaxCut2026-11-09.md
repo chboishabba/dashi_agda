@@ -366,3 +366,56 @@ All generic mathematical and simulator work is DASHI-original; historical source
 - P3: independent same-boundary mechanical/electrical output power and input/calibration, with uncertainties, remains OPEN.
 
 Source and attribution rule: record separately historical Infinity SAV/Slobodian descriptions, Holmstrom/Resonate369 original source claims, and DASHI-authored conditional steelman. This PR vendors **no** source STL, STEP, CAD, or manufacturer schematic.
+
+## 2026-11-10 steelman optimisation tranche: actual current shaping and drive comparison
+
+Added `scripts/circuit36927_motor_steelman_opt.py` (commit `cd1dbfa9`). This is independent DASHI code, **not recovered or attributed manufacturer wiring**. It works with a fixed inductance `L`, resistance `R`, and sinusoidal permanent-magnet flux linkage `psi_PM(theta) = -K cos(theta)`. It uses a full-revolution rotor phase sample and a four-quadrant *hypothetical* converter when bipolar currents are allowed.
+
+### Model equations and accounting
+- `v=R*i+L*di/dt+omega*K*sin(theta)`.
+- `tau(theta)=K*i*sin(theta)`.
+- Periodic stored field energy `E_L=L*i²/2` returns to its initial value. Discrete central derivatives are skew-adjoint on the cyclic grid, so period-averaged `pin_power - shaft_power - copper_loss = 0` numerically to roundoff.
+- Forward electrical conversion `gross_pin_import / eta`; returned pin power credited at `eta * gross_pin_regen`; add 0.15 W controller overhead. This is a simplified bidirectional drive model: no further diode, core, bearing, iron, hysteresis, switching dynamics or inverter-current dependence is admitted.
+- For a fixed positive mean torque `tau_target`, minimise `R*mean(i²)` over per-phase `0<=i<=Imax` (unipolar), or `-Imax<=i<=Imax` (bipolar). Convex KKT gives `clip(lambda*K*sin(theta), bounds)`; lambda selected by bisection to meet the requested torque. This solves **copper minimisation only**, not arbitrary efficiency optimisation including nonlinear switching or torque ripple.
+
+### Explicit baseline assumptions (illustrative only)
+`R=1.5 ohm; L=20 mH; K=0.06 N m/A; omega=100 rad/s; tau_target=0.015 N m; Vbus=24 V; Imax=2 A; forward and reverse efficiency=97%; idle/controller=0.15 W`.
+
+At 243 phase samples, same 1.5 W shaft load:
+| current strategy | copper W | DC-bus W | shaft/DC-bus efficiency |
+|---|---:|---:|---:|
+| clipped optimum unipolar positive half-sinusoid | 0.375000 | 2.083210 | 72.004% |
+| clipped optimum bipolar full sinusoid (different drive architecture) | 0.187500 | 1.889726 | 79.377% |
+| smooth broad half-cycle pulse (sin²) | 0.390351 | 2.098815 | 71.469% |
+| smooth narrow half-cycle pulse (sin⁶) | 0.499401 | 2.211238 | 67.835% |
+
+All selected smooth strategies satisfy the assumed 24 V and 2 A constraints at 100 rad/s. An instantaneous square current pulse is *not* considered feasible for a finite-inductance, finite-voltage drive.
+
+### Symbolic lower bounds
+For unipolar positive-torque operation, with uniform complete angle integration and `k_+(theta)=K*max(sin(theta),0)`, `mean(k_+²)=K²/4`. Cauchy–Schwarz yields
+`mean(R i²) >= 4 R tau_target²/K²`, equality for `i proportional max(sin(theta),0)` if unsaturated.
+For bipolar, `mean(k²)=K²/2`; `mean(R i²) >= 2 R tau_target²/K²`, equality for `i proportional sin(theta)` if unsaturated.
+At these parameters: 0.375 W and 0.1875 W, matching the numerical QP optimal currents. These bounds are contingent on the selected constant-K sinusoidal source and do **not** assert optimality over all possible rotor geometries or machines.
+
+### Voltage-limited illustrative envelope
+With current waveform held at each copper-optimum shape and 24 V terminal-magnitude bound:
+- unipolar: ~356.90 rad/s / ~3408 RPM; ~5.354 W shaft, ~88.39% predicted shaft/bus;
+- bipolar: ~382.39 rad/s / ~3652 RPM; ~5.736 W shaft, ~91.68% predicted shaft/bus.
+These are *electrical waveform feasibility bounds in an idealised, loss-incomplete, prescribed-speed model*, not certified maximum motor speeds. Rotor mechanics, bearings, core saturation and switching/controller bandwidth are not represented; do not construct devices to these speeds from this calculation.
+
+### Sensitivity at 100 rad/s, fixed load
+With R = 0.5, 1.5, 3 ohms and converter eta = 90%, 97%, 99%:
+- unipolar range ~56.59%–83.73% shaft/bus,
+- bipolar range ~67.16%–86.79% shaft/bus.
+This underscores why an unmeasured winding resistance, flux constant or converter behavior cannot be treated as a manufacturer performance figure.
+
+### Regression and acceptance boundary
+The independent local prototype `/mnt/data/circuit36927/optimal_pulse_motor.py` passed current/voltage limits, energy-balance residual, torque target, convex copper minima relative to smooth pulses and phase resolutions 27/81/243/729; the authoring session also checked the voltage-speed and resistance/converter sensitivity values. Exact GitHub script revision `scripts/circuit36927_motor_steelman_opt.py` has NOT been re-downloaded and executed byte-for-byte, owing to unavailable container outbound access. Agda kernel acceptance on PR #1482 remains OPEN.
+
+### Remaining max-cut after credible steelman
+1. Independently run exact committed Python scripts and compile all new Agda declarations using pinned Agda toolchain; correct failures.
+2. Replace constant-L and sinusoidal K with `L(theta,i)`, PM linkage `psi_PM(theta)`, actual winding and source geometry, and measured/specified air gap; otherwise any optimum is model-dependent.
+3. Add explicit current rise/fall and inductive-discharge recovery within a fully consistent drive switching law, diode or synchronous rectifier and converter capacities. Current is prescribed, not generated by an implementable PWM controller in this model.
+4. Optimise bus energy with realistic conduction/switching losses, controller overhead, torque ripple, peak thermal load and thermal limits; copper-optimal current is not automatically the globally optimal practical controller.
+5. Weld a source-selected netlist and original named device to the abstract circuit graph; no source-specific Slobodian or Holmstrom physical identification follows from the current assumptions.
+6. Validate whole-system real energy balance with paired electrical/mechanical instruments, and uncertainty before any performance attribution.
