@@ -24,6 +24,7 @@ import DASHI.Information.PNFSampleMeanExact as Mean
 import DASHI.Information.PNFCentredCovarianceExact as Centre
 import DASHI.Information.PNFCovarianceQuadraticIdentityExact as Quadratic
 import DASHI.Information.PNFFiniteRankNullityBridgeExact as Rank
+import DASHI.Information.PNFHistoryTimeTernaryCovarianceFibreExact as Fixed
 
 record HistoryTimeVariableDimensionFibre
   (K : Ring.ExactOrderedCommutativeRing)
@@ -141,3 +142,46 @@ record TemporalCoordinateTransport
         (coordinateMap i) (coordinateMap j)
 
 open TemporalCoordinateTransport public
+
+-- Embed any earlier fixed-dimension time/history family into this
+-- canonical dependent (n(t),p(t)) model. This is a true conservative
+-- extension: the same fibre, source, window and consumer are retained.
+fixedWindowAsVariableDimension :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {depth k p : Nat} →
+  (F : Fixed.HistoryTimeTernaryCovarianceFibre K depth k p) →
+  HistoryTimeVariableDimensionFibre K depth
+fixedWindowAsVariableDimension K {depth} {k} {p} F = record
+  { History = Fixed.History F
+  ; Time = Fixed.Time F
+  ; fabric = Fixed.fabric F
+  ; situatedAt = Fixed.situatedAt F
+  ; kAt = λ _ _ → k
+  ; pAt = λ _ _ → p
+  ; actualWindowAt = Fixed.windowAt F
+  ; scaleAt = Fixed.scaleAt F
+  ; scaleNonnegativeAt = Fixed.scaleNonnegativeAt F
+  ; sourceRefAt = Fixed.sourceReferenceAt F
+  ; consumerVersionAt = Fixed.consumerVersionAt F
+  }
+
+fixedCovarianceIsVariableCovariance :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {depth k p : Nat} →
+  (F : Fixed.HistoryTimeTernaryCovarianceFibre K depth k p) →
+  (h : Fixed.History F) → (t : Fixed.Time F) →
+  (i j : Fin p) →
+  variableCovarianceAt K (fixedWindowAsVariableDimension K F) h t i j
+  ≡ Fixed.covarianceAt K F h t i j
+fixedCovarianceIsVariableCovariance K F h t i j = refl
+
+fixedQuadraticIsVariableQuadratic :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {depth k p : Nat} →
+  (F : Fixed.HistoryTimeTernaryCovarianceFibre K depth k p) →
+  (h : Fixed.History F) → (t : Fixed.Time F) →
+  (v : Fin p → Scalar.Scalar (Ring.orderedScalar K)) →
+  variableCovarianceQuadraticAt K
+    (fixedWindowAsVariableDimension K F) h t v
+  ≡ Fixed.quadraticAt K F h t v
+fixedQuadraticIsVariableQuadratic K F h t v = refl
