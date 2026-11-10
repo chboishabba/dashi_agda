@@ -15,12 +15,12 @@ module DASHI.Physics.Foundations.KakeyaPadicPrefixGeometryNoGoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Data.Nat using (_≤_; _∸_)\nopen import Relation.Binary.PropositionalEquality using (subst)
 open import Data.Empty using (⊥)
 open import Data.Vec using ([]; _∷_) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Geometry.SSP369Ultrametric as Ultra
-import DASHI.Biology.PadicCylinderLODReasoningField as Cylinder
+import DASHI.Biology.PadicCylinderLODReasoningField as Cylinder\nimport DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 
 parent : Cylinder.DepthOneAddress
 parent = Ultra.digit3 vcons vnil
@@ -117,3 +117,39 @@ voxelLineArithmeticProgression = refl
 -- This finite voxel line does not claim any unit segment in every
 -- Euclidean direction. Physical continuum metric and line transport
 -- must still be established from original observer/YM/KK evidence.
+
+
+------------------------------------------------------------------------
+-- GENUINE ALL-DEPTH REFINEMENT RESIDUAL ON THE SOURCE ORIGINAL CARRIER.
+--
+-- The prefix/reconstructed-last-digit comparison is not a global
+-- p-adic -> Euclidean isometry. But the ORIGINAL refinement theorem
+-- provides a bounded one-digit error at EVERY n without guessing
+-- physical metric constants or constructing a new ultrametric.
+------------------------------------------------------------------------
+
+oneDiscardedDigit : (n : Nat) → suc n ∸ n ≡ 1
+oneDiscardedDigit zero = refl
+oneDiscardedDigit (suc n) = oneDiscardedDigit n
+
+-- At each finite depth n+1, selecting the canonical last digit3
+-- discards at most ONE unit of the original n+1-address ultrametric.
+-- This is a constructed proof on the original Address and distance.
+uniformOriginalPrefixReconstructionResidual :
+  ∀ {n : Nat} (parent : Ultra.Address n)
+    (actualDigit : Ultra.Digit369) →
+  Ultra.distance
+    (Pants.appendDigit parent actualDigit)
+    (Pants.appendDigit parent Ultra.digit3)
+  ≤ 1
+uniformOriginalPrefixReconstructionResidual {n} parent actualDigit =
+  subst
+    (λ bound →
+      Ultra.distance
+        (Pants.appendDigit parent actualDigit)
+        (Pants.appendDigit parent Ultra.digit3)
+      ≤ bound)
+    (oneDiscardedDigit n)
+    (Ultra.prefixMatch→distanceBound
+      (Pants.refinedSiblingsShareParentPrefix
+        parent actualDigit Ultra.digit3))
