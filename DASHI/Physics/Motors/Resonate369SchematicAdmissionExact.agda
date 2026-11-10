@@ -55,7 +55,8 @@ record SelectedEvidence (design : DesignIdentity) : Set where
   field
     receipt : SourceReceipt
     sameDesign : SourceReceipt.design receipt ≡ design
-    inspectedSource : Set
+    inspectedSource : Bool
+    inspectedSourceAttested : inspectedSource ≡ true
 
 data Terminal : Set where
   terminalA terminalB : Terminal
@@ -78,7 +79,7 @@ record Port : Set where
 -- A netlist is a *model*; absence of listed edges does not imply
 -- the absence of physical connections. No edge is asserted here
 -- about a particular manufactured circuit.
-record Netlist : Set where
+record Netlist : Set₁ where
   constructor netlist
   field
     Connected : Port → Port → Set
@@ -97,7 +98,7 @@ record AdmittedConnection
 -- first estimating resistance, voltage, or energy.
 data Reachable (n : Netlist) : Port → Port → Set where
   same : ∀ {p} → Reachable n p p
-  then : ∀ {p q r} →
+  edgeStep : ∀ {p q r} →
     Netlist.Connected n p q →
     Reachable n q r →
     Reachable n p r
@@ -108,7 +109,7 @@ twoEdgePath :
   Netlist.Connected n p q →
   Netlist.Connected n q r →
   Reachable n p r
-twoEdgePath n p q r pq qr = then pq (then qr same)
+twoEdgePath n p q r pq qr = edgeStep pq (edgeStep qr same)
 
 -- Describing all coils as 'in series' is a textual source assertion
 -- unless selected electrical junctions confirm an actual one-path
@@ -119,7 +120,8 @@ record SelectedSeriesTrace (design : DesignIdentity) (n : Netlist) : Set where
     source : SelectedEvidence design
     entry exit : Port
     connectedSeriesPath : Reachable n entry exit
-    noParallelBypassEstablished : Set
+    noParallelBypassEstablished : Bool
+    noParallelBypassAttested : noParallelBypassEstablished ≡ true
 
 -- Additional physical assumptions are first-class gates.
 -- Nothing below constructs these records for real devices.
@@ -180,8 +182,8 @@ pairedCoilsPredictedSignAgreement pair
 record ExperimentClosure (design : DesignIdentity) : Set where
   constructor experimentClosure
   field
-    measuredInputPower : Set
-    measuredOutputPower : Set
-    storageChangeAccounted : Set
-    independentCalibration : Set
-    uncertaintyBound : Set
+    measuredInputPower : Bool
+    measuredOutputPower : Bool
+    storageChangeAccounted : Bool
+    independentCalibration : Bool
+    uncertaintyBound : Bool
