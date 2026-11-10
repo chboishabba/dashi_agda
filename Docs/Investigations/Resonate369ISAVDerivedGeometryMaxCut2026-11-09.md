@@ -165,3 +165,26 @@ New module `DASHI.Physics.Motors.Resonate369SchematicAdmissionExact.agda` replac
 - P0 (OPEN): observed simultaneous cycle-integrated input and output, energy storage, shaft torque/speed with instrument uncertainty; no over-unity inference before this.
 
 Avoid treating the constructibility of a `Set`-valued witness as real-world inspection: provenance requires matching a source receipt to an actual source and its content, outside of Agda's logical kernel.
+
+### 2026-11-10 additional canonical netlist model
+
+Added `DASHI.Physics.Motors.Resonate369SeriesTraceModelExact`, commit `eadf0092`.
+
+- Defines `SeriesEdge` with distinct through-coil traversal and inter-coil junction constructors.
+- Defines `canonicalSeriesNetlist` and a generic path concatenation `appendReachable`.
+- Defines `canonicalSeriesPath n` for a model containing `n+1` nominal series coils.
+- Instantiates `twelveCoilSeriesPath` for coil indices 0 through 11.
+- Crucially, does **not** construct a real-device `SelectedSeriesTrace`, nor claim that the model is the manufacturer's actual wiring.
+
+The schematic admission file was corrected at commit `cd031186` to use `Netlist : Set₁` (since its edge family takes values in `Set`), to avoid reserved `then` as a constructor, and to expose Boolean attestations for source inspection and no-bypass status. These remain trust-boundary assertions requiring an independent exact source inspection.
+
+#### Remaining max-cut after this implementation
+S0 model (implemented, kernel unchecked): generic topology, two-edge derivation, canonical series model, conditional winding sign.
+S1 source (open): actual original/source-specific schematics or annotated build wiring, with exact URL/revision and wire-to-port transcription.
+S2 weld (open): source-depicted edges = model `SeriesEdge` for the same Dodecatron build revision, including bypass exclusion, coil terminal sign and polarity.
+S3 switching (open): real V1 reed contact and commutation/flyback graph; do not identify 'recycling' merely from coil-switch presence.
+G1 physical geometry (open): two C07 angled stations and measured air gap from authorized read-only reference.
+V0 proof (open): pinned Agda kernel checking on actual branch.
+P0 experiment (open): full source/output, storage and mechanical load energy accounting.
+
+Public Friendbeacon listings are sufficient for **design claims**; not for proof that all physically relevant netlist edges are present. No vendor CAD was added.
