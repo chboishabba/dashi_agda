@@ -17,6 +17,7 @@ import DASHI.Information.PNFHistoryTimeTernaryCovarianceFibreExact as Native
 import DASHI.Finance.TemporalMarketFibreExact as Market
 import DASHI.Finance.PointInTimeUniverseFibreExact as PIT
 import DASHI.Finance.DashiTradeFibreBridgeExact as Trade
+import DASHI.Trading.PermissionKernel as Legacy
 
 record HistoryTimeMarketWindow
   (K : Ring.ExactOrderedCommutativeRing)
@@ -100,9 +101,9 @@ situatedTradePermissionIsOriginalKernel :
   (h : Native.History F) → (t : Native.Time F) →
   (s : TimeIndexedTradeSituation K F W h t) →
   Trade.legacyPermissionFor (situatedTrade s) ≡
-  Trade.legacyPermissionFor (situatedTrade s)
-situatedTradePermissionIsOriginalKernel K F W h t s =
-  Agda.Builtin.Equality.refl
+  Legacy.authorize (Legacy.quotient
+    (Trade.legacyWindow (situatedTrade s)))
+situatedTradePermissionIsOriginalKernel K F W h t s = refl
 
 -- Explicit negative-control owners already proved by financial code.
 futureUniverseCannotBeTransportedBackToPast :
