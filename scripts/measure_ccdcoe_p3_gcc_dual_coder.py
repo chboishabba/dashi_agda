@@ -65,7 +65,9 @@ def analyse_dual(rows: list[dict], focus: str, intervention_date: str,
         for frame in (row["frame"], row["second_frame"]))
     chance = sum((counts[label] / (2 * n))**2 for label in base.FRAMES)
     observed = agreement / n
-    pi = (observed - chance) / (1 - chance) if chance < 1 else 1.0
+    # With one pooled category, expected agreement is one and Scott's pi
+    # has a zero denominator. Perfect raw agreement does not make pi = 1.
+    pi = (observed - chance) / (1 - chance) if chance < 1 else None
 
     bounds: dict[str, dict] = {}
     for arm in sorted(base.ARMS):
@@ -106,7 +108,8 @@ def analyse_dual(rows: list[dict], focus: str, intervention_date: str,
         "source_bytes_verified": not synthetic_fixture,
         "focus": focus,
         "raw_coding_agreement": round(observed, 6),
-        "scott_pi_five_frame_categories": round(pi, 6),
+        "scott_pi_five_frame_categories": None if pi is None else round(pi, 6),
+        "scott_pi_defined": pi is not None,
         "coding_disagreements": n - agreement,
         "frame_share_bounds_by_cell": bounds,
         "descriptive_did_coder1": first["descriptive_difference_in_differences"],
@@ -154,6 +157,16 @@ def self_test() -> None:
         assert matched["scott_pi_five_frame_categories"] == 1.0
         assert matched["descriptive_did_partial_coding_interval"] == [
             0.666667, 0.666667]
+        # Two coders can agree on every article but use only one category.
+        # This yields raw agreement 1, while Scott's pi is undefined (0/0).
+        constant = [{**row, "frame": "science_uncertainty",
+                     "second_frame": "science_uncertainty"} for row in rows]
+        degenerate = analyse_dual(constant, "science_uncertainty", **kwargs)
+        assert degenerate["raw_coding_agreement"] == 1.0
+        assert degenerate["scott_pi_five_frame_categories"] is None
+        assert degenerate["scott_pi_defined"] is False
+        assert degenerate["coding_disagreements"] == 0
+        assert degenerate["descriptive_did_partial_coding_interval"] == [0.0, 0.0]
         changed = [dict(r) for r in rows]
         changed[0]["second_frame"] = (
             "other_or_undetermined" if changed[0]["frame"] ==
@@ -213,7 +226,7 @@ def self_test() -> None:
             pass
         else:
             raise AssertionError("Unverified original file admitted")
-    print("PASS: independently attributed dual code, Scott pi, coding ambiguity bounds, source bytes and negative fixtures")
+    print("PASS: independent attribution, degenerate Scott pi undefined, coding ambiguity bounds, source bytes and negative fixtures")
 
 
 def main() -> None:
