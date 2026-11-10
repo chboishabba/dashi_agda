@@ -27,6 +27,10 @@ record OrderedEnergyCarrier : Set₁ where
       a ⊑ b → b ⊑ c → a ⊑ c
     orderLeftMonotone : (a : Energy) {b c : Energy} →
       b ⊑ c → (a ⊕ b) ⊑ (a ⊕ c)
+    orderRightMonotone : (c : Energy) {a b : Energy} →
+      a ⊑ b → (a ⊕ c) ⊑ (b ⊕ c)
+    orderCancelRight : (a b c : Energy) →
+      (a ⊕ c) ⊑ (b ⊕ c) → a ⊑ b
     nonnegativeSum : {a b : Energy} →
       zeroEnergy ⊑ a → zeroEnergy ⊑ b →
       zeroEnergy ⊑ (a ⊕ b)
@@ -113,3 +117,54 @@ module EnergyLaws (O : OrderedEnergyCarrier) where
         (cong (λ x → initial ⊕ x) creditZero)
         (energyRightUnit initial))
       (historyUpperBound history)
+
+  -- Nonzero residual or exterior work is permissible when the source
+  -- and numerical certificates show loss dominates total credit.
+  creditPaidByLoss : {initial final : Energy} →
+    (s : EnergyStep initial final) →
+    credit s ⊑ loss s → final ⊑ initial
+  creditPaidByLoss {initial} {final} s paid =
+    orderCancelRight final initial (loss s)
+      (subst (λ x → x ⊑ (initial ⊕ loss s))
+        (sym (exactLedger s))
+        (orderLeftMonotone initial paid))
+
+  paidCreditsCompose :
+    {initial middle final : Energy}
+    (first : EnergyStep initial middle)
+    (second : EnergyStep middle final) →
+    credit first ⊑ loss first →
+    credit second ⊑ loss second →
+    credit (compose first second) ⊑ loss (compose first second)
+  paidCreditsCompose first second firstPaid secondPaid =
+    orderTransitive
+      (orderLeftMonotone (credit first) secondPaid)
+      (orderRightMonotone (loss second) firstPaid)
+
+  data PaidEnergyHistory : Energy → Energy → Set where
+    paidOne : {initial final : Energy}
+      (s : EnergyStep initial final) →
+      credit s ⊑ loss s → PaidEnergyHistory initial final
+    paidFollow : {initial middle final : Energy}
+      (s : EnergyStep initial middle) →
+      credit s ⊑ loss s →
+      PaidEnergyHistory middle final →
+      PaidEnergyHistory initial final
+
+  paidHistoryReceipt : {initial final : Energy} →
+    PaidEnergyHistory initial final →
+    Σ (EnergyStep initial final)
+      (λ s → credit s ⊑ loss s)
+  paidHistoryReceipt (paidOne s paid) = s , paid
+  paidHistoryReceipt (paidFollow s paid rest)
+    with paidHistoryReceipt rest
+  ... | next , nextPaid =
+    compose s next , paidCreditsCompose s next paid nextPaid
+
+  allPaidEnergyHistoriesNonincreasing :
+    {initial final : Energy} →
+    PaidEnergyHistory initial final →
+    final ⊑ initial
+  allPaidEnergyHistoriesNonincreasing history
+    with paidHistoryReceipt history
+  ... | step , paid = creditPaidByLoss step paid
