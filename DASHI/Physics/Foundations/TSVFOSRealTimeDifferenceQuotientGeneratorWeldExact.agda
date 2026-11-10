@@ -928,6 +928,87 @@ module _
     originalPhysicalEnergyGraphBackward
       source metric conversion a b
 
+
+  ------------------------------------------------------------------------
+  -- P07.L08 SAME ORIGINAL PHYSICAL OPERATOR GRAPH -> EIGENMODE BIDI.
+  --
+  -- This is not a NEW spectral or operator identity assumption.
+  -- It composes the previously derived two-way actual energy graph
+  -- with the ORIGINAL real-step scalar linearity of J, preserving the
+  -- source-chosen energy operators and their domain predicates.
+  --
+  -- The scalar carrier below is the source's RealStep action.  An
+  -- identification with physically calibrated energy eigenvalues
+  -- requires a separately selected physical scalar interpretation.
+  ------------------------------------------------------------------------
+
+  OriginalObserverScalarEigenmode :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState) → Set
+  OriginalObserverScalarEigenmode source conversion scalar a =
+    OriginalObserverEnergyGraph source conversion
+      a (observerScale source scalar a)
+
+  OriginalOSScalarEigenmode :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState) → Set
+  OriginalOSScalarEigenmode source conversion scalar a =
+    OriginalOSEnergyGraph source conversion
+      (J a) (osScale source scalar (J a))
+
+  originalObserverScalarEigenmodeToOS :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState) →
+    OriginalObserverScalarEigenmode source conversion scalar a →
+    OriginalOSScalarEigenmode source conversion scalar a
+  originalObserverScalarEigenmodeToOS
+      source conversion scalar a (domain , energyEquation) =
+    mappedDomain source a domain ,
+    trans
+      (sym (originalSelectedPhysicalEnergyIntertwines
+        source conversion a domain))
+      (trans (cong J energyEquation)
+        (linearScale source scalar a))
+
+  originalOSScalarEigenmodeToObserver :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState) →
+    OriginalOSScalarEigenmode source conversion scalar a →
+    OriginalObserverScalarEigenmode source conversion scalar a
+  originalOSScalarEigenmodeToObserver
+      source metric conversion scalar a (domain , energyEquation) =
+    originalPhysicalEnergyGraphBackward source metric conversion
+      a (observerScale source scalar a)
+      (domain ,
+        trans energyEquation (sym (linearScale source scalar a)))
+
+  originalSelectedScalarEigenmodesBidi :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (a : ObserverState) →
+    (OriginalObserverScalarEigenmode source conversion scalar a →
+      OriginalOSScalarEigenmode source conversion scalar a)
+    ×
+    (OriginalOSScalarEigenmode source conversion scalar a →
+      OriginalObserverScalarEigenmode source conversion scalar a)
+  originalSelectedScalarEigenmodesBidi
+      source metric conversion scalar a =
+    originalObserverScalarEigenmodeToOS
+      source conversion scalar a ,
+    originalOSScalarEigenmodeToObserver
+      source metric conversion scalar a
+
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
 -- carrier and its value: the genuinely physical Hilbert generator
