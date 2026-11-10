@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.Motors.FilsingerLydenCircuit36927AdapterExact where
 
 -- A THIN ADAPTER to existing PR #1482's common component/pin/wire model.
