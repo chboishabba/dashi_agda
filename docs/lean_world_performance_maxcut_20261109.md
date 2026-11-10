@@ -156,9 +156,11 @@ The source inventory requires no permanent repository checkout, but a
 single giant source blob still occupies bounded temporary memory. Archive
 transport may transfer enormous non-Lean content; enforce network, compressed
 byte, wall-clock and total uncompressed budgets at the orchestrator.
-The initial archive streamer currently limits *Lean source* uncompressed
-bytes, not total network download. This must be closed before untrusted
-bulk use.
+The archive streamer now enforces compressed transport, per-Lean-file and
+aggregate Lean-source byte budgets. Whole-repository content/CPU/wall-clock
+budgets still require orchestration, and a tar member expansion attack remains
+a concern for other non-Lean entries unless aggregate extracted byte budgets
+are separately enforced.
 
 Do not report repository completion when a tree was truncated, source skipped
 by a cap, a request failed, or an elaboration import closure was incomplete.
