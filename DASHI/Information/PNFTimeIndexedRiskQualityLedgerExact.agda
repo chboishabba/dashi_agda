@@ -45,11 +45,16 @@ record PointInTimeLossLedger (m : Nat) : Set where
     decisionTime : Fin m → Nat
     observationTime : Fin m → Nat
     observationAvailableAt : Fin m → Nat
-    forwardEvaluation :
+    strictlyForwardEvaluation :
       (i : Fin m) →
-      Temporal.ForwardPath (decisionTime i) (observationTime i)
-    -- The forward evaluation path only constrains event chronology.
-    -- A consumer must separately pay source availability/forecast freeze.
+      Temporal.ForwardPath (suc (decisionTime i)) (observationTime i)
+    predictionPublishedAt : Fin m → Nat
+    publishedBeforeDecision : (i : Fin m) →
+      predictionPublishedAt i ≤ decisionTime i
+    observationCannotArriveBeforeEvent : (i : Fin m) →
+      observationTime i ≤ observationAvailableAt i
+    -- A heldout result may arrive after decision and even after its
+    -- event; its recorded value must not enter the frozen forecast.
     realizedRisk : Fin m → Nat
     baselineRiskForecast : Fin m → Nat
     cleanedRiskForecast : Fin m → Nat
@@ -81,7 +86,8 @@ record QualifiedRiskEvidence {m : Nat}
     -- concrete >=2 proof avoids a single-fold 'improvement' promotion.
     atLeastTwoFolds : suc (suc zero) ≤ minHeldoutFolds
     noBackdatedPrediction : (i : Fin m) →
-      Temporal.ForwardPath (decisionTime L i) (observationTime L i)
+      Temporal.ForwardPath (suc (decisionTime L i))
+        (observationTime L i)
     cleanedNotWorseOnSelectedLoss :
       cleanedSquaredRiskLoss L ≤ baselineSquaredRiskLoss L
 
