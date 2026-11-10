@@ -16,6 +16,7 @@ import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Ring
 import DASHI.Information.PNFSampleMeanExact as Mean
 import DASHI.Information.PNFCentredRankFactorisationExact as Factor
 import DASHI.Information.PNFCentredLinearRankExact as Linear
+import DASHI.Information.PNFCovarianceRankFactorisationExact as Covariance
 open import Relation.Binary.PropositionalEquality using (sym)
 
 private
@@ -117,3 +118,57 @@ centeredMatrixRankNullity :
     + nullity O (centeredLinearMap K M)) ≡ p
 centeredMatrixRankNullity K O M =
   rankNullity O (centeredLinearMap K M)
+
+-- Same original covariance C = scale·XcᵀXc, not a hypothetical
+-- unrelated Gram matrix. Both legs of its n−1-coordinate
+-- factorisation have already been proved linear in Covariance.
+covarianceLinearMap :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  FiniteLinearMap K p p
+covarianceLinearMap K M scale = record
+  { apply = Covariance.covarianceAction K M scale
+  ; additive = Covariance.covarianceActionAdditive K M scale
+  ; homogeneous = Covariance.covarianceActionHomogeneous K M scale
+  }
+
+covarianceTailDecoderLinearMap :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  FiniteLinearMap K k p
+covarianceTailDecoderLinearMap K M scale = record
+  { apply = Covariance.covarianceFromTail K M scale
+  ; additive = Covariance.covarianceFromTailAdditive K M scale
+  ; homogeneous = Covariance.covarianceFromTailHomogeneous K M scale
+  }
+
+-- Source-specific consequence of any checked generic field rank theorem:
+-- the actual sample covariance has rank ≤ n−1.
+covarianceRankAtMostNMinusOne :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : FiniteFieldRankNullityOwner K) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  rank O (covarianceLinearMap K M scale) ≤ k
+covarianceRankAtMostNMinusOne K O M scale =
+  factorRankBound O
+    (covarianceLinearMap K M scale)
+    (tailLinearMap K M)
+    (covarianceTailDecoderLinearMap K M scale)
+    (Covariance.covarianceActionFactorsThroughTail K M scale)
+
+covarianceRankNullity :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : FiniteFieldRankNullityOwner K) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  (rank O (covarianceLinearMap K M scale)
+    + nullity O (covarianceLinearMap K M scale)) ≡ p
+covarianceRankNullity K O M scale =
+  rankNullity O (covarianceLinearMap K M scale)
