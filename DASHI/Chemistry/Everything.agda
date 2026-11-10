@@ -325,3 +325,9 @@ import DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact
 -- Solar PV/water/CO2-to-hydrocarbon ideal material and energy maxcut.
 import DASHI.Chemistry.HydrogenSolarCarbonGeneralStoichiometryExact
 import DASHI.Chemistry.HydrogenSolarCarbonEnergyOptimizationExact
+
+-- User-directed power-station maximum cut: fixed-output carbon makeup,
+-- direct-PV versus synthetic-fuel dispatch, attributed PV/biogas pilot.
+import DASHI.Chemistry.HydrogenSolarCarbonSteadyStateExact
+import DASHI.Chemistry.HydrogenPowerStationDispatchDecisionExact
+import DASHI.Chemistry.HydrogenSolarCarbonPublishedPilotExact
