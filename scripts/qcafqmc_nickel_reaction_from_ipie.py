@@ -106,7 +106,9 @@ def combine(receipt_files,discard=50,autocorrelation=True):
             raise ValueError(label+": inconsistent source geometry")
         if len({r["hamiltonian_source_sha256"] for r in rs})!=1:
             raise ValueError(label+": two trials or orbital frames were mixed")
-        if len({r["trial_type"] for r in rs})!=1:
+        if len({r["production_blocks"] for r in rs})!=1:
+        raise ValueError(label+": inconsistent production block counts")
+    if len({r["trial_type"] for r in rs})!=1:
             raise ValueError(label+": trial types mixed in a single summary")
         if len({r["n_retained_blocks"] for r in rs})!=1:
             raise ValueError(label+": inconsistent analysis windows")
