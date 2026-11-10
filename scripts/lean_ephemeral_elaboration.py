@@ -26,6 +26,25 @@ from typing import Callable
 
 from lean_world_source_world import SourceWorldBuilder, SourceConflict
 
+def compiled_dependency_digest(root: Path | None) -> str:
+    """Hash exact relative filenames and OLean bytes, not caller assertions."""
+    h = hashlib.sha256()
+    if root is None:
+        h.update(b"dashi-empty-compiled-dependency-closure-v1")
+        return h.hexdigest()
+    if not root.is_dir():
+        raise ElaborationError("compiled dependency closure directory missing")
+    paths = sorted(p for p in root.rglob("*.olean") if p.is_file())
+    for file in paths:
+        relative = file.relative_to(root).as_posix().encode("utf-8")
+        h.update(len(relative).to_bytes(8, "big"))
+        h.update(relative)
+        with file.open("rb") as stream:
+            while chunk := stream.read(65536):
+                h.update(chunk)
+    return h.hexdigest()
+
+
 HEX = re.compile(r"^[0-9a-f]{64}$")
 MODULE = re.compile(r"^[A-Za-z0-9_./-]+\.lean$")
 
@@ -94,10 +113,18 @@ class EphemeralLeanWorker:
         if (not MODULE.fullmatch(module) or
             any(part in ("", ".", "..") for part in PurePosixPath(module).parts)):
             raise ValueError("unsafe Lean module name")
+        observed_closure = compiled_dependency_digest(self.dependency_olean_dir)
+        if observed_closure != self.closure_digest:
+            raise ElaborationError("compiled dependency closure contents do not match pinned digest")
         version = self.compiler_version()
+        lock = self.flake / "flake.lock"
+        if not lock.is_file() and self.command[:1] == ("nix",):
+            raise ElaborationError("pinned Nix flake.lock missing")
+        lock_digest = _sha(lock.read_bytes()) if lock.is_file() else "external-compiler"
         identity = {
             "format": "dashi-lean-world-olean-cache-v1",
             "compiler_version": version,
+            "flake_lock_sha256": lock_digest,
             "source_sha256": _sha(source),
             "repository": receipt["repository"],
             "revision": receipt["revision"],
