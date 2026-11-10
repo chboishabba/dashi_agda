@@ -62,6 +62,18 @@ class PointInTimeRiskTests(unittest.TestCase):
                               consumer_version="v1",
                               weights=[1/3,1/3,1/3],min_training=5)
 
+    def test_hindsight_delisting_does_not_change_past_training(self):
+        rows,features=source_fixture()
+        features[0]=Feature("history-1","tape","A",0,3,10)
+        earlier=forecast_one_step(rows,features,
+            history="history-1",source="tape",asof=9,
+            consumer_version="v1",weights=[1/3,1/3,1/3])
+        later=forecast_one_step(rows,features,
+            history="history-1",source="tape",asof=10,
+            consumer_version="v1",weights=[.5,.5])
+        self.assertIn("A",earlier.feature_ids)
+        self.assertNotIn("A",later.feature_ids)
+
     def test_wrong_source_and_future_source_prohibited(self):
         rows,features=source_fixture()
         with self.assertRaises(ValueError):
