@@ -370,3 +370,11 @@ This provides a finite algebra/positive-majorant target for Bishop summation; no
 **Independent finite regression**: \`scripts/analytic_j_tetration_exp_log_composition_majorant.py\`, executed with Python exact \`Fraction\` arithmetic locally. It independently builds all finite signed and positive Cauchy compositions through degree 24, and tests the exact geometric-tail identities for rational radii. All tests passed. Added to \`scripts/check_analytic_j_tetration_golden_local.sh\`.
 
 **Next paid max-cut**: (1) Agda exact-head receipt and repairs on new files; (2) original Bishop complex factorial-exponential \`expSeries\` and same-source identification with \`BishopSetoidComplexExact.expC\` from actual exp/sin/cos series; (3) original finite Cauchy-composition coefficient and positive-tail transfer to Bishop setoid limits; (4) source proof \`exp_C(L(w))≈_C1_C+w\`; (5) source selected upper fixed point/reciprocal/disk and local inverse; (6) Koenigs holomorphic limit + Abel winding; (7) **global** Kneser normalization; in parallel the Bishop trig period and true modular \(q,\Delta,j\). Nothing in this round kernel-closes (2)–(7).
+
+
+**Selected-disk quantitative instance (exact arithmetic):** On the intended closed radius-\(1/10\) neighborhood around the upper fixed point, assuming \(137/100<|p|\) and independently justified complex division \(w=(z-p)/p\), the norm bound is \(|w|\le(1/10)/(137/100)=10/137\). Apply the all-\(N\) **ordinary-complex** finite polynomial majorant with \(N=16\):
+\[
+\bigl|\exp(L_{16}(w))-(1+w)\bigr|
+\le\frac{(10/137)^{17}}{1-10/137}<10^{-15}.
+\]
+The final strict comparison was checked using exact Python \`fractions.Fraction\`; this is **not** a Bishop-certified complex exp evaluation or selected fixed-point construction. It supplies the explicit quantitative target for the original source-identification/continuity step.
