@@ -51,6 +51,14 @@ class Tests(unittest.TestCase):
         with self.assertRaises(ArchiveError):
             list(stream_archive(src, REPO, REV, max_total_bytes=3))
 
+    def test_total_uncompressed_budget_counts_nonlean_files(self):
+        src = archive_fixture([
+            ("repo-aaaa/Huge-README", b"x"*10000),
+            ("repo-aaaa/Foo.lean", DATA),
+        ])
+        with self.assertRaises(ArchiveError):
+            list(stream_archive(src, REPO, REV, max_total_bytes=1000))
+
     def test_transfer_budget_includes_nonlean_files(self):
         src = archive_fixture([("repo-aaaa/README.md", b"x" * 20000),
                                ("repo-aaaa/Foo.lean", DATA)])
