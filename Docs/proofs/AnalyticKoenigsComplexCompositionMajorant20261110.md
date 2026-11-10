@@ -66,6 +66,34 @@ This is a uniform, explicit, constructive geometric majorant on every compact su
 6. \`originalBishopLocalInverseAtUpperFixedPoint\`: actual \(p\), \(p^{-1}\), \(\exp(p)=p\), and a disk/radius witness, then \(g(z)=p+L((z-p)/p)\), including local addition.
 7. Original holomorphic Koenigs limit, Abel branch winding/cocycle, global Kneser normalization; and in parallel, true Bishop \(q\)-period and same-object \(\Delta/j\).
 
+
+
+## Theorem 3 — finite-polynomial approximation certificate (stronger implementation cut)
+
+For each \(N\ge1\) define the *finite* source polynomial
+\[
+L_N(w)=\sum_{k=1}^{N}\frac{(-1)^{k+1}}k w^k.
+\]
+Let \(F_N(w)=\exp(L_N(w))\) denote the ordinary complex exponential of this polynomial. In its Taylor expansion \(F_N(w)=\sum_{m\ge0}c_{N,m}w^m\), the coefficients through degree \(N\) are exactly the previously proved full-composition coefficients, since replacing \(L\) by \(L_N\) changes no input degree up to \(N\). Thus \(c_{N,0}=c_{N,1}=1\), and \(c_{N,m}=0\) for \(2\le m\le N\).
+
+The **positive composition majorant** for \(F_N\) has coefficients bounded by \(b_m=1\), because every positive Cauchy composition using terms of degree \(\le N\) is a sub-sum of the full positive composition. Hence \(|c_{N,m}|\le1\) for every \(m\), including beyond the cutoff. Therefore, for any complex \(|w|\le r<1\),
+\[
+\boxed{\bigl|\exp(L_N(w))-(1+w)\bigr|
+       \le\sum_{m>N}r^m
+       =\frac{r^{N+1}}{1-r}.}
+\]
+This is a **uniform, explicit** error estimate obtained from exact finite rational coefficient cancellation and a positive geometric majorant; it does not require a Cauchy integral estimate or an analytic principal logarithm.
+
+Separately, the log polynomial itself has the uniform tail estimate
+\[
+|L(w)-L_N(w)|
+\le\sum_{k>N}\frac{r^k}{k}
+\le\frac{r^{N+1}}{(N+1)(1-r)}.
+\]
+As \(N\to\infty\), \(L_N(w)\to L(w)\) uniformly and \(\exp(L_N(w))\to\exp(L(w))\) by continuity of the ordinary complex exponential, so the boxed estimate implies \(\exp(L(w))=1+w\) on \(|w|<1\).
+
+**Preferred Bishop Agda proof cut:** source-construct \`L_N\` using finite Bishop sums and prove coefficient cancellation and the positive absolute majorant for its factorial exponential series. Use the existing Bishop real/complex convergence and continuity lemmas to pass to the canonical limit \`originalBishopLogOnePlusCanonicalLimitOnUnitDisk\`. This needs the same-carrier identification of \`BishopSetoidComplexExact.expC\` with its complex factorial series and uniform continuity/limit transport, but does **not** require prior principal-log existence. The finite estimate is valid for every \(N\), not merely the checked examples.
+
 ## Independent regression
 
 Run \`python3 scripts/analytic_j_tetration_exp_log_composition_majorant.py\`. It constructs signed and positive **finite Cauchy compositions**, separately from the previous derivative-recurrence regression, in exact \`fractions.Fraction\` arithmetic. The checks pass at total degrees \(1,2,4,8,16,24\): all signed coefficients beyond degree 1 vanish; all positive comparison coefficients equal 1; every signed coefficient magnitude is bounded by its positive counterpart. Exact rational geometric tail identities are checked for \(r=1/10,1/2,3/4,9/10\). The script is a test, not a proof of the all-degree recurrence or a Bishop-kernel receipt.
