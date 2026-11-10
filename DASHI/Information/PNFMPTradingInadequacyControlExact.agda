@@ -194,3 +194,47 @@ qualifiedMPDoesNotOverrideInventory = refl
 -- Original risk reduction remains governed by exposure-aware intent.
 -- The Dream BUY/SELL direction-only specimen must not be used as a
 -- substitute for the newer exposure-aware order-role owner.
+
+-- Additional limitation revealed by the original state machine:
+-- the permission quotient forgets model/residual/risk-penalty costs.
+-- That may be sufficient for authorization, but is NOT sufficient for
+-- evaluating the benefit of MP covariance cleaning or realised P&L.
+samePermissionDifferentModelCost :
+  Legacy.MarketWindowState
+samePermissionDifferentModelCost =
+  Legacy.marketState
+    Legacy.upward Legacy.calm Legacy.persistent Legacy.adequate
+    Legacy.clear 7 0 0 Legacy.HOLD
+
+samePermissionQuotientDespiteCostChange :
+  Legacy.quotient canonicalClear
+  ≡ Legacy.quotient samePermissionDifferentModelCost
+samePermissionQuotientDespiteCostChange = refl
+
+differentCostNotRecoverableFromPermissionQuotient :
+  Legacy.tradingAction canonicalClear
+  ≡ Legacy.tradingAction samePermissionDifferentModelCost → ⊥
+differentCostNotRecoverableFromPermissionQuotient ()
+
+permissionQuotientDoesNotDetermineCost :
+  NF.NonFactorabilityWitness
+    Legacy.quotient Legacy.tradingAction
+permissionQuotientDoesNotDetermineCost =
+  NF.nonFactorabilityWitness
+    canonicalClear samePermissionDifferentModelCost
+    samePermissionQuotientDespiteCostChange
+    differentCostNotRecoverableFromPermissionQuotient
+
+noPermissionOnlyEconomicCostModel :
+  NF.FactorsThrough
+    Legacy.quotient Legacy.tradingAction → ⊥
+noPermissionOnlyEconomicCostModel =
+  NF.witnessRulesOutEveryFlatFactorisation
+    permissionQuotientDoesNotDetermineCost
+
+-- Equal ACT authorization also does not imply equal source/economic
+-- cost, and it proves nothing about out-of-sample covariance forecast.
+sameQuotientSameActionPermission :
+  guardedPermission qualifiedRiskEstimate canonicalClear
+  ≡ guardedPermission qualifiedRiskEstimate samePermissionDifferentModelCost
+sameQuotientSameActionPermission = refl
