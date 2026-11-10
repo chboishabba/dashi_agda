@@ -17,6 +17,7 @@ open import Agda.Builtin.String using (String)
 import DASHI.Physics.Motors.Circuit36927ComponentGraphExact as Circuit
 import DASHI.Computation.AStarPlateauFibreExact as AStar
 import DASHI.Foundations.Base369TriadicPhaseTower as Tower
+import DASHI.Foundations.Base369CirclePhase as Circle
 import Base369 as B
 
 open Circuit using (Endpoint; WiringGraph; Route; here; step)
@@ -72,15 +73,9 @@ record ExistingAStarInterface : Set where
     algorithmBoundary : AStar.AStarFibreBoundary
     modelContract : AStar.AStarCorrectnessContract
 
-canonicalAStarInterface : ExistingAStarInterface
-canonicalAStarInterface =
-  existingAStarInterface
-    AStar.canonicalAStarFibreBoundary
-    (AStar.aStarCorrectnessContract true true)
-
--- The two 'true' flags above configure an interface for hypothetical
--- certificates. They are NOT evidence that an actual heuristic is
--- admissible or that a run is optimal.
+-- Do not populate the A* correctness contract with ungrounded Booleans.
+-- The bridge exposes the original contract and requires a selected
+-- implementation to supply its heuristic and correctness evidence.
 
 record PhaseSearchHierarchy : Set where
   constructor phaseSearchHierarchy
@@ -98,7 +93,7 @@ canonicalPhaseSearchHierarchy :
 canonicalPhaseSearchHierarchy phase =
   phaseSearchHierarchy
     phase
-    (Tower.triToNonary phase)
+    (Circle.triToNonary phase)
     (Tower.triTo27 phase)
     (Tower.triToNonary-section phase)
     (Tower.nonaryTo27-section (Tower.triToNonary phase))
