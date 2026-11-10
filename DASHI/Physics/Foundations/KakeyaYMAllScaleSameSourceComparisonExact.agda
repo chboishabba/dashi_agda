@@ -164,3 +164,19 @@ uniformAllScalePhysicalContraction u n x y
 -- IMPORTANT: this proves an actual all-scale *consequence* if the
 -- uniformity proofs exist. No cutoff-independent bound is generated
 -- from an arbitrary RG contraction sequence.
+
+
+-- Explicitly specialise the all-pair result to the one selected
+-- observer state (the non-vacuous state-source index of this record).
+allScaleAtOriginalSelectedObserver :
+  (s : SameObjectAllScaleComparison) →
+  ∀ n y →
+  RG.comparisonLower (step s n (selectedState s) y) *
+    physicalDistance s (suc n) (selectedState s) y
+  ≤ RG.contraction (step s n (selectedState s) y) *
+      RG.comparisonUpper (step s n (selectedState s) y) *
+      physicalDistance s n (selectedState s) y
+    + RG.physicalScale (step s n (selectedState s) y) *
+      RG.reopeningError (step s n (selectedState s) y)
+allScaleAtOriginalSelectedObserver s n y =
+  allScalePhysicalContraction s n (selectedState s) y
