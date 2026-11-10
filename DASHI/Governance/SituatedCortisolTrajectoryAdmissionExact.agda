@@ -56,6 +56,12 @@ record PersonTimeObservation
     cortisolAssayUnit : String
     hormoneAssayValidated : Set
     collectionConsentAndAccess : Set
+    exposureSourcePaid : sourceRecordForExposure
+    bodyContextSourcePaid : sourceRecordForBodyContext
+    observationTimePaid : sourceMatchedTime
+    samplingTimePaid : samplingTimeVerified
+    assayReceipt : hormoneAssayValidated
+    ethicalAccessReceipt : collectionConsentAndAccess
 
 -- The Nat value is a placeholder for a measured encoded quantity.
 -- Unit, matrix and calibration are NOT supplied by the type itself.
@@ -157,3 +163,19 @@ fastRouteNotEndocrineTime =
 
 -- Stronger, calibrated temporal prediction and physiological causality
 -- remain open until independently supplied empirical receipts exist.
+
+-- An observation is admissible only because its evidence obligations
+-- are *inhabited fields*, not because it merely names required predicates.
+observationRequiresAssayReceipt :
+  ∀ {Person Time : Set} {p : Person} {t : Time} →
+  (obs : PersonTimeObservation Person Time p t) →
+  PersonTimeObservation.hormoneAssayValidated obs
+observationRequiresAssayReceipt obs =
+  PersonTimeObservation.assayReceipt obs
+
+observationRequiresEthicalAccess :
+  ∀ {Person Time : Set} {p : Person} {t : Time} →
+  (obs : PersonTimeObservation Person Time p t) →
+  PersonTimeObservation.collectionConsentAndAccess obs
+observationRequiresEthicalAccess obs =
+  PersonTimeObservation.ethicalAccessReceipt obs
