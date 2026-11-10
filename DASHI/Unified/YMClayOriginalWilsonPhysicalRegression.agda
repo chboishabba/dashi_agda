@@ -87,3 +87,6 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalSignedPathValueEvaluatorExact a
 
 -- E1/A3: actual original Gibbs/Haar normalized expectation of finite positive-link tuple evaluation is the original Wilson E1 cylinder expectation.
 import DASHI.Physics.YangMills.YMClayE1A3OriginalFiniteValueExpectationWeldExact as E1A3RealExpectationWeld
+
+-- E1/A3 cross-cutoff cut: actual n=3 Wilson Gibbs state pulled back through native 4->2 SU(N) block equals the original R445 effective pushforward; coarse n=1 Wilson state remains independent.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalR445CrossCutoffSourceExact as E1A3ActualR445CrossCutoff
