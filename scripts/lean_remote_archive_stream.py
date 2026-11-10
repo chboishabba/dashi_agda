@@ -20,7 +20,7 @@ import sys
 import tarfile
 import urllib.parse
 import urllib.request
-from typing import BinaryIO, Iterator
+from typing import BinaryIO, Iterator, Callable
 
 REPO_RE = re.compile(r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
 COMMIT_RE = re.compile(r"^[0-9a-fA-F]{40}$")
@@ -52,7 +52,8 @@ class CountingReader:
 def stream_archive(fileobj: BinaryIO, repo: str, revision: str,
                    *, max_file_bytes: int = 8 * 1024 * 1024,
                    max_total_bytes: int = 4 * 1024 * 1024 * 1024,
-                   max_transfer_bytes: int = 2 * 1024 * 1024 * 1024) -> Iterator[dict]:
+                   max_transfer_bytes: int = 2 * 1024 * 1024 * 1024,
+                   on_source: Callable[[dict, bytes], None] | None = None) -> Iterator[dict]:
     """Process tar.gz sequentially; source bytes never hit the filesystem."""
     if not REPO_RE.fullmatch(repo) or not COMMIT_RE.fullmatch(revision):
         raise ValueError("repo and immutable revision required")
@@ -74,7 +75,7 @@ def stream_archive(fileobj: BinaryIO, repo: str, revision: str,
             relative = path[len(prefix) + 1:]
             if not relative.endswith(".lean"):
                 continue
-            if (not relative or relative.startswith("/") or "\\x00" in relative
+            if (not relative or relative.startswith("/") or chr(0) in relative
                     or any(segment in ("", ".", "..") for segment in relative.split("/"))):
                 raise ArchiveError("unsafe archive member path")
             if member.size < 0:
@@ -93,17 +94,25 @@ def stream_archive(fileobj: BinaryIO, repo: str, revision: str,
             git_sha1 = hashlib.sha1()
             git_sha1.update(b"blob " + str(member.size).encode("ascii") + bytes([0]))
             remaining = member.size
+            chunks = [] if on_source is not None else None
             while remaining:
                 chunk = src.read(min(65536, remaining))
                 if not chunk:
                     raise ArchiveError("archive member truncated")
                 sha256.update(chunk)
                 git_sha1.update(chunk)
+                if chunks is not None:
+                    chunks.append(chunk)
                 remaining -= len(chunk)
-            yield {"kind": "lean-source", "repository": repo, "revision": revision,
-                   "path": relative, "size": member.size,
-                   "git_blob": git_sha1.hexdigest(), "sha256": sha256.hexdigest(),
-                   "status": "source-verified-not-elaborated"}
+            receipt = {"kind": "lean-source", "repository": repo,
+                       "revision": revision, "path": relative, "size": member.size,
+                       "git_blob": git_sha1.hexdigest(), "sha256": sha256.hexdigest(),
+                       "status": "source-verified-not-elaborated"}
+            if on_source is not None:
+                # Optional bounded source-byte handoff; NEVER include bytes in
+                # public JSONL inventory. Happens only after full hash/size check.
+                on_source(receipt, b"".join(chunks))
+            yield receipt
 
 
 def run(repo: str, revision: str, *, max_file_bytes: int,
