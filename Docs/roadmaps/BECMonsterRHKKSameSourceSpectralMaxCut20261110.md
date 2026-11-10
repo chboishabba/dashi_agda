@@ -35,3 +35,14 @@ These are branch comparison states, not verified PR merge statuses. Reconcile di
 
 ## Attribution
 C3 group representations and projectors: standard finite representation theory; Bose-Einstein occupation statistics: Bose/Einstein; heat-kernel Mellin transforms: standard spectral analysis; oscillator zero-point energy and exact SI Planck constant: standard quantum theory and SI. Monster/AdS3 gravity duality: Witten's conjectural proposal. These finite regressions are original integration code only, **not** a new physical discovery, Agda kernel certificate, RH/BSD proof, KK/OS physical identification or Monster gravity proof.
+
+## Resolved actual pull requests (GitHub metadata audited 2026-11-10)
+- #1162 Monster C3 entropy-gravity: open/non-draft, targeting master.
+- #1241 KK × LARES-2: open/draft, targeting master.
+- #1444 YM Voyager: open/draft, upstream of #1460.
+- #1460 Lorentz 3+1/TSVF/KK/YM: open/non-draft, targeting #1444 branch.
+- #1469 and #1470 independent YM-to-TSVF integration: CLOSED AND MERGED into the #1460 branch.
+- #1472 Y443 Monster/V-natural: open/draft, targeting master.
+- #1488 Kakeya × YM same observer/KK spatial metric: open/draft, targeting #1460 branch.
+- #1489 independent C3/BEC finite spectral integration: open/draft, targeting master.
+The PR records resolve the missing branch identities; actual physical observer/OS and Monster gravity source identifications remain conditional where their declaration owners explicitly say so.
