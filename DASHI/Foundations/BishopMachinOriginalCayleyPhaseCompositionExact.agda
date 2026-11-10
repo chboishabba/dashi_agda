@@ -54,3 +54,15 @@ originalCayleyMachinPhaseImaginaryIsOne =
 -- This is the exact rational normalized phase of the REAL
 -- original Machin pair; no numerical rounding, pi axiom,
 -- extra branch assertion or unnamed complex carrier is used.
+
+-- Even stronger intermediate: the fourth power of the
+-- first EXACT Machin Cayley point is i times the second point.
+-- This is the finite algebraic lift of the rational tangent
+-- identity, with no analytic branch selection.
+originalFourfoldFiveEqualsImaginaryTimes239 :
+  fourC Points.cayleyAtOneFifth
+  ≡ CD._*c_ Formal.imaginaryUnit
+      Points.cayleyAtOneTwoHundredThirtyNinth
+originalFourfoldFiveEqualsImaginaryTimes239 =
+  CD.complexExt Ring.solve-∀ Ring.solve-∀
+
