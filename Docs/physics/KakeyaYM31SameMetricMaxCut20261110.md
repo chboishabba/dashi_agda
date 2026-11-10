@@ -53,3 +53,54 @@ There is a natural conditional transport via a **distance-preserving bijection**
 ## Verification and merge rules
 
 Use local Nix/Agda 2.9; **no CI needed**. This was source-written and read against the inspected #1460 exact head; no Agda binary was available, hence this is **not** a kernel receipt. Prefer a stacked review and merge the original YM/TSFV donor branch before treating this file as a standalone master candidate.
+
+## 10 November: non-Euclidean / p-adic / RG metric owner audit
+
+New source: `DASHI.Physics.Foundations.KakeyaYMUltrametricPhysicalComparisonExact`.
+
+Actual old theorem owners inspected:
+
+- `DASHI.Physics.YangMills.BalabanRGTwoMetricUniformComparisonExact` already proves the division-free, source-selected contraction:
+  `c_- d_phys' ≤ a d_RG'`, `d_RG' ≤ λ d_RG+ε`, `a d_RG ≤ c_+ d_phys`
+  imply `c_- d_phys' ≤ λ c_+ d_phys+a ε`. New code directly reuses `rgContractionTransfersToPhysicalMetric`, not a duplicate proof.
+- `DASHI.Cognition.PNF.FutureGeometryEmbeddingExact` owns abstract Lipschitz/co-Lipschitz representations and composition of upper constants for **Nat** metrics. It is a useful proof-skeleton donor, not yet real-valued Euclidean bi-Lipschitz source.
+- `DASHI.Topology.TernaryCylinderPantsGeometryExact` owns exact ternary prefix/pants composition and 3D *extrinsic voxel observations*, including an explicit **false** voxel-ultrametric-isometry field. The new Kakeya module consumes this original false witness.
+- `DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact` proves the same exact fine address maps to different parameters under different contexts. The new module transports this source-owned contradiction: no context-independent identification is inferred from address alone.
+- `DASHI.Metric.TernaryUltrametric` and `DASHI.Geometry.SSP369Ultrametric` own discrete and prefix metric structures. `DASHI.Metric.CompleteFineAgreementUltrametric` and `DASHI.Geometry.CompleteUltrametric` represent completion variants.
+- `DASHI.Physics.YangMills.BalabanAnisotropicDiameterCompatibility` and `BalabanTreeDistanceDiameterCompatibility` are additional physical-distance comparison donors but do not by themselves instantiate the selected Kakeya geometry.
+- `DASHI.Geometry.Signature.HyperbolicFormZ` and original YM/KK `(3,1)` quadratic are **indefinite/hyperbolic**, mathematically distinct from a positive-definite spatial Euclidean metric and from the 3-adic ultrametric.
+
+### Exact theorem/accountability distinction
+
+The p-adic/ultrametric geometry **does** support finite cylinder refinement, history-indexed addresses, scale control and a two-metric comparison *if the selected physical comparison hypotheses are supplied*. It is not directly a Kakeya set geometry: the ordinary p-adic field is totally disconnected, while Euclidean `R^3` is connected, and a global homeomorphism/isometry is impossible. A finite voxel rendering does not erase this distinction.
+
+A bi-Lipschitz homeomorphism between **actual metric subspaces** preserves Hausdorff dimension; with appropriate surjectivity and scale control, the corresponding Minkowski dimension statement can be transported. However an arbitrary bi-Lipschitz map need not preserve straight unit segments, so the original image must be shown Kakeya in the Euclidean target, or one must separately prove the tube-transport incidence and measure estimates. A dimension-comparison inequality alone does not establish the **Kakeya** hypothesis.
+
+### Minimum original-physical commuting cut
+
+```
+selected TSFV / observer state
+  -> original 5D KK metric -> horizontal selected 4D metric
+  -> positive spatial restriction / measured spatial metric
+  -> complete Euclidean 3D chart/isometry (or controlled local maps)
+  -> original line-segment/direction and measure comparison
+  -> verified external 3D Kakeya dimension theorem
+
+triadic/p-adic history-cylinder -> context-indexed observation
+  -> selected RG physical metric comparison
+  -> same measured spatial metric (independently proved)
+```
+
+The lower route **must** commute with the upper one at the SAME selected observer state, including context and time index. The new `OriginalMetricComparisonRequirements` record makes all-pair metric comparison fields explicit. They are not physically inhabited here.
+
+### Source status
+
+The new RG/p-adic adapter is not `--safe` because its original source-owner imports are not marked `--safe`; this is a transitive Agda checker constraint, **not** an added postulate. The previously authored YM same-metric source remains separately `--safe` conditional on its transitive imports. No Agda kernel run took place. This is a stacked child of #1460 and independent of Kakeya finite incidence PR #1485 and Lean #106.
+
+## Next maximal proof payments
+
+YK7: same-state/context/time-indexed map from finite p-adic cylinders into selected *physical* spatial points, with exact original provenance.
+YK8: compare RG-depth distance to the actual original observer spatial metric at every cutoff, with positive lower and upper constants, explicit error, and a uniform all-scales limit.
+YK9: source-complete metric-space transfer (real completeness/topology/Borel measure), including zero/positive measure subtleties and avoidance of unproved global ultrametric/euclidean identification.
+YK10: original tube direction, segment incidence and scale-distortion bridge, or an independently selected Euclidean Kakeya image.
+YK11: use source-pinned external Lean unconditional Kakeya theorem through a theorem-type/domain correspondence; keep Lean/Agda kernel trust separate.
