@@ -106,7 +106,7 @@ record SameHistoricalWindow
   (K : Ring.ExactOrderedCommutativeRing)
   {depth k p : Nat}
   (F : HistoryTimeTernaryCovarianceFibre K depth k p)
-  (h : History F) (t u : Time F) : Set where
+  (h : History F) (t u : Time F) : Set₁ where
   field
     sameWindow : windowAt F h t ≡ windowAt F h u
     sameScale : scaleAt F h t ≡ scaleAt F h u
