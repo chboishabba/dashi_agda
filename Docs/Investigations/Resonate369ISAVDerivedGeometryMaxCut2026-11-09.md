@@ -307,3 +307,27 @@ The 3/9/27 representation is an existing finite phase-resolution/indexing abstra
 6. **P3**: physical-source admission via synchronized current/voltage/torque/time observations, fixed boundary and uncertainty. Never infer over-unity from a simulation or open-circuit voltage.
 
 Attribution: Slobodian's historical claims, Holmstrom's documented designs, and the independent DASHI modelling contributions remain separate.
+
+## 2026-11-10 formal component typing and switching gates
+
+### New Agda modules
+- `Circuit36927TypedValuesExact.agda` at commit `d4d64dfe`: kind-indexed `ValueFor` constructors prevent a resistor from receiving a capacitor or voltage nominal and preserve component kind under `toGenericPart`. `unspecified` preserves honest absence of a physically selected value. Unit scales are milliohms/picofarads/nanohenries/millivolts/microamps; positivity, calibration and tolerances remain open.
+- `Circuit36927SwitchStateExact.agda` at commit `cafc758a`: `ThroughSwitch closedSwitch` has a witness but `ThroughSwitch openSwitch` is empty; toggle is involutive and hold preserves state. The theorem excludes the **through-switch edge** only. It deliberately does not prove that no bypass route exists elsewhere.
+
+### New verified numerical identities
+- For passive two-capacitor resistive redistribution, charge is conserved:
+  `C1*V1 + C2*V2 = (C1+C2)*Vfinal`.
+- Exact rational identity: `E_initial - E_final = C1*C2*(V1-V2)^2/[2*(C1+C2)] >= 0`.
+- Python `Fraction` checks passed for 501 cases; selected 100 µF + 100 µF, 12 V + 0 V gives 6 V and 3.6 mJ equalisation loss.
+- Implicit numerical switched-transfer checks passed for 200 seeded randomised configurations plus 1999 closed steps (and one open step) with explicit split into resistor heat and nonnegative numerical integration loss.
+- These computations do not prove that the original physical circuit uses two capacitors in this connection or recovers magnetic flyback.
+
+### Remaining exact leaves
+1. Agda kernel check all changed modules on pinned Agda 2.9; fix any type errors. Current environment has no `agda` executable.
+2. Source-independent finite incidence algebra welding `TypedNetlist` / `ValidPort` to solver node equivalence and KCL/KVL.
+3. A proven typed electrical-law carrier with resistive Ohm, capacitive charge, inductive flux/current, and energy accounting; numeric backward Euler is independently tested but not Agda soundness-certified.
+4. Weld `SwitchState` through-edge evidence to an actual source-specific control circuit; add leakage, contact resistance, diode and MOSFET modes with physical losses and discontinuous-switch handling.
+5. Identify source-specific Holmstrom/Slobodian wiring and geometry through lawful read-only schematics/photographs without vendoring CAD.
+6. Same-apparatus physical measurements of total electrical input/output, mechanical torque/speed, capacitor/inductor states and calibrated uncertainty.
+
+All generic mathematical and simulator work is DASHI-original; historical source and manufacturer documentation must remain separately attributed.
