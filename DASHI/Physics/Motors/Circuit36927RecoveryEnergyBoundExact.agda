@@ -10,6 +10,9 @@ module DASHI.Physics.Motors.Circuit36927RecoveryEnergyBoundExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
+sym : ∀ {A : Set} {x y : A} → x ≡ y → y ≡ x
+sym refl = refl
+
 data _≤_ : Nat → Nat → Set where
   z≤n : ∀ {n} → zero ≤ n
   s≤s : ∀ {m n} → m ≤ n → suc m ≤ suc n
@@ -41,6 +44,6 @@ passiveFinalNoGreater :
   PassiveRecoveryReceipt.initialStored r
 passiveFinalNoGreater r =
   transportUpper
-    (Agda.Builtin.Equality.sym (PassiveRecoveryReceipt.closedBoundaryBalance r))
+    (sym (PassiveRecoveryReceipt.closedBoundaryBalance r))
     (≤-append (PassiveRecoveryReceipt.finalStored r)
               (PassiveRecoveryReceipt.heatAndLoss r))
