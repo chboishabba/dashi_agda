@@ -24,6 +24,8 @@ import DASHI.Governance.BlackGirlsMatterPublishedDisciplineArithmeticExact as BG
 import DASHI.Governance.BlackGirlsMatterExpulsionDenominatorExact as BGMExpulsion
 import DASHI.Governance.BlackGirlsMatterCRDCOriginalRowAdmissionExact as CRDC
 import DASHI.Governance.BlackGirlsMatterCRDCAggregationBoundaryExact as CRDCAgg
+import DASHI.Governance.BlackGirlsMatterDenominatorSensitivityExact as Sensitivity
+import DASHI.Governance.BlackGirlsMatterSourceBoundRateOrderExact as RateOrder
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -106,6 +108,16 @@ record LegalCrossCaseCut : Set₁ where
         CRDC.multipleOutOfSchoolSuspensions → ⊥
     crossIndicatorEventsAreNotUniqueStudents :
       CRDC.disciplinaryEvents ≡ CRDC.uniqueStudents → ⊥
+    publishedCasesCannotDetermineRateDirection :
+      INF.FactorsThrough Sensitivity.observedCountPair
+        Sensitivity.syntheticDirection → ⊥
+    conditionalSameYearPopulationRateReceipt :
+      ∀ {src : CRDC.VerifiedCRDCSource}
+        {d : CRDC.District}
+        {e : CRDC.DisabilityScope}
+        {m : CRDC.Measure} →
+      RateOrder.CertifiedBlackHigher src d e m →
+      CRDC.ComparableRatePair src d e m
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -138,4 +150,6 @@ crenshawLegalCrossCaseCut =
     CRDC.suppressedNotZero
     CRDC.oneAndRepeatedSuspensionAreDifferent
     CRDCAgg.differentUnitsAreNotDefinitionalEqual
+    Sensitivity.caseCountsAloneDoNotDetermineRateOrder
+    RateOrder.certifiedHigherRequiresSamePopulationRows
     refl refl
