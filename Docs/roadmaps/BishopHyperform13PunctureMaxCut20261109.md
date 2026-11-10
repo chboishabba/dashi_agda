@@ -914,3 +914,84 @@ Both H2.02 and P1 owners were imported in the three canonical TOE roots:
 **No Agda 2.9 typechecking performed** on this tranche. Do not
 promote SOURCE-WRITTEN into KERNEL-CHECKED or promote the finite
 rational-point Cayley result into original analytic Machin.
+
+
+## 2026-11-10 max-cut: exact SAME-SOURCE Machin phase and pre-existing P2 canonical powers
+
+### P1: full finite rational Machin composition is now SOURCE-WRITTEN
+
+New source owner:
+`DASHI/Foundations/BishopMachinOriginalCayleyPhaseCompositionExact.agda`.
+
+It reuses the original *same* Gaussian rational `Q[i]` carrier and the
+two source-selected exact point values already paid in
+`BishopMachinOriginalCayleyRationalPointAlgebraExact.agda`.
+
+- `twoC`, `fourC` use the original `CD._*c_` with no shadow algebra.
+- `originalFourfoldFiveEqualsImaginaryTimes239` proves literally
+  `C(1/5)^4 = i × C(1/239)` for the original selected source
+  Gaussian Cayley values.
+- `originalCayleyMachinGaussianPhase` defines the entire
+  original rational Machin phase product
+  `C(1/5)^4 × conjugate(C(1/239))`.
+- `originalCayleyMachinPhaseIsImaginaryUnit` proves that product
+  is exactly the source original imaginary unit.
+- `originalCayleyMachinPhaseRealIsZero` and
+  `originalCayleyMachinPhaseImaginaryIsOne` expose both
+  coordinate consequences by congruence.
+
+Independent exact-fraction arithmetic checked:
+`C(1/5)^4 = -239/28561 + (28560/28561)i`,
+`C(1/239) = 28560/28561 + (239/28561)i`,
+and the product with the conjugate is exactly `i`.
+No numerical tolerance, π axiom or analytic arctangent shortcut.
+
+Commits: `866ad95` original same-source phase proof;
+`1185469` stronger fourfold identity;
+golden TOE imports `68afac0`, `cab8a39`, `541dcc7`.
+
+**Critical boundary:** this closes the actual exact finite Q[i]
+Machin phase-composition *algebra*, NOT the original Bishop
+same-function analytic theorem identifying
+`exp_B(2i atan_B(t))` with `(1+it)/(1-it)`.
+That still needs the original complex-valued Bishop exponential,
+composition/convergence of the nested series, uniqueness and
+the analytic point evaluation with its branch theorem.
+
+### P2 prior-art attribution correction: canonical Nat powers ALREADY OWNED
+
+Original source `DASHI/Foundations/BishopNatEmbeddingPowerExact.agda`
+already proves `natRealPowNat` for **all Nat bases/exponents**,
+commuting `DASHI.Mathematics.NumberTheory.FiniteDivisorPowerSumExact.powNat`
+with the actual Bishop `Real.pow` on the original
+`BishopCubicTranslationIteratedExact.natReal` embedding.
+It also proves `natRealPowNatTimesBase`.
+`DASHI/Foundations/BishopNatEmbeddingPowerValidation.agda`
+already reuses both as regression theorems.
+
+Thus the P2 *canonical power identification* was an **existing paid
+mathematical theorem**, not an open challenge and not new work here.
+The missing P2 theorem is **independently selected same-function
+Riemann zeta equality** on the actual original analytic complex
+carrier and its convergence/continuation domain, not a power lemma.
+The existing `DASHI.Analysis.RiemannAnalyticSubstrate` explicitly
+keeps those analytic fields uninhabited at this source level.
+
+### Revised highest-alpha remaining leaves
+
+| Priority | Gate | Exact outstanding mathematical proof |
+|---|---|---|
+| P0 | H1.01 | Independent original relational/group completion semantic equivalence, not count |
+| P0 | H2.01 | Actually selected source-addressable ITIR nodes and commuting world observer/consumer |
+| P0 | H2.02 world | Original independently evidenced world edge-stalk signatures and full-fabric topology/provenance identification |
+| P1 | Bishop analytic | `exp_C(2i atan_B(t)) = C(t)` as a constructive Bishop same-function equality, followed by actual analytic evaluation at 1/5 and 1/239 and branch identification |
+| P1 | Rational Machin algebra | Exact two point denominators, fourfold identity and full Gaussian phase product | 
+| P2 | Canonical Nat powers | **ALREADY PAID IN ORIGINAL OWNER**, no new wrapper necessary |
+| P2 | Same-function zeta | Independently selected analytic zeta equality, required half-plane convergence/continuation |
+| P3 | Gamma/Xi | Actual source Mellin/Gamma integral, analytic continuation, functional equation, completed Xi |
+
+**Verification:** source-written new declarations; a Python exact-fraction
+calculation checked numerical rational identities independently.
+Agda kernel acceptance is NOT claimed: no `agda` or `nix`
+binary is present in the execution environment. No original world
+nodes or analytic-source proof has been fabricated.
