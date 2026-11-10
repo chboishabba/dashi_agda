@@ -97,6 +97,17 @@ Reuse `OggPrimeFourierWindingExact` (#1140), `TernaryPantsRecursiveWreathActionE
 
 Existing owners: `BishopMachinQuarterAngleBranchExact`, `BishopMachinPiArchimedesWindowExact`, `BishopRound11MachinSetoidComplexInstanceExact`, `BishopRound11ClassicalTrigObjectWeldExact`, `JInvariantBishopTrigUnitPhaseExact`, `JInvariantBishopUpperHalfPlaneEisensteinFromUnitPhaseExact`, `JInvariantBishopPuncturedLatticeEisensteinCompilerExact`, `JInvariantBishopUnitDiskEisensteinCompletionExact`.
 
+### 2026-11-10 P2 period strict same-source audit (no speculative promotion)
+
+Audited the actual latest source owners:
+- `DASHI/Foundations/BishopMachinQuarterAngleBranchExact.agda` owns the **concrete Bishop** quarter-angle `theta_M=4atan_B(1/5)-atan_B(1/239)`, and exact rational tangent parameter `1`, with angle branch `3/4<theta_M<11/14`. Its own `bishopMachinQuarterConcreteTrigIdentificationLevel` is `conditional`. Thus it does **not** yet assert `sin_B(theta_M)=cos_B(theta_M)` on the actual Round11 power-series sine/cosine.
+- `DASHI/Moonshine/BishopRound11MachinSetoidComplexInstanceExact.agda` pins `pi` to the actual Bishop Machin real; its `bishopMachinPiClassicalSameObjectLevel` is `conditional`. Its actual sine/cosine and exponential series **converge**, but convergence alone does not imply the addition, inverse-tangent, or `sin_B(2pi_M)=0` identities.
+- `DASHI/Analysis/BishopRound11ClassicalTrigObjectWeldExact.agda` is a source-transport interface with caller-selected `SameClassicalAndBishopTrigObject`; its status explicitly sets `sameTrigObjectWeldClosed=false`. This is NOT a paid Pythagorean proof for the selected original Bishop functions.
+
+Therefore **P2.01→P2.05 are still genuine original analytic source obligations**, not duplicate assumptions we may silently supply. The exact minimal producer is
+`originalBishopMachinQuarterConcreteTrigIdentification` on the actual Bishop sine/cosine power-series functions, then the same-carrier addition/period laws; and separately the original q norm-square/radius identity needed by the existing source Bishop E4/E6 limit. This audit is read-only; no P2 gate promoted.
+
+
 ## P2e. Original E8 theta → Bishop E4 (new cross-PR reuse)
 
 **Important distinction:** E8 is the exceptional rank-eight root lattice; its theta series is a **weight-4** modular form and satisfies the classical identity `Θ_E8=E4`. It is *not* the weight-eight Eisenstein series `E8(τ)` (classically `E8=E4²`). The ordinary `E6` is weight six. Do not conflate the rank label E8 with a modular-form weight.
