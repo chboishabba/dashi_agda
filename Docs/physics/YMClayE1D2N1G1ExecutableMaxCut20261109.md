@@ -217,3 +217,12 @@ New `YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda`, imported by `YMClayOrigi
 This replaces a possible wrong proof strategy (assume (B_*\mu^W_3=\mu^W_1)) with the exact three-source-moment requirement. The *future quantitative RG theorem* should estimate each of these three **errors** in the physical scale/volume, use ordinary real inequalities to turn the three source estimates into connected covariance control, and propagate through admissible iterated blocking. An exact finite-cutoff equality of effective and bare Wilson moments is not generally expected in interacting lattice gauge theory.
 
 **Verification:** module created and imported; exact source paths/commit readback; no Agda compiler/kernel receipt. The conditional three-moment theorem is a verified-by-source-inspection proof candidate, NOT physical E1 convergence or D1 decay.
+
+
+### Unconditional same-E1 two-source identity (2026-11-10)
+
+Added `sourceE1FineBlockedCovariance`, `sourceE1FineBlockedCovarianceIsR445`, and `originalFineMixedJ11IsSameE1BlockedCovariance` in `YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda`. Unlike the three-moment *bare* coarse comparison, these declarations require **no RG matching hypotheses**. The already-established source-first original side-four mixed J11 coefficient equals the connected covariance of the **same original cutoff-3 E1 physical Wilson state** with native two-link blocked original coarse observables. The construction uses `Same.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance` and `Cross.originalE1FineBlockedIsR445EffectiveCoarse` with real-product/subtraction congruence.
+
+This pays the finite *E1-selected covariance source identity*, not the analytic source-J differentiation, physical decay, UV continuum convergence, or a comparison to the independent bare cutoff-1 Wilson measure. The latter still requires actual quantitative moment discrepancies on F, G, and FG or a continuum RG alternative. This prevents inadvertent reuse of a bare-closure assumption in B1/D2.
+
+**All source-written; Agda typecheck and transitive physical authority receipts pending.**
