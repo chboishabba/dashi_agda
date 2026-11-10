@@ -87,3 +87,81 @@ Importer requirements:
 Performance targets should be set from measured hardware, dataset distributions
 and intended concurrency. This tranche does not assert unrealistic end-to-end
 runtime targets or confuse 21,481 repository identities with parsed declarations.
+
+
+## Zero-checkout source acquisition (added 2026-11-10)
+
+Two new source-only ingestion paths are available in this PR:
+
+1. `scripts/lean_remote_source_inventory.py`: GitHub REST tree + pinned
+   SHA-1 Git blobs. Per-blob SHA-1 identity is verified against content and
+   SHA-256 is independently recorded. Handles authenticated private repos if
+   `GITHUB_TOKEN` is provided. Refuses truncated recursive tree listings,
+   oversized blobs, corrupt bytes, or non-immutable revision names. No files
+   are downloaded to permanent checkout directories; JSONL can stream stdout.
+   **API requests scale with number of Lean files**, not one per repository.
+2. `scripts/lean_remote_archive_stream.py`: one pinned **public** codeload
+   tar.gz stream per repository, processed using Python's tarfile stream mode.
+   Never extracts to disk; emits source fingerprints and skipped-size markers.
+   This avoids one metadata request per source file, at the cost of transferring
+   archive data (including non-Lean files). Private/authenticated repositories
+   are not supported by this public codeload mode.
+
+All source records explicitly say `source-verified-not-elaborated`.
+Content-addressed source identity is **not** Lean kernel acceptance. Archive
+mode verifies each extracted .lean file as a Git SHA-1 blob, but archive
+completeness/commit-to-tree correspondence still requires remote Git tree
+validation or an independently trusted pinned archive provider.
+
+Offline negative-control tests:
+```sh
+python3 -m unittest discover -s tests -p 'test_lean_remote_source_inventory.py' -v
+python3 -m unittest discover -s tests -p 'test_lean_remote_archive_stream.py' -v
+```
+These tests are authored but **not executed from the GitHub connector**.
+The worker's worktrees remain separate from these GitHub branch updates.
+
+### Next mandatory architecture gate: real remote/ephemeral Lean elaboration
+
+Lean kernel term export cannot be inferred from .lean file bytes, and it cannot
+run inside GitHub's REST source API. For a real elaborated world, implement a
+bounded Nix-managed worker:
+
+- Use source inventory to identify candidate repos and pinned commits.
+- Resolve exact `lean-toolchain`, `lakefile`, lockfiles, imports and
+  transitive package closure. Treat package identities as source-pinned.
+- Deduplicate dependency closures by toolchain/profile/content fingerprint.
+  Reuse compiled dependencies read-only; do not mix incompatible profiles.
+- Materialize only required source/import closures into a `TemporaryDirectory`
+  or remote worker memory-backed filesystem, and run the original Lean
+  elaborator/exporter. For projects requiring build scripts or plugins,
+  create an isolated execution policy; remote source is untrusted.
+- Stream elaborated terms/axiom/dependency receipts to the PostgreSQL world;
+  commit records transactionally only after the checker/exporter evidence
+  is validated; drop the ephemeral source directory afterwards.
+- Apply independent concurrency and memory limits to retrieval, elaboration,
+  database writes and proof checking. Each worker must be restartable.
+- Preserve repo/revision, original path and declaration, source/proof digests,
+  toolchain, dependency closure, compatibility and license metadata.
+
+If source files must **never** reach the local host, run the Lean worker on
+remote compute and transmit only verified structured declaration records.
+This is a separate deployment/execution capability, not delivered by source
+streaming. No Docker or CI dependency is required; Nix-managed ephemeral
+workers fit the requested local orchestration model.
+
+### Scale and completeness
+
+The source inventory requires no permanent repository checkout, but a
+single giant source blob still occupies bounded temporary memory. Archive
+transport may transfer enormous non-Lean content; enforce network, compressed
+byte, wall-clock and total uncompressed budgets at the orchestrator.
+The initial archive streamer currently limits *Lean source* uncompressed
+bytes, not total network download. This must be closed before untrusted
+bulk use.
+
+Do not report repository completion when a tree was truncated, source skipped
+by a cap, a request failed, or an elaboration import closure was incomplete.
+For 21,481 repos compare: REST selective fetch, one-request archive streaming,
+and sparse/partial Git object retrieval; select by actual repository size and
+module demand. Measure I/O per useful imported Lean declaration.
