@@ -42,21 +42,21 @@ def main() -> None:
     im_max = max(abs(v) for v in residual_im)
     assert re_max**2 + im_max**2 < Q(3, 10000)**2
 
-    # c lies in the open right half plane, |c|>1.3712 and <1.3788.
+    # c lies in the open right half plane, |c|>1.372 and <1.378.
     assert cx > Q(1,100)
-    assert s > Q(13712,10000)**2
-    assert s < Q(13788,10000)**2
+    assert s > Q(1372,1000)**2
+    assert s < Q(1378,1000)**2
 
     # Closed disk radius 0.01 centered at c:
     # |Log'(z)| <= 1/(|c|-0.01) < 3/4.
     radius = Q(1, 100)
-    assert Q(13712,10000)-radius > Q(4,3)
+    assert Q(1372,1000)-radius > Q(4,3)
     assert Q(3,10000) + Q(3,4)*radius < radius
     # Banach: |p-c| <= residual/(1-q) < 0.0012.
     delta = Q(3,10000)/(1-Q(3,4))
     assert delta == Q(12,10000)
-    assert Q(13712,10000)-delta > Q(137,100)
-    assert Q(13788,10000)+delta < Q(69,50)
+    assert Q(1372,1000)-delta > Q(137,100)
+    assert Q(1378,1000)+delta < Q(69,50)
     # The principal log is analytic throughout these disks (Re(z)>0).
     assert cx - radius - delta - Q(1,10) > 0
 
