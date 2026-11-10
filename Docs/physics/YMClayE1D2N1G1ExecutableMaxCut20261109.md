@@ -178,3 +178,23 @@ This is the first source-written *measure-level* E1/A3 finite-coordinate result,
 **Sharp maximal cut after this:** the normalized *same-cutoff*, same-Gibbs, same-word finite-coordinate and prefix naturality calculation is now source-written. It does NOT imply a change-of-cutoff consistency theorem `E_{mu_upper}[f∘pi_{upper→lower}] = E_{mu_lower}[f]`. The actual Wilson RG blocking/pushforward and its physical scaling must discharge that statement, or one must prove convergence via the alternative marginal compactness/subsequence route with a selected continuum-limit identification. R566 A3 event consistency/continuity-at-empty, R576 B1 actual connecting activities, R577 B2 physical transfer, R563 H6 noncollapse and R571 G1 group physics remain live.
 
 **Verification:** committed and read back from GitHub; no Agda 2.9 typecheck has been run. Neither same-cutoff source-written lemma nor roadmap is a Clay terminal proof.
+
+ 
+## 2026-11-10 E1/A3 actual one-step original Wilson RG pushforward
+
+The repository already contained the **genuine interacting** R445 4-to-2 periodic SU(N) two-link holonomy block in `YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact.agda` and the full marked partition/fine-to-effective-functional equality in `YMClayOriginalWilsonNativeMarkedPushforwardExact.agda`. These use the *same* `Constructed.actualPeriodicProductMeasure` at cutoff 3 as the original E1 cutoff family, not an invented auxiliary rational measure.
+
+New `YMClayE1A3OriginalR445CrossCutoffSourceExact.agda` directly defines:
+- `originalFineBlockPullbackCylinder`: a cylinder on the genuine cutoff-dependent original SU(N) links whose n=3 section is `f ∘ actualBlockedLinkMap` for a side-two coarse test `f`;
+- `originalBareCoarseCylinder`: the same coarse test on the independently selected original bare Wilson n=1 family, with no demand that its measure match R445;
+- `originalR445EffectiveCoarseExpectation`, `originalE1FineBlockedExpectation`, `originalE1BareCoarseExpectation`: three *source-selected* expectations; the first and second coincide by definition, whereas the third is genuinely different;
+- `originalE1FineBlockedIsR445EffectiveCoarse`: exact `E_{mu_Wilson,3}[f ∘ B] = (B_* mu_Wilson,3)(f)` on the same true 1024-link Wilson Gibbs density, normalized Haar and beta(3), for every coarse test;
+- `originalE1BlockedCoarseWordIsR445`: instantiate this source identity for **all original side-two Wilson plaquette words** (not merely the unit test);
+- `originalE1CoarseIsBareWilson`: definitional identification with the separate original n=1 normalized Wilson expectation at beta(1);
+- `originalR445UnitEqualsOriginalBareCoarseUnit`: the only unconditional cross-measure consistency presently established: the constant unit test, derived using the original product-Haar ordered/strict normalization and division cancellation at both levels.
+
+This is a substantial upgrade over **fixed-cutoff** prefix projection: it reaches an **actual physical RG block between two differently sized original Wilson lattices**, preserving the full interacting fine Gibbs weight and the exact effective coarse functional. However, the equality of the effective coarse functional to a **bare** coarse Wilson Gibbs state at beta(1) for arbitrary nonconstant observables remains mathematically unproved and is not generally true at finite cutoff without extra effective operators/couplings. The correct continuum target is controlled mismatch for a *renormalized* selected physical cylinder family and its observables, not a spurious exact bare-action equality.
+
+The narrowest next high-alpha leaf is therefore a genuine original RG effective-action/marginal comparison estimate, uniform in continuum physical scaling, or an independently sourced finite-marginal compactness/diagonal subsequence plus selected-measure uniqueness argument. The R566 projective event consistency/continuity at empty requires that producer. D2/B1 R576 physical activity, D2/B2 R577 same-H transfer, N1/H6 R563 and G1 R571 stay independent analytic fronts.
+
+**Verification:** commit and readback of source only; Agda 2.9 kernel receipt remains outstanding, and the transitive `RealAnalysisAxioms`/one-link Haar physical authorities are not discharged by this bridge.
