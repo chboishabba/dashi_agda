@@ -849,3 +849,43 @@ Source changes `866ad95`, `1185469`; golden imports
 `68afac0`, `cab8a39`, `541dcc7`.
 Full proof ledger: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
 No new Agda kernel receipt.
+
+
+### 2026-11-10 original Machin prior art and H1.01 144→13 obstruction
+
+Audited original source ownership: `BishopMachinArctanConstructionExact`,
+`BishopMachinRationalTangentAlgebraExact`,
+`BishopMachinQuarterAngleBranchExact`,
+`BishopMachinPiRationalWindowExact`,
+`BishopMachinPiArchimedesWindowExact` and
+`BishopRound11MachinSetoidComplexInstanceExact` already own the
+genuine constructed Bishop Machin real, tangent arithmetic,
+branch bounds, numerical window and selected Round11 setoid
+transcendentals. Previous additions of finite Cayley point
+values and phase composition are incremental rational Q[i]
+lemmas, **not an original Machin proof**. The original
+Bishop nested analytic `exp(2i atan)` identification remains
+open at the specified same-source type.
+
+New highest-alpha original semantic source:
+`TernaryThirteenOriginalRelational144NonIdentificationExact`
+proves that the **original** 144-cell ordered relational field
+cannot be recovered from 12 original diagonal trits plus one
+selected (0,1) central relation trit: two original fields have
+identical 13-code and different reverse (1,0) relation value.
+It also builds an explicit 13-parameter selected subcarrier
+inside the original 144-cell field and proves the code map
+has a section but no inverse recovering all 144 source cells.
+
+This materially **corrects H1.01**: full original relational
+semantics cannot be asserted equal to the constructed 12+1
+carrier through the natural source observer. A restricted
+subcarrier or lossy quotient, selected independently with
+its actual relation/group semantics, is the remaining
+identification obligation. H2.01 genuine world nodes, H2.02
+independently selected world-fabric edge proofs, Bishop
+analytic P1, selected zeta P2 and Gamma/Xi P3 stay open.
+Source-level only: kernel certification not asserted.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for declaration-level receipts.
