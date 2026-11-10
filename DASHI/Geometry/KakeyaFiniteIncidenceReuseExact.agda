@@ -82,15 +82,15 @@ finiteRestrictedIncidenceSecondMoment =
 
 record GeometricIncidenceAdapter : Set₁ where
   field
-    data : FiniteIncidences
+    incidences : FiniteIncidences
     -- Selected geometric data must be identified with the exact
     -- finite rational model, not merely named after it.
     geometricTotal : ℚ
     geometricUnionWeight : ℚ
     geometricOverlapEnergy : ℚ
-    totalIdentified : geometricTotal ≡ totalIncidence data
-    unionIdentified : geometricUnionWeight ≡ occupiedWeight data
-    overlapIdentified : geometricOverlapEnergy ≡ overlapEnergy data
+    totalIdentified : geometricTotal ≡ totalIncidence incidences
+    unionIdentified : geometricUnionWeight ≡ occupiedWeight incidences
+    overlapIdentified : geometricOverlapEnergy ≡ overlapEnergy incidences
 
 open GeometricIncidenceAdapter public
 
@@ -105,7 +105,7 @@ geometricAdapterSecondMoment adapter
   rewrite totalIdentified adapter
         | unionIdentified adapter
         | overlapIdentified adapter =
-  finiteIncidenceSecondMoment (data adapter)
+  finiteIncidenceSecondMoment (incidences adapter)
 
 finiteIncidenceAlgebraFromPriorArt : Bool
 finiteIncidenceAlgebraFromPriorArt = true
