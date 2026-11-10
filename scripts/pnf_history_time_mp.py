@@ -57,8 +57,12 @@ def asof_mp(
                      or asof <= f.last_valid_at)]
     if not features:
         raise ValueError("no point-in-time eligible features")
+    # A later-admitted predicate/asset must not retroactively extend the
+    # common source panel, even if past values were subsequently backfilled.
+    admission_floor = max(f.first_known_at for f in eligible_meta
+                          if f.identifier in features)
     window = [e for e in observations
-              if e.history == history and e.event_time <= asof
+              if e.history == history and admission_floor <= e.event_time <= asof
               and e.available_at <= asof and e.source == source
               and all(feature in e.values for feature in features)]
     window.sort(key=lambda e: (e.event_time, e.available_at))
