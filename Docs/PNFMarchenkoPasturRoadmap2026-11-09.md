@@ -328,3 +328,15 @@ The Nat arithmetic corollary is `covarianceNullityAtLeastForcedLowerBound`, with
 **Exact executable witness:** `scripts/pnf_exact_finite_rank_nullity.py` uses exact rational row reduction and constructs an independent kernel basis for same-source centred covariance. A sibling implementation ran on small matrices, including 3×5 (rank 2, nullity 3), 4×2 (rank 2, nullity 0), 2×4 (rank 0, nullity 4). The precise GitHub branch file has not been executed from a checkout.
 
 The result is domain-neutral finite geometry. PNF semantics and financial MP null assumptions remain distinct.
+
+### Finite rank/nullity proof and verification supplement
+
+Let n=k+1 with n>=2. Write B for the k×p matrix containing the final k centred observation rows, and let R be the (k+1)×k linear reconstruction with top row (-1,...,-1) and lower block I_k. The source-paid mean identity establishes *exactly* Xc = R B (not just a reported numerical rank). Thus for any scalar covariance scale s,
+
+    C = s Xc^T Xc = s B^T R^T R B.
+
+Consequently rank(Xc)≤min(k,p) and rank(C)≤min(k,p). Over any field with the finite-dimensional rank-nullity theorem, dim ker(C)=p-rank(C)≥max(0,p-k). Over reals, C is symmetric, so its zero-eigenvalue multiplicity equals dim ker(C). With s>0, the stronger equality ker(C)=ker(Xc) follows from v^T C v = s ||Xc v||² and definiteness; the rank upper bound itself does not need s>0.
+
+The Agda implementation of R, its linear laws and the two source-specific operator factorizations is authored. The *generic* finite-field theorem `FiniteFieldRankNullityOwner` and zero-spectrum identification `CovarianceZeroSpectrum` are not instantiated in this branch, and Agda kernel acceptance remains open. These exact obligations must not be renamed as closed.
+
+Local exact-rational verification additionally passed **216** pseudo-random finite matrices spanning n=2..8 and p=1..9 (three matrices per shape), checking rank(Xc)=rank(C), independent kernel basis, exact C·v=0, and nullity≥max(0,p−n+1). This is runtime evidence for the formulas, not an Agda proof or an actual PNF or market dataset.
