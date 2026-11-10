@@ -38,6 +38,7 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyEx
 import DASHI.Physics.YangMills.YMClayOriginalVariableWilsonCovarianceSourceExact as Bare
 import DASHI.Physics.YangMills.YMClaySUNR445BlockedPushforwardR320CovarianceExact as R320
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 import DASHI.Physics.YangMills.NormalizedTwoSourceConnectedCumulantExact as Cumulant
 
 module _
@@ -160,3 +161,51 @@ module _
           (originalThreeRGEqualMomentsImplyCovariance
             left right leftMoment rightMoment productMoment)
           (sourceBareCovarianceIsOriginalWilson left right)))
+
+  -- Concrete native source-Wilson word family on the actual side-two
+  -- periodic 4-torus. This is the P0 original Wilson local test class,
+  -- not arbitrary independent coarse sources.
+  coarseOriginalWordTest :
+    Words.PlaquetteWord
+      theory traceData exponential beta oneLink bilateral divide 1 →
+    CoarseTest
+  coarseOriginalWordTest word =
+    Words.originalWordObservable
+      theory traceData exponential beta oneLink bilateral divide 1 word
+
+  originalThreeRGWordMomentMatchesWeldFineJet :
+    (leftWord rightWord :
+      Words.PlaquetteWord
+        theory traceData exponential beta oneLink bilateral divide 1) →
+    let left = coarseOriginalWordTest leftWord
+        right = coarseOriginalWordTest rightWord
+    in
+    sourceEffectiveExpectation left ≡ sourceBareExpectation left →
+    sourceEffectiveExpectation right ≡ sourceBareExpectation right →
+    sourceEffectiveExpectation (sourceCoarseProduct left right)
+      ≡ sourceBareExpectation (sourceCoarseProduct left right) →
+    let directions =
+          Original.originalWilsonLiteralJetDirections
+            theory traceData exponential beta oneLink bilateral divide 3
+        left = coarseOriginalWordTest leftWord
+        right = coarseOriginalWordTest rightWord
+    in
+    Cumulant.literalMixedSecondLogDerivative directions
+      (Cumulant.sourceDirectionOf directions
+        (Same.coarsePullback
+          theory traceData exponential beta oneLink bilateral divide
+          left))
+      (Cumulant.sourceDirectionOf directions
+        (Same.coarsePullback
+          theory traceData exponential beta oneLink bilateral divide
+          right))
+    ≡
+    Bare.originalWilsonConnectedCovariance
+      theory traceData exponential beta oneLink bilateral divide
+      1 left right
+  originalThreeRGWordMomentMatchesWeldFineJet
+    leftWord rightWord matchLeft matchRight matchProduct =
+    originalThreeRGEqualMomentsWeldFineJetToBareCoarseCovariance
+      (coarseOriginalWordTest leftWord)
+      (coarseOriginalWordTest rightWord)
+      matchLeft matchRight matchProduct
