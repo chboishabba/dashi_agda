@@ -475,3 +475,11 @@ In `scripts/pnf_history_time_mp.py`, `HistoricalFeature` now carries `last_valid
 - P0: actual source-feature/event availability, field-based rank/nullity and symmetric spectral owners, same-source time-indexed covariance transport, and kernel verification.
 - P1: validate analytic MP assumptions and numerical calibration under serial dependence, heteroskedasticity, null resampling, regime changes and multiple outlier testing.
 - P2: run the branch tests on the original PNF source windows and properly versioned stock histories; compare the heldout risk forecasting performance with shrinkage/factor baselines and separately costed portfolio outcomes.
+
+### Strict native feature-admission floor (subsequent P0 correction)
+
+In addition to as-of event availability and historically known delistings, both `pnf_history_time_mp.py` and `pnf_history_time_risk_walkforward.py` now enforce a common **feature-admission floor**: a selected complete-case observation cannot predate the first-known/admitted time of *any* selected feature. Otherwise a subsequently backfilled feature value could leak into earlier rows even though all raw dictionary keys are present. New synthetic negative-control regressions deliberately backfill late features and assert the historical window stays truncated.
+
+This is a conservative historical constituent/PNF coordinate policy. It may exclude pre-membership price observations that an alternative specified and justified research protocol wishes to use. Such an alternative must define and source its own historical availability/admission semantics explicitly rather than silently bypassing the point-in-time constraint.
+
+**Verification:** The tests are newly authored and committed; the exact branch code is still not executed locally from a checkout. No unverified test count is reported as passing.
