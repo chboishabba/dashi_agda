@@ -9,7 +9,7 @@ module DASHI.Physics.Motors.Circuit36927SearchBridgeExact where
 -- electromagnetic dynamics, inductive recovery or energy gain.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.String using (String)
@@ -22,6 +22,12 @@ import Base369 as B
 
 open Circuit using (Endpoint; WiringGraph; Route; here; step)
 
+-- Constructive numeric ordering: there is no arbitrary user-defined
+-- relation that could make an invalid optimality receipt vacuous.
+data _≤_ : Nat → Nat → Set where
+  zero≤ : ∀ {n} → zero ≤ n
+  suc≤ : ∀ {m n} → m ≤ n → suc m ≤ suc n
+
 record SearchProblem : Set₁ where
   constructor searchProblem
   field
@@ -31,38 +37,40 @@ record SearchProblem : Set₁ where
     heuristic : Endpoint → Nat
     trueRemainingCost : Endpoint → Nat
 
-    -- Genuine admissibility and cost-order evidence must come from
-    -- a selected model; fields of type Set are not automatically proved.
-    BoundedBy : Nat → Nat → Set
+    -- Admissibility is a nonvacuous numeric bound, but a supplied
+    -- 'trueRemainingCost' must still be welded to the actual graph
+    -- shortest-distance semantics before claiming an A* search theorem.
     heuristicAdmissible :
-      (n : Endpoint) → BoundedBy (heuristic n) (trueRemainingCost n)
+      (n : Endpoint) → heuristic n ≤ trueRemainingCost n
     targetCostZero : trueRemainingCost target ≡ zero
-    allEdgeCostsNonnegative : Bool
 
--- A successful path search requires a route witness and a claim that
--- its reported value represents the chosen cost accumulation.
--- In particular a route existing does not entail it is shortest.
-record SearchResult (s : SearchProblem) : Set₁ where
+-- The path cost is calculated from source-selected edge weights.
+pathCost : (s : SearchProblem) {x y : Endpoint} →
+  Route (SearchProblem.graph s) x y → Nat
+pathCost s here = zero
+pathCost s (step e tail) =
+  SearchProblem.edgeCost s e + pathCost s tail
+
+-- An executable search producer must return a route plus the
+-- exact computed cost; no arbitrary Set-valued cost evidence.
+record SearchResult (s : SearchProblem) : Set where
   constructor searchResult
   open SearchProblem s
   field
     path : Route graph start target
     reportedCost : Nat
-    exactPathCostEvidence : Set
+    exactPathCostEvidence : reportedCost ≡ pathCost s path
 
--- To promote a candidate path to optimal, we require an
--- independently justified lower bound for EVERY rival path. This is
--- not derivable merely from an A* tie-order fibre.
-record OptimalSearchResult (s : SearchProblem) : Set₁ where
+-- The optimality receipt quantifies over EVERY rival route using
+-- actual costs. It is not derived from a tie-order code alone.
+record OptimalSearchResult (s : SearchProblem) : Set where
   constructor optimalSearchResult
   open SearchProblem s
   field
     candidate : SearchResult s
-    betterOrEqualThan :
-      (rival : Route graph start target) → Set
     allRivalCostsCovered :
       (rival : Route graph start target) →
-      betterOrEqualThan rival
+      SearchResult.reportedCost candidate ≤ pathCost s rival
 
 -- Existing A* module exposes the intended plateau boundary.
 -- It is reused by type, without asserting any particular physical
