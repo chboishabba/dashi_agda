@@ -995,3 +995,110 @@ calculation checked numerical rational identities independently.
 Agda kernel acceptance is NOT claimed: no `agda` or `nix`
 binary is present in the execution environment. No original world
 nodes or analytic-source proof has been fabricated.
+
+
+## 2026-11-10 decisive H1.01 original relational 144-to-13 semantic obstruction
+
+**Prior-art audit correction: Machin already existed extensively in the repository.**
+Do NOT attribute the original 1706 Machin construction, the convergent Bishop
+arctangents, exact tangent arithmetic, branch control, Archimedes window or
+Round11 setoid-complex source semantics to the 2026-11-09 Cayley-point work.
+The original owners are:
+- `BishopMachinArctanConstructionExact`: actual convergent Bishop arctans at
+  1/5 and 1/239 and `bishopMachinPi`;
+- `BishopMachinRationalTangentAlgebraExact`: two tangent doublings,
+  subtraction and exact Machin rational identity;
+- `BishopMachinQuarterAngleBranchExact`,
+  `BishopMachinPiRationalWindowExact`,
+  `BishopMachinPiArchimedesWindowExact`: branch and quantitative bounds;
+- `BishopRound11MachinSetoidComplexInstanceExact`,
+  `BishopRound11MachinEisensteinRouteBExact`, and
+  `LeanRound11MachinCanonicalRouteBParityExact`: existing same-source
+  transcendental packaging and Lean parity receipts, subject to the
+  explicitly recorded exact-head replay/kernel caveats.
+The recent `BishopMachinOriginalCayleyRationalPointAlgebraExact` and
+`BishopMachinOriginalCayleyPhaseCompositionExact` are limited
+Q[i] **finite-algebra** additions, NOT discovery of Machin or completion
+of the original Bishop `exp(2i atan)` same-function proof.
+
+### New highest-alpha H1.01 source proof: obstruction, section, selected image
+
+`DASHI/Foundations/TernaryThirteenOriginalRelational144NonIdentificationExact.agda`
+is a SAME-SOURCE theorem using the original `StageRelation144`
+and `StageRelationField = (StageAxis12 × StageAxis12) → TriTruth` from
+`StageTwelveGrothendieckRelationHyperformExact`.
+It does not invent a group carrier or pretend equal counts identify
+the original relational semantics.
+
+- `relationToThirteen` observes all 12 original diagonal cells
+  plus the selected ORIGINAL off-diagonal cell (0,1), encoding
+  via the pre-existing `sourceCentralToThirteen`.
+- `reverseCellRaised` changes only the *other ordered* cell
+  (1,0) to `tri-high`, leaving the original diagonal and
+  selected central (0,1) cell neutral.
+- `diagonalCodesAgree`, `centralCellCodesAgree`,
+  `originalThirteenCodeCollision` prove equality of the
+  encoded 13-trit observations of `flatRelation` and
+  `reverseCellRaised`.
+- `reverseCellReallyDiffers` proves the selected original
+  (1,0) relational consumer separates those states.
+- `originalRelation144NonDescent`,
+  `sourceThirteenCannotDetermineReverseCell`,
+  `sourceThirteenCannotFactorReverseCell`:
+  actual constructive counterexample to consumer descent
+  from the original full relation field through the
+  13-coordinate observation.
+- `sourceThirteenCannotBeLosslessLeftInverse`:
+  no reconstruction from this 13-trit code can recover ALL
+  original ordered relational cells pointwise.
+- `selectedRelationFromCentral` explicitly embeds the
+  constructed original 12+1 source carrier into the original
+  144-cell relational field, keeping diagonal entries,
+  selected (0,1) centre, and choosing neutral for all other
+  ordered relation cells.
+- `selectedRelationDiagonalRecovers`,
+  `selectedRelationCentreRecovers`,
+  `selectedRelationThirteenCodeRoundTrip`:
+  exact original diagonal and central recovery.
+- `SelectedSourceRelation` and
+  `selectedRelationImageInhabited`: witness-bearing
+  **actual source subcarrier**, not all of the 144 fields.
+- `thirteenCodeToSelectedRelation` and
+  `sourceRelationCodeHasSection`: every 13-code has a
+  canonical selected 144-field representative (split
+  epimorphism for the coarse observation).
+- `sameCanonicalRepresentativeForCollision` and
+  `noPointwiseFullRelationReconstruction`: this section
+  is not an inverse on the full 144-field, which retains
+  independent relational information.
+
+The correct H1.01 statement can therefore NOT be an
+unqualified identification of the intended full 144-cell
+relational field with the constructed 12+1 carrier via this
+natural diagonal+one-cell observer. The user must select an
+original *restricted relational subcarrier* (or an explicit
+lossy quotient/consumer), prove it independently satisfies the
+semantic group/relational contracts, and only THEN seek a
+same-object identification. The available original owner
+shows why cardinality alone cannot pay this.
+
+Source commits: `3e9614c` counterexample,
+`1c5a601` selected original subcarrier,
+`317be40` explicit pair reduction corrections,
+`bbc7be0` split observation section vs no full inverse.
+Golden TOE roots: `10da9f9`, `cc91a7a`, `dbd6438`.
+
+**H1.01 selected-observer nonidentification is SOURCE-WRITTEN;
+not Agda-kernel checked.** No 144-field-to-13 isomorphism,
+full-world semantics, Monster group identification, or analytic
+Bishop evaluation is claimed. H2.01 still requires actual
+independent ITIR world nodes and commuting maps; H2.02 still
+requires source evidence for the independently selected world
+fabric, not merely the pants specimen.
+
+Remaining analytic P1: original Bishop nested exp/atan-to-Cayley
+equality and the same-function analytic point witnesses.
+P2: original canonical Nat powers were pre-existing and paid;
+independent analytic zeta equality remains open.
+P3: original Gamma integral, continuation, functional equation,
+completed Xi remain open.
