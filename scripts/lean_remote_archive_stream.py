@@ -73,16 +73,18 @@ def stream_archive(fileobj: BinaryIO, repo: str, revision: str,
             if not path.startswith(prefix + "/"):
                 raise ArchiveError("archive unexpectedly changed root")
             relative = path[len(prefix) + 1:]
-            if not relative.endswith(".lean"):
-                continue
+            # Validate and charge ALL regular members, including non-Lean
+            # files which tarfile still must decompress/skip sequentially.
             if (not relative or relative.startswith("/") or chr(0) in relative
                     or any(segment in ("", ".", "..") for segment in relative.split("/"))):
                 raise ArchiveError("unsafe archive member path")
             if member.size < 0:
                 raise ArchiveError("invalid archive member length")
             if member.size > max_total_bytes - total:
-                raise ArchiveError("archive exceeds total Lean source byte budget")
+                raise ArchiveError("archive exceeds total uncompressed archive byte budget")
             total += member.size
+            if not relative.endswith(".lean"):
+                continue
             if member.size > max_file_bytes:
                 yield {"kind": "lean-source", "repository": repo, "revision": revision,
                        "path": relative, "size": member.size, "status": "skipped-size-cap"}
