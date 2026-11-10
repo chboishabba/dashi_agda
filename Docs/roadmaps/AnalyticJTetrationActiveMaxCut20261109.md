@@ -328,3 +328,24 @@ This is a genuine dependency reduction, not a claim that \(\exp_C L(w)=1+w\) has
 Added \`originalBishopLogOnePlusCanonicalLimitUniqueOnUnitDisk\`: with a *genuine* selected radius certificate the constructed alternating Bishop-series limit is unique in the original componentwise setoid, by reusing the existing Bishop uniqueness theorem. This lemma does **not** establish that \`exp_C\` of the series is \`1+w\`; it only prevents multiple incompatible values for the *same* convergent term sequence.
 
 Static GitHub source inspection of \`AbelBishopLogOnePlusOriginalSeriesExact.agda\`, \`AbelBishopGeometricPowerSeriesExact.agda\`, and \`AbelBishopLogOnePlusCoefficientDominationExact.agda\` found no \`postulate\` declarations or Agda goal holes in those new files. **Static inspection is not Agda kernel typechecking**. The exact head still needs a pinned local Agda 2.9 \`--safe\` receipt and repairs before any completion mark.
+
+
+## 2026-11-10 P1 all-degree exp/log continuation (highest-alpha)
+
+The original task remains **Kneser-normalized tetration for ordinary complex exp, with a same-source Bishop modular-j observable**, not E8 count comparisons.
+
+**New source-written Agda:** \`DASHI/Moonshine/AbelBishopLogFiniteGeometricDerivativeExact.agda\` proves, on the genuine Bishop-real carrier, the finite polynomial identity \((1+w)\sum_{k=0}^{N-1}(-w)^k=1-(-w)^N\) for arbitrary \(N\), via the vendored Bishop ring solver and induction. This is the algebraic derivative precursor; does **not** assert infinite-series differentiation. **Exact-head Agda 2.9 typecheck is OPEN.**
+
+**New all-degree mathematical proof:** [AnalyticKoenigsFormalExpLogAllDegree20261110.md](../proofs/AnalyticKoenigsFormalExpLogAllDegree20261110.md) proves in \(\mathbb Q[[X]]\) by coefficient recurrence that \(\exp(\sum_{k\ge1}(-1)^{k+1}X^k/k)=1+X\) in *every* degree. Its independent exact \`fractions.Fraction\` test \`scripts/analytic_j_tetration_exp_log_formal_recurrence.py\` passed at degrees 1,2,3,6,12,32,64,100 and is included in the local golden runner. The all-degree proof is mathematical/documented, not yet native Agda.
+
+**P0 fix:** \`AbelBishopLogOnePlusOriginalSeriesExact.inversePositiveNat\` has been changed to supply \`Data.Nat.Base.NonZero (suc n)\` rather than a propositionally distinct \`suc n ≢ 0\` proof to Agda's rational constructor; static-source correction, fresh checker pending.
+
+**Maximum-cut next unpaid source owners** (no new authority fields):
+1. \`originalBishopFormalExpLogCoefficientAllN\`: all-degree coefficient proof within actual original rational/power-series semantics.
+2. \`originalBishopComplexExpIsPowerSeries\`: identify actual source \`BishopSetoidComplexExact.expC\` with the corresponding complex exponential formal power series (same Bishop carrier, trig/exponential Cauchy product).
+3. \`originalBishopLogOnePlusExpInverseOnUnitDisk\`: use coefficient extensionality, convergence and original Bishop complex exp to establish \(\exp_C(L(w))≈_C1_C+w\) for actual \(w\) with radius \(<1\).
+4. \`originalBishopFixedPointAndLocalLogSource\`: source-defined \(p\), reciprocal, disk, \(g(z)=p+L((z-p)/p)\), and local inverse; use the previously derived quantitative bounds.
+5. \`originalSchroederHolomorphicLocalLinearization\` → integer Abel winding cocycle → conjugate-pair Kneser global normalization.
+6. In parallel: original Bishop q-period, \(\Delta\) nonvanishing, same source j, and actual moving-fine observer/contour certification.
+
+**Acceptance policy:** none of (1)–(6) is kernel-closed by formal series, finite polynomial identities or a numerical run. Test and repair with the repository's pinned Agda 2.9 \`--safe\` runner before promotion.
