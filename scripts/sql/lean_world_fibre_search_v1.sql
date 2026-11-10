@@ -42,6 +42,22 @@ CREATE TABLE IF NOT EXISTS lean_world_occurrence (
 CREATE INDEX IF NOT EXISTS lean_world_occurrence_fibre_cursor_idx
   ON lean_world_occurrence (fibre_id, repository, revision, declaration);
 
+-- Occurrences are immutable admission receipts. A row UPDATE could change
+-- fibre_id without firing statement transition-table count triggers and
+-- silently corrupt both fibre counts. Metadata/proof alterations must also
+-- create an explicit new source receipt, not rewrite earlier provenance.
+CREATE OR REPLACE FUNCTION lean_world_reject_occurrence_update()
+RETURNS trigger LANGUAGE plpgsql AS $
+BEGIN
+  RAISE EXCEPTION 'Lean-world occurrence receipts are immutable; delete and reinsert in one transaction';
+END
+$;
+DROP TRIGGER IF EXISTS lean_world_occurrence_immutable_trigger
+  ON lean_world_occurrence;
+CREATE TRIGGER lean_world_occurrence_immutable_trigger
+BEFORE UPDATE ON lean_world_occurrence
+FOR EACH ROW EXECUTE FUNCTION lean_world_reject_occurrence_update();
+
 -- Bulk-friendly exact counts: statement-level transition tables update each
 -- affected fibre ONCE PER SQL INSERT/DELETE statement, not once per row.
 -- This reduces hot-row contention when COPY/batched INSERT is used.
