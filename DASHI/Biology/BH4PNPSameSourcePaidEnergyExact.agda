@@ -14,7 +14,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.BH4PNPSamePhysicalHistoryBridgeExact as Same
 import DASHI.Biology.BH4PNPOrderedEnergyHistoryExact as Ledger
 
-record SameSourcePaidEnergyModel : Set₁ where
+record SameSourcePaidEnergyModel : Set₂ where
   field
     source : Same.SameSourceBH4PNPModel
     orderedEnergy : Ledger.OrderedEnergyCarrier
