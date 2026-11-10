@@ -33,6 +33,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact as Hi
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact as Graph
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryVerifierExact as Verifier
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
 import DASHI.Mathematics.Complexity.Karp21NativeRawEdgeInputChargeExact as Input
 import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact as Width
 import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact as EdgeWord
@@ -177,3 +178,30 @@ actualOriginalN21CertificateBitsBound
         word n threshold edges parsed)
       (actualOriginalGraphEdgeCountAtMostInputBits
         word n threshold edges parsed))
+
+
+-- G2.2 true original-wire ACCEPTANCE receipt. There is no
+-- independently supplied accepted graph, ledger, certificate length,
+-- or abstract polynomial bound: the user supplies only a Boolean
+-- equality about execution of the ACTUAL binary N21 verifier.
+actualN21AcceptedCertificateBoundByOriginalGraphWord :
+  (word certificate : Word.BitWord) →
+  Verifier.verifyNativeWholeBinaryGraphWord word certificate ≡ true →
+  length certificate ≤ length word + length word
+actualN21AcceptedCertificateBoundByOriginalGraphWord
+  word certificate accepted
+  with Graph.readNativeWholeBinaryGraphWord word in graph
+... | nothing with accepted
+... | ()
+... | just (Graph.whole-binary-graph n edges threshold)
+  with Verifier.readNativeBinaryCutLedger
+    edges certificate [] Ledger.emptyLedger in checked
+... | nothing with accepted
+... | ()
+... | just result
+  with Positive.meetsOriginalPositiveThreshold result threshold
+... | false with accepted
+... | ()
+... | true =
+  actualOriginalN21CertificateBitsBound
+    word certificate n threshold edges result graph checked
