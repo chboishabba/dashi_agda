@@ -273,3 +273,37 @@ This is an **exact structural accounting identity**, *not* per-node Kirchhoff cu
 4. M3: support ideal switch states and realistic diode/MOSFET models (with explicit signed passivity/energy assumptions), then investigate pulse recovery.
 5. S1: acquire lawful read-only schematic/wiring documentation from Holmstrom and verify same-design/source topology; preserve Slobodian/Holmstrom/DASHI attribution.
 6. P3: original instrument input/output, capacitor and inductor states, shaft torque/speed and uncertainties. Do not infer physical efficiency from topology or simulations.
+
+## 2026-11-10 switched-capacitor recovery / exact rational equalisation continuation
+
+### New source files on PR #1482
+
+- `scripts/circuit36927_switched_capacitor_recovery.py` (commit `0b94de51`): two-capacitor switched resistor model with explicit closed/open switch; backward-Euler charge transfer; exact (up to floating-point) discrete energy partition into final capacitor storage, resistor heat, and nonnegative integrator loss. Contains 200 seeded randomised tests and one closed/open multi-step reference.
+- `scripts/circuit36927_equalization_exact.py` (commit `f53542f5`): rational arithmetic using Python `Fraction`, checking 501 cases including the reference 100 µF each at 12 and 0 V. Identifies final voltage `(C1*V1+C2*V2)/(C1+C2)` and equalisation loss `C1*C2*(V1-V2)^2/[2*(C1+C2)] >= 0`.
+- No vendor CAD, electrical design files or proprietary netlists were added.
+
+### Local checks actually executed
+
+- Original reference at `/mnt/data/circuit36927/switched_capacitor_recovery.py`: initial 7.2 mJ, final 3.6 mJ, resistor heat 3.2727272727 mJ, backward Euler artificial loss 0.3272727273 mJ, 1 open step and 1999 closed steps, 200 randomised cases; no residual beyond tolerance.
+- Original reference at `/mnt/data/circuit36927/circuit36927_equalization_exact.py`: 501 exact rational cases passed, 6 V final and 9/2500 J equalisation energy difference in the demonstration.
+- Previously provided local `/mnt/data/circuit36927/circuit36927_mna.py` executed and reported RC 11.9991292114 V, 100 steps with four checks each, RL first step 0.5 A; this file is a mounted local reference and is not guaranteed identical byte-for-byte to the GitHub `scripts/circuit36927_mna.py` revision.
+- `python -m py_compile /mnt/data/circuit36927/*.py` passed. This checks Python syntax only.
+- **The committed GitHub file bytes for the two new scripts were not re-downloaded and executed separately**; local scripts and committed scripts are intended to implement the same test, but treat exact committed-file test status as pending unless re-executed.
+- No Agda compiler was available; Agda kernel checking remains open.
+
+### Exact mathematical and physical boundary
+
+The equalisation formula follows algebraically from charge conservation and common final voltage. For the closed, passive, two-capacitor network without an external source, any differential-voltage energy is dissipated by physical losses and/or numerical dissipation in the selected implicit method; the code is *not* evidence that an alternative resonant switched circuit cannot return some energy to a designated storage node.
+
+The 3/9/27 representation is an existing finite phase-resolution/indexing abstraction. Neither phase index, A* route search, nor the equalisation law establishes physical gain. A* can be reused for probe placement or topology optimisation with explicit cost/admissibility; physical dynamics remain in the RLC/MNA solver.
+
+### Remaining maximum-cut obligations, ordered
+
+1. **V0**: Agda 2.9 kernel acceptance for all changed modules and transitive imports, plus exact committed-script executable regression.
+2. **S1**: actual original source-specific electrical schematics and connected coil/capacitor/switch terminals for the Holmstrom V1 impulse and Dodecatron; avoid false claim that a vendor design has been recovered.
+3. **M1**: source-independent typed-pin finite incidence matrix, KCL/KVL correspondence, and machine-checked R/C/L laws plus MNA soundness over a selected algebraic carrier.
+4. **M2**: passive switch / diode state model, recoverable inductor energy and capacitor return path; test simultaneous stored-energy and resistive-loss ledger including numerical integration loss.
+5. **M3**: physically calibrated motor magnetic field / inductance versus angle, coil polarity, torque and mechanical load.
+6. **P3**: physical-source admission via synchronized current/voltage/torque/time observations, fixed boundary and uncertainty. Never infer over-unity from a simulation or open-circuit voltage.
+
+Attribution: Slobodian's historical claims, Holmstrom's documented designs, and the independent DASHI modelling contributions remain separate.
