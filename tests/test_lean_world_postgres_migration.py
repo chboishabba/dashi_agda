@@ -91,6 +91,13 @@ BEGIN
   END;
 
   BEGIN
+    TRUNCATE lean_world_occurrence;
+    RAISE EXCEPTION 'TRUNCATE incorrectly admitted';
+  EXCEPTION WHEN raise_exception THEN
+    IF SQLERRM = 'TRUNCATE incorrectly admitted' THEN RAISE; END IF;
+  END;
+
+  BEGIN
     INSERT INTO lean_world_occurrence
       (repository,revision,declaration,statement_id,fibre_id,proof_term_digest,attribution)
       VALUES('r','rev','wrong-fibre',s1,f2,'term-w','author-w');
