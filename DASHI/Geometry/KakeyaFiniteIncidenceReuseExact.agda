@@ -51,22 +51,22 @@ incidenceGramDefect = L2.gramDefect
 -- Exact algebraic identity, stronger than the resulting inequality.
 -- The defect is explicitly a sum of squares, not an assumed bound.
 finiteIncidenceGramIdentity :
-  ∀ data →
-  occupiedWeight data * overlapEnergy data
-  ≡ L2.square (totalIncidence data) + incidenceGramDefect data
+  ∀ xs →
+  occupiedWeight xs * overlapEnergy xs
+  ≡ L2.square (totalIncidence xs) + incidenceGramDefect xs
 finiteIncidenceGramIdentity = L2.finiteGramIdentity
 
 finiteIncidenceGramDefectNonnegative :
-  ∀ data → Data.Rational.Base.0ℚ ≤ incidenceGramDefect data
+  ∀ xs → Data.Rational.Base.0ℚ ≤ incidenceGramDefect xs
 finiteIncidenceGramDefectNonnegative = L2.gramDefectNonnegative
 
 -- This is the squared finite union/second-moment inequality. Turning
 -- occupiedWeight into literal union volume requires independent cell
 -- disjointness and coverage proofs.
 finiteIncidenceSecondMoment :
-  ∀ data →
-  L2.square (totalIncidence data)
-    ≤ occupiedWeight data * overlapEnergy data
+  ∀ xs →
+  L2.square (totalIncidence xs)
+    ≤ occupiedWeight xs * overlapEnergy xs
 finiteIncidenceSecondMoment = L2.finiteCauchySchwarzSquared
 
 -- Reuse existing restricted-family argument for a selected subfamily.
@@ -83,7 +83,7 @@ finiteRestrictedIncidenceSecondMoment =
 record GeometricIncidenceAdapter : Set₁ where
   field
     incidences : FiniteIncidences
-    -- Selected geometric data must be identified with the exact
+    -- Selected geometric xs must be identified with the exact
     -- finite rational model, not merely named after it.
     geometricTotal : ℚ
     geometricUnionWeight : ℚ
