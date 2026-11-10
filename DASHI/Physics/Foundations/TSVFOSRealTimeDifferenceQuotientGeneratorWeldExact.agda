@@ -26,6 +26,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Unit using (⊤; tt)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
@@ -1371,6 +1372,222 @@ module _
       (originalSelectedObserverShiftInverseSolves
         source metric conversion scalar inverse target)
       (domain , refl)
+
+
+  ------------------------------------------------------------------------
+  -- P07.L10: SOURCE-NATIVE OPERATOR EXPRESSION AND STRONG LIMIT.
+  --
+  -- A typed expression uses ONLY the ORIGINAL observer and reconstructed
+  -- OS H, together with the ORIGINAL subtraction/scalar actions. There
+  -- is no newly selected operator and no independent "f(H)" equality.
+  --
+  -- A physically justified common invariant domain and convergence of
+  -- one source-selected expression sequence produce intertwinement of
+  -- its strong limit. This does not yet construct a Borel spectral
+  -- measure, trace-class heat semigroup or a dense self-adjoint core.
+  ------------------------------------------------------------------------
+
+  data OriginalEnergyExpression
+      (source : RealTimeDerivativeBridge) : Set where
+    selectedStateExpr : OriginalEnergyExpression source
+    applyEnergyExpr :
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+    subtractEnergyExpr :
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+    scaleEnergyExpr :
+      RealStep source →
+      OriginalEnergyExpression source →
+      OriginalEnergyExpression source
+
+  observerEnergyExpression :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    OriginalEnergyExpression source →
+    ObserverState → ObserverState
+  observerEnergyExpression source conversion selectedStateExpr a = a
+  observerEnergyExpression source conversion
+      (applyEnergyExpr expression) a =
+    observerPhysicalEnergyOperator conversion
+      (observerEnergyExpression source conversion expression a)
+  observerEnergyExpression source conversion
+      (subtractEnergyExpr left right) a =
+    observerSubtract source
+      (observerEnergyExpression source conversion left a)
+      (observerEnergyExpression source conversion right a)
+  observerEnergyExpression source conversion
+      (scaleEnergyExpr scalar expression) a =
+    observerScale source scalar
+      (observerEnergyExpression source conversion expression a)
+
+  osEnergyExpression :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source) →
+    OriginalEnergyExpression source →
+    ReconstructedState → ReconstructedState
+  osEnergyExpression source conversion selectedStateExpr a = a
+  osEnergyExpression source conversion
+      (applyEnergyExpr expression) a =
+    originalOSPhysicalEnergyOperator conversion
+      (OS.hamiltonian reconstruction)
+      (osEnergyExpression source conversion expression a)
+  osEnergyExpression source conversion
+      (subtractEnergyExpr left right) a =
+    osSubtract source
+      (osEnergyExpression source conversion left a)
+      (osEnergyExpression source conversion right a)
+  osEnergyExpression source conversion
+      (scaleEnergyExpr scalar expression) a =
+    osScale source scalar
+      (osEnergyExpression source conversion expression a)
+
+  record OriginalEnergyExpressionCore
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source) : Set₁ where
+    field
+      originalInvariantCore :
+        OriginalInvariantPhysicalEnergyCore source conversion
+
+      subtractStaysOnDomain :
+        ∀ a b →
+        ObserverGeneratorDomain source a →
+        ObserverGeneratorDomain source b →
+        ObserverGeneratorDomain source (observerSubtract source a b)
+
+      scaleStaysOnDomain :
+        ∀ scalar a →
+        ObserverGeneratorDomain source a →
+        ObserverGeneratorDomain source (observerScale source scalar a)
+
+  open OriginalEnergyExpressionCore public
+
+  originalExpressionDomain :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (expression : OriginalEnergyExpression source)
+    (a : ObserverState) →
+    ObserverGeneratorDomain source a →
+    ObserverGeneratorDomain source
+      (observerEnergyExpression source conversion expression a)
+  originalExpressionDomain source conversion core
+      selectedStateExpr a domain = domain
+  originalExpressionDomain source conversion core
+      (applyEnergyExpr expression) a domain =
+    originalObserverEnergyPreservesDomain
+      (originalInvariantCore core)
+      (observerEnergyExpression source conversion expression a)
+      (originalExpressionDomain source conversion core
+        expression a domain)
+  originalExpressionDomain source conversion core
+      (subtractEnergyExpr left right) a domain =
+    subtractStaysOnDomain core
+      (observerEnergyExpression source conversion left a)
+      (observerEnergyExpression source conversion right a)
+      (originalExpressionDomain source conversion core left a domain)
+      (originalExpressionDomain source conversion core right a domain)
+  originalExpressionDomain source conversion core
+      (scaleEnergyExpr scalar expression) a domain =
+    scaleStaysOnDomain core scalar
+      (observerEnergyExpression source conversion expression a)
+      (originalExpressionDomain source conversion core
+        expression a domain)
+
+  originalEnergyExpressionIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (expression : OriginalEnergyExpression source)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (observerEnergyExpression source conversion expression a)
+    ≡ osEnergyExpression source conversion expression (J a)
+  originalEnergyExpressionIntertwines source conversion core
+      selectedStateExpr a domain = refl
+  originalEnergyExpressionIntertwines source conversion core
+      (applyEnergyExpr expression) a domain =
+    trans
+      (originalSelectedPhysicalEnergyIntertwines
+        source conversion
+        (observerEnergyExpression source conversion expression a)
+        (originalExpressionDomain
+          source conversion core expression a domain))
+      (cong
+        (originalOSPhysicalEnergyOperator conversion
+          (OS.hamiltonian reconstruction))
+        (originalEnergyExpressionIntertwines
+          source conversion core expression a domain))
+  originalEnergyExpressionIntertwines source conversion core
+      (subtractEnergyExpr left right) a domain =
+    trans
+      (linearSubtract source
+        (observerEnergyExpression source conversion left a)
+        (observerEnergyExpression source conversion right a))
+      (cong₂ (osSubtract source)
+        (originalEnergyExpressionIntertwines
+          source conversion core left a domain)
+        (originalEnergyExpressionIntertwines
+          source conversion core right a domain))
+  originalEnergyExpressionIntertwines source conversion core
+      (scaleEnergyExpr scalar expression) a domain =
+    trans
+      (linearScale source scalar
+        (observerEnergyExpression source conversion expression a))
+      (cong
+        (osScale source scalar)
+        (originalEnergyExpressionIntertwines
+          source conversion core expression a domain))
+
+  record OriginalEnergyExpressionStrongLimit
+      (source : RealTimeDerivativeBridge)
+      (conversion : PhysicalHbarEnergyConversion source)
+      (core : OriginalEnergyExpressionCore source conversion)
+      : Set₁ where
+    field
+      selectedApproximant : Nat → OriginalEnergyExpression source
+      selectedObserverLimit : ObserverState → ObserverState
+      selectedOSLimit : ReconstructedState → ReconstructedState
+
+      observerExpressionConverges :
+        ∀ a →
+        ObserverGeneratorDomain source a →
+        ObserverConverges source
+          (λ n → observerEnergyExpression
+            source conversion (selectedApproximant n) a)
+          (selectedObserverLimit a)
+
+      osExpressionConverges :
+        ∀ a →
+        ObserverGeneratorDomain source a →
+        OSConverges source
+          (λ n → osEnergyExpression
+            source conversion (selectedApproximant n) (J a))
+          (selectedOSLimit (J a))
+
+  open OriginalEnergyExpressionStrongLimit public
+
+  originalSelectedStrongFunctionalLimitIntertwines :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (approximation :
+      OriginalEnergyExpressionStrongLimit source conversion core)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    J (selectedObserverLimit approximation a)
+    ≡ selectedOSLimit approximation (J a)
+  originalSelectedStrongFunctionalLimitIntertwines
+      source conversion core approximation a domain =
+    osLimitUnique source
+      (osConvergesRespectPointwise source
+        (λ n → originalEnergyExpressionIntertwines
+          source conversion core
+          (selectedApproximant approximation n) a domain)
+        (embeddingPreservesLimit source
+          (observerExpressionConverges approximation a domain)))
+      (osExpressionConverges approximation a domain)
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
