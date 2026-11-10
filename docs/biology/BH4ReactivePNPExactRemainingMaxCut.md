@@ -1097,3 +1097,61 @@ scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything
 Existing user geometry and prior PNP/SG thermodynamic sources retain attribution; these additions are assistant implementation assistance in exact additive proof bookkeeping.
 
 **Next highest-alpha:** attach original physical positive-entropy/Poisson one-step derivations to an *ordered real energy* accounting receipt; source-pay boundary work, residual bound, and Rhea detailed balance; then kernel check physical owner at a reconciled #1454/#1471 head. No K0 or generic deduplication detour.
+
+
+### 2026-11-10 P0 source-positive CHNOP weighted-simplex admission seam
+
+In the existing original `BH4OriginalCHNOPFiveAxisSimplexBridgeExact.agda`
+owner (not a competing simplex), the next proof contract is
+now source-written:
+
+- `SourcePositiveAggregateCHNOP certificate`: for **every**
+  `Fin 29` species, supplies an actual predecessor
+  `k : Nat` and exact equality
+  `lookup (totalCHNOPSourceWeights certificate) species ≡ suc k`.
+  This is exact strict positivity, not a float threshold.
+- `Original369PositiveWeightedSimplexAdmission`: pairs the
+  original `Panel.SourceCertifiedOriginal29x12` with its
+  per-species positive CHNOP witness, preserving source identity.
+- `original369SimplexWeightAndLeftKernel`: consumes that same
+  admission and gives both the selected species' positive
+  weight and each selected original reaction column's aggregate
+  conservation equality.
+- `original369PositiveSimplexAllSitesCHNOPInvariant`:
+  recovers the existing original 27×12 all-site weighted
+  conservation result for precisely that admitted source.
+- `zeroCHNOPWeightBlocksPositiveSource`: exact proof that
+  an original species whose combined CHNOP weight is zero
+  cannot inhabit `SourcePositiveAggregateCHNOP`.
+
+These are an actual logical source-admission and no-go seam,
+but **not an inhabitant** of the admission record and **not**
+a proof of compactness in the original 27×29 real concentration
+space. Generated original byte-pinned full panel source paths
+`artifacts/biology/rhea-kitzerow-bh4-reactions.json`,
+`artifacts/biology/bh4-stoichiometric-matrix.json`,
+and `DASHI/Biology/Molecular/BH4Original29x12GeneratedSourceExact.agda`
+were explicitly checked on the current PR branch and not found.
+Thus an unconditional `sourceWeightPositive` for the real
+29 species cannot be asserted or fabricated. If any selected
+species is atom-free or an unresolved exchange carrier, a
+different finite compactness/invariant carrier is required.
+
+**Remaining highest-alpha P0 exact leaves:**
+(1) authenticate and generate the original source;
+(2) inhabit `SourcePositiveAggregateCHNOP` or establish
+the exact species-specific obstruction;
+(3) embed the Nat source CHNOP algebra into a single
+real-valued 783-coordinate conserved mass functional;
+(4) prove Poisson–SG–mass-action continuity, weighted-simplex
+preservation and finite compactness there;
+(5) supply a genuine Brouwer fixed-point producer and
+convert it to a positive implicit root; (6) kernel-check
+exact-head with Agda and its transitive imports.
+Original measured kinetics, open physical boundaries,
+biological same-state observation and independent held-out
+empirical validation remain separate.
+
+**Validation boundary:** commit/write/readback is not Agda
+kernel checking. No Agda or Nix executable is available in
+the current runtime; this module remains source-written only.
