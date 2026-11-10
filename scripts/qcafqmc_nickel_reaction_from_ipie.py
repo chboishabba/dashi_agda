@@ -21,6 +21,34 @@ LABELS=("B","BC","C")
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
+def select_production_blocks(raw,expected_blocks,discard):
+    """Strip ipie's initial estimator before discarding production burn-in.
+
+    ipie AFQMC.setup_estimators() writes print_block(..., 0, ...) before
+    propagation; a 300-block run generally has 301 estimator rows.
+    Accept 300-row exports where block zero is already absent, but require
+    the exact production block count from the source receipt. Any other
+    shape fails rather than silently shifting the energy time window.
+    """
+    arr=np.asarray(raw)
+    if arr.ndim!=1:
+        raise ValueError("expected one-dimensional energy estimator")
+    if type(expected_blocks)!=int or expected_blocks<1:
+        raise ValueError("missing valid production block count")
+    if type(discard)!=int or not 0<=discard<expected_blocks:
+        raise ValueError("invalid discard count")
+    if len(arr)==expected_blocks+1:
+        arr=arr[1:]
+        dropped_block_zero=True
+    elif len(arr)==expected_blocks:
+        dropped_block_zero=False
+    else:
+        raise ValueError(
+            f"energy estimator has {len(arr)} rows; expected {expected_blocks} "
+            f"or {expected_blocks+1} (with block-zero estimator)")
+    return arr[discard:],dropped_block_zero
+
+
 def load_seed(receipt_path,discard=50,autocorrelation=True):
     receipt_path=Path(receipt_path).resolve()
     receipt=json.loads(receipt_path.read_text())
@@ -32,13 +60,18 @@ def load_seed(receipt_path,discard=50,autocorrelation=True):
     if receipt.get("executed",True) is False:
         raise ValueError("dry-run is not a measurement")
     from ipie.analysis.extraction import extract_observable
-    values=extract_observable(str(file),"energy")["ETotal"].to_numpy()
-    if values.ndim!=1 or len(values)<discard+30:
-        raise ValueError("insufficient measured energy blocks")
-    values=np.asarray(values,dtype=complex)
+    table=extract_observable(str(file),"energy")
+    if "ETotal" not in table.columns:
+        raise ValueError("ipie energy estimator does not contain ETotal")
+    values=np.asarray(table["ETotal"].to_numpy(),dtype=complex)
     if not np.isfinite(values).all() or np.max(abs(values.imag))>1e-4:
         raise ValueError("non-finite or unexpectedly complex energy estimates")
-    retained=values.real[discard:]
+    expected=receipt.get("measurement_blocks",receipt.get("blocks"))
+    retained,block_zero_dropped=select_production_blocks(
+        values,int(expected) if expected is not None else None,discard)
+    retained=retained.real
+    if len(retained)<64:
+        raise ValueError("too few actual production blocks for blocking diagnostic")
     blocked=None
     if autocorrelation:
         from qcafqmc_autocorrelation_reblocking import blocking_estimate
@@ -48,6 +81,8 @@ def load_seed(receipt_path,discard=50,autocorrelation=True):
       "seed":receipt.get("seed"),
       "energy_mean_hartree":float(retained.mean()),
       "n_retained_blocks":len(retained),
+      "block_zero_estimator_removed":block_zero_dropped,
+      "production_blocks":int(expected),
       "blocked_within_seed_SE_hartree":blocked["standard_error"] if blocked else None,
       "blocking_tau_diagnostic":blocked["tau_int_lower_estimate"] if blocked else None,
       "geometry_sha256":receipt["geometry_sha256"],
