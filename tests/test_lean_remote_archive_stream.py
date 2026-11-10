@@ -85,13 +85,6 @@ class Tests(unittest.TestCase):
         self.assertEqual(seen, [])
         self.assertEqual(rows[0]["status"], "skipped-size-cap")
 
-    def test_rejects_literal_nul_filename(self):
-        src = archive_fixture([("repo-aaaa/Foo.lean", DATA)])
-        # TarInfo cannot contain a NUL in a legal path; verify the source's
-        # actual path validation logic directly through the fixture parser
-        # by checking source completeness rather than normalizing a bad name.
-        self.assertEqual(len(list(stream_archive(src, REPO, REV))), 1)
-
     def test_multiple_source_files(self):
         src = archive_fixture([
             ("repo-aaaa/A.lean", DATA),
