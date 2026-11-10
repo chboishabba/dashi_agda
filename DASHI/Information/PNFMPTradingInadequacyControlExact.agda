@@ -144,3 +144,53 @@ noSpectralAdequacyOnlyBuyCompiler :
 noSpectralAdequacyOnlyBuyCompiler =
   NF.witnessRulesOutEveryFlatFactorisation
     sameQualifiedSpectrumDifferentBuyAvailability
+
+-- The richer Dream controller's uncertainty coordinate is a *distinct*
+-- gate from legacy risk. Do not collapse these or overwrite inventory.
+uncertaintyUnderSpectralAdequacy :
+  SpectralAdequacy → Dream.UncertaintyRegime →
+  Dream.UncertaintyRegime
+uncertaintyUnderSpectralAdequacy inadequateSample _ = Dream.uncertain
+uncertaintyUnderSpectralAdequacy uncalibratedNull _ = Dream.uncertain
+uncertaintyUnderSpectralAdequacy qualifiedRiskEstimate u = u
+uncertaintyUnderSpectralAdequacy bulkOnlyQualified u = u
+uncertaintyUnderSpectralAdequacy outlierCandidateQualified u = u
+
+guardedDreamState :
+  SpectralAdequacy → Dream.TradingFabricState →
+  Dream.TradingFabricState
+guardedDreamState q s = Dream.tradingFabricState
+  (Dream.proposal s)
+  (Dream.inventory s)
+  (Dream.liquidity s)
+  (uncertaintyUnderSpectralAdequacy q (Dream.uncertainty s))
+  (Dream.history s)
+  (Dream.risk s)
+
+-- Concrete regression: identical LONG proposal and otherwise
+-- favourable inventory/liquidity/history, but uncalibrated MP null
+-- forces the richer controller to decline a fresh BUY.
+uncalibratedDreamBuyUnavailable :
+  Dream.actionAvailable
+    (guardedDreamState uncalibratedNull Dream.cleanLongState)
+    Dream.buyAction ≡ false
+uncalibratedDreamBuyUnavailable = refl
+
+qualifiedDreamBuyStillAvailable :
+  Dream.actionAvailable
+    (guardedDreamState qualifiedRiskEstimate Dream.cleanLongState)
+    Dream.buyAction ≡ true
+qualifiedDreamBuyStillAvailable = refl
+
+-- The risk-estimate gate never erases a pre-existing crowded-long
+-- inventory condition. Even qualified MP evidence cannot authorize BUY
+-- when the richer action cone closes that branch.
+qualifiedMPDoesNotOverrideInventory :
+  Dream.actionAvailable
+    (guardedDreamState qualifiedRiskEstimate Dream.crowdedLongState)
+    Dream.buyAction ≡ false
+qualifiedMPDoesNotOverrideInventory = refl
+
+-- Original risk reduction remains governed by exposure-aware intent.
+-- The Dream BUY/SELL direction-only specimen must not be used as a
+-- substitute for the newer exposure-aware order-role owner.
