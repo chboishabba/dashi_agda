@@ -7,7 +7,7 @@ module DASHI.Information.PNFFiniteRankNullityBridgeExact where
 -- separate authority. There is no Set-valued proof placeholder.
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.Nat using (Nat; _+_; suc)
+open import Agda.Builtin.Nat using (Nat; _+_; _∸_; suc)
 open import Data.Fin.Base using (Fin)
 open import Data.Nat.Base using (_≤_)
 
@@ -17,7 +17,8 @@ import DASHI.Information.PNFSampleMeanExact as Mean
 import DASHI.Information.PNFCentredRankFactorisationExact as Factor
 import DASHI.Information.PNFCentredLinearRankExact as Linear
 import DASHI.Information.PNFCovarianceRankFactorisationExact as Covariance
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; subst)
+import Data.Nat.Properties as NatP
 
 private
   SOf : Ring.ExactOrderedCommutativeRing → Set
@@ -172,3 +173,33 @@ covarianceRankNullity :
     + nullity O (covarianceLinearMap K M scale)) ≡ p
 covarianceRankNullity K O M scale =
   rankNullity O (covarianceLinearMap K M scale)
+
+-- Truncated-subtraction form of the rank-nullity consequence:
+-- max(0, p - (n-1)) <= nullity(C), where n = suc k.
+-- This is an actual Nat-inequality derivation from the two generic
+-- finite-field owner laws, *not* an assumed PNF-specific conclusion.
+covarianceNullityAtLeastForcedLowerBound :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : FiniteFieldRankNullityOwner K) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  p ∸ k ≤ nullity O (covarianceLinearMap K M scale)
+covarianceNullityAtLeastForcedLowerBound K O {k} {p} M scale =
+  let
+    T = covarianceLinearMap K M scale
+    r = rank O T
+    z = nullity O T
+    rankBound : r ≤ k
+    rankBound = covarianceRankAtMostNMinusOne K O M scale
+    subBound : (r + z) ∸ k ≤ (r + z) ∸ r
+    subBound = NatP.∸-mono NatP.≤-refl rankBound
+    lower : (r + z) ∸ k ≤ z
+    lower = subst
+      (λ rhs → (r + z) ∸ k ≤ rhs)
+      (NatP.m+n∸m≡n r z)
+      subBound
+  in
+    subst (λ total → total ∸ k ≤ z)
+      (covarianceRankNullity K O M scale)
+      lower
