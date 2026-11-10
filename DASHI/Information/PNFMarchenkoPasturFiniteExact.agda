@@ -99,7 +99,7 @@ calibratedMPBand 𝕂 c = record
 -- PNFSpectralNumericABICore explicitly proves that type empty.
 record PNFModeEvidence
   (Candidate : Set)
-  (Source Structural Stability : Candidate → Set) : Set where
+  (Source Structural Stability : Candidate → Set) : Set₁ where
   field
     selectedCandidate : Candidate
     sourcePaid : Source selectedCandidate
