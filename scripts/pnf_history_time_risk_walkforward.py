@@ -108,16 +108,27 @@ def forecast_one_step(
 
 
 def assess_walkforward(receipts: Sequence[RiskForecastReceipt],
-                       *, min_folds: int = 5) -> dict:
+                       *, qualification_asof: int, min_folds: int = 5) -> dict:
     if min_folds < 2 or len(receipts) < min_folds:
         raise ValueError("insufficient out-of-sample folds")
     if any(r.training_latest_time > r.asof
            or r.training_latest_available_at > r.asof
            or r.evaluation_time <= r.asof for r in receipts):
         raise ValueError("lookahead or non-forward evaluation")
+    if any(r.realized_available_at > qualification_asof for r in receipts):
+        raise ValueError("held-out realization unavailable at qualification time")
+    if any(r.asof > qualification_asof for r in receipts):
+        raise ValueError("forecast decision after qualification time")
+    if len({(r.history, r.source, r.consumer_version, r.feature_ids)
+            for r in receipts}) != 1:
+        raise ValueError("mixed historical fibres, versions or feature universes")
     base = float(np.mean([r.benchmark_squared_error for r in receipts]))
     cleaned = float(np.mean([r.cleaned_squared_error for r in receipts]))
-    return {"folds":len(receipts), "baseline_loss":base,
+    return {"folds":len(receipts), "qualification_asof": qualification_asof,
+            "history": receipts[0].history, "source": receipts[0].source,
+            "consumer_version":receipts[0].consumer_version,
+            "feature_ids":receipts[0].feature_ids,
+            "baseline_loss":base,
             "mp_cleaned_loss":cleaned,
             "cleaned_improved_on_this_holdout":cleaned < base,
             "risk_quality_conclusion":"empirical_holdout_only",
