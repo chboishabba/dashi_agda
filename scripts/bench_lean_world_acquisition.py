@@ -23,6 +23,7 @@ import tarfile
 import time
 import tracemalloc
 import urllib.request
+import urllib.parse
 
 from lean_world_source_world import SourceWorldBuilder
 from lean_remote_archive_stream import stream_archive, REPO_RE, COMMIT_RE
@@ -222,5 +223,4 @@ def main():
 
 
 if __name__=="__main__":
-    import urllib.parse
     main()
