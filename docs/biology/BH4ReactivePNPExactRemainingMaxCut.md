@@ -1155,3 +1155,16 @@ empirical validation remain separate.
 **Validation boundary:** commit/write/readback is not Agda
 kernel checking. No Agda or Nix executable is available in
 the current runtime; this module remains source-written only.
+
+
+## 2026-11-10 P0.06 highest-alpha ordered-energy ledger (nonzero residuals)
+
+**New Agda owner, Golden-imported:** `DASHI/Biology/BH4PNPOrderedEnergyHistoryExact.agda`. It replaces the earlier Nat-only limitation at the *abstract ordered-additive carrier* layer without inventing any real-number or original BH4 physical instance.
+
+`OrderedEnergyCarrier` explicitly packages a carrier, zero, addition, order, additive associativity/commutativity/right unit, transitivity, monotonicity, addition-reflecting order cancellation, and nonnegative sums. `EnergyLaws` supplies `EnergyStep`, `compose`, `EnergyHistory`, `historyLedger`, `oneStepUpperBound`, `historyUpperBound`, and `zeroCreditHistoryNonincreasing`. Importantly, its stronger `creditPaidByLoss` theorem proves **final ≤ initial whenever credit ≤ loss, even with nonzero credit**; `paidCreditsCompose` proves closure under sequential composition. `PaidEnergyHistory`, `paidHistoryReceipt`, and `allPaidEnergyHistoriesNonincreasing` extend that implication to arbitrary finite nonempty chronological histories using the SAME indexed intermediate energies.
+
+**Exact scope:** symbolic equality and order algebra only. No concrete ordered-real instance, real-valued mixing entropy, fixed-Poisson electrostatics, SG positivity, detailed balance or six-face boundary-energy certificate has been built. Source assumptions must be inhabited by original physical data and independently certified bounds. Do not replace the original real energy with Nat accounting, promote a synthetic PNP reference, or claim that invoking the abstract record constructs physical energy. This is assistant implementation assistance, not an original PNP law. Agda 2.9 *kernel acceptance remains open*; files and imports have been written, not compiled.
+
+**Why this is the next reusable seam:** The exact P0.06 convexity/SG/reaction decomposition may be inserted as an `EnergyStep` on a real ordered carrier when its full identity and nonnegative dissipation are proved, and numerical residual plus boundary work are paid as `credit`. The generic theorem then shows that a solver can dissipate even with nonzero residuals whenever independently certified losses dominate that credit. This avoids the incorrect requirement that the numerical residual vanish identically.
+
+**Next high-alpha original leaves:** (1) kernel check the new owner and the native G0 imports with `scripts/run_agda29_parallel_check.sh`; (2) instantiate the ordered carrier from verified Bishop/real inequalities and source-matched physical energy; (3) formalize SG and detailed-balanced reaction power plus Poisson boundary terms as a single source-paid one-step receipt; (4) prove outward residual/work bounds; (5) reconcile #1454/#1471, source Rhea 29x12 and all remaining P0.05–P3 physical/empirical gates. No CI is required as proof authority.
