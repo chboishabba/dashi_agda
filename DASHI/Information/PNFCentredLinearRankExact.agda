@@ -118,3 +118,39 @@ tailActionPreservesScaling K M c v t =
       (λ i → Ring.mulAssociative K c (v i) (x i)))
     (Ring.sumFinMulLeft K c
       (λ i → Scalar._*_ S (v i) (x i)))
+
+centredActionPreservesAddition :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k p : Nat} → (M : Mean.ActualFiniteMean K (suc k) p) →
+  (u v : Fin p → SOf K) → (r : Fin (suc k)) →
+  centeredAction K M (Factor.pointwiseAdd K u v) r ≡
+  Factor.pointwiseAdd K (centeredAction K M u)
+      (centeredAction K M v) r
+centredActionPreservesAddition K M u v r =
+  let S = Ring.orderedScalar K
+      x = λ i → Matrix.entry
+        (Centre.centredMatrix K (Mean.source M)) r i
+  in
+  trans
+    (Ring.sumFinCong S
+      (λ i → Ring.mulDistributesOverAdditionLeft K (u i) (v i) (x i)))
+    (Ring.sumFinAdd K
+      (λ i → Scalar._*_ S (u i) (x i))
+      (λ i → Scalar._*_ S (v i) (x i)))
+
+centredActionPreservesScaling :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k p : Nat} → (M : Mean.ActualFiniteMean K (suc k) p) →
+  (c : SOf K) → (v : Fin p → SOf K) → (r : Fin (suc k)) →
+  centeredAction K M (Factor.pointwiseScale K c v) r ≡
+  Factor.pointwiseScale K c (centeredAction K M v) r
+centredActionPreservesScaling K M c v r =
+  let S = Ring.orderedScalar K
+      x = λ i → Matrix.entry
+        (Centre.centredMatrix K (Mean.source M)) r i
+  in
+  trans
+    (Ring.sumFinCong S
+      (λ i → Ring.mulAssociative K c (v i) (x i)))
+    (Ring.sumFinMulLeft K c
+      (λ i → Scalar._*_ S (v i) (x i)))
