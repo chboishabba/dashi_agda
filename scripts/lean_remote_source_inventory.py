@@ -81,6 +81,8 @@ def repository_tree(repo: str, commit: str, *, token: str | None = None,
             continue   # exclude submodules, symlinks, directories
         path, sha, size = item.get("path"), item.get("sha"), item.get("size")
         if (not isinstance(path, str) or not path.endswith(".lean")
+                or path.startswith("/") or chr(0) in path
+                or any(part in ("", ".", "..") for part in path.split("/"))
                 or not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
                 or type(size) is not int or size < 0):
             raise RemoteError("invalid or unsafe source tree entry")
