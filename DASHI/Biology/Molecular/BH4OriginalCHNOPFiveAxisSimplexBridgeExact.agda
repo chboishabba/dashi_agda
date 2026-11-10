@@ -240,3 +240,81 @@ original369x29x12AggregateCHNOPBalance certificate multiplicities =
     (totalCHNOPSourceWeights certificate)
     (Panel.sourceFiniteColumns certificate) multiplicities
     (sourceTotalCHNOPLeftKernel certificate)
+
+------------------------------------------------------------------------
+-- Exact strict-positivity source seam for the original 29 molecular
+-- species. The Rhea certificate provides CHNOP conservation but does
+-- NOT, on its own, establish that every selected molecular species
+-- contains at least one of those atoms. An electron-only carrier or a
+-- source with an unresolved formula must not inhabit this witness.
+--
+-- A strictly positive Nat is given constructively as suc its
+-- predecessor; this does not appeal to a floating-point threshold.
+------------------------------------------------------------------------
+
+record SourcePositiveAggregateCHNOP
+    (certificate : Panel.SourceCertifiedOriginal29x12) : Set where
+  field
+    sourceWeightPositive :
+      (species : F.Fin 29) →
+      Σ Nat (λ predecessor →
+        V.lookup (totalCHNOPSourceWeights certificate) species
+          ≡ suc predecessor)
+
+open SourcePositiveAggregateCHNOP public
+
+record Original369PositiveWeightedSimplexAdmission : Set where
+  constructor original369-positive-weighted-simplex-admission
+  field
+    originalSource : Panel.SourceCertifiedOriginal29x12
+    positiveCHNOP : SourcePositiveAggregateCHNOP originalSource
+
+open Original369PositiveWeightedSimplexAdmission public
+
+-- The two actual admissibility obligations travel together: every
+-- species weight is positive, and the SAME source column conserves the
+-- aggregate weight. Neither a five-class colour simplex nor a
+-- Nash mixed-strategy probability law is substituted for source data.
+original369SimplexWeightAndLeftKernel :
+  (admission : Original369PositiveWeightedSimplexAdmission)
+  (species : F.Fin 29)
+  (column : F.Fin 12) →
+  (Σ Nat (λ predecessor →
+    V.lookup (totalCHNOPSourceWeights (originalSource admission)) species
+      ≡ suc predecessor))
+  ×
+  (Panel.panelWeighted
+    (totalCHNOPSourceWeights (originalSource admission))
+    (Panel.originalReactants
+      (V.lookup
+        (Panel.sourceFiniteColumns (originalSource admission))
+        column))
+    ≡
+    Panel.panelWeighted
+      (totalCHNOPSourceWeights (originalSource admission))
+      (Panel.originalProducts
+        (V.lookup
+          (Panel.sourceFiniteColumns (originalSource admission))
+          column)))
+original369SimplexWeightAndLeftKernel admission species column =
+  sourceWeightPositive (positiveCHNOP admission) species
+  , sourceTotalCHNOPLeftKernel (originalSource admission) column
+
+-- All 27 original sites share exactly the same admitted source and
+-- positive weights; a different source or site-specific synthetic
+-- stoichiometric matrix is not introduced.
+original369PositiveSimplexAllSitesCHNOPInvariant :
+  (admission : Original369PositiveWeightedSimplexAdmission)
+  (multiplicities : V.Vec (V.Vec Nat 12) 27) →
+  Rate.spatialRateWeightedReactants
+    (totalCHNOPSourceWeights (originalSource admission))
+    (Panel.sourceFiniteColumns (originalSource admission))
+    multiplicities
+  ≡
+  Rate.spatialRateWeightedProducts
+    (totalCHNOPSourceWeights (originalSource admission))
+    (Panel.sourceFiniteColumns (originalSource admission))
+    multiplicities
+original369PositiveSimplexAllSitesCHNOPInvariant admission multiplicities =
+  original369x29x12AggregateCHNOPBalance
+    (originalSource admission) multiplicities
