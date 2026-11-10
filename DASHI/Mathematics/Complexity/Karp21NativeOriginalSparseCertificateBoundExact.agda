@@ -28,6 +28,7 @@ open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
 import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21BoolGoldenExact as Boolean
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact as Edge
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact as History
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact as Graph
@@ -45,18 +46,27 @@ numberOfEdgesAtMostSignedTokenBits :
   length edges ≤ Input.rawEdgeSignedCharges edges
 numberOfEdgesAtMostSignedTokenBits [] = z≤n
 numberOfEdgesAtMostSignedTokenBits
-  (Edge.binary-edge u v token ∷ rest) =
+  (Edge.binary-edge u v (Signed.positive magnitude) ∷ rest) =
   s≤s
     (NatP.≤-trans
       (numberOfEdgesAtMostSignedTokenBits rest)
       (NatP.≤-trans
         (NatP.m≤m+n
-          (Input.rawEdgeSignedCharges rest)
-          (Width.signedTokenBitCharge token))
+          (Input.rawEdgeSignedCharges rest) (length magnitude))
         (NatP.≤-reflexive
           (NatP.+-comm
-            (Input.rawEdgeSignedCharges rest)
-            (Width.signedTokenBitCharge token)))))
+            (Input.rawEdgeSignedCharges rest) (length magnitude)))))
+numberOfEdgesAtMostSignedTokenBits
+  (Edge.binary-edge u v (Signed.negative magnitude) ∷ rest) =
+  s≤s
+    (NatP.≤-trans
+      (numberOfEdgesAtMostSignedTokenBits rest)
+      (NatP.≤-trans
+        (NatP.m≤m+n
+          (Input.rawEdgeSignedCharges rest) (length magnitude))
+        (NatP.≤-reflexive
+          (NatP.+-comm
+            (Input.rawEdgeSignedCharges rest) (length magnitude)))))
 
 -- The whole parsed original binary graph word is the unique source of
 -- all edge tokens; its bit length bounds the number of source edges.
@@ -82,9 +92,18 @@ actualOriginalGraphEdgeCountAtMostInputBits word n threshold edges accepted =
     rawSignedTokenChargesAtMostAllFields
       (Edge.binary-edge u v token ∷ rest) =
       NatP.+-mono-≤
-        (NatP.m≤n+m
-          (length u + length v)
-          (Width.signedTokenBitCharge token))
+        (NatP.≤-trans
+          (NatP.m≤m+n
+            (Width.signedTokenBitCharge token)
+            (length u + length v))
+          (NatP.≤-reflexive
+            (trans
+              (NatP.+-comm
+                (Width.signedTokenBitCharge token)
+                (length u + length v))
+              (NatP.+-assoc
+                (length u) (length v)
+                (Width.signedTokenBitCharge token)))))
         (rawSignedTokenChargesAtMostAllFields rest)
 
 -- This source cursor is THE ACTUAL original-word binary sparse
@@ -118,13 +137,15 @@ nativeSuccessfulSparseCursorConsumesExactlyTwoBitsPerEdge
 ... | true | false with success
 ... | ()
 ... | true | true with Boolean.boolEqual a b
-... | true =
+... | true
+  rewrite NatP.+-suc (length rest) (length rest) =
   cong suc (cong suc
     (nativeSuccessfulSparseCursorConsumesExactlyTwoBitsPerEdge
       rest certificate
       (History.recordBinaryEndpointPair u v a b history)
       ledger result success))
-... | false =
+... | false
+  rewrite NatP.+-suc (length rest) (length rest) =
   cong suc (cong suc
     (nativeSuccessfulSparseCursorConsumesExactlyTwoBitsPerEdge
       rest certificate
