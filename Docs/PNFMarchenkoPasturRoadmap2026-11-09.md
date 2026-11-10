@@ -314,3 +314,17 @@ P2 recover original PNF eigenvalue-generating inputs and run independently justi
 P3 integrate the clean risk estimate as an optional upstream observation to Nashi with a source-specific no-bypass and costed walk-forward ledger.
 
 **Attribution:** external Fleet values 74.5526/18.8350/5.5865 are planning labels, not proven eigenvalues from one 120-column correlation matrix. Do not infer an 82.48% explained-variance claim. The reel itself motivates the null-versus-signal comparison, but it does not establish applicability of iid MP to PNF data.
+
+## 15. Finite rank/nullity bridge (2026-11-10)
+
+The same source-centred n-by-p matrix has zero column sums. The explicit first-row reconstruction and linear whole-operator factorisation through n-1 tail rows have been authored in Agda.
+
+**New modules:** `PNFCentredRankFactorisationExact`, `PNFCentredLinearRankExact`, `PNFCentredKernelExact`, `PNFCovarianceRankFactorisationExact`, and `PNFFiniteRankNullityBridgeExact`. They construct exact column and operator compression, prove both encoding and decoding maps linear, show equality of kernels for full centred and tail maps, and derive the covariance rank bound and finite rank/nullity equation from an explicit general finite-field rank theorem interface.
+
+The Nat arithmetic corollary is `covarianceNullityAtLeastForcedLowerBound`, with p∸(n−1)≤nullity(C). `forcedZeroEigenvalueMultiplicityLowerBound` transfers this to the zero eigenspace only when the selected symmetric spectral decomposition supplies an equality between zero multiplicity and kernel dimension.
+
+**Still open:** Agda kernel checking of all new modules. `FiniteFieldRankNullityOwner` has not yet been instantiated with a checked finite-dimensional linear algebra theorem, and `CovarianceZeroSpectrum` requires a real symmetric spectral multiplicity theorem. Neither is silently assumed complete.
+
+**Exact executable witness:** `scripts/pnf_exact_finite_rank_nullity.py` uses exact rational row reduction and constructs an independent kernel basis for same-source centred covariance. A sibling implementation ran on small matrices, including 3×5 (rank 2, nullity 3), 4×2 (rank 2, nullity 0), 2×4 (rank 0, nullity 4). The precise GitHub branch file has not been executed from a checkout.
+
+The result is domain-neutral finite geometry. PNF semantics and financial MP null assumptions remain distinct.
