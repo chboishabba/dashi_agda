@@ -290,11 +290,12 @@ def main() -> None:
         a.source_root is None or a.frame is None or a.expected_frame_sha256 is None):
         p.error("--input --output --intervention-date and --intervention-receipt required")
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
-    census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows,
+    frame_audit = census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows,
                  a.expected_frame_sha256,
                  a.intervention_date, a.intervention_receipt)
     result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt,
                    source_root=a.source_root)
+    result["sampling_frame_audit"] = frame_audit
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(result,sort_keys=True,indent=2)+"\n",encoding="utf-8")
     print(f"Wrote descriptive results for {result['article_count']} reviewed items; causal attribution NOT IDENTIFIED")
