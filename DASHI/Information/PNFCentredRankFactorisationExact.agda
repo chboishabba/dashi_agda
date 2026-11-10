@@ -11,7 +11,7 @@ module DASHI.Information.PNFCentredRankFactorisationExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin; zero; suc)
-open import Relation.Binary.PropositionalEquality using (sym)
+open import Relation.Binary.PropositionalEquality using (sym; trans; cong)
 
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
 import DASHI.Physics.Closure.NSTriadKNPhysicalCutoffInnerProduct as Ring
@@ -57,6 +57,70 @@ centeredColumnExactReconstruction K M i zero =
   sym (Dependency.centredFirstRowDeterminedByRemainingRows K M i)
 centeredColumnExactReconstruction K M i (suc r) = refl
 
+
+-- Linear structure of the zero-sum decoder. These laws matter:
+-- without them any opaque encoding could masquerade as a 'rank bound'.
+pointwiseAdd :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k : Nat} →
+  (a b : Fin k → SOf K) → Fin k → SOf K
+pointwiseAdd K a b i =
+  Scalar._+_ (Ring.orderedScalar K) (a i) (b i)
+
+pointwiseScale :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k : Nat} →
+  SOf K → (Fin k → SOf K) → Fin k → SOf K
+pointwiseScale K c a i =
+  Scalar._*_ (Ring.orderedScalar K) c (a i)
+
+reconstructPreservesAddition :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k : Nat} →
+  (a b : Fin k → SOf K) → (r : Fin (suc k)) →
+  reconstructZeroSum K (pointwiseAdd K a b) r
+  ≡ pointwiseAdd K (reconstructZeroSum K a)
+      (reconstructZeroSum K b) r
+reconstructPreservesAddition K a b zero =
+  trans
+    (cong (Scalar.neg (Ring.orderedScalar K))
+      (Ring.sumFinAdd K a b))
+    (Ring.negDistributesOverAddition K
+      (Ring.sumFin (Ring.orderedScalar K) a)
+      (Ring.sumFin (Ring.orderedScalar K) b))
+reconstructPreservesAddition K a b (suc r) = refl
+
+negativeOfProductMovesRight :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (c x : SOf K) →
+  Scalar.neg (Ring.orderedScalar K)
+    (Scalar._*_ (Ring.orderedScalar K) c x)
+  ≡ Scalar._*_ (Ring.orderedScalar K)
+      c (Scalar.neg (Ring.orderedScalar K) x)
+negativeOfProductMovesRight K c x =
+  sym
+    (trans
+      (Ring.mulCommutative K c (Scalar.neg (Ring.orderedScalar K) x))
+      (trans
+        (Ring.negMultiplicationLeft K x c)
+        (cong (Scalar.neg (Ring.orderedScalar K))
+          (Ring.mulCommutative K x c))))
+
+reconstructPreservesScaling :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  {k : Nat} →
+  (c : SOf K) → (a : Fin k → SOf K) →
+  (r : Fin (suc k)) →
+  reconstructZeroSum K (pointwiseScale K c a) r
+  ≡ pointwiseScale K c (reconstructZeroSum K a) r
+reconstructPreservesScaling K c a zero =
+  trans
+    (cong (Scalar.neg (Ring.orderedScalar K))
+      (Ring.sumFinMulLeft K c a))
+    (negativeOfProductMovesRight K c
+      (Ring.sumFin (Ring.orderedScalar K) a))
+reconstructPreservesScaling K c a (suc r) = refl
+
 -- A rank-at-most-k *factorisation witness*, rather than an unproved
 -- inequality about an opaque Nat-valued rank function.
 record ColumnFactorisationThrough
@@ -69,6 +133,14 @@ record ColumnFactorisationThrough
     reconstruct :
       (i : Fin p) → (r : Fin n) →
       decode (encode i) r ≡ Matrix.entry X r i
+    decodeAdditive :
+      (a b : Fin k → SOf K) → (r : Fin n) →
+      decode (pointwiseAdd K a b) r ≡
+        pointwiseAdd K (decode a) (decode b) r
+    decodeHomogeneous :
+      (c : SOf K) → (a : Fin k → SOf K) → (r : Fin n) →
+      decode (pointwiseScale K c a) r ≡
+        pointwiseScale K c (decode a) r
 
 -- The original centred matrix's column map has a literal factorisation
 -- through the vector space of k-vectors (k = n - 1).
@@ -82,6 +154,8 @@ centeredMatrixFactorsThroughNMinusOne K M = record
   { encode = centeredTail K M
   ; decode = reconstructZeroSum K
   ; reconstruct = centeredColumnExactReconstruction K M
+  ; decodeAdditive = reconstructPreservesAddition K
+  ; decodeHomogeneous = reconstructPreservesScaling K
   }
 
 -- ReconstructZeroSum is linear as soon as the source's additive group
