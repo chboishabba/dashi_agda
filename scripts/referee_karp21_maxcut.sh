@@ -89,6 +89,7 @@ python3 scripts/check_karp21_signed_ledger_width.py
 python3 scripts/check_karp21_signed_gamma_input_charge.py
 python3 scripts/check_karp21_first_enabled_ledger_word_width.py
 python3 scripts/check_karp21_endpoint_history_conservation.py
+python3 scripts/check_karp21_live_payload_potential.py
 python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
@@ -184,6 +185,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeFirstEnabledLedgerWordBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphEdgeFieldWordBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeFullEdgeFieldInputBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeActualEventSubsequenceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphLedgerInputBoundExact.agda
