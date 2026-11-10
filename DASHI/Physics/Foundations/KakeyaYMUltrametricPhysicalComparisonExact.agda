@@ -25,11 +25,14 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _*_; _+_; _≤_)
 open import Data.Product using (_×_; _,_)
 open import Data.Empty using (⊥)
+open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.YangMills.BalabanRGTwoMetricUniformComparisonExact as RG
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 import DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact as Context
 import DASHI.Biology.Physical.PadicPhysicalParameterProjectionExact as Base
+import DASHI.Biology.PadicCylinderLODReasoningField as Padic
+import DASHI.Geometry.SSP369Ultrametric as U369
 
 -- This source theorem already composes two-metric comparisons with a
 -- contraction and reopening error. It works for selected rational
@@ -65,6 +68,20 @@ sameAddressContextDependence :
   → ⊥
 sameAddressContextDependence =
   Context.sameFineAddressDifferentContextChangesParameter
+
+-- Stronger semantic no-go using the ORIGINAL same-address contextual
+-- witness: a single address-only decoder cannot agree with both
+-- original contextual physical parameter observations.
+addressOnlyProjectionCannotRepresentBothContexts :
+  (decode : Padic.DepthTwoAddress → U369.Digit369) →
+  decode Base.fineA ≡
+    Context.contextualParameter Context.closedContext Base.fineA →
+  decode Base.fineA ≡
+    Context.contextualParameter Context.openContext Base.fineA →
+  ⊥
+addressOnlyProjectionCannotRepresentBothContexts decode closedAgreement openAgreement =
+  sameAddressContextDependence
+    (trans (sym closedAgreement) openAgreement)
 
 -- The correct input to the original Kakeya/YM spatial bridge is therefore
 -- a selected physical metric comparison, not a bare ternary address code.
