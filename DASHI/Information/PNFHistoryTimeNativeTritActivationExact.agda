@@ -11,6 +11,8 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin)
 import Relation.Binary.PropositionalEquality
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
+import Data.Empty
 
 import DASHI.Algebra.Trit as Trit
 import DASHI.Physics.Closure.NSTriadKNExactOrderedScalar as Scalar
@@ -76,3 +78,43 @@ nativeTritIsSameSourceActivation :
   ≡ balancedTritScalar K (observedTritAt A h t r i)
 nativeTritIsSameSourceActivation K F A h t r i =
   sourceIsActualTritEncoding A h t r i
+
+-- Exact wrong-type guard: balanced ternary SIGN is not sufficient to
+-- reconstruct arbitrary original magnitudes or financial covariance.
+-- This is the existing consumer non-descent theorem, not a new
+-- invented notion of semantic inadequacy.
+data TwoPositiveObservations : Set where
+  smallPositive : TwoPositiveObservations
+  largerPositive : TwoPositiveObservations
+
+positiveSign : TwoPositiveObservations → Trit.Trit
+positiveSign smallPositive = Trit.pos
+positiveSign largerPositive = Trit.pos
+
+originalMagnitude : TwoPositiveObservations → Nat
+originalMagnitude smallPositive = 1
+originalMagnitude largerPositive = 2
+
+sameBalancedTritButDifferentMagnitude :
+  positiveSign smallPositive ≡ positiveSign largerPositive
+sameBalancedTritButDifferentMagnitude = Agda.Builtin.Equality.refl
+
+differentOriginalMagnitude :
+  originalMagnitude smallPositive ≡
+  originalMagnitude largerPositive → Data.Empty.⊥
+differentOriginalMagnitude ()
+
+balancedSignMagnitudeNonDescent :
+  Descent.ConsumerNonDescentWitness positiveSign originalMagnitude
+balancedSignMagnitudeNonDescent =
+  Descent.consumerNonDescentWitness
+    smallPositive largerPositive
+    sameBalancedTritButDifferentMagnitude
+    differentOriginalMagnitude
+
+balancedTritSignDoesNotRecoverOriginalMagnitude :
+  Descent.FactorsThrough positiveSign originalMagnitude →
+  Data.Empty.⊥
+balancedTritSignDoesNotRecoverOriginalMagnitude =
+  Descent.nonDescentWitnessBlocksFactorization
+    balancedSignMagnitudeNonDescent
