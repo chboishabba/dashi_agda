@@ -142,3 +142,30 @@ These are genuine finite/metric logic lemmas, not use of the large external 3D K
 | YM-K5 | Reproduce pinned external unconditional Kakeya proof and transport its exact statement to selected same-object geometry | OPEN LOCALLY |
 
 Avoid interpreting the hyperbolic (3,1) bilinear as Euclidean on all tangents or the extrinsic voxel encoding as an ultrametric isometry. Mathematical origin remains Wang--Zahl, Guth--Wang--Zahl, and independently credited formalisation contributors.
+
+## 10 November: original-object proof attempt and counterexample
+
+Two competing proposed claims need to be distinguished rigorously.
+
+**Proposed but false in general:** the original lossy finite-prefix `p`-adic/triadic address map is globally and uniformly bi-Lipschitz equivalent to a faithful Euclidean physical metric at *each finite scale*. This fails whenever two physically distinguishable states share a coarse prefix. Assuming a strictly positive lower metric comparison at that scale would force the prefix map to be injective.
+
+**New Agda exact original-source counterexample:**
+`DASHI.Physics.Foundations.KakeyaPadicPrefixGeometryNoGoExact` is built from the actual `PadicCylinderLODReasoningField.refineOne` and `prefixTwoToOne` and the actual `SSP369Ultrametric.distance`, not from invented abstract code. It computes two *distinct* depth-two children with the same depth-one parent, whose fine metric distance is exactly 1 but whose parent distance is exactly 0.
+
+- `fine3NotFine6`: literal proof of different original fine addresses.
+- `sameOriginalParent36`: literal same-prefix equality.
+- `fineDistance36IsOne` and `coarseDistance36IsZero`: exact source metric computations.
+- `noExactOriginalPrefixMetricIsometry`: conditional contradiction for any assertion that original truncation preserves every source distance.
+- `noOriginalPrefixInjectivity`: conditional contradiction for any global injectivity certificate for original truncation.
+- `voxel3SourceIsOriginal`, `voxel6SourceIsOriginal`, `voxel9SourceIsOriginal` and `voxelLineArithmeticProgression`: **positive finite** straight-line sample in the original three-dimensional voxel *observation*, not all real projective directions.
+
+**New Lean results:** in `DashiKakeya/OriginalEuclideanNeedleAndAddressNoGo.lean` (dashi_lean4 PR #106), `straightNeedle_translation`, `straightNeedleTube_translation`, `straightNeedles_translation` and `straightNeedleTubeUnion_translation` are genuine Euclidean R³ **straight-line** and tube correspondence theorems for one explicit rigid translation on the selected carrier, with every direction parametrised and transported. They are not postulated or merely indexed by a coincidentally matching label. Generic `lowerMetricComparison_forces_injective`, `addressCollision_blocks_positiveComparison`, `allScaleComparison_obstructedByAnyCollision` and `no_surjective_ultrametric_isometry_to_real` express mathematical obstacles to the proposed global metric equivalence.
+
+**Implication:** the all-scale RG theorem remains mathematically valid *conditional on independently supplied comparison witnesses*, but these cannot be constructed from a lossy finite prefix on the entire original physical space with a positive lower constant. Instead one must:
+
+1. Compare quotient pseudometrics on equal-observation equivalence classes, with explicit residual within-cell error, or restrict to a selected genuinely injective physical subset.
+2. Establish that the chosen observer / KK spatial metric is actually Euclidean or has the required chart-level controlled distortion from a **physical** metric construction; this cannot follow merely from `3+1` signature counts, contextual cylinder embeddings or our mathematical no-go.
+3. Prove original line segments and *all Euclidean directions* are covered by the chosen map, with a tube radius/measure comparison; a finite 3D voxel collinearity witness only checks a selected axis.
+4. Verify the new Agda/Lean source with actual compilers and the pinned external unconditional Kakeya theorem.
+
+**Proof-evidence boundary:** these are newly committed source-written Agda/Lean terms without local Agda/Lean binaries available. Therefore no exact-head kernel certificate, physical full-stack completion or new Kakeya dimension theorem is claimed. The no-go directly refutes one overly strong interpretation of the original-object obligation. It does not refute a context-dependent multiscale observational model with a proven quotient/residual comparison.
