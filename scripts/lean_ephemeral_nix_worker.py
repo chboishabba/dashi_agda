@@ -119,8 +119,9 @@ def check_version(lean: str, version: str) -> str:
 
 def prepare_sources(repo: str, rev: str, target: str, root: Path,
                     *, opener=None, token=None, max_sources=MAX_SOURCES,
-                    max_total_bytes=MAX_TOTAL_BYTES) -> tuple[list[dict], tuple[str, ...]]:
-    tree = tree_entries(repo, rev, opener=opener, token=token)
+                    max_total_bytes=MAX_TOTAL_BYTES, tree=None) -> tuple[list[dict], tuple[str, ...]]:
+    if tree is None:
+        tree = tree_entries(repo, rev, opener=opener, token=token)
     if target not in tree or not target.endswith(".lean"):
         raise WorkerError("target does not exist at pinned revision")
     queue = [target]
@@ -204,7 +205,8 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
         with tempfile.TemporaryDirectory(prefix="dashi-lean-ephemeral-") as scratch:
             root = Path(scratch)
             sources, externals = prepare_sources(repo, rev, target, root,
-                                                 opener=opener, token=token)
+                                                 opener=opener, token=token,
+                                                 tree=tree)
             receipt.update(toolchain=version, lean_version=observed_version,
                            source_closure=sources, external_imports=list(externals),
                            dependency_closure_id=dependency_closure_id)
