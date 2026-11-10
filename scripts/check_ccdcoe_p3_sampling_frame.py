@@ -28,6 +28,17 @@ def canonical_frame_sha256(frame):
     canonical = json.dumps(frame, sort_keys=True, separators=(',', ':'), ensure_ascii=False)
     return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
 
+def canonical_measurements_sha256(measured):
+    """Digest of observations, invariant under JSONL row order.
+
+    Unlike the preregistered frame digest, this is a result-time integrity
+    receipt. It binds coding labels and reviewer tokens to a saved analysis,
+    but is not independent authentication of any source or reviewer.
+    """
+    canonical = json.dumps(sorted(measured, key=lambda row: row['id']),
+                           sort_keys=True, separators=(',', ':'), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode('utf-8')).hexdigest()
+
 
 def check(frame, measured, expected_frame_sha256=None, expected_intervention_date=None,
           expected_intervention_receipt=None):
@@ -135,6 +146,7 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
             'intervention_date': cutoff_text,
             'intervention_receipt': receipt,
             'canonical_frame_sha256': actual_digest,
+            'canonical_measurements_sha256': canonical_measurements_sha256(measured),
             'frame_commitment_checked': expected_frame_sha256 is not None,
             'declared_units': len(units), 'eligible_units': len(eligible),
             'excluded_units': len(excluded), 'measured_eligible_units': len(observed),
@@ -170,6 +182,14 @@ def self_test():
                 for u in units if u['eligible']]
     good = check(frame, measured)
     assert good['eligible_units'] == 4 and good['excluded_units'] == 1
+
+    # Results bind coding/reviewer observations as well as frame membership:
+    # JSONL ordering is irrelevant, but edited coded data changes the receipt.
+    original_measurement_digest = good['canonical_measurements_sha256']
+    assert check(frame, list(reversed(measured)))['canonical_measurements_sha256'] == original_measurement_digest
+    edited_measurements = deepcopy(measured)
+    edited_measurements[0]['frame'] = 'science_uncertainty'
+    assert check(frame, edited_measurements)['canonical_measurements_sha256'] != original_measurement_digest
     committed = canonical_frame_sha256(frame)
     assert check(frame, measured, committed)['frame_commitment_checked'] is True
     altered = deepcopy(frame)
