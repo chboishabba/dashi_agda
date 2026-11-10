@@ -203,3 +203,34 @@ covarianceNullityAtLeastForcedLowerBound K O {k} {p} M scale =
     subst (λ total → total ∸ k ≤ z)
       (covarianceRankNullity K O M scale)
       lower
+
+-- Zero-*eigenvalue* multiplicity requires more than rank-nullity:
+-- a real symmetric spectral decomposition must identify geometric and
+-- algebraic multiplicity. A source-selected spectral backend pays this
+-- equality; the rank/nullity module does not silently assume it.
+record CovarianceZeroSpectrum
+  (K : Ring.ExactOrderedCommutativeRing)
+  (O : FiniteFieldRankNullityOwner K)
+  {k p : Nat}
+  (M : Mean.ActualFiniteMean K (suc k) p)
+  (scale : SOf K) : Set where
+  field
+    zeroEigenvalueMultiplicity : Nat
+    zeroMultiplicityEqualsKernelDimension :
+      zeroEigenvalueMultiplicity ≡
+      nullity O (covarianceLinearMap K M scale)
+
+open CovarianceZeroSpectrum public
+
+forcedZeroEigenvalueMultiplicityLowerBound :
+  (K : Ring.ExactOrderedCommutativeRing) →
+  (O : FiniteFieldRankNullityOwner K) →
+  {k p : Nat} →
+  (M : Mean.ActualFiniteMean K (suc k) p) →
+  (scale : SOf K) →
+  (E : CovarianceZeroSpectrum K O M scale) →
+  p ∸ k ≤ zeroEigenvalueMultiplicity E
+forcedZeroEigenvalueMultiplicityLowerBound K O {k} {p} M scale E =
+  subst (λ m → p ∸ k ≤ m)
+    (sym (zeroMultiplicityEqualsKernelDimension E))
+    (covarianceNullityAtLeastForcedLowerBound K O M scale)
