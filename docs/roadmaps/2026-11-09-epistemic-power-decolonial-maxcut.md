@@ -463,3 +463,24 @@ User scope remains K1–K3; K0/K4 and DOCX excluded.
 - `crenshawLegalAuthenticatedPrimaryIssue` and `historicalCarceralSamePersonMechanism`: authentic historical/legal sources, source-specific same-case attributions and warranted causal links.
 
 **Status:** All new modules committed as source-written; compiler acceptance was explicitly excluded, and none of the external original-row/causal evidence has been manufactured.
+
+## Fourteenth K1–K3 continuation — numerator/denominator identification cut (2026-11-10)
+
+**User operating constraints:** K0/K4 deliberately excluded. No DOCX. Crenshaw, Ocen/Nanda, OCR, archival curators, legal source authors, participants and DASHI mathematics retain separate credit and source authority.
+
+**Concrete new mathematical output (committed; kernel check not requested):**
+- `DASHI/Governance/BlackGirlsMatterDenominatorSensitivityExact.agda`: `blackHigherNumeratorCrossProduct`, `blackHigherComparatorCrossProduct`, `whiteHigherNumeratorCrossProduct`, `whiteHigherComparatorCrossProduct`, `publishedCountsUnchanged`, `denominatorsChangeRateDirection`, `caseCountsAloneDoNotDetermineRateOrder`, `syntheticCrossProductWitness`. Two constructed denominators with identical Boston **report case counts** generate opposite arithmetic cross-product order. Neither example denominator is an observed OCR value. This is a logical non-identification result, not an empirical claim about Boston racial disparity.
+- `DASHI/Governance/BlackGirlsMatterSourceBoundRateOrderExact.agda`: `CertifiedBlackHigher` is a proof-carrying source receipt requiring `OCR.ComparableRatePair`, observed positive denominator, source-matched 2011–12 OCR population and disability-eligibility index, same measure, and a strict cross-product proof. `certifiedHigherRequiresSamePopulationRows`, `eligibilityMismatchCannotPayRate`, `publishedBostonCountsCannotChooseDirection` enforce explicit dependencies. It is not inhabited for the actual Boston or NYC case in this PR.
+- `CrenshawLegalAttributionCapstoneExact.agda` imports both, adding `publishedCasesCannotDetermineRateDirection` and `conditionalSameYearPopulationRateReceipt`.
+
+**Archive discovery now version-grounded:** DataLumos ICPSR source dataset **2011–12 CRDC V2 (released 2025-08-08)** includes LEA/SCH, original dataset matching list, table layouts, data notes and definitions, source `https://www.datalumos.org/datalumos/project/219563/version/V2/view`, archival study DOI `10.3886/E219563V2`. This DOI identifies the archived project, **not the 2015 study or original federal file hash**. Archive description says ICPSR had not reviewed/processed the deposited content. OCR federal download `https://ocrdata.ed.gov/data` remains listed, but local DNS prevents binary access; no archived file rows are yet ingested.
+
+**Remaining exact high-alpha K1–K3 leaves:**
+1. `original2011CRDCReportRowSameDistrictYearIndicator` — original file bytes/version/hash, exact district/school joins, race/gender/eligibility, analysis measure, zero/suppression/missingness, school-to-LEA and report measure mapping.
+2. `source2011EnrollmentDenominatorSamePopulation` — population/year/unit matched source enrollment; verify that report 'disciplinary cases' can actually be translated to unique-student count rather than unvalidated indicator overlap.
+3. `blackGirlsMatterActual2011DisparityReplication` — compare source records against 2015 article counts and perform truly comparable per-person ratio only if 1–2 are paid. Record discrepancies rather than treating source authors as wrong by default.
+4. `crenshawLegalAuthenticatedPrimaryIssue` and `crenshawInterpretationSameCase` — source-verified judicial/opinion-stage passages and independent scholarly-text mapping; preserve majority/dissent.
+5. `observedFatigueAndCapacitySameHistory` — direct situated fatigue observations and causal/good-faith review comparators. Administrative disparity does not measure participant exhaustion.
+6. `historicalCarceralSamePersonMechanism` — independently sourced historical causal pathway and case-specific school→police→custody transitions, if any. Statistical data cannot substitute for consented individual histories.
+
+**No false claims:** No raw 2011–12 data downloaded or independently replicated; no original document SHA, no empirical rate ordering, and no K0/K4 acceptance. The *non-identification of rates from cases alone* is a finite DASHI theorem schema with an explicit synthetic witness; the report's published numerals are attributed to Crenshaw and research collaborators.
