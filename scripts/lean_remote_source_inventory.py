@@ -112,7 +112,7 @@ def source_blob(repo: str, blob_sha: str, max_size: int,
     if len(data) != declared or len(data) > max_size:
         raise RemoteError("blob content size mismatch")
     # Verify Git blob object identity, not merely the HTTP response's claimed SHA.
-    git_hash = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\0" + data).hexdigest()
+    git_hash = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + bytes([0]) + data).hexdigest()
     if git_hash != blob_sha.lower():
         raise RemoteError("source does not match requested Git object SHA-1")
     return data
