@@ -209,3 +209,62 @@ module _
       (coarseOriginalWordTest leftWord)
       (coarseOriginalWordTest rightWord)
       matchLeft matchRight matchProduct
+
+  -- Unlike the bare-coarse RG comparison, the following theorem has
+  -- NO RG moment matching assumptions. Every expectation is taken on
+  -- the actual original cutoff-3 Wilson Gibbs/Haar measure, with
+  -- both coarse test insertions pulled back along its genuine R445
+  -- native two-link SU(N) blocking.
+  sourceE1FineBlockedCovariance : CoarseTest → CoarseTest → ℝ
+  sourceE1FineBlockedCovariance left right =
+    Cross.originalE1FineBlockedExpectation
+      theory traceData exponential beta oneLink bilateral divide
+      (sourceCoarseProduct left right)
+    -ℝ
+    (Cross.originalE1FineBlockedExpectation
+      theory traceData exponential beta oneLink bilateral divide left
+     *ℝ
+     Cross.originalE1FineBlockedExpectation
+      theory traceData exponential beta oneLink bilateral divide right)
+
+  sourceE1FineBlockedCovarianceIsR445 :
+    (left right : CoarseTest) →
+    sourceE1FineBlockedCovariance left right
+    ≡ sourceEffectiveCovariance left right
+  sourceE1FineBlockedCovarianceIsR445 left right =
+    cong₂ _-ℝ_
+      (Cross.originalE1FineBlockedIsR445EffectiveCoarse
+        theory traceData exponential beta oneLink bilateral divide
+        (sourceCoarseProduct left right))
+      (cong₂ _*ℝ_
+        (Cross.originalE1FineBlockedIsR445EffectiveCoarse
+          theory traceData exponential beta oneLink bilateral divide
+          left)
+        (Cross.originalE1FineBlockedIsR445EffectiveCoarse
+          theory traceData exponential beta oneLink bilateral divide
+          right))
+
+  originalFineMixedJ11IsSameE1BlockedCovariance :
+    (left right : CoarseTest) →
+    let directions =
+          Original.originalWilsonLiteralJetDirections
+            theory traceData exponential beta oneLink bilateral divide 3
+    in
+    Cumulant.literalMixedSecondLogDerivative directions
+      (Cumulant.sourceDirectionOf directions
+        (Same.coarsePullback
+          theory traceData exponential beta oneLink bilateral divide
+          left))
+      (Cumulant.sourceDirectionOf directions
+        (Same.coarsePullback
+          theory traceData exponential beta oneLink bilateral divide
+          right))
+    ≡ sourceE1FineBlockedCovariance left right
+  originalFineMixedJ11IsSameE1BlockedCovariance left right =
+    trans
+      (Same.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right)
+      (trans
+        (sym (sourceEffectiveCovarianceIsActualR445 left right))
+        (sym (sourceE1FineBlockedCovarianceIsR445 left right)))
