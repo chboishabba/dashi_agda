@@ -198,3 +198,22 @@ This is a substantial upgrade over **fixed-cutoff** prefix projection: it reache
 The narrowest next high-alpha leaf is therefore a genuine original RG effective-action/marginal comparison estimate, uniform in continuum physical scaling, or an independently sourced finite-marginal compactness/diagonal subsequence plus selected-measure uniqueness argument. The R566 projective event consistency/continuity at empty requires that producer. D2/B1 R576 physical activity, D2/B2 R577 same-H transfer, N1/H6 R563 and G1 R571 stay independent analytic fronts.
 
 **Verification:** commit and readback of source only; Agda 2.9 kernel receipt remains outstanding, and the transitive `RealAnalysisAxioms`/one-link Haar physical authorities are not discharged by this bridge.
+
+
+## 2026-11-10 E1/D1 original R445 three-moment maximum cut
+
+New `YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda`, imported by `YMClayOriginalWilsonPhysicalRegression.agda`.
+
+**Recovered rather than reimplemented:** `YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance` already proves that the selected original fine Wilson two-source formal J11 germ equals the R445 original blocked effective coarse covariance. It uses the actual original side-four Gibbs and native ordered two-link SU(N) map, not a second auxiliary coarse theory.
+
+**New source-native outputs:**
+- `sourceEffectiveExpectation`, `sourceBareExpectation` and `sourceCoarseProduct`: original R445 effective coarse vs independent original bare side-two Wilson expectations, selected from the actual E1/R445 owners.
+- `sourceEffectiveCovarianceIsActualR445`: definitional identity of R445's true pushed-forward connected covariance with the new selected source expression.
+- `sourceBareCovarianceIsOriginalWilson`: definitional identity of independently selected original side-two bare Wilson covariance.
+- `originalThreeRGEqualMomentsImplyCovariance`: proof by `cong₂` on the **actual** original real product and subtraction, showing that source moment comparisons on `F`, `G`, `FG` suffice for covariance comparison; no new separate physical covariance premise.
+- `originalThreeRGEqualMomentsWeldFineJetToBareCoarseCovariance`: transitive composition with R445/R320's original same-fine-source mixed-log theorem. This gives a complete formal proof that **three real RG moment equalities** imply the original Wilson fine mixed J11 source equals the bare coarse Wilson covariance. The three equalities are explicitly unpaid original RG physical hypotheses—not silently deduced from a naive bare-Wilson closure.
+- `coarseOriginalWordTest` and `originalThreeRGWordMomentMatchesWeldFineJet`: specialize the cut to **arbitrary original side-two SU(N) Wilson plaquette-word pairs** rather than unrelated arbitrary independent source test families.
+
+This replaces a possible wrong proof strategy (assume (B_*\mu^W_3=\mu^W_1)) with the exact three-source-moment requirement. The *future quantitative RG theorem* should estimate each of these three **errors** in the physical scale/volume, use ordinary real inequalities to turn the three source estimates into connected covariance control, and propagate through admissible iterated blocking. An exact finite-cutoff equality of effective and bare Wilson moments is not generally expected in interacting lattice gauge theory.
+
+**Verification:** module created and imported; exact source paths/commit readback; no Agda compiler/kernel receipt. The conditional three-moment theorem is a verified-by-source-inspection proof candidate, NOT physical E1 convergence or D1 decay.
