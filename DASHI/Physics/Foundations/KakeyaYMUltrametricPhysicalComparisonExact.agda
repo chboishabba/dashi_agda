@@ -23,10 +23,12 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Rational.Base using (ℚ; _*_; _+_; _≤_)
 open import Data.Product using (_×_; _,_)
+open import Data.Empty using (⊥)
 
 import DASHI.Physics.YangMills.BalabanRGTwoMetricUniformComparisonExact as RG
 import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 import DASHI.Biology.Physical.ContextDependentPadicPhysicalMapExact as Context
+import DASHI.Biology.Physical.PadicPhysicalParameterProjectionExact as Base
 
 -- This source theorem already composes two-metric comparisons with a
 -- contraction and reopening error. It works for selected rational
@@ -55,11 +57,11 @@ canonicalVoxelIsometryIsNotClaimed =
 sameAddressContextDependence :
   Context.contextualParameter
     Context.closedContext
-    Context.Base.fineA
+    Base.fineA
   ≡ Context.contextualParameter
     Context.openContext
-    Context.Base.fineA
-  → Context.⊥
+    Base.fineA
+  → ⊥
 sameAddressContextDependence =
   Context.sameFineAddressDifferentContextChangesParameter
 
