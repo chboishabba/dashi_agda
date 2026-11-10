@@ -346,3 +346,16 @@ Another metric firewall: Eq. (9) of Estrada et al. defines **BFCE with diesel+H2
 **Not source paid:** engine-specific rod/conrod and wall-heat-transfer calibration, crank-angle pressure traces for the McLaren device, true flame kinetics, actual H2/O2 flow and electrolysis power, empirical efficiency/dose response, CO2 synthesis path, continuous carbon cycle, patent 2026 title, and independent device replication. These do not follow from the literature examples.
 
 K0 is deferred per user's explicit instruction; no Agda kernel acceptance is claimed.
+
+## 2026-11-10 user correction: two existing use cases, not a self-powering claim
+
+The user explicitly clarified the inventor's intended uses in the prior conversation and reiterated them on 2026-11-10. Treat these as **user-supplied descriptions**, not verified verbatim transcript quotations:
+
+1. **Hydrocarbon power-station retrofit / fuel synthesis:** place solar photovoltaics around existing hydrocarbon power plants. Use external solar electricity to produce hydrogen from abundant water, combine that hydrogen with carbon recovered from power-station exhaust **or captured atmospheric CO2**, and produce more hydrocarbons instead of continuing to extract as much virgin fossil fuel. The stated aim also includes improving combustion. This is an external-renewable-powered carbon-to-fuel scheme, **not a claim of energy creation**, a zero-energy fuel-making loop, or a requirement that the station's electricity powers its own synthesis.
+2. **Personal car demonstration:** inventor operates the hydrogen enrichment hardware with **externally charged batteries**. The electrical input is not assumed to come from engine alternator. It is inappropriate to dismiss the demonstration using an engine-alternator closed-loop objection unless the actual wiring says otherwise. This car claim is not evidence of on-car CO2 capture or full hydrocarbon regeneration.
+
+New `DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact` makes the deployments distinct: `hydrocarbonPowerStation` carries a typed SI solar-input record with exhaust/atmospheric CO2 alternatives and source-gated carbon synthesis; `externallyChargedCar` carries a typed offboard-battery SI input and source-gated water/H2/fuel/work measurements. Both preserve the existing SI and atomic/stoichiometric ownership. No measurement, direct quotation, legal title, or successful synthetic-fuel reactor is promoted by constructing these types.
+
+**Revised decisive physics:** calculate the selected ideal hydrocarbon water/CO2 stoichiometry, stoichiometric oxygen production, solar electricity/heat work, carbon-cycle inventory, and comparable avoided fossil extraction; measure net round-trip efficiency and practical product yields separately. For car, count battery charging energy over its full before/after SOC boundary. A combustion efficiency effect cannot be extrapolated from solar-station fuel synthesis, nor vice versa.
+
+This corrects earlier overemphasis on hypothetical engine-alternator or fuel-self-regeneration arguments. Attribution: speaker's claims only when direct transcript/payable source is located; user-provided interpretation as user direction; classical chemistry and earlier DASHI owners retain original attribution; ChatGPT is the adapter implementation author.
