@@ -31,7 +31,7 @@ class PointInTimeRiskTests(unittest.TestCase):
         self.assertTrue(all(r.training_latest_time <= r.asof
                             and r.training_latest_available_at <= r.asof
                             for r in receipts))
-        result=assess_walkforward(receipts,min_folds=5)
+        result=assess_walkforward(receipts,qualification_asof=14,min_folds=5)
         self.assertEqual(result["folds"],7)
         self.assertFalse(result["trade_authority"])
         self.assertFalse(result["alpha_claim"])
@@ -92,13 +92,21 @@ class PointInTimeRiskTests(unittest.TestCase):
                               consumer_version="v1",
                               weights=[1/3,1/3,1/3])
 
+    def test_hindsight_risk_certification_rejected(self):
+        rows,features=source_fixture()
+        r=forecast_one_step(rows,features,history="history-1",
+                            source="tape",asof=10,consumer_version="v1",
+                            weights=[1/3,1/3,1/3])
+        with self.assertRaises(ValueError):
+            assess_walkforward([r,r],qualification_asof=10,min_folds=2)
+
     def test_unqualified_number_of_folds_rejected(self):
         rows,features=source_fixture()
         r=forecast_one_step(rows,features,history="history-1",
                             source="tape",asof=10,consumer_version="v1",
                             weights=[1/3,1/3,1/3])
         with self.assertRaises(ValueError):
-            assess_walkforward([r],min_folds=5)
+            assess_walkforward([r],qualification_asof=14,min_folds=5)
 
 if __name__=="__main__":
     unittest.main()
