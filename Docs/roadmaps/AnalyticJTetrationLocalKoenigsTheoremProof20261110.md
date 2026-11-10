@@ -107,6 +107,44 @@ allowing a local logarithm of the normalized ratio. The remaining
 and must be proved on an explicit punctured sector, not inferred
 from this inequality alone.
 
+## A genuine local integer winding result and branch obstruction
+
+The rigorous uniform limit estimate gives, for `0<|w|≤1/10`,
+```text
+chi(p+w) = w(1+eps(w)),   |eps(w)|≤(21459/5840)|w|≤0.368<1.
+```
+
+Consequently `1+eps(w)` lies in the simply connected right half-plane
+disk `B(1,1)` and admits the **same principal Log everywhere on the full
+closed radius-1/10 disk** (including the removable value at w=0).
+For any `0<rho≤1/10`, the loop `chi(p+rho e^{it})` has winding number
+**exactly 1** around 0, because the straight-line homotopy
+```text
+H_s(t) = rho e^{it} (1+s eps(rho e^{it})),   0≤s≤1,
+```
+never vanishes. At s=0 it winds once. This is a genuine
+**ordinary complex topological** theorem about the actual constructed
+local Koenigs function, not a numerical winding guess or a C3 phase
+identification.
+
+It follows by the argument principle (or the path-lifting obstruction)
+that **no globally single-valued continuous/holomorphic logarithm of
+chi exists on the entire punctured disk**. On any simply connected
+sector with a chosen branch of `Log(z-p)` we can instead write
+```text
+Log_sector chi(z)
+  = Log_sector(z-p) + Log_principal(chi(z)/(z-p)).
+```
+Two such sector choices differ by a locally constant **integer
+multiple of 2πi**. This gives the mathematical construction and
+the local winding-1 obstruction required for P1b. The remaining
+native Bishop/Agda obligation is to define the actual sector and
+integer winding carriers and prove the chart-overlap cocycle, including
+the fixed-point multiplier `1/p` and all selected branch transitions.
+
+It does **not** assert a single global Abel coordinate on the punctured
+disk and does not solve Kneser conjugate-pair continuation.
+
 ## The exact next formal theorem leaves
 
 1. `originalBishopPrincipalLogOnSeries`: give the original Bishop
