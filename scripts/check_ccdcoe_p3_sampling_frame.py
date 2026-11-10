@@ -190,6 +190,9 @@ def self_test():
     edited_measurements = deepcopy(measured)
     edited_measurements[0]['frame'] = 'science_uncertainty'
     assert check(frame, edited_measurements)['canonical_measurements_sha256'] != original_measurement_digest
+    changed_receipt = deepcopy(measured)
+    changed_receipt[0]['review_receipt'] = 'different-review-receipt'
+    assert check(frame, changed_receipt)['canonical_measurements_sha256'] != original_measurement_digest
     committed = canonical_frame_sha256(frame)
     assert check(frame, measured, committed)['frame_commitment_checked'] is True
     altered = deepcopy(frame)
