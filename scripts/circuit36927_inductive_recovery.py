@@ -7,7 +7,7 @@ solutions from dissipative implicit-midpoint steps and account for energy.
 No anomalous energy claims, vendor designs, or high-voltage build directions.
 """
 from dataclasses import dataclass
-from math import atan2, cos, isfinite, pi, sin, sqrt
+from math import atan2, cos, exp, isfinite, pi, sin, sqrt
 from random import Random
 
 @dataclass(frozen=True)
@@ -53,6 +53,34 @@ def ideal_diode_capture(parts: Components, initial: State):
     return time_to_zero, final
 
 
+
+def underdamped_diode_capture(parts: Components, initial: State):
+    """Exact first-current-zero capture for passive underdamped series RLC.
+
+    Ideal non-reversing isolation at zero current; all dissipation is series R.
+    Does not extrapolate to critically damped/overdamped regimes or arbitrary
+    precharged capacitor polarity. Requires I0>0, V0>=0, R<2*sqrt(L/C).
+    """
+    parts.validate()
+    L,C,R=parts.inductance_h,parts.capacitance_f,parts.series_ohms
+    if initial.current_a<=0 or initial.capacitor_v<0 or R>=2*sqrt(L/C):
+        raise ValueError('positive forward current, nonnegative V and underdamped R required')
+    alpha=R/(2*L)
+    wd=sqrt(1/(L*C)-alpha*alpha)
+    A=initial.capacitor_v
+    B=(initial.current_a/C + alpha*A)/wd
+    # dv/dt=exp(-alpha*t)*[(I0/C)*cos(wd*t)-(A*wd+alpha*B)*sin(wd*t)]
+    theta=atan2(initial.current_a/C, A*wd+alpha*B)
+    t=theta/wd
+    voltage=exp(-alpha*t)*(A*cos(theta)+B*sin(theta))
+    final=State(0.,voltage)
+    initial_energy=energy(parts,initial)
+    final_energy=energy(parts,final)
+    heat=initial_energy-final_energy
+    if heat < -1e-12*max(1.,initial_energy):
+        raise ArithmeticError('negative passive loss')
+    return t,final,max(0.,heat)
+
 def midpoint_step(parts: Components, initial: State, dt: float):
     """Implicit midpoint for closed RLC recovery interval.
 
@@ -86,6 +114,12 @@ def test():
     assert abs(t-pi/2*sqrt(.01*100e-6))<1e-14
     assert abs(final.capacitor_v-20)<1e-12
     assert abs(energy(parts,initial)-.02)<1e-12
+    # Exact event solution includes realistic positive conductor/switch loss.
+    tR,endR,heatR=underdamped_diode_capture(Components(.01,100e-6,1.),initial)
+    assert 0<endR.capacitor_v<20
+    assert 0<heatR<.02
+    assert abs(energy(Components(.01,100e-6,1.),initial)-energy(Components(.01,100e-6,1.),endR)-heatR)<1e-12
+    assert abs(underdamped_diode_capture(parts,initial)[1].capacitor_v-20)<1e-12
     # Lossless midpoint: negligible drift across many timesteps.
     state=initial
     for _ in range(1000):
@@ -110,12 +144,23 @@ def test():
         nxt,heat,res=midpoint_step(p,s,dt)
         assert heat>=0 and abs(res)<1e-9*max(1,energy(p,s))
         assert energy(p,nxt)<=energy(p,s)+1e-9
+    for _ in range(500):
+        L=10**rng.uniform(-5,-1);C=10**rng.uniform(-8,-3)
+        R=rng.uniform(0,.9*2*sqrt(L/C))
+        I=rng.uniform(.01,5.);V=rng.uniform(0,50.)
+        p=Components(L,C,R);initial2=State(I,V)
+        ts,fin,loss=underdamped_diode_capture(p,initial2)
+        assert ts>0 and fin.current_a==0 and fin.capacitor_v>=V
+        assert loss>=0
+        assert abs(energy(p,initial2)-energy(p,fin)-loss)<1e-8*max(1,energy(p,initial2))
     for bad in (Components(0,1e-6),Components(.01,0),Components(.01,1e-6,-1)):
         try: energy(bad,initial);raise AssertionError('invalid components accepted')
         except ValueError: pass
     return dict(ideal_initial_energy_j=.02,ideal_captured_voltage_v=final.capacitor_v,
                 ideal_capture_time_s=t,lossy_final_energy_j=energy(lossy,state),
-                loss_heat_j=total_heat,randomised_midpoint_cases=500,status='passed')
+                loss_heat_j=total_heat,randomised_midpoint_cases=500,
+                exact_damped_capture_cases=500,exact_damped_final_voltage_v=endR.capacitor_v,
+                exact_damped_heat_j=heatR,status='passed')
 
 if __name__=='__main__':
     import json
