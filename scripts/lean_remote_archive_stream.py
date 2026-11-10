@@ -51,14 +51,16 @@ class CountingReader:
 
 def stream_archive(fileobj: BinaryIO, repo: str, revision: str,
                    *, max_file_bytes: int = 8 * 1024 * 1024,
-                   max_total_bytes: int = 4 * 1024 * 1024 * 1024,\n                   max_transfer_bytes: int = 2 * 1024 * 1024 * 1024) -> Iterator[dict]:
+                   max_total_bytes: int = 4 * 1024 * 1024 * 1024,
+                   max_transfer_bytes: int = 2 * 1024 * 1024 * 1024) -> Iterator[dict]:
     """Process tar.gz sequentially; source bytes never hit the filesystem."""
     if not REPO_RE.fullmatch(repo) or not COMMIT_RE.fullmatch(revision):
         raise ValueError("repo and immutable revision required")
     if min(max_file_bytes, max_total_bytes, max_transfer_bytes) < 0:
         raise ValueError("negative size cap")
     total = 0
-    with tarfile.open(fileobj=CountingReader(fileobj, max_transfer_bytes),\n                      mode="r|gz") as archive:
+    with tarfile.open(fileobj=CountingReader(fileobj, max_transfer_bytes),
+                      mode="r|gz") as archive:
         prefix = None
         for member in archive:
             # Ignore non-regular files. No archive extraction is ever performed.
