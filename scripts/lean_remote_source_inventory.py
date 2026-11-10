@@ -119,7 +119,8 @@ def source_blob(repo: str, blob_sha: str, max_size: int,
 
 
 def inventory(repo: str, commit: str, *, max_blob_bytes: int = DEFAULT_MAX_BLOB,
-              token: str | None = None, opener: Callable | None = None):
+              token: str | None = None, opener: Callable | None = None,
+              on_source: Callable[[dict, bytes], None] | None = None):
     """Yield source metadata; never write a repo tree or source blob to disk."""
     for item in repository_tree(repo, commit, token=token, opener=opener):
         if item["size"] > max_blob_bytes:
@@ -129,10 +130,16 @@ def inventory(repo: str, commit: str, *, max_blob_bytes: int = DEFAULT_MAX_BLOB,
             continue
         raw = source_blob(repo, item["sha"], max_blob_bytes,
                           token=token, opener=opener)
-        yield {"kind": "lean-source", "repository": repo, "revision": commit,
-               "path": item["path"], "git_blob": item["sha"], "size": len(raw),
-               "sha256": hashlib.sha256(raw).hexdigest(),
-               "status": "source-verified-not-elaborated"}
+        receipt = {"kind": "lean-source", "repository": repo,
+                   "revision": commit, "path": item["path"],
+                   "git_blob": item["sha"], "size": len(raw),
+                   "sha256": hashlib.sha256(raw).hexdigest(),
+                   "status": "source-verified-not-elaborated"}
+        if on_source is not None:
+            # Bytes are transient, hash-checked and cap-bounded. No checkout,
+            # and no source content is embedded in ordinary JSONL inventory.
+            on_source(receipt, raw)
+        yield receipt
 
 
 def main() -> int:
