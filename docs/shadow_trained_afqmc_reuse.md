@@ -464,3 +464,33 @@ The user correctly identified that the DASHI repository **already owned an HF-eq
 - KERNEL (open): Agda 2.9 acceptance for the new import graph; a source-written theorem is not automatically a verified kernel proof.
 
 **No PySCF, ipie or Agda is available in this execution container**, and these formal/physical gates must not be declared paid without acceptance receipts.
+
+
+## 2026-11-10 maximum-cut: verified upstream iPie interfaces, fixed core expansion, block-zero, Cholesky
+
+### Paid source implementation fixes
+
+**P0 (substantive performance and correctness): upstream native melting-core support.** Reviewed upstream `JoonhoLee-Group/ipie/ipie/trial_wavefunction/particle_hole.py`: `ParticleHole.setup_basic_wavefunction` explicitly detects alpha/beta occupied-index rows shorter than the full-system electron number and inserts the missing core indices. It tracks `nfrozen`, `nact` and excitation maps in the active subspace. Our earlier full-space runner manually expanded every four-electron spin occupation into 84 occupied-orbital indices, misleading the active-space inference into considering 88 orbitals rather than the actual eight interacting active orbitals. `scripts/qcafqmc_nickel41_full_space_vce.py` now gives iPie only the original 70 rows of 4+4 active occupations with `use_active_space=True` and checks `nfrozen=80`, `nact=8` and the actual inserted core occupations **before any propagation**. The propagator still receives the full STO-3G molecular Hamiltonian, so this is not a CASCI-only approximation.
+
+`scripts/qcafqmc_ipie_melting_core_check.py` verifies the precise occupation mapping and full antisymmetrized Slater-determinant overlap identity against an independent explicitly core-expanded construction. A locally executed finite mathematical reproduction (2 core pairs, 4 active orbitals, 2 virtual) gives exact 0 numerical overlap difference, with a source nickel 80-core/8-active/70-determinant structural check. This is not a runtime receipt from the installed ipie version, which remains unavailable locally.
+
+**P0 (analysis semantics): remove iPie block-zero estimator.** Upstream `ipie/qmc/afqmc.py` explicitly calls `estimators.print_block(..., 0, ...)` before propagation. Its 300 production blocks therefore generally produce 301 energy records. Our earlier reaction analysis discarded 50 rows directly, potentially retaining **251** values and including one extra burn-in row. `scripts/qcafqmc_nickel_reaction_from_ipie.py` now uses `select_production_blocks`, allowing precisely 300 production records or 301 when block zero is present. It strips the initial estimator before discarding the first 50 production blocks; requires exactly **250** retained records; rejects truncated or overlong arrays, missing production-block receipts or inconsistent block schedules across replicas. An actual iPie 0.7.1 estimator file is still needed to check its schema and ordering at runtime.
+
+**P0 (source electronic Hamiltonian integrity): Cholesky round trip.** Upstream `ipie/utils/hamiltonian_converter.py` reads spatial FCIDUMP integrals in chemists' notation, and `ipie/hamiltonians/utils.py` loads their modified-Cholesky representation. `scripts/qcafqmc_fcidump_cholesky_identity.py` independently reconstructs the full 8-spatial-orbital spatial tensor `(pq|rs)` from the loaded iPie Cholesky columns, comparing the relative Frobenius residual against the original source FCIDUMP tensor, and also verifies the source one-electron operator and effective frozen-core/nuclear constant. The nickel active-space iPie runner refuses to launch if this check fails. Positive synthetic tensor reconstruction and negative altered-factor/altered-constant controls are included in the local source acceptance command. Independently executed NumPy check of the same tensor identity gives zero relative error and **3.0752895%** relative residual after perturbing a factor; these are pure mathematical diagnostics, not a nickel Cholesky production run.
+
+**P1 (statistics):** block-zero and Cholesky/melting regressions added to `scripts/qcafqmc_source_acceptance.py`. The exact source acceptance command is
+
+    python scripts/qcafqmc_source_acceptance.py
+    python scripts/qcafqmc_source_acceptance.py --with-torch
+
+without GitHub CI or Docker. The *exact checked-out source* command has not yet been run in this environment; direct GitHub clone and ipie/PySCF/Agda executables are unavailable locally.
+
+### Strongest remaining physical/source gates
+
+1. Execute pinned iPie `ParticleHole` melting-core and `fcidump_to_afqmc.py` conversion against a real eight-spatial-orbital PySCF CASCI Hamiltonian, confirming the Cholesky round-trip and 300-production/50-discard estimators from actual output files.
+2. Execute B/BC/C 41-atom source-geometry RHF/STO-3G and verify source RHF Table 2 and MO SCF/Roothaan certificates, correct electronic charges/spins, selected MO indices 80–87 and exact original orbital frame.
+3. Produce **real**, same-Hamiltonian independent HF/DOCI/learned-paired-trial full-space iPie trajectories, with 3+ independent random seeds per structure, nonlinear phaseless bias checks, timestep/walker convergence and autocorrelation reblocking.
+4. Acquire original 16-qubit matchgate snapshots, exact upCCD initial trial, trained NQS weights/circuit settings; the independent 70-determinant trial does not supply this evidence.
+5. Kernel-check new and transitive Agda 2.9 imports; publish no Clay/physics completion claim from source-written declarations alone.
+
+References to audited upstream code: https://github.com/JoonhoLee-Group/ipie/blob/main/ipie/trial_wavefunction/particle_hole.py , https://github.com/JoonhoLee-Group/ipie/blob/main/ipie/qmc/afqmc.py , https://github.com/JoonhoLee-Group/ipie/blob/main/ipie/utils/hamiltonian_converter.py .
