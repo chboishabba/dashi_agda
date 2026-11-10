@@ -64,6 +64,27 @@ class TemporalMPTypedTests(unittest.TestCase):
         self.assertEqual(other["history"],"h2")
         self.assertEqual(other["mp_diagnostic"]["n"],2)
 
+    def test_delisting_knowledge_time_not_backfilled(self):
+        rows,features=self.fixture()
+        # An end-validity date of day 1 only becomes known on day 5.
+        features[0]=Feature("h1","feed","A",0,1,5)
+        earlier=asof_mp(rows,features,history="h1",asof=4,
+                        source="feed",measurement="trit_activation",
+                        consumer_version="v0",balanced_trit_native=True)
+        later=asof_mp(rows,features,history="h1",asof=5,
+                      source="feed",measurement="trit_activation",
+                      consumer_version="v0",balanced_trit_native=True)
+        self.assertIn("A",earlier["feature_ids"])
+        self.assertNotIn("A",later["feature_ids"])
+
+    def test_undated_delisting_refused(self):
+        rows,features=self.fixture()
+        features[0]=Feature("h1","feed","A",0,1)
+        with self.assertRaises(ValueError):
+            asof_mp(rows,features,history="h1",asof=4,
+                    source="feed",measurement="trit_activation",
+                    consumer_version="v0",balanced_trit_native=True)
+
     def test_balanced_trit_guard(self):
         rows,features=self.fixture()
         rows.append(Event("h1",7,7,{"A":2,"B":0,"C":1},"feed"))
