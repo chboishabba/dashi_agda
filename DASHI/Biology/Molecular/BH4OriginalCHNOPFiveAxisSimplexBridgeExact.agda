@@ -318,3 +318,21 @@ original369PositiveSimplexAllSitesCHNOPInvariant :
 original369PositiveSimplexAllSitesCHNOPInvariant admission multiplicities =
   original369x29x12AggregateCHNOPBalance
     (originalSource admission) multiplicities
+
+-- A zero-atom source species is an exact obstruction. The proof does
+-- not rely on an empirical tolerance, an unproved generic positivity
+-- axiom or a source reference string.
+zeroCHNOPWeightBlocksPositiveSource :
+  (certificate : Panel.SourceCertifiedOriginal29x12)
+  (species : F.Fin 29) →
+  V.lookup (totalCHNOPSourceWeights certificate) species ≡ 0 →
+  SourcePositiveAggregateCHNOP certificate →
+  ⊥
+zeroCHNOPWeightBlocksPositiveSource certificate species zeroWeight positive
+  with sourceWeightPositive positive species
+... | predecessor , strictlyPositive =
+  zeroIsNotSuccessor
+    (trans (sym zeroWeight) strictlyPositive)
+  where
+    zeroIsNotSuccessor : ∀ {n} → 0 ≡ suc n → ⊥
+    zeroIsNotSuccessor ()
