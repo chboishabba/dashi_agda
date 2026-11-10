@@ -317,3 +317,7 @@ import DASHI.Chemistry.HydrogenElectricalInputIntegrationExact
 
 -- Original-author literature observations, source reconciliation and exact steelman energy ratios.
 import DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact
+
+-- Distinct user-described deployments: solar-driven power-plant carbon synthesis
+-- and externally charged battery-driven car hydrogen enrichment.
+import DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact
