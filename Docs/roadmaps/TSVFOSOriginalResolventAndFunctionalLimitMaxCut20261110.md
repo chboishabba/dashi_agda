@@ -61,3 +61,7 @@ P2. Independently discharge actual RH completed-ξ, BSD rank, Monster VOA↔grav
 
 ## Attribution
 Osterwalder–Schrader reconstruction: Osterwalder and Schrader (1973, 1975). Strong generators and one-parameter unitary groups: Stone. Spectral theorem, resolvent, Borel calculus and trace invariance: standard functional analysis. Bose occupation: Bose/Einstein; helium collective dynamics: Landau and experimental neutron-scattering literature. Hilbert–Pólya: conjectural RH route; Monster/AdS3: Witten's proposed duality. This Agda module's source-native transport construction is an integration, not an independent physical discovery or claim that these conjectures are solved.
+
+
+## Executable finite donor regression, independent of Agda kernel
+\`scripts/tsvf_os_finite_resolvent_donor_regression.py\` mirrors the existing exact 2×2 spectral donor \`RationalTwoByTwoSelfAdjointSpectralExact.agda\` (diagonal 2 and 5; conjugated observer frame, not a second independent source). Five unittest cases covering complex off-real resolvents, conjugacy, finite spectral projections, semigroup/zeta traces, and resonant-shift/one-mode negative controls were replayed locally on 2026-11-10 and **5/5 passed**. The Python regression is a numerical/algebraic consistency test; it is not Agda kernel acceptance, continuum spectrum, Hilbert–Pólya physical identification or empirical validation. Command: \`python scripts/tsvf_os_finite_resolvent_donor_regression.py -v\`.
