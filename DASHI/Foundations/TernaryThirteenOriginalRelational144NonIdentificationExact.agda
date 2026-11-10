@@ -183,30 +183,30 @@ selectedRelationDiagonalRecovers :
   (axis : Atlas.StageAtlasZeroToEleven) →
   Original.diagonalObservation (selectedRelationFromCentral state) axis
   ≡ Rel.sourceCentralProjection state axis
-selectedRelationDiagonalRecovers state Atlas.atlas-0 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-1 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-2 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-3 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-4 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-5 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-6 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-7 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-8 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-9 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-10 = refl
-selectedRelationDiagonalRecovers state Atlas.atlas-11 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-0 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-1 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-2 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-3 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-4 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-5 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-6 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-7 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-8 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-9 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-10 = refl
+selectedRelationDiagonalRecovers (valuation , centre) Atlas.atlas-11 = refl
 
 selectedRelationCentreRecovers :
   (state : Rel.SourceCentralCompletionCarrier) →
   chosenOriginalCentralCell (selectedRelationFromCentral state)
   ≡ Rel.sourceCentralCoordinate state
-selectedRelationCentreRecovers state = refl
+selectedRelationCentreRecovers (valuation , centre) = refl
 
 selectedRelationThirteenCodeRoundTrip :
   (state : Rel.SourceCentralCompletionCarrier) →
   relationToThirteen (selectedRelationFromCentral state)
     ≡ Codec.sourceCentralToThirteen state
-selectedRelationThirteenCodeRoundTrip state = refl
+selectedRelationThirteenCodeRoundTrip (valuation , centre) = refl
 
 -- The selected subcarrier is a witness-bearing IMAGE of the 13
 -- original source parameters, not an arbitrary 144-cell relation.
