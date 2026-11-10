@@ -15,12 +15,15 @@ module DASHI.Physics.Foundations.KakeyaPadicPrefixGeometryNoGoExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)\nopen import Data.Nat using (_≤_; _∸_)\nopen import Relation.Binary.PropositionalEquality using (subst)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
+open import Data.Nat using (_≤_; _∸_)
+open import Relation.Binary.PropositionalEquality using (subst)
 open import Data.Empty using (⊥)
 open import Data.Vec using ([]; _∷_) renaming ([] to vnil; _∷_ to _vcons_)
 
 import DASHI.Geometry.SSP369Ultrametric as Ultra
-import DASHI.Biology.PadicCylinderLODReasoningField as Cylinder\nimport DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
+import DASHI.Biology.PadicCylinderLODReasoningField as Cylinder
+import DASHI.Topology.TernaryCylinderPantsGeometryExact as Pants
 
 parent : Cylinder.DepthOneAddress
 parent = Ultra.digit3 vcons vnil
