@@ -60,6 +60,23 @@ record HistoryTimeMPModeClassifier
   (E : HistoryTimeCovarianceEigenmodes K F) : Set₁ where
   field
     toMPCarrier : SOf K → PNF.ScalarStructure.Scalar 𝕄
+    -- A numeric recoding must be independently certified as an exact
+    -- scalar homomorphism; otherwise an arbitrary digit map could make
+    -- the numeric 'eigenvalue' unrelated to the source eigen equation.
+    preservesZero :
+      toMPCarrier (Scalar.zero (Ring.orderedScalar K))
+      ≡ PNF.ScalarStructure.0# 𝕄
+    preservesOne :
+      toMPCarrier (Scalar.one (Ring.orderedScalar K))
+      ≡ PNF.ScalarStructure.1# 𝕄
+    preservesAddition :
+      (a b : SOf K) →
+      toMPCarrier (Scalar._+_ (Ring.orderedScalar K) a b)
+      ≡ PNF.ScalarStructure._+_ 𝕄 (toMPCarrier a) (toMPCarrier b)
+    preservesMultiplication :
+      (a b : SOf K) →
+      toMPCarrier (Scalar._*_ (Ring.orderedScalar K) a b)
+      ≡ PNF.ScalarStructure._*_ 𝕄 (toMPCarrier a) (toMPCarrier b)
     calibrationAt :
       Native.History F → Native.Time F →
       MP.MPFiniteCalibration 𝕄
