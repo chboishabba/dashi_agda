@@ -321,3 +321,7 @@ import DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact
 -- Distinct user-described deployments: solar-driven power-plant carbon synthesis
 -- and externally charged battery-driven car hydrogen enrichment.
 import DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact
+
+-- Solar PV/water/CO2-to-hydrocarbon ideal material and energy maxcut.
+import DASHI.Chemistry.HydrogenSolarCarbonGeneralStoichiometryExact
+import DASHI.Chemistry.HydrogenSolarCarbonEnergyOptimizationExact
