@@ -75,3 +75,33 @@ implementation belongs in Mathlib's real/measure carrier.
 No Agda or Lean local checker was run in this interaction. Neither
 draft PR is a kernel receipt. Mathematical origin and independent
 formalisation contributor attribution remain explicit.
+
+## Reuse of the Lorentz (3,1) / unification branch
+
+New source `DASHI.Geometry.KakeyaLorentzSpatialSliceExact` imports
+the **actual** `DASHI.Physics.Closure.MinkowskiLimitReceipt`
+and `DASHI.Geometry.Signature.HyperbolicFormZ`, and provides
+`spatialSliceAtZero`, `spatialSliceCoordinates`,
+`spatialSliceTime`, `spatialSliceMinkowskiExpression` and
+`spatialSliceFlatReceipt`. These are finite integer-carrier
+identities. The matching `dashi_lean4` PR #106 adds a chosen
+`ℝ × EuclideanSpace ℝ (Fin 3)` flat spatial-slice identity.
+
+The original DASHI hyperbolic form is **timelike-positive**
+`F=t²−|x|²`; the new Lean model chooses **spacelike-positive**
+`Q=|x|²−t²`. Any formal cross-language identification must apply a
+minus sign. An agreement of signatures or a selected flat product
+alone does not construct the physical cone, measured observer metric,
+continuum embedding, or spatial measure. Do not use the prototype
+`DASHI.Physics.Signature31.sig31` as a derived-signature theorem.
+
+The large-poset, causal-contraction, TSVF/KK/OS and B4 branches
+may serve as **conditional sources of an original-object metric
+identification**, but are not automatically discharged by the
+Kakeya theorem. The exact unpaid physical consumer is a proved
+same-object spatial-metric identification/isometry (and
+measure/topology compatibility) from that model into the
+Euclidean three-dimensional target. The finite causal diamond
+by itself does not provide such a continuum identification.
+
+No kernel checks were run in this interaction.
