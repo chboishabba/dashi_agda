@@ -234,6 +234,36 @@ class CanonicalLeanWorld:
                 "context":"source-pinned-Lean-dependencies",
                 "semantic_equivalence_certified":False}
 
+
+    def populate_existing_fibre_index(self, module):
+        """Reuse PR #1483 FibreIndex with exporter-produced exact statement bytes.
+
+        The caller supplies the existing imported module (or module loaded from
+        its separate PR worktree). This does not manufacture proof receipts
+        from source fingerprints and does not require merging PRs prematurely.
+        """
+        if not self._sealed:
+            raise WorldError("seal dependency graph before exporting world index")
+        required = ("FibreIndex", "SourceOccurrence", "Declaration")
+        if any(not hasattr(module, name) for name in required):
+            raise WorldError("expected exact PR #1483 FibreIndex module")
+        index = module.FibreIndex()
+        for origin in sorted(self.occurrences):
+            row = self.occurrences[origin]
+            original = module.SourceOccurrence(
+                origin.repository, origin.revision, origin.declaration,
+                row["proof_digest"], row["attribution"])
+            declared = module.Declaration(
+                original, row["profile"], row["type_head"],
+                row["universe_shape"],
+                self.statements[row["statement_id"]].canonical_type,
+                tuple(f"{d.repository}@{d.revision}:{d.declaration}"
+                      for d in self._dependencies[origin]))
+            index.admit(declared)
+        if index.occurrence_count() != len(self.occurrences):
+            raise WorldError("fibre index dropped original provenance occurrences")
+        return index
+
     def counts(self):
         return {"source_files":len(self.sources),
                 "statement_exact_nodes":len(self.statements),
