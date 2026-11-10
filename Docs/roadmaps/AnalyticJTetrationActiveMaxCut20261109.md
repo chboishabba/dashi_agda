@@ -1,6 +1,6 @@
 # Active max-cut: analytic Kneser × Bishop q × modular j × fine observers
 
-**Controlling ledger:** 2026-11-09. **Branch:** `chatgpt/analytic-j-tetration-abel-transport`; **PR:** [#1478](https://github.com/chboishabba/dashi_agda/pull/1478). **Priority:** reuse source theorem → kernel proof → actual selected instance → numerical receipt. This page is the concise current cut; older progress chronology and complete declaration inventories remain in [AnalyticJTetrationAbelModularTransportRoadmap.md](AnalyticJTetrationAbelModularTransportRoadmap.md).
+**Controlling ledger:** updated 2026-11-10 (filename retained for stable links). **Branch:** `chatgpt/analytic-j-tetration-abel-transport`; **PR:** [#1478](https://github.com/chboishabba/dashi_agda/pull/1478). **Priority:** reuse source theorem → kernel proof → actual selected instance → numerical receipt. This page is the concise current cut; older progress chronology and complete declaration inventories remain in [AnalyticJTetrationAbelModularTransportRoadmap.md](AnalyticJTetrationAbelModularTransportRoadmap.md).
 
 ## Accepted evidence policy
 
@@ -18,7 +18,44 @@
 | P0.02 | Bishop (q)-series limit uniqueness API correction | **SOURCE-WRITTEN repair** | `AbelBishopQSeriesSetoidPeriodTransportExact.originalComplexSeriesLimitExtensional` now reuses vendored `BishopFiniteSeriesExtensionalityExact.termwiseEquivalentSeriesHaveEquivalentLimits` (commit `c2fdf65e`) |
 | P0.03 | Bishop trajectory limit API correction | **SOURCE-WRITTEN repair** | `AbelBishopKoenigsTrajectoryDifferenceLimitExact.originalBishopKoenigsDifferenceConverges` now provides explicit limit/convergence pairs to `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` (commit `37ec86cc`) |
 
-**P0 static source correction (2026-11-09):** discovered and repaired an invalid import form in five newly authored E8 modules. `Agda.Builtin.Equality` only supplies `_≡_`/`refl`; `sym`, `trans` and `cong` must come from `Relation.Binary.PropositionalEquality`. Patched `AbelE8HalfOddShellInvolutionExact`, `AbelE8ThetaParityProjectorExact`, `AbelE8RootE4FirstCoefficientExact`, `AbelE8RootTriadic243CountComparisonExact`, and `AbelE8GeneratedRootNormTwoExact`. Commits `e4a197df`, `3cf3e23c`, `d056195b`, `08b8af91`, `fdbc2267`. This removes a real static import error but does **not** constitute a kernel acceptance receipt.\n\n## P1. Local Schröder/Koenigs (highest-alpha analytic producer)
+**P0 static source correction (2026-11-09):** discovered and repaired an invalid import form in five newly authored E8 modules. `Agda.Builtin.Equality` only supplies `_≡_`/`refl`; `sym`, `trans` and `cong` must come from `Relation.Binary.PropositionalEquality`. Patched `AbelE8HalfOddShellInvolutionExact`, `AbelE8ThetaParityProjectorExact`, `AbelE8RootE4FirstCoefficientExact`, `AbelE8RootTriadic243CountComparisonExact`, and `AbelE8GeneratedRootNormTwoExact`. Commits `e4a197df`, `3cf3e23c`, `d056195b`, `08b8af91`, `fdbc2267`. This removes a real static import error but does **not** constitute a kernel acceptance receipt.\n\n## 2026-11-10 decisive P1/P1g/P4 implementation and mathematical status
+
+**New concrete original-source owner:** `DASHI/Moonshine/AbelBishopTetrationNaturalHeightExact.agda` (commits `c6b3a450`, `c65ad73f`). This uses **actual** `BishopSetoidComplexExact.expC` and `Exp.expCongruent`; it proves by induction:
+- `originalBishopTetrationNaturalHeightUniqueness`: any source-valued sequence satisfying `F(0)≈C1` and `F(n+1)≈Cexp_C(F(n))` matches the real source exponential tower for **all natural n**;
+- `originalBishopAnyTwoTetrationCandidatesAgreeOnNat`: any two such normalized sequences coincide on natural heights;
+- `originalRound11NaturalHeightUniqueness`: specialize the same theorem to the genuine Round11 Bishop/Machin sine/cosine/exponential bundle.
+
+This is a finite-height **uniqueness theorem**, not existence/analytic uniqueness of Kneser interpolation. Source-written and Agda 2.9 unverified.
+
+**New exact rational original fixed-point receipt:** `scripts/check_analytic_j_tetration_local_koenigs_rational.py` (commits `9c480f32`, `cc84d767`) constructs finite **rational** Machin arctangent/log series intervals with explicit error bounds for `c=0.318+1.337i`, checks `|Log(c)-c|<3/10000`, `1.372<|c|<1.378`, Banach contraction on radius 1/100 and `1.37<|p|<1.38` for the *inhabited selected* fixed point. Independently repeated its mathematical rational comparisons in local Python; PASS. The source script is committed and wired into the local acceptance runner; exact checkout execution of the GitHub-hosted script itself was not available in this environment.
+
+**Rigorous conventional complex-analysis proof** (not Agda): [AnalyticJTetrationLocalKoenigsTheoremProof20261110.md](AnalyticJTetrationLocalKoenigsTheoremProof20261110.md). From `|p|∈(1.37,1.38)`, on `|z-p|≤0.1` the source branch has derivative Lipschitz factor `q=4/5` and quadratic Log remainder coefficient `M=311/1000`. The actual iterates `hₙ(z)=pⁿ(Log^[n](z)-p)` satisfy
+[
+ |h_{n+1}-h_n|\le (69/50)(311/1000)(552/625)^n|z-p|²
+]
+and the uniform geometric tail
+[
+ |χ(z)-h_N(z)|\le(21459/5840)(552/625)^N|z-p|².
+]
+The ordinary holomorphic M-test proves local χ exists, χ(p)=0, χ'(p)=1, and χ(Log z)=χ(z)/p. This substantively **completes the local complex-analytic mathematical proof**, but **P1.01–P1.06 remain OPEN as original Bishop/Agda theorems** until native constructive Log, integration/remainder, disk contraction and holomorphic limit are kernel-proved. A rational certificate alone is not the Bishop complex logarithm construction.
+
+**P1b and global P1g:** local χ is invertible near p, allowing sector logs and local Abel coordinates; these do not pay integer branch-overlap cocycles, conjugate-pair global Kneser gluing or the selected `F(0)=1` normalization. Exact additional leaves:
+- [ ] `originalSelectedBishopLogRealizationAndRemainder` (P1.01/02, high-alpha core);
+- [ ] `originalBishopKoenigsMTestUniformLimit` and `originalBishopChiDerivativeAtPIsOne` (P1.03–06);
+- [ ] `originalPuncturedSectorLogBranchCocycle`, `originalKneserConjugatePairGlobalNormalization`, `originalKneserSourceSelectedInverse` (P1b/global);
+- [ ] original Bishop analytic extension of `originalRound11NaturalHeightUniqueness` from natural heights to a **holomorphic complex domain** (this is mathematically stronger and not implied).
+
+**P4 source boundary (DOI 10.1090/S0025-5718-09-02188-7):** Dmitrii Kouznetsov's 2009 *Mathematics of Computation* paper gives a numerical imaginary-axis contour/integral-equation method and small reported double-precision residuals; that report does **not** constitute a rigorous global analytic existence/uniqueness or interval-certified contour proof. Original-source remaining exact targets:
+- [ ] `originalKouznetsovSelectedContourAndBranchGeometry`: faithfully instantiate his contour and branch choices, including exact asymptotic upper/lower constants and singularity exclusions;
+- [ ] `originalKouznetsovIntegralEquationKernel`: reproduce the selected integral equation and nonlinear fixed-point operator on a stated function space;
+- [ ] `originalKouznetsovUniformOperatorContractionOrValidatedNewton`: analytically prove an existence/uniqueness test for that actual operator, rather than assuming its numerical iteration converges;
+- [ ] `originalKouznetsovVerifiedQuadratureRemainder`: explicit interval quadrature, truncation and rounding bounds with branch/winding control;
+- [ ] `originalKouznetsovCertifiedNumerics`: an independently audited certified output plus same-object normalization against the global Kneser construction.
+
+**Acceptance:** updated `scripts/check_analytic_j_tetration_golden_local.sh` targets the new original Bishop theorem and runs the exact fixed-point/Koenigs rational certificate in addition to E8 finite shell regression before the pinned Agda checker. No actual Agda 2.9 kernel receipt in this environment; all newly written Agda source remains UNCHECKED.
+
+
+## P1. Local Schröder/Koenigs (highest-alpha analytic producer)
 
 | ID | Exact remaining theorem | Status / dependencies |
 | --- | --- | --- |
