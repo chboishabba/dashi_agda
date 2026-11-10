@@ -70,7 +70,9 @@ BEGIN
   RETURN NULL;
 END
 $$;
-DROP TRIGGER IF EXISTS lean_world_occurrence_count_trigger\n  ON lean_world_occurrence;\nDROP TRIGGER IF EXISTS lean_world_occurrence_insert_count_trigger
+DROP TRIGGER IF EXISTS lean_world_occurrence_count_trigger
+  ON lean_world_occurrence;
+DROP TRIGGER IF EXISTS lean_world_occurrence_insert_count_trigger
   ON lean_world_occurrence;
 DROP TRIGGER IF EXISTS lean_world_occurrence_delete_count_trigger
   ON lean_world_occurrence;
