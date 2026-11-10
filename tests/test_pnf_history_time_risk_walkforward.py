@@ -94,11 +94,22 @@ class PointInTimeRiskTests(unittest.TestCase):
 
     def test_hindsight_risk_certification_rejected(self):
         rows,features=source_fixture()
+        r0=forecast_one_step(rows,features,history="history-1",
+                             source="tape",asof=9,consumer_version="v1",
+                             weights=[1/3,1/3,1/3])
+        r1=forecast_one_step(rows,features,history="history-1",
+                             source="tape",asof=10,consumer_version="v1",
+                             weights=[1/3,1/3,1/3])
+        with self.assertRaises(ValueError):
+            assess_walkforward([r0,r1],qualification_asof=10,min_folds=2)
+
+    def test_duplicate_folds_do_not_create_risk_evidence(self):
+        rows,features=source_fixture()
         r=forecast_one_step(rows,features,history="history-1",
                             source="tape",asof=10,consumer_version="v1",
                             weights=[1/3,1/3,1/3])
         with self.assertRaises(ValueError):
-            assess_walkforward([r,r],qualification_asof=10,min_folds=2)
+            assess_walkforward([r,r],qualification_asof=14,min_folds=2)
 
     def test_unqualified_number_of_folds_rejected(self):
         rows,features=source_fixture()
