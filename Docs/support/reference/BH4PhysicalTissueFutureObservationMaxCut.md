@@ -524,3 +524,40 @@ discrete-event conservation**, not an original continuous
 mass-action/SG conservation theorem, real compactness,
 Brouwer existence or biological calibration. No Agda
 kernel receipt was obtained on these branch heads.
+
+
+### 2026-11-10 PR #1454 proof-producing original CHNOP source-to-simplex bridge
+
+Companion PR #1454 now implements a total *constructive decision*
+for all original source weights:
+`positiveNatOrZero` →
+`allPositiveOrZeroIndex` →
+`decideOriginal369SourcePositiveCHNOP` →
+`decideOriginal369WeightedSimplexAdmission`.
+It consumes the already-proved 29×12 CHNOP aggregate left
+kernel on the same original `SourceCertifiedOriginal29x12`
+and returns either a genuine dependent strictly positive
+29-species source witness or the exact zero-weight species.
+
+The **existing** generator
+`scripts/generate_bh4_original29x12_agda.py` now emits
+literal Agda `refl` proofs from the independently SHA-pinned
+original Rhea certificate, not human-authored fictional
+stoichiometry. If all 29 weights are positive, it emits
+`generatedCHNOPPositiveAt` for all 29 `Fin` cases,
+`generatedPositiveCHNOP` and
+`generatedPositiveSimplexAdmission`. If any weight
+is zero, it emits the exact index and a proof of
+`generatedPositiveSimplexObstructed`, not a fictitious
+positive source. A new generated JSON receipt differentiates
+those two proof branches and always flags kernel acceptance
+as FALSE until checked.
+
+This narrows the unpaid original physical PNP cut to the
+actual byte-pinned source acquisition, Agda 2.9 acceptance,
+the 27×29 real concentration/continuous SG + mass-action
+simplex bridge, actual classical/constructive Brouwer theorem,
+and selected same-source tissue observation plus kinetic and
+boundary measurements. **No independently source-paid
+physical model has been constructed** by these finite
+proof-generator changes.
