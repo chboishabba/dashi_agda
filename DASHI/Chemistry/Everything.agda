@@ -314,3 +314,6 @@ import DASHI.Chemistry.HydrogenOxygenFactorialIdentificationExact
 
 -- DC voltage-current-duration energy-integral negative control (not a meter).
 import DASHI.Chemistry.HydrogenElectricalInputIntegrationExact
+
+-- Original-author literature observations, source reconciliation and exact steelman energy ratios.
+import DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact
