@@ -110,6 +110,70 @@ def verify_balanced_columns(pairs, elements, positive, negative):
             raise ValueError(f"original reaction {j} violates signed charge balance")
 
 
+
+def rendered_source_simplex_admission(elements):
+    """Produce byte-pinned literal Agda positivity, or an explicit zero blocker."""
+    if set(elements) != set(ELEMENTS) or any(len(elements[e]) != 29 for e in ELEMENTS):
+        raise ValueError("exact original 29-species CHNOP weight matrix required")
+    weights=[]
+    for i in range(29):
+        counts=[elements[e][i] for e in ELEMENTS]
+        if any(type(v) is not int or v<0 for v in counts):
+            raise ValueError("nonnegative exact integer original CHNOP values required")
+        weights.append(sum(counts))
+    zero_indices=[i for i,w in enumerate(weights) if w == 0]
+    lines=[
+        "generatedAggregateCHNOP : V.Vec Nat 29",
+        "generatedAggregateCHNOP =",
+        "  Simplex.totalCHNOPSourceWeights generatedSourceCertifiedOriginal29x12",
+        "",
+    ]
+    if zero_indices:
+        i=zero_indices[0]
+        lines += [
+            "-- Real source has a zero atom-weight species; reject positive simplex.",
+            "generatedZeroCHNOPSpecies : F.Fin 29",
+            f"generatedZeroCHNOPSpecies = {fin_constructor(i)}",
+            "generatedZeroCHNOPWeight :",
+            "  V.lookup generatedAggregateCHNOP generatedZeroCHNOPSpecies ≡ 0",
+            "generatedZeroCHNOPWeight = refl",
+            "generatedPositiveSimplexObstructed :",
+            "  Simplex.SourcePositiveAggregateCHNOP",
+            "    generatedSourceCertifiedOriginal29x12 → ⊥",
+            "generatedPositiveSimplexObstructed =",
+            "  Simplex.zeroCHNOPWeightBlocksPositiveSource",
+            "    generatedSourceCertifiedOriginal29x12",
+            "    generatedZeroCHNOPSpecies generatedZeroCHNOPWeight",
+            "",
+        ]
+    else:
+        lines += [
+            "generatedCHNOPPositiveAt :",
+            "  (species : F.Fin 29) →",
+            "  Σ Nat (λ predecessor →",
+            "    V.lookup generatedAggregateCHNOP species ≡ suc predecessor)",
+        ]
+        for i,w in enumerate(weights):
+            lines.append(
+                f"generatedCHNOPPositiveAt {fin_constructor(i)} = ({w-1} , refl)")
+        lines += [
+            "generatedPositiveCHNOP :",
+            "  Simplex.SourcePositiveAggregateCHNOP",
+            "    generatedSourceCertifiedOriginal29x12",
+            "generatedPositiveCHNOP = record",
+            "  { sourceWeightPositive = generatedCHNOPPositiveAt }",
+            "generatedPositiveSimplexAdmission :",
+            "  Simplex.Original369PositiveWeightedSimplexAdmission",
+            "generatedPositiveSimplexAdmission =",
+            "  Simplex.original369-positive-weighted-simplex-admission",
+            "    generatedSourceCertifiedOriginal29x12",
+            "    generatedPositiveCHNOP",
+            "",
+        ]
+    return lines, {"all_positive": not zero_indices,
+                   "zero_weight_species_indices": zero_indices,
+                   "aggregate_weights": weights}
+
 def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
     matrix, metadata = check_certificate(certificate, full_panel=True)
     pairs = source_column_pairs(certificate, matrix)
@@ -127,6 +191,7 @@ def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
         "import Data.Vec.Base as V",
         "import Data.Fin.Base as F",
         "import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Panel",
+        "import DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact as Simplex",
         "",
         "generatedOriginalRheaCertificateSha256 : String",
         f'generatedOriginalRheaCertificateSha256 = "{sha}"',
@@ -204,6 +269,8 @@ def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
         "  }",
         "",
     ]
+    simplex_lines, _ = rendered_source_simplex_admission(elements)
+    lines.extend(simplex_lines)
     return "\n".join(lines)
 
 
@@ -211,6 +278,18 @@ def self_test():
     assert fin_constructor(0) == "F.zero"
     assert fin_constructor(2) == "(F.suc (F.suc F.zero))"
     assert nat_vector([0, 2]) == "(V._∷_ 0 (V._∷_ 2 V.[]))"
+    sample = {e: [1]*29 for e in ELEMENTS}
+    lines, status = rendered_source_simplex_admission(sample)
+    assert status["all_positive"] and status["aggregate_weights"] == [5]*29
+    assert sum("generatedCHNOPPositiveAt (F." in line for line in lines) == 28
+    sample["C"][0] = 0
+    for e in ELEMENTS[1:]:
+        sample[e][0] = 0
+    lines, status = rendered_source_simplex_admission(sample)
+    assert not status["all_positive"]
+    assert status["zero_weight_species_indices"] == [0]
+    assert "generatedPositiveSimplexObstructed :" in lines
+    assert "generatedPositiveSimplexAdmission :" not in lines
     verify_balanced_columns(
         [([1, 0], [0, 1])],
         {"C": [2, 2], "H": [1, 1], "N": [0, 0],
