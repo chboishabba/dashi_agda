@@ -85,13 +85,18 @@ record QualifiedRiskEvidence {m : Nat}
     -- The source owner decides a nonvacuous threshold; requiring a
     -- concrete >=2 proof avoids a single-fold 'improvement' promotion.
     atLeastTwoFolds : suc (suc zero) ≤ minHeldoutFolds
-    noBackdatedPrediction : (i : Fin m) →
-      Temporal.ForwardPath (suc (decisionTime L i))
-        (observationTime L i)
     cleanedNotWorseOnSelectedLoss :
       cleanedSquaredRiskLoss L ≤ baselineSquaredRiskLoss L
 
 open QualifiedRiskEvidence public
+
+qualifiedRiskRetainsStrictForwardEvaluation :
+  {m : Nat} → (L : PointInTimeLossLedger m) →
+  QualifiedRiskEvidence L → (i : Fin m) →
+  Temporal.ForwardPath (suc (decisionTime L i))
+    (observationTime L i)
+qualifiedRiskRetainsStrictForwardEvaluation L proof i =
+  strictlyForwardEvaluation L i
 
 qualityReceiptEnablesSelectedRiskStatus :
   {m : Nat} →
