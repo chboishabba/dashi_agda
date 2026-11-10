@@ -74,6 +74,9 @@ def run(receipt_file,checkpoint=None,doci_npz=None,walkers=1280,blocks=300,steps
     from ipie.qmc.afqmc import AFQMC
     handler=MPIHandler()
     ham=get_hamiltonian(str(out),handler.scomm,pack_chol=True,verbose=False)
+    from qcafqmc_fcidump_cholesky_identity import check_ipie_hamiltonian
+    cholesky_certificate=check_ipie_hamiltonian(
+        str(fcidump),ham,threshold=float(chol_threshold)*5)
     nalpha=nbeta=4
     if ham.nbasis!=8:raise ValueError("expected eight-orbital CASCI Hamiltonian")
     if checkpoint:
@@ -126,6 +129,7 @@ def run(receipt_file,checkpoint=None,doci_npz=None,walkers=1280,blocks=300,steps
             "structure":receipt["structure"],"trial_type":trial_type,
             "integral_sha256":source_digest(fcidump),
             "ipie_hamiltonian_sha256":source_digest(out),
+            "same_source_cholesky_certificate":cholesky_certificate,
             "trial_checkpoint_sha256":source_digest(checkpoint) if checkpoint else None,
             "DOCI_source_sha256":source_digest(doci_npz) if doci_npz else None,
             "geometry_sha256":receipt["geometry_sha256"],
