@@ -64,6 +64,7 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
 python3 scripts/analytic_j_tetration_koenigs_log_series_majorant.py
+python3 scripts/analytic_j_tetration_exp_log_formal_recurrence.py
 
 echo "Running pinned Agda 2.9 --safe checker on ${#targets[@]} explicit source owners"
 DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh --safe "${targets[@]}"
