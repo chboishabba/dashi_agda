@@ -106,3 +106,39 @@ YK10: original tube direction, segment incidence and scale-distortion bridge, or
 YK11: use source-pinned external Lean unconditional Kakeya theorem through a theorem-type/domain correspondence; keep Lean/Agda kernel trust separate.
 
 Additional original-source no-go closed in the new module: `addressOnlyProjectionCannotRepresentBothContexts` shows no single address-only decoder can agree with both independently defined contextual projections at the same actual fine address. This is proved by equality transport into the preexisting context difference, not by assuming the p-adic carrier determines a physical metric.
+
+## 10 November: exact all-scale comparison and segment/tube maximum cut
+
+**New original-source composition:** `DASHI.Physics.Foundations.KakeyaYMAllScaleSameSourceComparisonExact`.
+
+- `SameObjectAllScaleComparison`: one selected physical state, one selected context, one scale-indexed observer-to-address map, and the **same** physical/refinement distance fields as the source Balaban step.
+- `allScalePhysicalContraction`: for **every natural-number scale** and pair of original physical states, applies `BalabanRGTwoMetricUniformComparisonExact.rgContractionTransfersToPhysicalMetric`. No inequality is re-axiomatised.
+- `allScaleRefinementIsOriginalAddress` and `allScaleNextRefinementIsOriginalAddress`: preserve the same original address/context identifications at adjacent scales.
+- `sameObjectAllScaleReceipt`: combines the physical inequality and selected source identity into one proof result.
+- `UniformSameObjectComparison` and `uniformAllScalePhysicalContraction`: cutoff-independent coefficients **when the source provides the five exact uniformity equalities**. This distinction matters: quantification over all scales is not itself a proof of fixed or positive constants.
+
+The genuinely unsolved source payment is **inhabiting** the comparison records using the selected TSFV/KK measured physical geometry and original triadic refinement. Nothing about the newly written generic all-scale transport by itself proves that a global p-adic address metric has all-pair positive uniform constants against `R³`.
+
+**New correct geometrical transport in dashi_lean4 PR #106:**
+`DashiKakeya/NeedleTubeTransport.lean` includes:
+
+- `needleTube_iff_of_same_metric`: metric-radius neighbourhood around a selected unit needle, transported by the same distance-preserving map and exactly matching curve parameter.
+- `needleTube_image_of_surjective`: image equality for a surjective such map.
+- `allDirectionalTubes_iff`, `allDirectionalTubeImage`: pointwise all-direction intersection predicate as a diagnostic only, **not** the Kakeya hypothesis.
+- `containsDirectionalNeedles`, `needleContainment_image`, `needleContainment_reflect`: actual **all-direction segment containment**, with forward transport and reverse under injectivity.
+- `directionalTubeUnion_image`: the geometrically appropriate **union** of selected direction tubes transports under an onto isometry that matches each selected needle.
+
+These are genuine finite/metric logic lemmas, not use of the large external 3D Kakeya theorem. Without an actual source-to-Euclidean isometry and needle correspondence, they only establish conditional implications. Under an arbitrary bi-Lipschitz map, Hausdorff dimensions may transport, but needles need not map to **straight** needles and radii need distortion factors. Do not suppress this gate.
+
+### Revised exact remaining gates
+
+| Gate | Original-source obligation | Status |
+| --- | --- | --- |
+| YM-K0 | Kernel typecheck both new Agda/Lean modules in pinned local Nix/Agda/Lean without CI | UNEXECUTED |
+| YM-K1 | Inhabit the same-selected-state/context/refinement all-scale comparison from **actual** TSFV/KK and p-adic physical projection owners | OPEN |
+| YM-K2 | Prove positivity and cutoff-independent nondegenerate comparison constants, or specify local/quasisymmetric Hölder route when global comparison is obstructed | OPEN |
+| YM-K3 | Prove selected physical spatial subspace, positive-definite metric, all-scale topology/measure convergence | OPEN |
+| YM-K4 | Construct a physical-to-Euclidean spatial correspondence and prove directions, **straight needle segments**, and the correct radius/tube distortion | OPEN |
+| YM-K5 | Reproduce pinned external unconditional Kakeya proof and transport its exact statement to selected same-object geometry | OPEN LOCALLY |
+
+Avoid interpreting the hyperbolic (3,1) bilinear as Euclidean on all tangents or the extrinsic voxel encoding as an ultrametric isometry. Mathematical origin remains Wang--Zahl, Guth--Wang--Zahl, and independently credited formalisation contributors.
