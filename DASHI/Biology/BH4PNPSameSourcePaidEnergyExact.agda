@@ -13,6 +13,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Biology.BH4PNPSamePhysicalHistoryBridgeExact as Same
 import DASHI.Biology.BH4PNPOrderedEnergyHistoryExact as Ledger
+import DASHI.Energy.Core as EC
 
 record SameSourcePaidEnergyModel : Set₂ where
   field
@@ -100,3 +101,41 @@ allSameSourceBH4PNPWithPaidEnergy M actions x =
        (source M) actions x
   , allSameSourceControlledHistoriesEnergyNonincreasing
       M actions x)
+
+------------------------------------------------------------------------
+-- Reuse the existing Energy.Core preorder and state-energy interface.
+-- No second independent physical observation or energy state is built.
+------------------------------------------------------------------------
+
+toExistingEnergyPreorder :
+  (O : Ledger.OrderedEnergyCarrier) →
+  EC.Preorder (Ledger.OrderedEnergyCarrier.Energy O)
+toExistingEnergyPreorder O =
+  record
+    { _≤_ = Ledger.OrderedEnergyCarrier._⊑_ O
+    ; refl = Ledger.OrderedEnergyCarrier.orderReflexive O
+    ; trans = Ledger.OrderedEnergyCarrier.orderTransitive O
+    }
+
+sameSourceEnergySpace :
+  (M : SameSourcePaidEnergyModel) →
+  EC.EnergySpace
+    (Same.PhysicalState (source M))
+    (Ledger.OrderedEnergyCarrier.Energy (orderedEnergy M))
+sameSourceEnergySpace M =
+  record
+    { P = toExistingEnergyPreorder (orderedEnergy M)
+    ; energy = energyOf M
+    }
+
+allSameSourceHistoriesDescendInExistingEnergySpace :
+  (M : SameSourcePaidEnergyModel)
+  (actions : List Bool)
+  (x : Same.PhysicalState (source M)) →
+  EC.Preorder._≤_
+    (EC.EnergySpace.P (sameSourceEnergySpace M))
+    (EC.EnergySpace.energy (sameSourceEnergySpace M)
+      (Same.physicalRun (source M) actions x))
+    (EC.EnergySpace.energy (sameSourceEnergySpace M) x)
+allSameSourceHistoriesDescendInExistingEnergySpace M actions x =
+  allSameSourceControlledHistoriesEnergyNonincreasing M actions x
