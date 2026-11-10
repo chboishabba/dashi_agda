@@ -316,3 +316,33 @@ and chemical input, real calibrated H2/O2 and engine output/NOx/PM readings,
 cross-over evidence with timing/dose, true hydrocarbon synthesis and
 carbon closure, actual patent-specific title documents, and independent
 replication. Neither static declarations nor accepted unit tests pay these.
+
+## 2026-11-10 literature-paid physical steelman: pressure, CA50, work, sources
+
+Per user instruction to calculate the steelman from published primary experimental literature rather than stopping at missing device measurements:
+
+- New `DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact` records **author- and DOI-attributed** original observations from Amatnieks et al. (2026, DOI 10.3390/en19173951), Estrada et al. (2022, DOI 10.1016/j.heliyon.2022.e09285) and their different tested engines. It keeps original author/measurement ownership separate from user direction and ChatGPT integration. The two published extreme pressure/duration changes are not assumed simultaneous or transferable across apparatus.
+- New `scripts/hydrogen_literature_pressure_steelman.py` computes single-zone Wiebe heat release, slider-crank volume, ideal gas first-law pressure and indicated work for an **assumption-labelled** engine geometry sourced to Estrada et al. (2022), with sensitivity changes informed by *other* literature, not a measured McLaren apparatus. Seven self-tests are source-written in the GitHub file; the exact GitHub version has not been rerun locally. The corresponding fuller local model `/mnt/data/hydrogen_literature_physics.py` was executed with **8/8 passing** tests and wrote reproducible scenario JSON and fuel-share CSV.
+- New `Docs/roadmaps/HydrogenDieselLiteratureSteelman20261110.md` supplies the exact original sources, reported-vs-calculated-vs-assumed demarcation, published pressure findings, apparent source cell-energy discrepancy, and matched-output fuel-share equivalence.
+
+### Numerical results — conditional, not external physical validation
+
+With assumptions (not author-reported): compression ratio 20, 78 mm bore, 62.57 mm stroke (geometry reported by Estrada), rod-to-crank 3.5, gamma 1.35, BDC 1 bar, 400 J/cycle, Wiebe (a=5,m=2), start=-10°, duration=50°:
+- assumed baseline 65.25 bar peak, 234.68 J ideal indicated cycle work;
+- moving CA50 earlier by 3.5° at identical total heat and unchanged burn shape: peak 74.68 bar, indicated work 240.83 J (**+2.62%**);
+- duration +46% as a *separate* sensitivity: peak 58.47 bar, work 206.18 J (**−12.14%**).
+- These are predictions from one simplified, uncalibrated model. Neither published 20%-peak-pressure nor 56%-rise-rate findings imply a proportional work/efficiency improvement.
+
+### Primary-source energy inconsistency requiring special admission
+
+Estrada et al. 2022 Table 3's 20 L/min H2 at Table 5's .0899 kg/m³ and 119.7 MJ/kg implies **3.587 kW hydrogen LHV** at the stated NTP; Table 3's 13.45 V×15.1 A implies **0.203095 kW** listed DC input, a 17.66-fold discrepancy *if compared on the same continuous full system boundary*. The experiment describes AC power, gas stores/bubblers and a cell assembly, so those parameters must NOT be used as a demonstrated whole-system electrolyser efficiency. Original numbers and any mismatch remain attributed to their own exact sources; the ratio is a DASHI/ChatGPT-derived arithmetic comparison, not an accusation or free-energy finding.
+
+Another metric firewall: Eq. (9) of Estrada et al. defines **BFCE with diesel+H2 fuel energies**, while Eq. (10) labels **BTE relative to the neat-diesel baseline fuel input**. Headline BTE percentage changes are not automatically changes in the complete brake conversion efficiency.
+
+### Exact residual theoretical versus empirical cut
+
+**Source-written:** physical mechanism under-identification, source-cited observation envelopes, ideal single-zone pressure/heat-release sensitivity, exact H2-share/diesel-efficiency ratio and energy-input substitution, SI/Atomic369 and NIST bridges, uncertainty comparison, patent authority classification.
+
+**Not source paid:** engine-specific rod/conrod and wall-heat-transfer calibration, crank-angle pressure traces for the McLaren device, true flame kinetics, actual H2/O2 flow and electrolysis power, empirical efficiency/dose response, CO2 synthesis path, continuous carbon cycle, patent 2026 title, and independent device replication. These do not follow from the literature examples.
+
+K0 is deferred per user's explicit instruction; no Agda kernel acceptance is claimed.
