@@ -27,6 +27,36 @@ H2_REVERSIBLE_ELECTRIC_KJ_PER_MOL=237.13
 H2_REVERSIBLE_HEAT_KJ_PER_MOL=H2_HHV_KJ_PER_MOL-H2_REVERSIBLE_ELECTRIC_KJ_PER_MOL
 METHANATION_HEAT_CONDENSED_KJ_PER_CH4=4*H2_HHV_KJ_PER_MOL-CH4_HHV_KJ_PER_MOL
 
+
+def pv_area_m2_for_energy(annual_electric_kwh:float,
+                          annual_irradiance_kwh_m2:float,
+                          solar_module_system_efficiency:float)->float:
+    """Annual aperture area. Irradiance, performance and site are supplied,
+    never inferred from the phrase 'put solar around the power plant'."""
+    if annual_electric_kwh < 0 or annual_irradiance_kwh_m2 <= 0:
+        raise ValueError('invalid solar resource/annual demand')
+    if not 0 < solar_module_system_efficiency <= 1:
+        raise ValueError('PV system efficiency must be in (0,1]')
+    return annual_electric_kwh/(annual_irradiance_kwh_m2*
+                               solar_module_system_efficiency)
+
+def compare_direct_h2_vs_methane(engine_efficiency:float=0.4)->dict:
+    """Same efficiency and 4 H2 feed: methanation loses useful fuel HHV.
+    Applicability/storage/transport/emissions are NOT assumed equal."""
+    if not 0 < engine_efficiency <= 1:
+        raise ValueError('invalid assumed engine efficiency')
+    return {
+      'direct_h2_chemical_kwh_per_4mol':4*H2_HHV_KJ_PER_MOL/3600,
+      'synthetic_methane_chemical_kwh_per_4mol':CH4_HHV_KJ_PER_MOL/3600,
+      'direct_h2_work_kwh_assumed_same_eta':
+           4*H2_HHV_KJ_PER_MOL/3600*engine_efficiency,
+      'methane_work_kwh_assumed_same_eta':
+           CH4_HHV_KJ_PER_MOL/3600*engine_efficiency,
+      'methanation_condensed_reference_heat_kwh':
+           METHANATION_HEAT_CONDENSED_KJ_PER_CH4/3600,
+      'storage_and_fuel_compatibility_not_compared':True
+    }
+
 @dataclass(frozen=True)
 class Inputs:
     co2_available_kg:float=1000.
@@ -143,6 +173,13 @@ class Checks(unittest.TestCase):
     def test_no_free_energy_without_external_supply(self):
         x=calculate(Inputs(solar_electric_kwh=0))
         self.assertEqual(x['methane_mol'],0.)
+    def test_annual_pv_area_formula(self):
+        self.assertAlmostEqual(pv_area_m2_for_energy(7.216453*1e9,1500,.2),
+                               24054843.33,delta=500)
+    def test_direct_h2_vs_methane_same_engine(self):
+        d=compare_direct_h2_vs_methane(.4)
+        self.assertGreater(d['direct_h2_work_kwh_assumed_same_eta'],
+                           d['methane_work_kwh_assumed_same_eta'])
     def test_inadmissible_inputs_fail(self):
         with self.assertRaises(ValueError):
             calculate(Inputs(electrolyser_hhv_efficiency=1.5))
