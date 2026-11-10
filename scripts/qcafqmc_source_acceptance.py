@@ -27,6 +27,9 @@ def run(include_torch=False):
     from qcafqmc_mixed_energy_error_certificate import self_test as check_ratio
     from qcafqmc_autocorrelation_reblocking import self_test as check_autocorr
     from qcafqmc_nickel_doci_trial import self_test as check_doci
+    from qcafqmc_ipie_melting_core_check import self_test as check_melting
+    from qcafqmc_fcidump_cholesky_identity import self_test as check_cholesky
+    from qcafqmc_nickel_reaction_from_ipie import select_production_blocks
     from qcafqmc_existing_hartree_fock_reuse import verify_hf_reuse
     from qcafqmc_molecular_scf_certificate import self_test as check_scf
     source=verify_nickel_source()
@@ -36,6 +39,16 @@ def run(include_torch=False):
     ratio=check_ratio()
     autocorr=check_autocorr()
     doci=check_doci()
+    melting=check_melting()
+    chol=check_cholesky()
+    import numpy as np
+    a,had0=select_production_blocks(np.arange(301),300,50)
+    b,had1=select_production_blocks(np.arange(300),300,50)
+    assert len(a)==len(b)==250 and had0 and not had1
+    for wrong in (299,302):
+        try:select_production_blocks(np.arange(wrong),300,50)
+        except ValueError:pass
+        else:raise AssertionError("wrong ipie estimator block count accepted")
     hf_reuse=verify_hf_reuse()
     scf_certificate=check_scf()
     if not scf_certificate["wrong_orbital_order_rejected"]:
@@ -71,6 +84,9 @@ def run(include_torch=False):
       "molecular_SCF_wrong_MO_frame_rejected":scf_certificate["wrong_orbital_order_rejected"],
       "DOCI_projected_Hubbard_matches_exact_FCI_subblock":doci["small_hubbard_projected_matrix_matches_FCI"],
       "DOCI_vs_FCI_seniority_gap_positive":doci["seniority_zero_approximation_gap_positive"],
+      "ipie_melting_core_full_space_overlap_identity":melting["passed"],
+      "Cholesky_source_identity_negative_controls":chol["altered_two_electron_rejected"] and chol["altered_core_energy_rejected"],
+      "nickel_300_to_250_production_block_selection":True,
       "PySCF_ipie_nickel_runs_executed":False,
       "original_ionq_replication":False,
       "checked_files":checked
