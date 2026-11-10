@@ -10,7 +10,7 @@ module DASHI.Geometry.KakeyaLorentzSpatialSliceExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (ℤ; +_; _*_; _-_ )
 open import Data.Vec using (Vec)
 
 import DASHI.Geometry.Signature.HyperbolicFormZ as HFZ
