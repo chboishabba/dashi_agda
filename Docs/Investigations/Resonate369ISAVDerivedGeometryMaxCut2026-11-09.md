@@ -331,3 +331,38 @@ Attribution: Slobodian's historical claims, Holmstrom's documented designs, and 
 6. Same-apparatus physical measurements of total electrical input/output, mechanical torque/speed, capacitor/inductor states and calibrated uncertainty.
 
 All generic mathematical and simulator work is DASHI-original; historical source and manufacturer documentation must remain separately attributed.
+
+## 2026-11-10 ideal-competent implementation steelman — pulse recovery
+
+**User assumption:** for undocumented elements, assume a technically competent developer selected physically available components and a sound switching/protection design. This is an explicit *counterfactual reconstruction* to maximise the possible performance of the stated topology, **not a new claim about what Holmstrom installed**.
+
+### Hypothetical component topology, inferred from function rather than manufacturer schematic
+
+- A conventional externally powered winding/coil with current commutation; stationary coil field energy at turn-off is `L*I^2/2` for a selected linear-inductance approximation.
+- Correctly rated semiconductor switch/driver and timing (an ideal controllable switch in the bound model), with proper protection and a defined current path on opening.
+- An oriented diode, synchronous rectifier, or active clamp routes the decaying winding current into a recovery capacitor, and prevents reverse current at the first zero-crossing.
+- The recovery capacitor is connected to a subsequent useful input or bus through an appropriate converter/driver; that reuse link is **not** physically asserted without a circuit diagram. A TVS-only dissipative clamp is not equivalent to energy recapture.
+- Realistic adjustable parameter `R >= 0` covers winding/conductor/switch forward resistance as one lumped loss; further diode switching loss, capacitor ESR/ESL, leakage, converter loss, magnetic core loss, hysteresis, mechanical torque, and external source remain explicit omissions.
+- All ideal numerical examples are illustrative and are not recommendations to assemble or operate high-voltage equipment.
+
+### New executable source — `scripts/circuit36927_inductive_recovery.py`
+
+- Lossless analytic LC diode-isolated first-zero-current capture, with forward initial current and nonnegative capacitor voltage.
+- Damped analytic first-zero-current solution for `0 <= R < 2 sqrt(L/C)`, with the initial coil energy transferred to capacitor plus resistive dissipation. A precharged capacitor is supported in the nonnegative voltage quadrant.
+- Dissipative implicit-midpoint closed-RLC timestep: exact discrete identity (up to floating error)
+  `E_before - E_after = dt * R * I_mid^2`, with *no artificial LC dissipation*. The solver intentionally does not claim diode event detection for arbitrary midpoint trajectories.
+- In the illustrative 10 mH, 100 µF, 2 A, initially empty capacitor case: initial coil energy = 20 mJ, ideal final capacitor = 20 V, first capture time ~1.570796 ms. In a 1-ohm resistive underdamped path, first-zero-current cap ~18.53384042 V; resistor loss ~2.82483796 mJ, final storage ~17.17516204 mJ.
+- Local Python checks passed: 500 randomised midpoint and 500 randomised exact damped first-zero-current cases, 1000-step zero-resistance energy drift, 1000-step lossy energy ledger, input validation.
+- `Circuit36927RecoveryEnergyBoundExact.agda`: conditional Nat-valued nonnegative energy ledger `initial = final + loss` entails `final <= initial`; avoids pretending that this assumption is empirically established. Agda kernel check remains OPEN.
+
+### What this closes, and what remains
+
+- **Closes numerical steelman:** conventional physically plausible lossless and resistively lossy inductor-to-capacitor energy recapture can be calculated and energy accounted.
+- **Does not close:** source-specific motor schematics or any coefficient-of-performance measurement, because only the modelling assumption supplies component topology and parameter values.
+- S1: acquisition of a genuinely selected original wiring diagram and proof of correspondence to the hypothetical circuit remains OPEN.
+- M1: generic typed finite netlist to physical KCL/KVL and MNA kernel soundness remains OPEN.
+- M2: exact Agda RLC constitutive and switching proof, with verified matching analytic/Python functions, remains OPEN.
+- M3: finite phase C3/C9/C27 physical phase-angle and actual coil/magnet polarity geometry weld remains OPEN.
+- P3: independent same-boundary mechanical/electrical output power and input/calibration, with uncertainties, remains OPEN.
+
+Source and attribution rule: record separately historical Infinity SAV/Slobodian descriptions, Holmstrom/Resonate369 original source claims, and DASHI-authored conditional steelman. This PR vendors **no** source STL, STEP, CAD, or manufacturer schematic.
