@@ -62,6 +62,16 @@ class PointInTimeRiskTests(unittest.TestCase):
                               consumer_version="v1",
                               weights=[1/3,1/3,1/3],min_training=5)
 
+    def test_retrofilled_late_feature_does_not_extend_risk_training(self):
+        rows,features=source_fixture()
+        features[2]=Feature("history-1","tape","C",6)
+        # All rows contain C, but C entered the PIT universe only at 6.
+        r=forecast_one_step(rows,features,history="history-1",source="tape",
+                            asof=10,consumer_version="v1",
+                            weights=[1/3,1/3,1/3],min_training=5)
+        self.assertEqual(r.training_count,5)
+        self.assertEqual(r.training_latest_time,10)
+
     def test_hindsight_delisting_does_not_change_past_training(self):
         rows,features=source_fixture()
         features[0]=Feature("history-1","tape","A",0,3,10)
