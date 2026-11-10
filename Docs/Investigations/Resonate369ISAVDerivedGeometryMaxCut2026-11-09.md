@@ -188,3 +188,48 @@ V0 proof (open): pinned Agda kernel checking on actual branch.
 P0 experiment (open): full source/output, storage and mechanical load energy accounting.
 
 Public Friendbeacon listings are sufficient for **design claims**; not for proof that all physically relevant netlist edges are present. No vendor CAD was added.
+
+## 2026-11-10: reusable 369/27 circuit-components and search tranche
+
+### Repo reuse audit
+
+- `DASHI.Foundations.Base369TriadicPhaseTower` already exposes `Phase27`, `triTo27`, `phase27ToNonarySector`, `phase27ToTriSector` and section theorems.
+- `DASHI.Foundations.Base369PolyphaseCharacters` already models symbolic three-sequence exponent characters. No physical sinusoidal signal implied by the finite field.
+- `DASHI.Computation.AStarPlateauFibreExact` provides A* tie-fibre boundaries and `AStarCorrectnessContract`. `DijkstraQueueFibreExact`, `PathfindingFibreFamilyExact` cover related algorithm contracts.
+- PR #1486 `Filsinger × Lyden Earth-port max-cut: source bounds and switched-capacitor power audit` contains existing numerical capacitor energy and recharge/recirculation bounds. Its two changed files (as compared to master during inspection) are `Docs/research/FilsingerLydenEarthPortMaxCut20261110.md` and `scripts/filsinger_lyden_earth_port_maxcut.py`. Reuse these for numeric energy audit rather than duplicating them in motor schematic code.
+- Default-branch GitHub code search for literal `capacitor`, `resistor`, and `Kirchhoff` returned no indexed module matches. This is NOT a proof those constructs do not exist in historical/unmerged PRs.
+
+### New modules
+
+- `DASHI.Physics.Motors.Circuit36927ComponentGraphExact` defines component kinds (passive R/L/C, sources, semiconductors, switches, magnetic elements), dimension-tagged nominal values, arbitrary pins/junctions, explicit wire edges, graph routes, source-bound model interfaces, and a coarse/fine 3/9/27 phase projection with a reused section proof. A declared component/edge is not an actual observed device.
+- `DASHI.Physics.Motors.Circuit36927SearchBridgeExact` connects circuit wiring graphs to existing A* contract types, records explicit Nat admissibility bounds and calculated route cost, requires a universally quantified comparison against rival routes for shortest-path promotion, and builds an exact C3-C9-C27 hierarchy. It does not claim the abstract source-dependent A* run already exists.
+- `DASHI.Physics.Motors.Circuit36927IllustrativeRCExact` is an entirely DASHI-authored 12 V, 1 kohm, 3.3 microfarad RC component instance with integer units and three declared wire edges. It certifies exact value dimension labels but does not simulate current or capacitor charging.
+- `scripts/circuit36927_netlist.py` is a standard-library, executable reference for parts, pins, values, wires, Graphviz DOT export, nonnegative-cost Dijkstra/A*, phase hierarchy and simple checks; uses independent example values only. Authoring-workspace tests passed, but this is NOT Agda kernel acceptance and NOT physical circuit validation.
+
+### Diagram and inference boundaries
+
+- DOT output represents explicit wires and component blocks. It does NOT silently insert conduction across resistors, capacitors, open switches, diodes or active semiconductors.
+- Electrical topology and phase discretisation are orthogonal: tagging the same component by C3/C9/C27 does not assert that the physical machine has 27 coils, 27 phases, or any particular frequency. It is a finite resolution/refinement carrier.
+- A* / Dijkstra answer connectivity/routing/design search only under their path-cost and heuristic contracts. They do not compute node voltages, branch currents, switching timing, electromagnetic flux or shaft torque.
+- For a physical circuit model, KCL, KVL, constitutive equations (R, C, L, semiconductor, switch), component tolerances, energy storage, source boundaries and load power must be introduced as separate law-bearing interpretation records.
+- C07, Dodecatron and V1 manufacturer schematics remain **not acquired**. No actual vendor netlist instantiated.
+
+### Highest-alpha remaining lemmas and deliverables
+
+| Priority | Exact gate | Evidence / theorem |
+|---|---|---|
+| P0 | `allCircuit36927ModulesKernelChecked` | Run pinned Agda 2.9 with current module import graph, fix errors |
+| P0 | `actualDeviceSchematicTranscriptionSameSource` | Versioned Friendbeacon original circuit / drawings, pin labels and revision correspondence |
+| P0 | `wireEndpointsWithinDeclaredPinCount` | Fin-indexed parts and pins, no missing IDs or unresolved junctions |
+| P0 | `sourceBoundNetlistGraphWeld` | Measured or visually attested wires to signed port graph, explicit missing-connection boundary |
+| P1 | `circuitRouteSoundnessFromNetlist` | Route iff finite paths in selected and valid netlist |
+| P1 | `astarOptimalityFromAdmissibleConsistentHeuristic` | Actual A* algorithm/refinement to existing family contracts, not merely carrier |
+| P1 | `phase27CoarseGraphPathLift` | Explicit edge-preserving refinement map and path lift; false in general without assumptions |
+| P1 | `seriesCoilPolarityActualWiring` | Source-selected terminal and magnet-polarity observations |
+| P2 | `sameNetlistKirchhoffKCLAndKVL` | Selected reference orientation and node/loop incidence |
+| P2 | `resistorCapacitorInductorConstitutiveLaws` | Physical R/L/C units and differential/DAE semantics |
+| P2 | `switchedTopologyEnergyCycleIdentity` | Source drive, flux, flyback, stored-energy and dissipation algebra with switches |
+| P2 | `motorCoenergyTorqueSameGeometry` | Magnet, airgap, winding geometry and calibrated constitutive laws |
+| P3 | `realDeviceLoadedPowerResidual` | Calibrated simultaneous input/output/storage/shaft measurements, uncertainty |
+
+No STL/STEP/CAD or original manufacturer circuitry copied. Attribution: historical Slobodian/Infinity SAV, Holmstrom/Resonate369 and independent DASHI formalism remain separately identified.
