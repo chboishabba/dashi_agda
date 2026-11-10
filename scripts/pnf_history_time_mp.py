@@ -47,9 +47,14 @@ def asof_mp(
     eligible_meta = [f for f in universe if f.history == history and f.source == source]
     if len({f.identifier for f in eligible_meta}) != len(eligible_meta):
         raise ValueError("duplicate source feature IDs")
+    if any(f.last_valid_at is not None and f.last_valid_known_at is None
+           for f in eligible_meta):
+        raise ValueError("membership end date lacks as-of knowledge timestamp")
     features = [f.identifier for f in eligible_meta
                 if f.first_known_at <= asof
-                and (f.last_valid_at is None or asof <= f.last_valid_at)]
+                and (f.last_valid_at is None
+                     or asof < f.last_valid_known_at
+                     or asof <= f.last_valid_at)]
     if not features:
         raise ValueError("no point-in-time eligible features")
     window = [e for e in observations
