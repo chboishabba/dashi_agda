@@ -42,15 +42,17 @@ class TemporalMPTypedTests(unittest.TestCase):
         self.assertEqual(early["feature_ids"],["A","B"])
         self.assertEqual(later["feature_ids"],["A","B","C"])
         self.assertEqual(early["mp_diagnostic"]["n"],3)
-        self.assertEqual(later["mp_diagnostic"]["n"],6)
+        self.assertEqual(later["mp_diagnostic"]["n"],3)
         self.assertEqual(early["mp_diagnostic"]["p"],2)
         self.assertEqual(later["mp_diagnostic"]["p"],3)
+        self.assertEqual(later["source_event_times"],[3,4,5])
+        # Newly admitted feature C cannot be backfilled into older rows.
         self.assertTrue(early["leakage_guard"] and later["leakage_guard"])
 
     def test_future_announcement_never_enters_past(self):
         at6 = self.get(6)
         self.assertNotIn(6,at6["source_event_times"])
-        self.assertEqual(at6["mp_diagnostic"]["n"],6)
+        self.assertEqual(at6["mp_diagnostic"]["n"],3)
         self.assertEqual(at6["feature_ids"],["A","B","C"])
 
     def test_consumer_version_and_history_remain_distinct(self):
