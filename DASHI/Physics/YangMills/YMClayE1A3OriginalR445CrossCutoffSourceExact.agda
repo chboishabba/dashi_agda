@@ -37,6 +37,7 @@ import DASHI.Physics.YangMills.YMClayE1OriginalSUNDependentCylinderExact as E1
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -100,10 +101,29 @@ module _
     (observable : CoarseTest) →
     originalE1BareCoarseExpectation observable
     ≡
-    E1.actualOriginalWilsonCylinderExpectation
-      theory traceData exponential beta oneLink bilateral divide
-      1 (λ _ links → observable links)
+    Physical.normalizedExpectation
+      (E1.actualOriginalWilsonMeasureAt
+        theory traceData exponential beta oneLink bilateral divide 1)
+      observable
   originalE1CoarseIsBareWilson observable = refl
+
+  -- All original coarse plaquette words survive the exact 3 -> 1
+  -- interacting R445 pushforward comparison. No bare-action closure
+  -- is claimed at the effective coarse scale.
+  originalE1BlockedCoarseWordIsR445 :
+    (word : Words.PlaquetteWord
+      theory traceData exponential beta oneLink bilateral divide 1) →
+    originalE1FineBlockedExpectation
+      (Words.originalWordObservable
+        theory traceData exponential beta oneLink bilateral divide 1 word)
+    ≡
+    originalR445EffectiveCoarseExpectation
+      (Words.originalWordObservable
+        theory traceData exponential beta oneLink bilateral divide 1 word)
+  originalE1BlockedCoarseWordIsR445 word =
+    originalE1FineBlockedIsR445EffectiveCoarse
+      (Words.originalWordObservable
+        theory traceData exponential beta oneLink bilateral divide 1 word)
 
   -- The unit case of matching the genuine R445 effective coarse state
   -- to the genuine bare Wilson state is now proved from original Haar
