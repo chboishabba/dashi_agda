@@ -44,6 +44,24 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows[0]["status"], "source-verified-not-elaborated")
         self.assertEqual(rows[0]["sha256"], hashlib.sha256(DATA).hexdigest())
 
+    def test_verified_blob_callback_receives_exact_source(self):
+        received=[]
+        rows=list(inventory(
+            REPO, REV, opener=opener,
+            on_source=lambda receipt, raw: received.append((receipt, raw))))
+        self.assertEqual(len(received),1)
+        self.assertEqual(received[0][1],DATA)
+        self.assertEqual(received[0][0],rows[0])
+        self.assertEqual(received[0][0]["git_blob"],SHA)
+
+    def test_skipped_blob_never_calls_source_consumer(self):
+        received=[]
+        rows=list(inventory(
+            REPO,REV,opener=opener,max_blob_bytes=1,
+            on_source=lambda receipt,raw:received.append(raw)))
+        self.assertEqual(received,[])
+        self.assertEqual(rows[0]["status"],"skipped-size-cap")
+
     def test_skips_oversized_without_loading_blob(self):
         def tree_only(req):
             if "/git/blobs/" in req.full_url:
