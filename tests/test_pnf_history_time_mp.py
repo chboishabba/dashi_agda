@@ -64,6 +64,24 @@ class TemporalMPTypedTests(unittest.TestCase):
         self.assertEqual(other["history"],"h2")
         self.assertEqual(other["mp_diagnostic"]["n"],2)
 
+    def test_retrofilled_new_feature_does_not_extend_window(self):
+        rows,features=self.fixture()
+        # Backfill C into older observations even though C was not
+        # historically admitted until day 3.
+        retro=[]
+        for e in rows:
+            if e.history == "h1" and e.source == "feed" and e.event_time < 3:
+                values=dict(e.values)
+                values["C"]=1 if e.event_time % 2 else -1
+                retro.append(Event(e.history,e.event_time,e.available_at,values,e.source))
+            else:
+                retro.append(e)
+        result=asof_mp(retro,features,history="h1",asof=5,
+                       source="feed",measurement="trit_activation",
+                       consumer_version="v0",balanced_trit_native=True)
+        self.assertEqual(result["source_event_times"],[3,4,5])
+        self.assertEqual(result["mp_diagnostic"]["n"],3)
+
     def test_delisting_knowledge_time_not_backfilled(self):
         rows,features=self.fixture()
         # An end-validity date of day 1 only becomes known on day 5.
