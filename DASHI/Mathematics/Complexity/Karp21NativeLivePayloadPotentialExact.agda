@@ -8,7 +8,9 @@ module DASHI.Mathematics.Complexity.Karp21NativeLivePayloadPotentialExact where
 -- The potential counts the literal payload lengths held in the real
 -- State:  historical endpoint addresses and labels; remaining
 -- original binary u/v/signed-w fields; remaining certificate bits;
--- and the two signed ripple-accumulator registers.
+-- and the two signed ripple-accumulator registers. The threshold,
+-- header registers, caches, runtime cons/tag/pointer cells and stack
+-- are NOT counted; this is not a complete live-allocation measure.
 --
 -- An ACTUAL successful advance consumes u,v, signed w and two
 -- certificate bits, records u,v plus their labels, and inserts w in
@@ -28,7 +30,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (length)
 open import Data.Maybe.Base using (Maybe; nothing; just)
 open import Data.Product using (_×_; _,_)
-open import Data.Nat.Base using (_≤_)
+open import Data.Nat.Base using (_≤_; z≤n)
 import Data.Nat.Properties as NatP
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 open import Data.Nat.Tactic.RingSolver using (solve)
@@ -182,7 +184,7 @@ initialLivePayloadFitsOriginalWords :
     ≤ length word + length certificate
 initialLivePayloadFitsOriginalWords word certificate
   with Graph.readNativeWholeBinaryGraphWord word in parsed
-... | nothing = NatP.z≤n
+... | nothing = z≤n
 ... | just (Graph.whole-binary-graph n edges threshold)
   rewrite NatP.+-identityʳ
     (EdgeWidth.allBinaryRawEdgeRegisterCharges edges
@@ -195,7 +197,8 @@ initialLivePayloadFitsOriginalWords word certificate
 -- The direct highest-alpha F2.2 theorem. For every ACTUAL machine
 -- state reached with any source first-enabled fuel from the actual
 -- original signed N21 word/certificate, all retained source binary
--- data payloads together fit the combined ORIGINAL input bit length.
+-- four listed data-payload categories fit the combined ORIGINAL
+-- input bit length; threshold/header/scratch allocations are excluded.
 actualN21FirstEnabledLivePayloadFitsOriginalWords :
   (fuel : Nat) (word certificate : Word.BitWord) →
   stateLivePayload
