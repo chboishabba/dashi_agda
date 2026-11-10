@@ -66,6 +66,14 @@ class SourceWorldBuilder:
         for field in ("repository", "revision", "path"):
             if not isinstance(receipt[field], str) or not receipt[field]:
                 raise SourceConflict("empty or invalid source origin")
+        source_path = receipt["path"]
+        if (not source_path.endswith(".lean") or source_path.startswith("/")
+            or chr(0) in source_path
+            or any(part in ("", ".", "..") for part in source_path.split("/"))):
+            raise SourceConflict("unsafe original Lean source path")
+        import re
+        if re.fullmatch(r"[0-9a-fA-F]{40}", receipt["revision"]) is None:
+            raise SourceConflict("source provenance requires immutable revision")
 
     def admit(self, receipt: dict, raw: bytes) -> bool:
         self._validate_receipt(receipt, raw)
