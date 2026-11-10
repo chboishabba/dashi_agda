@@ -27,7 +27,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.Product using (Σ; _×_; _,_; proj₂)
+open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
 import DASHI.Quantum.TSVF as TSVF
@@ -1293,6 +1293,84 @@ module _
       originalOSAffineShiftToObserver
         source metric conversion scalar observerState target
         selectedOSEquation
+
+
+  ------------------------------------------------------------------------
+  -- The *same* original decode/embedding reflects solution uniqueness.
+  -- This proves an actual observer-side inverse-on-domain rather than
+  -- merely renaming the source-selected OS solution operator.
+  ------------------------------------------------------------------------
+
+  originalObserverShiftSolutionsUnique :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (a b target : ObserverState) →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar a target →
+    OriginalObserverAffineShiftEquation
+      source conversion scalar b target →
+    a ≡ b
+  originalObserverShiftSolutionsUnique
+      source conversion scalar inverse a b target first second =
+    let
+      firstOS : OriginalOSAffineShiftEquation
+        source conversion scalar a target
+      firstOS =
+        originalObserverAffineShiftToOS
+          source conversion scalar a target first
+
+      secondOS : OriginalOSAffineShiftEquation
+        source conversion scalar b target
+      secondOS =
+        originalObserverAffineShiftToOS
+          source conversion scalar b target second
+
+      osEquality : J a ≡ J b
+      osEquality =
+        osShiftInjective inverse (J a) (J b)
+          (proj₁ firstOS)
+          (proj₁ secondOS)
+          (trans (proj₂ firstOS) (sym (proj₂ secondOS)))
+    in
+    trans
+      (sym (Clock.decodeEmbed clock a))
+      (trans
+        (cong (Clock.decodeObserver clock) osEquality)
+        (Clock.decodeEmbed clock b))
+
+  originalSelectedObserverShiftInverseLeft :
+    (source : RealTimeDerivativeBridge)
+    (metric : OriginalIsometricStrongLimitSource source)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (a : ObserverState)
+    (domain : ObserverGeneratorDomain source a) →
+    originalSelectedObserverShiftInverse
+      source conversion scalar inverse
+      (observerSubtract source
+        (observerPhysicalEnergyOperator conversion a)
+        (observerScale source scalar a))
+    ≡ a
+  originalSelectedObserverShiftInverseLeft
+      source metric conversion scalar inverse a domain =
+    let
+      target : ObserverState
+      target =
+        observerSubtract source
+          (observerPhysicalEnergyOperator conversion a)
+          (observerScale source scalar a)
+    in
+    originalObserverShiftSolutionsUnique
+      source conversion scalar inverse
+      (originalSelectedObserverShiftInverse
+        source conversion scalar inverse target)
+      a target
+      (originalSelectedObserverShiftInverseSolves
+        source metric conversion scalar inverse target)
+      (domain , refl)
 
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
