@@ -224,3 +224,48 @@ selectedRelationImageInhabited state = state , (λ cell → refl)
 
 -- The selected image has a concrete section and pointwise
 -- recovery. The ambient field retains unrestricted other cells.
+
+
+------------------------------------------------------------------------
+-- An actual SECTION of the coarse 144-field -> 13-trit observation
+-- exists, because each 13-trit code has a canonical selected
+-- 144-cell representative. But the previous same-source pair proves
+-- that this split epimorphism is NOT an isomorphism.
+------------------------------------------------------------------------
+
+thirteenCodeToSelectedRelation :
+  Word.TritWord 13 → Original.StageRelationField
+thirteenCodeToSelectedRelation code =
+  selectedRelationFromCentral (Codec.thirteenToSourceCentral code)
+
+sourceRelationCodeHasSection :
+  (code : Word.TritWord 13) →
+  relationToThirteen (thirteenCodeToSelectedRelation code)
+  ≡ code
+sourceRelationCodeHasSection code =
+  trans
+    (selectedRelationThirteenCodeRoundTrip
+      (Codec.thirteenToSourceCentral code))
+    (Codec.thirteenSourceRoundTrip code)
+
+-- The two original relation fields both have the SAME selected
+-- canonical 13-coordinate representative, although their actual
+-- (1,0) relation cells differ.
+sameCanonicalRepresentativeForCollision :
+  thirteenCodeToSelectedRelation (relationToThirteen originalFlatField)
+  ≡
+  thirteenCodeToSelectedRelation (relationToThirteen reverseCellRaised)
+sameCanonicalRepresentativeForCollision =
+  cong thirteenCodeToSelectedRelation originalThirteenCodeCollision
+
+-- Hence "there is a section" does not imply the original full
+-- relation field has been reconstructed from its 13-code.
+noPointwiseFullRelationReconstruction :
+  ((field : Original.StageRelationField)
+   (cell : Original.StageRelation144) →
+   thirteenCodeToSelectedRelation (relationToThirteen field) cell
+     ≡ field cell) →
+  ⊥
+noPointwiseFullRelationReconstruction allFieldsRecovered =
+  sourceThirteenCannotBeLosslessLeftInverse
+    thirteenCodeToSelectedRelation allFieldsRecovered
