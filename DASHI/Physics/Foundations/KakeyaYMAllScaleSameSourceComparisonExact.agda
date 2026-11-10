@@ -15,9 +15,10 @@ module DASHI.Physics.Foundations.KakeyaYMAllScaleSameSourceComparisonExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Rational.Base using (ℚ; _*_; _+_; _≤_)
 open import Data.Product using (_×_; _,_)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Physics.YangMills.BalabanRGTwoMetricUniformComparisonExact as RG
 import DASHI.Physics.Foundations.KakeyaYMUltrametricPhysicalComparisonExact as Prior
@@ -47,7 +48,7 @@ record SameObjectAllScaleComparison : Set₁ where
     samePhysicalDistanceNext :
       ∀ n x y →
       RG.physicalDistanceNext (step n x y)
-        ≡ physicalDistance (Nat.suc n) x y
+        ≡ physicalDistance (suc n) x y
 
     sameRGDistance :
       ∀ n x y →
@@ -59,9 +60,9 @@ record SameObjectAllScaleComparison : Set₁ where
     sameRGDistanceNext :
       ∀ n x y →
       RG.rgDistanceNext (step n x y)
-        ≡ refinementDistance (Nat.suc n)
-            (selectedAddress (Nat.suc n) x selectedContext)
-            (selectedAddress (Nat.suc n) y selectedContext)
+        ≡ refinementDistance (suc n)
+            (selectedAddress (suc n) x selectedContext)
+            (selectedAddress (suc n) y selectedContext)
 
 open SameObjectAllScaleComparison public
 
@@ -72,7 +73,7 @@ allScalePhysicalContraction :
   (s : SameObjectAllScaleComparison) →
   ∀ n x y →
   RG.comparisonLower (step s n x y) *
-    physicalDistance s (Nat.suc n) x y
+    physicalDistance s (suc n) x y
   ≤ RG.contraction (step s n x y) *
       RG.comparisonUpper (step s n x y) *
       physicalDistance s n x y
@@ -98,9 +99,9 @@ allScaleNextRefinementIsOriginalAddress :
   (s : SameObjectAllScaleComparison) →
   ∀ n x y →
   RG.rgDistanceNext (step s n x y)
-  ≡ refinementDistance s (Nat.suc n)
-      (selectedAddress s (Nat.suc n) x (selectedContext s))
-      (selectedAddress s (Nat.suc n) y (selectedContext s))
+  ≡ refinementDistance s (suc n)
+      (selectedAddress s (suc n) x (selectedContext s))
+      (selectedAddress s (suc n) y (selectedContext s))
 allScaleNextRefinementIsOriginalAddress s = sameRGDistanceNext s
 
 -- Terminal aggregation without choosing a different observer metric:
@@ -109,7 +110,7 @@ sameObjectAllScaleReceipt :
   (s : SameObjectAllScaleComparison) →
   ∀ n x y →
   (RG.comparisonLower (step s n x y) *
-     physicalDistance s (Nat.suc n) x y
+     physicalDistance s (suc n) x y
    ≤ RG.contraction (step s n x y) *
        RG.comparisonUpper (step s n x y) *
        physicalDistance s n x y
