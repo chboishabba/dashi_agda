@@ -43,19 +43,6 @@ freshCarbonScaled c = freshPercent c * demandedCarbonAtoms c
 requiredCarbonScaled : FixedOutputCarbonCycle → Nat
 requiredCarbonScaled c = 100 * demandedCarbonAtoms c
 
-sameDutySourceBalance :
-  (c : FixedOutputCarbonCycle) →
-  reusedCarbonScaled c + freshCarbonScaled c
-    ≡ requiredCarbonScaled c
-sameDutySourceBalance c =
-  solve 3
-    (λ r v amount → (r :* amount) :+ (v :* amount)
-      := ((r :+ v) :* amount))
-    refl (recoveredPercent c) (freshPercent c)
-    (demandedCarbonAtoms c)
-  -- The normalized equality above is in (r+v)*amount form;
-  -- fullSourceSplit c supplies the final replacement by 100*amount.
-
 -- A direct rewrite using the independently admitted full source split
 -- avoids equating arbitrary r+v with 100 by arithmetic alone.
 actualSourceBalance :
