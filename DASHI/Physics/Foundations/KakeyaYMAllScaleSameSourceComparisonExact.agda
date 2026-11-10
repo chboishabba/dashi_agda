@@ -124,3 +124,43 @@ sameObjectAllScaleReceipt :
 sameObjectAllScaleReceipt s n x y =
   allScalePhysicalContraction s n x y ,
   allScaleRefinementIsOriginalAddress s n x y
+
+
+-- A cutoff-independent comparison is stronger than a witness indexed by
+-- n. It is a genuinely additional original-source obligation.
+record UniformSameObjectComparison : Set₁ where
+  field
+    original : SameObjectAllScaleComparison
+    fixedLower fixedUpper fixedContraction fixedScale fixedError : ℚ
+    lowerIndependent : ∀ n x y →
+      RG.comparisonLower (step original n x y) ≡ fixedLower
+    upperIndependent : ∀ n x y →
+      RG.comparisonUpper (step original n x y) ≡ fixedUpper
+    contractionIndependent : ∀ n x y →
+      RG.contraction (step original n x y) ≡ fixedContraction
+    scaleIndependent : ∀ n x y →
+      RG.physicalScale (step original n x y) ≡ fixedScale
+    errorIndependent : ∀ n x y →
+      RG.reopeningError (step original n x y) ≡ fixedError
+open UniformSameObjectComparison public
+
+-- No local re-derivation of the Balaban source inequality: all five
+-- scale-parameter equalities are applied to the inherited theorem.
+uniformAllScalePhysicalContraction :
+  (u : UniformSameObjectComparison) →
+  ∀ n x y →
+  fixedLower u * physicalDistance (original u) (suc n) x y
+  ≤ fixedContraction u * fixedUpper u *
+      physicalDistance (original u) n x y
+    + fixedScale u * fixedError u
+uniformAllScalePhysicalContraction u n x y
+  rewrite sym (lowerIndependent u n x y)
+        | sym (upperIndependent u n x y)
+        | sym (contractionIndependent u n x y)
+        | sym (scaleIndependent u n x y)
+        | sym (errorIndependent u n x y) =
+  allScalePhysicalContraction (original u) n x y
+
+-- IMPORTANT: this proves an actual all-scale *consequence* if the
+-- uniformity proofs exist. No cutoff-independent bound is generated
+-- from an arbitrary RG contraction sequence.
