@@ -23,6 +23,7 @@ record OrderedEnergyCarrier : Set₁ where
     energyComm : (a b : Energy) → a ⊕ b ≡ b ⊕ a
     energyRightUnit : (a : Energy) → a ⊕ zeroEnergy ≡ a
 
+    orderReflexive : (a : Energy) → a ⊑ a
     orderTransitive : {a b c : Energy} →
       a ⊑ b → b ⊑ c → a ⊑ c
     orderLeftMonotone : (a : Energy) {b c : Energy} →
