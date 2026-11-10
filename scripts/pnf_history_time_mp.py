@@ -25,6 +25,8 @@ class TemporalObservation:
 
 @dataclass(frozen=True)
 class HistoricalFeature:
+    history: str
+    source: str
     identifier: str
     first_known_at: int
     last_valid_at: int | None = None
@@ -42,9 +44,10 @@ def asof_mp(
 ):
     if not history or not source or not consumer_version or not measurement:
         raise ValueError("history/source/consumer/measurement receipts required")
-    if len({f.identifier for f in universe}) != len(universe):
+    eligible_meta = [f for f in universe if f.history == history and f.source == source]
+    if len({f.identifier for f in eligible_meta}) != len(eligible_meta):
         raise ValueError("duplicate source feature IDs")
-    features = [f.identifier for f in universe
+    features = [f.identifier for f in eligible_meta
                 if f.first_known_at <= asof
                 and (f.last_valid_at is None or asof <= f.last_valid_at)]
     if not features:
