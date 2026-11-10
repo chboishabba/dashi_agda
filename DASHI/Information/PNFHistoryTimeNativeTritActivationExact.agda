@@ -7,7 +7,7 @@ module DASHI.Information.PNFHistoryTimeNativeTritActivationExact where
 -- An optional trit encoding is a quantised observation. It is NOT
 -- asserted to preserve arbitrary continuous financial-return covariance.
 
-open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Fin.Base using (Fin)
 import Relation.Binary.PropositionalEquality
@@ -35,18 +35,12 @@ balancedTritScalar K Trit.zer =
 balancedTritScalar K Trit.pos =
   Scalar.one (Ring.orderedScalar K)
 
-balancedNegationCommutesWithScalar :
-  (K : Ring.ExactOrderedCommutativeRing) →
-  (t : Trit.Trit) →
-  balancedTritScalar K (Trit.inv t)
-  ≡ Scalar.neg (Ring.orderedScalar K) (balancedTritScalar K t)
-balancedNegationCommutesWithScalar K Trit.neg =
-  Relation.Binary.PropositionalEquality.sym
-    (Ring.negInvolution K (Scalar.one (Ring.orderedScalar K)))
-balancedNegationCommutesWithScalar K Trit.zer =
-  Relation.Binary.PropositionalEquality.sym (Ring.negZero K)
-balancedNegationCommutesWithScalar K Trit.pos =
-  Agda.Builtin.Equality.refl
+-- The trit involution is already proved in DASHI.Algebra.Trit.
+-- No arithmetic 'negation involution' is reintroduced here: the
+-- exact ordered-ring owner does not publish a general negInvolution.
+balancedTritInvolution :
+  (t : Trit.Trit) → Trit.inv (Trit.inv t) ≡ t
+balancedTritInvolution = Trit.inv-invol
 
 -- The same panel that supplies covariance must be proved to contain
 -- the trit-coded observations at each (history,time,row,predicate).
@@ -97,7 +91,7 @@ originalMagnitude largerPositive = 2
 
 sameBalancedTritButDifferentMagnitude :
   positiveSign smallPositive ≡ positiveSign largerPositive
-sameBalancedTritButDifferentMagnitude = Agda.Builtin.Equality.refl
+sameBalancedTritButDifferentMagnitude = refl
 
 differentOriginalMagnitude :
   originalMagnitude smallPositive ≡
