@@ -494,3 +494,7 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExac
 -- F2.2 SAME real binary first-enabled run: endpoint-history + remaining edge/certificate payload conserved;
 -- original graph+certificate words bound final history bit register storage. Source candidate; Agda/tape clock OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativeEndpointHistoryConservationExact
+
+-- F2.2 actual binary N21 first-enabled all-state nonincreasing same-state payload potential for history/edges/cert/ledger.
+-- Threshold, header, stack, pointers and copies excluded; exact-head Agda kernel and physical bit-TM cost OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativeLivePayloadPotentialExact
