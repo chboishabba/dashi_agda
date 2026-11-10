@@ -264,6 +264,19 @@
           inherit agdaRecord agdaRecordAll;
         };
 
+        # Reuses the same pinned nixpkgs/flake.lock as the Agda runners.
+        # A repo's lean-toolchain MUST match this Lean binary; the worker
+        # refuses mismatches rather than silently selecting another version.
+        devShells.lean-world = pkgs.mkShell {
+          packages = [
+            pkgs.lean4
+            pkgs.python3
+            pkgs.bash
+            pkgs.coreutils
+            pkgs.git
+          ];
+        };
+
         devShells.default = pkgs.mkShell {
           buildInputs = [
             agdaWithDashiDeps
