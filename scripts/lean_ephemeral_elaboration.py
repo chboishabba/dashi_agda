@@ -100,9 +100,24 @@ class EphemeralLeanWorker:
         self.command = tuple(command)
         self.timeout = timeout
 
+    @staticmethod
+    def safe_environment(home: Path | None = None) -> dict[str, str]:
+        # Lean macros and elaborators may execute code. Never pass OAuth/API
+        # tokens, AWS/cloud credentials, SSH agent sockets or unrelated user
+        # secrets into a source-controlled compiler subprocess.
+        allowed = (
+            "PATH", "USER", "LOGNAME", "LANG", "LC_ALL", "LC_CTYPE",
+            "SSL_CERT_FILE", "NIX_PATH", "NIX_CONFIG", "NIX_SSL_CERT_FILE",
+            "NIX_REMOTE", "NIX_PROFILES", "TZ",
+        )
+        env = {key:os.environ[key] for key in allowed if key in os.environ}
+        if home:
+            env["HOME"] = str(home)
+        return env
+
     def compiler_version(self) -> str:
         command = list(self.command) + ["--version"]
-        output = _run(command, cwd=self.flake, env=os.environ.copy(),
+        output = _run(command, cwd=self.flake, env=self.safe_environment(),
                       timeout=self.timeout)
         if output.returncode or not output.stdout.strip():
             raise ElaborationError("pinned Lean compiler version unavailable")
@@ -155,9 +170,8 @@ class EphemeralLeanWorker:
             file.parent.mkdir(parents=True, exist_ok=True)
             file.write_bytes(source)
             target = root / "output.olean"
-            env = os.environ.copy()
-            env["HOME"] = str(root / "home")
             (root / "home").mkdir()
+            env = self.safe_environment(root / "home")
             if self.dependency_olean_dir:
                 if not self.dependency_olean_dir.is_dir():
                     raise ElaborationError("pinned compiled dependency directory missing")
