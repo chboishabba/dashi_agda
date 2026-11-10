@@ -419,3 +419,55 @@ The independent local prototype `/mnt/data/circuit36927/optimal_pulse_motor.py` 
 4. Optimise bus energy with realistic conduction/switching losses, controller overhead, torque ripple, peak thermal load and thermal limits; copper-optimal current is not automatically the globally optimal practical controller.
 5. Weld a source-selected netlist and original named device to the abstract circuit graph; no source-specific Slobodian or Holmstrom physical identification follows from the current assumptions.
 6. Validate whole-system real energy balance with paired electrical/mechanical instruments, and uncertainty before any performance attribution.
+
+## 2026-11-10: joint voltage-constrained steelman; mandatory correction to earlier feasibility figures
+
+New independent DASHI scripts:
+- `scripts/circuit36927_joint_voltage_constrained_drive.py` (commit `df00e181`): constrained finite current optimisation, fixed torque, peak current, sampled voltage, current slew penalty and explicitly modelled conversion, switching, core and idle losses; local independent implementation executed successfully with 27/81 sampled phases.
+- `scripts/circuit36927_bus_power_optimise.py` (commit `9fe0f68d`): searches a *local* improvement to modeled bus wattage, treating positive and regenerative power through direction-specific converter efficiencies. Bus objective is generally nonconvex; no global optimality claim.
+- `scripts/circuit36927_continuous_voltage_guard.py` (commit `7888cac5`): Fourier interpolation of periodic phase current, Fourier-derivative voltage, explicit 8x fine grid, linear constraints there plus conservative between-grid derivative bound.
+
+### Important invalidation/correction
+
+The sampled 81-point voltage-constrained solution at 250 rad/s and 12 V had a *finer-grid peak* of ~15.80 V (unipolar) and ~13.43 V (bipolar), i.e. was **NOT** continuously voltage feasible. It also produced slight between-grid negative-current overshoot for a nominally one-quadrant unipolar drive. Prior discussion describing those current designs as feasible under a 12 V physical drive must be qualified as only discrete-node feasibility. This was discovered by inspecting the original Python optimiser at local file path `/mnt/data/circuit36927/optimal_pulse_motor.py` and an independent eightfold Fourier-grid audit.
+
+### Conservative Fourier-waveform certificate
+
+For a bandlimited periodic trigonometric polynomial `f(theta)=sum_k c_k exp(i*k*theta)`, the derivative has `sup |f'| <= sum_k |k*c_k|`. For `m` uniformly sampled points around one turn, every position is at most `pi/m` angular distance from a sample, so
+`sup_theta |f(theta)| <= max_grid|f| + (pi/m)*sum_k |k*c_k|`.
+Analogous lower/upper bounds apply to signed current, ensuring no transient reverse current for the selected unipolar Fourier signal.
+
+The analytical inequality is exact for the selected *trigonometric polynomial*, but its floating-point evaluation is not an interval-arithmetic or kernel-check proof. It does not validate a real PWM switching waveform or unmodelled HF effects.
+
+### Local corrected audit (independent numerical implementation)
+
+Parameters remain illustrative: R=1.5Ω, L=20mH, PM K=0.06 Nm/A, 0.015 Nm average torque, 2A max, converter 97% in each direction, 0.15W idle, 20 kHz with 2µJ fixed and 1µJ/A current-scaled nominal event loss, 0.05W core loss. Current is constrained with 0.03 A per-grid conservative guard; the tight 12 V case adds a 1.02 V voltage margin. Note model switching loss is assumed rather than component-characterised.
+
+At 81 base phases and 8x fine grid:
+| Case | Fourier-derived voltage envelope upper bound | Continuous current range conservative | Shaft/DC-bus efficiency |
+|---|---:|---:|---:|
+| 100 rad/s, 24V, unipolar | 8.031 V | 0.0203..1.048 A | 67.74% |
+| 100 rad/s, 24V, bipolar | 6.857 V | -0.5024..+0.5024 A | 75.53% |
+| 250 rad/s, 12V, unipolar | 11.990 V | 0.0063..1.923 A | 66.33% |
+| 250 rad/s, 12V, bipolar | 11.501 V | -0.9322..+0.9322 A | 82.59% |
+
+The corrected 250rad/s, 12V efficiencies replace the prior sampled-only 74.6% / 85.2% feasibility claims **for the chosen candidate waveform and guard assumptions**. They do NOT constitute global best achievable drive efficiencies, and the bipolar architecture remains a more capable physical design than a reed-switched one-quadrant drive.
+
+The fine-grid signed electrical average minus shaft minus copper was within ~6e-15 W in the local numerical model. All Fourier-bound and source-power statements are conditional on the idealised constant-L sinusoidal-PM model. No vendor files or source-specific geometry were imported.
+
+### Bus-power optimisation comparison
+
+A local implementation of nondifferentiable positive/negative port power accounting with explicit converter efficiency and chosen fixed switching costs found:
+- 100rad/s 24V: ~0.0030% improvement over copper-only unipolar and ~0.0013% bipolar.
+- 250rad/s 12V *sampled-only feasibility*: ~0.0432% unipolar and ~0.0028% bipolar.
+These are local searches and **the second pair must not be called continuously feasible** without re-solving with the Fourier envelope constraints. The small relative improvement in this chosen loss model suggests copper minimisation is a useful surrogate, not a universal law.
+
+### Maximum-cut successor obligations
+1. Source-independent **verification**: execute the precise committed Python revisions and kernel-check the Agda modules; current local numerical prototypes were tested, exact new committed bytes were not independently rerun. No Agda 2.9 executable available.
+2. Upgrade Fourier derivative envelope to outward-rounded interval arithmetic and add a trustworthy analytic `sup` checker; retain actual waveform switching and hold timing as separate dynamics.
+3. Solve constrained drive **plus actual energy-recovery converter dynamics**, rather than independently imposing fixed converter percentages on port power.
+4. Replace sinusoidal `K sin theta` and constant `L` with selected original/empirical field geometry, slot harmonics, cogging and nonlinear saturation, then optimise full controller and torque-ripple/thermal constraints.
+5. Weld source-selected Holmstrom/Slobodian wiring via pin-level schematic evidence; no physical claim is promoted from the competent-component counterfactual.
+6. Validate electrical input, power recycled, shaft output, friction, thermal dissipation, full switching history and energy storage changes at one bounded physical system.
+
+Attribution separation and non-vendoring continue: Slobodian historical Infinity SAV claims; Holmstrom/Resonate369 devices; independent DASHI abstractions and optimisers.
