@@ -243,3 +243,33 @@ Added `DASHI.Physics.Motors.Circuit36927InternalTransferConservationExact` (comm
 - `allInternalTransfersCancel`, an abstract group-law cancellation theorem.
 
 This is an **exact structural accounting identity**, *not* per-node Kirchhoff current conservation, real device current continuity or measured energy conservation. Per-node edge incidence and physical constitutive weld remain OPEN. Agda kernel verification of the new module and prior modules is also OPEN.
+
+## 2026-11-10 continuation: physically meaningful numerical RLC solver and bounded pins
+
+### Implemented
+- `Circuit36927TypedPinsExact.agda` (commit `43bd1a62`): `FiniteParts`, `ValidPort`, `ValidWire`, `TypedNetlist`; bounded component index and dependent bounded pin index; wire reversal involution. These replace the prior unconstrained raw-Nat pin references at the trustworthy graph boundary.
+- `Circuit36927TwoNodeKCLExact.agda` (commit `0b38543d`): conditional two-branch equality implies signed node-current cancellation. Uses existing additive-group contract; equality of physical currents must be established independently.
+- `scripts/circuit36927_mna.py` (commit `19b08ebb`): independent modified-nodal analysis reference for two-terminal R/C/L elements and ideal voltage/current sources, with explicit ground, wire-union node identification, per-source branch-current unknowns, backward-Euler capacitor history current and inductor history current, partial-pivot linear solve, singular/floating-network rejection, branch voltages/currents, and KCL residual diagnostics. This is an original DASHI reference implementation, not source-derived vendor wiring.
+
+### Tested in authoring environment
+- RC example: 12 V, 1000 ohms, 3.3 microfarads, backward-Euler dt=0.00033 seconds, 100 steps; resulting capacitor voltage 11.99912921140919 V, matching BE closed form 11.999129211409182 V.
+- At each RC step, tested: KCL residual under 1e-9 A, resistor/capacitor current equality, series KVL, and source power = resistor power + capacitor stored-energy difference / dt + nonnegative BE numerical dissipation. The numerical dissipative term cannot be mistaken for a source of energy.
+- RL example: 10 V, 10 ohms, 1 H, dt=0.1 seconds, initial 0 A; BE first-step inductor current 0.5 A.
+- Input validation: rejects missing connection endpoints and an electrically disconnected floating resistor component; a correctly grounded lone resistor is *not* singular.
+- A local test was executed against a slightly more verbose implementation of the same stamping algorithm; the subsequently committed condensed script has not yet been executed in this environment. Treat exact committed-script regression verification as pending until run.
+- Agda 2.9 kernel acceptance remains open because the toolchain is not installed here.
+
+### Important nonclaims
+- Model only: ideal linear R/L/C and DC independent voltage/current sources. NO diode, MOSFET, reed-switch transitions, hysteresis, coil–magnet coupling, flux calculation, mechanical torque, AC harmonic solver, nonlinear solver or experimentally demonstrated pulse-energy recovery.
+- Physical energy conservation and the discretisation energy identity are distinct. Backward Euler adds nonnegative numerical dissipation; a calculation of negative numerical loss would signal an implementation/sign problem.
+- Finite C3/C9/C27 phase indices support refinement, not mystical/empirical 369 energy significance.
+- A* graph search remains distinct from MNA. A* can optimise probe paths or candidate topology, not solve circuit dynamics.
+- No vendor CAD, STL, STEP, schematics, or copyrighted netlist content is vendored.
+
+### Revised highest-alpha cut
+1. V0: run pinned Agda kernel on all new modules; run the exact committed Python MNA script with tests.
+2. M1: weld `TypedNetlist` to the Python wire-node compiler with a jointly checked finite incidence matrix.
+3. M2: add machine-checkable R/C/L constitutive laws and per-node KCL/KVL to Agda, then a source-selected MNA soundness bridge (symbolic or rational arithmetic).
+4. M3: support ideal switch states and realistic diode/MOSFET models (with explicit signed passivity/energy assumptions), then investigate pulse recovery.
+5. S1: acquire lawful read-only schematic/wiring documentation from Holmstrom and verify same-design/source topology; preserve Slobodian/Holmstrom/DASHI attribution.
+6. P3: original instrument input/output, capacitor and inductor states, shaft torque/speed and uncertainties. Do not infer physical efficiency from topology or simulations.
