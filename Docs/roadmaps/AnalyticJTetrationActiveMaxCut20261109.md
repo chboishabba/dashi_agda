@@ -349,3 +349,24 @@ The original task remains **Kneser-normalized tetration for ordinary complex exp
 6. In parallel: original Bishop q-period, \(\Delta\) nonvanishing, same source j, and actual moving-fine observer/contour certification.
 
 **Acceptance policy:** none of (1)–(6) is kernel-closed by formal series, finite polynomial identities or a numerical run. Test and repair with the repository's pinned Agda 2.9 \`--safe\` runner before promotion.
+
+
+## 2026-11-10 new mathematical maximum cut — original Bishop complex / nested exp–log
+
+This round advances the original **Kneser/Abel–modular \(j\)** objective, not E8 numerical shells.
+
+**Direct new Agda source**: \`DASHI/Moonshine/AbelBishopLogFiniteComplexDerivativeExact.agda\`. The source defines the *actual Bishop-complex* finite geometric prefix \(\sum_{k<N}(-w)^k\); proves finite complex distributivity via the original \`BishopP.ℝ-Solver\` separately on both coordinates; proves a finite complex remainder cancellation; and derives for every \`N : Nat\` and every original Bishop-complex \`w\`:
+\[
+(1_C+w)\sum_{k<N}(-w)^k\approx_C 1_C-(-w)^N.
+\]
+**No arbitrary analytic derivative/log record or new postulate**. The source is added to the pinned Agda 2.9 \`--safe\` local target list. **Kernel acceptance pending:** no local Agda installation or repo checkout available in this session; source-written is not kernel-complete.
+
+**New fully all-degree mathematical proof**: \`Docs/proofs/AnalyticKoenigsComplexCompositionMajorant20261110.md\`. Work in rational formal series: with \(L(X)=\sum_{k≥1}(-1)^{k+1}X^k/k\), and positive majorant \(H(X)=\sum X^k/k\), the coefficients of \(\exp L\) are \((1,1,0,0,\dots)\), while those of \(\exp H\) are \((1,1,1,\dots)\). The coefficientwise triangle inequality bounds all nested Cauchy compositions by 1. The resulting *uniform compact-disk tail* is \(r^{N+1}/(1-r)\), for \(0≤r<1\). Stronger finite-polynomial version: with \(L_N(w)=\sum_{k=1}^N(-1)^{k+1}w^k/k\), the **ordinary complex** exponential satisfies for every \(N≥1\)
+\[
+|\exp(L_N(w))-(1+w)| \le \frac{r^{N+1}}{1-r}\quad (|w|\le r<1).
+\]
+This provides a finite algebra/positive-majorant target for Bishop summation; no Cauchy integral estimate or global principal-log record is needed. **Not a Bishop exp equality until original source carrier weld/continuity is proved.**
+
+**Independent finite regression**: \`scripts/analytic_j_tetration_exp_log_composition_majorant.py\`, executed with Python exact \`Fraction\` arithmetic locally. It independently builds all finite signed and positive Cauchy compositions through degree 24, and tests the exact geometric-tail identities for rational radii. All tests passed. Added to \`scripts/check_analytic_j_tetration_golden_local.sh\`.
+
+**Next paid max-cut**: (1) Agda exact-head receipt and repairs on new files; (2) original Bishop complex factorial-exponential \`expSeries\` and same-source identification with \`BishopSetoidComplexExact.expC\` from actual exp/sin/cos series; (3) original finite Cauchy-composition coefficient and positive-tail transfer to Bishop setoid limits; (4) source proof \`exp_C(L(w))≈_C1_C+w\`; (5) source selected upper fixed point/reciprocal/disk and local inverse; (6) Koenigs holomorphic limit + Abel winding; (7) **global** Kneser normalization; in parallel the Bishop trig period and true modular \(q,\Delta,j\). Nothing in this round kernel-closes (2)–(7).
