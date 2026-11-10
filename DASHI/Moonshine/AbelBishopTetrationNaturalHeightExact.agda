@@ -13,8 +13,9 @@ module DASHI.Moonshine.AbelBishopTetrationNaturalHeightExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-import Real as Bishop
 import DASHI.Analysis.BishopSetoidComplexExact as Complex
+import DASHI.Moonshine.BishopRound11MachinSetoidComplexInstanceExact as Round11
+import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Cutset
 
 originalBishopExponentialTower :
   Complex.BishopSetoidComplexTranscendentals →
@@ -81,6 +82,23 @@ originalBishopAnyTwoTetrationCandidatesAgreeOnNat T left right l r n =
       (originalBishopTetrationNaturalHeightUniqueness T right r n))
 
 originalRound11ExponentialTower :
-  (T : Complex.BishopSetoidComplexTranscendentals) →
+  Cutset.Round11BishopCutset →
   Nat → Complex.BishopComplex
-originalRound11ExponentialTower = originalBishopExponentialTower
+originalRound11ExponentialTower inputs =
+  originalBishopExponentialTower
+    (Round11.round11MachinTranscendentals inputs)
+
+originalRound11NaturalHeightUniqueness :
+  (inputs : Cutset.Round11BishopCutset) →
+  (candidate : Nat → Complex.BishopComplex) →
+  OriginalBishopTetrationNatLaw
+    (Round11.round11MachinTranscendentals inputs)
+    candidate →
+  (n : Nat) →
+  Complex._≈C_
+    (candidate n)
+    (originalRound11ExponentialTower inputs n)
+originalRound11NaturalHeightUniqueness inputs candidate law n =
+  originalBishopTetrationNaturalHeightUniqueness
+    (Round11.round11MachinTranscendentals inputs)
+    candidate law n
