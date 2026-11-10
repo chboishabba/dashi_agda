@@ -128,6 +128,110 @@ def calculate(s:Inputs)->dict:
         'source_uncertainty':'No physical yield, heat integration or calibration certified.'
     }
 
+
+def dispatch_choice(solar_kwh: float, co2_kg: float, water_kg: float,
+                    directly_usable_solar_fraction: float = 1.0,
+                    methane_generator_efficiency: float = 0.4,
+                    stored_electricity_value_multiplier: float = 1.0,
+                    electrolyser_hhv_efficiency: float = 1.0,
+                    capture_fraction: float = 1.0,
+                    conversion_fraction: float = 1.0,
+                    carbon_capture_kwh_per_mol: float = 0.0,
+                    reactor_aux_kwh_per_mol: float = 0.0) -> dict:
+    """Solve the two-option LINEAR energy-service allocation exactly at corners.
+
+    PV may go directly to currently deliverable demand, or be converted into
+    methane for future generating service. A fixed value multiplier may
+    approximate the value of dispatchability, but it is NOT a real tariff.
+    All captured CO2 incurs capture work even if synthesis yield < 1.
+    Gross-water intake and CO2 are independent constraints.
+    No capture/synthesis heat reuse is assumed in this branch.
+    """
+    from math import isfinite
+    values=(solar_kwh,co2_kg,water_kg,directly_usable_solar_fraction,
+            methane_generator_efficiency,stored_electricity_value_multiplier,
+            electrolyser_hhv_efficiency,capture_fraction,conversion_fraction,
+            carbon_capture_kwh_per_mol,reactor_aux_kwh_per_mol)
+    if any(not isfinite(v) or v < 0 for v in values):
+        raise ValueError('negative/nonfinite dispatch parameters')
+    if any(v > 1 for v in (directly_usable_solar_fraction,
+                          methane_generator_efficiency,capture_fraction,
+                          conversion_fraction,electrolyser_hhv_efficiency)):
+        raise ValueError('fractions may not exceed one')
+    if electrolyser_hhv_efficiency <= 0:
+        raise ValueError('electrolyser efficiency must be positive')
+    captured=co2_kg/M_CO2_KG_PER_MOL*capture_fraction
+    product_capacity=captured*conversion_fraction
+    h2_electric_kwh_per_product=4*H2_HHV_KJ_PER_MOL/3600/electrolyser_hhv_efficiency
+    if conversion_fraction == 0:
+        methane_mol=0.
+        energy_cost=0.
+        carbon_cap=0.
+        marginal_methane=0.
+    else:
+        energy_cost=(h2_electric_kwh_per_product
+            +carbon_capture_kwh_per_mol/conversion_fraction
+            +reactor_aux_kwh_per_mol)
+        carbon_cap=min(product_capacity,water_kg/(4*M_H2O_KG_PER_MOL))
+        marginal_methane=(
+            CH4_HHV_KJ_PER_MOL/3600*methane_generator_efficiency*
+            stored_electricity_value_multiplier/energy_cost
+        )
+        # Corner solution for a linear program with solar, carbon, and
+        # water bounds. All fuel is product-assayed and deliverable only
+        # as an ASSUMPTION, not physical evidence.
+        methane_mol=(min(carbon_cap,solar_kwh/energy_cost)
+                     if marginal_methane > directly_usable_solar_fraction else 0.)
+    solar_to_methane=methane_mol*energy_cost
+    methane_service=(methane_mol*CH4_HHV_KJ_PER_MOL/3600*
+                     methane_generator_efficiency*stored_electricity_value_multiplier)
+    direct_service=(solar_kwh-solar_to_methane)*directly_usable_solar_fraction
+    return {
+        'decision':('prioritise_methane' if methane_mol>0 else 'prioritise_direct_pv'),
+        'methane_mol':methane_mol,
+        'solar_to_methane_kwh':solar_to_methane,
+        'solar_to_direct_kwh':solar_kwh-solar_to_methane,
+        'valued_methane_service_units':methane_service,
+        'valued_direct_pv_service_units':direct_service,
+        'total_valued_service_units':methane_service+direct_service,
+        'methane_service_per_solar_kwh':marginal_methane,
+        'direct_service_per_solar_kwh':directly_usable_solar_fraction,
+        'carbon_limited_moles':carbon_cap,
+        'note':'Ideal linear schedule; no ramping, equipment cost, storage loss or physical data.'
+    }
+
+
+def steady_state_carbon_inventory(carbon_duty_kg_per_period:float,
+                                  effective_recovery_fraction:float,
+                                  periods:int)->dict:
+    """Fixed carbon consumption EACH period, NOT attrition of one batch.
+
+    First period is entirely virgin fossil carbon. In each later period,
+    fraction q of the immediately preceding output is recovered, and
+    (1-q) is replaced to keep the same fuel output. Water/PV energy inputs
+    for converting q*C CO2 into fuel remain payable each period.
+    """
+    from math import isfinite
+    if (not isfinite(carbon_duty_kg_per_period) or
+        carbon_duty_kg_per_period < 0 or
+        not isfinite(effective_recovery_fraction) or
+        not 0<=effective_recovery_fraction<=1 or
+        type(periods) is not int or periods < 1):
+        raise ValueError('invalid fixed-demand carbon-cycle inputs')
+    c=carbon_duty_kg_per_period
+    q=effective_recovery_fraction
+    virgin=c+(periods-1)*(1-q)*c
+    return {
+        'total_carbon_fuel_duty_kg':periods*c,
+        'virgin_carbon_kg':virgin,
+        'reused_carbon_kg':(periods-1)*q*c,
+        'virgin_baseline_kg':periods*c,
+        'avoided_virgin_kg':(periods-1)*q*c,
+        'steady_period_virgin_makeup_kg':(1-q)*c,
+        'repeated_recycled_carbon_not_atmospheric_removal':True,
+        'external_solar_energy_per_recovered_batch_still_required':True
+    }
+
 class Checks(unittest.TestCase):
     def test_methane_chemistry(self):
         self.assertAlmostEqual(4*H2_HHV_KJ_PER_MOL,
@@ -183,6 +287,36 @@ class Checks(unittest.TestCase):
     def test_inadmissible_inputs_fail(self):
         with self.assertRaises(ValueError):
             calculate(Inputs(electrolyser_hhv_efficiency=1.5))
+
+    def test_fixed_output_recycling_does_not_assume_one_finite_batch(self):
+        x=steady_state_carbon_inventory(100,0.9,10)
+        self.assertAlmostEqual(x['virgin_carbon_kg'],190)
+        self.assertAlmostEqual(x['avoided_virgin_kg'],810)
+        self.assertAlmostEqual(x['virgin_carbon_kg']+x['reused_carbon_kg'],1000)
+    def test_direct_pv_dominates_simultaneous_same_value(self):
+        x=dispatch_choice(100,100,100,directly_usable_solar_fraction=1)
+        self.assertEqual(x['methane_mol'],0)
+        self.assertAlmostEqual(x['solar_to_direct_kwh'],100)
+    def test_storage_wins_if_direct_pv_cannot_serve_demand(self):
+        x=dispatch_choice(100,100,100,directly_usable_solar_fraction=0.2)
+        self.assertGreater(x['methane_mol'],0)
+        self.assertGreater(x['methane_service_per_solar_kwh'],
+                           x['direct_service_per_solar_kwh'])
+    def test_methane_cap_co2_and_water(self):
+        x=dispatch_choice(1e6,.044009,.07206,directly_usable_solar_fraction=0)
+        self.assertAlmostEqual(x['methane_mol'],1)
+    def test_zero_co2_no_methane(self):
+        x=dispatch_choice(100,0,100,directly_usable_solar_fraction=0)
+        self.assertEqual(x['methane_mol'],0)
+    def test_capture_work_reduces_served_methane(self):
+        a=dispatch_choice(10,100,100,directly_usable_solar_fraction=0,
+                          carbon_capture_kwh_per_mol=0)
+        b=dispatch_choice(10,100,100,directly_usable_solar_fraction=0,
+                          carbon_capture_kwh_per_mol=.1)
+        self.assertGreater(a['methane_mol'],b['methane_mol'])
+    def test_dispatch_rejects_unphysical_fraction(self):
+        with self.assertRaises(ValueError):
+            dispatch_choice(1,1,1,methane_generator_efficiency=1.1)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser()
