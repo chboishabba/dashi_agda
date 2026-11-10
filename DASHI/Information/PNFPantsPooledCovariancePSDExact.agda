@@ -6,7 +6,7 @@ module DASHI.Information.PNFPantsPooledCovariancePSDExact where
 -- The existing combinatorial pants carrier provides an independent
 -- channel/capacity/wave interface, NOT the covariance identity.
 -- The observed quadratic must be proven equal to its three source
--- branch quadratics plus a nonnegative rank-one seam correction.
+-- branch quadratics plus two nonnegative rank-one seam corrections.
 --
 -- This is the common algebraic interface for grouped PNF activation
 -- windows and grouped economic returns; it does not prove either
@@ -40,10 +40,14 @@ record ThreeBranchPooledQuadratic
     rightPSD :
       (v : Vector) → Scalar._≤_ S (Scalar.zero S) (rightQuadratic v)
 
-    betweenProjection : Vector → Scalar.Scalar S
-    betweenWeight : Scalar.Scalar S
-    betweenWeightNonnegative :
-      Scalar._≤_ S (Scalar.zero S) betweenWeight
+    betweenProjectionA : Vector → Scalar.Scalar S
+    betweenProjectionB : Vector → Scalar.Scalar S
+    betweenWeightA : Scalar.Scalar S
+    betweenWeightB : Scalar.Scalar S
+    betweenWeightANonnegative :
+      Scalar._≤_ S (Scalar.zero S) betweenWeightA
+    betweenWeightBNonnegative :
+      Scalar._≤_ S (Scalar.zero S) betweenWeightB
 
     observedQuadratic : Vector → Scalar.Scalar S
     pooledQuadraticIdentity :
@@ -52,15 +56,18 @@ record ThreeBranchPooledQuadratic
         Scalar._+_ S
           (Scalar._+_ S
             (Scalar._+_ S
-              (leftQuadratic v) (middleQuadratic v))
-            (rightQuadratic v))
-          (Scalar._*_ S betweenWeight
-            (Ring.square S (betweenProjection v)))
+              (Scalar._+_ S
+                (leftQuadratic v) (middleQuadratic v))
+              (rightQuadratic v))
+            (Scalar._*_ S betweenWeightA
+              (Ring.square S (betweenProjectionA v))))
+          (Scalar._*_ S betweenWeightB
+            (Ring.square S (betweenProjectionB v)))
 
 open ThreeBranchPooledQuadratic public
 
 -- A literal proof of the selected pooled quadratic's positivity.
--- The between-branch term remains a separate receipt: pants topology,
+-- The two between-branch terms remain separately paid receipts: pants topology,
 -- matching charts, and three individually PSD 2x2 marginals do NOT
 -- imply the operator equality used here.
 pooledPantsCovariancePSD :
@@ -76,13 +83,16 @@ pooledPantsCovariancePSD K O P v
   ExistingPSD.addNonnegative O
     (ExistingPSD.addNonnegative O
       (ExistingPSD.addNonnegative O
-        (leftPSD P v)
-        (middlePSD P v))
-      (rightPSD P v))
+        (ExistingPSD.addNonnegative O
+          (leftPSD P v)
+          (middlePSD P v))
+        (rightPSD P v))
+      (Scalar.multiplicationPreservesNonnegative (Ring.orderedScalar K)
+        (betweenWeightANonnegative P)
+        (ExistingPSD.squareNonnegative O (betweenProjectionA P v))))
     (Scalar.multiplicationPreservesNonnegative (Ring.orderedScalar K)
-      (betweenWeightNonnegative P)
-      (ExistingPSD.squareNonnegative O
-        (betweenProjection P v)))
+      (betweenWeightBNonnegative P)
+      (ExistingPSD.squareNonnegative O (betweenProjectionB P v)))
 
 -- The existing 1→3 pants witness is a legitimate three-branch
 -- *combinatorial* interface, with separately proved conservations.
