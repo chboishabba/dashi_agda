@@ -28,7 +28,7 @@ module DASHI.Physics.Foundations.TSVFOSRealTimeDifferenceQuotientGeneratorWeldEx
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product using (Σ; _×_; _,_; proj₂)
-open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; trans; sym; subst)
 
 import DASHI.Quantum.TSVF as TSVF
 import DASHI.Physics.Foundations.BidirectionallyAdmissibleHistoryFibreExact as Bidi
