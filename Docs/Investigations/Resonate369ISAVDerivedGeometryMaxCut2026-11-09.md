@@ -127,3 +127,41 @@ Committed `DASHI.Physics.Motors.Resonate369SignedPitchTelescopingExact` at commi
 - `Walk.fullTurnSignedPitch`: the measured ordered samples have signed increment sum exactly `turn` whenever the unwrapped last sample is the initial angle plus `turn`. This closes the **abstract** full-turn telescope with a supplied endpoint witness, but not the concrete C07 station list, nominal-pitch error sum, or geometric measurement.
 - The name `closedWalkSignedPitchZero` applies only to equal *unwrapped* endpoints; do not use it to erase 360 degrees.
 - Both new lemmas are unverified by Agda and require pinned-toolchain acceptance.
+
+## 2026-11-10 schematic-entailment route (commit 52ca35eb)
+
+New module `DASHI.Physics.Motors.Resonate369SchematicAdmissionExact.agda` replaces the erroneous assumption that CAD metrology is mandatory for electrical topology.
+
+### Implemented source/evidence interfaces
+
+- `DesignIdentity` explicitly distinguishes historical Slobodian MG10 from the independently designed Resonate369 C07, Dodecatron, V1 impulse, EZ Spin and AtmoMotor.
+- `EvidenceKind`: manufacturer description, original schematic, read-only CAD, video observation, instrument measurement.
+- `SourceReceipt` and `SelectedEvidence`: versioned, same-design provenance with explicit inspection obligation. Records are **interfaces**, not magically certified eyewitness facts; no concrete observation is populated.
+- `Component`, `Port`, `Netlist`, `Reachable`: directed pin-level connectivity model. `twoEdgePath` establishes two-edge structural path entailment conditional on explicit source connections.
+- `AdmittedConnection`: combines a selected-source witness and the actual represented edge.
+- `SelectedSeriesTrace`: distinguishes positive series path evidence from a further absence-of-bypass obligation; a prose claim that coils are 'series' is not a verified electrical netlist.
+- `SelectedWindingPolarity`, `OppositePoleAndWinding`, `pairedCoilsPredictedSignAgreement`: conditionally proves sign agreement when source-backed opposite pole/winding and equal terminal conventions are supplied.
+- `ExperimentClosure` is a separate measurement gate; no topology theorem instantiates physical output, recovery fraction or anomalous energy.
+
+### Source-derived vs conditional vs unmeasured
+
+| Design | Accessible description claim | Conditional inferred consequence | Not yet admitted |
+|---|---|---|---|
+| C07 | Eight stations, six main and two angled stations, historical-derived experimental coil roles | Finite angular index; nominal 45-degree pitch only if uniform | Measured two-station angles, polarity, actual coil terminal connections |
+| Dodecatron | Twelve magnets, twelve CW/CCW coils described as series | Opposite pole plus opposite winding can reinforce selected terminal sign | Pole-by-pole sign sequence, terminal orientation, complete netlist, loaded output |
+| V1 Impulse | Bifilar and reed-switch commutation description | Position-responsive switching is plausible under specified wiring | Actual reed contact circuit, phase, energy recovery path |
+| Historical MG10 | 250-coil / 250-magnet presentation claim | 1.44-degree nominal station pitch if uniform | Actual position map and original switch/control circuit |
+
+**No complete original manufacturer schematic was acquired in this continuation.** Friendbeacon product and membership pages confirm the marketplace and access pathways but cannot attest the completeness of a schematic: https://friendbeacon.com/ and https://friendbeacon.com/faq/.
+
+### Highest-alpha revised maximum cut
+
+- S0 (DONE as implementation, unverified kernel): source-bound schematic inference interface, typed design separation, 2-edge path, conditional winding sign theorem.
+- S1 (OPEN): fetch/inspect actual original schematic or annotated assembly images and instantiate `SelectedEvidence` with a traceable, source-specific receipt; inspect every claimed connection.
+- S2 (OPEN): convert a complete original C07/Dodecatron/V1 netlist to a finite port graph, prove component-port compatibility, polarity order and no bypass; do not infer absence of missing wires from silence.
+- S3 (OPEN): check V1 reed-switch polarity/timing and any coil flyback recovery branch from real source wiring; distinguish diode clamp dissipative circuit from energy recapture.
+- G1 (OPEN): read-only CAD/dimensioned drawing for C07 two angled stations and coil/magnet gap; electrical topology does *not* require exact CAD metrology.
+- V0 (OPEN): pinned Agda kernel acceptance of all source modules. Environment in this tool session does not contain Agda; no kernel-check claim.
+- P0 (OPEN): observed simultaneous cycle-integrated input and output, energy storage, shaft torque/speed with instrument uncertainty; no over-unity inference before this.
+
+Avoid treating the constructibility of a `Set`-valued witness as real-world inspection: provenance requires matching a source receipt to an actual source and its content, outside of Agda's logical kernel.
