@@ -9,7 +9,7 @@ module DASHI.Information.PNFHistoryTimeMPSpectralModeExact where
 -- static eigenvalue list or a parallel 369 ontology.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Fin.Base using (Fin)
 open import Data.Empty using (⊥)
 
@@ -77,9 +77,37 @@ record HistoryTimeMPModeClassifier
       (a b : SOf K) →
       toMPCarrier (Scalar._*_ (Ring.orderedScalar K) a b)
       ≡ PNF.ScalarStructure._*_ 𝕄 (toMPCarrier a) (toMPCarrier b)
+    -- Counts are from this same selected finite observation window.
+    -- The finite calibration MUST pay gamma = p / (n-1), rather than
+    -- accepting any positive looking MP edge.
+    countScalar : Nat → PNF.ScalarStructure.Scalar 𝕄
+    countZero :
+      countScalar zero ≡ PNF.ScalarStructure.0# 𝕄
+    countSuccessor :
+      (n : Nat) →
+      countScalar (suc n) ≡
+      PNF.ScalarStructure._+_ 𝕄
+        (PNF.ScalarStructure.1# 𝕄) (countScalar n)
     calibrationAt :
       Native.History F → Native.Time F →
       MP.MPFiniteCalibration 𝕄
+    aspectRatioIsSelectedSampleCount :
+      (h : Native.History F) → (t : Native.Time F) →
+      PNF.ScalarStructure._*_ 𝕄
+        (MP.MPFiniteCalibration.aspectRatio (calibrationAt h t))
+        (countScalar (suc k))
+      ≡ countScalar p
+    calibratedSquareRootIsAspect :
+      (h : Native.History F) → (t : Native.Time F) →
+      PNF.ScalarStructure._*_ 𝕄
+        (MP.MPFiniteCalibration.sqrtAspect (calibrationAt h t))
+        (MP.MPFiniteCalibration.sqrtAspect (calibrationAt h t))
+      ≡ MP.MPFiniteCalibration.aspectRatio (calibrationAt h t)
+    variancePositive :
+      (h : Native.History F) → (t : Native.Time F) →
+      PNF.ScalarStructure._<_ 𝕄
+        (PNF.ScalarStructure.0# 𝕄)
+        (MP.MPFiniteCalibration.variance (calibrationAt h t))
     classifierAt :
       (h : Native.History F) → (t : Native.Time F) →
       PNF.NoiseClassifier 𝕄
