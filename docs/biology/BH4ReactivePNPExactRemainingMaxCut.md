@@ -1181,3 +1181,82 @@ the current runtime; this module remains source-written only.
 **Actual evidence frontier remains:** provide a concrete source-authenticated `SameSourceBH4PNPModel`; source-paid, physically dimensioned 29×12 original `physicalStep` and SG/reaction/electrostatic energy identities; rigorously nonnegative loss and bounded residual/electrode credit; actual native 54-bond/6-face PR #1471 shared geometry; and kernel-accepted genuine ordered-real/Bishop instance. Neither the abstract record nor same-source history inference manufactures those receipts. One-step physical P0.05–08 and P1–P3 source/empirical gates remain OPEN. Agda 2.9 was unavailable here; the newly written modules have not been kernel-checked.
 
 **Verification command:** `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPSameSourcePaidEnergyExact.agda` followed by `scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`.
+
+
+### 2026-11-10 highest-alpha P0 source-positive simplex: proof-producing decision and generated original certificate
+
+The existing **original** `BH4OriginalCHNOPFiveAxisSimplexBridgeExact.agda`
+now contains the constructive, total finite-vector decision lemmas:
+
+- `positiveNatOrZero`: for any literal `Nat` weight,
+  produces `Σ predecessor. weight ≡ suc predecessor` **or**
+  the definitional equality `weight ≡ 0`.
+- `allPositiveOrZeroIndex`: for any `Vec Nat n`, either
+  constructs a dependent positive witness for **every** `Fin n`
+  index or identifies a concrete zero-weight `Fin n` coordinate.
+- `decideOriginal369SourcePositiveCHNOP`: applies this
+  actual decision to the original 29-coordinate aggregate source
+  CHNOP vector. No hypothesis that all weights are positive.
+- `decideOriginal369WeightedSimplexAdmission`: in its
+  successful branch, inhabits the **already-existing**
+  `Original369PositiveWeightedSimplexAdmission` on the
+  same original `SourceCertifiedOriginal29x12` carrier;
+  in the other branch returns the exact species obstruction.
+
+The canonical original certificate generator
+`scripts/generate_bh4_original29x12_agda.py` is now extended
+rather than duplicated. On genuine separately SHA-pinned acquired
+29×12 Rhea/ChEBI bytes:
+
+1. Its existing `check_certificate(full_panel=True)`
+   validates original finite reaction/gross participants and
+   CHNOP/charge equality.
+2. The new `rendered_source_simplex_admission` computes
+   the CHNOP sum for **each** of the 29 source-ordered
+   species using exact Python integers.
+3. If all counts are positive, it emits **29 literal indexed
+   Agda clauses**, each
+   `generatedCHNOPPositiveAt (selected Fin index)
+      = (exact predecessor , refl)`.
+   It also emits `generatedPositiveCHNOP` and
+   `generatedPositiveSimplexAdmission`, both consuming
+   `generatedSourceCertifiedOriginal29x12`. The proof
+   does not rely on source labels or an asserted Boolean.
+4. If any source weight is zero, it emits the **concrete**
+   `generatedZeroCHNOPSpecies`,
+   `generatedZeroCHNOPWeight = refl` and
+   `generatedPositiveSimplexObstructed` using the
+   existing no-go theorem. It explicitly does **not**
+   emit a positive-simplex admission.
+5. The generator's JSON receipt now records the exact
+   source positivity result, zero-species indices,
+   which Agda proof branch was emitted and
+   `source_CHNOP_positivity_agda_kernel_checked: false`.
+
+New test owner:
+`scripts/test_generate_bh4_original29x12_simplex.py`
+contains synthetic-only positive 29-index coverage, four
+zero-position negative controls and rejection of invalid
+atomic counts/shape. The generator also has new built-in
+synthetic self-test controls. Neither test suite nor native
+Agda was executed in this session.
+
+**Exact closure:** The *generic finite decidability and
+source-emission implementation* is source-written and committed.
+The actual original 29-species positivity **outcome** remains
+unknown until the independently byte-pinned original input is
+available. Generated literal `refl` clauses must pass Agda
+2.9 kernel. This does not prove the classical real-weighted
+simplex compactness/Brouwer fixed point inside constructive
+Bishop analysis, physical kinetic calibration, reactive
+boundary work, or same-source tissue observation.
+
+**Revised next cut:** acquire source bytes → generate and
+Agda-kernel check original source + literal positivity/zero
+obstruction; then bridge those exact `Nat` CHNOP invariants
+to the selected real-valued 27×29 PNP state, prove
+SG/mass-action conservation and map self-preservation,
+and import/construct a trustworthy finite-dimensional
+Brouwer theorem for the intended real foundation. Do not
+replace Brouwer with an arbitrary normalized probability
+law or a conditional record.
