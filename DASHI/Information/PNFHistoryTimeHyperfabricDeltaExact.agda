@@ -41,6 +41,7 @@ record CoherentTimedHyperfabricDelta
       (v : Vertex) → Delta.VertexDelta D v
     edgeChange :
       (e : Edge) → Delta.EdgeDelta D e
+    updateReceipt : String
     incidentDeltaAgreement :
       {v : Vertex} {e : Edge} →
       (membership : Hyper.incidence fabric v e) →
@@ -76,7 +77,7 @@ applyCoherentDelta {fabric = fabric} D old change = record
             (cong (λ value →
               Delta.applyEdge D e value (edgeChange change e))
               (Hyper.compatible old membership)))
-  ; sectionReceipt = Hyper.sectionReceipt old
+  ; sectionReceipt = updateReceipt change
   }
 
 -- The checked construction retains the selected source time, but it
