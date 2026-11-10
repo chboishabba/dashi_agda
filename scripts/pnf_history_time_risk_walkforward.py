@@ -62,7 +62,7 @@ def forecast_one_step(
     w = np.asarray(weights, dtype=float)
     if w.shape != (len(features),) or not np.isfinite(w).all():
         raise ValueError("weights must match point-in-time universe")
-    # Complete-case, strictly as-of training. A feature admitted today may
+    if any(o.available_at < o.event_time for o in observations\n           if o.history == history and o.source == source):\n        raise ValueError("source availability predates event")\n    # Complete-case, strictly as-of training. A feature admitted today may
     # not be backfilled into yesterday's observations.
     selected = [o for o in observations if o.history == history
                 and o.source == source and o.event_time <= asof
