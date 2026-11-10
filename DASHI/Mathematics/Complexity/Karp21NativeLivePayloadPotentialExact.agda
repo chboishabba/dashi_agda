@@ -42,6 +42,8 @@ import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryFiniteRunExact as Run
 import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact as LedgerWidth
 import DASHI.Mathematics.Complexity.Karp21NativeFullEdgeFieldInputBoundExact as EdgeWidth
 import DASHI.Mathematics.Complexity.Karp21NativeEndpointHistoryConservationExact as HistoryWidth
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact as Graph
+import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact as OriginalEdgeInput
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
 import DASHI.Mathematics.Complexity.Karp21BinaryNativeSignedLedgerExact as Ledger
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
@@ -164,3 +166,44 @@ actualFirstEnabledRunLivePayloadBound (suc fuel) state
   NatP.≤-trans
     (actualFirstEnabledRunLivePayloadBound fuel next)
     (firstEnabledBinaryStepLivePayloadNonincreasing state next step)
+
+
+------------------------------------------------------------------------
+-- F2.2 actual SOURCE ORIGINAL WORD closure (not a new abstract
+-- selection or allocation record). Both source initial state and
+-- every finite-run prefix are expressions of the genuine graph
+-- parser, certificate and Compiled.directStep source runtime.
+------------------------------------------------------------------------
+
+initialLivePayloadFitsOriginalWords :
+  (word certificate : Word.BitWord) →
+  stateLivePayload
+    (Machine.initialBinaryWholeWordState word certificate)
+    ≤ length word + length certificate
+initialLivePayloadFitsOriginalWords word certificate
+  with Graph.readNativeWholeBinaryGraphWord word in parsed
+... | nothing = NatP.z≤n
+... | just (Graph.whole-binary-graph n edges threshold)
+  rewrite NatP.+-identityʳ
+    (EdgeWidth.allBinaryRawEdgeRegisterCharges edges
+      + length certificate) =
+  NatP.+-mono-≤
+    (OriginalEdgeInput.actualWholeBinaryGraphEdgeFieldWidthAtMostOriginalWord
+      word n threshold edges parsed)
+    NatP.≤-refl
+
+-- The direct highest-alpha F2.2 theorem. For every ACTUAL machine
+-- state reached with any source first-enabled fuel from the actual
+-- original signed N21 word/certificate, all retained source binary
+-- data payloads together fit the combined ORIGINAL input bit length.
+actualN21FirstEnabledLivePayloadFitsOriginalWords :
+  (fuel : Nat) (word certificate : Word.BitWord) →
+  stateLivePayload
+    (Run.runBinaryWithFuel fuel
+      (Machine.initialBinaryWholeWordState word certificate))
+    ≤ length word + length certificate
+actualN21FirstEnabledLivePayloadFitsOriginalWords fuel word certificate =
+  NatP.≤-trans
+    (actualFirstEnabledRunLivePayloadBound fuel
+      (Machine.initialBinaryWholeWordState word certificate))
+    (initialLivePayloadFitsOriginalWords word certificate)
