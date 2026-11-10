@@ -340,3 +340,53 @@ Consequently rank(Xc)≤min(k,p) and rank(C)≤min(k,p). Over any field with the
 The Agda implementation of R, its linear laws and the two source-specific operator factorizations is authored. The *generic* finite-field theorem `FiniteFieldRankNullityOwner` and zero-spectrum identification `CovarianceZeroSpectrum` are not instantiated in this branch, and Agda kernel acceptance remains open. These exact obligations must not be renamed as closed.
 
 Local exact-rational verification additionally passed **216** pseudo-random finite matrices spanning n=2..8 and p=1..9 (three matrices per shape), checking rank(Xc)=rank(C), independent kernel basis, exact C·v=0, and nullity≥max(0,p−n+1). This is runtime evidence for the formulas, not an Agda proof or an actual PNF or market dataset.
+
+## 16. 369–27, dialectic/trialectic and pants-gluing maximum cut (2026-11-10)
+
+### Source audit: existing owners, not invented interpretations
+
+- `DASHI.Foundations.Base369Ternary27HypervoxelFabricGeometryExact` proves 27-state T^3 and three-factor 19,683-state T^9 hyperfabric cardinalities. These are **state-space cardinalities**, not observed sample sizes or automatically matrix ranks.
+- `DASHI.Reasoning.TrialecticObserverMatrix369Exact` supplies the typed three-by-three observer matrix (three self positions, six directed other-model positions). Its D4 chart bijection is not psychological ontology.
+- `DASHI.Reasoning.Trialectic369DescentNaturalityExact` proves exact A/B, B/C, C/A chart overlap/restriction/regluing for SSP trits and exact row-to-27-cube projection naturality. It explicitly does NOT certify identity with a larger X6 Čech/Grothendieck site.
+- `DASHI.Reasoning.TrialecticThreeCellHyperformSynthesisExact` proves the three 27-state dialectic cells <-> T^9 hyperfabric rechart.
+- `DASHI.Reasoning.TrialecticBoundaryFaceNonfactorabilityExact` proves that even matching three dyadic boundary edges do not determine the triadic face.
+- `DASHI.Topology.TernaryCylinderPantsGeometryExact` and `DASHI.Reasoning.TypedHyperfabricPantsGluingBridgeExact` provide finite 1→3 pants/channel combinatorics and exact interface-match seams. Neither is a smooth manifold/TQFT or a license to change topology or erase provenance.
+
+### Exact declarations newly authored on PR #1480
+
+1. `PNFTrialecticSpectralDescentExact`: generic value-typed three-chart overlap/gluing theorem; observer-matrix roundtrip; `mapMatchingFamily` and `pointwiseSpectralClassificationCommutesWithGluing` plus chart naturality; directly reuses triadic-face nonfactorability. This generalizes the existing SSP-only cover to arbitrary *spectral evidence values* without inventing local covariance reconstruction.
+2. `PNF36927FiniteRankBoundaryExact`: preserves existing 3 (pants branches), 9 (observer positions), 27 (ternary states) carrier counts and derives **conditional** forced-nullity bounds p∸2, p∸8, p∸26 for real source panels with exactly 3, 9, 27 observed rows. Carrier cardinality alone never pays an observation count or a sample mean receipt.
+3. `PNFTrialecticPantsSpectralInterfaceExact`: pairs a matching three-chart family with an independently required full `Pants.InterfaceMatch`; transports proposition/capacity matching and reuses the canonical hyperfabric/pants seam witness.
+4. `PNFMP36927ChartNaturalityExact`: specializes generic pointwise descent to the **existing MP-calibrated PNF `NoiseClassifier`**; explicit AB/BC/CA restriction squares commute. This is pointwise classification of *already supplied values*, not local computation of a matrix spectrum.
+5. `PNFDialecticTrialectic369RechartExact`: composes the existing `CellDialectic ↔ T^9` and `ObserverMatrix3 SSPTrit ↔ T^9` bijections and proves both roundtrip equalities. Requires an explicit trit→scalar encoding before any MP threshold is applied.
+6. `PNFPantsPooledCovariancePSDExact`: for a source-confirmed common vector carrier, three PSD within-branch quadratics and **two** nonnegative between-branch rank-one corrections, proves positivity of the *selected pooled quadratic* through the existing `FiniteGramOrderAuthority`. The actual pooled quadratic equality is a separately paid mathematical/source field; pants seam matching does not prove it.
+7. `scripts/pnf_trialectic_covariance_gluing_negative_control.py`: exact rational counterexample, three pairwise PSD 2×2 charts each with rho=−3/4 (determinant 7/16), but global 3×3 ones-vector quadratic −3/2 (negative eigenvalue −1/2). The exact Fraction equalities were verified locally.
+8. `scripts/pnf_three_branch_scatter_exact.py`: source-independent rational pooled-scatter identity with three groups and two nonnegative between-group outer products. An independently executed local version passed 320 parameter combinations spanning feature dimensions 1..5 and group sizes 1..4 each.
+
+### Why the gluing correction matters economically and for PNF
+
+For disjoint source groups A, B, C with sizes a, b, c, means μ_A, μ_B, μ_C and μ_AB=(a μ_A+b μ_B)/(a+b), their pooled *unscaled centred scatter* is exactly
+
+S_ABC = S_A + S_B + S_C
+      + [ab/(a+b)] (μ_A−μ_B)(μ_A−μ_B)^T
+      + [(a+b)c/(a+b+c)] (μ_AB−μ_C)(μ_AB−μ_C)^T.
+
+This identity must be paid for the **same source and same feature coordinates**. Its two additional terms are PSD and are essential to pooled risk modelling or grouped PNF structure. If one merely glues independent pairwise covariance charts, PSD need not survive; the exact rational negative control demonstrates the obstruction.
+
+### Remaining exact maximum cut (including kernel status)
+
+P0: Agda 2.9 kernel-check *all* changed modules (especially the generic observer chart and the new triple pooled PSD proof); repair any types/implicit parameters. No kernel success is claimed here.
+
+P0: Derive `pooledThreeGroupScatterIdentity` from actual same-source finite groups in Agda instead of supplying `pooledQuadraticIdentity` as a field. Derive the exact two between-group weights and preserve selected means/normalisation.
+
+P0: Instantiate a genuine checked `FiniteFieldRankNullityOwner` and `CovarianceZeroSpectrum` from selected finite-dimensional field/spectral infrastructure; the previous rank-nullity mathematical proof and source-specific factorisation are authored but owner instantiations remain OPEN.
+
+P1: Construct an actual numerical chart with compatible eigenvalues from **the same global covariance** and validate MP null hypotheses by PNF source/temporal/hierarchy group. Pointwise `NoiseClassifier` naturality cannot justify computing eigenvalues separately on patches or replacing a global operator by glued local PSD matrices.
+
+P1: Establish an actual covariance-preserving group action or field transport under the 369/27 chart maps if desired: mere T^9 carrier bijection does not preserve Euclidean inner products, covariance, eigenvalues or source-semantic meaning.
+
+P2: Replay original PNF activation matrices (not external Fleet planning labels); retain separate provenance and semantic promotion gates. For economics, test sector and common-market covariance plus three-group pooled risk out of sample; evaluate shrinkage and MP bulk cleaning against other estimators and Nashi cost gates.
+
+P3: Only if independently supported, construct a literal sheaf/stack or cobordism-level operator identity; do not infer TQFT, global PSD, causality, psychology or economic alpha from finite chart/pants compatibility.
+
+**Verification:** New Agda proofs are *authored and committed*, not typechecked in Agda 2.9. Independent local rational computations checked the negative-control values and 320 three-group pooled-scatter cases; the exact copies committed to GitHub have not been rerun in a local Git checkout. No original PNF or S&P 500 data was replayed during this round.
