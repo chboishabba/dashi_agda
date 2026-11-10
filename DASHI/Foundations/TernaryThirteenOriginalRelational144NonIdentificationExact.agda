@@ -138,3 +138,89 @@ sourceThirteenCannotBeLosslessLeftInverse reconstruct recover =
 -- relational subcarrier; this theorem simply forbids declaring
 -- the entire original 144-field to be losslessly encoded by its
 -- diagonal and a single off-diagonal centre.
+
+
+------------------------------------------------------------------------
+-- Positive same-source subcarrier: 13 parameters DO embed into
+-- original 144 relation slots, provided all unrelated ordered cells
+-- are fixed to the explicitly selected neutral source convention.
+-- Full source relation fields are strictly larger (the negative
+-- control above), so no image equality is silently assumed.
+------------------------------------------------------------------------
+
+selectedRelationFromCentral :
+  Rel.SourceCentralCompletionCarrier → Original.StageRelationField
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-0 , Atlas.atlas-0) = valuation Atlas.atlas-0
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-1 , Atlas.atlas-1) = valuation Atlas.atlas-1
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-2 , Atlas.atlas-2) = valuation Atlas.atlas-2
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-3 , Atlas.atlas-3) = valuation Atlas.atlas-3
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-4 , Atlas.atlas-4) = valuation Atlas.atlas-4
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-5 , Atlas.atlas-5) = valuation Atlas.atlas-5
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-6 , Atlas.atlas-6) = valuation Atlas.atlas-6
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-7 , Atlas.atlas-7) = valuation Atlas.atlas-7
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-8 , Atlas.atlas-8) = valuation Atlas.atlas-8
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-9 , Atlas.atlas-9) = valuation Atlas.atlas-9
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-10 , Atlas.atlas-10) = valuation Atlas.atlas-10
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-11 , Atlas.atlas-11) = valuation Atlas.atlas-11
+selectedRelationFromCentral (valuation , centre)
+  (Atlas.atlas-0 , Atlas.atlas-1) = centre
+selectedRelationFromCentral state _ = Base.tri-mid
+
+selectedRelationDiagonalRecovers :
+  (state : Rel.SourceCentralCompletionCarrier)
+  (axis : Atlas.StageAtlasZeroToEleven) →
+  Original.diagonalObservation (selectedRelationFromCentral state) axis
+  ≡ Rel.sourceCentralProjection state axis
+selectedRelationDiagonalRecovers state Atlas.atlas-0 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-1 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-2 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-3 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-4 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-5 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-6 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-7 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-8 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-9 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-10 = refl
+selectedRelationDiagonalRecovers state Atlas.atlas-11 = refl
+
+selectedRelationCentreRecovers :
+  (state : Rel.SourceCentralCompletionCarrier) →
+  chosenOriginalCentralCell (selectedRelationFromCentral state)
+  ≡ Rel.sourceCentralCoordinate state
+selectedRelationCentreRecovers state = refl
+
+selectedRelationThirteenCodeRoundTrip :
+  (state : Rel.SourceCentralCompletionCarrier) →
+  relationToThirteen (selectedRelationFromCentral state)
+    ≡ Codec.sourceCentralToThirteen state
+selectedRelationThirteenCodeRoundTrip state = refl
+
+-- The selected subcarrier is a witness-bearing IMAGE of the 13
+-- original source parameters, not an arbitrary 144-cell relation.
+SelectedSourceRelation : Original.StageRelationField → Set
+SelectedSourceRelation field =
+  Σ Rel.SourceCentralCompletionCarrier
+    (λ state →
+      (cell : Original.StageRelation144) →
+      field cell ≡ selectedRelationFromCentral state cell)
+
+selectedRelationImageInhabited :
+  (state : Rel.SourceCentralCompletionCarrier) →
+  SelectedSourceRelation (selectedRelationFromCentral state)
+selectedRelationImageInhabited state = state , (λ cell → refl)
+
+-- The selected image has a concrete section and pointwise
+-- recovery. The ambient field retains unrestricted other cells.
