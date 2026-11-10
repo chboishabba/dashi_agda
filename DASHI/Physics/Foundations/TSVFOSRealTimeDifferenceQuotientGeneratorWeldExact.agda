@@ -1178,7 +1178,59 @@ module _
           (osScale source scalar (osInverse target))
         ≡ target
 
+      -- The source independently pays nonresonance / injectivity.
+      -- A mere right inverse is insufficient to identify the resolvent.
+      osShiftInjective :
+        ∀ x y →
+        OSDomain source x →
+        OSDomain source y →
+        osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)
+        ≡
+        osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) y)
+          (osScale source scalar y)
+        → x ≡ y
+
   open OriginalOSSelectedShiftInverse public
+
+  -- Inverse-on-domain follows from the source's right solution and
+  -- injectivity: no second, unrelated left-inverse assumption.
+  originalOSShiftInverseLeft :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (scalar : RealStep source)
+    (inverse : OriginalOSSelectedShiftInverse source conversion scalar)
+    (x : ReconstructedState)
+    (domain : OSDomain source x) →
+    osInverse inverse
+      (osSubtract source
+        (originalOSPhysicalEnergyOperator conversion
+          (OS.hamiltonian reconstruction) x)
+        (osScale source scalar x))
+    ≡ x
+  originalOSShiftInverseLeft source conversion scalar inverse x domain =
+    osShiftInjective inverse
+      (osInverse inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
+      x
+      (osInverseInDomain inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
+      domain
+      (osInverseRightEquation inverse
+        (osSubtract source
+          (originalOSPhysicalEnergyOperator conversion
+            (OS.hamiltonian reconstruction) x)
+          (osScale source scalar x)))
 
   originalSelectedObserverShiftInverse :
     (source : RealTimeDerivativeBridge)
