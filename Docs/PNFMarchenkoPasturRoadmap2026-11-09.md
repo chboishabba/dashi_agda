@@ -457,3 +457,21 @@ The 55-second source reel makes a **sample-identifiability** assertion: a mode u
 **Verification accounting:** These files are committed to draft PR #1480. The Agda binaries/Nix environment were unavailable in the current tool container; new Agda proof terms are **not kernel accepted**. The exact new GitHub Python file/tests have **not** been run from a checkout in this execution environment; do not present source-authoring as test-pass. The previous locally executed synthetic MP and rational gluing results remain valid for their own fixtures only.
 
 **New decisive P0 gates:** (a) check/repair transitive Agda imports, (b) source-derive loss labels for the same real covariance/portfolio positions, not merely integer-coded forecasts, (c) prove as-of provenance for the actual producer/market feed with available-at timestamp semantics, (d) derive a calibrated absolute risk error/tolerance policy before granting `qualifiedRiskEstimate` to Nashi, (e) run committed Python tests against real PIT financial history and separately the original PNF source activation panel. Winning a selected synthetic loss comparison is neither statistical significance nor economic trading surplus.
+
+## 19. PIT knowledge-time correction for constituent removals
+
+A feature's recorded last valid date is not necessarily the date a historical trader or PNF consumer could know the removal. Source-bound replay must distinguish **event/effective time** from **knowledge/availability time**, preserving the repository's general history/time-indexed fibre principle and its no-retroactive-promotion rules.
+
+In `scripts/pnf_history_time_mp.py`, `HistoricalFeature` now carries `last_valid_known_at`. A supplied `last_valid_at` without its knowledge timestamp is rejected, instead of silently excluding observations from earlier historical universes. Prior to the announcement time, a later-discovered end date does not retroactively remove that feature; once known, the actual validity bound applies.
+
+`scripts/pnf_history_time_risk_walkforward.py` uses exactly the same PIT membership semantics. New regression cases exercise an asset whose end validity is known only later, proving the earlier replay still contains it and that an undated removal is rejected.
+
+**Important:** This is still a finite as-of data selection policy, not proof that a particular third-party market feed supplies historically versioned constituent disclosures. Source providers must furnish both effective and knowledge time, plus any publication/revision history; missing metadata fails closed.
+
+### Verification and decisive remaining work
+- New Agda finite ledger, native as-of risk admission, Nashi/trader gate integration: committed **but not kernel checked**. No installed Agda or Nix toolchain is available in the execution environment.
+- New Python as-of replay, walkforward risk evaluation, and unit tests: committed **but exact branch copies not executed from a checkout**. Previous independent local MP and rational pooled-scatter tests do not verify these new modules.
+- The held-out risk comparison is a selected squared-error test of an ex-post squared return proxy. It is not a significant estimate of conditional true covariance and cannot authorize alpha/trading or semantic promotion.
+- P0: actual source-feature/event availability, field-based rank/nullity and symmetric spectral owners, same-source time-indexed covariance transport, and kernel verification.
+- P1: validate analytic MP assumptions and numerical calibration under serial dependence, heteroskedasticity, null resampling, regime changes and multiple outlier testing.
+- P2: run the branch tests on the original PNF source windows and properly versioned stock histories; compare the heldout risk forecasting performance with shrinkage/factor baselines and separately costed portfolio outcomes.
