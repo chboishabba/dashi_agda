@@ -169,3 +169,50 @@ Two competing proposed claims need to be distinguished rigorously.
 4. Verify the new Agda/Lean source with actual compilers and the pinned external unconditional Kakeya theorem.
 
 **Proof-evidence boundary:** these are newly committed source-written Agda/Lean terms without local Agda/Lean binaries available. Therefore no exact-head kernel certificate, physical full-stack completion or new Kakeya dimension theorem is claimed. The no-go directly refutes one overly strong interpretation of the original-object obligation. It does not refute a context-dependent multiscale observational model with a proven quotient/residual comparison.
+
+## Concrete all-depth residual (stronger than a conditional record)
+
+The **actual original** `SSP369Ultrametric.prefixMatch→distanceBound`
+and `TernaryCylinderPantsGeometryExact.refinedSiblingsShareParentPrefix`
+now compose to prove
+`KakeyaPadicPrefixGeometryNoGoExact.uniformOriginalPrefixReconstructionResidual`:
+
+For *every* finite prefix depth `n`, original parent `p`, and
+one-digit refinement `a`, choosing the fixed canonical child digit3
+changes the **original length-(n+1) address ultrametric** by at most 1:
+
+```text
+d_{n+1}(appendDigit(p,a), appendDigit(p,digit3)) <= 1.
+```
+
+The arithmetic identity `(n+1) ∸ n = 1` is also proved as
+`oneDiscardedDigit`. This bound is truly source-constructed at
+**all finite n**, not an empty constructor or imported claim of
+physical boundedness.
+
+Important: because the current `SSP369Ultrametric.distance` is
+`depth - commonPrefixLength`, its bound 1 is in **combinatorial
+branch-depth units**, not a shrinking real physical error.
+Do **not** claim it tends to zero as `n→∞`. A physical reconstruction
+requires the scale-to-metres calibration and actual observer/KK
+same-metric compatibility.
+
+Companion Lean #106 now contains
+`DashiKakeya/AllScaleObservationResidualMetric.lean`:
+given a selected physical-space decoding residual
+`dist(x,decode_n(encode_n(x))) ≤ ε_n`, the exact triangle inequality
+yields
+`|dist(x,y)-dist(decode_n(encode_n(x)),decode_n(encode_n(y)))|≤2ε_n`,
+represented by both directional inequalities. This is a correct
+additive alternative to the disproved exact finite-prefix isometry.
+The missing original physical theorem is a uniform or vanishing
+*real-valued* residual, with the corresponding spatial-line geometry.
+
+The Lean counterexample theorem
+`no_surjective_ultrametric_isometry_to_real` rules out an
+ultrametric surjective isometry even to the ordinary real line by
+the distances 1,1,2. Therefore the global ultrametric↔Euclidean
+isometry is mathematically impossible in the proposed form.
+
+Neither new source module has been kernel-checked here; Agda, Lean
+and Lake executables are not present. No CI used.
