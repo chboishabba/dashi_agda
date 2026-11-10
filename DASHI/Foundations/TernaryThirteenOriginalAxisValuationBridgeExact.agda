@@ -71,7 +71,23 @@ mapFromToRoundTrip (suc n) (x , xs) =
 valuationWordRoundTrip :
   (word : F.TritWord 12) →
   valuationToWord (wordToValuation word) ≡ word
-valuationWordRoundTrip word = mapFromToRoundTrip 12 word
+-- Explicitly eliminate the 12 nested pairs. The projection-based
+-- valuationToWord is NOT definitionally equal to the recursive
+-- mapTritWord on an *unsplit* variable word.
+valuationWordRoundTrip (x0 , (x1 , (x2 , (x3 , (x4 , (x5 , (x6 , (x7 , (x8 , (x9 , (x10 , (x11 , tt)))))))))))) =
+  cong₂ _,_ (fromToSource x0)
+    (cong₂ _,_ (fromToSource x1)
+    (cong₂ _,_ (fromToSource x2)
+    (cong₂ _,_ (fromToSource x3)
+    (cong₂ _,_ (fromToSource x4)
+    (cong₂ _,_ (fromToSource x5)
+    (cong₂ _,_ (fromToSource x6)
+    (cong₂ _,_ (fromToSource x7)
+    (cong₂ _,_ (fromToSource x8)
+    (cong₂ _,_ (fromToSource x9)
+    (cong₂ _,_ (fromToSource x10)
+    (cong₂ _,_ (fromToSource x11)
+    (refl))))))))))))
 
 valuationPointwiseRoundTrip :
   (valuation : Rel.SourceTwelveAxisValuation)
