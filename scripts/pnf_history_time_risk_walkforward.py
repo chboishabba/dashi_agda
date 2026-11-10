@@ -115,6 +115,8 @@ def assess_walkforward(receipts: Sequence[RiskForecastReceipt],
            or r.training_latest_available_at > r.asof
            or r.evaluation_time <= r.asof for r in receipts):
         raise ValueError("lookahead or non-forward evaluation")
+    if len({r.evaluation_time for r in receipts}) != len(receipts):
+        raise ValueError("duplicate held-out targets cannot count as separate folds")
     if any(r.realized_available_at > qualification_asof for r in receipts):
         raise ValueError("held-out realization unavailable at qualification time")
     if any(r.asof > qualification_asof for r in receipts):
