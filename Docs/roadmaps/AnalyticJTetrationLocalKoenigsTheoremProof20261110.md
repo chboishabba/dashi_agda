@@ -59,7 +59,7 @@ using `|p|-1/10>1.27`. The second is the **exact** integral identity
 L(p+w)-p-w/p = -w² ∫₀¹ t / (p(p+tw)) dt,
 ```
 
-giving `M <= 1/(2*1.37*1.27) < 311/1000`. No Taylor
+giving the remainder coefficient `1/(2*1.37*1.27) < M=311/1000`. No Taylor
 remainder is being guessed.
 
 Put `w_n(z)=L^[n](z)-p`, `h_n(z)=p^n w_n(z)`.
