@@ -26,6 +26,8 @@ import DASHI.Governance.BlackGirlsMatterCRDCOriginalRowAdmissionExact as CRDC
 import DASHI.Governance.BlackGirlsMatterCRDCAggregationBoundaryExact as CRDCAgg
 import DASHI.Governance.BlackGirlsMatterDenominatorSensitivityExact as Sensitivity
 import DASHI.Governance.BlackGirlsMatterSourceBoundRateOrderExact as RateOrder
+import DASHI.Governance.SituatedCortisolAggregateNonIdentificationExact as CortisolAggregate
+import DASHI.Governance.SituatedCortisolTrajectoryAdmissionExact as CortisolPerson
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -118,6 +120,19 @@ record LegalCrossCaseCut : Set₁ where
         {m : CRDC.Measure} →
       RateOrder.CertifiedBlackHigher src d e m →
       CRDC.ComparableRatePair src d e m
+    aggregateEnvironmentalAndCortisolTotalsCannotIdentifyPerson :
+      INF.FactorsThrough
+        CortisolAggregate.coarseEnvironmentAndAggregateTotal
+        (CortisolAggregate.individualResponse CortisolAggregate.participantA) → ⊥
+    aggregateLoadCannotIdentifySituatedAppraisal :
+      INF.FactorsThrough
+        CortisolPerson.aggregateLoad CortisolPerson.candidateAppraisal → ⊥
+    cortisolModelAdmissionRequiresIndividualFit :
+      ∀ {Person Time LatentState : Set}
+        {model : CortisolPerson.CalibratedPersonalDynamics Person Time LatentState}
+        {t : Time} →
+      CortisolPerson.PersonSpecificAdmission model t →
+      CortisolPerson.withinPersonCalibrationEvidence model
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -152,4 +167,7 @@ crenshawLegalCrossCaseCut =
     CRDCAgg.differentUnitsAreNotDefinitionalEqual
     Sensitivity.caseCountsAloneDoNotDetermineRateOrder
     RateOrder.certifiedHigherRequiresSamePopulationRows
+    CortisolAggregate.aggregateEnvironmentalExposureCannotDeterminePerson
+    CortisolPerson.aggregateLoadDoesNotFixAppraisal
+    CortisolPerson.admissionRequiresIndividualCalibration
     refl refl
