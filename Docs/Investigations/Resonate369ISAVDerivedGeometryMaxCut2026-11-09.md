@@ -233,3 +233,13 @@ Public Friendbeacon listings are sufficient for **design claims**; not for proof
 | P3 | `realDeviceLoadedPowerResidual` | Calibrated simultaneous input/output/storage/shaft measurements, uncertainty |
 
 No STL/STEP/CAD or original manufacturer circuitry copied. Attribution: historical Slobodian/Infinity SAV, Holmstrom/Resonate369 and independent DASHI formalism remain separately identified.
+
+### 2026-11-10: generic internal-transfer conservation
+
+Added `DASHI.Physics.Motors.Circuit36927InternalTransferConservationExact` (commit `b5fb0b5a`). It reuses `Resonate369SignedPitchTelescopingExact.AngularGroup` and constructs:
+- `pairedSignedTransfer i = neg i ⊕ i`
+- `eachInternalTransferCancels`
+- `aggregateInternalTransfers` over an arbitrary finite list
+- `allInternalTransfersCancel`, an abstract group-law cancellation theorem.
+
+This is an **exact structural accounting identity**, *not* per-node Kirchhoff current conservation, real device current continuity or measured energy conservation. Per-node edge incidence and physical constitutive weld remain OPEN. Agda kernel verification of the new module and prior modules is also OPEN.
