@@ -59,13 +59,18 @@ def forecast_one_step(
     features = _features(universe, history, source, asof)
     if not features:
         raise ValueError("no historical assets")
+    # The earliest comparable training row cannot precede admission of
+    # any currently selected feature, even if a provider later backfills it.
+    admission_floor = max(f.first_known_at for f in universe
+                          if f.history == history and f.source == source
+                          and f.identifier in features)
     w = np.asarray(weights, dtype=float)
     if w.shape != (len(features),) or not np.isfinite(w).all():
         raise ValueError("weights must match point-in-time universe")
     if any(o.available_at < o.event_time for o in observations\n           if o.history == history and o.source == source):\n        raise ValueError("source availability predates event")\n    # Complete-case, strictly as-of training. A feature admitted today may
     # not be backfilled into yesterday's observations.
     selected = [o for o in observations if o.history == history
-                and o.source == source and o.event_time <= asof
+                and o.source == source and admission_floor <= o.event_time <= asof
                 and o.available_at <= asof
                 and all(f in o.values for f in features)]
     selected.sort(key=lambda o: (o.event_time, o.available_at))
