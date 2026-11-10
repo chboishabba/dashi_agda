@@ -47,3 +47,31 @@ No Agda executable or checked build was available in this interaction. Source-wr
 ## Attribution / non-promotion
 
 Record the exact mathematical origin of every imported result. Distinguish inherited algebra, source theorem, translated formal proof, selected input assumptions, and original connector code. Do not claim priority over Wang, Zahl, Guth, the MMAT/Project Numina/Seed/Nankai groups, or the historical authors. Do not represent a conditional adapter as a full 3D or 4D proof.
+
+## 2026-11-10 second-repository update: exact Lean formalisation cut
+
+The separately opened `chboishabba/dashi_lean4` PR #106
+(https://github.com/chboishabba/dashi_lean4/pull/106) implements an
+opt-in finite rational cell/tube incidence sum and records the complete
+source-level external theorem path. Project Numina's
+`Unconditional.KakeyaDimensionThree : KakeyaSetConjecture 3`
+is described as unconditional **after linking** the
+Nankai University/ByteDance Seed sticky result. Its exact upstream pin
+is `42f739b484fd055e0aa29601c35677ad996f2ef2`; toolchain
+`v4.32.0-rc1` and Mathlib commit
+`1b0782d8191b03e0001caac10e1601d17f2cd580`.
+See https://github.com/project-numina/kakeya-3d/blob/main/PROOF-PATH.md
+and https://github.com/project-numina/kakeya-3d/blob/main/ATTRIBUTION.md .
+
+**Important rational-to-measure correction.** For cell volumes `v_c`
+and tube multiplicities `m_c`, the desired Cauchy--Schwarz inputs are
+`a_c = sqrt(v_c)` and `b_c = sqrt(v_c) m_c`. The rational proof does
+not directly support arbitrary `v_c ∈ ℚ` because `sqrt(v_c)` need
+not be rational. The adapter in this PR only transports a literal
+*chosen rational pair* identity, and it remains semantically incomplete
+until cell-volume identification is supplied. A robust continuum
+implementation belongs in Mathlib's real/measure carrier.
+
+No Agda or Lean local checker was run in this interaction. Neither
+draft PR is a kernel receipt. Mathematical origin and independent
+formalisation contributor attribution remain explicit.
