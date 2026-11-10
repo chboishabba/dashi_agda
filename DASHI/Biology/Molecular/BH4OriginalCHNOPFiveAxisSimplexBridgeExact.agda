@@ -336,3 +336,74 @@ zeroCHNOPWeightBlocksPositiveSource certificate species zeroWeight positive
   where
     zeroIsNotSuccessor : ∀ {n} → 0 ≡ suc n → ⊥
     zeroIsNotSuccessor ()
+
+------------------------------------------------------------------------
+-- P0 computational completeness: decide source CHNOP positivity at
+-- EVERY index, constructing evidence instead of admitting a string flag.
+--
+-- Unlike the missing generated Rhea source, this is fully generic and
+-- constructive over the existing Vec/Fin/Nat proof carriers.
+-- The right branch supplies a concrete index whose source weight is
+-- exactly zero and therefore blocks positive-simplex admission.
+------------------------------------------------------------------------
+
+positiveNatOrZero :
+  (weight : Nat) →
+  (Σ Nat (λ predecessor → weight ≡ suc predecessor))
+    ⊎ (weight ≡ 0)
+positiveNatOrZero zero = inj₂ refl
+positiveNatOrZero (suc predecessor) =
+  inj₁ (predecessor , refl)
+
+allPositiveOrZeroIndex :
+  ∀ {n}
+  (weights : V.Vec Nat n) →
+  ((species : F.Fin n) →
+     Σ Nat (λ predecessor →
+       V.lookup weights species ≡ suc predecessor))
+  ⊎
+  (Σ (F.Fin n) (λ species → V.lookup weights species ≡ 0))
+allPositiveOrZeroIndex V.[] = inj₁ (λ ())
+allPositiveOrZeroIndex (V._∷_ weight weights)
+  with positiveNatOrZero weight
+... | inj₂ isZero = inj₂ (F.zero , isZero)
+... | inj₁ positive with allPositiveOrZeroIndex weights
+...   | inj₁ allTailPositive =
+        inj₁ λ { F.zero → positive
+               ; (F.suc species) → allTailPositive species }
+...   | inj₂ (species , isZero) =
+        inj₂ (F.suc species , isZero)
+
+-- The source certificate alone need not imply positivity. Nevertheless
+-- EVERY inhabitable original source certificate has an exact decidable
+-- outcome: a complete positive-weight witness or an explicit zero
+-- species obstruction, with no excluded middle or fake source data.
+decideOriginal369SourcePositiveCHNOP :
+  (certificate : Panel.SourceCertifiedOriginal29x12) →
+  SourcePositiveAggregateCHNOP certificate
+    ⊎
+  (Σ (F.Fin 29)
+    (λ species →
+      V.lookup (totalCHNOPSourceWeights certificate) species ≡ 0))
+decideOriginal369SourcePositiveCHNOP certificate
+  with allPositiveOrZeroIndex (totalCHNOPSourceWeights certificate)
+... | inj₁ everyPositive =
+      inj₁ record { sourceWeightPositive = everyPositive }
+... | inj₂ obstruction = inj₂ obstruction
+
+-- Once the generated original source is available, the success branch
+-- supplies the SAME PNP simplex admission without asking a researcher
+-- to manually fill in 29 positivity proofs.
+decideOriginal369WeightedSimplexAdmission :
+  (certificate : Panel.SourceCertifiedOriginal29x12) →
+  Original369PositiveWeightedSimplexAdmission
+    ⊎
+  (Σ (F.Fin 29)
+    (λ species →
+      V.lookup (totalCHNOPSourceWeights certificate) species ≡ 0))
+decideOriginal369WeightedSimplexAdmission certificate
+  with decideOriginal369SourcePositiveCHNOP certificate
+... | inj₁ evidence =
+      inj₁ (original369-positive-weighted-simplex-admission
+              certificate evidence)
+... | inj₂ obstruction = inj₂ obstruction
