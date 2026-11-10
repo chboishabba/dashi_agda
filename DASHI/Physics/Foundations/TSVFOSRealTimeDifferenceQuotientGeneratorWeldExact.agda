@@ -1589,6 +1589,55 @@ module _
           (observerExpressionConverges approximation a domain)))
       (osExpressionConverges approximation a domain)
 
+
+  ------------------------------------------------------------------------
+  -- EXPERIMENTALLY RELEVANT CONSUMER: TWO-POINT CORRELATOR TRANSPORT.
+  --
+  -- An independently supplied pairwise expectation/pairing on the
+  -- ORIGINAL observer and OS states yields equality of correlators
+  -- for EVERY source-certified strong functional limit.
+  --
+  -- No trace-class claim, thermal partition function or actual
+  -- neutron/Bragg response is inferred from an uninterpreted pairing.
+  ------------------------------------------------------------------------
+
+  record OriginalSelectedCorrelationPairing
+      (source : RealTimeDerivativeBridge) : Set₁ where
+    field
+      Correlation : Set
+      observerCorrelation : ObserverState → ObserverState → Correlation
+      osCorrelation : ReconstructedState → ReconstructedState → Correlation
+      sameSelectedCorrelation :
+        ∀ a b →
+        observerCorrelation a b
+        ≡ osCorrelation (J a) (J b)
+
+  open OriginalSelectedCorrelationPairing public
+
+  originalSelectedStrongLimitCorrelationTransport :
+    (source : RealTimeDerivativeBridge)
+    (conversion : PhysicalHbarEnergyConversion source)
+    (core : OriginalEnergyExpressionCore source conversion)
+    (approximation :
+      OriginalEnergyExpressionStrongLimit source conversion core)
+    (pairing : OriginalSelectedCorrelationPairing source)
+    (a b : ObserverState)
+    (domain : ObserverGeneratorDomain source b) →
+    observerCorrelation pairing a
+      (selectedObserverLimit approximation b)
+    ≡
+    osCorrelation pairing (J a)
+      (selectedOSLimit approximation (J b))
+  originalSelectedStrongLimitCorrelationTransport
+      source conversion core approximation pairing a b domain =
+    trans
+      (sameSelectedCorrelation pairing a
+        (selectedObserverLimit approximation b))
+      (cong
+        (osCorrelation pairing (J a))
+        (originalSelectedStrongFunctionalLimitIntertwines
+          source conversion core approximation b domain))
+
 -- SOURCE conditional, KERNEL PENDING. In particular the original
 -- OSReconstructionAuthority.Hamiltonian is presently just an abstract
 -- carrier and its value: the genuinely physical Hilbert generator
