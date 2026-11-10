@@ -39,6 +39,11 @@ def check() -> None:
         for n in (0, 1, 4, 12, 40):
             tail = radius ** (n + 1) / (1 - radius)
             assert tail >= 0 and tail * (1 - radius) == radius ** (n + 1)
+    selected_radius = F(10, 137)
+    selected_tail = selected_radius ** 17 / (1 - selected_radius)
+    assert selected_radius < F(1, 10)
+    assert selected_tail < F(1, 10**15)
+    print("PASS selected disk |w|<=10/137: degree 16 error < 10^-15")
     print("PASS exact geometric majorant tails (formal arithmetic only)")
 
 
