@@ -1260,3 +1260,16 @@ and import/construct a trustworthy finite-dimensional
 Brouwer theorem for the intended real foundation. Do not
 replace Brouwer with an arbitrary normalized probability
 law or a conditional record.
+
+
+## 2026-11-10 P0.06 source-level type repair and native Energy.Core reuse
+
+**Concrete defect fixed:** `SameSourcePaidEnergyModel` holds two fields with types themselves in `Set₁` (`SameSourceBH4PNPModel` and `OrderedEnergyCarrier`), and therefore its record must inhabit `Set₂`. The previous `Set₁` declaration could not be accepted by Agda's universe checker; it has been repaired to `record SameSourcePaidEnergyModel : Set₂`. This is a source-level universe correction, not a kernel receipt.
+
+**Existing prior art reused:** `DASHI.Energy.Core` provides `Preorder` and `EnergySpace`; `DASHI.Analysis.DissipationPathMonotonicity` already covers ordinary zero-credit finite-path descent, so no duplicate path monotonicity infrastructure is required. `BH4PNPSameSourcePaidEnergyExact` now defines `toExistingEnergyPreorder` using the exact existing `Preorder` interface and `sameSourceEnergySpace` with the *same* `energyOf` and `PhysicalState`. `allSameSourceHistoriesDescendInExistingEnergySpace` exposes the previous nonzero-paid-residual descent conclusion directly via `DASHI.Energy.Core.EnergySpace.P`, without constructing an unrelated observation space or narrowing physical energies to Nat.
+
+**Important prior-art seam:** `DissipationPathMonotonicity.OrderedAdditiveEnergy.zeroLower` demands `zero ≤ value` for **every** energy value. This is not automatically valid for a signed physical free-energy carrier; also the prior zero-credit theorem does not directly pay numerical residual or exterior-work credits. Reuse its existing `Preorder` and `EnergySpace` now; supply an actual scoped dissipative transition only with properly inhabited domain and zero/paid work evidence. In particular, do not assert an unconditional ordered-real instance from Bishop analysis or artificially require all original free energies nonnegative.
+
+**Current proof status:** new owners and Golden import are source-written; the available runtime has neither Agda nor Nix, so kernel checking at the exact head remains OPEN. No physical S0.01–04, P0.05–08, or P1–P3 source gate is discharged by the abstract bridge.
+
+**Acceptance commands:** `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPSameSourcePaidEnergyExact.agda`, `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPOrderedEnergyHistoryExact.agda`, `scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`.
