@@ -21,7 +21,7 @@ module DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact where
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (_≢_)
+open import Data.Nat.Base as Nat using (NonZero)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (ℚᵘ; _/_)
 
@@ -48,8 +48,8 @@ inversePositiveNat : Nat → ℚᵘ
 inversePositiveNat n = + 1 / suc n
   where
     instance
-      denominatorNonzero : suc n ≢ zero
-      denominatorNonzero ()
+      denominatorNonzero : NonZero (suc n)
+      denominatorNonzero = _
 
   -- Local definition avoids the off-by-one error from mkℚᵘ's raw
   -- denominator-minus-one representation.
