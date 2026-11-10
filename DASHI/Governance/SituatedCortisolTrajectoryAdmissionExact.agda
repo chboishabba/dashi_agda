@@ -73,9 +73,16 @@ record CalibratedPersonalDynamics
   field
     chosenPerson : Person
     latentAt : Time → LatentState
+    nextObservationTime : Time → Time
+    situatedExposureAt : Time → SituatedTimeSlice
     individualizedTransition :
       Person → Time → LatentState → SituatedTimeSlice → LatentState
     cortisolReadout : Person → Time → LatentState → Nat
+    transitionCoherent :
+      (time : Time) →
+      latentAt (nextObservationTime time) ≡
+      individualizedTransition chosenPerson time
+        (latentAt time) (situatedExposureAt time)
     validatedInitialCondition : Set
     parameterIdentificationEvidence : Set
     temporalSampleAlignmentEvidence : Set
@@ -94,6 +101,24 @@ predictCortisol :
   Time → Nat
 predictCortisol model t =
   cortisolReadout model (chosenPerson model) t (latentAt model t)
+
+-- Exact one-step bridge between a chosen person's source-indexed
+-- exposure/history, the latent dynamics, and its next-time readout.
+-- The source/calibration evidence for the model is required separately.
+predictedNextCortisolAgreesWithTransition :
+  ∀ {Person Time LatentState : Set}
+  (model : CalibratedPersonalDynamics Person Time LatentState)
+  (t : Time) →
+  predictCortisol model (nextObservationTime model t)
+  ≡ cortisolReadout model (chosenPerson model)
+      (nextObservationTime model t)
+      (individualizedTransition model
+        (chosenPerson model) t
+        (latentAt model t) (situatedExposureAt model t))
+predictedNextCortisolAgreesWithTransition model t =
+  cong (cortisolReadout model (chosenPerson model)
+          (nextObservationTime model t))
+       (transitionCoherent model t)
 
 -- No census aggregate can inhabit person-time assay validation merely
 -- by matching a cohort average.
