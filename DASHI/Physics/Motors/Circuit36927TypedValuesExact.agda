@@ -7,6 +7,7 @@ module DASHI.Physics.Motors.Circuit36927TypedValuesExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Equality using (_≡_; refl)
 import DASHI.Physics.Motors.Circuit36927ComponentGraphExact as Graph
 
@@ -37,7 +38,7 @@ record TypedPart : Set where
   field
     identifier : Nat
     kind : ComponentKind
-    label : Agda.Builtin.String.String
+    label : String
     nominal : ValueFor kind
     pins : Nat
 
