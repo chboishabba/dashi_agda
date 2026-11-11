@@ -18,11 +18,13 @@ module DASHI.Moonshine.AbelBishopSelectedLogAffineReconstructionExact where
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 
+import Inverse as BishopInverse
 import Real as BishopReal
 import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Analysis.BishopComplexReciprocalExact as Reciprocal
+import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
 import DASHI.Moonshine.AbelBishopLogFiniteComplexDerivativeExact as Finite
 
 complexMulAssociative :
@@ -134,3 +136,24 @@ originalBishopNormalizedDisplacementAffineReconstruct p nz t =
   BishopP.≃-trans (proj₁ dist) (proj₁ pieces)
   ,
   BishopP.≃-trans (proj₂ dist) (proj₂ pieces)
+
+
+-- The original unit-disk radius for the displacement w = p^-1 * t
+-- can be derived from this EXACT norm-square formula rather than
+-- supplying an independent norm oracle for the normalized chart.
+originalBishopNormalizedDisplacementNormSquare :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  BishopReal._≃_
+    (Norm.normSqC (normalizedDisplacement p nz t))
+    (BishopReal._*_
+      (BishopInverse._⁻¹
+        (Norm.normSqC p)
+        (Reciprocal.normSquareNonzero nz))
+      (Norm.normSqC t))
+originalBishopNormalizedDisplacementNormSquare p nz t =
+  BishopP.≃-trans
+    (Norm.normSqMultiply (Reciprocal.reciprocalC p nz) t)
+    (BishopP.*-congʳ
+      (Reciprocal.normSquareReciprocal p nz))
