@@ -23,6 +23,7 @@ import Real as BishopReal
 import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
+import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
 
 imaginaryAxis : BishopReal.ℝ → Complex.BishopComplex
 imaginaryAxis y = Complex.complex BishopReal.0ℝ y
@@ -91,3 +92,118 @@ originalBishopImaginaryAxisPowerTwoStepImag :
       (Complex.im (Algebra.powC (imaginaryAxis y) n)))
 originalBishopImaginaryAxisPowerTwoStepImag y n =
   proj₂ (originalBishopImaginaryAxisPowerTwoStep y n)
+
+
+------------------------------------------------------------------------
+-- THE ORIGINAL YANG--MILLS SINE/COSINE INDEX CONVENTIONS ARE REUSED:
+-- evenExponent k = 2k, oddExponent k = 2k+1.
+-- The output powers here are (-y²)^k; the final parity/sign weld to
+-- concrete sine/cosine signed factorial coefficients is still separate.
+------------------------------------------------------------------------
+
+originalBishopImaginaryAxisEvenPower :
+  ∀ y n →
+  Complex._≈C_
+    (Algebra.powC
+      (imaginaryAxis y)
+      (Estimates.evenExponent n))
+    (Complex.complex
+      (BishopReal.pow (negativeSquare y) n)
+      BishopReal.0ℝ)
+originalBishopImaginaryAxisEvenPower y zero =
+  (let open BishopP.ℝ-Solver in
+   solve 0 (Κ 1ℚᵘ ⊜ Κ 1ℚᵘ) BishopP.≃-refl)
+  ,
+  (let open BishopP.ℝ-Solver in
+   solve 0 (Κ 0ℚᵘ ⊜ Κ 0ℚᵘ) BishopP.≃-refl)
+originalBishopImaginaryAxisEvenPower y (suc n) =
+  let
+    u = negativeSquare y
+    p = BishopReal.pow u n
+    previous = originalBishopImaginaryAxisEvenPower y n
+    step = originalBishopImaginaryAxisPowerTwoStep y
+      (Estimates.evenExponent n)
+    substituted = Algebra.scaleCCongruent previous u
+    realTail :
+      BishopReal._≃_
+        (BishopReal._*_ u p)
+        (BishopReal.pow u (suc n))
+    realTail =
+      let open BishopP.ℝ-Solver in
+      solve 2
+        (λ u′ p′ → u′ ⊗ p′ ⊜ p′ ⊗ u′)
+        BishopP.≃-refl u p
+    imagTail :
+      BishopReal._≃_
+        (BishopReal._*_ u BishopReal.0ℝ)
+        BishopReal.0ℝ
+    imagTail =
+      let open BishopP.ℝ-Solver in
+      solve 1
+        (λ u′ → u′ ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+        BishopP.≃-refl u
+  in
+  (BishopP.≃-trans (proj₁ step)
+    (BishopP.≃-trans (proj₁ substituted) realTail))
+  ,
+  (BishopP.≃-trans (proj₂ step)
+    (BishopP.≃-trans (proj₂ substituted) imagTail))
+
+originalBishopImaginaryAxisOddPower :
+  ∀ y n →
+  Complex._≈C_
+    (Algebra.powC
+      (imaginaryAxis y)
+      (Estimates.oddExponent n))
+    (Complex.complex
+      BishopReal.0ℝ
+      (BishopReal._*_ y (BishopReal.pow (negativeSquare y) n)))
+originalBishopImaginaryAxisOddPower y zero =
+  (let open BishopP.ℝ-Solver in
+   solve 1
+     (λ y′ →
+       ((Κ 0ℚᵘ ⊗ Κ 1ℚᵘ) ⊖ (y′ ⊗ Κ 0ℚᵘ))
+       ⊜ Κ 0ℚᵘ)
+     BishopP.≃-refl y)
+  ,
+  (let open BishopP.ℝ-Solver in
+   solve 1
+     (λ y′ →
+       ((Κ 0ℚᵘ ⊗ Κ 0ℚᵘ) ⊕ (y′ ⊗ Κ 1ℚᵘ))
+       ⊜ (y′ ⊗ Κ 1ℚᵘ))
+     BishopP.≃-refl y)
+originalBishopImaginaryAxisOddPower y (suc n) =
+  let
+    u = negativeSquare y
+    p = BishopReal.pow u n
+    yp = BishopReal._*_ y p
+    previous = originalBishopImaginaryAxisOddPower y n
+    step = originalBishopImaginaryAxisPowerTwoStep y
+      (Estimates.oddExponent n)
+    substituted = Algebra.scaleCCongruent previous u
+    realTail :
+      BishopReal._≃_
+        (BishopReal._*_ u BishopReal.0ℝ)
+        BishopReal.0ℝ
+    realTail =
+      let open BishopP.ℝ-Solver in
+      solve 1
+        (λ u′ → u′ ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+        BishopP.≃-refl u
+    imagTail :
+      BishopReal._≃_
+        (BishopReal._*_ u yp)
+        (BishopReal._*_ y (BishopReal.pow u (suc n)))
+    imagTail =
+      let open BishopP.ℝ-Solver in
+      solve 3
+        (λ u′ y′ p′ →
+          u′ ⊗ (y′ ⊗ p′)
+          ⊜ y′ ⊗ (p′ ⊗ u′))
+        BishopP.≃-refl u y p
+  in
+  (BishopP.≃-trans (proj₁ step)
+    (BishopP.≃-trans (proj₁ substituted) realTail))
+  ,
+  (BishopP.≃-trans (proj₂ step)
+    (BishopP.≃-trans (proj₂ substituted) imagTail))
