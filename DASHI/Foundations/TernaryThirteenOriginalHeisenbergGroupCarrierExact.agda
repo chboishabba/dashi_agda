@@ -21,6 +21,9 @@ import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Moonshine.Monster3BFiniteHeisenbergAssociativityExact as Assoc
 import DASHI.Moonshine.Monster3BFiniteHeisenbergInverseExact as Inv
 import DASHI.Foundations.TernaryThirteenFibreSplitExact as Word
+import DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact as Codec
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 
 toWordTrit : F3.Trit → Word.Trit
 toWordTrit F3.neg = Word.negative
@@ -202,3 +205,88 @@ wordGeneratorOrderMatters equality =
 
 -- Keep the exact boundary: this SOURCE GROUP is not automatically
 -- the separately intended relational/group/world semantic completion.
+
+------------------------------------------------------------------------
+-- Exact ORIGINAL relational 12-axis-plus-centre source carrier.
+-- This is an actual transport to the existing source valuation
+-- type; equality of functions is avoided, not assumed.
+------------------------------------------------------------------------
+
+originalGroupToSource :
+  H.Heisenberg6 → Rel.SourceCentralCompletionCarrier
+originalGroupToSource g =
+  Codec.thirteenToSourceCentral (originalGroupToWord g)
+
+sourceToOriginalGroup :
+  Rel.SourceCentralCompletionCarrier → H.Heisenberg6
+sourceToOriginalGroup state =
+  wordToOriginalGroup (Codec.sourceCentralToThirteen state)
+
+originalGroupSourceRoundTrip :
+  (g : H.Heisenberg6) →
+  sourceToOriginalGroup (originalGroupToSource g) ≡ g
+originalGroupSourceRoundTrip g =
+  trans
+    (cong wordToOriginalGroup
+      (Codec.thirteenSourceRoundTrip (originalGroupToWord g)))
+    (originalGroupRoundTrip g)
+
+sourceOriginalGroupRoundTripAxis :
+  (state : Rel.SourceCentralCompletionCarrier)
+  (axis : Atlas.StageAtlasZeroToEleven) →
+  proj₁ (originalGroupToSource (sourceToOriginalGroup state)) axis
+  ≡ proj₁ state axis
+sourceOriginalGroupRoundTripAxis state axis =
+  trans
+    (cong
+      (λ code → proj₁ (Codec.thirteenToSourceCentral code) axis)
+      (originalWordRoundTrip (Codec.sourceCentralToThirteen state)))
+    (Codec.sourceCentralRoundTripOnAxis state axis)
+
+sourceOriginalGroupRoundTripCentre :
+  (state : Rel.SourceCentralCompletionCarrier) →
+  proj₂ (originalGroupToSource (sourceToOriginalGroup state))
+  ≡ proj₂ state
+sourceOriginalGroupRoundTripCentre state =
+  trans
+    (cong
+      (λ code → proj₂ (Codec.thirteenToSourceCentral code))
+      (originalWordRoundTrip (Codec.sourceCentralToThirteen state)))
+    (Codec.sourceCentralRoundTripOnCentre state)
+
+-- Noncommutative ORIGINAL group operation pulled back to the
+-- chosen relational 12+central coordinate model. This is NOT
+-- coordinatewise ternary addition.
+sourceCentralCompose :
+  Rel.SourceCentralCompletionCarrier →
+  Rel.SourceCentralCompletionCarrier →
+  Rel.SourceCentralCompletionCarrier
+sourceCentralCompose x y =
+  originalGroupToSource
+    (H.compose (sourceToOriginalGroup x) (sourceToOriginalGroup y))
+
+sourceCentralGroupCompositionOnAxes :
+  (g h : H.Heisenberg6)
+  (axis : Atlas.StageAtlasZeroToEleven) →
+  proj₁
+    (sourceCentralCompose (originalGroupToSource g)
+                          (originalGroupToSource h)) axis
+  ≡ proj₁ (originalGroupToSource (H.compose g h)) axis
+sourceCentralGroupCompositionOnAxes g h axis
+  rewrite originalGroupSourceRoundTrip g
+        | originalGroupSourceRoundTrip h = refl
+
+sourceCentralGroupCompositionOnCentre :
+  (g h : H.Heisenberg6) →
+  proj₂
+    (sourceCentralCompose (originalGroupToSource g)
+                          (originalGroupToSource h))
+  ≡ proj₂ (originalGroupToSource (H.compose g h))
+sourceCentralGroupCompositionOnCentre g h
+  rewrite originalGroupSourceRoundTrip g
+        | originalGroupSourceRoundTrip h = refl
+
+-- The finite Heisenberg group is an independently existing
+-- group owner with genuine cocycle/commutator. What is NOT paid
+-- is an identification of arbitrary 144-cell relations, ITIR
+-- world nodes, or an actual Monster group representation with it.
