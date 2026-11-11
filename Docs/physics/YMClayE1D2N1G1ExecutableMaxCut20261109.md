@@ -239,3 +239,12 @@ The concrete same-source `originalR445ThreeMomentResidualBound` instantiates thi
 **Important precise distinction:** the subtraction-interchange identity `(a-b)-(c-d) = (a-c)-(b-d)`, needed to rewrite the difference of *connected covariances* into that residual, is not provided as a named theorem in `RealAnalysisAxioms`. Do not treat the current module as a kernel-proven covariance difference bound until that scalar lemma is derived and accepted. The **physical** Wilson RG error bounds ε_F, ε_G, ε_FG and majorants also remain unpaid; the same original Wilson source selection is preserved.
 
 Next true high-alpha target: source-specific CMP109/CMP119 effective-action bounds for the three original coarse Wilson moments with cutoff/volume-uniform physical scaling, then transport via the scalar subtraction-interchange lemma to the same E1 source mixed-J11/CMP116 covariance. The R576 polymer and R577/H6/G1 cuts are unchanged. Agda 2.9 acceptance remains unverified.
+
+
+### Quantitative downstream covariance and original mixed-J transport
+
+The same module now also source-writes `originalR445CovarianceErrorFromThreeSourceMoments` and `originalMixedJ11MinusBareCovarianceQuantitativeBound`, transporting the three-moment estimate to (1) the genuine difference of original R445 effective and bare coarse covariances, and (2) the already proved original fine Wilson formal mixed J11 coefficient. **Both signatures explicitly request the scalar-ring subtraction-interchange equality** `(a-b)-(c-d) ≡ (a-c)-(b-d)` at the selected six source moments. They do **not** request equality of effective and bare coarse Wilson probability laws.
+
+The next standalone P0 mathematics leaf is therefore to discharge the pure ordered-real scalar interchange once from a coherent selected real ring (or extend `RealAnalysisAxioms` with an independently verified ring theorem, not a Yang–Mills postulate), then supply three nontrivial original Wilson RG physical source moment errors at all relevant scales and volumes. Together those will yield honest quantitative same-source covariance comparison.
+
+**Acceptance limit:** committed source terms and current GitHub readback only. This is a conditional quantitative transport theorem, not a computed physical error bound, E1 continuum existence or D2 mass gap. No kernel/Agda receipt available in the execution environment.
