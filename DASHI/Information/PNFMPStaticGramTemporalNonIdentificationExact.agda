@@ -91,6 +91,25 @@ equalFullGramButDifferentTemporalLag =
     Time.alternating Time.clustered
     equalFullTwoColumnStatistics Time.differentLagOne
 
+-- For any pair of columns, equality of original totals and Gram
+-- entries yields exact cross-multiplied equality of the unnormalised
+-- centred-covariance expression:
+-- n·G_ab - S_a·S_b, with n=4.
+-- The equation is expressed over Nat by moving the subtraction terms
+-- across the equality, avoiding any assumed field division or negatives.
+-- A real/rational sample covariance has the common denominator n(n-1).
+sameCentredCovarianceCrossProduct :
+  (a b : Column) →
+  (4 * rawGram Time.alternating a b +
+    columnTotal Time.clustered a * columnTotal Time.clustered b)
+  ≡
+  (4 * rawGram Time.clustered a b +
+    columnTotal Time.alternating a * columnTotal Time.alternating b)
+sameCentredCovarianceCrossProduct firstColumn firstColumn = refl
+sameCentredCovarianceCrossProduct firstColumn secondColumn = refl
+sameCentredCovarianceCrossProduct secondColumn firstColumn = refl
+sameCentredCovarianceCrossProduct secondColumn secondColumn = refl
+
 -- In particular no eigenvalue classifier/MP edge applied to those
 -- sufficient covariance statistics can recover the erased time order.
 noStaticTwoColumnSpectralDecoder :
