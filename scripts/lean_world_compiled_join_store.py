@@ -49,6 +49,7 @@ def persist_join(conn,report,generated_source,joined_olean,*,
             raise JoinStoreError("missing or unbounded original OLean bytes")
         return raw
     names=set()
+    total_compiled=0
     for row in original_modules:
         origin=row.get("original_source_origin")
         if (not isinstance(origin,dict) or row.get("module") in names or
@@ -126,6 +127,9 @@ def persist_join(conn,report,generated_source,joined_olean,*,
             for row in original_modules:
                 origin=row["original_source_origin"]
                 compiled=compiled_bytes(row["module"])
+                total_compiled+=len(compiled)
+                if total_compiled>1024*1024*1024:
+                    raise JoinStoreError("compiled original module closure exceeds 1 GiB")
                 if sha256(compiled).hexdigest()!=row["olean_sha256"]:
                     raise JoinStoreError("original compiled OLean bytes differ")
                 cur.execute("""
