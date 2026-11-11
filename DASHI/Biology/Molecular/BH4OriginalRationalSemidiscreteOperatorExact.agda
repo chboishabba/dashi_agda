@@ -93,3 +93,35 @@ rational369SemidiscreteAt inputs site species = refl
 -- can now consume this computed RHS. The six left-kernel/edge-zero
 -- witnesses remain an original-source proof obligation, NOT fields
 -- silently inhabited by a synthetic or guessed matrix.
+
+------------------------------------------------------------------------
+-- Consumption of the existing rational-to-Bishop six-axis owner.
+-- All six ORIGINAL left-kernel/edge-cancellation witnesses remain
+-- explicit. A numeric operator does not manufacture source evidence.
+------------------------------------------------------------------------
+
+import Real as BishopReal
+import DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact
+  as BishopLift
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact
+  as Embed
+
+computedRationalRHSConservationLiftsToBishop :
+  (inputs : Rational369SemidiscreteInputs)
+  (sourceWeights : Matrix 6 29) →
+  ((axis : F.Fin 6) →
+    Q._≃_
+      (BishopLift.sourceSpatialWeighted
+        (V.lookup sourceWeights axis)
+        (rational369SemidiscreteRHS inputs))
+      Q.0ℚᵘ) →
+  (axis : F.Fin 6) →
+  BishopReal._≃_
+    (BishopLift.bishopSpatialWeighted
+      (V.map Embed.embed (V.lookup sourceWeights axis))
+      (V.map (V.map Embed.embed)
+        (rational369SemidiscreteRHS inputs)))
+    (Embed.embed Q.0ℚᵘ)
+computedRationalRHSConservationLiftsToBishop inputs sourceWeights conserved =
+  BishopLift.original369SixRationalConservationLiftsToBishop
+    sourceWeights (rational369SemidiscreteRHS inputs) conserved
