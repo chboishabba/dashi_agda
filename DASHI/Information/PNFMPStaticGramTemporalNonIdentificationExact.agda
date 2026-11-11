@@ -8,7 +8,7 @@ module DASHI.Information.PNFMPStaticGramTemporalNonIdentificationExact where
 -- empirical MP null or promotion is produced by this finite countermodel.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
 open import Data.Empty using (⊥)
 open import Data.Product using (_×_; _,_)
 
@@ -109,8 +109,8 @@ noRechartedTwoColumnSpectralDecoder classify =
 -- Specific sample values: both matrices have column totals (2,2)
 -- and Gram [[2,0],[0,2]], yet differ in chronological structure.
 totalsExactlyTwo :
-  columnTotal Time.alternating firstColumn ≡ 2
-  × columnTotal Time.alternating secondColumn ≡ 2
+  (columnTotal Time.alternating firstColumn ≡ 2)
+  × (columnTotal Time.alternating secondColumn ≡ 2)
 totalsExactlyTwo = refl , refl
 
 offDiagonalGramZero :
