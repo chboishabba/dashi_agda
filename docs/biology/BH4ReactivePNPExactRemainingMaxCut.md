@@ -1273,3 +1273,12 @@ law or a conditional record.
 **Current proof status:** new owners and Golden import are source-written; the available runtime has neither Agda nor Nix, so kernel checking at the exact head remains OPEN. No physical S0.01–04, P0.05–08, or P1–P3 source gate is discharged by the abstract bridge.
 
 **Acceptance commands:** `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPSameSourcePaidEnergyExact.agda`, `scripts/run_agda29_parallel_check.sh DASHI/Biology/BH4PNPOrderedEnergyHistoryExact.agda`, `scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda`.
+
+
+## 2026-11-11 highest-alpha P1 native-route/energy source identity weld
+
+**Source-written owner:** `DASHI/Biology/BH4PNPSameSourcePaidEnergyExact.agda` now contains `allSameSourceBH4PNPRouteAndPaidEnergy`. This composes the **existing** `BH4PNPSamePhysicalHistoryBridgeExact.physicalTrajectoryHasSourcePermittedRoute` with the exact same controlled-history BH4 projection, PNP projection and conditional energy-order certificate. The four conclusions use one selected `SameSourceBH4PNPModel.physicalRun`, not a separate toy state or an invented graph. The route type is the actual `BH4SpatialConnectivityCirculationExact.FlowPath` of source-permitted forward connections. It does not prove membranes are passable or rates measured. It adds no new evidence inhabitant.
+
+**Verification boundary:** the source was committed and re-fetched from the BH4 branch; Agda and Nix executables are absent in the current runtime, so no exact-head kernel check was performed. Neither import presence nor absence of holes implies type acceptance. Original 29×12 source and rates, six-face work, positive physical-step proof, genuine Bishop real energy instantiation, #1471 native geometry reconciliation and empirical P2/P3 remain OPEN.
+
+**Next actual cut:** run the Agda root in a Nix/Agda 2.9 environment, fix first type error rather than adding another abstract ledger; then instantiate `SameSourcePaidEnergyModel` against an original source-paid 27×29 chemical/SG/Poisson state with certified nonzero boundary/residual work. The existing CHNOP five-axis simplex bridge is accounting only and must not be mistaken for Brouwer compactness.
