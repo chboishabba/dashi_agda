@@ -28,6 +28,9 @@ import DASHI.Governance.BlackGirlsMatterDenominatorSensitivityExact as Sensitivi
 import DASHI.Governance.BlackGirlsMatterSourceBoundRateOrderExact as RateOrder
 import DASHI.Governance.SituatedCortisolAggregateNonIdentificationExact as CortisolAggregate
 import DASHI.Governance.SituatedCortisolTrajectoryAdmissionExact as CortisolPerson
+import DASHI.Governance.SituatedCortisolScaleIndexedAssayExact as AssayScale
+import DASHI.Governance.SituatedHPARegimeFlexibilityExact as HPARegime
+import DASHI.Governance.SituatedCortisolPNFAdmissibilityExact as PNF
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -133,6 +136,27 @@ record LegalCrossCaseCut : Set₁ where
         {t : Time} →
       CortisolPerson.PersonSpecificAdmission model t →
       CortisolPerson.withinPersonCalibrationEvidence model
+    integratedHairScaleCannotRecoverAcutePoint :
+      INF.FactorsThrough
+        AssayScale.twoPointIntegral AssayScale.acutePoint → ⊥
+    sameExposureCannotIdentifyHPARegime :
+      INF.FactorsThrough
+        HPARegime.sameNominalExposure HPARegime.regime → ⊥
+    preciselyKnownBiomarkerCannotAttributeDefendant :
+      INF.FactorsThrough
+        PNF.measurementValue PNF.causalAttribution → ⊥
+    causalGovernanceRequiresCounterfactual :
+      ∀ {Person Case : Set}
+        {audit : PNF.ExternalGovernanceAudit Person Case}
+        {person : Person} {legalCase : Case} →
+      PNF.SourcePaidCausalFinding audit person legalCase →
+      PNF.validatedCounterfactualComparison audit person legalCase
+    legalGovernanceRequiresAdjudication :
+      ∀ {Person Case : Set}
+        {audit : PNF.ExternalGovernanceAudit Person Case}
+        {person : Person} {legalCase : Case} →
+      PNF.SeparatelyAdjudicatedLegalClaim audit person legalCase →
+      PNF.legallyAuthorisedDetermination audit legalCase
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -170,4 +194,9 @@ crenshawLegalCrossCaseCut =
     CortisolAggregate.aggregateEnvironmentalExposureCannotDeterminePerson
     CortisolPerson.aggregateLoadDoesNotFixAppraisal
     CortisolPerson.admissionRequiresIndividualCalibration
+    AssayScale.longWindowCannotIdentifyAcuteSurge
+    HPARegime.exposureCannotDetermineHPARegime
+    PNF.pointIdentifiedBiomarkerDoesNotIdentifyCause
+    PNF.causalFindingRequiresCounterfactual
+    PNF.legalFindingRequiresLegalAuthority
     refl refl
