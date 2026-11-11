@@ -125,3 +125,77 @@ def check_native_export(export: PendingExport, executable: Path, *,
             expected_executable_sha256, str(executable),
             tuple(arguments), sha256(stdout.read_bytes()).hexdigest(),
             sha256(stderr.read_bytes()).hexdigest())
+
+
+def check_native_export_nanoda(export: PendingExport, executable: Path, *,
+                              expected_executable_sha256: str,
+                              timeout: int = 180,
+                              max_output_bytes: int = 8_000_000
+                              ) -> ExternalCheckReceipt:
+    """Run pinned Rust nanoda with its documented config-file interface.
+
+    This never grants kernel certification, even when nanoda succeeds. The
+    executable SHA-256 is a necessary byte pin, not full closure attestation.
+    """
+    import json
+    from run_lean_world_real_semantic_acceptance import nanoda_policy
+    if not isinstance(export, PendingExport):
+        raise CheckerError("PendingExport required")
+    if sha256(export.artifact).hexdigest() != export.artifact_sha256:
+        raise CheckerError("export content identity mismatch")
+    if (not isinstance(expected_executable_sha256, str) or
+        not HEX64.fullmatch(expected_executable_sha256)):
+        raise CheckerError("missing immutable Rust checker digest")
+    if not isinstance(timeout, int) or not 1 <= timeout <= 1800:
+        raise CheckerError("invalid checker timeout")
+    if not isinstance(max_output_bytes, int) or max_output_bytes <= 0:
+        raise CheckerError("invalid checker output budget")
+    executable = Path(executable).resolve(strict=True)
+    if not executable.is_file() or not os.access(executable, os.X_OK):
+        raise CheckerError("Rust checker executable unavailable")
+    if sha256(executable.read_bytes()).hexdigest() != expected_executable_sha256:
+        raise CheckerError("Rust checker executable pin mismatch")
+    with tempfile.TemporaryDirectory(prefix="dashi-rust-nanoda-") as td:
+        root=Path(td)
+        export_path=root/"original.ndjson"
+        export_path.write_bytes(export.artifact)
+        policy=nanoda_policy()
+        policy["export_file_path"]=str(export_path)
+        policy["use_stdin"]=False
+        config_path=root/"checker-config.json"
+        config_path.write_text(json.dumps(policy,sort_keys=True))
+        out_path=root/"stdout"
+        err_path=root/"stderr"
+        def cap_logs():
+            resource.setrlimit(resource.RLIMIT_FSIZE,
+                               (max_output_bytes,max_output_bytes))
+        try:
+            with out_path.open("wb") as out, err_path.open("wb") as err:
+                result=subprocess.run(
+                    (str(executable),str(config_path)),
+                    cwd=td,
+                    env={"PATH":"/usr/bin:/bin","HOME":td,
+                         "LC_ALL":"C","TZ":"UTC"},
+                    stdin=subprocess.DEVNULL,stdout=out,stderr=err,
+                    check=False,timeout=timeout,preexec_fn=cap_logs)
+        except (OSError,subprocess.TimeoutExpired) as exc:
+            raise CheckerError("Rust checker unavailable or timed out") from exc
+        if (out_path.stat().st_size >= max_output_bytes or
+            err_path.stat().st_size >= max_output_bytes or
+            result.returncode == -signal.SIGXFSZ):
+            raise CheckerError("Rust checker output exceeded budget")
+        if result.returncode:
+            raise CheckerError("Rust checker rejected native export")
+        stdout=out_path.read_bytes()
+        if b"Checked " not in stdout or b" no errors" not in stdout:
+            raise CheckerError("Rust checker returned no explicit success statement")
+        if sha256(executable.read_bytes()).hexdigest()!=expected_executable_sha256:
+            raise CheckerError("Rust checker changed during execution")
+        if sha256(export_path.read_bytes()).hexdigest()!=export.artifact_sha256:
+            raise CheckerError("Rust checker modified original export")
+        return ExternalCheckReceipt(
+            export.handoff_key,export.artifact_sha256,
+            expected_executable_sha256,str(executable),
+            ("nanoda-config",sha256(config_path.read_bytes()).hexdigest()),
+            sha256(stdout).hexdigest(),
+            sha256(err_path.read_bytes()).hexdigest())
