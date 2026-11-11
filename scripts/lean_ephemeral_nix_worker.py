@@ -27,6 +27,8 @@ import sys
 import tempfile
 import time
 
+from lean_world_native_v3_export import export_native, store_native, NativeExportError
+
 from lean_remote_source_inventory import (
     REPO_RE, COMMIT_RE, SHA_RE, RemoteError, request_json, source_blob,
 )
@@ -237,7 +239,9 @@ def execute_lean(lean: str, root: Path, target: str, *,
 
 def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                timeout=120, memory_mib=4096, dependency_closure_id="",
-               lean_path="", opener=None, token=None, checker=execute_lean) -> dict:
+               lean_path="", opener=None, token=None, checker=execute_lean,
+               native_declaration="", native_out=None, export_command=("lean4export",),
+               exporter=export_native) -> dict:
     start = time.perf_counter()
     receipt = {"schema": "dashi-lean-ephemeral-check-v1",
                "repository": repo, "revision": rev, "target": target,
@@ -264,7 +268,35 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
             receipt["status"] = ("lean-module-checked" if
                                  result["exit_code"] == 0 and result["olean_emitted"]
                                  else "lean-check-failed")
-    except (RemoteError, WorkerError, OSError, UnicodeError, ValueError) as exc:
+            if native_declaration:
+                if receipt["status"] != "lean-module-checked":
+                    raise WorkerError("refuse native export of failed Lean module")
+                if native_out is None:
+                    raise WorkerError("native export requires persistent output directory")
+                # Export before TemporaryDirectory cleans up the pinned sources.
+                # The compiled target must be available under its module name.
+                module = ".".join(Path(target).with_suffix("").parts)
+                if not MODULE_RE.fullmatch(module):
+                    raise WorkerError("target path does not form a Lean module name")
+                compiled = root / ".lean-output" / "target.olean"
+                if not compiled.is_file():
+                    raise WorkerError("native export needs compiled target olean")
+                olean = root.joinpath(*module.split(".")).with_suffix(".olean")
+                olean.parent.mkdir(parents=True, exist_ok=True)
+                olean.write_bytes(compiled.read_bytes())
+                raw, inspected = exporter(
+                    root, module, native_declaration,
+                    command=tuple(export_command), lean_path=lean_path,
+                    timeout=timeout, memory_mib=memory_mib)
+                native = store_native(
+                    raw, inspected, Path(native_out),
+                    repository=repo, revision=rev, module=module,
+                    declaration=native_declaration,
+                    source_closure=sources, toolchain=version,
+                    dependency_closure_id=dependency_closure_id)
+                receipt["native_export"] = native
+                receipt["declaration_ast_exported"] = True
+    except (RemoteError, WorkerError, NativeExportError, OSError, UnicodeError, ValueError) as exc:
         receipt["error"] = f"{type(exc).__name__}: {exc}"
     receipt["total_seconds"] = round(time.perf_counter() - start, 4)
     return receipt
@@ -280,15 +312,25 @@ def main() -> int:
     p.add_argument("--memory-mib", type=int, default=4096)
     p.add_argument("--dependency-closure-id", default="")
     p.add_argument("--lean-path", default="")
+    p.add_argument("--native-declaration", default="",
+                   help="exact Lean declaration to export from checked module")
+    p.add_argument("--native-out", type=Path,
+                   help="persistent artifact directory outside ephemeral workspace")
+    p.add_argument("--export-bin", default="lean4export")
+    p.add_argument("--export-arg", action="append", default=[])
     args = p.parse_args()
     result = run_worker(args.repository, args.revision, args.target,
                         lean=args.lean, timeout=args.timeout,
                         memory_mib=args.memory_mib,
                         dependency_closure_id=args.dependency_closure_id,
                         lean_path=args.lean_path,
+                        native_declaration=args.native_declaration,
+                        native_out=args.native_out,
+                        export_command=(args.export_bin, *args.export_arg),
                         token=os.environ.get("GITHUB_TOKEN"))
     print(json.dumps(result, sort_keys=True))
-    return 0 if result["status"] == "lean-module-checked" else 2
+    return 0 if result["status"] == "lean-module-checked" and (
+        not args.native_declaration or result["declaration_ast_exported"]) else 2
 
 
 if __name__ == "__main__":
