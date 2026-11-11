@@ -71,3 +71,22 @@ The arithmetic `196884 = 10*3^9+54` by itself does not produce a 54-dimensional 
 - **P1:** keep R563 same-family continuum noncollapse and R571 compact-simple-group quantitative extensions independent.
 
 **Acceptance:** handoff note; no new Clay theorem, no Agda kernel claim. Max-cut principle is to prevent unearned promotion of finite/structural equalities to continuum physical authority.
+
+
+## 2026-11-11 implementation: original Wilson P0 constant-mode centering
+
+Committed `DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringExact.agda`, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+This uses the **actual original** side-four SU(N) Wilson Gibbs/Haar and its two-link native blocking map versus the **independent actual** side-two bare Wilson Gibbs/Haar, with original numerator scale and addition laws, rather than an invented linear functional.
+
+- `weightedCrossShiftCancellation`: scalar bilinear cross-numerator identity, from the selected real-ring distributivity, commutativity, associativity and subtractive cancellation
+- `fineConstantNumerator` / `bareConstantNumerator`: same-original-source Haar numerator of a constant scalar insertion equals scalar times that source's actual partition
+- `fineShiftNumerator` / `bareShiftNumerator`: actual source-specific scalar addition laws
+- `originalWilsonCrossNumeratorConstantShift`: **unconditional source-written** `X(F + c * 1) = X(F)` for every original coarse test and scalar
+- `originalWilsonCrossNumeratorNegativeCentering`: unconditional `X(F + (-c) * 1) = X(F)`
+- `fineNumeratorCongruent`, `bareNumeratorCongruent`, `crossNumeratorCongruent`: literal pointwise-to-Haar integrand congruence, so no hidden function-extensionality axiom
+- `originalWilsonCrossNumeratorSubtractionCentering`: `X(F-c)=X(F)`, taking the standard `x-c = x+(-c)*1` scalar identity as an **explicit authority argument**, because the currently selected `RealAnalysisAxioms` module does not provide that particular additive-inverse equation
+
+The stronger centered one-sided formula `X(F)=Z_b N_f(F-E_bF)` is **not yet promoted** merely from the previous centering lemma: it also needs a proof that the selected division operation satisfies `N_b(F)=E_b[F] Z_b` and a genuine bare centered numerator cancellation using the selected scalar laws. The existing normalized expectation is abstracted by a `divide` function, so standard quotient cancellation must be justified, not smuggled in.
+
+Next physical producer remains a source-native nonconstant plaquette bound on `X(F_p)`, followed by actual scale/volume error propagation. **No uniform decay rate is claimed.** Kernel Agda 2.9 receipt remains outstanding.
