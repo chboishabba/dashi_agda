@@ -47,11 +47,11 @@ CREATE INDEX IF NOT EXISTS lean_world_occurrence_fibre_cursor_idx
 -- silently corrupt both fibre counts. Metadata/proof alterations must also
 -- create an explicit new source receipt, not rewrite earlier provenance.
 CREATE OR REPLACE FUNCTION lean_world_reject_occurrence_update()
-RETURNS trigger LANGUAGE plpgsql AS $
+RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
   RAISE EXCEPTION 'Lean-world occurrence receipts are immutable; delete and reinsert in one transaction';
 END
-$;
+$$;
 DROP TRIGGER IF EXISTS lean_world_occurrence_immutable_trigger
   ON lean_world_occurrence;
 CREATE TRIGGER lean_world_occurrence_immutable_trigger
@@ -61,11 +61,11 @@ FOR EACH ROW EXECUTE FUNCTION lean_world_reject_occurrence_update();
 -- TRUNCATE does not fire row DELETE triggers or the DELETE transition
 -- table and would corrupt stored occurrence_count. Reject it explicitly.
 CREATE OR REPLACE FUNCTION lean_world_reject_occurrence_truncate()
-RETURNS trigger LANGUAGE plpgsql AS $
+RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
   RAISE EXCEPTION 'Lean-world occurrence TRUNCATE is forbidden; use batched DELETE';
 END
-$;
+$$;
 DROP TRIGGER IF EXISTS lean_world_occurrence_no_truncate
   ON lean_world_occurrence;
 CREATE TRIGGER lean_world_occurrence_no_truncate
