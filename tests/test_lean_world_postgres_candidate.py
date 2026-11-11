@@ -98,6 +98,25 @@ class CandidateDatabase(unittest.TestCase):
             persist_candidate_world(self.conn,w)
         self.assertEqual(self.scalar("SELECT count(*) FROM lean_world_occurrence"),0)
 
+    def test_candidate_provenance_is_append_only(self):
+        persist_candidate_world(self.conn,world(row("A"),row("B",deps=("A",))))
+        for command in (
+            "UPDATE lean_world_candidate_receipt SET source_path='evil'",
+            "DELETE FROM lean_world_candidate_receipt",
+            "TRUNCATE lean_world_candidate_receipt",
+            "UPDATE lean_world_candidate_dependency SET dep_declaration='evil'",
+            "DELETE FROM lean_world_candidate_dependency",
+            "TRUNCATE lean_world_candidate_dependency"):
+            with self.subTest(command=command):
+                with self.assertRaises(Exception):
+                    with self.conn.transaction():
+                        with self.conn.cursor() as cur:
+                            cur.execute(command)
+        self.assertEqual(self.scalar(
+            "SELECT count(*) FROM lean_world_candidate_receipt"),2)
+        self.assertEqual(self.scalar(
+            "SELECT count(*) FROM lean_world_candidate_dependency"),1)
+
     def test_rebind_dependency_history_rejected(self):
         persist_candidate_world(self.conn,world(row("A"),row("B")))
         changed=world(row("A"),row("B",deps=("A",)))
