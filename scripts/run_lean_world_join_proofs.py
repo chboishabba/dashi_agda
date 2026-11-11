@@ -257,15 +257,15 @@ def lean_name(name):
         raise JoinError("invalid declaration: "+name)
     return "`"+name
 
-def generate_joins(root_module,donors):
+def generate_joins(root_module,donors,*,join_namespace="DASHIJoined"):
     """Lean elaboration constructs actual kernel-checked theorem declarations.
 
     Theorem type/universes are taken from the ORIGINAL imported environment;
     the proof is a direct Expr.const pointing to that donor. No assumptions
     about textual signatures, rewrite equivalence or reduced normal forms.
     """
-    if not MODULE.fullmatch(root_module):
-        raise JoinError("invalid root")
+    if not MODULE.fullmatch(root_module) or not MODULE.fullmatch(join_namespace):
+        raise JoinError("invalid root or destination theorem namespace")
     if not donors or len(donors)>256 or len(set(donors))!=len(donors):
         raise JoinError("invalid selected donor set")
     lines=[
@@ -276,7 +276,7 @@ def generate_joins(root_module,donors):
     ]
     for i,donor in enumerate(donors):
         if not MODULE.fullmatch(donor):raise JoinError("invalid donor theorem name")
-        alias="DASHIJoined.join"+str(i)
+        alias=join_namespace+".join"+str(i)
         lines.extend([
             "run_cmd do",
             "  let donor : Name := "+lean_name(donor),
