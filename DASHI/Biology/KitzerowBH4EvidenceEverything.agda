@@ -17,6 +17,7 @@ import DASHI.Biology.Molecular.BH4RationalNativeBondCancellationExact
 import DASHI.Biology.Molecular.BH4RationalRateWeightedSourceConservationExact
 import DASHI.Biology.Molecular.BH4RationalNativeSourceCompositionExact
 import DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact
+import DASHI.Biology.Molecular.BH4OriginalNative369IncidenceExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4QuantitativeAcquisitionExact
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact
