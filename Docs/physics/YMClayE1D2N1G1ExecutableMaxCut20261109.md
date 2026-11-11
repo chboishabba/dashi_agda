@@ -226,3 +226,16 @@ Added `sourceE1FineBlockedCovariance`, `sourceE1FineBlockedCovarianceIsR445`, an
 This pays the finite *E1-selected covariance source identity*, not the analytic source-J differentiation, physical decay, UV continuum convergence, or a comparison to the independent bare cutoff-1 Wilson measure. The latter still requires actual quantitative moment discrepancies on F, G, and FG or a continuum RG alternative. This prevents inadvertent reuse of a bare-closure assumption in B1/D2.
 
 **All source-written; Agda typecheck and transitive physical authority receipts pending.**
+
+
+## 2026-11-11 Quantitative three-moment original RG residual (source-written)
+
+New `YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact.agda`, imported by `YMClayOriginalWilsonPhysicalRegression.agda`, reuses the CMP116 `BalabanDecoupledActivityHessian.productHeadTelescope`, the existing marked-product `absNonnegative`, and the real-analysis absolute-value/monotonicity axioms. It proves the independent two-factor difference majorant and `threeMomentCovarianceErrorBound` for the **explicit rearranged moment residual**
+`(E_eff(FG)-E_bare(FG)) - (E_eff(F)E_eff(G)-E_bare(F)E_bare(G))`.
+The concrete same-source `originalR445ThreeMomentResidualBound` instantiates this on the actual R445 effective coarse and independent original bare side-two Wilson expectations.
+
+**Quantitative inequality:** given |Δ(FG)|≤ε_FG, |Δ(F)|≤ε_F, |Δ(G)|≤ε_G, |E_eff(G)|≤M_eff,G, |E_bare(F)|≤M_bare,F, then the absolute explicit three-moment residual is ≤ ε_FG + ε_F M_eff,G + M_bare,F ε_G.
+
+**Important precise distinction:** the subtraction-interchange identity `(a-b)-(c-d) = (a-c)-(b-d)`, needed to rewrite the difference of *connected covariances* into that residual, is not provided as a named theorem in `RealAnalysisAxioms`. Do not treat the current module as a kernel-proven covariance difference bound until that scalar lemma is derived and accepted. The **physical** Wilson RG error bounds ε_F, ε_G, ε_FG and majorants also remain unpaid; the same original Wilson source selection is preserved.
+
+Next true high-alpha target: source-specific CMP109/CMP119 effective-action bounds for the three original coarse Wilson moments with cutoff/volume-uniform physical scaling, then transport via the scalar subtraction-interchange lemma to the same E1 source mixed-J11/CMP116 covariance. The R576 polymer and R577/H6/G1 cuts are unchanged. Agda 2.9 acceptance remains unverified.
