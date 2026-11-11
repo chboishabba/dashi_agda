@@ -22,8 +22,8 @@ class NativeCheckObservation(unittest.TestCase):
         self.receipt.write_text(json.dumps(sample(self.root)))
         self.spool=self.root/"spool"
 
-    def checker(self, body="pass"):
-        # Test-only executable; demonstrates that exit zero is NOT authority.
+    def checker(self, body="print('Checked 2 declarations with no errors')"):
+        # Test-only config-accepting executable; never proof authority.
         program=self.root/"test-checker.py"
         program.write_text("#!"+sys.executable+"\n"+body+"\n")
         program.chmod(0o700)
@@ -38,6 +38,7 @@ class NativeCheckObservation(unittest.TestCase):
         self.assertFalse(first["world_admitted"])
         data=json.loads(Path(first["checker_observation_path"]).read_text())
         self.assertFalse(data["kernel_certified"])
+        self.assertEqual(data["checker_kind"],"rust-nanoda")
         self.assertEqual(data["artifact_sha256"],
                          json.loads(self.receipt.read_text())["artifact_sha256"])
 
