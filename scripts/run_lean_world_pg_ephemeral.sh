@@ -54,4 +54,8 @@ python3 -m unittest discover -s tests \
   -p 'test_lean_world_postgres_candidate.py' -v
 python3 -m unittest discover -s tests \
   -p 'test_lean_world_source_stream_pg.py' -v
+python3 -m unittest discover -s tests \
+  -p 'test_lean_world_cross_repo_joins.py' -v
+python3 -m unittest discover -s tests \
+  -p 'test_lean_world_compiled_join_store_pg.py' -v
 echo "POSTGRES_MIGRATION_VALIDATED: actual isolated PostgreSQL server, real SQL and data-integrity tests"
