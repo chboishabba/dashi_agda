@@ -28,6 +28,8 @@ import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpCauchy
 import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as RealAxis
 import DASHI.Analysis.BishopComplexFiniteSquareTriangleDifferenceExact as ComplexWing
+import DASHI.Analysis.BishopVanishingDifferenceConvergenceExact as Vanish
+open import Data.Rational.Unnormalised using (0ℚᵘ)
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Moonshine.AbelBishopFactorialComplexImaginaryAxisTwoStepExact as Axis
 import DASHI.Moonshine.AbelBishopFactorialComplexImaginaryAxisSignedTermsExact as Signed
@@ -454,3 +456,98 @@ originalBishopFourFactorialImaginaryTailBound x y count =
       (realFactorImagAbsoluteBound x)
       (imaginaryFactorRealAbsoluteBound y)
       Ann realBnn count count)
+
+
+------------------------------------------------------------------------
+-- TWO COPIES OF THE ORIGINAL FACTORIAL POSITIVE Cauchy tail
+-- converge constructively to zero, with an extracted Bishop modulus.
+------------------------------------------------------------------------
+
+doubleFactorialPositiveTail :
+  BishopReal.ℝ → BishopReal.ℝ → Nat → BishopReal.ℝ
+doubleFactorialPositiveTail x y n =
+  BishopReal._+_
+    (ExpCauchy.absoluteTriangleWingTail x y n)
+    (ExpCauchy.absoluteTriangleWingTail x y n)
+
+doubleFactorialPositiveTailConvergesZero :
+  ∀ x y →
+  BishopSequence._ConvergesTo_
+    (doubleFactorialPositiveTail x y)
+    BishopReal.0ℝ
+doubleFactorialPositiveTailConvergesZero x y =
+  BishopSequence.xₙ→x∧x≃y⇒xₙ→y
+    (BishopSequence.xₙ+yₙ→x₀+y₀
+      (BishopReal.0ℝ ,
+        originalBishopFactorialPositiveTriangleTailVanishes x y)
+      (BishopReal.0ℝ ,
+        originalBishopFactorialPositiveTriangleTailVanishes x y))
+    (BishopP.+-identityʳ BishopReal.0ℝ)
+
+originalBishopDominatedByDoubleFactorialTailVanishes :
+  (x y : BishopReal.ℝ) →
+  (stream : Nat → BishopReal.ℝ) →
+  (∀ n →
+    BishopReal._≤_
+      (BishopReal.∣ stream n ∣)
+      (doubleFactorialPositiveTail x y n)) →
+  BishopSequence._ConvergesTo_ stream BishopReal.0ℝ
+originalBishopDominatedByDoubleFactorialTailVanishes
+  x y stream bounded =
+  Vanish.vanishingDifferenceConvergence
+    (BishopSequence.xₙ≃c⇒xₙ→c
+      (λ {(suc n-1) → BishopP.≃-refl}))
+    (doubleFactorialPositiveTailConvergesZero x y)
+    (λ n →
+      BishopP.≤-trans
+        (BishopP.≤-respˡ-≃
+          (BishopP.∣-∣-cong
+            (let open BishopP.ℝ-Solver in
+             solve 1
+               (λ a → a ⊖ Κ 0ℚᵘ ⊜ a)
+               BishopP.≃-refl (stream n)))
+          (bounded n))
+        (BishopP.x≤∣x∣
+          {x = doubleFactorialPositiveTail x y n}))
+
+originalBishopFactorialComplexWingRealConvergesZero :
+  ∀ x y →
+  BishopSequence._ConvergesTo_
+    (λ n → Complex.re
+      (ComplexWing.upperWingResidual
+        (factorialRealStream x)
+        (factorialImaginaryStream y) n))
+    BishopReal.0ℝ
+originalBishopFactorialComplexWingRealConvergesZero x y =
+  originalBishopDominatedByDoubleFactorialTailVanishes x y
+    (λ n → Complex.re
+      (ComplexWing.upperWingResidual
+        (factorialRealStream x)
+        (factorialImaginaryStream y) n))
+    (λ n →
+      BishopP.≤-trans
+        (ComplexWing.originalBishopComplexWingRealAbsoluteBound
+          (factorialRealStream x)
+          (factorialImaginaryStream y) n)
+        (originalBishopFourFactorialPositiveTailBound x y n))
+
+originalBishopFactorialComplexWingImagConvergesZero :
+  ∀ x y →
+  BishopSequence._ConvergesTo_
+    (λ n → Complex.im
+      (ComplexWing.upperWingResidual
+        (factorialRealStream x)
+        (factorialImaginaryStream y) n))
+    BishopReal.0ℝ
+originalBishopFactorialComplexWingImagConvergesZero x y =
+  originalBishopDominatedByDoubleFactorialTailVanishes x y
+    (λ n → Complex.im
+      (ComplexWing.upperWingResidual
+        (factorialRealStream x)
+        (factorialImaginaryStream y) n))
+    (λ n →
+      BishopP.≤-trans
+        (ComplexWing.originalBishopComplexWingImagAbsoluteBound
+          (factorialRealStream x)
+          (factorialImaginaryStream y) n)
+        (originalBishopFourFactorialImaginaryTailBound x y n))
