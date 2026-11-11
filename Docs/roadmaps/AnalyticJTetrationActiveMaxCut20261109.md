@@ -462,3 +462,15 @@ using **existing** \`BishopComplexReciprocalExact.normSquareReciprocal\` and \`B
 Next, \`originalBishopSelectedChartLogSeries\` and \`originalBishopSelectedChartLogSeriesConverges\` **construct** the actual alternating Bishop-complex logarithmic series limit and a componentwise convergence proof for the normalized displacement \`reciprocalC p nz *C t\`, directly from the original \`AbelBishopLogOnePlusCoefficientDominationExact\` convergence result. This closes a useful **generic relative-radius-to-canonical-series consumer** without inserting an independent \`ComponentwiseAbsoluteSeriesConvergent\` or arbitrary logarithm package.
 
 **Do NOT promote:** still source-written only; a compiled kernel receipt has not been obtained. The selected nonreal exponential fixed point \(p\) and its apartness, original exponential addition identity, complex exp–log analytic inverse, quadratic normal-form remainder and holomorphic Koenigs all remain open. Crucially, this source uses an **exact relative-radius witness** \(N(t)\simeq r^2N(p)\) rather than claiming every point of a fixed disk possesses a uniform exact-norm radius automatically; completing the actual disk application requires constructing a suitable such radius witness (or a bound-based variant).
+
+
+## 2026-11-11 next P1 selected-germ source completion
+
+\`AbelBishopSelectedLogAffineReconstructionExact.agda\` now includes:
+- \`originalBishopSelectedLocalLogGerm\` defining the **actual** \(g(p+t)=p+L(p^{-1}t)\) on the source Bishop-complex carrier for a witnessed nonzero \(p\), original relative norm-square radius \(N(t)\simeq r^2N(p)\), and \(0\le r<1\). The logarithmic increment comes from \`originalBishopLogOnePlusCanonicalLimitOnUnitDisk\`, not an assumed log.
+- \`originalBishopSelectedChartLogIncrementUnique\`, proving the *actual normalized increment* is the unique limit of its original term sequence.
+- \`originalBishopSelectedLocalLogGermIncrementUnique\`, lifting that uniqueness through addition of the same original \(p\), using the source \`addCCongruent\`.
+
+These are **source-written, checker-pending** and do not prove \(\exp_C(g(z))≈_Cz\) or \(\operatorname{Log}(z)=g(z)\). They avoid silently importing the principal log as an authority. The exact relative-radius witness is still a separate user of \(N(p^{-1}t)=N(p)^{-1}N(t)\) and is not automatically generated for every disk point.
+
+**Remaining max-cut priority unchanged:** typecheck/fix exact head; then Bishop factorial-complex exponential identification, Cauchy composition/limit interchange, genuine \(\exp_C L(w)=1+w\), selected nonreal fixed point and exp addition, source contraction/Koenigs limit, global Kneser branch gluing, and real Bishop modular \(j\).
