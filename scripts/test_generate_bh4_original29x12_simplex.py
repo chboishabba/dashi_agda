@@ -113,3 +113,23 @@ def test_original_rational_source_generated_proof_axes_not_reinterpreted_as_meas
     assert "generatedRationalAxes : V.Vec (V.Vec Q.ℚᵘ 29) 6" in lines
     assert "  (rates : V.Vec (V.Vec Q.ℚᵘ 12) 27)" in lines
     assert "  (fluxes : V.Vec (V.Vec Q.ℚᵘ 29) 54)" in lines
+
+
+def test_generated_original_rhs_uses_same_source_stoichiometry_and_native_incidence():
+    from generate_bh4_original29x12_agda import rendered_source_rational_producer
+    lines=rendered_source_rational_producer()
+    assert "generatedRationalStoichiometry : Operator.Matrix 29 12" in lines
+    assert "generatedRationalStoichiometry =" in lines
+    assert "      (V.lookup (V.lookup generatedRationalProducts column) species)" in lines
+    assert "      (V.lookup (V.lookup generatedRationalReactants column) species)))" in lines
+    assert "generatedOriginalRationalInputs fluxes rates =" in lines
+    assert "  NativeGeometry.originalNativeRationalInputs" in lines
+    assert "    fluxes generatedRationalStoichiometry rates" in lines
+    assert "generatedOriginalRationalRHS fluxes rates =" in lines
+    assert "  Operator.rational369SemidiscreteRHS" in lines
+    assert "generatedOriginalRationalRHSAt fluxes rates site species =" in lines
+    assert "  Operator.rational369SemidiscreteAt" in lines
+    # This is a 783-coordinate operator, not a global-zero assumption.
+    assert "  Operator.Matrix 27 12 → Operator.Matrix 27 29" in lines
+    assert not any("source_kinetic_parameters_authenticated = true" in line
+                   for line in lines)
