@@ -141,3 +141,31 @@ Tenet documents `tenet check FILE` and `--fail-on-axiom NAME`:
 https://github.com/keithadler/tenet
 Do not assume Lean 4.28.0's built-in checker has a later command-line mode;
 test exact pinned binaries before setting any authority flag.
+
+## End-to-end candidate-checker observation command (still NOT a proof)
+
+`scripts/run_lean_world_native_check_observation.py` now joins the existing
+export receipt, #1494 immutable native queue, #1495 PendingExport identity
+contract, and pinned checker runner. It invokes `check --fail-on-axiom sorryAx`
+against the exact staged native export, and on exit zero publishes an immutable,
+content-addressed **observation only**. It never creates `BuilderResult`,
+kernel certification, PostgreSQL world admission or an Agda/Lean proof.
+
+```sh
+python3 scripts/run_lean_world_native_check_observation.py \
+  --native-receipt path/to/native-export-receipt.json \
+  --spool path/to/private-immutable-spool \
+  --checker-bin /nix/store/.../bin/tenet \
+  --checker-sha256 <actual-pinned-executable-sha256>
+```
+
+The checker binary path/hash are deliberately operator-provided, not invented
+and not downloaded by this command. The binary's exact Nix closure and checker
+semantics still need independent policy review. Test-only executable success
+is expressly NOT mathematical evidence. Run:
+```sh
+python3 -m unittest discover -s tests -p \
+  'test_lean_world_native_check_observation.py' -v
+```
+These three new regressions are authored but no live exact-head run was
+observed here. Passing the test only shows dataflow and fail-closed status.
