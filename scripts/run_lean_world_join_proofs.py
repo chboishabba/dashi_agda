@@ -379,7 +379,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
         }
         if artifact_consumer is not None:
             artifact_consumer(
-                report,generated,(root/"DASHIJoinBatch.olean").read_bytes())
+                report,generated,(root/"DASHIJoinBatch.olean").read_bytes(),root)
         return report
 
 def main():
@@ -440,7 +440,7 @@ def main():
             plan["source_snapshots"]=[{
                 "repository":args.repository,"revision":args.revision}]
         stored=[]
-        def sink(report,generated,olean):
+        def sink(report,generated,olean,compiled_root):
             if not args.persist_joins:
                 return
             import psycopg
@@ -451,7 +451,8 @@ def main():
                     cur.execute(sql.SQL("SET search_path TO {},pg_catalog").format(
                         sql.Identifier(args.schema)))
                 db.commit()
-                stored.append(persist_join(db,report,generated,olean))
+                stored.append(persist_join(
+                    db,report,generated,olean,compiled_root=compiled_root))
         result=compile_and_join(
             plan,args.lean,args.donor,timeout=args.timeout,
             artifact_consumer=sink)
