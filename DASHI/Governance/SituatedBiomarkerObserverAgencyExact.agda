@@ -52,7 +52,7 @@ record ScopedBiomarkerUse (Subject : Set) (person : Subject) : Set where
     subjectPermission : OptionalBiomarkerPermission choice
     originalConsentProvenance : String
     withdrawalAndRetentionRules : String
-    samplingAndClinicalAuthoritySeparatelyReviewed : Bool
+    clinicalAuthorityPromoted : Bool
     clinicalAuthorityStillNotGranted :
       samplingAndClinicalAuthoritySeparatelyReviewed ≡ false
 
@@ -83,7 +83,7 @@ aliceLoomStillCandidateOnly =
   Alice.corpusLoomCandidateOnlyIsTrue Alice.canonicalAliceBrownCorpusLoom
 
 johnMixedMethodNotForcedSingleNarrative :
-  John.forcedSingleNarrative John.canonicalMixedMethodsIntegration
+  John.MixedMethodsIntegrationReceipt.forcedSingleNarrative John.canonicalMixedMethodsIntegration
     ≡ false
 johnMixedMethodNotForcedSingleNarrative = refl
 
