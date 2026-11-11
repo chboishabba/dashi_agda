@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebr
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
 import DASHI.Physics.YangMills.YMClayE1A3OriginalR445WeightedCrossNumeratorExact as Cross
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
+import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 -- Pure scalar identity: constant-mode cross-numerator terms cancel.
 -- Note that all multiplication is the selected real-ring operation.
@@ -197,6 +198,84 @@ module _
   originalWilsonCrossNumeratorNegativeCentering test center =
     originalWilsonCrossNumeratorConstantShift test (-ℝ center)
 
+  fineNumeratorCongruent :
+    (left right : CoarseTest) →
+    (∀ coarse → left coarse ≡ right coarse) →
+    fineNumerator left ≡ fineNumerator right
+  fineNumeratorCongruent left right pointwise =
+    Finite.haarIntegralCongruent
+      (Push.originalFineIntegrationLaws
+        theory traceData exponential (beta 3) oneLink bilateral divide
+        ordered strictToWeak)
+      (λ fine →
+        Physical.density
+          (Push.originalFineGibbsMeasure
+            theory traceData exponential (beta 3) oneLink bilateral divide)
+          fine
+        *ℝ left
+          (Push.actualBlockedLinkMap
+            theory traceData exponential (beta 3) oneLink bilateral divide
+            fine))
+      (λ fine →
+        Physical.density
+          (Push.originalFineGibbsMeasure
+            theory traceData exponential (beta 3) oneLink bilateral divide)
+          fine
+        *ℝ right
+          (Push.actualBlockedLinkMap
+            theory traceData exponential (beta 3) oneLink bilateral divide
+            fine))
+      (λ fine →
+        cong
+          (λ value →
+            Physical.density
+              (Push.originalFineGibbsMeasure
+                theory traceData exponential (beta 3) oneLink bilateral divide)
+              fine *ℝ value)
+          (pointwise
+            (Push.actualBlockedLinkMap
+              theory traceData exponential (beta 3) oneLink bilateral divide
+              fine)))
+
+  bareNumeratorCongruent :
+    (left right : CoarseTest) →
+    (∀ coarse → left coarse ≡ right coarse) →
+    bareNumerator left ≡ bareNumerator right
+  bareNumeratorCongruent left right pointwise =
+    Finite.haarIntegralCongruent
+      (Original.originalWilsonFiniteIntegrationLaws
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak 1)
+      (λ coarse →
+        Physical.density
+          (Original.originalWilsonMeasure
+            theory traceData exponential beta oneLink bilateral divide 1)
+          coarse *ℝ left coarse)
+      (λ coarse →
+        Physical.density
+          (Original.originalWilsonMeasure
+            theory traceData exponential beta oneLink bilateral divide 1)
+          coarse *ℝ right coarse)
+      (λ coarse →
+        cong
+          (λ value →
+            Physical.density
+              (Original.originalWilsonMeasure
+                theory traceData exponential beta oneLink bilateral divide 1)
+              coarse *ℝ value)
+          (pointwise coarse))
+
+  crossNumeratorCongruent :
+    (left right : CoarseTest) →
+    (∀ coarse → left coarse ≡ right coarse) →
+    X left ≡ X right
+  crossNumeratorCongruent left right pointwise =
+    cong₂
+      (λ fine bare →
+        (fine *ℝ zBare) -ℝ (bare *ℝ zFine))
+      (fineNumeratorCongruent left right pointwise)
+      (bareNumeratorCongruent left right pointwise)
+
   originalWilsonCrossNumeratorSubtractionCentering :
     (test : CoarseTest) (center : ℝ) →
     (scalarSubtract :
@@ -205,9 +284,8 @@ module _
   originalWilsonCrossNumeratorSubtractionCentering
     test center scalarSubtract =
     trans
-      (cong
-        X
-        -- Pointwise equality is passed via numerator congruence below
-        -- rather than assumed as function extensionality.
-        refl)
+      (crossNumeratorCongruent
+        (λ coarse → test coarse -ℝ center)
+        (shiftByConstant test (-ℝ center))
+        (λ coarse → scalarSubtract (test coarse)))
       (originalWilsonCrossNumeratorNegativeCentering test center)
