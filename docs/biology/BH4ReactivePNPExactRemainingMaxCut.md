@@ -1503,3 +1503,18 @@ and no promotion to physical interpretation.
   test: still OPEN.
 No continuous real theorem is inferred from
 exactness of the rational source accounting alone.
+
+
+### 2026-11-11 P0 exact rational-to-Bishop-real finite continuity lift
+
+**New source-written owner:** `DASHI/Biology/Molecular/BH4RationalToBishopFiniteContinuityExact.agda` is now imported into `KitzerowBH4EvidenceEverything.agda` on existing BH4 PR #1454. It reuses the actual pinned `Real` / `RealProperties` Bishop real setoid, `BishopExponentialSeriesConvergenceExact.embed`, and rational `Data.Rational.Unnormalised` operations. The key finite results are `rationalFiniteSumEmbeds`, `weightedRowEmbeds`, `spatialWeightedEmbeds`, `original369RationalZeroDefectImpliesBishopZero`, and `original369SixRationalConservationLiftsToBishop`. Generic indexed proofs recurse on arbitrary row count; their terminal source chart is exactly `Vec (Vec ℚᵘ 29) 27` and exactly six separately supplied weights (C,H,N,O,P,z).
+
+**Mathematical acceptance contract:** a SAME-SOURCE rational `rhs : Vec (Vec ℚᵘ 29) 27` and `weights : Vec (Vec ℚᵘ 29) 6` must be supplied, together with all six `Q._≃_ (sourceSpatialWeighted ... rhs) Q.0ℚᵘ` witnesses. Rational setoid equivalence is used rather than propositional equality of unnormalised fraction representatives. Existing Bishop `⋆-distrib-+`, `⋆-distrib-*`, `⋆-cong`, `+-cong` and `≃-trans` derive the finite Bishop real conserved sum. This is a **finite algebraic conservation transport** and not a proof the genuine real Scharfetter–Gummel flux and mass-action field is the embedding of an arbitrary rational RHS.
+
+**Highest-alpha missing seam:** build the Agda-side source-identity-gated `Q.ℚᵘ` incarnation of the existing exact Python `Fraction` semidiscrete 54-bond / 29×12 RHS, with explicit same-order vector/source certificate and exact six rational zero-sum witnesses; then instantiate this module. The executable Python producer must not be mistaken for an Agda proof inhabitant. Real PNP RHS includes log/exp/Bernoulli transcendental values that need independent finite flux-cancellation/left-kernel proofs and operator continuity; no rational-density claim discharges those by itself.
+
+**Kernel and physical boundary:** source-written, GitHub-readback only; no Agda 2.9 acceptance. The original byte-pinned 29×12 Rhea certificate, positive 29-weight source instance, genuine Bishop-real weighted-simplex compactness, Brouwer fixed point, positive implicit root, measured/source rates, six-face reactive work and physical BH4/PNP/tissue refinement remain OPEN. Reuse existing Bishop sum lemmas instead of introducing independent real axioms. Acceptance:
+```sh
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4RationalToBishopFiniteContinuityExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+```
