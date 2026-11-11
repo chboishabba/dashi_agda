@@ -283,7 +283,8 @@ def main() -> None:
         encoding="utf-8").splitlines() if line.strip()]
     frame_audit = census.check(json.loads(args.frame.read_text(encoding="utf-8")), rows,
                  args.expected_frame_sha256,
-                 args.intervention_date, args.intervention_receipt)
+                 args.intervention_date, args.intervention_receipt,
+                 args.focus)
     result = analyse_dual(
         rows, args.focus, args.intervention_date,
         args.intervention_receipt, source_root=args.source_root)
