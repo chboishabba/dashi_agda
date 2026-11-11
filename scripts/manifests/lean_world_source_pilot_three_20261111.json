@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "mode": "source-bytes-no-independent-checker",
+  "repositories": [
+    {
+      "repository": "leanprover/lean4export",
+      "revision": "d065b0009aed0520e9e99752847a33b337661690",
+      "class": "small"
+    },
+    {
+      "repository": "leanprover-community/batteries",
+      "revision": "4af7237d146261353907b06a01b6f3fc06cfa067",
+      "class": "medium"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "revision": "f5968138493f85bdf0651647a4f829c63175874e",
+      "class": "large"
+    }
+  ]
+}
