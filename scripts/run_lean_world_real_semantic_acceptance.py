@@ -174,7 +174,7 @@ def main_run(output_dir: Path, *, timeout=600):
                 "sha256":sha256(source_bytes).hexdigest(),
                 "size":len(source_bytes),
                 "git_blob":sha1(b"blob "+str(len(source_bytes)).encode()+
-                                b"\\0"+source_bytes).hexdigest()
+                                b"\0"+source_bytes).hexdigest()
             })
             type_node=json.loads(c.canonical_type.decode("utf-8"))
             dependency_names=(set(c.direct_constants)|
@@ -210,9 +210,9 @@ def main_run(output_dir: Path, *, timeout=600):
             "source_complete":True,"skipped_sources":0,
             "admitted_source_occurrences":len(source_rows)
         })
-        source_payload=("".join(json.dumps(x,sort_keys=True)+"\\n"
+        source_payload=("".join(json.dumps(x,sort_keys=True)+"\n"
                               for x in source_rows)).encode()
-        export_payload=("".join(json.dumps(x,sort_keys=True)+"\\n"
+        export_payload=("".join(json.dumps(x,sort_keys=True)+"\n"
                               for x in export_rows)).encode()
         output_dir.mkdir(parents=True,exist_ok=True)
         from lean_world_atomic_spool import publish_immutable
