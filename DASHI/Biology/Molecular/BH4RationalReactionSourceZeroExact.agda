@@ -20,6 +20,7 @@ import DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact as Lift
 import DASHI.Biology.Molecular.BH4RationalFiniteFubiniExact as Fubini
 import DASHI.Biology.Molecular.BH4NativeTransportRationalZeroExact as NativeZero
 import DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact as Compose
+import DASHI.Biology.Molecular.BH4OriginalComputedRationalRHSSplitExact as Split
 
 -- Each source weight scales a *whole finite reaction column*.
 reactionTerms :
@@ -104,11 +105,11 @@ reactionTermColumnFactors
     (QP.≃-trans
       (QP.+-cong
         (QP.≃-reflexive
-          (cong (Q._*_ w)
-            (NativeZero.lookupZipAdd
-              (V.zipWith Q._*_ row rates)
-              (V.replicate {n = _} Q.0ℚᵘ)
-              column)))
+          (trans
+            (NativeZero.lookupMapExact
+              (Q._*_ w) (V.zipWith Q._*_ row rates) column)
+            (cong (Q._*_ w)
+              (Split.lookupZipWith Q._*_ row rates column))))
         (reactionTermColumnFactors weights matrix rates column))
       (let open Solver in
        solve 4
@@ -137,7 +138,7 @@ oneSiteRationalReactionZero :
     (Lift.sourceWeightedRow weights
       (V.map (λ row → Op.rationalDot row rates) matrix))
     Q.0ℚᵘ
-oneSiteRationalReactionZero weights matrix rates columnZero =
+oneSiteRationalReactionZero {reactions = reactions} weights matrix rates columnZero =
   QP.≃-trans
     (weightedReactionAsDoubleSum weights matrix rates)
     (QP.≃-trans
@@ -146,7 +147,7 @@ oneSiteRationalReactionZero weights matrix rates columnZero =
       (QP.≃-trans
         (Fubini.qFiniteSumCong
           (Fubini.qColumnTotals (reactionTerms weights matrix rates))
-          (V.replicate {n = _} Q.0ℚᵘ)
+          (V.replicate {n = reactions} Q.0ℚᵘ)
           (λ column →
             QP.≃-trans
               (reactionTermColumnFactors weights matrix rates column)
@@ -156,4 +157,4 @@ oneSiteRationalReactionZero weights matrix rates columnZero =
                  solve 1
                    (λ rate → (Κ Q.0ℚᵘ ⊗ rate) ⊜ Κ Q.0ℚᵘ)
                    QP.≃-refl (V.lookup rates column)))))
-        (Fubini.qSumReplicateZero _)))
+        (Fubini.qSumReplicateZero reactions)))
