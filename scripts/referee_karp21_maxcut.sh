@@ -21,30 +21,53 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 
 case "$mode" in
-  golden|e20|all|preflight) ;;
+  golden|e20|all|preflight|kernel-cut) ;;
   *)
-    echo "Usage: $0 {preflight|golden|e20|all}" >&2
+    echo "Usage: $0 {preflight|golden|e20|all|kernel-cut}" >&2
     exit 2
     ;;
 esac
 
-if [[ "$mode" != "preflight" ]] && ! command -v agda >/dev/null 2>&1; then
-  echo "BLOCKED: agda executable unavailable. No kernel proof receipt." >&2
+# Fail closed only after checking ALL supported Agda sources.  The
+# previous guard required 'agda' on PATH *before* AGDA_BIN/Nix resolution,
+# incorrectly blocking the repository's configured Nix-only Agda 2.9.
+if [[ -z "${AGDA_BIN:-}" ]] &&
+   [[ -x "/nix/store/jv7cagyh8wm4cw8j94z5s2ffqmjv10dq-Agda-2.9.0-bin/bin/agda" ]]; then
+  export AGDA_BIN="/nix/store/jv7cagyh8wm4cw8j94z5s2ffqmjv10dq-Agda-2.9.0-bin/bin/agda"
+fi
+if [[ "$mode" != "preflight" ]] &&
+   ! { [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]] ||
+       command -v agda >/dev/null 2>&1 ||
+       command -v nix >/dev/null 2>&1; }; then
+  echo "BLOCKED: neither executable AGDA_BIN, agda on PATH, nor Nix is available. No kernel proof receipt." >&2
   exit 127
 fi
 
 printf 'Repository: %s\n' "$repo_root"
 printf 'Referee revision: '
 git rev-parse HEAD
-if command -v agda >/dev/null 2>&1; then
+if [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]]; then
+  printf 'Agda version: '
+  "$AGDA_BIN" --version
+elif command -v agda >/dev/null 2>&1; then
   printf 'Agda version: '
   agda --version
+elif command -v nix >/dev/null 2>&1; then
+  printf 'Agda version: via Nix wrapper (checked at target execution)\n'
 else
   # The Python/static preflight must run even without Agda installed.
   # All kernel modes have already failed closed above.
   printf 'Agda version: unavailable (preflight-only; no kernel receipt)\n'
 fi
 printf 'Mode: %s\n' "$mode"
+
+# Focused kernel cut must not be gated behind the complete independent
+# Python test corpus. Agda itself remains strictly fail-closed.
+if [[ "$mode" == "kernel-cut" ]]; then
+  export DASHI_AGDA_RSS_LIMIT_MB="${DASHI_AGDA_RSS_LIMIT_MB:-16384}"
+  # The check_agda function is defined below; source checks are
+  # invoked after that definition.
+else
 
 # This source/bitword preflight is independent of the Agda kernel.
 # It catches actual codec mismatches and stdlib argument-arity mistakes.
@@ -95,6 +118,8 @@ python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
 
+fi # independent preflight (skipped for kernel-cut)
+
 if [[ "$mode" == "preflight" ]]; then
   echo "PREFLIGHT ONLY: no Agda kernel acceptance or machine clock."
   exit 0
@@ -131,6 +156,31 @@ check_agda() {
   fi
   printf 'ACCEPTED BY AGDA: %s\n' "$source"
 }
+
+# Focused direct kernel adjudication, intentionally WITHOUT the whole
+# Python preflight or the large Golden root. The original runtime and
+# the new F2/G3 source obligations are checked in dependency order.
+# This is not an acceptance receipt until every check_agda succeeds.
+if [[ "$mode" == "kernel-cut" ]]; then
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePayloadExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeUnsignedEndpointBitReaderExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryEndpointRawEdgeStreamExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityMachineExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryAdderWidthBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeSignedLedgerWidthBudgetExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeSignedGammaInputChargeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeRawEdgeInputChargeExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeFullEdgeFieldInputBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphEdgeFieldWordBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
+  echo "KERNEL CUT ACCEPTED AT EXACT LOCAL HEAD: F2/G3 source owners only."
+  exit 0
+fi
 
 if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   for root in \
