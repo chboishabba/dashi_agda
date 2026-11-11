@@ -596,3 +596,36 @@ selected 27×29 real-valued SG transport law with original
 biophysical boundary conditions, verified real-space
 simplex/Brouwer proof, SAME physical object BH4/PNP/tissue
 one-step commutation, and independent longitudinal receipts.
+
+
+### 2026-11-11 cross-PR original 162 local source-continuity equations
+
+Companion PR #1454 upgraded
+`original_closed_rational_semidiscrete_conservation`
+from global CHNOP/signed-charge cancellation to **all 162
+per-voxel six-coordinate finite-volume continuity equations**
+on the exact same 27 original voxels, 54 physical native
+internal bonds, 29 finite Rhea species, and 12 original
+reaction columns. For arbitrary *supplied rational*
+bond rates and reaction rates the exact RHS is
+`RHS[v,s]=source[v,s]-div_native[v,s]`,
+and the six original atom/charge coordinates satisfy
+`weightedRHS[v]+weightedDiv[v]=weightedSource[v]=0`
+at every site. The returned `Fraction` receipt
+includes the complete 27×6 divergence, source,
+continuity residual, and the 783-coordinate RHS.
+
+An independent original source-checker hardening rejects
+zero, negative, fractional and Boolean gross participant
+multiplicities before adopting a finite Rhea participant.
+No original kinetic rate, electrochemical potential,
+tissue observation or reactive exterior flux is fabricated.
+
+These source-written rational local identities remain
+a **numerical exact-algebra interface**, not an Agda/Bishop
+real PNP theorem or a physically source-calibrated
+one-step state. The highest-alpha unpaid physical witness
+remains a single actual source/time/space PNP transition
+with a proven observation refinement and selected
+boundary work; native Agda and Python tests on the
+new heads are pending.
