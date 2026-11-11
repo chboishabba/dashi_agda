@@ -743,3 +743,18 @@ The concrete source proof chain now includes:
 - P1g global Kneser and P2–P4 modular j/J and original observer/contour proofs remain **OPEN** and must retain branch, analytic-domain, homology/cycle and convergence provenance.
 
 **Current status label:** \`P1.expFactEqualsNativeExp = SOURCE-WRITTEN / KERNEL-UNVERIFIED\`, NOT \`machineChecked\` or a Clay-grade completed result.
+
+
+### P1 exact-head readback and next kernel handoff
+
+At source head \`f2d1345a2ccdf15ce898f75410456dae0a79f70e\`, \`originalBishopExpFactComplexSeriesConvergesToNativeExp\` also packages the two coordinate limits in the original \`Complex.ComplexSeriesConvergesTo\` constructor, making the full original factorial source available to downstream analytic/Koenigs/modular consumers.
+
+A connected GitHub source readback examined all **14 new P1 modules**, totaling **1,930 source lines**; each path matches its module name, each appears in the focused checker (**53 explicit targets total**), and no explicit textual \`postulate\`, Agda goal hole, or bare-metavariable RHS was found. This is ONLY static source integrity, not proof checking. A concrete source fix supplied \`{n = suc n}\` to the four original \`Fin\` sums in \`BishopComplexFactorialFiniteConvolutionExact\`.
+
+**Next operator command** in a real checkout of the exact PR head:
+\`\`\`bash
+bash scripts/check_analytic_j_tetration_golden_local.sh
+\`\`\`
+The runner invokes the pinned Agda 2.9 \`--safe\` checker and associated exact rational analytic regressions. If it fails, capture the **first actual Agda error with file/line**, repair the source and rerun; do not infer acceptance from module text. The current conversation runtime has neither \`agda\` nor \`nix\` available.
+
+**Do not import legacy** \`RealElementaryFunctionsCanonicalInstanceExact\` postulated \`expℝ/logℝ\` to satisfy the new log inverse; new P1 log work must use the original Bishop source and a genuinely proved positive-real inverse or holomorphic local logarithm law.
