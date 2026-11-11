@@ -1423,3 +1423,83 @@ PNP kinetics. It ensures the existing source proof-algebra
 and new exact rational continuum-chart computation cannot
 receive an unvetted original finite matrix by bypassing
 ordinary Python assertions.
+
+
+### 2026-11-11 original rational semidiscrete **local** maximum cut
+
+The original-source rational bridge now exposes all 27×6=**162**
+exact **per-voxel** continuity laws, not merely six globally
+vanishing conserved sums. Using the same 54 original native
+bonds and source-selected full 29×12 Rhea signed matrix, it
+constructs separate `Fraction` matrices:
+
+```text
+divergence[v,s] = sum_{edges leaving v} J[edge,s]
+                  - sum_{edges entering v} J[edge,s]
+source[v,s] = sum_r S[s,r]*rate[v,r]
+RHS[v,s] = source[v,s]-divergence[v,s].
+```
+
+For each original weight coordinate
+`a∈{C,H,N,O,P,signed_charge}` and EACH actual site `v`:
+
+```text
+Σ_s a[s]*RHS[v,s]
+ + Σ_s a[s]*divergence[v,s]
+ = Σ_s a[s]*source[v,s] = 0.
+```
+
+This is **local continuity**, not a claim that local
+weighted concentration remains constant when matter
+flows between neighbours. Across all 27 sites,
+each native bond appears once with each sign, so the
+weighted divergences globally sum to zero. Combined
+with the per-original-reaction exact left kernel, the
+six original global inventory derivatives vanish.
+
+The bridge returns `exact_local_weighted_divergence`,
+`exact_local_weighted_reaction_source`,
+`exact_local_continuity_residual`, and the count
+`local_CHNOP_signed_charge_equations_checked=162`.
+Its consumer convention is explicit:
+`signed_native_flux_units` are **per-voxel normalized
+transport rates**; physically dimensioned Scharfetter–
+Gummel edge flux densities from the numerical solver
+must be divided by mesh length `h` before being passed
+as these semidiscrete RHS terms. The exact rational
+inputs are a symbolic/algebraic chart, not proof that
+arbitrary real SG values or original measured rates
+have rational representations.
+
+Source validation is further tightened: the original
+checker now rejects zero/negative/fractional/Boolean
+gross participant coefficients and unsupported sides
+using the canonical strict integer parser before accepting
+its 29×12 source identity. Focused synthetic tests check
+nonzero `1/3` flux, `2/7` original reaction,
+six local equations at each voxel, a reversed signed
+flux on original bond 53, malformed gross coefficients,
+and no promotion to physical interpretation.
+
+**Updated cut accounting:**
+- P0 exact full 27×29 rational source RHS and its
+  162 local six-coordinate continuity equalities:
+  implemented by direct exact `Fraction` calculation;
+  regression code committed, not run at this head.
+- P0 original Nat five-axis CHNOP left-kernel composition
+  and decidable positivity/refutation: source-written
+  Agda, kernel verification NOT obtained.
+- P0 authentic source/real PNP: strict source certificate,
+  29 source-positive weights, independent physical rates,
+  actual original 27×29 concentration state and the
+  canonical semidiscrete SG constitutive refinement
+  remain unpaid.
+- P0 Bishop-real / finite dimensional compact positive
+  weighted simplex and a TRUSTED Brouwer fixed-point
+  producer, implicit-root identity, strict positivity,
+  convex free-energy dissipation: still kernel OPEN.
+- P1 original reactive face work, physical tissue
+  same-source/time step, and independent longitudinal
+  test: still OPEN.
+No continuous real theorem is inferred from
+exactness of the rational source accounting alone.
