@@ -13,6 +13,7 @@ import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact
 import DASHI.Biology.Molecular.BH4PanelRateWeightedConservationExact
 import DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact
 import DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact
+import DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4QuantitativeAcquisitionExact
 import DASHI.Biology.BH4ExecutedSABIOReceiptExact
