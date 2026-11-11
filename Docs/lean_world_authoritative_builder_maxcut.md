@@ -78,3 +78,40 @@ Updated seam:
 3. Make the checked result feed atomic PostgreSQL canonical admission, then query the persisted fibre index.
 4. Retrieve an admitted declaration as donor and kernel-check an independently elaborated consumer proof.
 5. Run negative controls, Nix Lean, PostgreSQL rollback/idempotency/concurrency and actual representative corpus benchmarks locally (not CI).
+
+## Next tranche — pinned checker execution (observational, not certification)
+
+`scripts/lean_world_external_checker.py` now accepts the existing immutable
+`PendingExport`, checks its exact NDJSON bytes, pins the checker executable
+to an operator-supplied SHA-256, invokes that checker with no shell or
+ambient secret-bearing environment, sets a POSIX output-file size limit,
+rejects nonzero exit/timeout/output excess/artifact mutation, and returns
+`ExternalCheckReceipt` with executable, original artifact, stdout and stderr
+digests. Seven offline tests cover acceptance as an observation and the
+critical false-promotion/negative-control cases.
+
+This deliberately does **not** convert checker exit zero into
+`BuilderResult.dag_validated`, `world_admitted` or `kernel_certified`.
+The binary hash does not authenticate the provenance of the executable or its
+transitive Nix closure. A trusted operator must separately pin the entire
+checker derivation, attest its checking semantics, account for axioms and
+unsafe assumptions, and validate results against real native-v3 fixtures.
+
+Candidate upstream to evaluate: Tenet, which documents checking
+lean4export 3.x NDJSON, including 3.0/3.1. This is a source-discovery
+candidate, **not a validated DASHI checker**. See
+https://github.com/keithadler/tenet . Do not add a second world store.
+Reuse #1484's `lean_world_canonical_dag.py` and source-world owners,
+and #1483's exact fibre-index adapter once semantic validation is paid.
+
+Local offline commands (run against exact committed branches, no CI):
+```sh
+python3 -m unittest discover -s tests -p 'test_lean_world_external_checker.py' -v
+python3 -m unittest discover -s tests -p 'test_lean_world_builder_contract.py' -v
+```
+`#1484` separately repaired the malformed PL/pgSQL dollar delimiters in
+both receipt-immutability trigger functions and added an offline regression.
+Its canonical DAG `seal()` now uses iterative shared-child-safe DFS and has
+deep-chain/cycle/diamond regression tests. Those source changes are on
+#1484, not yet ancestors of this #1495 stack. No exact-head operator execution
+or PostgreSQL migration receipt is claimed.
