@@ -28,10 +28,9 @@ python3 -m unittest discover -s tests \
 
 # Each compatible revision is a DISTINCT pinned original source snapshot.
 # Prior three-repository objects and provenance remain unchanged.
-python3 scripts/run_lean_world_stream_pg.py \
-  leanprover-community/batteries "$batteries_revision" --schema "$schema"
-python3 scripts/run_lean_world_stream_pg.py \
-  leanprover-community/mathlib4 "$mathlib_revision" --schema "$schema"
+python3 scripts/run_lean_world_original_dependency_ingest.py \
+  --manifest scripts/manifests/mathlib_v428_original_dependencies.json \
+  --schema "$schema"
 
 python3 scripts/run_lean_world_join_proofs.py \
   --schema "$schema" \
@@ -56,6 +55,13 @@ python3 scripts/run_lean_world_join_proofs.py \
   --repository leanprover-community/mathlib4 \
   --revision "$mathlib_revision" \
   --additional-source "leanprover-community/batteries@$batteries_revision" \
+  --additional-source "leanprover-community/plausible@55c8532eb21ec9f6d565d51d96b8ca50bd1fbef3" \
+  --additional-source "leanprover-community/LeanSearchClient@c5d5b8fe6e5158def25cd28eb94e4141ad97c843" \
+  --additional-source "leanprover-community/import-graph@85b59af46828c029a9168f2f9c35119bd0721e6e" \
+  --additional-source "leanprover-community/ProofWidgets4@be3b2e63b1bbf496c478cef98b86972a37c1417d" \
+  --additional-source "leanprover-community/aesop@f642a64c76df8ba9cb53dba3b919425a0c2aeaf1" \
+  --additional-source "leanprover-community/quote4@b8f98e9087e02c8553945a2c5abf07cec8e798c3" \
+  --additional-source "leanprover/lean4-cli@4f10f47646cb7d5748d6f423f4a07f98f7bbcc9e" \
   --module Mathlib.Logic.Basic \
   --import-module Batteries.Data.List.Basic \
   --donor congr_heq \
