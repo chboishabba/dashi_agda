@@ -109,9 +109,9 @@ class TestLeanWorker(unittest.TestCase):
     def test_native_export_before_ephemeral_cleanup(self):
         from lean_world_native_v3_export import inspect_v3
         captured=[]
-        native_raw=(b'{"meta":{"format":{"version":"3.1.0"}}}\\n'
-                    b'{"ie":1,"bvar":0}\\n'
-                    b'{"thm":{"type":1}}\\n')
+        native_raw=(b'{"meta":{"format":{"version":"3.1.0"}}}\n'
+                    b'{"ie":1,"bvar":0}\n'
+                    b'{"thm":{"type":1}}\n')
         def compiled(lean, root, target, *, timeout, memory_mib, lean_path):
             compiled_path=root/".lean-output"/"target.olean"
             compiled_path.parent.mkdir(parents=True,exist_ok=True)
