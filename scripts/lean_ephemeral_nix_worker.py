@@ -159,36 +159,80 @@ def prepare_sources(repo: str, rev: str, target: str, root: Path,
     return sorted(records, key=lambda x: x["path"]), tuple(sorted(external))
 
 
+def local_compilation_order(root: Path, target: str) -> list[str]:
+    """Dependencies-first order; missing external modules handled separately."""
+    staged = {p.relative_to(root).as_posix(): p
+              for p in root.rglob("*.lean")}
+    if target not in staged:
+        raise WorkerError("target not staged")
+    visiting, visited, ordered = set(), set(), []
+
+    def visit(path: str) -> None:
+        if path in visiting:
+            raise WorkerError("cyclic local import: " + path)
+        if path in visited:
+            return
+        visiting.add(path)
+        for module in import_modules(staged[path].read_bytes()):
+            dependency = module_path(module)
+            if dependency in staged:
+                visit(dependency)
+        visiting.remove(path)
+        visited.add(path)
+        ordered.append(path)
+
+    visit(target)
+    return ordered
+
+
 def execute_lean(lean: str, root: Path, target: str, *,
                  timeout: int, memory_mib: int, lean_path: str = "") -> dict:
     if timeout < 1 or memory_mib < 128:
         raise WorkerError("invalid worker resource budget")
-    output = root / ".lean-output" / "target.olean"
-    output.parent.mkdir(parents=True, exist_ok=True)
     env = os.environ.copy()
-    # Explicitly limit inherited Lean path to the documented dependency cache.
+    # Generate local .olean files at module-matching paths, so subsequent
+    # imports resolve without requiring full Lake project checkout.
     env["LEAN_PATH"] = str(root) + (os.pathsep + lean_path if lean_path else "")
     env["LEAN_SRC_PATH"] = str(root)
     env["HOME"] = str(root / ".home")
     (root / ".home").mkdir(exist_ok=True)
+
     def limits():
-        resource.setrlimit(resource.RLIMIT_AS, (memory_mib * 1048576, memory_mib * 1048576))
-    args = [lean, f"--root={root}", "-o", str(output), str(root / target)]
-    start = time.perf_counter()
-    proc = subprocess.Popen(args, cwd=root, env=env, stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE, start_new_session=True,
-                            preexec_fn=limits)
-    try:
-        stdout, stderr = proc.communicate(timeout=timeout)
-    except subprocess.TimeoutExpired:
-        os.killpg(proc.pid, signal.SIGKILL)
-        proc.communicate()
-        raise WorkerError("Lean timed out")
-    elapsed = time.perf_counter() - start
-    return {"exit_code": proc.returncode, "elapsed_seconds": round(elapsed, 4),
-            "stdout_tail": stdout[-4096:].decode("utf-8", "replace"),
-            "stderr_tail": stderr[-4096:].decode("utf-8", "replace"),
-            "olean_emitted": output.is_file()}
+        resource.setrlimit(resource.RLIMIT_AS, (memory_mib * 1048576,
+                                               memory_mib * 1048576))
+
+    order = local_compilation_order(root, target)
+    started = time.perf_counter()
+    built = []
+    for path in order:
+        remaining = timeout - (time.perf_counter() - started)
+        if remaining <= 0:
+            raise WorkerError("Lean closure timed out")
+        module_output = root / path.removesuffix(".lean")
+        output = module_output.with_suffix(".olean")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        args = [lean, f"--root={root}", "-o", str(output),
+                str(root / path)]
+        proc = subprocess.Popen(args, cwd=root, env=env,
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                start_new_session=True, preexec_fn=limits)
+        try:
+            stdout, stderr = proc.communicate(timeout=remaining)
+        except subprocess.TimeoutExpired:
+            os.killpg(proc.pid, signal.SIGKILL)
+            proc.communicate()
+            raise WorkerError("Lean closure timed out")
+        if proc.returncode != 0 or not output.is_file():
+            return {"exit_code": proc.returncode, "failed_module": path,
+                    "elapsed_seconds": round(time.perf_counter() - started, 4),
+                    "stdout_tail": stdout[-4096:].decode("utf-8", "replace"),
+                    "stderr_tail": stderr[-4096:].decode("utf-8", "replace"),
+                    "olean_emitted": False, "compiled_modules": built}
+        built.append(path)
+    return {"exit_code": 0,
+            "elapsed_seconds": round(time.perf_counter() - started, 4),
+            "stdout_tail": "", "stderr_tail": "", "olean_emitted": True,
+            "compiled_modules": built}
 
 
 def run_worker(repo: str, rev: str, target: str, *, lean="lean",
