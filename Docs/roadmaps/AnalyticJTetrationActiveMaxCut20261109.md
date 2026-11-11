@@ -618,3 +618,34 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Still open:** the full \(x+iy\) factorial-series/natural \`expC\` equivalence, requiring original Bishop complex binomial/Cauchy product and limit interchange. Important reuse: **the real Bishop Cauchy product and addition law are already paid** in \`DASHI/Foundations/BishopExponentialCauchyProductExact.agda\` (\`bishopExpAdd\`, \`bishopExpTimesNegativeIsOne\`, triangle/rectangle convergence). Do not re-prove that existing real result or confuse it with the still-open complex Cauchy product. The native \`BishopSetoidComplexExact.BishopSetoidComplexTranscendentals\` is a configuration record: independent inhabitation and same-source sine/cosine witnesses must remain explicit.
 
 **Remaining dependency-ordered max-cut:** P0 local Agda 2.9 \`--safe\` exact-head acceptance/fix; P1 general complex exponential factorial product and native Cartesian identification; P1 Bishop original exp-log inverse; P1 original upper complex fixed point and analytic Koenigs/Schröder; P1g global Kneser; P2-P4 original modular j and observer/contour. Do not mark the latter open gates closed based on Euler's formula alone.
+
+
+## 2026-11-11 — P1 complex Cauchy rectangle: original-carrier finite lift
+
+**New source-written implementation:** \`DASHI/Analysis/BishopComplexFiniteRectangleProductExact.agda\` (registered in the focused checker).
+
+- \`finiteComplexPartial terms n\` constructs the literal pair of Bishop \`Sequence.SeriesOf\` component partial sums.
+- \`rectangleComplex left right h w\` constructs the four actual original \`BishopFiniteSeriesRectangleProductExact.rectangleSum\` coordinate rectangles, assembling the real difference \`R(ac) - R(bd)\` and imaginary sum \`R(ad) + R(bc)\`.
+- \`originalBishopComplexFiniteRectangleProduct\` derives the complete finite identity
+  \[
+    R_{h,w}^{\mathbb C}(a,b) \approx_C
+    \bigl(\sum_{i<h}a_i\bigr) *_C
+    \bigl(\sum_{j<w}b_j\bigr)
+  \]
+  using the *already-owned* four Bishop-real \`rectangleProduct\` proofs. \`originalBishopComplexSquareRectangleProduct\` specializes to square cutoffs.
+- Unlike a new Cauchy-product "authority" record, these are explicit equality proofs over the same \`BishopComplexSeriesConvergenceExact.BishopComplex\` carrier, using \`BishopComplexAlgebraExact._*C_\`. They require Agda 2.9 \`--safe\` acceptance and remain SOURCE-WRITTEN, not kernel-checked.
+
+**The exact P1 analytic remainder is now smaller:** (1) finite complex Cauchy triangular index/term equality, including the binomial/factorial identity for \(x+iy\); (2) componentwise complex absolute triangular-wing bound and modulus; (3) rectangle/triangle convergence to the *same* limit; (4) transport of the real \`bishopExp\` and imaginary \`expC\` source-series limits through that product and the already constructed \`originalBishopFactorialImaginaryAxisAllCutoffsExact\` theorem. The existing real Cauchy engine \`BishopExponentialCauchyProductExact\` remains owned; do not rebuild it.
+
+**Important correctness corrections to the analytic continuum handoff:**
+
+1. The selected upper exponential fixed point \`p≈0.31813+1.33724i\` has \(|p|>1\). It is **repelling for forward exponential** \(f(z)=e^z\). The formula \(\lim_{n\to\infty}p^{-n}(f^{\circ n}(z)-p)\) is **not valid on a full local neighbourhood of this repeller**: forward orbits generally leave any small disc. Instead use the locally chosen inverse branch \(g(z)=\log(z)\), \(g(p)=p\), \(g'(p)=p^{-1}\) with \(|p^{-1}|<1\), and define the Koenigs coordinate on a certified inverse-invariant chart by
+   \[
+     \Psi(z)=\lim_{n\to\infty}p^n\bigl(g^{\circ n}(z)-p\bigr),
+   \]
+   subject to an independently proved uniform convergence/holomorphic-derivative bound. Then \(\Psi(f(z))=p\Psi(z)\) wherever both sides lie in the corresponding chart.
+2. The exact q-expansion \(\,q^{-1}+744+196884q+\cdots\,\) is the usual **unnormalized modular \(j\)**. The normalized Hauptmodul \(J=j-744\) has \(q^{-1}+196884q+\cdots\). Do not conflate the two.
+3. \(\partial([-1/2,1/2]^4)\) is **three-dimensional**; Cauchy's one-complex-variable contour integral is a real one-dimensional cycle, not integration directly over that entire 3D boundary. The Round56/240-cell observer claim requires a specified 1-cycle or a justified differential-form/current and dimension-specific Stokes theorem, together with orientation/regularity and an actual defect/residue identification. Topological analogy is not a proof.
+4. The already-present finite rational selected fixed-point contraction check is a *numerical/exact-rational receipt*, not an inhabited Bishop-complex fixed-point certificate with its chosen branch and Newton/Banach hypotheses transported through the kernel.
+
+**Still open:** exact-head Agda acceptance; complex triangle wing/limit; full native \`expC\`; local Bishop disk exp-log and, separately, positive-real integral log inverse; source fixed point/Koenigs; global Kneser; selected modular q/\(\Delta\)/j and observer/contour homology.
