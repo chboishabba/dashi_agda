@@ -175,6 +175,7 @@ if [[ "$mode" == "kernel-cut" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeRawEdgeInputChargeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeFullEdgeFieldInputBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphEdgeFieldWordBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativePositiveThresholdInputWidthExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
