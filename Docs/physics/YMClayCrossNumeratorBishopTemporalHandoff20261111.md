@@ -108,3 +108,8 @@ New source module: `DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringAlg
 **Not unconditional:** Calling these fields “closed” means closed *under the explicit chosen real-law interfaces*, not that `OriginalRealCenteringLaws` or `OriginalRealPositiveDivisionLaws` has been inhabited by the repository's chosen real implementation. The latter is the remaining scalar trust boundary. Nor does this complete P0.05's one-sided formula, P0.06 SU(N) trace boundedness, P0.07 plaquette centered formula, or the physically difficult nonconstant cross-numerator decay.
 
 **Verification:** source committed/read back, Agda 2.9 typecheck not performed. No physical theorem has been inferred from this algebra.
+
+
+## P0.05/P0.07 one-sided source centering implemented (2026-11-11)
+
+The original Wilson centering algebra module now includes `originalWilsonCrossNumeratorIsFineCenteredInsertion` and `originalPlaquetteCrossNumeratorIsCenteredFineInsertion`. Under explicit coherent real-field subtraction, zero-subtraction and positive-division laws, the actual fine-blocked versus bare Wilson cross numerator is `Z_bare * N_fine(F - E_bare(F))`, including the literal original side-two plaquette from the existing Wilson word evaluator. The source integrals, partitions and native SU(N) block are unchanged. No original RG contraction or error rate is inferred. The remaining P0.06 matrix normalized trace bound is not derivable from the current cyclic-only `SUNMatrixRealTrace` record. Agda acceptance remains pending.
