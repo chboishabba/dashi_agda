@@ -7,6 +7,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from lean_world_native_admission_queue import enqueue
 from lean_world_builder_contract import pending_from_manifest, validate_through_builder, BuilderResult, ContractError
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from test_lean_world_native_admission_queue import sample
 
 class HandoffIntegrationTests(unittest.TestCase):
