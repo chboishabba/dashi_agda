@@ -69,8 +69,7 @@ factorialCoefficientAbsoluteAtMostOne :
 factorialCoefficientAbsoluteAtMostOne n =
   BishopP.≤-respˡ-≃
     (BishopP.nonNegx⇒∣x∣≃x
-      (BishopP.nonNegx⇒0≤x
-        (Exp.embeddedInverseFactorialNonnegative n)))
+      (Exp.embeddedInverseFactorialNonnegative n))
     (factorialCoefficientAtMostOne n)
 
 originalBishopFactorialExpPositiveTerm :
