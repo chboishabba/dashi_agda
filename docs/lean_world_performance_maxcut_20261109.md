@@ -461,3 +461,21 @@ and streamed public archives in the assistant's runtime. The locally validated
 previous 2/2 migrations and 6/6 candidate DAG tests do not cover this new
 source-byte schema. No full-source-memory or end-to-end time receipts may be
 claimed until the operator runs the new pilot.
+
+## 11 November — big proof joining tranche (original Lean 4.28)
+
+The validated pilot on #1484 head c453dd05 ingested 9,577 original Lean files and 104,842,666 actual bytes from three repos using three archive calls and no REST blob calls. Source-only admission remains distinct from Lean proof compilation.
+
+New scripts/run_lean_world_join_proofs.py reads actual original source bytes back from PostgreSQL, constructs same-revision module import closures, and compiles selected sources using Lean 4.28. Cross-repository imports are resolved only from explicitly pinned source snapshots. Missing or ambiguous modules are rejected. It constructs genuine Lean theorem terms referencing selected original declarations and also a new compound theorem: the conjunction of all selected theorem propositions, proved by And.intro on the original proof constants.
+
+New scripts/sql/lean_world_compiled_join_v1.sql and scripts/lean_world_compiled_join_store.py store the actual generated Lean proof source, compiled OLean and all original dependency module OLean bytes, with immutable original-source provenance and import/theorem-composition edges. scripts/run_lean_world_join_get.py restores the full OLean import closure from PostgreSQL and compiles a second theorem batch that reuses and composes the retrieved proofs without Git download or original source re-elaboration.
+
+Compatible upstream source tags, deliberately distinct from the earlier 2026 pilot snapshots: Batteries 495c008c3e3f4fb4256ff5582ddb3abf3198026f; mathlib4 8f9d9cff6bd728b17a24e163c9402775d9e6a365. Their lean-toolchain files both specify Lean 4.28.0.
+
+ONE LOCAL RUN from an isolated #1484 worktree with PostgreSQL PGDATABASE configured:
+
+    nix develop .#lean-world --command bash scripts/run_lean_world_big_proof_join.sh /tmp/dashi-original-big-join-1
+
+This command tests proof graph integrity and real PostgreSQL storage; ingests the compatible Batteries and mathlib sources, checks five original Batteries theorem joins and their composite conjunction, checks five mathlib theorem joins and their composite conjunction over the actual Batteries imports, saves their compiled OLean closures in PostgreSQL, then retrieves both closures and recompiles second-stage theorem conjunctions. Use a new output directory on reruns.
+
+Status: code committed; new exact-head compilation and PostgreSQL receipts UNEXECUTED in the assistant environment. Independent checking remains deferred by operator directive. A successful result proves selected Lean theorem imports and compositions checked by the reference Lean compiler and persisted/reused as bytes; it does not establish Agda/Lean semantic identity or universal mathematical-world admission.
