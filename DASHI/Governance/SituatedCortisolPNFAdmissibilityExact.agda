@@ -23,7 +23,7 @@ data ProofStage : Set where
 
 -- One simple exact uncertainty cap is modelled with Nats.
 -- It is NOT Shannon entropy, a posterior density, or a legal threshold.
-record FiniteUncertaintyControl : Set where
+record FiniteUncertaintyControl : Set₁ where
   constructor finite-uncertainty-control
   field
     ambiguityScore : Nat
