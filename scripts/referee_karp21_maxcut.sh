@@ -178,7 +178,25 @@ if [[ "$mode" == "kernel-cut" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
-  echo "KERNEL CUT ACCEPTED AT EXACT LOCAL HEAD: F2/G3 source owners only."
+  # End-to-end original source-language B6, first-enabled D2,
+  # event-by-event E1 and typed Fin/Cut E2. No theorem is certified
+  # unless its exact owner is actually passed to the kernel.
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphOriginalExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryCutLedgerOriginalExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryVerifierOriginalExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTypedAcceptanceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21OriginalRawVsBinaryTerminalCounterexampleExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryToOriginalRawMachineStepExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryStepPotentialExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryFiniteRunExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryPriorityRunAcceptanceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinarySelectedEventTraceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryTraceRebuildExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeSelectedLedgerInputBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphLedgerInputBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeActualEventSubsequenceExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeFirstEnabledLedgerWordBoundExact.agda
+  echo "KERNEL CUT ACCEPTED AT EXACT LOCAL HEAD: listed B6/D2/E1/E2/F2/G3 owners."
   exit 0
 fi
 
