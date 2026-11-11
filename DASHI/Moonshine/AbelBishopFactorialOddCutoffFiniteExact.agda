@@ -12,6 +12,7 @@ open import Agda.Builtin.Nat using (Nat; suc)
 open import Data.Product.Base using (proj₁; proj₂)
 
 import Real as BishopReal
+import Sequence as BishopSequence
 import RealProperties as BishopP
 
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
@@ -84,3 +85,71 @@ originalBishopImaginaryAxisOddCutoffRemainder T y n =
        (λ e a → (e ⊕ a) ⊖ e ⊜ a)
        BishopP.≃-refl even coefficient)
     (Signed.originalBishopImaginaryAxisCosineConfiguredTerm T y n)
+
+
+------------------------------------------------------------------------
+-- CONSTRUCTIVE OMITTED-TERM CONVERGENCE.
+--
+-- The pinned Bishop Sequence.agda theorem
+--   ∑xₙisConvergent⇒xₙ→0
+-- directly supplies a modulus, since the configured cosine terms
+-- have a proof of absolute series convergence.
+------------------------------------------------------------------------
+
+originalBishopConfiguredCosineTermTendsZero :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (Elementary.cosineTerm (Cartesian.dataSet T) y)
+    BishopReal.0ℝ
+originalBishopConfiguredCosineTermTendsZero T y =
+  BishopSequence.∑xₙisConvergent⇒xₙ→0
+    (Elementary.cosineTerm (Cartesian.dataSet T) y)
+    (BishopSequence.absolute⇒isConvergent
+      (Elementary.cosineAbsoluteConvergence (Cartesian.dataSet T) y))
+
+originalBishopImaginaryAxisOddRealPrefixConverges :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (λ n → BishopReal.∑₀
+      (EvenPrefix.factorialImaginaryRealTerm y)
+      (suc (Estimates.evenExponent n)))
+    (Elementary.bishopCos (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisOddRealPrefixConverges T y =
+  let
+    cos = Elementary.bishopCos (Cartesian.dataSet T) y
+    evenConvergence =
+      EvenPrefix.originalBishopImaginaryAxisRealEvenPrefixConvergesToCosine T y
+    tailConvergence = originalBishopConfiguredCosineTermTendsZero T y
+    sumConvergence =
+      BishopSequence.xₙ+yₙ→x₀+y₀
+        (cos , evenConvergence)
+        (BishopReal.0ℝ , tailConvergence)
+    simplified =
+      BishopSequence.xₙ→x∧x≃y⇒xₙ→y
+        sumConvergence
+        (BishopP.+-identityʳ cos)
+  in
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ n →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisRealOddPrefix T y n))
+    (cos , simplified)
+
+originalBishopImaginaryAxisOddImagPrefixConverges :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (λ n → BishopReal.∑₀
+      (EvenPrefix.factorialImaginaryImagTerm y)
+      (suc (Estimates.evenExponent n)))
+    (Elementary.bishopSin (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisOddImagPrefixConverges T y =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ n →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisImagOddPrefix T y n))
+    ( Elementary.bishopSin (Cartesian.dataSet T) y
+    , Elementary.bishopSinConvergence (Cartesian.dataSet T) y
+    )
