@@ -850,3 +850,12 @@ tissue observation. Exterior reactive
 six-face boundary work and independent
 empirical longitudinal validation remain
 additional P1/P2 obligations.
+
+
+### 2026-11-11 canonical six-axis computed-rational Bishop source route reconciled
+
+The authoritative #1454 branch already contains `BH4OriginalNativePerSpeciesCancellationExact` for the actual original 27×54 incidence and all 29 rational currents, `BH4OriginalRationalReactionColumnKernelExact` for arbitrary 27×12 rational reaction rates under the original 72 generated rational signed-net column kernels, `BH4OriginalComputedRationalRHSSplitExact` for the same 783-coordinate RHS, and `BH4OriginalNativeComputedBishopConservationExact` for all six original Bishop-real conservation identities. `generate_bh4_original29x12_agda.py` emits `generatedRationalNetColumnsZero` and `generatedOriginalComputedSixAxisBishopConservation` using original byte-pinned Rhea source inputs only; this is **not** a synthetic source or a checked Agda proof until the genuine input and kernel receipts exist. These are source-written proof owners, not original physiological data.
+
+Provisional additional experimental finite bilinearity, local-defect composition and transport/reaction modules were added while the branch was rapidly changing. They overlap the authoritative owners and are intentionally **NOT imported by the BH4 Golden** following reconciliation (retained as unpromoted development source only). Do not let a duplicated untested owner obstruct the canonical Golden import.
+
+**Precise remaining gates:** byte-pin and inspect authentic original 29×12 Rhea generated Agda source, run Agda 2.9 checks on authoritative owners and strict root; then prove actual Bishop-real Scharfetter–Gummel/Poisson/mass-action constitutive and open six-face terms, compact conserved weighted-real simplex and original positive implicit-root/Brouwer; then SAME source-paid BH4/PNP/tissue physical-step commutation, intervention-safe future quotient and independent assay validation. Source-level finite conservation is not experimental tissue conservation nor original biological kinetics.
