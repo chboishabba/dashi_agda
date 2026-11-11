@@ -1402,3 +1402,24 @@ pinned Agda kernel. **P1:** original opened six-face
 boundary work and BH4/PNP/tissue same physical carrier.
 **P2:** independent physical longitudinal validation,
 Golden kernel and ITIR artifact provenance.
+
+
+### 2026-11-11 additional original-source shape firewall
+
+`check_bh4_original_panel_spatial_events.check_certificate`
+formerly used Python `assert` for its 29×12 matrix
+row/dimension preliminary checks. They have been replaced
+with explicit `ValueError` rejection, plus an exact
+Python-integer requirement for all signed matrix entries
+(rejecting float and Bool). Those are enforced even under
+`python -O`, avoiding accidental source admission without
+shape/type verification. Added focused malformed row,
+float coefficient and Boolean coefficient negative
+controls in the original BH4/PNP adapter test owner.
+
+This hardening does not authenticate a genuine Rhea release,
+change the approved 12 finite reactions, or prove measured
+PNP kinetics. It ensures the existing source proof-algebra
+and new exact rational continuum-chart computation cannot
+receive an unvetted original finite matrix by bypassing
+ordinary Python assertions.
