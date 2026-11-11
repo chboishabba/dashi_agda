@@ -137,3 +137,89 @@ rootFixedToSourceFixed {cellAct = cellAct} {rootAct = rootAct}
 -- selected exceptional root action. A mismatch refutes any inhabitant
 -- of SameAction240Comparison for that same actor. Counting and selected
 -- same-actor membership remain an external, finite computation task.
+
+-- The next invariant is full generator-path reachability, which every
+-- equivariant map must preserve. It is stronger than cardinality alone and
+-- underlies comparing orbit counts (source B4 orbits versus target orbits).
+
+data GeneratedPath {Point Symmetry : Set}
+  (act : Symmetry → Point → Point) : Point → Point → Set where
+  pathIdentity : {x : Point} → GeneratedPath act x x
+  pathGenerator : (g : Symmetry) (x : Point) →
+    GeneratedPath act x (act g x)
+  pathCompose : {x y z : Point} →
+    GeneratedPath act x y →
+    GeneratedPath act y z →
+    GeneratedPath act x z
+
+sameActionMapsPaths :
+  ∀ {RegularRoot Root Symmetry : Set}
+    {cellAct : Symmetry → RegularRoot → RegularRoot}
+    {rootAct : Symmetry → Root → Root} →
+  (comparison : SameAction240Comparison
+    RegularRoot Root Symmetry cellAct rootAct) →
+  ∀ {x y : RegularRoot} →
+  GeneratedPath cellAct x y →
+  GeneratedPath rootAct
+    (SameAction240Comparison.toRoots comparison x)
+    (SameAction240Comparison.toRoots comparison y)
+sameActionMapsPaths comparison pathIdentity = pathIdentity
+sameActionMapsPaths comparison (pathGenerator g x)
+  rewrite SameAction240Comparison.intertwinesSelectedAction comparison g x =
+  pathGenerator g (SameAction240Comparison.toRoots comparison x)
+sameActionMapsPaths comparison (pathCompose first second) =
+  pathCompose
+    (sameActionMapsPaths comparison first)
+    (sameActionMapsPaths comparison second)
+
+-- General commutation in the reverse direction follows from source and
+-- target inverse laws. This is the equivariant-bijection (not just
+-- equivariant injection) condition.
+inverseActionCommutes :
+  ∀ {RegularRoot Root Symmetry : Set}
+    {cellAct : Symmetry → RegularRoot → RegularRoot}
+    {rootAct : Symmetry → Root → Root} →
+  (comparison : SameAction240Comparison
+    RegularRoot Root Symmetry cellAct rootAct) →
+  (g : Symmetry) (r : Root) →
+  SameAction240Comparison.fromRoots comparison (rootAct g r)
+    ≡ cellAct g (SameAction240Comparison.fromRoots comparison r)
+inverseActionCommutes {cellAct = cellAct} {rootAct = rootAct}
+  comparison g r =
+  trans
+    (sym (cong (SameAction240Comparison.fromRoots comparison)
+      (cong (rootAct g)
+        (SameAction240Comparison.targetAfterRoundTrip comparison r))))
+    (trans
+      (sym (cong (SameAction240Comparison.fromRoots comparison)
+        (SameAction240Comparison.intertwinesSelectedAction
+          comparison g (SameAction240Comparison.fromRoots comparison r))))
+      (SameAction240Comparison.sourceAfterRoundTrip
+        comparison (cellAct g
+          (SameAction240Comparison.fromRoots comparison r))))
+
+sameActionPullsBackPaths :
+  ∀ {RegularRoot Root Symmetry : Set}
+    {cellAct : Symmetry → RegularRoot → RegularRoot}
+    {rootAct : Symmetry → Root → Root} →
+  (comparison : SameAction240Comparison
+    RegularRoot Root Symmetry cellAct rootAct) →
+  ∀ {x y : Root} →
+  GeneratedPath rootAct x y →
+  GeneratedPath cellAct
+    (SameAction240Comparison.fromRoots comparison x)
+    (SameAction240Comparison.fromRoots comparison y)
+sameActionPullsBackPaths comparison pathIdentity = pathIdentity
+sameActionPullsBackPaths comparison (pathGenerator g x)
+  rewrite inverseActionCommutes comparison g x =
+  pathGenerator g (SameAction240Comparison.fromRoots comparison x)
+sameActionPullsBackPaths comparison (pathCompose first second) =
+  pathCompose
+    (sameActionPullsBackPaths comparison first)
+    (sameActionPullsBackPaths comparison second)
+
+-- Thus two candidate actions having different orbit partitions cannot be
+-- related by a same-action bijection. The finite checker also establishes
+-- the stronger rational permutation-character obstruction: 4 versus 34
+-- full orbits, 0 versus 60 flip fixed roots, 56 versus 126 swap fixed roots.
+-- No universal obstruction to other E8/F4/D4 subgroup actions follows.
