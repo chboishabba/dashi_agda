@@ -1755,3 +1755,23 @@ committed/readback; **no native repo pytest or
 Agda typechecking** was executed here. The
 generated original source module still requires
 authentic separately byte-pinned input.
+
+
+### 2026-11-11 native incidence exact-owner regression
+
+Added `scripts/test_bh4_original_native369_incidence.py`.
+It parses the **actual Agda term** `sourceNative54Endpoints`
+as a strict recursive grammar of `V._∷_`,
+`F.zero`, `F.suc`, and endpoint pairs,
+then compares all 54 decoded `Fin 27` pairs
+against the pre-existing numerical PNP
+`reactive_pnp_369.BONDS` ordering.
+The test checks 27 source points, all 54
+distinct nearest-neighbour bonds and
+rejects missing/duplicated source declarations
+or an incorrectly reversed endpoint list.
+This is a source-identity regression, NOT
+a proof of a measured tissue adjacency,
+an Agda kernel receipt or an empirical
+kinetic calibration. The new repository
+pytest was not executed in this session.
