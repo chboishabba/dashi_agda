@@ -43,17 +43,14 @@ rationalFiniteSumEmbeds (V._∷_ a rest) =
 
 rationalZeroSumEmbeds :
   ∀ {n} (values : V.Vec Q.ℚᵘ n) →
-  rationalFiniteSum values ≡ Q.0ℚᵘ →
+  Q._≃_ (rationalFiniteSum values) Q.0ℚᵘ →
   R._≃_
     (bishopFiniteSum (V.map Embed.embed values))
     (Embed.embed Q.0ℚᵘ)
 rationalZeroSumEmbeds values zeroProof =
   RP.≃-trans
     (RP.≃-symm (rationalFiniteSumEmbeds values))
-    (subst
-      (λ q → R._≃_ (Embed.embed q) (Embed.embed Q.0ℚᵘ))
-      (sym zeroProof)
-      RP.≃-refl)
+    (RP.⋆-cong zeroProof)
 
 -- Explicit source-weighted 29-species dot product.
 sourceWeightedRow :
@@ -124,7 +121,7 @@ spatialWeightedEmbeds weights (V._∷_ row rest) =
 original369RationalZeroDefectImpliesBishopZero :
   (weights : V.Vec Q.ℚᵘ 29)
   (rhs : V.Vec (V.Vec Q.ℚᵘ 29) 27) →
-  sourceSpatialWeighted weights rhs ≡ Q.0ℚᵘ →
+  Q._≃_ (sourceSpatialWeighted weights rhs) Q.0ℚᵘ →
   R._≃_
     (bishopSpatialWeighted
       (V.map Embed.embed weights)
@@ -133,10 +130,7 @@ original369RationalZeroDefectImpliesBishopZero :
 original369RationalZeroDefectImpliesBishopZero weights rhs zeroDefect =
   RP.≃-trans
     (RP.≃-symm (spatialWeightedEmbeds weights rhs))
-    (subst
-      (λ q → R._≃_ (Embed.embed q) (Embed.embed Q.0ℚᵘ))
-      (sym zeroDefect)
-      RP.≃-refl)
+    (RP.⋆-cong zeroDefect)
 
 -- Six source-checked CHNOP/z conservation inputs are kept as one
 -- source-matched six-axis object, not fabricated as distinct rates.
@@ -144,7 +138,7 @@ original369SixRationalConservationLiftsToBishop :
   (weights : V.Vec (V.Vec Q.ℚᵘ 29) 6)
   (rhs : V.Vec (V.Vec Q.ℚᵘ 29) 27) →
   ((axis : Fin.Fin 6) →
-    sourceSpatialWeighted (V.lookup weights axis) rhs ≡ Q.0ℚᵘ) →
+    Q._≃_ (sourceSpatialWeighted (V.lookup weights axis) rhs) Q.0ℚᵘ) →
   (axis : Fin.Fin 6) →
   R._≃_
     (bishopSpatialWeighted
