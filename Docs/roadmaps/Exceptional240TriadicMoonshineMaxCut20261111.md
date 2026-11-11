@@ -60,3 +60,22 @@ Purpose: prevent repeating already-paid finite mathematics and specify SAME-OBJE
 The new modules are in the existing `chatgpt/epistemic-power-maxcut-20261109` PR #1479. PRs #1098, #1106, #1389 are separate open branches; modules added ONLY in those PRs must not be implicitly imported into #1479. No new kernel typecheck or numerical physics validation performed here. No DOCX or CI requirement introduced.
 
 **Next decisive high-alpha implementation:** Choose the specific common action on the *regular* 240-cell representation and one exceptional source branch, compute source/target character signatures under matching generators, and either construct a concrete integral/finite-field intertwiner or prove a selected-character obstruction; in parallel pay the literal one-loop generator/environment certificate already staged in the physical owners.
+
+## 5 — NEW selected E8 subgroup-action fixed-point no-go (2026-11-11)
+
+**Exact reproducible Python checker:** `scripts/check_round56_b4_e8_selected_action_fixed_points.py`.
+
+Uses explicit 240 standard E8 roots, doubled to integer coordinates: 112 vectors with two nonzero ±2 entries and 128 vectors of all ±1 with an even number of negative coordinates. The selected `B4` embedding is the first four-coordinate permutation action plus each first-four sign flip compensated by flipping coordinate index 4 (the fifth E8 coordinate), which lies in even-sign `W(D8) ⊂ W(E8)`. On the 240 regular Round56 cells, the action is first-four swaps and independent sign flips on signed inner/outer intervals.
+
+The explicit finite enumeration checks closure under **all seven generators**, source 4-orbit decomposition [16,64,64,96], and fixed-point counts:
+
+| Matched generator | Original 240 regular cells | Selected E8 root action |
+|---|---:|---:|
+| flip0, flip1, flip2, flip3 (root paired with coordinate 4) | 0 | 60 |
+| swap01, swap12, swap23 | 56 | 126 |
+
+Mathematical reason: a bijection `f` satisfying `f(g·x)=g·f(x)` maps and reflects `g`-fixed points, so their cardinalities must coincide. The newly source-written Agda lemma `sourceFixedToRootFixed` and `rootFixedToSourceFixed` in `BalabanExceptional240SameActionBoundaryExact.agda` prove this necessary transport for an *arbitrary supplied same-action bijection*. The exact executable enumeration therefore excludes any equivariant **set bijection for this selected paired-sign embedding**. It does NOT rule out a different Weyl subgroup representation, linear-representation intertwiner without basis permutation, 3×80 block refinement, alternative F4/E6/finite-field action, or the #1098 D4 quotient bypass.
+
+**Verification level:** local independent exact Python enumeration was executed and observed 240/240 closed carriers, fixed counts 0/56 versus 60/126 and alternative target orbit partition. The committed script has the same algorithm and assertions but has **not been separately run from the GitHub branch**; the Agda generic fixed-point lemmas have **not been kernel-checked**. No claims that E8 mapping is universally impossible.
+
+**Updated highest-alpha E8 next leaf:** use source-selected common group action from #1098/#1106/#1389, compare its actual generator fixed-point characters on both permutation carriers; if characters match, compute linear permutation-character decomposition and search an explicit intertwining matrix. If not, record the selected no-go before trying another action, rather than forcing a count-only identification.
