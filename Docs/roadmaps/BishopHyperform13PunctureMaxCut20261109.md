@@ -1590,3 +1590,23 @@ owned), selected analytic zeta, and Gamma/Xi.
 **Kernel status**: source-written only. Neither a successful
 Agda 2.9 invocation nor Nix Agda environment is available
 in this session. Do not claim certified same-object semantics.
+
+
+### 2026-11-11 positive residual repair of source Heisenberg central transpose
+
+Commit `5980353` extends
+`TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact`:
+- `selectedTransposeResidualAtReverse` proves the original
+  Heisenberg selected-image central trit is retained **exactly**
+  as residual cell (1,0) after actual original relation transpose,
+  by reusing `selectedRelationCentreRecovers`.
+- `selectedTransposeReopensAtReverse` proves the *existing*
+  normalized 13+131 decoder reconstructs that source central
+  value from the full transposed relation's code and residual.
+
+Therefore the selected coarse group action obstruction has a
+concrete source-preserving repair: retain the directed residual
+instead of mistaking the coarse 13-code for the entire original
+relational process. The full original 144-transpose involution
+is not contradicted. No source appraisal/ITIR/group-action
+semantic equality or kernel acceptance is inferred.
