@@ -1102,3 +1102,91 @@ P2: original canonical Nat powers were pre-existing and paid;
 independent analytic zeta equality remains open.
 P3: original Gamma integral, continuation, functional equation,
 completed Xi remain open.
+
+
+## 2026-11-11 highest-alpha: ORIGINAL relational 144 = observed 13 + residual 131 (pointwise)
+
+New source owner:
+`DASHI/Foundations/TernaryThirteenOriginalRelationResidualReopeningExact.agda`.
+
+**Actual original object:** the 144-cell ordered `StageRelationField`
+from `StageTwelveGrothendieckRelationHyperformExact`. The observed
+13 cells are all 12 original diagonals and the specific directed
+(0,1) relation; the residual is the other **131 independently
+addressable ordered cells**, not a Monster or group completion.
+
+- `maskUnobserved` makes the original 13 observed cells neutral,
+  retaining the other 131 relation cells exactly.
+- `reopenRelation` reconstructs the original 144 field by taking
+  the 13 observed values from the existing `relationToThirteen`
+  and the omitted cells from the actual masked residual.
+- `reopenExactlyPointwise`: explicit proof for **all 144 ordered
+  source addresses**, with 12 `valuationPointwiseRoundTrip`
+  uses, one `toFromSource` at the central cell and 131 literal
+  unchanged-cell cases.
+- `reopenPreservesCoarseCode`: for **any** supplied residual,
+  the 13-code obtained by reopening equals the starting code.
+- `Residual131`: witness-bearing normalized residual, with
+  neutrality proof for all twelve diagonal cells and the chosen
+  central (0,1) cell. `maskToResidual131` inhabits it.
+- `reopenNormalizedExact`,
+  `reopenNormalizedCoarseRecovers` and
+  `reopenNormalizedResidualRecoversAt`: both inverse
+  directions for an **arbitrary code and normalized residual**,
+  using 144 complete address cases in the second direction.
+- `OriginalRelationalProductNormalForm` and
+  `originalRelationalProductNormalForm`: explicit pointwise
+  normal-form record for the original relational field.
+  This is a (T^{13} × T^{131}) decomposition **at the level
+  of addressed values and normalized residual evidence**, not a
+  claim of propositional function equality or a semantic
+  group/Monster isomorphism. No funext or postulates added.
+- `fullRelationalObserver` and
+  `allOriginalRelationCellsSufficient`: the pair of observed
+  13-code + normalized 131-cell residual is sufficient for
+  **every original indexed relation-cell consumer**.
+- `originalRelationCodeSectioned`,
+  `originalRelationFibreConstantRecovery` reuse the actual
+  `SectionedProjectionProvenanceBridgeExact` to reconstruct
+  precisely the observables which are constant on 13-code
+  fibres. `reverseCellIsNotCoarseFibreConstant` gives the
+  independently selected (1,0) counterexample.
+- `differentOriginalResiduals` proves residuals separate
+  exactly the two previously colliding original fields.
+
+Commits `ddc73ee` (all original 144 cell recovery),
+`cb6f5c1` (coarse-recovery + residual necessity),
+`a577beb` (witness-normalized 131-residual and product
+normal form), `326a77d` (all cell-consumer sufficiency
+and original SectionedProjection weld). Golden imports:
+`a460251`, `a39319d`, `59a635c`.
+
+### Decisive status distinction
+
+**SOURCE-WRITTEN**: exact observation+residual reopening of
+the full original 144-cell relational source field, complete
+pointwise both directions; arbitrary original relation-cell
+consumers now descend through this lossless pair. This
+closes the *finite relational reconstruction/residual
+accounting* leaf of H1.01/H2.01.
+
+**OPEN**: independently identify the intended relational/group
+completion with a selected **semantic** 13-coordinate subcarrier
+(or quotient with an explicitly limited consumer), or with this
+larger exact 13+131 product; instantiate original ITIR-world
+nodes and commuting observation/consumer fields; source-select
+the full heterogeneous ITIR/world fabric edge matches.
+No construction here provides an ITIR node, independent
+Monster representation, legal/physical world authority,
+or actual group equivalence.
+
+P1 Bishop nested exp/atan analytic same-function identity,
+P2 original independently selected analytic zeta equality,
+and P3 Gamma/Xi original integral/continuation/functional
+equation are unchanged and OPEN.
+
+**Verification:** all new declarations are source-written;
+Agda kernel typechecking has NOT run. Do not call the full
+original 144 field equivalent to (T^{13}) alone. The
+pointwise 13+131 reconstruction is the correct finite
+information decomposition for the selected observation.
