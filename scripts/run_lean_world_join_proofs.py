@@ -270,7 +270,7 @@ def run_compiler(lean,root,relative,*,environment,timeout):
         raise JoinError("Lean returned zero without compiled output: "+relative)
     return sha256(output.read_bytes()).hexdigest(),result
 
-def compile_and_join(plan,lean,donors,*,timeout=180,max_build_seconds=3600):
+def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
     compiler=Path(lean).resolve(strict=True)
     if not compiler.is_file():
         raise JoinError("pinned Lean executable unavailable")
@@ -316,7 +316,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,max_build_seconds=3600):
         for i in range(len(donors)):
             if "DASHIJoined.join"+str(i) not in output_text:
                 raise JoinError("missing original theorem check output")
-        return {
+        report={
             "status":"original-lean-theorem-joins-compiled",
             "lean_version":version_text,
             "lean_binary_sha256":sha256(compiler.read_bytes()).hexdigest(),
@@ -334,6 +334,10 @@ def compile_and_join(plan,lean,donors,*,timeout=180,max_build_seconds=3600):
             "independently_checked":False,
             "world_admitted":False
         }
+        if artifact_consumer is not None:
+            artifact_consumer(
+                report,generated,(root/"DASHIJoinBatch.olean").read_bytes())
+        return report
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
