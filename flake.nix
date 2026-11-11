@@ -275,6 +275,8 @@
             pkgs.bash
             pkgs.coreutils
             pkgs.git
+            pkgs.rustc
+            pkgs.cargo
           ];
         };
 
