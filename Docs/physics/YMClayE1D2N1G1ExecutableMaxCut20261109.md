@@ -283,3 +283,8 @@ Completed source-written declarations:
 **What is paid:** the source-dependent finite numerator positivity/order and partition majorant; if the relevant original Wilson F or G is shown to admit the complement, no new Haar positivity/linearity estimate is needed. **Still unpaid:** a concrete certified uniform [0,1] Wilson test complement for each selected renormalized nonconstant F,G, conversion to normalized moment bounds using the pinned positive-division order, and most importantly actual original RG effective-versus-bare moment errors ε_F, ε_G, ε_FG uniform in physical scaling. The conditional quantitative covariance bound and source mixed J11 transport from the preceding round remain available; no E1 continuum convergence or D2 gap follows.
 
 **Verification:** source-written on PR #1444 and imported in its original physical regression; no local Agda 2.9 compiler. Do not mark as kernel accepted.
+
+
+### 2026-11-11 independent exact-rational regression
+
+Added `scripts/check_ym_original_three_moment_rg.py`. The same six-moment algebra was run locally under Python `fractions.Fraction` exhaustively on the sixfold grid `{-2,-1,0,1,2}^6`: **15,625/15,625** exact-rational covariance-rearrangement and three-error-bound cases passed, including 125 exact matching-moment cases. An explicit *algebraic* negative control confirms that different moment triples can have different covariances; it is **not** represented as a physical SU(N) Wilson counterexample. This is supplementary algebra regression, not Agda kernel checking or physical RG validation.
