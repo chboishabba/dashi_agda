@@ -56,12 +56,15 @@ private import Batteries.Util.Test
         source=generate_joins("Batteries.Data.List.Basic",[
             "List.takeD_zero","List.takeD_nil","List.takeD_succ"
         ]).decode()
-        self.assertEqual(source.count("Declaration.thmDecl"),3)
+        self.assertEqual(source.count("Declaration.thmDecl"),4)
         self.assertEqual(source.count("let proof := mkConst donor levels"),3)
         self.assertIn("info.type",source)
         self.assertIn("info.levelParams",source)
         self.assertNotIn("sorry",source.lower())
         self.assertIn("DASHIJoined.join2",source)
+        self.assertIn("DASHIJoined.combined",source)
+        self.assertIn("mkConst `And.intro",source)
+        self.assertIn("mkConst `And",source)
 
     def test_duplicate_theorem_list_fails_closed(self):
         with self.assertRaises(JoinError):
@@ -97,6 +100,7 @@ class JoinProofActualLean(unittest.TestCase):
             self.assertEqual(len(digest),64)
             self.assertIn(b"DASHIJoined.join0",result.stdout)
             self.assertIn(b"DASHIJoined.join1",result.stdout)
+            self.assertIn(b"DASHIJoined.combined",result.stdout)
 
 
 if __name__=="__main__":
