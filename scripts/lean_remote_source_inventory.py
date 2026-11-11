@@ -79,11 +79,15 @@ def repository_tree(repo: str, commit: str, *, token: str | None = None,
         if (not isinstance(item, dict) or item.get("type") != "blob"
                 or item.get("mode") not in ("100644", "100755")):
             continue   # exclude submodules, symlinks, directories
-        path, sha, size = item.get("path"), item.get("sha"), item.get("size")
-        if (not isinstance(path, str) or not path.endswith(".lean")
-                or not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
+        path = item.get("path")
+        if not isinstance(path, str):
+            raise RemoteError("invalid tree path")
+        if not path.endswith(".lean"):
+            continue
+        sha, size = item.get("sha"), item.get("size")
+        if (not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
                 or type(size) is not int or size < 0):
-            raise RemoteError("invalid or unsafe source tree entry")
+            raise RemoteError("invalid Lean source tree entry")
         filtered.append({"path": path, "sha": sha.lower(), "size": size})
     return sorted(filtered, key=lambda x: x["path"])
 
