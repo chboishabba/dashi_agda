@@ -199,7 +199,26 @@ prune_old_logs() {
   done
 }
 
-AGDA_BIN="${AGDA_BIN:-$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda}"
+# Use the explicitly selected binary, then a working PATH Agda, and
+# only THEN Nix.  Previously an ordinary PATH-only installation tried
+# 'nix build' unconditionally and failed before any kernel check.
+if [ -z "${AGDA_BIN:-}" ]; then
+  if command -v agda >/dev/null 2>&1; then
+    AGDA_BIN="$(command -v agda)"
+  elif command -v nix >/dev/null 2>&1; then
+    AGDA_BIN="$(nix build --no-link --print-out-paths "$AGDA_FLAKE")/bin/agda"
+  else
+    echo "BLOCKED: AGDA_BIN unset, agda absent from PATH, and nix unavailable." >&2
+    exit 127
+  fi
+fi
+if [ ! -x "$AGDA_BIN" ]; then
+  echo "BLOCKED: selected Agda binary is not executable: $AGDA_BIN" >&2
+  exit 127
+fi
+export AGDA_BIN
+echo "Selected Agda executable: $AGDA_BIN"
+"$AGDA_BIN" --version
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   DASHI_WORK="$(mktemp -d /tmp/dashi-agda29-shadow.XXXXXX)"
   STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-experimental.XXXXXX)"
