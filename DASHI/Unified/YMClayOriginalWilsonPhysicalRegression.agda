@@ -102,3 +102,6 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as 
 
 -- Original Wilson physical RG bounded-test majorants: original n=3 pushforward and n=1 bare expectation both <=1 from native product Haar.
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445BoundedMomentMajorantsExact as E1D1OriginalBoundedMomentMajorants
+
+-- E1/A3 physical one-step RG error: exact original interacting Wilson cross numerator and all-weight unit cancellation, without bare-action closure.
+import DASHI.Physics.YangMills.YMClayE1A3OriginalR445WeightedCrossNumeratorExact as E1A3OriginalWeightedRGError
