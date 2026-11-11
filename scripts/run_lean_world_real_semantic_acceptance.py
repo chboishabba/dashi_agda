@@ -53,6 +53,7 @@ def require_tool(name):
     return Path(found).resolve()
 
 def main_run(output_dir: Path, *, timeout=600):
+    output_dir=Path(output_dir).resolve()
     lean=require_tool("lean")
     lake=require_tool("lake")
     dotnet=require_tool("dotnet")
