@@ -16,6 +16,7 @@ open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product.Base using (proj₁; proj₂)
 
 import Real as BishopReal
+import Sequence as BishopSequence
 import RealProperties as BishopP
 
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
@@ -139,3 +140,45 @@ originalBishopImaginaryAxisImagPrefix2NIsSine T y n =
         (Signed.originalBishopImaginaryAxisSinePartialSameConfigured
           T y n))
       (BishopP.+-identityˡ sinePrefix))
+
+
+------------------------------------------------------------------------
+-- CONTIGUOUS FULL FACTORIAL SERIES PREFIXES AT EVEN CUTOFFS.
+-- This is not merely convergence of parity-selected subseries.
+------------------------------------------------------------------------
+
+originalBishopImaginaryAxisRealEvenPrefixConvergesToCosine :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (λ n →
+      BishopReal.∑₀ (factorialImaginaryRealTerm y)
+        (Estimates.evenExponent n))
+    (Elementary.bishopCos (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisRealEvenPrefixConvergesToCosine T y =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisRealPrefix2NIsCosine
+          T y (suc count-1))})
+    ( Elementary.bishopCos (Cartesian.dataSet T) y
+    , Elementary.bishopCosConvergence (Cartesian.dataSet T) y
+    )
+
+originalBishopImaginaryAxisImagEvenPrefixConvergesToSine :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (λ n →
+      BishopReal.∑₀ (factorialImaginaryImagTerm y)
+        (Estimates.evenExponent n))
+    (Elementary.bishopSin (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisImagEvenPrefixConvergesToSine T y =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisImagPrefix2NIsSine
+          T y (suc count-1))})
+    ( Elementary.bishopSin (Cartesian.dataSet T) y
+    , Elementary.bishopSinConvergence (Cartesian.dataSet T) y
+    )
