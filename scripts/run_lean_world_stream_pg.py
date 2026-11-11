@@ -106,6 +106,8 @@ def ingest_stream(conn, repo, revision, fileobj, *,
         if skips:
             raise StreamIngestError(
                 "incomplete archive: "+str(skips)+" source files exceed cap")
+        if count == 0:
+            raise StreamIngestError("no original Lean sources in selected archive")
         cur.execute("""
             SELECT count(*),coalesce(sum(source_size),0)
             FROM lean_world_source_occurrence
