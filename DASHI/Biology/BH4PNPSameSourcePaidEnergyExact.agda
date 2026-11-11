@@ -14,6 +14,7 @@ open import DASHI.Core.Prelude
 import DASHI.Biology.BH4PNPSamePhysicalHistoryBridgeExact as Same
 import DASHI.Biology.BH4PNPOrderedEnergyHistoryExact as Ledger
 import DASHI.Energy.Core as EC
+import DASHI.Biology.BH4SpatialConnectivityCirculationExact as Spatial
 
 record SameSourcePaidEnergyModel : Set₂ where
   field
@@ -139,3 +140,45 @@ allSameSourceHistoriesDescendInExistingEnergySpace :
     (EC.EnergySpace.energy (sameSourceEnergySpace M) x)
 allSameSourceHistoriesDescendInExistingEnergySpace M actions x =
   allSameSourceControlledHistoriesEnergyNonincreasing M actions x
+
+
+------------------------------------------------------------------------
+-- Four-way same-original-history weld: chemistry, PNP, permitted
+-- circulation route, and paid energy all use the one physicalRun.
+-- The route is the pre-existing source-permitted forward FlowPath;
+-- no reverse path, permeability or empirical circulation is inferred.
+------------------------------------------------------------------------
+
+allSameSourceBH4PNPRouteAndPaidEnergy :
+  (M : SameSourcePaidEnergyModel)
+  (actions : List Bool)
+  (x : Same.PhysicalState (source M)) →
+  (Same.bh4Quantitative (source M)
+     (Same.physicalRun (source M) actions x)
+   ≡ Same.bh4Run (source M) actions
+       (Same.bh4Quantitative (source M) x))
+  ×
+  ((Same.pnState (source M)
+      (Same.physicalRun (source M) actions x)
+    ≡ Same.pnRun (source M) actions
+        (Same.pnState (source M) x))
+  ×
+  ((Spatial.FlowPath
+      (Spatial.PermittedFlow
+        (Same.circulation (source M)))
+      (Same.locationOf (source M) x)
+      (Same.locationOf (source M)
+        (Same.physicalRun (source M) actions x)))
+  ×
+   Ledger.OrderedEnergyCarrier._⊑_ (orderedEnergy M)
+     (energyOf M (Same.physicalRun (source M) actions x))
+     (energyOf M x)))
+allSameSourceBH4PNPRouteAndPaidEnergy M actions x =
+  Same.allBH4ControlledHistoriesSamePhysicalSource
+    (source M) actions x
+  , (Same.allPNPControlledHistoriesSamePhysicalSource
+       (source M) actions x
+  , (Same.physicalTrajectoryHasSourcePermittedRoute
+       (source M) actions x
+  , allSameSourceControlledHistoriesEnergyNonincreasing
+      M actions x))
