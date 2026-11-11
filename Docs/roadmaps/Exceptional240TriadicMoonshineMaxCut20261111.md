@@ -284,3 +284,29 @@ where `L(c)_i = ±2` if interval i is outer, else 0, and `H(c)_i=sgn(c_i)`. Reco
 - P1 empirical **OPEN**: original PNF time/history rows, selected dynamic MP null and uncollapsed independent evidence; non-identification facts do not establish real harm/intent.
 
 **Source/type audit:** PR #1106's `FoldedF4WeylReceipt` is an Agda source record with uninhabited `Set` fields and `agdaFoldedWeylKernelPaidHere=false` on that branch. The constructed standard root-coordinate action is therefore a separate finite mathematical recognition, not a new kernel proof of its E6-folded producers.
+
+## 17 — Entire 240-cell support×F4 half-root MAX-CUT closed at finite geometry (2026-11-11)
+
+**Key new constructive answer:** the rank-two F4 long/half incidence map is one restriction of a genuinely larger exact factorisation of the original 256 signed boxes. Each coordinate interval consists of an outer/inner Boolean mask bit and its positive/negative sign. The original all-inner (infrared) 16 cells have precisely the zero four-bit outer-support mask. Therefore the 240 regular cells admit the reversible, source-action-equivariant *set* factorisation
+
+[
+\mathrm{Round56Regular}_{240} \;\cong_{W(B_4)}\; 
+(\{0,1\}^{4}\setminus\{0000\})_{15}\;\times\;
+(\{\pm1\}^{4})_{16}.
+]
+
+The second carrier is exactly the 16 half-root signs of the standard F4 root system in doubled integer coordinates. The first carrier is **not** automatically F4/E6/E8 roots: it is the 15 nonempty support masks already present in the repository `BalabanWilsonBooleanFourCubeExact` and `BalabanClayT4HypercubicOrbitGeometryExact.outerSubset`. Orbit-degree multiplicities follow from the true mask bit counts: 4×16=64, 6×16=96, 4×16=64, 1×16=16. This **accounts for the formerly remaining 144 cells** in the SAME carrier, not by inventing exceptional representations.
+
+**New Agda source on #1479:** `DASHI/Physics/YangMills/BalabanRegular240SupportHalfExact.agda` reuses the original Grid, Orbit, Action and the just-built rank-two F4 incidence owner; it defines `Mask4`, `SupportHalf256`, `encode256`, `decode256`, `source256RoundTrip`, `target256RoundTrip`, `maskWeight`, `sourceMaskWeight`; proof-carrying `Regular240` and `SupportHalf240` require positive outer degree; `encode240`, `decode240`, `regularOriginalRoundTrip`, `regularPackedRoundTrip` prove underlying coordinates round-trip. Independent action `actMask` (flips trivial, adjacent swaps on positions) and existing `F4.actHalf` (sign flips and swaps) yield `maskProjectionEquivariant`, `halfProjectionEquivariant`, `actSupportHalf`, `full256Equivariant`, `regular240Equivariant`, and `independentCartesianActionAgrees`. Agda kernel typecheck is **NOT done**; avoid claiming these source-written proof terms have already passed Agda 2.9.
+
+**New finite executable** `scripts/check_round56_240_support_half_f3.py`; its mathematical algorithm independently run locally with exact integer/Bools confirms 240 matched source coordinates, 15 support masks, 16 sign vectors, all inverse roundtrips, 7 generating actions, 64/96/64/16 orbits. The script is committed; direct execution of that exact committed file from a checkout is still an independent verification gate.
+
+**Representation-level payoff (exact local finite GF3 Gaussian elimination):** over the common W(B4) action the free permutation module of the 240 regular cells is **isomorphic to the free F3 permutation module of 15×16 pairs**, not to the direct sum of two or more unrelated exceptional orbit copies. The two coordinate marginalisation maps `F3[240]→F3[15]` and `F3[240]→F3[16]` have ranks 15 and 16; their stacked 31×240 matrix has rank **30** (one total-sum relation), and kernel dimension **210**. For the *full paired* basis-vector map there is no loss: it is a permutation matrix. These are distinct maps, and confusing the joint coordinate identity with marginal aggregation would reintroduce the original temporal/static information-loss mistake in another domain.
+
+**Updated exact P0/P1/P2 gates:**
+- P0 `round56AllRegularSupportHalfEquivariantBijection`: entire 240-cell **finite algorithm PASS**, Agda source-written, typecheck OPEN.
+- P1 `round56F3ModuleTensorFactorisation`: full free-module permutation isomorphism follows from the exact finite pair-bijection; paper proof/independent numeric checks exist, formal Agda free-module matrices not yet kernel constructed; separate marginal rank 15/16/joint rank30 kernel210 numerically verified.
+- P1 `selectedFoldedE6F4HalfRootSameActorWeld`: OPEN. Actual #1106 folded Weyl/Albert producer may not act on the 16 half-roots independently under full W(F4); its B4 restriction must be identified via actual generators. Do **not** assert current standard-B4 correspondence is the folded group action.
+- P1 `nonemptySupport15ToExceptionalTernaryQuadraticCarrier`: OPEN. Dimension 15/16 has no automatic relation to 3×80 or E8 240; need same-group action and actual equivariant matrix.
+- P0 physical `literalRegularIntegrandSelectedB4GeneratorCertificate`: OPEN, source tensor and box interval environment; four-representative theorem already exists independently.
+- P1–P3 actual original PNF histories, MP null, codec decoder, biological assay, Monster 3-local VOA and legal authority gates UNCHANGED and independent.
