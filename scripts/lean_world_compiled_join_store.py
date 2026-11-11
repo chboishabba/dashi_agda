@@ -175,6 +175,24 @@ def persist_join(conn,report,generated_source,joined_olean,*,
                         batch_sha256,join_name,donor_name,scope_module)
                     VALUES (%s,%s,%s,%s) ON CONFLICT DO NOTHING
                 """,(batch_id,"DASHIJoined.join"+str(index),donor,root))
+            if report.get("genuinely_composed_conjunction") is True:
+                if len(donors)<2:
+                    raise JoinStoreError("conjunction requires multiple original proofs")
+                for ordinal,donor in enumerate(donors):
+                    cur.execute("""
+                        INSERT INTO lean_world_compiled_join_combination (
+                            batch_sha256,combined_theorem_name,
+                            donor_ordinal,original_donor_name)
+                        VALUES (%s,%s,%s,%s) ON CONFLICT DO NOTHING
+                    """,(batch_id,"DASHIJoined.combined",ordinal,donor))
+                cur.execute("""
+                    SELECT donor_ordinal,original_donor_name
+                    FROM lean_world_compiled_join_combination
+                    WHERE batch_sha256=%s AND combined_theorem_name=%s
+                    ORDER BY donor_ordinal
+                """,(batch_id,"DASHIJoined.combined"))
+                if cur.fetchall()!=list(enumerate(donors)):
+                    raise JoinStoreError("composed original proof history collision")
             cur.execute("""
                 SELECT join_name,donor_name,scope_module
                 FROM lean_world_compiled_join_theorem
@@ -210,6 +228,7 @@ def persist_join(conn,report,generated_source,joined_olean,*,
         "batch_sha256":batch_id.hex(),
         "module_occurrences":len(original_modules),
         "joined_theorems":len(donors),
+        "composed_conjunction":report.get("genuinely_composed_conjunction") is True,
         "generated_source_bytes":len(generated_source),
         "joined_olean_bytes":len(joined_olean),
         "original_module_oleans_persisted":len(original_modules),
