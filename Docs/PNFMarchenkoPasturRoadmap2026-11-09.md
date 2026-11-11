@@ -483,3 +483,28 @@ In addition to as-of event availability and historically known delistings, both 
 This is a conservative historical constituent/PNF coordinate policy. It may exclude pre-membership price observations that an alternative specified and justified research protocol wishes to use. Such an alternative must define and source its own historical availability/admission semantics explicitly rather than silently bypassing the point-in-time constraint.
 
 **Verification:** The tests are newly authored and committed; the exact branch code is still not executed locally from a checkout. No unverified test count is reported as passing.
+
+## 2026-11-11 — Cross-PR epistemic observer / Marchenko–Pastur highest-alpha weld
+
+**Actual live owners checked:** PR #1480 `pnf-mp-maxcut-2026-11-09` (original audited head `6ef9c6525269ca661fe6e06945f64fcf056e4863`), PR #1465 `chatgpt/esd-pnf-trialectic-spectral-world-20261104` (source on separate parent #1458), historical PR #37 `PNFSpectralGeometry`, and PR #1479 `chatgpt/epistemic-power-maxcut-20261109` (epistemic cognitive-warfare/cortisol work). **Do not import PR #1479-only modules into #1480 without an explicit branch merge.**
+
+**New source-written theorem** in `DASHI/Information/PNFMPObserverNonPromotionWeldExact.agda`:
+- `taskOnlyMPClass`: the actual MP `NoiseClassifier` applied to an arbitrary candidate eigenvalue estimator that sees the existing `Work.observedTasks` source record only. No empirical eigenvalue is fabricated.
+- `taskOnlyMPClassCannotDetermineIntent`: the existing `Work.sameTasksCannotIdentifyPurpose` and canonical `IntersectionalNonFactorability.rechartingCannotRecoverErasedPhenomenon` imply that no MP threshold/rechart can recover controller intention from observationally identical task histories.
+- `publicOutcomeMPClassCannotRecoverRetention`: post-processing a public accepted-disposition observation with any numeric MP chart/classifier cannot recover unobserved retaining work.
+- `noMPClassCanAuthoriseNumericPromotion`: reuses the original empty `PNFSpectralNumericABIPromotion` type.
+- **Scope:** a source-level distinguishability/no-go result; not a claim that an MP eigenvalue of true independent human outcomes is itself a random matrix or that a measured spectral outlier is evidence of manipulation. Attribution for MP theory belongs to Marchenko and Pastur; epistemic three-task modelling is DASHI original work motivated by its separately cited authors.
+
+**Original sibling source owners already implemented (DO NOT REDO):** `PNFFiniteGramPositiveExact`, `PNFCentredCovarianceExact`, `PNFCovarianceQuadraticIdentityExact`, `PNFCentredFiniteRankNullityBridgeExact` / `PNFFiniteRankNullityBridgeExact`, `PNFHistoryTimeVariableMPSpectralExact` with same history/time finite covariance eigen-equations and aspect ratio `p/(n-1)`, `PNFMP36927ChartNaturalityExact` with pointwise MP classification commuting with the **same** 3-chart observer gluing, and `PNFMPTradingInadequacyControlExact` preserving the original trader permission kernel. No bypass around these original sources.
+
+**Phases and remaining high-alpha exact leaves, in priority order:**
+- P0 **kernel check** the new negative-control theorem and all dependent `PNF`/epistemic imports; no kernel pass asserted.
+- P0 **same-source calibration:** `pnfWindowActivationEquality`, `centredSampleMeanIsOriginal`, `sampleScaleEqualsInverseNMinusOne`, `pnfEmpiricalNullCalibrated`; actual source rows, missingness, sample-window and positive variance needed.
+- P1 **finite spectral mathematical closure:** `sampleCovarianceForcedZeroMultiplicity`, `sampleCorrelationDiagonalTrace`, eigen-decomposition reconstruction and PSD cleaning; check existing rank-nullity owners before writing anything new.
+- P1 **asymptotic MP:** `marchenkoPasturZeroAtom`, `marchenkoPasturDensityNormalised`, `marchenkoPasturMomentFormula`, `marchenkoPasturStieltjesEquation`, `marchenkoPasturWeakLimit` and separately `marchenkoPasturExtremeEigenvalueBounds`. These are OPEN, not implied by finite Gram PSD or MP edge formula fields.
+- P1 **same-action exceptional spectral comparison:** on separate #1479/#1098/#1106/#1389, compute actual common-actor character decomposition (not just count 240 or E8 weight-two dimensions); if one wants to compare Gram empirical spectra, one must source-pay both covariance objects and their normalizations.
+- P2 **ESD/PNF context:** PR #1465 has a selected same-world eigenbasis and required MP calibration, but no original full-text-reviewed population-specific null proof or semantic authority; preserve current PNF candidacy and observer provenance.
+- P2 **human/biology/cognitive warfare:** source-specific physiological measurement and controller intent remain independently unidentifiable from MP class; do not equate a covariance outlier with stress injury or unlawful manipulation.
+- P3 **real numerical replay and walk-forward** on source-pinned histories, held-out nulls, actual financial/clinical measurement units; no forward data leakage, no invented bpp/return or harm claim.
+
+**Status:** one new cross-owner Agda source committed to PR #1480; no Agda kernel check, asymptotic MP convergence proof, real-world causal claim or PR merge made in this pass.
