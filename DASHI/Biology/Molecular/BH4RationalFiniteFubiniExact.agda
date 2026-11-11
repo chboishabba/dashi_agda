@@ -207,3 +207,51 @@ original27x29WeightedFubini :
     (Lift.sourceSpatialWeighted weights rhs)
     (Lift.sourceWeightedRow weights (qColumnTotals rhs))
 original27x29WeightedFubini = qWeightedFiniteFubini
+
+------------------------------------------------------------------------
+-- Generic actual symbolic Fin-indexed column observation.
+-- Crucial: this does not assume lookup(tabulate f) i = f i
+-- by reflexivity for a symbolic Fin i.
+------------------------------------------------------------------------
+
+qLookupMap :
+  ∀ {n : Nat} {A B : Set}
+  (f : A → B) (xs : V.Vec A n) (i : F.Fin n) →
+  V.lookup (V.map f xs) i ≡ f (V.lookup xs i)
+qLookupMap f V.[] ()
+qLookupMap f (V._∷_ x xs) F.zero = refl
+qLookupMap f (V._∷_ x xs) (F.suc i) =
+  qLookupMap f xs i
+
+qLookupZipAdd :
+  ∀ {n : Nat}
+  (left right : V.Vec Q.ℚᵘ n) (i : F.Fin n) →
+  V.lookup (V.zipWith Q._+_ left right) i
+    ≡ Q._+_ (V.lookup left i) (V.lookup right i)
+qLookupZipAdd V.[] V.[] ()
+qLookupZipAdd (V._∷_ x xs) (V._∷_ y ys) F.zero = refl
+qLookupZipAdd (V._∷_ x xs) (V._∷_ y ys) (F.suc i) =
+  qLookupZipAdd xs ys i
+
+qLookupReplicateZero :
+  ∀ {n : Nat} (i : F.Fin n) →
+  V.lookup (V.replicate {n = n} Q.0ℚᵘ) i ≡ Q.0ℚᵘ
+qLookupReplicateZero {n = zero} ()
+qLookupReplicateZero {n = suc n} F.zero = refl
+qLookupReplicateZero {n = suc n} (F.suc i) =
+  qLookupReplicateZero i
+
+qColumnTotalsLookup :
+  ∀ {sites species}
+  (rows : V.Vec (V.Vec Q.ℚᵘ species) sites)
+  (sp : F.Fin species) →
+  Q._≃_
+    (V.lookup (qColumnTotals rows) sp)
+    (qFiniteSum (V.map (λ row → V.lookup row sp) rows))
+qColumnTotalsLookup V.[] sp =
+  QP.≃-reflexive (qLookupReplicateZero sp)
+qColumnTotalsLookup (V._∷_ row rows) sp =
+  QP.≃-trans
+    (QP.≃-reflexive
+      (qLookupZipAdd row (qColumnTotals rows) sp))
+    (QP.+-cong QP.≃-refl (qColumnTotalsLookup rows sp))
