@@ -1327,3 +1327,78 @@ outcome, 27×29 real concentration embedding, analytic
 Poisson–SG preservation/continuity, genuine finite Brouwer,
 root transfer, physical kinetics and open-boundary
 laws remain OPEN.
+
+
+### 2026-11-11 highest-alpha source exact rational semidiscrete accounting
+
+**New testable cross-model bridge**:
+`scripts/bh4_original_reactive_pnp_adapter.py` now defines
+`original_closed_rational_semidiscrete_conservation`. It obtains
+the **same** full-panel original 29×12 signed stoichiometric
+matrix and 29 source formula/charge weights from
+`check_certificate(full_panel=True)`, pins the original
+Rhea bytes by SHA-256, and consumes 54×29 **arbitrary
+signed rational** internal native-bond fluxes plus 27×12
+**arbitrary rational** original reaction-rate coordinates.
+It constructs all 783 entries of the selected closed
+semidiscrete source RHS by exact `fractions.Fraction`:
+
+```text
+RHS_{v,s}
+ = sum_{native incident bonds} ± J_{edge,s}
+   + sum_{r=1}^{12} S_{s,r} rate_{v,r}.
+```
+
+Every original 54-bond term appears with opposite signs at
+its two incident voxels. The separately source-checked
+exact integer 29×12 left-kernel inequalities yield
+
+```text
+Σ_{v,s} C_s RHS_{v,s} = 0,
+Σ_{v,s} H_s RHS_{v,s} = 0,
+Σ_{v,s} N_s RHS_{v,s} = 0,
+Σ_{v,s} O_s RHS_{v,s} = 0,
+Σ_{v,s} P_s RHS_{v,s} = 0,
+Σ_{v,s} z_s RHS_{v,s} = 0.
+```
+
+The adapter checks those six exact rational equalities and
+returns the complete rational RHS, source digest and
+fail-closed non-promotion flags. It rejects binary floating
+inputs so a `0.5` float is not misrepresented as an
+original exact rational proof term. Regression controls
+`test_original_54_bond_27x29x12_exact_rational_rhs_conservation`
+and `test_original_rational_continuity_rejects_binary_floats_and_bad_source`
+exercise a nontrivial `1/3` bond flux and `2/7`
+reaction, a corrupted source column and fractional precision
+rejection. These are synthetic-only monkeypatched checks,
+NOT real source acquisition.
+
+This is substantive **exact-rational semidiscrete continuity**
+and a reusable proof-algebra interface. It does not yet
+give a kernel-accepted `ℚ→Bishop ℝ` embedding, prove
+the transcendental real SG Bernoulli flux or original
+rate laws meet all positivity/continuity hypotheses, add
+physical boundary work, prove existence/uniqueness of
+a real root in Agda, or validate a tissue observable.
+
+The same pass strengthens `SourcePositiveAggregateCHNOP`
+to an actual constructive yes/no proposition via
+`decideOriginal369SourcePositiveCHNOPWithRefutation`
+and `positiveOriginalSourceExcludesEveryZeroCoordinate`
+in the already imported Agda CHNOP bridge. The checker
+now reuses upstream strict `_integer` to reject source
+charge coercions at both layers. These are source-written
+and not Agda/pytest executed in this runtime.
+
+**Remaining P0 critical path:** byte-pin authentic
+source; check generated Agda 29-weight positivity/no-go;
+embed source-certified integral left-kernel into the
+selected Bishop real species and the same original
+SG/mass-action field; pay finite real compactness,
+self-map continuity, source-real positivity/loss bound,
+Brouwer producer and fixed-point-to-root proof in the
+pinned Agda kernel. **P1:** original opened six-face
+boundary work and BH4/PNP/tissue same physical carrier.
+**P2:** independent physical longitudinal validation,
+Golden kernel and ITIR artifact provenance.
