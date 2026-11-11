@@ -18,7 +18,7 @@ module DASHI.Analysis.BishopComplexFactorialBinomialSummandExact where
 open import Agda.Builtin.Nat using (Nat)
 import Data.Nat.Base as ℕ
 import Data.Nat.Combinatorics as Comb
-open import Data.Product.Base using (_,_)
+open import Data.Product.Base using (_,_; proj₁; proj₂)
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -29,6 +29,14 @@ import DASHI.Foundations.BishopExponentialBinomialCoefficientExact as Coeff
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
 import DASHI.Foundations.BishopFiniteDegreeOneGeometricIdentityExact as NatReal
 import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as Factorial
+
+complexTrans :
+  ∀ {a b c : Complex.BishopComplex} →
+  Complex._≈C_ a b → Complex._≈C_ b c → Complex._≈C_ a c
+complexTrans first second =
+  BishopP.≃-trans (proj₁ first) (proj₁ second)
+  ,
+  BishopP.≃-trans (proj₂ first) (proj₂ second)
 
 -- Exact Cartesian multiplication compatibility with two original
 -- Bishop real scalars, on arbitrary complex values.
@@ -93,7 +101,7 @@ originalBishopComplexFactorialConvolutionSummand :
         (Algebra.powC w (n ℕ.∸ k))))
 originalBishopComplexFactorialConvolutionSummand
   z w n k k≤n =
-  Complex.≈C-trans
+  complexTrans
     (originalBishopComplexTwoScalesMultiply
       (Exp.embed (Exp.inverseFactorial k))
       (Exp.embed (Exp.inverseFactorial (n ℕ.∸ k)))
