@@ -108,3 +108,6 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalR445WeightedCrossNumeratorExact
 
 -- E1/D1: same original fine-blocked vs bare Wilson weighted cross numerator invariant under arbitrary scalar constant-mode shifts; subtraction centering requires explicit selected scalar law.
 import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact as OriginalWilsonCrossNumeratorCentering
+
+-- E1/D1 P0.01--04 original Wilson bare-centering and exact positive-partition quotient; selected real additive/quotient laws remain explicit and not newly postulated.
+import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringAlgebraExact as OriginalWilsonBareCentering
