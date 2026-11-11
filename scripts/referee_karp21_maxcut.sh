@@ -114,6 +114,7 @@ python3 scripts/check_karp21_first_enabled_ledger_word_width.py
 python3 scripts/check_karp21_endpoint_history_conservation.py
 python3 scripts/check_karp21_live_payload_potential.py
 python3 scripts/check_karp21_sparse_certificate_bound.py
+python3 scripts/check_karp21_positive_threshold_input_width.py
 python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
