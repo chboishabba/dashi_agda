@@ -341,3 +341,23 @@ closure and 21,481-repository harvesting are **still open**.
 This tranche is source-written and pushed but NOT yet executed against the
 operator's Nix/.NET/PostgreSQL environment. The earlier #1484 2/2 migration
 and 6/6 candidate tests apply to their earlier validated head only.
+
+## 11 November — Rust-only acceptance path update
+
+The #1495 checker is now **nanoda**, an independent Rust Lean kernel checker,
+pinned to `ammkrn/nanoda_lib` commit
+`418320295890faed83a96fd97907b12a3b6728c2`.
+Previous Tenet/.NET acceptance references are superseded. No .NET toolchain
+is required. The existing #1484 Nix shell now provides `pkgs.rustc` and
+`pkgs.cargo` alongside Lean, psycopg and PostgreSQL.
+
+The cross-PR candidate importer additionally checks that the #1495 evidence
+records `checker_kind=rust-nanoda`, the exact pinned source SHA, a strict
+axiom policy, and explicit absence of `sorryAx` permission. This is necessary
+evidence-binding validation, not a substitute for checking the actual export.
+
+Use the same two-stage commands in the preceding section; the #1495
+`run_lean_world_semantic_maxcut_local.sh` now builds nanoda through Cargo
+and invokes it using its JSON configuration file. The #1484 isolated-schema
+retrieval/Lean replay interface is unchanged. Rust-stage execution on the new
+heads is still pending.
