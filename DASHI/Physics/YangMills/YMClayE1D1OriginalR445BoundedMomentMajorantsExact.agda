@@ -19,10 +19,10 @@ module DASHI.Physics.YangMills.YMClayE1D1OriginalR445BoundedMomentMajorantsExact
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; subst)
+open import Relation.Binary.PropositionalEquality using (sym; subst; trans; cong)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_; _≤ℝ_; absℝ; oneNonnegative)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_; _≤ℝ_; absℝ; oneNonnegative; +-mono-≤; +-identityˡ; +-comm; +-assoc; *-distribˡ-+; mulOneʳ)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -36,6 +36,7 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as 
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact as Quant
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445ThreeMomentRGCutExact as Source
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -68,6 +69,95 @@ module _
   CoarseTest =
     Cross.CoarseTest
       theory traceData exponential beta oneLink bilateral divide
+
+  ----------------------------------------------------------------------
+  -- REAL bounded-test product closure on the SAME original coarse
+  -- field. Given F + F^c = 1 and G + G^c = 1 with nonnegative parts,
+  -- the product has the explicit nonnegative complement
+  --
+  --           (FG)^c = F^c + F * G^c.
+  --
+  -- This is a constructed physical-test-class closure, not a new
+  -- event/measure axiom. In particular FG need not be a single loop.
+  ----------------------------------------------------------------------
+
+  sourceProductComplement :
+    (left leftComplement right rightComplement : CoarseTest) →
+    CoarseTest
+  sourceProductComplement left leftComplement right rightComplement coarse =
+    leftComplement coarse +ℝ
+    (left coarse *ℝ rightComplement coarse)
+
+  sourceProductTest :
+    (left right : CoarseTest) → CoarseTest
+  sourceProductTest left right coarse =
+    left coarse *ℝ right coarse
+
+  sourceProductNonnegative :
+    (left right : CoarseTest) →
+    (∀ coarse → 0ℝ ≤ℝ left coarse) →
+    (∀ coarse → 0ℝ ≤ℝ right coarse) →
+    ∀ coarse →
+      0ℝ ≤ℝ sourceProductTest left right coarse
+  sourceProductNonnegative left right leftNN rightNN coarse =
+    Hess.zeroProduct≤ (left coarse) (right coarse)
+      (leftNN coarse) (rightNN coarse)
+
+  sourceProductComplementNonnegative :
+    (left leftComplement right rightComplement : CoarseTest) →
+    (∀ coarse → 0ℝ ≤ℝ left coarse) →
+    (∀ coarse → 0ℝ ≤ℝ leftComplement coarse) →
+    (∀ coarse → 0ℝ ≤ℝ rightComplement coarse) →
+    ∀ coarse →
+      0ℝ ≤ℝ
+        sourceProductComplement
+          left leftComplement right rightComplement coarse
+  sourceProductComplementNonnegative
+    left leftComplement right rightComplement
+    leftNN leftCompNN rightCompNN coarse =
+    subst
+      (λ v → v ≤ℝ
+        sourceProductComplement
+          left leftComplement right rightComplement coarse)
+      (+-identityˡ 0ℝ)
+      (+-mono-≤
+        (leftCompNN coarse)
+        (Hess.zeroProduct≤
+          (left coarse) (rightComplement coarse)
+          (leftNN coarse) (rightCompNN coarse)))
+
+  sourceProductCompletesOne :
+    (left leftComplement right rightComplement : CoarseTest) →
+    (∀ coarse → left coarse +ℝ leftComplement coarse ≡ 1ℝ) →
+    (∀ coarse → right coarse +ℝ rightComplement coarse ≡ 1ℝ) →
+    ∀ coarse →
+      sourceProductTest left right coarse
+      +ℝ sourceProductComplement
+        left leftComplement right rightComplement coarse
+      ≡ 1ℝ
+  sourceProductCompletesOne
+    left leftComplement right rightComplement
+    leftComplete rightComplete coarse =
+    let
+      f = left coarse
+      g = right coarse
+      cf = leftComplement coarse
+      cg = rightComplement coarse
+    in
+    trans
+      (cong (λ v → (f *ℝ g) +ℝ v)
+        (+-comm cf (f *ℝ cg)))
+      (trans
+        (sym (+-assoc (f *ℝ g) (f *ℝ cg) cf))
+        (trans
+          (cong (λ v → v +ℝ cf)
+            (sym (*-distribˡ-+ f g cg)))
+          (trans
+            (cong (λ v → (f *ℝ v) +ℝ cf)
+              (rightComplete coarse))
+            (trans
+              (cong (λ v → v +ℝ cf) (mulOneʳ f))
+              (leftComplete coarse)))))
 
   -- A coarse test and its explicitly supplied positive complement
   -- remain pointwise [0,1] when composed with the ACTUAL SU(N) block.
