@@ -1843,3 +1843,20 @@ or source-paid tissue boundary conditions.
 **New Agda source is committed, not kernel checked**;
 the current container has no `agda` or `nix`
 executable.
+
+
+### 2026-11-11 P0 six computed RHS defects derived from separately source-paid local owners
+
+**New assistant-authored Agda owner:** `DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact`, imported by the original BH4 Golden root. This is a **consequence theorem for the actual** `Operator.rational369SemidiscreteRHS inputs` rather than a constructor that assumes six global conservation defects.
+
+**Exact source split:** `OriginalSourceLocalConservation inputs weights` requires *only* (i) a proof that the native transport-only 27-site column total vanishes for each of 29 species, and (ii) proof that the reaction-only 27×29 RHS weighted sum vanishes for each of the six original CHNOP/charge axes. Both refer to the SAME `Rational369SemidiscreteInputs` and `Matrix 6 29` owner. `originalComputedRHSSixZeroDefects` composes the new source-written `Linear.original369ComputedRHSWeightedSplit` and the pre-existing current-head `Fubini.qWeightedColumnZeroImpliesSpatialZero` to **derive all six rational zero defects**. `originalComputedRHSSixBishopConservation` immediately invokes `Operator.computedRationalRHSConservationLiftsToBishop` with those derived witnesses; no global zero-defect proof is admitted independently.
+
+**Do not overpromote:** the record is an explicit uninhabited obligation until actual original 54-column incidence cancellation and 29×12 signed source-kernel theorems are transferred to the specific transport/reaction `Operator` terms. It cannot be filled with fake zero matrices or unknown measured rates. The finite Fubini and source column cancellation donors already exist on this fast-moving branch; their same-expression weld remains **OPEN**. Neither this structural proof nor prior donor source has an Agda 2.9 kernel receipt. The byte-pinned Rhea generated source and real SG/mass-action physics remain separately OPEN.
+
+**Exact next maximum cut:** discharge the two *local* receipt fields from (a) `Native.sourceNativeIncidence` with `Native.sourceNativeColumnZero`, transporting arbitrary rational native flux columns across finite sums; (b) generated original 12-column gross reactant/product source kernel, proving arbitrary 27-site rational reaction RHS weighted zero with correct subtraction signs. Then construct a single genuine `OriginalSourceLocalConservation` inhabitant for the generated source. Real ordered PNP, Brouwer, boundary work, tissue and empirical validation remain independent.
+
+**Verification:** committed source + root source readback; no Agda/Nix at runtime. Exact-head:
+```sh
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4ComputedRationalSixDefectCompositionExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+```
