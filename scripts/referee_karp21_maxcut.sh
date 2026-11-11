@@ -15,7 +15,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$repo_root"
 mode="${1:-all}"
 
-if ! command -v python3 >/dev/null 2>&1; then
+if [[ "$mode" != "kernel-cut" ]] && ! command -v python3 >/dev/null 2>&1; then
   echo "BLOCKED: python3 unavailable for preflight." >&2
   exit 127
 fi
