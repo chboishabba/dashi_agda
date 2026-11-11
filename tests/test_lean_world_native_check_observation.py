@@ -25,7 +25,7 @@ class NativeCheckObservation(unittest.TestCase):
     def checker(self, body="pass"):
         # Test-only executable; demonstrates that exit zero is NOT authority.
         program=self.root/"test-checker.py"
-        program.write_text("#!/usr/bin/python3\n"+body+"\n")
+        program.write_text("#!"+sys.executable+"\n"+body+"\n")
         program.chmod(0o700)
         return program,sha256(program.read_bytes()).hexdigest()
 
