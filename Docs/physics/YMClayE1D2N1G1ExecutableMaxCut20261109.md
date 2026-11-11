@@ -288,3 +288,25 @@ Completed source-written declarations:
 ### 2026-11-11 independent exact-rational regression
 
 Added `scripts/check_ym_original_three_moment_rg.py`. The same six-moment algebra was run locally under Python `fractions.Fraction` exhaustively on the sixfold grid `{-2,-1,0,1,2}^6`: **15,625/15,625** exact-rational covariance-rearrangement and three-error-bound cases passed, including 125 exact matching-moment cases. An explicit *algebraic* negative control confirms that different moment triples can have different covariances; it is **not** represented as a physical SU(N) Wilson counterexample. This is supplementary algebra regression, not Agda kernel checking or physical RG validation.
+
+
+## 2026-11-11 P0 original Wilson normalized source majorants and bounded RG cut
+
+A source review found two defects in the earlier `YMClayOriginalWilsonFiniteNumeratorOrderExact.agda`: missing real multiplication import, and the wrong equality orientation in its `lowerNum+0=lowerNum` substitution. Both were repaired before extending the proof.
+
+The same original all-cutoff numerator module now includes:
+- `originalWilsonPartitionStrictlyPositive` directly from the original `Family.physicalFinitePartitionPositive`;
+- `originalWilsonNormalizedBelowOne`: if the selected original test F has a certified nonnegative complement to 1, then **the original Wilson normalized expectation** at arbitrary cutoff n satisfies E_W,n[F]≤1;
+- `originalWilsonNormalizedNonnegative`: pointwise nonnegative original Wilson F gives 0≤E_W,n[F].
+
+These use only the previously sourced product-Haar integration laws and **explicit standard scalar ordered-division premises**: monotonicity of numerator under division by a positive denominator, division of zero, and self-division. They do **not** silently infer quotient order from the currently minimal `RealAnalysisAxioms`.
+
+New `YMClayE1D1OriginalR445BoundedMomentMajorantsExact.agda` uses these directly on the actual physical R445 3→1 block:
+- `originalEffectiveMomentAtMostOne` applies original n=3 Wilson source normalization to F∘B using the native ordered SU(N) blocked-link map;
+- `originalBareMomentAtMostOne` applies the independent original n=1 Wilson source to F;
+- `originalEffectiveMomentAbsoluteAtMostOne` and `originalBareMomentAbsoluteAtMostOne` turn certified [0,1] source moments into |E|≤1, using an explicit standard abs(x)=x for nonnegative real x;
+- `originalR445CovarianceBoundForNativeUnitBoundedTests` invokes the previously source-written quantitative R445 covariance theorem with **both one-point majorants set to the actual scalar unit 1**, not additional physical source assumptions. This applies to any original coarse tests with explicit [0,1] certificates and still requires only the three source RG errors on F,G,FG. The RHS is ε_FG+ε_F·1+1·ε_G, with simplification to a three-error sum available from basic ring identities.
+
+**Precise unpaid P0:** actual cutoff/volume-uniform physical source RG moment discrepancy estimates ε_F, ε_G, ε_FG on a concrete chosen renormalized interacting Wilson cylinder family; certifying bounded/coarse complements on the selected (possibly rescaled/shifted) observable class; identifying physical blocking with the E1 limit. R576 mixed-log shell activity, R577 same-OS transfer, R563 H6 noncollapse and R571 G1 physical group continuation remain unpaid.
+
+**Verification:** source-written/committed and imported into original physical regression, not Agda-kernel-accepted. No CI-based acceptance inferred.
