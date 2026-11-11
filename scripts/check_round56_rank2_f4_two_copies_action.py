@@ -30,12 +30,14 @@ def f4_roots_doubled():
             r[i] = a
             roots.add(tuple(r))
     for i, j in combinations(range(4), 2):
-        for a, b in product((-1, 1), repeat=2):
+        for a, b in product((-2, 2), repeat=2):
             r = [0] * 4
             r[i], r[j] = a, b
             roots.add(tuple(r))
     roots.update(product((-1, 1), repeat=4))
     assert len(roots) == 48
+    assert sum(sum(x*x for x in r) == 4 for r in roots) == 24
+    assert sum(sum(x*x for x in r) == 8 for r in roots) == 24
     return roots
 
 
