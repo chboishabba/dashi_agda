@@ -1860,3 +1860,99 @@ executable.
 scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4ComputedRationalSixDefectCompositionExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 ```
+
+
+### 2026-11-11 P0 computed 783-coordinate RHS decomposition: local producer instead of six assumed global zeros
+
+The **existing** original semidiscrete operator
+`BH4OriginalRationalSemidiscreteOperatorExact` was
+retained unchanged as the authority for
+`rational369SemidiscreteRHS : Matrix 27 29`.
+Two new source-written Agda owners are now imported
+under the existing BH4 Golden root:
+
+**1. `BH4RationalFiniteFubiniExact.agda`**:
+- generic `ℚᵘ` row-sum congruence, addition,
+  zero-vector identity and finite matrix Fubini;
+- generic source-row weighted addition and
+  `qWeightedFiniteFubini`;
+- `original27x29WeightedFubini`, identifying the
+  exact same `Lift.sourceSpatialWeighted` with
+  weighted 27-site column totals;
+- `qWeightedColumnZeroImpliesSpatialZero`,
+  making **29 per-species 27-site zero witnesses**
+  sufficient for *any* rational weight vector,
+  rather than postulating six global weighted zeros.
+
+**2. `BH4OriginalComputedRationalRHSSplitExact.agda`**:
+- `originalBondRows` and `originalReactionRows`
+  use the same original operator's own
+  `bondContribution` and `reactionContribution`;
+- `originalBondAt`, `originalReactionAt`,
+  `lookupZipWith`, `lookupMatrixAddAt`,
+  `originalRHSSplitLookup` explicitly respect
+  SYMBOLIC `Fin 27` and `Fin 29` indices.
+  A first tempting `refl` shortcut was rejected
+  because `lookup (tabulate f) i` need not
+  definitionally reduce for an arbitrary symbolic
+  `i`; the source now uses the original
+  `Operator.lookupTabulateExact` proof and
+  explicit `zipWith` lookup induction.
+- `qSpatialWeightedCong` and
+  `qSpatialWeightedAdd` prove weighted
+  sum congruence and RHS splitting.
+- `originalComputedRHSWeightedSplits` proves
+  the canonical original 27×29 RHS's spatial
+  weighted sum equals the sum of its transport
+  and reaction weighted totals.
+- `originalComputedSixAxisZeroFromLocal`
+  derives the six source-axis rational
+  global zero defects from exactly two
+  **local structural inputs**:
+  (a) one transport zero over all 27 sites
+  for EACH of the 29 species,
+  (b) one weighted reaction source zero
+  for EACH of six original CHNOP/z axes.
+  No arbitrary six-global-zero hypothesis
+  occurs in this theorem.
+- `originalComputedSixAxisBishopFromLocal`
+  immediately consumes the derived zeros in
+  the **already-existing**
+  `Operator.computedRationalRHSConservationLiftsToBishop`.
+
+The new owners are proof SOURCE, not Agda
+typechecking receipts. They do **not**
+manufacture original Rhea 29×12 source bytes,
+measured fluxes/rates or original tissue calibration.
+
+**Remaining exact P0 algebraic cut (now narrower):**
+(1) prove for each of 29 species, on the
+literal `sourceNativeIncidence` 27×54 matrix,
+that its transport-only original
+`qColumnTotals (originalBondRows inputs)`
+is zero, by using the previously emitted
+54 `sourceNativeColumnZero` witnesses
+and rational finite weighted Fubini;
+(2) prove each of six original CHNOP/z
+weights annihilates the 27-site
+`originalReactionRows`, using the 72
+generated source 12-column rational
+balance cases and arbitrary 27×12 rates;
+(3) instantiate `originalComputedSixAxisBishopFromLocal`
+with *these derived, same-source* witnesses
+to obtain the actual computed 783-coordinate
+Bishop continuity theorem without supplying
+a global conservation receipt.
+Source generation and Agda 2.9 acceptance
+must precede any claim of physical source
+certification.
+
+**P0 real/analytic then remains:** genuine
+Bishop-real SG/mass-action operator
+identification; compact conserved positive
+simplex, true fixed-point theorem, positive
+implicit root and free-energy inequality.
+**P1/P2:** original six-face boundary work,
+BH4/PNP/tissue same-object refinement,
+original kinetic evidence, longitudinal
+validation and Golden/ITIR promotion.
