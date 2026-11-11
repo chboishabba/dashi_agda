@@ -34,8 +34,8 @@ def persist_candidate_world(conn, world):
                 if source is None or row["source_sha256"] != source["sha256"]:
                     raise CandidatePersistenceError("missing original source evidence")
                 if (row.get("kind") != "lean-elaborated-export" or
-                    row.get("kernel_certified") is True or
-                    row.get("world_admitted") is True):
+                    any(field in row and row[field] is not False
+                        for field in ("kernel_certified", "world_admitted"))):
                     raise CandidatePersistenceError("unexpected candidate promotion")
                 cur.execute("""
                     INSERT INTO lean_world_fibre
