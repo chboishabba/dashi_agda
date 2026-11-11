@@ -6,6 +6,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 targets=(
+  DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisFiniteReindexExact.agda
   DASHI/Foundations/BishopFiniteEvenOddSeriesReindexExact.agda
   DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisSignedTermsExact.agda
   DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisTwoStepExact.agda
