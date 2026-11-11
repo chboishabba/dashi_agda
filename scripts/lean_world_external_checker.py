@@ -104,8 +104,11 @@ def check_native_export(export: PendingExport, executable: Path, *,
         # Both are overflow failures, not ordinary proof rejection.
         if (completed.returncode == -signal.SIGXFSZ or
             (completed.returncode != 0 and
-             (stdout.stat().st_size >= max_output_bytes or
-              stderr.stat().st_size >= max_output_bytes))):
+             ((max_output_bytes == 0 and
+               (stdout.stat().st_size > 0 or stderr.stat().st_size > 0)) or
+              (max_output_bytes > 0 and
+               (stdout.stat().st_size >= max_output_bytes or
+                stderr.stat().st_size >= max_output_bytes))))):
             raise CheckerError("external checker output exceeded budget")
         if completed.returncode != 0:
             raise CheckerError("external checker rejected native export")
