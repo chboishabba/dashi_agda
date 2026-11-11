@@ -109,10 +109,10 @@ module _
     in
     subst
       (λ value → value ≤ℝ 1ℝ)
-      (sym (mulOneʳ 1ℝ))
+      (sym (absMul x y))
       (subst
-        (λ value → value ≤ℝ 1ℝ *ℝ 1ℝ)
-        (sym (absMul x y))
+        (λ bound → absℝ x *ℝ absℝ y ≤ℝ bound)
+        (mulOneʳ 1ℝ)
         (mulMonotoneNonnegative
           (absNonnegative x)
           (originalPlaquetteTraceBoundAtEveryCutoff n p links)
