@@ -63,11 +63,11 @@ complexFactorialConvolutionCoefficient :
   Nat → Complex.BishopComplex
 complexFactorialConvolutionCoefficient z w n =
   Complex.complex
-    (BishopSum.sum
+    (BishopSum.sum {n = suc n}
       (λ index →
         Complex.re
           (complexFactorialConvolutionTerm z w n (toℕ index))))
-    (BishopSum.sum
+    (BishopSum.sum {n = suc n}
       (λ index →
         Complex.im
           (complexFactorialConvolutionTerm z w n (toℕ index))))
@@ -77,11 +77,11 @@ complexBinomialConvolutionCoefficient :
   Nat → Complex.BishopComplex
 complexBinomialConvolutionCoefficient z w n =
   Complex.complex
-    (BishopSum.sum
+    (BishopSum.sum {n = suc n}
       (λ index →
         Complex.re
           (complexBinomialConvolutionTerm z w n (toℕ index))))
-    (BishopSum.sum
+    (BishopSum.sum {n = suc n}
       (λ index →
         Complex.im
           (complexBinomialConvolutionTerm z w n (toℕ index))))
