@@ -39,6 +39,7 @@ import DASHI.Governance.SituatedDevelopmentalUltrametricExact as Development
 import DASHI.Governance.CognitiveWarfareSituatedPhysiologyWeldExact as CW
 import DASHI.Governance.CrossDomainResidualConsumerPreservationExact as Residual
 import DASHI.Governance.DevelopmentalTriadicFiniteQuotientWeldExact as DevTri
+import DASHI.Governance.EpistemicHistoryResidualPayloadExact as WorkPayload
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -194,6 +195,13 @@ record LegalCrossCaseCut : Set₁ where
     developmentalCanonicalPrefixCannotRecoverLaterHistory :
       DevTri.encodeHistory Development.leafA
         ≡ DevTri.encodeHistory Development.leafB → ⊥
+    epistemicWorkFullHistoryPayloadRoundTrip :
+      (history : List CW.Work.EpistemicTask) →
+      WorkPayload.decodeWork (WorkPayload.encodeWork history) ≡ history
+    epistemicWorkPublicStatusCannotDecodeHistory :
+      (decoder : CW.Work.PublicDisposition → List CW.Work.EpistemicTask) →
+      ((history : List CW.Work.EpistemicTask) →
+        decoder (CW.Work.visibleDisposition history) ≡ history) → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -246,4 +254,6 @@ crenshawLegalCrossCaseCut =
     CW.cortisolDoesNotDetermineCausalAttribution
     Residual.integralDoesNotDetermineAcutePoint
     DevTri.laterHistoryReallyLost
+    WorkPayload.workRoundTrip
+    WorkPayload.noLosslessDecoderAfterDroppingSideInformation
     refl refl
