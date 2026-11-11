@@ -35,3 +35,32 @@ CREATE TABLE IF NOT EXISTS lean_world_candidate_dependency (
 -- The tables intentionally have NO kernel_certified boolean that may
 -- accidentally be set by ingesting an untrusted export row. Promotion requires
 -- an independently reviewed, separate authenticated-checker ledger.
+
+-- A stored original candidate receipt or dependency history is append-only.
+-- Provenance corrections must create a newly pinned original identity.
+CREATE OR REPLACE FUNCTION lean_world_reject_candidate_mutation()
+RETURNS trigger LANGUAGE plpgsql AS $$
+BEGIN
+  RAISE EXCEPTION 'Lean-world candidate provenance is immutable';
+END
+$$;
+DROP TRIGGER IF EXISTS lean_world_candidate_receipt_immutable
+  ON lean_world_candidate_receipt;
+CREATE TRIGGER lean_world_candidate_receipt_immutable
+BEFORE UPDATE OR DELETE ON lean_world_candidate_receipt
+FOR EACH ROW EXECUTE FUNCTION lean_world_reject_candidate_mutation();
+DROP TRIGGER IF EXISTS lean_world_candidate_dependency_immutable
+  ON lean_world_candidate_dependency;
+CREATE TRIGGER lean_world_candidate_dependency_immutable
+BEFORE UPDATE OR DELETE ON lean_world_candidate_dependency
+FOR EACH ROW EXECUTE FUNCTION lean_world_reject_candidate_mutation();
+DROP TRIGGER IF EXISTS lean_world_candidate_receipt_no_truncate
+  ON lean_world_candidate_receipt;
+CREATE TRIGGER lean_world_candidate_receipt_no_truncate
+BEFORE TRUNCATE ON lean_world_candidate_receipt
+FOR EACH STATEMENT EXECUTE FUNCTION lean_world_reject_candidate_mutation();
+DROP TRIGGER IF EXISTS lean_world_candidate_dependency_no_truncate
+  ON lean_world_candidate_dependency;
+CREATE TRIGGER lean_world_candidate_dependency_no_truncate
+BEFORE TRUNCATE ON lean_world_candidate_dependency
+FOR EACH STATEMENT EXECUTE FUNCTION lean_world_reject_candidate_mutation();
