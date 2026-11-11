@@ -485,3 +485,20 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **IMPORTANT STATUS:** source-written and pinned Agda 2.9 target registered; no actual Agda kernel check in this environment. The source still needs successful typechecking. This does NOT yet identify \`originalBishopFactorialExpDiskValue\` with the **existing** \`BishopSetoidComplexExact.expC T\` (Cartesian Bishop exp/sin/cos); that is the next same-object analytic weld. It also does not prove \(\exp_C(L(w))\simeq1+w\) until finite composition algebra, uniform convergence and continuity have been moved onto original Bishop setoid carrier.
 
 **Revised max-cut order:** (0) exact-head Agda acceptance/repairs; (1) native complex factorial exp identification (first on certified unit disk, then arbitrary input needed for \(L(w)\)), (2) formal coefficient cancellation and positive Cauchy-composition domination with Bishop limit exchange, (3) original \(\exp_C(L(w))\simeq1+w\), (4) upper fixed-point witness and original exp addition, (5) Koenigs/Schröder, global Kneser, modular \(q/\Delta/j\), observer/Kouznetsov. Never promote source-written/conditional lemmas to kernel-complete without the checker receipt.
+
+
+## 2026-11-11 P0 source-audit fixes and same-argument analytic weld
+
+**Actual P0 corrections made to the connected PR #1478 branch** (not kernel receipts):
+
+1. \`AbelBishopLogOnePlusOriginalSeriesExact.inversePositiveNat\`: replaced the unresolved Agda instance placeholder \`denominatorNonzero = _\` with an explicit structural proof \`Nat.≢-nonZero (λ ())\` for \`NonZero (suc n)\`. This was a genuine source error hidden by a hole-only grep.
+2. \`AbelBishopFactorialComplexExpDiskExact.factorialCoefficientAtMostOne\`: replaced the uncertain \`BishopP.≤-reflexive\` call with \`BishopP.≤-respˡ-≃ factorialCoefficientZeroIsOne BishopP.≤-refl\`, using the known Bishop order transport and reflexivity.
+3. \`factorialCoefficientAbsoluteAtMostOne\`: corrected the nonnegative absolute-value equivalence to take \`Exp.embeddedInverseFactorialNonnegative n\` directly, instead of feeding it a proof of \`0≤x\`.
+4. Hardened the focused Agda local checker \`scripts/check_analytic_j_tetration_golden_local.sh\` to fail on bare right-hand-side placeholders \`= _\` as well as holes, postulates, and trust escapes. This lint is additional to (not a substitute for) the pinned Agda kernel.
+
+**New direct same-object source composition** in \`AbelBishopSelectedLogAffineReconstructionExact.agda\`:
+- \`originalBishopSelectedChartFactorialExp\` produces the canonical factorial exponential disk value \(\sum_{n≥0}(p^{-1}t)^n/n!\) at **the exact same** \`normalizedDisplacement p nz t\` and original norm-square witness used by the source logarithmic germ.
+- \`originalBishopSelectedChartFactorialPositiveConverges\` produces the original positive-degree complex-series convergence witness at that same point, directly via \`AbelBishopFactorialComplexExpDiskExact.originalBishopFactorialExpPositiveLimitConverges\`.
+- Both remain source-written and require the exact-head Agda checker. These declarations neither compose the exp and log functions nor identify the native Cartesian \`expC\`. They prevent future work from accidentally comparing unrelated selected analytic carriers.
+
+**Still highest alpha:** (P0) successful pinned Agda acceptance with concrete error fixes, (P1) native Bishop Cartesian \`expC\` = factorial complex series, then the source-level all-degree coefficient/cauchy-composition theorem and \(\exp_C(L(w))≈_C 1_C+w\), (P1) selected upper nonreal fixed point and exp addition, (P1) Koenigs holomorphic limit, (P1g) global Kneser gluing/normalization, (P2–P4) original Bishop modular \(q/\Delta/j\), observer and Kouznetsov. Local execution environment lacks \`agda\` and \`nix\`; do not claim acceptance or complete the programme from source syntax inspection.
