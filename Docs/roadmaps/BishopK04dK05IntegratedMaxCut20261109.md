@@ -986,3 +986,39 @@ P1 original Bishop analytic exp/atan-Cayley same-function
 identity, P2 independent analytic zeta identification, P3
 Gamma/Xi integral and continuation are unchanged and open.
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11: independently owned original Heisenberg group to 13 source valuations
+
+H1.01 now has a stronger real-group owner than numerical
+`3^(1+12)` parallels. `Monster3BFiniteHeisenbergCentralExtensionExact`
+already builds the finite `Heisenberg6` carrier, true
+six+six+central group multiplication with cocycle, and
+nontrivial Weyl dual-pair witness; original associativity
+and inverse owners were also already available.
+
+New `TernaryThirteenOriginalHeisenbergGroupCarrierExact`
+constructs both **full** group↔13-word inverse maps,
+transports the existing noncommutative group multiplication,
+identity/inverse and a noncommuting generator pair, and welds
+the group to the selected original
+`SourceCentralCompletionCarrier` (group equality and source
+axis/centre pointwise recovery). The accompanying
+`TernaryThirteenOriginalHeisenbergRelationalImageExact`
+places this actual group and cocycle multiplication inside
+the previously selected 13-parameter image of the ORIGINAL
+144-address relational field, with all-address product
+agreement and selected-image closure.
+
+This pays a nontrivial **FINITE ORIGINAL GROUP SAME-CARRIER**
+source proof, distinct from both the unrestricted original
+144 relation field and intended ITIR/world/Monster group
+representation semantics. Original relational/appraisal
+meaning, world-source observer correspondence and genuine
+heterogeneous world edge admission remain open and cannot
+be inferred from the finite-group isomorphism.
+
+Bishop analytic P1 exp/atan, P2 independent analytic zeta,
+P3 Gamma/Xi remain open. NO new Agda kernel receipt;
+source-written only. Details:
+`Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
