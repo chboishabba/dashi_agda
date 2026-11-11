@@ -21,6 +21,7 @@ import DASHI.Biology.Molecular.BH4OriginalComputedRationalRHSSplitExact
 import DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact
 import DASHI.Biology.Molecular.BH4RationalSemidiscreteBilinearityExact
 import DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact
+import DASHI.Biology.Molecular.BH4NativeTransportRationalZeroExact
 import DASHI.Biology.Molecular.BH4OriginalNative369IncidenceExact
 import DASHI.Biology.BH4CompartmentKineticStateExact
 import DASHI.Biology.BH4QuantitativeAcquisitionExact
