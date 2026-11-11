@@ -13,9 +13,10 @@ module DASHI.Analysis.BishopComplexTriangleTailsVanishingExact where
 -- No claim of a completed four-wing vanishing theorem is made here.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; suc)
+open import Agda.Builtin.Nat using (Nat; suc; _+_)
 open import Data.Fin.Base using (toℕ)
 import Data.Nat.Base as ℕ
+import Data.Nat.Properties as NatP
 
 import Real as BishopReal
 import RealProperties as BishopP
@@ -245,3 +246,58 @@ originalBishopImaginaryImagAbsBound y n
     (BishopP.nonNegx⇒0≤x
       (BishopP.nonNeg∣x∣
         (Exp.expTerm y (Estimates.evenExponent j))))
+
+
+------------------------------------------------------------------------
+-- TAIL ORDER IS A SEPARATE THEOREM: prefix monotonicity alone
+-- does not imply that differences of prefixes preserve order.
+-- The vendored Bishop finite-interval ∑-mono-≤ pays precisely this.
+------------------------------------------------------------------------
+
+originalBishopTriangleTailIsInterval :
+  (a b : Nat → BishopReal.ℝ) →
+  ∀ start count →
+  BishopReal._≃_
+    (BishopReal._-_
+      (Row.trianglePartial a b (start + count))
+      (Row.trianglePartial a b start))
+    (BishopSequence.∑ (Row.cauchyCoefficient a b)
+      start (start + count))
+originalBishopTriangleTailIsInterval a b start count =
+  let
+    coefficient = Row.cauchyCoefficient a b
+  in
+  BishopP.≃-trans
+    (BishopP.+-cong
+      (FinSum.finSumIsSeriesOf coefficient (start + count))
+      (BishopP.-‿cong (FinSum.finSumIsSeriesOf coefficient start)))
+    (BishopP.≃-symm
+      (BishopSequence.∑ₙᵐ≃∑₀ᵐ-∑₀ⁿ
+        coefficient start (start + count)))
+
+originalBishopCauchyTriangleTailMonotone :
+  ∀ {a b A B : Nat → BishopReal.ℝ} →
+  (∀ n → BishopReal._≤_ (a n) (A n)) →
+  (∀ n → BishopReal._≤_ (b n) (B n)) →
+  (∀ n → BishopReal.NonNegative (A n)) →
+  (∀ n → BishopReal.NonNegative (b n)) →
+  ∀ start count →
+  BishopReal._≤_
+    (BishopReal._-_
+      (Row.trianglePartial a b (start + count))
+      (Row.trianglePartial a b start))
+    (BishopReal._-_
+      (Row.trianglePartial A B (start + count))
+      (Row.trianglePartial A B start))
+originalBishopCauchyTriangleTailMonotone
+  {a} {b} {A} {B} a≤A b≤B Ann bnn start count =
+  BishopP.≤-respʳ-≃
+    (BishopP.≃-symm
+      (originalBishopTriangleTailIsInterval A B start count))
+    (BishopP.≤-respˡ-≃
+      (originalBishopTriangleTailIsInterval a b start count)
+      (BishopSequence.∑-mono-≤
+        (originalBishopCauchyCoefficientMonotone
+          a≤A b≤B Ann bnn)
+        start (start + count)
+        (NatP.m≤m+n start count)))
