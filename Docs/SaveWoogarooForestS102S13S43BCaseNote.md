@@ -1,5 +1,20 @@
 # Save Woogaroo Forest — s 102, s 13 and EPBC s 43B case note
 
+## 11 November 2026 — signed approval and preservation update
+
+**Operative status:** original 50-page Commonwealth Part 9 approval for EPBC **2019/8575** is signed **16 October 2026** (SHA256 `f9b591f230458939dbeafc8b6178c148dbbec3e68e5e75f66fd187e2a402b808`). This supersedes any older “pending federal decision” interpretation in the historical sections below.
+
+**NCA s102/s13 counsel cut remains live but conditional:** obtain exact Queensland 9281/2024/OW Condition 6(a) satisfaction/prestart and physical clearing chronology; bind actual threatened processes to authenticated same-land and recent ecological evidence of likely significant detrimental effect. Habitat observed or modelled does not by itself prove the statutory Ministerial opinion. NCA ss102–107, s13, s49, Part 7A and any enforcement route require source-specific applicability and legal assessment. Neither state earthworks approval nor federal signed approval by itself proves first on-ground action.
+
+**Federal overlap:** C1–C4 regulate authorised physical clearing; C24 requires Avonvale/Esk VDECs **before any Action commencement**, C25 requires MWW VDEC **before works outside Phase One**, C52 concerns actual commencement notification. Records not obtained. Later OAG forecasts (January PD v5) are not the final July Issue F accepted proof; original independent QUT/QCC/RSPCA objections should be retained.
+
+**s43B remains conditional**, not an automatic existing-use exemption challenge. The 2026 Environmental Offsets Standard new individual-approval tests must not be projected backwards into the signed 16 October decision without statutory transitional authority. Counsel to assess review windows/standing/remedies urgently; no definitive deadline, action, breach, order or protection is claimed.
+
+Refer to [main legal handoff](SaveWoogarooForestLegalTeamBrief.md), [preservation cutset](WoogarooPreservationLegalCutset.md) and [federal records request](SaveWoogarooForestFederalRecordsRequest.md).
+
+---
+
+
 ## Purpose
 
 This note isolates the three legal questions that now matter most after acquisition of the 9281 negotiated approval and plans. It is written for counsel and community use. It is not legal advice.
