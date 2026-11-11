@@ -12,7 +12,7 @@ module DASHI.Foundations.BishopEvenOddFullSequenceConvergenceExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Product.Base using (proj₁; proj₂)
-import Data.Nat.Base as ℕ using (_≤_; z≤n; s≤s; _⊔_)
+import Data.Nat.Base as ℕ using (NonZero; _≤_; z≤n; s≤s; _⊔_)
 import Data.Nat.Properties as ℕP
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_)
@@ -54,7 +54,7 @@ oddIndexLowerBound (suc N) (suc n)
 
 parityBoundAtAnyIndex :
   ∀ {sequence : Nat → BishopReal.ℝ} {limit : BishopReal.ℝ}
-    {k N m : Nat} →
+    {k N m : Nat} → .{{_ : ℕ.NonZero k}} →
   (evenBound : ∀ n → N ℕ.≤ n →
     BishopReal._≤_
       (BishopReal.∣ BishopReal._-_ 
