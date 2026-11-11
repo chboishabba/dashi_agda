@@ -221,14 +221,8 @@ independentCartesianActionAgrees :
   supportSigns (actPackedRegular g p) ≡
   actSupportHalf g (supportSigns p)
 independentCartesianActionAgrees g p =
-  trans (full256Equivariant g (GridCell p))
+  trans (full256Equivariant g (original (decode240 p)))
     (cong (actSupportHalf g) (target256RoundTrip (supportSigns p)))
-  where
-    GridCell : SupportHalf240 → Grid.GridCell4
-    GridCell q = GridCell′ (decode240 q)
-      where
-        GridCell′ : Regular240 → Grid.GridCell4
-        GridCell′ = original
 
 -- The 15 support masks, rather than all 16, supply the base space
 -- after removing the all-inner 16-sign infrared fibre. Because the
