@@ -75,6 +75,13 @@ class EvidenceBinding(unittest.TestCase):
             "original_repository":REPO,
             "original_commit":REV,
             "independent_checker_observed":True,
+            "checker_kind":"rust-nanoda",
+            "checker_source_sha":"418320295890faed83a96fd97907b12a3b6728c2",
+            "checker_policy":{
+                "permitted_axioms":["propext","Classical.choice",
+                                    "Quot.sound","Lean.trustCompiler"],
+                "unsafe_permit_all_axioms":False,
+                "unpermitted_axiom_hard_error":False},
             "invalid_fixture_rejected":True,
             "postgres_world_admitted":False,"fibre_retrieved":False,
             "declarations":self.declarations,
