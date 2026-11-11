@@ -192,7 +192,12 @@ def execute_lean(lean: str, root: Path, target: str, *,
                  timeout: int, memory_mib: int, lean_path: str = "") -> dict:
     if timeout < 1 or memory_mib < 128:
         raise WorkerError("invalid worker resource budget")
-    env = os.environ.copy()
+    # Importing third-party Lean elaborators can execute arbitrary host code.
+    # Do not forward credentials or unrelated environment secrets.
+    allowed_env = ("PATH", "USER", "LOGNAME", "LANG", "LC_ALL",
+                   "LC_CTYPE", "TZ", "SSL_CERT_FILE", "NIX_PATH",
+                   "NIX_REMOTE", "NIX_SSL_CERT_FILE", "NIX_CONFIG")
+    env = {key: os.environ[key] for key in allowed_env if key in os.environ}
     # Generate local .olean files at module-matching paths, so subsequent
     # imports resolve without requiring full Lake project checkout.
     env["LEAN_PATH"] = str(root) + (os.pathsep + lean_path if lean_path else "")
@@ -214,6 +219,14 @@ def execute_lean(lean: str, root: Path, target: str, *,
         module_output = root / path.removesuffix(".lean")
         output = module_output.with_suffix(".olean")
         output.parent.mkdir(parents=True, exist_ok=True)
+        # An explicitly source-bound compiled-cache pass already built these
+        # local dependencies. Reuse its validated oleans; still check the
+        # selected original target with the actual Lean binary.
+        cached = root / ".lean-local-compiled" / Path(path).with_suffix(".olean")
+        if path != target and cached.is_file():
+            output.write_bytes(cached.read_bytes())
+            built.append(path)
+            continue
         args = [lean, f"--root={root}", "-o", str(output),
                 str(root / path)]
         proc = subprocess.Popen(args, cwd=root, env=env,
@@ -294,12 +307,11 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                 module = ".".join(Path(target).with_suffix("").parts)
                 if not MODULE_RE.fullmatch(module):
                     raise WorkerError("target path does not form a Lean module name")
-                compiled = root / ".lean-output" / "target.olean"
+                compiled = root / Path(target).with_suffix(".olean")
                 if not compiled.is_file():
                     raise WorkerError("native export needs compiled target olean")
-                olean = root.joinpath(*module.split(".")).with_suffix(".olean")
-                olean.parent.mkdir(parents=True, exist_ok=True)
-                olean.write_bytes(compiled.read_bytes())
+                # execute_lean already emits <module>.olean at this path.
+                # Do not copy a fabricated olean into the module namespace.
                 raw, inspected = exporter(
                     root, module, native_declaration,
                     command=tuple(export_command), lean_path=active_lean_path,
