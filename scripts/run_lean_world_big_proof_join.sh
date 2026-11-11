@@ -50,16 +50,17 @@ python3 scripts/run_lean_world_join_proofs.py \
   --persist-joins \
   --output "$out/batteries-five-theorem-joins.json"
 
-# Exact cross-repo import closure: mathlib imports original Batteries source.
+# Cross-repo theorem composition: FOUR mathlib proofs and ONE Batteries proof.
 python3 scripts/run_lean_world_join_proofs.py \
   --schema "$schema" \
   --repository leanprover-community/mathlib4 \
   --revision "$mathlib_revision" \
   --additional-source "leanprover-community/batteries@$batteries_revision" \
   --module Mathlib.Logic.Basic \
+  --import-module Batteries.Data.List.Basic \
   --donor congr_heq \
   --donor congr_arg_heq \
-  --donor dcongr_heq \
+  --donor List.takeD_zero \
   --donor eq_iff_eq_cancel_left \
   --donor eq_iff_eq_cancel_right \
   --max-modules 1024 \
