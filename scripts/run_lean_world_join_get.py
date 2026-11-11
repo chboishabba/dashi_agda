@@ -97,10 +97,13 @@ def main():
             for i in range(args.reuse_count):
                 if "DASHIFromStored.join"+str(i) not in output_text:
                     raise JoinError("reused imported theorem not checked by Lean")
+            if args.reuse_count>=2 and "DASHIFromStored.combined" not in output_text:
+                raise JoinError("reused multi-theorem composition not checked by Lean")
             reused={"joined_theorems":args.reuse_count,
                     "consumer_olean_sha256":digest,
                     "consumer_source_sha256":sha256(new_source).hexdigest(),
                     "lean_compilation_succeeded":True,
+                    "genuinely_composed_from_retrieved_proofs":args.reuse_count>=2,
                     "axiom_report":output_text[-8000:]}
         print(json.dumps({
             "status":"original-joined-lean-proof-closure-retrieved",
