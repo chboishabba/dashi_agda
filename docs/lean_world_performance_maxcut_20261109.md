@@ -361,3 +361,103 @@ Use the same two-stage commands in the preceding section; the #1495
 and invokes it using its JSON configuration file. The #1484 isolated-schema
 retrieval/Lean replay interface is unchanged. Rust-stage execution on the new
 heads is still pending.
+
+## 11 November — source-first three-repository ingestion, NO independent checker
+
+The operator explicitly deferred independent Lean verification for the initial
+ingestion pilot. This **supersedes** the earlier requirement to complete the
+Rust/Nanoda gate before source ingestion. The Rust checker remains available,
+but is not part of the P0/P1 source run. The pilot makes **no theorem** claims.
+
+### Implemented files
+
+- `scripts/sql/lean_world_source_stream_v1.sql` stores **actual original
+  source bytes** in immutable `lean_world_source_blob` rows (bytea, SHA-256,
+  Git blob SHA-1 and byte length), preserves every original
+  `(repository,revision,path)` in `lean_world_source_occurrence`, and
+  records `source-complete-not-elaborated` only after full archive intake.
+  Source identity is content based; proofs and statement IDs are not invented.
+- `scripts/run_lean_world_stream_pg.py` uses **one pinned HTTPS streaming
+  archive request per repository**, sequentially hashes and validates each
+  file, passes at most a reviewed 8 MiB individual source to psycopg3, and
+  persists the actual source bytes with byte-for-byte collision checking.
+  Python does **not** create or retain a repository-sized receipts dictionary.
+  Every repository is one SQL transaction: truncation, oversized files,
+  inconsistent existing original receipts or source budgets roll back.
+  No REST Git-blob request is issued, at any point.
+- `scripts/run_lean_world_source_get.py` reads real original source bytes
+  from committed complete SQL-world rows into a *new* chosen file, verifies
+  both hashes afresh and refuses overwrites. This is a direct content
+  readback, not a receipt-only mock.
+- `scripts/run_lean_world_three_source_pilot.py` processes exactly three
+  pinned source repositories in order, with a dedicated SQL schema, and
+  reports verified bytes/files and completion. A failed repository stops
+  the pilot without committing its partial archive; completed repos are
+  idempotently rerunnable.
+- `scripts/manifests/lean_world_source_pilot_three_20261111.json` pins:
+  leanprover/lean4export `d065b0009aed0520e9e99752847a33b337661690`,
+  leanprover-community/batteries
+  `4af7237d146261353907b06a01b6f3fc06cfa067`, and
+  leanprover-community/mathlib4
+  `f5968138493f85bdf0651647a4f829c63175874e`.
+- `tests/test_lean_world_source_stream_pg.py` tests actual PostgreSQL bytes,
+  idempotence, original rebind rejection, all-or-nothing archive rollback,
+  occurrence budget and immutable table guards. Integrated into the existing
+  isolated PostgreSQL test runner.
+
+### Run without .NET, Nanoda, CI, Docker or REST per-blob retrieval
+
+In the isolated #1484 worktree with PGDATABASE/PGHOST/PGUSER configured:
+
+```sh
+nix develop .#lean-world --command bash scripts/run_lean_world_pg_ephemeral.sh
+
+# Uses your explicit PGDATABASE. Creates dedicated lean_world_source_pilot
+# schema and persists only original source bytes and provenance there.
+nix develop .#lean-world --command python3 \
+  scripts/run_lean_world_three_source_pilot.py \
+  --manifest scripts/manifests/lean_world_source_pilot_three_20261111.json \
+  --schema lean_world_source_pilot
+```
+
+After completion, retrieve one actual source into a new, explicit file:
+
+```sh
+nix develop .#lean-world --command python3 \
+  scripts/run_lean_world_source_get.py \
+  --schema lean_world_source_pilot \
+  --repository leanprover/lean4export \
+  --revision d065b0009aed0520e9e99752847a33b337661690 \
+  --path Main.lean \
+  --output /tmp/dashi-lean4export-source-readback.lean
+```
+
+Choose an actual ingested path, which can be listed using:
+
+```sql
+SELECT repository,revision,path,source_size
+FROM lean_world_source_occurrence
+WHERE repository = 'leanprover/lean4export'
+ORDER BY path LIMIT 20;
+```
+
+### Reviewed resource policy and status
+
+- Per source: **8 MiB hard limit**, other byte buffers are released before
+  processing the next file. A per-file raw Python buffer and psycopg
+  serialization copies can coexist; not a 512 MiB process RSS guarantee.
+- Total uncompressed archive: **4 GiB**, including non-Lean regular files.
+- Compressed transfer: **2 GiB**.
+- Source occurrence limit: **1,000,000** per archive.
+- Storage: immutable original bytes in PostgreSQL; no filesystem checkout.
+  Dedup across original occurrences only on verified full exact bytes.
+- Three independently pinned archive requests, zero REST blob downloads.
+- **No Lean compile/export/check** and no proof-identity certification in
+  this pilot; `kernel_certified=false`. Earlier SQL canonical theorem storage
+  stays unchanged.
+
+The new tranche is committed but has not been executed with real PostgreSQL
+and streamed public archives in the assistant's runtime. The locally validated
+previous 2/2 migrations and 6/6 candidate DAG tests do not cover this new
+source-byte schema. No full-source-memory or end-to-end time receipts may be
+claimed until the operator runs the new pilot.
