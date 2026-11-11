@@ -86,7 +86,11 @@ def check_native_export(export: PendingExport, executable: Path, *,
         def limit_output():
             # A failing or hostile checker cannot write unbounded log files.
             # SIGXFSZ causes nonzero exit, which never authorizes a receipt.
-            cap = max(1, max_output_bytes)
+            # Permit one byte beyond the configured budget so the post-run
+            # size check can distinguish truncation by RLIMIT_FSIZE from an
+            # ordinary checker rejection.  The extra byte is never admitted
+            # into the receipt.
+            cap = max(1, max_output_bytes + 1)
             resource.setrlimit(resource.RLIMIT_FSIZE, (cap, cap))
         try:
             with stdout.open("wb") as out, stderr.open("wb") as err:
