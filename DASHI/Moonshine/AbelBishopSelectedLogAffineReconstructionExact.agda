@@ -29,6 +29,7 @@ import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
 import DASHI.Moonshine.AbelBishopLogOnePlusCoefficientDominationExact as Log
 import DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact as Terms
 import DASHI.Moonshine.AbelBishopLogFiniteComplexDerivativeExact as Finite
+import DASHI.Moonshine.AbelBishopFactorialComplexExpDiskExact as Factorial
 
 complexMulAssociative :
   ∀ x y z →
@@ -322,3 +323,51 @@ originalBishopSelectedLocalLogGermIncrementUnique
     (Complex.≈C-refl p)
     (originalBishopSelectedChartLogIncrementUnique
       p nz t ratio interval relativeRadius other convergence)
+
+
+------------------------------------------------------------------------
+-- SAME-ARGUMENT FACTORIAL EXPONENTIAL SERIES AT THE NORMALIZED CHART.
+--
+-- This is NOT an exp-log inverse. It constructs the independently
+-- source-convergent factorial candidate at p^-1*t, so the analytic
+-- weld has a common genuine Bishop-complex argument and radius proof.
+------------------------------------------------------------------------
+
+originalBishopSelectedChartFactorialExp :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  Complex.BishopComplex
+originalBishopSelectedChartFactorialExp p nz t ratio interval relativeRadius =
+  Factorial.originalBishopFactorialExpDiskValue
+    interval
+    (originalBishopNormalizedDisplacementRadius
+      p nz t ratio relativeRadius)
+
+originalBishopSelectedChartFactorialPositiveConverges :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  Complex.ComplexSeriesConvergesTo
+    (Factorial.originalBishopFactorialExpPositiveTerm
+      (normalizedDisplacement p nz t))
+    (Factorial.originalBishopFactorialExpPositiveLimit
+      interval
+      (originalBishopNormalizedDisplacementRadius
+        p nz t ratio relativeRadius))
+originalBishopSelectedChartFactorialPositiveConverges
+  p nz t ratio interval relativeRadius =
+  Factorial.originalBishopFactorialExpPositiveLimitConverges
+    interval
+    (originalBishopNormalizedDisplacementRadius
+      p nz t ratio relativeRadius)
