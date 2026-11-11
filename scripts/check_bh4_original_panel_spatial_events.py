@@ -78,8 +78,10 @@ def check_certificate(certificate, *, full_panel):
     reactions=constructed["reaction_index"]
     matrix=constructed["matrix"]
     residuals=constructed["finite_formula_residuals"]
-    assert len(matrix)==len(species)
-    assert all(len(row)==len(reactions) for row in matrix)
+    if len(matrix)!=len(species) or any(len(row)!=len(reactions) for row in matrix):
+        raise ValueError("original source finite matrix dimensions inconsistent")
+    if any(type(coefficient) is not int for row in matrix for coefficient in row):
+        raise ValueError("original source finite matrix entries must be exact Python integers")
     if full_panel:
         if len(species)!=29 or len(reactions)!=12 or len(residuals)!=3:
             raise ValueError("original 29×12/3-residual acquisition not present")
