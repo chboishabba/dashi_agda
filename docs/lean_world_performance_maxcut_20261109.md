@@ -280,3 +280,64 @@ Lean type validity, checker trust, or theorem status from the external rows.
 Further required: actual independent native-v3 checker under pinned closure,
 authenticated identity-bound term/statement projection, and subsequent
 original-proof reuse with an observed Lean kernel receipt.
+
+## 11 November — real native export to SQL-retrieved donor proof acceptance
+
+#1484 now has an explicit bridge for #1495's immutable independent-checker
+acceptance outputs:
+
+- `scripts/run_lean_world_semantic_candidate_pg.py`: checks linked JSONL
+  SHA-256 against the acceptance manifest, confirms each source, export,
+  original revision, selected declaration and dependency is bound, seals the
+  existing `CanonicalLeanWorld`, writes the candidate DAG transactionally,
+  and reads candidate occurrences back from PostgreSQL. It NEVER infers
+  kernel authority from the checker receipt JSON.
+- `scripts/run_lean_world_retrieved_donor_proof.py`: queries the original
+  donor and consumer occurrences through the canonical statement/fibre tables,
+  requires same exact canonical type bytes, generates a consumer using the
+  database-retrieved donor name, requires byte identity against the pinned
+  original consumer, and recompiles donor + consumer with Lean 4.28.0.
+- `scripts/run_lean_world_semantic_full_acceptance.py`: runs those two
+  operations in one UUID-named temporary schema, migrates the actual base
+  PostgreSQL and candidate schemas, and destroys the test schema on exit.
+  No persistent world rows are changed.
+- `tests/test_lean_world_semantic_candidate_pg.py`: offline hash, source,
+  dependency and false-promotion negative controls. The existing local
+  offline runner now executes this suite.
+
+The #1495 receipt must first be produced by the pinned Lean4export/Tenet
+runner described in that PR's roadmap. From an isolated #1484 worktree with
+the operator's previously validated PG* environment configured, run:
+
+```sh
+# The first command runs on #1495 under pinned Lean 4.28 + .NET 10:
+python3 scripts/run_lean_world_real_semantic_acceptance.py \
+  --output-dir /tmp/dashi-lean-semantic-original
+
+# The second command runs on #1484 under its existing Nix lean-world shell.
+# Replace <receipt-from-first-command> and <pr1495-worktree> with ACTUAL paths.
+python3 scripts/run_lean_world_semantic_full_acceptance.py \
+  --acceptance-receipt <receipt-from-first-command> \
+  --donor-source <pr1495-worktree>/tests/fixtures/lean_world_semantic/Donor.lean \
+  --consumer-source <pr1495-worktree>/tests/fixtures/lean_world_semantic/Consumer.lean \
+  --lean "$(command -v lean)" \
+  --output-dir /tmp/dashi-lean-semantic-original
+```
+
+The second command expects an explicitly configured PGDATABASE, the actual
+psycopg3 package and the Nix-resolved Lean binary. It creates and drops an
+isolated PostgreSQL schema rather than relying on migrations in a production
+schema. All external tool/source changes are pinned, and all receipt files
+are content-addressed. No CI, Docker, or permanent repository checkout is
+required.
+
+**Acceptance states remain distinct:** an independently observed checker
+acceptance is evidence for a selected proof, while the SQL database stores
+`candidate-unverified` rows. Retrieval/recompilation demonstrates concrete
+same-source original proof reuse, not universal world certification. The
+programme's general source-to-verified-world authority, heterogeneous import
+closure and 21,481-repository harvesting are **still open**.
+
+This tranche is source-written and pushed but NOT yet executed against the
+operator's Nix/.NET/PostgreSQL environment. The earlier #1484 2/2 migration
+and 6/6 candidate tests apply to their earlier validated head only.
