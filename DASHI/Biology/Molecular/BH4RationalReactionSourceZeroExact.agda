@@ -1,0 +1,159 @@
+module DASHI.Biology.Molecular.BH4RationalReactionSourceZeroExact where
+
+-- P0: all-six-axes original semidiscrete reaction conservation from
+-- 12 *net stoichiometry column* left-kernel certificates, arbitrary
+-- exact rational 27-site source rates, and the SAME 29x12 operator.
+--
+-- Original Rhea-generated positive/negative gross source data must
+-- independently construct the 12 signed-net-column kernel receipts.
+-- This theorem does not fabricate any 29x12 chemistry or rates.
+
+open import DASHI.Core.Prelude
+import Data.Vec.Base as V
+import Data.Fin.Base as F
+import Data.Rational.Unnormalised as Q
+import Data.Rational.Unnormalised.Properties as QP
+import NonReflectiveQ as Solver
+
+import DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact as Op
+import DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact as Lift
+import DASHI.Biology.Molecular.BH4RationalFiniteFubiniExact as Fubini
+import DASHI.Biology.Molecular.BH4NativeTransportRationalZeroExact as NativeZero
+import DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact as Compose
+
+-- Each source weight scales a *whole finite reaction column*.
+reactionTerms :
+  ∀ {species reactions}
+  (weights : V.Vec Q.ℚᵘ species)
+  (matrix : Op.Matrix species reactions)
+  (rates : V.Vec Q.ℚᵘ reactions) →
+  Op.Matrix species reactions
+reactionTerms weights matrix rates =
+  V.zipWith
+    (λ w row →
+      V.map (λ x → Q._*_ w x)
+        (V.zipWith Q._*_ row rates))
+    weights matrix
+
+-- Finite rational scaling of a sum, no approximation or limit.
+scaleFiniteSum :
+  ∀ {n} (w : Q.ℚᵘ) (xs : V.Vec Q.ℚᵘ n) →
+  Q._≃_
+    (Q._*_ w (Fubini.qFiniteSum xs))
+    (Fubini.qFiniteSum (V.map (λ x → Q._*_ w x) xs))
+scaleFiniteSum w V.[] =
+  let open Solver in
+  solve 1 (λ w′ → (w′ ⊗ Κ Q.0ℚᵘ) ⊜ Κ Q.0ℚᵘ)
+    QP.≃-refl w
+scaleFiniteSum w (V._∷_ x xs) =
+  QP.≃-trans
+    (Fubini.qMulDistributes w x (Fubini.qFiniteSum xs))
+    (QP.+-cong QP.≃-refl (scaleFiniteSum w xs))
+
+-- The original weighted reaction RHS is exactly the double sum of
+-- source weights times net stoichiometry times the SAME site rates.
+weightedReactionAsDoubleSum :
+  ∀ {species reactions}
+  (weights : V.Vec Q.ℚᵘ species)
+  (matrix : Op.Matrix species reactions)
+  (rates : V.Vec Q.ℚᵘ reactions) →
+  Q._≃_
+    (Lift.sourceWeightedRow weights
+      (V.map (λ row → Op.rationalDot row rates) matrix))
+    (Fubini.qFiniteSum
+      (V.map Fubini.qFiniteSum
+        (reactionTerms weights matrix rates)))
+weightedReactionAsDoubleSum V.[] V.[] rates = QP.≃-refl
+weightedReactionAsDoubleSum
+  (V._∷_ w weights) (V._∷_ row matrix) rates =
+  QP.+-cong
+    (scaleFiniteSum w (V.zipWith Q._*_ row rates))
+    (weightedReactionAsDoubleSum weights matrix rates)
+
+-- A symbolic reaction-column projection of the weighted term matrix
+-- factors into (source left-kernel coefficient) times that same rate.
+reactionTermColumnFactors :
+  ∀ {species reactions}
+  (weights : V.Vec Q.ℚᵘ species)
+  (matrix : Op.Matrix species reactions)
+  (rates : V.Vec Q.ℚᵘ reactions)
+  (column : F.Fin reactions) →
+  Q._≃_
+    (V.lookup (Fubini.qColumnTotals
+      (reactionTerms weights matrix rates)) column)
+    (Q._*_
+      (Lift.sourceWeightedRow weights
+        (Op.rationalColumn matrix column))
+      (V.lookup rates column))
+reactionTermColumnFactors V.[] V.[] rates column =
+  QP.≃-trans
+    (NativeZero.lookupReplicateZero column)
+    (let open Solver in
+     solve 1
+       (λ rate → Κ Q.0ℚᵘ ⊜ Κ Q.0ℚᵘ ⊗ rate)
+       QP.≃-refl (V.lookup rates column))
+reactionTermColumnFactors
+  (V._∷_ w weights) (V._∷_ row matrix) rates column =
+  QP.≃-trans
+    (QP.≃-reflexive
+      (NativeZero.lookupZipAdd
+        (V.map (λ x → Q._*_ w x)
+          (V.zipWith Q._*_ row rates))
+        (Fubini.qColumnTotals (reactionTerms weights matrix rates))
+        column))
+    (QP.≃-trans
+      (QP.+-cong
+        (QP.≃-reflexive
+          (cong (Q._*_ w)
+            (NativeZero.lookupZipAdd
+              (V.zipWith Q._*_ row rates)
+              (V.replicate {n = _} Q.0ℚᵘ)
+              column)))
+        (reactionTermColumnFactors weights matrix rates column))
+      (let open Solver in
+       solve 4
+         (λ w′ coefficient rate rest →
+           (w′ ⊗ (coefficient ⊗ rate))
+               ⊕ (rest ⊗ rate)
+           ⊜ ((w′ ⊗ coefficient) ⊕ rest) ⊗ rate)
+         QP.≃-refl
+         w (V.lookup row column) (V.lookup rates column)
+         (Lift.sourceWeightedRow weights
+           (Op.rationalColumn matrix column))))
+
+-- Higher-level rational conservation uses source-column annihilation
+-- and finite Fubini, not a global zero-defect assumption.
+oneSiteRationalReactionZero :
+  ∀ {species reactions}
+  (weights : V.Vec Q.ℚᵘ species)
+  (matrix : Op.Matrix species reactions)
+  (rates : V.Vec Q.ℚᵘ reactions) →
+  ((column : F.Fin reactions) →
+    Q._≃_
+      (Lift.sourceWeightedRow weights
+        (Op.rationalColumn matrix column))
+      Q.0ℚᵘ) →
+  Q._≃_
+    (Lift.sourceWeightedRow weights
+      (V.map (λ row → Op.rationalDot row rates) matrix))
+    Q.0ℚᵘ
+oneSiteRationalReactionZero weights matrix rates columnZero =
+  QP.≃-trans
+    (weightedReactionAsDoubleSum weights matrix rates)
+    (QP.≃-trans
+      (Fubini.qFiniteFubini
+        (reactionTerms weights matrix rates))
+      (QP.≃-trans
+        (Fubini.qFiniteSumCong
+          (Fubini.qColumnTotals (reactionTerms weights matrix rates))
+          (V.replicate {n = _} Q.0ℚᵘ)
+          (λ column →
+            QP.≃-trans
+              (reactionTermColumnFactors weights matrix rates column)
+              (QP.≃-trans
+                (QP.*-cong (columnZero column) QP.≃-refl)
+                (let open Solver in
+                 solve 1
+                   (λ rate → (Κ Q.0ℚᵘ ⊗ rate) ⊜ Κ Q.0ℚᵘ)
+                   QP.≃-refl (V.lookup rates column)))))
+        (Fubini.qSumReplicateZero _)))
