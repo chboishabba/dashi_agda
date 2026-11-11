@@ -123,10 +123,10 @@ class SourceStreamPG(unittest.TestCase):
         self.assertEqual(retrieve_source(self.conn,self.repo,self.rev,
                                          "A.lean"),b"ok")
 
-    def test_complete_empty_archive_is_explicit(self):
-        result=self.ingest([("README.md",b"empty")])
-        self.assertEqual(result["source_occurrences"],0)
-        self.assertEqual(self.count("lean_world_source_archive"),1)
+    def test_archive_with_no_lean_sources_is_not_complete(self):
+        with self.assertRaisesRegex(StreamIngestError,"no original Lean sources"):
+            self.ingest([("README.md",b"empty")])
+        self.assertEqual(self.count("lean_world_source_archive"),0)
 
 
 if __name__=="__main__":
