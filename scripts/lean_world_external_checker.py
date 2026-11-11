@@ -99,9 +99,13 @@ def check_native_export(export: PendingExport, executable: Path, *,
         if (stdout.stat().st_size > max_output_bytes or
             stderr.stat().st_size > max_output_bytes):
             raise CheckerError("external checker output exceeded budget")
-        if completed.returncode == -signal.SIGXFSZ or (
-            max_output_bytes == 0 and
-            (stdout.stat().st_size or stderr.stat().st_size)):
+        # A checker may die from SIGXFSZ or catch EFBIG and exit nonzero
+        # after filling the capped log (notably Python flush-on-exit).
+        # Both are overflow failures, not ordinary proof rejection.
+        if (completed.returncode == -signal.SIGXFSZ or
+            (completed.returncode != 0 and
+             (stdout.stat().st_size >= max_output_bytes or
+              stderr.stat().st_size >= max_output_bytes))):
             raise CheckerError("external checker output exceeded budget")
         if completed.returncode != 0:
             raise CheckerError("external checker rejected native export")
