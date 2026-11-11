@@ -253,3 +253,30 @@ pinned environment; conversion of checked native declarations into the
 existing canonical type bytes with exact binding; and separately authorized
 promotions. Candidate persistence is an infrastructure advancement, not
 source-to-world proof certification or reuse.
+
+### Executable candidate-only integration entry point
+
+`scripts/run_lean_world_candidate_pg.py` now connects the existing
+`run_lean_world_export_admission.build()` complete source summary / exact
+export-row intake to `persist_candidate_world()` and prints an explicit
+`candidate-unverified` result. Requires an operator-chosen existing target
+schema and explicit PGDATABASE; never silently writes the default public
+schema. Schema migrations must be applied within that chosen schema first.
+
+```sh
+# Review schema and connection first; no production authority implied.
+PGDATABASE=lean_world_test python3 scripts/run_lean_world_candidate_pg.py \
+  --sources verified_sources.jsonl \
+  --exports externally_exported_candidates.jsonl \
+  --schema lean_world_candidate_test \
+  --acknowledge-unverified-candidates
+```
+
+The existing Nix PostgreSQL ephemeral script now also runs the new
+`test_lean_world_postgres_candidate.py` tests, and its devShell adds psycopg3
+from pinned nixpkgs. Neither this CLI nor the transaction store can infer
+Lean type validity, checker trust, or theorem status from the external rows.
+
+Further required: actual independent native-v3 checker under pinned closure,
+authenticated identity-bound term/statement projection, and subsequent
+original-proof reuse with an observed Lean kernel receipt.
