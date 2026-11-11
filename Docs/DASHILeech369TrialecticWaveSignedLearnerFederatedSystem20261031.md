@@ -282,3 +282,49 @@ our finite Agda mathematics, acquired
 GPU training, future LLM steering, or
 geometry improvement measured on a
 held-out evaluation.
+
+
+## 11 November — full AdamW/Sophontic/LILA efficiency formal-first cut
+
+The consolidated exact proof-obligation and BIDI ledger is
+`chboishabba/dashi_agda/Docs/LILAWholeSystemLearningEfficiencySophonticAdamWFormalMaxCut20261111.md`.
+It first-class formalises the **actual original LILA
+scientific objective**: fewer active neurons/parameters,
+faster time-to-heldout-quality, reduced FLOPs and training
+wall-time/energy, improved BPC or model/transport bytes,
+not only final accuracy. Leech/plain `DASHIg` prelim
+already completed and showed mixed timing, so neither
+Leech dominance nor failure of the original claim is
+licensed from terminal 100% accuracy.
+
+The new **original-source proof cut** comprises
+L00–L08 full AdamW/data/RNG/provenance/geometry-state
+update plus time-to-quality/resource admission;
+S00–S04 Sophontic-style paired semantic/LLM
+neuronal steering and stage-aligned intervention;
+E00–E01 original root/neural Weyl action;
+T00–T02 irreducible trialectic face and typed
+pants/history gluing; H00–H01 signed C2/C3
+history and future-preserving consumer;
+O00–O02 matched AdamW/Dust, true MDL coding
+and grokking mechanism; F00–F01 source-to-Agda
+kernel acceptance and actual whole-system diagram.
+These are **specific outstanding lemmas and
+provenance payments**, not declarations proven
+by this documentation change. In particular,
+optimizer weight decay is NOT literally MDL;
+AdamW is NOT unconditionally monotone;
+matching current weights is NOT matching future
+learning; sign reversal is NOT logical or
+ethical negation; geometry is NOT by itself
+semantic steering; and finite pants seam
+admissibility is NOT full global sheaf gluing.
+
+Prior Agda owner PR #1094: exact semantic paired
+intervention and equivariance composition;
+#1095: geometric regularizer and Weyl/grokking
+same-action boundary; #1265: forward-only Dust
+adapter with no universal unbiasedness or
+full LILA model claim. Reuse those existing
+owners rather than introducing duplicate
+learning, steering or topology theories.
