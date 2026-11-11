@@ -71,6 +71,42 @@ class NativeProjectionTests(unittest.TestCase):
         candidate,=extract_candidates(("\n".join(json.dumps(x) for x in rows)+"\n").encode())
         self.assertEqual(candidate.direct_constants,("Ty",))
 
+    def test_dag_sharing_layout_and_sparse_ids_do_not_change_identity(self):
+        def encode(rows):
+            return ("\\n".join(json.dumps(x) for x in rows)+"\\n").encode()
+        header=[{"meta":{"format":{"version":"3.1.0"}}},
+                {"str":{"pre":0,"str":"Demo"},"in":1}]
+        a=encode(header+[
+            {"sort":0,"ie":1},
+            {"app":{"fn":1,"arg":1},"ie":2},
+            {"app":{"fn":2,"arg":2},"ie":3},
+            {"thm":{"name":1,"levelParams":[],"type":3,"value":3,"all":[]}}
+        ])
+        b=encode(header+[
+            {"sort":0,"ie":7},
+            {"app":{"fn":7,"arg":7},"ie":8},
+            {"app":{"fn":7,"arg":7},"ie":9},
+            {"app":{"fn":8,"arg":9},"ie":10},
+            {"thm":{"name":1,"levelParams":[],"type":10,"value":10,"all":[]}}
+        ])
+        x,=extract_candidates(a)
+        y,=extract_candidates(b)
+        self.assertEqual(x.canonical_type,y.canonical_type)
+        self.assertEqual(x.proof_digest,y.proof_digest)
+
+    def test_proof_dependencies_distinguished_from_statement_dependencies(self):
+        rows=[
+            {"meta":{"format":{"version":"3.1.0"}}},
+            {"str":{"pre":0,"str":"Donor"},"in":1},
+            {"str":{"pre":0,"str":"Consumer"},"in":2},
+            {"sort":0,"ie":1},
+            {"const":{"name":1,"us":[]},"ie":2},
+            {"thm":{"name":2,"levelParams":[],"type":1,"value":2,"all":[]}}
+        ]
+        c,=extract_candidates(("\\n".join(json.dumps(r) for r in rows)+"\\n").encode())
+        self.assertEqual(c.direct_constants,())
+        self.assertEqual(c.proof_direct_constants,("Donor",))
+
     def test_empty_export_and_invalid_meta_rejected(self):
         with self.assertRaises(NativeV3Error):
             extract_candidates(b"")
