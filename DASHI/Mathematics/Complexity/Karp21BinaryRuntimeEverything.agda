@@ -336,3 +336,6 @@ import DASHI.Mathematics.Complexity.Karp21NativeLivePayloadPotentialExact
 -- G2 actual accepted original N21 same-word sparse cert exactly 2 bits per parsed edge; bound <= 2*graph input length.
 -- Agda kernel and original physical PR.InNP clock remain unpaid.
 import DASHI.Mathematics.Complexity.Karp21NativeOriginalSparseCertificateBoundExact
+
+-- F2.2 actual original positive threshold register length charged to gamma input; source candidate, kernel OPEN.
+import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdInputWidthExact
