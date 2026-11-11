@@ -27,6 +27,22 @@ private import Batteries.Util.Test
         self.assertEqual(path_for_module("Batteries.Data.List.Basic"),
                          "Batteries/Data/List/Basic.lean")
 
+    def test_comments_do_not_invent_additional_dependencies(self):
+        raw=b"""/-
+        import Fake.Owner
+        /- import Fake.Nested -/
+        -/
+        module
+        public import Batteries.Logic
+        -- import Fake.LineComment
+        namespace Example
+        /- documentation
+        import Fake.Late
+        -/
+        theorem checked : True := trivial
+        """
+        self.assertEqual(parse_imports(raw),("Batteries.Logic",))
+
     def test_unsupported_import_is_not_silently_discarded(self):
         with self.assertRaises(JoinError):
             parse_imports(b"import A.???")
