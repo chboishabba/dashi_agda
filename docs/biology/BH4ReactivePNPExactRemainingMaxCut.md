@@ -1282,3 +1282,48 @@ law or a conditional record.
 **Verification boundary:** the source was committed and re-fetched from the BH4 branch; Agda and Nix executables are absent in the current runtime, so no exact-head kernel check was performed. Neither import presence nor absence of holes implies type acceptance. Original 29×12 source and rates, six-face work, positive physical-step proof, genuine Bishop real energy instantiation, #1471 native geometry reconciliation and empirical P2/P3 remain OPEN.
 
 **Next actual cut:** run the Agda root in a Nix/Agda 2.9 environment, fix first type error rather than adding another abstract ledger; then instantiate `SameSourcePaidEnergyModel` against an original source-paid 27×29 chemical/SG/Poisson state with certified nonzero boundary/residual work. The existing CHNOP five-axis simplex bridge is accounting only and must not be mistaken for Brouwer compactness.
+
+
+### 2026-11-11 exact-source refutation + signed-charge parser reconciliation
+
+The existing `DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact`
+has two further **source-written** generic Agda lemmas:
+
+- `decideOriginal369SourcePositiveCHNOPWithRefutation`
+  consumes the existing `decideOriginal369SourcePositiveCHNOP`
+  and `zeroCHNOPWeightBlocksPositiveSource`, returning
+  `SourcePositiveAggregateCHNOP certificate ⊎
+    (SourcePositiveAggregateCHNOP certificate → ⊥)`.
+  The negative branch is a real contradiction for the SAME
+  original source, not a zero-index display.
+- `positiveOriginalSourceExcludesEveryZeroCoordinate`
+  shows a chosen original positive witness and an exact zero
+  at any `Fin 29` species cannot coexist.
+
+This completes a **constructive decidability/refutation layer**
+for every inhabited `Panel.SourceCertifiedOriginal29x12`;
+it does **not** inhabit the original source certificate,
+prove positivity for the missing actual source bytes,
+or import a real-valued Brouwer fixed-point theorem.
+
+The original checker `scripts/check_bh4_original_panel_spatial_events.py`
+now uses the existing authoritative
+`run_bh4_reaction_network._integer` for each source
+participant charge rather than a secondary `int(...)`
+conversion. Upstream `audit_reaction` already rejected
+nonintegral source charges, so this hardening removes an
+**inconsistent local coercion**, not an independently
+demonstrated bypass of the upstream full-panel audit.
+The canonical strict parser accepts genuine decimal integer
+text such as `-2` and rejects Boolean/fractional/exponential
+values. A focused negative-control test was committed to
+`scripts/test_generate_bh4_original29x12_simplex.py`.
+
+**Verification:** New code is GitHub-committed and readback
+eligible. No native Agda 2.9 kernel acceptance, pytest run
+or actual original byte-pinned Rhea source generation
+occurred in this session. P0 original source positivity
+outcome, 27×29 real concentration embedding, analytic
+Poisson–SG preservation/continuity, genuine finite Brouwer,
+root transfer, physical kinetics and open-boundary
+laws remain OPEN.
