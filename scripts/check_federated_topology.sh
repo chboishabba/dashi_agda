@@ -24,4 +24,20 @@ do
   agda --no-libraries -i . "$module"
 done
 agda --version
+python3 - <<'PY'
+import json
+import subprocess
+from pathlib import Path
+p=Path("artifacts/federated_topology/finite_preflight.json")
+r=json.loads(p.read_text())
+r["agda_kernel_checked"]=True
+r["agda_version"]=subprocess.check_output(["agda","--version"],text=True).strip()
+r["checked_modules"]=[
+    "DASHI/Reasoning/FederatedMinerWorkerTopologyExact.agda",
+    "DASHI/Reasoning/FederatedTieredMoEFiniteExact.agda",
+    "DASHI/Reasoning/MoEOutOfCoreStreamingFiniteExact.agda",
+]
+r["release_admitted"]=False
+p.write_text(json.dumps(r,indent=2,sort_keys=True)+"\\n")
+PY
 printf '%s\n' 'FINITE KERNEL GATE PASS; original Qwen/LILA source execution, network, cryptography, GPU and deployment remain UNCHECKED.'
