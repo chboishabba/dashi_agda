@@ -14,6 +14,9 @@ open import Data.Product using (_×_; _,_)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
 import DASHI.Information.PNFMPTemporalOrderingNonIdentificationExact as Time
+import DASHI.Information.PNFMPObserverNonPromotionWeldExact as MPObserver
+import DASHI.Information.PNFMarchenkoPasturFiniteExact as MP
+import DASHI.Information.PNFSpectralGeometry as PNF
 
 data Column : Set where
   firstColumn secondColumn : Column
@@ -116,3 +119,25 @@ totalsExactlyTwo = refl , refl
 offDiagonalGramZero :
   rawGram Time.alternating firstColumn secondColumn ≡ 0
 offDiagonalGramZero = refl
+
+-- This is the actual source-specific MP interface instantiated to the
+-- 2-column sufficient statistics above. It imports the generic
+-- MPObserver theorem rather than an unmerged PR #1479 source.
+twoColumnMPClassificationCannotRecoverTemporalLag :
+  (K : PNF.ScalarStructure) →
+  (C : MP.MPFiniteCalibration K) →
+  (classifier : PNF.NoiseClassifier K (MP.calibratedMPBand K C)) →
+  (estimate : TwoColumnSufficientStatistics →
+    PNF.ScalarStructure.Scalar K) →
+  NF.FactorsThrough
+    (MPObserver.mpClassOfObserver K C classifier
+      staticTwoColumnStatistics estimate)
+    Time.lagOneProducts → ⊥
+twoColumnMPClassificationCannotRecoverTemporalLag
+  K C classifier estimate =
+  MPObserver.mpRechartCannotRecoverErasedOutcome
+    K C classifier
+    staticTwoColumnStatistics
+    Time.lagOneProducts
+    equalFullGramButDifferentTemporalLag
+    estimate
