@@ -561,3 +561,38 @@ and selected same-source tissue observation plus kinetic and
 boundary measurements. **No independently source-paid
 physical model has been constructed** by these finite
 proof-generator changes.
+
+
+### 2026-11-11 BH4 PR #1454: exact rational source continuity and positivity refutation
+
+Companion PNP branch now derives a second source-continuity bridge,
+`original_closed_rational_semidiscrete_conservation`, over the SAME
+original 27 voxels, 54 native bonds, 29 finite Rhea species and
+12 source-certified reaction columns. It accepts arbitrary *exact
+rational* signed bond fluxes and reaction rates and verifies all
+783 resulting finite-volume RHS coordinates using
+`fractions.Fraction`. The six global exact conserved quantities
+are the original C/H/N/O/P and signed charge, with each bond
+cancelling between its actual source/target and each original
+column consumed only after exact integer left-kernel checks.
+The physical kernel/membrane/boundary interpretation is not
+asserted by this algebra: no real SG transcendental or kinetic
+rate identity, experimental observation or Agda continuum
+existence is claimed.
+
+Agda `BH4OriginalCHNOPFiveAxisSimplexBridgeExact` additionally
+has `decideOriginal369SourcePositiveCHNOPWithRefutation`:
+it returns either an actual source-positive per-species proof
+or a same-source contradiction function. Its zero-coordinate
+no-go is `positiveOriginalSourceExcludesEveryZeroCoordinate`.
+The original-panel checker also reuses the canonical strict
+charge parser rather than coercing with `int(...)`.
+All of these changes remain source-written only until
+native pytest and Agda kernel validation.
+
+**Remaining biological bottleneck** is unchanged: actual
+Rhea release/29×12 certificate and original kinetic parameters,
+selected 27×29 real-valued SG transport law with original
+biophysical boundary conditions, verified real-space
+simplex/Brouwer proof, SAME physical object BH4/PNP/tissue
+one-step commutation, and independent longitudinal receipts.
