@@ -1660,3 +1660,98 @@ Verification in this session: GitHub commits and
 readbacks of source files; **no local Agda, Nix or
 repository pytest execution**. Generated source is
 absent until actual original bytes are supplied.
+
+
+### 2026-11-11 follow-on P0: literal native 27×54 incidence and same-source 783-coordinate rational RHS
+
+The source-writing continuation located and reused
+`DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact`
+(the existing 27×54/54×29/29×12/27×12 typed matrix operator).
+The prior P0 producer composition did not yet inhabit that
+specific `Rational369SemidiscreteInputs` record.
+
+**New original-native finite geometry owner**
+`DASHI.Biology.Molecular.BH4OriginalNative369IncidenceExact`
+now provides:
+
+- `sourceNative54Endpoints`: the exact 54 oriented
+  native bonds of the selected 3×3×3 lexicographic 27-cell
+  chart, with the same ordering as
+  `scripts/reactive_pnp_369.py`.
+- `sourceIncidenceCoefficient`: −1 at each bond's
+  outgoing site, +1 at its target, zero at every
+  other original site, all in unnormalised rational
+  form.
+- `sourceNativeIncidence : Operator.Matrix 27 54`.
+- `sourceNativeColumnZero`: 54 enumerated, closed
+  `QP.≃-reflexive refl` proof candidates that each
+  native incidence column sums to zero at all 27 sites.
+- `originalNativeRationalInputs`: constructs the
+  pre-existing typed original RHS input from that
+  selected incidence and arbitrary provided 54×29
+  flux, 29×12 stoichiometric and 27×12 rate matrices.
+
+Independent exact-integer Python execution outside
+the checkout confirms 27 sites, 54 distinct oriented
+bonds, one +1/−1 per bond, all 54 zero column sums,
+and the selected first/last endpoint order. This is
+**not** an Agda kernel receipt and not an authenticated
+tissue compartment topology.
+
+The existing SHA-pinned original Rhea generator now
+also emits `generatedRationalStoichiometry : Matrix 29 12`
+by **definitionally subtracting** its own
+`generatedRationalReactants` from its own
+`generatedRationalProducts`; it is not a second
+handwritten matrix. It emits:
+
+- `generatedOriginalRationalInputs`: combines
+  source-derived stoichiometry with the native
+  incidence and arbitrary source-indexed rational
+  fluxes/rates;
+- `generatedOriginalRationalRHS`: directly calls
+  `Operator.rational369SemidiscreteRHS`, producing
+  all original 783 coordinate entries;
+- `generatedOriginalRationalRHSAt`: reuses
+  `Operator.rational369SemidiscreteAt` to identify
+  each selected RHS coordinate with its actual
+  signed bond and original reaction contribution.
+
+This is a **new typed source/geometry constructor**
+on the intended RHS owner, distinct from and stronger
+than a detached six-axis accounting receipt.
+
+**Critical last P0 finite-seam obligation:** establish
+`originalComputedRHSWeightedSumAgreesWithPairedSource`
+as a genuine rational setoid theorem. It must
+prove that the six global
+`Lift.sourceSpatialWeighted sourceAxes
+  (Operator.rational369SemidiscreteRHS inputs)`
+are equal to the corresponding paired-native-bond
+plus gross-source net expression already controlled
+by `BH4RationalNativeSourceCompositionExact`.
+The proof requires finite-sum linearity/Fubini
+across 27 sites, 29 species, 54 edges, 12 columns,
+and source incidence signs. The already-committed
+54 zero-column witnesses and 72 source-column
+rational balance clauses are precisely its
+preconditions; **they are not by themselves
+the RHS zero-defect proof**.
+
+Then invoke the existing
+`computedRationalRHSConservationLiftsToBishop`
+with **derived** six zero-defect witnesses, rather
+than assuming global conservation. Beyond that
+remain original physical Rhea source bytes,
+Agda 2.9 kernel acceptance, actual Bishop-real
+SG/mass-action correspondence, compact conserved
+simplex, Brouwer, strictly positive implicit root,
+closed free-energy proof, source-paid reactive
+boundary work, same-state tissue observer and
+independent empirical/ITIR validation.
+
+All source modules and generator tests are GitHub
+committed/readback; **no native repo pytest or
+Agda typechecking** was executed here. The
+generated original source module still requires
+authentic separately byte-pinned input.
