@@ -90,3 +90,6 @@ This uses the **actual original** side-four SU(N) Wilson Gibbs/Haar and its two-
 The stronger centered one-sided formula `X(F)=Z_b N_f(F-E_bF)` is **not yet promoted** merely from the previous centering lemma: it also needs a proof that the selected division operation satisfies `N_b(F)=E_b[F] Z_b` and a genuine bare centered numerator cancellation using the selected scalar laws. The existing normalized expectation is abstracted by a `divide` function, so standard quotient cancellation must be justified, not smuggled in.
 
 Next physical producer remains a source-native nonconstant plaquette bound on `X(F_p)`, followed by actual scale/volume error propagation. **No uniform decay rate is claimed.** Kernel Agda 2.9 receipt remains outstanding.
+
+
+The new centering module also specializes directly to `originalCoarsePlaquetteTrace` (`Words.originalWordObservable ... 1 (p :: [])`) and proves `originalPlaquetteCrossNumeratorConstantShift` for arbitrary original side-two plaquettes. The subtraction-spelled specialization, `originalPlaquetteCrossNumeratorSubtractionCentering`, retains the same explicit selected scalar subtraction identity argument. This pays the specific plaquette *centering* algebra, not any nonconstant physical RG error bound.
