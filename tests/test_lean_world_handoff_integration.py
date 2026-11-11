@@ -16,10 +16,9 @@ class HandoffIntegrationTests(unittest.TestCase):
             receipt = sample(root)
             # Old receipts legitimately use an empty dependency closure ID.
             handoff = enqueue(receipt, root / "queue")
-            # This documents the current remaining schema mismatch until the
-            # source-closure contract is normalized.
-            with self.assertRaises(ContractError):
-                pending_from_manifest(Path(handoff["manifest"]))
+            export = pending_from_manifest(Path(handoff["manifest"]))
+            self.assertEqual(export.handoff_key, handoff["handoff_key"])
+            self.assertEqual(export.dependency_closure_id, "")
 
     def test_nonempty_closure_id_roundtrip(self):
         with tempfile.TemporaryDirectory() as tmp:
