@@ -18,7 +18,7 @@ Nothing here parses native AST records into mathematical nodes, proves typing, i
 
 1. **H02 / W02–W03**: locate or implement a reviewed authoritative Lean native-v3 parser and DAG validator that resolves every native reference against a complete pinned Lean environment and supplies an independently verifiable checker receipt.
 2. **H03–H05**: expose the real builder API, bind each emitted node and dependency to the source closure and validator evidence, and implement transactional PostgreSQL persistence. Only the trusted builder/database transaction may alter admission status.
-3. **H08**: make #1494 spool publication atomic across processes, using temporary files, fsync of files and directory, and atomic rename/no-clobber semantics. Queue readers must never see partial files.
+3. **H08 (local POSIX implementation added)**: immutable spool publication now uses private temporary files, file/directory fsync, atomic no-clobber hard links, and conflict detection. Cross-host readers, network filesystem semantics, crash injection and stale temporary-file cleanup remain to validate.
 4. **W04–W08**: rebase or port #1483's *retrieval-only* fibre index without promoting profile compatibility to theorem equivalence, and prove/test deduplication and bounded retrieval.
 5. **H01 / H06 / K01–K02**: test a real pinned Lean declaration end to end, then a second independent kernel-checked proof using a retrieved donor.
 6. **H07 / I01**: test throughput, concurrency, import invalidation, storage amplification and source/attribution retention against real repositories.
@@ -30,3 +30,21 @@ python3 -m unittest discover -s tests -p 'test_lean_world_builder_contract.py' -
 ```
 
 The tests exercise the contract only. They do not substitute for a Nix Lean run, PostgreSQL admission, actual native-v3 DAG validation, or kernel rechecking.
+
+## Follow-up tranche — immutable spool publication
+
+`scripts/lean_world_atomic_spool.py` supplies the atomic, no-clobber
+POSIX publication primitive. The #1494 queue now calls it for both the native
+artifact and the manifest. The manifest is published *last*, making it the
+reader-visible commit marker. The original queue schema and status remain
+unchanged. New tests cover repeated writes, conflicting bytes, pre-existing
+partial entries, symlinks and concurrent writers. Integration tests construct
+a real queue record then pass it through the read-only builder contract.
+
+The integration boundary accepts an empty dependency-closure ID because the
+original #1494 receipt schema explicitly allows it; the source closure remains
+required. Empty closure must never be interpreted as evidence of resolution
+of external imports.
+
+**No kernel or world-admission status is promoted.** No PostgreSQL writer or
+trusted native-v3 DAG validator was introduced.
