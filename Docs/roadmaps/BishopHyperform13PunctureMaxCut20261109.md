@@ -1190,3 +1190,111 @@ Agda kernel typechecking has NOT run. Do not call the full
 original 144 field equivalent to (T^{13}) alone. The
 pointwise 13+131 reconstruction is the correct finite
 information decomposition for the selected observation.
+
+
+## 2026-11-11 continuation: universal original consumer factorization and relational transpose
+
+**This tranche closes two precise source-level H1.01/H2.01 leaves, not the
+independent ITIR/Monster semantic admission. Kernel checking remains open.**
+
+### 1. Every pointwise-extensional original relational consumer factors
+
+New owner:
+`DASHI/Foundations/TernaryThirteenOriginalRelationConsumerUniversalityExact.agda`
+(commit `c84d4c9`).
+
+- `PointwiseEqual` is explicit equality at **each** original
+  `StageRelation144` cell, not intensional equality of functions.
+- `PointwiseExtensionalConsumer` retains both original
+  `StageRelationField → Outcome` and evidence the consumer respects
+  this pointwise relation.
+- `reopenedFieldIsPointwiseOriginal` reuses the paid 144-address
+  residual reopening theorem.
+- `reconstructConsumer` explicitly evaluates the selected consumer
+  on the decoded 13+131 state.
+- `reconstructConsumerCommutes` proves that this is the
+  original consumer on the original field.
+- `everyExtensionalConsumerFactors` constructs the **original**
+  `ObserverFactorizedRefinementExact.FactorizedRefinement`,
+  not a weakened wrapper or new unverified admission record.
+- `everyExtensionalConsumerIsSufficient` proves sufficiency through
+  the original consumer-descent API.
+- `originalCellConsumerExtensional`,
+  `everyOriginalCellExplicitlyFactors`: same-source complete
+  144-cell indexed consumer instantiation.
+- `reverseCellStillDoesNotFactorThroughCoarse` explicitly retains
+  the original (1,0) counterexample for the 13-code alone.
+
+This is universal **for independently supplied pointwise-extensional
+consumers on the original relation field**, and does not assert that
+all external world/ITIR consumers are the same field functions.
+
+### 2. Original relation transpose makes the coarse quotient non-functorial
+
+New owner:
+`DASHI/Foundations/TernaryThirteenOriginalRelationalTransposeDescentExact.agda`
+(commit `08275e5`).
+
+- `transposeCentralConsumer`, `transposeCentralIsReverseCell`
+  use the ORIGINAL `StageTwelveGrothendieckRelationHyperformExact.transposeRelation`,
+  whose directed transposition sends the *unobserved* (1,0)
+  cell into the selected central (0,1) cell.
+- `transposedCentralNonDescent` and
+  `transposeCentralCannotFactorThroughCoarse` prove the original
+  central consumer AFTER transpose does not descend through the
+  13-code observer BEFORE transpose.
+- `originalRelationCodeCentralRecovers` recovers the actual
+  source selected centre from the original word codec.
+- `transposeCodeCannotDescend` is strictly stronger: **no**
+  `TritWord 13 → TritWord 13` map can commute with the
+  original 144-field transpose on all source fields.
+- `transposeOnFullObservation` is an actual operation on the
+  full 13-code+normalized-131 residual carrier.
+- `transposeFullObservationRecoversAt` proves its decoded
+  output equals the original transposed source field at every
+  original relation cell. This is exact, pointwise, and
+  assumes no funext.
+
+This is a specific mathematical explanation for the retained
+residual: it is necessary even to preserve an ORIGINAL
+relational symmetry/dynamics operation. Thus a proposed
+semantic 13-dimensional quotient must independently specify
+which transformations and consumers it is allowed to discard.
+
+### 3. Finite independent data regression
+
+New executable original-data-model regression:
+`scripts/check_ternary13_original_relation_residual.py`
+(commit `9969acf`).
+
+- Enumerates all 144 source ordered addresses,
+  13 retained and 131 residual.
+- Checks exactly 864 single-address trit basis and inverse
+  cases, plus zero-field.
+- Confirms that changing source (1,0) leaves the coarse
+  observation unchanged while changing the residual.
+- The standalone finite arithmetic regression passed locally;
+  this is **not an Agda kernel proof** and does not certify
+  the Agda source imports.
+
+TOE roots: consumer module `afa7140`, `c999240`,
+`885ed81`; transpose module `37af950`, `5818e96`,
+`f42c9d4`.
+
+### Corrected remaining highest-alpha exact cut
+
+| Priority | Gate | Precise status and next unpaid work |
+|---|---|---|
+| P0 | H1.01 original source relational information | **SOURCE-WRITTEN** pointwise 13+131 normal form and universal extensional-consumer factorization |
+| P0 | H1.01 original relation transpose | **SOURCE-WRITTEN** proof transpose cannot descend through coarse 13 alone; does transport over full 13+131 |
+| P0 | H1.01 independently intended group completion | OPEN: identify a specifically selected original relational subcarrier/quotient and independently justify its group action, intended semantics and allowed consumers |
+| P0 | H2.01 original 144-cell consumers | **SOURCE-WRITTEN** all indexed cells and any explicitly pointwise-extensional consumer factor through full 13+131 |
+| P0 | H2.01 ITIR-world node bridge | OPEN: genuine original nodes, independent world→source mapping, commuting consumer/observer maps and appropriate world operational evidence |
+| P0 | H2.02 independently selected world-fabric seam | OPEN: actual independently sourced heterogeneous world edge-stalk maps and complete 5-field evidence, larger-fabric topology/provenance transport |
+| P1 | Bishop analytic Cayley | OPEN: original source analytic nested exponential/atan same-function equality; do not duplicate pre-existing Machin construction |
+| P2 | Independently selected zeta | OPEN: original analytic zeta equality with independently validated convergence/continuation (Nat power lemma already owned) |
+| P3 | Gamma/Xi | OPEN: original Gamma integral, analytic continuation, functional equation, completed Xi |
+
+**Verification:** source-written (no Agda binary available); do not
+promote to KERNEL-CHECKED. The Python finite regression is a separate
+algorithmic cross-check and carries no original-world semantic claim.
