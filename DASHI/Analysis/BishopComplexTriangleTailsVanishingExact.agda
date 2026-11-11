@@ -52,8 +52,7 @@ originalBishopFiniteFinSumMonotone
     (BishopP.≃-symm
       (FinSum.finSumIsSeriesOf right count))
     (BishopP.≤-respˡ-≃
-      (BishopP.≃-symm
-        (FinSum.finSumIsSeriesOf left count))
+      (FinSum.finSumIsSeriesOf left count)
       (BishopSequence.∑₀-mono-≤ pointwise count))
 
 originalBishopCauchyCoefficientMonotone :
@@ -224,8 +223,10 @@ originalBishopImaginaryRealAbsBound y n
     (originalBishopImaginaryEvenRealAbsIsExpAbs y j)
 ... | Parity.odd j =
   BishopP.≤-respˡ-≃
-    (BishopP.∣-∣-cong
-      (proj₁ (Axis.originalBishopImaginaryAxisFactorialOddTerm y j)))
+    (BishopP.≃-trans
+      (BishopP.∣-∣-cong
+        (proj₁ (Axis.originalBishopImaginaryAxisFactorialOddTerm y j)))
+      (BishopP.0≤x⇒∣x∣≃x BishopP.≤-refl))
     (BishopP.nonNegx⇒0≤x
       (BishopP.nonNeg∣x∣
         (Exp.expTerm y (Estimates.oddExponent j))))
@@ -244,8 +245,10 @@ originalBishopImaginaryImagAbsBound y n
     (originalBishopImaginaryOddImagAbsIsExpAbs y j)
 ... | Parity.even j =
   BishopP.≤-respˡ-≃
-    (BishopP.∣-∣-cong
-      (proj₂ (Axis.originalBishopImaginaryAxisFactorialEvenTerm y j)))
+    (BishopP.≃-trans
+      (BishopP.∣-∣-cong
+        (proj₂ (Axis.originalBishopImaginaryAxisFactorialEvenTerm y j)))
+      (BishopP.0≤x⇒∣x∣≃x BishopP.≤-refl))
     (BishopP.nonNegx⇒0≤x
       (BishopP.nonNeg∣x∣
         (Exp.expTerm y (Estimates.evenExponent j))))
