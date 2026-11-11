@@ -324,13 +324,13 @@ def generate_joins(root_module,donors,*,join_namespace="DASHIJoined"):
             "  let some joinedProof := accumulatedProof",
             "    | throwError \"missing theorem conjunction proof\"",
             "  addDecl <| Declaration.thmDecl {",
-            "    name := `DASHIJoined.combined,",
+            "    name := "+lean_name(join_namespace+".combined")+",",
             "    levelParams := universes,",
             "    type := joinedType,",
             "    value := joinedProof",
             "  }",
-            "#check DASHIJoined.combined",
-            "#print axioms DASHIJoined.combined",
+            "#check "+join_namespace+".combined",
+            "#print axioms "+join_namespace+".combined",
             ""
         ])
     return ("\n".join(lines)+"\n").encode()
