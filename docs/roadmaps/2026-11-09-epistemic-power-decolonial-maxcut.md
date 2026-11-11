@@ -576,3 +576,14 @@ User scope remains K1–K3; K0/K4 and DOCX excluded.
 - `causalAttributionOverCompetingHistories`: no automatic defendant-specific causation from cortisol, posterior entropy, spectral defect or an ungluable toy assay.
 
 **Verification:** GitHub commits are source-written but no Agda kernel check under excluded K0; no original person-time/GR data, approved access, clinical inference or legal determination produced.
+
+### Seventeenth-pass original PNF→IR legal-use boundary
+
+`SituatedBiomarkerPNFSourceWeldExact.agda` now also imports the actual `DASHI/Cognition/PNF/OperationalIR.agda` and `CandidateInvalidation.agda` owners. Exact new declarations: `selectedCandidateFromResolution`, `selectedCandidateValidityFromResolution`, `exampleStructuralLegalIR`, `exampleIRIsOperationalShapeOnly`, `IndependentlyReviewedLegalUse`, `legalUseRequiresAdjudication`, `invalidatedSourceCannotBecomeAdmissible`.
+
+**Decisive observed repository seam:** `OperationalIR.legalProjection` gives `operationallyValid` to a source-resolved legal IR, but its constructor only needs a `ResolvedPNF` and string coordinates. This is **operational shape, not proof of a judicial finding, a clinical diagnosis, physiological injury or defendant causation**. Hence the independent `IndependentlyReviewedLegalUse` record requires source authentication, physiological/clinical evidence where claimed, defendant-specific causal evidence, case-specific legal elements and independently authorised disposition. No such instance is supplied. Canonical invalidated candidates remain barred from admission.
+
+**Concrete illustrative flow (NOT a real-world finding):**
+reported environmental harm → primary source and exact actor/time/role span → `EventPNF` → source-bound `CandidatePNF` → `AdmissiblePNF` iff actual validity proof → `ResolvedPNF` retaining alternatives → optional sampled cortisol only when independently validated purpose/consent + assay+time receipt → source-indexed model residuals/causal alternatives → optional `DomainIR` operational projection → separate source-paid clinical, causal, law and judicial authority. If a subject declines OPTIONAL biological profiling, the biological branch stops, while their testimony remains available under its own appropriate provenance and legal/evidentiary rules. The source-resolved IR does **not** automatically become adjudicated truth.
+
+**Unpaid empirical leaves:** authentic person-time records/assays, quantitative cortisol/GR dynamics, calibrated 3-adic mapping and developmental sensitive periods, source-verified consent, actual cross-assay transfer and uncertainty, clinical and counterfactual inference, and authorised case-specific legal evaluation. No technical library proof grants Indigenous community authority or overrides custodianship.
