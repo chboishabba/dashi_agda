@@ -15,7 +15,8 @@ module DASHI.Foundations.BishopFiniteEvenOddSeriesReindexExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Rational.Unnormalised using (0ℚᵘ)
 
 import Real as BishopReal
