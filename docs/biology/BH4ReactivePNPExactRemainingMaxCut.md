@@ -2075,3 +2075,72 @@ scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalNativeCo
 scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 ```
 The generated strict original-source Golden root must be tested separately after providing `BH4_ORIGINAL_CERT_SHA256` and the corresponding genuine Rhea certificate bytes. Unavailable data are not replaced by synthetic rows or guesses.
+
+
+### 2026-11-11 highest-alpha arbitrary Bishop-real reaction rate conservation
+
+The previously source-written exact rational computed 783-coordinate
+conservation proof graph is now accompanied by a stronger
+**real-valued reaction law**, not just rational-rate conservation.
+
+New Golden-imported
+`DASHI.Biology.Molecular.BH4OriginalBishopArbitraryReactionRatesExact`
+reuses the exact same `Lift.bishopWeightedRow`,
+`Embed.embed`, and `RP._≃_` setoid owner.
+Its `bishopOriginalColumnBalanceFromRationalSource`
+takes the **original source rational** 29-component
+reactant/product column balance through
+`Lift.weightedRowEmbeds` to the corresponding
+Bishop-real weighted column equality.
+`bishopAllColumnsArbitraryRatesConserve`
+uses Bishop multiplication/addition congruence
+to retain that equality under arbitrary 12-vector
+**Bishop-real** reaction rates.
+`bishopAllSitesArbitraryRatesConserve`
+extends that exact equality to all 27 original
+sites with possibly distinct arbitrary real rates.
+The concrete
+`original369BishopArbitraryReactionRatesConserve`
+specializes the original 29 species, 12 columns,
+27 sites, without requiring those rates to be
+rational or imposing measured kinetics.
+
+The existing original Rhea Agda generator now
+emits `generatedOriginalBishopAnyReactionRatesConserve`
+for all **six** source CHNOP/z axes, directly
+consuming the same 72 literal
+`generatedRationalColumnsBalance` proofs;
+no separately written chemistry matrix or
+source-assumed real-rate conservation receipt.
+The generator's JSON receipt and synthetic-only
+regression test distinguish source-written
+emission from Agda 2.9 kernel acceptance.
+
+**New exact status separation:**
+- Finite 54-bond/29-species/12-reaction
+  rational computed RHS conservation and
+  Bishop embedding: source-written through
+  an explicitly derived 783-coordinate RHS
+  zero producer; original source generation
+  and kernel checking outstanding.
+- Original source chemical reaction
+  conservation under **arbitrary Bishop-real
+  rate fields**: source-written and generator
+  connected; kernel acceptance outstanding.
+- Bishop-real native SG/Poisson transport,
+  arbitrary real-valued 27×29 RHS identity,
+  physical parameter/source identification,
+  compact positive simplex, actual Brouwer,
+  implicit root, real electrochemical energy
+  dissipation and six-face boundary work:
+  STILL OPEN. The arbitrary-real reaction
+  theorem does **not** imply these.
+- Original Rhea source/CHNOP positivity,
+  same-state tissue readout, independently
+  measured longitudinal validation and
+  ITIR source authentication: STILL OPEN.
+
+The current container has no native Agda/Nix
+binary and cannot resolve GitHub via direct
+checkout. GitHub source readback does not
+constitute an Agda kernel receipt.
