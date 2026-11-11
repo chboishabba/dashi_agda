@@ -121,3 +121,18 @@ Additional Agda declarations in `BalabanExceptional240SameActionBoundaryExact.ag
 4. `CrenshawLegalAttributionCapstoneExact` imports the canonical developmental address and cross-domain consumer module, retaining prior authorship/observer/cortisol boundaries.
 
 **High-alpha remaining next actions:** (a) obtain the actual alternative F4/E6/D4 selected action from PRs #1098/#1106/#1389 and match character values on a common group, not an arbitrarily chosen map; (b) construct/select the real Balaban scalar identity including fixed momentum and analytic BoxTrigEnvironment; (c) build an explicit *consumer instantiation* for one source-coded residual stream with a justified observer and measure; (d) prove kernel acceptance on real checkout with Nix Agda, not CI. The representation negative theorem and generic residual positive transport are source-written, and no source-domain empirical equivalence has been claimed.
+
+## 8 — First *inhabited* cross-domain residual consumer (2026-11-11)
+
+`DASHI/Governance/EpistemicHistoryResidualPayloadExact.agda` consumes actual `EpistemicPowerHistoryAndNonSubstitutionExact` source task histories and instantiates `CrossDomainResidualConsumerPreservationExact.ObservableResidualTransport`, rather than leaving a generic Set-valued interface. It records the COMPLETE task list in `WorkHistoryPayload.sideHistory` with a public disposition. `workRoundTrip`, `retentionAfterDecode`, `communicationAfterDecode`, `publicAfterEncode`, `fullPayloadInjective` and `workSelectedObservablePreserved` provide exact reduction proofs. `noLosslessDecoderAfterDroppingSideInformation` reuses the previously proved non-factorability obstruction: a public accepted conclusion alone cannot recover the determining/retaining/communicating work spent maintaining it.
+
+**Important cost/result distinction:** This is a deliberately *lossless but not compressed* source-specific witness; full task history is charged as side information. No physical metabolic cost, physiological cortisol estimate, video-bit rate, MDL improvement or verified cognitive-warfare attribution follows. It makes the information lost under public-outcome projection explicit. `CrenshawLegalAttributionCapstoneExact` now imports both positive task reconstruction and negative public-outcome decoder impossibility.
+
+**Revised residual P2 maximum cut:**
+- P2a `epistemicWorkHistorySelectedConsumerExact`: source-written accomplished (full task history stored).
+- P2b `codecActualSourceDecoderObservableBridge`: identify an actual witness in the dashitest codec with real decoder, bit budget and errors, then map a selected observable to correct source consumer; no simulated bpp.
+- P2c `cortisolAssayWindowObservationTransport`: person-time validated sample windows and uncertainty, no free inversion of integration or identity between cortisol and cognitive load.
+- P2d `PNFHistorySourceResolutionTransport`: source-indexed PNF original candidate/alternative/resolution, authority and invalidation; preserve participant testimony and non-promotion.
+- P2e `residualCrossDomainObservablePreservation`: a selected observation-valued naturality square with source-specific fibres and calibrated semantic meaning, not a three-domain numerical identification.
+
+**Source verification:** New Agda is committed but not kernel-checked. The independent exact E8 finite enumeration was run for each of four paired-sign embedding choices and confirmed 240 roots, 34 target orbits, and identical mismatch of involution traces; committed script should be replayed at its PR head before marking the script test itself PASS.
