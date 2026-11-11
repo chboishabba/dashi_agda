@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """CCDCOE P3 census check: exact equality with a predeclared article frame.
 
-V4 also requires unique discovery locators and publication metadata for excluded units. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
+V5 also preregisters the tested substantive frame to prevent post-hoc outcome selection. This verifies only INTERNAL coverage of the submitted, frozen frame. It does not
 verify that the frame contains every historical article or that treatment was
 assigned independently of outcome. No historical GCC case is admitted here.
 """
@@ -15,7 +15,9 @@ from pathlib import Path
 
 ARMS = {'GCC-linked-outlet', 'comparison-outlet'}
 PERIODS = {'before', 'after'}
-SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v4'
+SCHEMA = 'dashi.ccdcoe.p3.predeclared_article_frame.v5'
+SUBSTANTIVE_FRAMES = {'science_uncertainty', 'economic_cost',
+                      'consensus_acknowledgement', 'policy_mandate'}
 
 
 def require(condition, reason):
@@ -41,7 +43,7 @@ def canonical_measurements_sha256(measured):
 
 
 def check(frame, measured, expected_frame_sha256=None, expected_intervention_date=None,
-          expected_intervention_receipt=None):
+          expected_intervention_receipt=None, expected_focus=None):
     require(isinstance(frame, dict), 'frame must be an object')
     require(frame.get('schema') == SCHEMA, 'frame schema')
     actual_digest = canonical_frame_sha256(frame)
@@ -55,6 +57,12 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
     require(frame.get('frozen_before_coding') is True, 'frame must be frozen before coding')
     for name in ('frame_id', 'inclusion_rule', 'exclusion_rule', 'frame_provenance'):
         require(isinstance(frame.get(name), str) and frame[name].strip(), 'frame field: ' + name)
+    focus = frame.get('focus_frame')
+    require(isinstance(focus, str) and focus in SUBSTANTIVE_FRAMES,
+            'frozen substantive focus frame required')
+    if expected_focus is not None:
+        require(expected_focus == focus,
+                'analysis substantive focus differs from frozen frame')
     cutoff_text = frame.get('intervention_date')
     receipt = frame.get('intervention_receipt')
     require(isinstance(cutoff_text, str), 'frozen intervention date required')
@@ -144,6 +152,7 @@ def check(frame, measured, expected_frame_sha256=None, expected_intervention_dat
     counts = Counter((registered[uid]['arm'], registered[uid]['period']) for uid in eligible)
     return {'schema': SCHEMA, 'frame_id': frame['frame_id'],
             'intervention_date': cutoff_text,
+            'focus_frame': focus,
             'intervention_receipt': receipt,
             'canonical_frame_sha256': actual_digest,
             'canonical_measurements_sha256': canonical_measurements_sha256(measured),
@@ -172,6 +181,7 @@ def self_test():
     frame = {'schema': SCHEMA, 'frame_id': 'SYNTHETIC-ONLY',
              'frozen_before_coding': True, 'inclusion_rule': 'fixture rule',
              'exclusion_rule': 'fixture exclusions', 'frame_provenance': 'fixture',
+             'focus_frame': 'science_uncertainty',
              'intervention_date': '1993-01-01',
              'intervention_receipt': 'SYNTHETIC-CUTOFF-RECEIPT',
              'units': units}
@@ -209,6 +219,15 @@ def self_test():
         assert '64 lowercase hex' in str(error)
     else:
         raise AssertionError('Malformed commitment was accepted')
+    for bad_focus, reason in (
+        ('economic_cost', 'analysis substantive focus differs'),
+    ):
+        try:
+            check(frame, measured, committed, expected_focus=bad_focus)
+        except ValueError as error:
+            assert reason in str(error)
+        else:
+            raise AssertionError('Post-hoc focus selection admitted')
     # A matching frame digest is not enough if a consumer changes the
     # asserted historical onset date or source receipt.
     for expected_date, expected_receipt, reason in (
@@ -223,6 +242,8 @@ def self_test():
             raise AssertionError('Intervention identity drift accepted')
     cases = [
         ('unfrozen', lambda f, m: f.update(frozen_before_coding='true'), 'frame must be frozen'),
+        ('missing_focus', lambda f, m: f.pop('focus_frame'), 'frozen substantive focus frame required'),
+        ('invalid_focus', lambda f, m: f.update(focus_frame='other_or_undetermined'), 'frozen substantive focus frame required'),
         ('missing', lambda f, m: m.pop(), 'missing eligible original articles'),
         ('extra', lambda f, m: m.append({'id': 'unregistered', 'treatment': m[0]['treatment'], 'period': m[0]['period']}), 'not in declared frame'),
         ('duplicate', lambda f, m: m.append(dict(m[0])), 'duplicate measured original unit'),
@@ -258,7 +279,7 @@ def self_test():
             assert message in str(error), (name, str(error))
         else:
             raise AssertionError(name + ' should fail')
-    return {'positive_synthetic_frame': True, 'targeted_negative_controls': len(cases) + 4,
+    return {'positive_synthetic_frame': True, 'targeted_negative_controls': len(cases) + 5,
             'historical_articles_admitted': 0}
 
 
@@ -270,17 +291,20 @@ def main():
     parser.add_argument('--expected-frame-sha256', required=False)
     parser.add_argument('--intervention-date')
     parser.add_argument('--intervention-receipt')
+    parser.add_argument('--focus', required=False)
     args = parser.parse_args()
     if args.self_test:
         print(json.dumps(self_test(), indent=2))
         return
     if (args.frame is None or args.measurements is None or args.expected_frame_sha256 is None
-            or args.intervention_date is None or args.intervention_receipt is None):
+            or args.intervention_date is None or args.intervention_receipt is None
+            or args.focus is None):
         parser.error('--frame JSON, --measurements JSONL and --expected-frame-sha256 are required')
     frame = json.loads(args.frame.read_text(encoding='utf-8'))
     rows = [json.loads(line) for line in args.measurements.read_text(encoding='utf-8').splitlines() if line.strip()]
     print(json.dumps(check(frame, rows, args.expected_frame_sha256,
-                           args.intervention_date, args.intervention_receipt), indent=2))
+                           args.intervention_date, args.intervention_receipt,
+                           args.focus), indent=2))
 
 
 if __name__ == '__main__':
