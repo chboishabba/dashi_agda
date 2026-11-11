@@ -41,6 +41,8 @@ import DASHI.Governance.CrossDomainResidualConsumerPreservationExact as Residual
 import DASHI.Governance.DevelopmentalTriadicFiniteQuotientWeldExact as DevTri
 import DASHI.Governance.EpistemicHistoryResidualPayloadExact as WorkPayload
 import DASHI.Governance.MonsterThreeLocalCognitiveOriginNonIdentificationExact as MonsterDetector
+import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as CWDetector
+import DASHI.Moonshine.MoonshineZ3OrbifoldThreeLocalSiblingExact as MonsterLocal
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -204,11 +206,11 @@ record LegalCrossCaseCut : Set₁ where
       ((history : List CW.Work.EpistemicTask) →
         decoder (CW.Work.visibleDisposition history) ≡ history) → ⊥
     selectedMonsterThreeLocalLabelCannotProveHiddenController :
-      (chart : MonsterDetector.CW.TargetObservation →
-        MonsterDetector.ThreeLocal.ThreeLocalSiblingName) →
+      (chart : CWDetector.TargetObservation →
+        MonsterLocal.ThreeLocalSiblingName) →
       INF.FactorsThrough
-        (λ history → chart (MonsterDetector.CW.targetProject history))
-        MonsterDetector.CW.origin → ⊥
+        (λ history → chart (CWDetector.targetProject history))
+        CWDetector.origin → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
