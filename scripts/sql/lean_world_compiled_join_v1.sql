@@ -23,9 +23,19 @@ CREATE TABLE IF NOT EXISTS lean_world_compiled_join_module (
   original_path text NOT NULL,
   source_sha256 bytea NOT NULL CHECK (octet_length(source_sha256)=32),
   compiled_olean_sha256 bytea NOT NULL CHECK(octet_length(compiled_olean_sha256)=32),
+  compiled_olean bytea NOT NULL CHECK(octet_length(compiled_olean) > 0),
   PRIMARY KEY(batch_sha256,module),
   FOREIGN KEY(original_repository,original_revision,original_path)
     REFERENCES lean_world_source_occurrence(repository,revision,path)
+);
+CREATE TABLE IF NOT EXISTS lean_world_compiled_join_import (
+  batch_sha256 bytea NOT NULL,
+  source_module text NOT NULL,
+  import_module text NOT NULL,
+  original_module_in_batch boolean NOT NULL,
+  PRIMARY KEY(batch_sha256,source_module,import_module),
+  FOREIGN KEY(batch_sha256,source_module)
+    REFERENCES lean_world_compiled_join_module(batch_sha256,module)
 );
 CREATE TABLE IF NOT EXISTS lean_world_compiled_join_theorem (
   batch_sha256 bytea NOT NULL REFERENCES lean_world_compiled_join_batch(batch_sha256),
@@ -47,7 +57,8 @@ BEGIN
  FOREACH t IN ARRAY ARRAY[
    'lean_world_compiled_join_batch',
    'lean_world_compiled_join_module',
-   'lean_world_compiled_join_theorem'
+   'lean_world_compiled_join_theorem',
+   'lean_world_compiled_join_import'
  ] LOOP
    EXECUTE format('DROP TRIGGER IF EXISTS lean_join_immutable_row ON %I',t);
    EXECUTE format('CREATE TRIGGER lean_join_immutable_row BEFORE UPDATE OR DELETE ON %I FOR EACH ROW EXECUTE FUNCTION lean_world_reject_compiled_join_mutation()',t);
