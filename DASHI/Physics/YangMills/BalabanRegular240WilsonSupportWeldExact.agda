@@ -10,6 +10,7 @@ module DASHI.Physics.YangMills.BalabanRegular240WilsonSupportWeldExact where
 -- representation is inferred from this discrete carrier weld.
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanRegular240SupportHalfExact as Product
 import DASHI.Physics.YangMills.BalabanWilsonBooleanFourCubeExact as Cube
@@ -107,3 +108,44 @@ sameOriginalWilsonSupport (Grid.gridCell4 a b c d) with
 
 -- This aligns exactly with the Wilson four-cube's original 15 nonempty
 -- atoms and the Round56 four-representative orbit decomposition.
+
+-- Exact rank identity with the ORIGINAL Wilson Boolean four-cube,
+-- not a reconstructed list of equally many support-mask objects.
+wilsonDegreeMatchesOriginal :
+  (cell : Grid.GridCell4) →
+  Cube.subsetCardinality
+    (toWilson (Product.supportMask (Product.encode256 cell))) ≡
+  Orbit.outerCount cell
+wilsonDegreeMatchesOriginal cell =
+  trans (cong Cube.subsetCardinality (sameOriginalWilsonSupport cell))
+        (Orbit.outerSubsetCardinalityExact cell)
+
+-- A Wilson-subset action induced solely through the already proved
+-- reversible Boolean carrier, not through grid cell encodings.
+actWilsonSubset :
+  Product.Action.HypercubicGenerator → Cube.Subset4 → Cube.Subset4
+actWilsonSubset g subset =
+  toWilson (Product.actMask g (fromWilson subset))
+
+sourceSupportToWilsonInverse :
+  (cell : Grid.GridCell4) →
+  Product.supportMask (Product.encode256 cell) ≡
+    fromWilson (Orbit.outerSubset cell)
+sourceSupportToWilsonInverse cell =
+  trans
+    (sym (maskRoundTrip
+      (Product.supportMask (Product.encode256 cell))))
+    (cong fromWilson (sameOriginalWilsonSupport cell))
+
+wilsonSubsetActionCommutesWithOriginal :
+  (g : Product.Action.HypercubicGenerator)
+  (cell : Grid.GridCell4) →
+  Orbit.outerSubset (Product.Action.act g cell) ≡
+    actWilsonSubset g (Orbit.outerSubset cell)
+wilsonSubsetActionCommutesWithOriginal g cell =
+  trans
+    (sym (sameOriginalWilsonSupport (Product.Action.act g cell)))
+    (trans
+      (cong toWilson (Product.maskProjectionEquivariant g cell))
+      (cong (λ mask → toWilson (Product.actMask g mask))
+        (sourceSupportToWilsonInverse cell)))
