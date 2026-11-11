@@ -34,6 +34,22 @@ def psql(sql: str | None = None, *, filename: Path | None = None,
     return completed.stdout.strip()
 
 
+class PostgreSQLMigrationSyntax(unittest.TestCase):
+    def test_immutable_trigger_bodies_have_balanced_dollar_quotes(self):
+        """Catch malformed migration SQL even without a live PostgreSQL server."""
+        import re
+        sql = SQL.read_text(encoding="utf-8")
+        for name in ("lean_world_reject_occurrence_update",
+                     "lean_world_reject_occurrence_truncate",
+                     "lean_world_count_insert_batch",
+                     "lean_world_count_delete_batch"):
+            match = re.search(
+                r"CREATE OR REPLACE FUNCTION " + name +
+                r"\(\)\s*RETURNS trigger LANGUAGE plpgsql AS (\$\$)"
+                r".*?\nEND\n\1;", sql, flags=re.S)
+            self.assertIsNotNone(match, f"unbalanced PL/pgSQL delimiter: {name}")
+
+
 class PostgreSQLMigration(unittest.TestCase):
     def test_actual_migration_counters_and_rejections(self):
         if not shutil.which("psql"):
