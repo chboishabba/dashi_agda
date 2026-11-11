@@ -310,3 +310,12 @@ New `YMClayE1D1OriginalR445BoundedMomentMajorantsExact.agda` uses these directly
 **Precise unpaid P0:** actual cutoff/volume-uniform physical source RG moment discrepancy estimates ε_F, ε_G, ε_FG on a concrete chosen renormalized interacting Wilson cylinder family; certifying bounded/coarse complements on the selected (possibly rescaled/shifted) observable class; identifying physical blocking with the E1 limit. R576 mixed-log shell activity, R577 same-OS transfer, R563 H6 noncollapse and R571 G1 physical group continuation remain unpaid.
 
 **Verification:** source-written/committed and imported into original physical regression, not Agda-kernel-accepted. No CI-based acceptance inferred.
+
+
+## 2026-11-11 original RG finite-source continuation
+
+The bounded-moment module constructs an explicit product-complement test: given F+Fc=1 and G+Gc=1 with nonnegative summands, the complementary test Fc+F*Gc satisfies FG+(Fc+F*Gc)=1. Source-written proofs establish pointwise positivity and unit completion, and reuse actual R445 and bare Wilson normalized moments to show both product expectations have magnitude at most one. This extends the certified bounded test class to all three RG moment inputs F, G, FG.
+
+New `YMClayE1A3OriginalR445WeightedCrossNumeratorExact.agda` defines the actual original Wilson effective fine-block numerator N_eff(F), independent bare coarse numerator N_bare(F), and their respective source partition functions Z_fine, Z_bare. It constructs X(F)=N_eff(F)*Z_bare-N_bare(F)*Z_fine and proves its literal interacting Haar/Gibbs expansion plus unit-test cancellation X(1)=0. Nonconstant physical RG errors remain unresolved: no matching of effective and bare Wilson actions is asserted.
+
+Agda kernel verification has not been performed. Remaining highest-alpha physical target: a uniform nonconstant original Wilson weighted cross-numerator bound, followed by positive-denominator normalization and existing three-moment covariance transport. R576/R577/R563/R571 physical gates remain open.
