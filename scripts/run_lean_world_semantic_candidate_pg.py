@@ -41,10 +41,15 @@ def load_acceptance(path: Path):
         evidence.get("checker_source_sha") !=
         "418320295890faed83a96fd97907b12a3b6728c2"):
         raise SemanticCandidateError("wrong independent Rust checker identity")
-    if evidence.get("checker_policy",{}).get("unsafe_permit_all_axioms") is not False:
-        raise SemanticCandidateError("unsafe checker axiom policy")
-    if "sorryAx" in evidence.get("checker_policy",{}).get("permitted_axioms",[]):
-        raise SemanticCandidateError("sorry axiom incorrectly permitted")
+    policy=evidence.get("checker_policy")
+    if (not isinstance(policy,dict) or
+        policy.get("unsafe_permit_all_axioms") is not False or
+        policy.get("unpermitted_axiom_hard_error") is not False or
+        policy.get("permitted_axioms") != [
+            "propext","Classical.choice","Quot.sound","Lean.trustCompiler"] or
+        policy.get("nat_extension") is not True or
+        policy.get("string_extension") is not True):
+        raise SemanticCandidateError("unexpected Rust checker axiom policy")
     if (evidence.get("independent_checker_observed") is not True or
         evidence.get("invalid_fixture_rejected") is not True or
         evidence.get("postgres_world_admitted") is not False or
