@@ -158,3 +158,13 @@ Added `Karp21NativeBinaryCountFuelOriginalExact.agda` with `positiveBinaryPredec
 ### Do not re-list as missing
 
 `compareLENumericalCorrect`, `nativePositiveThresholdParserSameOriginal`, `nativeSignedLedgerIntegerEqualsOriginalTraceScore`, `nativeSignedLedgerIntegerEqualsOriginalRawSparseScore`, `nativeOriginalGraphWordFieldsSame`, `karpFractranFirstEnabledSameParsedRawVerifierStep`, `karpNativeThresholdDecisionSameOriginal`, `karpNativeParsedRawAcceptanceSameOriginal`, `karpFractranDecodePreservesAcceptance`, and the parsed-raw `karpFirstEnabledStepStrictPotential` have already been source-written. They may contain Agda errors and must be checked; **source-written is not kernel-closed**.
+
+## 2026-11-11 K0 focused Agda execution repair — verified source changes, NO receipt
+
+**Actual blocker repaired**: scripts/referee_karp21_maxcut.sh previously rejected kernel modes when `agda` was missing from PATH before considering AGDA_BIN or Nix, even when a valid pinned Nix Agda binary was available. It now checks executable AGDA_BIN, an installed Agda, or Nix before declaring the environment blocked. `scripts/run_agda29_parallel_check.sh` previously unconditionally evaluated a Nix build fallback when AGDA_BIN was unset, even when a usable Agda existed on PATH; resolution now prioritizes AGDA_BIN, then PATH, then Nix, and records the selected version.
+
+New deterministic focused mode `bash scripts/referee_karp21_maxcut.sh kernel-cut` skips the large unrelated Python preflight, then checks ORIGINAL binary grammar, verifier and machine followed by actual signed gamma/raw edge, ripple ledger, full input register, endpoint history, all-state combined payload and accepted sparse-certificate G3 declarations in dependency order. Each target remains fail-closed under actual Agda diagnostics. This focused mode makes K0 immediately executable on the user's Agda/Nix workstation, avoiding an earlier unrelated E20 or Golden root as a blocker.
+
+**Status and strict boundary**: changes were committed and source-inspected, but no Agda 2.9 executable or Nix is installed in this container and direct GitHub checkout is unavailable. ZERO new K0 proof acceptance receipts. `kernel-cut` itself must be run on the actual local checkout before any B6/D2/F2/G3 source candidate may be promoted to kernel-accepted. Actual verifier polynomial bit-Turing time F1/F3/F4, complete live heap allocation F2, original PR.InNP G2/G3/G4, P1 E20/Cook–Levin, P2 original Karp network and independent SATNotInP remain OPEN.
+
+Suggested exact local command: `DASHI_NO_TMUX=1 bash scripts/referee_karp21_maxcut.sh kernel-cut` with AGDA_BIN pointing to the pinned 2.9 binary, or with Nix configured through AGDA_FLAKE. This requires no CI.
