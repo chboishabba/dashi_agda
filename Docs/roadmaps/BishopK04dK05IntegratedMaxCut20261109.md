@@ -955,3 +955,34 @@ edge-stalk semantics remain open. Bishop original analytic
 exp/atan, independently sourced zeta and Gamma/Xi remain open.
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for exact source declarations and commits.
+
+
+### 2026-11-11: H1.01 original Heisenberg group 12+centre SAME-CARRIER proof
+
+The independent group source was already available:
+`Monster3BFiniteHeisenbergCentralExtensionExact.Heisenberg6`,
+with a genuine F3 six-translation, six-modulation, one-centre
+carrier and nontrivial cocycle multiplication, supported by
+the separate original associativity/inverse owners. The new
+`TernaryThirteenOriginalHeisenbergGroupCarrierExact`
+source establishes explicit BOTH-WAY 13-word encodings,
+transports the original nonabelian group multiplication and
+noncommuting generator pair, and proves an exact group-side /
+pointwise 12-axis plus exact central-coordinate correspondence
+with the already constructed `SourceCentralCompletionCarrier`.
+This is a SOURCE-WRITTEN **finite group representation** result,
+not a derivation from group-order numerology.
+
+The unpaid H1.01 semantic seam is now more specific:
+independently justify that the *intended relational/appraisal*
+completion selects this original Heisenberg group operation,
+cocycle and observable correspondence; the full 144-cell
+relation field is not the 13-code, and ITIR-world semantic nodes
+are not canonically group elements. Source Monster group/VOA
+action recognition and ITIR-world/heterogeneous edge admission
+remain independent. All new source is **not yet Agda kernel-checked**.
+
+P1 original Bishop analytic exp/atan-Cayley same-function
+identity, P2 independent analytic zeta identification, P3
+Gamma/Xi integral and continuation are unchanged and open.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
