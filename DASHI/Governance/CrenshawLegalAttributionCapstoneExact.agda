@@ -41,6 +41,7 @@ import DASHI.Governance.CrossDomainResidualConsumerPreservationExact as Residual
 import DASHI.Governance.DevelopmentalTriadicFiniteQuotientWeldExact as DevTri
 import DASHI.Governance.EpistemicHistoryResidualPayloadExact as WorkPayload
 import DASHI.Governance.MonsterThreeLocalCognitiveOriginNonIdentificationExact as MonsterDetector
+import DASHI.Governance.ProceduralHolonomyExact as Procedure
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as CWDetector
 import DASHI.Moonshine.MoonshineZ3OrbifoldThreeLocalSiblingExact as MonsterLocal
 
@@ -211,6 +212,12 @@ record LegalCrossCaseCut : Set₁ where
       INF.FactorsThrough
         (λ history → chart (CWDetector.targetProject history))
         CWDetector.origin → ⊥
+    closedProceduralStandingCannotEraseRetainedWork :
+      INF.FactorsThrough
+        Procedure.standingObserver Procedure.retentionConsumer → ⊥
+    locallyPermittedLoopReturnsPublicStatus :
+      Procedure.publicStanding Procedure.afterClosure
+        ≡ Procedure.publicStanding Procedure.initial
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -266,4 +273,6 @@ crenshawLegalCrossCaseCut =
     WorkPayload.workRoundTrip
     WorkPayload.noLosslessDecoderAfterDroppingSideInformation
     MonsterDetector.threeLocalSymmetryLabelCannotIdentifyController
+    Procedure.noStandingOnlyWorkloadDecoder
+    Procedure.closedBaseLoop
     refl refl
