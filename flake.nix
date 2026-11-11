@@ -267,7 +267,7 @@
         # Reuse this flake's PINNED nixpkgs closure without changing the Agda shell.
         # Lean version remains tied to flake.lock; never fetch a moving elan toolchain.
         devShells.lean-world = pkgs.mkShell {
-          packages = [ pkgs.lean4 (pkgs.python3.withPackages (ps: [ ps.psycopg ])) pkgs.git pkgs.postgresql_16 ];
+          packages = [ pkgs.lean4 (pkgs.python3.withPackages (ps: [ ps.psycopg ])) pkgs.git pkgs.postgresql_16 pkgs.rustc pkgs.cargo ];
           shellHook = ''
             echo "DASHI source-pinned Lean elaboration worker shell"
             echo "  nix develop .#lean-world --command lean --version"
