@@ -37,6 +37,8 @@ import DASHI.Governance.SituatedCortisolAssayGluingExact as AssayGluing
 import DASHI.Governance.SituatedCortisolReceptorDissipativeExact as Receptor
 import DASHI.Governance.SituatedDevelopmentalUltrametricExact as Development
 import DASHI.Governance.CognitiveWarfareSituatedPhysiologyWeldExact as CW
+import DASHI.Governance.CrossDomainResidualConsumerPreservationExact as Residual
+import DASHI.Governance.DevelopmentalTriadicFiniteQuotientWeldExact as DevTri
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -186,6 +188,12 @@ record LegalCrossCaseCut : Set₁ where
     cognitiveWarfareBiomarkerNotCause :
       INF.FactorsThrough
         CW.Causal.measurementValue CW.Causal.causalAttribution → ⊥
+    crossDomainIntegratedAssayNotAcuteRecovery :
+      INF.FactorsThrough
+        AssayGluing.integratedReadout AssayGluing.earlyReadout → ⊥
+    developmentalCanonicalPrefixCannotRecoverLaterHistory :
+      DevTri.encodeHistory Development.leafA
+        ≡ DevTri.encodeHistory Development.leafB → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -236,4 +244,6 @@ crenshawLegalCrossCaseCut =
     CW.sameContentAndConeCannotDetermineProvenance
     CW.sameEpistemicTasksCannotIdentifyStrategicPurpose
     CW.cortisolDoesNotDetermineCausalAttribution
+    Residual.integralDoesNotDetermineAcutePoint
+    DevTri.laterHistoryReallyLost
     refl refl
