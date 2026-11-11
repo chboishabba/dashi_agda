@@ -112,3 +112,10 @@ originalBishopComplexCommutativeSemiring = record
   { isCommutativeSemiring =
       originalBishopComplexIsCommutativeSemiring
   }
+
+
+-- Export the exact semiring projection for stdlib Semiring.Exp/Mult.
+originalBishopComplexSemiring : Semiring 0ℓ 0ℓ
+originalBishopComplexSemiring = record
+  { isSemiring = originalBishopComplexIsSemiring
+  }
