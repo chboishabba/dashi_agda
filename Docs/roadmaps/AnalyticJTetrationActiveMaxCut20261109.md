@@ -426,3 +426,26 @@ This provides a finite algebra/positive-majorant target for Bishop summation; no
 \le\frac{(10/137)^{17}}{1-10/137}<10^{-15}.
 \]
 The final strict comparison was checked using exact Python \`fractions.Fraction\`; this is **not** a Bishop-certified complex exp evaluation or selected fixed-point construction. It supplies the explicit quantitative target for the original source-identification/continuity step.
+
+
+## 2026-11-11 highest-alpha original Bishop fixed-point chart — repository reuse
+
+**Actual pre-existing producers found:** \`DASHI.Analysis.BishopComplexReciprocalExact\` already implements \`BishopComplexNonzero z\` (positive norm square), \`reciprocalC z nz\` and \`multiplyReciprocal z nz : z * reciprocalC z nz ≈C oneC\`. \`DASHI.Analysis.BishopComplexNonzeroFromComponentExact\` already turns apartness of either component into the necessary norm-square positivity. This settles the **generic** reciprocal infrastructure, not the *selected nonreal fixed point's* apartness witness. Do not duplicate these owners.
+
+**New direct source-written Agda:** \`DASHI/Moonshine/AbelBishopSelectedLogAffineReconstructionExact.agda\`, using the already existing reciprocal. On the actual \`BishopComplexSeriesConvergenceExact.BishopComplex\` setoid it proves the original finite complex multiplication associativity and one-sided units, then defines
+\[
+u_p(t) = p^{-1}t,\qquad
+p\,u_p(t)\approx_C t,\qquad
+p(1_C+u_p(t))\approx_C p+t.
+\]
+These are the exact algebraic reconstruction equations required to infer \(\exp_C(p+L(u_p(t)))\approx_Cp+t\) *once* the same-source complex exponential addition, fixed-point identity and inverse identity \(\exp_C(L(w))\approx_C1_C+w\) have been proved. They do not assert those missing analytic theorems. Source added to local pinned Agda 2.9 target list. **NO EXACT-HEAD KERNEL ACCEPTANCE YET.**
+
+**Highest-alpha remaining gates now more precise:**
+- P0: pinned Agda 2.9 \`--safe\` run for new source, with repair against exact errors.
+- P1 mathematical identity source: actual complex Cartesian exp = factorial series; original Bishop finite Cauchy positive-majorant -> limit transport -> \`exp_C(L(w))≈_C1_C+w\`.
+- P1 physical/selected fixed point: independent Bishop source witness for nonreal \`p\`, \`exp_C(p)≈_Cp\` and e.g. \`im p\` apartness. Reuse \`complexNonzeroFromImagApart\`, \`reciprocalC\`, and the new chart equations; then prove radius certificate \`Norm.normSqC (u_p t)≈r²\` and its strict unit-disk condition, plus local exp-add.
+- P1 Koenigs: quadratic log remainder, contraction, uniform holomorphic convergence, nonzero derivative, Schröder equation, Abel winding.
+- P1g Kneser: conjugate chart, sector continuation/normalization, global extension and uniqueness.
+- P2 true Bishop trigonometric period, q-parametrization and selected j; P3/P4 fine observer and contour certification.
+
+**Status:** generic Bishop reciprocal construction was already provided by earlier prior art; original chart algebra is source-written. No claim of global Kneser, selected exponential fixed point, or original analytic exp–log inverse completion.
