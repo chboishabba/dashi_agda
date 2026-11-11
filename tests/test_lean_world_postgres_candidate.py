@@ -91,6 +91,15 @@ class CandidateDatabase(unittest.TestCase):
         self.assertEqual(self.scalar(
             "SELECT count(*) FROM lean_world_candidate_dependency"),0)
 
+    def test_truthy_untrusted_authority_flags_fail_closed(self):
+        for value in (True, 1, "true", {}):
+            with self.subTest(value=value):
+                candidate=row("A")
+                candidate["kernel_certified"]=value
+                with self.assertRaises(CandidatePersistenceError):
+                    persist_candidate_world(self.conn,world(candidate))
+        self.assertEqual(self.scalar("SELECT count(*) FROM lean_world_occurrence"),0)
+
     def test_missing_source_cannot_store(self):
         w=world(row("A"))
         w.sources.clear()
