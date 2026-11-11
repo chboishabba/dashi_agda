@@ -889,3 +889,34 @@ Source-level only: kernel certification not asserted.
 
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for declaration-level receipts.
+
+
+### 2026-11-11 exact 144-cell relation residual reopening: 13 + 131
+
+The original H1.01 semantic audit has now been continued beyond
+non-identification. New
+`TernaryThirteenOriginalRelationResidualReopeningExact.agda`
+constructs a **pointwise exact** normalized product description of
+the actual full original 144 ordered relation cells: the selected
+12 diagonal + one (0,1) observation and an independent 131-cell
+residual with the 13 observed addresses explicitly fixed neutral.
+Both encode/decode directions are source-written over all original
+144 addresses, without funext/postulates. The existing
+`SectionedProjectionProvenanceBridgeExact` is reused to
+characterize which original consumers factor through the
+13-observation alone. The full 13+131 pair suffices for every
+source indexed relation-cell consumer; the reverse (1,0) consumer
+still disproves sufficiency of the coarse 13-code alone.
+
+This pays the **finite original relational residual/reopening
+and indexed-consumer** lemmas, but NOT semantic identity with a
+13-dimensional Monster/group completion, actual ITIR-world
+sources or authoritative world-fabric topology. Bishop P1's
+analytic exp/atan-to-Cayley identity, P2 independently sourced
+analytic zeta and P3 Gamma/Xi remain open. The canonical Nat-power
+and original Machin construction had already been established
+in prior original repository owners.
+
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact declarations and source receipts. New code is
+SOURCE-WRITTEN, not kernel verified.
