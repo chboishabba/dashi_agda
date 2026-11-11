@@ -19,11 +19,14 @@ import Data.Nat.Base as ℕ
 
 import Real as BishopReal
 import RealProperties as BishopP
+open import Data.Product.Base using (proj₁; proj₂)
 import Sequence as BishopSequence
 
 import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpCauchy
+import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as RealAxis
+import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 
 originalBishopFiniteFinSumMonotone :
   ∀ {left right : Nat → BishopReal.ℝ} →
@@ -91,3 +94,33 @@ originalBishopFactorialPositiveTriangleTailVanishes :
     BishopReal.0ℝ
 originalBishopFactorialPositiveTriangleTailVanishes =
   ExpCauchy.absoluteTriangleWingTailConvergesZero
+
+
+------------------------------------------------------------------------
+-- LITERAL REAL-AXIS FACTOR OF THE COMPLEX EXPONENTIAL PRODUCT.
+-- Its absolute coefficient is exactly the pinned real factorial
+-- exponential absolute coefficient. Its imaginary coefficient is
+-- identically zero, with the proof from the original all-degree
+-- factorial complex source.
+------------------------------------------------------------------------
+
+originalBishopRealFactorAbsoluteIsExpAbsolute :
+  ∀ x n →
+  BishopReal._≃_
+    (BishopReal.∣ Complex.re
+      (RealAxis.originalBishopFactorialComplexTerm
+        (RealAxis.realAxis x) n) ∣)
+    (ExpCauchy.absoluteExpTerm x n)
+originalBishopRealFactorAbsoluteIsExpAbsolute x n =
+  BishopP.∣-∣-cong
+    (proj₁ (RealAxis.originalBishopFactorialComplexTermRealAxis x n))
+
+originalBishopRealFactorImaginaryZero :
+  ∀ x n →
+  BishopReal._≃_
+    (Complex.im
+      (RealAxis.originalBishopFactorialComplexTerm
+        (RealAxis.realAxis x) n))
+    BishopReal.0ℝ
+originalBishopRealFactorImaginaryZero x n =
+  proj₂ (RealAxis.originalBishopFactorialComplexTermRealAxis x n)
