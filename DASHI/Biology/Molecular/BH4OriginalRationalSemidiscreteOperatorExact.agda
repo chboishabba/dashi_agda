@@ -78,8 +78,19 @@ rational369SemidiscreteRHS inputs =
         (bondContribution inputs site species)
         (reactionContribution inputs site species)))
 
--- Extracting a coordinate agrees definitionally with the actual
--- native finite-volume formula, not a separately asserted relation.
+-- Vector lookup after tabulation is proved by Fin induction.
+-- This avoids relying on a false definitional-refl assumption for
+-- symbolic site/species variables.
+lookupTabulateExact :
+  ∀ {n} {A : Set} (f : F.Fin n → A) (i : F.Fin n) →
+  V.lookup (V.tabulate f) i ≡ f i
+lookupTabulateExact {n = zero} f ()
+lookupTabulateExact {n = suc n} f F.zero = refl
+lookupTabulateExact {n = suc n} f (F.suc i) =
+  lookupTabulateExact (λ j → f (F.suc j)) i
+
+-- Every symbolic site/species lookup is identified explicitly with
+-- the actual native finite-volume bond plus reaction coordinate.
 rational369SemidiscreteAt :
   (inputs : Rational369SemidiscreteInputs)
   (site : F.Fin 27) (species : F.Fin 29) →
@@ -87,7 +98,22 @@ rational369SemidiscreteAt :
     ≡ Q._+_
         (bondContribution inputs site species)
         (reactionContribution inputs site species)
-rational369SemidiscreteAt inputs site species = refl
+rational369SemidiscreteAt inputs site species =
+  trans
+    (cong (λ row → V.lookup row species)
+      (lookupTabulateExact
+        (λ site′ →
+          V.tabulate (λ species′ →
+            Q._+_
+              (bondContribution inputs site′ species′)
+              (reactionContribution inputs site′ species′)))
+        site))
+    (lookupTabulateExact
+      (λ species′ →
+        Q._+_
+          (bondContribution inputs site species′)
+          (reactionContribution inputs site species′))
+      species)
 
 -- The existing source-independent rational -> Bishop finite-sum lift
 -- can now consume this computed RHS. The six left-kernel/edge-zero
