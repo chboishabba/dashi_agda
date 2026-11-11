@@ -14,7 +14,7 @@ module DASHI.Analysis.BishopComplexFiniteSquareTriangleDifferenceExact where
 -- not an infinite Cauchy product or a modulus of convergence.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Product.Base using (_,_)
 open import Data.Rational.Unnormalised using (0ℚᵘ)
 
@@ -183,3 +183,115 @@ upperWingAsExplicitRows left right count =
   (BishopP.≃-trans
     imaginaryReassociate
     (BishopP.+-cong ad bc))
+
+
+------------------------------------------------------------------------
+-- FOUR-SOURCE COMPONENTWISE FINITE ABSOLUTE WING DOMINATION.
+--
+-- The real real/both-imaginary residuals subtract, and the
+-- mixed residuals add. The existing Bishop real finite Cauchy
+-- wing inequality supplies the bounds for each pairing.
+------------------------------------------------------------------------
+
+positiveTriangleTail :
+  (Nat → BishopReal.ℝ) →
+  (Nat → BishopReal.ℝ) →
+  Nat → BishopReal.ℝ
+positiveTriangleTail a b count =
+  BishopReal._-_
+    (Row.trianglePartial (Wing.absoluteTerms a) (Wing.absoluteTerms b)
+      (count + count))
+    (Row.trianglePartial (Wing.absoluteTerms a) (Wing.absoluteTerms b)
+      count)
+
+originalBishopComplexWingRealAbsoluteBound :
+  (left right : Nat → Complex.BishopComplex) →
+  ∀ count →
+  BishopReal._≤_
+    (BishopReal.∣ Complex.re (upperWingResidual left right count) ∣)
+    (BishopReal._+_
+      (positiveTriangleTail
+        (Complex.realTerms left) (Complex.realTerms right) count)
+      (positiveTriangleTail
+        (Complex.imagTerms left) (Complex.imagTerms right) count))
+originalBishopComplexWingRealAbsoluteBound left right count =
+  let
+    a = Complex.realTerms left
+    b = Complex.imagTerms left
+    c = Complex.realTerms right
+    d = Complex.imagTerms right
+    rac = RectangleR.rectangleSum a c count count
+    rbd = RectangleR.rectangleSum b d count count
+    tac = Row.trianglePartial a c count
+    tbd = Row.trianglePartial b d count
+    realReassociate :
+      BishopReal._≃_
+        (BishopReal._-_
+          (BishopReal._-_ rac rbd)
+          (BishopReal._-_ tac tbd))
+        (BishopReal._-_
+          (BishopReal._-_ rac tac)
+          (BishopReal._-_ rbd tbd))
+    realReassociate =
+      let open BishopP.ℝ-Solver in
+      solve 4
+        (λ ac₁ bd₁ ac₂ bd₂ →
+          (ac₁ ⊖ bd₁) ⊖ (ac₂ ⊖ bd₂)
+          ⊜ (ac₁ ⊖ ac₂) ⊖ (bd₁ ⊖ bd₂))
+        BishopP.≃-refl rac rbd tac tbd
+  in
+  BishopP.≤-respˡ-≃
+    (BishopP.∣-∣-cong realReassociate)
+    (BishopP.≤-trans
+      (BishopP.∣x-y∣≤∣x∣+∣y∣
+        (BishopReal._-_ rac tac)
+        (BishopReal._-_ rbd tbd))
+      (BishopP.+-mono-≤
+        (Wing.finiteCauchyWingAbsoluteBound a c count)
+        (Wing.finiteCauchyWingAbsoluteBound b d count)))
+
+originalBishopComplexWingImagAbsoluteBound :
+  (left right : Nat → Complex.BishopComplex) →
+  ∀ count →
+  BishopReal._≤_
+    (BishopReal.∣ Complex.im (upperWingResidual left right count) ∣)
+    (BishopReal._+_
+      (positiveTriangleTail
+        (Complex.realTerms left) (Complex.imagTerms right) count)
+      (positiveTriangleTail
+        (Complex.imagTerms left) (Complex.realTerms right) count))
+originalBishopComplexWingImagAbsoluteBound left right count =
+  let
+    a = Complex.realTerms left
+    b = Complex.imagTerms left
+    c = Complex.realTerms right
+    d = Complex.imagTerms right
+    rad = RectangleR.rectangleSum a d count count
+    rbc = RectangleR.rectangleSum b c count count
+    tad = Row.trianglePartial a d count
+    tbc = Row.trianglePartial b c count
+    imaginaryReassociate :
+      BishopReal._≃_
+        (BishopReal._-_
+          (BishopReal._+_ rad rbc)
+          (BishopReal._+_ tad tbc))
+        (BishopReal._+_
+          (BishopReal._-_ rad tad)
+          (BishopReal._-_ rbc tbc))
+    imaginaryReassociate =
+      let open BishopP.ℝ-Solver in
+      solve 4
+        (λ ad₁ bc₁ ad₂ bc₂ →
+          (ad₁ ⊕ bc₁) ⊖ (ad₂ ⊕ bc₂)
+          ⊜ (ad₁ ⊖ ad₂) ⊕ (bc₁ ⊖ bc₂))
+        BishopP.≃-refl rad rbc tad tbc
+  in
+  BishopP.≤-respˡ-≃
+    (BishopP.∣-∣-cong imaginaryReassociate)
+    (BishopP.≤-trans
+      (BishopP.∣x+y∣≤∣x∣+∣y∣
+        (BishopReal._-_ rad tad)
+        (BishopReal._-_ rbc tbc))
+      (BishopP.+-mono-≤
+        (Wing.finiteCauchyWingAbsoluteBound a d count)
+        (Wing.finiteCauchyWingAbsoluteBound b c count)))
