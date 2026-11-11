@@ -353,3 +353,59 @@ module _
       (originalBareMomentAbsoluteAtMostOne
         left leftComplement leftNN leftComplementNN leftCompletes)
       rightError
+
+  -- Third original RG test FG automatically inherits the bounded
+  -- original test class from F,G. Thus the physical RG producer needs
+  -- only the actual three moment ERROR estimates, not a separate
+  -- polynomial-test nonnegativity or normalized majorant input.
+  originalEffectiveProductMomentAbsoluteAtMostOne :
+    (left right leftComplement rightComplement : CoarseTest) →
+    (∀ coarse → 0ℝ ≤ℝ left coarse) →
+    (∀ coarse → 0ℝ ≤ℝ leftComplement coarse) →
+    (∀ coarse → left coarse +ℝ leftComplement coarse ≡ 1ℝ) →
+    (∀ coarse → 0ℝ ≤ℝ right coarse) →
+    (∀ coarse → 0ℝ ≤ℝ rightComplement coarse) →
+    (∀ coarse → right coarse +ℝ rightComplement coarse ≡ 1ℝ) →
+    absℝ
+      (Cross.originalR445EffectiveCoarseExpectation
+        theory traceData exponential beta oneLink bilateral divide
+        (sourceProductTest left right))
+      ≤ℝ 1ℝ
+  originalEffectiveProductMomentAbsoluteAtMostOne
+    left right leftComp rightComp
+    leftNN leftCompNN leftComplete
+    rightNN rightCompNN rightComplete =
+    originalEffectiveMomentAbsoluteAtMostOne
+      (sourceProductTest left right)
+      (sourceProductComplement left leftComp right rightComp)
+      (sourceProductNonnegative left right leftNN rightNN)
+      (sourceProductComplementNonnegative
+        left leftComp right rightComp leftNN leftCompNN rightCompNN)
+      (sourceProductCompletesOne
+        left leftComp right rightComp leftComplete rightComplete)
+
+  originalBareProductMomentAbsoluteAtMostOne :
+    (left right leftComplement rightComplement : CoarseTest) →
+    (∀ coarse → 0ℝ ≤ℝ left coarse) →
+    (∀ coarse → 0ℝ ≤ℝ leftComplement coarse) →
+    (∀ coarse → left coarse +ℝ leftComplement coarse ≡ 1ℝ) →
+    (∀ coarse → 0ℝ ≤ℝ right coarse) →
+    (∀ coarse → 0ℝ ≤ℝ rightComplement coarse) →
+    (∀ coarse → right coarse +ℝ rightComplement coarse ≡ 1ℝ) →
+    absℝ
+      (Cross.originalE1BareCoarseExpectation
+        theory traceData exponential beta oneLink bilateral divide
+        (sourceProductTest left right))
+      ≤ℝ 1ℝ
+  originalBareProductMomentAbsoluteAtMostOne
+    left right leftComp rightComp
+    leftNN leftCompNN leftComplete
+    rightNN rightCompNN rightComplete =
+    originalBareMomentAbsoluteAtMostOne
+      (sourceProductTest left right)
+      (sourceProductComplement left leftComp right rightComp)
+      (sourceProductNonnegative left right leftNN rightNN)
+      (sourceProductComplementNonnegative
+        left leftComp right rightComp leftNN leftCompNN rightCompNN)
+      (sourceProductCompletesOne
+        left leftComp right rightComp leftComplete rightComplete)
