@@ -36,6 +36,7 @@ import DASHI.Governance.SituatedBiomarkerObserverAgencyExact as Agency
 import DASHI.Governance.SituatedCortisolAssayGluingExact as AssayGluing
 import DASHI.Governance.SituatedCortisolReceptorDissipativeExact as Receptor
 import DASHI.Governance.SituatedDevelopmentalUltrametricExact as Development
+import DASHI.Governance.CognitiveWarfareSituatedPhysiologyWeldExact as CW
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -176,6 +177,15 @@ record LegalCrossCaseCut : Set₁ where
       Agency.OptionalBiomarkerPermission Agency.refuses → ⊥
     PNFNumericABIStillCannotPromote :
       BiomarkerWeld.NumericABI.PNFSpectralNumericABIPromotion → ⊥
+    cognitiveWarfareContentConeNotProvenance :
+      INF.FactorsThrough
+        CW.Warfare.contentConeObserver CW.Warfare.provenance → ⊥
+    cognitiveWarfareTasksNotIntent :
+      INF.NonFactorabilityWitness
+        CW.Work.observedTasks CW.Work.statedPurpose
+    cognitiveWarfareBiomarkerNotCause :
+      INF.FactorsThrough
+        CW.Causal.measurementValue CW.Causal.causalAttribution → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -223,4 +233,7 @@ crenshawLegalCrossCaseCut =
     AssayGluing.noCommonHistoryForContradictoryReadings
     Agency.refusalBlocksOptionalBiomarkerUse
     BiomarkerWeld.noNumericAbiTruthPromotion
+    CW.sameContentAndConeCannotDetermineProvenance
+    CW.sameEpistemicTasksCannotIdentifyStrategicPurpose
+    CW.cortisolDoesNotDetermineCausalAttribution
     refl refl
