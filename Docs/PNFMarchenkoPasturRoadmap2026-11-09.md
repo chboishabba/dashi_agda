@@ -534,3 +534,17 @@ This is a conservative historical constituent/PNF coordinate policy. It may excl
 **Independent executable check this round:** exact Python root-set action enumeration across E8 fifth-pair coordinates 4,5,6,7 yields same fixed points [60,60,60,60,126,126,126] and 34 orbits each. This supports the specifically selected #1479 representation no-go, not a general exceptional equivalence claim.
 
 **Verification:** committed source-written Agda, no Agda kernel run. External original PNF panel, original null model, MP probability limit and selected physical E8 intertwiner remain unpaid.
+
+## 2026-11-11 dependency correction — independent PR #1480 buildability
+
+**Important corrected error:** Original `PNFMPObserverNonPromotionWeldExact.agda` source (first committed this pass) directly imported `DASHI/Governance/EpistemicPowerHistoryAndNonSubstitutionExact.agda`, which is in **PR #1479 only**, not present on master or #1480. Such a source would fail file resolution and was **NOT an independently valid Agda module on #1480**. Replaced it at commit `b110844912fe71c099a6b73ea6637a97556c2048` with a wholly generic theorem requiring only modules on #1480 and master.
+
+The corrected exact declarations are:
+- `mpClassOfObserver`: source-selected observer + numeric estimator + original MP classifier.
+- `mpRechartCannotRecoverErasedOutcome`: supplied source-owned `NF.NonFactorabilityWitness` implies no MP classification can recover erased outcome; calls canonical `rechartingCannotRecoverErasedPhenomenon`. This is a REAL generic negative result, not a source-specific instantiated theorem on #1480.
+- `mpClassCannotPromoteNumericABI`: directly invokes original empty numeric promotion theorem.
+- The **concrete** source witness `Work.sameTasksCannotIdentifyPurpose` remains on #1479 until the two PRs are deliberately stacked/merged or compiled in a joint test checkout. No accidental cross-PR module import remains.
+
+**Prior text correction:** passages naming `taskOnlyMPClassCannotDetermineIntent`, `publicOutcomeMPClassCannotRecoverRetention` and `noMPClassCanAuthoriseNumericPromotion` as currently existing #1480 declarations describe the initial unbuildable draft; they have been replaced by the three generic declarations above and must not be reported as current. Same-world source-specific instantiation remains OPEN. This discovery lowers the MP cognitive-warfare seam from claimed direct integration to generic standalone mathematics with explicit dependency.
+
+**Other scope:** the finite temporal-ordering negative example and conditional same-window zero-spectrum modules remain source-written; no Agda kernel test was run.
