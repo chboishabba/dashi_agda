@@ -494,6 +494,10 @@ def self_test():
                for line in source_rational_lines) == 72
     assert "generatedOriginalSixAxisBishopProducer rates fluxes =" in source_rational_lines
     assert "generatedRationalReactants =" in source_rational_lines
+    assert sum(line.startswith("generatedRationalNetColumnsZero F.")
+               or line.startswith("generatedRationalNetColumnsZero (F.")
+               for line in source_rational_lines) == 72
+    assert "generatedOriginalComputedSixAxisBishopConservation fluxes rates =" in source_rational_lines
     assert "generatedOriginalRationalInputs fluxes rates =" in source_rational_lines
     assert "generatedOriginalRationalRHSAt fluxes rates site species =" in source_rational_lines
     assert "generatedRationalStoichiometry =" in source_rational_lines
@@ -569,6 +573,9 @@ def main():
         "source_literal_zero_weight_obstruction_agda_emitted": not simplex_status["all_positive"],
         "source_CHNOP_positivity_agda_kernel_checked": False,
         "source_rational_column_balance_proof_clauses_emitted": 72,
+        "source_rational_net_column_zero_proof_clauses_emitted": 72,
+        "source_computed_783_Bishop_conservation_producer_emitted": True,
+        "source_computed_783_Bishop_conservation_agda_kernel_checked": False,
         "source_rational_producer_definitionally_uses_generated_Nat_columns": True,
         "source_rational_producer_agda_kernel_checked": False,
         "same_source_native_incidence_and_rational_stoichiometry_RHS_emitted": True,
