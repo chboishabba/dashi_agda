@@ -1,70 +1,68 @@
 module DASHI.Information.PNFMPObserverNonPromotionWeldExact where
 
--- Original DASHI cross-owner negative-control theorem.
--- PR #1480 owns MP classifier; EpistemicPowerHistoryAndNonSubstitutionExact
--- owns the actual distinguishability witness. No random-matrix theorem or
--- cortisol/cognitive-warfare causation is inferred from a spectral class.
+-- Generic cross-owner adapter. It imports ONLY PNF/MP owners present on
+-- this PR's base/master, never PR #1479-only cognitive-work modules.
+-- An external source-specific observer (e.g. epistemic work on #1479)
+-- supplies its independently proved NonFactorabilityWitness.
+-- Marchenko-Pastur supplies a numerical classifier, not causation or
+-- truth promotion.
+
 open import Agda.Builtin.Equality using (_≡_)
-open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.IntersectionalNonFactorability as NF
-import DASHI.Governance.EpistemicPowerHistoryAndNonSubstitutionExact as Work
 import DASHI.Information.PNFSpectralGeometry as PNF
 import DASHI.Information.PNFMarchenkoPasturFiniteExact as MP
 import DASHI.Interop.PNFSpectralNumericABICore as ABI
 
--- For *any* source-to-eigenvalue estimator which sees only recorded tasks,
--- applying an MP threshold cannot recover independent controller purpose.
--- The negative control remains legitimate review versus obstruction with
--- identical observable task records. No actual eigenvalue is fabricated.
-taskOnlyMPClass :
+-- Any outcome erased by a selected observable cannot be recovered
+-- merely by assigning a spectral value and an MP threshold to it.
+mpClassOfObserver :
+  ∀ {Situated Observation : Set} →
   (K : PNF.ScalarStructure) →
   (C : MP.MPFiniteCalibration K) →
   (classifier : PNF.NoiseClassifier K (MP.calibratedMPBand K C)) →
-  (estimate : List Work.EpistemicTask → PNF.ScalarStructure.Scalar K) →
-  Work.ReviewEpisode → PNF.SpectralClass
-taskOnlyMPClass K C classifier estimate episode =
-  PNF.NoiseClassifier.classify classifier
-    (estimate (Work.observedTasks episode))
+  (observe : Situated → Observation) →
+  (estimate : Observation → PNF.ScalarStructure.Scalar K) →
+  Situated → PNF.SpectralClass
+mpClassOfObserver K C classifier observe estimate state =
+  PNF.NoiseClassifier.classify classifier (estimate (observe state))
 
-taskOnlyMPClassCannotDetermineIntent :
+mpRechartCannotRecoverErasedOutcome :
+  ∀ {Situated Observation Outcome : Set} →
   (K : PNF.ScalarStructure) →
   (C : MP.MPFiniteCalibration K) →
   (classifier : PNF.NoiseClassifier K (MP.calibratedMPBand K C)) →
-  (estimate : List Work.EpistemicTask → PNF.ScalarStructure.Scalar K) →
+  (observe : Situated → Observation) →
+  (phenomenon : Situated → Outcome) →
+  (witness : NF.NonFactorabilityWitness observe phenomenon) →
+  (estimate : Observation → PNF.ScalarStructure.Scalar K) →
   NF.FactorsThrough
-    (taskOnlyMPClass K C classifier estimate)
-    Work.statedPurpose → ⊥
-taskOnlyMPClassCannotDetermineIntent K C classifier estimate =
+    (mpClassOfObserver K C classifier observe estimate)
+    phenomenon → ⊥
+mpRechartCannotRecoverErasedOutcome K C classifier observe
+  phenomenon witness estimate =
   NF.rechartingCannotRecoverErasedPhenomenon
-    (λ tasks → PNF.NoiseClassifier.classify classifier (estimate tasks))
-    Work.sameTasksCannotIdentifyPurpose
+    (λ observed → PNF.NoiseClassifier.classify classifier
+      (estimate observed))
+    witness
 
--- Source-selected public disposition erases actual retention effort.
--- No postprocessed spectral label of that disposition can recover it.
-publicOutcomeMPClassCannotRecoverRetention :
+-- No owner of a sample eigenvalue, MP null edge or selected
+-- observational recharting may construct the existing empty
+-- PNF spectral numeric ABI promotion authority.
+mpClassCannotPromoteNumericABI :
+  ∀ {Situated Observation : Set} →
   (K : PNF.ScalarStructure) →
   (C : MP.MPFiniteCalibration K) →
   (classifier : PNF.NoiseClassifier K (MP.calibratedMPBand K C)) →
-  (estimate : Work.PublicDisposition → PNF.ScalarStructure.Scalar K) →
-  NF.FactorsThrough
-    (λ tasks → PNF.NoiseClassifier.classify classifier
-      (estimate (Work.visibleDisposition tasks)))
-    Work.retentionDemand → ⊥
-publicOutcomeMPClassCannotRecoverRetention K C classifier estimate =
-  NF.rechartingCannotRecoverErasedPhenomenon
-    (λ outcome → PNF.NoiseClassifier.classify classifier (estimate outcome))
-    Work.sameOutcomeDifferentRetentionHistory
-
--- A numerical mode classification is not the separate PNF numeric ABI
--- promotion right. This exact empty-type boundary already exists.
-noMPClassCanAuthoriseNumericPromotion :
-  (K : PNF.ScalarStructure) →
-  (C : MP.MPFiniteCalibration K) →
-  (classifier : PNF.NoiseClassifier K (MP.calibratedMPBand K C)) →
-  (estimate : List Work.EpistemicTask → PNF.ScalarStructure.Scalar K) →
-  (episode : Work.ReviewEpisode) →
+  (observe : Situated → Observation) →
+  (estimate : Observation → PNF.ScalarStructure.Scalar K) →
+  (state : Situated) →
   ABI.PNFSpectralNumericABIPromotion → ⊥
-noMPClassCanAuthoriseNumericPromotion K C classifier estimate episode =
+mpClassCannotPromoteNumericABI K C classifier observe estimate state =
   ABI.pnfSpectralNumericABIPromotionImpossible
+
+-- After an explicit PR stack/merge, instantiate the generic theorem with
+-- EpistemicPowerHistoryAndNonSubstitutionExact.sameTasksCannotIdentifyPurpose
+-- or sameOutcomeDifferentRetentionHistory. The current #1480 branch
+-- intentionally DOES NOT import that unmerged source owner.
