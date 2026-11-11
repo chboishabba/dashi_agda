@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pinned Lean 4.28 donor/consumer -> lean4export -> Tenet acceptance.
+"""Pinned Lean 4.28 donor/consumer -> lean4export -> Rust nanoda acceptance.
 
 This script is intentionally LOCAL, explicit and fail-closed: temporary tool
 checkouts, no CI/Docker, no world DB mutation, no proof-status promotion by a
@@ -90,8 +90,8 @@ def replace_theorem_proof_with_type(raw):
                 type(thm.get("value")) is int and
                 thm["value"]!=thm["type"]):
             thm["value"]=thm["type"]
-            return ("\\n".join(json.dumps(row,separators=(",",":"))
-                              for row in rows)+"\\n").encode()
+            return ("\n".join(json.dumps(row,separators=(",",":"))
+                              for row in rows)+"\n").encode()
     raise AcceptanceError("cannot construct substantive invalid proof control")
 
 
