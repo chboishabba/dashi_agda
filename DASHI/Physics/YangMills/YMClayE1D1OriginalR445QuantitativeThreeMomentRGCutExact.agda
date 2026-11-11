@@ -19,7 +19,7 @@ module DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCu
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (trans; sym; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_;
