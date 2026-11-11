@@ -308,15 +308,22 @@ def original_closed_rational_semidiscrete_conservation(
         if len(row)!=12:
             raise ValueError("original voxel requires exactly 12 reaction rates")
         rates.append([exact_q(x) for x in row])
-    rhs=[[Fraction(0) for _ in range(29)] for _ in range(27)]
+    # Separate the source and divergence *before* combining them:
+    # every voxel must satisfy RHS + divergence = source, not merely
+    # have globally cancelling inventories.
+    divergence=[[Fraction(0) for _ in range(29)] for _ in range(27)]
+    reaction_source=[[Fraction(0) for _ in range(29)] for _ in range(27)]
     for edge,(a,b) in enumerate(BONDS):
         for i,value in enumerate(flux[edge]):
-            rhs[a][i]-=value
-            rhs[b][i]+=value
+            divergence[a][i]+=value
+            divergence[b][i]-=value
     for v in range(27):
         for i in range(29):
-            rhs[v][i]+=sum((rows[i][j]*rates[v][j]
-                           for j in range(12)),Fraction(0))
+            reaction_source[v][i]=sum(
+                (rows[i][j]*rates[v][j] for j in range(12)),
+                Fraction(0))
+    rhs=[[reaction_source[v][i]-divergence[v][i]
+          for i in range(29)] for v in range(27)]
     weights=[]
     for element in ("C","H","N","O","P"):
         weights.append([
@@ -331,6 +338,23 @@ def original_closed_rational_semidiscrete_conservation(
         for j in range(12):
             if sum(w[i]*rows[i][j] for i in range(29))!=0:
                 raise ValueError(f"source column {j} violates exact conserved coordinate {coord}")
+    # Six original CHNOP/charge continuity equations at EACH voxel.
+    # Reaction source is individually weight-neutral at each voxel,
+    # so weighted RHS + weighted native divergence = 0.
+    local_divergence=[
+        [sum((divergence[v][i]*w[i] for i in range(29)),Fraction(0))
+         for w in weights] for v in range(27)]
+    local_source=[
+        [sum((reaction_source[v][i]*w[i] for i in range(29)),Fraction(0))
+         for w in weights] for v in range(27)]
+    local_residual=[
+        [sum((rhs[v][i]*w[i] for i in range(29)),Fraction(0))
+         + local_divergence[v][j]-local_source[v][j]
+         for j,w in enumerate(weights)] for v in range(27)]
+    if any(value for row in local_source for value in row):
+        raise AssertionError("original reaction column creates CHNOP/charge locally")
+    if any(value for row in local_residual for value in row):
+        raise AssertionError("original rational 27-site local continuity failed")
     defects=[
         sum((rhs[v][i]*w[i] for v in range(27)
              for i in range(29)),Fraction(0))
@@ -345,6 +369,11 @@ def original_closed_rational_semidiscrete_conservation(
         "original_finite_reactions":12,
         "exact_CHNOP_and_signed_charge_defects":[str(x) for x in defects],
         "exact_rational_rhs":[[str(x) for x in row] for row in rhs],
+        "exact_local_weighted_divergence":[[str(x) for x in row] for row in local_divergence],
+        "exact_local_weighted_reaction_source":[[str(x) for x in row] for row in local_source],
+        "exact_local_continuity_residual":[[str(x) for x in row] for row in local_residual],
+        "local_CHNOP_signed_charge_equations_checked":27*6,
+        "signed_native_flux_units":"per-voxel time-normalized transport rate; multiply physical SG flux density by 1/h before passing",
         "signed_fluxes_and_rates_were_supplied_not_measured":True,
         "original_Rhea_release_independently_authenticated":False,
         "this_proves_real_SG_or_mass_action":False,
