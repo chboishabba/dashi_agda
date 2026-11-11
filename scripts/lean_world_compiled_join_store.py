@@ -237,3 +237,49 @@ def fetch_join(conn,batch_hex):
     if digest(source)!=bytes(source_hash) or digest(olean)!=bytes(olean_hash):
         raise JoinStoreError("stored compiled theorem bytes corrupted")
     return source,olean
+
+
+def join_metadata(conn,batch_hex):
+    """Return compiler provenance and number of original compiled modules."""
+    if not isinstance(batch_hex,str) or len(batch_hex)!=64:
+        raise JoinStoreError("invalid original compiled theorem batch")
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT source_compiler_sha256,compiler_version,source_scope_count,
+                   joined_theorem_count,status
+            FROM lean_world_compiled_join_batch WHERE batch_sha256=%s
+        """,(bytes.fromhex(batch_hex),))
+        found=cur.fetchone()
+    if not found or found[4]!="lean-compiled-original-proof-joins":
+        raise JoinStoreError("original compiled theorem batch missing")
+    return {
+        "lean_binary_sha256":bytes(found[0]).hex(),
+        "lean_version":found[1],
+        "module_count":found[2],
+        "joined_theorems":found[3],
+        "status":found[4]
+    }
+
+
+def iter_original_module_oleans(conn,batch_hex):
+    """Yield bounded one-at-a-time ORIGINAL compiled module byte payloads."""
+    if not isinstance(batch_hex,str) or len(batch_hex)!=64:
+        raise JoinStoreError("invalid source-compiled theorem batch")
+    # Server side named cursor avoids a repository-sized Python result list.
+    with conn.cursor(name="dashi_original_module_olean_readback") as cur:
+        cur.execute("""
+            SELECT module,compiled_olean,compiled_olean_sha256
+            FROM lean_world_compiled_join_module
+            WHERE batch_sha256=%s ORDER BY module
+        """,(bytes.fromhex(batch_hex),))
+        count=0
+        for module,raw,digest_bytes in cur:
+            raw=bytes(raw)
+            if len(raw)>128*1024*1024 or not raw:
+                raise JoinStoreError("oversized or missing original compiled module")
+            if sha256(raw).digest()!=bytes(digest_bytes):
+                raise JoinStoreError("original compiled module digest mismatch")
+            count+=1
+            yield module,raw
+    if not count:
+        raise JoinStoreError("no original module closure found")
