@@ -264,16 +264,14 @@ def generate_joins(root_module,donors,*,join_namespace="DASHIJoined"):
     the proof is a direct Expr.const pointing to that donor. No assumptions
     about textual signatures, rewrite equivalence or reduced normal forms.
     """
-    if not MODULE.fullmatch(root_module) or not MODULE.fullmatch(join_namespace):
-        raise JoinError("invalid root or destination theorem namespace")
+    roots=(root_module,) if isinstance(root_module,str) else tuple(root_module)
+    if (not roots or any(not MODULE.fullmatch(r) for r in roots)
+        or not MODULE.fullmatch(join_namespace)):
+        raise JoinError("invalid roots or destination theorem namespace")
     if not donors or len(donors)>256 or len(set(donors))!=len(donors):
         raise JoinError("invalid selected donor set")
-    lines=[
-        "import "+root_module,
-        "import Lean",
-        "open Lean Elab Command",
-        "",
-    ]
+    lines=["import "+root for root in dict.fromkeys(roots)]
+    lines.extend(["import Lean","open Lean Elab Command",""])
     for i,donor in enumerate(donors):
         if not MODULE.fullmatch(donor):raise JoinError("invalid donor theorem name")
         alias=join_namespace+".join"+str(i)
@@ -388,7 +386,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
                 "direct_imports":list(plan["edges"][module]),
                 "original_source_origin":plan.get("origins",{}).get(module)
             })
-        generated=generate_joins(plan["root_modules"][-1],donors)
+        generated=generate_joins(plan["root_modules"],donors)
         (root/"DASHIJoinBatch.lean").write_bytes(generated)
         joined_digest,output=run_compiler(
             compiler,root,"DASHIJoinBatch.lean",
@@ -404,7 +402,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
             "lean_version":version_text,
             "lean_binary_sha256":sha256(compiler.read_bytes()).hexdigest(),
             "module_count":len(module_receipts),
-            "root_module":plan["root_modules"][-1],
+            "root_module":plan["root_modules"][0],
             "external_imports":list(plan["external_imports"]),
             "original_source_bytes":plan["total_source_bytes"],
             "compiled_modules":module_receipts,
