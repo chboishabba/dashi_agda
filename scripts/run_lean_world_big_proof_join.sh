@@ -2,7 +2,7 @@
 # Ten actual proof joins across Batteries and mathlib4, Lean 4.28.
 # No .NET, independent checker, Docker, per-blob REST, CI or source edits.
 set -euo pipefail
-if [ -z "$PGDATABASE" ]; then
+if [ -z "${PGDATABASE:-}" ]; then
   echo "PGDATABASE must be configured explicitly" >&2
   exit 2
 fi
@@ -14,7 +14,7 @@ out="/tmp/dashi-big-proof-join"
 if [ "$#" -ge 1 ]; then out="$1"; fi
 mkdir -p "$out"
 schema="lean_world_source_pilot"
-if [ -n "$DASHI_WORLD_SCHEMA" ]; then schema="$DASHI_WORLD_SCHEMA"; fi
+if [ -n "${DASHI_WORLD_SCHEMA:-}" ]; then schema="$DASHI_WORLD_SCHEMA"; fi
 batteries_revision="495c008c3e3f4fb4256ff5582ddb3abf3198026f"
 mathlib_revision="8f9d9cff6bd728b17a24e163c9402775d9e6a365"
 
