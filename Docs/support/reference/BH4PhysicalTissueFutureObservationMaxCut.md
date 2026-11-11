@@ -696,3 +696,48 @@ and independent longitudinal validation.
 Neither arbitrary rational bond values nor
 a generated source-reference string can
 substitute for original physical calibration.
+
+
+### 2026-11-11 P0 original incidence and source-same 783 rational RHS refinement
+
+Companion PR #1454 now contains
+`BH4OriginalNative369IncidenceExact`, a finite Agda
+27×54 oriented incidence matrix derived from the
+original lexicographic 3×3×3/54-bond geometry,
+with 54 rational zero-column proof candidates.
+An independent exact-integer calculation confirms
+54 distinct oriented edges and ±1 source/target
+signs; native Agda has not yet checked them.
+
+The existing original Rhea source generator now uses
+its **own** generated Nat `generatedColumns`
+to define 12×29 rational gross reaction sides,
+their 29×12 signed net stoichiometry, six source
+CHNOP/z axes, 72 rational source balance proof
+clauses and a **single typed**
+`generatedOriginalRationalInputs`.
+It calls the previously existing
+`BH4OriginalRationalSemidiscreteOperatorExact.rational369SemidiscreteRHS`
+and emits `generatedOriginalRationalRHSAt`
+for the original 783 finite coordinates. This
+eliminates a second fictional chemistry matrix
+or a detached geometry-only RHS.
+
+The remaining high-alpha exact proof is the finite
+Fubini/incidence equality between the computed
+783-coordinate weighted source RHS and the
+paired-bond plus gross reaction source algebra
+already proved in
+`BH4RationalNativeSourceCompositionExact`.
+Only after that equality is kernel-proved should
+`computedRationalRHSConservationLiftsToBishop`
+be supplied its six *derived* global zero proofs.
+No old conditional six-zero input should be
+relabeled as a newly proved original result.
+
+Authentic byte-pinned full Rhea source,
+original kinetic rates, Bishop-real SG/mass-action,
+Brouwer and positive implicit root, six-face
+reactive boundary work, same-physical-object
+tissue/observer refinement and independent
+longitudinal validation remain OPEN.
