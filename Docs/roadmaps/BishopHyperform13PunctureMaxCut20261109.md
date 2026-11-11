@@ -1508,3 +1508,85 @@ remain OPEN.
 
 No kernel acceptance receipt; the new module is
 SOURCE-WRITTEN, not certified by Agda 2.9.
+
+
+## 2026-11-11 H1.01 same-object action frontier: selected transpose is NOT a Heisenberg automorphism
+
+Original semantic/action-owner audit:
+`DASHI/Foundations/Base369RelationalUpdateKernelExact.agda`
+defines actual asymmetric/context-indexed relational dynamics.
+It does not expose a canonical Heisenberg multiplication,
+an independent action-equivariance proof, or a same-object
+identification with original `Heisenberg6`. Its
+`OperatorEquivariance` and `PropagationEquivariance` keep
+authority, dependency, capacity and weave transports separate.
+We must not infer them from a finite group-carrier bijection.
+
+NEW exact original source negative control:
+`DASHI/Foundations/TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact.agda`
+(commit `9d137a9`), wired into TOE roots
+`6e83b77`, `4d877ab`, `a341c20`.
+
+It uses the actual original finite Heisenberg `H.central`
+source states and the original
+`StageTwelveGrothendieckRelationHyperformExact.transposeRelation`,
+embedded in the selected 13-coordinate image of the original
+144 ordered relation-cell field. The directional central
+(0,1) cell is sent to the omitted (1,0) cell.
+
+- `sourceCentralZero`, `sourceCentralPositive` are two
+  genuinely distinct original finite Heisenberg central
+  group elements.
+- `sourceCentralElementsDiffer` proves their distinction,
+  not mere difference in chosen labels or count.
+- `selectedTransposeCode` is the actual composition
+  `Heisenberg6 → selected original 144 relation image →
+  original transpose → original 13-coordinate observer`.
+- `selectedTransposeAlwaysNeutralCentre` shows that
+  selected-image transpose always returns neutral as the
+  observed centre.
+- `selectedTransposeCollapsesDifferentCentralElements`
+  exhibits a **concrete same-code collision** despite
+  distinct original source central phases.
+- `selectedTransposeCannotBeInjective` rules out treating
+  this selected operation as an injective Heisenberg action.
+- `selectedTransposeCannotHaveLeftInverse` rules out
+  any proposed group-element-valued reconstruction from
+  its coarse selected transpose code.
+
+The independent finite Python data-model check verified
+all three F3 central-phase inputs collapse to the same
+13-code after this selected relation transpose, whereas
+the **full original 144-cell transpose remains involutive**.
+This regression does NOT replace Agda kernel acceptance.
+
+### Interpretation of the next maximum cut
+
+The original Heisenberg group ↔ 13-word ↔ selected 144-relational
+image now has complete **source-written** cocycle-bearing group
+laws and source-word carrier round trips. But natural *original
+144-field transpose*, after restriction to selected source
+image and forgetting residual, is **not an automorphism**
+of the 13-coordinate group; its exact information loss
+is exhibited by distinct central-phase group states.
+
+Therefore a true H1.01 original semantic identification must
+specify the intended original relational **action** and
+prove its equivariance with Heisenberg multiplication.
+It must not conflate source transpose with a Heisenberg
+group automorphism. If the intended action intrinsically
+uses directed off-diagonal relations, retain the original
+13+131 residual or restrict the class of allowed consumers.
+No theorem here identifies genuine ITIR nodes/authority or
+original Monster 3B representation actions.
+
+Still OPEN: independently selected original appraisal
+action law and commuting semantic observer map; genuine
+ITIR-world `OriginalWorldCentralTransport` witness;
+independently matched heterogeneous full world edge stalks;
+original Bishop analytic exp/atan (Machin prior art already
+owned), selected analytic zeta, and Gamma/Xi.
+
+**Kernel status**: source-written only. Neither a successful
+Agda 2.9 invocation nor Nix Agda environment is available
+in this session. Do not claim certified same-object semantics.
