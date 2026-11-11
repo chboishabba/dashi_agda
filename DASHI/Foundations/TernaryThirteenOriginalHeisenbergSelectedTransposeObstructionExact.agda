@@ -25,6 +25,9 @@ import DASHI.Foundations.TernaryThirteenOriginalHeisenbergGroupCarrierExact as B
 import DASHI.Foundations.TernaryThirteenOriginalHeisenbergRelationalImageExact as Image
 import DASHI.Foundations.TernaryThirteenOriginalRelational144NonIdentificationExact as Boundary
 import DASHI.Foundations.TernaryThirteenOriginalRelationalTransposeDescentExact as Transpose
+import DASHI.Foundations.TernaryThirteenOriginalRelationResidualReopeningExact as Residual
+import DASHI.Foundations.StageAtlasZeroToEleven as Atlas
+import DASHI.Biology.RelationalAppraisalPointedPhaseExact as Rel
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Original
 import DASHI.Foundations.TernaryThirteenFibreSplitExact as Word
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
@@ -103,3 +106,43 @@ selectedTransposeCannotHaveLeftInverse undo invert =
 -- This is not a contradiction with invertibility of the
 -- ORIGINAL 144-field transpose: its removed reverse relation
 -- survives in the previously proved 131-cell residual.
+
+
+------------------------------------------------------------------------
+-- Positive repair of the original transpose information loss.
+-- The central trit is moved into the (1,0) residual coordinate
+-- after the 144-field transpose, exactly where the 13-code
+-- projection loses it. No additional semantic group action
+-- or external node is manufactured.
+------------------------------------------------------------------------
+
+selectedTransposeResidualAtReverse :
+  (g : H.Heisenberg6) →
+  Residual.maskUnobserved
+    (Original.transposeRelation (Image.sourceGroupToOriginalRelation g))
+    (Atlas.atlas-1 , Atlas.atlas-0)
+  ≡ Rel.sourceCentralCoordinate (Bridge.originalGroupToSource g)
+selectedTransposeResidualAtReverse g =
+  Boundary.selectedRelationCentreRecovers
+    (Bridge.originalGroupToSource g)
+
+-- The full original 144-state records the moved centre without
+-- information loss. The previously proven pointwise normal form
+-- reopens it from the selected 13-code and retained 131 residual.
+selectedTransposeReopensAtReverse :
+  (g : H.Heisenberg6) →
+  Residual.reopenNormalized
+    (Boundary.relationToThirteen
+      (Original.transposeRelation (Image.sourceGroupToOriginalRelation g)))
+    (Residual.maskToResidual131
+      (Original.transposeRelation (Image.sourceGroupToOriginalRelation g)))
+    (Atlas.atlas-1 , Atlas.atlas-0)
+  ≡ Rel.sourceCentralCoordinate (Bridge.originalGroupToSource g)
+selectedTransposeReopensAtReverse g =
+  trans
+    (Residual.reopenNormalizedExact
+      (Original.transposeRelation
+        (Image.sourceGroupToOriginalRelation g))
+      (Atlas.atlas-1 , Atlas.atlas-0))
+    (Boundary.selectedRelationCentreRecovers
+      (Bridge.originalGroupToSource g))
