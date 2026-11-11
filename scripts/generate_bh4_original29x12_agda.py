@@ -174,6 +174,120 @@ def rendered_source_simplex_admission(elements):
                    "zero_weight_species_indices": zero_indices,
                    "aggregate_weights": weights}
 
+
+def rendered_source_rational_producer():
+    """Emit source-DEFINITIONAL Q columns and all 72 rational balance clauses.
+
+    This consumes generatedColumns and generatedElementWeights directly:
+    NO second hand-entered matrix. All 72 closed Q-equivalences must
+    reduce in the pinned Agda kernel, never asserted by a source flag.
+    """
+    lines = [
+        "",
+        "-- Exact rational image of the SAME generated Nat source columns.",
+        "-- The generated rational proof is still untrusted until Agda checks it.",
+        "sourceNatAsRational : Nat → Q.ℚᵘ",
+        "sourceNatAsRational n = (+ n / 1)",
+        "",
+        "generatedRationalReactants : V.Vec (V.Vec Q.ℚᵘ 29) 12",
+        "generatedRationalReactants =",
+        "  V.map (λ column → V.map sourceNatAsRational",
+        "    (Panel.originalReactants column)) generatedColumns",
+        "",
+        "generatedRationalProducts : V.Vec (V.Vec Q.ℚᵘ 29) 12",
+        "generatedRationalProducts =",
+        "  V.map (λ column → V.map sourceNatAsRational",
+        "    (Panel.originalProducts column)) generatedColumns",
+        "",
+        "generatedRationalSignedCharge : V.Vec Q.ℚᵘ 29",
+        "generatedRationalSignedCharge =",
+        "  V.zipWith (λ positive negative → Q._-_",
+        "    (sourceNatAsRational positive)",
+        "    (sourceNatAsRational negative))",
+        "    generatedPositiveCharges generatedNegativeCharges",
+        "",
+        "generatedRationalAxes : V.Vec (V.Vec Q.ℚᵘ 29) 6",
+        "generatedRationalAxes =",
+        "  V._∷_ (V.map sourceNatAsRational",
+        "    (generatedElementWeights Panel.carbonElement))",
+        "    (V._∷_ (V.map sourceNatAsRational",
+        "      (generatedElementWeights Panel.hydrogenElement))",
+        "    (V._∷_ (V.map sourceNatAsRational",
+        "      (generatedElementWeights Panel.nitrogenElement))",
+        "    (V._∷_ (V.map sourceNatAsRational",
+        "      (generatedElementWeights Panel.oxygenElement))",
+        "    (V._∷_ (V.map sourceNatAsRational",
+        "      (generatedElementWeights Panel.phosphorusElement))",
+        "    (V._∷_ generatedRationalSignedCharge V.[])))))",
+        "",
+        "-- This is the ORIGINAL source's 6×12 columnwise left kernel",
+        "-- expressed over rational equivalence, not Nat propositional",
+        "-- equality or a separately asserted global zero-defect field.",
+        "generatedRationalColumnsBalance :",
+        "  (axis : F.Fin 6) (column : F.Fin 12) →",
+        "  Q._≃_",
+        "    (Lift.sourceWeightedRow",
+        "      (V.lookup generatedRationalAxes axis)",
+        "      (V.lookup generatedRationalReactants column))",
+        "    (Lift.sourceWeightedRow",
+        "      (V.lookup generatedRationalAxes axis)",
+        "      (V.lookup generatedRationalProducts column))",
+    ]
+    for axis in range(6):
+        for col in range(12):
+            lines.append(
+                f"generatedRationalColumnsBalance {fin_constructor(axis)} "
+                f"{fin_constructor(col)} = QP.≃-reflexive refl")
+    lines += [
+        "",
+        "-- Any 27×12 rational original rate field and 54×29 rational",
+        "-- native flux field now inherits all six conserved axes.",
+        "-- Incidence-to-paired-form and original SG laws remain OPEN.",
+        "generatedOriginalSixAxisRationalProducer :",
+        "  (rates : V.Vec (V.Vec Q.ℚᵘ 12) 27)",
+        "  (fluxes : V.Vec (V.Vec Q.ℚᵘ 29) 54)",
+        "  (axis : F.Fin 6) →",
+        "  Q._≃_",
+        "    (Q._+_",
+        "      (Composer.Native.pairedNativeBondCollection",
+        "        (V.lookup generatedRationalAxes axis) fluxes)",
+        "      (Composer.Rates.spatialRateWeightedTotal",
+        "        (V.lookup generatedRationalAxes axis)",
+        "        generatedRationalReactants rates))",
+        "    (Composer.Rates.spatialRateWeightedTotal",
+        "      (V.lookup generatedRationalAxes axis)",
+        "      generatedRationalProducts rates)",
+        "generatedOriginalSixAxisRationalProducer rates fluxes =",
+        "  Composer.originalSixAxisNativeAndReactionBalance",
+        "    generatedRationalAxes",
+        "    generatedRationalReactants generatedRationalProducts",
+        "    rates fluxes generatedRationalColumnsBalance",
+        "",
+        "generatedOriginalSixAxisBishopProducer :",
+        "  (rates : V.Vec (V.Vec Q.ℚᵘ 12) 27)",
+        "  (fluxes : V.Vec (V.Vec Q.ℚᵘ 29) 54)",
+        "  (axis : F.Fin 6) →",
+        "  R._≃_",
+        "    (Embed.embed",
+        "      (Q._+_",
+        "        (Composer.Native.pairedNativeBondCollection",
+        "          (V.lookup generatedRationalAxes axis) fluxes)",
+        "        (Composer.Rates.spatialRateWeightedTotal",
+        "          (V.lookup generatedRationalAxes axis)",
+        "          generatedRationalReactants rates)))",
+        "    (Embed.embed",
+        "      (Composer.Rates.spatialRateWeightedTotal",
+        "        (V.lookup generatedRationalAxes axis)",
+        "        generatedRationalProducts rates))",
+        "generatedOriginalSixAxisBishopProducer rates fluxes =",
+        "  Composer.originalSixAxisNativeReactionBalanceBishop",
+        "    generatedRationalAxes",
+        "    generatedRationalReactants generatedRationalProducts",
+        "    rates fluxes generatedRationalColumnsBalance",
+        "",
+    ]
+    return lines
+
 def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
     matrix, metadata = check_certificate(certificate, full_panel=True)
     pairs = source_column_pairs(certificate, matrix)
@@ -192,6 +306,14 @@ def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
         "import Data.Fin.Base as F",
         "import DASHI.Biology.Molecular.BH4PanelStoichiometricMatrixExact as Panel",
         "import DASHI.Biology.Molecular.BH4OriginalCHNOPFiveAxisSimplexBridgeExact as Simplex",
+        "import Data.Rational.Unnormalised as Q",
+        "import Data.Rational.Unnormalised.Properties as QP",
+        "open import Data.Integer.Base using (+_)",
+        "open import Data.Rational.Unnormalised using (_/_)",
+        "import Real as R",
+        "import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Embed",
+        "import DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact as Lift",
+        "import DASHI.Biology.Molecular.BH4RationalNativeSourceCompositionExact as Composer",
         "",
         "generatedOriginalRheaCertificateSha256 : String",
         f'generatedOriginalRheaCertificateSha256 = "{sha}"',
@@ -271,6 +393,7 @@ def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
     ]
     simplex_lines, _ = rendered_source_simplex_admission(elements)
     lines.extend(simplex_lines)
+    lines.extend(rendered_source_rational_producer())
     return "\n".join(lines)
 
 
@@ -278,6 +401,12 @@ def self_test():
     assert fin_constructor(0) == "F.zero"
     assert fin_constructor(2) == "(F.suc (F.suc F.zero))"
     assert nat_vector([0, 2]) == "(V._∷_ 0 (V._∷_ 2 V.[]))"
+    source_rational_lines = rendered_source_rational_producer()
+    assert sum(line.startswith("generatedRationalColumnsBalance F.")
+               or line.startswith("generatedRationalColumnsBalance (F.")
+               for line in source_rational_lines) == 72
+    assert "generatedOriginalSixAxisBishopProducer rates fluxes =" in source_rational_lines
+    assert "generatedRationalReactants =" in source_rational_lines
     sample = {e: [1]*29 for e in ELEMENTS}
     lines, status = rendered_source_simplex_admission(sample)
     assert status["all_positive"] and status["aggregate_weights"] == [5]*29
@@ -349,6 +478,9 @@ def main():
         "source_literal_positive_simplex_agda_emitted": simplex_status["all_positive"],
         "source_literal_zero_weight_obstruction_agda_emitted": not simplex_status["all_positive"],
         "source_CHNOP_positivity_agda_kernel_checked": False,
+        "source_rational_column_balance_proof_clauses_emitted": 72,
+        "source_rational_producer_definitionally_uses_generated_Nat_columns": True,
+        "source_rational_producer_agda_kernel_checked": False,
         "original_release_independently_verified": False,
         "physical_kinetic_flux_proved": False,
         "agda_kernel_accepted": False,
