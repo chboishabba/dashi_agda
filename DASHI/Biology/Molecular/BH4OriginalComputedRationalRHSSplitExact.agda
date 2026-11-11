@@ -89,7 +89,7 @@ originalRHSPointwiseSplits inputs site species =
 -- Generic Vec.zipWith index identity; necessary because symbolic
 -- Fin indices do not normalize by bare refl.
 lookupZipWith :
-  ∀ {n A B C : Set}
+  ∀ {n : Nat} {A B C : Set} →
   (combine : A → B → C)
   (left : V.Vec A n) (right : V.Vec B n)
   (index : F.Fin n) →
