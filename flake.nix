@@ -258,6 +258,7 @@
           cubical = cubicalLocal;
           agda-with-dashi-deps = agdaWithDashiDeps;
           agda29-parallel = agda29.packages.${system}.debug.bin;
+          lean-world-bin = pkgs.lean4;
           check = authoritativeCheck;
           zeta-check = zetaCheck;
           merge-smoke = mergeSmokeCheck;
