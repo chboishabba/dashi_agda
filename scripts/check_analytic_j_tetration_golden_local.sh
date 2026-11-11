@@ -56,33 +56,8 @@ for target in "${targets[@]}"; do
     echo "FAIL forbidden trust escape: $target" >&2
     exit 4
   fi
-  # A standalone underscore as the complete RHS is an Agda metavariable,
-  # not a proved witness. Reject it before kernel checking.
-  if grep -nE '=[[:space:]]*_
-    echo "FAIL unsolved Agda hole: $target" >&2
-    exit 4
-  fi
-done
-
-if [[ ! -x scripts/run_agda29_parallel_check.sh ]]; then
-  echo "FAIL pinned local Agda checker runner missing or not executable" >&2
-  exit 5
-fi
-
-if ! command -v python3 >/dev/null 2>&1; then
-  echo "FAIL python3 unavailable for independent exact E8 shell regression" >&2
-  exit 6
-fi
-python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
-python3 scripts/check_analytic_j_tetration_local_koenigs_rational.py
-python3 scripts/analytic_j_tetration_koenigs_log_series_majorant.py
-python3 scripts/analytic_j_tetration_exp_log_formal_recurrence.py
-python3 scripts/analytic_j_tetration_exp_log_composition_majorant.py
-
-echo "Running pinned Agda 2.9 --safe checker on ${#targets[@]} explicit source owners"
-DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh --safe "${targets[@]}"
-echo "PASS exact-head focused Agda check (only if checker exited zero)"
- "$target"; then
+  # A bare RHS underscore leaves an Agda metavariable, not a proof.
+  if grep -nE '=[[:space:]]*_$' "$target"; then
     echo "FAIL unresolved placeholder RHS: $target" >&2
     exit 4
   fi
