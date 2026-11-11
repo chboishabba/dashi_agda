@@ -113,7 +113,7 @@ class TestLeanWorker(unittest.TestCase):
                     b'{"ie":1,"bvar":0}\n'
                     b'{"thm":{"type":1}}\n')
         def compiled(lean, root, target, *, timeout, memory_mib, lean_path):
-            compiled_path=root/".lean-output"/"target.olean"
+            compiled_path=root/"Target.olean"
             compiled_path.parent.mkdir(parents=True,exist_ok=True)
             compiled_path.write_bytes(b"fake compiled olean for test")
             captured.append(root)
