@@ -16,7 +16,8 @@ class JoinStoreError(ValueError):
 def digest(data):
     return sha256(data).digest()
 
-def persist_join(conn,report,generated_source,joined_olean):
+def persist_join(conn,report,generated_source,joined_olean,*,
+                 compiled_root=None,compiled_module_contents=None):
     if (report.get("status")!="original-lean-theorem-joins-compiled" or
         report.get("independently_checked") is not False or
         report.get("world_admitted") is not False):
@@ -36,6 +37,17 @@ def persist_join(conn,report,generated_source,joined_olean):
     if (not isinstance(original_modules,list) or not original_modules or
         not isinstance(donors,list) or not donors):
         raise JoinStoreError("no original module/theorem evidence")
+    def compiled_bytes(module):
+        if compiled_module_contents is not None:
+            raw=compiled_module_contents.get(module)
+        elif compiled_root is not None:
+            filename=Path(compiled_root)/(module.replace(".","/")+".olean")
+            raw=filename.read_bytes()
+        else:
+            raise JoinStoreError("full original OLean module closure required")
+        if type(raw) is not bytes or not raw or len(raw)>128*1024*1024:
+            raise JoinStoreError("missing or unbounded original OLean bytes")
+        return raw
     names=set()
     for row in original_modules:
         origin=row.get("original_source_origin")
@@ -112,14 +124,46 @@ def persist_join(conn,report,generated_source,joined_olean):
                 raise JoinStoreError("compiled proof batch content collision")
             for row in original_modules:
                 origin=row["original_source_origin"]
+                compiled=compiled_bytes(row["module"])
+                if sha256(compiled).hexdigest()!=row["olean_sha256"]:
+                    raise JoinStoreError("original compiled OLean bytes differ")
                 cur.execute("""
                     INSERT INTO lean_world_compiled_join_module (
                         batch_sha256,module,original_repository,original_revision,
-                        original_path,source_sha256,compiled_olean_sha256)
-                    VALUES (%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING
+                        original_path,source_sha256,compiled_olean_sha256,
+                        compiled_olean)
+                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT DO NOTHING
                 """,(batch_id,row["module"],origin["repository"],origin["revision"],
                      origin["path"],bytes.fromhex(row["source_sha256"]),
-                     bytes.fromhex(row["olean_sha256"])))
+                     bytes.fromhex(row["olean_sha256"]),compiled))
+                cur.execute("""
+                    SELECT compiled_olean,compiled_olean_sha256
+                    FROM lean_world_compiled_join_module
+                    WHERE batch_sha256=%s AND module=%s
+                """,(batch_id,row["module"]))
+                stored_module=cur.fetchone()
+                if (stored_module is None or
+                    bytes(stored_module[0])!=compiled or
+                    bytes(stored_module[1])!=digest(compiled)):
+                    raise JoinStoreError("stored original OLean content collision")
+            for row in original_modules:
+                for dependency in row.get("direct_imports",[]):
+                    internal=dependency in names
+                    cur.execute("""
+                        INSERT INTO lean_world_compiled_join_import (
+                            batch_sha256,source_module,import_module,
+                            original_module_in_batch)
+                        VALUES (%s,%s,%s,%s) ON CONFLICT DO NOTHING
+                    """,(batch_id,row["module"],dependency,internal))
+                    cur.execute("""
+                        SELECT original_module_in_batch
+                        FROM lean_world_compiled_join_import
+                        WHERE batch_sha256=%s AND source_module=%s
+                          AND import_module=%s
+                    """,(batch_id,row["module"],dependency))
+                    found=cur.fetchone()
+                    if found is None or found[0]!=internal:
+                        raise JoinStoreError("conflicting exact module import edge")
             # Scope is the compiled root whose imports established access to
             # the donor. It is NOT an assertion about the theorem's source file.
             root=report.get("root_module")
@@ -168,6 +212,7 @@ def persist_join(conn,report,generated_source,joined_olean):
         "joined_theorems":len(donors),
         "generated_source_bytes":len(generated_source),
         "joined_olean_bytes":len(joined_olean),
+        "original_module_oleans_persisted":len(original_modules),
         "content_stored_in_postgresql":True,
         "independently_checked":False,
         "world_admitted":False
