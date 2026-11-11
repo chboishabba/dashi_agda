@@ -92,6 +92,43 @@ class BuilderContractTests(unittest.TestCase):
         with self.assertRaises(ContractError):
             validate_through_builder(pending_from_manifest(self.manifest), Unresolved())
 
+    def test_cycle_rejected_even_if_builder_claims_validation(self):
+        class Cyclic:
+            def validate(self, p):
+                return BuilderResult(p.handoff_key, p.artifact_sha256, "validator",
+                                     "c"*64, ("n1", "n2"),
+                                     (("n1", "n2"), ("n2", "n1")), True, False)
+        with self.assertRaisesRegex(ContractError, "cyclic"):
+            validate_through_builder(pending_from_manifest(self.manifest), Cyclic())
+
+    def test_self_edge_rejected(self):
+        class SelfEdge:
+            def validate(self, p):
+                return BuilderResult(p.handoff_key, p.artifact_sha256, "validator",
+                                     "c"*64, ("n1",), (("n1", "n1"),), True, False)
+        with self.assertRaisesRegex(ContractError, "cyclic"):
+            validate_through_builder(pending_from_manifest(self.manifest), SelfEdge())
+
+    def test_duplicate_edges_rejected(self):
+        class Duplicate:
+            def validate(self, p):
+                return BuilderResult(p.handoff_key, p.artifact_sha256, "validator",
+                                     "c"*64, ("n1", "n2"),
+                                     (("n1", "n2"), ("n1", "n2")), True, False)
+        with self.assertRaisesRegex(ContractError, "duplicate"):
+            validate_through_builder(pending_from_manifest(self.manifest), Duplicate())
+
+    def test_long_acyclic_chain_remains_structural_only(self):
+        class Chain:
+            def validate(self, p):
+                ids = tuple(f"n{i}" for i in range(1500))
+                return BuilderResult(p.handoff_key, p.artifact_sha256, "validator",
+                                     "c"*64, ids,
+                                     tuple((ids[i], ids[i+1]) for i in range(len(ids)-1)),
+                                     True, False)
+        result = validate_through_builder(pending_from_manifest(self.manifest), Chain())
+        self.assertFalse(result.kernel_certified)
+
     def test_shape_acceptance_never_certifies(self):
         class Stub:
             def validate(self, p):
