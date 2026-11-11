@@ -649,3 +649,22 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 4. The already-present finite rational selected fixed-point contraction check is a *numerical/exact-rational receipt*, not an inhabited Bishop-complex fixed-point certificate with its chosen branch and Newton/Banach hypotheses transported through the kernel.
 
 **Still open:** exact-head Agda acceptance; complex triangle wing/limit; full native \`expC\`; local Bishop disk exp-log and, separately, positive-real integral log inverse; source fixed point/Koenigs; global Kneser; selected modular q/\(\Delta\)/j and observer/contour homology.
+
+
+## 2026-11-11 — P1 finite complex square/triangle/explicit wing cut
+
+**New source-written module:** \`DASHI/Analysis/BishopComplexFiniteSquareTriangleDifferenceExact.agda\`. Registered in \`scripts/check_analytic_j_tetration_golden_local.sh\` (Agda 2.9 \`--safe\` execution pending).
+
+- \`cauchyTrianglePartial left right N\` is the real/imaginary assembly of **four actual** \`BishopFiniteCauchyRowReindexExact.trianglePartial\` convolutions: \(T_N(ac)-T_N(bd)\) and \(T_N(ad)+T_N(bc)\) for \(a+ib,c+id\).
+- \`upperWingResidual left right N\` is the original complex square rectangle minus that literal complex convolution triangle.
+- \`bishopComplexSquareCauchyWingIdentity\` proves the **all-\(N\) finite identity**
+  \[
+  R^{\mathbb C}_{N,N}(a,b)\approx_C T_N^{\mathbb C}(a,b)+W_N^{\mathbb C}(a,b).
+  \]
+- \`realSignedWingIsRectangleMinusTriangle\` proves that each underlying real residual agrees with the **original row-indexed** \`BishopFiniteCauchyWingAbsoluteBoundExact.signedWingRow\` series, via the already existing \`rectangleSumIsNativeRows\`, \`triangleIsMertensRow\`, and \`signedWingIsRowSeries\` proofs. Hence this upper wing genuinely consists of the square cells \(i,j<N\) with \(i+j\ge N\); its geometric interpretation is **proved by the original row owners**, not introduced by an axiom.
+- \`upperWingAsExplicitRows\` transports that exact row identification to both original complex coordinates.
+- \`originalBishopComplexWingRealAbsoluteBound\` and \`originalBishopComplexWingImagAbsoluteBound\` derive componentwise upper bounds by the sum of **two already-owned positive triangle tails**, using \`Wing.finiteCauchyWingAbsoluteBound\` for the four real pairings and Bishop real triangle inequalities. This pays the finite complex residual DOMINATION cut with no new arbitrary bound record.
+
+**Important mathematical bookkeeping:** \(T_N\) contains degrees \(0,\ldots,N-1\), and the upper wing of the \(N\times N\) rectangle has total degree \(N,\ldots,2N-2\). The full \(T_{2N-1}\) also contains off-square contributions, so it is **not** equal to the rectangle. The precise finite decomposition is \(R_{N,N}=T_N+W_N\), not \(R_{N,N}=T_{2N-1}\).
+
+**Still unpaid and genuinely analytic:** (P0) pinned Agda \`--safe\` kernel acceptance; (P1) instantiate four positive triangle-tail convergence moduli for actual real \(x^n/n!\) and imaginary \((iy)^n/n!\) term coordinates, including an original-source \(\ell^1\) majorant; (P1) original complex finite exponential binomial factorial coefficient identity; (P1) infer complex wing \(\to0\), identify complex triangle/rectangle limits and finish \`expFactEqualsExpC\` at all \(x+iy\). The local source not passing kernel yet must not be described as a discharged theorem.
