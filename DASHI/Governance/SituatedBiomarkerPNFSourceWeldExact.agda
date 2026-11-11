@@ -25,7 +25,7 @@ record CandidateWithSubjectPermission
   {Subject : Set}
   (verification : Agency.ConsentVerification Subject)
   (person : Subject)
-  (candidate : PNF.CandidatePNF) : Set where
+  (candidate : PNF.CandidatePNF) : Set₁ where
   constructor candidate-with-subject-permission
   field
     permittedUse : Agency.ScopedBiomarkerUse Subject verification person
@@ -134,7 +134,7 @@ exampleIRIsOperationalShapeOnly r = refl
 record IndependentlyReviewedLegalUse
   (Case : Set)
   (legalCase : Case)
-  (resolved : PNF.ResolvedPNF) : Set where
+  (resolved : PNF.ResolvedPNF) : Set₁ where
   field
     projectedIR : IR.DomainIR
     selectedSourcePreserved :
