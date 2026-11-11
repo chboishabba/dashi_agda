@@ -76,3 +76,40 @@ def test_original_charge_source_parser_rejects_fractional_or_boolean():
     for invalid in (True, False, 1.5, "1.5", "1e0", None, float("nan")):
         with pytest.raises(ValueError):
             _integer(invalid, "charge")
+
+
+def test_original_rational_producer_is_source_definitional_and_covers_72_columns():
+    from generate_bh4_original29x12_agda import rendered_source_rational_producer
+    lines = rendered_source_rational_producer()
+    assert "generatedRationalReactants =" in lines
+    assert "generatedRationalProducts =" in lines
+    assert any("generatedColumns" in line for line in lines)
+    assert any("Panel.originalReactants column" in line for line in lines)
+    assert any("Panel.originalProducts column" in line for line in lines)
+    clauses = [line for line in lines if line.startswith(
+        "generatedRationalColumnsBalance F.")
+        or line.startswith("generatedRationalColumnsBalance (F.")]
+    assert len(clauses) == 72
+    assert len(set(clauses)) == 72
+    assert all("QP.≃-reflexive refl" in clause for clause in clauses)
+    assert "generatedOriginalSixAxisRationalProducer rates fluxes =" in lines
+    assert "generatedOriginalSixAxisBishopProducer rates fluxes =" in lines
+    assert any("Composer.originalSixAxisNativeAndReactionBalance" in line
+               for line in lines)
+    assert any("Composer.originalSixAxisNativeReactionBalanceBishop" in line
+               for line in lines)
+    assert not any("postulate" in line for line in lines)
+
+
+def test_original_rational_source_generated_proof_axes_not_reinterpreted_as_measured():
+    from generate_bh4_original29x12_agda import rendered_source_rational_producer
+    lines=rendered_source_rational_producer()
+    assert any("generatedPositiveCharges generatedNegativeCharges" in line
+               for line in lines)
+    assert any("generatedElementWeights Panel.carbonElement" in line
+               for line in lines)
+    assert any("generatedElementWeights Panel.phosphorusElement" in line
+               for line in lines)
+    assert "generatedRationalAxes : V.Vec (V.Vec Q.ℚᵘ 29) 6" in lines
+    assert "  (rates : V.Vec (V.Vec Q.ℚᵘ 12) 27)" in lines
+    assert "  (fluxes : V.Vec (V.Vec Q.ℚᵘ 29) 54)" in lines
