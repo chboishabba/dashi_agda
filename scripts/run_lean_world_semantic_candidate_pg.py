@@ -35,6 +35,16 @@ def load_acceptance(path: Path):
         raise SemanticCandidateError("unsupported acceptance receipt")
     if evidence.get("status") != "independent-checker-observed-two-module-reuse":
         raise SemanticCandidateError("incomplete checker observation")
+    # The cross-PR acceptance is now specifically pinned to the independent
+    # Rust implementation; legacy Tenet observations are not equivalent.
+    if (evidence.get("checker_kind") != "rust-nanoda" or
+        evidence.get("checker_source_sha") !=
+        "418320295890faed83a96fd97907b12a3b6728c2"):
+        raise SemanticCandidateError("wrong independent Rust checker identity")
+    if evidence.get("checker_policy",{}).get("unsafe_permit_all_axioms") is not False:
+        raise SemanticCandidateError("unsafe checker axiom policy")
+    if "sorryAx" in evidence.get("checker_policy",{}).get("permitted_axioms",[]):
+        raise SemanticCandidateError("sorry axiom incorrectly permitted")
     if (evidence.get("independent_checker_observed") is not True or
         evidence.get("invalid_fixture_rejected") is not True or
         evidence.get("postgres_world_admitted") is not False or
