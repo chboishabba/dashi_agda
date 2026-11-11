@@ -1775,3 +1775,18 @@ a proof of a measured tissue adjacency,
 an Agda kernel receipt or an empirical
 kinetic calibration. The new repository
 pytest was not executed in this session.
+
+
+### 2026-11-11 P0 finite weighted bilinearity of the computed 27×29 RHS
+
+**New assistant-authored proof source on #1454:** `DASHI.Biology.Molecular.BH4RationalSemidiscreteBilinearityExact`, Golden-imported. This owner adds finite rational `rationalZipAdd`, `rationalWeightedAdditive`, `rationalSpatialZipAdd`, `original369SpatialWeightedAdditive`, `original369RHSIsBondPlusReaction`, and `original369ComputedRHSWeightedSplit`. It uses existing `Lift.sourceWeightedRow`, `Lift.sourceSpatialWeighted`, and the **actual** `Operator.rational369SemidiscreteRHS`, with rational setoid equivalence. Inductive proofs use the repository's existing `NonReflectiveQ` solver for finite ring distributivity and reassociation.
+
+**Achieved source-level statement:** for any typed rational 27×54 incidence, 54×29 currents, 29×12 signed stoichiometry, 27×12 rates and 29 rational weights, the weighted spatial sum of the computed full 783-coordinate RHS splits into the spatial weighted **bond contribution plus reaction contribution**. No six global zero-defect premise is required for this algebraic split. This moves from two separate synthetic-free source producers toward the missing RHS-to-paired-source identity, but does not prove the requisite finite 27/54/29/12 Fubini interchange, original source incidence equality or gross-column rational source match.
+
+**Exact remaining equality:** identify the split bond sum with `Native.pairedNativeBondCollection weights fluxes` (zero for arbitrary original signed flux) and the split signed reaction sum with `Rates.spatialRateWeightedTotal weights products rates - Rates.spatialRateWeightedTotal weights reactants rates`, using the source-generated original stoichiometry and rational finite interchange. Then the existing 54 native column and 72 original reaction-column witnesses produce the actual computed six zero defects for `Operator.rational369SemidiscreteRHS`. Only after that may the `computedRationalRHSConservationLiftsToBishop` consumer be instantiated without an independent conservation premise.
+
+**Verification:** GitHub source/Golden commits are not Agda 2.9 kernel receipts; local runtime lacks Agda/Nix and the original source certificate is not authenticated. Real SG/mass-action, Poisson, open electrode work, weighted-simplex/Brouwer, physical same-source step, tissue and independent empirical validation remain OPEN. Run:
+```sh
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4RationalSemidiscreteBilinearityExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+```
