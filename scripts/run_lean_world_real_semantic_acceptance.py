@@ -189,7 +189,7 @@ def main_run(output_dir: Path, *, timeout=600):
                 "proof_digest":c.proof_digest,
                 "profile":"lean4-4.28.0-exporter-"+EXPORTER_SHA[:12]+
                           "-tenet-"+TENET_SHA[:12],
-                "type_head":type_node[2][0],
+                "type_head":type_node[2],
                 "universe_shape":json.dumps(type_node[1],separators=(",",":")),
                 "canonical_type_b64":base64.b64encode(c.canonical_type).decode(),
                 "exporter_profile":"lean4export-3x-independent-tenet-check-observed",
