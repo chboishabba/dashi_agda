@@ -107,8 +107,8 @@ record SupportHalf240 : Set where
   constructor supportHalf240
   field
     supportSigns : SupportHalf256
-    degree : Nat
-    nonemptySupport : maskWeight (supportMask supportSigns) ≡ suc degree
+    supportDegree : Nat
+    nonemptySupport : maskWeight (supportMask supportSigns) ≡ suc supportDegree
 open SupportHalf240 public
 
 encode240 : Regular240 → SupportHalf240
