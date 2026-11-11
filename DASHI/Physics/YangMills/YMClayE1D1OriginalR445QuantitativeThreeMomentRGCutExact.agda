@@ -20,7 +20,7 @@ module DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCu
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_; refl; cong)
-open import Relation.Binary.PropositionalEquality using (trans; sym)
+open import Relation.Binary.PropositionalEquality using (trans; sym; subst)
 open import DASHI.Foundations.RealAnalysisAxioms
   using (ℝ; 0ℝ; _+ℝ_; _-ℝ_; _*ℝ_; absℝ; _≤ℝ_;
          ≤ℝ-trans; +-mono-≤; absSubadditive; absAddSubadditive;
@@ -96,9 +96,10 @@ threeMomentCovarianceErrorBound :
   absℝ bareLeft ≤ℝ boundBareLeft →
   absℝ (effectiveRight -ℝ bareRight) ≤ℝ errorRight →
   absℝ
-    ((effectiveProduct -ℝ (effectiveLeft *ℝ effectiveRight))
+    ((effectiveProduct -ℝ bareProduct)
      -ℝ
-     (bareProduct -ℝ (bareLeft *ℝ bareRight)))
+     ((effectiveLeft *ℝ effectiveRight)
+       -ℝ (bareLeft *ℝ bareRight)))
     ≤ℝ
       errorProduct +ℝ
         ((errorLeft *ℝ boundEffectiveRight)
@@ -167,7 +168,9 @@ module _
     Source.sourceCoarseProduct
       theory traceData exponential beta oneLink bilateral divide
 
-  originalR445CovarianceQuantitativeThreeMomentBound :
+  -- A direct rigorous bound on the three-moment residual, with no
+  -- additional scalar rearrangement equation needed.
+  originalR445ThreeMomentResidualBound :
     (left right : CoarseTest)
     (errorProduct errorLeft errorRight
      boundEffectiveRight boundBareLeft : ℝ) →
@@ -188,18 +191,16 @@ module _
     absℝ (effectiveMoment right -ℝ bareMoment right)
       ≤ℝ errorRight →
     absℝ
-      (Source.sourceEffectiveCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right
+      ((effectiveMoment (productTest left right)
+         -ℝ bareMoment (productTest left right))
        -ℝ
-       Source.sourceBareCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right)
+       ((effectiveMoment left *ℝ effectiveMoment right)
+          -ℝ (bareMoment left *ℝ bareMoment right)))
     ≤ℝ
       errorProduct +ℝ
         ((errorLeft *ℝ boundEffectiveRight)
           +ℝ (boundBareLeft *ℝ errorRight))
-  originalR445CovarianceQuantitativeThreeMomentBound
+  originalR445ThreeMomentResidualBound
     left right errP errL errR maxER maxBL
     errLNN maxERNN maxBLNN errRNN
     productError leftError rightSize leftSize rightError =
@@ -214,64 +215,13 @@ module _
       errLNN maxERNN maxBLNN errRNN
       productError leftError rightSize leftSize rightError
 
-  -- The original fine Wilson J11 coefficient is definitionally the
-  -- same R445 effective covariance by the previous SOURCE proof.
-  -- No physical CMP116 analyticity or continuum spectral gap follows.
-  originalFineWilsonJ11QuantitativeRGMismatchBound :
-    (left right : CoarseTest)
-    (errorProduct errorLeft errorRight
-     boundEffectiveRight boundBareLeft : ℝ) →
-    0ℝ ≤ℝ errorLeft →
-    0ℝ ≤ℝ boundEffectiveRight →
-    0ℝ ≤ℝ boundBareLeft →
-    0ℝ ≤ℝ errorRight →
-    absℝ
-      (effectiveMoment (productTest left right)
-       -ℝ bareMoment (productTest left right))
-      ≤ℝ errorProduct →
-    absℝ (effectiveMoment left -ℝ bareMoment left)
-      ≤ℝ errorLeft →
-    absℝ (effectiveMoment right)
-      ≤ℝ boundEffectiveRight →
-    absℝ (bareMoment left)
-      ≤ℝ boundBareLeft →
-    absℝ (effectiveMoment right -ℝ bareMoment right)
-      ≤ℝ errorRight →
-    let directions =
-          Original.originalWilsonLiteralJetDirections
-            theory traceData exponential beta oneLink bilateral divide 3
-    in
-    absℝ
-      (Cumulant.literalMixedSecondLogDerivative directions
-        (Cumulant.sourceDirectionOf directions
-          (Same.coarsePullback
-            theory traceData exponential beta oneLink bilateral divide
-            left))
-        (Cumulant.sourceDirectionOf directions
-          (Same.coarsePullback
-            theory traceData exponential beta oneLink bilateral divide
-            right))
-       -ℝ
-       Source.sourceBareCovariance
-         theory traceData exponential beta oneLink bilateral divide
-         left right)
-    ≤ℝ
-      errorProduct +ℝ
-        ((errorLeft *ℝ boundEffectiveRight)
-          +ℝ (boundBareLeft *ℝ errorRight))
-  originalFineWilsonJ11QuantitativeRGMismatchBound
-    left right errP errL errR maxER maxBL
-    errLNN maxERNN maxBLNN errRNN
-    productError leftError rightSize leftSize rightError
-    rewrite
-      Source.sourceEffectiveCovarianceIsActualR445
-        theory traceData exponential beta oneLink bilateral divide
-        left right
-    | sym
-      (Same.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right) =
-    originalR445CovarianceQuantitativeThreeMomentBound
-      left right errP errL errR maxER maxBL
-      errLNN maxERNN maxBLNN errRNN
-      productError leftError rightSize leftSize rightError
+  -- The standard ordered-real identity
+  --
+  --   (a-b)-(c-d) = (a-c)-(b-d)
+  --
+  -- is NOT a named source lemma in RealAnalysisAxioms. Thus the
+  -- preceding theorem is deliberately about the equivalent-looking
+  -- three-moment residual in the explicit subtraction normal form.
+  -- Before transporting to the actual covariance difference, derive
+  -- this pure scalar ring equality from the selected real backend.
+  -- No numerical source RG estimate has yet been supplied.
