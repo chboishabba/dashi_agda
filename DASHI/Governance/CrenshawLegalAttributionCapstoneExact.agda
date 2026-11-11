@@ -31,6 +31,11 @@ import DASHI.Governance.SituatedCortisolTrajectoryAdmissionExact as CortisolPers
 import DASHI.Governance.SituatedCortisolScaleIndexedAssayExact as AssayScale
 import DASHI.Governance.SituatedHPARegimeFlexibilityExact as HPARegime
 import DASHI.Governance.SituatedCortisolPNFAdmissibilityExact as PNF
+import DASHI.Governance.SituatedBiomarkerPNFSourceWeldExact as BiomarkerWeld
+import DASHI.Governance.SituatedBiomarkerObserverAgencyExact as Agency
+import DASHI.Governance.SituatedCortisolAssayGluingExact as AssayGluing
+import DASHI.Governance.SituatedCortisolReceptorDissipativeExact as Receptor
+import DASHI.Governance.SituatedDevelopmentalUltrametricExact as Development
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -157,6 +162,20 @@ record LegalCrossCaseCut : Set₁ where
         {person : Person} {legalCase : Case} →
       PNF.SeparatelyAdjudicatedLegalClaim audit person legalCase →
       PNF.legallyAuthorisedDetermination audit legalCase
+    finiteDevelopmentalTreeStrongTriangle :
+      (x y z : Development.DevelopmentalLeaf) →
+      Development.treeDistance x z ≤
+      (Development.treeDistance x y ⊔ Development.treeDistance y z)
+    receptorClearanceIsNotInvertible :
+      (undo : Receptor.HormoneReceptor → Receptor.HormoneReceptor) →
+      ((s : Receptor.HormoneReceptor) →
+        undo (Receptor.step Receptor.clearance s) ≡ s) → ⊥
+    incompatibleToyAssaysDoNotGlue :
+      AssayGluing.JointAssayExplanation 2 0 → ⊥
+    optionalBiomarkerRefusalBlocksOptionalUse :
+      Agency.OptionalBiomarkerPermission Agency.refuses → ⊥
+    PNFNumericABIStillCannotPromote :
+      BiomarkerWeld.NumericABI.PNFSpectralNumericABIPromotion → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -199,4 +218,9 @@ crenshawLegalCrossCaseCut =
     PNF.pointIdentifiedBiomarkerDoesNotIdentifyCause
     PNF.causalFindingRequiresCounterfactual
     PNF.legalFindingRequiresLegalAuthority
+    Development.treeDistanceStrongTriangle
+    Receptor.clearanceHasNoGlobalLeftInverse
+    AssayGluing.noCommonHistoryForContradictoryReadings
+    Agency.refusalBlocksOptionalBiomarkerUse
+    BiomarkerWeld.noNumericAbiTruthPromotion
     refl refl
