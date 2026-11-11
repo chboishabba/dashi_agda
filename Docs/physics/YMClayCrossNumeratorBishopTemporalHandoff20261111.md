@@ -93,3 +93,18 @@ Next physical producer remains a source-native nonconstant plaquette bound on `X
 
 
 The new centering module also specializes directly to `originalCoarsePlaquetteTrace` (`Words.originalWordObservable ... 1 (p :: [])`) and proves `originalPlaquetteCrossNumeratorConstantShift` for arbitrary original side-two plaquettes. The subtraction-spelled specialization, `originalPlaquetteCrossNumeratorSubtractionCentering`, retains the same explicit selected scalar subtraction identity argument. This pays the specific plaquette *centering* algebra, not any nonconstant physical RG error bound.
+
+
+## P0.01–P0.04 original Wilson centered bare numerator — 2026-11-11
+
+New source module: `DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringAlgebraExact.agda`. Imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`.
+
+- `OriginalRealCenteringLaws.subtractionAsNegation` and `centeredCancellation` identify the **unpaid scalar authority** needed for P0.01. They are explicit parameters, not new postulates or proven properties of `RealAnalysisAxioms`.
+- `OriginalRealPositiveDivisionLaws.quotientTimesPositiveDenominator` identifies the **unpaid positive-division field law** for the original source's independently passed `divide` operation.
+- `originalRealSubtractionAsAddition` and `originalWilsonCrossNumeratorSubtractionCenteringClosed` (P0.01–02) follow relative to these selected scalar laws, reusing the actual original R445 scalar-shift theorem.
+- `originalBareExpectationMultiplyPartition` (P0.03) derives `E_b(F)*Z_b=N_b(F)` relative to the positive-division law, with `Z_b>0` proved by the actual `originalWilsonPartitionStrictlyPositive ... 1`, not assumed independently.
+- `originalBareCenteredNumeratorZero` (P0.04) derives `N_b(F-E_b(F))=0` using actual Wilson source numerator congruence, the native original bare numerator additive shift, the quotient reconstruction and explicit selected real additive cancellation.
+
+**Not unconditional:** Calling these fields “closed” means closed *under the explicit chosen real-law interfaces*, not that `OriginalRealCenteringLaws` or `OriginalRealPositiveDivisionLaws` has been inhabited by the repository's chosen real implementation. The latter is the remaining scalar trust boundary. Nor does this complete P0.05's one-sided formula, P0.06 SU(N) trace boundedness, P0.07 plaquette centered formula, or the physically difficult nonconstant cross-numerator decay.
+
+**Verification:** source committed/read back, Agda 2.9 typecheck not performed. No physical theorem has been inferred from this algebra.
