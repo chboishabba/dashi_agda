@@ -115,3 +115,29 @@ Its canonical DAG `seal()` now uses iterative shared-child-safe DFS and has
 deep-chain/cycle/diamond regression tests. Those source changes are on
 #1484, not yet ancestors of this #1495 stack. No exact-head operator execution
 or PostgreSQL migration receipt is claimed.
+
+## P0 dependency update — canonical candidate PostgreSQL writer on #1484
+
+#1484 has progressed beyond the earlier generic metadata-only migration:
+`scripts/lean_world_postgres_candidate.py` consumes its **sealed original**
+`CanonicalLeanWorld`, writes exact-type interned statements, original source
+occurrences and foreign-keyed dependencies under one PostgreSQL transaction,
+and checks idempotence and conflict histories. Additional candidate receipt
+and edge tables are append-only; psycopg3 is supplied via the pinned Nix shell.
+`run_lean_world_candidate_pg.py` joins the existing complete-source
+`run_lean_world_export_admission.build` to that writer, requiring an explicit
+database, existing schema and candidate-only acknowledgement. Tests cover
+rollback, dependency conflict, duplicate receipts and mutating provenance.
+
+This is **unverified candidate persistence** only. #1484 is still a parallel
+PR, not an ancestor of #1495, and no new operator execution receipt is claimed.
+The next genuine cut is independent Lean native-v3 checker authentication,
+complete exported declaration/dependency closure validation, a checked-typed
+mapping into those canonical bytes, and real original-donor proof reuse.
+
+The actual lean4export format is documented at:
+https://github.com/leanprover/lean4export/blob/master/format_ndjson.md
+Tenet documents `tenet check FILE` and `--fail-on-axiom NAME`:
+https://github.com/keithadler/tenet
+Do not assume Lean 4.28.0's built-in checker has a later command-line mode;
+test exact pinned binaries before setting any authority flag.
