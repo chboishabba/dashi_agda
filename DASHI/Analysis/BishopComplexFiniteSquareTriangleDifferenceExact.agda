@@ -243,9 +243,13 @@ originalBishopComplexWingRealAbsoluteBound left right count =
   BishopP.≤-respˡ-≃
     (BishopP.∣-∣-cong realReassociate)
     (BishopP.≤-trans
-      (BishopP.∣x-y∣≤∣x∣+∣y∣
-        (BishopReal._-_ rac tac)
-        (BishopReal._-_ rbd tbd))
+      (BishopP.≤-respʳ-≃
+        (BishopP.+-cong
+          BishopP.≃-refl
+          BishopP.∣-x∣≃∣x∣)
+        (BishopP.∣x+y∣≤∣x∣+∣y∣
+          (BishopReal._-_ rac tac)
+          (BishopReal.-_ (BishopReal._-_ rbd tbd))))
       (BishopP.+-mono-≤
         (Wing.finiteCauchyWingAbsoluteBound a c count)
         (Wing.finiteCauchyWingAbsoluteBound b d count)))
