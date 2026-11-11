@@ -599,3 +599,22 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Acceptance status:** these are source-written declarations, added to the focused local Agda 2.9 \`--safe\` targets, **not kernel-checked**. Earlier even-prefix source modules also remain unchecked. The omitted term vanishing is directly grounded in the pinned upstream \`Sequence.agda\` theorem, whose exact definition was inspected at commit \`240e38c7f6938f20f865b1f956c5f084da48bd54\`.
 
 **Still unpaid:** (P0) exact-head Agda/Nix execution and repairs, (P1) combine even- and odd-cutoff convergences for *every* \`M : Nat\` without a fabricated subsequence principle; (P1) full complex factorial-series product/Cartesian exp identification for arbitrary \(x+iy\); (P1) actual Bishop exp–log inverse and selected fixed point; (P1g) global Kneser; (P2–P4) modular j, observer, and contour. Do not claim the full Euler identity in the kernel from only separately proved parity subsequences.
+
+
+## 2026-11-11 — P1 all-natural-cutoff Bishop imaginary factorial / native expC
+
+**Implemented source, still unchecked by pinned Agda 2.9:**
+
+- \`DASHI/Foundations/BishopEvenOddFullSequenceConvergenceExact.agda\`: a **generic** constructive proof that if \`sequence (2n) → limit\` and \`sequence (2n+1) → limit\` with Bishop \`Sequence.con*\` moduli, then \`sequence m → limit\` for **every** \`m : Nat\`. \`ParityCover\` is proved by structural recursion on Nat; \`evenIndexLowerBound\` and \`oddIndexLowerBound\` invert \`2N ≤ 2n\` and \`2N ≤ 2n+1\` without classical division or case-exhaustion. The common cutoff is explicit: \`2 max(N_even,N_odd)+1\`, and each modulus is obtained directly from the two original \`con*\` witnesses.
+- \`DASHI/Moonshine/AbelBishopFactorialImaginaryAxisAllCutoffsExact.agda\`:
+  * \`originalBishopImaginaryFactorialRealAllCutoffs\` and \`...ImagAllCutoffs\`: applies the generic result to the **literal full original factorial complex sequence** at \`(0,y)\`, using the already-constructed contiguous even/odd cutoff certificates.
+  * \`originalBishopImaginaryFactorialComplexAllCutoffs\`: constructs the original componentwise \`ComplexSeriesConvergesTo\` witness to \`(bishopCos y,bishopSin y)\` for **every** cutoff, not just the even/odd selected subsequences.
+  * \`originalBishopNativeExpImaginaryAxisIsEuler\`: uses pre-existing pinned \`BishopExponentialPositiveOrderExact.bishopExpZero\` to identify the **native** \`BishopSetoidComplexExact.expC T (0+iy)\` with the same configured sine/cosine value, through the original \`AbelBishopOriginalComplexCarrierWeldExact.toSeries\`.
+  * \`originalBishopImaginaryFactorialIsNativeExp\`: transports both convergence coordinates to the actual native \`expC\` value by the pinned Bishop \`Sequence.xₙ→x∧x≃y⇒xₙ→y\` convergence-along-setoid theorem.
+- Both modules registered in the exact-head local checker.
+
+**P1 mathematical conclusion IF accepted by Agda kernel:** the full \(\sum_{n≥0}(iy)^n/n!\) converges to the original configured Bishop \(\cos_B y+i\sin_B y\) at **all finite cutoffs**, and this value agrees with the native Cartesian \`expC\` at imaginary inputs. This is an actual original-source limit identification, not a formal-power-series note or parallel selected exp authority.
+
+**Still open:** the full \(x+iy\) factorial-series/natural \`expC\` equivalence, requiring original Bishop complex binomial/Cauchy product and limit interchange. Important reuse: **the real Bishop Cauchy product and addition law are already paid** in \`DASHI/Foundations/BishopExponentialCauchyProductExact.agda\` (\`bishopExpAdd\`, \`bishopExpTimesNegativeIsOne\`, triangle/rectangle convergence). Do not re-prove that existing real result or confuse it with the still-open complex Cauchy product. The native \`BishopSetoidComplexExact.BishopSetoidComplexTranscendentals\` is a configuration record: independent inhabitation and same-source sine/cosine witnesses must remain explicit.
+
+**Remaining dependency-ordered max-cut:** P0 local Agda 2.9 \`--safe\` exact-head acceptance/fix; P1 general complex exponential factorial product and native Cartesian identification; P1 Bishop original exp-log inverse; P1 original upper complex fixed point and analytic Koenigs/Schröder; P1g global Kneser; P2-P4 original modular j and observer/contour. Do not mark the latter open gates closed based on Euler's formula alone.
