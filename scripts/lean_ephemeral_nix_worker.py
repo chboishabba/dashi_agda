@@ -31,7 +31,7 @@ from lean_remote_source_inventory import (
     REPO_RE, COMMIT_RE, SHA_RE, RemoteError, request_json, source_blob,
 )
 
-IMPORT_RE = re.compile(r"^\s*import\s+(.+?)\s*(?:--.*)?$", re.MULTILINE)
+IMPORT_RE = re.compile(r"^[ \t]*(?:(?:public|protected)[ \t]+)?import[ \t]+(.+?)\s*(?:--.*)?$", re.MULTILINE)
 MODULE_RE = re.compile(r"^[A-Za-z_][A-Za-z_0-9'.]*(?:\.[A-Za-z_][A-Za-z_0-9']*)*$")
 TOOLCHAIN_RE = re.compile(r"^leanprover/lean4:(v[0-9]+\.[0-9]+\.[0-9]+(?:-[A-Za-z0-9.]+)?)$")
 MAX_SOURCES = 2048
