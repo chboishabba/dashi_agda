@@ -80,3 +80,14 @@ The core proof boundary remains unchanged: same-fibre proximity is a
 candidate-retrieval signal, never logical equivalence or a discharged
 mathematical obligation. We need checked transport/equivalence receipts
 before merging mathematical identities.
+
+
+## PR #1491 follow-up corrections (2026-11-11)
+
+Validation of the earlier head found 18 passing tests and 2 failures.
+- Non-Lean tree blobs are now excluded before applying Lean-source SHA/size validation; malformed `.lean` entries continue to fail closed.
+- Import discovery now recognizes `import`, `public import` and `protected import`. Within the supported simple-import fragment, the worker stages same-repository dependencies and compiles their `.olean` artifacts before the selected target.
+- The Nix wrapper now explicitly resolves `.#lean-world-bin` through `nix build --no-link --print-out-paths` using the existing flake lock and passes its absolute `/nix/store/.../bin/lean` to Python. There is **no system-Lean PATH fallback from this wrapper**.
+- Added regression tests for the two failures and compilation ordering.
+
+These changes are source-written on this PR branch; the operator still needs to rerun the isolated tests, `nix develop` realization and one pinned Batteries revision. The flake's Lean version may differ from Batteries' pinned `lean-toolchain`: correct behaviour is refusal, not executing Arch Lean. Building arbitrary Lake packages and a cross-repo reusable compiled dependency cache remain separate unpaid gates.
