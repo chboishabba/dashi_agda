@@ -14,7 +14,7 @@ import sys
 
 from lean_world_native_admission_queue import enqueue
 from lean_world_builder_contract import pending_from_manifest
-from lean_world_external_checker import check_native_export
+from lean_world_external_checker import check_native_export_nanoda
 from lean_world_atomic_spool import publish_immutable
 
 def observe(receipt_path: Path, spool: Path, checker: Path, checker_hash: str,
@@ -22,14 +22,14 @@ def observe(receipt_path: Path, spool: Path, checker: Path, checker_hash: str,
     raw_receipt=json.loads(receipt_path.read_text(encoding="utf-8"))
     handoff=enqueue(raw_receipt,spool)
     pending=pending_from_manifest(Path(handoff["manifest"]))
-    check=check_native_export(
+    check=check_native_export_nanoda(
         pending,checker,expected_executable_sha256=checker_hash,
-        arguments=("check","--fail-on-axiom","sorryAx"),
         timeout=timeout)
     receipt=asdict(check)
     receipt["schema"]="dashi-lean-external-check-observation-v1"
     receipt["native_manifest_key"]=handoff["handoff_key"]
-    receipt["status"]="external-checker-exit-zero-uncertified"
+    receipt["status"]="rust-nanoda-exit-zero-uncertified"
+    receipt["checker_kind"]="rust-nanoda"
     receipt["world_admitted"]=False
     receipt["kernel_certified"]=False
     # Deterministic immutable observation; no source bytes are repeated.
@@ -46,7 +46,8 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--native-receipt",type=Path,required=True)
     p.add_argument("--spool",type=Path,required=True)
-    p.add_argument("--checker-bin",type=Path,required=True)
+    p.add_argument("--checker-bin",type=Path,required=True,
+                   help="pinned nanoda_bin Rust executable")
     p.add_argument("--checker-sha256",required=True)
     p.add_argument("--timeout",type=int,default=180)
     args=p.parse_args()
