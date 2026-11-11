@@ -27,6 +27,7 @@ import DASHI.Foundations.BishopFinSumSeriesBridgeExact as FinSum
 import DASHI.Foundations.BishopFiniteCauchyRowReindexExact as Row
 import DASHI.Foundations.BishopExponentialCauchyProductExact as ExpCauchy
 import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as RealAxis
+import DASHI.Analysis.BishopComplexFiniteSquareTriangleDifferenceExact as ComplexWing
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Moonshine.AbelBishopFactorialComplexImaginaryAxisTwoStepExact as Axis
 import DASHI.Moonshine.AbelBishopFactorialComplexImaginaryAxisSignedTermsExact as Signed
@@ -301,3 +302,155 @@ originalBishopCauchyTriangleTailMonotone
           a≤A b≤B Ann bnn)
         start (start + count)
         (NatP.m≤m+n start count)))
+
+
+------------------------------------------------------------------------
+-- INSTANTIATED FOUR ORIGINAL COMPLEX FACTORIAL POSITIVE WINGS.
+-- The source pairing is the actual exp-factorial (x,0) with
+-- exp-factorial (0,y), with no abstract comparison record.
+------------------------------------------------------------------------
+
+factorialRealStream :
+  BishopReal.ℝ → Nat → Complex.BishopComplex
+factorialRealStream x n =
+  RealAxis.originalBishopFactorialComplexTerm (RealAxis.realAxis x) n
+
+factorialImaginaryStream :
+  BishopReal.ℝ → Nat → Complex.BishopComplex
+factorialImaginaryStream y n =
+  RealAxis.originalBishopFactorialComplexTerm (Axis.imaginaryAxis y) n
+
+doubleAbsolute :
+  ∀ value →
+  BishopReal._≃_
+    (BishopReal.∣ BishopReal.∣ value ∣ ∣)
+    (BishopReal.∣ value ∣)
+doubleAbsolute value =
+  BishopP.0≤x⇒∣x∣≃x
+    (BishopP.nonNegx⇒0≤x (BishopP.nonNeg∣x∣ value))
+
+realFactorRealAbsoluteBound :
+  ∀ x n →
+  BishopReal._≤_
+    (Wing.absoluteTerms (Complex.realTerms (factorialRealStream x)) n)
+    (ExpCauchy.absoluteExpTerm x n)
+realFactorRealAbsoluteBound x n =
+  BishopP.≤-reflexive
+    (originalBishopRealFactorAbsoluteIsExpAbsolute x n)
+
+realFactorImagAbsoluteBound :
+  ∀ x n →
+  BishopReal._≤_
+    (Wing.absoluteTerms (Complex.imagTerms (factorialRealStream x)) n)
+    (ExpCauchy.absoluteExpTerm x n)
+realFactorImagAbsoluteBound x n =
+  BishopP.≤-respˡ-≃
+    (BishopP.≃-trans
+      (BishopP.∣-∣-cong
+        (originalBishopRealFactorImaginaryZero x n))
+      (BishopP.0≤x⇒∣x∣≃x BishopP.≤-refl))
+    (BishopP.nonNegx⇒0≤x
+      (BishopP.nonNeg∣x∣ (Exp.expTerm x n)))
+
+imaginaryFactorRealAbsoluteBound :
+  ∀ y n →
+  BishopReal._≤_
+    (Wing.absoluteTerms (Complex.realTerms (factorialImaginaryStream y)) n)
+    (ExpCauchy.absoluteExpTerm y n)
+imaginaryFactorRealAbsoluteBound =
+  originalBishopImaginaryRealAbsBound
+
+imaginaryFactorImagAbsoluteBound :
+  ∀ y n →
+  BishopReal._≤_
+    (Wing.absoluteTerms (Complex.imagTerms (factorialImaginaryStream y)) n)
+    (ExpCauchy.absoluteExpTerm y n)
+imaginaryFactorImagAbsoluteBound =
+  originalBishopImaginaryImagAbsBound
+
+originalBishopFourFactorialPositiveTailBound :
+  ∀ x y count →
+  BishopReal._≤_
+    (BishopReal._+_
+      (ComplexWing.positiveTriangleTail
+        (Complex.realTerms (factorialRealStream x))
+        (Complex.realTerms (factorialImaginaryStream y))
+        count)
+      (ComplexWing.positiveTriangleTail
+        (Complex.imagTerms (factorialRealStream x))
+        (Complex.imagTerms (factorialImaginaryStream y))
+        count))
+    (BishopReal._+_
+      (ExpCauchy.absoluteTriangleWingTail x y)
+      (ExpCauchy.absoluteTriangleWingTail x y))
+originalBishopFourFactorialPositiveTailBound x y count =
+  let
+    A = ExpCauchy.absoluteExpTerm x
+    B = ExpCauchy.absoluteExpTerm y
+    Ann : ∀ n → BishopReal.NonNegative (A n)
+    Ann n = BishopP.nonNeg∣x∣ (Exp.expTerm x n)
+    realBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.realTerms (factorialImaginaryStream y)) n)
+    realBnn n = BishopP.nonNeg∣x∣
+      (Complex.realTerms (factorialImaginaryStream y) n)
+    imagBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.imagTerms (factorialImaginaryStream y)) n)
+    imagBnn n = BishopP.nonNeg∣x∣
+      (Complex.imagTerms (factorialImaginaryStream y) n)
+  in
+  BishopP.+-mono-≤
+    (originalBishopCauchyTriangleTailMonotone
+      (realFactorRealAbsoluteBound x)
+      (imaginaryFactorRealAbsoluteBound y)
+      Ann realBnn count count)
+    (originalBishopCauchyTriangleTailMonotone
+      (realFactorImagAbsoluteBound x)
+      (imaginaryFactorImagAbsoluteBound y)
+      Ann imagBnn count count)
+
+originalBishopFourFactorialImaginaryTailBound :
+  ∀ x y count →
+  BishopReal._≤_
+    (BishopReal._+_
+      (ComplexWing.positiveTriangleTail
+        (Complex.realTerms (factorialRealStream x))
+        (Complex.imagTerms (factorialImaginaryStream y))
+        count)
+      (ComplexWing.positiveTriangleTail
+        (Complex.imagTerms (factorialRealStream x))
+        (Complex.realTerms (factorialImaginaryStream y))
+        count))
+    (BishopReal._+_
+      (ExpCauchy.absoluteTriangleWingTail x y)
+      (ExpCauchy.absoluteTriangleWingTail x y))
+originalBishopFourFactorialImaginaryTailBound x y count =
+  let
+    A = ExpCauchy.absoluteExpTerm x
+    Ann : ∀ n → BishopReal.NonNegative (A n)
+    Ann n = BishopP.nonNeg∣x∣ (Exp.expTerm x n)
+    realBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.realTerms (factorialImaginaryStream y)) n)
+    realBnn n = BishopP.nonNeg∣x∣
+      (Complex.realTerms (factorialImaginaryStream y) n)
+    imagBnn : ∀ n →
+      BishopReal.NonNegative
+        (Wing.absoluteTerms
+          (Complex.imagTerms (factorialImaginaryStream y)) n)
+    imagBnn n = BishopP.nonNeg∣x∣
+      (Complex.imagTerms (factorialImaginaryStream y) n)
+  in
+  BishopP.+-mono-≤
+    (originalBishopCauchyTriangleTailMonotone
+      (realFactorRealAbsoluteBound x)
+      (imaginaryFactorImagAbsoluteBound y)
+      Ann imagBnn count count)
+    (originalBishopCauchyTriangleTailMonotone
+      (realFactorImagAbsoluteBound x)
+      (imaginaryFactorRealAbsoluteBound y)
+      Ann realBnn count count)
