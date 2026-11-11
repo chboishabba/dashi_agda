@@ -85,24 +85,24 @@ weightedRowEmbeds (V._∷_ w weights) (V._∷_ v values) =
 -- The 27 native voxels are the original accounting chart, not a
 -- replacement for the semantic 369/pants spatial geometry.
 sourceSpatialWeighted :
-  V.Vec Q.ℚᵘ 29 →
-  V.Vec (V.Vec Q.ℚᵘ 29) 27 → Q.ℚᵘ
+  ∀ {sites} → V.Vec Q.ℚᵘ 29 →
+  V.Vec (V.Vec Q.ℚᵘ 29) sites → Q.ℚᵘ
 sourceSpatialWeighted weights V.[] = Q.0ℚᵘ
 sourceSpatialWeighted weights (V._∷_ row rest) =
   Q._+_ (sourceWeightedRow weights row)
          (sourceSpatialWeighted weights rest)
 
 bishopSpatialWeighted :
-  V.Vec R.ℝ 29 →
-  V.Vec (V.Vec R.ℝ 29) 27 → R.ℝ
+  ∀ {sites} → V.Vec R.ℝ 29 →
+  V.Vec (V.Vec R.ℝ 29) sites → R.ℝ
 bishopSpatialWeighted weights V.[] = Embed.embed Q.0ℚᵘ
 bishopSpatialWeighted weights (V._∷_ row rest) =
   R._+_ (bishopWeightedRow weights row)
          (bishopSpatialWeighted weights rest)
 
 spatialWeightedEmbeds :
-  ∀ (weights : V.Vec Q.ℚᵘ 29)
-    (rhs : V.Vec (V.Vec Q.ℚᵘ 29) 27) →
+  ∀ {sites} (weights : V.Vec Q.ℚᵘ 29)
+    (rhs : V.Vec (V.Vec Q.ℚᵘ 29) sites) →
   R._≃_
     (Embed.embed (sourceSpatialWeighted weights rhs))
     (bishopSpatialWeighted
