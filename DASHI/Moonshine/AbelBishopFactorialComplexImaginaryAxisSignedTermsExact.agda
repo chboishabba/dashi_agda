@@ -20,6 +20,9 @@ open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 import Real as BishopReal
 import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
+import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
+import DASHI.Foundations.BishopPowerSeriesElementaryBridgeExact as Elementary
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as SeriesExt
 import DASHI.Foundations.BishopNegativeExponentialInterlacingExact as NegExp
 import DASHI.Moonshine.AbelBishopFactorialComplexImaginaryAxisTwoStepExact as Axis
 import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as Terms
@@ -175,3 +178,72 @@ originalBishopImaginaryAxisSineSignedTerm y n =
     (BishopP.≃-trans
       (BishopP.*-congˡ (originalBishopNegativeSquarePowerSignedOdd y n))
       rearrange)
+
+
+------------------------------------------------------------------------
+-- THE *CONFIGURED* BISHOP CARTESIAN SINE/COSINE DATA, NOT A SECOND
+-- TRIGONOMETRIC SOURCE. Term-identification is explicitly carried
+-- by the existing Cartesian.BishopSetoidComplexTranscendentals T.
+------------------------------------------------------------------------
+
+originalBishopImaginaryAxisCosineConfiguredTerm :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y n →
+  BishopReal._≃_
+    (Complex.re
+      (Terms.originalBishopFactorialComplexTerm
+        (Axis.imaginaryAxis y) (Estimates.evenExponent n)))
+    (Elementary.cosineTerm (Cartesian.dataSet T) y n)
+originalBishopImaginaryAxisCosineConfiguredTerm T y n =
+  BishopP.≃-trans
+    (originalBishopImaginaryAxisCosineSignedTerm y n)
+    (BishopP.≃-symm
+      (Signed.cosineTermIsConcrete (Cartesian.trigIdentification T) y n))
+
+originalBishopImaginaryAxisSineConfiguredTerm :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y n →
+  BishopReal._≃_
+    (Complex.im
+      (Terms.originalBishopFactorialComplexTerm
+        (Axis.imaginaryAxis y) (Estimates.oddExponent n)))
+    (Elementary.sineTerm (Cartesian.dataSet T) y n)
+originalBishopImaginaryAxisSineConfiguredTerm T y n =
+  BishopP.≃-trans
+    (originalBishopImaginaryAxisSineSignedTerm y n)
+    (BishopP.≃-symm
+      (Signed.sineTermIsConcrete (Cartesian.trigIdentification T) y n))
+
+originalBishopImaginaryAxisCosinePartialSameConfigured :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y count →
+  BishopReal._≃_
+    (BishopReal.∑₀
+      (λ n → Complex.re
+        (Terms.originalBishopFactorialComplexTerm
+          (Axis.imaginaryAxis y) (Estimates.evenExponent n)))
+      count)
+    (BishopReal.∑₀
+      (Elementary.cosineTerm (Cartesian.dataSet T) y)
+      count)
+originalBishopImaginaryAxisCosinePartialSameConfigured T y count =
+  SeriesExt.finiteSumCongruent
+    (originalBishopImaginaryAxisCosineConfiguredTerm T y)
+    count
+
+originalBishopImaginaryAxisSinePartialSameConfigured :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y count →
+  BishopReal._≃_
+    (BishopReal.∑₀
+      (λ n → Complex.im
+        (Terms.originalBishopFactorialComplexTerm
+          (Axis.imaginaryAxis y) (Estimates.oddExponent n)))
+      count)
+    (BishopReal.∑₀
+      (Elementary.sineTerm (Cartesian.dataSet T) y)
+      count)
+originalBishopImaginaryAxisSinePartialSameConfigured T y count =
+  SeriesExt.finiteSumCongruent
+    (originalBishopImaginaryAxisSineConfiguredTerm T y)
+    count
