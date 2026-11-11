@@ -1,6 +1,33 @@
 # Save Woogaroo Forest — request for the full EPBC 2019/8575 record
 
-## Purpose
+## 11 November 2026 — REVISED UNSENT POST-DECISION RECORD REQUEST (supersedes historical draft below)
+
+**Case:** EPBC 2019/8575, Springfield Residential Development. **Signed Part 9 decision:** **16 October 2026**, original 50-page document obtained, SHA256 `f9b591f230458939dbeafc8b6178c148dbbec3e68e5e75f66fd187e2a402b808`. The historical September suggested email below incorrectly treats the case as pending and should **not** be sent unchanged. Confirm the present Commonwealth records custodian and delegate from original contact records; do not infer the officer solely from an old extension notice.
+
+**Proposed subject:** URGENT post-decision records — EPBC 2019/8575 — s95C recommendation, s95B packet, operative offsets and condition records
+
+**Draft for legal representative / authorised applicant (NOT SENT):**
+
+> I write concerning the signed Part 9 approval dated 16 October 2026 for EPBC 2019/8575 (Springfield Residential Development). Please identify the current authorised records custodian and provide, or state the applicable access procedure, exemptions and fees for, the following original records.
+>
+> 1. The Secretary's complete **s95C recommendation report** and attachments for this decision. Please assess any request mechanism under **s135A as applicable to this pre-24 August 2026 referral/assessment path**, including transitional and redaction provisions; alternatively identify an appropriate FOI process.
+> 2. The complete **s95B(1)** final proponent submission, summary and response to **1,786 reported comments**, and the underlying public-comment packet as lawfully releasable. The s95B(2) publication notice is not the full packet.
+> 3. The approval decision brief, original **s136(2)(bc)** material actually considered, scientific assessments, advice on offset sufficiency, decision reasons and any relevant delegation/notification record.
+> 4. The accepted **Saunders Havill Preliminary Report (Part A), Issue F, 3 July 2026**, and original referenced **15 October 2026 OAMP revisions**: Avonvale One Environment `Oes1:v1.2(e)`, Esk BAAM `0102-059 Version 6`, Mount Walker West Saunders Havill `9612-E Issue D`, including maps and any subsequent ministerially approved versions.
+> 5. Every native **Offsets Assessment Guide workbook (.xlsm)** or equivalent assessment record relied upon at decision, including native formulas, exact source/version, input assessment units, assumptions, supplementary worksheets, revisions and authority/receipt history. Please distinguish the January 2026 historical PD v5 OAG from the signed-referenced final July/October materials.
+> 6. Records of publication under **conditions 48–49**: approved-holder Website/domain, publication dates, original current/superseded accessible files, any **Minister's written extension** of the ordinary 6 November 2026 deadline, and lawful redactions.
+> 7. Actual date of **Action commencement** and the original **C52** notification; copies of **C24** Avonvale and Esk and **C25** Mount Walker West Voluntary Declaration evidence submitted to the agency, original title/dealing references, maps and effective dates; original outside-Phase-One clearing/construction notices and phase-boundary spatial files (to the extent held).
+> 8. Any original record used to reconcile the approximately **7.6-ha prior EPBC 2014/7306 exclusion** with the accepted final 2019/8575 128-ha species-habitat limit and 134.9-ha development footprint, including dated GIS layers and whether the earlier land was merely approved for clearing or actually cleared.
+>
+> Please preserve original filenames and metadata; provide native machine-readable formats when available, an itemised production/redaction inventory, the decision/version dates, and the precise statutory basis for any withheld material. If some records are held elsewhere, identify the responsible custodian and facilitate transfer or advise how to make a valid request. A partial prompt production is welcome while the remainder is processed.
+
+**Scope/risk controls:** A post-decision request is *not* evidence that records are absent, were not considered or were unlawfully withheld. The exact statutory text, amendment commencement, potential charges/exemptions and requester's standing should be reviewed by counsel. No email/request has been sent, and no FOI application or disclosure decision is implied.
+
+**Counsel handoff:** [11 November operative legal brief](SaveWoogarooForestLegalTeamBrief.md); [preservation-critical source requirements](../docs/research/Woogaroo20198575PreservationOutcomeCriticalPath20261109.md). Original QUT/QCC/RSPCA objector authorship remains preserved.
+
+---
+
+## ARCHIVED historical September purpose and draft (do not send unchanged)
 
 This is a short records request for the substantive 2026 Preliminary Documentation and public-comment response material for **EPBC 2019/8575 — Springfield Residential Development**.
 
