@@ -502,3 +502,18 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 - Both remain source-written and require the exact-head Agda checker. These declarations neither compose the exp and log functions nor identify the native Cartesian \`expC\`. They prevent future work from accidentally comparing unrelated selected analytic carriers.
 
 **Still highest alpha:** (P0) successful pinned Agda acceptance with concrete error fixes, (P1) native Bishop Cartesian \`expC\` = factorial complex series, then the source-level all-degree coefficient/cauchy-composition theorem and \(\exp_C(L(w))≈_C 1_C+w\), (P1) selected upper nonreal fixed point and exp addition, (P1) Koenigs holomorphic limit, (P1g) global Kneser gluing/normalization, (P2–P4) original Bishop modular \(q/\Delta/j\), observer and Kouznetsov. Local execution environment lacks \`agda\` and \`nix\`; do not claim acceptance or complete the programme from source syntax inspection.
+
+
+## 2026-11-11 P1 original Bishop factorial complex exponential: real-axis identification
+
+**Highest-alpha original-source progress** in \`DASHI/Moonshine/AbelBishopFactorialComplexRealAxisTermsExact.agda\`:
+
+1. \`realAxisPower\`: for every original Bishop real \`x\` and natural \`n\`, the **actual** complex power \`Algebra.powC (Complex.complex x 0ℝ) n\` is componentwise Bishop-equivalent to \`Complex.complex (BishopReal.pow x n) 0ℝ\`, by induction using the existing complex multiplication congruence and original Bishop real ring solver.
+2. \`originalBishopFactorialComplexTermRealAxis\`: all degrees, including the degree-zero coefficient, identify the real component of the **literal** factorial complex series term \`scaleC (Exp.embed (Exp.inverseFactorial n)) (powC (x,0) n)\` with \`Exp.expTerm x n\` from the original vendored Bishop exponential. Its imaginary component is proved zero.
+3. \`originalBishopPositiveTermIsFullSuccessor\`: definitional \`refl\` identifies the positive-degree disk-series source with the successor terms of the same full factorial series.
+4. \`originalBishopRealAxisFactorialPartialSameOriginal\`: actual finite partial-sum equivalence via already-owned \`BishopFiniteSeriesExtensionalityExact.seriesPartialSumsCongruent\`.
+5. \`originalBishopRealAxisFactorialSeriesConvergesToOriginalExp\`: **real-axis all-x series-limit identification**, using the original \`Exp.bishopExpConverges x\` and Bishop's \`xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀\`. This directly settles the real-coordinate source-equivalence and its infinite limit; it is stronger than merely displaying matching coefficients and is not a new analytic authority.
+
+**Verification boundary:** module source committed, registered as a new explicit target in \`scripts/check_analytic_j_tetration_golden_local.sh\`. Agda/Nix absent in current runtime; no kernel receipt. Do NOT mark the lemma checked without running the pinned Agda 2.9 \`--safe\` command. Nor does the real-axis result complete the full Cartesian \`BishopSetoidComplexExact.expC T\` = factorial complex exponential for arbitrary imaginary argument. The sine/cosine parity, Cauchy-product and imaginary-series convergence, and same-source exp addition are now the decisive next complex weld. The independently selected nonreal exponential fixed point, exp-log inverse, local Koenigs, global Kneser and actual modular j remain open.
+
+**Important architectural improvement:** real-axis terms use the **existing** \`BishopExponentialSeriesConvergenceExact.expTerm\` and \`bishopExpConverges\`; no additional setoid quotient, selected real exponential or arbitrary convergence record.
