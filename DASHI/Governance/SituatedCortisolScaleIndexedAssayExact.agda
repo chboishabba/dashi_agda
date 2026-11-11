@@ -27,7 +27,7 @@ data WindowWeight : Set where
 
 -- A source-specific filter kernel is needed; a merely named substrate
 -- does not determine weighting, delay, washout, hair growth or assay error.
-record ScaleKernel (scale : AssayScale) : Set where
+record ScaleKernel (scale : AssayScale) : Set₁ where
   constructor scale-kernel
   field
     weight : DiscreteTime → Nat
