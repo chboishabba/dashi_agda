@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Structural Lean4export 3.x declaration projection, NOT a type checker.
+"""Bounded native lean4export 3.x DAG projection; NOT a Lean kernel checker.
 
-Turns export integer name/level/expression references into an index-independent
-canonical expression representation. Rejects absent, duplicate, forward and
-cyclic term references. A separate trusted Lean kernel must check typing,
-definitional equality and the actual proof term. Never infer certification here.
-Reference: leanprover/lean4export format_ndjson.md (3.1).
+Resolves source name/universe/expression indices, then serializes selected
+types and proof terms as compact, structurally interned, index-independent
+expression DAGs. Different serialization indices and sharing layouts cannot
+create different canonical candidate identities. No hash injectivity is
+assumed: the full canonical bytes are carried to the world store.
 """
 from __future__ import annotations
 from dataclasses import dataclass
@@ -19,8 +19,8 @@ def integer(value):
     return type(value) is int and value >= 0
 
 def canonical(value):
-    return json.dumps(value, ensure_ascii=False, sort_keys=True,
-                      separators=(",", ":")).encode("utf-8")
+    return json.dumps(value,ensure_ascii=False,sort_keys=True,
+                      separators=(",",":")).encode("utf-8")
 
 @dataclass(frozen=True)
 class NativeCandidate:
@@ -36,171 +36,213 @@ class NativeCandidate:
 
 def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                        selected_names: frozenset[str] | None = None):
-    if not isinstance(raw, bytes) or not raw or len(raw) > 200_000_000:
+    if type(raw) is not bytes or not raw or len(raw)>200_000_000:
         raise NativeV3Error("invalid native export size")
-    names = {0: ""}
-    levels = {0: ("zero",)}
-    expressions = {}
-    candidates = []
-    unprojected_groups = 0
-    def ref(table, value, label):
-        if not integer(value) or value not in table:
+    names={0:""}
+    levels={0:("zero",)}
+    # Expressions contain CHILD IDS, never nested expanded child expressions.
+    expressions={}
+    selected=[]
+    def ref(table,i,label):
+        if not integer(i) or i not in table:
             raise NativeV3Error("unresolved "+label+" reference")
-        return table[value]
-    def intern(table, id_value, value, label):
-        if not integer(id_value) or id_value == 0 or id_value in table:
+        return table[i]
+    def intern(table,i,node,label):
+        if not integer(i) or not i or i in table:
             raise NativeV3Error("duplicate or invalid "+label+" index")
-        table[id_value] = value
-    def name_ref(i):
-        return ref(names, i, "name")
-    def expr_ref(i):
-        return ref(expressions, i, "expression")
-    def level_ref(i):
-        return ref(levels, i, "universe")
-    kinds = ("axiom","def","opaque","thm","quot")
-    rows=0
-    for line in raw.splitlines():
-        rows+=1
-        if rows > max_records or not line or len(line)>8_000_000:
-            raise NativeV3Error("invalid record length or count")
+        table[i]=node
+    def name(i): return ref(names,i,"name")
+    def level(i): return ref(levels,i,"universe")
+    def expr(i):
+        ref(expressions,i,"expression")
+        return i
+    def children(node):
+        tag=node[0]
+        if tag=="app": return (node[1],node[2])
+        if tag in ("lam","forallE"): return (node[2],node[3])
+        if tag=="letE": return (node[2],node[3],node[4])
+        if tag=="proj": return (node[3],)
+        if tag=="alias": return (node[1],)
+        return ()
+    def expression_dag(root):
+        """Postorder structural interning with deterministic canonical IDs."""
+        assigned={}
+        interned={}
+        nodes=[]
+        stack=[(root,False)]
+        while stack:
+            index,leaving=stack.pop()
+            if index in assigned:
+                continue
+            node=expressions[index]
+            if not leaving:
+                stack.append((index,True))
+                for dependency in reversed(children(node)):
+                    if dependency not in assigned:
+                        stack.append((dependency,False))
+                continue
+            tag=node[0]
+            if tag=="alias":
+                assigned[index]=assigned[node[1]]
+                continue
+            if tag=="app":
+                norm=(tag,assigned[node[1]],assigned[node[2]])
+            elif tag in ("lam","forallE"):
+                norm=(tag,node[1],assigned[node[2]],
+                      assigned[node[3]],node[4])
+            elif tag=="letE":
+                norm=(tag,node[1],assigned[node[2]],assigned[node[3]],
+                      assigned[node[4]],node[5])
+            elif tag=="proj":
+                norm=(tag,node[1],node[2],assigned[node[3]])
+            else:
+                norm=node
+            key=canonical(norm)
+            if key not in interned:
+                interned[key]=len(nodes)+1
+                nodes.append(norm)
+            assigned[index]=interned[key]
+        return (assigned[root],nodes)
+    def direct_constants(root):
+        found=set()
+        visited=set()
+        pending=[root]
+        while pending:
+            index=pending.pop()
+            if index in visited: continue
+            visited.add(index)
+            node=expressions[index]
+            if node[0]=="const": found.add(node[1])
+            pending.extend(children(node))
+        return tuple(sorted(found))
+    def root_tag(root):
+        while expressions[root][0]=="alias":
+            root=expressions[root][1]
+        return expressions[root][0]
+    kinds=("axiom","def","opaque","thm","quot")
+    for count,line in enumerate(raw.splitlines(),1):
+        if count>max_records or not line or len(line)>8_000_000:
+            raise NativeV3Error("invalid native record length/count")
         try:
             obj=json.loads(line)
-        except (ValueError, UnicodeError) as exc:
-            raise NativeV3Error("invalid NDJSON") from exc
+        except (ValueError,UnicodeError) as exc:
+            raise NativeV3Error("invalid native JSONL") from exc
         if not isinstance(obj,dict):
-            raise NativeV3Error("non-object record")
-        if rows == 1:
-            meta=obj.get("meta")
-            fmt=meta.get("format") if isinstance(meta,dict) else None
-            version=fmt.get("version") if isinstance(fmt,dict) else None
-            if not isinstance(version,str) or not version.startswith("3."):
+            raise NativeV3Error("non-object native record")
+        if count==1:
+            metadata=obj.get("meta")
+            fmt=metadata.get("format") if isinstance(metadata,dict) else None
+            v=fmt.get("version") if isinstance(fmt,dict) else None
+            if not isinstance(v,str) or not v.startswith("3."):
                 raise NativeV3Error("unsupported native format")
             continue
-        if "meta" in obj:
-            raise NativeV3Error("duplicate metadata")
-        tagged = [k for k in ("str","num","succ","max","imax","param",
-                               "bvar","sort","const","app","lam","forallE",
-                               "letE","proj","natVal","strVal","mdata",
-                               *kinds,"inductive") if k in obj]
+        if "meta" in obj: raise NativeV3Error("duplicate metadata")
+        tagged=[k for k in ("str","num","succ","max","imax","param",
+                             "bvar","sort","const","app","lam","forallE",
+                             "letE","proj","natVal","strVal","mdata",
+                             *kinds,"inductive") if k in obj]
         if len(tagged)!=1:
-            raise NativeV3Error("unsupported or multiply tagged record")
+            raise NativeV3Error("unsupported or multiply tagged native row")
         tag=tagged[0]
-        val=obj[tag]
+        value=obj[tag]
         if tag in ("str","num"):
-            if not isinstance(val,dict):
-                raise NativeV3Error("invalid name record")
-            prefix=name_ref(val.get("pre"))
-            segment=val.get("str") if tag=="str" else val.get("i")
-            if tag=="str" and (not isinstance(segment,str) or not segment):
-                raise NativeV3Error("invalid name segment")
+            if not isinstance(value,dict):
+                raise NativeV3Error("invalid name")
+            prefix=name(value.get("pre"))
+            segment=value.get("str") if tag=="str" else value.get("i")
+            if tag=="str" and (type(segment) is not str or not segment):
+                raise NativeV3Error("invalid string name")
             if tag=="num" and not integer(segment):
                 raise NativeV3Error("invalid numeric name")
             intern(names,obj.get("in"),
                    (prefix+"." if prefix else "")+str(segment),"name")
         elif tag in ("succ","max","imax","param"):
-            if tag=="succ":
-                node=("succ",level_ref(val))
-            elif tag=="param":
-                node=("param",name_ref(val))
+            if tag=="succ": node=("succ",level(value))
+            elif tag=="param": node=("param",name(value))
             else:
-                if not isinstance(val,list) or len(val)!=2:
+                if not isinstance(value,list) or len(value)!=2:
                     raise NativeV3Error("invalid universe pair")
-                node=(tag,level_ref(val[0]),level_ref(val[1]))
+                node=(tag,level(value[0]),level(value[1]))
             intern(levels,obj.get("il"),node,"universe")
         elif "ie" in obj:
             if tag=="bvar":
-                if not integer(val): raise NativeV3Error("invalid bvar")
-                node=("bvar",val)
-            elif tag=="sort":
-                node=("sort",level_ref(val))
+                if not integer(value): raise NativeV3Error("invalid bvar")
+                node=(tag,value)
+            elif tag=="sort": node=(tag,level(value))
             elif tag=="const":
-                if not isinstance(val,dict) or not isinstance(val.get("us"),list):
+                if not isinstance(value,dict) or not isinstance(value.get("us"),list):
                     raise NativeV3Error("invalid constant")
-                node=("const",name_ref(val.get("name")),
-                      tuple(level_ref(i) for i in val["us"]))
+                node=(tag,name(value.get("name")),
+                      tuple(level(i) for i in value["us"]))
             elif tag=="app":
-                node=("app",expr_ref(val["fn"]),expr_ref(val["arg"]))
+                node=(tag,expr(value["fn"]),expr(value["arg"]))
             elif tag in ("lam","forallE"):
-                if val.get("binderInfo") not in (
+                if value.get("binderInfo") not in (
                     "default","implicit","strictImplicit","instImplicit"):
-                    raise NativeV3Error("invalid binder info")
-                node=(tag,name_ref(val["name"]),expr_ref(val["type"]),
-                      expr_ref(val["body"]),val["binderInfo"])
+                    raise NativeV3Error("invalid binder information")
+                node=(tag,name(value["name"]),expr(value["type"]),
+                      expr(value["body"]),value["binderInfo"])
             elif tag=="letE":
-                if type(val.get("nondep")) is not bool:
-                    raise NativeV3Error("invalid let nondep")
-                node=(tag,name_ref(val["name"]),expr_ref(val["type"]),
-                      expr_ref(val["value"]),expr_ref(val["body"]),val["nondep"])
+                if type(value.get("nondep")) is not bool:
+                    raise NativeV3Error("invalid let dependency")
+                node=(tag,name(value["name"]),expr(value["type"]),
+                      expr(value["value"]),expr(value["body"]),value["nondep"])
             elif tag=="proj":
-                if not integer(val.get("idx")):
+                if not integer(value.get("idx")):
                     raise NativeV3Error("invalid projection index")
-                node=(tag,name_ref(val["typeName"]),val["idx"],expr_ref(val["struct"]))
+                node=(tag,name(value["typeName"]),value["idx"],expr(value["struct"]))
             elif tag=="natVal":
-                if not isinstance(val,str) or not val.isascii() or not val.isdecimal():
+                if type(value) is not str or not value.isascii() or not value.isdecimal():
                     raise NativeV3Error("invalid natural literal")
-                node=(tag,str(int(val)))
+                node=(tag,str(int(value)))
             elif tag=="strVal":
-                if not isinstance(val,str): raise NativeV3Error("invalid string literal")
-                node=(tag,val)
+                if type(value) is not str: raise NativeV3Error("invalid string literal")
+                node=(tag,value)
             elif tag=="mdata":
-                if not isinstance(val,dict):
-                    raise NativeV3Error("invalid metadata expression")
-                node=expr_ref(val["expr"])
+                node=("alias",expr(value["expr"]))
             else:
-                raise NativeV3Error("unsupported expression form")
-            intern(expressions,obj["ie"],node,"expression")
+                raise NativeV3Error("unsupported expression node")
+            intern(expressions,obj.get("ie"),node,"expression")
         elif tag in kinds:
-            if not isinstance(val,dict):
-                raise NativeV3Error("invalid declaration")
-            name=name_ref(val.get("name"))
-            typ=expr_ref(val.get("type"))
-            params=val.get("levelParams")
-            if not name or not isinstance(params,list):
+            if not isinstance(value,dict):
+                raise NativeV3Error("invalid native declaration")
+            declaration=name(value.get("name"))
+            typ=expr(value.get("type"))
+            params=value.get("levelParams")
+            if not declaration or not isinstance(params,list):
                 raise NativeV3Error("invalid declaration header")
-            universe_params=tuple(name_ref(i) for i in params)
-            value_present=tag in ("thm","def","opaque")
-            value=expr_ref(val.get("value")) if value_present else None
-            if selected_names is not None and name not in selected_names:
+            universes=tuple(name(i) for i in params)
+            has_proof=tag in ("thm","def","opaque")
+            proof=expr(value.get("value")) if has_proof else None
+            if selected_names is not None and declaration not in selected_names:
                 continue
-            canonical_type=canonical(("lean4export-v3-type",universe_params,typ))
-            def constants_in(node):
-                constants=set()
-                pending=[node]
-                # Explicit stack: do not recurse for dependency discovery.
-                while pending:
-                    item=pending.pop()
-                    if isinstance(item,(tuple,list)):
-                        if item and item[0]=="const":
-                            constants.add(item[1])
-                        pending.extend(item[1:])
-                return tuple(sorted(constants-{name}))
-            candidates.append(NativeCandidate(
-                name,tag,canonical_type,sha256(canonical_type).hexdigest(),
-                constants_in(typ),value_present,
-                sha256(canonical(value)).hexdigest() if value_present else "",
-                constants_in(value) if value_present else ()))
+            type_bytes=canonical(("lean4export-v3-type-dag-v1",universes,
+                                  root_tag(typ),expression_dag(typ)))
+            if len(type_bytes)>8_000_000:
+                raise NativeV3Error("selected type DAG exceeds size budget")
+            proof_bytes=canonical(expression_dag(proof)) if has_proof else b""
+            if len(proof_bytes)>8_000_000:
+                raise NativeV3Error("selected proof DAG exceeds size budget")
+            selected.append(NativeCandidate(
+                declaration,tag,type_bytes,sha256(type_bytes).hexdigest(),
+                tuple(x for x in direct_constants(typ) if x!=declaration),
+                has_proof,sha256(proof_bytes).hexdigest() if has_proof else "",
+                tuple(x for x in direct_constants(proof) if x!=declaration)
+                    if has_proof else ()))
         else:
-            # A mutual inductive group is a kernel-atomic declaration.
-            # Validate its referenced name/type indices, but do not split it
-            # into independently admissible candidate declarations.
-            if not isinstance(val,dict) or any(
-                not isinstance(val.get(field),list)
-                for field in ("types","ctors","recs")):
-                raise NativeV3Error("invalid inductive group")
-            if not val["types"]:
-                raise NativeV3Error("empty inductive group")
-            for field in ("types","ctors","recs"):
-                for item in val[field]:
+            # Grouped inductive constants are kernel-atomic: record references
+            # are checked here but the group is NOT promoted or projected.
+            if not isinstance(value,dict) or any(
+                not isinstance(value.get(k),list) for k in ("types","ctors","recs")
+            ) or not value["types"]:
+                raise NativeV3Error("invalid or empty inductive group")
+            for group in ("types","ctors","recs"):
+                for item in value[group]:
                     if not isinstance(item,dict):
                         raise NativeV3Error("invalid inductive member")
-                    name_ref(item.get("name"))
-                    expr_ref(item.get("type"))
-            unprojected_groups += 1
-    if not candidates:
-        raise NativeV3Error("no supported declarations")
-    if len({c.name for c in candidates})!=len(candidates):
+                    name(item.get("name"));expr(item.get("type"))
+    if not selected:
+        raise NativeV3Error("no supported selected declaration")
+    if len({d.name for d in selected})!=len(selected):
         raise NativeV3Error("duplicate declaration name")
-    # Core exports commonly include mutual inductive groups. The extractor
-    # has not projected those groups and may not claim complete DAG coverage.
-    # Callers must use type candidates as observations only.
-    return tuple(candidates)
+    return tuple(selected)
