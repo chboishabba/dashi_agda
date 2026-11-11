@@ -645,3 +645,54 @@ The BH4/PNP branch now carries `DASHI.Biology.Molecular.BH4RationalToBishopFinit
 Companion #1454 now source-writes `BH4OriginalRationalSemidiscreteOperatorExact`, a real **typed** producer of the entire 27×29 rational semidiscrete RHS from 27×54 native incidence, 54×29 currents, 29×12 stoichiometry and 27×12 rates. `rational369SemidiscreteAt` verifies each cell/species lookup agrees definitionally with bond-plus-reaction contributions. `computedRationalRHSConservationLiftsToBishop` applies the pre-existing six-axis Bishop embedding to this *same computed RHS*, with six explicit rational zero-defect witnesses. No right-shaped matrix is falsely identified with a source-authenticated Rhea matrix.
 
 **Distinct original obligations:** the native signed 54-edge incidence of this arithmetic chart must be welded to actual geometry/signed-current owners on #1471; original source-certified Nat CHNOP/charge left-kernels must be transported into rational setoid arithmetic for all 12 reaction columns; the six RHS zero-defect witnesses must be *derived* from those proofs. Then real SG/mass-action, boundary work and same-object tissue refinement remain separate. This source text has not been kernel-checked; branches are still unmerged.
+
+
+### 2026-11-11 cross-PR P0 six-axis generated original rational/Bishop producer
+
+Companion BH4/PNP PR #1454 now has three original-size,
+source-written Agda finite-algebra owners:
+`BH4RationalNativeBondCancellationExact`
+(54×29 paired signed rational bond cancellation),
+`BH4RationalRateWeightedSourceConservationExact`
+(27×12 arbitrary rational rate conservation from
+12 source column left-kernel equalities), and
+`BH4RationalNativeSourceCompositionExact`
+(same 6 axes, same rates/fluxes, rational and Bishop
+paired-bond-plus-reaction conservation).
+All are imported into the existing
+`KitzerowBH4EvidenceEverything` Golden root.
+
+The existing
+`BH4OriginalRationalSemidiscreteOperatorExact`
+already has the concrete typed 27×54 incidence,
+54×29 fluxes, 29×12 stoichiometry and 27×12 rates
+to produce the original 783-coordinate RHS, so that
+owner is reused rather than duplicated. Its current
+six-weighted-zero consumer still requires the producer.
+
+The original SHA-256-pinned Rhea Agda source generator
+now emits rational sides **definitionally from the same
+generated original Nat columns**, source-derived six
+CHNOP/signed-charge weight axes, 72 explicit rational
+columnwise balance clauses, and both original rational
+and Bishop finite producer specializations. No second
+hand-authored stoichiometric panel or measured rate
+is asserted. The source itself and the generated
+module remain absent until original bytes are supplied,
+and all emitted proofs are pending Agda 2.9 kernel checking.
+
+**Next exact physical/kernel cut:** identify the
+actual 27×54 signed incidence with the paired
+54-edge cancellation, and the actual 29×12 rational
+stoichiometric RHS with the gross same-source
+reactants/products. Then derive the six zero
+defects of the **existing computed** 27×29 RHS,
+apply the already-written rational-to-Bishop
+consumer, and only then address genuine
+Bishop-real SG/mass-action, compact simplex,
+Brouwer, positive root, free energy, six-face
+boundary work, tissue same-object observation
+and independent longitudinal validation.
+Neither arbitrary rational bond values nor
+a generated source-reference string can
+substitute for original physical calibration.
