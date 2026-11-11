@@ -575,3 +575,27 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Proof-boundary note:** The above all-degree finite equalities and even-cutoff limit arguments are source-written and connected, but have not yet passed Agda 2.9 \`--safe\`. They do **not yet identify the full factorial complex series for arbitrary imaginary inputs with \`BishopSetoidComplexExact.expC T\`**: the odd-cutoff control (vanishing omitted term), all-input factorial convergence, and the full real/imaginary Cartesian Cauchy-product weld remain. These are precise remaining next-original-source proofs; not merely interface records.
 
 **Remaining P1 onward** after kernel verification: (a) all-cutoff Bishop imaginary-axis factorial series limit; (b) original \(e^{x+iy}=e^x(\cos y+i\sin y)\) from literal series Cauchy product; (c) original \(\exp_C L(w)=1+w\) via all-degree nested-composition coefficient equality and uniform Bishop majorant; (d) construct original upper exponential fixed point, reciprocal disk, derivative/Koenigs/Abel and global Kneser; (e) true selected Bishop modular \(q\), \(\Delta\), \(j\), and later observer/contour claims.
+
+
+## 2026-11-11 — P0 focused-checker recovery + original Bishop odd-cutoff constructive modulus
+
+**P0 blocker found and repaired:** on PR head \`222aaaa328bda1987965495634eb4de894a2065e\`, \`scripts/check_analytic_j_tetration_golden_local.sh\` contained a malformed unterminated \`grep -nE\` invocation and a complete duplicated suffix. It could not act as an exact-head kernel acceptance runner. The script was rewritten to have one valid RHS-placeholder lint, one pass over targets, one invocation of pinned \`scripts/run_agda29_parallel_check.sh --safe\`, and one final pass line. **Still requires actual local execution.**
+
+**New same-source finite proof:** \`DASHI/Moonshine/AbelBishopFactorialOddCutoffFiniteExact.agda\`.
+- \`originalBishopImaginaryAxisRealOddPrefix\`: for all \(N\), the literal \(2N+1\)-term factorial complex real prefix is exactly the configured \(N\)-term cosine prefix plus the next configured cosine coefficient.
+- \`originalBishopImaginaryAxisImagOddPrefix\`: literal \(2N+1\)-term imaginary prefix equals the \(N\)-term configured sine prefix (even-degree imaginary term vanishes).
+- \`originalBishopImaginaryAxisOddCutoffRemainder\`: the difference of the \(2N+1\) and \(2N\) real prefixes is exactly \`Elementary.cosineTerm (Cartesian.dataSet T) y N\`.
+- \`originalBishopConfiguredCosineTermTendsZero\`: **reuses pinned** \`Sequence.∑xₙisConvergent⇒xₙ→0\` and the actual configured cosine absolute convergence to prove the omitted cosine term vanishes with constructive Bishop convergence, no new oracle.
+- \`originalBishopImaginaryAxisOddRealPrefixConverges\` and \`originalBishopImaginaryAxisOddImagPrefixConverges\`: odd prefixes converge to the **same** configured cosine/sine limits, using the Bishop limit addition, equivalent-limit transport, and source finite-prefix identities.
+
+**New explicit executable cutoff:** \`DASHI/Moonshine/AbelBishopFactorialOddCutoffVanishingExact.agda\`.
+- \`originalBishopOddCutoffCosineModulus T y k\` unpacks the **actual pinned Bishop** \`Sequence.con*\` witness for \`cosineTerm T y → 0\`, producing a natural cutoff \(N(k)\).
+- \`originalBishopOddCutoffCosineBound\` proves for every \(k>0\) and \(n≥N(k)\):
+\[
+|c_n(y)| \le (1/k)^\star.
+\]
+- The cutoff source is the existing Bishop absolute-series convergence and \`∑xₙisConvergent⇒xₙ→0\`. There is **no new factorial-tail modulus authority**.
+
+**Acceptance status:** these are source-written declarations, added to the focused local Agda 2.9 \`--safe\` targets, **not kernel-checked**. Earlier even-prefix source modules also remain unchecked. The omitted term vanishing is directly grounded in the pinned upstream \`Sequence.agda\` theorem, whose exact definition was inspected at commit \`240e38c7f6938f20f865b1f956c5f084da48bd54\`.
+
+**Still unpaid:** (P0) exact-head Agda/Nix execution and repairs, (P1) combine even- and odd-cutoff convergences for *every* \`M : Nat\` without a fabricated subsequence principle; (P1) full complex factorial-series product/Cartesian exp identification for arbitrary \(x+iy\); (P1) actual Bishop exp–log inverse and selected fixed point; (P1g) global Kneser; (P2–P4) modular j, observer, and contour. Do not claim the full Euler identity in the kernel from only separately proved parity subsequences.
