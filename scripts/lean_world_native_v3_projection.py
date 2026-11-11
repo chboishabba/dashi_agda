@@ -39,6 +39,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000):
     levels = {0: ("zero",)}
     expressions = {}
     candidates = []
+    unprojected_groups = 0
     def ref(table, value, label):
         if not integer(value) or value not in table:
             raise NativeV3Error("unresolved "+label+" reference")
@@ -171,11 +172,27 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000):
                 name,tag,canonical_type,sha256(canonical_type).hexdigest(),
                 tuple(sorted(constants-{name})),value_present))
         else:
-            # Mutual inductive blocks are not safe to project piecemeal:
-            # checker validation and group semantics are both required.
-            raise NativeV3Error("inductive group projection not implemented")
+            # A mutual inductive group is a kernel-atomic declaration.
+            # Validate its referenced name/type indices, but do not split it
+            # into independently admissible candidate declarations.
+            if not isinstance(val,dict) or any(
+                not isinstance(val.get(field),list)
+                for field in ("types","ctors","recs")):
+                raise NativeV3Error("invalid inductive group")
+            if not val["types"]:
+                raise NativeV3Error("empty inductive group")
+            for field in ("types","ctors","recs"):
+                for item in val[field]:
+                    if not isinstance(item,dict):
+                        raise NativeV3Error("invalid inductive member")
+                    name_ref(item.get("name"))
+                    expr_ref(item.get("type"))
+            unprojected_groups += 1
     if not candidates:
         raise NativeV3Error("no supported declarations")
     if len({c.name for c in candidates})!=len(candidates):
         raise NativeV3Error("duplicate declaration name")
+    # Core exports commonly include mutual inductive groups. The extractor
+    # has not projected those groups and may not claim complete DAG coverage.
+    # Callers must use type candidates as observations only.
     return tuple(candidates)
