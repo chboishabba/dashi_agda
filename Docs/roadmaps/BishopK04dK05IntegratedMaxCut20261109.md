@@ -1049,3 +1049,35 @@ OPEN. The source 144-cell relation field is still larger.
 Bishop P1 original analytic exp/atan, P2 independent zeta
 and P3 Gamma/Xi remain analytically open.
 Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11 H1.01 original action obstruction: selected transpose collapses Heisenberg centre
+
+The real original `Base369RelationalUpdateKernelExact`
+is asymmetric and context-indexed; its action-equivariance
+and propagation-equivalence evidence is separate from the
+existing finite Heisenberg carrier. This pass does not
+manufacture a source action from cardinality.
+
+`TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact`
+uses TWO original distinct `H.central` elements and actual
+`StageTwelveGrothendieckRelationHyperformExact.transposeRelation`,
+through the selected 13-parameter image of the ORIGINAL
+144-cell ordered relation field. Because transpose moves
+selected (0,1) centre into omitted (1,0), the coarse
+13-observation COLLAPSES two different central phases.
+Consequently this selected coarse transpose has no left
+inverse and cannot be an automorphism of the original
+Heisenberg group. A separate finite three-phase/144-address
+regression confirms the exact collision, but Agda kernel
+checking remains outstanding.
+
+The H1.01 remaining gate is independently sourced semantic
+action agreement/equivariance, not additional group-coordinate
+bijections. In particular, original relational transpose
+cannot be promoted to the Heisenberg automorphism; a valid
+observer must retain the original 131 residual cells if
+full original directed relation transport is required.
+H2.01 genuine ITIR world nodes, H2.02 original full-world
+heterogeneous seams and analytic P1–P3 remain open.
+Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
