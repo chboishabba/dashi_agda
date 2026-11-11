@@ -285,3 +285,56 @@ independentMatchesTransported240 :
   supportSigns (actPackedRegular g p)
 independentMatchesTransported240 g p =
   sym (independentCartesianActionAgrees g p)
+
+-- Fixed-point equivalence for a componentwise generator action.
+-- This is the abstract theorem behind the exact 15×16 character
+-- multiplication in check_round56_240_b4_tensor_characters.py.
+record FixedFactors
+  (g : Action.HypercubicGenerator) (p : SupportHalf256) : Set where
+  field
+    fixedSupport :
+      actMask g (supportMask p) ≡ supportMask p
+    fixedF4HalfRoot :
+      F4.actHalf g (halfRootSigns p) ≡ halfRootSigns p
+open FixedFactors public
+
+productFixedImpliesFactors :
+  (g : Action.HypercubicGenerator) (p : SupportHalf256) →
+  actSupportHalf g p ≡ p → FixedFactors g p
+productFixedImpliesFactors g p eq = record
+  { fixedSupport = cong supportMask eq
+  ; fixedF4HalfRoot = cong halfRootSigns eq
+  }
+
+factorsFixedImpliesProduct :
+  (g : Action.HypercubicGenerator) (p : SupportHalf256) →
+  FixedFactors g p → actSupportHalf g p ≡ p
+factorsFixedImpliesProduct g (supportHalf256 mask signs) f
+  rewrite fixedSupport f | fixedF4HalfRoot f = refl
+
+-- Generator fixed points on the ORIGINAL source grid are transported
+-- exactly to fixed points of the independent support×F4-half action.
+originalFixedImpliesProductFixed :
+  (g : Action.HypercubicGenerator) (c : Grid.GridCell4) →
+  Action.act g c ≡ c →
+  actSupportHalf g (encode256 c) ≡ encode256 c
+originalFixedImpliesProductFixed g c eq =
+  trans (sym (full256Equivariant g c)) (cong encode256 eq)
+
+productFixedImpliesOriginalFixed :
+  (g : Action.HypercubicGenerator) (c : Grid.GridCell4) →
+  actSupportHalf g (encode256 c) ≡ encode256 c →
+  Action.act g c ≡ c
+productFixedImpliesOriginalFixed g c eq =
+  trans
+    (sym (source256RoundTrip (Action.act g c)))
+    (trans
+      (cong decode256
+        (trans (full256Equivariant g c) eq))
+      (source256RoundTrip c))
+
+-- For all 7 named generators, the exact finite test counts factors:
+-- flip: 15 fixed supports × 0 fixed signs = 0 fixed cells.
+-- swap: 7 fixed supports × 8 fixed signs = 56 fixed cells.
+-- Only the fixed-point logical equivalence is proved here in Agda;
+-- the finite cardinality enumeration is independently executable.
