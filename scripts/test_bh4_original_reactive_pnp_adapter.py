@@ -317,3 +317,24 @@ def test_original_rational_continuity_rejects_binary_floats_and_bad_source(monke
             source,pinned_sha256=sha,
             signed_native_bond_fluxes=bonds,
             signed_original_reaction_rates=rates)
+
+
+def test_original_checker_rejects_nonintegral_or_misshapen_matrix_under_optimized_python(monkeypatch):
+    # Explicit ValueError gates, not disabled Python asserts.
+    import check_bh4_original_panel_spatial_events as Checker
+    certificate={"reactions":[]}
+    base={
+        "species_index":["S0"],
+        "reaction_index":["R0"],
+        "matrix":[[0]],
+        "finite_formula_residuals":[],
+        "external_exchange":[],
+    }
+    for altered, pattern in (
+        ({**base,"matrix":[[]]}, "dimensions"),
+        ({**base,"matrix":[[0.5]]}, "exact Python integers"),
+        ({**base,"matrix":[[True]]}, "exact Python integers"),
+    ):
+        monkeypatch.setattr(Checker,"build_matrix",lambda _, m=altered: m)
+        with pytest.raises(ValueError,match=pattern):
+            Checker.check_certificate(certificate,full_panel=False)
