@@ -1103,3 +1103,41 @@ same-object semantic identification. H1.01 independent
 appraisal/Heisenberg action equivariance remains open; H2.01
 ITIR node and H2.02 actual world-fabric matches remain open.
 No Agda kernel receipt.
+
+
+### 2026-11-11: actual nontrivial finite Heisenberg action on source 13+131 relation data
+
+New `TernaryThirteenOriginalHeisenbergResidualActionExact` goes
+beyond an uninhabited relational/appraisal equivariance record:
+the **original** finite Heisenberg cocycle-bearing group
+now left-acts on the exact 13-word/normalized-131-cell
+original relational normal form. Group-action identity,
+composition and inverse are source-written from original
+Heisenberg group laws; all 131 omitted relation cells
+are preserved exactly. The corresponding action on the
+actual original 144 ordered relation cells has exact
+13-code transport and pointwise residual invariance.
+The action is proved nontrivial by an original translation
+generator with an actual distinct state.
+
+Also fixed a real type bug in the prior
+`TernaryThirteenOriginalHeisenbergRelationalImageExact`
+selected-image proof: its first Σ component must be the
+original source 12+centre valuation derived from the
+Heisenberg product, not the raw group element. The fix is
+commit `05dd669`. New original action commits
+`3f147cd`, `9e9ac8d`; root imports
+`ac9d0a4`, `eedb353`, `970b2c4`.
+
+A new reproducible finite model test
+`scripts/check_heisenberg_original_full_residual_action.py`
+passed 20,000 deterministic original-cocycle action trials.
+This is **not** Agda kernel checking.
+
+The decisive independent H1.01 source gap remains actual
+relational/appraisal action selection and equivariance with
+its proper participant, context, provenance and observer
+semantics. H2.01 genuine ITIR nodes, H2.02 actual
+heterogeneous original-world edge source matches and
+analytic Bishop P1, zeta P2 and Gamma/Xi P3 remain OPEN.
+See the Hyperform13 max-cut roadmap for full proof inventory.
