@@ -1790,3 +1790,56 @@ pytest was not executed in this session.
 scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4RationalSemidiscreteBilinearityExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 ```
+
+
+### 2026-11-11 P0 exact unnormalised-rational finite and weighted Fubini
+
+Added `DASHI.Biology.Molecular.BH4RationalFiniteFubiniExact.agda`
+to the existing BH4 Golden import tree. This is a reusable
+finite-algebraic lemma donor **in the identical ℚᵘ setoid**
+as `BH4OriginalRationalSemidiscreteOperatorExact` and
+`BH4RationalToBishopFiniteContinuityExact`:
+
+- `qFiniteSum`, `qFiniteSumCong`,
+  `qSumZipAdd`, `qSumReplicateZero`.
+- `qColumnTotals`: fold arbitrary finite site/species
+  rational matrices columnwise using actual `Q._+_`.
+- `qFiniteFubini`, `original27x29RationalFubini`:
+  transpose finite double sums without creating a new
+  physical state or changing rational equality to
+  propositional equality.
+- `qMulZero`, `qMulDistributes`,
+  `qWeightedRowAdd`, `qWeightedZeroRow`.
+- `qWeightedFiniteFubini`,
+  `original27x29WeightedFubini`: for arbitrary original
+  29-vectors `weights` and arbitrary 27×29 rational
+  rows, prove equality (under ℚᵘ rational equivalence)
+  of the canonical original `Lift.sourceSpatialWeighted`
+  and the same weighted row applied after columnwise
+  27-site totals.
+- `qWeightedDotCong`,
+  `qWeightedColumnZeroImpliesSpatialZero`:
+  a derived weighted-global-zero theorem from a
+  **per-species 27-site zero proof**, not from a
+  six-axis arbitrary global-zero certificate.
+
+The important exact *remaining* P0 dependency is to
+prove for each original species, using the actual
+`sourceNativeIncidence : Matrix 27 54`,
+that the 27-site total of the selected operator's
+**transport** sub-RHS is zero, while the original
+29×12 reaction sub-RHS has zero in each of the six
+weighted coordinates from the generated source
+72 column cases and arbitrary 27×12 rational rates.
+Then use weighted row splitting and these finite
+Fubini identities to derive all six
+`Lift.sourceSpatialWeighted ... computedRHS ≃ 0`
+without any global conservation input.
+
+This finite algebra construction does not imply
+Bishop-real SG constitutive identity, actual
+biological rate calibration, compactness, Brouwer
+or source-paid tissue boundary conditions.
+**New Agda source is committed, not kernel checked**;
+the current container has no `agda` or `nix`
+executable.
