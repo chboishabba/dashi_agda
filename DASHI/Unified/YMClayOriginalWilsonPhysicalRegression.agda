@@ -114,3 +114,9 @@ import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringAlgebraExact as 
 
 -- P0.06 exact negative control: cyclic trace axioms admit arbitrary constant real value, so genuine normalized SU(N) matrix trace bound must be sourced independently.
 import DASHI.Physics.YangMills.YMClayOriginalPlaquetteTraceCyclicityInsufficientExact as OriginalPlaquetteTraceRangeNegativeControl
+
+-- P0.06: source SU(N) matrix trace bound transports to every original cutoff plaquette and all finite Wilson words; explicit analytic source remains unpaid.
+import DASHI.Physics.YangMills.YMClayE1D1OriginalSUNTraceToAllWordsBoundExact as OriginalSUNTraceAllWordBounds
+
+-- P0 original R445 cross numerator: F*G is exactly original concatenated Wilson word, on actual signed plaquette source and Haar congruence.
+import DASHI.Physics.YangMills.YMClayE1D1OriginalWilsonWordConcatenationR445Exact as OriginalWilsonWordConcatenation
