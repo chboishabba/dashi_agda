@@ -44,6 +44,7 @@ python3 scripts/run_lean_world_join_proofs.py \
   --max-source-bytes 134217728 \
   --timeout 600 \
   --lean "$(command -v lean)" \
+  --persist-joins \
   --output "$out/batteries-five-theorem-joins.json"
 
 # Exact cross-repo import closure: mathlib imports original Batteries source.
@@ -62,6 +63,7 @@ python3 scripts/run_lean_world_join_proofs.py \
   --max-source-bytes 268435456 \
   --timeout 600 \
   --lean "$(command -v lean)" \
+  --persist-joins \
   --output "$out/mathlib-five-theorem-cross-repo-joins.json"
 
 echo "BIG_JOIN_COMPLETE: 10 source-original Lean theorems joined and compiled"
