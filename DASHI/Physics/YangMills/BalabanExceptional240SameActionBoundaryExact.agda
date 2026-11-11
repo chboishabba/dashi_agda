@@ -43,24 +43,22 @@ fourOuterOrbitIsNotOneEightyBlock ()
 -- Actual action / operator recognition must specify the *same actors*
 -- and commute pointwise. Matching dimensions or coefficients is weaker.
 record SameAction240Comparison
-  (Root : Set)
-  (Symmetry : Set)
-  (cellAct : Symmetry → Grid.GridCell4 → Grid.GridCell4)
+  (RegularRoot Root Symmetry : Set)
+  (cellAct : Symmetry → RegularRoot → RegularRoot)
   (rootAct : Symmetry → Root → Root) : Set₁ where
   field
-    regularSource : Grid.GridCell4 → Set
-    targetIsRoot : Root → Set
-    toRoots : Grid.GridCell4 → Root
-    fromRoots : Root → Grid.GridCell4
+    -- The *regular 240-cell subtype* must be supplied, not the full
+    -- 256-element GridCell4 carrier with its 16 excluded infrared cells.
+    forgetCell : RegularRoot → Grid.GridCell4
+    toRoots : RegularRoot → Root
+    fromRoots : Root → RegularRoot
     sourceAfterRoundTrip :
-      (c : Grid.GridCell4) → fromRoots (toRoots c) ≡ c
+      (c : RegularRoot) → fromRoots (toRoots c) ≡ c
     targetAfterRoundTrip :
       (r : Root) → toRoots (fromRoots r) ≡ r
     intertwinesSelectedAction :
-      (s : Symmetry) (c : Grid.GridCell4) →
+      (s : Symmetry) (c : RegularRoot) →
       toRoots (cellAct s c) ≡ rootAct s (toRoots c)
-    respectsRegularSource : (c : Grid.GridCell4) →
-      regularSource c → targetIsRoot (toRoots c)
     selectedRootInnerProductTransport : Set
     independentRootCarrierAuthentication : Set
     invarianceUnderSelectedExternalMomenta : Set
@@ -76,6 +74,13 @@ physicalInvariantSumReduction :
 physicalInvariantSumReduction =
   Quad.regularSumCanonicalizes
 
--- P0 physical gate: instantiate GeneratorInvariantRationalContribution
--- for the literal selected Wilson/ghost/Haar scalar after respecting
--- fixed external momenta and interval enclosures. No instance here.
+-- Existing physical owners already reduce this further:
+-- BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact:
+--    source reflection/permutation laws -> 7 generator certificates.
+-- BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact:
+--    literal recursive evaluator transports over 240 generated cells.
+-- BalabanClayT4WilsonOneLoopHyperoctahedralGeneratorCertificateExact:
+--    7 generators for full B4, 6 for fixed external axis.
+-- Remaining leaf is a selected literal source theorem/certificate and
+-- exact trig/interval environment compatibility, not geometric counting.
+-- No physical certificate is forged here.
