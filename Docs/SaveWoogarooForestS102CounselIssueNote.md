@@ -1,5 +1,18 @@
 # Save Woogaroo Forest — Queensland interim conservation order issue note
 
+## 11 November 2026 — POST-APPROVAL COUNSEL UPDATE (controlling)
+
+The **signed Commonwealth EPBC 2019/8575 Part 9 approval dated 16 October 2026** has now been obtained. This supersedes any pre-federal-approval assumption below. The Queensland `9281/2024/OW` negotiated decision `A12705835` and plans `A12705838` remain legally distinct from federal authorisation. An NCA **s102** interim conservation order is a **potential administrative preservation route**, not granted or shown to be mandatory; independent legal/ecological application evidence is still required.
+
+**Urgent factual questions:** (1) present actual vegetation clearing/earthworks, dates, coordinates and Condition 6(a) compliance; (2) matched federally approved action/retention/LRSA/Phase One geometry, C4 species-habitat clearing caps, and actual C52 commencement; (3) Avonvale/Esk precommencement VDECs under signed C24 and MWW pre-outside-Phase-One VDEC under C25; (4) recent independently verified koala mature-canopy/corridor/refuge evidence, threat imminence and an identified s102 statutory gateway; (5) counsel review of standing and appropriate timing/relief. A signed approval does not prove that work commenced, and unlocated public records do not prove a breach.
+
+**Lawyer decision:** assess, with appropriate instructions and professional advice, the evidence needed to form the Ministerial opinion under ss102–107, including possible off-site threatening processes and interaction with existing local approvals; examine any other statutory mechanisms only after exact applicability/grounds. No request, referral, emergency order, s102 decision, court application or filing has been made.
+
+Read [current legal team handoff](SaveWoogarooForestLegalTeamBrief.md) before relying on this historical note. Preserve independence of the original QUT/QCC ecology and authorship.
+
+---
+
+
 ## What this note is for
 
 This note identifies the practical legal question under **Part 6 of the Nature Conservation Act 1992 (Qld), especially ss 102–107**. It is not a court pleading and does not assume that an order will be made.
