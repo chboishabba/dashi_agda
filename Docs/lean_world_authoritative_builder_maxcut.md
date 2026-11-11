@@ -169,3 +169,62 @@ python3 -m unittest discover -s tests -p \
 ```
 These three new regressions are authored but no live exact-head run was
 observed here. Passing the test only shows dataflow and fail-closed status.
+
+## 11 November — runnable pinned real-semantic maximum-cut acceptance
+
+The new files `scripts/lean_world_native_v3_projection.py` and
+`scripts/run_lean_world_native_v3_projection.py` consume the official
+lean4export 3.x name/universe/expression/declaration records, resolve their
+integer references, and produce exact selected-type and proof-term structural
+digests with direct named constant dependencies. Mutual inductive groups are
+inspected conservatively but **not** independently projected or treated as
+certified. A type projection receipt remains `kernel_certified=false`.
+
+The main real acceptance gate is
+`scripts/run_lean_world_real_semantic_acceptance.py`. It uses the committed
+`Donor.lean` and `Consumer.lean` original fixtures, both checked against
+the local HEAD Git objects. It clones and builds upstream tools in a temporary
+directory at the following **full immutable source commits**:
+
+- lean4export `v4.28.0` at
+  `d065b0009aed0520e9e99752847a33b337661690`;
+- Tenet `v0.11.3` at
+  `026a35ce8c433b4785a8be8ae15952803ddfacc5`.
+
+It requires Nix-resolved Lean **4.28.0**, `lake`, `git`, and .NET SDK 10
+(`dotnet --version` must start with `10.`). It compiles original donor
+and consumer Lean modules independently, exports both exact declaration
+environments using the pinned exporter, checks both with Tenet while rejecting
+`sorryAx`, and REQUIRES a rejection of a pinned negative corpus file. Exact
+source, .olean, exporter, checker source/assembly, native export and output
+digests are recorded. Temporary tool checkouts are deleted on exit.
+
+Run from an isolated worktree at the committed #1495 head:
+```sh
+python3 -m unittest discover -s tests -p 'test_lean_world_native_v3_projection*.py' -v
+python3 -m unittest discover -s tests -p 'test_lean_world_external_checker.py' -v
+python3 -m unittest discover -s tests -p 'test_lean_world_native_check_observation.py' -v
+# Run inside the original Nix Lean environment, with .NET SDK 10 available:
+python3 scripts/run_lean_world_real_semantic_acceptance.py \
+  --output-dir /tmp/dashi-lean-semantic-original
+```
+
+The last command writes one immutable `*.semantic-acceptance.json` as the
+manifest, plus matching `*.source-world.jsonl` and
+`*.candidate-world.jsonl` files. The exact output receipt path is printed.
+
+**Cross-PR maximum cut:** on #1484, the new
+`scripts/run_lean_world_semantic_full_acceptance.py` takes that receipt,
+the two exact #1495 fixture paths and the pinned `lean` binary, builds the
+original canonical DAG, writes its candidate declarations transactionally in
+a fresh UUID-named PostgreSQL schema, retrieves the donor, regenerates the
+exact original consumer, kernel-elaborates it, and drops the temporary schema.
+See #1484's performance/max-cut roadmap for the invocation.
+
+A successful run supports `independent_checker_observed`,
+`candidate_fibre_retrieved` and `consumer_lean_elaborated`, **not**
+`world_admitted` or a generally authenticated permanent theorem ledger.
+External checker/build-chain trust, general native-v3 coverage, source-owner
+attribution for arbitrary imports, and general Agda-to-Lean/fibre reuse remain
+separate obligations. The new tests and acceptance scripts have NOT been
+executed in the operator environment for these new commits.
