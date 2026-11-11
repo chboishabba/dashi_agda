@@ -294,6 +294,45 @@ def generate_joins(root_module,donors,*,join_namespace="DASHIJoined"):
             "#print axioms "+alias,
             ""
         ])
+    # Actual proof composition: a NEW theorem whose proposition is the
+    # conjunction of ALL original theorem propositions, and whose proof
+    # term applies And.intro to EVERY original proof constant.
+    if len(donors)>=2:
+        donor_names=",".join(lean_name(x) for x in donors)
+        lines.extend([
+            "run_cmd do",
+            "  let donors : Array Name := #["+donor_names+"]",
+            "  let env ← getEnv",
+            "  let mut universes : List Name := []",
+            "  let mut accumulatedType : Option Expr := none",
+            "  let mut accumulatedProof : Option Expr := none",
+            "  for donor in donors do",
+            "    let some (.thmInfo info) := env.find? donor",
+            "      | throwError \"expected original theorem in conjunction: {donor}\"",
+            "    universes := (universes ++ info.levelParams).eraseDups",
+            "    let proof := mkConst donor (info.levelParams.map Level.param)",
+            "    match accumulatedType, accumulatedProof with",
+            "    | none, none =>",
+            "      accumulatedType := some info.type",
+            "      accumulatedProof := some proof",
+            "    | some earlierType, some earlierProof =>",
+            "      accumulatedProof := some <| mkApp4 (mkConst `And.intro) earlierType info.type earlierProof proof",
+            "      accumulatedType := some <| mkApp2 (mkConst `And) earlierType info.type",
+            "    | _, _ => throwError \"inconsistent conjunction state\"",
+            "  let some joinedType := accumulatedType",
+            "    | throwError \"missing theorem conjunction type\"",
+            "  let some joinedProof := accumulatedProof",
+            "    | throwError \"missing theorem conjunction proof\"",
+            "  addDecl <| Declaration.thmDecl {",
+            "    name := `DASHIJoined.combined,",
+            "    levelParams := universes,",
+            "    type := joinedType,",
+            "    value := joinedProof",
+            "  }",
+            "#check DASHIJoined.combined",
+            "#print axioms DASHIJoined.combined",
+            ""
+        ])
     return ("\n".join(lines)+"\n").encode()
 
 def run_compiler(lean,root,relative,*,environment,timeout):
@@ -358,6 +397,8 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
         for i in range(len(donors)):
             if "DASHIJoined.join"+str(i) not in output_text:
                 raise JoinError("missing original theorem check output")
+        if len(donors)>=2 and "DASHIJoined.combined" not in output_text:
+            raise JoinError("missing newly composed multi-theorem proof")
         report={
             "status":"original-lean-theorem-joins-compiled",
             "lean_version":version_text,
@@ -369,6 +410,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
             "compiled_modules":module_receipts,
             "original_source_snapshots":plan.get("source_snapshots",[]),
             "donor_names":list(donors),
+            "genuinely_composed_conjunction":len(donors)>=2,
             "generated_join_source_sha256":sha256(generated).hexdigest(),
             "joined_olean_sha256":joined_digest,
             "joined_axiom_report":output_text[-12000:],
