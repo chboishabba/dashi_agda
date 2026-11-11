@@ -148,25 +148,37 @@ class CanonicalLeanWorld:
         return True
 
     def seal(self):
-        """Fail on missing dependency owners, cycles or invalid source context."""
-        active=set()
-        done=set()
+        """Validate original dependency closure iteratively, without stack overflow.
 
-        def visit(node):
-            if node in active:
-                raise WorldError("cyclic exporter dependency graph")
-            if node in done:
-                return
-            if node not in self.occurrences:
-                raise WorldError("unresolved original dependency: "+repr(node))
-            active.add(node)
-            for dep in self._dependencies[node]:
-                visit(dep)
-            active.remove(node)
-            done.add(node)
-
-        for origin in sorted(self.occurrences):
-            visit(origin)
+        Only an edge to an active ancestor is a cycle. Shared dependencies
+        reached from separate branches are legitimate DAG joins.
+        """
+        active = set()
+        done = set()
+        for root in sorted(self.occurrences):
+            if root in done:
+                continue
+            if root not in self.occurrences:
+                raise WorldError("unresolved original dependency: " + repr(root))
+            active.add(root)
+            stack = [(root, iter(self._dependencies[root]))]
+            while stack:
+                node, remaining = stack[-1]
+                try:
+                    dependency = next(remaining)
+                except StopIteration:
+                    stack.pop()
+                    active.remove(node)
+                    done.add(node)
+                    continue
+                if dependency in active:
+                    raise WorldError("cyclic exporter dependency graph")
+                if dependency in done:
+                    continue
+                if dependency not in self.occurrences:
+                    raise WorldError("unresolved original dependency: " + repr(dependency))
+                active.add(dependency)
+                stack.append((dependency, iter(self._dependencies[dependency])))
         self._sealed = True
 
     def fibre_candidates(self, profile, type_head, universe_shape, limit,
