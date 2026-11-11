@@ -17,9 +17,9 @@ module DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringAlgebraExact whe
 
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
-open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using
-  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; -ℝ_; _<ℝ_; _≤ℝ_)
+  (ℝ; 0ℝ; 1ℝ; _+ℝ_; _-ℝ_; _*ℝ_; -ℝ_; _<ℝ_; _≤ℝ_; mulZeroˡ; *-comm)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -30,6 +30,7 @@ import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact 
 import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact as Center
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as Numerator
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 -- P0.01 is a real-carrier compatibility requirement, NOT derivable
@@ -39,6 +40,9 @@ record OriginalRealCenteringLaws : Set where
     subtractionAsNegation :
       (x c : ℝ) →
       x -ℝ c ≡ x +ℝ (-ℝ c) *ℝ 1ℝ
+
+    subtractionZeroRight :
+      ∀ value → value -ℝ 0ℝ ≡ value
 
     centeredCancellation :
       (numerator value partition : ℝ) →
@@ -155,3 +159,95 @@ module _
         (centeredCancellation realLaws
           (bareNumerator F) (bareExpectation F) barePartition
           (sym (originalBareExpectationMultiplyPartition F))))
+
+  ----------------------------------------------------------------------
+  -- P0.05: one-sided centered original fine Wilson insertion.
+  -- The bare centered numerator vanished in P0.04.  This theorem
+  -- uses only the selected real carrier's x-0=x law beyond P0.01-04.
+  -- Nothing here assumes physical RG contraction.
+  ----------------------------------------------------------------------
+
+  originalWilsonCrossNumeratorIsFineCenteredInsertion :
+    (F : CoarseTest) →
+    Center.X theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak F
+    ≡
+    barePartition *ℝ
+      (Center.fineNumerator
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak
+        (λ U → F U -ℝ bareExpectation F))
+  originalWilsonCrossNumeratorIsFineCenteredInsertion F =
+    trans
+      (sym
+        (originalWilsonCrossNumeratorSubtractionCenteringClosed
+          F (bareExpectation F)))
+      (trans
+        (cong
+          (λ bare →
+            (Center.fineNumerator
+              theory traceData exponential beta oneLink bilateral divide
+              ordered strictToWeak
+              (λ U → F U -ℝ bareExpectation F)
+              *ℝ barePartition)
+            -ℝ (bare *ℝ
+              (Center.zFine
+                theory traceData exponential beta oneLink bilateral divide
+                ordered strictToWeak)))
+          (originalBareCenteredNumeratorZero F))
+        (trans
+          (cong
+            (λ value →
+              (Center.fineNumerator
+                theory traceData exponential beta oneLink bilateral divide
+                ordered strictToWeak
+                (λ U → F U -ℝ bareExpectation F)
+                *ℝ barePartition)
+              -ℝ value)
+            (mulZeroˡ
+              (Center.zFine
+                theory traceData exponential beta oneLink bilateral divide
+                ordered strictToWeak)))
+          (trans
+            (subtractionZeroRight realLaws
+              (Center.fineNumerator
+                theory traceData exponential beta oneLink bilateral divide
+                ordered strictToWeak
+                (λ U → F U -ℝ bareExpectation F)
+                *ℝ barePartition))
+            (*-comm
+              (Center.fineNumerator
+                theory traceData exponential beta oneLink bilateral divide
+                ordered strictToWeak
+                (λ U → F U -ℝ bareExpectation F))
+              barePartition))))
+
+  -- P0.07 algebraic specialization is literal: the source native
+  -- periodic plaquette trace, not a generic CoarseTest abstraction.
+  -- The normalized SU(N) trace range is a distinct P0.06 obligation.
+  originalPlaquetteCrossNumeratorIsCenteredFineInsertion :
+    (p : Plaquette.PeriodicPlaquette 1) →
+    Center.X theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak
+      (Center.originalCoarsePlaquetteTrace
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak p)
+    ≡
+    barePartition *ℝ
+      (Center.fineNumerator
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak
+        (λ U →
+          Center.originalCoarsePlaquetteTrace
+            theory traceData exponential beta oneLink bilateral divide
+            ordered strictToWeak p U
+          -ℝ
+          bareExpectation
+            (Center.originalCoarsePlaquetteTrace
+              theory traceData exponential beta oneLink bilateral divide
+              ordered strictToWeak p)))
+  originalPlaquetteCrossNumeratorIsCenteredFineInsertion p =
+    originalWilsonCrossNumeratorIsFineCenteredInsertion
+      (Center.originalCoarsePlaquetteTrace
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak p)
