@@ -196,12 +196,36 @@ wordGeneratorOrderMatters :
 wordGeneratorOrderMatters equality =
   originalGeneratorOrderMatters
     (trans
-      (sym (originalGroupRoundTrip
-        (H.compose sourceTranslation sourceModulation)))
-      (trans
-        (cong wordToOriginalGroup equality)
+      (sym leftDecodes)
+      (trans (cong wordToOriginalGroup equality) rightDecodes))
+  where
+    leftDecodes :
+      wordToOriginalGroup
+        (wordCompose
+          (originalGroupToWord sourceTranslation)
+          (originalGroupToWord sourceModulation))
+      ≡ H.compose sourceTranslation sourceModulation
+    leftDecodes =
+      trans
+        (cong wordToOriginalGroup
+          (originalMultiplicationRespected
+            sourceTranslation sourceModulation))
         (originalGroupRoundTrip
-          (H.compose sourceModulation sourceTranslation))))
+          (H.compose sourceTranslation sourceModulation))
+
+    rightDecodes :
+      wordToOriginalGroup
+        (wordCompose
+          (originalGroupToWord sourceModulation)
+          (originalGroupToWord sourceTranslation))
+      ≡ H.compose sourceModulation sourceTranslation
+    rightDecodes =
+      trans
+        (cong wordToOriginalGroup
+          (originalMultiplicationRespected
+            sourceModulation sourceTranslation))
+        (originalGroupRoundTrip
+          (H.compose sourceModulation sourceTranslation))
 
 -- Keep the exact boundary: this SOURCE GROUP is not automatically
 -- the separately intended relational/group/world semantic completion.
