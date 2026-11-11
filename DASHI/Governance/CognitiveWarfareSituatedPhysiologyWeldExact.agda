@@ -8,6 +8,7 @@ module DASHI.Governance.CognitiveWarfareSituatedPhysiologyWeldExact where
 open import DASHI.Core.Prelude
 
 import DASHI.Core.IntersectionalNonFactorability as NF
+import DASHI.Core.AdmissibleConsumerFutureAdequacyExact as Adequacy
 import DASHI.Cognition.CognitiveWarfareAdmissibleDetectionExact as Detection
 import DASHI.Cognition.CognitiveWarfarePlatoTraumaDetectorWeldExact as Warfare
 import DASHI.Governance.EpistemicPowerHistoryAndNonSubstitutionExact as Work
@@ -25,7 +26,7 @@ samePresentTargetCannotEstablishOrigin =
   Detection.targetLocalCollision
 
 sameTargetSurfaceCannotAnswerOriginQuery :
-  DASHI.Core.AdmissibleConsumerFutureAdequacyExact.AdmissibleAdequateNow
+  Adequacy.AdmissibleAdequateNow
     Detection.detectionProblem Detection.originQuery → ⊥
 sameTargetSurfaceCannotAnswerOriginQuery =
   Detection.targetSurfaceCannotDetermineOrigin
@@ -79,13 +80,18 @@ data PhysiologicalFinding : Set where
 data AuthorityFinding : Set where
   legalUndetermined legalDeterminedByAuthority : AuthorityFinding
 
-sourceVerificationNotAnAssay :
-  sourceVerified ≡ noIndividualAssay → ⊥
-sourceVerificationNotAnAssay ()
+-- Each coordinate has its own domain; comparisons require an explicitly
+-- selected and justified common projection, not heterogeneous equality.
+data EvidenceAxis : Set where
+  provenanceAxis physiologyAxis legalAuthorityAxis : EvidenceAxis
 
-legalAuthorityNotSourceVerification :
-  legalDeterminedByAuthority ≡ legalUndetermined → ⊥
-legalAuthorityNotSourceVerification ()
+provenanceAxisNotPhysiologyAxis :
+  provenanceAxis ≡ physiologyAxis → ⊥
+provenanceAxisNotPhysiologyAxis ()
+
+legalAuthorityAxisNotProvenanceAxis :
+  legalAuthorityAxis ≡ provenanceAxis → ⊥
+legalAuthorityAxisNotProvenanceAxis ()
 
 -- The meaningful source-paid K2/K3 path requires distinct originals.
 -- Nothing is inhabited merely by detecting a potential influence event.
