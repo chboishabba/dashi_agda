@@ -259,3 +259,61 @@ def test_original_formula_weighted_brouwer_rejects_missing_atom_or_unbalance(mon
             Adapter.source_bound_closed_brouwer_existence(
                 source,manifest,pinned_sha256=sha,
                 initial_concentrations=np.ones((27,29)),dt=1.0)
+
+
+def test_original_54_bond_27x29x12_exact_rational_rhs_conservation(monkeypatch):
+    from fractions import Fraction
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    certificate=Adapter.load_original_receipt_json(source)
+    matrix,_=Adapter.check_certificate(certificate,full_panel=True)
+    metadata={s:({"C":1,"H":0,"N":0,"O":0,"P":0},0)
+              for s in species}
+    metadata[species[0]]=({"C":1,"H":0,"N":0,"O":0,"P":0},1)
+    metadata[species[12]]=({"C":1,"H":0,"N":0,"O":0,"P":0},1)
+    monkeypatch.setattr(Adapter,"check_certificate",
+                        lambda *a,**kw:(matrix,metadata))
+    bonds=[["0"]*29 for _ in range(54)]
+    rates=[["0"]*12 for _ in range(27)]
+    bonds[0][0]="1/3"
+    rates[0][0]="2/7"
+    receipt=Adapter.original_closed_rational_semidiscrete_conservation(
+        source,pinned_sha256=sha,
+        signed_native_bond_fluxes=bonds,
+        signed_original_reaction_rates=rates)
+    a,b=Adapter.BONDS[0]
+    rhs=receipt["exact_rational_rhs"]
+    assert a == 0
+    assert Fraction(rhs[a][0]) == -Fraction(1,3)-Fraction(2,7)
+    assert Fraction(rhs[b][0]) == Fraction(1,3)
+    assert Fraction(rhs[0][12]) == Fraction(2,7)
+    assert receipt["exact_CHNOP_and_signed_charge_defects"] == ["0"]*6
+    assert not receipt["this_proves_real_SG_or_mass_action"]
+    assert not receipt["agda_kernel_checked"]
+
+
+def test_original_rational_continuity_rejects_binary_floats_and_bad_source(monkeypatch):
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    certificate=Adapter.load_original_receipt_json(source)
+    matrix,_=Adapter.check_certificate(certificate,full_panel=True)
+    metadata={s:({"C":1,"H":0,"N":0,"O":0,"P":0},0)
+              for s in species}
+    monkeypatch.setattr(Adapter,"check_certificate",
+                        lambda *a,**kw:(matrix,metadata))
+    bonds=[["0"]*29 for _ in range(54)]
+    rates=[["0"]*12 for _ in range(27)]
+    bonds[0][0]=0.5
+    with pytest.raises(ValueError):
+        Adapter.original_closed_rational_semidiscrete_conservation(
+            source,pinned_sha256=sha,
+            signed_native_bond_fluxes=bonds,
+            signed_original_reaction_rates=rates)
+    bonds[0][0]="0"
+    corrupt=deepcopy(matrix)
+    corrupt["matrix"][0][0]=-2
+    monkeypatch.setattr(Adapter,"check_certificate",
+                        lambda *a,**kw:(corrupt,metadata))
+    with pytest.raises(ValueError,match="conserved coordinate"):
+        Adapter.original_closed_rational_semidiscrete_conservation(
+            source,pinned_sha256=sha,
+            signed_native_bond_fluxes=bonds,
+            signed_original_reaction_rates=rates)
