@@ -30,7 +30,7 @@ from itertools import product
 from pathlib import Path
 
 from build_bh4_stoichiometric_matrix import build_matrix, participant_key
-from run_bh4_reaction_network import QDPR, audit_reaction, parse_formula
+from run_bh4_reaction_network import QDPR, audit_reaction, parse_formula, _integer
 from run_bh4_flux_feasibility import evaluate as evaluate_original_flux_candidate
 from check_bh4_spatial_measurement_payment import read_assay as read_original_spatial_assay
 from check_bh4_spatial_measurement_payment import REQUIRED as ORIGINAL_ASSAY_FIELDS
@@ -109,7 +109,7 @@ def check_certificate(certificate, *, full_panel):
         for participant in record["participants"]:
             key=participant_key(participant)
             data=(parse_formula(str(participant["formula"])),
-                  int(participant["charge"]))
+                  _integer(participant["charge"], "original participant charge"))
             if key in by_species and by_species[key]!=data:
                 raise ValueError(f"inconsistent original species formula/charge: {key}")
             by_species[key]=data
