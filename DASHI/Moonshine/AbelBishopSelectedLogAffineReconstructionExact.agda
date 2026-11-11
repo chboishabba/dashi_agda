@@ -25,6 +25,9 @@ import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Analysis.BishopComplexReciprocalExact as Reciprocal
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
+import DASHI.Moonshine.AbelBishopLogOnePlusCoefficientDominationExact as Log
+import DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact as Terms
 import DASHI.Moonshine.AbelBishopLogFiniteComplexDerivativeExact as Finite
 
 complexMulAssociative :
@@ -157,3 +160,86 @@ originalBishopNormalizedDisplacementNormSquare p nz t =
     (Norm.normSqMultiply (Reciprocal.reciprocalC p nz) t)
     (BishopP.*-congʳ
       (Reciprocal.normSquareReciprocal p nz))
+
+
+-- Relative-radius compatibility is the same-object precondition:
+-- normSq(t) ~= ratio^2 * normSq(p).
+-- The standard Bishop reciprocal law converts this to the exact
+-- norm-square certificate expected by the source logarithm series.
+originalBishopNormalizedDisplacementRadius :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p)) →
+  BishopReal._≃_
+    (Norm.normSqC (normalizedDisplacement p nz t))
+    (Norm.square ratio)
+originalBishopNormalizedDisplacementRadius p nz t ratio relativeRadius =
+  let
+    d = Norm.normSqC p
+    inv = BishopInverse._⁻¹ d (Reciprocal.normSquareNonzero nz)
+    r2 = Norm.square ratio
+    rearrange :
+      BishopReal._≃_
+        (BishopReal._*_ inv (BishopReal._*_ r2 d))
+        (BishopReal._*_ (BishopReal._*_ d inv) r2)
+    rearrange =
+      let open BishopP.ℝ-Solver in
+      solve 3
+        (λ i r pNorm →
+          i ⊗ (r ⊗ pNorm)
+          ⊜ (pNorm ⊗ i) ⊗ r)
+        BishopP.≃-refl inv r2 d
+  in
+  BishopP.≃-trans
+    (originalBishopNormalizedDisplacementNormSquare p nz t)
+    (BishopP.≃-trans
+      (BishopP.*-congˡ relativeRadius)
+      (BishopP.≃-trans
+        rearrange
+        (BishopP.≃-trans
+          (BishopP.*-congʳ
+            (BishopInverse.*-inverseʳ
+              d (Reciprocal.normSquareNonzero nz)))
+          (BishopP.*-identityˡ r2))))
+
+-- Direct consumer of the actual original log-series completion.
+-- No caller-provided series convergence, norm-square radius of
+-- normalizedDisplacement, or unrelated "log authority".
+originalBishopSelectedChartLogSeries :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  Complex.BishopComplex
+originalBishopSelectedChartLogSeries p nz t ratio interval relativeRadius =
+  Log.originalBishopLogOnePlusCanonicalLimitOnUnitDisk
+    interval
+    (originalBishopNormalizedDisplacementRadius
+      p nz t ratio relativeRadius)
+
+originalBishopSelectedChartLogSeriesConverges :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  Complex.ComplexSeriesConvergesTo
+    (Terms.originalBishopLogOnePlusTerm
+      (normalizedDisplacement p nz t))
+    (originalBishopSelectedChartLogSeries p nz t ratio interval relativeRadius)
+originalBishopSelectedChartLogSeriesConverges p nz t ratio interval relativeRadius =
+  Log.originalBishopLogOnePlusCanonicalLimitConvergesOnUnitDisk
+    interval
+    (originalBishopNormalizedDisplacementRadius
+      p nz t ratio relativeRadius)
