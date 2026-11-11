@@ -228,3 +228,53 @@ External checker/build-chain trust, general native-v3 coverage, source-owner
 attribution for arbitrary imports, and general Agda-to-Lean/fibre reuse remain
 separate obligations. The new tests and acceptance scripts have NOT been
 executed in the operator environment for these new commits.
+
+## 11 November — Rust checker replaces the .NET acceptance dependency
+
+The active acceptance checker is now **nanoda 0.4.13**, implemented in Rust,
+from the original pinned commit
+`418320295890faed83a96fd97907b12a3b6728c2`
+(https://github.com/ammkrn/nanoda_lib). The preceding Tenet/.NET
+instructions are **superseded** for the runnable max-cut path; neither .NET
+nor C# is a required component.
+
+`scripts/run_lean_world_real_semantic_acceptance.py` checks out nanoda at
+the exact immutable Git SHA into a temporary directory, builds
+`cargo build --release --locked --bin nanoda_bin`, and launches nanoda via
+its documented JSON configuration-file interface. The checker only permits
+`propext`, `Classical.choice`, `Quot.sound`, and
+`Lean.trustCompiler`; it never permits `sorryAx`, and
+`unsafe_permit_all_axioms=false`. Unpermitted declarations may be skipped
+but any proof depending on them must fail. It requires a visible positive
+checker result and a negative result when a selected theorem's proof
+expression is replaced with its type expression in an otherwise
+well-formed native-v3 export.
+
+`scripts/lean_world_external_checker.py` also supports
+`check_native_export_nanoda`, and the CLI handoff
+`run_lean_world_native_check_observation.py` invokes that Rust-specific
+interface. The original generic subprocess checker helper remains
+available for compatibility tests but is not the preferred admission path.
+
+The `devShells.lean-world` Nix shell now provides `pkgs.rustc` and
+`pkgs.cargo` from pinned nixpkgs, with no .NET SDK. Source and Cargo.lock
+are pinned; the exact compiled binary digest is included in observations.
+No system-wide toolchain change, Docker, or CI is needed.
+
+On an isolated #1495 checkout, run:
+
+```sh
+nix develop .#lean-world --command bash \
+  scripts/run_lean_world_semantic_maxcut_local.sh \
+  /tmp/dashi-lean-semantic-original
+```
+
+The downstream #1484 PostgreSQL evidence bridge rejects receipts without
+the exact pinned Rust checker identity and explicit no-sorry axiom policy.
+The two PRs must remain on their own isolated heads for cross-branch
+integration.
+
+**Source-authored, not yet re-executed for this Rust switch.**
+Do not claim a successful independent checker or second-proof run before
+obtaining real output at the current head. The independent kernel and
+general semantic-world admission gates remain logically separate.
