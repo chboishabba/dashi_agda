@@ -57,6 +57,20 @@ class TestLeanWorker(unittest.TestCase):
             self.assertEqual((Path(folder) / "Local/Helper.lean").read_bytes(), HELPER)
             self.assertEqual((Path(folder) / "Target.lean").read_bytes(), TARGET)
 
+    def test_public_and_protected_import_closure(self):
+        from lean_ephemeral_nix_worker import local_compilation_order
+        self.assertEqual(import_modules(
+            b"public import Local.Helper\nprotected import Init\n"),
+            ("Local.Helper", "Init"))
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "Local").mkdir()
+            (root / "Target.lean").write_bytes(
+                b"public import Local.Helper\ntheorem x : True := helper\n")
+            (root / "Local/Helper.lean").write_bytes(HELPER)
+            self.assertEqual(local_compilation_order(root, "Target.lean"),
+                             ["Local/Helper.lean", "Target.lean"])
+
     def test_pinned_toolchain(self):
         from lean_ephemeral_nix_worker import tree_entries
         tree = tree_entries(REPO, REV, opener=opener)
