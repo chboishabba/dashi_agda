@@ -213,3 +213,24 @@ regular240Equivariant g c =
 -- projections commute already, by full256Equivariant).
 -- The regular counting receipt is independent and already source-owned:
 -- Grid.regularGridCellCount, Orbit.regularOrbitMultiplicitySum.
+
+-- The underlying target Cartesian action is independent. At this level,
+-- our proof-carrying action has exactly the same support/sign coordinates.
+independentCartesianActionAgrees :
+  (g : Action.HypercubicGenerator) (p : SupportHalf240) →
+  supportSigns (actPackedRegular g p) ≡
+  actSupportHalf g (supportSigns p)
+independentCartesianActionAgrees g p =
+  trans (full256Equivariant g (GridCell p))
+    (cong (actSupportHalf g) (target256RoundTrip (supportSigns p)))
+  where
+    GridCell : SupportHalf240 → Grid.GridCell4
+    GridCell q = GridCell′ (decode240 q)
+      where
+        GridCell′ : Regular240 → Grid.GridCell4
+        GridCell′ = original
+
+-- The 15 support masks, rather than all 16, supply the base space
+-- after removing the all-inner 16-sign infrared fibre. Because the
+-- source proof of positive outerCount was preserved, no hidden
+-- IR admissibility claim is imported from a finite cardinality.
