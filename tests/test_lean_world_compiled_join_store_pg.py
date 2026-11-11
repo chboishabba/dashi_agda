@@ -55,6 +55,7 @@ class JoinedProofArtifactPG(unittest.TestCase):
                           archive("Original.lean",self.source))
         self.joined=b"import Original\n"
         self.olean=b"fake-non-certified-olean-test-bytes"
+        self.original_olean=b"original-module-olean"
         self.report={
             "status":"original-lean-theorem-joins-compiled",
             "lean_binary_sha256":sha256(b"pinned-lean").hexdigest(),
@@ -69,7 +70,7 @@ class JoinedProofArtifactPG(unittest.TestCase):
             "compiled_modules":[{
                 "module":"Original",
                 "source_sha256":sha256(self.source).hexdigest(),
-                "olean_sha256":sha256(b"original-module-olean").hexdigest(),
+                "olean_sha256":sha256(self.original_olean).hexdigest(),
                 "direct_imports":[],
                 "original_source_origin":{
                     "repository":self.repo,"revision":self.rev,
@@ -91,7 +92,8 @@ class JoinedProofArtifactPG(unittest.TestCase):
         self.conn.close()
 
     def test_persist_exact_original_bytes_retrieve_and_retry(self):
-        first=persist_join(self.conn,self.report,self.joined,self.olean)
+        first=persist_join(self.conn,self.report,self.joined,self.olean,
+                            compiled_module_contents={"Original":self.original_olean})
         second=persist_join(self.conn,self.report,self.joined,self.olean)
         self.assertEqual(first,second)
         self.assertTrue(first["content_stored_in_postgresql"])
@@ -111,7 +113,8 @@ class JoinedProofArtifactPG(unittest.TestCase):
 
     def test_reject_modified_checked_olean_payload(self):
         with self.assertRaisesRegex(JoinStoreError,"digest"):
-            persist_join(self.conn,self.report,self.joined,self.olean+b"tamper")
+            persist_join(self.conn,self.report,self.joined,self.olean+b"tamper",
+                         compiled_module_contents={"Original":self.original_olean})
 
     def test_immutable_database_join_rows(self):
         result=persist_join(self.conn,self.report,self.joined,self.olean)
