@@ -39,6 +39,37 @@ originalReactionRows inputs =
   V.tabulate (λ site →
     V.tabulate (Operator.reactionContribution inputs site))
 
+-- Lookup-after-tabulation is NOT definitionally reflexive for an
+-- arbitrary symbolic Fin index. Reuse the exact lemma already proved
+-- by the canonical rational operator for both site and species.
+originalBondAt :
+  (inputs : Operator.Rational369SemidiscreteInputs)
+  (site : F.Fin 27) (species : F.Fin 29) →
+  V.lookup (V.lookup (originalBondRows inputs) site) species
+    ≡ Operator.bondContribution inputs site species
+originalBondAt inputs site species =
+  trans
+    (cong (λ row → V.lookup row species)
+      (Operator.lookupTabulateExact
+        (λ site′ → V.tabulate
+          (Operator.bondContribution inputs site′)) site))
+    (Operator.lookupTabulateExact
+      (Operator.bondContribution inputs site) species)
+
+originalReactionAt :
+  (inputs : Operator.Rational369SemidiscreteInputs)
+  (site : F.Fin 27) (species : F.Fin 29) →
+  V.lookup (V.lookup (originalReactionRows inputs) site) species
+    ≡ Operator.reactionContribution inputs site species
+originalReactionAt inputs site species =
+  trans
+    (cong (λ row → V.lookup row species)
+      (Operator.lookupTabulateExact
+        (λ site′ → V.tabulate
+          (Operator.reactionContribution inputs site′)) site))
+    (Operator.lookupTabulateExact
+      (Operator.reactionContribution inputs site) species)
+
 originalRHSPointwiseSplits :
   (inputs : Operator.Rational369SemidiscreteInputs)
   (site : F.Fin 27) (species : F.Fin 29) →
@@ -51,11 +82,41 @@ originalRHSPointwiseSplits inputs site species =
   QP.≃-reflexive
     (trans
       (Operator.rational369SemidiscreteAt inputs site species)
-      (cong₂ Q._+_
-        (sym (Operator.lookupTabulateExact
-          (Operator.bondContribution inputs site) species))
-        (sym (Operator.lookupTabulateExact
-          (Operator.reactionContribution inputs site) species))))
+      (sym (cong₂ Q._+_
+        (originalBondAt inputs site species)
+        (originalReactionAt inputs site species))))
+
+-- Generic Vec.zipWith index identity; necessary because symbolic
+-- Fin indices do not normalize by bare refl.
+lookupZipWith :
+  ∀ {n A B C : Set}
+  (combine : A → B → C)
+  (left : V.Vec A n) (right : V.Vec B n)
+  (index : F.Fin n) →
+  V.lookup (V.zipWith combine left right) index
+    ≡ combine (V.lookup left index) (V.lookup right index)
+lookupZipWith combine V.[] V.[] ()
+lookupZipWith combine
+  (V._∷_ left restLeft) (V._∷_ right restRight) F.zero = refl
+lookupZipWith combine
+  (V._∷_ left restLeft) (V._∷_ right restRight) (F.suc index) =
+  lookupZipWith combine restLeft restRight index
+
+lookupMatrixAddAt :
+  ∀ {sites species}
+  (left right : V.Vec (V.Vec Q.ℚᵘ species) sites)
+  (site : F.Fin sites) (sp : F.Fin species) →
+  V.lookup
+    (V.lookup (V.zipWith (V.zipWith Q._+_) left right) site)
+    sp
+    ≡
+  Q._+_ (V.lookup (V.lookup left site) sp)
+        (V.lookup (V.lookup right site) sp)
+lookupMatrixAddAt left right site sp =
+  trans
+    (cong (λ row → V.lookup row sp)
+      (lookupZipWith (V.zipWith Q._+_) left right site))
+    (lookupZipWith Q._+_ (V.lookup left site) (V.lookup right site) sp)
 
 -- Original weighted spatial sum is pointwise-congruent, rather than
 -- using propositional equality on unnormalised rational values.
@@ -120,13 +181,13 @@ originalRHSSplitLookup :
           (originalReactionRows inputs))
         site) species)
 originalRHSSplitLookup inputs site species =
-  -- Both sides are tabulations of the same two native operators:
-  -- V.zipWith on two V.tabulate vectors evaluates pointwise to
-  -- V.tabulate of Q._+_. The fixed 27×29 dimensions normalize here.
-  QP.≃-reflexive refl
-
--- Agda still must accept the definitional V.zipWith/V.tabulate
--- normalization. No external axiom or postulated equality is used.
+  QP.≃-trans
+    (originalRHSPointwiseSplits inputs site species)
+    (QP.≃-sym
+      (QP.≃-reflexive
+        (lookupMatrixAddAt
+          (originalBondRows inputs) (originalReactionRows inputs)
+          site species)))
 
 originalComputedRHSWeightedSplits :
   (inputs : Operator.Rational369SemidiscreteInputs)
