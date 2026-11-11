@@ -1956,3 +1956,98 @@ implicit root and free-energy inequality.
 BH4/PNP/tissue same-object refinement,
 original kinetic evidence, longitudinal
 validation and Golden/ITIR promotion.
+
+
+### 2026-11-11 P0 full computed-rational 783-coordinate Bishop conservation chain source-written
+
+The original **computed** finite continuity producer is now
+assembled without requiring any arbitrary six-axis global
+conservation witness:
+
+1. `BH4RationalFiniteFubiniExact` now additionally owns
+   `qLookupMap`, `qLookupZipAdd`,
+   `qLookupReplicateZero`, and `qColumnTotalsLookup`.
+   These prove that a *symbolic* `Fin` column total equals
+   the sum of its actual selected voxel entries; a naked
+   `refl` on symbolic index lookups is not used.
+2. New `BH4OriginalNativePerSpeciesCancellationExact`
+   consumes the literal original
+   `sourceNativeIncidence : Matrix 27 54` and its
+   54 `sourceNativeColumnZero` clauses. Through
+   rational-dot commutativity and weighted Fubini,
+   `originalNativeEverySpeciesTransportZero`
+   derives the **29** transport-only 27-site total
+   zeros for ANY 54×29 rational native flux field,
+   the actual existing 27×29 computed RHS operator
+   and ANY 29×12 stoichiometric/27×12 rate fields.
+   It has no per-species-zero hypothesis.
+3. New `BH4OriginalNativeComputedBishopConservationExact`
+   applies all 29 derived transport zeros to the
+   original computed 783-coordinate field:
+   `originalNativeComputedSixAxisRationalConserves`
+   and `originalNativeComputedSixAxisBishopConserves`
+   require only **six reaction neutralities**.
+4. New `BH4OriginalRationalReactionColumnKernelExact`
+   proves `rationalDotAdd`,
+   `rationalDotScale`,
+   `weightedStoichiometryRateFubini`,
+   `weightedStoichiometryColumnsZeroRates`,
+   and `originalReactionAllSitesZeroFromSourceColumns`.
+   For the same existing 29×12 signed source matrix,
+   12 weighted *column* zero proofs imply zero
+   original 27-site reaction contribution under
+   EVERY 27×12 rational rate field.
+5. The EXISTING SHA-256-pinned original Rhea/ChEBI
+   Agda generator now emits the **same Nat-source**
+   `generatedRationalStoichiometry`, the original
+   signed-native `generatedOriginalRationalRHS`,
+   and **72 new literal**
+   `generatedRationalNetColumnsZero` proof clauses
+   (six source axes × twelve original columns)
+   against the **same net stoichiometric matrix**.
+   Its terminal
+   `generatedOriginalComputedSixAxisBishopConservation`
+   composes the native cancellation and reaction
+   column kernel with the ORIGINAL computed 783
+   RHS and existing Bishop-real embedding.
+   It does NOT request any global-zero or
+   per-site-neutrality authority field.
+6. The generator self-test, synthetic-only
+   `test_generate_bh4_original29x12_simplex.py`,
+   and machine-readable source receipt now
+   explicitly identify 72 new net-column cases
+   and the computed Bishop producer while
+   `source_computed_783_Bishop_conservation_agda_kernel_checked`
+   remains **false**. Its source data remain
+   separately SHA-pinned and not fabricated.
+
+**Finite P0 status:** The dependency chain from a
+**generated original 29×12 Nat source**, through
+actual 27×54 incidence, arbitrary rational
+54×29 signed fluxes and 27×12 rates, to six
+zero defects of the actual original 783-coordinate
+rational RHS and its existing Bishop real image
+is SOURCE-WRITTEN. This does NOT equal a
+kernel-accepted result. Until the actual original
+full-panel Rhea bytes are acquired and generated
+and the Agda 2.9 transitive Golden root passes,
+the 72 exact source-specific closed clauses
+and all imported finite algebra must be treated
+as **unverified**. No source-specific generated
+positive CHNOP result has been obtained yet.
+
+**Remaining real/physical P0:** The genuine
+Bishop-real Scharfetter–Gummel/Poisson/mass-action
+operator correspondence to the original selected
+27×29 state; exact physical source kinetics;
+compact positive conserved weighted simplex;
+a TRUSTED finite-dimensional Brouwer producer;
+strict-positive implicit root and original
+real electrochemical free-energy dissipation
+theorem. **P1:** six-face reactive boundary
+work and source-matched BH4/PNP/tissue
+observation refinement. **P2/P3:** independent
+longitudinal calibration and ITIR/Golden
+source provenance. There is no shortcut from
+algebraic conservation to physical regularity
+or biological interpretation.
