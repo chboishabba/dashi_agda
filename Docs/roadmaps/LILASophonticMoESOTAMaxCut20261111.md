@@ -243,3 +243,81 @@ Prior user-executed TinyStories pilot (as recorded in `WholeSystemJointMoEConsum
 **Decision policy:** The machine's 5.24 GB available is a *runtime pressure observation*, not a guaranteed allocation. Prefer a tiny local coordinator and on-demand *remote expert ownership* if sufficient peers exist; use NVMe or CPU expert cache only for admitted local experts. Local SSD paging remains useful when network latency makes federation worse; preserve full local fallback where possible. A fixed worldwide ranking of Swiftlet/oLLM/AirLLM/llama.cpp is unscientific because they optimize different memory, quality and transport boundaries.
 
 **Attribution firewall:** Original LILA scientific architecture is Kornienko's. DASHI PR #1442 and LeechTransformer PR #4 contain user's existing federation work; Swiftlet/oLLM/AirLLM/llama.cpp and Qwen authors own their respective runtimes/model ideas. This document records reuse and proposed synthesis only, not an invention-of-MoE or original-source proof claim.
+
+## 2026-11-11 topology maximum cut — miners, workers, model DAG and 512-wide intra-expert shards
+
+### Restored original design and provenance
+
+The original architecture is a **hierarchical, heterogeneous, economic federation**, not merely a local out-of-core MoE. Miners are independently operated service providers, each hosting zero or more CPU/GPU/NVMe worker nodes; workers are not automatically the authoritative economic owner. The inference model is a **content-addressed dependency DAG** of model→layer→(shared computation + selected MoE experts)→optional subexpert shards→aggregate→next layer, not a serial ring nor a four-tier cache diagram. Peer discovery, content routing and execution scheduling are distinct. Authenticated ownership/leases, CID-like immutable weights, model revision, and mutable signed histories have different identity and consistency rules. Restore original `512-wide` proposal only for a concrete expert with intermediate width 3072 (six shards, each 512), not as a universal property of all Qwen models.
+
+Existing relevant donor owners:
+- DASHI PR #1442 at head `bbb8005b0920921f9dbb95d09f3e60058ceb02b0`: `LeechJointStateConsumerQuotientExact`, `FederatedExpertTransportBidiExact`, `LeechGenericTopKActionTransportExact`, original full state/history and wire proofs. Source branch only until merged/read against exact head.
+- LeechTransformer PR #4 at head `b9f83a638bc24bab046c252cc93a6362c0579666`: real model, hierarchy, selected-expert execution and network codec testing; its historical early sparse-student and network Pareto failures are retained.
+- `DASHI/Computation/PathfindingFibreFamilyExact.agda`: distinguish BFS/Dijkstra/A*/BMSSP algorithm certificates; no proof of the topology scheduler without an actual instance.
+- `DASHI/Computation/IncrementalShortestPathReopenFibreExact.agda`: typed cost-change/reopening state; reuse for dynamic capacity/peer failures without asserting a proven D* implementation.
+- `DASHI/Interop/DistributedEpistemicPlaneSeparationExact.agda` and `DASHI/Reasoning/ContentAddressedVerificationBridgeExact.agda`: transport versus authority and content-identity proof boundaries.
+- Existing JMD/CFT/ERDFA, PNF hyperfabric and ITIR typed-world materialisation: candidate future integration for immutable shard DAG and provenance, not a claim that current proof ingestion implements a federated model runtime. No mandatory new world ingestion or CI dependency.
+
+### Actual network and computation objects
+
+A time-indexed network is `N_t=(V_t,E_t,role_t,miner_t,capacity_t,link_t,placement_t,replica_t,lease_t,admission_t,schedule_t)`.
+- `role : V → {coordinator,miner,worker,relay,storage}`, `miner : worker → provider` with capability ads CPU/RAM/VRAM/storage/backend and price/energy.
+- Directed `E` contains feasible communication channels; separate authenticated peer ID from CID weight ID and from network locator.
+- Link capacities `B_e`, RTT `L_e`, contention and failure process `F_e`; measure rather than assume identical links.
+- `placement : shard × modelRevision → nonempty set of eligible peer replicas`, constrained by per-peer tier memory/cache/workspace and authenticated revision.
+- `compute DAG` contains layer ordering, all selected expert branches, optional intermediate-axis subshard branches, local reductions, and source-owned mixing/history commit. Independent branches can overlap; the next layer waits for its actual dependency cut.
+- Economic scheduling optimises constrained Pareto outcomes: cost/served token, p95/p99 time, steady throughput, availability, privacy, energy, and *same model quality*. Miner price is not equivalent to worker compute time.
+
+For an expert `W_down φ(W_up x)`, splitting its intermediate axis into six disjoint 512-wide submatrices gives a sum of six shard outputs **only if** the actual activation is separable over that axis, bias is counted exactly once, and any model-specific gating/normalisation/cross-shard operations are placed at the correct side of the reduction. Nonlinear terms crossing shard boundaries break the naive identity. For standard elementwise FFN gate, shardwise contributions can be summed after independent paired up/gate projection; numerical floating reduction order is not exact.
+
+For each selected expert set `S_t`, the scheduler may choose colocated execution or fan-out across worker nodes. Its makespan is bounded by critical dependency paths and actual link/compute schedules, not simply `Σ_e runtime(e)`, and not simply `max_e runtime(e)` when WAN aggregation and memory contention exist. Include a non-negligible coordination, serialization, retry and reducer term.
+
+### Finite source-level implementation delivered
+
+`DASHI/Reasoning/FederatedMinerWorkerTopologyExact.agda` (new in commit `0dde2c0ab9301faa8c589488d1fe5449a54fdca6`, subsequently strengthened at `b51b48d636f6c4424bef01eef02159ff2673ed51`):
+- Directed `Link` and constructive `Reach` for coordinator→two miners→workers, including alternate-parent reachability.
+- Separate economic provider `Miner` from physical `Node`; a worker may have multiple dispatch paths without changing who economically owns it.
+- Six disjoint symbolic 512-wide shards covering a historical 3072-wide intermediate axis, complete fixed placement and coordinator reachability.
+- Hierarchical two-miner sum and exact reference equality over natural-number shard contributions.
+- **Compositional soundness:** if every executed shard has an actual per-shard equality receipt, the full hierarchical reduction agrees with reference on all six shards.
+- **Negative control:** omission of the last shard changes the result; also a small abstract parallel makespan example 7 versus serial 12, not a general latency win.
+- This source has not been run through Agda 2.9 in the current tool environment. It is NOT a source-bound Qwen/LILA runtime/real WAN proof; a Nat reduction is not floating associativity.
+
+### Topology-specific exact remaining lemma ledger
+
+| ID | Priority | Proposed exact lemma | Admission condition |
+|---|---|---|---|
+| TNET01 | P0 | `federatedMinerWorkerGraphWellFormed` | Arbitrary finite node type, role, ownership, unique ID, typed edges, graph version; witnessed admissible routes |
+| TNET02 | P0 | `expertShardPlacementCapacitySafe` | Each shard weight+workspace/cache reservation and concurrent fanout respects distinct local memory tiers; overcommit rejects |
+| TNET03 | P0 | `selectedExpertShardCoverageComplete` | For any selected expert, exactly the appropriate source-derived shard index ranges, no overlap/gap, one-off bias, valid activation/gate boundary |
+| TNET04 | P0 | `parallelExpertFanoutAggregationSound` | Real per-shard output/quant/activation refinement and actual source-owned mixing/histories commute with reference model |
+| TNET05 | P0 | `originalModelExpertTensorPartitionIdentity` | Actual model config and tensor manifest prove 3072↔6×512 on selected target or use a distinct per-model partition |
+| TNET06 | P0 | `cidRevisionPeerAuthoritySeparation` | Immutable CID identifies bytes, revision identifies model compatibility, peer admission establishes trust, mutable histories use distinct generations |
+| TNET07 | P1 | `multiParentDispatchHistoryConsistent` | Alternate route never grants conflicting commits, ACKs, or split-brain selected-history updates |
+| TNET08 | P1 | `communicationAwareCriticalPathSound` | Scheduling's makespan estimate lower/upper receipts include link latency, serialization, per-node contention, reductions, queues |
+| TNET09 | P1 | `replicaMigrationPreservesExpertIdentity` | Replica changes preserve signed weight manifest, quant mode, adapter version, immutable CID and admissible workspace |
+| TNET10 | P1 | `networkFailureReplanningPreservesSemantics` | Retry/timeout/new owner with exactly-once committed semantic state or explicit abort/no advancement |
+| TNET11 | P1 | `minerPriceReliabilityResourceParetoSound` | Price, latency, throughput, availability, energy, privacy and model quality defined and benchmarked under common traces |
+| TNET12 | P1 | `aStarDAGScheduleRefinesSelectedCriticalPath` | Reuse existing pathfinding donor only after proving instance, admissible heuristic and actual DAG dependency semantics |
+| TNET13 | P2 | `hierarchicalAggregationEqualsReferenceMoE` | End-to-end exact/reference or bounded numeric equivalence with real kernels and remote packets |
+| TNET14 | P2 | `topologyOptimiserParetoOptimalUnderModel` | Objective/feasible-set formalisation, exhaustive finite solver or proven bound, no universal real-network optimality |
+| TNET15 | P2 | `dynamicPeerReopenFibreSound` | Changed link/worker capacities reopen only invalidated schedule fibres with correctness and full dependency closure |
+| TNET16 | P2 | `contentAddressedInferenceDAGWholeRunBidi` | Actual shard manifest, execution DAG, selected consumer/history and signed transport verified for complete token trace |
+
+**Accounting update:** previous 66 planning obligations + these 16 topology-specific entries = **82** names in integrated ledger, not 82 independent unpaid kernel theorems. Finite examples contribute witness fragments to TNET01/03/04/07/08/13 but do not discharge those original-source obligations.
+
+### Revised phase and deliverable gates — topology is now foundational
+
+- **Phase 0 Source/identity:** existing PR #1442 + Leech PR #4, original Kornienko architecture, correct concrete 512 partition and content-addressed manifest. Deliver pinned owner/attribution and model graph receipt. Close TNET05/06 and A01 before any source assertion.
+- **Phase 1 Formal network topology:** general finite node/edge/role/ownership graph, multi-parent routes, edge metrics, capacity and exact partition/coverage; reuse JMD/CFT for immutable model shard identity where verified. Deliver topology + admission kernel receipts: TNET01–03, F01.
+- **Phase 2 Federated execution semantics:** distributed fan-out, original real expert subcomputations, local reducer, source aggregation, ACKed signed histories, failover; compose existing N01–N10 and X01–X11. Deliver per-shard→whole-output BIDI and fail-closed recovery: TNET04/07/09/10/13.
+- **Phase 3 Communication-aware scheduler:** feasible placements, adaptive critical path, A*/incremental reopening, miner economic bids, peer pressure, topology fault handling. Deliver certified optimisation reference and benchmark scheduler: TNET08/11/12/14/15.
+- **Phase 4 Original LILA/Sophontic learning:** matched whole-model loss/AdamW/Dust/steering/grokking quality and active compute. Deliver learned-student fidelity and interpretable matched controls: A/S/G/O/R obligations (unchanged; no displacement by transport engineering).
+- **Phase 5 Memory-tier and federated Pareto:** same model on local resident / SSD streaming / RAM+CPU offload / single-miner multiworker / LAN / WAN / hybrid, identical prompt, context and fidelity; track memory availability pressure, tail latency, cost and storage. Deliver actual per-tier Pareto and negative-control receipts: X/N/TNET metrics.
+- **Phase 6 Full trace source↔theory BIDI:** verified tokenizer, weight CID, hardware kernels, signed history, transport, steering reroutes, consumer observable quality. Deliver Agda kernel and executable integration receipts: F01/F02, N16, X15, TNET16.
+
+**Highest-alpha dependency cut:** TNET05/06 + A01 → TNET01/02/03 + X01–X08 → TNET04/07/09 + N01–N10 + S01/S04 → TNET08/10/12/15 → TNET11/13/14/16 + full-source BIDI. Source-specific tensor partition and semantic equivalence outrank inventing a sophisticated placement optimiser.
+
+### Source attribution and exact closure firewall
+
+The six-512 partition is a user-recovered historical architecture proposal, not a property automatically verified for Qwen3-Next or an original theorem of another upstream project. Miners/providers and workers have distinct identities. Claim only the source-level finite Agda witness until Agda kernel run; claim only same-model implementation equivalence when matched source model and test/trace receipts exist; claim only a scheduling/efficiency improvement when latency, cost, quality, RAM and energy are actually measured. The historical TinyStories student-quality and JQ1 network failures remain live negative evidence, not cleared by a successful synthetic arithmetic proof.
