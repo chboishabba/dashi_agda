@@ -587,3 +587,32 @@ User scope remains K1–K3; K0/K4 and DOCX excluded.
 reported environmental harm → primary source and exact actor/time/role span → `EventPNF` → source-bound `CandidatePNF` → `AdmissiblePNF` iff actual validity proof → `ResolvedPNF` retaining alternatives → optional sampled cortisol only when independently validated purpose/consent + assay+time receipt → source-indexed model residuals/causal alternatives → optional `DomainIR` operational projection → separate source-paid clinical, causal, law and judicial authority. If a subject declines OPTIONAL biological profiling, the biological branch stops, while their testimony remains available under its own appropriate provenance and legal/evidentiary rules. The source-resolved IR does **not** automatically become adjudicated truth.
 
 **Unpaid empirical leaves:** authentic person-time records/assays, quantitative cortisol/GR dynamics, calibrated 3-adic mapping and developmental sensitive periods, source-verified consent, actual cross-assay transfer and uncertainty, clinical and counterfactual inference, and authorised case-specific legal evaluation. No technical library proof grants Indigenous community authority or overrides custodianship.
+
+## Eighteenth pass — cognitive warfare, observer provenance and situated physiology (2026-11-11)
+
+**Critical recovered existing original owners:**
+- `DASHI/Cognition/CognitiveWarfareAdmissibleDetectionExact.agda`: `targetLocalCollision`, `targetSurfaceCannotDetermineOrigin`, `targetPlusOriginStrictlyRefinesTarget`, `targetLocalCollisionIsNotFutureEquivalent` and an admissible provenance inspection. A present content/target surface does not recover organic versus influence origin.
+- `DASHI/Cognition/CognitiveWarfarePlatoTraumaDetectorWeldExact.agda`: `contentConeCannotDetermineProvenance`, `sameContentDifferentProvenance`, `sameProvenanceDifferentCone`, `fullDetectorStrictlyRefinesContentCone`, `learnedThreatDoesNotProveThreatTruth`, `shadowIsNotFalsehood`, and a resource-budget obstruction for provenance collection. The original three coordinates are content, reachable/observer-action cone and independently inspected provenance.
+- `DASHI/Governance/EpistemicPowerHistoryAndNonSubstitutionExact.agda`: `sameOutcomeDifferentRetentionHistory`, `sameOutcomeDifferentCommunicationHistory`, `sameTasksCannotIdentifyPurpose`, negative controls on legitimate review versus strategic obstruction.
+- `DASHI/Governance/SituatedCortisolAggregateNonIdentificationExact.agda`, `SituatedCortisolPNFAdmissibilityExact.agda`, `SituatedBiomarkerObserverAgencyExact.agda`: group-to-individual nonidentification, biomarker-to-cause nonidentification, optional biomarker consent and testimony separation.
+
+**New source-written exact weld:** `DASHI/Governance/CognitiveWarfareSituatedPhysiologyWeldExact.agda`.
+- Reuses canonical cognitive-warfare query adequacy, provenance and action-cone theorem owners.
+- Reuses epistemic workload/intent negative controls.
+- Reuses cortisol individual-aggregation and biomarker causality nonidentification.
+- Keeps provenance, physiological observation and legal authority as **different evidence axes**.
+- The uninhabited external `CognitiveWarfareSituatedEvidence` record specifies separate proofs of original origin, actor/controller chain, intentional coordination, observed epistemic tasks, person-time exposures, consented physiological observations, legitimate review alternative, case-specific comparator, first-person account and legal rules.
+- `CrenshawLegalAttributionCapstoneExact.agda` now composes `cognitiveWarfareContentConeNotProvenance`, `cognitiveWarfareTasksNotIntent`, and `cognitiveWarfareBiomarkerNotCause`.
+
+**Key non-equivalences**:
+1. Repeated review demands or public epistemic exhaustion **do not establish** deliberate hostile influence; actual coordination and controller evidence are separately required.
+2. A narrowed accessible action cone can arise from many causes; cone deformation alone neither identifies enemy interference nor falsity of a perceived situation.
+3. A document's origin alone does not make the document true.
+4. Cortisol and other endocrine readings cannot reveal content truth, thought, intention, controller identity or defendant-specific causal liability.
+5. Legitimate institutional review is a live negative control, not classified hostile by repetition alone.
+6. The victim's situated report is independently meaningful testimony; declining optional biomarker collection must not silence the report.
+7. Resource constraints on provenance inspection are real: the current observer may be insufficient without authorized, affordable source inquiry.
+
+**Remaining K1–K3 decisive external evidence:** authenticated campaign/procedure/communication provenance; controller and coordination reconstruction; time-indexed participant workload, ecological conditions, agency/control and alternatives; actual subject-consented assays if voluntarily used; longitudinal causal discrimination and original legal facts. None are provided by finite countermodels, and no current real-world actor or institution is classified as conducting cognitive warfare by this work.
+
+**Status:** GitHub source committed; compiler proof acceptance and empirical/forensic validation remain open. No PNF/ITIR or legal/clinical promotion was issued.
