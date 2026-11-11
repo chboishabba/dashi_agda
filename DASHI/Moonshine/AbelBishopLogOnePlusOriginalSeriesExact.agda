@@ -49,7 +49,7 @@ inversePositiveNat n = + 1 / suc n
   where
     instance
       denominatorNonzero : NonZero (suc n)
-      denominatorNonzero = _
+      denominatorNonzero = Nat.≢-nonZero (λ ())
 
   -- Local definition avoids the off-by-one error from mkℚᵘ's raw
   -- denominator-minus-one representation.
