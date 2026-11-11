@@ -7,6 +7,7 @@ validated DAG, or kernel-certified proof. No repository checkout is retained.
 from __future__ import annotations
 import argparse, hashlib, json, os, re
 from pathlib import Path
+from lean_world_atomic_spool import publish_immutable, PublicationError
 
 SHA40 = re.compile(r"[0-9a-f]{40}\Z")
 SHA256 = re.compile(r"[0-9a-f]{64}\Z")
@@ -122,24 +123,16 @@ def enqueue(receipt: dict, spool: Path) -> dict:
     key = digest(json.dumps(record, sort_keys=True, separators=(",", ":")).encode())
     artifact = spool / (digest(raw) + ".ndjson")
     try:
-        with artifact.open("xb") as fd:
-            fd.write(raw)
-            fd.flush()
-            os.fsync(fd.fileno())
-    except FileExistsError:
-        if artifact.read_bytes() != raw:
-            raise AdmissionError("conflicting staged native artifact")
+        publish_immutable(artifact, raw)
+    except PublicationError as exc:
+        raise AdmissionError(str(exc)) from exc
     record["artifact_path"] = str(artifact.resolve())
     manifest = spool / (key + ".json")
-    expected = json.dumps(record, sort_keys=True, separators=(",", ":")).encode() + b"\n"
+    expected = json.dumps(record, sort_keys=True, separators=(",", ":")).encode() + b"\\n"
     try:
-        with manifest.open("xb") as fd:
-            fd.write(expected)
-            fd.flush()
-            os.fsync(fd.fileno())
-    except FileExistsError:
-        if manifest.read_bytes() != expected:
-            raise AdmissionError("conflicting handoff identity")
+        publish_immutable(manifest, expected)
+    except PublicationError as exc:
+        raise AdmissionError(str(exc)) from exc
     return {"handoff_key": key, "manifest": str(manifest),
             "artifact_path": str(artifact.resolve()),
             "artifact_sha256": digest(raw),
