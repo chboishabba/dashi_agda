@@ -106,6 +106,50 @@ class TestLeanWorker(unittest.TestCase):
         self.assertFalse(captured[0].exists())
         self.assertEqual(len(result["source_closure"]), 2)
 
+    def test_native_export_before_ephemeral_cleanup(self):
+        from lean_world_native_v3_export import inspect_v3
+        captured=[]
+        native_raw=(b'{"meta":{"format":{"version":"3.1.0"}}}\\n'
+                    b'{"ie":1,"bvar":0}\\n'
+                    b'{"thm":{"type":1}}\\n')
+        def compiled(lean, root, target, *, timeout, memory_mib, lean_path):
+            compiled_path=root/".lean-output"/"target.olean"
+            compiled_path.parent.mkdir(parents=True,exist_ok=True)
+            compiled_path.write_bytes(b"fake compiled olean for test")
+            captured.append(root)
+            return {"exit_code":0,"olean_emitted":True,
+                    "elapsed_seconds":0.1,"stdout_tail":"","stderr_tail":""}
+        def exported(root,module,declaration,*,command,lean_path,timeout,memory_mib):
+            self.assertTrue(root.is_dir())
+            self.assertEqual(module,"Target")
+            self.assertEqual(declaration,"yes")
+            self.assertTrue((root/"Target.olean").exists())
+            return native_raw,inspect_v3(native_raw)
+        with tempfile.TemporaryDirectory() as destination:
+            with patch("lean_ephemeral_nix_worker.check_version",
+                       return_value="Lean (version 4.20.0)"):
+                receipt=run_worker(REPO,REV,"Target.lean",opener=opener,
+                    checker=compiled,exporter=exported,native_declaration="yes",
+                    native_out=Path(destination))
+            self.assertEqual(receipt["status"],"lean-module-checked")
+            self.assertTrue(receipt["declaration_ast_exported"])
+            self.assertFalse(receipt["native_export"]["world_admitted"])
+            self.assertFalse(receipt["native_export"]["kernel_proof_certified"])
+            self.assertTrue(Path(receipt["native_export"]["artifact_path"]).is_file())
+        self.assertFalse(captured[0].exists())
+
+    def test_native_export_requires_persistent_output(self):
+        def compiled(lean, root, target, *, timeout, memory_mib, lean_path):
+            return {"exit_code":0,"olean_emitted":True,
+                    "elapsed_seconds":0.1,"stdout_tail":"","stderr_tail":""}
+        with patch("lean_ephemeral_nix_worker.check_version",
+                   return_value="Lean (version 4.20.0)"):
+            receipt=run_worker(REPO,REV,"Target.lean",opener=opener,
+                               checker=compiled,native_declaration="yes")
+        self.assertFalse(receipt["declaration_ast_exported"])
+        self.assertEqual(receipt["status"],"lean-module-checked")
+        self.assertIn("persistent output",receipt["error"])
+
     def test_external_import_rejected_without_dependency_receipt(self):
         custom_target = b"import ThirdParty.Theorem\n"
         sha = digest(custom_target)
