@@ -26,6 +26,7 @@ def persist_candidate_world(conn, world):
     with conn.transaction():
         with conn.cursor() as cur:
             origin_dbids = {}
+            prior_dependency_history = {}
             for origin in sorted(world.occurrences):
                 row = world.occurrences[origin]
                 stmt = world.statements[row["statement_id"]]
@@ -37,6 +38,21 @@ def persist_candidate_world(conn, world):
                     any(field in row and row[field] is not False
                         for field in ("kernel_certified", "world_admitted"))):
                     raise CandidatePersistenceError("unexpected candidate promotion")
+                cur.execute("""
+                    SELECT 1
+                    FROM lean_world_candidate_receipt
+                    WHERE repository=%s AND revision=%s AND declaration=%s
+                """, (origin.repository,origin.revision,origin.declaration))
+                had_prior_receipt = cur.fetchone() is not None
+                cur.execute("""
+                    SELECT dep_repository,dep_revision,dep_declaration
+                    FROM lean_world_candidate_dependency
+                    WHERE repository=%s AND revision=%s AND declaration=%s
+                """, (origin.repository,origin.revision,origin.declaration))
+                prior_dependency_history[origin] = (
+                    had_prior_receipt,
+                    {tuple(dependency) for dependency in cur.fetchall()},
+                )
                 cur.execute("""
                     INSERT INTO lean_world_fibre
                       (foundation_profile,type_head,universe_shape)
@@ -109,6 +125,16 @@ def persist_candidate_world(conn, world):
                                               "candidate-unverified"):
                     raise CandidatePersistenceError("conflicting candidate provenance")
                 origin_dbids[origin] = statement_id
+            # Compare against the history that existed before this transaction
+            # began.  Checking after ON CONFLICT insertion would make a changed
+            # edge set look like the expected set and silently accept a rebind.
+            for origin in sorted(world.occurrences):
+                had_prior_receipt, prior_edges = prior_dependency_history[origin]
+                if had_prior_receipt:
+                    expected={(d.repository,d.revision,d.declaration)
+                              for d in world._dependencies[origin]}
+                    if prior_edges != expected:
+                        raise CandidatePersistenceError("conflicting dependency history")
             for origin in sorted(world.occurrences):
                 for dep in world._dependencies[origin]:
                     if dep not in origin_dbids:
