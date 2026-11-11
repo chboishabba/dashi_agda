@@ -321,3 +321,28 @@ For each selected expert set `S_t`, the scheduler may choose colocated execution
 ### Source attribution and exact closure firewall
 
 The six-512 partition is a user-recovered historical architecture proposal, not a property automatically verified for Qwen3-Next or an original theorem of another upstream project. Miners/providers and workers have distinct identities. Claim only the source-level finite Agda witness until Agda kernel run; claim only same-model implementation equivalence when matched source model and test/trace receipts exist; claim only a scheduling/efficiency improvement when latency, cost, quality, RAM and energy are actually measured. The historical TinyStories student-quality and JQ1 network failures remain live negative evidence, not cleared by a successful synthetic arithmetic proof.
+
+## 2026-11-11 execution handoff — finite topology gate ready for local Nix run
+
+**Implementation:** `DASHI/Reasoning/FederatedMinerWorkerTopologyExact.agda` finite two-miner/six-512-shard graph and conditional aggregation; `FederatedTieredMoEFiniteExact.agda` finite revision/placement admission; `MoEOutOfCoreStreamingFiniteExact.agda` finite source/stream/cache and steering examples. Added `scripts/federated_topology_gate.py` and `scripts/check_federated_topology.sh` on default branch.
+
+**Actual locally executed evidence (assistant CPU environment):** 14/14 dependency-free Python tests PASS (synthetic reachability, provider independence, 3072→6×512 partition, gaps/duplicates, capacity, digest/revision rejection, exact integer elementwise-gated FFN shard reduction, duplicate bias negative control, parallel versus serial cost counterexamples, fail-closed release). Script runs without model downloads, network, GPU or third-party Python packages. The repository copy was checked by read-back from GitHub; the exact user's checkout has not been executed. No Agda binary / Nix environment exists in assistant container, so **Agda acceptance is pending the user's machine**.
+
+**Run from repository root on the user's Arch/Nix machine:**
+
+```bash
+git fetch origin
+git switch master
+git pull --ff-only
+bash scripts/check_federated_topology.sh --cpu-only
+nix develop --command bash scripts/check_federated_topology.sh --kernel
+cat artifacts/federated_topology/finite_preflight.json
+```
+
+A Nix devShell is already defined by the repository `flake.nix`; the checker uses its Agda binary and `agda --no-libraries -i .` on the three finite modules. No CI/Docker/venv assumption. It does not run on GPU or allocate significant model weights. If the full gate cannot be launched because Nix flakes/dependencies are absent, preserve the error rather than substituting a system Agda or claiming a kernel pass. The command is **ready to run**, not guaranteed to pass until executed on Agda 2.9.
+
+**Receipt behavior:** CPU-only writes a synthetic JSON receipt with `agda_kernel_checked=false`, `actual_model_checked=false`, `network_measured=false`, `gpu_validated=false`, `release_admitted=false`. The full runner updates the Agda fields *only after* all three checks pass. Any failure exits nonzero. Return both the terminal output and that JSON receipt; never promote this finite gate to source-model or federation release.
+
+**Next source-binding work after Agda receipt:** TNET05 original source weight tensor shapes and activation/partition identity; TNET02 memory capacities for actual worker hardware and available coordinator RAM; TNET04 source FFN/C2/Sophontic and quantized kernel BIDI; N02/N07/N12 authenticated remote joint-state transport, ACKed histories and failover; TNET08/TNET12 multi-peer critical-path scheduler; TNET13/TNET16 full original-token-trace and measured multi-peer cost. The earlier recorded student-quality and JQ1 transport failures remain failed gates, not cured by synthetic shard tests.
+
+**Attribution/status:** existing LILA architecture belongs to Anatolii Kornienko; original signed-wave/federated transport owners remain in PR #1442 and LeechTransformer PR #4. The new topology/focused gate is DASHI-owned finite implementation and conditional proof infrastructure only; no external MoE model ownership, deployed federation or physical speedup claimed.
