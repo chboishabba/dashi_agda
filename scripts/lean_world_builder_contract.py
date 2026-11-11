@@ -118,6 +118,28 @@ def validate_through_builder(export: PendingExport, builder: AuthoritativeBuilde
     if any(not isinstance(e, tuple) or len(e) != 2 or e[0] not in ids or e[1] not in ids
            for e in outcome.edges):
         raise ContractError("unresolved dependency reference")
+    # Structural DAG sanity is necessary but never sufficient for Lean typing.
+    # Process iteratively to avoid recursion-limit failures on untrusted graphs.
+    successors = {node: [] for node in ids}
+    indegree = {node: 0 for node in ids}
+    seen_edges = set()
+    for origin, target in outcome.edges:
+        if (origin, target) in seen_edges:
+            raise ContractError("duplicate dependency edge")
+        seen_edges.add((origin, target))
+        successors[origin].append(target)
+        indegree[target] += 1
+    ready = [node for node, degree in indegree.items() if degree == 0]
+    visited = 0
+    while ready:
+        node = ready.pop()
+        visited += 1
+        for target in successors[node]:
+            indegree[target] -= 1
+            if indegree[target] == 0:
+                ready.append(target)
+    if visited != len(ids):
+        raise ContractError("cyclic dependency graph")
     # Fake builder claims cannot upgrade a proof. Authenticate the external validator independently.
     # This result never changes a queued manifest or authorizes world admission.
     return outcome
