@@ -6,9 +6,16 @@ if [ -z "${PGDATABASE:-}" ]; then
   echo "PGDATABASE must be configured explicitly" >&2
   exit 2
 fi
-for bin in python3 lean; do
-  command -v "$bin" >/dev/null || { echo "MISSING: $bin" >&2; exit 2; }
-done
+command -v python3 >/dev/null || { echo "MISSING: python3" >&2; exit 2; }
+if [ -n "${DASHI_LEAN_BIN:-}" ]; then
+  lean_bin="$DASHI_LEAN_BIN"
+else
+  lean_bin="$(command -v lean || true)"
+fi
+if [ -z "$lean_bin" ] || ! "$lean_bin" --version 2>/dev/null | grep -q "4.28.0"; then
+  echo "REQUIRED: exact pinned Lean 4.28.0 (set DASHI_LEAN_BIN to its executable)" >&2
+  exit 2
+fi
 
 out="/tmp/dashi-big-proof-join"
 if [ "$#" -ge 1 ]; then out="$1"; fi
@@ -18,7 +25,7 @@ if [ -n "${DASHI_WORLD_SCHEMA:-}" ]; then schema="$DASHI_WORLD_SCHEMA"; fi
 batteries_revision="495c008c3e3f4fb4256ff5582ddb3abf3198026f"
 mathlib_revision="8f9d9cff6bd728b17a24e163c9402775d9e6a365"
 
-export DASHI_LEAN_BIN="$(command -v lean)"
+export DASHI_LEAN_BIN="$lean_bin"
 python3 -m unittest discover -s tests \
   -p 'test_lean_world_join_proofs.py' -v
 python3 -m unittest discover -s tests \
@@ -45,7 +52,7 @@ python3 scripts/run_lean_world_join_proofs.py \
   --max-modules 512 \
   --max-source-bytes 134217728 \
   --timeout 600 \
-  --lean "$(command -v lean)" \
+  --lean "${DASHI_LEAN_BIN}" \
   --persist-joins \
   --output "$out/batteries-five-theorem-joins.json"
 
@@ -72,7 +79,7 @@ python3 scripts/run_lean_world_join_proofs.py \
   --max-modules 1024 \
   --max-source-bytes 268435456 \
   --timeout 600 \
-  --lean "$(command -v lean)" \
+  --lean "${DASHI_LEAN_BIN}" \
   --persist-joins \
   --output "$out/mathlib-five-theorem-cross-repo-joins.json"
 
@@ -83,11 +90,11 @@ mathlib_batch="$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))[
 python3 scripts/run_lean_world_join_get.py \
   --schema "$schema" --batch "$batteries_batch" \
   --output-dir "$out/batteries-from-db" \
-  --lean "$(command -v lean)" --reuse-count 5
+  --lean "${DASHI_LEAN_BIN}" --reuse-count 5
 python3 scripts/run_lean_world_join_get.py \
   --schema "$schema" --batch "$mathlib_batch" \
   --output-dir "$out/mathlib-from-db" \
-  --lean "$(command -v lean)" --reuse-count 5
+  --lean "${DASHI_LEAN_BIN}" --reuse-count 5
 
 echo "BIG_JOIN_COMPLETE: 10 source-original theorems compiled and 10 more rechecked from stored PostgreSQL OLean closures"
 echo "Receipts: $out/batteries-five-theorem-joins.json"
