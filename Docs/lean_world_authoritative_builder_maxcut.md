@@ -65,3 +65,16 @@ for that exact path, and source search did not locate it there. This is a
 **source discovery blocker**, not proof that no implementation exists on other
 branches or in another repository. No replacement native-v3 graph semantics
 have been invented in this tranche.
+
+## 11 November follow-through — actual prior canonicalization owner
+
+Live PR inspection established that #1484 (head `c4bca43ed5e46795dde1f439c1f4df821337fd9a`) includes `scripts/lean_world_canonical_dag.py` and `scripts/lean_world_source_world.py`. The former already owns exact canonical-type interning under profile, original source/proof occurrence retention, explicit dependency completeness and cycle rejection, context-indexed incidence and a read-only adapter to #1483's `FibreIndex`. **Reuse or port these implementations rather than introducing a competing statement identity or hyperfabric store.** They accept elaborated-export rows, however, and neither independently validates native-v3 Lean term typing nor certifies the Lean kernel.
+
+The contract's independent structural guard now rejects duplicate edges, self-dependencies and arbitrary cycles in externally claimed canonical DAGs, using iterative topological traversal. Four additional negative/scale regression tests are authored. This guard is intentionally not proof authentication; neither database admission nor kernel certification follows from its success. Tests have not been run against this exact GitHub branch in the operator's Nix environment.
+
+Updated seam:
+1. Port/rebase #1484's exact source receipt and canonical statement interners together with #1483's existing fibre-index adapter into the #1495 dependency stack, preserving independent source occurrences.
+2. Supply a genuine native-v3 parser and pinned-Lean checker that verifies declarations, term references, universes, dependency closure and checker receipts. Never infer kernel certification from the exporter envelope or a builder-supplied boolean.
+3. Make the checked result feed atomic PostgreSQL canonical admission, then query the persisted fibre index.
+4. Retrieve an admitted declaration as donor and kernel-check an independently elaborated consumer proof.
+5. Run negative controls, Nix Lean, PostgreSQL rollback/idempotency/concurrency and actual representative corpus benchmarks locally (not CI).
