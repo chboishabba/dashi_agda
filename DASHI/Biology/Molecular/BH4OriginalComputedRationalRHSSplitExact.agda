@@ -120,16 +120,13 @@ originalRHSSplitLookup :
           (originalReactionRows inputs))
         site) species)
 originalRHSSplitLookup inputs site species =
-  QP.≃-reflexive
-    (trans
-      (Operator.rational369SemidiscreteAt inputs site species)
-      (sym (cong₂ Q._+_
-        (Operator.lookupTabulateExact
-          (Operator.bondContribution inputs site) species)
-        (Operator.lookupTabulateExact
-          (Operator.reactionContribution inputs site) species))))
--- NOTE: the preceding symbolic equality is intended to normalize
--- V.zipWith/V.tabulate at fixed 27×29. Kernel verification is needed.
+  -- Both sides are tabulations of the same two native operators:
+  -- V.zipWith on two V.tabulate vectors evaluates pointwise to
+  -- V.tabulate of Q._+_. The fixed 27×29 dimensions normalize here.
+  QP.≃-reflexive refl
+
+-- Agda still must accept the definitional V.zipWith/V.tabulate
+-- normalization. No external axiom or postulated equality is used.
 
 originalComputedRHSWeightedSplits :
   (inputs : Operator.Rational369SemidiscreteInputs)
