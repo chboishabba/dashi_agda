@@ -28,6 +28,7 @@ import tempfile
 import time
 
 from lean_world_native_v3_export import export_native, store_native, NativeExportError
+from lean_world_compiled_local_closure import compile_deps, ClosureError
 
 from lean_remote_source_inventory import (
     REPO_RE, COMMIT_RE, SHA_RE, RemoteError, request_json, source_blob,
@@ -241,7 +242,8 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                timeout=120, memory_mib=4096, dependency_closure_id="",
                lean_path="", opener=None, token=None, checker=execute_lean,
                native_declaration="", native_out=None, export_command=("lean4export",),
-               exporter=export_native) -> dict:
+               exporter=export_native, compile_local_imports=False,
+               compiled_cache_dir=None) -> dict:
     start = time.perf_counter()
     receipt = {"schema": "dashi-lean-ephemeral-check-v1",
                "repository": repo, "revision": rev, "target": target,
@@ -262,8 +264,22 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                 raise WorkerError("external imports require explicit pinned dependency closure ID")
             if externals and not lean_path:
                 raise WorkerError("external imports require LEAN_PATH directory supplied by caller")
+            active_lean_path = lean_path
+            if compile_local_imports:
+                if compiled_cache_dir is not None and Path(compiled_cache_dir).resolve().is_relative_to(root):
+                    raise WorkerError("persistent compiled cache cannot live in ephemeral workspace")
+                local = compile_deps(
+                    root, sources, target, lean=lean, lean_version=observed_version,
+                    repo=repo, revision=rev,
+                    external_digest=dependency_closure_id or "no-external-dependency-closure",
+                    external_path=lean_path,
+                    cache_dir=Path(compiled_cache_dir) if compiled_cache_dir else None,
+                    timeout=timeout, memory_mib=memory_mib)
+                receipt["compiled_local_import_closure"] = local
+                active_lean_path = local["olean_directory"] + (
+                    os.pathsep + lean_path if lean_path else "")
             result = checker(lean, root, target, timeout=timeout,
-                             memory_mib=memory_mib, lean_path=lean_path)
+                             memory_mib=memory_mib, lean_path=active_lean_path)
             receipt.update(result)
             receipt["status"] = ("lean-module-checked" if
                                  result["exit_code"] == 0 and result["olean_emitted"]
@@ -286,7 +302,7 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                 olean.write_bytes(compiled.read_bytes())
                 raw, inspected = exporter(
                     root, module, native_declaration,
-                    command=tuple(export_command), lean_path=lean_path,
+                    command=tuple(export_command), lean_path=active_lean_path,
                     timeout=timeout, memory_mib=memory_mib)
                 native = store_native(
                     raw, inspected, Path(native_out),
@@ -296,7 +312,7 @@ def run_worker(repo: str, rev: str, target: str, *, lean="lean",
                     dependency_closure_id=dependency_closure_id)
                 receipt["native_export"] = native
                 receipt["declaration_ast_exported"] = True
-    except (RemoteError, WorkerError, NativeExportError, OSError, UnicodeError, ValueError) as exc:
+    except (RemoteError, WorkerError, NativeExportError, ClosureError, OSError, UnicodeError, ValueError) as exc:
         receipt["error"] = f"{type(exc).__name__}: {exc}"
     receipt["total_seconds"] = round(time.perf_counter() - start, 4)
     return receipt
@@ -318,6 +334,10 @@ def main() -> int:
                    help="persistent artifact directory outside ephemeral workspace")
     p.add_argument("--export-bin", default="lean4export")
     p.add_argument("--export-arg", action="append", default=[])
+    p.add_argument("--compile-local-imports", action="store_true",
+                   help="compile source-verified local imports into module-named oleans")
+    p.add_argument("--compiled-cache-dir", type=Path,
+                   help="persistent content-addressed local olean cache")
     args = p.parse_args()
     result = run_worker(args.repository, args.revision, args.target,
                         lean=args.lean, timeout=args.timeout,
@@ -327,6 +347,8 @@ def main() -> int:
                         native_declaration=args.native_declaration,
                         native_out=args.native_out,
                         export_command=(args.export_bin, *args.export_arg),
+                        compile_local_imports=args.compile_local_imports,
+                        compiled_cache_dir=args.compiled_cache_dir,
                         token=os.environ.get("GITHUB_TOKEN"))
     print(json.dumps(result, sort_keys=True))
     return 0 if result["status"] == "lean-module-checked" and (
