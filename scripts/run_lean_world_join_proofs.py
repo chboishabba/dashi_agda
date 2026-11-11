@@ -388,7 +388,33 @@ def main():
                     conn,args.repository,args.revision,[args.module],
                     max_modules=args.max_modules,
                     max_source_bytes=args.max_source_bytes)
-        result=compile_and_join(plan,args.lean,args.donor,timeout=args.timeout)
+        if not plan.get("origins"):
+            plan["origins"]={
+                mod:{"repository":args.repository,"revision":args.revision,
+                     "path":path_for_module(mod),
+                     "source_sha256":sha256(raw).hexdigest()}
+                for mod,raw in plan["source"].items()
+            }
+            plan["source_snapshots"]=[{
+                "repository":args.repository,"revision":args.revision}]
+        stored=[]
+        def sink(report,generated,olean):
+            if not args.persist_joins:
+                return
+            import psycopg
+            from psycopg import sql
+            from lean_world_compiled_join_store import persist_join
+            with psycopg.connect("") as db:
+                with db.cursor() as cur:
+                    cur.execute(sql.SQL("SET search_path TO {},pg_catalog").format(
+                        sql.Identifier(args.schema)))
+                db.commit()
+                stored.append(persist_join(db,report,generated,olean))
+        result=compile_and_join(
+            plan,args.lean,args.donor,timeout=args.timeout,
+            artifact_consumer=sink)
+        if stored:
+            result["persistent_join"]=stored[0]
         result["repository"]=args.repository
         result["revision"]=args.revision
         output=args.output.resolve()
