@@ -13,6 +13,7 @@ from hashlib import sha256
 from pathlib import Path
 import os
 import re
+import resource
 import subprocess
 import tempfile
 
@@ -81,11 +82,17 @@ def check_native_export(export: PendingExport, executable: Path, *,
         argv = (str(executable), *arguments, str(native))
         # No shell, user tokens, SSH agent or ambient Python path supplied.
         env = {"PATH": "/usr/bin:/bin", "HOME": td, "LC_ALL": "C", "TZ": "UTC"}
+        def limit_output():
+            # A failing or hostile checker cannot write unbounded log files.
+            # SIGXFSZ causes nonzero exit, which never authorizes a receipt.
+            cap = max(1, max_output_bytes)
+            resource.setrlimit(resource.RLIMIT_FSIZE, (cap, cap))
         try:
             with stdout.open("wb") as out, stderr.open("wb") as err:
                 completed = subprocess.run(
                     argv, cwd=td, env=env, stdin=subprocess.DEVNULL,
-                    stdout=out, stderr=err, check=False, timeout=timeout)
+                    stdout=out, stderr=err, check=False, timeout=timeout,
+                    preexec_fn=limit_output)
         except (OSError, subprocess.TimeoutExpired) as exc:
             raise CheckerError("external checker unavailable or timed out") from exc
         if (stdout.stat().st_size > max_output_bytes or
