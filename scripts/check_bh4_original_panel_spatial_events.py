@@ -109,6 +109,12 @@ def check_certificate(certificate, *, full_panel):
         if not audited["stoichiometrically_balanced"]:
             raise ValueError(f"original reaction atom/charge not balanced: {rid}")
         for participant in record["participants"]:
+            coefficient=_integer(participant.get("coefficient",1),
+                                 "original participant coefficient")
+            if coefficient<=0:
+                raise ValueError("original gross participant coefficient must be positive")
+            if participant.get("side") not in ("substrate","product"):
+                raise ValueError("original gross participant side not admitted")
             key=participant_key(participant)
             data=(parse_formula(str(participant["formula"])),
                   _integer(participant["charge"], "original participant charge"))
