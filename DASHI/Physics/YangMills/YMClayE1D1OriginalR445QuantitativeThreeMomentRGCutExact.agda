@@ -216,23 +216,13 @@ module _
       errLNN maxERNN maxBLNN errRNN
       productError leftError rightSize leftSize rightError
 
-  -- The standard ordered-real identity
+  -- The scalar equality (a-b)-(c-d) = (a-c)-(b-d) is now proved
+  -- from the existing RealAnalysisAxioms additive laws by
+  -- Scalar.subtractionInterchange, with NO new physics or scalar axiom.
   --
-  --   (a-b)-(c-d) = (a-c)-(b-d)
-  --
-  -- is NOT a named source lemma in RealAnalysisAxioms. Thus the
-  -- preceding theorem is deliberately about the equivalent-looking
-  -- three-moment residual in the explicit subtraction normal form.
-  -- Before transporting to the actual covariance difference, derive
-  -- this pure scalar ring equality from the selected real backend.
-  -- No numerical source RG estimate has yet been supplied.
-
-
-  -- This is the actual covariance bound, conditional ONLY on
-  -- (a) the selected pure real-ring subtraction interchange
-  --     (a-b)-(c-d) = (a-c)-(b-d),
-  -- (b) the three numerical source moment error bounds and two
-  --     selected moment majorants.
+  -- The genuine original covariance bound below consumes ONLY the
+  -- THREE quantitative RG moment errors and TWO moment majorants.
+  -- These remain unpaid physical estimates, not typeclass defaults.
   -- No assumption that B_*mu_Wilson,3 equals mu_Wilson,1.
   originalR445CovarianceErrorFromThreeSourceMoments :
     (left right : CoarseTest)
