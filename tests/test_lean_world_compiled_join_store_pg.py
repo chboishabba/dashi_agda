@@ -94,7 +94,8 @@ class JoinedProofArtifactPG(unittest.TestCase):
     def test_persist_exact_original_bytes_retrieve_and_retry(self):
         first=persist_join(self.conn,self.report,self.joined,self.olean,
                             compiled_module_contents={"Original":self.original_olean})
-        second=persist_join(self.conn,self.report,self.joined,self.olean)
+        second=persist_join(self.conn,self.report,self.joined,self.olean,
+                            compiled_module_contents={"Original":self.original_olean})
         self.assertEqual(first,second)
         self.assertTrue(first["content_stored_in_postgresql"])
         self.assertFalse(first["world_admitted"])
@@ -104,12 +105,14 @@ class JoinedProofArtifactPG(unittest.TestCase):
     def test_reject_unbound_original_module(self):
         self.report["compiled_modules"][0]["source_sha256"]="f"*64
         with self.assertRaisesRegex(JoinStoreError,"source sha mismatch"):
-            persist_join(self.conn,self.report,self.joined,self.olean)
+            persist_join(self.conn,self.report,self.joined,self.olean,
+                            compiled_module_contents={"Original":self.original_olean})
 
     def test_reject_forged_certificate(self):
         self.report["world_admitted"]=True
         with self.assertRaisesRegex(JoinStoreError,"cannot be promoted"):
-            persist_join(self.conn,self.report,self.joined,self.olean)
+            persist_join(self.conn,self.report,self.joined,self.olean,
+                            compiled_module_contents={"Original":self.original_olean})
 
     def test_reject_modified_checked_olean_payload(self):
         with self.assertRaisesRegex(JoinStoreError,"digest"):
@@ -117,7 +120,8 @@ class JoinedProofArtifactPG(unittest.TestCase):
                          compiled_module_contents={"Original":self.original_olean})
 
     def test_immutable_database_join_rows(self):
-        result=persist_join(self.conn,self.report,self.joined,self.olean)
+        result=persist_join(self.conn,self.report,self.joined,self.olean,
+                            compiled_module_contents={"Original":self.original_olean})
         with self.assertRaises(psycopg.Error):
             with self.conn.transaction():
                 with self.conn.cursor() as cur:
