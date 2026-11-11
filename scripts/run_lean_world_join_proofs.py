@@ -28,7 +28,6 @@ from lean_remote_archive_stream import REPO_RE,COMMIT_RE
 
 # Imports are a discovery plan only. Lean, not this regex, resolves the
 # actual compiled import closure and checks proof identities.
-IMPORT=re.compile(r"^\s*(?:(?:public|private|meta)\s+)?import\s+([A-Za-z_][\w.]*)(?:\s+([A-Za-z_][\w.]*))*\s*$")
 MODULE=re.compile(r"[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*\Z")
 BUILTINS=("Lean.","Init.","Std.")
 DEFAULT_MODULE_CAP=128
@@ -155,10 +154,7 @@ def plan_multi_repo_from_pg(conn,snapshots,roots,*,max_modules=512,
             cur.execute("""SELECT path FROM lean_world_source_occurrence
                 WHERE repository=%s AND revision=%s""",(repo,rev))
             for (path,) in cur:
-                prior=path_owners.get(path)
-                if prior and prior!=(repo,rev):
-                    raise JoinError("ambiguous cross-repository path: "+path)
-                path_owners[path]=(repo,rev)
+                path_owners.setdefault(path,[]).append((repo,rev))
     sources={}
     edges={}
     origins={}
@@ -180,13 +176,16 @@ def plan_multi_repo_from_pg(conn,snapshots,roots,*,max_modules=512,
         if mod in active:
             raise JoinError("cyclic original source imports")
         path=path_for_module(mod)
-        owner=path_owners.get(path)
-        if owner is None:
+        owners=path_owners.get(path,[])
+        if not owners:
             if mod in ("Init","Lean","Std") or mod.startswith(BUILTINS):
                 external.add(mod)
                 done.add(mod)
                 continue
             raise JoinError("missing original cross-repository import: "+mod)
+        if len(owners)!=1:
+            raise JoinError("ambiguous selected source module: "+mod)
+        owner=owners[0]
         if len(sources)>=max_modules:
             raise JoinError("source module cap exceeded")
         raw=retrieve_source(conn,owner[0],owner[1],path)
