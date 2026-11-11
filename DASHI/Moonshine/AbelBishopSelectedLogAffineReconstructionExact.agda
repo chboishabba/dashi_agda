@@ -243,3 +243,82 @@ originalBishopSelectedChartLogSeriesConverges p nz t ratio interval relativeRadi
     interval
     (originalBishopNormalizedDisplacementRadius
       p nz t ratio relativeRadius)
+
+
+------------------------------------------------------------------------
+-- SELECTED LOCAL LOGARITHMIC GERM: AN ACTUAL BISHOP-COMPLEX VALUE.
+--
+-- This is p + the source-constructed logarithmic series of p^-1*t.
+-- No use of a chosen principal-log function and no hidden analytic
+-- inverse assumption. The exp inverse law is a separate open gate.
+------------------------------------------------------------------------
+
+originalBishopSelectedLocalLogGerm :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  Complex.BishopComplex
+originalBishopSelectedLocalLogGerm p nz t ratio interval relativeRadius =
+  Algebra._+C_ p
+    (originalBishopSelectedChartLogSeries
+      p nz t ratio interval relativeRadius)
+
+-- A proposed value for the logarithmic increment at normalized
+-- displacement is uniquely identified by its SAME source-series
+-- convergence, rather than by an unrelated inverse authority.
+originalBishopSelectedChartLogIncrementUnique :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  (other : Complex.BishopComplex) →
+  Complex.ComplexSeriesConvergesTo
+    (Terms.originalBishopLogOnePlusTerm
+      (normalizedDisplacement p nz t))
+    other →
+  Complex._≈C_
+    (originalBishopSelectedChartLogSeries
+      p nz t ratio interval relativeRadius)
+    other
+originalBishopSelectedChartLogIncrementUnique
+  p nz t ratio interval relativeRadius other otherConvergence =
+  Log.originalBishopLogOnePlusCanonicalLimitUniqueOnUnitDisk
+    interval
+    (originalBishopNormalizedDisplacementRadius
+      p nz t ratio relativeRadius)
+    other
+    otherConvergence
+
+originalBishopSelectedLocalLogGermIncrementUnique :
+  (p : Complex.BishopComplex) →
+  (nz : Reciprocal.BishopComplexNonzero p) →
+  (t : Complex.BishopComplex) →
+  (ratio : BishopReal.ℝ) →
+  (interval : Unit.BishopUnitIntervalRatio ratio) →
+  (relativeRadius : BishopReal._≃_
+    (Norm.normSqC t)
+    (BishopReal._*_ (Norm.square ratio) (Norm.normSqC p))) →
+  (other : Complex.BishopComplex) →
+  Complex.ComplexSeriesConvergesTo
+    (Terms.originalBishopLogOnePlusTerm
+      (normalizedDisplacement p nz t))
+    other →
+  Complex._≈C_
+    (originalBishopSelectedLocalLogGerm
+      p nz t ratio interval relativeRadius)
+    (Algebra._+C_ p other)
+originalBishopSelectedLocalLogGermIncrementUnique
+  p nz t ratio interval relativeRadius other convergence =
+  Algebra.addCCongruent
+    (Complex.≈C-refl p)
+    (originalBishopSelectedChartLogIncrementUnique
+      p nz t ratio interval relativeRadius other convergence)
