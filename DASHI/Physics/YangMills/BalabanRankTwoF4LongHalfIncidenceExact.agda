@@ -220,3 +220,88 @@ incidenceActionEquivariant g c =
 -- Fully separate target action compatibility for an INDEPENDENT F4
 -- source remains open; the finite enumerator checks the standard
 -- signed-coordinate action on 24 long and 16 half roots.
+
+-- Independent standard signed-coordinate actions on the F4 long and
+-- F4 half-root coordinates; unlike incidenceAct, these are defined
+-- directly, not by conjugating the grid-cell action.
+negateOuter : SignedOuter → SignedOuter
+negateOuter inner = inner
+negateOuter outerNegative = outerPositive
+negateOuter outerPositive = outerNegative
+
+negateHalf : HalfSign → HalfSign
+negateHalf negative = positive
+negateHalf positive = negative
+
+longOfIntervalFlips :
+  (c : Grid.IntervalCell) →
+  support (axisFromInterval (Action.flipInterval c))
+    ≡ negateOuter (support (axisFromInterval c))
+longOfIntervalFlips Grid.negativeOuter = refl
+longOfIntervalFlips Grid.negativeInner = refl
+longOfIntervalFlips Grid.positiveInner = refl
+longOfIntervalFlips Grid.positiveOuter = refl
+
+halfOfIntervalFlips :
+  (c : Grid.IntervalCell) →
+  halfSign (axisFromInterval (Action.flipInterval c))
+    ≡ negateHalf (halfSign (axisFromInterval c))
+halfOfIntervalFlips Grid.negativeOuter = refl
+halfOfIntervalFlips Grid.negativeInner = refl
+halfOfIntervalFlips Grid.positiveInner = refl
+halfOfIntervalFlips Grid.positiveOuter = refl
+
+actLong : Action.HypercubicGenerator → Long4 → Long4
+actLong Action.flip0 (long4 a b c d) = long4 (negateOuter a) b c d
+actLong Action.flip1 (long4 a b c d) = long4 a (negateOuter b) c d
+actLong Action.flip2 (long4 a b c d) = long4 a b (negateOuter c) d
+actLong Action.flip3 (long4 a b c d) = long4 a b c (negateOuter d)
+actLong Action.swap01 (long4 a b c d) = long4 b a c d
+actLong Action.swap12 (long4 a b c d) = long4 a c b d
+actLong Action.swap23 (long4 a b c d) = long4 a b d c
+
+actHalf : Action.HypercubicGenerator → Half4 → Half4
+actHalf Action.flip0 (half4 a b c d) = half4 (negateHalf a) b c d
+actHalf Action.flip1 (half4 a b c d) = half4 a (negateHalf b) c d
+actHalf Action.flip2 (half4 a b c d) = half4 a b (negateHalf c) d
+actHalf Action.flip3 (half4 a b c d) = half4 a b c (negateHalf d)
+actHalf Action.swap01 (half4 a b c d) = half4 b a c d
+actHalf Action.swap12 (half4 a b c d) = half4 a c b d
+actHalf Action.swap23 (half4 a b c d) = half4 a b d c
+
+longProjectionEquivariant :
+  (g : Action.HypercubicGenerator) (c : Grid.GridCell4) →
+  longProjection (toIncidence (Action.act g c)) ≡
+    actLong g (longProjection (toIncidence c))
+longProjectionEquivariant Action.flip0 (Grid.gridCell4 a b c d)
+  rewrite longOfIntervalFlips a = refl
+longProjectionEquivariant Action.flip1 (Grid.gridCell4 a b c d)
+  rewrite longOfIntervalFlips b = refl
+longProjectionEquivariant Action.flip2 (Grid.gridCell4 a b c d)
+  rewrite longOfIntervalFlips c = refl
+longProjectionEquivariant Action.flip3 (Grid.gridCell4 a b c d)
+  rewrite longOfIntervalFlips d = refl
+longProjectionEquivariant Action.swap01 (Grid.gridCell4 a b c d) = refl
+longProjectionEquivariant Action.swap12 (Grid.gridCell4 a b c d) = refl
+longProjectionEquivariant Action.swap23 (Grid.gridCell4 a b c d) = refl
+
+halfProjectionEquivariant :
+  (g : Action.HypercubicGenerator) (c : Grid.GridCell4) →
+  halfProjection (toIncidence (Action.act g c)) ≡
+    actHalf g (halfProjection (toIncidence c))
+halfProjectionEquivariant Action.flip0 (Grid.gridCell4 a b c d)
+  rewrite halfOfIntervalFlips a = refl
+halfProjectionEquivariant Action.flip1 (Grid.gridCell4 a b c d)
+  rewrite halfOfIntervalFlips b = refl
+halfProjectionEquivariant Action.flip2 (Grid.gridCell4 a b c d)
+  rewrite halfOfIntervalFlips c = refl
+halfProjectionEquivariant Action.flip3 (Grid.gridCell4 a b c d)
+  rewrite halfOfIntervalFlips d = refl
+halfProjectionEquivariant Action.swap01 (Grid.gridCell4 a b c d) = refl
+halfProjectionEquivariant Action.swap12 (Grid.gridCell4 a b c d) = refl
+halfProjectionEquivariant Action.swap23 (Grid.gridCell4 a b c d) = refl
+
+-- This is the actual nontrivial generator commuting square: projection
+-- into each independent standard F4 root carrier commutes with ALL
+-- seven original Round56 hypercubic generators. The map into each
+-- separate carrier has nontrivial fibres and is NOT bijective.
