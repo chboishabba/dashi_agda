@@ -22,6 +22,8 @@ import DASHI.Foundations.TernaryThirteenOriginalRelational144NonIdentificationEx
 import DASHI.Foundations.TernaryThirteenOriginalAxisValuationBridgeExact as Codec
 import DASHI.Foundations.TernaryThirteenFibreSplitExact as Word
 import Base369 as Base
+import DASHI.Core.SectionedProjectionProvenanceBridgeExact as Sectioned
+import DASHI.Core.ConsumerDescentMinimalObserverExact as Descent
 
 UnobservedResidual : Set
 UnobservedResidual = Original.StageRelationField
@@ -916,3 +918,76 @@ originalRelationalProductNormalForm = record
   ; encodeDecodeCode = reopenNormalizedCoarseRecovers
   ; encodeDecodeResidualAt = reopenNormalizedResidualRecoversAt
   }
+
+------------------------------------------------------------------------
+-- Operational completeness for EVERY original addressed relation cell.
+-- The product of coarse code and normalized residual is sufficient
+-- for all cell consumers, whereas coarse code alone was explicitly
+-- refuted for the reverse (1,0) cell by the original counterexample.
+------------------------------------------------------------------------
+
+fullRelationalObserver :
+  Original.StageRelationField →
+  Word.TritWord 13 × Residual131
+fullRelationalObserver field =
+  Boundary.relationToThirteen field , maskToResidual131 field
+
+originalRelationCellConsumer :
+  Original.StageRelation144 →
+  Original.StageRelationField → Base.TriTruth
+originalRelationCellConsumer cell field = field cell
+
+allOriginalRelationCellsSufficient :
+  (cell : Original.StageRelation144) →
+  Descent.ConsumerSufficient
+    fullRelationalObserver
+    (originalRelationCellConsumer cell)
+allOriginalRelationCellsSufficient cell left right same =
+  trans
+    (sym (reopenNormalizedExact left cell))
+    (trans
+      (cong
+        (λ pair →
+          reopenNormalized (proj₁ pair) (proj₂ pair) cell)
+        same)
+      (reopenNormalizedExact right cell))
+
+-- The ORIGINAL sectioned projection machinery now applies to the
+-- actual 144-field -> 13-coordinate map with the already-proved
+-- canonical representative. It does NOT assert fine-state equality.
+originalRelationCodeSectioned :
+  Sectioned.SectionedProjection
+    Original.StageRelationField
+    (Word.TritWord 13)
+originalRelationCodeSectioned =
+  Sectioned.sectionedProjection
+    Boundary.relationToThirteen
+    Boundary.thirteenCodeToSelectedRelation
+    Boundary.sourceRelationCodeHasSection
+
+originalRelationFibreConstantRecovery :
+  {Value : Set}
+  (observable : Original.StageRelationField → Value) →
+  Sectioned.FibreConstant
+    Boundary.relationToThirteen observable →
+  (field : Original.StageRelationField) →
+  observable field ≡
+    observable
+      (Boundary.thirteenCodeToSelectedRelation
+        (Boundary.relationToThirteen field))
+originalRelationFibreConstantRecovery observable constant field =
+  Sectioned.fibreConstantObservableReconstructsFromSection
+    originalRelationCodeSectioned observable constant field
+
+-- Original reverse-cell consumer witnesses exactly why the
+-- pointwise 131-cell residual is operationally indispensable.
+reverseCellIsNotCoarseFibreConstant :
+  Sectioned.FibreConstant
+    Boundary.relationToThirteen
+    Boundary.reverseCellConsumer → ⊥
+reverseCellIsNotCoarseFibreConstant constant =
+  Boundary.reverseCellReallyDiffers
+    (constant
+      Boundary.originalFlatField
+      Boundary.reverseCellRaised
+      Boundary.originalThirteenCodeCollision)
