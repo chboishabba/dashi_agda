@@ -67,6 +67,34 @@ clearanceHasNoGlobalLeftInverse undo inverse =
         (cong undo clearanceCollapsesDistinctState)
         (inverse highHormoneLowReceptor)))
 
+
+-- A simple finite Lyapunov-style potential is compatible with this
+-- dissipative example. It is not a conservation-law/Hamiltonian invariant.
+levelEnergy : Level → Nat
+levelEnergy low = 0
+levelEnergy middle = 1
+levelEnergy high = 2
+
+toyPotential : HormoneReceptor → Nat
+toyPotential s = levelEnergy (hormone s) + levelEnergy (activeReceptor s)
+
+clearancePotentialIsZero :
+  (s : HormoneReceptor) → toyPotential (step clearance s) ≡ 0
+clearancePotentialIsZero s = refl
+
+clearancePotentialNonIncreasing :
+  (s : HormoneReceptor) →
+  toyPotential (step clearance s) ≤ toyPotential s
+clearancePotentialNonIncreasing s = z≤n
+
+clearanceStrictlyLowersSelectedHighState :
+  toyPotential (step clearance highHormoneHighReceptor) <
+    toyPotential highHormoneHighReceptor
+clearanceStrictlyLowersSelectedHighState = s≤s z≤n
+
+-- A potential decreasing for a TOY clearance operator is not evidence
+-- that real cortisol/GR systems necessarily converge to the same state.
+
 -- External measurement and mechanism data are required to project the
 -- finite hormonal state into an actual individual concentration trace.
 record ReceptorDynamicsCalibration : Set₁ where
