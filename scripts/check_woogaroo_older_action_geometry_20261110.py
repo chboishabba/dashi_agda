@@ -18,6 +18,9 @@ CASE = 'EPBC 2019/8575'
 ROLES = ('prior_approved_impact', 'prior_actual_clearing',
          'current_excluded_habitat', 'current_final_impact')
 MAX_BYTES = 40 * 1024 * 1024
+# Local metric grids used by the original 2014/7306 map and potential
+# GDA2020 successor. Never infer that *any* metre CRS is area-safe.
+ALLOWED_LOCAL_CRS = ('EPSG:28356', 'EPSG:7856')
 
 
 def load_geom(root, record, role):
@@ -64,6 +67,8 @@ def audit(manifest, root):
     crs = CRS.from_user_input(epsg)
     if not crs.is_projected or not all(x.unit_name.lower() in ('metre', 'meter') for x in crs.axis_info[:2]):
         raise ValueError('Projected metre CRS required, not latitude/longitude')
+    if epsg not in ALLOWED_LOCAL_CRS:
+        raise ValueError('Unsupported area-distorting or non-local CRS: no automatic reprojection')
     records = manifest.get('layers')
     if not isinstance(records, dict) or set(records) != set(ROLES):
         raise ValueError('Exactly four layer roles required')
@@ -98,6 +103,8 @@ def audit(manifest, root):
     return {
         'case': CASE, 'status': 'UNAUTHENTICATED_GEOMETRIC_CANDIDATE_COMPARISON',
         'projected_crs': epsg, 'original_layer_sha256': hashes,
+        'local_mga_grid_areas_not_geodesic': True,
+        'cross_datum_reprojection_performed': False,
         'area_hectares': areas,
         'excluded_inside_prior_approval': not_prior.is_empty,
         'excluded_inside_prior_actual_clearing': not_cleared.is_empty,
@@ -154,6 +161,13 @@ def selftest():
         try: audit(geographic,root); raise AssertionError('degrees accepted')
         except ValueError as exc: assert 'Projected metre' in str(exc)
         tests += 1
+        mercator = copy.deepcopy(manifest)
+        mercator['projected_crs'] = 'EPSG:3857'
+        for record in mercator['layers'].values():
+            record['projected_crs'] = 'EPSG:3857'
+        try: audit(mercator,root); raise AssertionError('Web Mercator area accepted')
+        except ValueError as exc: assert 'Unsupported area-distorting' in str(exc)
+        tests += 1
         mixed = copy.deepcopy(manifest)
         mixed['layers']['current_final_impact']['projected_crs'] = 'EPSG:4326'
         try: audit(mixed,root); raise AssertionError('mixed CRS accepted')
@@ -174,7 +188,7 @@ def selftest():
         try: audit(wrong,root); raise AssertionError('wrong case accepted')
         except ValueError as exc: assert 'Wrong case' in str(exc)
         tests += 1
-        assert tests == 9
+        assert tests == 10
         return {'tests':tests, 'passed':tests, 'synthetic_only':True,
                 'original_approval_or_clearing_polygons_acquired':False}
 
