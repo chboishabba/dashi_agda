@@ -128,7 +128,7 @@ def enqueue(receipt: dict, spool: Path) -> dict:
         raise AdmissionError(str(exc)) from exc
     record["artifact_path"] = str(artifact.resolve())
     manifest = spool / (key + ".json")
-    expected = json.dumps(record, sort_keys=True, separators=(",", ":")).encode() + b"\\n"
+    expected = json.dumps(record, sort_keys=True, separators=(",", ":")).encode() + b"\n"
     try:
         publish_immutable(manifest, expected)
     except PublicationError as exc:
