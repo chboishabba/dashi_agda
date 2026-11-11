@@ -160,3 +160,13 @@ Additional Agda declarations in `BalabanExceptional240SameActionBoundaryExact.ag
 - P2 `mpDensityWeakLimitOriginalProbabilitySpace`: original Marchenko–Pastur weak-limit, moments, Stieltjes equation, zero atom, eigen-edge controls remain independent theorem obligations, not supplied by finite Gram PSD or the numerical script.
 
 **Verification:** PR #1480 Agda source-written only and its numeric tests committed; no Agda/Nix compiler available in this working container and no new actual empirically sourced PNF panel or verified null. Cross-branch checkout needed to test or merge; leave #1479 original sources untouched.
+
+## 10 — Marchenko–Pastur second pass, temporal-ordering obstruction (2026-11-11)
+
+**Correct owner:** All new MP lemmas remain on independent PR #1480 (`pnf-mp-maxcut-2026-11-09`); this roadmap is a cross-PR inventory, not a fabricated branch merge. The new `PNFMPTemporalOrderingNonIdentificationExact.agda` has two actual finite sequences [0,1,0,1] and [0,0,1,1] with equal n=4, sample sum 2 and sum-squares 2 but different lag-one sums 0 vs 1. Formal declarations `sameStaticMoments`, `noStaticCovarianceMomentOnlyAutocorrelationDecoder` and `arbitraryStaticRechartCannotRecoverLag` establish that spectral postprocessing of a static univariate covariance cannot recover erased order/dependence information. No stochastic iid truth, real 319211-world analysis or empirical biological/cognitive inference promoted.
+
+`PNFHistoryTimeZeroSpectrumExact.agda` in #1480 reuses actual variable-dimensional same-source centred windows and `CovarianceZeroSpectrum` to prove `forcedZeroModesForActualWindow` *conditional on the source-specific field rank-nullity owner and selected operator's zero-mode=kernel-dimension receipt*. It does not construct the eigensolver or prove an unconditional spectral theorem. These are distinct from the P0 `literalRegularIntegrandSelectedB4GeneratorCertificate` and alternative F4/E6/D4 character owners.
+
+**Locally re-executed exact 240-root action count:** for all four unused paired-sign E8 coordinates 4,5,6,7, each selected W(D8) action yields sign fixed points 60, adjacent-swap fixed points 126 and 34 root orbits. This confirms the selected action negative control; no universal exception-group no-go claimed.
+
+**P0/P1 true outstanding external cut:** independently authenticated original activation rows/window/source and empirical null; real field + spectral mode/kernel equality; same-action alternative F4/D4/E6 characters; source physical literal integrand with actual interval environment. P2 original independent sampling/assay windows and actual source-codec reconstructions. P3 individual physiological causality and legal authority. New Agda remains source-written, unverified by kernel.
