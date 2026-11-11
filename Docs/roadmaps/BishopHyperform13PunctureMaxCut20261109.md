@@ -1610,3 +1610,57 @@ instead of mistaking the coarse 13-code for the entire original
 relational process. The full original 144-transpose involution
 is not contradicted. No source appraisal/ITIR/group-action
 semantic equality or kernel acceptance is inferred.
+
+
+## 2026-11-11 P0 exact appraisal–Heisenberg equivariance type signature
+
+New original-source-admission contract:
+`DASHI/Foundations/HeisenbergAppraisalEquivarianceExact.agda`
+(commit `414a950`). Golden TOE roots `0b9895d`,
+`63a399b`, `fbdb6bf`.
+
+`OriginalAppraisalHeisenbergAction kernel Time` is a **record of
+unpaid source proof obligations**, parameterised by the original
+`Base369RelationalUpdateKernelExact.RelationalUpdateKernel` and
+an independently selected time type. It is NOT constructed.
+
+Required fields:
+- `appraisalUpdate`: actual original participant/time-indexed
+  update on `StageRelationField`, not a fabricated generic action;
+- `groupAction`, `groupActionUnit`, `groupActionComposition`:
+  genuine action of the existing nonabelian `Heisenberg6`
+  on the original 144-cell relation source;
+- `relabelGroup`, `relabelPreservesMultiplication`,
+  `relabelPreservesIdentity`: source-backed group relabeling;
+- `residualCorrection` and `correctionPreservesCoarse`:
+  explicit original-field correction that does not alter the
+  original selected 13-coordinate observation;
+- `appraisalEquivariantUpToResidual`: actual all-cell commuting
+  law for selected appraisal action, relabeled group action,
+  and source-residual correction.
+
+Constructed now:
+`correctionReopensAt` reuses the existing original
+`reopenNormalizedExact` to recover every addressed cell of
+any explicitly selected residual-corrected field.
+
+**Crucial boundary:** no original appraisal action has
+been shown to be an `Heisenberg6` representation, no
+external ITIR world-node correspondence is supplied, and
+the residual correction is NOT proved a 2-cocycle.
+The finite ternary Weyl group law does not alone imply
+continuous canonical CCR `[P,Q]=iℏI`, a Cayley unitary
+operator functional calculus, or Bishop/Zeta/Gamma analytic
+continuation. These remain independent mathematical gates.
+
+NEXT highest-alpha P0 source payment:
+select a genuine original relational-update operator and
+actual participant/context/time specialization, then
+construct the precise original `groupAction` and
+`relabelGroup` witnesses (or prove a concrete obstruction);
+finally prove the all-cell equivariance/coherence, including
+authority, dependency, capacity and provenance. Do not
+give this record a trivial invented inhabitant and call
+the original semantic-world seam complete.
+
+No Agda kernel receipt for the new contract; source-written.
