@@ -1298,3 +1298,94 @@ TOE roots: consumer module `afa7140`, `c999240`,
 **Verification:** source-written (no Agda binary available); do not
 promote to KERNEL-CHECKED. The Python finite regression is a separate
 algorithmic cross-check and carries no original-world semantic claim.
+
+
+## 2026-11-11 original finite Heisenberg group owner: H1.01 SAME-CARRIER result
+
+**Prior-art correction and highest-alpha proof:** the repository already
+has the ACTUAL finite 3B Heisenberg central extension
+`DASHI/Moonshine/Monster3BFiniteHeisenbergCentralExtensionExact.agda`:
+`Heisenberg6` is six translation plus six modulation coordinates
+over F3, together with a central F3 phase. `compose` includes
+the genuine `dot6` cocycle. The original associativity and inverse
+theorem owners are
+`Monster3BFiniteHeisenbergAssociativityExact` and
+`Monster3BFiniteHeisenbergInverseExact`. DO NOT mistake
+`RelationalAppraisalPointedPhaseExact.centralCompletionGroupOrderPattern`
+(a count) for proof of this original group law.
+
+New source owner:
+`DASHI/Foundations/TernaryThirteenOriginalHeisenbergGroupCarrierExact.agda`.
+
+The construction uses original group/source types only, not a
+cardinality-only group placeholder:
+
+- `toWordTrit`/`fromWordTrit` with both three-case inverses
+  between original `DASHI.Algebra.Trit.Trit` and existing
+  thirteen-fibre `Trit`.
+- `x6ToWord`/`wordToX6` with both six-coordinate inverse
+  theorems for the original finite `Monster3BFiniteHeisenbergGeneratorsExact.X6`.
+- `originalGroupToWord`/`wordToOriginalGroup` use the
+  actual six+six+one quotient/centre split and the original
+  `TritWord 13`, with **both full inductive word/group round
+  trips** `originalGroupRoundTrip`, `originalWordRoundTrip`.
+- `wordCompose`, `wordIdentity`, `wordInverse` are
+  *transported from the original nonabelian cocycle-bearing
+  `Heisenberg6`*, not componentwise ternary addition;
+  `originalMultiplicationRespected`,
+  `wordMultiplicationDecoded`,
+  `originalIdentityRespected`,
+  `originalInverseRespected`,
+  `originalAssociativityRespected` reuse original laws.
+- `sourceTranslation`/`sourceModulation` specialize the
+  original nontrivial dual generator pair at `axis0`;
+  `sourceTranslationModulationPhase`,
+  `sourceModulationTranslationPhase`,
+  `originalGeneratorOrderMatters`,
+  `wordGeneratorOrderMatters` give an explicit
+  noncommuting witness after transporting the true group law.
+- `originalGroupToSource`/`sourceToOriginalGroup` compose
+  the actual finite group coding with the already-owned
+  `TernaryThirteenOriginalAxisValuationBridgeExact` and
+  original `Rel.SourceCentralCompletionCarrier`.
+  `originalGroupSourceRoundTrip` is an exact group-side
+  equality. `sourceOriginalGroupRoundTripAxis` is the
+  original twelve-axis pointwise inverse and
+  `sourceOriginalGroupRoundTripCentre` is the exact centre
+  inverse (no unproved function extensionality).
+- `sourceCentralCompose` and
+  `sourceCentralGroupCompositionOnAxes/OnCentre` establish
+  the cocycle-bearing group multiplication transported into
+  the originally constructed 12+centre valuation.
+
+Commits `469e89d` original 13-word Heisenberg carrier,
+`e7fd2a9` actual source 12+centre correspondence and
+transported multiplication, `758ec77` explicit inverse-based
+noncommutativity argument. Golden roots:
+`36be2ef`, `0d67633`, `a444539`.
+
+### What this pays, and what remains independent
+
+**SOURCE-WRITTEN H1.01 finite group SAME-CARRIER gate:**
+the independently existing, nonabelian *finite Heisenberg group*
+has an exact 13-word representation and a pointwise same-carrier
+identification with the already-constructed original twelve-axis
+plus central trit valuation. This is stronger than merely
+matching `3^(1+12)`: its original nontrivial group law and
+generator commutator are preserved.
+
+**NOT PAID:** an independently sourced claim that the
+biological/appraisal relation semantically **is** this Heisenberg
+group; identity with the full original 144-cell relation field
+(previously disproved for the diagonal+centre observer);
+the specific Monster 3B group or VOA action identification;
+a genuine ITIR semantic-world state correspondence and consumer;
+or independently selected full world-fabric edge-stalk match.
+Those are different same-object/physical/epistemic admissions.
+The transported operation is NOT coordinatewise ternary addition.
+
+P1 original Bishop analytic exp/atan Cayley, P2 selected analytic
+zeta identity and P3 source Gamma/Xi remain OPEN.
+**Kernel status:** source-written only, no Agda compiler acceptance
+receipt. The original finite Heisenberg group laws' older source
+owners are reused but this new bridge has not been typechecked.
