@@ -85,3 +85,109 @@ python -m scripts.train_signed_wave_experts \
 ```
 
 The mathematical identities were checked in a separate local SymPy run; the branch's full test suite, Agda typecheck, and actual checkpoint student training have NOT been executed here. No observed accuracy, WAN gain or genuine Leech automorphism is promoted.
+
+
+## 11 November 2026 — original LILA claim, LLM steering and E8/369/pants source weld
+
+**Original scientific-source correction.** Kornienko's original
+Leech-LILA README explicitly claims improved language-model
+performance/efficiency from a Leech-inspired frozen orthogonal
+kernel and/or geometric resonance. This is an original-author
+claim—not merely our separate downstream
+consumer-relative codec research objective—and deserves
+direct metric-faithful independent replication. The actual
+384D saved dense baseline uses a QR orthogonal 24D matrix
+shared between Q and K, whose dot-product action cancels
+in exact arithmetic; `lambda_geo=0` in the measured
+checkpoint. That excludes a direct gain from a shared
+Q/K gauge alone in ideal attention, not all
+possible separately trained resonance effects.
+The latest 200-step real original-dense gfx803 training
+run completed, eight checkpoints verified, a
+100→200 process restart accepted, ~900.64/955.09
+target tokens/s, peak allocated ~526.7 MiB;
+zero resonance means it does not test LILA's
+original geometry-benefit claim. No Agda theorem
+or empirical neural gain is inferred.
+
+**New independent research lane: LLM-guided neuron
+steering** on the actual original model and
+step-200 checkpoint. A source-labelled proposal
+LLM may select candidate layers/units/activation
+directions and counterfactual prompts, but causal
+acceptance requires separate fixed labelled
+held-out evaluation, dose response,
+injection/ablation necessity/sufficiency and
+random/equal-norm/unguided controls. Both
+the proposal trace and intervention operator
+must be linked to original checkpoint, tokenizer,
+layer/hook state, historical step, target
+observable, source counterfactual labels
+and independent evaluator. LLM claims of a
+'semantic neuron' are hypotheses, not the
+proof-bearing semantic source.
+
+**Agda donor hierarchy explicitly reused:**
+
+- `Reasoning/LeechE8PriorStrataBidiExact`:
+  E8 rank eight and 240 roots versus separate
+  8-index punctured `F3²`; equality of
+  cardinalities is NOT an isometry/action.
+- `Reasoning/LeechPuncturedNineLearningBridgeExact`:
+  point antipode distinct from coefficient sign
+  and C3 Fourier chart. No semantic sign inference.
+- `Reasoning/Leech369TrialecticWaveLearningArchitectureBidiExact`:
+  384/24/3 tensor charts, C2/C3 action, six directed
+  plus three self channels, independent trialectic face.
+- `Reasoning/DialecticInvariantGeometry`:
+  predicate-valued stance involution/intersection,
+  conceptually distinct from activation inversion.
+- `Reasoning/TrialecticBoundaryFaceNonfactorabilityExact`:
+  two states can have equal three dyadic edges
+  and distinct face relations. A face-sensitive
+  steering consumer MUST retain face evidence,
+  context or an explicitly validated residual.
+- `Topology/TernaryCylinderPantsGeometryExact` and
+  `Reasoning/TernaryPantsSynthesisS3BridgeExact`:
+  finite triple-branch refinement, 27
+  synthesis cells and S3 branch transport.
+  No smooth topology/TQFT promotion.
+- `Reasoning/TypedHyperfabricPantsGluingBridgeExact`:
+  explicit realised-edge-stalk `InterfaceMatch`,
+  but no incidence rewrite or automatic path
+  memory elimination.
+- `Reasoning/WavePantsBundleGluingAdapterExact`:
+  exact zero canonical wave defect and nonzero
+  phase-changed defect; **arbitrary bundle/sheaf
+  local-family gluing remains unpaid**.
+- `Reasoning/LeechJointStateConsumerQuotientExact`:
+  consumer-specific selected history and retained
+  inactive-state condition; no blanket state loss
+  or implied complete multi-context seam.
+
+**Exact new original-object Agda cut:**
+A1 selected actual `LeechGPT` checkpoint activations
+→ 8D/24D/ternary index and history carrier;
+A2 actual learned intervention action ↔ C2/C3/S3
+commuting diagram with source-labeled observable;
+A3 typed `BranchChannel` realisation of independent
+neuron-steered contexts with true
+`InterfaceMatch`, face/history carry and
+separate actual reorganisation/gluing;
+A4 mismatch negative controls proving why
+boundary-only/phase-only context cannot
+support face-sensitive steering;
+A5 Agda 2.9 kernel acceptance of changed
+safe leaves/import closure and true
+model-to-proof refinement. These are
+**OPEN**, not completed theorems by
+writing this roadmap.
+
+**Canonical executable-facing roadmap** is
+LeechTransformer PR #4
+`docs/LILA_ORIGINAL_CLAIM_NEURON_STEERING_E8_369_PANTS_ROADMAP_20261111.md`.
+Do not conflate the original author's claim,
+our finite Agda mathematics, acquired
+GPU training, future LLM steering, or
+geometry improvement measured on a
+held-out evaluation.
