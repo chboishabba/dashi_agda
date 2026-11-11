@@ -267,3 +267,19 @@ The original finite J11 bound has the same RHS. This is a materially stronger **
 **Unpaid physical highest-alpha leaves (unchanged):** actual nonconstant Wilson RG moment errors on F,G,FG uniformly in physical cutoff/volume, plus the two moment majorants, and iterative renormalized cutoff comparison/compactness. The generic error transport is not source-dependent and cannot prove these inequalities itself.
 
 **Trust/verification:** the new scalar lemma uses a transitive postulated real-ring surface, and the existing marked-factor `absNonnegative` authority; no new postulate. Both new modules are committed and imported by the original Wilson physical regression. No Agda 2.9 executable is installed locally: GitHub readback is NOT kernel acceptance.
+
+
+## 2026-11-11 — original Wilson *physical numerator* moment-majorant leaf
+
+New theorem module `DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteNumeratorOrderExact.agda`, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`, directly consumes the selected n-dependent original SU(N) Wilson Gibbs density, native one-link product Haar and `YMClayOriginalWilsonFiniteTwoSourceJetExact.originalWilsonFiniteIntegrationLaws`. It does **not** create another source measure or independent integration-law record.
+
+Completed source-written declarations:
+- `originalWilsonNumeratorCongruent`: same original density, product Haar, denominator-independent numerator integral respects equality of original observables.
+- `originalWilsonNumeratorPositive`: for every cutoff n and original pointwise nonnegative test F, the **actual** weighted Wilson insertion numerator is nonnegative.
+- `originalWilsonNumeratorAdd`: actual original weighted Wilson numerator is additive, from already-proved selected product-Haar laws.
+- `originalWilsonNumeratorMonotoneFromSlack`: if F+S=G pointwise with S≥0, original numerator(F)≤original numerator(G), derived from the existing ordered-real addition monotonicity and native integration positivity; no new order axiom.
+- `originalWilsonNumeratorBelowItsPartition`: if original test F has a pointwise nonnegative complement S satisfying F+S=1, its actual weighted insertion numerator is at most the **same cutoff's Wilson partition** Z_n. This is a genuinely selected source majorant, not a rational T5 proxy, and it applies at every periodic cutoff.
+
+**What is paid:** the source-dependent finite numerator positivity/order and partition majorant; if the relevant original Wilson F or G is shown to admit the complement, no new Haar positivity/linearity estimate is needed. **Still unpaid:** a concrete certified uniform [0,1] Wilson test complement for each selected renormalized nonconstant F,G, conversion to normalized moment bounds using the pinned positive-division order, and most importantly actual original RG effective-versus-bare moment errors ε_F, ε_G, ε_FG uniform in physical scaling. The conditional quantitative covariance bound and source mixed J11 transport from the preceding round remain available; no E1 continuum convergence or D2 gap follows.
+
+**Verification:** source-written on PR #1444 and imported in its original physical regression; no local Agda 2.9 compiler. Do not mark as kernel accepted.
