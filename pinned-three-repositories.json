@@ -1,0 +1,19 @@
+{
+  "repositories": [
+    {
+      "repository": "leanprover-community/batteries",
+      "revision": "4af7237d146261353907b06a01b6f3fc06cfa067",
+      "class": "small"
+    },
+    {
+      "repository": "leanprover/lean4export",
+      "revision": "df81913eee5519d5a88ae5b0fd701b5298cc29ab",
+      "class": "medium"
+    },
+    {
+      "repository": "leanprover-community/mathlib4",
+      "revision": "f5968138493f85bdf0651647a4f829c63175874e",
+      "class": "large"
+    }
+  ]
+}
