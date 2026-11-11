@@ -46,6 +46,13 @@ CREATE TABLE IF NOT EXISTS lean_world_compiled_join_theorem (
   FOREIGN KEY(batch_sha256,scope_module)
     REFERENCES lean_world_compiled_join_module(batch_sha256,module)
 );
+CREATE TABLE IF NOT EXISTS lean_world_compiled_join_combination (
+  batch_sha256 bytea NOT NULL REFERENCES lean_world_compiled_join_batch(batch_sha256),
+  combined_theorem_name text NOT NULL,
+  donor_ordinal integer NOT NULL CHECK(donor_ordinal >= 0),
+  original_donor_name text NOT NULL,
+  PRIMARY KEY(batch_sha256,combined_theorem_name,donor_ordinal)
+);
 CREATE OR REPLACE FUNCTION lean_world_reject_compiled_join_mutation()
 RETURNS trigger LANGUAGE plpgsql AS $$
 BEGIN
@@ -58,7 +65,8 @@ BEGIN
    'lean_world_compiled_join_batch',
    'lean_world_compiled_join_module',
    'lean_world_compiled_join_theorem',
-   'lean_world_compiled_join_import'
+   'lean_world_compiled_join_import',
+   'lean_world_compiled_join_combination'
  ] LOOP
    EXECUTE format('DROP TRIGGER IF EXISTS lean_join_immutable_row ON %I',t);
    EXECUTE format('CREATE TRIGGER lean_join_immutable_row BEFORE UPDATE OR DELETE ON %I FOR EACH ROW EXECUTE FUNCTION lean_world_reject_compiled_join_mutation()',t);
