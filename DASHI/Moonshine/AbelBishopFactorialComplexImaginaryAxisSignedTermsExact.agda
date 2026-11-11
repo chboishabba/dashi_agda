@@ -18,6 +18,7 @@ open import Data.Product.Base using (proj₁; proj₂)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 
 import Real as BishopReal
+import Sequence as BishopSequence
 import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
@@ -247,3 +248,51 @@ originalBishopImaginaryAxisSinePartialSameConfigured T y count =
   SeriesExt.finiteSumCongruent
     (originalBishopImaginaryAxisSineConfiguredTerm T y)
     count
+
+
+------------------------------------------------------------------------
+-- INFINITE PARITY-SUBSERIES LIMIT IDENTIFICATION ON THE ORIGINAL
+-- BISHOP REAL CARRIER. This is a genuine limit-transport theorem:
+-- no new convergence input, no new cosine or sine value.
+--
+-- It does NOT yet prove interleaving of the two subseries into the
+-- full factorial complex series or the cartesian exponential product.
+------------------------------------------------------------------------
+
+originalBishopImaginaryAxisCosineSubseriesConverges :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (BishopSequence.SeriesOf
+      (λ n → Complex.re
+        (Terms.originalBishopFactorialComplexTerm
+          (Axis.imaginaryAxis y) (Estimates.evenExponent n))))
+    (Elementary.bishopCos (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisCosineSubseriesConverges T y =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisCosinePartialSameConfigured
+          T y (suc count-1))})
+    ( Elementary.bishopCos (Cartesian.dataSet T) y
+    , Elementary.bishopCosConvergence (Cartesian.dataSet T) y
+    )
+
+originalBishopImaginaryAxisSineSubseriesConverges :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ y →
+  BishopSequence._ConvergesTo_
+    (BishopSequence.SeriesOf
+      (λ n → Complex.im
+        (Terms.originalBishopFactorialComplexTerm
+          (Axis.imaginaryAxis y) (Estimates.oddExponent n))))
+    (Elementary.bishopSin (Cartesian.dataSet T) y)
+originalBishopImaginaryAxisSineSubseriesConverges T y =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm
+        (originalBishopImaginaryAxisSinePartialSameConfigured
+          T y (suc count-1))})
+    ( Elementary.bishopSin (Cartesian.dataSet T) y
+    , Elementary.bishopSinConvergence (Cartesian.dataSet T) y
+    )
