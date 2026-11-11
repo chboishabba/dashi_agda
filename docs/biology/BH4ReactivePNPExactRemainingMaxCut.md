@@ -1545,3 +1545,118 @@ The `rationalDot` and `rationalColumn` functions construct the internal-bond and
 
 **2026-11-11 symbolic-index proof repair:** `rational369SemidiscreteAt` no longer attempts to close both symbolic `Vec.lookup (Vec.tabulate ...)` reductions by bare `refl`. New `lookupTabulateExact` proves lookup/tabulate correspondence by Fin induction, and the RHS coordinate proof explicitly composes two such equalities using `cong` and `trans`. This addresses a specific likely Agda elaboration defect; it is still source-written and requires kernel execution. The operator's exact 27×29 dimension and missing original-geometry/source proofs are unchanged.
 
+
+### 2026-11-11 producer-side 54-bond + rational rate algebra and same-source generated Agda CHNOP/z column proof
+
+The **existing** original operator owner
+`DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact`
+was found in the current PR branch, already Golden-imported:
+it defines typed rational matrices
+`orientedNativeIncidence : Matrix 27 54`,
+`signedNativeBondFluxes : Matrix 54 29`,
+`originalFiniteStoichiometry : Matrix 29 12`,
+`originalFiniteReactionRates : Matrix 27 12`, and computes
+`rational369SemidiscreteRHS : Matrix 27 29`.
+Its consumer theorem currently **assumes** six rational global
+zero-defect proofs. Do not duplicate that 783-coordinate operator.
+
+New **proof-source** owners, imported into
+`KitzerowBH4EvidenceEverything`:
+
+1. `BH4RationalNativeBondCancellationExact` proves
+   `pairedSpeciesContributionCancels`,
+   `pairedBondWeightedSumCancels`,
+   `pairedNativeBondCollectionCancels`,
+   `original54x29PairedNativeFluxCancels`, and
+   `original54x29PairedNativeFluxBishopZero`.
+   For any 29 rational weights and 54×29 rational signed
+   fluxes, the opposite endpoint contributions cancel
+   as rational equivalence and under the existing Bishop
+   embedding. The proof does not yet identify the paired
+   expression with the actual 27×54 incidence matrix.
+2. `BH4RationalRateWeightedSourceConservationExact`
+   proves `rationalAllColumnsRateBalanced` and
+   `rationalAllSitesRateBalanced`; for *any* 27×12
+   rational rate field, source-column rational weighted
+   balance suffices for the exact reaction totals to
+   balance. It specializes to
+   `original369x29x12RationalRatesPreserveKernel`
+   and its Bishop-real image.
+3. `BH4RationalNativeSourceCompositionExact` combines
+   these same 54×29 fluxes, 27×12 rates and 12×29 gross
+   reaction sides for each of the same **six** supplied
+   source-weight vectors. Its one/six-axis rational and
+   Bishop theorem need only **columnwise** rational
+   balance—not an already-given global zero-defect
+   hypothesis.
+
+The **existing SHA-256 pinned original Rhea source generator**
+`scripts/generate_bh4_original29x12_agda.py` has been
+extended: it now emits
+`generatedRationalReactants`,
+`generatedRationalProducts` and
+`generatedRationalAxes` **as Agda expressions of the SAME**
+`generatedColumns`, `generatedElementWeights`, and
+signed `generatedPositiveCharges / generatedNegativeCharges`.
+It never separately hand-codes another 29×12 matrix.
+It additionally emits all 72 closed, original-source
+`generatedRationalColumnsBalance` cases
+(6 coordinates × 12 columns) as rational setoid
+`QP.≃-reflexive refl` proof candidates, plus
+`generatedOriginalSixAxisRationalProducer` and
+`generatedOriginalSixAxisBishopProducer` for arbitrary
+27×12 rational rates and 54×29 rational flux fields.
+**None is an original measured flux/rate.**
+
+The generator's receipt exposes
+`source_rational_column_balance_proof_clauses_emitted=72`,
+`source_rational_producer_definitionally_uses_generated_Nat_columns=true`
+and
+`source_rational_producer_agda_kernel_checked=false`.
+Synthetic-only test owner
+`scripts/test_generate_bh4_original29x12_simplex.py`
+now checks 72 distinct clauses, exact source Nat dependency,
+correct six axes and arbitrary rate/flux dimensions, rejection
+of missing source fields, and both rational/Bishop output paths.
+
+**Highest-alpha remaining exact chain** (none implicitly
+discharged by the new algebra):
+
+P0.A: obtain independent authentic Rhea full-panel bytes,
+pin SHA256, generate the 29×12 original Nat + rational
+owner and **Agda 2.9 kernel-check** the 72 `refl` cases
+and all three new Agda module transitive imports.
+A source-written term is not an accepted proof.
+
+P0.B: prove that the current `Matrix 27 54`
+`orientedNativeIncidence` in
+`BH4OriginalRationalSemidiscreteOperatorExact`
+is exactly the original native geometric 54-bond
+endpoint incidence and that its 783-coordinate RHS's
+six weighted global sums agree (under rational setoid
+equivalence) with the now-derived paired native/source
+sums. This is the decisive
+`original369RationalRHSFromSameSourceProducer`
+left unresolved. **Do not** substitute paired
+cancellation for the actual 27×54 identification.
+
+P0.C: use P0.B to supply the **computed**
+`rational369SemidiscreteRHS inputs` six zero-defect
+proofs *without* taking them as unrelated input
+fields; consume the already-present
+`computedRationalRHSConservationLiftsToBishop`.
+
+P0.D: identify the genuine original Bishop-real
+Scharfetter–Gummel + detailed-balanced mass-action
+operator as the source-selected 27×29 semidiscrete
+operator, pay weighted simplex compactness,
+continuity, a genuine Brouwer fixed-point producer,
+strict-positive implicit root and free-energy theorem
+in Agda. Source-selected open boundary, original
+kinetic parameters, tissue same-state observation and
+empirical/ITIR validation remain further P1/P2 gates.
+
+Verification in this session: GitHub commits and
+readbacks of source files; **no local Agda, Nix or
+repository pytest execution**. Generated source is
+absent until actual original bytes are supplied.
