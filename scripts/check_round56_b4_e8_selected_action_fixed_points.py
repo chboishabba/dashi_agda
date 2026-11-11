@@ -97,6 +97,7 @@ def run():
     assert grid_orbits == [16, 64, 64, 96], grid_orbits
     assert sum(root_orbits) == 240
     assert Counter(root_orbits)[1] == 12, root_orbits
+    assert len(grid_orbits) == 4 and len(root_orbits) == 34
 
     # An equivariant bijection preserves each generator's fixed-point set.
     # Disagreement gives an exact specific-action no-go.
@@ -106,6 +107,18 @@ def run():
     print("E8 generator fixed counts:", root_fixed)
     print("grid orbit sizes:", grid_orbits)
     print("E8 orbit sizes:", root_orbits)
+    print("invariant function dimension (grid, E8):", len(grid_orbits), len(root_orbits))
+    print("flip involution +/- eigenspace ranks (grid,E8):",
+          ((240 + grid_fixed[0]) // 2, (240 - grid_fixed[0]) // 2),
+          ((240 + root_fixed[0]) // 2, (240 - root_fixed[0]) // 2))
+    print("swap involution +/- eigenspace ranks (grid,E8):",
+          ((240 + grid_fixed[4]) // 2, (240 - grid_fixed[4]) // 2),
+          ((240 + root_fixed[4]) // 2, (240 - root_fixed[4]) // 2))
+    assert (240 + grid_fixed[0]) // 2 != (240 + root_fixed[0]) // 2
+    assert (240 + grid_fixed[4]) // 2 != (240 + root_fixed[4]) // 2
+    # A conjugacy between permutation matrices over Q would preserve trace.
+    # Trace of a permutation matrix equals the permutation fixed-point count.
+    print("RESULT: NO invertible rational/complex linear representation intertwiner")
     print("RESULT: NO equivariant bijection for this paired-flip B4 embedding")
     print("BOUNDARY: alternative root actions and linear intertwiners NOT ruled out")
 
