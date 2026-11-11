@@ -368,3 +368,33 @@ def test_exact_local_rational_pnp_native_bond_directional_sign(monkeypatch):
     assert sum(Fraction(row[0]) for row in d) == 0
     assert all(val=="0" for row in result["exact_local_continuity_residual"] for val in row)
     assert result["local_CHNOP_signed_charge_equations_checked"] == 162
+
+
+def test_original_source_checker_rejects_zero_and_fractional_gross_coefficients(monkeypatch):
+    import check_bh4_original_panel_spatial_events as Checker
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    # Build a minimally structured single-column source whose otherwise
+    # balanced reaction has two participants with the same formula.
+    original={
+        "reactions":[{
+            "rhea_id":"synthetic-only-R",
+            "formula_charge_ready":True,
+            "participants":[
+                {"chebi_id":"A","side":"substrate","coefficient":1,
+                 "formula":"C","charge":0},
+                {"chebi_id":"B","side":"product","coefficient":1,
+                 "formula":"C","charge":0},
+            ],
+        }]
+    }
+    matrix={"species_index":["A","B"],
+            "reaction_index":["synthetic-only-R"],
+            "matrix":[[-1],[1]],
+            "finite_formula_residuals":[],"external_exchange":[]}
+    monkeypatch.setattr(Checker,"build_matrix",lambda _:matrix)
+    assert Checker.check_certificate(original,full_panel=False)[0] == matrix
+    for bad in (0, "0", -1, "1.5", True):
+        corrupt=deepcopy(original)
+        corrupt["reactions"][0]["participants"][0]["coefficient"]=bad
+        with pytest.raises(ValueError):
+            Checker.check_certificate(corrupt,full_panel=False)
