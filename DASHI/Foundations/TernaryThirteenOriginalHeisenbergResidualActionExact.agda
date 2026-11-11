@@ -28,6 +28,8 @@ import DASHI.Foundations.TernaryThirteenFibreSplitExact as Word
 import DASHI.Foundations.StageTwelveGrothendieckRelationHyperformExact as Original
 import DASHI.Moonshine.Monster3BFiniteHeisenbergCentralExtensionExact as H
 import DASHI.Moonshine.Monster3BFiniteHeisenbergInverseExact as Inverse
+import DASHI.Moonshine.Monster3BFiniteHeisenbergGeneratorsExact as G
+import DASHI.Algebra.Trit as F3
 
 OriginalFullRelationCoordinates : Set
 OriginalFullRelationCoordinates =
@@ -220,3 +222,44 @@ originalFullResidualHeisenbergAction =
     originalGroupActionComposition
     originalGroupActionInverse
     originalActionResidualFixed
+
+------------------------------------------------------------------------
+-- NONVACUITY: the original source translation generator is NOT the
+-- identity, and it genuinely moves the 13-coordinate component.
+-- The unchanged residual therefore does not trivialize the action.
+------------------------------------------------------------------------
+
+sourceTranslationNotIdentity :
+  Bridge.sourceTranslation ≡ H.identityH → ⊥
+sourceTranslationNotIdentity equality =
+  positiveNotZero
+    (cong (λ group →
+      G.x0 (H.translationPart (H.quotient group))) equality)
+  where
+    positiveNotZero : F3.pos ≡ F3.zer → ⊥
+    positiveNotZero ()
+
+originalWordTranslationMovesIdentity :
+  Bridge.wordCompose
+    (Bridge.originalGroupToWord Bridge.sourceTranslation)
+    Bridge.wordIdentity
+  ≡ Bridge.wordIdentity → ⊥
+originalWordTranslationMovesIdentity equal =
+  sourceTranslationNotIdentity
+    (trans
+      (sym (Bridge.originalGroupRoundTrip Bridge.sourceTranslation))
+      (trans
+        (cong Bridge.wordToOriginalGroup
+          (trans
+            (Laws.wordRightIdentity
+              (Bridge.originalGroupToWord Bridge.sourceTranslation))
+            equal))
+        Bridge.originalIdentityRespected))
+
+originalFullResidualActionIsNontrivial :
+  (rest : Residual.Residual131) →
+  groupActsOnFullCoordinates Bridge.sourceTranslation
+    (Bridge.wordIdentity , rest)
+  ≡ (Bridge.wordIdentity , rest) → ⊥
+originalFullResidualActionIsNontrivial rest equal =
+  originalWordTranslationMovesIdentity (cong proj₁ equal)
