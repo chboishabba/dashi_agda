@@ -111,3 +111,6 @@ import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact as Origina
 
 -- E1/D1 P0.01--04 original Wilson bare-centering and exact positive-partition quotient; selected real additive/quotient laws remain explicit and not newly postulated.
 import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringAlgebraExact as OriginalWilsonBareCentering
+
+-- P0.06 exact negative control: cyclic trace axioms admit arbitrary constant real value, so genuine normalized SU(N) matrix trace bound must be sourced independently.
+import DASHI.Physics.YangMills.YMClayOriginalPlaquetteTraceCyclicityInsufficientExact as OriginalPlaquetteTraceRangeNegativeControl
