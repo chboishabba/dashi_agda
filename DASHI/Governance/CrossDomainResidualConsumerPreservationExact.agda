@@ -7,6 +7,7 @@ module DASHI.Governance.CrossDomainResidualConsumerPreservationExact where
 -- Crenshaw supplies conceptual warning about lost situated relations,
 -- not the mathematical proof here.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.List using (List)
 open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Core.IntersectionalNonFactorability as NF
@@ -60,8 +61,8 @@ losslessEncodingIsInjective T side {x} {y} same =
 -- reconstruction of the hidden work spent retaining them.
 noDecoderFromPublicDisposition :
   (decode : Work.PublicDisposition →
-    Agda.Builtin.List.List Work.EpistemicTask) →
-  ((history : Agda.Builtin.List.List Work.EpistemicTask) →
+    List Work.EpistemicTask) →
+  ((history : List Work.EpistemicTask) →
     decode (Work.visibleDisposition history) ≡ history) → ⊥
 noDecoderFromPublicDisposition decode recovered =
   NF.witnessRulesOutEveryFlatFactorisation
