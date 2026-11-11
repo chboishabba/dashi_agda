@@ -534,3 +534,385 @@ originalRelationRoundTripAt :
   reopenRelation (Boundary.relationToThirteen field)
     (maskUnobserved field) cell ≡ field cell
 originalRelationRoundTripAt = reopenExactlyPointwise
+
+------------------------------------------------------------------------
+-- Make the residual NORMALIZATION intrinsic to its type.
+-- Exactly 13 addressed entries are fixed neutral, leaving the
+-- other 131 ordered relation cells as the unconstrained data.
+-- The record contains proof witnesses, but never requires
+-- proof-irrelevance or equality of dependent function fields.
+------------------------------------------------------------------------
+
+record Residual131 : Set where
+  constructor normalized-residual
+  field
+    values : Original.StageRelationField
+    diagonalNeutral :
+      (axis : Atlas.StageAtlasZeroToEleven) →
+      values (axis , axis) ≡ Base.tri-mid
+    centreNeutral :
+      values (Atlas.atlas-0 , Atlas.atlas-1) ≡ Base.tri-mid
+
+maskToResidual131 :
+  Original.StageRelationField → Residual131
+maskToResidual131 field = normalized-residual
+  (maskUnobserved field)
+  (λ { Atlas.atlas-0 → refl ; Atlas.atlas-1 → refl ; Atlas.atlas-2 → refl ; Atlas.atlas-3 → refl ; Atlas.atlas-4 → refl ; Atlas.atlas-5 → refl ; Atlas.atlas-6 → refl ; Atlas.atlas-7 → refl ; Atlas.atlas-8 → refl ; Atlas.atlas-9 → refl ; Atlas.atlas-10 → refl ; Atlas.atlas-11 → refl })
+  refl
+
+reopenNormalized :
+  Word.TritWord 13 → Residual131 →
+  Original.StageRelationField
+reopenNormalized code residual =
+  reopenRelation code (Residual131.values residual)
+
+reopenNormalizedExact :
+  (field : Original.StageRelationField)
+  (cell : Original.StageRelation144) →
+  reopenNormalized (Boundary.relationToThirteen field)
+    (maskToResidual131 field) cell ≡ field cell
+reopenNormalizedExact = reopenExactlyPointwise
+
+reopenNormalizedCoarseRecovers :
+  (code : Word.TritWord 13)
+  (residual : Residual131) →
+  Boundary.relationToThirteen (reopenNormalized code residual)
+    ≡ code
+reopenNormalizedCoarseRecovers code residual =
+  reopenPreservesCoarseCode code (Residual131.values residual)
+
+-- Exact pointwise second inverse: reopening ANY 13-code with ANY
+-- normalized 131-cell residual then masking gives back every
+-- residual value. This holds even when that pair did not arise
+-- from an original field, so it proves a genuine product normal
+-- form (up to pointwise function equality).
+reopenNormalizedResidualRecoversAt :
+  (code : Word.TritWord 13)
+  (residual : Residual131)
+  (cell : Original.StageRelation144) →
+  maskUnobserved (reopenNormalized code residual) cell
+  ≡ Residual131.values residual cell
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-0) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-0)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-1) =
+  sym (Residual131.centreNeutral residual)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-0 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-1) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-1)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-1 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-2) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-2)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-2 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-3) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-3)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-3 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-4) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-4)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-4 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-5) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-5)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-5 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-6) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-6)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-6 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-7) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-7)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-7 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-8) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-8)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-8 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-9) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-9)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-9 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-10) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-10)
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-10 , Atlas.atlas-11) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-0) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-1) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-2) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-3) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-4) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-5) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-6) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-7) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-8) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-9) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-10) =
+  refl
+reopenNormalizedResidualRecoversAt code residual (Atlas.atlas-11 , Atlas.atlas-11) =
+  sym (Residual131.diagonalNeutral residual Atlas.atlas-11)
+
+-- Restrict equality to the actual original field's addressed
+-- observations. Equality between functions would additionally
+-- require funext, which is intentionally absent.
+record OriginalRelationalProductNormalForm : Set₁ where
+  field
+    encode : Original.StageRelationField →
+      Word.TritWord 13 × Residual131
+    decode : Word.TritWord 13 × Residual131 →
+      Original.StageRelationField
+    decodeEncodeAt :
+      (field : Original.StageRelationField)
+      (cell : Original.StageRelation144) →
+      decode (encode field) cell ≡ field cell
+    encodeDecodeCode :
+      (code : Word.TritWord 13)
+      (residual : Residual131) →
+      proj₁ (encode (decode (code , residual))) ≡ code
+    encodeDecodeResidualAt :
+      (code : Word.TritWord 13)
+      (residual : Residual131)
+      (cell : Original.StageRelation144) →
+      Residual131.values (proj₂ (encode (decode (code , residual)))) cell
+      ≡ Residual131.values residual cell
+
+originalRelationalProductNormalForm :
+  OriginalRelationalProductNormalForm
+originalRelationalProductNormalForm = record
+  { encode = λ field →
+      Boundary.relationToThirteen field , maskToResidual131 field
+  ; decode = λ pair →
+      reopenNormalized (proj₁ pair) (proj₂ pair)
+  ; decodeEncodeAt = reopenNormalizedExact
+  ; encodeDecodeCode = reopenNormalizedCoarseRecovers
+  ; encodeDecodeResidualAt = reopenNormalizedResidualRecoversAt
+  }
