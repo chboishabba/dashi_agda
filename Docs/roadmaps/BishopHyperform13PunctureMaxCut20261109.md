@@ -1439,3 +1439,72 @@ as an existing group operation on the unrestricted 144-field.
 
 Kernel receipt: none in the current environment. Do not label
 new group bridge Agda-verified until Nix/Agda 2.9 checks imports.
+
+
+## 2026-11-11 P0 highest-alpha closure: original transported FINITE GROUP LAWS and action-law no-go
+
+The prior source bridge has already established the finite
+`Monster3BFiniteHeisenbergCentralExtensionExact.Heisenberg6`
+↔ `TritWord 13` carrier maps, source original cocycle
+multiplication, and concrete noncommuting dual generators.
+The next unpaid mathematical piece was proving the FULL
+induced group laws rather than only preserving chosen products.
+
+NEW original-source lemma owner:
+`DASHI/Foundations/TernaryThirteenOriginalHeisenbergTransportedGroupLawsExact.agda`.
+
+- `originalLeftIdentity`: direct structural proof using original
+  `H.compose`, 12 F3 coordinates and original central cocycle.
+- `originalRightIdentity`: deduced constructively from the
+  original `Assoc.composeAssociative`, `Inv.leftInverse`,
+  `Inv.rightInverse` and the just-proved left unit.
+- `decodedWordIdentity`, `decodedWordInverse`:
+  exact decoding of source group unit/inverse through the
+  already-proved full original group ↔ word carrier round trips.
+- `wordAssoc`: actual word multiplication associativity;
+  the proof passes through original `H.compose`, original
+  `Assoc.composeAssociative`, and full decoding/encoding laws.
+- `wordLeftIdentity`, `wordRightIdentity`,
+  `wordLeftInverse`, `wordRightInverse`: all four group
+  laws as propositional equalities in the original
+  `TritWord 13` carrier, not merely coordinatewise checks.
+- `OriginalTransportedFiniteGroup` and
+  `originalTransportedFiniteGroup`: inhabited, complete,
+  source-grounded finite group-law record, including the
+  existing genuine noncommuting generator witness.
+- `commutativeSemanticCompletionCannotAgree`: a direct
+  NO-GO for any proposed commutative 13-word multiplication
+  to agree with the original nonabelian Heisenberg group law
+  on ALL original group elements; its obstruction is exactly
+  the existing dual generator pair.
+
+SOURCE commits `7867eb1` (complete finite group law),
+`86086e6` (semantic commutativity no-go), canonical TOE
+imports `32702ba`, `50290ca`, `2527a3b`.
+
+Independent executable arithmetic spot-check on the EXACT
+F3 cocycle rule passed 39 directed one-coordinate basis
+identity/inverse cases, 10,000 deterministic sampled
+associativity triples and the noncommuting generator pair.
+This is NOT Agda typechecking.
+
+**Highest-alpha change:** the **original finite group
+structure** on the concrete thirteen-coordinate carrier is
+now SOURCE-WRITTEN including its full group laws and original
+nontrivial cocycle, not merely a same-cardinality bijection.
+A commutative original relational semantics is PROVABLY
+incompatible with the Heisenberg interpretation.
+
+**Unpaid independently intended semantic choice:** show from
+original appraisal/relational/Monster/world owner evidence that
+the intended operation is this original nonabelian cocycle law;
+then prove original action/observer equivariance, including
+the selected complete consumer domain and full context/
+provenance transport. The 144-field still needs its 131-cell
+residual for arbitrary original relations/transposition. Actual
+ITIR nodes, heterogeneous original-world edge witnesses,
+Bishop P1 nested exp-atan, P2 analytic zeta and P3 Gamma/Xi
+remain OPEN.
+
+No kernel acceptance receipt; the new module is
+SOURCE-WRITTEN, not certified by Agda 2.9.
