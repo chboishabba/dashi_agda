@@ -920,3 +920,38 @@ in prior original repository owners.
 See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
 for exact declarations and source receipts. New code is
 SOURCE-WRITTEN, not kernel verified.
+
+
+### 2026-11-11: universal relational-consumer factorization and transpose residual necessity
+
+The actual original 144-address relation and its 13+131 normal
+form now have a **quantified consumer factorization**:
+`TernaryThirteenOriginalRelationConsumerUniversalityExact`
+proves that every independently supplied pointwise-extensional
+original relation-field consumer factors through the full 13-code
+plus normalized 131-cell residual, by constructing the original
+`FactorizedRefinement`. All 144 indexed relation-cell consumers
+are special cases. The old non-descent of the (1,0) consumer
+through the coarse 13 alone is retained.
+
+`TernaryThirteenOriginalRelationalTransposeDescentExact`
+adds a concrete original operation test: the source's actual
+ordered-relation transpose puts unobserved (1,0) into observed
+central (0,1), proving **there is no map from the 13-code to
+itself commuting with all original transpositions**.
+Transposition is nevertheless reconstructed exactly at every
+original address by the 13+131 full observer and its existing
+reopening operation. These are semantic-preservation constraints,
+not an assumption that a Monster/group completion has been
+identified.
+
+Finite model regression
+`scripts/check_ternary13_original_relation_residual.py`
+was added and 864 basis/inverse cases plus zero-field
+were independently run successfully (not Agda kernel checking).
+
+P0 independent group/ITIR world admission and full world
+edge-stalk semantics remain open. Bishop original analytic
+exp/atan, independently sourced zeta and Gamma/Xi remain open.
+See `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`
+for exact source declarations and commits.
