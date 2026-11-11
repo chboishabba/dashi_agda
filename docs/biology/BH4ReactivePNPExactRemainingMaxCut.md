@@ -1541,3 +1541,7 @@ The `rationalDot` and `rationalColumn` functions construct the internal-bond and
 - The existing real weighted-simplex compactness, continuity, genuine Brouwer producer and positive original implicit-root acceptance, source-paid kinetics/open boundaries, same-physical-state tissue refinement and empirical held-out validation remain OPEN.
 
 **Verification boundary:** new code is GitHub-committed and readback-checkable; there is no Agda/Nix executable in this runtime and no Agda kernel receipt. No original source certificate, Agda accepted rational left-kernel proof, real PNP identification or data-backed biology claim was promoted. Run `scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalRationalSemidiscreteOperatorExact.agda` and then the existing BH4 Golden root in the actual Nix/Agda environment. Source-written definitions are not typechecking receipts.
+
+
+**2026-11-11 symbolic-index proof repair:** `rational369SemidiscreteAt` no longer attempts to close both symbolic `Vec.lookup (Vec.tabulate ...)` reductions by bare `refl`. New `lookupTabulateExact` proves lookup/tabulate correspondence by Fin induction, and the RHS coordinate proof explicitly composes two such equalities using `cong` and `trans`. This addresses a specific likely Agda elaboration defect; it is still source-written and requires kernel execution. The operator's exact 27×29 dimension and missing original-geometry/source proofs are unchanged.
+
