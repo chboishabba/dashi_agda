@@ -16,6 +16,7 @@ module DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Product.Base using (_,_; proj₁; proj₂)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 
@@ -116,3 +117,42 @@ realAxisFactorialPositiveTermImagZero x n =
        (λ a → a ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
        BishopP.≃-refl
        (Factorial.factorialCoefficient (suc n)))
+
+
+------------------------------------------------------------------------
+-- ALL-DEGREE same-source identity, including the constant term.
+------------------------------------------------------------------------
+
+originalBishopFactorialComplexTerm :
+  Complex.BishopComplex → Nat → Complex.BishopComplex
+originalBishopFactorialComplexTerm z n =
+  Algebra.scaleC
+    (Factorial.factorialCoefficient n)
+    (Algebra.powC z n)
+
+originalBishopFactorialComplexTermRealAxis :
+  ∀ x n →
+  Complex._≈C_
+    (originalBishopFactorialComplexTerm (realAxis x) n)
+    (realAxis (Exp.expTerm x n))
+originalBishopFactorialComplexTermRealAxis x n =
+  (BishopP.≃-trans
+    (BishopP.*-congˡ (proj₁ (realAxisPower x n)))
+    (BishopP.*-comm
+      (Factorial.factorialCoefficient n)
+      (BishopReal.pow x n)))
+  ,
+  (BishopP.≃-trans
+    (BishopP.*-congˡ (proj₂ (realAxisPower x n)))
+    (let open BishopP.ℝ-Solver
+     in solve 1
+       (λ a → a ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+       BishopP.≃-refl
+       (Factorial.factorialCoefficient n)))
+
+originalBishopPositiveTermIsFullSuccessor :
+  ∀ z n →
+  Factorial.originalBishopFactorialExpPositiveTerm z n
+  ≡
+  originalBishopFactorialComplexTerm z (suc n)
+originalBishopPositiveTermIsFullSuccessor z n = refl
