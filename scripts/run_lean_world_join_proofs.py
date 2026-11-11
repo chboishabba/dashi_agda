@@ -23,7 +23,7 @@ import subprocess
 import sys
 import tempfile
 
-from lean_world_stream_pg import retrieve_source,SCHEMA_RE
+from run_lean_world_stream_pg import retrieve_source,SCHEMA_RE
 from lean_remote_archive_stream import REPO_RE,COMMIT_RE
 
 # Imports are a discovery plan only. Lean, not this regex, resolves the
