@@ -692,3 +692,24 @@ These follow mathematically by the earlier finite even/odd power identities, zer
 **Efficiency:** The explicit \(\lceil N/2\rceil\) index-splitting proof in the proposed handoff is mathematically valid but need not be reimplemented if the original \`BishopFiniteCauchyWingAbsoluteBoundExact.finiteCauchyWingAbsoluteBound\`, \`BishopExponentialCauchyProductExact.absoluteTriangleWingTailConvergesZero\`, and finite positive tail comparison suffice. Reuse the proven triangle-to-rectangle machinery instead of expanding a second independent indexing implementation.
 
 **Next exact cut:** P0 kernel check the new owner; P1 source imaginary-axis absolute coefficient domination; P1 finite Cauchy triangle **tail** order congruence and vanishing real/imag complex wing modulus; P1 complex factorial binomial coefficient equality; P1 \`expFactEqualsExpC\`; subsequent Bishop exp/log, inverse Koenigs, Kneser and selected modular/observer gates stay OPEN.
+
+
+## 2026-11-11 — P1 literal four-wing vanishing: source implementation (not kernel-accepted)
+
+**Expanded existing source owner:** \`DASHI/Analysis/BishopComplexTriangleTailsVanishingExact.agda\` (included in the focused \`--safe\` checker).
+
+The concrete source proof chain now includes:
+- \`originalBishopSignedFactorialAbsIsMagnitude\`: original \`alternatingSign\` × original reciprocal factorial × original Bishop power has exactly the positive original factorial magnitude. Reuses \`BishopMachinArctanConstructionExact.alternatingSignAbsOne\` and \`ExponentialSeriesConvergenceExact.expTermAbsIsMagnitude\`.
+- \`originalBishopImaginaryEvenRealAbsIsExpAbs\`, \`originalBishopImaginaryOddImagAbsIsExpAbs\`: nonzero coordinates of the literal \( (iy)^n/n! \) are equal in modulus to the original real factorial coefficient at the **same degree**.
+- \`originalBishopImaginaryRealAbsBound\`, \`originalBishopImaginaryImagAbsBound\`: constructive **all-index** bounds, via the actual \`BishopEvenOddFullSequenceConvergenceExact.ParityCover\`, explicitly normalizing both vanishing opposite coordinates.
+- \`originalBishopTriangleTailIsInterval\`: source \`Row.trianglePartial\` prefix difference is the original Bishop \`Sequence.∑\` interval. Uses \`FinSum.finSumIsSeriesOf\` and vendored \`Sequence.∑ₙᵐ≃∑₀ᵐ-∑₀ⁿ\`.
+- \`originalBishopCauchyTriangleTailMonotone\`: **true interval-tail order preservation** via vendored \`Sequence.∑-mono-≤\`, rather than incorrectly subtracting two prefix inequalities.
+- \`factorialRealStream\` and \`factorialImaginaryStream\`: literal original two-factor source terms, no copied or selected surrogate.
+- \`originalBishopFourFactorialPositiveTailBound\`, \`originalBishopFourFactorialImaginaryTailBound\`: both upper bounds are exactly twice the original \`BishopExponentialCauchyProductExact.absoluteTriangleWingTail x y\`, applied to four original real/imag pairings.
+- \`doubleFactorialPositiveTailConvergesZero\`: existing original Bishop tail convergence and \`Sequence.xₙ+yₙ→x₀+y₀\`.
+- \`originalBishopDominatedByDoubleFactorialTailVanishes\`: original Bishop \`BishopVanishingDifferenceConvergenceExact.vanishingDifferenceConvergence\` converts the explicit magnitude bound and original exp-tail modulus into convergence to zero.
+- \`originalBishopFactorialComplexWingRealConvergesZero\`, \`originalBishopFactorialComplexWingImagConvergesZero\`: full source-written componentwise convergence of the **literal complex square-minus-triangle residual** to \((0,0)\).
+
+**Acceptance:** these new declarations were committed/read back, but are **NOT Agda 2.9 kernel-checked**. No actual local checker is present in the current execution container; run \`bash scripts/check_analytic_j_tetration_golden_local.sh\` on the exact current PR SHA with the pinned Nix/Agda setup before promoting any mathematical claim. Static review repaired a wrong orientation of \`FinSum.finSumIsSeriesOf\` order transport and missing \`|0|≃0\` equivalences, but it cannot rule out additional typechecker errors.
+
+**Next highest-alpha remaining cut:** (1) compile/repair this source stack, (2) original Bishop-complex binomial coefficient identity \( (x+iy)^n/n!≈\sum_{k=0}^n(x^k/k!)(iy)^{n-k}/(n-k)! \), (3) use the now source-written four-wing limit with the rectangle convergence and the finite triangle/binomial identity to construct \`expFactEqualsExpC\` at all \(x,y\). Then original integral-positive exp–log inverse, selected Bishop Koenigs fixed-point inhabitance, global Kneser and modular/observer contours remain separate analytic gates.
