@@ -168,3 +168,78 @@ For each layer and batch, route IDs `E_t=TopK(router_theta(x_t))`; ensure the ma
 5. Deliver traces for peak GPU/RAM/disk, bytes read, cache hits/misses, prefill, decode, first-token latency, throughput, energy, output fidelity, SSD-write volume, and reboot/replay; meet X12–X16 before a deployment claim.
 
 **New maximum cut:** A01 + M02/M03 + X01–X06 + S01/S04 are first. Then X07/X08/X10/X14 separate safe streaming from an apparently working but corrupt or OOM-prone implementation. Then X09/X11/X12 and measurements; then X13/X15/X16, jointly with original LILA geometric-efficiency gates. **Memory-optimisation and training-geometry are separable scientific claims**. Do not redirect LILA's original causal hypothesis into a mere GPU offload competition.
+
+## 2026-11-11 correction: Federation is the architecture, not a downstream codec
+
+**Recovered authoritative source owners:** DASHI PR #1442 (head `bbb8005b0920921f9dbb95d09f3e60058ceb02b0`, historical branch snapshot), LeechTransformer PR #4 (head `b9f83a638bc24bab046c252cc93a6362c0579666`), original `Docs/LeechFederatedCryptoNetworkBidi20261031.md`, `Docs/WholeSystemJointMoEConsumerQuotientMaxCut20261101.md`, `Docs/DASHILeech369TrialecticWaveSignedLearnerFederatedSystem20261031.md`. Do not silently conflate files on PR branch with modules merged to default branch. Earlier roadmap treated federation as a downstream deployment option and was **incomplete**. This revision restores the original multi-parent, signed-history, source/peer joint-state federation goal, and explicitly connects it to modern selected-expert SSD paging.
+
+### Real machine constraint and interpretation
+
+User-supplied Arch snapshot (2026-11-11): **3.27 GB free**, **5.24 GB available**. These are *reported host memory statistics*, not total installed RAM or the GPU's VRAM; `available` includes memory reclaimable from cache. Do **not** sum free and available. Do not claim a Qwen-80B checkpoint is resident or benchmarked on this host. Govern admission by measured `MemAvailable` minus a reserved safety margin and process peak allocations, swap/page-cache pressure, KV + hybrid state, and in-flight transfers. Design for a **small coordinator / expert worker** with configurable bounded cache and CPU-only fallback; do not assume the old gfx803 GPU is correct or that unified Apple-memory performance transfers to Arch Linux.
+
+### Best-of-all synthesis: the same learner over multiple execution tiers
+
+A coherent model combines:
+1. **Original LILA/Leech geometry + DASHIg learning** and optional C2/C3/punctured-nine routing prior as a testable learned model, not a proven benefit.
+2. **Sophontic paired intervention semantics**, distinguishing before-router steering (may change selected expert and location) from after-router steering (cannot change past route).
+3. **Modern MoE** shared core plus routed experts with source-identical mixing and explicit top-k/capacity history and load balance.
+4. **Swiftlet-like demand paging** of exact required experts from NVMe, with checkpoint/revision-keyed cache and memory admission.
+5. **oLLM/AirLLM whole-layer streaming fallback**, when a model lacks exploitable expert locality or entire layer cannot remain resident.
+6. **llama.cpp-like CPU/GPU hybrid** and quantization, explicitly separate numerical fidelity and observed performance from exact lossless transport.
+7. **Original DASHI federation**: a local coordinator retains the global router, mixing weights and authoritative unselected histories; selected peers retain their own expert weights and optionally ACKed selected histories; transports carry one shared activation + only selected histories, or certified consumer-sufficient action/correction, NOT E copies of the shared activation. Selected peers return unweighted expert outputs and updated histories, or an explicitly witnessed alternative remotely aggregated output. Authenticated, versioned packet and history replay are mandatory.
+8. **Content-addressed expert manifests and multiple peer replication** for availability with peer/version/precision/quant/adapter/capability admission; authenticated hashes are not themselves signatures; authority and observable equivalence remain separate.
+
+**Placement is dynamic** on each layer and token (or microbatch): local GPU, local CPU, local RAM, local SSD, LAN peer, WAN peer or faithful dense fallback. Under placement decisions, expected cost is modeled as total latency/bytes/energy/quality, not an expert-count proxy. Compute route locally from authoritative complete historical state, then choose location. If expert is on a peer with already ACKed history, avoid retransmitting history; otherwise use a self-contained lossless snapshot or negotiated authenticated recovery. Peer scheduling/caches may be speculative; correctness must not depend on a speculative path being available.
+
+### Formal state and same-object BIDI
+
+`Z_t = (theta, router, x_t, (H_e)_e, modelRev, historyRev, quantRev, kv, optimiser, rng, signed_fibres, provenance)`
+is the whole time-indexed model state. 
+`D_t = (peers, expertPlacement, modelManifest, tierCache, routingIndex, ownership, leases, ACKs, transportSessions, resourceBudgets, failureState)`
+is execution/distribution state.
+`Exec(Z_t,D_t,intervention_t)` must observationally refine the original resident learner for each declared consumer, under explicit trust, liveness, finite-precision and data-plane assumptions.
+
+For `S=TopK(r(x,H))`, `Q_S(Z)=(x,(H_e)_{e∈S})` is a **selected consumer quotient**, NOT a copy of full world state. It is admissible iff the relevant worker's computation factors through `Q_S`; the coordinator reopens the full state using its retained inactive histories. Routing depends on the *complete* history at the router's owner. If the router is remote or decentralized, the information/consensus obligation changes; do not assert universal selected-only packets.
+
+The end-to-end response obligation includes exact router selection, expert identity/weights, current history, arbitrary peer/network failures and retries, the source-side mixture and output. Numeric correctness needs an explicit quantisation-error theorem and an expert-routing margin condition; signed orbit action is not the same thing as semantic disagreement or moral polarity.
+
+### Existing failures must constrain the roadmap
+
+Prior user-executed TinyStories pilot (as recorded in `WholeSystemJointMoEConsumerQuotientMaxCut20261101.md`): dense teacher heldout CE 2.58; `c2_invariant` 12-layer MoE CE 8.63, `punctured9_wave` CE 17.30. For that experiment the students failed to preserve model quality; no evidence that those learned students are deployable replacements. JQ1 2048-token captures reopened byte-exactly, but all frames chose zlib rather than purported signed/punctured/temporal reuse; under the chosen 1 Gb/s / RTT assumptions, ~11.42 ms JQ1 versus ~5.16 ms raw. **Do not** claim geometric compression or federation speed advantages from these traces. The recorded dense teacher is not already trained sparse MoE. A new experiment needs faithfully trained source-bound experts and matched quality.
+
+### Additional exact remaining federation obligations (in addition to A/M/S/G/O/R/X/F)
+
+| ID | Priority | Proposed exact lemma | Acceptance condition |
+|---|---|---|---|
+| N01 | P0 | `federatedWholeJointStateSingleOwner` | Router authority and all E histories represented once, not fictitious independent per-expert global states |
+| N02 | P0 | `selectedQuotientRemoteExecutionSound` | For actual selected worker functions, packet projection/worker output/source aggregation commutes |
+| N03 | P0 | `inactiveHistoryRejoinExact` | Inactive histories survive source-owned or ACKed peer-held selected execution |
+| N04 | P0 | `remoteExpertRevisionQuantManifestAdmission` | Model, weight, tokenizer, quant, adapter, codec and history revisions match; otherwise reject |
+| N05 | P0 | `boundedCoordinatorMemoryAdmission` | Free/available distinction, RAM reserve, cache, in-flight buffers, KV/workspace and OOM fallback |
+| N06 | P0 | `peerFailureFallbackPreservesState` | Timeout, failed dispatch and retry do not double-commit recurrent history or corrupt outputs |
+| N07 | P0 | `authenticatedSessionSequenceBinding` | AEAD/signature for identity, revisions, action, sequence and selected IDs; replay/out-of-order rejected |
+| N08 | P0 | `selectedExpertReturnWeightsAtSource` | Unweighted outputs and updated selected histories returned; source mixes with authoritative weights |
+| N09 | P1 | `remoteLocalCacheResidentBidi` | Same admitted token trace across placement choices, including revisioned cache misses and peer offload |
+| N10 | P1 | `steeringRoutePlacementRevalidation` | Pre-router interventions force routing/placement/prefetch recalculation; post-route edits cannot retroactively route |
+| N11 | P1 | `federatedLatencyEnergyParetoSound` | Latency includes queues, RTT, serialization, both directions, migrations, retries, compression, storage, compute |
+| N12 | P1 | `historyLeaseAckDurability` | ACKed history reference has correct session, lease, generation and crash-recovery conditions |
+| N13 | P1 | `privacyCompressionSideChannelBoundary` | Encryption is not optional on untrusted links; prevent information leaks via mixed-context compression and routing metadata |
+| N14 | P2 | `multiPeerReplicaConsistencyAndAvailability` | Versioned ownership, replication, eviction and failover; no split-brain history commit |
+| N15 | P2 | `signedPantsFederationConsumerGluing` | Independent face/signed fibre and local peer composition retain specified consumers without unjustified semantic claims |
+| N16 | P2 | `sourceBoundFederatedLearnerBidi` | Real original LILA/student learner ⇄ exact execution trace ⇄ formal model, kernel and runtime receipts |
+
+**Finite source artifact for this continuation:** `DASHI/Reasoning/FederatedTieredMoEFiniteExact.agda` has a two-expert, two-peer, two-revision admitted placement specimen, stale model/history rejection, and a pre-routing steering/owner-change example. Its placement equivalence uses the SAME trusted source weight oracle regardless of peer; this is an explicit idealisation, **not** a real network proof. Agda kernel not run; do not promote to N02, N04, N06 or N16 original-source closure.
+
+### Revised max-cut / phase deliverables
+
+**P0 (source and safety):** recover PR #1442 / Leech PR #4 original owners; check actual remote branch heads, verify original source and historical-data receipts; fix new finite module kernel errors (F01); complete A01–A04, M02–M03, S01–S04, X01–X08, N01–N08. *Deliverable:* versioned selected-expert execution and bounded coordinator memory contract with explicit failure fallbacks.
+
+**P1 (effective federation):** tie X09–X14 with N09–N13, original geometry/steering source refinements and experimentally measured candidate policy. *Deliverable:* CPU/RAM/NVMe/LAN/WAN tier decision audit and source-exact identity/replay/transport checks.
+
+**P2 (quality and scale):** repair the actual 12-layer student quality or retain dense fallback; ensure whole-model quality before claimed efficiency; compare SSD-only, RAM-offload, CPU offload, federation-only, hybrid federation+SSD, and selected-expert eager/demand with identical model and prompts, cold/warm runs and failure injection. *Deliverable:* Pareto fronts for CE/BPC, accuracy, first-token latency, steady decode t/s, p50/p95/p99, local peak RSS, GPU VRAM, per-peer RAM, SSD traffic, network bytes and Joules/token.
+
+**P3 (proof closure):** X15–X16, N14–N16, F01–F02; actual crypto and backend implementations separately certified or precisely bounded. *Deliverable:* source-bound whole-system BIDI and a claim ledger showing exactly what is kernel-accepted, tested, inferred or still open.
+
+**Decision policy:** The machine's 5.24 GB available is a *runtime pressure observation*, not a guaranteed allocation. Prefer a tiny local coordinator and on-demand *remote expert ownership* if sufficient peers exist; use NVMe or CPU expert cache only for admitted local experts. Local SSD paging remains useful when network latency makes federation worse; preserve full local fallback where possible. A fixed worldwide ranking of Swiftlet/oLLM/AirLLM/llama.cpp is unscientific because they optimize different memory, quality and transport boundaries.
+
+**Attribution firewall:** Original LILA scientific architecture is Kornienko's. DASHI PR #1442 and LeechTransformer PR #4 contain user's existing federation work; Swiftlet/oLLM/AirLLM/llama.cpp and Qwen authors own their respective runtimes/model ideas. This document records reuse and proposed synthesis only, not an invention-of-MoE or original-source proof claim.
