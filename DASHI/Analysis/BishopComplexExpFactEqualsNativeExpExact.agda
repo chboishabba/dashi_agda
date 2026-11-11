@@ -22,7 +22,7 @@ module DASHI.Analysis.BishopComplexExpFactEqualsNativeExpExact where
 -- No uninhabited closing leaf or postulate is imported.
 ------------------------------------------------------------------------
 
-open import Data.Product.Base using (_×_)
+open import Data.Product.Base using (_×_; proj₁; proj₂)
 import Real as BishopReal
 import Sequence as BishopSequence
 
@@ -55,3 +55,20 @@ originalBishopExpFactEqualsNativeExp T x y =
   Reduction.originalBishopFactorialSeriesEqualsNativeExpFromFiniteBinomial
     T x y
     (Binomial.originalBishopFiniteComplexBinomialLeafInhabited x y)
+
+
+-- Canonical complex-series consumer on exactly the same original
+-- factor terms, not just a pair of scalar convergence facts.
+originalBishopExpFactComplexSeriesConvergesToNativeExp :
+  (T : Cartesian.BishopSetoidComplexTranscendentals) →
+  ∀ (x y : BishopReal.ℝ) →
+  Complex.ComplexSeriesConvergesTo
+    (Factorial.originalBishopFactorialComplexTerm
+      (Complex.complex x y))
+    (Weld.originalBishopExpOnSeries T (Complex.complex x y))
+originalBishopExpFactComplexSeriesConvergesToNativeExp T x y =
+  let components = originalBishopExpFactEqualsNativeExp T x y
+  in
+  Complex.complex-series-converges-to
+    (proj₁ components)
+    (proj₂ components)
