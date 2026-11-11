@@ -283,6 +283,23 @@ def rendered_source_rational_producer():
                 f"{fin_constructor(col)} = QP.≃-reflexive refl")
     lines += [
         "",
+        "generatedRationalNetColumnsZero :",
+        "  (axis : F.Fin 6) (column : F.Fin 12) →",
+        "  Q._≃_",
+        "    (V.lookup",
+        "      (Kernel.weightedStoichiometryColumns",
+        "        (V.lookup generatedRationalAxes axis)",
+        "        generatedRationalStoichiometry)",
+        "      column)",
+        "    Q.0ℚᵘ",
+    ]
+    for axis in range(6):
+        for col in range(12):
+            lines.append(
+                f"generatedRationalNetColumnsZero {fin_constructor(axis)} "
+                f"{fin_constructor(col)} = QP.≃-reflexive refl")
+    lines += [
+        "",
         "-- Any 27×12 rational original rate field and 54×29 rational",
         "-- native flux field now inherits all six conserved axes.",
         "-- Incidence-to-paired-form and original SG laws remain OPEN.",
@@ -361,6 +378,7 @@ def render_agda(certificate_bytes: bytes, certificate: dict) -> str:
         "import DASHI.Biology.Molecular.BH4RationalRateWeightedSourceConservationExact as Rates",
         "import DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact as Operator",
         "import DASHI.Biology.Molecular.BH4OriginalNative369IncidenceExact as NativeGeometry",
+        "import DASHI.Biology.Molecular.BH4OriginalRationalReactionColumnKernelExact as Kernel",
         "",
         "generatedOriginalRheaCertificateSha256 : String",
         f'generatedOriginalRheaCertificateSha256 = "{sha}"',
