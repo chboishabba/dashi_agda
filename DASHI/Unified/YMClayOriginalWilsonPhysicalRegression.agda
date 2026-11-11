@@ -99,3 +99,6 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCu
 
 -- Original Wilson physical source numerator order: all-cutoff positivity, signed-test congruence and partition majorant for positive-complement test, from native product Haar.
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as OriginalWilsonNumeratorOrder
+
+-- Original Wilson physical RG bounded-test majorants: original n=3 pushforward and n=1 bare expectation both <=1 from native product Haar.
+import DASHI.Physics.YangMills.YMClayE1D1OriginalR445BoundedMomentMajorantsExact as E1D1OriginalBoundedMomentMajorants
