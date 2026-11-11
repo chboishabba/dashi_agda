@@ -492,3 +492,45 @@ originalRelationPointwiseReopening = record
   ; reopen = reopenRelation
   ; exact = reopenExactlyPointwise
   }
+
+------------------------------------------------------------------------
+-- The 13-code is recovered after reopening for ANY residual, not
+-- only a residual produced by maskUnobserved.
+------------------------------------------------------------------------
+
+reopenPreservesCoarseCode :
+  (code : Word.TritWord 13)
+  (residual : UnobservedResidual) →
+  Boundary.relationToThirteen (reopenRelation code residual)
+    ≡ code
+reopenPreservesCoarseCode code residual =
+  trans
+    (Boundary.selectedRelationThirteenCodeRoundTrip
+      (Codec.thirteenToSourceCentral code))
+    (Codec.thirteenSourceRoundTrip code)
+
+-- The omitted (1,0) slot separates exactly the collision that
+-- the original 13-coordinate observation cannot distinguish.
+differentOriginalResiduals :
+  maskUnobserved Boundary.originalFlatField
+  ≡ maskUnobserved Boundary.reverseCellRaised → ⊥
+differentOriginalResiduals sameResidual =
+  Boundary.reverseCellReallyDiffers
+    (trans
+      (sym (residualPreservesReverseCell Boundary.originalFlatField))
+      (trans
+        (cong (λ residual → residual (Atlas.atlas-1 , Atlas.atlas-0))
+          sameResidual)
+        (residualPreservesReverseCell Boundary.reverseCellRaised)))
+
+-- Every source relation field is reconstructed at every addressed
+-- cell from its own coarse observation and its own masked residual.
+-- Conversely the coarse observation always survives reopening.
+-- Together this provides the selected finite residual splitting
+-- WITHOUT any chosen section being confused with a full inverse.
+originalRelationRoundTripAt :
+  (field : Original.StageRelationField)
+  (cell : Original.StageRelation144) →
+  reopenRelation (Boundary.relationToThirteen field)
+    (maskUnobserved field) cell ≡ field cell
+originalRelationRoundTripAt = reopenExactlyPointwise
