@@ -99,6 +99,27 @@ def run():
     assert Counter(root_orbits)[1] == 12, root_orbits
     assert len(grid_orbits) == 4 and len(root_orbits) == 34
 
+    # The fifth-axis choice is not special. Exhaust all four options.
+    for partner in range(4, 8):
+        paired = [
+            *(lambda v, i=i, partner=partner: tuple(
+                -x if index in (i, partner) else x
+                for index, x in enumerate(v))
+              for i in range(4)),
+            *(lambda v, i=i: swap(v, i) for i in range(3)),
+        ]
+        for g in paired:
+            assert {g(v) for v in roots} == roots
+        assert [sum(g(v) == v for v in roots) for g in paired] == root_fixed
+        assert len(orbits(roots, paired)) == 34
+
+    # Eigen-dimension argument for each order-two generator.
+    flip_rank_bound = min(120, 150) + min(120, 90)
+    swap_rank_bound = min(148, 183) + min(92, 57)
+    assert flip_rank_bound == 210 and swap_rank_bound == 205
+    print("All four paired-sign embeddings give the same obstruction")
+    print("Any full B4 intertwiner rank <= 205; source kernel dimension >= 35")
+
     # An equivariant bijection preserves each generator's fixed-point set.
     # Disagreement gives an exact specific-action no-go.
     assert any(a != b for a, b in zip(grid_fixed, root_fixed))
