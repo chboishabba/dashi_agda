@@ -66,6 +66,15 @@ private import Batteries.Util.Test
         self.assertIn("mkConst `And.intro",source)
         self.assertIn("mkConst `And",source)
 
+    def test_actual_combination_can_depend_on_two_original_projects(self):
+        code=generate_joins((
+            "Mathlib.Logic.Basic","Batteries.Data.List.Basic"),
+            ["congr_heq","List.takeD_zero"]).decode()
+        self.assertIn("import Mathlib.Logic.Basic",code)
+        self.assertIn("import Batteries.Data.List.Basic",code)
+        self.assertIn("let donors : Array Name := #[`congr_heq,`List.takeD_zero]",code)
+        self.assertIn("DASHIJoined.combined",code)
+        self.assertIn("And.intro",code)
     def test_duplicate_theorem_list_fails_closed(self):
         with self.assertRaises(JoinError):
             generate_joins("Batteries.Data.List.Basic",
