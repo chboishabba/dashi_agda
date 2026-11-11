@@ -225,3 +225,157 @@ module _
   -- Before transporting to the actual covariance difference, derive
   -- this pure scalar ring equality from the selected real backend.
   -- No numerical source RG estimate has yet been supplied.
+
+
+  -- This is the actual covariance bound, conditional ONLY on
+  -- (a) the selected pure real-ring subtraction interchange
+  --     (a-b)-(c-d) = (a-c)-(b-d),
+  -- (b) the three numerical source moment error bounds and two
+  --     selected moment majorants.
+  -- No assumption that B_*mu_Wilson,3 equals mu_Wilson,1.
+  originalR445CovarianceErrorFromThreeSourceMoments :
+    (left right : CoarseTest)
+    (errorProduct errorLeft errorRight
+     boundEffectiveRight boundBareLeft : ℝ) →
+    (scalarInterchange :
+      (Source.sourceEffectiveCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right
+       -ℝ
+       Source.sourceBareCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right)
+      ≡
+      ((effectiveMoment (productTest left right)
+         -ℝ bareMoment (productTest left right))
+       -ℝ
+       ((effectiveMoment left *ℝ effectiveMoment right)
+         -ℝ (bareMoment left *ℝ bareMoment right)))) →
+    0ℝ ≤ℝ errorLeft →
+    0ℝ ≤ℝ boundEffectiveRight →
+    0ℝ ≤ℝ boundBareLeft →
+    0ℝ ≤ℝ errorRight →
+    absℝ
+      (effectiveMoment (productTest left right)
+       -ℝ bareMoment (productTest left right))
+      ≤ℝ errorProduct →
+    absℝ (effectiveMoment left -ℝ bareMoment left)
+      ≤ℝ errorLeft →
+    absℝ (effectiveMoment right)
+      ≤ℝ boundEffectiveRight →
+    absℝ (bareMoment left)
+      ≤ℝ boundBareLeft →
+    absℝ (effectiveMoment right -ℝ bareMoment right)
+      ≤ℝ errorRight →
+    absℝ
+      (Source.sourceEffectiveCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right
+       -ℝ
+       Source.sourceBareCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right)
+    ≤ℝ
+      errorProduct +ℝ
+        ((errorLeft *ℝ boundEffectiveRight)
+          +ℝ (boundBareLeft *ℝ errorRight))
+  originalR445CovarianceErrorFromThreeSourceMoments
+    left right errP errL errR maxER maxBL
+    scalarInterchange errLNN maxERNN maxBLNN errRNN
+    productError leftError rightSize leftSize rightError =
+    subst
+      (λ v →
+        absℝ v ≤ℝ
+          (errP +ℝ
+            ((errL *ℝ maxER) +ℝ (maxBL *ℝ errR))))
+      (sym scalarInterchange)
+      (originalR445ThreeMomentResidualBound
+        left right errP errL errR maxER maxBL
+        errLNN maxERNN maxBLNN errRNN
+        productError leftError rightSize leftSize rightError)
+
+  -- Direct reuse of the genuine original Wilson J11 -> R445 theorem
+  -- already supplied by Same, not a fresh analytic-log claim.
+  originalMixedJ11MinusBareCovarianceQuantitativeBound :
+    (left right : CoarseTest)
+    (errorProduct errorLeft errorRight
+     boundEffectiveRight boundBareLeft : ℝ) →
+    (scalarInterchange :
+      (Source.sourceEffectiveCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right
+       -ℝ
+       Source.sourceBareCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right)
+      ≡
+      ((effectiveMoment (productTest left right)
+         -ℝ bareMoment (productTest left right))
+       -ℝ
+       ((effectiveMoment left *ℝ effectiveMoment right)
+         -ℝ (bareMoment left *ℝ bareMoment right)))) →
+    0ℝ ≤ℝ errorLeft →
+    0ℝ ≤ℝ boundEffectiveRight →
+    0ℝ ≤ℝ boundBareLeft →
+    0ℝ ≤ℝ errorRight →
+    absℝ
+      (effectiveMoment (productTest left right)
+       -ℝ bareMoment (productTest left right))
+      ≤ℝ errorProduct →
+    absℝ (effectiveMoment left -ℝ bareMoment left)
+      ≤ℝ errorLeft →
+    absℝ (effectiveMoment right)
+      ≤ℝ boundEffectiveRight →
+    absℝ (bareMoment left)
+      ≤ℝ boundBareLeft →
+    absℝ (effectiveMoment right -ℝ bareMoment right)
+      ≤ℝ errorRight →
+    let directions =
+          Original.originalWilsonLiteralJetDirections
+            theory traceData exponential beta oneLink bilateral divide 3
+    in
+    absℝ
+      (Cumulant.literalMixedSecondLogDerivative directions
+        (Cumulant.sourceDirectionOf directions
+          (Same.coarsePullback
+            theory traceData exponential beta oneLink bilateral divide
+            left))
+        (Cumulant.sourceDirectionOf directions
+          (Same.coarsePullback
+            theory traceData exponential beta oneLink bilateral divide
+            right))
+       -ℝ
+       Source.sourceBareCovariance
+         theory traceData exponential beta oneLink bilateral divide
+         left right)
+    ≤ℝ
+      errorProduct +ℝ
+        ((errorLeft *ℝ boundEffectiveRight)
+          +ℝ (boundBareLeft *ℝ errorRight))
+  originalMixedJ11MinusBareCovarianceQuantitativeBound
+    left right errP errL errR maxER maxBL
+    scalarInterchange errLNN maxERNN maxBLNN errRNN
+    productError leftError rightSize leftSize rightError =
+    subst
+      (λ v →
+        absℝ
+          (v -ℝ
+           Source.sourceBareCovariance
+             theory traceData exponential beta oneLink bilateral divide
+             left right)
+        ≤ℝ
+          (errP +ℝ
+            ((errL *ℝ maxER) +ℝ (maxBL *ℝ errR))))
+      (sym
+        (trans
+          (Same.originalN3LiteralMixedLogJetIsActualR320PushforwardCovariance
+            theory traceData exponential beta oneLink bilateral divide
+            left right)
+          (sym
+            (Source.sourceEffectiveCovarianceIsActualR445
+              theory traceData exponential beta oneLink bilateral divide
+              left right))))
+      (originalR445CovarianceErrorFromThreeSourceMoments
+        left right errP errL errR maxER maxBL
+        scalarInterchange errLNN maxERNN maxBLNN errRNN
+        productError leftError rightSize leftSize rightError)
