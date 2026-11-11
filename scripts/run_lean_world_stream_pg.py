@@ -29,6 +29,7 @@ SCHEMA_RE=re.compile(r"[A-Za-z_][A-Za-z0-9_]{0,62}\Z")
 MAX_SOURCE_BYTES=8*1024*1024
 TOTAL_CAP=4*1024*1024*1024
 TRANSFER_CAP=2*1024*1024*1024
+MAX_OCCURRENCES=1_000_000
 
 def migrate(conn):
     sql_text=(Path(__file__).resolve().parent/"sql"/
@@ -39,7 +40,8 @@ def migrate(conn):
 def ingest_stream(conn, repo, revision, fileobj, *,
                   max_source_bytes=MAX_SOURCE_BYTES,
                   max_total_bytes=TOTAL_CAP,
-                  max_transfer_bytes=TRANSFER_CAP):
+                  max_transfer_bytes=TRANSFER_CAP,
+                  max_occurrences=MAX_OCCURRENCES):
     """Persist real bytes in the caller's active transaction.
 
     Requires a caller-managed transaction and an already selected SQL schema.
@@ -52,10 +54,14 @@ def ingest_stream(conn, repo, revision, fileobj, *,
         raise StreamIngestError("per-file budget must not exceed reviewed 8 MiB")
     if max_total_bytes<=0 or max_transfer_bytes<=0:
         raise StreamIngestError("invalid aggregate cap")
+    if not 1<=max_occurrences<=MAX_OCCURRENCES:
+        raise StreamIngestError("invalid occurrence cap")
     count=total=skips=0
     with conn.cursor() as cur:
         def accept(receipt,raw):
             nonlocal count,total
+            if count >= max_occurrences:
+                raise StreamIngestError("source occurrence cap reached")
             SourceWorldBuilder._validate_receipt(receipt,raw)
             if len(raw)>max_source_bytes:
                 raise StreamIngestError("unbounded original source")
@@ -161,6 +167,7 @@ def main():
     p.add_argument("--max-source-bytes",type=int,default=MAX_SOURCE_BYTES)
     p.add_argument("--max-total-bytes",type=int,default=TOTAL_CAP)
     p.add_argument("--max-transfer-bytes",type=int,default=TRANSFER_CAP)
+    p.add_argument("--max-occurrences",type=int,default=MAX_OCCURRENCES)
     args=p.parse_args()
     if not SCHEMA_RE.fullmatch(args.schema):
         p.error("explicit safe PostgreSQL schema required")
@@ -195,7 +202,8 @@ def main():
                         conn,args.repository,args.revision,archive,
                         max_source_bytes=args.max_source_bytes,
                         max_total_bytes=args.max_total_bytes,
-                        max_transfer_bytes=args.max_transfer_bytes)
+                        max_transfer_bytes=args.max_transfer_bytes,
+                        max_occurrences=args.max_occurrences)
         receipt["elapsed_seconds"]=round(time.monotonic()-started,3)
         print(json.dumps(receipt,sort_keys=True))
         return 0
