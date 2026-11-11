@@ -66,3 +66,42 @@ record ValidatedDevelopmentalProjection (PersonHistory : Set) : Set₁ where
     originalChronologyAuthenticated : PersonHistory → Set
     developmentalWindowCalibration : PersonHistory → Set
     biologicalResponseValidated : PersonHistory → Set
+
+-- Second, independent canonical owner: finite PrefixAgree from the
+-- original Base369 balanced-truth address geometry. Keep the digit
+-- presentation conversion explicit (the trit types are not definally equal).
+open import Base369 using (TriTruth; tri-low; tri-mid; tri-high)
+import DASHI.Foundations.Base369AddressSymmetryAndBranchGeometryExact as Address
+import DASHI.Foundations.Base369PrefixUltrametricExact as Prefix
+
+toTruth : Trit → TriTruth
+toTruth neg = tri-low
+toTruth zer = tri-mid
+toTruth pos = tri-high
+
+toTruthPath : ∀ {n : Nat} → Q.Residue3Pow n → Address.TritPath n
+toTruthPath [] = Address.[]
+toTruthPath (t ∷ ts) = toTruth t Address.∷ toTruthPath ts
+
+canonicalPrefix : Dev.DevelopmentalLeaf → Address.TritPath 2
+canonicalPrefix leaf = toTruthPath (encodeHistory leaf)
+
+sharedEarlyPrefixWitness :
+  Prefix.PrefixAgree 1 (canonicalPrefix Dev.leafA)
+    (canonicalPrefix Dev.leafB)
+sharedEarlyPrefixWitness =
+  Prefix.prefixSuc Prefix.prefixZero
+
+differentEarlyBranchNoPrefixWitness :
+  Prefix.PrefixAgree 1 (canonicalPrefix Dev.leafA)
+    (canonicalPrefix Dev.leafC) → ⊥
+differentEarlyBranchNoPrefixWitness ()
+
+canonicalPrefixThresholdTransitive :
+  ∀ {n k : Nat}
+    {a b c : Address.TritPath n} →
+  Prefix.PrefixAgree k a b →
+  Prefix.PrefixAgree k b c →
+  Prefix.PrefixAgree k a c
+canonicalPrefixThresholdTransitive =
+  Prefix.prefixUltrametricThreshold
