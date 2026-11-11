@@ -132,6 +132,85 @@ def plan_from_pg(conn,repository,revision,roots,*,max_modules=DEFAULT_MODULE_CAP
         "root_modules":tuple(roots)
     }
 
+
+def plan_multi_repo_from_pg(conn,snapshots,roots,*,max_modules=512,
+                            max_source_bytes=256*1024*1024):
+    """Resolve cross-repo original imports without guessed sources."""
+    if not snapshots or not roots or len(snapshots)>16:
+        raise JoinError("invalid pinned source selection")
+    if len(set(snapshots)) != len(snapshots):
+        raise JoinError("duplicate pinned source snapshot")
+    if not 1<=max_modules<=2048 or not 1<=max_source_bytes<=256*1024*1024:
+        raise JoinError("invalid resource budget")
+    path_owners={}
+    for repo,rev in snapshots:
+        if not REPO_RE.fullmatch(repo) or not COMMIT_RE.fullmatch(rev):
+            raise JoinError("invalid immutable source snapshot")
+        with conn.cursor() as cur:
+            cur.execute("""SELECT source_count FROM lean_world_source_archive
+                WHERE repository=%s AND revision=%s
+                  AND status='source-complete-not-elaborated'""",(repo,rev))
+            if cur.fetchone() is None:
+                raise JoinError("source snapshot not complete: "+repo)
+            cur.execute("""SELECT path FROM lean_world_source_occurrence
+                WHERE repository=%s AND revision=%s""",(repo,rev))
+            for (path,) in cur:
+                prior=path_owners.get(path)
+                if prior and prior!=(repo,rev):
+                    raise JoinError("ambiguous cross-repository path: "+path)
+                path_owners[path]=(repo,rev)
+    sources={}
+    edges={}
+    origins={}
+    order=[]
+    external=set()
+    done=set()
+    active=set()
+    total=0
+    stack=[(r,False) for r in reversed(roots)]
+    while stack:
+        mod,leaving=stack.pop()
+        if leaving:
+            active.remove(mod)
+            done.add(mod)
+            order.append(mod)
+            continue
+        if mod in done:
+            continue
+        if mod in active:
+            raise JoinError("cyclic original source imports")
+        path=path_for_module(mod)
+        owner=path_owners.get(path)
+        if owner is None:
+            if mod in ("Init","Lean","Std") or mod.startswith(BUILTINS):
+                external.add(mod)
+                done.add(mod)
+                continue
+            raise JoinError("missing original cross-repository import: "+mod)
+        if len(sources)>=max_modules:
+            raise JoinError("source module cap exceeded")
+        raw=retrieve_source(conn,owner[0],owner[1],path)
+        total+=len(raw)
+        if total>max_source_bytes:
+            raise JoinError("source-byte budget exceeded")
+        sources[mod]=raw
+        origins[mod]={"repository":owner[0],"revision":owner[1],
+                      "path":path,"source_sha256":sha256(raw).hexdigest()}
+        dependencies=parse_imports(raw)
+        edges[mod]=dependencies
+        active.add(mod)
+        stack.append((mod,True))
+        for dependency in reversed(dependencies):
+            if dependency in active:
+                raise JoinError("cyclic original import")
+            if dependency not in done:
+                stack.append((dependency,False))
+    return {"source":sources,"order":order,"edges":edges,
+            "origins":origins,"external_imports":tuple(sorted(external)),
+            "total_source_bytes":total,"root_modules":tuple(roots),
+            "source_snapshots":[{"repository":r,"revision":v} for r,v in snapshots]}
+
+
 def lean_name(name):
     if not MODULE.fullmatch(name):
         raise JoinError("invalid declaration: "+name)
@@ -226,7 +305,8 @@ def compile_and_join(plan,lean,donors,*,timeout=180,max_build_seconds=3600):
                 "module":module,"path":path,
                 "source_sha256":sha256(plan["source"][module]).hexdigest(),
                 "olean_sha256":digest,
-                "direct_imports":list(plan["edges"][module])
+                "direct_imports":list(plan["edges"][module]),
+                "original_source_origin":plan.get("origins",{}).get(module)
             })
         generated=generate_joins(plan["root_modules"][-1],donors)
         (root/"DASHIJoinBatch.lean").write_bytes(generated)
@@ -245,6 +325,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,max_build_seconds=3600):
             "external_imports":list(plan["external_imports"]),
             "original_source_bytes":plan["total_source_bytes"],
             "compiled_modules":module_receipts,
+            "original_source_snapshots":plan.get("source_snapshots",[]),
             "donor_names":list(donors),
             "generated_join_source_sha256":sha256(generated).hexdigest(),
             "joined_olean_sha256":joined_digest,
@@ -261,6 +342,8 @@ def main():
     p.add_argument("--repository",required=True)
     p.add_argument("--revision",required=True)
     p.add_argument("--module",required=True)
+    p.add_argument("--additional-source",action="append",default=[],
+                   help="original repo@40SHA snapshot in same PostgreSQL schema")
     p.add_argument("--donor",action="append",required=True,
                    help="full original theorem declaration name; repeat")
     p.add_argument("--lean",type=Path,required=True)
@@ -284,10 +367,22 @@ def main():
                 if cur.fetchone()[0]!=args.schema:
                     raise JoinError("source world schema missing")
             conn.commit()
-            plan=plan_from_pg(
-                conn,args.repository,args.revision,[args.module],
-                max_modules=args.max_modules,
-                max_source_bytes=args.max_source_bytes)
+            if args.additional_source:
+                snapshots=[(args.repository,args.revision)]
+                for item in args.additional_source:
+                    if "@" not in item:
+                        raise JoinError("additional source must be repo@40SHA")
+                    r,v=item.rsplit("@",1)
+                    snapshots.append((r,v))
+                plan=plan_multi_repo_from_pg(
+                    conn,snapshots,[args.module],
+                    max_modules=args.max_modules,
+                    max_source_bytes=args.max_source_bytes)
+            else:
+                plan=plan_from_pg(
+                    conn,args.repository,args.revision,[args.module],
+                    max_modules=args.max_modules,
+                    max_source_bytes=args.max_source_bytes)
         result=compile_and_join(plan,args.lean,args.donor,timeout=args.timeout)
         result["repository"]=args.repository
         result["revision"]=args.revision
