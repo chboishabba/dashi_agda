@@ -741,3 +741,10 @@ Brouwer and positive implicit root, six-face
 reactive boundary work, same-physical-object
 tissue/observer refinement and independent
 longitudinal validation remain OPEN.
+
+
+### 2026-11-11 BH4 #1454 finite weighted RHS bilinearity cut
+
+Companion BH4 source now carries Golden-imported `BH4RationalSemidiscreteBilinearityExact`. It uses exact rational setoid equality and the existing `NonReflectiveQ` solver to show that the **actual computed 27×29 semidiscrete RHS** splits, after finite spatial source-weighted summation, into its bond contribution and reaction contribution. This removes the additive-splitting leaf from the source-to-six-zero-defect cut.
+
+Still OPEN: prove the 27×29×54 incidence Fubini sum equals the existing actual 54 paired-native bond cancellation; prove the 27×29×12 reaction Fubini sum equals the existing 12 source-column weighted gross-reactant/product difference, preserving generated 29×12 identity and orientation. Only then construct the six exact computed RHS zero-defect inhabitants and invoke the already-written Bishop lift. No cross-PR imports/merge, Agda kernel check, authentic Rhea source, physical real SG/mass-action law, six-face work, Brouwer, tissue refinement or independent validation are claimed.
