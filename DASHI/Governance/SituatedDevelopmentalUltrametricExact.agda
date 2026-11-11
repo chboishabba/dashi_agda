@@ -80,3 +80,74 @@ record DevelopmentalCalibration (Response : Set) : Set₁ where
     developmentalMeasurementEvidence : Set
     withinPersonTimingEvidence : Set
     alternativeHistoriesReviewed : Set
+
+-- Exhaustive strong-triangle certificate for all four developmental leaves.
+-- 64 cases are normalized by reduction; this is a FINITE ultrametric,
+-- not an empirical effect size or complete p-adic developmental theory.
+treeDistanceStrongTriangle :
+  (x y z : DevelopmentalLeaf) →
+  treeDistance x z ≤ (treeDistance x y ⊔ treeDistance y z)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) (developmental-leaf otherBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) (developmental-leaf otherBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) (developmental-leaf otherBranch localB) = z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localA) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf sharedBranch localB) = s≤s (s≤s z≤n)
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localA) = s≤s z≤n
+treeDistanceStrongTriangle (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) (developmental-leaf otherBranch localB) = z≤n
