@@ -548,3 +548,20 @@ The corrected exact declarations are:
 **Prior text correction:** passages naming `taskOnlyMPClassCannotDetermineIntent`, `publicOutcomeMPClassCannotRecoverRetention` and `noMPClassCanAuthoriseNumericPromotion` as currently existing #1480 declarations describe the initial unbuildable draft; they have been replaced by the three generic declarations above and must not be reported as current. Same-world source-specific instantiation remains OPEN. This discovery lowers the MP cognitive-warfare seam from claimed direct integration to generic standalone mathematics with explicit dependency.
 
 **Other scope:** the finite temporal-ordering negative example and conditional same-window zero-spectrum modules remain source-written; no Agda kernel test was run.
+
+## 2026-11-11 continuation — multivariate covariance vs temporal ordering
+
+**New Agda owner:** DASHI/Information/PNFMPStaticGramTemporalNonIdentificationExact.agda. It imports existing finite temporal-ordering, core non-factorability, and actual MP observation rechart on the SAME #1480 branch; no #1479-only imports.
+
+Synthetic 4×2 histories are [(0,1),(1,0),(0,1),(1,0)] and [(0,1),(0,1),(1,0),(1,0)]. Both have exact column totals (2,2), full raw Gram [[2,0],[0,2]] and equal centered covariance (over any ordinary characteristic-0 field with usual sample normalization). Chronological lag-one first-column product sums differ: 0 versus 1.
+
+**Exact source-written lemmas:**
+- sameColumnTotals, sameEntireRawGram, equalFullTwoColumnStatistics.
+- sameCentredCovarianceCrossProduct: cross-multiplied equality of all 2×2 centered covariance entries, with source n=4; no unlicensed field division.
+- equalFullGramButDifferentTemporalLag, noStaticTwoColumnSpectralDecoder, noRechartedTwoColumnSpectralDecoder.
+- twoColumnMPClassificationCannotRecoverTemporalLag: ACTUAL #1480 MP classifier applied to an arbitrary covariance-statistic-based estimate cannot reconstruct the lag-one difference.
+- totalsExactlyTwo and offDiagonalGramZero: finite computational checks.
+
+**Independent local arithmetic reproduction:** two matrices verified totals (2,2), Gram (2,0,2) and lag 0 versus 1. No Agda kernel check performed. This is a synthetic mathematical no-go, NOT an actual iid model assessment or causal claim.
+
+**Remaining phases:** P0 pnfWindowActivationEquality / pnfNullAssumptionsAssessed need original authenticated data and selected null with temporal, group and missingness assumptions. P1 sampleCovarianceForcedZeroMultiplicity remains conditional on real field rank/nullity and same-matrix eigenvalue/kernel equality; marchenkoPasturWeakLimit and extreme-eigenvalue convergence need independent probability-space and moment/tail proofs. P2 calibrated empirical nulls, held-out projector stability and source-specific PNF authority remain open. Avoid treating MP spectral threshold as ability to recover omitted time ordering or to infer actor intent.
