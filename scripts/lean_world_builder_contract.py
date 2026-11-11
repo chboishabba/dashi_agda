@@ -60,11 +60,13 @@ def pending_from_manifest(manifest_path: Path, *, limit=200_000_000) -> PendingE
         or m.get("kernel_proof_certified") is not False):
         raise ContractError("already promoted or invalid admission status")
     for k in ("repository", "revision", "module", "declaration",
-              "toolchain", "dependency_closure_id", "export_sha256", "artifact_path"):
+              "toolchain", "export_sha256", "artifact_path"):
         if not isinstance(m.get(k), str) or not m[k]:
             raise ContractError("missing " + k)
     if not HEX40.fullmatch(m["revision"]) or not HEX64.fullmatch(m["export_sha256"]):
         raise ContractError("invalid immutable identity")
+    if not isinstance(m.get("dependency_closure_id"), str):
+        raise ContractError("invalid dependency closure ID")
     source = m.get("source_closure")
     if (not isinstance(source, list) or not source
         or any(not isinstance(s, list) or len(s) != 2
