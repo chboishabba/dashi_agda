@@ -83,11 +83,11 @@ sameOriginalWilsonSupport :
   (cell : Grid.GridCell4) →
   toWilson (Product.supportMask (Product.encode256 cell)) ≡
   Orbit.outerSubset cell
-sameOriginalWilsonSupport cell with
-  Orbit.outerFlag (Grid.c0 cell) |
-  Orbit.outerFlag (Grid.c1 cell) |
-  Orbit.outerFlag (Grid.c2 cell) |
-  Orbit.outerFlag (Grid.c3 cell)
+sameOriginalWilsonSupport (Grid.gridCell4 a b c d) with
+  Orbit.outerFlag a |
+  Orbit.outerFlag b |
+  Orbit.outerFlag c |
+  Orbit.outerFlag d
 ... | false | false | false | false = refl
 ... | true  | false | false | false = refl
 ... | false | true  | false | false = refl
