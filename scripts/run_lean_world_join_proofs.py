@@ -321,6 +321,7 @@ def compile_and_join(plan,lean,donors,*,timeout=180,artifact_consumer=None):
             "lean_version":version_text,
             "lean_binary_sha256":sha256(compiler.read_bytes()).hexdigest(),
             "module_count":len(module_receipts),
+            "root_module":plan["root_modules"][-1],
             "external_imports":list(plan["external_imports"]),
             "original_source_bytes":plan["total_source_bytes"],
             "compiled_modules":module_receipts,
@@ -354,6 +355,7 @@ def main():
     p.add_argument("--max-source-bytes",type=int,default=DEFAULT_SOURCE_CAP)
     p.add_argument("--timeout",type=int,default=180)
     p.add_argument("--output",type=Path,required=True)
+    p.add_argument("--persist-joins",action="store_true")
     args=p.parse_args()
     if not SCHEMA_RE.fullmatch(args.schema) or args.schema=="public":
         p.error("dedicated explicit source-world schema required")
