@@ -38,6 +38,7 @@ def compile_retrieved(conn, *, original_receipt: Path,
                    c.status,c.source_sha256
             FROM lean_world_occurrence o
             JOIN lean_world_statement s ON s.statement_id=o.statement_id
+            JOIN lean_world_fibre f ON f.fibre_id=o.fibre_id
             JOIN lean_world_candidate_receipt c
               USING (repository,revision,declaration)
             WHERE o.repository=%s AND o.revision=%s AND o.declaration=%s
@@ -149,11 +150,9 @@ def main():
                 conn,original_receipt=args.acceptance_receipt,
                 donor_file=args.donor_source,consumer_file=args.consumer_source,
                 lean_executable=args.lean)
-        from pathlib import Path
         dest=args.output_dir.resolve()
         dest.mkdir(parents=True,exist_ok=True)
         data=(json.dumps(report,sort_keys=True,separators=(",",":"))+"\n").encode()
-        from hashlib import sha256
         output=dest/(sha256(data).hexdigest()+".retrieved-proof-observation.json")
         # Immutable POSIX publication using same checked pattern as #1495.
         if output.exists():
