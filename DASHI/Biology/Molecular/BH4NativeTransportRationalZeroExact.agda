@@ -284,3 +284,65 @@ originalComputedNativeTransportPerSpeciesZero
             fluxes stoichiometry rates species)))
       (original369AllSpeciesNativeRationalTransportZero
         fluxes species))
+
+
+-- Native transport is now INHABITED by original source geometry.
+-- Only the original finite reaction source left kernel remains to
+-- inhabit the other field of the original local-conservation record.
+originalNativeLocalConservationFromReactionProof :
+  (fluxes : Op.Matrix 54 29)
+  (stoichiometry : Op.Matrix 29 12)
+  (rates : Op.Matrix 27 12)
+  (weights : Op.Matrix 6 29) →
+  ((axis : F.Fin 6) →
+    Q._≃_
+      (Lift.sourceSpatialWeighted
+        (V.lookup weights axis)
+        (Compose.originalReactionRHS
+          (Native.originalNativeRationalInputs
+            fluxes stoichiometry rates)))
+      Q.0ℚᵘ) →
+  Compose.OriginalSourceLocalConservation
+    (Native.originalNativeRationalInputs fluxes stoichiometry rates)
+    weights
+originalNativeLocalConservationFromReactionProof
+  fluxes stoichiometry rates weights reactionsBalanced =
+  record
+    { originalNativeTransportPerSpeciesZero =
+        originalComputedNativeTransportPerSpeciesZero
+          fluxes stoichiometry rates
+    ; originalSourceReactionPerAxisZero = reactionsBalanced
+    }
+
+-- Consequent all-six-axes Bishop real conservation for the SAME
+-- computed source-native 27×29 RHS. No global zero premise is assumed.
+-- The remaining reaction-only proof must be independently source-paid.
+originalNativeRHSBishopConservationGivenReactionSource :
+  (fluxes : Op.Matrix 54 29)
+  (stoichiometry : Op.Matrix 29 12)
+  (rates : Op.Matrix 27 12)
+  (weights : Op.Matrix 6 29) →
+  ((axis : F.Fin 6) →
+    Q._≃_
+      (Lift.sourceSpatialWeighted
+        (V.lookup weights axis)
+        (Compose.originalReactionRHS
+          (Native.originalNativeRationalInputs
+            fluxes stoichiometry rates)))
+      Q.0ℚᵘ) →
+  (axis : F.Fin 6) →
+  Q._≃_
+    (Lift.sourceSpatialWeighted
+      (V.lookup weights axis)
+      (Op.rational369SemidiscreteRHS
+        (Native.originalNativeRationalInputs
+          fluxes stoichiometry rates)))
+    Q.0ℚᵘ
+originalNativeRHSBishopConservationGivenReactionSource
+  fluxes stoichiometry rates weights reactionsBalanced =
+  Compose.originalComputedRHSSixZeroDefects
+    (Native.originalNativeRationalInputs
+      fluxes stoichiometry rates)
+    weights
+    (originalNativeLocalConservationFromReactionProof
+      fluxes stoichiometry rates weights reactionsBalanced)
