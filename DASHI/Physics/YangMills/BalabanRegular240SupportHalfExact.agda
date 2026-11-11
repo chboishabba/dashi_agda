@@ -9,6 +9,7 @@ module DASHI.Physics.YangMills.BalabanRegular240SupportHalfExact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Data.Nat.Properties using (+-comm)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
@@ -228,3 +229,59 @@ independentCartesianActionAgrees g p =
 -- after removing the all-inner 16-sign infrared fibre. Because the
 -- source proof of positive outerCount was preserved, no hidden
 -- IR admissibility claim is imported from a finite cardinality.
+
+-- Complete the initially open proof-carrying independent Cartesian action.
+-- These identities reuse original finite Nat commutativity/associativity
+-- owners rather than deriving the action by conjugating the source.
+maskWeightIndependentInvariant :
+  (g : Action.HypercubicGenerator) (m : Mask4) →
+  maskWeight (actMask g m) ≡ maskWeight m
+maskWeightIndependentInvariant Action.flip0 m = refl
+maskWeightIndependentInvariant Action.flip1 m = refl
+maskWeightIndependentInvariant Action.flip2 m = refl
+maskWeightIndependentInvariant Action.flip3 m = refl
+maskWeightIndependentInvariant Action.swap01 (mask4 a b c d) =
+  cong (λ p → (p + Orbit.boolWeight c) + Orbit.boolWeight d)
+    (+-comm (Orbit.boolWeight b) (Orbit.boolWeight a))
+maskWeightIndependentInvariant Action.swap12 (mask4 a b c d) =
+  cong (λ p → p + Orbit.boolWeight d)
+    (sym (Action.swapAdjacentAfterPrefix
+      (Orbit.boolWeight a) (Orbit.boolWeight b) (Orbit.boolWeight c)))
+maskWeightIndependentInvariant Action.swap23 (mask4 a b c d) =
+  sym (Action.swapAdjacentAfterPrefix
+    (Orbit.boolWeight a + Orbit.boolWeight b)
+    (Orbit.boolWeight c) (Orbit.boolWeight d))
+
+independentSupportDegreeInvariant :
+  (g : Action.HypercubicGenerator) (p : SupportHalf256) →
+  maskWeight (supportMask (actSupportHalf g p)) ≡
+  maskWeight (supportMask p)
+independentSupportDegreeInvariant g (supportHalf256 mask signs) =
+  maskWeightIndependentInvariant g mask
+
+-- Unlike actPackedRegular, this action is directly the independent
+-- B4 product action on the support mask and the F4 half-root signs.
+actIndependent240 :
+  Action.HypercubicGenerator → SupportHalf240 → SupportHalf240
+actIndependent240 g (supportHalf240 p n positive) =
+  supportHalf240 (actSupportHalf g p) n
+    (trans (independentSupportDegreeInvariant g p) positive)
+
+-- The original Round56 action and independently constructed F4
+-- half-root/support-mask product action genuinely commute, on the
+-- same underlying proof-carrying regular carrier.
+encodeIndependent240Equivariant :
+  (g : Action.HypercubicGenerator) (c : Regular240) →
+  supportSigns (encode240 (actRegular g c)) ≡
+  supportSigns (actIndependent240 g (encode240 c))
+encodeIndependent240Equivariant g (regular240 c n proof) =
+  full256Equivariant g c
+
+-- The independent product action equals the previously constructed
+-- conjugated action on all observable support/sign coordinates.
+independentMatchesTransported240 :
+  (g : Action.HypercubicGenerator) (p : SupportHalf240) →
+  supportSigns (actIndependent240 g p) ≡
+  supportSigns (actPackedRegular g p)
+independentMatchesTransported240 g p =
+  sym (independentCartesianActionAgrees g p)
