@@ -7,9 +7,10 @@ Python parser. A successful run records independent checker observations,
 including a negative-control rejection. It does not claim fibre retrieval.
 """
 from __future__ import annotations
-from hashlib import sha256
+from hashlib import sha256, sha1
 from pathlib import Path
 import argparse
+import base64
 import json
 import os
 import shutil
@@ -101,6 +102,7 @@ def main_run(output_dir: Path, *, timeout=600):
         for file in ("Donor.lean","Consumer.lean"):
             shutil.copyfile(FIXTURES/file,original/file)
         reports=[]
+        projected={}
         for module, theorem in (
             ("Donor","DASHIWorldSmoke.originalIdentity"),
             ("Consumer","DASHIWorldSmoke.consumerIdentity")):
@@ -124,6 +126,12 @@ def main_run(output_dir: Path, *, timeout=600):
                                  cwd=original,env=env,timeout=timeout)
             if b"OK:" not in independent.stdout:
                 raise AcceptanceError("Tenet gave no explicit OK receipt for "+module)
+            from lean_world_native_v3_projection import extract_candidates
+            candidate, = extract_candidates(
+                export.read_bytes(), selected_names=frozenset((theorem,)))
+            if candidate.name != theorem or not candidate.proof_value_present:
+                raise AcceptanceError("selected original proof not structurally projected")
+            projected[theorem]=(module,candidate)
             reports.append({
                 "module":module,"declaration":theorem,
                 "source_sha256":digest(original/(module+".lean")),
@@ -143,6 +151,77 @@ def main_run(output_dir: Path, *, timeout=600):
                           expect_success=False)
         if rejection.returncode == 0:
             raise AcceptanceError("independent checker accepted invalid control")
+        # Create candidate-only #1484 compatible originals iff all direct
+        # type/proof constants are defined within this selected two-module
+        # dependency set. Otherwise publish no misleading complete DAG rows.
+        selected=set(projected)
+        unresolved={theorem:sorted(
+            (set(c.direct_constants)|set(c.proof_direct_constants))-selected)
+            for theorem,(_,c) in projected.items()}
+        if any(unresolved.values()):
+            raise AcceptanceError("selected proof has unresolved original dependencies: "+
+                                  json.dumps(unresolved,sort_keys=True))
+        source_rows=[]
+        export_rows=[]
+        for theorem,(module,c) in projected.items():
+            source_bytes=(FIXTURES/(module+".lean")).read_bytes()
+            original_path="tests/fixtures/lean_world_semantic/"+module+".lean"
+            source_rows.append({
+                "kind":"world-source-occurrence",
+                "status":"source-verified-not-elaborated",
+                "repository":"chboishabba/dashi_agda",
+                "revision":original_commit,"path":original_path,
+                "sha256":sha256(source_bytes).hexdigest(),
+                "size":len(source_bytes),
+                "git_blob":sha1(b"blob "+str(len(source_bytes)).encode()+
+                                b"\\0"+source_bytes).hexdigest()
+            })
+            type_node=json.loads(c.canonical_type.decode("utf-8"))
+            dependency_names=(set(c.direct_constants)|
+                              set(c.proof_direct_constants))-{theorem}
+            export_rows.append({
+                "kind":"lean-elaborated-export",
+                "repository":"chboishabba/dashi_agda",
+                "revision":original_commit,"path":original_path,
+                "declaration":theorem,
+                "source_sha256":sha256(source_bytes).hexdigest(),
+                "proof_digest":c.proof_digest,
+                "profile":"lean4-4.28.0-exporter-"+EXPORTER_SHA[:12]+
+                          "-tenet-"+TENET_SHA[:12],
+                "type_head":type_node[2][0],
+                "universe_shape":json.dumps(type_node[1],separators=(",",":")),
+                "canonical_type_b64":base64.b64encode(c.canonical_type).decode(),
+                "exporter_profile":"lean4export-3x-independent-tenet-check-observed",
+                "attribution":"DASHI original Lean fixture",
+                "dependencies":[{
+                    "repository":"chboishabba/dashi_agda",
+                    "revision":original_commit,"declaration":name
+                } for name in sorted(dependency_names)],
+                "native_export_sha256":next(r["native_export_sha256"]
+                            for r in reports if r["declaration"]==theorem),
+                "independent_checker_observed":True,
+                "kernel_certified":False,
+                "world_admitted":False
+            })
+        source_rows.append({
+            "kind":"world-source-intake-summary",
+            "repository":"chboishabba/dashi_agda",
+            "revision":original_commit,
+            "source_complete":True,"skipped_sources":0,
+            "admitted_source_occurrences":len(source_rows)
+        })
+        source_payload=("".join(json.dumps(x,sort_keys=True)+"\\n"
+                              for x in source_rows)).encode()
+        export_payload=("".join(json.dumps(x,sort_keys=True)+"\\n"
+                              for x in export_rows)).encode()
+        output_dir.mkdir(parents=True,exist_ok=True)
+        from lean_world_atomic_spool import publish_immutable
+        source_path=output_dir/(sha256(source_payload).hexdigest()+
+                                ".source-world.jsonl")
+        export_path=output_dir/(sha256(export_payload).hexdigest()+
+                                ".candidate-world.jsonl")
+        publish_immutable(source_path,source_payload)
+        publish_immutable(export_path,export_payload)
         receipt={
             "schema":"dashi-lean-real-independent-semantic-acceptance-v1",
             "status":"independent-checker-observed-two-module-reuse",
@@ -158,6 +237,10 @@ def main_run(output_dir: Path, *, timeout=600):
             "checker_apphost_sha256":digest(tenet_binary),
             "checker_assembly_sha256":digest(tenet_assembly),
             "declarations":reports,
+            "candidate_source_world_path":str(source_path),
+            "candidate_source_world_sha256":sha256(source_payload).hexdigest(),
+            "candidate_export_world_path":str(export_path),
+            "candidate_export_world_sha256":sha256(export_payload).hexdigest(),
             "invalid_fixture_name":invalid[0].relative_to(tenet).as_posix(),
             "invalid_fixture_sha256":digest(invalid[0]),
             "invalid_fixture_rejected":True,
