@@ -50,4 +50,6 @@ export PGUSER="$(id -un)"
 createdb "$PGDATABASE"
 python3 -m unittest discover -s tests \
   -p 'test_lean_world_postgres_migration.py' -v
+python3 -m unittest discover -s tests \
+  -p 'test_lean_world_postgres_candidate.py' -v
 echo "POSTGRES_MIGRATION_VALIDATED: actual isolated PostgreSQL server, real SQL and data-integrity tests"
