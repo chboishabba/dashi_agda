@@ -51,6 +51,7 @@ def persist_join(conn,report,generated_source,joined_olean):
     profile={
         "schema":"original-lean-compiled-proof-join-v1",
         "compiler_sha256":report["lean_binary_sha256"],
+        "snapshots":report.get("original_source_snapshots",[]),
         "generated_source_sha256":report["generated_join_source_sha256"],
         "olean_sha256":report["joined_olean_sha256"],
         "modules":[
@@ -83,7 +84,7 @@ def persist_join(conn,report,generated_source,joined_olean):
                     original_source_snapshots,compiled_source,compiled_source_sha256,
                     compiled_olean,compiled_olean_sha256,
                     source_scope_count,joined_theorem_count)
-                VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                VALUES (%s,%s,%s,%s::jsonb,%s,%s,%s,%s,%s,%s)
                 ON CONFLICT DO NOTHING
             """,(batch_id,bytes.fromhex(report["lean_binary_sha256"]),
                  report["lean_version"],json.dumps(report.get("original_source_snapshots",[])),
@@ -92,7 +93,7 @@ def persist_join(conn,report,generated_source,joined_olean):
                  len(original_modules),len(donors)))
             cur.execute("""
                 SELECT source_compiler_sha256,compiler_version,
-                       compiled_source,compiled_source_sha256,
+                       original_source_snapshots,compiled_source,compiled_source_sha256,
                        compiled_olean,compiled_olean_sha256,
                        source_scope_count,joined_theorem_count,status
                 FROM lean_world_compiled_join_batch WHERE batch_sha256=%s
@@ -100,7 +101,8 @@ def persist_join(conn,report,generated_source,joined_olean):
             stored=cur.fetchone()
             expected=(
                 bytes.fromhex(report["lean_binary_sha256"]),
-                report["lean_version"],generated_source,digest(generated_source),
+                report["lean_version"],report.get("original_source_snapshots",[]),
+                generated_source,digest(generated_source),
                 joined_olean,digest(joined_olean),
                 len(original_modules),len(donors),
                 "lean-compiled-original-proof-joins"
