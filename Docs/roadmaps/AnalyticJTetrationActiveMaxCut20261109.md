@@ -668,3 +668,27 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Important mathematical bookkeeping:** \(T_N\) contains degrees \(0,\ldots,N-1\), and the upper wing of the \(N\times N\) rectangle has total degree \(N,\ldots,2N-2\). The full \(T_{2N-1}\) also contains off-square contributions, so it is **not** equal to the rectangle. The precise finite decomposition is \(R_{N,N}=T_N+W_N\), not \(R_{N,N}=T_{2N-1}\).
 
 **Still unpaid and genuinely analytic:** (P0) pinned Agda \`--safe\` kernel acceptance; (P1) instantiate four positive triangle-tail convergence moduli for actual real \(x^n/n!\) and imaginary \((iy)^n/n!\) term coordinates, including an original-source \(\ell^1\) majorant; (P1) original complex finite exponential binomial factorial coefficient identity; (P1) infer complex wing \(\to0\), identify complex triangle/rectangle limits and finish \`expFactEqualsExpC\` at all \(x+iy\). The local source not passing kernel yet must not be described as a discharged theorem.
+
+
+## 2026-11-11 — complex factorial positive triangle-tail comparison implementation
+
+**New source-written module** \`DASHI/Analysis/BishopComplexTriangleTailsVanishingExact.agda\`, registered in the pinned \`scripts/check_analytic_j_tetration_golden_local.sh\` target list.
+
+Paid reusable proof declarations, still requiring Agda 2.9 acceptance:
+- \`originalBishopFiniteFinSumMonotone\`: Fin-sum order transport implemented by the **existing** \`FinSum.finSumIsSeriesOf\` bridge and pinned \`Sequence.∑₀-mono-≤\`.
+- \`originalBishopCauchyCoefficientMonotone\`: finite convolution coefficient monotonicity for any two pointwise dominated Bishop-real streams, with explicit nonnegative assumptions used in the Bishop multiplication monotonicity proof.
+- \`originalBishopCauchyTriangleMonotone\`: all-\(N\) finite triangle domination, reusing the coefficient proof.
+- \`originalBishopFactorialPositiveTriangleTailVanishes\`: direct original owner \`BishopExponentialCauchyProductExact.absoluteTriangleWingTailConvergesZero\` for the actual positive factorial stream; uses its original constructive \`Sequence.con*\` modulus.
+- \`originalBishopRealFactorAbsoluteIsExpAbsolute\`: identifies **literal complex factorial** coefficients of \`(x,0)\` with the original real \`absoluteExpTerm x\`, by \`BishopReal.∣_∣\` congruence on the existing \`originalBishopFactorialComplexTermRealAxis\` certificate.
+- \`originalBishopRealFactorImaginaryZero\`: the source real factorial term has zero imaginary part for every index.
+
+**Crucial exact remaining seam, NOT completed by the above:** obtain for every \(n\) the **original imaginary-axis complex factorial coordinate inequalities**
+\[
+  |\mathrm{Re}((iy)^n/n!)|\le \mathrm{expTerm}(|y|,n),\qquad
+  |\mathrm{Im}((iy)^n/n!)|\le \mathrm{expTerm}(|y|,n).
+\]
+These follow mathematically by the earlier finite even/odd power identities, zero complementary coordinates, and original Bishop nonnegative-factorial/power-absolute lemmas; they still require *Agda proofs*, not a record of assumed hypotheses. After these termwise bounds, combine the finite Cauchy comparison with the **difference-of-prefix** monotonicity needed for \(T_{2N}-T_N\). Pointwise domination of \(T_N\) and \(T_{2N}\) independently does **not** imply domination of their difference; prove the finite nonnegative **tail** comparison or use a direct nonnegative wing reindexing. Then apply the existing exponential triangle-tail convergence modulus to the two relevant real/imaginary coordinates. Do not claim that \`W_N→0\` has already been proved.
+
+**Efficiency:** The explicit \(\lceil N/2\rceil\) index-splitting proof in the proposed handoff is mathematically valid but need not be reimplemented if the original \`BishopFiniteCauchyWingAbsoluteBoundExact.finiteCauchyWingAbsoluteBound\`, \`BishopExponentialCauchyProductExact.absoluteTriangleWingTailConvergesZero\`, and finite positive tail comparison suffice. Reuse the proven triangle-to-rectangle machinery instead of expanding a second independent indexing implementation.
+
+**Next exact cut:** P0 kernel check the new owner; P1 source imaginary-axis absolute coefficient domination; P1 finite Cauchy triangle **tail** order congruence and vanishing real/imag complex wing modulus; P1 complex factorial binomial coefficient equality; P1 \`expFactEqualsExpC\`; subsequent Bishop exp/log, inverse Koenigs, Kneser and selected modular/observer gates stay OPEN.
