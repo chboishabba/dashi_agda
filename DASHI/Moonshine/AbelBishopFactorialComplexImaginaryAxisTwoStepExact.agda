@@ -24,6 +24,8 @@ import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Physics.YangMills.BalabanClayGate4BishopHalfRadiusRealEstimatesExact as Estimates
+import DASHI.Moonshine.AbelBishopFactorialComplexRealAxisTermsExact as FactorialTerms
+import DASHI.Moonshine.AbelBishopFactorialComplexExpDiskExact as Factorial
 
 imaginaryAxis : BishopReal.ℝ → Complex.BishopComplex
 imaginaryAxis y = Complex.complex BishopReal.0ℝ y
@@ -207,3 +209,59 @@ originalBishopImaginaryAxisOddPower y (suc n) =
   ,
   (BishopP.≃-trans (proj₂ step)
     (BishopP.≃-trans (proj₂ substituted) imagTail))
+
+
+------------------------------------------------------------------------
+-- INSTANTIATION ON THE EXACT COMPLEX FACTORIAL SOURCE TERMS.
+-- They are the same terms as the real-axis owner, not a new series.
+------------------------------------------------------------------------
+
+originalBishopImaginaryAxisFactorialEvenTerm :
+  ∀ y n →
+  Complex._≈C_
+    (FactorialTerms.originalBishopFactorialComplexTerm
+      (imaginaryAxis y)
+      (Estimates.evenExponent n))
+    (Complex.complex
+      (BishopReal._*_
+        (Factorial.factorialCoefficient (Estimates.evenExponent n))
+        (BishopReal.pow (negativeSquare y) n))
+      BishopReal.0ℝ)
+originalBishopImaginaryAxisFactorialEvenTerm y n =
+  let
+    coeff = Factorial.factorialCoefficient (Estimates.evenExponent n)
+    power = originalBishopImaginaryAxisEvenPower y n
+  in
+  (BishopP.*-congˡ (proj₁ power))
+  ,
+  (BishopP.≃-trans
+    (BishopP.*-congˡ (proj₂ power))
+    (let open BishopP.ℝ-Solver in
+     solve 1
+       (λ c → c ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+       BishopP.≃-refl coeff))
+
+originalBishopImaginaryAxisFactorialOddTerm :
+  ∀ y n →
+  Complex._≈C_
+    (FactorialTerms.originalBishopFactorialComplexTerm
+      (imaginaryAxis y)
+      (Estimates.oddExponent n))
+    (Complex.complex
+      BishopReal.0ℝ
+      (BishopReal._*_
+        (Factorial.factorialCoefficient (Estimates.oddExponent n))
+        (BishopReal._*_ y (BishopReal.pow (negativeSquare y) n))))
+originalBishopImaginaryAxisFactorialOddTerm y n =
+  let
+    coeff = Factorial.factorialCoefficient (Estimates.oddExponent n)
+    power = originalBishopImaginaryAxisOddPower y n
+  in
+  (BishopP.≃-trans
+    (BishopP.*-congˡ (proj₁ power))
+    (let open BishopP.ℝ-Solver in
+     solve 1
+       (λ c → c ⊗ Κ 0ℚᵘ ⊜ Κ 0ℚᵘ)
+       BishopP.≃-refl coeff))
+  ,
+  (BishopP.*-congˡ (proj₂ power))
