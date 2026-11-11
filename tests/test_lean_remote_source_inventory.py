@@ -44,6 +44,28 @@ class Tests(unittest.TestCase):
         self.assertEqual(rows[0]["status"], "source-verified-not-elaborated")
         self.assertEqual(rows[0]["sha256"], hashlib.sha256(DATA).hexdigest())
 
+    def test_nonlean_blobs_do_not_invalidate_tree(self):
+        def broken_readme(req):
+            if "/git/trees/" in req.full_url:
+                obj = json.loads(opener(req))
+                obj["tree"].append({"type": "blob", "mode": "100644",
+                                    "path": "lakefile.toml", "sha": None,
+                                    "size": None})
+                return json.dumps(obj).encode()
+            return opener(req)
+        rows = repository_tree(REPO, REV, opener=broken_readme)
+        self.assertEqual([x["path"] for x in rows], ["Proof.lean"])
+
+    def test_malformed_lean_blob_is_rejected(self):
+        def broken_source(req):
+            if "/git/trees/" in req.full_url:
+                obj = json.loads(opener(req))
+                obj["tree"][0]["sha"] = None
+                return json.dumps(obj).encode()
+            return opener(req)
+        with self.assertRaises(RemoteError):
+            repository_tree(REPO, REV, opener=broken_source)
+
     def test_skips_oversized_without_loading_blob(self):
         def tree_only(req):
             if "/git/blobs/" in req.full_url:
