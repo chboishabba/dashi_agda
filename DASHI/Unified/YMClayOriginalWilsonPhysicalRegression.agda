@@ -96,3 +96,6 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalR445ThreeMomentRGCutExact as E1
 
 -- E1/D1: quantitative real-valued three-moment original Wilson R445 RG residual using CMP116 finite-factor product telescope (scalar subtraction-rearrangement explicitly not silently assumed).
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact as E1D1OriginalQuantitativeRGCut
+
+-- Original Wilson physical source numerator order: all-cutoff positivity, signed-test congruence and partition majorant for positive-complement test, from native product Haar.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as OriginalWilsonNumeratorOrder
