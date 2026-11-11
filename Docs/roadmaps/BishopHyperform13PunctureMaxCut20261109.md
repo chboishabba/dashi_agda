@@ -1389,3 +1389,53 @@ zeta identity and P3 source Gamma/Xi remain OPEN.
 **Kernel status:** source-written only, no Agda compiler acceptance
 receipt. The original finite Heisenberg group laws' older source
 owners are reused but this new bridge has not been typechecked.
+
+
+### 2026-11-11: the genuine original Heisenberg law on the selected 144-relation IMAGE
+
+Additional new source:
+`DASHI/Foundations/TernaryThirteenOriginalHeisenbergRelationalImageExact.agda`
+(commit `dec862d`).
+
+This takes the actual original `Heisenberg6` group
+and embeds its exact thirteen-coordinate code into the
+**selected** image of the original
+`StageTwelveGrothendieckRelationHyperformExact.StageRelationField`.
+
+- `sourceGroupToOriginalRelation`: genuine original group
+  element -> original 12+centre valuation -> 144-address relation,
+  with the other 131 original ordered cells neutral.
+- `originalRelationToSelectedGroup`: original directed relation
+  observation -> 13-code -> actual original finite group element.
+- `originalGroupRecoveredFromSelectedRelation`: full equality
+  of original Heisenberg group elements after that selected
+  original-relation embedding/recovery.
+- `groupImageIsOriginalSelectedRelation`: embeds each group element
+  as a witness-bearing inhabitant of the original
+  `SelectedSourceRelation` subcarrier.
+- `selectedRelationGroupCompose`: original cocycle-bearing
+  group composition transported to the selected relation image.
+- `selectedRelationProductIsGroupProductAt`: exact same
+  source multiplication at **every one of the 144 original
+  ordered relation addresses**.
+- `selectedRelationProductIsSelected`: the group operation
+  is closed under the selected *actual original relational
+  image*, not merely a stand-alone 13-word type.
+
+All three canonical TOE roots import the source (`7002576`,
+`1371457`, `286b3d4`).
+
+**Updated P0 gate: H1.01 original finite group carrier and
+selected 144-relation-image multiplication = SOURCE-WRITTEN.**
+The group-side carrier round trip and cocycle are genuine source
+results. **Still OPEN:** independent evidence that the intended
+*relational/appraisal/group/Monster semantics* selects precisely
+this group/operation (rather than a different quotient),
+actual ITIR nodes and observer/consumer maps, and heterogeneous
+world-edge-fabric source admission. The entire arbitrary
+144-relation field remains a larger carrier with 131 independent
+residual values; the selected group multiplication is not claimed
+as an existing group operation on the unrestricted 144-field.
+
+Kernel receipt: none in the current environment. Do not label
+new group bridge Agda-verified until Nix/Agda 2.9 checks imports.
