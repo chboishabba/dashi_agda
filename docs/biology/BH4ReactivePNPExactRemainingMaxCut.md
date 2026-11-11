@@ -1518,3 +1518,26 @@ exactness of the rational source accounting alone.
 scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4RationalToBishopFiniteContinuityExact.agda
 scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
 ```
+
+
+## 2026-11-11 highest-alpha P0 Agda rational semidiscrete operator producer
+
+**New source-written, Golden-imported owner:** `DASHI.Biology.Molecular.BH4OriginalRationalSemidiscreteOperatorExact`. It constructs a fully dimension-indexed rational finite-volume RHS, not just a proposition about an arbitrarily selected RHS. Inputs:
+- `Matrix 27 54` signed site-by-native-bond incidence, whose orientation must be identified with the original geometry;
+- `Matrix 54 29` signed native-bond/species currents;
+- `Matrix 29 12` finite stoichiometric coefficients, to be identified with the authentic original Rhea source;
+- `Matrix 27 12` site-by-reaction net rates.
+
+The `rationalDot` and `rationalColumn` functions construct the internal-bond and reaction contributions, `rational369SemidiscreteRHS` tabulates **all 783** site/species values, and `rational369SemidiscreteAt` shows lookup is definitionally the two-term finite RHS. This is an Agda source program using exact `Data.Rational.Unnormalised` arithmetic, not NumPy, float or an invented rate constant.
+
+**Same-computed-RHS Bishop consumer:** `computedRationalRHSConservationLiftsToBishop` invokes the preceding `original369SixRationalConservationLiftsToBishop` on exactly `rational369SemidiscreteRHS inputs` and the six source-weight rows. Its premises are the **six rational zero-defect proofs** for this computed RHS. It does **not** derive those proofs from arbitrary matrix values, and it does not presume the arbitrary typed matrices are the authenticated original Rhea/incidence matrices. A 29×12 coefficient array of the right shape is not itself source provenance.
+
+**New exact remaining lemmas (source and physical):**
+- `original369NativeIncidenceRationalColumnZero`: weld the native original 54 endpoint pairs from #1471 to each of these 54 rational incidence columns with a source-verified orientation, then prove `Σ_v B_{v,e} ≃ 0`.
+- `original29x12CertifiedRationalLeftKernel`: transport each original signed-Nat gross reactant/product conservation proof (CHNOP and signed charge) into `Q._≃_ (Σ_s a_{axis,s} S_{s,r}) 0` for all 12 original columns. **Authentic generated source certificate still required**.
+- `original369SemidiscreteSixZeroDefects`: using finite distributivity/interchange, derive the six computed rational RHS defects from the previous two theorems for arbitrary rational bond currents/reaction rates.
+- `original369SemidiscreteBishopSixZeroDefects`: instantiate `computedRationalRHSConservationLiftsToBishop` with those *derived*, same-source defects, not fabricated proofs.
+- `original369RealSGMassActionMatchesConservativeOperator`: independently prove that selected real Scharfetter–Gummel currents and source-paid mass-action reaction rates satisfy the same real-valued finite operator and all source-specific boundary terms. The rational finite model is an accounting implementation only.
+- The existing real weighted-simplex compactness, continuity, genuine Brouwer producer and positive original implicit-root acceptance, source-paid kinetics/open boundaries, same-physical-state tissue refinement and empirical held-out validation remain OPEN.
+
+**Verification boundary:** new code is GitHub-committed and readback-checkable; there is no Agda/Nix executable in this runtime and no Agda kernel receipt. No original source certificate, Agda accepted rational left-kernel proof, real PNP identification or data-backed biology claim was promoted. Run `scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalRationalSemidiscreteOperatorExact.agda` and then the existing BH4 Golden root in the actual Nix/Agda environment. Source-written definitions are not typechecking receipts.
