@@ -67,9 +67,20 @@ def test():
     assert (gf3_rank(p),gf3_rank(q),gf3_rank(p+q))==(15,16,30)
     assert all(sum(row)==16 for row in p)
     assert all(sum(row)==15 for row in q)
+    # Concrete two-cell source pairing: same support/half marginals,
+    # different exact joint incidence, so separate aggregation loses data.
+    m1,m2=masks[0],masks[1]
+    h1,h2=halves[0],halves[-1]
+    aligned=[(m1,h1),(m2,h2)]
+    crossed=[(m1,h2),(m2,h1)]
+    assert sorted(m for m,h in aligned)==sorted(m for m,h in crossed)
+    assert sorted(h for m,h in aligned)==sorted(h for m,h in crossed)
+    assert (m1,h1) in aligned and (m1,h1) not in crossed
+    assert [reconstruct(m,h) for m,h in aligned]!=[reconstruct(m,h) for m,h in crossed]
     print("PASS: 240=(15 nonempty support masks)×(16 F4 half-root signs)")
     print("PASS: all 7 W(B4) generators, inverse encoding, 64+96+64+16")
     print("PASS: GF3 marginal ranks 15,16, combined rank30, kernel210")
+    print("PASS: two-cell pairing counterexample identical marginals but different joint incidence")
     print("OPEN: folded E6/F4 identification, full E8, physical integrand")
 
 if __name__=="__main__":test()
