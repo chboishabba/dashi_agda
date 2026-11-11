@@ -68,7 +68,8 @@ def persist_join(conn,report,generated_source,joined_olean,*,
         "olean_sha256":report["joined_olean_sha256"],
         "modules":[
             [row["module"],row["original_source_origin"],
-             row["source_sha256"],row["olean_sha256"]]
+             row["source_sha256"],row["olean_sha256"],
+             row.get("direct_imports",[])]
             for row in original_modules],
         "donors":donors
     }
