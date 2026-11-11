@@ -63,6 +63,10 @@ class ExternalCheckerTests(unittest.TestCase):
         with self.assertRaisesRegex(CheckerError, "timed out"):
             self.run_checker("import time; time.sleep(4)", timeout=1)
 
+    def test_zero_output_budget_keeps_silent_rejection_distinct(self):
+        with self.assertRaisesRegex(CheckerError, "rejected"):
+            self.run_checker("import sys; sys.exit(7)", max_output_bytes=0)
+
     def test_nonempty_output_respects_cap(self):
         with self.assertRaisesRegex(CheckerError, "output exceeded"):
             self.run_checker("print('x'*100)", max_output_bytes=10)
