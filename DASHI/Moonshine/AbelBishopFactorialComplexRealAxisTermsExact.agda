@@ -21,10 +21,12 @@ open import Data.Product.Base using (_,_; proj₁; proj₂)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ)
 
 import Real as BishopReal
+import Sequence as BishopSequence
 import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Exp
+import DASHI.Foundations.BishopFiniteSeriesExtensionalityExact as SeriesExt
 import DASHI.Moonshine.AbelBishopFactorialComplexExpDiskExact as Factorial
 
 realAxis : BishopReal.ℝ → Complex.BishopComplex
@@ -156,3 +158,42 @@ originalBishopPositiveTermIsFullSuccessor :
   ≡
   originalBishopFactorialComplexTerm z (suc n)
 originalBishopPositiveTermIsFullSuccessor z n = refl
+
+
+------------------------------------------------------------------------
+-- ORIGINAL REAL EXPONENTIAL SERIES LIMIT: PAID BY POINTWISE EQUALITY
+-- AND THE EXISTING VENDORED BISHOP CONVERGENCE TRANSFER.
+--
+-- Unlike the disk-valued complex exponential construction, this
+-- convergence proof applies on the full real axis x : BishopReal.ℝ.
+------------------------------------------------------------------------
+
+originalBishopRealAxisFactorialPartialSameOriginal :
+  ∀ x count →
+  BishopReal._≃_
+    (BishopSequence.SeriesOf
+      (λ n → Complex.re
+        (originalBishopFactorialComplexTerm (realAxis x) n))
+      count)
+    (BishopSequence.SeriesOf (Exp.expTerm x) count)
+originalBishopRealAxisFactorialPartialSameOriginal x count =
+  SeriesExt.seriesPartialSumsCongruent
+    (λ n → proj₁ (originalBishopFactorialComplexTermRealAxis x n))
+    count
+
+originalBishopRealAxisFactorialSeriesConvergesToOriginalExp :
+  ∀ x →
+  BishopSequence._ConvergesTo_
+    (BishopSequence.SeriesOf
+      (λ n → Complex.re
+        (originalBishopFactorialComplexTerm (realAxis x) n)))
+    (Exp.bishopExp x)
+originalBishopRealAxisFactorialSeriesConvergesToOriginalExp x =
+  BishopSequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀
+    (λ {(suc count-1) →
+      BishopP.≃-symm
+        (originalBishopRealAxisFactorialPartialSameOriginal
+          x (suc count-1))})
+    ( Exp.bishopExp x
+    , Exp.bishopExpConverges x
+    )
