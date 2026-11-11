@@ -93,3 +93,6 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalR445CrossCutoffSourceExact as E
 
 -- E1/D1 original RG maximal cut: three original Wilson coarse moments suffice to identify the exact R445 fine mixed-J source with the separately selected bare coarse connected covariance.
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445ThreeMomentRGCutExact as E1D1OriginalR445ThreeMomentCut
+
+-- E1/D1: quantitative real-valued three-moment original Wilson R445 RG residual using CMP116 finite-factor product telescope (scalar subtraction-rearrangement explicitly not silently assumed).
+import DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact as E1D1OriginalQuantitativeRGCut
