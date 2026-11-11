@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms using
@@ -37,6 +38,8 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Or
 import DASHI.Physics.YangMills.YMClayE1A3OriginalR445WeightedCrossNumeratorExact as Cross
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
+import DASHI.Physics.YangMills.BalabanClayGate4LiteralPeriodicPlaquetteWitnessExact as Plaquette
+import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
 
 -- Pure scalar identity: constant-mode cross-numerator terms cancel.
 -- Note that all multiplication is the selected real-ring operation.
@@ -289,3 +292,36 @@ module _
         (shiftByConstant test (-ℝ center))
         (λ coarse → scalarSubtract (test coarse)))
       (originalWilsonCrossNumeratorNegativeCentering test center)
+
+  -- Literal original side-two plaquette test, not an abstract chosen
+  -- observable. We retain its actual normalized real SU(N) trace and
+  -- signed original Wilson holonomy; no [0,1] trace bound is assumed.
+  originalCoarsePlaquetteTrace :
+    Plaquette.PeriodicPlaquette 1 → CoarseTest
+  originalCoarsePlaquetteTrace plaquette =
+    Words.originalWordObservable
+      theory traceData exponential beta oneLink bilateral divide
+      1 (plaquette ∷ [])
+
+  originalPlaquetteCrossNumeratorConstantShift :
+    (plaquette : Plaquette.PeriodicPlaquette 1)
+    (scalar : ℝ) →
+    X (shiftByConstant (originalCoarsePlaquetteTrace plaquette) scalar)
+    ≡ X (originalCoarsePlaquetteTrace plaquette)
+  originalPlaquetteCrossNumeratorConstantShift plaquette scalar =
+    originalWilsonCrossNumeratorConstantShift
+      (originalCoarsePlaquetteTrace plaquette) scalar
+
+  originalPlaquetteCrossNumeratorSubtractionCentering :
+    (plaquette : Plaquette.PeriodicPlaquette 1)
+    (center : ℝ) →
+    (scalarSubtract :
+      ∀ value → value -ℝ center ≡ value +ℝ (-ℝ center) *ℝ 1ℝ) →
+    X (λ coarse →
+      originalCoarsePlaquetteTrace plaquette coarse -ℝ center)
+    ≡ X (originalCoarsePlaquetteTrace plaquette)
+  originalPlaquetteCrossNumeratorSubtractionCentering
+    plaquette center scalarSubtract =
+    originalWilsonCrossNumeratorSubtractionCentering
+      (originalCoarsePlaquetteTrace plaquette)
+      center scalarSubtract
