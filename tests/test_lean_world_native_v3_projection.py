@@ -73,7 +73,7 @@ class NativeProjectionTests(unittest.TestCase):
 
     def test_dag_sharing_layout_and_sparse_ids_do_not_change_identity(self):
         def encode(rows):
-            return ("\\n".join(json.dumps(x) for x in rows)+"\\n").encode()
+            return ("\n".join(json.dumps(x) for x in rows)+"\n").encode()
         header=[{"meta":{"format":{"version":"3.1.0"}}},
                 {"str":{"pre":0,"str":"Demo"},"in":1}]
         a=encode(header+[
@@ -103,7 +103,7 @@ class NativeProjectionTests(unittest.TestCase):
             {"const":{"name":1,"us":[]},"ie":2},
             {"thm":{"name":2,"levelParams":[],"type":1,"value":2,"all":[]}}
         ]
-        c,=extract_candidates(("\\n".join(json.dumps(r) for r in rows)+"\\n").encode())
+        c,=extract_candidates(("\n".join(json.dumps(r) for r in rows)+"\n").encode())
         self.assertEqual(c.direct_constants,())
         self.assertEqual(c.proof_direct_constants,("Donor",))
 
