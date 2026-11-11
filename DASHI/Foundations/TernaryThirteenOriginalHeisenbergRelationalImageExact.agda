@@ -91,7 +91,7 @@ selectedRelationProductIsSelected :
       (sourceGroupToOriginalRelation g)
       (sourceGroupToOriginalRelation h))
 selectedRelationProductIsSelected g h =
-  H.compose g h ,
+  Group.originalGroupToSource (H.compose g h) ,
     selectedRelationProductIsGroupProductAt g h
 
 -- The 13-coordinate group completion can therefore act on a
