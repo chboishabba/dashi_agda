@@ -40,6 +40,11 @@ rateWeightedReactantTotal weights
 
 -- The product-side type is identical; the original source identity
 -- distinguishes gross reactants from gross products by its arguments.
+rateWeightedProductTotal :
+  ∀ {columns species} →
+  V.Vec Q.ℚᵘ species →
+  V.Vec (V.Vec Q.ℚᵘ species) columns →
+  V.Vec Q.ℚᵘ columns → Q.ℚᵘ
 rateWeightedProductTotal = rateWeightedReactantTotal
 
 -- Finite-column theorem: *any* rate vector respects a certified
