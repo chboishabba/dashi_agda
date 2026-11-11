@@ -166,3 +166,35 @@ originalTransportedFiniteGroup =
     wordAssoc wordLeftIdentity wordRightIdentity
     wordLeftInverse wordRightInverse
     Bridge.wordGeneratorOrderMatters
+
+------------------------------------------------------------------------
+-- H1.01 semantic *admission obstruction*:
+-- no commutative law on a 13-coordinate representation can be
+-- simultaneously identical to the existing source H_6 group law.
+-- A proposed independently intended relational completion must
+-- retain this nontrivial cocycle/noncommuting source action.
+------------------------------------------------------------------------
+
+commutativeSemanticCompletionCannotAgree :
+  (candidate :
+    Word.TritWord 13 →
+    Word.TritWord 13 →
+    Word.TritWord 13) →
+  ((a b : Word.TritWord 13) →
+    candidate a b ≡ candidate b a) →
+  ((g h : H.Heisenberg6) →
+    candidate (Bridge.originalGroupToWord g)
+              (Bridge.originalGroupToWord h)
+    ≡ Bridge.wordCompose
+        (Bridge.originalGroupToWord g)
+        (Bridge.originalGroupToWord h)) →
+  ⊥
+commutativeSemanticCompletionCannotAgree candidate commutative agrees =
+  Bridge.wordGeneratorOrderMatters
+    (trans
+      (sym (agrees Bridge.sourceTranslation Bridge.sourceModulation))
+      (trans
+        (commutative
+          (Bridge.originalGroupToWord Bridge.sourceTranslation)
+          (Bridge.originalGroupToWord Bridge.sourceModulation))
+        (agrees Bridge.sourceModulation Bridge.sourceTranslation)))
