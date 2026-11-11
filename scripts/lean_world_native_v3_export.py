@@ -7,6 +7,7 @@ dashi_lean4's build_jmd_lean_ast_world.py owns DAG validation/admission.
 from __future__ import annotations
 import hashlib, json, os, re, resource, signal, subprocess, tempfile
 from pathlib import Path
+from lean_world_atomic_spool import publish_immutable, PublicationError
 
 IDENT=re.compile(r"[A-Za-z_][A-Za-z0-9_'.]*\Z")
 SHA40=re.compile(r"[0-9a-f]{40}\Z")
@@ -84,14 +85,10 @@ def store_native(raw:bytes,verification:dict,output:Path,*,repository:str,revisi
     output=output.resolve()
     output.mkdir(parents=True,exist_ok=True)
     artifact=output/(sha(raw)+".ndjson")
-    if artifact.exists():
-        if sha(artifact.read_bytes())!=sha(raw):
-            raise NativeExportError("conflicting existing content-addressed artifact")
-    else:
-        with tempfile.NamedTemporaryFile(dir=output,delete=False) as fd:
-            fd.write(raw)
-            tmp=Path(fd.name)
-        os.replace(tmp,artifact)
+    try:
+        publish_immutable(artifact, raw)
+    except PublicationError as exc:
+        raise NativeExportError(str(exc)) from exc
     return {"schema":"dashi-lean-ephemeral-native-export-v1",
             "status":"native-v3-exported-unadmitted",
             "repository":repository,"revision":revision,"module":module,
