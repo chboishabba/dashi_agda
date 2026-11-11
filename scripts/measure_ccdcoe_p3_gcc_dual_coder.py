@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from itertools import product
 import json
 from pathlib import Path
 import check_ccdcoe_p3_sampling_frame as census
@@ -177,6 +178,36 @@ def self_test() -> None:
             disputed["descriptive_did_coder2"])
         assert disputed["descriptive_did_partial_coding_interval"][1] >= (
             disputed["descriptive_did_coder1"])
+        # Finite exactness of four-cell partial coding interval:
+        # every disputed document may be adjudicated to either reviewer
+        # label, without altering any agreed label. Enumerate all 2^4
+        # choices and require both reported interval endpoints attained.
+        four_disputes = [dict(r) for r in rows]
+        disputed_indices = []
+        for arm in sorted(base.ARMS):
+            for period in sorted(base.PERIODS):
+                ix = next(i for i, row in enumerate(four_disputes)
+                          if row["treatment"] == arm and row["period"] == period)
+                four_disputes[ix]["frame"] = "science_uncertainty"
+                four_disputes[ix]["second_frame"] = "other_or_undetermined"
+                disputed_indices.append(ix)
+        finite = analyse_dual(four_disputes, "science_uncertainty", **kwargs)
+        admissible_did = []
+        for adjudication in product((False, True), repeat=len(disputed_indices)):
+            selected = [dict(r) for r in four_disputes]
+            for ix, choose_focus in zip(disputed_indices, adjudication):
+                selected[ix]["frame"] = (
+                    "science_uncertainty" if choose_focus
+                    else "other_or_undetermined")
+            descriptive = base.analyse(
+                selected, "science_uncertainty", **kwargs)
+            admissible_did.append(
+                descriptive["descriptive_difference_in_differences"])
+        lo, hi = finite["descriptive_did_partial_coding_interval"]
+        assert abs(lo - min(admissible_did)) <= 0.000002
+        assert abs(hi - max(admissible_did)) <= 0.000002
+        assert all(lo - 0.000002 <= v <= hi + 0.000002
+                   for v in admissible_did)
         bad = [dict(r) for r in rows]
         bad[0]["second_review_receipt"] = bad[0]["review_receipt"]
         try:
