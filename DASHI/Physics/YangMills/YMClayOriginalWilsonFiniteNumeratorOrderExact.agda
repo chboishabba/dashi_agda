@@ -124,7 +124,7 @@ module _
       lowerBelowSum =
         subst
           (λ value → value ≤ℝ lowerNum +ℝ slackNum)
-          (sym (+-identityʳ lowerNum))
+          (+-identityʳ lowerNum)
           (+-mono-≤ ≤ℝ-refl slackNumNonnegative)
 
       sumIsUpper :
