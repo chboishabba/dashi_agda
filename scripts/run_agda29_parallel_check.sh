@@ -218,7 +218,15 @@ if [ ! -x "$AGDA_BIN" ]; then
 fi
 export AGDA_BIN
 echo "Selected Agda executable: $AGDA_BIN"
-"$AGDA_BIN" --version
+AGDA_SELECTED_VERSION="$("$AGDA_BIN" --version)"
+echo "$AGDA_SELECTED_VERSION"
+# Do not accept an Agda 2.8 or 2.10 PATH binary just because one is
+# executable: the Karp theorem suite is pinned to Agda 2.9.
+if [[ "$AGDA_SELECTED_VERSION" != *"2.9."* ]]; then
+  echo "BLOCKED: pinned Agda 2.9 required; selected executable reported: $AGDA_SELECTED_VERSION" >&2
+  echo "Set AGDA_BIN to Agda 2.9, or unset it and configure the Nix Agda 2.9 environment." >&2
+  exit 126
+fi
 if [ "$DASHI_EPHEMERAL" = "1" ]; then
   DASHI_WORK="$(mktemp -d /tmp/dashi-agda29-shadow.XXXXXX)"
   STDLIB_WORK="$(mktemp -d /tmp/agda-stdlib-experimental.XXXXXX)"
