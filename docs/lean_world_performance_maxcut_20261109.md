@@ -214,3 +214,42 @@ by a cap, a request failed, or an elaboration import closure was incomplete.
 For 21,481 repos compare: REST selective fetch, one-request archive streaming,
 and sparse/partial Git object retrieval; select by actual repository size and
 module demand. Measure I/O per useful imported Lean declaration.
+
+## 11 November — candidate DAG PostgreSQL implementation (NOT kernel admission)
+
+Added `scripts/sql/lean_world_candidate_dag_v1.sql`,
+`scripts/lean_world_postgres_candidate.py`, and
+`tests/test_lean_world_postgres_candidate.py`.
+
+The writer consumes ONLY a sealed existing `CanonicalLeanWorld` (never source
+text), persists the exact-type statement interners and source-original proof
+occurrences into the existing `lean_world_fibre`/`statement`/`occurrence`
+tables, and adds immutable candidate source receipts and original dependency
+edges through foreign keys. One psycopg3 transaction covers the complete
+batch. Locked fibre rows serialize same-profile/type admission and exact bytes
+are compared even after matching SHA-256; original occurrence/provenance and
+dependency conflicts abort the transaction. Repeat admissions are idempotent.
+There is no signed checker attestation and the schema intentionally permits
+ONLY `candidate-unverified`, never proof certification.
+
+Validation supplied by the operator before this tranche: #1484 canonical DAG
+11/11, PostgreSQL syntax and live temporary-schema migrations (2 tests passed),
+and actual Nix Lean 4.28 compilation of pinned Batteries/Tactic/Init.lean
+with a missing-Std-import negative control. These do NOT imply the new
+candidate writer has passed its own live database tests.
+
+New exact local gate on #1484 (explicit test database only):
+```sh
+PGDATABASE=<isolated-test-database> python3 -m unittest discover -s tests \
+  -p 'test_lean_world_postgres_candidate.py' -v
+```
+Requires psycopg3. Tests create/drop only their own UUID-named schema, and
+exercise an exact statement with two original occurrences, dependencies,
+idempotence, provenance conflicts and rollback. Do not point this gate at a
+production database without reviewing credentials and access policy.
+
+Remaining P0: independently authenticated native-v3 semantics and complete
+pinned environment; conversion of checked native declarations into the
+existing canonical type bytes with exact binding; and separately authorized
+promotions. Candidate persistence is an infrastructure advancement, not
+source-to-world proof certification or reuse.
