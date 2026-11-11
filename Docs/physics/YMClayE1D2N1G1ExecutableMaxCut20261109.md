@@ -248,3 +248,22 @@ The same module now also source-writes `originalR445CovarianceErrorFromThreeSour
 The next standalone P0 mathematics leaf is therefore to discharge the pure ordered-real scalar interchange once from a coherent selected real ring (or extend `RealAnalysisAxioms` with an independently verified ring theorem, not a Yang–Mills postulate), then supply three nontrivial original Wilson RG physical source moment errors at all relevant scales and volumes. Together those will yield honest quantitative same-source covariance comparison.
 
 **Acceptance limit:** committed source terms and current GitHub readback only. This is a conditional quantitative transport theorem, not a computed physical error bound, E1 continuum existence or D2 mass gap. No kernel/Agda receipt available in the execution environment.
+
+
+### 2026-11-11: pure scalar interchange discharged from repository axioms
+
+**Correction to the immediately preceding note:** `YMClayOriginalRealSubtractionInterchangeExact.agda` now proves `subtractionInterchange`:
+`(a-b)-(c-d) ≡ (a-c)-(b-d)`.
+The derivation uses only the existing `subAddCancelMiddle`, `+-comm`, `subAddDistributes`, `subSelf` and `+-identityʳ` laws of `DASHI.Foundations.RealAnalysisAxioms`. There is no new postulate, and the theorem respects the transitive axiomatic nature of the selected real carrier.
+
+The quantitative E1/D1 original Wilson module was then updated to **eliminate the scalarInterchange argument entirely** from:
+- `originalR445CovarianceErrorFromThreeSourceMoments`: actual connected covariance difference of native effective R445 pushed-forward vs original bare coarse Wilson sources;
+- `originalMixedJ11MinusBareCovarianceQuantitativeBound`: actual original fine Wilson two-source formal J11 vs original bare coarse covariance.
+
+Given original selected-source bounds `|Δ(FG)| ≤ ε_FG`, `|Δ(F)| ≤ ε_F`, `|Δ(G)| ≤ ε_G`, `|E_eff(G)| ≤ M_eff,G`, `|E_bare(F)| ≤ M_bare,F`, with nonnegative error and majorant inputs where needed, their proof-contract bound is
+`|Cov_eff(F,G) − Cov_bare(F,G)| ≤ ε_FG + ε_F M_eff,G + M_bare,F ε_G`.
+The original finite J11 bound has the same RHS. This is a materially stronger **physical-error-conditional theorem** with no independent covariance, real-scalar interchange or bare-action closure input.
+
+**Unpaid physical highest-alpha leaves (unchanged):** actual nonconstant Wilson RG moment errors on F,G,FG uniformly in physical cutoff/volume, plus the two moment majorants, and iterative renormalized cutoff comparison/compactness. The generic error transport is not source-dependent and cannot prove these inequalities itself.
+
+**Trust/verification:** the new scalar lemma uses a transitive postulated real-ring surface, and the existing marked-factor `absNonnegative` authority; no new postulate. Both new modules are committed and imported by the original Wilson physical regression. No Agda 2.9 executable is installed locally: GitHub readback is NOT kernel acceptance.
