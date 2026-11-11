@@ -164,3 +164,35 @@ replicaDestinationUnchanged = refl
 
 -- A per-shard CID, model revision, encoding and history witness is
 -- still needed before the alternate route can be admitted in practice.
+
+------------------------------------------------------------------------
+-- Generic end-to-end reduction under actual per-shard value receipts.
+-- This is the useful compositional theorem: individual source⇄worker
+-- refinement receipts can be promoted to a global reduction law, but
+-- not without those receipts.
+------------------------------------------------------------------------
+
+certifiedReductionSound :
+  (reference worker : Shard → Nat) →
+  ((s : Shard) → worker s ≡ reference s) →
+  hierarchicalReduce worker ≡ hierarchicalReduce reference
+certifiedReductionSound reference worker agree
+  rewrite agree s0 | agree s1 | agree s2
+        | agree s3 | agree s4 | agree s5 = refl
+
+-- Loss of even one shard can invalidate the reference observation.
+missingLastShard : Shard → Nat
+missingLastShard s0 = 1
+missingLastShard s1 = 2
+missingLastShard s2 = 3
+missingLastShard s3 = 4
+missingLastShard s4 = 5
+missingLastShard s5 = 0
+
+missingShardChangesResult :
+  hierarchicalReduce missingLastShard ≡ hierarchicalReduce shardValue →
+  false ≡ true
+missingShardChangesResult ()
+
+-- No theorem of packet authenticity, routing optimality, or floating
+-- reduction accuracy follows from the conditional composition above.
