@@ -65,3 +65,14 @@ def test_missing_axis_and_wrong_species_count_rejected():
     elements["O"].append(1)
     with pytest.raises(ValueError):
         rendered_source_simplex_admission(elements)
+
+
+def test_original_charge_source_parser_rejects_fractional_or_boolean():
+    # The source checker reuses this exact parser rather than int(...),
+    # because signed charge is an integral invariant, not a float cast.
+    from run_bh4_reaction_network import _integer
+    assert _integer("-2", "charge") == -2
+    assert _integer(0, "charge") == 0
+    for invalid in (True, False, 1.5, "1.5", "1e0", None, float("nan")):
+        with pytest.raises(ValueError):
+            _integer(invalid, "charge")
