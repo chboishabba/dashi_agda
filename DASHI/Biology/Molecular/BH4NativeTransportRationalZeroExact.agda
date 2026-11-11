@@ -167,3 +167,120 @@ original369AllSpeciesNativeRationalTransportZero :
 original369AllSpeciesNativeRationalTransportZero fluxes species =
   original54NativeRationalTransportTotalZero
     (Op.rationalColumn fluxes species)
+
+
+------------------------------------------------------------------------
+-- The selected original-native incidence is the SAME operator that
+-- produces the transport part of the 783-coordinate computed RHS.
+------------------------------------------------------------------------
+
+import DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact
+  as Compose
+
+lookupMapExact :
+  ∀ {n} {A B : Set}
+  (f : A → B) (xs : V.Vec A n) (i : F.Fin n) →
+  V.lookup (V.map f xs) i ≡ f (V.lookup xs i)
+lookupMapExact f V.[] ()
+lookupMapExact f (V._∷_ x xs) F.zero = refl
+lookupMapExact f (V._∷_ x xs) (F.suc i) =
+  lookupMapExact f xs i
+
+vecExtensional :
+  ∀ {n} {A : Set}
+  (xs ys : V.Vec A n) →
+  ((i : F.Fin n) → V.lookup xs i ≡ V.lookup ys i) →
+  xs ≡ ys
+vecExtensional V.[] V.[] same = refl
+vecExtensional (V._∷_ x xs) (V._∷_ y ys) same =
+  cong₂ V._∷_
+    (same F.zero)
+    (vecExtensional xs ys (λ j → same (F.suc j)))
+
+-- Input dimensions are unchanged; chemistry/rate vectors do not enter
+-- the native closed-mass transport term.
+nativeComputedTransportColumnIsOriginalIncidenceDot :
+  (fluxes : Op.Matrix 54 29)
+  (stoichiometry : Op.Matrix 29 12)
+  (rates : Op.Matrix 27 12)
+  (species : F.Fin 29) →
+  V.map (λ row → V.lookup row species)
+    (Compose.originalTransportRHS
+      (Native.originalNativeRationalInputs fluxes stoichiometry rates))
+  ≡
+  V.map
+    (λ incidenceRow →
+      Op.rationalDot incidenceRow (Op.rationalColumn fluxes species))
+    Native.sourceNativeIncidence
+nativeComputedTransportColumnIsOriginalIncidenceDot
+  fluxes stoichiometry rates species =
+  vecExtensional
+    (V.map (λ row → V.lookup row species)
+      (Compose.originalTransportRHS
+        (Native.originalNativeRationalInputs fluxes stoichiometry rates)))
+    (V.map
+      (λ row → Op.rationalDot row (Op.rationalColumn fluxes species))
+      Native.sourceNativeIncidence)
+    λ site →
+      trans
+        (lookupMapExact
+          (λ row → V.lookup row species)
+          (Compose.originalTransportRHS
+            (Native.originalNativeRationalInputs
+              fluxes stoichiometry rates))
+          site)
+        (trans
+          (cong (λ row → V.lookup row species)
+            (Op.lookupTabulateExact
+              (λ site′ →
+                V.tabulate (λ species′ →
+                  Op.bondContribution
+                    (Native.originalNativeRationalInputs
+                      fluxes stoichiometry rates)
+                    site′ species′))
+              site))
+          (trans
+            (Op.lookupTabulateExact
+              (λ species′ →
+                Op.bondContribution
+                  (Native.originalNativeRationalInputs
+                    fluxes stoichiometry rates)
+                  site species′)
+              species)
+            (sym (lookupMapExact
+              (λ row →
+                Op.rationalDot row
+                  (Op.rationalColumn fluxes species))
+              Native.sourceNativeIncidence site))))
+
+-- This is the FIRST actually source-owned local receipt field:
+-- per-species 27-site transport cancellation for arbitrary original
+-- signed rational currents, from the exact original incidence.
+originalComputedNativeTransportPerSpeciesZero :
+  (fluxes : Op.Matrix 54 29)
+  (stoichiometry : Op.Matrix 29 12)
+  (rates : Op.Matrix 27 12)
+  (species : F.Fin 29) →
+  Q._≃_
+    (V.lookup
+      (Fubini.qColumnTotals
+        (Compose.originalTransportRHS
+          (Native.originalNativeRationalInputs
+            fluxes stoichiometry rates)))
+      species)
+    Q.0ℚᵘ
+originalComputedNativeTransportPerSpeciesZero
+  fluxes stoichiometry rates species =
+  QP.≃-trans
+    (columnTotalsAreIndexedSiteSums
+      (Compose.originalTransportRHS
+        (Native.originalNativeRationalInputs
+          fluxes stoichiometry rates))
+      species)
+    (QP.≃-trans
+      (QP.≃-reflexive
+        (cong Lift.rationalFiniteSum
+          (nativeComputedTransportColumnIsOriginalIncidenceDot
+            fluxes stoichiometry rates species)))
+      (original369AllSpeciesNativeRationalTransportZero
+        fluxes species))
