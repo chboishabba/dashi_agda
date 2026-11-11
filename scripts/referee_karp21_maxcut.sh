@@ -136,7 +136,7 @@ fi
 check_agda() {
   local source="$1"
   printf '\nREFEREE CHECK: %s\n' "$source"
-  if [[ -f "scripts/run_agda29_parallel_check.sh" ]] && { [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]] || command -v nix >/dev/null 2>&1; }; then
+  if [[ -f "scripts/run_agda29_parallel_check.sh" ]] && { [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]] || command -v agda >/dev/null 2>&1 || command -v nix >/dev/null 2>&1; }; then
     DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh "$source"
   else
     local shadow_dir
