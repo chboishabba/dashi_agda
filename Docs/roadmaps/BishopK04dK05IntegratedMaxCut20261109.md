@@ -1081,3 +1081,25 @@ full original directed relation transport is required.
 H2.01 genuine ITIR world nodes, H2.02 original full-world
 heterogeneous seams and analytic P1–P3 remain open.
 Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### H1.01 2026-11-11 residual recovery of original central phase under relational transpose
+
+The selected relational image of the genuine finite Heisenberg
+group loses its central phase if its original 144-cell transpose
+is observed through only 12 diagonals plus (0,1). That
+particular coarse operation is therefore noninjective, and
+cannot be the same as an invertible Heisenberg action.
+`TernaryThirteenOriginalHeisenbergSelectedTransposeObstructionExact`
+proves the collision and impossibility of any left inverse.
+
+The same source now also proves the **positive repair**:
+after transpose, original central phase survives in directed
+residual cell (1,0), and the previous 13+131 exact
+pointwise decoder reconstructs it (`selectedTransposeResidualAtReverse`,
+`selectedTransposeReopensAtReverse`).
+This is original operation preservation without an invented
+same-object semantic identification. H1.01 independent
+appraisal/Heisenberg action equivariance remains open; H2.01
+ITIR node and H2.02 actual world-fabric matches remain open.
+No Agda kernel receipt.
