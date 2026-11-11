@@ -40,6 +40,7 @@ import DASHI.Governance.CognitiveWarfareSituatedPhysiologyWeldExact as CW
 import DASHI.Governance.CrossDomainResidualConsumerPreservationExact as Residual
 import DASHI.Governance.DevelopmentalTriadicFiniteQuotientWeldExact as DevTri
 import DASHI.Governance.EpistemicHistoryResidualPayloadExact as WorkPayload
+import DASHI.Governance.MonsterThreeLocalCognitiveOriginNonIdentificationExact as MonsterDetector
 
 data AttributionStage : Set where
   judicialText scholarlyAnalysis finiteDASHIReconstruction
@@ -202,6 +203,12 @@ record LegalCrossCaseCut : Set₁ where
       (decoder : CW.Work.PublicDisposition → List CW.Work.EpistemicTask) →
       ((history : List CW.Work.EpistemicTask) →
         decoder (CW.Work.visibleDisposition history) ≡ history) → ⊥
+    selectedMonsterThreeLocalLabelCannotProveHiddenController :
+      (chart : MonsterDetector.CW.TargetObservation →
+        MonsterDetector.ThreeLocal.ThreeLocalSiblingName) →
+      INF.FactorsThrough
+        (λ history → chart (MonsterDetector.CW.targetProject history))
+        MonsterDetector.CW.origin → ⊥
     citationDoesNotClaimBinding :
       Legal.bindingForceClaimed Cases.jefferiesAppeal ≡ false
     crenshawBibliographyNoProofPromotion :
@@ -256,4 +263,5 @@ crenshawLegalCrossCaseCut =
     DevTri.laterHistoryReallyLost
     WorkPayload.workRoundTrip
     WorkPayload.noLosslessDecoderAfterDroppingSideInformation
+    MonsterDetector.threeLocalSymmetryLabelCannotIdentifyController
     refl refl
