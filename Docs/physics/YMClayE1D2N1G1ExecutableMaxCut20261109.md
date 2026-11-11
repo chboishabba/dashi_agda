@@ -359,3 +359,16 @@ It then proves `originalR445WordProductCrossNumeratorIsConcatenation` at the act
 **Important nonclaim:** Wilson expectation is *not* multiplicative. `E(FG)` is the expectation of an actual word-product insertion, not `E(F)E(G)`. These exact finite identities do not establish a nonconstant RG error rate, source matrix norm, or any terminal Clay gate. Agda 2.9 acceptance is still outstanding; the source-written modules and imports are not kernel receipts.
 
 **Next highest-alpha original physical producer:** for each admissible original coarse Wilson word, give a truly derived cutoff/volume-uniform estimate on its exact weighted cross numerator `X(W_word)` relative to the actual positive partition product `Z_f Z_b`, in the correct UV scaling regime. Together with the existing word-concatenation identity, the same quantitative covariance route then applies to a pair of original Wilson words without a separate non-Wilson polynomial error premise.
+
+
+### P0.08 local deterministic Agda acceptance command (2026-11-11)
+
+Added `scripts/check_ym_original_rg_p0_kernel.sh`, a local fail-closed Nix/Agda 2.9 focused runner invoking the existing project-owned `scripts/run_agda29_parallel_check.sh`. It lists the original scalar subtraction lemma, same-source R445/R320 three-moment modules, numerator order, quantitative covariance, bounded test majorants, weighted cross numerator, centering and bare-centered insertion, trace cyclicity negative control, new all-cutoff trace-to-word and word-concatenation lemmas, and the entire original Wilson physical regression root. It refuses to claim acceptance if Nix is missing, any source is absent, or the checker exits unsuccessfully. Invocation:
+
+```bash
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+This is a **ready-to-run local verification harness**, NOT a kernel pass receipt. The script was not run in the assistant's environment, where `nix` and `agda` binaries are absent. Any compiler errors in upstream and new sources must be addressed from actual Agda diagnostics.
+
+The actual physical P0.09 target is still a uniform nonconstant original Wilson cross-numerator estimate on Wilson words `w` (especially `u`, `v`, `u++v`), divided by the correct original fine/bare partition product only under legitimate scalar division laws. The project-owned original SU(N) matrix trace bound, real arithmetic field-law carrier, all-scale RG effective action, E1 continuum, R576 connecting clusters, R577 OS Hamiltonian, R563 nontriviality and R571 all-group coverage are not closed.
