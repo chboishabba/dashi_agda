@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ord
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as Family
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
 
@@ -156,3 +157,71 @@ module _
       (originalWilsonNumeratorMonotoneFromSlack
         n test (λ _ → 1ℝ) complement
         complementNonnegative completesOne)
+
+  ----------------------------------------------------------------------
+  -- Normalized original Wilson order, using ONLY the selected original
+  -- positive partition and standard ordered-real division lemmas.
+  -- No independent normalized probability source is introduced.
+  ----------------------------------------------------------------------
+
+  originalWilsonPartitionStrictlyPositive :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (n : Nat) →
+    0ℝ <ℝ Physical.partitionFunction (wilsonMeasure n)
+  originalWilsonPartitionStrictlyPositive strict n =
+    Family.physicalFinitePartitionPositive
+      theory traceData exponential beta oneLink bilateral divide
+      strict n
+
+  originalWilsonNormalizedBelowOne :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideOrder :
+      ∀ {a b denominator : ℝ} →
+      0ℝ <ℝ denominator →
+      a ≤ℝ b →
+      divide a denominator ≤ℝ divide b denominator)
+    (divideSelf :
+      ∀ denominator →
+      0ℝ <ℝ denominator → divide denominator denominator ≡ 1ℝ)
+    (n : Nat) (test complement : WilsonTest n) →
+    (∀ links → 0ℝ ≤ℝ complement links) →
+    (∀ links → test links +ℝ complement links ≡ 1ℝ) →
+    Physical.normalizedExpectation (wilsonMeasure n) test ≤ℝ 1ℝ
+  originalWilsonNormalizedBelowOne
+    strict divideOrder divideSelf n test complement
+    complementNonnegative completesOne =
+    subst
+      (λ upper →
+        Physical.normalizedExpectation (wilsonMeasure n) test ≤ℝ upper)
+      (divideSelf
+        (Physical.partitionFunction (wilsonMeasure n))
+        (originalWilsonPartitionStrictlyPositive strict n))
+      (divideOrder
+        (originalWilsonPartitionStrictlyPositive strict n)
+        (originalWilsonNumeratorBelowItsPartition
+          n test complement complementNonnegative completesOne))
+
+  originalWilsonNormalizedNonnegative :
+    (strict : Ordered.OneLinkStrictlyPositiveIntegration oneLink)
+    (divideOrder :
+      ∀ {a b denominator : ℝ} →
+      0ℝ <ℝ denominator →
+      a ≤ℝ b →
+      divide a denominator ≤ℝ divide b denominator)
+    (divideZero :
+      ∀ denominator →
+      0ℝ <ℝ denominator → divide 0ℝ denominator ≡ 0ℝ)
+    (n : Nat) (test : WilsonTest n) →
+    (∀ links → 0ℝ ≤ℝ test links) →
+    0ℝ ≤ℝ Physical.normalizedExpectation (wilsonMeasure n) test
+  originalWilsonNormalizedNonnegative
+    strict divideOrder divideZero n test testNonnegative =
+    subst
+      (λ lower →
+        lower ≤ℝ Physical.normalizedExpectation (wilsonMeasure n) test)
+      (divideZero
+        (Physical.partitionFunction (wilsonMeasure n))
+        (originalWilsonPartitionStrictlyPositive strict n))
+      (divideOrder
+        (originalWilsonPartitionStrictlyPositive strict n)
+        (originalWilsonNumeratorPositive n test testNonnegative))
