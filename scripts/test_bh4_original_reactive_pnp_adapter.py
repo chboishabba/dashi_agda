@@ -287,6 +287,13 @@ def test_original_54_bond_27x29x12_exact_rational_rhs_conservation(monkeypatch):
     assert Fraction(rhs[b][0]) == Fraction(1,3)
     assert Fraction(rhs[0][12]) == Fraction(2,7)
     assert receipt["exact_CHNOP_and_signed_charge_defects"] == ["0"]*6
+    assert receipt["local_CHNOP_signed_charge_equations_checked"] == 162
+    assert receipt["exact_local_continuity_residual"] == [["0"]*6 for _ in range(27)]
+    assert receipt["exact_local_weighted_reaction_source"] == [["0"]*6 for _ in range(27)]
+    assert Fraction(receipt["exact_local_weighted_divergence"][a][0]) == Fraction(1,3)
+    assert Fraction(receipt["exact_local_weighted_divergence"][b][0]) == -Fraction(1,3)
+    assert Fraction(receipt["exact_local_weighted_divergence"][a][5]) == Fraction(1,3)
+    assert Fraction(receipt["exact_local_weighted_divergence"][b][5]) == -Fraction(1,3)
     assert not receipt["this_proves_real_SG_or_mass_action"]
     assert not receipt["agda_kernel_checked"]
 
@@ -338,3 +345,26 @@ def test_original_checker_rejects_nonintegral_or_misshapen_matrix_under_optimize
         monkeypatch.setattr(Checker,"build_matrix",lambda _, m=altered: m)
         with pytest.raises(ValueError,match=pattern):
             Checker.check_certificate(certificate,full_panel=False)
+
+
+def test_exact_local_rational_pnp_native_bond_directional_sign(monkeypatch):
+    from fractions import Fraction
+    source,sha,manifest,species,reactions=fixture(monkeypatch)
+    certificate=Adapter.load_original_receipt_json(source)
+    matrix,_=Adapter.check_certificate(certificate,full_panel=True)
+    metadata={s:({"C":1,"H":0,"N":0,"O":0,"P":0},0) for s in species}
+    monkeypatch.setattr(Adapter,"check_certificate",lambda *a,**kw:(matrix,metadata))
+    flux=[["0"]*29 for _ in range(54)]
+    rates=[["0"]*12 for _ in range(27)]
+    flux[53][28]="-5/11"
+    left,right=Adapter.BONDS[53]
+    result=Adapter.original_closed_rational_semidiscrete_conservation(
+        source,pinned_sha256=sha,
+        signed_native_bond_fluxes=flux,
+        signed_original_reaction_rates=rates)
+    d=result["exact_local_weighted_divergence"]
+    assert Fraction(d[left][0]) == -Fraction(5,11)
+    assert Fraction(d[right][0]) == Fraction(5,11)
+    assert sum(Fraction(row[0]) for row in d) == 0
+    assert all(val=="0" for row in result["exact_local_continuity_residual"] for val in row)
+    assert result["local_CHNOP_signed_charge_equations_checked"] == 162
