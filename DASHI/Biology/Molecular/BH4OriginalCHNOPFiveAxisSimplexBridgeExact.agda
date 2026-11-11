@@ -407,3 +407,34 @@ decideOriginal369WeightedSimplexAdmission certificate
       inj₁ (original369-positive-weighted-simplex-admission
               certificate evidence)
 ... | inj₂ obstruction = inj₂ obstruction
+
+------------------------------------------------------------------------
+-- Genuine decidability of the exact original-source positive-weight
+-- proposition. The negative result is a contradiction function for
+-- THAT SAME source certificate, rather than an unattached zero label.
+------------------------------------------------------------------------
+
+decideOriginal369SourcePositiveCHNOPWithRefutation :
+  (certificate : Panel.SourceCertifiedOriginal29x12) →
+  SourcePositiveAggregateCHNOP certificate
+    ⊎ (SourcePositiveAggregateCHNOP certificate → ⊥)
+decideOriginal369SourcePositiveCHNOPWithRefutation certificate
+  with decideOriginal369SourcePositiveCHNOP certificate
+... | inj₁ witness = inj₁ witness
+... | inj₂ (species , zeroWeight) =
+  inj₂ (zeroCHNOPWeightBlocksPositiveSource
+    certificate species zeroWeight)
+
+-- If the source already supplies an explicit positive witness, a
+-- zero coordinate is impossible. Unlike a cached Boolean, this proof
+-- works for every selected 29x12 source inhabitant.
+positiveOriginalSourceExcludesEveryZeroCoordinate :
+  (certificate : Panel.SourceCertifiedOriginal29x12) →
+  SourcePositiveAggregateCHNOP certificate →
+  (species : F.Fin 29) →
+  V.lookup (totalCHNOPSourceWeights certificate) species ≡ 0 →
+  ⊥
+positiveOriginalSourceExcludesEveryZeroCoordinate certificate
+  witness species zeroWeight =
+  zeroCHNOPWeightBlocksPositiveSource
+    certificate species zeroWeight witness
