@@ -27,6 +27,7 @@ open import DASHI.Foundations.RealAnalysisAxioms
          absMul; mulMonotoneNonnegative)
 
 import DASHI.Physics.YangMills.BalabanDecoupledActivityHessian as Hess
+import DASHI.Physics.YangMills.YMClayOriginalRealSubtractionInterchangeExact as Scalar
 import DASHI.Physics.YangMills.BalabanDifferentiatedMarkedFactorProductExact as Product
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445ThreeMomentRGCutExact as Source
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as Original
@@ -237,20 +238,6 @@ module _
     (left right : CoarseTest)
     (errorProduct errorLeft errorRight
      boundEffectiveRight boundBareLeft : ℝ) →
-    (scalarInterchange :
-      (Source.sourceEffectiveCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right
-       -ℝ
-       Source.sourceBareCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right)
-      ≡
-      ((effectiveMoment (productTest left right)
-         -ℝ bareMoment (productTest left right))
-       -ℝ
-       ((effectiveMoment left *ℝ effectiveMoment right)
-         -ℝ (bareMoment left *ℝ bareMoment right)))) →
     0ℝ ≤ℝ errorLeft →
     0ℝ ≤ℝ boundEffectiveRight →
     0ℝ ≤ℝ boundBareLeft →
@@ -281,14 +268,18 @@ module _
           +ℝ (boundBareLeft *ℝ errorRight))
   originalR445CovarianceErrorFromThreeSourceMoments
     left right errP errL errR maxER maxBL
-    scalarInterchange errLNN maxERNN maxBLNN errRNN
+    errLNN maxERNN maxBLNN errRNN
     productError leftError rightSize leftSize rightError =
     subst
       (λ v →
         absℝ v ≤ℝ
           (errP +ℝ
             ((errL *ℝ maxER) +ℝ (maxBL *ℝ errR))))
-      (sym scalarInterchange)
+      (sym (Scalar.subtractionInterchange
+         (effectiveMoment (productTest left right))
+         (effectiveMoment left *ℝ effectiveMoment right)
+         (bareMoment (productTest left right))
+         (bareMoment left *ℝ bareMoment right)))
       (originalR445ThreeMomentResidualBound
         left right errP errL errR maxER maxBL
         errLNN maxERNN maxBLNN errRNN
@@ -300,20 +291,6 @@ module _
     (left right : CoarseTest)
     (errorProduct errorLeft errorRight
      boundEffectiveRight boundBareLeft : ℝ) →
-    (scalarInterchange :
-      (Source.sourceEffectiveCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right
-       -ℝ
-       Source.sourceBareCovariance
-        theory traceData exponential beta oneLink bilateral divide
-        left right)
-      ≡
-      ((effectiveMoment (productTest left right)
-         -ℝ bareMoment (productTest left right))
-       -ℝ
-       ((effectiveMoment left *ℝ effectiveMoment right)
-         -ℝ (bareMoment left *ℝ bareMoment right)))) →
     0ℝ ≤ℝ errorLeft →
     0ℝ ≤ℝ boundEffectiveRight →
     0ℝ ≤ℝ boundBareLeft →
@@ -354,7 +331,7 @@ module _
           +ℝ (boundBareLeft *ℝ errorRight))
   originalMixedJ11MinusBareCovarianceQuantitativeBound
     left right errP errL errR maxER maxBL
-    scalarInterchange errLNN maxERNN maxBLNN errRNN
+    errLNN maxERNN maxBLNN errRNN
     productError leftError rightSize leftSize rightError =
     subst
       (λ v →
@@ -377,5 +354,5 @@ module _
               left right))))
       (originalR445CovarianceErrorFromThreeSourceMoments
         left right errP errL errR maxER maxBL
-        scalarInterchange errLNN maxERNN maxBLNN errRNN
+        errLNN maxERNN maxBLNN errRNN
         productError leftError rightSize leftSize rightError)
