@@ -161,3 +161,15 @@ def test_original_generator_exposes_only_proof_candidate_not_kernel_receipt():
                for line in lines)
     assert not any("agda_kernel_checked = true" in line
                    for line in lines)
+
+
+def test_original_source_reaction_conserves_all_six_axes_at_arbitrary_bishop_rates():
+    from generate_bh4_original29x12_agda import rendered_source_rational_producer
+    lines=rendered_source_rational_producer()
+    assert "generatedOriginalBishopAnyReactionRatesConserve :" in lines
+    assert "generatedOriginalBishopAnyReactionRatesConserve rates axis =" in lines
+    assert "  BishopRates.original369BishopArbitraryReactionRatesConserve" in lines
+    assert "    rates (generatedRationalColumnsBalance axis)" in lines
+    assert "  (rates : V.Vec (V.Vec R.ℝ 12) 27)" in lines
+    assert "  (axis : F.Fin 6) →" in lines
+    assert all("source_rhea_kinetics_paid" not in line for line in lines)
