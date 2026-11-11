@@ -1,5 +1,15 @@
 # Save Woogaroo Forest — legal-team handoff brief
 
+## URGENT 11 November 2026 — possible ADJR time limit (counsel must check immediately)
+
+**A potentially critical date has been identified but NOT conclusively determined.** The *Administrative Decisions (Judicial Review) Act 1977* **s11(3)** provides a 28-day period tied to when the original decision or a qualifying reasons document is furnished (with further statutory qualifications and judicial extension power). If **16 October 2026** was the legally relevant furnishing date and no later qualifying reasons event changes the period, the illustrative 28th day is **Friday 13 November 2026**. It is **not safe to assert this is the actual limitation deadline** from the date the approval was signed alone; counsel must immediately establish the service/notification chain, whether ADJR applies to the particular claim, any reasons request, relevant transitional law and the availability of extension. Equally, lack of the original recommendation does NOT make it safe to defer filing.
+
+**Original legal authorities:** [ADJR Act s11, 27 August 2026 compilation](https://www.legislation.gov.au/C2004A01697/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_1/document_1.html); [Federal Court's judicial-review practice page](https://www.fedcourt.gov.au/law-and-practice/national-practice-areas/aclhr/more) (Form 66, extension of time Form 67). [EPBC Act s487, 24 August 2026 compilation](https://www.legislation.gov.au/C2004A00485/2026-08-24/2026-08-24/text/original/epub/OEBPS/document_3/document_3.html) extends environmental-group standing subject to the actual statutory objects, activity and timing. **These are source-based procedural options, not a finding of standing or grounds.** An EPBC s475 threatened-contravention injunction is a legally distinct route requiring a genuine threatened or actual contravention; the mere existence of a permit is not such a contravention. Queensland NCA ss102–107 interim conservation order is an administrative Ministerial power with its own evidence threshold, not a substitute for preserving federal review time.
+
+**Do now, if authorised:** have counsel investigate/advise on urgent protective applications and filing requirements **before any possible applicable limit expires**, while separately authenticating commencement/C24/C25 records and identifying actual threatened works. No request, filing, proceeding, retainer or protection is shown in this repository.
+
+---
+
 ## 11 November 2026 — operative post-approval handoff (READ FIRST)
 
 **Matter:** Save Woogaroo Forest Group Inc — Springfield Residential Development, **EPBC 2019/8575**. **Audience:** legal representatives and assisting/pro-bono counsel; no named lawyer, retainer, authority to act, or transmission of this brief has been verified.
