@@ -344,3 +344,18 @@ The selected `OriginalRealCenteringLaws` now additionally requests the standard 
 ### P0.06 falsifiability / source-admission negative control
 
 Added `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact.agda` and imported it in `YMClayOriginalWilsonPhysicalRegression.agda`. `constantCyclicRealTrace` constructs a legal cyclic real trace assigning an arbitrary real scalar k to every SU(N) matrix. `constantCyclicWilsonValue` proves the evaluated Wilson value is k. `universalCyclicTraceBoundForcesAllScalarsBounded` proves any bound claimed for **all** such trace records would force `absℝ k <= 1ℝ` for every k (when the selected SUN carrier is inhabited). This is a precise negative control on the current trace signature, not a proof of a real-order contradiction. P0.06 needs an actual finite complex matrix trace with verified normalization/inner-product inequalities and a source-bound on the same original plaquette holonomy; trace cyclicity by itself cannot pay that gate.
+
+
+## 2026-11-11 P0.06 original matrix trace range → all-cutoff Wilson words; word-concatenation RG weld
+
+New Agda source modules, imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda`:
+
+1. `YMClayE1D1OriginalSUNTraceToAllWordsBoundExact.agda` derives `originalPlaquetteTraceBoundAtEveryCutoff` from a **single selected original SU(N) matrix trace magnitude estimate**, then proves `originalSingletonWordIsPlaquetteTrace` using the original Wilson signed-plaquette evaluator and `mulOneʳ`, and `originalAllLengthWilsonWordMagnitudeBound` by actual original word recursion and the selected real `absMul`/nonnegative-product comparison. Precise *unpaid* mathematical owners are `traceRange : ∀ U → |matrixWilsonValue traceData U| ≤ 1` for a **concrete** normalized matrix SU(N) trace, `absNonnegative` and `absOne` in a coherent real carrier. This does not infer trace range from cyclicity or create a false bounded SU(N) trace instance.
+
+2. `YMClayE1D1OriginalWilsonWordConcatenationR445Exact.agda` proves `originalWilsonWordAppendIsProduct` at **every original cutoff** by list induction and the selected real multiplication group laws:
+`W_{left++right}(U) ≡ W_left(U)*W_right(U)`.
+It then proves `originalR445WordProductCrossNumeratorIsConcatenation` at the actual 4→2 R445 fine-blocked-versus-bare original Gibbs/Haar source using `Center.crossNumeratorCongruent`. Thus the third nonconstant original RG discrepancy on `FG` is literally the cross numerator of the original **concatenated plaquette word**; the three source inputs for pairwise covariance comparison can be handled by a single all-word effective-versus-bare producer applied to `left`, `right`, `left++right`.
+
+**Important nonclaim:** Wilson expectation is *not* multiplicative. `E(FG)` is the expectation of an actual word-product insertion, not `E(F)E(G)`. These exact finite identities do not establish a nonconstant RG error rate, source matrix norm, or any terminal Clay gate. Agda 2.9 acceptance is still outstanding; the source-written modules and imports are not kernel receipts.
+
+**Next highest-alpha original physical producer:** for each admissible original coarse Wilson word, give a truly derived cutoff/volume-uniform estimate on its exact weighted cross numerator `X(W_word)` relative to the actual positive partition product `Z_f Z_b`, in the correct UV scaling regime. Together with the existing word-concatenation identity, the same quantitative covariance route then applies to a pair of original Wilson words without a separate non-Wilson polynomial error premise.
