@@ -136,3 +136,27 @@ Additional Agda declarations in `BalabanExceptional240SameActionBoundaryExact.ag
 - P2e `residualCrossDomainObservablePreservation`: a selected observation-valued naturality square with source-specific fibres and calibrated semantic meaning, not a three-domain numerical identification.
 
 **Source verification:** New Agda is committed but not kernel-checked. The independent exact E8 finite enumeration was run for each of four paired-sign embedding choices and confirmed 240 roots, 34 target orbits, and identical mismatch of involution traces; committed script should be replayed at its PR head before marking the script test itself PASS.
+
+## 9 — Marchenko–Pastur PR cross-pollination, source-owner split (2026-11-11)
+
+**Live PR audit:** [#1480](https://github.com/chboishabba/dashi_agda/pull/1480), initial head `6ef9c6525269ca661fe6e06945f64fcf056e4863`, active `pnf-mp-maxcut-2026-11-09`; [#1465](https://github.com/chboishabba/dashi_agda/pull/1465), head `4d775e99c69684143a2cc7e652a68df4d10ebd28`, stacked on #1458; original [#37](https://github.com/chboishabba/dashi_agda/pull/37), source role/covariance/eigenmode/null-class interface. **Do not silently import these open-PR-only files into #1479.** Existing repo mathematical domain owners are distinct from interpretation and actual source admission.
+
+**Reused existing #1480 Agda (not duplicated):**
+- `PNFFiniteGramPositiveExact`, `PNFCentredCovarianceExact`, `PNFCovarianceQuadraticIdentityExact`, `PNFFiniteRankNullityBridgeExact`, `PNFHistoryTimeVariableDimensionExact`: same centred source covariance and PSD, finite rank/nullity conditional on independent finite-field owner.
+- `PNFHistoryTimeMPSpectralModeExact`, `PNFHistoryTimeVariableMPSpectralExact`: source-indexed eigen-equations at actual history/time with MP variance, positive counts and selected aspect (p/(n-1)); numeric carrier homomorphism remains independently required.
+- `PNFMP36927ChartNaturalityExact`: pointwise spectral classification commutes with 3-chart observation gluing but does NOT prove that the covariance spectrum of glued observation matrices equals glued local spectra.
+- `PNFMPTradingInadequacyControlExact`: original trader permission state machine preserves risk and avoids trading on an outlier by itself. `PNFHistoryTimeMarketSpectralFibreExact` preserves point-in-time universe.
+- `PNFMarchenkoPasturFiniteExact` finite Gram positivity conditional on source order and sum, MP edge formulas conditional on calibration; `PNFMarchenkoPasturAdmissionExact` candidate-only classifier; asymptotic distribution and empirical null independently OPEN.
+
+**New source-written and numerical results committed on PR #1480 (not #1479):**
+- `DASHI/Information/PNFMPObserverNonPromotionWeldExact.agda`: `taskOnlyMPClassCannotDetermineIntent`, `publicOutcomeMPClassCannotRecoverRetention`, `noMPClassCanAuthoriseNumericPromotion`; imports original epic `EpistemicPowerHistoryAndNonSubstitutionExact` and generic non-factorability. Spectral postprocessing cannot restore information already erased by the observer and cannot promote authority. Source-written, not kernel checked.
+- `scripts/pnf_mp_temporal_null_sensitivity.py` and `tests/test_pnf_mp_temporal_null_sensitivity.py`: independent-column synthetic AR(1) 120×24, ρ=0.8, seed 20261111; sample max eigenvalue ≈2.999 vs iid MP upper ≈2.100, but selected circular-shift surrogate 95th percentile ≈3.641. This is a deterministic numerical counterexample to *unconditional* iid MP outlier inference, NOT a validated finite-sample null for real data. Independently executed numerical reproduction; committed source not independently replayed from GitHub.
+
+**Updated cross-domain maximum cut:**
+- P0 `mpSameSourceOriginalPanelAndNull`: same history/time/source data with missingness, centered means, scale (1/(n-1)), finite-rank math owner; valid null assumptions independently reviewed. No MP label can infer provenance/intent from task count or observed public outcome.
+- P1 `empiricalNullCalibrationUnderDependence`: compare independent-column, grouped, time-preserving, block and source-appropriate surrogates, each justified for exchangeability; variance, aspect, sample, stability and finite-sample uncertainty receipts.
+- P1 `selectedExceptionalCovarianceCharacterTransport`: even if 240-dimensional B4/E8 permutation representations both have empirical eigen-spectra, selected-action differences (characters/orbits) mean arbitrary MP outliers do NOT repair missing intertwiner. A covariance similarity/eigenvalue coincidence is strictly weaker than same-action equality.
+- P2 `codecRiskCognitiveCrossDomainNullWeld`: reusing source-conditioned covariance and actual codec/PNF/cognitive-work observer, distinguish numerical null anomalies from semantic concepts, participant testimony, endocrine injury, manipulation attribution or legal/trader action.
+- P2 `mpDensityWeakLimitOriginalProbabilitySpace`: original Marchenko–Pastur weak-limit, moments, Stieltjes equation, zero atom, eigen-edge controls remain independent theorem obligations, not supplied by finite Gram PSD or the numerical script.
+
+**Verification:** PR #1480 Agda source-written only and its numeric tests committed; no Agda/Nix compiler available in this working container and no new actual empirically sourced PNF panel or verified null. Cross-branch checkout needed to test or merge; leave #1479 original sources untouched.
