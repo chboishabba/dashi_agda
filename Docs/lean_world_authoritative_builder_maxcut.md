@@ -48,3 +48,20 @@ of external imports.
 
 **No kernel or world-admission status is promoted.** No PostgreSQL writer or
 trusted native-v3 DAG validator was introduced.
+
+## Exporter-side H08 follow-through
+
+The original `scripts/lean_world_native_v3_export.py:store_native`
+published with `os.replace`, which could overwrite an already-published
+content-addressed native export. It now calls the same no-clobber,
+fsync-backed immutable publication primitive used by the queue.
+`tests/test_lean_world_native_export_atomic.py` covers repeat export,
+conflicting bytes under the expected digest name, and symlink rejection.
+
+The exporter specifically identifies
+`dashi_lean4/build_jmd_lean_ast_world.py` as its expected DAG validation
+owner. A GitHub file lookup on `chboishabba/dashi_lean4` main returned 404
+for that exact path, and source search did not locate it there. This is a
+**source discovery blocker**, not proof that no implementation exists on other
+branches or in another repository. No replacement native-v3 graph semantics
+have been invented in this tranche.
