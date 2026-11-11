@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import re
 import resource
+import signal
 import subprocess
 import tempfile
 
@@ -97,6 +98,10 @@ def check_native_export(export: PendingExport, executable: Path, *,
             raise CheckerError("external checker unavailable or timed out") from exc
         if (stdout.stat().st_size > max_output_bytes or
             stderr.stat().st_size > max_output_bytes):
+            raise CheckerError("external checker output exceeded budget")
+        if completed.returncode == -signal.SIGXFSZ or (
+            max_output_bytes == 0 and
+            (stdout.stat().st_size or stderr.stat().st_size)):
             raise CheckerError("external checker output exceeded budget")
         if completed.returncode != 0:
             raise CheckerError("external checker rejected native export")
