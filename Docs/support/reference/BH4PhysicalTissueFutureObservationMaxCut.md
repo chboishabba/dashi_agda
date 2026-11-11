@@ -859,3 +859,37 @@ The authoritative #1454 branch already contains `BH4OriginalNativePerSpeciesCanc
 Provisional additional experimental finite bilinearity, local-defect composition and transport/reaction modules were added while the branch was rapidly changing. They overlap the authoritative owners and are intentionally **NOT imported by the BH4 Golden** following reconciliation (retained as unpromoted development source only). Do not let a duplicated untested owner obstruct the canonical Golden import.
 
 **Precise remaining gates:** byte-pin and inspect authentic original 29×12 Rhea generated Agda source, run Agda 2.9 checks on authoritative owners and strict root; then prove actual Bishop-real Scharfetter–Gummel/Poisson/mass-action constitutive and open six-face terms, compact conserved weighted-real simplex and original positive implicit-root/Brouwer; then SAME source-paid BH4/PNP/tissue physical-step commutation, intervention-safe future quotient and independent assay validation. Source-level finite conservation is not experimental tissue conservation nor original biological kinetics.
+
+
+### 2026-11-11 P0 Bishop-real reaction rates beyond rational discretization
+
+Companion BH4/PNP PR #1454 now adds
+`BH4OriginalBishopArbitraryReactionRatesExact`:
+from the SAME source-derived 29-species/12-column
+rational CHNOP and signed-charge left kernel,
+all 27 original voxel reaction sums are
+conserved for **arbitrary Bishop-real 12-component
+rate fields**, not only source-rational rate
+samples. This follows by importing the existing
+rational-to-Bishop source-weighted column
+embedding and finite real multiplication/
+addition congruence.
+
+The SHA-pinned original Rhea generator now
+emits `generatedOriginalBishopAnyReactionRatesConserve`
+for each of six axes using the SAME 72 literal
+source rational column balance clauses.
+It does not assert any measured rate or
+mass-action parameter. Native Agda
+typechecking and actual source generation
+are still outstanding.
+
+This strengthens the reaction side of
+BH4/PNP physical modeling but does NOT
+identify an actual biochemical rate law,
+prove real-valued SG transport/Poisson
+continuity, compactness/Brouwer, a
+strict positive implicit PNP root,
+or a source-matched tissue observer.
+Those physical/kernel and empirical
+gates remain OPEN.
