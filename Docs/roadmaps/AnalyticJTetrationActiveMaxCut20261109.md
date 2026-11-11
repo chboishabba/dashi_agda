@@ -517,3 +517,30 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Verification boundary:** module source committed, registered as a new explicit target in \`scripts/check_analytic_j_tetration_golden_local.sh\`. Agda/Nix absent in current runtime; no kernel receipt. Do NOT mark the lemma checked without running the pinned Agda 2.9 \`--safe\` command. Nor does the real-axis result complete the full Cartesian \`BishopSetoidComplexExact.expC T\` = factorial complex exponential for arbitrary imaginary argument. The sine/cosine parity, Cauchy-product and imaginary-series convergence, and same-source exp addition are now the decisive next complex weld. The independently selected nonreal exponential fixed point, exp-log inverse, local Koenigs, global Kneser and actual modular j remain open.
 
 **Important architectural improvement:** real-axis terms use the **existing** \`BishopExponentialSeriesConvergenceExact.expTerm\` and \`bishopExpConverges\`; no additional setoid quotient, selected real exponential or arbitrary convergence record.
+
+
+## 2026-11-11 P1 imaginary-axis original Bishop factorial/trigonometric finite bridge
+
+**Implemented directly in the open PR #1478, source-written (checker pending):**
+
+- \`AbelBishopFactorialComplexImaginaryAxisTwoStepExact.agda\` proves, on the original Bishop complex carrier, for arbitrary Bishop real \(y\), complex \(q\), and every \(n\),
+  \[
+  (iy)(iyq)\approx_C(-y^2)q,\qquad (iy)^{n+2}\approx_C(-y^2)(iy)^n.
+  \]
+  Both coordinates are proved by the existing \`RealProperties.ℝ-Solver\`; no new postulates or geometric assumptions. Using **the same** \`BalabanClayGate4BishopHalfRadiusRealEstimatesExact.evenExponent/oddExponent\` functions as the original sine/cosine series, the module gives
+  \[
+  (iy)^{2k}\approx_C((-y^2)^k,0),\quad
+  (iy)^{2k+1}\approx_C(0,y(-y^2)^k)
+  \]
+  and applies the original factorial-complex series term to obtain both parity-specific component identities.
+- \`AbelBishopFactorialComplexImaginaryAxisSignedTermsExact.agda\` reuses \`BalabanBishopFactorialPowerRecurrenceExact.powTwoStep\` and \`BishopNegativeExponentialInterlacingExact.powNegativeByAlternatingSign\` to obtain for **every** \(k\):
+  \[
+  (-y^2)^k\simeq(-1)^k y^{2k},\qquad
+  y(-y^2)^k\simeq(-1)^k y^{2k+1}.
+  \]
+  It then proves finite, **literal same-source** term equalities to \`BalabanBishopConcreteSineCosineTermParityExact.cosineSignedTerm y k\` and \`sineSignedTerm y k\`. The factorial rational in the new series is definitionally the same \`BalabanClayGate4BishopHalfRadiusRealEstimatesExact.inverseFactorialRational\` as the concrete trig coefficients. No independent sine/cosine or factorial authority records.
+- Both modules added to \`scripts/check_analytic_j_tetration_golden_local.sh\`.
+
+**Critical verification distinction:** GitHub source commits and static inspection are not pinned Agda kernel acceptance. In particular, the infinite full factorial series \(\sum_{n\ge0}(iy)^n/n!\) must still be split into its signed even and odd subseries, with a source-proved Bishop real/complex parity reindexing, independent convergence, canonical limits, and identification with **the configured** \`BishopSetoidComplexExact.expC T\` sine/cosine. The latter also relies on identifying \`ConcreteSineCosineTermIdentification (dataSet T)\` with the literal factorial owners and handling its conditional configuration correctly. This round closes only *finite source-level parity/coefficient proofs pending kernel acceptance*, not infinite exp additivity, exp-log inversion or global tetration.
+
+**Remaining max-cut:** P0 Agda 2.9 \`--safe\` acceptance/repair; P1 all-degree even/odd series reindexing and actual limit identification; P1 full Cartesian exp = factorial complex series using the original Bishop exponential Cauchy-product / limit theorem; P1 finite exp-log rational coefficient proof within Agda and Bishop composition tail exchange; selected upper fixed point and reciprocal radius; Koenigs/Abel/global Kneser; independent original modular j and Kouznetsov contours.
