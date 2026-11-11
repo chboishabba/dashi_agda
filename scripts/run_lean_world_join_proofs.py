@@ -428,6 +428,7 @@ def main():
     p.add_argument("--repository",required=True)
     p.add_argument("--revision",required=True)
     p.add_argument("--module",required=True)
+    p.add_argument("--import-module",action="append",default=[])
     p.add_argument("--additional-source",action="append",default=[],
                    help="original repo@40SHA snapshot in same PostgreSQL schema")
     p.add_argument("--donor",action="append",required=True,
@@ -446,6 +447,7 @@ def main():
     try:
         import psycopg
         from psycopg import sql
+        roots=[args.module]+args.import_module
         with psycopg.connect("") as conn:
             with conn.cursor() as cur:
                 cur.execute(sql.SQL("SET search_path TO {},pg_catalog").format(
@@ -462,12 +464,12 @@ def main():
                     r,v=item.rsplit("@",1)
                     snapshots.append((r,v))
                 plan=plan_multi_repo_from_pg(
-                    conn,snapshots,[args.module],
+                    conn,snapshots,roots,
                     max_modules=args.max_modules,
                     max_source_bytes=args.max_source_bytes)
             else:
                 plan=plan_from_pg(
-                    conn,args.repository,args.revision,[args.module],
+                    conn,args.repository,args.revision,roots,
                     max_modules=args.max_modules,
                     max_source_bytes=args.max_source_bytes)
         if not plan.get("origins"):
