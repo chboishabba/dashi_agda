@@ -176,6 +176,8 @@ original369AllSpeciesNativeRationalTransportZero fluxes species =
 
 import DASHI.Biology.Molecular.BH4ComputedRationalSixDefectCompositionExact
   as Compose
+import Real as BishopReal
+import DASHI.Foundations.BishopExponentialSeriesConvergenceExact as Embed
 
 lookupMapExact :
   ∀ {n} {A B : Set}
@@ -317,7 +319,7 @@ originalNativeLocalConservationFromReactionProof
 -- Consequent all-six-axes Bishop real conservation for the SAME
 -- computed source-native 27×29 RHS. No global zero premise is assumed.
 -- The remaining reaction-only proof must be independently source-paid.
-originalNativeRHSBishopConservationGivenReactionSource :
+originalNativeRHSSixRationalZeroGivenReactionSource :
   (fluxes : Op.Matrix 54 29)
   (stoichiometry : Op.Matrix 29 12)
   (rates : Op.Matrix 27 12)
@@ -338,9 +340,42 @@ originalNativeRHSBishopConservationGivenReactionSource :
         (Native.originalNativeRationalInputs
           fluxes stoichiometry rates)))
     Q.0ℚᵘ
-originalNativeRHSBishopConservationGivenReactionSource
+originalNativeRHSSixRationalZeroGivenReactionSource
   fluxes stoichiometry rates weights reactionsBalanced =
   Compose.originalComputedRHSSixZeroDefects
+    (Native.originalNativeRationalInputs
+      fluxes stoichiometry rates)
+    weights
+    (originalNativeLocalConservationFromReactionProof
+      fluxes stoichiometry rates weights reactionsBalanced)
+
+-- Correct real-setoid consequence. Same original native incidence,
+-- same arbitrary fluxes/rates, same original reaction source obligation.
+originalNativeRHSSixBishopZeroGivenReactionSource :
+  (fluxes : Op.Matrix 54 29)
+  (stoichiometry : Op.Matrix 29 12)
+  (rates : Op.Matrix 27 12)
+  (weights : Op.Matrix 6 29) →
+  ((axis : F.Fin 6) →
+    Q._≃_
+      (Lift.sourceSpatialWeighted
+        (V.lookup weights axis)
+        (Compose.originalReactionRHS
+          (Native.originalNativeRationalInputs
+            fluxes stoichiometry rates)))
+      Q.0ℚᵘ) →
+  (axis : F.Fin 6) →
+  BishopReal._≃_
+    (Lift.bishopSpatialWeighted
+      (V.map Embed.embed (V.lookup weights axis))
+      (V.map (V.map Embed.embed)
+        (Op.rational369SemidiscreteRHS
+          (Native.originalNativeRationalInputs
+            fluxes stoichiometry rates))))
+    (Embed.embed Q.0ℚᵘ)
+originalNativeRHSSixBishopZeroGivenReactionSource
+  fluxes stoichiometry rates weights reactionsBalanced =
+  Compose.originalComputedRHSSixBishopConservation
     (Native.originalNativeRationalInputs
       fluxes stoichiometry rates)
     weights
