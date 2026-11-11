@@ -30,9 +30,12 @@ class NativeCandidate:
     type_sha256: str
     direct_constants: tuple[str, ...]
     proof_value_present: bool
+    proof_digest: str = ""
+    proof_direct_constants: tuple[str, ...] = ()
     kernel_certified: bool = False
 
-def extract_candidates(raw: bytes, *, max_records: int=5_000_000):
+def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
+                       selected_names: frozenset[str] | None = None):
     if not isinstance(raw, bytes) or not raw or len(raw) > 200_000_000:
         raise NativeV3Error("invalid native export size")
     names = {0: ""}
@@ -156,21 +159,26 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000):
                 raise NativeV3Error("invalid declaration header")
             universe_params=tuple(name_ref(i) for i in params)
             value_present=tag in ("thm","def","opaque")
-            if value_present:
-                expr_ref(val.get("value"))
+            value=expr_ref(val.get("value")) if value_present else None
+            if selected_names is not None and name not in selected_names:
+                continue
             canonical_type=canonical(("lean4export-v3-type",universe_params,typ))
-            constants=set()
-            pending=[typ]
-            # Walk fully expanded trees; avoid recursion over deep terms.
-            while pending:
-                item=pending.pop()
-                if isinstance(item,(tuple,list)):
-                    if item and item[0]=="const":
-                        constants.add(item[1])
-                    pending.extend(item[1:])
+            def constants_in(node):
+                constants=set()
+                pending=[node]
+                # Explicit stack: do not recurse for dependency discovery.
+                while pending:
+                    item=pending.pop()
+                    if isinstance(item,(tuple,list)):
+                        if item and item[0]=="const":
+                            constants.add(item[1])
+                        pending.extend(item[1:])
+                return tuple(sorted(constants-{name}))
             candidates.append(NativeCandidate(
                 name,tag,canonical_type,sha256(canonical_type).hexdigest(),
-                tuple(sorted(constants-{name})),value_present))
+                constants_in(typ),value_present,
+                sha256(canonical(value)).hexdigest() if value_present else "",
+                constants_in(value) if value_present else ()))
         else:
             # A mutual inductive group is a kernel-atomic declaration.
             # Validate its referenced name/type indices, but do not split it
