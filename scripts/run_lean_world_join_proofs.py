@@ -47,13 +47,55 @@ def names_from_import_line(line):
     return tuple(tokens)
 
 def parse_imports(raw):
+    """Read the Lean module header without picking imports out of comments.
+
+    This is a conservative dependency *planning* scan; the real Lean compiler
+    remains authoritative about module resolution and theorem typing.
+    """
     try:
-        text=raw.decode("utf-8")
+        content=raw.decode("utf-8")
     except UnicodeDecodeError as exc:
-        raise JoinError("Lean source is not valid UTF-8") from exc
-    return tuple(dict.fromkeys(
-        imp for line in text.splitlines()
-        for imp in names_from_import_line(line)))
+        raise JoinError("Lean source is not UTF-8") from exc
+    # Remove nested Lean block comments and line comments from header.
+    cleaned=[]
+    depth=0
+    i=0
+    while i<len(content):
+        if content.startswith("/-",i):
+            depth+=1
+            i+=2
+        elif depth and content.startswith("-/",i):
+            depth-=1
+            i+=2
+        elif depth:
+            if content[i]=="\n":
+                cleaned.append("\n")
+            i+=1
+        elif content.startswith("--",i):
+            end=content.find("\n",i)
+            if end<0:
+                break
+            cleaned.append("\n")
+            i=end+1
+        else:
+            cleaned.append(content[i])
+            i+=1
+    if depth:
+        raise JoinError("unclosed block comment in original source")
+    imports=[]
+    for line in "".join(cleaned).splitlines():
+        stripped=line.strip()
+        if not stripped or stripped in ("module","prelude"):
+            continue
+        found=names_from_import_line(stripped)
+        if found:
+            imports.extend(found)
+            continue
+        # Lean import commands belong to the header. Do not search later
+        # theorem bodies or documentation examples for fake imports.
+        break
+    return tuple(dict.fromkeys(imports))
+
 
 def path_for_module(module):
     if not MODULE.fullmatch(module):
