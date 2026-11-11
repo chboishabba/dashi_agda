@@ -6,6 +6,7 @@ module DASHI.Physics.YangMills.BalabanExceptional240SameActionBoundaryExact wher
 -- This is NOT a root-system identification and does NOT assert that
 -- 240 hypercubic cells constitute an E8 root graph or Weyl orbit.
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Agda.Builtin.Nat using (Nat; _+_)
 open import Data.Empty using (⊥)
 open import Data.List.Base using (length)
@@ -84,3 +85,55 @@ physicalInvariantSumReduction =
 -- Remaining leaf is a selected literal source theorem/certificate and
 -- exact trig/interval environment compatibility, not geometric counting.
 -- No physical certificate is forged here.
+
+-- A genuine SAME-ACTION bijection necessarily transports each generator's
+-- fixed-point locus; this is the first non-cardinality rejection test.
+-- It does not depend on choosing the E8/root representation beforehand.
+
+sourceFixedToRootFixed :
+  ∀ {RegularRoot Root Symmetry : Set}
+    {cellAct : Symmetry → RegularRoot → RegularRoot}
+    {rootAct : Symmetry → Root → Root} →
+  (comparison : SameAction240Comparison
+    RegularRoot Root Symmetry cellAct rootAct) →
+  (actor : Symmetry) (cell : RegularRoot) →
+  cellAct actor cell ≡ cell →
+  rootAct actor (SameAction240Comparison.toRoots comparison cell)
+    ≡ SameAction240Comparison.toRoots comparison cell
+sourceFixedToRootFixed comparison actor cell sourceFixed =
+  trans
+    (sym (SameAction240Comparison.intertwinesSelectedAction
+      comparison actor cell))
+    (cong (SameAction240Comparison.toRoots comparison) sourceFixed)
+
+rootFixedToSourceFixed :
+  ∀ {RegularRoot Root Symmetry : Set}
+    {cellAct : Symmetry → RegularRoot → RegularRoot}
+    {rootAct : Symmetry → Root → Root} →
+  (comparison : SameAction240Comparison
+    RegularRoot Root Symmetry cellAct rootAct) →
+  (actor : Symmetry) (root : Root) →
+  rootAct actor root ≡ root →
+  cellAct actor (SameAction240Comparison.fromRoots comparison root)
+    ≡ SameAction240Comparison.fromRoots comparison root
+rootFixedToSourceFixed {cellAct = cellAct} {rootAct = rootAct}
+  comparison actor root rootFixed =
+  trans
+    (sym (SameAction240Comparison.sourceAfterRoundTrip
+      comparison (cellAct actor
+        (SameAction240Comparison.fromRoots comparison root))))
+    (trans
+      (cong (SameAction240Comparison.fromRoots comparison)
+        (SameAction240Comparison.intertwinesSelectedAction
+          comparison actor
+          (SameAction240Comparison.fromRoots comparison root)))
+      (trans
+        (cong (SameAction240Comparison.fromRoots comparison)
+          (cong (rootAct actor)
+            (SameAction240Comparison.targetAfterRoundTrip comparison root)))
+        (cong (SameAction240Comparison.fromRoots comparison) rootFixed)))
+
+-- Compare actual fixed-point *counts* on the regular-cell subtype and
+-- selected exceptional root action. A mismatch refutes any inhabitant
+-- of SameAction240Comparison for that same actor. Counting and selected
+-- same-actor membership remain an external, finite computation task.
