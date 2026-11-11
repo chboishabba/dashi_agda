@@ -544,3 +544,34 @@ The source defines **literal positive-degree complex factorial terms** \(\frac{w
 **Critical verification distinction:** GitHub source commits and static inspection are not pinned Agda kernel acceptance. In particular, the infinite full factorial series \(\sum_{n\ge0}(iy)^n/n!\) must still be split into its signed even and odd subseries, with a source-proved Bishop real/complex parity reindexing, independent convergence, canonical limits, and identification with **the configured** \`BishopSetoidComplexExact.expC T\` sine/cosine. The latter also relies on identifying \`ConcreteSineCosineTermIdentification (dataSet T)\` with the literal factorial owners and handling its conditional configuration correctly. This round closes only *finite source-level parity/coefficient proofs pending kernel acceptance*, not infinite exp additivity, exp-log inversion or global tetration.
 
 **Remaining max-cut:** P0 Agda 2.9 \`--safe\` acceptance/repair; P1 all-degree even/odd series reindexing and actual limit identification; P1 full Cartesian exp = factorial complex series using the original Bishop exponential Cauchy-product / limit theorem; P1 finite exp-log rational coefficient proof within Agda and Bishop composition tail exchange; selected upper fixed point and reciprocal radius; Koenigs/Abel/global Kneser; independent original modular j and Kouznetsov contours.
+
+
+## 2026-11-11 — P1 original Bishop sine/cosine finite-interleaving cut
+
+**Source-written; Agda kernel acceptance pending.** New original-carrier modules and exact proof owners:
+
+1. \`DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisTwoStepExact.agda\`
+   - \`originalBishopImaginaryAxisDoubleMultiply\`, \`originalBishopImaginaryAxisPowerTwoStep\`: every \(n\), \((iy)^{n+2}\approx_C(-y^2)(iy)^n\).
+   - \`originalBishopImaginaryAxisEvenPower\`, \`originalBishopImaginaryAxisOddPower\`: every \(k\), \((iy)^{2k}\approx_C((-y^2)^k,0)\) and \((iy)^{2k+1}\approx_C(0,y(-y^2)^k)\).
+   - Same-source factorial coefficient even/odd coordinate corollaries.
+2. \`DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisSignedTermsExact.agda\`
+   - Reuses \`BalabanBishopFactorialPowerRecurrenceExact.powTwoStep\`, \`BishopNegativeExponentialInterlacingExact.powNegativeByAlternatingSign\`, and the *original* concrete \`BalabanBishopConcreteSineCosineTermParityExact\` signed factorial definitions.
+   - Establishes \((-y^2)^k\simeq(-1)^ky^{2k}\) and \(y(-y^2)^k\simeq(-1)^ky^{2k+1}\).
+   - \`originalBishopImaginaryAxisCosineSignedTerm\`, \`originalBishopImaginaryAxisSineSignedTerm\` identify **the actual factorial complex coefficients** with the actual signed Bishop sine/cosine coefficients.
+   - \`originalBishopImaginaryAxisCosineConfiguredTerm\`, \`originalBishopImaginaryAxisSineConfiguredTerm\` transport via the *pre-existing* \`ConcreteSineCosineTermIdentification (dataSet T)\` (not an invented source).
+   - Finite partial-sum equality and convergence of both parity-subseries to original \`Elementary.bishopCos\` and \`Elementary.bishopSin\`, using Bishop sequence limit transport, with no new convergence fields.
+3. \`DASHI/Foundations/BishopFiniteEvenOddSeriesReindexExact.agda\`
+   - \`oddExponentIsSuccessorEven\` and \`originalBishopFiniteEvenOddSumReindex\`: **universal all-\(N\) finite identity**
+   \[
+   \sum_{k<2N} f(k)\simeq \sum_{k<N} f(2k)+\sum_{k<N} f(2k+1).
+   \]
+   - Uses the same even/odd exponent definitions as the concrete Bishop sine/cosine owners and the original Bishop \`∑₀\`.
+4. \`DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisFiniteReindexExact.agda\`
+   - Finite zero-component sums from the actual original term source.
+   - \`originalBishopImaginaryAxisRealPrefix2NIsCosine\`: first \(2N\) factorial complex terms' real sum equals the first \(N\) **configured** Bishop cosine terms.
+   - \`originalBishopImaginaryAxisImagPrefix2NIsSine\`: corresponding imaginary sum equals the configured Bishop sine prefix.
+   - \`originalBishopImaginaryAxisRealEvenPrefixConvergesToCosine\` and \`originalBishopImaginaryAxisImagEvenPrefixConvergesToSine\`: the **contiguous full factorial series even-cutoff subsequences** converge to the same original Bishop cos/sin limits.
+
+**Proof-boundary note:** The above all-degree finite equalities and even-cutoff limit arguments are source-written and connected, but have not yet passed Agda 2.9 \`--safe\`. They do **not yet identify the full factorial complex series for arbitrary imaginary inputs with \`BishopSetoidComplexExact.expC T\`**: the odd-cutoff control (vanishing omitted term), all-input factorial convergence, and the full real/imaginary Cartesian Cauchy-product weld remain. These are precise remaining next-original-source proofs; not merely interface records.
+
+**Remaining P1 onward** after kernel verification: (a) all-cutoff Bishop imaginary-axis factorial series limit; (b) original \(e^{x+iy}=e^x(\cos y+i\sin y)\) from literal series Cauchy product; (c) original \(\exp_C L(w)=1+w\) via all-degree nested-composition coefficient equality and uniform Bishop majorant; (d) construct original upper exponential fixed point, reciprocal disk, derivative/Koenigs/Abel and global Kneser; (e) true selected Bishop modular \(q\), \(\Delta\), \(j\), and later observer/contour claims.
