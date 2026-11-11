@@ -38,6 +38,6 @@ r["checked_modules"]=[
     "DASHI/Reasoning/MoEOutOfCoreStreamingFiniteExact.agda",
 ]
 r["release_admitted"]=False
-p.write_text(json.dumps(r,indent=2,sort_keys=True)+"\\n")
+p.write_text(json.dumps(r,indent=2,sort_keys=True)+"\n")
 PY
 printf '%s\n' 'FINITE KERNEL GATE PASS; original Qwen/LILA source execution, network, cryptography, GPU and deployment remain UNCHECKED.'
