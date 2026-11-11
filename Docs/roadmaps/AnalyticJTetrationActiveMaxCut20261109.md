@@ -449,3 +449,16 @@ These are the exact algebraic reconstruction equations required to infer \(\exp_
 - P2 true Bishop trigonometric period, q-parametrization and selected j; P3/P4 fine observer and contour certification.
 
 **Status:** generic Bishop reciprocal construction was already provided by earlier prior art; original chart algebra is source-written. No claim of global Kneser, selected exponential fixed point, or original analytic exp–log inverse completion.
+
+
+### 2026-11-11 P1 normalization cut actually compiled at source level (Agda kernel pending)
+
+Extended \`DASHI/Moonshine/AbelBishopSelectedLogAffineReconstructionExact.agda\` with exact original Bishop-complex norm-square transport:
+\[
+N(p^{-1}t)\simeq N(p)^{-1}N(t)
+\]
+using **existing** \`BishopComplexReciprocalExact.normSquareReciprocal\` and \`BishopComplexNormSquarePowerEnvelopeExact.normSqMultiply\`. The same file proves **relative radius discharge**: from original \`BishopComplexNonzero p\`, \`Unit.BishopUnitIntervalRatio r\`, and \(N(t)\simeq r^2N(p)\), derive \(N(p^{-1}t)\simeq r^2\) with the *actual* Bishop scalar inverse identity. This is no new geometric/radius authority.
+
+Next, \`originalBishopSelectedChartLogSeries\` and \`originalBishopSelectedChartLogSeriesConverges\` **construct** the actual alternating Bishop-complex logarithmic series limit and a componentwise convergence proof for the normalized displacement \`reciprocalC p nz *C t\`, directly from the original \`AbelBishopLogOnePlusCoefficientDominationExact\` convergence result. This closes a useful **generic relative-radius-to-canonical-series consumer** without inserting an independent \`ComponentwiseAbsoluteSeriesConvergent\` or arbitrary logarithm package.
+
+**Do NOT promote:** still source-written only; a compiled kernel receipt has not been obtained. The selected nonreal exponential fixed point \(p\) and its apartness, original exponential addition identity, complex exp–log analytic inverse, quadratic normal-form remainder and holomorphic Koenigs all remain open. Crucially, this source uses an **exact relative-radius witness** \(N(t)\simeq r^2N(p)\) rather than claiming every point of a fixed disk possesses a uniform exact-norm radius automatically; completing the actual disk application requires constructing a suitable such radius witness (or a bound-based variant).
