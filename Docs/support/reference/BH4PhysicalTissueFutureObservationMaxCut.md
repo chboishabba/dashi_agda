@@ -755,3 +755,50 @@ Still OPEN: prove the 27×29×54 incidence Fubini sum equals the existing actual
 The companion BH4 Golden now imports `BH4ComputedRationalSixDefectCompositionExact`. Its new `OriginalSourceLocalConservation` requires **per-species transport column cancellation** and **six reaction weighted-balance witnesses** for the *same* typed original-dimension rational inputs, not six arbitrary global zero receipts. It combines the existing `BH4RationalSemidiscreteBilinearityExact` and `BH4RationalFiniteFubiniExact` to derive `originalComputedRHSSixZeroDefects`, then feeds those exact computed-RHS proofs to the pinned Bishop-real conservation lift.
 
 This is source-written on #1454 only; **no original source-dependent local receipt has yet been inhabited**, and no Agda 2.9 kernel receipt exists. The remaining exact mathematical seam is linking source-native `sourceNativeColumnZero` and generated original 29×12 Rhea gross-column identities to these two local receipt fields for arbitrary rational fluxes and rates. Do not claim a same-state tissue step, measured SG physics, membrane/electrode work, finite Brouwer, or empirical validation from the abstract composition. No cross-PR import is claimed.
+
+
+### 2026-11-11 exact computed-rational PNP RHS Fubini and local-to-Bishop seam
+
+BH4/PNP companion PR #1454 now carries
+`BH4RationalFiniteFubiniExact` and
+`BH4OriginalComputedRationalRHSSplitExact`,
+registered in the authoritative BH4 Golden import
+root. These source-written Agda owners reuse the
+existing `BH4OriginalRationalSemidiscreteOperatorExact`
+rather than duplicating its selected 27×29 RHS
+or inventing source fluxes.
+
+They derive the precise rational weighted-Fubini
+and transport/reaction splitting identities for
+the 783 computed coordinates, then package
+`originalComputedSixAxisZeroFromLocal`:
+six global CHNOP/signed-charge conservation
+defects are derived from 29 **per-species
+transport cancellations** and six **per-axis
+reaction neutralities**. The corresponding
+`originalComputedSixAxisBishopFromLocal`
+transports those derived rational zeros using
+the previously existing Bishop-real
+`computedRationalRHSConservationLiftsToBishop`.
+There is no input of an arbitrary six-axis
+global zero receipt.
+
+The symbolic source-index proof uses explicit
+lookup-after-tabulation and zipWith-at-Fin
+identities rather than incorrectly assuming
+arbitrary Fin lookups reduce by `refl`.
+
+Remaining exact same-source kernel leaves:
+obtain 29 per-species cancellations from the
+literal original 27×54 incidence and its 54
+closed rational zero-column clauses; obtain
+six reaction neutralities from the generated
+same-Rhea 72 rational CHNOP/charge column
+proofs. Then instantiate the theorem and
+Agda-2.9 check the transitive Golden root.
+Genuine physical Bishop-real SG/rate laws,
+compact-simplex/Brouwer/positive implicit
+root, original six-face boundary work,
+same-object tissue interpretation and
+held-out longitudinal validation remain
+independent OPEN science gates.
