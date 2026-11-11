@@ -8,6 +8,8 @@ module DASHI.Governance.SituatedBiomarkerPNFSourceWeldExact where
 -- procedures are not silenced by this type.
 open import DASHI.Core.Prelude
 import DASHI.Cognition.PNF.EventAlgebra as PNF
+import DASHI.Cognition.PNF.OperationalIR as IR
+import DASHI.Cognition.PNF.CandidateInvalidation as Invalidation
 import DASHI.Interop.PNFSpectralNumericABICore as NumericABI
 import DASHI.Interop.SensibLawSemanticPromotionPolicy as Semantic
 import DASHI.Algebra.TetralemmaBridge as Tetralemma
@@ -96,3 +98,71 @@ finiteDevelopmentalUltrametric :
 finiteDevelopmentalUltrametric = Dev.treeDistanceStrongTriangle
 
 -- No legalized harm coordinate is constructed by this module.
+
+-- Preserve the original staged PNF/IR objects. An operational IR may
+-- be constructed with an operationallyValid flag; that says nothing
+-- about whether the defendant-specific physiological harm is proved.
+selectedCandidateFromResolution : PNF.ResolvedPNF → PNF.CandidatePNF
+selectedCandidateFromResolution resolved =
+  PNF.AdmissiblePNF.candidate (PNF.ResolvedPNF.selected resolved)
+
+selectedCandidateValidityFromResolution :
+  (resolved : PNF.ResolvedPNF) →
+  PNF.validity (selectedCandidateFromResolution resolved) ≡ PNF.admissible
+selectedCandidateValidityFromResolution resolved =
+  PNF.AdmissiblePNF.candidateIsAdmissible
+    (PNF.ResolvedPNF.selected resolved)
+
+-- This is a STRUCTURAL source projection only, using the pre-existing
+-- legalProjection constructor. It is not an authorized legal judgement.
+exampleStructuralLegalIR :
+  PNF.ResolvedPNF → IR.DomainIR
+exampleStructuralLegalIR r =
+  IR.legalProjection r
+    "hypothetical actor" "hypothetical environmental exposure"
+    "unproven physiological injury" "candidate-only"
+    "requires source-matched timeline" "competing causes unresolved"
+    "jurisdiction not assessed"
+
+exampleIRIsOperationalShapeOnly :
+  (r : PNF.ResolvedPNF) →
+  IR.validationState (exampleStructuralLegalIR r) ≡ IR.operationallyValid
+exampleIRIsOperationalShapeOnly r = refl
+
+-- External legal certification must carry proof that cannot be discharged
+-- by the operational flag, a cortisol reading, heuristic MDL or a trit.
+record IndependentlyReviewedLegalUse
+  (Case : Set)
+  (legalCase : Case)
+  (resolved : PNF.ResolvedPNF) : Set where
+  field
+    projectedIR : IR.DomainIR
+    selectedSourcePreserved :
+      IR.sourcePNF projectedIR ≡ resolved
+    legalDomainOnly : IR.domain projectedIR ≡ IR.legalDomain
+    SourceAuthentication : Set
+    IndependentClinicalEvidence : Set
+    DefendantSpecificAttribution : Set
+    LegallyReviewedHarmElements : Set
+    AuthorizedDisposition : Set
+    originalSourcePaid : SourceAuthentication
+    medicalOrPhysiologyPaid : IndependentClinicalEvidence
+    specificCausalEvidencePaid : DefendantSpecificAttribution
+    legalStandardsPaid : LegallyReviewedHarmElements
+    adjudicationPaid : AuthorizedDisposition
+
+open IndependentlyReviewedLegalUse public
+
+legalUseRequiresAdjudication :
+  ∀ {Case : Set} {caseKey : Case} {resolved : PNF.ResolvedPNF} →
+  (receipt : IndependentlyReviewedLegalUse Case caseKey resolved) →
+  AuthorizedDisposition receipt
+legalUseRequiresAdjudication = adjudicationPaid
+
+-- The canonical invalidation check is retained, not bypassed.
+invalidatedSourceCannotBecomeAdmissible :
+  (receipt : Invalidation.PNFInvalidationReceipt) →
+  PNF.validity (Invalidation.invalidatedCandidate receipt)
+    ≡ PNF.admissible → ⊥
+invalidatedSourceCannotBecomeAdmissible =
+  Invalidation.invalidatedCannotBeAdmitted
