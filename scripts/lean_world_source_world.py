@@ -120,7 +120,13 @@ class SourceWorldBuilder:
         return count
 
     def manifest(self):
-        for key in sorted(self._by_origin):
+        # SourceOrigin is intentionally a value object, not an ordering type.
+        # Use its stable provenance tuple for deterministic manifests instead
+        # of relying on dataclass ordering being enabled.
+        for key in sorted(self._by_origin,
+                          key=lambda origin: (origin.repository,
+                                              origin.revision,
+                                              origin.path)):
             record = dict(self._by_origin[key])
             record["kind"] = "world-source-occurrence"
             # Deliberately no elaboration/statement identity.

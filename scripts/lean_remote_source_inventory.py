@@ -80,8 +80,13 @@ def repository_tree(repo: str, commit: str, *, token: str | None = None,
                 or item.get("mode") not in ("100644", "100755")):
             continue   # exclude submodules, symlinks, directories
         path, sha, size = item.get("path"), item.get("sha"), item.get("size")
-        if (not isinstance(path, str) or not path.endswith(".lean")
-                or path.startswith("/") or chr(0) in path
+        # Repository trees contain READMEs, workflows and other blobs.  They
+        # are outside this Lean-source inventory and must be filtered before
+        # Lean-path metadata validation; malformed Lean entries still fail
+        # closed below.
+        if not isinstance(path, str) or not path.endswith(".lean"):
+            continue
+        if (path.startswith("/") or chr(0) in path
                 or any(part in ("", ".", "..") for part in path.split("/"))
                 or not isinstance(sha, str) or not SHA_RE.fullmatch(sha)
                 or type(size) is not int or size < 0):
