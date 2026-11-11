@@ -1,3 +1,12 @@
+## 2026-11-11 highest-alpha new F2.2 leaf and K0 execution correction
+
+**Concrete Agda source** `Karp21NativePositiveThresholdInputWidthExact` now contains `originalPositiveThresholdRegisterSuffixCharge` and `actualWholeBinaryPositiveThresholdRegisterFitsOriginalWord`: after the ACTUAL strictly-positive gamma W reader produces an LE register, its bit length plus the parser's untouched suffix fits the original field source bits, and a successfully parsed complete original N21 binary graph's retained W register fits the length of the original graph word. This pays another F2.2 *retained register payload* source candidate, not heap/list/stack/tape allocation. Imported into both Karp Golden roots and added to focused Agda kernel targets. Its independently executed local finite mirror passes **85,535/85,535** cases; reproducible `scripts/check_karp21_positive_threshold_input_width.py` committed and added to preflight.
+
+**K0 correction:** The focused `kernel-cut` referee now *actually includes* the original all-word B6 graph/verifier, D2 old raw-list cross-state/terminal boundary, E1 complete selected-event trace, E2 typed acceptance, and all F2/G3 owners. Previously it could report success without checking those theorem owners. Agda 2.9 wrapper now refuses other version numbers, including a wrong PATH-only Agda. Referee recognizes executable `AGDA_BIN`, PATH Agda, or Nix, and skips Python only for focused kernel checking. This is a direct local check, not CI.
+
+**Honest gate status:** This run authored new source and executed the independent 85,535-case threshold regression. No Agda or Nix executable is installed in this container, so no new Agda theorem was kernel-accepted. The F2.2 remaining live-heap leaves are peak parser copies/reverse/suffix buffers, graph/history cons/pointer/record tags, intermediate registers and stack under a selected physical representation. F1 actual bit tape/cell/head machine, F3 instruction simulation, F4 original bit-TM polynomial clock, G2/G3 typed PR cost-model witnesses, G4 `originalN21InNP`, original E20 Cook–Levin and Karp network, and separate universal SATNotInP remain open. Do not claim P≠NP.
+
+
 # Karp-21 / FRACDASH — actual mathematical cut, no wrapper inflation (9 Nov 2026)
 
 **Source of truth:** PR #1474, `chatgpt/conway-karp-gamma-weld-20261106`; original Karp PR #1445; original P≠NP PR #1129. Refer to `Karp21FRACDASHMachineMaxCut20261109.md` for historical notes. This document records what must be **implemented and checked** before any gate is called closed.
