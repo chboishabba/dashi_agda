@@ -107,7 +107,8 @@ def validate_through_builder(export: PendingExport, builder: AuthoritativeBuilde
         or not outcome.builder_id
         or not isinstance(outcome.checker_receipt_sha256, str)
         or not HEX64.fullmatch(outcome.checker_receipt_sha256)
-        or outcome.dag_validated is not True):
+        or outcome.dag_validated is not True
+        or outcome.kernel_certified is not False):
         raise ContractError("unbound or incomplete validator evidence")
     ids = outcome.node_ids
     if not ids or len(set(ids)) != len(ids) or any(not isinstance(x, str) or not x for x in ids):
@@ -115,6 +116,6 @@ def validate_through_builder(export: PendingExport, builder: AuthoritativeBuilde
     if any(not isinstance(e, tuple) or len(e) != 2 or e[0] not in ids or e[1] not in ids
            for e in outcome.edges):
         raise ContractError("unresolved dependency reference")
-    # A caller must independently authenticate and audit the actual validator.
+    # Fake builder claims cannot upgrade a proof. Authenticate the external validator independently.
     # This result never changes a queued manifest or authorizes world admission.
     return outcome
