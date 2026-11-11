@@ -13,6 +13,7 @@ import argparse
 import hashlib
 import json
 import math
+from fractions import Fraction
 from pathlib import Path
 import sys
 
@@ -21,7 +22,7 @@ import numpy as np
 from check_bh4_original_panel_spatial_events import (
     check_certificate, load_original_receipt_json,
 )
-from reactive_pnp_369 import (Model, implicit_step,
+from reactive_pnp_369 import (BONDS, Model, implicit_step,
     global_positive_implicit_brouwer_bounds)
 from build_bh4_stoichiometric_matrix import participant_key
 
@@ -249,6 +250,107 @@ def source_bound_closed_brouwer_existence(
         "original_tissue_observer_one_step_proven":False,
         "agda_kernel_checked":False,
     }
+
+
+def original_closed_rational_semidiscrete_conservation(
+    source_bytes: bytes, *, pinned_sha256: str,
+    signed_native_bond_fluxes, signed_original_reaction_rates
+):
+    """Exact ℚ accounting bridge for 27 sites × 29 species × 12 reactions.
+
+    For ANY supplied rational flux on the native 54 bonds and ANY
+    rational original reaction rate per 27 sites, the closed RHS
+       -div_native(J) + S @ rates
+    must conserve all five source CHNOP totals and signed charge.
+    This does NOT assume numerical SG Bernoulli values are rational,
+    prove arbitrary real-valued PNP continuity, or create source rates.
+    Only the original full-panel checker supplies the 29x12 S/weights.
+    """
+    if not isinstance(source_bytes,bytes):
+        raise ValueError("original source bytes required")
+    digest=hashlib.sha256(source_bytes).hexdigest()
+    if (not isinstance(pinned_sha256,str)
+            or len(pinned_sha256)!=64
+            or pinned_sha256.lower()!=digest):
+        raise ValueError("original source digest mismatch")
+    certificate=load_original_receipt_json(source_bytes.decode("utf-8"))
+    matrix,by_species=check_certificate(certificate,full_panel=True)
+    species=matrix["species_index"]
+    rows=matrix["matrix"]
+    if (len(species)!=29 or len(rows)!=29 or
+            any(len(row)!=12 or any(type(n) is not int for n in row)
+                for row in rows)):
+        raise ValueError("original exact 29x12 integer reaction matrix required")
+    if len(BONDS)!=54 or len(signed_native_bond_fluxes)!=54:
+        raise ValueError("all original 54 signed bond flux rows required")
+    if len(signed_original_reaction_rates)!=27:
+        raise ValueError("all 27 source voxel reaction-rate rows required")
+
+    def exact_q(value):
+        if type(value) is int:
+            return Fraction(value)
+        if isinstance(value,Fraction):
+            return value
+        if isinstance(value,str) and value.strip() == value:
+            try:
+                return Fraction(value)
+            except (ValueError,ZeroDivisionError,OverflowError) as exc:
+                raise ValueError("invalid exact rational input") from exc
+        raise ValueError("actual rational string/Fraction/integer required, not binary float or bool")
+
+    flux=[]
+    for row in signed_native_bond_fluxes:
+        if len(row)!=29:
+            raise ValueError("original bond requires exactly 29 species fluxes")
+        flux.append([exact_q(x) for x in row])
+    rates=[]
+    for row in signed_original_reaction_rates:
+        if len(row)!=12:
+            raise ValueError("original voxel requires exactly 12 reaction rates")
+        rates.append([exact_q(x) for x in row])
+    rhs=[[Fraction(0) for _ in range(29)] for _ in range(27)]
+    for edge,(a,b) in enumerate(BONDS):
+        for i,value in enumerate(flux[edge]):
+            rhs[a][i]-=value
+            rhs[b][i]+=value
+    for v in range(27):
+        for i in range(29):
+            rhs[v][i]+=sum((rows[i][j]*rates[v][j]
+                           for j in range(12)),Fraction(0))
+    weights=[]
+    for element in ("C","H","N","O","P"):
+        weights.append([
+            by_species[key][0].get(element,0) for key in species])
+    weights.append([by_species[key][1] for key in species])
+    if any(len(w)!=29 or any(type(n) is not int for n in w)
+           for w in weights):
+        raise ValueError("original source atom and signed charge integers required")
+    # Independent exact left-kernel check; neither rounded floating
+    # S nor metadata equality is accepted as a rational proof input.
+    for coord,w in enumerate(weights):
+        for j in range(12):
+            if sum(w[i]*rows[i][j] for i in range(29))!=0:
+                raise ValueError(f"source column {j} violates exact conserved coordinate {coord}")
+    defects=[
+        sum((rhs[v][i]*w[i] for v in range(27)
+             for i in range(29)),Fraction(0))
+        for w in weights]
+    if any(defect!=0 for defect in defects):
+        raise AssertionError("original rational 369 semidiscrete continuity failed")
+    return {
+        "kind":"dashi.bh4.original369x29x12.rational-closed-rhs.v1",
+        "source_sha256":digest,
+        "original_sites":27,
+        "original_native_bonds":54,
+        "original_finite_reactions":12,
+        "exact_CHNOP_and_signed_charge_defects":[str(x) for x in defects],
+        "exact_rational_rhs":[[str(x) for x in row] for row in rhs],
+        "signed_fluxes_and_rates_were_supplied_not_measured":True,
+        "original_Rhea_release_independently_authenticated":False,
+        "this_proves_real_SG_or_mass_action":False,
+        "agda_kernel_checked":False,
+    }
+
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
