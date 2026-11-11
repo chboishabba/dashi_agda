@@ -9,7 +9,7 @@ import hashlib,json,os,re,resource,signal,shutil,subprocess
 from pathlib import Path
 
 MODULE=re.compile(r"[A-Za-z_][A-Za-z0-9_'.]*(?:\.[A-Za-z_][A-Za-z0-9_']*)*\Z")
-IMPORT=re.compile(r"^\s*import\s+(.+?)\s*(?:--.*)?$",re.M)
+IMPORT=re.compile(r"^\s*(?:(?:public|protected)\s+)?import\s+(.+?)\s*(?:--.*)?$",re.M)
 class ClosureError(ValueError): pass
 
 def source_imports(raw:bytes)->tuple[str,...]:
