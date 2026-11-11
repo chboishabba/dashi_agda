@@ -27,6 +27,12 @@ fi
 MODULES=(
   DASHI/Biology/Molecular/BH4PanelStoichiometricMatrixExact.agda
   DASHI/Biology/Molecular/BH4PanelRateWeightedConservationExact.agda
+  # Authoritative exact 27x54/29x12 rational -> Bishop P0 source chain.
+  DASHI/Biology/Molecular/BH4OriginalNative369IncidenceExact.agda
+  DASHI/Biology/Molecular/BH4OriginalNativePerSpeciesCancellationExact.agda
+  DASHI/Biology/Molecular/BH4OriginalRationalReactionColumnKernelExact.agda
+  DASHI/Biology/Molecular/BH4OriginalComputedRationalRHSSplitExact.agda
+  DASHI/Biology/Molecular/BH4OriginalNativeComputedBishopConservationExact.agda
   DASHI/Biology/BH4OneMoleculeSpatialFutureMinimalityExact.agda
   DASHI/Biology/BH4SpatialOriginalQDPRStoichiometryExact.agda
   DASHI/Biology/BH4SharedSourceTargetRedoxDynamicsExact.agda
@@ -128,6 +134,18 @@ if [ "${BH4_REQUIRE_SOURCE_PAID:-0}" = "1" ]; then
     --certificate artifacts/biology/rhea-kitzerow-bh4-reactions.json \
     --expected-certificate-sha256 "$BH4_ORIGINAL_CERT_SHA256" \
     --output DASHI/Biology/Molecular/BH4Original29x12GeneratedSourceExact.agda
+  # Generated original source must expose its exact 72 net-column
+  # rational zero proofs AND the real computed-RHS Bishop consequence.
+  # String checks only gate completeness; Agda below is proof authority.
+  GENERATED_SOURCE=DASHI/Biology/Molecular/BH4Original29x12GeneratedSourceExact.agda
+  grep -q 'generatedRationalNetColumnsZero' "$GENERATED_SOURCE" || {
+    echo "FAIL CLOSED: original source missing signed-net 72-column proof" >&2
+    exit 2
+  }
+  grep -q 'generatedOriginalComputedSixAxisBishopConservation' "$GENERATED_SOURCE" || {
+    echo "FAIL CLOSED: original source missing computed Bishop RHS proof" >&2
+    exit 2
+  }
   bash scripts/run_agda29_parallel_check.sh \
     DASHI/Biology/KitzerowBH4Original29x12SourcePaidEverything.agda
 
