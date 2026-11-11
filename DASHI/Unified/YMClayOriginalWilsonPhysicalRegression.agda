@@ -105,3 +105,6 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalR445BoundedMomentMajorantsExact
 
 -- E1/A3 physical one-step RG error: exact original interacting Wilson cross numerator and all-weight unit cancellation, without bare-action closure.
 import DASHI.Physics.YangMills.YMClayE1A3OriginalR445WeightedCrossNumeratorExact as E1A3OriginalWeightedRGError
+
+-- E1/D1: same original fine-blocked vs bare Wilson weighted cross numerator invariant under arbitrary scalar constant-mode shifts; subtraction centering requires explicit selected scalar law.
+import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact as OriginalWilsonCrossNumeratorCentering
