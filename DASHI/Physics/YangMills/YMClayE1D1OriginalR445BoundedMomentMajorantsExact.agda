@@ -22,7 +22,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; subst)
 open import Data.Product using (_×_; _,_)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _<ℝ_; _≤ℝ_; absℝ; oneNonnegative)
+  using (ℝ; 0ℝ; 1ℝ; _+ℝ_; _*ℝ_; _-ℝ_; _<ℝ_; _≤ℝ_; absℝ; oneNonnegative)
 
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
@@ -34,6 +34,7 @@ import DASHI.Physics.YangMills.YMClayE1A3OriginalR445CrossCutoffSourceExact as C
 import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as Order
 import DASHI.Physics.YangMills.YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact as Quant
+import DASHI.Physics.YangMills.YMClayE1D1OriginalR445ThreeMomentRGCutExact as Source
 import DASHI.Physics.YangMills.YangMillsClayPinnedPhysicalCarriersExact as Physical
 
 module _
@@ -190,3 +191,75 @@ module _
           theory traceData exponential beta oneLink bilateral divide test)
         nonnegative))
       upper
+
+  ----------------------------------------------------------------------
+  -- P0 bounded-test source application: replace BOTH unverified
+  -- one-point majorants in the original quantitative R445 theorem by
+  -- exact literal 1ℝ using native original Wilson product-Haar bounds.
+  --
+  -- Still unpaid: ε_{FG}, ε_F, ε_G original RG moment error bounds.
+  ----------------------------------------------------------------------
+
+  originalR445CovarianceBoundForNativeUnitBoundedTests :
+    (left right leftComplement rightComplement : CoarseTest) →
+    (∀ coarse → 0ℝ ≤ℝ left coarse) →
+    (∀ coarse → 0ℝ ≤ℝ leftComplement coarse) →
+    (∀ coarse → left coarse +ℝ leftComplement coarse ≡ 1ℝ) →
+    (∀ coarse → 0ℝ ≤ℝ right coarse) →
+    (∀ coarse → 0ℝ ≤ℝ rightComplement coarse) →
+    (∀ coarse → right coarse +ℝ rightComplement coarse ≡ 1ℝ) →
+    (errorProduct errorLeft errorRight : ℝ) →
+    0ℝ ≤ℝ errorLeft →
+    0ℝ ≤ℝ errorRight →
+    absℝ
+      (Quant.effectiveMoment
+        theory traceData exponential beta oneLink bilateral divide
+        (Quant.productTest
+          theory traceData exponential beta oneLink bilateral divide
+          left right)
+       -ℝ
+       Quant.bareMoment
+         theory traceData exponential beta oneLink bilateral divide
+         (Quant.productTest
+           theory traceData exponential beta oneLink bilateral divide
+           left right))
+      ≤ℝ errorProduct →
+    absℝ
+      (Quant.effectiveMoment
+        theory traceData exponential beta oneLink bilateral divide left
+       -ℝ
+       Quant.bareMoment
+         theory traceData exponential beta oneLink bilateral divide left)
+      ≤ℝ errorLeft →
+    absℝ
+      (Quant.effectiveMoment
+        theory traceData exponential beta oneLink bilateral divide right
+       -ℝ
+       Quant.bareMoment
+         theory traceData exponential beta oneLink bilateral divide right)
+      ≤ℝ errorRight →
+    absℝ
+      (Source.sourceEffectiveCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right
+       -ℝ
+       Source.sourceBareCovariance
+        theory traceData exponential beta oneLink bilateral divide
+        left right)
+    ≤ℝ
+      errorProduct +ℝ ((errorLeft *ℝ 1ℝ) +ℝ (1ℝ *ℝ errorRight))
+  originalR445CovarianceBoundForNativeUnitBoundedTests
+    left right leftComplement rightComplement
+    leftNN leftComplementNN leftCompletes
+    rightNN rightComplementNN rightCompletes
+    errP errL errR errLNN errRNN productError leftError rightError =
+    Quant.originalR445CovarianceErrorFromThreeSourceMoments
+      theory traceData exponential beta oneLink bilateral divide
+      left right errP errL errR 1ℝ 1ℝ
+      errLNN oneNonnegative oneNonnegative errRNN
+      productError leftError
+      (originalEffectiveMomentAbsoluteAtMostOne
+        right rightComplement rightNN rightComplementNN rightCompletes)
+      (originalBareMomentAbsoluteAtMostOne
+        left leftComplement leftNN leftComplementNN leftCompletes)
+      rightError
