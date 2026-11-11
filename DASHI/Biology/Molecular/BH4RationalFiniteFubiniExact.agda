@@ -7,6 +7,7 @@ module DASHI.Biology.Molecular.BH4RationalFiniteFubiniExact where
 
 open import DASHI.Core.Prelude
 import Data.Vec.Base as V
+import Data.Fin.Base as F
 import Data.Rational.Unnormalised as Q
 import Data.Rational.Unnormalised.Properties as QP
 import NonReflectiveQ as QSolver
@@ -18,13 +19,13 @@ qFiniteSum (V._∷_ x xs) =
 
 qFiniteSumCong :
   ∀ {n} (left right : V.Vec Q.ℚᵘ n) →
-  ((i : Data.Fin.Base.Fin n) →
+  ((i : F.Fin n) →
     Q._≃_ (V.lookup left i) (V.lookup right i)) →
   Q._≃_ (qFiniteSum left) (qFiniteSum right)
 qFiniteSumCong V.[] V.[] same = QP.≃-refl
 qFiniteSumCong (V._∷_ x xs) (V._∷_ y ys) same =
-  QP.+-cong (same Data.Fin.Base.zero)
-    (qFiniteSumCong xs ys (λ i → same (Data.Fin.Base.suc i)))
+  QP.+-cong (same F.zero)
+    (qFiniteSumCong xs ys (λ i → same (F.suc i)))
 
 qShuffle : ∀ a b c d →
   Q._≃_ (Q._+_ (Q._+_ a b) (Q._+_ c d))
