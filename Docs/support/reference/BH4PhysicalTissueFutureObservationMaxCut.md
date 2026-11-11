@@ -629,3 +629,12 @@ remains a single actual source/time/space PNP transition
 with a proven observation refinement and selected
 boundary work; native Agda and Python tests on the
 new heads are pending.
+
+
+### 2026-11-11 cross-PR rational-to-Bishop finite conservation lift (BH4 #1454)
+
+The BH4/PNP branch now carries `DASHI.Biology.Molecular.BH4RationalToBishopFiniteContinuityExact`, source-written and Golden-imported on **#1454 only**, with `original369SixRationalConservationLiftsToBishop`. It reuses the existing pinned Bishop `Real`/`RealProperties` rational embedding, transports finite rational sums/products into Bishop-real **setoid equivalence**, and specializes the finite chart to 27 sites × 29 species with six C/H/N/O/P/signed-charge weight vectors. Its premises are the six exact source-matched rational zero-defects, expressed via rational setoid equivalence rather than propositional equality of unnormalised representatives. This is a conditional algebraic lift, not an original real-valued SG flux result.
+
+**Branch/evidence boundary:** the module is present on #1454, not imported on this separate #1471 tissue branch. No compatible branch merge, original authenticated Rhea source inhabitant, real SG kinetic law, membrane/electrode work, finite weighted-real simplex compactness/Brouwer producer, positive implicit physical root, or same-source tissue event projection is constructed here. Both branches still require Agda 2.9 exact-head kernel checks. Do not identify a rational numerical RHS with the real transcendental PNP vector field without a separate exact operator theorem.
+
+**Highest-alpha cross-branch next cut:** integrate native signed/face continuity from #1471 with the source-paid rational 27×29×12 semidiscrete RHS and six-axis Bishop lift from #1454 on one reconciled original physical-state carrier; prove source-to-real reaction/transport operator agreement and correct source-paid boundary terms. Reuse both existing Golden owners rather than producing a third independent geometry.
