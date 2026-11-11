@@ -1022,3 +1022,30 @@ Bishop analytic P1 exp/atan, P2 independent analytic zeta,
 P3 Gamma/Xi remain open. NO new Agda kernel receipt;
 source-written only. Details:
 `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
+
+
+### 2026-11-11: source-owned complete finite Heisenberg group laws on 13 words
+
+`TernaryThirteenOriginalHeisenbergTransportedGroupLawsExact`
+now proves original transported nonabelian group associativity,
+both identity laws, both inverse laws and source generator
+noncommutativity on the genuine `TritWord 13` carrier,
+reusing the already-existing full
+`Monster3BFiniteHeisenbergAssociativityExact` and
+`Monster3BFiniteHeisenbergInverseExact` owners.
+`commutativeSemanticCompletionCannotAgree` proves any
+commutative candidate on these words fails to be the same
+operation as the original Heisenberg group law.
+
+A finite independent mod-3 cocycle check passed basis
+identity/inverse checks and 10,000 seeded associativity
+triples. Source Agda kernel acceptance remains OPEN.
+
+H1.01 thus has complete source-written *finite group
+structure*, but the external semantic decision that the
+original appraisal/ITIR/Monster intended completion is
+this same group, with action/consumer equivariance, remains
+OPEN. The source 144-cell relation field is still larger.
+Bishop P1 original analytic exp/atan, P2 independent zeta
+and P3 Gamma/Xi remain analytically open.
+Details: `Docs/roadmaps/BishopHyperform13PunctureMaxCut20261109.md`.
