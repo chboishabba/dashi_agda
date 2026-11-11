@@ -108,3 +108,63 @@ For steering: random unit and equal-norm control, shuffled labels, layer/site sw
 (1) Fetch exact PR #1094/#1095/#1265/#1442 heads and source owners, resolve master vs branch without treating PR text as kernel proofs. (2) Build A01/M02/S01 source maps and F01 kernel receipts. (3) Prove S04 and R05 finite counterexamples by reuse before proposing a universal positive theorem. (4) Complete A05–A06 and actual original-model loss weld. (5) Only then commission matched geometry×MoE×steering execution using existing DASHIg training evidence and original LILA checkpoints.
 
 **Release firewall:** No claimed LILA superiority, neuron semantic identity, expert-to-brain equivalence, universal grokking mechanism, trained E8 representation or verified neural implementation until original-source, kernel and empirical obligations are separately paid.
+
+## 2026-11-11 continuation: storage-tiered Qwen / out-of-core MoE maximum cut
+
+### Attribution and verified-source comparison
+
+**Qwen Team (original model/architecture):** `Qwen/Qwen3-Next-80B-A3B-Instruct` model card https://huggingface.co/Qwen/Qwen3-Next-80B-A3B-Instruct and original Qwen3-Next architecture blog https://qwen.ai/blog?from=home.latest-research-list&id=e34c4305036ce60d55a0791b170337c2. Reported 80B total, ~3B active per token, 48 hybrid DeltaNet/attention layers; 512 routed experts, top-10 plus one shared expert per MoE layer. **3B active ≠ 3B resident**. Benchmark comparisons are Qwen author's reports, not DASHI replication.
+
+**oLLM:** https://github.com/Mega4alik/ollm (author's primary repo; do not assign ownership based on an unattributed search summary). Reports 80B bf16, 50k context on 8 GB RTX 3060 Ti, ~7.5 GB VRAM / 180 GB SSD, about **0.5 token/s**; layer-wise streaming and SSD KV offload. Numbers must remain benchmark-configuration-local.
+
+**AirLLM:** https://github.com/lyogavin/airllm. Author reports layer streaming, Qwen3-235B ~3 GB VRAM and 405B Llama 3.1 ~8 GB VRAM; these are **peak accelerator memory claims**, NOT claims of 3 GB system RAM/disk or conversational throughput. A large slow experiment is not a winning efficiency point without speed/energy/quality measurements. Source version and modern claims need pinning.
+
+**Swiftlet** (not “Swiftlit”): https://github.com/leonickson1/Swiftlet. Author reports Qwen3-Next-80B-A3B 4-bit ~42 GB disk, ~4.3 GB peak RAM and ~4.5–5 tokens/s on an **M5 Mac**, not arbitrary Apple hardware; retains small dense core, pages selected experts. Unified Apple memory differs from discrete PCIe VRAM+host RAM.
+
+**llama.cpp:** https://github.com/ggml-org/llama.cpp with upstream discussion https://github.com/ggml-org/llama.cpp/discussions/23324 (demand-paged expert slots, user PoC), https://github.com/ggml-org/llama.cpp/discussions/28248 (persistent expert slot pool and reported speedups), and command surface `--cpu-moe`, `--n-cpu-moe`, `--moe-cache-mib` on current docs. Precisely pin upstream revision, merged status and backend support; RFC measurements/forks cannot be promoted to upstream production or cross-platform facts.
+
+The AI Mode text conflates VRAM, physical RAM, quantised weights, storage footprint, model active compute, and real speed. A 4.3 GB *peak memory working set* with a ~42 GB disk model does not mean an 80B model is compressed losslessly into 4.3 GB. On old discrete AMD gfx803 GPUs, BF16/FlashAttention/CUDA-specific speed figures are **not** transferable: use ROCm/gfx803 compatibility findings, validated Nix builds, verified numerics and explicit CPU fallback as independent gates. No assumption of a working GPU kernel.
+
+### Third execution axis: compute, residency, and semantic control
+
+Let a source MoE run be `F_theta(x,h)`. The out-of-core state extends the earlier whole learner:
+`C_t=(model_revision,quant_revision,expert_file_manifest,residency_GPU,residency_RAM,page_cache,slot_map,LRU,dirty_generation,load_inflight,KV_cache,workspace,router_state,rng,backend,precision,provenance)_t`.
+For each layer and batch, route IDs `E_t=TopK(router_theta(x_t))`; ensure the matching *weight revision and dtype* is fetched or cached in a valid slot, synchronize all DMA/fences, remap expert indices consistently, execute shared and selected experts, apply gated mixing, then commit cache transitions. A router decision is an input to the scheduler, not an excuse to change the model output. A trained-geometry hypothesis may *predict* expert locality/cache hits but does not prove it.
+
+**Correctness:** under exact non-quantized arithmetic and a lossless storage codec, `F_out-of-core(x,h,C)=F_resident(x,h)` for the same model, routing, KV and outputs. Under quantisation/floating execution, replace equality by separately proved bounded per-layer error **plus** router-margin stability, or compare explicit deviations. Cache hits and misses must not change semantic output absent allowed numerical nondeterminism. When steering changes the pre-router state, recompute expert IDs and invalidate/reselect prefetches; pre-routing steering cannot be treated as post-routing neuron editing.
+
+**Scheduling costs:** let `W_e` be bytes per selected expert, `M` cache misses, `B` effective SSD or PCIe transfer bandwidth, `L` per-fetch latency. A lower bound for sequential miss transfer is `T_transfer >= sum_miss(W_e)/B` (assuming sustained bandwidth B), plus command/latency and any non-overlapped compute, not a blanket model-speed theorem. Decode vs prefill have different unique expert working sets and cache effects; long context adds KV and/or DeltaNet-state requirements. Compare cold start, cold prefill, warm decode, worst-case routing and continuous operation; report SSD wear and read bytes as well as Joules.
+
+### New exact remaining obligations (storage-tiered extension)
+
+| ID | Priority | Proposed exact obligation | Proof / executable receipt |
+|---|---|---|---|
+| X01 | P0 | `originalQwenConfigWeightAndExpertManifest` | Pin official model, config, tokenizer, weight SHA and expert tensor offsets/layout |
+| X02 | P0 | `routeSelectedExpertIsFetchedWeight` | Top-k selected global ID → exact matching loaded expert/revision |
+| X03 | P0 | `expertSlotMapInjectiveForResidentSet` | No two live experts overwrite one occupied slot; alias/eviction lifecycle |
+| X04 | P0 | `cacheHitMissObservationalEquivalence` | Same model output for hit, miss and eviction against resident reference |
+| X05 | P0 | `cacheRevisionInvalidationSound` | Checkpoint/quant/adapter changes reject stale cached experts |
+| X06 | P0 | `inflightReadFenceBeforeExpertExecution` | Fetch staging and DMA complete before kernel reads; no stale/torn weights |
+| X07 | P0 | `boundedGpuRamWorkspaceAccounted` | Real peak device, RAM, cache, KV and workspaces under configured limits |
+| X08 | P0 | `prefillUniqueExpertsCapacitySafe` | Batch/ubatch admits selected distinct experts or safe fallback; no silent drop |
+| X09 | P1 | `streamedVsResidentQuantizedErrorBound` | Quant/codecs/numeric accumulation, calibrated tolerance and router-margin caveat |
+| X10 | P1 | `steeringPrefetchInvalidationAndReplay` | Intervention before routing invalidates speculative expert selection and replays correctly |
+| X11 | P1 | `expertCacheReplacementNoSemanticChange` | LRU/other replacement changes time and state, not model output |
+| X12 | P1 | `storageBandwidthLatencyLowerBound` | Fetch volume, locality, transfer and sync overhead expressed with assumptions |
+| X13 | P1 | `expertHitLocalityConditionalPrediction` | Geometry/semantic prior predicts routing locality **only when measured and held out** |
+| X14 | P1 | `gpuKernelBackendNumericRefinement` | Supported backend and source kernel agreement; gfx803 separate release gate |
+| X15 | P2 | `moeOutOfCoreFullExecutionBidi` | Whole-sequence source/model/cache/KV trace with admissible numerical semantics |
+| X16 | P2 | `expertPrefetchParetoDominanceSound` | Peak VRAM, RAM, disk, prefill, decode, J/token, SSD traffic vs matched baselines |
+
+**Finite donor delivered in this continuation:** `DASHI/Reasoning/MoEOutOfCoreStreamingFiniteExact.agda`: finite two-expert selected demand-fetch equality, count inequality, changed-revision/stale cache counterexample, and pre-route vs post-route steering counterexample. It is intentionally source-independent, with no imports from Qwen or a runtime; **Agda kernel run not yet obtained**. This is not X02–X06 original-source closure. Do not mistake a synthetic proof for measured SSD/VRAM performance.
+
+### New phase and deliverable
+
+**Phase 2b — storage-tiered execution (precedes any claim of small-RAM deployment):**
+1. Pinned source owner atlas and exact weight manifest for original Qwen and relevant LILA/MoE variants (X01).
+2. Thin model-generic `StorageTier/Cache/TransferSchedule` interpretation (X02–X08); reuse fibre-routing, history, PNF and future-quotient donors.
+3. Kernel/codec correspondence in exact vs quantised modes (X09–X11, X14).
+4. Empirical head-to-head benchmark on CPU-only and supported GPU (with hardware capability receipts): resident/CPU-offload/whole-layer-SSD/selected-expert-SSD/LRU+prefetch. Exact training model, prompt, sampling, seed, context, quant, batch and cache policy.
+5. Deliver traces for peak GPU/RAM/disk, bytes read, cache hits/misses, prefill, decode, first-token latency, throughput, energy, output fidelity, SSD-write volume, and reboot/replay; meet X12–X16 before a deployment claim.
+
+**New maximum cut:** A01 + M02/M03 + X01–X06 + S01/S04 are first. Then X07/X08/X10/X14 separate safe streaming from an apparently working but corrupt or OOM-prone implementation. Then X09/X11/X12 and measurements; then X13/X15/X16, jointly with original LILA geometric-efficiency gates. **Memory-optimisation and training-geometry are separable scientific claims**. Do not redirect LILA's original causal hypothesis into a mere GPU offload competition.
