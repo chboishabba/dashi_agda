@@ -43,7 +43,20 @@ absenceOfRequestBlocksOptionalBiomarkerUse ()
 
 -- The authorisation must be scoped to subject, collection and purpose.
 -- It does not itself establish assay validity or legal authority.
-record ScopedBiomarkerUse (Subject : Set) (person : Subject) : Set where
+-- Verification ownership is external; the model has no default verifier
+-- and a string or a user-interface toggle is not a consent receipt.
+record ConsentVerification (Subject : Set) : Set₁ where
+  field
+    OriginalConsent : Subject → EvidencePurpose → Set
+    CurrentAuthorization : Subject → EvidencePurpose → Set
+    IndependentPurposeReview : Subject → EvidencePurpose → Set
+
+open ConsentVerification public
+
+record ScopedBiomarkerUse
+  (Subject : Set)
+  (verification : ConsentVerification Subject)
+  (person : Subject) : Set where
   constructor scoped-biomarker-use
   field
     choice : AgencyDecision
@@ -52,6 +65,12 @@ record ScopedBiomarkerUse (Subject : Set) (person : Subject) : Set where
     subjectPermission : OptionalBiomarkerPermission choice
     originalConsentProvenance : String
     withdrawalAndRetentionRules : String
+    sourceVerifiedConsent :
+      OriginalConsent verification person optionalBiomarkerProfiling
+    currentlyUnwithdrawn :
+      CurrentAuthorization verification person optionalBiomarkerProfiling
+    purposeReviewed :
+      IndependentPurposeReview verification person optionalBiomarkerProfiling
     clinicalAuthorityPromoted : Bool
     clinicalAuthorityStillNotGranted :
       samplingAndClinicalAuthoritySeparatelyReviewed ≡ false
@@ -61,8 +80,9 @@ open ScopedBiomarkerUse public
 -- This deliberately does not assert a universal veto over court procedure;
 -- it proves only refusal of the selected optional biometric pathway.
 refusedCannotProduceOptionalAdmission :
-  ∀ {Subject : Set} {person : Subject} →
-  (receipt : ScopedBiomarkerUse Subject person) →
+  ∀ {Subject : Set} {verification : ConsentVerification Subject}
+    {person : Subject} →
+  (receipt : ScopedBiomarkerUse Subject verification person) →
   choice receipt ≡ refuses → ⊥
 refusedCannotProduceOptionalAdmission receipt refl =
   refusalBlocksOptionalBiomarkerUse (subjectPermission receipt)
