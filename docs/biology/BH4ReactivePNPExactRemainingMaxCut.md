@@ -2051,3 +2051,27 @@ longitudinal calibration and ITIR/Golden
 source provenance. There is no shortcut from
 algebraic conservation to physical regularity
 or biological interpretation.
+
+
+### 2026-11-11 maximum-cut reconciliation — original computed Bishop continuity source chain
+
+**Authoritative current source chain (not the provisional duplicate leaf owners):**
+1. `BH4OriginalNative369IncidenceExact.sourceNativeColumnZero` provides actual literal 54 native incidence-column rational zero witnesses on the source's own 27-cell chart.
+2. `BH4OriginalNativePerSpeciesCancellationExact.originalNativeEverySpeciesTransportZero` lifts the source's 54 columns through arbitrary rational 54×29 currents into the 29 computed transport-only column totals, using exact finite Fubini.
+3. `BH4OriginalRationalReactionColumnKernelExact.originalReactionAllSitesZeroFromSourceColumns` derives all-site weighted reaction neutrality from twelve source-signed net-column rational zero witnesses and arbitrary 27×12 reaction rates.
+4. `BH4OriginalComputedRationalRHSSplitExact.originalComputedSixAxisBishopFromLocal` and `BH4OriginalNativeComputedBishopConservationExact.originalNativeComputedSixAxisBishopConserves` produce all six actual 27×29 computed RHS Bishop-real conservation equalities from these two **derived** local sources.
+5. `scripts/generate_bh4_original29x12_agda.py` already emits `generatedRationalNetColumnsZero` with 72 *literal source-derived* cases and `generatedOriginalComputedSixAxisBishopConservation` applying the authoritative native/reaction owners to the generated original 29×12 matrix. This generator is intentionally **fail closed** absent an authentic byte-pinned Rhea source; generated Agda proofs remain uninhabited until generation plus kernel acceptance.
+
+**Additional experimental work reconciled:** The assistant separately source-wrote `BH4RationalSemidiscreteBilinearityExact`, `BH4ComputedRationalSixDefectCompositionExact`, `BH4NativeTransportRationalZeroExact`, and `BH4RationalReactionSourceZeroExact`. These overlap the already-committed authoritative source owners above and have **not** been typechecked. To avoid creating an extra Golden failure surface, their imports have been **removed** from `KitzerowBH4EvidenceEverything.agda`; the source files remain unpromoted development candidates only. In particular, no claim of completion should rely on their not-yet-kernel-accepted proofs. This supersedes the provisional leaf progress commentary earlier in this document.
+
+**Revised exact maximum cut:** the finite original 54-bond / 29×12 computed 783-coordinate CHNOP+signed charge `ℚᵘ→Bishop ℝ` conservation chain is source-written and connected to an authenticated-source-demanding generator. **P0 kernel run and genuine byte-pinned source instantiation remain OPEN.** P0.05 real weighted-simplex compactness, continuity, classical/constructive finite Brouwer and positive original implicit root are OPEN. P0.06–07 actual real SG/mass-action/Poisson dissipation and original six-face reactive boundary work are OPEN. P0.08–P1 same selected source-paid physical state with tissue and ionic readout are OPEN, as are P2 physical future quotient/minimality and P3 independently heldout calibration plus trusted Golden/ITIR promotion. A verified finite algebraic conservation proof alone never establishes actual physiology.
+
+**Required native Nix/Agda 2.9 owner check (no CI dependency):**
+```sh
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalNative369IncidenceExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalNativePerSpeciesCancellationExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalRationalReactionColumnKernelExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/Molecular/BH4OriginalNativeComputedBishopConservationExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Biology/KitzerowBH4EvidenceEverything.agda
+```
+The generated strict original-source Golden root must be tested separately after providing `BH4_ORIGINAL_CERT_SHA256` and the corresponding genuine Rhea certificate bytes. Unavailable data are not replaced by synthetic rows or guesses.
