@@ -47,7 +47,9 @@ factorialCoefficientAtMostOne :
   ∀ n →
   BishopReal._≤_ (factorialCoefficient n) BishopReal.1ℝ
 factorialCoefficientAtMostOne zero =
-  BishopP.≤-reflexive factorialCoefficientZeroIsOne
+  BishopP.≤-respˡ-≃
+    factorialCoefficientZeroIsOne
+    BishopP.≤-refl
 factorialCoefficientAtMostOne (suc n) =
   BishopP.≤-trans
     (BishopP.≤-respˡ-≃
