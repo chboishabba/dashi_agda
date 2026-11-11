@@ -802,3 +802,51 @@ root, original six-face boundary work,
 same-object tissue interpretation and
 held-out longitudinal validation remain
 independent OPEN science gates.
+
+
+### 2026-11-11 source-written computed 783-coordinate Bishop finite chain complete modulo kernel/source admission
+
+Companion BH4/PNP PR #1454 has now composed the
+original selected **27×54 native incidence**,
+its **54 exact zero columns**, **all 29
+source-species transport cancellations**,
+**29×12 source net stoichiometric left kernel**,
+**27×12 arbitrary rational kinetic-rate fields**,
+and the **same 27×29 computed rational RHS**
+in the pre-existing
+`BH4OriginalRationalSemidiscreteOperatorExact`.
+
+New Golden-imported owners:
+`BH4OriginalNativePerSpeciesCancellationExact`,
+`BH4OriginalNativeComputedBishopConservationExact`,
+`BH4OriginalRationalReactionColumnKernelExact`,
+plus expanded `BH4RationalFiniteFubiniExact`.
+They yield six source-weighted rational zero
+defects and pass those **derived**, not assumed,
+zeros to the existing Bishop-real embedding.
+
+The pre-existing SHA-pinned original Rhea source
+generator is now able to emit **72 closed source
+NET-column zero proof candidates** and
+`generatedOriginalComputedSixAxisBishopConservation`
+for the actual 783-coordinate computed RHS.
+It emits no original rates/fluxes and never
+grants a measured/physical source receipt.
+The generated module cannot exist until
+independent original full-panel source bytes
+are acquired, and the new proof graph has
+**NOT PASSED NATIVE AGDA 2.9** in this session.
+
+Therefore the finite rational-to-Bishop
+conservation proof graph is SOURCE-WRITTEN
+but NOT kernel-admitted. The scientific P0
+real dynamic gates remain independent:
+source-real Poisson/SG/mass-action identity,
+positive conserved simplex, genuine Brouwer,
+strict positive implicit root, real energy
+dissipation, exact original physical rate
+provenance and source-matched same-state
+tissue observation. Exterior reactive
+six-face boundary work and independent
+empirical longitudinal validation remain
+additional P1/P2 obligations.
