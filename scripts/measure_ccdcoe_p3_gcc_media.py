@@ -292,7 +292,8 @@ def main() -> None:
     rows=[json.loads(line) for line in a.input.read_text(encoding="utf-8").splitlines() if line.strip()]
     frame_audit = census.check(json.loads(a.frame.read_text(encoding="utf-8")), rows,
                  a.expected_frame_sha256,
-                 a.intervention_date, a.intervention_receipt)
+                 a.intervention_date, a.intervention_receipt,
+                 a.focus)
     result=analyse(rows,a.focus,a.intervention_date,a.intervention_receipt,
                    source_root=a.source_root)
     result["sampling_frame_audit"] = frame_audit
