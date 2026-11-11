@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS lean_world_source_occurrence (
   source_size bigint NOT NULL CHECK (source_size >= 0),
   PRIMARY KEY(repository,revision,path),
   CONSTRAINT lean_source_path_safe CHECK (
-    path LIKE '%.lean' AND path !~ '(^/|//|(^|/)\\.\\.?(/|$))'
+    path LIKE '%.lean' AND path !~ '(^/|//|(^|/)[.][.]?(/|$))'
   )
 );
 CREATE INDEX IF NOT EXISTS lean_world_source_occurrence_content_idx
