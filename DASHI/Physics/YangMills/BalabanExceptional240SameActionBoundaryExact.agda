@@ -223,3 +223,70 @@ sameActionPullsBackPaths comparison (pathCompose first second) =
 -- the stronger rational permutation-character obstruction: 4 versus 34
 -- full orbits, 0 versus 60 flip fixed roots, 56 versus 126 swap fixed roots.
 -- No universal obstruction to other E8/F4/D4 subgroup actions follows.
+
+-- Exact representation-theoretic NUMERICAL NECESSARY CONDITIONS for the
+-- chosen signed-permutation embedding (see executable integer enumeration).
+-- For an involution on a rational permutation representation, fixed-set
+-- cardinality is the matrix trace. Hence the (+1,-1) multiplicities
+-- are (dimension +/- trace)/2. The following are arithmetic certificates;
+-- the general linear algebra statement is mathematical prior art and
+-- no matrix representation is constructed in this module.
+
+gridFlipPositiveRank : Nat
+gridFlipPositiveRank = 120
+gridFlipNegativeRank : Nat
+gridFlipNegativeRank = 120
+e8FlipPositiveRank : Nat
+e8FlipPositiveRank = 150
+e8FlipNegativeRank : Nat
+e8FlipNegativeRank = 90
+
+gridSwapPositiveRank : Nat
+gridSwapPositiveRank = 148
+gridSwapNegativeRank : Nat
+gridSwapNegativeRank = 92
+e8SwapPositiveRank : Nat
+e8SwapPositiveRank = 183
+e8SwapNegativeRank : Nat
+e8SwapNegativeRank = 57
+
+flipRanksReconstruct240 :
+  gridFlipPositiveRank + gridFlipNegativeRank ≡ 240
+flipRanksReconstruct240 = refl
+
+e8FlipRanksReconstruct240 :
+  e8FlipPositiveRank + e8FlipNegativeRank ≡ 240
+e8FlipRanksReconstruct240 = refl
+
+swapRanksReconstruct240 :
+  gridSwapPositiveRank + gridSwapNegativeRank ≡ 240
+swapRanksReconstruct240 = refl
+
+e8SwapRanksReconstruct240 :
+  e8SwapPositiveRank + e8SwapNegativeRank ≡ 240
+e8SwapRanksReconstruct240 = refl
+
+gridFlipPositiveDiffersFromE8 :
+  gridFlipPositiveRank ≡ e8FlipPositiveRank → ⊥
+gridFlipPositiveDiffersFromE8 ()
+
+gridSwapPositiveDiffersFromE8 :
+  gridSwapPositiveRank ≡ e8SwapPositiveRank → ⊥
+gridSwapPositiveDiffersFromE8 ()
+
+selectedSwapRankBound : Nat
+selectedSwapRankBound = 205
+
+selectedSwapMinimumKernel : Nat
+selectedSwapMinimumKernel = 35
+
+selectedRankDeficiencyExact :
+  selectedSwapRankBound + selectedSwapMinimumKernel ≡ 240
+selectedRankDeficiencyExact = refl
+
+-- With Q/C-linear representations of the selected involution, any
+-- linear intertwiner has rank <= min(148,183)+min(92,57)=205.
+-- Thus any equivariant linear map from the 240-dimensional grid
+-- permutation module has kernel dimension >=35, if it respects the
+-- selected adjacent transposition. This lemma records only exact
+-- combinatorial dimensions, not an unproved Agda linear-rank theorem.
