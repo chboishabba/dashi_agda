@@ -11,6 +11,7 @@ run_offline() {
   python3 -m unittest discover -s tests -p 'test_lean_world_source_world.py' -v
   python3 -m unittest discover -s tests -p 'test_lean_ephemeral_elaboration.py' -v
   python3 -m unittest discover -s tests -p 'test_lean_world_canonical_dag.py' -v
+  python3 -m unittest discover -s tests -p 'test_lean_world_semantic_candidate_pg.py' -v
   python3 scripts/bench_lean_world_acquisition.py --mode offline --files 100 1000
 }
 run_postgres() {
