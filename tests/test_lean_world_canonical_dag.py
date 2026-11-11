@@ -67,6 +67,29 @@ class Tests(unittest.TestCase):
         with self.assertRaises(WorldError):
             other.seal()
 
+    def test_deep_original_dependency_chain_seals_without_recursion(self):
+        for i in range(1800):
+            self.world.admit(declaration(
+                f"N{i}", deps=(f"N{i-1}",) if i else ()))
+        self.world.seal()
+        self.assertEqual(self.world.counts()["proof_occurrences"], 1800)
+
+    def test_deep_cycle_rejected_without_partial_seal(self):
+        for i in range(1200):
+            self.world.admit(declaration(
+                f"N{i}", deps=(f"N{i-1}",) if i else ("N1199",)))
+        with self.assertRaisesRegex(WorldError, "cyclic"):
+            self.world.seal()
+        self.assertFalse(self.world._sealed)
+
+    def test_shared_dependency_diamond_is_not_cycle(self):
+        self.world.admit(declaration("A"))
+        self.world.admit(declaration("B", deps=("A",)))
+        self.world.admit(declaration("C", deps=("A",)))
+        self.world.admit(declaration("D", deps=("B", "C")))
+        self.world.seal()
+        self.assertEqual(self.world.counts()["proof_occurrences"], 4)
+
     def test_bounded_keyset_and_stale_generation(self):
         for name in "ABCDE":
             self.world.admit(declaration(name))
