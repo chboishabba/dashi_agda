@@ -59,8 +59,24 @@ def compile_deps(root:Path,sources:list[dict],target:str,*,lean:str,
                  memory_mib:int=4096,runner=None)->dict:
     if timeout<1 or memory_mib<128:raise ClosureError("invalid resource limits")
     order=compile_order(root,sources,target)
+    # Reuse the original PR #1484 byte-level compiled-closure digester.
+    # A caller-supplied closure label alone is not an immutable cache key.
+    actual_external=[]
+    if external_path:
+        from lean_ephemeral_elaboration import compiled_dependency_digest
+        for location in external_path.split(os.pathsep):
+            if not location:
+                continue
+            directory=Path(location)
+            if not directory.is_dir():
+                raise ClosureError("external compiled closure path unavailable")
+            actual_external.append((str(directory.resolve()),
+                                    compiled_dependency_digest(directory)))
+    observed_external=hashlib.sha256(
+        json.dumps(actual_external,sort_keys=True).encode()).hexdigest()
     key=closure_key(sources=sources,repo=repo,revision=revision,
-       lean_version=lean_version,target=target,external_digest=external_digest)
+       lean_version=lean_version,target=target,
+       external_digest=external_digest+":"+observed_external)
     output=root/".lean-local-compiled"
     output.mkdir(exist_ok=True)
     cache=(cache_dir/key) if cache_dir else None
