@@ -616,3 +616,28 @@ reported environmental harm → primary source and exact actor/time/role span �
 **Remaining K1–K3 decisive external evidence:** authenticated campaign/procedure/communication provenance; controller and coordination reconstruction; time-indexed participant workload, ecological conditions, agency/control and alternatives; actual subject-consented assays if voluntarily used; longitudinal causal discrimination and original legal facts. None are provided by finite countermodels, and no current real-world actor or institution is classified as conducting cognitive warfare by this work.
 
 **Status:** GitHub source committed; compiler proof acceptance and empirical/forensic validation remain open. No PNF/ITIR or legal/clinical promotion was issued.
+
+## Nineteenth pass — repaired exact cross-PR exceptional/369/3-adic maximum cut (2026-11-11)
+
+**Detailed authoritative scope/priority ledger:** `Docs/roadmaps/Exceptional240TriadicMoonshineMaxCut20261111.md`. The user supplied two prior audits: the first noted 240-grid/E8/codec/p-adic/Moonshine bridges; the second recovered extensive same-action F4/E6/E8 and 3-local owners in PRs #1098, #1106 and #1389. Do not repeat enumeration, orbit representatives, p-adic tower, or 196884 arithmetic as new work.
+
+**Further original repository discovery:** the physical weld was ALREADY more advanced than the earlier report:
+- `BalabanCMP109VacuumPolarizationHypercubicSourceSymmetryExact.agda`: 1987 CMP109 reflection/permutation covariance as source-facing generator invariants.
+- `BalabanClayT4WilsonOneLoopHyperoctahedralGeneratorCertificateExact.agda`: seven full B4 expression generators and six fixed-external-axis generators.
+- `BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact.agda`: exact pathwise transport of the ACTUAL `Eval.regularIntegrand` recursive evaluator for a supplied literal source certificate and BoxTrigEnvironment equality. Outstanding: instantiate *the actual source* and pay trig/interval environments, not build 240 separate evaluations.
+- `BalabanClayT4HypercubicRepresentativeSumExact.agda`: original rational 240→4 reduction.
+
+**New source-written exact modules committed on this branch:**
+1. `DASHI/Physics/YangMills/BalabanExceptional240SameActionBoundaryExact.agda`: imports original 240 B4 count and E8 count, exact whole-orbit vs 80-block mismatch (96≠80 and 16≠80), a conditional **regular-240-subtype** equivariant comparison record (not all 256 grid cells), and direct re-export of existing physical quadrature canonicalization. It does not rule out actual finite-field or group-subgroup representation intertwiners and constructs no root bijection.
+2. `DASHI/Governance/DevelopmentalTriadicFiniteQuotientWeldExact.agda`: reuses canonical finite `Z/3^n Z` `Residue3Pow` and `reduce`, explicit 2-digit encoding of pre-existing synthetic `SituatedDevelopmentalUltrametricExact` leaf, exact early reduction, later-detail information loss, distinct earlier prefixes and conversion into `Base369PrefixUltrametricExact.PrefixAgree`. That is a FINITE candidate address bridge; no clinical quantitation, human p-adic spectral identification or causal developmental marker inferred. Its `ValidatedDevelopmentalProjection` remains uninhabited.
+
+**Corrective technical distinctions:**
+- Four B4 orbit types [64,96,64,16], three 80-element blocks, F4 24+24 roots, 72 E6 roots, 240 E8 roots are **different actions/carriers** unless explicitly intertwined.
+- E6×A2 E8 root decomposition is 72+6+81+81=240. The 72+3×56 arithmetic does not by itself identify that E6×A2 decomposition.
+- `SameAction240Comparison` must use selected 240-cell regular subtype, not all 256 grid cells. An explicit inner-product, generator-character and orbit-stabiliser test is needed.
+- `ThreeSixNineMoonshineScaleExact`, `MonsterThreeLocalE8LeechBridgeExact`, `TrialecticD4C3ResidualBoundaryExact`, the ternary Golay and actual 3B/VOA modules are already substantial; dimensions 196884=10×3^9+54 and 65610=10×3^8=90×3^6 do not alone identify a Monster action.
+- `GRVladimirovFrameDiagnosticReceipt` does not certify physical/clinical p-adic dynamics. Reuse as a source-status owner and preserve its Archimedean/observable gates.
+
+**Reprioritised decisive leaves:** P0 `literalRegularIntegrandSelectedB4GeneratorCertificate`, `regular240SubcarrierActualB4Action`, `sameActorRootIntertwinerOrSpecificNoGo`; P1 `finiteB4OrbitToExceptionalRepresentationCharacterWeld`, `individualSensitiveWindowEmpiricalValuation`, `selectedPadicSpectralPhysicalTransport`; P2 `crossDomainResidualConsumerPreservation`, `monsterThreeLocal369SameActionWeld`, `fourWayEpistemicEvidentiarySeparation`. See detailed per-owner proof input and closure criteria in the linked ledger.
+
+**Status:** Two concrete cross-owner source files and new roadmap committed; Agda 2.9 kernel acceptance, selected physical integrand and actual exceptional intertwiner unverified. Distinct PR branches must not be silently treated as merged.
