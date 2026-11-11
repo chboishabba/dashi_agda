@@ -1664,3 +1664,107 @@ give this record a trivial invented inhabitant and call
 the original semantic-world seam complete.
 
 No Agda kernel receipt for the new contract; source-written.
+
+
+## 2026-11-11 P0 original nontrivial full-residual Heisenberg action (high-alpha)
+
+This tranche proceeds beyond the uninhabited appraisal equivariance
+admission record. It constructs a **genuinely nontrivial original finite
+Heisenberg action** on the already-established exact original
+13+131 relational normal-form carrier, with actual unit,
+composition and inverse laws. It intentionally does **NOT**
+invent a participant appraisal operator or claim the world semantics
+are this mathematical action.
+
+New source:
+`DASHI/Foundations/TernaryThirteenOriginalHeisenbergResidualActionExact.agda`
+(commits `3f147cd`, `9e9ac8d`).
+
+- `OriginalFullRelationCoordinates` is the already-existing
+  `TritWord 13 × Residual131` with the original 144-address
+  source relation field’s omitted 131 values retained.
+- `wordActsOnFullCoordinates` and
+  `groupActsOnFullCoordinates` left-multiply the original
+  thirteen-coordinate word with the original **cocycle-bearing**
+  `Monster3BFiniteHeisenbergCentralExtensionExact.compose`,
+  and preserve the entire residual value unchanged.
+- `wordActionIdentity`, `wordActionComposition`,
+  `wordActionInverseLeft`, `wordActionInverseRight`
+  are genuine propositional equalities in the full original
+  13+131 product carrier, reused from the paid original
+  `TernaryThirteenOriginalHeisenbergTransportedGroupLawsExact`.
+- `originalGroupActionIdentity`,
+  `originalGroupActionComposition`,
+  `originalGroupActionInverse` transport them back to the
+  **independently original** finite `Heisenberg6` owner,
+  using the full group↔word source multiplication and
+  inverse-preservation witnesses, not an invented group.
+- `originalActionCoarseProjection` and
+  `originalActionResidualFixed` record the exact projection
+  and **complete original residual invariance**.
+- `actOnOriginalRelation`,
+  `actOriginalRelationCoarse`,
+  `actOriginalRelationResidualAt` transport that action
+  back to the actual original 144-cell source field using
+  the paid original pointwise `reopenNormalized` and
+  `maskToResidual131` theorems.
+- `OriginalFullResidualHeisenbergAction` is an
+  **inhabited** group-action record for the original
+  mathematically selected 13+131 representation.
+- `sourceTranslationNotIdentity`,
+  `originalWordTranslationMovesIdentity`,
+  `originalFullResidualActionIsNontrivial` show an actual
+  original translation generator moves the coarse state;
+  this is NOT a trivial/identity fake group action.
+
+### Critical correction to the earlier finite-group source
+
+`TernaryThirteenOriginalHeisenbergRelationalImageExact.agda`
+had an ill-typed witness in `selectedRelationProductIsSelected`:
+the selected source image requires a value of
+`Rel.SourceCentralCompletionCarrier`, NOT
+`Heisenberg6` itself. Commit `05dd669` now supplies
+`Group.originalGroupToSource (H.compose g h)` and
+keeps the original selected-image multiplication proof.
+This is an actual previous source type defect corrected,
+not a new claim of kernel acceptance.
+
+### Independent finite verification and roots
+
+`scripts/check_heisenberg_original_full_residual_action.py`
+(commit `2dd3495`) implements the original six translation,
+six modulation and one central F3 cocycle arithmetic. Its
+independent deterministic 20,000-trial run **PASSED** all
+sampled associativity, both units, both inverses,
+13+131 action composition, inverse, identity and
+131-residual invariance checks; the original
+noncommuting translation/modulation pair was also checked.
+This is finite-model validation, NOT Agda kernel checking.
+
+All three TOE root imports were updated in commits
+`ac9d0a4`, `eedb353`, `970b2c4`.
+
+### Maximum-cut semantics boundary
+
+**SOURCE-WRITTEN:** real, nontrivial mathematically selected
+finite Heisenberg action on a lossless full 13+131 relational
+normal-form carrier, plus exact original relational-field
+coarse observer and residual invariance.
+
+**STILL OPEN:** identify that action with a selected original
+situated/relational/appraisal update, including original
+participant, authority, dependency, capacity, history,
+provenance and contextual time fields. The
+`OriginalAppraisalHeisenbergAction` contract remains
+uninhabited: original `Base369RelationalUpdateKernelExact`
+does not itself supply the required 144-cell action,
+source relabeling, residual correction/coherence or
+equivariance. A mathematical left-translation construction
+does not meet those semantic-source gates.
+
+H2.01 actual ITIR nodes and commuting world observers,
+H2.02 original independently sourced heterogeneous world
+edge-stalk gluing, Bishop P1 nested analytic exp/atan,
+P2 selected analytic zeta and P3 Gamma/Xi remain OPEN.
+Agda 2.9 kernel acceptance remains unperformed; source
+and executable finite-model receipts are separate.
