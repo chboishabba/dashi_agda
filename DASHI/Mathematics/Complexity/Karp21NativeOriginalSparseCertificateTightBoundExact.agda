@@ -140,6 +140,16 @@ actualOriginalN21CertificateTightBound
     (nativeOriginalGraphSparseTwoPerEdgeBudget
       word n threshold edges graph)
 
+-- Agda's literal List.length and DASHI's bitword encodingSize are
+-- extensionally equal; do not silently assume definal equality of
+-- two distinct recursively defined functions on an arbitrary word.
+listLengthIsOriginalEncodingSize :
+  (word : Word.BitWord) →
+  length word ≡ Word.encodingSize word
+listLengthIsOriginalEncodingSize [] = refl
+listLengthIsOriginalEncodingSize (_ ∷ bits)
+  rewrite listLengthIsOriginalEncodingSize bits = refl
+
 -- G3 same-original-word ACCEPTED certificate endpoint: every actual
 -- accepted binary N21 verification has a certificate no longer than
 -- the original input word. No NP membership is claimed before the
@@ -162,5 +172,8 @@ actualN21AcceptedCertificateFitsOriginalGraphWord word certificate accepted
 ... | false with accepted
 ... | ()
 ... | true =
-  actualOriginalN21CertificateTightBound
-    word certificate n threshold edges result graph checked
+  subst
+    (λ n → n ≤ Word.encodingSize word)
+    (listLengthIsOriginalEncodingSize certificate)
+    (actualOriginalN21CertificateTightBound
+      word certificate n threshold edges result graph checked)
