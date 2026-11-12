@@ -547,3 +547,7 @@ bash scripts/check_federated_streaming_block.sh --kernel
 ```
 
 Preserve output and first type error. Do not rerun when a separate kernel-check service is actively using that worktree; preserve the user's dirty original checkout. No background execution or native GPU run was performed by this authoring change.
+
+### Post-ledger implementation extension: finite block-batch refinement transport
+
+Agda source `DASHI/Reasoning/FederatedStreamingBlockRefinementFiniteExact.agda` additionally provides `mapResult` and `blockBatchRefinementPreservesReference` for arbitrary finite lists of independently proven source-equivalent refinement values (commit `133599d88ec8df0bf3320bf377add3e1780311ce`). This materially strengthens the conditional SBD04 specimen from a single proposal to a batch, **without assuming tokenwise independence of the actual denoising neural network**. It only preserves results when the required per-element equalities are supplied; proving the original model has that property is still OPEN. Requires local Agda kernel receipt.
