@@ -228,7 +228,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
             params=value.get("levelParams")
             if not declaration or not isinstance(params,list):
                 raise NativeV3Error("invalid declaration header")
-            universes=tuple(name(i) for i in params)
+            universes=tuple((name(i),name_shape(i)) for i in params)
             has_proof=tag in ("thm","def","opaque")
             proof=expr(value.get("value")) if has_proof else None
             if selected_names is not None and declaration not in selected_names:
