@@ -69,7 +69,7 @@ fourRankHessianOrbitCollapseExact m1 m2 m3 m4 =
 -- Actual input numbers from the original source four quadrature records.
 -- No replacement proxy M_i values are introduced.
 actualFourHessianBudget :
-  ∀ {scalarData} →
+  ∀ {expressions ward scalarData} →
   Four.LiteralSemanticFourQuadratureCut scalarData → ℚ
 actualFourHessianBudget dataSet =
   fourRankPhysicalHessianError
