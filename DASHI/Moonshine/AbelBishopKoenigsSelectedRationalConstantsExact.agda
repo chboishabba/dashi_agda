@@ -321,3 +321,66 @@ selectedSineCubicLowerAboveHalf = ℚP.≤ᵇ⇒≤ tt
 selectedSineCubicLowerPositive :
   zeroQ ≤ selectedSineCubicLowerRational
 selectedSineCubicLowerPositive = ℚP.≤ᵇ⇒≤ tt
+
+
+------------------------------------------------------------------------
+-- STRONGER LOG TAIL FROM THE ORIGINAL POWER-SERIES COEFFICIENTS.
+--
+-- For |p| >= 27/20 and |t| <= 1/10, the local relative radius is
+-- |u|=|t/p| <= 2/27.  Pure coefficient comparison gives
+--
+--   |log(1+u)-u| <= |u|^2/[2(1-|u|)]
+--               <= (8/27)|t|^2.
+--
+-- This uses only the finite positive geometric tail plus the actual
+-- Bishop log-series limit: no Lagrange integral or derivative source.
+-- The comparisons BELOW are fully rational; transporting the bound to
+-- the original componentwise Bishop complex logarithm remains open.
+------------------------------------------------------------------------
+
+selectedRelativeLogRadius : ℚ
+selectedRelativeLogRadius = + 2 / 27
+
+selectedRelativeRadiusExact :
+  selectedLogDiskRadius * (+ 20 / 27)
+    ≡ selectedRelativeLogRadius
+selectedRelativeRadiusExact = refl
+
+selectedRelativeRadiusBelowOne :
+  selectedRelativeLogRadius ≤ (+ 1 / 1)
+selectedRelativeRadiusBelowOne = ℚP.≤ᵇ⇒≤ tt
+
+selectedLogSecondRemainderFromSeries : ℚ
+selectedLogSecondRemainderFromSeries = + 8 / 27
+
+selectedLogSecondRemainderSeriesExact :
+  (+ 2 / 1) * selectedModulusLower *
+    selectedDiskModulusLower *
+    selectedLogSecondRemainderFromSeries
+  ≡ (+ 1 / 1)
+selectedLogSecondRemainderSeriesExact = refl
+
+selectedLogSeriesRemainderImprovesIntegral :
+  selectedLogSecondRemainderFromSeries ≤ selectedLogSecondRemainder
+selectedLogSeriesRemainderImprovesIntegral = ℚP.≤ᵇ⇒≤ tt
+
+selectedLogSeriesIncrementConstant : ℚ
+selectedLogSeriesIncrementConstant = + 23 / 5625
+
+selectedLogSeriesIncrementConstantExact :
+  selectedModulusUpper * selectedLogSecondRemainderFromSeries *
+    selectedLogDiskRadius * selectedLogDiskRadius
+  ≡ selectedLogSeriesIncrementConstant
+selectedLogSeriesIncrementConstantExact = refl
+
+selectedLogSeriesIncrementBelowMajorant :
+  selectedLogSeriesIncrementConstant ≤ selectedIncrementConstantUpper
+selectedLogSeriesIncrementBelowMajorant = ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonTotalDisplacementBound : ℚ
+selectedNewtonTotalDisplacementBound = + 1 / 14930
+
+selectedNewtonTotalDisplacementExact :
+  selectedNewtonCenterImageUpper * (+ 1500 / 1493)
+    ≡ selectedNewtonTotalDisplacementBound
+selectedNewtonTotalDisplacementExact = refl
