@@ -56,7 +56,7 @@ totalCount = 2
 
 selectedCountNoGreaterThanTotal :
   selectedCount ≤ totalCount
-selectedCountNoGreaterThanTotal = s≤s (s≤s z≤n)
+selectedCountNoGreaterThanTotal = s≤s z≤n
 
 -- A changed source revision can reuse the same expert identifier with a
 -- different weight. Identity-only caches are therefore insufficient.
