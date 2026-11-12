@@ -15,6 +15,7 @@ import json
 from lean_world_builder_contract import pending_from_manifest
 from lean_world_native_v3_projection import extract_candidates, NativeV3Error
 from lean_world_native_p1_codec import candidate_receipt, P1CodecError
+import lean_world_native_p1_codec as p1_codec_owner
 from lean_world_atomic_spool import publish_immutable
 
 class ProjectionError(ValueError):
@@ -62,6 +63,7 @@ def project(manifest: Path, declaration: str, spool: Path):
         "alpha_type_b64":base64.b64encode(
             p1["alpha_type_bytes"]).decode("ascii"),
         "alpha_type_sha256":p1["alpha_type_sha256"],
+        "p1_codec_sha256":sha256(Path(p1_codec_owner.__file__).read_bytes()).hexdigest(),
         "exact_exported_proof_b64":base64.b64encode(
             p1["exact_proof_bytes"]).decode("ascii"),
         "exact_exported_proof_sha256":p1["exact_exported_proof_sha256"],
