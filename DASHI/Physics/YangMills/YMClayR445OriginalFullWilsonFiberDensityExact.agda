@@ -71,7 +71,8 @@ module _
   FinePairs : Set
   FinePairs = Vec (Link × Link) 64
 
-  nativePairReconstitute : Coarse → Relative → FinePairs
+  nativePairReconstitute :
+    ∀ {n} → Vec Link n → Vec Link n → Vec (Link × Link) n
   nativePairReconstitute [] [] = []
   nativePairReconstitute (W ∷ coarse) (U ∷ relative) =
     (U , SUN.sunMultiply theory (SUN.sunInverse theory U) W)
@@ -199,7 +200,7 @@ module _
         (Group.identityLeft (SUN.sunMatrixGroup theory) W))
 
   originalR445AllPairsRecomposeCoarse :
-    (coarse : Coarse) (relative : Relative) →
+    ∀ {n} (coarse : Vec Link n) (relative : Vec Link n) →
     Paired.blockPairs theory oneLink ordered bilateral
       (nativePairReconstitute coarse relative)
     ≡ coarse
