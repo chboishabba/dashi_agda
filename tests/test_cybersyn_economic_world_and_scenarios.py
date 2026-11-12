@@ -15,6 +15,7 @@ import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import cybersyn_economic_observation_world as world
 import cybersyn_empirical_scenario_validation as scenarios
+import cybersyn_world_scenario_handoff as handoff
 
 
 def event_fixture():
@@ -173,6 +174,68 @@ class ScenarioValidationTests(unittest.TestCase):
         manifest["empirically_admitted"] = True
         with self.assertRaisesRegex(scenarios.ScenarioError, "self-certified"):
             scenarios.validate(raw, manifest, "2026-02-17T00:00:00Z")
+
+
+class WorldScenarioHandoffTests(unittest.TestCase):
+    def build_paired(self, path):
+        raw, scenario_manifest, records, encode = scenario_fixture()
+        world_rows = []
+        for r in records:
+            observation = {k: r[k] for k in (*scenarios.BASE, "outcome",
+                                               *scenarios.AMOUNTS)}
+            world_rows.append({
+                "region": r["region"], "time": r["time"],
+                "event_id": r["event_id"],
+                "source_id": scenario_manifest["dataset_id"],
+                "source_layer": "synthetic",
+                "source_locator": "test-fixture", "attribution_owner": "DASHI",
+                "observation": json.dumps(observation, sort_keys=True),
+                "claim_boundary": "synthetic: not an empirical source",
+                "authority_status": "unresolved",
+                "empirically_admitted": False
+            })
+        world_raw = b"".join(world.canonical(row) + b"\\n" for row in world_rows)
+        world_manifest = {
+            "schema": "dashi-cybersyn-observation-snapshot-v1",
+            "dataset_id": "joined-observations", "version": "1",
+            "sha256": world.sha(world_raw),
+            "source_locator": "test fixture", "licence": "test-only",
+            "attribution_owner": "DASHI", "collection_method": "synthetic",
+            "empirically_admitted": False
+        }
+        world.ingest(path, world_manifest, world_raw)
+        return raw, scenario_manifest, records, encode, world_manifest
+
+    def test_exact_join_without_empirical_promotion(self):
+        with tempfile.TemporaryDirectory() as d:
+            db = Path(d) / "world.sqlite"
+            raw, manifest, _, _, world_manifest = self.build_paired(db)
+            r = handoff.verify_cross_world(
+                db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
+            self.assertEqual(r["matched_events"], 64)
+            self.assertFalse(r["world_admitted"])
+            self.assertFalse(r["empirically_admitted"])
+            self.assertEqual(r["validation"]["holdout_n"], 17)
+
+    def test_relabelled_measurement_rejected_even_with_new_csv_hash(self):
+        with tempfile.TemporaryDirectory() as d:
+            db = Path(d) / "world.sqlite"
+            _, manifest, records, encode, world_manifest = self.build_paired(db)
+            records[0]["ai_credit"] = 1 - records[0]["ai_credit"]
+            raw = encode(records)
+            manifest["sha256"] = hashlib.sha256(raw).hexdigest()
+            with self.assertRaisesRegex(handoff.CrossWorldError, "measurement changed"):
+                handoff.verify_cross_world(
+                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
+
+    def test_source_identity_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            db = Path(d) / "world.sqlite"
+            raw, manifest, _, _, world_manifest = self.build_paired(db)
+            manifest["dataset_id"] = "false-origin"
+            with self.assertRaisesRegex(handoff.CrossWorldError, "source identity"):
+                handoff.verify_cross_world(
+                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
 
 
 if __name__ == "__main__":
