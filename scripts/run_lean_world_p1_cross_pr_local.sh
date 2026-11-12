@@ -44,11 +44,34 @@ observation="$(
     python3 -c 'import json,sys;print(json.load(sys.stdin)["path"])'
 )"
 test -f "$observation"
-python3 "$root/scripts/run_lean_world_native_p1_pg.py" \
-  --schema "$DASHI_WORLD_SCHEMA" \
-  --observation "$observation" \
-  --p1-codec "$p1_codec" \
-  --acknowledge-candidate-only
+p1_receipt="$(
+  python3 "$root/scripts/run_lean_world_native_p1_pg.py" \
+    --schema "$DASHI_WORLD_SCHEMA" \
+    --observation "$observation" \
+    --p1-codec "$p1_codec" \
+    --acknowledge-candidate-only
+)"
+printf '%s\n' "$p1_receipt"
+
+# These two consumers use exactly the SAME source-bound type/proof bytes:
+# typed fibre lookup and compressed Expr baseline. They do not certify Lean.
+python3 - "$p1_receipt" "$root" "$DASHI_WORLD_SCHEMA" <<'PYCODE'
+import json
+import subprocess
+import sys
+row=json.loads(sys.argv[1])
+script=sys.argv[2]+"/scripts/run_lean_world_p1_common_consumers.py"
+subprocess.run([
+    sys.executable,script,
+    "--schema",sys.argv[3],
+    "--repository",row["repository"],
+    "--revision",row["revision"],
+    "--path",row["source_path"],
+    "--declaration",row["declaration"],
+    "--export-sha256",row["export_sha256"],
+    "--top-k","25",
+],check=True)
+PYCODE
 
 echo "P1_SOURCE_BOUND_OBSERVATION_STORED (no proof/world admission)"
 echo "Original immutable native observation: $observation"
