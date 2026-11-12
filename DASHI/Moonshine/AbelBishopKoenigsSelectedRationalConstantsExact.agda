@@ -26,6 +26,14 @@ open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational using (ℚ; _/_; _≤_; _≤ᵇ_; _+_; _-_; _*_)
 import Data.Rational.Properties as ℚP
+import Data.Nat.Properties as ℕP
+import Data.Integer.Base as ℤ using ()
+import Data.Rational.Unnormalised as RawQ using (0ℚᵘ; 1ℚᵘ; _/_)
+import Data.Rational.Unnormalised.Properties as RawP
+import Real as BishopReal
+import RealProperties as BishopP
+import DASHI.Foundations.BishopFiniteDegreeOneGeometricBoundExact as Unit
+import DASHI.Foundations.BishopPolynomialGeometricDominationConvergenceExact as Geometric
 
 centerReal centerImag : ℚ
 centerReal = + 31813 / 100000
@@ -126,3 +134,54 @@ selectedNewtonSelfMapComparison = ℚP.≤ᵇ⇒≤ tt
 selectedNewtonCenterInsideLogDisk :
   newtonRadius ≤ selectedLogDiskRadius
 selectedNewtonCenterInsideLogDisk = ℚP.≤ᵇ⇒≤ tt
+
+
+------------------------------------------------------------------------
+-- Native BISHOP REAL [0,1) evidence for the selected geometric ratio.
+-- This directly fills the EXISTING Step-V/Bishop convergence input.
+-- It is not merely the normalized Data.Rational ordering above.
+------------------------------------------------------------------------
+
+bishopSelectedKoenigsBeta : BishopReal.ℝ
+bishopSelectedKoenigsBeta =
+  BishopReal._⋆ (+ 552 / 625)
+
+bishopSelectedKoenigsConstant : BishopReal.ℝ
+bishopSelectedKoenigsConstant =
+  BishopReal._⋆ (+ 7 / 1000)
+
+bishopSelectedKoenigsBetaNonnegative :
+  BishopReal._≤_ BishopReal.0ℝ bishopSelectedKoenigsBeta
+bishopSelectedKoenigsBetaNonnegative =
+  BishopP.p≤q⇒p⋆≤q⋆
+    0ℚᵘ (+ 552 / 625)
+    (RawP.nonNegative⁻¹ (+ 552 / 625))
+
+bishopSelectedKoenigsBetaBelowOne :
+  BishopReal._<_ bishopSelectedKoenigsBeta BishopReal.1ℝ
+bishopSelectedKoenigsBetaBelowOne =
+  BishopP.p<q⇒p⋆<q⋆
+    (+ 552 / 625) 1ℚᵘ
+    (RawQ.*<* (ℤ.+<+ (ℕP.≤ᵇ⇒≤ tt)))
+
+bishopSelectedKoenigsConstantNonnegative :
+  BishopReal._≤_ BishopReal.0ℝ bishopSelectedKoenigsConstant
+bishopSelectedKoenigsConstantNonnegative =
+  BishopP.p≤q⇒p⋆≤q⋆
+    0ℚᵘ (+ 7 / 1000)
+    (RawP.nonNegative⁻¹ (+ 7 / 1000))
+
+bishopSelectedKoenigsBetaInterval :
+  Unit.BishopUnitIntervalRatio bishopSelectedKoenigsBeta
+bishopSelectedKoenigsBetaInterval = record
+  { Unit.ratioNonnegative = bishopSelectedKoenigsBetaNonnegative
+  ; Unit.ratioBelowOne = bishopSelectedKoenigsBetaBelowOne
+  }
+
+bishopSelectedKoenigsGeometricInputs :
+  Geometric.BishopScaledGeometricInputs
+    bishopSelectedKoenigsConstant bishopSelectedKoenigsBeta
+bishopSelectedKoenigsGeometricInputs = record
+  { Geometric.constantNonnegative = bishopSelectedKoenigsConstantNonnegative
+  ; Geometric.ratioInputs = bishopSelectedKoenigsBetaInterval
+  }
