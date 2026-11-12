@@ -339,3 +339,8 @@ import DASHI.Mathematics.Complexity.Karp21NativeOriginalSparseCertificateBoundEx
 
 -- F2.2 actual original positive threshold register length charged to gamma input; source candidate, kernel OPEN.
 import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdInputWidthExact
+
+-- F1 physical tape substrate: local finite-control multi-tape machine and
+-- per-physical-instruction/fuel-bounded represented cell footprint.
+-- NO original N21 instruction compiler, F3 simulation or F4 clock receipt.
+import DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact
