@@ -20,6 +20,10 @@ from lean_world_jmd_native_owner_readonly import read_only_check
 
 HEX64 = re.compile(r"[a-f0-9]{64}\Z")
 
+# Exact original dashi_lean4 PR #105 at 62bc54b67651d6dd465585d42490beea8fd2621e.
+# Changing this pin requires explicit source/format review, not branch drift.
+JMD_PR105_SOURCE_SHA256 = "f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e"
+
 
 class JMDObservationError(ValueError):
     pass
@@ -81,6 +85,8 @@ def _immutable(spool: Path, payload: bytes) -> Path:
 def publish_jmd_readonly(*, source_path: Path, source_sha256: str,
                          export_path: Path, export_sha256: str,
                          declaration: str, spool: Path) -> dict:
+    if source_sha256 != JMD_PR105_SOURCE_SHA256:
+        raise JMDObservationError("original JMD PR105 source revision not pinned")
     if source_path.name != "build_jmd_lean_ast_world.py":
         raise JMDObservationError("not the pinned original JMD builder path")
     source_bytes = _pinned_file(source_path, source_sha256, size_limit=5_000_000)
