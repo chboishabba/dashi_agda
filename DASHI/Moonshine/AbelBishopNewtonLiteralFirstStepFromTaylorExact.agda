@@ -23,6 +23,8 @@ module DASHI.Moonshine.AbelBishopNewtonLiteralFirstStepFromTaylorExact where
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (zero; suc)
+import Inverse as BishopInverse
+import Data.Rational.Unnormalised.Properties as RationalP
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (_/_; 0ℚᵘ; 1ℚᵘ)
 open import Data.Product.Base using (_,_)
@@ -177,3 +179,159 @@ originalBishopNewtonContractionFromSourceCenter
         originalBishopFirstStepBoundFromActualSourceEnclosures
           T nz center
     }
+
+
+------------------------------------------------------------------------
+-- DENOMINATOR LOWER ENCLOSURE -> ACTUAL RECIPROCAL UPPER ENCLOSURE.
+-- This uses original Bishop inverse multiplication (d*d^-1≈1), not a
+-- separate reciprocal estimate oracle.
+------------------------------------------------------------------------
+
+centerDenominatorSquareLower : BishopReal.ℝ
+centerDenominatorSquareLower =
+  BishopReal._⋆ (+ 9 / 4)
+
+centerDenominatorInverseSquareUpper : BishopReal.ℝ
+centerDenominatorInverseSquareUpper =
+  BishopReal._⋆ (+ 4 / 9)
+
+centerDenominatorInverseSquareUpperNonnegative :
+  BishopReal.NonNegative centerDenominatorInverseSquareUpper
+centerDenominatorInverseSquareUpperNonnegative =
+  BishopP.pos⇒nonNeg
+    (BishopP.0<x⇒posx
+      (BishopP.p<q⇒p⋆<q⋆
+        0ℚᵘ (+ 4 / 9)
+        (RationalP.positive⁻¹ (+ 4 / 9))))
+
+centerInverseUpperAsSquare :
+  BishopReal._≃_
+    centerDenominatorInverseSquareUpper
+    (Norm.square centerReciprocalUpper)
+centerInverseUpperAsSquare =
+  let open BishopP.ℝ-Solver in
+  solve 0
+    (Κ (+ 4 / 9)
+      ⊜ ((Κ (+ 2 / 3)) ⊗ (Κ (+ 2 / 3))))
+    BishopP.≃-refl
+
+originalBishopReciprocalNormFromActualDenominatorLower :
+  ∀ T nz →
+  BishopReal._≤_
+    centerDenominatorSquareLower
+    (Norm.normSqC (Newton.originalBishopNewtonDenominator T)) →
+  BishopReal._≤_
+    (Norm.normSqC (sourceNewtonReciprocal T nz))
+    (Norm.square centerReciprocalUpper)
+originalBishopReciprocalNormFromActualDenominatorLower
+  T nz denominatorLower =
+  let
+    den = Newton.originalBishopNewtonDenominator T
+    d = Norm.normSqC den
+    inv = BishopInverse._⁻¹ d (Reciprocal.normSquareNonzero nz)
+
+    invNonnegative : BishopReal.NonNegative inv
+    invNonnegative =
+      BishopP.pos⇒nonNeg
+        (BishopP.0<x⇒posx
+          (BishopInverse.0<x⇒0<x⁻¹
+            (Reciprocal.normSquareNonzero nz)
+            (Reciprocal.normSquarePositive nz)))
+
+    scaledLower :
+      BishopReal._≤_
+        (BishopReal._*_ centerDenominatorSquareLower inv)
+        (BishopReal._*_ d inv)
+    scaledLower =
+      BishopP.*-monoʳ-≤-nonNeg
+        denominatorLower invNonnegative
+
+    productBelowOne :
+      BishopReal._≤_
+        (BishopReal._*_ centerDenominatorSquareLower inv)
+        BishopReal.1ℝ
+    productBelowOne =
+      BishopP.≤-respʳ-≃
+        (BishopInverse.*-inverseʳ
+          d (Reciprocal.normSquareNonzero nz))
+        scaledLower
+
+    scaledUpper :
+      BishopReal._≤_
+        (BishopReal._*_
+          (BishopReal._*_
+            centerDenominatorSquareLower inv)
+          centerDenominatorInverseSquareUpper)
+        (BishopReal._*_
+          BishopReal.1ℝ
+          centerDenominatorInverseSquareUpper)
+    scaledUpper =
+      BishopP.*-monoʳ-≤-nonNeg
+        productBelowOne
+        centerDenominatorInverseSquareUpperNonnegative
+
+    leftNormalizes :
+      BishopReal._≃_
+        (BishopReal._*_
+          (BishopReal._*_
+            centerDenominatorSquareLower inv)
+          centerDenominatorInverseSquareUpper)
+        inv
+    leftNormalizes =
+      let open BishopP.ℝ-Solver in
+      solve 1
+        (λ x →
+          ((Κ (+ 9 / 4) ⊗ x) ⊗ Κ (+ 4 / 9)) ⊜ x)
+        BishopP.≃-refl inv
+
+    invBelowRational :
+      BishopReal._≤_ inv centerDenominatorInverseSquareUpper
+    invBelowRational =
+      BishopP.≤-respʳ-≃
+        (BishopP.*-identityˡ centerDenominatorInverseSquareUpper)
+        (BishopP.≤-respˡ-≃ leftNormalizes scaledUpper)
+
+  in
+  BishopP.≤-respˡ-≃
+    (Reciprocal.normSquareReciprocal den nz)
+    (BishopP.≤-respʳ-≃
+      centerInverseUpperAsSquare invBelowRational)
+
+record OriginalBishopNewtonLiteralTaylorCenterBounds
+    (T : Cartesian.BishopSetoidComplexTranscendentals) : Set where
+  field
+    -- Taylor residual: actual native expC(c)-c.
+    centerResidualUpper :
+      BishopReal._≤_
+        (Norm.normSqC (sourceNewtonResidual T))
+        (Norm.square centerResidualSquareUpper)
+
+    -- Taylor denominator: actual native expC(c)-1.
+    centerDenominatorLower :
+      BishopReal._≤_
+        centerDenominatorSquareLower
+        (Norm.normSqC (Newton.originalBishopNewtonDenominator T))
+
+open OriginalBishopNewtonLiteralTaylorCenterBounds public
+
+originalBishopNewtonTaylorBuildsFirstStepInputs :
+  ∀ T nz →
+  OriginalBishopNewtonLiteralTaylorCenterBounds T →
+  OriginalBishopNewtonTaylorCenterEnclosures T nz
+originalBishopNewtonTaylorBuildsFirstStepInputs T nz source =
+  record
+    { expResidualSquared = centerResidualUpper source
+    ; reciprocalSquared =
+        originalBishopReciprocalNormFromActualDenominatorLower
+          T nz (centerDenominatorLower source)
+    }
+
+originalBishopActualTaylorBuildsFirstStepBound :
+  ∀ T nz →
+  OriginalBishopNewtonLiteralTaylorCenterBounds T →
+  BishopReal._≤_
+    (Disk.originalBishopNewtonIncrementSquare T nz zero)
+    (Norm.square Constants.bishopSelectedNewtonIncrementConstant)
+originalBishopActualTaylorBuildsFirstStepBound T nz source =
+  originalBishopFirstStepBoundFromActualSourceEnclosures
+    T nz (originalBishopNewtonTaylorBuildsFirstStepInputs T nz source)
