@@ -1380,3 +1380,20 @@ Cross-branch acceptance remains: run original Agda 2.9 focused
 checker for each PR's complete imports; reconcile actual carrier
 revision and source equality before any cherry-pick/rebase.
 No CI-only or source-description-based completion promotion.
+
+
+**Late exact-head refresh, 2026-11-12:** the independent
+#1478 branch advanced during this audit to
+`11d3c1f976d5b9a84462b5f36fb8c2f089a34e3a`.
+At that refreshed head,
+`AbelBishopNewtonSourceInhabitationExact.agda`
+still has source blob `84933052a3fb070d4728878ff1f3b7a7d02fc32f`
+and requires the selected-disk certificate and three original
+exp/cos/sin orbit-continuity fields.
+`BishopComplexExpFactEqualsNativeExpExact.agda` has
+source blob `904fcc2ee2c022131e81886b0d751ca215bd4a2f`.
+#1497 advanced to `c0bd37c0bb24448f36789d09ec2add104aef08b7`;
+the core generic odd-zeta witness module retains blob
+`116d776e41016f03dda382ab71869994facd7e4f`.
+These refreshed heads are **not merged into #1408**;
+no all-branch Agda kernel receipt is claimed.
