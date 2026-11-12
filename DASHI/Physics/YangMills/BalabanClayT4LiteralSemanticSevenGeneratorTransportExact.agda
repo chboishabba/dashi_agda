@@ -276,13 +276,13 @@ originalLiteralSemanticOneGeneratorTransport :
   Eval.evaluateExpression arithmetic
     (environment cell)
     (Eval.regularIntegrand scalarData)
-originalLiteralSemanticOneGeneratorTransport dataSet generator cell =
+originalLiteralSemanticOneGeneratorTransport {scalarData = scalarData} dataSet generator cell =
   trans
     (originalSemanticForGenerator dataSet generator cell)
     (Transport.transformEvaluationExact
       (concreteAtomsBuildOriginalEnvironmentCompatibility
         (originalAtomsForGenerator dataSet generator cell))
-      (Eval.regularIntegrand _))
+      (Eval.regularIntegrand scalarData))
 
 -- Existing source paths, no alternative orbit geometry.
 originalLiteralSemanticPathTransport :
