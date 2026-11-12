@@ -134,3 +134,109 @@ originalBishopExpFixedPointIsNewtonFixedPoint T nonzero z fixed =
           (Reciprocal.reciprocalC
             (originalBishopNewtonDenominator T) nonzero))))
     (complexSubtractZero z)
+
+
+------------------------------------------------------------------------
+-- CONVERSE: same-source Newton fixed point => native exp fixed point.
+-- This uses the exact Bishop reciprocal of expC(p0)-1 and the
+-- cancellative complex ring, NOT a classical inverse function axiom.
+------------------------------------------------------------------------
+
+complexSubtractCancellation :
+  ∀ x error →
+  Complex._≈C_ (x -C error) x →
+  Complex._≈C_ error Algebra.zeroC
+complexSubtractCancellation
+  (Complex.complex a b) (Complex.complex c d) fixed =
+  let
+    recover :
+      Complex._≈C_
+        ((Complex.complex a b)
+          -C ((Complex.complex a b) -C (Complex.complex c d)))
+        (Complex.complex c d)
+    recover =
+      (let open BishopP.ℝ-Solver in
+        solve 2
+          (λ x y → x ⊖ (x ⊖ y) ⊜ y)
+          BishopP.≃-refl a c)
+      ,
+      (let open BishopP.ℝ-Solver in
+        solve 2
+          (λ x y → x ⊖ (x ⊖ y) ⊜ y)
+          BishopP.≃-refl b d)
+  in
+  Ring.complexTrans
+    (Ring.complexSym recover)
+    (Ring.complexTrans
+      (Algebra.subCCongruent
+        (Complex.≈C-refl (Complex.complex a b))
+        fixed)
+      (Orbit.complexSubtractSelfZero (Complex.complex a b)))
+
+complexDefectPlusArgument :
+  ∀ expValue z →
+  Complex._≈C_
+    (Algebra._+C_ (expValue -C z) z)
+    expValue
+complexDefectPlusArgument
+  (Complex.complex a b) (Complex.complex c d) =
+  (let open BishopP.ℝ-Solver in
+    solve 2
+      (λ e z → (e ⊖ z) ⊕ z ⊜ e)
+      BishopP.≃-refl a c)
+  ,
+  (let open BishopP.ℝ-Solver in
+    solve 2
+      (λ e z → (e ⊖ z) ⊕ z ⊜ e)
+      BishopP.≃-refl b d)
+
+originalBishopNewtonOperatorFixedImpliesExpFixed :
+  ∀ T nonzero z →
+  Complex._≈C_ (originalBishopNewtonOperator T nonzero z) z →
+  Complex._≈C_ (Native.originalBishopExpOnSeries T z) z
+originalBishopNewtonOperatorFixedImpliesExpFixed T nonzero z fixed =
+  let
+    expValue = Native.originalBishopExpOnSeries T z
+    f = originalBishopExponentialDefect T z
+    denominator = originalBishopNewtonDenominator T
+    inverse = Reciprocal.reciprocalC denominator nonzero
+    error = f *C inverse
+
+    errorZero : Complex._≈C_ error Algebra.zeroC
+    errorZero = complexSubtractCancellation z error fixed
+
+    reciprocalLeft :
+      Complex._≈C_ (inverse *C denominator) Algebra.oneC
+    reciprocalLeft =
+      Ring.complexTrans
+        (Laws.complexMultiplyCommutative inverse denominator)
+        (Reciprocal.multiplyReciprocal denominator nonzero)
+
+    multiplicationCancels :
+      Complex._≈C_ ((f *C inverse) *C denominator) f
+    multiplicationCancels =
+      Ring.complexTrans
+        (Laws.complexMultiplyAssociative f inverse denominator)
+        (Ring.complexTrans
+          (Algebra.mulCCongruent
+            (Complex.≈C-refl f)
+            reciprocalLeft)
+          (Laws.complexMultiplyRightIdentity f))
+
+    fZero : Complex._≈C_ f Algebra.zeroC
+    fZero =
+      Ring.complexTrans
+        (Ring.complexSym multiplicationCancels)
+        (Ring.complexTrans
+          (Algebra.mulCCongruent
+            errorZero
+            (Complex.≈C-refl denominator))
+          (Laws.complexMultiplyLeftZero denominator))
+  in
+  Ring.complexTrans
+    (Ring.complexSym (complexDefectPlusArgument expValue z))
+    (Ring.complexTrans
+      (Algebra.addCCongruent
+        fZero
+        (Complex.≈C-refl z))
+      (Laws.complexAddLeftIdentity z))
