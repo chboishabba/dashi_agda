@@ -372,3 +372,31 @@ bash scripts/check_ym_original_rg_p0_kernel.sh
 This is a **ready-to-run local verification harness**, NOT a kernel pass receipt. The script was not run in the assistant's environment, where `nix` and `agda` binaries are absent. Any compiler errors in upstream and new sources must be addressed from actual Agda diagnostics.
 
 The actual physical P0.09 target is still a uniform nonconstant original Wilson cross-numerator estimate on Wilson words `w` (especially `u`, `v`, `u++v`), divided by the correct original fine/bare partition product only under legitimate scalar division laws. The project-owned original SU(N) matrix trace bound, real arithmetic field-law carrier, all-scale RG effective action, E1 continuum, R576 connecting clusters, R577 OS Hamiltonian, R563 nontriviality and R571 all-group coverage are not closed.
+
+
+## 2026-11-12 source audit of pasted “all gates CLOSED” argument
+
+See `Docs/physics/YMClayAllGatesClosedClaimSourceAudit20261112.md`. The supplied write-up presents standard heuristic strategies for P0, UV RG, connected polymers, OS reconstruction, nontriviality, and compact group coverage, but does **not** contain checked original SU(N) source proofs of its defining high-alpha analytic estimates. None of the five terminal Clay gates can be promoted from its final table. The independent `RealAnalysisAxioms` real carrier is not definitionally the existing Bishop setoid real carrier and its subtraction/division compatibility laws still require an actual semantic weld.
+
+### New source-written exact Agda declarations
+
+- `YMClayE1D1OriginalCrossNumeratorNormalizedMomentFactorExact.agda`: true original fine/bare positive partitions; `originalFineMomentTimesPartition`, `originalBareMomentTimesPartition`, `originalCrossNumeratorIsMomentDefectTimesPartitionProduct`, and `originalWordPairCrossNumeratorIsNormalizedDefect`. Under the explicitly selected coherent positive division law, prove on the actual original Wilson source
+`X(F) = (E_f(F)-E_b(F)) Z_f Z_b`
+and for the third original covariance test `F_u F_v` use the genuine concatenated word `W_{u++v}`. This pays **exact normalization algebra**, not a physical moment estimate.
+- `YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact.agda`: finite normalized two-point Dirac source with `X(1)=0`, certified `F in {0,1}`, but `X(F)=1`. Demonstrates why nonconstant RG error cannot be inferred from unit cancellation or boundedness.
+- `YMClayRealSubtractionLawIndependenceExact.agda`: finite Nat countermodel for **the named subtraction-interaction fragment**, showing it does not determine `x-0=x`; not a full real axioms model.
+- `YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda`: finite transfer mode counterexample to identifying selected observed decay with an operator-wide spectral gap without a dense/separating same-OS observable family.
+
+All modules are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and listed in `scripts/check_ym_original_rg_p0_kernel.sh` for **local** Agda 2.9 verification. Source-written is not kernel-accepted.
+
+### Independent numerical algebra regression
+
+`scripts/check_ym_original_cross_factorization_exact.py` uses Python `fractions.Fraction` to test 400 exact rational numerator/positive-partition combinations, with unit cancellation and a nonconstant negative control. Local execution produced `PASS 400 exact rational original-form factorization cases; unit and nonconstant negative controls`. This is finite algebra regression, not an Agda receipt, proof of the source-selected real field, or physical Yang–Mills validation.
+
+### Remaining maximum-cut, in order
+
+1. Run `bash scripts/check_ym_original_rg_p0_kernel.sh` in the actual Nix/Agda environment and repair the first compiler errors. No CI inference.
+2. Realize `OriginalRealCenteringLaws`, `OriginalRealPositiveDivisionLaws` and real absolute-value compatibility on the SAME selected real carrier, with explicit Bishop `_≃_` versus postulated `_≡_` authority weld.
+3. Prove concrete all-N finite-matrix SU(N) normalized trace range (cyclicity alone is inadequate), then apply existing all-word bound.
+4. Supply the original nonconstant physically UV-uniform Wilson weighted cross-numerator estimate, for all relevant original words, including `u`, `v`, `u++v`—a true effective blocked action/polymer-weight producer rather than a free error record.
+5. Complete E1 continuum limit, R576/D1 physical connected clustering, R577/D2 full same-OS spectral gap, R563/N1 continuum nontriviality, R571/G1 group-indexed physical construction. All OPEN.
