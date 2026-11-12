@@ -83,3 +83,77 @@ inverseOrbitAtDefinitionalFixedPoint :
 inverseOrbitAtDefinitionalFixedPoint g p fixed zero = refl
 inverseOrbitAtDefinitionalFixedPoint g p fixed (suc n)
   rewrite fixed = inverseOrbitAtDefinitionalFixedPoint g p fixed n
+
+
+------------------------------------------------------------------------
+-- SETOID-CORRECT SOURCE FIXED POINT TRANSPORT.
+--
+-- The intended selected logarithm branch is not definitionally
+-- equal to its fixed point. Its actual proof must be g(p) ≈C p.
+-- We use a genuine congruence hypothesis for the chosen endomap.
+------------------------------------------------------------------------
+
+complexTrans :
+  ∀ {x y z : Complex.BishopComplex} →
+  Complex._≈C_ x y →
+  Complex._≈C_ y z →
+  Complex._≈C_ x z
+complexTrans xy yz =
+  BishopP.≃-trans (proj₁ xy) (proj₁ yz)
+  ,
+  BishopP.≃-trans (proj₂ xy) (proj₂ yz)
+
+inverseOrbitRespects :
+  ∀ (g : Complex.BishopComplex → Complex.BishopComplex) →
+  (∀ {x y} → Complex._≈C_ x y →
+    Complex._≈C_ (g x) (g y)) →
+  ∀ n {x y} →
+  Complex._≈C_ x y →
+  Complex._≈C_ (inverseOrbit g n x) (inverseOrbit g n y)
+inverseOrbitRespects g congruent zero equivalent = equivalent
+inverseOrbitRespects g congruent (suc n) equivalent =
+  inverseOrbitRespects g congruent n (congruent equivalent)
+
+inverseOrbitAtSetoidFixedPoint :
+  ∀ (g : Complex.BishopComplex → Complex.BishopComplex) →
+  (∀ {x y} → Complex._≈C_ x y →
+    Complex._≈C_ (g x) (g y)) →
+  (p : Complex.BishopComplex) →
+  Complex._≈C_ (g p) p →
+  ∀ n →
+  Complex._≈C_ (inverseOrbit g n p) p
+inverseOrbitAtSetoidFixedPoint g congruent p fixed zero =
+  Complex.≈C-refl p
+inverseOrbitAtSetoidFixedPoint g congruent p fixed (suc n) =
+  complexTrans
+    (inverseOrbitRespects g congruent n fixed)
+    (inverseOrbitAtSetoidFixedPoint g congruent p fixed n)
+
+complexSubtractSelfZero :
+  ∀ z →
+  Complex._≈C_
+    (Algebra._-C_ z z)
+    Algebra.zeroC
+complexSubtractSelfZero (Complex.complex a b) =
+  BishopP.+-inverseʳ a
+  ,
+  BishopP.+-inverseʳ b
+
+inverseKoenigsPrefixFixedPointIsZero :
+  ∀ (g : Complex.BishopComplex → Complex.BishopComplex) →
+  (∀ {x y} → Complex._≈C_ x y →
+    Complex._≈C_ (g x) (g y)) →
+  (p : Complex.BishopComplex) →
+  Complex._≈C_ (g p) p →
+  ∀ n →
+  Complex._≈C_ (inverseKoenigsPrefix p g n p) Algebra.zeroC
+inverseKoenigsPrefixFixedPointIsZero g congruent p fixed n =
+  complexTrans
+    (Algebra.mulCCongruent
+      (Complex.≈C-refl (Algebra.powC p n))
+      (complexTrans
+        (Algebra.subCCongruent
+          (inverseOrbitAtSetoidFixedPoint g congruent p fixed n)
+          (Complex.≈C-refl p))
+        (complexSubtractSelfZero p)))
+    (Laws.complexMultiplyRightZero (Algebra.powC p n))
