@@ -80,17 +80,20 @@ squareUpperNonnegative box =
       (Eval.upper box * Eval.upper box))
 
 -- This is a mathematically sound *dependency-aware* square enclosure.
+refinedSquareOrdered : ∀ box →
+  Typed.max2 0ℚ (Eval.lower (Typed.multiplyInterval box box))
+  ≤ Eval.upper (Typed.multiplyInterval box box)
+refinedSquareOrdered box
+  with ℚP.≤-total 0ℚ (Eval.lower (Typed.multiplyInterval box box))
+... | inj₁ _ = Eval.ordered (Typed.multiplyInterval box box)
+... | inj₂ _ = squareUpperNonnegative box
+
 refinedSquare : Eval.RationalInterval → Eval.RationalInterval
 refinedSquare box =
-  let product = Typed.multiplyInterval box box
-      low = Eval.lower product
-      high = Eval.upper product
-      zeroOrLow = Typed.max2 0ℚ low
-      bound : zeroOrLow ≤ high
-      bound with ℚP.≤-total 0ℚ low
-      ... | inj₁ _ = Eval.ordered product
-      ... | inj₂ _ = squareUpperNonnegative box
-  in Eval.interval zeroOrLow high bound
+  Eval.interval
+    (Typed.max2 0ℚ (Eval.lower (Typed.multiplyInterval box box)))
+    (Eval.upper (Typed.multiplyInterval box box))
+    (refinedSquareOrdered box)
 
 refinedSquareLowerNonnegative : ∀ box →
   0ℚ ≤ Eval.lower (refinedSquare box)
