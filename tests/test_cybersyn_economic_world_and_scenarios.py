@@ -204,14 +204,14 @@ class WorldScenarioHandoffTests(unittest.TestCase):
             "empirically_admitted": False
         }
         world.ingest(path, world_manifest, world_raw)
-        return raw, scenario_manifest, records, encode, world_manifest
+        return raw, scenario_manifest, records, encode, world_manifest, world_raw
 
     def test_exact_join_without_empirical_promotion(self):
         with tempfile.TemporaryDirectory() as d:
             db = Path(d) / "world.sqlite"
-            raw, manifest, _, _, world_manifest = self.build_paired(db)
+            raw, manifest, _, _, world_manifest, world_raw = self.build_paired(db)
             r = handoff.verify_cross_world(
-                db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
+                db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
             self.assertEqual(r["matched_events"], 64)
             self.assertFalse(r["world_admitted"])
             self.assertFalse(r["empirically_admitted"])
@@ -220,13 +220,13 @@ class WorldScenarioHandoffTests(unittest.TestCase):
     def test_relabelled_measurement_rejected_even_with_new_csv_hash(self):
         with tempfile.TemporaryDirectory() as d:
             db = Path(d) / "world.sqlite"
-            _, manifest, records, encode, world_manifest = self.build_paired(db)
+            _, manifest, records, encode, world_manifest, world_raw = self.build_paired(db)
             records[0]["ai_credit"] = 1 - records[0]["ai_credit"]
             raw = encode(records)
             manifest["sha256"] = hashlib.sha256(raw).hexdigest()
             with self.assertRaisesRegex(handoff.CrossWorldError, "measurement changed"):
                 handoff.verify_cross_world(
-                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
+                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
 
     def test_source_identity_rejected(self):
         with tempfile.TemporaryDirectory() as d:
@@ -235,7 +235,7 @@ class WorldScenarioHandoffTests(unittest.TestCase):
             manifest["dataset_id"] = "false-origin"
             with self.assertRaisesRegex(handoff.CrossWorldError, "source identity"):
                 handoff.verify_cross_world(
-                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z")
+                    db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
 
 
 if __name__ == "__main__":
