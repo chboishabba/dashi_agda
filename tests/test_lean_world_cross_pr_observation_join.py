@@ -8,6 +8,8 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
+import lean_world_cross_pr_observation_join as join_owner
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -77,6 +79,11 @@ class CrossPrObservationJoinTests(unittest.TestCase):
         }
         self.checker = emit(
             self.spool, ".checker-observation.json", self.checker_obj)
+        # The fake JMD fixture cannot impersonate the pinned PR105 source
+        # outside an explicitly local unit-test mock.
+        pinned = patch.object(join_owner, "JMD_PR105_SOURCE_SHA256", "1" * 64)
+        pinned.start()
+        self.addCleanup(pinned.stop)
 
     def invoke(self, projection=None, checker=None, **kwargs):
         return join(self.manifest, projection or self.projection,
