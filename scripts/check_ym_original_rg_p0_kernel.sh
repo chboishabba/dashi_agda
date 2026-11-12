@@ -24,6 +24,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringAlgebraExact.agda
   DASHI/Physics/YangMills/YMClayOriginalPlaquetteTraceCyclicityInsufficientExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalSUNTraceToAllWordsBoundExact.agda
+  DASHI/Physics/YangMills/YMClayE1D1OriginalSignedWilsonWordMomentBoundExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalWilsonWordConcatenationR445Exact.agda
   DASHI/Physics/YangMills/YMClayRealSubtractionLawIndependenceExact.agda
   DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact.agda
