@@ -243,9 +243,9 @@ irigarayContactRefusesForcedOne :
 irigarayContactRefusesForcedOne = Irigaray.neitherRejectsForcedOne
 
 braidedTwoEyedNonFusion :
+  Braided.SharedTrialecticObservationFusesProvenance → ⊥
+braidedTwoEyedNonFusion =
   Braided.sharedTrialecticObservationDoesNotFuseProvenance
-    ≡ Braided.sharedTrialecticObservationDoesNotFuseProvenance
-braidedTwoEyedNonFusion = refl
 
 -- No unlicensed promotion from financial/policy signals to economic success.
 coupledSignalsCannotProveCertainCrash :
