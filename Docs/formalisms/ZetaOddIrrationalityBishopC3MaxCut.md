@@ -95,3 +95,30 @@ Proposed RH-specific integration gate `ZI10`: identify the selected odd-value DA
 ### Verification boundary
 
 Both new Agda files are source-written, committed, readback-verified, but **not kernel-checked** in this session. No Nix/Agda executable was available locally. Consequently no claim that `ZI04`, `ZI05`, or the Clay countermodel is a machine-checked theorem should be made until the repository's pinned check passes.
+
+## 2026-11-12 recent Bishop PR audit: replace outdated dependency picture
+
+**PR #1478 (Agda)** https://github.com/chboishabba/dashi_agda/pull/1478, 80 changed paths. Source-level owners include:
+- `DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda`: literal complete factorial complex series to the selected native Bishop complex exponential. Its own header says source-written, **NOT Agda kernel verified**.
+- `DASHI/Analysis/BishopComplexCauchyTriangleLimitTransportExact.agda`: coordinatewise square/rectangle -> Cauchy triangle limit using original wings and vanishing differences.
+- `DASHI/Moonshine/AbelBishopOriginalComplexCarrierWeldExact.agda`: explicit bidirectional record conversion, preserves original Bishop-real re/im and setoid equality, with multiplication/addition compatibility.
+- Additional finite binomial, rectangle, triangle-tail, signed factorial, complex log, Koenigs and Machin source modules. These are meaningful internal prerequisites already source-written; don't duplicate them.
+
+**PR #104 (dashi_lean4)** https://github.com/chboishabba/dashi_lean4/pull/104, 9 changed paths. Its actual patches contain:
+- `Integration/BishopNegativeLogNativeRound11Semantics.lean`: selected literal negative-log source finite partial sums, convergence and faithful evaluation, including `canonicalNegativeLog_converges`, `anyOriginalNatSuccessorExpInverse`.
+- `Integration/BishopPureImaginaryInfiniteCauchyProductExact.lean`: absolutely summable factorial coefficients and full infinite Cauchy product.
+- `Integration/BishopRound11ImaginaryProductSemanticReflection.lean`: source-backed sine/cosine addition and Machin-quarter semantic setoid reflection.
+- **`Integration/BishopRiemannZetaNativeMachinContinuity.lean`** already provides `originalDirichletTerm_eq_cpow`, `originalDirichletValue_eq_riemannZeta (hs : 1 < s.re)`, `originalDirichletValue_continuousAt`, `completedRiemannZeta_continuousAtMachinPi`. This is the genuine Mathlib zeta on the half-plane, NOT an opaque zeta-like function.
+- `Integration/AxiomAuditMoonshineRound11RouteB.lean` adds `#print axioms` calls for key exact theorem names; the presence of audit commands is **not** evidence of their output or successful build.
+
+### Updated minimum cut, with same-value ownership
+
+- **ZI-L1 (already source-written on Lean PR #104):** positive-half-plane classical Dirichlet coefficient and infinite sum equal Mathlib `riemannZeta`; test and kernel/axiom audit still need run evidence.
+- **ZI-L2 (new minimum):** instantiate the external odd-zeta irrationality proof on the *same* `riemannZeta` with precisely typed `5+2k` indices; avoid an unnecessary second zeta representation.
+- **ZI-A1:** transport that Mathlib value through PR #104's actual vendored `RegularRatReal` faithful `eval`/equivalence into the independently selected original Agda Bishop `Real.ℝ`. This is not yet a cross-kernel proof.
+- **ZI-A2:** construct an explicit `ZetaHalfPlaneLayer` and source identity on the Agda side; the current `RiemannAnalyticSubstrate` is an interface, so no full actual analytic function is automatically obtained.
+- **ZI-RH:** tie to the genuine selected `AnalyticSubstrate` of `RiemannMillenniumAssembly` without inferring Weil positivity, off-line exclusion or RH from positive-odd irrationality.
+
+**Correction to earlier framing:** we do *not* need to build a complex exponential or prove a Mathlib half-plane Dirichlet equivalence from scratch. They exist as source-level modules in the recent PRs; remaining hard work is verifying their compilation/axioms and identifying cross-kernel original objects. The golden-ratio fibre remains reusable evidence-transport/approximation infrastructure, not a zeta-value identity.
+
+This audit is based on connector-retrieved PR changed-file lists and file patches, **not claimed current CI or kernel-build results**.
