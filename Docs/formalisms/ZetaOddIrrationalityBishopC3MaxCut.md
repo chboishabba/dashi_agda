@@ -253,3 +253,16 @@ The concrete FastCauchy metric authority in `DASHI/Analysis/CanonicalRationalMet
 - New `BishopFastCauchyCanonicalRationalWeldExact.agda` defines `canonicalFastFromBishopRational q = CanonicalRationalMetric.canonicalRationalEmbedding (Data.Rational.Base.fromℚᵘ q)` and proves by definition that every finite FastCauchy term equals that reduced rational; its `canonicalRationalWeld` consumes the same **still pending** original Bishop/Fast categoricity and rational source agreement.
 
 Thus the original normalization map and finite constant-rational embedding are source-written/precisely selected, but canonical equivalence on all Bishop sequences, original series values and RH analytic substrate is **NOT** thereby proven. No local Agda kernel acceptance has been observed.
+
+## 12 November new upstream source paydown — verified PR metadata, not kernel proof
+
+Agda Bishop [PR #1478](https://github.com/chboishabba/dashi_agda/pull/1478) now additionally owns:
+- `AbelBishopLogQuadraticUpperDiskSeriesLimitExact`: original shifted log series converges on actual closed upper-radius disks, with its limit the original canonical log minus the linear term. Does not require the false same-radius equality.
+- `AbelBishopSelectedLogUpperDiskQuadraticTailExact`: exact 2/27 p⁻¹t chart specialization with genuine selected upper-disk inequality.
+- `AbelBishopLogQuadraticUpperDiskHalfGeometricExact`: actual half-coefficient Bishop comparison yields componentwise ABSOLUTE convergence of original shifted log terms and identifies the resulting limit with the same canonical remainder.
+- `AbelBishopLogUpperDiskZeroNormalizationExact`: upper-disk log(1)=0 from same-term series convergence and uniqueness.
+These are K04d/Koenigs source donors, **not** an Agda Dirichlet/zeta identification. Norm-square-proportional remainder `|R₂| ≤ 8/27|t|²`, actual Newton orbit analytic inputs, principal inverse, local/global Koenigs are still mathematically open. Source readback only, local Agda kernel pending.
+
+Lean Bishop [PR #104](https://github.com/chboishabba/dashi_lean4/pull/104) now additionally owns `proofs/zeta7-lean435/BishopZ7DirichletSameObject.lean`. In the version-isolated stable-v4.35 Mathlib workspace, this explicitly defines the complex Dirichlet `∑' n, 1/(n+1)^s`, proves **the literal same-value equation** with Mathlib `riemannZeta` on Re(s)>1, and composes that equation with the external imported Z7 witness to obtain a fifteen-odd-value existential result. This pays one genuine single-version Mathlib selected source-value equality and avoids the root Lean/Mathlib pin mismatch. The sidecar local checker now includes strict per-theorem axiom-whitelist parsing. No local Lake/kernel acceptance was performed.
+
+**Still highest-alpha for this ZI ledger:** (1) verify stable-v4.35 source and exact axioms locally, (2) instantiate the original Agda Bishop-real analytic zeta at the same values, including real/complex rationality reflection and faithful cross-prover interpretation, (3) complete Bishop/FastCauchy canonical reindexing/round trips and a same-value series-limit comparison, (4) independently prove RH explicit-formula/Weil positivity and hermitian G1–G4. No cross-prover proof imported merely by mirroring declarations.
