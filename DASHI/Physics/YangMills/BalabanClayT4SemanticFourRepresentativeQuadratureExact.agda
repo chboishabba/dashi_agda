@@ -31,7 +31,7 @@ record LiteralSemanticFourQuadratureCut
     {expressions : Eval.LiteralDiagramExpressions}
     {ward : Eval.LiteralWardExpressionProofs expressions}
     (scalarData : Eval.LiteralScalarIntegrandExpression expressions ward)
-    : Set₁ where
+    : Set₃ where
   field
     -- An ACTUAL literal generated-grid evaluator, not 4 opaque numbers.
     source : Eval.LiteralGeneratedBoxEvaluator expressions ward scalarData
@@ -135,10 +135,10 @@ open LiteralSemanticFourQuadratureCut public
 -- Count certificates are imported from original generated orbit geometry,
 -- not guessed from four arbitrary list lengths.
 fourRepresentativeRegularCount :
-  length Orbit.rank1Cells +
-    (length Orbit.rank2Cells +
-      (length Orbit.rank3Cells +
-        length Orbit.rank4Cells))
+  length Geometry.oneOuterCells +
+    (length Geometry.twoOuterCells +
+      (length Geometry.threeOuterCells +
+        length Geometry.fourOuterCells))
     ≡ 240
 fourRepresentativeRegularCount =
   Geometry.regularOrbitMultiplicitySum
