@@ -543,3 +543,17 @@ The full source/Agda regression imports this module. `scripts/check_ym_finite_pa
 6. `originalR445PhysicalEffectiveBareResidualUVUniform`: prove a genuinely sourced ultraviolet-uniform bound on the resulting effective-versus-bare density/moment residual, including all relevant and marginal counterterm directions. This is the decisive nonconstant P0.09 physical estimate.
 
 P0.01–08 outstanding scalar/carrier and Agda obligations also remain. E1 continuum, D1 original connecting polymer, D2 same-H full OS gap, N1 interaction witness and G1 all compact simple physical group extension remain **OPEN**. Neither the attachment's assumed massive propagator nor a local Haar identity supplies them.
+
+
+## 2026-11-12 latest P0.A-E canonical finite source-weld landing
+
+See [`YMClayR445P0MaxCutSourceWeldLedger20261112.md`](YMClayR445P0MaxCutSourceWeldLedger20261112.md) for exact declarations and full fail-closed status. This round registered the original native parity P0.A/C modules in both `YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_original_rg_p0_kernel.sh`, and added:
+
+- `YMClayR445CanonicalBondPermutationCodecExact.agda`: canonical side-four original-bond reorder into 128 selected paired positive fine bonds and 896 canonical residual fine bonds, with list completeness, distinctness, source finite enumeration and inverse Vec reordering. The exact 1024-bond permutation was independently checked (all 1024 distinct; 20 roundtrips; SHA-256 `49b954c21ccd1649208074eb5096e5b6b63102313da773fe17e1268b67727ada`). Agda acceptance pending.
+- `YMClayR445FlatPairedHaarIntegrationExact.agda`: all-n finite SU(N) flat `2n+m`-link integration equivalence to source n pair/m residual Haar, and literal 1024-to-64 pure-Haar theorem on flat coordinates. Agda acceptance pending.
+- `YMClayR445OriginalPureHaarBlockWeldExact.agda`: conditional original 1024-bond to native 64-bond pure-Haar theorem. Its **two exact uninhabited finite welds** are the original canonical `LinkPermutation 1024` word and the literal native coarse bond output vector order.
+- `YMClayR445OriginalFullWilsonFiberDensityExact.agda`: constructive **candidate** effective coarse density using the exact original side-four interacting SU(N) Gibbs weight and all 64 relative + 896 interior Haar fiber links; source-written strict positivity and native pair recomposition. Equality with the actual original n=3 weighted pushforward still requires the **weighted full-lattice** P0.E measure/Fubini transport theorem; do not silently promote a definition to that equality.
+- `scripts/check_ym_r445_p0_maxcut_local.sh`: focused Nix/Agda 2.9 fail-closed local acceptance runner; not executed in this assistant runtime.
+- `scripts/check_ym_e1_harmonic_regrouping_countermodel.py`: independent exact rational falsification of the uploaded E1 claim that an `O(1/k)` step budget becomes a geometric Cauchy rate under dyadic grouping: 131071 adjacent checks; bounded rational non-Cauchy witness with alternating values at powers of two.
+
+**Highest-alpha still open:** P0.B kernel acceptance; P0.D explicit finite permutation word/native ordering; P0.E actual original weighted pushforward partition equality; uninhabited same-carrier Bishop real and arbitrary SU(N) trace authority; P0.F genuinely derived original UV-nonconstant RG residual; E1, D1, D2, N1, G1 physical producers. The attachment's `g0²(a_k)∼1/k` error is NOT summable and is not a continuum-existence certificate. No terminal Clay gate closed or local Agda receipt claimed.
