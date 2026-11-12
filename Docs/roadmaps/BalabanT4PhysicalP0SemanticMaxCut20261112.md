@@ -49,3 +49,11 @@ The source search did not find a constructed physical LiteralScalarIntegrandExpr
 Run python scripts/check_balaban_t4_semantic_p0_exact.py. Check the three Agda modules with the pinned local Agda 2.9 checker and their transitive imports. CI is not required.
 
 Attribution: original lattice gauge theory source remains with Wilson, Faddeev-Popov, Bałaban and the cited method authors. DASHI owns the new finite semantic proof compilation and four-orbit transport wiring. No new finite orbit theorem substitutes for a physical one-loop integrand or continuum mass-gap proof.
+
+
+## Adversarial follow-up on the source API
+
+- The exact original flip counterexample, `originalSineHalfFlip0NotSyntacticallyInvariant`, now proves in Agda syntax that the literal sineHalf(loopMomentum,axis0) atom becomes a different constructor (negate rather than atom) under flip0. This does not refute possible full-integrand symmetry; it shows why atom covariance and full-scalar invariance must be different obligations.
+- The source TrigAtom grammar has three momentum roles: loopMomentum, externalMomentum and shiftedMomentum. The rank lower bound for the unshifted \\hat{q}^2 is **not** automatically a positive bound for every shifted propagator denominator \\hat{q+p}^2. Each literal denominator appearing in gauge and ghost terms needs its own positivity certificate, and the fixed-axis versus joint external-momentum convention must be tracked.
+- A pointwise functional equality under B4 need not imply propositional equality of the two RationalInterval evaluations: interval dependency and expression-tree shape can change enclosures. The new seven-generator record asks for the stronger *evaluated interval equality* at the selected boxes. If a literal expression proves only enclosure inclusion, the correct remedy is a separate sound-inclusion transport using the selected interval backend, not an assumed equality.
+- Therefore neither the new semantic certificate TYPE nor the four receipt selectors is evidence that the physical P0 gate is already inhabited. The next highest-information action is constructing the exact literal scalar-source instance and checking which of seven semantic equalities is actually true for its momentum convention, before trying to certify the four quadratures.
