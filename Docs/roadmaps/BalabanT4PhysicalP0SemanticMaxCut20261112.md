@@ -120,3 +120,55 @@ The geometric 4,6,4,1 weighted direct interval envelope is **[15/16,105472/22707
 5. **KERNEL:** local pinned Agda checking / first type-error repair for all new modules; no CI.
 
 **No physical Clay E1/D1/D2/N1/G1 terminal result follows.**
+
+
+## 2026-11-13 source-accurate P0 maximum cut (from attached 12-group proposed resolution)
+
+The authoritative detailed declaration-by-declaration audit is in
+`Docs/roadmaps/BalabanP0MaxCutAttachmentAudit20261113.md`.
+The attachment's blanket "12/12 constructively closed" claim is NOT
+accepted as a local Agda or physical source receipt. The real Wilson
+Hessian, reduced FP jet, Haar Casimir and mixed derivative beta extractor
+already exist and are REUSED; the same-source finite Fourier/determinant,
+quartic analytic remainder, Ward tensor-to-scalar and real quadrature
+certificates still do not follow from those independent leaves.
+
+New source-written exact modules (PR #1498):
+- `BalabanP0FreeGhostWilsonPositiveWeldExact.agda`: source free ghost
+  Fourier symbol and original Wilson hat momentum live in the SAME
+  positive Bishop/rational box given true source four-sine membership.
+  Crucially `derivedCoherentGhostFromOriginalSine` constructs the
+  coherent ghost box directly from the existing sine-derived cosine owner.
+- The source `BalabanClayT4FaddeevPopovWilsonSymbolBridgeExact.agda`
+  is now SETOID-correct: half-angle and sum transport are `Bishop._≃_`
+  rather than unprovably strict `_≡_` of Cauchy records.
+- `BalabanP0TransverseGaugeFixingNoGoExact.agda`: proves exact algebraic
+  gauge-fixed Laplacian identity and counterexample to Wilson `d*d=Δ`;
+  source SU2 rational normalisation `(11/3)C_A/16 = 11/24`,
+  with `C_A=2`, not the attachment's `2N=4`.
+- `BalabanP0SU2HaarQuarticFormalJetExact.agda`: formal SU2 Haar
+  `log J` quartic term is `-r⁴/1440`, and -log J has positive
+  quadratic/quartic terms. The analytic remainder is NOT paid.
+- `BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.agda`:
+  original-cell x-domain midpoint coefficient M2/384; Brillouin
+  physical-measure coefficient M2/6144; exact orbit budget
+  (4 M1+6 M2+4 M3+M4)/384. The true source Hessian bounds and integral
+  inclusions are STILL missing.
+- Corrected original `Eval.rationalInterval` compatibility alias
+  for already-imported Bishop reciprocal/semantics modules.
+- The existing local no-CI checker now enumerates 18 source modules.
+  Static GitHub readback plus independent exact Fraction/SymPy rational
+  checks PASS. No Agda executable was available; new Agda declarations
+  remain kernel UNVERIFIED.
+
+P0.1–P0.12 exact remaining theorem owners and dependency order are in
+the new audit. Critical unpaid physical frontier:
+(1) original P33 Wilson 3/4-momentum vertex and FP/Haar SAME-source
+chart/determinant/analytic remainder;
+(2) instantiate `LiteralDiagramExpressions`, actual Ward and off-diagonal
+second jet / singular-regular semantics;
+(3) real Machin/Fourier cell sine memberships for loop AND shifted roles,
+actual seven scalar symmetries or correct stabilizer;
+(4) FOUR TRUE `CertifiedBoxQuadrature` values, Hessian error proofs and
+error covariance; (5) real Bałaban coefficient and quartic RG remainder.
+One-loop beta sign/algebra alone does not prove Clay E1/D1/D2.
