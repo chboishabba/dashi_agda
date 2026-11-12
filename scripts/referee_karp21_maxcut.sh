@@ -117,6 +117,7 @@ python3 scripts/check_karp21_sparse_certificate_bound.py
 python3 scripts/check_karp21_positive_threshold_input_width.py
 # F1 physical zipper/local multi-tape machine finite differential (NOT Agda).
 python3 scripts/check_karp21_physical_tape.py
+python3 scripts/check_karp21_physical_gamma_prefix.py
 python3 scripts/check_karp21_fractran_parsed_raw_threshold.py
 python3 scripts/check_karp21_signed_gamma_suffix_values.py
 python3 scripts/check_karp21_signed_gamma_number_theory.py
@@ -167,6 +168,7 @@ check_agda() {
 if [[ "$mode" == "kernel-cut" ]]; then
   # F1 physical finite-control tape substrate (not full N21 compiler).
   check_agda DASHI/Mathematics/Complexity/Karp21NativeBitTapePhysicalMachineExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeGammaPrefixPhysicalSimulationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePayloadExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeUnsignedEndpointBitReaderExact.agda
@@ -219,6 +221,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   done
 
   check_agda DASHI/Mathematics/Complexity/Karp21NativeBitTapePhysicalMachineExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeGammaPrefixPhysicalSimulationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21ConwayGammaChainCodecExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21N21BitWeightedComparisonEnvelopeExact.agda
