@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.YMClaySUNTwoLinkHaarEffectiveFiberDensityExact wh
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.Vec.Base as Vec using (Vec)
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans)
@@ -228,3 +229,73 @@ module _
             (trans
               (*-comm 1ℝ (observable W))
               (mulOneʳ (observable W)))))
+
+  ----------------------------------------------------------------------
+  -- P0.E kernel-valued, arbitrary-interaction version.
+  --
+  -- The earlier weighted scalar theorem factors an observable out of
+  -- a single fiber. This stronger identity changes variables for an
+  -- arbitrary h(U,V,W), including a kernel with *all* remaining fine
+  -- links and a coupled Wilson action inside it. No product form of
+  -- the weight, independence assumption, or analytic approximation.
+  ----------------------------------------------------------------------
+
+  nativeTwoLinkKernelChangeOfVariables :
+    (kernel : Link → Link → Link → ℝ) →
+    Haar.integrateOne oneLink
+      (λ U → Haar.integrateOne oneLink
+        (λ V → kernel U V (product U V)))
+    ≡ Haar.integrateOne oneLink
+      (λ W → Haar.integrateOne oneLink
+        (λ U → kernel U (product (inverse U) W) W))
+  nativeTwoLinkKernelChangeOfVariables kernel =
+    trans
+      (Haar.integrateCongruent oneLink
+        (λ U → Haar.integrateOne oneLink
+          (λ V → kernel U V (product U V)))
+        (λ U → Haar.integrateOne oneLink
+          (λ W → kernel U (product (inverse U) W) W))
+        (λ U →
+          trans
+            (Haar.integrateCongruent oneLink
+              (λ V → kernel U V (product U V))
+              (λ V →
+                kernel U
+                  (product (inverse U) (product U V))
+                  (product U V))
+              (λ V →
+                cong
+                  (λ value → kernel U value (product U V))
+                  (sym (nativeInverseLeftProductCancellation U V))))
+            (Bilateral.oneLeftInvariant bilateral U
+              (λ W → kernel U (product (inverse U) W) W))))
+      (Haar.integrateTwoSwap oneLink
+        (λ U W → kernel U (product (inverse U) W) W))
+
+  -- Strong local R445 source interface: a single native two-link
+  -- product with ANY finite number m of residual original fine links.
+  -- The actual Wilson density may couple U, V and all residual links.
+  -- It remains INSIDE the SAME integral on both sides.
+  nativeOnePairAllInteriorWeightedChangeOfVariables :
+    ∀ {m}
+      (density : Link → Link → Vec Link m → ℝ)
+      (observable : Link → ℝ) →
+    Haar.integrateOne oneLink
+      (λ U → Haar.integrateOne oneLink
+        (λ V →
+          Haar.productIntegral {n = m} oneLink
+            (λ interior →
+              density U V interior *ℝ observable (product U V))))
+    ≡ Haar.integrateOne oneLink
+      (λ W → Haar.integrateOne oneLink
+        (λ U →
+          Haar.productIntegral {n = m} oneLink
+            (λ interior →
+              density U (product (inverse U) W) interior
+                *ℝ observable W)))
+  nativeOnePairAllInteriorWeightedChangeOfVariables
+      {m} density observable =
+    nativeTwoLinkKernelChangeOfVariables
+      (λ U V W →
+        Haar.productIntegral {n = m} oneLink
+          (λ interior → density U V interior *ℝ observable W))
