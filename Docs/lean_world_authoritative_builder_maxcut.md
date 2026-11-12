@@ -305,3 +305,21 @@ Exact local commands on isolated #1495 head, with no CI dependency:
 4. Supply actual, authenticated dependency-closure, checker/builder and original world-admission authorities before promoting any proof or persistence status. Agda↔Lean formal semantic transport, YM physical source, Bishop analytic/Koenigs, RH, BSD, global Kneser and P!=NP are mathematically independent remaining gates.
 
 All new code is SOURCE-WRITTEN: no local exact-head test or kernel receipt is claimed. Use local source-backed verification, not CI status, as authority.
+
+
+### Exact paired observation invocation (still no world admission)
+
+Sibling #1484 now has an immutable native/JMD observation producer at scripts/run_lean_world_jmd_readonly_observation.py. It requires the true original JMD PR #105 source SHA, selected native export SHA and a private spool; its output includes an independent observation SHA.
+
+The #1495 consumer takes the literal existing #1494 handoff manifest, already published #1495 type projection, independently observed pinned nanoda result, and optionally that #1484 JMD result:
+
+    python3 scripts/lean_world_cross_pr_observation_join.py \
+      --manifest /path/to/sha256.json \
+      --projection /path/to/sha256.native-type-observation.json \
+      --checker-observation /path/to/sha256.checker-observation.json \
+      --spool /path/to/private/immutable-spool \
+      --jmd-observation /path/to/pinned/jmd-result.json \
+      --jmd-sha256 ACTUAL_JMD_RESULT_SHA256 \
+      --jmd-source-sha256 ACTUAL_PINNED_JMD_PR105_SOURCE_SHA256
+
+This output is necessarily same-native-export-correlated-uncertified, with no proof/DB status promotion. A synthetically forged checker JSON can test binding but cannot authenticate the underlying Rust executable or Lean proof. The independent checker run, original native dependency validation, completed DAG and PostgreSQL world-admission API remain the active high-alpha gates.
