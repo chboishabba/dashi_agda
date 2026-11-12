@@ -17,7 +17,7 @@ files=(
 
 for f in "${files[@]}"; do
   test -f "$f" || { echo "MISSING: $f" >&2; exit 1; }
-  if grep -nE '^([[:space:]]*)postulate([[:space:]]|$)|\\{![^}]*!\\}|--allow-unsolved-metas|--(unsafe|type-in-type|no-positivity-check|no-termination-check)' "$f"; then
+  if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|--allow-unsolved-metas|--(unsafe|type-in-type|no-positivity-check|no-termination-check)' "$f" || grep -nF '{!' "$f"; then
     echo "Forbidden unsafe option/postulate/hole in $f" >&2
     exit 1
   fi
