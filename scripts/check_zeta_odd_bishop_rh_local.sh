@@ -10,6 +10,7 @@ targets=(
   DASHI/Analysis/ZetaZ7AgdaIndexTransportExact.agda
   DASHI/Analysis/BishopSetoidWeldExact.agda
   DASHI/Analysis/BishopFastCauchyZetaWeldExact.agda
+  DASHI/Analysis/BishopFastCauchyCanonicalRationalWeldExact.agda
   DASHI/Analysis/RiemannOddIrrationalityClayBoundaryExact.agda
 )
 
