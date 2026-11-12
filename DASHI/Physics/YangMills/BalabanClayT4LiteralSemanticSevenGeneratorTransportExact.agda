@@ -231,8 +231,9 @@ originalAtomsForGenerator :
   ∀ generator cell →
   ConcreteAtomGeneratorCovariance arithmetic generator
     (environment cell) (environment (Orbit.act generator cell))
-originalAtomsForGenerator dataSet Orbit.identity cell =
-  originalIdentityAtomCovariance _ _
+originalAtomsForGenerator {arithmetic = arithmetic} {environment = environment}
+  dataSet Orbit.identity cell =
+  originalIdentityAtomCovariance arithmetic (environment cell)
 originalAtomsForGenerator dataSet Orbit.flip0 cell = atomsFlip0 dataSet cell
 originalAtomsForGenerator dataSet Orbit.flip1 cell = atomsFlip1 dataSet cell
 originalAtomsForGenerator dataSet Orbit.flip2 cell = atomsFlip2 dataSet cell
