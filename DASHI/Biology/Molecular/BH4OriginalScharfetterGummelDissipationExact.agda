@@ -324,13 +324,29 @@ originalConcreteSGFluxAt :
 originalConcreteSGFluxAt prefactors faces bond sp =
   trans
     (cong (λ row → V.lookup row sp)
-      (Finite.qLookupMap
-        (λ row → V.zipWith
-          (λ factor face →
-            R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
-          prefactors row) faces bond))
+      (lookupConcreteMap prefactors faces bond))
     (lookupScale prefactors (V.lookup faces bond) sp)
   where
+  lookupConcreteMap :
+    ∀ {n : Nat}
+    (p : V.Vec R.ℝ 29)
+    (rows : V.Vec (V.Vec ConcreteSG.ConcreteBishopFaceState 29) n)
+    (index : F.Fin n) →
+    V.lookup (V.map
+      (λ row → V.zipWith
+        (λ factor face →
+          R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+        p row) rows) index
+    ≡
+    V.zipWith
+      (λ factor face →
+        R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+      p (V.lookup rows index)
+  lookupConcreteMap p V.[] ()
+  lookupConcreteMap p (V._∷_ row rows) F.zero = refl
+  lookupConcreteMap p (V._∷_ row rows) (F.suc index) =
+    lookupConcreteMap p rows index
+
   lookupScale :
     ∀ {n : Nat}
     (p : V.Vec R.ℝ n)
