@@ -134,6 +134,32 @@ initialInputTape (bit ∷ bits) =
 blankTape : Tape
 blankTape = tape [] Blank []
 
+-- No unary Nat decoding or extra bitword payload is introduced
+-- when putting an ORIGINAL graph or certificate word on its tape.
+encodeBitsPreservesLength :
+  (word : Word.BitWord) →
+  length (encodeBits word) ≡ length word
+encodeBitsPreservesLength [] = refl
+encodeBitsPreservesLength (bit ∷ bits) =
+  cong suc (encodeBitsPreservesLength bits)
+
+nonemptyInitialTapeCells :
+  (bit : Bool) (bits : Word.BitWord) →
+  cellCount (initialInputTape (bit ∷ bits)) ≡
+    length (bit ∷ bits)
+nonemptyInitialTapeCells bit bits =
+  cong suc (encodeBitsPreservesLength bits)
+
+initialTapeCellBudget :
+  (word : Word.BitWord) →
+  cellCount (initialInputTape word) ≤ suc (length word)
+initialTapeCellBudget [] = NatP.≤-refl
+initialTapeCellBudget (bit ∷ bits) =
+  NatP.≤-trans
+    (NatP.≤-reflexive (nonemptyInitialTapeCells bit bits))
+    (n≤sucN (length (bit ∷ bits)))
+
+
 -- A finite multi-tape transition writes and moves each tape exactly
 -- once. Unlike the attachment's one-char Instruction sketch, it
 -- specifies an action for the input tape AND every work tape.
