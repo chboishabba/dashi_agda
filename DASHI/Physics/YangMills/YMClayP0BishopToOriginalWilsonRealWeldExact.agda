@@ -71,7 +71,7 @@ record OriginalWilsonToBishopScalarWeld
           (map n)
           (Inv._⁻¹ (map d)
             (BishopP0.bishopPositiveDenominatorApartFromZero
-              (map d) (preservePositive positive)))
+              (map d) (preservePositive positive))))
 
 open OriginalWilsonToBishopScalarWeld public
 
