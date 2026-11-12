@@ -955,3 +955,12 @@ The initially added 311-line \`AbelBishopNewtonSelectedSinePositiveExact.agda\` 
 | Global Kneser / modular / observer | Local finite algebra, 196884 coefficient checks, Moonshine source interfaces and existing observer/transpose paths | Global Abel analytic continuation with monodromy/univalence/Schwarz reflection, real half-iterate, actual Hauptmodul q-series/modularity and selected 144-cell Heisenberg/modular period same-action intertwiner. These are independent nontrivial results; no local Newton proof by itself closes them |
 
 **Trust and attribution:** Original Bishop/Murray/Csimma real and the Bałaban/YM concrete two-ball sine theorem remain source owners; DASHI owns the selected rational specialization and finite complex/log power-difference proof. No CI dependence. New modules are registered in \`scripts/check_analytic_j_tetration_golden_local.sh\`; registration and static no-postulate inspection do not mean typechecked acceptance.
+
+
+### 2026-11-12 — Disk inequality versus exact-radius obstruction paid at finite power level
+
+\`DASHI/Analysis/BishopComplexNormSquareUpperPowerEnvelopeExact.agda\` is now source-written and local-checker registered. It resolves a nontrivial interface mismatch: \`BishopComplexNormSquarePowerEnvelopeExact\` accepted **exact norm-square equality** \(\mathrm{normSq}(u)\simeq r^2\), but any selected CLOSED Bishop disk supplies only \(\mathrm{normSq}(u)\le r^2\). Choosing an exact radius would require a constructive square-root/modulus witness and must not be guessed.
+
+The new \`BishopComplexNormSquareUpperRadius\` takes actual source nonnegative radius and the correct \(\le\) bound; \`normSquarePowerUpper\` proves by Nat induction and norm-square multiplicativity \(\mathrm{normSq}(u^n)\le(r^n)^2\). Reusing the existing \`BishopNonnegativeSquareReflectionExact\`, \`realPowerUpper\`/\`imagPowerUpper\` prove the coordinate envelopes \(|\Re u^n|,|\Im u^n|\le r^n\) with no square root. \`upperBoundBuildsOriginalPowerEnvelope\` supplies the repository's **same original** \`Norm.BishopQPowerComponentEnvelope\` interface from this weaker, physically relevant disk input.
+
+This closes the **source-written finite power-envelope bridge** needed for arbitrary log-disk points. The remaining decisive step is constructing the original Bishop normSq inequality for the selected normalized displacement, then proving the actual \(\log(1+u)\) coefficient geometric domination on those points, its limit, and principal-log inverse law. No new machine acceptance or global Kneser proof is claimed.
