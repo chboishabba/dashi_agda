@@ -127,20 +127,20 @@ module _
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak
       n (originalWordTest n w)
-      (λ links → 1ℝ -ℝ originalWordTest n w links)
+      (λ links → 1ℝ -ℝ (originalWordTest n w links))
       (λ links → oneMinusNN
         (originalWordTest n w links) (originalWordAbsBelowOne n w links))
       (λ links → oneMinusCompletes (originalWordTest n w links))
 
   originalNegWordNumeratorUpper :
     (n : Nat) (w : OriginalWord n) →
-    numerator n (λ links → -ℝ originalWordTest n w links)
+    numerator n (λ links → -ℝ (originalWordTest n w links))
       ≤ℝ partition n
   originalNegWordNumeratorUpper n w =
     OriginalOrder.originalWilsonNumeratorBelowItsPartition
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak n
-      (λ links → -ℝ originalWordTest n w links)
+      (λ links → -ℝ (originalWordTest n w links))
       (λ links → 1ℝ +ℝ originalWordTest n w links)
       (λ links → onePlusNN
         (originalWordTest n w links) (originalWordAbsBelowOne n w links))
@@ -148,14 +148,14 @@ module _
 
   originalNegWordNumeratorIsNegation :
     (n : Nat) (w : OriginalWord n) →
-    numerator n (λ links → -ℝ originalWordTest n w links)
+    numerator n (λ links → -ℝ (originalWordTest n w links))
     ≡ -ℝ (numerator n (originalWordTest n w))
   originalNegWordNumeratorIsNegation n w =
     trans
       (OriginalOrder.originalWilsonNumeratorCongruent
         theory traceData exponential beta oneLink bilateral divide
         ordered strictToWeak n
-        (λ links → -ℝ originalWordTest n w links)
+        (λ links → -ℝ (originalWordTest n w links))
         (λ links → (-ℝ 1ℝ) *ℝ originalWordTest n w links)
         (λ links → negAsScale (originalWordTest n w links)))
       (trans
@@ -215,7 +215,7 @@ module _
     OriginalOrder.originalWilsonNumeratorBelowItsPartition
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak n
-      test (λ links → 1ℝ -ℝ test links)
+      test (λ links → 1ℝ -ℝ (test links))
       (λ links → oneMinusNN (test links) (bounded links))
       (λ links → oneMinusCompletes (test links))
 
@@ -225,12 +225,12 @@ module _
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak n) →
     (∀ links → absℝ (test links) ≤ℝ 1ℝ) →
-    numerator n (λ links → -ℝ test links) ≤ℝ partition n
+    numerator n (λ links → -ℝ (test links)) ≤ℝ partition n
   originalBoundedTestNegativeNumeratorUpper n test bounded =
     OriginalOrder.originalWilsonNumeratorBelowItsPartition
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak n
-      (λ links → -ℝ test links)
+      (λ links → -ℝ (test links))
       (λ links → 1ℝ +ℝ test links)
       (λ links → onePlusNN (test links) (bounded links))
       (λ links → onePlusCompletes (test links))
@@ -240,14 +240,14 @@ module _
     (test : OriginalOrder.WilsonTest
       theory traceData exponential beta oneLink bilateral divide
       ordered strictToWeak n) →
-    numerator n (λ links → -ℝ test links)
+    numerator n (λ links → -ℝ (test links))
       ≡ -ℝ (numerator n test)
   originalBoundedTestNegativeNumeratorIsNegation n test =
     trans
       (OriginalOrder.originalWilsonNumeratorCongruent
         theory traceData exponential beta oneLink bilateral divide
         ordered strictToWeak n
-        (λ links → -ℝ test links)
+        (λ links → -ℝ (test links))
         (λ links → (-ℝ 1ℝ) *ℝ test links)
         (λ links → negAsScale (test links)))
       (trans
