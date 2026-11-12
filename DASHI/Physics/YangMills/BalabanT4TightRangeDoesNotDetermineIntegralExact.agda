@@ -32,12 +32,12 @@ data BetweenZeroAndOne : Nat → Set where
   exactlyZero : BetweenZeroAndOne zero
   exactlyOne : BetweenZeroAndOne one
 
-record TightRangeZeroOne (field : Site4 → Nat) : Set where
+record TightRangeZeroOne (values : Site4 → Nat) : Set where
   constructor tight-range
   field
-    allValuesWithin : ∀ site → BetweenZeroAndOne (field site)
-    zeroAttained : field s0 ≡ zero
-    oneAttained : field s3 ≡ one
+    allValuesWithin : ∀ site → BetweenZeroAndOne (values site)
+    zeroAttained : values s0 ≡ zero
+    oneAttained : values s3 ≡ one
 
 open TightRangeZeroOne public
 
@@ -72,8 +72,8 @@ largeMassRange = tight-range certificate refl refl
     certificate s3 = exactlyOne
 
 finiteIntegral : (Site4 → Nat) → Nat
-finiteIntegral field =
-  field s0 + (field s1 + (field s2 + field s3))
+finiteIntegral values =
+  values s0 + (values s1 + (values s2 + values s3))
 
 smallIntegralExact : finiteIntegral smallMassField ≡ one
 smallIntegralExact = refl
@@ -97,9 +97,9 @@ sameTransitive refl proof = proof
 -- attained min/max but different integrals.
 noExactIntegralFromTightRangeAlone :
   (estimator : Nat → Nat → Nat) →
-  ((field : Site4 → Nat) →
-    TightRangeZeroOne field →
-    estimator zero one ≡ finiteIntegral field) →
+  ((values : Site4 → Nat) →
+    TightRangeZeroOne values →
+    estimator zero one ≡ finiteIntegral values) →
   ⊥
 noExactIntegralFromTightRangeAlone estimator universal =
   oneNotThree
