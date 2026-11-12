@@ -13,6 +13,7 @@ import DASHI.Governance.CybersynGlobalViabilityMaxCutExact as Cyber
 import DASHI.Governance.CybersynCrossSectorScenarioExact as Scenario
 import DASHI.Planning.MultiAxisAuthorityFabricExact as Axis
 import DASHI.Governance.NonCompensatoryJusticeOrderExact as Justice
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 
 -- Conservation is constructed explicitly, not guessed from reported profits.
 -- All figures here are natural-valued accounting units.
@@ -27,10 +28,10 @@ record LossWaterfall : Set where
 
 open LossWaterfall public
 
-allocateLoss : (equity lender public : Nat) → LossWaterfall
-allocateLoss equity lender public =
-  lossWaterfall equity lender public
-    (equity + (lender + public)) refl
+allocateLoss : (equity lender publicShare : Nat) → LossWaterfall
+allocateLoss equity lender publicShare =
+  lossWaterfall equity lender publicShare
+    (equity + (lender + publicShare)) refl
 
 privateAbsorption : LossWaterfall
 privateAbsorption = allocateLoss 4 3 0
@@ -59,6 +60,49 @@ differentPublicExposure :
   publicExposure privateAbsorption ≡
   publicExposure publicBackstop → ⊥
 differentPublicExposure ()
+
+-- Aggregate loss and identical investment publicity do not recover which
+-- actor carries the actual loss.  Use the repository's constructive
+-- intersectional non-factorability criterion, rather than a generic slogan.
+data WaterfallCase : Set where
+  privateCase : WaterfallCase
+  publicCase : WaterfallCase
+
+waterfallFor : WaterfallCase → LossWaterfall
+waterfallFor privateCase = privateAbsorption
+waterfallFor publicCase = publicBackstop
+
+aggregateLoss : WaterfallCase → Nat
+aggregateLoss caseName = totalLoss (waterfallFor caseName)
+
+publicBurden : WaterfallCase → Nat
+publicBurden caseName = publicLoss (waterfallFor caseName)
+
+sameAggregateLoss :
+  aggregateLoss privateCase ≡ aggregateLoss publicCase
+sameAggregateLoss = refl
+
+differentTaxpayerBurden :
+  publicBurden privateCase ≡ publicBurden publicCase → ⊥
+differentTaxpayerBurden ()
+
+aggregateLossCannotRecoverTaxpayerBurden :
+  NonFactor.FactorsThrough aggregateLoss publicBurden → ⊥
+aggregateLossCannotRecoverTaxpayerBurden =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      privateCase publicCase
+      sameAggregateLoss differentTaxpayerBurden)
+
+investmentHeadlineCannotRecoverTaxpayerBurden :
+  NonFactor.FactorsThrough
+    (λ caseName → report (waterfallFor caseName))
+    publicBurden → ⊥
+investmentHeadlineCannotRecoverTaxpayerBurden =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      privateCase publicCase
+      sameReportedInvestment differentTaxpayerBurden)
 
 -- A public backstop changes distribution despite identical aggregate loss.
 -- It cannot generate commercial viability, actual permission or justice.
