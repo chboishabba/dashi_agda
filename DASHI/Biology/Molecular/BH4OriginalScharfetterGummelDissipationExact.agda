@@ -216,3 +216,73 @@ zeroDropIsPureDiffusion diffusivityOverH2 cLeft cRight =
       (d ⊗ (left ⊖ right))
       ⊜ ((d ⊗ left) ⊖ (d ⊗ right)))
     RP.≃-refl diffusivityOverH2 cLeft cRight
+
+------------------------------------------------------------------------
+-- Correct source-independent SG edge entropy factorization.
+--
+-- Let qL = cL B(x), qR = cR B(-x), and let logL/logR be
+-- actual logarithms of those POSITIVE quantities (not established
+-- in the current Bishop log owner). The molar face rate is
+--       k (qL-qR)
+-- while its chemical potential difference is
+--       RT (logR-logL).
+-- Thus the signed transport power is exactly
+--       -k RT (qL-qR)(logL-logR).
+--
+-- The algebraic equality is fully proved here. Deriving
+-- 0 ≤ (qL-qR)(logL-logR) from a concrete Bishop logarithm's
+-- monotonicity, and deriving the chemical potentials of the
+-- original Poisson-coupled BH4 source, remain independent OPEN
+-- analytic obligations. No hidden entropy-positivity premise.
+------------------------------------------------------------------------
+
+sgTransportPower :
+  (rate RT qL qR logL logR : R.ℝ) → R.ℝ
+sgTransportPower rate RT qL qR logL logR =
+  R._*_
+    (R._*_ rate (R._-_ qL qR))
+    (R._*_ RT (R._-_ logR logL))
+
+sgEntropyProductionFactor :
+  (rate RT qL qR logL logR : R.ℝ) → R.ℝ
+sgEntropyProductionFactor rate RT qL qR logL logR =
+  R._*_
+    (R._*_ rate RT)
+    (R._*_
+      (R._-_ qL qR)
+      (R._-_ logL logR))
+
+sgTransportPowerIsNegativeEntropyProduction :
+  (rate RT qL qR logL logR : R.ℝ) →
+  R._≃_
+    (sgTransportPower rate RT qL qR logL logR)
+    (R.- (sgEntropyProductionFactor rate RT qL qR logL logR))
+sgTransportPowerIsNegativeEntropyProduction
+  rate RT qL qR logL logR =
+  let open RP.ℝ-Solver
+  in solve 6
+    (λ rate′ rt′ left′ right′ logLeft′ logRight′ →
+      ((rate′ ⊗ (left′ ⊖ right′))
+       ⊗ (rt′ ⊗ (logRight′ ⊖ logLeft′)))
+      ⊜
+      (⊝ ((rate′ ⊗ rt′)
+       ⊗ ((left′ ⊖ right′)
+       ⊗ (logLeft′ ⊖ logRight′)))))
+    RP.≃-refl rate RT qL qR logL logR
+
+-- Equilibrium equality is allowed: the transport contribution
+-- vanishes when the two Bernoulli-weighted positive activities
+-- coincide, even at nonzero potential drop.
+sgEqualActivitiesHaveZeroPower :
+  (rate RT activity logActivity : R.ℝ) →
+  R._≃_
+    (sgTransportPower
+      rate RT activity activity logActivity logActivity)
+    R.0ℝ
+sgEqualActivitiesHaveZeroPower rate RT activity logActivity =
+  let open RP.ℝ-Solver
+  in solve 4
+    (λ r t a l →
+      ((r ⊗ (a ⊖ a)) ⊗ (t ⊗ (l ⊖ l)))
+      ⊜ Κ Q.0ℚᵘ)
+    RP.≃-refl rate RT activity logActivity
