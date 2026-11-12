@@ -1,3 +1,9 @@
+## 2026-11-12 physical gamma and tight G3 update
+
+See `Karp21ActualMaxCutBlockers20261109.md` for exact new source declarations and local regression. Physical `k+1` gamma prefix instructions, table-dispatch correction and original accepted |C|≤|G| are source-written proof candidates, **not Agda accepted**. Full payload parser, N21 instruction simulation/cost/heap, NP witnesses, Cook–Levin, Karp network and SATNotInP remain open.
+
+---
+
 ## 2026-11-12 physical F1 substrate, exact boundary
 
 See `Karp21ActualMaxCutBlockers20261109.md` for the new `Karp21NativeBitTapePhysicalMachineExact` proof owners and finite differential receipt. The physical zipper, multi-tape local step and `machineRunCellBudget` (≤ initial represented tape cells + physical fuel × number of tapes) are **SOURCE-WRITTEN**, not kernel accepted. The actual original N21 compiler/simulation and polynomial physical fuel proof remain OPEN. F2.2 complete heap/stack peak remains OPEN. The attached closure table does not override actual proof receipts.
