@@ -44,6 +44,7 @@ import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as
 import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as Perm
 import DASHI.Physics.YangMills.YMClayR445FlatPairedHaarIntegrationExact as Flat
 import DASHI.Physics.YangMills.YMClaySUNFinitePairedHaarBlockPushforwardExact as Paired
+import DASHI.Physics.YangMills.YMClaySUNTwoLinkHaarEffectiveFiberDensityExact as Fiber
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -231,3 +232,75 @@ module _
             (nativePairReconstitute coarse relative)
             interior)))
       (originalR445AllPairsRecomposeCoarse coarse relative)
+
+  ----------------------------------------------------------------------
+  -- P0.E original-Gibbs first-pair transport, with all other original
+  -- fine bonds fixed. No factorization of the Wilson action is used.
+  --
+  -- Source pair order is EXACTLY P0.B's 128 selected fine bonds,
+  -- followed by the 896 canonical residual fine bonds. A 1022-link
+  -- tail means 126 other pair-bonds + 896 residual bonds; the first
+  -- two coordinates are the FIRST original selected pair.
+  ----------------------------------------------------------------------
+
+  originalR445FineWilsonWeightAtFirstSelectedPair :
+    Vec Link 1022 → Link → Link → ℝ
+  originalR445FineWilsonWeightAtFirstSelectedPair tail U V =
+    Variable.periodicSUNGibbsDensity
+      theory traceData exponential 3 (beta 3)
+      (Codec.decodeOriginalBonds 4
+        (Perm.originalR445PairResidualToCanonical
+          (subst (Vec Link)
+            (sym Perm.originalR445PairResidualCountIs1024)
+            (U ∷ V ∷ tail))))
+
+  -- This is the actual original 1024-bond Wilson density with the
+  -- other 1022 canonical-reordered fine bond values frozen. The
+  -- source action may couple this pair to EVERY other link.
+  originalR445FirstSelectedPairWeightedNumerator :
+    (tail : Vec Link 1022) (observable : Link → ℝ) → ℝ
+  originalR445FirstSelectedPairWeightedNumerator tail observable =
+    Haar.integrateOne oneLink
+      (λ U → Haar.integrateOne oneLink
+        (λ V →
+          originalR445FineWilsonWeightAtFirstSelectedPair tail U V
+            *ℝ observable (SUN.sunMultiply theory U V)))
+
+  originalR445FirstSelectedPairEffectiveDensity :
+    (tail : Vec Link 1022) → Link → ℝ
+  originalR445FirstSelectedPairEffectiveDensity tail W =
+    Haar.integrateOne oneLink
+      (λ U →
+        originalR445FineWilsonWeightAtFirstSelectedPair
+          tail U
+          (SUN.sunMultiply theory (SUN.sunInverse theory U) W))
+
+  -- EXACT original-source first-pair change of variables and
+  -- effective-density identification. Only native SU(N) Haar
+  -- invariance, original group inverse and finite Fubini are used.
+  -- This does not infer that the other 63 pairs and 896 interior
+  -- links have been integrated into one effective coarse measure.
+  originalR445FirstSelectedPairWeightedHaarTransport :
+    (tail : Vec Link 1022) (observable : Link → ℝ) →
+    originalR445FirstSelectedPairWeightedNumerator tail observable
+    ≡ Haar.integrateOne oneLink
+        (λ W →
+          originalR445FirstSelectedPairEffectiveDensity tail W
+            *ℝ observable W)
+  originalR445FirstSelectedPairWeightedHaarTransport
+      tail observable =
+    Fiber.nativeTwoLinkWeightedPushforwardIsEffectiveDensity
+      theory oneLink ordered bilateral
+      (originalR445FineWilsonWeightAtFirstSelectedPair tail)
+      observable
+
+  originalR445FirstSelectedPairPartitionTransport :
+    (tail : Vec Link 1022) →
+    originalR445FirstSelectedPairWeightedNumerator
+      tail (λ _ → 1ℝ)
+    ≡ Haar.integrateOne oneLink
+        (originalR445FirstSelectedPairEffectiveDensity tail)
+  originalR445FirstSelectedPairPartitionTransport tail =
+    Fiber.nativeTwoLinkEffectiveDensityPreservesPartition
+      theory oneLink ordered bilateral
+      (originalR445FineWilsonWeightAtFirstSelectedPair tail)
