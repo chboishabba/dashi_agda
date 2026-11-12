@@ -312,6 +312,38 @@ intergenerationalInterpretiveReceipt =
     "Seven generations is a selected planning horizon, not universal Indigenous law or permission."
     false refl
 
+cybersynInterpretiveReceipt : InterpretiveReceipt
+cybersynInterpretiveReceipt =
+  interpretiveReceipt cyberneticViabilityLens
+    "DASHI.Core.GeneralizedRoleUnifiedDomains"
+    "Project Cybersyn; Stafford Beer and Chilean collaborators, 1971-1973"
+    "Historical motivation only; the DASHI time-indexed interface and finite counterexamples are original constructions, not claims of historical typechecking."
+    false refl
+
+marxInterpretiveReceipt : InterpretiveReceipt
+marxInterpretiveReceipt =
+  interpretiveReceipt marxCapitalLens
+    "DASHI.Culture.MarxLabourUnionSourceBoundaryExact"
+    "Karl Marx, Capital volume I (1867), chapters 6, 10 and 13"
+    "Historical capital/labour and cooperative-production source scope; not an attribution of DASHI global viability theorems."
+    false refl
+
+irigarayInterpretiveReceipt : InterpretiveReceipt
+irigarayInterpretiveReceipt =
+  interpretiveReceipt irigarayRelationalLens
+    "DASHI.Core.IrigarayLabialRelationalCarrierExact"
+    "Luce Irigaray, This Sex Which Is Not One, English edition 1985, ISBN 9780801493317"
+    "Relational contact motivates a classification boundary; not a numerical theorem or universal biology."
+    false refl
+
+twoEyedInterpretiveReceipt : InterpretiveReceipt
+twoEyedInterpretiveReceipt =
+  interpretiveReceipt twoEyedPluralKnowledgeLens
+    "DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact"
+    "Bartlett, Marshall and Marshall Two-Eyed Seeing; Kimmerer and source registry"
+    "Distinct knowledge histories are coordinated without fusion; actual standing, consent and benefit-sharing must be independently sourced."
+    false refl
+
 -- Exact remaining computational/empirical cuts:
 -- G1: typed stock-flow/physical conservation and cross-sector joins;
 -- G2: measured time-series transitions and action-response calibration;
