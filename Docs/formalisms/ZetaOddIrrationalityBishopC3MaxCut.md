@@ -136,3 +136,17 @@ New `Integration/BishopOddZetaHalfPlaneSpecialization.lean` committed to `chbois
 **Precise scope:** the rationality predicate is `∃ q : ℚ, z = (q : ℂ)`. This must still be welded to the external proof's *actual* definition of irrationality (often on `ℝ`, or an odd zeta value seen through complex coercion). Neither the external disjunction nor native Agda carrier equality is imported. This is therefore source-written, not a kernel-verified closure of ZI00, ZI01 or ZI03.
 
 Next cut: after the pinned Lean build, obtain the external theorem's exact Lean declaration and specialize its genuine Mathlib zeta to this finite window, proving the rationality predicate equivalence. Then settle the Agda/Bishop semantic evaluation boundary. The completed RH assembly remains wholly independent.
+
+## 2026-11-12 narrower-window real/complex exact transport
+
+Public external source: Shawn Krisman, `telaviv/zeta-irrationality` at https://github.com/telaviv/zeta-irrationality ; README declaration `ZetaIrr.Z7.oneOfZeta7To21 : OneOfZeta7To21`, where `OneOfZeta7To21` is a finite-set existential over `Irrational (riemannZeta j).re` for `j ∈ {7,9,...,21}`. Source README reports a kernel audit `[propext, Classical.choice, Quot.sound]`; this report is external, not independently rerun. The README attributes mathematical lineage to Ball–Rivoal, Rivoal, Zudilin and Lai–Zhou, with the Z7 construction based on Zudilin's 2004 work and a distinct pole-block profile. It additionally declares AI-generated implementation and no independent human mathematical audit; preserve both qualifiers.
+
+DASHI Lean PR #104 branch gained `Integration/BishopOddZetaNarrowWindowTransport.lean`, commit `14b175ca16a1c63202a383f9e92e0739bbb40dde`. The new source proves (subject to pinned Lean compilation):
+- `irrational_real_iff_no_rational_complex`: Mathlib real irrationality iff exclusion of a rational complex cast;
+- `irrational_re_iff_complex_rational_neg`: the same for complex `z` with explicit `z.im=0`;
+- `intoFifteen` and `intoFifteen_same_argument`: `Fin 8` -> `Fin 15` preserving `7+2k=5+2(k+1)`;
+- `narrowerWitness_to_originalSource`: transport an externally **supplied** Z7-style real irrationality witness to the existing original Bishop/Dirichlet source window, given real-valuedness of positive-odd Mathlib zeta. Neither the existential theorem nor real-valuedness is postulated as a global axiom.
+
+Still open: pin and read the external theorem declaration and exact commit, prove finite-set -> `Fin 8` witness conversion, discharge positive-odd zeta imaginary-part zero by an actual Mathlib theorem, run pinned Lean kernel and axiom audits, and transport into the original Agda Bishop carrier. Cross-version Lean 4.35 external vs existing project compatibility is a *version-change proof surface*, not permission to identify snapshots without inspection.
+
+No information here settles the RH Clay Weil-positivity or G1–G4 error-floor gates.
