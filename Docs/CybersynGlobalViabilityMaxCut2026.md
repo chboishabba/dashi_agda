@@ -166,3 +166,50 @@ PR #1484 provides the separate Lean-world source/semantic-join and original-iden
 **P1 exact integration contract (unpaid):** acquire the actual authoritative builder action and checked event/declaration receipts; transport exact immutable world identity and source/revision/time into `SameDatedEvent`; require independently checked authority before admitting `AdmittedSameEventJoin`; preserve original owner and failed-candidate residuals. A candidate join or source spelling coincidence cannot pay P1.
 
 This cross-PR source inspection is not a run of the Lean/Agda/PostgreSQL suites.
+
+## Economic-world and empirical scenario execution cut (2026-11-12)
+
+This continuation implements actual executable Python **economic observation** world ingestion, alongside a predictive scenario comparison. It does **not** implement the still-missing authoritative JMD/Lean proof-world builder, and it does **not** independently adjudicate empirical evidence. Those two admissions remain separate and explicit.
+
+### Delivered source interfaces
+
+| Phase | Concrete file/API | Exact deliverable | Current status |
+|---|---|---|---|
+| P1a | `scripts/cybersyn_economic_observation_world.py` — `read_snapshot`, `ingest` | Immutable hash-pinned JSONL economic-event snapshots; atomic SQLite insertion; duplicate/conflict rejection; original event ID, UTC time, region, claimant, authority status and claim-boundary preservation | Source-written, no runtime receipt yet |
+| P1b | `scripts/cybersyn_world_scenario_handoff.py` — `verify_cross_world` | Fail-closed event identity, UTC timestamp, source layer, event content and all scenario feature/resource amounts must agree across stored events and modelling CSV | Source-written, no runtime receipt yet |
+| P8a | `scripts/cybersyn_empirical_scenario_validation.py` — `load`, `fit`, `validate` | Exact snapshot SHA-256; no-leak chronological split; finance/grid/skilled-labour conservation checks; additive vs interaction logistic benchmark; holdout Brier/log loss; deterministic 500-resample uncertainty interval | Source-written, no runtime receipt yet |
+| P8b | `tests/test_cybersyn_economic_world_and_scenarios.py` | Idempotency, relabelling and hash tampering, authority self-promotion rejection, conservation failure, holdout leakage, and adversarial event/measurement join tests | Source-written, tests not executed here |
+| P8c | `scripts/generate_cybersyn_synthetic_fixture.py` — `generate` | Deterministic synthetic 64-row two-region source and scenario snapshot, both marked `empirically_admitted=false` | Source-written, no runtime receipt yet |
+
+**Do not conflate P1a with the upstream Lean/JMD world.** P1a creates an auditable observation store in a new SQLite file. Upstream #1494 H02–H04 still require the authoritative JMD builder, complete Lean DAG checking and original world DB insertion. P1b is an exact consumer join, not an Agda/Lean proof or cross-foundation equivalence.
+
+### Offline execution and acceptance commands
+
+```sh
+python3 -m unittest discover -s tests -p 'test_cybersyn_economic_world_and_scenarios.py' -v
+
+python3 scripts/generate_cybersyn_synthetic_fixture.py --out /tmp/cybersyn-fixture
+
+python3 scripts/cybersyn_economic_observation_world.py \
+  /tmp/cybersyn-fixture/world.jsonl \
+  /tmp/cybersyn-fixture/world-manifest.json \
+  --database /tmp/cybersyn-fixture/world.sqlite3
+
+python3 scripts/cybersyn_world_scenario_handoff.py \
+  --database /tmp/cybersyn-fixture/world.sqlite3 \
+  --world-manifest /tmp/cybersyn-fixture/world-manifest.json \
+  --scenario-data /tmp/cybersyn-fixture/scenario.csv \
+  --scenario-manifest /tmp/cybersyn-fixture/scenario-manifest.json \
+  --cutoff 2026-02-17T00:00:00Z
+```
+
+For real regional inputs, provenance must include snapshot digest, collection method, authority owner, source locator and version; use the exact CSV schema documented at the top of `scripts/cybersyn_empirical_scenario_validation.py`. A real-world source is not validated merely by filling `source_layer=primary`. All generated outcomes retain `empirically_admitted=false` pending independent source adjudication, causal confounding review, model competition and actual predictive validation on independent data.
+
+### Remaining P1/P8 maximum cut
+
+- **P1c (OPEN):** actual authoritative JMD/Lean proof-world builder/validator discovery, versioned DAG/source-identity receipt, original owner and PostgreSQL insertion. PR #1494 remains the fail-closed queue; PR #1484 is a candidate source/semantic world, not a certified general builder.
+- **P1d (OPEN):** explicit Agda proposition linking valid economic-world receipt identity and temporal observation to `CybersynDatedPublicRiskJoinExact` without inventing world IDs from string labels. A Python store receipt is not an Agda proof.
+- **P8d (OPEN):** independent primary/secondary empirical datasets with measurable regional exposures, energy/electricity/housing/food/finance outcomes and documented measurement provenance.
+- **P8e (OPEN):** real holdout and model audit; blocked until data is supplied and independent sourcing, leakage and adjustment/confounder reviews are completed. The synthetic benchmark establishes pipeline execution suitability only after its own tests pass, not macroeconomic conclusions.
+- **P0 (OPEN):** pinned local Nix/Agda 2.9 kernel check remains required for all eight source-written Agda owners.
+
