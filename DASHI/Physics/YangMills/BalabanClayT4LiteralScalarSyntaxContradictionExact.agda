@@ -1,21 +1,14 @@
 module DASHI.Physics.YangMills.BalabanClayT4LiteralScalarSyntaxContradictionExact where
 
--- Exact source API obstruction (original 2026-11-12 signature):
--- LiteralScalarIntegrandExpression requires simultaneously
+-- Permanent negative control for the UNSOUND ORIGINAL source API SHAPE:
+-- a single free inductive DiagramExpression cannot propositionally equal
+-- both (divide numerator denominator) and (add singular regular).
 --
---  scalarIntegrand ≡ divide numerator denominator
---  scalarIntegrand ≡ add continuumSingular regularIntegrand
---
--- for the FREE inductive DiagramExpression grammar. These are
--- DISTINCT constructors. NO inhabitant can satisfy both equations.
--- This is why constructing the four Wilson/ghost/Haar physical
--- literal scalar simply by "filling the existing record" is impossible.
--- This proof witnesses the obstruction directly in the ORIGINAL AST.
---
--- Fix needed: replace the second propositional SYNTACTIC equality
--- with equality of SOURCE-FAITHFUL PHYSICAL SEMANTIC INTERPRETATIONS.
--- Neither equality of arbitrary intervals nor a Set=⊤ placeholder is
--- a valid replacement for true physical scalar-point equality.
+-- The ORIGINAL LiteralScalarIntegrandExpression record was repaired in
+-- BalabanClayT4LiteralOneLoopBoxEvaluatorExact to use explicitly selected
+-- source-pointwise scalar semantics rather than impossible AST equality.
+-- This file preserves the countertheorem without importing the old,
+-- now-fixed record interface, so the repaired project can compile.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Empty using (⊥)
@@ -29,16 +22,15 @@ divideConstructorDistinctFromAdd :
   ⊥
 divideConstructorDistinctFromAdd ()
 
-literalScalarRecordUninhabitableBeforeSemanticRepair :
-  ∀ {expressions ward} →
-  Eval.LiteralScalarIntegrandExpression expressions ward →
+formerLiteralScalarSyntaxRequirementsAreInconsistent :
+  ∀ {numerator denominator scalarIntegrand singular regular} →
+  scalarIntegrand ≡ Eval.divide numerator denominator →
+  scalarIntegrand ≡ Eval.add singular regular →
   ⊥
-literalScalarRecordUninhabitableBeforeSemanticRepair source =
-  divideConstructorDistinctFromAdd
-    (trans
-      (sym (Eval.scalarIntegrandDefinition source))
-      (Eval.singularRegularSplitExact source))
+formerLiteralScalarSyntaxRequirementsAreInconsistent quotient split =
+  divideConstructorDistinctFromAdd (trans (sym quotient) split)
 
--- This theorem must be REMOVED or moved to a historical snapshot when
--- LiteralScalarIntegrandExpression is repaired to carry true semantic
--- equality instead of contradictory AST constructor equality.
+-- This says nothing against the actual physical singular+regular identity.
+-- That identity lives in sourcePointwiseSemantics and must be proved in
+-- the selected physical Bishop/Fourier/diagrammatic model, with a truthful
+-- same-source interpretation for all constructors.
