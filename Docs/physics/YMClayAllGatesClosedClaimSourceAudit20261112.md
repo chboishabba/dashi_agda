@@ -49,3 +49,15 @@ All controls are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegres
 5. **E1/R576/R577/N1/G1:** maintain separate same-object continuum, connected-cluster, OS spectral, noncollapse, and group-coverage receipts.
 
 **Verification status:** GitHub source commits and readback, **not** Agda 2.9 kernel acceptance. No compiler or independent physical analytic estimate was run in this environment.
+
+
+## 2026-11-12 subsequent same-carrier constructive Bishop P0 implementation
+
+After this audit, the P0 scalar work advanced by two new Agda modules:
+- `YMClayP0BishopRealCarrierInstancesExact.agda` proves native Bishop `x-c≃x+(-c)*1`, `x-0≃x`, genuine centered additive cancellation, and `(n/z)*z≃n` under native `0<z` using Murray/Csimma's imported setoid solver and proved inverse. Those are **concrete constructed Bishop real** proof terms, not uninstantiated record fields or new postulates.
+- `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` proves that a *single faithful interpretation* of `RealAnalysisAxioms.ℝ` into the Bishop setoid, reflecting equality and preserving the **actual source-selected divide**, supplies both existing `OriginalRealCenteringLaws` and `OriginalRealPositiveDivisionLaws` for original Wilson P0.01–05. Its `OriginalWilsonToBishopScalarWeld` itself remains UNINHABITED: the original Wilson scalar carrier is independently postulated and not definitionally Murray's Bishop carrier. A genuine quotient/equality-preserving same-carrier realization must be built instead of substituting setoid proofs for propositional equality.
+- Existing concrete rational SU(2) quaternion normalized trace bound owner `BalabanSU2RationalWilsonTraceBoundExact.agda` had a missing explicit rational ring solver import; repaired. This is a concrete SU(2) *subcase*, not the full `SUNMatrixRealTrace` matrix source for arbitrary N.
+
+**Remaining P0.06 signed-test gap:** `|W|≤1` does not imply a signed Wilson word is pointwise nonnegative, so it does not directly inhabit the positive-test complement of `originalWilsonNormalizedBelowOne`. To obtain `|E_W W|≤1`, prove `|N(W)|≤N(|W|)` from the actual Haar positivity+linearity with valid ordered-real absolute compatibility, or construct a certified affine-shifted [0,1] test. No such source proof is currently present.
+
+**D2 important logical precision:** decay `⟨ψ,e^{-tH}ψ⟩≤ C_ψ e^{-mt}` on a dense core with **one common positive exponent m**, a genuine *positive self-adjoint* common H, and an actual spectral-measure theorem can establish spectral support above m even with unbounded state-dependent `C_ψ`. Density alone does not justify taking a limit to a norm-1 semigroup bound with such prefactors. This sharpens rather than negates the existing single-observable hidden-mode counterexample. Neither same-H source nor its all-core decay and spectral transfer is present in this PR.
