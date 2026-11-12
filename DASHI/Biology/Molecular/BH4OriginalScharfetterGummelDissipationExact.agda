@@ -366,3 +366,67 @@ originalConcrete54x29SGTransportConserves
   pairedBishopSGNativeZero
     (V.map Embed.embed (V.lookup weights axis))
     (originalConcreteSGFluxes prefactors faces)
+
+------------------------------------------------------------------------
+-- ACTUAL zero-drop quadratic-energy dissipation (no logarithm).
+-- This follows from the concrete Bishop square nonnegativity theorem.
+-- For a blocking internal two-cell diffusion edge with inward/outward
+-- sign correctly oriented, the instantaneous quadratic-energy power
+-- is -k(cL-cR)^2. This proves a real nonnegative dissipation
+-- magnitude for k>=0, without claiming the full SG entropy law.
+------------------------------------------------------------------------
+
+import DASHI.Foundations.BishopSquareNonnegativeExact as BishopSquare
+
+zeroDropQuadraticDissipation :
+  (rateScale left right : R.ℝ) → R.ℝ
+zeroDropQuadraticDissipation rateScale left right =
+  R._*_
+    rateScale
+    (R._*_
+      (R._-_ left right)
+      (R._-_ left right))
+
+zeroDropQuadraticPower :
+  (rateScale left right : R.ℝ) → R.ℝ
+zeroDropQuadraticPower rateScale left right =
+  R._*_
+    (zeroDropMolarFaceRate rateScale left right)
+    (R._-_ right left)
+
+zeroDropPowerIsMinusQuadraticDissipation :
+  (rateScale left right : R.ℝ) →
+  R._≃_
+    (zeroDropQuadraticPower rateScale left right)
+    (R.- (zeroDropQuadraticDissipation rateScale left right))
+zeroDropPowerIsMinusQuadraticDissipation rateScale left right =
+  let open RP.ℝ-Solver
+  in solve 3
+    (λ k l r →
+      ((k ⊗ (l ⊖ r)) ⊗ (r ⊖ l))
+      ⊜ (⊝ (k ⊗ ((l ⊖ r) ⊗ (l ⊖ r)))))
+    RP.≃-refl rateScale left right
+
+zeroDropQuadraticDissipationNonnegative :
+  (rateScale left right : R.ℝ) →
+  R.NonNegative rateScale →
+  R.NonNegative
+    (zeroDropQuadraticDissipation rateScale left right)
+zeroDropQuadraticDissipationNonnegative
+  rateScale left right nonnegativeRate =
+  RP.nonNegx,y⇒nonNegx*y
+    nonnegativeRate
+    (BishopSquare.bishopSquareNonnegative
+      (R._-_ left right))
+
+zeroDropEqualPopulationsHaveZeroQuadraticPower :
+  (rateScale population : R.ℝ) →
+  R._≃_
+    (zeroDropQuadraticPower rateScale population population)
+    R.0ℝ
+zeroDropEqualPopulationsHaveZeroQuadraticPower rateScale population =
+  let open RP.ℝ-Solver
+  in solve 2
+    (λ k p → ((k ⊗ (p ⊖ p)) ⊗ (p ⊖ p))
+      ⊜ Κ Q.0ℚᵘ)
+    RP.≃-refl rateScale population
