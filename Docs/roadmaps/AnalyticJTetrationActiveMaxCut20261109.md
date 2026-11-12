@@ -801,3 +801,49 @@ Added \`DASHI/Moonshine/AbelBishopLogOnePlusZeroNormalizationExact.agda\` to exi
 **Boundary:** this is only the local \(\log(1)=0\) normalization, not a constructed selected principal-log inverse on a disk and not \(\log(\exp x)=x\) on the positive Bishop reals. The next selected-chart seam is proving \`originalBishopSelectedLocalLogGerm\` at zero displacement agrees with this canonical zero source value under the \`normalizedDisplacement p nz 0≈_C0\` certificate and zero-radius witness, then proving the actual inverse germ and its geometric increment estimates. The numeric certified Banach/Koenigs radii remain not yet an inhabited Bishop fixed-point/chart certificate.
 
 **Source status:** committed and registered for local golden check, no Agda kernel receipt. CI is not used or needed.
+
+
+## 2026-11-12 — Corrected exact Newton/Koenigs cut, original Bishop log-exp crosswalk, P1g–P4 non-promotion
+
+### Previously owned log-exp (reuse; do not re-prove)
+
+\`DASHI/Analysis/InverseLogarithmFromExponential.agda\` **already proves** \`expLogFromExponential\`, \`logExpFromExponential\`, \`logOneFromExponential\`, and \`inverseRealLogarithm\`. Their authority is **parameterized by** an inhabited \`ConstructedRealExponential R\` with original \`expOntoPositive\`, \`expInjective\`, \`expPositive\` and multiplication positivity. Those theorems are not independently evidence that the concrete Murray/Bishop factorial \`bishopExp\` has been instantiated into the same real exponential record. \`PrincipalComplexLog.agda\` and \`PrincipalComplexLogRealization.agda\` likewise have principal complex inverse equations **as branch/authority fields**, not a construction of the corresponding principal logarithm on the *original* \`BishopComplexSeriesConvergenceExact\` carrier. Respect same-carrier proof ownership.
+
+The original local log source already has \`AbelBishopLogOnePlusCoefficientDominationExact.originalBishopLogOnePlusAbsoluteConvergenceOnUnitDisk\`, \`AbelBishopSelectedLogAffineReconstructionExact.originalBishopSelectedLocalLogGerm\`, and the finite complex derivative polynomial \`AbelBishopLogFiniteComplexDerivativeExact.originalBishopComplexFiniteLogDerivativeIdentity\`. The missing work is **not** basic logarithmic term convergence: it is quantitative tail/remainder control, uniform derivative-limit transport, branch identity, and selected fixed-point/disk interpretation.
+
+### Corrected selected rational geometry
+
+Original candidate \`p0 = 31813/100000 + i*133724/100000\`, Newton radius \`1/200\`, and **corrected** Koenigs disk radius \`1/10\`.
+
+- The proposed \`|exp(p0)-1| >= 1.503\` is false: actual magnitude is approximately \`1.501049876...\`; a rigorous available bound is \`> 3/2\`.
+- The proposed radius \`1/8\`, lower norm \`2499/2000\`, and Lipschitz \`4/5\` do **not** fit: \`(4/5)*(2499/2000) = 2499/2500 < 1\`, whereas an inverse modulus \`<=4/5\` would require that product \`>=1\`.
+- With selected radius \`1/10\` and **still unpaid actual Bishop** \`27/20 <= |p| <=69/50\`, each point in the disk has \`|w|>=5/4\`, hence the proposed principal-log derivative estimate \`<=4/5\`; the quadratic remainder constant \`M2 = 8/25\` follows from \`1/(2*(5/4)^2)\`.
+- The exact selected ratio is \`(69/50)*(4/5)^2 = 552/625 < 1\`, and \`(69/50)*(8/25)*(1/10)^2 < 7/1000\`.
+
+**Finite exact-rational evidence**: \`scripts/check_analytic_j_tetration_newton_center_exact.py\` uses Python \`Fraction\` Taylor intervals with explicit exp tail and alternating cosine/sine remainder certificates. Local execution of the equivalent exact interval preflight succeeded for \`|exp(p0)-p0| < 1/10000\`, \`|exp(p0)-1| > 3/2\`, \`exp(Re(p0)+1/200) < 7/5\`, \`271/200 < |p0| < 11/8\`, and the Newton disk contraction/self-map *scalar bounds*. This is a proof of **rational endpoint inequalities conditional on the standard analytic Taylor remainder interpretation**, not yet an Agda 2.9 kernel proof of a Bishop native-exponential fixed point.
+
+### New actual-source theorem owners (all source-written, not kernel-accepted)
+
+- \`AbelBishopKoenigsSelectedRationalConstantsExact.agda\`: correct rational inequalities, exact center norm-square comparisons, native \`bishopSelectedKoenigsBetaInterval\` and \`bishopSelectedKoenigsGeometricInputs\` at \`552/625\` and \`7/1000\`, native Newton ratio/input at \`1/200\` and \`1/15000\`. Reuses original vendored Bishop rational embedding/order.
+- \`AbelBishopInverseKoenigsRemainderFactorExact.agda\`: literal \`R_p(w)=(g(w)-p)-p^-1*(w-p)\`; exact same-source algebraic identity \`h_(n+1)-h_n ~= p^n*(p*R_p(g^n(z)))\`. Reuses actual Bishop complex reciprocal and finite orbit, no derivative or contraction input.
+- \`AbelBishopInverseKoenigsRemainderToSchroederExact.agda\`: \`originalBishopRemainderBuildsActualIncrementBounds\`, then \`selectedOriginalBishopKoenigsSchroeder\`, with original \`552/625\` Bishop ratio already inhabited. Precise remaining analytic source leaf: \`OriginalBishopSelectedAnalyticRemainderBound\` at z and g(z) proves the two component inequalities for the genuine scaled logarithmic remainder; no caller-chosen ratio or convergence proof.
+- \`AbelBishopNewtonSelectedOperatorExact.agda\`: selected rational \`BishopComplex\` center; exact Newton endomap and recursively generated Newton orbit on \`Weld.originalBishopExpOnSeries T\`, using original \`Reciprocal.reciprocalC\` of the **same** \`expC(p0)-1\`. Proves both directions of algebraic fixed-point compatibility: \`originalBishopExpFixedPointIsNewtonFixedPoint\`, \`originalBishopNewtonOperatorFixedImpliesExpFixed\`.
+- \`AbelBishopNewtonSelectedLimitExact.agda\`: from \`OriginalBishopNewtonSelectedStepBounds\` on literal Newton increments at ratio \`1/200\` and continuity of the literal Newton endomap along the same orbit, builds a Bishop complex limit and proves \`originalBishopSelectedNewtonLimitIsNativeExpFixed\` via original completion, successor convergence, unique limits, and nonzero denominator cancellation.
+- Original \`JCoefficientCharacterBridge.agda\` extended with exact \`196884=10*3^9+54\`, \`196884=27*7292\`, and \`196884=81*2430+54\` finite Nat arithmetic. Does not assert a Hauptmodul or Monster trace theorem.
+
+### Remaining highest-information P1 gate
+
+1. **Source analytic bridge:** show the exact-rational Taylor interval enclosures are valid for the *same* configured Murray/Bishop \`expC\` and actual \`cos_B/sin_B\`, and build the original norm-square nonzero witness of \`expC(p0)-1\`.
+2. **Original Bishop Newton contraction:** prove pointwise \`OriginalBishopNewtonSelectedStepBounds\` for the literal Newton orbit on \`B(p0,1/200)\`, and original native expC/reciprocal continuity along this same orbit. Then \`originalBishopSelectedNewtonLimitIsNativeExpFixed\` supplies the **inhabited** p, with no postulate.
+3. **Source log disk:** transfer selected p norm margins, construct a setoid-correct principal local log branch via the original \`log(1+u)\` series, with \`g(p)≈p\`, domain preservation, and \`g(exp(w))≈w\` on its selected local domain.
+4. **Genuine quadratic remainder:** prove original \`OriginalBishopSelectedAnalyticRemainderBound\` for z and g(z), using a finite \`log(1+u)-u\` positive-degree tail and Bishop absolute-series comparison. Then \`selectedOriginalBishopKoenigsSchroeder\` provides the exact local inverse equation and canonical limit; prove univalence/normalization separately.
+
+### P1g–P4 global mathematical cautions and physical frontiers
+
+- \`A(z)=Log(Psi(z))/Log(p)\` is **undefined at p** where \`Psi(p)=0\`; an Abel chart must use a punctured/disc-with-cut domain and choose compatible logarithm branches, with local univalence and monodromy. Exponential iteration from arbitrary negative-real z is **not** proved to reach the selected complex p disk. Schwarz reflection and a real half-iterate cannot be inferred solely from local Schroeder.
+- \`J=j-744\` and the first coefficient arithmetic are finite normalizations. Hauptmodul existence requires the actual E4/E6/Delta quotient and its source convergence, holomorphic/modular transformation and nonvanishing/divisor certificates. Original modular and moving 27/9/3 observer transports remain their respective owners.
+- SL2(Z) period transformations, Heisenberg transpose-residual restoration and a metaplectic unitary representation are distinct objects; a shared notation is **not** a constructed same-action intertwiner. The 13-coordinate centre collapse does not itself prove unitarity on a modular period carrier.
+- Boundary of a 4-cube is **3-dimensional** and supports 3-form integration; 1D complex contour arguments require explicit slices, orientation and Fubini/disintegration, while \`d(omega3)\` is a 4-form not integrable over the 3D boundary. Normalized solid-angle \`omega3\` can give degree one for the oriented enclosing boundary if puncture/homology/Stokes are actually paid. An arbitrary closed gauge current has no automatic winding one.
+- BSD/YM/Clay statements from the pasted proposal are not consequences of the P1g–P4 finite facts and are not promoted.
+
+**Trust:** Agda golden, exact-head local checker authoritative, no CI reliance, no physical or global unproved theorem represented as accepted. The new source declarations have not had an Agda typechecker receipt in this execution environment.
