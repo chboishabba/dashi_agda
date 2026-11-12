@@ -7,6 +7,7 @@ module DASHI.Reasoning.FederatedStreamingBlockRefinementFiniteExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.List using (List; []; _∷_)
 
 data Admission (A : Set) : Set where
   rejected : Admission A
@@ -179,3 +180,24 @@ oldGenerationCannotCommit :
   ≡ admitted value →
   false ≡ true
 oldGenerationCannotCommit value ()
+
+------------------------------------------------------------------------
+-- Batching lemma: arbitrary finite lists of independently source-
+-- equivalent refinement results may be transported element by element.
+-- It does not claim that an actual neural denoiser is separable in time.
+------------------------------------------------------------------------
+
+mapResult : (Nat → Nat) → List Nat → List Nat
+mapResult f [] = []
+mapResult f (x ∷ xs) = f x ∷ mapResult f xs
+
+blockBatchRefinementPreservesReference :
+  (reference worker : Nat → Nat) →
+  ((x : Nat) → worker x ≡ reference x) →
+  (inputs : List Nat) →
+  mapResult worker inputs ≡ mapResult reference inputs
+blockBatchRefinementPreservesReference reference worker agree [] = refl
+blockBatchRefinementPreservesReference reference worker agree (x ∷ xs)
+  rewrite agree x
+        | blockBatchRefinementPreservesReference reference worker agree xs
+  = refl
