@@ -1,3 +1,9 @@
+## 2026-11-12 physical F1 substrate, exact boundary
+
+See `Karp21ActualMaxCutBlockers20261109.md` for the new `Karp21NativeBitTapePhysicalMachineExact` proof owners and finite differential receipt. The physical zipper, multi-tape local step and `machineRunCellBudget` (≤ initial represented tape cells + physical fuel × number of tapes) are **SOURCE-WRITTEN**, not kernel accepted. The actual original N21 compiler/simulation and polynomial physical fuel proof remain OPEN. F2.2 complete heap/stack peak remains OPEN. The attached closure table does not override actual proof receipts.
+
+---
+
 ## 2026-11-11 highest-alpha new F2.2 leaf and K0 execution correction
 
 **Concrete Agda source** `Karp21NativePositiveThresholdInputWidthExact` now contains `originalPositiveThresholdRegisterSuffixCharge` and `actualWholeBinaryPositiveThresholdRegisterFitsOriginalWord`: after the ACTUAL strictly-positive gamma W reader produces an LE register, its bit length plus the parser's untouched suffix fits the original field source bits, and a successfully parsed complete original N21 binary graph's retained W register fits the length of the original graph word. This pays another F2.2 *retained register payload* source candidate, not heap/list/stack/tape allocation. Imported into both Karp Golden roots and added to focused Agda kernel targets. Its independently executed local finite mirror passes **85,535/85,535** cases; reproducible `scripts/check_karp21_positive_threshold_input_width.py` committed and added to preflight.
