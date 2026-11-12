@@ -373,3 +373,54 @@ cat artifacts/federated_topology/finite_preflight.json
 If continuing to run via a `systemd --user` persistent service, update its `ExecStart` to call the new `nix develop .#federated-topology` command, verify the old service has stopped, and preserve the service's journal and exit status. No competing Nix process or repeated full default-shell build should be launched.
 
 **Current actual status:** CPU finite preflight PASS; focused Nix entrypoint SOURCE-WRITTEN; focused Nix build NOT YET VERIFIED; Agda 2.9 finite kernel acceptance OPEN; original LILA/Qwen and distributed execution OPEN. The mathematical maximum cut remains unchanged until we receive a real Agda result; do not spend time on unrelated zkperf repairs to discharge topology gates.
+
+## 2026-11-12 verified finite gate and native-GPU-first policy correction
+
+### Evidence state / provenance
+
+User executed 14/14 finite CPU preflight tests and reports **three focused Agda 2.9 modules kernel/type-check accepted** in the established `run_agda29_parallel_check.sh` environment. The initial `zkperf` Rust package failure is superseded by the user's actual focused proof receipt, not interpreted as mathematical failure. Independently fetched GitHub commit `d92d9ac025a09ed0aab0b9eb922d00d5631ad7ab` from branch `fix/federated-topology-streaming-bound` repairs the streamed-selection `1 ≤ 2` witness by removing an extra `s≤s`. **Record kernel accepted as user-reported, not assistant re-executed**; preserve exact checker version, worktree and logs. Avoid falsely conflating the branch commit with master.
+
+User requests **GPU native from now forward**. Interpret precisely: model *training*, model *inference*, distributed expert GPU kernels, and performance/efficiency claims must run actual native device operations. Retain Agda proof checking, topology Python finite tests, source inspection, static PyTorch skip-reason collection and CPU-oracle numeric references on CPU. CPU-substituted linear layers or mixed CPU/GPU hybrid may diagnose failure but are NOT accepted as native-GPU training or a successful GPU correspondence.
+
+### Actual gfx803 source and fault-boundary status
+
+Relevant owners: `chboishabba/gfx803_compat_graph` master commit `b40e54422a99c3e6683c3260f7f697fb0c8e7867`; `scripts/gfx803_opinfo_skip_reason_probe.py`; `docs/GFX803_OPINFO_SKIP_REASON_RECOVERY_20261112.md`. Existing real LILA bridge in `chboishabba/LeechTransformer` PR #4 (`scripts/gfx803_moe_gpu_gate.py`, `scripts/gfx803_repair_runtime.py`, `scripts/run_gfx803_lila_repair_gate.sh`); use the exact PR branch and commits. Preserve external Schaka WGM1/10.1 attribution and source hashes.
+
+Original 1,774-case PyTorch OpInfo discovery retains 183 `unsupported` cases **without original skip reasons**: float32 147, complex64 30, int64 4, float8 e4m3fn 2 (`_scaled_mm`, `_scaled_mm_v2`). Separate 95 CPU-comparison from 88 variant-consistency. They are **not 183 demonstrated broken GPU operators**. Existing four fault candidates and three normal failures must be treated separately; any unresolved cases retain fail-closed classifications.
+
+Static 183-node skip marker collection is **the next diagnostic gate**: inspect `skip/skipif/xfail` from exactly pinned PyTorch source, no test execution, immutable original audit and new receipt path. The original discovery scheduler only selects `unassayed` and has none left: **do not resume it to recover reasons**. Optional pytest-setup probing may initialise GPU fixtures; run it separately only on an idle and healthy RX 580. A setup skip or blocked call does not prove native op implementation.
+
+Reported native gfx803 6.4 numerical discrepancy remains: first QKV input boundary differences and dense logits max error around 13.89 in existing on-card receipts. WGM1 QKV dispatcher demonstration is **partial**, and the 10.1 SGEMM shim has not been proved physically sound for a complete model through backward and matched AdamW updates. Never promote FP32 output parity of an isolated GEMM to full-model native training permission.
+
+### Native GPU gates added to phase plan (new GPN obligations)
+
+| ID | Priority | Exact remaining GPU-native acceptance obligation | Required receipt |
+|---|---|---|---|
+| GPN01 | P0 | `gfx803SourceRuntimeAbiAndKernelIdentity` | Pinned ROCm/Torch/device PCI ID/gfx ISA/DSO SHA, no mixed runtime |
+| GPN02 | P0 | `gfx803OpInfoSkipReasonFaithfulClassification` | Exactly the 183 retained original identities and static/dynamic reasons, never overwrite discovery |
+| GPN03 | P0 | `nativeGpuForwardEarliestDivergenceIdentified` | All original model operators, first divergent QKV input and subsequent logits against CPU oracle |
+| GPN04 | P0 | `nativeGpuBackwardGradientReferenceBound` | Real device gradients for the actual dense/C2 model under numerical tolerance |
+| GPN05 | P0 | `nativeGpuAdamwTrajectoryReferenceBound` | Original model and optimiser state with repeated device updates, bounded errors, no CPU GEMM substitution |
+| GPN06 | P0 | `nativeGpuRepeatedExecutionStable` | 100-repetition or explicitly documented stress receipt, source hashes, no hangs/crashes/corruption |
+| GPN07 | P1 | `nativeGpuSelectedExpertKernelBidi` | Original routed IDs, expert weights, shard outputs, source aggregation and true device dispatch |
+| GPN08 | P1 | `nativeGpuMultiPeerSelectedHistoryBidi` | Actual model/history revisions, authenticated packet exchange, exact/quantised correspondence, local/remote GPU kernels |
+| GPN09 | P1 | `nativeGpuResidentStreamingFederatedPareto` | Resident/SSD/CPU-offload (diagnostic-only)/LAN-peer/WAN-peer comparisons; native-GPU results clearly separated |
+| GPN10 | P2 | `nativeGpuReleaseGateNoCpuSubstitution` | Whole-model inference and training/stability receipts; deny release on unresolved backend errors |
+
+**Status:** GPN01–10 are new explicit proposed obligations, not existing kernel declarations or successful benchmarks. With the former 82-item planning ledger, there are now **92 named target obligations** (not 92 independently unpaid theorems). GPU native is an execution release gate, not an assertion that Agda itself runs on GPU.
+
+### Phase/deliverable update
+
+**Phase GPU0 — source and negative evidence (immediate):** run the static 183 skip marker recovery on exact pinned PyTorch source, inspect missing/conditional markers, preserve original matrices and Schaka attribution. Deliver reproducible classification + calibrated remediation queue. Avoid optional GPU setup until card idle.
+
+**Phase GPU1 — native device correctness:** candidate 10.1 shim and/or verified WGM1 path must run the real dense/C2 forward, backward, repeated AdamW update and source/operator trace on gfx803 without CPU linear substitutions. Deliver device/kernel/ABI hashes, first-error locator, repeatability, negative controls and numerical tolerances. If failing, record first operation and remain fail-closed, without claiming LILA training.
+
+**Phase GPU2 — model-native routing and subshards:** validate on the *actual* selected model that top-k router, six-by-512 (only if source tensor manifests admit), selected expert kernels and source aggregation execute on GPU; compare local resident and tiered variants. Deliver TNET05/TNET04/TNET13 + GPN07 acceptance.
+
+**Phase GPU3 — federated native execution:** establish multi-peer GPU selected-expert work with signed history, replay/failure consistency and secure admission; measure full critical-path and throughput under N/TNET/X prerequisites. Deliver GPN08–09 and end-to-end original-model comparison.
+
+**Release policy:** GPU-native training remains DENIED until GPN01 + GPN03–06 pass on a pinned original checkpoint. GPU-native federated release remains DENIED until GPN07–10 and whole-system source BIDI pass. Native-only objective does not erase finite proof and CPU reference lanes. Run no broad GPU tests concurrently with another GPU tenant. Use Nix, not Docker; local receipts are authoritative, CI not required.
+
+### Highest-information next action
+
+Run **only static** skip-reason reconstruction with the already committed command documented in `gfx803_compat_graph/docs/GFX803_OPINFO_SKIP_REASON_RECOVERY_20261112.md`, classify the 183 exact nodes first. Next focus a single real native GPU 10.1 or WGM1 whole-model forward/backward/AdamW fidelity trial when the RX 580 is idle and the corresponding Schaka runtime is actually installed. No speculative GPU throughput claim or immediate training launch.
