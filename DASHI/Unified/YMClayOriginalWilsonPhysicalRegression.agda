@@ -120,3 +120,15 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalSUNTraceToAllWordsBoundExact as
 
 -- P0 original R445 cross numerator: F*G is exactly original concatenated Wilson word, on actual signed plaquette source and Haar congruence.
 import DASHI.Physics.YangMills.YMClayE1D1OriginalWilsonWordConcatenationR445Exact as OriginalWilsonWordConcatenation
+
+-- P0.09 finite 2-point negative control: X(1)=0 and |F|<=1 do not force nonconstant RG error decay.
+import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact as OriginalRGCrossNumeratorNonclosure
+
+-- P0.01 independence control: the named scalar subtraction interaction fragment alone cannot prove x-0=x.
+import DASHI.Physics.YangMills.YMClayRealSubtractionLawIndependenceExact as OriginalRealSubtractionNonclosure
+
+-- E1/D1: genuine R445 original fine-vs-bare weighted cross numerator factors through selected normalized moment difference times BOTH source partitions (positive division remains explicit).
+import DASHI.Physics.YangMills.YMClayE1D1OriginalCrossNumeratorNormalizedMomentFactorExact as OriginalRGNormalizedFactor
+
+-- D2 negative control: one observed fast-decay transfer mode does not establish a gap on every non-vacuum mode.
+import DASHI.Physics.YangMills.YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact as OSObservableGapNegativeControl
