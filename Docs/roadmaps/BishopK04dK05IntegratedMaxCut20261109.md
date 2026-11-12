@@ -1141,3 +1141,148 @@ semantics. H2.01 genuine ITIR nodes, H2.02 actual
 heterogeneous original-world edge source matches and
 analytic Bishop P1, zeta P2 and Gamma/Xi P3 remain OPEN.
 See the Hyperform13 max-cut roadmap for full proof inventory.
+
+
+## 2026-11-12: adversarial audit of attached "P0–P3 all closed" assertion
+
+**Inputs:** user-provided `Pasted text.txt` P0–P3 proposed closure
+(12 November 2026), exact existing source owners on DASHI PR
+[#1408](https://github.com/chboishabba/dashi_agda/pull/1408),
+the separate Bishop/Koenigs PR
+[#1478](https://github.com/chboishabba/dashi_agda/pull/1478),
+and zeta odd-value PR
+[#1497](https://github.com/chboishabba/dashi_agda/pull/1497).
+**Policy:** separate finite mathematical identity, original Bishop
+same-source implementation, actual source-valued analytic theorem,
+pinned local Agda-2.9 kernel acceptance, and independently
+admitted external theorem. No false closure from a paper calculation.
+
+### Exact new Agda contributions (finite source evidence only)
+
+1. `DASHI/Analysis/BishopMachinOppositeCayleyConventionExact.agda`
+   (commit `306234e`): uses existing original
+   `BishopMachinExistingCayleyReuseExact` and actual Q[i]
+   `CayleyDicksonRationalComplexQuaternionExact` carrier.
+   Proves the inverse-convention phases are conjugates of the
+   original ones, their squares and fourth powers transport
+   via actual complex conjugation/product algebra, and
+   `oppositeMachinQuarterIsMinusImaginaryUnit` is EXACTLY
+   `-i`. Original DASHI convention is
+   `C+(t)=(1+it)/(1-it)` and the phase product is `+i`;
+   the attached opposite convention
+   `C-(t)=(1-it)/(1+it)` gives `-i`.
+   Neither finite identity proves
+   `exp_C(±2i atan_B(t)) ≈ C±(t)`.
+
+2. `DASHI/Analysis/RiemannEtaZetaOriginalFinitePairingExact.agda`
+   (commit `f37a4e5`): arbitrary original Q[i] Nat-indexed
+   term family, *all finite cutoffs*, exact even/odd
+   block reindexing and
+   `finiteEtaPlusTwiceEvenIsZeta` /
+   `finiteEtaIsZetaMinusTwiceEven`. Here `term n`
+   denotes the positive-index source term at `n+1`.
+   For every finite N:
+   `eta(2N) + 2 sum_{k<N} term(2k+1) = zeta(2N)`.
+   This is a finite ring theorem, NOT the native analytic
+   `eta=(1-2^(1-s))zeta` limit, and it does not instantiate
+   the Bishop Dirichlet term family without a verified
+   same-carrier embedding and convergence proof.
+
+3. `DASHI/Analysis/RiemannXiSymmetricMellinPolynomialExact.agda`
+   (commit `ac07821`): reuses original
+   `RiemannXiSymmetryExact.ComplexCoordinate` and actual
+   `functionalReflection`. Proves
+   `s(s-1)=(1-s)((1-s)-1)` on original rational-complex
+   coordinates and normalized reflection symmetry of
+   `1/2+[s(s-1)/2]T(s)` CONDITIONAL on an independently
+   supplied reflection-symmetric tail `T`.
+   This is NOT a constructed Euler Gamma integral, Jacobi
+   theta transform, actual completed Xi or entireness proof.
+
+Golden TOE root imports `DASHI/EverythingTOESymmetryResolved369`,
+`DASHI/Unifier`, `DASHI/Unified/Everything` updated in
+commits `e58138b`, `ac8676f`, `a652ebe`.
+New source declarations are **SOURCE-WRITTEN**:
+Agda 2.9 kernel acceptance is **NOT** established in this
+execution environment.
+
+### Reproducible independent arithmetic check AND negative control
+
+`scripts/check_bishop_attached_p0_p3_finite.py`
+(commit `8b77d24`) passed as locally executed exact-fraction
+and exact-integer checks:
+
+- original positive/inverse Cayley products `+i/-i`;
+- **2100** finite Q[i] eta/even/odd all-prefix tests;
+- **100** exact Q[i] Xi prefactor reflection tests;
+- **1240** conservative factorial bounds;
+- decisive counterexample to the attachment's UNSOUND proposed
+  factorial null modulus
+  `max(ceil(2R),ceil(log2(1/epsilon)))`:
+  with `R=10`, `epsilon=1/1000`, `N=20`,
+  `10^20/20! = 610351562500/14849255421 > 1/1000`.
+
+A correct conservative **integer-radius** statement is:
+for `R≥1, L≥0, N=2R²+L`,
+`R^N/N!≤2^-L`, and all subsequent terms decrease by at
+least a factor of `1/2`.
+Proof at anchor `m=2R²`: the upper `R²` factors in
+`m!` are each at least `R²`, so
+`m!≥(R²)^(R²)=R^m`; for `n≥m`, the ratio
+`R/(n+1)≤1/2`. This supplies an honest finite numerical
+modulus donor, **not** an original Bishop-real compact-ball
+limit proof. Prefer existing original Bishop even/odd
+source-owner lemmas in PR #1478 for true native convergence.
+
+### Corrections to the attachment's nine "closed" claims
+
+| P | Attached claim | Actual source/analytic boundary |
+|---|---|---|
+| P0 | `exp(-log x)=1/x` closes K04d | Different from original K04d target `exp_B(-L_B(x))≃1-x`. The actual source-native original K04d terminal theorem already exists as `BishopOriginalNegativeLogTerminalFromMeshExact.originalBishopNegativeLogExponentialGap`. SOURCE-WRITTEN; Agda unverified |
+| P0 | K05 expC product | Already written from actual original signed factorial Cauchy product in `BishopK04dK05NativeProductDischargeExact` and `BishopMachinCayleyNativeProductFirstZeroExact`; source-written, kernel open |
+| P0 | expC factorial series, simple null modulus | PR #1478 `BishopComplexExpFactEqualsNativeExpExact.originalBishopExpFactEqualsNativeExp` already source-written; pasted explicit cutoff FALSE, as proved above; native PR #1478 kernel check open |
+| P1 | rational Machin phase gives analytic atan/Cayley | The original finite rational identity and both sign conventions are now exact, but the two original source-specific `OriginalAtanFiveCayleyEvaluation` and `OriginalAtan239CayleyEvaluation` are explicitly INPUTS in `BishopMachinTwoPointCayleyCompositionExact`. Taking a complex logarithm of `±i` also requires branch and first-zero proof |
+| P1 | Koenigs fixed point and global log constructed | PR #1478 has strong exact rational and ordinary complex local proof plus conditional native Bishop limit transports; source-native principal Log, convergence, selected fixed point, winding/sector and global Kneser still separately open |
+| P2 | eta quotient gives full Re(s)>0 continuation | The finite parity equality is source-written. Analytic eta convergence, same-object zeta identity, continuation and removable singularities at `1-2^(1-s)=0` remain open. **For complex s, this factor vanishes at s=1+2πik/log2 for all integer k**; not only the pole s=1 |
+| P2 | Apéry and external odd-zeta theorem admitted | `AbelZeta.agda` defines rational constants `zeta0`, `zetaMinus1`, but does not construct analytic Abel limits. PR #1497 `ZetaOddValueWitnessTransportExact` is generic and explicitly requires external theorem/admission and equality of actual zeta values; neither ζ(3) nor odd-window irrationality is promoted as DASHI's unconditional source result |
+| P3 | Euler Gamma integral complete | The finite series calculation does not supply original Bishop integral, convergence/analytic continuation, Gamma functional equation or meromorphic function semantics. These remain OPEN |
+| P3 | Xi entire/functional equation complete | Exact `s(s-1)` reflection algebra is paid as above. The **independently original** Jacobi theta modular transformation, Mellin integral, original Gamma/zeta same-function equation, entireness and completed Xi identify remain OPEN |
+
+### Current highest-information action
+
+**P0 verification:** run the pinned **local** Agda 2.9 checker
+at exact PR #1408 head on the three new modules and their
+dependencies, then the separate PR #1478 bishop-exp owner;
+fix every real typecheck failure before claiming acceptance.
+Do NOT promote compilation through GitHub imports alone.
+
+**P1:** solve the *two original analytic atan/Cayley*
+same-object evaluations, using the actual
+`BishopOriginalLogAtanDerivativeLimitValuesExact`,
+`BishopOriginalMachinAtanUniformHalfBallTailExact`,
+`BishopComplexExpFactEqualsNativeExpExact` (separate #1478
+branch) and selected branch/first-zero proofs. The true
+remaining analytic step includes derivative-of-limit
+interchange and solution uniqueness; rational Q[i] arithmetic
+is already paid.
+
+**P2:** prove actual original Bishop Dirichlet/eta
+termwise equality and uniform convergence in the appropriate
+region; continue with zero-set/removable-singularity handling
+rather than dividing across complex zeros.
+Native original zeta value for `Re(s)>2` already exists
+SOURCE-WRITTEN in `BishopRiemannOriginalZetaAboveTwoExact`
+and `BishopOriginalZetaAboveTwoFromMeshLogExact`; no
+external independently selected zeta identification yet.
+
+**P3:** independently supply actual original Euler Gamma
+Mellin domain/continuation, theta modular inversion and
+integral identity, then instantiate `CompletedRiemannZeta`
+with full function/period/entire/symmetry proofs. Polynomial
+reflection does NOT instantiate these source analytic fields.
+
+**Statuses:** three NEW finite algebra/proof transport
+modules SOURCE-WRITTEN; finite Python regression LOCALLY
+EXECUTED; Agda kernel unverified; original analytic P1–P3
+and external theorem admission OPEN. No axiom/postulate,
+silently selected analytic function or fake source receipt.
