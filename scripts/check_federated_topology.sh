@@ -14,7 +14,7 @@ p=Path("artifacts/federated_topology/finite_preflight.json")
 r=json.loads(p.read_text())
 r["tests_passed"]=14
 r["release_admitted"]=False
-p.write_text(json.dumps(r, indent=2, sort_keys=True)+"\\n")
+p.write_text(json.dumps(r, indent=2, sort_keys=True)+"\n")
 PY
 if [[ "$mode" == "--cpu-only" ]]; then
   echo 'CPU synthetic preflight PASS; Agda kernel, original-model parity, network and GPU still UNCHECKED.'
