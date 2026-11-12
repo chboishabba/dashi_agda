@@ -244,3 +244,12 @@ Selected Mathlib `completedRiemannZeta₀_one_sub` can prove the **functional eq
 - Substantive open gates: concrete Bishop ↔ Fast rational Cauchy reindexing and categoricity inputs; original Wilson postulated scalar interpretation; actual Agda-vendored zeta same-value analytic construction; true Weil positivity/RH G2–G4.
 
 **Attribution:** external work belongs to Bishop/Bridges, Murray/Csimma, Geuvers/Niqui, the Mathlib zeta contributors, and Zudilin/Ball–Rivoal/Krisman's formalized theorem respectively. The novel DASHI commits in this iteration are the selected-value proof transport and original finite Wilson apartness specialization; they are not new proofs of the external analytic or millennium results.
+
+### Precise rational-representation normalization follow-up
+
+The concrete FastCauchy metric authority in `DASHI/Analysis/CanonicalRationalMetric.agda` uses the standard library's **reduced** `Data.Rational.Base.ℚ`, while the vendored Murray/Csimma Bishop `Real._⋆` embeds **unnormalised** `Data.Rational.Unnormalised.ℚᵘ`. This rules out claiming literal representation identity between their source rational sequences.
+
+- `BishopFastCauchyZetaWeldExact.makeRationalWeld` now fixes its rational carrier to the real original `ℚᵘ` and left embedding to `Real._⋆` (rather than accepting an arbitrary set as "Rational").
+- New `BishopFastCauchyCanonicalRationalWeldExact.agda` defines `canonicalFastFromBishopRational q = CanonicalRationalMetric.canonicalRationalEmbedding (Data.Rational.Base.fromℚᵘ q)` and proves by definition that every finite FastCauchy term equals that reduced rational; its `canonicalRationalWeld` consumes the same **still pending** original Bishop/Fast categoricity and rational source agreement.
+
+Thus the original normalization map and finite constant-rational embedding are source-written/precisely selected, but canonical equivalence on all Bishop sequences, original series values and RH analytic substrate is **NOT** thereby proven. No local Agda kernel acceptance has been observed.
