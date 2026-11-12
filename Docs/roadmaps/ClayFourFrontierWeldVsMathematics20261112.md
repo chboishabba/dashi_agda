@@ -269,3 +269,14 @@ Agda golden local kernel and Lean cross-prover transport remain distinct.
 * Hodge Lean #40 remains merged genuine algebraic-cycle donor, not
   universal Hodge; NS Lean #109 five R3 transports pending; RH
   Lean #50/Agda #1434 original strict analytic inequalities pending.
+
+
+## 12 November broad PR continuation / 34 original producer gates
+
+After reviewing the first 100 open Agda PRs and all 59 open Lean PRs, the source-native detailed continuation is `Docs/roadmaps/ClayBroadPRExactRemaining20261112.json`, with independent fail-closed validator `scripts/check_clay_broad_maxcut_manifest.py`. This ledger counts **34 remaining specific proof producers** across the six open Clay problems plus the shared world-builder dependency; it does NOT imply 34 new Clay endpoints or 34 proofs solved. The 34 IDs are finer-grained than the original physical Yang--Mills YM01--YM10 owner IDs / 23 producer manifest; neither is superseded. The ledger keeps source-written, local, kernel and physical/integrated gate status separate. All 34 named remaining terminal producers are OPEN.
+
+Yang--Mills Agda #1498 now source-writes the actual 240-cell free-Wilson auxiliary four-orbit rational bounds and `BalabanClayT4AuxiliaryWilsonNormalizedMeasureExact` with the exact unit Brillouin `d⁴k/(2π)⁴ = d⁴x/16` convention and endpoints `15/256,6592/22707` for **regular free 1/hat(k)² only**. Independent Fraction enumeration verified 256 cells, 240 regular, 16 infrared, the orbit counts and the source coefficients. The four physical one-loop Wilson/ghost/Haar integrals are **not** thereby certified. Original physical sine membership, shifted propagators, genuine scalar AST/derivatives, symmetry and quadrature errors remain open. Source contribution: [Agda #1498](https://github.com/chboishabba/dashi_agda/pull/1498).
+
+Yang--Mills Agda #1444 has independently advanced the *nonperturbative* original full 1024-bond positive-Wilson Haar-fibre disintegration, partition and covariance machinery; that does not prove small original RG cross-numerator, E1 cutoff convergence or D2 same-H gap. Do not conflate finite blocked Wilson partition identity with the perturbative free-propagator calculation. Likewise Lean #107 genuinely constructs Ebar exactness and positive Gamma **candidate**, not classical Sha nor the original L(E,1) Mellin identification; merged Lean #40 already represents the selected P¹×P¹ and real ruling-cycle swap, leaving its standard geometry instances, cycle-class naturality and universal Hodge problem, not an absent P¹ scheme.
+
+**Local, no CI:** run `python3 scripts/check_clay_broad_maxcut_manifest.py`; separately run the existing per-branch pinned checker on the actual Agda #1498, #1444, #1474 and Lean #107/#109 exact checkout. No kernel or physical completion is implied by the ledger validator. The Agda golden proof authority and original-source attribution remain unchanged.
