@@ -58,20 +58,41 @@ These exact Boolean/cash/physical examples are new DASHI models, not measured tr
 
 The toy cases are formal countermodels to invalid general inferences, **not** empirical causal claims about NEXTDC, the 2026 economy, or historical Cybersyn.
 
-## Max-cut continuation: exact outstanding obligations
+## Authoritative phase deliverables and exact lemma ledger (updated 2026-11-12)
 
-| Gate | Producer / consumer | Required proof or validated runtime | Status |
-|---|---|---|---|
-| P0 | Existing source owners → new bridge | Agda 2.9 focused typecheck and import-closure readback | OPEN: uncompiled |
-| P1 | Time-indexed hyperfabric → world store | Source-identified events, multi-parent time axes, witness-preserving cross-ontology joins | OPEN |
-| P2 | dashiTRADE/economics → physical stocks | Double-entry stock-flow conservation AND energy/material/land/water balances, with unit conversion receipts | OPEN |
-| P3 | Governments, banks, firms, insurers, households, communities → dynamics | Nontrivial policy/credit/insurance/action functions; heterogenous observation and feasible action sets | OPEN |
-| P4 | Cybersyn governance → affected-community authority | Actual authority, veto/correction and legitimate System 5 feedback conditions; no equivalence between consultation and consent | OPEN |
-| P5 | Indigenous, ecological and intergenerational owners → impact trajectories | Source/community-specific authority; irreversible harm and all intermediate generations, no endpoint-only optimisation | OPEN |
-| P6 | Market shock and trade owners → regional scenario engine | FX/JPY, Treasury, Hormuz, fertiliser, food, climate, employment, AI supply and housing interactions with lagged thresholds | OPEN |
-| P7 | Crisis model → actuarial/firm/government adapters | Liquidity versus solvency, reserve and funding constraints, risk transfer, public contingent liabilities and election incentives | OPEN |
-| P8 | Causal inference / claims provenance → empirical validation | Counterfactual, alternative explanations, no lookahead, calibration error, confidence and negative controls | OPEN |
-| P9 | BOLO and Cybersyn versus market/status-quo planning | Common resource constraints, distribution-sensitive comparative criteria, no appropriation of community governance | OPEN |
+This section supersedes the earlier rough P0–P9 statuses. Each row separates source existence from kernel acceptance and physical/empirical admission. No completion is inferred from descriptions. The authoritative local verifier is `scripts/check_cybersyn_global_viability_maxcut.sh`; Agda/Nix were unavailable in the current session.
+
+**Verification codes:** S = source-written/readback; L = locally Agda checked; K = kernel-accepted; E = empirical/world integration verified. A source may be S without L/K/E.
+
+| Phase | Deliverable / exact declarations | Owner and dependency | Status | Exact acceptance / unpaid condition |
+| --- | --- | --- | --- | --- |
+| P0 Compiler admission | `CybersynGlobalViabilityEverything` focused Agda root; named theorem probes; no holes/postulates | all seven current `Cybersyn*Exact.agda` owners + source dependencies | S; L/K OPEN | execute focused Agda 2.9 root in pinned local Nix; resolve first diagnostic and record head, command, exit code, compiler/version receipt |
+| P1 State, observer and history | `TimeIndexedCybersyn`, `outcomeAfterLaw`, `sameFinalExposure`, `differentFirstSignal`, `headlineCannotDetermineMandate`, `identityTransport` | GlobalViability, TemporalStressPropagation, HistoricalMandateWorldBridge | S; L/K OPEN; E OPEN | actual world event IDs, timestamp ordering, event-store readback and external authority identity; independent PostgreSQL / JMD builder receipt, not filename similarity |
+| P2 Finance/physical conservation | `loanPostingBalanced`, `cashAllocationBalances`, `sameAggregateGrid`, `sameAggregateTrades`, `announcementCannotFixHousingUse`, `sameTotalLoss` | PhysicalFinanceCut, PublicBackstopLossWaterfall | S; L/K OPEN; E OPEN | exact sectoral flow-of-funds plus resource balances per region/time/unit and full counterparty map; observationally sourced data and unit conversions |
+| P3 Multi-actor decision | `localCybersyn`, `communityCorrectionActuates`, `investorOnlyObservationDoesNotActuate`, `investorReportCannotRecoverEffect` | AuthorityFeedback, agent/world owners | S; L/K OPEN; E OPEN | admissible government/fund/bank/insurer/household action sets, objective functions, feasible choices and scenario transition receipts |
+| P4 Political authority | `consultationNotAdmission`, `mandateRetainsReviewAndRecall`, `headlineCannotDetermineMandate` | AuthorityFeedback, HistoricalMandateWorldBridge, original MandateBackedAuthorityRouting | S; L/K OPEN; E OPEN | source-specific mandate, scope, recall, appeal, repair and consent; do not equate administrative jurisdiction or project consultation with community control |
+| P5 Intergenerational/ecology | `lateSuccessNotAllGenerationsSafe`, `earlyHarmBlocksWholeHorizon`, `completeHorizonAccepted` | PhysicalFinanceCut + original IntergenerationalPlanningHorizon + Indigenous owners | S; L/K OPEN; E OPEN | time-resolved biodiversity, water, emissions, food/housing, reversibility and seven-generation conditions with community-specific source/authority; endpoint optimisation insufficient |
+| P6 Temporal geopolitical stress | `twoShocksTrigger`, `yenAndCollateralTrigger`, `yenOnlyNotCascade`, `yenPlusCollateralCascade`, `sameFinalExposure`, `differentFirstSignal` | CrossSectorScenario, TemporalStressPropagation, JPY/JGB, GeopoliticalEnergy, Crisis owners | S; L/K OPEN; E OPEN | empirically calibrated regional delay, substitution and joint-shock thresholds; no deterministic crisis claim from selected synthetic Boolean rules |
+| P7 Loss allocation and public risk | `sameTotalLoss`, `differentPublicExposure`, `promiseNotCostRecovery`, `pressureIsNotPublicGuaranteeAdmission` | PublicBackstopLossWaterfall, CrossSectorScenario, PolicyBackstopCommercialDiscipline | S; L/K OPEN; E OPEN | complete insurer reserves/capital, investor collateral, bank liquidity/solvency and fiscal contingent liability stress with explicit legal/community admission |
+| P8 Causal validation | `toyPairedIntervention`, `toyBaselineStaysBlocked`, `toyInterventionChangesAccess` | TemporalStressPropagation, HistoryIndexedMarketMechanismOODALoop | S; L/K OPEN; E OPEN | historical counterfactuals, negative controls, out-of-sample calibration, no lookahead, coefficient provenance and model competition |
+| P9 Institutional comparison | `viable`, `financedButUnaccountableNotViable`, `allGatesPaidIsViable`; BOLO/Cybersyn comparison is not yet a delivered function | GlobalViability and external BOLO/federated governance owner | S for local gates; comparative implementation OPEN | identical shocks/resources, independent models for planning/market/BOLO/Cybersyn, governance evidence, non-compensatory and community-defined metrics |
+
+### Exact source-written theorem inventory by file
+
+- `CybersynGlobalViabilityMaxCutExact.agda`: `financedButUnaccountableNotViable`, `allGatesPaidIsViable`, `headlineCannotRecoverCommunityResult`, `noChangePreservesBlock`, `negotiationChangesFeasibility`, `sameEcologicalObservationDoesNotFuseHistories`, `irigarayContactRefusesForcedOne`, `braidedTwoEyedNonFusion`, `coupledSignalsCannotProveCertainCrash`, `yenAppreciationCannotProveGlobalCollapse`, `regulatoryMoatCannotProveConspiracy`.
+- `CybersynPhysicalFinanceCutExact.agda`: `loanPostingBalanced`, `cashAllocationBalances`, `sameAggregateGrid`, `sameAggregateTrades`, `differentHousingAllocations`, `announcementCannotFixHousingUse`, `lateSuccessNotAllGenerationsSafe`, `earlyHarmBlocksWholeHorizon`, `completeHorizonAccepted`, `balancesWithoutAuthorityStillFail`.
+- `CybersynAuthorityFeedbackExact.agda`: `localCybersyn`, `investorSeesHeadline`, `communitySeesUnrepairedHarm`, `communityCorrectionActuates`, `investorOnlyObservationDoesNotActuate`, `sameInvestorReport`, `effectDistinction`, `investorReportCannotRecoverEffect`, `consultedButNotAuthorised`, `consultationDoesNotProvideAuthority`, `repairCarriesSimulatedAuthority`, `consultationNotAdmission`.
+- `CybersynCrossSectorScenarioExact.agda`: `energyAloneDoesNotTrigger`, `foodAloneDoesNotTrigger`, `twoShocksTrigger`, `yenAndCollateralTrigger`, `undisclosedRiskFailsTransparency`, `disclosedRiskPassesThisNarrowGate`, `pressureIsNotPublicGuaranteeAdmission`, `sameInvestmentAnnouncement`, `differentLossAllocation`, `illustrativeDoesNotCertifyObservedCrisis`.
+- `CybersynHistoricalMandateWorldBridgeExact.agda`: `mandateRetainsReviewAndRecall`, `headlineCannotDetermineMandate`, `laterVerificationCannotRewriteEarlierReceipt`, `laterReceiptNotAlreadyEarlier`, `identityTransport`, `sameLabelCannotManufactureAuthority`.
+- `CybersynTemporalStressPropagationExact.agda`: `replayExact` (field), `yenOnlyNotCascade`, `yenPlusCollateralCascade`, `sameFinalExposure`, `differentFirstSignal`, `toyPairedIntervention`, `toyBaselineStaysBlocked`, `toyInterventionChangesAccess`, `syntheticReplayDoesNotValidateForecast`.
+- `CybersynPublicBackstopLossWaterfallExact.agda`: `sameTotalLoss`, `sameReportedInvestment`, `differentPublicExposure`, `policySupportNotProofOfReturn`, `strategyNotNPV`, `promiseNotCostRecovery`, `noCostClaimDoesNotCancelPublicLiability`.
+
+### Highest-information next cut, explicitly unpaid
+
+1. **P0 first:** local Agda 2.9/Nix compile and exact first-error repair. Source scans are not a substitute; this chat has no executable Agda.
+2. **P1→P7 formal seam:** join actual sourced typed events to common financial-physical/public risk receipts, keeping dated world identity and loss-bearing actor separate; first accepted theorem must preserve nonfactorability, conservation, and no unlicensed authority promotion.
+3. **P6/P8 admission:** turn synthetic time-ordered scenarios into measured region-indexed histories with counterfactual receipts.
+4. **P9:** evaluate resource- and authority-constrained institutional comparisons rather than merely comparing slogans.
 
 ## Initial adversarial/negative controls
 
