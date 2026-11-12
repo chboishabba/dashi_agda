@@ -28,7 +28,7 @@ open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using
   (cong; sym; trans)
 open import DASHI.Foundations.RealAnalysisAxioms
-  using (ℝ; 1ℝ; _*ℝ_; *-comm; mulOneʳ)
+  using (ℝ; 0ℝ; 1ℝ; _*ℝ_; _≤ℝ_; *-comm; mulOneʳ)
 
 import DASHI.Physics.YangMills.CompactLieGroupCore as Group
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
@@ -183,3 +183,48 @@ module _
         (λ W → effectiveOneLinkDensity density W *ℝ 1ℝ)
         (effectiveOneLinkDensity density)
         (λ W → mulOneʳ (effectiveOneLinkDensity density W)))
+
+  -- E1 finite reference positivity, on the SAME weighted fiber.
+  -- This consumes only the already-selected one-link Haar positivity;
+  -- no separately stipulated effective coarse positivity record.
+  nativeEffectiveFiberDensityPreservesPositivity :
+    (density : Link → Link → ℝ) →
+    (∀ U V → 0ℝ ≤ℝ density U V) →
+    (W : Link) →
+    0ℝ ≤ℝ effectiveOneLinkDensity density W
+  nativeEffectiveFiberDensityPreservesPositivity density positive W =
+    Ordered.onePositive ordered
+      (λ U → density U (product (inverse U) W))
+      (λ U → positive U (product (inverse U) W))
+
+  -- Pure normalized one-link Haar is the exact density image of
+  -- the two-link UNIT Wilson reference. There is no Gaussian field.
+  nativeEffectiveFiberUnitWeightIsUnit :
+    (W : Link) →
+    effectiveOneLinkDensity (λ _ _ → 1ℝ) W ≡ 1ℝ
+  nativeEffectiveFiberUnitWeightIsUnit W =
+    Haar.integrateUnit oneLink
+
+  -- On the source's all-test integrable algebra, the zero-interaction
+  -- two-link weighted pushforward agrees with one-link Haar, not only
+  -- with a specified test class or a formal density.
+  nativeUnitWeightBlockedNumeratorIsHaar :
+    (observable : Link → ℝ) →
+    fineTwoLinkWeightedNumerator (λ _ _ → 1ℝ) observable
+      ≡ Haar.integrateOne oneLink observable
+  nativeUnitWeightBlockedNumeratorIsHaar observable =
+    trans
+      (nativeTwoLinkWeightedPushforwardIsEffectiveDensity
+        (λ _ _ → 1ℝ) observable)
+      (Haar.integrateCongruent oneLink
+        (λ W →
+          effectiveOneLinkDensity (λ _ _ → 1ℝ) W
+            *ℝ observable W)
+        observable
+        (λ W →
+          trans
+            (cong (λ scalar → scalar *ℝ observable W)
+              (nativeEffectiveFiberUnitWeightIsUnit W))
+            (trans
+              (*-comm 1ℝ (observable W))
+              (mulOneʳ (observable W)))))
