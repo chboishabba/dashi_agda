@@ -60,15 +60,15 @@ max4MiddleSwap : ∀ a b c d →
   Typed.max4 a b c d ≡ Typed.max4 a c b d
 max4MiddleSwap a b c d = ℚP.≤-antisym
   (max4Least
-    (Typed.firstBelowMax4 a b c d)
-    (Typed.thirdBelowMax4 a b c d)
-    (Typed.secondBelowMax4 a b c d)
-    (Typed.fourthBelowMax4 a b c d))
-  (max4Least
     (Typed.firstBelowMax4 a c b d)
     (Typed.thirdBelowMax4 a c b d)
     (Typed.secondBelowMax4 a c b d)
     (Typed.fourthBelowMax4 a c b d))
+  (max4Least
+    (Typed.firstBelowMax4 a b c d)
+    (Typed.thirdBelowMax4 a b c d)
+    (Typed.secondBelowMax4 a b c d)
+    (Typed.fourthBelowMax4 a b c d))
 
 -- Literal four-corner rational products for [a,b] * [c,d].
 productLL productLU productUL productUU :
