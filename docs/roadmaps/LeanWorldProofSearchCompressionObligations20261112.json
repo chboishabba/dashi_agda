@@ -1,5 +1,5 @@
 {
-  "schema": "dashi-lean-world-maxcut-obligations-v1",
+  "schema": "dashi-lean-world-maxcut-obligations-v2",
   "date": "2026-11-12",
   "repository": "chboishabba/dashi_agda",
   "branch": "perf/lean-world-postgres-retrieval-20261109",
@@ -34,468 +34,828 @@
   },
   "obligations": [
     {
-      "id": "W00",
+      "id": "LW-W00",
       "phase": "P0",
       "proposed_declaration": "originalSourceBytesRoundTrip",
       "owner": "source-world",
       "status": "locally-verified",
       "acceptance": "Three pinned repos; 9,577 .lean files; 104,842,666 bytes; 15/15 local PG tests; 3 archives/0 REST; operator-supplied receipt",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "Already paid: source byte retrieval plus SHA/Git-blob identity; not theorem elaboration"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": true,
+        "local_tests_passed": true,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": true
+      },
+      "integration_scope": "original source-byte PostgreSQL ingestion only"
     },
     {
-      "id": "V01",
+      "id": "LW-V01",
       "phase": "P1",
       "proposed_declaration": "unchangedBlobReusesSourceOccurrence",
       "owner": "revision-delta",
       "status": "open",
       "acceptance": "Two pinned revisions with one unchanged path; exact byte content reused but both occurrences and revision roots preserved",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "P0"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "V02",
+      "id": "LW-V02",
       "phase": "P1",
       "proposed_declaration": "revisionDeltaClassifiesChangedDeclaration",
       "owner": "revision-delta",
       "status": "open",
       "acceptance": "Distinguish moved, renamed, proof-only, type/universe, dependency and source-only changes with original locations",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "V01,E01"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "V03",
+      "id": "LW-V03",
       "phase": "P1",
       "proposed_declaration": "reverseDependencyInvalidationIsComplete",
       "owner": "revision-delta",
       "status": "open",
       "acceptance": "Recompute all affected elaboration contexts and no unaffected type/proof evidence; include import, instance, toolchain changes",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "V02,E03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "V04",
+      "id": "LW-V04",
       "phase": "P1",
       "proposed_declaration": "compiledOleanReuseRequiresCompatibleEnvironment",
       "owner": "revision-delta",
       "status": "open",
       "acceptance": "Reject matching source hashes with incompatible Lean compiler/ABI/imported constants; preserve original compiled owners",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "V02,E03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "E01",
+      "id": "LW-E01",
       "phase": "P1",
       "proposed_declaration": "nativeLeanTermDecodeEncodeRoundTrip",
       "owner": "lean-native-v3",
       "status": "open",
       "acceptance": "Actual native-v3 typed term including binders, constants and universe levels reconstructs byte-identical source expression format under declared exporter profile",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "P0",
         "#1495 native projection"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "E02",
+      "id": "LW-E02",
       "phase": "P1",
       "proposed_declaration": "alphaBinderRenamingPreservesCanonicalTerm",
       "owner": "lean-native-v3",
       "status": "open",
       "acceptance": "Alpha-equivalent elaborated terms have identical canonical binder-safe DAG; capture/shadowing negative tests",
       "depends_on": [
-        "E01"
+        "LW-E01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "E03",
+      "id": "LW-E03",
       "phase": "P1",
       "proposed_declaration": "nativeLeanDependenciesMatchOriginalEnvironment",
       "owner": "lean-native-v3",
       "status": "open",
       "acceptance": "Original fully-qualified constant/instance/universe dependencies retained with imported source and compiler identities",
       "depends_on": [
-        "E01"
+        "LW-E01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "E04",
+      "id": "LW-E04",
       "phase": "P1",
       "proposed_declaration": "distinctLiteralOrConstantDoesNotMergeExactTypes",
       "owner": "lean-native-v3",
       "status": "open",
       "acceptance": "x+0=x vs x+1=x distinct; same spelling under distinct constant namespaces distinct; changed universe/assumptions distinct",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E01,E02"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "E05",
+      "id": "LW-E05",
       "phase": "P1",
       "proposed_declaration": "statementAndProofOccurrencesSurviveInterning",
       "owner": "lean-dag",
       "status": "open",
       "acceptance": "One statement, two distinct proof terms/sources; exact proof provenance and authorship remain separately recoverable",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E01,E03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "F01",
+      "id": "LW-F01",
       "phase": "P2",
       "proposed_declaration": "fibreCandidateEnumerationBounded",
       "owner": "fibre-index",
       "status": "source-written-not-revalidated",
       "acceptance": "Bounded deterministic output, exact remaining count and non-exhaustive flag at truncation; validate on real emitted Lean declarations",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E01,#1483"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": true,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      },
+      "integration_scope": "Python fibre-index primitive only; proposed formal lemma not kernel accepted"
     },
     {
-      "id": "F02",
+      "id": "LW-F02",
       "phase": "P2",
       "proposed_declaration": "fibreBlockingCompleteForExactMatches",
       "owner": "fibre-index",
       "status": "open",
       "acceptance": "Every validated exact same-type pair projects to indexed compatible fibres; document profile scope; no false negatives within stated contract",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E01,E02,F01"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "F03",
+      "id": "LW-F03",
       "phase": "P2",
       "proposed_declaration": "fibreProjectionNeverCertifiesEquivalence",
       "owner": "fibre-index",
       "status": "open",
       "acceptance": "Two distinct constants or a changed literal may collide in coarse fibre but cannot merge canonical statements",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E04,F01"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "F04",
+      "id": "LW-F04",
       "phase": "P2",
       "proposed_declaration": "agdaPreflightShallowAlphaIsCandidateOnly",
       "owner": "agda-preflight",
       "status": "open",
       "acceptance": "Shadowing, renaming, implicit binders and same-name/different-type negatives; dashi-repo related is heuristic, Agda owns proof equality",
       "depends_on": [
-        "F03"
+        "LW-F03"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "F05",
+      "id": "LW-F05",
       "phase": "P2",
       "proposed_declaration": "typedSubtermPostingKeepsOriginalScope",
       "owner": "fibre-index",
       "status": "open",
       "acceptance": "Typed subterm/binder/hypothesis polarity postings from elaborated DAG; bounded keys/occurrences; source environments retained",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E03,F01"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A01",
+      "id": "LW-A01",
       "phase": "P3",
       "proposed_declaration": "aristotleActionAndSubgoalClosureSound",
       "owner": "Aristotle",
       "status": "open-in-real-world-adapter",
       "acceptance": "All AND-action child obligations checked before source is marked proved; candidate branch alone cannot pay goal",
       "depends_on": [
-        "F05",
-        "existing AristotleMCGSHypergraphExact"
+        "LW-F05"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing AristotleMCGSHypergraphExact"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A02",
+      "id": "LW-A02",
       "phase": "P3",
       "proposed_declaration": "costedResidualSearchDoesNotPromoteCandidates",
       "owner": "Aristotle-PNF",
       "status": "open-in-real-world-adapter",
       "acceptance": "Search value/reduced frontier can rank candidate but not certify theorem; preserve exact unpaid hypotheses and source contexts",
       "depends_on": [
-        "A01",
-        "existing AristotleResidualInformationSearchExact"
+        "LW-A01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing AristotleResidualInformationSearchExact"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A03",
+      "id": "LW-A03",
       "phase": "P3",
       "proposed_declaration": "findGapsBoundedReturnsTypedResiduals",
       "owner": "Aristotle-PNF",
       "status": "open",
       "acceptance": "Given original goal + budget returns bounded theorem candidates, typed residuals, source and truncation; no global-pair enumeration",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "F05,A02"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A04",
+      "id": "LW-A04",
       "phase": "P3",
       "proposed_declaration": "scopedTraceTransportRespectsContext",
       "owner": "hyperfabric-trace",
       "status": "open-in-Lean-world-adapter",
       "acceptance": "Local trace/subterm transfer requires typed alignment and section restriction; no implication of global equality or braid structure",
       "depends_on": [
-        "A03",
-        "existing transportTrace/transportTraceAppend"
+        "LW-A03"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing transportTrace/transportTraceAppend"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A05",
+      "id": "LW-A05",
       "phase": "P3",
       "proposed_declaration": "checkedImplicationCompositionPaysTarget",
       "owner": "Lean-join",
       "status": "open",
       "acceptance": "Lean elaborates and checks A→B, B→C ⇒ A→C with original donor closure, hypotheses, source lineage and output proof bytes",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "A03,E03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A06",
+      "id": "LW-A06",
       "phase": "P3",
       "proposed_declaration": "checkedPermutationRequiresTransport",
       "owner": "Lean-join",
       "status": "open",
       "acceptance": "Two a+b commutativity presentations related by binder/argument permutation only through checked renaming/rewrite, not hash collision",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "A05,E02"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "A07",
+      "id": "LW-A07",
       "phase": "P3",
       "proposed_declaration": "noSilentHypothesisStrengthening",
       "owner": "Agda-Lean-admission",
       "status": "open",
       "acceptance": "A stronger-theorem premise cannot close weaker-context goal without paid implication or hypothesis witness",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "A02,A05",
         "existing ProofSearchLeastPrivilegeAdmissionExact"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "M01",
+      "id": "LW-M01",
       "phase": "P4",
       "proposed_declaration": "typedExpressionCodecExactReconstruction",
       "owner": "MDL-Lean",
       "status": "open",
       "acceptance": "Decode(encode(original typed term + universes + contexts)) reproduces exact original required elaborated representation",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "E01,E03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "M02",
+      "id": "LW-M02",
       "phase": "P4",
       "proposed_declaration": "typedGrammarInstancePreservesTyping",
       "owner": "MDL-Lean",
       "status": "open",
       "acceptance": "Generator, typed substitution and residual reconstitute original complete expression; reject overload/instance/associativity leakage",
       "depends_on": [
-        "M01"
+        "LW-M01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "M03",
+      "id": "LW-M03",
       "phase": "P4",
       "proposed_declaration": "acceptedTypedMDLMoveStrictlyDecreasesTotalLength",
       "owner": "MDL-Lean",
       "status": "open",
       "acceptance": "Whole compressed bytes include dictionary, parameters, provenance, residual, certificates and compression wrapper; accept strictly smaller than best baseline",
       "depends_on": [
-        "M02",
-        "existing StringMDLCore.accepted-strictly-descends"
+        "LW-M02"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing StringMDLCore.accepted-strictly-descends"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "M04",
+      "id": "LW-M04",
       "phase": "P4",
       "proposed_declaration": "typedMDLSelectionPreservesOriginalOccurrences",
       "owner": "MDL-Lean",
       "status": "open",
       "acceptance": "Multiple proofs and authors retain distinct addresses and exact reconstruction after template/program factoring",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "M01,M03,E05"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "M05",
+      "id": "LW-M05",
       "phase": "P4",
       "proposed_declaration": "hybridCodecIsMinimumOverMeasuredCandidateFamily",
       "owner": "MDL-Lean",
       "status": "open",
       "acceptance": "Same real Lean terms tested on plain AST, shared DAG, typed grammar, generated program if applicable, hybrid; measured compressed size plus runtime/RSS",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "M03,M04"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "G01",
+      "id": "LW-G01",
       "phase": "P5",
       "proposed_declaration": "discoveredFractranProgramHasSupportedRepresentation",
       "owner": "FRACDASH",
       "status": "open",
       "acceptance": "Program inferred automatically from actual typed Lean subterm; explicit source-to-register encoding, guards and scope; not manually selected fractions",
       "depends_on": [
-        "M01",
-        "FRACDASH signed IR"
+        "LW-M01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "FRACDASH signed IR"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "G02",
+      "id": "LW-G02",
       "phase": "P5",
       "proposed_declaration": "selectedFractranStepSimulation",
       "owner": "FRACDASH",
       "status": "open",
       "acceptance": "First-applicable step/halt correspondence for source computation on selected supported encoding; preserve ordered rule and guards",
       "depends_on": [
-        "G01",
-        "existing FractranComputationEquivalence"
+        "LW-G01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing FractranComputationEquivalence"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "G03",
+      "id": "LW-G03",
       "phase": "P5",
       "proposed_declaration": "generatedFractranCodecReconstructsCompleteLeanObject",
       "owner": "FRACDASH",
       "status": "open",
       "acceptance": "Exact complete term/proof-object reconstruction, including environments/parameters/residuals, not just coefficients or observed outputs",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "G02,M02"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "G04",
+      "id": "LW-G04",
       "phase": "P5",
       "proposed_declaration": "generatedFractranCostBeatsBestExactBaseline",
       "owner": "FRACDASH-MDL",
       "status": "open",
       "acceptance": "Any FRACTRAN encoding must strictly beat best exact real-Lean codec after all metadata, program dictionary and compression costs",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "G03,M05"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "H01",
+      "id": "LW-H01",
       "phase": "P6",
       "proposed_declaration": "certifiedTransportEdgeRetainsOriginalSources",
       "owner": "hyperfabric-world",
       "status": "open",
       "acceptance": "Persist source/target contexts, oriented proof relation, Lean kernel receipt, originals and attribution without implying semantic quotient on implication",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "A05,E05"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "H02",
+      "id": "LW-H02",
       "phase": "P6",
       "proposed_declaration": "traceAndTransportAreDistinctEvidenceKinds",
       "owner": "CID-world",
       "status": "open",
       "acceptance": "CID/provenance/trace evidence never promoted into statement equality; generated trace only retained where irreducible",
       "depends_on": [
-        "H01",
-        "existing ContentAddressedVerificationBridgeExact"
+        "LW-H01"
       ],
       "existing_declaration": false,
-      "receipt": null
+      "receipt": null,
+      "related_existing_owner": [
+        "existing ContentAddressedVerificationBridgeExact"
+      ],
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "H03",
+      "id": "LW-H03",
       "phase": "P6",
       "proposed_declaration": "worldUpdateInvalidatesOnlyAffectedProofClosure",
       "owner": "revision-hyperfabric",
       "status": "open",
       "acceptance": "Copy-on-write roots, original time-indexed object identities, exact changed dependency closure and selective recheck",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "V03,H01"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     },
     {
-      "id": "H04",
+      "id": "LW-H04",
       "phase": "P6",
       "proposed_declaration": "federatedShardRetrievalPreservesAuthorityBoundary",
       "owner": "ZOS-Kant",
       "status": "deferred",
       "acceptance": "Original CIDs and proof authority separated; no federation/zk/zkperf input is a theorem certificate",
-      "depends_on": [
+      "depends_on": [],
+      "existing_declaration": false,
+      "receipt": null,
+      "related_existing_owner": [
         "H02,H03"
       ],
-      "existing_declaration": false,
-      "receipt": null
+      "declaration_is_proposed_not_yet_written": true,
+      "receipt_levels": {
+        "source_written": false,
+        "local_tests_passed": false,
+        "agda_kernel_accepted": false,
+        "lean_kernel_accepted": false,
+        "independently_verified": false,
+        "world_integration_verified": false
+      }
     }
-  ]
+  ],
+  "note": "Every name is a PROPOSED, not yet kernel-accepted declaration except separately identified existing-owner theorems; source-side tests and implemented primitives do not constitute Agda theorem proofs."
 }
