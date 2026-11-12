@@ -1056,3 +1056,24 @@ These are literal rational arithmetic comparisons. Still OPEN: propagate the act
 ### Verification / trust
 
 The local checker contains these additions with all earlier source owners. The Agda 2.9 executable/Nix are unavailable in this execution runtime, so **source-written is not kernel accepted**. The checked math that ran here is independent \`Fraction\` rational preflight, not a proof of uniform Bishop analytic inequalities. Local golden Agda kernel, never CI, remains authoritative. Original Bishop/Murray/Csimma, Bałaban concrete sine sources, mathematical theta/Moonshine attribution and DASHI proof-joining boundaries preserved.
+
+## 2026-11-12 Bishop original log closed-disk limit cut — source proof continuation
+
+Three concrete, source-written Agda modules have been committed to this PR; they consume the established actual original Bishop complex/log series rather than adding any abstract principal-log hypothesis:
+
+1. `AbelBishopLogQuadraticUpperDiskSeriesLimitExact.agda`: the existing `originalBishopLogUpperDiskCanonicalConverges` on **every** proof-bearing upper-radius disk (`normSq(w) ≤ r²`, `0 ≤ r < 1`) is transported, by the original finite first-term split, convergence under successor shift, Bishop subtraction convergence and uniqueness, to the ACTUAL original shifted degree≥2 quadratic series. The limit is exactly `originalBishopLogUpperDiskCanonicalValue interval disk -C w`. This resolves the mismatch that the prior `AbelBishopLogQuadraticSeriesLimitExact` required an unsupported exact radius equality `normSq(w) ≃ r²`.
+2. `AbelBishopSelectedLogUpperDiskQuadraticTailExact.agda`: specializes that theorem to the genuine selected Bishop relative chart `u = p⁻¹ t` with `|p| ≥ 27/20` and `|t| ≤ 1/10`, hence the existing original `normSq(u) ≤ (2/27)²`. Constructs the selected remainder limit and proves convergence of the ORIGINAL shifted source terms to it.
+3. `AbelBishopLogUpperDiskZeroNormalizationExact.agda`: applies the existing original Bishop log-zero series convergence and **same-term series-limit uniqueness** to show the upper-disk canonical value at zero is setoid-equal to zero for any proof-bearing upper-radius witness. It does not introduce a second normalization or claim an exp/log inverse.
+
+All three targets are registered in `scripts/check_analytic_j_tetration_golden_local.sh`; the checker, not CI, is authoritative. No local Agda/Nix executable in this execution environment, so **none of these three files has a new kernel-acceptance receipt**.
+
+### Newly reduced remaining P1.L minimum cut
+
+- **CLOSED AT SOURCE-LEVEL, KERNEL PENDING:** original quadratic tail **convergence on an arbitrary closed upper disk**, selected (p^{-1}t) chart specialization, and agreement of upper-disk canonical log(1) with the original zero-series limit.
+- **STILL OPEN MATHEMATICALLY:** quantitative *limit-order* transfer of the coefficient-wise `1/(n+2) ≤ 1/2` original bounds to the actual complex remainder with its true `|u|²` factor. The exact target follows from `|R₂(u)| ≤ |u|²/[2(1-|u|)]` and `|p|≥27/20, |t|≤1/10`, giving `|R₂(p⁻¹t)| ≤ (8/27)|t|²`. This requires original complex norm / finite-sum triangle / source geometric limit comparison, NOT only componentwise convergence or an exact rational preflight.
+- **STILL OPEN:** actual Bishop expC/log(1+u) inverse on the selected branch, original Newton Taylor bounds/contraction/continuity along actual orbit, actual fixed point p and its norm witness, local Koenigs univalence, global Kneser, modular and contour integration.
+- **TRUST:** no symbolic kernel success is inferred from the source file names, conditional owners, source readback, or independent rational checks. Do not upgrade to kernel-accepted until the local pinned Agda target set succeeds.
+
+### Avoided duplications
+
+Existing `AbelBishopLogQuadraticHalfCoefficientExact` already pays the original `≤1/2` shifted coefficient and componentwise power envelope; `AbelBishopLogOnePlusUpperDiskConvergenceExact` already pays full upper-disk series convergence; `AbelBishopLogOnePlusZeroNormalizationExact` already constructs the zero stream and its canonical value. The new files only prove the missing compatibility/convergence arrows among these exact owners.
