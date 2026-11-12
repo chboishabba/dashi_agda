@@ -85,9 +85,10 @@ originalBishopSGFluxAt series prefactors faces bond species =
     (lookupFaceScale prefactors (V.lookup faces bond) species)
   where
   lookupFaceScale :
-    (prefactors : V.Vec R.ℝ 29)
-    (row : V.Vec (SG.BishopFaceState series) 29)
-    (species : F.Fin 29) →
+    ∀ {n : Nat} →
+    (prefactors : V.Vec R.ℝ n)
+    (row : V.Vec (SG.BishopFaceState series) n)
+    (species : F.Fin n) →
     V.lookup
       (V.zipWith
         (λ factor face → R._*_ factor (SG.bishopSGFaceFlux face))
