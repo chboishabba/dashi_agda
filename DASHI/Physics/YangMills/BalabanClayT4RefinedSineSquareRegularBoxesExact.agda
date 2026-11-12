@@ -102,21 +102,29 @@ refinedSquareLowerNonnegative box
 ... | inj₁ lowerNN = lowerNN
 ... | inj₂ _ = ℚP.≤-refl
 
+refinedSquareBishopLower :
+  ∀ {value box} →
+  (inside : Product.BishopLiesIn value box) →
+  Product.embed (Typed.max2 0ℚ
+    (Eval.lower (Typed.multiplyInterval box box)))
+    Bishop.≤ (value Bishop.* value)
+refinedSquareBishopLower {value} {box} inside
+  with ℚP.≤-total 0ℚ (Eval.lower (Typed.multiplyInterval box box))
+... | inj₁ _ =
+  Product.lowerSound (Product.multiplyIntervalBishopSound inside inside)
+... | inj₂ _ =
+  BishopP.≤-respˡ-≃
+    Product.embedZero
+    (BishopP.nonNegx⇒0≤x (BishopP.nonNegSquare value))
+
 refinedSquareBishopSound :
   ∀ {value box} →
   Product.BishopLiesIn value box →
   Product.BishopLiesIn (value Bishop.* value) (refinedSquare box)
-refinedSquareBishopSound {value} {box} inside =
-  let old = Product.multiplyIntervalBishopSound inside inside
-      nonneg : Bishop.0ℝ Bishop.≤ (value Bishop.* value)
-      nonneg = BishopP.nonNegx⇒0≤x (BishopP.nonNegSquare value)
-      newLower : Product.embed (Eval.lower (refinedSquare box))
-        Bishop.≤ (value Bishop.* value)
-      newLower with ℚP.≤-total 0ℚ
-        (Eval.lower (Typed.multiplyInterval box box))
-      ... | inj₁ _ = Product.lowerSound old
-      ... | inj₂ _ = BishopP.≤-respˡ-≃ Product.embedZero nonneg
-  in Product.bishopLiesIn newLower (Product.upperSound old)
+refinedSquareBishopSound inside =
+  Product.bishopLiesIn
+    (refinedSquareBishopLower inside)
+    (Product.upperSound (Product.multiplyIntervalBishopSound inside inside))
 
 sourceComponent : Grid.IntervalCell → Eval.RationalInterval
 sourceComponent c =
