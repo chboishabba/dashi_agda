@@ -1,4 +1,3 @@
-{-# OPTIONS --safe #-}
 module DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact where
 
 ------------------------------------------------------------------------
@@ -24,7 +23,7 @@ open import Agda.Builtin.Nat using (Nat; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Data.Vec.Base as Vec using (Vec)
-open import Data.Empty using (⊥; ⊥-elim)
+open import Data.Empty using (⊥)
 open import Data.Sum.Base using (_⊎_; inj₁; inj₂)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
