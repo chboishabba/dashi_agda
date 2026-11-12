@@ -18,6 +18,7 @@ module DASHI.Analysis.BishopFastCauchyZetaWeldExact where
 
 open import Agda.Builtin.Sigma using (Σ)
 open import Data.Fin using (Fin)
+open import Data.Rational.Unnormalised using (ℚᵘ)
 
 import Real as BishopReal
 import DASHI.Analysis.FastCauchyReals as Fast
@@ -53,21 +54,23 @@ module _
   -- The only rational embedding comparison not already provided by
   -- the above categorical structure. For concrete Bishop/Fast models
   -- it must be established from their original rational approximants.
+  -- Unlike the generic reusable weld, this concrete instantiation
+  -- fixes the rational carrier to the ACTUAL Bishop library ℚᵘ and
+  -- its pre-existing rational-to-real embedding (_⋆). The Fast
+  -- embedding and comparison still require original source proofs.
   makeRationalWeld :
-    (Q : Set)
-    (bishopRational : Q → BishopReal.ℝ)
-    (fastRational : Q → Fast.FastCauchyReal A) →
-    ((q : Q) →
+    (fastRational : ℚᵘ → Fast.FastCauchyReal A) →
+    ((q : ℚᵘ) →
       Fast._≈R_
         (Spine.map (Spine.toRight canonicalEquivalence)
-          (bishopRational q))
+          (BishopReal._⋆ q))
         (fastRational q)) →
     Weld.RationalSetoidWeld SelectedBishopBackend SelectedFastBackend
-  makeRationalWeld Q bishopRational fastRational agree =
+  makeRationalWeld fastRational agree =
     record
       { equivalence = canonicalEquivalence
-      ; Rational = Q
-      ; leftEmbed = bishopRational
+      ; Rational = ℚᵘ
+      ; leftEmbed = BishopReal._⋆
       ; rightEmbed = fastRational
       ; rationalAgreement = agree
       }
