@@ -454,3 +454,50 @@ This real module uses actual pretrained teacher checkpoint and training tokens. 
 **Reclassification of GPN lane:** GPN01–06 are externally supplied environment assurance / optional independent validation, not blocking the native LILA model experiment. GPN02 183 skip-reason research remains in gfx803_compat_graph and off the LILA critical path. GPN07–09 remain model-specific federation and performance goals. GPN10 is a project release/reproducibility status, not permission to ignore actual model crashes or data loss. Report failures if they occur, but do not preempt the user's working runtime with another general ROCm certification programme.
 
 **Attribution/verification firewall:** Schaka owns relevant ROCm repairs, Kornienko original Leech-LILA, user/DASHI owns native model/federation adapters. Provided environment functionality is user-reported and source-supported; a new launcher commit is source-written, not a claimed physical run. Agda kernel proof, real model training, quality, distributed history and network claims remain independent.
+
+## 2026-11-12 native GPU training results and observable performance/progress workstream
+
+### User-run measured results (not an assistant-executed GPU benchmark)
+
+Original Schaka ROCm 10.1 native execution on the **RX 580, HIP 7.16.26385** with the real dense teacher checkpoint and real token rows:
+- Initial C2 **layer 1** smoke: 64 real token rows; 26 native GPU training batches; overall wall time 34.9 seconds; **reported peak memory 1.1 GB** (receipt source/allocator/RSS category not yet inspected); checkpoint SHA-256 prefix `404a3255`, suffix `fade280` (full hash not supplied in this conversation); resulting `c2_layer1.pt` / `c2_layer1.json` under `/mnt/truenas/comet-net/experiments/lila_native_launcher_smoke_20261112/`. Overall average **26/34.9 ≈ 0.745 batches/s** and ~1.342 seconds/batch, inclusive of setup and validation. Not a GPU-kernel-only throughput measurement. Exact tokens/s cannot be computed without actual batch row lengths/timing boundaries.
+- Matched GPU quality experiment `/mnt/truenas/comet-net/experiments/lila_matched_quality_gpu_20261112/`: dense development CE **2.216053**, C2 gated development CE **2.564707**; dense wins by **0.348654 nats/token**. C2 final independent heldout hybrid CE **2.515797**; C2 strict student-only independent heldout CE **11.565138**. Both matched training arms used the same teacher, initial student-seed checkpoint, and exact **45 optimiser rows**, confirmed by user-reported matching SHA-256. **Not a teacher-free quality win or proof of source-preserving full-student compression.**
+- LeechTransformer PR #4 commit `9138d8d29293416690caa97d07009a0acd4400e0` added native launcher support for dense matched control, reusing the same Schaka HIP device wrapper. Original Leech-LILA authorship: Anatolii Kornienko; independent runtime repair belongs to Schaka and the gfx803 contributors.
+
+### Progress/throughput implementation (next rerun; source written)
+
+On LeechTransformer PR #4 branch `experiment/consumer-preserving-multiscale-codec-20261031`, new `scripts/native_training_progress.py` and `scripts/summarize_native_training_progress.py`, integrated into `train_signed_wave_experts.py`, `train_guarded_moe_continuation.py`, and `train_early_layer_dense_control.py`. The progress callback logs **completed steps, input rows, next-token prediction targets, cumulative and interval steps/s, target-tokens/s, epoch, training loss, rough remaining time and `torch.cuda.max_memory_allocated/reserved`**; it synchronizes the device at reporting intervals to avoid recording mere queued work as completed compute. `--progress-every` defaults to five batches; optional per-run JSONL paths are atomic-latest and append-only. The training-summary tool combines measured receipt rows, without fabricating network throughput or model-quality fields. CPU-only source tests exist in `tests/test_native_training_progress.py`; **new tests and GPU runs are not yet locally executed by the assistant**.
+
+For guarded C2 or dense matched model module, use the **existing native launcher**, preserving the original train/dev/heldout split:
+```bash
+bash scripts/run_native_schaka101_lila.sh --module scripts.train_guarded_moe_continuation -- \
+  [the identical previously verified teacher/student/config/train/heldout/fit arguments] \
+  --progress-every 5 --progress-jsonl /mnt/truenas/comet-net/experiments/NEW_RUN/c2.progress.jsonl
+
+bash scripts/run_native_schaka101_lila.sh --module scripts.train_early_layer_dense_control -- \
+  [the identical paired dense args, matching optimizer-fit rows] \
+  --progress-every 5 --progress-jsonl /mnt/truenas/comet-net/experiments/NEW_RUN/dense.progress.jsonl
+
+python3 scripts/summarize_native_training_progress.py \
+  --progress /mnt/truenas/comet-net/experiments/NEW_RUN/dense.progress.jsonl \
+             /mnt/truenas/comet-net/experiments/NEW_RUN/c2.progress.jsonl \
+  --output /mnt/truenas/comet-net/experiments/NEW_RUN/throughput_summary.json
+```
+The bracketed arguments are placeholders referring to previously user-executed real paths; do not pretend they are actual shell arguments. The new logic must be checked locally before using it for a publication receipt. **Do not overwrite the prior source receipts** and do not rerun a substantive matched experiment until the new progress tests/checks are accepted. GPU kernels remain in the supplied ROCm 10.1 native runtime; no CPU fallback and no new compatibility audit.
+
+### Performance measurement and exact remaining gates
+
+| ID | Priority | Remaining performance/progress deliverable | Acceptance |
+|---|---|---|---|
+| PERF01 | P0 | `nativeGpuProgressStepAccounting` | Per-batch completed (synchronized) steps, epochs, samples, next-token targets, zero-overwrite structured log |
+| PERF02 | P0 | `matchedNativeGpuThroughputDenominatorIdentity` | Same actual token lengths, train rows, batch, precision and timing scopes for dense and C2 |
+| PERF03 | P0 | `nativeGpuAllocatorVsHostMemoryBoundary` | Distinguish GPU allocated/reserved peaks from NVML/rocm SMI or host RSS; no summation or false VRAM claim |
+| PERF04 | P0 | `matchedGpuQualityCheckpointProvenance` | Full source hashes, matching 45 fit rows, teacher/student starting weights, dev vs independent heldout split |
+| PERF05 | P1 | `nativeGpuTrainVsValidationTimingSeparation` | Kernels vs transfer, data loading, optimizer, calibration, evaluation and saving separate measured timing components |
+| PERF06 | P1 | `grokkingProgressTimeToThresholdSound` | Quality threshold/censoring and epoch/step timestamps; no inference from final CE only |
+| PERF07 | P1 | `nativeMoEFederatedCriticalPathTelemetry` | Per-shard/peer queue, copy, network, local/remote compute, reduction, cache hit/miss and synchronization |
+| PERF08 | P2 | `throughputQualityMemoryEnergyParetoReceipt` | Matched CE/BPC and latency/tokens/s/VRAM/RAM/J/token, confidence intervals across seeds and reference-dense controls |
+
+**Ledger accounting:** previous 92 planning names + eight PERF targets = **100 named obligations**, not 100 independently unpaid or kernel-accepted theorems. The finite Agda topology accepted by the user and the real native-GPU training are both genuine progress; neither proves the original training/quality advantage or physical federation performance.
+
+**High-alpha next experiment:** Preserve the actual 45 fit rows and model versions; inspect the existing full TrueNAS receipts for matched loss/epoch traces and known token lengths; run a **single bounded same-data native GPU paired dense/C2 timing experiment with progress enabled**, then prioritise improving strict student-only CE 11.565138 before attempting SSD/remote expert throughput comparisons. The quality gap is a first-class blocker, not an artefact that networking should disguise.
