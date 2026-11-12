@@ -8,3 +8,4 @@ import DASHI.Governance.CybersynCrossSectorScenarioExact
 import DASHI.Governance.CybersynHistoricalMandateWorldBridgeExact
 import DASHI.Governance.CybersynTemporalStressPropagationExact
 import DASHI.Governance.CybersynPublicBackstopLossWaterfallExact
+import DASHI.Governance.CybersynDatedPublicRiskJoinExact
