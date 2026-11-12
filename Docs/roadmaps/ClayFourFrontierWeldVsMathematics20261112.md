@@ -50,3 +50,35 @@
 ## Attribution and promotion
 
 External Clay/Navier–Stokes comparator is separately attributed; Agda does not inherit Lean trust. Karp, Young, Hadamard, Newman, Wilson, Faddeev–Popov, Bałaban, OS and other primary results remain with their authors. Our exact rational negative controls and new Agda fixed-instance no-go are DASHI-source adapters. No CI requirement: a local reproducible kernel receipt takes precedence. Do not infer closure from this document, code compilation descriptions, or a clean static scanner.
+
+## 12 November 2026 — further source-proof continuation
+
+**Committed native proof files on Agda draft PR #1499:**
+
+- `DASHI/Mathematics/Complexity/PNotEqualsNPFixedInstanceQuantifierNoGoExact.agda`: original `PolynomialSATDeciderCandidate` target and explicit cost-model constant-time certificates. The pointwise `∃φ ∀D` statement is refuted for each supplied truth assignment bit, without a polynomial SAT theorem.
+- `DASHI/Physics/YangMills/BalabanT4TightRangeDoesNotDetermineIntegralExact.agda`: unconditional four-site finite-measure countermodel with *tight*, attained extrema 0 and 1 for both fields but sums 1 and 3. The source proof `noExactIntegralFromTightRangeAlone` refutes any exact integral estimator depending only on those extrema. This is a finite mathematical negative control, not a proof about the original physical four boxes.
+- `DASHI/ClayFourFrontierNegativeControlsExact.agda` is the local golden focused import root.
+
+**Additional Lean donor:** `chboishabba/dashi_lean4` draft PR #108, `Synthesis/RiemannContinuousFifthMomentSignAudit.lean`. It source-writes the *actual displayed continuous integral* and exact algebraic negativity implication from the two explicitly declared moment identities and a strictly positive fourth moment. The moment identities still require analytic proofs for any concrete input, and no native discrete Route-B identification is made. No cross-kernel promotion.
+
+**New analytic NS scalar countermodel:** for (0≤t<1), (E(t)=(1-t)^{-1/2}) solves (E'(t)=E(t)^3/2), has (int_0^1 E(t)dt=2), and diverges as (t\uparrow1). At rational times (t_n=1-1/n^2), (E(t_n)=n), (int_0^{t_n} E=2(1-1/n)<2), and (E'(t_n)=n^3/2); the Python exact-rational fixture checks the closed expressions for (1≤n≤1000). This is a rigorous scalar mathematical counterexample to the *claimed inference* from finite time-integrated enstrophy and an upper cubic ODE growth bound to no blowup. It is emphatically **not** a 3D Navier–Stokes solution or a blowup construction.
+
+**Scope correction (important):** A sound pointwise enclosure (L≤f(x)≤U) *does* certify the coarse integral enclosure (L \operatorname{Vol}(B)≤\int_B f≤U\operatorname{Vol}(B)) for a nonnegative volume measure and integrable (f). Taylor/Hessian bounds are not logically necessary for this coarse certified enclosure. They are needed only for a more precise midpoint/Taylor-type approximation or when the source's prescribed certificate requires a quantitative remainder. The new Agda four-site no-go proves inability to recover an **exact** integral from min/max alone, not inability to enclose an integral from valid range+volume data.
+
+**Existing paid YM analytic donor discovered on current master:** `BalabanClayT4BishopRegularHatMomentumGapExact.agda` proves the source-written structural implication from a selected nonnegative outer-axis sine-square lower bound to the full canonical unshifted four-dimensional Wilson hat-momentum value. Do not count this structural sum as a remaining physical proof. Still open: source sine-to-Machin-angle identification on each actual physical box, shifted denominators, selected Wilson/ghost/Haar scalar, valid momentum convention, integrand symmetry and certified quadrature/error witnesses. The module's own status reports the physical 1D angle weld as conditional.
+
+**P≠NP nuance:** in standard polynomial-time Turing models, if a decider errs on only finitely many strings, a finite hard-coded exception table makes a polynomial-time correct decider. Hence P≠NP implies infinitely many errors per polynomial SAT decider. The repository's abstract `PolynomialCostModel`, however, does not yet prove closure under arbitrary finite exception-table patching; the all-word bit-machine and finite-table time bound must be supplied to promote that stronger statement within *this exact model*. The direct target `∀D,∃φ_D` remains the source-owned `UniversalPolynomialSATDecisionFailure`.
+
+### Exact pending verifier commands (local authority, not CI)
+
+```bash
+# Execute on the precise #1499 branch, not master
+AGDA_JOBS=1 DASHI_NO_TMUX=1 \
+  bash scripts/run_agda29_parallel_check.sh DASHI/ClayFourFrontierNegativeControlsExact.agda
+python3 scripts/check_clay_four_frontier_negative_controls.py
+
+# On Lean draft #108:
+lake env lean Synthesis/RiemannContinuousFifthMomentSignAudit.lean
+```
+
+The tools were absent in the current execution container, so the two new Agda proof sources and the Lean donor remain **SOURCE-WRITTEN / GITHUB READBACK** until their exact pinned kernels check. No new `postulate`, `sorry`, unsolved meta, axiom escape, or Clay-terminal theorem has been added. Previous static scans are not a substitute for the transitive axiom audit.
