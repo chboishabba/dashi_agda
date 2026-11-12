@@ -138,3 +138,6 @@ import DASHI.Physics.YangMills.YMClayP0BishopRealCarrierInstancesExact as P0Bish
 
 -- P0 faithful source field weld: the actual Bishop setoid algebra derives original Wilson centering and division law records ONLY after a verified semantics-preserving original-real interpretation (still OPEN).
 import DASHI.Physics.YangMills.YMClayP0BishopToOriginalWilsonRealWeldExact as P0OriginalBishopFieldWeld
+
+-- P0.06 signed Wilson integration: actual original n=3 fine-blocked and independent n=1 bare Gibbs/Haar absolute expectation bounds from pointwise trace range and explicit ordered-real laws.
+import DASHI.Physics.YangMills.YMClayE1D1OriginalSignedWilsonWordMomentBoundExact as OriginalSignedWilsonAbsoluteMomentBound
