@@ -35,11 +35,12 @@ PROOF=encoded([1,[["sort",["zero"]]]])
 
 class CandidateCodec:
     """Test-only stand-in, NOT an authentic native export reader."""
+    __file__=__file__
     def exact_type_roundtrip(self,x):return x
     def exact_proof_roundtrip(self,x):return x
     def alpha_type(self,x):return b"alpha-candidate-"+x
 
-def observation(root,source,*,alpha=None,promoted=False):
+def observation(root,source,*,alpha=None,promoted=False,codec_sha=None):
     alpha=alpha if alpha is not None else CandidateCodec().alpha_type(EXACT)
     record={
        "schema":"dashi-lean-v3-type-projection-observation-v1",
@@ -56,6 +57,7 @@ def observation(root,source,*,alpha=None,promoted=False):
        "declaration":"originalProof",
        "toolchain":"Lean-4.28",
        "handoff_key":"c"*64,
+       "p1_codec_sha256":codec_sha or sha256(Path(__file__).read_bytes()).hexdigest(),
        "dependency_closure_id":"",
        "artifact_sha256":"b"*64,
        "original_source_path":"Sample.lean",
@@ -105,6 +107,11 @@ class NativeP1SourceBoundary(unittest.TestCase):
     def test_tampered_alpha_even_if_filename_rehashed_fails(self):
         path=observation(self.root,self.source,alpha=b"unrelated")
         with self.assertRaisesRegex(NativeP1PGError,"mismatch"):
+            inspect_observation(path,CandidateCodec())
+
+    def test_changed_codec_source_identity_rejected(self):
+        path=observation(self.root,self.source,codec_sha="d"*64)
+        with self.assertRaisesRegex(NativeP1PGError,"codec implementation"):
             inspect_observation(path,CandidateCodec())
 
     def test_candidate_cannot_promote_to_world(self):
@@ -158,7 +165,9 @@ class RealSourcePostgresP1(unittest.TestCase):
 
     def test_original_source_exact_type_proof_and_index_are_persistent(self):
         alpha=self.codec.alpha_type(EXACT)
-        path=observation(self.root,self.source,alpha=alpha)
+        path=observation(
+            self.root,self.source,alpha=alpha,
+            codec_sha=sha256(Path(self.codec.__file__).read_bytes()).hexdigest())
         first=persist_original_p1(self.conn,path,self.codec)
         second=persist_original_p1(self.conn,path,self.codec)
         self.assertEqual(first,second)
