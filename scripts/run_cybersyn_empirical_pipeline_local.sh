@@ -24,6 +24,7 @@ python3 scripts/cybersyn_economic_observation_world.py \
 python3 scripts/cybersyn_world_scenario_handoff.py \
   --database "$fixture_root/economic-world.sqlite3" \
   --world-manifest "$fixture_root/world-manifest.json" \
+  --world-snapshot "$fixture_root/world.jsonl" \
   --scenario-data "$fixture_root/scenario.csv" \
   --scenario-manifest "$fixture_root/scenario-manifest.json" \
   --cutoff 2026-02-17T00:00:00Z \
