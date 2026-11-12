@@ -87,9 +87,12 @@ def publish_jmd_readonly(*, source_path: Path, source_sha256: str,
     export_bytes = _pinned_file(export_path, export_sha256, size_limit=200_000_000)
     if type(declaration) is not str or not declaration:
         raise JMDObservationError("original selected declaration required")
-    result = read_only_check(
-        source_path=source_path, export_path=export_path,
-        declaration=declaration, expected_export_sha=export_sha256)
+    try:
+        result = read_only_check(
+            source_path=source_path, export_path=export_path,
+            declaration=declaration, expected_export_sha=export_sha256)
+    except (ValueError, KeyError, TypeError, AttributeError, ImportError) as exc:
+        raise JMDObservationError("pinned original JMD parser rejected native input") from exc
     if (result.get("status") != "jmd-native-builder-readonly-roots-validated"
         or result.get("builder_source_sha256") != source_sha256
         or result.get("native_export_sha256") != export_sha256
