@@ -1513,3 +1513,30 @@ kernel acceptance. No original analytic P1–P3 closure is asserted.
 certificate EXECUTED PASS, new Agda sources committed/read back,
 original Agda-2.9 kernel check UNAVAILABLE in this session.
 No CI or fabricated physical/analytic admission used.
+
+
+### 2026-11-12 final source consumer and refreshed PR donor heads
+
+`BishopOriginalEtaZetaEvenCutoffSeriesWeldExact` commit
+`cf6be10` also exports
+`originalEtaAndEvenTermsIsNativeZetaPartial` and
+`OriginalRound11.actualRound11EtaIsNativeZetaAtEvenCutoff`.
+These combine the ORIGINAL native Bishop eta/even pairing
+with its independently established 2N cutoff/SeriesOf
+identification into one **actual Round11 same-term consumer**:
+
+`etaPrefix_(2N)(s) + 2*evenPositivePrefix_N(s)
+  ≈C Dirichlet.dirichletPartial sourceTerms s (2N)`.
+
+This removes all residual abstract finite pairing/cutoff
+assumptions from the original P2 **finite** eta identity.
+The infinite-series convergence, exponential log(2n)
+multiplicative rescaling, nonzero divisor checks, analytic
+same-object zeta, and continuation remain OPEN.
+
+Latest independent donor PR heads observed during this session:
+`#1478 a46944e6dd9ad00008e82bcba9f380afaa47f00d`;
+`#1497 ea9644ee32d6f61e9b79fc873f527f24de1313cc`.
+Neither is merged into #1408 or kernel-verified from this
+session. Their original analytic/generic external admission
+requirements remain independent.
