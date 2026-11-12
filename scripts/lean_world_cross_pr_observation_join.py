@@ -25,6 +25,10 @@ from lean_world_atomic_spool import publish_immutable
 
 HEX64 = re.compile(r"[0-9a-f]{64}\Z")
 
+# Exact original dashi_lean4 PR #105 at 62bc54b67651d6dd465585d42490beea8fd2621e.
+# Changing this pin requires explicit source/format review, not branch drift.
+JMD_PR105_SOURCE_SHA256 = "f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e"
+
 
 class ObservationJoinError(ValueError):
     pass
@@ -198,6 +202,8 @@ def join(manifest: Path, projection_path: Path, checker_path: Path,
         jmd_path is None and jmd_source_sha256 is not None):
         raise ObservationJoinError("incomplete JMD identity")
     if jmd_path is not None:
+        if jmd_source_sha256 != JMD_PR105_SOURCE_SHA256:
+            raise ObservationJoinError("unreviewed original JMD PR105 source revision")
         if not all(type(x) is str and HEX64.fullmatch(x)
                    for x in (jmd_sha256, jmd_source_sha256)):
             raise ObservationJoinError("un-pinned JMD source/observation")
