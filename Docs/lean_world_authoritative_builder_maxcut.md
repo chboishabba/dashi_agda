@@ -323,3 +323,14 @@ The #1495 consumer takes the literal existing #1494 handoff manifest, already pu
       --jmd-source-sha256 ACTUAL_PINNED_JMD_PR105_SOURCE_SHA256
 
 This output is necessarily same-native-export-correlated-uncertified, with no proof/DB status promotion. A synthetically forged checker JSON can test binding but cannot authenticate the underlying Rust executable or Lean proof. The independent checker run, original native dependency validation, completed DAG and PostgreSQL world-admission API remain the active high-alpha gates.
+
+
+### 2026-11-12 exact original JMD PR #105 discovery and source hash
+
+The actual original source is present at chboishabba/dashi_lean4 PR #105, Git commit 62bc54b67651d6dd465585d42490beea8fd2621e, path scripts/build_jmd_lean_ast_world.py. GitHub blob SHA1: 1b57908509cc02c42f6ea3384fcbc6e52af05db0. Independent SHA-256 of the 23,029-byte ASCII source (calculated by a SHA-256 implementation checked against the standard "abc" vector): f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e.
+
+Direct original-source inspection verified the literal definitions nodes_from_export(path), reachable(root, exprs, names), and expression_fingerprint(root, exprs, names, levels=None), matching the read-only JMD adapter's call signatures. The GitHub PR is OPEN and the source is on its pinned branch head; do not accidentally use a default-branch path or HEAD drift. Its main import_export(conn,row) is a separate SQLite-writing path and MUST NOT be invoked by read-only correlation.
+
+This closes JMD AST source *discovery/version identification* but NOT actual native-v3 dataset acceptance, source-executed read-only receipt, independent Rust checker, authenticated proof semantics or original PostgreSQL world admission.
+
+On isolated #1484 checkout, source file obtained from that exact PR #105 revision should be passed to run_lean_world_jmd_readonly_observation.py with --builder-sha256 f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e. On isolated #1495 checkout, the optional cross-PR join must use the same exact hash for --jmd-source-sha256 and the actual separately generated read-only observation's own SHA-256. No CI or unpinned source fetch.
