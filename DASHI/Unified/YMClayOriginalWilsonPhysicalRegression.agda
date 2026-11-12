@@ -171,3 +171,6 @@ import DASHI.Physics.YangMills.YMClayR445OriginalPureHaarBlockWeldExact as R445O
 
 -- P0.E: actual original side-four interacting Wilson action expressed in exact 64 coarse/64 relative/896 interior source coordinates; pointwise/partition positive; physical weighted canonical pushforward equality and UV decay still OPEN.
 import DASHI.Physics.YangMills.YMClayR445OriginalFullWilsonFiberDensityExact as R445OriginalFullWilsonFibers
+
+-- P0.D supporting typed finite adjacent-swap schedule compiler. The preferred already-source-written original 1024-label permutation owner is NativeClosedThreeEqualities/M01; both require local kernel acceptance.
+import DASHI.Physics.YangMills.YMClayR445AdjacentHaarPermutationCompilerExact as AdjacentHaarSchedule
