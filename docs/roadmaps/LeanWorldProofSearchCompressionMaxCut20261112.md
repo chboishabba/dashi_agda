@@ -246,3 +246,30 @@ In the table below every `LW-*` symbol is a **proposed precise implementation/pr
 | `LW-H03` | `worldUpdateInvalidatesOnlyAffectedProofClosure` · revision-hyperfabric | Copy-on-write roots, original time-indexed object identities, exact changed dependency closure and selective recheck | open |
 | `LW-H04` | `federatedShardRetrievalPreservesAuthorityBoundary` · ZOS-Kant | Original CIDs and proof authority separated; no federation/zk/zkperf input is a theorem certificate | deferred |
 
+
+
+## 2026-11-12 — original JMD parser receipt is now independently publishable
+
+PR #1484 adds scripts/run_lean_world_jmd_readonly_observation.py and tests/test_run_lean_world_jmd_readonly_observation.py. This is a NO-CI, no-checkout, read-only and fail-closed tool to emit **exact original SHA256-bound JMD structural observations** for the same native-v3 export consumed by sibling #1495. It does NOT create a second world DB, grant Lean kernel authority or write PostgreSQL world tables.
+
+- Requires the literal original dashi_lean4 PR #105 build_jmd_lean_ast_world.py file, the operator-chosen source SHA256, a native-v3 file and its SHA256, selected declaration and an existing private observation spool.
+- Checks the source and export bytes against original hashes before and after existing read_only_check; requires that existing owner select one exact declaration, verify native export digest and original Lean githash, enumerate reachable original type/proof roots and return world_admitted=false, typechecked_by_lean_here=false, wrote_another_world_database=false.
+- Publishes a single canonical JSON-line observation with filename = SHA256(original JSON bytes) + .jmd-readonly-observation.json through a private tempfile + fsync + POSIX hard link + directory fsync; same observation is idempotent and changed identity conflicts are rejected.
+- Tests have synthetic fake JMD parser source only to exercise source/export pinning, idempotence, symlinks, bad names and immutable receipt tampering. NO actual original JMD PR #105 importer or Lean checker has been executed in this turn.
+
+Run on isolated #1484 exact branch after obtaining the genuine JMD PR #105 file and pin, without CI:
+
+    python3 -m unittest discover -s tests -p 'test_run_lean_world_jmd_readonly_observation.py' -v
+    python3 scripts/run_lean_world_jmd_readonly_observation.py \
+      --builder-source /path/to/pinned/dashi_lean4/build_jmd_lean_ast_world.py \
+      --builder-sha256 ACTUAL_ORIGINAL_JMD_SHA256 \
+      --native-export /path/to/pinned/native.ndjson \
+      --native-sha256 ACTUAL_NATIVE_SHA256 \
+      --declaration ORIGINAL_SELECTED_LEAN_DECLARATION \
+      --spool /path/to/private/spool
+
+Sibling #1495's newly source-written scripts/lean_world_cross_pr_observation_join.py accepts the emitted observation **only** with both the separate JMD observation SHA256 and builder source SHA256 pinned, and binds it to that same original #1494/#1495 pending export, native-v3 candidate type/proof bytes, Rust nanoda checker observation and source closure. The PR branches remain independent; an operator must use their original isolated worktrees. Neither sibling module becomes an ancestor by referencing its path here.
+
+**Remaining P0/P1 highest-alpha gates:** actual original JMD source + Rust nanoda checker execution and negative controls at exact pins; original native-v3 dependency closure and importer compatibility; authenticated checker semantics/axiom trust; transactional original typed DAG admission into the existing PostgreSQL store; original Lean donor retrieval, consumer elaboration and source-attributed proof reuse. Parser structural agreement and hashes are necessary evidence, not these proofs.
+
+Status: source written; local exact-head Python/Lean/Nix/PostgreSQL receipts pending. Agda remains golden for its original source, local verification authoritative over CI.
