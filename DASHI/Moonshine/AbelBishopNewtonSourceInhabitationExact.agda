@@ -8,11 +8,14 @@ module DASHI.Moonshine.AbelBishopNewtonSourceInhabitationExact where
 -- orbit starting from the literal rational complex center.
 --
 -- Source inputs still to be paid with constructive analytic proofs:
---   1. sin_B(133724/100000)>0, for the *selected* trig source;
---   2. source squared-distance Newton disk stability and contraction,
+--   1. Source squared-distance Newton disk stability and contraction,
 --      and first-step bound, on the SAME native operator;
---   3. continuity of the actual original Bishop exp, sin, cos
+--   2. Continuity of the actual original Bishop exp, sin, cos
 --      along that actual Newton orbit.
+--
+-- The selected sin_B(133724/100000)>0 leaf and denominator witness
+-- are now SOURCE-WRITTEN in AbelBishopNewtonSelectedSinePositiveExact,
+-- reusing the original factorial interlacing and rational ratio proof.
 --
 -- Derived, with NO additional hypothesis:
 --   Newton denominator nonzero, all Newton step geometric bounds,
@@ -29,6 +32,7 @@ import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
 import DASHI.Moonshine.AbelBishopOriginalComplexCarrierWeldExact as Native
 import DASHI.Moonshine.AbelBishopNewtonCenterDenominatorExact as Denominator
+import DASHI.Moonshine.AbelBishopNewtonSelectedSinePositiveExact as SelectedSine
 import DASHI.Moonshine.AbelBishopNewtonSelectedOperatorExact as Newton
 import DASHI.Moonshine.AbelBishopNewtonSelectedLimitExact as Limit
 import DASHI.Moonshine.AbelBishopAnalyticNewtonContractionExact as Disk
@@ -37,17 +41,8 @@ import DASHI.Moonshine.AbelBishopNewtonRealTrigContinuityExact as Continuity
 record OriginalBishopNewtonActualAnalyticSources
     (T : Cartesian.BishopSetoidComplexTranscendentals) : Set₁ where
 
-  field
-    selectedSinePositive :
-      BishopReal._<_ BishopReal.0ℝ
-        (Elementary.bishopSin
-          (Cartesian.dataSet T)
-          Denominator.bishopNewtonCenterImag)
-
   private
-    nz =
-      Denominator.bishopNewtonDenominatorNonzeroFromOriginalSine
-        T selectedSinePositive
+    nz = SelectedSine.originalBishopNewtonDenominatorNonzeroFromSource T
 
   field
     selectedDiskCertificate :
@@ -89,8 +84,7 @@ originalBishopSelectedNewtonFixedPoint :
 originalBishopSelectedNewtonFixedPoint T source =
   let
     nz =
-      Denominator.bishopNewtonDenominatorNonzeroFromOriginalSine
-        T (selectedSinePositive source)
+      SelectedSine.originalBishopNewtonDenominatorNonzeroFromSource T
     steps =
       Disk.originalBishopAnalyticNewtonBuildsActualStepBounds
         T nz (selectedDiskCertificate source)
@@ -107,8 +101,7 @@ originalBishopSelectedNewtonFixedPointIsExpFixed :
 originalBishopSelectedNewtonFixedPointIsExpFixed T source =
   Continuity.originalBishopNewtonNativeExpFixedFromThreeScalarContinuities
     T
-    (Denominator.bishopNewtonDenominatorNonzeroFromOriginalSine
-      T (selectedSinePositive source))
+    (SelectedSine.originalBishopNewtonDenominatorNonzeroFromSource T)
     (selectedDiskCertificate source)
     (originalExpContinuousAlongNewton source)
     (originalCosContinuousAlongNewton source)
