@@ -71,6 +71,15 @@ originalR445SelectedBondEnumerationDistinct =
       (Unique.allCyclicIndicesDuplicateFree 2))
 
 -- Original exact equality decision for positive side-four bonds.
+-- Native torus decidability returns T.Empty, while the existing
+-- duplicate-free list calculus returns Data.Empty.⊥. Both are
+-- uninhabited; an elimination is the only bridge required.
+torusEmptyToBottom : T.Empty → ⊥
+torusEmptyToBottom ()
+
+torusEmptyElim : ∀ {A : Set} → T.Empty → A
+torusEmptyElim ()
+
 originalFineBondEquality : T.DecidableEquality FineBond
 originalFineBondEquality =
   T.productDecidableEquality
@@ -135,7 +144,7 @@ removeSelectedFresh :
   ∀ {bond : FineBond} {items : List FineBond} →
   bond T.∈ removeSelected items →
   (bond T.∈ originalR445SelectedBondEnumeration →
-   ⊥)
+   T.Empty)
 removeSelectedFresh {items = []} ()
 removeSelectedFresh {items = head ∷ tail} membership
   with selectedMembershipDecision head
@@ -148,13 +157,13 @@ removeSelectedFresh {items = head ∷ tail} membership
 removeSelectedRetainsNonselected :
   ∀ {bond : FineBond} {items : List FineBond} →
   (bond T.∈ originalR445SelectedBondEnumeration →
-   ⊥) →
+   T.Empty) →
   bond T.∈ items →
   bond T.∈ removeSelected items
 removeSelectedRetainsNonselected {items = []} absent ()
 removeSelectedRetainsNonselected {items = head ∷ tail}
     absent T.here with selectedMembershipDecision head
-... | T.yes selected = ⊥-elim (absent selected)
+... | T.yes selected = torusEmptyElim (absent selected)
 ... | T.no _ = T.here
 removeSelectedRetainsNonselected {items = head ∷ tail}
     absent (T.there inTail) with selectedMembershipDecision head
@@ -190,7 +199,7 @@ originalR445SelectedResidualDisjoint :
     originalR445ResidualBondEnumeration
 originalR445SelectedResidualDisjoint = record
   { disjoint = λ inSelected inResidual →
-      removeSelectedFresh inResidual inSelected
+      torusEmptyToBottom (removeSelectedFresh inResidual inSelected)
   }
 
 originalR445AllOriginalBondsCovered :
