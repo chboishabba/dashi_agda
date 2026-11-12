@@ -168,3 +168,6 @@ import DASHI.Physics.YangMills.YMClayR445FlatPairedHaarIntegrationExact as R445F
 
 -- P0.D original-native pure Haar blocking: full formal implication from concrete canonical permutation word and native coarse-vector order equality to actual original n=3->n=1 product Haar. Both weld certificates remain explicit/uninhabited.
 import DASHI.Physics.YangMills.YMClayR445OriginalPureHaarBlockWeldExact as R445OriginalPureHaarWeld
+
+-- P0.E: actual original side-four interacting Wilson action expressed in exact 64 coarse/64 relative/896 interior source coordinates; pointwise/partition positive; physical weighted canonical pushforward equality and UV decay still OPEN.
+import DASHI.Physics.YangMills.YMClayR445OriginalFullWilsonFiberDensityExact as R445OriginalFullWilsonFibers
