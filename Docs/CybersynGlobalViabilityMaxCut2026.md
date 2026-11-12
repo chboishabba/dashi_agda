@@ -156,3 +156,13 @@ The next smallest decisive action is to run `bash scripts/check_cybersyn_global_
 ## Current branch reconciliation note
 
 The latest focused root has **eight** source-written exact owner modules, alongside one dedicated root, one local check script and this roadmap. Earlier chronologically dated status passages above are retained as historical progress notes; the phase ledger and latest P1/P7 subsection control current status. Source readback is not a local Agda 2.9 typecheck or a physical/economic verification receipt. 
+
+## Cross-PR world ingestion and semantic join check (PRs #1494, #1484)
+
+Live changed-file review confirms PR #1494's world-stage source is `scripts/lean_world_native_admission_queue.py` with its own dated roadmap and tests. Its roadmap explicitly states **H02 authoritative JMD builder discovery OPEN; H03 full native-DAG checking OPEN; H04 world-DB insertion OPEN**, and that `world_admitted=false`, `complete_dag_checked=false`, `kernel_proof_certified=false` remain fail-closed. This Cybersyn implementation must not treat the queue/spool as a world-builder.
+
+PR #1484 provides the separate Lean-world source/semantic-join and original-identity work, including `scripts/lean_world_canonical_dag.py` and PostgreSQL source/query workers. Its roadmap distinguishes immutable source occurrences (O), elaborated expressions (E), canonical expression DAG (N), retrieval fibres (F), certified transport (T), and hyperfabric incidence (H), with typed candidate retrieval deliberately not a proof certificate.
+
+**P1 exact integration contract (unpaid):** acquire the actual authoritative builder action and checked event/declaration receipts; transport exact immutable world identity and source/revision/time into `SameDatedEvent`; require independently checked authority before admitting `AdmittedSameEventJoin`; preserve original owner and failed-candidate residuals. A candidate join or source spelling coincidence cannot pay P1.
+
+This cross-PR source inspection is not a run of the Lean/Agda/PostgreSQL suites.
