@@ -135,3 +135,6 @@ import DASHI.Physics.YangMills.YMClayD2ObservedDecayDoesNotForceFullSpectralGapE
 
 -- P0 concrete scalar realization: pinned Murray/Csimma Bishop SETOID real proves subtraction, x-0, centered cancellation and positive inverse quotient law; does not identify with RealAnalysisAxioms abstract propositional ℝ.
 import DASHI.Physics.YangMills.YMClayP0BishopRealCarrierInstancesExact as P0BishopRealArithmetic
+
+-- P0 faithful source field weld: the actual Bishop setoid algebra derives original Wilson centering and division law records ONLY after a verified semantics-preserving original-real interpretation (still OPEN).
+import DASHI.Physics.YangMills.YMClayP0BishopToOriginalWilsonRealWeldExact as P0OriginalBishopFieldWeld
