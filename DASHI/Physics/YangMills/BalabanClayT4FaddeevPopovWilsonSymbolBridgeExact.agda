@@ -38,9 +38,10 @@ module DASHI.Physics.YangMills.BalabanClayT4FaddeevPopovWilsonSymbolBridgeExact 
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (sym; trans)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 
 import Real as Bishop
+import RealProperties as BishopP
 
 open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
@@ -51,19 +52,22 @@ import DASHI.Physics.YangMills.BalabanP33PhysicalFaddeevPopovOperatorExact as Fi
 record CoherentGhostTrigBoxData : Set₁ where
   field
     trig : Canonical.PhysicalTrigBoxData
+    -- Bishop ℝ is a SETOID. A true half-angle theorem gives ≃,
+    -- not propositional equality of underlying Cauchy representatives.
     halfAngleExact : ∀ role axis →
-      Canonical.twoValue Bishop.-
-        (Canonical.twoValue Bishop.*
-          Canonical.cosineFullValue trig role axis)
-      ≡ Canonical.scaledSineSquareValue trig role axis
+      Bishop._≃_
+        (Canonical.twoValue Bishop.-
+          (Canonical.twoValue Bishop.*
+            Canonical.cosineFullValue trig role axis))
+        (Canonical.scaledSineSquareValue trig role axis)
 open CoherentGhostTrigBoxData public
 
 ghostAxisSymbol :
   CoherentGhostTrigBoxData → Eval.MomentumRole → Eval.AxisIndex → Bishop.ℝ
 ghostAxisSymbol dataSet role axis =
   Canonical.twoValue Bishop.-
-    (Canonical.twoValue Bishop.*
-      Canonical.cosineFullValue (trig dataSet) role axis)
+  (Canonical.twoValue Bishop.*
+    Canonical.cosineFullValue (trig dataSet) role axis)
 
 freeGhostSymbol :
   CoherentGhostTrigBoxData → Eval.MomentumRole → Bishop.ℝ
@@ -74,28 +78,39 @@ freeGhostSymbol dataSet role =
   ghostAxisSymbol dataSet role Eval.axis3
 
 ghostAxisSymbolIsWilsonSineSquare : ∀ dataSet role axis →
-  ghostAxisSymbol dataSet role axis
-  ≡ Canonical.scaledSineSquareValue (trig dataSet) role axis
+  Bishop._≃_
+    (ghostAxisSymbol dataSet role axis)
+    (Canonical.scaledSineSquareValue (trig dataSet) role axis)
 ghostAxisSymbolIsWilsonSineSquare dataSet role axis =
   halfAngleExact dataSet role axis
 
 freeGhostSymbolIsWilsonHatMomentum : ∀ dataSet role →
-  freeGhostSymbol dataSet role
-  ≡ Hat.literalWilsonHatMomentum (trig dataSet) role
-freeGhostSymbolIsWilsonHatMomentum dataSet role
-  rewrite ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis0
-        | ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis1
-        | ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis2
-        | ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis3 = refl
+  Bishop._≃_
+    (freeGhostSymbol dataSet role)
+    (Hat.literalWilsonHatMomentum (trig dataSet) role)
+freeGhostSymbolIsWilsonHatMomentum dataSet role =
+  BishopP.+-cong
+    (BishopP.+-cong
+      (BishopP.+-cong
+        (ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis0)
+        (ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis1))
+      (ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis2))
+    (ghostAxisSymbolIsWilsonSineSquare dataSet role Eval.axis3)
 
 freeGhostSymbolIsCanonicalHatMomentumAtom : ∀ dataSet role →
-  freeGhostSymbol dataSet role
-  ≡ Canonical.canonicalAtomValue (trig dataSet)
-      (Eval.hatMomentumSquared role)
+  Bishop._≃_
+    (freeGhostSymbol dataSet role)
+    (Canonical.canonicalAtomValue (trig dataSet)
+      (Eval.hatMomentumSquared role))
 freeGhostSymbolIsCanonicalHatMomentumAtom dataSet role =
-  trans
-    (freeGhostSymbolIsWilsonHatMomentum dataSet role)
-    (sym (Hat.hatMomentumAtomValueIsLiteralWilson (trig dataSet) role))
+  let
+    source = freeGhostSymbolIsWilsonHatMomentum dataSet role
+    match = Hat.hatMomentumAtomValueIsLiteralWilson (trig dataSet) role
+  in
+  subst
+    (λ value → Bishop._≃_ (freeGhostSymbol dataSet role) value)
+    (sym match)
+    source
 
 freeGhostWilsonHatSymbolBridgeLevel : ProofLevel
 freeGhostWilsonHatSymbolBridgeLevel = machineChecked
