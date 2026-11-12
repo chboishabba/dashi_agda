@@ -150,3 +150,12 @@ import DASHI.Physics.YangMills.YMClaySUNTwoLinkHaarEffectiveFiberDensityExact as
 
 -- R443/R445 all finite n native SU(N) Haar-paired product block, including 64-coarse/896-unused cardinality specialization; original bond codec identification still OPEN.
 import DASHI.Physics.YangMills.YMClaySUNFinitePairedHaarBlockPushforwardExact as NativeFinitePairedSUNHaar
+
+-- Original 4->2 periodic positive-bond parity/index and native holonomy weld; source candidate, Agda check pending.
+import DASHI.Physics.YangMills.YMClayR445OriginalAxialBondParityInjectiveExact as R445OriginalAxialParity
+
+-- Original 4->2 periodic positive-bond parity/index and native holonomy weld; source candidate, Agda check pending.
+import DASHI.Physics.YangMills.YMClayR445NativePairHolonomyIdentityExact as R445NativePairHolonomy
+
+-- Original 4->2 periodic positive-bond parity/index and native holonomy weld; source candidate, Agda check pending.
+import DASHI.Physics.YangMills.YMClayR445OriginalNativeParityPairWeldExact as R445NativeParityWeld
