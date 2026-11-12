@@ -9,6 +9,7 @@ module DASHI.Physics.YangMills.BalabanRegular240EncodedFourOrbitSumExact where
 -- representative values or a new 240-term manual certificate.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (cong)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
