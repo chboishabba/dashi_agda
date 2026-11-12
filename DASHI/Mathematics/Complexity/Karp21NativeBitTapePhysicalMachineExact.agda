@@ -381,3 +381,27 @@ machineRunCellBudget {q} {k} (suc fuel) program cfg =
         (NatP.+-assoc
           (configurationCells cfg) (suc k)
           (fuel * suc k))))
+
+
+-- Reassociate a finite number of literal local physical instructions:
+-- one final instruction occurs after the first `fuel` steps.
+machineRunAppendOne :
+  {q k : Nat} (fuel : Nat) (program : LocalProgram q k)
+  (cfg : Configuration q k) →
+  machineRun (suc fuel) program cfg
+    ≡ machineStep program (machineRun fuel program cfg)
+machineRunAppendOne zero program cfg = refl
+machineRunAppendOne (suc fuel) program cfg =
+  machineRunAppendOne fuel program (machineStep program cfg)
+
+-- Once the explicit halted flag is set, no subsequent physical step
+-- changes any tape, control state or head location.
+machineRunHaltedStable :
+  {q k : Nat} (fuel : Nat) (program : LocalProgram q k)
+  (state : Fin.Fin q) (source : Tape)
+  (work : Vec.Vec Tape k) →
+  machineRun fuel program (config state source work true)
+    ≡ config state source work true
+machineRunHaltedStable zero program state source work = refl
+machineRunHaltedStable (suc fuel) program state source work =
+  machineRunHaltedStable fuel program state source work
