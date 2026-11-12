@@ -243,3 +243,29 @@ None of these mathematical negative controls is a Clay solution.
 
 No new endpoint is promoted. Full original source/physical authority,
 Agda golden local kernel and Lean cross-prover transport remain distinct.
+
+
+### Final current heads after latest physical-source audits (11:18 UTC)
+
+* **YM #1498 `13dbfa361d30`** now has exact source rank-endpoint
+  generator invariances, a formal rank-one naive-squaring counterexample
+  and four rational *auxiliary unshifted inverse-propagator* intervals
+  folded over 240 boxes. These ARE NOT the original four-diagram
+  Wilson/ghost/Haar beta quadratures or actual integral error receipts.
+  Physical source sine-value membership, shifted denominators, tensor
+  scalar projection and true quadrature still OPEN.
+* **YM #1444 `a6e2ee14733c`** contains the original D2 reciprocal
+  denominator uniform-gap no-go just added to the existing owner
+  plus the updated PH0–PH4 roadmap. Local Agda kernel pending.
+* **Karp #1474 `00556cd11bf5`** source-writes exact physical gamma
+  sixteen-dispatch cases, original accepted-witness bitword width,
+  and tighter `2m≤|G|` G3 certificate accounting. This is a
+  source-written **G3 memory/witness weld**, not a full F1–F4
+  machine-clock, Cook–Levin, 21-completeness or SATNotInP proof.
+* **BSD Lean #107 `96d1a0ea2422`** advances actual Ebar continuous
+  linear [2] exactness, selected point-H1 localization and exact
+  Γ(1/4) target positivity. Genuine all-place Kummer/Sha comparison,
+  same-curve L(E,1) Mellin and Fermat/MW rank remain OPEN.
+* Hodge Lean #40 remains merged genuine algebraic-cycle donor, not
+  universal Hodge; NS Lean #109 five R3 transports pending; RH
+  Lean #50/Agda #1434 original strict analytic inequalities pending.
