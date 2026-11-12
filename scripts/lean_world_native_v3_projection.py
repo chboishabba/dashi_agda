@@ -33,12 +33,14 @@ class NativeCandidate:
     proof_digest: str = ""
     proof_direct_constants: tuple[str, ...] = ()
     kernel_certified: bool = False
+    canonical_proof: bytes = b""
 
 def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                        selected_names: frozenset[str] | None = None):
     if type(raw) is not bytes or not raw or len(raw)>200_000_000:
         raise NativeV3Error("invalid native export size")
     names={0:""}
+    name_shapes={0:("anon",)}
     levels={0:("zero",)}
     # Expressions contain CHILD IDS, never nested expanded child expressions.
     expressions={}
@@ -55,6 +57,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
             raise NativeV3Error("duplicate or invalid "+label+" index")
         table[i]=node
     def name(i): return ref(names,i,"name")
+    def name_shape(i): return ref(name_shapes,i,"name shape")
     def level(i): return ref(levels,i,"universe")
     def expr(i):
         ref(expressions,i,"expression")
@@ -65,7 +68,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
         if tag in ("lam","forallE"): return (node[2],node[3])
         if tag=="letE": return (node[2],node[3],node[4])
         if tag=="proj": return (node[3],)
-        if tag=="alias": return (node[1],)
+        if tag in ("alias","mdata"): return (node[1],)
         return ()
     def expression_dag(root):
         """Postorder structural interning with deterministic canonical IDs."""
@@ -88,16 +91,18 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
             if tag=="alias":
                 assigned[index]=assigned[node[1]]
                 continue
-            if tag=="app":
+            if tag=="mdata":
+                norm=("mdata",assigned[node[1]],node[2])
+            elif tag=="app":
                 norm=(tag,assigned[node[1]],assigned[node[2]])
             elif tag in ("lam","forallE"):
                 norm=(tag,node[1],assigned[node[2]],
-                      assigned[node[3]],node[4])
+                      assigned[node[3]],node[4],node[5])
             elif tag=="letE":
                 norm=(tag,node[1],assigned[node[2]],assigned[node[3]],
-                      assigned[node[4]],node[5])
+                      assigned[node[4]],node[5],node[6])
             elif tag=="proj":
-                norm=(tag,node[1],node[2],assigned[node[3]])
+                norm=(tag,node[1],node[2],assigned[node[3]],node[4])
             else:
                 norm=node
             key=canonical(norm)
@@ -157,11 +162,13 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                 raise NativeV3Error("invalid string name")
             if tag=="num" and not integer(segment):
                 raise NativeV3Error("invalid numeric name")
-            intern(names,obj.get("in"),
-                   (prefix+"." if prefix else "")+str(segment),"name")
+            index=obj.get("in")
+            intern(names,index,(prefix+"." if prefix else "")+str(segment),"name")
+            intern(name_shapes,index,(tag,name_shape(value.get("pre")),segment),
+                   "name shape")
         elif tag in ("succ","max","imax","param"):
             if tag=="succ": node=("succ",level(value))
-            elif tag=="param": node=("param",name(value))
+            elif tag=="param": node=("param",name(value),name_shape(value))
             else:
                 if not isinstance(value,list) or len(value)!=2:
                     raise NativeV3Error("invalid universe pair")
@@ -176,7 +183,8 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                 if not isinstance(value,dict) or not isinstance(value.get("us"),list):
                     raise NativeV3Error("invalid constant")
                 node=(tag,name(value.get("name")),
-                      tuple(level(i) for i in value["us"]))
+                      tuple(level(i) for i in value["us"]),
+                      name_shape(value.get("name")))
             elif tag=="app":
                 node=(tag,expr(value["fn"]),expr(value["arg"]))
             elif tag in ("lam","forallE"):
@@ -184,16 +192,19 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                     "default","implicit","strictImplicit","instImplicit"):
                     raise NativeV3Error("invalid binder information")
                 node=(tag,name(value["name"]),expr(value["type"]),
-                      expr(value["body"]),value["binderInfo"])
+                      expr(value["body"]),value["binderInfo"],
+                      name_shape(value["name"]))
             elif tag=="letE":
                 if type(value.get("nondep")) is not bool:
                     raise NativeV3Error("invalid let dependency")
                 node=(tag,name(value["name"]),expr(value["type"]),
-                      expr(value["value"]),expr(value["body"]),value["nondep"])
+                      expr(value["value"]),expr(value["body"]),value["nondep"],
+                      name_shape(value["name"]))
             elif tag=="proj":
                 if not integer(value.get("idx")):
                     raise NativeV3Error("invalid projection index")
-                node=(tag,name(value["typeName"]),value["idx"],expr(value["struct"]))
+                node=(tag,name(value["typeName"]),value["idx"],expr(value["struct"]),
+                      name_shape(value["typeName"]))
             elif tag=="natVal":
                 if type(value) is not str or not value.isascii() or not value.isdecimal():
                     raise NativeV3Error("invalid natural literal")
@@ -202,7 +213,10 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                 if type(value) is not str: raise NativeV3Error("invalid string literal")
                 node=(tag,value)
             elif tag=="mdata":
-                node=("alias",expr(value["expr"]))
+                if (not isinstance(value,dict) or
+                    not isinstance(value.get("data"),dict)):
+                    raise NativeV3Error("invalid native metadata payload")
+                node=("mdata",expr(value["expr"]),value["data"])
             else:
                 raise NativeV3Error("unsupported expression node")
             intern(expressions,obj.get("ie"),node,"expression",allow_zero=True)
@@ -231,7 +245,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                 tuple(x for x in direct_constants(typ) if x!=declaration),
                 has_proof,sha256(proof_bytes).hexdigest() if has_proof else "",
                 tuple(x for x in direct_constants(proof) if x!=declaration)
-                    if has_proof else ()))
+                    if has_proof else (),False,proof_bytes))
         else:
             # Grouped inductive constants are kernel-atomic: record references
             # are checked here but the group is NOT promoted or projected.
