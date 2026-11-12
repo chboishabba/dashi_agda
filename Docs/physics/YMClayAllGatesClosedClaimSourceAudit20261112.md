@@ -77,3 +77,19 @@ Critical boundaries:
 7. **N1/G1:** positivity of a running coupling does not prove a particular four-point cumulant nonzero without an error-versus-leading-term lower bound and a same-continuum source. `h^∨(G)>0` and compact Haar existence do not establish original group-indexed nonperturbative RG or continuum mass gap.
 
 These distinctions are reflected in the executable roadmap. **All five Clay terminal gates E1/D1/D2/N1/G1 OPEN.** No new Agda kernel acceptance receipt or UV-uniform physical polymer estimate exists in this round.
+
+
+## 2026-11-12 attachment-specific result: real SU(N) Haar fiber identity, without fictitious UV closure
+
+The user's latest attached `Pasted text.txt` proposes `U_e=exp(a ξ_e)V_e`, an exponential Jacobian, a positive `K_V=D_V^*D_V+a²m_eff²`, and an already-decaying resolvent. Those formulas **are not yet a rigorously proved global disintegration** of the original Wilson side-four finite Haar weight; in particular the group exponential is not generally a globally injective coordinate chart, gauge-fixed zero modes and Jacobians are not identified on the selected original bond codec, and a positive `m_eff` cannot be freely introduced in a mass-gap argument.
+
+There is, however, a genuine **source-first alternative for a single native two-link SU(N) multiplication block**:
+
+- `YMClaySUNOneLinkHaarConvolutionSourceExact.agda`: proves from actual existing `OneLinkProductHaar`, bilateral invariance and Fubini that product of two independent Haar links pushes forward to the selected one-link Haar measure for **every** integrable original link test.
+- `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda`: constructs the weighted coarse density `ρ_g(W)=∫_U g(U,U⁻¹W)` for *arbitrary* correlated fine two-link density `g`; the native SU(N) group inverse cancellation and Haar left-invariance yield `∫_U∫_V g(U,V)F(UV)=∫_W ρ_g(W)F(W)`. The same module derives source partition transport, pointwise positivity of `ρ_g` from original positive `g`, and exact unit-density reduction to pure Haar for all tests.
+- `scripts/check_ym_two_link_haar_fiber_exact.py` independently passed 512 exact rational instances on noncommutative D4 with correlated densities and signed observables; D4 is **not SU(N)** and this is not a kernel receipt.
+- The module imports are in the original Wilson physical regression and the local Nix/Agda target list.
+
+**Actual remaining high-alpha P0.09 proof:** the full original side-four `YMClaySUNNativeBlockedPositiveHolonomyExact.nativeSUNBlockLinks` is a map from 1024 original fine positive bonds to 64 original coarse positive bonds, not a single two-link group multiplication on one coordinate. A legal global disintegration needs a real source bond-coordinate decomposition matching all coarse blocked holonomies to disjoint oriented fine-link product pairs and integrating out the residual interior links, with explicit original Gibbs density `Variable.periodicSUNGibbsDensity`, gauge covariance and Fubini. Only after its exact full-block `ρ_eff` is constructed can `ρ_eff - ρ_bare` be estimated by source-controlled polymer weights in the correct ultraviolet scaling regime. The local Haar identity is a useful finite proof subleaf; it does **not** deliver the physical uniform bound, mass gap, or E1/D1/D2/N1/G1 terminal Clay closure.
+
+**D2 logical defect in the supplied text:** its spectral argument excludes a hypothetical *eigenvector* with energy `λ_0<m` but does not cover continuous subgap spectral support. Also an approximant `Ψ_δ` changes with `δ`; its correlation bound's constant `M(Ψ_δ)` is uncontrolled in that passage to `t→∞`. A valid operator gap proof requires the same self-adjoint H, OS core density, and a spectral-measure support lemma uniformly in the decay exponent, not only an eigenvalue contradiction.
