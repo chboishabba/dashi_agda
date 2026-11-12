@@ -93,3 +93,49 @@ cosinePairPairedBoxesAgree arithmetic source target compatible addCommutative =
 -- SemanticInvariant on Eval.regularIntegrand scalarData for all seven
 -- actual generators, plus environment compatibility on generated boxes.
 -- This example is NOT the complete source scalar certificate.
+
+-- Same-source physical consumer: accept the original LiteralScalarIntegrand,
+-- rather than an independently chosen AST or idealised proxy.
+-- The record has two independently checkable inputs, not an axiomatic
+-- declaration of global symmetry: a real atom/environment transport and
+-- evaluator equality of the original regular-integrand expression.
+record LiteralSemanticBoxTransport
+  {expressions : Eval.LiteralDiagramExpressions}
+  {ward : Eval.LiteralWardExpressionProofs expressions}
+  (scalarData : Eval.LiteralScalarIntegrandExpression expressions ward)
+  (arithmetic : Eval.RationalIntervalArithmetic)
+  (generator : Orbit.HyperoctahedralGenerator)
+  (source target : Eval.BoxTrigEnvironment) : Set₁ where
+  field
+    atomEnvironmentCompatibility :
+      Transport.GeneratorEnvironmentCompatibility
+        arithmetic generator source target
+    literalSemanticInvariant :
+      SemanticInvariant arithmetic target generator
+        (Eval.regularIntegrand scalarData)
+open LiteralSemanticBoxTransport public
+
+literalSameSourceSemanticEvaluationExact :
+  ∀ {expressions ward scalarData arithmetic generator source target} →
+  LiteralSemanticBoxTransport
+    {expressions = expressions} {ward = ward}
+    scalarData arithmetic generator source target →
+  Eval.evaluateExpression arithmetic target
+    (Eval.regularIntegrand scalarData)
+  ≡ Eval.evaluateExpression arithmetic source
+    (Eval.regularIntegrand scalarData)
+literalSameSourceSemanticEvaluationExact
+  {scalarData = scalarData} {arithmetic = arithmetic}
+  {generator = generator} {source = source} {target = target}
+  receipt =
+  semanticGeneratorBoxTransport arithmetic generator source target
+    (Eval.regularIntegrand scalarData)
+    (atomEnvironmentCompatibility receipt)
+    (literalSemanticInvariant receipt)
+
+-- This deliberately does not inhabit the old
+-- LiteralRegularIntegrandB4GeneratorCertificate: that old record
+-- demands raw syntax equality and is strictly stronger/different.
+-- A downstream quadrature/orbit theorem needs proof of equality of
+-- actual rational contributions, or a sound interval enclosing relation,
+-- not merely pointwise equality of two chosen enclosures.
