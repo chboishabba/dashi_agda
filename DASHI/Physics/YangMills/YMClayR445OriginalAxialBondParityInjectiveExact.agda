@@ -119,7 +119,7 @@ originalR445SelectedFineBond
   T.pair
     (T.pair (T.pair (even a) (even b))
       (T.pair (even c) (coord d p)))
-    (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))
+    (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ)))
 
 Selected : Set
 Selected = T.Product CoarseBond Bit
@@ -163,7 +163,7 @@ originalR445DecodeSelectedFineBond
 ... | _ | _ | _ = nothing
 originalR445DecodeSelectedFineBond
   (T.pair (T.pair (T.pair x0 x1) (T.pair x2 x3))
-    (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ)))
+    (T.sucᵢ (T.sucᵢ (T.sucᵢ T.zeroᵢ))))
   with decodeEven x0 | decodeEven x1 | decodeEven x2
 ... | just a | just b | just c =
   just (T.pair
