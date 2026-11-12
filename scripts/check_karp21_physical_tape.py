@@ -88,6 +88,16 @@ def main() -> None:
                             assert walk("right", walk("left", t)) == t
                         if r:
                             assert walk("left", walk("right", t)) == t
+    # Explicitly enumerate all q * 4^(k+1) finite table entries,
+    # independent of the cursor/tape tail contents.
+    q, work_count = 3, 2
+    table = {(state, heads): program(state, heads, q)
+             for state in range(q)
+             for heads in product(CELLS, repeat=work_count + 1)}
+    assert len(table) == q * (4 ** (work_count + 1))
+    for (state, heads), command in table.items():
+        assert command == program(state, heads, q)
+        checked += 1
     for width in (0, 1, 2, 4):
         for _ in range(4000):
             bit_len = rng.randrange(24)
