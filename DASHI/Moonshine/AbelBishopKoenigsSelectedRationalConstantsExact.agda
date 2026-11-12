@@ -93,3 +93,36 @@ selectedIncrementConstantBound :
   ≤ selectedIncrementConstantUpper
 selectedIncrementConstantBound = ℚP.≤ᵇ⇒≤ tt
 
+
+
+------------------------------------------------------------------------
+-- The selected rational CENTER has genuine squared-modulus margins.
+-- When the Newton disk of radius 1/200 is inhabited on this center,
+-- triangle inequalities propagate these to |p| in [27/20,69/50].
+------------------------------------------------------------------------
+
+centerNormSquare : ℚ
+centerNormSquare =
+  centerReal * centerReal + centerImag * centerImag
+
+centerNormSqAboveLowerMargin :
+  ((+ 271 / 200) * (+ 271 / 200)) ≤ centerNormSquare
+centerNormSqAboveLowerMargin = ℚP.≤ᵇ⇒≤ tt
+
+centerNormSqBelowUpperMargin :
+  centerNormSquare ≤ ((+ 11 / 8) * (+ 11 / 8))
+centerNormSqBelowUpperMargin = ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonContractionComparison :
+  (+ 7 / 5) ≤ (+ 3 / 2)
+selectedNewtonContractionComparison = ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonSelfMapComparison :
+  ((+ 1 / 10000) * (+ 2 / 3)) +
+  ((+ 1 / 200) * (+ 1 / 200))
+  ≤ newtonRadius
+selectedNewtonSelfMapComparison = ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonCenterInsideLogDisk :
+  newtonRadius ≤ selectedLogDiskRadius
+selectedNewtonCenterInsideLogDisk = ℚP.≤ᵇ⇒≤ tt
