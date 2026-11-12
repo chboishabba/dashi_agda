@@ -1325,3 +1325,18 @@ the independent original Riemann analytic same-function
 continuation/identification. None is inferred from finite
 ring equality. The Re(s)>2 native zeta value remains separately
 source-written, kernel acceptance unverified.
+
+
+#### Bidirectional native eta finite identity — 2026-11-12
+
+Commit `97280ac` extends the actual original Bishop
+`BishopOriginalDirichletEtaFinitePairingExact` with
+`originalBishopFiniteEvenCancellation` and
+`originalBishopEtaIsZetaMinusTwiceEven`:
+`eta_(2N)(s) ≈C zeta_(2N)(s) - 2*evenPositivePrefix_N(s)`
+at **every original Bishop complex input and finite cutoff**,
+via the selected original real `RP.ℝ-Solver` on both coordinates.
+The original Round11 same-term instance remains
+`OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`.
+No analytic limit, even-term rescaling or divisor inversion is
+deduced from this bidirectional finite algebra. Kernel pending.
