@@ -26,10 +26,13 @@ for module in \
   DASHI/Physics/YangMills/BalabanClayT4NaiveNormalizedSineSquareCounterexampleExact.agda \
   DASHI/Physics/YangMills/BalabanClayT4FourAuxiliaryWilsonPropagatorBoxesExact.agda \
   DASHI/Physics/YangMills/BalabanClayT4LiteralScalarSyntaxContradictionExact.agda \
-  DASHI/Physics/YangMills/BalabanClayT4AuxiliaryWilsonNormalizedMeasureExact.agda
+  DASHI/Physics/YangMills/BalabanClayT4AuxiliaryWilsonNormalizedMeasureExact.agda \
+  DASHI/Physics/YangMills/BalabanP0FreeGhostWilsonPositiveWeldExact.agda \
+  DASHI/Physics/YangMills/BalabanP0TransverseGaugeFixingNoGoExact.agda \
+  DASHI/Physics/YangMills/BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.agda
 do
   echo "Checking literal-source Agda module: $module"
   agda -i . -l standard-library "$module"
 done
 
-echo 'AGDA KERNEL PASS for all twelve local semantic/refined P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
+echo 'AGDA KERNEL PASS for 15 selected local semantic/refined P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
