@@ -185,3 +185,52 @@ bishopSelectedKoenigsGeometricInputs = record
   { Geometric.constantNonnegative = bishopSelectedKoenigsConstantNonnegative
   ; Geometric.ratioInputs = bishopSelectedKoenigsBetaInterval
   }
+
+
+------------------------------------------------------------------------
+-- Native Bishop rational Newton majorant:
+-- ||T^(n+1)(p0)-T^n(p0)|| <= (1/15000)*(1/200)^n
+-- is the eventual source bound; below we construct ONLY its admissible
+-- [0,1) geometric-ratio evidence, not the unproved inequality itself.
+------------------------------------------------------------------------
+
+bishopSelectedNewtonRatio : BishopReal.ℝ
+bishopSelectedNewtonRatio = BishopReal._⋆ (+ 1 / 200)
+
+bishopSelectedNewtonIncrementConstant : BishopReal.ℝ
+bishopSelectedNewtonIncrementConstant =
+  BishopReal._⋆ (+ 1 / 15000)
+
+bishopSelectedNewtonRatioNonnegative :
+  BishopReal._≤_ BishopReal.0ℝ bishopSelectedNewtonRatio
+bishopSelectedNewtonRatioNonnegative =
+  BishopP.p≤q⇒p⋆≤q⋆
+    0ℚᵘ (+ 1 / 200)
+    (RawP.nonNegative⁻¹ (+ 1 / 200))
+
+bishopSelectedNewtonRatioBelowOne :
+  BishopReal._<_ bishopSelectedNewtonRatio BishopReal.1ℝ
+bishopSelectedNewtonRatioBelowOne =
+  BishopP.p<q⇒p⋆<q⋆
+    (+ 1 / 200) 1ℚᵘ
+    (RawQ.*<* (ℤ.+<+ (ℕP.≤ᵇ⇒≤ tt)))
+
+bishopSelectedNewtonConstantNonnegative :
+  BishopReal._≤_ BishopReal.0ℝ bishopSelectedNewtonIncrementConstant
+bishopSelectedNewtonConstantNonnegative =
+  BishopP.p≤q⇒p⋆≤q⋆
+    0ℚᵘ (+ 1 / 15000)
+    (RawP.nonNegative⁻¹ (+ 1 / 15000))
+
+bishopSelectedNewtonGeometricInputs :
+  Geometric.BishopScaledGeometricInputs
+    bishopSelectedNewtonIncrementConstant
+    bishopSelectedNewtonRatio
+bishopSelectedNewtonGeometricInputs = record
+  { Geometric.constantNonnegative =
+      bishopSelectedNewtonConstantNonnegative
+  ; Geometric.ratioInputs = record
+      { Unit.ratioNonnegative = bishopSelectedNewtonRatioNonnegative
+      ; Unit.ratioBelowOne = bishopSelectedNewtonRatioBelowOne
+      }
+  }
