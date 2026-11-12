@@ -1397,3 +1397,119 @@ the core generic odd-zeta witness module retains blob
 `116d776e41016f03dda382ab71869994facd7e4f`.
 These refreshed heads are **not merged into #1408**;
 no all-branch Agda kernel receipt is claimed.
+
+
+## 2026-11-12 attached nine-gate maximum-cut continuation: source-native P2/P3 welds and certified eta obstruction
+
+User supplied a second proposed mathematical closure ledger on 12 November
+2026 (P0 negative LOG mesh, complex Cauchy product/factorial modulus; P1
+Machin/Koenigs; P2 eta/odd-zeta; P3 Gamma/Xi). This is a **candidate
+derivation**, not a kernel receipt. The new source-owned implementations
+and invalid claims below are kept separate from earlier finite Q[i] work.
+
+### NEW P2 SAME-OBJECT Bishop prefix→actual SeriesOf/Dirichlet cutoff
+
+Source module `DASHI/Analysis/BishopOriginalEtaZetaEvenCutoffSeriesWeldExact.agda`
+(commits `f1b0c32`, `5ff57d3`):
+
+- `originalBishopPrefixIsNativeSeries` constructs both REAL
+  componentwise setoid equalities between the prior original
+  `Eta.originalBishopPrefix term N` and the actual pinned
+  `Sequence.SeriesOf (re ∘ term) N` and `SeriesOf (im ∘ term) N`.
+- `twoIndexSuccessor` proves **the actual Nat reindex**:
+  `Eta.twice (suc N) ≡ suc (suc (Eta.twice N))`,
+  not assumed by definitional equality.
+- `originalBishopAdditionReassociate` proves the necessary
+  three-argument original Bishop complex addition identity using
+  the pinned `RealProperties.ℝ-Solver` independently in both
+  coordinates.
+- `pairedUnsignedIsOriginalEvenPrefix` proves the ALL-N
+  two-at-a-time unpairing on original Bishop terms.
+- `pairedUnsignedIsOriginalDirichletPartial` identifies the
+  paired eta/zeta proof's original `originalZetaPrefix`
+  with the ACTUAL `BishopRiemannDirichletBaselSameObjectExact.dirichletPartial`
+  at cutoff `Eta.twice N`, not an independent analytic function.
+- `OriginalRound11.actualRound11PairedZetaIsNativeSeries`
+  instantiates the SAME original source negative-log/native-exp
+  Dirichlet term family from the actual Round11 kernel.
+
+This **pays the original finite 2N/Sequence.SeriesOf cutoff weld at
+SOURCE-WRITTEN level**, previously an explicit P2 remaining leaf.
+Agda 2.9 kernel check and dependency elaboration remain UNVERIFIED.
+
+### NEW P3 same-carrier Bishop Xi polynomial/symmetric tail result
+
+`DASHI/Analysis/BishopOriginalXiPolynomialReflectionSameCarrierExact.agda`
+(commit `eb00ac2`):
+
+- `bishopFunctionalReflection` is the actual Bishop Cartesian
+  complex reflection `s↦1-s`;
+- `bishopXiPolynomial` is the original Bishop complex
+  `s(s-1)`, using the same `BC._*C_` carrier;
+- `originalBishopXiPolynomialReflection` proves equality of
+  the **actual Bishop real and imaginary coordinates** under
+  reflection, via original `RP.ℝ-Solver`;
+- `originalBishopNormalizedMellinSymmetry` transports the
+  polynomial symmetry to `1/2+(s(s-1)/2)T(s)` only AFTER
+  source evidence that `T(s)≈C T(1-s)` is provided.
+
+This is not an original theta integral, Gamma construction,
+holomorphic function proof, entireness or actual completed-xi
+same-object identification. Both new modules are imported into
+the three canonical TOE roots (commits `fbc5066`, `0facf7e`,
+`e889aab`).
+
+### Rigorous failure of the attached eta uniform tail claim
+
+`scripts/check_bishop_eta_complex_tail_enclosure.py`
+(commit `5178739`) independently supplies an EXACT-RATIONAL
+counterexample using arctanh log intervals, alternating Machin
+pi intervals, finite rational Taylor phases, and an integral
+bound for the infinite remainder. The independently executed
+certificate passed:
+
+For `s=2+20i`, after `N=4` terms,
+`|eta(s)-eta_prefix_4(s)| > 86/1000 > 2/25 = 2/(N+1)^Re(s)`.
+The finite tail `n=5..100` has computed lower modulus
+`>97/1000`, approximation errors total `<1/1000`,
+and the infinite tail `n>100` has an absolute upper bound
+`<=1/100`. Thus the proposed universal
+`2/(N+1)^sigma` complex bound is mathematically FALSE,
+not an outstanding Agda implementation detail.
+
+The correct Abel-partial-summation **analytic target** for
+`sigma=Re(s)>0` (subject to proving source derivatives and
+uniform termwise convergence) is
+`|eta_tail_N(s)| <= (|s|/sigma)*(N+1)^(-sigma)`;
+uniformity on a compact chart requires source witnesses
+`sigma>=delta>0` and `|s|<=M`, giving
+`(M/delta)*(N+1)^(-delta)`. This statement is not yet
+proved against the ORIGINAL Bishop complex/derivative layer.
+
+The other attached P2 quotient defect remains: for COMPLEX
+`s=1+(2*pi*i*k)/log 2`, all integral `k`,
+`1-2^(1-s)=0`. `k=0` is the genuine zeta pole,
+while nonzero `k` need removable-singularity proofs;
+no indiscriminate source division is allowed.
+
+### Exact remaining true P0–P3 cut (do not promote classical text)
+
+| Priority | Current source status | Exact remaining work |
+|---|---|---|
+| P0 K04d-LOG | `originalBishopNegativeLogExponentialGap` SOURCE-WRITTEN | Agda 2.9 kernel acceptance and original finite-mesh dependency audit; attachment's integral log(1→x) is not the same original geometric-log owner |
+| P0 K05-PRODUCT | Original native exponential Cauchy product SOURCE-WRITTEN | Kernel acceptance and original exp/sin/cos dependency check |
+| P0 factorial exp | PR #1478 original all-degree factorial/native exp SOURCE-WRITTEN | Pinned local Agda kernel acceptance and cross-branch compatibility; its actual even/odd tail owners already exist |
+| P1 Machin | Exact rational +i/-i Cayley and first-zero transports SOURCE-WRITTEN | BOTH original `OriginalAtanFiveCayleyEvaluation`, `OriginalAtan239CayleyEvaluation`, same-source analytic derivative/limit interchange and branch |
+| P1 Koenigs | PR #1478 geometric/analytic skeleton SOURCE-WRITTEN | original selected Newton disk and first-step certificate, original exp/cos/sin orbit continuity, principal Log analytic germ, native holomorphic limit, global Kneser |
+| P2 eta/zeta | NEW original Bishop eta pairing + finite 2N native SeriesOf weld SOURCE-WRITTEN | original `log(2n)=log2+log n`, even-power term law, derivative/Abel-summation compact bound, eta continuation, all divisor zeros/removability, original analytic zeta equality |
+| P2 odd-zeta | PR #1497 conditional external witness transport | independently kernel-audited external source theorem, accurate index scope, exact original Bishop zeta same-value equality and irrationality |
+| P3 Gamma | Original GammaMellinLayer is an uninhabited analytic interface | genuine Bishop improper integral, uniform convergence/holomorphy, recurrence, poles and continuation |
+| P3 Xi | NEW original Bishop polynomial reflection and conditional symmetric-tail transport SOURCE-WRITTEN | native theta Poisson transform, integral convergence, actual Mellin equality, original Gamma/zeta completed-Xi equality, entire/order-one proof and original functional equation |
+
+The attachment's nine "constructively closed" labels are NOT
+kernel acceptance. No original analytic P1–P3 closure is asserted.
+
+**Verification receipts**: exact-rational external arithmetic
+certificate EXECUTED PASS, new Agda sources committed/read back,
+original Agda-2.9 kernel check UNAVAILABLE in this session.
+No CI or fabricated physical/analytic admission used.
