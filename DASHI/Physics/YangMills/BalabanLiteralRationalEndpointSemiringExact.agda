@@ -42,12 +42,12 @@ endpointsTrans ab bc = sameEndpoints
 
 typedAddLowerExact : ∀ a b →
   Eval.lower (Typed.addInterval a b)
-    ≡ Eval.lower a ℚ._+_ Eval.lower b
+    ≡ ℚ._+_ (Eval.lower a) (Eval.lower b)
 typedAddLowerExact a b = refl
 
 typedAddUpperExact : ∀ a b →
   Eval.upper (Typed.addInterval a b)
-    ≡ Eval.upper a ℚ._+_ Eval.upper b
+    ≡ ℚ._+_ (Eval.upper a) (Eval.upper b)
 typedAddUpperExact a b = refl
 
 -- Explicit concrete rational interval laws.
