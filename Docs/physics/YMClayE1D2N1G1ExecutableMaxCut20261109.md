@@ -509,3 +509,15 @@ These sources are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegre
 **P0.09.C:** derive and bound the *difference* between that true effective density and the independently selected bare/renormalized coarse Wilson density; quantify its norm/connected-polymer residual with a genuine volume- and UV-uniform estimate (and appropriate relevant/marginal operator counterterms). This is NOT provided by a local coordinate identity. The attachment's claimed `g_0²(a)(a/L)²` rate and massive `K_V^{-1}` estimate have no same-source constructive proof; do not assume a positive mass in order to prove D2.
 
 **D1/E1/D2/N1/G1:** remain OPEN. The attachment's `64^n` tree counting and abstract positivity of group Casimir are at most supporting lemmas; the actual Wilson polymer activity bound, projectively consistent interacting continuum Schwinger family, full same-H OS spectral support, surviving four-point non-Gaussian witness, and group-indexed constructions are still unpaid.
+
+
+### 2026-11-12 exact two-link positivity/normalization source completion
+
+The constructed `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda` now additionally provides:
+- `nativeEffectiveFiberDensityPreservesPositivity`: from `g(U,V)≥0` and the **existing** `OneLinkOrderedHaarAlgebra.onePositive`, derive `ρ_g(W)≥0` for every coarse SU(N) link, no independent coarse positivity assumption.
+- `nativeEffectiveFiberUnitWeightIsUnit`: for literal fine unit weight `g≡1`, prove `ρ_g(W)=1` using the original normalized one-link Haar integral.
+- `nativeUnitWeightBlockedNumeratorIsHaar`: for every one-link observable F, the actual native two-link unit-weight pushforward equals original coarse Haar integration `∫_U∫_V F(UV)=∫_W F(W)`.
+
+These are exact **finite two-link** Haar identities derived from the existing group/Haar authority; they do not prove the positivity/normalization or effective density of the full original `n=3` interacting Wilson block. The highest alpha physical leaf remains explicit original side-four bond-fiber disintegration and full interacting coarse effective-density residual control, not re-stating a local change of variables.
+
+**Verification:** source committed and read back, all named external imports/fields checked against current repository, balanced Agda parentheses/no newly declared postulates or holes. Nix/Agda not available to this runtime; NO Agda kernel acceptance. Independent noncommutative D4 exact rational regression passed 512/512 and must not be promoted into SU(N) or physical receipts.
