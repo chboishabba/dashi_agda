@@ -42,6 +42,7 @@ import DASHI.Physics.YangMills.BalabanBishopAlternatingBracketFromMonotoneLimits
 import DASHI.Physics.YangMills.BalabanP33BishopTaylorPolynomialFormExact as Taylor
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
 import DASHI.Analysis.BishopComplexReciprocalExact as Reciprocal
+import DASHI.Moonshine.AbelBishopNewtonSelectedOperatorExact as Newton
 import DASHI.Moonshine.AbelBishopNewtonCenterDenominatorExact as Center
 
 selectedSineRational : ℚ.ℚᵘ
@@ -252,9 +253,16 @@ selectedSineLowerPolynomialFactorization =
         x ⊖ (Κ (+ 1 / 6) ⊗ ((x ⊗ x) ⊗ x))
         ⊜ x ⊗ (Κ 1ℚᵘ ⊖ ((x ⊗ x) ⊗ Κ (+ 1 / 6))))
       BishopP.≃-refl y)
-    (BishopP.*-congˡ
-      (BishopP.≃-symm
-        (BishopP.*-congʳ selectedSineAbsIsSelf)))
+    (BishopP.*-cong
+      BishopP.≃-refl
+      (BishopP.+-cong
+        BishopP.≃-refl
+        (BishopP.-‿cong
+          (BishopP.*-cong
+            (BishopP.*-cong
+              (BishopP.≃-symm selectedSineAbsIsSelf)
+              (BishopP.≃-symm selectedSineAbsIsSelf))
+            BishopP.≃-refl))))
 
 selectedSineCubicIsStrictlyPositive :
   BishopReal._<_ BishopReal.0ℝ
@@ -295,7 +303,7 @@ selectedOriginalBishopSineAtNewtonCenterPositive T =
 originalBishopNewtonDenominatorNonzeroFromSource :
   ∀ T →
   Reciprocal.BishopComplexNonzero
-    (Center.Newton.originalBishopNewtonDenominator T)
+    (Newton.originalBishopNewtonDenominator T)
 originalBishopNewtonDenominatorNonzeroFromSource T =
   Center.bishopNewtonDenominatorNonzeroFromOriginalSine
     T
