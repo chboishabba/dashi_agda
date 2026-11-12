@@ -278,3 +278,30 @@ integration.
 Do not claim a successful independent checker or second-proof run before
 obtaining real output at the current head. The independent kernel and
 general semantic-world admission gates remain logically separate.
+
+
+## 2026-11-12: read-only same-export JMD / Rust / native-v3 cross-PR cut
+
+Source-written on PR #1495 (not kernel or operator accepted): scripts/lean_world_cross_pr_observation_join.py and tests/test_lean_world_cross_pr_observation_join.py.
+
+**Source discovery correction:** Sibling PR #1484 now contains scripts/lean_world_jmd_native_owner_readonly.py, using the existing dashi_lean4 PR #105 JMD build_jmd_lean_ast_world.py parser's nodes_from_export/reachable/expression_fingerprint. That owner performs only source-read-only structural observation; its independent source is not an ancestor of #1495, and it neither operates the authoritative shared-world builder nor writes the PostgreSQL ledger. The older generic "cannot find JMD parser" blocker has therefore narrowed to exact-head source alignment, independent checker/semantic authority and original world admission.
+
+**Implemented:** A strict source-correlation adapter reads #1494's original immutable handoff through the existing PendingExport parser. It checks source closure, repository, revision, module, declaration and toolchain against the original native-v3 observation; recomputes the exact exported type and proof bytes, alpha-type candidate digest, original dependency names and source selection from the actual native export, not the supplied projection JSON. It requires a content-addressed, canonical Rust-nanoda observation tied to the identical original artifact SHA and handoff key, always as an uncertified process observation. It optionally correlates a separately SHA256-pinned JMD read-only output with the identical native export, original Lean githash, declaration, direct type/proof constants, and independently pinned JMD source SHA. It neither imports sibling branches nor copies JMD's SQLite world.
+
+All output always has native_dag_complete=false, imported_dependencies_resolved=false, checker_semantics_authenticated=false, builder_authority_authenticated=false, candidate_admission_authorized=false, world_admitted=false and kernel_certified=false. The output is an immutable content-addressed observation; no source parser, signed receipt, cross-repository provenance string, or executable exit status is accepted as a theorem.
+
+**Adversarial tests:** synthetic same-export idempotence/nonpromotion, mismatched revision, rehashed fake type bytes, altered source closure, checker artifact/policy and forbidden promotion, out-of-spool and symlink rejection, positive synthetic JMD correlation and negative JMD source/revision/dependency/export pins. A fabricated checker receipt is deliberately permitted only as a *non-authoritative observation*; these tests cannot certify nanoda/Lean.
+
+Exact local commands on isolated #1495 head, with no CI dependency:
+
+    python3 -m unittest discover -s tests -p 'test_lean_world_cross_pr_observation_join.py' -v
+    python3 -m unittest discover -s tests -p 'test_lean_world_native_p1_codec.py' -v
+    python3 -m unittest discover -s tests -p 'test_lean_world_native_v3_projection*.py' -v
+
+**Exact remaining max-cut:**
+1. Obtain and execute the genuinely pinned Rust nanoda + Lean 4.28 + lean4export native-v3 donor/consumer positive and corrupt-proof negative controls on #1495 in the original Nix shell; validate exact checker toolchain closure and axiom policy. NO receipt in this turn.
+2. Execute the sibling #1484 read-only JMD owner against the same original export with the authentic PR #105 source hash; pin the bytes/observation before using this cross-PR join.
+3. Source-preservingly reconcile #1484 candidate DAG/PG/fibre with #1495 native-v3 source/independent checker, run exact original Lean donor retrieval and independently elaborated consumer under ephemeral PostgreSQL.
+4. Supply actual, authenticated dependency-closure, checker/builder and original world-admission authorities before promoting any proof or persistence status. Agda↔Lean formal semantic transport, YM physical source, Bishop analytic/Koenigs, RH, BSD, global Kneser and P!=NP are mathematically independent remaining gates.
+
+All new code is SOURCE-WRITTEN: no local exact-head test or kernel receipt is claimed. Use local source-backed verification, not CI status, as authority.
