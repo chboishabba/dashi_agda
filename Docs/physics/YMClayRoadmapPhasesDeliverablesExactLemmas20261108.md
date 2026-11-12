@@ -439,3 +439,45 @@ New same-source declarations added to `DASHI/Physics/YangMills/YMClayD1OriginalP
 **Still unpaid Agda geometric cardinal proof** `D1-COH-01b`: original all-cutoff side≥3 each link has six **distinct** incident plaquettes; each star can conflict with at most 18 *other* positive links. Next `D1-COH-02b`: define a cardinality-based counting theorem using those real finite distinct stars and prove `19 * length(greedyOriginalDisjointStars marked) >= length(marked)` for a source no-duplicate marked list, or its finite-set/cardinality equivalent. The analytic bound is already in `YMClayOriginalWilsonCoherentConnectedPolymerPacking20261109.md`, but Agda still needs this specific original degree/cardinal proof. `D1-COH-03/04`: true source full-Wilson Gibbs conditional factorization over the selected disjoint stars, using the original finite product-Haar Fubini source; then local coherent suppression. **HARD D1-FRU-01b/02**: sparse connected frustrated/mixed polymer activity and original cutoff/physical-distance CMP116/119 covariance, still OPEN. No E1/D2/N1/G1 continuum physical gate is closed by this finite combinatorics.
 
 **Verification:** GitHub source committed and read back. No `agda` or `nix` binary exists in this environment, and no kernel/CI acceptance is claimed. The user forbade sending DASHI work to Itakura's repository; all writes remain solely in `chboishabba/dashi_agda`. Existing Itakura references are read-only prior art under CC BY 4.0; no issue, PR, comment, patch, source or results were sent to the donor repo.
+
+
+## 12 November 2026 — D2 uniform-spectrum proof cut (new source-written theorem)
+
+In the ORIGINAL existing D2 negative-control owner
+`DASHI/Physics/YangMills/YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda`,
+`noUniformPositiveReciprocalGapCertificate` now proves constructively
+that no finite integer K dominates every eigenvalue reciprocal
+denominator n+1. The analytic Hilbert countermodel motivating it is
+`H Ω=0` and `H e_n=e_n/(n+1)` on `ℓ²`: finite-support nonvacuum
+vectors form a dense set, each selected mode decays at a positive
+rate, but those rates accumulate at zero. This is **independent** of
+the earlier 3-mode hidden-sector obstruction: even a dense test
+domain cannot upgrade *mode-dependent* decay constants into a
+**uniform** nonvacuum spectral gap.
+
+**Discharged now (SOURCE-WRITTEN):** exact integer reciprocal-gap
+denominator no-go in the original D2 owner; structurally contains
+no postulate or hole. **Not discharged:** an actual continuum
+selfadjoint OS Hamiltonian, explicit ℓ² analytic realization
+inside Agda, *uniform* full-spectrum D2, and transitive Agda 2.9
+kernel acceptance. No physical Clay promotion follows.
+
+Run the local focused check against the precise branch HEAD:
+```bash
+AGDA_JOBS=1 DASHI_NO_TMUX=1 bash scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/YangMills/YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda
+```
+Also inspect transitive `RealAnalysisAxioms` dependencies on any
+physical companions; the arithmetic negative control itself only
+imports builtin Nat/Equality. No CI dependency.
+
+Further new source cross-branch: the Bałaban P0 #1498 refined
+source-sine/hat-momentum proof now establishes **unshifted**
+denominator-positive rational intervals from genuine source Bishop
+sine membership. Do NOT reopen that conditional structure; focus
+on original sine membership, shifted q+p propagators, actual
+four-diagram tensor-to-scalar expression, and four physical errors.
+The #1479 typed positive-division/Bishop compiler is a distinct
+sibling required for an exact branch weld. The #1444 P0.E original
+1024-bond full Wilson fibre-density/Bishop partition certificates
+remain conditional on the original scalar-carrier mapping.
