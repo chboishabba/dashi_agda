@@ -38,33 +38,47 @@ import DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact as T
 -- B0: advance and mark another source gamma zero.
 -- B1: halt at the payload separator, without consuming it.
 -- Blank/Mark: halt; they are malformed gamma-prefix boundaries.
-gammaPrefixOnWorkCell :
-  Tape.FourChoices (Tape.Instruction 1 1)
-gammaPrefixOnWorkCell =
-  Tape.four
-    (Tape.instruction Fin.zero Tape.B0 Tape.right
-      (Tape.Mark Vec.∷ Vec.[])
-      (Tape.right Vec.∷ Vec.[]) false)
-    (Tape.instruction Fin.zero Tape.B1 Tape.stay
-      (Tape.Blank Vec.∷ Vec.[])
-      (Tape.stay Vec.∷ Vec.[]) true)
-    (Tape.instruction Fin.zero Tape.Blank Tape.stay
-      (Tape.Blank Vec.∷ Vec.[])
-      (Tape.stay Vec.∷ Vec.[]) true)
-    (Tape.instruction Fin.zero Tape.Mark Tape.stay
-      (Tape.Blank Vec.∷ Vec.[])
-      (Tape.stay Vec.∷ Vec.[]) true)
+gammaSkipZero : Tape.Instruction 1 1
+gammaSkipZero =
+  Tape.instruction Fin.zero Tape.B0 Tape.right
+    (Tape.Mark Vec.∷ Vec.[])
+    (Tape.right Vec.∷ Vec.[]) false
 
--- All four possible current work symbols select the same gamma
--- instruction. No unbounded operation is delegated to this table.
+gammaSeeOne : Tape.Instruction 1 1
+gammaSeeOne =
+  Tape.instruction Fin.zero Tape.B1 Tape.stay
+    (Tape.Blank Vec.∷ Vec.[])
+    (Tape.stay Vec.∷ Vec.[]) true
+
+gammaEndBlank : Tape.Instruction 1 1
+gammaEndBlank =
+  Tape.instruction Fin.zero Tape.Blank Tape.stay
+    (Tape.Blank Vec.∷ Vec.[])
+    (Tape.stay Vec.∷ Vec.[]) true
+
+gammaEndMark : Tape.Instruction 1 1
+gammaEndMark =
+  Tape.instruction Fin.zero Tape.Mark Tape.stay
+    (Tape.Blank Vec.∷ Vec.[])
+    (Tape.stay Vec.∷ Vec.[]) true
+
+-- In the physical carrier, the OUTER FourChoices selects the input
+-- head, and the INNER FourChoices selects the work head. Reversing
+-- this indexing incorrectly makes an input B0 with blank work head
+-- execute the Blank-halting instruction.
+constantWorkRow :
+  Tape.Instruction 1 1 →
+  Tape.FourChoices (Tape.Instruction 1 1)
+constantWorkRow action = Tape.four action action action action
+
 gammaWorkCases :
   Tape.FourChoices (Tape.FourChoices (Tape.Instruction 1 1))
 gammaWorkCases =
   Tape.four
-    gammaPrefixOnWorkCell
-    gammaPrefixOnWorkCell
-    gammaPrefixOnWorkCell
-    gammaPrefixOnWorkCell
+    (constantWorkRow gammaSkipZero)
+    (constantWorkRow gammaSeeOne)
+    (constantWorkRow gammaEndBlank)
+    (constantWorkRow gammaEndMark)
 
 literalGammaPrefixTable : Tape.TableProgram 1 1
 literalGammaPrefixTable =
@@ -72,6 +86,48 @@ literalGammaPrefixTable =
 
 gammaPrefixProgram : Tape.LocalProgram 1 1
 gammaPrefixProgram = Tape.useLiteralTable literalGammaPrefixTable
+
+-- Exact physical dispatch by BOTH observed symbols; this is a
+-- 16-case definitional verification of the literal table order.
+gammaTableB0IgnoresWork :
+  (workHead : Tape.Cell) →
+  Tape.tableInstruction literalGammaPrefixTable
+    Fin.zero Tape.B0 (workHead Vec.∷ Vec.[])
+  ≡ gammaSkipZero
+gammaTableB0IgnoresWork Tape.B0 = refl
+gammaTableB0IgnoresWork Tape.B1 = refl
+gammaTableB0IgnoresWork Tape.Blank = refl
+gammaTableB0IgnoresWork Tape.Mark = refl
+
+gammaTableB1IgnoresWork :
+  (workHead : Tape.Cell) →
+  Tape.tableInstruction literalGammaPrefixTable
+    Fin.zero Tape.B1 (workHead Vec.∷ Vec.[])
+  ≡ gammaSeeOne
+gammaTableB1IgnoresWork Tape.B0 = refl
+gammaTableB1IgnoresWork Tape.B1 = refl
+gammaTableB1IgnoresWork Tape.Blank = refl
+gammaTableB1IgnoresWork Tape.Mark = refl
+
+gammaTableBlankIgnoresWork :
+  (workHead : Tape.Cell) →
+  Tape.tableInstruction literalGammaPrefixTable
+    Fin.zero Tape.Blank (workHead Vec.∷ Vec.[])
+  ≡ gammaEndBlank
+gammaTableBlankIgnoresWork Tape.B0 = refl
+gammaTableBlankIgnoresWork Tape.B1 = refl
+gammaTableBlankIgnoresWork Tape.Blank = refl
+gammaTableBlankIgnoresWork Tape.Mark = refl
+
+gammaTableMarkIgnoresWork :
+  (workHead : Tape.Cell) →
+  Tape.tableInstruction literalGammaPrefixTable
+    Fin.zero Tape.Mark (workHead Vec.∷ Vec.[])
+  ≡ gammaEndMark
+gammaTableMarkIgnoresWork Tape.B0 = refl
+gammaTableMarkIgnoresWork Tape.B1 = refl
+gammaTableMarkIgnoresWork Tape.Blank = refl
+gammaTableMarkIgnoresWork Tape.Mark = refl
 
 -- The work tally head is always on blank; the left list is a literal
 -- sequence of tally marks. The input head is at the next source bit.
