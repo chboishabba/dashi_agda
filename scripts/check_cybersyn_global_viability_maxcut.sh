@@ -9,6 +9,9 @@ files=(
   DASHI/Governance/CybersynPhysicalFinanceCutExact.agda
   DASHI/Governance/CybersynAuthorityFeedbackExact.agda
   DASHI/Governance/CybersynCrossSectorScenarioExact.agda
+  DASHI/Governance/CybersynHistoricalMandateWorldBridgeExact.agda
+  DASHI/Governance/CybersynTemporalStressPropagationExact.agda
+  DASHI/Governance/CybersynPublicBackstopLossWaterfallExact.agda
   DASHI/Governance/CybersynGlobalViabilityEverything.agda
 )
 
@@ -29,7 +32,11 @@ for theorem in \
   consultationNotAdmission \
   twoShocksTrigger \
   yenAndCollateralTrigger \
-  pressureIsNotPublicGuaranteeAdmission; do
+  pressureIsNotPublicGuaranteeAdmission \
+  headlineCannotDetermineMandate \
+  yenPlusCollateralCascade \
+  sameTotalLoss \
+  promiseNotCostRecovery; do
   grep -R -q "^$theorem :" "${files[@]}" || {
     echo "Missing theorem surface: $theorem" >&2; exit 1;
   }
