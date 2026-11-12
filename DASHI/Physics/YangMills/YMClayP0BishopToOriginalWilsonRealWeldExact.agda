@@ -122,9 +122,9 @@ weldDerivesOriginalSubtractionZeroRight W x =
     (P.≃-trans
       (preserveSub W x R.0ℝ)
       (P.≃-trans
-        (P.+-cong
+        (P.-‿cong
           P.≃-refl
-          (P.-‿cong (preserveZero W)))
+          (preserveZero W))
         (BishopP0.bishopSubtractionZeroRight (map W x))))
 
 weldDerivesOriginalCenteredCancellation :
