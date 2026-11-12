@@ -186,6 +186,7 @@ if [[ "$mode" == "kernel-cut" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateTightBoundExact.agda
   # End-to-end original source-language B6, first-enabled D2,
   # event-by-event E1 and typed Fin/Cut E2. No theorem is certified
   # unless its exact owner is actually passed to the kernel.
@@ -266,6 +267,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21NativeEndpointHistoryConservationExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeLivePayloadPotentialExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateBoundExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateTightBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeFullEdgeFieldInputBoundExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeActualEventSubsequenceExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeWholeGraphLedgerInputBoundExact.agda
