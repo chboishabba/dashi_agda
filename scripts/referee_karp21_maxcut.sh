@@ -43,8 +43,7 @@ if [[ "$mode" != "preflight" ]] &&
   exit 127
 fi
 
-printf 'Repository: %s
-' "$repo_root"
+printf 'Repository: %s\n' "$repo_root"
 printf 'Referee revision: '
 git rev-parse HEAD
 if [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]]; then
@@ -54,16 +53,13 @@ elif command -v agda >/dev/null 2>&1; then
   printf 'Agda version: '
   agda --version
 elif command -v nix >/dev/null 2>&1; then
-  printf 'Agda version: via Nix wrapper (checked at target execution)
-'
+  printf 'Agda version: via Nix wrapper (checked at target execution)\n'
 else
   # The Python/static preflight must run even without Agda installed.
   # All kernel modes have already failed closed above.
-  printf 'Agda version: unavailable (preflight-only; no kernel receipt)
-'
+  printf 'Agda version: unavailable (preflight-only; no kernel receipt)\n'
 fi
-printf 'Mode: %s
-' "$mode"
+printf 'Mode: %s\n' "$mode"
 
 # Focused kernel cut must not be gated behind the complete independent
 # Python test corpus. Agda itself remains strictly fail-closed.
@@ -140,9 +136,7 @@ fi
 
 check_agda() {
   local source="$1"
-  printf '
-REFEREE CHECK: %s
-' "$source"
+  printf '\nREFEREE CHECK: %s\n' "$source"
   if [[ -f "scripts/run_agda29_parallel_check.sh" ]] && { [[ -n "${AGDA_BIN:-}" && -x "$AGDA_BIN" ]] || command -v agda >/dev/null 2>&1 || command -v nix >/dev/null 2>&1; }; then
     DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh "$source"
   else
@@ -161,8 +155,7 @@ REFEREE CHECK: %s
     agda "${include_args[@]}" "$shadow_dir/$source"
     rm -rf "$shadow_dir"
   fi
-  printf 'ACCEPTED BY AGDA: %s
-' "$source"
+  printf 'ACCEPTED BY AGDA: %s\n' "$source"
 }
 
 # Focused direct kernel adjudication, intentionally WITHOUT the whole
@@ -340,10 +333,6 @@ if [[ "$mode" == "e20" || "$mode" == "all" ]]; then
   check_agda DASHI/Mathematics/Complexity/Karp21Everything.agda
 fi
 
-printf '
-CHECKED: selected Agda roots at pinned local HEAD.
-'
-printf 'WARNING: This is NOT a receipt for Karp-21 NP-completeness,
-'
-printf 'machine polynomial clocks, or any unimplemented E01–E19 reductions.
-'
+printf '\nCHECKED: selected Agda roots at pinned local HEAD.\n'
+printf 'WARNING: This is NOT a receipt for Karp-21 NP-completeness,\n'
+printf 'machine polynomial clocks, or any unimplemented E01–E19 reductions.\n'
