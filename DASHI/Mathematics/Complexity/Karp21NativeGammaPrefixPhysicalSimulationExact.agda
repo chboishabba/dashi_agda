@@ -22,10 +22,11 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Data.List.Base using (_++_)
+open import Data.List.Base using (_++_; length)
 open import Data.Product using (Σ; _×_; _,_; proj₁; proj₂)
 open import Relation.Binary.PropositionalEquality using (cong; trans)
 open import Data.Nat.Base using (_≤_)
+import Data.Nat.Properties as NatP
 import Data.Fin.Base as Fin
 import Data.Vec.Base as Vec
 
@@ -220,6 +221,65 @@ physicalGammaPrefixHaltExact zeros payload
         (cong (Tape.machineStep gammaPrefixProgram) exact)
         (onePhysicalGammaSeparator
           (proj₁ final) (proj₂ final) payload))
+
+-- Stronger explicit physical trace: every zero moves onto the INPUT
+-- head-left list while exactly one Mark enters the WORK head-left list.
+-- This is not a guessed cost annotation: both lists are the literal
+-- results of the selected two-tape instruction table.
+pushZeros : Nat → List Tape.Cell → List Tape.Cell
+pushZeros zero left = left
+pushZeros (suc n) left = pushZeros n (Tape.B0 ∷ left)
+
+pushMarks : Nat → List Tape.Cell → List Tape.Cell
+pushMarks zero left = left
+pushMarks (suc n) left = pushMarks n (Tape.Mark ∷ left)
+
+physicalGammaZerosExplicit :
+  (zeros : Nat) (left tally : List Tape.Cell)
+  (payload : Word.BitWord) →
+  Tape.machineRun zeros gammaPrefixProgram
+    (scanning left tally
+      (Gamma.zeroPrefix zeros ++ (true ∷ payload)))
+    ≡ scanning (pushZeros zeros left) (pushMarks zeros tally)
+        (true ∷ payload)
+physicalGammaZerosExplicit zero left tally payload = refl
+physicalGammaZerosExplicit (suc zeros) left tally payload
+  rewrite onePhysicalGammaZero left tally
+    (Gamma.zeroPrefix zeros ++ (true ∷ payload)) =
+  physicalGammaZerosExplicit zeros
+    (Tape.B0 ∷ left) (Tape.Mark ∷ tally) payload
+
+pushMarksLength :
+  (zeros : Nat) (tally : List Tape.Cell) →
+  length (pushMarks zeros tally) ≡ zeros + length tally
+pushMarksLength zero tally = refl
+pushMarksLength (suc zeros) tally =
+  trans
+    (pushMarksLength zeros (Tape.Mark ∷ tally))
+    (NatP.+-suc zeros (length tally))
+
+physicalGammaMarkCountExact :
+  (zeros : Nat) →
+  length (pushMarks zeros []) ≡ zeros
+physicalGammaMarkCountExact zeros =
+  trans (pushMarksLength zeros []) (NatP.+-identityʳ zeros)
+
+physicalGammaPrefixHaltExplicit :
+  (zeros : Nat) (payload : Word.BitWord) →
+  Tape.machineRun (suc zeros) gammaPrefixProgram
+    (scanning [] []
+      (Gamma.zeroPrefix zeros ++ (true ∷ payload)))
+    ≡ stopped (pushZeros zeros []) (pushMarks zeros []) payload
+physicalGammaPrefixHaltExplicit zeros payload =
+  trans
+    (Tape.machineRunAppendOne zeros gammaPrefixProgram
+      (scanning [] []
+        (Gamma.zeroPrefix zeros ++ (true ∷ payload))))
+    (trans
+      (cong (Tape.machineStep gammaPrefixProgram)
+        (physicalGammaZerosExplicit zeros [] [] payload))
+      (onePhysicalGammaSeparator
+        (pushZeros zeros []) (pushMarks zeros []) payload))
 
 -- Same ACTUAL source gamma scan stage, not a fabricated parser.
 sourceGammaZeroPrefixAgreement :
