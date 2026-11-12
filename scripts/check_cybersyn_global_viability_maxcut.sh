@@ -12,6 +12,7 @@ files=(
   DASHI/Governance/CybersynHistoricalMandateWorldBridgeExact.agda
   DASHI/Governance/CybersynTemporalStressPropagationExact.agda
   DASHI/Governance/CybersynPublicBackstopLossWaterfallExact.agda
+  DASHI/Governance/CybersynDatedPublicRiskJoinExact.agda
   DASHI/Governance/CybersynGlobalViabilityEverything.agda
 )
 
@@ -36,7 +37,12 @@ for theorem in \
   headlineCannotDetermineMandate \
   yenPlusCollateralCascade \
   sameTotalLoss \
-  promiseNotCostRecovery; do
+  promiseNotCostRecovery \
+  aggregateLossCannotRecoverTaxpayerBurden \
+  investmentHeadlineCannotRecoverTaxpayerBurden \
+  candidateCannotPromoteEmpirical \
+  noEmpiricalPromotionFromExample \
+  eventIdentityCannotRecoverPublicRisk; do
   grep -R -q "^$theorem :" "${files[@]}" || {
     echo "Missing theorem surface: $theorem" >&2; exit 1;
   }
