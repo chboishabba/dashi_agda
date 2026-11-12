@@ -955,3 +955,49 @@ same-tissue observation, original
 kinetic measurements and P2/P3 empirical
 validation remain independently OPEN.
 No "all P0 Closed" assertion is admitted.
+
+
+### 2026-11-12 computed Bishop-real 27×29 SG/chemistry operator and exactly bounded zero-drop energy
+
+Companion BH4/PNP PR #1454 now Golden-imports
+`BH4OriginalBishopSGComputedRHSExact`, an explicit
+**Bishop-real 27×29 semidiscrete RHS** built from the
+SAME original 27×54 native incidence, 54×29
+semiconductor Bishop SG faces, generated-source-dependent
+29×12 rational stoichiometry and arbitrary 27×12
+Bishop-real reaction-rate coordinates. Each RHS
+coordinate is definitionally the selected signed
+bond divergence plus original net chemical source;
+the proof uses finite symbolic-index lookup, not
+an inferred physical observation. This does not
+yet construct a unique original 27-node Poisson
+potential or identify 54×29 signed drops with
+that physical solution and 29 source populations.
+
+The SG donor also contains a genuine one-edge
+zero-drop Bishop-real quadratic energy proof:
+`zeroDropQuadraticDissipationNonnegative`,
+`zeroDropPowerIsMinusQuadraticDissipation`
+and the equilibrium zero-power case. It reuses
+the actual vendored Bishop square-nonnegativity
+proof, without inventing log monotonicity.
+The 783-coordinate electrochemical entropy
+and strict-positive implicit root remain OPEN.
+
+The independently checked finite counterexample
+clarifies global vs local mass:
+a native internal flux can change a voxel
+inventory while conserving the complete
+domain's source-weighted mass. The proposed
+per-voxel product simplex is therefore not
+the original physical invariant set.
+
+**Still open:** native Agda kernel and SHA-pinned
+Rhea source, signed/zero-drop continuous Bernoulli
+and SG material geometry, self-consistent Poisson,
+source-real chemical quasi-positivity and
+detailed balance, global conserved simplex
+compactness, constructive or justified classical
+Brouwer, actual physical free-energy derivative,
+real six-face boundary work, same-object tissue
+refinement and independent measurements.
