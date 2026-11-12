@@ -9,7 +9,7 @@ module DASHI.Physics.YangMills.BalabanRegular240EncodedFourOrbitSumExact where
 -- representative values or a new 240-term manual certificate.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Relation.Binary.PropositionalEquality using (cong)
+open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; _+_; _*_; _/_)
 import DASHI.Physics.YangMills.BalabanPhysicalBlockFibreSumsExact as Sums
@@ -89,3 +89,41 @@ encodedSourceInvariantFourRepresentativeSum contribution admitted =
 -- source-derived generator equalities and box-trig environment
 -- compatibility. A rational contribution can be supplied only after
 -- validated analytic interval/physical source admission.
+
+-- New nontrivial commuting square: the independently defined B4
+-- product action on the full 240 support/sign carrier preserves
+-- the exact encoded ORIGINAL contribution, PROVIDED the original
+-- seven-generator invariance is actually supplied.
+-- No action conjugation or invented target invariance is assumed.
+encodedIndependentB4Invariant :
+  (contribution : Grid.GridCell4 → ℚ)
+  (invariant : Action.GeneratorInvariantRationalContribution contribution)
+  (g : Action.HypercubicGenerator)
+  (p : Encoded.SupportHalf240) →
+  encodedContribution contribution (Encoded.actIndependent240 g p) ≡
+  encodedContribution contribution p
+encodedIndependentB4Invariant contribution invariant g p =
+  trans
+    (Coeff.proofInsensitiveEncoded
+      (Coeff.encodeCoefficients (sourceCoefficients contribution))
+      (Encoded.actIndependent240 g p)
+      (Encoded.encode240
+        (Encoded.actRegular g (Encoded.decode240 p)))
+      (sym (Encoded.independentMatchesTransported240 g p)))
+    (trans
+      (regularContributionRoundTrip contribution
+        (Encoded.actRegular g (Encoded.decode240 p)))
+      (trans
+        (sym (Action.generatorInvariant invariant g
+          (Encoded.original (Encoded.decode240 p))))
+        (trans
+          (sym (regularContributionRoundTrip contribution
+            (Encoded.decode240 p)))
+          (Coeff.proofInsensitiveEncoded
+            (Coeff.encodeCoefficients (sourceCoefficients contribution))
+            (Encoded.encode240 (Encoded.decode240 p)) p
+            (Encoded.regularPackedRoundTrip p)))))
+
+-- To instantiate this on the literal Yang--Mills scalar, separately
+-- admit the ORIGINAL exact diagrams, environmental covariance, and
+-- rational box contributions. This theorem does not construct them.
