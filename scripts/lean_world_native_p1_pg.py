@@ -82,9 +82,15 @@ def inspect_observation(path:Path,codec):
     if (not _hex(o.get("revision"),40) or
         not _hex(o.get("artifact_sha256")) or
         not _hex(o.get("handoff_key")) or
+        not _hex(o.get("p1_codec_sha256")) or
         not _hex(o.get("original_source_sha256")) or
         type(o.get("proof_value_present")) is not bool):
         raise NativeP1PGError("invalid immutable original/export identity")
+    implementation=getattr(codec,"__file__",None)
+    if (type(implementation) is not str or
+        sha256(Path(implementation).read_bytes()).hexdigest()!=
+           o["p1_codec_sha256"]):
+        raise NativeP1PGError("P1 source-owner codec implementation mismatch")
     source_closure=o.get("source_closure")
     if (not isinstance(source_closure,list) or not source_closure or
         any(type(s) is not list or len(s)!=2 or
@@ -131,7 +137,8 @@ def persist_original_p1(conn,path,codec):
     identity=(o["repository"],o["revision"],o["original_source_path"],
               o["declaration"],bytes.fromhex(o["artifact_sha256"]))
     fields=(bytes.fromhex(o["original_source_sha256"]),o["toolchain"],
-            o["handoff_key"],o.get("dependency_closure_id",""),
+            o["handoff_key"],bytes.fromhex(o["p1_codec_sha256"]),
+            o.get("dependency_closure_id",""),
             exact,sha256(exact).digest(),alpha,sha256(alpha).digest(),
             proof,sha256(proof).digest() if proof else None,
             o["direct_statement_constants"],o["direct_proof_constants"],
@@ -144,19 +151,17 @@ def persist_original_p1(conn,path,codec):
               INSERT INTO lean_world_native_p1_observation (
                 repository,revision,path,declaration,native_export_sha256,
                 original_source_sha256,toolchain,handoff_key,
-                dependency_closure_id,type_exact,type_exact_sha256,
+                p1_codec_sha256,dependency_closure_id,type_exact,type_exact_sha256,
                 type_alpha,type_alpha_sha256,proof_exact,proof_exact_sha256,
                 direct_statement_constants,direct_proof_constants,
                 observation_sha256)
-              VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
+              VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,
                       %s::jsonb,%s::jsonb,%s) ON CONFLICT DO NOTHING
-            """,(*identity,fields[0],fields[1],fields[2],fields[3],
-                  fields[4],fields[5],fields[6],fields[7],fields[8],
-                  fields[9],json.dumps(fields[10]),json.dumps(fields[11]),
-                  fields[12]))
+            """,(*identity,*fields[:11],json.dumps(fields[11]),
+                  json.dumps(fields[12]),fields[13]))
             cur.execute("""
               SELECT original_source_sha256,toolchain,handoff_key,
-                dependency_closure_id,type_exact,type_exact_sha256,
+                p1_codec_sha256,dependency_closure_id,type_exact,type_exact_sha256,
                 type_alpha,type_alpha_sha256,proof_exact,proof_exact_sha256,
                 direct_statement_constants,direct_proof_constants,
                 observation_sha256,status
@@ -178,6 +183,7 @@ def persist_original_p1(conn,path,codec):
         "type_exact_sha256":sha256(exact).hexdigest(),
         "type_alpha_sha256":sha256(alpha).hexdigest(),
         "proof_exact_sha256":sha256(proof).hexdigest() if proof else None,
+        "p1_codec_sha256":o["p1_codec_sha256"],
         "source_bytes_retrieved_and_verified":True,
         "exported_expr_roundtrip":True,
         "dependencies_resolved":False,
