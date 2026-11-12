@@ -145,6 +145,55 @@ originalBishopEtaZetaPairing term (suc n) =
       (originalBishopEtaZetaPairing term n)
       (originalUnsignedBlock term n))
 
+
+-- Setoid reversal stays on the actual Bishop real carrier.
+≈C-sym : ∀ {left right} → left ≈C right → right ≈C left
+≈C-sym equivalent =
+  RP.≃-symm (proj₁ equivalent)
+  ,
+  RP.≃-symm (proj₂ equivalent)
+
+-- Finite additive cancellation, proved in BOTH source coordinates.
+originalBishopFiniteEvenCancellation :
+  (eta even : BC.BishopComplex) →
+  BC._+C_
+    (BC._+C_ eta (BC._+C_ even even))
+    (BC.negC (BC._+C_ even even))
+  ≈C eta
+originalBishopFiniteEvenCancellation
+    (BC.bishop-complex er ei) (BC.bishop-complex vr vi) =
+  (let open RP.ℝ-Solver in
+   solve 2
+     (λ e v → (e ⊕ (v ⊕ v)) ⊕ (⊝ (v ⊕ v)) ⊜ e)
+     RP.≃-refl er vr)
+  ,
+  (let open RP.ℝ-Solver in
+   solve 2
+     (λ e v → (e ⊕ (v ⊕ v)) ⊕ (⊝ (v ⊕ v)) ⊜ e)
+     RP.≃-refl ei vi)
+
+-- Hence the customary finite eta = zeta - 2 * even-terms
+-- equation is available ON THE SAME SOURCE complex term family.
+originalBishopEtaIsZetaMinusTwiceEven :
+  (term : Nat → BC.BishopComplex) →
+  (n : Nat) →
+  BC._+C_
+    (originalZetaPrefix term n)
+    (BC.negC (BC._+C_
+      (originalEvenPositivePrefix term n)
+      (originalEvenPositivePrefix term n)))
+  ≈C originalEtaPrefix term n
+originalBishopEtaIsZetaMinusTwiceEven term n =
+  ≈C-trans
+    (addRightCongruent
+      (≈C-sym (originalBishopEtaZetaPairing term n))
+      (BC.negC (BC._+C_
+        (originalEvenPositivePrefix term n)
+        (originalEvenPositivePrefix term n))))
+    (originalBishopFiniteEvenCancellation
+      (originalEtaPrefix term n)
+      (originalEvenPositivePrefix term n))
+
 -- A concrete instantation, not an arbitrary renamed eta/zeta.
 -- EXACT SAME term family as
 -- BishopRiemannOriginalZetaAboveTwoExact.FromOriginalNegativeLog.
