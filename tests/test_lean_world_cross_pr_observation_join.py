@@ -205,5 +205,41 @@ class CrossPrObservationJoinTests(unittest.TestCase):
             self.invoke(jmd_path=path, jmd_sha256=sha256(raw).hexdigest())
 
 
+    def test_original_axiom_with_no_proof_bytes_stays_candidate_only(self):
+        # Original proofless native-v3 axiom: proof SHA is JSON null.
+        original = sample(self.root)
+        rows = [
+            {"meta": {"format": {"version": "3.1.0"},
+                      "lean": {"githash": self.revision}}},
+            {"str": {"pre": 0, "str": "yes"}, "in": 1},
+            {"sort": 0, "ie": 1},
+            {"axiom": {"name": 1, "levelParams": [], "type": 1,
+                       "all": []}},
+        ]
+        raw = b"".join(canonical(row) for row in rows)
+        Path(original["artifact_path"]).write_bytes(raw)
+        original["artifact_sha256"] = sha256(raw).hexdigest()
+        original["validation"]["export_sha256"] = original["artifact_sha256"]
+        original["validation"]["ndjson_records"] = 4
+        original["validation"]["declaration_records"] = 1
+        spool = self.root / "axioms"
+        manifest = Path(enqueue(original, spool)["manifest"])
+        projection = Path(project(manifest, "yes", spool)["path"])
+        pending = pending_from_manifest(manifest)
+        checker = {
+            **self.checker_obj,
+            "handoff_key": pending.handoff_key,
+            "native_manifest_key": pending.handoff_key,
+            "artifact_sha256": pending.artifact_sha256,
+        }
+        checker_path = emit(spool, ".checker-observation.json", checker)
+        joined = join(manifest, projection, checker_path, spool)
+        record = json.loads(Path(joined["path"]).read_bytes())
+        self.assertIs(record["proof_value_present"], False)
+        self.assertIs(record["kernel_certified"], False)
+        self.assertIs(record["world_admitted"], False)
+
+
+
 if __name__ == "__main__":
     unittest.main()
