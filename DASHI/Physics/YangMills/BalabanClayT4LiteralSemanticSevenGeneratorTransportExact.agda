@@ -24,6 +24,7 @@ module DASHI.Physics.YangMills.BalabanClayT4LiteralSemanticSevenGeneratorTranspo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
@@ -34,6 +35,20 @@ import DASHI.Physics.YangMills.BalabanClayT4HypercubicOrbitGeometryExact as Geom
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopJointMomentumEquivarianceExact as Joint
 import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopOrbitEvaluationTransportExact as Transport
 import DASHI.Physics.YangMills.BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact as Four
+
+------------------------------------------------------------------------
+-- A concrete obstruction to pretending every atom is invariant:
+-- sineHalf(loopMomentum,axis0) becomes syntactically negated under
+-- flip0. Thus the atom covariance and complete-scalar invariance
+-- must NOT be conflated.
+------------------------------------------------------------------------
+
+originalSineHalfFlip0NotSyntacticallyInvariant :
+  Joint.transformExpression Orbit.flip0
+    (Eval.atom (Eval.sineHalf Eval.loopMomentum Eval.axis0))
+  ≡ Eval.atom (Eval.sineHalf Eval.loopMomentum Eval.axis0) →
+  ⊥
+originalSineHalfFlip0NotSyntacticallyInvariant ()
 
 ------------------------------------------------------------------------
 -- Exact source TrigAtom cases, not an unspecified atom oracle.
