@@ -47,8 +47,11 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
         if not integer(i) or i not in table:
             raise NativeV3Error("unresolved "+label+" reference")
         return table[i]
-    def intern(table,i,node,label):
-        if not integer(i) or not i or i in table:
+    def intern(table,i,node,label,*,allow_zero=False):
+        # Lean4export native v3 reserves Name 0 and Level 0, but Expr 0
+        # is a real expression index. Its own Nat.add_succ export starts
+        # with {"ie":0,"sort":1}; rejecting it blocks real source.
+        if (not integer(i) or (i==0 and not allow_zero) or i in table):
             raise NativeV3Error("duplicate or invalid "+label+" index")
         table[i]=node
     def name(i): return ref(names,i,"name")
@@ -202,7 +205,7 @@ def extract_candidates(raw: bytes, *, max_records: int=5_000_000,
                 node=("alias",expr(value["expr"]))
             else:
                 raise NativeV3Error("unsupported expression node")
-            intern(expressions,obj.get("ie"),node,"expression")
+            intern(expressions,obj.get("ie"),node,"expression",allow_zero=True)
         elif tag in kinds:
             if not isinstance(value,dict):
                 raise NativeV3Error("invalid native declaration")
