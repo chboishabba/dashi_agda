@@ -270,3 +270,44 @@ Published source locators:
 - https://www.oxfordeconomics.com/resource/data-centres-energy-demand-outlook-in-australia/
 - https://www.reuters.com/world/asia-pacific/australian-ai-data-centre-operator-nextdc-shares-shed-44-revenue-delay-2026-10-21/
 
+
+## Monetary policy / regulated network incidence cut (2026-11-12)
+
+**New source-written quantitative owner:** `scripts/cybersyn_policy_rate_network_cost_forecast.py` plus `tests/test_cybersyn_policy_rate_network_cost_forecast.py`.
+
+Source-date frozen at **12 Nov 2026**; executable forecast examples were independently calculated in the working Python runtime, with CSV/JSON receipts saved. Exact repository source/test execution is still unverified here (no GitHub network checkout, no Nix/Agda).
+
+### P6 / P7 / P8 rates forecast and incidence
+
+- US FOMC official **3.75–4.00%** target range (28 Oct 2026), next target meeting **9 Dec 2026**. Third-party FedWatch on 12 Nov implied December **88.1%** probability target 4.00–4.25%, **11.9%** target 4.25–4.50%. Weighted midpoint **4.15475%**. 27 Jan 2027 **4.31%**, 17 Mar **4.476%**, Dec 2027 **4.6115%** (all weighted conditional futures probabilities, NOT independent rate-model outputs).
+- RBA official **4.85%** cash-rate target effective 4 Nov 2026. ASX on 11 Nov implies **97% hold/3% hike** for 8 Dec; the **Dec 2026 30-day overnight futures yield** is **4.855%**, Mar 2027 4.91%, Dec 2027 4.65%. Crucially an overnight futures yield is NOT directly a cash target outcome.
+- Westpac forecast of 9 Nov 2026: Dec 2026 **4.85%**, Jun 2027 **4.85%**, Dec 2027 **4.35%**. Mark as external bank projection, not ground truth. Cross-forecast disagreement is retained, rather than retrospectively treating one forecast as fact.
+- A$500,000 repayment mortgage, 25 years, fixed illustrative starting nominal 6%, full immediate 25bp pass through → approx **A$76.84 extra monthly repayments**. This is a mechanically computed example, not a claim about actual household loan rates.
+- RBA data-centre insight (9 Nov 2026): projected **A$115bn** real gross data-centre investment mid-2026 to end-2028; assumed 70% imported. Under that staff assumption: **A$80.5bn imported equipment and A$34.5bn domestic expenditure**. These are components of projected investment, not additional GDP or measured national cashflow.
+
+### P7 actual regulated network accounting (not causal attribution)
+
+Ausgrid 2026–27 pricing proposal approved by AER (April 2026): allowable revenue changes **A$2,528m → A$2,881m**, difference **A$353m**. Published rounded waterfall: Ausgrid distribution +A$152m, Ausgrid transmission +A$28m, Transgrid +A$129m, Climate Change Fund +A$4m, Roadmap +A$41m; these add to A$354m because of source rounding. A typical 5 MWh/y residential flat-tariff customer has **A$73.81 annual network-bill increase**. These numbers document regulated revenue and price movements, but **do not identify any attributable data-centre network upgrade, congestion price effect, or subsidy**.
+
+Hypothetical network financing sensitivity: A$1bn affected debt, 25bp interest increase → A$2.5m additional *annual interest* before regulated pass-through; 100% recovery across an assumed 1m accounts gives A$2.50/account/year; actual allowability, regulated financing profiles, rate reset timing, incidence and marginal AI attribution not established.
+
+### Exact unpaid evidence / causal gates
+
+- **G-RATE-01:** Full vintage-stamped Fed futures/rate decision history and RBA ASX rate tracker; market probabilities must be recorded as forecasts, evaluated for calibration/Brier/log-score against **actual future meetings**. Current policy targets alone cannot train a policy-rate predictor.
+- **G-RATE-02:** Independent predictive model with lagged Australia/US inflation, wages, unemployment, inflation expectations, energy import costs, real financial conditions, exchange rates, credit and fiscal/policy variables; no future information leakage, regime-switch and error receipts required.
+- **G-RATE-03:** Policy endogeneity: grid/data-centre capacity constraint to wholesale prices → CPI input/output weights and lag → RBA/Fed reaction. External price and monetary policy shocks are not identified by a static cross-sectional sensitivity.
+- **G-GRID-01:** Demand by feeder/zone/time; DNSP/TNSP connection-capex agreement; connection charge; shared augmentation vs dedicated investment; transmission use-of-system invoices; regulated recovery schedules; project-specific demand and marginal cost. AER/Ausgrid generic pricing proposal cannot prove incremental data-centre share.
+- **G-GRID-02:** Marginal wholesale price impacts with temporal dispatch and scarcity periods, local marginal generation costs, PPA additionality, curtailment, behind-the-meter storage, carbon/other ecological burden, adjusted wholesale pass through and household account/usage incidence.
+- **G-GRID-03:** State/federal grants, concessionary finance, tax credits, public guarantees and socialised capex; separate proponent benefit, public risk and realised vs contingent loss.
+- **G-P0:** Existing eight Agda source modules need local Agda 2.9 typechecking. Rate source models do not change kernel status.
+
+Selected source URLs:
+- https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm
+- https://www.rba.gov.au/statistics/cash-rate/
+- https://www.asx.com.au/markets/trade-our-derivatives-market/futures-market/rba-rate-tracker
+- https://terminal.kryptomagazin.cz/en/macro/fedwatch
+- https://www.rba.gov.au/publications/insights/australian-economy/2026/data-centre-investment-in-australia.html
+- https://www.aer.gov.au/industry/networks/pricing-proposals/ausgrid-2026-27-pricing-proposal
+
+**Interpretive source boundary:** regulatory revenue composition, price transmission, financial power and governance are different causal objects. The formal Marx/Žižek/Irigaray/Kimmerer/Two-Eyed owners supply attributed interpretive lenses, not the measured coefficients, legal authority or causal proof for this finance-to-policy join.
+
