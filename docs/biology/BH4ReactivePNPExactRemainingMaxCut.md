@@ -2182,3 +2182,72 @@ P1 Six-face real reactive boundary work, tissue same-state refinement, kinetic c
 P2–P3 independent longitudinal physical validation and Golden/ITIR receipts: OPEN.
 
 No CI dependence; source-writing is distinct from Agda kernel acceptance. Do not promote the old "all P0 Closed" table.
+
+
+### 2026-11-12 continuation: source-written Bishop-real 783-coordinate operator and zero-drop quadratic dissipation
+
+New Golden-imported
+`DASHI.Biology.Molecular.BH4OriginalBishopSGComputedRHSExact` consumes:
+(a) the same 27×54 native oriented incidence from
+`BH4OriginalNative369IncidenceExact.sourceNativeIncidence`,
+embedded by the existing rational-to-Bishop injection;
+(b) `SG.originalBishopSGFluxes` on 54×29 existing
+semiconductor SG Bishop face states;
+(c) an explicit 29×12 original-source rational signed
+stoichiometric matrix (NOT invented here);
+(d) arbitrary 27×12 Bishop-real reaction rates.
+It defines `bishopOriginalDot`,
+`bishopOriginalColumn`, `bishopOriginalIncidence`,
+`bishopOriginalBondContribution`,
+`bishopOriginalReactionContribution`,
+`bishopOriginalSGReactionRHS`,
+`original54FaceBishopSGRHS` and the exact symbolic
+coordinate equations `bishopOriginalRHSAt`,
+`original54FaceBishopSGRHSAt`. This is the **real
+operator-definition bridge**, distinct from the
+previous rational RHS followed by rational embedding.
+It does NOT yet show that the abstract face populations,
+drop signs and potential are the SAME source's nodal
+concentrations and solution of its nonlinear 27×27
+Poisson equation; that remains an exact P0 identity
+weld. On the concrete exponential chart the
+face theorem is currently restricted to 0<x≤1.
+
+The existing new SG reuse module now additionally
+proves `zeroDropPowerIsMinusQuadraticDissipation`,
+`zeroDropQuadraticDissipationNonnegative`
+and `zeroDropEqualPopulationsHaveZeroQuadraticPower`.
+Those consume the repository's actual
+`BishopSquareNonnegativeExact.bishopSquareNonnegative`
+and show that an original-sized **single zero-drop,
+blocking, passive diffusion edge** with nonnegative
+rate coefficient has nonnegative *quadratic*
+dissipation magnitude:
+`κ(cL-cR)^2 ≥ 0` and signed two-node power
+`P = -κ(cL-cR)^2`.
+This is a completed source-written elementary
+energetic inequality (kernel pending), not the
+physical 783-coordinate electrochemical
+logarithmic/free-field energy decrease.
+
+**Remaining next exact mathematical leaves**:
+- Kernel acceptance of new SG/Bishop source and all transitive
+  modules; original 29×12 byte-pinned Rhea source generation;
+- global Bishop-real Bernoulli B including x=0, x<0,
+  x>1, with source-same forward/backward identity and
+  positive weight proofs;
+- source-same face geometry/thermal prefactors/potential
+  drop and grounded self-consistent Poisson inversion
+  from each actual 27×29 concentration state;
+- prove actual real 27×29 RHS six-axis cancellation and
+  positivity at boundary of the one GLOBAL conserved simplex;
+- construct finite real invariant self-map, genuine
+  Brouwer (existence, not uniqueness), positive
+  implicit root, and detailed-balanced finite
+  electrochemical log entropy Lyapunov theorem;
+- physical six-face reactive boundary, same-object
+  tissue observer and independent empirical receipts.
+
+Do not mark those physical, analytical or kernel
+gates "Closed" from a finite algebraic SG face
+definition or a synthetic numerical assay alone.
