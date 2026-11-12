@@ -964,3 +964,53 @@ The initially added 311-line \`AbelBishopNewtonSelectedSinePositiveExact.agda\` 
 The new \`BishopComplexNormSquareUpperRadius\` takes actual source nonnegative radius and the correct \(\le\) bound; \`normSquarePowerUpper\` proves by Nat induction and norm-square multiplicativity \(\mathrm{normSq}(u^n)\le(r^n)^2\). Reusing the existing \`BishopNonnegativeSquareReflectionExact\`, \`realPowerUpper\`/\`imagPowerUpper\` prove the coordinate envelopes \(|\Re u^n|,|\Im u^n|\le r^n\) with no square root. \`upperBoundBuildsOriginalPowerEnvelope\` supplies the repository's **same original** \`Norm.BishopQPowerComponentEnvelope\` interface from this weaker, physically relevant disk input.
 
 This closes the **source-written finite power-envelope bridge** needed for arbitrary log-disk points. The remaining decisive step is constructing the original Bishop normSq inequality for the selected normalized displacement, then proving the actual \(\log(1+u)\) coefficient geometric domination on those points, its limit, and principal-log inverse law. No new machine acceptance or global Kneser proof is claimed.
+
+
+## 2026-11-12 — Highest-alpha Newton source cut: first step + disk self-map no longer independent leaves
+
+### New literal source owners (registered in local golden, not kernel-verified here)
+
+**\`AbelBishopNewtonLiteralFirstStepFromTaylorExact.agda\`**
+
+Uses the ACTUAL configured \`Newton.originalBishopExponentialDefect T p0 = expC(p0)-p0\`, the actual denominator \`expC(p0)-1\` and \`Reciprocal.reciprocalC\`. Proves \`originalBishopFirstStepSquareIsResidualProduct\`, the literal norm-square identity
+\[
+N(T(p_0)-p_0) \simeq
+N(\operatorname{expC}(p_0)-p_0)\,
+N((\operatorname{expC}(p_0)-1)^{-1}).
+\]
+Uses the ORIGINAL Bishop inverse law and multiplication positivity to prove \`originalBishopReciprocalNormFromActualDenominatorLower\` directly from the norm-square denominator lower bound, so no independent inverse enclosure needs to be supplied. The one-step target \`originalBishopActualTaylorBuildsFirstStepBound\` follows from only TWO original series endpoint facts:
+\[
+N(\operatorname{expC}(p_0)-p_0)\le (1/10000)^2,\qquad
+(3/2)^2\le N(\operatorname{expC}(p_0)-1).
+\]
+The rational arithmetic is exact: \((1/10000)(2/3)=1/15000\). The center Taylor source propositions remain OPEN as Bishop/Agda proofs, despite independent exact-\`Fraction\` numerical checks.
+
+**\`AbelBishopNewtonDiskSelfMapFromSquareContractionExact.agda\`**
+
+Pays the finite constructive Bishop Euclidean **parallelogram bound**
+\[
+N(a+b)\le2(N(a)+N(b)),
+\]
+with no square root and no imported classical triangle theorem, via \(2(Na+Nb)-N(a+b)=N(a-b)\ge0\).
+The same Newton operator identity \(T(z)-p_0=(T(z)-T(p_0))+(T(p_0)-p_0)\), the squared contraction factor \((1/200)^2\), and the source first-step bound imply
+\[
+N(T(z)-p_0)\le
+2\big((1/200)^4+(1/15000)^2\big)
+=73/7200000000 < (1/200)^2.
+\]
+Thus \`originalBishopNewtonDiskInvariantFromSquaredContraction\` removes the **independently assumed disk self-map theorem**. \`originalBishopNewtonContractionFromLiteralTaylorAndSquare\` constructs the original record \`Disk.OriginalBishopAnalyticNewtonContraction\` with its actual three fields from SAME-SOURCE Taylor enclosures and ONE uniform original squared-contraction statement. The numerical inequality \`73/7200000000 < 1/40000\` is exact.
+
+**\`AbelBishopNewtonReducedNativeMaxCutExact.agda\`**
+
+\`OriginalBishopReducedNewtonAnalyticInputs\` now retains only literal \`OriginalBishopNewtonLiteralTaylorCenterBounds\` (two original expC center inequalities), \`OriginalBishopNativeSquaredContraction\` (on the source radius-1/200 disk), and original \`bishopExp/bishopCos/bishopSin\` convergence **along the constructed actual Newton stream**. It computes the original reciprocal from the already-owned two-ball concrete sine positivity, computes the first step from the Taylor center, computes disk invariance from the squared contraction, and feeds all of this to the source Newton/Bishop completion and fixed-point compiler. \`originalReducedNewtonGivesActualNativeExpFixed\` is the final conditional theorem \(expC(p)\approx_Cp\) on exactly that same T/carrier. It neither supplies an arbitrary fixed point nor changes the logarithm authority.
+
+### Recomputed smallest remaining P1 max-cut
+
+1. **P1.N.CENTRE**: Transport the executable exact-\`Fraction\` Taylor intervals to original \`Exp.bishopExp\`, \`Elementary.bishopSin\`, \`Elementary.bishopCos\` at the exact rational \(p_0\), proving the two norm-square inequalities in \`OriginalBishopNewtonLiteralTaylorCenterBounds\`. The original signed factorial coefficient identification is available; the uniform tail-to-norm-square comparison is not yet constructed.
+2. **P1.N.CONTRACT**: Prove \`OriginalBishopNativeSquaredContraction\` for the LITERAL \(T(z)=z-(expC(z)-z)/(expC(p_0)-1)\) on the source disk. A second exponential-difference estimate or source holomorphic derivative-integral bound must be produced from the original Bishop carrier. No separate disk self-map or Newton first-step hypothesis remains.
+3. **P1.N.CONTINUITY**: Prove the original scalar \`bishopExp\`, \`bishopSin\`, \`bishopCos\` convergence along the ACTUAL Newton orbit. Existing uniform derivative-limit interchange documents are descriptive/conditional; original series uniform bounds remain to be established. The Newton-operator/complex lift is already compiled.
+4. **P1.L.LOG**: Original source local log coefficient convergence and affine germ exist, as do power-difference finite algebra and inequality-based complex power envelope. Missing: same-carrier local \(expC/log\) inverse, selected p modulus and branch constraints, bound \(R_2\le(8/27)|w-p|^2\) at ALL actual disk points via coefficient-tail Bishop limit, log disk contraction, and the two actual \`OriginalBishopSelectedAnalyticRemainderBound\` consumers.
+5. **P1.KOENIGS**: Apply existing selected \(552/625\) convergence/Schröder compiler only after P1.N and P1.L. Local univalence/normalization remain distinct.
+6. **P1g/P2–P4**: Global Kneser period propagation, monodromy, real half-iterate, full modular \(j/J\) construction, same-action observer intertwiner and dimension-correct contour/boundary integration are NOT supplied by any local source proof. All OPEN.
+
+**Acceptance boundary:** All additions in this round are source-written and exact-head GitHub readback, but there is NO Agda 2.9 executable in the current environment, so there are **zero new local kernel-acceptance receipts**. The script registration number describes targets, not verified targets. CI is not required or trusted as a substitute for local kernel acceptance. No existing physical/Clay/global claims are promoted.
