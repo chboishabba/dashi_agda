@@ -234,3 +234,57 @@ bishopSelectedNewtonGeometricInputs = record
       ; Unit.ratioBelowOne = bishopSelectedNewtonRatioBelowOne
       }
   }
+
+
+------------------------------------------------------------------------
+-- ATTACHED P1 NEWTON EXACT FINITE ARITHMETIC. These inequalities are
+-- LITERAL rational endpoint facts; their identification with Bishop
+-- expC derivative and disk enclosures remains a separate source proof.
+------------------------------------------------------------------------
+
+selectedNewtonDerivativeUpper : ℚ
+selectedNewtonDerivativeUpper = + 7 / 1500
+
+selectedNewtonDerivativeUpperIsBelowSelectedRatio :
+  selectedNewtonDerivativeUpper ≤ (+ 1 / 200)
+selectedNewtonDerivativeUpperIsBelowSelectedRatio =
+  ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonDerivativeProductExact :
+  (+ 14 / 15) * (+ 1 / 200)
+    ≡ selectedNewtonDerivativeUpper
+selectedNewtonDerivativeProductExact = refl
+
+selectedNewtonCenterImageUpper : ℚ
+selectedNewtonCenterImageUpper = + 1 / 15000
+
+selectedNewtonCenterImageFromResidual :
+  (+ 2 / 3) * (+ 1 / 10000)
+    ≡ selectedNewtonCenterImageUpper
+selectedNewtonCenterImageFromResidual = refl
+
+selectedNewtonDiskImageUpper : ℚ
+selectedNewtonDiskImageUpper = + 27 / 300000
+
+selectedNewtonDiskImageUpperExact :
+  selectedNewtonDerivativeUpper * newtonRadius
+    + selectedNewtonCenterImageUpper
+  ≡ selectedNewtonDiskImageUpper
+selectedNewtonDiskImageUpperExact = refl
+
+selectedNewtonImageStrictMargin :
+  selectedNewtonDiskImageUpper ≤ newtonRadius
+selectedNewtonImageStrictMargin = ℚP.≤ᵇ⇒≤ tt
+
+selectedKoenigsTightConstant : ℚ
+selectedKoenigsTightConstant = + 552 / 125000
+
+selectedKoenigsTightConstantExact :
+  selectedModulusUpper * selectedLogSecondRemainder
+    * selectedLogDiskRadius * selectedLogDiskRadius
+  ≡ selectedKoenigsTightConstant
+selectedKoenigsTightConstantExact = refl
+
+selectedKoenigsTightConstantBelowMajorant :
+  selectedKoenigsTightConstant ≤ selectedIncrementConstantUpper
+selectedKoenigsTightConstantBelowMajorant = ℚP.≤ᵇ⇒≤ tt
