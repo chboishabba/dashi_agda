@@ -25,6 +25,8 @@ module DASHI.Moonshine.AbelBishopInverseKoenigsFiniteOrbitExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Product.Base using (_,_; proj₁; proj₂)
+import RealProperties as BishopP
 
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
@@ -60,10 +62,15 @@ inverseKoenigsPrefixStep :
       (inverseKoenigsPrefix p g n (g z)))
     (inverseKoenigsPrefix p g (suc n) z)
 inverseKoenigsPrefixStep p g n z =
-  Laws.complexMultiplyAssociative
-    p
-    (Algebra.powC p n)
-    (Algebra._-C_ (inverseOrbit g n (g z)) p)
+  let associative =
+        Laws.complexMultiplyAssociative
+          p
+          (Algebra.powC p n)
+          (Algebra._-C_ (inverseOrbit g n (g z)) p)
+  in
+  BishopP.≃-symm (proj₁ associative)
+  ,
+  BishopP.≃-symm (proj₂ associative)
 
 -- Fixpoints of g give a constant orbit point exactly, with
 -- no assumption about analytic differentiability or modulus.
