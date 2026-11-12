@@ -64,7 +64,7 @@ residual_norm_sq_upper = square_upper(res_re)+square_upper(res_im)
 derivative_norm_sq_lower = square_lower(den_re)+square_lower(im)
 center_norm_sq = A*A+B*B
 
-assert residual_norm_sq_upper < Q(1,10000)**2
+assert residual_norm_sq_upper < Q(1,100000)**2  # strengthened from 10^-4
 assert derivative_norm_sq_lower > Q(3,2)**2
 assert exp_interval(A+R)[1] < Q(7,5)
 assert Q(271,200)**2 < center_norm_sq < Q(11,8)**2
@@ -82,10 +82,39 @@ assert Q(2)*Q(5,4)**2*Q(8,25) == 1
 assert Q(69,50)*Q(4,5)**2 == Q(552,625) < 1
 assert Q(69,50)*Q(8,25)*Q(1,10)**2 < Q(7,1000)
 
+
+# Newton disk invariant and geometric displacement: exact scalar arithmetic.
+# The corresponding original Bishop norm derivative theorem remains OPEN.
+LAMBDA = Q(7, 1500)
+STEP0 = Q(1, 15000)
+assert LAMBDA == Q(7, 5)*R/Q(3, 2) < Q(1, 200)
+assert LAMBDA*R + STEP0 == Q(27,300000) < R
+assert STEP0/(1-LAMBDA) == Q(1,14930) < R
+assert Q(271,200)-R == Q(27,20)
+assert Q(11,8)+R == Q(69,50)
+
+# Direct constructive-series log(1+u)-u envelope:
+# sum(k>=2) |u|^k/k <= |u|^2/(2*(1-|u|)).
+# For |p|>=27/20 and |w-p|<=1/10, |u|<=2/27, hence
+# |R2(w)| <= [1/(2*(27/20)*(27/20-1/10))] * |w-p|^2
+#         = (8/27)*|w-p|^2.  This improves the 8/25 integral
+# remainder bound and needs only finite coefficient/geometric comparison.
+P_MIN, P_MAX, DISK = Q(27,20), Q(69,50), Q(1,10)
+U_MAX = DISK/P_MIN
+assert U_MAX == Q(2,27) < 1
+assert P_MIN-DISK == Q(5,4)
+assert 1/(P_MIN-DISK) == Q(4,5)
+M2_SERIES = 1/(2*P_MIN*(P_MIN-DISK))
+assert M2_SERIES == Q(8,27) < Q(8,25)
+assert P_MAX*M2_SERIES*DISK**2 == Q(23,5625) < Q(7,1000)
+assert P_MAX*Q(4,5)**2 == Q(552,625) < 1
+
 # Reject the original 1/8 disk with only 2499/2000 lower modulus:
 assert Q(4,5)*Q(2499,2000) < 1
 print("PASS: exact Taylor enclosure residual norm squared < (1/10000)^2")
 print("PASS: |exp(p0)-1| > 3/2 and exp(Re(p0)+1/200) < 7/5")
 print("PASS: rational Newton disk self-map/contraction sufficient inequalities")
 print("PASS: corrected Koenigs radius=1/10 and beta=552/625")
+print("PASS: exact log-series coefficient majorant M2=8/27, C<=23/5625")
+print("PASS: Newton geometric total displacement <=1/14930")
 print("OPEN: Bishop analytic exponent/derivative source weld and Banach inhabitant")
