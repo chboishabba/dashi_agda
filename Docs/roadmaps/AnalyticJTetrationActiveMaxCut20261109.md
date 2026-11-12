@@ -847,3 +847,23 @@ Original candidate \`p0 = 31813/100000 + i*133724/100000\`, Newton radius \`1/20
 - BSD/YM/Clay statements from the pasted proposal are not consequences of the P1g–P4 finite facts and are not promoted.
 
 **Trust:** Agda golden, exact-head local checker authoritative, no CI reliance, no physical or global unproved theorem represented as accepted. The new source declarations have not had an Agda typechecker receipt in this execution environment.
+
+
+### 2026-11-12 — Source logarithm R2 and Newton exp fixed-point compiler continued
+
+Three further original-source log tail owners now implement the finite-to-infinite equality **without** adding a derivative or principal-Log axiom:
+
+1. \`AbelBishopLogQuadraticFiniteTailExact.agda\`: the original \`Log.originalBishopLogOnePlusTerm w zero\` is provably \(w\), and for every natural \(n\), the genuine Bishop finite prefix obeys \(\sum_{k<n+1}a_k(w)\approx_C w+\sum_{k<n}a_{k+1}(w)\). The tail has only positive powers \(w^{k+2}\).
+2. \`AbelBishopLogQuadraticSeriesLimitExact.agda\`: on an actually witnessed Bishop unit radius, the original shifted finite tail converges componentwise to \(\operatorname{LogOnePlus}_{B}(w)-w\). Uses the **existing** original \`LogOnePlusCoefficientDominationExact\` absolute series completion and genuine Bishop successor-convergence/subtraction results. No new convergence authority.
+3. \`AbelBishopSelectedLogQuadraticRemainderWeldExact.agda\`: for any original nonzero \(p\), displacement \(t\), and genuine relative-radius certificate, the selected \`originalBishopSelectedLocalLogGerm p nz t\` has precisely that same canonical shifted quadratic tail as its deviation from the linear term \(p^{-1}t\). The tail's convergence is an actual source proof, not a separate assumed \(R_2\).
+
+The selected Newton source chain now includes \`AbelBishopNewtonSelectedOperatorExact.originalBishopNewtonOperatorFixedImpliesExpFixed\`, proving an actual Newton fixed point is a same-carrier original native \`expC\` fixed point by cancellation through the **original** nonzero Newton denominator. \`AbelBishopNewtonSelectedLimitExact.originalBishopSelectedNewtonLimitIsNativeExpFixed\` combines actual step majorants, source completeness, successor convergence and selected Newton continuity to construct that exponential fixed point.
+
+**Exact remaining highest-alpha P1 analytic producer:**
+- Bridge the finite rational Taylor enclosure of \(p_0\) into Bishop-native source \`expC\`/cos/sin inequalities and original \`BishopComplexNonzero (expC(p0)-1)\`.
+- Derive the genuine step majorants of the literal Newton orbit in \`OriginalBishopNewtonSelectedStepBounds\` and same-operator continuity on its Bishop-completed limit; do not supply these as fabricated records.
+- On the constructed \(p\), establish the actual selected \`Log\` chart, its inverse identity and disk stability. The selected log-series quadratic tail is now fully **identified as a source series**, but its quantitative componentwise geometric bound along the actual inverse orbit and the principal-branch identity remain OPEN. The \`552/625\` ratio itself is a source-written Bishop interval proof, not an assumed ratio.
+- Only after the selected logarithm/germ is glued to an invariant disk and the remainder is bounded can \`selectedOriginalBishopKoenigsSchroeder\` be applied *unconditionally* to the original orbit.
+- The local Abel chart, monodromy, Kneser real half-iterate, j/J Hauptmodul, world/observer frame intertwiner and 1D slice/3D boundary integral transports remain independently OPEN.
+
+**Acceptance:** all additional declarations above are source-written and registered in \`scripts/check_analytic_j_tetration_golden_local.sh\`; no Agda/Nix local kernel is installed in the current runtime; CI status is irrelevant and not used. Retain mathematical original-author/source and DASHI proof-owner attribution boundaries.
