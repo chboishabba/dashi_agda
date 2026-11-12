@@ -190,3 +190,66 @@ def persist_original_p1(conn,path,codec):
         "kernel_certified":False,
         "world_admitted":False
     }
+
+
+def bounded_original_alpha_fibre(conn,*,toolchain,alpha_type,limit=25,after=None):
+    """Bounded exact-alpha byte matches, candidate ONLY, no implicit equivalence.
+
+    All keys belong to the EXISTING PostgreSQL source world. The full alpha
+    bytes are compared after digest-index lookup. A hash collision fails
+    closed instead of merging unlike types. SQL keyset ordering avoids a
+    global theorem-pair table or OFFSET scans.
+    """
+    if (type(toolchain) is not str or not toolchain or
+        type(alpha_type) is not bytes or not alpha_type or
+        type(limit) is not int or not 1<=limit<=256):
+        raise NativeP1PGError("invalid typed fibre retrieval budget/profile")
+    cursor=None
+    if after is not None:
+        if (type(after) is not tuple or len(after)!=5 or
+            any(type(x) is not str for x in after[:4]) or
+            type(after[4]) is not bytes or len(after[4])!=32):
+            raise NativeP1PGError("invalid source-original keyset cursor")
+        cursor=after
+    digest=sha256(alpha_type).digest()
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT repository,revision,path,declaration,native_export_sha256,
+                   type_alpha,type_exact_sha256,proof_exact_sha256,
+                   original_source_sha256
+            FROM lean_world_native_p1_observation
+            WHERE toolchain=%s AND type_alpha_sha256=%s
+              AND (%s::boolean OR
+                   (repository,revision,path,declaration,native_export_sha256)
+                      > (%s,%s,%s,%s,%s))
+            ORDER BY repository,revision,path,declaration,native_export_sha256
+            LIMIT %s
+        """,(toolchain,digest,cursor is None,
+             cursor[0] if cursor else "",cursor[1] if cursor else "",
+             cursor[2] if cursor else "",cursor[3] if cursor else "",
+             cursor[4] if cursor else bytes(32),limit+1))
+        rows=cur.fetchall()
+    for row in rows:
+        if bytes(row[5])!=alpha_type:
+            raise NativeP1PGError("native alpha fibre SHA collision")
+    selected=rows[:limit]
+    result=[]
+    for r in selected:
+        result.append({
+            "repository":r[0],"revision":r[1],"path":r[2],
+            "declaration":r[3],"native_export_sha256":bytes(r[4]).hex(),
+            "type_exact_sha256":bytes(r[6]).hex(),
+            "proof_exact_sha256":bytes(r[7]).hex() if r[7] else None,
+            "original_source_sha256":bytes(r[8]).hex(),
+            "status":"typed-structural-candidate-only"
+        })
+    last=selected[-1] if selected else None
+    keyset=(last[0],last[1],last[2],last[3],bytes(last[4])) if last else None
+    return {
+        "status":"typed-structural-candidates-not-equivalence",
+        "matches":result,"returned":len(result),
+        "more_possible":len(rows)>limit,
+        "complete":len(rows)<=limit,
+        "next_keyset":keyset if len(rows)>limit else None,
+        "kernel_certified":False,"world_admitted":False
+    }
