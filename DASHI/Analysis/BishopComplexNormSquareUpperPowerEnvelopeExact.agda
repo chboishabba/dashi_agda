@@ -141,3 +141,19 @@ imagPowerUpper {q} upper n =
   componentAbsolutePowerUpper upper n
     (Complex.im (Algebra.powC q n))
     (Norm.componentSquareBelowNormSqImag (Algebra.powC q n))
+
+
+-- Reuse the EXISTING BishopQPowerComponentEnvelope interface, while
+-- replacing its overly strong exact-radius admission by the inequality
+-- actually obtained on a Bishop disk.
+upperBoundBuildsOriginalPowerEnvelope :
+  ∀ {q r} →
+  BishopComplexNormSquareUpperRadius q r →
+  Norm.BishopQPowerComponentEnvelope q r
+upperBoundBuildsOriginalPowerEnvelope upper =
+  record
+    { Norm.realPowerBound = λ n →
+        realPowerUpper upper (suc n)
+    ; Norm.imagPowerBound = λ n →
+        imagPowerUpper upper (suc n)
+    }
