@@ -53,3 +53,39 @@ Moreover, there is a bounded, explicit rational sequence `a_k∈[0,1]` with `|a_
 The attachment also assumes its massive covariant propagator, polymer activity envelope, original OS same-object identification and four-point nonvanishing remainder control. Those are the **very analytic theorems** outstanding and cannot be promoted by naming their intended conclusions.
 
 **Bottom line:** original native P0.B finite partition and flat P0.D integration are now source-written; P0.E has an explicit full original interacting density and strict positivity. P0.D's final source permutation/native order and P0.E's weighted identification remain welds; P0.F and all five Clay terminal physical gates remain genuinely open. No source-written candidate is called kernel-accepted without a successful local Agda receipt.
+
+
+## 2026-11-12 later same-source R445 audit — correction of earlier P0.D/E inventory
+
+A later audit of the **authoritative original Wilson regression's actual imports** found that the repository already had stronger F15–F19 and M.01/M.02 source-written constructions than the new, parallel P0.B/D/E helper modules. The earlier wording above ("P0.D original permutation word uninhabited" / "P0.E original weighted equality missing") applies to the **new auxiliary record presentation**, but is NOT a complete description of the older existing source path.
+
+### Pre-existing, more advanced original path
+
+- `YMClayNativeClosedThreeEqualitiesCandidateExact` source-writes the `originalPairSpectatorLengthClosed`, `originalPairSpectatorSelectabilityClosed` and `originalPairSpectatorCanonicalLabelsClosed` actual original-label goals. The two computational values are written using `refl` against the real 1024-bond codec and require actual Agda normalization. **No exact-head kernel receipt.**
+- `YMClayNative1024ClosedReindexHaarConsequencesExact` **constructs** `actualPairProgram : Haar.LinkPermutation 1024` and `actualPairSpectatorReindexEveryOriginalVector` for arbitrary original link values, together with original product-Haar invariance. This is the canonical P0.D route, ahead of the newer `OriginalR445PermutationAndNativeBlockWeld` record, which remains uninhabited as that *particular* alternative presentation.
+- `YMClayNative1024WeightedWilsonReindexExact` constructs the inverse program and `actualWeightedReindex` for arbitrary weights; `originalWilsonPartitionIsSortedPhysicalPartition` applies it to the true original n=3 interacting Wilson Gibbs action.
+- `YMClayNativePairsSpectatorsFubiniExact` proves original full flat=64-pair/896-spectator Haar integration with arbitrary coupled integrands.
+- `YMClaySUNWeightedDisjointPairFibreReparamExact` F18/F19 already proves all-pair arbitrary-weight non-Abelian fiber reparametrization, all-spectator integration, effective density and signed/source-marked observable transport.
+- `YMClayOriginalWilsonF19ConcreteWeightExact` specializes F19 two-source marked numerators and same-partition normalized values to the original *physically sorted* n=3 Wilson weight.
+- `YMClayOriginalWilsonPhysicalF19PartitionExact` already proved `originalFinePhysicalPartitionEqualsNestedF19`. **New direct composed theorem** `originalFinePhysicalPartitionEqualsActualEffectivePartition` reuses that source equality, `originalAllPairsGeneralWeightedChange`, and `originalInterleavedIntegralIsCoarseFibre` to state that the original canonical 1024-bond interacting Wilson partition equals the original constructed full coarse effective-density Haar integral. It assumes no factorization, independent coarse density or physical RG convergence.
+
+### Further source-written implementation and correction this pass
+
+- Fixed the concrete `Torus.Empty` vs `Data.Empty.⊥` mismatch in `YMClayR445CanonicalBondPermutationCodecExact` using explicit empty eliminators and removed an unjustified `--safe` marker from this unchecked composite module.
+- `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact`: new `nativeTwoLinkKernelChangeOfVariables` (arbitrary (K(U,V,UV))) and `nativeOnePairAllInteriorWeightedChangeOfVariables` (arbitrary coupled signed finite-interior weight). These are **small standalone source lemmas**; the pre-existing F18/F19 path is the preferred all-pair proof owner.
+- `YMClayR445OriginalFullWilsonFiberDensityExact`: `originalR445FirstSelectedPairWeightedHaarTransport` and `originalR445FirstSelectedPairPartitionTransport` specialize the source two-link theorem to the original n=3 1024-bond Gibbs action with 1022 other fine links frozen; F18/F19 remains the full all-pair owner.
+- `YMClayR445AdjacentHaarPermutationCompilerExact`: generic typed program for original `Haar.LinkPermutation` and its exact execution proof. This is **auxiliary**, not a claim that the canonical permutation is missing from M.01. The deterministic source-order insertion sort takes 41,792 legal adjacent moves (hash `9d75eed2b46c4507c92a699a337413b3bed9d41580c4ac616228f2dad82562cd`), whereas M.01 already constructs a more suitable program subject to kernel acceptance.
+- Exact-rational D4 regression: `check_ym_r445_kernel_valued_haar_exact.py` passed 256 signed arbitrary-kernel and 32 signed fully coupled two-interior-link cases; `check_ym_r445_adjacent_schedule_exact.py` passed the 41,792-swap source-order program and 12 independent vector actions. **Neither is an Agda SU(N) or physical receipt.**
+- `scripts/check_ym_r445_p0_maxcut_local.sh` now checks the ORIGINAL closed label/sort, original Wilson weighted reindex, F18/F19 owners **first**, followed by auxiliary new modules and the main regression. It runs the exact finite Python controls, then accepts AGDA_BIN, Agda on PATH or the project Nix shell; no CI, Docker, or replacement kernel.
+
+### Updated fail-closed classification
+
+| Owner / gate | Actual current classification |
+|---|---|
+| P0.A/B/C/D original 1024-bond permutation and Haar reindex | **Source-written actual original witnesses exist in M.01 and parity/codec modules.** Local Agda 2.9 kernel acceptance and exact source-action identification remain unpaid; do not infer completion from `refl` text |
+| P0.E full original Wilson partition and arbitrary weighted F19 disintegration | **Source-written full original partition equality and F19 effective density exist**, including new direct same-source composite. The normalized two-marked original-native block observable identification and kernel acceptance must be checked across the exact transitive root |
+| P0 scalar and trace | Original Wilson ↔ Bishop setoid scalar `OriginalWilsonToBishopScalarWeld` remains uninhabited; fully selected arbitrary-SU(N) trace bound needs constructive source proof |
+| P0.F | **Genuinely open mathematical theorem:** source-derived nonconstant UV/volume-uniform effective-minus-bare Wilson RG bound |
+| E1 / D1 / D2 / N1 / G1 | **Genuinely open physical Clay gates**, not completed by source-written finite Haar/disintegration or one-loop beta |
+
+**Trust:** source readback and independently executed finite control checks, NOT pinned Agda kernel acceptance. The live #1498 Bałaban Wilson/ghost/Haar physical integrand and four quadratures are a separate open branch and do not close this R445 physical RG estimate.
