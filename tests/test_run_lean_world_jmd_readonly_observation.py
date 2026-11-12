@@ -126,6 +126,13 @@ class JMDReadonlyObservationTests(unittest.TestCase):
         with self.assertRaisesRegex(JMDObservationError, "conflicting"):
             self.publish()
 
+    def test_unreviewed_jmd_source_revision_rejected_by_production_pin(self):
+        with patch.object(publisher, "JMD_PR105_SOURCE_SHA256",
+                          "f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e"):
+            with self.assertRaisesRegex(JMDObservationError, "revision not pinned"):
+                self.publish()
+
+
 
 if __name__ == "__main__":
     unittest.main()
