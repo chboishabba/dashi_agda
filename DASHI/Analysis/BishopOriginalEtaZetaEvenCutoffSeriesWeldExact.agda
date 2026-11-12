@@ -112,6 +112,26 @@ pairedUnsignedIsOriginalDirichletPartial terms s n =
     (originalBishopPrefixIsNativeSeries
       (terms s) (Eta.twice n))
 
+-- This is the single all-cutoff ORIGINAL SOURCE consumer:
+-- finite eta plus two even-indexed source terms IS the actual
+-- Dirichlet SeriesOf partial at 2*N. It does not assert any
+-- analytic limit, division by the eta factor, or continuation.
+originalEtaAndEvenTermsIsNativeZetaPartial :
+  (terms : Dirichlet.BishopDirichletTermFamily) →
+  (s : BC.BishopComplex) →
+  (n : Nat) →
+  Eta._≈C_
+    (BC._+C_
+      (Eta.originalEtaPrefix (terms s) n)
+      (BC._+C_
+        (Eta.originalEvenPositivePrefix (terms s) n)
+        (Eta.originalEvenPositivePrefix (terms s) n)))
+    (Dirichlet.dirichletPartial terms s (Eta.twice n))
+originalEtaAndEvenTermsIsNativeZetaPartial terms s n =
+  Eta.≈C-trans
+    (Eta.originalBishopEtaZetaPairing (terms s) n)
+    (pairedUnsignedIsOriginalDirichletPartial terms s n)
+
 -- Reuse the actual original Round11 native-exponential Dirichlet
 -- term family (whose chosen negative-log source remains genuine).
 module OriginalRound11
@@ -129,6 +149,22 @@ module OriginalRound11
         (Eta.twice n))
   actualRound11PairedZetaIsNativeSeries =
     pairedUnsignedIsOriginalDirichletPartial Selected.sourceTerms
+
+  -- No separate zeta carrier: concrete source eta + even terms
+  -- agrees with the true original Round11 Dirichlet partial sum.
+  actualRound11EtaIsNativeZetaAtEvenCutoff :
+    (s : BC.BishopComplex) →
+    (n : Nat) →
+    Eta._≈C_
+      (BC._+C_
+        (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+        (BC._+C_
+          (Eta.originalEvenPositivePrefix (Selected.sourceTerms s) n)
+          (Eta.originalEvenPositivePrefix (Selected.sourceTerms s) n)))
+      (Dirichlet.dirichletPartial Selected.sourceTerms s
+        (Eta.twice n))
+  actualRound11EtaIsNativeZetaAtEvenCutoff =
+    originalEtaAndEvenTermsIsNativeZetaPartial Selected.sourceTerms
 
 -- Exact remaining analytic P2:
 --  * source even-term rescaling log(2n)=log(2)+log(n);
