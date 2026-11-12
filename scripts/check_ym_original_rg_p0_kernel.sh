@@ -25,6 +25,10 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalPlaquetteTraceCyclicityInsufficientExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalSUNTraceToAllWordsBoundExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalWilsonWordConcatenationR445Exact.agda
+  DASHI/Physics/YangMills/YMClayRealSubtractionLawIndependenceExact.agda
+  DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact.agda
+  DASHI/Physics/YangMills/YMClayE1D1OriginalCrossNumeratorNormalizedMomentFactorExact.agda
+  DASHI/Physics/YangMills/YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
