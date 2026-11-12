@@ -424,3 +424,33 @@ Reported native gfx803 6.4 numerical discrepancy remains: first QKV input bounda
 ### Highest-information next action
 
 Run **only static** skip-reason reconstruction with the already committed command documented in `gfx803_compat_graph/docs/GFX803_OPINFO_SKIP_REASON_RECOVERY_20261112.md`, classify the 183 exact nodes first. Next focus a single real native GPU 10.1 or WGM1 whole-model forward/backward/AdamW fidelity trial when the RX 580 is idle and the corresponding Schaka runtime is actually installed. No speculative GPU throughput claim or immediate training launch.
+
+## 2026-11-12 user correction: consume the provided native ROCm 10.1 environment now
+
+**User directive:** The Schaka native 10.1 runtime is provided and working. STOP treating a new ROCm compatibility audit, 183-skip reconstruction, new platform build, or rediscovery of a GPU fault as a prerequisite for LILA/MoE/federation progress. Those belong to the independent gfx803 compatibility research lane and its owners. The already qualified native GPU wrapper is the baseline for this project. Never fall back silently to CPU GEMM, native 6.4, Docker or a fresh software install.
+
+**Pinned upstream source:** `chboishabba/gfx803_compat_graph/nix/gfx803/schaka101-composed-candidate.nix` defines `gfx803-schaka101-python`, using the selected Schaka 10.1 relocated ROCm root, original imported Python venv, patched Torch wheel and SGEMM shim. Its documented composed store output is `/nix/store/vq1lgpc49im7qvvxgxabykyfs47l2ykb-gfx803-schaka101-torch-candidate-overlay`. Runtime loader and patched TopK ownership remain upstream Schaka/gfx803_compat_graph; no new ROCm correctness work is claimed here. This same store output also supplies a separate `gfx803-schaka101-pytest-python` for original OpInfo research; **do not run the pytest wrapper for ordinary LILA training**.
+
+**Native execution launcher implemented:** `chboishabba/LeechTransformer`, existing PR #4 branch `experiment/consumer-preserving-multiscale-codec-20261031`, `scripts/run_native_schaka101_lila.sh` (commit `d2a1af062ece8071f4638b84771c2912a222bcef`). The launcher runs exactly the already-imported composed native PyTorch, enforces cuda:0 for four existing model-facing modules, rejects CPU GEMM substitution, does not rebuild or audit ROCm. Supports `--probe` (a tiny *actual native GPU tensor operation*) or `--module MODULE -- [real source-model args]`. The launcher has **not been executed on the user machine in this conversation**. Do not claim output before running it.
+
+**Example on existing Leech PR #4 checkout**, with actual source model files/config/splits (do not invent missing paths):
+```bash
+cd /path/to/LeechTransformer
+git fetch origin
+git switch experiment/consumer-preserving-multiscale-codec-20261031
+git pull --ff-only
+bash scripts/run_native_schaka101_lila.sh --probe
+bash scripts/run_native_schaka101_lila.sh --module scripts.train_signed_wave_experts -- \
+  --checkpoint data/best_model.pt --config /actual/config.json \
+  --token-ids /actual/train_ids.npy --layer -1 \
+  --epochs 1 --batch 1 --experts 4 --top-k 2 \
+  --expert-width 192 --transition-rank 24 \
+  --route-geometry c2_invariant --output artifacts/native_c2_adapters.pt
+```
+This real module uses actual pretrained teacher checkpoint and training tokens. Paths must already exist and match the branch's original model; do not substitute synthetic examples. Due to ~5.24 GB host available snapshot, `--batch 1` is a conservative *starting choice*, not a guarantee of memory fit. Real model size, worker GPU VRAM, optimizer state, activations and CPU RAM are different resources.
+
+**Roadmap priority reordering:** Formal Agda finite 3-module gate user-reported complete; keep F01 receipts. Native GPU path is present: run native LILA sparse student training first (source-trained original teacher) then export and evaluate heldout CE, then record selected expert traces and federation opportunities. Physical GPU runtime qualification is a *supplier-owned precondition already satisfied for the provided scope*, not a new DASHI work package. LILA-specific layer/tensor/activation binding (TNET05) and trained-student quality remain actual DASHI-owned open gates. Proceed to TNET02/TNET04/TNET13 and N02/N08 using the native model outputs. GPU-native scheduler/expert distribution still needs implementation and actual receipts: merely invoking a GPU in one process does not establish multi-peer federation.
+
+**Reclassification of GPN lane:** GPN01–06 are externally supplied environment assurance / optional independent validation, not blocking the native LILA model experiment. GPN02 183 skip-reason research remains in gfx803_compat_graph and off the LILA critical path. GPN07–09 remain model-specific federation and performance goals. GPN10 is a project release/reproducibility status, not permission to ignore actual model crashes or data loss. Report failures if they occur, but do not preempt the user's working runtime with another general ROCm certification programme.
+
+**Attribution/verification firewall:** Schaka owns relevant ROCm repairs, Kornienko original Leech-LILA, user/DASHI owns native model/federation adapters. Provided environment functionality is user-reported and source-supported; a new launcher commit is source-written, not a claimed physical run. Agda kernel proof, real model training, quality, distributed history and network claims remain independent.
