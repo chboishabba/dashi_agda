@@ -1340,3 +1340,43 @@ The original Round11 same-term instance remains
 `OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`.
 No analytic limit, even-term rescaling or divisor inversion is
 deduced from this bidirectional finite algebra. Kernel pending.
+
+
+#### 2026-11-12 live Bishop #1478 cross-PR exact-head source audit
+
+Live PR [#1478](https://github.com/chboishabba/dashi_agda/pull/1478)
+was checked at head `1a4c1de31280034f6de0995a78ef40a618545ea7`
+(branch `chatgpt/analytic-j-tetration-abel-transport`);
+zeta [#1497](https://github.com/chboishabba/dashi_agda/pull/1497)
+at `1d32eb53593aa636ddb4a9ed74f6629bd335d750`.
+These are separate unmerged, non-kernel-admitted parents.
+
+Newer #1478 `AbelBishopNewtonSourceInhabitationExact`
+now explicitly constructs the selected Bishop Newton limit and
+same-source `expC(p)≈C p` **FROM**
+`OriginalBishopNewtonActualAnalyticSources`, not without it.
+That record's exact independent unpaid fields are:
+
+1. `selectedDiskCertificate` :
+   `OriginalBishopAnalyticNewtonContraction T nz` of the
+   actual original Newton disk and first-step enclosure;
+2. `originalExpContinuousAlongNewton` :
+   original Bishop exp along the literal Newton orbit;
+3. `originalCosContinuousAlongNewton` :
+   configured original Bishop cosine along that orbit;
+4. `originalSinContinuousAlongNewton` :
+   configured original Bishop sine along that orbit.
+
+#1478 also source-writes genuine local log coefficient convergence,
+the shifted quadratic log-series limit and the selected logarithm
+germ remainder weld. This is strong reuse for analytic P1 but
+not the native principal Log with all source evaluations, the
+selected fixed-point source assumptions, a global Kneser
+continuation, or complete modular-period/contour validation.
+In particular, the user-provided `Principal Log Koenigs: Closed`
+claim is NOT supported by this exact-head source.
+
+Cross-branch acceptance remains: run original Agda 2.9 focused
+checker for each PR's complete imports; reconcile actual carrier
+revision and source equality before any cherry-pick/rebase.
+No CI-only or source-description-based completion promotion.
