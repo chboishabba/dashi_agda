@@ -150,3 +150,52 @@ DASHI Lean PR #104 branch gained `Integration/BishopOddZetaNarrowWindowTransport
 Still open: pin and read the external theorem declaration and exact commit, prove finite-set -> `Fin 8` witness conversion, discharge positive-odd zeta imaginary-part zero by an actual Mathlib theorem, run pinned Lean kernel and axiom audits, and transport into the original Agda Bishop carrier. Cross-version Lean 4.35 external vs existing project compatibility is a *version-change proof surface*, not permission to identify snapshots without inspection.
 
 No information here settles the RH Clay Weil-positivity or G1–G4 error-floor gates.
+
+## 2026-11-12 evening: physical source-admission implementation and corrected mathematical cut
+
+### New source-written proof surfaces
+
+**Lean PR #104** (existing branch `feat/bishop-k04d-k05-source-semantics-20261103`):
+- `Integration/PositiveOddZetaImaginaryZeroExact.lean`: `riemannZeta_nat_eq_real_tsum`, `riemannZeta_nat_im_zero`, `positive_odd_zeta_im_zero`, `z7_eight_window_im_zero`, `fifteen_window_im_zero`, `originalDirichlet_fifteen_window_im_zero`. The proof uses the actual Mathlib `zeta_nat_eq_tsum_of_gt_one` and `Complex.ofReal_tsum`, hence no hypothetical uniform-limit continuity assumption.
+- `Synthesis/PositiveOddZetaImaginaryZeroExact.lean`: exact re-export into the requested Synthesis tree.
+- `Integration/BishopOddZetaZ7FinsetBridgeExact.lean`: literal external **statement-shape** `{7,9,11,13,15,17,19,21}`, Finset -> Fin 8, Fin 8 -> Fin 15, unconditional removal of the old positive-odd `im=0` *hypothesis*, but not import of the external theorem proof.
+- `Integration/RiemannXiMathlibReflectionExact.lean`: `selectedXi(s)=(s(s-1) completedRiemannZeta₀(s)+1)/2` and `selectedXi(1-s)=selectedXi(s)`, using Mathlib's actual entire completed-zeta `completedRiemannZeta₀_one_sub`. `selectedXi(0)=selectedXi(1)=1/2`. The selected Lean xi is not a constructed instance of Agda's `AnalyticSubstrate`.
+- `scripts/check_bishop_odd_zeta_maxcut_local.sh`: Nix/native local check entrypoint; fails closed on an observed root version-pin mismatch, without a CI dependency.
+
+**Version-isolated external proof import in Lean PR #104**:
+- `proofs/zeta7-lean435/lean-toolchain` selects Lean v4.35.0;
+- `proofs/zeta7-lean435/lakefile.toml` requires `ZetaIrrational` at external tag `v1.0` (its manifest pins Mathlib v4.35.0);
+- `proofs/zeta7-lean435/BishopZ7Admission.lean` **imports the actual external theorem** `ZetaIrr.Z7.oneOfZeta7To21`, transports the finite set to `Fin 8` and the existing fifteen-window shape, and produces (conditional only on any NEW source-value equality) a non-rational value on that same source carrier. The genuine Mathlib odd-zeta witness in this separate v4.35 sidecar is unconditional *provided the imported external theorem builds as documented*.
+- `proofs/zeta7-lean435/check_local.sh`: build and `#print axioms` verification using native Lake, not Docker or CI.
+- The root `dashi_lean4` project's `lakefile.toml` currently requests Mathlib **v4.28.0**, while its `lean-toolchain` reads **v4.35.0-rc3**. These observed pins do NOT match the external stable v4.35.0 project. No binary theorem import across them is claimed. Version compatibility is an explicit gate.
+
+**Agda PR #1497**:
+- `DASHI/Analysis/ZetaZ7AgdaIndexTransportExact.agda`: eight literal constructors for 7,9,...,21; proofs of all eight `Odd.oddArgument` equations; conditional source-index/irrationality transport to the existing `Odd.ValueContext`; witness index preserved without inventing a numerical chosen value.
+- `scripts/check_zeta_odd_bishop_rh_local.sh`: local Nix/Agda 2.9 check using the already established `scripts/run_agda29_parallel_check.sh` against the three Agda Z7/Bishop/RH boundary modules.
+- All new files are **source-written and GitHub-readback candidates until a local Lean/Agda kernel run succeeds**; scripts have not been executed in this session. No CI status is substituted for a local run.
+
+### Corrected ledger
+
+| Gate | Precise status after implementation |
+| --- | --- |
+| ZI reality | Mathematical proof written for actual Mathlib zeta; local Lean checker PENDING |
+| ZI external Z7 import | Actual external `ZetaIrr.Z7.oneOfZeta7To21` imported in isolated stable-v4.35 sidecar; sidecar kernel/axioms PENDING |
+| ZI Finset membership to Fin8, to Fin15 | Source-written in both sidecar and Agda index carrier; kernel PENDING |
+| ZI value to original Lean Dirichlet series | Prior Bishop Lean PR #104 source equality, specialized across 15 values; kernel PENDING |
+| ZI original Agda Bishop-real same-object weld | OPEN: a faithful cross-kernel semantic interpretation is not the same as renaming `RegularRatReal`, and no verified proof term crosses Lean to Agda |
+| Xi reflection G1 (selected Mathlib xi) | Reuses actual `completedRiemannZeta₀_one_sub`; specialized source lemma written; kernel PENDING |
+| Xi reflection G1 (original Agda analytic substrate) | OPEN: the abstract `CompletedRiemannZeta` package does not yet have a genuinely constructed same-object instance |
+| RH G2 | OPEN: real prime-power / gamma / pole / zero explicit-formula identity and exact observation operator, not the 3-adic label analogy |
+| RH G3 | OPEN: coercivity or an analytic off-line zero-exclusion estimate that beats the genuine error floor; the proposed signed-fifth and far-shell bounds are NOT source-certified closures |
+| RH G4 | OPEN: complete `RiemannHypothesisFor` witness; conditional terminal assembly in source is not an inhabitant |
+| YM Wilson P0 scalar weld (separate Clay programme) | OPEN: `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` explicitly leaves `OriginalWilsonToBishopScalarWeld` uninhabited, because the selected original `RealAnalysisAxioms.ℝ` differs from the vendored Bishop real `Real.ℝ`. Bishop quotient cancellation alone cannot construct a faithful map and reflection from an independent postulated scalar socket |
+| Local kernel receipts | NOT RUN: this runtime has no `lake`, `lean`, `agda` or `nix`; local native scripts now identify exact targets |
+
+### Mathematical non-promotion controls
+
+1. The **true Z7 window** is `7..21` over odd integers, mapping into `5..33` at indices `1..8`, **not** a window `17..31`.
+2. `∃ j, Irrational(ζ(j).re)` permits *proof-theoretic existential elimination*, not a computed single named irrational value or a modulus `δ(q)` for a known index.
+3. An im=0 proof at positive integer arguments does not imply analytic continuation, RH, or uniform Bishop-real equality. The direct Lean proof is simpler than a free abstract modulus.
+4. The classical completed-ξ identity and functional reflection do not exclude off-critical-line zeros; the full Weil/Poisson/Selberg/Hermitian analytic positive route remains unpaid.
+5. The constructive Bishop inverse uses apartness of the **selected** denominator, not a bare rational sequence inverse at arbitrary early cutoffs; the independent original Wilson scalar still needs an operation-/equality-/order-preserving interpretation.
+6. Keep theorem lineage separate: external Zudilin/Ball–Rivoal/Rivoal/Krisman mathematical and Lean formalization work; Mathlib zeta and completed-Lambda owners; original Bishop/Murray/Csimma real construction; DASHI's exact integration and source-index transport.
