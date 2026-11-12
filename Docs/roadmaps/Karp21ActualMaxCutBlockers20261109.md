@@ -1,3 +1,19 @@
+## 2026-11-12 F1 physical tape substrate; F2 local cell-growth receipt (SOURCE ONLY)
+
+**New owner:** `DASHI/Mathematics/Complexity/Karp21NativeBitTapePhysicalMachineExact.agda` on PR #1474. It defines the literal four-cell alphabet (0,1,blank,marker), a two-sided finite tape zipper with implicit blank extension, one-head write/move, finite control via `Fin q`, and a k-work-tape local transition. The instruction selects from current control state and one observed symbol per tape, rather than arbitrarily inspecting the high-level N21 machine state. A run is fuel-bounded by the *number of physical instructions*, not by decoded gamma values.
+
+**Source-written elementary proof candidates:** `writePreservesCellCount`, `walkAddsAtMostOneCell`, `writeAndWalkCellBudget`, `leftThenRightInterior`, `rightThenLeftInterior`, `allWorkTapesCellBudget`, `machineStepCellBudget`, `machineRunCellBudget`. For fixed k work tapes and physical run fuel T, the constructed zipper representation has the source-level bound:
+`configurationCells (machineRun T program c) ≤ configurationCells c + T * suc k`.
+**Boundary:** this accounts ONLY for represented tape cells and the literal local tape-instruction semantics. It does not pay source N21 heap/stack/persistent sharing, or establish any polynomial bound for T.
+
+**Independent finite regression:** `scripts/check_karp21_physical_tape.py` exercises 610,806 selected zipper/write/move/budget checks locally, including 0/1/2/4 work tapes; PASS. Registered in the local preflight. Both Karp aggregation roots import the new source owner, and `kernel-cut` plus `golden` invoke it directly.
+
+**Exact unpaid next cut:** K0 pinned Agda 2.9 kernel receipt for the new F1 owner and existing B6–G3 chain; F1 original N21 parser/threshold/ledger/history routines compiled into a literal finite local instruction table; F3 `originalBitTapeStepSimulatesN21Rule` with stuttering/threshold-aware terminal observation; F2.2 live-heap copies/cons/pointers/stack; F4 `karpFractranBitMachineClockPolynomial` paying physical instruction count; original G2/G3 typed PR cost/certificate receipts; G4 `originalN21InNP`; P1 E20/Cell-Bits Cook–Levin; P2 complete `CertifiedKarpNetwork`; independently universal `SATNotInP`.
+
+**Do not promote:** the user's attached 2026-11-12 architecture sketch labels K0–P2 "closed" without Agda typechecking, literal same-word N21 instruction simulation, or cost-model inhabitance. The real original accepted sparse certificate has 2m bits, not an assumed m-bit subset indicator. Source-written is NOT kernel-accepted or physically integrated. Local checker rather than CI is authoritative.
+
+---
+
 ## 2026-11-11 highest-alpha new F2.2 leaf and K0 execution correction
 
 **Concrete Agda source** `Karp21NativePositiveThresholdInputWidthExact` now contains `originalPositiveThresholdRegisterSuffixCharge` and `actualWholeBinaryPositiveThresholdRegisterFitsOriginalWord`: after the ACTUAL strictly-positive gamma W reader produces an LE register, its bit length plus the parser's untouched suffix fits the original field source bits, and a successfully parsed complete original N21 binary graph's retained W register fits the length of the original graph word. This pays another F2.2 *retained register payload* source candidate, not heap/list/stack/tape allocation. Imported into both Karp Golden roots and added to focused Agda kernel targets. Its independently executed local finite mirror passes **85,535/85,535** cases; reproducible `scripts/check_karp21_positive_threshold_input_width.py` committed and added to preflight.
