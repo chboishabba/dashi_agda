@@ -21,6 +21,7 @@ open import Relation.Binary.PropositionalEquality using (subst; sym)
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
 import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact as Typed
 import DASHI.Physics.YangMills.BalabanLiteralTotalRationalBackendExact as Selected
+import DASHI.Physics.YangMills.BalabanLiteralSelectedTotalExpressionTypedDerivationExact as Derivation
 
 -- The proposition inspected by the executable checker is tied to the
 -- SAME original source environment and original recursive evaluator.
@@ -230,3 +231,72 @@ literalRegularPositiveDerivation :
       environment (Eval.regularIntegrand scalarData))
 literalRegularPositiveDerivation scalarData environment proof =
   compilePositiveDerivation environment proof
+
+-- Converse: EVERY original Typed.ExpressionInterval derivation of an
+-- expression entails strict positivity of every denominator in the
+-- SAME selected evaluator. This is proved by induction on the ACTUAL
+-- typed derivation; the equality of its denominator interval with the
+-- selected recursive result is supplied by the previous source
+-- derivation-identification theorem.
+
+positiveFromTypedDerivation :
+  (environment : Eval.BoxTrigEnvironment) →
+  ∀ {expression box} →
+  Typed.ExpressionInterval
+    (Eval.atomInterval environment) expression box →
+  AllDivisionsPositive environment expression
+positiveFromTypedDerivation environment (Typed.constant value) =
+  constantPositive value
+positiveFromTypedDerivation environment (Typed.trig atom) =
+  atomPositive atom
+positiveFromTypedDerivation environment (Typed.plus left right) =
+  addPositive
+    (positiveFromTypedDerivation environment left)
+    (positiveFromTypedDerivation environment right)
+positiveFromTypedDerivation environment (Typed.minus left right) =
+  subtractPositive
+    (positiveFromTypedDerivation environment left)
+    (positiveFromTypedDerivation environment right)
+positiveFromTypedDerivation environment (Typed.times left right) =
+  multiplyPositive
+    (positiveFromTypedDerivation environment left)
+    (positiveFromTypedDerivation environment right)
+positiveFromTypedDerivation environment
+  (Typed.quotient numeratorDerivation denominatorDerivation denominatorPositive) =
+  dividePositive
+    (positiveFromTypedDerivation environment numeratorDerivation)
+    (positiveFromTypedDerivation environment denominatorDerivation)
+    (subst
+      (λ b → 0ℚ < Eval.lower b)
+      (sym (Derivation.selectedTotalRecursionIdentifiesTypedDerivation
+        environment denominatorDerivation))
+      denominatorPositive)
+positiveFromTypedDerivation environment (Typed.negative proof) =
+  negatePositive (positiveFromTypedDerivation environment proof)
+
+-- The MAX-CUT closed logical equivalence:
+-- valid recursively evaluated original expression has a typed interval
+-- derivation iff the executable AllDivisionsPositive test returns yes.
+-- The 'no' branch is a constructively proven REFUTATION of any candidate
+-- Typed.ExpressionInterval derivation for that original expression and box.
+
+decideSelectedTypedDerivation :
+  (environment : Eval.BoxTrigEnvironment) →
+  (expression : Eval.DiagramExpression) →
+  Dec (Typed.ExpressionInterval
+    (Eval.atomInterval environment)
+    expression
+    (Eval.evaluateExpression Selected.selectedArithmetic
+      environment expression))
+decideSelectedTypedDerivation environment expression
+  with checkAllDivisionsPositive environment expression
+... | yes certificate =
+  yes (compilePositiveDerivation environment certificate)
+... | no refutation =
+  no (λ derivation →
+    refutation (positiveFromTypedDerivation environment derivation))
+
+-- This decides positive-domain TYPED CERTIFIABILITY of the given
+-- source intervals. It does not decide the correctness of physical
+-- trigonometric atom enclosures and cannot fill the original
+-- Wilson/ghost/Haar scalar source record.
