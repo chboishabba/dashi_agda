@@ -27,6 +27,7 @@ open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
 import DASHI.Core.GeneralizedRoleUnifiedDomains as Roles
+import DASHI.Core.FormalRole as Formal
 import DASHI.Governance.CyberneticClinicalInstitutionalRepairBridge as Governance
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Plural
 import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
@@ -188,7 +189,7 @@ negotiationChangesFeasibility : (t : Nat) →
 negotiationChangesFeasibility t = refl
 
 -- Explicitly keep selected philosophy / knowledge lenses source-bounded.
-cybersynOwner : Roles.RoleFamily
+cybersynOwner : Formal.RoleFamily
 cybersynOwner = Roles.cyberneticDomain
 
 systemFiveOwner : Governance.GovernanceGateRow
@@ -215,9 +216,9 @@ sameEcologicalObservationDoesNotFuseHistories =
   TwoEyed.sharedObservationDoesNotRecoverProvenance
 
 -- No unlicensed promotion from financial/policy signals to economic success.
-policySupportCannotProveViability :
+coupledSignalsCannotProveCertainCrash :
   Finance.CoupledSignalsImplyCertainCrashPermission → ⊥
-policySupportCannotProveViability = Finance.couplingDoesNotAutoProveCertainCrash
+coupledSignalsCannotProveCertainCrash = Finance.couplingDoesNotAutoProveCertainCrash
 
 yenAppreciationCannotProveGlobalCollapse :
   Yen.YenAppreciationImpliesGlobalCrisisPermission → ⊥
