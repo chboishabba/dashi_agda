@@ -180,6 +180,7 @@ def persist_original_p1(conn,path,codec):
         "repository":o["repository"],"revision":o["revision"],
         "source_path":o["original_source_path"],
         "declaration":o["declaration"],
+        "export_sha256":o["artifact_sha256"],
         "type_exact_sha256":sha256(exact).hexdigest(),
         "type_alpha_sha256":sha256(alpha).hexdigest(),
         "proof_exact_sha256":sha256(proof).hexdigest() if proof else None,
