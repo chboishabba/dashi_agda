@@ -1,0 +1,23 @@
+# Multi-secondary source and Smith high-power claim: exact numerical cuts (2026-11-12)
+
+## Original claim targeted
+The Kelly/Darrer compilation (source pp9–10 and 95) presents a Don Smith claim that **multiple pickup coils** may extract large outputs from one magnetic disturbance without diminishing it, with the difference supplied by **ambient background energy**. Keep this as a testable environmental-source conjecture. The same document pp55 and 60–61 suggests an R shunt across L1 as well as C, or across a step-down transformer primary in *different* circuits. These are **not all** Filsinger's stated 1/2/4 MΩ capacitor-bank shunts. The historical driver is not canonically ZVS.
+
+## Test 1: reciprocal coupled coils (local Python)
+`/mnt/data/smith_filsinger_maxcut/coupled_coils.py`: **12/12 PASS** in a linear model at hypothetical electrical 7.8kHz, one 15V RMS tuned primary (Lp=1mH, Rp=3Ω), N tuned secondaries (Ls=1mH, Rs=2Ω, Rload=100Ω, coupling k=.05), neglecting secondary-secondary mutual coupling. Reflected impedance adds `N*(ωM)^2/Zs` to the primary. At N=1: primary real input ~73.557W, useful load 1.388W, each secondary 0.11781A RMS. At N=10: primary real input ~62.697W, total useful load 10.083W, each secondary 0.10042A RMS. Each case satisfies `P_drive=P_load+P_primary_heat+P_secondary_heat` to roundoff. **Thus additional passive receiver loading is not independent of source behaviour** in this concrete reciprocal model. This does NOT disprove a physically distinct environmental port; it specifies where a measured independent source must enter.
+
+## Test 2: reactive energy vs output (local Python)
+`/mnt/data/smith_filsinger_maxcut/model.py`: **16/16 tests PASS**, including time-dependent energy integration under a driven parallel RLC with optional separately supplied environmental current source, storage, useful load, bleeder and internal loss. An illustrative steady 12W input model can circulate ~130.4 var while delivering only 10.643W real useful output, plus accounted heat. High reactive amplitude alone is not a gain certificate. Integrated conservation residual under ~6.5×10^-8J for selected 12ms simulation.
+
+## Test 3: 8kV ×20A ambiguous as *apparent* output
+The compilation's Figure 6 **claims** 8kV ×20A out, 12V ×1A in. The product 160000 **VA** does not establish 160000 **W** unless 8kV,20A are simultaneous appropriate output measurements of the SAME load with power factor 1 (and the input 12W is real). If so, external-energy input or storage-depletion minimum is 159988W before losses; lasting 60s requires 9,599,280J. For a sinusoidal AC same-port case, `P_real=VI cosφ`; a 12W real output at 160kVA would require `cosφ=.000075`, phase ~89.9957°. This is NOT an inferred real power factor for the original device, only an underdetermination countercase. `/mnt/data/smith_filsinger_maxcut/power_claim.py`: **8/8 tests PASS**.
+
+## Test 4: source-specific topology, not one 'Smith device'
+`/mnt/data/smith_filsinger_maxcut/source_graph.py`: **8 structural checks PASS** and catalogues 123 figure captions from the user-supplied 147-page PDF. Five **functional** graph variants preserve Smith loaded plates, two suitcase diagrams, Filsinger Earth setup and proposed portable receiver. The catalog is source indexing, **NOT** proof that 123 individual electric circuits have been fully translated or tested. Actual pin-level figure interpretation and same-object Filsinger mapping remain unpaid.
+
+## Correct source hypothesis
+`P_earth + P_atmos + P_RF + P_particle = P_useful + P_loss + dU/dt - P_drive`.
+Only after actually measuring all terms and controlling external interfaces may the net residual be attributed to any particular physical mechanism. The conventional multi-coil/driver and RLC models can reproduce important behaviours without new input. In an alternative explicitly powered environmental model, extra real output appears **only alongside extra source work**. That is source attribution, not circular rejection.
+
+## Highest-alpha unpaid gates
+P0: original source-selected terminal-level circuit for a specified figure, and identify whether Filsinger is implementing it rather than just its broad principle. P0: capture electrical switching vs acoustic modulation, actual metered source/input and shunt terminal values. P1: finite conductivity + Maxwell/Poynting port flux on actual geometry, including ground/atmospheric/RF/particle source. P1: nonlinear driver and diode/capacitor bank real-power model. P1: high-voltage safe lab evidence for same-load current, voltage, phase and output duration. P2: Agda kernel verification; no Nix/Agda installed in current runtime and no verified kernel receipt was fabricated.
