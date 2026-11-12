@@ -19,8 +19,7 @@ module DASHI.Physics.YangMills.BalabanT4TightRangeDoesNotDetermineIntegralExact 
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Unit using (⊤; tt)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 
 data Site4 : Set where
   s0 s1 s2 s3 : Site4
@@ -108,7 +107,7 @@ noExactIntegralFromTightRangeAlone estimator universal =
       (sameSymmetric
         (sameTransitive
           (universal smallMassField smallMassRange)
-          (sameSymmetric smallIntegralExact)))
+          smallIntegralExact))
       (sameTransitive
         (universal largeMassField largeMassRange)
         largeIntegralExact))
