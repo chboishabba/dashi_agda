@@ -11,6 +11,7 @@ open import Data.Empty using (⊥)
 
 import DASHI.Governance.CybersynGlobalViabilityMaxCutExact as Cyber
 import DASHI.Core.IntergenerationalPlanningHorizonExact as Future
+import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Economics.AIGlobalFundingRegulatorySynthesisExact as Finance
 import DASHI.Economics.GeopoliticalEnergyAITreasuryTransmissionExact as Geo
 
@@ -142,11 +143,18 @@ housingUse : AllocationCase → Nat
 housingUse housingCase = skilledHoursHousing housingPriority
 housingUse dataCentreCase = skilledHoursHousing dataCentrePriority
 
+sameAnnouncement : announced housingCase ≡ announced dataCentreCase
+sameAnnouncement = refl
+
+differentHousingUse : housingUse housingCase ≡ housingUse dataCentreCase → ⊥
+differentHousingUse ()
+
 announcementCannotFixHousingUse :
-  (f : AggregateAnnouncement → Nat) →
-  ((c : AllocationCase) → housingUse c ≡ f (announced c)) → ⊥
-announcementCannotFixHousingUse f proof with proof housingCase | proof dataCentreCase
-... | refl | ()
+  NonFactor.FactorsThrough announced housingUse → ⊥
+announcementCannotFixHousingUse =
+  NonFactor.witnessRulesOutEveryFlatFactorisation
+    (NonFactor.nonFactorabilityWitness
+      housingCase dataCentreCase sameAnnouncement differentHousingUse)
 
 -- Requiring all seven generations is stronger than endpoint inspection.
 sevenSafe : (Future.Generation → Bool) → Bool
