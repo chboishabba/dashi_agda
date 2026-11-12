@@ -17,7 +17,7 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using
-  (ℚ; 0ℚ; 1ℚ; _/_; _≤_; _<_)
+  (ℚ; 0ℚ; 1ℚ; _/_; -_; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
@@ -33,7 +33,7 @@ rawSquare : Eval.RationalInterval
 rawSquare = Typed.multiplyInterval originalInner originalInner
 
 rawSquareLowerIsNegativeOne :
-  Eval.lower rawSquare ≡ ℚ.- 1ℚ
+  Eval.lower rawSquare ≡ (- 1ℚ)
 rawSquareLowerIsNegativeOne = refl
 
 rawSquareUpperIsOne :
