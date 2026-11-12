@@ -194,7 +194,7 @@ class WorldScenarioHandoffTests(unittest.TestCase):
                 "authority_status": "unresolved",
                 "empirically_admitted": False
             })
-        world_raw = b"".join(world.canonical(row) + b"\\n" for row in world_rows)
+        world_raw = b"".join(world.canonical(row) + b"\n" for row in world_rows)
         world_manifest = {
             "schema": "dashi-cybersyn-observation-snapshot-v1",
             "dataset_id": "joined-observations", "version": "1",
