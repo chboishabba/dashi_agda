@@ -82,3 +82,164 @@ lake env lean Synthesis/RiemannContinuousFifthMomentSignAudit.lean
 ```
 
 The tools were absent in the current execution container, so the two new Agda proof sources and the Lean donor remain **SOURCE-WRITTEN / GITHUB READBACK** until their exact pinned kernels check. No new `postulate`, `sorry`, unsolved meta, axiom escape, or Clay-terminal theorem has been added. Previous static scans are not a substitute for the transitive axiom audit.
+
+
+## 12 November follow-up — live cross-PR audit of ALL six unsolved Clay endpoints
+
+This paragraph supersedes any earlier static summary when newer branch heads contain
+source-written advances. PR heads continue changing; record exact commits with
+local kernel receipts before promoting any theorem.
+
+### Yang–Mills — latest source donors, not five physical closures
+
+* Agda #1444 (`research/ym-voyager2026-completeness-crosswalk-20261101`)
+  now contains original 1024-bond full Wilson fibre-density/recomposition,
+  source-selected finite positive partition/Bishop-apartness transport
+  (`YMClayP0OriginalPartitionBishopApartnessExact` conditional on
+  `OriginalWilsonToBishopScalarWeld`), three-moment original R445-vs-bare
+  quantitative covariance compiler
+  (`YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact`),
+  original selected variable-cutoff cylinder-limit compiler,
+  and a strict non-promotion negative control for mere O(1/k)
+  adjacent RG increments. The latter are non-summable without a stronger
+  bound, and even source-independent diminishing increments cannot
+  manufacture Wilson projective consistency.
+* The existing D2 finite 3-mode no-go, now strengthened with
+  `noUniformPositiveReciprocalGapCertificate` in the SAME owner,
+  distinguishes an invisible non-vacuum mode from a different defect:
+  countably many positive modewise rates 1/(n+1) do not admit a common
+  positive lower spectral bound even when their finite span is dense.
+  The newly added native lemma proves the denominator-cap contradiction;
+  the l2 spectral illustration is a mathematical explanatory model, not
+  the actual interacting OS Hamiltonian. Local Agda receipt pending.
+* Agda #1498 (later than the previous P0 ledger) has
+  `BalabanClayT4RefinedSineSquareRegularBoxesExact` and
+  `BalabanClayT4RefinedOriginalWilsonBishopEnvironmentExact`: true
+  Bishop sine-value membership implies source-faithful **UNSHIFTED**
+  Wilson hat-momentum interval soundness and positive rational lower
+  interval endpoint for every regular box. The original membership
+  assumptions are NOT supplied merely by a grid code. Shifted q+p
+  propagators, tensor-to-scalar source, physical scalar symmetries,
+  numerical Hessian/error/volume integral certificates remain OPEN.
+  The old universal 2m sine-square bound must not be marked physical.
+* Sibling Agda #1479 adds source-recursive typed positive division and
+  Bishop semantics: reuse its checker rather than writing a second
+  backend or inventing per-quotient proofs. A real branch weld is still
+  required before importing it into #1498.
+* The canonical #1444 five-phase ledger remains PH0–PH4 / YM01–YM10;
+  23 physical producers refine those targets. Actual E1, D1, D2, N1
+  and G1 all remain OPEN; the R578 seven-family scheduler and R581–R583
+  finite OS/selected H1 compilers are paid *conditionally*, not as
+  original physical estimates.
+
+### Exact attached-claim countercalculations
+
+1. **RH local sign.** A zero at beta+i gamma gives horizontal log-curvature
+   contribution `-1/(sigma-beta)^2` at t=gamma. At |sigma-beta|=1/3,
+   it equals -9, disproving the attachment's **lower** bound -4.
+   The inequality reverses: for horizontal distance <=1/2,
+   -1/distance^2 <= -4. The claimed
+   `log(t/(2*pi))/(2*pi)-4>0` requires
+   `t > 2*pi*exp(8*pi)`, not `t>14.13`.
+2. **RH Route B:** the attachment's
+   `sum_k mu(k)(gamma_k^5-E[gamma^2]gamma_k^3)e^{-2gamma_k^2 t}`
+   has NOT been identified with the original Lean
+   `signedFifthCorrelationGapAt` / physicalCapInterior. The
+   `mu`, normalization and expectation are not sourced. If the
+   expectation is a positive average over gamma_k>=gamma_1,
+   then `E[gamma^2]>=gamma_1^2`, so the asserted first coefficient
+   is nonPOSITIVE, the reverse of the sketch's claimed sign.
+   Eventual positivity also does not imply positivity for ALL t>0.
+3. **NS Periodic B:** fundamental-domain *opposite faces* cancel;
+   arbitrary INTERNAL cutoff boundaries need not. Example on the
+   torus: u=(sin y,sin x,0), p=0 is smooth/divergence-free, and
+   `div((|u|^2/2)u)(pi/4,pi/4)=sqrt(2)/2>0`; an interior small
+   box has a nonzero boundary flux. A claimed torus
+   `dist(x,Sigma)^(-3)` tail does not cure the missing R736 estimate.
+4. **NS R829:** BKM is a **conditional criterion**, requiring the
+   time integral of spatial supremum vorticity, not a source-free
+   conclusion from Leray energy. Neither a Morrey small collar
+   (chosen in response to an uncontrolled norm) nor an instantaneous
+   negative rate is a global continuation theorem.
+5. **YM quadrature:** the displayed second-order `M*diam²/24`
+   error requires *centered midpoint nodes* on axis-aligned symmetric
+   boxes and actual smoothness/Hessian hypotheses. Without midpoint
+   nodes, `f(x)=x` on [0,1] has Hessian 0 but endpoint sample 0
+   and exact integral 1/2. The correct Taylor remainder proof is
+   obtained by integrating `f(x)-f(c)-Df(c)(x-c)` over each symmetric
+   cell: the linear term vanishes, and
+   `|error| <= M/24 * Volume * sum_i h_i^2` for cell side lengths
+   `h_i`. This is a mathematical lemma template; selected physical
+   original four-integrand Hessian majorants remain absent.
+6. **YM D2:** density of a positive-time cylinder span does not
+   alone imply a positive spectral gap. The countable selfadjoint
+   diagonal model `H e_n= e_n/(n+1)`, `H Omega=0` on l2 has
+   dense finite-support tests and individually positive decay rates
+   tending to zero. Need one **uniform bound** on SAME reconstructed
+   nonvacuum sector, not just density. Its integer denominator-cap
+   no-go is source-written in #1444.
+7. **YM E1/N1/G1:** a prescribed running `g^2(a_k)~1/k`
+   fixes neither a coherent interacting continuum measure nor
+   scale-uniform Wilson three-moment discrepancy, genuine four-point
+   remainder, or full compact-simple-group estimates. A positive
+   one-loop beta coefficient is not an implication to these gates.
+
+The additional independent test runner
+`scripts/check_clay_latest_attached_maxcut_20261112.py` contains nine
+negative-control groups. A matching stand-alone local reference runner
+completed all nine; the GitHub blob still needs an exact checkout replay.
+None of these mathematical negative controls is a Clay solution.
+
+### Other Clay projects checked, outside attachment's four
+
+* **P vs NP:** newest Agda #1474 contains source-written physical bit-tape,
+  positive-threshold bit-width bound, and a fail-closed local
+  `referee_karp21_maxcut.sh kernel-cut` workflow. Its owner explicitly
+  states F2 peak allocation, F1/F3/F4 machine simulation/clock,
+  `PR.InNP`, E20/Cell-Bits, other reductions and universal `SATNotInP`
+  remain OPEN, **not** 21 verified NP-completeness results.
+* **BSD:** Lean #107 now owns actual geometric E[2] Galois-equivariance,
+  Ebar doubling continuous TopRep and a concrete two-way rational-curve
+  vs area-one right triangle weld; rank-zero is conditional on a
+  missing formally proved infinite descent. Still open all-place
+  cohomological Kummer/Sha(E)[2], genuine L(E,1) same-curve
+  modular/Mellin identity and nonvanishing, odd-primary/leading
+  coefficient and universal BSD. The Lean v4.35-v4.28/mathlib mismatch
+  is an explicit *verification* blocker, not an analytic theorem.
+* **Hodge:** Lean #40 merged genuine scheme-level algebraic cycle
+  pushforward/automorphism donors. Actual P1 x P1 cycle-class action
+  and primitive general Hodge algebraicity are OPEN.
+* **External NS C:** Lean #109 still leaves four literal R3 Fefferman-C
+  representation leaves and the finite-energy scalar-to-vector norm
+  bridge (after adding same-solution smoothness); the attachment's
+  torus weak-Leray dictionary does NOT inhabit these R3 leaves.
+* **RH:** Lean #50 A1 shell/curvature, A2 strict debt/compensation,
+  Route B boundary/sign/limit are still real analytic source leaves.
+  Lean #108 audits a different continuous even-moment functional.
+
+### Required next outputs rather than more wrappers
+
+1. Agda: run the exact #1444 D2 negative-control owner and imported
+   source closure with pinned Agda 2.9; check transitive postulates
+   and do NOT equate a proof under `RealAnalysisAxioms` with a
+   constructive Bishop theorem.
+2. Agda #1498: source-inhabit original four-diagram Wilson/ghost/Haar
+   scalar and its tensor-to-beta projection; then test true
+   external-momentum covariance and shifted denominator positivity.
+   Only then produce four actual midpoint/Hessian/volume/error
+   quadrature certificates.
+3. Agda #1444: pay ORIGINAL cutoff-dependent bounded three-moment
+   estimates with a genuinely summable physical scale/UV/IR budget,
+   original full Wilson small+large field, and same-S_OS dense
+   nonvacuum spectral bound. Physical G1 and N1 remain independent.
+4. Lean #109: close *literal R3* five transport leaves; local
+   exact-head typecheck + `#print axioms`. Avoid importing a
+   torus weak-solution result as an R3 theorem.
+5. Lean #50: decide A2 strict residual sign and/or A1 summation
+   source; Route B must use its original `physicalCapInterior`.
+6. Agda #1474 / Lean #107: local native kernel verification at the
+   pinned original toolchains, while retaining their independent
+   mathematical P!=NP and universal BSD obstructions.
+
+No new endpoint is promoted. Full original source/physical authority,
+Agda golden local kernel and Lean cross-prover transport remain distinct.
