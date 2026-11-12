@@ -285,6 +285,56 @@ originalLiteralSemanticOneGeneratorTransport {scalarData = scalarData} dataSet g
         (originalAtomsForGenerator dataSet generator cell))
       (Eval.regularIntegrand scalarData))
 
+
+------------------------------------------------------------------------
+-- SAME GENERATOR, TWO PRE-EXISTING SOURCE ACTIONS.
+-- Action.act and Orbit.act use independent flipInterval definitions;
+-- extensional equality is required on an abstract GridCell4.
+------------------------------------------------------------------------
+
+canonicalActionIsOrbitAction :
+  ∀ generator cell →
+  Action.act generator cell
+    ≡ Orbit.act (Four.asOrbitGenerator generator) cell
+canonicalActionIsOrbitAction Action.flip0
+  (Grid.gridCell4 Grid.negativeOuter b c d) = refl
+canonicalActionIsOrbitAction Action.flip0
+  (Grid.gridCell4 Grid.negativeInner b c d) = refl
+canonicalActionIsOrbitAction Action.flip0
+  (Grid.gridCell4 Grid.positiveInner b c d) = refl
+canonicalActionIsOrbitAction Action.flip0
+  (Grid.gridCell4 Grid.positiveOuter b c d) = refl
+canonicalActionIsOrbitAction Action.flip1
+  (Grid.gridCell4 a Grid.negativeOuter c d) = refl
+canonicalActionIsOrbitAction Action.flip1
+  (Grid.gridCell4 a Grid.negativeInner c d) = refl
+canonicalActionIsOrbitAction Action.flip1
+  (Grid.gridCell4 a Grid.positiveInner c d) = refl
+canonicalActionIsOrbitAction Action.flip1
+  (Grid.gridCell4 a Grid.positiveOuter c d) = refl
+canonicalActionIsOrbitAction Action.flip2
+  (Grid.gridCell4 a b Grid.negativeOuter d) = refl
+canonicalActionIsOrbitAction Action.flip2
+  (Grid.gridCell4 a b Grid.negativeInner d) = refl
+canonicalActionIsOrbitAction Action.flip2
+  (Grid.gridCell4 a b Grid.positiveInner d) = refl
+canonicalActionIsOrbitAction Action.flip2
+  (Grid.gridCell4 a b Grid.positiveOuter d) = refl
+canonicalActionIsOrbitAction Action.flip3
+  (Grid.gridCell4 a b c Grid.negativeOuter) = refl
+canonicalActionIsOrbitAction Action.flip3
+  (Grid.gridCell4 a b c Grid.negativeInner) = refl
+canonicalActionIsOrbitAction Action.flip3
+  (Grid.gridCell4 a b c Grid.positiveInner) = refl
+canonicalActionIsOrbitAction Action.flip3
+  (Grid.gridCell4 a b c Grid.positiveOuter) = refl
+canonicalActionIsOrbitAction Action.swap01
+  (Grid.gridCell4 a b c d) = refl
+canonicalActionIsOrbitAction Action.swap12
+  (Grid.gridCell4 a b c d) = refl
+canonicalActionIsOrbitAction Action.swap23
+  (Grid.gridCell4 a b c d) = refl
+
 -- Existing source paths, no alternative orbit geometry.
 originalLiteralSemanticPathTransport :
   ∀ {expressions ward scalarData arithmetic environment} →
@@ -300,7 +350,8 @@ originalLiteralSemanticPathTransport :
     (Eval.regularIntegrand scalarData)
 originalLiteralSemanticPathTransport dataSet Action.pathRefl = refl
 originalLiteralSemanticPathTransport dataSet
-  (Action.pathStep generator cell) =
+  (Action.pathStep generator cell)
+  rewrite canonicalActionIsOrbitAction generator cell =
   originalLiteralSemanticOneGeneratorTransport dataSet
     (Four.asOrbitGenerator generator) cell
 originalLiteralSemanticPathTransport dataSet
