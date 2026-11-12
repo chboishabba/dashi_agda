@@ -24,7 +24,8 @@ def project(manifest: Path, declaration: str, spool: Path):
     pending=pending_from_manifest(manifest)
     if declaration != pending.declaration:
         raise ProjectionError("requested declaration differs from original handoff")
-    candidates=extract_candidates(pending.artifact)
+    candidates=extract_candidates(
+        pending.artifact,selected_names=frozenset((declaration,)))
     matches=[c for c in candidates if c.name==declaration]
     if len(matches)!=1:
         raise ProjectionError("selected original declaration absent or ambiguous")
