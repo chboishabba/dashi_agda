@@ -551,3 +551,49 @@ Preserve output and first type error. Do not rerun when a separate kernel-check 
 ### Post-ledger implementation extension: finite block-batch refinement transport
 
 Agda source `DASHI/Reasoning/FederatedStreamingBlockRefinementFiniteExact.agda` additionally provides `mapResult` and `blockBatchRefinementPreservesReference` for arbitrary finite lists of independently proven source-equivalent refinement values (commit `133599d88ec8df0bf3320bf377add3e1780311ce`). This materially strengthens the conditional SBD04 specimen from a single proposal to a batch, **without assuming tokenwise independence of the actual denoising neural network**. It only preserves results when the required per-element equalities are supplied; proving the original model has that property is still OPEN. Requires local Agda kernel receipt.
+
+## 2026-11-12 next cut: native-GPU selected-expert streaming, original source interface
+
+**User-run verification admitted:** original published `origin/master` at `ba6af7cd2` — **12/12** synthetic scheduling tests PASS; Agda 2.9 `FederatedStreamingBlockRefinementFiniteExact.agda` kernel PASS, recorded by user in `artifacts/federated_streaming_block/agda29-parallel-20261112-212131-DASHI__Reasoning__FederatedStreamingBlockRefinementFiniteExact.agda.log` of the isolated topology worktree. Thus SBD01–04 finite witnesses are verified; **general source, physical WAN and diffusion-model gates stay OPEN**.
+
+### Native-GPU implementation, without ROCm rebuild
+
+New native source experiment on `chboishabba/LeechTransformer` PR #4 branch `experiment/consumer-preserving-multiscale-codec-20261031`:
+- `scripts/native_streamed_selected_experts.py`, integrated with the existing Schaka ROCm 10.1 launcher `scripts/run_native_schaka101_lila.sh` and original `HistoryOrbitMoE.execute_selected`.
+- Loads exact **dense teacher + full MoE student** checkpoints and real token-ID windows via existing `load_pair`; captures the actual selected teacher's layer normalized activation and computes source-owned expert routing/weights from `HistoryOrbitMoE.step`.
+- Captures a **finite independent microbatch** from each token row's first normalized position, with **explicit zero initial history for every row**; captures original source expert output and selected updated histories. This is real checkpoint-derived expert compute, not complete autoregressive stateful generation or an existing trained diffusion denoiser.
+- Pins CPU copies of the admitted activation, selected IDs, selected histories and source weights, then compares **sequential CUDA H2D copy+selected expert compute** with **two-stream asynchronous H2D staging + GPU selected-expert compute**; bounded in-flight queue, CUDA events for dependencies, actual event completion before observation. Both alternatives execute the *same* selected GPU expert math and compare with source outputs/history under explicit tolerances.
+- Records repeats in alternating sequential/pipeline order, actual elapsed seconds, microbatch/s, row/s, staged bytes/s, allocator peak allocated/reserved and full source checkpoint/token SHA-256. Distinguishes source preparation time (outside timing), actual GPU workload, and PCIe-only staging from physical WAN/network, end-to-end tokens/s, production distributed execution or teacher-free quality. No CPU GEMM fallback, no new ROCm qualification.
+- `tests/test_native_streamed_selected_experts.py` exercises actual selected-source parity and refusal for duplicate IDs on CPU-constructed unit data; these tests are code-written, not yet run by user. A GPU run has **not** yet been observed.
+
+**Run a bounded native-GPU experiment** with real existing source paths; do not use `c2_layer1.pt` if it is merely an adapter rather than a full trained MoE student checkpoint:
+```bash
+cd /path/to/LeechTransformer
+git fetch origin
+git switch experiment/consumer-preserving-multiscale-codec-20261031
+git pull --ff-only
+# Unit tests (no GPU performance assertions):
+python3 -m unittest tests.test_native_streamed_selected_experts -v
+# On the already-working Schaka 10.1 native GPU wrapper:
+bash scripts/run_native_schaka101_lila.sh \
+  --module scripts.native_streamed_selected_experts -- \
+  --teacher /actual/teacher.pt --student /actual/full_student.pt \
+  --config /actual/config.json --token-ids /actual/real_tokens.npy \
+  --layer 1 --batch 2 --max-rows 16 --queue-depth 2 --repeats 3 \
+  --output /mnt/truenas/comet-net/experiments/lila_streamed_selected_20261112/receipt.json
+```
+The paths `/actual/...` are **placeholder** paths and must be substituted with the previously used real checkpoint, student, tokenizer and config paths, preserving identity; do not invent physical inputs. The output directory must be fresh and no competing GPU jobs should share the card. The command is a runnable **bench only**; it is not a background service, training launcher or live federation. Source-written only until host receipts arrive.
+
+### Exact delta to existing maximum-cut ledger
+
+No additional named programme lemma IDs; these implementations contribute partial *source-interface* witnesses to:
+- **SBD01/TNET08:** actual native CUDA copy/compute pipeline, queue depth, event completion and synchronisation. **Open:** measured useful overlap and general multi-device critical path, WAN RTT/throughput, network packet dispatch.
+- **SBD02/TNET02:** finite in-flight queue and real CUDA allocator peak measurement. **Open:** multi-peer RAM/VRAM/workspace reservations and failure-aware backpressure.
+- **SBD03/N01/N07/N12:** selected history source update equality for independent zero-initial-history microbatches. **Open:** authenticated, ACKed, durable *recurrent* signed history with reordering/retry/peer failure.
+- **SBD04/TNET04/TNET13/GPN07:** actual source-owned IDs and weights paired with `execute_selected`, compare output and updated selected histories on same HIP device. **Open:** whole-model tensor/denoiser source BIDI, full top-k traces and trained diffusion model.
+- **SBD05:** asynchronous iterative denoising convergence still **OPEN**. No iterative denoising is yet implemented.
+- **SBD06/PERF07–08:** matched AR microbatch/copy throughput receipt pending. Diffusion-vs-AR resource Pareto remains **OPEN**.
+
+**Next after a passing same-GPU receipt:** add an authenticated two-process/two-device transport using original `federated_authenticated_session.py` and JQ1 selected-state packets, with acked generations and original observer equality; then measure actual WAN/local-link latency overlap on real remote GPU peers. Independently implement a truly trained block-diffusion model and measure its quality/iterations; do not conflate AR microbatch streaming with diffusion training.
+
+**Programme scope:** remains **106 named roadmap targets** from the previous ledger, including 6 SBD targets. Native LILA quality negative controls (dense dev CE 2.216053, C2 gated dev CE 2.564707, strict C2 student-only heldout CE 11.565138) remain unchanged. These new GPU streaming executors are not yet an improvement claim.
