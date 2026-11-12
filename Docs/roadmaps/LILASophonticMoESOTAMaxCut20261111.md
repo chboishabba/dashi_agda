@@ -501,3 +501,49 @@ The bracketed arguments are placeholders referring to previously user-executed r
 **Ledger accounting:** previous 92 planning names + eight PERF targets = **100 named obligations**, not 100 independently unpaid or kernel-accepted theorems. The finite Agda topology accepted by the user and the real native-GPU training are both genuine progress; neither proves the original training/quality advantage or physical federation performance.
 
 **High-alpha next experiment:** Preserve the actual 45 fit rows and model versions; inspect the existing full TrueNAS receipts for matched loss/epoch traces and known token lengths; run a **single bounded same-data native GPU paired dense/C2 timing experiment with progress enabled**, then prioritise improving strict student-only CE 11.565138 before attempting SSD/remote expert throughput comparisons. The quality gap is a first-class blocker, not an artefact that networking should disguise.
+
+## 2026-11-12 maximum cut — streaming overlap, bounded queues, and block-refinement federation
+
+**Scope and mathematical correction.** Streaming *hides* independent network transfer behind other computation; it does NOT erase the causal path, queueing, WAN round-trip or synchronous denoising barriers. Model throughput, first-token latency, completed-block latency and energy separately. For an ideal two-stage steady-state system, a new independent item's interval is `max(transfer,compute)`; startup still needs `transfer+compute`. Arbitrary actual network and parallel multi-worker graphs require dependency-safe schedules and bandwidth/arrival assumptions, not this identity alone. In particular, block diffusion creates parallel candidate positions but may require multiple serial denoising rounds; no proof says diffusion universally outruns AR.
+
+**New finite Agda owner:** `DASHI/Reasoning/FederatedStreamingBlockRefinementFiniteExact.agda` at commit `b47fc1df2e64a5d580405d25048ba684d0bc5d65`. The module provides: (i) concrete 8-unit transfer + 20-unit compute; first completion 28, pipelined three-item completion 68 versus sequential 84, steady-state interval 20, and bandwidth bottleneck negative example; (ii) intrinsically capacity-2 queue with enqueue/dequeue and explicit reject on full/empty; (iii) distinct immutable model revision, mutable history generation and block refinement generation, with stale cases rejected; (iv) conditional worker-reference refinement equality under per-input proof. **Agda module is SOURCE-WRITTEN, not yet kernel accepted by the user**. These are finite proof specimens, not a source-bound LILA denoiser.
+
+**Executable scheduling specimen:** `scripts/federated_streaming_schedule_gate.py`, committed `7ac44144818767e88096534ccff0679018739323`, provides deterministic transfer/compute schedules, bounded queue backpressure and 12 synthetic test cases including causal-arrival/bandwidth negative controls and revision rejection. A locally developed equivalent executable was run with **12/12 tests passing**, including correction of a mistaken backpressure expectation; do not upgrade the newly committed repo copy to an independently verified check until run on user checkout. Its receipt explicitly declares no GPU, no network measurement, no diffusion-trained model, and no whole-model proof. Focused runner `scripts/check_federated_streaming_block.sh` at commit `56d3a1adf83cb89a08411f35a9f50e4830771ff9`; no Docker, no CI, no new ROCm qualification. It runs synthetic tests then the Agda proof using the existing local Agda installation, without unrelated Nix zkperf.
+
+### New streaming/block-diffusion exact lemma and deliverable ledger
+
+| ID | Alpha | Exact lemma / deliverable | Result and remaining physical weld |
+|---|---|---|---|
+| SBD01 | P0 | `streamingOverlapCriticalPathBound` | **Finite witness written:** 8+20 startup and 20-unit independent stream interval. **OPEN generally:** arbitrary DAG, RTT/bandwidth, arrival constraints, truly overlapping compute/transfer kernels, actual peer traces |
+| SBD02 | P0 | `federatedPipelineQueueBounded` | **Finite witness written:** capacity-2 intrinsic queue saturation and empty/full rejects. **OPEN generally:** multi-peer resource budget, GPU memory reservations, bounded producer/consumer execution under failures |
+| SBD03 | P0 | `denoisingHistoryRevisionConsistent` | **Finite witness written:** exact version-generation admission plus stale reject. **OPEN generally:** authenticated protocol, persistent full C2/C3 signed history, per-block/iteration exactly-once commits |
+| SBD04 | P0 | `blockDiffusionExpertBatchSound` | **Conditional finite lemma written:** worker reference refinement equality preserves admitted value. **OPEN:** actual trained diffusion denoiser, transition kernel, tokenizer, mask schedule, source-expert tensor execution, numerical bound |
+| SBD05 | P1 | `asynchronousRefinementConvergence` | **OPEN:** chosen denoising/update rule and contraction, bounded staleness, fairness, cancellation and counterexample for unsynchronised noncontractive transitions; cannot assert convergence from admission alone |
+| SBD06 | P1 | `federatedDiffusionVsARResourcePareto` | **OPEN:** matched native-GPU prefill and block-generation throughput, latency, quality/task performance, iterations, bandwidth, per-worker RAM/VRAM and energy; no reuse of AR CE as diffusion training loss |
+
+**Planning-count update:** previously 100 + 6 new SBD targets = **106 named ledger obligations**, which are programme gates, not 106 unpaid proof theorems. Each gate is explicitly split into finite specimen, original-source weld and hardware/empirical receipt. Previous 14/14 topology CPU and three Agda-2.9 finite modules remain user-accepted separately; do not count the new streaming module as kernel accepted until run.
+
+### Updated phase-by-phase deliverables / dependencies
+
+- **Phase 0 — Original source and identity:** retain Kornienko original dense/LILA weights and C2 history, source tensor shape, checkpoint/token provenance. New requirement: diffusion architecture is a separate student with a real objective and corrupt/refine transition; not a decoding reinterpretation of an AR checkpoint. Dependencies A01/TNET05/SBD04.
+- **Phase 1 — Finite proof and scheduling bridge:** existing 3 Agda topology modules accepted; **check new Agda finite streaming module** and executable 12-case scheduling specimen; generalise communication schedule, backpressure and generation state. Deliver SBD01–03 source/Agda receipts, TNET01/TNET08 donor interface.
+- **Phase 2 — Native GPU AR streamed baseline:** use supplied Schaka ROCm 10.1 on RX 580 and already trained C2/dense checkpoints; first run instrumented native AR model with *true asynchronous microbatching* (work that is independently ready) and a measured stalled/no-overlap negative control. Record GPU steps/s, completed tokens/s, PCIe/network transport, queue pressure and exact same quality. Native GPU runtime requalification is off the critical path. Dependencies PERF01–05, SBD01/02 source integration.
+- **Phase 3 — Diffusion-trained branch:** implement separate diffusion tokenizer/corruption/masking schedule, iterative block denoiser and its actual native GPU training; evaluate original source-bound signed-history step changes and source-selected expert batching. Deliver SBD04 and explicit denoising iteration count; preserve AR control and failed historical C2 teacher-free quality.
+- **Phase 4 — Multi-miner federation:** actual selected expert remote GPU compute on two or more workers, ACKed block/history generations, failover, bounded queues, dynamic retry/revision and multiple parents. Deliver SBD03/SBD05 when justified, N01–N16/TNET04/07/10/13/16; do not infer from finite queue examples.
+- **Phase 5 — Native quality/resource Pareto:** compare matched (a) AR dense, (b) AR C2, (c) microbatched streaming AR C2, (d) trained block diffusion and (e) federated streaming block diffusion; measure same evaluation tasks, quality, model/storage bytes, p50/p95/p99 tail, tokens/s, GPU/RAM peak, energy and all physical network bytes. Deliver SBD06/PERF07–08, plus source-wise attribution. AR CE and denoising loss must never be naively compared.
+- **Phase 6 — End-to-end BIDI and promotion:** original source ↔ Agda ↔ native GPU kernel ↔ authenticated per-worker packet ↔ history reconciliation ↔ observed quality/latency, no skipped source bindings. Deliver F02, TNET16, SBD01–06 physical/source closures as earned.
+
+**New max-cut priority:** `new Agda kernel + scheduler receipt` → `native-GPU streaming AR same-checkpoint baseline` ∥ `original tensor partition/quality diagnosis` → `real block-diffusion model+training` → `multi-peer revision-safe streaming` → `quality/resource Pareto` → `whole-model BIDI`. The already measured dense development CE 2.216053, C2 gated 2.564707 and strict C2 student-only heldout 11.565138 remain baseline negative controls; adding a diffusion branch is an independent research hypothesis, not a way to relabel those scores.
+
+**Focused local test:**
+
+```bash
+cd /home/c/Documents/code/dashi_agda-master-topology
+git fetch origin
+git pull --ff-only
+bash scripts/check_federated_streaming_block.sh --cpu-only
+# In the already working Agda-2.9 environment (do not rebuild ROCm):
+bash scripts/check_federated_streaming_block.sh --kernel
+```
+
+Preserve output and first type error. Do not rerun when a separate kernel-check service is actively using that worktree; preserve the user's dirty original checkout. No background execution or native GPU run was performed by this authoring change.
