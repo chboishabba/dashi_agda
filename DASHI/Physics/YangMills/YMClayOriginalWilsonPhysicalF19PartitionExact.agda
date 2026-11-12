@@ -53,3 +53,60 @@ module _
         theory source bilateral
         (Original.physicallySortedWilsonWeight
           theory traceData exponential beta))
+
+  ----------------------------------------------------------------------
+  -- P0.E SAME-OBJECT PHYSICAL PARTITION ENDPOINT.
+  --
+  -- The existing original canonical 1024-bond sorter already proves
+  -- originalFinePhysicalPartitionEqualsNestedF19, and the source F19
+  -- arbitrary-weight Haar theorem already proves general 64-pair
+  -- disintegration. Their direct composition gives the TRUE original
+  -- fine Wilson partition as one coarse Haar integral of the
+  -- constructed full physical effective density.
+  --
+  -- No additional positive-mass assumption, redefined Wilson action,
+  -- factorized Gibbs weight, real division or independent coarse
+  -- measure occurs. All existing sources still require local Agda
+  -- acceptance; this is NOT a UV residual/continuum mass-gap proof.
+  ----------------------------------------------------------------------
+
+  originalFullInteractingEffectiveDensity : Vec.Vec Link 64 → ℝ
+  originalFullInteractingEffectiveDensity =
+    Fibre.originalAllPairsEffectiveDensity
+      theory source bilateral
+      (λ pairs →
+        Haar.productIntegral source
+          (λ spectators →
+            Original.physicallySortedWilsonWeight
+              theory traceData exponential beta
+              (F19Physical.originalPairsAndSpectators
+                pairs spectators)))
+
+  -- This is a source-written direct producer of the missing
+  -- canonical-fine-to-actual-effective PARTITION identity.
+  -- It reuses M.01/M.02 and F18/F19 instead of introducing a new
+  -- finite permutation or an assumed density-transport record.
+  originalFinePhysicalPartitionEqualsActualEffectivePartition :
+    Haar.productIntegral source
+      (Original.originalWilsonVectorWeight
+        theory traceData exponential beta)
+    ≡ Haar.productIntegral source
+        originalFullInteractingEffectiveDensity
+  originalFinePhysicalPartitionEqualsActualEffectivePartition =
+    let
+      originalNestedFineWeight =
+        λ pairs →
+          Haar.productIntegral source
+            (λ spectators →
+              Original.physicallySortedWilsonWeight
+                theory traceData exponential beta
+                (F19Physical.originalPairsAndSpectators
+                  pairs spectators))
+    in
+    trans
+      originalFinePhysicalPartitionEqualsNestedF19
+      (trans
+        (Fibre.originalAllPairsGeneralWeightedChange
+          theory source bilateral originalNestedFineWeight)
+        (Fibre.originalInterleavedIntegralIsCoarseFibre
+          theory source bilateral originalNestedFineWeight))
