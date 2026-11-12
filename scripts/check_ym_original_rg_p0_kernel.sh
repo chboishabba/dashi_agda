@@ -40,6 +40,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayR445NativePairHolonomyIdentityExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalNativeParityPairWeldExact.agda
   DASHI/Physics/YangMills/YMClayR445CanonicalBondPermutationCodecExact.agda
+  DASHI/Physics/YangMills/YMClayR445FlatPairedHaarIntegrationExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
