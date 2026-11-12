@@ -133,3 +133,490 @@ canonicalBH4PanelStoichiometricMatrixReceipt =
     "pins the executed species/reaction dimensions, exact finite reaction index, residual reaction IDs and deterministic/internal-only matrix contract while leaving the sparse executable entries in the generated JSON/CSV receipt"
     "missing chemistry is not a zero column; S does not create kinetics, compartment measurements, external exchange, allocator causality or disease mechanism"
     "python3 scripts/build_bh4_stoichiometric_matrix.py artifacts/biology/rhea-kitzerow-bh4-reactions.json --output-prefix artifacts/biology/bh4-stoichiometric-matrix"
+
+
+------------------------------------------------------------------------
+-- SOURCE-CONSUMING FINITE STOICHIOMETRIC REACTION THEOREM
+--
+-- A finite source column is explicitly reactants/products (no signed
+-- natural-number underflow), with a reactant-availability witness
+--  state[site] = reactants + residual.
+--
+-- Conservation is derived from executable vector addition and the
+-- literal per-column CHNOP left-kernel identities. No hand-filled
+-- 29x12 coefficients or measured kinetics enter this theorem.
+------------------------------------------------------------------------
+
+import Data.Vec.Base as V
+import Data.Fin.Base as F
+
+panelAdd :
+  ∀ {n} → V.Vec Nat n → V.Vec Nat n → V.Vec Nat n
+panelAdd V.[] V.[] = V.[]
+panelAdd (V._∷_ a xs) (V._∷_ b ys) =
+  V._∷_ (a + b) (panelAdd xs ys)
+
+panelWeighted :
+  ∀ {n} → V.Vec Nat n → V.Vec Nat n → Nat
+panelWeighted V.[] V.[] = 0
+panelWeighted (V._∷_ weight weights) (V._∷_ count counts) =
+  weight * count + panelWeighted weights counts
+
+-- Four-term exchange is the only arithmetic interchange required
+-- by the native 29-species weighted-inventory proof.
+panelShuffle :
+  (a b c d : Nat) →
+  (a + b) + (c + d) ≡ (a + c) + (b + d)
+panelShuffle a b c d =
+  trans (+-assoc a b (c + d))
+    (trans
+      (cong (λ n → a + n)
+        (trans
+          (sym (+-assoc b c d))
+          (trans
+            (cong (λ n → n + d) (+-comm b c))
+            (+-assoc c b d))))
+      (sym (+-assoc a c (b + d))))
+
+panelWeightedDistributes :
+  ∀ {n} (weights xs ys : V.Vec Nat n) →
+  panelWeighted weights (panelAdd xs ys)
+    ≡ panelWeighted weights xs + panelWeighted weights ys
+panelWeightedDistributes V.[] V.[] V.[] = refl
+panelWeightedDistributes
+  (V._∷_ w weights) (V._∷_ x xs) (V._∷_ y ys) =
+  trans
+    (cong (λ n → w * (x + y) + n)
+      (panelWeightedDistributes weights xs ys))
+    (trans
+      (cong (λ n → n + (panelWeighted weights xs
+        + panelWeighted weights ys))
+        (*-distribˡ-+ w x y))
+      (panelShuffle (w * x) (w * y)
+        (panelWeighted weights xs) (panelWeighted weights ys)))
+
+record OriginalFiniteReaction (n : Nat) : Set where
+  constructor original-finite-reaction
+  field
+    originalReactants : V.Vec Nat n
+    originalProducts : V.Vec Nat n
+open OriginalFiniteReaction public
+
+-- Executed reaction on the available residual inventory.
+panelReactionAfter :
+  ∀ {n} → OriginalFiniteReaction n →
+  V.Vec Nat n → V.Vec Nat n
+panelReactionAfter reaction residual =
+  panelAdd (originalProducts reaction) residual
+
+panelReactionBefore :
+  ∀ {n} → OriginalFiniteReaction n →
+  V.Vec Nat n → V.Vec Nat n
+panelReactionBefore reaction residual =
+  panelAdd (originalReactants reaction) residual
+
+panelReactionConserves :
+  ∀ {n} (weights : V.Vec Nat n)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n) →
+  panelWeighted weights (originalReactants reaction)
+    ≡ panelWeighted weights (originalProducts reaction) →
+  panelWeighted weights (panelReactionAfter reaction residual)
+    ≡ panelWeighted weights (panelReactionBefore reaction residual)
+panelReactionConserves weights reaction residual balanced =
+  trans
+    (panelWeightedDistributes
+      weights (originalProducts reaction) residual)
+    (trans
+      (cong (λ n → n + panelWeighted weights residual)
+        (sym balanced))
+      (sym (panelWeightedDistributes
+        weights (originalReactants reaction) residual)))
+
+panelSpatialWeighted :
+  ∀ {n sites} (weights : V.Vec Nat n) →
+  V.Vec (V.Vec Nat n) sites → Nat
+panelSpatialWeighted weights V.[] = 0
+panelSpatialWeighted weights (V._∷_ current rest) =
+  panelWeighted weights current + panelSpatialWeighted weights rest
+
+-- A reaction fires AT the selected voxel, preserving all other
+-- molecular inventories. The lookup equality is the genuine
+-- reactant-availability witness, not an asserted nonnegative rate.
+panelSpatialReactionConserves :
+  ∀ {n sites} (weights : V.Vec Nat n)
+  (site : F.Fin sites)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n)
+  (before : V.Vec (V.Vec Nat n) sites) →
+  V.lookup before site ≡ panelReactionBefore reaction residual →
+  panelWeighted weights (originalReactants reaction)
+    ≡ panelWeighted weights (originalProducts reaction) →
+  panelSpatialWeighted weights
+    (V.updateAt before site
+      (λ _ → panelReactionAfter reaction residual))
+    ≡ panelSpatialWeighted weights before
+panelSpatialReactionConserves weights F.zero reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (cong (λ n → n + panelSpatialWeighted weights rest)
+      (panelReactionConserves weights reaction residual balanced))
+    (cong (λ n → n + panelSpatialWeighted weights rest)
+      (sym (cong (panelWeighted weights) available)))
+panelSpatialReactionConserves weights (F.suc site) reaction residual
+  (V._∷_ current rest) available balanced =
+  cong (λ n → panelWeighted weights current + n)
+    (panelSpatialReactionConserves
+      weights site reaction residual rest available balanced)
+
+
+------------------------------------------------------------------------
+-- SIGNED MOLECULAR CHARGE. Conservation of positive and negative
+-- magnitudes separately would be false for general redox chemistry.
+-- Instead p_before + n_after = p_after + n_before is the constructive
+-- cross-sum encoding of net signed-charge equality.
+------------------------------------------------------------------------
+
+panelReactionSignedChargeConserves :
+  ∀ {n}
+  (positiveWeights negativeWeights : V.Vec Nat n)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n) →
+  (panelWeighted positiveWeights (originalReactants reaction)
+    + panelWeighted negativeWeights (originalProducts reaction))
+    ≡
+  (panelWeighted positiveWeights (originalProducts reaction)
+    + panelWeighted negativeWeights (originalReactants reaction)) →
+  (panelWeighted positiveWeights (panelReactionBefore reaction residual)
+    + panelWeighted negativeWeights (panelReactionAfter reaction residual))
+    ≡
+  (panelWeighted positiveWeights (panelReactionAfter reaction residual)
+    + panelWeighted negativeWeights (panelReactionBefore reaction residual))
+panelReactionSignedChargeConserves
+  positiveWeights negativeWeights reaction residual balanced =
+  trans
+    (cong₂ _+_
+      (panelWeightedDistributes positiveWeights
+        (originalReactants reaction) residual)
+      (panelWeightedDistributes negativeWeights
+        (originalProducts reaction) residual))
+    (trans
+      (panelShuffle
+        (panelWeighted positiveWeights (originalReactants reaction))
+        (panelWeighted positiveWeights residual)
+        (panelWeighted negativeWeights (originalProducts reaction))
+        (panelWeighted negativeWeights residual))
+      (trans
+        (cong
+          (λ n → n + (panelWeighted positiveWeights residual
+            + panelWeighted negativeWeights residual))
+          balanced)
+        (trans
+          (sym (panelShuffle
+            (panelWeighted positiveWeights (originalProducts reaction))
+            (panelWeighted positiveWeights residual)
+            (panelWeighted negativeWeights (originalReactants reaction))
+            (panelWeighted negativeWeights residual)))
+          (cong₂ _+_
+            (sym (panelWeightedDistributes positiveWeights
+              (originalProducts reaction) residual))
+            (sym (panelWeightedDistributes negativeWeights
+              (originalReactants reaction) residual))))))
+
+-- Cross-sum equality is preserved in all 27 sites even when another
+-- voxel has arbitrary unrelated molecular inventory.
+panelSpatialSignedReactionConserves :
+  ∀ {n sites}
+  (positiveWeights negativeWeights : V.Vec Nat n)
+  (site : F.Fin sites)
+  (reaction : OriginalFiniteReaction n)
+  (residual : V.Vec Nat n)
+  (before : V.Vec (V.Vec Nat n) sites) →
+  V.lookup before site ≡ panelReactionBefore reaction residual →
+  (panelWeighted positiveWeights (originalReactants reaction)
+    + panelWeighted negativeWeights (originalProducts reaction))
+    ≡
+  (panelWeighted positiveWeights (originalProducts reaction)
+    + panelWeighted negativeWeights (originalReactants reaction)) →
+  (panelSpatialWeighted positiveWeights before
+    + panelSpatialWeighted negativeWeights
+      (V.updateAt before site
+        (λ _ → panelReactionAfter reaction residual)))
+    ≡
+  (panelSpatialWeighted positiveWeights
+    (V.updateAt before site
+      (λ _ → panelReactionAfter reaction residual))
+    + panelSpatialWeighted negativeWeights before)
+panelSpatialSignedReactionConserves
+  positiveWeights negativeWeights F.zero reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (panelShuffle
+      (panelWeighted positiveWeights current)
+      (panelSpatialWeighted positiveWeights rest)
+      (panelWeighted negativeWeights (panelReactionAfter reaction residual))
+      (panelSpatialWeighted negativeWeights rest))
+    (trans
+      (cong
+        (λ n → n + (panelSpatialWeighted positiveWeights rest
+          + panelSpatialWeighted negativeWeights rest))
+        (trans
+          (cong
+            (λ n → n + panelWeighted negativeWeights
+              (panelReactionAfter reaction residual))
+            (cong (panelWeighted positiveWeights) available))
+          (trans
+            (panelReactionSignedChargeConserves
+              positiveWeights negativeWeights reaction residual balanced)
+            (cong
+              (λ n → panelWeighted positiveWeights
+                (panelReactionAfter reaction residual) + n)
+              (sym (cong (panelWeighted negativeWeights) available))))))
+      (sym (panelShuffle
+        (panelWeighted positiveWeights
+          (panelReactionAfter reaction residual))
+        (panelSpatialWeighted positiveWeights rest)
+        (panelWeighted negativeWeights current)
+        (panelSpatialWeighted negativeWeights rest))))
+panelSpatialSignedReactionConserves
+  positiveWeights negativeWeights (F.suc site) reaction residual
+  (V._∷_ current rest) available balanced =
+  trans
+    (panelShuffle
+      (panelWeighted positiveWeights current)
+      (panelSpatialWeighted positiveWeights rest)
+      (panelWeighted negativeWeights current)
+      (panelSpatialWeighted negativeWeights
+        (V.updateAt rest site
+          (λ _ → panelReactionAfter reaction residual))))
+    (trans
+      (cong
+        (λ n → (panelWeighted positiveWeights current
+          + panelWeighted negativeWeights current) + n)
+        (panelSpatialSignedReactionConserves
+          positiveWeights negativeWeights site reaction residual
+          rest available balanced))
+      (sym (panelShuffle
+        (panelWeighted positiveWeights current)
+        (panelSpatialWeighted positiveWeights
+          (V.updateAt rest site
+            (λ _ → panelReactionAfter reaction residual)))
+        (panelWeighted negativeWeights current)
+        (panelSpatialWeighted negativeWeights rest))))
+
+data OriginalCHNOPElement : Set where
+  carbonElement : OriginalCHNOPElement
+  hydrogenElement : OriginalCHNOPElement
+  nitrogenElement : OriginalCHNOPElement
+  oxygenElement : OriginalCHNOPElement
+  phosphorusElement : OriginalCHNOPElement
+
+-- The entire original 29x12 source is demanded explicitly.
+-- No data are fabricated to inhabit this record.
+record SourceCertifiedOriginal29x12 : Set where
+  field
+    sourceFiniteColumns : V.Vec (OriginalFiniteReaction 29) 12
+    sourceElementWeights : OriginalCHNOPElement → V.Vec Nat 29
+    sourceColumnLeftKernel :
+      (element : OriginalCHNOPElement) (column : F.Fin 12) →
+      panelWeighted (sourceElementWeights element)
+        (originalReactants (V.lookup sourceFiniteColumns column))
+        ≡ panelWeighted (sourceElementWeights element)
+          (originalProducts (V.lookup sourceFiniteColumns column))
+    sourcePositiveChargeWeights : V.Vec Nat 29
+    sourceNegativeChargeWeights : V.Vec Nat 29
+    sourceColumnSignedCharge :
+      (column : F.Fin 12) →
+      (panelWeighted sourcePositiveChargeWeights
+        (originalReactants (V.lookup sourceFiniteColumns column))
+        + panelWeighted sourceNegativeChargeWeights
+          (originalProducts (V.lookup sourceFiniteColumns column)))
+        ≡
+      (panelWeighted sourcePositiveChargeWeights
+        (originalProducts (V.lookup sourceFiniteColumns column))
+        + panelWeighted sourceNegativeChargeWeights
+          (originalReactants (V.lookup sourceFiniteColumns column)))
+open SourceCertifiedOriginal29x12 public
+
+-- Exact P0 finite-volume SOURCE-CERTIFICATE-CONSUMING theorem:
+-- each original column fires in one of 27 sites, consumes only its
+-- actual reactants and preserves every CHNOP quantity across the
+-- COMPLETE cubical inventory. The certificate itself is UNPAID until
+-- constructed from the original byte-pinned Rhea/ChEBI matrix.
+original29x12SpatialReactionBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (element : OriginalCHNOPElement)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29)
+  (before : V.Vec (V.Vec Nat 29) 27) →
+  V.lookup before site ≡
+    panelReactionBefore
+      (V.lookup (sourceFiniteColumns certificate) column) residual →
+  panelSpatialWeighted (sourceElementWeights certificate element)
+    (V.updateAt before site
+      (λ _ → panelReactionAfter
+        (V.lookup (sourceFiniteColumns certificate) column) residual))
+    ≡ panelSpatialWeighted
+      (sourceElementWeights certificate element) before
+original29x12SpatialReactionBalance
+  certificate element column site residual before available =
+  panelSpatialReactionConserves
+    (sourceElementWeights certificate element)
+    site (V.lookup (sourceFiniteColumns certificate) column)
+    residual before available
+    (sourceColumnLeftKernel certificate element column)
+
+
+-- This is SIGNED charge (positive minus negative molecular charge);
+-- positive and negative atomic-charge totals need not be conserved
+-- separately during a balanced redox reaction. The cross-sum form
+-- avoids unproven integer homomorphisms and permits any true 29x12
+-- source reaction with original signed charges.
+original29x12SpatialSignedChargeBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29)
+  (before : V.Vec (V.Vec Nat 29) 27) →
+  V.lookup before site ≡
+    panelReactionBefore
+      (V.lookup (sourceFiniteColumns certificate) column) residual →
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate)
+      (V.updateAt before site
+        (λ _ → panelReactionAfter
+          (V.lookup (sourceFiniteColumns certificate) column) residual)))
+    ≡
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate)
+    (V.updateAt before site
+      (λ _ → panelReactionAfter
+        (V.lookup (sourceFiniteColumns certificate) column) residual))
+    + panelSpatialWeighted
+      (sourceNegativeChargeWeights certificate) before)
+original29x12SpatialSignedChargeBalance
+  certificate column site residual before available =
+  panelSpatialSignedReactionConserves
+    (sourcePositiveChargeWeights certificate)
+    (sourceNegativeChargeWeights certificate)
+    site (V.lookup (sourceFiniteColumns certificate) column)
+    residual before available
+    (sourceColumnSignedCharge certificate column)
+
+
+------------------------------------------------------------------------
+-- ORIGINAL 29x12 CERTIFIED CHRONOLOGICAL REACTION HISTORIES.
+-- The dependent history constructor carries ACTUAL availability at
+-- each intermediate state: negative inventories cannot be conjured.
+------------------------------------------------------------------------
+
+Original29x12SpatialState : Set
+Original29x12SpatialState = V.Vec (V.Vec Nat 29) 27
+
+applyOriginal29x12Reaction :
+  (certificate : SourceCertifiedOriginal29x12)
+  (column : F.Fin 12)
+  (site : F.Fin 27)
+  (residual : V.Vec Nat 29) →
+  Original29x12SpatialState → Original29x12SpatialState
+applyOriginal29x12Reaction certificate column site residual state =
+  V.updateAt state site
+    (λ _ → panelReactionAfter
+      (V.lookup (sourceFiniteColumns certificate) column) residual)
+
+data SourceCertifiedOriginal29x12History
+  (certificate : SourceCertifiedOriginal29x12) :
+  Original29x12SpatialState → Original29x12SpatialState → Set where
+  emptyOriginalReactionHistory :
+    ∀ {state} →
+    SourceCertifiedOriginal29x12History certificate state state
+  nextOriginalReactionHistory :
+    ∀ {before after}
+    (column : F.Fin 12) (site : F.Fin 27)
+    (residual : V.Vec Nat 29) →
+    V.lookup before site ≡
+      panelReactionBefore
+        (V.lookup (sourceFiniteColumns certificate) column) residual →
+    SourceCertifiedOriginal29x12History certificate
+      (applyOriginal29x12Reaction certificate column site residual before)
+      after →
+    SourceCertifiedOriginal29x12History certificate before after
+
+original29x12SpatialAllHistoryCHNOPBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  (element : OriginalCHNOPElement)
+  {before after : Original29x12SpatialState} →
+  SourceCertifiedOriginal29x12History certificate before after →
+  panelSpatialWeighted (sourceElementWeights certificate element) after
+    ≡ panelSpatialWeighted (sourceElementWeights certificate element) before
+original29x12SpatialAllHistoryCHNOPBalance
+  certificate element emptyOriginalReactionHistory = refl
+original29x12SpatialAllHistoryCHNOPBalance
+  certificate element {before}
+  (nextOriginalReactionHistory column site residual available rest) =
+  trans
+    (original29x12SpatialAllHistoryCHNOPBalance certificate element rest)
+    (original29x12SpatialReactionBalance
+      certificate element column site residual before available)
+
+
+------------------------------------------------------------------------
+-- COMPOSITION OF SIGNED MOLECULAR REACTION HISTORIES.
+-- Two cross-sum charge balances compose after cancellation of the
+-- intermediate positive/negative charge pair. This is deliberately
+-- not a claim that positive and negative ion counts are each fixed.
+------------------------------------------------------------------------
+
+panelSwap3 :
+  (a b c : Nat) → (a + b) + c ≡ (a + c) + b
+panelSwap3 a b c =
+  trans (+-assoc a b c)
+    (trans
+      (cong (λ n → a + n) (+-comm b c))
+      (sym (+-assoc a c b)))
+
+panelSignedCrossTrans :
+  (p0 n0 p1 n1 p2 n2 : Nat) →
+  p0 + n1 ≡ p1 + n0 →
+  p1 + n2 ≡ p2 + n1 →
+  p0 + n2 ≡ p2 + n0
+panelSignedCrossTrans p0 n0 p1 n1 p2 n2 first second =
+  +-cancelʳ-≡ n1 (p0 + n2) (p2 + n0)
+    (trans
+      (panelSwap3 p0 n2 n1)
+      (trans
+        (cong (λ n → n + n2) first)
+        (trans
+          (panelSwap3 p1 n0 n2)
+          (trans
+            (cong (λ n → n + n0) second)
+            (panelSwap3 p2 n1 n0)))))
+
+original29x12SpatialAllHistorySignedChargeBalance :
+  (certificate : SourceCertifiedOriginal29x12)
+  {before after : Original29x12SpatialState} →
+  SourceCertifiedOriginal29x12History certificate before after →
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate) after)
+    ≡
+  (panelSpatialWeighted (sourcePositiveChargeWeights certificate) after
+    + panelSpatialWeighted (sourceNegativeChargeWeights certificate) before)
+original29x12SpatialAllHistorySignedChargeBalance
+  certificate emptyOriginalReactionHistory = refl
+original29x12SpatialAllHistorySignedChargeBalance
+  certificate {before} {after}
+  (nextOriginalReactionHistory column site residual available rest) =
+  panelSignedCrossTrans
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate) before)
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate) before)
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate)
+      (applyOriginal29x12Reaction
+        certificate column site residual before))
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate)
+      (applyOriginal29x12Reaction
+        certificate column site residual before))
+    (panelSpatialWeighted (sourcePositiveChargeWeights certificate) after)
+    (panelSpatialWeighted (sourceNegativeChargeWeights certificate) after)
+    (original29x12SpatialSignedChargeBalance
+      certificate column site residual before available)
+    (original29x12SpatialAllHistorySignedChargeBalance certificate rest)

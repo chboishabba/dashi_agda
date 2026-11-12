@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
+from collections import Counter
 from pathlib import Path
 
 REQUIRED_COORDINATES = [
@@ -105,10 +107,15 @@ def normalize_row(pid: str, incoming: dict, errors: list[str]) -> dict:
             errors.append(f"{pid}: paid status requires lower/upper/unit")
             return unresolved_record(pid)
         try:
-            if float(row["lower"]) > float(row["upper"]):
+            lower = float(row["lower"])
+            upper = float(row["upper"])
+            if not math.isfinite(lower) or not math.isfinite(upper):
+                errors.append(f"{pid}: bounds must be finite numbers")
+                return unresolved_record(pid)
+            if lower > upper:
                 errors.append(f"{pid}: lower bound exceeds upper bound")
                 return unresolved_record(pid)
-        except (TypeError, ValueError):
+        except (TypeError, ValueError, OverflowError):
             errors.append(f"{pid}: bounds must be numeric")
             return unresolved_record(pid)
         if not all(row.get(key) for key in ["source_reference", "same_object_reference", "compartment_reference", "measurement_time_reference"]):
@@ -122,18 +129,29 @@ def normalize_row(pid: str, incoming: dict, errors: list[str]) -> dict:
 
 
 def normalize(payload: dict, matrix: dict | None = None) -> dict:
+    source_rows = [
+        dict(row) for row in payload.get("parameters", [])
+        if isinstance(row, dict) and row.get("parameter_id")
+    ]
+    ids_in = [str(row["parameter_id"]) for row in source_rows]
+    duplicate_ids = {
+        pid for pid, count in Counter(ids_in).items() if count != 1
+    }
     records_by_id = {
-        str(row.get("parameter_id")): dict(row)
-        for row in payload.get("parameters", [])
-        if row.get("parameter_id")
+        str(row["parameter_id"]): row for row in source_rows
+        if str(row["parameter_id"]) not in duplicate_ids
     }
     ordered_ids = all_coordinate_ids(matrix)
     for pid in records_by_id:
         if pid not in ordered_ids:
             ordered_ids.append(pid)
 
-    errors: list[str] = []
-    normalized = [normalize_row(pid, records_by_id.get(pid, {}), errors) for pid in ordered_ids]
+    errors: list[str] = [
+        f"{pid}: repeated parameter id, no payment accepted"
+        for pid in sorted(duplicate_ids)
+    ]
+    normalized = [normalize_row(pid, records_by_id.get(pid, {}), errors)
+                  for pid in ordered_ids]
     paid = [row for row in normalized if row["payment_status"] != "unresolved"]
     usable = [row for row in normalized if row.get("usable_for_joint_flux_witness")]
     reaction_rows = [row for row in normalized if str(row["parameter_id"]).startswith("REACTION_FLUX:")]

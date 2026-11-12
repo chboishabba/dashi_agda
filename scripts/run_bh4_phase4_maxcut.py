@@ -30,6 +30,13 @@ def main() -> int:
     p.add_argument("--artifact-dir", type=Path, default=Path("artifacts/biology"))
     p.add_argument("--manifest", type=Path)
     p.add_argument("--wikimedia", type=Path, help="optional pinned Wikimedia BH4 panel receipt; no network acquisition is implied")
+    p.add_argument("--source-reopen-packet", type=Path, help="optional caller-supplied source/revision references; does not authenticate source text")
+    p.add_argument("--creator-source-text", type=Path,
+                   help="optional authorized local creator-chart text; source evidence only")
+    p.add_argument("--acquire-creator-chart-reactions", action="store_true",
+                   help="opt in to separate source-chart Rhea/ChEBI acquisition; no merger with panel")
+    p.add_argument("--creator-source-revision", type=str,
+                   help="required with --creator-source-text; observed date/source, not authentication")
     p.add_argument("--max-pdb-per-protein", type=int, default=3)
     p.add_argument("--top-kinetic-candidates", type=int, default=10)
     p.add_argument("--skip-network-evidence", action="store_true")
@@ -53,11 +60,84 @@ def main() -> int:
     sifts = out / "bh4-pdbe-sifts.json"
     xpollenation = out / "bh4-xpollenation.json"
     xpollenation_dir = out / "xpollenation-neighbourhoods"
+    ontology = out / "bh4-pathway-ontology.json"
+    ontology_jsonld = out / "bh4-pathway-ontology.jsonld"
+    ontology_review = out / "bh4-pathway-review-worklist.json"
+    primary_chart_crosswalk = out / "kitzerow-primary-chart-rhea-crosswalk.json"
+    creator_chart_text_index = out / "kitzerow-chart-source-text-candidates.json"
+    creator_chart_rhea = out / "kitzerow-creator-chart-rhea-reactions.json"
+    creator_chart_matrix_prefix = out / "kitzerow-creator-chart-stoichiometric-matrix"
+    creator_chart_matrix = creator_chart_matrix_prefix.with_suffix(".json")
+    creator_chart_ontology = out / "kitzerow-creator-chart-ontology.json"
+    creator_chart_jsonld = out / "kitzerow-creator-chart-ontology.jsonld"
+    creator_chart_review = out / "kitzerow-creator-chart-review.json"
+    claim_ledger = Path("docs/biology/KitzerowBH4ClaimLedgerCandidate.v1.json")
     interval = out / "bh4-interval-flux-feasibility.json"
     summary_path = out / "bh4-phase4-maxcut-summary.json"
 
     run([py, "scripts/acquire_rhea_chebi_bh4_reactions.py", "--from-uniprot-panel", str(a.panel), "-o", str(rhea)])
     run([py, "scripts/build_bh4_stoichiometric_matrix.py", str(rhea), "--output-prefix", str(mp)])
+    if bool(a.creator_source_text) != bool(a.creator_source_revision):
+        raise SystemExit("--creator-source-text and --creator-source-revision must occur together")
+    compare_cmd = [
+        py, "scripts/compare_kitzerow_primary_chart.py",
+        "--matrix", str(matrix), "-o", str(primary_chart_crosswalk),
+    ]
+    if a.creator_source_text:
+        run([
+            py, "scripts/index_kitzerow_chart_source_text.py",
+            "--source-text", str(a.creator_source_text),
+            "--source-revision", a.creator_source_revision,
+            "-o", str(creator_chart_text_index),
+        ])
+        compare_cmd.extend(["--source-text-index", str(creator_chart_text_index)])
+    run(compare_cmd)
+    run([py, "scripts/check_kitzerow_primary_chart.py"])
+    run([py, "scripts/check_kitzerow_source_chart_acquisition.py"])
+    creator_chart_acquisition_exit: int | None = None
+    creator_ontology_exit: int | None = None
+    creator_review_exit: int | None = None
+    if a.acquire_creator_chart_reactions:
+        # The optional derived files are overwritten in-place. Clear only
+        # this optional namespace so a new partial/failing source call
+        # cannot silently reuse an earlier green creator-chart artifact.
+        for stale in (creator_chart_rhea, creator_chart_matrix,
+                      creator_chart_matrix_prefix.with_suffix(".csv"),
+                      creator_chart_matrix_prefix.with_suffix(".md"),
+                      creator_chart_ontology, creator_chart_jsonld,
+                      creator_chart_review):
+            stale.unlink(missing_ok=True)
+        creator_chart_acquisition_exit = run([
+            py, "scripts/acquire_rhea_chebi_bh4_reactions.py",
+            "--from-source-chart",
+            "docs/biology/KitzerowPublishedRheaChartObservedIndex.v1.json",
+            "-o", str(creator_chart_rhea),
+        ], allow_partial=True)
+        if creator_chart_rhea.exists():
+            # A missing or nonfinite creator reaction is a residual, not
+            # automatically a zero-valued internal reaction.
+            run([
+                py, "scripts/build_bh4_stoichiometric_matrix.py",
+                str(creator_chart_rhea),
+                "--output-prefix", str(creator_chart_matrix_prefix),
+            ])
+            creator_matrix_ready = load(creator_chart_matrix)
+            if creator_matrix_ready and creator_matrix_ready.get("reaction_count", 0) > 0:
+                # Reuse the existing candidate-only chemistry adapter, not
+                # a second author-chart ontology/compiler or mixed matrix.
+                creator_ontology_exit = run([
+                    py, "scripts/build_bh4_pathway_ontology.py",
+                    "--matrix", str(creator_chart_matrix),
+                    "--rhea", str(creator_chart_rhea),
+                    "-o", str(creator_chart_ontology),
+                    "--jsonld-output", str(creator_chart_jsonld),
+                ], allow_partial=True)
+                if creator_ontology_exit == 0:
+                    creator_review_exit = run([
+                        py, "scripts/build_bh4_pathway_review.py",
+                        "--pathway", str(creator_chart_ontology),
+                        "-o", str(creator_chart_review),
+                    ], allow_partial=True)
     run([py, "scripts/acquire_bh4_parameter_evidence.py", "--template", "--matrix", str(matrix), "-o", str(template)])
     solver = template
     if a.manifest:
@@ -104,6 +184,29 @@ def main() -> int:
         if exits["xpollenation"] == 0:
             run([py, "scripts/check_bh4_xpollenation.py"])
 
+    ontology_cmd = [
+        py, "scripts/build_bh4_pathway_ontology.py",
+        "--matrix", str(matrix), "--rhea", str(rhea),
+        "--claims", str(claim_ledger), "-o", str(ontology),
+        "--jsonld-output", str(ontology_jsonld),
+    ]
+    if exits.get("xpollenation") == 0 and xpollenation.exists():
+        ontology_cmd.extend(["--xpollenation", str(xpollenation)])
+    exits["pathway_ontology"] = run(ontology_cmd, allow_partial=True)
+    if exits["pathway_ontology"] == 0:
+        run([py, "scripts/check_bh4_pathway_ontology.py"])
+
+    if exits.get("pathway_ontology") == 0:
+        review_cmd = [
+            py, "scripts/build_bh4_pathway_review.py",
+            "--pathway", str(ontology), "-o", str(ontology_review),
+        ]
+        if a.source_reopen_packet is not None:
+            review_cmd.extend(["--source-receipts", str(a.source_reopen_packet)])
+        exits["pathway_review"] = run(review_cmd, allow_partial=True)
+        if exits["pathway_review"] == 0:
+            run([py, "scripts/check_bh4_pathway_review.py"])
+
     interval_exit = run([py, "scripts/solve_bh4_flux_intervals.py", "--matrix", str(matrix), "--parameters", str(solver), "-o", str(interval)], allow_partial=True)
     run([py, "scripts/check_kitzerow_bh4_priority_all.py"])
 
@@ -112,7 +215,17 @@ def main() -> int:
     inter = json.loads(interval.read_text())
     sab = load(sabio); ad = load(adj); rk = load(ranking); pay = load(payment)
     abund = load(abundance); exch = load(exchange_context); joint = load(joint_payment)
-    sf = load(sifts); xp = load(xpollenation)
+    sf = load(sifts); xp = load(xpollenation); ont = load(ontology) if exits.get("pathway_ontology") == 0 else None
+    review = load(ontology_review) if exits.get("pathway_review") == 0 else None
+    original_chart = load(primary_chart_crosswalk)
+    creator_acquisition = (load(creator_chart_rhea)
+                           if a.acquire_creator_chart_reactions else None)
+    creator_matrix = (load(creator_chart_matrix)
+                      if a.acquire_creator_chart_reactions else None)
+    creator_ontology = (load(creator_chart_ontology)
+                        if creator_ontology_exit == 0 else None)
+    creator_review = (load(creator_chart_review)
+                      if creator_review_exit == 0 else None)
     network: dict[str, object] = {}
     if sab:
         network["sabio"] = {k: sab.get(k) for k in ("schema", "proteins_completed", "proteins_with_entries", "kinetic_entry_count", "kinetic_parameter_count")}
@@ -139,6 +252,59 @@ def main() -> int:
             "authority": "navigation-enrichment-only", "establishes_payment": False,
         }
 
+    if ont:
+        network["pathway_ontology"] = {
+            "schema": ont.get("schema"),
+            "finite_reactions": len(ont.get("reactions", [])),
+            "species": len(ont.get("species", [])),
+            "unpromoted_hypothesis_edges": len(ont.get("author_hypothesis_edges", [])),
+            "external_edges": len(ont.get("external_edges", [])),
+            "rhea_go_reactome_cross_references": len(ont.get("ontology_cross_references", [])),
+            "authority": ont.get("authority"),
+        }
+
+    if creator_acquisition:
+        network["kitzerow_creator_chart_rhea_acquisition"] = {
+            "schema": creator_acquisition.get("schema"),
+            "requested": creator_acquisition.get("unique_rhea_ids_requested"),
+            "acquired": creator_acquisition.get("rhea_rows_acquired"),
+            "failed": creator_acquisition.get("rhea_rows_failed"),
+            "formula_charge_ready": creator_acquisition.get("formula_charge_ready_reactions"),
+            "separate_creator_chart_selection": True,
+            "original_pdf_binary_verified": False,
+            "acquisition_exit_code": creator_chart_acquisition_exit,
+            "ontology_exit_code": creator_ontology_exit,
+            "review_exit_code": creator_review_exit,
+            "separate_matrix_species": creator_matrix.get("species_count") if creator_matrix else None,
+            "separate_matrix_reactions": creator_matrix.get("reaction_count") if creator_matrix else None,
+            "separate_ontology_reactions": len(creator_ontology.get("reactions", [])) if creator_ontology else None,
+            "separate_review_obligations": len(creator_review.get("obligations", [])) if creator_review else None,
+            "same_compartment_network_merge_executed": False,
+        }
+    if original_chart and original_chart.get("local_source_text_observation"):
+        network["creator_chart_local_text_observation"] = {
+            "schema": original_chart["local_source_text_observation"]["schema"],
+            "source_text_sha256": original_chart["local_source_text_observation"]["source_utf8_sha256"],
+            "candidate_observed_ids": original_chart["local_source_text_observation"]["creator_chart_observed_rhea_id_count"],
+            "source_is_original_pdf": False,
+            "creator_whole_network_coverage": None,
+        }
+    if original_chart:
+        network["kitzerow_original_chart"] = {
+            "schema": original_chart.get("schema"),
+            "observed_chart_rhea_ids": original_chart.get("creator_chart_observed_rhea_id_count"),
+            "finite_panel_ids": original_chart.get("dashi_finite_panel_rhea_id_count"),
+            "literal_overlap": len(original_chart.get("literal_rhea_identifier_intersection", [])),
+            "whole_creator_network_coverage_ratio": None,
+        }
+    if review:
+        network["pathway_review"] = {
+            "schema": review.get("schema"),
+            "obligations": len(review.get("obligations", [])),
+            "family_counts": review.get("obligation_family_counts", {}),
+            "authority": review.get("authority"),
+        }
+
     summary = {
         "schema": "dashi.bh4-phase4-maxcut-run.v8",
         "panel": str(a.panel),
@@ -155,7 +321,17 @@ def main() -> int:
             "sabio_flux_payment": str(payment), "protein_abundance": str(abundance),
             "exchange_context": str(exchange_context), "joint_payment": str(joint_payment),
             "sifts": str(sifts), "xpollenation": str(xpollenation),
-            "xpollenation_neighbourhoods": str(xpollenation_dir), "interval": str(interval),
+            "xpollenation_neighbourhoods": str(xpollenation_dir),
+            "pathway_ontology": str(ontology), "pathway_ontology_jsonld": str(ontology_jsonld),
+            "pathway_review": str(ontology_review) if review else None,
+            "kitzerow_primary_chart_crosswalk": str(primary_chart_crosswalk),
+            "kitzerow_chart_source_text_candidates": str(creator_chart_text_index) if a.creator_source_text else None,
+            "kitzerow_creator_chart_rhea": str(creator_chart_rhea) if a.acquire_creator_chart_reactions else None,
+            "kitzerow_creator_chart_matrix": str(creator_chart_matrix) if creator_matrix else None,
+            "kitzerow_creator_chart_ontology": str(creator_chart_ontology) if creator_ontology else None,
+            "kitzerow_creator_chart_jsonld": str(creator_chart_jsonld) if creator_ontology else None,
+            "kitzerow_creator_chart_review": str(creator_chart_review) if creator_review else None,
+            "interval": str(interval),
             "summary": str(summary_path),
         },
     }
