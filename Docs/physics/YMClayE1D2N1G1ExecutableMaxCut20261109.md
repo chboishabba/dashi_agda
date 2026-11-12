@@ -400,3 +400,36 @@ All modules are imported into `DASHI/Unified/YMClayOriginalWilsonPhysicalRegress
 3. Prove concrete all-N finite-matrix SU(N) normalized trace range (cyclicity alone is inadequate), then apply existing all-word bound.
 4. Supply the original nonconstant physically UV-uniform Wilson weighted cross-numerator estimate, for all relevant original words, including `u`, `v`, `u++v`—a true effective blocked action/polymer-weight producer rather than a free error record.
 5. Complete E1 continuum limit, R576/D1 physical connected clustering, R577/D2 full same-OS spectral gap, R563/N1 continuum nontriviality, R571/G1 group-indexed physical construction. All OPEN.
+
+
+## 2026-11-12 P0 real carrier: concrete Bishop proofs and faithful original-source weld
+
+**Attached proposal audited:** the supplied `P0RealCarrierInstancesExact.agda` direction is valid, but it is wrong to directly claim P0.01 and P0.03 discharged on the independently postulated `DASHI.Foundations.RealAnalysisAxioms.ℝ` merely by constructing Bishop setoid real laws. The following is the actual source-written progress.
+
+**New concrete module** `YMClayP0BishopRealCarrierInstancesExact.agda`: proves, using the pinned imported constructive Bishop `RealProperties.ℝ-Solver` and `Inverse`, with `Bishop._≃_` rather than propositional `_≡_`:
+- `bishopSubtractionAsNegationTimesUnit`, the actual Bishop `x-c ≃ x+(-c)*1` law;
+- `bishopSubtractionZeroRight`, actual Bishop `x-0 ≃ x`;
+- `bishopCenteredScalarCancellation`, actual Bishop centered `n+(-q)*z ≃ 0` under `n ≃ q*z`;
+- `bishopPositiveDenominatorApartFromZero`, positive denominator supplies the imported Bishop inverse's required constructive apartness;
+- `bishopPositiveQuotientTimesDenominator`, the genuine Bishop inverse law `(n*(1/z))*z ≃ n` for `z>0`;
+- `bishopPositiveQuotientCenteredCancellation`, the same native centered normalizer without assuming `divide`.
+
+This pays the P0 scalar arithmetic **on the concrete Bishop backend**. It does NOT by itself inhabit `OriginalRealCenteringLaws` or `OriginalRealPositiveDivisionLaws` for the original Wilson model's separate postulated carrier.
+
+**New explicit same-source weld** `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` defines `OriginalWilsonToBishopScalarWeld divide` containing a faithful source-to-Bishop interpretation, reflection of setoid equality to selected source propositional equality, preservation of the selected zero/one/add/sub/mul/neg/strict positivity, and preservation of the **specific** original normalized `divide` function on positive denominators. The module derives:
+- `weldDerivesOriginalSubtractionAsNegation`;
+- `weldDerivesOriginalSubtractionZeroRight`;
+- `weldDerivesOriginalCenteredCancellation`;
+- `weldDerivesOriginalPositiveDivision`;
+- `weldSuppliesOriginalRealCenteringLaws` and `weldSuppliesOriginalPositiveDivisionLaws`.
+
+These are constructed algebraic transports, not merely opaque names for the missing laws. **The actual interpretation record is still UNINHABITED**; a proof identifying the original Wilson real carrier with a concrete Bishop quotient/representation remains the decisive P0 scalar owner. Do not claim P0.01-05 fully closed at the original Wilson source.
+
+**P0.06 concrete subcase:** repaired a missing `Data.Rational.Tactic.RingSolver as ℚRing` import in the existing `BalabanSU2RationalWilsonTraceBoundExact.agda`. The existing rational SU(2) quaternion `normalizedTraceLowerBound` / `normalizedTraceUpperBound`, together with `BalabanLiteralRationalSU2WilsonBoundedAlgebraExact.literalWilsonPathPointwiseUnitBounded`, are genuine **concrete rational SU(2)** trace/path bounds. They do not establish the original parameterized full SU(N) `SUNMatrixRealTrace` norm theorem; that requires its concrete finite complex matrix representation and equality-preserving identification with `matrixWilsonValue` at every original cutoff.
+
+**Local verification:** both new P0 modules and the rational SU(2) trace source are imported or explicitly named in `DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda` and `scripts/check_ym_original_rg_p0_kernel.sh`. They have source readback and simple structural syntax checks but **no Agda 2.9 kernel acceptance receipt**. Run locally:
+```bash
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+**Further original physical P0.09 / E1 / D1 / D2 status:** UNPAID. The attached write-up proposes an exponential fine propagator and positive `m_eff`, but does not construct gauge-covariant original Wilson coarse/fine coordinates, derive the alleged propagator estimate uniformly in UV cutoff or show a true original physical connecting-polymer source bound. Avoid assuming a positive microscopic `m_eff` in a proof seeking a mass gap. For D2, density of local cylinder observables plus state-dependent correlation constants `C(F)` is insufficient to infer an **operator-wide norm estimate** at the same exponent: the prefactor must be controlled by the OS Hilbert norm uniformly, or a valid spectral-measure/cyclic-vector argument must establish the same spectral support conclusion. Original R576/R577/N1/G1 remain open.
