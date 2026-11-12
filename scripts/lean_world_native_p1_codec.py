@@ -75,20 +75,38 @@ def parse_type(raw):
     if (type(x) is not list or len(x)!=4 or
         x[0]!="lean4export-v3-type-dag-v1" or
         type(x[1]) is not list or
-        any(type(p) is not str for p in x[1]) or
-        len(set(x[1]))!=len(x[1]) or type(x[2]) is not str):
+        type(x[2]) is not str):
         raise P1CodecError("invalid projected type envelope")
+    # Native levelParams are ordered universe binders. Their ORIGINAL
+    # exact names are structured Lean Names (String vs Num nodes differ).
+    # Historical v1 string-only rows remain decodable, but are not allowed
+    # to assert full original-name fidelity.
+    params=x[1]
+    for p in params:
+        if not (type(p) is str or (
+            type(p) is list and len(p)==2 and
+            type(p[0]) is str and type(p[1]) is list)):
+            raise P1CodecError("invalid native universe binder")
+    if len({encode(p) for p in params})!=len(params):
+        raise P1CodecError("duplicate universe binder")
     root,nodes=_dag(x[3])
-    if nodes[root-1][0]!=x[2]:raise P1CodecError("type root tag mismatch")
-    return x[1],root,nodes
+    if nodes[root-1][0]!=x[2]:
+        raise P1CodecError("type root tag mismatch")
+    return params,root,nodes
 
 def _level(l,params):
     if type(l) is not list or not l:raise P1CodecError("invalid level")
     tag=l[0]
     if tag=="zero" and len(l)==1:return ["zero"]
     if tag=="param" and len(l)==3:
-        if l[1] not in params:raise P1CodecError("unbound universe")
-        return ["param",params.index(l[1])]
+        indices=[
+            i for i,p in enumerate(params)
+            if (p==l[1] if type(p) is str else
+                p[0]==l[1] and p[1]==l[2])
+        ]
+        if len(indices)!=1:
+            raise P1CodecError("unbound or ambiguous universe parameter")
+        return ["param",indices[0]]
     if tag=="succ" and len(l)==2:return ["succ",_level(l[1],params)]
     if tag in ("max","imax") and len(l)==3:
         return [tag,_level(l[1],params),_level(l[2],params)]
