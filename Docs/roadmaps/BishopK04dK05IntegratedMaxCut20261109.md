@@ -1540,3 +1540,83 @@ Latest independent donor PR heads observed during this session:
 Neither is merged into #1408 or kernel-verified from this
 session. Their original analytic/generic external admission
 requirements remain independent.
+
+
+## 12 November 2026: source-native P2 even-index scaling bridge
+
+**New implementation (PR #1408; original Bishop complex, not a rational proxy):**
+`DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda`
+is imported by the three golden TOE roots. It proves the
+all-cutoff finite scaling and original `Sequence.SeriesOf` result,
+conditional only on the precise original source-term identity
+
+```text
+OriginalDyadicSourceScale term scale
+  = forall k, term (2*k+1) ≈C scale *C term k
+
+originalEvenSourceScaleNativePartial:
+  evenPositivePrefix(term,n) ≈C scale *C originalDirichletPartial(term,n)
+
+originalEtaScaleToNativeZetaEvenCutoff:
+  etaPrefix(term,n) +C (scale *C zetaPartial(term,n)
+                        +C scale *C zetaPartial(term,n))
+    ≈C zetaPartial(term,2*n)
+```
+
+The module explicitly specializes the consumer to
+`Eta.OriginalRound11DirichletEta inputs .sourceTerms`. Its mathematical
+source obligation is **not** an arbitrarily supplied same-value zeta:
+for the actual index convention `term s k = (k+1)^(-s)`, prove
+
+```text
+term s (2*k+1) ≈C exp_C(-s*log_B(2)) *C term s k
+```
+
+from the pinned Bishop natural-log multiplicativity and the actual
+native complex exponential product theorem, with compatible carrier,
+negative-log sign and branch conventions. These two PR donors are
+separate: #1408 owns the original Round11 term, #1478 owns extensive
+Bishop complex factorial/exponential same-value transport. Importing
+one branch does not automatically pay the original source-term identity.
+
+**Independent finite evidence:** `scripts/check_bishop_p2_even_source_scale_exact.py`
+executed locally: **936/936 exact Gaussian-rational finite-prefix cases
+PASS** (cutoffs 0..25), plus a nontrivial altered-term negative control.
+This checks polynomial/setoid algebra only. It is NOT an Agda typecheck,
+does not construct Bishop analytic terms, and is not a kernel receipt.
+
+**Correct classical complex eta-tail theorem (mathematical donor only).**
+For `s = sigma+i*t`, `sigma>0`, and integer `N>=0`, let
+`a_n(s)=(n+1)^(-s)`. Ordinary complex calculus gives
+
+```text
+eta(s) - eta_(2N)(s)
+ = sum_(k=N)^infinity [ (2k+1)^(-s) - (2k+2)^(-s) ]
+ = s * sum_(k=N)^infinity integral_(2k+1)^(2k+2) x^(-s-1) dx.
+```
+
+The disjoint integration intervals are subsets of `[2N+1,infinity)`.
+Consequently,
+
+```text
+|eta(s) - eta_(2N)(s)|
+ <= |s| * integral_(2N+1)^infinity x^(-sigma-1) dx
+ = (|s|/sigma) * (2N+1)^(-sigma).
+```
+
+For a compact parameter set with `sigma>=delta>0` and `|s|<=M`,
+the bound is `(M/delta)*(2N+1)^(-delta)`, so the classical paired
+eta partials converge uniformly on compacta in `Re(s)>0`.
+This repairs the invalid complex-uniform `2/(N+1)^sigma` estimate.
+It still requires a **source-native Bishop** derivative/integral
+or difference-majorant certificate and a Bishop uniform-limit
+holomorphy/continuity owner before promotion into Agda.
+
+**Remaining exact P2 max-cut:** (a) original Round11 dyadic source
+scaling, (b) original Bishop compact-uniform eta modulus,
+(c) native even-source scaling at the limit and eta/zeta identity on
+`Re(s)>1`, (d) divisor zeros
+`s=1+2*pi*i*k/log(2)` including nonzero `k` and their removal,
+(e) selected independently defined analytic zeta identification,
+and (f) local Agda 2.9 typechecking of transitive dependencies.
+No meromorphic continuation or RH/odd-zeta theorem is claimed.
