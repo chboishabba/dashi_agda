@@ -288,3 +288,36 @@ selectedKoenigsTightConstantExact = refl
 selectedKoenigsTightConstantBelowMajorant :
   selectedKoenigsTightConstant ≤ selectedIncrementConstantUpper
 selectedKoenigsTightConstantBelowMajorant = ℚP.≤ᵇ⇒≤ tt
+
+
+------------------------------------------------------------------------
+-- NEXT SOURCE SINE GATE: RATIONAL TWO-TERM ALTERNATING ENVELOPE.
+-- At y0=133724/100000, 0 < y0^2/6 < 1/3 and
+--  y0-y0^3/6 > 1/2.
+--
+-- These are exact Data.Rational inequalities. The Bishop sine lower
+-- bound sin_B(y0)>=y0-y0^3/6 still requires reusing the original
+-- concrete factorial-term identification and proving decreasing
+-- magnitudes at this y0 (the old half-radius lemma does NOT apply).
+------------------------------------------------------------------------
+
+selectedSineSuccessorRatio : ℚ
+selectedSineSuccessorRatio =
+  centerImag * centerImag * (+ 1 / 6)
+
+selectedSineCubicLowerRational : ℚ
+selectedSineCubicLowerRational =
+  centerImag -
+    ((centerImag * centerImag) * centerImag * (+ 1 / 6))
+
+selectedSineSuccessorBelowOneThird :
+  selectedSineSuccessorRatio ≤ (+ 1 / 3)
+selectedSineSuccessorBelowOneThird = ℚP.≤ᵇ⇒≤ tt
+
+selectedSineCubicLowerAboveHalf :
+  (+ 1 / 2) ≤ selectedSineCubicLowerRational
+selectedSineCubicLowerAboveHalf = ℚP.≤ᵇ⇒≤ tt
+
+selectedSineCubicLowerPositive :
+  zeroQ ≤ selectedSineCubicLowerRational
+selectedSineCubicLowerPositive = ℚP.≤ᵇ⇒≤ tt
