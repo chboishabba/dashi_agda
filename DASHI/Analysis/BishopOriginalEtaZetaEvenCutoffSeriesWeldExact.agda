@@ -17,7 +17,7 @@ module DASHI.Analysis.BishopOriginalEtaZetaEvenCutoffSeriesWeldExact where
 
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 open import Relation.Binary.PropositionalEquality using (_≡_; cong)
-open import Data.Product.Base using (proj₁; proj₂)
+open import Data.Product.Base using (_,_; proj₁; proj₂)
 import Data.Nat.Properties as NatP
 
 import RealProperties as RP
