@@ -35,6 +35,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayP0BishopToOriginalWilsonRealWeldExact.agda
   DASHI/Physics/YangMills/YMClaySUNOneLinkHaarConvolutionSourceExact.agda
   DASHI/Physics/YangMills/YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda
+  DASHI/Physics/YangMills/YMClaySUNFinitePairedHaarBlockPushforwardExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
