@@ -159,3 +159,6 @@ import DASHI.Physics.YangMills.YMClayR445NativePairHolonomyIdentityExact as R445
 
 -- Original 4->2 periodic positive-bond parity/index and native holonomy weld; source candidate, Agda check pending.
 import DASHI.Physics.YangMills.YMClayR445OriginalNativeParityPairWeldExact as R445NativeParityWeld
+
+-- P0.B: explicit canonical side-four 1024-bond list -> 128 selected pair bonds and 896 residual bonds, source finite enumeration, disjoint/completeness and Vec codec round trips; local checker pending.
+import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as R445CanonicalPairResidualCodec
