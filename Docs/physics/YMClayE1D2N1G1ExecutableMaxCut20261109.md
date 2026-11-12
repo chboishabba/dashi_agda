@@ -457,3 +457,30 @@ bash scripts/check_ym_original_rg_p0_kernel.sh
 The first command invokes the existing project-owned Nix Agda 2.9 checker separately on `YMClayP0BishopRealCarrierInstancesExact.agda`, `YMClayP0BishopToOriginalWilsonRealWeldExact.agda`, and `BalabanSU2RationalWilsonTraceBoundExact.agda`. It fails on the first compiler error, allowing kernel diagnostics to be attributed to the correct source owner. The second command then checks the wider original R445/E1-D1 proof regression. Neither command has run in the assistant's container, which has no `nix` or `agda` executable.
 
 The first check, even if accepted, establishes **concrete Bishop setoid arithmetic and a conditional faithful-weld theorem**; it does not conjure an inhabitant of the original Wilson `OriginalWilsonToBishopScalarWeld` record or establish arbitrary-SU(N) real trace range. Keep the "source-written / locally kernel-accepted / physically verified" receipt columns distinct.
+
+
+## 2026-11-12 maximum cut: P0.06 signed original Wilson integration closed as conditional source transport
+
+The user-supplied proposed resolution (2026-11-12) asserts the eight gates P0, P0.06, P0.09, D1, E1, D2, N1, G1 are all closed. The attachment gives candidate standard arguments and source names, but not kernel-accepted selected original-Wilson physical estimates. **All physical Clay terminal gates remain OPEN.** Do not import its all-closed status table as a proof receipt.
+
+### Source code newly implemented
+
+- Repaired `YMClayP0BishopToOriginalWilsonRealWeldExact.weldDerivesOriginalSubtractionZeroRight`: the equality transport for Bishop subtraction must use `RealProperties.-‿cong`, **not** addition congruence. Original-source scalar weld remains uninhabited.
+- New `YMClayE1D1OriginalSignedWilsonWordMomentBoundExact.agda` proves for **the actual original n-dependent SU(N) finite Gibbs/Haar source**, using the original normalized trace and explicit standard scalar ordered-real laws:
+  - `originalWordNumeratorUpper`: `N_n(W) ≤ Z_n` via positive slack `1-W`.
+  - `originalNegWordNumeratorUpper`: `N_n(-W) ≤ Z_n` via positive slack `1+W`.
+  - `originalNegWordNumeratorIsNegation`: `N_n(-W) = -N_n(W)` via actual original Haar numerator scale and congruence.
+  - `originalWordNumeratorAbsoluteBelowPartition`: `|N_n(W)| ≤ Z_n`.
+  - `originalWordNormalizedAbsoluteBelowOne`: `|E_n(W)| ≤ 1` using the actual positive partition and selected division order.
+  - `originalBoundedTestNumeratorUpper`, `originalBoundedTestNegativeNumeratorUpper`, `originalBoundedTestNegativeNumeratorIsNegation`, `originalBoundedTestNumeratorAbsoluteAtMostPartition`, `originalBoundedTestNormalizedAbsoluteAtMostOne`: same **true original source** estimate for any certified signed `|F|≤1` test, not merely words.
+  - `originalR445FineBlockedWordAbsoluteMomentAtMostOne` and `originalR445BareWordAbsoluteMomentAtMostOne`: apply the generic theorem to the **native n=3 → n=1 SU(N) blocked fine Wilson measure** and the independent original n=1 bare measure, respectively. The selected n=3 fine insertion is literally `W_word(actualBlockedLinkMap U)` and retains the original interacting Wilson density/partition, not an invented effective density.
+- The new source is imported into `YMClayOriginalWilsonPhysicalRegression.agda` and listed in `scripts/check_ym_original_rg_p0_kernel.sh`.
+- New `scripts/check_ym_original_signed_wilson_moment_exact.py` exact-rational finite-measure regression. An equivalent local check passed **7,875** configurations of nonnegative weights and signed test values, and a sharp two-Dirac difference of 2. This is a **numerical algebra regression, not an Agda kernel or physical RG receipt**.
+
+### Exact unpaid source authorities
+
+The theorem is **source-written, conditional**, not unconditionally closed. The concrete all-N complex matrix representation with `|Tr_norm U|≤1` (not cyclicity alone), coherent selected real `abs` and negation order laws, positivity/quotient absolute monotonicity, and the still-uninhabited original Wilson ↔ Bishop scalar interpretation must be supplied as genuine carriers. P0.08 Agda 2.9 kernel acceptance remains outstanding; the code has been read back and structurally inspected but **not compiled**.
+
+**P0.09 remains the immediate physical max-cut:** using the selected original fine-blocked versus bare Wilson measures, derive `|X(W)| ≤ ε_W(a,L,β) Z_f Z_b` with a genuine UV-uniform `ε_W→0`, for all selected words, their products/concatenations and admissible scaling regimes. The source now gives the sharp no-decay envelope `|E_fW-E_bW|≤2` at most; that cannot substitute for an `o(1)` estimate. A Taylor/Green-function sketch asserting a positive massive fine propagator does not prove the original Wilson bound and can be circular with D2.
+
+**Other advertised closures remain unpaid:** D1 actual R576 connecting-polymer physical activity estimates, E1 source-admitted continuum cylinders with projective consistency and positivity, D2 same-OS self-adjoint H and dense-core common-exponent spectral support theorem, N1 nonzero same-limit interacting four-point witness, G1 all-group physical estimates. In particular, a formal `g_{ren}>0` does not prove a four-point cumulant survives or is nonzero, and `h^∨>0` does not prove nonperturbative RG contraction.
