@@ -95,34 +95,63 @@ def _level(l,params):
     raise P1CodecError("invalid universe expression")
 
 def alpha_type(raw):
-    """Typed structural candidate key, never mathematical proof authority."""
+    """Deterministic binder-alpha *candidate* key independent of DAG layout.
+
+    Traverse only the normalized root reachability graph in deterministic
+    child order. In particular, erased mdata nodes must not perturb
+    postorder IDs, nor may distinct original exporter sharing layouts.
+    Original metadata and binder labels remain in the separate exact key.
+    """
     params,root,nodes=parse_type(raw)
     assigned={}
     interned={}
-    output=[]
-    for i,n in enumerate(nodes,1):
+    normalized=[]
+    stack=[(root,False)]
+    active=set()
+    while stack:
+        i,leaving=stack.pop()
+        if i in assigned:
+            continue
+        n=nodes[i-1]
         tag=n[0]
+        if not leaving:
+            if i in active:
+                raise P1CodecError("cyclic exported expression")
+            active.add(i)
+            stack.append((i,True))
+            for dep in reversed(_children(n)):
+                if dep not in assigned:
+                    stack.append((dep,False))
+            continue
+        active.remove(i)
         if tag=="mdata":
             assigned[i]=assigned[n[1]]
             continue
-        if tag=="app": norm=[tag,assigned[n[1]],assigned[n[2]]]
+        if tag=="app":
+            norm=[tag,assigned[n[1]],assigned[n[2]]]
         elif tag in ("lam","forallE"):
             norm=[tag,assigned[n[2]],assigned[n[3]],n[4]]
         elif tag=="letE":
             norm=[tag,assigned[n[2]],assigned[n[3]],assigned[n[4]],n[5]]
-        elif tag=="proj":norm=[tag,n[4],n[2],assigned[n[3]]]
-        elif tag=="sort":norm=[tag,_level(n[1],params)]
+        elif tag=="proj":
+            norm=[tag,n[4],n[2],assigned[n[3]]]
+        elif tag=="sort":
+            norm=[tag,_level(n[1],params)]
         elif tag=="const":
-            if type(n[2]) is not list:raise P1CodecError("invalid constant levels")
+            if type(n[2]) is not list:
+                raise P1CodecError("invalid constant universe arguments")
             norm=[tag,n[3],[_level(v,params) for v in n[2]]]
-        else:norm=n
+        elif tag in ("bvar","natVal","strVal"):
+            norm=n
+        else:
+            raise P1CodecError("unsupported native expression constructor")
         key=encode(norm)
         if key not in interned:
-            interned[key]=len(output)+1
-            output.append(norm)
+            interned[key]=len(normalized)+1
+            normalized.append(norm)
         assigned[i]=interned[key]
     return encode(["lean4export-v3-alpha-type-dag-v1",len(params),
-                   assigned[root],output])
+                   assigned[root],normalized])
 
 def exact_type_roundtrip(raw):
     params,root,nodes=parse_type(raw)
