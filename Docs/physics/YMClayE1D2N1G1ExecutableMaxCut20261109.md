@@ -443,3 +443,17 @@ bash scripts/check_ym_original_rg_p0_kernel.sh
 derived from a proved original signed-weight integral inequality `|N_n(F)| ≤ N_n(abs F)` (or a certified affine shift to a [0,1]-valued test) together with the concrete trace bound and coherent scalar order/division laws. This is OPEN; do not infer that signed trace norms already satisfy the nonnegative-complement entry conditions.
 
 **D2 spectral lemma correction:** If the SAME reconstructed OS Hamiltonian is positive self-adjoint, the local-observable cyclic/core family is dense in the vacuum-orthogonal sector, and **every vector in that core** has a bound `<ψ,e^{-tH}ψ> ≤ C_ψ e^{-m t}` for a common `m>0` and all `t≥0`, then a spectral-measure argument can establish `spec(H)∩(0,m)=∅` even when `C_ψ` depends on `ψ`. What fails without further argument is the **direct** passage `ε→0` to the operator norm estimate `<ψ,e^{-tH}ψ> ≤ e^{-m t}||ψ||²`; that requires uniform norm-controlled prefactors or an independent spectral-support theorem. The exact unpaid R577 owner is the common positive self-adjoint OS semigroup, the dense/separating all-word family, the common physical connected-decay exponent with suitable reflected-time identification, and the spectral-measure support transport. A single decaying plaquette remains insufficient, as the existing finite negative control shows.
+
+
+### Local kernel acceptance split: smallest P0 witness first
+
+Added `scripts/check_ym_p0_real_carrier_local.sh`. This is deliberately separate from the full R445 physical regression checker:
+
+```bash
+bash scripts/check_ym_p0_real_carrier_local.sh
+bash scripts/check_ym_original_rg_p0_kernel.sh
+```
+
+The first command invokes the existing project-owned Nix Agda 2.9 checker separately on `YMClayP0BishopRealCarrierInstancesExact.agda`, `YMClayP0BishopToOriginalWilsonRealWeldExact.agda`, and `BalabanSU2RationalWilsonTraceBoundExact.agda`. It fails on the first compiler error, allowing kernel diagnostics to be attributed to the correct source owner. The second command then checks the wider original R445/E1-D1 proof regression. Neither command has run in the assistant's container, which has no `nix` or `agda` executable.
+
+The first check, even if accepted, establishes **concrete Bishop setoid arithmetic and a conditional faithful-weld theorem**; it does not conjure an inhabitant of the original Wilson `OriginalWilsonToBishopScalarWeld` record or establish arbitrary-SU(N) real trace range. Keep the "source-written / locally kernel-accepted / physically verified" receipt columns distinct.
