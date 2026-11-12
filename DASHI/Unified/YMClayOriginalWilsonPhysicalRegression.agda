@@ -132,3 +132,6 @@ import DASHI.Physics.YangMills.YMClayE1D1OriginalCrossNumeratorNormalizedMomentF
 
 -- D2 negative control: one observed fast-decay transfer mode does not establish a gap on every non-vacuum mode.
 import DASHI.Physics.YangMills.YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact as OSObservableGapNegativeControl
+
+-- P0 concrete scalar realization: pinned Murray/Csimma Bishop SETOID real proves subtraction, x-0, centered cancellation and positive inverse quotient law; does not identify with RealAnalysisAxioms abstract propositional ℝ.
+import DASHI.Physics.YangMills.YMClayP0BishopRealCarrierInstancesExact as P0BishopRealArithmetic
