@@ -7,7 +7,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact wher
 -- One two-sided, one-head tape is represented by an explicit zipper.
 -- Crossing either represented boundary creates exactly one blank cell.
 -- A program instruction observes only its finite control state and
--- one symbol per tape, never the entire N21 source state. Each move
+-- one symbol per tape, never the entire N21 source state. A separate\n-- TableProgram stores all finite transition entries explicitly. Each move
 -- rewrites one symbol and moves its head by at most one cell.
 --
 -- The tape/transition system below is executable. Its elementary
@@ -182,6 +182,65 @@ record LocalProgram (numberOfStates workTapeCount : Nat) : Set where
       Vec.Vec Cell workTapeCount →
       Instruction numberOfStates workTapeCount
 open LocalProgram public
+
+-- Literal, FINITELY STORED instructions, rather than an uncharged
+-- higher-order transition oracle. Four choices are explicitly stored
+-- for every observed tape cell; no list scan or Nat-valued decoding
+-- is hidden in the transition itself.
+record FourChoices (A : Set) : Set where
+  constructor four
+  field
+    onB0 : A
+    onB1 : A
+    onBlank : A
+    onMark : A
+open FourChoices public
+
+pickCell : {A : Set} → Cell → FourChoices A → A
+pickCell B0 (four a b c d) = a
+pickCell B1 (four a b c d) = b
+pickCell Blank (four a b c d) = c
+pickCell Mark (four a b c d) = d
+
+-- A finite 4-ary table over k current work-tape symbols.
+WorkTable : Nat → Set → Set
+WorkTable zero A = A
+WorkTable (suc k) A = FourChoices (WorkTable k A)
+
+pickWork :
+  {k : Nat} {A : Set} →
+  Vec.Vec Cell k → WorkTable k A → A
+pickWork Vec.[] entry = entry
+pickWork (cell Vec.∷ heads) entry =
+  pickWork heads (pickCell cell entry)
+
+-- The finite-control dimension is also an actual vector of entries.
+-- For fixed q and k this is a finite, fully enumerated transition
+-- table of q * 4^(k+1) instruction entries.
+record TableProgram (q k : Nat) : Set where
+  constructor tableProgram
+  field
+    entries : Vec.Vec
+      (FourChoices (WorkTable k (Instruction q k))) q
+open TableProgram public
+
+tableInstruction :
+  {q k : Nat} →
+  TableProgram q k →
+  Fin.Fin q → Cell → Vec.Vec Cell k → Instruction q k
+tableInstruction (tableProgram table) state input work =
+  pickWork work (pickCell input (Vec.lookup table state))
+
+-- Adapt a LITERAL finite table to the generic execution equations.
+-- Kernel checking this source is distinct from proving that the
+-- original N21 arithmetic/parser/history/threshold routines admit
+-- a polynomial-cost compilation into such table instructions.
+useLiteralTable :
+  {q k : Nat} →
+  TableProgram q k → LocalProgram q k
+useLiteralTable table =
+  record { localInstruction = tableInstruction table }
+
 
 machineStep :
   {q k : Nat} →
