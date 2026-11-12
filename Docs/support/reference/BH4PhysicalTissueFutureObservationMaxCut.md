@@ -893,3 +893,65 @@ strict positive implicit PNP root,
 or a source-matched tissue observer.
 Those physical/kernel and empirical
 gates remain OPEN.
+
+
+### 2026-11-12 actual Bishop SG face reuse, thermodynamic gate separation
+
+Companion BH4/PNP PR #1454 now Golden-imports
+`BH4OriginalScharfetterGummelDissipationExact`, which reuses
+the EXISTING semiconductor `BishopScharfetterGummelFaceFluxExact`
+and `BishopConcreteScharfetterGummelFaceFluxExact` owners:
+the same 54 native interior faces × 29 source-indexed species
+have an explicit Bishop-real SG flux matrix, and each of six
+source rational weights embedded in Bishop reals has a
+source-written paired-internal-face cancellation.
+The concrete exponential chart is restricted to
+0 < normalizedDrop ≤ 1. General signed/zero drops
+and source Poisson self-consistency are not yet proved.
+The zero-drop branch has correct elementary
+pure-diffusion algebra, but no all-real analytic
+Bernoulli removable-singularity theorem yet.
+
+The same module proves the algebraic SG face-power
+factorization into minus an entropy kernel, and
+zero power at equal edge activities. It does NOT
+construct a source-specific Bishop logarithm or
+prove its strict positive-order monotonicity,
+original detailed-balanced kinetics, or the
+physical total electrochemical free-energy derivative.
+No universal strict Lyapunov inequality is claimed.
+
+New `BH4OriginalSGPhysicalMaxCutCounterexamplesExact`
+formally witnesses that closed internal transfer
+can change a local voxel inventory while keeping
+the global total fixed. Therefore the previously
+proposed 27-fold product of **independently
+fixed-voxel** simplices is NOT the original PNP
+invariant domain. The eligible positive compact
+domain (after original source species-weight
+positivity is actually proved) has global
+weighted inventories and boundary-aware
+conditions, not per-cell constants.
+
+Committed synthetic regression owner
+`scripts/test_bh4_original_sg_physical_maxcut.py`
+exercises SG sign and zero-drop, native local
+redistribution, chemical non-detailed-balance
+positive free-energy power, and equilibrium
+zero-dissipation negative controls. It was
+not executed in the repository this round.
+
+**Correct remaining P0 physical max cut**:
+actual Rhea bytes and Golden kernel,
+same-nodal Bishop-real 54×29 SG flux and
+self-consistent Poisson coupling for all
+signed drops, quasi-positive source rates,
+GLOBAL invariant mass simplex and a
+constructive or duly justified Brouwer
+root, concrete log/entropy field work
+and source thermodynamic compatibility.
+P1 exterior reactive six-face work,
+same-tissue observation, original
+kinetic measurements and P2/P3 empirical
+validation remain independently OPEN.
+No "all P0 Closed" assertion is admitted.
