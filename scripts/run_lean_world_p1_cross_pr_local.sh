@@ -44,12 +44,25 @@ observation="$(
     python3 -c 'import json,sys;print(json.load(sys.stdin)["path"])'
 )"
 test -f "$observation"
+jmd_args=()
+if [ -n "${DASHI_PR105_WORKTREE:-}" ]; then
+  jmd_owner="$(cd "$DASHI_PR105_WORKTREE" && pwd -P)/scripts/build_jmd_lean_ast_world.py"
+  test -f "$jmd_owner"
+  native_export="$(python3 - "$DASHI_HANDOFF_MANIFEST" <<'PY'
+import json,sys
+manifest=json.load(open(sys.argv[1],encoding="utf-8"))
+print(manifest["artifact_path"])
+PY
+)"
+  test -f "$native_export"
+  jmd_args=(--jmd-builder-source "$jmd_owner" --native-export "$native_export")
+fi
 p1_receipt="$(
   python3 "$root/scripts/run_lean_world_native_p1_pg.py" \
     --schema "$DASHI_WORLD_SCHEMA" \
     --observation "$observation" \
     --p1-codec "$p1_codec" \
-    --acknowledge-candidate-only
+    --acknowledge-candidate-only "${jmd_args[@]}"
 )"
 printf '%s\n' "$p1_receipt"
 
