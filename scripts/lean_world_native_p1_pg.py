@@ -253,3 +253,49 @@ def bounded_original_alpha_fibre(conn,*,toolchain,alpha_type,limit=25,after=None
         "next_keyset":keyset if len(rows)>limit else None,
         "kernel_certified":False,"world_admitted":False
     }
+
+
+def retrieve_original_native_p1(conn,*,repository,revision,path,declaration,
+                                export_sha256):
+    """Read ACTUAL exported type/proof bytes, alpha key and original source.
+
+    A theorem searcher or MDL worker consumes the SAME selected source-bound
+    payload; neither gets a materialized theorem-pair table. No proof status
+    is upgraded by readback.
+    """
+    if not _hex(revision,40) or not _hex(export_sha256):
+        raise NativeP1PGError("immutable original P1 key required")
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT type_exact,type_exact_sha256,type_alpha,type_alpha_sha256,
+                   proof_exact,proof_exact_sha256,original_source_sha256,
+                   toolchain,direct_statement_constants,direct_proof_constants,
+                   status,p1_codec_sha256
+            FROM lean_world_native_p1_observation
+            WHERE repository=%s AND revision=%s AND path=%s
+              AND declaration=%s AND native_export_sha256=%s
+        """,(repository,revision,path,declaration,bytes.fromhex(export_sha256)))
+        row=cur.fetchone()
+    if row is None or row[10]!="source-bound-projected-not-kernel-checked":
+        raise NativeP1PGError("original expression observation not present")
+    exact=bytes(row[0])
+    alpha=bytes(row[2])
+    proof=bytes(row[4])
+    original=retrieve_source(conn,repository,revision,path)
+    if (sha256(exact).digest()!=bytes(row[1]) or
+        sha256(alpha).digest()!=bytes(row[3]) or
+        (sha256(proof).digest() if proof else None)!=(
+            bytes(row[5]) if row[5] is not None else None) or
+        sha256(original).digest()!=bytes(row[6])):
+        raise NativeP1PGError("original expression/source readback integrity failure")
+    return {
+        "status":row[10],
+        "repository":repository,"revision":revision,"path":path,
+        "declaration":declaration,
+        "source":original,"type_exact":exact,"type_alpha":alpha,
+        "proof_exact":proof,"toolchain":row[7],
+        "direct_statement_constants":row[8],
+        "direct_proof_constants":row[9],
+        "p1_codec_sha256":bytes(row[11]).hex(),
+        "kernel_certified":False,"world_admitted":False
+    }
