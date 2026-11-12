@@ -199,3 +199,48 @@ No information here settles the RH Clay Weil-positivity or G1–G4 error-floor g
 4. The classical completed-ξ identity and functional reflection do not exclude off-critical-line zeros; the full Weil/Poisson/Selberg/Hermitian analytic positive route remains unpaid.
 5. The constructive Bishop inverse uses apartness of the **selected** denominator, not a bare rational sequence inverse at arbitrary early cutoffs; the independent original Wilson scalar still needs an operation-/equality-/order-preserving interpretation.
 6. Keep theorem lineage separate: external Zudilin/Ball–Rivoal/Rivoal/Krisman mathematical and Lean formalization work; Mathlib zeta and completed-Lambda owners; original Bishop/Murray/Csimma real construction; DASHI's exact integration and source-index transport.
+
+## 2026-11-12 Setoid and original Wilson partition max-cut — source implementation
+
+### Reuse of prior actual Cauchy-completion work
+
+Existing master owners `BishopFastCauchyRealEquivalenceExact`, `BishopFastCauchyCommonCompletionExact`, and `BishopFastCauchyCategoricityInstanceExact` already define the Bishop ↔ FastCauchy conversion, canonical rational-approximation bridges, and conditional setoid equivalence. These are **not inhabited** merely because the two carriers describe rational sequences. Bishop regular sequences and dyadic FastCauchy representatives have different precision indexing; rational reindexing, round trips, and operation preservation must be proved.
+
+New `DASHI/Analysis/BishopSetoidWeldExact.agda` proves source-level, generic exact lemmas for any **supplied** `Spine.SetoidRealEquivalence` and verified rational-embedding agreement:
+- `rationalAgreementBackwards`: the inverse rational source agreement follows from the existing round-trip proof;
+- `rationalLeftToRight` and `rationalRightToLeft`: preserved and reflected rational-image predicates;
+- `irrationalLeftToRight` and `irrationalRightToLeft`: bidirectional irrationality transport without decidability of irrationality;
+- `irrationalRightCongruent` and `existentialIrrationalityTransport`: selected-value equivalence and existential witness preservation.
+
+New `DASHI/Analysis/BishopFastCauchyZetaWeldExact.agda` specializes the generic layer to the **already-selected** `Canonical.bishopFastCauchyCanonicalEquivalence`, constructs `makeRationalWeld` from an *explicit* rational agreement, and transports an actual fifteen-value witness only with an *explicit* same-source value comparison.
+
+**Unpaid original input:** instantiate the existing `BishopFastCauchyCategoricityData` from real rational-reindexing and source convergence proofs, then provide actual source-specific `Mathlib/Lean ↔ Bishop` evaluation and `Bishop ↔ Agda RiemannAnalyticSubstrate` value equality. Neither construction follows from an interface having a name. This change does NOT inhabit the common-completion records; it proves the value/witness transport *after* the real equivalence.
+
+### Original Wilson finite partition: branch owner PR #1444
+
+The independent Wilson source `RealAnalysisAxioms.ℝ` is a postulated propositional-equality carrier; Bishop's vendored `Real.ℝ` has setoid equality. The Wilson scalar type is NOT `FastCauchyReal`, and neither Bishop/Fast equivalence nor strict partition positivity identifies them.
+
+New `DASHI/Physics/YangMills/YMClayP0OriginalPartitionBishopApartnessExact.agda` on PR #1444 specializes the already-owned original source:
+- `originalPartitionPositive`: consumes `YMClayOriginalWilsonFiniteNumeratorOrderExact.originalWilsonPartitionStrictlyPositive` for the *same* finite Wilson Gibbs/Haar partition;
+- `partitionImagePositive`, `partitionImageApartZero`: obtain a genuine Bishop positive order/apartness witness through the **supplied** `OriginalWilsonToBishopScalarWeld`;
+- `selectedBishopPartitionInverse`, `partitionImageQuotientCancellation`: use Bishop's native constructive inverse and P0 cancellation lemmas;
+- `originalWilsonPositiveDivideCancellation`: applies the existing exact source Wilson quotient law **under the same supplied scalar weld**.
+
+**Unpaid original input:** construct `OriginalWilsonToBishopScalarWeld divide` or replace/reinstantiate the original Wilson consumer over a constructed Bishop quotient with an explicit semantics-preserving comparison. Positivity is already witnessed and does NOT inhabit the independent interpretation.
+
+**Correction to a tempting but invalid shortcut:** `exp(-beta * numberOfPlaquettes)` is in general a positive *real*, not a positive rational `q₀`. A finite-action uniform lower bound also needs actual trace bounds, nonnegative beta, exponential monotonicity and normalized Haar monotonic integration for the same chosen action. Such an inequality is unnecessary for apartness once the original strict partition positivity witness is available.
+
+### RH Gate G2/G3/G4 distinction
+
+The user's displayed prime/zero trace is schematic, not an admitted genuine Weil explicit formula: the classical explicit formula includes normalization, poles/trivial zeros and archimedean Gamma contributions depending on the Fourier/test-function conventions. Similarly, positive-definiteness on the real Fourier axis does not alone establish a sign contradiction for every off-line zero. The missing analytic test-function separation and **uniform** Weil positivity remain the substantive Clay obstruction.
+
+Selected Mathlib `completedRiemannZeta₀_one_sub` can prove the **functional equation** of the genuine entire xi. The new Lean `selectedXi_eq_classical_completed` source identifies `(s(s-1)Λ₀(s)+1)/2` with the classical `s(s-1)Λ(s)/2` away from s=0,1 via the actual Mathlib `completedRiemannZeta_eq`. This does not inhabit the independent Agda `AnalyticSubstrate` and does not assert RH.
+
+### Verification and exact status
+
+- Source-written / GitHub-committed: two new Agda setoid files on PR #1497; one Wilson partition file on PR #1444; Mathlib xi identity extension on Lean PR #104.
+- Local check targets updated: `scripts/check_zeta_odd_bishop_rh_local.sh` on PR #1497; new `scripts/check_ym_bishop_partition_maxcut_local.sh` on PR #1444. No Docker or CI dependence.
+- Local Agda/Lake/Nix kernel output: **NOT OBSERVED** in this execution environment. These source-written statements are therefore **NOT promoted to machine-checked**.
+- Substantive open gates: concrete Bishop ↔ Fast rational Cauchy reindexing and categoricity inputs; original Wilson postulated scalar interpretation; actual Agda-vendored zeta same-value analytic construction; true Weil positivity/RH G2–G4.
+
+**Attribution:** external work belongs to Bishop/Bridges, Murray/Csimma, Geuvers/Niqui, the Mathlib zeta contributors, and Zudilin/Ball–Rivoal/Krisman's formalized theorem respectively. The novel DASHI commits in this iteration are the selected-value proof transport and original finite Wilson apartness specialization; they are not new proofs of the external analytic or millennium results.
