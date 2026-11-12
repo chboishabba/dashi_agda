@@ -16,7 +16,7 @@ import uuid
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from lean_world_native_p1_pg import (
     inspect_observation,load_selected_codec,persist_original_p1,
-    bounded_original_alpha_fibre,NativeP1PGError)
+    bounded_original_alpha_fibre,retrieve_original_native_p1,NativeP1PGError)
 from run_lean_world_stream_pg import ingest_stream,migrate
 
 try:
@@ -185,6 +185,16 @@ class RealSourcePostgresP1(unittest.TestCase):
         self.assertEqual(tuple(bytes(x) if isinstance(x,memoryview) else x
                                for x in row[:3]),(EXACT,alpha,PROOF))
         self.assertEqual(row[3],"source-bound-projected-not-kernel-checked")
+        restored=retrieve_original_native_p1(
+            self.conn,repository="example/test",revision="a"*40,
+            path="Sample.lean",declaration="originalProof",
+            export_sha256="b"*64)
+        self.assertEqual(restored["source"],self.source)
+        self.assertEqual(restored["type_exact"],EXACT)
+        self.assertEqual(restored["type_alpha"],alpha)
+        self.assertEqual(restored["proof_exact"],PROOF)
+        self.assertFalse(restored["kernel_certified"])
+        self.assertFalse(restored["world_admitted"])
         hit=bounded_original_alpha_fibre(
             self.conn,toolchain="Lean-4.28",alpha_type=alpha,limit=1)
         self.assertEqual(hit["returned"],1)
