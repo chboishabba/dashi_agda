@@ -27,13 +27,13 @@ data Z7Index : Set where
 
 intoFifteen : Z7Index → Fin 15
 intoFifteen at7 = suc zero
-intoFifteen at9 = suc suc zero
-intoFifteen at11 = suc suc suc zero
-intoFifteen at13 = suc suc suc suc zero
-intoFifteen at15 = suc suc suc suc suc zero
-intoFifteen at17 = suc suc suc suc suc suc zero
-intoFifteen at19 = suc suc suc suc suc suc suc zero
-intoFifteen at21 = suc suc suc suc suc suc suc suc zero
+intoFifteen at9 = suc (suc (zero))
+intoFifteen at11 = suc (suc (suc (zero)))
+intoFifteen at13 = suc (suc (suc (suc (zero))))
+intoFifteen at15 = suc (suc (suc (suc (suc (zero)))))
+intoFifteen at17 = suc (suc (suc (suc (suc (suc (zero))))))
+intoFifteen at19 = suc (suc (suc (suc (suc (suc (suc (zero)))))))
+intoFifteen at21 = suc (suc (suc (suc (suc (suc (suc (suc (zero))))))))
 
 ------------------------------------------------------------------------
 -- Literal index equalities, checked by Agda's Nat normalizer.
