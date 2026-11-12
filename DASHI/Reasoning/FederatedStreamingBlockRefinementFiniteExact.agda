@@ -82,17 +82,17 @@ cannotUnderflow :
   dequeue empty ≡ rejected
 cannotUnderflow = refl
 
-twoEnqueuesFillExactly :
-  (caseZero : Admission Queue2) →
-  caseZero ≡ admitted two →
-  caseZero ≡ admitted two
-twoEnqueuesFillExactly caseZero proof = proof
+secondEnqueueFillsQueue :
+  enqueue one ≡ admitted two
+secondEnqueueFillsQueue = refl
 
-twoEnqueuesAdmitted :
-  (caseZero : Admission Queue2) →
-  caseZero ≡ enqueue one →
-  caseZero ≡ admitted two
-twoEnqueuesAdmitted caseZero refl = refl
+thirdEnqueueRejected :
+  enqueue two ≡ rejected
+thirdEnqueueRejected = refl
+
+dequeueFullQueue :
+  dequeue two ≡ admitted one
+dequeueFullQueue = refl
 
 -- Separate immutable model revision and mutable history/denoising
 -- generation: neither can silently stand in for the other.
