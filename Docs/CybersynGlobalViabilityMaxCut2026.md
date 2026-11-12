@@ -22,6 +22,31 @@ Source attribution follows `Docs/SourceAttributionPolicy.md`: external observati
 - `DASHI/Economics/GeopoliticalEnergyAITreasuryTransmissionExact.agda`, `DASHI/Governance/ComparativeCrisisClimateAtlas.agda`: geographically specific transmission candidates.
 - `DASHI/Economics/SystemicCrisisCompressionBridge.agda`: explicit market-plumbing evidence, compression regimes, no-leakage validation.
 
+## Follow-on implementation, 2026-11-12
+
+Implemented additional source-only owners:
+
+- `DASHI/Governance/CybersynPhysicalFinanceCutExact.agda`: constructive loan double-entry, cash sources/uses, exact grid/labour capacity constraints, housing allocation nonfactorability, early-generation harm counterexample, financial/physical conditions separated from social authority.
+- `DASHI/Governance/CybersynAuthorityFeedbackExact.agda`: actual finite actor-dependent sensor/action transition instance; corrected vs imposed outcomes, investor-observation nonfactorability, consultation distinct from governance admission.
+- `DASHI/Governance/CybersynCrossSectorScenarioExact.agda`: finite energy–food and yen–AI collateral nonlinear shock conjunctions; public/private first-loss distinction; government/insurer/bank/household eligibility gates.
+- `DASHI/Governance/CybersynGlobalViabilityEverything.agda`: one focused root importing all four owners.
+- `scripts/check_cybersyn_global_viability_maxcut.sh`: fail-closed local Agda acceptance command, no CI requirement.
+
+These exact Boolean/cash/physical examples are new DASHI models, not measured transition magnitudes or forecasts. Source readback is confirmed. No Agda kernel/type-check acceptance was performed on this branch.
+
+### Revised gate statuses
+
+- **P0 OPEN**: five source owners read back; focused Agda 2.9 checker not run, kernel acceptance absent.
+- **P1 PARTIAL**: time-indexed actor observation/action transition exists; no authoritative PostgreSQL/world time-index hyperfabric adapter.
+- **P2 PARTIAL**: constructive financial double entry and physical grid/labour conservation; complete sectoral SFC and energy/material/land/water import balances absent.
+- **P3 PARTIAL**: finite affected-community/investor interventions, and government/insurer/bank/household gating; no calibrated best-response, actuarial cashflows or budget choices.
+- **P4 PARTIAL**: source-bound no-consent-from-consultation and operational correction examples; real mandate/community governance receipts absent.
+- **P5 PARTIAL**: seven-generation all-intermediate constraint and finite first-generation counterexample; regional ecological trajectories and Indigenous standing not implied.
+- **P6 PARTIAL**: explicit synthetic multi-shock interactions and first-loss allocations; no calibrated lagged, region-indexed scenario runs.
+- **P7 PARTIAL**: explicit guarantee transparency and fiscal/insurance/funding constraints; actuarial reserving, systemic balance-sheet contagion and public contingent liabilities not yet joined.
+- **P8 OPEN**: independently sourced empirical admission/backtests and negative controls.
+- **P9 OPEN**: realised resource-constrained comparisons of BOLO, Cybersyn, market and public-planning alternatives.
+
 ## Implemented tranche
 
 1. Typed `TimeIndexedCybersyn`: observer-specific measurement, actor interventions, dynamics, effects, authority, and an exact action/transition agreement field.
@@ -64,7 +89,7 @@ The toy cases are formal countermodels to invalid general inferences, **not** em
 ## Suggested validation command
 
 ```sh
-agda -i . -i /path/to/agda-stdlib DASHI/Governance/CybersynGlobalViabilityMaxCutExact.agda
+bash scripts/check_cybersyn_global_viability_maxcut.sh
 ```
 
 Use the repo's pinned Nix/Agda 2.9 environment and include its configured library paths. No CI dependency is presumed.
