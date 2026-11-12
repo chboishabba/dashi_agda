@@ -33,6 +33,8 @@ targets=(
   DASHI/Physics/YangMills/BalabanSU2RationalWilsonTraceBoundExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopRealCarrierInstancesExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopToOriginalWilsonRealWeldExact.agda
+  DASHI/Physics/YangMills/YMClaySUNOneLinkHaarConvolutionSourceExact.agda
+  DASHI/Physics/YangMills/YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
 )
 
