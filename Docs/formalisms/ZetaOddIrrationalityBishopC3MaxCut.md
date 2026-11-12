@@ -65,3 +65,9 @@ No repository-local Agda compiler is available in the current execution environm
 - Existing rational-approximation fibre: `DASHI/Moonshine/QuadraticIrrationalSignedApproximationFibreExact.agda`
 - Genuine zeta boundary: `DASHI/Analysis/RiemannAnalyticSubstrate.agda`
 - C3 coordinate boundary: `DASHI/Moonshine/C3RiemannConjugationBridgeExact.agda`
+
+## Additional candidate external proof (not admitted)
+
+The public `telaviv/zeta-irrationality` README reports an unconditional Mathlib theorem `ZetaIrr.Z7.oneOfZeta7To21` proving that one of zeta(7),...,zeta(21) is irrational, with exactly `[propext, Classical.choice, Quot.sound]` as reported axioms. URL: https://github.com/telaviv/zeta-irrationality . Its actual commit and source declarations have not been fetched or checked here. As the set {7,...,21} is a subset of {5,...,33}, an eventual verified witness can map into the existing 15-index `OddWindow`, but a proper finite-index embedding theorem is still necessary (ZI01).
+
+The separate 2026 individual zeta(5) projects must not be treated as automatically interchangeable. For example, https://github.com/danromik/zeta5-irrationality reports a prime-number-theorem axiom, whereas https://github.com/long-mathematics/zeta5-irrationality explicitly says it has not yet proved the endpoint. Verify every project's own trust boundary before admitting a claim. These are external projects; no credit is transferred to DASHI.
