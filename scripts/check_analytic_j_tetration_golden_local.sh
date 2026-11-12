@@ -6,6 +6,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 targets=(
+  DASHI/Moonshine/AbelBishopNewtonSelectedOperatorExact.agda
   DASHI/Moonshine/AbelBishopInverseKoenigsRemainderToSchroederExact.agda
   DASHI/Moonshine/AbelBishopInverseKoenigsRemainderFactorExact.agda
   DASHI/Moonshine/AbelBishopKoenigsSelectedRationalConstantsExact.agda
@@ -108,6 +109,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 6
 fi
 python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
+python3 scripts/check_analytic_j_tetration_newton_center_exact.py
 python3 scripts/check_analytic_j_tetration_local_koenigs_rational.py
 python3 scripts/analytic_j_tetration_koenigs_log_series_majorant.py
 python3 scripts/analytic_j_tetration_exp_log_formal_recurrence.py
