@@ -35,6 +35,7 @@ import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ord
 import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bilateral
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as Push
 import DASHI.Physics.YangMills.YMClayE1D1OriginalSUNTraceToAllWordsBoundExact as WordBound
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as OriginalOrder
 import DASHI.Physics.YangMills.YangMillsPhysicalFiniteMeasureCylinderAlgebraExact as Finite
@@ -195,3 +196,145 @@ module _
         theory traceData exponential beta oneLink bilateral divide
         ordered strictToWeak strict n)
       (originalWordNumeratorAbsoluteBelowPartition n w)
+
+  ----------------------------------------------------------------------
+  -- The stronger original-PHYSICAL result is formulated for any
+  -- certified signed bounded source test (not only Wilson words).
+  -- This permits the actual R445 fine n=3 native-block pullback of
+  -- an independently chosen n=1 coarse Wilson word.
+  ----------------------------------------------------------------------
+
+  originalBoundedTestNumeratorUpper :
+    (n : Nat)
+    (test : OriginalOrder.WilsonTest
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n) →
+    (∀ links → absℝ (test links) ≤ℝ 1ℝ) →
+    numerator n test ≤ℝ partition n
+  originalBoundedTestNumeratorUpper n test bounded =
+    OriginalOrder.originalWilsonNumeratorBelowItsPartition
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n
+      test (λ links → 1ℝ -ℝ test links)
+      (λ links → oneMinusNN (test links) (bounded links))
+      (λ links → oneMinusCompletes (test links))
+
+  originalBoundedTestNegativeNumeratorUpper :
+    (n : Nat)
+    (test : OriginalOrder.WilsonTest
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n) →
+    (∀ links → absℝ (test links) ≤ℝ 1ℝ) →
+    numerator n (λ links → -ℝ test links) ≤ℝ partition n
+  originalBoundedTestNegativeNumeratorUpper n test bounded =
+    OriginalOrder.originalWilsonNumeratorBelowItsPartition
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n
+      (λ links → -ℝ test links)
+      (λ links → 1ℝ +ℝ test links)
+      (λ links → onePlusNN (test links) (bounded links))
+      (λ links → onePlusCompletes (test links))
+
+  originalBoundedTestNegativeNumeratorIsNegation :
+    (n : Nat)
+    (test : OriginalOrder.WilsonTest
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n) →
+    numerator n (λ links → -ℝ test links)
+      ≡ -ℝ (numerator n test)
+  originalBoundedTestNegativeNumeratorIsNegation n test =
+    trans
+      (OriginalOrder.originalWilsonNumeratorCongruent
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak n
+        (λ links → -ℝ test links)
+        (λ links → (-ℝ 1ℝ) *ℝ test links)
+        (λ links → negAsScale (test links)))
+      (trans
+        (Finite.numeratorScale
+          (OriginalOrder.sourceIntegration
+            theory traceData exponential beta oneLink bilateral divide
+            ordered strictToWeak n)
+          (-ℝ 1ℝ) test)
+        (sym (negAsScale (numerator n test))))
+
+  originalBoundedTestNumeratorAbsoluteAtMostPartition :
+    (n : Nat)
+    (test : OriginalOrder.WilsonTest
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n) →
+    (∀ links → absℝ (test links) ≤ℝ 1ℝ) →
+    absℝ (numerator n test) ≤ℝ partition n
+  originalBoundedTestNumeratorAbsoluteAtMostPartition n test bounded =
+    absFromSignedBounds
+      (numerator n test)
+      (partition n)
+      (originalBoundedTestNumeratorUpper n test bounded)
+      (subst
+        (λ value → value ≤ℝ partition n)
+        (originalBoundedTestNegativeNumeratorIsNegation n test)
+        (originalBoundedTestNegativeNumeratorUpper n test bounded))
+
+  originalBoundedTestNormalizedAbsoluteAtMostOne :
+    (n : Nat)
+    (test : OriginalOrder.WilsonTest
+      theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak n) →
+    (∀ links → absℝ (test links) ≤ℝ 1ℝ) →
+    absℝ
+      (Physical.normalizedExpectation
+        (OriginalOrder.wilsonMeasure
+          theory traceData exponential beta oneLink bilateral divide
+          ordered strictToWeak n) test)
+      ≤ℝ 1ℝ
+  originalBoundedTestNormalizedAbsoluteAtMostOne n test bounded =
+    divideSignedUnitBound
+      (numerator n test) (partition n)
+      (OriginalOrder.originalWilsonPartitionStrictlyPositive
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak strict n)
+      (originalBoundedTestNumeratorAbsoluteAtMostPartition n test bounded)
+
+  -- P0.06 original same-source WEXT/R445 two-measure version:
+  -- selected n=1 bare word vs its actual native block pullback
+  -- integrated in original interacting n=3 Wilson Gibbs/Haar.
+  originalR445FineBlockedWordAbsoluteMomentAtMostOne :
+    (w : OriginalWord 1) →
+    absℝ
+      (Physical.normalizedExpectation
+        (OriginalOrder.wilsonMeasure
+          theory traceData exponential beta oneLink bilateral divide
+          ordered strictToWeak 3)
+        (λ fine →
+          originalWordTest 1 w
+            (Push.actualBlockedLinkMap
+              theory traceData exponential (beta 3)
+              oneLink bilateral divide fine)))
+      ≤ℝ 1ℝ
+  originalR445FineBlockedWordAbsoluteMomentAtMostOne w =
+    originalBoundedTestNormalizedAbsoluteAtMostOne
+      3
+      (λ fine →
+        originalWordTest 1 w
+          (Push.actualBlockedLinkMap
+            theory traceData exponential (beta 3)
+            oneLink bilateral divide fine))
+      (λ fine →
+        originalWordAbsBelowOne 1 w
+          (Push.actualBlockedLinkMap
+            theory traceData exponential (beta 3)
+            oneLink bilateral divide fine))
+
+  originalR445BareWordAbsoluteMomentAtMostOne :
+    (w : OriginalWord 1) →
+    absℝ
+      (Physical.normalizedExpectation
+        (OriginalOrder.wilsonMeasure
+          theory traceData exponential beta oneLink bilateral divide
+          ordered strictToWeak 1)
+        (originalWordTest 1 w))
+      ≤ℝ 1ℝ
+  originalR445BareWordAbsoluteMomentAtMostOne w =
+    originalBoundedTestNormalizedAbsoluteAtMostOne
+      1 (originalWordTest 1 w)
+      (originalWordAbsBelowOne 1 w)
