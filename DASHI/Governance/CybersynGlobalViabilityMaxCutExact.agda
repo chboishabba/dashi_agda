@@ -156,7 +156,8 @@ data InvestmentHeadline : Set where
   promisedCapital : InvestmentHeadline
 
 data CommunityResult : Set where
-  unresolvedHarm repairedWithAuthority : CommunityResult
+  unresolvedHarm : CommunityResult
+  repairedWithAuthority : CommunityResult
 
 headline : ToyPolicyState → InvestmentHeadline
 headline _ = promisedCapital
