@@ -83,6 +83,7 @@ def real_acceptance(*,lean,exporter,output,timeout=600):
         built=command([lean,"-o",olean,staged],cwd=root,env=env,timeout=timeout)
         if not olean.is_file():
             raise RealP1ControlError("Lean returned success without OLean")
+        compiled_olean_sha256=sha256(olean.read_bytes()).hexdigest()
         joined={}
         receipts=[]
         for declaration in NAMES:
@@ -135,8 +136,7 @@ def real_acceptance(*,lean,exporter,output,timeout=600):
         "original_source_sha256":sha256(original).hexdigest(),
         "lean_version":version,
         "lean_binary_sha256":sha256(lean.read_bytes()).hexdigest(),
-        "compiled_original_olean_sha256":sha256(olean.read_bytes()).hexdigest()
-           if olean.is_file() else None,
+        "compiled_original_olean_sha256":compiled_olean_sha256,
         "original_source_kernel_compiled":True,
         "native_proof_roundtrip":True,
         "binder_alpha_positive":True,
@@ -146,8 +146,7 @@ def real_acceptance(*,lean,exporter,output,timeout=600):
         "independent_checker_required":False,
         "authoritative_world_admitted":False
     }
-    # Checked OLean was ephemeral by design; don't claim saved OLean retention.
-    result["compiled_original_olean_sha256"]=None
+    # OLean bytes are ephemeral; only its checked original digest persists.
     receipt_path=output/"receipt.p1-real-native-controls.json"
     with receipt_path.open("x",encoding="utf-8") as file:
         json.dump(result,file,sort_keys=True,indent=2)
