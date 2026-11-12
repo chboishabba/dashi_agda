@@ -247,6 +247,18 @@ class CrossPrObservationJoinTests(unittest.TestCase):
         self.assertIs(record["world_admitted"], False)
 
 
+    def test_unreviewed_jmd_source_revision_rejected_by_production_pin(self):
+        raw = canonical(self.fake_jmd())
+        path = self.root / "fake-jmd-pin.json"
+        path.write_bytes(raw)
+        with patch.object(join_owner, "JMD_PR105_SOURCE_SHA256",
+                          "f937850cbc5ad15a1bc81fa88f723dd1ac3056a2709b7c06ceefe5c22ec5044e"):
+            with self.assertRaisesRegex(ObservationJoinError, "unreviewed"):
+                self.invoke(jmd_path=path,
+                            jmd_sha256=sha256(raw).hexdigest(),
+                            jmd_source_sha256="1" * 64)
+
+
 
 if __name__ == "__main__":
     unittest.main()
