@@ -31,6 +31,7 @@ import DASHI.Moonshine.AbelBishopKoenigsFiniteTelescopingExact as Telescope
 import DASHI.Moonshine.AbelBishopKoenigsGeometricAbsoluteExact as Bounds
 import DASHI.Moonshine.AbelBishopInverseKoenigsFiniteOrbitExact as Orbit
 import DASHI.Moonshine.AbelBishopInverseKoenigsRemainderFactorExact as Remainder
+import DASHI.Moonshine.AbelBishopKoenigsSelectedRationalConstantsExact as Selected
 import DASHI.Moonshine.AbelBishopInverseKoenigsGeometricOrbitExact as Limit
 import DASHI.Moonshine.AbelBishopInverseKoenigsGeometricSchroederExact as Schroeder
 
@@ -135,3 +136,79 @@ originalBishopRemainderBuildsSchroeder
       p nz g z constant ratio atZ)
     (originalBishopRemainderBuildsActualIncrementBounds
       p nz g (g z) constant ratio atGZ)
+
+
+------------------------------------------------------------------------
+-- FINAL SELECTED-RATIO CUT: source analytic bounds are TWO REAL COMPONENT
+-- inequalities; the actual Bishop ratio/constant inputs are NOW CONSTRUCTED.
+-- There is no caller-supplied abstract geometric ratio or order witness.
+------------------------------------------------------------------------
+
+record OriginalBishopSelectedAnalyticRemainderBound
+    (p : Complex.BishopComplex)
+    (nz : Reciprocal.BishopComplexNonzero p)
+    (g : Complex.BishopComplex → Complex.BishopComplex)
+    (z : Complex.BishopComplex) : Set₁ where
+  field
+    realSourceEstimate :
+      ∀ n →
+      BishopReal._≤_
+        (BishopReal.∣ Complex.re
+          (originalBishopScaledLogRemainder p nz g n z) ∣)
+        (Geometric.scaledGeometricTerm
+          Selected.bishopSelectedKoenigsConstant
+          Selected.bishopSelectedKoenigsBeta n)
+
+    imagSourceEstimate :
+      ∀ n →
+      BishopReal._≤_
+        (BishopReal.∣ Complex.im
+          (originalBishopScaledLogRemainder p nz g n z) ∣)
+        (Geometric.scaledGeometricTerm
+          Selected.bishopSelectedKoenigsConstant
+          Selected.bishopSelectedKoenigsBeta n)
+open OriginalBishopSelectedAnalyticRemainderBound public
+
+selectedAnalyticBoundsBuildOriginalGeometricInputs :
+  ∀ p (nz : Reciprocal.BishopComplexNonzero p) g z →
+  OriginalBishopSelectedAnalyticRemainderBound p nz g z →
+  OriginalBishopSelectedLogRemainderBounds
+    p nz g z
+    Selected.bishopSelectedKoenigsConstant
+    Selected.bishopSelectedKoenigsBeta
+selectedAnalyticBoundsBuildOriginalGeometricInputs p nz g z input =
+  record
+    { geometricInputs = Selected.bishopSelectedKoenigsGeometricInputs
+    ; realRemainderBound = realSourceEstimate input
+    ; imagRemainderBound = imagSourceEstimate input
+    }
+
+selectedOriginalBishopKoenigsLimit :
+  ∀ p (nz : Reciprocal.BishopComplexNonzero p) g z →
+  OriginalBishopSelectedAnalyticRemainderBound p nz g z →
+  Complex.BishopComplex
+selectedOriginalBishopKoenigsLimit p nz g z input =
+  originalBishopRemainderSourceKoenigsLimit
+    p nz g z
+    Selected.bishopSelectedKoenigsConstant
+    Selected.bishopSelectedKoenigsBeta
+    (selectedAnalyticBoundsBuildOriginalGeometricInputs p nz g z input)
+
+selectedOriginalBishopKoenigsSchroeder :
+  ∀ p (nz : Reciprocal.BishopComplexNonzero p) g z →
+  (atZ : OriginalBishopSelectedAnalyticRemainderBound p nz g z) →
+  (atGZ : OriginalBishopSelectedAnalyticRemainderBound p nz g (g z)) →
+  Complex._≈C_
+    (Algebra._*C_ p
+      (selectedOriginalBishopKoenigsLimit p nz g (g z) atGZ))
+    (selectedOriginalBishopKoenigsLimit p nz g z atZ)
+selectedOriginalBishopKoenigsSchroeder
+  p nz g z atZ atGZ =
+  originalBishopRemainderBuildsSchroeder
+    p nz g z
+    Selected.bishopSelectedKoenigsConstant
+    Selected.bishopSelectedKoenigsBeta
+    (selectedAnalyticBoundsBuildOriginalGeometricInputs
+      p nz g z atZ)
+    (selectedAnalyticBoundsBuildOriginalGeometricInputs
+      p nz g (g z) atGZ)
