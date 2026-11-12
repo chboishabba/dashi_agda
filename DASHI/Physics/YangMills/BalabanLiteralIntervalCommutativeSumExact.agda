@@ -27,7 +27,8 @@ record IntervalAdditionLaws
     associative : (x y z : Eval.RationalInterval) →
       Eval.addInterval arithmetic (Eval.addInterval arithmetic x y) z
       ≡ Eval.addInterval arithmetic x (Eval.addInterval arithmetic y z)
-open IntervalAdditionLaws public
+open IntervalAdditionLaws public renaming
+  (commutative to addCommutative; associative to addAssociative)
 
 record IntervalMultiplicationLaws
   (arithmetic : Eval.RationalIntervalArithmetic) : Set₁ where
@@ -40,7 +41,8 @@ record IntervalMultiplicationLaws
         (Eval.multiplyInterval arithmetic x y) z
       ≡ Eval.multiplyInterval arithmetic x
         (Eval.multiplyInterval arithmetic y z)
-open IntervalMultiplicationLaws public
+open IntervalMultiplicationLaws public renaming
+  (commutative to multiplyCommutative; associative to multiplyAssociative)
 
 -- The following lemmas instantiate the ACTUAL source expression
 -- constructors against the ACTUAL recursive evaluator.
@@ -52,7 +54,7 @@ addSyntaxCommutesSemantically :
   Eval.evaluateExpression arithmetic environment (Eval.add left right)
   ≡ Eval.evaluateExpression arithmetic environment (Eval.add right left)
 addSyntaxCommutesSemantically arithmetic environment laws left right =
-  commutative laws
+  addCommutative laws
     (Eval.evaluateExpression arithmetic environment left)
     (Eval.evaluateExpression arithmetic environment right)
 
@@ -66,7 +68,7 @@ addSyntaxAssociatesSemantically :
   ≡ Eval.evaluateExpression arithmetic environment
     (Eval.add a (Eval.add b c))
 addSyntaxAssociatesSemantically arithmetic environment laws a b c =
-  associative laws
+  addAssociative laws
     (Eval.evaluateExpression arithmetic environment a)
     (Eval.evaluateExpression arithmetic environment b)
     (Eval.evaluateExpression arithmetic environment c)
@@ -79,7 +81,7 @@ multiplySyntaxCommutesSemantically :
   Eval.evaluateExpression arithmetic environment (Eval.multiply left right)
   ≡ Eval.evaluateExpression arithmetic environment (Eval.multiply right left)
 multiplySyntaxCommutesSemantically arithmetic environment laws left right =
-  commutative laws
+  multiplyCommutative laws
     (Eval.evaluateExpression arithmetic environment left)
     (Eval.evaluateExpression arithmetic environment right)
 
@@ -93,7 +95,7 @@ multiplySyntaxAssociatesSemantically :
   ≡ Eval.evaluateExpression arithmetic environment
     (Eval.multiply a (Eval.multiply b c))
 multiplySyntaxAssociatesSemantically arithmetic environment laws a b c =
-  associative laws
+  multiplyAssociative laws
     (Eval.evaluateExpression arithmetic environment a)
     (Eval.evaluateExpression arithmetic environment b)
     (Eval.evaluateExpression arithmetic environment c)
@@ -108,11 +110,11 @@ swapTwoInsideSum :
     ≡ Eval.addInterval arithmetic y (Eval.addInterval arithmetic x tail)
 swapTwoInsideSum arithmetic laws x y tail =
   trans
-    (sym (associative laws x y tail))
+    (sym (addAssociative laws x y tail))
     (trans
       (cong (λ v → Eval.addInterval arithmetic v tail)
-            (commutative laws x y))
-      (associative laws y x tail))
+            (addCommutative laws x y))
+      (addAssociative laws y x tail))
 
 -- Sum evaluation is a fold through the existing literal AST, with
 -- the true recursive arithmetic and constant-zero leaf unchanged.
