@@ -346,3 +346,30 @@ A Nix devShell is already defined by the repository `flake.nix`; the checker use
 **Next source-binding work after Agda receipt:** TNET05 original source weight tensor shapes and activation/partition identity; TNET02 memory capacities for actual worker hardware and available coordinator RAM; TNET04 source FFN/C2/Sophontic and quantized kernel BIDI; N02/N07/N12 authenticated remote joint-state transport, ACKed histories and failover; TNET08/TNET12 multi-peer critical-path scheduler; TNET13/TNET16 full original-token-trace and measured multi-peer cost. The earlier recorded student-quality and JQ1 transport failures remain failed gates, not cured by synthetic shard tests.
 
 **Attribution/status:** existing LILA architecture belongs to Anatolii Kornienko; original signed-wave/federated transport owners remain in PR #1442 and LeechTransformer PR #4. The new topology/focused gate is DASHI-owned finite implementation and conditional proof infrastructure only; no external MoE model ownership, deployed federation or physical speedup claimed.
+
+## 2026-11-12 attached local verification result — dependency failure before Agda; isolated Nix gate
+
+**User-supplied authoritative receipt:** 14/14 CPU-only synthetic preflight tests passed in isolated clean worktree `/home/c/Documents/code/dashi_agda-master-topology`; JSON receipt recorded `tests_passed: null` due to old writer metadata, `agda_kernel_checked: false`, `actual_model_checked: false`, `network_measured: false`, `gpu_validated: false`, `release_admitted: false`. Never infer a kernel result from the 14/14 CPU test report.
+
+**Observed kernel-run.log:** Nix failed building `zkperf-0.1.0.drv` because Cargo could not find `erdfa-publish/Cargo.toml` within the packaged source workspace (exit code 101). The shell environment derivation consequently failed: **Agda never started**. This is an environment/build packaging fault, not a failed proof, invalid theorem, GPU issue, or a reason to change the active dirty checkout.
+
+**Focused correction on default branch:**
+- `flake.nix` now offers `devShells.federated-topology` containing the repository-selected Agda toolchain, Python and Bash, but no `zkperfParse` dependency. Leave the broader default devShell/zkperf user environment unmodified.
+- `scripts/check_federated_topology.sh` now uses `agda -i . -l standard-library` on all three finite modules. The earlier `--no-libraries` mode was unsuitable for library-dependent modules; use only the repository's declared standard-library configuration.
+- After a passing CPU suite, the receipt writer explicitly stores `tests_passed: 14`. The `agda_kernel_checked` flag becomes true only following success of all three actual Agda invocations. `release_admitted` remains false.
+- Source changes committed through GitHub; no machine-local service manipulation or Agda 2.9 verification by the assistant has occurred.
+
+**Next local focused command** (when no earlier kernel service is running):
+
+```bash
+cd /home/c/Documents/code/dashi_agda-master-topology
+git fetch origin
+git pull --ff-only
+nix develop .#federated-topology --command bash scripts/check_federated_topology.sh --kernel \
+  2>&1 | tee artifacts/federated_topology/kernel-run.log
+cat artifacts/federated_topology/finite_preflight.json
+```
+
+If continuing to run via a `systemd --user` persistent service, update its `ExecStart` to call the new `nix develop .#federated-topology` command, verify the old service has stopped, and preserve the service's journal and exit status. No competing Nix process or repeated full default-shell build should be launched.
+
+**Current actual status:** CPU finite preflight PASS; focused Nix entrypoint SOURCE-WRITTEN; focused Nix build NOT YET VERIFIED; Agda 2.9 finite kernel acceptance OPEN; original LILA/Qwen and distributed execution OPEN. The mathematical maximum cut remains unchanged until we receive a real Agda result; do not spend time on unrelated zkperf repairs to discharge topology gates.
