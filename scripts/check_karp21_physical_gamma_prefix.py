@@ -9,6 +9,23 @@ import random
 
 B0, B1, BLANK, MARK = "B0", "B1", "Blank", "Mark"
 
+SYMBOLS = (B0, B1, BLANK, MARK)
+# Shape matches Agda TableProgram: OUTER indexed by input head,
+# INNER indexed by work head; neither dimension may be transposed.
+INPUT_ACTIONS = (
+    ("skip-zero", B0, "right", MARK, "right", False),
+    ("separator", B1, "stay", BLANK, "stay", True),
+    ("end-blank", BLANK, "stay", BLANK, "stay", True),
+    ("end-mark", MARK, "stay", BLANK, "stay", True),
+)
+LITERAL_TABLE = tuple(tuple(action for _ in SYMBOLS)
+                      for action in INPUT_ACTIONS)
+
+
+def dispatch(input_head, work_head):
+    return LITERAL_TABLE[SYMBOLS.index(input_head)][SYMBOLS.index(work_head)]
+
+
 @dataclass(frozen=True)
 class Tape:
     left: tuple[str, ...]
@@ -31,7 +48,8 @@ def scan_start(bits):
 
 def step(source: Tape, tally: Tape):
     # Exact four-row local input transition table, tally-head independent.
-    if source.head == B0:
+    action = dispatch(source.head, tally.head)
+    if action[0] == "skip-zero":
         nxt = Tape((B0,) + source.left,
                    source.right[0] if source.right else BLANK,
                    source.right[1:] if source.right else ())
@@ -78,6 +96,12 @@ def check_case(bits):
 
 def main():
     rng = random.Random(20261112)
+    for input_head in SYMBOLS:
+        for work_head in SYMBOLS:
+            assert dispatch(input_head, work_head) == INPUT_ACTIONS[SYMBOLS.index(input_head)]
+    # Regression catches the historical transposed-table bug: B0
+    # with an initially blank tally tape MUST advance, never halt.
+    assert dispatch(B0, BLANK)[0] == "skip-zero"
     cases = instructions = 0
     for zeros in range(257):
         for payload_size in (0, 1, 2, 3, 7, 16, 63):
