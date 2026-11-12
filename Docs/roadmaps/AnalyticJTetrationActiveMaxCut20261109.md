@@ -867,3 +867,56 @@ The selected Newton source chain now includes \`AbelBishopNewtonSelectedOperator
 - The local Abel chart, monodromy, Kneser real half-iterate, j/J Hauptmodul, world/observer frame intertwiner and 1D slice/3D boundary integral transports remain independently OPEN.
 
 **Acceptance:** all additional declarations above are source-written and registered in \`scripts/check_analytic_j_tetration_golden_local.sh\`; no Agda/Nix local kernel is installed in the current runtime; CI status is irrelevant and not used. Retain mathematical original-author/source and DASHI proof-owner attribution boundaries.
+
+
+## 2026-11-12 — Attached P1 Newton analytic contraction cut, maximal source proof (continuation)
+
+**Status:** The attached 120-line Newton/Koenigs handoff was audited against the literal Bishop imports. Its claims of "constructively closed" Newton contraction, fixed point, principal log disk and local Koenigs are **NOT promoted** by a paper derivation or a rational smoke test. This round adds exact source modules below, with no CI dependency and no assumed local Agda acceptance.
+
+### Source implementations now on PR #1478
+
+1. \`AbelBishopAnalyticNewtonContractionExact.agda\`
+   - Defines the **same actual Newton center and Euclidean squared distance**, \`originalBishopSquaredDistance z w = normSqC(z-w)\`, on the original Bishop complex carrier.
+   - Proves \`originalBishopNewtonCenterInSelectedDisk\` without a source field.
+   - From \`OriginalBishopAnalyticNewtonContraction\` for the **actual native-expC Newton operator**, and only its explicit \`originalNewtonMapsDisk\`, \`originalNewtonSquaredContraction\` and literal \`originalNewtonFirstStepSquared\` analytic leaves, proves \`originalBishopNewtonOrbitStaysInDisk\`.
+   - Inductively establishes the all-natural squared increment bound \(\mathrm{normSq}(p_{n+1}-p_n)\le((1/15000)(1/200)^n)^2\). Reuses original Bishop real multiplication monotonicity, native geometric-power successor, normSq component domination and proven nonnegative square-order reflection.
+   - \`originalBishopAnalyticNewtonBuildsActualStepBounds\` produces **both** exact original real/imag componentwise bounds required by \`AbelBishopNewtonSelectedLimitExact\`. No per-index or caller-chosen convergence records remain.
+2. \`AbelBishopNewtonExpContinuityTransportExact.agda\`
+   - Constructs actual Bishop complex subtraction and right-fixed multiplication convergence, derives Newton-operator continuity along **the same Newton orbit** from the concrete original complex \`expC\` continuity along it, and passes that to \`originalBishopSelectedNewtonLimitIsNativeExpFixed\`. The former arbitrary Newton-operator continuity assumption is eliminated.
+3. \`AbelBishopNewtonRealTrigContinuityExact.agda\`
+   - From convergence of the three **actual** scalar source sequences \`Exp.bishopExp(re p_n)\`, \`Elementary.bishopCos(dataSet T)(im p_n)\`, \`Elementary.bishopSin(dataSet T)(im p_n)\`, proves convergence of the literal \`Native.originalBishopExpOnSeries T p_n\) by the original Bishop real product theorem. No abstract principal-complex-log or transcendental package inversion is substituted.
+4. \`AbelBishopNewtonCenterDenominatorExact.agda\`
+   - Proves \(\Im(\expC(p_0)-1)\simeq \exp_B(\Re p_0)\sin_B(\Im p_0)\) on the same complex carrier; uses existing \`BishopExponentialPositiveOrderExact\` and \`BishopComplexNonzeroFromComponentExact\` to construct the original Newton reciprocal whenever the **specific** sine value is positive.
+5. \`AbelBishopNewtonSelectedSinePositiveExact.agda\`
+   - **Source-written selected sine payment:** rational \(y_0=133724/100000\) has exact successor ratio \(y_0^2/6<1/3\), not the older half-radius restriction. Reuses \`BalabanBishopFactorialPowerRecurrenceExact.sineSuccessorBelowCoarseRatio\`, original coefficient discharge, source \`ConcreteSineCosineTermIdentification\`, original even/odd signed factorial term identification and Bishop \`AlternatingDecreasingSeriesData\`/interlacing.
+   - Proves the **actual original** \(\sin_B(y_0)\ge y_0-y_0^3/6>0\), then \`originalBishopNewtonDenominatorNonzeroFromSource T\` for every *supplied* original Bishop transcendental dataset T. No caller-provided sine positivity is retained.
+   - The exact rational positive cubic and successor ratio are independently registered in \`AbelBishopKoenigsSelectedRationalConstantsExact.agda\`.
+6. \`AbelBishopNewtonSourceInhabitationExact.agda\`
+   - The selected point \(p\) is **defined**, not assumed: the source Newton orbit is completed with the original Bishop Cauchy limit once the actual squared-distance disk contraction/first-step and original exp/sin/cos scalar continuity fields are proved.
+   - \`originalBishopSelectedNewtonFixedPointIsExpFixed\` derives \(\expC(p)\approx_C p\) from that **same** source, now with the sine/nonzero leaf constructed rather than passed as a hypothesis.
+   - This is still a **conditional source theorem** while the two remaining genuine analytic inputs remain open.
+
+### Exact finite rational checks and corrected constants
+
+The independently executed Python \`Fraction\` Taylor enclosure confirms:
+- \(|\exp(p_0)-p_0|^2<10^{-8}\), \(|\exp(p_0)-1|^2>9/4\), \(\exp(0.32313)<7/5\).
+- Newton \(\lambda\le 7/1500<1/200\) and strict disk self-map upper \((7/1500)(1/200)+1/15000 = 27/300000 < 1/200\).
+- Corrected log radius \(1/10\), \(\kappa=4/5\) if the **selected Bishop** principal-log derivative is established on that disk; \((69/50)(4/5)^2=552/625\).
+- Corrected remainder factor \((69/50)(8/25)(1/10)^2=552/125000=0.004416 < 7/1000\).
+- For the selected sine input, \(y_0^2/6<1/3\) and \(y_0-y_0^3/6>1/2\).
+
+**Normalization correction in the supplied attachment:** For \(u=(w-p)/p\), the actual logarithm remainder is \(R_2(w)=\log(1+u)-u=\sum_{k\ge2}(-1)^{k-1}u^k/k\) **without an extra factor \(p\)**. The normalized inverse-Koenigs finite increment is \(h_{n+1}-h_n\approx_C p^n\cdot p\cdot R_2(g^n z)\). \`AbelBishopSelectedLogQuadraticRemainderWeldExact\` is the already-owned finite/infinite source tail identification for this correctly normalized \(R_2\).
+
+### Exact open analytic max-cut (do not infer closure from a record signature)
+
+**P1.N (Newton):** Prove \`OriginalBishopAnalyticNewtonContraction.originalNewtonMapsDisk\`, \`originalNewtonSquaredContraction\` and \`originalNewtonFirstStepSquared\` for the literal original native Bishop expC and reciprocal, from the exact Taylor interval enclosures and a same-carrier uniform exponential remainder/Lipschitz theorem. \`AbelBishopAnalyticNewtonContractionExact\` has already paid all Nat induction, disk orbit closure and componentwise geometric propagation **conditional on these fields**.
+
+**P1.C (continuity):** Prove continuity of the *original selected* Bishop scalar \`bishopExp\`, \`bishopCos\` and \`bishopSin\` along the Newton source orbit from uniform power-series tails. Their product/complex/Newton/fixed-point limit transport is now implemented, not assumed.
+
+**P1.L (selected log):** Use the constructed p, prove its norm margin \([27/20,69/50]\), branch-cut avoidance, original local principal-log inverse, invariant \(D(p,1/10)\), and componentwise bound of the **correctly normalized** quadratic log tail with \(M_2=8/25\). Then the already source-written \`selectedOriginalBishopKoenigsSchroeder\` consumes the two literal original remainder bounds at \(z,g(z)\). Do not claim this is unconditional from the numerical ratio alone.
+
+**P1g (global Abel/Kneser):** Local Abel chart excludes \(p\), where \(\Psi(p)=0\). Global strip propagation, univalence, monodromy, Schwarz reflection and real half-iterate source construction remain OPEN.
+
+**P2–P4:** \`J=j-744\` finite coefficient normalization is not an original Hauptmodul proof; 144-cell Heisenberg transpose/cocycle is not automatically a modular-period unitary intertwiner; complex 1-cycle residues and 3-dimensional four-cube boundary Stokes/winding remain separate geometry/integration source obligations. No BSD, Yang–Mills or other Clay result is promoted by this analytic local cut.
+
+**Trust / acceptance:** Source-written Agda 2.9 targets registered in the pinned local \`check_analytic_j_tetration_golden_local.sh\`; no local kernel acceptance receipt in this execution environment. Local source Agda acceptance, not CI, governs completion; no postulate or bare metavariable is accepted as a proof.
