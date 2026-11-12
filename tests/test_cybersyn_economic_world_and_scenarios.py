@@ -237,6 +237,38 @@ class WorldScenarioHandoffTests(unittest.TestCase):
                 handoff.verify_cross_world(
                     db, world_manifest, manifest, raw, "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
 
+    def test_database_payload_rewritten_with_matching_hash_still_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            db = Path(d) / "world.sqlite"
+            raw, manifest, _, _, world_manifest, world_raw = self.build_paired(db)
+            with sqlite3.connect(db) as con:
+                old = con.execute(
+                    "SELECT payload FROM economic_world_event LIMIT 1").fetchone()[0]
+                changed = json.loads(old)
+                changed["claim_boundary"] = "FORGED"
+                payload = world.canonical(changed).decode()
+                con.execute(
+                    "UPDATE economic_world_event SET payload=?, payload_sha256=? "
+                    "WHERE payload=?",
+                    (payload, hashlib.sha256(payload.encode()).hexdigest(), old))
+            with self.assertRaisesRegex(handoff.CrossWorldError, "pinned source bytes"):
+                handoff.verify_cross_world(
+                    db, world_manifest, manifest, raw,
+                    "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
+
+    def test_missing_stored_event_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            db = Path(d) / "world.sqlite"
+            raw, manifest, _, _, world_manifest, world_raw = self.build_paired(db)
+            with sqlite3.connect(db) as con:
+                con.execute(
+                    "DELETE FROM economic_world_event WHERE rowid IN "
+                    "(SELECT rowid FROM economic_world_event LIMIT 1)")
+            with self.assertRaisesRegex(handoff.CrossWorldError, "missing scenario"):
+                handoff.verify_cross_world(
+                    db, world_manifest, manifest, raw,
+                    "2026-02-17T00:00:00Z", world_snapshot_raw=world_raw)
+
 
 if __name__ == "__main__":
     unittest.main()
