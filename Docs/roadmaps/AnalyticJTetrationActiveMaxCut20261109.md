@@ -1077,3 +1077,9 @@ All three targets are registered in `scripts/check_analytic_j_tetration_golden_l
 ### Avoided duplications
 
 Existing `AbelBishopLogQuadraticHalfCoefficientExact` already pays the original `≤1/2` shifted coefficient and componentwise power envelope; `AbelBishopLogOnePlusUpperDiskConvergenceExact` already pays full upper-disk series convergence; `AbelBishopLogOnePlusZeroNormalizationExact` already constructs the zero stream and its canonical value. The new files only prove the missing compatibility/convergence arrows among these exact owners.
+
+### 12 November refinement: coefficient-wise half-geometric comparison actually joined to canonical remainder
+
+`AbelBishopLogQuadraticUpperDiskHalfGeometricExact.agda` now source-writes a **second**, independent absolute convergence derivation for the ORIGINAL shifted log series on any upper-radius Bishop disk. It uses the already-proved `AbelBishopLogQuadraticHalfCoefficientExact` term bound, constructs an original Bishop geometric majorant with **literal** constant `((1/2)·r)·r` and ratio `r`, and applies the existing Bishop comparison theorem to real and imaginary components. The proof `originalBishopLogQuadraticHalfLimitEqualsUpperDiskRemainder` then identifies this original source-series limit with the earlier closed-disk log-minus-linear canonical remainder by **same-term uniqueness**.
+
+This pays the source componentwise ABSOLUTE-CONVERGENCE + SAME-LIMIT weld at the coefficient `1/2` (kernel pending), removing the temptation to infer a limit solely from a finite inequality. It still **does not pay** the complex-norm upper bound proportional to the ACTUAL `normSq(u)`, nor the continuity of norm/absolute value through infinite Bishop sums. The precise remaining real analytic inequality remains `|R₂(u)| ≤ |u|²/(2(1−|u|))`, requiring full source norm factorization and finite-sum triangle/limit order transport, before applying the exact rational `8/27` Koenigs chart coefficient.
