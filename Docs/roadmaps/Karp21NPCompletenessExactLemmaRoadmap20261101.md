@@ -1,5 +1,17 @@
 # Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
 
+## 2026-11-12 precise phase update (F1/F3 and G3; no terminal closure)
+
+**Phase F1.1 — physically implemented/source-written:** `Karp21NativeBitTapePhysicalMachineExact` defines the actual literal four-symbol tape machine with local `TableProgram` and per-physical-instruction cell accounting. `Karp21NativeGammaPrefixPhysicalSimulationExact` compiles only the *zero-prefix* of original `GammaBinaryNativePayload.scanZeros` into a literal one-work-tape table. Source-written physical `k+1` instruction, zero-count mark and size lemmas; 16 table-dispatch checks and 21,799-case/1,529,243-step local differential PASS. It is **not** full gamma payload, N21 machine or Agda kernel certification.
+
+**Phase G3.1 — strengthened source-written:** `Karp21NativeOriginalSparseCertificateTightBoundExact.actualN21AcceptedCertificateFitsOriginalGraphWord` composes actual binary accepted 2m-bit sparse cursor with original same-word Fin-free graph parser and original strict 3m guard to obtain **|certificate|≤|original graph word|**. Original regression assertion strengthened, independent 100,000-case generated-grammar check PASS. Local Agda 2.9/Nix unavailable; kernel acceptance OPEN.
+
+**Unpaid exact dependency order:** K0 kernel accept/repair F1/G3+B6–G3 imports; F1.2 literal full gamma payload and all n/m/u/v/signed-w/W stages; F1.3 actual original history/ledger/threshold compilation; F3 `originalBitTapeStepSimulatesN21Rule` and complete same-original-word acceptance; F2.2 peak heap/parser copies/stack/pointer accounting under selected representation; F4 `karpFractranBitMachineClockPolynomial` covering malformed inputs and tape head motions; G2/G3 `PR.PolynomialCostModel` typed verifier/certificate evidence, G4 `originalN21InNP`; P1 physical costed E20 and Cell/Bits Cook–Levin; P2 20 real polynomial edge reductions + 21 original `InNP` + `CertifiedKarpNetwork` inhabited; **separate** truly universal `SATNotInP` lower bound OPEN. Conditional records are not proofs of the required inhabitants.
+
+Full exact owner notes: `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md`. Local authoritative receipt command (not CI): `DASHI_NO_TMUX=1 bash scripts/referee_karp21_maxcut.sh kernel-cut`.
+
+
+
 ## 2026-11-06 — original categorical row-dimension max-cut (same-object Agda source)
 
 **Defect:** the former `ConcreteTapeAcceptingRunAssignmentExact.encodeRunRows_finalBlock` compared a bit vector indexed by `Canonical.listLength (Local.cells start)` with a finish row encoded at `Canonical.listLength (Local.cells finish)`, even though only `runFinishCanonicalLength : startCols ≡ finishCols` is proved. Its recursive `rewrite stepCanonicalLength step` caused ill-typed Agda 2.9 `with`-abstraction. Do **not** impose definitional equality of distinct free rows or postulate width invariance.
