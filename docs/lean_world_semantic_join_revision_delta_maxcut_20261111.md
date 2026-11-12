@@ -147,3 +147,31 @@ labelled regression fixtures, top-k omissions, checked transports,
 certified newly composed proofs, cache hits, peak process RSS, PostgreSQL
 growth and worker time. Never claim global semantic completeness or automatic
 21k-repository equivalence on these local receipts.
+
+
+## 12 November 2026 — authoritative phased consolidation
+
+**This is a supersession pointer, not a blanket claim of implementation.**
+The authoritative cross-project roadmap is
+[`docs/roadmaps/LeanWorldProofSearchCompressionMaxCut20261112.md`](roadmaps/LeanWorldProofSearchCompressionMaxCut20261112.md),
+with machine-readable status, acceptance, exact **proposed** lemma names and
+dependencies in
+[`docs/roadmaps/LeanWorldProofSearchCompressionObligations20261112.json`](roadmaps/LeanWorldProofSearchCompressionObligations20261112.json).
+
+The new cross-owner maximum cut connects the already-owned Aristotle MCGS
+hypergraph/residual search, Agda repository-intelligence similarity and proof
+preflight, typed PNF fibre/hyperfabric, FRACDASH signed-IR/generative encoding,
+the existing `StringMDLCore` strict-improvement contracts, and Lean source
+PostgreSQL/canonical AST substrate. It does **not** create a duplicate
+repository-intelligence database or authority layer.
+
+The previously measured three-repository source pilot remains **operator
+locally validated**, while genuine typed-Lean term admission, bounded
+goal-directed proof joins, real-term grammar/FRACDASH program synthesis, exact
+full-term reconstruction and physical MDL wins are **OPEN**. The newer
+source-written big-proof-join tranche is not the global matching algorithm and
+has no new local kernel-acceptance receipt at its later heads.
+
+Independent Rust verification is explicitly deferred; local Lean and Agda
+checking retain their respective formal authority. Preserve historical
+owner, contributor/author, revision, licence and proof-lineage attribution.
