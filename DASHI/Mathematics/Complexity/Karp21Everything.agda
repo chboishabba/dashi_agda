@@ -510,3 +510,8 @@ import DASHI.Mathematics.Complexity.Karp21NativePositiveThresholdInputWidthExact
 -- per-physical-instruction/fuel-bounded represented cell footprint.
 -- NO original N21 instruction compiler, F3 simulation or F4 clock receipt.
 import DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact
+
+-- F1/F3: ORIGINAL N21 gamma reader's zero-prefix stage on a literal
+-- finite tape table; exact physical k+1 prefix trace. Payload decoder,
+-- remaining parser and full verifier simulation/clock are still open.
+import DASHI.Mathematics.Complexity.Karp21NativeGammaPrefixPhysicalSimulationExact
