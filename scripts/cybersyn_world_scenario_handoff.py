@@ -31,7 +31,13 @@ def normalize_date(value: str) -> str:
 
 def verify_cross_world(db: Path, world_manifest: dict,
                        scenario_manifest: dict, scenario_raw: bytes,
-                       cutoff: str) -> dict:
+                       cutoff: str, *, world_snapshot_raw: bytes) -> dict:
+    original_world_rows = economic.read_snapshot(world_manifest, world_snapshot_raw)
+    expected_world = {
+        (row["region"], row["time"], row["event_id"], row["source_id"]):
+        economic.canonical(row).decode()
+        for row in original_world_rows
+    }
     # Validate dataset integrity, all physical and financial identities,
     # and strict chronological holdout BEFORE matching the world.
     report = validation.validate(scenario_raw, scenario_manifest, cutoff)
@@ -64,6 +70,10 @@ def verify_cross_world(db: Path, world_manifest: dict,
         if sha256(payload.encode()).hexdigest() != record["payload_sha256"]:
             raise CrossWorldError("world event payload changed")
         event = json.loads(payload)
+        original_key = (event["region"], event["time"], event["event_id"],
+                        event["source_id"])
+        if expected_world.get(original_key) != payload:
+            raise CrossWorldError("database event differs from pinned source bytes")
         if event.get("empirically_admitted") is not False:
             raise CrossWorldError("event self-promotion")
         if event["source_id"] != scenario_manifest["dataset_id"]:
@@ -84,7 +94,7 @@ def verify_cross_world(db: Path, world_manifest: dict,
                 k: expected[key][k] for k in required}:
             raise CrossWorldError("scenario/model measurement changed across world join")
         matched.add(key)
-    if matched != set(expected):
+    if matched != set(expected) or len(matched) != len(expected_world):
         raise CrossWorldError("world missing scenario observations")
     return {
         "schema": "dashi-cybersyn-world-scenario-handoff-v1",
@@ -108,13 +118,16 @@ def main() -> None:
     p.add_argument("--world-manifest", type=Path, required=True)
     p.add_argument("--scenario-manifest", type=Path, required=True)
     p.add_argument("--scenario-data", type=Path, required=True)
+    p.add_argument("--world-snapshot", type=Path, required=True)
     p.add_argument("--cutoff", required=True)
     args = p.parse_args()
     print(json.dumps(verify_cross_world(
         args.database,
         json.loads(args.world_manifest.read_text()),
         json.loads(args.scenario_manifest.read_text()),
-        args.scenario_data.read_bytes(), args.cutoff), indent=2, sort_keys=True))
+        args.scenario_data.read_bytes(), args.cutoff,
+        world_snapshot_raw=args.world_snapshot.read_bytes()),
+        indent=2, sort_keys=True))
 
 
 if __name__ == "__main__":
