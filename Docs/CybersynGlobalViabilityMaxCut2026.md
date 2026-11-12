@@ -99,3 +99,19 @@ Use the repo's pinned Nix/Agda 2.9 environment and include its configured librar
 For Indigenous knowledge, Two-Eyed Seeing, Braiding Sweetgrass and seven-generation thinking, protect distinctions between source interpretation, cultural/community authority, permission, benefit sharing and independently established empirical effect. Do not infer that a Western formalisation confers the originating community's consent or jurisdiction. The formal lens belongs to DASHI; the inherited knowledge remains attributed to its actual holders and named authors.
 
 Cybersyn/VSM: original system history and viable-system lineage belong to their historical developers; our new finite counterexamples and time-indexed interface are DASHI extensions. Political/economic models remain hypothesis-specific until empirical calibration and validation.
+
+## 2026-11-12 afternoon max-cut continuation (PR #1496)
+
+New source-written, read-back-verified modules:
+
+1. `CybersynHistoricalMandateWorldBridgeExact.agda` imports source-owned `MandateBackedAuthorityRoutingExact`, `HistoryIndexedMarketMechanismOODALoopExact`, `HistoryIndexedProofExperimentActionLoopExact` and `TemporalStrandProvenanceBidiExact`. It carries a canonical scoped, recallable/reviewable route, non-factorability between publicity and actual mandate, a temporal non-backdating witness, and identity-preserving transport.
+2. `CybersynTemporalStressPropagationExact.agda` introduces deterministic replay of ordered shock traces, an exact case where two distinct event histories have the same final stress coordinates but different first observations, and a source-limited paired-policy counterfactual witness.
+3. `CybersynPublicBackstopLossWaterfallExact.agda` introduces conserved equity/lender/public loss allocations with equal total losses, different taxpayer exposure, and a separate legal/community/ecological/solvency admission gate. It imports the existing policy backstop, multi-axis authority and non-compensatory justice owners.
+4. `CybersynGlobalViabilityEverything.agda` now imports seven source owners. The local acceptance script checks the expanded root and the named theorem interfaces, including literal detection of Agda holes.
+
+The entire seven-module focused tranche was read back from the PR branch; no explicit Agda holes, `postulate` declarations or unsafe flags were found in those Agda sources. The checker itself contains search strings for such constructs, so do not interpret a scan of the checker as an Agda source finding.
+
+**Important remaining gates:** no Agda/Nix runtime is present in this execution environment and no kernel acceptance is claimed. P1 remains a historical interface, not an authoritative PR #1494 JMD-world-builder / PostgreSQL integration. P2 has finite conserved examples, not complete cross-sector sectoral balance sheets or regionally quantified resource flows. P3/P7 have finite actor and public-risk constraints, not calibrated dynamic asset-liability management or actuarial capital calculations. P4/P5 retain separate real-world community-specific authorisation and ecological provenance requirements. P6 has reproducible synthetic replays only; P8/P9 need measurable comparative scenarios and empirical backtests.
+
+The next smallest decisive action is to run `bash scripts/check_cybersyn_global_viability_maxcut.sh` under the already-selected Agda 2.9 Nix environment, correct any compiler diagnostics, then connect the accepted root to an actual world-builder event identity/time adapter and observed economic datasets. Neither CI success nor an implementation comment is a substitute for these receipts.
+
