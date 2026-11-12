@@ -19,6 +19,7 @@ module DASHI.Physics.YangMills.YMClayE1D1OriginalCrossNumeratorNormalizedMomentF
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Nat using (Nat)
+open import Data.List.Base using (_++_)
 open import Agda.Builtin.Equality using (_≡_)
 open import Relation.Binary.PropositionalEquality using
   (cong; cong₂; sym; trans)
@@ -34,6 +35,8 @@ import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as Bila
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
 import DASHI.Physics.YangMills.YMClayE1D1CrossNumeratorCenteringExact as Center
 import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteNumeratorOrderExact as Numerator
+import DASHI.Physics.YangMills.YMClayE1D1OriginalVariablePlaquetteWordsExact as Words
+import DASHI.Physics.YangMills.YMClayE1D1OriginalWilsonWordConcatenationR445Exact as Conc
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -137,6 +140,39 @@ module _
           (subMulDistributes
             (fineMoment F) (bareMoment F)
             (zFine *ℝ zBare))))
+
+  -- Source-specific Wilson-word consequence: for the original
+  -- coarse plaquette-word compiler, the test F*G is literally the
+  -- concatenated original Wilson word. Thus the same X factorization
+  -- applies to the *third* covariance insertion without an
+  -- independent product-measure or word-factorization assumption.
+  CoarseWord : Set
+  CoarseWord =
+    Words.PlaquetteWord
+      theory traceData exponential beta oneLink bilateral divide 1
+
+  coarseWordTest : CoarseWord → CoarseTest
+  coarseWordTest =
+    Words.originalWordObservable
+      theory traceData exponential beta oneLink bilateral divide 1
+
+  originalWordPairCrossNumeratorIsNormalizedDefect :
+    (left right : CoarseWord) →
+    Center.X theory traceData exponential beta oneLink bilateral divide
+      ordered strictToWeak
+      (λ coarse →
+        coarseWordTest left coarse *ℝ coarseWordTest right coarse)
+    ≡
+    (fineMoment (coarseWordTest (left ++ right))
+       -ℝ bareMoment (coarseWordTest (left ++ right)))
+      *ℝ (zFine *ℝ zBare)
+  originalWordPairCrossNumeratorIsNormalizedDefect left right =
+    trans
+      (Conc.originalR445WordProductCrossNumeratorIsConcatenation
+        theory traceData exponential beta oneLink bilateral divide
+        ordered strictToWeak left right)
+      (originalCrossNumeratorIsMomentDefectTimesPartitionProduct
+        (coarseWordTest (left ++ right)))
 
   -- This exact factorization is the only numerical algebra required
   -- before transporting a PHYSICAL X(F) error through positive
