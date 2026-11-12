@@ -920,3 +920,38 @@ The independently executed Python \`Fraction\` Taylor enclosure confirms:
 **P2–P4:** \`J=j-744\` finite coefficient normalization is not an original Hauptmodul proof; 144-cell Heisenberg transpose/cocycle is not automatically a modular-period unitary intertwiner; complex 1-cycle residues and 3-dimensional four-cube boundary Stokes/winding remain separate geometry/integration source obligations. No BSD, Yang–Mills or other Clay result is promoted by this analytic local cut.
 
 **Trust / acceptance:** Source-written Agda 2.9 targets registered in the pinned local \`check_analytic_j_tetration_golden_local.sh\`; no local kernel acceptance receipt in this execution environment. Local source Agda acceptance, not CI, governs completion; no postulate or bare metavariable is accepted as a proof.
+
+
+## 2026-11-12 late continuation — exact selected Newton sine reuse and finite log difference cut
+
+**IMPORTANT non-promotion:** the user's request names six open analytic/global gates. No Agda kernel is available in this execution environment, and no local Agda 2.9 acceptance receipt was produced. New declarations below are **source-written**, not accepted as proof of unconditional Newton, log/Koenigs or Kneser completion.
+
+### Source corrections and reuse
+
+The initially added 311-line \`AbelBishopNewtonSelectedSinePositiveExact.agda\` duplicated an EXISTING stronger theorem: \`DASHI/Physics/YangMills/BalabanBishopSineTwoBallCubicLowerExact.agda\` already supplies \`sineCubicLowerTwoBall\` for any nonnegative original Bishop real of magnitude at most 2. The selected argument \(133724/100000\) belongs to that domain. The new source now specializes this theorem through \`FiniteNatFractionOrderExact.natFractionLe\`, a literal normalized rational comparison, and proves the selected cubic lower is strictly positive. It then reuses \`AbelBishopNewtonCenterDenominatorExact.bishopNewtonDenominatorNonzeroFromOriginalSine\` to construct the ORIGINAL Bishop reciprocal witness. The redundant 311-line proof was replaced, not retained as a parallel authority.
+
+### Finite source logarithm difference, new modules
+
+- \`AbelBishopComplexPowerDifferenceExact.agda\` constructs \(Q_0=0\), \(Q_{n+1}(x,h)=Q_n(x,h)(x+h)+x^n\) and proves the exact original Bishop-complex setoid identity \((x+h)^n-x^n\approx_C hQ_n(x,h)\) for every natural n by a real-ring-solver step and the existing complex semiring laws. No derivative/limit or external complex arithmetic.
+- \`AbelBishopLogSourceFiniteDifferenceFactorExact.agda\` specializes that identity to the LITERAL original signed-factorial logarithm coefficients \(a_n(w)=(-1)^n w^{n+1}/(n+1)\), producing \(a_n(v+h)-a_n(v)\approx_C c_n hQ_{n+1}(v,h)\). This is the precise finite structure needed for a constructive local logarithm Lipschitz bound via coefficient domination.
+
+### Exact scalar bounds, stronger than attached request
+
+\`scripts/check_analytic_j_tetration_newton_center_exact.py\` now contains exact rational \`Fraction\` enclosures and scalar checks:
+- \(\lvert\exp(p_0)-p_0\rvert<10^{-5}\), stronger than the conservative \(10^{-4}\); \(\lvert\exp(p_0)-1\rvert>3/2\); \(\exp(\Re p_0+1/200)<7/5\).
+- The Newton derivative candidate ratio \(7/1500<1/200\), self-map margin \(27/300000<1/200\), geometric Cauchy displacement majorant \(1/14930<1/200\), and centered modulus window propagation \(271/200-1/200=27/20\), \(11/8+1/200=69/50\). The derivative and limit estimates are mathematically conditional on their SAME original Bishop exponential/integration/continuity proofs.
+- The direct coefficient estimate, valid for \(|u|\le 2/27\), is
+  \(\sum_{k\ge2}|u|^k/k\le |u|^2/[2(1-|u|)]\). For \(|p|\ge27/20\), \(|w-p|\le1/10\), this gives the sharper \(M_2=8/27\), not just \(8/25\). The resulting maximum local first-increment constant is \(C\le23/5625\approx0.00408889<7/1000\); \(\beta=552/625\) is unchanged. Exact rational comparisons and constants are also entered in \`AbelBishopKoenigsSelectedRationalConstantsExact.agda\`.
+
+### Refined six-gate max-cut after this round
+
+| Gate | Paid finite/source interfaces | Exact unpaid theorem |
+| --- | --- | --- |
+| Native expC Newton contraction / first step | Stronger \`Fraction\` center enclosures, source Newton squared-distance induction and denominator construction | Transport finite Taylor enclosures to the ORIGINAL configured Bishop expC; prove selected \`OriginalBishopAnalyticNewtonContraction.originalNewtonSquaredContraction\`, \`originalNewtonMapsDisk\`, \`originalNewtonFirstStepSquared\` without uninstantiated record evidence |
+| Native exp/sin/cos continuity | Original pointwise absolute series, finite power difference, scalar-product and Newton continuity compilers | Construct actual uniform scalar power-series tail modulus on the radius-two Newton charts; derive convergence along the original Newton trajectory |
+| Selected principal log and invariant disk | Original \`log(1+u)\` absolute series and affine germ; corrected \(\kappa=4/5\) scalar radius arithmetic; finite complex power-difference identity | Show original selected log branch is the principal logarithm with \(\log(\exp z)=z\) on the selected strip and \(g(p)\approx_Cp\); finite-series difference domination and its Bishop limit yield actual \(4/5\) disk contraction and preservation |
+| Quantitative original log remainder | Canonical shifted degree>=2 log tail; exact \(8/27\) scalar majorant and literal coefficient-difference factor | Original Bishop norm envelope for the finite coefficient tail, geometric upper bound and setoid order-closed canonical limit at every actual inverse-orbit point |
+| Unconditional local Koenigs | Exact powers, finite difference, shifted-series limit, selected \(\beta\) Bishop ratio and Schröder consumer | Inhabit actual fixed point, principal-log disk and \`OriginalBishopSelectedAnalyticRemainderBound\` at both z and g(z) from those source estimates, then prove domain-correct local univalence |
+| Global Kneser / modular / observer | Local finite algebra, 196884 coefficient checks, Moonshine source interfaces and existing observer/transpose paths | Global Abel analytic continuation with monodromy/univalence/Schwarz reflection, real half-iterate, actual Hauptmodul q-series/modularity and selected 144-cell Heisenberg/modular period same-action intertwiner. These are independent nontrivial results; no local Newton proof by itself closes them |
+
+**Trust and attribution:** Original Bishop/Murray/Csimma real and the Bałaban/YM concrete two-ball sine theorem remain source owners; DASHI owns the selected rational specialization and finite complex/log power-difference proof. No CI dependence. New modules are registered in \`scripts/check_analytic_j_tetration_golden_local.sh\`; registration and static no-postulate inspection do not mean typechecked acceptance.
