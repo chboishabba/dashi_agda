@@ -347,3 +347,23 @@ The committed `scripts/check_round56_240_support_half_f3.py` also now checks the
 - P1–P3 original PNF dynamic null, actual codec, empirical physiology, Monster VOA, legal/source authority remain independently OPEN.
 
 **Verification:** finite generator traces independently reproduced by exact Python arithmetic locally (four flips 0; three swaps 56), source files written through GitHub connector; no Agda 2.9 kernel or Nix toolchain in the execution container, so no kernel completion asserted.
+
+
+## 19 — Source-faithful four-representative sum and encoded B4 observable commute (2026-11-12)
+
+**Important prior-art correction:** The requested exact Agda reduction
+`sum_{regular240} contribution = 64 I1 + 96 I2 + 64 I3 + 16 I4`
+was ALREADY implemented in `DASHI/Physics/YangMills/BalabanClayT4HypercubicRepresentativeSumExact.agda` as `regularInvariantSumIsFourRepresentatives`. It consumes the ACTUAL generated `Grid.regularGridCells`, the original rational contribution and `Action.GeneratorInvariantRationalContribution` with seven generator equalities. Supporting source lemmas are `regularSumCanonicalizes` and `canonicalizedRegularSumMultiplicity`. Do not claim this theorem was first proved in the present pass or redo its ring solver.
+
+**New source-written integration module on #1479:** `DASHI/Physics/YangMills/BalabanRegular240EncodedFourOrbitSumExact.agda` connects the recent proof-insensitive `BalabanRegular240PointwisePermutationModuleExact` to this **same original** theorem. `sourceCoefficients` instantiates the original coefficient record for an actual `Grid.GridCell4 → ℚ` contribution; `encodedContribution` and `encodedContributionIsOriginal` relate its encoded value to the unique decoded original cell; `regularContributionRoundTrip` reuses the source proof-insensitive inverse. `OriginalRationalOrbitAdmission` requires the exact pre-existing `GeneratorInvariantRationalContribution`; `encodedSourceInvariantFourRepresentativeSum` invokes the actual pre-existing sum theorem with *unchanged source integrand and original representatives*. `encodedIndependentB4Invariant` is a new nontrivial commuting-square proof: the independently defined `Encoded.actIndependent240` on all positive-support F4-half signs preserves this source-indexed rational observable PROVIDED its original seven B4 generator equalities are supplied. It uses encoded proof-insensitivity and both roundtrips, not the unverified equality of proof-carrying dependent records.
+
+**Acceptance boundary:** This is a correctly scoped SAME-SOURCE mathematical bridge for rational box contributions, NOT `literalRegularIntegrandSelectedB4GeneratorCertificate`, not source scalar/interval evaluator physical invariance, not F4/E6 full-group symmetry and not an integral of a physical continuum. The literal `BalabanClayT4LiteralEvaluatorFourRepresentativeReductionExact.LiteralFourRepresentativeTransport` requires `generatorCertificate` plus `environmentCompatibility`; no producer of both receipts for the actual Wilson/Haar/ghost integrand was established this pass. Even under discrete symmetry, analytic continuation across the excised inner core and Yang--Mills spectral gaps are entirely independent.
+
+**Revised near-term P0/P1 exact gates:**
+- P0 `regularInvariantSumIsFourRepresentatives`: **PRE-EXISTING source theorem**, conditional on an input invariant, not newly proved.
+- P0/P1 `encodedIndependentB4Invariant` + `encodedSourceInvariantFourRepresentativeSum`: new source-written proof terms; Agda kernel acceptance OPEN.
+- P0 physical `literalRegularIntegrandSelectedB4GeneratorCertificate`: open with seven literal source expression equalities, ward/source projected tensor and periodic-trigonometric environment compatibility.
+- P1 `foldedE6F4OriginalSameActorHalfRootIdentification`, `fullF4Short24SourceActionOrExplicitNoGo`, `round56F3FreeModuleMatrixKernelExact`: OPEN; none is needed for the conditional 4-orbit sum.
+- P1–P3 original PNF historical rows, MP dynamic null, codec bits, subject physiology, Monster VOA and legal evidence remain unchanged OPEN.
+
+**Verification:** New Agda source committed through GitHub; no Agda/Nix installed in the container, so **not kernel-accepted**. The arithmetic fixed-point checks 0/56 from earlier passes remain exact finite numerical checks, not substitutes for literal physical invariance.
