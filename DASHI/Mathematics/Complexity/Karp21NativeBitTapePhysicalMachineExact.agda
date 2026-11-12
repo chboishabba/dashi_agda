@@ -19,7 +19,7 @@ module DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact wher
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; false; true)
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.List.Base using (length)
@@ -210,3 +210,89 @@ haltedMachineStepIsIdentity :
   machineStep program (config state source work true)
     ≡ config state source work true
 haltedMachineStepIsIdentity program state source work = refl
+
+------------------------------------------------------------------------
+-- F1/F2 physical TAPE footprint accounting for any fixed tape count.
+-- This is the sum of represented head/left/right cells, not a bound
+-- on source-language heap objects, sharing, stack or N21 compiler.
+------------------------------------------------------------------------
+
+workCellCount : {k : Nat} → Vec.Vec Tape k → Nat
+workCellCount Vec.[] = zero
+workCellCount (t Vec.∷ ts) = cellCount t + workCellCount ts
+
+configurationCells :
+  {q k : Nat} → Configuration q k → Nat
+configurationCells (config state source work halted) =
+  cellCount source + workCellCount work
+
+-- Reassociation of the exact one-new-cell-per-tape charge.
+cellBudgetRearrange :
+  (a b k : Nat) →
+  suc a + (b + k) ≡ (a + b) + suc k
+cellBudgetRearrange a b k =
+  Relation.Binary.PropositionalEquality.trans
+    (cong suc (sym (NatP.+-assoc a b k)))
+    (sym (NatP.+-suc (a + b) k))
+
+allWorkTapesCellBudget :
+  {k : Nat} (writes : Vec.Vec Cell k)
+  (moves : Vec.Vec Direction k)
+  (work : Vec.Vec Tape k) →
+  workCellCount (applyWorkInstructions writes moves work)
+    ≤ workCellCount work + k
+allWorkTapesCellBudget {zero} Vec.[] Vec.[] Vec.[] =
+  NatP.≤-refl
+allWorkTapesCellBudget {suc k}
+  (c Vec.∷ writes) (direction Vec.∷ moves) (t Vec.∷ work) =
+  NatP.≤-trans
+    (NatP.+-mono-≤
+      (writeAndWalkCellBudget c direction t)
+      (allWorkTapesCellBudget writes moves work))
+    (NatP.≤-reflexive
+      (cellBudgetRearrange
+        (cellCount t) (workCellCount work) k))
+
+-- Actual local instruction application to k work tapes plus ONE input
+-- tape; upper bound: at most k+1 extra represented tape cells.
+machineStepCellBudget :
+  {q k : Nat} (program : LocalProgram q k)
+  (cfg : Configuration q k) →
+  configurationCells (machineStep program cfg)
+    ≤ configurationCells cfg + suc k
+machineStepCellBudget {q} {k} program (config state source work true) =
+  NatP.m≤m+n
+    (configurationCells (config state source work true)) (suc k)
+machineStepCellBudget {q} {k} program (config state source work false)
+  with localInstruction program state (atHead source) (readWorkHeads work)
+... | instruction next symbol direction writes moves stop =
+  NatP.≤-trans
+    (NatP.+-mono-≤
+      (writeAndWalkCellBudget symbol direction source)
+      (allWorkTapesCellBudget writes moves work))
+    (NatP.≤-reflexive
+      (cellBudgetRearrange
+        (cellCount source) (workCellCount work) k))
+
+-- A concrete fuel-bounded physical-run footprint theorem.
+-- Fuel counts literal local tape instructions, NOT original N21
+-- source steps. This is deliberately NOT a polynomial verifier-clock
+-- receipt, because a compiler and its instruction bound are missing.
+machineRunCellBudget :
+  {q k : Nat} (fuel : Nat) (program : LocalProgram q k)
+  (cfg : Configuration q k) →
+  configurationCells (machineRun fuel program cfg)
+    ≤ configurationCells cfg + fuel * suc k
+machineRunCellBudget {q} {k} zero program cfg =
+  NatP.m≤m+n (configurationCells cfg) zero
+machineRunCellBudget {q} {k} (suc fuel) program cfg =
+  NatP.≤-trans
+    (machineRunCellBudget fuel program (machineStep program cfg))
+    (NatP.≤-trans
+      (NatP.+-mono-≤
+        (machineStepCellBudget program cfg)
+        NatP.≤-refl)
+      (NatP.≤-reflexive
+        (NatP.+-assoc
+          (configurationCells cfg) (suc k)
+          (fuel * suc k))))
