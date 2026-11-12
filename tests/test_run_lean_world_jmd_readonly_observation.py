@@ -8,6 +8,8 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
+import run_lean_world_jmd_readonly_observation as publisher
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from run_lean_world_jmd_readonly_observation import (
@@ -58,6 +60,11 @@ class JMDReadonlyObservationTests(unittest.TestCase):
         self.native.write_bytes(self.raw)
         self.source_hash = sha256(self.builder.read_bytes()).hexdigest()
         self.native_hash = sha256(self.raw).hexdigest()
+        # Synthetic parser is used ONLY in offline tests; production is
+        # hard-pinned to the independently read-back original PR105 SHA.
+        pinned = patch.object(publisher, "JMD_PR105_SOURCE_SHA256", self.source_hash)
+        pinned.start()
+        self.addCleanup(pinned.stop)
 
     def publish(self, **changes):
         options = dict(
