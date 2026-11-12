@@ -83,7 +83,7 @@ def inspect_observation(path:Path,codec):
         not _hex(o.get("artifact_sha256")) or
         not _hex(o.get("handoff_key")) or
         not _hex(o.get("original_source_sha256")) or
-        o.get("proof_value_present") not in (True,False)):
+        type(o.get("proof_value_present")) is not bool):
         raise NativeP1PGError("invalid immutable original/export identity")
     source_closure=o.get("source_closure")
     if (not isinstance(source_closure,list) or not source_closure or
