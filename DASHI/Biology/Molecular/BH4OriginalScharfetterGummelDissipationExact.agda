@@ -286,3 +286,83 @@ sgEqualActivitiesHaveZeroPower rate RT activity logActivity =
       ((r ⊗ (a ⊖ a)) ⊗ (t ⊗ (l ⊖ l)))
       ⊜ Κ Q.0ℚᵘ)
     RP.≃-refl rate RT activity logActivity
+
+------------------------------------------------------------------------
+-- Stronger CONCRETE Bishop face specialization, available when each
+-- dimensionless drop has a certified 0 < drop ≤ 1 chart.
+-- This imports the *constructed* Bishop exponential/Bernoulli inverse
+-- from the existing semiconductor owner, not an unspecified power
+-- series dataSet. General negative/large/zero drops remain OPEN.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Semiconductor.Device.BishopConcreteScharfetterGummelFaceFluxExact
+  as ConcreteSG
+
+originalConcreteSGFaces : Set₁
+originalConcreteSGFaces =
+  V.Vec (V.Vec ConcreteSG.ConcreteBishopFaceState 29) 54
+
+originalConcreteSGFluxes :
+  V.Vec R.ℝ 29 → originalConcreteSGFaces → BishopMatrix 54 29
+originalConcreteSGFluxes prefactors =
+  V.map (λ faces →
+    V.zipWith
+      (λ factor face →
+        R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+      prefactors faces)
+
+originalConcreteSGFluxAt :
+  (prefactors : V.Vec R.ℝ 29)
+  (faces : originalConcreteSGFaces)
+  (bond : F.Fin 54) (sp : F.Fin 29) →
+  V.lookup (V.lookup (originalConcreteSGFluxes prefactors faces) bond) sp
+    ≡
+  R._*_
+    (V.lookup prefactors sp)
+    (ConcreteSG.concreteBishopSGFaceFlux
+      (V.lookup (V.lookup faces bond) sp))
+originalConcreteSGFluxAt prefactors faces bond sp =
+  trans
+    (cong (λ row → V.lookup row sp)
+      (Finite.qLookupMap
+        (λ row → V.zipWith
+          (λ factor face →
+            R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+          prefactors row) faces bond))
+    (lookupScale prefactors (V.lookup faces bond) sp)
+  where
+  lookupScale :
+    ∀ {n : Nat}
+    (p : V.Vec R.ℝ n)
+    (row : V.Vec ConcreteSG.ConcreteBishopFaceState n)
+    (index : F.Fin n) →
+    V.lookup
+      (V.zipWith
+        (λ factor face →
+          R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+        p row) index
+    ≡
+    R._*_
+      (V.lookup p index)
+      (ConcreteSG.concreteBishopSGFaceFlux
+        (V.lookup row index))
+  lookupScale V.[] V.[] ()
+  lookupScale (V._∷_ p ps) (V._∷_ face rest) F.zero = refl
+  lookupScale (V._∷_ p ps) (V._∷_ face rest) (F.suc index) =
+    lookupScale ps rest index
+
+originalConcrete54x29SGTransportConserves :
+  (prefactors : V.Vec R.ℝ 29)
+  (faces : originalConcreteSGFaces)
+  (sourceWeights : V.Vec (V.Vec Q.ℚᵘ 29) 6)
+  (axis : F.Fin 6) →
+  R._≃_
+    (pairedBishopSGNative
+      (V.map Embed.embed (V.lookup sourceWeights axis))
+      (originalConcreteSGFluxes prefactors faces))
+    R.0ℝ
+originalConcrete54x29SGTransportConserves
+  prefactors faces weights axis =
+  pairedBishopSGNativeZero
+    (V.map Embed.embed (V.lookup weights axis))
+    (originalConcreteSGFluxes prefactors faces)
