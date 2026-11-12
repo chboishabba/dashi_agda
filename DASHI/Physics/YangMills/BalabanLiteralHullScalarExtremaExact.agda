@@ -82,3 +82,74 @@ max4TimesUpper scalar a b c d =
 -- multiplication commutativity; avoiding sign splits remains essential.
 -- Pair these selection lemmas with multiplyIntervalSound to finish
 -- both directions of the four nested-hull extremality comparisons.
+
+-- The left-scalar variants follow by the SAME branch choice, rather
+-- than a potentially sign-sensitive multiplication monotonicity claim.
+
+min2LeftTimesLower : ∀ {bound a b} scalar →
+  bound ≤ scalar * a → bound ≤ scalar * b →
+  bound ≤ scalar * Typed.min2 a b
+min2LeftTimesLower {a = a} {b = b} scalar aBound bBound
+  with ℚP.≤-total a b
+... | inj₁ _ = aBound
+... | inj₂ _ = bBound
+
+max2LeftTimesLower : ∀ {bound a b} scalar →
+  bound ≤ scalar * a → bound ≤ scalar * b →
+  bound ≤ scalar * Typed.max2 a b
+max2LeftTimesLower {a = a} {b = b} scalar aBound bBound
+  with ℚP.≤-total a b
+... | inj₁ _ = bBound
+... | inj₂ _ = aBound
+
+min2LeftTimesUpper : ∀ {bound a b} scalar →
+  scalar * a ≤ bound → scalar * b ≤ bound →
+  scalar * Typed.min2 a b ≤ bound
+min2LeftTimesUpper {a = a} {b = b} scalar aBound bBound
+  with ℚP.≤-total a b
+... | inj₁ _ = aBound
+... | inj₂ _ = bBound
+
+max2LeftTimesUpper : ∀ {bound a b} scalar →
+  scalar * a ≤ bound → scalar * b ≤ bound →
+  scalar * Typed.max2 a b ≤ bound
+max2LeftTimesUpper {a = a} {b = b} scalar aBound bBound
+  with ℚP.≤-total a b
+... | inj₁ _ = bBound
+... | inj₂ _ = aBound
+
+min4LeftTimesLower : ∀ {bound a b c d} scalar →
+  bound ≤ scalar * a → bound ≤ scalar * b →
+  bound ≤ scalar * c → bound ≤ scalar * d →
+  bound ≤ scalar * Typed.min4 a b c d
+min4LeftTimesLower scalar a b c d =
+  min2LeftTimesLower scalar
+    (min2LeftTimesLower scalar a b)
+    (min2LeftTimesLower scalar c d)
+
+max4LeftTimesLower : ∀ {bound a b c d} scalar →
+  bound ≤ scalar * a → bound ≤ scalar * b →
+  bound ≤ scalar * c → bound ≤ scalar * d →
+  bound ≤ scalar * Typed.max4 a b c d
+max4LeftTimesLower scalar a b c d =
+  max2LeftTimesLower scalar
+    (max2LeftTimesLower scalar a b)
+    (max2LeftTimesLower scalar c d)
+
+min4LeftTimesUpper : ∀ {bound a b c d} scalar →
+  scalar * a ≤ bound → scalar * b ≤ bound →
+  scalar * c ≤ bound → scalar * d ≤ bound →
+  scalar * Typed.min4 a b c d ≤ bound
+min4LeftTimesUpper scalar a b c d =
+  min2LeftTimesUpper scalar
+    (min2LeftTimesUpper scalar a b)
+    (min2LeftTimesUpper scalar c d)
+
+max4LeftTimesUpper : ∀ {bound a b c d} scalar →
+  scalar * a ≤ bound → scalar * b ≤ bound →
+  scalar * c ≤ bound → scalar * d ≤ bound →
+  scalar * Typed.max4 a b c d ≤ bound
+max4LeftTimesUpper scalar a b c d =
+  max2LeftTimesUpper scalar
+    (max2LeftTimesUpper scalar a b)
+    (max2LeftTimesUpper scalar c d)
