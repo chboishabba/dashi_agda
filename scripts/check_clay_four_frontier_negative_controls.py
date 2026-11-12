@@ -69,12 +69,43 @@ def ym_signed_interval_and_shifted_denominator():
     assert Q(1)+Q(-1) == 0
 
 
+
+def ns_cubic_ode_exact_sequence():
+    """E(t)=(1-t)^(-1/2): E'=E^3/2, integral_0^t E=2(1-sqrt(1-t)).
+    Rational times t_n=1-1/n^2 have E(t_n)=n, integral < 2.
+    This scalar ODE is NOT a fluid solution.
+    """
+    for n in range(1, 1001):
+        time = Q(1) - Q(1, n*n)
+        energy = Q(n)
+        derivative = Q(n**3, 2)
+        cumulative_integral = Q(2) * (Q(1)-Q(1, n))
+        assert Q(1)-time == Q(1, n*n)
+        assert derivative == Q(1,2) * energy**3
+        assert Q(0) <= cumulative_integral < Q(2)
+    # Since n is unbounded, finite integral cannot preclude E(t_n)->infinity.
+
+
+def ym_tight_range_different_integrals():
+    """Two fields on the same four-site measure have attained 0/1 extrema."""
+    low = [0,0,0,1]
+    high = [0,1,1,1]
+    assert min(low) == min(high) == 0
+    assert max(low) == max(high) == 1
+    assert sum(low) == 1 and sum(high) == 3
+    for values in (low, high):
+        assert set(values) == {0,1}
+    # Thus no function of min/max alone can return both exact integrals.
+
+
 if __name__ == "__main__":
     delta = rh_signed_fifth_counterexample()
     ns_young_exponent_counterexamples()
     ns_integrability_counterexample()
     pnp_fixed_input_quantifier_counterexample()
     ym_signed_interval_and_shifted_denominator()
-    print("PASS: 5 source-specific exact-rational negative-control groups")
+    ns_cubic_ode_exact_sequence()
+    ym_tight_range_different_integrals()
+    print("PASS: 7 source-specific exact-rational negative-control groups")
     print("RH selected compact even H: Delta5 =", delta)
     print("No Clay endpoint promoted.")
