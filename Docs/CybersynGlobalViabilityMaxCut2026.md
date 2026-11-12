@@ -198,6 +198,7 @@ python3 scripts/cybersyn_economic_observation_world.py \
 python3 scripts/cybersyn_world_scenario_handoff.py \
   --database /tmp/cybersyn-fixture/world.sqlite3 \
   --world-manifest /tmp/cybersyn-fixture/world-manifest.json \
+  --world-snapshot /tmp/cybersyn-fixture/world.jsonl \
   --scenario-data /tmp/cybersyn-fixture/scenario.csv \
   --scenario-manifest /tmp/cybersyn-fixture/scenario-manifest.json \
   --cutoff 2026-02-17T00:00:00Z
@@ -222,7 +223,7 @@ New source-written command:
 bash scripts/run_cybersyn_empirical_pipeline_local.sh /tmp/cybersyn-smoke
 ```
 
-The runner executes 14 offline test methods (including source-hash tampering, immutable event conflict, failed cash/grid/labour balance, no-leak time holdout, and adversarial source-id/measurement replacement), produces pinned synthetic fixtures, creates the SQLite economic observation world, performs the exact world-to-scenario match, and writes two JSON receipts. Test execution and outcomes are **unverified in this chat** until the runner is actually executed. It does not run Agda and cannot certify a Lean theorem.
+The runner executes 16 offline test methods (including source-hash tampering, immutable event conflict, failed cash/grid/labour balance, no-leak time holdout, and adversarial source-id/measurement replacement), produces pinned synthetic fixtures, creates the SQLite economic observation world, performs the exact world-to-scenario match, and writes two JSON receipts. Test execution and outcomes are **unverified in this chat** until the runner is actually executed. It does not run Agda and cannot certify a Lean theorem.
 
 **Current P1a/P1b:** executable source and tests written; local runtime PASS/FAIL receipt OPEN. P1c remains blocked on the genuine authoritative JMD builder (PR #1494 H02–H04). P1d, a source-preserving bridge from a checked event to the Agda typed world join, remains OPEN.
 
@@ -230,3 +231,9 @@ The runner executes 14 offline test methods (including source-hash tampering, im
 
 This design separates three validation meanings: (1) executable software correctness on offline fixtures, (2) integrity of a versioned observation as originally acquired, and (3) external credibility of the source and model's causal claims. Neither (1) nor (2) automatically establishes (3). In accordance with the repository's attribution rules, all synthetic fixtures attribute mathematical and software construction to DASHI, not to the external political, scientific or Indigenous knowledge sources.
 
+
+### Independent source-snapshot integrity strengthening
+
+`verify_cross_world` now requires `world_snapshot_raw` (CLI `--world-snapshot`) in addition to the manifest and database. The original JSONL must hash to the pinned manifest, and each database event payload must equal the independently supplied original record byte-for-byte after canonicalisation. Altering an SQLite event and recomputing its stored payload hash does not suffice. Two new adversarial tests check that attack and deletion of an expected event.
+
+This verifies consistency with a supplied source snapshot, **not** truth of the source contents, source ownership, community authorisation, or absence of omitted unobserved effects. Those remain separate evidence gates.
