@@ -384,3 +384,51 @@ selectedNewtonTotalDisplacementExact :
   selectedNewtonCenterImageUpper * (+ 1500 / 1493)
     ≡ selectedNewtonTotalDisplacementBound
 selectedNewtonTotalDisplacementExact = refl
+
+
+------------------------------------------------------------------------
+-- ACTUAL NEWTON LIMIT COORDINATE MARGIN TARGETS.
+--
+-- From the genuine Bishop total Newton displacement bound
+-- |p-p0| <= 1/14930, each coordinate admits <= 1/14930.
+-- The following entirely rational squares then prove
+--  (27/20)^2 < |p|^2 < (69/50)^2
+-- by Bishop coordinate order and nonnegative square monotonicity.
+--
+-- The missing limit-level Cauchy distance/coordinate comparison
+-- remains a separate theorem, not supplied by these endpoint checks.
+------------------------------------------------------------------------
+
+newtonCoordinateLowerReal newtonCoordinateLowerImag : ℚ
+newtonCoordinateLowerReal =
+  centerReal - selectedNewtonTotalDisplacementBound
+newtonCoordinateLowerImag =
+  centerImag - selectedNewtonTotalDisplacementBound
+
+newtonCoordinateUpperReal newtonCoordinateUpperImag : ℚ
+newtonCoordinateUpperReal =
+  centerReal + selectedNewtonTotalDisplacementBound
+newtonCoordinateUpperImag =
+  centerImag + selectedNewtonTotalDisplacementBound
+
+newtonCoordinateLowerNormSquare : ℚ
+newtonCoordinateLowerNormSquare =
+  (newtonCoordinateLowerReal * newtonCoordinateLowerReal)
+  + (newtonCoordinateLowerImag * newtonCoordinateLowerImag)
+
+newtonCoordinateUpperNormSquare : ℚ
+newtonCoordinateUpperNormSquare =
+  (newtonCoordinateUpperReal * newtonCoordinateUpperReal)
+  + (newtonCoordinateUpperImag * newtonCoordinateUpperImag)
+
+selectedNewtonLimitLowerMarginFromCoordinates :
+  (selectedModulusLower * selectedModulusLower)
+    ≤ newtonCoordinateLowerNormSquare
+selectedNewtonLimitLowerMarginFromCoordinates =
+  ℚP.≤ᵇ⇒≤ tt
+
+selectedNewtonLimitUpperMarginFromCoordinates :
+  newtonCoordinateUpperNormSquare
+    ≤ (selectedModulusUpper * selectedModulusUpper)
+selectedNewtonLimitUpperMarginFromCoordinates =
+  ℚP.≤ᵇ⇒≤ tt
