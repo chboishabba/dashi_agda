@@ -6,8 +6,9 @@ module DASHI.Physics.YangMills.BalabanLiteralOriginalGridDenominatorMaskExact wh
 
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Agda.Builtin.Unit using (tt)
-open import Data.Rational.Base using (ℚ; _≤_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _≤_; _<_)
 import Data.Rational.Properties as ℚP
 
 import DASHI.Physics.YangMills.BalabanClayT4GeneratedBrillouinGridExact as Grid
@@ -330,3 +331,67 @@ sourceAllRegularAxisBound cell regular receipt =
 -- q_i ≡ the lower endpoint of the original source's ith sine-square
 -- contribution and its normalized-momentum trigonometric enclosure.
 -- Then use sourceAllRegularAxisBound and the 0 < 2 rational theorem.
+
+-- Turn the source-generated rank floor into STRICT positive rational
+-- positivity without postulating any real analytic sine theorem.
+sourceTwoStrictlyPositive : 0ℚ < Rank.two
+sourceTwoStrictlyPositive = ℚP.positive⁻¹ Rank.two
+
+sourceRegularRankStrictlyPositive :
+  (cell : Grid.GridCell4) →
+  Grid.allInner cell ≡ false →
+  0ℚ < sourceRankLower cell
+sourceRegularRankStrictlyPositive cell regular =
+  ℚP.<-≤-trans sourceTwoStrictlyPositive
+    (sourceRegularRankAtLeastTwo cell regular)
+
+sourceSummedAxisStrictlyPositive :
+  (cell : Grid.GridCell4) →
+  Grid.allInner cell ≡ false →
+  (receipt : SourceAxisEnclosures cell) →
+  0ℚ < Rank.sumFour
+    (q0 receipt) (q1 receipt) (q2 receipt) (q3 receipt)
+sourceSummedAxisStrictlyPositive cell regular receipt =
+  ℚP.<-≤-trans sourceTwoStrictlyPositive
+    (sourceAllRegularAxisBound cell regular receipt)
+
+-- Same ORIGINAL Typed division target, once the original source AST
+-- has been shown to yield exactly the sum of those four axis bounds.
+import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
+import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact as Typed
+
+record SourceDenominatorAdmission (cell : Grid.GridCell4) : Set where
+  field
+    sourceAxes : SourceAxisEnclosures cell
+    sourceDenominator : Eval.RationalInterval
+    denominatorLowerSameSource :
+      Eval.lower sourceDenominator ≡
+      Rank.sumFour
+        (q0 sourceAxes) (q1 sourceAxes)
+        (q2 sourceAxes) (q3 sourceAxes)
+open SourceDenominatorAdmission public
+
+admittedPhysicalDenominatorPositive :
+  (cell : Grid.GridCell4) →
+  Grid.allInner cell ≡ false →
+  (receipt : SourceDenominatorAdmission cell) →
+  0ℚ < Eval.lower (sourceDenominator receipt)
+admittedPhysicalDenominatorPositive cell regular receipt =
+  subst (λ x → 0ℚ < x)
+    (sym (denominatorLowerSameSource receipt))
+    (sourceSummedAxisStrictlyPositive cell regular (sourceAxes receipt))
+
+admittedTypedPositiveDivision :
+  (cell : Grid.GridCell4) →
+  Grid.allInner cell ≡ false →
+  (receipt : SourceDenominatorAdmission cell) →
+  Eval.RationalInterval →
+  Eval.RationalInterval
+admittedTypedPositiveDivision cell regular receipt numerator =
+  Typed.divideInterval numerator (sourceDenominator receipt)
+    (admittedPhysicalDenominatorPositive cell regular receipt)
+
+-- The SourceDenominatorAdmission object is NOT constructed here:
+-- it requires actual source trig intervals and AST equality. This
+-- function only shows the physical positivity certificate is exactly
+-- sufficient to call the existing proof-requiring typed backend.
