@@ -213,3 +213,20 @@ For real regional inputs, provenance must include snapshot digest, collection me
 - **P8e (OPEN):** real holdout and model audit; blocked until data is supplied and independent sourcing, leakage and adjustment/confounder reviews are completed. The synthetic benchmark establishes pipeline execution suitability only after its own tests pass, not macroeconomic conclusions.
 - **P0 (OPEN):** pinned local Nix/Agda 2.9 kernel check remains required for all eight source-written Agda owners.
 
+
+### Complete local pipeline runner and exact remaining blockers
+
+New source-written command:
+
+```sh
+bash scripts/run_cybersyn_empirical_pipeline_local.sh /tmp/cybersyn-smoke
+```
+
+The runner executes 14 offline test methods (including source-hash tampering, immutable event conflict, failed cash/grid/labour balance, no-leak time holdout, and adversarial source-id/measurement replacement), produces pinned synthetic fixtures, creates the SQLite economic observation world, performs the exact world-to-scenario match, and writes two JSON receipts. Test execution and outcomes are **unverified in this chat** until the runner is actually executed. It does not run Agda and cannot certify a Lean theorem.
+
+**Current P1a/P1b:** executable source and tests written; local runtime PASS/FAIL receipt OPEN. P1c remains blocked on the genuine authoritative JMD builder (PR #1494 H02–H04). P1d, a source-preserving bridge from a checked event to the Agda typed world join, remains OPEN.
+
+**Current P8a/P8b/P8c:** replay, conservation and statistical model-comparison source implemented, synthetic fixtures and tests committed; local execution receipt OPEN. **Current P8d/P8e:** no independently attributed real-world dataset has been admitted, no measured regional calibration or multi-region out-of-sample model report exists, and no counterfactual causal interpretation is authorised. A synthetic pipeline cannot discharge these claims.
+
+This design separates three validation meanings: (1) executable software correctness on offline fixtures, (2) integrity of a versioned observation as originally acquired, and (3) external credibility of the source and model's causal claims. Neither (1) nor (2) automatically establishes (3). In accordance with the repository's attribution rules, all synthetic fixtures attribute mathematical and software construction to DASHI, not to the external political, scientific or Indigenous knowledge sources.
+
