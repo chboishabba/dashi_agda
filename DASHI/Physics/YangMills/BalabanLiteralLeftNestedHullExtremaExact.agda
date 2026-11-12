@@ -135,7 +135,7 @@ max8Above8 a b c d e f g h =
 
 leftLowerIsEightCornerMinimum : ∀ x y z →
   Eval.lower (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
-    ℚ.≤ Eight.leftCorners Eight.min8 x y z
+    ≤ Eight.leftCorners Eight.min8 x y z
 leftLowerIsEightCornerMinimum x y z =
   Eight.min8Greatest
     (Typed.lowerSound (Typed.multiplyIntervalSound
@@ -165,16 +165,10 @@ leftLowerIsEightCornerMinimum x y z =
 
 eightCornerMinimumIsLeftLower : ∀ x y z →
   Eight.leftCorners Eight.min8 x y z
-    ℚ.≤ Eval.lower (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
+    ≤ Eval.lower (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
 eightCornerMinimumIsLeftLower x y z =
   Four.min4Greatest
     (Hull.min4TimesLower (Eval.lower z)
-      (min8Below1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (min8Below3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (min8Below5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (min8Below7 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-    )
-    (Hull.max4TimesLower (Eval.lower z)
       (min8Below1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (min8Below3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (min8Below5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
@@ -186,6 +180,12 @@ eightCornerMinimumIsLeftLower x y z =
       (min8Below6 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (min8Below8 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
     )
+    (Hull.max4TimesLower (Eval.lower z)
+      (min8Below1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (min8Below3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (min8Below5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (min8Below7 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+    )
     (Hull.max4TimesLower (Eval.upper z)
       (min8Below2 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (min8Below4 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
@@ -195,16 +195,10 @@ eightCornerMinimumIsLeftLower x y z =
 
 leftUpperIsEightCornerMaximum : ∀ x y z →
   Eval.upper (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
-    ℚ.≤ Eight.leftCorners Eight.max8 x y z
+    ≤ Eight.leftCorners Eight.max8 x y z
 leftUpperIsEightCornerMaximum x y z =
   Four.max4Least
     (Hull.min4TimesUpper (Eval.lower z)
-      (max8Above1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (max8Above3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (max8Above5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-      (max8Above7 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
-    )
-    (Hull.max4TimesUpper (Eval.lower z)
       (max8Above1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (max8Above3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (max8Above5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
@@ -216,6 +210,12 @@ leftUpperIsEightCornerMaximum x y z =
       (max8Above6 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (max8Above8 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
     )
+    (Hull.max4TimesUpper (Eval.lower z)
+      (max8Above1 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (max8Above3 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (max8Above5 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+      (max8Above7 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
+    )
     (Hull.max4TimesUpper (Eval.upper z)
       (max8Above2 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
       (max8Above4 ((Eval.lower x * Eval.lower y) * Eval.lower z) ((Eval.lower x * Eval.lower y) * Eval.upper z) ((Eval.lower x * Eval.upper y) * Eval.lower z) ((Eval.lower x * Eval.upper y) * Eval.upper z) ((Eval.upper x * Eval.lower y) * Eval.lower z) ((Eval.upper x * Eval.lower y) * Eval.upper z) ((Eval.upper x * Eval.upper y) * Eval.lower z) ((Eval.upper x * Eval.upper y) * Eval.upper z))
@@ -225,7 +225,7 @@ leftUpperIsEightCornerMaximum x y z =
 
 eightCornerMaximumIsLeftUpper : ∀ x y z →
   Eight.leftCorners Eight.max8 x y z
-    ℚ.≤ Eval.upper (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
+    ≤ Eval.upper (Typed.multiplyInterval (Typed.multiplyInterval x y) z)
 eightCornerMaximumIsLeftUpper x y z =
   Eight.max8Least
     (Typed.upperSound (Typed.multiplyIntervalSound
