@@ -26,6 +26,7 @@ import Sequence as BishopSequence
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexReciprocalExact as Reciprocal
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
+import DASHI.Moonshine.AbelBishopOriginalComplexCarrierWeldExact as Native
 import DASHI.Foundations.BishopPolynomialGeometricDominationConvergenceExact as Geometric
 import DASHI.Moonshine.AbelBishopKoenigsSelectedRationalConstantsExact as Constants
 import DASHI.Moonshine.AbelBishopNewtonSelectedOperatorExact as Newton
@@ -136,3 +137,32 @@ originalBishopSelectedNewtonLimitIsOperatorFixed T nz input continuity =
     (Complex.im (Newton.originalBishopNewtonOperator T nz limit) ,
       Completion.imaginaryConverges continuity)
     (Complex.im limit , Completion.imaginaryConverges successor)
+
+
+------------------------------------------------------------------------
+-- END-TO-END CONSTRUCTIVE NEWTON CONSUMER.
+-- Only the two genuine source analytic leaves remain:
+--   original Newton step geometric bounds, operator continuity.
+-- All completion and fixed-point-to-exponential cancellation is paid
+-- by the actual source lemmas above.
+------------------------------------------------------------------------
+
+originalBishopSelectedNewtonLimitIsNativeExpFixed :
+  ∀ T nz →
+  (input : OriginalBishopNewtonSelectedStepBounds T nz) →
+  Completion.OriginalBishopPointwiseComplexConverges
+    (λ n → Newton.originalBishopNewtonOperator T nz
+      (Newton.originalBishopNewtonOrbit T nz n))
+    (Newton.originalBishopNewtonOperator T nz
+      (originalBishopSelectedNewtonLimit T nz input)) →
+  Complex._≈C_
+    (Native.originalBishopExpOnSeries T
+      (originalBishopSelectedNewtonLimit T nz input))
+    (originalBishopSelectedNewtonLimit T nz input)
+originalBishopSelectedNewtonLimitIsNativeExpFixed
+  T nz input continuity =
+  Newton.originalBishopNewtonOperatorFixedImpliesExpFixed
+    T nz
+    (originalBishopSelectedNewtonLimit T nz input)
+    (originalBishopSelectedNewtonLimitIsOperatorFixed
+      T nz input continuity)
