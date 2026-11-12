@@ -96,7 +96,11 @@ def _decoded(observation: dict, key: str, digest_key: str) -> bytes:
         raw = base64.b64decode(encoded, validate=True)
     except (ValueError, base64.binascii.Error) as exc:
         raise ObservationJoinError("invalid base64 "+key) from exc
-    if sha256(raw).hexdigest() != observation.get(digest_key):
+    expected_digest = observation.get(digest_key)
+    # Original v3 axiom declarations have no proof expression; the P1
+    # exporter receipt records JSON null, not SHA256(empty bytes).
+    if not (raw == b"" and expected_digest is None) and \
+            sha256(raw).hexdigest() != expected_digest:
         raise ObservationJoinError("wrong digest "+digest_key)
     return raw
 
