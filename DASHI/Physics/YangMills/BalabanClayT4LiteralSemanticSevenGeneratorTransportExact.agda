@@ -137,7 +137,7 @@ record LiteralSevenSemanticGeneratorData
     {ward : Eval.LiteralWardExpressionProofs expressions}
     (scalarData : Eval.LiteralScalarIntegrandExpression expressions ward)
     (arithmetic : Eval.RationalIntervalArithmetic)
-    (environment : Grid.GridCell4 → Eval.BoxTrigEnvironment) : Set₁ where
+    (environment : Grid.GridCell4 → Eval.BoxTrigEnvironment) : Set₂ where
   field
     -- The 7 actual atom covariances. Identity comes by refl.
     atomsFlip0 : ∀ cell →
