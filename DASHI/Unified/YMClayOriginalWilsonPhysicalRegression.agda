@@ -165,3 +165,6 @@ import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as R
 
 -- P0.D: true flat SU(N) 2n+m product-Haar -> n pair products plus m discarded Haar links, 1024-to-64 source cardinalities; final canonical reorder witness remains OPEN.
 import DASHI.Physics.YangMills.YMClayR445FlatPairedHaarIntegrationExact as R445FlatHaarBlock
+
+-- P0.D original-native pure Haar blocking: full formal implication from concrete canonical permutation word and native coarse-vector order equality to actual original n=3->n=1 product Haar. Both weld certificates remain explicit/uninhabited.
+import DASHI.Physics.YangMills.YMClayR445OriginalPureHaarBlockWeldExact as R445OriginalPureHaarWeld
