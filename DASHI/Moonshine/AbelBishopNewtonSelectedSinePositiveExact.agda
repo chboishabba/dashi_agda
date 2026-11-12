@@ -20,8 +20,8 @@ module DASHI.Moonshine.AbelBishopNewtonSelectedSinePositiveExact where
 
 open import Agda.Builtin.Unit using (tt)
 open import Data.Integer.Base using (+_)
-import Data.Integer.Properties as ℤP
 import Data.Nat.Properties as ℕP
+import DASHI.Mathematics.NumberTheory.FiniteNatFractionOrderExact as NatFraction
 open import Data.Rational.Unnormalised as ℚ using
   (ℚᵘ; 0ℚᵘ; _/_; _*_; _-_)
 import Data.Rational.Unnormalised.Properties as RatP
@@ -68,7 +68,7 @@ selectedSineRationalBelowTwo :
 selectedSineRationalBelowTwo =
   BishopP.p≤q⇒p⋆≤q⋆
     selectedSineRational TwoBall.two
-    (ℚ.*≤* (ℤP.+≤+ (ℕP.≤ᵇ⇒≤ tt)))
+    (NatFraction.natFractionLe (ℕP.≤ᵇ⇒≤ tt))
 
 selectedSineInsideTwoBall :
   BishopReal._≤_
