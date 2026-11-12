@@ -573,7 +573,7 @@ git fetch origin
 git switch experiment/consumer-preserving-multiscale-codec-20261031
 git pull --ff-only
 # Unit tests (no GPU performance assertions):
-python3 -m unittest tests.test_native_streamed_selected_experts -v
+/nix/store/vq1lgpc49im7qvvxgxabykyfs47l2ykb-gfx803-schaka101-torch-candidate-overlay/bin/gfx803-schaka101-python -m unittest discover -s tests -p 'test_native_streamed_selected_experts.py' -v
 # On the already-working Schaka 10.1 native GPU wrapper:
 bash scripts/run_native_schaka101_lila.sh \
   --module scripts.native_streamed_selected_experts -- \
