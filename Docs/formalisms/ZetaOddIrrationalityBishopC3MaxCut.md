@@ -122,3 +122,17 @@ Both new Agda files are source-written, committed, readback-verified, but **not 
 **Correction to earlier framing:** we do *not* need to build a complex exponential or prove a Mathlib half-plane Dirichlet equivalence from scratch. They exist as source-level modules in the recent PRs; remaining hard work is verifying their compilation/axioms and identifying cross-kernel original objects. The golden-ratio fibre remains reusable evidence-transport/approximation infrastructure, not a zeta-value identity.
 
 This audit is based on connector-retrieved PR changed-file lists and file patches, **not claimed current CI or kernel-build results**.
+
+## 2026-11-12 positive-odd specialization implemented in Bishop Lean PR #104
+
+New `Integration/BishopOddZetaHalfPlaneSpecialization.lean` committed to `chboishabba/dashi_lean4` PR #104 branch, commit `b18d8d05a7aa04339c97debca03e9fab595f2d3f`:
+- `oddArgument_gt_one`: every `5+2*k` lies in `Re(s)>1`.
+- `originalOddDirichlet_eq_riemannZeta`: specializes existing `originalDirichletValue_eq_riemannZeta` without introducing a new analytic object.
+- `originalOddWindow_eq_riemannZeta`: `Fin 15` same-object equality.
+- `oddWindow_rational_iff`, `oddWindow_irrational_iff`: pointwise transport of the explicit existential `HasRationalComplexValue` predicate.
+- `zetaOddWindow_exists_iff_sourceWindow`: finite-window existential transport in both directions.
+- Two `#print axioms` probes (execution evidence still missing).
+
+**Precise scope:** the rationality predicate is `∃ q : ℚ, z = (q : ℂ)`. This must still be welded to the external proof's *actual* definition of irrationality (often on `ℝ`, or an odd zeta value seen through complex coercion). Neither the external disjunction nor native Agda carrier equality is imported. This is therefore source-written, not a kernel-verified closure of ZI00, ZI01 or ZI03.
+
+Next cut: after the pinned Lean build, obtain the external theorem's exact Lean declaration and specialize its genuine Mathlib zeta to this finite window, proving the rationality predicate equivalence. Then settle the Agda/Bishop semantic evaluation boundary. The completed RH assembly remains wholly independent.
