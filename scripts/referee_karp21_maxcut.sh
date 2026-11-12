@@ -163,7 +163,7 @@ check_agda() {
 # the new F2/G3 source obligations are checked in dependency order.
 # This is not an acceptance receipt until every check_agda succeeds.
 if [[ "$mode" == "kernel-cut" ]]; then
-  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePayloadExact.agda
+  # F1 physical finite-control tape substrate (not full N21 compiler).\n  check_agda DASHI/Mathematics/Complexity/Karp21NativeBitTapePhysicalMachineExact.agda\n  check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativePayloadExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21GammaBinaryNativeSignedExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeUnsignedEndpointBitReaderExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21NativeBinaryEndpointRawEdgeStreamExact.agda
@@ -214,7 +214,7 @@ if [[ "$mode" == "golden" || "$mode" == "all" ]]; then
       --entry "$root"
   done
 
-  check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
+  check_agda DASHI/Mathematics/Complexity/Karp21NativeBitTapePhysicalMachineExact.agda\n  check_agda DASHI/Mathematics/Complexity/Karp21ConwayTotalChainExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21ConwayGammaChainCodecExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21N21BitWeightedComparisonEnvelopeExact.agda
   check_agda DASHI/Mathematics/Complexity/Karp21BinaryWordEqualityPrimitiveExact.agda
