@@ -34,6 +34,9 @@ import DASHI.Culture.KimmererTwoEyedSeeingInterpretationBoundaryExact as TwoEyed
 import DASHI.Core.IntergenerationalPlanningHorizonExact as Horizons
 import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Reasoning.PNFZizekOperator as Zizek
+import DASHI.Core.IrigarayLabialRelationalCarrierExact as Irigaray
+import DASHI.Culture.MarxLabourUnionSourceBoundaryExact as Marx
+import DASHI.Reasoning.TrialecticBraidedTwoEyedCoordinationExact as Braided
 import DASHI.Economics.AIGlobalFundingRegulatorySynthesisExact as Finance
 import DASHI.Economics.JPYJGBTreasuryFundingTransmission2026Exact as Yen
 import DASHI.Economics.AISafetyRegulatoryMoatGameExact as Regulation
@@ -45,16 +48,27 @@ false and _ = false
 
 -- Authority, evidence, and effects must not be inferred from shared signals.
 data ActorRole : Set where
-  affectedCommunity government investor insurer lender worker
-    ecologicalSteward coordinatingFederation : ActorRole
+  affectedCommunity : ActorRole
+  government : ActorRole
+  investor : ActorRole
+  insurer : ActorRole
+  lender : ActorRole
+  worker : ActorRole
+  ecologicalSteward : ActorRole
+  coordinatingFederation : ActorRole
 
 data SourceLayer : Set where
-  externalClaim dashiReconstruction dashiInference dashiTheorem
-    empiricalAdmission : SourceLayer
+  externalClaim : SourceLayer
+  dashiReconstruction : SourceLayer
+  dashiInference : SourceLayer
+  dashiTheorem : SourceLayer
+  empiricalAdmission : SourceLayer
 
 data Admission : Set where
-  candidateOnly sourceChecked independentlyCorroborated
-    empiricallyValidated : Admission
+  candidateOnly : Admission
+  sourceChecked : Admission
+  independentlyCorroborated : Admission
+  empiricallyValidated : Admission
 
 record AttributedSignal : Set where
   constructor signal
@@ -135,7 +149,8 @@ allGatesPaidIsViable = refl
 -- community outcomes and authority differ.  Hence no flattening of the
 -- latter into an investment headline can be valid for all states.
 data ToyPolicyState : Set where
-  announcedOnly accountableDelivery : ToyPolicyState
+  announcedOnly : ToyPolicyState
+  accountableDelivery : ToyPolicyState
 
 data InvestmentHeadline : Set where
   promisedCapital : InvestmentHeadline
@@ -171,10 +186,12 @@ headlineCannotRecoverCommunityResult =
 -- infrastructure state despite unchanged financial ownership.  The toy
 -- illustrates a dependency cut, not a causal estimate for a listed company.
 data AccessState : Set where
-  constructionAccessBlocked constructionAccessOpen : AccessState
+  constructionAccessBlocked : AccessState
+  constructionAccessOpen : AccessState
 
 data AccessAction : Set where
-  noChange negotiatedAccess : AccessAction
+  noChange : AccessAction
+  negotiatedAccess : AccessAction
 
 accessStep : Nat → AccessState → AccessAction → AccessState
 accessStep _ s noChange = s
@@ -215,6 +232,21 @@ sameEcologicalObservationDoesNotFuseHistories :
 sameEcologicalObservationDoesNotFuseHistories =
   TwoEyed.sharedObservationDoesNotRecoverProvenance
 
+-- Original source roles for two additional lenses are recovered rather than
+-- recreated as fresh claims.
+marxSourceOwner : Marx.LabourUnionSourceReference
+marxSourceOwner = Marx.marxCapitalVolI
+
+irigarayContactRefusesForcedOne :
+  Irigaray.forcedReadingAdmitted
+    Irigaray.neitherOneNorTwo Irigaray.forceAsOne ≡ false
+irigarayContactRefusesForcedOne = Irigaray.neitherRejectsForcedOne
+
+braidedTwoEyedNonFusion :
+  Braided.sharedTrialecticObservationDoesNotFuseProvenance
+    ≡ Braided.sharedTrialecticObservationDoesNotFuseProvenance
+braidedTwoEyedNonFusion = refl
+
 -- No unlicensed promotion from financial/policy signals to economic success.
 coupledSignalsCannotProveCertainCrash :
   Finance.CoupledSignalsImplyCertainCrashPermission → ⊥
@@ -233,10 +265,14 @@ regulatoryMoatCannotProveConspiracy =
 -- Cross-disciplinary import registry: explicit interpretations, not a claim
 -- that a philosophy or Indigenous knowledge source entails DASHI mathematics.
 data Lens : Set where
-  cyberneticViabilityLens marxCapitalLens zizekIdeologyLens
-    irigarayRelationalLens kimmererReciprocityLens
-    twoEyedPluralKnowledgeLens sevenGenerationPlanningLens
-    communitySelfDeterminationLens : Lens
+  cyberneticViabilityLens : Lens
+  marxCapitalLens : Lens
+  zizekIdeologyLens : Lens
+  irigarayRelationalLens : Lens
+  kimmererReciprocityLens : Lens
+  twoEyedPluralKnowledgeLens : Lens
+  sevenGenerationPlanningLens : Lens
+  communitySelfDeterminationLens : Lens
 
 record InterpretiveReceipt : Set where
   constructor interpretiveReceipt
