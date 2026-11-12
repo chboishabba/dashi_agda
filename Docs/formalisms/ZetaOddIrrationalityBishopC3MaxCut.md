@@ -71,3 +71,27 @@ No repository-local Agda compiler is available in the current execution environm
 The public `telaviv/zeta-irrationality` README reports an unconditional Mathlib theorem `ZetaIrr.Z7.oneOfZeta7To21` proving that one of zeta(7),...,zeta(21) is irrational, with exactly `[propext, Classical.choice, Quot.sound]` as reported axioms. URL: https://github.com/telaviv/zeta-irrationality . Its actual commit and source declarations have not been fetched or checked here. As the set {7,...,21} is a subset of {5,...,33}, an eventual verified witness can map into the existing 15-index `OddWindow`, but a proper finite-index embedding theorem is still necessary (ZI01).
 
 The separate 2026 individual zeta(5) projects must not be treated as automatically interchangeable. For example, https://github.com/danromik/zeta5-irrationality reports a prime-number-theorem axiom, whereas https://github.com/long-mathematics/zeta5-irrationality explicitly says it has not yet proved the endpoint. Verify every project's own trust boundary before admitting a claim. These are external projects; no credit is transferred to DASHI.
+
+## RH Clay rollup integration — independent proof owners
+
+The exact RH source owner `DASHI/Analysis/RiemannMillenniumAssembly.agda` composes a *supplied* `DashiRiemannAssembly` into `RiemannHypothesisFor`. Its prerequisites are the actual analytic substrate, compatible explicit formula, DASHI/Weil exact identification, positivity/dense extension, and criterion. The newer `DASHI/Analysis/RiemannHermitianSourceGapMapExact.agda` exposes G1 complex Poisson, G2 mixed kernel, G3 normalized Hermitian excess and G4 error-floor-closer gaps. `RiemannHermitianEndgameTrichotomyExact.agda` admits localization/higher-moment/arithmetic-rigidity only with a genuine closer.
+
+Added `DASHI/Analysis/RiemannOddIrrationalityClayBoundaryExact.agda`:
+
+- `jointEvidenceYieldsOddDashi`: obtains the odd-value consequence from the supplied odd-value certificate *and both value equalities*.
+- `jointEvidenceYieldsRH`: obtains RH from the separately supplied `DashiRiemannAssembly`, not from odd irrationality.
+- `genericOddWitnessCannotForceOffLineExclusion`: a finite Boolean **abstract-interface countermodel** to the invalid inference from an arbitrary odd-irrationality witness to excluding independent off-line states. This is explicitly not a counterexample to the actual Riemann hypothesis.
+
+Proposed RH-specific integration gate `ZI10`: identify the selected odd-value DASHI analytic carrier with the same `AnalyticSubstrate` used in the terminal RH assembly. This shares value provenance, not proof strength. `ZI10` remains OPEN.
+
+### Active Clay leaves (do not collapse into ZI04)
+
+1. Actual completed-zeta / xi analytic layer and exact prime-zero formula, including Gamma/pole/trivial-zero terms.
+2. Real DASHI arithmetic observable identified with the full von Mangoldt-weighted prime side (not unweighted `p*v_p(n)`).
+3. One genuine Weil positivity route: exact coercivity plus density, or global decomposition.
+4. Hermitian alternative G1–G4 if chosen: complex Poisson, mixed-kernel summation, normalized excess, and a strict bound above the second-moment error floor.
+5. Separate source-exact Lean RH Clay statement/criterion weld, and terminal kernel-admission check; no signed-inequality margin is inferred from positive-odd zeta values.
+
+### Verification boundary
+
+Both new Agda files are source-written, committed, readback-verified, but **not kernel-checked** in this session. No Nix/Agda executable was available locally. Consequently no claim that `ZI04`, `ZI05`, or the Clay countermodel is a machine-checked theorem should be made until the repository's pinned check passes.
