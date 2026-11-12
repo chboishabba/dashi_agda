@@ -758,3 +758,37 @@ bash scripts/check_analytic_j_tetration_golden_local.sh
 The runner invokes the pinned Agda 2.9 \`--safe\` checker and associated exact rational analytic regressions. If it fails, capture the **first actual Agda error with file/line**, repair the source and rerun; do not infer acceptance from module text. The current conversation runtime has neither \`agda\` nor \`nix\` available.
 
 **Do not import legacy** \`RealElementaryFunctionsCanonicalInstanceExact\` postulated \`expℝ/logℝ\` to satisfy the new log inverse; new P1 log work must use the original Bishop source and a genuinely proved positive-real inverse or holomorphic local logarithm law.
+
+
+## 2026-11-12 — P1 inverse Koenigs: genuine finite orbit and geometric-increment Schroeder lift
+
+**Six new source-written Agda owners landed in PR #1478**, with registration in the pinned **local** golden script. They neither invoke CI nor change P0 acceptance status.
+
+1. \`DASHI/Moonshine/AbelBishopInverseKoenigsFiniteOrbitExact.agda\`
+   - \`inverseOrbit g n z\`: literal \(g^n(z)\) on the original Bishop complex pair, using right-oriented recursion to ensure the successive input shift is definitional even before a setoid-congruence law for \`g\` is provided.
+   - \`inverseKoenigsPrefix p g n z\`: **literal** \(p^n(g^n(z)-p)\), with original complex multiplication and power.
+   - \`inverseKoenigsPrefixStep\`: original finite identity \(p\,h_n(g(z))\approx_C h_{n+1}(z)\), by explicit original complex multiplication associativity.
+   - \`inverseOrbitRespects\` and \`inverseOrbitAtSetoidFixedPoint\`: preserve a selected \`g(p)≈C p\` proof (not a fake definitional equality) through every iterate under an explicit congruence law for \`g\`.
+   - \`inverseKoenigsPrefixFixedPointIsZero\`: \(h_n(p)≈C0\) for every \(n\), whenever the source endomap is congruent and fixes the source \(p\) in the Bishop setoid.
+
+2. \`DASHI/Moonshine/AbelBishopInverseKoenigsShiftConvergenceExact.agda\`
+   - \`originalBishopSuccessorConvergesToSame\`, plus the genuine complex and normalized inverse-orbit specializations, reuse vendored \`Sequence.shift-is-subsequence\` and \`Sequence.xₙ⊆yₙ∧yₙ→y⇒xₙ→y\`: if \(h_n→H\), then \(h_{n+1}→H\), with source Bishop convergence modulus.
+
+3. \`DASHI/Analysis/BishopComplexConstantMultiplicationConvergenceExact.agda\`
+   - \`originalBishopConstantComplexMultiplyConverges\`: if \(h_n→H\), then \(p\,h_n→pH\), built from pinned Bishop real constant/product/negation/sum convergence, componentwise. No new continuity authority.
+
+4. \`DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda\`
+   - \`originalBishopInverseKoenigsLimitSchroeder\`: if the two **actual normalized** inverse-orbit sequences at \(z\) and \(g(z)\) converge, then \(p\,\Psi(g(z))≈_C\Psi(z)\), using finite exact identity, successor convergence, fixed-scalar multiplication continuity, and uniqueness of Bishop limits. Caller-provided convergence is a genuine input, not fabricated.
+
+5. \`DASHI/Moonshine/AbelBishopInverseKoenigsGeometricOrbitExact.agda\`
+   - \`originalBishopGeometricOrbitConverges\`: original geometric bounds on the signed increments \(h_{n+1}-h_n\) construct convergence of \(h_n\) **itself**, not only \(h_n-h_0\), by reusing existing \`AbelBishopKoenigsTrajectoryDifferenceLimitExact\` and real additive convergence. Defines the literal original-orbit limit \(h_0+\lim(h_n-h_0)\) on the same carrier.
+   - \`originalBishopInverseKoenigsGeometricConverges\`: actual \(p^n(g^n(z)-p)\) specialization.
+
+6. \`DASHI/Moonshine/AbelBishopInverseKoenigsGeometricSchroederExact.agda\`
+   - \`originalBishopInverseKoenigsGeometricSchroeder\`: combines the source convergence producer at \(z\) and at \(g(z)\) to derive \(p\,\Psi(g(z))≈_C\Psi(z)\) from **two actual geometric increment-bound inputs**, not two detached convergence records.
+
+**Trust and attribution:** All are SOURCE-WRITTEN and committed, with no claimed Agda 2.9 kernel receipt. They reuse the previously owned Bishop/Murray \`Sequence\` convergence and completeness, existing DASHI \`KoenigsGeometricAbsoluteExact\` and finite telescoping, and source original Bishop complex operations. The prior real/imag \`expFactEqualsNativeExp\` source stack remains kernel-unverified. The rational scripts \`check_analytic_j_tetration_local_koenigs_rational.py\` and \`analytic_j_tetration_koenigs_log_series_majorant.py\` certify only exact-fraction numerical inequalities (e.g. \(\beta=552/625<1\)), **not** a chosen Bishop \(p\), a Bishop principal-\(\log\) inverse, derivative estimates, or an invariant disk.
+
+**Precise new highest-alpha cut:** Build a *typed* original Bishop selected principal-\(\log\) local chart around an **inhabited** fixed point \(p\), with (i) \(e^p≈_Cp\) on the same native exponential and logarithm branch, (ii) source \(|p|>1\) and inverse-disk invariance, (iii) the analytic local \(\log\) remainder/derivative estimate from the actual Bishop \`LogOnePlusOriginalSeriesExact\` on the normalized displacement, and (iv) explicit real/imag componentwise bounds of \(h_{n+1}-h_n\) by the existing \`BishopScaledGeometricInputs\` with selected \(\beta<1\). Then \`originalBishopInverseKoenigsGeometricSchroeder\` supplies the limit identity. To obtain the forward Schröder form \(\Psi(e^z)=p\Psi(z)\), also prove the specific local inverse \(g(e^z)≈_Cz\) on the correct domain and transport chart congruence; it is not a consequence of a bare endomap record.
+
+**P1g–P4 still OPEN:** global Kneser source continuation, original modular \(j/J\) Hauptmodul and observer/contour 1-cycle/differential-form weld. Keep them separate from the local Koenigs result.
