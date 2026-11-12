@@ -231,7 +231,7 @@ class WorldScenarioHandoffTests(unittest.TestCase):
     def test_source_identity_rejected(self):
         with tempfile.TemporaryDirectory() as d:
             db = Path(d) / "world.sqlite"
-            raw, manifest, _, _, world_manifest = self.build_paired(db)
+            raw, manifest, _, _, world_manifest, world_raw = self.build_paired(db)
             manifest["dataset_id"] = "false-origin"
             with self.assertRaisesRegex(handoff.CrossWorldError, "source identity"):
                 handoff.verify_cross_world(
