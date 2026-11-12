@@ -147,3 +147,6 @@ import DASHI.Physics.YangMills.YMClaySUNOneLinkHaarConvolutionSourceExact as Pur
 
 -- R445 local kernel: explicit effective coarse density of any weighted two-link SU(N) Haar block, source-derived using exact group inverse, Haar left invariance, Fubini and scalar linearity.
 import DASHI.Physics.YangMills.YMClaySUNTwoLinkHaarEffectiveFiberDensityExact as SUNHaarEffectiveFiberDensity
+
+-- R443/R445 all finite n native SU(N) Haar-paired product block, including 64-coarse/896-unused cardinality specialization; original bond codec identification still OPEN.
+import DASHI.Physics.YangMills.YMClaySUNFinitePairedHaarBlockPushforwardExact as NativeFinitePairedSUNHaar
