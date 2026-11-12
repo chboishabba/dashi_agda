@@ -4,7 +4,7 @@
 
 Implementation owner: `DASHI/Governance/CybersynGlobalViabilityMaxCutExact.agda`.
 
-This branch introduces a new **DASHI-original finite bridge**, not an empirical validation of any particular political or economic claim, nor a faithful formalisation of every aspect of historical Cybersyn. The new module has not yet been Agda typechecked on this branch. The existing source owners were read from the remote default branch.
+This branch introduces a new **DASHI-original finite bridge**, not an empirical validation of any particular political or economic claim, nor a faithful formalisation of every aspect of historical Cybersyn. The new module has not yet been Agda typechecked on this branch. The initial source owners were read from the remote default branch; follow-on integration owners were read from the PR branch.
 
 Source attribution follows `Docs/SourceAttributionPolicy.md`: external observation != source-bound claim != DASHI reconstruction != cross-owner inference != proved finite theorem != empirical promotion. The exact first-implementation commit and timestamp are separate from subsequent typecheck/kernel receipts.
 
@@ -29,14 +29,14 @@ Implemented additional source-only owners:
 - `DASHI/Governance/CybersynPhysicalFinanceCutExact.agda`: constructive loan double-entry, cash sources/uses, exact grid/labour capacity constraints, housing allocation nonfactorability, early-generation harm counterexample, financial/physical conditions separated from social authority.
 - `DASHI/Governance/CybersynAuthorityFeedbackExact.agda`: actual finite actor-dependent sensor/action transition instance; corrected vs imposed outcomes, investor-observation nonfactorability, consultation distinct from governance admission.
 - `DASHI/Governance/CybersynCrossSectorScenarioExact.agda`: finite energy–food and yen–AI collateral nonlinear shock conjunctions; public/private first-loss distinction; government/insurer/bank/household eligibility gates.
-- `DASHI/Governance/CybersynGlobalViabilityEverything.agda`: one focused root importing all four owners.
+- `DASHI/Governance/CybersynGlobalViabilityEverything.agda`: one focused root, expanded in the later phases below.
 - `scripts/check_cybersyn_global_viability_maxcut.sh`: fail-closed local Agda acceptance command, no CI requirement.
 
 These exact Boolean/cash/physical examples are new DASHI models, not measured transition magnitudes or forecasts. Source readback is confirmed. No Agda kernel/type-check acceptance was performed on this branch.
 
 ### Revised gate statuses
 
-- **P0 OPEN**: five source owners read back; focused Agda 2.9 checker not run, kernel acceptance absent.
+- **P0 OPEN**: current source owners read back; focused Agda 2.9 checker not run, kernel acceptance absent.
 - **P1 PARTIAL**: time-indexed actor observation/action transition exists; no authoritative PostgreSQL/world time-index hyperfabric adapter.
 - **P2 PARTIAL**: constructive financial double entry and physical grid/labour conservation; complete sectoral SFC and energy/material/land/water import balances absent.
 - **P3 PARTIAL**: finite affected-community/investor interventions, and government/insurer/bank/household gating; no calibrated best-response, actuarial cashflows or budget choices.
@@ -94,6 +94,22 @@ This section supersedes the earlier rough P0–P9 statuses. Each row separates s
 3. **P6/P8 admission:** turn synthetic time-ordered scenarios into measured region-indexed histories with counterfactual receipts.
 4. **P9:** evaluate resource- and authority-constrained institutional comparisons rather than merely comparing slogans.
 
+### P1/P7 dated source and public-risk join (latest implementation)
+
+New owner: `DASHI/Governance/CybersynDatedPublicRiskJoinExact.agda`, added to the focused `CybersynGlobalViabilityEverything.agda` root and the local checker. This is an **eighth source-written formal owner**; **L/K/E remain OPEN**.
+
+| Phase | Exact declaration | Implemented property | Remaining gate |
+|---|---|---|---|
+| P7 | `aggregateLossCannotRecoverTaxpayerBurden` | Identical aggregate loss cannot be used to reconstruct taxpayer loss for two finite waterfall scenarios | Kernel check, full economy liability tracing, real loss estimates |
+| P7 | `investmentHeadlineCannotRecoverTaxpayerBurden` | Identical investment headline cannot reconstruct taxpayer loss | Kernel check, observed loan/guarantee exposure |
+| P1 | `SameDatedEvent`, `sameExactEvent` | Typed event ID and observation-time equality are required for same-event joins | Actual world-builder ID and timestamp correspondence |
+| P1/P8 | `EmpiricallyAdmitted`, `candidateCannotPromoteEmpirical`, `sourceCheckedCannotPromoteEmpirical`, `noEmpiricalPromotionFromExample` | A candidate or source-checked synthetic receipt cannot produce empirical validation | Independent observed evidence and source promotion |
+| P1/P7 | `AdmittedSameEventJoin`, `CandidateSameEventJoin`, `syntheticJoin` | Structural event identity is strictly weaker than same-event evidence-backed empirical admission | PostgreSQL/JMD-world builder adapter, actual consumer receipt |
+| P7 | `sameTotalRisk`, `differentPublicCost`, `eventIdentityCannotRecoverPublicRisk` | Two scenarios for the same simulated event can share total loss and event identity while allocating losses differently | Kernel check, cross-actor actual loss register |
+| P4 | `historyAuthorityOwner`, `consultationBoundary` | Existing authority and world-ID owners are imported without manufacturing community consent | Source-specific authority/admissibility and review |
+
+**Roadmap decision:** the next highest-information step is still P0 compiler acceptance, not a new data pipeline based on uncompiled Agda. Any additional P1 world join must fetch the authoritative world-builder API used by PR #1494 and preserve its event identity, source, world version and parent DAG—not just invent a label-matching adapter. The new typed join is an internal precondition, not that integration.
+
 ## Initial adversarial/negative controls
 
 - Same GDP, investment headline or carbon score; different household/ecological outcomes.
@@ -128,11 +144,15 @@ New source-written, read-back-verified modules:
 1. `CybersynHistoricalMandateWorldBridgeExact.agda` imports source-owned `MandateBackedAuthorityRoutingExact`, `HistoryIndexedMarketMechanismOODALoopExact`, `HistoryIndexedProofExperimentActionLoopExact` and `TemporalStrandProvenanceBidiExact`. It carries a canonical scoped, recallable/reviewable route, non-factorability between publicity and actual mandate, a temporal non-backdating witness, and identity-preserving transport.
 2. `CybersynTemporalStressPropagationExact.agda` introduces deterministic replay of ordered shock traces, an exact case where two distinct event histories have the same final stress coordinates but different first observations, and a source-limited paired-policy counterfactual witness.
 3. `CybersynPublicBackstopLossWaterfallExact.agda` introduces conserved equity/lender/public loss allocations with equal total losses, different taxpayer exposure, and a separate legal/community/ecological/solvency admission gate. It imports the existing policy backstop, multi-axis authority and non-compensatory justice owners.
-4. `CybersynGlobalViabilityEverything.agda` now imports seven source owners. The local acceptance script checks the expanded root and the named theorem interfaces, including literal detection of Agda holes.
+4. `CybersynGlobalViabilityEverything.agda` originally imported seven source owners; subsequently expanded to eight. The local acceptance script checks the expanded root and the named theorem interfaces, including literal detection of Agda holes.
 
-The entire seven-module focused tranche was read back from the PR branch; no explicit Agda holes, `postulate` declarations or unsafe flags were found in those Agda sources. The checker itself contains search strings for such constructs, so do not interpret a scan of the checker as an Agda source finding.
+The initial seven-module focused tranche was read back from the PR branch; no explicit Agda holes, `postulate` declarations or unsafe flags were found in those Agda sources. The checker itself contains search strings for such constructs, so do not interpret a scan of the checker as an Agda source finding.
 
 **Important remaining gates:** no Agda/Nix runtime is present in this execution environment and no kernel acceptance is claimed. P1 remains a historical interface, not an authoritative PR #1494 JMD-world-builder / PostgreSQL integration. P2 has finite conserved examples, not complete cross-sector sectoral balance sheets or regionally quantified resource flows. P3/P7 have finite actor and public-risk constraints, not calibrated dynamic asset-liability management or actuarial capital calculations. P4/P5 retain separate real-world community-specific authorisation and ecological provenance requirements. P6 has reproducible synthetic replays only; P8/P9 need measurable comparative scenarios and empirical backtests.
 
 The next smallest decisive action is to run `bash scripts/check_cybersyn_global_viability_maxcut.sh` under the already-selected Agda 2.9 Nix environment, correct any compiler diagnostics, then connect the accepted root to an actual world-builder event identity/time adapter and observed economic datasets. Neither CI success nor an implementation comment is a substitute for these receipts.
 
+
+## Current branch reconciliation note
+
+The latest focused root has **eight** source-written exact owner modules, alongside one dedicated root, one local check script and this roadmap. Earlier chronologically dated status passages above are retained as historical progress notes; the phase ledger and latest P1/P7 subsection control current status. Source readback is not a local Agda 2.9 typecheck or a physical/economic verification receipt. 
