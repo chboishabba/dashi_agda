@@ -521,3 +521,25 @@ The constructed `YMClaySUNTwoLinkHaarEffectiveFiberDensityExact.agda` now additi
 These are exact **finite two-link** Haar identities derived from the existing group/Haar authority; they do not prove the positivity/normalization or effective density of the full original `n=3` interacting Wilson block. The highest alpha physical leaf remains explicit original side-four bond-fiber disintegration and full interacting coarse effective-density residual control, not re-stating a local change of variables.
 
 **Verification:** source committed and read back, all named external imports/fields checked against current repository, balanced Agda parentheses/no newly declared postulates or holes. Nix/Agda not available to this runtime; NO Agda kernel acceptance. Independent noncommutative D4 exact rational regression passed 512/512 and must not be promoted into SU(N) or physical receipts.
+
+
+### 2026-11-12 R443→R445 all-n paired Haar cutoff theorem
+
+**New source:** `YMClaySUNFinitePairedHaarBlockPushforwardExact.agda`. From the genuinely existing `OneLinkProductHaar`, bilateral invariance, finite Fubini and source group multiplication, it constructs `PairVector n`, the literal native `blockPairs` map, the finite iterated `pairedIntegral` and its pointwise congruence. It then proves:
+
+- `finiteNativePairedBlockPreservesProductHaar`: for **every** finite `n` and every coarse `Vec Link n → ℝ` test, independent two-link Haar pairs push forward to the original `Haar.productIntegral` on `n` links, by a genuine inductive invocation of the already-proved local native SU(N) Haar convolution (not an n-link pushforward axiom).
+- `unusedHaarIntegralOfConstant`: any number of source-Haar unused fine links integrates out exactly, using induction and original normalization.
+- `finiteNativePairedBlockWithUnusedLinks`: combines the pair and residue integrals without a new discarded-link measure.
+- `sideFourSideTwoCandidatePairHaarWithInterior`: specializes to **64 coarse link pair products, 896 unused fine links**, reflecting the cardinalities of the original 4×4^4=1024 fine bonds and 4×2^4=64 coarse bonds. This is a precise candidate-coordinate theorem; it is **not** yet the original selected periodic-bond codec identity.
+
+The full source/Agda regression imports this module. `scripts/check_ym_finite_paired_haar_exact.py` independently passed 12 exact rational dihedral D4 checks for `n=0,1,2,3` and `m=0,1,2`; D4 is not SU(N) and an exact arithmetic test is not a kernel receipt.
+
+**Exact next source-based native R445 lemmas (still unpaid):**
+1. `originalR445NativeCoarseBondPairIndicesInjective`: original side-two periodic bond indices → disjoint ordered fine-bond pairs, preserving orientations and periodic wrap.
+2. `originalR445SelectedBondEnumerationPermutation64Pairs896Residual`: an explicit bijection/permutation from the actual original 1024-bond `Codec.decodeOriginalBonds 4` order to the 64 selected pairs and the 896 otherwise unused fine bonds, proving disjointness/completeness.
+3. `originalR445NativeBlockAgreesPairedCodec`: the actual source `SUNBlock.nativeSUNBlockLinks {m=1} {l=1}` agrees with `blockPairs` after the codec, for every original gauge configuration; do not replace original periodic holonomy by a new group product map.
+4. `originalR445PureHaarBlockedIsOriginalCoarseHaar`: combine this module, the already present `productHaarPermutationInvariant` and original `SUNPeriodicLinks` vector encode/decode proof with 1–3.
+5. `originalR445FullInteractingCoarseDensitySource`: transport the actual coupled original Wilson Gibbs density through this complete codec and all fiber integrals, preserving original partition and positivity.
+6. `originalR445PhysicalEffectiveBareResidualUVUniform`: prove a genuinely sourced ultraviolet-uniform bound on the resulting effective-versus-bare density/moment residual, including all relevant and marginal counterterm directions. This is the decisive nonconstant P0.09 physical estimate.
+
+P0.01–08 outstanding scalar/carrier and Agda obligations also remain. E1 continuum, D1 original connecting polymer, D2 same-H full OS gap, N1 interaction witness and G1 all compact simple physical group extension remain **OPEN**. Neither the attachment's assumed massive propagator nor a local Haar identity supplies them.
