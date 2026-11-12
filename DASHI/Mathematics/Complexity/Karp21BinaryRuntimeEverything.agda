@@ -349,3 +349,8 @@ import DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact
 -- finite tape table; exact physical k+1 prefix trace. Payload decoder,
 -- remaining parser and full verifier simulation/clock are still open.
 import DASHI.Mathematics.Complexity.Karp21NativeGammaPrefixPhysicalSimulationExact
+
+-- G3 strengthened same-original-word sparse certificate transport:
+-- actual binary accepted 2m bits <= original gamma graph word length,
+-- using the original Fin-free 3m budget. Source only; kernel/NP open.
+import DASHI.Mathematics.Complexity.Karp21NativeOriginalSparseCertificateTightBoundExact
