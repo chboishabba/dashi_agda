@@ -36,17 +36,17 @@ module _
       A operations bishopPackaging fastPackaging)
   where
 
-  BishopBackend : Spine.SetoidOrderedCompleteReal
-  BishopBackend =
+  SelectedBishopBackend : Spine.SetoidOrderedCompleteReal
+  SelectedBishopBackend =
     Bishop.bishopSetoidOrderedCompleteReal bishopPackaging
 
-  FastBackend : Spine.SetoidOrderedCompleteReal
-  FastBackend =
+  SelectedFastBackend : Spine.SetoidOrderedCompleteReal
+  SelectedFastBackend =
     FastBackend.fastCauchySetoidOrderedCompleteReal
       operations fastPackaging
 
   canonicalEquivalence :
-    Spine.SetoidRealEquivalence BishopBackend FastBackend
+    Spine.SetoidRealEquivalence SelectedBishopBackend SelectedFastBackend
   canonicalEquivalence =
     Canonical.bishopFastCauchyCanonicalEquivalence dataSet
 
@@ -62,7 +62,7 @@ module _
         (Spine.map (Spine.toRight canonicalEquivalence)
           (bishopRational q))
         (fastRational q)) →
-    Weld.RationalSetoidWeld BishopBackend FastBackend
+    Weld.RationalSetoidWeld SelectedBishopBackend SelectedFastBackend
   makeRationalWeld Q bishopRational fastRational agree =
     record
       { equivalence = canonicalEquivalence
@@ -75,7 +75,7 @@ module _
   -- Precisely the original selected fifteen-value witness cut:
   -- no abstract proof is promoted to the actual zeta without `same`.
   bishopOddZetaToFastWitness :
-    (W : Weld.RationalSetoidWeld BishopBackend FastBackend)
+    (W : Weld.RationalSetoidWeld SelectedBishopBackend SelectedFastBackend)
     (source : Fin 15 → BishopReal.ℝ)
     (target : Fin 15 → Fast.FastCauchyReal A) →
     ((i : Fin 15) →
