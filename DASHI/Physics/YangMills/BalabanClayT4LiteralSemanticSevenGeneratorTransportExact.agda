@@ -24,7 +24,7 @@ module DASHI.Physics.YangMills.BalabanClayT4LiteralSemanticSevenGeneratorTranspo
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
