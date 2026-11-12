@@ -15,6 +15,11 @@ import DASHI.Core.IntersectionalNonFactorability as NonFactor
 import DASHI.Core.PluralEpistemicOperationalClosureExact as Plural
 import DASHI.Governance.CyberneticClinicalInstitutionalRepairBridge as Governance
 
+infixr 6 _and_
+_and_ : Bool → Bool → Bool
+true and b = b
+false and _ = false
+
 data LocalState : Set where
   accessObstructed : LocalState
   imposedBuild : LocalState
@@ -159,13 +164,9 @@ record GovernanceAdmission : Set where
 open GovernanceAdmission public
 
 governanceAdmitted : GovernanceAdmission → Bool
-governanceAdmitted g with communityRecognised g
-... | false = false
-... | true with meaningfulControl g
-...   | false = false
-...   | true with consentSourceChecked g
-...     | false = false
-...     | true = appealAndRepair g
+governanceAdmitted g =
+  communityRecognised g and meaningfulControl g and
+  consentSourceChecked g and appealAndRepair g
 
 mereConsultation : GovernanceAdmission
 mereConsultation = governanceAdmission true false false false
