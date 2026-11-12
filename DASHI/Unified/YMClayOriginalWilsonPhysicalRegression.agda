@@ -141,3 +141,9 @@ import DASHI.Physics.YangMills.YMClayP0BishopToOriginalWilsonRealWeldExact as P0
 
 -- P0.06 signed Wilson integration: actual original n=3 fine-blocked and independent n=1 bare Gibbs/Haar absolute expectation bounds from pointwise trace range and explicit ordered-real laws.
 import DASHI.Physics.YangMills.YMClayE1D1OriginalSignedWilsonWordMomentBoundExact as OriginalSignedWilsonAbsoluteMomentBound
+
+-- R443/R445: two original SU(N) links multiply to a Haar link (no Wilson interaction assumed).
+import DASHI.Physics.YangMills.YMClaySUNOneLinkHaarConvolutionSourceExact as PureSUNHaarConvolution
+
+-- R445 local kernel: explicit effective coarse density of any weighted two-link SU(N) Haar block, source-derived using exact group inverse, Haar left invariance, Fubini and scalar linearity.
+import DASHI.Physics.YangMills.YMClaySUNTwoLinkHaarEffectiveFiberDensityExact as SUNHaarEffectiveFiberDensity
