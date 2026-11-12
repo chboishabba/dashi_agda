@@ -1286,3 +1286,42 @@ modules SOURCE-WRITTEN; finite Python regression LOCALLY
 EXECUTED; Agda kernel unverified; original analytic P1–P3
 and external theorem admission OPEN. No axiom/postulate,
 silently selected analytic function or fake source receipt.
+
+
+### 2026-11-12 higher-alpha P2: ACTUAL original Bishop Dirichlet eta–zeta finite pairing
+
+After the exact Q[i] finite reindex, the same all-prefix relation is
+now source-written on the **original pinned Bishop real complex carrier**
+itself, not just rational-complex values:
+
+`DASHI/Analysis/BishopOriginalDirichletEtaFinitePairingExact.agda`
+(commit `4074bc2`), imported into all three golden TOE roots
+(commits `2e015b9`, `23bbda4`, `51a6dc6`).
+
+- `_≈C_`: original `RiemannBishopComplexAnalyticCarrierExact`
+  Cartesian complex pair with **Bishop setoid** equality in each
+  original component, no quotient/equality-of-record shortcut.
+- `originalBishopEtaStep` proves the actual 4-input original
+  Bishop real ring-rearrangement on real and imaginary coordinates,
+  using `RealProperties.ℝ-Solver`, no synthetic complex carrier.
+- `originalBishopEtaZetaPairing` proves by induction, for
+  ANY original Bishop complex source term sequence and all N,
+  `eta_(2N)+2*evenPositivePrefix_N ≈C zeta_(2N)`.
+- `OriginalRound11DirichletEta.sourceTerms` is *literally*
+  the same original `bishopDirichletExponentialTerm` from
+  `BishopRiemannOriginalZetaAboveTwoExact`, configured with
+  original `round11MachinTranscendentals` and the original
+  `sourceCanonicalNatLogCandidate`.
+- `OriginalRound11DirichletEta.actualOriginalFiniteEtaZetaPairing`
+  inhabits the finite pairing for that actual native
+  original zeta term family on EVERY complex input s and cutoff N.
+
+**Source-written, kernel not checked.** This materially reduces
+P2's original eta–zeta work to exact Seq.SeriesOf cutoff
+identification, the EVEN term rescaling law
+`(2n)^(-s)=2^(-s)n^(-s)`, actual uniform eta convergence,
+the divisor's complex zeros/removable singularities, and
+the independent original Riemann analytic same-function
+continuation/identification. None is inferred from finite
+ring equality. The Re(s)>2 native zeta value remains separately
+source-written, kernel acceptance unverified.
