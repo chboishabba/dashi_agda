@@ -71,6 +71,28 @@ class NativeP1(unittest.TestCase):
         self.assertEqual(alpha_type(a.canonical_type),alpha_type(c.canonical_type))
         self.assertEqual(alpha_type(b.canonical_type),alpha_type(c.canonical_type))
 
+    def test_nested_metadata_does_not_shift_alpha_dag_postorder(self):
+        plain,=extract_candidates(binder())
+        decorated=raw([
+            {"meta":{"format":{"version":"3.1.0"}}},
+            {"str":{"pre":0,"str":"Demo"},"in":1},
+            {"str":{"pre":0,"str":"Nat"},"in":2},
+            {"str":{"pre":0,"str":"x"},"in":3},
+            {"const":{"name":2,"us":[]},"ie":0},
+            {"bvar":0,"ie":1},
+            {"natVal":"0","ie":2},
+            {"mdata":{"expr":1,"data":{"source":"in-body"}},"ie":3},
+            {"app":{"fn":3,"arg":2},"ie":4},
+            {"forallE":{"name":3,"type":0,"body":4,
+                        "binderInfo":"default"},"ie":5},
+            {"thm":{"name":1,"levelParams":[],"type":5,
+                    "value":5,"all":[]}}
+        ])
+        wrapped,=extract_candidates(decorated)
+        self.assertNotEqual(plain.canonical_type,wrapped.canonical_type)
+        self.assertEqual(alpha_type(plain.canonical_type),
+                         alpha_type(wrapped.canonical_type))
+
     def test_same_printed_name_different_lean_name_constructor_does_not_merge(self):
         def exp(kind):
             names=[{"str":{"pre":0,"str":"Demo"},"in":1},
