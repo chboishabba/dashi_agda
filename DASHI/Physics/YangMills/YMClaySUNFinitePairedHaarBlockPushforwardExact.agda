@@ -166,3 +166,22 @@ module _
           unusedHaarIntegralOfConstant {n = m}
             (observable (blockPairs pairs))))
       (finiteNativePairedBlockPreservesProductHaar {n = n} observable)
+
+  -- Side-four -> side-two R445 CARDINALITIES:
+  -- 4*4^4 = 1024 original fine positive bonds,
+  -- 4*2^4 =   64 original coarse positive bonds.
+  -- If the source codec identifies 64 disjoint two-link pairs,
+  -- 896 unused fine bonds remain. This theorem pays exact Haar
+  -- integration for THOSE cardinalities; the native codec bijection
+  -- between the original site/bond field and these coordinates
+  -- is still open and must be explicitly proved.
+  sideFourSideTwoCandidatePairHaarWithInterior :
+    (observable : Vec Link 64 → ℝ) →
+    pairedIntegral {n = 64}
+      (λ pairs →
+        Haar.productIntegral {n = 896} oneLink
+          (λ _ → observable (blockPairs pairs)))
+    ≡ Haar.productIntegral {n = 64} oneLink observable
+  sideFourSideTwoCandidatePairHaarWithInterior observable =
+    finiteNativePairedBlockWithUnusedLinks
+      {n = 64} {m = 896} observable
