@@ -29,6 +29,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayE1D1CrossNumeratorCenteringDoesNotForceContractionExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalCrossNumeratorNormalizedMomentFactorExact.agda
   DASHI/Physics/YangMills/YMClayD2ObservedDecayDoesNotForceFullSpectralGapExact.agda
+  DASHI/Physics/YangMills/BalabanSU2RationalWilsonTraceBoundExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopRealCarrierInstancesExact.agda
   DASHI/Physics/YangMills/YMClayP0BishopToOriginalWilsonRealWeldExact.agda
   DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda
