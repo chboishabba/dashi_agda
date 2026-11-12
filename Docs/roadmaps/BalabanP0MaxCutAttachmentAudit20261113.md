@@ -119,3 +119,36 @@ No axiom, postulate, synthetic physical source, proxy four-integral value or
   is the local authoritative checker; **no CI**.
 - Do not use its final `machineChecked` descriptive labels as
   kernel receipts. No original physical or Clay endpoint promoted.
+
+## 2026-11-13 P0.7 exact Bishop setoid coherence breakthrough
+
+Source audit discovered that `BalabanClayT4SineDeterminesCosineAtomExact.derivedHalfAngleCoherence`
+is already an actual **Bishop-real setoid proof** `_≃_`, while
+`BalabanClayT4FaddeevPopovWilsonSymbolBridgeExact.CoherentGhostTrigBoxData.halfAngleExact`
+inappropriately demanded Agda structural `_≡_` equality of Cauchy record representations.
+There is no generic legal conversion `a ≃ b → a ≡ b` for Bishop reals.
+
+Implementation (PR #1498):
+- Repaired original `CoherentGhostTrigBoxData.halfAngleExact` to the genuine
+  `Bishop._≃_` relation. Its
+  `ghostAxisSymbolIsWilsonSineSquare`, `freeGhostSymbolIsWilsonHatMomentum`
+  and `freeGhostSymbolIsCanonicalHatMomentumAtom` now use the **fourfold
+  `BishopP.+-cong`** proof and setoid-correct transport.
+- New `derivedCoherentGhostFromOriginalSine` in
+  `BalabanP0FreeGhostWilsonPositiveWeldExact.agda` constructs
+  `Ghost.CoherentGhostTrigBoxData` directly from the already-present
+  `SineDerived.PhysicalSineHalfBoxData`, eliminating a redundant
+  independent half-angle proof and independent cosine enclosure.
+- `actualGhostSymbolInRefinedWilsonBox` is now transported via
+  Bishop `≤-respʳ-≃`/`≤-respˡ-≃`, not illegal propositional substitution.
+  `derivedSineGhostWilsonPositive` exhibits the actual source-sine
+  -> derived cosine -> coherent ghost -> Bishop interval -> strictly positive
+  rational denominator pipeline, conditional ONLY on actual source cell sine
+  membership and regular cell status.
+- This new setoid coherence is SOURCE-WRITTEN, **kernel unverified**.
+  The physical Fourier-source cosine equality, original Machin sine
+  source cells, shifted momentum operator/determinant and full scalar
+  symmetries remain **OPEN**.
+- Local checker now explicitly includes 18 target modules, with existing
+  `SineDeterminesCosineAtomExact` and the repaired setoid
+  `FaddeevPopovWilsonSymbolBridgeExact` before their consumer, no CI.
