@@ -31,6 +31,21 @@ import DASHI.Analysis.BishopComplexCommutativeSemiringLawsExact as Laws
 
 open Algebra using (_+C_; _-C_; _*C_; powC)
 
+complexTrans :
+  ∀ {x y z : Complex.BishopComplex} →
+  Complex._≈C_ x y →
+  Complex._≈C_ y z →
+  Complex._≈C_ x z
+complexTrans (a , b) (c , d) =
+  BishopP.≃-trans a c , BishopP.≃-trans b d
+
+complexSym :
+  ∀ {x y : Complex.BishopComplex} →
+  Complex._≈C_ x y →
+  Complex._≈C_ y x
+complexSym (a , b) =
+  BishopP.≃-symm a , BishopP.≃-symm b
+
 originalComplexPowerDifferenceQuotient :
   Complex.BishopComplex → Complex.BishopComplex → Nat →
   Complex.BishopComplex
@@ -109,16 +124,16 @@ originalComplexPowerDifferenceFactorisation x h (suc n) =
     yn = powC y n
     induction = originalComplexPowerDifferenceFactorisation x h n
   in
-  Complex.≈C-trans
+  complexTrans
     (originalComplexPowerDifferenceStep x h xn yn)
-    (Complex.≈C-trans
+    (complexTrans
       (Algebra.addCCongruent
         (Algebra.mulCCongruent induction (Complex.≈C-refl y))
         (Complex.≈C-refl (xn *C h)))
-      (Complex.≈C-trans
+      (complexTrans
         (Algebra.addCCongruent
           (Laws.complexMultiplyAssociative h Q y)
           (Laws.complexMultiplyCommutative xn h))
-        (Complex.≈C-sym
+        (complexSym
           (Laws.complexMultiplyDistributesLeft
             h (Q *C y) xn))))
