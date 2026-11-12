@@ -4,6 +4,7 @@ module DASHI.Physics.YangMills.BalabanLiteralLeftNestedHullExtremaExact where
 -- This module proves both actual left-bracketed extrema coincide with
 -- extrema of its eight original rational triple-corner products.
 
+open import Agda.Builtin.Equality using (_≡_)
 open import Data.Rational.Base as ℚ using (ℚ; _≤_; _*_)
 import Data.Rational.Properties as ℚP
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
