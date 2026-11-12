@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Authoritative local Agda 2.9 check for the newly source-written
 # R445 P0.A-E native finite-bond/weighted-density maximum cut.
-# Nix required, no Docker, no CI admission, fail on the first error.
+# AGDA_BIN, PATH Agda or Nix supported; no Docker or CI, fail on first error.
 # The physical P0.F/E1/D1/D2/N1/G1 gates are NOT checked/closed here.
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
@@ -54,7 +54,7 @@ else
   echo "BLOCKED: no AGDA_BIN, PATH Agda or Nix. No kernel receipt." >&2
   exit 127
 fi
-printf 'Original R445 P0.A-E local source head: %s\\n' \\
+printf 'Original R445 P0.A-E local source head: %s\n' \
   "$(git rev-parse HEAD 2>/dev/null || echo unknown)"
 for target in "${targets[@]}"; do
   echo "CHECK $target"
