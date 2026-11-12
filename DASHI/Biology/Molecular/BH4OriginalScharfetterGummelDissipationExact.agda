@@ -84,23 +84,23 @@ originalBishopSGFluxAt series prefactors faces bond species =
         faces bond))
     (lookupFaceScale prefactors (V.lookup faces bond) species)
   where
-  lookupFaceScale :
-    ∀ {n : Nat} →
-    (prefactors : V.Vec R.ℝ n)
-    (row : V.Vec (SG.BishopFaceState series) n)
-    (species : F.Fin n) →
-    V.lookup
-      (V.zipWith
-        (λ factor face → R._*_ factor (SG.bishopSGFaceFlux face))
-        prefactors row) species
-      ≡
-    R._*_
-      (V.lookup prefactors species)
-      (SG.bishopSGFaceFlux (V.lookup row species))
-  lookupFaceScale V.[] V.[] ()
-  lookupFaceScale (V._∷_ scale scales) (V._∷_ face remaining) F.zero = refl
-  lookupFaceScale (V._∷_ scale scales) (V._∷_ face remaining) (F.suc i) =
-    lookupFaceScale scales remaining i
+    lookupFaceScale :
+      ∀ {n : Nat} →
+      (prefactors : V.Vec R.ℝ n)
+      (row : V.Vec (SG.BishopFaceState series) n)
+      (species : F.Fin n) →
+      V.lookup
+        (V.zipWith
+          (λ factor face → R._*_ factor (SG.bishopSGFaceFlux face))
+          prefactors row) species
+        ≡
+      R._*_
+        (V.lookup prefactors species)
+        (SG.bishopSGFaceFlux (V.lookup row species))
+    lookupFaceScale V.[] V.[] ()
+    lookupFaceScale (V._∷_ scale scales) (V._∷_ face remaining) F.zero = refl
+    lookupFaceScale (V._∷_ scale scales) (V._∷_ face remaining) (F.suc i) =
+      lookupFaceScale scales remaining i
 
 -- Pairing each edge's outward and inward contributions requires NO
 -- exponential identity or positivity assumption. This is the
@@ -327,45 +327,45 @@ originalConcreteSGFluxAt prefactors faces bond sp =
       (lookupConcreteMap prefactors faces bond))
     (lookupScale prefactors (V.lookup faces bond) sp)
   where
-  lookupConcreteMap :
-    ∀ {n : Nat}
-    (p : V.Vec R.ℝ 29)
-    (rows : V.Vec (V.Vec ConcreteSG.ConcreteBishopFaceState 29) n)
-    (index : F.Fin n) →
-    V.lookup (V.map
-      (λ row → V.zipWith
+    lookupConcreteMap :
+      ∀ {n : Nat}
+      (p : V.Vec R.ℝ 29)
+      (rows : V.Vec (V.Vec ConcreteSG.ConcreteBishopFaceState 29) n)
+      (index : F.Fin n) →
+      V.lookup (V.map
+        (λ row → V.zipWith
+          (λ factor face →
+            R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+          p row) rows) index
+      ≡
+      V.zipWith
         (λ factor face →
           R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
-        p row) rows) index
-    ≡
-    V.zipWith
-      (λ factor face →
-        R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
-      p (V.lookup rows index)
-  lookupConcreteMap p V.[] ()
-  lookupConcreteMap p (V._∷_ row rows) F.zero = refl
-  lookupConcreteMap p (V._∷_ row rows) (F.suc index) =
-    lookupConcreteMap p rows index
+        p (V.lookup rows index)
+    lookupConcreteMap p V.[] ()
+    lookupConcreteMap p (V._∷_ row rows) F.zero = refl
+    lookupConcreteMap p (V._∷_ row rows) (F.suc index) =
+      lookupConcreteMap p rows index
 
-  lookupScale :
-    ∀ {n : Nat}
-    (p : V.Vec R.ℝ n)
-    (row : V.Vec ConcreteSG.ConcreteBishopFaceState n)
-    (index : F.Fin n) →
-    V.lookup
-      (V.zipWith
-        (λ factor face →
-          R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
-        p row) index
-    ≡
-    R._*_
-      (V.lookup p index)
-      (ConcreteSG.concreteBishopSGFaceFlux
-        (V.lookup row index))
-  lookupScale V.[] V.[] ()
-  lookupScale (V._∷_ p ps) (V._∷_ face rest) F.zero = refl
-  lookupScale (V._∷_ p ps) (V._∷_ face rest) (F.suc index) =
-    lookupScale ps rest index
+    lookupScale :
+      ∀ {n : Nat}
+      (p : V.Vec R.ℝ n)
+      (row : V.Vec ConcreteSG.ConcreteBishopFaceState n)
+      (index : F.Fin n) →
+      V.lookup
+        (V.zipWith
+          (λ factor face →
+            R._*_ factor (ConcreteSG.concreteBishopSGFaceFlux face))
+          p row) index
+      ≡
+      R._*_
+        (V.lookup p index)
+        (ConcreteSG.concreteBishopSGFaceFlux
+          (V.lookup row index))
+    lookupScale V.[] V.[] ()
+    lookupScale (V._∷_ p ps) (V._∷_ face rest) F.zero = refl
+    lookupScale (V._∷_ p ps) (V._∷_ face rest) (F.suc index) =
+      lookupScale ps rest index
 
 originalConcrete54x29SGTransportConserves :
   (prefactors : V.Vec R.ℝ 29)
