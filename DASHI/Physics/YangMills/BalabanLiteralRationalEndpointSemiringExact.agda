@@ -19,6 +19,9 @@ open import Relation.Binary.PropositionalEquality using (cong₂; sym; trans)
 open import Data.Rational.Base as ℚ using (_+_)
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
 import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact as Typed
+import DASHI.Physics.YangMills.BalabanLiteralExpressionSyntaxPermutationBoundaryExact as Negative
+import DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact as Orbit
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopJointMomentumEquivarianceExact as Joint
 
 record SameEndpoints (a b : Eval.RationalInterval) : Set where
   constructor sameEndpoints
@@ -95,3 +98,37 @@ typedHeadSwapEndpointExact a b tail =
 -- To discharge the current full-record semantic evaluator equality,
 -- prove a constructor proof-irrelevance/canonical-order-witness lemma
 -- or refactor the evaluator into an endpoint-quotiented semantics.
+
+-- ACTUAL selected cosine terms and ACTUAL original atom-environment
+-- values. This closes the earlier syntax-vs-semantics counterexample
+-- at concrete rational endpoint level, with no generic law postulate.
+sourceCosine0 sourceCosine1 :
+  Eval.BoxTrigEnvironment → Eval.RationalInterval
+sourceCosine0 environment =
+  Eval.atomInterval environment
+    (Eval.cosineFull Eval.loopMomentum Eval.axis0)
+sourceCosine1 environment =
+  Eval.atomInterval environment
+    (Eval.cosineFull Eval.loopMomentum Eval.axis1)
+
+concreteCosineSwapHasEqualEndpoints :
+  (environment : Eval.BoxTrigEnvironment) →
+  SameEndpoints
+    (Typed.addInterval
+      (sourceCosine1 environment) (sourceCosine0 environment))
+    (Typed.addInterval
+      (sourceCosine0 environment) (sourceCosine1 environment))
+concreteCosineSwapHasEqualEndpoints environment =
+  typedAddCommutative
+    (sourceCosine1 environment) (sourceCosine0 environment)
+
+-- The exact syntax is still different, by
+-- Negative.rawSyntaxSwapNotInvariant. The interval endpoint semantics
+-- nonetheless agree for the concrete rational backend's addition.
+--
+-- To promote to equality of Eval.evaluateExpression for a selected
+-- Eval.RationalIntervalArithmetic, first identify its addInterval
+-- operation with Typed.addInterval AND prove that the chosen interval
+-- record construction canonicalizes ordering proofs (or use the
+-- quotient SameEndpoints directly). Such identification has not
+-- been supplied as a runtime or physical source receipt.
