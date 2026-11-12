@@ -17,6 +17,7 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
 from lean_world_native_p1_pg import (
     inspect_observation,load_selected_codec,persist_original_p1,
     bounded_original_alpha_fibre,retrieve_original_native_p1,NativeP1PGError)
+from run_lean_world_p1_common_consumers import analyze_original
 from run_lean_world_stream_pg import ingest_stream,migrate
 
 try:
@@ -193,6 +194,17 @@ class RealSourcePostgresP1(unittest.TestCase):
         self.assertEqual(restored["type_exact"],EXACT)
         self.assertEqual(restored["type_alpha"],alpha)
         self.assertEqual(restored["proof_exact"],PROOF)
+        common=analyze_original(
+            self.conn,repository="example/test",revision="a"*40,
+            path="Sample.lean",declaration="originalProof",
+            export_sha256="b"*64,top_k=1)
+        self.assertEqual(common["search"]["returned"],1)
+        self.assertEqual(common["compression_baseline"]["exact_type_bytes"],
+                         len(EXACT))
+        self.assertTrue(common["compression_baseline"][
+            "same_original_object_used_by_fibre_and_MDL"])
+        self.assertFalse(common["compression_baseline"][
+            "full_typed_MDL_win_claimed"])
         self.assertFalse(restored["kernel_certified"])
         self.assertFalse(restored["world_admitted"])
         hit=bounded_original_alpha_fibre(
