@@ -45,7 +45,6 @@ import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact
 import DASHI.Physics.YangMills.BalabanClayT4BishopFourCornerIntervalExact as Product
 import DASHI.Physics.YangMills.BalabanClayT4BishopExpressionIntervalSemanticsExact as Sem
 import DASHI.Physics.YangMills.BalabanClayT4CanonicalBishopAtomEnvironmentExact as Canonical
-import DASHI.Physics.YangMills.BalabanLiteralFourCornerCommutativityExact as Extremes
 
 lowerSine : ℚ
 lowerSine = + 87 / 128
