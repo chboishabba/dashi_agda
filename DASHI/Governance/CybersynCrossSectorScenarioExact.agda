@@ -15,6 +15,7 @@ import DASHI.Governance.CybersynAuthorityFeedbackExact as Authority
 import DASHI.Economics.SystemicCrisisCompressionBridge as Crisis
 import DASHI.Economics.GeopoliticalEnergyAITreasuryTransmissionExact as Geo
 import DASHI.Economics.JPYJGBTreasuryFundingTransmission2026Exact as Yen
+import DASHI.Algebra.Trit as Trit
 
 infixr 6 _and_
 _and_ : Bool → Bool → Bool
@@ -195,9 +196,7 @@ differentLossAllocation ()
 -- Existing owners are consumed as separate interpretations, never promoted
 -- from the illustrative Boolean interaction into empirical evidence.
 crisisTransmissionOwner : Crisis.TransmissionChain
-crisisTransmissionOwner = Crisis.triggerOnlyChain
-  (Yen.leveragedCarryUnwind (Yen.yenFundingValve
-    Yen.zer Yen.zer Yen.zer Yen.zer Yen.zer Yen.zer Yen.zer))
+crisisTransmissionOwner = Crisis.triggerOnlyChain Trit.zer
 
 hormuzTransmissionOwner : Geo.GeopoliticalNode
 hormuzTransmissionOwner = Geo.hormuz
