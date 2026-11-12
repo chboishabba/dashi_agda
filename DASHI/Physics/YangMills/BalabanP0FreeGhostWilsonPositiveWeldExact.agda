@@ -15,6 +15,7 @@ module DASHI.Physics.YangMills.BalabanP0FreeGhostWilsonPositiveWeldExact where
 -- source-specific premises and are NOT manufactured by this module.
 
 open import Agda.Builtin.Equality using (_≡_)
+open import Agda.Builtin.Bool using (false)
 open import Data.Product using (_×_; _,_)
 open import Data.Rational.Base using (0ℚ; _<_)
 open import Relation.Binary.PropositionalEquality using (subst; sym)
