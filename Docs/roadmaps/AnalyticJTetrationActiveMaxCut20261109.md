@@ -1014,3 +1014,45 @@ Thus \`originalBishopNewtonDiskInvariantFromSquaredContraction\` removes the **i
 6. **P1g/P2–P4**: Global Kneser period propagation, monodromy, real half-iterate, full modular \(j/J\) construction, same-action observer intertwiner and dimension-correct contour/boundary integration are NOT supplied by any local source proof. All OPEN.
 
 **Acceptance boundary:** All additions in this round are source-written and exact-head GitHub readback, but there is NO Agda 2.9 executable in the current environment, so there are **zero new local kernel-acceptance receipts**. The script registration number describes targets, not verified targets. CI is not required or trusted as a substitute for local kernel acceptance. No existing physical/Clay/global claims are promoted.
+
+
+## 2026-11-12 latest — original Bishop local log on arbitrary closed DISK, not equality sphere
+
+Four additional source modules are now registered in the exact-head local golden checker:
+
+1. \`AbelBishopSelectedLogNormalizedDiskUpperExact.agda\` proves that for the ACTUAL original Bishop reciprocal of p, \(\mathrm{normSq}(t)\le r^2\mathrm{normSq}(p)\) implies \(\mathrm{normSq}(p^{-1}t)\le r^2\). Uses \`Affine.originalBishopNormalizedDisplacementNormSquare\` and the original Bishop inverse cancellation, not an exact-radius assumption.
+2. \`AbelBishopLogOnePlusUpperDiskConvergenceExact.agda\` proves the LITERAL signed \(\log(1+u)\) factorial coefficient stream absolutely converges **componentwise** under \(\mathrm{normSq}(u)\le r^2\), \(0\le r<1\). Uses \`Upper.upperBoundBuildsOriginalPowerEnvelope\`, the existing \`originalBishopLogCoefficientMagnitudeAtMostOne\`, and Bishop geometric-series comparison to construct the canonical original complex series value and limit. It produces an actual selected affine log germ from the normalized relative DISK inequality. It does not assert principal inverse.
+3. \`AbelBishopLogQuadraticHalfCoefficientExact.agda\` pays the sharper genuine degree-two source coefficient inequality \(\lvert(-1)^{n+1}/(n+2)\rvert\le1/2\) from \`FiniteNatFractionOrderExact\`, and proves \(\lvert\Re a_{n+1}(u)\rvert,\lvert\Im a_{n+1}(u)\rvert\le(1/2)r^{n+2}\) on the original upper disk. This is the finite scalar foundation for \(M_2=8/27\), rather than a guessed Taylor-remainder field. The infinite source sum majorant/limit order transport remains OPEN.
+4. \`AbelBishopSelectedLocalLogDiskAdmissionExact.agda\` establishes the precise selected \(p\)-disk relative-radius inequality: if \(\mathrm{normSq}(p)\ge(27/20)^2\) and \(\mathrm{normSq}(t)\le(1/10)^2\), then \(\mathrm{normSq}(t)\le(2/27)^2\mathrm{normSq}(p)\). It constructs a native Bishop interval witness \(0\le2/27<1\) and therefore an actual canonical local log-series germ at *every* such displacement. Reuses previous upper-disk convergence; no exact norm radius or classical log oracle.
+
+The existing \`AbelBishopLogOnePlusZeroNormalizationExact.agda\` already proves \(\log(1+0)\approx_C0\) for the same original coefficient stream; do not duplicate it. It must still be welded to the newly constructed upper-disk canonical limit via source uniqueness and congruence before claiming \(g(p)\approx_Cp\) for all proof-bearing log chart witnesses.
+
+### Selected p norm window: stronger exact rational endpoints
+
+\`AbelBishopKoenigsSelectedRationalConstantsExact.agda\` now records coordinatewise endpoint bounds at total Newton displacement \(1/14930\), rather than the looser invariant disk radius \(1/200\):
+\[
+\left(p_{0,\mathrm{re}}-\frac1{14930}\right)^2+
+\left(p_{0,\mathrm{im}}-\frac1{14930}\right)^2
+>(27/20)^2,
+\]
+\[
+\left(p_{0,\mathrm{re}}+\frac1{14930}\right)^2+
+\left(p_{0,\mathrm{im}}+\frac1{14930}\right)^2
+<(69/50)^2.
+\]
+These are literal rational arithmetic comparisons. Still OPEN: propagate the actual Bishop geometric Cauchy displacement estimate to the completed fixed point coordinate order to inhabit the selected \(p\)-modulus interval; no norm-square radius theorem is implied by the rational check alone.
+
+### Updated minimal MAX-CUT — no false completion
+
+| Gate | Source-written advance | Exact remaining producer |
+| --- | --- | --- |
+| P1.N numeric | Native Newton first step from residual and reciprocal, inverse bound from denominator, explicit \(73/7200000000\) squared disk self-map and reduced compiler | Prove the TWO original expC center Taylor inequalities and uniform SAME operator squared contraction |
+| P1.N continuity | Existing scalar-to-complex/Newton transport and canonical Cauchy completion; 1/14930 endpoint arithmetic | Prove native Bishop exp/sin/cos convergence along the same Newton limit and coordinate bound transfer |
+| P1.L source log | Actual upper-disk absolute logarithm-series convergence, affine normalization from inequality, \(2/27\) radius, existing log(1)=0 owner | Principal \(\log(\exp z)=z\) branch identity, same-carrier exp-log composition, p norm lower and disk self-map/contraction |
+| P1.L remainder | Genuine degree-two coefficient bound \(1/2\) and per-component \((1/2)r^{n+2}\) on arbitrary disk | Infinite geometric tail comparison to \(8/27\) squared remainder on actual normalized displacement; limit order closure |
+| P1 Koenigs | Source finite increments, Bishop geometric \(552/625\) convergence and conditional Schröder | Inhabit the actual fixed point/selected log branch, source orbit bounds at z and g(z), local univalence and normalization |
+| P1g/P2-P4 | Finite algebra and modular coefficient receipts | Global Abel/Kneser continuation, monodromy, real half-iterate, modular \`j/J\` construction, observer same-action and contour/boundary integration all remain OPEN |
+
+### Verification / trust
+
+The local checker contains these additions with all earlier source owners. The Agda 2.9 executable/Nix are unavailable in this execution runtime, so **source-written is not kernel accepted**. The checked math that ran here is independent \`Fraction\` rational preflight, not a proof of uniform Bishop analytic inequalities. Local golden Agda kernel, never CI, remains authoritative. Original Bishop/Murray/Csimma, Bałaban concrete sine sources, mathematical theta/Moonshine attribution and DASHI proof-joining boundaries preserved.
