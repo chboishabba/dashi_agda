@@ -237,3 +237,36 @@ This design separates three validation meanings: (1) executable software correct
 `verify_cross_world` now requires `world_snapshot_raw` (CLI `--world-snapshot`) in addition to the manifest and database. The original JSONL must hash to the pinned manifest, and each database event payload must equal the independently supplied original record byte-for-byte after canonicalisation. Altering an SQLite event and recomputing its stored payload hash does not suffice. Two new adversarial tests check that attack and deletion of an expected event.
 
 This verifies consistency with a supplied source snapshot, **not** truth of the source contents, source ownership, community authorisation, or absence of omitted unobserved effects. Those remain separate evidence gates.
+
+## 2026-11-12 numerically executed source-anchored sensitivity cut
+
+The prior synthetic-only run was insufficient as empirical evidence. A new standalone sensitivity module is now source-written:
+
+- `scripts/cybersyn_sourced_australian_sensitivity.py`, with published 25 August 2026 AEMO/Oxford Economics NEM demand forecasts (FY26 5.1, FY30 15.5, FY36 33.7 TWh) and Reuters 21 October 2026 NEXTDC deferred-revenue, guidance and equity-repricing reports.
+- `tests/test_cybersyn_sourced_australian_sensitivity.py`, verifying conservation, exact arithmetic and explicit no-promotion statuses.
+- The same arithmetic was **executed independently in the current working runtime** using a reference Python implementation, with seven local tests passing, 36 electricity-incidence cases and three public-loss allocation cases. Its generated JSON and CSV receipts were retained as session artifacts. **The new repository script and its own test file have not been run in the pinned repository environment**; do not promote the independent calculation to exact-PR source acceptance.
+
+### Numerical results and definitions
+
+- Central NEM demand FY36 / FY26: 33.7 / 5.1 = **6.607843×**; incremental yearly energy = **28.6 TWh**.
+- NEXTDC FY27 net revenue guidance midpoint changed from (615+640)/2 = A$627.5m to (475+500)/2 = A$487.5m: **A$140m (22.31%)** downward revision.
+- EBITDA midpoint changed from (385+410)/2 = A$397.5m to (245+265)/2 = A$255m: **A$142.5m (35.85%)** downward revision.
+- Reported market value repricing / deferred annual contracted revenue: approx A$3bn / A$140m = **21.43×**, a descriptive sensitivity ratio, not a causal multiplier.
+- Assumed tariffs: A$100, A$200 and A$300 per MWh; assumed consumer cost incidence: 0%, 25%, 50%, 100%. The 36 grid scenarios allocate gross electricity invoice value, **not** marginal system costs, carbon damage, road repair, education expenditure, net consumer costs or subsidies.
+- Hypothetical guarantee shares: 0%, 10%, 25% of the A$140m deferred revenue. These are illustrative loss allocations, **not** observed policy guarantees, losses, or fiscally realised liabilities.
+
+### Acceptance boundaries remaining
+
+P8a: published public forecast arithmetic with source identifiers **executed** in standalone reference runtime. P8b: independently observed multivariate historical rows and held-out macroeconomic forecast comparison **OPEN**; a one-time forecast table cannot identify causal or aggregate macroeconomic effects. P1c: authoritative JMD world builder/checker **OPEN**; the separate source-verified economic observation store is not an admissible Lean proof world. P0: Agda 2.9 compiler and kernel acceptance **OPEN**.
+
+Reproduce repository implementation:
+
+```sh
+python3 -m unittest discover -s tests -p 'test_cybersyn_sourced_australian_sensitivity.py' -v
+python3 scripts/cybersyn_sourced_australian_sensitivity.py --out /tmp/cybersyn-australia
+```
+
+Published source locators:
+- https://www.oxfordeconomics.com/resource/data-centres-energy-demand-outlook-in-australia/
+- https://www.reuters.com/world/asia-pacific/australian-ai-data-centre-operator-nextdc-shares-shed-44-revenue-delay-2026-10-21/
+
