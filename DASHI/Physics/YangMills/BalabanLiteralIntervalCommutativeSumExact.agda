@@ -15,6 +15,9 @@ open import Agda.Builtin.List using (List; []; _∷_)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans)
 
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
+import DASHI.Physics.YangMills.BalabanClayT4HyperoctahedralGridOrbitExact as Orbit
+import DASHI.Physics.YangMills.BalabanClayT4WilsonOneLoopJointMomentumEquivarianceExact as Joint
+import DASHI.Physics.YangMills.BalabanLiteralSemanticGeneratorTransportExact as Semantic
 
 record IntervalAdditionLaws
   (arithmetic : Eval.RationalIntervalArithmetic) : Set₁ where
@@ -220,3 +223,53 @@ originalCombinedKernelSwapsBubbleTadpole arithmetic environment
 -- * Ordered/proof-containing interval records may require endpoint
 --   equivalence or construction with canonical order proofs.
 -- * No associativity is assumed for arbitrary rounded/opaque enclosures.
+
+-- The list map is explicitly the original Joint.transformExpression,
+-- no independent expression transformer or new physical symbol.
+transformTerms :
+  Orbit.HyperoctahedralGenerator →
+  List Eval.DiagramExpression → List Eval.DiagramExpression
+transformTerms generator [] = []
+transformTerms generator (x ∷ xs) =
+  Joint.transformExpression generator x ∷ transformTerms generator xs
+
+-- The actual momentum transform COMMUTES with the original source
+-- list-sum constructor. This is a syntactic fact proven by recursion,
+-- not an assertion that a physical contribution is invariant.
+transformSumExpressions :
+  (generator : Orbit.HyperoctahedralGenerator) →
+  (terms : List Eval.DiagramExpression) →
+  Joint.transformExpression generator (Eval.sumExpressions terms)
+  ≡ Eval.sumExpressions (transformTerms generator terms)
+transformSumExpressions generator [] = refl
+transformSumExpressions generator (x ∷ xs) =
+  cong (Eval.add (Joint.transformExpression generator x))
+    (transformSumExpressions generator xs)
+
+-- A same-backend selected scalar transformation is compositional
+-- through the real four-diagram kernel. Each of the four independent
+-- source terms remains an uninstantiated, independently verifiable leaf.
+originalFourTermsSemanticBuildCombinedKernel :
+  (arithmetic : Eval.RationalIntervalArithmetic)
+  (environment : Eval.BoxTrigEnvironment)
+  (generator : Orbit.HyperoctahedralGenerator)
+  (source : Eval.LiteralDiagramExpressions) →
+  Semantic.SemanticInvariant arithmetic environment generator
+    (Eval.gaugeBubble source) →
+  Semantic.SemanticInvariant arithmetic environment generator
+    (Eval.gaugeTadpole source) →
+  Semantic.SemanticInvariant arithmetic environment generator
+    (Eval.ghostLoop source) →
+  Semantic.SemanticInvariant arithmetic environment generator
+    (Eval.haarLoop source) →
+  Semantic.SemanticInvariant arithmetic environment generator
+    (Eval.combinedKernelExpression source)
+originalFourTermsSemanticBuildCombinedKernel
+  arithmetic environment generator source bubble tadpole ghost haar
+  rewrite bubble | tadpole | ghost | haar = refl
+
+-- A generator that PERMUTES actual diagram terms rather than fixing
+-- them one-by-one needs an additional selected term-permutation
+-- identification, followed by the commutative-sum laws above.
+-- The full source scalar may further contain transverse projection,
+-- Ward subtraction, continuum-singular extraction and divisions.
