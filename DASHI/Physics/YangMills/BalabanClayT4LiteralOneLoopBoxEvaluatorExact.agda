@@ -189,6 +189,13 @@ record RationalInterval : Set where
 
 open RationalInterval public
 
+-- Compatibility with the existing canonical Bishop and positive-reciprocal
+-- source modules. The actual proof-carrying constructor is "interval";
+-- those modules already use "rationalInterval" as a synonym.
+-- Definitional equality ensures no alternate carrier or axiom is introduced.
+rationalInterval : (lower upper : ℚ) → lower ≤ upper → RationalInterval
+rationalInterval = interval
+
 record RationalIntervalArithmetic : Set₁ where
   field
     zeroInterval oneInterval : RationalInterval
