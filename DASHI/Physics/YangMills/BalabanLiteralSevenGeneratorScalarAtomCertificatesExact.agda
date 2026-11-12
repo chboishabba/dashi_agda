@@ -95,3 +95,67 @@ sevenAdd left right = record
   ; Cert.swap23Exact = cong₂ Eval.add
       (Cert.swap23Exact left) (Cert.swap23Exact right)
   }
+
+sevenSubtract :
+  ∀ {a b} →
+  Cert.SevenGeneratorInvariantExpression a →
+  Cert.SevenGeneratorInvariantExpression b →
+  Cert.SevenGeneratorInvariantExpression (Eval.subtract a b)
+sevenSubtract left right = record
+  { Cert.flip0Exact = cong₂ Eval.subtract
+      (Cert.flip0Exact left) (Cert.flip0Exact right)
+  ; Cert.flip1Exact = cong₂ Eval.subtract
+      (Cert.flip1Exact left) (Cert.flip1Exact right)
+  ; Cert.flip2Exact = cong₂ Eval.subtract
+      (Cert.flip2Exact left) (Cert.flip2Exact right)
+  ; Cert.flip3Exact = cong₂ Eval.subtract
+      (Cert.flip3Exact left) (Cert.flip3Exact right)
+  ; Cert.swap01Exact = cong₂ Eval.subtract
+      (Cert.swap01Exact left) (Cert.swap01Exact right)
+  ; Cert.swap12Exact = cong₂ Eval.subtract
+      (Cert.swap12Exact left) (Cert.swap12Exact right)
+  ; Cert.swap23Exact = cong₂ Eval.subtract
+      (Cert.swap23Exact left) (Cert.swap23Exact right)
+  }
+
+
+sevenDivide :
+  ∀ {a b} →
+  Cert.SevenGeneratorInvariantExpression a →
+  Cert.SevenGeneratorInvariantExpression b →
+  Cert.SevenGeneratorInvariantExpression (Eval.divide a b)
+sevenDivide left right = record
+  { Cert.flip0Exact = cong₂ Eval.divide
+      (Cert.flip0Exact left) (Cert.flip0Exact right)
+  ; Cert.flip1Exact = cong₂ Eval.divide
+      (Cert.flip1Exact left) (Cert.flip1Exact right)
+  ; Cert.flip2Exact = cong₂ Eval.divide
+      (Cert.flip2Exact left) (Cert.flip2Exact right)
+  ; Cert.flip3Exact = cong₂ Eval.divide
+      (Cert.flip3Exact left) (Cert.flip3Exact right)
+  ; Cert.swap01Exact = cong₂ Eval.divide
+      (Cert.swap01Exact left) (Cert.swap01Exact right)
+  ; Cert.swap12Exact = cong₂ Eval.divide
+      (Cert.swap12Exact left) (Cert.swap12Exact right)
+  ; Cert.swap23Exact = cong₂ Eval.divide
+      (Cert.swap23Exact left) (Cert.swap23Exact right)
+  }
+
+
+sevenNegate :
+  ∀ {a} →
+  Cert.SevenGeneratorInvariantExpression a →
+  Cert.SevenGeneratorInvariantExpression (Eval.negate a)
+sevenNegate input = record
+  { Cert.flip0Exact = cong Eval.negate (Cert.flip0Exact input)
+  ; Cert.flip1Exact = cong Eval.negate (Cert.flip1Exact input)
+  ; Cert.flip2Exact = cong Eval.negate (Cert.flip2Exact input)
+  ; Cert.flip3Exact = cong Eval.negate (Cert.flip3Exact input)
+  ; Cert.swap01Exact = cong Eval.negate (Cert.swap01Exact input)
+  ; Cert.swap12Exact = cong Eval.negate (Cert.swap12Exact input)
+  ; Cert.swap23Exact = cong Eval.negate (Cert.swap23Exact input)
+  }
+
+-- Syntactic closure does NOT mean the literal regular integrand is
+-- syntactically invariant: actual axis-labelled terms may only be
+-- invariant after semantic sums/permutations, via endpoint congruence.
