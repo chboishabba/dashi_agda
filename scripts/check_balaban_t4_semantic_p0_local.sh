@@ -15,10 +15,12 @@ agda --version
 for module in \
   DASHI/Physics/YangMills/BalabanClayT4LiteralSemanticSevenGeneratorTransportExact.agda \
   DASHI/Physics/YangMills/BalabanClayT4SemanticFourRepresentativeQuadratureExact.agda \
-  DASHI/Physics/YangMills/BalabanClayT4OuterRankTwoPerAxisExact.agda
+  DASHI/Physics/YangMills/BalabanClayT4OuterRankTwoPerAxisExact.agda \
+  DASHI/Physics/YangMills/BalabanClayT4OriginalEvaluatorFourOrbitEndpointSumsExact.agda \
+  DASHI/Physics/YangMills/BalabanClayT4LiteralFourOrbitErrorBudgetFoldExact.agda
 do
   echo "Checking literal-source Agda module: $module"
   agda -i . -l standard-library "$module"
 done
 
-echo 'AGDA KERNEL PASS for three semantic P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
+echo 'AGDA KERNEL PASS for five semantic P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
