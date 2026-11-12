@@ -4,7 +4,7 @@
 Checks the real repository binary_decision program; deliberately
 constructs accepting signed maximum-cut witnesses, plus invalid
 and truncated certificates, and checks exactly 2 source cut bits
-per parsed edge and <= 2 original graph input bits. Not Agda proof.
+per parsed edge and <= original graph input bits, via the original 3m guard. Not Agda proof.
 """
 from random import Random
 from check_karp21_binary_header_budget import gamma
@@ -30,9 +30,10 @@ def main():
         parsed=original_graph(word)
         assert parsed is not None and len(parsed[0])==len(chosen)
         assert len(cert)==len(chosen)+len(chosen)
+        assert 2*len(chosen)<=len(word)
         if score>0:
             assert binary_decision(word,cert),('expected accepted',len(word))
-            assert len(cert)<=len(word)+len(word)
+            assert len(cert)<=len(word)
             valid_accepts+=1
         else:
             assert not binary_decision(word,cert)
