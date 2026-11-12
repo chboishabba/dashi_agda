@@ -162,3 +162,6 @@ import DASHI.Physics.YangMills.YMClayR445OriginalNativeParityPairWeldExact as R4
 
 -- P0.B: explicit canonical side-four 1024-bond list -> 128 selected pair bonds and 896 residual bonds, source finite enumeration, disjoint/completeness and Vec codec round trips; local checker pending.
 import DASHI.Physics.YangMills.YMClayR445CanonicalBondPermutationCodecExact as R445CanonicalPairResidualCodec
+
+-- P0.D: true flat SU(N) 2n+m product-Haar -> n pair products plus m discarded Haar links, 1024-to-64 source cardinalities; final canonical reorder witness remains OPEN.
+import DASHI.Physics.YangMills.YMClayR445FlatPairedHaarIntegrationExact as R445FlatHaarBlock
