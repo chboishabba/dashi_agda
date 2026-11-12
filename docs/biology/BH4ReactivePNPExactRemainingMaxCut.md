@@ -2144,3 +2144,41 @@ The current container has no native Agda/Nix
 binary and cannot resolve GitHub via direct
 checkout. GitHub source readback does not
 constitute an Agda kernel receipt.
+
+
+### 2026-11-12 P0 SG/Poisson/positivity/Brouwer/dissipation adversarial correction and concrete Bishop SG reuse
+
+The previously circulated proposed P0 table marked original-source certification, arbitrary-drop SG/Poisson, simplex invariance, constructive Brouwer and strict free-energy decay all **Closed**. Those labels are NOT supported by live kernel or physical receipts and must NOT enter the canonical world. This audit retains each as OPEN except for the particular finite algebraic fragments actually constructed.
+
+**Corrected mathematical claims:**
+
+1. **Global, not voxelwise, invariants.** The previously proven 54-bond incidence cancellations show `Σ_{v,s} V_v a_s c_{v,s}` is conserved for a closed volume-balanced model; they do NOT make 27 separate masses `M_{a,v}` constant under transport. A finite exact Agda counterexample `BH4OriginalSGPhysicalMaxCutCounterexamplesExact` uses the pre-existing electrodiffusive two-volume transfer to prove the total is conserved while one compartment changes. The originally proposed product of 27 fixed-voxel mass simplices is generally not invariant. For homogeneous native cells with strictly positive total source weights, the eligible domain is the **one global** fixed-weight nonnegative simplex `K={c>=0, Σ_{v,s} w_s V_v c_{v,s}=W}`, intersected with independently proved other global CHNOP/z equalities when applicable.
+2. **Quasi-positivity requires actual rate laws.** A left-kernel identity `a^T S=0` alone does not imply `R_i(c)>=0` at `c_i=0`. Reversible mass-action with positive rate coefficients, nonnegative integral gross orders and correct forward AND reverse consuming factors can provide quasi-positivity, but an actual source-calibrated law still has to be identified.
+3. **Sperner is not automatic uniqueness.** A constructive sequence of ε-fixed points must be shown to yield a compatible regular Cauchy sequence and a genuine exact fixed point; uniqueness additionally needs contraction, monotonicity or an independent strong comparison/selection theorem. Brouwer gives existence without uniqueness.
+4. **Dissipation requires thermodynamic compatibility.** The inequality `(f-b)log(f/b)>=0` only identifies chemical power with `-RT(f-b)log(f/b)` if positive forward/backward rates are linked to the SAME chemical potentials via detailed balance or another proved thermodynamic rate law. Source stoichiometric conservation does not imply this. At equilibrium `dF/dt=0`, so a universal *strict* inequality is false. A nonincreasing energy alone does not prove uniqueness or exclude every possible recurrent orbit without further dynamical structure.
+5. **Sign convention.** The user's `B(-x)c_l - B(x)c_k` is the *inward* current; the existing Python native solver uses the outward `B(x)c_k - B(-x)c_l`. The original incidence coefficient is -1 at the outgoing site, +1 at its target. Double-negation silently reverses transport/entropy production.
+6. **Zero-drop removable singularity.** `B(x)=x/(exp x-1)` at `x=0` is `0/0`; the correct continuously extended value is `B(0)=1`. The existing `BishopBernoulliScharfetterGummelBridgeExact.BishopBernoulliPoint` demands nonzero denominator and cannot cover arbitrary original edges with zero potential difference, including electrically neutral species. General source SG must pay a global continuous Bernoulli extension, not assume every potential drop is positive or nonzero.
+
+**New P0 source-written Agda modules** (Golden imported, not kernel-accepted):
+
+- `DASHI.Biology.Molecular.BH4OriginalScharfetterGummelDissipationExact`: owns the exact 54×29 `bishopSGFaces` and `originalBishopSGFluxes` constructed solely from the pre-existing semiconductor `BishopScharfetterGummelFaceFluxExact.bishopSGFaceFlux`, with explicit symbolic `Fin 54×Fin 29` lookup equality; `pairedBishopSGSpeciesZero`, `pairedBishopSGRowZero`, `pairedBishopSGNativeZero` and `original369BishopSGSixAxesConserve` cancel arbitrary Bishop-real internal SG edge currents for all six source axes. This is the paired-face global conservation of SG-derived real currents, NOT YET the 27×29 computed real RHS with physical self-consistent potential. Its stronger `originalConcrete54x29SGTransportConserves` specializes to the repository's concrete exponential-defined semiconductor face flux with all selected dimensionless drops carrying the **0 < x <= 1** chart proof. No claim of unrestricted physical drops.
+- `zeroDropMolarFaceRate` and `zeroDropIsPureDiffusion`: prove the correct zero-drop molar diffusion algebra `D/h² (c_L-c_R)` independently of a singular Bernoulli quotient. The continuity of the general all-drop SG extension remains OPEN.
+- `sgTransportPowerIsNegativeEntropyProduction`: proves the exact Bishop-ring factorization `κ(q_L-q_R) RT(log q_R-log q_L) ≃ -κ RT(q_L-q_R)(log q_L-log q_R)`. `sgEqualActivitiesHaveZeroPower` proves the equilibrium zero case. Actual `log q` identification and monotonicity, nonnegative κ, Poisson chemical-potential derivative and source chemical detailed balance are still OPEN, so this is **not** a completed Lyapunov theorem.
+- `BH4OriginalSGPhysicalMaxCutCounterexamplesExact`: exact finite two-compartment counterexample to voxelwise invariant-mass claims; total is conserved and the initial local amount differs after one internal transfer.
+
+**New adversarial solver tests**:
+`scripts/test_bh4_original_sg_physical_maxcut.py` checks Bernoulli difference/zero, native current orientation, local mass redistribution with globally zero derivative, zero-drop diffusion for neutral species, a conserved-stoichiometry but non-detailed-balanced reaction whose standard free-energy derivative is **positive**, rejection by the actual solver's thermodynamic admission, and zero dissipation at equilibrium. These are synthetic algorithmic regressions, NOT source Rhea kinetics. Tests were authored but not run inside the repository checkout in this runtime.
+
+An independent exact-geometry numerical calculation showed: 54 oriented native bonds, global derivative zero while the source voxel derivative was -3 for a single-species inhomogeneous state, the Bernoulli difference law including x=0 to roundoff over nine x values, and a positive hypothetical undetailed-balanced chemical energy power approximately 0.145857. These independently reproduce the counterexample algebra, not physical-source evidence.
+
+**The true remaining max-cut:**
+
+P0.1 Native Agda 2.9 typecheck/repair of new finite and SG modules, independently pinned full Rhea 29×12 source generation, all 72 source closed cases and original species-positive or zero-weight obstruction: OPEN.
+P0.2 Identify all original `54×29` real SG faces from the SAME 27×29 concentrations, self-consistent 27-node Poisson potentials, original valences/geometry/scales (including zero-drop and signed arbitrary-drop Bernoulli): OPEN.
+P0.3 Prove real signed-incidence assembly gives the SAME 27×29 Bishop SG+reaction RHS and its one-global weighted simplex invariance; source chemical quasi-positivity, bounded outward loss and strict positive implicit root: OPEN.
+P0.4 Finite constructive fixed-point existence with explicit modulus/Cauchy convergence or justified classical host; do not infer uniqueness: OPEN.
+P0.5 Actual source detailed balance, concrete Bishop positive logarithm and monotonicity, electrical/chemical free energy derivative including field/boundary terms, finite implicit free-energy decrease: OPEN.
+P1 Six-face real reactive boundary work, tissue same-state refinement, kinetic calibration: OPEN.
+P2–P3 independent longitudinal physical validation and Golden/ITIR receipts: OPEN.
+
+No CI dependence; source-writing is distinct from Agda kernel acceptance. Do not promote the old "all P0 Closed" table.
