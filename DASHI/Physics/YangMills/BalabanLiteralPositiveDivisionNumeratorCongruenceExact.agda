@@ -7,6 +7,7 @@ module DASHI.Physics.YangMills.BalabanLiteralPositiveDivisionNumeratorCongruence
 -- independent denominator positivity proofs.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
+open import Relation.Binary.PropositionalEquality using (subst; sym)
 open import Data.Rational.Base as ℚ using (0ℚ; _<_)
 import DASHI.Physics.YangMills.BalabanClayT4LiteralOneLoopBoxEvaluatorExact as Eval
 import DASHI.Physics.YangMills.BalabanClayT4TypedRationalExpressionIntervalExact as Typed
@@ -31,3 +32,20 @@ typedPositiveDivideNumeratorEndpointStable
 -- nonpositive-denominator policy and establishing that policy's soundness.
 -- Nor does it prove coherent transfer between distinct positive
 -- denominator witnesses: the selected typed division is partial.
+
+-- Endpoint equality transports the required STRICT positivity proof.
+-- In particular it is not necessary to assume a second denominator is
+-- positive when its lower endpoint is already known to be identical.
+positiveLowerTransport : ∀ {a b : Eval.RationalInterval} →
+  End.SameEndpoints a b →
+  0ℚ < Eval.lower a →
+  0ℚ < Eval.lower b
+positiveLowerTransport same positive =
+  subst (λ q → 0ℚ < q) (End.lowerEqual same) positive
+
+positiveLowerTransportBack : ∀ {a b : Eval.RationalInterval} →
+  End.SameEndpoints a b →
+  0ℚ < Eval.lower b →
+  0ℚ < Eval.lower a
+positiveLowerTransportBack same =
+  positiveLowerTransport (End.endpointsSym same)
