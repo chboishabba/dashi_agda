@@ -13,7 +13,7 @@
     {
       "repository": "chboishabba/dashi_agda",
       "pr": 1478,
-      "sha": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9",
+      "sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
       "branch": "chatgpt/analytic-j-tetration-abel-transport"
     },
     {
@@ -148,14 +148,14 @@
         }
       ],
       "consumer": "original Bishop dyadic a(2k+1)=2^(-s)*a(k) proof",
-      "paid": "Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written",
-      "missing": "Exact original Bishop log(2n)=log2+logn and exp multiplication on same n^(-s) term; transfer 4 absent eta donor import owners to #1478 or dependency closure into #1408",
+      "paid": "Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written; 10 original #1408 eta source modules transferred byte-for-byte into #1478; original Round11 eta term native factorial-exp real/imag convergence source-written on same branch",
+      "missing": "Kernel typecheck 12-root imported dependency chain and the new same-term factorial/native exp weld. Mathematical: original Bishop log(2n)=log2+logn at the *actual canonical Nat log*, complex exponential addition/multiplication, and hence dyadic a(2k+1)=2^(-s) a(k) for the original n^(-s) source.",
       "classification": "analytic_source",
       "source_closure_checker": "scripts/check_bishop_cross_pr_dependency_closure.py",
       "source_closure_regression": "scripts/test_bishop_cross_pr_dependency_closure.py",
       "source_closure_status": "checker source committed; full exact-head import closure not yet locally executed",
       "source_closure_kernel_receipt": null,
-      "cross_branch_state": "not_present_together",
+      "cross_branch_state": "source_dependencies_co_located_on_pr1478_kernel_unverified",
       "kernel_accepted_in_this_reconciliation": false,
       "terminal_gate_closed": false,
       "source_weld_promotion": false
@@ -177,7 +177,7 @@
       "paid": "Finite alternating-even pairing and conditional dyadic scaling source-written",
       "missing": "Native Bishop difference/integral domination for |s|/sigma*(2N+1)^(-sigma); uniform Cauchy convergence, analytic continuation and divisor zeros",
       "classification": "analytic_source",
-      "cross_branch_state": "not_present_together",
+      "cross_branch_state": "source_dependencies_co_located_on_pr1478_kernel_unverified",
       "kernel_accepted_in_this_reconciliation": false,
       "terminal_gate_closed": false,
       "source_weld_promotion": false
@@ -719,7 +719,7 @@
   ],
   "claim_no_clay_problem_solved": true,
   "no_kernel_acceptances_obtained": true,
-  "import_closure_warning": "Agda #1408 Bishop eta finite source is absent from #1478; its four required new Bishop owner imports are absent there. #1478 native complex exp source absent from #1408. These are NOT yet one compiling theorem chain. #1495 is stacked on #1494; #1484 PostgreSQL branch independent.",
+  "import_closure_warning": "Former eta-vs-native-exp source co-location blocker has been addressed by verbatim transfer of 10 PR1408 eta sources onto PR1478 at head 6ff07d854e326c3fab9553c2254fe8cee2c416f1. All 10 donor blob SHAs match exactly. A new source-specific factorial/native exp convergence term weld is committed. Local Agda kernel acceptance is still absent; direct log(2n)/exp-product dyadic identity, compact-uniform eta convergence and analytic zeta identification remain OPEN. Lean world #1495 stacks on #1494 and #1484 PostgreSQL remains independent.",
   "source_terminal_gates_closed_here": 0,
   "source_integrity": "All 40 source files and exact declaration identifier strings were individually read back at the 20 pinned PR head SHAs by connected GitHub fetch_file, with false descriptive labels corrected. Readback tests file presence/identifier, NOT Agda or Lean kernel acceptance, import closure or physical content of the claimed theorem.",
   "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger.",
@@ -728,5 +728,31 @@
     "identifier_seen": 40,
     "unverified_terms": 0,
     "agda_lean_kernel_receipts": 0
+  },
+  "source_dependency_transfer": {
+    "date": "2026-11-13",
+    "destination_pr": 1478,
+    "destination_head_sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+    "from_pr": 1408,
+    "from_head_sha": "28d85aa529155352a025de9e12853ecad1e4214e",
+    "verbatim_files": 10,
+    "source_blob_sha_matches": 10,
+    "proof_owner": "DASHI/Analysis/BishopOriginalEtaNativeFactorialExpSourceWeldExact.agda",
+    "new_source_theorems": [
+      "actualOriginalEtaExponentialRealIsNativeFactorialLimit",
+      "actualOriginalEtaExponentialImagIsNativeFactorialLimit",
+      "actualOriginalEtaTermFactorialSeriesConverges",
+      "originalRound11EtaTermFactorialConvergence"
+    ],
+    "verification": "source written, Github readback + source SHA identity, NOT Agda kernel accepted",
+    "golden_local_checker": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+    "remaining_analytic_gates": [
+      "same-original canonical Nat logarithm dyadic multiplicativity",
+      "same-original Bishop complex exponential product law",
+      "original even-term dyadic scale identity",
+      "compact-uniform original eta convergence",
+      "zero/division and independent original zeta identification"
+    ],
+    "no_clay_gate_promoted": true
   }
 }
