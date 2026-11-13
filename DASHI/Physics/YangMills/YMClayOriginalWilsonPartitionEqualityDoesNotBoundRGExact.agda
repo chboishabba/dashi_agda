@@ -95,3 +95,59 @@ scaleUniformFixedDefect cutoff = effectiveMinusBareAtPlusExact
 -- The theorem is a non-implication about the DATA supplied by partition
 -- identities, not a refutation of P0.F's hoped-for physical estimate.
 -- P0.F must exploit Wilson-specific cluster/covariance/spectral bounds.
+
+-- P0.F asks for actual normalized marked moment control. Equality
+-- of partition functions not only fails to control pointwise density:
+-- it also fails for F, G and FG simultaneously, even when all are
+-- nonconstant bounded tests under positive, normalized measures.
+
+selectedNonconstantTest : Bool → ℚ
+selectedNonconstantTest true = 1ℚ
+selectedNonconstantTest false = 0ℚ
+
+twoPointWeightedMarkedNumerator : (Bool → ℚ) → (Bool → ℚ) → ℚ
+twoPointWeightedMarkedNumerator density observable =
+  ((density true * observable true) + (density false * observable false))
+    * (+ 1 / 2)
+
+bareSelectedMomentExact :
+  twoPointWeightedMarkedNumerator bareDensity selectedNonconstantTest
+    ≡ (+ 1 / 2)
+bareSelectedMomentExact = ℚRing.solve-∀
+
+effectiveSelectedMomentExact :
+  twoPointWeightedMarkedNumerator effectiveDensity selectedNonconstantTest
+    ≡ (+ 3 / 4)
+effectiveSelectedMomentExact = ℚRing.solve-∀
+
+-- Both partition functions are exactly 1, so these are ALREADY
+-- the normalized test expectations on the two-point Haar model.
+fixedNormalizedMomentDefect :
+  twoPointWeightedMarkedNumerator
+    effectiveDensity selectedNonconstantTest
+  -
+  twoPointWeightedMarkedNumerator
+    bareDensity selectedNonconstantTest
+  ≡ (+ 1 / 4)
+fixedNormalizedMomentDefect = ℚRing.solve-∀
+
+selectedTestProductIsSame :
+  ∀ sign →
+  selectedNonconstantTest sign * selectedNonconstantTest sign
+    ≡ selectedNonconstantTest sign
+selectedTestProductIsSame true = ℚRing.solve-∀
+selectedTestProductIsSame false = ℚRing.solve-∀
+
+-- Choosing F=G=selectedNonconstantTest shows the same 1/4
+-- defect for all three F,G,FG moment targets. No three-moment
+-- contraction estimate follows from the exact same-partition weld.
+threeMarkedMomentsDoNotDecayAtEveryScale :
+  ∀ cutoff →
+  twoPointWeightedMarkedNumerator
+    (effectiveAtScale cutoff) selectedNonconstantTest
+  -
+  twoPointWeightedMarkedNumerator
+    bareDensity selectedNonconstantTest
+  ≡ (+ 1 / 4)
+threeMarkedMomentsDoNotDecayAtEveryScale cutoff =
+  fixedNormalizedMomentDefect
