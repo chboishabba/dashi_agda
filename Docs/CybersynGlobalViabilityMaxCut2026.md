@@ -311,3 +311,54 @@ Selected source URLs:
 
 **Interpretive source boundary:** regulatory revenue composition, price transmission, financial power and governance are different causal objects. The formal Marx/Žižek/Irigaray/Kimmerer/Two-Eyed owners supply attributed interpretive lenses, not the measured coefficients, legal authority or causal proof for this finance-to-policy join.
 
+
+## 2026-11-13 — NVIDIA leadership, contingent finance, Ausgrid incidence, conditional Fed/RBA cuts
+
+### Source-bound news shock
+
+NVIDIA's 11 November SEC 8-K (released 12 November) reports Huang's departure and appointment of interim CEO Colette Kress. Reuters 12 November reports investor concern that new leadership could curtail NVIDIA's financing and guarantees to its customers; this is a **hypothesised future credit-support/financing channel**, not observed cancellation. Reuters reports approximately US$164.5bn in NVIDIA financial commitments, including an Ohio obligation capped at US$105bn and more than US$50bn in other guarantees, alongside a proposed separate financing platform seeking more than US$500bn of third-party capital with an **optional** NVIDIA backstop of at most US$125bn. These totals are heterogeneous and may overlap: do not add them or book them as realised cash liabilities.
+
+Source links:
+- https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm
+- https://www.reuters.com/business/finance/investors-worry-ai-trade-needs-nvidias-huang-its-largesse-2026-11-12/
+- https://www.reuters.com/business/retail-consumer/global-ai-stocks-sink-nvidia-crisis-deepens-sector-selloff-2026-11-12/
+
+### Official economic anchors
+
+RBA 9 November: forecast Australian data-centre investment of **A$115bn mid-2026 through end-2028**, with staff assumption ~**70% equipment/other imports** (50–80% plausible external range); direct net GDP contribution from previous year up to ~**0.2 percentage points** despite much larger gross investment. Import-adjustment is necessary. RBA 3 November monetary decision **4.85%**: the Governor explicitly identified domestic resource/capacity pressures including data-centre construction as one factor, while direct oil price inflation alone was not the cause of tightening. Fed 28 October decision **3.75–4.00%**. The RBA and Fed December meetings are scheduled **8 December** and **9 December** respectively; as of 13 November no outcome can be backtested.
+
+Ausgrid FY26–FY27 allowed revenue **A$2,528m → A$2,881m**, a **A$353m** change. Its proposal's illustrative 5-MWh flat residential customer network-charge change is **A$73.81**; the AER separately calculates **A$63.81** for the average 4,044-kWh flat-tariff customer. Different load profiles/definitions; neither is an identified data-centre attribution. Transmission/TUOS, inflation, recovery adjustments and NSW schemes contribute. The direct data-centre share of this total is **not identified**; never set it to 100% without labeling it an outer-envelope extreme.
+
+Official sources:
+- https://www.rba.gov.au/publications/insights/australian-economy/2026/data-centre-investment-in-australia.html
+- https://www.rba.gov.au/speeches/2026/mc-gov-2026-11-03.html
+- https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm
+- https://www.aer.gov.au/system/files/2026-04/AER%20%E2%80%93%202026%E2%80%9327%20%E2%80%93%20Statement%20of%20Reasons%20%E2%80%93%20Ausgrid%20Pricing%20Proposal.pdf
+- https://www.aer.gov.au/system/files/2026-04/Ausgrid%20%E2%80%93%202026%E2%80%9327%20%E2%80%93%20Pricing%20Proposal%20Overview%20%E2%80%93%2031%20March%202026.pdf
+
+### Code and exact acceptance
+
+- `scripts/cybersyn_nvidia_network_rate_shock_20261113.py`: source-bound anchors, **576 scenario rows** varying Australian project delay, import fraction, hypothetical Ausgrid data-centre component, residential recovery and US loan-credit spread, with conservation and no-empirical-promotion fields. **12 separate conditional RBA/Fed rule sensitivities** from explicitly assumed coefficient values 1.5× inflation shock + 0.5× output-gap shock. This is not an estimated central-bank reaction function.
+- `tests/test_cybersyn_nvidia_network_rate_shock_20261113.py`: five deterministic source-written regression tests. The 576/12 calculations were independently executed using a functionally corresponding working-container Python implementation with four model assertion groups PASS. **The exact repository implementation and its own test file were not executed in the pinned checkout**.
+- `scripts/cybersyn_policy_rate_vintage_backtest.py`: separately sourced forecast-vintage vs official-rate outcome scoring, exact target-rate metrics, prohibition of forecasts dated after outcome, and no lookahead. **Future December 2026 meetings remain pending**, and no empirical prediction-error claim may be made before they take place.
+- `tests/test_cybersyn_policy_rate_vintage_backtest.py`: four source-written temporal/official-outcome negative controls; local exact-repository execution OPEN.
+
+### Independently executed illustrative cases (not observed responses)
+
+Using the A$115bn RBA forecast, assumed 70% imports:
+- 10% Australian pipeline delay → A$11.5bn gross, A$3.45bn domestic and A$8.05bn imported expenditure delayed.
+- 25% delay → A$28.75bn gross, A$8.625bn domestic and A$20.125bn imports delayed.
+- 50% delay → A$57.5bn gross, A$17.25bn domestic and A$40.25bn imports delayed.
+- US$50bn **assumed** debt book × 100-bp spread increase → **US$500m per year** additional interest; 300 bp → US$1.5bn/year.
+- 25% *hypothetical* share of Ausgrid's A$353m revenue movement attributed to data centres × 50% *hypothetical* household recovery → **A$44.125m**. Neither coefficient is measured and actual Australian data-centre network cost remains unestablished.
+- 25% withdrawal of *optional* US$125bn NVIDIA platform backstop corresponds to **US$31.25bn reduction in possible support**, not a realised financial loss or Australian construction cancellation.
+
+### Revised unpaid max-cuts
+
+- **N1 observed financing:** actual post-leadership signed/withdrawn NVIDIA credit support, customer debt maturity, spreads, collateral, financing covenants and matched vendor/customer transactions. NVIDIA announcement alone cannot determine a contraction rate.
+- **N2 regional investment:** map specific Australian projects to import content, domestic trades, grid connection stage, power draw and financial source dependence; global USD commitments do not automatically become AU spending.
+- **N3 network attribution:** identify per-project connection augmentation and direct charging, residual shared-network costs, AER cost allocation/rate base and household pass-through, avoiding double-counting network revenue.
+- **N4 macro reaction:** measure electricity-price and capacity-demand transmission to actual underlying inflation, output gap and central-bank rates; evaluate policy endogeneity and opposing channels. The chosen +1.5/+0.5 rule is illustrative only.
+- **N5 forecast vintage backtest:** input strictly earlier as-of forecasts and after-meeting official decisions, score like-for-like policy metrics only when published (RBA 8 Dec, Fed 9 Dec 2026).
+- **P0/P1:** pinned Agda local acceptance and authoritative JMD original proof-world builder remain OPEN. No shell runner, JSON file, market headline or statistical fit pays them.
+
