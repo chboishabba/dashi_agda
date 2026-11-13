@@ -1,0 +1,123 @@
+#!/usr/bin/env python3
+"""Fail-closed, multi-lane, exact-head source donor/consumer ledger validator.
+
+This validates ownership, dependency-status consistency and optional exact
+git-object presence. It is NOT Agda/Lean typechecking, a mathematical proof,
+an authoritative proof world, or a claim of Clay progress.
+
+Run on #1499 checkout:
+  python3 scripts/check_dashi_all_lane_source_donors.py
+  python3 scripts/check_dashi_all_lane_source_donors.py --verify-local-objects
+
+The second command requires all exact donor commits in the local Git object
+database, obtainable through user-controlled pinned fetch/worktrees; it never
+performs network access, runs a checker, or alters repository history.
+"""
+from __future__ import annotations
+import argparse
+import json
+import re
+import subprocess
+from pathlib import Path
+from collections import Counter
+
+ROOT = Path(__file__).resolve().parents[1]
+LEDGER = ROOT / "Docs/roadmaps/DASHIAllLaneSourceDonorMaxCut20261113.json"
+LANES = {"BISHOP", "KARP21", "BSD", "NS", "RH", "HODGE", "WORLD", "YM"}
+TYPES = {"new_mathematics", "analytic_source", "arithmetic_source",
+         "formalization", "formal_weld", "source_weld", "integration"}
+ALLOWED_REPOS = {"chboishabba/dashi_agda", "chboishabba/dashi_lean4"}
+SHA40 = re.compile(r"[0-9a-f]{40}\Z")
+ID = re.compile(r"[A-Z][A-Z0-9-]+\Z")
+SINGLE_SOURCE = re.compile(r"[A-Za-z_][A-Za-z0-9_']*\Z")
+
+class SourceAuditError(RuntimeError):
+    pass
+
+def _safe_path(path: str) -> bool:
+    return (type(path) is str and path and path[0] != "/"
+            and "\\" not in path and ".." not in path.split("/")
+            and (path.endswith(".agda") or path.endswith(".lean")
+                 or path.endswith(".py")))
+
+def verify(document: dict, *, verify_local_objects: bool = False, root: Path = ROOT):
+    assert document["claim_no_clay_problem_solved"] is True
+    assert document["no_kernel_acceptances_obtained"] is True
+    assert document["source_terminal_gates_closed_here"] == 0
+    heads = document["heads"]
+    assert len(heads) >= 12
+    head_index = {}
+    for head in heads:
+        assert head["repository"] in ALLOWED_REPOS
+        assert type(head["pr"]) is int and head["pr"] > 0
+        assert SHA40.fullmatch(head["sha"])
+        assert type(head["branch"]) is str and head["branch"]
+        key = (head["repository"], head["pr"])
+        assert key not in head_index, "duplicate PR head"
+        head_index[key] = head
+    rows = document["bridges"]
+    ids = [x["id"] for x in rows]
+    assert len(ids) >= 14 and len(ids) == len(set(ids))
+    assert all(ID.fullmatch(i) for i in ids)
+    assert {r["lane"] for r in rows} == LANES
+    assert sum(r["lane"] == "BISHOP" for r in rows) >= 3
+    assert sum(r["lane"] == "KARP21" for r in rows) >= 3
+    assert sum(r["lane"] == "BSD" for r in rows) >= 3
+    classified = Counter()
+    for row in rows:
+        assert row["classification"] in TYPES
+        assert row["cross_branch_state"] and row["missing"]
+        assert row["consumer"] and row["paid"]
+        assert row["kernel_accepted_in_this_reconciliation"] is False
+        assert row["terminal_gate_closed"] is False
+        assert row["source_weld_promotion"] is False
+        donors = row["donors"]
+        assert donors and len(donors) <= 6
+        for donor in donors:
+            key = next(((h["repository"], h["pr"]) for h in heads
+                        if h["pr"] == donor["pr"]), None)
+            assert key in head_index, f"unowned donor {donor}"
+            assert _safe_path(donor["path"]), donor["path"]
+            assert type(donor["declaration"]) is str and donor["declaration"]
+            if "exact path to confirm" in donor["declaration"].lower():
+                raise SourceAuditError("unresolved provisional donor")
+            if verify_local_objects:
+                head = head_index[key]
+                obj = f'{head["sha"]}:{donor["path"]}'
+                got = subprocess.run(["git", "-C", str(root), "show", obj],
+                                     capture_output=True, text=True, check=False)
+                if got.returncode:
+                    raise SourceAuditError(f"missing exact head blob {obj}")
+                symbol = donor["declaration"]
+                # Some rows explicitly name a conceptual proof owner instead
+                # of an exact declaration. Require an actual code token only
+                # when it is a single syntactic identifier.
+                if SINGLE_SOURCE.fullmatch(symbol) and not re.search(
+                        rf"(?<![\w']){re.escape(symbol)}(?![\w'])", got.stdout):
+                    raise SourceAuditError(f"missing donor term: {obj}::{symbol}")
+        classified[row["lane"]] += 1
+    lookup = {r["id"]: r for r in rows}
+    assert lookup["BISHOP-ETA-EXP"]["cross_branch_state"] == "not_present_together"
+    assert lookup["WORLD-1495-1484"]["cross_branch_state"] == "divergent_stack_unjoined"
+    assert lookup["NS-R850-R830"]["terminal_gate_closed"] is False
+    assert lookup["KARP-G3"]["terminal_gate_closed"] is False
+    assert lookup["BSD-K1-K3"]["terminal_gate_closed"] is False
+    return {"heads": len(heads), "bridges": len(rows),
+            "donors": sum(len(r["donors"]) for r in rows),
+            "lanes": dict(classified)}
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--verify-local-objects", action="store_true")
+    args = parser.parse_args()
+    with LEDGER.open(encoding="utf-8") as handle:
+        report = verify(json.load(handle), verify_local_objects=args.verify_local_objects)
+    print("PASS: exact-head, eight-lane source bridge ledger", report)
+    if args.verify_local_objects:
+        print("LOCAL git object/readback coverage only; still NO kernel receipt")
+    else:
+        print("Manifest and status semantics only; exact donor blobs not rechecked locally")
+    print("No Clay, Bishop, Karp, BSD, NS, RH, Hodge or world promotion authorized")
+
+if __name__ == "__main__":
+    main()
