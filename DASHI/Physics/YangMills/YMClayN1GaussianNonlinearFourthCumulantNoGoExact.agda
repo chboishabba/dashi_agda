@@ -74,3 +74,20 @@ gaussianNonlinearObservableHasNonzeroFourthCumulant
       (sym
         gaussianSquaredFourthCumulantIsFortyEight)
       equalsZero)
+
+-- In contrast, the same Gaussian X as a LINEAR observable has
+-- E[X]=0, E[X^2]=1, E[X^3]=0, E[X^4]=3 and connected fourth
+-- cumulant 3-3*(1)^2=0. The two exact calculations specify which
+-- N1 Gaussian-null assertion is justified by the elementary Wick law.
+gaussianLinearFourthCumulant : ℚ
+gaussianLinearFourthCumulant =
+  (+ 3 / 1) - ((+ 3 / 1) * (+ 1 / 1) * (+ 1 / 1))
+
+gaussianLinearFourthCumulantIsZero :
+  gaussianLinearFourthCumulant ≡ 0ℚ
+gaussianLinearFourthCumulantIsZero = Ring.solve-∀
+
+-- A legitimate N1 source must be a non-free interacting witness on a
+-- well-defined gauge-invariant continuum observable (or an equivalent
+-- family with a justified Gaussian-null comparison), not a bare
+-- nonzero fourth cumulant of a nonlinear Wilson-loop observable.
