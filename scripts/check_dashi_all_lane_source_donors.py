@@ -78,6 +78,9 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
                         if h["pr"] == donor["pr"]), None)
             assert key in head_index, f"unowned donor {donor}"
             assert _safe_path(donor["path"]), donor["path"]
+            assert donor["github_exact_head_source_readback"] is True
+            assert donor["github_exact_head_decl_seen"] is True
+            assert donor["github_head_sha_observed"] == head_index[key]["sha"]
             assert type(donor["declaration"]) is str and donor["declaration"]
             if "exact path to confirm" in donor["declaration"].lower():
                 raise SourceAuditError("unresolved provisional donor")
@@ -96,6 +99,11 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
                         rf"(?<![\w']){re.escape(symbol)}(?![\w'])", got.stdout):
                     raise SourceAuditError(f"missing donor term: {obj}::{symbol}")
         classified[row["lane"]] += 1
+    counts = document["source_readback_counts"]
+    assert counts["donor_files"] == sum(len(r["donors"]) for r in rows)
+    assert counts["identifier_seen"] == counts["donor_files"]
+    assert counts["unverified_terms"] == 0
+    assert counts["agda_lean_kernel_receipts"] == 0
     lookup = {r["id"]: r for r in rows}
     assert lookup["BISHOP-ETA-EXP"]["cross_branch_state"] == "not_present_together"
     assert lookup["WORLD-1495-1484"]["cross_branch_state"] == "divergent_stack_unjoined"
