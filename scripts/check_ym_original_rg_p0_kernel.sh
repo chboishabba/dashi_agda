@@ -14,6 +14,15 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
 targets=(
+  # Prefer genuine original 1024-label -> F19 full interacting chain
+  # before conditional cross-numerator or downstream E1/D1 compilers.
+  DASHI/Physics/YangMills/YMClayNativeClosedThreeEqualitiesCandidateExact.agda
+  DASHI/Physics/YangMills/YMClayNative1024ClosedReindexHaarConsequencesExact.agda
+  DASHI/Physics/YangMills/YMClayNative1024WeightedWilsonReindexExact.agda
+  DASHI/Physics/YangMills/YMClayNativePairsSpectatorsFubiniExact.agda
+  DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonF19ConcreteWeightExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonPhysicalF19PartitionExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRealSubtractionInterchangeExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact.agda
