@@ -7,6 +7,7 @@ cd "$(dirname "$0")/.."
 python3 scripts/check_balaban_t4_semantic_p0_exact.py
 python3 scripts/check_balaban_t4_refined_wilson_exact.py
 python3 scripts/check_balaban_t4_auxiliary_unit_brillouin.py
+python3 scripts/check_balaban_p0_attachment_maxcut_exact.py
 
 if ! command -v agda >/dev/null 2>&1; then
   echo 'BLOCKED: agda unavailable; rational smoke is NOT kernel acceptance.' >&2
@@ -32,10 +33,16 @@ for module in \
   DASHI/Physics/YangMills/BalabanP0FreeGhostWilsonPositiveWeldExact.agda \
   DASHI/Physics/YangMills/BalabanP0TransverseGaugeFixingNoGoExact.agda \
   DASHI/Physics/YangMills/BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.agda \
-  DASHI/Physics/YangMills/BalabanP0SU2HaarQuarticFormalJetExact.agda
+  DASHI/Physics/YangMills/BalabanP0SU2HaarQuarticFormalJetExact.agda \
+  DASHI/Physics/YangMills/BalabanP0LiteralDiagramTopologyFromSourceExact.agda \
+  DASHI/Physics/YangMills/BalabanP0LiteralIndexedTensorWardSourceExact.agda \
+  DASHI/Physics/YangMills/BalabanP0FeynmanGaugeRationalPropagatorInverseExact.agda \
+  DASHI/Physics/YangMills/BalabanP0TransverseTensorNotAutomaticallyScalarProjectorExact.agda \
+  DASHI/Physics/YangMills/BalabanP0FourOriginalDiagramMixedTwoJetWeldExact.agda \
+  DASHI/Physics/YangMills/BalabanP0PhysicalReducedGhostFiniteLogTailWeldExact.agda
 do
   echo "Checking literal-source Agda module: $module"
   agda -i . -l standard-library "$module"
 done
 
-echo 'AGDA KERNEL PASS for 18 selected local semantic/refined P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
+echo 'AGDA KERNEL PASS for 24 selected local semantic/refined P0 cut modules; source physical atoms, seven scalar equalities, physical denominator and quadrature receipts remain OPEN.'
