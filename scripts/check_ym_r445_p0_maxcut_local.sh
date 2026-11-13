@@ -22,6 +22,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonEffectiveBetaFiniteDifferenceExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda
+  DASHI/Physics/YangMills/YMClayN1GaussianNonlinearFourthCumulantNoGoExact.agda
   DASHI/Physics/YangMills/YMClayE1OriginalR445ThreeMomentCutoffTransportExact.agda
   DASHI/Physics/YangMills/YMClaySUNTraceCyclicityDoesNotImplyRangeExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalAxialBondParityInjectiveExact.agda
