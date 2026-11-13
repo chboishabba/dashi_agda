@@ -33,6 +33,7 @@ module DASHI.Moonshine.AbelBishopSelectedLogEightTwentySevenNormExact where
 
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Unnormalised using (0ℚᵘ; 1ℚᵘ; _/_)
+import Data.Rational.Unnormalised.Properties as RationalP
 
 import Inverse as BishopInverse
 import Real as BishopReal
@@ -125,7 +126,7 @@ gapInverseUpperNN =
     (BishopP.0<x⇒posx
       (BishopP.p<q⇒p⋆<q⋆
         0ℚᵘ (+ 27 / 25)
-        (Data.Rational.Unnormalised.Properties.positive⁻¹ (+ 27 / 25))))
+        (RationalP.positive⁻¹ (+ 27 / 25))))
 
 gapLowerTimesInverseUpperIsOne :
   BishopReal._≃_ (BishopReal._*_ gapLower gapInverseUpper)
@@ -169,7 +170,7 @@ originalSelectedGapLower roots {w} rBelow =
              ⊜ (Κ 1ℚᵘ ⊖ r))
            BishopP.≃-refl maxRadius radius)
         (BishopP.≤-respˡ-≃
-          (BishopP.+-identityʳ maxGap) shifted)
+          (BishopP.≃-symm (BishopP.+-identityʳ maxGap)) shifted)
 
     lowerIsMaxGap :
       BishopReal._≃_ gapLower maxGap
@@ -308,9 +309,10 @@ originalSelectedSharpValueBelowEightOverTwentySeven
 
     finalAlgebra =
       BishopP.≃-trans
+        (BishopP.≃-symm
+          (BishopP.*-identityʳ
+            (BishopReal._*_ termUpper gapInverseUpper)))
         (sharpCoefficientIsEightOverTwentySeven nt)
-        (BishopP.*-identityʳ
-          (BishopReal._*_ eightOverTwentySeven nt))
   in
   BishopP.≤-respʳ-≃
     finalAlgebra
