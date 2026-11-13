@@ -38,6 +38,7 @@ import DASHI.Mathematics.Arithmetic.EllipticCurveFiniteTwoDescentSeedExact as Se
 import DASHI.Mathematics.Arithmetic.EllipticRationalKummerOpenExact as Kummer
 import DASHI.Mathematics.Arithmetic.EllipticRationalTwoTorsionKummerExact as TorsionKummer
 import DASHI.Mathematics.Arithmetic.RationalSquareClassBitInvariantExact as BitInvariant
+import DASHI.Mathematics.Arithmetic.RationalSquareClassSetoidExact as Square
 
 record SupportedSquareClassPairCode : Set where
   constructor supportedPair
@@ -375,7 +376,6 @@ realDiagonalPairsExhaustive
 -- EllipticRationalTwoTorsionKummerExact owner.
 ------------------------------------------------------------------------
 
-import DASHI.Mathematics.Arithmetic.RationalSquareClassSetoidExact as Square
 
 supportedUnitRepresentative :
   Torsion.Bit → Torsion.Bit → Square.NonzeroRational
