@@ -26,7 +26,7 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonPartitionEqualityDoesNotBound
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Nat using (Nat)
-open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; _<_)
+open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _/_; _+_; _-_; _*_; _<_; Positive)
 import Data.Rational.Properties as ℚP
 import Data.Rational.Tactic.RingSolver as ℚRing
 open import Data.Integer.Base using (+_)
@@ -56,12 +56,18 @@ effectivePartitionIsOne :
 effectivePartitionIsOne = ℚRing.solve-∀
 
 barePositive : ∀ sign → 0ℚ < bareDensity sign
-barePositive true = ℚP.<ᵇ⇒< _
-barePositive false = ℚP.<ᵇ⇒< _
+barePositive true = ℚP.positive⁻¹ 1ℚ
+barePositive false = ℚP.positive⁻¹ 1ℚ
 
 effectivePositive : ∀ sign → 0ℚ < effectiveDensity sign
-effectivePositive true = ℚP.<ᵇ⇒< _
-effectivePositive false = ℚP.<ᵇ⇒< _
+effectivePositive true =
+  let instance positive : Positive (+ 3 / 2)
+      positive = ℚP.normalize-pos 3 2
+  in ℚP.positive⁻¹ (+ 3 / 2)
+effectivePositive false =
+  let instance positive : Positive (+ 1 / 2)
+      positive = ℚP.normalize-pos 1 2
+  in ℚP.positive⁻¹ (+ 1 / 2)
 
 effectiveMinusBareAtPlusExact :
   effectiveDensity true - bareDensity true ≡ (+ 1 / 2)
