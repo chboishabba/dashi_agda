@@ -161,3 +161,43 @@ Keep the PR draft and do not upgrade the status without exact local logs.
 Attribution boundaries: Silverman/BSD arithmetic sources; original Agda
 owners; CM/modular and Rubin/Kolyvagin published literature; Lean/mathlib
 donors; Bishop/Murray vendored constructive real owners.
+
+
+## Additional named-term donor audit: Hecke & Bishop
+
+- `DASHI/Moonshine/AristotleHeckeGeneralPrimePowerDecompositionExact.agda`
+  on master is a substantial *generic* source. It contains
+  `agreeOnPrimePowerDecomposition` and
+  `agreeOnAllowedPrimePowerDecomposition`, proving coefficient
+  equality on a proof-carrying coprime prime-power decomposition
+  from source prime agreement and valid Hecke systems. Its own
+  boundary marks the raw-prime-factorisation → grouped-coprime-
+  prime-powers normalization still false. It is NOT automatically
+  an all-n selected elliptic Hecke theorem. In this audit a direct
+  fetch of its imported `AristotleHeckeRecurrenceCoreExact.agda`
+  at that master path returned 404, so the imported dependency
+  must be reconciled locally before adopting the generic module
+  into the original BSD dependency graph.
+- `DASHI/Mathematics/NumberTheory/FiniteMultiplicativeDirichletExact.agda`
+  proves finite monomial and coefficient multiplicativity on a
+  supplied factorisation list, not actual unique factorization,
+  the chosen `a_n`, or an infinite sum.
+- Agda PR #1408 owns
+  `DASHI/Analysis/BishopDirichletUniformBaselTailsExact.agda`,
+  constructing uniform tail cutoffs from the **actual Bishop
+  Basel series** under an all-index region majorant. This is
+  a cross-PR donor; still need an actual original level-32
+  Hecke/coefficient exponential majorant and same-object Mellin
+  expression before transporting it into the elliptic L-function.
+- Agda PR #1478 owns additional complex exp/finite convolution
+  convergence donors, not the conductor-32 newform identity.
+- Agda PR #1497's rational setoid transport is zeta-oriented,
+  not the elliptic square-class and original L-series identity.
+
+Next smallest useful K4 source cut is to reconcile the generic
+Hecke recurrence import graph and connect the selected row recurrence
+to its `NatHeckeClosureSystem` only after the actual all-prime
+source coefficient and coprime multiplicativity are constructed.
+Next K1 cut remains actual Agda sign and v₂ square-generator invariants,
+then real/Q₂ Kummer image source proofs; the finite sieve does not
+supply those physical/local-field arithmetic lemmas.
