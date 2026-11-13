@@ -26,6 +26,8 @@
 
 **Actual unproved source-specific mathematical producer:** for physically relevant nonconstant Wilson tests F,G,FG and **correct cutoff trajectory** prove the original selected normalized fine-blocked versus original bare-coarse moment differences are small with genuinely cutoff/volume-uniform UV+IR constants and summable scale errors. Finite Haar partition equality and cancellation at F=1 do not give this. The independent legacy `RealAnalysisAxioms.ℝ` to constructed Bishop setoid and physical SU(N) trace-source are still real representation/semantics welds.
 
+**Verification-specific caution (newer #1444 head `8866c8762763`):** the latest commit adds `--safe` to `scripts/check_ym_bishop_partition_maxcut_local.sh`. Its target `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` imports `DASHI.Foundations.RealAnalysisAxioms`, which explicitly declares `postulate ℝ` and other laws. Agda `--safe` therefore cannot be assumed compatible with the entire original legacy-real import closure. Keep a *safe-only constructive Bishop root* separate from a *normal exact-typecheck plus explicit trust/axiom audit* for the legacy Wilson root; do not interpret a static no-new-postulate grep as whole-program `--safe` acceptance.
+
 **Separate terminal Clay mathematics:** E1 interacting four-dimensional continuum and consistency, D1 full original small+large-field Wilson clustering, D2 full same-H physical spectrum, N1 interacting nontriviality and G1 all compact simple physical carriers.
 
 ### P2 RH — original A2/G3 strict compensation
