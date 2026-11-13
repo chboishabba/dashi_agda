@@ -17,6 +17,10 @@ targets=(
   DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonF19ConcreteWeightExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonPhysicalF19PartitionExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonPairSpectatorDecoderExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalMarkedReindexExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalAxialBondParityInjectiveExact.agda
   DASHI/Physics/YangMills/YMClayR445NativePairHolonomyIdentityExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalNativeParityPairWeldExact.agda
@@ -40,6 +44,7 @@ done
 python3 scripts/check_ym_r445_canonical_bond_codec_exact.py
 python3 scripts/check_ym_r445_adjacent_schedule_exact.py
 python3 scripts/check_ym_r445_kernel_valued_haar_exact.py
+python3 scripts/check_ym_original_marked_maxcut_exact.py
 
 # The project runner resolves and version-checks AGDA_BIN/PATH/Nix.
 # Avoid blocking a locally pinned Agda 2.9 executable just because
