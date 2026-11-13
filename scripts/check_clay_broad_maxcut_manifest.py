@@ -88,4 +88,20 @@ if __name__ == "__main__":
     )
     print("PASS: separate eleven-lane source donor/bridge ledger", report)
     print("NO source-owner link or donor record is a kernel receipt.")
+    # A separate immutable SHA-level Bishop source transfer receipt now
+    # distinguishes source co-location from a compiled dyadic theorem.
+    # This is a cheap static manifest check, NOT Git blob replay or Agda.
+    from check_bishop_eta_source_transfer_receipt import (
+        RECEIPT as BISHOP_ETA_RECEIPT, verify_receipt as verify_bishop_eta
+    )
+    bishop_transfer = verify_bishop_eta(
+        json.loads(BISHOP_ETA_RECEIPT.read_text(encoding="utf-8"))
+    )
+    print("PASS: pinned Bishop #1408→#1478 source-transfer manifest",
+          bishop_transfer)
+    # Exercise fail-closed status gates with 15 malicious manifest variants.
+    from test_bishop_eta_source_transfer_receipt import run as bishop_negatives
+    bishop_negatives()
+    print("NO factorial/native-exp source weld implies dyadic scaling, "
+          "eta analytic continuation, kernel or RH acceptance.")
 
