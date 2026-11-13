@@ -365,3 +365,69 @@ realDiagonalPairsExhaustive
     (supportedPair Torsion.bit0 _ Torsion.bit1 _) ()
 realDiagonalPairsExhaustive
     (supportedPair Torsion.bit1 _ Torsion.bit0 _) ()
+
+
+------------------------------------------------------------------------
+-- LITERAL RATIONAL RECONSTRUCTION: NO FINITE-CODE SUBSTITUTION FOR
+-- THE ORIGINAL Q*/Q*² REFERENCE CARRIER.
+--
+-- These four nonzero rationals belong to the original
+-- EllipticRationalTwoTorsionKummerExact owner.
+------------------------------------------------------------------------
+
+import DASHI.Mathematics.Arithmetic.RationalSquareClassSetoidExact as Square
+
+supportedUnitRepresentative :
+  Torsion.Bit → Torsion.Bit → Square.NonzeroRational
+supportedUnitRepresentative Torsion.bit0 Torsion.bit0 =
+  TorsionKummer.oneNZ
+supportedUnitRepresentative Torsion.bit0 Torsion.bit1 =
+  TorsionKummer.twoNZ
+supportedUnitRepresentative Torsion.bit1 Torsion.bit0 =
+  TorsionKummer.minusOneNZ
+supportedUnitRepresentative Torsion.bit1 Torsion.bit1 =
+  TorsionKummer.minusTwoNZ
+
+supportedPairRationalRepresentative :
+  SupportedSquareClassPairCode →
+  Kummer.RationalSquareClassPairRepresentative
+supportedPairRationalRepresentative code =
+  Kummer.square-class-pair-representative
+    (supportedUnitRepresentative
+      (firstNegative code) (firstOddAtTwo code))
+    (supportedUnitRepresentative
+      (secondNegative code) (secondOddAtTwo code))
+
+-- This is an EXACT identity on original rational representatives,
+-- not an unproved square-class equality or a new quotient.
+supportedTorsionRationalsMatchOriginalKummer :
+  (torsion : Torsion.TwoTorsionCode) →
+  supportedPairRationalRepresentative
+    (torsionSupportedCode torsion)
+  ≡ TorsionKummer.torsionKummerRepresentative torsion
+supportedTorsionRationalsMatchOriginalKummer
+    (Torsion.torsionCode Torsion.bit0 Torsion.bit0) = refl
+supportedTorsionRationalsMatchOriginalKummer
+    (Torsion.torsionCode Torsion.bit1 Torsion.bit0) = refl
+supportedTorsionRationalsMatchOriginalKummer
+    (Torsion.torsionCode Torsion.bit0 Torsion.bit1) = refl
+supportedTorsionRationalsMatchOriginalKummer
+    (Torsion.torsionCode Torsion.bit1 Torsion.bit1) = refl
+
+-- Every finite code satisfying the actual real/dyadic NECESSARY
+-- bit conditions represents literally one of the four original
+-- rational torsion Kummer pairs. This is stronger than bit equality,
+-- but STILL does not assert the original Selmer global H¹ image is
+-- represented by supported units: that is the unproved good-prime
+-- support + cohomological square-class transport gate.
+filteredCodeRationalRepresentativeIsOriginalTorsion :
+  (code : SupportedSquareClassPairCode) →
+  RealAndDyadicNecessaryFilter code →
+  Σ Torsion.TwoTorsionCode
+    (λ torsion →
+      supportedPairRationalRepresentative code
+      ≡ TorsionKummer.torsionKummerRepresentative torsion)
+filteredCodeRationalRepresentativeIsOriginalTorsion code good
+  with filteredSupportedCodeHasTorsionPreimage code good
+... | torsion , equality rewrite sym equality =
+  torsion , supportedTorsionRationalsMatchOriginalKummer torsion
