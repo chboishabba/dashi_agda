@@ -608,3 +608,99 @@ Source-written negative control (NOT original SU(N), NOT a Clay theorem):
 `YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact.agda` starts from an actual shared-interior finite Z₂-character weight `(1+t*x*z)(1+t*y*z)` and integrates the same interior `z` once. At `t=1/2` it derives `rho_eff=1+xy/4`, exactly normalized positive fine/effective/bare partitions, two vanishing single moments, induced pair moment/covariance `1/4`, and non-factorizability of the 2×2 effective coefficient matrix (determinant `1`). The proof source is wired to `YMClayOriginalWilsonPhysicalRegression` and `check_ym_original_rg_p0_kernel.sh`. An independent exact rational regression ran 4096 signed arbitrary-observable controls plus eight couplings; `check_ym_r445_p0_maxcut_local.sh` runs it. **Source-written, Agda kernel OPEN.**
 
 This demonstrates why neither F19 exact weighted disintegration nor equality of canonical fine/effective partitions can substitute for the nonconstant (FG) error. The existing `YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact` already handles algebraic error propagation; the highest-alpha P0.F input is a true Wilson-specific *uniform* estimate on all three physical moment differences, in the correct renormalized effective-operator basis. Do not assume the bare plaquette-only family is closed under blocking. Explicitly include generated relevant/marginal operators and physical running couplings, all-volume/test-support constants, correct cutoff geometry, and a summable RG scale dependence. The original scalar/`SUNMatrixRealTrace` authority and actual E1/D1/D2/N1/G1 proof remain separate open gates.
+
+
+## 2026-11-13 additional maximum cut: direct canonical MARKED physical F19 pushforward
+
+### Source-written exact proof producers on PR #1444
+
+- `YMClayOriginalWilsonCanonicalMarkedReindexExact.agda`:
+  `inverseProgramTwice` and `forwardAfterInverse` prove both directions for the **actual original** adjacent-swap permutation (not a chosen inverse map);
+  `originalWeightedMarkedReindexExact` transports the entire original
+  interacting Wilson density times **any sorted-carrier marked observable**;
+  `originalCanonicalMarkedNormalizedIsSorted` transports its numerator and
+  the original canonical Wilson partition as a **same-Z normalized equality**.
+- `YMClayOriginalWilsonPairSpectatorDecoderExact.agda`:
+  `splitJoinedOriginalExactly`, `joinedSplitOriginalExactly` and
+  `sourceSideFourSplitJoin` establish the actual two-sided vector
+  isomorphism for 64 ordered original pairs and 896 retained spectators
+  (2×64+896=1,024), with no factorization assumption.
+- `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda`:
+  `sourceSortedBlockIsOriginalPairs` identifies source sorted-pair
+  readout with the **same** 64 non-Abelian block holonomies;
+  `originalFineCanonicalBlockedNumeratorEqualsPhysicalEffective`
+  composes original native marked reindex, count transport, exact source
+  Fubini and existing actual F19 weighted disintegration to identify the
+  **original unsorted 1,024-link Wilson** marked numerator with its
+  genuine physical 64-block effective-density numerator **for arbitrary
+  coarse observables**;
+  `originalCanonicalBlockedNormalizedEqualsPhysicalEffective`
+  composes that with `originalFinePhysicalPartitionEqualsActualEffectivePartition`
+  to identify normalized marked expectations using exactly the same
+  original Wilson partition, no synthetic coarse partition.
+- `YMClayOriginalWilsonEffectiveBetaFiniteDifferenceExact.agda`:
+  original partition equality parameterized by the physical Wilson
+  coupling `beta` yields `originalCouplingFirstFiniteDifferenceExact`
+  and `originalCouplingSecondFiniteDifferenceExact` for *all*
+  coupling arguments, no differentiation-under-Haar premise. These are
+  **finite Wilson coupling differences**, not Bałaban's physical mixed
+  external-momentum tensor two-jet / continuum beta function.
+- `YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda`:
+  an explicit positive two-point finite Haar model has
+  `Z_bare=Z_eff=1`, with a persistent density discrepancy `1/2`
+  and a persistent **normalized marked moment discrepancy `1/4`**
+  for bounded nonconstant F=G=FG, at every cutoff. Thus neither
+  the original P0.E source partition equality NOR even same-Z
+  normalized observational transport establishes effective-vs-*bare*
+  RG closeness P0.F. The model is a logical countercontrol, not a
+  surrogate of the genuine 1,024-bond Wilson law.
+- No duplicate trace authority was retained: existing
+  `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact` already
+  proves the accurate original RealAnalysisAxioms scalar trace obstruction.
+  Cyclicity alone cannot yield the arbitrary SU(N) unitary trace bound.
+
+### Verification
+
+**All new Agda declarations are SOURCE-WRITTEN and pushed, NOT
+kernel-accepted in this session.** The Agda/Nix executable is unavailable
+here; no CI was run. Both fail-closed pinned local referees now explicitly
+include the new original source theorem roots:
+`scripts/check_ym_r445_p0_maxcut_local.sh` and
+`scripts/check_ym_original_rg_p0_kernel.sh`.
+The independent `scripts/check_ym_original_marked_maxcut_exact.py` uses
+exact Fraction arithmetic on a noncommutative S3 five-link example
+(2 ordered pairs + a spectator), four marked two-source conditions,
+strictly positive fully coupled weights and 7,776 configurations
+per side; the independent Python execution produced equal sums
+and common positive normalizer. This is **NOT** SU(N) physical integration
+nor Agda typechecking.
+
+### Remaining maximum-cut mathematical gates after this source lift
+
+1. **Kernel admission:** Agda 2.9 first-error check, repair, acceptance for
+   M.01/M.02/F18/F19 and every new canonical 64-pair marked consumer.
+   Source code and Python arithmetic alone are not receipts.
+2. **Original scalar:** inhabit the already-written
+   `OriginalWilsonToBishopScalarWeld` on the *actual*
+   `RealAnalysisAxioms.ℝ` Wilson partition/expectation carrier, with
+   faithful operations/order/division/reflectsEquality. Existing
+   `YMClayP0BishopRealCarrierInstancesExact` proves Bishop algebra but
+   does NOT identify the postulated source real with that carrier.
+3. **Arbitrary SU(N) trace:** prove the source original
+   matrix normalized-real-trace unitary magnitude ≤1 from a
+   genuine finite complex matrix entry/norm and `Tr(I)=N`
+   authority, then transport it to original plaquette words.
+   Source cyclicity alone is mathematically insufficient.
+4. **P0.F:** genuine *same original interacting source* all-volume,
+   UV/IR-uniform polymer/RG physical estimate bounding the actual
+   normalized F,G,FG covariance/cross numerators; source-bare Wilson
+   effective interaction comparison requires a true scale-summable rate,
+   not partition equality or a generic F19 change of variables.
+5. **E1/D1/D2/N1/G1:** interacting cutoff-continuum consistency,
+   original rooted-shell covariance decay, same E1 OS Hamiltonian with
+   positive full spectrum gap, nontrivial interacting witness, and all
+   required compact simple groups all remain OPEN.
+6. **Separate PR #1498:** the perturbative Bałaban mixed-momentum
+   Wilson/ghost/Haar scalar, physical Fourier sine/shifted denominator,
+   Ward/tensor-to-beta weld, real four integral/Hessian/error certificates
+   remain OPEN; original finite Haar blocking does not replace them.
