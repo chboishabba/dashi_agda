@@ -33,6 +33,9 @@ import RealProperties as BishopP
 import DASHI.Analysis.BishopComplexSeriesConvergenceExact as Complex
 import DASHI.Analysis.BishopComplexAlgebraExact as Algebra
 import DASHI.Analysis.BishopComplexNormSquarePowerEnvelopeExact as Norm
+import DASHI.Analysis.BishopComplexNormSquareUpperPowerEnvelopeExact as Upper
+import DASHI.Moonshine.AbelBishopLogQuadraticHalfCoefficientExact as Half
+import Sequence as BishopSequence
 import DASHI.Moonshine.AbelBishopLogOnePlusOriginalSeriesExact as Log
 import DASHI.Moonshine.AbelBishopSelectedLogAffineReconstructionExact as Affine
 import DASHI.Moonshine.AbelBishopInverseKoenigsRemainderFactorExact as Ring
@@ -91,3 +94,49 @@ originalBishopQuadraticSourceNormSquare w n =
 
 -- Both results are exact original-setoid equalities; no need for an
 -- arbitrary complex scalar, selected exponentiation or branch axiom.
+
+------------------------------------------------------------------------
+-- SHARP TRUE-SOURCE NORM-SQUARE TERM MAJORANT (NO DISK ASSUMPTION).
+--
+-- N(a_(n+1)(w)) <= (1/2)^2 * N(w)^(n+2).
+-- Unlike the component envelopes at a chosen radius, this retains
+-- N(w) at each coefficient and supplies the missing input for a
+-- finite COMPLEX triangle and Bishop limit-order comparison.
+------------------------------------------------------------------------
+
+originalBishopShiftedCoefficientSquareBelowQuarter :
+  ∀ n →
+  BishopReal._≤_
+    (Norm.square (Log.logCoefficient (suc n)))
+    (Norm.square Half.bishopHalf)
+originalBishopShiftedCoefficientSquareBelowQuarter n =
+  let
+    coefficient = Log.logCoefficient (suc n)
+    absoluteNonnegative = BishopP.nonNeg∣x∣ coefficient
+    coefficientBelowHalf =
+      Half.originalShiftedBishopLogCoefficientBelowHalf n
+  in
+  BishopP.≤-respˡ-≃
+    (BishopP.≃-symm (Norm.absoluteSquare coefficient))
+    (BishopP.*-mono-≤
+      absoluteNonnegative
+      absoluteNonnegative
+      coefficientBelowHalf
+      coefficientBelowHalf)
+
+originalBishopQuadraticSourceNormSquareUpper :
+  ∀ w n →
+  BishopReal._≤_
+    (Norm.normSqC (originalBishopQuadraticSourceTerm w n))
+    (BishopReal._*_
+      (Norm.square Half.bishopHalf)
+      (BishopReal.pow (Norm.normSqC w) (suc (suc n))))
+originalBishopQuadraticSourceNormSquareUpper w n =
+  BishopP.≤-respˡ-≃
+    (originalBishopQuadraticSourceNormSquare w n)
+    (BishopP.*-monoʳ-≤-nonNeg
+      (originalBishopShiftedCoefficientSquareBelowQuarter n)
+      (BishopSequence.nonNegx⇒nonNegxⁿ
+        (suc (suc n))
+        (Upper.normSquareNonnegative w)))
+
