@@ -182,11 +182,31 @@
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda",
           "declaration": "originalBishopLogOnePlusSeriesValue"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda",
+          "declaration": "originalBishopLogUpperDiskAbsoluteConvergence"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda",
+          "declaration": "selectedOriginalLocalLogGermOnDisk"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda",
+          "declaration": "originalBishopSelectedNewtonFixedPointIsExpFixed"
+        },
+        {
+          "pr": 1478,
+          "path": "DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda",
+          "declaration": "originalBishopInverseKoenigsLimitSchroeder"
         }
       ],
       "consumer": "original Newton-orbit principal logarithm and Koenigs Schroeder fixed point",
-      "paid": "Native complex exponential equality; actual original logarithm term sequence defined",
-      "missing": "Prove |w|<1 absolute logarithmic convergence, selected principal-log inverse and orbitwise log remainder; unconditional Koenigs and Kneser continuation",
+      "paid": "Native complex exponential equality; original Bishop log(1+u) upper-disk absolute convergence and actual canonical series germ, selected p-dependent disk normalization/relative radius, source Newton fixed-point compiler and inverse-Koenigs Schroeder limit transport all source-written with their stated premises.",
+      "missing": "Inhabit original native Newton squared-disk contraction and real trig/exp continuity along orbit, principal complex Log inverse law and quantitative local Koenigs actual-orbit convergence, then globally normalized Kneser continuation. Do NOT re-prove upper-disk absolute log series convergence.",
       "classification": "analytic_source",
       "cross_branch_state": "same_branch_unclosed",
       "kernel_accepted_in_this_reconciliation": false,
