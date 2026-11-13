@@ -121,3 +121,21 @@ The same **`YMClayOriginalWilsonPhysicalF19PartitionExact.agda`** now also conta
 **Scope:** the tests are actual native original F19 coarse-block functions, and the interacting fine weight is the same original SU(N) Wilson Gibbs density. This advances the finite native physical **normalizer and two-source source-identification**, not the distinct remaining marked physical Wilson word/loop observable identification into that carrier, the missing positive division semantic interpretation, or the cutoff-uniform `P0.F` original effective-minus-bare physical moment errors.
 
 **Verification:** all five new declarations are only **SOURCE-WRITTEN / pinned Agda 2.9 kernel OPEN**; in particular `RealAnalysisAxioms` remains an explicitly postulated scalar boundary. No CI result or finite Python witness is used as kernel authority.
+
+
+## 13 November 2026: P0.F induced two-source interaction negative control
+
+**New source owner:** `DASHI/Physics/YangMills/YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact.agda`. This is an explicitly **finite Z₂-character rational control**, not the original SU(N) Wilson model. The control uses two observed sign characters `x,y` and one **shared** interior sign character `z` with strictly positive fine weight at `t=1/2`:
+
+```text
+K(x,y,z) = (1 + t*x*z) * (1 + t*y*z)
+rho_eff(x,y) = Haar_z K = 1 + t^2*x*y
+```
+
+The source-written Agda module implements literal interior/coarse Haar averages, full fine/effective marked-test equality, positive finite effective density, matching partition functions `Zfine=Zeff=Zbare=1`, vanishing effective/bare single-character moments, and induced `FG` moment/covariance **1/4 vs 0**. It also proves `effectiveCrossDeterminant = 1` and the general independent-character product determinant is zero, rejecting representation as an arbitrary rank-one independent bare density. The same finite toy indexed by a formal cutoff retains its nonzero error: indexing alone cannot generate UV decay. This is **not** a counterexample to a genuine 4D Wilson RG theorem, because its original physical Wilson source and running couplings are absent.
+
+**Independent executed receipt:** `scripts/check_ym_p0f_generated_two_source_interaction.py`, exact `fractions.Fraction` arithmetic, **4,096/4,096** arbitrary signed marked tests for eight strictly positive fine couplings, **8/8** normalized one-point/bare controls and **8/8** nonfactorization/covariance controls. Both focused original Wilson referee and R445 P0 runner now include the new source/check. This is a finite mathematical regression, **not** Agda kernel verification; the full source has no new postulate/hole declarations and does not assert `--safe`.
+
+**What this changes in P0.F:** finite M.01/M.02/F18/F19 disintegration, positivity, equal partitions and even equality of the two selected *first* moments are insufficient to bound the third `FG` error. Genuine Wilson blocking can generate extra gauge-invariant multi-observable interactions; the physical comparison target must explicitly specify running couplings, allowed relevant/marginal operator counterterms, and a uniform remainder norm controlling `X(F)`, `X(G)`, and `X(FG)` on the same original R445/E1 measure family. The old quantitative three-moment compiler already transfers such estimates to covariance, so there is no reason to duplicate that algebra.
+
+**Precise open physical producer:** for the true source `E_eff,n` of the original side-four blocked Wilson state and separately defined renormalized bare coarse `E_bare,n`, prove a source-derived bound `sup_{test in admissible Wilson algebra} |E_eff,n(test)-E_bare,n(test)| <= eps_n` with explicit support dependence, physically justified counterterms, uniform volume constants and a summable/decaying `eps_n`. Prove the actual group/theory-dependent estimate; do not infer it from exact normalization or a toy finite uniform bound. Original constructive scalar/Haar/trace carrier admission and the full E1/D1/D2/N1/G1 endpoints remain OPEN.
