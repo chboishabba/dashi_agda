@@ -56,8 +56,14 @@ effectivePartitionIsOne :
 effectivePartitionIsOne = ℚRing.solve-∀
 
 barePositive : ∀ sign → 0ℚ < bareDensity sign
-barePositive true = ℚP.positive⁻¹ 1ℚ
-barePositive false = ℚP.positive⁻¹ 1ℚ
+barePositive true =
+  let instance positive : Positive 1ℚ
+      positive = ℚP.normalize-pos 1 1
+  in ℚP.positive⁻¹ 1ℚ
+barePositive false =
+  let instance positive : Positive 1ℚ
+      positive = ℚP.normalize-pos 1 1
+  in ℚP.positive⁻¹ 1ℚ
 
 effectivePositive : ∀ sign → 0ℚ < effectiveDensity sign
 effectivePositive true =
