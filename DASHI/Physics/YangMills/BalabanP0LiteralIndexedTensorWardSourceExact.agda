@@ -46,15 +46,27 @@ sourceDiagramAt :
 sourceDiagramAt source mu nu =
   Diagrams.literalPhysicalTopology (numeratorSources source mu nu)
 
+sourceBubbleAt :
+  PhysicalIndexedFourSource →
+  Eval.AxisIndex → Eval.AxisIndex → Eval.DiagramExpression
 sourceBubbleAt source mu nu =
   Eval.gaugeBubble (sourceDiagramAt source mu nu)
 
+sourceTadpoleAt :
+  PhysicalIndexedFourSource →
+  Eval.AxisIndex → Eval.AxisIndex → Eval.DiagramExpression
 sourceTadpoleAt source mu nu =
   Eval.gaugeTadpole (sourceDiagramAt source mu nu)
 
+sourceGhostAt :
+  PhysicalIndexedFourSource →
+  Eval.AxisIndex → Eval.AxisIndex → Eval.DiagramExpression
 sourceGhostAt source mu nu =
   Eval.ghostLoop (sourceDiagramAt source mu nu)
 
+sourceHaarAt :
+  PhysicalIndexedFourSource →
+  Eval.AxisIndex → Eval.AxisIndex → Eval.DiagramExpression
 sourceHaarAt source mu nu =
   Eval.haarLoop (sourceDiagramAt source mu nu)
 
@@ -87,15 +99,23 @@ literalFullWardExpression :
 literalFullWardExpression source =
   fourAxisContraction source (sourceTensorAt source)
 
+literalGaugeBubbleWardExpression :
+  PhysicalIndexedFourSource → Eval.AxisIndex → Eval.DiagramExpression
 literalGaugeBubbleWardExpression source =
   fourAxisContraction source (sourceBubbleAt source)
 
+literalGaugeTadpoleWardExpression :
+  PhysicalIndexedFourSource → Eval.AxisIndex → Eval.DiagramExpression
 literalGaugeTadpoleWardExpression source =
   fourAxisContraction source (sourceTadpoleAt source)
 
+literalGhostWardExpression :
+  PhysicalIndexedFourSource → Eval.AxisIndex → Eval.DiagramExpression
 literalGhostWardExpression source =
   fourAxisContraction source (sourceGhostAt source)
 
+literalHaarWardExpression :
+  PhysicalIndexedFourSource → Eval.AxisIndex → Eval.DiagramExpression
 literalHaarWardExpression source =
   fourAxisContraction source (sourceHaarAt source)
 
