@@ -11,6 +11,7 @@ targets=(
   DASHI/Analysis/BishopSetoidWeldExact.agda
   DASHI/Analysis/BishopFastCauchyZetaWeldExact.agda
   DASHI/Analysis/BishopFastCauchyCanonicalRationalWeldExact.agda
+  DASHI/Analysis/BishopFastCauchyRationalNormalizationRoundTripExact.agda
   DASHI/Analysis/RiemannOddIrrationalityClayBoundaryExact.agda
 )
 
