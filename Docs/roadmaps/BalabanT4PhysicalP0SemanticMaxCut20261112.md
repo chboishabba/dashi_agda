@@ -195,3 +195,47 @@ The 2026-11-13 attachment contains further proposed mathematical calculations, N
 **Source/run receipts:** `scripts/check_balaban_p0_attachment_maxcut_exact.py` is the independent Fraction regression for the corrected sine-square rational, 11/24 SU2 coefficient, Haar logarithmic fourth jet, physical volume, midpoint/Hessian and physical ghost fifth-tail, plus 384 signed-axis tensor covariance tests. The no-CI `scripts/check_balaban_t4_semantic_p0_local.sh` now includes **24 target Agda modules**. Local Python Fraction equivalents were executed and passed. No local Agda or Nix was available in this runtime; all this round's new Agda declarations are source-written but **not kernel accepted**.
 
 **Remaining physical highest-information cut:** (i) actual indexed P33 Wilson cubic/quartic Fourier vertices, reduced FP log det and Haar chart; (ii) source-specific indexed bubble/tadpole/FP/Haar numerator ASTs, Ward semantic cancellation and CMP109 off-diagonal two-jet including remainder; (iii) true same-Fourier sine and shifted denominator proofs; (iv) actual scalar-source B4 or stabilizer invariance; (v) four TRUE integral values, Hessian/integration error proofs with source error covariance; (vi) Bałaban coefficient and RG quartic remainder matching. These are not reducible to already paid free-symbol, finite tail or rational normalization arithmetic, and none justifies Clay E1/D1/D2 physical promotion.
+
+
+## Cross-lane source audit (2026-11-13): original Wilson M.02/F19 PR #1444 is NOT the Bałaban P0 scalar
+
+PR #1444's authoritative original native 1,024-bond interacting
+Wilson Gibbs chain now contains:
+- original canonical 1,024-bond -> physically sorted 64 ordered pairs
+  + 896 spectators reindex, retaining the full interacting weight;
+- `originalFinePhysicalPartitionEqualsActualEffectivePartition` from
+  the original source F19 finite Haar fibre;
+- original physical two-marked normalized source with the SAME
+  canonical original Wilson partition;
+- new `YMClayOriginalWilsonCanonicalMarkedReindexExact` for
+  *arbitrary* marked original canonical observables under the native
+  adjacent-swap programme;
+- new 64-pair/896-spectator two-sided codec and
+  `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact`, a
+  source-written direct **all coarse-block-observable** original
+  fine-to-physical-effective numerator/normalized pushforward;
+- new `YMClayOriginalWilsonEffectiveBetaFiniteDifferenceExact`:
+  source partition equality transports exact finite first/second
+  differences in Wilson coupling beta (this is **NOT** the original
+  CMP109 mixed external-momentum tensor beta coefficient);
+- strict positive equal-partition countercontrol shows nonconstant
+  normalized original F,G,FG moments can retain a nonzero 1/4
+  discrepancy between *effective* and *bare* measures for every
+  cutoff. Thus partition pushforward does **not** entail P0.F
+  UV-uniform RG decay.
+
+These results are source-written on PR #1444, **local Agda kernel
+PENDING**. The original SU(N) matrix/trace authority, scalar carrier
+identification, and true P0.F decay estimate remain OPEN.
+
+**Physical interface firewall:** a finite exact 1,024-link Wilson Haar
+Gibbs pushforward does not identify the momentum-dependent
+Wilson + Faddeev–Popov ghost + Haar fourth-order background perturbative
+vacuum-polarization kernel. PR #1498 still requires genuine
+`ActualPhysicalDiagramNumeratorSources` for the four indexed ASTs,
+source Ward cancellation and CMP109 off-diagonal two-jet, true Fourier
+sin/cos membership (especially shifted propagator denominators),
+seven actual combined-scalar symmetry identities, four physically
+evaluated integrals and Hessian error receipts, and source quartic
+remainder. No spectral-gap or Clay claim follows from either finite
+partition equality or one-loop beta arithmetic.
