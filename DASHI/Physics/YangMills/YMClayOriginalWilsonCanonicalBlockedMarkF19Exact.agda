@@ -17,7 +17,7 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonCanonicalBlockedMarkF19Exact 
 --
 -- SOURCE WRITTEN. Local Agda checker / all imports pending.
 
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (cong; cong₂; subst; sym; trans)
 import Data.Vec.Base as Vec
@@ -154,9 +154,9 @@ module _
     (∀ pairs → left pairs ≡ right pairs) →
     Fibre.finePairsIntegral theory source bilateral left
       ≡ Fibre.finePairsIntegral theory source bilateral right
-  finePairsIntegralCongruent {n = Agda.Builtin.Nat.zero} left right same =
+  finePairsIntegralCongruent {n = zero} left right same =
     same Vec.[]
-  finePairsIntegralCongruent {n = Agda.Builtin.Nat.suc n} left right same =
+  finePairsIntegralCongruent {n = suc n} left right same =
     Haar.integrateCongruent source _ _
       (λ first →
         Haar.integrateCongruent source _ _
@@ -184,13 +184,15 @@ module _
       (Original.productIntegralCongruent source _ _
         (λ flat →
           cong
-            (λ sorted →
+            (λ blocks →
               Original.physicallySortedWilsonWeight
-                theory traceData exponential beta sorted
-                *ℝ observable
-                  (coarseFromSortedOriginal sorted))
-            (sym (substThenUnsubst
-              (sym originalCountToSortedCount) (toNative flat)))))
+                theory traceData exponential beta (toNative flat)
+                *ℝ observable blocks)
+            (cong
+              (Fibre.actualPairBlockVector theory source bilateral
+                ∘ Torus.first ∘ Split.sourceSideFourDecode)
+              (substThenUnsubst originalCountToSortedCount flat))))
+    where open import Function using (_∘_)
 
   -- Original source real Fubini + SAME weighted physical 64-pair test.
   markedFlatToActualFinePairs :
