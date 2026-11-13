@@ -1,5 +1,5 @@
 {
-  "title": "DASHI all-lane exact source-donor and unfinished integration ledger",
+  "title": "DASHI eleven-lane exact source-donor and unfinished integration ledger",
   "date": "2026-11-13",
   "status": "source-reconciled; kernel and semantic promotion fail-closed",
   "source_authority": "GitHub exact-head source readback per listed PR; local golden Agda 2.9 and pinned Lean needed for acceptance",
@@ -99,6 +99,30 @@
       "pr": 40,
       "sha": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672",
       "branch": "agent/hodge-real-algebraic-cycle-v435-20261002"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1472,
+      "sha": "00eadae44260d4a229543cff0eed8dff8be04b11",
+      "branch": "agent/y443-monster-vnatural-maxcut-20261106"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1454,
+      "sha": "e6d0eee68d248659d2239ee5a4b64191e37a81d1",
+      "branch": "feat/kitzerow-bh4-pathway-ontology-interop"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1471,
+      "sha": "bd8de172f4db26e1527b69c6893f0ec759a9dcd0",
+      "branch": "chatgpt/biology-history-future-quotient-20261106"
+    },
+    {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1496,
+      "sha": "2e6aa8c4c162c30070f917ed082c6b260de56bdb",
+      "branch": "feat/cybersyn-global-viability-maxcut-20261112"
     }
   ],
   "bridges": [
@@ -470,11 +494,89 @@
       "kernel_accepted_in_this_reconciliation": false,
       "terminal_gate_closed": false,
       "source_weld_promotion": false
+    },
+    {
+      "id": "VOA-Y443-FLM",
+      "lane": "VOA",
+      "donors": [
+        {
+          "pr": 1472,
+          "path": "DASHI/Moonshine/Y443Original79CentralQuotientIs80Exact.agda",
+          "declaration": "original80IffHistorical79Central"
+        },
+        {
+          "pr": 1472,
+          "path": "DASHI/Moonshine/Y443FLMDirectSameObjectCapstoneExact.agda",
+          "declaration": "PublishedFLMAndJMDSource"
+        }
+      ],
+      "consumer": "actual historical Q80 Monster isomorphism and selected FLM/Vnatural same action",
+      "paid": "Historical 79+central source congruence matches universal 80 relators; FLM/JMD concrete same-VOA action compiler consumes explicit genuine Griess and Huang inputs",
+      "missing": "Actual group quotient isomorphism, genuine Griess product/weight-two generation, selected VOA action and class traces; no Monster uniqueness from relator count alone",
+      "classification": "formal_weld",
+      "cross_branch_state": "same_branch_unclosed",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "BIOLOGY-BH4-PNP",
+      "lane": "BIOLOGY",
+      "donors": [
+        {
+          "pr": 1454,
+          "path": "DASHI/Biology/Molecular/BH4OriginalNativeComputedBishopConservationExact.agda",
+          "declaration": "originalNativeComputedSixAxisBishopConserves"
+        },
+        {
+          "pr": 1454,
+          "path": "DASHI/Biology/Molecular/BH4OriginalSGPhysicalMaxCutCounterexamplesExact.agda",
+          "declaration": "originalGlobalNotCellwiseCounterexample"
+        },
+        {
+          "pr": 1471,
+          "path": "DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda",
+          "declaration": "traceAgreementFromCoarse"
+        }
+      ],
+      "consumer": "actual semidiscrete BH4 SG/Poisson positivity, conservation and history-indexed tissue evolution",
+      "paid": "Native 27x54 transfer per-species conservation; 29x12 reaction six-axis neutralities as source premises; selected global-not-cellwise counterexample and finite future quotient test",
+      "missing": "Actual nonlinear SG/Poisson RHS and nonnegative simplex invariant, physical reaction rate bounds, diffusion, tissue source/morphology and calibrated experimental trajectories; #1454 and #1471 live on distinct branches",
+      "classification": "analytic_source",
+      "cross_branch_state": "not_present_together",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
+    },
+    {
+      "id": "CYBERSYN-WORLD",
+      "lane": "CYBERSYN",
+      "donors": [
+        {
+          "pr": 1496,
+          "path": "scripts/cybersyn_policy_rate_network_cost_forecast.py",
+          "declaration": "calculate"
+        },
+        {
+          "pr": 1495,
+          "path": "scripts/lean_world_builder_contract.py",
+          "declaration": "validate_through_builder"
+        }
+      ],
+      "consumer": "sourced Fed/RBA rate forecast, Australian AER network incidence, and reproducible economic observation world",
+      "paid": "Scenario/sourced sensitivity code and pinned dated public records; independent immutable proof-world builder contract exists",
+      "missing": "Calibrate source-date and real AER/market time series, model forecast error and counterfactual allocation without treating futures as actual outcomes or all network increases as data-centre-caused; proof-world adapter cannot auto-admit economic models",
+      "classification": "integration",
+      "cross_branch_state": "cross_repo_semantics_unjoined",
+      "kernel_accepted_in_this_reconciliation": false,
+      "terminal_gate_closed": false,
+      "source_weld_promotion": false
     }
   ],
   "claim_no_clay_problem_solved": true,
   "no_kernel_acceptances_obtained": true,
   "import_closure_warning": "Agda #1408 Bishop eta finite source is absent from #1478; its four required new Bishop owner imports are absent there. #1478 native complex exp source absent from #1408. These are NOT yet one compiling theorem chain. #1495 is stacked on #1494; #1484 PostgreSQL branch independent.",
   "source_terminal_gates_closed_here": 0,
-  "source_integrity": "Donor source paths, and theorem names where used, reconciled against exact PR branch readbacks; no cross-branch Agda/Lean import closure compiled."
+  "source_integrity": "Donor source paths, and theorem names where used, reconciled against exact PR branch readbacks; no cross-branch Agda/Lean import closure compiled.",
+  "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger."
 }
