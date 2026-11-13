@@ -133,12 +133,18 @@
         {
           "pr": 1408,
           "path": "DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda",
-          "declaration": "originalEtaScaleToNativeZetaEvenCutoff"
+          "declaration": "originalEtaScaleToNativeZetaEvenCutoff",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28d85aa529155352a025de9e12853ecad1e4214e"
         },
         {
           "pr": 1478,
           "path": "DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda",
-          "declaration": "originalBishopExpFactEqualsNativeExp"
+          "declaration": "originalBishopExpFactEqualsNativeExp",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         }
       ],
       "consumer": "original Bishop dyadic a(2k+1)=2^(-s)*a(k) proof",
@@ -157,7 +163,10 @@
         {
           "pr": 1408,
           "path": "DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda",
-          "declaration": "originalEvenSourceScaleFinite"
+          "declaration": "originalEvenSourceScaleFinite",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28d85aa529155352a025de9e12853ecad1e4214e"
         }
       ],
       "consumer": "Bishop complex compact-uniform eta tail for Re(s)>=delta>0",
@@ -176,32 +185,50 @@
         {
           "pr": 1478,
           "path": "DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda",
-          "declaration": "originalBishopExpFactEqualsNativeExp"
+          "declaration": "originalBishopExpFactEqualsNativeExp",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         },
         {
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda",
-          "declaration": "originalBishopLogOnePlusSeriesValue"
+          "declaration": "originalBishopLogOnePlusSeriesValue",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         },
         {
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda",
-          "declaration": "originalBishopLogUpperDiskAbsoluteConvergence"
+          "declaration": "originalBishopLogUpperDiskAbsoluteConvergence",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         },
         {
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda",
-          "declaration": "selectedOriginalLocalLogGermOnDisk"
+          "declaration": "selectedOriginalLocalLogGermOnDisk",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         },
         {
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda",
-          "declaration": "originalBishopSelectedNewtonFixedPointIsExpFixed"
+          "declaration": "originalBishopSelectedNewtonFixedPointIsExpFixed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         },
         {
           "pr": 1478,
           "path": "DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda",
-          "declaration": "originalBishopInverseKoenigsLimitSchroeder"
+          "declaration": "originalBishopInverseKoenigsLimitSchroeder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
         }
       ],
       "consumer": "original Newton-orbit principal logarithm and Koenigs Schroeder fixed point",
@@ -220,7 +247,10 @@
         {
           "pr": 1497,
           "path": "DASHI/Analysis/BishopFastCauchyRationalNormalizationRoundTripExact.agda",
-          "declaration": "canonicalFastReducedTermRoundTrip"
+          "declaration": "canonicalFastReducedTermRoundTrip",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "f213b5bfb893e49ae9b29b2915257884b3b0e14e"
         }
       ],
       "consumer": "native original odd-zeta same-value transport",
@@ -239,12 +269,18 @@
         {
           "pr": 1474,
           "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaPrefixPhysicalSimulationExact.agda",
-          "declaration": "sourceGammaZeroPrefixAgreement"
+          "declaration": "sourceGammaZeroPrefixAgreement",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
         },
         {
           "pr": 1474,
           "path": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda",
-          "declaration": "readNativeWholeBinaryGraphWord"
+          "declaration": "readNativeWholeBinaryGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
         }
       ],
       "consumer": "originalBitTapeStepSimulatesN21Rule",
@@ -263,7 +299,10 @@
         {
           "pr": 1474,
           "path": "DASHI/Mathematics/Complexity/Karp21NativeOriginalSparseCertificateTightBoundExact.agda",
-          "declaration": "actualN21AcceptedCertificateFitsOriginalGraphWord"
+          "declaration": "actualN21AcceptedCertificateFitsOriginalGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
         }
       ],
       "consumer": "original PR.polynomialCertificateBound and originalN21InNP",
@@ -282,7 +321,10 @@
         {
           "pr": 1474,
           "path": "DASHI/Mathematics/Complexity/Karp21NativeWholeBinaryGraphRuntimeExact.agda",
-          "declaration": "readNativeWholeBinaryGraphWord"
+          "declaration": "readNativeWholeBinaryGraphWord",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f"
         }
       ],
       "consumer": "karpFractranBitMachineClockPolynomial; CertifiedKarpNetwork",
@@ -301,17 +343,26 @@
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda",
-          "declaration": "actualDyadicFinitePrime"
+          "declaration": "actualDyadicFinitePrime",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
         },
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
-          "declaration": "originalSelmerGlobalH1ExhaustedByActualTorsion"
+          "declaration": "originalSelmerGlobalH1ExhaustedByActualTorsion",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
         },
         {
           "pr": 107,
           "path": "Synthesis/MillenniumBSDCMOriginalGeometricKummerGaloisEquivariantExact.lean",
-          "declaration": "cmSelectedGeometricKummerShortExact_galois_equivariant"
+          "declaration": "cmSelectedGeometricKummerShortExact_galois_equivariant",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
         }
       ],
       "consumer": "actual E(Q) local Kummer image to Selmer class, faithful global cohomology and rank",
@@ -330,12 +381,18 @@
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda",
-          "declaration": "originalSelmerElementH1ImageExhausted"
+          "declaration": "originalSelmerElementH1ImageExhausted",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
         },
         {
           "pr": 107,
           "path": "Synthesis/MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact.lean",
-          "declaration": "cmSelectedEBarRestrictedShaTwo_mem_iff"
+          "declaration": "cmSelectedEBarRestrictedShaTwo_mem_iff",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
         }
       ],
       "consumer": "classical 0->E(Q)/2E(Q)->Sel2(E)->Sha(E)[2]->0",
@@ -354,17 +411,26 @@
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Automorphic/EllipticSelectedHeckePrimePowerExact.agda",
-          "declaration": "rowHeckeEulerCancellation"
+          "declaration": "rowHeckeEulerCancellation",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
         },
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda",
-          "declaration": "vanishingTwoTorsionDoesNotForceGroupTrivial"
+          "declaration": "vanishingTwoTorsionDoesNotForceGroupTrivial",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "cd6583da3dcaae333f452a6cef67e82dd53ebe29"
         },
         {
           "pr": 107,
           "path": "Synthesis/MillenniumBSDCMLevel32GammaSpecialValuePositiveExact.lean",
-          "declaration": "cmLevel32PublishedSpecialValueCandidate_pos"
+          "declaration": "cmLevel32PublishedSpecialValueCandidate_pos",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "96d1a0ea2422769ef07afad6f513df39e9de6519"
         }
       ],
       "consumer": "selected curve original L(E,1)>0, exact leading term and full Sha",
@@ -383,17 +449,26 @@
         {
           "pr": 1501,
           "path": "DASHI/Physics/Closure/NSTriadKNR650Rational345SnapshotIdentificationRound850Exact.agda",
-          "declaration": "round850R829VectorClosed"
+          "declaration": "round850R829VectorClosed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
         },
         {
           "pr": 1501,
           "path": "DASHI/Physics/Closure/NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact.agda",
-          "declaration": "round853GeneralR815SelectedRateNormalFormClosed"
+          "declaration": "round853GeneralR815SelectedRateNormalFormClosed",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
         },
         {
           "pr": 1501,
           "path": "DASHI/Physics/Closure/NSTriadKNR650Rational345ForcingSupportMaxCutRound846Exact.agda",
-          "declaration": "round846ZeroOutputUsesR436TransverseVanishing"
+          "declaration": "round846ZeroOutputUsesR436TransverseVanishing",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39"
         }
       ],
       "consumer": "R830 same selected real ODE trajectory / negative short-time rate integral",
@@ -412,7 +487,10 @@
         {
           "pr": 109,
           "path": "ExternalClayNS/LeanDojoCComparatorBridge.lean",
-          "declaration": "leanDojoFeffermanC_of_transport"
+          "declaration": "leanDojoFeffermanC_of_transport",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "317ff04a74e51f35d72e7784e3de2999f32ab15b"
         }
       ],
       "consumer": "Fefferman C actual initial/forcing decay, momentum, div=0, finite energy",
@@ -431,7 +509,10 @@
         {
           "pr": 108,
           "path": "Synthesis/RiemannContinuousFifthMomentSignAudit.lean",
-          "declaration": "continuousFifthGap_strictly_negative"
+          "declaration": "continuousFifthGap_strictly_negative",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87"
         }
       ],
       "consumer": "Lean #50 original strict signed A2 debt vs far-zero compensation + original discrete signedFifthCorrelationGapAt",
@@ -450,7 +531,10 @@
         {
           "pr": 40,
           "path": "Synthesis/MillenniumHodgeP1QRulingCyclesExact.lean",
-          "declaration": "p1QRulingDifference_antiInvariant"
+          "declaration": "p1QRulingDifference_antiInvariant",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672"
         }
       ],
       "consumer": "cycleClass selected Hodge carrier and pushforward naturality",
@@ -469,17 +553,26 @@
         {
           "pr": 1494,
           "path": "scripts/lean_world_native_admission_queue.py",
-          "declaration": "verify_receipt"
+          "declaration": "verify_receipt",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "a3e0e9cfdcce8bc3aa6c1a0a31fd2f90f8b2bedd"
         },
         {
           "pr": 1495,
           "path": "scripts/lean_world_builder_contract.py",
-          "declaration": "validate_through_builder"
+          "declaration": "validate_through_builder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "53db64eea732920eb7841bd06e9816defd91646c"
         },
         {
           "pr": 1484,
           "path": "scripts/lean_world_postgres_candidate.py",
-          "declaration": "persist_candidate_world"
+          "declaration": "persist_candidate_world",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "6c829bdf0d284dca393abecbebfb13e939908d56"
         }
       ],
       "consumer": "authoritative native-v3 Lean checker proof DAG -> same canonical PostgreSQL world",
@@ -498,12 +591,18 @@
         {
           "pr": 1444,
           "path": "DASHI/Physics/YangMills/YMClayE1OriginalR445ThreeMomentCutoffTransportExact.agda",
-          "declaration": "originalE1CovarianceErrorFromThreePhysicalCutoffMoments"
+          "declaration": "originalE1CovarianceErrorFromThreePhysicalCutoffMoments",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "7a559643506cc1de24ffb8a64c78a5b45493c97d"
         },
         {
           "pr": 1498,
           "path": "DASHI/Physics/YangMills/BalabanP0LiteralIndexedTensorWardSourceExact.agda",
-          "declaration": "fourAxisContraction"
+          "declaration": "fourAxisContraction",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "c979a2822471e1e8511dbc5fbf11a6c2469befb5"
         }
       ],
       "consumer": "original nonconstant Wilson F/G/FG error and four-diagram Ward-physical source",
@@ -522,12 +621,18 @@
         {
           "pr": 1472,
           "path": "DASHI/Moonshine/Y443Original79CentralQuotientIs80Exact.agda",
-          "declaration": "original80IffHistorical79Central"
+          "declaration": "original80IffHistorical79Central",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "00eadae44260d4a229543cff0eed8dff8be04b11"
         },
         {
           "pr": 1472,
           "path": "DASHI/Moonshine/Y443FLMDirectSameObjectCapstoneExact.agda",
-          "declaration": "PublishedFLMAndJMDSource"
+          "declaration": "PublishedFLMAndJMDSource",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "00eadae44260d4a229543cff0eed8dff8be04b11"
         }
       ],
       "consumer": "actual historical Q80 Monster isomorphism and selected FLM/Vnatural same action",
@@ -546,17 +651,26 @@
         {
           "pr": 1454,
           "path": "DASHI/Biology/Molecular/BH4OriginalNativeComputedBishopConservationExact.agda",
-          "declaration": "originalNativeComputedSixAxisBishopConserves"
+          "declaration": "originalNativeComputedSixAxisBishopConserves",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "e6d0eee68d248659d2239ee5a4b64191e37a81d1"
         },
         {
           "pr": 1454,
           "path": "DASHI/Biology/Molecular/BH4OriginalSGPhysicalMaxCutCounterexamplesExact.agda",
-          "declaration": "originalGlobalNotCellwiseCounterexample"
+          "declaration": "originalGlobalNotCellwiseCounterexample",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "e6d0eee68d248659d2239ee5a4b64191e37a81d1"
         },
         {
           "pr": 1471,
           "path": "DASHI/Biology/Physical/BiologicalHistoryFutureQuotientExact.agda",
-          "declaration": "traceAgreementFromCoarse"
+          "declaration": "traceAgreementFromCoarse",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "bd8de172f4db26e1527b69c6893f0ec759a9dcd0"
         }
       ],
       "consumer": "actual semidiscrete BH4 SG/Poisson positivity, conservation and history-indexed tissue evolution",
@@ -575,12 +689,18 @@
         {
           "pr": 1496,
           "path": "scripts/cybersyn_policy_rate_network_cost_forecast.py",
-          "declaration": "calculate"
+          "declaration": "calculate",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "2e6aa8c4c162c30070f917ed082c6b260de56bdb"
         },
         {
           "pr": 1495,
           "path": "scripts/lean_world_builder_contract.py",
-          "declaration": "validate_through_builder"
+          "declaration": "validate_through_builder",
+          "github_exact_head_source_readback": true,
+          "github_exact_head_decl_seen": true,
+          "github_head_sha_observed": "53db64eea732920eb7841bd06e9816defd91646c"
         }
       ],
       "consumer": "sourced Fed/RBA rate forecast, Australian AER network incidence, and reproducible economic observation world",
@@ -597,6 +717,12 @@
   "no_kernel_acceptances_obtained": true,
   "import_closure_warning": "Agda #1408 Bishop eta finite source is absent from #1478; its four required new Bishop owner imports are absent there. #1478 native complex exp source absent from #1408. These are NOT yet one compiling theorem chain. #1495 is stacked on #1494; #1484 PostgreSQL branch independent.",
   "source_terminal_gates_closed_here": 0,
-  "source_integrity": "Every exact donor path and declaration in all eleven lanes is being verified against its pinned PR head by direct GitHub readback; no source/analytic/physical declaration is promoted by that check.",
-  "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger."
+  "source_integrity": "All 40 source files and exact declaration identifier strings were individually read back at the 20 pinned PR head SHAs by connected GitHub fetch_file, with false descriptive labels corrected. Readback tests file presence/identifier, NOT Agda or Lean kernel acceptance, import closure or physical content of the claimed theorem.",
+  "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger.",
+  "source_readback_counts": {
+    "donor_files": 40,
+    "identifier_seen": 40,
+    "unverified_terms": 0,
+    "agda_lean_kernel_receipts": 0
+  }
 }
