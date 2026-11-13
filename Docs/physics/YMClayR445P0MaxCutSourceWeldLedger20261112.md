@@ -89,3 +89,20 @@ A later audit of the **authoritative original Wilson regression's actual imports
 | E1 / D1 / D2 / N1 / G1 | **Genuinely open physical Clay gates**, not completed by source-written finite Haar/disintegration or one-loop beta |
 
 **Trust:** source readback and independently executed finite control checks, NOT pinned Agda kernel acceptance. The live #1498 Bałaban Wilson/ghost/Haar physical integrand and four quadratures are a separate open branch and do not close this R445 physical RG estimate.
+
+
+### 13 November: constructed *original physical* F19 strict positivity (source-written)
+
+**New original-source proof in `YMClayOriginalWilsonPhysicalF19PartitionExact.agda`**, not an independent effective-density oracle. The module now constructs five declarations, with the **same** side-four SU(N) interacting Wilson/Gibbs weight, the actual native M.01/M.02 1024-bond sorter and the original 64-pair/896-spectator F19 effective density:
+
+1. `originalSortedWilsonPhysicalWeightPointwisePositive`: pointwise `exp(-S_Wilson)>0` from the existing `StrictPositiveRealExponential.expPositive`.
+2. `originalPhysical896SpectatorMarginalStrictlyPositive`: integrates **all 896 physically coupled spectator bonds** with the existing source `OneLinkStrictlyPositiveIntegration`, retaining Wilson interactions.
+3. `originalFullInteractingEffectiveDensityStrictlyPositive`: strict positivity of the exact original coarse effective density at every native 64-block configuration via F18/F19 original pair-fibre integration.
+4. `originalFullInteractingEffectivePartitionStrictlyPositive`: strict positivity of the same effective coarse partition.
+5. `originalCanonicalFineWilsonPartitionStrictlyPositiveFromF19`: strict positivity of the original UNSORTED 1024-bond Wilson partition by transporting the previously source-written same-source F19 partition equality.
+
+**Status:** source-written, GitHub readback verified, **local pinned Agda 2.9 kernel OPEN**. These are genuinely original physical finite-object instantiations, though they use the already explicit `OneLinkStrictlyPositiveIntegration` and independently postulated `RealAnalysisAxioms.ℝ` rather than constructing Borel Haar or the scalar carrier. The proof does not supply P0.F effective-vs-bare Wilson contraction, a physical UV/IR uniform bound, continuum E1, decay D1, spectrum D2, N1, G1, or #1498 original Wilson/ghost/Haar perturbative beta integrals.
+
+**Trust/runner repair:** `check_ym_r445_p0_maxcut_local.sh` and `check_ym_original_rg_p0_kernel.sh` now explicitly set `AGDA_BIN` from PATH before calling the original shared runner, preventing an unwanted implicit Nix build; Nix remains a supported fallback. The latter now targets the ORIGINAL M.01/M.02/F18/F19 source before dependent quantitative RG modules. `check_ym_bishop_partition_maxcut_local.sh` separately runs `--safe` on the constructed Bishop-only root, then ordinary typechecking of the original Wilson real-socket modules with their transitive legacy postulate boundary disclosed. Removed misleading `--safe` annotations in `YMClayFiniteProductHaarOrderedAlgebraExact.agda` and `CMP119AntigravityRealGibbsDensityPositiveExact.agda`, both of which import explicitly postulated `RealAnalysisAxioms`. **No local Agda 2.9 receipt obtained in this assistant runtime.**
+
+**Exact next mathematical producer:** prove source-dependent all-volume, UV/IR-uniform smallness of `X(F)` (equivalently three genuine normalized moment differences) for actual nonconstant Wilson tests `F,G,FG` with a scale summability sufficient to compare the effective Gibbs law against the distinct bare coarse Wilson law. The exact F19 partition identity and its strictly positive normalizer do not imply this.
