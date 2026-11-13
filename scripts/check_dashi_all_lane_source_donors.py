@@ -23,7 +23,7 @@ from collections import Counter
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "Docs/roadmaps/DASHIAllLaneSourceDonorMaxCut20261113.json"
-LANES = {"BISHOP", "KARP21", "BSD", "NS", "RH", "HODGE", "WORLD", "YM"}
+LANES = {"BISHOP", "KARP21", "BSD", "NS", "RH", "HODGE", "WORLD", "YM", "VOA", "BIOLOGY", "CYBERSYN"}
 TYPES = {"new_mathematics", "analytic_source", "arithmetic_source",
          "formalization", "formal_weld", "source_weld", "integration"}
 ALLOWED_REPOS = {"chboishabba/dashi_agda", "chboishabba/dashi_lean4"}
@@ -45,7 +45,7 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
     assert document["no_kernel_acceptances_obtained"] is True
     assert document["source_terminal_gates_closed_here"] == 0
     heads = document["heads"]
-    assert len(heads) >= 12
+    assert len(heads) >= 20
     head_index = {}
     for head in heads:
         assert head["repository"] in ALLOWED_REPOS
@@ -57,7 +57,7 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
         head_index[key] = head
     rows = document["bridges"]
     ids = [x["id"] for x in rows]
-    assert len(ids) >= 14 and len(ids) == len(set(ids))
+    assert len(ids) >= 19 and len(ids) == len(set(ids))
     assert all(ID.fullmatch(i) for i in ids)
     assert {r["lane"] for r in rows} == LANES
     assert sum(r["lane"] == "BISHOP" for r in rows) >= 3
@@ -102,6 +102,9 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
     assert lookup["NS-R850-R830"]["terminal_gate_closed"] is False
     assert lookup["KARP-G3"]["terminal_gate_closed"] is False
     assert lookup["BSD-K1-K3"]["terminal_gate_closed"] is False
+    assert lookup["BIOLOGY-BH4-PNP"]["cross_branch_state"] == "not_present_together"
+    assert lookup["VOA-Y443-FLM"]["terminal_gate_closed"] is False
+    assert lookup["CYBERSYN-WORLD"]["terminal_gate_closed"] is False
     return {"heads": len(heads), "bridges": len(rows),
             "donors": sum(len(r["donors"]) for r in rows),
             "lanes": dict(classified)}
@@ -112,7 +115,7 @@ def main():
     args = parser.parse_args()
     with LEDGER.open(encoding="utf-8") as handle:
         report = verify(json.load(handle), verify_local_objects=args.verify_local_objects)
-    print("PASS: exact-head, eight-lane source bridge ledger", report)
+    print("PASS: exact-head, eleven-lane source bridge ledger", report)
     if args.verify_local_objects:
         print("LOCAL git object/readback coverage only; still NO kernel receipt")
     else:
