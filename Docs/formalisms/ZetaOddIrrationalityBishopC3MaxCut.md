@@ -266,3 +266,42 @@ These are K04d/Koenigs source donors, **not** an Agda Dirichlet/zeta identificat
 Lean Bishop [PR #104](https://github.com/chboishabba/dashi_lean4/pull/104) now additionally owns `proofs/zeta7-lean435/BishopZ7DirichletSameObject.lean`. In the version-isolated stable-v4.35 Mathlib workspace, this explicitly defines the complex Dirichlet `∑' n, 1/(n+1)^s`, proves **the literal same-value equation** with Mathlib `riemannZeta` on Re(s)>1, and composes that equation with the external imported Z7 witness to obtain a fifteen-odd-value existential result. This pays one genuine single-version Mathlib selected source-value equality and avoids the root Lean/Mathlib pin mismatch. The sidecar local checker now includes strict per-theorem axiom-whitelist parsing. No local Lake/kernel acceptance was performed.
 
 **Still highest-alpha for this ZI ledger:** (1) verify stable-v4.35 source and exact axioms locally, (2) instantiate the original Agda Bishop-real analytic zeta at the same values, including real/complex rationality reflection and faithful cross-prover interpretation, (3) complete Bishop/FastCauchy canonical reindexing/round trips and a same-value series-limit comparison, (4) independently prove RH explicit-formula/Weil positivity and hermitian G1–G4. No cross-prover proof imported merely by mirroring declarations.
+
+## 2026-11-13 focused eight-gate continuation: concrete original source proofs vs open math
+
+### P1.L and Koenigs donor: Agda Bishop PR #1478
+
+New `AbelBishopLogQuadraticSourceNormFactorExact.agda` source targets `originalBishopQuadraticSourceTermFactor`, `originalBishopQuadraticSourceNormSquare`, `originalBishopShiftedCoefficientSquareBelowQuarter`, `originalBishopQuadraticSourceNormSquareUpper`: the exact ORIGINAL coefficient `(-1)^(n+1)/(n+2)·w^(n+2)` factors through `w*w), and its true norm-square is bounded by `(1/4)*N(w)^(n+2)`. This uses existing `Norm.normSqScale`, `Norm.normSqPower`, literal signed coefficient and Bishop real monotonicity. It does not discard actual `N(w)` for the selected chart radius.
+
+New `AbelBishopLogUpperDiskSetoidZeroExact.agda` source targets same-original-term convergence to zero when `w ≈C zeroC`, via original zero stream, finite series extensionality, Bishop convergence transport, and uniqueness, then selected affine chart center normalization `p + logSeries(p⁻¹·0) ≈C p`. Does not infer principal exp/log inverse.
+
+Both registered in PR #1478's **91-unique-target** `scripts/check_analytic_j_tetration_golden_local.sh` (count is target registrations, NOT passes). Repo source readbacks and dependency symbol existence checked; local Agda 2.9 **NOT RUN**.
+
+**Remaining true P1.L mathematical producer:** original Euclidean complex norm finite-sum triangle/limit-order inequality for the same shifted source terms, including `N(w)` rather than radius only, yielding `|R₂(w)| ≤ |w|²/(2(1-|w|))` and then the exact selected `8/27` coefficient. The new termwise norm-square bound does not imply a bound for the sum of complex terms without a triangle/Cauchy inequality and passage to the limit. P1.N native Taylor enclosures, squared contraction and exp/cos/sin orbit continuity remain unproved; local Koenigs still requires actual fixed-point source and analytic branch/univalence; global Kneser remains genuine mathematics.
+
+### Rational carrier constructor: this Agda PR #1497
+
+New `DASHI/Analysis/BishopFastCauchyRationalNormalizationRoundTripExact.agda` explicitly consumes standard-library `Data.Rational.Properties.fromℚᵘ-toℚᵘ` and `toℚᵘ-fromℚᵘ`:
+- `reducedRationalRoundTrip : fromℚᵘ(toℚᵘ r) ≡ r`;
+- `unnormalisedRationalRoundTrip : toℚᵘ(fromℚᵘ q) ≃ᵘ q`;
+- `bishopRationalEmbeddingNormalization`: lifts original unnormalised equality through `Real._⋆` and `RealProperties.⋆-cong`;
+- `canonicalFastReducedTermRoundTrip`: every term of the original FastCauchy **constant rational representative** is exactly the selected reduced rational.
+
+This pays the concrete **rational normalization and constant-sequence** round trips, not the entire Bishop ↔ FastCauchy categoricity: the old `BishopFastCauchyCommonCompletion` takes arbitrary regular/dyadic sequence reindexing, generated maps, round-trip, field-law and completeness evidence. It also contains weak `Set` placeholders; these are not genuine proof receipts and must not be confused with a constructed canonical equivalence. Full reindexing and original zeta same-value series remain OPEN.
+
+### Lean Z7 admission
+
+Lean PR #104 now registers BOTH `BishopZ7Admission` and `BishopZ7DirichletSameObject` in its isolated stable-v4.35 `lakefile.toml` default targets, so the native `check_local.sh` can build each and run its strict `#print axioms` parsing. The actual external `ZetaIrr.Z7.oneOfZeta7To21` theorem is in external `ZetaIrrational/Statement.lean` + `Z7/MainUnconditional.lean`; the identical finite set is `{7,9,11,13,15,17,19,21}`. The sidecar uses genuinely selected Mathlib `zeta_eq_tsum_one_div_nat_add_one_cpow`. There is still **NO observed local Lean build** or cross-kernel Agda same-object zeta construction.
+
+### YM and RH fail-closed endpoints
+
+Yang--Mills original `DASHI/Foundations/RealAnalysisAxioms.agda` declares `ℝ : Set` and original algebraic operations by `postulate`. Its `OriginalWilsonToBishopScalarWeld` is therefore NOT constructible just by proving Bishop arithmetic or positive partition function; source interpretation or whole-consumer reparameterization must be supplied. PR #1498 only constructs conditional literal evaluator endpoints and independent **auxiliary free** Wilson denominator enclosures; four physical Wilson/ghost/Haar integrals and errors remain open, as do continuum E1/D1/D2/N1/G1.
+
+RH Mathlib xi functional reflection and real half-plane zeta value identification do not supply the genuine prime-power-plus-archimedean Weil explicit formula **for the selected original Agda substrate**, nor positive quadratic trace for every admissible test, nor strict G3 compensating signed estimates. G2–G4 stay genuine open analytic/theorem-proving problems, not file or scalar welds. No RH proof claimed.
+
+### Receipt discipline
+
+- Source created/updated and exact GitHub branch readback: **YES** for named new modules.
+- Static symbol existence / no explicit holes check: **YES** for new Bishop files, not equivalent to elaboration.
+- Native pinned Agda 2.9, Lean 4.35 or Nix run: **UNAVAILABLE here**; zero new kernel-accepted receipts.
+- User retains local golden checker authority; no CI success inferred; no Docker used.
