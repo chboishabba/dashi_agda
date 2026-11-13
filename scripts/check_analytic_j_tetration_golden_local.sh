@@ -140,6 +140,7 @@ if ! command -v python3 >/dev/null 2>&1; then
   exit 6
 fi
 python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
+python3 scripts/check_bishop_log_true_norm_geometric_exact.py
 python3 scripts/check_analytic_j_tetration_newton_center_exact.py
 python3 scripts/check_analytic_j_tetration_local_koenigs_rational.py
 python3 scripts/analytic_j_tetration_koenigs_log_series_majorant.py
