@@ -47,6 +47,10 @@ python3 scripts/check_ym_r445_kernel_valued_haar_exact.py
 if [[ -n "${AGDA_BIN:-}" ]] && command -v "$AGDA_BIN" >/dev/null 2>&1; then
   runner=(bash scripts/run_agda29_parallel_check.sh)
 elif command -v agda >/dev/null 2>&1; then
+  # The shared runner defaults to a Nix build whenever AGDA_BIN is
+  # unset. Explicitly pass the existing executable so PATH-only hosts
+  # do not accidentally require Nix.
+  export AGDA_BIN="$(command -v agda)"
   runner=(bash scripts/run_agda29_parallel_check.sh)
 elif command -v nix >/dev/null 2>&1; then
   runner=(nix develop .# --command bash scripts/run_agda29_parallel_check.sh)
