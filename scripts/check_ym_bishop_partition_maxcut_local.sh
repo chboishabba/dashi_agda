@@ -41,6 +41,13 @@ done
 # --safe on (b) is deliberately NOT attempted or represented as achieved.
 bishop_source="${sources[0]}"
 legacy_sources=("${sources[1]}" "${sources[2]}")
+# The shared script's default AGDA_BIN invokes Nix even with Agda on
+# PATH. Preserve the explicit user's pinned choice and accept PATH-only
+# checked executables; otherwise let the native Nix fallback run.
+if [[ -z "${AGDA_BIN:-}" ]] && command -v agda >/dev/null 2>&1; then
+  export AGDA_BIN="$(command -v agda)"
+fi
+
 echo "CHECK safe constructed Bishop-only target: $bishop_source"
 DASHI_NO_TMUX=1 AGDA_JOBS="${AGDA_JOBS:-1}" \
   bash scripts/run_agda29_parallel_check.sh --safe "$bishop_source"
