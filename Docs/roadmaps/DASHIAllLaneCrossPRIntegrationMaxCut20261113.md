@@ -8,7 +8,7 @@ The 13 November user attachment contains concrete commits in *several* programme
 
 ## Five high-information cross-PR dependencies
 
-1. **Bishop #1408 → #1478:** `BishopOriginalEtaEvenSourceScaleFiniteWeldExact.originalEtaScaleToNativeZetaEvenCutoff` on #1408 needs the **actual original** (a(2k+1)\approx 2^{-s} a(k)) law and an analytic eta tail. #1478 has `BishopComplexExpFactEqualsNativeExpExact.originalBishopExpFactEqualsNativeExp`, but they are **not one compilation closure**. Inspection confirmed #1478 lacks the eta module and four of its direct Bishop dependency modules; #1408 lacks the new native-exp owner. Pay the complete exact import closure and log-product same-object identity first. Also: #1478 already proves `AbelBishopLogOnePlusUpperDiskConvergenceExact.originalBishopLogUpperDiskAbsoluteConvergence` and `AbelBishopSelectedLocalLogDiskAdmissionExact.selectedOriginalLocalLogGermOnDisk` as source; **do not re-open these or assume the full principal logarithm/Koenigs theorem from them**.
+1. **Bishop #1408 → #1478 (source transfer completed, analytic weld open):** Ten original eta/Dirichlet source modules were copied byte-for-byte from #1408 into #1478 and are now co-present with `BishopComplexExpFactEqualsNativeExpExact.originalBishopExpFactEqualsNativeExp`. The new `BishopOriginalEtaNativeFactorialExpSourceWeldExact` identifies the **original Round11 eta exponential term** with the native factorial-series limit in both Bishop-real coordinates. All 31 immediate DASHI imports of the ten transferred modules and the additional consumer imports are present. This source-closure advance does **not** establish the actual original `log(2n)=log2+logn`, native exponential multiplicativity, the dyadic `a(2k+1)≈2^(-s)*a(k)`, compact-uniform eta tails or a successful Agda 2.9 kernel elaboration. #1478 also has source-written original local log upper-disk convergence and the conditional true-norm 8/27 source bound; the required scalar square-root calculus and selected Newton analysis remain open.
 
 2. **Karp #1474 F1/G3 → original F4/G2–G4:** The physical gamma zero-prefix finite-table programme and the tighter `actualN21AcceptedCertificateFitsOriginalGraphWord` are concrete same-branch **source** progress. One physical microstep is not a full parser instruction cost. The missing all-word tape transition, whole heap, clock and typed `PR.InNP` remain uninhabited. The direct SAT lower bound remains mathematically independent of `CertifiedKarpNetwork`.
 
@@ -23,7 +23,7 @@ The 13 November user attachment contains concrete commits in *several* programme
 | PR | Source head | Branch |
 |---|---|---|
 | [Agda #1408](https://github.com/chboishabba/dashi_agda/pull/1408) | `28d85aa52915` | `feat/twin-prime-six-wheel-bounded-gap-reuse-20261028` |
-| [Agda #1478](https://github.com/chboishabba/dashi_agda/pull/1478) | `c19bb2c7c3b0` | `chatgpt/analytic-j-tetration-abel-transport` |
+| [Agda #1478](https://github.com/chboishabba/dashi_agda/pull/1478) | `6ff07d854e32` | `chatgpt/analytic-j-tetration-abel-transport` |
 | [Agda #1497](https://github.com/chboishabba/dashi_agda/pull/1497) | `f213b5bfb893` | `feat/zeta-odd-irrationality-same-object-transport` |
 | [Agda #1474](https://github.com/chboishabba/dashi_agda/pull/1474) | `fcadcb35b2d6` | `chatgpt/conway-karp-gamma-weld-20261106` |
 | [Agda #1500](https://github.com/chboishabba/dashi_agda/pull/1500) | `cd6583da3dca` | `chatgpt/bsd-agda-kummer-selmer-sieve-maxcut-20261113` |
@@ -49,17 +49,17 @@ These are source-head observations from this reconciliation, not compiler result
 
 ### BISHOP — 4 decision cuts
 
-**`BISHOP-ETA-EXP`** — analytic_source · not_present_together
+**`BISHOP-ETA-EXP`** — analytic_source · source_dependencies_co_located_on_pr1478_kernel_unverified
 
-Donors: [#1408](https://github.com/chboishabba/dashi_agda/blob/28d85aa529155352a025de9e12853ecad1e4214e/DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda) `originalEtaScaleToNativeZetaEvenCutoff`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda) `originalBishopExpFactEqualsNativeExp`.
+Donors: [#1408](https://github.com/chboishabba/dashi_agda/blob/28d85aa529155352a025de9e12853ecad1e4214e/DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda) `originalEtaScaleToNativeZetaEvenCutoff`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda) `originalBishopExpFactEqualsNativeExp`.
 
 Already paid: Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written.
 
-**Actual remaining:** Exact original Bishop log(2n)=log2+logn and exp multiplication on same n^(-s) term; transfer 4 absent eta donor import owners to #1478 or dependency closure into #1408.
+**Actual remaining:** Kernel-check the twelve-root source chain, prove original canonical Nat `log(2n)=log2+logn` and source complex-exp multiplicativity, discharge dyadic a(2k+1)=2^(-s) a(k), then prove compact-uniform complex-parameter eta convergence; donor transfer is already complete.
 
 Exact consumer: `original Bishop dyadic a(2k+1)=2^(-s)*a(k) proof`. **Terminal status: open; pinned kernel and same-object acceptance absent.**
 
-**`BISHOP-ETA-TAIL`** — analytic_source · not_present_together
+**`BISHOP-ETA-TAIL`** — analytic_source · source_dependencies_co_located_on_pr1478_kernel_unverified
 
 Donors: [#1408](https://github.com/chboishabba/dashi_agda/blob/28d85aa529155352a025de9e12853ecad1e4214e/DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda) `originalEvenSourceScaleFinite`.
 
@@ -71,7 +71,7 @@ Exact consumer: `Bishop complex compact-uniform eta tail for Re(s)>=delta>0`. **
 
 **`BISHOP-KOENIGS-LOG`** — analytic_source · same_branch_unclosed
 
-Donors: [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda) `originalBishopExpFactEqualsNativeExp`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda) `originalBishopLogOnePlusSeriesValue`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda) `originalBishopLogUpperDiskAbsoluteConvergence`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda) `selectedOriginalLocalLogGermOnDisk`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda) `originalBishopSelectedNewtonFixedPointIsExpFixed`; [#1478](https://github.com/chboishabba/dashi_agda/blob/c19bb2c7c3b01d493975b31c868ffa9da46eb0b9/DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda) `originalBishopInverseKoenigsLimitSchroeder`.
+Donors: [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda) `originalBishopExpFactEqualsNativeExp`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda) `originalBishopLogOnePlusSeriesValue`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda) `originalBishopLogUpperDiskAbsoluteConvergence`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda) `selectedOriginalLocalLogGermOnDisk`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda) `originalBishopSelectedNewtonFixedPointIsExpFixed`; [#1478](https://github.com/chboishabba/dashi_agda/blob/6ff07d854e326c3fab9553c2254fe8cee2c416f1/DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda) `originalBishopInverseKoenigsLimitSchroeder`.
 
 Already paid: Native complex exponential equality; original Bishop log(1+u) upper-disk absolute convergence and actual canonical series germ, selected p-dependent disk normalization/relative radius, source Newton fixed-point compiler and inverse-Koenigs Schroeder limit transport all source-written with their stated premises..
 
@@ -364,3 +364,12 @@ The earlier cross-PR dependency-warning was **correct at the earlier audited hea
 - **Mathematics still open:** (1) ORIGINAL `L(2(k+1)) ≃ L(2)+L(k+1)` from the canonical negative-log `NatLogCandidate`; (2) same-native-Bishop complex exp multiplication and original dyadic term `a(2k+1)≈C a(1)*a(k)`; (3) compact-uniform complex eta convergence with a correct `|s|/σ` majorant; (4) zeros/division/continuation and original zeta/ξ/RH identification. The existing finite even-source scale theorem is CONDITIONAL on the real dyadic input.
 
 **Status correction:** the programme's Bishop source-dependency gate has moved from `not_present_together` to **`source_dependencies_co_located_on_pr1478_kernel_unverified`**; source-level original term convergence has a new consumer. The terminal analytic gates have NOT been promoted. Karp-21's native bit-machine, BSD's local Kummer/Sha, NS/RH/Hodge analytic objects, independent Lean-world PostgreSQL admission and the YM original RG estimates retain their separately recorded open obligations.
+
+
+## 13 November follow-up: immutable Bishop eta transfer receipt and fail-closed all-lane guard
+
+The source-transfer status is now machine-readable **without** being conflated with Agda admission. `Docs/roadmaps/BishopEtaCrossPRSourceTransferReceipt20261113.json` pins the exact #1408 donor head `28d85aa52915…` and the source-copresent #1478 head `6ff07d854e32…`. GitHub source readbacks checked **10/10 identical donor/recipient Git blob SHA values** and **31/31 immediate external DASHI imports of those ten transferred files** on #1478. The separate new same-term consumer has additional imports and is listed in the receipt as a source owner, not an accepted theorem.
+
+`scripts/check_bishop_eta_source_transfer_receipt.py` validates the transfer manifest and, with `--verify-local-objects`, compares all ten donor and recipient Git blobs, rereads the literal imports, and checks the entire pinned direct-import file list plus the new source owner. That mode requires exact Git objects locally and FAILS if any are unavailable or differ; it never fetches, merges or runs Agda. `scripts/test_bishop_eta_source_transfer_receipt.py` has **15 negative manifest mutation controls**, including unauthorized dyadic/eta/RH/kernel promotion, missing/duplicated blobs and imports, altered Git SHA and invalid source paths. The default `scripts/check_clay_broad_maxcut_manifest.py` now invokes the manifest audit and negative controls. These sources are **committed but not locally executed in this environment**; do not misreport their registration as passing receipts.
+
+The eleven-lane validator's previously stale `not_present_together` requirement is repaired: both Bishop eta rows now require `source_dependencies_co_located_on_pr1478_kernel_unverified`. The check also demands the outstanding original dyadic/logarithmic argument and eta uniform tail remain explicitly named. The other ten lanes and the independent original Clay terminal ledger are unchanged. In particular, Yang–Mills physical RG/continuum/spectral estimates, Karp's bit-machine and polynomial runtime, BSD Kummer/Ša, NS ODE/rate, RH Weil positivity, Hodge cycle-class naturality, and Lean-world native authoritative builder admission are **not** solved by this integration.
