@@ -136,7 +136,7 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
             got = subprocess.run(["git", "-C", str(root), "show", obj],
                                  capture_output=True, text=True, check=False)
             if got.returncode or not re.search(
-                    rf"(?<![\\w']){re.escape(p1l[decl])}(?![\\w'])",
+                    rf"(?<![\w']){re.escape(p1l[decl])}(?![\w'])",
                     got.stdout):
                 raise SourceAuditError("missing original Bishop P1.L source " + obj)
     assert lookup["WORLD-1495-1484"]["cross_branch_state"] == "divergent_stack_unjoined"
