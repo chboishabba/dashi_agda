@@ -19,7 +19,7 @@ module DASHI.Mathematics.Automorphic.EllipticSelectedHeckePrimePowerExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
-open import Data.Rational.Base using (ℚ; 1ℚ; _-_; _*_)
+open import Data.Rational.Base using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 open import Agda.Builtin.List using ([]; _∷_)
 
@@ -101,3 +101,75 @@ sevenPrimeEulerAgreement :
   ≡ Euler.selectedModularEulerDenominator
       Euler.canonicalSelectedModularCandidate T
 sevenPrimeEulerAgreement = Euler.canonicalSmallPrimeEulerAgreement
+
+
+------------------------------------------------------------------------
+-- ORIGINAL CHECKED-ROW EULER POLYNOMIAL ↔ RECURRENCE CANCELLATION
+--
+-- Algebra on exact rational coefficients, no infinite Euler-product
+-- inversion or unverified analytic convergence.
+------------------------------------------------------------------------
+
+primePowerEulerCancellation :
+  ∀ a p k →
+  primePowerHeckeCoefficient a p (suc (suc k))
+    - a * primePowerHeckeCoefficient a p (suc k)
+    + p * primePowerHeckeCoefficient a p k
+  ≡ 0ℚ
+primePowerEulerCancellation a p k =
+  solve (a ∷ p ∷
+    primePowerHeckeCoefficient a p (suc k) ∷
+    primePowerHeckeCoefficient a p k ∷ [])
+
+-- The reciprocal-series identity through the actual p² coefficient:
+-- (1-aT+pT²)(1+aT+a_{p²}T²)
+--    = 1 - a_{p³}T³ + p*a_{p²}T⁴.
+-- It is valid in Q[T] and verified here pointwise for every Q T.
+primePowerEulerTruncationTwo :
+  ∀ a p T →
+  (1ℚ - a * T + p * T * T)
+  * (primePowerHeckeCoefficient a p zero
+    + primePowerHeckeCoefficient a p (suc zero) * T
+    + primePowerHeckeCoefficient a p (suc (suc zero)) * T * T)
+  ≡
+  1ℚ
+    - primePowerHeckeCoefficient a p (suc (suc (suc zero)))
+      * T * T * T
+    + p * primePowerHeckeCoefficient a p (suc (suc zero))
+      * T * T * T * T
+primePowerEulerTruncationTwo a p T = solve (a ∷ p ∷ T ∷ [])
+
+-- THE ORIGINAL rowFactorValue from the repository's literal
+-- Frobenius fibre count, not a newly chosen polynomial.
+rowEulerHeckeTruncationTwo :
+  ∀ row T →
+  Euler.rowFactorValue row T
+    * (rowHeckeCoefficient row zero
+      + rowHeckeCoefficient row (suc zero) * T
+      + rowHeckeCoefficient row (suc (suc zero)) * T * T)
+  ≡ 1ℚ
+      - rowHeckeCoefficient row (suc (suc (suc zero)))
+        * T * T * T
+      + Rows.natToRational (Rows.prime row)
+        * rowHeckeCoefficient row (suc (suc zero))
+        * T * T * T * T
+rowEulerHeckeTruncationTwo row T =
+  primePowerEulerTruncationTwo
+    (Rows.signedToRational (Rows.frobeniusTrace row))
+    (Rows.natToRational (Rows.prime row))
+    T
+
+-- Exact cancellation for any exponent at any checked row.
+rowHeckeEulerCancellation :
+  ∀ row k →
+  rowHeckeCoefficient row (suc (suc k))
+    - Rows.signedToRational (Rows.frobeniusTrace row)
+      * rowHeckeCoefficient row (suc k)
+    + Rows.natToRational (Rows.prime row)
+      * rowHeckeCoefficient row k
+  ≡ 0ℚ
+rowHeckeEulerCancellation row k =
+  primePowerEulerCancellation
+    (Rows.signedToRational (Rows.frobeniusTrace row))
+    (Rows.natToRational (Rows.prime row))
+    k
