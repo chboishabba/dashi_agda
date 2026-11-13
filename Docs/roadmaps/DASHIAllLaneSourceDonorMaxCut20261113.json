@@ -236,13 +236,27 @@
         }
       ],
       "consumer": "original Newton-orbit principal logarithm and Koenigs Schroeder fixed point",
-      "paid": "Native complex exponential equality; original Bishop log(1+u) upper-disk absolute convergence and actual canonical series germ, selected p-dependent disk normalization/relative radius, source Newton fixed-point compiler and inverse-Koenigs Schroeder limit transport all source-written with their stated premises.",
-      "missing": "Inhabit original native Newton squared-disk contraction and real trig/exp continuity along orbit, principal complex Log inverse law and quantitative local Koenigs actual-orbit convergence, then globally normalized Kneser continuation. Do NOT re-prove upper-disk absolute log series convergence.",
+      "paid": "Native complex exponential equality; original Bishop log(1+u) upper-disk absolute convergence and actual canonical series germ, selected p-dependent disk normalization/relative radius, source Newton fixed-point compiler and inverse-Koenigs Schroeder limit transport all source-written with their stated premises. The original P1.L source now has original complex true-norm finite triangle/geometric and norm-square Bishop limit-order transport, plus selected 8/27 numerical remainder theorem on the same original p^-1*t chart; its R4 square-root calculus is an uninhabited input and its Agda 2.9 kernel run is pending.",
+      "missing": "Inhabit the original arbitrary Bishop-real R4.BishopSquareRootCalculus and kernel-check P1.L (including original selected 8/27 source theorem); supply actual selected Newton fixed-point norm lower, native expC Taylor centre and uniform squared contraction, original exp/sin/cos orbit continuity; principal complex Log inverse, local Koenigs univalence and globally normalized Kneser continuation still open.",
       "classification": "analytic_source",
       "cross_branch_state": "same_branch_unclosed",
       "kernel_accepted_in_this_reconciliation": false,
       "terminal_gate_closed": false,
-      "source_weld_promotion": false
+      "source_weld_promotion": false,
+      "p1l_original_source": {
+        "pr": 1478,
+        "pinned_pr_sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+        "finite_to_limit_owner": "DASHI/Moonshine/AbelBishopLogQuadraticTrueNormLimitOrderExact.agda",
+        "finite_to_limit_declaration": "originalBishopUpperDiskLogQuadraticTrueNormBound",
+        "selected_numeric_owner": "DASHI/Moonshine/AbelBishopSelectedLogEightTwentySevenNormExact.agda",
+        "selected_numeric_declaration": "originalSelectedLogQuadraticEightOverTwentySeven",
+        "true_displacement_constant": "8/27",
+        "uses_existing_uninhabited_root_calculus": true,
+        "source_readback": true,
+        "kernel_elaborated": false,
+        "unconditional_semantic_proof": false,
+        "terminal_gate_closed": false
+      }
     },
     {
       "id": "BISHOP-ODD-ZETA-CARRIER",
