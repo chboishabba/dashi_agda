@@ -277,3 +277,74 @@ Exact consumer: `sourced Fed/RBA rate forecast, Australian AER network incidence
 ### Exact-head source verification receipt (13 November)
 
 All **40/40** pinned PR donor file paths and named declaration strings in the 11-lane ledger were individually read back from their exact GitHub commit SHA. Four initial descriptive placeholder names on NS C/R846 and world admission/PostgreSQL were replaced with the **actual source declarations** before the final receipt. The ledger now stores per-donor `github_exact_head_source_readback`, `github_exact_head_decl_seen`, and `github_head_sha_observed`; the all-lane validator enforces agreement with the recorded 20 PR heads. This is only *exact source presence and named identifier readback*, NOT syntax elaboration, dependency import closure, proof term acceptance, source provenance adjudication, a Lean-world authority receipt or mathematical validity of any analytic hypothesis. **No new Agda 2.9 / Lean kernel receipts were obtained.**
+
+
+## 13 November: executable exact Bishop source-transfer closure (new)
+
+The source ledger's `BISHOP-ETA-EXP` bridge is now backed by a
+**read-only, recursively source-inspecting transfer planner**:
+`scripts/check_bishop_cross_pr_dependency_closure.py`.
+Its deterministic offline regression is
+`scripts/test_bishop_cross_pr_dependency_closure.py`.
+
+The exact PR heads used when constructing the check were:
+- #1408: `28d85aa529155352a025de9e12853ecad1e4214e`
+- #1478: `c19bb2c7c3b01d493975b31c868ffa9da46eb0b9`.
+
+A direct import readback confirmed that #1478 lacks the *original*
+`BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda` and
+four of its direct DASHI imports:
+`BishopOriginalDirichletEtaFinitePairingExact.agda`,
+`BishopOriginalEtaZetaEvenCutoffSeriesWeldExact.agda`,
+`BishopRiemannDirichletBaselSameObjectExact.agda`,
+and `BishopOriginalXiPolynomialReflectionSameCarrierExact.agda`.
+In the other direction, #1408 lacks
+`BishopComplexExpFactEqualsNativeExpExact.agda` and FOUR of that
+capstone's direct donor imports:
+`BishopComplexExpFactFiniteBinomialReductionExact.agda`,
+`BishopComplexFactorialBinomialCapstoneExact.agda`,
+`AbelBishopFactorialComplexRealAxisTermsExact.agda`, and
+`AbelBishopOriginalComplexCarrierWeldExact.agda`.
+**These are direct imports only, not the recursively complete closure.**
+
+The new script, run against locally fetched pinned Git objects, follows
+DASHI-prefixed Agda imports recursively and reports BASELINE,
+DONOR_TRANSFER and UNRESOLVED sources, source SHA-256, whether
+different files on the two branches require manual semantic reconciliation,
+and an explicit `kernel_accepted: false`. Optional `--stage-dir`
+copies **only** exact missing donor sources into a user-specified empty
+scratch directory, never into a repository checkout or branch. It refuses
+missing commits, unsafe paths, missing modules in BOTH commits and
+nonempty staging directories; does not use CI, network or Docker.
+
+Example from the `dashi_agda` repository after fetching BOTH SHA objects:
+
+```bash
+python3 scripts/test_bishop_cross_pr_dependency_closure.py
+python3 scripts/check_bishop_cross_pr_dependency_closure.py \
+  --baseline 28d85aa529155352a025de9e12853ecad1e4214e \
+  --donor c19bb2c7c3b01d493975b31c868ffa9da46eb0b9 \
+  --root DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda \
+  --stage-dir /tmp/dashi-bishop-source-transfer-20261113 --json
+```
+
+To inspect the reverse transfer, swap baseline/donor SHA and use
+`--root DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda`.
+
+The **synthetic exact-git regression** passed the recursive two-step
+import closure, exact source staging, overwrite prevention and missing
+module rejection. The actual complete pinned remote-repository import
+closure was **NOT** run because this execution environment has no
+locally mounted full Git object database for both branches. The script
+does **not** check external or vendored imports (`Real`,
+`RealProperties`, `Sequence`, Agda stdlib), source semantics or
+Agda elaboration. Its staged files are a REVIEW QUEUE, not an
+import-closed typechecked Bishop theorem or permission to merge.
+
+The mathematically open source cut remains to establish the
+**actual** Bishop
+`a(2k+1,s) ≈ (2^{-s}) a(k,s)` from source logarithm laws and
+exponential multiplicativity, then quantitative compact-uniform
+eta-tail convergence and nonvanishing of the divisor where division
+is performed. Native complex factorial exp equality in #1478
+does not by itself prove the required dyadic identity.
