@@ -362,3 +362,35 @@ Using the A$115bn RBA forecast, assumed 70% imports:
 - **N5 forecast vintage backtest:** input strictly earlier as-of forecasts and after-meeting official decisions, score like-for-like policy metrics only when published (RBA 8 Dec, Fed 9 Dec 2026).
 - **P0/P1:** pinned Agda local acceptance and authoritative JMD original proof-world builder remain OPEN. No shell runner, JSON file, market headline or statistical fit pays them.
 
+
+### AER actual wholesale-versus-network negative control (13 November)
+
+The AER's DMO 2026–27 final determination, Appendix F Table F.1, contains a full Ausgrid residential flat-rate cost stack, not merely a network-only change:
+
+| Component | FY25–26 A$/year | FY26–27 A$/year | Difference from displayed rounded values |
+| --- | ---: | ---: | ---: |
+| Wholesale | 753.97 | 653.79 | −100.18 (AER's own change column: −100.19) |
+| Network | 711.92 | 778.23 | +66.31 |
+| Environmental | 68.33 | 47.57 | −20.76 |
+| Retail costs | 312.51 | 305.55 | −6.96 |
+| Retail margin | 117.88 | 113.95 | −3.93 |
+| **Total** | **1,965** | **1,899** | **−66** |
+
+The sum of differences derived from two-decimal displayed components is −65.52; the published total is rounded. The AER's explanatory notice separately estimates a +A$63.81 network charge change for a 4,044-kWh flat-rate customer, whereas Ausgrid's proposal quotes +A$73.81 for an illustrative 5-MWh user. Neither is evidence of a data-centre-attributable charge.
+
+AEMO reports average NEM wholesale Q3 2026 prices **−27% YoY to A$63/MWh**. Wholesale spot market outcomes, forward contract components, AER DMO projections, actual retail household expenditure, inflation and marginal data-centre augmentation costs remain distinct objects. A network increase and wholesale decrease can coexist with a lower DMO benchmark: the blanket inference 'AI demand raised household electricity costs' is not identified by this aggregate observation.
+
+Committed `scripts/cybersyn_aer_network_wholesale_rate_bridge_20261113.py` and `tests/test_cybersyn_aer_network_wholesale_rate_bridge_20261113.py`. Independently executed an equivalent source-bound arithmetic calculation and **18 hypothetical CPI/monetary-policy mapping rows** in the local Python environment. The exact committed checker not yet run.
+
+Unpaid N3/N4: project-specific network augmentation/connection and cost allocation, electricity CPI weights and actual retail pass-through, capacity/crowding-out estimates, endogeneity controls, and estimated monetary-policy reaction. These inputs must not be replaced by illustrative DMO cost components or a chosen policy-rule coefficient.
+
+Sources:
+- https://www.aer.gov.au/system/files/2026-05/AER%20-%20Final%20determination%20-%20Default%20market%20offer%202026%E2%80%9327.pdf
+- https://www.aemo.com.au/newsroom/media-release/qed-q3-2026
+- https://www.aer.gov.au/system/files/2026-04/AER%20%E2%80%93%202026%E2%80%9327%20%E2%80%93%20Statement%20of%20Reasons%20%E2%80%93%20Ausgrid%20Pricing%20Proposal.pdf
+
+### Forecast-vintage status
+
+Next RBA official decision **8 December 2026**, FOMC **9 December 2026**. As of this 13 November tranche, both are future events; **zero genuine out-of-sample December decision outcomes can yet be scored**. `cybersyn_policy_rate_vintage_backtest.py` takes dated forecast vintages and later official decisions, checking time ordering and the exact rate metric. It is inappropriate to backfill a December outcome or present a conditional rule as a market prediction.
+
+Acceptance: keep one frozen pre-decision forecast snapshot with precise timestamp, source and target metric; separately acquire post-event official rate announcement; run the vintage scoring script; record Brier/MAE across many historical origins only where matched point/distributional forecasts are available. The file and four source-written tests exist; executable checkout validation and actual new outcome receipts OPEN.
