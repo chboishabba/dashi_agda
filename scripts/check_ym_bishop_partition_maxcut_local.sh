@@ -26,5 +26,5 @@ for source in "${sources[@]}"; do
   fi
 done
 
-bash scripts/run_agda29_parallel_check.sh "${sources[@]}"
+bash scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
 echo "Original Wilson partition -> Bishop apartness source checked."
