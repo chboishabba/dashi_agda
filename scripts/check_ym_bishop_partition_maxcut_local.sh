@@ -26,5 +26,40 @@ for source in "${sources[@]}"; do
   fi
 done
 
-bash scripts/run_agda29_parallel_check.sh --safe "${sources[@]}"
-echo "Original Wilson partition -> Bishop apartness source checked."
+# A whole-graph --safe run on the legacy Wilson target would be INVALID:
+# YMClayP0BishopToOriginalWilsonRealWeldExact imports
+# DASHI.Foundations.RealAnalysisAxioms, which openly POSTULATES its Real
+# carrier and ordered-ring laws. Source-local "no postulate" grep does not
+# remove or whitelist transitive postulates. Keep two explicit receipts:
+#
+#   (a) constructed Bishop-only source, checked with --safe;
+#   (b) original selected Wilson scalar socket, ordinarily typechecked
+#       but with its known RealAnalysisAxioms postulates disclosed.
+#
+# Neither creates OriginalWilsonToBishopScalarWeld or removes an axiom.
+#
+# --safe on (b) is deliberately NOT attempted or represented as achieved.
+bishop_source="${sources[0]}"
+legacy_sources=("${sources[1]}" "${sources[2]}")
+echo "CHECK safe constructed Bishop-only target: $bishop_source"
+DASHI_NO_TMUX=1 AGDA_JOBS="${AGDA_JOBS:-1}" \
+  bash scripts/run_agda29_parallel_check.sh --safe "$bishop_source"
+
+for legacy_source in "${legacy_sources[@]}"; do
+  if ! grep -q 'DASHI.Foundations.RealAnalysisAxioms' "$legacy_source"; then
+    # The second target is expected to import the postulated carrier
+    # directly, and the third indirectly. A build-time attribution scan
+    # must not silently equate source no-postulate with transitive safety.
+    if [[ "$legacy_source" == *"BishopToOriginalWilson"* ]]; then
+      echo "FAIL expected legacy RealAnalysisAxioms dependency" >&2
+      exit 2
+    fi
+  fi
+done
+echo "CHECK legacy original Wilson targets: imports RealAnalysisAxioms postulates"
+DASHI_NO_TMUX=1 AGDA_JOBS="${AGDA_JOBS:-1}" \
+  bash scripts/run_agda29_parallel_check.sh "${legacy_sources[@]}"
+
+echo "PASS: Bishop-only safe check and legacy source typechecking completed."
+echo "TRUST: original Wilson real postulates remain an explicit dependency."
+echo "OPEN: faithful Bishop↔original Wilson real scalar interpretation; physical RG."
