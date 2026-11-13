@@ -124,13 +124,14 @@ module _
       flat = Physical.appendVec (Physical.flattenPairs pairs) spectators
     in
     trans
-      (cong (Fibre.actualPairBlockVector theory source bilateral
-        ∘ Torus.first ∘ Split.sourceSideFourDecode)
+      (cong (λ flat →
+          Fibre.actualPairBlockVector theory source bilateral
+            (Torus.first (Split.sourceSideFourDecode flat)))
         (substThenUnsubst originalCountToSortedCount flat))
-      (cong (Fibre.actualPairBlockVector theory source bilateral
-        ∘ Torus.first)
+      (cong (λ decoded →
+          Fibre.actualPairBlockVector theory source bilateral
+            (Torus.first decoded))
         (Split.sourceSideFourSplitJoin pairs spectators))
-    where open import Function using (_∘_)
 
   originalFinePhysicalWeight :
     Vec.Vec Pair 64 → Vec.Vec Link 896 → ℝ
@@ -189,10 +190,10 @@ module _
                 theory traceData exponential beta (toNative flat)
                 *ℝ observable blocks)
             (cong
-              (Fibre.actualPairBlockVector theory source bilateral
-                ∘ Torus.first ∘ Split.sourceSideFourDecode)
+              (λ flat →
+                Fibre.actualPairBlockVector theory source bilateral
+                  (Torus.first (Split.sourceSideFourDecode flat)))
               (substThenUnsubst originalCountToSortedCount flat))))
-    where open import Function using (_∘_)
 
   -- Original source real Fubini + SAME weighted physical 64-pair test.
   markedFlatToActualFinePairs :
@@ -232,10 +233,10 @@ module _
                   originalFinePhysicalWeight pairs spectators
                   *ℝ observable blocks)
                 (cong
-                  (Fibre.actualPairBlockVector theory source bilateral
-                    ∘ Torus.first)
+                  (λ decoded →
+                    Fibre.actualPairBlockVector theory source bilateral
+                      (Torus.first decoded))
                   (Split.sourceSideFourSplitJoin pairs spectators))))
-    where open import Function using (_∘_)
 
   -- The requested F19 original-Wilson-Gibbs pushforward for EVERY
   -- observable of the 64 blocked holonomies, not just the partition.
