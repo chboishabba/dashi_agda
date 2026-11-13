@@ -32,6 +32,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRealSubtractionInterchangeExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda
+  DASHI/Physics/YangMills/YMClayE1OriginalR445ThreeMomentCutoffTransportExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonFiniteNumeratorOrderExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445BoundedMomentMajorantsExact.agda
