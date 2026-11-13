@@ -51,6 +51,7 @@ python3 scripts/check_ym_r445_kernel_valued_haar_exact.py
 python3 scripts/check_ym_p0f_generated_two_source_interaction.py
 python3 scripts/check_ym_original_marked_maxcut_exact.py
 python3 scripts/check_ym_e1_harmonic_regrouping_countermodel.py
+python3 scripts/check_ym_source_killing_geometric_n1_20261113.py
 
 # The project runner resolves and version-checks AGDA_BIN/PATH/Nix.
 # Avoid blocking a locally pinned Agda 2.9 executable just because
