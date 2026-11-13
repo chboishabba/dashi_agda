@@ -394,3 +394,20 @@ Sources:
 Next RBA official decision **8 December 2026**, FOMC **9 December 2026**. As of this 13 November tranche, both are future events; **zero genuine out-of-sample December decision outcomes can yet be scored**. `cybersyn_policy_rate_vintage_backtest.py` takes dated forecast vintages and later official decisions, checking time ordering and the exact rate metric. It is inappropriate to backfill a December outcome or present a conditional rule as a market prediction.
 
 Acceptance: keep one frozen pre-decision forecast snapshot with precise timestamp, source and target metric; separately acquire post-event official rate announcement; run the vintage scoring script; record Brier/MAE across many historical origins only where matched point/distributional forecasts are available. The file and four source-written tests exist; executable checkout validation and actual new outcome receipts OPEN.
+
+### NVIDIA SEC direct maturity reconciliation (13 November)
+
+Primary source NVIDIA 10-Q as of July 26, 2026:
+https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm
+
+- Scheduled main contractual commitments (USD billions): supply/capacity **279**, cloud service **29**, uncommenced data-centre leases **25**, equity investments **25**, capital expenditure **8**; total **366**.
+- Distribution across fiscal years: remainder FY2027 **120**, FY2028 **100**, FY2029 **98**, FY2030 **16**, FY2031 **10**, FY2032+ **22**. First three columns = **318/366 = 86.885%**.
+- Separately disclosed AI-cloud commitments **36**, third-party uncommenced leases **20**, sum **56**; these are not automatically an extra disjoint liability bucket beyond other categories.
+- AI-cloud land/power/shell guarantee **US$3.5bn gross maximum**, plus Ohio SB Energy/OpenAI guarantee **US$105bn maximum**; the Ohio coverage activates in phases at lease commencement, with first phase expected **FY2029**, and declines with tenant payments; neither cap is an immediate realised loss.
+- Reuters's later reporting of **US$164.5bn financial commitments** is a differently scoped and dated press summary, not interchangeable with the SEC contractual schedule. Do not substitute or sum heterogeneous vintages without a rowwise mapping to a common accounting ontology.
+- US$500bn proposed third-party platform and up-to-US$125bn *optional* support are not signed, currently drawn NVIDIA debt; its SEC filing says these memoranda may not lead to final agreements.
+
+Committed `scripts/cybersyn_nvidia_sec_maturity_ladder_20261113.py` and `tests/test_cybersyn_nvidia_sec_maturity_ladder_20261113.py`. An equivalent local Python 12-row commitment schedule has been executed and source rows reconcile **366** and **56**; exact committed GitHub module tests remain unexecuted.
+
+**Revised N1 acceptance:** obtain original contracts/10-Q source terms by identity and fiscal period, classify supply, equity, leases, guarantees, optional support and externally financed capital as nonfungible incidence types; only then join paid versus contingent cash flows with the JMD/source world. The rowwise obligation/activation maturity is essential to test transmission into credit spreads and Australian construction delays. Never use $105bn maximum cap as a contemporaneous 2026 drawdown.
+
