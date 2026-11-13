@@ -53,18 +53,24 @@ for target in "${targets[@]}"; do
   fi
 done
 
-if ! command -v nix >/dev/null 2>&1; then
-  echo 'Nix unavailable: local Agda acceptance NOT performed' >&2
+# Prefer the already pinned local Agda 2.9 executable, if supplied.
+# The common runner otherwise invokes Nix even on a PATH-only host, so
+# AGDA_BIN must be populated explicitly for a true PATH-first fallback.
+if [[ -n "${AGDA_BIN:-}" ]] && command -v "$AGDA_BIN" >/dev/null 2>&1; then
+  runner=(bash scripts/run_agda29_parallel_check.sh)
+elif command -v agda >/dev/null 2>&1; then
+  export AGDA_BIN="$(command -v agda)"
+  runner=(bash scripts/run_agda29_parallel_check.sh)
+elif command -v nix >/dev/null 2>&1; then
+  runner=(nix develop .# --command bash scripts/run_agda29_parallel_check.sh)
+else
+  echo 'BLOCKED: neither AGDA_BIN nor PATH Agda nor Nix is available; no kernel receipt' >&2
   exit 127
 fi
-
 printf 'Checking %s exact original Wilson proof targets at head %s\n' \
   "${#targets[@]}" "$(git rev-parse HEAD 2>/dev/null || printf unknown)"
-
-# The project-owned runner (not independent CI) owns Agda version,
-# stdlib, memory ceilings, diagnostics and its kernel pass/fail result.
+# No CI; selected exact original source and dependencies are checked locally.
 DASHI_NO_TMUX=1 AGDA_JOBS="${AGDA_JOBS:-1}" \
-  nix develop .# --command \
-  bash scripts/run_agda29_parallel_check.sh "${targets[@]}"
+  "${runner[@]}" "${targets[@]}"
 
 echo 'PASS: original Wilson P0 focused Agda kernel root accepted.'
