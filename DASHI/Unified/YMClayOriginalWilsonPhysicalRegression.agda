@@ -39,6 +39,7 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact as Phy
 
 import DASHI.Physics.YangMills.YMClayNativePairsSpectatorsFubiniExact as OriginalFlatNestedFubini
 import DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact as OriginalPhysicalF19Partition
+import DASHI.Physics.YangMills.YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact as P0FGeneratedInteractionNegativeControl
 
 import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as NativeTimeReflection
 
