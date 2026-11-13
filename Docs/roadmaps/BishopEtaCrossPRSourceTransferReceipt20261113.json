@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-13",
+  "repository": "chboishabba/dashi_agda",
+  "source_pr": 1408,
+  "source_head": "28d85aa529155352a025de9e12853ecad1e4214e",
+  "recipient_pr": 1478,
+  "recipient_head": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+  "source_status": "same_branch_byte_identical_eta_sources_and_native_exp_source_not_typechecked",
+  "copied_source_blobs": [
+    {
+      "path": "DASHI/Analysis/BishopDirichletUniformBaselTailsExact.agda",
+      "blob_sha": "0030efa3e4c749e38788b19b1c1a1ea5fb702101"
+    },
+    {
+      "path": "DASHI/Analysis/BishopOriginalDirichletEtaFinitePairingExact.agda",
+      "blob_sha": "2d90649c8adafbde585f3c4164ae8f882a216f0d"
+    },
+    {
+      "path": "DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda",
+      "blob_sha": "e4c85b3d7c65e661202e94fc8843ba7aa217e046"
+    },
+    {
+      "path": "DASHI/Analysis/BishopOriginalEtaZetaEvenCutoffSeriesWeldExact.agda",
+      "blob_sha": "7779e71f116bcc3f80b0e55b43be4838dd4261ff"
+    },
+    {
+      "path": "DASHI/Analysis/BishopOriginalXiPolynomialReflectionSameCarrierExact.agda",
+      "blob_sha": "67258fb92b0ecf5c72a3b05c082302e78016f6c2"
+    },
+    {
+      "path": "DASHI/Analysis/BishopRiemannAnalyticSetoidExpReuseExact.agda",
+      "blob_sha": "ca194b88f73d6e0b2fbabd8990e8569c84d89007"
+    },
+    {
+      "path": "DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda",
+      "blob_sha": "3ebbec6fc9c51e6557814b0dcf52d5c078df594d"
+    },
+    {
+      "path": "DASHI/Analysis/BishopRiemannDirichletExponentialTermExact.agda",
+      "blob_sha": "51c054ef5e7a9ed2cfd2bcd6d7cef575bc4806a5"
+    },
+    {
+      "path": "DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda",
+      "blob_sha": "dc1c5e87d5a66de43158b44a51d3ae25fcb30c3e"
+    },
+    {
+      "path": "DASHI/Foundations/BishopRound11TrigAtZeroExact.agda",
+      "blob_sha": "a6cdd733f2875693e1c70d9498b1e349dbd3e318"
+    }
+  ],
+  "other_immediate_dashi_imports_present": [
+    "DASHI/Analysis/BishopConcreteSineCosineFiniteTermDerivativeExact.agda",
+    "DASHI/Analysis/BishopGeometricMajorantSeriesConvergenceExact.agda",
+    "DASHI/Analysis/BishopSetoidComplexExact.agda",
+    "DASHI/Analysis/RiemannAnalyticSubstrate.agda",
+    "DASHI/Analysis/RiemannBishopComplexAnalyticCarrierExact.agda",
+    "DASHI/Foundations/BishopBaselReciprocalSquareConvergenceExact.agda",
+    "DASHI/Foundations/BishopConcreteTrigSeriesConvergenceExact.agda",
+    "DASHI/Foundations/BishopConstructiveRealBridgeExact.agda",
+    "DASHI/Foundations/BishopCubicTranslationIteratedExact.agda",
+    "DASHI/Foundations/BishopExponentialCauchyProductExact.agda",
+    "DASHI/Foundations/BishopExponentialPositiveOrderExact.agda",
+    "DASHI/Foundations/BishopExponentialSeriesConvergenceExact.agda",
+    "DASHI/Foundations/BishopExponentialSetoidCongruenceExact.agda",
+    "DASHI/Foundations/BishopFiniteDegreeOneGeometricBoundExact.agda",
+    "DASHI/Foundations/BishopFiniteSeriesExtensionalityExact.agda",
+    "DASHI/Foundations/BishopGeometricReciprocalSquareFromCrossExact.agda",
+    "DASHI/Foundations/BishopGeometricSeriesConvergenceExact.agda",
+    "DASHI/Foundations/BishopInverseSquareProductExact.agda",
+    "DASHI/Foundations/BishopMachinArctanConstructionExact.agda",
+    "DASHI/Foundations/BishopMachinPiRationalWindowExact.agda",
+    "DASHI/Foundations/BishopNatRealPositiveExact.agda",
+    "DASHI/Foundations/BishopNatRealReciprocalSquareBaselExact.agda",
+    "DASHI/Foundations/BishopNegativeExponentialGlobalUnitIntervalExact.agda",
+    "DASHI/Foundations/BishopPowerSeriesElementaryBridgeExact.agda",
+    "DASHI/Foundations/BishopSineCosineSetoidCongruenceExact.agda",
+    "DASHI/Mathematics/Automorphic/EllipticDirichletBaselMajorantExact.agda",
+    "DASHI/Moonshine/BishopRound11MachinSetoidComplexInstanceExact.agda",
+    "DASHI/Physics/YangMills/BalabanBishopConcreteSineCosineTermParityExact.agda",
+    "DASHI/Physics/YangMills/BalabanBishopSeriesParityAndLimitExact.agda",
+    "DASHI/Physics/YangMills/BalabanClayGate4BishopHalfRadiusRealEstimatesExact.agda",
+    "DASHI/Physics/YangMills/YangMillsSubmissionRound11ExactCutset.agda"
+  ],
+  "new_same_term_owner": "DASHI/Analysis/BishopOriginalEtaNativeFactorialExpSourceWeldExact.agda",
+  "local_agda29_kernel_accepted": false,
+  "all_imports_elaborated": false,
+  "original_dyadic_term_identity_proved": false,
+  "compact_uniform_eta_convergence_proved": false,
+  "clay_or_rh_theorem_proved": false,
+  "verification_note": "GitHub connected readback verified all 10 recipient blob SHA identities and presence of 31 immediate external DASHI imports, without running local Agda or verifying recursive transitive elaboration. One additional source-written eta/native factorial exp term weld is on recipient head."
+}
