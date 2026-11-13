@@ -65,3 +65,15 @@ if __name__ == "__main__":
     print("Open exact producer gates:", count)
     print("Gate kinds:", dict(kinds))
     print("NO Clay endpoint or physical gate was promoted by this validator.")
+    # Keep the original six-Clay terminal ledger and the broader eleven-lane
+    # DONOR/consumer source audit in one default local referee. The latter is
+    # deliberately non-authoritative: neither check compiles Agda/Lean.
+    from check_dashi_all_lane_source_donors import (
+        LEDGER as ALL_LANE_LEDGER, verify as verify_source_donors
+    )
+    report = verify_source_donors(
+        json.loads(ALL_LANE_LEDGER.read_text(encoding="utf-8"))
+    )
+    print("PASS: separate eleven-lane source donor/bridge ledger", report)
+    print("NO source-owner link or donor record is a kernel receipt.")
+
