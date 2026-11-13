@@ -21,7 +21,7 @@ module DASHI.Physics.YangMills.BalabanP0TransverseTensorNotAutomaticallyScalarPr
 -- with an O(derivative^3) remainder, not an exact all-k scalar factor.
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Empty using (⊥)
+open import Data.Empty using (⊥)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base as ℚ using (ℚ; 0ℚ; 1ℚ; _+_; _-_; _*_; _/_)
 open import Relation.Binary.PropositionalEquality using (_≢_; cong; sym; trans)
