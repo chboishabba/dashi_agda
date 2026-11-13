@@ -393,7 +393,7 @@
         {
           "pr": 1501,
           "path": "DASHI/Physics/Closure/NSTriadKNR650Rational345ForcingSupportMaxCutRound846Exact.agda",
-          "declaration": "zero-mode repaired support"
+          "declaration": "round846ZeroOutputUsesR436TransverseVanishing"
         }
       ],
       "consumer": "R830 same selected real ODE trajectory / negative short-time rate integral",
@@ -412,7 +412,7 @@
         {
           "pr": 109,
           "path": "ExternalClayNS/LeanDojoCComparatorBridge.lean",
-          "declaration": "five original R3 C transport leaves"
+          "declaration": "leanDojoFeffermanC_of_transport"
         }
       ],
       "consumer": "Fefferman C actual initial/forcing decay, momentum, div=0, finite energy",
@@ -469,7 +469,7 @@
         {
           "pr": 1494,
           "path": "scripts/lean_world_native_admission_queue.py",
-          "declaration": "immutable source/admission queue"
+          "declaration": "verify_receipt"
         },
         {
           "pr": 1495,
@@ -597,6 +597,6 @@
   "no_kernel_acceptances_obtained": true,
   "import_closure_warning": "Agda #1408 Bishop eta finite source is absent from #1478; its four required new Bishop owner imports are absent there. #1478 native complex exp source absent from #1408. These are NOT yet one compiling theorem chain. #1495 is stacked on #1494; #1484 PostgreSQL branch independent.",
   "source_terminal_gates_closed_here": 0,
-  "source_integrity": "Donor source paths, and theorem names where used, reconciled against exact PR branch readbacks; no cross-branch Agda/Lean import closure compiled.",
+  "source_integrity": "Every exact donor path and declaration in all eleven lanes is being verified against its pinned PR head by direct GitHub readback; no source/analytic/physical declaration is promoted by that check.",
   "programme_scope": "Eight primary mathematical/proof-world lanes plus VOA, BH4/tissue and Cybersyn; this ledger does not substitute for the original six-Clay terminal ledger."
 }
