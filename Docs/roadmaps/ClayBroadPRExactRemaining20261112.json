@@ -4,7 +4,7 @@
   "authority": "GitHub original source and exact local Agda/Lean receipts; no CI inference",
   "scope": "Six open Clay problems plus shared ingestion dependency; Poincare solved externally",
   "original_clay_gates_solved_here": 0,
-  "notice": "Every item below describes a missing terminal gate or material producer. Existing conditional compilers may be source-written, but their original physical/analytic input is not. Field source_written_gate=false means this exact named remaining gate, not its supporting lemmas. Updated 13 Nov: source R850 has already paid the instantaneous NS R829 snapshot; its remaining ledger slot is now exact-head verification, not new vector arithmetic. Original R848 closes nonzero forcing support; companion PR corrects R846 all-mode counterexample and zero-output R436 case. P1xP1 actual geometric instances and ruling exchange are source-written on merged Lean #40; remaining P1 slot is kernel receipt.",
+  "notice": "Every item below describes a missing terminal gate or material producer. Existing conditional compilers may be source-written, but their original physical/analytic input is not. Field source_written_gate=false means this exact named remaining gate, not its supporting lemmas. Updated 13 Nov: source R850 has already paid the instantaneous NS R829 snapshot; its remaining ledger slot is now exact-head verification, not new vector arithmetic. Original R848 closes nonzero forcing support; companion PR corrects R846 all-mode counterexample and zero-output R436 case. P1xP1 actual geometric instances and ruling exchange are source-written on merged Lean #40; remaining P1 slot is kernel receipt. Source audit: #1444 head 8866c8762763 adds --safe to a Bishop focused checker; M.01/M.02/F18/F19 original 1024-link full Wilson partition and F19 normalized two-mark source already exist and must not be re-invented; full source/kernel acceptance absent.",
   "obligations": [
     {
       "id": "YM-P001",
@@ -478,6 +478,34 @@
       "next_smallest_action": "Execute actual locally pinned Lean source fixture/export/Nanoda native controls and authoritative Postgres DAG admission; a staged handoff queue is not proof ingestion",
       "gate_status": "open",
       "source_written_gate": false,
+      "local_checked_gate": false,
+      "kernel_accepted_gate": false,
+      "physical_or_integrated_gate": false
+    },
+    {
+      "id": "YM-P0-DE-ORIGINAL-F19",
+      "problem": "YM",
+      "gate": "P0.D/E",
+      "classification": "verification",
+      "owners": "Agda #1444 M.01/M.02/F18/F19",
+      "source": "YMClayOriginalWilsonPhysicalF19PartitionExact.originalFinePhysicalPartitionEqualsActualEffectivePartition",
+      "next_smallest_action": "Already source-written: original 1024-link fully coupled Wilson fine physical partition equals the same original F19 64-pair+896-spectator constructed coarse effective Haar partition. Verify original closed label sorting candidate, abstract one-link Haar/Fubini source assumptions and transitive trust by local pinned Agda 2.9; DO NOT reclassify this identity as an unconstructed candidate or physics P0.F.",
+      "gate_status": "source_written_kernel_pending",
+      "source_written_gate": true,
+      "local_checked_gate": false,
+      "kernel_accepted_gate": false,
+      "physical_or_integrated_gate": false
+    },
+    {
+      "id": "YM-P0-F19-ORIGINAL-MARKS",
+      "problem": "YM",
+      "gate": "P0.E marked",
+      "classification": "formal_weld",
+      "owners": "Agda #1444 F19",
+      "source": "YMClayOriginalWilsonF19ConcreteWeightExact.actualF19WilsonNormalizedTwoMarkTheorem",
+      "next_smallest_action": "Already source-written: equality of original physical sorted weight F19 fine/effective two-marked generators, both normalized by same partition, for arbitrary 64-block test maps. Remaining exact original-loop/native-observable matching across the original 1024-link decoder and same mixed-log J11 source, plus local Agda 2.9 receipt; DO NOT demand proof of arbitrary-weight F19 disintegration again.",
+      "gate_status": "partial_source_written",
+      "source_written_gate": true,
       "local_checked_gate": false,
       "kernel_accepted_gate": false,
       "physical_or_integrated_gate": false
