@@ -32,6 +32,7 @@ import DASHI.Mathematics.Arithmetic.EllipticRationalKummerOpenExact as Kummer
 import DASHI.Mathematics.Arithmetic.EllipticTwoDescentRoadExact as Descent
 import DASHI.Mathematics.Arithmetic.EllipticRationalPlaceSelmerExact as Place
 import DASHI.Mathematics.Arithmetic.EllipticSupportedSquareClassSieveExact as Sieve
+import DASHI.Mathematics.Arithmetic.EllipticActualDyadicPrimePlaceExact as Dyadic
 
 record OriginalAllPlaceSieveEvidence
     (data : Place.RationalPlaceTwoDescentData
@@ -45,10 +46,8 @@ record OriginalAllPlaceSieveEvidence
       Place.GlobalCohomology data →
       Kummer.RationalSquareClassPairRepresentative
 
-    -- This prime label must really be 2, not a dummy local place.
-    actualTwoPrime : Place.FinitePrime
-    actualTwoLabel :
-      Place.primeValue actualTwoPrime ≡ 2
+    -- The prime-2 place is now the source-written canonical Agda
+    -- inhabitant Dyadic.actualDyadicFinitePrime, not a record field.
 
     -- Mathematical source requirements, not assumed status flags.
     archimedeanNecessary :
@@ -63,8 +62,8 @@ record OriginalAllPlaceSieveEvidence
 
     dyadicNecessary :
       (x : Place.GlobalCohomology data) →
-      Place.FiniteKummerImage data actualTwoPrime
-        (Place.localizeFinite data actualTwoPrime x) →
+      Place.FiniteKummerImage data Dyadic.actualDyadicFinitePrime
+        (Place.localizeFinite data Dyadic.actualDyadicFinitePrime x) →
       Sieve.firstOddAtTwo
         (Sieve.projectOriginalSquareClassPair fourBitProjection
           (originalGlobalSquareClass x))
@@ -100,7 +99,7 @@ originalSelmerSatisfiesRealDyadicFilter evidence s =
     (dyadicNecessary evidence
       (Descent.cohomologyClass s)
       (Descent.satisfiesEveryLocalCondition s
-        (Place.finitePlace (actualTwoPrime evidence))))
+        Dyadic.actualDyadicRationalPlace))
 
 -- The finite exhaustive K1→K3 weld. It does not infer that the
 -- global H¹ class equals the rational torsion Kummer class; such
