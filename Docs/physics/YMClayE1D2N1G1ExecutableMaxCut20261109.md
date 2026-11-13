@@ -704,3 +704,18 @@ nor Agda typechecking.
    Wilson/ghost/Haar scalar, physical Fourier sine/shifted denominator,
    Ward/tensor-to-beta weld, real four integral/Hessian/error certificates
    remain OPEN; original finite Haar blocking does not replace them.
+
+
+### 13 November: attachment seven-gate "constructively closed" claim rejected on original source
+
+**Controlling exact audit:** `Docs/physics/YMClaySevenGateAttachmentClaimAudit20261113.md`.
+
+The latest #1444 source has already paid even MORE P0.E than an earlier inventory: `YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.originalCanonicalBlockedNormalizedEqualsPhysicalEffective` proves full same-source **original canonical 1024-link blocked observable -> original F19 effective-density normalized moment** for arbitrary selected 64-block tests, with original spectator-weighted source and same original Z. Do NOT re-open this as a merely missing independent source carrier. The remaining source-specific marking issue is the selected Wilson **word/loop family and physical derivative/OS identification**, which is distinct from arbitrary 64-block tests.
+
+**Constructive trace audit added:** `YMClaySUNTraceCyclicityDoesNotImplyRangeExact` explicitly constructs the actual source `SUNMatrixRealTrace` record on the certified SUN theory with `Scalar=Nat` and constant two, then proves that an alleged universal unit-range theorem contradicts the native identity element. It complements existing `YMClayOriginalPlaquetteTraceCyclicityInsufficientExact` (real constant trace => allegedly every real is bounded). It is not a physical trace range certificate and does not establish `|Re Tr(U)/N|≤1` for the **genuine** matrix trace: original `CertifiedSUNMatrixTheory` has no indexed entries/diagonal sum to instantiate Cauchy–Schwarz.
+
+**Strong E1 blocker:** strengthened existing `scripts/check_ym_e1_harmonic_regrouping_countermodel.py`; exact finite 131071 step differences `≤2/k`, all dyadic harmonic blocks `≥1/2`, and **convergent `4^j` subsequence identically zero with intermediate `2·4^j` values one**. The latter refutes even a sparse-convergence inference, not the actual Wilson family. One-loop `g0²(a_k)∼1/k` does NOT imply `Σ ε(k)<∞`; the attachment's asserted geometric grouped E1 Cauchy rate has no physical producer.
+
+**All claimed E1/D1/D2/N1/G1 closures still OPEN.** The specific source RG P0.F errors require actual nonconstant tests, UV/volume-uniform physical small/large-field bounds and summable/cancellation scale control, which neither F19 Haar equality nor a perturbative beta coefficient supplies. D1's original activity `m1≥log64+2` is a missing **input**, not a result of rewriting its geometric tail. D2 needs the actual E1 continuum same-H OS core and a common nonvacuum physical-time exponent. N1's four-point coefficient/remainder is unproved for physical nonabelian gauge invariants. G1's dual Coxeter positivity does not build measures/gaps for all groups. The Bałaban #1498 physical Wilson+FP/Haar Ward/one-loop quadrature source remains a parallel 12-gate P0, not a consequence of F19.
+
+**Exact-head verification remains OPEN.** The P0 local referee now includes the source-specific Nat cyclicity negative control and the exact 131071-step sparse-subsequence regression. No Agda 2.9 local receipt, transitive trust audit, positive normalized Borel Haar construction or genuine P0.F physical estimate was established this round.
