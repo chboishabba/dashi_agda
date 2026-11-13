@@ -44,6 +44,7 @@ done
 python3 scripts/check_ym_r445_canonical_bond_codec_exact.py
 python3 scripts/check_ym_r445_adjacent_schedule_exact.py
 python3 scripts/check_ym_r445_kernel_valued_haar_exact.py
+python3 scripts/check_ym_p0f_generated_two_source_interaction.py
 python3 scripts/check_ym_original_marked_maxcut_exact.py
 
 # The project runner resolves and version-checks AGDA_BIN/PATH/Nix.
