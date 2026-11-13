@@ -131,8 +131,11 @@ originalSelmerGlobalH1ExhaustedByActualTorsion :
       ≡ actualTorsionGlobalH1 realization torsion)
 originalSelmerGlobalH1ExhaustedByActualTorsion
     {data} {evidence} realization s
-  with Producer.originalAllPlaceSelmerProjectsToTorsionCode evidence s
-... | torsion , codeEq =
+  with Sieve.filteredCodeRationalRepresentativeIsOriginalTorsion
+    (Producer.originalSelmerSupportedCode evidence
+      (Descent.cohomologyClass s))
+    (Producer.originalSelmerSatisfiesRealDyadicFilter evidence s)
+... | torsion , literalEquality =
   torsion ,
     globalCohomologicalSquareClassFaithful realization
       (Descent.cohomologyClass s)
@@ -140,33 +143,17 @@ originalSelmerGlobalH1ExhaustedByActualTorsion
       (originalPairSquareEquivalenceTrans
         (genuineSUnitSupport realization s)
         (originalPairSquareEquivalenceTrans
-          (transportSupportedToOriginal codeEq)
+          (literalEqualityGivesEquivalent literalEquality)
           (originalPairSquareEquivalenceSym
             (actualTorsionKummerCompatibility realization torsion))))
   where
-    transportSupportedToOriginal :
-      Sieve.torsionSupportedCode torsion
-      ≡ Producer.originalSelmerSupportedCode evidence
-          (Descent.cohomologyClass s) →
-      Kummer.RationalSquareClassPairEquivalent
-        (Sieve.supportedPairRationalRepresentative
-          (Producer.originalSelmerSupportedCode evidence
-            (Descent.cohomologyClass s)))
-        (TorsionKummer.torsionKummerRepresentative torsion)
-    transportSupportedToOriginal refl =
-      let equality =
-            Sieve.supportedTorsionRationalsMatchOriginalKummer torsion
-      in
-      substOriginal equality
-
-    substOriginal :
+    literalEqualityGivesEquivalent :
       ∀ {x y : Kummer.RationalSquareClassPairRepresentative} →
-      x ≡ y →
-      Kummer.RationalSquareClassPairEquivalent x y
-    substOriginal refl =
+      x ≡ y → Kummer.RationalSquareClassPairEquivalent x y
+    literalEqualityGivesEquivalent {x} refl =
       Kummer.pair-equivalent
-        (Square.square-refl _)
-        (Square.square-refl _)
+        (Square.square-refl (Kummer.first x))
+        (Square.square-refl (Kummer.second x))
 
 -- Kernel-free same-object statement: the original Selmer H¹ class
 -- equals the class underlying an actual torsion Selmer element.
