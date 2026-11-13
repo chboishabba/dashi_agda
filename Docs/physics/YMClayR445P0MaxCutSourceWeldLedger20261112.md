@@ -235,3 +235,26 @@ nor Agda typechecking.
    Wilson/ghost/Haar scalar, physical Fourier sine/shifted denominator,
    Ward/tensor-to-beta weld, real four integral/Hessian/error certificates
    remain OPEN; original finite Haar blocking does not replace them.
+
+
+
+## 13 November: audit correction — original canonical blocked marks already source-written
+
+The earlier P0.E ledger statement that the canonical original physical marked-observable identification remained unimplemented was **too broad**. Original canonical 1024-link blocked-holonomy observables have an existing complete SOURCE-WRITTEN same-Wilson-weight, same-Haar integration, same-normalizer proof chain.
+
+Actual declarations and precise responsibilities:
+
+- YMClayOriginalWilsonCanonicalMarkedReindexExact.originalWeightedMarkedReindexExact: the original native 1024-link adjacent permutation carries an arbitrary marked Wilson integrand without dropping spectator interactions.
+- YMClayOriginalWilsonPairSpectatorDecoderExact.sourceSideFourSplitJoin and joinedSplitOriginalExactly: two-sided original 64-pair / 896-spectator vector source codec. Its physical canonical test identification is used by the canonical blocked-mark owner.
+- YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.sourceSortedBlockIsOriginalPairs: true decoded coarse vector agrees with original 64 noncommutative link-pair holonomies.
+- Same file markedSortedToFlat and markedFlatToActualFinePairs: source count equality, flat-to-nested Fubini and original coupled physical fine weight.
+- Same file originalFineCanonicalBlockedNumeratorEqualsPhysicalEffective: canonical original unsorted fine 1024-link numerator agrees with the actual F19 effective-density numerator for EVERY test on the 64 blocked holonomies.
+- Same file originalCanonicalBlockedNormalizedEqualsPhysicalEffective: identical FULL normalized canonical fine/effective blocked observable, since originalFinePhysicalPartitionEqualsActualEffectivePartition identifies precisely the SAME original canonical Wilson normalizer.
+
+That closes the **source-authoring** gap for the canonical blocked-HOLONOMY marked-observable identity; this does not supply Agda 2.9 KERNEL acceptance, concrete Haar/Fubini representation, a model for the separately postulated RealAnalysisAxioms real carrier, arbitrary-SU(N) normalized trace, or physical localized Wilson-loop/OS meaning. In particular, physical P0.F uniform effective-minus-bare RG estimate is still completely open.
+
+The authoritative unified regression root DASHI/Unified/YMClayOriginalWilsonPhysicalRegression.agda is now extended to import YMClayOriginalWilsonCanonicalBlockedMarkF19Exact directly, instead of importing only the unmarked physical F19 partition. The focused checkers already include the decoder, canonical marked, and canonical blocked F19 source modules. No new local Agda kernel receipt.
+
+P0.F finite rational negative control independently reproduced: for the positive fine Z2 character weight K(x,y,z)=(1+t*x*z)(1+t*y*z), integrating the shared interior sign gives rho_eff(x,y)=1+t*t*x*y. Although Zfine=Zeff=Zbare=1 and both one-point means are zero, the cross expectation E_eff[xy]=t*t differs from bare zero. This audit independently executed 4,096/4,096 seeded arbitrary signed marked-observable transports and all eight selected coupling positivity/partition/cross-determinant cases with exact rational arithmetic. This does NOT prove or disprove original 4D SU(N) Wilson P0.F; it proves why correct F19 partition/marks alone cannot establish RG closeness. The original physical comparison must specify running relevant/marginal counterterms and pay cutoff/volume-uniform genuinely summable or decaying errors for F, G, and FG on the SAME selected Wilson family.
+
+Verification boundary: run scripts/check_ym_r445_p0_maxcut_local.sh at the precise PR head, followed by scripts/check_ym_original_rg_p0_kernel.sh. The existing Bishop-partition checker uses --safe only for the constructed Bishop-only root and ordinary typechecking for postulated legacy original Wilson real roots. No physical E1/D1/D2/N1/G1 closure is asserted.
