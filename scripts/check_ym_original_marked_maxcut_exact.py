@@ -74,10 +74,16 @@ def check_partition_equality_is_not_rg_decay():
     integrate = lambda pair: sum(pair, Q(0))/2
     assert integrate(bare) == integrate(effective) == 1
     assert all(x > 0 for x in bare + effective)
+    test = (Q(1), Q(0))
+    marked = lambda density: sum((density[i]*test[i] for i in range(2)), Q(0))/2
+    assert marked(effective) == Q(3, 4)
+    assert marked(bare) == Q(1, 2)
+    assert marked(effective) - marked(bare) == Q(1, 4)
     for cutoff in range(128):
         assert abs(effective[0] - bare[0]) == Q(1, 2)
+        assert marked(effective) - marked(bare) == Q(1, 4)
     print("PASS 128 cutoffs: positive equal-Z densities retain")
-    print("     exact nonzero 1/2 effective-minus-bare difference")
+    print("     exact nonzero 1/2 density and 1/4 F/G/FG moment differences")
     assert 2*64 + 896 == 1024
     print("PASS original 64 ordered pairs / 896 spectators = 1024 bonds")
 
