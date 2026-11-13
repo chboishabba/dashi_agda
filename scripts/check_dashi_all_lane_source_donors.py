@@ -113,6 +113,32 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
     assert "dyadic" in lookup["BISHOP-ETA-EXP"]["missing"]
     assert "uniform" in lookup["BISHOP-ETA-TAIL"]["missing"].lower()
     assert lookup["BISHOP-ETA-TAIL"]["terminal_gate_closed"] is False
+    # Original source P1.L is credited without converting the still
+    # uninhabited R4 square-root calculus into a theorem.
+    p1l = lookup["BISHOP-KOENIGS-LOG"]["p1l_original_source"]
+    assert p1l["pr"] == 1478
+    assert p1l["pinned_pr_sha"] == head_index[
+        ("chboishabba/dashi_agda", 1478)]["sha"]
+    assert p1l["true_displacement_constant"] == "8/27"
+    assert p1l["source_readback"] is True
+    assert p1l["uses_existing_uninhabited_root_calculus"] is True
+    assert p1l["kernel_elaborated"] is False
+    assert p1l["unconditional_semantic_proof"] is False
+    assert p1l["terminal_gate_closed"] is False
+    for owner, decl in (
+        ("finite_to_limit_owner", "finite_to_limit_declaration"),
+        ("selected_numeric_owner", "selected_numeric_declaration"),
+    ):
+        assert _safe_path(p1l[owner])
+        assert SINGLE_SOURCE.fullmatch(p1l[decl])
+        if verify_local_objects:
+            obj = p1l["pinned_pr_sha"] + ":" + p1l[owner]
+            got = subprocess.run(["git", "-C", str(root), "show", obj],
+                                 capture_output=True, text=True, check=False)
+            if got.returncode or not re.search(
+                    rf"(?<![\\w']){re.escape(p1l[decl])}(?![\\w'])",
+                    got.stdout):
+                raise SourceAuditError("missing original Bishop P1.L source " + obj)
     assert lookup["WORLD-1495-1484"]["cross_branch_state"] == "divergent_stack_unjoined"
     assert lookup["NS-R850-R830"]["terminal_gate_closed"] is False
     assert lookup["KARP-G3"]["terminal_gate_closed"] is False
