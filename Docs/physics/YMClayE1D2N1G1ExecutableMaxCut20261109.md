@@ -585,3 +585,18 @@ The local max-cut runner now first checks the original selected 1024-label Boole
 **Trust/runner repair:** `check_ym_r445_p0_maxcut_local.sh` and `check_ym_original_rg_p0_kernel.sh` now explicitly set `AGDA_BIN` from PATH before calling the original shared runner, preventing an unwanted implicit Nix build; Nix remains a supported fallback. The latter now targets the ORIGINAL M.01/M.02/F18/F19 source before dependent quantitative RG modules. `check_ym_bishop_partition_maxcut_local.sh` separately runs `--safe` on the constructed Bishop-only root, then ordinary typechecking of the original Wilson real-socket modules with their transitive legacy postulate boundary disclosed. Removed misleading `--safe` annotations in `YMClayFiniteProductHaarOrderedAlgebraExact.agda` and `CMP119AntigravityRealGibbsDensityPositiveExact.agda`, both of which import explicitly postulated `RealAnalysisAxioms`. **No local Agda 2.9 receipt obtained in this assistant runtime.**
 
 **Exact next mathematical producer:** prove source-dependent all-volume, UV/IR-uniform smallness of `X(F)` (equivalently three genuine normalized moment differences) for actual nonconstant Wilson tests `F,G,FG` with a scale summability sufficient to compare the effective Gibbs law against the distinct bare coarse Wilson law. The exact F19 partition identity and its strictly positive normalizer do not imply this.
+
+
+### 13 November P0.E strengthened: actual physical two-source normalizer equals original canonical Z
+
+The same **`YMClayOriginalWilsonPhysicalF19PartitionExact.agda`** now also contains a nested original `OriginalPhysicalF19TwoMarked` module with five exact source-written consumers of the previously implemented `F19Physical.physicalWeight` and `actualF19WilsonTwoMarkTheorem`:
+
+- `originalPhysicalTwoMarkedAtZeroIsOne`: pointwise exact `(1+0·F)(1+0·G)=1` on the actual 64-block test carrier, using existing real ring laws.
+- `originalPhysicalF19EffectiveMarkedZeroIsPartition`: the actual source F19 effective two-marked numerator at `s=t=0` is the previously constructed physical 64-block effective partition, using original finite-Haar extensionality.
+- `originalPhysicalF19FineMarkedZeroIsCanonicalPartition`: exact **same original canonical unsorted 1024-link** Wilson Gibbs partition equality `Z_aff(0,0) = Z_original fine`, combining the source F19 two-mark theorem with original M.01/M.02/F19 partition transport.
+- `originalPhysicalF19FineMarkedNormalizerStrictlyPositive`: the same original source two-marked denominator is strictly positive under the already explicit original strict Haar and exp-positive hypotheses.
+- `originalPhysicalF19TwoMarksNormalizeByCanonicalPartition`: the *entire* physical fine/effective two-source generating expression is identical when both are normalized by the original canonical Wilson fine partition, without a second `Z` oracle or physical RG moment identification.
+
+**Scope:** the tests are actual native original F19 coarse-block functions, and the interacting fine weight is the same original SU(N) Wilson Gibbs density. This advances the finite native physical **normalizer and two-source source-identification**, not the distinct remaining marked physical Wilson word/loop observable identification into that carrier, the missing positive division semantic interpretation, or the cutoff-uniform `P0.F` original effective-minus-bare physical moment errors.
+
+**Verification:** all five new declarations are only **SOURCE-WRITTEN / pinned Agda 2.9 kernel OPEN**; in particular `RealAnalysisAxioms` remains an explicitly postulated scalar boundary. No CI result or finite Python witness is used as kernel authority.
