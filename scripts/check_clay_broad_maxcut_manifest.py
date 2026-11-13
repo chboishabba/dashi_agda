@@ -31,7 +31,19 @@ def verify(document):
     classes = Counter()
     for item in items:
         assert item["id"] and item["source"] and item["next_smallest_action"]
-        assert item["gate_status"] == "open", "open-gate manifest must fail closed"
+        stage = item["gate_status"]
+        assert stage in {
+            "open", "source_written_kernel_pending", "partial_source_written"
+        }, "unrecognized stage would silently promote gate"
+        if stage != "open":
+            # Only the two explicitly documented intermediate F19 source stages
+            # may be source-written in this terminal-gate ledger.
+            assert item["id"] in {
+                "YM-P0-DE-ORIGINAL-F19", "YM-P0-F19-ORIGINAL-MARKS"
+            }, "no new intermediate promotions without source/receipt review"
+            assert item["source_written_gate"] is True
+            assert item["kernel_accepted_gate"] is False
+            assert item["physical_or_integrated_gate"] is False
         assert item["classification"] in ALLOWED
         assert "CI" not in str(item.get("kernel_receipt", "")), "CI is not local authority"
         assert all(type(item[k]) is bool for k in FLAGS)
@@ -62,7 +74,7 @@ def verify(document):
 if __name__ == "__main__":
     count, kinds = verify(json.loads(PATH.read_text(encoding="utf-8")))
     print("PASS: exact Clay max-cut gate ledger, IDs and proof-status firewall")
-    print("Open exact producer gates:", count)
+    print("Remaining/unaccepted exact producer rows:", count)
     print("Gate kinds:", dict(kinds))
     print("NO Clay endpoint or physical gate was promoted by this validator.")
     # Keep the original six-Clay terminal ledger and the broader eleven-lane
