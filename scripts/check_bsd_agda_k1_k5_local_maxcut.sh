@@ -7,7 +7,10 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 
 files=(
   DASHI/Mathematics/Arithmetic/EllipticSupportedSquareClassSieveExact.agda
+  DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda
   DASHI/Mathematics/Arithmetic/EllipticRationalPlaceTwoDescentProducerExact.agda
+  DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda
+  DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda
   DASHI/Mathematics/Automorphic/EllipticSelectedHeckePrimePowerExact.agda
 )
 
@@ -19,6 +22,27 @@ for f in "${files[@]}"; do
   if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|allow-unsolved-metas|--no-positivity-check|--no-termination-check' "$f"; then
     echo "BLOCKED: non-golden or unfinished declaration in $f" >&2
     exit 13
+  fi
+done
+
+
+# Make the exact original theorem names part of the local preflight,
+# without confusing textual presence with kernel proof acceptance.
+required=(
+  'EllipticSupportedSquareClassSieveExact.agda:filteredCodeRationalRepresentativeIsOriginalTorsion'
+  'EllipticActualDyadicPrimePlaceExact.agda:actualTwoIsPrimeNat'
+  'EllipticRationalPlaceTwoDescentProducerExact.agda:originalAllPlaceSelmerProjectsToTorsionCode'
+  'EllipticOriginalSelmerCohomologyExhaustionExact.agda:originalSelmerGlobalH1ExhaustedByActualTorsion'
+  'EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda:vanishingTwoTorsionDoesNotForceGroupTrivial'
+  'EllipticSelectedHeckePrimePowerExact.agda:rowEulerHeckeTruncationTwo'
+)
+for owner in "${required[@]}"; do
+  module="${owner%%:*}"
+  symbol="${owner#*:}"
+  source="$(find DASHI/Mathematics/Arithmetic DASHI/Mathematics/Automorphic -maxdepth 1 -name "$module" -print -quit)"
+  if [[ -z "$source" ]] || ! grep -Fq "$symbol :" "$source"; then
+    echo "BLOCKED: original named theorem missing: $owner" >&2
+    exit 14
   fi
 done
 
