@@ -31,6 +31,7 @@ open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Sigma using (Σ; _,_)
 open import Data.List.Base using (length)
+open import Relation.Binary.PropositionalEquality using (sym)
 
 import DASHI.Mathematics.Arithmetic.EllipticCurveTwoTorsionAndBadPrimeExact as Torsion
 import DASHI.Mathematics.Arithmetic.EllipticCurveFiniteTwoDescentSeedExact as Seed
@@ -255,3 +256,41 @@ torsionDictionaryCalibrationGivesFilter
     projection calibrate code
     rewrite calibrate code =
   torsionCodesPassFilter code
+
+------------------------------------------------------------------------
+-- Proof-relevant list coverage, not merely a declaration of counts.
+------------------------------------------------------------------------
+
+infix 4 _∈_
+
+data _∈_ {A : Set} (x : A) : List A → Set where
+  here : ∀ {xs} → x ∈ (x ∷ xs)
+  there : ∀ {y xs} → x ∈ xs → x ∈ (y ∷ xs)
+
+torsionSupportedCodeOccurs :
+  (torsion : Torsion.TwoTorsionCode) →
+  torsionSupportedCode torsion ∈ torsionSievePairs
+torsionSupportedCodeOccurs
+    (Torsion.torsionCode Torsion.bit0 Torsion.bit0) =
+  here
+torsionSupportedCodeOccurs
+    (Torsion.torsionCode Torsion.bit1 Torsion.bit0) =
+  there here
+torsionSupportedCodeOccurs
+    (Torsion.torsionCode Torsion.bit0 Torsion.bit1) =
+  there (there here)
+torsionSupportedCodeOccurs
+    (Torsion.torsionCode Torsion.bit1 Torsion.bit1) =
+  there (there (there here))
+
+-- No hidden completeness premise: every code satisfying the
+-- two exact finite filters occurs in the ORIGINAL torsion table.
+filteredSupportedPairOccursInTorsionTable :
+  (code : SupportedSquareClassPairCode) →
+  RealAndDyadicNecessaryFilter code →
+  code ∈ torsionSievePairs
+filteredSupportedPairOccursInTorsionTable code filter
+  with filteredSupportedCodeHasTorsionPreimage code filter
+... | torsion , equality rewrite
+  sym equality =
+  torsionSupportedCodeOccurs torsion
