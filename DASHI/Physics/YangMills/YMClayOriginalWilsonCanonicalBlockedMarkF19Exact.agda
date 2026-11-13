@@ -236,7 +236,7 @@ module _
                   (λ decoded →
                     Fibre.actualPairBlockVector theory source bilateral
                       (Torus.first decoded))
-                  (Split.sourceSideFourSplitJoin pairs spectators))))
+                  (Split.sourceSideFourSplitJoin pairs spectators)))))
 
   -- The requested F19 original-Wilson-Gibbs pushforward for EVERY
   -- observable of the 64 blocked holonomies, not just the partition.
