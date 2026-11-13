@@ -348,3 +348,19 @@ exponential multiplicativity, then quantitative compact-uniform
 eta-tail convergence and nonvanishing of the divisor where division
 is performed. Native complex factorial exp equality in #1478
 does not by itself prove the required dyadic identity.
+
+
+## 13 November: actual Bishop eta ↔ native factorial exp integration implemented
+
+The earlier cross-PR dependency-warning was **correct at the earlier audited heads**, but this round has now addressed its concrete source-presence boundary:
+
+- PR #1408 original eta branch at `28d85aa529155352a025de9e12853ecad1e4214e` contributed **10 exact source files**, including `BishopOriginalEtaEvenSourceScaleFiniteWeldExact` and its transitive original Dirichlet, real-log, native Bishop-exponential and uniform-Basel owners, transferred without edits to PR #1478.
+- GitHub exact blob SHA comparison passed **10/10**, including the 53,340-byte `BishopRiemannDirichletExponentialTermExact.agda` original source. This is an actual dependency transfer, not a mere roadmap cross-reference.
+- On PR #1478 a new `BishopOriginalEtaNativeFactorialExpSourceWeldExact.agda` now source-writes **real and imaginary native factorial-series convergence for the ORIGINAL Round11 eta term**
+  `Terms.bishopDirichletExponentialTerm (Route.round11MachinTranscendentals inputs) Terms.sourceCanonicalNatLogCandidate s n`.
+  The genuine original Riemann analytic pair, Bishop exp-setoid pair, and native factorial-series pair are connected by definitional coordinate equality using the existing `BishopRiemannAnalyticSetoidExpReuseExact` and `AbelBishopOriginalComplexCarrierWeldExact` donors.
+- All **35 direct external DASHI imports** of the ten transferred source files and the new consumer resolve in PR #1478; no missing direct module remains. **No Agda kernel receipt** was available.
+- New local no-CI golden checker `scripts/check_bishop_eta_native_exp_cross_pr_local.sh` checks 12 roots. Dedicated source report `Docs/proofs/BishopEtaNativeExpCrossPRIntegration20261113.md` on PR #1478.
+- **Mathematics still open:** (1) ORIGINAL `L(2(k+1)) ≃ L(2)+L(k+1)` from the canonical negative-log `NatLogCandidate`; (2) same-native-Bishop complex exp multiplication and original dyadic term `a(2k+1)≈C a(1)*a(k)`; (3) compact-uniform complex eta convergence with a correct `|s|/σ` majorant; (4) zeros/division/continuation and original zeta/ξ/RH identification. The existing finite even-source scale theorem is CONDITIONAL on the real dyadic input.
+
+**Status correction:** the programme's Bishop source-dependency gate has moved from `not_present_together` to **`source_dependencies_co_located_on_pr1478_kernel_unverified`**; source-level original term convergence has a new consumer. The terminal analytic gates have NOT been promoted. Karp-21's native bit-machine, BSD's local Kummer/Sha, NS/RH/Hodge analytic objects, independent Lean-world PostgreSQL admission and the YM original RG estimates retain their separately recorded open obligations.
