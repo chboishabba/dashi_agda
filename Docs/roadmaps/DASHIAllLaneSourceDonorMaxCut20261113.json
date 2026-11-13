@@ -479,7 +479,7 @@
         {
           "pr": 1484,
           "path": "scripts/lean_world_postgres_candidate.py",
-          "declaration": "PostgreSQL source candidate world"
+          "declaration": "persist_candidate_world"
         }
       ],
       "consumer": "authoritative native-v3 Lean checker proof DAG -> same canonical PostgreSQL world",
