@@ -51,8 +51,9 @@ def check(max_stage=17):
     for j in range(max_stage):
         low = 1 << j
         upper = low << 1
-        assert sum((Fraction(1, k) for k in range(low, upper)),
-                   Fraction(0)) >= Fraction(1, 2)
+        assert all(Fraction(1, k) >= Fraction(1, 2*low)
+                   for k in range(low, upper))
+        assert low * Fraction(1, 2*low) == Fraction(1, 2)
 
     print(f'PASS exact bounded rational sawtooth: {2**max_stage - 1} adjacent O(1/k) bounds')
     print(f'PASS {max_stage} alternating dyadic stage values 0/1 and harmonic-block lower bound 1/2')
