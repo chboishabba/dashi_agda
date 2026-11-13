@@ -39,6 +39,10 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact as Phy
 
 import DASHI.Physics.YangMills.YMClayNativePairsSpectatorsFubiniExact as OriginalFlatNestedFubini
 import DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact as OriginalPhysicalF19Partition
+-- Canonical 1024-link marked tests -> actual 64 blocked holonomies ->
+-- physical F19 effective measure, including same-original-Z normalization.
+-- Source-written; legacy scalar and compact Haar remain explicit inputs.
+import DASHI.Physics.YangMills.YMClayOriginalWilsonCanonicalBlockedMarkF19Exact as CanonicalBlockedF19
 import DASHI.Physics.YangMills.YMClayP0FGeneratedTwoSourceInteractionNegativeControlExact as P0FGeneratedInteractionNegativeControl
 
 import DASHI.Physics.YangMills.YMClayNativeR445TemporalReversalExact as NativeTimeReflection
