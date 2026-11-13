@@ -20,6 +20,7 @@ targets=(
   DASHI/Physics/YangMills/YMClayOriginalWilsonPairSpectatorDecoderExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalMarkedReindexExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonEffectiveBetaFiniteDifferenceExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda
   DASHI/Physics/YangMills/YMClayR445OriginalAxialBondParityInjectiveExact.agda
   DASHI/Physics/YangMills/YMClayR445NativePairHolonomyIdentityExact.agda
