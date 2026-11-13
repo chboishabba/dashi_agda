@@ -175,8 +175,8 @@
       "donors": [
         {
           "pr": 1497,
-          "path": "DASHI/Analysis/BishopFastCauchyRealEquivalenceExact.agda",
-          "declaration": "cross-source rational normalization donor"
+          "path": "DASHI/Analysis/BishopFastCauchyRationalNormalizationRoundTripExact.agda",
+          "declaration": "canonicalFastReducedTermRoundTrip"
         }
       ],
       "consumer": "native original odd-zeta same-value transport",
@@ -266,8 +266,8 @@
         },
         {
           "pr": 107,
-          "path": "Synthesis/MillenniumBSDSelectedCurveActualKummer.lean",
-          "declaration": "Lean Kummer/H1 donor, exact path to confirm"
+          "path": "Synthesis/MillenniumBSDCMOriginalGeometricKummerGaloisEquivariantExact.lean",
+          "declaration": "cmSelectedGeometricKummerShortExact_galois_equivariant"
         }
       ],
       "consumer": "actual E(Q) local Kummer image to Selmer class, faithful global cohomology and rank",
@@ -290,8 +290,8 @@
         },
         {
           "pr": 107,
-          "path": "Synthesis/MillenniumBSD.lean",
-          "declaration": "Lean classical Sha2 donor, exact path to confirm"
+          "path": "Synthesis/MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact.lean",
+          "declaration": "cmSelectedEBarRestrictedShaTwo_mem_iff"
         }
       ],
       "consumer": "classical 0->E(Q)/2E(Q)->Sel2(E)->Sha(E)[2]->0",
@@ -315,7 +315,12 @@
         {
           "pr": 1500,
           "path": "DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda",
-          "declaration": "C3[2] trivial does not give full Sha"
+          "declaration": "vanishingTwoTorsionDoesNotForceGroupTrivial"
+        },
+        {
+          "pr": 107,
+          "path": "Synthesis/MillenniumBSDCMLevel32GammaSpecialValuePositiveExact.lean",
+          "declaration": "cmLevel32PublishedSpecialValueCandidate_pos"
         }
       ],
       "consumer": "selected curve original L(E,1)>0, exact leading term and full Sha",
@@ -381,8 +386,8 @@
       "donors": [
         {
           "pr": 108,
-          "path": "Riemann/ContinuousFifthSign.lean",
-          "declaration": "continuous fifth-moment negative-control, exact path to confirm"
+          "path": "Synthesis/RiemannContinuousFifthMomentSignAudit.lean",
+          "declaration": "continuousFifthGap_strictly_negative"
         }
       ],
       "consumer": "Lean #50 original strict signed A2 debt vs far-zero compensation + original discrete signedFifthCorrelationGapAt",
@@ -470,5 +475,6 @@
   "claim_no_clay_problem_solved": true,
   "no_kernel_acceptances_obtained": true,
   "import_closure_warning": "Agda #1408 Bishop eta finite source is absent from #1478; its four required new Bishop owner imports are absent there. #1478 native complex exp source absent from #1408. These are NOT yet one compiling theorem chain. #1495 is stacked on #1494; #1484 PostgreSQL branch independent.",
-  "source_terminal_gates_closed_here": 0
+  "source_terminal_gates_closed_here": 0,
+  "source_integrity": "Donor source paths, and theorem names where used, reconciled against exact PR branch readbacks; no cross-branch Agda/Lean import closure compiled."
 }
