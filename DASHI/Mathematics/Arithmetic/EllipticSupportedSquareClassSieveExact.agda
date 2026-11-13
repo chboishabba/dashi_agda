@@ -291,6 +291,77 @@ filteredSupportedPairOccursInTorsionTable :
   code ∈ torsionSievePairs
 filteredSupportedPairOccursInTorsionTable code filter
   with filteredSupportedCodeHasTorsionPreimage code filter
-... | torsion , equality rewrite
-  sym equality =
+... | torsion , equality rewrite sym equality =
   torsionSupportedCodeOccurs torsion
+
+-- An explicit proof of COVERAGE for the 16-element list, rather
+-- than inferring exhaustiveness from its length alone.
+allSupportedPairsExhaustive :
+  (a b c d : Torsion.Bit) →
+  supportedPair a b c d ∈ allSupportedPairs
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit0 Torsion.bit0 Torsion.bit0 =
+  here
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit0 Torsion.bit0 Torsion.bit1 =
+  there (here)
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit0 Torsion.bit1 Torsion.bit0 =
+  there (there (here))
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit0 Torsion.bit1 Torsion.bit1 =
+  there (there (there (here)))
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit1 Torsion.bit0 Torsion.bit0 =
+  there (there (there (there (here))))
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit1 Torsion.bit0 Torsion.bit1 =
+  there (there (there (there (there (here)))))
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit1 Torsion.bit1 Torsion.bit0 =
+  there (there (there (there (there (there (here))))))
+allSupportedPairsExhaustive Torsion.bit0 Torsion.bit1 Torsion.bit1 Torsion.bit1 =
+  there (there (there (there (there (there (there (here)))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit0 Torsion.bit0 Torsion.bit0 =
+  there (there (there (there (there (there (there (there (here))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit0 Torsion.bit0 Torsion.bit1 =
+  there (there (there (there (there (there (there (there (there (here)))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit0 Torsion.bit1 Torsion.bit0 =
+  there (there (there (there (there (there (there (there (there (there (here))))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit0 Torsion.bit1 Torsion.bit1 =
+  there (there (there (there (there (there (there (there (there (there (there (here)))))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit1 Torsion.bit0 Torsion.bit0 =
+  there (there (there (there (there (there (there (there (there (there (there (there (here))))))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit1 Torsion.bit0 Torsion.bit1 =
+  there (there (there (there (there (there (there (there (there (there (there (there (there (here)))))))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit1 Torsion.bit1 Torsion.bit0 =
+  there (there (there (there (there (there (there (there (there (there (there (there (there (there (here))))))))))))))
+allSupportedPairsExhaustive Torsion.bit1 Torsion.bit1 Torsion.bit1 Torsion.bit1 =
+  there (there (there (there (there (there (there (there (there (there (there (there (there (there (there (here)))))))))))))))
+
+-- Exactly the diagonal-sign 8-element real-necessary slice.
+realDiagonalPairsExhaustive :
+  (code : SupportedSquareClassPairCode) →
+  firstNegative code ≡ secondNegative code →
+  code ∈ realDiagonalPairs
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit0 Torsion.bit0 Torsion.bit0 Torsion.bit0) refl =
+  here
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit0 Torsion.bit0 Torsion.bit0 Torsion.bit1) refl =
+  there (here)
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit0 Torsion.bit1 Torsion.bit0 Torsion.bit0) refl =
+  there (there (here))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit0 Torsion.bit1 Torsion.bit0 Torsion.bit1) refl =
+  there (there (there (here)))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit1 Torsion.bit0 Torsion.bit1 Torsion.bit0) refl =
+  there (there (there (there (here))))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit1 Torsion.bit0 Torsion.bit1 Torsion.bit1) refl =
+  there (there (there (there (there (here)))))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit1 Torsion.bit1 Torsion.bit1 Torsion.bit0) refl =
+  there (there (there (there (there (there (here))))))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit1 Torsion.bit1 Torsion.bit1 Torsion.bit1) refl =
+  there (there (there (there (there (there (there (here)))))))
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit0 _ Torsion.bit1 _) ()
+realDiagonalPairsExhaustive
+    (supportedPair Torsion.bit1 _ Torsion.bit0 _) ()
