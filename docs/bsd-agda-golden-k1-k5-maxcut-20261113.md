@@ -201,3 +201,127 @@ source coefficient and coprime multiplicativity are constructed.
 Next K1 cut remains actual Agda sign and v₂ square-generator invariants,
 then real/Q₂ Kummer image source proofs; the finite sieve does not
 supply those physical/local-field arithmetic lemmas.
+
+
+## 13 Nov afternoon: additional proof owners and narrower exact max-cut
+
+The following were SOURCE-WRITTEN and committed on draft Agda PR #1500
+after the first three original modules, with new theorem declarations
+registered by `scripts/check_bsd_agda_k1_k5_local_maxcut.sh`.
+**None has passed Agda 2.9 kernel checking in this execution context.**
+
+### K1: actual dyadic prime label (not a fake witness)
+
+`EllipticActualDyadicPrimePlaceExact.agda`:
+- `actualTwoIsPrimeNat` converts the pinned stdlib
+  `Data.Nat.Primality.prime[2]`/irreducible result into the
+  project's EXISTING `EllipticRationalPlaceSelmerExact.PrimeNat 2`
+  (whose divisor field is explicit).
+- `actualDyadicFinitePrime` and `actualDyadicPrimeLabel`
+  construct/prove the actual rational finite place labelled 2.
+- `actualDyadicLocalConditionFromSelmer` consumes the original
+  all-place `SelmerTwoElement` field and extracts its finite
+  prime-two image-membership proof.
+- `EllipticRationalPlaceTwoDescentProducerExact.agda` was repaired
+  to use `Dyadic.actualDyadicFinitePrime` directly instead of
+  **requiring** an unknown `actualTwoPrime` record field.
+- UNPAID: the `FiniteKummerImage data actualDyadicFinitePrime`
+  predicate is still an abstract local image until actual Q₂
+  points and original E[2] continuous H¹ are identified.
+
+### K1/K3: reconstruct original rational S-unit representatives
+
+`EllipticSupportedSquareClassSieveExact.agda` additionally:
+- `supportedUnitRepresentative` uses the original
+  `EllipticRationalTwoTorsionKummerExact` constants
+  `oneNZ`, `twoNZ`, `minusOneNZ`, `minusTwoNZ`.
+- `supportedPairRationalRepresentative` maps EVERY
+  16-supported-code pair into the original
+  `RationalSquareClassPairRepresentative` carrier.
+- `supportedTorsionRationalsMatchOriginalKummer` proves
+  the original four filtered torsion codes yield precisely
+  the original four **literal rational** Kummer pairs.
+- `filteredCodeRationalRepresentativeIsOriginalTorsion`
+  proves ANY finite code passing the two necessary bit filters
+  is literally an original rational torsion Kummer pair, not
+  just equivalent under a synthetic finite-seed projection.
+- UNPAID: prove every actual global Selmer H¹ class has
+  supported rational square-class coordinates with these
+  bits; this requires actual good-prime unramifiedness
+  and the dyadic/real Kummer necessary inequalities.
+
+### K3: full H¹ source-conditional Selmer exhaustion
+
+NEW `EllipticOriginalSelmerCohomologyExhaustionExact.agda`:
+- `OriginalSelmerCohomologyRealization` keeps four actual
+  original-carrier obligations plainly visible:
+  (i) original rational torsion global H¹ classes and
+  their all-place local image certificates;
+  (ii) actual good-prime S-unit support equivalence
+  for all original Selmer H¹ classes;
+  (iii) original torsion global H¹ to original rational
+  torsion Kummer representative comparison;
+  (iv) **global H¹ faithfulness** under rational
+  square-class equivalence, beyond four-bit equality.
+- `originalSelmerGlobalH1ExhaustedByActualTorsion`
+  proves, from those supplied genuine proofs and the
+  prior K1 real/dyadic evidence, that EVERY actual
+  original Selmer global H¹ class EQUALS an original
+  rational two-torsion H¹ class.
+- `originalSelmerElementH1ImageExhausted` makes the
+  same assertion against the actual all-place Selmer
+  inhabitants built from those torsion classes.
+- This is a mathematically valid *conditional* path to
+  an H¹ Selmer bound. It is not an inhabited realization
+  and has no Sha[2]/Mordell–Weil conclusion without
+  the separate classical sequence and rank argument.
+
+### K4: finite original Frobenius Euler/Hecke weld
+
+The selected seven-row Hecke module now adds:
+- `primePowerEulerCancellation`, every exponent;
+- `primePowerEulerTruncationTwo`, the exact identity
+  `(1-aT+pT²)(1+aT+(a²-p)T²)
+  =1-aₚ³ T³ + p aₚ² T⁴`;
+- `rowEulerHeckeTruncationTwo`, instantiated on the
+  ORIGINAL `SmallPrimeTruncatedEulerProductExact.rowFactorValue`,
+  using checked original Frobenius fibre-count rows;
+- `rowHeckeEulerCancellation`, every exponent and row.
+- This does NOT construct the all-prime reduction data,
+  a true level-32 newform, infinite Euler product, Bishop
+  Mellin transform or original curve central L-value.
+
+### K5: Agda golden classical-Sha non-promotion theorem
+
+NEW `EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda`:
+- Defines a literal three-element commutative additive
+  group C₃, including both identities, commutativity,
+  associativity and explicit inverses.
+- `threeTwoTorsionTrivial`: the only element killed by
+  two is zero; `threeNontrivial`: an element != zero.
+- `vanishingTwoTorsionDoesNotForceGroupTrivial`
+  constructs both proofs together. C₃ is an abstract
+  **counterexample** to the invalid inference
+  `Sha(E)[2] = 0 ⇒ Sha(E) = 0`; no claim that this
+  group is the actual Sha of this curve.
+- Odd-primary actual Sha, real periods, full leading
+  BSD formula and the universal Clay conjecture
+  remain OPEN.
+
+### Final exact acceptance cut
+
+1. Check the six new files under the actual pinned local
+   Agda 2.9 toolchain, inspect exact error logs, repair
+   elaboration/import/termination issues and rerun.
+2. K1: prove actual signed square-class and 2-valuation
+   generators, all odd-prime support, real and Q₂ local images.
+3. K2: actual continuous E[2]→E(Qbar) LES and CLASSICAL
+   local E(Qbar_v) image, Sha(E)[2] identification.
+4. K3: inhabit source-supported Selmer comparison and
+   prove rank via authentic MW/Fermat descent transport.
+5. K4: all-prime/all-n coefficient source plus actual
+   newform/Mellin and positive L(E,1) in Bishop reals.
+6. K5: odd-primary Sha, leading coefficient and universal BSD.
+
+**No source-written module has been promoted to kernel-accepted;
+there is no claimed solution of the universal BSD conjecture.**
