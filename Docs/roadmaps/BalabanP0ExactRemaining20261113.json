@@ -126,9 +126,9 @@
     {
       "id": "P0.12",
       "title": "Physical Bałaban coefficient and quartic RG remainder",
-      "reused_or_new": "combinedElevenThirdColorFactorExact; cmp109MixedDerivativeExtractsBeta; auxiliary normalized Brillouin mass exact",
-      "still_unproved": "ConfiguredPhysicalOneLoopInstance.boxCoefficientMatchesBalabanCoefficient; quarticRemainderMatchesBalabanBetaPrimeError",
-      "next_action": "Join actual singular integral and four physical quadratures, prove source coefficient and quartic remainder; no Clay promotion",
+      "reused_or_new": "combinedElevenThirdColorFactorExact; cmp109MixedDerivativeExtractsBeta; auxiliary normalized Brillouin mass exact; CompactSimpleClassificationAdjointCasimirExact.classificationStrictCasimirCarrier; BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo + classificationGroupUniversalCoefficientAtLeastElevenTwelfths; YangMillsCompactSimpleCasimirDynkinTraceExact.casimirDynkinDimensionBalance",
+      "still_unproved": "ConfiguredPhysicalOneLoopInstance.boxCoefficientMatchesBalabanCoefficient; quarticRemainderMatchesBalabanBetaPrimeError; literal Wilson/reduced-FP/Haar indexed colour contraction equals the SAME classified adjoint Casimir C_A times the selected universal scalar (not just positivity C_A>0), with actual source group and shifted-momentum Ward data",
+      "next_action": "Join actual singular integral and four physical quadratures, prove source coefficient and quartic remainder; no Clay promotion. Do NOT redo Coxeter/Dynkin or positive C_A: inherited master already proves C_A>=2 and C_A*11/24>=11/12 for all classified A/B/C/D/E/F/G. Actual beta normalization and same-source 4-diagram AST and remainder are P0.12.",
       "source_written": true,
       "kernel_checked_this_round": false,
       "physical_gate_closed": false
