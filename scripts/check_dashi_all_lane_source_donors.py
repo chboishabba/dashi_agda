@@ -105,7 +105,10 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
     assert counts["unverified_terms"] == 0
     assert counts["agda_lean_kernel_receipts"] == 0
     lookup = {r["id"]: r for r in rows}
-    assert lookup["BISHOP-ETA-EXP"]["cross_branch_state"] == "not_present_together"
+    assert lookup["BISHOP-ETA-EXP"]["cross_branch_state"] == "source_dependencies_co_located_on_pr1478_kernel_unverified"
+    assert lookup["BISHOP-ETA-EXP"]["kernel_accepted_in_this_reconciliation"] is False
+    assert lookup["BISHOP-ETA-EXP"]["source_weld_promotion"] is False
+    assert "OPEN" in lookup["BISHOP-ETA-EXP"]["missing"].upper() or "still" in lookup["BISHOP-ETA-EXP"]["missing"].lower() or "not" in lookup["BISHOP-ETA-EXP"]["missing"].lower() or "original" in lookup["BISHOP-ETA-EXP"]["missing"].lower()
     assert lookup["WORLD-1495-1484"]["cross_branch_state"] == "divergent_stack_unjoined"
     assert lookup["NS-R850-R830"]["terminal_gate_closed"] is False
     assert lookup["KARP-G3"]["terminal_gate_closed"] is False
