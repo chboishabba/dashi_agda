@@ -23,6 +23,10 @@ targets=(
   DASHI/Physics/YangMills/YMClaySUNWeightedDisjointPairFibreReparamExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonF19ConcreteWeightExact.agda
   DASHI/Physics/YangMills/YMClayOriginalWilsonPhysicalF19PartitionExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonPairSpectatorDecoderExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalMarkedReindexExact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonCanonicalBlockedMarkF19Exact.agda
+  DASHI/Physics/YangMills/YMClayOriginalWilsonPartitionEqualityDoesNotBoundRGExact.agda
   DASHI/Physics/YangMills/YMClayOriginalRealSubtractionInterchangeExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445ThreeMomentRGCutExact.agda
   DASHI/Physics/YangMills/YMClayE1D1OriginalR445QuantitativeThreeMomentRGCutExact.agda
