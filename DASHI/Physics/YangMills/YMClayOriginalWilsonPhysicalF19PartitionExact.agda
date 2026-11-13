@@ -8,8 +8,10 @@ module DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact whe
 open import Agda.Builtin.Nat using (Nat)
 open import Agda.Builtin.Equality using (_≡_)
 import Data.Vec.Base as Vec
-open import Relation.Binary.PropositionalEquality using (sym; trans; subst)
-open import DASHI.Foundations.RealAnalysisAxioms using (ℝ; 0ℝ; -ℝ_; _<ℝ_)
+open import Relation.Binary.PropositionalEquality using (cong; cong₂; sym; trans; subst)
+open import DASHI.Foundations.RealAnalysisAxioms using
+  (ℝ; 0ℝ; 1ℝ; -ℝ_; _+ℝ_; _*ℝ_; _<ℝ_;
+   mulZeroˡ; mulOneʳ; +-identityʳ)
 import DASHI.Physics.YangMills.SUNMatrixCarrier as SUN
 import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as Trace
 import DASHI.Physics.Foundations.CMP119AntigravityRealGibbsDensityPositiveExact as Exp
@@ -22,6 +24,7 @@ import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact as F19
 import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as Wilson
 import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as Codec
 import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as Ordered
+import DASHI.Physics.YangMills.YMClaySUNOriginal64Pair896MarkedEffectiveSourceExact as Marked
 
 module _
     {Matrix Complex : Set} {N : Nat}
@@ -209,3 +212,148 @@ module _
     subst (λ z → 0ℝ <ℝ z)
       (sym originalFinePhysicalPartitionEqualsActualEffectivePartition)
       (originalFullInteractingEffectivePartitionStrictlyPositive strict)
+
+  ----------------------------------------------------------------------
+  -- P0.E SAME ORIGINAL CANONICAL FINE PARTITION IS THE PHYSICAL
+  -- TWO-MARKED NORMALIZER. No second measure or independent Z oracle.
+  --
+  -- The F19 original physically sorted Wilson fine weight was
+  -- ALREADY supplied by F19Physical.physicalWeight, and the full
+  -- 2-source identity by actualF19WilsonTwoMarkTheorem. This pays the
+  -- exact zero-source literal Z_aff(0,0) identification with the
+  -- UNSORTED original 1024-link Wilson partition, including all
+  -- coupled spectators and native M.01/M.02 Haar reordering.
+  --
+  -- This is still for original coarse block TEST FUNCTIONS. The
+  -- physical Wilson-loop word -> actual native block observable
+  -- identification is a separate source-specific uninhabited weld.
+  ----------------------------------------------------------------------
+
+  module OriginalPhysicalF19TwoMarked
+      (linear : Ordered.OneLinkOrderedHaarAlgebra source) where
+
+    CoarseTest : Set
+    CoarseTest =
+      Marked.OriginalCoarseTest theory source bilateral linear
+
+    originalPhysicalF19Weight :
+      Marked.OriginalFineWeight theory source bilateral linear
+    originalPhysicalF19Weight =
+      F19Physical.physicalWeight
+        theory traceData exponential beta source bilateral linear
+
+    originalPhysicalTwoMarkedAtZeroIsOne :
+      (left right : CoarseTest) (coarse : Vec.Vec Link 64) →
+      Marked.actualTwoMarkedCoarseTest
+        theory source bilateral linear
+        left right 0ℝ 0ℝ coarse
+      ≡ 1ℝ
+    originalPhysicalTwoMarkedAtZeroIsOne left right coarse =
+      trans
+        (cong₂ _*ℝ_
+          (trans
+            (cong (λ v → 1ℝ +ℝ v) (mulZeroˡ (left coarse)))
+            (+-identityʳ 1ℝ))
+          (trans
+            (cong (λ v → 1ℝ +ℝ v) (mulZeroˡ (right coarse)))
+            (+-identityʳ 1ℝ)))
+        (mulOneʳ 1ℝ)
+
+    -- The actual F19 source selected effective density is
+    -- DEFINITIONALLY the originalFullInteractingEffectiveDensity
+    -- already constructed above: same original Wilson weight,
+    -- same spectator integrals and same 64 fibre measures.
+    originalPhysicalF19EffectiveMarkedZeroIsPartition :
+      (left right : CoarseTest) →
+      Marked.actualEffectiveTwoMarkedNumerator
+        theory source bilateral linear
+        originalPhysicalF19Weight left right 0ℝ 0ℝ
+      ≡ Haar.productIntegral source
+          originalFullInteractingEffectiveDensity
+    originalPhysicalF19EffectiveMarkedZeroIsPartition left right =
+      Original.productIntegralCongruent source
+        (λ coarse →
+          originalFullInteractingEffectiveDensity coarse *ℝ
+          Marked.actualTwoMarkedCoarseTest
+            theory source bilateral linear
+            left right 0ℝ 0ℝ coarse)
+        originalFullInteractingEffectiveDensity
+        (λ coarse →
+          trans
+            (cong
+              (λ marked →
+                originalFullInteractingEffectiveDensity coarse *ℝ marked)
+              (originalPhysicalTwoMarkedAtZeroIsOne left right coarse))
+            (mulOneʳ (originalFullInteractingEffectiveDensity coarse)))
+
+    -- True ORIGINAL fine Wilson Z, rather than independently selected
+    -- Z_aff(0,0), normalizes the full F19 two-source polynomial.
+    originalPhysicalF19FineMarkedZeroIsCanonicalPartition :
+      (left right : CoarseTest) →
+      Marked.actualOriginalFineTwoMarkedNumerator
+        theory source bilateral linear
+        originalPhysicalF19Weight left right 0ℝ 0ℝ
+      ≡ Haar.productIntegral source
+          (Original.originalWilsonVectorWeight
+            theory traceData exponential beta)
+    originalPhysicalF19FineMarkedZeroIsCanonicalPartition
+        left right =
+      trans
+        (F19Physical.actualF19WilsonTwoMarkTheorem
+          theory traceData exponential beta
+          source bilateral linear left right 0ℝ 0ℝ)
+        (trans
+          (originalPhysicalF19EffectiveMarkedZeroIsPartition
+            left right)
+          (sym originalFinePhysicalPartitionEqualsActualEffectivePartition))
+
+    -- Source-native denominator positivity from the SAME exponential/
+    -- strict Haar requirements, not a new "Z_aff > 0" postulate.
+    originalPhysicalF19FineMarkedNormalizerStrictlyPositive :
+      (strict : Ordered.OneLinkStrictlyPositiveIntegration source) →
+      (left right : CoarseTest) →
+      0ℝ <ℝ
+        Marked.actualOriginalFineTwoMarkedNumerator
+          theory source bilateral linear
+          originalPhysicalF19Weight left right 0ℝ 0ℝ
+    originalPhysicalF19FineMarkedNormalizerStrictlyPositive
+        strict left right =
+      subst (λ z → 0ℝ <ℝ z)
+        (sym
+          (originalPhysicalF19FineMarkedZeroIsCanonicalPartition
+            left right))
+        (originalCanonicalFineWilsonPartitionStrictlyPositiveFromF19
+          strict)
+
+    -- Full physical finite F19 marked numerator and SAME original
+    -- canonical Z on both sides. This proves no RG rate: the coarse
+    -- effective and distinct bare-coarse Wilson Gibbs laws generally
+    -- differ, and P0.F remains a genuine UV/IR-uniform estimate.
+    originalPhysicalF19TwoMarksNormalizeByCanonicalPartition :
+      (divide : ℝ → ℝ → ℝ)
+      (left right : CoarseTest) (s t : ℝ) →
+      divide
+        (Marked.actualOriginalFineTwoMarkedNumerator
+          theory source bilateral linear
+          originalPhysicalF19Weight left right s t)
+        (Haar.productIntegral source
+          (Original.originalWilsonVectorWeight
+            theory traceData exponential beta))
+      ≡
+      divide
+        (Marked.actualEffectiveTwoMarkedNumerator
+          theory source bilateral linear
+          originalPhysicalF19Weight left right s t)
+        (Haar.productIntegral source
+          (Original.originalWilsonVectorWeight
+            theory traceData exponential beta))
+    originalPhysicalF19TwoMarksNormalizeByCanonicalPartition
+        divide left right s t =
+      cong (λ numerator →
+        divide numerator
+          (Haar.productIntegral source
+            (Original.originalWilsonVectorWeight
+              theory traceData exponential beta)))
+        (F19Physical.actualF19WilsonTwoMarkTheorem
+          theory traceData exponential beta
+          source bilateral linear left right s t)
