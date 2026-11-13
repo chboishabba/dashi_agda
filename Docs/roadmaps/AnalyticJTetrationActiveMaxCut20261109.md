@@ -1117,3 +1117,27 @@ Both modules are now in `scripts/check_analytic_j_tetration_golden_local.sh`, al
 **Independent rational regression:** `scripts/check_bishop_log_true_norm_geometric_exact.py` executed 11,322/11,322 *exact rational* term-square, finite complex-norm and geometric upper-bound comparisons across 222 points and 17 finite cutoffs, with true moduli in the selected radius. This is a supplementary mathematical control and NOT an Agda proof. The local golden checker now registers 95 Agda target files (four new) and invokes this standalone regression; unexecuted Agda target count must never be misreported as passed.
 
 **Unchanged true analytic frontiers:** P1.N native expC Taylor-centre enclosures/squared Newton contraction and original exp/cos/sin orbit convergence; the selected exp/log branch inverse and local univalence; global Kneser continuation; Bishop↔FastCauchy arbitrary-sequence canonical completion; actual Agda Bishop zeta ↔ pinned external Lean Z7 same-value; YM physical P0.F/E1/D1/D2/N1/G1; RH Weil G2–G4. These cannot be closed by this finite logarithm result or conditional records.
+
+
+### 2026-11-13 follow-up: selected original 8/27 source now proved under the existing root interface
+
+**Original semantic owner, NOT a numerical surrogate:** `DASHI/Moonshine/AbelBishopSelectedLogEightTwentySevenNormExact.agda`, with support `DASHI/Foundations/BishopPositiveInverseUpperFromLowerExact.agda` and `DASHI/Moonshine/AbelBishopSelectedLogTrueNormRemainderExact.agda`. All are new source-written targets on this branch; the focused golden checker includes them. No local Agda 2.9 elaboration was run in the editing runtime.
+
+Original assumptions are precisely the existing selected concrete Bishop-local chart:
+`N(p) >= (27/20)^2`; `N(t) <= (1/10)^2`; `nz : BishopComplexNonzero p`; and the existing R4 `BishopSquareRootCalculus` input. Define `u=p^-1*t` by `Affine.normalizedDisplacement`, with `N(u) <= (2/27)^2` from the existing selected disk theorem.
+
+New original-reciprocal cross-multiplication theorem `positiveInverseBelowSupersolution` consumes only **original Bishop inverse**, strict denominator positivity, lower denominator order, nonnegative explicit upper, and its exact ring equality `lower*upper ≃ 1`. Two physical selected source instances derive:
+
+- `originalSelectedPInverseNormSqUpper`: actual `N(p)^-1 <= (20/27)^2` from the true `pLower`. Coupled to `Affine.originalBishopNormalizedDisplacementNormSquare`, this yields `originalSelectedRelativeNormSqBelowDisplacement : N(p^-1*t) <= (20/27)^2*N(t)`.
+- `originalSelectedGapLower`: from actual true radius `r=||u||<=2/27`, Bishop ordered-subtraction and original `Sequence.x≤y⇒0≤y-x` give `25/27 <= 1-r`. The source `originalSelectedGapInverseUpper` proves `(1-r)^-1 <= 27/25`, reusing the *actual* Step-V Bishop geometric reciprocal.
+
+The final source term `originalSelectedSharpValueBelowEightOverTwentySeven` combines both true-denominator inequalities with previously source-written finite-to-Bishop-limit true-norm log bound. The theorem **`originalSelectedLogQuadraticEightOverTwentySeven`** is on the literal existing selected Bishop series tail `Tail.selectedOriginalLogQuadraticTailLimit`:
+
+```text
+|| R2(p^-1*t) || <= (8/27)*N(t)
+(1/2)*(20/27)^2*(27/25) = 8/27
+```
+
+This is the intended **exact local Bishop P1.L numerical coefficient** in original source terms, with no forged order oracle or independent “given R2” object. There are no new `postulate` declarations, holes, or alternate original log/evaluator sources.
+
+**Fail-closed status:** this closes more *proof-source construction*, NOT the actual P1.L kernel gate or unconditional constructive root semantics. The `R4.BishopSquareRootCalculus` still has no source inhabitant: only Nat-specific floor-root approximations were found elsewhere (not an arbitrary Bishop-real root). Source Agda 2.9 elaboration remains unobserved. The exact original selected fixed point p lower norm, P1.N Taylor/Nevton continuity, genuine exp/log inverse, local univalence and global Kneser continue OPEN. The 95+ golden registered targets and independent rational tests are not proof acceptance.
