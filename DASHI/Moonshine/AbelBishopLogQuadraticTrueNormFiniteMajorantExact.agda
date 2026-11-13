@@ -188,8 +188,8 @@ originalBishopQuadraticZeroPrefixNormIsZero roots w =
     zeroSquare =
       let open BishopP.ℝ-Solver
       in solve 0
-        (((Κ 0ℚᵘ) ⊗ (Κ 0ℚᵘ)) ⊕
-          ((Κ 0ℚᵘ) ⊗ (Κ 0ℚᵘ))
+        ((((Κ 0ℚᵘ) ⊗ (Κ 0ℚᵘ)) ⊕
+           ((Κ 0ℚᵘ) ⊗ (Κ 0ℚᵘ)))
           ⊜ ((Κ 0ℚᵘ) ⊗ (Κ 0ℚᵘ)))
         BishopP.≃-refl
     zeroNonnegative =
