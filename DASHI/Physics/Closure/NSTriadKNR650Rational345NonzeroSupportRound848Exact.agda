@@ -33,6 +33,11 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
+import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+import DASHI.Physics.Closure.NSTriadKNComConcreteActiveOddPQTriadRound62Exact as Unit
+import DASHI.Physics.Closure.NSTriadKNR650Rational345ActiveRepositoryReductionRound837Exact as R837
+import DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact as Direct
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNR650Rational345MixedOutputSupportRound848Exact as Original848
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ForcingSupportMaxCutRound846Exact as R846
@@ -60,3 +65,26 @@ inactiveNonzeroFibreEmpty mode inactive nonzero =
 round846RepairedF1FromOriginalR848 :
   R846.InactiveActiveFibreEmpty
 round846RepairedF1FromOriginalR848 = inactiveNonzeroFibreEmpty
+
+-- Construct a real source-specific R837 modal same-object receipt for
+-- the literal direct physical snapshot using R844's active forcing
+-- rows, original R848 for nonzero support, and R436 for zero output.
+-- This is stronger than an isolated certificate of finite-list shape.
+F : C3.RealField _
+F = Rational.rationalRealField
+
+module ActualDirectPhysicalModal
+    {E : C3.IntegerEmbedding F}
+    (unit : Unit.UnitPreservingIntegerEmbedding F E)
+    (I : C3.ModeInverseSquare F E) where
+
+  module CompletedR846 =
+    R846.Evaluate unit I round846RepairedF1FromOriginalR848
+
+  originalR837ModalSameObject :
+    R837.Repository345ModalSameObject (Direct.directPhysicalSystem E I)
+  originalR837ModalSameObject = CompletedR846.modalSameObject
+
+-- This does NOT claim all R829D helical 8x2 vector rows via this route;
+-- those are separate, and R850 already directly closes the instantaneous
+-- physical selected-rate snapshot by its R849/R847 global folds.
