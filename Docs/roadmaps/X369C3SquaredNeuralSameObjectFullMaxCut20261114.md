@@ -118,3 +118,32 @@ Operational rule: use repo AGENTS.md / Docs/AgentOperationalNotes.md and pinned 
 ## Explicit decision outcomes
 
 If F2/F3 fail, the learned circuit assertion is unsupported even if F4/F5 C3-invariant features reduce CE. If F2/F3 pass without F4/F5 predictive gain, report a mechanism with no demonstrated advantage at the chosen budget. F4 development improvements are biased by best-step selection; F5 must independently confirm on a locked same-corpus control. F6 requires new matched capacity/compute and cannot be folded into the existing 2-arm F4 result after the fact. Physical continuum statements, Monster/Leech, D4/S3 and semantic triadic-face interpretations require separately selected input/output intertwiners and are NOT proved by these finite group identities.
+
+## 2026-11-14 maximum-cut implementation receipts — source-written versus accepted
+
+**Agda sources added on this same PR #1442:**
+
+| Source file / declaration | Proposed gate partially paid | Actual state |
+|---|---|---|
+| `DASHI/Cognition/PNF/X369FiniteTorusAndRouterActionWeldExact.agda`: `sameTorusFirstCharacterEigen`, `sameTorusSecondCharacterEigen`, `sameTorusFirstActionOrderThree`, `sameTorusSecondActionOrderThree`, `sameTorusActionsCommute` | A01 selected common torus + eigenaction | SOURCE-WRITTEN, selected Agda kernel OPEN |
+| Same file: `directedChannelsSimultaneousC3Invariant` and explicit `relativePhaseOriginalChannels` / `relativePhaseShiftedChannels` | B01/B02 symbolic source polynomial and one-sided witness | SOURCE-WRITTEN on ℕ semiring only; signed-real original activation weld OPEN |
+| `DASHI/Cognition/PNF/X369OriginalTorusCharacterOrthogonalityExact.agda`: `originalTorusC3SquareCharacterOrthogonality` | A02 original torus exact 9x9-character orthogonality | SOURCE-WRITTEN in Z[omega], 81 explicit cases, kernel OPEN |
+| `scripts/check_x369_finite_original_torus_maxcut.sh` | A06 selected leaf checker entrypoint | IMPLEMENTED; actual Agda 2.9/authoritative pinned receipt OPEN |
+
+The 81 algebraic character-pair orthogonality cases were also checked independently by an exact integer Z[omega] verifier outside Agda (81/81). This is NOT proof that the just-written Agda module typechecks; it is a preflight arithmetic receipt only. A03 convolution/inverse, A04 Parseval/real descent, A05 centred puncture bijection, A06 complete kernel acceptance remain OPEN until genuine same-carrier Agda proofs/replay exist.
+
+**Leech PR #4 corresponding source implementation (commit 45a8bbc and later):** F1 full hidden d×d/cross-triad/cluster bootstrap; original source C3/C3² feature-action report; nonpersistent routing-site intervention hooks; F3 causal CE runner requiring frozen original F4 candidate; optional F6 three-arm screen using new `punctured9_wave_matched` nonlinear fixed feature lift and prior official F4/F5 receipt exclusion. The three-arm new geometry has same 2d router *parameter dimensions*, but not demonstrated equal effective feature capacity. A further F2 held-out task-orbit supervised linear-phase readout probe is a source-implementation deliverable only; it is not an actual trained original model Fourier circuit, and its manifest is source-attested until independently verified.
+
+**Exact remaining Agda lemmas after source implementation (none silently closed):**
+- A03 `c3x3FourierConvolutionSameCarrier`: full normalized convolution theorem + inverse on original nine-point carrier
+- A04 `c3x3ConjugationParsevalAndReality`: conjugate/Parseval and all nine Fourier coefficients
+- A05 `c3x3PunctureCentreGaugeBidi`: nine-sheet and pointed-eight real source chart with retained centre
+- A06 `c3x3AgdaKernelSelectedSourceAccepted`: pinned repository-checker receipts and no hidden assumptions
+- B01/B02/B04/B05: transport polynomial and Fourier pair mathematical actions to *actual signed real model*, selected router source, top-k/tie and recurrent history
+- C01–C08: real task group action, supervised readout limitation, unseen actual learned phase composition, causal CE, semantic validation and original consumer BIDI
+- D01–D12: full original model recurrent evidence, documentary data independence, matched CE, frozen F5, three-arm F6 separate final, compute Pareto
+- X369-B/C/D/E/G: atomic, NS, YM, quantum and Monster physical/semantic source maps, still independent OPEN frontiers
+
+**Kernel command:** `DASHI_NO_TMUX=1 scripts/check_x369_finite_original_torus_maxcut.sh`, which delegates to the existing pinned `scripts/run_agda29_parallel_check.sh`; subsequently run authoritative Track A flake checks before promotion. No Agda checker was executable in the current environment, and no fresh kernel result is claimed.
+
+**Formal status:** P1 mathematical source progressed materially, Agda acceptance still OPEN; P2/P3 source code implemented in Leech, neural evidence OPEN; P4/P5 original GPU/data gates OPEN; P6 matched three-arm code implemented but native/new-data and independent final F6 OPEN; P7 original physical source gates OPEN. Keep mathematical proof, experimental code, source-level tested invariants, real GPU measurements and interpretive claims in separate status columns.
