@@ -56,3 +56,6 @@ import DASHI.Physics.YangMills.YMClayR445LocalizedTVInferenceNoGoExact
 
 -- External OpenAI 2026 Lean YM claim/review: source receipt ONLY; no Agda proof import.
 import DASHI.Research.OpenAIMath.OpenAIYangMills2026SourceIntakeExact
+
+-- Broader OpenAI math 208-entry source crosswalk, six reviewed scope firewalls.
+import DASHI.Research.OpenAIMath.OpenAIMathCrosswalkReview20261114
