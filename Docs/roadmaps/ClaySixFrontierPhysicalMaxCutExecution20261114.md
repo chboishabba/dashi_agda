@@ -546,7 +546,7 @@ independent finite logical audit, not new existence/mass-gap mathematics.
 
 **Canonical detailed ledger and source attribution:**
 `Docs/roadmaps/ClayOpenAIThreeFrontierBidirectionalSteelman20261114.md`
-(29 exact source/analytic gates). This adds to, rather than overwrites, the
+(26 A/B/C gate rows, with Karp F1–F4 grouped in one row). This adds to, rather than overwrites, the
 prior six-frontier A/B/C register. Newly inspected external pins are separate:
 October YM Lean 4.32.0, September NS Lean 4.34.0-rc2, October OAI #SAT
 Lean 4.34.1. Do NOT identify the later 7ef5 OAI index with the older
