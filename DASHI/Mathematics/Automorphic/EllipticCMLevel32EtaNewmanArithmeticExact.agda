@@ -27,7 +27,8 @@ open import Agda.Builtin.Nat using (Nat; _+_; _*_)
 
 import DASHI.Mathematics.Automorphic.EllipticCMJacobiThetaCheckedRowsExact as Theta
 import DASHI.Mathematics.Arithmetic.EllipticCurveSmallPrimeFrobeniusExact as Frobenius
-open import Data.Rational.Base using (1ℚ)\nopen import Data.Product using (_×_; _,_)
+open import Data.Rational.Base using (1ℚ)
+open import Data.Product using (_×_; _,_)
 
 level : Nat
 level = 32
