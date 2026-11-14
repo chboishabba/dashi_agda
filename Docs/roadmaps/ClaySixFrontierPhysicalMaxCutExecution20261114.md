@@ -578,3 +578,18 @@ list/Finset CNF formulas and four abstract forced/unforced scope models,
 with unused-variable, duplicate and empty-clause controls. It is now
 registered in the single Agda/Lean rollup acceptance driver. No exact
 new Agda 2.9 or Lean 4.28/4.32/4.34 kernel receipt is claimed.
+
+
+## 15 November: TOE A/B/C/D / R³ source-faithful correction
+
+**Canonical correction:** [ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md](ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md).
+Earlier six-frontier rows focusing on periodic R736 **under-counted the existing NS programme**. They remain historically correct as the specific B proof attempt, not as an exhaustive A/B/C/D account.
+
+- A / unforced ℝ³: actual `NSWholeSpaceCanonicalPairSaturationOriginExact` pair resolvents, `NSWholeSpaceProjectedSaturationOriginBoundExact` near-origin bound and `NSWholeSpaceR3RadialFactorBudgetExact` inverse-cube measure-aware compiler already source-written. Outstanding: physical (q=|\xi|^2) second-moment gain, actual radial/Fubini and finite-energy majorant, then A continuation. No need to restart abstract resolvent calculation or demand unphysical `|xi|^6` pointwise compensation.
+- B / unforced T³: R568/R650 two genuine physical payment leaves; R571 finite dissipation fold consumed in TOE; R71/R74 original finite quadratic Galerkin RHS and R854 negative-rate/real-integral conditional work remain separate B validation lanes. Original physical R853 rate along a real solution and uniform B continuation are open.
+- C/D / forced breakdown: `dashi_lean4/ExternalClayNS` **already** has independent `ClaySpec.lean`, `Gap.lean`, `ClauseAudit.lean`, `ProvenanceAudit.lean`, `SubmissionAudit.lean` direct C/D proof terms and `LiteralABCD.lean` `literalAnyOneClayResolution`. Earlier source-written elementary C/D no-universal-forced corollaries add no new mathematical result. External construction remains attributed to OpenAI; DASHI's independent formal specification/semantic audit retains separate credit. No independent physical certification is asserted.
+- Exact external pin correction: nested `ExternalClayNS/lakefile.toml` references `openai/NavierStokesAndEuler@f9e8bc5b38b6e212696e8a30e3e91517af887bbd` on Lean 4.34.0-rc2, **one commit later** than the prior sampled `8937a8f4...`. Current C/D proof spines use `NavierStokesR3.theorem_1_1` / `comparator_of_breakdown` and `PeriodicPaper.periodic_corollary` / `option_D_of_paper_candidate`.
+- Independent exact SymPy 1.14.0 regression `scripts/check_ns_abcd_r3_toe_sympy_20261115.py` on Git blob `2b70c3cc0323abe7ce04c80e94668a9d6109a6af` passed: pressure commutator (\int_{\mathbb R^3}K_R^{4/3}=16\pi/R), paid A radial factor (q(\nu q)^{-3}(qG)(qQ)=GQ/\nu^3), missing-second-q origin divergence, and literal R854 rational negativity. **Finite/symbolic analytic receipt, not an Agda/Lean kernel or physical source-equivalence proof.**
+- Added fail-closed paired source and optional local-kernel script `scripts/check_ns_toe_abcd_pinned_local_20261115.sh`; registered `source-only` in single six-frontier Clay driver. This execution environment lacks `agda`, `lake`, `lean` and `nix` and cannot clone the repositories, so **the new external and Golden exact-head kernels remain unrun in this turn**.
+
+The full NS programme remains A/B/C/D; the TOE `Everything` and `NavierStokesClayFrontierTOEConvergenceValidation` carry non-promotion contracts and do not upgrade finite/structural truths into general PDE solutions.
