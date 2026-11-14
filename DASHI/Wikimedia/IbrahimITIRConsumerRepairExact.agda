@@ -177,7 +177,7 @@ firstLinkRepairDoesNotPayAllConsumers =
 -- query identity and licensing evidence remain attached to the caller.
 ------------------------------------------------------------------------
 
-consumerObservablePreservedByReviewedAlignment :
+consumerObservablePreservedByEvidenceScopedLicence :
   ∀ {A B OutA OutB Common : Set}
     {observeA : A → OutA} {observeB : B → OutB}
     {toCommonA : OutA → Common} {toCommonB : OutB → Common} →
@@ -190,53 +190,59 @@ consumerObservablePreservedByReviewedAlignment :
       (Heterogeneous.mapRepresentation
         (Heterogeneous.underlyingLicence licensed) x))
     ≡ toCommonA (observeA x)
-consumerObservablePreservedByReviewedAlignment licensed x =
+consumerObservablePreservedByEvidenceScopedLicence licensed x =
   Heterogeneous.heterogeneousConsumerPreservation
     (Heterogeneous.underlyingLicence licensed) x
 
 ------------------------------------------------------------------------
 -- Existing ITIR source comparison + bounded repair stay separate from
 -- source mutation. The caller must provide a revision-pinned comparison
--- and a reviewed repair with a preservation witness for the selected
--- consumer. This contract never manufactures a Wikipedia edit.
+-- and a CANDIDATE repair with a preservation witness for one selected
+-- consumer. Textual review references never certify human review or an
+-- independent replay; this interface cannot manufacture Wikipedia edits.
 ------------------------------------------------------------------------
 
-record ReviewedSourceBoundRepair
+record SourceBoundRepairCandidate
   {State Outcome : Set}
   (query : State → Outcome)
   (left right : ITIR.SourceObservation)
   (consumer : ITIR.ConsumerLicence) : Set where
-  constructor reviewedSourceBoundRepair
+  constructor sourceBoundRepairCandidate
   field
     sourceComparison : Weld.RevisionBoundComparison left right consumer
     boundedRepair : Transport.ConsumerBoundedRepair State Outcome query
-    reviewReceipt : String
-    recheckReceipt : String
+    reviewObligationReference : String
+    rerunObligationReference : String
+    candidateOnly : Bool
+    candidateOnlyTrue : candidateOnly ≡ true
     createsWikipediaEdit : Bool
     createsWikipediaEditFalse : createsWikipediaEdit ≡ false
 
-open ReviewedSourceBoundRepair public
+open SourceBoundRepairCandidate public
 
-reviewedRepairRerunSound :
+-- This is algebraic consumer preservation given the supplied
+-- ConsumerBoundedRepair witness. It does not prove a review occurred,
+-- that any Wikipedia page changed, or that an external re-parser ran.
+candidateRepairPreservesSelectedConsumer :
   ∀ {State Outcome : Set}
     {query : State → Outcome}
     {left right : ITIR.SourceObservation}
     {consumer : ITIR.ConsumerLicence} →
-  (caseReceipt : ReviewedSourceBoundRepair query left right consumer) →
+  (caseReceipt : SourceBoundRepairCandidate query left right consumer) →
   (state : State) →
   query (Transport.repair (boundedRepair caseReceipt) state)
     ≡ query state
-reviewedRepairRerunSound caseReceipt state =
+candidateRepairPreservesSelectedConsumer caseReceipt state =
   Transport.consumerPreservation (boundedRepair caseReceipt) state
 
-reviewedRepairDoesNotPromoteSourceTruth :
+candidateRepairDoesNotPromoteSourceTruth :
   ∀ {State Outcome : Set}
     {query : State → Outcome}
     {left right : ITIR.SourceObservation}
     {consumer : ITIR.ConsumerLicence} →
-  (caseReceipt : ReviewedSourceBoundRepair query left right consumer) →
+  (caseReceipt : SourceBoundRepairCandidate query left right consumer) →
   ITIR.createsPropositionTruth
     (Weld.compared (sourceComparison caseReceipt)) ≡ false
-reviewedRepairDoesNotPromoteSourceTruth caseReceipt =
+candidateRepairDoesNotPromoteSourceTruth caseReceipt =
   ITIR.comparisonNeverPaysTruth
     (Weld.compared (sourceComparison caseReceipt))
