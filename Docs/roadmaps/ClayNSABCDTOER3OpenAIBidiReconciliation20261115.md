@@ -26,22 +26,22 @@ The actual nested `ExternalClayNS/lakefile.toml` pins `openai/NavierStokesAndEul
 ## Nontrivial exact analytic cross-pollination (new independent symbolic receipt)
 
 OpenAI `NavierStokes/R3PressureKernel.lean` (same upstream source package) defines the nonnegative radial pressure-commutator majorant for R>0:
-[
+$
  K_R(x)=|x|^{-3}\min(|x|/R,1).
-]
+$
 For standard ℝ³ Lebesgue measure, the exact elementary integral is
-[
+$
 \int_{\mathbb R^3}K_R(x)^{4/3}dx
 =4\pi\left[R^{-4/3}\int_0^R r^{-2/3}dr
 +\int_R^\infty r^{-2}dr\right]
 =\frac{16\pi}{R}.
-]
+$
 The near and far contributions are respectively `12*pi/R` and `4*pi/R`; hence the norm is `(16*pi/R)^(3/4)`. This **confirms** the published \(R^{-1}\) moment scaling and supplies an explicit standard-volume constant at the level of an independent calculation. It is not a Lean theorem of the displayed constant until formalized. It helps for **large-radius remote boundary** \(R\to\infty\), but blows up as \(R\to 0\) and cannot be imported as a uniform small-collar reserve. The pressure commutator is not definitionally the DASHI Fourier resolvent; a precise kernel/force/geometry correspondence is a separate A/B donor gate.
 
 For DASHI Lane A, let \(q=|\xi|^2>0\), \(a=\nu q\), with \(\nu>0\). The original radial factor compiler gives the independent algebraic equality
-[
+$
  q\,a^{-3}\,(qG)(qQ)=\frac{GQ}{\nu^3}.
-]
+$
 **Both** factors are required: if the physical signed second-moment producer does not supply its expected \(q\), the residual is \(GQ/(\nu^3 q)\), whose radial \(q=r^2\) model behaves like \(r^{-2}\) and is not integrable near zero for nonvanishing \(GQ\). Conversely, cancellation of the origin alone does **not** establish integrability at infinity: the majorant \(GQ\) must itself decay/integrate. Thus the genuinely missing witness is **the original physical second-moment q-gain plus actual radial/Fubini and global majorant**, not an invented \(|\xi|^6\) pointwise estimate or another algebraic wrapper.
 
 For B/R854, the exact original finite scalar values are \(r_0=-28273644/125\), \(L=391309593930357307785216\), \(T=226189/3938540454339300631433585885184\); symbolic simplification gives \(r_0+LT=-284574877153831/1258128000<0\) and the integrated affine bound \(r_0 T+LT^2/2<0\). This is **not** a real Galerkin trajectory: B3 still requires the literal R71/R74 RHS and R853 *actual* rate along the solution.
