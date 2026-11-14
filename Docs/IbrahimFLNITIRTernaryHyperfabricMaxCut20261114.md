@@ -272,3 +272,34 @@ The `--certificate-output` option is for bounded input; manifest identifiers mus
 ### Final non-promotion correction (QID/source acquisition)
 
 The I9 candidate runtime now emits `qid_identity_paid=false` and `source_retrieval_paid=false`, independently of the syntax of `Q5891`, the candidate same-QID comparison, and the presence of a claimed Wikipedia `oldid`. The original-language wikitext SHA/selected span are verified **relative to caller-supplied bytes**, while the caller's source authentication and Wikidata item-sitelink identity require **separate** original-object receipts. A successful author's-behavioural-port match does not set `first_qualifying_link_soundness_paid` to true for the historical source. Test ledger is updated in the **same PR** to 28/28 after these explicit negative flags (source commits `4d8b6188`, `4ad09b4b`). This is a valid *candidate producer* but not a review/authority/execution grant.
+
+
+## 2026-11-14 external local discriminator follow-up — A1 isolated checks accepted
+
+**Verifier report provenance:** The user supplied the local command/execution summary for PR #1505 at exact fetched head `f573eca542959229f6b0dc9df4074720efa0d99d`. This section is a **user-reported deterministic verification receipt** and not a fabricated machine-generated stdout/stderr artifact. Scientific credit for original FLN remains Ibrahim, Danforth and Dodds, DOI `10.1016/j.jocs.2016.12.001`; this verification is a subsequent DASHI action and not a source theorem claim.
+
+### Reported results, toolchain, and exact scope
+
+| Gate | Toolchain and command | Reported result | Acceptance |
+| --- | --- | --- | --- |
+| Python suite | Python 3.13, `python3 -m unittest discover -s tests -p 'test_ibrahim*.py'` | 28/28 PASS, 1.089 s; includes 5,000 bounded random graph/revision pairs, author-parser-port and candidate-source negative controls | **A1 Python CLOSED locally** |
+| Five isolated source modules | Agda **2.9.0** and **2.8.0.2**, safe checking | All five checked without unsolved metas, holes or proof escapes | **A1 isolated kernel CLOSED locally, conditional on dependency environment below** |
+| P2 new periodicity | Both above compilers | `iterateAppend`, `positiveCycleRepeats`, `eventualCycleReturnsAfterEveryPeriodMultiple` PASS | **P2 periodicity subgate CLOSED** |
+| Unified check script | Bash + Python + Agda | `check_ibrahim_fln_maxcut.sh` reported exit 0 | **A1 focused wrapper CLOSED locally** |
+| Wikimedia umbrella | `DASHI/Wikimedia/Everything.agda` | 2.9 transitive ~4,940 modules exceed 8-GiB memory watchdog; 2.8 encounters unrelated legacy physics parsing errors | **Aggregate OPEN; different obstruction from isolated theorem failures** |
+
+**Reproducibility qualifier:** the verifier explicitly reported applying **`fix/core-agda-level-scoping` at commit [`0dc254eabe`](https://github.com/chboishabba/dashi_agda/commit/0dc254eabeb00c4fdf1dc6d6f1a0e013d05d9606)** when checking `IbrahimITIRConsumerRepairExact`. GitHub commit inspection confirms this is a distinct 4-file change to `DASHI/Core/TypedDependencyCore.agda`, `AdmissibleReachability.agda`, `FutureObservationLanguageQuotientExact.agda`, `ReopenableConsumerInterventionKernelExact.agda`, restoring `Set` sorts. **That fix is not counted as part of the Ibrahim PR head merely because the verifier used it.** Full acceptance against an entirely unmodified PR branch requires either (a) the base incorporating the fix, or (b) a separately documented, reviewed dependency patch. Do not silently modify those four core files as Ibrahim-owned theorem work.
+
+**The completed formal result is narrower than scientific replication:** safe local typechecking of supplied finite orbits, seven-node basin certificates, conditional typed Hyperfabric projection, synthetic consumer-repair counterexample and revision transport. It does not prove `finiteFirstLinkOrbitClassifies` for every finite graph, nor licensed source-backed cross-language repair, nor published historical full-corpus producer identity.
+
+### Revised exact outstanding frontier (post A1)
+
+- **A2 (kernel, high alpha):** `finiteFirstLinkOrbitClassifies` (finite enumeration + decidable equality + repeated-vertex extraction); `terminalCycleUniqueUpToRotation` and `terminalBasinsPartition` (unique canonical eventual terminal independent of start-path traversal); `terminalCensusMatchesCertificate` (formal checker–producer semantics). Existing Python exhaustive certificates plus 5,000 random differential tests are **executable evidence**, not substitutes for these Agda theorems.
+- **A3/I9 (real source):** acquire *actual* two-edition revision-pinned Wikipedia wikitext and verified Wikidata identity/sitelinks; `actualSelectedEdgeProjectsToFirstLink`, `consumerObservablePreservedByEvidenceScopedLicence` under real evidence, `reviewedRepairRerunSound` with independent after-state parser; retain original versions and human review authority. Current fixture remains `qid_identity_paid=false` and `source_retrieval_paid=false`.
+- **B1 (revision/ITIR):** `oldReverseClosureContainsAllChangedTerminals`, `queryProjectionInvariantOutsideDirtyCone`, `repairedTranslationReopensOnlyAffectedDependents`, `pageIdentityTransportPreservesConsumerQuery` across redirects/deletions/revision ID migrations. The finite same-carrier Python witness is already tested, not proof of arbitrary consumer invariance.
+- **B2 (typed hyperfabric/ternary):** `selectedEdgeHasRevisionSpanReceipt`, `incidenceAndRestrictionCompatibleForSelectedEdge`, `trajectoryTritEncodingInjectiveOrResidual`, `alignedPrefixDepthSound`; distinguish source navigation links, signed comparative observations and semantic authority.
+- **C (empirical):** historical dump/chunk/producer full replay; current multilingual census with explicit edition/date and source-coverage/confounder receipts; no cultural causal claim promoted.
+
+### Aggregate verification plan
+
+The A1 isolated local check is accepted as the relevant focused kernel result, rather than requiring the entire 4,940-module umbrella as a precondition to prove any new Ibrahim lemma. Aggregate remains a **repository integration gate**. To close it, record the *first actual failure* for 2.8 legacy source parsing separately from the memory-limit failure on 2.9; use bounded sub-aggregates or a split-check target that includes the entire Ibrahim dependency closure without dragging unrelated physics imports. Preserve source/stdlib/toolchain hashes, exit codes and core-fix dependency identity. Do not treat an 8-GiB watchdog as a mathematical counterexample or claim that no other aggregate errors exist.
