@@ -1,0 +1,801 @@
+{
+  "schema": "dashi-clay-portfolio-integration-v1",
+  "date": "2026-11-14",
+  "status": "pinned GitHub head snapshot; source-ledger only; no merge or kernel proof",
+  "repositories": {
+    "agda": {
+      "repository": "chboishabba/dashi_agda",
+      "baseline_ref": "master",
+      "golden": "pinned Nix Agda local root checker"
+    },
+    "lean": {
+      "repository": "chboishabba/dashi_lean4",
+      "baseline_ref": "main",
+      "golden": "pinned Lean/mathlib local kernel check and #print axioms"
+    }
+  },
+  "attribution_policy": "AGENTS.md and Docs/SourceAttributionPolicy.md: DOI/URL when available, first source implementation != later validation != PR != merge; never attribute new DASHI results to external authors",
+  "references": [
+    {
+      "author": "Martin Lundfall",
+      "title": "Formalizing Real Numbers in Agda",
+      "year": 2015,
+      "url": "https://ncatlab.org/nlab/files/Lundfall-RealNumbersInAgda.pdf",
+      "scope": "historical equivalence-relation construction; text has an unproved Bishop lemma"
+    },
+    {
+      "author": "Zachary Murray",
+      "title": "Constructive Analysis in the Agda Proof Assistant",
+      "year": 2022,
+      "doi": "10.48550/arXiv.2205.08354",
+      "url": "https://arxiv.org/abs/2205.08354",
+      "scope": "Bishop real arithmetic, ordered field and completeness"
+    },
+    {
+      "author": "Viktor Csimma and contributors",
+      "title": "Bishop constructive real software continuation",
+      "url": "https://github.com/viktorcsimma/bishop",
+      "scope": "pinned vendor implementation; check exact vendor hash"
+    },
+    {
+      "authors": "Andrea Vezzosi, Anders Mörtberg, Andreas Abel",
+      "title": "Cubical Agda: A Dependently Typed Programming Language with Univalence and Higher Inductive Types",
+      "year": 2019,
+      "doi": "10.1145/3341691",
+      "scope": "Cubical comparison and quotient backend, not automatic standard-Agda legacy rewrite"
+    },
+    {
+      "author": "Vladimir Voevodsky",
+      "title": "Univalence foundations",
+      "scope": "foundational attribution only; no complete imported real backend asserted"
+    }
+  ],
+  "pr_heads": [
+    {
+      "repository_group": "agda",
+      "pr": 1408,
+      "sha": "28d85aa529155352a025de9e12853ecad1e4214e",
+      "lane": "Bishop_eta_RH",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1444,
+      "sha": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
+      "lane": "YM_constructed_real_L7",
+      "wave": 2,
+      "state": "open",
+      "previous_snapshot_sha": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "latest_update_date": "2026-11-14"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1445,
+      "sha": "b3915126edd096cd09ce7cc1b1b195e75d9e9e87",
+      "lane": "Karp21_PNP",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1460,
+      "sha": "ed4cd2edf5f9692f015dca7cf1e5439b5eb87ebb",
+      "lane": "TSVF_KK",
+      "wave": 3,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1472,
+      "sha": "36db4df129ceff68e0d4e5b574bf2ef60202e657",
+      "lane": "Monster_VOA",
+      "wave": 3,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1474,
+      "sha": "5348713358c23f6b7e638cfb181bcb7e999645b1",
+      "lane": "Karp21_FRACTRAN",
+      "wave": 2,
+      "state": "open",
+      "previous_snapshot_sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "latest_update_date": "2026-11-14"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1478,
+      "sha": "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872",
+      "lane": "Bishop_eta_Koenigs",
+      "wave": 2,
+      "state": "open",
+      "previous_snapshot_sha": "c66dc4ec53f98971925a82603b5c97a338f9ae7e",
+      "note": "New original expC add from real Bishop exp + two source trig laws, finite eta selected theorem composition; kernel-open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1484,
+      "sha": "6c829bdf0d284dca393abecbebfb13e939908d56",
+      "lane": "Lean_world_ingest",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1494,
+      "sha": "a3e0e9cfdcce8bc3aa6c1a0a31fd2f90f8b2bedd",
+      "lane": "Lean_world_native_admission",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1495,
+      "sha": "53db64eea732920eb7841bd06e9816defd91646c",
+      "lane": "Lean_world_builder",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1497,
+      "sha": "f213b5bfb893e49ae9b29b2915257884b3b0e14e",
+      "lane": "RH_zeta_Bishop",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1498,
+      "sha": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "lane": "YM_original_diagrams",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1499,
+      "sha": "e8c06cfbfdc3ec07c75f62a1bbca58f08794e280",
+      "lane": "All_Clay_ledgers",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1500,
+      "sha": "5c01456abb4a6126bec02804af6f42cdfb7e953b",
+      "lane": "BSD_Kummer_CM_L32",
+      "wave": 2,
+      "state": "open",
+      "previous_snapshot_sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
+      "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof",
+      "latest_update_date": "2026-11-14"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1501,
+      "sha": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+      "lane": "NS_zero_mode_modal",
+      "wave": 2,
+      "state": "open",
+      "previous_snapshot_sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "latest_update_date": "2026-11-14"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 40,
+      "sha": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672",
+      "lane": "Hodge_cycle_class",
+      "wave": 1,
+      "state": "merged"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 50,
+      "sha": "2384d90f1a2c23dc59c072425e7efbc040405032",
+      "lane": "RH_Weil_gap",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 51,
+      "sha": "b54358c5b5c29b3bc37f1948bb1b6f878573f744",
+      "lane": "NS_C_D_and_PNP",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 104,
+      "sha": "dbda83aec4b6aa07746d5c692d2d99440872bda1",
+      "lane": "Bishop_log_pi_zeta",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 107,
+      "sha": "96d1a0ea2422769ef07afad6f513df39e9de6519",
+      "lane": "BSD_K1_K5",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 108,
+      "sha": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87",
+      "lane": "RH_negative_fifth_control",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 109,
+      "sha": "317ff04a74e51f35d72e7784e3de2999f32ab15b",
+      "lane": "NS_C_smoothness",
+      "wave": 2,
+      "state": "open"
+    }
+  ],
+  "dont_reopen": [
+    {
+      "lane": "YM",
+      "pr": 1444,
+      "owner": "originalFinePhysicalPartitionEqualsActualEffectivePartition",
+      "limitation": "source-written physical F19 partition equality, not P0.F moment estimates"
+    },
+    {
+      "lane": "YM",
+      "pr": 1444,
+      "owner": "actualF19WilsonNormalizedTwoMarkTheorem",
+      "limitation": "normalized marked formula, not cutoff uniform error"
+    },
+    {
+      "lane": "Bishop",
+      "pr": 1478,
+      "owner": "originalBishopExpFactEqualsNativeExp",
+      "limitation": "actual complex factorial/native exp proof source, kernel acceptance open"
+    },
+    {
+      "lane": "Bishop",
+      "pr": 1478,
+      "owner": "originalEtaDyadicScaleFromLogAndExp",
+      "limitation": "uses two uninhabited exact original analytic laws"
+    },
+    {
+      "lane": "NS",
+      "pr": 1501,
+      "owner": "R847 zero-output actual counterexample; R848 nonzero support",
+      "limitation": "repairs false short route; original real-time rate open"
+    },
+    {
+      "lane": "Karp",
+      "pr": 1474,
+      "owner": "original all-word gamma / FRACTRAN reader",
+      "limitation": "literal N21 bit clock and NP obligations open"
+    },
+    {
+      "lane": "BSD",
+      "pr": 1500,
+      "owner": "Kummer 16 to 8 to 4 original square-class sieve",
+      "limitation": "full K1–K5 remain"
+    },
+    {
+      "lane": "Hodge",
+      "pr": 40,
+      "owner": "genuine rational algebraic-cycle and correspondence-action Lean proof owner",
+      "limitation": "Lean PR #40 already merged, not the universal Hodge conjecture"
+    },
+    {
+      "lane": "Lean-world",
+      "pr": 1495,
+      "owner": "native content-addressed proof builder contract",
+      "limitation": "cannot certify Agda proof from a Lean theorem without a faithful transfer"
+    }
+  ],
+  "joins": [
+    {
+      "id": "BISHOP_ETA_L_E",
+      "donors": [
+        1408,
+        1478
+      ],
+      "exact": "Source-level dyadic Nat-log law and original Bishop expC addition, then compact-uniform eta",
+      "kind": "weld+analysis",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "BISHOP_REAL_LEGACY",
+      "donors": [
+        1444,
+        1478
+      ],
+      "exact": "Setoid interpretation of legacy original Wilson/Haar real carrier without assuming propositional equality",
+      "kind": "trust+same-object",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "YM_P0F",
+      "donors": [
+        1444,
+        1498,
+        1499
+      ],
+      "exact": "Original physical Wilson/FP/Haar B4 scalar and original F,G,FG normalized cutoff-uniform three-moment bounds",
+      "kind": "new analytic math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "YM_L7",
+      "donors": [
+        1444,
+        1499
+      ],
+      "exact": "Physical T00 stress Ward action on an OS semigroup-smoothed common graph core; identify Q with H_OS",
+      "kind": "physical Ward+domain",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "NS_R829",
+      "donors": [
+        1501
+      ],
+      "exact": "Signed collar/remote boundary flux, selected real-time trajectory and quantitative time-integrated reserve",
+      "kind": "new math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "RH_G3",
+      "donors": [
+        1408,
+        1497
+      ],
+      "exact": "Original off-line zero/Weil strict signed residual and shell compensation; fifth-moment parity is not a substitute",
+      "kind": "new math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "KARP21_CLOCK",
+      "donors": [
+        1445,
+        1474
+      ],
+      "exact": "Original N21 word, history, parser and bit-machine heap/clock and all PR.InNP endpoints",
+      "kind": "formalization",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "SAT_NOT_IN_P",
+      "donors": [
+        1445,
+        1499
+      ],
+      "exact": "∀ polynomial SAT decider D ∃ input formula F with incorrect decision, not false fixed-instance ∃F∀D",
+      "kind": "open Clay math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "BSD_K1_K5",
+      "donors": [
+        1500
+      ],
+      "exact": "Original local Kummer/Sha[2], Mordell–Weil rank, level-32 genus-one/Fricke L(E,1) positivity and full odd-primary Sha",
+      "kind": "arithmetic+analysis",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "HODGE_GENERAL",
+      "donors": [],
+      "exact": "Arbitrary smooth projective variety rational (p,p) cycle-class representability; CP1 special case not enough",
+      "kind": "open Clay math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "MONSTER_VOA",
+      "donors": [
+        1472
+      ],
+      "exact": "Y443 80-relator quotient, original FLM Vnatural Griess product/action and trace identity",
+      "kind": "non-Clay structural math",
+      "status": "open_source_admission_or_math"
+    }
+  ],
+  "policy": {
+    "waves": {
+      "0": "Freeze SHAs, original author/first-implementation receipts and exact import graph",
+      "1": "Infrastructure and independent checked sources (lean-world #1494 before #1495, #1484 separately; status ledgers)",
+      "2": "Per-lane donor co-location, conflicts resolved, source+kernel checks (YM, Bishop, BSD, NS, RH, Karp, Hodge Lean)",
+      "3": "Cross-programme same-source/physical joins, Golden aggregate, controlled review and merges"
+    },
+    "fail_closed": [
+      "same-path divergent blobs",
+      "missing pinned commits",
+      "Agda --safe transitive unsafe dependency",
+      "axiom/postulate or sorry",
+      "failed original-source semantic test",
+      "missing exact-head kernel receipt",
+      "incompatible Cubical/cohesion flags",
+      "unattributed sourced mathematics"
+    ]
+  },
+  "promotions": {
+    "source_merged": false,
+    "agda_golden": false,
+    "lean_golden": false,
+    "legacy_real_unpostulated": false,
+    "clay_endpoints_solved": false
+  },
+  "snapshot_policy": "Donor Git SHA snapshot as of 14 November 2026 only; PR branches may advance asynchronously. #1499 self SHA not pinned recursively. No kernel/Clay promotion.",
+  "last_checked_on": "2026-11-14",
+  "warnings": [
+    "No PR was merged or closed by this work",
+    "Bishop/Cubical vendor changes cannot bypass source-carrier equivalence, trust and kernel gates",
+    "A current GitHub mergeable flag is not proof of conflict freedom or mathematical correctness"
+  ],
+  "execution_2026_11_14": {
+    "phase": "staged_original_source_convergence",
+    "lean_world_source_transfer": {
+      "from_pr": 1495,
+      "source_sha": "53db64eea732920eb7841bd06e9816defd91646c",
+      "recipient_pr": 1499,
+      "files": [
+        "scripts/lean_world_atomic_spool.py",
+        "scripts/lean_world_native_admission_queue.py",
+        "tests/test_lean_world_atomic_spool.py",
+        "tests/test_lean_world_native_admission_queue.py"
+      ],
+      "identical_git_blobs_verified": 4,
+      "test_status": "source_tests_transferred_not_locally_executed",
+      "world_admitted": false,
+      "authoritative_dag_validated": false
+    },
+    "karp_stacked_convergence": {
+      "pr": 1502,
+      "base_pr": 1474,
+      "additional_donor_pr": 1445,
+      "base_sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "donor_sha": "b3915126edd096cd09ce7cc1b1b195e75d9e9e87",
+      "common_ancestor": "730f62ed27a0c45d71c89e5cdbc61bd9f1e6ab2c",
+      "four_divergent_files_transplanted_exact_blobs": true,
+      "aggregate_imports_1445": [
+        102,
+        7
+      ],
+      "aggregate_imports_1474": [
+        204,
+        101
+      ],
+      "all_207_unique_direct_imports_resolved_on_1474": true,
+      "source_acceptance_root": "DASHI/Mathematics/Complexity/Karp21StackedSourceConvergence20261114.agda",
+      "state": "draft stacked PR, pinned Agda kernel open",
+      "SATNotInP": false
+    },
+    "bishop_eta_new_source": {
+      "pr": 1478,
+      "source_commits": [
+        "580950c0084e575053a89d06a6d13a9bacd8da4b",
+        "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872"
+      ],
+      "modules": [
+        "DASHI/Analysis/BishopOriginalNativeComplexExpAdditionFromTrigExact.agda",
+        "DASHI/Analysis/BishopOriginalEtaNativeTrigSelectedSourceWeldExact.agda"
+      ],
+      "scope": "genuine original Bishop expC add algebra from preexisting bishopExpAdd, conditional only on original sine/cosine addition; selected all-cutoff Round11 eta finite theorem composition",
+      "static_imports_resolve": true,
+      "ring_identitites_sympy_pass": true,
+      "source_written_not_kernel_accepted": true,
+      "remaining_analytic_leaves": [
+        "OriginalCosineAddition",
+        "OriginalSineAddition",
+        "OriginalDyadicNatLogLaw",
+        "Bishop complex compact-uniform eta convergence"
+      ],
+      "rh_proven": false
+    },
+    "source_merge_effect": {
+      "head_prs_merged_to_master": 0,
+      "branches_preserved": true,
+      "local_kernel_receipt": false,
+      "clay_problems_solved": 0
+    },
+    "bsd_actual_source": {
+      "donor_pr": 1500,
+      "donor_sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
+      "recipient_pr": 1499,
+      "donor_changed_files_transferred": 23,
+      "all_exact_git_blobs_verified": true,
+      "math_modules": 13,
+      "docs_and_scripts": 10,
+      "external_direct_imports_present": 12,
+      "focus_root": "DASHI/Mathematics/Arithmetic/EllipticBSDSourceConvergence20261114.agda",
+      "local_rational_positive_tail_and_negative_control": "PASS",
+      "identity_modularity_mellin_kernel": false,
+      "original_K1_K5_closed": false
+    },
+    "ns_actual_source": {
+      "donor_pr": 1501,
+      "donor_sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "recipient_pr": 1499,
+      "six_files_exact_blobs": true,
+      "old_R846_universal_empty_fibre_refuted": true,
+      "original_R436_R847_R848_imports_present": true,
+      "exact_integer_regression": "PASS: 36 seed pairs, 22 cutoff retained, 6 zero, 16 nonzero, 226981 full triads",
+      "signed_collar_and_time_continuation": false
+    },
+    "rh_actual_source": {
+      "donor_pr": 1497,
+      "donor_sha": "f213b5bfb893e49ae9b29b2915257884b3b0e14e",
+      "recipient_pr": 1499,
+      "nine_files_exact_blobs": true,
+      "direct_external_imports_present": 9,
+      "focus_root": "DASHI/Analysis/RiemannBishopOddSourceConvergence20261114.agda",
+      "RH_Weil_positivity": false
+    },
+    "ym_p0_actual_source": {
+      "donor_pr": 1498,
+      "donor_sha": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "recipient_pr": 1499,
+      "nine_math_files_exact_blobs": true,
+      "three_original_docs_and_regression_exact_blobs": true,
+      "focus_root": "DASHI/Physics/YangMills/BalabanP0OriginalSourceConvergence20261114.agda",
+      "local_haar_rational_SU2_five_sample_regression": "PASS",
+      "physical_Wilson_FP_Ward_coefficient": false
+    },
+    "ym_same_source_stack": {
+      "draft_pr": 1503,
+      "branch": "chatgpt/ym-f19-p0-source-convergence-20261114",
+      "stacked_base_pr": 1444,
+      "base_head": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "p0_donor_pr": 1498,
+      "p0_donor_head": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "nine_p0_math_files_exact_blobs": true,
+      "direct_source_imports_verified": 14,
+      "focus_root": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "legacy_RealAnalysisAxioms_contains_postulates": true,
+      "F19_P0_common_H_physical_estimates_proved": false
+    },
+    "central_acceptance_root": {
+      "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+      "path": "DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda",
+      "direct_owners": 8,
+      "imports_all_resolve": true,
+      "pinned_kernel_checked": false
+    },
+    "phases": {
+      "source_preservation": "DONE for selected owners",
+      "stacked_same_original_source": "DONE for #1502 Karp and #1503 YM at source level",
+      "all_lane_source_combined": "DONE as import-only acceptance root #1499",
+      "local_regressions": "PASS for NS, BSD and YM arithmetic; 4 convergence planner tests",
+      "pinned_Agda_Lean_kernel": "NOT RUN",
+      "merge_to_master": "NOT DONE",
+      "physical_clay_endpoint_math": "OPEN"
+    }
+  },
+  "local_test_evidence": {
+    "source": "Exact donor Git blob SHA reconstructed locally in container; explicit Python test executions 2026-11-14",
+    "test_commands": [
+      "python3 /mnt/data/check_ns_r846_zero_mode_and_nonzero_support.py",
+      "python3 /mnt/data/test_bsd_level32_positive_tail.py",
+      "python3 /mnt/data/check_balaban_l1_adjoint_haar_local_tail.py",
+      "python3 -m unittest -v /mnt/data/test_plan_clay_multi_pr_integrations.py"
+    ],
+    "result": "all PASS",
+    "agda_present": false,
+    "nix_present": false,
+    "lake_present": false,
+    "lemmas_typechecked": false
+  },
+  "abc_attachment_reconciliation_2026_11_14": {
+    "authoritative_roadmap": "Docs/roadmaps/ClaySixFrontierABCMaximumCut20261114.md",
+    "machine_gate_register": "Docs/roadmaps/ClaySixFrontierABCExactGates20261114.json",
+    "original_round518_43_preserved": true,
+    "first_attachment_claims_overstated": [
+      "YM normalized 4^-k Wilson contraction",
+      "YM normalized polymer activity/OS gap",
+      "NS universal collar/BKM reserve",
+      "RH -4 local pole floor and t>14.13 convexity",
+      "RH discrete signed fifth sign",
+      "Karp all costs and chains already certified",
+      "BSD Sel2=0, torsion classes, Sha odd and Kodaira I0*",
+      "Exact.agda filename implies pinned kernel acceptance"
+    ],
+    "new_math_negative_control": "DASHI/Mathematics/CrossPollination/Clay20261114RHPoleFloorNoGoExact.agda",
+    "source_test_and_unit_test": [
+      "scripts/check_clay_abc_attachment_negative_controls.py",
+      "tests/test_clay_abc_attachment_negative_controls.py"
+    ],
+    "latest_exact_donor_transfers": [
+      {
+        "source_pr": 1444,
+        "donor": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
+        "destination_pr": 1503,
+        "count": 2,
+        "gate": "YM.R445.TV",
+        "physical_TV_proved": false
+      },
+      {
+        "source_pr": 1474,
+        "donor": "5348713358c23f6b7e638cfb181bcb7e999645b1",
+        "destination_pr": 1502,
+        "count": 4,
+        "gate": "PNP.F1",
+        "all_k_gamma_physical_machine_proved": false
+      },
+      {
+        "source_pr": 1500,
+        "donor": "5c01456abb4a6126bec02804af6f42cdfb7e953b",
+        "destination_pr": 1499,
+        "count": 2,
+        "gate": "BSD.K1.SECOND",
+        "Q2_local_H1_proved": false
+      },
+      {
+        "source_pr": 1501,
+        "donor": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+        "destination_pr": 1499,
+        "count": 4,
+        "gate": "NS.R854",
+        "real_ode_rate_proved": false
+      },
+      {
+        "source_pr": 1498,
+        "donor": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+        "destination_pr": 1503,
+        "count": 5,
+        "gate": "YM.P0.L1",
+        "source": "BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.agda and its four original imports",
+        "physical_Hessian_integrals_proved": false
+      }
+    ],
+    "external_NS_announcement": {
+      "openai_date": "2026-09-08",
+      "clay_date": "2026-09-11",
+      "url": "https://www.claymath.org/news/navier-stokes-announcement/",
+      "status": "externally announced apparently settled; CMI evaluation ongoing; not original repo B theorem",
+      "accepted_by_repo": false
+    },
+    "bsd_exact_curve": {
+      "Cremona": "32a2",
+      "LMFDB": "32.a3",
+      "equation": "y^2=x^3-x",
+      "torsion_order": 4,
+      "Kodaira_at_2": "III",
+      "Tamagawa_at_2": 2,
+      "special_value_decimal_external": "0.65551438857302995261620989747",
+      "analytic_sha_size_external": 1,
+      "source": "https://www.lmfdb.org/EllipticCurve/Q/32a2/",
+      "local_agda_same_object_verified": false
+    },
+    "status": {
+      "all_universal_clay_terminal_proofs": false,
+      "pinned_agda_local_kernel_receipt": false,
+      "pinned_lean_local_kernel_receipt": false,
+      "negative_controls_mathematically_tested": true,
+      "existing_donor_source_blobs_converged": true
+    }
+  },
+  "six_cut_execution_round3": {
+    "as_of": "2026-11-14",
+    "pinned_donors_pre_manifest": [
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1502,
+        "head": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+        "source": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "verified": "GitHub source blob readback only; no Agda 2.9 kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1503,
+        "head": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+        "source": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+        "verified": "GitHub source blob readback only; no physical source TV, no Agda kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "head": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "source": "Synthesis/MillenniumBSDCMRealNonexceptionalXTSignImageCompleteExact.lean",
+        "verified": "GitHub source blob readback only; Q2 eight squareclasses Python exact, no Lean kernel/H1"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 109,
+        "head": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba",
+        "source": "Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean",
+        "verified": "GitHub source blob readback only; actual source rate envelope open, no Lean kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1478,
+        "head": "e391fcd65b75495282c90a7f23ce99195d20761c",
+        "source": "DASHI/Analysis/BishopOriginalEtaPairBlockTelescopingExact.agda",
+        "verified": "GitHub source blob readback only; Nat log, trig addition and real uniform limit open, no Agda kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 50,
+        "head": "2384d90f1a2c23dc59c072425e7efbc040405032",
+        "source": "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2SelectedWitnessCut.lean",
+        "verified": "Existing positive-cap iff selected fourth-Lipschitz threshold; actual selected W/G3 sign unproved and unrefuted"
+      }
+    ],
+    "test_evidence": {
+      "literal_gamma_positive_words": 31713,
+      "literal_gamma_malformed_controls": 7,
+      "gamma_k_range": "0..9",
+      "q2_local_distinct_2adic_squareclass_pairs": 8,
+      "source_git_exact_readback": true,
+      "source_proof_kernel_receipts": 0,
+      "github_pr_workflow_runs_returned": 0
+    },
+    "admission_order": [
+      "Exact branch-head Agda/Lean kernel diagnostics",
+      "Transitive axiom/trust admissibility and original-source types",
+      "Source-specific TV/real trajectory/H1/eta/zero-W analytic estimates",
+      "Only then terminal endpoint/merge"
+    ],
+    "all_general_Clay_endpoint_gates": "OPEN; no unsupported promotion",
+    "source_status": "new A-class source proof terms and conditional consumers written; B/C physical-math estimates not solved"
+  },
+  "r445_attached_maxcut_round4": {
+    "date": "2026-11-14",
+    "original_owner": "chboishabba/dashi_agda#1503",
+    "donor_head": "ada2ac4da5ecef28cb512c320e25250e65910671",
+    "files": [
+      "DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda",
+      "scripts/check_ym_r445_localized_tv_maxcut_countermodels.py",
+      "tests/test_ym_r445_localized_tv_maxcut_countermodels.py",
+      "Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md"
+    ],
+    "root_import": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+    "verified_independent_finite_rational_cases": 6561,
+    "counterexamples": [
+      "outside-only reweight changes interior marginal TV by 1/8",
+      "rare reference bad event P_bad 1/2",
+      "fixed 1/16 vs invented 16^-k; 1/k harmonic divergence",
+      "D_k=0 with alternating uncauchy scale families",
+      "D_k=0 with covariance 1/4 at any distance",
+      "positive probability with OS Gram -1"
+    ],
+    "valid_conditional_finite_bound": "TV(P_X,Q_X) ≤ sup_y TV(P(X|y),Q(X|y)) + TV(P_Y,Q_Y)",
+    "false_attachment_claim": "A/B/C physical closed is unsupported; cutoff-uniform source Wilson D_k, mass gap E1/D1/D2 all remain OPEN",
+    "pinned_kernel_receipt": false,
+    "python_committed_tests_executed_here": false,
+    "continued_work": [
+      "original F19↔R445 same block map and same target density",
+      "original normalized conditional SU(N) gauge action variation",
+      "actual physical outside influence / pinned large-field two-measure bound",
+      "actual scale summable irrelevant activity",
+      "original uniform RG F,G,FG moment estimates",
+      "OS reflection positivity/cluster and same-H positive gap"
+    ],
+    "additional_genuine_original_A_source": {
+      "path": "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda",
+      "owning_pr": "Agda #1503",
+      "source_written_theorem_names": [
+        "originalF19AllCoarseNumeratorsSamePhysicalSource",
+        "originalF19AllCoarseNormalizedSamePhysicalSource"
+      ],
+      "consumers": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "proof_sources": [
+        "Fibre.selected64Pair896SpectatorWeightedDisintegration",
+        "F19.originalFinePhysicalPartitionEqualsActualEffectivePartition"
+      ],
+      "scope": "F19-internal original interacting Wilson all coarse tests and shared physical normalizer; exact original SU(N) 64+896 disintegration",
+      "not_proved": [
+        "pointwise R445 nativeSUNBlockLinks map identity",
+        "R445 renormalized target physical density",
+        "localized effective/target TV bound",
+        "physical RG scale summability",
+        "Clay continuum/OS/gap"
+      ],
+      "agda_kernel_verified": false
+    },
+    "local_acceptance_runner": "scripts/check_ym_r445_original_physical_maxcut_local.sh",
+    "source_only_command": "R445_SOURCE_ONLY=1 bash scripts/check_ym_r445_original_physical_maxcut_local.sh",
+    "pinned_kernel_command": "bash scripts/check_ym_r445_original_physical_maxcut_local.sh"
+  }
+}
