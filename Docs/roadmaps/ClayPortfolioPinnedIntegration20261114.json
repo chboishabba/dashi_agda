@@ -1,0 +1,419 @@
+{
+  "schema": "dashi-clay-portfolio-integration-v1",
+  "date": "2026-11-14",
+  "status": "pinned GitHub head snapshot; source-ledger only; no merge or kernel proof",
+  "repositories": {
+    "agda": {
+      "repository": "chboishabba/dashi_agda",
+      "baseline_ref": "master",
+      "golden": "pinned Nix Agda local root checker"
+    },
+    "lean": {
+      "repository": "chboishabba/dashi_lean4",
+      "baseline_ref": "main",
+      "golden": "pinned Lean/mathlib local kernel check and #print axioms"
+    }
+  },
+  "attribution_policy": "AGENTS.md and Docs/SourceAttributionPolicy.md: DOI/URL when available, first source implementation != later validation != PR != merge; never attribute new DASHI results to external authors",
+  "references": [
+    {
+      "author": "Martin Lundfall",
+      "title": "Formalizing Real Numbers in Agda",
+      "year": 2015,
+      "url": "https://ncatlab.org/nlab/files/Lundfall-RealNumbersInAgda.pdf",
+      "scope": "historical equivalence-relation construction; text has an unproved Bishop lemma"
+    },
+    {
+      "author": "Zachary Murray",
+      "title": "Constructive Analysis in the Agda Proof Assistant",
+      "year": 2022,
+      "doi": "10.48550/arXiv.2205.08354",
+      "url": "https://arxiv.org/abs/2205.08354",
+      "scope": "Bishop real arithmetic, ordered field and completeness"
+    },
+    {
+      "author": "Viktor Csimma and contributors",
+      "title": "Bishop constructive real software continuation",
+      "url": "https://github.com/viktorcsimma/bishop",
+      "scope": "pinned vendor implementation; check exact vendor hash"
+    },
+    {
+      "authors": "Andrea Vezzosi, Anders Mörtberg, Andreas Abel",
+      "title": "Cubical Agda: A Dependently Typed Programming Language with Univalence and Higher Inductive Types",
+      "year": 2019,
+      "doi": "10.1145/3341691",
+      "scope": "Cubical comparison and quotient backend, not automatic standard-Agda legacy rewrite"
+    },
+    {
+      "author": "Vladimir Voevodsky",
+      "title": "Univalence foundations",
+      "scope": "foundational attribution only; no complete imported real backend asserted"
+    }
+  ],
+  "pr_heads": [
+    {
+      "repository_group": "agda",
+      "pr": 1408,
+      "sha": "28d85aa529155352a025de9e12853ecad1e4214e",
+      "lane": "Bishop_eta_RH",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1444,
+      "sha": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "lane": "YM_constructed_real_L7",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1445,
+      "sha": "b3915126edd096cd09ce7cc1b1b195e75d9e9e87",
+      "lane": "Karp21_PNP",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1460,
+      "sha": "ed4cd2edf5f9692f015dca7cf1e5439b5eb87ebb",
+      "lane": "TSVF_KK",
+      "wave": 3,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1472,
+      "sha": "36db4df129ceff68e0d4e5b574bf2ef60202e657",
+      "lane": "Monster_VOA",
+      "wave": 3,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1474,
+      "sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "lane": "Karp21_FRACTRAN",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1478,
+      "sha": "c66dc4ec53f98971925a82603b5c97a338f9ae7e",
+      "lane": "Bishop_eta_Koenigs",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1484,
+      "sha": "6c829bdf0d284dca393abecbebfb13e939908d56",
+      "lane": "Lean_world_ingest",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1494,
+      "sha": "a3e0e9cfdcce8bc3aa6c1a0a31fd2f90f8b2bedd",
+      "lane": "Lean_world_native_admission",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1495,
+      "sha": "53db64eea732920eb7841bd06e9816defd91646c",
+      "lane": "Lean_world_builder",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1497,
+      "sha": "f213b5bfb893e49ae9b29b2915257884b3b0e14e",
+      "lane": "RH_zeta_Bishop",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1498,
+      "sha": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "lane": "YM_original_diagrams",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1499,
+      "sha": "e8c06cfbfdc3ec07c75f62a1bbca58f08794e280",
+      "lane": "All_Clay_ledgers",
+      "wave": 1,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1500,
+      "sha": "73bc99a324bdc0251862802177e2390973ae8c0a",
+      "lane": "BSD_Kummer_CM_L32",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1501,
+      "sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "lane": "NS_zero_mode_modal",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 40,
+      "sha": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672",
+      "lane": "Hodge_cycle_class",
+      "wave": 1,
+      "state": "merged"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 50,
+      "sha": "2384d90f1a2c23dc59c072425e7efbc040405032",
+      "lane": "RH_Weil_gap",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 51,
+      "sha": "b54358c5b5c29b3bc37f1948bb1b6f878573f744",
+      "lane": "NS_C_D_and_PNP",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 104,
+      "sha": "dbda83aec4b6aa07746d5c692d2d99440872bda1",
+      "lane": "Bishop_log_pi_zeta",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 107,
+      "sha": "96d1a0ea2422769ef07afad6f513df39e9de6519",
+      "lane": "BSD_K1_K5",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 108,
+      "sha": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87",
+      "lane": "RH_negative_fifth_control",
+      "wave": 2,
+      "state": "open"
+    },
+    {
+      "repository_group": "lean",
+      "pr": 109,
+      "sha": "317ff04a74e51f35d72e7784e3de2999f32ab15b",
+      "lane": "NS_C_smoothness",
+      "wave": 2,
+      "state": "open"
+    }
+  ],
+  "dont_reopen": [
+    {
+      "lane": "YM",
+      "pr": 1444,
+      "owner": "originalFinePhysicalPartitionEqualsActualEffectivePartition",
+      "limitation": "source-written physical F19 partition equality, not P0.F moment estimates"
+    },
+    {
+      "lane": "YM",
+      "pr": 1444,
+      "owner": "actualF19WilsonNormalizedTwoMarkTheorem",
+      "limitation": "normalized marked formula, not cutoff uniform error"
+    },
+    {
+      "lane": "Bishop",
+      "pr": 1478,
+      "owner": "originalBishopExpFactEqualsNativeExp",
+      "limitation": "actual complex factorial/native exp proof source, kernel acceptance open"
+    },
+    {
+      "lane": "Bishop",
+      "pr": 1478,
+      "owner": "originalEtaDyadicScaleFromLogAndExp",
+      "limitation": "uses two uninhabited exact original analytic laws"
+    },
+    {
+      "lane": "NS",
+      "pr": 1501,
+      "owner": "R847 zero-output actual counterexample; R848 nonzero support",
+      "limitation": "repairs false short route; original real-time rate open"
+    },
+    {
+      "lane": "Karp",
+      "pr": 1474,
+      "owner": "original all-word gamma / FRACTRAN reader",
+      "limitation": "literal N21 bit clock and NP obligations open"
+    },
+    {
+      "lane": "BSD",
+      "pr": 1500,
+      "owner": "Kummer 16 to 8 to 4 original square-class sieve",
+      "limitation": "full K1–K5 remain"
+    },
+    {
+      "lane": "Hodge",
+      "pr": 40,
+      "owner": "genuine rational algebraic-cycle and correspondence-action Lean proof owner",
+      "limitation": "Lean PR #40 already merged, not the universal Hodge conjecture"
+    },
+    {
+      "lane": "Lean-world",
+      "pr": 1495,
+      "owner": "native content-addressed proof builder contract",
+      "limitation": "cannot certify Agda proof from a Lean theorem without a faithful transfer"
+    }
+  ],
+  "joins": [
+    {
+      "id": "BISHOP_ETA_L_E",
+      "donors": [
+        1408,
+        1478
+      ],
+      "exact": "Source-level dyadic Nat-log law and original Bishop expC addition, then compact-uniform eta",
+      "kind": "weld+analysis",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "BISHOP_REAL_LEGACY",
+      "donors": [
+        1444,
+        1478
+      ],
+      "exact": "Setoid interpretation of legacy original Wilson/Haar real carrier without assuming propositional equality",
+      "kind": "trust+same-object",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "YM_P0F",
+      "donors": [
+        1444,
+        1498,
+        1499
+      ],
+      "exact": "Original physical Wilson/FP/Haar B4 scalar and original F,G,FG normalized cutoff-uniform three-moment bounds",
+      "kind": "new analytic math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "YM_L7",
+      "donors": [
+        1444,
+        1499
+      ],
+      "exact": "Physical T00 stress Ward action on an OS semigroup-smoothed common graph core; identify Q with H_OS",
+      "kind": "physical Ward+domain",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "NS_R829",
+      "donors": [
+        1501
+      ],
+      "exact": "Signed collar/remote boundary flux, selected real-time trajectory and quantitative time-integrated reserve",
+      "kind": "new math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "RH_G3",
+      "donors": [
+        1408,
+        1497
+      ],
+      "exact": "Original off-line zero/Weil strict signed residual and shell compensation; fifth-moment parity is not a substitute",
+      "kind": "new math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "KARP21_CLOCK",
+      "donors": [
+        1445,
+        1474
+      ],
+      "exact": "Original N21 word, history, parser and bit-machine heap/clock and all PR.InNP endpoints",
+      "kind": "formalization",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "SAT_NOT_IN_P",
+      "donors": [
+        1445,
+        1499
+      ],
+      "exact": "∀ polynomial SAT decider D ∃ input formula F with incorrect decision, not false fixed-instance ∃F∀D",
+      "kind": "open Clay math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "BSD_K1_K5",
+      "donors": [
+        1500
+      ],
+      "exact": "Original local Kummer/Sha[2], Mordell–Weil rank, level-32 genus-one/Fricke L(E,1) positivity and full odd-primary Sha",
+      "kind": "arithmetic+analysis",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "HODGE_GENERAL",
+      "donors": [],
+      "exact": "Arbitrary smooth projective variety rational (p,p) cycle-class representability; CP1 special case not enough",
+      "kind": "open Clay math",
+      "status": "open_source_admission_or_math"
+    },
+    {
+      "id": "MONSTER_VOA",
+      "donors": [
+        1472
+      ],
+      "exact": "Y443 80-relator quotient, original FLM Vnatural Griess product/action and trace identity",
+      "kind": "non-Clay structural math",
+      "status": "open_source_admission_or_math"
+    }
+  ],
+  "policy": {
+    "waves": {
+      "0": "Freeze SHAs, original author/first-implementation receipts and exact import graph",
+      "1": "Infrastructure and independent checked sources (lean-world #1494 before #1495, #1484 separately; status ledgers)",
+      "2": "Per-lane donor co-location, conflicts resolved, source+kernel checks (YM, Bishop, BSD, NS, RH, Karp, Hodge Lean)",
+      "3": "Cross-programme same-source/physical joins, Golden aggregate, controlled review and merges"
+    },
+    "fail_closed": [
+      "same-path divergent blobs",
+      "missing pinned commits",
+      "Agda --safe transitive unsafe dependency",
+      "axiom/postulate or sorry",
+      "failed original-source semantic test",
+      "missing exact-head kernel receipt",
+      "incompatible Cubical/cohesion flags",
+      "unattributed sourced mathematics"
+    ]
+  },
+  "promotions": {
+    "source_merged": false,
+    "agda_golden": false,
+    "lean_golden": false,
+    "legacy_real_unpostulated": false,
+    "clay_endpoints_solved": false
+  }
+}
