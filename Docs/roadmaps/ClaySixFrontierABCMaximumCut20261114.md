@@ -329,3 +329,8 @@ Source-owning branch [YM #1503](https://github.com/chboishabba/dashi_agda/pull/1
 - **C:** `originalR445OSPositiveProjectiveContinuum`, `originalR445NontrivialInteractingCylinder`, `originalR445OriginalWilsonRootedPolymerCovarianceDecay`, `originalR445SameOSGeneratorPositiveGap` (NEW; all OPEN).
 
 **Independent arithmetic:** 6,561 positive 2×2 conditional-mixture pairs passed; distant reweight, rare bad-field, non-Cauchy zero TV, non-clustering zero TV, negative OS Gram and dyadic harmonic controls passed. Original Agda --safe no-go theorem and eight committed Python tests await exact-head pinned Agda 2.9/CI. Full 43 original YM Round518 leaves remain tracked and OPEN. Maintain source provenance and preserve the other five programme gates unchanged.
+
+
+### Round 4 A-source advance — physical F19 all-cylinder normalization
+
+Agda #1503 now additionally owns `DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda`, imported by the original F19/P0/R445 acceptance root. The two actual source declarations `originalF19AllCoarseNumeratorsSamePhysicalSource` and `originalF19AllCoarseNormalizedSamePhysicalSource` specialize the existing arbitrary 64-pair/896-spectator interacting Wilson weighted disintegration to **any** original 64-link cylinder test and transport it through the **same** original 1024-link fine/effective F19 normalizer equality. No independently supplied effective measure or normalizer is inserted. This genuine **A source-written** result has not been locally Agda 2.9 kernel-accepted. The remaining independent A bridge is exact F19 pair-block vs R445 `nativeSUNBlockLinks {m=1}{l=1}` original codec correspondence and identification of a genuinely renormalized physical target. All B/C estimates remain OPEN.
