@@ -1,5 +1,18 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## New P0–P4 physical/native source-witness implementation — 15 November 2026
+
+**All prior exact-head acceptance CLOSED at their checked commits:** Agda 9/9 on DASHI `cf3ba8d`; ITIR 120/120 Python plus genuine Cap'n Proto mini-original two-pass native producer at `7385872`; SLR source-handoff 19/19 Rust at `4e0f150`; SensibLaw NORA 17/17 at `a5715ea7`. Operator-reported local clean-head receipts; do not assign them to subsequent changed source heads.
+
+**New physical P0/P1/P2 integration in ITIR #14 (source-written, new head NOT yet replayed):** `run_zelph_local_physical_maxcut.py` accepts independently obtained original `.bin`, pinned full raw manifest, existing selected HF physical shard files and compiled original-schema producer/decoder. It checks manifest SHA, optionally rehashes a full expected original-bin digest, regenerates the QID-plus-numeric-frontier route, independently replays exact source offsets and shards, executes native four-section equality and optionally the declared finite left/right query-word closure in the same run. It records raw SHA hashes for route/range/native receipts, explicit missing numeric frontier rows, fail-closed incomplete/blocked exit codes, no-overwrite outputs, and **never sets upstream-source-provenance or edit-authority true**. Six isolated orchestration tests passed; only actual bytes can instantiate the theorem.
+
+**New original native Wikibase P4 read-only bridge:** ITIR `verify_wikidata_native_entity_snapshot.py` parses raw *full Wikibase JSON* with exactly matched raw SHA256, entity revision, QID, statement GUID and property; retains native quantity amount/unit/bounds, qualifiers, ordered references and P854 URLs. Its 19 isolated synthetic tests passed. The new SLR #10 `native_raw_receipt_join.rs` compares these exact coordinates to the existing typed candidate in `sensiblaw-source-handoff`, refusing unmatched digest/revision/GUID/quantitative evidence and keeping source payment/authority false; new SLR cargo tests remain unrun. Native upstream HTTP provenance, actual primary-source P854 document and S29 durable review remain distinct open gates.
+
+**Next exact commands:** clean new ITIR branch `bash tools/check_zelph_physical_maxcut_offline.sh` (prior 120 plus 25 newly committed source-transport cases), clean new SLR branch `cargo test -p sensiblaw-source-handoff`, DASHI 9-target Agda source unchanged from checked source commit. Physical one-shot and native full entity operator invocations: [ITIR original physical acceptance runbook](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_bin_hf_ranges_maxcut_20261114.md).
+
+**No genuine original claim discharged yet:** A1 full original name-domain coverage, A2 property-semantic all-family closure, authentic original/source↔HF identity, P14143/P854 source document support, S29 durability, Éder Porto NORA export and current Nat `(QID,GUID)` exhaustion remain OPEN.
+
+
 ## Source acceptance update — finite-word A2 / name-fibre A1 / native original two-pass
 
 **Still-verified base:** 7/7 Agda modules at source `4c89edb`, ITIR clean 95/95 Python plus native four schema roundtrips/five negative controls at `e64c04f`; SLR 4/4 focused Rust candidate joins and SensibLaw 17/17 reference tests at their reported older source. **New code NOT YET RUN on the new heads.**
