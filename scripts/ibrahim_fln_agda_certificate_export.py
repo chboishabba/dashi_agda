@@ -194,10 +194,10 @@ def main() -> None:
     p.add_argument('--output',type=Path,required=True)
     args=p.parse_args()
     check_manifest(args.manifest,args.input)
-    graph=checked_graph(json.loads(args.input.read_text(encoding='utf-8')))
+    graph=checked_graph(Certificate.strict_json_loads(args.input.read_text(encoding='utf-8')))
     cert=None
     if args.certificate:
-        data=json.loads(args.certificate.read_text(encoding='utf-8'))
+        data=Certificate.strict_json_loads(args.certificate.read_text(encoding='utf-8'))
         cert=data['finite_graph'] if isinstance(data,dict) and 'finite_graph' in data else data
     generated=agda_text(graph,args.module,cert)
     args.output.write_text(generated,encoding='utf-8')
