@@ -155,3 +155,135 @@ The 81 algebraic character-pair orthogonality cases were also checked independen
 - Leech PR #4 now also has `scripts/score_frozen_three_arm_c3square_f6.py` and `tests/test_frozen_three_arm_c3square_f6.py`. This adds a separately frozen F6 three-arm *final* scorer, SHA-binds official earlier F4/F5 receipts, excludes previously evaluated tokens, and includes the original repaired C2 on the same independent test. It has not run on original RX580 or a genuinely unseen documentary corpus. **F6 empirical exit OPEN**.
 - The actual original LM F2 source-function readout has been implemented as `scripts/audit_trained_c3_task_orbits.py`: a separately trained supervised two-coordinate readout of frozen original-layer activations on externally supplied task-defined orbit triples, with new orbit/doc IDs and heldout composition/equivariance diagnostics. No independently certified semantic C3 input action or autonomous neural Fourier addition mechanism is claimed; F2 and F3 scientific result remain OPEN.
 - The older master document `Docs/roadmaps/LILASophonticMoESOTAMaxCut20261111.md` may have historical X369 status rows. It does not exist at the current diverged #1442 branch head, so this PR keeps the full X369 ledger here rather than copying a conflicting stale master file. Reconcile with master before promoting and update the old master index as part of the non-destructive PR rebase.
+
+
+## 2026-11-14 next formal max-cut: A03–A05 exact coefficient witness, original-centre BIDI and F2 gauge correction
+
+**Owner:** Existing DASHI Agda neural-formal PR #1442. **Companion:** Existing
+LeechTransformer neural PR #4; these are not new PRs. Historical Clay
+rollup PR #1499 and independent physical owners are not reclassified as
+neural proof owners.
+
+### Source-written Agda A05 original-carrier advancement
+
+New `DASHI/Cognition/PNF/X369OriginalTorusPointedAffineBidiExact.agda`
+uses the **already existing** `FiniteThreeCycleTorusExact.Torus3x3` and
+`X369OriginalTorusGroupLawExact`. It does not construct a competing
+nine-element torus. Its explicit conditional algebra parameters are an
+additive operation, a difference operation, zero, difference
+cancellation, self-difference zero and relative-difference gauge
+cancellation. These are **hypotheses**, not supplied physical facts or
+implicit postulates.
+
+The new exact declarations and their precise scope:
+
+| Name | Original-carrier theorem / condition | Status |
+|---|---|---|
+| `originalPointedReopenBidi` | At every original torus point, reopen retained centre + centre-relative offset and obtain the original sheet value | SOURCE-WRITTEN, conditional, selected Agda kernel OPEN |
+| `originalOffsetsCentreIsZero` | Pointed relative offset vanishes at distinguished origin, given `selfDifferenceZero` | SOURCE-WRITTEN, conditional, kernel OPEN |
+| `originalPointedTranslationGaugeLaw` | Translate an original sheet and subtract the **new** origin equals translating centre-relative offsets followed by re-gauge; uses the actual original torus add/inverse | SOURCE-WRITTEN, conditional, kernel OPEN |
+| `c3x3PunctureCentreGaugeBidi` | Upgrade conditional all-nine sheet result to original eight-puncture/Fourier-pair/independently retained centre, same coefficients and source waveform | OPEN — not silently solved by the three declarations |
+
+The selected leaf checker now includes this fourth source:
+`DASHI_NO_TMUX=1 bash scripts/check_x369_finite_original_torus_maxcut.sh`.
+Actual Agda 2.9 kernel execution, transitive safety and authoritative Track
+A acceptance were NOT available in this execution environment.
+
+### Exact companion coefficient results on the Python original site order
+
+Leech PR #4 adds
+`scripts/certify_x369_original_torus_maxcut.py` and
+`tests/test_x369_original_torus_maxcut.py`, reusing
+`models/punctured_nine_wave_prior.SITES`, with integer-pair
+`Z[omega]` arithmetic and no floating approximation. Locally the
+source-matched finite harness passed its three regression cases and
+reported:
+
+- **A03**: 81 inverse Fourier matrix coefficients; 729 bilinear
+  convolution and 729 product/frequency-convolution coefficients. The
+  basis-expansion argument justifies arbitrary finite inputs at the
+  Python algebra level.
+- **A04**: 81 sesquilinear Parseval coefficients; 81 real-conjugation
+  coefficients; all 729 centred Gram coefficients across nine
+  translations, rather than diagonal-only samples.
+- **A05**: Nine basis centre/offset recoveries, 648 single-translation
+  gauge coefficients, 5,832 induced composition coefficients.
+  Counterexample to naive punctured-eight norm preservation:
+  squared norm 8 becomes 1 under original-centre re-gauge by (1,0).
+
+These exact finite results are **not Agda theorems**, not proof that
+`SITES` and the original Agda enumeration are definitionally the
+same object, and not a neural, semantic, Leech-lattice, NS, YM or
+Monster theorem. They provide an executable normalization/orientation
+oracle for formal A03–A05, with an explicit falsification target.
+
+### Next Agda exact lemmas (A00–A06)
+
+| Exact name to close | Input/parent owners | Required output |
+|---|---|---|
+| `x369PythonSignedSitesToOriginalTorusBidi` (new A00) | `punctured_nine_wave_prior.SITES`, original `Torus3x3` and canonical mode ordering | Both-way 9-site table and character frequency/sign convention, not simply matching cardinality |
+| `c3x3SameCarrierGroupLaw` A01 | `X369OriginalTorusGroupLawExact` | Pinned kernel proof and original translation equivalence |
+| `c3x3CharacterOrthogonalityOnOriginalCarrier` A02 | `X369OriginalTorusCharacterOrthogonalityExact` | 81 exact Z[omega] cases, freshly checked |
+| `c3x3FourierConvolutionSameCarrier` A03 | A00/A01/A02, `Eisenstein` multiplication and group convolution | Original FT inversion, convolution-multiplication and pointwise-product frequency convolution, correctly factor 9 |
+| `c3x3ConjugationParsevalAndReality` A04 | A03 and selected `Eisenstein` conjugation | All nine modes, full centred/DC treatment, real descent and 9-point Parseval |
+| `c3x3PunctureCentreGaugeBidi` A05 | new conditional pointed BIDI + A00/A03/A04, source wave basis | Original eight puncture+independent centre ↔ nine amplitudes ↔ four real character pairs, with re-gauged translations and true norm |
+| `c3x3AgdaKernelSelectedSourceAccepted` A06 | Selected source check + pinned toolchain | Zero postulates/metas in selected path, exact checker version, log, pinned SHA, authoritative Track A |
+
+There is no Agda claim beyond the actual conditional declarations. A
+finite integer-coefficient checker is an independent oracle, not an
+imported formal proof.
+
+### F2/F3 empirical ownership and exact remaining source obligations
+
+The companion Leech PR #4 additionally introduces
+`certify_c3_task_orbits_original_tokens.py` and six negative/positive
+action-regression cases. A token-position C3 input action can be
+structurally verified on supplied original token IDs, while supplied
+external label semantics and logit consumers remain **unverified**.
+The frozen hidden readout now accepts the declared **absolute phase
+labels** for training and held-out composition scoring. A valid orbit
+may start at 1 or 2; otherwise a perfect character can be falsely
+scored as noncompositional. A three-orbit numerical witness gave
+mean false defect around 1.1547 before alignment, approximately zero
+after alignment. F2/C03–C08 and F3 source-semantic/causal results are
+not thereby closed.
+
+New exact formal handoffs:
+
+- `originalC3TaskMachineActionLabelBidi`: from the machine-checked
+  original token permutations and externally labelled phase action to
+  Agda's finite action, **conditional on** a verified label-source map
+  (OPEN).
+- `originalC3OrbitAbsoluteGaugeCompositionBidi`: define phase
+  label transport under orbit base changes, and prove that composition
+  is tested after reindexing by the absolute label rather than the
+  orbit's enumeration index (OPEN in Agda; tested numeric negative
+  control in Leech).
+- `originalC3HiddenToOutputConsumerIntertwiner`: chosen checkpoint
+  site, recurrent memory, phase decoder, task label and downstream
+  logits commute on the **actual trained model** (OPEN).
+- `learnedC3RelativePhaseCausalExcessLoss`: predeclared paired
+  intervention over named fresh documents beats proper
+  displacement-matched and memoriser controls (OPEN empirical).
+
+### F6 tightening and phase exit audit
+
+`score_frozen_three_arm_c3square_f6.py` now refuses a one-seed final
+selection: at least two precommitted **paired** development seeds are
+necessary. Distinct F4/F5/F6 source/document sets, exact SHA/provenance,
+matched effective rank/compute, final never-tuned evaluation and actual
+learned F3² mechanism remain **OPEN**. This is procedural acceptance,
+not F6 neural performance evidence.
+
+P0: current branch/source revisions and latest full test receipts OPEN.
+P1: A01/A02 source plus conditional A05 partial progressed; A00/A03/A04/full
+A05 and kernel A06 OPEN. P2: actual row provenance and original recurrent
+source statistics OPEN. P3: structural F2 input action and corrected
+phase-score code present; real semantic F2/F3 OPEN. P4: fresh matched
+two-arm GPU/data OPEN. P5: F5 independent final/recurrent replay OPEN.
+P6: two-seed F6 guard present; independent three-arm scientific evidence
+OPEN. P7: original physical cross-lane source maps OPEN.
+
+**Do not promote mathematical code, a Python exact certificate, a
+source-written Agda conditional theorem, and an independently
+trained neural mechanism as the same level of acceptance.**
