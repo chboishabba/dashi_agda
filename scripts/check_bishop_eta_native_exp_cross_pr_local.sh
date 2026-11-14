@@ -23,6 +23,7 @@ targets=(
   DASHI/Analysis/BishopOriginalDirichletEtaFinitePairingExact.agda
   DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda
   DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda
+  DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda
   DASHI/Analysis/BishopOriginalXiPolynomialReflectionSameCarrierExact.agda
   DASHI/Analysis/BishopOriginalEtaZetaEvenCutoffSeriesWeldExact.agda
   DASHI/Analysis/BishopOriginalEtaEvenSourceScaleFiniteWeldExact.agda
@@ -50,6 +51,6 @@ for target in "${targets[@]}"; do
   echo "AGDA SOURCE: $target"
   DASHI_NO_TMUX=1 AGDA_JOBS="${AGDA_JOBS:-1}" "${runner[@]}" "$target"
 done
-echo "KERNEL PASS: Bishop eta ↔ source native factorial exp 15 target roots"
+echo "KERNEL PASS: Bishop eta ↔ source native factorial exp 16 target roots"
 echo "NOT PROVED HERE: original log(2n) law, native exp addition/multiplication,"
 echo "  dyadic a(2k+1) identity, compact-uniform eta convergence, RH."
