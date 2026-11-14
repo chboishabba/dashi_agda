@@ -1,25 +1,60 @@
 # Six-frontier original-source maximum cut — implementation round 9
 **Date:** 14 November 2026
-**Owner:** dashi_agda #1499 canonical tracker; owner PR branches below.
+**Owner:** Agda Clay PR #1499 and Lean Clay PR #108 (both source rollups); historical owner branches are donors only.
 **Trust:** every linked source-written Agda/Lean candidate is **NOT**
 kernel-accepted in this round; local exact-rational regressions PASS.
 No Clay problem or NP-completeness consequence is claimed solved.
 
-## Execution contract
+## Canonical PR topology and execution contract (rollup revision)
 
-Combined fail-closed runner:
-`scripts/check_clay_sixfrontier_physical_local_20261114.sh`
+The active work destination is **one open draft PR per repository**:
+Agda **#1499**, `chatgpt/clay-20261112-four-frontier-fail-closed`
+against `master`; Lean **#108**,
+`chatgpt/clay-continuous-fifth-sign-20261112`
+against `main`.
+The former per-lane PRs are source/provenance donors, **not** active
+destinations for new work. Their histories are not Git-merged or closed.
+All transferred files have retained their content-addressed Git
+blob SHA; overlapping paths are deduplicated or reconciled explicitly.
 
-Set six explicit worktree env vars:
-`DASHI_YM_WORKTREE` (#1503), `DASHI_KARP_WORKTREE` (#1502),
-`DASHI_NS_WORKTREE` (#1501), `DASHI_BISHOP_WORKTREE` (#1478),
-`DASHI_BSD_LEAN_WORKTREE` (dashi_lean4 #107),
-`DASHI_RH_LEAN_WORKTREE` (dashi_lean4 #108).
-`CLAY_SIX_SOURCE_ONLY=1` runs only exact finite regression tests.
-The default runner demands pinned Agda/Nix and Lean/Lake and stops
-on missing roots, kernel errors and unadmitted sources; a green run
-would accept only the named *auxiliary source roots*, **not**
-the original six terminal theorems.
+The original round-9 donor groups now co-reside in the rollups:
+- Agda: 661 donor-file transfers; 25 BSD Agda blobs already
+  identical and additional original YM/NS files already present.
+  Donors #1444, #1498, #1503 (YM), #1474, #1502 (Karp),
+  #1478 (Bishop), #1500 (BSD), #1501 (NS).
+- Lean: 56 original donor files from #107 BSD, #50 RH, and
+  #109 NS; additional Route B cutoff/three-producer proof is
+  source-written directly on the Lean rollup. The two divergent
+  RH existing files were retained, with the useful missing
+  Route B consequence in a nonbreaking new module.
+- Shared critical global surfaces were deliberately NOT
+  overwritten: `CHANGELOG.md`, `TODO.md`,
+  `scripts/run_agda29_parallel_check.sh`,
+  `.github/workflows/ym-native-maxcut-exact-agda.yml`,
+  `Synthesis.lean`, and stacked external LeanDojo
+  comparator files. These are explicit integration review items.
+
+The **single-rollup** acceptance driver is
+`scripts/check_clay_sixfrontier_physical_local_20261114.sh`.
+Run it from the checked-out Agda #1499 worktree, pointing only to
+the Lean #108 worktree:
+
+```bash
+DASHI_CLAY_LEAN_WORKTREE=/path/to/dashi_lean4-clay108 \
+  CLAY_SIX_SOURCE_ONLY=1 \
+  bash scripts/check_clay_sixfrontier_physical_local_20261114.sh
+```
+
+Omit `CLAY_SIX_SOURCE_ONLY=1` to request pinned local source
+Agda/Lean checks; the script fails closed when kernels/toolchains
+are unavailable. The script never treats the finite-only run as
+a proof of any physical/analytic C gate. Kernel exit zero still
+requires the original Agda golden and Lean `#print axioms` /
+transitive trust audit before admission.
+
+Full precise donor head hashes, transfer counts, incomplete global
+surface inventory, source trust, and promotion booleans:
+`Docs/roadmaps/ClayPortfolioPinnedIntegration20261114.json`.
 
 The native source still owns its declared blame and attribution:
 separate proofs for direct finite arithmetic, original-carrier
