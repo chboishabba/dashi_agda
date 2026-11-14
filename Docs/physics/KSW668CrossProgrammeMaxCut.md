@@ -600,3 +600,105 @@ Eight independent **local source-equivalent** Python runs all passed on this ass
 | **E2** | original human controlled and source-calibrated same-specimen nuclear-product detection (or an actual bounded physical exclusion via real dose/efficiency/uncertainty) | C — experiment still absent |
 
 Do not promote the mathematical local ray/detector or the synthetic Poisson/MMS/pigeon tests to physically observed KSW 668 mechanisms.
+
+---
+
+## Tranche 6 — 2026-11-14: maximum-cut reconciliation after original source retrieval audit
+
+**Ownership:** All new work is kept in this single existing DASHI research PR #1504. Golden scientific theorem owners are original Agda modules; local source/kernal verification precedes acceptance. CI is explicitly not an acceptance requirement. No external source bytes, Agda kernel acceptance, instrument observations or hypotheses are fabricated.
+
+### T6.D2 — first genuine *curved, nonvacuum* 5D Einstein–matter solution
+
+The earlier constant-pure-gauge \(M_4\times S^1\) was a valid **flat vacuum**, but was not the requested interacting matter solution. There is now a demonstrably different explicit exact **5D Einstein–massless-scalar** solution:
+
+\[
+ds_5^2=-dt^2+t^{1/2}(dx^2+dy^2+dz^2+dw^2),\qquad
+\phi(t)=\frac{\sqrt3}{2}\ln t,\quad t>0,
+\]
+with spatial \(w\sim w+4\), \(8\pi G_5=1\), \(\Lambda=0\), \(T_{AB}=\partial_A\phi\partial_B\phi-\frac12g_{AB}(\nabla\phi)^2\). The fibre is spacelike and its physical radius is **time varying** \(a(t)=t^{1/4}\), so this is a compact KK cosmology but **not** constant-radius pure-gauge KK and not a tested quantum-gravitational mechanism.
+
+Exact symbolic computation **executed locally** in \`scripts/ksw668_kk_einstein_scalar_cosmology.py\`:
+- 125 Christoffel positions, **12 nonzero**; 625 Riemann positions, **40 nonzero**; full 25-component \(G_{AB}=T_{AB}\) exactly (nonzero stress); \(R=-3/(4t^2)\).
+- \(\rho=p=3/(8t^2)>0\), \(\square\phi=0\), \(\nabla_A T^{AB}=0\).
+- Two actual *null geodesic curves* from \(t=1,x=0,w=0\) to the **same comoving detector** \(x=3,w\equiv0\pmod4\). Direct ray \(v_x=1,v_w=0\): \(t=(13/4)^{4/3}\simeq4.81405611\). Fibre-winding ray \(v_x=3/5,v_w=4/5\) completes one \(S^1\) turn: \(t=(19/4)^{4/3}\simeq7.98469159\). Full metric-null, nonaffine geodesic and endpoint identities verified; both arrivals are same-detector *modelled proper time*, **not a real recorded observation**. No FTL shortcut.
+- New \`DASHI/Physics/Gravity/KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact.agda\` source-writes exact rational 5D Friedmann relations \(6H^2=\rho\), \(-3\dot H-6H^2=p\), \(\frac12\dot\phi^2=\rho\) in \(u=1/t\), trace relation and a compact-fibre **squared-distance no-shortcut inequality** using existing rational KK positivity. The full \(\sqrt3,\log,t^{1/4}\) analytic metric and Christoffel tensor are **verified only by SymPy**, not Agda. Local Agda typecheck PENDING.
+- Still OPEN: the particular user's proposed stress/gauge/observer physical KK solution, a common OS observer Hilbert space, empirically realised signal and actual operational measurement. This source is a genuine **existence result for a conventional 5D Einstein–scalar model**, not universal transport.
+
+### T6.C2 — original ENDF interpolation-law discontinuity repaired
+
+New \`scripts/ksw668_endf81_c2_law_integral.py\` consumes SHA-verified NNDC **ENDF/B-VIII.1** N14 original MAT725 MF3 MT103, source DOI **10.11578/endf/2571019**, and source-labelled site differential neutron flux. It partitions at EVERY original N14 cross-section and flux-energy knot, applies the true ENDF interpolation laws **INT=1,2,3,4,5**, including genuine histogram jumps and repeated-energy left/right discontinuities, and integrates between discontinuities by adaptive interior 8/16-point Gauss–Legendre with explicit convergence refusal. The preceding \`ksw668_endf81_n14np_original.py\` did a simple trapezoid through histogram end values which can produce a **wrong integral**; its physical-rate API now delegates to this safe method and REQUIRES a flux provenance string.
+
+Local synthetic **7/7 regression tests** in \`scripts/test_ksw668_endf81_law_integral.py\` (histogram jump, lin-lin flux×sigma, log-energy, exponential, log-log, repeated-energy discontinuity, out-of-domain and missing-source negative controls) PASS; synthetic samples are **not NNDC original raw bytes**.
+
+Original NNDC \`n-007_N_014.endf\` expected SHA256 \`fd5c0c0beccefbcd0b57c49bcdf835449d2014e3740830377ce24760478c06d8\` and size 1,253,924 **remain unacquired here**. The source-evaluated E1/E2 model must not call an interpolated original evaluation a measured physical body neutron fluence.
+
+**Site spectrum software:** JAEA official **EXPACS/PARMA 4.19** updated 2026-11-05, official https://phits.jaea.go.jp/expacs/top-eng.htm; software downloads have explicit noncommercial/attribution terms. New \`scripts/ksw668_parma_site_spectrum_adapter.py\` offers a clearly identified **secondary Neptoon offline PARMA 4.10** adapter requiring actual site latitude/longitude, elevation, date, water fraction and atmospheric depth (or documented estimate), writing eV differential-flux densities with original settings and source SHA256. DO NOT equate PARMA4.10 with JAEA4.19, site air flux with internal body fluence, or the documented 0.01–100000 MeV Neptoon example with **thermal 0.0036–1.8 eV** coverage; separate genuinely sourced thermal spectrum/ground-albedo/Geant4 transport is essential. No source site output generated here.
+
+### T6.C1 — actual incident-energy-dependent LAB two-body kinematics
+
+New \`scripts/ksw668_n14_relativistic_lab_final_state.py\` solves exact high-precision relativistic \(^{14}N^{7+}+n\to{}^{14}C^{6+}+p\) at **any provided incident neutron kinetic energy** using the previously source-indexed NIST neutral masses, electron ionization correction and CODATA proton/electron values. It computes Källén COM momentum, Lorentz boost, proton/daughter lab energies/momenta for \(\cos\theta_*=-1,0,1\), and verifies all four-momentum components and both daughter mass shells:
+- illustrative \(T_n=0.0253\) eV: proton lab KE **0.5842470765–0.5842797443 MeV**, \(^{14}C\) recoil **0.0420336036–0.0420662715 MeV**;
+- illustrative fast \(T_n=1\) MeV: proton lab KE **1.2967867081–1.6209603372 MeV**.
+- source-grounded input \(Q_{\mathrm{bare}}=0.62631332268\) MeV from independent rounded CODATA masses; earlier NIST neutral+ionization Q differs by ~0.317 eV due source precision/constant convention, a retained uncertainty seam.
+
+Source-specific neutron *incident event energy*, true charge-state branching, atomic electronic final states, excited daughter gamma production, angular cross-sections, sample environment and source uncertainties are still OPEN. The two illustrated incident energies are BENCHMARKS, not measured events.
+
+### T6.E1 — recovered independent original Movebank GPS checksum + exact bitstream identifier
+
+The earlier Movebank landing-page-only source was upgraded by actual **independent third-party original acquisition metadata**:
+- Public \`zuizui0223/RSDS\` original \`research/GLOBAL_SOLAR_AZIMUTH_NEW24_PROVIDER_FROZEN_SOURCE_FILE_MANIFEST_20261025.json\` and \`research/GLOBAL_SOLAR_AZIMUTH_NEW24_ORIGINAL_GPS_FIRST_V2_RESULT_20261025.json\`;
+- exact Lisowski Movebank package \`2f38f106-42bf-4c4a-b7a4-17d758bdd9a9\`, DOI **10.5441/001/1.744_2**, original bitstream \`b36da51a-30d5-4e4a-856c-940d7b9c27e3\`, original \`Navigation with macrophage depletion in homing pigeons.csv\`;
+- original **705,083 bytes**, provider **MD5 \`420dd8de4e0afe50f78ac848846591ba\`**, independent original-MD5 verified, reported **4,347 GPS rows, 34 birds**, **CC BY-NC 4.0**; original third-party direct source receipt Git blob \`eae522571b5902ee0ab901d6bbebbb46ece55d48\`.
+- New \`scripts/ksw668_movebank_lisowski_original_bitstream.py\` targets official DSpace \`/server/api/core/bitstreams/<UUID>/content\`, independently enforces exact provider MD5, original file size and census, then locally SHA256 hashes successful original bytes. It also accepts an original manually acquired local file.
+- This assistant has NOT acquired the 705-kB original CSV bytes from Movebank; *external independent original MD5 checked* and *ours locally downloaded+SHA checked* are distinct statuses. No treatment group, loft, weather, timestamp matching or source 16/16 vs 0/18 reconstruction has been invented. The existing \`ksw668_movebank_original_treatment_join.py\` still explicitly requires independent original hashed treatment metadata.
+
+### T6.P0 — fail-closed local original-data and Agda acceptance
+
+\`scripts/run_ksw668_local_maxcut.sh\` now runs locally:
+- new D2 Einstein–scalar exact symbolic model and rational KK negative control,
+- original C1 parameterized on-shell nuclear laboratory kinematics,
+- the seven ENDF interpolator source-format and discontinuity tests,
+- original E2 conditional neutron visibility bound,
+- preexisting U1/Maxwell and source evidence regressions,
+- plan-only Movebank original bitstream, MMS SDC and PARMA acquisition interfaces.
+
+\`--all\` refuses to accept:
+- absent raw original MMS burst CDF SHA/epoch receipt,
+- absent original Movebank CSV or its **exact provider MD5** replay,
+- an ENA JSON without actually readable **every FASTQ** original MD5/SHA256 (new \`ksw668_ena_fastq_receipt_verify.py\`),
+- absent verified NNDC ENDF/B-VIII.1 N14 original file SHA and real source-specified site spectrum,
+- absent pinned local Agda 2.9 acceptance of all new source theorem owner targets.
+
+**No CI acceptance required.** The current runtime cannot resolve the original archive hosts and does not have Agda/Nix. Source-defined checks are committed; exact PR-head all-file replay and Agda 2.9 kernel remain PENDING.
+
+### T6.A1 — original C3 rational transfer row specificity
+
+\`DASHI/Physics/Plasma/KSW668RationalThreeModeOriginalRowsExact.agda\` consumes the **actual original** \`sourceZPlus\` / \`sourceZMinus\` total integer-mode functions, confirms selected C3 row values, same doubled magnetic squared strength \(|2b(k)|^2=2>|2b(q)|^2=1\), and gives normal-form signed transfer **real-embedded** \(+\mathrm{embed}(1)\) and \(-\mathrm{embed}(1)\) in the original C3 carrier. The theorem consuming the original \`selectedPlusTransfer\` still explicitly takes the original complete all-mode RealityCondition / DivergenceFreeCondition hypotheses. The numerical Python all-mode finite support check passes, but **the Agda global all-mode conditions and normalized physical inverse-square projector are STILL OPEN**, and none of this is a measured MMS signed transfer.
+
+### T6.E2 — conditional source-specific isotope effect-size, NOT empirical exclusion
+
+New \`scripts/ksw668_e2_neutron_isotope_visibility_bound.py\` makes the thermal-channel inequality explicit:
+\[
+N_{\mathrm{new}\,^{14}C}
+\le N_{^{14}N}\,\Phi_{\rm thermal,upper}\,\sigma_{\rm thermal,upper}\,10^{-24}\,\Delta t
+\]
+conditional on **actually verified upper** flux and cross-section across the relevant band, then converts to an assumed measured-carbon isotope pMC upper under explicit carbon mass and modern C14/carbon ratio. It assumes all produced C14 remains in the sample (conservative for this channel).
+
+A strictly **synthetic** one-year example with \(10^{20}\) target N14 atoms, *representative mean not upper* ambient \(4\mathrm{n/cm^2/hour}\), a source 2026 thermal fit illustrative \(\sigma=1.987\) barn, 1g carbon and **assumed** \(^{14}C/\mathrm{C}_{\rm modern}=1.2\times10^{-12}\) gives **6.9672168 atoms** and \(\Delta\mathrm{pMC}\le1.15796517\times10^{-8}\) **only if the assumed ambient mean were a hard upper**. Because it is NOT a measured hard bound, these are **scenario values and not a real exclusion**. Fast/epithermal neutrons, tissue shielding, other nuclear channels, human metabolic uptake and sample contamination are not covered.
+
+The existing \`ksw668_e2_zero_count_exclusion.py\` now rejects original background lower estimates that are themselves statistically incompatible with actual 0-count evidence, rather than turning inconsistency into a false zero-signal bound. No controlled human experiment, same-specimen source-pinned trial or universal emotion nuclear mechanism established or excluded.
+
+### T6 decisive remaining original leaves
+
+| Lane | New strongest delivered cut | Exact next primitive |
+| --- | --- | --- |
+| **P0** | Original GPS UUID/provider-MD5 located; ENA actual byte replay; official SDC CDF epoch-source program; NNDC original ENDF exact SHA; local runner | Networked execution of *actual* GPS/CDF/FASTQ/ENDF plus P0 local Agda acceptance |
+| **A1** | Original C3 signed +/− real-embedded transfer source row exact Agda authored | Original six-mode all-integer-domain Fourier reality+transversality inhabitants and normalized inverse-square, Agda kernel; same observed MMS turbulence transfer |
+| **B1/B2** | True original four-potential Maxwell U1 PDE/gauge Bianchi plus six-face continuum field cube | Source **measured** E,B,J field/boundary and calibration with uncertainty, original PDE/agda weld |
+| **C1** | Ionization-corrected channel and exact relativistic arbitrary-input-energy 2-body kinematics | Actual event neutron energy, excited nuclear/electronic states and gamma/ion branching, mass covariance |
+| **C2** | NNDC latest evaluated library source, true ENDF laws 1–5, proven synthetic discontinuity tests; PARMA route | Actual full raw ENDF grid, measured/validated all-energy including thermal/site neutron source, in-tissue transport/self shielding |
+| **D1/D2** | **Curved nonvacuum Einstein–scalar 5D solution + same-detector null geodesics** mathematically completed | Analytic Agda original 5D full tensor weld, particular physical KSW mechanism and genuine instrument/observer measurement |
+| **E1** | Original independent pigeon GPS 705083-byte MD5/4347 fixes/34 birds provenance; 34 human AMS + NH1/NH2/NH3 source sensitivity | Exact original raw GPS/treatments/FASTQ joins, diet/residence/AMS fractionation/decay/assay histories |
+| **E2** | Conditional thermal-only effect-size and source-data-gated Poisson bound | Real source verified upper spectra and actual same-human controlled isotope interventions or constrained, exposure-specific exclusion |
+
+**Promotion rule:** mathematical solution ≠ original KSW mechanism ≠ source original data ≠ actual human experiment; source script ≠ executable receipt ≠ Agda 2.9 kernel theorem.
