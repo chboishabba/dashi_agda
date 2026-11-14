@@ -498,3 +498,67 @@ Runtime receipt                     dashiTRADE implementation conformance
 ```
 
 The trading domain should become mostly an instantiation of generic DASHI owners, not a second private theory of observers, hyperfabrics, reachability or interaction.
+
+---
+
+## GJR volatility observer and governance handoff
+
+The canonical owner is `DASHI.Finance.DashiTradeFibreBridgeExact`.
+
+The observer uses the Glosten-Jagannathan-Runkle asymmetric variance model as external mathematical prior art. The source-bounded fixtures record the values displayed by Michael Burry on 1 August 2026. DASHI does not claim ownership of the GJR model or of Burry's empirical claim.
+
+The formal adapter keeps these coordinates separate:
+
+- resting volatility;
+- positive-shock response;
+- extra negative-shock response;
+- variance memory;
+- expected persistence;
+- displayed half-decay.
+
+The adapter proves the displayed finite arithmetic in integer scale. The historical fixture has positive-shock kick 31, downside kick 75, doubled expected persistence 1978, and half-decay 65 trading days. The modern fixture has positive-shock kick 0, downside kick 282, doubled expected persistence 1948, and half-decay 27 trading days.
+
+The structural counterexample holds resting volatility fixed while changing shock response and memory. Therefore a scalar resting-volatility observer cannot determine the full volatility dynamics.
+
+The classification step may populate the existing `EnergyInvariant` and `PersistenceInvariant` coordinates. It cannot create `ACT`, `HOLD`, or `BAN` authority.
+
+### ZKP governance contract
+
+The bridge reuses `DASHI.Core.GovernanceTrajectoryRealisationExact`.
+
+- **O — organization:** dashiTRADE.
+- **R — requirement:** point-in-time volatility evidence and separate trade authorization.
+- **C — code:** GJR observer code and option-cone authorization code.
+- **S — state:** historical or modern volatility era.
+- **L — lattice:** observed or classified evidence.
+- **P — proposal:** observe, classify, or authorize.
+- **G — governance:** observation and classification pass. Direct trade authorization fails closed.
+- **F — gap:** evidence may close. Authorization remains open until the existing dashiTRADE authority path discharges it.
+
+Preconditions require a source receipt and declared integer scale. Invariants keep shock response, persistence, and authorization separate. Postconditions expose a classification while leaving permission external.
+
+### TOE and cross-prover status
+
+The canonical Agda owner is imported directly by:
+
+- `DASHI.EverythingTOESymmetryResolved369`;
+- `DASHI.Unifier`;
+- `DASHI.Unified.Everything`.
+
+The same TOE roots also import the existing governance-trajectory and SensibLaw semantic-promotion owners. This gives the legal-compliance and trading lanes the same non-promotion rule: an observed or heuristic signal does not become authority by projection.
+
+`dashi_lean4` currently has no canonical Finance/Trading mirror on its main branch. The Agda theorem surface remains golden. Do not create a second Lean volatility ontology only to obtain parity. A future Lean mirror must consume this Agda contract and preserve the same non-promotion boundary.
+
+### External research boundary
+
+Recent volatility-management research supports keeping forecast, scaling rule, transaction costs, and realized performance separate. It does not prove that a GJR regime causes a specific portfolio flow or market mechanism. The current adapter therefore records volatility dynamics only. Causal attribution to volatility targeting, pod shops, dealer hedging, CTA flows, or other producers remains a separate empirical obligation.
+
+
+Primary and external references:
+
+- Lawrence R. Glosten, Ravi Jagannathan, David E. Runkle, "On the Relation between the Expected Value and the Volatility of the Nominal Excess Return on Stocks", Journal of Finance 48(5), 1993, DOI 10.1111/j.1540-6261.1993.tb05128.x.
+- Michael Burry, "Foundations: Market Structure, Volatility Targeting, Pod Shops & Other Gremlins", Cassandra Unchained, 1 August 2026. Burry owns the displayed 1985-2000 and 2011-2026 empirical comparison.
+- Xia Xu, "Improving volatility-managed portfolios in real time", Critical Finance Review 15(2), 2026, DOI 10.1108/CFR-03-2023-2491. This is external empirical context only.
+- Jędrzej Białkowski, Sanghyun Hong, Moritz Wagner, "Is no news still good news? Volatility feedback revisited", Pacific-Basin Finance Journal 91, 2025, article 102708. This is external empirical context only.
+
+
