@@ -74,6 +74,8 @@ pycheck "$LEAN_ROOT" check_bsd_q2_eight_squareclasses_20261114.py
 pycheck "$AGDA_ROOT" check_rh_original_a2_interval_maxcut_20261114.py
 (cd "$AGDA_ROOT" && python3 scripts/check_openai_math_full_crosswalk_20261114.py --self-test)
 echo "OAI_MATH_CORPUS_PINS_PASS: 721/373/208 historical source index; no mathematical import"
+(cd "$AGDA_ROOT" && python3 scripts/check_clay_existing_vs_open_source_20261114.py --lean-root "$LEAN_ROOT" --self-test)
+echo "CLAY_TERMINAL_TYPE_AUDIT_PASS: 13 exact-source receipts; no physical or kernel promotion"
 echo "EXACT_FINITE_PASS: source-only diagnostics != Agda/Lean theorem"
 
 if [[ "${CLAY_SIX_SOURCE_ONLY:-0}" == "1" ]]; then
