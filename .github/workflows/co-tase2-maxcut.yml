@@ -1,0 +1,128 @@
+name: Co1/4TaSe2 physical max-cut
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Physics/CondensedMatter/**'
+      - 'data/co_tase2/**'
+      - 'outputs/co_tase2/**'
+      - 'scripts/co_tase2_*.py'
+      - 'scripts/check_co_tase2_maxcut.sh'
+      - 'requirements-co-tase2.txt'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/co-tase2-maxcut.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: co-tase2-maxcut-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  exact-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install Co1/4TaSe2 numerical dependencies
+        run: python -m pip install -r requirements-co-tase2.txt
+
+      - name: Compile focused Python consumers
+        run: >-
+          python -m py_compile
+          scripts/co_tase2_bloch_symmetry.py
+          scripts/co_tase2_bns_operation_audit.py
+          scripts/co_tase2_full_symmetry_receipt.py
+          scripts/co_tase2_arpes_ibw_ingest.py
+          scripts/co_tase2_arpes_observer_from_ibw.py
+          scripts/co_tase2_arpes_observer_selftest.py
+          scripts/co_tase2_arpes_peak_fit.py
+          scripts/co_tase2_arpes_forward_fit.py
+          scripts/co_tase2_published_arpes_constraints.py
+          scripts/co_tase2_independent_theory_targets.py
+          scripts/co_tase2_sah_kagome_tb.py
+          scripts/co_tase2_spin_space_generator_bridge.py
+          scripts/co_tase2_wannier90_spectral.py
+          scripts/co_tase2_wannier90_spectral_selftest.py
+          scripts/co_tase2_wannier_bns_covariance_audit.py
+          scripts/co_tase2_wannier_bns_covariance_selftest.py
+          scripts/co_tase2_kz_final_state_calibration.py
+          scripts/co_tase2_kz_final_state_calibration_selftest.py
+          scripts/co_tase2_dataset_download_probe.py
+
+      - name: Verify literal BNS and Bloch sewing receipt
+        run: >-
+          python scripts/co_tase2_full_symmetry_receipt.py
+          data/co_tase2/bns_194_268_magndata_operations.json
+          --receipt /tmp/co_tase2_full_bns_bloch_receipt.json
+
+      - name: Verify publication ARPES target receipt
+        run: >-
+          python scripts/co_tase2_published_arpes_constraints.py
+          data/co_tase2/published_arpes_constraints_2026.json
+          --receipt /tmp/co_tase2_published_arpes_constraints_receipt.json
+
+      - name: Verify independent same-stoichiometry theory target
+        run: >-
+          python scripts/co_tase2_independent_theory_targets.py
+          data/co_tase2/independent_theory_targets_2026.json
+          --receipt /tmp/co_tase2_independent_theory_targets_receipt.json
+
+      - name: Verify sourced four-site hexagonal-to-kagome TB donor
+        run: >-
+          python scripts/co_tase2_sah_kagome_tb.py
+          --receipt /tmp/co_tase2_sah_kagome_tb_receipt.json
+
+      - name: Verify spin-space generators against literal BNS table
+        run: >-
+          python scripts/co_tase2_spin_space_generator_bridge.py
+          data/co_tase2/bns_194_268_magndata_operations.json
+          --receipt /tmp/co_tase2_spin_space_generator_receipt.json
+
+      - name: Verify Wannier90 spectral producer format
+        run: python scripts/co_tase2_wannier90_spectral_selftest.py
+
+      - name: Verify Wannier-basis BNS covariance audit mechanics
+        run: python scripts/co_tase2_wannier_bns_covariance_selftest.py
+
+      - name: Verify ARPES kz calibration arithmetic
+        run: python scripts/co_tase2_kz_final_state_calibration_selftest.py
+
+      - name: Verify calibrated ARPES observer assembly
+        run: python scripts/co_tase2_arpes_observer_selftest.py
+
+      - name: Check published material producer contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          d = json.loads(Path('data/co_tase2/published_material_dft_recipe_2026.json').read_text())
+          assert d['structure_source']['space_group_number'] == 194
+          assert len(d['structure_source']['refined_fractional_sites']) == 5
+          assert d['arpes_dft_source']['code'] == 'VASP'
+          assert d['arpes_dft_source']['plane_wave_cutoff_ev'] == 600
+          assert d['arpes_dft_source']['k_mesh'] == [9, 9, 4]
+          assert d['reproducibility_boundary']['literal_material_hamiltonian_closed'] is False
+          print('PUBLISHED-MATERIAL-PRODUCER-CONTRACT: PASS')
+          PY
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check condensed-matter umbrella
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Physics/CondensedMatter/Everything.agda

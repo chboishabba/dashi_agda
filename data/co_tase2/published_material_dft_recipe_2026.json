@@ -1,0 +1,48 @@
+{
+  "material": "Co1/4TaSe2",
+  "structure_source": {
+    "citation": "H. C. Mandujano et al., Phys. Rev. B 110, 144420 (2024)",
+    "doi": "10.1103/PhysRevB.110.144420",
+    "space_group": "P63/mmc",
+    "space_group_number": 194,
+    "lattice_angstrom": {
+      "a": 6.8828,
+      "a_uncertainty": 0.0001,
+      "b": 6.8828,
+      "c": 12.4535,
+      "c_uncertainty": 0.0003
+    },
+    "refined_fractional_sites": [
+      {"species": "Co", "wyckoff": "2a", "x": 0.0, "y": 0.0, "z": 0.5, "occupancy": 1.0},
+      {"species": "Ta", "wyckoff": "2b", "x": 0.0, "y": 0.0, "z": 0.25, "occupancy": 1.0},
+      {"species": "Ta", "wyckoff": "6h", "x": 0.49148, "x_uncertainty": 0.00002, "y": 0.98296, "y_uncertainty": 0.00003, "z": 0.25, "occupancy": 1.0},
+      {"species": "Se", "wyckoff": "12k", "x": 0.33781, "x_uncertainty": 0.00003, "y": 0.16890, "y_uncertainty": 0.00002, "z": 0.38160, "z_uncertainty": 0.00002, "occupancy": 1.0},
+      {"species": "Se", "wyckoff": "4f", "x": 0.3333333333333333, "y": 0.6666666666666666, "z": 0.11041, "z_uncertainty": 0.00003, "occupancy": 1.0}
+    ]
+  },
+  "arpes_dft_source": {
+    "citation": "M. Sprague et al., Nature Communications (2026)",
+    "doi": "10.1038/s41467-026-76784-x",
+    "code": "VASP",
+    "basis": "plane-wave pseudopotential",
+    "exchange_correlation": "GGA/PBE",
+    "plane_wave_cutoff_ev": 600,
+    "lattice_angstrom_used": {"a": 6.88, "b": 6.88, "c": 12.47},
+    "k_mesh": [9, 9, 4],
+    "force_tolerance_ev_per_angstrom": 0.001,
+    "self_consistency_tolerance_ev": 1e-9,
+    "internal_positions_relaxed": true,
+    "source_reports_agreement_with_observed_band_structure": true
+  },
+  "reproducibility_boundary": {
+    "exact_pseudopotential_filenames_and_hashes_publicly_pinned_here": false,
+    "source_input_files_stored_in_repository": false,
+    "source_wavefunctions_or_charge_density_stored_in_repository": false,
+    "explicit_spin_orbit_protocol_pinned_in_public_methods_used_here": false,
+    "wannier_projection_and_disentanglement_recipe_available": false,
+    "wannier_hamiltonian_available": false,
+    "explicit_tight_binding_hopping_matrix_available": false,
+    "repository_has_reproduced_the_published_dft": false,
+    "literal_material_hamiltonian_closed": false
+  }
+}
