@@ -430,3 +430,26 @@ Leech PR #4 now owns a seeded `audit_x369_f1_rank_and_orientation_null.py` to qu
 - **F2/F3:** original frozen checkpoint, independently semantic C3 task action, source hidden readout and actual output consumer, paired causal CE against equal-displacement random null.
 - **F4/F5/F6:** source-bound truly fresh documents, non-overlapping 16-token windows and original model training; reserved independent holdouts must remain untouched.
 - **P0:** Host reports 103/103 Leech tests across 22 suites on a working tree referencing `4761459` with a local Python multiline syntax correction. The correction has since been pushed to the existing PR branch; later source changes require a new current-head replay. Do not label those 103 tests as an execution of a subsequent GitHub head.
+
+## 15 Nov 2026 — spectral covariance non-identifiability and physical F4 handoff
+
+Host reports the selected **8/8 Agda 2.9** original torus/spectral leaves passed at `e8dbc5db0c81`; this selected kernel replay does not close the A03/A04 all-field lift or A05 trained neural consumer. F1 source residual rank/orientation audit has now been reported from TrueNAS, with layer-0 original full C3 defect `1.33227`, participation rank `44.30`, and layer-1 defect `1.41233`, participation rank **`1.67`**. Mixed ± nonidentity C3 orientation null mean defects `1.3304` and `1.4121`, with observed-relative fractions `0.0955` and `0.1658`. Those are source observations on original neural activations, not finite-torus kernel theorems and not calibrated p-values.
+
+**Precise spectral no-go against covariance-only identification:** for any real symmetric PSD `C` with eigenvalues `lambda_i,lambda_j`, conjugate the standard two-dimensional rotation through `2π/3` into the corresponding eigenspace and act as identity elsewhere. The resulting orthogonal matrix `R` satisfies `R³=I` and
+```text
+||C - R C R^T||F² = (3/2) (lambda_i-lambda_j)²
+||C - R C R^T||F/||C||F = sqrt(3/2) |lambda_i-lambda_j|/||C||F
+rotating trace variance share = (lambda_i + lambda_j)/Tr(C).
+```
+Thus nullspace (or near-nullspace) two-eigenvector rotations can yield arbitrarily small covariance defect without any nontrivial trained C3 phase on the represented data. Selecting an apparent symmetry *after seeing C* is not independent validation. A candidate representation must pass a **predeclared high-variance rotating-sector threshold**, task-labelled input-orbit transport, original output-consumer response, and heldout causal CE before identifying a learned mechanism. This particular two-eigenvector construction is not a global optimum theorem over arbitrary multi-pair actions.
+
+Leech PR #4 added `audit_x369_f1_spectral_pair_identifiability.py`, which enumerates these exact single-pair covariance rotations across rotating trace share thresholds (0%,1%,5%,10%,25%), checks leading-PC source-row concentration, and remains explicitly nonpromotional. Original TrueNAS arrays are still needed for its measured receipt. New F4 development adjudicator `audit_x369_f4_development_fairness.py` separately proves the original **initial-vs-trained CE decomposition** from a completed 2-arm result:
+```text
+bestC3-bestC2 = (initialC3-initialC2)
+                - ((initialC3-bestC3)-(initialC2-bestC2)).
+```
+It must verify source/provenance SHA, paired seeds, same trainable parameters and steps, then choose only from development; never open F5 reserved rows.
+
+Host reports 600 authentic TinyStories documents acquired and new 32×64 dev + 32×64 reserved actual tokenizer arrays, with 16-token nonoverlap against supplied original files. **Without verified historical training-document IDs, this is not yet independently documented document-disjointness.** RX 580 physical F4 (C2 vs C2×C3, seeds 41/42, 24 router steps) has been launched, but **no completed arm CE receipt is available in the provided message**. Neither an uncompleted run nor source-invariant arithmetic closes F2 task semantics or F3 original output response.
+
+Still open formal target names: `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`, `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`, `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, `signedFloatWaveConsumerRefinement` and original master-integrated Track A. Do not conflate finite Agda source algebra with physical trained-model mechanism.
