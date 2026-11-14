@@ -268,3 +268,71 @@ phaseCorrectedCurlBiotSavart modeData omega transverse =
         (trans
           (cong (_* coordinate) inverseLaw)
           (solve (coordinate ∷ [])))
+
+------------------------------------------------------------------------
+-- Physical vorticity curl residual: exact swapped-input cancellation.
+--
+-- Classical vector calculus identity for the incompressible curl of
+-- convection. The difference between the ordered curl convection term and
+-- its vorticity advection/stretching expansion is not generally zero for
+-- ONE ordered pair. Instead, for p+q=k,
+--
+--   R(p,q) = (q·u_p) (p×u_q) + (q·(p×u_p)) u_q,
+--
+--   R(p,q)+R(q,p)
+--     = (p·u_p) (q×u_q) + (q·u_q) (p×u_p).
+--
+-- Consequently the swapped sum is zero when each Fourier mode is
+-- transverse. This theorem is purely polynomial over the existing
+-- rational three-vector carrier; a complex Fourier field must use the
+-- existing Complex3 algebra to transport it, not discard its phase.
+-- In particular no R236 selected covariance or R685 physical estimate
+-- is claimed here.
+------------------------------------------------------------------------
+
+orderedCurlDefect :
+  V.Vector3 → V.Vector3 → V.Vector3 → V.Vector3 → V.Vector3
+orderedCurlDefect p q up uq =
+  V.add
+    (V.scale (V.dot q up) (cross p uq))
+    (V.scale (V.dot q (cross p up)) uq)
+
+swappedCurlDefectIdentity :
+  (p q up uq : V.Vector3) →
+  V.add (orderedCurlDefect p q up uq)
+        (orderedCurlDefect q p uq up)
+  ≡ V.add
+      (V.scale (V.dot p up) (cross q uq))
+      (V.scale (V.dot q uq) (cross p up))
+swappedCurlDefectIdentity
+    (V.v3 px py pz) (V.v3 qx qy qz)
+    (V.v3 ux uy uz) (V.v3 vx vy vz) =
+  V.vectorExt
+    (solve (px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz
+         ∷ ux ∷ uy ∷ uz ∷ vx ∷ vy ∷ vz ∷ []))
+    (solve (px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz
+         ∷ ux ∷ uy ∷ uz ∷ vx ∷ vy ∷ vz ∷ []))
+    (solve (px ∷ py ∷ pz ∷ qx ∷ qy ∷ qz
+         ∷ ux ∷ uy ∷ uz ∷ vx ∷ vy ∷ vz ∷ []))
+
+swappedCurlDefectVanishesForTransverseInputs :
+  (p q up uq : V.Vector3) →
+  V.dot p up ≡ 0ℚ →
+  V.dot q uq ≡ 0ℚ →
+  V.add (orderedCurlDefect p q up uq)
+        (orderedCurlDefect q p uq up)
+  ≡ V.v3 0ℚ 0ℚ 0ℚ
+swappedCurlDefectVanishesForTransverseInputs
+    p q up uq hp hq =
+  trans (swappedCurlDefectIdentity p q up uq) vanish
+  where
+    vanish :
+      V.add
+        (V.scale (V.dot p up) (cross q uq))
+        (V.scale (V.dot q uq) (cross p up))
+      ≡ V.v3 0ℚ 0ℚ 0ℚ
+    vanish rewrite hp | hq =
+      V.vectorExt
+        (solve (V.x (cross q uq) ∷ V.x (cross p up) ∷ []))
+        (solve (V.y (cross q uq) ∷ V.y (cross p up) ∷ []))
+        (solve (V.z (cross q uq) ∷ V.z (cross p up) ∷ []))

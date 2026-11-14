@@ -27,6 +27,85 @@ module DASHI.Physics.Closure.NSTriadKNPhysicalCriticalTouchingDefectR44020261007
 -- allowance plus local ED remains the analytic theorem.
 ------------------------------------------------------------------------
 
+------------------------------------------------------------------------
+-- 2026-10-24 NEGATIVE CONTROL / DO NOT PROMOTE FULL-FIBRE B4 PAYMENT
+--
+-- For the fixed smooth unforced shear u0=2(cos x+cos y)e_z, k=(1,1,0),
+-- two active Core mixed-helicity cells have rate 2, M=(-i/2,-i/2,0).
+-- Every OTHER incidence is zero in amplitude, but the full enumeration
+-- still contributes zero-cell counts and input-rate sums to noncore
+-- centering. Exact physical negative-control arithmetic gives
+--
+--    defect_N = sum_Noncore (|p|^2+|q|^2-2) -> +infinity,
+--
+-- while the literal Core-Core Young companion freezes at 1345859672
+-- for N>=9. In particular, defect_40=1671172320.
+--
+-- EXACT ALL-CUTOFF POLYNOMIAL (for the original output fibre):
+-- for every integer N>=9, both active inputs remain fixed, and every
+-- mode newly admitted after N=9 is deep high-high/noncore under the
+-- strict R63 classifier.  Output k=(1,1,0) has lattice-pair domain
+--   px,py in [1-N,N], pz in [-N,N], q=k-p.
+-- The rate excess equals
+--   (|p|²+|q|²-2) = 2[px(px-1)+py(py-1)+pz²].
+-- Explicit power sums over that box yield
+--   fullExcess_N=(8/3)N²(2N+1)(3N²+N-2).
+-- Saturated CORE excess at N=9 is exactly 840480 (finite literal
+-- enumeration). Consequently the literal signed noncore/core defect is
+--
+--   defect_N=(8/3)N²(2N+1)(3N²+N-2)-840480
+--           =16N^5+lower-degree terms, for ALL N>=9.
+--
+-- With Core-Core companion=1345859672 and original output localED<=4,
+-- this gives an exact degree-five physical no-go for cutoff-independent
+-- c_D, theta_D<1/2. Source proof is exact algebra + finite enumeration,
+-- not yet an Agda-kernel certificate. See script/test v2.
+--
+-- Hence the proposed defect <= theta*M_core + c*localED CANNOT be cutoff
+-- uniform IF localED is a genuine bounded physical quantity on this
+-- fixed smooth state. The analytic interface currently does not source
+-- localED, so this is a conditional NO-GO for the intended physical
+-- payment, NOT a kernel proof of failure of an independently specified
+-- ED predicate. Do not change the closed-status flag to true.
+--
+-- THE REAL ED PROVENANCE IS ALREADY FIXED (NOT AN OPAQUE CUT):
+-- R219.physicalModalED has E_m=||u_m||² and D_m=|m|²||u_m||².
+-- R109.pairKernel(p,q)=D_p E_q + E_p D_q.
+-- R469.selectedTriadValue routes that kernel through the selected
+-- ordered output fibre, and PhysicalCriticalRegionUniformFamilyProducer
+-- defines localED(k) as its fold. A selected Boolean may ONLY remove
+-- nonnegative terms. For the same fixed seed, sum E=sum D=4,
+-- so the GLOBAL selected pair ED<=2*4*4=32 and this output's
+-- selected localED(k)<=4 (only ordered (e_x,e_y),(e_y,e_x) can be
+-- nonzero, each ED kernel =2). Both bounds are INDEPENDENT of N.
+--
+-- Thus the literal B4 physical payment against this original ED
+-- source is mathematically impossible with cutoff-independent
+-- theta_D<1/2 and c_D: defect_N diverges, M_core is fixed,
+-- localED<=4. A generic source-attachment record still permits an
+-- arbitrary nonspecific localED and is NOT the original physical ED.
+-- This is a no-go for THIS auxiliary B4 full-fibre estimate, not
+-- a no-go for Navier-Stokes or for a redesigned R440 estimator.
+--
+-- Source/receipt: scripts/ns_b4_literal_padding_adversary.py
+-- Canonical fix: derive a zero-padding-invariant bound from the literal
+-- modal R440 weighted amplitude, preserving NS source identification;
+-- zero rows must not create spectral damping work.
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+-- 2026-10-24 NO REINVENTED B4 NORMAL FORM
+-- The padding-invariant real input-rate/output-heat identity is ALREADY
+-- proved in NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact and
+-- NSTriadKNR650RateKernelCrossGradientNormalFormRound681Exact.
+-- R684/R685 identify the same rate kernel with the input Laplacian
+-- and commutator minus tangent; R690 sums before time integration.
+-- The quantitative cross-gradient/spacetime estimate is UNPAID, and
+-- this existing rate kernel is not automatically equivalent to the
+-- ORIGINAL selected R236 critical B4 work, whose full-fibre centered
+-- strict-half payment is disproved by the fixed smooth shear.
+-- A replacement must prove same-source equality to B4 first.
+------------------------------------------------------------------------
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List)

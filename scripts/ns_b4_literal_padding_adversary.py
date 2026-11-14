@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Exact cutoff-padding negative control for literal R440 B4.
+
+Physical real transverse seed: u_hat(±e_x)=u_hat(±e_y)=e_z.
+At output k=e_x+e_y only active ordered cells (e_x,e_y), (e_y,e_x)
+are core, with H+ cross H- values (-i/4,-i/4,±1/4).
+Hence M=(-i/2,-i/2,0), ||M||²=1/2, r_active=2.
+
+The FULL output-fibre R440 noncore/core covariance includes ZERO velocity
+incidences in n_noncore and the rate sum. Defect is exactly
+  sum_(p in noncore) (|p|²+|k-p|²-2).
+The literal Young core/core companion mass is computed from ALL core pairs,
+including zero-zero pairs; it becomes fixed for N>=9.
+
+Source definitions: PhysicalParabolicCriticalRegionRoutingExact,
+PhysicalCriticalTouchingDefectNoncoreCore20261007Exact,
+PhysicalCriticalTouchingLiteralCompanion20261007Exact and
+PhysicalCriticalTouchingDefectR44020261007Exact.
+
+The EXISTING literal R219/R469 selected-pair local ED is exactly bounded
+at this fixed state: energy_m = ||u_m||^2 and dissipation_m = |m|^2||u_m||^2.
+Both total 4. R109 bounds the GLOBAL selected-pair payment by 2*4*4=32,
+and at output k=(1,1,0) the only nonzero ordered pairs are (P,Q),(Q,P),
+each of kernel value 2: actual localED <= 4 for ANY Boolean selector.
+Thus the full-fibre B4 signed defect disproves the desired cutoff-uniform
+payment against the pre-existing physical ED currency, not merely an arbitrary
+ED chosen after the fact. The generic B4 analytic interface still accepts a
+free source-attachment predicate and is not a proof of an actual ED payment.
+This refutes an auxiliary estimate, NOT the Clay theorem.
+"""
+from fractions import Fraction
+from itertools import product
+import argparse
+import json
+
+P=(1,0,0)
+Q=(0,1,0)
+K=(1,1,0)
+
+def shell(p):
+    m=max(map(abs,p))
+    return 0 if m <= 1 else (m-1).bit_length()
+
+def region(p,q):
+    a,b,c=shell(p),shell(q),shell(K)
+    if a+3 < b: return "noncore" if 3*a <= 2*b else "core"
+    if b+3 < a: return "noncore" if 3*b <= 2*a else "core"
+    if c+3 < a and c+3 < b:
+        return "noncore" if 5*c <= 4*max(a,b) else "core"
+    return "core"
+
+# Closed-form all-N proof, not curve fitting.
+# For output k=(1,1,0), the full ordered fibre is the rectangular box
+# p_x,p_y ∈ {1-N,...,N}, p_z ∈ {-N,...,N}; q=k-p.
+# Rate excess S(p,q)-2 is 2[p_x(p_x-1)+p_y(p_y-1)+p_z²].
+# Sum over the box:
+#  Σ_{x=1-N}^N x(x-1) = 2N(N²-1)/3
+#  Σ_{z=-N}^N z² = N(N+1)(2N+1)/3,
+# giving FULL(N)=(8/3)N²(2N+1)(3N²+N-2).
+# Strict R63 shells guarantee every added row beyond cutoff N=9
+# is Noncore: if |p|∞>9 or |q|∞>9 then both input shells >=4,
+# while the fixed k shell is 0, hence this is deep HH -> Noncore.
+# The finite Core rows are fixed from N=9 onward, with exact
+# rate-excess CORE=840480, checked by the literal N=9 enumeration.
+CORE_RATE_EXCESS = 840480
+
+def closed_form_defect(N):
+    """Exact degree-five literal defect for every integer cutoff N>=9."""
+    if N < 9:
+        raise ValueError("strict R63 core is not yet saturated below cutoff 9")
+    all_fibre_rate_excess = (
+        8 * N*N * (2*N+1) * (3*N*N+N-2) // 3)
+    return all_fibre_rate_excess - CORE_RATE_EXCESS
+
+def certificate(N):
+    if N < 1: raise ValueError("cutoff must be positive")
+    core,noncore=[],[]
+    for p in product(range(-N,N+1),repeat=3):
+        q=tuple(K[j]-p[j] for j in range(3))
+        if max(map(abs,q))>N:continue
+        rate=sum(x*x for x in p+q)
+        (core if region(p,q)=="core" else noncore).append((p,rate))
+    assert sorted(p for p,r in core if p in (P,Q))==sorted((P,Q))
+    assert all(p not in (P,Q) for p,r in noncore)
+    nN=len(noncore)
+    rN=sum(rate for _,rate in noncore)
+    # w_(active ordered cell)=2Re<M,A>=1/2; all noncore w=0.
+    defect=Fraction(rN-2*nN)
+    if N >= 9:
+        assert defect == closed_form_defect(N)
+        assert sum(rate-2 for _,rate in core) == CORE_RATE_EXCESS
+    # ||M||²=1/2, ||A||²=||B||²=3/16, r_A=r_B=2.
+    zeros=sorted(r for p,r in core if p not in (P,Q))
+    count=len(zeros)
+    zero_zero=sum((2*i-count+1)*rate for i,rate in enumerate(zeros))
+    active_zero=2*Fraction(11,8)*sum(abs(rate-2) for rate in zeros)
+    companion=Fraction(zero_zero)+active_zero
+    assert defect>=0
+    physical_modal_energy = 4
+    physical_modal_dissipation = 4
+    selected_pair_global_ED_upper_bound = 2 * physical_modal_energy * physical_modal_dissipation
+    selected_pair_output_ED_upper_bound = 2 * 2
+    assert selected_pair_global_ED_upper_bound == 32
+    assert selected_pair_output_ED_upper_bound == 4
+    # For any nonnegative thetaD < 1/2, cD >= 0, and this same physical
+    # selected-pair ED <=4, a necessary condition on cD at this cutoff is:
+    # cD > (defect - M_core/2)/4 if the numerator is positive.
+    min_cD_at_half_margin = max(Fraction(0), (defect - companion / 2) / 4)
+    return {
+        "cutoff":N,"output":K,"core_rows":len(core),
+        "noncore_zero_amplitude_rows":nN,
+        "noncore_rate_sum":rN,
+        "signed_defect":str(defect),
+        "all_cutoffs_ge9_exact_degree5":str(closed_form_defect(N)) if N>=9 else None,
+        "literal_core_companion":str(companion),
+        "defect_over_companion":str(defect/companion) if companion else None,
+        "defect_exceeds_half_companion":bool(2*defect>companion),
+        "physical_modal_energy":"4",
+        "physical_modal_dissipation":"4",
+        "literal_R109_global_selected_ED_bound":"32",
+        "literal_R219_R469_output_localED_bound":"4",
+        "necessary_cD_lower_bound_at_theta_half":str(min_cD_at_half_margin),
+    }
+
+def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument("--cutoffs",nargs="+",type=int,default=[4,8,9,16,24,36,40])
+    ns=ap.parse_args().cutoffs
+    results=[certificate(n) for n in ns]
+    for r in results:
+        if r["cutoff"]>=9:
+            assert r["core_rows"]==5474
+            assert r["literal_core_companion"]=="1345859672"
+    print(json.dumps({
+        "schema":"ns.r440.zero-padding.v2",
+        "degree5_all_N_ge9":"(8/3)*N^2*(2*N+1)*(3*N^2+N-2)-840480",
+        "fixed_core_rate_excess":CORE_RATE_EXCESS,
+        "state":"u_hat(±e_x)=u_hat(±e_y)=e_z; all other modes zero",
+        "seed_is_real_transverse":True,
+        "physical_helical_reciprocals_at_active_modes": "1,1",
+        "normalization":"full ordered physical output fibre, zero cells retained",
+        "physical_shear_solution":"u(t,x,y,z)=2*exp(-t)*(cos(x)+cos(y))*e_z on 2pi-periodic torus; pressure constant",
+        "nonlinear_physical_forcing":"zero identically",
+        "padding_invariant_modal_M":"(-i/2,-i/2,0)",
+        "padding_invariant_R440_weighted_amplitude":"2*M",
+        "padding_invariant_modal_coherent_heat_work":"2",
+        "output_heat_centered_R440_work":"0",
+        "not_claimed":["Clay B false","kernel proof","arbitrary free-source ED payment ruled out"],
+        "cutoffs":results,
+    },indent=2))
+
+if __name__=="__main__":
+    main()

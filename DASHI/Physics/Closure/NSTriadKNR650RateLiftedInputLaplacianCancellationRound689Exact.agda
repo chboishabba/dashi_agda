@@ -41,6 +41,10 @@ import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Audit
 import DASHI.Physics.Closure.NSTriadKNFixedOutputMixedCommutatorDampedTangentExact as D1a
 import DASHI.Physics.Closure.NSTriadKNFixedOutputCoherentCovarianceWorkExact as Work
 import DASHI.Physics.Closure.NSTriadKNR650RateKernelInputLaplacianCollapseRound684Exact as R684
+import DASHI.Physics.Closure.NSTriadKNR650RateKernelCommutatorEndpointRound685Exact as R685
+import DASHI.Physics.Closure.NSTriadKNFixedOutputPhysicalOutputRateNormalFormExact as OutputRate
+import DASHI.Physics.Closure.NSTriadKNFixedOutputCenteredMultiplierVectorCovarianceExact as Vector
+import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedR568ToC2CommutatorRound687Exact as R687
 import DASHI.Physics.Closure.NSTriadKNR650RateLiftedDynamicCancellationRound688Exact as R688
 
@@ -75,6 +79,33 @@ module FixedOutput
     Cancel.weightedWork ≡ inputLaplacianWork
   weightedIsInputLaplacianWork =
     R684.fixedOutputPhysicalRateKernelIsInputLaplacianWork
+      physicalSystem S output
+
+  ------------------------------------------------------------------------
+  -- Actual R689 physical work, now split by the pre-existing
+  -- padding-invariant output heat-rate normal form.
+  -- These are source-defined same-fibre values, not new placeholders.
+  ------------------------------------------------------------------------
+
+  outputHeatSelfWork : ℚ
+  outputHeatSelfWork =
+    OutputRate.outputHeatRate nu I output
+      * Work.coherentWork Cancel.mixed Cancel.mixed
+
+  centeredDifferenceWork : ℚ
+  centeredDifferenceWork =
+    OutputRate.halfViscosity nu
+      * Work.coherentWork Cancel.mixed
+          (Vector.weightedVectorSum
+            (Vector.centeredFrequencyMultiplier
+              (Field30.physicalEmbedding physicalSystem))
+            value
+            (Output.physicalOutputFiber cutoff output))
+
+  inputLaplacianIsOutputHeatPlusCenteredDifference :
+    inputLaplacianWork ≡ outputHeatSelfWork + centeredDifferenceWork
+  inputLaplacianIsOutputHeatPlusCenteredDifference =
+    R685.r685InputLaplacianIsOutputHeatPlusDifference
       physicalSystem S output
 
   rateLiftedMinusTangentIsEightInputLaplacianWork :

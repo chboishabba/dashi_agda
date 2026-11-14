@@ -51,6 +51,9 @@ import DASHI.Physics.Closure.NSTriadKNR650PhysicalReserveFeasibilityRound825Exac
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotNormalizationRound829Exact as R829
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ShortTimeRound830Exact as R830
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DecisionMaxCutRound832Exact as R832
+import DASHI.Physics.Closure.NSTriadKNR650Rational345SnapshotIdentificationRound850Exact as R850
+import DASHI.Physics.Closure.NSTriadKNR650Rational345FullVectorEvaluationRound852Exact as R852
+import DASHI.Physics.Closure.NSTriadKNR650CanonicalSelectedRateNormalFormRound853Exact as R853
 import DASHI.Physics.Closure.NSClayFacingAMaxCut20261002Exact as AMax
 import DASHI.Physics.Closure.NSClayFacingBPostReserveMaxCut20261002Exact as BMax
 import DASHI.Physics.Closure.NSClayFacingCDMaxCut20261002Exact as CDMax
@@ -378,15 +381,15 @@ bExactRealFourierSparseIntegratedR408CounterexampleCertifiedIsFalse = refl
 -- calculation by moving the sparse witness to a 3-4-5 Fourier triad.
 -- R829 closes the exact R815 scalar normalization once the concrete
 -- R230/R692/R744 values are identified. R830 closes the rational horizon
--- and negative integral-upper-bound arithmetic. The two remaining physical
--- leaves are deliberately NOT represented as closed:
---
---   (1) repository-native evaluation of the selected 3-4-5 snapshot against
---       the actual R230/R692/R744 owners;
---   (2) real finite-dimensional ODE existence/continuity plus transport of
---       that same selected scalar over the certified short interval.
---
--- A successful pair of proofs refutes only universal R823 B-RESERVE.
+-- and negative integral-upper-bound arithmetic. The later R850 and R852
+-- theorem owners now supply (1) actual repository-native signed-rate work,
+-- production and dissipation, and (2) the complete R829D physical vector
+-- evaluation record via R851's zero/nonzero forcing support split.
+-- The remaining auxiliary-reserve decision leaf is REAL finite-dimensional
+-- ODE existence/chart correspondence and exact selected-rate transport over
+-- the certified short interval. That remains open.
+-- A successful R833 transport would challenge universal R823 B-RESERVE,
+-- not prove Clay alternative B.
 ------------------------------------------------------------------------
 
 bR829CanonicalNormalizationArithmeticClosed : Bool
@@ -395,7 +398,7 @@ bR829CanonicalNormalizationArithmeticClosed =
 
 bR829ConcreteSameObjectSnapshotEvaluationClosed : Bool
 bR829ConcreteSameObjectSnapshotEvaluationClosed =
-  R829.round829R230R692R744ConcreteSameObjectEvaluationClosed
+  R852.round852FullR829DRepositoryVectorRecordInhabited
 
 bR830ExactShortTimeArithmeticClosed : Bool
 bR830ExactShortTimeArithmeticClosed =
@@ -413,9 +416,31 @@ bR829CanonicalNormalizationArithmeticClosedIsTrue :
   bR829CanonicalNormalizationArithmeticClosed ≡ true
 bR829CanonicalNormalizationArithmeticClosedIsTrue = refl
 
-bR829ConcreteSameObjectSnapshotEvaluationClosedIsFalse :
-  bR829ConcreteSameObjectSnapshotEvaluationClosed ≡ false
-bR829ConcreteSameObjectSnapshotEvaluationClosedIsFalse = refl
+bR829ConcreteSameObjectSnapshotEvaluationClosedIsTrue :
+  bR829ConcreteSameObjectSnapshotEvaluationClosed ≡ true
+bR829ConcreteSameObjectSnapshotEvaluationClosedIsTrue = refl
+
+bR850InstantaneousRepositoryRateNegative : Bool
+bR850InstantaneousRepositoryRateNegative =
+  R850.round850InstantaneousActualRepositoryRateStrictlyNegative
+
+-- General R815/R823 physical pointwise identification ALREADY exists as a
+-- term in R853; only its real-time physical carrier instantiation is open.
+bR853PointwiseSelectedRateSamePhysicalPacket : Bool
+bR853PointwiseSelectedRateSamePhysicalPacket =
+  R853.round853GeneralR815SelectedRateNormalFormClosed
+
+bR853SelectedRateOnRealTrajectory : Bool
+bR853SelectedRateOnRealTrajectory =
+  R853.round853RealTrajectoryCarrierWeldClosed
+
+bR853PointwiseSelectedRateSamePhysicalPacketIsTrue :
+  bR853PointwiseSelectedRateSamePhysicalPacket ≡ true
+bR853PointwiseSelectedRateSamePhysicalPacketIsTrue = refl
+
+bR853SelectedRateOnRealTrajectoryIsFalse :
+  bR853SelectedRateOnRealTrajectory ≡ false
+bR853SelectedRateOnRealTrajectoryIsFalse = refl
 
 bR830ExactShortTimeArithmeticClosedIsTrue :
   bR830ExactShortTimeArithmeticClosed ≡ true
@@ -434,7 +459,7 @@ aMaxCutLeafCount : Nat
 aMaxCutLeafCount = AMax.aLeafCount
 
 bDecisionLeafCount : Nat
-bDecisionLeafCount = R832.decisionLeafCount
+bDecisionLeafCount = R832.remainingDecisionLeafCount
 
 bPostReserveLeafCount : Nat
 bPostReserveLeafCount = BMax.bPostReserveLeafCount
