@@ -12,13 +12,13 @@ open import DASHI.AnimalCommunication.PoseMDL
 -- must prove.  It does not postulate cryptographic hiding, binding, soundness,
 -- or zero knowledge: those belong to a concrete proof-system instance.
 record CommitmentFamily
-  (Video DogTrack PoseRibbon MotifProgram Summary Digest : Set) : Set₁ where
+  (V T P M S Digest : Set) : Set₁ where
   field
-    commitVideo   : Video → Digest
-    commitTrack   : DogTrack → Digest
-    commitPose    : PoseRibbon → Digest
-    commitProgram : MotifProgram → Digest
-    commitSummary : Summary → Digest
+    commitVideo   : V → Digest
+    commitTrack   : T → Digest
+    commitPose    : P → Digest
+    commitProgram : M → Digest
+    commitSummary : S → Digest
 
 open CommitmentFamily public
 
