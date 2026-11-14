@@ -502,3 +502,41 @@ proofs and exact-head kernel tests. False promotion remains blocked.
 not an exhaustive syntactic/theorem-semantic search of every historical
 DASHI declaration. Open status is recorded **at the audited original
 consumer interfaces**; do not interpret it as mathematical impossibility.
+
+
+## 14 November: OAI Clay comparison and A7/A8 same-witness maximum cut
+
+See canonical scoped comparison:
+\`Docs/roadmaps/ClayOpenAIOriginalWitnessComparativeMaximumCut20261114.md\`.
+This section is an additive 14-Nov source cut, **not** a revision of earlier
+rounds' physical or kernel outcomes.
+
+- External OpenAI October 28 YM A7 \`combined_acceptance\` at its own Lean
+  4.32 types keeps \`C,q,S,F\` together. External OPE A8 was separately checked.
+  The review explicitly leaves a same-existential-witness A7+A8 theorem open.
+- A new **candidate** in Lean Clay #108,
+  \`Integration/OpenAIYangMills32/CombinedA7A8SameWitnessCandidate.lean\`,
+  uses the SAME A7 \`Accepted.source\` OPE property and external review
+  \`YMReview.OPE.from_source\`, rather than choosing an independent A8 witness.
+  The exact 4.32 compile/type/axiom receipt is **OPEN**, and the candidate is
+  intentionally excluded from the native 4.28 acceptance root.
+- New **Agda source candidate** on this PR,
+  \`DASHI/Research/OpenAIMath/OpenAIYangMillsSameWitnessNonEntailmentExact.agda\`,
+  gives a synthetic two-witness countermodel and an explicit same-witness
+  lift, plus a separate positive-probe/all-mode counterexample.
+  Its pinned Agda 2.9 kernel is **OPEN**; not a physical Yang--Mills model.
+- New finite regression
+  \`scripts/check_oai_ym_endpoint_logic_maxcut_20261114.py\` is included in
+  the single-rollup source-only driver. **Exact Git blob
+  \`3d72ed3b3f592dcd49f97d8a99b239ab588fa5a7\` was executed independently
+  locally and passed all 16 finite predicate pairs (two independent-but-not-
+  joint models).** This is not a native theorem check.
+- No original Wilson E1/D1/D2, OS-H or physically uniform gap is discharged.
+  The earlier E1 original-source and R445 RG work remains a distinct B/C
+  set of physical obligations. The OpenAI 4 Nov YM submission is not covered
+  by the independently reviewed 28 Oct source package.
+
+Original mathematical credit: OpenAI and the cited prior mathematical
+sources; external 10 Nov review: Douglas, Gross, Jaffe, Klebanov, Nekrasov.
+New DASHI contribution: fail-closed endpoint composition *candidate* and
+independent finite logical audit, not new existence/mass-gap mathematics.
