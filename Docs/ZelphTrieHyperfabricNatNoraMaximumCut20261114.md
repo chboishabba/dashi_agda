@@ -1,5 +1,30 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## New constructive A2 maximum-cut tranche — 15 November 2026
+
+**Source committed, new head not yet kernel checked.** Existing DASHI A1–A6 conditional modules passed operator Agda 2.9 at exact earlier source `4c89edb` (7 targets). The new separate `DASHI/Interop/ZelphFiniteQueryWordClosureExact.agda` replaces the A2 circular proof premise *for finite left/right relation words* with a source-reachable local-step certificate and an induction:
+
+`SourceReachableBoundary original selected state word` requires `original direction frontier ≡ selected direction frontier` at **each actually reached source frontier**; `zelphSelectedWordAnswerEqualsOriginal` then derives equality of the entire word's endpoint frontier; `zelphFiniteQueryFamilyBoundaryClosed` lifts it to each query in an explicitly declared family. The state is a frontier, not a fabricated single-valued node function. The accepted 7-target Agda source remains unchanged, and the exact-head checker now includes the NEW eighth module. Do not claim its Agda PASS until the operator reruns.
+
+**ITIR P2 constructive implementation:** `tools/audit_zelph_finite_query_family.py` composes source-equal native one-hop root observations into finite `left/right` word answer traces, tracks provenance raw audit SHAs and reports exact missing `(node_id,direction)` boundaries. If the second-hop original/selected observation is missing, it **returns incomplete** rather than inventing negative answers. It explicitly refuses treating numeric `left/right` paths as property-labelled P31/P279 or P14143/SPARQL semantics. `tools/zelph_bin_filtered_route_builder.cpp` additionally accepts `--node <numeric Zelph ID>` for **unnamed physical frontier nodes**, retaining the original `--qid` seed and both source passes; raw-range, native decode and finite-family validators now carry these extra nodes. Existing QID name mapping is never replaced by made-up QIDs.
+
+**New exact acceptance commands (NOT YET RUN at the new heads):**
+
+```bash
+# DASHI #1506 on clean new head, pinned Agda 2.9 (now 8 targets):
+bash scripts/check_zelph_trie_hyperfabric_maxcut.sh
+# ITIR #14 on clean new head: 11 Python suites plus native packed roundtrip:
+bash tools/check_zelph_physical_maxcut_offline.sh
+```
+
+**Physical P0/P1/P2 execution after real pinned byte acquisition:** run the unchanged five-QID original-bin route; run native physical audit on actual sharded bytes; specify a finite `left/right` query family and evaluate it through `audit_zelph_finite_query_family.py`. If its output identifies missing numeric boundaries, rerun the **original** source-bin producer with the five seed QIDs and exact `--node` IDs from that report; re-fetch/re-hash and re-decode all routed selected shards, and rerun finite closure. This iterates until every declared query word has a complete physical one-hop observation on each reachable frontier, or returns incomplete. No assumption that adjacency sections are sorted by node ID, no global source-word claim, and no automatic property/qualifier semantics.
+
+**Independent P4 advance:** SLR #10 now contains `crates/sl-source-handoff/src/native_statement_evidence.rs` (source-written, cargo not yet run). It refuses to join a claimed native statement GUID/property/revision/rank/mainsnak/qualifier/reference/P854 value that disagrees with the existing `StatementBundleReview` and graph candidate, and returns an explicit read-only candidate with `source_support_paid=false` and no edit authority. Native *raw entity byte rehash*, primary P854 document verification and persisted S29/restart still OPEN. The native GUID cannot be invented from Zelph node IDs; the statement shape follows Wikibase native statement semantics.
+
+**Next decisive original-math cut:** instantiate A2's source-reachable equality with physically authenticated adjacency rows from a real immutable HF revision, then extend the query grammar beyond numeric left/right to a verified property-labelled, join-aware engine. A1 whole-domain original name coverage, A3–A6 real premises, original-source authentication, SLR native source payment, S29, external Éder Porto NORA and Nat full cursor remain OPEN.
+
+
+
 ## 15 November 2026: Ibrahim FLN ↔ Zelph physical-gate crosswalk
 
 **Separate original objects, shared mathematics.** The [Ibrahim FLN exact-lemma matrix](https://github.com/chboishabba/dashi_agda/blob/feat/ibrahim-fln-ternary-revision-maxcut-20261114/Docs/IbrahimFLNMaximumCutAcceptanceAndExactLemmas20261115.md) (Agda [PR #1505](https://github.com/chboishabba/dashi_agda/pull/1505)) now distinguishes finite first-link graph mathematics, original author-parser source spans, and reviewed ITIR query objects. This Zelph [PR #1506](https://github.com/chboishabba/dashi_agda/pull/1506) continues to own the **different** original published HF `.bin`/Cap'n Proto source-evidence gate. Reuse the existing trie/hyperfabric and conditional consumer-lift owners, but **do not identify** an original Zelph QID/name edge with an original Wikipedia first-qualifying article link without an authenticated crosswalk.
