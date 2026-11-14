@@ -65,7 +65,8 @@ def cylinder_audit(eps=0.02, t=2.125, tau=0.25):
                 photon_first_arrival=math.pi, receiver_time=t,
                 spatial_source_halfwidth=eps, numerical_receiver_response=response,
                 rigorous_positive_receiver_lower=lower,
-                finite_energy_early_scalar_receiver=True,\n                exactly_thin_brane_confined_source=False,
+                finite_energy_early_scalar_receiver=True,
+                exactly_thin_brane_confined_source=False,
                 scalar_test_field_only=True, gravitational_backreaction=False)
 
 def ads_tensor_audit():
