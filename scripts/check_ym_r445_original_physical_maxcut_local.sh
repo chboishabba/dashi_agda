@@ -14,6 +14,8 @@ python3 scripts/check_ym_r445_relative_density_three_moment_cut.py
 
 printf '%s\n' "== R445 conditional influence and logical no-go checker =="
 python3 scripts/check_ym_r445_localized_tv_maxcut_countermodels.py
+python3 scripts/check_ym_r445_weighted_exterior_influence.py
+python3 scripts/check_ym_r445_interacting_transfer_contraction_20261114.py
 
 printf '%s\n' "== R445 exact-rational independent regression tests =="
 python3 -m unittest discover -s tests \
