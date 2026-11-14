@@ -101,4 +101,6 @@ Any proposed **forced-universal** extension of this method must survive the exte
 3. **BIDI original source proofs:** prioritize **YM.A01–A05** and **SAT.M01b–M05** (greatest direct theorem reuse). In NS, **NS.B01/B02** are concrete analytic reuse targets but must respect R³ vs torus and unsigned vs signed flux. Complete the separate original R71/R853 finite-flow joins.
 4. **True C frontier:** original Wilson mass gap / nontriviality and all groups, original 3D uniform regularity vs validated C/D breakdown, and the universal polynomial SAT lower bound. These are not discharged by a checker, a finite regression or a source/witness record.
 
+**Exact local regression receipt:** the committed source Git blob `5a37096a5d7579bea3a439b31020d1621259eb21` was independently reconstructed and run on 14 Nov 2026: PASS (580 finite CNF formulas and four NS predicate models). This source-only receipt is **not** a Lean/Agda proof.
+
 **Status:** selected original count→SAT decision and foreign typed corollary/proposed count transport *source-written*; the local finite regression passed 580 CNFs and 4 NS models; no pinned new Agda/Lean kernel checks, no full external proof replay, no same-object YM E1/D2, no Clay solution. Preserve all donor heads, author priority, original math and review citations.
