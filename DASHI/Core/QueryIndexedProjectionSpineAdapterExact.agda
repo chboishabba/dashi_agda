@@ -41,8 +41,12 @@ projectionCollisionToQueryAdequacyDefect :
     {query : Query} →
   Coarse.ProjectionCollision project (Indexed.answer semantics query) →
   Indexed.QueryAdequacyDefect project semantics query
-projectionCollisionToQueryAdequacyDefect =
+projectionCollisionToQueryAdequacyDefect
+  {project = project} {semantics = semantics} {query = query} collision =
   Crosswalk.projectionCollisionToNonFactorability
+    {project = project}
+    {consumer = Indexed.answer semantics query}
+    collision
 
 queryAdequacyDefectRepairRequiresSeparation :
   ∀ {State Observation Query Answer Refinement : Set}
@@ -57,9 +61,18 @@ queryAdequacyDefectRepairRequiresSeparation :
     ≡ refine
       (Coarse.right (queryAdequacyDefectToProjectionCollision defect)) →
   ⊥
-queryAdequacyDefectRepairRequiresSeparation defect =
+queryAdequacyDefectRepairRequiresSeparation
+  {project = project} {semantics = semantics}
+  {query = query} {refine = refine} defect =
   Crosswalk.projectionCollisionRepairRequiresSeparation
-    (queryAdequacyDefectToProjectionCollision defect)
+    {project = project}
+    {refine = refine}
+    {consumer = Indexed.answer semantics query}
+    (queryAdequacyDefectToProjectionCollision
+      {project = project}
+      {semantics = semantics}
+      {query = query}
+      defect)
 
 ------------------------------------------------------------------------
 -- Boundary: observer identity/axis/protocol can be a retained coordinate for a
