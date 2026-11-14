@@ -174,3 +174,35 @@ Huber–Liu–McLaughlin–Ye–Yuan–Zhang (CM eta);
 Newman/Gordon–Hughes eta-quotient criterion;
 Ligozat cusp orders; Jacobi theta product formulas;
 Michael Stoll's Mordell–Weil formalization.
+
+
+### Extended exact-integer independent assay (14 Nov)
+
+Independently reran the TWO finite q-coefficient algorithms through
+degree 1024 (beyond the script's default cutoff of 256):
+- 1025/1025 coefficient entries agree for the selected
+  eta(4τ)²eta(8τ)² q-product and explicit Jacobi/Gaussian theta sum;
+- 171/171 odd-prime coefficients through 1024 agree with
+  **independent direct point counting** of y²=x³-x in F_p;
+- all indices 0<=n<=1024 with n % 4 != 1 have coefficient 0;
+- the good-prime square recurrence a_(p²)=a_p²-p agrees for
+  every p with p²<=1024.
+- all six selected d|32 Ligozat cusp arithmetic checks
+  agree with the exact gcd formula and yield cusp order 1.
+
+This is computational testing, not kernel acceptance or an
+all-n q-series proof. Reproduce the expanded test with:
+  python3 scripts/check_bsd_level32_cm_eta_theta_exact.py --cutoff 1024
+
+### One-dimensional normalized all-n algebraic compiler
+
+`EllipticCMNormalizedOneDimensionalQSeriesExact.agda` proves
+`normalizedScalarIsOne` and
+`normalizedOneDimensionalAllNCoefficientsAgree`:
+if two rational Fourier coefficient families f,g are PROVED
+to lie in the same one-dimensional cusp-form line,
+so f_n=c*g_n for ALL n, and f_1=g_1=1, then c=1 and
+every coefficient agrees. This avoids a second Hecke-prime
+reconstruction, while making the missing modular-space
+proportionality theorem explicit rather than inserting a
+false/assumed instance.
