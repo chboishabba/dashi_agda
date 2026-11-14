@@ -1,0 +1,210 @@
+{
+  "schema": "dashi-clay-existing-theorems-vs-open-physical-producers-v1",
+  "date": "2026-11-14",
+  "purpose": "Audited original-source terminal type structure, not a formal proof of absence or an assertion of a solved Clay problem",
+  "source_heads": {
+    "agda": "fa751e1c9c1a0b0a52a33d97f69531bb0934786a",
+    "lean": "df214149df612797cd1a3bb71d52dda00bd45c26"
+  },
+  "vendoring": {
+    "openai_math_gitlink_repository": "openai/math",
+    "openai_math_gitlink_commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+    "openai_math_original_main_result_references": 200,
+    "openai_math_later_index_references": 208,
+    "openai_math_later_catalogue_revision": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+    "openai_ym_external_registration_not_gitlink": true,
+    "openai_ym_external_head": "3456e5e75cf8d4cd558955a5c7638fba2d68f464"
+  },
+  "semantics": "source_receipt means source text contains a named proof/record; signatures may be conditional and have not been kernel-accepted at these exact rollup heads",
+  "all_terminal_problems_solved": false,
+  "any_new_kernel_receipt": false,
+  "rows": [
+    {
+      "id": "YM.LITERAL.CLAY",
+      "programme": "YM",
+      "repo": "agda",
+      "path": "DASHI/Physics/YangMills/YangMillsDirectSourceOSLiteralClayMaxCutExact.agda",
+      "blob": "97f1ecfa6dcb2b0b7c6d1c83fc303809f33d0b5a",
+      "signatures": [
+        "record DirectSourceOSLiteralClayInputs",
+        "literalClaySolution :",
+        "directSourceOSLiteralClayPhysicalInstantiationLevel = conditional"
+      ],
+      "source_receipt": "A complete conditional theorem compiler from populated physical and local-QFT inputs",
+      "outstanding": "Construct inhabited original all-group DirectSourceOSLiteralClayInputs Y; external OAI YM E1 original Wilson transport is a candidate, not this witness",
+      "tier": "NEW_PHYSICAL_AND_SAME_OBJECT"
+    },
+    {
+      "id": "YM.FINITE.E1",
+      "programme": "YM",
+      "repo": "agda",
+      "path": "DASHI/Physics/YangMills/YMClayE1OriginalSUNFiniteCylinderLawsExact.agda",
+      "blob": "1ddb583aa9b5fa5c12e297ebcc42d389b2d22eb7",
+      "signatures": [
+        "This is finite mathematics. It does not assert a physical continuum",
+        "legacy"
+      ],
+      "source_receipt": "Finite SU(N) original interacting Wilson/Haar normalized cylinder laws",
+      "outstanding": "Interacting projective UV/IR limit, physical connected covariance, same OS gap and nontriviality",
+      "tier": "KNOWN_FINITE_MATH"
+    },
+    {
+      "id": "NS.R736",
+      "programme": "NS",
+      "repo": "agda",
+      "path": "DASHI/Physics/Closure/NSTriadKNR650CurrentSharedWeightedWallRound736Exact.agda",
+      "blob": "a38d8fc322e4efe7ce1bb3979b2705e561904fe2",
+      "signatures": [
+        "round736WeightedPlusEndpointClosedIsFalse",
+        "round736AugmentedCriticalWeightedClosedIsFalse",
+        "round736ClayPromotion = false"
+      ],
+      "source_receipt": "Two original signed weighted barrier leaves and exact equivalences/priority",
+      "outstanding": "Establish original cutoff-uniform W1/W2 signed payments on actual NS flow, not just their equivalence",
+      "tier": "NEW_PDE_ESTIMATE"
+    },
+    {
+      "id": "NS.R240",
+      "programme": "NS",
+      "repo": "agda",
+      "path": "DASHI/Physics/Closure/NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact.agda",
+      "blob": "53c6a8f1a7f5110bf7cf6ed9f6d55bd328eeebcd",
+      "signatures": [
+        "record PhysicalNSGalerkinTrajectory",
+        "round240CorrectedPhysicalSpacetimeBudgetClosedIsFalse",
+        "round240ClayPromotionIsFalse"
+      ],
+      "source_receipt": "Full typed physical Galerkin trajectory interface with derivative and equation fields",
+      "outstanding": "Construct real-time original ODE solution and uniform bound; a record alone is not a trajectory proof",
+      "tier": "ORIGINAL_SOURCE_PRODUCER"
+    },
+    {
+      "id": "NS.R854",
+      "programme": "NS",
+      "repo": "lean",
+      "path": "Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean",
+      "blob": "866c9a5fef276630623fc5def1540f1031f4a10e",
+      "signatures": [
+        "theorem nsR854OriginalRealRateIntegralStrictlyNegative",
+        "(hOriginalRateEnvelope :"
+      ],
+      "source_receipt": "Real interval integral is negative if R854 affine source envelope is supplied",
+      "outstanding": "Prove original R71 trajectory/R853 rate provides hOriginalRateEnvelope at selected horizon",
+      "tier": "CONDITIONAL_KNOWN_ANALYSIS"
+    },
+    {
+      "id": "RH.A2",
+      "programme": "RH",
+      "repo": "lean",
+      "path": "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean",
+      "blob": "26a479f496ebe09f74f30fe9e9013d56ddf9fe5b",
+      "signatures": [
+        "selectedA2Pass_of_source_intervals",
+        "selectedA2NoGo_of_source_intervals",
+        "(hf : W.literalFarExactAt"
+      ],
+      "source_receipt": "Actual original W/rho/EV/n signed interval PASS/NO-GO logic with explicit assumptions",
+      "outstanding": "Obtain strict actual-zero-source intervals for signed FarExact/debt/compensation or an actual-source refutation",
+      "tier": "NEW_ZERO_ESTIMATE"
+    },
+    {
+      "id": "PNP.UNIVERSAL",
+      "programme": "PNP",
+      "repo": "agda",
+      "path": "DASHI/Mathematics/Complexity/PNotEqualsNPDirectSATLowerBoundExact.agda",
+      "blob": "a777a87b5cd42b4a6badc9dea58a3f86768987ea",
+      "signatures": [
+        "UniversalPolynomialSATDecisionFailure cost =",
+        "universalDecisionFailureGivesSATLowerBoundProducer universalFailure"
+      ],
+      "source_receipt": "Actual universal SAT lower-bound predicate and consequence compiler",
+      "outstanding": "Inhabit ∀ polynomial candidates D, ∃ input φ with D(φ) ≠ SAT(φ) (in actual cost model)",
+      "tier": "NEW_COMPLEXITY_LOWER_BOUND"
+    },
+    {
+      "id": "KARP.PHYSICAL",
+      "programme": "KARP",
+      "repo": "agda",
+      "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+      "blob": "cb720b2ec3d2135dcca0033015e14441a6b10164",
+      "signatures": [
+        "physicalAllLengthGammaRunSameOriginalPositive",
+        "This is NOT a full total parser"
+      ],
+      "source_receipt": "True source physical gamma positive word run for arbitrary positive k",
+      "outstanding": "All malformed words, original N21 physical F3 simulation, F2/F4 total bit heap and clock, originalN21InNP",
+      "tier": "KNOWN_COMPUTABILITY_FORMALIZATION"
+    },
+    {
+      "id": "BISHOP.FINITE",
+      "programme": "BISHOP",
+      "repo": "agda",
+      "path": "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda",
+      "blob": "33d41d991b2b8b065f63f159919bf7518de41a5c",
+      "signatures": [
+        "originalRound11EtaFiniteAbel",
+        "SOURCE-WRITTEN, NOT YET PINNED AGDA 2.9"
+      ],
+      "source_receipt": "Original finite Abel summation identity on actual Bishop-complex eta prefix",
+      "outstanding": "Prove same source Nat-log/exp laws and compact-uniform Cauchy tail; no new general mathematical discovery known",
+      "tier": "KNOWN_CONSTRUCTIVE_ANALYSIS"
+    },
+    {
+      "id": "BSD.H1",
+      "programme": "BSD",
+      "repo": "lean",
+      "path": "Synthesis/MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence.lean",
+      "blob": "266cad40ff2c2343fd877af14975ecfbdababdc5",
+      "signatures": [
+        "cmOriginalK1ActualE2H1TorsionAndQ2LocalCondition",
+        "classical H1(R,E[2])"
+      ],
+      "source_receipt": "Actual E[2] H¹-compatible Selmer torsion and local necessity facts",
+      "outstanding": "Classical global/local Kummer image equivalence, Selmer exact sequence, rank and actual L-value normalization",
+      "tier": "KNOWN_SELECTED_CURVE_FORMALIZATION"
+    },
+    {
+      "id": "BSD.SHA",
+      "programme": "BSD",
+      "repo": "lean",
+      "path": "Synthesis/MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact.lean",
+      "blob": "ef5292051cb42c9380f56dd641a12d4d1b2f4025",
+      "signatures": [
+        "noncomputable def cmSelectedEBarRestrictedShaTwo",
+        "rationalTateShafarevichTwoTorsion"
+      ],
+      "source_receipt": "Actual E(Qbar)-coefficient Sha[2] subgroup target (not E[2]-coefficient Sha)",
+      "outstanding": "Identify classical Kummer cokernel with this Sha[2], odd-primary Sha via applicable Rubin theorem and exact leading coefficient",
+      "tier": "KNOWN_SELECTED_CURVE_FORMALIZATION"
+    },
+    {
+      "id": "OAI.YM.RECEIPT",
+      "programme": "OAI",
+      "repo": "agda",
+      "path": "DASHI/Research/OpenAIMath/OpenAIYangMills2026SourceIntakeExact.agda",
+      "blob": "9b0c34aeec7719902da5345116af0e707c241cca",
+      "signatures": [
+        "YangMills.jointExistence",
+        "SOURCE RECEIPT, not a Lean-to-Agda theorem import",
+        "leanprover/lean4:v4.32.0"
+      ],
+      "source_receipt": "External source/review pinned, E1 existence candidate",
+      "outstanding": "Original Wilson group/measure/scale/OS typed transport; distinct from physical D1/D2 mass-gap estimates",
+      "tier": "EXTERNAL_CANDIDATE_SOURCE"
+    },
+    {
+      "id": "OAI.MATH.INDEX",
+      "programme": "OAI",
+      "repo": "lean",
+      "path": "Integration/OpenAIMath/ClayCrosswalkSourceIndex20261114.lean",
+      "blob": "25e49e0bab40d16e6fffc8ed4e127623600bd8c0",
+      "signatures": [
+        "sourceIndexHas208Declarations",
+        "originalCorpusSameObjectToAgdaPaid : Bool := false"
+      ],
+      "source_receipt": "Full 208-reference later indexed theorem metadata, no native theorem ports",
+      "outstanding": "Recheck original external Lean toolchain, typed same-object proof transport and native world admission",
+      "tier": "VENDORED_SOURCE_ONLY"
+    }
+  ]
+}
