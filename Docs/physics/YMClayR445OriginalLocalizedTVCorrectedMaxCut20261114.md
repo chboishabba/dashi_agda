@@ -125,3 +125,15 @@ The new `YMClayR445LocalizedTVInferenceNoGoExact.agda` has only native Nat arith
 **Precise status:** this pays the *F19-internal* A-level source normalized cylinder identity. It does **not** establish `originalF19R445SamePhysicalCoarseMap`: the selected R445 `SUNBlock.nativeSUNBlockLinks {m=1}{l=1}` must still be proved pointwise identical to the F19 sorted-64-pair block map after the original codec/reindex, and the actual R445 renormalized target must be constructed. No cutoff-uniform TV/physical RG estimate follows from this new theorem. Legacy `RealAnalysisAxioms` and Agda 2.9 exact-head kernel acceptance remain outstanding.
 
 The main logical no-go and correct conditional-mixture inequality above are unchanged.
+
+
+## Full fail-closed original-source checker
+
+The dedicated runner is `scripts/check_ym_r445_original_physical_maxcut_local.sh`:
+
+```sh
+R445_SOURCE_ONLY=1 bash scripts/check_ym_r445_original_physical_maxcut_local.sh
+bash scripts/check_ym_r445_original_physical_maxcut_local.sh
+```
+
+The first explicitly exits as finite source-only evidence (including the eight regression tests); the second must actually invoke `scripts/run_agda29_parallel_check.sh` on the F19/P0/R445 aggregate original Agda root or fail. Neither outcome by itself establishes the actual unproved original effective/target Wilson-TV assumption, removal of transitive `RealAnalysisAxioms` postulates, or the Yang–Mills mass-gap endpoint.
