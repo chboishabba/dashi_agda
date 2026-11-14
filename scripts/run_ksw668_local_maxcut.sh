@@ -44,6 +44,10 @@ run python python3 scripts/ksw668_brane_winding_stability_source.py
 run python python3 scripts/ksw668_compact_kk_mode_dispersion.py
 run python python3 scripts/ksw668_caldwell_langlois_original_eq19.py
 run python python3 scripts/ksw668_caldwell_langlois_israel_exact.py
+run python python3 scripts/ksw668_brane_winding_allmode_linear_stability.py
+run python python3 scripts/ksw668_ads5_gravitational_horizon_variance_bound.py
+run python python3 scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py
+run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
 run python python3 scripts/ksw668_original_eq19_rational_pair_horizon.py
 run python python3 scripts/test_ksw668_brane_shortcut.py
 run python python3 scripts/test_ksw668_endf81_primary.py
@@ -153,6 +157,8 @@ run agda bash scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Gravity/KSW668BraneWindingSourceFiniteExact.agda \
   DASHI/Physics/Gravity/KSW668CaldwellLangloisHorizonSourceRationalExact.agda \
   DASHI/Physics/Gravity/KSW668BraneLevinStringTSFVPromotionBoundaryExact.agda \
+  DASHI/Physics/Gravity/KSW668AdS5IsraelOriginalRationalSliceExact.agda \
+  DASHI/Physics/Gravity/KSW668BulkScalarReceiverRationalSliceExact.agda \
   DASHI/Physics/Gravity/KSW668BraneBulkMaxCutEverything.agda \
   DASHI/Biology/KSW668EmpiricalIsotopeMagnetoreceptionSourceExact.agda \
   DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda \
