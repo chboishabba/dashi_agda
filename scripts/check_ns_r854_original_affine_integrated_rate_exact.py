@@ -28,6 +28,17 @@ def main():
     old = COARSE_UPPER*T
     assert envelope_terminal < COARSE_UPPER < 0
     assert integrated < old < 0
+    # New R855: enormous slack in the *actual fixed* R830 horizon.
+    # These two weaker budgets can replace the sharp R828 constant IF
+    # proved for the physical original R853 rate along a real solution.
+    weak_pointwise = 10_000_000 * L
+    weak_integrated = 20_000_000 * L
+    assert SOURCE_RATE + weak_pointwise*T < 0
+    assert SOURCE_RATE*T + weak_integrated*T*T/2 < 0
+    exact_pointwise_threshold = -SOURCE_RATE/T
+    exact_integrated_threshold = -2*SOURCE_RATE/T
+    assert weak_pointwise < exact_pointwise_threshold
+    assert weak_integrated < exact_integrated_threshold
     # Counterexample: the negative INITIAL rate alone says nothing
     # about later integrated sign without the physical Lipschitz bound.
     # A linear scalar with slope 2*abs(r0)/T becomes positive enough
@@ -45,6 +56,13 @@ def main():
         "old_R830_integral_upper":str(old),
         "strictly_stronger_and_negative":True,
         "negative_initial_rate_alone_not_enough":True,
+        "R855_pointwise_weak_L_factor":10_000_000,
+        "R855_integrated_weak_L_factor":20_000_000,
+        "R855_exact_pointwise_derivative_budget":str(exact_pointwise_threshold),
+        "R855_exact_integrated_derivative_budget":str(exact_integrated_threshold),
+        "R855_weak_pointwise_terminal":str(SOURCE_RATE+weak_pointwise*T),
+        "R855_weak_integrated_upper":str(SOURCE_RATE*T+weak_integrated*T*T/2),
+        "actual_R853_weak_rate_bound_proved":False,
         "real_time_selected_R408_trajectory_built":False,
         "original_physical_Lipschitz_proved_in_Agda":False,
         "ns_clay_promotion":False,
