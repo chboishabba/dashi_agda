@@ -1,0 +1,25 @@
+module DASHI.Biology.DyadicSynchronyDevelopmentalAttunementBridgeRegression where
+
+open import Agda.Builtin.Bool using (true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Biology.DyadicSynchronyDevelopmentalAttunementBridgeExact as P
+import DASHI.Reasoning.DevelopmentalAttunementPNFBridge as Attunement
+
+relationKindRegression : Attunement.DevelopmentalRelation
+relationKindRegression = P.relationKind P.canonicalDyadicSynchronyAttunementBridge
+
+fragmentationOwnerRegression :
+  Attunement.SameQuantityGreaterFragmentation Attunement.stableTrace Attunement.fragmentedTrace
+fragmentationOwnerRegression = P.fragmentationWitness P.canonicalDyadicSynchronyAttunementBridge
+
+heterogeneityReviewRetainedRegression :
+  P.heterogeneityReviewRetained P.canonicalDyadicSynchronyAttunementBoundary ≡ true
+heterogeneityReviewRetainedRegression = refl
+
+uniquePsychologicalClassifierBlockedRegression :
+  P.synchronyMeaningIsUniquePsychologicalClassifier P.canonicalDyadicSynchronyAttunementBoundary ≡ false
+uniquePsychologicalClassifierBlockedRegression = refl
+
+canonicalBoundaryRegression : P.DyadicSynchronyAttunementBoundary
+canonicalBoundaryRegression = P.canonicalDyadicSynchronyAttunementBoundary

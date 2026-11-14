@@ -1,0 +1,12 @@
+module DASHI.Biology.QuailEggGutTransferRound2Regression where
+
+import DASHI.Biology.QuailEggGutTransferRound2Exact as Q
+
+ovomucoidStabilityRegression : Q.QuailOvomucoidStabilityReceipt
+ovomucoidStabilityRegression = Q.quailOvomucoidStability1994Receipt
+
+ibsDietMastCellRegression : Q.IBSDietMastCellMechanismReceipt
+ibsDietMastCellRegression = Q.gao2025IBSDietMastCellReceipt
+
+transferBoundaryRegression : Q.QuailEggGutTransferRound2Boundary
+transferBoundaryRegression = Q.canonicalQuailEggGutTransferRound2Boundary

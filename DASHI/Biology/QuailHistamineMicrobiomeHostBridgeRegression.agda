@@ -1,0 +1,17 @@
+module DASHI.Biology.QuailHistamineMicrobiomeHostBridgeRegression where
+
+import DASHI.Biology.QuailHistamineMicrobiomeHostBridgeExact as Q
+import DASHI.Biology.Levin.MicrobiomeHostAppetiteBoundary as Host
+
+hostBoundaryRegression : Host.MicrobiomeHostAppetiteBoundary
+hostBoundaryRegression =
+  Q.QuailHistamineMicrobiomeHostBridge.microbiomeHostBoundary
+    Q.canonicalQuailHistamineMicrobiomeHostBridge
+
+routeRegression : Host.AppetiteSignalRoute
+routeRegression =
+  Q.QuailHistamineMicrobiomeHostBridge.histamineRoute
+    Q.canonicalQuailHistamineMicrobiomeHostBridge
+
+bridgeBoundaryRegression : Q.QuailHistamineMicrobiomeHostBoundary
+bridgeBoundaryRegression = Q.canonicalQuailHistamineMicrobiomeHostBoundary
