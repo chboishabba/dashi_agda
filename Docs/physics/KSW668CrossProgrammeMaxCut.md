@@ -90,7 +90,7 @@ For P0 acceptance require actual Agda 2.9 kernel log from the exact branch head 
 
 This is the continuation after the initial 11-test finite A–E/369/QM source adapter.
 **Reproducible numerical command:** \`python3 scripts/check_ksw668_physical_maxcut.py\`
-**Local execution:** 16 / 16 SymPy/decimal/fraction tests passed (distinct from the earlier 11 / 11).
+**Local execution:** 17 / 17 SymPy/decimal/fraction tests passed (distinct from the earlier 11 / 11).
 **Source-indexed exact diagnostic receipt:** `Artifacts/ksw668/physical_maxcut_exact_receipt.json` (independently reproduced local checks; canonical exact-head script replay pending). The checker prints its exact source-labelled JSON receipt. These tests were executed in the assistant's Python environment, **not** against an Agda/Nix checker. No test compares to an experiment that was not actually obtained.
 
 ### A1 — actual original-form helical-Elsasser finite state
@@ -146,6 +146,13 @@ Tabulated NIST isotope atomic masses with electrons cancelling between sides and
 
 These are decimal calculations from evaluated masses, not measurements of reactions in a body and not uncertainty-propagated full state-of-the-art mass evaluations.
 
+The new source-form checker also solves **effective neutral-atom two-body CM kinematics** for
+`N14 atom + neutron -> C14 atom + H1 atom`. Given those same masses and a zero-relative-initial-momentum idealization, it uses
+(E_3=(W^2+m_3^2-m_4^2)/(2W)), (E_4=(W^2+m_4^2-m_3^2)/(2W)),
+(p^2=E_3^2-m_3^2=E_4^2-m_4^2>0).
+It proves the energy sum and both mass shells by exact symbolic rational arithmetic, with daughter opposite momenta (pm33.11398405) MeV/c, and kinetic releases about **0.58383832 MeV** (hydrogen atom) and **0.04203233 MeV** (carbon-14 atom), totaling the computed Q. This is **not** a corrected nuclear-ion final state: the electron bindings and ionization/recombination channels are omitted. It does pay an explicit representative four-momentum kinematic benchmark, not the complete nuclear reaction source.
+
+
 The independently measured 2026 thermal \(^{14}\mathrm N(n,p){}^{14}\mathrm C\) cross section is \(\sigma=1.828\pm0.053\) barn at \(E_n=0.0253\) eV, DOI [10.1080/00223131.2026.2750299](https://doi.org/10.1080/00223131.2026.2750299). Under *hypothetical* thin-target thermal flux \(\phi=10^6\) neutrons/cm²/s and \(N_{14}=10^{20}\) target atoms, \(R=\phi N_{14}\sigma=182.8\pm5.3\) reactions/s (cross-section uncertainty only). This **is not** an ambient human neutron flux or an observed biological carbon-14-production rate. Energy-dependent spectral folding, attenuation, true neutron-flux distributions, chemical uptake, background and uncertainty covariance remain OPEN. Triple-alpha needs a completely different multi-particle stellar temperature/density rate source, which has not been calibrated.
 
 Primary atomic masses: [NIST Isotopic Compositions](https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ascii=ascii). Primary reaction measurement: DOI above. Reaction data authority: [IAEA EXFOR](https://nds3.westeurope.cloudapp.azure.com/exfor/). Retain source and datum versions with every promotion.
@@ -173,7 +180,7 @@ for a SAME-window complete carbon-14 inventory. The checker exhibits identical f
 | A1 | Real divergence-free, conjugate-paired 3-mode original-form MHD signed-transfer model + actual Agda source-state observer/normal-form | Kernel inhabitant with explicit rational wave coefficients and magnetic-order proof; global measured plasma no-go is NOT claimed |
 | B1 | Agda transverse Maxwell-jet Poynting algebra proof + exact Maxw. polynomial solution | General original U(1)/MHD field/source/constitutive PDE and kernel check |
 | B2 | Exact nonzero 2-unit slab surface flux and integrated Poynting equality | Arbitrary physically calibrated domain/boundary theorem and measured current |
-| C1 | Original nuclide count + NIST mass Q-values, typed same-reaction 4-momentum gate | Full 4-vector physical kinematics / decay channels / all rate source objects |
+| C1 | Original nuclide count + NIST mass Q-values, exact neutral-atom effective two-body 4-vector kinematic benchmark, typed physical same-reaction gate | Corrected nuclear-ion/electron final-state four-vectors / decay channels / all rate source objects |
 | C2 | Primary 2026 thermal neutron cross section + conditional \(R=182.8\pm5.3\)/s hypothetical example | Actual neutron environment, sigma(E) folding, triple-alpha stellar reaction-rate model |
 | D1 | Spacelike flat event + finite Bell-unitary no-signalling diagnostic | General selected quantum CPTP theorem and original physical cone source |
 | D2 | Explicit original-KK/Einstein/observer operational test contract | Common solved metric, stability, signal/arrival evidence |
@@ -193,4 +200,4 @@ scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668IsotopeCausalRes
 scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
 \`\`\`
 
-**Trust:** 16/16 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
+**Trust:** 17/17 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
