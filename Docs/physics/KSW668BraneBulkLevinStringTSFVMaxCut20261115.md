@@ -186,3 +186,117 @@ at **all 16 component positions**. Norm/orthogonality of the source normal, bran
 **Corrected B1 gate:** The original-paper *classical homogeneous/isotropic AdS5 bulk + FRW + Z2 Israel source equations* now have a concrete algebraic same-metric source solution. Full nonlinear global existence/gluing, normal/tangential perturbative stability, graviton localization/brane-to-brane Green function and physical detector coupling/measurement remain OPEN. This is not a quantum-corrected/string-theory exact spacetime or experimentally observed fifth-dimensional graviton.
 
 **Corrected T8 next mathematical primitive:** derive/source-check the actual retarded *tensor* Green function in the moving-brane AdS5 geometry with Israel-matched perturbation boundary conditions, then prove the brane-to-brane detector response is nonzero and its **front arrival** follows the source Eq19 geometry. A null geodesic alone does not guarantee that a physically generated or observable wave packet follows the path. Then test realistic \(\ell,\kappa_5\), graviton mode spectrum, tensor coupling scales, source emission lags and independent GW/EM timing.
+
+---
+
+## Tranche 2 / 2026-11-15: a physical test-field receiver, TT boundary no-go, all-mode probe and original distributional junction
+
+**Source:** This extends, rather than duplicates, the original Caldwell–Langlois (2001) AdS₅ original metric / Israel 16-component work already in this same PR. Previously pasted notes that claimed the repository had no relativistic Israel implementation were stale: the original GRQFT owner \`DASHI/Physics/Foundations/GRQFTIsraelBranchMaxCutExact.agda\` and its Kottler thin-shell relatives were already present. Those use a 4D bulk with a 2+1D hypersurface rather than the **5D bulk and 3+1D FRW brane** selected here; their source terms cannot be identified by module name alone. Original Is​rael source: Werner Israel (1966) DOI **10.1007/BF02710419**.
+
+### D2.B3(i) — an explicit retarded bulk *scalar* with localised emitter and same brane receiver
+
+\`scripts/ksw668_brane_scalar_emitter_receiver_retarded.py\` upgrades the earlier 5D Minkowski cylindrical-brane shortcut from a **geometric null chord** to an actual **solution of the causal bulk scalar wave equation with a declared source and receiver coupling**. The source and receiver sit at opposite points of the same radius \(R>0\) cylindrical test brane. Define the switched-on, finite-duration *triangular* source \(q(t)=t_+-2(t-\tau)_++(t-2\tau)_+\), where the source is an ideal point on the brane (finite time duration but distributional in space), and a scalar detector returns \(g_{\rm det}\phi(t,B)\).
+
+For the 4-spatial-dimensional wave equation \((\partial_t^2-\nabla_{\mathbb R^4}^2)\phi=q(t)\delta^4(\mathbf x-\mathbf x_A)\), the **true 4+1D retarded fundamental solution** follows by dimension-raising recurrence from the 2+1D Green function. For any \(d=|\mathbf x_B-\mathbf x_A|>0\), the Green response to \(q(t)=t_+\) is exactly
+\[
+F(t,d)=\frac{\mathbf1_{t>d}}{4\pi^2 d^2}\sqrt{t^2-d^2},\qquad
+\phi_{\rm triangular}(t,d)=F(t,d)-2F(t-\tau,d)+F(t-2\tau,d).
+\]
+This solves the sourced wave equation distributionally with retarded support; away from the point source the 5D radial free wave equation was checked by exact differentiation. No detector pickup before \(t=d\); for \(d=2R\), \(\tau=R/4\), the source detector at \(t=2R+\tau/2\) already responds while the brane-confined light front cannot reach until \(t=\pi R\). For \(R=1\): bulk front **2**, sample scalar response at time **2.125** is **0.00454723349105** (dimensionless emitter and detector couplings); brane photon earliest time **3.1415926536**.
+
+A discrete rational source check also exists: choose polyline brane intrinsic length \(10\), bulk spatial chord \(d=6\), time \(t=15/2\), \(\tau=2\). The first square-root is exactly \(9/2\), later source terms vanish causally, so **\(4\pi^2\phi=1/8>0\)** at the same receiver *before* the brane photon. New Agda finite source \`DASHI/Physics/Gravity/KSW668BulkScalarReceiverRationalSliceExact.agda\` proves the original rational gap/square/response identities (source-written; Agda kernel not run). The smooth cylinder and polygon are distinct test-brane geometry illustrations, not identical globally.
+
+**Honest limitations:** This is a **test massless scalar**, not an Einstein perturbation/graviton or demonstrated device. The source is idealised as a spatial point, so the self-field energy at the emitter is singular; finite-energy spatial smoothing, finite-band source and pickup, brane reflection/transmission conditions and backreaction remain open. The carrier exists in the chosen same ambient flat 5D model; nothing guarantees a Standard Model brane can emit/detect it or that such a brane is in our Universe. Energy injection from the source is required; no free energy, negative-energy wormhole or ambient FTL is inferred.
+
+### D2.B3(ii) — exact bulk AdS₅ *tensor* wave + moving Israel boundary obstruction
+
+\`scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py\` uses the same original AdS₅ bulk metric and moving \(a(t)=t\) FRW brane as our Caldwell–Langlois and original Israel 16-component scripts, in conformal Poincaré \(z=1/R\):
+\[
+ds_5^2=z^{-2}(-dT^2+dz^2+d\mathbf x^2),\qquad
+z_b(t)=t^{-1},\quad T'_b(t)=\sqrt{1+t^2}/t^2.
+\]
+The transverse-traceless tensor perturbation equation with no anisotropic brane stress is
+\[
+(-\partial_T^2+\partial_z^2-\tfrac3z\partial_z+\nabla_{\mathbf x}^2)h=0,\quad
+(n^A\partial_A h)_\mathrm{brane}=0,
+\quad n^A=t^{-2}(-1,\sqrt{1+t^2},0,0,0).
+\]
+The **nontrivial separated exact bulk wave**
+\(h=\cos(kx-\omega T)z^2J_2(mz)\), \(\omega^2=k^2+m^2\), solves the PDE exactly for all bulk positions. But at \(t=z=1,T=x=0,k=m=1\), its required moving-Neumann residual is
+\(\sqrt2J_1(1)=0.6223255064907095\ne0\). Thus a Bessel bulk solution alone **cannot be labelled a physically coupled moving-brane graviton**, even when the background Einstein+Israel equations are solved. The homogeneous constant zero mode satisfies the boundary but carries no localized message. Full source-emission/reception needs a genuine superposition/retarded propagator solving the moving boundary *with anisotropic-stress source*, not a static Neumann mode.
+
+Primary perturbation context: Maartens & Koyama, *Brane-World Gravity*, Living Rev. Relativ. **13:5** (2010), DOI 10.12942/lrr-2010-5; Koyama (2004), arXiv **astro-ph/0407263**; moving-mirror tensor analyses of FRW braneworlds. This is the main open B3 physical producer.
+
+### D2.A2 — strict continuum shortcut horizon LOWER BOUND from expansion variance
+
+The already derived exact original Caldwell–Langlois Eq.19 has a stronger **general quantitative theorem**. Set \(w=dt/a>0\), \(A=\int w\), \(x(t)=\ell H(t)\), and assume \(|x|\le M\) on the same physical interval. Rapidities \(\eta=\operatorname{asinh}x\) obey
+\[
+r_g^2-A^2=\iint w_s w_t[\cosh(\eta_s-\eta_t)-1]
+\ge \frac{A^2\operatorname{Var}_w(x)}{1+M^2}.
+\]
+Since \(r_g+A\le A(1+\sqrt{1+M^2})\),
+\[
+\boxed{r_g-r_\gamma\ \ge\
+ \frac{A\,\operatorname{Var}_w(\ell H)}
+ {(1+M^2)(1+\sqrt{1+M^2})}.}
+\]
+Here \(\operatorname{Var}_w(x)=A^{-1}\int w(x-\bar x)^2\). The bound is **strict for nonconstant H** on a positive-weight interval, zero for constant H; its weak-curvature leading term is \(A\operatorname{Var}_w(\ell H)/2\). No local differential null-cone violation occurs. This is an analytical consequence of the original source Eq19 (nonnegative \(\cosh\) difference), not a claim about brane matter launch or experimental observation.
+
+New \`scripts/ksw668_ads5_gravitational_horizon_variance_bound.py\` checks 280 finite positive-weight cases, the constant-H null and original \(a=t,H=1/t,\ell=1,1\le t\le2\) analytic moments. This exact same-interval example gives \(A=\ln2=0.69314718056\), \(r_g=0.69779778110\), actual horizon excess **0.00465060054**, and guaranteed lower **0.00296706141** (about 64% of the actual mathematical gap). This is a **horizon-radius gap** not the same-receiver clock-time advance; the latter remains the separately checked \(\simeq0.00932286273\). Ordered-real continuum Agda proof of \(\cosh\), inverse hyperbolic functions and the integral inequality remains OPEN.
+
+### D2.B2 — full radial + compact-scalar **probe** perturbations, not merely uniform mode
+
+The stabilized cylinder was previously checked only for the uniform radius. \`scripts/ksw668_brane_winding_allmode_linear_stability.py\` now expands the **actual exact worldvolume action** under arbitrary normal displacement \(R=R_0+\epsilon\eta(t,\theta,u,v)\) and an *independent* compact winding scalar disturbance \(\chi=n\theta+\epsilon\psi\). Using the exact determinant/inverse of the induced metric, the quadratic action density, after the background equation \(2TR_0^2=f^2n^2\), reduces to
+\[
+\mathcal L_2=
+ TR_0(\eta_t^2-\eta_u^2-\eta_v^2)
+ +\frac{f^2R_0}{2}(\psi_t^2-\psi_u^2-\psi_v^2)
+ -\frac{f^2}{2R_0}(\psi_\theta-n\eta/R_0)^2.
+\]
+Therefore its **quadratic Hamiltonian is nonnegative**, a sum of squares. All integer angular Fourier modes \(m\) and real longitudinal \(|k|^2\ge0\) have the generalized eigenvalues
+\[
+\omega_-^2=|k|^2,\qquad
+\omega_+^2=|k|^2+\frac{m^2+1}{R_0^2}.
+\]
+There is no tachyonic \(e^{+\gamma t}\) mode in the **linearized probe-worldvolume theory**. Importantly, \(\omega_-^2=0\) for \(|k|=0\), including genuine marginal modes with potential secular linear drift. Therefore **nonlinear stability and gravitational backreaction stability are NOT proved**. The direct quadratic action is stronger than only checking \(E''(R_*)>0\), and confirms the tension/winding competition without “free-energy” claims.
+
+### D2.B1 — exact original Z₂ distributional source coefficient, not only K mixed
+
+\`scripts/ksw668_ads5_z2_distributional_israel_coefficient.py\` computes the Gaussian-normal cusp \(g_{ab}(y)=h_{ab}+2|y|K^+_{ab}+\cdots\), source distribution identity \(\partial_y^2|y|=2\delta(y)\), and the **full 16-component** \(Z_2\) singular Einstein coefficient
+\[
+(G_{ab})_{\rm sing}=
+ -2(K^+_{ab}-h_{ab}K^+)\delta(y)=\kappa_5^2 S_{ab}\delta(y)
+\]
+for the *same original AdS5 cosmology, tension and FRW matter*. At exact rational brane proper time \(t=4/3\), \(A=\sqrt{1+t^{-2}}=5/4\), \(\rho=1/4\), \(p=-1/10\), \(\rho+p=3/20>0\), \(S^a{}_a=-91/20\) and
+\(K^a{}_b=\operatorname{diag}(-4/5,-5/4,-5/4,-5/4)\).
+The singular Einstein coefficient's diagonal is exactly **\((15/2,-176/15,-176/15,-176/15)\)**, equal to \(\kappa_5^2 S_{ab}\); all off-diagonal 12 entries vanish. The local distributional *coefficient* is checked; the full global brane bulk metric with higher-order Gaussian-normal terms and all-mode perturbations is NOT thereby independently constructed.
+
+\`DASHI/Physics/Gravity/KSW668AdS5IsraelOriginalRationalSliceExact.agda\` records the exact selected \(t=4/3\) **all-16 rational Israel component equations**, the Friedmann relation and positive-NEC normal form using original rational Agda tactics (source-written; kernel pending). It explicitly imports the preexisting \`GRQFTIsraelBranchMaxCutExact\` (4D Kottler shell) and \`MonsterGravityAuthorityAndDimensionExact\` (AdS3 Monster candidate), without identifying their dimensions.
+
+### Cross-programme source owners, NOT same-spacetime identifications
+
+Existing true owners reused:
+- **Levin:** \`DASHI/Biology/Levin/ProblemSpaceAgency.agda\` (anatomical vs physiological state spaces), \`TravelingFieldControl.agda\`, \`NeuralWaveAnalogComputation.agda\` — causal biophysical control/observability, not extra Lorentzian dimensions.
+- **Original physical Israel:** \`DASHI/Physics/Foundations/GRQFTIsraelBranchMaxCutExact.agda\` and \`GRQFTSourceAmplitudeDrivenIsraelKottlerExact.agda\` — 4D Kottler thin-shell jump and DEC/source stress. \(\mathbb Z_2\) Israel *normal-side reflection* is not a generic parity/ternary label.
+- **Jordan/radion:** \`scripts/check_kk_jordan_sourced_sphere.py\` — 4D scalar fifth-force profile from a declared *external radion mass*, not a 5D null-mode/branelight shortcut or physical membrane actuator.
+- **Monster gravity:** \`DASHI/Physics/Closure/MonsterGravityAuthorityAndDimensionExact.agda\`, \`DASHI/MonsterC3EntropyGravityEverything.agda\` — distinguish Witten AdS3/CFT Monster candidate and high-dimensional monstrous M-theory from this *specific* classical AdS5 FRW/Israel geometry. A duality, compactification and matching physical source are still needed.
+- **Pants/cylinder:** \`DASHI/Topology/WormSoilPantsSheafBoundary.agda\` and \`ClopenNDimFibreBoundary.agda\` — gluing/refinement and topological cell roles do not confer Lorentz signature, Einstein stress, or timed geodesics.
+- **Ultrametric/p-adic/trie:** \`DASHI/Geometry/SSP369ClopenBallBridge.agda\`, \`DASHI/Geometry/SSP369Ultrametric.agda\` — non-Archimedean distance and nested clopen cells differ from Lorentzian timelike/null length. A physically verified metric-emergence map is necessary before interpreting them as a bulk spatial direction.
+- **String/SUSY/TSFV:** existing roles remain typed separately in \`KSW668BraneLevinStringTSFVPromotionBoundaryExact.agda\`; action phases, string UV claims, a SUSY state and many-world histories are not identical to a measured 5D classical signal.
+
+The existing physical promotion Agda owner now imports these original donor objects and constructs **no-equality** proofs for the distinct carrier roles. Exact source coexistence is not physical identity. The canonical governance condition is the same \(5D\) metric + induced brane \(h\) + \(\Lambda_5\)/Israel + sourced moving tensor mode + nonzero detector response + independent observation.
+
+### Exact next maximum-cut gates (do not call missing quantum/experimental data a lemma weld)
+
+| Priority | Strongest delivered in this tranche | Next decisive mathematical/physical producer |
+| --- | --- | --- |
+| **A2 continuum horizon** | Rigorous analytic rapidity/weighted-variance lower bound and executed numerical example | Original *real* Agda ordered \(\cosh/\operatorname{asinh}\), Bochner/Fubini positive-weight integration, strict variance theorem |
+| **B1 original 5D Israel** | Full original symbolic one-sided K/S; Z2 singular Einstein delta coefficient; all-16 rational Agda slice | Global Gaussian-normal thin-wall distributional solution, analytic metric/Israel Agda kernel, brane source microphysics |
+| **B2 probe all-mode** | Exact full radial + scalar quadratic form and all Fourier spectral squares; no tachyons | Treat marginal \(\omega^2=0\), nonlinear effects, radiation/gravity backreaction, brane-bending and normal stability with full 5D field |
+| **B3 receiver in flat 5D** | **Actual retarded scalar source-to-detector wave** before brane light; exact causal Green support and rational Agda sample | Finite spatial source/receiver smearing + finite total energy + fully coupled brane matter / boundary, physically available bulk field |
+| **B3 moving AdS5 tensor** | Exact real TT PDE and original moving normal BC; explicit Bessel-mode obstruction | Construct/source numerical retarded tensor Green with correct moving Israel boundary, initial/brane anisotropic stress, positive spectral energy and nonzero on-brane receiver |
+| **C1 observational** | Real physical quantity/event language defined; GW170817 dimensional constraints sourced | Choose ℓ, physical epoch and source/detector material, predict redshift/frequency-delay and strain, compare short-range gravity + GW/EM common-source limits |
+| **Cross programme** | Reused exact Levin, Jordan, Monster, p-adic/pants, SUSY/string/TSFV owners without identifying dimensions | One real source geometry/UV action/scaling map that preserves original Lorentzian metric and target physical observables |
+| **Acceptance** | Independent local SymPy/mpmath/Fraction mathematical checks; same existing PR #1504 and new Agda source modules | Run exact PR HEAD Python suite and local pinned Agda kernel on networked/code-equipped machine. **No CI requirement**. |
+
+**Scientific takeaway:** We have a rigorous model **where an actual scalar disturbance reaches the same brane detector before confined light**, and a distinct sourced AdS5/Israel geometry that has earlier bulk *null causal reach*. These are NOT YET one fully coupled graviton-transport solution: the remaining same-object merger is the moving-brane sourced tensor propagator and detector. It is the true next decisive physical gate, not an unproved universal claim of FTL/free energy.
