@@ -73,15 +73,14 @@ CentralEigenspace {State} action phase =
   Σ State (λ state → centralAct action state ≡ phaseScale action phase state)
 
 stateOf :
-  ∀ {State} {action : CentralPhaseAction State} {phase : CentralPhase3} →
-  CentralEigenspace action phase → State
-stateOf (state , _) = state
+  ∀ {State action phase} → CentralEigenspace {State} action phase → State
+stateOf = proj₁
 
 centralEigenlaw :
-  ∀ {State} {action : CentralPhaseAction State} {phase : CentralPhase3} →
-  (eigenstate : CentralEigenspace action phase) →
-  centralAct action (stateOf eigenstate)
-  ≡ phaseScale action phase (stateOf eigenstate)
+  ∀ {State action phase} →
+  (eigenstate : CentralEigenspace {State} action phase) →
+  centralAct action (proj₁ eigenstate)
+  ≡ phaseScale action phase (proj₁ eigenstate)
 centralEigenlaw (_ , law) = law
 
 ------------------------------------------------------------------------
