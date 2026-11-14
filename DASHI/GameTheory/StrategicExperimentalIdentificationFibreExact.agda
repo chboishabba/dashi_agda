@@ -53,7 +53,7 @@ IdentifiedForQuery S query =
 
 StrategicIdentificationDefect :
   (S : StrategicIdentificationSurface) →
-  Query S → Set
+  Query S → Set₁
 StrategicIdentificationDefect S query =
   Fibre.ConsumerAdequacyDefect (asConsumerIndexedFibreSystem S) query
 
