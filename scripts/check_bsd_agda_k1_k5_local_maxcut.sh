@@ -15,6 +15,8 @@ files=(
   DASHI/Mathematics/Automorphic/EllipticCMJacobiThetaCheckedRowsExact.agda
   DASHI/Mathematics/Automorphic/EllipticCMLevel32EtaNewmanArithmeticExact.agda
   DASHI/Mathematics/Automorphic/EllipticCMLevel32FrickeMellinExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMLevel32GenusOneArithmeticExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMLevel32LigozatCuspArithmeticExact.agda
 )
 
 for f in "${files[@]}"; do
@@ -42,6 +44,8 @@ required=(
   'EllipticCMLevel32EtaNewmanArithmeticExact.agda:etaNewmanArithmeticConditions'
   'EllipticCMLevel32FrickeMellinExact.agda:level32FrickeFromTwoEtaInversions'
   'EllipticCMLevel32FrickeMellinExact.agda:mellinCentralValueIsTwiceTail'
+  'EllipticCMLevel32GenusOneArithmeticExact.agda:level32GenusOneArithmetic'
+  'EllipticCMLevel32LigozatCuspArithmeticExact.agda:level32CuspOneWitness'
 )
 for owner in "${required[@]}"; do
   module="${owner%%:*}"
@@ -64,3 +68,11 @@ bash scripts/run_agda29_parallel_check.sh "${files[@]}"
 
 echo 'Agda local checker completed; retain actual receipt/logs and module hashes.'
 echo 'This checks selected finite Kummer, Frobenius, Gaussian theta and Fricke/Mellin algebra, NOT classical H¹/Sha, infinite Jacobi, or universal BSD.'
+
+# Optional, NON-GOLDEN numeric regressions: deliberately not mixed into
+# Agda kernel acceptance so missing mpmath never downgrades a true proof.
+if [[ "${BSD_K4_NUMERIC_ASSAYS:-0}" == 1 ]]; then
+  python3 scripts/check_bsd_level32_cm_eta_theta_exact.py --cutoff 256
+  python3 scripts/check_bsd_level32_mellin_fricke.py --dps 65 --terms 110
+  echo 'Numeric K4 assays passed; these are NOT Agda proof certificates.'
+fi
