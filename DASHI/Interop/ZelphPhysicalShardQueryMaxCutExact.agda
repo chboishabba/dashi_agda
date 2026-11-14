@@ -81,9 +81,13 @@ zelphBoundedShardQueryFamilyCompleteness :
   QueryFamilyClosure Graph View Query Answer select original selected InFamily →
   (query : Query) → InFamily query →
   Query.AdequateFor select original query
-zelphBoundedShardQueryFamilyCompleteness {selected = selected} closure query within =
+zelphBoundedShardQueryFamilyCompleteness
+  {select = select} {original = original} {selected = selected}
+  closure query within =
   Query.factorsForQuery
-    {semantics = _}
+    {project = select}
+    {semantics = original}
+    {query = query}
     (Query.answer selected query)
     (edgeClosure closure query within)
 
@@ -155,8 +159,8 @@ differentOverlap ()
 FibreConstant :
   ∀ {State View Answer : Set} →
   (project : State → View) → (respond : State → Answer) → Set
-FibreConstant project respond =
-  (left right : _) →
+FibreConstant {State = State} project respond =
+  (left right : State) →
   project left ≡ project right → respond left ≡ respond right
 
 zelphPrefixQuotientQueryAdequacyIffForward :
