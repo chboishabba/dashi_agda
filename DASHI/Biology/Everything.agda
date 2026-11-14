@@ -259,3 +259,11 @@ import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
 import DASHI.Biology.PMDDHistamineAmplificationExact
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact
+-- Brain-IT: source, learned quotient, consumer loss and metric receipts.
+import DASHI.Biology.BrainITSourceBoundaryExact
+import DASHI.Biology.BrainITFunctionalClusterTransferExact
+import DASHI.Biology.BrainITObservationPromotionBoundaryExact
+import DASHI.Biology.BrainITConnectomeFMRIWeldExact
+import DASHI.Biology.BrainITConsumerRelativeExact
+import DASHI.Biology.BrainITTableReceiptsExact
+import DASHI.Biology.BrainITValidation
