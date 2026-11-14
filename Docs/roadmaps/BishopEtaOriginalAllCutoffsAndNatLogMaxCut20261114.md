@@ -83,6 +83,69 @@ exact rational polynomial integral identities, **400** finite
 dyadic remainder bounds, and produces rational-power epsilon cutoffs
 without floating-point evaluation.
 
+## 1c. New higher-alpha path: two-sided original Nat-log increments, no real FTC
+
+For `m≥1`, the **actual** negative-log polynomial at the physical
+positive integer m is
+`L_N(m)=ell_N((m-1)/m)`. Let
+`a=(m-1)/m`, `b=m/(m+1)`. The exact finite power difference
+`b^j-a^j=(b-a)Σ_(r<j)b^(j-1-r)a^r` yields the two-sided bound
+
+`(1-a^N)/(m+1) ≤ L_N(m+1)-L_N(m) ≤ (1-b^N)/m`. (D1)
+
+For each *fixed* m, 0≤a,b<1. Transporting the limit `N→∞`
+in the **original Bishop real order/setoid** therefore gives
+
+`1/(m+1) ≤ L(m+1)-L(m) ≤ 1/m`. (D2)
+
+This provides both monotonicity and a uniform-in-n finite increment
+bound. Summing the lower bound for m≤n<2m gives
+`L(2m)-L(m)≥1/2` and induction from L(1)=0 yields
+`L(2^k)≥k/2`. For any positive integer
+`2^k≤n<2^(k+1)`, monotonicity yields `L(n)≥k/2`.
+
+For compact `Re(s)≥delta>0`, `|s|≤R`,
+define `q=exp_B(-delta/2)` (so 0<q<1). The original
+term is `a_s(n)=expC(-s L(n))`, indexed by n≥1.
+Using the native complex exponential addition/norm and its
+finite complex Taylor estimate,
+
+`|a_s(n)|≤q^k` on dyadic block k,
+
+`|a_s(n+1)-a_s(n)| ≤ R exp_B(R) q^k / n`
+for 2^k≤n<2^(k+1), since D2 bounds `ΔL_n≤1/n`.
+
+There are 2^k integers in that block and each 1/n≤2^-k,
+so its *total* variation is at most `R exp_B(R) q^k`.
+The original finite Abel identity, plus the unmatched last
+raw term, therefore produces an all-cutoffs estimate
+
+`|Σ_(n=N)^M (-1)^(n-1)a_s(n)|
+  ≤ [1+R exp_B(R)/(1-q)] q^K`
+for all 2^K≤N≤M. (D3)
+
+This yields a **geometric constructive Cauchy modulus** on any
+compact K, *conditional on* original-setoid transport of D1→D2,
+native complex exp norm/difference, the original signed finite
+Abel source, and true Bishop completeness. It does **NOT**
+require first proving either `OriginalDyadicNatLogLaw` or the
+continuous real-variable FTC for u↦u^-s; the latter remain
+important separate targets for finite eta/zeta factorization and
+holomorphy but are not prerequisites for this B convergence route.
+
+Exact regression:
+`scripts/check_bishop_natlog_two_sided_dyadic_20261114.py`
+tests 3,150 exact two-sided finite increments, 64 rational shell
+lower bounds, 15 exact dyadic lower comparisons, and 252 separate
+complex numerical geometric-tail examples. **No Agda kernel
+receipt** for D2/D3 yet.
+
+**New first maximum-cut theorem:**
+`originalCanonicalNatLogSuccessorIncrementSandwich`, then
+`originalCanonicalNatLogDyadicLowerBound`, then
+`originalRound11EtaDyadicGeometricVariation`, then
+`originalRound11EtaCompactUniformConvergence`.
+
 ## 2. Real sine/cosine addition: exact remaining source leaves
 
 `BishopOriginalNativeComplexExpAdditionFromTrigExact.agda`
