@@ -23,6 +23,7 @@ open AdelicSpectralTOE public using
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
 -- Reuse source-typed finite Sonic Warfare witness; no external promotion.
 import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
+import DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact as Wette915
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact as ParallelNeeds
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -2234,3 +2235,47 @@ toeFeynmanExperimentDoesNotValidateTSFV :
   UnifiedPhysics.feynmanExperimentValidatesTSFVFlag ≡ false
 toeFeynmanExperimentDoesNotValidateTSFV =
   UnifiedPhysics.feynmanExperimentDoesNotValidateTSFV
+-- Wette constructive-foundations max-cut.
+-- Agda is the theorem authority.  The fleet receipt only prioritizes work.
+------------------------------------------------------------------------
+
+toeWetteRule915CurrentProblemBoundary :
+  Wette915.CanonicalRule915CurrentProblemBoundary
+toeWetteRule915CurrentProblemBoundary =
+  Wette915.canonicalRule915CurrentProblemBoundary
+
+toeWetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
+toeWetteRule915ZKPFrame =
+  Wette915.canonicalRule915MajorZKPFrame
+
+toeWetteGeneratedScaffoldDoesNotCreatePremise18 :
+  Wette915.GeneratedScaffoldCreatesPremise18 → ⊥
+toeWetteGeneratedScaffoldDoesNotCreatePremise18 =
+  Wette915.generatedScaffoldDoesNotCreatePremise18
+
+toeWetteGeneratedScaffoldDoesNotCreatePremise27 :
+  Wette915.GeneratedScaffoldCreatesPremise27 → ⊥
+toeWetteGeneratedScaffoldDoesNotCreatePremise27 =
+  Wette915.generatedScaffoldDoesNotCreatePremise27
+
+toeWetteDocumentationDoesNotCreateMajorDerivation :
+  Wette915.DocumentationCreatesMajorDerivation → ⊥
+toeWetteDocumentationDoesNotCreateMajorDerivation =
+  Wette915.documentationDoesNotCreateMajorDerivation
+
+toeWetteVerificationStatusDoesNotCreateMajorDerivation :
+  Wette915.VerificationStatusCreatesMajorDerivation → ⊥
+toeWetteVerificationStatusDoesNotCreateMajorDerivation =
+  Wette915.verificationStatusDoesNotCreateMajorDerivation
+
+toeFleetPriorityStillDoesNotCreateWetteProofAuthority :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPriorityStillDoesNotCreateWetteProofAuthority =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetStillTargetsOnlyFiftyEightUnformalisedFormalGaps :
+  FleetGapTOE.unformalisedFormalGaps
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ 58
+toeFleetStillTargetsOnlyFiftyEightUnformalisedFormalGaps =
+  FleetGapTOE.fleetRecordedUnformalisedGapCountIs58
