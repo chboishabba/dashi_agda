@@ -1,0 +1,120 @@
+# DASHI X369: C3² exact Fourier, neural source actions and cross-lane maximum-cut roadmap
+Owner: Agda PR #1442 (the existing LILA signed-history formal lane). Date: 2026-11-14.
+Paired neural execution owner: LeechTransformer PR #4, docs/X369_C2_C3_C3SQUARED_FULL_MAXCUT_20261114.md. Do not create parallel PRs for the same programme. This document supersedes claims in older roadmap sections only where explicitly contradicted by dated evidence; retain historic evidence and attribution.
+
+## Scope and status vocabulary
+
+The aim is to distinguish the exact finite C3 and C3xC3 algebra, a source-bound neural representation, task-level phase composition, causal utility, and the independent physical / Moonshine cross-lane statements. A declaration found in source is not a new kernel check. A Python check is not Agda kernel acceptance. A 55/55 test suite is not a trained-model equivariance proof. A finite construction for a different model is not a same-source Leech model theorem.
+
+DASHI master at user-identified 7a83556a contains existing X369-F0..F5 roadmap sections. Leech PR #4 at 9aa6ad0 held the first F5 lockbox scorer; user subsequently reported host 55/55 after device and exact 16-token regression fixes. Leech PR #4 was then advanced with its full roadmap and those source corrections; do not attribute those commits to Agda. The original RX580 9-row/576-token F0/F1 audit has p0=0.850, p1=0.742 signed-coordinate regrouping; layer 1 D_iso=0.1243 and pooled 3x3 D_C3=0.2125. This does NOT establish isotropy or absence of learned C3.
+
+## Verified finite original-owner declarations: reuse, do not rewrite
+
+1. DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda — authoritative common finite 3x3 torus carrier used by physics and biology. The selected c3x3 proof must use this actual carrier, not an invented synonym.
+2. DASHI/Algebra/TriadicDepthOneCharacters.agda — exact C3Phase ring and characterValue/characterAdditive/depthOneCharacter.
+3. DASHI/Moonshine/C3FourierConjugationExact.agda — zetaCubedIsOne, chi1ConjugateIsChi2, chi2ConjugateIsChi1.
+4. DASHI/Moonshine/OggSSPP2CenteredTernaryGroupExact.agda — centerSheet-assoc, centerSheet-inverse, sheetPhaseRoundTrip, sheetToPhase-preserves-addition; origin is a distinguished signed zero.
+5. DASHI/Moonshine/OggSSPP2BalancedTernaryPuncturedPlaneExact.agda — puncturedNineSheetCountIsThreeSquaredMinusOne and duplicated-centre caveat.
+6. DASHI/Cognition/PNF/ModularFourierGrokkingC3Exact.agda — algorithmicRuleIsCharacterComposition, memorizerAndAlgorithmTrainingEquivalent, memorizerAndAlgorithmNotFullTaskEquivalent.
+7. DASHI/Cognition/PNF/GrokkingEquivarianceDefectGeometryExact.agda — algorithmicEquivarianceDefectIsZero, memorizerEquivarianceDefectIsTwo.
+8. DASHI/Cognition/PNF/CyclotomicGrokkingActionLinearizationExact.agda — algorithmicPairLinearises, phaseOneActsByOmegaOnEveryState.
+9. DASHI/ComputerScience/BalancedTernaryC2C3DihedralCodecBridgeExact.agda — antipodeConjugatesCycleToInverse, qutritPresentationIntertwinesCycle. This is C2 semidirect C3 on a three-state carrier; not automatically C2xC3 or the full neural action.
+10. DASHI/Physics/YangMills/BalabanP33ThreeCycleBlockTorusCrossPollinationExact.agda — finite block-index translation exact; its module explicitly excludes the physical side-4 SU(N) Wilson action.
+11. DASHI/Physics/Closure/NSTriadKNLuoGalerkinFourierModePairExact.agda and DASHI/Physics/Chemistry/AtomicPeriodicTable369GenerativeExact.agda are separate physical donor types, not derived from a common numerical label.
+
+All listed names are observed in source, not freshly replayed Agda kernel acceptances by this roadmap. In the main master roadmap, 4/4 Python exact integer Z[omega] C3² orthogonality/Parseval/convolution verification was previously host-accepted. That is a finite calculation receipt, not the selected Agda same-carrier theorem.
+
+## Exact formal obligation register — PROPOSED names, NOT declarations already proved
+
+### Part A: C3xC3 on the original physical common finite torus
+
+A01 c3x3SameCarrierGroupLaw:
+  G = FiniteThreeCycleTorusExact.Channel (or exact original nine-index type); exhibit identity, inverse, commuting generators and the explicit dictionary to the nine balanced-ternary sheets, with two-sided inverse maps. Do not duplicate a nine-element carrier.
+A02 c3x3CharacterOrthogonalityOnOriginalCarrier:
+  For frequencies k,l in G, sum over x in G of chi_k(x)*conj(chi_l(x)) equals 9 when k=l and 0 otherwise, over the existing exact Z[omega]/phase structure. Define the sum and ring morphism once.
+A03 c3x3FourierConvolutionSameCarrier:
+  FT(f*g)(k) = FT(f)(k) FT(g)(k) in the same ring, finite sum, convolution and normalisation convention. Supply inversion.
+A04 c3x3ConjugationParsevalAndReality:
+  Real-valued source fields produce conjugate k/-k Fourier pairs; Parseval with correct nine-point normalisation and no swallowed DC/centre contribution.
+A05 c3x3PunctureCentreGaugeBidi:
+  The original pointed-eight amplitudes plus independent centre -> nine sheet -> four complex character pairs -> inverse -> original eight+centre, including re-gauging when translating. State which norm is preserved (zero-mean nine-sheet), not naive punctured-eight norm.
+A06 c3x3AgdaKernelSelectedSourceAccepted:
+  Exact selected module path, verified transitively imported sources, Agda pinned toolchain and successful existing script wrapper output. Reject unsolved metas/postulates and reflexive wrappers over unrelated carriers.
+
+### Part B: exact C2 / C3 / S3 action distinctions
+
+B01 originalC3SimultaneousRouteRotationInvariant:
+  For the actual Leech source trialectic directed-channel formulas I(x,h), show I(Rx,Rh)=I(x,h) for cyclic triad shift R. Additionally check scalar unary channel invariance and top-k behavior with ties.
+B02 originalC3RelativePhaseChangesDirectedChannels:
+  Construct a selected exact witness with I(Rx,h) != I(x,h) and equal norm, proving a simultaneous group action is not a phase-destruction intervention. Example triads x=h=(1,0,0).
+B03 originalC3ShiftVsBalancedInversion:
+  Distinguish shift of order 3, inversion automorphism on C3 (phase conjugation), independent central sign C2=-I and semantic opposition. C2xC3, C2 semi-direct C3 and diagram S3 cannot be conflated.
+B04 originalC3Punctured9DiagonalAndOneSidedAction:
+  Fourier four-pair F3² translation of x and history has invariant relative dot/wedge routing channels; a one-sided shift need not. Prove source function exact under stated centre-gauge.
+B05 originalC3NeuralSiteTransportBidi:
+  Every claimed equivariance must name (input action, activation site, history, expert routing, output consumer), tie/precision conditions, and source revision. No theorem solely about a hand-coded chart can close this.
+
+### Part C: learned representation and causal soundness, formal interfaces before source instantiation
+
+C01 originalC3InputLabelActionTyped:
+  A task T with a genuine input G-action and label/output G-action; source has to provide meaningful R on original inputs, not coordinate rotations.
+C02 originalC3HiddenActionGaugeIndependent:
+  A specified learned-layer chart h and representation rho with transformation law well-typed modulo admissible readout gauge.
+C03 trainedC3TaskActionEquivarianceDefectBound:
+  Finite-evaluation evidence of normed h(Rx)-rho(R)h(x); the formal target must state the verified finite set and tolerance, not universal all-input neural symmetry unless supported by the model.
+C04 trainedC3LearnedPhaseReadoutIdentifiable:
+  A trained u and independently labelled residues; constant/collapsed or teacher-substituted Fourier maps rejected.
+C05 learnedC3PhaseCompositionHeldout:
+  u(a)u(b) approx u(a+b mod3) on unseen combinations and across seeds; exact modular carrier formal theorem is only a specification for learned approximate behaviour.
+C06 originalC3PhaseInterventionSourceConsumerBidi:
+  Actual model site (pre/post router, relative activation/history, recurrent step, expert identities) with reversibility and norm preservation; original logits and off-target labels are observed.
+C07 learnedC3PhaseCausalExcessLoss:
+  Paired selective ablation vs equal-norm/gauge/random-phase control, predeclared improvement direction and clustered uncertainty. This is empirical acceptance, NOT an Agda closed numeric theorem in advance.
+C08 originalC3SemanticTrialecticFaceBoundary:
+  Independent semantic label/action source needed; orthogonal three-axis chart alone is insufficient to identify reasoning face/opposition.
+
+### Part D: original trained model, frozen scoring and independent C3² comparison
+
+D01 originalLeechC2PairedOddEvenCrossCancellationAllRelevantStates — expand 9-row teacher-input test to all named original recurrent states or explicit counterexample; no universal theorem from a zero paired mean.
+D02 originalLeechSignedHistoryRecurrentActionBidi — same original MoE top-k, expert history, R64 and 32+ token original trace with correct finite-precision refinement.
+D03 originalC2C3RouterOnlySourceIdentity — shared source state, trained parameter/frozen weights equality, matched seeds and optimiser schedule; fail on any accidental state change.
+D04 freshC2C3DevelopmentDocumentDisjoint — documentary source IDs, original tokenizer and genuine separate split, not only token-n-gram exclusion.
+D05 matchedBoundedRouterPredictiveGainOrCounterexample — measured development delta CE(C2C3)-CE(C2) across paired seeds, explicitly selection-exposed.
+D06 frozenSelectionIndependentOfLockbox — chosen from development CE before locking, all arm checkpoints and hashes frozen, independently compared on one never-tuned test.
+D07 frozenC2C3PairedCEOrCounterexample — original repaired C2, frozen C2, frozen C2C3 on SAME lockbox corpus; no cross-dataset CE comparison to historical 4.5966.
+D08 originalPunctured9CapacityMatchedRouterAdapter — 2d vs 3d/2 original source router input widths reconciled under predeclared parameter/compute budget.
+D09 originalPunctured9TranslationAndRelativePhaseSourceAction — 9-point F3² action on actual learned source state with centre gauge, negative controls.
+D10 frozenC3SquareIndependentLockboxAndMechanism — separately preregistered three-arm architecture comparison; never reuse F5 after seeing its results.
+D11 originalC2C3FinalStudentAgdaBidi — actual source student observables and Agda formal state/transition commute both ways for named inputs.
+D12 originalC2C3MeasuredQualityComputePareto — full original resource/quality comparison, no FLOP/parameter count alone as performance proof.
+
+These names form the formal ledger of what REMAINS. A source file or mathematical donor may already implement part of a lemma; the selected original source weld is still open until the exact signature and evidence are recorded.
+
+## Cross-lane programme X369-A to X369-G (separate physical frontiers)
+
+X369-A c3x3ExactCyclotomicCharacterConvolution — A01-A06 same carrier. Finite exact evidence exists; Agda full weld OPEN.
+X369-B atomic369PhysicalOrbitalRepresentationIntertwiner — map from 369 labels to actual antisymmetric Hamiltonian eigenstates, shell energies and calibrated source; OPEN.
+X369-C nsPeriodicGalerkinNonlinearPhaseConvolutionBidi — integer Z³ Fourier mode and nonlinear Leray-projected source solution, not a modular-3 quotient; OPEN.
+X369-D ymOriginalWilsonC3BlockFourierTransport — actual SU(N) lattice Wilson fields and coarse block translations/Haar/Ward/RG, not index symmetry; OPEN.
+X369-E quantumC3TritQutritFourierIntertwiner — actual Hilbert operator on selected qutrit register, unitary intertwiner and physical gate/readout; OPEN.
+X369-F lilaGrokkingC3PhaseVsC2RepairedRepresentations — all C and D evidence; no learned neural C3 claim before mechanism tests. OPEN.
+X369-G monster369RegularTracePhaseVsRiemannZetaTypeBoundary — type-separate cyclotomic omega, Monster multiplicity phases, analytic zeta/Epstein etc; actual same-object map or explicit no-go required. OPEN.
+
+## Phase, delivery, and proof order
+
+| Phase | Agda deliverable | Parallel Leech deliverable | Exit |
+|---|---|---|---|
+| P0 provenance | chosen module/branch hashes, currently accepted finite declarations | host detached fixes joined to PR #4; exact 55/55 receipt | working checked-out SHA and PR head agree |
+| P1 exact algebra | A01-A06 Agda full kernel source | Python four finite C3² tests remain regression | one same-carrier Agda proof (not isolated integer test) |
+| P2 action and negative controls | B01-B05 and named source signatures | full hidden covariance uncertainties, recurrent C2 history | simultaneous/relative phase distinction falsifiable on original state |
+| P3 learned mechanism | C01-C08 interface and counterexamples | task-labelled learned u, equivariance, composition, causal paired intervention | success or independently reproducible negative result |
+| P4 2-arm screen | D03-D05 source contract | genuine untouched development data, two-seed 24-step screen | F4 per-seed CE/checkpoint receipts |
+| P5 frozen F5 | D06-D07 and D11-D12 same-model proof interfaces | independent one-time lockbox, 32+ replay, Pareto | F5 admission or counterexample |
+| P6 full 9-sheet | B04, D08-D10 source law and matched adapter | new 3-arm C2/C3/C3² comparison with separate data | genuine C3² claim decided, not inherited from F4 |
+| P7 cross-lane | X369-A-G domain-by-domain same original map | independent physical or semantic empirical sources | no claim of physical universality from finite G-action |
+
+Operational rule: use repo AGENTS.md / Docs/AgentOperationalNotes.md and pinned Agda 2.9 script wrapper, DASHI_NO_TMUX=1 as specified by repository; inspect original owner before adding duplicate lemmas. Every purported closed lemma needs exact source path, theorem statement, command, checker version, kernel log and a negative test if possible. Avoid a new PR per subproblem. Existing Agda PR #1442 is the neural/semantic formal rollup; separate Clay/NS/quantum physical owners stay on their original respective PRs.
+
+## Explicit decision outcomes
+
+If F2/F3 fail, the learned circuit assertion is unsupported even if F4/F5 C3-invariant features reduce CE. If F2/F3 pass without F4/F5 predictive gain, report a mechanism with no demonstrated advantage at the chosen budget. F4 development improvements are biased by best-step selection; F5 must independently confirm on a locked same-corpus control. F6 requires new matched capacity/compute and cannot be folded into the existing 2-arm F4 result after the fact. Physical continuum statements, Monster/Leech, D4/S3 and semantic triadic-face interpretations require separately selected input/output intertwiners and are NOT proved by these finite group identities.
