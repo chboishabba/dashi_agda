@@ -494,3 +494,22 @@ The BSD dyadic `x=39` proof is constructive mathematics with coherent Hensel lif
 The RH selected scalar is **not** replaced by a synthetic toy witness: Lean #50 already reduces positive A2 sixth/eighth leading allowance to a selected `fourthLipschitz` ceiling of roughly 737.365 for the strength-floor witness, but its actual selected witness and FarExact do not yet supply the inequalities. First-zero positive-moment sign is an invalid shortcut, not a refutation of actual signed `signedFifthCorrelationGapAt`.
 
 **No exact-head Agda/Nix/Lean/Lake binary is installed in this tool environment.** Do not treat these new declarations as kernel-proved. All six full end states, their downstream Clay endpoints, and 43 YM original residuals remain appropriately open.
+
+### 14 November — actual BSD cohomological source archaeology (Lean #107), K1/K3 correction
+
+The prior Agda-only summary was behind source PR [Lean #107](https://github.com/chboishabba/dashi_lean4/pull/107), pinned at observed source head `a06066e49555058e3cf4694e5b1ce748b9a869c4`. **Do not recreate these owners**:
+
+| Exact original Lean theorem | Meaning | Remaining exact cut |
+|---|---|---|
+| `cmQ2LocalKummerImage_firstParity_zero` | On actual `PadicProjectivePoint 2` over Mathlib `ℚ_[2]`, ALL original local Kummer-image points have even first-coordinate valuation; covers exceptional torsion points. | This is **necessary** parity; not local-image characterization |
+| `cmExplicitTwoSelmer_firstRationalV2Parity_zero` | Original all-place explicit subgroup has genuine rational first p=2 parity zero, via actual local `LocalKummerImage 2`, not finite Boolean-code guess. | Local H¹/Kummer equivalence `PadicQuadraticKummerCompatibility p` not yet supplied |
+| `cmExplicitTwoSelmer_carrier_eq_four_torsion` and `cmTorsionEquivOriginalExplicitSelmer` | Actual original **explicit** all-place 2-Selmer square-class subgroup is exactly four rational 2-torsion classes. | This explicit Selmer is not yet classical continuous cohomological Selmer |
+| `cmActualE2H1ExplicitSelmerImage_eq_torsion` | Original global generic E[2]-valued H¹ image of the explicit subgroup is exactly the four torsion images. | Does not establish every locally admissible H¹ class belongs to this image |
+| `cmOriginalPoint_E2H1Restriction_eq_localXT` | Pointwise original Q→Qp H¹ restriction commutes with local x-T map for every actual rational elliptic point. | **Explicit premise** `PadicQuadraticKummerCompatibility p`; still uninhabited |
+| `cmGlobalKummerQuotientEquivExplicitSelmer` | Genuine rational point group modulo doubles is equivalent to original **explicit** square-class subgroup. | Classical `Sha(E)[2]` exact sequence and full Sha remain OPEN |
+
+New original-source consumer on Lean #107:
+`Synthesis/MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence.lean`
+combines the actual E[2]-H¹ four-torsion image with the genuine Q₂ all-local first-parity condition on the **same** original explicit Selmer group. Source-written, Lean exact-head kernel receipt **OPEN**. Agda's standalone x=39 coherent Hensel witness is a **negative-control/example**, not a replacement for these much stronger already-written general image lemmas.
+
+**Highest-alpha BSD K1/K2/K5 still new source producers:** scalar local quadratic `PadicQuadraticKummerCompatibility p`; direct geometric Kummer ⇄ cohomological exactness and all local images; continuous `Sha(E)[2]` identification; all odd-primary Sha; original K4 same modular/newform/Mellin/period source proof. No classical BSD endpoint promoted.
