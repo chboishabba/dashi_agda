@@ -287,3 +287,25 @@ OPEN. P7: original physical cross-lane source maps OPEN.
 **Do not promote mathematical code, a Python exact certificate, a
 source-written Agda conditional theorem, and an independently
 trained neural mechanism as the same level of acceptance.**
+
+
+### Additional finite F2 counterexample and normalization source
+
+`DASHI/Cognition/PNF/X369OrbitAbsolutePhaseGaugeExact.agda` now reuses
+the **existing** `DASHI.Algebra.TriadicDepthOneCharacters.C3Phase`,
+`multiplyPhase`, and `conjugatePhase` without making a second cyclic
+group. The exact source declarations are
+`absolutePhaseNormalizeCancelsBase` (all nine phase/base cases),
+`absolutePhaseCompositionAfterReindexing` (character composition
+after removing a nonzero orbit origin),
+`shiftedBaseNaivePhaseSquareIsPhase2`, and
+`shiftedBaseNaiveCompositionCannotEqualPhase1` (a finite no-go:
+multiplying the shifted base `phase1` by itself produces `phase2`,
+not `phase1`). The selected Agda checker now includes this module.
+
+**SOURCE-WRITTEN ONLY, kernel still OPEN**. The formal normalized
+character result closes a finite *specification/counterexample* lane,
+not an actual learned network's supervised phase, semantic output
+equivariance, or causal mechanism. The corresponding Leech readout
+change corrects the empirical scoring semantics, but its real-model
+evaluation is still unrun.
