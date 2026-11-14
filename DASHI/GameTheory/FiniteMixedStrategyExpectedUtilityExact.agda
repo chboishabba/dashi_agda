@@ -88,15 +88,25 @@ jointDeviationMass (profileAtom ∷ profiles) alternatives =
   profileMass profileAtom * mixedStrategyMass alternatives
   + jointDeviationMass profiles alternatives
 
+zeroTimesRational : ∀ q → 0ℚ ≡ 0ℚ * q
+zeroTimesRational = solve-∀
+
+distribRational : ∀ a b c → a * c + b * c ≡ (a + b) * c
+distribRational = solve-∀
+
+oneTimesOneRational : 1ℚ * 1ℚ ≡ 1ℚ
+oneTimesOneRational = solve-∀
+
 jointDeviationMassFactors :
   ∀ {G player}
     (profiles : List (WeightedProfile G))
     (alternatives : List (WeightedStrategy G player)) →
   jointDeviationMass profiles alternatives
   ≡ mixedProfileMass profiles * mixedStrategyMass alternatives
-jointDeviationMassFactors [] alternatives = solve-∀
+jointDeviationMassFactors [] alternatives = zeroTimesRational (mixedStrategyMass alternatives)
 jointDeviationMassFactors (profileAtom ∷ profiles) alternatives
-  rewrite jointDeviationMassFactors profiles alternatives = solve-∀
+  rewrite jointDeviationMassFactors profiles alternatives =
+    distribRational (profileMass profileAtom) (mixedProfileMass profiles) (mixedStrategyMass alternatives)
 
 normalizedJointDeviationMass :
   ∀ {G player}
@@ -111,7 +121,7 @@ normalizedJointDeviationMass profileLaw alternative
     (FiniteMixedProfileLaw.atoms profileLaw)
     (FiniteMixedStrategy.atoms alternative)
     | FiniteMixedProfileLaw.normalized profileLaw
-    | FiniteMixedStrategy.normalized alternative = solve-∀
+    | FiniteMixedStrategy.normalized alternative = oneTimesOneRational
 
 ------------------------------------------------------------------------
 -- Cardinal expected-utility gate.
