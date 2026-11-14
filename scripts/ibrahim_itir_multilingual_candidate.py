@@ -102,6 +102,7 @@ def compare_candidate(left:dict[str,Any],right:dict[str,Any])->dict[str,Any]:
             'repair_candidate':({'coarse_coordinate':'qid','retain_coordinate':'observed_value',
                                  'reason':'candidate consumer non-descent / query collision'}
                                 if differs else None),
+            'qid_identity_paid':False,'source_retrieval_paid':False,
             'translation_equivalence_paid':False,'semantic_authority_paid':False,
             'wiki_edit_authority_paid':False,'human_review_paid':False,
             'selected_consumer_licence_paid':False,
