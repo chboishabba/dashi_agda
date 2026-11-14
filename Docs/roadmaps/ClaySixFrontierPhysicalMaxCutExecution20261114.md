@@ -593,3 +593,16 @@ Earlier six-frontier rows focusing on periodic R736 **under-counted the existing
 - Added fail-closed paired source and optional local-kernel script `scripts/check_ns_toe_abcd_pinned_local_20261115.sh`; registered `source-only` in single six-frontier Clay driver. This execution environment lacks `agda`, `lake`, `lean` and `nix` and cannot clone the repositories, so **the new external and Golden exact-head kernels remain unrun in this turn**.
 
 The full NS programme remains A/B/C/D; the TOE `Everything` and `NavierStokesClayFrontierTOEConvergenceValidation` carry non-promotion contracts and do not upgrade finite/structural truths into general PDE solutions.
+
+
+## 15 NOVEMBER SOURCE-CORRECTED MAXIMUM CUT — OVERRIDES ANY PRIOR UNIVERSAL NS W2 TARGET
+
+See [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md).
+
+**IMPORTANT:** [Agda #1271](https://github.com/chboishabba/dashi_agda/pull/1271) already supplied a physical smooth six-mode, unforced, real divergence-free Galerkin counterexample to the **unrestricted universal R734/R735 augmented W2 inequality**. The actual original dyadic X production at N=2 and amplitude 512 is positive while the mixed W rate initially vanishes. The conditional W1+W2→barrier compiler is valid, but its W2 premise is **false on actual physical data**, NOT merely awaiting a weld or general estimate. The counterexample is NOT a counterexample to NS regularity or a Clay solution. Do not spend work proving universal W2 or silently strengthen hypotheses with the desired regularity conclusion. The correct replacement is a physically signed R92/R102 helicity/negative-helicity/dyadic-defect production estimate, separately from W1.
+
+Coalesced exact sources into this single Agda Clay PR #1499: original PR #1271 R734 fuller ring identities, 25 authored research/test/script files and status warning (20 via atomic blob tree, 5 prior exact copy); original P≠NP PR #1129 172 complexity owners via atomic unchanged Git blobs (commit `5a5d1de6bd649a1e5d18c8d420449b5d9240308a`); original Yang–Mills PR #1440 R320→R313→R333 direct OS same-source compilation; preserved #1503 original R445 finite TV. Lean #108 has existing #7 clustering→gap and adds `YMFiniteRangeGibbsExteriorCancellationExact` plus NS R856.
+
+New exact scalar R856 at original R829/R854 values gives pointwise safe integer 10,065,030 (first unsafe 10,065,031) and integrated safe integer 20,130,061 (first unsafe 20,130,062). These are source-written Agda/Lean math with independent SymPy 1.14.0 PASS, **not kernel checked**, and **not a physical R853 rate derivative certificate**. General Lane A physical derivative-slot and low/high integrable-envelope identifications, YM actual interacting R320/R445 physical inputs, SAT M00–M05 bit/cost, Karp F1–F4 and universal SAT lower bound remain open.
+
+TOE original-owner facade is [Agda #1393](https://github.com/chboishabba/dashi_agda/pull/1393), not a new Clay theorem owner. No old donor PR was merged to master.
