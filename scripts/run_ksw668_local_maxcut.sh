@@ -2,7 +2,9 @@
 # KSW 668 original source max-cut: LOCAL receipt only; CI is irrelevant.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-MODE="$1"
+MODE="${1:---math}"
+KSW_MOVEBANK_GPS_FILE="${KSW_MOVEBANK_GPS_FILE:-}"
+KSW_ENA_ORIGINAL_RECEIPT="${KSW_ENA_ORIGINAL_RECEIPT:-}"
 mkdir -p Artifacts/ksw668/local-check
 LOG=Artifacts/ksw668/local-check/acceptance-command-log.tsv
 printf 'kind\tcommand\tstate\n' > "$LOG"
