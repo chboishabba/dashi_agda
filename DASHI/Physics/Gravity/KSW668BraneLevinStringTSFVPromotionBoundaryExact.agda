@@ -27,6 +27,10 @@ import DASHI.Quantum.QuantumMereologySpacetimePromotionExact as QuantumSpacetime
 import DASHI.Physics.ExoticGravity.AntigravityProofSearchFrontierExact as Exotic
 import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
 import DASHI.Physics.Gravity.KSW668BraneBulkRationalNullComparatorExact as Chord
+import DASHI.Topology.WormSoilPantsSheafBoundary as Pants
+import DASHI.Topology.ClopenNDimFibreBoundary as Clopen
+import DASHI.Physics.Closure.MonsterGravityAuthorityAndDimensionExact as Monster
+import DASHI.Physics.Foundations.GRQFTIsraelBranchMaxCutExact as KottlerIsrael
 
 data DimensionRole : Set where
   anatomicalProblemSpace : DimensionRole
@@ -35,6 +39,10 @@ data DimensionRole : Set where
   internalKKSpacelikeCircle : DimensionRole
   curvedBranePhysicalSpatialDirection : DimensionRole
   genuineBulkLorentzianGeometry : DimensionRole
+  nonArchimedeanUltrametricSpace : DimensionRole
+  topologicalPantsWorldTube : DimensionRole
+  monsterAdS3PureGravityCandidate : DimensionRole
+  radionJordanScalarMatterField : DimensionRole
 
 levinAnatomicalSpace : Levin.ProblemSpaceKind
 levinAnatomicalSpace = Levin.anatomical
@@ -144,3 +152,47 @@ canonicalCrossProgrammeNonPromotion = record
 
 -- The booleans above are only guard labels. The stronger real transport
 -- record has NO inhabitant without the external original physical data.
+
+
+------------------------------------------------------------------------
+-- Historical source roles from the user's actual existing repository.
+-- These are REAL existing Agda carriers, not invented replacements.
+-- They are distinct from an exact physical bulk metric or a 5D graviton.
+------------------------------------------------------------------------
+
+originalWormSoilTopologicalPants : Pants.PantsJunction
+originalWormSoilTopologicalPants = Pants.canonicalSplitPants
+
+originalClopenPAdicStyleBall : Clopen.ClopenBallDescriptor
+originalClopenPAdicStyleBall = Clopen.canonicalTwoDimBall
+
+originalMonsterAdS3GravityCandidate : Monster.GravityRouteDescriptor
+originalMonsterAdS3GravityCandidate = Monster.wittenAdS3MonsterRoute
+
+originalExistingIsraelKottler4DBranch :
+  KottlerIsrael.IsraelBranchMaxCut
+originalExistingIsraelKottler4DBranch =
+  KottlerIsrael.canonicalIsraelBranchMaxCut
+
+pAdicClopenTopologyNotFiveDimensionalLorentzCone :
+  nonArchimedeanUltrametricSpace ≡ genuineBulkLorentzianGeometry → ⊥
+pAdicClopenTopologyNotFiveDimensionalLorentzCone ()
+
+pantsWorldTubeNotFiveDimensionalEinsteinMatter :
+  topologicalPantsWorldTube ≡ genuineBulkLorentzianGeometry → ⊥
+pantsWorldTubeNotFiveDimensionalEinsteinMatter ()
+
+monsterAdS3CandidateNotAdS5PhysicalShortcut :
+  monsterAdS3PureGravityCandidate ≡ genuineBulkLorentzianGeometry → ⊥
+monsterAdS3CandidateNotAdS5PhysicalShortcut ()
+
+JordanRadionScalarNotAutomaticallyPhysicalBulkGraviton :
+  radionJordanScalarMatterField ≡ genuineBulkLorentzianGeometry → ⊥
+JordanRadionScalarNotAutomaticallyPhysicalBulkGraviton ()
+
+-- "Israel" refers to the same geometrical jump law across codimension
+-- one but our existing 4D spherical Kottler shell has a 2+1D worldvolume;
+-- this AdS5 cosmological FRW brane has 3+1D worldvolume. The imported
+-- source witnesses are NOT equal to a same-apparatus 5D tensor junction.
+-- Z2 orbifold reflection is not the NS Fourier Z^3 lattice, SSP Z3
+-- triality or a Monster modular group representation.
