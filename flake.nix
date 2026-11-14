@@ -264,6 +264,15 @@
           inherit agdaRecord agdaRecordAll;
         };
 
+        # Focused federation proof shell: avoids the unrelated zkperf Rust
+        # workspace build (which can fail before Agda starts).
+        devShells.federated-topology = pkgs.mkShell {
+          buildInputs = [ agdaWithDashiDeps pkgs.python3 pkgs.bash ];
+          shellHook = ''
+            echo "Federated topology focused Agda shell (no zkperf dependency)"
+          '';
+        };
+
         devShells.default = pkgs.mkShell {
           buildInputs = [
             agdaWithDashiDeps
