@@ -1,0 +1,179 @@
+{-# OPTIONS --safe #-}
+module DASHI.Physics.Propulsion.Rocketdyne1974MaterialIdentityAndConstitutiveDataExact where
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.String using (String)
+
+------------------------------------------------------------------------
+-- HISTORICAL SAME-OBJECT IDENTITY
+--
+-- NASA-CR-140308 / R-9557 and executive summary R-9557-1 identify the
+-- Durability Engine nozzle as WC103 columbium with Vac Hyd silicide coating
+-- VH-101, 80-percent bell, attached near epsilon 3:1 and extending to 40:1.
+-- This pays the historical alloy/coating identity. It does not import a
+-- modern datasheet as though it were the 1974 article's batch certificate.
+------------------------------------------------------------------------
+
+data MaterialIdentity : Set where
+  haynes25 wc103Columbium : MaterialIdentity
+
+data DataAuthority : Set where
+  sameHistoricalReport modernManufacturerData legacyNASAComparator secondaryDatabase : DataAuthority
+
+record HardwareIdentityReceipt : Set where
+  constructor hardware-identity-receipt
+  field
+    material : MaterialIdentity
+    historicalName : String
+    coating : String
+    nozzleContour : String
+    attachAreaRatio : String
+    exitAreaRatio : String
+    sourceReference : String
+    sameObjectIdentityPaid : Bool
+
+wc103NozzleIdentity : HardwareIdentityReceipt
+wc103NozzleIdentity =
+  hardware-identity-receipt
+    wc103Columbium
+    "WC103 columbium"
+    "Vac Hyd silicide VH-101"
+    "80-percent bell; special contour"
+    "approximately 3:1"
+    "40:1"
+    "NASA-CR-140308 R-9557 pp.13,18; R-9557-1 p.9"
+    true
+
+wc103IdentityPaid : Bool
+wc103IdentityPaid = HardwareIdentityReceipt.sameObjectIdentityPaid wc103NozzleIdentity
+
+vh101CoatingPaid : Bool
+vh101CoatingPaid = true
+
+record HistoricalGeometryReceipt : Set where
+  constructor historical-geometry-receipt
+  field
+    characteristicLengthTenthsIn : Nat
+    contractionRatio : String
+    throatExpansionAngleDeg : Nat
+    reportedHeatTransferReductionLowerPercent : Nat
+    reportedHeatTransferReductionUpperPercent : Nat
+    nozzleAttachRatio : String
+    nozzleExitRatio : String
+    wallThicknessRecovered : Bool
+    localRadiusProfileRecovered : Bool
+    sourceReference : String
+
+historicalGeometry : HistoricalGeometryReceipt
+historicalGeometry =
+  historical-geometry-receipt
+    160 "6:1" 42 20 30 "3:1" "40:1"
+    false false
+    "NASA-CR-140308 R-9557 pp.13,18; Figure 7"
+
+------------------------------------------------------------------------
+-- CONSTITUTIVE ANCHORS
+--
+-- These are bounded external anchors. They constrain plausibility but are
+-- not silently promoted to the exact 1974 nozzle article's constitutive law.
+------------------------------------------------------------------------
+
+record TensileAnchor : Set where
+  constructor tensile-anchor
+  field
+    material : MaterialIdentity
+    temperatureF : Nat
+    yieldStrengthTenthsKsi : Nat
+    ultimateStrengthTenthsKsi : Nat
+    condition : String
+    authority : DataAuthority
+    sameHistoricalArticle : Bool
+    sourceReference : String
+
+-- Current Haynes International solution-annealed sheet data:
+-- 2000 F: 0.2% yield 9.0 ksi, UTS 13.3 ksi.
+haynes25At2000F : TensileAnchor
+haynes25At2000F =
+  tensile-anchor haynes25 2000 90 133
+    "solution-annealed sheet"
+    modernManufacturerData false
+    "Haynes International HAYNES 25 alloy brochure/current alloy page"
+
+-- Plate gives a nearby independent product-form anchor:
+-- 2000 F: yield 9.3 ksi, UTS 14.5 ksi.
+haynes25PlateAt2000F : TensileAnchor
+haynes25PlateAt2000F =
+  tensile-anchor haynes25 2000 93 145
+    "solution-annealed plate"
+    modernManufacturerData false
+    "Haynes International HAYNES 25 alloy brochure/current alloy page"
+
+-- ATI Wah Chang C-103 data mirrored by MatWeb provide a bounded comparator:
+-- 2000 F in vacuum: yield 20.0 ksi, UTS 27.0 ksi.
+c103At2000F : TensileAnchor
+c103At2000F =
+  tensile-anchor wc103Columbium 2000 200 270
+    "ATI Wah Chang C-103, vacuum"
+    secondaryDatabase false
+    "MatWeb ATI Wah Chang Nb/Nb Alloy C-103; information attributed to ATI Wah Chang"
+
+-- At 2500 F in vacuum the same external source reports yield 10.5 ksi,
+-- UTS 13.0 ksi. This brackets the historical ~2300 F observation but MUST
+-- NOT be interpolated into a same-article 2300 F allowable without a model.
+c103At2500F : TensileAnchor
+c103At2500F =
+  tensile-anchor wc103Columbium 2500 105 130
+    "ATI Wah Chang C-103, vacuum"
+    secondaryDatabase false
+    "MatWeb ATI Wah Chang Nb/Nb Alloy C-103; information attributed to ATI Wah Chang"
+
+record CreepAnchor : Set where
+  constructor creep-anchor
+  field
+    material : MaterialIdentity
+    temperatureC : Nat
+    testFamily : String
+    authority : DataAuthority
+    sameHistoricalArticle : Bool
+    sourceReference : String
+    admissibleUse : String
+
+c103HistoricalCreepAnchor : CreepAnchor
+c103HistoricalCreepAnchor =
+  creep-anchor wc103Columbium 1093
+    "legacy C-103 creep / stress-rupture test family"
+    legacyNASAComparator false
+    "NASA NTRS 19800025047, Table I, C-103 creep data"
+    "external constitutive comparator only; not a 1974 batch certificate"
+
+record ComparativeAnchorReceipt : Set where
+  constructor comparative-anchor-receipt
+  field
+    comparisonTemperatureF : Nat
+    haynesYieldTenthsKsi : Nat
+    c103YieldTenthsKsi : Nat
+    sameTemperature : Bool
+    sameProductFormOrBatch : Bool
+    admissibleConclusion : String
+
+at2000FComparativeAnchor : ComparativeAnchorReceipt
+at2000FComparativeAnchor =
+  comparative-anchor-receipt 2000 90 200 true false
+    "external data place C-103 above HAYNES 25 sheet in yield strength at 2000 F; this constrains plausibility but does not identify the 1974 failure stress"
+
+record MaterialDataBoundary : Set where
+  constructor material-data-boundary
+  field
+    alloyIdentityRecovered : Bool
+    coatingIdentityRecovered : Bool
+    exact1974WallThicknessRecovered : Bool
+    exact1974HaynesConstitutiveLawRecovered : Bool
+    exact1974WC103ConstitutiveLawRecovered : Bool
+    modernDataMayBoundPlausibility : Bool
+    modernDataEqualsHistoricalArticle : Bool
+    interpolationTo2300FAutomaticallyAdmissible : Bool
+
+canonicalMaterialDataBoundary : MaterialDataBoundary
+canonicalMaterialDataBoundary =
+  material-data-boundary true true false false false true false false
