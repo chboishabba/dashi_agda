@@ -85,3 +85,14 @@ The user reported three remaining one-line source adjustments from the local com
 The one still-open source site was `PNotEqualsNPCookFormulaPrefixCodecExact.encodeCookFormulaLength`: the consumed suffix-length equality yields `cookFormulaTokenCount formula + zero`, while the public statement expects `cookFormulaTokenCount formula`. The owner now imports `trans` and applies `trans equality (NatP.+-identityʳ (cookFormulaTokenCount formula))`; no term-level axiom, arbitrary bound, or unsafe compiler flag was introduced.
 
 **Verification lattice:** old-head compiler diagnostic → exact same-owner edit → GitHub source readback → **new-head pinned Agda 2.9 Golden and integration compiler receipts pending**. Source changes, previous head acceptance, and absence of semantic modifications do not establish the new-head kernel pass. Run `scripts/run_agda29_parallel_check.sh` and the fail-closed preflight on the new branch head, recording exit codes and any next diagnostic. The P0–P3 costed completeness programme remains independently OPEN.
+
+
+## 2026-11-07 reverse accepting-endpoint CNF owner: explicit composition
+
+- **O/R:** DASHI Karp-21, PR #1445, branch `chatgpt/karp21-reduction-transport`; latest worker dispatched the reverse Cook–Levin acceptance endpoint proof.
+- **C:** Original owner `ConcreteTapeAcceptingRunAcceptCompleteExact.agda`, theorem `acceptingEndpointCNF_complete_for_run`. Its original theorem statement remains unchanged: a genuine `AcceptingWellFormedRun` supplies a canonical assignment satisfying `Endpoint.acceptingEndpointCNF`.
+- **S:** Source-only repair committed on the PR. Imported `proj₁`/`proj₂` explicitly for nested `Σ` projections; replaced the final `rewrite witnessClauseTrue | implicationsTrue` with `trans (cong₂ CNF.andBool witnessClauseTrue implicationsTrue) refl`. This composes the already source-written one-hot witness clause and the `Placed.compilePlacedAllComplete` certificate without `with`-abstraction of non-constructor terms.
+- **L:** Source observed → same-owner patch → source readback → exact pinned Agda 2.9 `ConcreteTapeBoundaryGuardFocusedRootExact`/E20 compiler receipt → promotion. The last two steps are **OPEN** for this SHA.
+- **P:** Compile the original owner first, then the focused boundary root, then E20. Repair the first actual compiler diagnostic, not a hypothetical one.
+- **G:** No new theorem type, alternate SAT assignment, axioms, postulates, unsafe pragmas, or inherited compiler acceptance. Attribution: Cook/Levin for SAT completeness; source-native DASHI reconstruction for the endpoint bit/Fin proof. `dashi_lean4` authority mirrors are non-promoting donors.
+- **F:** Exact-head kernel acceptance and subsequent reverse accepting-run integration remain unverified by this source-only worker.
