@@ -33,7 +33,6 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.String using (String)
 
 -- Keep all theorem producers in their existing modules.
-import DASHI.EverythingNonArchimedeanSpectralBidi as NonArch
 import DASHI.Analysis.NonArchimedeanSpectralBidiObligationExact as Bidi
 import DASHI.Analysis.NonArchimedeanSpectralOriginalGoalCapstoneExact as Capstone
 import DASHI.Analysis.AdelicSpectralClaimStrengthAuditExact as SourceAudit
