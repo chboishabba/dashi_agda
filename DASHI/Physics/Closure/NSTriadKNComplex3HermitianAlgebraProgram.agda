@@ -231,17 +231,17 @@ realModePairingIsBilinear E k v =
 record HermitianScalingCutset
     {r : Level} (F : C3.RealField r) : Set (lsuc r) where
   field
-    complexMultiplyAssociative : ∀ a b c →
+    complexMultiplyAssociative : (a b c : C3.Complex F) →
       C3.complexMultiply (C3.complexMultiply a b) c
       ≡ C3.complexMultiply a (C3.complexMultiply b c)
 
-    hermitianPairingScaleLeft : ∀ scalar u v →
+    hermitianPairingScaleLeft : (scalar : C3.Complex F) (u v : C3.Complex3 F) →
       C3.hermitianPairing3 (C3.complex3Scale scalar u) v
       ≡ C3.complexMultiply
           (C3.complexConjugate scalar)
           (C3.hermitianPairing3 u v)
 
-    hermitianPairingScaleRight : ∀ scalar u v →
+    hermitianPairingScaleRight : (scalar : C3.Complex F) (u v : C3.Complex3 F) →
       C3.hermitianPairing3 u (C3.complex3Scale scalar v)
       ≡ C3.complexMultiply scalar (C3.hermitianPairing3 u v)
 
