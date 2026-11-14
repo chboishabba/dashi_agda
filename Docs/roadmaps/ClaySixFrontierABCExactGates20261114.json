@@ -1568,5 +1568,79 @@
         "physical OS E1/D1/D2/gap"
       ]
     }
+  },
+  "implementation_round_20261114_5": {
+    "date": "2026-11-14",
+    "scope": "Six-frontier attachment maximum cut; preserve original owner and fail-closed source status",
+    "source_evidence_only": true,
+    "source_written_awaiting_kernel": true,
+    "verified_original_clay_terminal_gates": [],
+    "lanes": {
+      "YM": {
+        "owner": "#1503",
+        "new_script": "scripts/check_ym_r445_weighted_exterior_influence.py",
+        "new_doc": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "advance": "Finite weighted conditional exterior coupling inequality; 6561 rational positive 2x2 pair checks",
+        "physical_wilson_effective_target_D_k_proved": false,
+        "cutoff_uniform_summability_proved": false
+      },
+      "PNP": {
+        "owner": "#1502",
+        "new_doc": "Docs/roadmaps/Karp21N21PhysicalF3F4CompileWeld20261114.md",
+        "advance": "Reconciliation of true original raw first-enabled donor, bit-native semantic step, source run bound, all-k positive physical gamma and terminal phase quotient",
+        "actual_compiled_N21_physical_F3_proved": false,
+        "whole_machine_bit_clock_proved": false,
+        "originalN21InNP_proved": false
+      },
+      "BSD": {
+        "owner": "Lean #107",
+        "new_script": "scripts/check_bsd_q2_hensel_3705_exact.py",
+        "new_source": "Synthesis/MillenniumBSDCMQ2Hensel3705CandidateExact.lean",
+        "new_local_runner": "scripts/check_bsd_q2_hensel_3705_local.sh",
+        "advance": "Constructive coherent 2-adic lifts and actual Q2-root Hensel Lean proof candidate",
+        "lean_candidate_kernel_accepted": false,
+        "complete_Q2_kummer_image_proved": false,
+        "continuous_H1_sha_identification_proved": false
+      },
+      "NS": {
+        "owner": "#1501",
+        "new_source": "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda",
+        "updated_checker": "scripts/check_ns_r854_original_affine_integrated_rate_exact.py",
+        "advance": "Exact original horizon permits pointwise rate budget 10^7 times R828 and integrated budget 2·10^7 times R828",
+        "agda_source_kernel_accepted": false,
+        "original_real_galerkin_and_R853_weld_proved": false
+      },
+      "BISHOP": {
+        "owner": "#1478",
+        "new_source": "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda",
+        "updated_checker": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+        "advance": "Finite source Bishop complex setoid eta Abel telescope; reuse preexisting analytic compact-uniform bound and differential diagnostics",
+        "agda_source_kernel_accepted": false,
+        "canonical_Nat_log_and_FTC_proved": false,
+        "original_eta_uniform_convergence_proved": false
+      },
+      "RH": {
+        "owner": "#1499 / Lean #50/#108",
+        "new_doc": "Docs/roadmaps/RHA2FourierCurvatureCorrectedScope20261114.md",
+        "advance": "Corrected single vs paired horizontal Taylor and generic all-frequency Fourier-curvature sign no-go",
+        "actual_selected_zeta_zero_configuration_obstruction_proved": false,
+        "selected_A2_no_go_proved": false,
+        "strict_compensation_proved": false
+      }
+    },
+    "acceptance": {
+      "pinned_Agda_2_9_executed": false,
+      "pinned_Lean_executed": false,
+      "physical_or_original_source_theorem_gate_closed": false,
+      "none_of_missing_A_B_C_endpoint_gates_promoted": true
+    },
+    "next_source_gates": [
+      "originalR445ActualLocalizedEffectiveTargetTVBound",
+      "originalBitTapeStepSimulatesN21Rule",
+      "PadicQuadraticKummerCompatibility 2",
+      "originalR71RealGalerkinLocalSolution",
+      "originalRound11DirichletTermFundamentalTheorem",
+      "originalSelectedA2StrictSignedCompensation OR originalSelectedA2CompensationNoGo"
+    ]
   }
 }
