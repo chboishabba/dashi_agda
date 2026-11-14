@@ -132,7 +132,7 @@ refinedConstancyReceipt :
     (refinedSystem experiment)
     query
 refinedConstancyReceipt experiment =
-  Fibre.fibre-constant-for-consumer
+  Fibre.fibreConstantForConsumer
     (Fibre.refinedAnswer (refinement experiment))
     (Fibre.targetDescendsAfterRefinement (refinement experiment))
 
