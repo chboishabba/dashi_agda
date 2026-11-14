@@ -1,5 +1,66 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Authoritative current programme cut — 15 November 2026 (exact-head operator replay)
+
+**This section supersedes the dated checkpoint summaries below; those remain for audit history, not current gate status.**
+
+**Formal/offline CLOSED at recorded commits:** DASHI PR #1506 source commit `4c89edbe90ef0e29ea5c02b18bd5dfe090ab9e61`: seven pinned Agda 2.9 targets, clean tracked worktree, exit 0. ITIR PR #14 commit `e64c04f32f791502f6feccd3d918ece9a426c122`: ten Python suites **95/95 PASS**, native C++ Cap'n Proto writer+decoder **4 packed-message roundtrips and five fail-closed controls**, exact-head script exit 0, no tracked modifications. Both are operator-executed and were not independently replayed by this chat runtime. SLR candidate Rust **4/4** and SensibLaw reference/NORA **17/17** are separate reported focused results, not persisted/native-source acceptance.
+
+**Status rule:** `conditional-theorem-kernel-pass` ≠ `physical-premise-constructed` ≠ `all-query-complete` ≠ `native statement evidence paid` ≠ `S29 durable review` ≠ `NORA external-author fixture verified` ≠ `operator-authorised Wikidata edit`. The first two offline source acceptance gates have been paid; the physical, semantic and production gates remain open.
+
+### A: exact Agda mathematical declarations and the still-missing concrete theorems
+
+| Gate | Existing kernel-checked declaration (already proved *conditional*) | Outstanding concrete proof obligation — required witness or proposed next lemma, NOT yet proved |
+|---|---|---|
+| **A1** | `NameShardPartition`; `zelphPhysicalNameShardPartitionExact` | Establish `indexedCoverage` **and** `indexedExclusivity` for *actual* source graph QID/name keys across the whole `nodeOfName` domain. First prove full physical manifest cover and key range/sort semantics, then a byte-checked `contains` relation; if duplicate keys can occupy multiple shards, use a **multi-shard fibre** rather than instantiate a false singleton. Proposed target `zelphPublishedNameCoverMatchesOriginalBinDomain` and `zelphDuplicateNameFibreExhaustive` (new names, not current source). Five selected QIDs do not establish A1 globally. |
+| **A2** | `QueryFamilyClosure`; `zelphBoundedShardQueryFamilyCompleteness`; counterexample `nameOnlyCannotCertifyAdjacency` | Construct `edgeClosure` from actual original binary and decoded selected view **for a declared query grammar**. First close finite one-hop `left`/`right` root answers (P2); then prove the selected subgraph is closed under *every* step, join and relation word in the declared family. Proposed `zelphSelectedOneHopAnswerEqualsOriginal`, `zelphQueryFamilyBoundaryClosed` and `zelphOriginalQueryAnswerFactorsThroughSelected` (new targets, not discharged). The existing record's `edgeClosure` is the desired equality as a supplied premise; its Agda acceptance does NOT prove that real equality. |
+| **A3** | `CompatibleShardSections`; `zelphHyperformalShardGluingSound`; `conflictingOverlapsCannotGlue` | Provide **real** `localVertex`, `localEdge`, and each `overlapAgreement` indexed by identical QID, source, revision, qualifier, temporal and reviewer context; reject incompatible overlaps. Current theorem **constructs** a `GlobalSection` from an already compatible family, it does **not** prove uniqueness or infer compatibility from labels. Proposed `zelphRealShardOverlapAgreement` (new). |
+| **A4** | `FibreConstant`; `zelphPrefixQuotientQueryAdequacyIffForward`, `zelphPrefixQuotientQueryAdequacyIffBackward`; `nameOnlyIsNotAdequateForEdgeQuery` | Build an actual physical prefix/range projection and demonstrate a representative law for its **image**. Show selected query answers constant on physical projection fibres; supply a concrete native quantity/P854 counterexample to a name-only projection. The existing two directions make an equivalence **only under the stated representative hypothesis**, not a free-standing unconditional physical `iff`. Proposed `zelphPhysicalRangeProjectionAdequacy` (new). |
+| **A5** | `RevisionFibreTransport`; `zelphRevisionRefinementTransportCoherent` | Prove `stableFibreCorrespondence` for **actual old/new graph revisions** and distinguish stable `(source,QID,GUID,scope)` fibres from regenerated internal node/chunk IDs. Produce a dependency-indexed reopen receipt; a provenance `String` alone is not a cryptographic equality. Proposed `zelphRevisionCorrespondencePreservesReviewedFibres` and `zelphChangedDependencyRequiresReopen` (new). |
+| **A6** | `ScopedNegativeCertificate`; `zelphQueryScopedNegativeCompletenessIff`; `uninspectedCannotGiveNegative` | Produce **both** missing-answer preservation and reflection for a formally enumerated closed-world query family, same revision, complete decoder and full dependency closure. Missing/uninspected/ambiguous source must remain **unresolved**. The A6 bidirectional theorem is correct *given* the two certificates: it does not establish they exist for Wikidata. Proposed `zelphPhysicalScopedNegativeCertificateSound` (new). |
+
+### B: exact runtime/refinement targets (existing roadmap names; not all Agda declarations)
+
+| Gate / bridge target | Owner | Exact acceptance and missing evidence |
+|---|---|---|
+| **B1 `hfManifestShardIdentityPreserved`** | ITIR | Real published numeric-v2 raw manifest, immutable dataset SHA, schema/path/chunk range correspondence and raw SHA digest; no caller-only identity |
+| **B2 `hfSelectedShardDecodePreservesKeyNode`** | ITIR → DASHI | Compiled decoder now passes native generated-schema roundtrips; missing real published packed bytes, independent original source-range equality and an explicit **decoder soundness/refinement argument** |
+| **B3 `natFiveQidsExactRouteReplays`** | ITIR | Five actual QIDs, physical `nodeOfName` and reverse name rows, original `.bin` source-bin route, new route digest, request/receipt hash chain; old digest cannot be reused |
+| **B4 `hfPhysicalRequestDedupeAndBudgetExact`** | ITIR / existing SLR acquisition | Actual **unique physical** GET count, cold-object coalescing, `≤5` concurrency, bytes transferred (distinct from planned bytes/cache), strict truncation policy, fail-closed retry |
+| **B5 `zelphGraphNativeStatementJoinIsEvidenceOnly`** | SLR #10 | Independent same-original native `(QID, statement GUID)`/mainsnak/rank/qualifiers/time/units/references/P854 source with revision correspondence; no inference from graph edges to evidence payment |
+| **B6 `natZelphNoraReviewReplaySameSource`** | SLR S29 + ITIR + SensibLaw reference | Same source/revision/QID/GUID/subject/standpoint/reviewer; restartable durable review, rejected/held options retained, sparse reopen upon dependency change |
+
+### C: indispensable empirical/production receipts
+
+| Gate | Exact hard artifact and stop condition |
+|---|---|
+| **C1** | Recomputed on-disk raw SHA256 of original request, immutable manifest, new route, packaged receipt and selected physical bytes, plus independent source URL/commit identity. No asserted hash without bytes |
+| **C2** | Native decoder output on **real** selected `left`, `right`, `nodeOfName`, `nameOfNode` objects; exact original `.bin` source-range equality; measured GET/bytes/cache and no truncation. Then real finite-family closure; synthetic native fixtures are not this receipt |
+| **C3** | Independently inspect actual native P14143 quantities, periods/qualifiers, GUIDs and P854 primary source records, with source-bound 1-to-N split and review disposition; do not promote graph-only candidates |
+| **C4** | Preserve exact-head Agda 7/7 and ITIR 95/95 + native acceptance receipts; **remaining** same-artifact SLR PostgreSQL S29 persistence, restart/readback, sparse reopen and original-source native tests (not simply more offline fixture tests) |
+| **C5** | Real Éder Porto NORA export/API artifact and documented semantics; five-choice multi-consumer replay into SLR review without flattening or inventing reviewer authority |
+| **C6** | Lossless **current** Nat `(QID, statement GUID)` cursor, counted page receipts and explicit exhaustion across population. Historic P5991 statement total `57,989` and five-entity fixtures are not a current complete enumeration |
+
+### Phase roadmap — keep one active PR per repository
+
+| Phase | A/B/C cuts | Deliverables (independent artifacts) | Evidence-based exit | Owner |
+|---|---|---|---|---|
+| **P0 source lock** | B1/B3/C1 | `original-bin-source.json`, pinned full-manifest raw bytes/SHA, new five-QID route, original-source build hash, selected-object list, local-or-HTTP206 same-original range receipts | Original `.bin` identity genuinely authenticated and raw source-range equality independently checked, no synthetic records | ITIR #14 |
+| **P1 name partition** | A1/B2/B3 | Real native `nodeOfName`/`nameOfNode` per-QID outputs, duplicate-name fibre results, whole-domain `nodeOfName` range/cover evidence, accepted partition witness | Finite selected QID theorem first; global A1 only after source-domain coverage and exclusivity or multi-fibre reformulation | ITIR #14 + DASHI #1506 |
+| **P2 query-family completeness** | A2/A3/A4/A6/C2 | Original-vs-selected one-hop arrays/counts and source graph equality; explicit query syntax/dependencies, closed neighbourhood fixpoint and counterexamples; physical overlaps and scoped negative policy | `∀q∈F, answer(G,q)=answer(view(G),q)` with **proved premises**; no general closure or negative claim from mere one-hop equality | ITIR #14 + DASHI #1506 |
+| **P3 transport/revision** | A5/B4/C2 | Cold physical GET/cache/byte budget; two actual revisions, stable key mapping, changed-dependency reopen receipts | Measured ≤5 cold physical concurrency, old/new fibre transport only on justified stable keys | ITIR #14 + SLR #10 / existing acquisition owner |
+| **P4 native source/S29** | B5/B6/C3/C4 | `(QID, GUID)` native statement bundle, cited P854 verified evidence, qualified quantity/period, S29 durable initial-review/restart/reopen outputs | Production reviewed source receipt independent of graph candidate; readback matches persisted review decisions | SLR #10 + existing S29 owner |
+| **P5 NORA/Nat population** | B6/C5/C6 | Attributed true NORA export + semantic crosswalk, five-choice multi-perspective replay, complete current Nat cursor/exhaustion, explicit external authorisation if any write | No source or reviewer authority from hypothetical NORA; lossless population and actual source-supported/held decisions | SensibLaw #514 (reference), SLR production |
+
+### The immediate three highest-information cuts
+
+1. **P0.1: real bytes**, not more synthetic tests: replay original pinned manifest + original source binary (or exact immutable original HTTP 206 ranges), download only manifest-selected physical objects, compare raw original packed ranges and produce independently recomputed SHA receipts. Real `hf` access or an already retained original `.bin` and selected chunk files is the external dependency.
+2. **P1.1/P2.1: actual five-QID native replay:** compile the existing filtered original `.bin` producer; emit a **new** exact route with bounded selected-root `nodeAdjacency`, native decode 4 section types, compare five actual name routes and original vs selected left/right neighbour sets and counts; preserve ambiguity/truncation failures. This proves bounded first-hop equality only.
+3. **P2.2/P4.1: extend semantics, not transport:** explicitly select a finite real query family and prove source/selected answer closure through its relation steps/joins; in parallel obtain independent native `(QID,GUID,P14143,P854)` source bundles in SLR and persist/restart the S29 review. A2 original query closure and P4 source evidence are **independent**, not substitutable.
+
+**Hard stop:** physical or native proof cannot be inferred from a generated synthetic Cap'n Proto fixture, a request string, a manifest label, an asserted digest, or an Agda record whose fields are the desired propositions. Retain exact original authors: Zelph acrion/upstream, NORA Éder Porto, Wikimedia/primary source creators and repo-specific formal/runtime implementers.
+
+
 ## Latest P0/A1/A2 physical acceptance checkpoint — 15 November 2026
 
 **Golden Agda result remains exact-head PASS:** the operator's clean Agda 2.9.0 replay at `4c89edbe90ef0e29ea5c02b18bd5dfe090ab9e61` checked seven core/interop modules (exit 0). Since then this PR has only gained documentation, so the checked mathematical source has not changed.
