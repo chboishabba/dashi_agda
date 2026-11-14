@@ -2,7 +2,6 @@ module DASHI.Physics.Plasma.KSW668SourceCrosswalkExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
-open import Agda.Builtin.Nat using (_+_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.MHDFullTransferFromExchangeCompatiblePayloadExact as MHD
