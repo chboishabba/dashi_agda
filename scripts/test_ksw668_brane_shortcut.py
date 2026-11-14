@@ -6,6 +6,7 @@ import ksw668_brane_bulk_shortcut_same_metric as Geometry
 import ksw668_brane_winding_stability_source as Worldvolume
 import ksw668_compact_kk_mode_dispersion as ProductKK
 import ksw668_caldwell_langlois_original_eq19 as OriginalAdS
+import ksw668_caldwell_langlois_israel_exact as Israel
 
 class BraneMaxCutTests(unittest.TestCase):
     def test_actual_same_ambient_metric_and_apparent_shortcut(self):
@@ -53,6 +54,17 @@ class BraneMaxCutTests(unittest.TestCase):
         self.assertTrue(r["brane_rho_plus_pressure_positive"])
         self.assertTrue(r["original_bulk_null_and_geodesic"])
         self.assertFalse(r["all_Israel_distributional_conditions_independently_accepted"])
+
+    def test_original_AdS5_Z2_Israel_full_spacetime_junction(self):
+        r=Israel.audit()
+        self.assertEqual(r["original_paper_DOI"],"10.1016/S0370-2693(01)00631-1")
+        self.assertEqual(r["geometric_K_mixed_t"],"-1/sqrt(1+t^-2)")
+        self.assertEqual(r["geometric_K_mixed_i"],"-sqrt(1+t^-2)")
+        self.assertTrue(r["unit_normal_and_induced_clock"])
+        self.assertTrue(r["classical_Z2_Israel_all_16"])
+        self.assertTrue(r["rho_plus_p_positive"])
+        self.assertFalse(r["bulk_linearised_graviton_and_stability_proved"])
+        self.assertFalse(r["physical_bulk_source_detector_response"])
 
     def test_same_receiver_original_gravitational_horizon_arrives_earlier(self):
         r=OriginalAdS.audit()
