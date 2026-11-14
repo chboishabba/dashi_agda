@@ -26,7 +26,7 @@ module DASHI.Unified.R559IbrahimFleetHyperfabricTOEExact where
 --
 -- L. Lane.
 -- One TOE normalization lane.
--- No ESD or digital_esd surface is edited.
+-- No protected external ESD surface is edited.
 --
 -- Preconditions.
 -- All imported owners exist and retain attribution.
