@@ -2,7 +2,8 @@
 # KSW 668 original source max-cut: LOCAL receipt only; CI is irrelevant.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-MODE="${1:---math}"
+MODE="--math"
+if [ "$#" -gt 0 ]; then MODE="$1"; fi
 KSW_MOVEBANK_GPS_FILE="${KSW_MOVEBANK_GPS_FILE:-}"
 KSW_ENA_ORIGINAL_RECEIPT="${KSW_ENA_ORIGINAL_RECEIPT:-}"
 mkdir -p Artifacts/ksw668/local-check
@@ -24,6 +25,7 @@ run python python3 scripts/test_ksw668_primary_empirical_weld.py
 run python python3 scripts/check_ksw668_maxwell_3d_jet.py
 run python python3 scripts/ksw668_neutron_energy_nonextrapolation.py
 run python python3 scripts/ksw668_nuclear_electron_final_states.py
+run python python3 scripts/check_ksw668_spacelike_kk_projection.py
 run python python3 scripts/ksw668_mms_burst_acquire.py
 run python python3 scripts/ksw668_mms_sdc_direct.py
 run python python3 scripts/ksw668_ena_reads_acquire.py
