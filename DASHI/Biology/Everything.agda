@@ -262,3 +262,6 @@ import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact
 
 -- KSW 668 same-source empirical biology, read-only controls.
 import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact
+
+-- Published individual original human AMS isotope measurements (2013).
+import DASHI.Biology.KSW668HumanCarbon14ObservedExact
