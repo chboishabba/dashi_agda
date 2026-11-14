@@ -1,7 +1,6 @@
 module DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyVerificationExact where
 
 open import DASHI.Core.Prelude
-open import Agda.Primitive using (Set; Set₁; Set₂)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
