@@ -31,6 +31,7 @@ module DASHI.Mathematics.Complexity.Karp21StackedSourceConvergence20261114 where
 
 import DASHI.Mathematics.Complexity.Karp21Everything
 import DASHI.Mathematics.Complexity.Karp21BinaryRuntimeEverything
+import DASHI.Mathematics.Complexity.Karp21NativeGammaOneBitPayloadPhysicalExact
 
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunAcceptCompleteExact
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalEndcapCNFExact
