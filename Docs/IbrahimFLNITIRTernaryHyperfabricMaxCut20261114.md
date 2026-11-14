@@ -421,3 +421,17 @@ NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh
 ```
 
 Use the repository's existing isolated shadow-tree routine with Agda 2.9 and pinned stdlib; report the first failing module, actual exit status and import closure, rather than treating old-head passes as new-head passes. Generated certificate code now exercises both `General.finiteFirstLinkOrbitClassifies` and `Pigeonhole.finiteFirstLinkOrbitClassifiesAutomatically`.
+
+
+### Finite-pigeonhole oracle verification (independent of Agda)
+
+A **separate** Python mathematical oracle, `tests/test_ibrahim_finite_pigeonhole_oracle.py`, was added to the same PR and executed locally using Python 3.13.5:
+
+```
+Ran 3 tests in 0.085s
+OK
+```
+
+The tests cover all one-/two-vertex total functional maps, 5,600 seeded random graphs across sizes 1–14 (multiple sampled starts) with deliberately repeated carrier-list entries, and fail-closed behaviour for partial/missing links. Each test checks a repeated orbit within the *carrier-list-size + 1* observation bound, a positive period, and equality at the original orbit indices. It is a model oracle only; it **does not** type-check `IbrahimFinitePigeonholeProducerExact.agda`. The pre-existing 33-test full Python suite has **not yet been rerun on this new head**; the expected expanded suite is **36 tests** (33 previous + 3 newly locally tested). The shadow-tree focused Agda checker now includes the producer as its seventh source module and the dynamically generated figure as an eighth check. Exact-head kernel acceptance is pending.
+
+The new proof's reuse of `Data.Fin.Properties.pigeonhole` and the natural subtraction lemma is grounded in the standard-library theorem, rather than an axiomatic claim. Compiler acceptance must verify all imports and reductions on this repository's pinned Agda 2.9/stdlib combination.
