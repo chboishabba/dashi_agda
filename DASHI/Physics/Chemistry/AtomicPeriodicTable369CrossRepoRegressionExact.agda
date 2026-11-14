@@ -138,7 +138,7 @@ canonicalCrossRepoRegressionDiscipline =
 -- different axes and are now held simultaneously rather than rewritten into
 -- one retrospective claim.
 
-record CrossRepoAtomicDashboard : Set₁ where
+record CrossRepoAtomicDashboard : Set₂ where
   field
     full118Surface : CrossRepoRegressionReceipt
     finiteFormalSurface : CrossRepoRegressionReceipt
