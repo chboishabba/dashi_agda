@@ -235,7 +235,7 @@ canonicalAgentInteractionReopening = agentInteractionReopeningReceipt
 
 netOutcomeCannotReachHostSpecificity :
   Affected.AffectedClosure Depends netOutcomeCertificate hostSpecificityCertificate → ⊥
-netOutcomeCannotReachHostSpecificity ()
+netOutcomeCannotReachHostSpecificity (Affected.affectedStep () _)
 
 oxygenOutcomeCannotReachHostSpecificity :
   Affected.AffectedClosure Depends oxygenOutcomeCertificate hostSpecificityCertificate → ⊥
