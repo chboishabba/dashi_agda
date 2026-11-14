@@ -1,5 +1,13 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## A1 collision-preserving proof-owner refinement — 15 November 2026
+
+**New Agda source written, NOT yet Agda-checked:** `DASHI/Interop/ZelphMultiNameShardFibreExact.agda` defines `CompleteNameShardFibre` with finite `shardFibre` lists and two independent implications: `noMissingShard` (every physically containing shard appears) and `noFabricatedShard` (every listed shard actually contains the key). `zelphDuplicateNameFibreExhaustive` exposes their bidirectional exactness. `singletonNameFibre` constructs a special case from the previously checked `NameShardPartition` singleton witness, but no reverse conversion is assumed without a physical uniqueness theorem. This retains genuine name collisions rather than erasing them.
+
+The repository's `scripts/check_zelph_trie_hyperfabric_maxcut.sh` now includes **nine** targets: the original checked seven, the new finite relation-word A2, and this new collision-preserving A1. **Only the original seven at `4c89edb` have a recorded Agda 2.9 PASS.** New declarations must be tested at their exact committed head before kernel-status promotion.
+
+Both the new theorems are mathematical transport/representation improvements, NOT verified physical source-domain completeness. Their instantiation still requires original `nodeOfName` key-domain exhaustion, real selected packed-name bytes, decoded collision fibres and same-revision original source identity.
+
 ## New constructive A2 maximum-cut tranche — 15 November 2026
 
 **Source committed, new head not yet kernel checked.** Existing DASHI A1–A6 conditional modules passed operator Agda 2.9 at exact earlier source `4c89edb` (7 targets). The new separate `DASHI/Interop/ZelphFiniteQueryWordClosureExact.agda` replaces the A2 circular proof premise *for finite left/right relation words* with a source-reachable local-step certificate and an induction:
