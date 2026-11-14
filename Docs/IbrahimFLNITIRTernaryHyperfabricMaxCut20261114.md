@@ -195,3 +195,21 @@ The user supplied a deterministic local-check narrative from a disposable worktr
 **Updated A1 acceptance:** isolated module proofs **reported locally typechecked (5/5) with stated adjustments**; Python exact-file suite **verified 9/9**; **current-head clean replay and aggregate 2.9 remain OPEN**. The user-supplied verification is catalogued under [`artifacts/ibrahim_fln_local_agda_2802_reported_verification_20261114.md`](../artifacts/ibrahim_fln_local_agda_2802_reported_verification_20261114.md) as a report, not a machine-generated kernel log.
 
 **Next P2/P4/P5 proof cuts:** the seven-node orbit/basin and synthetic consumer-repair modules now have a **reported** Agda 2.8 local typecheck; the general graph certification, source-backed Hyperfabric edge selection, an actual review-authorised multilingual query repair, typed changed-page transport and independently rerun post-repair evidence are not yet discharged. Keep each candidate/revision/epistemic state independent, including signed ternary and unknown.
+
+
+### Verification script mode repair (same PR)
+
+The local direct-script attempt exited 126 because `scripts/check_ibrahim_fln_maxcut.sh` lacked the executable Git mode. Commit [`70553db6`](https://github.com/chboishabba/dashi_agda/commit/70553db6172bee0df36d8bb1f0dc57a1d91885af) changes only the file mode **100644 → 100755**, retaining the exact existing shell contents and byte SHA; this closes the **invocation-permission defect**, not the Agda proof gate. The existing CI command `bash scripts/check_ibrahim_fln_maxcut.sh` remains valid. Do not infer an executed pass from the chmod itself.
+
+**Current requested clean acceptance command in an isolated worktree, with the stated library wrapper disambiguation applied only there:**
+
+```sh
+set -o pipefail
+agda --version
+./scripts/check_ibrahim_fln_maxcut.sh 2>&1 | tee /tmp/ibrahim-1505-agda-check.log
+# separately, do not silently swallow the aggregate failure:
+agda --safe -i . -l standard-library DASHI/Wikimedia/Everything.agda \
+  2>&1 | tee /tmp/ibrahim-1505-wikimedia-aggregate.log
+```
+
+Record the real `PIPESTATUS`/exit code immediately for each command (or use `set -e -o pipefail` in a fresh shell), full log hash, exact worktree head, Agda/stdlib identity, any local wrapper-mask diff and first failing module if aggregate still exits 42. The prior isolated 2.8.0.2 pass and 9/9 Python pass are preserved as **separate receipts**.
