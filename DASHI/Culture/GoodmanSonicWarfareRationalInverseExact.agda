@@ -176,13 +176,20 @@ ridgeTwoChannelDecomposition :
       + ((rho * q) * (secondError - firstError))
 ridgeTwoChannelDecomposition = ridgeRingDecomposition
 
+ridgeBiasRing :
+  ∀ (q rho lambda y : ℚ) →
+  ((rho * (q * q)) * y) + ((rho * lambda) * y)
+  ≡ (rho * (q * q + lambda)) * y
+ridgeBiasRing q rho lambda y =
+  solve (q ∷ rho ∷ lambda ∷ y ∷ [])
+
 ridgeBiasBalance :
   ∀ (q rho lambda y : ℚ) →
   rho * (q * q + lambda) ≡ 1ℚ →
   ((rho * (q * q)) * y) + ((rho * lambda) * y) ≡ y
 ridgeBiasBalance q rho lambda y paid =
   trans
-    (solve (q ∷ rho ∷ lambda ∷ y ∷ []))
+    (ridgeBiasRing q rho lambda y)
     (trans
       (cong (λ factor → factor * y) paid)
       (QProperties.*-identityˡ y))
