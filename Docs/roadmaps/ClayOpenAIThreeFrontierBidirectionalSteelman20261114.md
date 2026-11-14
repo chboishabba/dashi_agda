@@ -116,3 +116,12 @@ separate gates.
 **Exact local regression receipt:** the committed source Git blob `5a37096a5d7579bea3a439b31020d1621259eb21` was independently reconstructed and run on 14 Nov 2026: PASS (580 finite CNF formulas and four NS predicate models). This source-only receipt is **not** a Lean/Agda proof.
 
 **Status:** selected original count→SAT decision and foreign typed corollary/proposed count transport *source-written*; the local finite regression passed 580 CNFs and 4 NS models; no pinned new Agda/Lean kernel checks, no full external proof replay, no same-object YM E1/D2, no Clay solution. Preserve all donor heads, author priority, original math and review citations.
+
+
+## 15 November NS source-owner reconciliation (supersedes earlier narrow NS reading)
+
+The canonical NS A/B/C/D × TOE/R³ audit is [ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md](ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md). The prior NS A02 elementary forced-universal corollaries are **redundant** relative to the pre-existing full `dashi_lean4/ExternalClayNS` independent `ClaySpec` + `Gap` + `ClauseAudit` + `SubmissionAudit.directClayC/directClayD` proof spines. The proper C/D task is exact pinned f9e Lean 4.34.0-rc2 kernel/axiom replay and independent source-physics audit, **not new elementary corollary construction**. OAI at the nested source pin is one commit ahead of the originally read 8937 snapshot.
+
+DASHI Lane A already has complete conditional near-origin projected saturation, canonical pair resolvents, radial q-gain factor algebra, and a dominated integration compiler. Its remaining real producer is the **original physical q second-moment gain and actual R³ Fubini / finite-energy majorant same-object transport**, with whole-space continuation. Lane B already has R568/R650 physical frontier, R571 TOE fold and R71/R74/R854 original finite Galerkin route. Neither was absent; previous focus on R736 alone undercounted the repository.
+
+SymPy exact source reference `scripts/check_ns_abcd_r3_toe_sympy_20261115.py`, blob `2b70c3cc0323abe7ce04c80e94668a9d6109a6af`, PASS: `16*pi/R` for the standard ℝ³ pressure-commutator majorant moment; `G*Q/nu**3` for the paid original radial factor, with an explicit missing-q divergent origin control; and original R854 rational terminal/integrated negativity. **Not** a Lean/Agda physical theorem receipt.
