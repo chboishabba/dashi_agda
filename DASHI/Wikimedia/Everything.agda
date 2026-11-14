@@ -191,5 +191,6 @@ import DASHI.Wikimedia.IbrahimCycleRotationRelationExact
 import DASHI.Wikimedia.IbrahimPartialFirstLinkSemanticsExact
 import DASHI.Wikimedia.IbrahimFiniteTraceCheckerWeldExact
 import DASHI.Wikimedia.IbrahimFiniteCanonicalCycleRootExact
+import DASHI.Wikimedia.IbrahimFiniteDecidableReachabilityExact
 import DASHI.Wikimedia.IbrahimFiniteFigureBasinCertificateExact
 import DASHI.Wikimedia.IbrahimITIRConsumerRepairExact
