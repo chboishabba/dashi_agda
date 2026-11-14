@@ -45,9 +45,9 @@ def sha256(path):
     return h.hexdigest()
 
 
-def make_listing_url():
+def make_listing_url(probe=1):
     return ROOT+"/file_names/science?"+urlencode({
-      "sc_id":"mms1",
+      "sc_id":"mms"+str(probe),
       "start_date":DATE,
       "end_date":"2017-06-18",
       "data_rate_mode":"brst",
@@ -66,12 +66,13 @@ def parse_original_names(body:bytes):
     return names
 
 
-def select_near_event(names,lookback_minutes=10):
+def select_near_event(names,lookback_minutes=10,probe=1,products=None):
     if not (0<lookback_minutes<=60):raise ValueError("Invalid bounded burst lookback")
     lo=EVENT_START-timedelta(minutes=lookback_minutes)
     hi=EVENT_END
     matches={}
-    for product,pattern in SPECS.items():
+    for product in (products if products is not None else SPECS):
+        pattern=SPECS[product].replace('mms1','mms'+str(probe))
         candidate={}
         for name in names:
             match=re.match(pattern,name.lower())
@@ -148,12 +149,12 @@ def original_download(name,target,max_file_mb=256):
             "exact_archive_url":url}
 
 
-def execute(cache,lookback_minutes=10,max_mb=256):
-    req=Request(make_listing_url(),headers={"User-Agent":"DASHI-KSW668-MMS/1.0"})
+def execute(cache,lookback_minutes=10,max_mb=256,probe=1,products=None):
+    req=Request(make_listing_url(probe),headers={"User-Agent":"DASHI-KSW668-MMS/1.0"})
     with urlopen(req,timeout=60) as resp:
         listing=resp.read(4<<20)
     filename_list=parse_original_names(listing)
-    selected=select_near_event(filename_list,lookback_minutes)
+    selected=select_near_event(filename_list,lookback_minutes,probe,products)
     cache=Path(cache);cache.mkdir(parents=True,exist_ok=True)
     acquired={};all_cdfs=[]
     for product,available in selected.items():
@@ -167,9 +168,9 @@ def execute(cache,lookback_minutes=10,max_mb=256):
         acquired[product]=actual
     return {
       "schema":"dashi.ksw668.mms-official-sdc-direct-v1",
-      "source_api_listing_url":make_listing_url(),
+      "source_api_listing_url":make_listing_url(probe),
       "source_listing_sha256":hashlib.sha256(listing).hexdigest(),
-      "spacecraft":"MMS1",
+      "spacecraft":"MMS"+str(probe),
       "event_UTC":{"start":"2017-06-17/20:24:03","end":"2017-06-17/20:24:11"},
       "event_papers":["10.1029/2020GL088761","10.1029/2022GL098445"],
       "download_source":"official unauthenticated LASP MMS SDC API",
@@ -181,9 +182,9 @@ def execute(cache,lookback_minutes=10,max_mb=256):
     }
 
 
-def verify(cache,receipt):
+def verify(cache,receipt,probe=1):
     r=json.loads(Path(receipt).read_text(encoding="utf-8"))
-    if r["spacecraft"]!="MMS1":raise ValueError("Unrelated spacecraft")
+    if r["spacecraft"]!="MMS"+str(probe):raise ValueError("Unrelated spacecraft")
     if not r["cdf_files"]:raise ValueError("Empty CDF receipt")
     for item in r["cdf_files"]:
         rel=Path(item["relative_path"])
@@ -207,16 +208,18 @@ def main():
     ap.add_argument("--receipt",type=Path)
     ap.add_argument("--lookback-minutes",type=int,default=10)
     ap.add_argument("--max-file-mb",type=int,default=256)
+    ap.add_argument("--probe",type=int,choices=(1,2,3,4),default=1)
+    ap.add_argument("--products",nargs="+",choices=tuple(SPECS),default=None)
     args=ap.parse_args()
     if args.execute:
         if args.receipt is None:ap.error("--execute requires --receipt")
-        result=execute(args.cache,args.lookback_minutes,args.max_file_mb)
+        result=execute(args.cache,args.lookback_minutes,args.max_file_mb,args.probe,args.products)
         args.receipt.write_text(json.dumps(result,sort_keys=True,indent=2)+"\n")
     elif args.verify:
-        result=verify(args.cache,args.verify)
+        result=verify(args.cache,args.verify,args.probe)
     else:
         result={"status":"plan-only; original CDF bytes NOT retrieved",
-                "official_listing_api":make_listing_url(),
+                "official_listing_api":make_listing_url(args.probe),
                 "event_utc":["2017-06-17T20:24:03Z","2017-06-17T20:24:11Z"],
                 "next":"--execute --receipt /tmp/mms_sdc_original_sha.json"}
     print(json.dumps(result,indent=2))
