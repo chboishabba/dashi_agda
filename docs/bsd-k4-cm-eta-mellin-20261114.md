@@ -206,3 +206,22 @@ every coefficient agrees. This avoids a second Hecke-prime
 reconstruction, while making the missing modular-space
 proportionality theorem explicit rather than inserting a
 false/assumed instance.
+
+
+### Uniform positive-tail bound with explicit modulus (14 Nov second cut)
+
+NEW: docs/bsd-level32-positive-tail-proof-20261114.md and
+scripts/check_bsd_level32_positive_tail.py with regression
+scripts/test_bsd_level32_positive_tail.py source-write the elementary
+Bernoulli-product proof for the selected eta candidate. On
+t >= 1/sqrt(32), with q=exp(-8*pi*t) < 1/16, EVERY finite product
+P_N=product_(n=1)^N (1-q^n)^2 (1-q^(2n))^2 obeys P_N >= 73/85, and
+0 <= P_N-P_M <= delta_N for all M>N, where
+delta_N=2(1/16)^(N+1)/(1-1/16)+2(1/16)^(2N+2)/(1-(1/16)^2).
+This is an explicit uniform Cauchy modulus, not sample positivity.
+
+ONLY IF actual Bishop eta and original E same-object Fricke/Mellin
+identifications are proved, this gives the strict symbolic lower bound
+L(E,1) >= (146/85)*exp(-2*pi/sqrt(32)) > 0.
+The exact rational certificates and mathematical induction proof
+are not an Agda kernel check. Analytic identification gates remain open.
