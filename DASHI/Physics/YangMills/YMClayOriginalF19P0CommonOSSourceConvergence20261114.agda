@@ -33,6 +33,7 @@ module DASHI.Physics.YangMills.YMClayOriginalF19P0CommonOSSourceConvergence20261
 ------------------------------------------------------------------------
 
 import DASHI.Physics.YangMills.YMClayOriginalWilsonPhysicalF19PartitionExact
+import DASHI.Physics.YangMills.YMClayF19OriginalAllCoarseCylinderNormalizationExact
 import DASHI.Physics.YangMills.YMClayOriginalWilsonF19ConcreteWeightExact
 import DASHI.Physics.YangMills.YMClayP0BishopToOriginalWilsonRealWeldExact
 
