@@ -1,0 +1,33 @@
+{
+  "schema": "dashi.ksw668.n14-high-energy-source-negative-control.v1",
+  "status": "source-audited 2026 fit vs older historical evaluated nuclear cross-section libraries",
+  "measured_original": {
+    "doi": "10.1080/00223131.2026.2750299",
+    "validated_fit_eV": [
+      0.0036,
+      1.8
+    ],
+    "thermal_barn": 1.828,
+    "thermal_sigma_barn": 0.053
+  },
+  "legacy_original": {
+    "source": "EPRI report 1021106 Table 2-2, OECD-NEA JEF Report 14 1994",
+    "url": "https://restservice.epri.com/publicdownload/000000000001021106/0/Product",
+    "energy_MeV": 14,
+    "library_cross_sections_barn": {
+      "JEF-2.2": 0.04325,
+      "ENDF/B-VI": 0.04447,
+      "JENDL-3.2": 0.0042,
+      "BROND-2": 0.05404,
+      "CENDL-2": 0.04324
+    },
+    "evaluation_not_raw_modern_measurement": true
+  },
+  "computed": {
+    "disallowed_fit_extrapolation_14MeV_barn": 0.00006104620287709294,
+    "JEF2_2_to_illegal_factor": 708.479773706436,
+    "legacy_max_to_min": 12.866666666666667,
+    "real_site_specific_nuclear_rate_established": false
+  },
+  "caveat": "Full range source-evaluated cross-section curve, neutrons/energies, propagation through shielding/body and rate data are NOT yet available; historical evaluated library values do not give a modern uncertainty interval."
+}
