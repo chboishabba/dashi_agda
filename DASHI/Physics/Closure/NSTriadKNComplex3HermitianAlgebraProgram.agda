@@ -137,6 +137,14 @@ complexConjugateMultiply {F = F}
           (Algebra.realNegateMultiplyRight F ar bi)
           (Algebra.realNegateMultiplyLeft F ai br))
 
+cong₂ :
+  ∀ {a b c : Level}
+    {A : Set a} {B : Set b} {C : Set c}
+    (f : A → B → C)
+    {x x' : A} {y y' : B} →
+  x ≡ x' → y ≡ y' → f x y ≡ f x' y'
+cong₂ f refl refl = refl
+
 cong₃ :
   ∀ {a b c d : Level}
     {A : Set a} {B : Set b} {C : Set c} {D : Set d}
@@ -182,18 +190,19 @@ bilinearDot3Conjugate :
   C3.complexConjugate (C3.bilinearDot3 u v)
   ≡ C3.bilinearDot3 (C3.complex3Conjugate u) (C3.complex3Conjugate v)
 bilinearDot3Conjugate
-  (C3.complex3 ux uy uz) (C3.complex3 vx vy vz)
-  rewrite complexConjugateAdd
-            (C3.complexAdd
-              (C3.complexMultiply ux vx)
-              (C3.complexMultiply uy vy))
-            (C3.complexMultiply uz vz)
-        | complexConjugateAdd
-            (C3.complexMultiply ux vx)
-            (C3.complexMultiply uy vy)
-        | complexConjugateMultiply ux vx
-        | complexConjugateMultiply uy vy
-        | complexConjugateMultiply uz vz = refl
+  (C3.complex3 ux uy uz) (C3.complex3 vx vy vz) =
+  trans
+    (complexConjugateAdd
+      (C3.complexAdd (C3.complexMultiply ux vx) (C3.complexMultiply uy vy))
+      (C3.complexMultiply uz vz))
+    (trans
+      (cong (λ first → C3.complexAdd first (C3.complexConjugate (C3.complexMultiply uz vz)))
+        (complexConjugateAdd (C3.complexMultiply ux vx) (C3.complexMultiply uy vy)))
+      (cong₂ C3.complexAdd
+        (cong₂ C3.complexAdd
+          (complexConjugateMultiply ux vx)
+          (complexConjugateMultiply uy vy))
+        (complexConjugateMultiply uz vz)))
 
 hermitianPairingConjugateSymmetric :
   ∀ {r} {F : C3.RealField r} (u v : C3.Complex3 F) →
