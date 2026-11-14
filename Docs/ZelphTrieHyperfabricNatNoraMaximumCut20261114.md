@@ -1,5 +1,22 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Latest P0/A1/A2 physical acceptance checkpoint — 15 November 2026
+
+**Golden Agda result remains exact-head PASS:** the operator's clean Agda 2.9.0 replay at `4c89edbe90ef0e29ea5c02b18bd5dfe090ab9e61` checked seven core/interop modules (exit 0). Since then this PR has only gained documentation, so the checked mathematical source has not changed.
+
+**ITIR operator verification at original physical-tranche head `bcbf7c3`:** four new Python suites initially **23 PASS / 9 FAIL**. The failures were exactly one wrong variable name in the native audit range proof (`manifest_sha` vs `manifest_sha256`) and one negative test that changed a name-section chunk index without updating the matching immutable physical filename. After local corrections, **32/32 new tests PASS**; combined with the earlier **58/58** Python tranche the operator reports **90/90 locally passing**. This is an **overlay-tested local receipt, not an exact-head test pass of the original `bcbf7c3` Git tree**. The two fixes have now been committed to the same existing ITIR PR #14.
+
+**Native Cap'n Proto compilation:** operator successfully compiled `zelph_selected_packed_shard_decoder.cpp` using `clang++ -fuse-ld=lld` (default GNU linker rejected LLVM IR bitcode in local `libcapnp.a`). This verifies **compilation and CLI response**, not real packed shard decoding. Subsequent new ITIR work adds an *actual native writer/reader roundtrip*: `zelph_native_capnp_fixture.cpp` writes genuine upstream-schema packed data for the four sections, and `check_zelph_native_capnp_roundtrip.sh` decodes and checks all four, direction/index/language mismatches and forbidden trailing bytes. It remains **source-written, not yet run**.
+
+**Physical receipt hardening:** the native audit now requires each previously recorded range receipt to match the source's exact `offset`, URI, size and SHA; pinned remote-original URL and HTTP 206 flag are enforced. It accepts `--source-bin` to independently repeat same-original packed-range comparison **in the native audit run**; without this flag it records `source_bin_range_equality_reverified_in_this_run=false` and cannot treat a raw JSON receipt alone as an independently authenticated original. Genuine HF source identity and first-hop physics are still **OPEN**.
+
+**Exact next source acceptance:** run `bash tools/check_zelph_physical_maxcut_offline.sh` on the clean latest [ITIR #14 branch](https://github.com/chboishabba/ITIR-suite/pull/14). The script checks all ten Python suites plus both genuinely compiled upstream-schema C++ binaries. A source-level PASS does not close real HF raw-byte execution. Full physical operator commands and file/algorithm ownership: [Zelph original-bin ↔ selected HF physical P0/A1/A2 guide](https://github.com/chboishabba/ITIR-suite/blob/agent/nat-filtered-route-producer/docs/planning/zelph_original_bin_hf_ranges_maxcut_20261114.md).
+
+**A/B/C/P exact remaining gates unchanged in mathematical strength:** A1 complete original name partition; A2 actual source/selected query-family closure beyond nominated roots/one-hop; A3 overlap gluing on real source indexed stalks; A4 real prefix quotient and factorisation; A5 graph revision/sparse reopening; A6 closed-world scoped negatives; SLR GUID/P14143/P854 + S29; real Éder Porto NORA export and contemporary Nat exhaustiveness. **No native source/payment, absolute absence or Wikidata edit authority** is created by these tests or by Agda conditional source checking.
+
+
+
+
 ## Verified Agda gate + concrete physical original-.bin max-cut (14 November 2026)
 
 **A1–A6 conditional proof source: EXACT-HEAD KERNEL PASS at `4c89edbe90ef0e29ea5c02b18bd5dfe090ab9e61`**. Operator reported clean tracked worktree, no overlays, seven Agda 2.9.0 targets checked using `scripts/check_zelph_trie_hyperfabric_maxcut.sh`, exit 0. It replaces the older tentative overlay-only status. No underlying Agda proof source has been changed in the following physical ITIR tranche; a later documentation-only PR head does not retroactively change that Agda result.
