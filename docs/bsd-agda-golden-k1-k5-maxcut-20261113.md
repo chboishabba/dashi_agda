@@ -394,3 +394,20 @@ Cross-lane donor audit:
 K1 Q2/real image, K2 classical Sha[2] LES, K3 source-realized
 rank, K5 odd-primary Sha/full formula and universal BSD
 remain OPEN. No K1–K5 terminal gate or kernel status promotion.
+
+
+## 2026-11-14 K1 pointwise real/dyadic proof reduction
+
+Source-written owner: DASHI/Mathematics/Arithmetic/EllipticCubicValuationParityExact.agda.
+Proof and exact outstanding same-object producers:
+docs/bsd-k1-local-valuation-parity-maxcut-20261114.md.
+Original y²=x(x−1)(x+1) implies, for actual non-torsion Q_p points,
+2*v_p(y)=v_p(x) when v_p(x)>0; 2*v_p(y)=3*v_p(x) when v_p(x)<0;
+v_p(x)=0 otherwise. Hence v_p(x) is even for ALL finite p including 2.
+The integer parity algebra is source-written using existing Agda ring solver,
+with explicit witness v_p(y)-v_p(x) in the negative-valuation case.
+For actual real points, original x and x−1 have equal sign.
+Special torsion cases retain ORIGINAL rational x−T representative dictionary.
+Local valuation/sign laws, actual Q₂/R local point carriers, the H¹ local
+Kummer-image transport, good-prime support and global H¹ realization OPEN.
+Agda 2.9 kernel not run; no K1 terminal promotion.
