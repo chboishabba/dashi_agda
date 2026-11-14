@@ -371,3 +371,12 @@ Specifying boundary data equal to this trace makes the **bulk PDE and sourced no
 5. **F5:** nonlinear/zero-mode/global stability; dimensional scales, observational constraints, local pinned Agda kernel acceptance; independent evidence is a separate experimental gate.
 
 **Scope guard:** F1 and F2 are real but *partial* mathematical advances. No theorem currently joins the finite-energy flat cylindrical scalar receiver to a physical retarded graviton on the expanding AdS5 brane; the two spacetime metrics must not be silently equated. No empirical faster-than-light transmission or free-energy device is claimed.
+
+
+### F1 thickness qualification / exact remaining thin-brane lemma
+
+The F1 profile is supported in a compact **ambient four-spatial-dimensional neighborhood** of a point of the cylinder, not strictly on its three-spatial-dimensional infinitely thin worldvolume. Consequently the finite-energy estimate is for a **finite-thickness (bulk-neighborhood) scalar source**. It resolves the singular ambient point-source idealization but not an exactly brane-confined emitter. No claim is made that the original worldvolume winding action supplies this scalar emitter coupling.
+
+Additional exact missing target: `cylinderThinBraneDeltaSourceEnergyTrace` — formulate (J=q(t)f(\theta,u,v)\delta_{\Sigma}) on the actual cylindrical worldvolume, establish the correct Sobolev trace/dual-source estimate, causal retarded solution, nonzero antipodal pickup, and stress-energy/backreaction compatibility. The smooth thick-source limit may require uniform renormalized energy estimates; the F1 (L^2(\mathbb R^4)) estimate is **not uniform as thickness tends to zero**, so it cannot pay this lemma.
+
+The source manuscript and the exact PR-head new Python file were not jointly executed in this tool runtime. Independent quadrature of the explicit F1 kernel with tensor-product Gauss–Legendre orders 3/5/7/9 converged near **0.004545273184896** at (t=2.125), compared with the ideal point-source value **0.004547233491053**; the rigorous support-based positive lower estimate at this parameter point is **0.00408853005758**. These are independent numerical sanity checks, not a replacement for repository-head execution or Agda kernel acceptance.
