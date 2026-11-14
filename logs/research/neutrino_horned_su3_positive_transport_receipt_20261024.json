@@ -1,0 +1,96 @@
+{
+  "schema": "dashi.neutrino-horn-su3-positive-transport/v1",
+  "date": "2026-10-24",
+  "branches": {
+    "horn": "alexander-horned-c3-equivariant-20261024 PR #1244",
+    "neutrino": "chatgpt/neutrino-icecube-maxcut-20261024 PR #1247"
+  },
+  "original_roots": [
+    {
+      "author": "Morikuni Gotô",
+      "date": "1949",
+      "doi": "10.2969/jmsj/00130270",
+      "claim": "every element of connected compact semisimple Lie group (in particular SU3) is a single commutator"
+    },
+    {
+      "author": "Allen Hatcher",
+      "work": "Algebraic Topology Example 2B.2",
+      "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+      "claim": "horn complement binary free-group direct-limit commutator tower"
+    },
+    {
+      "author": "J. W. Alexander",
+      "date": "1924",
+      "claim": "original horned sphere"
+    },
+    {
+      "author": "Cecilia Jarlskog",
+      "date": "1985",
+      "doi": "10.1103/PhysRevLett.55.1039",
+      "claim": "CP-odd mixing/mass-commutator invariant"
+    }
+  ],
+  "source_blobs": {
+    "horn_commutator_representation": "59d05550ce2ab3fae21373fb4ad0414da095e6a7",
+    "horn_numerical_probe": "a2afad5b7c1733149990d0d070a5793c24562f4d",
+    "lepton_su3_root": "f20d3497a71476c09d749d737be47db58c1dcd04",
+    "lepton_exact_fraction_test": "a89dee7d8150eb138beedbc89c2772716804acbd",
+    "lepton_original_cp": "8837b0a9394ea4b4ca531f4d85fbeb13e8537d70",
+    "lepton_finite_residual_no_go": "9d2d1e8ab1455b81b3efd1e3acff4a8ead623ee0"
+  },
+  "exact_computations": {
+    "U_unitarity_both_sides": "PASS exactly over Q(zeta) using Fraction",
+    "S1_hermitian": "PASS",
+    "S1_squared_identity": "PASS",
+    "det_S1": "1+0*zeta",
+    "TS_unitarity_both_sides": "PASS exactly over Q(zeta) using Fraction",
+    "det_TS": "1+0*zeta",
+    "TS_fifth_identity": false,
+    "TS_fifth_ee_in_Qzeta": [
+      "64617593685528773022494665450634455935626525583170223342274209281039/236441034989226881781955824279450550827785137929884652463470640062961",
+      "-37652869638564470030709578649147690575544358178427234909789542400/281142728881363711988056865968431094920077452948733237174162473321"
+    ],
+    "relative_galois_trace": "442358853598/216225930001",
+    "nonintegral_relative_galois_trace": true,
+    "infinite_order_mathematical_consequence": "standard finite-order eigenvalue algebraic-integrality theorem; not yet mechanised in Agda"
+  },
+  "SU3_commutator_proof": {
+    "spectral": "A=V diag(lambda0,lambda1,lambda2)V†; determinant one",
+    "permutation": "P e_i=e_(i+1), det P=1",
+    "diagonal": "D=scaled diag(1,1/lambda1,lambda0), scalar unit cube root sets det D=1",
+    "commutator": "[P,D]=diag(lambda0,lambda1,lambda2)",
+    "recursive_compatible_horn": "A_w=[A_w0,A_w1] at all finite levels; compatible homomorphisms F_n→SU3 produce G_A→SU3 by colimit property",
+    "C3_equivariant_three_arm": "rho_i(g)=T^i rho_A(g) T^-i; G=G_A*G_A*G_A; R(g,k)=rho(g)T^k is representation of G⋊C3",
+    "infinite_image": "A has infinite order; homomorphism image contains A; homomorphic image of perfect horn G is perfect hence nonabelian"
+  },
+  "independent_finite_numerical_verification": {
+    "library": "numpy 2.3.5, scipy 1.17.0",
+    "five_levels": {
+      "parents": 31,
+      "leaves": 32,
+      "max_comm_error": 4.9850145806131525e-15,
+      "max_det_defect": 2.5631488888267375e-15
+    },
+    "eight_levels": {
+      "parents": 255,
+      "leaves": 256,
+      "max_comm_error": 7.836612150722834e-15,
+      "max_det_defect": 2.9981161145699657e-15
+    },
+    "rotation_sectors": 3,
+    "rotation_sector_max_comm_error": 4.755853591381347e-15
+  },
+  "verification_grades": {
+    "original_Goto_theorem": "PUBLISHED_1949",
+    "infinite_representation_existential": "MATHEMATICAL_THEOREM_BY_GOTO_PLUS_FREE_GROUP_COLIMIT",
+    "Agda_horned_source": "SOURCE_WRITTEN",
+    "Agda_target_source": "SOURCE_WRITTEN",
+    "Agda_kernel": "NOT_RUN",
+    "committed_script_execution": "NOT_RUN",
+    "independent_local_fraction": "PASS",
+    "independent_local_numerical_refinement": "PASS",
+    "geometric_three_arm_exterior_identification": "OPEN",
+    "actual_physical_neutrino_intertwiner": "NOT_DERIVED",
+    "parameter_free_physical_prediction": "NO; any SU3 A admits representation"
+  }
+}

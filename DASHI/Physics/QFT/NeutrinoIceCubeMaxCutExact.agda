@@ -1,0 +1,246 @@
+module DASHI.Physics.QFT.NeutrinoIceCubeMaxCutExact where
+
+-- Reuse-first neutrino audit.  Mathematical calculations are exact, whereas
+-- the input numbers are versioned empirical fixtures from NuFIT 6.1 (2025).
+-- No first-principles neutrino mass, physical PMNS matrix, or IceCube source
+-- inference is constructed by this module.
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.Nat using (Nat; _+_; _*_; _-_)
+open import Agda.Builtin.String using (String)
+open import Data.Nat using (_≤ᵇ_)
+open import Data.Empty using (⊥)
+
+import DASHI.Physics.Closure.FactorVecFalsifiablePredictionLanes as FactorVec
+
+------------------------------------------------------------------------
+-- Existing 15SSP ratio claim: reuse the canonical owner, not a new law.
+------------------------------------------------------------------------
+
+factorVecCandidateIsOneOver31 :
+  (lane : FactorVec.NeutrinoMixingRatioLane) →
+  FactorVec.predictedMassSplittingRatio lane ≡
+    FactorVec.ratio 1 31
+factorVecCandidateIsOneOver31 =
+  FactorVec.canonicalNeutrinoMassSplittingRatio
+
+------------------------------------------------------------------------
+-- NuFIT 6.1: NO, IC24 with SK atmospheric data, published 3 sigma
+-- one-dimensional component ranges.  All quantities are integers in
+-- units of 10^(-8) eV^2:
+--
+-- delta m^2_21: 7.236 ... 7.823 x 10^(-5) eV^2
+-- delta m^2_31: 2.450 ... 2.576 x 10^(-3) eV^2
+--
+-- These are *individually profiled* 1D Delta-chi-square=9 ranges.
+-- Their Cartesian rectangle is NOT itself a 2D "3 sigma" region:
+-- 2D confidence contours can use different Delta-chi-square thresholds.
+-- The exact interval inequality below is valid, but does NOT supply an
+-- independent p-value, correlated global fit or 2D significance claim.
+------------------------------------------------------------------------
+
+solarLower : Nat
+solarLower = 7236
+
+solarBest : Nat
+solarBest = 7537
+
+solarUpper : Nat
+solarUpper = 7823
+
+normalAtmosLower : Nat
+normalAtmosLower = 245000
+
+normalAtmosBest : Nat
+normalAtmosBest = 251100
+
+normalAtmosUpper : Nat
+normalAtmosUpper = 257600
+
+-- 1/31 > solarUpper/normalAtmosLower since
+-- 31 * 7823 = 242513 < 245000.
+candidateCrossProduct : 31 * solarUpper ≡ 242513
+candidateCrossProduct = refl
+
+positiveGap : normalAtmosLower - (31 * solarUpper) ≡ 2487
+positiveGap = refl
+
+-- Boolean decision proof using the library's natural comparison.
+-- The observation's generous upper ratio cannot reach 1/31.
+normalThreeSigmaRectangleExcludesOneOver31 :
+  (normalAtmosLower ≤ᵇ (31 * solarUpper)) ≡ false
+normalThreeSigmaRectangleExcludesOneOver31 = refl
+
+-- The NO best fit is likewise below the proposed ratio.
+normalBestFitBelowCandidate :
+  (normalAtmosBest ≤ᵇ (31 * solarBest)) ≡ false
+normalBestFitBelowCandidate = refl
+
+------------------------------------------------------------------------
+-- Inverted ordering convention: NuFIT reports delta m32^2 < 0.
+-- Thus delta m31^2 = delta m32^2 + delta m21^2 < 0.
+-- For absolute-valued splitting ratios |m31^2| = |m32^2| - m21^2.
+-- A positive 1/31 comparison is meaningful only AFTER explicitly
+-- choosing the absolute-magnitude convention.  An exact interval
+-- witness (within both marginal 3-sigma IO intervals) is below; it
+-- establishes mere componentwise compatibility, NOT a correlated fit.
+-- Source units remain 10^(-8) eV^2.
+------------------------------------------------------------------------
+
+ioSolarWitness : Nat
+ioSolarWitness = 7600
+
+ioM32AbsWitness : Nat
+ioM32AbsWitness = 243200
+
+ioM31AbsWitness : Nat
+ioM31AbsWitness = ioM32AbsWitness - ioSolarWitness
+
+ioWitnessSolarLower : (7236 ≤ᵇ ioSolarWitness) ≡ true
+ioWitnessSolarLower = refl
+
+ioWitnessSolarUpper : (ioSolarWitness ≤ᵇ 7822) ≡ true
+ioWitnessSolarUpper = refl
+
+ioWitnessAtmLower : (242100 ≤ᵇ ioM32AbsWitness) ≡ true
+ioWitnessAtmLower = refl
+
+ioWitnessAtmUpper : (ioM32AbsWitness ≤ᵇ 254700) ≡ true
+ioWitnessAtmUpper = refl
+
+ioWitnessM31AbsIs235600 : ioM31AbsWitness ≡ 235600
+ioWitnessM31AbsIs235600 = refl
+
+ioMagnitudeRatioCanMatchOneOver31 :
+  (31 * ioSolarWitness) ≡ ioM31AbsWitness
+ioMagnitudeRatioCanMatchOneOver31 = refl
+
+------------------------------------------------------------------------
+-- Exact four-phase, maximal two-flavour vacuum toy.
+--
+-- U = Hadamard and mass-phase = 1, i, -1, -i.  Appearance amplitude
+-- is (1 - phase)/2, survival amplitude (1 + phase)/2.
+-- We prove the squared *numerators* sum to 4, so their probabilities
+-- sum to 1 after dividing by 4.  This is an exact finite illustration,
+-- NOT three-flavour PMNS, propagation through matter, or detection.
+------------------------------------------------------------------------
+
+data Phase4 : Set where
+  phase0 phase90 phase180 phase270 : Phase4
+
+data SignedUnit : Set where
+  minusOne signedZero plusOne : SignedUnit
+
+phaseReal : Phase4 → SignedUnit
+phaseReal phase0   = plusOne
+phaseReal phase90  = signedZero
+phaseReal phase180 = minusOne
+phaseReal phase270 = signedZero
+
+phaseImag : Phase4 → SignedUnit
+phaseImag phase0   = signedZero
+phaseImag phase90  = plusOne
+phaseImag phase180 = signedZero
+phaseImag phase270 = minusOne
+
+oneMinus : SignedUnit → Nat
+oneMinus minusOne   = 2
+oneMinus signedZero = 1
+oneMinus plusOne    = 0
+
+onePlus : SignedUnit → Nat
+onePlus minusOne   = 0
+onePlus signedZero = 1
+onePlus plusOne    = 2
+
+square : SignedUnit → Nat
+square minusOne   = 1
+square signedZero = 0
+square plusOne    = 1
+
+appearanceNumSq : Phase4 → Nat
+appearanceNumSq p =
+  oneMinus (phaseReal p) * oneMinus (phaseReal p) +
+  square (phaseImag p)
+
+survivalNumSq : Phase4 → Nat
+survivalNumSq p =
+  onePlus (phaseReal p) * onePlus (phaseReal p) +
+  square (phaseImag p)
+
+toyProbabilityConservation :
+  (p : Phase4) → appearanceNumSq p + survivalNumSq p ≡ 4
+toyProbabilityConservation phase0   = refl
+toyProbabilityConservation phase90  = refl
+toyProbabilityConservation phase180 = refl
+toyProbabilityConservation phase270 = refl
+
+toyNoAppearanceAtZero : appearanceNumSq phase0 ≡ 0
+toyNoAppearanceAtZero = refl
+
+toyFullAppearanceAtPi : appearanceNumSq phase180 ≡ 4
+toyFullAppearanceAtPi = refl
+
+quarterTurn : Phase4 → Phase4
+quarterTurn phase0   = phase90
+quarterTurn phase90  = phase180
+quarterTurn phase180 = phase270
+quarterTurn phase270 = phase0
+
+fourQuarterTurnsIdentity : (p : Phase4) →
+  quarterTurn (quarterTurn (quarterTurn (quarterTurn p))) ≡ p
+fourQuarterTurnsIdentity phase0   = refl
+fourQuarterTurnsIdentity phase90  = refl
+fourQuarterTurnsIdentity phase180 = refl
+fourQuarterTurnsIdentity phase270 = refl
+
+------------------------------------------------------------------------
+-- Typed experimental boundary.  Unlike the toy phases, actual
+-- IceCube point-source inference needs calibrated detector response,
+-- atmospheric backgrounds, exposure, and a likelihood with nuisance
+-- handling.  These are NOT provided here.
+------------------------------------------------------------------------
+
+record IceCubeInferenceInterface : Set₁ where
+  field
+    Event Direction Energy Exposure DetectorResponse Nuisance Source : Set
+    Likelihood : Set
+    eventDirection : Event → Direction
+    eventEnergy : Event → Energy
+    response : Event → DetectorResponse
+    backgroundModel : Event → Nuisance
+    sourceLikelihood : Source → Event → Exposure → Likelihood
+    validatedResponse : DetectorResponse → Set
+    validatedExposure : Exposure → Set
+    validatedBackground : Nuisance → Set
+
+data PhysicalNeutrinoPromotion : Set where
+
+noPhysicalNeutrinoPromotionFromToy :
+  PhysicalNeutrinoPromotion → ⊥
+noPhysicalNeutrinoPromotionFromToy ()
+
+nufitFixtureSource : String
+nufitFixtureSource =
+  "NuFIT 6.1 (2025), IC24 with SK atmospheric, NO, v61.tbl-parameters.pdf"
+
+iceCubeDataSource : String
+iceCubeDataSource =
+  "IceCube Collaboration, IceTracks-DR2-v2, SkyLLH v26.1.0 (September 2026); public 2008-2022 source-search sample, not a neutrino-oscillation fit"
+
+iceCubeResponseVersion : String
+iceCubeResponseVersion =
+  "v2 corrects IC86 highest true-energy bin to [8.6,8.7) in log10 GeV and per-season sin(declination) smearing bins"
+
+nobelOriginalAuthority : String
+nobelOriginalAuthority =
+  "NobelPrize.org, Physics 2026 official press release, 2026-10-06, award attribution to Francis Halzen"
+
+collaborationOriginalAuthority : String
+collaborationOriginalAuthority =
+  "IceCube Collaboration, Abbasi et al., arXiv:2605.19040, original DR2 methods and collective authorship"
+
+claimBoundary : String
+claimBoundary =
+  "Only finite algebra and conservative NuFIT interval arithmetic are proved; no physical PMNS, Majorana nature, detector inference or new neutrino observation is proved."

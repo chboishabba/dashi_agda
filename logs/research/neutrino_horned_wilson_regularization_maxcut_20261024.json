@@ -1,0 +1,147 @@
+{
+  "schema": "dashi.horned-su3-wilson-regularity-maxcut/v1",
+  "date": "2026-10-24",
+  "source_authority": [
+    {
+      "root": "J. W. Alexander",
+      "year": 1924,
+      "role": "original horned-sphere embedding"
+    },
+    {
+      "root": "Allen Hatcher",
+      "work": "Algebraic Topology Example 2B.2",
+      "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+      "role": "abstract nested free-group commutator tower; does NOT prove current three-copy shrinking metric hypothesis"
+    },
+    {
+      "root": "Morikuni Gotô",
+      "year": 1949,
+      "doi": "10.2969/jmsj/00130270",
+      "role": "ambient compact SU3 group commutator surjectivity"
+    },
+    {
+      "root": "Cecilia Jarlskog",
+      "year": 1985,
+      "doi": "10.1103/PhysRevLett.55.1039",
+      "role": "CP mixing/rephasing invariants"
+    },
+    {
+      "root": "Non-Abelian gauge field optics",
+      "year": 2019,
+      "doi": "10.1038/s41467-019-10974-8",
+      "role": "prior non-Abelian Wilson optical interferometer proposal"
+    },
+    {
+      "root": "Sugawa et al.",
+      "year": 2021,
+      "doi": "10.1038/s41534-021-00483-2",
+      "role": "realized SU2 Wilczek-Zee/Wilson loop experimental precedent, not horn/lepton data"
+    },
+    {
+      "root": "Lucas et al.",
+      "year": 2026,
+      "doi": "10.1038/s41567-026-03400-6",
+      "role": "distinct dynamical Z2 lattice AB experimental precedent"
+    },
+    {
+      "root": "Yutaka Hosotani",
+      "year": 1989,
+      "doi": "10.1016/0003-4916(89)90015-8",
+      "role": "Wilson-line quantum effective-potential selection on specified compact smooth geometries"
+    }
+  ],
+  "existing_repo_owners": [
+    "DASHI/Physics/YangMills/SUNWilsonClassFunction.agda",
+    "DASHI/Physics/YangMills/SUNWilsonAction.agda",
+    "DASHI/Physics/YangMills/SUNMatrixCarrier.agda",
+    "DASHI/Geometry/FlatFormalDiskHolonomySurface.agda",
+    "DASHI/Physics/Closure/AnomalyCancellationTableReceipt.agda",
+    "DASHI/Physics/QFT/NeutrinoHornedSU3RootExact.agda",
+    "DASHI/Physics/QFT/NeutrinoHornedC3RephasingNoGoExact.agda"
+  ],
+  "new_sources": {
+    "neutrino": {
+      "tests/test_neutrino_horned_wilson_regularization.py": "a460096e509b2e869f1fd7fff72e8ba13514ca51",
+      "scripts/check_neutrino_horned_wilson_spectral_selection.py": "35d4e0798a43cfe4e9fe304bfab45b740d06c6aa",
+      "DASHI/Physics/QFT/NeutrinoHornedWilsonInterferenceExact.agda": "8cd998cb47b03e08730672d261e229ddde81ea16",
+      "Docs/physics/HornedSU3ObservableRegularityParetoMaxCut20261024.md": "0c4ef052e27921b67d8aa5123e0d41a4c6129878"
+    },
+    "horn": {
+      "scripts/alexander_horned_c3_su3_regularization_no_go_probe.py": "8038e440ffe0186fac87937fe12815763d0d0f51"
+    }
+  },
+  "execution": {
+    "runtime": "Python 3.13.5, NumPy 2.3.5, SciPy 1.17.0, SymPy 1.14.0",
+    "unittests_total": 50,
+    "passed": 50,
+    "failed": 0,
+    "elapsed_seconds": 0.239,
+    "committed_source_tests_passed": 42,
+    "source_matched_new_tests": 6,
+    "previous_source_matched_tests": 36,
+    "local_exploratory_tests_passed": 8,
+    "source_blob_sha1_matched": [
+      "a460096e509b2e869f1fd7fff72e8ba13514ca51",
+      "8038e440ffe0186fac87937fe12815763d0d0f51",
+      "35d4e0798a43cfe4e9fe304bfab45b740d06c6aa"
+    ],
+    "source_matched_horn_regularity_probe": "PASS standalone horn-branch source script; example n=12 leaf lower bound 0.500128987765, example norm growth lower bound ~2048.528 for ell_12=2^-12",
+    "source_matched_synthetic_ring_spectral_probe": "PASS, phi_j eigenphases; heat trace at t=0.2 differs from identity",
+    "agda_kernel": "NOT_RUN (Agda unavailable in local execution runtime)",
+    "CI": "NOT_USED_PER_USER"
+  },
+  "exact_wilson_fixture": {
+    "trace_in_Qzeta": {
+      "rational_coefficient": "176093404722400/181846007130841",
+      "zeta_coefficient": "-19836986431118/181846007130841"
+    },
+    "relative_Galois_trace": "372023795875918/181846007130841",
+    "complex_trace_approx": [
+      1.0229088934799684,
+      -0.09447188010850631
+    ],
+    "unpolarized_two_path_probability_phi0": "434928608401/648677790003",
+    "probability_phi0_approx": 0.6704848155799947,
+    "selected_visibility": 0.3424207192088653,
+    "identity_holonomy_phi0_probability": 1,
+    "same_C3_conjugacy_orbit_observable": "INVARIANT"
+  },
+  "regularity_no_go": {
+    "matrix_group": "SU3, operator norm, unitary commutators",
+    "group_recursion": "m_w=[m_w0,m_w1]",
+    "universal_estimate": "||[X,Y]-I|| <= 2||X-I|| ||Y-I||",
+    "n_leaf_upper_bound": "d(root) <= (2*epsilon_n)^(2^n)/2",
+    "n_leaf_forced_lower_bound": "max_leaf d >= (2*d(root))^(1/2^n)/2",
+    "selected_root_gap_operator_norm": 1.4381884752669252,
+    "forced_leaf_gap_limit": 0.5,
+    "conditional_geometry": "Physical representative local loops uniformly length ell_n -> 0, up to common-basepoint conjugation; not proved for the geometric three-copy wild exterior",
+    "conditional_connection": "unitary connection uniformly bounded in compatible frames near shrinking horns; then d(Hol(loop))<=M ell_n",
+    "conditional_conclusion": "nontrivial root impossible under both conditions; require geometry failure, non-regular defect/connection, or invalid representation-to-physical-loop identification",
+    "not_claimed": "No universal statement that every horned flat connection is infinite-action or has singular physical stress; no geometric pi1/shrinking theorem."
+  },
+  "spectral_ring_control": {
+    "topology": "ordinary S1, NOT wild horn; vectorlike 3-component triplet",
+    "eigenphases_approx": [
+      -1.5090565,
+      -0.09593953,
+      1.60499604
+    ],
+    "dimensionless_gap": 0.09593953432280615,
+    "heat_trace_t_02_selected": 2.2535171069536086,
+    "heat_trace_t_02_identity": 3.002234083836318,
+    "renormalized_Hosotani_effective_potential": "NOT_CALCULATED"
+  },
+  "steelman_counterfactuals": {
+    "single_loop_generic_annulus": "A Z->SU3 homomorphism maps generator to same W, identical single loop Wilson fringe",
+    "first_nonabelian_commutator_generic_F2": "Any X,Y with [X,Y]=W can also appear as arbitrary generators of F2, thus finite stage not horn specific",
+    "pure_flat_YM": "F=0 => classical local field strength action and stress vanish; no classical selection among flat holonomies",
+    "chiral_SU3_flavour": "gauge representations, anomaly cancellation and lepton charged-current data not sourced",
+    "physical_neutrino_prediction": "NO; model W and mixing angles selected post hoc"
+  },
+  "roadmap_next": [
+    "P3 geometry: independently certify uniform shrinking representatives or counterexample in literal three-copy wild exterior; preferred first mathematical publication-quality result",
+    "P4 observable: build source-specified gauge-invariant 2-path synthetic model and all-depth commutator discriminator, distinguish from S1 and F2 controls",
+    "P4 selection: renormalized Hosotani-type matter determinant on verified geometry with consistent boundary conditions and anomaly-safe content",
+    "P5 empirical: only compare independently predicted constrained model with source NuFIT/T2K/IceCube likelihood; no observational claim now"
+  ]
+}
