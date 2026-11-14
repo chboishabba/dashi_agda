@@ -403,3 +403,41 @@ semantic next cuts: OAI378 original real SAT machine; OAI optimal Max-Cut
 vs original Karp graph/cost; OAI CM-Hodge actual cycle maps; OAI quasi-RH
 correct zero-carrier; and separate OAI YM E1 Wilson original-source weld.
 No RH/BSD/Hodge/P≠NP/NS/YM Clay endpoint is promoted by importing metadata.
+
+
+## 14 November full source-only migration completion (OpenAI math corpus)
+
+At this update, all **37 changed paths** from the original
+`dashi_lean4#78` ingestion PR are present in the single Lean Clay #108
+rollup, including the exact immutable upstream `openai/math` Git submodule
+at `1581d4cb...`, original formal-source atlas and 208-index, finite
+CNF adapters and original 13 local scripts (Lean rollup donor integration
+commit `df214149df612797cd1a3bb71d52dda00bd45c26`).
+
+The Golden Agda #1499 rollup now also includes **all 12 Agda
+OpenAIMath modules from #1212** with identical Git blob hashes, plus
+the separate original shared-circuit semantics which differs at one
+nonfunctional binder-name line and was preserved from the current
+Golden owner instead of overwritten. All six historical OAI planning
+documents, including the 39-ID exact-lemma ledger, and three original
+scripts were preserved. Only AGENTS, CHANGELOG and the existing
+agda_preflight README were deliberately not replaced. New focused
+Golden source root `OpenAIMathFullSourceRollup20261114.agda`.
+
+The canonical local six-frontier acceptance runner now requires
+both focused source roots, and stages the new immutable crosswalk
+`--self-test` plus independent pinned Agda/Lean kernel compilation
+in non-source-only mode. **The runner has not been operator-executed
+at the new heads; no syntax/axiom/kernel-greens are asserted.**
+The separate OpenAI 378 source machine still requires its later Lean
+4.34.1 checkout; the standard Lean source-index root must not pretend
+that the original 200-entry vendor contains all later 208 entries.
+
+**Mathematics still new and NOT paid:** physical interacting original
+Wilson conditional decay/RG and same-H spectral mass gap, genuine
+RH signed zero estimates, NS global cutoff-uniform collar/flux,
+universal SAT lower bounds, universal BSD. OAI378 M00–M05, exact
+Hodge CM cycle-map adapter, MaxCut original graph-cost comparison,
+RH quasi-zero carrier and 4.32 OAI YM same-original Wilson E1
+correspondence remain **original-source/formalization**, not proof
+of those universal frontiers.
