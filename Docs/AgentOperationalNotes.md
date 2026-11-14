@@ -17,7 +17,7 @@ There are two Agda tracks. Keep them separate:
   parallel import checking via `-j[N]` / `--parallel[=N]`. Track B is fast
   feedback only and must not block promotion by itself.
 
-The preferred wrapper for this workflow is:
+The **only allowable Agda entrypoint** for this repository is:
 
 ```bash
 scripts/run_agda29_parallel_check.sh
@@ -25,8 +25,7 @@ scripts/run_agda29_parallel_check.sh DASHI/Core/FormalStructureLawCore.agda
 AGDA_JOBS=4 scripts/run_agda29_parallel_check.sh DASHI/Everything.agda
 ```
 
-Workers and subagents that are explicitly allowed to run Agda should use that
-wrapper, not `agda` directly and not the old `run_agda29_shadow_check` name.
+Workers, subagents, and automated callers that check Agda **must use this wrapper exclusively**, never bare `agda`, system `/usr/bin/agda`, or ad-hoc binaries.
 For normal focused checks, this is the command to hand to agents:
 
 ```bash
