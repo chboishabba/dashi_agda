@@ -27,8 +27,12 @@ queryAdequacyDefectToProjectionCollision :
     {query : Query} →
   Indexed.QueryAdequacyDefect project semantics query →
   Coarse.ProjectionCollision project (Indexed.answer semantics query)
-queryAdequacyDefectToProjectionCollision =
+queryAdequacyDefectToProjectionCollision
+  {project = project} {semantics = semantics} {query = query} defect =
   Crosswalk.nonFactorabilityToProjectionCollision
+    {project = project}
+    {consumer = Indexed.answer semantics query}
+    defect
 
 projectionCollisionToQueryAdequacyDefect :
   ∀ {State Observation Query Answer : Set}
