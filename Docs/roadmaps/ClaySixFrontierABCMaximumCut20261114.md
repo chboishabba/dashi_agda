@@ -121,6 +121,8 @@ Source owners: [#1478](https://github.com/chboishabba/dashi_agda/pull/1478) and 
 | #1501 R854 conditional affine signed-rate integral | #1499: four exact donor files and combined source acceptance root | Genuine real-valued Galerkin trajectory, Lipschitz and R853 source rate identification |
 | #1444 R445 three-moment common-density TV reduction | #1503: original donor ledger and test, co-located with original Wilson F19/P0 root | Estimate actual effective-vs-target Gibbs TV, or prove matching renormalized source |
 
+| #1498 original rational 240-to-4 orbit Hessian budget, plus its semantic generator and auxiliary Wilson source owners | #1503: five newly recovered Agda donor blobs, and its F19/P0/OS root now imports the four-orbit theorem | Actual physical Hessian upper bounds M1–M4, real interval enclosures and genuine four physical loop integrals remain OPEN |
+
 ### The R445 algebraic payoff (not a Clay moment estimate)
 
 For the actual **same finite carrier** and two normalized probability laws P, Q, let `D=TV(P,Q)`. For bounded `0≤F,G≤1` (hence `0≤FG≤1`),
