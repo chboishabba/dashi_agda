@@ -1,5 +1,26 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## B5 discriminator exact-head acceptance — 15 November 2026
+
+**Local operator receipts at checked commits (not inferred from source existence):**
+
+| Owner / existing PR | Checked commit | Accepted offline command | Exact reported result |
+|---|---|---|---|
+| [ITIR #14](https://github.com/chboishabba/ITIR-suite/pull/14) | [`712011a91231295250ce196e77d0015e04635492`](https://github.com/chboishabba/ITIR-suite/commit/712011a91231295250ce196e77d0015e04635492) | `bash tools/check_zelph_physical_maxcut_offline.sh` | **145/145 Python + real native C++ packed Cap'n Proto roundtrip** (new B5 full-entity 19 and physical orchestrator 6 suites included) |
+| [SLR #10](https://github.com/chboishabba/slr/pull/10) | [`fc819e652be4e78dcfaa3bcc0c1dafad8d6f3840`](https://github.com/chboishabba/slr/commit/fc819e652be4e78dcfaa3bcc0c1dafad8d6f3840) | `cargo test -p sensiblaw-source-handoff` | **24/24 Rust**; five new `native_raw_receipt_join` negatives/joins |
+| [DASHI #1506](https://github.com/chboishabba/dashi_agda/pull/1506) | [`20ef376c832568992baab3db5e657a8dc76e76e6`](https://github.com/chboishabba/dashi_agda/commit/20ef376c832568992baab3db5e657a8dc76e76e6) | `scripts/check_zelph_trie_hyperfabric_maxcut.sh` | **9/9 Agda 2.9.0**; formal source unchanged from `cf3ba8d` |
+| [SensibLaw #514](https://github.com/chboishabba/SensibLaw/pull/514) | [`f77b28f20ad4b15a2f873a223c2650fcc71461f8`](https://github.com/chboishabba/SensibLaw/commit/f77b28f20ad4b15a2f873a223c2650fcc71461f8) | `pytest tests/test_wikidata_nora_review_handoff.py` | **17/17 pytest**; reference source unchanged from `a5715ea7` |
+
+**ITIR post-acceptance scope warning:** The live #14 branch subsequently advanced to [`11b5ea3f96d2d0ebb54121f84d03973a2a1ba9e0`](https://github.com/chboishabba/ITIR-suite/commit/11b5ea3f96d2d0ebb54121f84d03973a2a1ba9e0), **six commits beyond** the accepted `712011a`, modifying the physical orchestrator and offline script and introducing `audit_zelph_original_packed_partition.py` and synthetic tests. The new verifier checks that decoded source-header length, dense per-section chunk indices and all four manifest sections form a nonoverlapping gap-free packed offset cover over the original bin size. This is a new **SOURCE-WRITTEN structural P0 gate**; no local exact-head test result is supplied for `11b5ea3`. Re-run `bash tools/check_zelph_physical_maxcut_offline.sh` there. A gap-free partition establishes **offset geometry only**, not original-byte authenticity, completeness of every name key, or a proof of native decoder semantics.
+
+**Discriminator resolution:** B5-a (full-entity snapshot decoder shape and candidate observation contract) and B5-b (SLR strict raw-entity coordinates and false authority flags) are **offline accepted** at the two distinct checked commits. B5-c (one-shot orchestrator path) is **offline accepted in synthetic tests**, but **original-object physical replay remains OPEN**. In the raw SLR join, caller flags such as `upstream_http_provenance_independently_verified=true` or `p854_documents_independently_verified=true` are not themselves evidence: the joined result explicitly keeps provenance, primary-document verification, S29 review, source support, and edit authority false.
+
+**Next decisive original-object chain:** independently acquire immutable original `.bin` and externally verified source SHA, pinned HF full manifest and actual selected shard objects; perform same-run packed partition → original range/Shards byte equality → native four-section decode and selected bidirectional adjacency; iterate any missing numeric frontier until the declared finite left/right query family closes. Separately fetch exact native full Wikibase entity JSON for an actual `(QID, GUID, P14143, lastrevid)` plus actual P854 referenced primary documents. Only then supply a typed read-only candidate to SLR and execute **real S29 persisted-and-reloaded reviewer observation**. Do not equate these original Zelph graph edges with Wikipedia's revision-pinned first qualified hyperlinks, and do not infer source payment or edit rights.
+
+Earlier historical check figures below remain chronological and are superseded where they conflict with this exact-head ledger. Keep separate evidence owners and source attributions.
+
+---
+
 ## Updated external acceptance and new P0 structural name-cover prerequisite — 15 November 2026
 
 **Operator-reported exact-head PASS:** DASHI `20ef376c` 9/9 Agda 2.9 kernel targets; ITIR `712011a` 145/145 Python and native packed Cap'n Proto/original mini-bin; SLR `fc819e6` 24/24 Rust; SensibLaw `f77b28f` 17/17 Python. Those source-level results are fixed to those heads and do not imply actual HF source bytes or primary Wikidata source support.
