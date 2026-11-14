@@ -227,18 +227,43 @@ complexNegateMultiplyLeft :
   ≡ C3.complexNegate (C3.complexMultiply a b)
 complexNegateMultiplyLeft {F = F}
   (C3.complex ar ai) (C3.complex br bi) =
-  complexExt
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.multiplyReal (P.R.⊝ ar) (P.R.⊝ ai) br bi
-        P.R.⊜ P.R.⊝ (P.multiplyReal ar ai br bi))
-      refl ar ai br bi)
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.multiplyImaginary (P.R.⊝ ar) (P.R.⊝ ai) br bi
-        P.R.⊜ P.R.⊝ (P.multiplyImaginary ar ai br bi))
-      refl ar ai br bi)
-  where module P = Polynomial F
+  Algebra.cong₂ C3.complex realPart imaginaryPart
+  where
+    realPart :
+      C3.add F
+        (C3.multiply F (C3.negate F ar) br)
+        (C3.negate F (C3.multiply F (C3.negate F ai) bi))
+      ≡
+      C3.negate F
+        (C3.add F
+          (C3.multiply F ar br)
+          (C3.negate F (C3.multiply F ai bi)))
+    realPart =
+      trans
+        (Algebra.cong₂ (C3.add F)
+          (Algebra.realNegateMultiplyLeft F ar br)
+          (cong (C3.negate F) (Algebra.realNegateMultiplyLeft F ai bi)))
+        (sym (Algebra.realNegateAdd F
+          (C3.multiply F ar br)
+          (C3.negate F (C3.multiply F ai bi))))
+
+    imaginaryPart :
+      C3.add F
+        (C3.multiply F (C3.negate F ar) bi)
+        (C3.multiply F (C3.negate F ai) br)
+      ≡
+      C3.negate F
+        (C3.add F
+          (C3.multiply F ar bi)
+          (C3.multiply F ai br))
+    imaginaryPart =
+      trans
+        (Algebra.cong₂ (C3.add F)
+          (Algebra.realNegateMultiplyLeft F ar bi)
+          (Algebra.realNegateMultiplyLeft F ai br))
+        (sym (Algebra.realNegateAdd F
+          (C3.multiply F ar bi)
+          (C3.multiply F ai br)))
 
 complexNegateMultiplyRight :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
