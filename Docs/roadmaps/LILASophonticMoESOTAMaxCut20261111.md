@@ -1164,3 +1164,13 @@ These G1–G12 are **named subdivisions/crosswalks of existing M5–M7 and the 1
 | A3 E8/Leech modular bridge | n<=5 finite coset-shell agreement and modular candidate coefficients | All-index Theta(E8), Theta(Leech), Delta/J and Mellin/Epstein kernel proofs remain OPEN |
 
 **Immediate low-cost original sequence:** first latest suite and finite C3 proof, then original hidden-parity/C3 source probe, then capped 24-step warm-start plus fresh duplicate-disjoint dev; rank interventions by full-student CE and Fourier/generalisation ablation rather than by scalar cancellation magnitude. No additional 80-minute run unless these measurements justify it.
+
+### Focused pinned kernel acceptance command (do not confuse with committed proof text)
+
+From the established repository Agda/Nix toolchain environment in its golden worktree, typecheck the **new** direct source owner before adding it to an umbrella import:
+
+```bash
+agda -i . DASHI/Foundations/BalancedTernaryC3OppositionGrokkingBridgeExact.agda
+```
+
+Archive Agda version, toolchain store path, module source SHA, full stdout/stderr and exit status. An existing `GrokkingTaskCharacterPhaseExact` or `BalancedTernaryStageSymmetryExact` acceptance is *not* a substitute for checking this new file. If this focused source fails, repair actual definitions/qualification without weakening the semantic separation or adding an axiom/postulate.
