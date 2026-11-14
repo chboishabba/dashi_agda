@@ -1,0 +1,78 @@
+name: Antigravity post-normalization reuse
+
+on:
+  push:
+    branches:
+      - agent/antigravity-source-native-reuse-maxcut-20261008
+  pull_request:
+    paths:
+      - 'DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuse*.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFrontierExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityP1MarkedOSParetoReuseMaxCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityStressLengthSquaredTargetIntervalExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda'
+      - 'DASHI/Physics/ExoticGravity/AntigravityMatchedControlExperimentDonorMaxCutExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityLocalCWightmanTerminalToStaticExact.agda'
+      - 'DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda'
+      - 'tests/test_antigravity_local_c_wightman_static_reuse.py'
+      - 'tests/test_antigravity_terminal_physical_package_frontier.py'
+      - 'tests/test_antigravity_p1_marked_os_pareto_reuse.py'
+      - 'tests/test_antigravity_r136_static_differential_reuse.py'
+      - 'tests/test_antigravity_pinned_local_c_static_promotion.py'
+      - 'tests/test_antigravity_differential_tt_donor_maxcut.py'
+      - 'tests/test_antigravity_stress_length_squared_target_interval.py'
+      - 'tests/test_antigravity_si_calibration_donor_maxcut.py'
+      - 'tests/test_antigravity_matched_control_experiment_donor.py'
+      - 'tests/test_antigravity_post_normalization_reuse_rollup.py'
+      - '.github/workflows/antigravity-post-normalization-reuse.yml'
+  workflow_dispatch:
+
+jobs:
+  typecheck-and-regress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Materialize Agda source dependencies
+        run: git submodule update --init --depth 1 DCHoTT-Agda cubical
+      - uses: cachix/install-nix-action@630ae543ea3a38a9a4166f03376c02c50f408342 # v31
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Focused regression contracts
+        run: |
+          python -m pip install pytest
+          pytest -q \
+            tests/test_antigravity_local_c_wightman_static_reuse.py \
+            tests/test_antigravity_terminal_physical_package_frontier.py \
+            tests/test_antigravity_p1_marked_os_pareto_reuse.py \
+            tests/test_antigravity_r136_static_differential_reuse.py \
+            tests/test_antigravity_pinned_local_c_static_promotion.py \
+            tests/test_antigravity_differential_tt_donor_maxcut.py \
+            tests/test_antigravity_stress_length_squared_target_interval.py \
+            tests/test_antigravity_si_calibration_donor_maxcut.py \
+            tests/test_antigravity_matched_control_experiment_donor.py \
+            tests/test_antigravity_post_normalization_reuse_rollup.py \
+            tests/test_antigravity_static_pair_to_differential.py \
+            tests/test_antigravity_post_normalization_maxcut.py
+      - name: Typecheck focused reuse frontier
+        run: |
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136ToStaticVacuumPromotionExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityR136StaticPairToDifferentialExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPinnedLocalCTerminalToStaticExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityLocalCWightmanTerminalToStaticExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/Foundations/CMP119AntigravityPostScalarR136ReuseMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityP1MarkedOSParetoReuseMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityStressLengthSquaredTargetIntervalExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityTerminalPhysicalPackageFrontierExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityDifferentialTTDonorMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravitySICalibrationDonorMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityMatchedControlExperimentDonorMaxCutExact.agda
+          nix develop .# --command agda -i . DASHI/Physics/ExoticGravity/AntigravityPostNormalizationReuseEverything.agda
