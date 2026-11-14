@@ -178,10 +178,10 @@ partialAtEveryFiniteDepth :
   (n : Nat) (start : Node) →
   PartialAtDepth select n start
 partialAtEveryFiniteDepth select n start
-  with partialIterate select n (visiting start)
-... | visiting node = stillVisiting node refl
-... | stoppedAt node = reachedDeadEnd node refl
-... | missingTarget target = reachedUnresolved target refl
+  with partialIterate select n (visiting start) in eq
+... | visiting node = stillVisiting node eq
+... | stoppedAt node = reachedDeadEnd node eq
+... | missingTarget target = reachedUnresolved target eq
 
 partialIterateAppend :
   ∀ {Node Outside : Set}

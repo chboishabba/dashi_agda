@@ -72,8 +72,8 @@ boundedPathImpliesForwardRotation :
     {fuel : Nat} {start target : Node} →
   ReachWithin next target fuel start →
   Rotation.ForwardRotation next start target
-boundedPathImpliesForwardRotation (reachNow equal) =
-  Rotation.forwardRotation zero equal
+boundedPathImpliesForwardRotation (reachNow same) =
+  Rotation.forwardRotation zero same
 boundedPathImpliesForwardRotation (reachLater tail)
   with boundedPathImpliesForwardRotation tail
 ... | Rotation.forwardRotation k path =
