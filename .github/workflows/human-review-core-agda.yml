@@ -1,0 +1,52 @@
+name: Human review core Agda
+
+on:
+  pull_request:
+    paths:
+      - 'DASHI/Core/HumanReviewCore.agda'
+      - 'DASHI/Core/HumanReviewCoreRegression.agda'
+      - 'DASHI/Law/SensibLawRealMatterReviewDecisionExact.agda'
+      - 'DASHI/Law/SensibLawRealMatterReviewedResumeExact.agda'
+      - 'scripts/run_agda29_parallel_check.sh'
+      - 'flake.nix'
+      - 'flake.lock'
+      - '.github/workflows/human-review-core-agda.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: human-review-core-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  focused-agda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v3
+
+      - name: Type-check generic human-review core regression
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Core/HumanReviewCoreRegression.agda
+
+      - name: Type-check REAL-MATTER review decision compatibility
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Law/SensibLawRealMatterReviewDecisionExact.agda
+
+      - name: Type-check downstream reviewed-resume compatibility
+        run: >-
+          nix develop .# --command
+          bash scripts/run_agda29_parallel_check.sh
+          DASHI/Law/SensibLawRealMatterReviewedResumeExact.agda

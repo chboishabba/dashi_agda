@@ -6,42 +6,25 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Data.Empty using (⊥)
 
+import DASHI.Core.HumanReviewCore as HumanReview
 import DASHI.Law.SensibLawProviderPinnedEphemeralMaterialisationExact as Source
+
+-- Preserve the historical SensibLaw API while moving the generic carriers to
+-- Core. Existing downstream users may continue to refer to
+-- Review.GenericHumanReviewReceipt / Review.ExactReviewItemBinding and their
+-- constructors/projections without acquiring a new legal-specific type.
+open HumanReview public
 
 ------------------------------------------------------------------------
 -- REAL-MATTER-1 REVIEW DECISION
 --
--- Source materialisation and candidate PNF do not pay review. A generic human
--- review receipt pays reviewer/action/workflow state, but does not by itself
--- choose the domain-specific legal evidence role or normative order. The real
--- legal matter therefore requires a second durable decision coordinate binding
--- those choices to the accepted/qualified receipt and exact source/candidate.
+-- Source materialisation and candidate PNF do not pay review. The generic human
+-- review carriers are now owned by DASHI.Core.HumanReviewCore. This legal owner
+-- adds only the domain-specific evidence-role and normative-order decision.
 ------------------------------------------------------------------------
 
 selectedSourceBoundary : Source.ProviderCandidatePnfBoundary
 selectedSourceBoundary = Source.canonicalProviderCandidatePnfBoundary
-
-record GenericHumanReviewReceipt : Set where
-  constructor generic-human-review-receipt
-  field
-    reviewReceiptRef : String
-    reviewItemRef : String
-    reviewerRef : String
-    observationRef : String
-
-open GenericHumanReviewReceipt public
-
-record ExactReviewItemBinding : Set where
-  constructor exact-review-item-binding
-  field
-    sourceManifestationRef : String
-    candidatePnfBatchRef : String
-    candidateFactorRef : String
-    consumerRef : String
-    acceptedOrQualified : Bool
-    acceptedOrQualifiedIsTrue : acceptedOrQualified ≡ true
-
-open ExactReviewItemBinding public
 
 record LegalEvidenceReviewDecision : Set where
   constructor legal-evidence-review-decision
