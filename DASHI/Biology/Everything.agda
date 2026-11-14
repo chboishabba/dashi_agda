@@ -259,3 +259,6 @@ import DASHI.Biology.Evolution.EvolutionaryWorldCouplingTheoryBoundaryExact
 import DASHI.Biology.PMDDHistamineAmplificationExact
 import DASHI.Biology.PMDDHistamineMolecularTargetInstantiationExact
 import DASHI.Biology.PMDDHistamineInterventionIdentificationBoundaryExact
+
+-- KSW 668 same-source empirical biology, read-only controls.
+import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact
