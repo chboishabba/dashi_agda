@@ -13,6 +13,9 @@ import DASHI.Cognition.PNF.SensibLawGWBv01PostCertificationRoadmapExact as Sensi
 -- Reuse-only PNF boundary normalization. No source theorem is promoted.
 import DASHI.Unified.PNFSourceBoundaryTOEValidation
 
+import DASHI.Core.GovernanceTrajectoryRealisationExact as GovernanceTrajectory
+import DASHI.Interop.SensibLawSemanticPromotionPolicy as SensibLawPromotion
+import DASHI.Finance.DashiTradeFibreBridgeExact as DashiTradeGJR
 open import Agda.Primitive using (Setω)
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
