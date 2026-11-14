@@ -141,8 +141,7 @@ oldOrbitHitOrAvoid :
 oldOrbitHitOrAvoid delta {zero} {v} decide = inj₂ avoidsZero
 oldOrbitHitOrAvoid delta {suc n} {v} decide with decide v
 ... | inj₁ edited = inj₁ (editAtCurrent edited)
-... | inj₂ unchanged
-  with oldOrbitHitOrAvoid delta {n} {oldLink delta v} decide
+... | inj₂ unchanged with oldOrbitHitOrAvoid delta {n} {oldLink delta v} decide
 ...   | inj₁ hit = inj₁ (editFurtherAlong hit)
 ...   | inj₂ avoids = inj₂ (avoidsStep unchanged avoids)
 
