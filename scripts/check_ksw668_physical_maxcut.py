@@ -94,6 +94,20 @@ def q_values():
              - MASSES["H1"]) * U_MEV)
 
 
+def neutral_atom_two_body_kinematics():
+    # Effective neutral-atom rest masses with conserved electron count:
+    # N14 atom + n -> C14 atom + H1 atom. This is a four-vector kinematic
+    # benchmark, NOT a fully corrected nuclear-ion/electron final state.
+    u = s.Rational("931.49410242")
+    W = (s.Rational("14.00307400443")+s.Rational("1.00866491595"))*u
+    mc = s.Rational("14.0032419884")*u
+    mp = s.Rational("1.00782503223")*u
+    EC = (W**2+mc**2-mp**2)/(2*W)
+    EP = (W**2+mp**2-mc**2)/(2*W)
+    p2 = s.factor(EC**2-mc**2)
+    return W, mc, mp, EC, EP, p2
+
+
 def neutron_rate(flux_cm2_s, target_N14_atoms):
     scale = Decimal(str(flux_cm2_s)) * Decimal(str(target_N14_atoms)) * Decimal("1e-24")
     return scale * SIGMA_B, scale * SIGMA_ERROR_B
@@ -167,6 +181,13 @@ class KSWPhysicalBenchmarks(unittest.TestCase):
         self.assertTrue(Decimal("7.274") < alpha < Decimal("7.276"))
         self.assertTrue(Decimal("0.625") < np < Decimal("0.628"))
 
+    def test_c_exact_effective_fourmomentum_cm_kinematics(self):
+        W, mc, mp, EC, EP, p2 = neutral_atom_two_body_kinematics()
+        self.assertEqual(s.simplify(EC+EP-W),0)
+        self.assertEqual(s.simplify(EP**2-mp**2-p2),0)
+        self.assertGreater(p2,0)
+        self.assertEqual(s.simplify((EC-mc)+(EP-mp)),W-mc-mp)
+
     def test_c_neutron_rate_uncertainty_and_flux_dependence(self):
         self.assertEqual(neutron_rate("1e6", "1e20"),
                          (Decimal("182.8"), Decimal("5.3")))
@@ -216,7 +237,8 @@ if __name__ == "__main__":
                  "surface_flux_at_t0_L1":"2","current":["-1","+1"]},
             "C":{"triple_alpha_Q_MeV":str(alpha),"N14_n_p_C14_Q_MeV":str(np),
                  "sigma_thermal_barn":"1.828 +/- 0.053",
-                 "rate_at_hypothetical_flux_1e6_and_N_1e20_per_s":"182.8 +/- 5.3"},
+                 "rate_at_hypothetical_flux_1e6_and_N_1e20_per_s":"182.8 +/- 5.3",
+                 "two_body_CM_neutral_atom_kinematics":"energy and mass shells exactly satisfy 4-momentum, not nuclear-ion reaction data"},
             "D":{"flat_spacelike_event":"x=10,t=0,c=1",
                  "bell_reduced_alice":"I/2 under Bob I,X,Z,H and CPTP amplitude damping"},
             "E":{"observations":"total=15 from (uptake,nuclear)=(5,0) or (2,3)",
