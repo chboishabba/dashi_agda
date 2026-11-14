@@ -54,3 +54,56 @@ Replay the external proof under its actual upstream toolchain (4.34.1; independe
 The scan uses a comparator subject anchor plus at least two overlapping tokens. It can find useful owners but does not compare normalized theorem types, binders, universes, quantifier scope, group representation, exact lattice law, original machine clock, choice of Fourier transform or ambient finite/infinite object. It also references older repo heads. The four separate states remain `DISCOVERY`, `SOURCE_READ`, `SAME_OBJECT_PROVED`, `KERNEL_ACCEPTED`; no transition without its own receipt.
 
 **Status on this commit: A/source snapshot integrated; historical B has 101 lexical candidates and six source-reviewed relations, none positive; genuine same-object C and kernel D remain OPEN.** This is high-volume information integration, not 208 physical/formal theorem completions.
+
+
+## 14 November late continuation: the missing ORIGINAL Agda proof owners are now co-located
+
+The first October YM intake had transferred only four OAI **source atlas**
+modules, not the original `openai/math` finite circuit/CNF proof modules.
+This was a real source-integration omission, now repaired.
+
+**Eight native Agda owner modules**, and **three original Python
+regression/discovery scripts**, have been imported **byte-for-byte** from
+Golden donor PR #1212 at
+`b1357263c117a04a9cf963da57500e583b6d1108`
+onto the single canonical Golden Clay PR #1499.
+The eight: `Everything`, `CorpusRegression`,
+`OpenAIMathCreationOrderSerializationExact`,
+`OpenAIMathFiniteSupportedTseitinModelsExact`,
+`OpenAIMathLiteralCodeTransportExact`,
+`OpenAIMathSharedTseitinGateCNFExact`,
+`OpenAIMathSharedTseitinOptimizedCNFExact`,
+`OpenAIMathSharedTseitinUniqueExtensionExact`.
+Original scripts:
+`check_openai_shared_tseitin_parsimonious.py`,
+`run_openai_math_symbol_snowball.py`,
+`test_openai_math_symbol_snowball.py`.
+
+Existing shared-semantic original owner
+`DASHI/Mathematics/Complexity/PNotEqualsNPConcreteCircuitSharedSemanticsExact.agda`
+was **NOT overwritten**: the donor and current sources are 1085-line
+versions with the same 35 top-level declaration identifiers and one source
+difference (line 243, donor names the `ProgramAssignmentRealizes`
+argument `realization`; the receiver writes its type anonymously).
+This is an alpha-binder/source diff, but equivalence of the *elaborated*
+terms and all downstream proof checks remains for the Golden kernel.
+We retain the receiver owner/chronology, not reintroduce a duplicate.
+
+New isolated focused acceptance owner:
+`DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda`.
+It imports the actual original `Everything.agda` source proof chain,
+the six reviewed cross-corpus boundary registry, and the separate
+October YM formal-source receipt. This is a source dependency root,
+**not a kernel result**. Suggested local Nix checks:
+
+```bash
+AGDA_JOBS=1 DASHI_NO_TMUX=1 bash scripts/run_agda29_parallel_check.sh DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda
+python3 scripts/check_openai_shared_tseitin_parsimonious.py --help
+python3 scripts/test_openai_math_symbol_snowball.py
+python3 scripts/check_openai_math_full_crosswalk_20261114.py --self-test
+```
+
+The original Agda finite #SAT/CNF source types are now physically present
+together, so **source co-location is no longer the first gate**. Actual
+Golden Agda 2.9 elaboration, exact upstream OAI 378 bitstream and fixed
+primitive-machine M00–M05 proofs, and universal scope math are still OPEN.
