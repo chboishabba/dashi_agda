@@ -57,12 +57,18 @@ def valid_surface(payload:dict[str,Any])->dict[str,Any]:
     selected=text[a:b]
     # Verify only a literal local selected-link token. Complex MediaWiki
     # templates/links/exclusions are owned by the external selector policy.
-    if not selected.startswith('[[') or not selected.endswith(']]') or len(selected)<=4:
+    if (not selected.startswith('[[') or not selected.endswith(']]') or len(selected)<=4
+            or '[[' in selected[2:-2] or ']]' in selected[2:-2]):
         raise ValueError('span is not a simple wiki-link token')
     name=selected[2:-2].split('|',1)[0].split('#',1)[0].strip()
     if name!=payload['selected_target']:
         raise ValueError('selected target does not match pinned source span')
+    # ITIR canonical text/span coordinates are deterministic from this exact
+    # revision's bytes and offsets, not from a rendered title or QID.
+    span_ref=hashlib.sha256(f'{digest}:{a}:{b}'.encode('ascii')).hexdigest()
+    source_ref=f"{payload['language']}wiki:{payload['page_id']}@{payload['revision_id']}:{digest}"
     return {'qid':payload['qid'],'language':payload['language'],
+            'source_ref':source_ref,'text_revision_id':digest,'span_ref':span_ref,
             'page_id':payload['page_id'],'revision_id':payload['revision_id'],
             'title':payload['title'],'source_sha256':digest,'selector_policy_ref':payload['selector_policy_ref'],
             'consumer_ref':payload['consumer_ref'],'observed_value':payload['observation'],
