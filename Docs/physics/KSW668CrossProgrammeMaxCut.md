@@ -373,3 +373,77 @@ python3 scripts/ksw668_ena_reads_acquire.py --execute --download-reads \
 | E2 | Explicit source/reconstruction identifiability theorem remains | Same-human within-person isotope baseline, controlled intervention, matched exposure and evidence-backed causal identification |
 
 **Verification:** Data in the human source table are transcribed from the published primary paper and reconciled as 34 rows/28 donors. Local independent analytic checks for neutron integration and published paired-donor contrasts were performed. New scripts and Agda modules are present in GitHub but exact-head Python replay and Agda 2.9 kernel verification are still pending. No original external MMS/Movebank/ENA/PARMA raw bytes downloaded here; do not claim a full physical empirical closure.
+
+---
+
+## Phase P0–P3 continuation — 2026-11-14 exact max-cut physical and empirical advances
+
+### E1 source-specific progress: source-measured individual AMS vs acquired NH source curves
+
+**Important correction:** Heinemeier et al. (2013), DOI 10.1096/fj.12-225599, original Table 1 involved human donors from Arkansas, USA. The earlier acquired *Southern Hemisphere* curve is unsuitable as a naive same-location calibration. Acquired the three available **Northern Hemisphere annual 1950.5–2019.5** original Hua et al. (2021/2022) radiocarbon curves, at exact original upstream \`Maarten14C/rintcal\` Git blob SHA-1:
+
+- NH1: \`f7ff49b2ff6ed99f2a6b5aa811c86a774082cbcf\`;
+- NH2: \`296b7fbbee8f69f87501be05f9b1a1391a49e0f5\` (**working Arkansas comparator, subject to zone/diet corrections**);
+- NH3: \`aafd74536ec0690f1c1943ac98da3caf7972f59f\`.
+
+Each original source file contains 70 annual calibrated atmospheric radiocarbon-age and uncertainty rows. Original full curves remain in the upstream GPL-licensed distribution; hashes were actually checked through connected original GitHub source. We computed the explicitly **uncalibrated** reference number \`100*exp(-14CageBP/8033)\`, restricted to original donor birth year through the **2000 source autopsy date**, for all **30** original tendon AMS rows and compared numerical envelopes to observed \`pMC\`. This is a SCREEN, not a calibrated isotope likelihood, because atmospheric F14C and human pMC carry distinct conventional/decay/fractionation normalizations and tissue carbon has a nontrivial dietary lag.
+
+**Concrete acquired-source finding:** the three original author-flagged anomalous donors 25, 28, 30 comprise five original tendon assay rows, and **all five** lie outside the simple post-birth 1950–2000 annual NH1, NH2, NH3 envelopes, with **0/25** other tendon assay rows outside these envelopes. NH2 source-derived pMC-vs-proxy gaps:
+- donor 25 original AMS IDs \`15882.1\` and \`15882.2\`: *below* lifetime minimum by 4.390349 / 5.020349 proxy units;
+- donor 30 original AMS \`16252\`: *above* lifetime maximum by 15.467841 units;
+- donor 28 original AMS \`15883\` and \`16247\`: *above* lifetime maximum by 17.490083 / 19.800083 units.
+
+This reproduces the qualitative original-author outlier classification across independent northern-hemisphere source curves; it **does not** infer new isotope production, nuclear conversion, a statistically calibrated deviation, deliberate contamination or emotional causation. Other plausible causes include sample identity, diet/birth estimates, contaminants, and conventions. User must not take the atmospheric proxy numerical residual as a raw measured isotope conservation residual.
+
+- Executable source-pinned \`scripts/ksw668_human_atmospheric_lifetime.py\` supports \`--curve-dir\` with original source files or download + blob verification.
+- Actual source-derived full per-assay screen and source hashes: \`Artifacts/ksw668/human_original_ams_northern_lifetime_screen_20261114.json\`.
+- Original direct raw human Table 1: \`Artifacts/ksw668/heinemeier2013_original_human_ams_table1.csv\`; original paper's outlier flags preserved.
+- Exact-head Python fetch of newly source-written NH script still PENDING; independent original-source GitHub calculation of all source rows and source-receipt creation verified.
+
+### B1/B2 source-typed full vector Maxwell and exact nontrivial integrated boundary
+
+New \`DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda\` is a generic original \`C3.RealField\` source-written theorem over the **full three-vector, nine spatial Jacobian first derivatives for E and B**, with explicit 3D curl computed from each Jacobian, Ampère \(\partial_t E-\nabla\times B+J=0\), Faraday \(\partial_t B+\nabla\times E=0\), local energy-rate coefficient and \(\nabla\cdot(E\times B)=B\cdot\nabla\times E-E\cdot\nabla\times B\) in its spatial product-rule form. \`fullVectorBudgetNormalForm\` uses an **original RealField ring solver with 21 independent real coordinates**; \`fullVectorMaxwellPoyntingIdentity\` then consumes both actual source jet curl equalities. Exported by \`Plasma/Everything.agda\` and \`KSW668SourceCrosswalkExact.agda\`.
+
+**Nontrivial exact 3D polynomial test:** choose \(A=t(xy+z^2,\ yz+x^2,\ zx+y^2)\), \(E=-\partial_tA\), \(B=\nabla\times A=t(y,z,x)\), \(J=\nabla\times B-\partial_t E=-t(1,1,1)\), normalized vacuum units. \`scripts/check_ksw668_maxwell_3d_jet.py\` checks Faraday, Ampère, \(\nabla\cdot B=0\), charge continuity, local \(\partial_tu+\nabla\cdot(E\times B)+J\cdot E=0\), all six face surface fluxes, and the original **finite cube** \([0,L]^3\) exact identities:
+
+\[
+\frac{d}{dt}\int_\Omega u\,dV=L^5t,\quad
+\oint_{\partial\Omega} (E\times B)\cdot n\,dS=-\frac{11}{4}L^5t,\quad
+\int_\Omega J\cdot E\,dV=\frac74L^5t,
+\]
+so the integrated balance is identically zero without assuming boundary flux vanishes. Symbolic \`sympy\` local equivalent source check PASS; exact GitHub code execution on a checked-out head and Agda kernel 2.9 still PENDING. Receipt: \`Artifacts/ksw668/three_dimensional_maxwell_exact_receipt_20261114.json\`. This is **not** observed MMS or a complete continuum U1/SI Maxwell derivation. The local jet record requires original \(C^1\) field producer and source physical medium/constitutive assumptions.
+
+### A1/B1 physical MMS same-event joins
+
+\`scripts/ksw668_mms_cdf_energy_reconstruct.py\` now consumes the **actual original MMS1 SHA-256 CDF manifest** emitted by \`ksw668_mms_burst_acquire.py\`; checks source probe/event, file digests, original CDF epochs, GSE FGM nT, EDP mV/m, FPI electron/ion density cm⁻³ and bulk velocity km/s, rejects duplicate epochs and out-of-tolerance temporal joins. Source 2017-06-17 published event \`20:24:03–20:24:11 UTC\` and DOIs \`10.1029/2020GL088761\`, \`10.1029/2022GL098445\`.
+
+In physical units it computes the **actual candidate** \(J=e(n_i v_i-n_e v_e)\) from separate source particle moments, \(E'=E+v_e\times B\), and both electron-frame \(J\cdot E'\) and lab \(J\cdot E\) with explicit conversions. Outputs signed min/median/max, fraction negative and valid epoch fraction; **does not claim** correct original author's exact method, CDF data quality, source uncertainties, matched original physics or a calibrated measured result. Actual SDC original burst segments and original raw CDF **NOT acquired in this environment**, thus no signed observational receipt. This is distinct from the finite Fourier MHD transfer exact source algebra.
+
+### C2 actual *cross-energy* nuclear evaluated-source discrepancy
+
+EPRI/NWT Corporation (2010), *Estimation of Carbon-14 in Nuclear Power Plant Gaseous Effluents*, EPRI report **1021106**, Table 2-2 (attributed by report to original **OECD-NEA JEF Report 14, 1994**), records **historical EVALUATED** (not independent modern original measurements) \(^{14}N(n,p)^{14}C\) cross sections at **14 MeV**:
+
+| Historical evaluated library | 14-MeV cross section (barn) |
+| --- | ---: |
+| JEF-2.2 | 0.04325 |
+| ENDF/B-VI | 0.04447 |
+| JENDL-3.2 | 0.00420 |
+| BROND-2 | 0.05404 |
+| CENDL-2 | 0.04324 |
+
+Among these evaluations, max/min ratio \(\simeq12.8667\). Naive application of the **separately measured 2026 Li et al. 0.0036–1.8 eV** fit \(0.2706E^{-0.5103}\) to **14 MeV \(=14\times10^6\) eV** yields merely \(6.10462\times10^{-5}\) barn, **709-ish times below** JEF-2.2 (exact computed ratio \(\approx708.48\)), and is **physically INVALID** since far outside experimental fit support. The historical evaluated-library spread is not a statistical error interval for a modern nuclear evaluation. Original source is https://restservice.epri.com/publicdownload/000000000001021106/0/Product, Table 2-2, with historical authority separated from the 2026 measured low-energy paper DOI \`10.1080/00223131.2026.2750299\`.
+
+New \`scripts/ksw668_neutron_energy_nonextrapolation.py\` hard-rejects physically invalid fit evaluation above 1.8 eV and checks original source-evaluation reported numbers and derived spread; original-source ledger \`Artifacts/ksw668/n14_high_energy_evaluated_nonextrapolation_20261114.json\`. **No modern evaluated all-energy cross-section grid or site-specific neutron spectrum acquired; C2 total production remains OPEN.** No whole-body radioactive source is inferred.
+
+### Updated original A1–E2 exact remaining cuts
+
+- **A1:** original \`IdealElsasserFourierState\` with a *concrete finite signed ±1 rational three-mode and ordered magnetic strengths* is not Agda inhabited/kernel-accepted yet; source-form tests are separate. Actual MMS instrument observational weld awaits FGM/EDP/FPI CDF.
+- **B1:** full original RealField **3D local curl-jet** source-written, with signed identity. Full physical U1 C1 field/constitutive and Agda acceptance remains. 
+- **B2:** exact analytic full 3D cube **all six faces** proven by SymPy source form, but actual measured surface remains OPEN.
+- **C1:** source two-body idealized nuclear kinematics supplied earlier; full ion/electron state and experimental final-state calibration OPEN.
+- **C2:** original low-energy measured fit and historical high-energy EPRI evaluations now source-separated; **no extrapolation**. Full modern \(\sigma(E)\), \(\Phi(E)\), body transport OPEN.
+- **D1/D2:** no new physically inhabited 5D Einstein–matter/KK causal transport. Flat Lorentz and Bell diagnostics only, SAME selected physical solution OPEN.
+- **E1:** individual original human AMS + new NH lifetime envelope cross-source **diagnostic** added; original pigeon GPS and ENA FASTQ downloads and treatment joins remain OPEN.
+- **E2:** controlled same-specimen emotions/uptake/clearance/neutron exposure nuclear-residual causal discrimination is neither observed nor proved. Existing original biology experiments do not imply it.
+
+**Acceptance:** Offline GitHub workflow now installs pinned \`sympy==1.14.0\` and runs the new 3D Maxwell polynomial proof/test, 14-MeV extrapolation negative control, original human AMS table checks and existing eight regressions. Execution is not claimed until a real Actions result/CI receipt is returned. **Agda/Nix binaries and internet archive fetch are not available in this task environment; no invented acceptance.**
