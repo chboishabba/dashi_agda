@@ -80,3 +80,5 @@ import DASHI.Physics.Plasma.MHDLiteralMagneticHelicityTriadConservationExact
 import DASHI.Physics.Plasma.MHDLiteralIdealInvariantTriadCompilerExact
 import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
 import DASHI.Physics.Plasma.PlasmaActivatedWaterAgricultureSourceRegistryExact
+import DASHI.Physics.Plasma.KSW668FiniteDiscriminatorsExact
+import DASHI.Physics.Plasma.KSW668SourceCrosswalkExact
