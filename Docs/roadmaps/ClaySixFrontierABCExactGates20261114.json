@@ -1166,6 +1166,12 @@
       "to": "#1503",
       "exact_files": 2,
       "result": "R445 TV 3-moment common-density analytic reduction; physical TV estimate OPEN"
+    },
+    {
+      "from": "#1498 head 2c4204914d93",
+      "to": "#1503",
+      "exact_files": 5,
+      "result": "four-orbit midpoint/Hessian rational quadrature algebra plus four original dependencies; actual physical Hessian/integral certificates OPEN"
     }
   ],
   "acceptance": {
