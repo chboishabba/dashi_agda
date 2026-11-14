@@ -675,5 +675,69 @@
       "negative_controls_mathematically_tested": true,
       "existing_donor_source_blobs_converged": true
     }
+  },
+  "six_cut_execution_round3": {
+    "as_of": "2026-11-14",
+    "pinned_donors_pre_manifest": [
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1502,
+        "head": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+        "source": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "verified": "GitHub source blob readback only; no Agda 2.9 kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1503,
+        "head": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+        "source": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+        "verified": "GitHub source blob readback only; no physical source TV, no Agda kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "head": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "source": "Synthesis/MillenniumBSDCMRealNonexceptionalXTSignImageCompleteExact.lean",
+        "verified": "GitHub source blob readback only; Q2 eight squareclasses Python exact, no Lean kernel/H1"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 109,
+        "head": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba",
+        "source": "Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean",
+        "verified": "GitHub source blob readback only; actual source rate envelope open, no Lean kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_agda",
+        "pr": 1478,
+        "head": "e391fcd65b75495282c90a7f23ce99195d20761c",
+        "source": "DASHI/Analysis/BishopOriginalEtaPairBlockTelescopingExact.agda",
+        "verified": "GitHub source blob readback only; Nat log, trig addition and real uniform limit open, no Agda kernel"
+      },
+      {
+        "repo": "chboishabba/dashi_lean4",
+        "pr": 50,
+        "head": "2384d90f1a2c23dc59c072425e7efbc040405032",
+        "source": "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2SelectedWitnessCut.lean",
+        "verified": "Existing positive-cap iff selected fourth-Lipschitz threshold; actual selected W/G3 sign unproved and unrefuted"
+      }
+    ],
+    "test_evidence": {
+      "literal_gamma_positive_words": 31713,
+      "literal_gamma_malformed_controls": 7,
+      "gamma_k_range": "0..9",
+      "q2_local_distinct_2adic_squareclass_pairs": 8,
+      "source_git_exact_readback": true,
+      "source_proof_kernel_receipts": 0,
+      "github_pr_workflow_runs_returned": 0
+    },
+    "admission_order": [
+      "Exact branch-head Agda/Lean kernel diagnostics",
+      "Transitive axiom/trust admissibility and original-source types",
+      "Source-specific TV/real trajectory/H1/eta/zero-W analytic estimates",
+      "Only then terminal endpoint/merge"
+    ],
+    "all_general_Clay_endpoint_gates": "OPEN; no unsupported promotion",
+    "source_status": "new A-class source proof terms and conditional consumers written; B/C physical-math estimates not solved"
   }
 }
