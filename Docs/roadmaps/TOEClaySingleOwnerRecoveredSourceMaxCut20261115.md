@@ -19,3 +19,6 @@ For YM R445, the existing #1503 weighted conditional-TV and source-specific shar
 **Authoritative detailed research and status record**:
 [ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md](https://github.com/chboishabba/dashi_agda/blob/chatgpt/clay-20261112-four-frontier-fail-closed/Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md).
 Use the original Clay driver on #1499 for Python/SymPy source checks and the pinned Agda/Lean local kernel gates. The TOE import is a source normalization, not a compiler or kernel receipt itself. Actual Agda 2.9/Lean 4.28 exact-head replay remains to be run on the pinned local worktrees.
+
+
+**Additional consolidation:** the subsequent Git-tree comparison found 114 missing original strict-SAT/Karp-21/Cook–Levin source files from [Agda #1445](https://github.com/chboishabba/dashi_agda/pull/1445), imported atomically into Clay #1499 as immutable blobs in commit `058b65598ae8f85dd336a80e35f99096856937a9`. No copied mathematics lives in TOE; the TOE facade imports the canonical in-repo original source owners and retains their false-promotion status. Lean #108 now stages the exact `Pcrit=(5+sqrt(5)-sqrt(30))/10>3/20` and amplitude-512 W2 failure scalar proof candidate. Source-written, kernel not checked.
