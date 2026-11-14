@@ -88,22 +88,24 @@ binaryWord9ToTernary27 word =
     (Lift27.encodeBit3To27 (block1 word))
     (Lift27.encodeBit3To27 (block2 word))
 
-ternary27ToBinaryWord9 : Ternary27Word3 → BinaryWord9
-ternary27ToBinaryWord9 (ternary27Word3 c0 c1 c2)
-  with Block.decode2to3 (Lift27.projectPayload c0)
-     | Block.decode2to3 (Lift27.projectPayload c1)
-     | Block.decode2to3 (Lift27.projectPayload c2)
-... | Block.bits3 a0 a1 a2 | Block.bits3 b0 b1 b2 | Block.bits3 c0 c1 c2 =
+bit3ToWord : Block.Bit3 → Block.Bit3 → Block.Bit3 → BinaryWord9
+bit3ToWord (Block.bits3 a0 a1 a2) (Block.bits3 b0 b1 b2) (Block.bits3 c0 c1 c2) =
   binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2
+
+ternary27ToBinaryWord9 : Ternary27Word3 → BinaryWord9
+ternary27ToBinaryWord9 (ternary27Word3 c0 c1 c2) =
+  bit3ToWord
+    (Lift27.decodeBit3From27Payload c0)
+    (Lift27.decodeBit3From27Payload c1)
+    (Lift27.decodeBit3From27Payload c2)
 
 binaryWordToTernaryRoundTrip :
   (word : BinaryWord9) →
   ternary27ToBinaryWord9 (binaryWord9ToTernary27 word) ≡ word
-binaryWordToTernaryRoundTrip
-  (binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2)
-  rewrite Block.blockRoundTrip (Block.bits3 a0 a1 a2)
-        | Block.blockRoundTrip (Block.bits3 b0 b1 b2)
-        | Block.blockRoundTrip (Block.bits3 c0 c1 c2) = refl
+binaryWordToTernaryRoundTrip (binaryWord9 a0 a1 a2 b0 b1 b2 c0 c1 c2)
+  rewrite Lift27.bit3LiftRoundTrip (Block.bits3 a0 a1 a2)
+        | Lift27.bit3LiftRoundTrip (Block.bits3 b0 b1 b2)
+        | Lift27.bit3LiftRoundTrip (Block.bits3 c0 c1 c2) = refl
 
 mapList : ∀ {A B : Set} → (A → B) → List A → List B
 mapList f [] = []
@@ -137,6 +139,8 @@ record FixedNineBitFramed27Boundary : Set where
     threeFramed27CellsPerWord : Bool
     genericArbitraryNatRoundTripClaimed : Bool
     physicalCostClaimed : Bool
+
+open FixedNineBitFramed27Boundary public
 
 canonicalFixedNineBitFramed27Boundary : FixedNineBitFramed27Boundary
 canonicalFixedNineBitFramed27Boundary =
