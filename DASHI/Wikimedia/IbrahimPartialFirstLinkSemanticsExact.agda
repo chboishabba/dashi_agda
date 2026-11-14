@@ -150,3 +150,77 @@ fixtureUnknownCannotEqualDeadEnd :
   stoppedAt fixtureSecond → ⊥
 fixtureUnknownCannotEqualDeadEnd equality =
   missingTargetNotDeadEnd (sym equality)
+
+
+------------------------------------------------------------------------
+-- M3 constructive BOUNDED three-way classification at every depth.
+-- This is a real exhaustive source-state disjunction. A further
+-- finite-pigeonhole lemma is required to turn an arbitrarily long
+-- continuing path into an eventual-cycle witness.
+------------------------------------------------------------------------
+
+data PartialAtDepth {Node Outside : Set}
+    (select : Node → FirstLinkSelection Node Outside)
+    (n : Nat) (start : Node) : Set where
+  stillVisiting : (node : Node) →
+    partialIterate select n (visiting start) ≡ visiting node →
+    PartialAtDepth select n start
+  reachedDeadEnd : (node : Node) →
+    partialIterate select n (visiting start) ≡ stoppedAt node →
+    PartialAtDepth select n start
+  reachedUnresolved : (target : Outside) →
+    partialIterate select n (visiting start) ≡ missingTarget target →
+    PartialAtDepth select n start
+
+partialAtEveryFiniteDepth :
+  ∀ {Node Outside : Set}
+    (select : Node → FirstLinkSelection Node Outside) →
+  (n : Nat) (start : Node) →
+  PartialAtDepth select n start
+partialAtEveryFiniteDepth select n start
+  with partialIterate select n (visiting start)
+... | visiting node = stillVisiting node refl
+... | stoppedAt node = reachedDeadEnd node refl
+... | missingTarget target = reachedUnresolved target refl
+
+partialIterateAppend :
+  ∀ {Node Outside : Set}
+    (select : Node → FirstLinkSelection Node Outside) →
+  (m n : Nat) (initial : PartialObservation Node Outside) →
+  partialIterate select (m + n) initial ≡
+  partialIterate select n (partialIterate select m initial)
+partialIterateAppend select zero n initial = refl
+partialIterateAppend select (suc m) n initial =
+  partialIterateAppend select m n (advancePartial select initial)
+
+partialDeadEndPersistsAfterDiscovery :
+  ∀ {Node Outside : Set}
+    (select : Node → FirstLinkSelection Node Outside) →
+  (prefix additional : Nat) (start stop : Node) →
+  partialIterate select prefix (visiting start) ≡ stoppedAt stop →
+  partialIterate select (prefix + additional) (visiting start) ≡
+    stoppedAt stop
+partialDeadEndPersistsAfterDiscovery select prefix additional
+    start stop stopped =
+  trans (partialIterateAppend select prefix additional (visiting start))
+    (trans
+      (cong (partialIterate select additional) stopped)
+      (partialDeadEndAbsorbs select additional stop))
+
+partialUnresolvedPersistsAfterDiscovery :
+  ∀ {Node Outside : Set}
+    (select : Node → FirstLinkSelection Node Outside) →
+  (prefix additional : Nat) (start : Node) (target : Outside) →
+  partialIterate select prefix (visiting start) ≡ missingTarget target →
+  partialIterate select (prefix + additional) (visiting start) ≡
+    missingTarget target
+partialUnresolvedPersistsAfterDiscovery select prefix additional
+    start target unresolved =
+  trans (partialIterateAppend select prefix additional (visiting start))
+    (trans
+      (cong (partialIterate select additional) unresolved)
+      (partialUnresolvedAbsorbs select additional target))
+
+-- Full M3 still requires finite-carrier periodicity for never-terminating
+-- partial traces. This module does not turn every continuing endpoint
+-- into a terminal-cycle certificate without that further proof.
