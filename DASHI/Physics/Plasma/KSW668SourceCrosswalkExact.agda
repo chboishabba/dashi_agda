@@ -3,6 +3,7 @@ module DASHI.Physics.Plasma.KSW668SourceCrosswalkExact where
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import Agda.Builtin.Nat using (_+_)
+import Data.Rational.Base as ℚ
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.MHDFullTransferFromExchangeCompatiblePayloadExact as MHD
@@ -21,6 +22,8 @@ import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact as Empiri
 import DASHI.Biology.KSW668HumanCarbon14ObservedExact as HumanAMS
 import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact as Empirical
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as VectorMaxwell
+import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
+import DASHI.Physics.Chemistry.KSW668NuclearElectronStateLedgerExact as Nuclear
 
 ------------------------------------------------------------------------
 -- KSW 668: exact OWNER reuse.  Do not copy original mathematical proofs,
@@ -93,6 +96,35 @@ originalFull3DMaxwellPoynting :
   VectorMaxwell.fullVectorSignedBudget j ≡ C3.zero F
 originalFull3DMaxwellPoynting =
   VectorMaxwell.fullVectorMaxwellPoyntingIdentity
+
+
+-- D1/D2 standard spacelike-fibre KK projection theorem, not an
+-- Einstein-matter field-equation solution and not exotic operational FTL.
+originalSpacelikeKaluzaKleinProjectedCausal :
+  (v : KK.SpacelikeKaluzaKleinCausalTangent) →
+  KK.baseLorentzIntervalSquared v
+    ℚ.≤ ℚ.0ℚ
+originalSpacelikeKaluzaKleinProjectedCausal =
+  KK.originalKaluzaKleinCausalProjection
+
+-- C1 preserve all original NIST electrons across microscopic final-state
+-- alternatives. Stronger physical scattering amplitudes remain unproved.
+originalNuclearNeutralElectrons :
+  Nuclear.electronInventoryMatches Nuclear.neutralDaughters
+originalNuclearNeutralElectrons = Nuclear.neutralElectronReceipt
+
+originalNuclearIonAndFreeElectronChannel :
+  Nuclear.electronInventoryMatches
+    Nuclear.ionAndFreeElectronDaughters
+originalNuclearIonAndFreeElectronChannel =
+  Nuclear.ionPlusElectronReceipt
+
+originalNuclearBareQCorrection :
+  Nuclear.atomicNeutralChannelQ
+    + Nuclear.nuclearMinusAtomicBindingCorrection
+    ≡ Nuclear.bareNuclearChannelQ
+originalNuclearBareQCorrection =
+  Nuclear.originalBareNuclearQCorrection
 
 originalHumanAMSObservedDonor24 :
   HumanAMS.pMCHundredths HumanAMS.donor24Tendon
