@@ -1,5 +1,160 @@
 # Clay Yang-Mills Proof Roadmap
 
+
+### P2 rational-trace / same-algebra alternative (30 October extension)
+
+The canonical `BalabanSU2RationalWilsonTraceBoundExact` proves
+`-1 <= realPart(q) <= 1` for rational unit-quaternion SU(2) data.
+`YMClayLiteralWilsonS2SameAlgebraBoundExact` now defines the proof-bearing
+`RationalSU2TraceGramBoundSource` and the explicit projections
+`rationalSU2TraceToSameAlgebraWilsonBounds` and
+`rationalSU2TraceBuildsCanonicalS2`. Once one same-carrier `pointwiseUnitBoundGivesGramBounded` interpretation and `traceIsLiteralWilson` equality are exhibited, **all loopwise boundedness fields** follow from the existing literal configuration-dependent Wilson-path theorem. The resulting
+canonical S2 inputs feed `YMClayLiteralWilsonP2ExpectationConvergenceExact`
+and the already-proved three selected expectation-limit compilers. This removes a family of duplicate P2 per-loop boundedness proofs. The record now additionally requires `traceIsLiteralWilson`, an explicit equality on the SAME physical loop carrier. Boundedness is transported along that equality with `subst`; an arbitrary synthetic trace observable cannot be substituted into P2.
+
+The exact
+remaining P2 obligations are now the trace→Gram physical interpretation,
+bounded-product closure, exact literal identity same-object equality, selected Euclidean
+translate/support-time identity, and actual measure convergence on the same
+physical theory. The rational-quaternion argument alone is **not** a proof
+over full continuum Haar SU(2), nor an independent gauge-measure limit.
+
+
+
+### Canonical rational Wilson-function donor (30 October late reuse correction)
+
+Further source-tree archaeology found the existing
+`BalabanLiteralRationalSU2WilsonBoundedAlgebraExact.agda` owner. It already
+constructs **configuration-dependent** `RationalWilsonPath n` observables
+using periodic bond holonomies, proves the complete pointwise unit bound
+`literalWilsonPathPointwiseUnitBounded`, and proves one/multiplication
+pointwise closure. The new P2 bridge now consumes this owner *directly*:
+`physicalWilsonObservable : RationalWilsonObservable n → TestObservable`,
+`traceIsLiteralWilson` on the actual path observable, and
+`pointwiseUnitBoundGivesGramBounded` transport the existing theorem onto
+the same physical `Gram.BoundedObservable` carrier. The bounded identity
+follows from the existing literal unit observable and an exact same-object
+identity equality, rather than being independently assumed.
+
+This replaces the earlier fixed-quaternion-per-path approximation: path
+holonomy necessarily depends on the configuration. The S2 adapter also fixes the literal SU(2) scalar ABI definitionally: `one = 1ℚ`, `groupRank = 1ℚ`, and scalar multiplication is rational multiplication, rather than accepting unconstrained numeric placeholders.
+
+Generic
+`Gram.BoundedObservable` multiplication closure is still a separate
+stronger physical algebra input than rational-image pointwise closure. This
+is the real remaining P2 implementation wall, alongside the physical
+trace/Gram map and limit/time semantics.
+
+
+
+### 30 October, subsequent source-first native-P2 max-cut
+
+The stronger already-existing donor chain is now authoritative for **native**
+rational Wilson paths:
+
+```
+BalabanLiteralRationalSU2WilsonBoundedAlgebraExact
+  -> BalabanLiteralRationalSU2WilsonCylinderBoundDataExact
+  -> BalabanLiteralWilsonNativeThermodynamicProducerExact
+  -> BalabanLiteralWilsonNativePhysicalMeasureExact
+  -> YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2Limits
+```
+
+The native physical-measure owner explicitly sets
+`Gram.BoundedObservable = Σ majorant, QuantitativeBound` and
+`Gram.multiplyObservable =` pointwise Wilson multiplication. Thus the earlier
+generic `RationalSU2TraceGramBoundSource` with its separately provided
+trace-to-Gram and generic multiplication closure is a **compatibility** route,
+not a primitive P2 input in the native path.
+
+In `YMClayLiteralWilsonS2SameAlgebraBoundExact`,
+`nativeWilsonSameAlgebraBoundInputs` reuses the already-produced
+quantitative Wilson path bound, unit bound, bounded products and native
+physical-measure definitions. No new analytic closure is assumed in this
+specialization. Moreover `nativeWilsonP2Limits` already constructs all
+three actual convergence proofs **without** support-distance/time geometry;
+support-distance belongs to P1. Its thermodynamic/expectation input package
+still must be physically inhabited; the syntactic construction is not itself
+a new four-dimensional measure-existence theorem.
+
+**Normalization fix:** the canonical `literalRationalSU2WilsonCylinderBounds`
+uses `groupRank = 1ℚ` for normalized Wilson traces. The new S2 adapter now
+matches this exact source, rather than confusing normalized trace with the
+matrix representation dimension two. This is a same-object semantic correction.
+
+P3 donor search also found pre-existing
+`YangMillsDirectSourceOSReconstructedSpectrumH3Exact` and
+`YangMillsClayCMP119RealSameOSH3Exact`. Both retain the physical
+selected-spectrum / actual reconstructed `H_OS` identification as a
+proof-bearing input; no new synthetic H3 spectrum is introduced.
+
+
+
+
+### R445 same-marked-moment source to native P2 (30 October continuation)
+
+Existing `BalabanClayT5MarkedMomentProducerRound444Exact` and
+`BalabanClayT5MarkedPreferredExpectationRound445Exact` already compile
+one marked-polymer moment closure into the exact preferred diagonal
+expectation producer on a selected thermodynamic family.
+`BalabanLiteralWilsonNativePhysicalMeasureExact.nativeWilsonPreferredFromMarked`
+now reuses that R445 input **on the same native Wilson thermodynamic
+carrier**, then
+`YMClayLiteralWilsonP2NativeMeasureExact.nativeWilsonP2FromMarkedSource`
+constructs the actual three P2 expectation limits using the existing
+`nativeWilsonP2Limits`. No second moment package, covariance shortcut,
+support-distance theorem or independent trace-to-Gram interpretation is
+introduced in the native route. Remaining inputs are the actual R445
+`boundedObservableTail`, continuum-tail witness, selected moment
+realization and physically identified native thermodynamic/measure family.
+The real CMP119 and rational P2 carriers are not asserted equal by analogy.
+
+The 2026 external literature scan included OpenAI's October 26 public
+scientific-collaboration announcement, Bałaban's original CMP116 record,
+and contemporary proof proposals; externally authored proof claims are
+inspiration/search inputs, not kernel proof terms or guaranteed physical
+witnesses. QIDs are discovery/provenance identifiers and do not substitute
+for mathematical same-object equalities; the existing Ibrahim/QID and
+Monster3B ownership fences remain unchanged.
+
+
+## 2026-10-30 — Route-S H1 direct-source Pareto weld
+
+The highest-value reuse cut is the **direct source/OS** mass-gap route, not a
+repetition of the strong F1/F3/F4 Mosco path. The existing owners already
+provide the exact compiler spine:
+
+```text
+R320 DirectSelectedT5MarkedDecayPayment (literal selected two-J inequality)
+  -> YMClayRouteSH1DirectSelectedMarkedDecayExact.h1BuildsLocalizedR295
+  -> R313.exactT5JMagnitudeFromR295 (with rational |·| meaning)
+  -> R296.ExactT5JMagnitudePresentation
+  -> R333.CanonicalBOSIndexedApplication + Completion
+  -> OS.PhysicalMassGapCertificate on the SAME reconstructed H_OS
+```
+
+The new direct bridge in `YMClayDirectSourceOSMassGapFrontierExact` is an
+explicit Agda composition of **existing** owners, not a new selected-source
+inequality. It removes the apparent need to pay R295/R296 again after H1.
+Its remaining actual inputs are R320 physical source localization, rational
+absolute-magnitude interpretation, R333's physical Wilson/time, expectation
+limit and same-H_OS spectral witnesses. P1/P2/P3 in the September closed-world
+audit are the corresponding direct-route cut. The independent strong
+F1-C/F1-D/P_a/E_a/Mosco obligations are **not** terminal prerequisites of
+Route S, but remain available for the other Pareto lane.
+
+Source roots and authorship: Tadeusz Bałaban, CMP 116 (1988), DOI
+10.1007/BF01239022 (cluster expansions and differentiated localization);
+R295/R313/R320/R333 are independently authored DASHI theorem interfaces and
+compilers. A published paper, a typed import, a source-written proof and an
+exact-head kernel check are distinct evidence levels. No physical source
+witness is fabricated; no continuum or Clay promotion occurs from this weld.
+The direct consumer is now smaller and can be attacked at its actual literal
+Wilson P1/P2/P3 physical inputs; all-compact-simple-group and local-QFT
+extension remains a separate terminal scope. Reference comparison: OpenAI's
+26 October 2026 existence announcement is not an imported proof: its Yang–Mills
+Lean artifacts were not publicly released as of this review.
+
 Status: lemma roadmap; non-promoting.
 
 This document is a dependency graph for what a DASHI-based proof of the

@@ -417,3 +417,34 @@ noUnconditionalClayPromotion :
   Full.unconditionalClayPromotion ≡ false
 noUnconditionalClayPromotion =
   Full.unconditionalClayPromotionIsFalse
+
+
+routeSH1NoDuplicateAbsoluteMagnitude :
+  Full.routeSH1AbsoluteMagnitudeIndependentPhysicalLeaf ≡ false
+routeSH1NoDuplicateAbsoluteMagnitude =
+  Full.routeSH1AbsoluteMagnitudeIndependentPhysicalLeafIsFalse
+
+
+
+rationalTraceProvidesP2LoopBoundsGivenInterpretation :
+  Full.routeSP2LoopBoundsFromTraceGivenInterpretation ≡ true
+rationalTraceProvidesP2LoopBoundsGivenInterpretation =
+  Full.routeSP2LoopBoundsFromTraceGivenInterpretationIsTrue
+
+
+
+routeSP2NativeDoesNotRequireGenericProductPayment :
+  Full.routeSP2NativeNoSeparateBoundedProductLeaf ≡ true
+routeSP2NativeDoesNotRequireGenericProductPayment =
+  Full.routeSP2NativeNoSeparateBoundedProductLeafIsTrue
+
+routeSP2NativeDoesNotRequireTimeDistance :
+  Full.routeSP2NativeNoDistanceRequirement ≡ false
+routeSP2NativeDoesNotRequireTimeDistance =
+  Full.routeSP2NativeNoDistanceRequirementIsFalse
+
+
+routeSP2R445NoSecondMoment :
+  Full.routeSP2R445IndependentMomentRequired ≡ false
+routeSP2R445NoSecondMoment =
+  Full.routeSP2R445IndependentMomentRequiredIsFalse
