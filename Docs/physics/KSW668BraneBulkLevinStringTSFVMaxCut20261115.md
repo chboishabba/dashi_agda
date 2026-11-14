@@ -157,3 +157,32 @@ The original GW170817/GRB170817A same-source observation constrained gravitation
 | **D (exotic lab)** | Full SI stress/current/tensor field, pulse duration and control, measured gravitational residual, independent replication | original existing source apparatus obligations **OPEN** |
 
 **Acceptance policy:** independent source science retains original author credit; local finite tests and symbolic equations are not Agda kernel receipts, and a mathematically consistent source candidate is not experimental validation. CI ignored by user request.
+
+---
+
+## Addendum: original Z₂ Israel junction **local source-equation closure** — 2026-11-15
+
+The initial T8 roadmap marked the Israel source itself OPEN. That was correct before the following new calculation; this addendum supersedes that narrower status.
+
+New \`scripts/ksw668_caldwell_langlois_israel_exact.py\` symbolically computes the original AdS5 \(k=\mu=0,\ell=1\) bulk Christoffels, moving FRW embedding \(R_b(t)=t\), \(dT_b/dt=\sqrt{1+t^2}/t^2\), *inward* spacelike unit normal covector
+\[
+n_A=(1,-\sqrt{1+t^2}/t^2,0,0,0).
+\]
+Its source-intrinsic \(h_{ab}=\mathrm{diag}(-1,t^2,t^2,t^2)\) and extrinsic mixed tensor obey
+\[
+K^t_{\ t}=-\frac{1}{\sqrt{1+t^{-2}}},\qquad
+K^i_{\ j}=-\sqrt{1+t^{-2}}\,\delta^i_j.
+\]
+For the SAME brane worldline and SAME bulk metric, with \(\kappa_5^2=6,\sigma=1\),
+\(\rho(t)=\sqrt{1+t^{-2}}-1\),
+\(p=-\rho-\dot\rho/(3H)\),
+\(S_{tt}=\rho+\sigma\),
+\(S_{ij}=(p-\sigma)h_{ij}\), it checks the full exact classical \(Z_2\) Israel relation
+\[
+K_{ab}=-(\kappa_5^2/2)(S_{ab}-h_{ab}S/3)
+\]
+at **all 16 component positions**. Norm/orthogonality of the source normal, brane proper-clock normalization, positive matter density and \(\rho+p>0\) all PASS by symbolic identity. Locally executed in isolation; exact repository-head and Agda 2.9 replay NOT performed. No postulated "magic negative stress" is required for this original expanding-brane geometry.
+
+**Corrected B1 gate:** The original-paper *classical homogeneous/isotropic AdS5 bulk + FRW + Z2 Israel source equations* now have a concrete algebraic same-metric source solution. Full nonlinear global existence/gluing, normal/tangential perturbative stability, graviton localization/brane-to-brane Green function and physical detector coupling/measurement remain OPEN. This is not a quantum-corrected/string-theory exact spacetime or experimentally observed fifth-dimensional graviton.
+
+**Corrected T8 next mathematical primitive:** derive/source-check the actual retarded *tensor* Green function in the moving-brane AdS5 geometry with Israel-matched perturbation boundary conditions, then prove the brane-to-brane detector response is nonzero and its **front arrival** follows the source Eq19 geometry. A null geodesic alone does not guarantee that a physically generated or observable wave packet follows the path. Then test realistic \(\ell,\kappa_5\), graviton mode spectrum, tensor coupling scales, source emission lags and independent GW/EM timing.
