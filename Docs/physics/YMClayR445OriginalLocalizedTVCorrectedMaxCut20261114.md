@@ -113,3 +113,15 @@ Focused source Agda acceptance root:
 `DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda`
 
 The new `YMClayR445LocalizedTVInferenceNoGoExact.agda` has only native Nat arithmetic; **Agda 2.9 pinned kernel acceptance has not run**. Original R445/F19 imports still rely on legacy `RealAnalysisAxioms` and remain not `--safe`. No universal Clay terminal endpoint should be marked closed.
+
+
+## Additional A proof: original physical F19 all-cylinder normalization
+
+`DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda` is a new actual source theorem (introduced on #1503, accepted by original F19/P0/R445 import root) with two explicit declarations:
+
+1. `originalF19AllCoarseNumeratorsSamePhysicalSource`: for **every** coarse `F : Vec Link 64 → ℝ`, the original interacting 64-pair/896-spectator nested Wilson weighted numerator equals the product-Haar expectation of the **same** original full physical F19 effective density multiplied by `F`. Proof is a direct instantiation of the pre-existing `Fibre.selected64Pair896SpectatorWeightedDisintegration` with `Original.physicallySortedWilsonWeight` and the literal original pair/spectator packing.
+2. `originalF19AllCoarseNormalizedSamePhysicalSource`: applies `cong₂ divide` to that numerator theorem and `F19.originalFinePhysicalPartitionEqualsActualEffectivePartition`. The denominator is the **actual original canonical 1024-link Wilson partition** on the fine side and the **actual effective F19 density partition** on the coarse side; both are already proved equal in the original F19 source and separately physical-positive given the original strictly positive SU(N) Haar integration premise.
+
+**Precise status:** this pays the *F19-internal* A-level source normalized cylinder identity. It does **not** establish `originalF19R445SamePhysicalCoarseMap`: the selected R445 `SUNBlock.nativeSUNBlockLinks {m=1}{l=1}` must still be proved pointwise identical to the F19 sorted-64-pair block map after the original codec/reindex, and the actual R445 renormalized target must be constructed. No cutoff-uniform TV/physical RG estimate follows from this new theorem. Legacy `RealAnalysisAxioms` and Agda 2.9 exact-head kernel acceptance remain outstanding.
+
+The main logical no-go and correct conditional-mixture inequality above are unchanged.
