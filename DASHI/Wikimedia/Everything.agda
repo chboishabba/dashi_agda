@@ -186,5 +186,6 @@ import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact
 import DASHI.Wikimedia.IbrahimMultilingualHyperfabricWeldExact
 import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact
 import DASHI.Wikimedia.IbrahimGeneralFiniteCertificateKernelExact
+import DASHI.Wikimedia.IbrahimFinitePigeonholeProducerExact
 import DASHI.Wikimedia.IbrahimFiniteFigureBasinCertificateExact
 import DASHI.Wikimedia.IbrahimITIRConsumerRepairExact
