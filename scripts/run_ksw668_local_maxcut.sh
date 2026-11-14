@@ -7,6 +7,8 @@ if [ "$#" -gt 0 ]; then MODE="$1"; fi
 KSW_MOVEBANK_GPS_FILE="${KSW_MOVEBANK_GPS_FILE:-}"
 KSW_ENA_ORIGINAL_RECEIPT="${KSW_ENA_ORIGINAL_RECEIPT:-}"
 KSW_ENDF_N14_FILE="${KSW_ENDF_N14_FILE:-}"
+KSW_MMS4_FGM_MANIFEST="${KSW_MMS4_FGM_MANIFEST:-}"
+KSW_MMS4_BOUNDARY_JSON="${KSW_MMS4_BOUNDARY_JSON:-}"
 KSW_SITE_SPECTRUM_CSV="${KSW_SITE_SPECTRUM_CSV:-}"
 KSW_SITE_FLUX_SOURCE="${KSW_SITE_FLUX_SOURCE:-}"
 KSW_N14_TARGET_ATOMS="${KSW_N14_TARGET_ATOMS:-}"
@@ -64,6 +66,23 @@ fi
 run raw python3 scripts/ksw668_mms_sdc_direct.py \
   --cache data/mms_original_SDC_20170617 \
   --verify "$HOME/.cache/dashi-ksw668/mms_sdc_original_sha.json"
+
+if [ -z "$KSW_MMS4_FGM_MANIFEST" ] || [ ! -f "$KSW_MMS4_FGM_MANIFEST" ]; then
+  echo "BLOCKED: MMS1-4 original FGM burst files and ephemeris receipts absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_mms4_fgm_ephemeris_bridge.py \
+  --manifest "$KSW_MMS4_FGM_MANIFEST" \
+  --out Artifacts/ksw668/local-check/mms4_original_fgm_ephemeris.json
+
+if [ -z "$KSW_MMS4_BOUNDARY_JSON" ] || [ ! -f "$KSW_MMS4_BOUNDARY_JSON" ]; then
+  echo "BLOCKED: measured MMS1-4 synchronized calibrated E/B/J tetra source data absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_mms4_tetrahedron_boundary.py \
+  --input "$KSW_MMS4_BOUNDARY_JSON" \
+  --out Artifacts/ksw668/local-check/mms4_affine_boundary_source_model.json
+
 
 if [ -z "$KSW_MOVEBANK_GPS_FILE" ] || [ ! -f "$KSW_MOVEBANK_GPS_FILE" ]; then
   echo "BLOCKED: original Movebank GPS CSV/ZIP absent" >&2
