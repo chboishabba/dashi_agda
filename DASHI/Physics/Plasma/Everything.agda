@@ -92,3 +92,5 @@ import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact
 import DASHI.Physics.Plasma.KSW668RationalThreeModeSourceExact
 import DASHI.Physics.Plasma.KSW668RationalThreeModeOriginalRowsExact
+import DASHI.Physics.Plasma.KSW668SparseModeLookupNegationExact
+import DASHI.Physics.Plasma.KSW668SparsePairRealityExact
