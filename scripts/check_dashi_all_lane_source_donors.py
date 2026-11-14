@@ -112,6 +112,40 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
     assert "log(2n)" in lookup["BISHOP-ETA-EXP"]["missing"]
     assert "dyadic" in lookup["BISHOP-ETA-EXP"]["missing"]
     assert "uniform" in lookup["BISHOP-ETA-TAIL"]["missing"].lower()
+    # Original Bishop eta source is now co-located, and its dyadic scaling
+    # has a concrete TWO-LEAF proof reduction. Requiring these exact status
+    # flags prevents source-written implications becoming analytic results.
+    p2 = lookup["BISHOP-ETA-EXP"]["p2_dyadic_source_reduction"]
+    assert p2["pr"] == 1478
+    assert p2["pinned_pr_sha"] == head_index[
+        ("chboishabba/dashi_agda", 1478)]["sha"]
+    assert p2["owner"] == (
+        "DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda")
+    assert _safe_path(p2["owner"]) and p2["source_readback"] is True
+    assert p2["source_written"] is True
+    assert set(p2["declarations"]) == {
+        "originalDyadicNegativeSLogIsSum",
+        "originalEtaDyadicScaleFromLogAndExp",
+        "originalRound11EtaZetaFiniteFromTwoLaws",
+    }
+    for flag in ("agda29_kernel_accepted",
+                 "original_log_dyadic_law_inhabited",
+                 "original_native_complex_exp_add_inhabited",
+                 "unconditional_original_dyadic_proved",
+                 "compact_uniform_eta_convergence_proved",
+                 "terminal_gate_closed"):
+        assert p2[flag] is False, ("unauthorized eta proof promotion", flag)
+    if verify_local_objects:
+        ref = p2["pinned_pr_sha"] + ":" + p2["owner"]
+        got = subprocess.run(
+            ["git", "-C", str(root), "show", ref],
+            capture_output=True, text=True, check=False)
+        if got.returncode:
+            raise SourceAuditError("missing eta dyadic source " + ref)
+        for name in p2["declarations"]:
+            if not re.search(rf"(?<![\\w']){re.escape(name)}(?![\\w'])",
+                             got.stdout):
+                raise SourceAuditError("missing eta source theorem " + name)
     assert lookup["BISHOP-ETA-TAIL"]["terminal_gate_closed"] is False
     # Original source P1.L is credited without converting the still
     # uninhabited R4 square-root calculus into a theorem.
