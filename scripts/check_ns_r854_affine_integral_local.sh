@@ -4,6 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 python3 scripts/check_ns_r854_original_affine_integrated_rate_exact.py
 python3 scripts/check_ns_r823_shear_negative_control_20261114.py
+python3 scripts/check_ns_r853_quadratic_lie_derivative_20261114.py
 target=DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda
 test -f "$target" || { echo "BLOCKED: missing $target" >&2; exit 11; }
 if grep -nE '^[[:space:]]*postulate([[:space:]]|$)|\{!|!\}|TERMINATING|NO_TERMINATION_CHECK|--no-termination-check|allow-unsolved-metas' "$target"; then
