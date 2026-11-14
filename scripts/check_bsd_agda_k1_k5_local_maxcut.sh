@@ -78,3 +78,12 @@ if [[ "${BSD_K4_NUMERIC_ASSAYS:-0}" == 1 ]]; then
   python3 scripts/check_bsd_level32_mellin_fricke.py --dps 65 --terms 110
   echo 'Numeric K4 assays passed; these are NOT Agda proof certificates.'
 fi
+
+
+# Optional exact-rational K4 positivity and Cauchy-tail regressions.
+# These do not require mpmath and MUST NOT be counted as Agda acceptance.
+if [[ "${BSD_K4_EXACT_TAIL_ASSAYS:-0}" == 1 ]]; then
+  python3 scripts/check_bsd_level32_positive_tail.py --n 10
+  python3 scripts/test_bsd_level32_positive_tail.py
+  echo 'Exact rational K4 tail assays passed; Bishop eta, Mellin and Agda kernel remain separate.'
+fi
