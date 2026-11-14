@@ -1,4 +1,4 @@
-# Six-frontier original-source maximum cut — implementation round 9
+# Six-frontier original-source maximum cut — implementation rounds 9–10
 **Date:** 14 November 2026
 **Owner:** Agda Clay PR #1499 and Lean Clay PR #108 (both source rollups); historical owner branches are donors only.
 **Trust:** every linked source-written Agda/Lean candidate is **NOT**
@@ -70,7 +70,7 @@ finite TV obstruction, covariance compiler, conditional mixture
 inference; new exterior influence bound script
 `scripts/check_ym_r445_weighted_exterior_influence.py`.
 
-**Round 9:** `check_ym_r445_interacting_transfer_contraction_20261114.py`
+**Round 9 source:** `check_ym_r445_interacting_transfer_contraction_20261114.py`
 uses the genuinely correlated two-state transfer matrix
 `[[3/4,1/4],[1/4,3/4]]`. It computes
 `D_k=(1/2)^k` at 41 exact rational distances and the summable
