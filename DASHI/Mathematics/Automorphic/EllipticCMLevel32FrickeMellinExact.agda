@@ -80,36 +80,11 @@ mellinCentralLowerEqualsUpper :
   Mellin.reflectParameter data central ≡ central →
   Mellin.lowerPiece data central
     ≡ Mellin.upperPiece data central
-mellinCentralLowerEqualsUpper data central eps reflection =
+mellinCentralLowerEqualsUpper data central eps fixed
+  rewrite eps | fixed =
   trans
     (Mellin.lowerSubstitution data central)
-    (trans
-      epsilonOne
-      (sym (MellinUpperIdentity data central)))
-  where
-    epsilonOne :
-      Mellin.epsilon data
-        * Mellin.upperPiece data (Mellin.reflectParameter data central)
-      ≡ Mellin.upperPiece data (Mellin.reflectParameter data central)
-    epsilonOne rewrite eps =
-      solve (Mellin.upperPiece data
-        (Mellin.reflectParameter data central) ∷ [])
-
-    congMultiply :
-      Mellin.epsilon data
-        * Mellin.upperPiece data (Mellin.reflectParameter data central)
-      ≡ Mellin.upperPiece data (Mellin.reflectParameter data central) →
-      Mellin.epsilon data
-        * Mellin.upperPiece data (Mellin.reflectParameter data central)
-      ≡ Mellin.upperPiece data (Mellin.reflectParameter data central)
-    congMultiply proof = proof
-
-    MellinUpperIdentity :
-      (d : Mellin.MellinSplitData) →
-      (s : Mellin.Parameter d) →
-      Mellin.upperPiece d s
-        ≡ Mellin.upperPiece d (Mellin.reflectParameter d s)
-    MellinUpperIdentity d s rewrite reflection = refl
+    (solve (Mellin.upperPiece data central ∷ []))
 
 mellinCentralValueIsTwiceTail :
   (data : Mellin.MellinSplitData) →
