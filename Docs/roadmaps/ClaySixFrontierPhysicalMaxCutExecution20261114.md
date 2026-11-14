@@ -356,3 +356,50 @@ are now colocated on the **same Clay rollup #1499**; OpenAI's older
 from the new Yang--Mills submission (Lean 4.32.0). Local Lean world-builder
 #1495 uses Lean 4.28.0; source-only manifest cannot be promoted to an
 accepted DAG or a native kernel proof. Source identity before proof identity.
+
+
+## 14 November 2026: all-208 OpenAI math corpus crosswalk reconciled with Golden and Lean
+
+Authoritative scope **`openai/math` ≠ OpenAI October YM**. Original Lean ingestion
+[#78](https://github.com/chboishabba/dashi_lean4/pull/78) had already collected
+the full later **721 manuscripts / 373 families / 208 source-qualified Lean
+declaration references (192 comparator configurations)**. Older immutable vendor
+`1581d4cb...` contains **719/372/200/189** respectively. The later indexed
+revision `7ef5c0cc...` adds **eight**: CM-Hodge (1), six Fourier
+LocalSmoothing, SubexponentialSAT (1). These are distinct source versions.
+
+The historical complete candidate scan provided **101/208 lexical candidate**
+leads, **107/208 none**, across 22,761 Agda and 4,661 Lean source paths;
+the Lean search tree was **truncated**, so this is not exhaustive owner
+identification. **Six** genuine source-read comparisons, all with **zero**
+verified same-object transport and **zero** DASHI kernel ports, identify
+critical negative controls for SAT machine, Max-Cut hardness vs fixed
+checkerboard, 7/8 zero-free vs RH, CM-Hodge subclass, classical
+Vlasov-Maxwell vs YM, Fourier circuit vs PDE Fourier analysis.
+
+**Executed source co-location:** exact original Git blob copies of all
+five indexed machine registries from Lean #78 are now on this same
+Golden #1499 under `Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114/`.
+`DASHI.Research.OpenAIMath.OpenAIMathCrosswalkReview20261114` records
+the six reviewed source relationships and fail-closed trust statuses.
+`scripts/check_openai_math_full_crosswalk_20261114.py` checks donor
+byte hashes, joins 208 exact rows with 208 candidate rows and six reviews,
+and optionally verifies both source YAML snapshots and the eight-entry
+historical source delta. The independent JS connector readback checked
+208/208 row identity, 373/373 family membership, 721 manuscript references
+and 6/6 reviewed source declaration associations; **Python script execution,
+Agda 2.9 checking and Lean 4.28 checking remain unperformed**.
+
+The single Lean Clay rollup **#108** now imports the *original exact-blob*
+Lean #78 `FullUpstreamMainResultsCatalogue.lean` and `UpstreamPin.lean`,
+and exposes `Integration.OpenAIMath.ClayCrosswalkSourceIndex20261114`.
+Lean rollup commit `5454c5d60e17ac6beb651caa57e6e984ed48de74`.
+The new source-index theorem checks a **List length**, not 208 mathematics
+theorem proofs. No automatic upgrade from Lean 4.34.1 to DASHI Lean 4.28.
+
+For full A/B/C/D cross-corpus roadmap and precise reviewed comparisons:
+`Docs/roadmaps/OpenAIMathCorpusCrosswalk20261114.md`. Highest value
+semantic next cuts: OAI378 original real SAT machine; OAI optimal Max-Cut
+vs original Karp graph/cost; OAI CM-Hodge actual cycle maps; OAI quasi-RH
+correct zero-carrier; and separate OAI YM E1 Wilson original-source weld.
+No RH/BSD/Hodge/P≠NP/NS/YM Clay endpoint is promoted by importing metadata.
