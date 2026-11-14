@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-14. **Golden authority:** DASHI/Agda. **Production:** SLR Rust/PostgreSQL. **MCP / external graph routing:** ITIR-suite / Zelph. **Historical reference:** SensibLaw Python. **External NORA authorship:** Éder Porto. **No new parallel index, review store, scheduler or proof system.**
 
-**Source state:** This is an exact-lemma/phase roadmap grounded in existing Agda declarations and a user-supplied local HF execution report. It is **not** an Agda kernel proof of new original theorems, not a re-execution of the raw HF receipt, and not SLR PostgreSQL acceptance.
+**Source state:** A1–A6 conditional proof code is now committed on PR #1506, but has **not** been kernel-checked in this environment. The physical HF receipts remain operator-reported rather than independently rehashed; SLR PostgreSQL acceptance is still open. See the implementation delta at the end.
 
 ## 0. Executive max-cut
 
@@ -39,7 +39,7 @@
 
 ## 2. Exact new mathematical lemmas (not generic welds)
 
-These are **proposed exact declaration names** and specifications, NOT existing proved declarations. The file owner for new proof code should be DASHI on the existing NORA/ontology Agda rollup PR #1506; reuse all modules in §1. **Novelty discipline:** the abstract prefix-ultrametric law, fibrewise constancy criterion for factorisation, and conditional compatible-gluing principle are already known mathematics and in several cases already proved in the repository. The genuinely new *work here* is establishing the **concrete Zelph published-byte partition, complete-for-query physical projection, actual overlapping source/revision correspondence, and executable refinement witnesses**. A3/A4/A6 should reuse and instantiate existing theorems where the hypotheses are available, not be advertised as entirely new foundational theorems.
+These were **proposed original physical-instantiation goals**. Conditional A1–A6 declaration source has now been added on PR #1506; kernel replay and concrete physical premise discharge are still OPEN. The file owner for new proof code should be DASHI on the existing NORA/ontology Agda rollup PR #1506; reuse all modules in §1. **Novelty discipline:** the abstract prefix-ultrametric law, fibrewise constancy criterion for factorisation, and conditional compatible-gluing principle are already known mathematics and in several cases already proved in the repository. The genuinely new *work here* is establishing the **concrete Zelph published-byte partition, complete-for-query physical projection, actual overlapping source/revision correspondence, and executable refinement witnesses**. A3/A4/A6 should reuse and instantiate existing theorems where the hypotheses are available, not be advertised as entirely new foundational theorems.
 
 ### A — New same-object proof obligations: distinguish true new content from existing theorem instantiation
 
@@ -121,3 +121,41 @@ These are **proposed exact declaration names** and specifications, NOT existing 
 - Agda modules and repo-local mathematical adapters: their respective repository contributors; relevant sheaf-hypergraph conceptual donor: Duta, Cassarà, Silvestri and Liò (arXiv:2309.17116). Trie/prefix and ultrametric background is not claimed as invented by this project.
 - Original external compiler/Lean claims in pruned preservation: RequestProject/Aristotle donor, not newly established by a transport result.
 - Numerical source identity and route receipt values above: **operator report**, not independently reverified raw bytes in this execution.
+
+
+## 2026-11-14 implementation tranche — committed source, NOT runtime acceptance
+
+This section supersedes older statements above that A1–A6 have only proposed names. On the **existing [DASHI PR #1506](https://github.com/chboishabba/dashi_agda/pull/1506)**, `DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda` is now source-written. It imports the existing query-factorisation, prefix-ultrametric, indexed-fabric, typed-hyperfabric and Zelph coverage owners. It does **not** reimplement a generic trie/sheaf and it makes **no claim of physical HF verification or Agda kernel acceptance**. The proof source needs exact-head pinned local Agda replay; this environment has no Agda executable.
+
+### Exact A-gate declaration-to-deliverable ledger
+
+| Gate | New code/theorem declaration | What is shown conditionally | Remaining physical or kernel discharge |
+|---|---|---|---|
+| A1 | `NameShardPartition`, `zelphPhysicalNameShardPartitionExact` | Key coverage + uniqueness from an explicitly provided partition witness | Exhaustively enumerate real `nodeOfName` manifest keys, bytes, duplicate-name fibres, and bind the verified source graph revision. Singletons cannot be fabricated for collisions. |
+| A2 | `QueryFamilyClosure`, `zelphBoundedShardQueryFamilyCompleteness`, `nameOnlyCannotCertifyAdjacency` | Edge-closure premise factors the full answer through the selected view; finite name-only collision refutes unguarded adequacy | Real `left/right/nameOfNode` decode, original-graph answer evaluation and family-specific closure over selected physical objects |
+| A3 | `CompatibleShardSections`, `zelphHyperformalShardGluingSound`, `conflictingOverlapsCannotGlue` | Typed global section from compatible stalk restrictions; conflicting local overlap cannot glue | Overlap/source/qualifier/revision equality on actual objects, checked extractor |
+| A4 | `FibreConstant`, `zelphPrefixQuotientQueryAdequacyIffForward`, `...Backward`, `nameOnlyIsNotAdequateForEdgeQuery` | Fibre constancy is necessary; sufficient where an explicit image-representative is supplied | Physically verified prefix/range projection and representative; do not equate Cap'n Proto interval with ternary ball by fiat |
+| A5 | `RevisionFibreTransport`, `zelphRevisionRefinementTransportCoherent` | Stable semantic fibres transport **given** a source/revision correspondence | Actual old/new graph identity, dependency-scoped stable-fibre map and re-open receipts; node IDs do not transport by default |
+| A6 | `ScopedNegativeCertificate`, `zelphQueryScopedNegativeCompletenessIff`, `uninspectedCannotGiveNegative` | Bidirectional scoped negative equivalence when preservation + reflection certificates exist; without a certificate abstain | Declared closed-world source scope, complete decoder, exact family partition and no missing source dependencies |
+
+**Proof labels:** `source-written` ≠ `kernel-checked` ≠ `physical premise discharged`. The A1/A2/A3/A5/A6 records deliberately demand inputs; populating them with a string receipt does not independently authenticate the underlying bytes. A4 requires a representative law, not just a proposed address mapping.
+
+### Cross-repository implementation heads (one existing PR per repo)
+
+| Owner | Source-added deliverable | Test entry point | What is still not claimed |
+|---|---|---|---|
+| [DASHI #1506](https://github.com/chboishabba/dashi_agda/pull/1506) | `DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda` A1–A6 conditional lemmas and counterexamples | Pinned local Agda on this import root | Kernel/byte premise acceptance |
+| [ITIR #14](https://github.com/chboishabba/ITIR-suite/pull/14) | `itir-mcp/src/itir_mcp/zelph_query_closure.py`: raw object SHA-256+length checks, complete-for-declared-object enumeration, collision buckets, revision-checked dependency coverage | `PYTHONPATH=itir-mcp/src python -m pytest -q itir-mcp/tests/test_zelph_query_closure.py` | Completeness of the manifest's *source graph* universe or correctness of caller-supplied Cap'n Proto decoder |
+| [SLR #10](https://github.com/chboishabba/slr/pull/10) | `crates/sl-source-handoff/src/zelph_graph_native_join.rs`: pinned graph/native candidate join, explicit correspondence, source/qualifier/ref retention, non-promotion | `cargo test -p sensiblaw-source-handoff` | Native GUID provenance inspection, S29 persisted storage or source evidence payment |
+| [SensibLaw #514](https://github.com/chboishabba/SensibLaw/pull/514) | `plan_nora_zelph_scoped_review`: read-only NORA source/QID/revision/collision/closure join and digest-labelled plan | `python -m pytest -q tests/test_wikidata_nora_review_handoff.py` | True NORA export parser or external edits |
+
+### End-to-end gate order and exact acceptance artefacts
+
+1. **P0 / B1+B3+C1:** check in or otherwise make independently accessible the *raw* full manifest, request, scanned `nodeOfName` object bytes/digests, route JSON, matching packager receipt, producer source commit and immutable dataset SHA. Re-hash raw bytes, never source fields copied from the caller; prove no network work was confused with packager-only `network_performed=false`.
+2. **P1 / A1+B2:** run `audit_declared_name_partition` with a pinned, trusted Cap'n Proto decoder and every declared name object. Verify that its *declared-object* coverage matches the actual complete manifest/graph name section before claiming A1; perform duplicate-QID, byte-tampering and missing-object negative controls.
+3. **P2 / A2+A3+A4+A6:** bind the exact intended query family, collect the dependency/adjacency neighbourhood, and prove actual source→selected answer equality, overlap compatibility and scoped negatives. ITIR's `evaluate_query_closure` deliberately returns `original_graph_edge_closure_proved=false` even if a caller's listed dependencies were inspected. The stronger witness is still required.
+4. **P3 / A5+B4+C2:** decode selected graph relations and record unique physical GETs, bytes, cache/coalescing, concurrency ≤5 and no fallback masquerading as direct fetch; compare same-object v2 against any v3 only with measurements; construct old/new dependency-reopening receipts.
+5. **P4 / B5+B6+C3+C4:** connect to original native Wikidata QID+statement GUID+mainsnak+rank+qualifiers+P854+temporal evidence, verify source-correspondence, persist/restart/read S29 and selectively reopen, and replay pinned Agda + Rust/Python checks. A name/graph receipt is not source support.
+6. **P5 / C5+C6:** consume a real **Éder Porto NORA** export with preserved review/attribution and independently authorised actions; enumerate full *current* Nat population with a lossless `(QID, GUID)` cursor and exhaustion receipt, independent of historical 57,989 and five-QID calibration.
+
+**Release criterion:** P0–P5 are accepted only when the exact data SHA, named source file/lemma, successful local test/kernel receipt, source-provenance chain, and negative controls are committed or linked per gate. Until then the end-to-end status remains **OPEN**; this tranche advances source-level implementation, not original-graph completeness.
