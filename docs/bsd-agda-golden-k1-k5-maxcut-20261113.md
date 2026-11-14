@@ -325,3 +325,72 @@ NEW `EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda`:
 
 **No source-written module has been promoted to kernel-accepted;
 there is no claimed solution of the universal BSD conjecture.**
+
+
+## 2026-11-14 K4 MAIN PATH SUPERSEDED by level-32 genus-one/Fricke route
+
+A direct original-E CM η route has now been source-written on this branch.
+See `docs/bsd-k4-cm-eta-mellin-20261114.md` for the full exact proof DAG,
+file attribution, direct independent arithmetic assays, and separate K3 Stoll
+integration. The original older "all-prime/all-n coefficients first" K4 gate
+is now a **USEFUL ALTERNATIVE**, NOT THE SHORTEST IDENTIFICATION.
+
+New Agda owners:
+- `EllipticCMJacobiThetaCheckedRowsExact.agda`: explicit finite
+  Gaussian-Jacobi θ coefficient (odd squared+4 times square), original 7
+  Frobenius rows and original Hecke a₉.
+- `EllipticCMLevel32EtaNewmanArithmeticExact.agda`: exact
+  η(4τ)²η(8τ)² weight 2, level 32 η quotient arithmetic and q^1
+  normalization.
+- `EllipticCMLevel32LigozatCuspArithmeticExact.agda`: actual gcd
+  arithmetic for d=1,2,4,8,16,32, all cusp orders 1.
+- `EllipticCMLevel32GenusOneArithmeticExact.agda`: index 48,
+  eight cusps, g(X0(32))=1 arithmetic. The genuine modular curve
+  genus formula and dim S2 = genus have not yet been imported.
+- `EllipticCMLevel32FrickeMellinExact.agda`: algebra from actual
+  squared η inversion to Fricke factor 32t² and central
+  MellinSplitData epsilon+1 reflection to twice the upper piece.
+
+Direct, independent NON-KERNEL assays:
+- `scripts/check_bsd_level32_cm_eta_theta_exact.py`:
+  257/257 q coefficients matched through q^256, 53/53 odd-prime
+  original E(Fp) point counts matched, and 7/7 original source rows.
+- `scripts/check_bsd_level32_mellin_fricke.py`:
+  numerically verifies Fricke at selected positive t and
+  `4*pi*integral_(1/sqrt(32))^infinity eta(4it)^2eta(8it)^2 dt`
+  ≈0.65551438857302995261620989747..., the ORIGINAL curve L(E,1).
+  This numeric result is external evidence, NOT Agda/Bishop acceptance.
+
+Mathematical SHORTER K4 cut:
+ (1) Actual Bishop Dedekind η analytic carrier and full q product;
+ (2) Newman/Ligozat analytic theorem supplied to the above
+     finite arithmetic, yielding a genuine normalized cusp form;
+ (3) actual genus/dimension theorem and modularity of ORIGINAL
+     E give equality in the ONE-dimensional level-32 form space;
+ (4) actual η inversion, cusp bounds, positivity and
+     Mellin integral give L(E,1)>0.
+The exact Γ(1/4)²/(2^(7/2)Γ(1/2)) special-value formula
+is NOT required for nonvanishing, but remains available
+for full BSD coefficient normalization.
+
+Cross-lane donor audit:
+- The in-repo Wikimedia "Dedekind" modules are source-attribution
+  and finite-product/proof-debt routers, NOT proved Agda analytic
+  Dedekind η functions. Lean mathlib v4.28 DOES supply a genuine
+  analytic eta and nonzero theorem, but transport across kernels
+  is still a separate proof task.
+- In-repo MellinSplitFunctionalEquationExact proves algebra
+  from supplied substitutions, NOT an original eta/Bishop
+  integral or analytical continuation.
+- Lean Synthesis/MillenniumBSDMathlibLFunctionWeld.lean already
+  supplies ORIGINAL all-n cmAllNCoefficient and cmLSeries,
+  not just finite Hecke rows. Reuse it as a donor.
+- Michael Stoll's original finite-generation theorem on
+  IsAddFG W.Point, via the original rationalProjectivePoint
+  AddEquiv and isolated Lean 4.35.0 donor replay, remains
+  K3's shortest route; yet unverified and version-incompatible
+  with the root Lean 4.35rc3/mathlib 4.28.
+
+K1 Q2/real image, K2 classical Sha[2] LES, K3 source-realized
+rank, K5 odd-primary Sha/full formula and universal BSD
+remain OPEN. No K1–K5 terminal gate or kernel status promotion.
