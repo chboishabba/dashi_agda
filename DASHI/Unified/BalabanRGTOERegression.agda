@@ -27,6 +27,23 @@ open import DASHI.Physics.YangMills.CompactLieProofLevel
 import DASHI.Physics.YangMills.YMClayLiteralWilsonP2NativeMeasureExact as NativeP2
 import DASHI.Physics.YangMills.YMClayLiteralWilsonS2SameAlgebraBoundExact as P2Trace
 import DASHI.Physics.YangMills.YMClayDirectSourceOSMassGapFrontierExact as RouteS
+-- 6 November 2026: new ORIGINAL native-bond structural sort and Wilson C3
+-- composition are import-tested by the canonical TOE regression root.
+-- SOURCE ONLY; importing does not constitute a kernel receipt.
+import DASHI.Physics.YangMills.YMClayNativeOriginalSortMembershipCorrectExact as YMNativeSortCorrect
+import DASHI.Physics.YangMills.YMClayNativeOriginalSortDeciderExact as YMNativeSortDecider
+import DASHI.Physics.YangMills.YMClayNativeClosedThreeEqualitiesCandidateExact as YMNativeClosedThree
+-- Quantitative physical-cube conditional-Gibbs Dobrushin; source proof is conditional.
+import DASHI.Physics.YangMills.YMClayPhysicalCubeDobrushinFromGibbsExact as YMPhysicalCubeDobrushin
+import DASHI.Physics.YangMills.YMClayPhysicalRGDriftToUniformInfluenceExact as YMPhysicalRGDrift
+import DASHI.Physics.YangMills.YMClayRGDriftOriginalGibbsInstantiationExact as YMActualGibbsRGDrift
+import DASHI.Physics.YangMills.YMClayRGLossBudgetToNonGaussianExact as YMActualRGNonGaussian
+-- Reuse literal CMP119/CMP122/CMP116 typed owners into original R342/R467/R482, no substitute source.
+import DASHI.Physics.YangMills.YMClayCMP119122116SelectedProducerWeldExact as YMSameLiteral119122116
+-- Original changing-cutoff Wilson finite two-marked jet (not CMP116 analytic J yet).
+import DASHI.Physics.YangMills.YMClayOriginalWilsonFiniteTwoSourceJetExact as YMOriginalWilsonTwoSourceJet
+import DASHI.Physics.YangMills.YMClayOriginalWilsonR445R320TwoSourceSameFamilyExact as YMOriginalBlockedTwoSource
+import DASHI.Physics.YangMills.YMClaySUNNativeSixPlaneFullC3FromInverseTraceExact as YMNativeSixC3Full
 
 import DASHI.Physics.YangMills.Balaban1989BetaDrivenCompleteDensityFlowExact as Density
 import DASHI.Physics.YangMills.Balaban1989BetaHistoryToCanonicalCompleteDensityExact as CanonicalDensity
@@ -773,3 +790,721 @@ balabanRouteSP2R445IndependentMomentRequiredIsFalse =
 balabanRouteSP2R445NativeCompilerLevel : ProofLevel
 balabanRouteSP2R445NativeCompilerLevel =
   NativeP2.p2CanonicalMarkedSourceCompilerLevel
+
+
+------------------------------------------------------------------------
+-- Voyager 2026 video: use the canonical Route-S/P2 theorem owners and
+-- a separate flat Euclidean R4 classical Hodge-basis donor. No Clay,
+-- stochastic equilibrium or Donaldson-moduli promotion follows.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.YMClayVoyager2026CoverageExact as VoyagerCoverage
+import DASHI.Physics.YangMills.YMClayVoyagerR4HodgeBasisExact as VoyagerHodge
+
+voyager2026ChapterReceipts : List VoyagerCoverage.ChapterReceipt
+voyager2026ChapterReceipts = VoyagerCoverage.chapterReceipts
+
+voyager2026CurrentRouteSNotClay : RouteS.clayPromotion ≡ false
+voyager2026CurrentRouteSNotClay = VoyagerCoverage.routeSStillNotClay
+
+voyager2026EuclideanHodgeSquare :
+  ∀ b → VoyagerHodge.euclideanHodgeStar
+      (VoyagerHodge.euclideanHodgeStar b) ≡ b
+voyager2026EuclideanHodgeSquare =
+  VoyagerHodge.hodgeSquareOnSignedBasis
+
+
+------------------------------------------------------------------------
+-- 1 Nov cross-domain source-forced symmetry / dimension fork.
+-- Genuine existing C3 CMP119 source owner is cited in the audit, and
+-- not replaced by the new signed-axis finite C3/quarter-turn theorem.
+------------------------------------------------------------------------
+
+import DASHI.Physics.YangMills.YMClayVoyagerImaginaryC3DimensionBidiExact as Imaginary
+import DASHI.Physics.YangMills.YMClayVoyagerDimensionSignatureForkExact as Dim
+
+voyagerImaginaryQuarterSquared :
+  ∀ axis →
+  Imaginary.quarterTurn (Imaginary.quarterTurn axis)
+  ≡ Imaginary.axisNegation axis
+voyagerImaginaryQuarterSquared =
+  Imaginary.quarterTurnSquaredIsNegation
+
+voyagerC3CannotIntertwineWithFourCycle :
+  (f : Imaginary.TritPosition → Imaginary.SignedAxis2) →
+  ((t : Imaginary.TritPosition) →
+    f (Imaginary.rotateC3 t) ≡ Imaginary.quarterTurn (f t)) → ⊥
+voyagerC3CannotIntertwineWithFourCycle =
+  Imaginary.noC3ToQuarterTurnIntertwiner
+
+voyagerPureYMFourMarginal :
+  Dim.ymTwiceCouplingDimension Dim.four ≡ Dim.zero
+voyagerPureYMFourMarginal =
+  Dim.fourDimensionalMarginal
+
+voyagerCreutzFiveNotKKFive :
+  Dim.creutzFiveEuclideanLattice ≡ Dim.kkFourLorentzPlusCircle → ⊥
+voyagerCreutzFiveNotKKFive = Dim.creutzIsNotKK
+
+------------------------------------------------------------------------
+-- Gauge- and observable-preserving selected Wilson blocking: strictly
+-- conditional; the physical CMP119/R445 selection supplies the squares.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayVoyagerCovariantWilsonCoarseFineBidiExact as WilsonBlock
+
+voyagerSelectedBlockRetainsFineWilsonGaugeInvariant :
+  ∀ {Fine Coarse Gauge Scalar}
+    (selected : WilsonBlock.SelectedWilsonCoarseFine
+      Fine Coarse Gauge Scalar)
+    gauge fine →
+  WilsonBlock.wilsonFine selected
+    (WilsonBlock.gaugeOnFine selected gauge fine)
+  ≡ WilsonBlock.wilsonFine selected fine
+voyagerSelectedBlockRetainsFineWilsonGaugeInvariant =
+  WilsonBlock.selectedFineWilsonGaugeInvariant
+
+
+------------------------------------------------------------------------
+-- 2026-11-01 actual selected finite side-four Wilson-C3 seam.
+-- The same rational SU2 n=3 periodic bond carrier is now explicit.
+-- These are proofs written on the physical finite lattice source, not
+-- a new 369 analogy, not an infinite-volume measure/Clay promotion.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClaySide4SpatialC3WilsonNaturalityExact as Side4C3
+import DASHI.Physics.YangMills.YMClaySide4RationalSU2C3WilsonTraceExact as RationalC3
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4C3CarrierWeldExact as NativeC3Weld
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2Side4PathSameObjectExact as NativePath
+
+open Side4C3 public using
+  (spatialC3ShiftForward; holonomyC3Naturality; wilsonC3Naturality)
+open RationalC3 public using
+  (rationalSU2Group; rationalTraceCyclic
+  ; rationalTraceConjugationInvariant
+  ; rationalSU2Side4WilsonC3GaugeInvariant)
+open NativeC3Weld public using
+  (nativeSiteIsSide4; nativePositiveBondIsSide4
+  ; graphFieldFromActualNativeRationalSU2
+  ; graphRoundTrip
+  ; nativeRationalSU2Side4C3Wilson
+  ; nativeRationalSU2Side4C3GaugeWilson
+  ; nativeGraphC3Square)
+open NativePath public using
+  (side4CyclicSuccessorIsHodge
+  ; nativePositiveStepEqualsHodge
+  ; nativeGraphHolonomyEqualsExistingPathHolonomy
+  ; nativeGraphWilsonEqualsExistingPathWilson)
+
+
+------------------------------------------------------------------------
+-- Native signed (positive and inverse) Wilson source and 16 ordered
+-- plaquette sum, physical side-four C3.  The latter is not yet canonical
+-- six-unordered-plaquette Gibbs/Haar finite action.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2AllSignedC3WilsonExact as AllSignedC3
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2OrderedPlaquetteC3ActionExact as OrderedC3
+
+open AllSignedC3 public using
+  (c3SignedDirection; c3NativeData; c3SignedStepNaturality
+  ; c3NativeSignedPathHolonomy; c3NativeSignedWilson)
+open OrderedC3 public using
+  (orientedOrderedPlaquetteWord; c3PlaquetteWord
+  ; orderedWilsonPlaquetteC3; sumIndexC3
+  ; sumSitesSpatialC3; orderedWilsonActionSpatialC3Invariant)
+
+
+------------------------------------------------------------------------
+-- Source six positive coordinate planes (not sixteen ordered pairs):
+-- native SU2 plaquette holonomy is exactly the older signed-word Wilson.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2SixPlaneSameSourceExact as SixSource
+
+open SixSource public using
+  (nativeSixPlaneBoundaryIsOrdered
+  ; nativeSixPlaneHolonomyIsOrdered
+  ; nativeSixPlaneTraceIsOrdered
+  ; sixPlanePhysicalTraceAction
+  ; nativeSixPlaneTraceSumEqualsOrderedSixSubfamily)
+
+
+------------------------------------------------------------------------
+-- Universal native SU2 group inverse / real Wilson orientation reversal
+-- on the exact norm-one quaternion link carrier; selected lattice inverse-
+-- edge endpoint identification remains a separate source theorem.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeRationalSU2FourFactorReversalExact as NativeReverse
+
+open NativeReverse public using
+  (forwardPlaquetteFour; reversePlaquetteFour
+  ; inverseFourIsReversedPlaquette
+  ; realTraceInverse; forwardReverseFourTraceSame)
+
+
+------------------------------------------------------------------------
+-- November source-complete six ORIGINAL positive plaquettes and native
+-- R443/R445 SAME-config Set-universe weld. These are source-written
+-- algebraic implications: no product Haar, R445 tail or gap constructed.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3SourceReductionExact as SixCut
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneC3ActualPhysicalSourceExact as SixActual
+import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneHaarNumeratorExact as R443Six
+import DASHI.Physics.YangMills.YMClayR445NativeSU2R443SameObjectExact as R445Weld
+import DASHI.Physics.YangMills.YMClayR443NativeSixPlaneC3SequenceLimitExact as R443Limit
+import DASHI.Physics.YangMills.YMClayR443BondMarginalC3Exact as R443BondMarginal
+import DASHI.Physics.YangMills.YMClayR445NativeSixDeficitUniformFiniteBoundExact as R445FiniteBound
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSignedWilsonExact as SUNSigned
+import DASHI.Physics.YangMills.YMClaySUNMatrixWilsonTraceGaugeExact as SUNGauge
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGibbsDensityExact as SUNGibbs
+import DASHI.Physics.YangMills.YMClaySUNMatrixSixPlaneGaugeInvariantExact as SUNGaugeAction
+import DASHI.Physics.YangMills.YMClayNativeSixPlaquetteSUNWilsonActionWeldExact as SUNCanonicalWilsonWeld
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGibbsGaugeExact as SUNVariable
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicProductHaarExact as SUNVariableHaar
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicGaugeHaarExact as SUNVariableGaugeHaar
+import DASHI.Physics.YangMills.YMClayNativePositiveBondEnumerationVectorExact as SUNBondCodec
+import DASHI.Physics.YangMills.YMClaySUNConstructedPeriodicGaugeCodecExact as SUNConstructedGauge
+import DASHI.Physics.YangMills.YMClayNativeFiniteGaugeVectorNaturalitySafeExact as SUNFiniteSafe
+import DASHI.Physics.YangMills.YMClayFiniteNativeBondReindexingSafeExact as SUNFiniteReindex
+import DASHI.Physics.YangMills.YMClayNativeSideFourC3VectorWeldExact as SUNNativeC3Vec
+import DASHI.Physics.YangMills.YMClaySUNConstructedNativeC3SetoidHaarExact as SUNNativeC3Haar
+import DASHI.Physics.YangMills.YMClayNativeC3SingleVectorPermutationCertificateExact as SUNOneVectorC3
+import DASHI.Physics.YangMills.YMClayNativeCyclicFinIsoSafeExact as SUNNativeFinIso
+import DASHI.Physics.YangMills.YMClayNativeBlockedPeriodicBondWeldExact as SUNNativeBlockWeld
+import DASHI.Physics.YangMills.YMClayNativeBlockedPositiveHolonomyGaugeExact as SUNNativeBlockHolonomy
+import DASHI.Physics.YangMills.YMClayNativeAllScaleBlockedCoarseGaugeLiftExact as SUNAllScaleGaugeLift
+import DASHI.Physics.YangMills.YMClayFiniteRGExistingPushPullReopeningWeldExact as SUNFinitePushPull
+import DASHI.Physics.YangMills.YMClaySUNHaarDisjointPairBlockingExact as SUNHaarPairBlocking
+import DASHI.Physics.YangMills.YMClaySUNWeightedHaarPairFibreDisintegrationExact as SUNWeightedPairFibre
+import DASHI.Physics.YangMills.YMClaySUNWeightedDisjointPairFibreReparamExact as SUNWeightedAllPairFibre
+import DASHI.Physics.YangMills.YMClayFiniteNativeAdjacentWordInverseExact as SUNOriginalAdjacentInverse
+import DASHI.Physics.YangMills.YMClayNativeC3AdjacentSortProgramExact as SUNOriginalC3AdjacentSort
+import DASHI.Physics.YangMills.YMClayOriginalWilsonC3WeightedHaarTransferExact as SUNOriginalWeightedC3PhysicalTransfer
+import DASHI.Physics.YangMills.YMClayCompactSimpleScopeBidiNoVacuitySafeExact as YMCompactSimpleScopeBidi
+import DASHI.Physics.YangMills.YMClayNativeSideFourPairSpectatorSortProgramExact as SUNOriginalPairSpectatorSort
+import DASHI.Physics.YangMills.YMClayProofRelevantFieldAnchoringSafeExact as YM219ProofRelevantField
+import DASHI.Physics.YangMills.YMClayOriginalCMP109NamedSetNoPromotionExact as YMOriginalCMP109BareSetNoGo
+import DASHI.Physics.YangMills.YMClayParametricVocabularyNoClayPromotionExact as YMExternalClaySemanticAnchor
+import DASHI.Physics.YangMills.YMClayNativeSideFourTwoLinkPairSameObjectExact as SUNNativePairLiteral
+import DASHI.Physics.YangMills.YMClayNativeSideFourPairDistinctCertificateExact as SUNNativePairDistinct
+import DASHI.Physics.YangMills.YMClaySUNR445BlockedPushforwardR320CovarianceExact as SUNBlockedSameCovariance
+import DASHI.Physics.YangMills.YMClaySUNNativeBlockedPositiveHolonomyExact as SUNPhysicalBlockedHolonomy
+import DASHI.Physics.YangMills.YMClayNativeSideFourTwoBlockEndpointExact as SUNSideFourBlockEndpoint
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedWilsonGaugeExact as SUNSideFourBlockedWilson
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedFineHaarObservableExact as SUNBlockedFineHaar
+import DASHI.Physics.YangMills.YMClaySUNSideFourBlockedPushforwardCylinderAlgebraExact as SUNBlockedPushforward
+import DASHI.Physics.YangMills.YMClayFiniteRGPushforwardNonBareWitnessSafeExact as SUNPushforwardNoBare
+import DASHI.Physics.YangMills.YMClaySUNVariablePhysicalCutoffFamilyExact as SUNMovingFamily
+import DASHI.Physics.YangMills.YMClaySUNMatrixSameFamilyR443R445Exact as SUNFamily
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarPermutationExact as FiniteHaar
+import DASHI.Physics.YangMills.YMClayFiniteProductHaarOrderedAlgebraExact as OrderedHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixSpatialC3RealFubiniExact as SUNRealC3
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeInversePlaquetteRealTraceExact as SUNInversePlane
+import DASHI.Physics.YangMills.YMClayConstructedComplexFiniteAdjointTraceExact as SUNFiniteTrace
+import DASHI.Physics.YangMills.YMClayBishopSetoidFiniteAdjointTraceExact as SUNBishopTrace
+import DASHI.Physics.YangMills.YMClaySUNProductHaarGaugeFromOneLinkExact as SUNGaugeHaar
+import DASHI.Physics.YangMills.YMClaySUNProductHaarNativeGaugeR443Exact as SUNNativeGauge
+import DASHI.Physics.YangMills.YMClaySUNNativeWilsonBondPointwiseExact as SUNPointwise
+import DASHI.Physics.YangMills.YMClaySUNVariablePeriodicBondPointwiseExact as SUNVariablePointwise
+import DASHI.Physics.YangMills.YMClaySUNNativeSetoidBondProductHaarExact as SUNSetoidHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixNativeSixPlaneC3FromInverseTraceExact as SUNSixC3
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarC3Exact as SUNHaar
+import DASHI.Physics.YangMills.YMClaySUNMatrixProductHaarR443NumeratorExact as SUNHaarR443
+import DASHI.Physics.YangMills.YMClaySUNMatrixR445R320SameCovarianceExact as SUNCov
+
+open SixActual public using
+  (inversePositivePlaneIsSwappedWord
+  ; swappedPositivePlaquetteIsInverse
+  ; swappedPositivePlaquetteTrace
+  ; nativeSelectedSixOrientation
+  ; nativeSixPositiveWilsonActionSpatialC3)
+open R443Six public using
+  (NativeConfiguration; nativeSixTrace; nativeSixTraceC3
+  ; NativeSixPlaneHaarBoundary; nativeSixPlaneR443
+  ; nativeSixPlaneNumeratorC3Invariant)
+open R445Weld public using
+  (r443R445NativeConfigurationSameObject
+  ; nativeR443SixPlaneR445Observable
+  ; nativeR443R445FiniteCylinderLimits)
+open R443Limit public using
+  (nativeC3FiniteNumeratorSource
+  ; nativeC3NormalizedExpectationAtEveryCutoff
+  ; nativeC3SelectedSequenceLimitInvariant)
+
+
+------------------------------------------------------------------------
+-- Actual original native SU2 source 16ordered = 2x six positive planes
+-- plus 4 identity terms/site; Wilson 1-ReTrace deficit = 2x six deficit.
+-- R443 Gibbs consumes the SIX-source physical Wilson deficit, not raw trace.
+------------------------------------------------------------------------
+import DASHI.Physics.YangMills.YMClayNativeSixPlaneOrderedIdentityExact as SixOrdered
+
+open SixOrdered public using
+  (diagonalWordIsReverseOpposite
+  ; nativeDiagonalHolonomyIdentity; nativeDiagonalTraceIsOne
+  ; orderedAtIsTwiceSixPlusDiagonal
+  ; orderedActionIsSixSourceTwicePlusDiagonal
+  ; orderedDeficitAtIsTwiceSixDeficit
+  ; sixPhysicalDeficitAction
+  ; sixPhysicalDeficitActionSpatialC3)
+open R443Six public using
+  (nativeSixWilsonDeficit; nativeSixWilsonDeficitC3)
+
+
+-- Original six-plane Wilson deficit is also exactly a R445 native observable.
+open R445Weld public using (nativeR443SixDeficitR445Observable; r443SixDeficitIsNativeObservableSameObject)
+
+
+-- 2 Nov: canonical import graph now exposes the *proved finite-source
+-- propositions*, without changing the physical Haar/continuum/OS gates.
+open R443BondMarginal public using
+  (sixDeficitFactorsThroughBonds
+  ; forgetC3CommutingSquare
+  ; densityFactorsThroughBonds
+  ; bondMarginalIntegrationLaws
+  ; normalizedBondExpectationAgreement
+  ; bondR431NumeratorC3)
+open R445FiniteBound public using
+  (nativeSixTraceLower
+  ; nativeSixTraceUpper
+  ; nativeSixDeficitNonnegative
+  ; nativeSixDeficitAtMost3072
+  ; nativeSixDeficitAbsoluteBound)
+
+
+------------------------------------------------------------------------
+-- 2026-11-02: REUSE THE ORIGINAL SU(N) MATRIX CARRIER, NOT RATIONAL HAAR.
+-- These are source-written conditional theorem bodies, without kernel receipt.
+-- The selected real physical Haar/Fubini, 1024-link codec, R445 uniform
+-- continuum convergence, R320 true physical decay and R333 same-H spectral
+-- gap are NOT discharged by the import graph.
+------------------------------------------------------------------------
+
+open SUNSigned public using
+  (toExactSignedBondGroup
+  ; sunSignedC3Holonomy
+  ; sunSignedC3Wilson
+  ; sunPositivePlaquetteHolonomy)
+open SUNGauge public using
+  (sunTraceConjugationInvariant
+  ; sunOriginalPlaquetteTraceGaugeInvariant
+  ; sunSideFourWilsonC3)
+open SUNGibbs public using
+  (nativeSUNSixWilsonDeficit
+  ; nativeSUNWilsonGibbsDensity
+  ; nativeSUNWilsonGibbsDensityStrictlyPositive
+  ; nativeSUNFiniteGibbsMeasure)
+open SUNFamily public using
+  (sameOriginalFiniteMeasureFamily
+  ; originalSixPartitionSameObject
+  ; originalSixFiniteExpectation)
+open FiniteHaar public using
+  (productIntegralUnit
+  ; productHaarPermutationInvariant)
+open SUNHaar public using
+  (nativeSUNProductIntegral
+  ; nativeSUNProductIntegralSpatialC3Invariant
+  ; nativeSUNProductIntegralUnit)
+-- Exact same Gibbs measure: product Haar C3 + literal Wilson action -> R443/R431.
+-- Remaining one-link Haar/Fubini, codec, integration laws and action C3
+-- remain explicit sources; no independent whole-lattice Haar law is assumed.
+-- N-link zero/linearity/scale/positivity are derived, not new premises.
+open OrderedHaar public using
+  (productIntegralZero
+  ; productIntegralAdd
+  ; productIntegralScale
+  ; productIntegralPositive
+  ; productIntegralStrictlyPositive)
+-- Real physical-site C3 finite Fubini is now sourced from generic
+-- commutative-monoid finite-Fubini, not postulated as a global action.
+open SUNRealC3 public using
+  (realSumSitesSpatialC3
+  ; nativeSUNSixDeficitC3FromLocal
+  ; nativeSUNWilsonActionC3FromLocal)
+-- Original SUN inverse plaquette and six real plane C3 from one real
+-- matrix trace-inversion law. Not an abstract Wilson action assumption.
+-- Concrete finite complex-pair trace adjoint algebra (Bishop/real bridge pending).
+-- Vendored Bishop setoid, not the legacy axiomatic real equality:
+-- native ≃ adjoint real-trace invariance on finite complex matrices.
+open SUNBishopTrace public using
+  (bishopRealMatrixAdjointTrace
+  ; bishopNormalizedRealTraceAdjoint)
+open SUNFiniteTrace public using
+  (realComplexMatrixAdjointTrace
+  ; concreteNormalizedRealTraceAdjoint
+  ; concreteSUNAdjointRealTrace)
+-- Coordinatewise gauge Haar invariance is a consequence of one-link bi-invariance.
+open SUNGaugeHaar public using
+  (OneLinkSUNBilateralHaar
+  ; gaugeOneLinkHaarInvariant
+  ; gaugeBondVector
+  ; productHaarNativeGaugeInvariant)
+-- Native periodic BondField is a function; original Wilson/Gibbs observables
+-- preserve pointwise bond equality without global function extensionality.
+-- Same original periodic source, arbitrary cutoff n; Wilson/Gibbs functions
+-- are extensional under pointwise bond equality without global funext.
+open SUNVariablePointwise public using
+  (variableOrientedLinkPointwise
+  ; variableSignedPathPointwise
+  ; variablePositivePlaquettePointwise
+  ; variableSixWilsonDeficitPointwise
+  ; variableWilsonActionPointwise
+  ; variableGibbsDensityPointwise)
+-- Keep the ACTUAL periodic bond function carrier. Setoid round-trip and
+-- observable congruence replace overstrong whole-function equality.
+open SUNSetoidHaar public using
+  (SUNNativeSetoidBondCodec
+  ; nativeSetoidProductHaar
+  ; nativeSetoidHaarC3Invariant
+  ; nativeSUNWilsonActionRespectsBondPointwise
+  ; nativeSUNGibbsDensityRespectsBondPointwise
+  ; nativeSUNPhysicalGibbsSetoidHaarC3)
+open SUNPointwise public using
+  (nativeOrientedLinkPointwise
+  ; nativeSignedPathPointwise
+  ; nativeSUNPositivePlaquettePointwise
+  ; nativeSUNSixDeficitPointwise
+  ; nativeSUNWilsonActionPointwise
+  ; nativeSUNGibbsDensityPointwise)
+open SUNNativeGauge public using
+  (nativeGaugePhysicalIntegrationLaws
+  ; nativeGaugeR443FromOneLink
+  ; nativeGaugeNormalizedFromOneLink
+  ; nativeProductHaarGaugeInvariant
+  ; nativeGaugeWilsonGibbsR443
+  ; nativeGaugeGibbsNumeratorInvariant
+  ; nativeGaugeNormalizedExpectationInvariant)
+open SUNInversePlane public using
+  (sunSwappedPositivePlaneIsInverse
+  ; sunSwappedPositivePlaneRealTrace
+  ; matrixAdjointGivesSUNTraceInverse)
+open SUNSixC3 public using
+  (nativeSUNSixAtC3FromInverseRealTrace
+  ; sixRealC3Reindex)
+open SUNHaarR443 public using
+  (nativeC3BoundaryFromAdjointRealTrace
+  ; nativeC3BoundaryFromInverseTrace
+  ; nativePhysicalIntegrationLaws
+  ; nativePhysicalPartitionPositive
+  ; nativeProductHaarR443
+  ; nativeProductHaarNumeratorC3
+  ; nativeProductHaarNormalizedC3
+  ; nativeProductHaarUnitNumerator
+  ; nativeNormalizedWilsonUnit)
+
+open SUNCov public using
+  (originalSUNR278FiniteSameExpectation
+  ; originalSUNR278ContinuumSameLimit
+  ; originalSUNRealCovarianceExtension)
+
+
+-- Full source-native SU(N) Gibbs action (not just individual plaquettes)
+-- is gauge-invariant under original periodic link transformation.
+open SUNGaugeAction public using
+  (sunTransformedPathSameSource
+  ; sunPlaquetteRealTraceGaugeInvariant
+  ; sunSixDeficitGaugeInvariant
+  ; sunWilsonActionGaugeInvariant
+  ; sunGibbsDensityGaugeInvariant)
+
+
+-- Canonical owner reconciliation: the existing generic SUNWilsonAction was
+-- already proved. This new bridge identifies it with the literal original
+-- positive-six-plane signed Balaban source at each physical site.
+open SUNCanonicalWilsonWeld public using
+  (signedWordAsPath
+  ; nativePositivePlaquetteIsCanonicalSUN
+  ; canonicalNativeSiteSUNWilsonData
+  ; canonicalNativeSUNWilsonSelectedListExact
+  ; nativeSixAtSiteIsCanonicalSUNWilsonAction)
+
+
+-- Variable-n original periodic SUN Wilson source: n genuinely changes the
+-- four-torus, unlike a beta-only sequence on the fixed side-four source.
+-- All-n local gauge invariance and n=3 source matching are proof terms,
+-- but the continuous SU(N) Haar/UV-IR/CMP116/OS physical gates stay open.
+open SUNCanonicalWilsonWeld public using
+  (canonicalSUNSixWilsonDeficit
+  ; nativeSixGlobalIsCanonicalSUNWilsonAction
+  ; nativeSUNBetaActionIsCanonicalWilsonAction)
+open SUNVariable public using
+  (SUNPeriodicLinks
+  ; periodicSUNPositivePlaquette
+  ; periodicSUNSixDeficit
+  ; periodicSUNSixDeficitGaugeInvariant
+  ; periodicSUNWilsonActionGaugeInvariant
+  ; periodicSUNGibbsDensityGaugeInvariant
+  ; periodicSUNFiniteGibbsMeasure
+  ; sideFourPlaquetteSameNativeHolonomy)
+
+-- Every actual periodic cutoff: derive product-Haar integration and positive
+-- Wilson Gibbs partition from one-link laws, without inventing continuum data.
+open SUNVariableHaar public using
+  (periodicProductHaar
+  ; periodicProductFiniteMeasure
+  ; periodicProductHaarUnit
+  ; periodicActualDensityStrictPositive
+  ; periodicProductPartitionStrictPositive
+  ; periodicProductIntegrationLaws
+  ; periodicProductDensitySameObject
+  ; periodicProductPartitionSameObject)
+
+-- Every-n native original finite Gibbs gauge symmetry, using one-link
+-- bilateral Haar and a pointwise gauge/bond vector naturality witness.
+open SUNVariableGaugeHaar public using
+  (OriginalPeriodicGaugeVectorNaturality
+  ; PeriodicPointwiseObservable
+  ; periodicProductGaugeHaarInvariant
+  ; periodicGibbsPointwise
+  ; periodicWeightedPointwise
+  ; periodicGaugeNumeratorInvariant
+  ; periodicGaugeNormalizedExpectationInvariant)
+
+-- The ORIGINAL positive-bond enumeration is an actually constructed all-n
+-- Vec codec. The previous R443/R445 decoder and gauge naturality fields
+-- no longer need to be supplied independently on this finite source.
+open SUNBondCodec public using
+  (originalPositiveBondFinite
+  ; originalPositiveBondDistinct
+  ; originalPositiveBondCount
+  ; originalSiteCountFormula
+  ; originalPositiveBondCountFormula
+  ; originalSideFourCountIs1024
+  ; originalBondsDecodeEncodeAt
+  ; originalBondsEncodePointwise
+  ; originalBondsEncodeDecodeExactly
+  ; encodeOriginalBonds
+  ; decodeOriginalBonds)
+open SUNConstructedGauge public using
+  (nativeDecode
+  ; nativeEncode
+  ; constructedOriginalPeriodicGaugeNaturality
+  ; actualGaugeVectorEncoded
+  ; actualGaugeVectorDecodedAt
+  ; actualPeriodicProductMeasure
+  ; actualPeriodicPartitionPositive
+  ; actualPeriodicGaugeHaar
+  ; actualPeriodicGaugeNormalized
+  ; actualSixDeficitGaugeNormalized)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443/R445: separate finite Golden construction from
+-- analysis-authority-dependent moving-cutoff physical Gibbs family.
+-- The parent theorem graph does NOT import downstream Lorentz/KK PR #1460.
+------------------------------------------------------------------------
+
+-- No real scalar/Haar assumptions are imported by this finite theorem
+-- itself: the canonical bond codec plus group laws prove naturality.
+open SUNFiniteSafe public using
+  (originalGaugeDecodedAt
+  ; encodeGaugeNatural
+  ; vectorGaugeDecodedAt)
+
+-- Actual periodic side increases with n; old fixed-side-four beta-only
+-- families do not constitute a lattice-changing UV limit.
+open SUNMovingFamily public using
+  (finiteCutoffLinks
+  ; linksAt
+  ; gaugeAt
+  ; physicalFiniteCutoffMeasure
+  ; finiteCutoffLinkCountFormula
+  ; physicalFiniteDensitySameWilson
+  ; physicalFinitePartitionSameWilson
+  ; physicalFinitePartitionPositive
+  ; physicalSixDeficitGaugeExpectation
+  ; physicalWilsonActionAt
+  ; physicalWilsonActionGauge)
+
+------------------------------------------------------------------------
+-- 2026-11-03 R443: original spatial C3 bond coordinates -> actual
+-- side-four 1024-link Vec. Exact native order-three/inverse source.
+-- This does NOT yet construct an adjacent-swap LinkPermutation witness.
+------------------------------------------------------------------------
+open SUNFiniteReindex public using
+  (reindexBonds
+  ; reindexAt
+  ; reindexIdentity
+  ; reindexCompose
+  ; reindexAsIdentity
+  ; reindexInverseLeft
+  ; reindexInverseRight
+  ; reindexOrderThree)
+
+open SUNNativeC3Vec public using
+  (forwardBond
+  ; backwardBond
+  ; forwardAfterBackward
+  ; backwardAfterForward
+  ; bondOrderThree
+  ; forwardVector
+  ; backwardVector
+  ; nativeForwardIsVectorAt
+  ; nativeForwardEncodesExactly
+  ; forwardBackwardVector
+  ; backwardForwardVector
+  ; forwardVectorOrderThree)
+
+open SUNOneVectorC3 public using
+  (canonicalLabelVector
+  ; reconstructFromCanonicalLabels
+  ; permuteLinksMap
+  ; canonicalC3IsEncodedBondMap
+  ; nativeC3VectorMap
+  ; SingleVectorC3PermutationCertificate
+  ; singleVectorC3ImpliesAllVectors)
+
+open SUNNativeC3Haar public using
+  (ExactC3AdjacentSwapWitness
+  ; originalNativeC3SetoidCodec
+  ; originalNativeC3GibbsHaarInvariant
+  ; adjacentSwapFromOneVector
+  ; originalNativeC3SetoidCodecFromOneVector
+  ; originalNativeC3GibbsHaarInvariantFromOneVector)
+
+------------------------------------------------------------------------
+-- R445: same-original-periodic-torus site and positive-bond block codec.
+-- It uses the earlier BałabanBlockedPeriodicLattice exact Fin refinement
+-- through the safe CyclicIndex/Fin equivalence. No physical blocking
+-- action/measure, analytic bounds, RG contraction or OS source is inferred.
+------------------------------------------------------------------------
+open SUNNativeFinIso public using
+  (cyclicToFin
+  ; finToCyclic
+  ; cyclicRoundtrip
+  ; finRoundtrip)
+
+open SUNNativeBlockWeld public using
+  (siteToCube
+  ; cubeToSite
+  ; siteCubeRoundtrip
+  ; cubeSiteRoundtrip
+  ; blockNativeSite
+  ; unblockNativeSite
+  ; blockNativeSiteAfterUnblock
+  ; unblockNativeSiteAfterBlock
+  ; BlockedPositiveBond
+  ; blockNativeBond
+  ; unblockNativeBond
+  ; blockNativeBondAfterUnblock
+  ; unblockNativeBondAfterBlock)
+
+------------------------------------------------------------------------
+-- R445 moving-lattice actual GROUP-VALUED source join. The original
+-- Bałaban positive path holonomy now supplies a non-Abelian blocked-link
+-- field at every M×L, not merely a blocked bond-label coordinate. The
+-- source-write proves gauge cancellation and signed-path identification
+-- independently of arbitrary field funext. The coarse endpoint arithmetic
+-- is left as ONE explicit proposition, and no Gibbs pushforward, RG
+-- uniform estimates, continuum or OS spectral gap is promoted here.
+------------------------------------------------------------------------
+
+open SUNNativeBlockHolonomy public using
+  (positiveDirections
+  ; positiveSteps
+  ; positiveHolonomy
+  ; positiveHolonomyPointwise
+  ; positiveHolonomyGaugeCovariant
+  ; positiveHolonomyIsSelectedPath
+  ; fineBlockOrigin
+  ; positiveBlockDirections
+  ; nativeBlockedPositiveLinks
+  ; nativeBlockedPositiveLinksPointwise
+  ; nativeBlockedCoarseGauge
+  ; nativeBlockedGaugeLawAtFineEndpoint
+  ; BlockEndpointCompatibility
+  ; nativeBlockedGaugeLawOnCoarse)
+
+open SUNPhysicalBlockedHolonomy public using
+  (nativeSUNBlockLinks
+  ; nativeSUNBlockGauge
+  ; nativeSUNBlockAgreesSelectedPath
+  ; nativeSUNBlockGaugeLawAtFineEndpoint
+  ; NativeSUNBlockEndpoint
+  ; nativeSUNBlockGaugeLawOnCoarse)
+
+------------------------------------------------------------------------
+-- R445 finite selected side-four M=L=2 witness:
+-- exact periodic 2-step fine endpoint for the existing original
+-- 1024-link lattice; consequently no externally supplied block-endpoint
+-- equality remains for the *specific* side-four SU(N) coarse block.
+-- General M,L, physical Gibbs/RG pushforward, RP and limits stay open.
+------------------------------------------------------------------------
+open SUNSideFourBlockEndpoint public using
+  (sideFourTwoBlockEndpoint
+  ; sideFourSUNBlockGaugeCovariant)
+
+------------------------------------------------------------------------
+-- R445 selected original side-four -> side-two Wilson/Gibbs observable.
+-- These are the actual SU(N) matrix Wilson plaquettes and original
+-- variable-periodic six-plane and Gibbs functions evaluated on the
+-- constructed noncommutative coarse link holonomies. Invariance is
+-- proved at the source, then at the SAME original fine product-Haar
+-- Gibbs expectation conditionally on ONE chosen one-link Haar.
+--
+-- Neither source asserts that a fine Wilson pushforward equals a new
+-- coarse Wilson Gibbs law, nor that reflection positivity, Haar
+-- measurability, continuum R445 or same-Hamiltonian R333 are paid.
+------------------------------------------------------------------------
+open SUNSideFourBlockedWilson public using
+  (fineToCoarse
+  ; gaugeToCoarse
+  ; blockFineGaugeCoarsePointwise
+  ; blockedSelectedPlaquette
+  ; blockedSelectedPlaquetteGauge
+  ; blockedSelectedPlaquetteWilsonGauge
+  ; blockedSelectedSixDeficit
+  ; blockedSelectedSixDeficitGaugeInvariant
+  ; blockedSelectedWilsonAction
+  ; blockedSelectedWilsonActionGaugeInvariant
+  ; blockedSelectedGibbsDensity
+  ; blockedSelectedGibbsDensityGaugeInvariant)
+
+open SUNBlockedFineHaar public using
+  (CoarsePointwiseObservable
+  ; blockedPullbackPointwise
+  ; originalFineMeasureBlockedGaugeInvariant
+  ; blockedCoarseWilsonPointwise
+  ; originalFineGibbsBlockedWilsonGaugeInvariant
+  ; blockedCoarseGibbsPointwise
+  ; originalFineGibbsBlockedGibbsGaugeInvariant)
+
+------------------------------------------------------------------------
+-- R445 selected original fine Gibbs law -> blocked SUN cylinder PUSHFORWARD.
+-- Uses exactly the same selected fine physical measure and native two-link
+-- SU(N) block already exported above. Numerator positivity, additivity,
+-- scaling, partition normalization and source-gauge covariance are derived
+-- from the actual older physical finite-cylinder owner.
+--
+-- This is a positive coarse observable functional, NOT a constructed
+-- coarse bare-Wilson product-Haar law or a completed disintegration.
+-- The finite Golden three-to-two counterexample makes the logical
+-- nonpromotion explicit. --safe on this unified legacy root is NOT
+-- a transitive axiomatic acceptance receipt (RealAnalysisAxioms).
+------------------------------------------------------------------------
+open SUNBlockedPushforward public using
+  ( pullbackCoarse
+  ; actualPushforwardNumerator
+  ; actualPushforwardPartition
+  ; actualPushforwardNormalized
+  ; actualPushforwardNumeratorIsOriginalWeightedIntegral
+  ; actualPushforwardNormalizedIsOriginalBlockedExpectation
+  ; originalFineIntegrationLaws
+  ; actualPushforwardNumeratorZero
+  ; actualPushforwardNumeratorOne
+  ; actualPushforwardNumeratorAdd
+  ; actualPushforwardNumeratorScale
+  ; actualPushforwardNumeratorPositive
+  ; actualFinePartitionPositive
+  ; actualPushforwardUnitNormalized
+  ; actualPushforwardGaugeInvariant
+  ; actualPushforwardWilsonGaugeInvariant
+  ; actualPushforwardGibbsGaugeInvariant)
+
+open SUNPushforwardNoBare public using
+  ( sameCoarseFibreDistinctFine
+  ; coarsePushforwardMassA
+  ; coarsePushforwardMassB
+  ; noBareUniformUnnormalizedClosure
+  ; noBareUniformNormalizedClosure)
+
+
+import DASHI.Physics.YangMills.YMClayD1PhysicalRemoteCoverageNoGoExact as YMPhysicalPairCoverage
+
+import DASHI.Physics.YangMills.YangMillsCMP119LiteralWilsonSpanAdditiveExact as CMP119LiteralSpan
