@@ -47,6 +47,7 @@ run python python3 scripts/ksw668_caldwell_langlois_israel_exact.py
 run python python3 scripts/ksw668_brane_winding_allmode_linear_stability.py
 run python python3 scripts/ksw668_ads5_gravitational_horizon_variance_bound.py
 run python python3 scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py
+run python python3 scripts/ksw668_ads5_z2_distributional_israel_coefficient.py
 run python python3 scripts/ksw668_brane_scalar_emitter_receiver_retarded.py
 run python python3 scripts/ksw668_original_eq19_rational_pair_horizon.py
 run python python3 scripts/test_ksw668_brane_shortcut.py
