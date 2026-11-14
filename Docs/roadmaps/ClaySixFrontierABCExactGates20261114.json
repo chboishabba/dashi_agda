@@ -2448,6 +2448,13 @@
       "ym_pr_1503": {
         "local_tv_three_moments_blob": "9e97eac7cd2e2de1989e699b3e53fc98d77578e3",
         "same_in_rollup": true
+      },
+      "karp_pr_1445": {
+        "count": 114,
+        "method": "atomic original Git tree blob import, source PR #1445 original Karp-21/strict SAT/finite Cook-Levin owners only",
+        "commit": "058b65598ae8f85dd336a80e35f99096856937a9",
+        "existing_overwritten": false,
+        "existing_changed_complexity": 92
       }
     },
     "math": {
@@ -2499,7 +2506,10 @@
         "q1_is_equivalent_to_decider_failure": true,
         "fixed_self_quotation_budget_no_go_present": true,
         "actual_bit_TM_polynomial_clock": false,
-        "universal_SAT_lower_bound": false
+        "universal_SAT_lower_bound": false,
+        "imported_original_karp_pr1445_blobs": 114,
+        "finite_theorem_source_gate": true,
+        "kernel": false
       }
     },
     "executable_source_receipts": {
@@ -2508,7 +2518,9 @@
       "far_conditional_tests": 32,
       "original_W2_test": "tests/test_ns_r734_pure_plus_physical_w2_no_go.py",
       "independent_local_6_mode_sympy": "PASS",
-      "verified_native_kernel": false
+      "verified_native_kernel": false,
+      "lean_r734_sqrt_certificate": "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean",
+      "lean_r734_sqrt_native_kernel": false
     },
     "dont_promote": [
       "conditional implication as physical estimate",
