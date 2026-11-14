@@ -10,6 +10,7 @@ import ksw668_caldwell_langlois_israel_exact as Israel
 import ksw668_brane_scalar_emitter_receiver_retarded as ScalarReceiver
 import ksw668_ads5_tensor_mode_moving_israel_bc as TensorBC
 import ksw668_ads5_gravitational_horizon_variance_bound as StrictHorizon
+import ksw668_brane_winding_allmode_linear_stability as AllModeWinding
 
 class BraneMaxCutTests(unittest.TestCase):
     def test_actual_same_ambient_metric_and_apparent_shortcut(self):
@@ -137,6 +138,16 @@ class BraneMaxCutTests(unittest.TestCase):
         self.assertEqual(r["finite_positive_weight_variants_tested"],280)
         self.assertTrue(r["constant_H_no_shortcut_control"])
         self.assertFalse(r["analytic_Agda_continuum_sqrt_integration_kernel_accepted"])
+
+
+    def test_probe_brane_full_winding_allmode_quadratic_energy_not_tachyonic(self):
+        r=AllModeWinding.audit()
+        self.assertTrue(r["Hamiltonian_quadratic_nonnegative_for_finite_energy_data"])
+        self.assertFalse(r["negative_frequency_squared"])
+        self.assertEqual(r["sample_modes_checked"],24)
+        self.assertTrue(r["marginal_zero_modes_k2_zero"])
+        self.assertFalse(r["zero_mode_linear_drift_or_nonlinear_instability_ruled_out"])
+        self.assertFalse(r["full_self_gravitating_5D_Einstein_Israel_stability"])
 
 if __name__=="__main__":
     unittest.main(verbosity=2)
