@@ -12,6 +12,9 @@ files=(
   DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda
   DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda
   DASHI/Mathematics/Automorphic/EllipticSelectedHeckePrimePowerExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMJacobiThetaCheckedRowsExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMLevel32EtaNewmanArithmeticExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMLevel32FrickeMellinExact.agda
 )
 
 for f in "${files[@]}"; do
@@ -35,6 +38,10 @@ required=(
   'EllipticOriginalSelmerCohomologyExhaustionExact.agda:originalSelmerGlobalH1ExhaustedByActualTorsion'
   'EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda:vanishingTwoTorsionDoesNotForceGroupTrivial'
   'EllipticSelectedHeckePrimePowerExact.agda:rowEulerHeckeTruncationTwo'
+  'EllipticCMJacobiThetaCheckedRowsExact.agda:thetaP13MatchesOriginalFrobenius'
+  'EllipticCMLevel32EtaNewmanArithmeticExact.agda:etaNewmanArithmeticConditions'
+  'EllipticCMLevel32FrickeMellinExact.agda:level32FrickeFromTwoEtaInversions'
+  'EllipticCMLevel32FrickeMellinExact.agda:mellinCentralValueIsTwiceTail'
 )
 for owner in "${required[@]}"; do
   module="${owner%%:*}"
@@ -56,4 +63,4 @@ fi
 bash scripts/run_agda29_parallel_check.sh "${files[@]}"
 
 echo 'Agda local checker completed; retain actual receipt/logs and module hashes.'
-echo 'This checks finite sieve and prime-power recurrence, NOT actual H¹/Sha/BSD.'
+echo 'This checks selected finite Kummer, Frobenius, Gaussian theta and Fricke/Mellin algebra, NOT classical H¹/Sha, infinite Jacobi, or universal BSD.'
