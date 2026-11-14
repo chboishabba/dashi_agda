@@ -1,0 +1,1715 @@
+# Karp 21 NP-completeness: full exact-lemma roadmap (2026-11-01)
+
+## 2026-11-12 precise phase update (F1/F3 and G3; no terminal closure)
+
+**Phase F1.1 — physically implemented/source-written:** `Karp21NativeBitTapePhysicalMachineExact` defines the actual literal four-symbol tape machine with local `TableProgram` and per-physical-instruction cell accounting. `Karp21NativeGammaPrefixPhysicalSimulationExact` compiles only the *zero-prefix* of original `GammaBinaryNativePayload.scanZeros` into a literal one-work-tape table. Source-written physical `k+1` instruction, zero-count mark and size lemmas; 16 table-dispatch checks and 21,799-case/1,529,243-step local differential PASS. It is **not** full gamma payload, N21 machine or Agda kernel certification.
+
+**Phase G3.1 — strengthened source-written:** `Karp21NativeOriginalSparseCertificateTightBoundExact.actualN21AcceptedCertificateFitsOriginalGraphWord` composes actual binary accepted 2m-bit sparse cursor with original same-word Fin-free graph parser and original strict 3m guard to obtain **|certificate|≤|original graph word|**. Original regression assertion strengthened, independent 100,000-case generated-grammar check PASS. Local Agda 2.9/Nix unavailable; kernel acceptance OPEN.
+
+**Unpaid exact dependency order:** K0 kernel accept/repair F1/G3+B6–G3 imports; F1.2 literal full gamma payload and all n/m/u/v/signed-w/W stages; F1.3 actual original history/ledger/threshold compilation; F3 `originalBitTapeStepSimulatesN21Rule` and complete same-original-word acceptance; F2.2 peak heap/parser copies/stack/pointer accounting under selected representation; F4 `karpFractranBitMachineClockPolynomial` covering malformed inputs and tape head motions; G2/G3 `PR.PolynomialCostModel` typed verifier/certificate evidence, G4 `originalN21InNP`; P1 physical costed E20 and Cell/Bits Cook–Levin; P2 20 real polynomial edge reductions + 21 original `InNP` + `CertifiedKarpNetwork` inhabited; **separate** truly universal `SATNotInP` lower bound OPEN. Conditional records are not proofs of the required inhabitants.
+
+Full exact owner notes: `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md`. Local authoritative receipt command (not CI): `DASHI_NO_TMUX=1 bash scripts/referee_karp21_maxcut.sh kernel-cut`.
+
+
+
+## 2026-11-06 — original categorical row-dimension max-cut (same-object Agda source)
+
+**Defect:** the former `ConcreteTapeAcceptingRunAssignmentExact.encodeRunRows_finalBlock` compared a bit vector indexed by `Canonical.listLength (Local.cells start)` with a finish row encoded at `Canonical.listLength (Local.cells finish)`, even though only `runFinishCanonicalLength : startCols ≡ finishCols` is proved. Its recursive `rewrite stepCanonicalLength step` caused ill-typed Agda 2.9 `with`-abstraction. Do **not** impose definitional equality of distinct free rows or postulate width invariance.
+
+**Implementation (source written, kernel receipt pending):** the original assignment owner now states a homogeneous equality with `castBits (cong (λ n → n * CellWidth machine) (sym (runFinishCanonicalLength run)))` on `Flat.encodeRow finish`. `finalBlockTransport` eliminates the local step and final width equalities by pattern matching on `refl`; the original row-tail encoder/Fin indices are unchanged. `ConcreteTapeAcceptingRunInitialCompleteExact` now transports this equality across `encodedRunBase_finalRow`, `encodedAcceptingAssignment_finalRow`, and `decodeCastRow`, composing with the existing `Initial.decodeRow_encodeRow`. `ConcreteTapeEncodedPaddedRunRowsExact.encodedTailBlockTransport` removes its own fragile recursive `rewrite` on a free width. `ConcreteTapeUniformRunWidthExact` provides an original-run `Global.Slot` indexed, proof-relevant uniform-width view, without changing `TapeRow`, `WellFormedTapeRun`, the real CNF bits or underlying transition semantics.
+
+**ZKP contract:** Preconditions = original `WellFormedTapeRun` + `stepCanonicalLength` / `runFinishCanonicalLength` and canonical `Fin`/codec. Invariants = one original fixed-width SAT fibre, one equality-justified cast boundary, every original physical row aligned to the selected `cols`. Postconditions = transported final-row block equality, decoded final-row identity, and a proof-relevant per-time row/width pair; not promoted until pinned Agda 2.9 acceptance. `ConcreteTapeBoundaryGuardFocusedRootExact` now imports the changed original initial-completeness owner and the new uniform view.
+
+**Verification:** independent deterministic 1,008 row-slot/cell-width/step cases passed; `scripts/check_karp21_uniform_row_width.py` added to fail-closed preflight and no-Agda referee fixture (10 preflight checks). This is not Agda kernel verification. Next local command `bash scripts/referee_karp21_maxcut.sh all`; compile the original focused root and `Karp21Everything` at the new head, then pay any exact Agda diagnostic. Full uniform bit-tape runtime and remaining Karp network gates are separate.
+
+**Detailed formalism, C4/PlantUML, ISO/ITIL/NIST/Six Sigma crosswalk and attribution:** [Karp21UniformRunWidthZKP20261106.md](Karp21UniformRunWidthZKP20261106.md). Agda Golden source is primary; `dashi_lean4` is a non-promoting comparison.
+
+
+## 2026-11-06 — guarded Cook–Levin original-owner closure pass: Golden acceptance pending
+
+**O/R/C/S/L/P/G/F source contract.** O = DASHI Karp-21; R = PR #1445 on `chatgpt/karp21-reduction-transport`; C = original Cook–Levin Agda owners plus `ConcreteTapeEncodedPaddedRunDecodeWeldExact` and referee sources; S = new source commits beyond the prior kernel receipts (no new Agda 2.9 receipt); L = canonical encoded accepting-run assignment ↔ real decoded row/Fin slice ↔ row endcaps ↔ guarded CNF ↔ exact-budget iff ↔ Cook BooleanFormula ↔ quotation/size; P = run exact-head kernel checks and repair the first true Agda diagnostic; G = only Agda typechecking of exact source/head promotes proofs, no Python/Lean/promotional Boolean substitutes; F = exact-head compiler and full transitive e20 closure; original uniform bit-tape clock and remaining Karp network edges are separate.
+
+**Implemented this round.**
+
+- `ConcreteTapeEncodedPaddedRunDecodeWeldExact`: `encodedAcceptanceBaseSameObject`, `encodedAcceptanceRowSliceSameObject` reuse original `Assignment.encodeAcceptingRunAssignment_base`, `Block.pullbackFinLeft_eq_takeBits`, `Block.rowSliceBits_eq_blockSlice`, `Assignment.encodeRunBaseTrace_rows`; `encodedPaddedRowDecodesSameObject` reuses `Initial.decodeRow_encodeRow`; `encodedAcceptingAssignmentDecodedEndcaps` transports real padded-run endcaps to **every** original SAT row slot, using ordinary time/width index equalities.
+- `ConcreteTapeCookLevinExactBudgetIff`: `GuardedCookLevinSAT.satisfies` now evaluates the actual `GuardedCNF.guardedGlobalCookLevinCNF`, and `exactRunToGuardedSAT` builds its proof from `Padded.allPaddedRunRowsHavePlainEndcaps`, the original accepting-run encoding/row weld, `Complete.acceptingRunSatisfiesGlobalCookLevinCNF`, and `GuardedCNF.guardedCompletenessFromDecodedEndcaps`. `guardedSATToExactRun` uses the same SAT record and original decoded-run soundness.
+- `ConcreteTapeCookLevinCookFormulaExact`: the literal `guardedCookFormula` and both Cook witness transports are compiled from **the same guarded CNF** as the exact-budget record, not the previous unguarded formula.
+- `ConcreteTapeCookLevinQuotationGrowthExact`: the previous strict lower bound on original unit clauses remains attributed to its actual original owner, while `originalBelowGuarded` (from original list concatenation and `m≤m+n`) transports that bound to the new source-defined guarded Cook formula. The binary quotation lower-bound consumer remains unchanged in structure.
+- `ConcreteTapeCookLevinPrizeFacingExact`: the prize-facing `closedClauseBound` now refers to the guarded CNF and delegates to `ConcreteTapeGuardedClauseCountExact.guardedGlobalClauseBound`, including the exact additive `(steps+1)·2·localEndcapClauseCount` overhead. The original variable-count theorem still applies because the global bit width is unchanged.
+- `scripts/check_karp21_guarded_sat_same_object.py` joins `referee_karp21_maxcut.sh` preflight and the no-Agda referee fixture. It fails on an absent original proof owner, stale unguarded Cook/size consumers, an expected original proof edge disappearing, or source-level proof holes. This is static governance, not an Agda proof.
+
+**Preconditions:** original `AcceptingWellFormedRun`, `exactLength = steps`, original `guardedInitialCellCount` and successor-width proof, `Guard.guardedInitialMargin`, and the prior canonical coding/row-slice proofs. **Invariants:** one underlying extended Boolean assignment, a single chosen original machine/rule, one precise row-slot witness for each row, plain boundary cells throughout the physically padded run, same Cook BooleanFormula carrier, and additive clause overhead without extra SAT variables. **Postconditions (source-candidate):** guarded SAT iff exact accepting run, preserved Cook-formula satisfiability iff, genuine endcap row evidence, and an exact guarded CNF clause bound; none is promoted until the Agda 2.9 kernel accepts the transitive source tree.
+
+**Exact remaining acceptance cut:** `bash scripts/referee_karp21_maxcut.sh preflight`, then `golden`, then `e20` (or `all`) on the new pinned head; repair any Agda termination, positivity, index/unification or rewrite diagnostic emitted by `ConcreteTapeBoundaryGuardFocusedRootExact`, `Karp21Everything`, and the original Cook capstones. The absent Agda executable in the current connected-GitHub environment prevents a fresh kernel receipt here. The original uniform **binary machine** runtime bound, remaining P1 N21/E20 edge closure, P2 E01–E19 and P3 CertifiedKarpNetwork remain distinct max-cut obligations.
+
+**Attribution:** Cook/Levin remain credited for foundational SAT NP-completeness; Agda source owners and their exact proof terms own internal claims; Lean mirrors are secondary comparison; Python differential tests are explicitly labelled independent, bounded regressions; no claim that any finite test settles a universal theorem.
+
+
+## 2026-11-06 — G2–G5 maximal source implementation and exact acceptance wall
+
+**ZKP / O-R-C-S-L-P-G-F:** O=DASHI Karp-21; R=PR #1445 original branch; C=`DASHI/Mathematics/Complexity/ConcreteTape{DecodedEndcapSameObject,GuardedDecodedTransition,DecodedRunInduction,DecodedRunLength,SATToAcceptingRun,PaddedRunEndcaps,EncodedPaddedRunRows,CanonicalEndcapCNF,GuardedGlobalCookLevinCNF,GuardedClauseCount}Exact.agda` plus `ConcreteTapeTimeBudgetPaddingExact.agda`; S=source commits with no new local Agda 2.9 receipt; L=original SAT clauses → canonical endcap clauses → literal indexed row decode → NoGhost → well-formed step → run induction → accepting endpoint, reversed along padded-run margins and canonical row encoding; P=complete same-object slot-to-run completeness proof and preserve original Cook BooleanFormula carrier; G=Agda Golden with no authority promotion from source writes, Boolean flags or independent finite Python; F=transitive compiler acceptance and canonical encoded-run/extended-assignment row alignment in the reverse SAT direction, followed by uniform bit-clock and network root.
+
+**G2 endpoint equality source-written:** `ConcreteTapeDecodedEndcapSameObjectExact` supplies `pullbackCompose`, `decodedCellAtBlockSlice`, `decodedCellAtCanonicalBlock`, `extendedRowCellSameObject`, `globalCNFToDecodedRowEndcaps`, and the reverse `decodedEndcapsToPhysicalBlocks`. All use the ORIGINAL `Block.pullbackBlockRename_eq_blockSlice`, `Global.rowSliceBits`, `Decode.decodeCells`, and canonical `Fin` index. The formerly external NoGhost record is instantiated in `ConcreteTapeGuardedDecodedTransitionExact.guardedSATNoGhostAtTime`, and its guarded SAT-to-original-step consequence is `guardedSATDecodedMachineStep`. Agda kernel acceptance for the new focused root remains UNVERIFIED.
+
+**G4 run chain source-written:** The ORIGINAL `ConcreteTapeDecodedRunInductionExact` now defines `AfterEndcapsForAllTimes` and `decodedStepFromEndcaps`, threading one proof-relevant row-endcap function through `buildDecodedRunNonempty`, `decodedAllSlotsRun`, and final-row equalities. `ConcreteTapeDecodedRunLengthExact` threads the same evidence through length induction. `ConcreteTapeSATToAcceptingRunExact` now requires the guarded CNF, obtains `guardedParts`, derives `allEndcaps` directly from SAT's same extended assignment, then feeds the original run and length proof. `ConcreteTapeTimeBudgetPaddingExact.guardedInitialColsSuccessor` establishes the nonempty width needed for endcap placement. These are proof candidates, not accepted Agda 2.9 results.
+
+**G5 forward completeness and size source-written:** `ConcreteTapePaddedRunEndcapsExact` obtains first/last plainness from the ORIGINAL `WF.ExactlyOneHead`, `Margin.HeadMargin` and `Margin.wellFormedStepMargin`, inductively carrying it across `Run.WellFormedTapeRun`. `ConcreteTapeEncodedPaddedRunRowsExact.encodedPaddedRunRowAt` is the indexed same-object row/cast alignment candidate. `Endcap.globalAllRowsEndcapsComplete` proves the whole added endcap CNF from genuine first/last canonical blocks on every row; `Guarded.guardedCompletenessFromDecodedEndcaps` combines original CNF acceptance with decoded-row endcap proofs. `ConcreteTapeGuardedClauseCountExact` gives an exact additive formula `|CNF_guarded| = |CNF_original| + (steps+1)·2·|CNF_plainCell|` and lifts the existing clause upper bound. A fixed-machine truth-table template makes this additional clause count linear in row count; it does NOT by itself prove the total uniform binary-machine clock.
+
+**Exact still unpaid (fail closed):** (1) Agda 2.9 diagnostics/receipts on `ConcreteTapeBoundaryGuardFocusedRootExact` plus the dependent run and exact-budget roots; (2) transport `encodedPaddedRunRowAt` through `Assignment.encodeAcceptingRunAssignment_base`, `Block.rowSliceBits_eq_blockSlice` and `Initial.decodeRow_encodeRow` to construct `∀ Global.Slot, DecodedRowEndcapsPlain` for the specific original accepting-run assignment; (3) update `ConcreteTapeCookLevinExactBudgetIff.GuardedCookLevinSAT` and `exactRunToGuardedSAT` to the same new guarded CNF **without silently using the old unguarded satisfaction theorem**; (4) ensure all `ConcreteTapeCookLevinCookFormulaExact`/quotation/clock consumers use the same formula, pay actual uniform compiler machine time, and recheck N21/E20 and P2/P3 Golden roots. No interpretation of source edits as compiler acceptance. Preserve Cook (1971)/Levin (1973) attribution, DASHI source ownership and separate independent test attribution.
+
+**Deterministic controls:** the canonical headed-bit/endcap truth-table and physical-row-endcap model passed 33,020 independently executed finite assignments; `scripts/check_karp21_canonical_endcap_cnf.py` is part of fail-closed preflight. This does not establish any universal Agda proof.
+
+
+## 2026-11-06 — decoded endpoint and guarded one-step weld (new implementation)
+
+At this branch head, two Agda source owners have been added to the canonical P0-B/G2/G3 lane, with the guarded formula's Boolean completeness proof made explicit via `trans`/`cong₂`.
+
+**G2-b endpoint same-object:** `ConcreteTapeDecodedEndcapSameObjectExact.agda` reuses original `Block.pullbackBlockRename_eq_blockSlice`, `Global.blockRename`, `Global.globalRowRename`, `Endpoint.liftBaseIndex`, `FormulaSem.baseTraceBits`, and literal `Decode.decodeCells`. It defines `pullbackCompose`, `decodedCellAtBlockSlice`, `decodedCellAtCanonicalBlock`, and `extendedRowCellSameObject`. `frontPlainFromFirstBlock` and `endPlainFromLastBlock` establish exact decoded list endcaps; `globalCNFToDecodedRowEndcaps` combines them with the global all-row CNF certificate. This is a *source-written candidate*, not a compiler-accepted theorem until the new focused root passes Agda 2.9.
+
+**G3 guarded one-step:** `ConcreteTapeGuardedDecodedTransitionExact.agda` now defines `guardedSATNoGhostAtTime` and `guardedSATDecodedMachineStep`. The latter takes the ORIGINAL guarded global CNF satisfaction, actual source-defined semantic sliding-window proof, and original before-row interior; it constructs `NoGhostContextBoundaries` from the SAT endcap evidence and applies `Step.decodedAdjacentRowsFormMachineStep` to yield the ORIGINAL `WF.WellFormedMachineStep` on the same decoded trace assignment. No standalone guard oracle, alternate decoding or unproved whole-row uniqueness assumption.
+
+**Verifier:** `ConcreteTapeBoundaryGuardFocusedRootExact.agda` now imports both new modules, the original canonical endcap CNF and the guarded global formula. A local independent exhaustive Python model of the actual canonical headed-flag truth-table and first/last row constraints passed 33,020 assignments, but the repository's Agda 2.9 command is unavailable in this environment. No `--safe` acceptance is inferred for these transitive roots.
+
+**Exact remaining G4/G5:** Thread the constructed per-time-step `NoGhost` witnesses through the existing `ConcreteTapeDecodedRunInductionExact` and dependent `ConcreteTapeDecodedRunLengthExact` without changing their row identities. Then change `ConcreteTapeSATToAcceptingRunExact` to accept the *guarded* global formula, and prove the **guarded completeness** direction for every original padded accepting run; do not silently claim that imposing new endcap clauses preserves the old unguarded SAT language. The uniform polynomial clause/variable/bit-clock estimates, N21/E20 encoded clocks and P2/P3 network construction remain independently unpaid. Obtain first concrete Agda error from the updated focused root before any Golden promotion.
+
+
+### Additional same-object endcap proof owners: every row, not selected examples
+
+The canonical Agda endcap source now also proves `everyPhysicalRowIsEnumerated : Slot i count → RowSlotMember ... (allPhysicalRows count)` and `everyRowEndcapCNFTrue`, which selects any actual row's CNF acceptance from the whole-row-endcap conjunction. `globalRowEndcapsSound` splits the exact two physical-column CNFs into a `PhysicalRowEndcapCellsPlain` witness, and `globalAllRowsEndcapsGivePhysicalRowPlain` derives the two **actual canonical decoded cell** plainness facts from the original global assignment and original row/cell index placements. These are source-written proof terms, not compiler receipts.
+
+A separate concrete owner `ConcreteTapeGuardedGlobalCookLevinCNFExact.agda` defines `guardedGlobalCookLevinCNF = Placed.append originalGlobalCNF globalAllRowsEndcapsCNF`. Its `guardedGlobalCookLevinCNFSound` and `guardedGlobalCookLevinCNFComplete` prove exact Boolean conjunction decomposition; `guardedGlobalCNFToOriginalAndAllEndcaps` produces both original SAT formula parts and the all-row source certificate. The focused Agda acceptance root imports this new owner. The ORIGINAL `globalCookLevinCNF` remains unchanged: claims of original-SAT equivalence and polynomial compiled size require their own proof, not mere formula extension.
+
+**Revised exact unpaid weld:** for every decoded after-row, prove the equality between the `Canonical.decodeCell` at the physical endpoint Fin placements and the first/last constructor in `Decode.decodeCells` for `Global.rowSliceBits` (existing `ConcreteTapeGlobalBlockSliceConsistencyExact` is a likely donor). Apply `noGhostFromAfterRowEndcaps`, thread `NoGhostContextBoundaries` through `DecodedRunInduction`, switch SAT soundness to the guarded global formula with a matching completeness proof for encoded padded runs, and obtain Agda 2.9 exact-head receipts. Unit CNF clauses and source-documented proof flags alone do not close those steps.
+
+**Verification already performed locally:** 33,020 cases passed in an independent Python differential model of the canonical plain-tag truth-table and row-endcap pairing, plus the existing six-cell ghost model. The actual repo script is included in preflight, but this workspace lacks Agda and a local checkout, so **no exact-head compiler receipt** can be reported.
+
+
+## 2026-11-06 — current max-cut implementation: endcap witness route (Agda source written)
+
+**Authority and scope:** Golden candidate sources are the ORIGINAL `ConcreteTapeAfterUniqueFromLocalityExact.agda` and `ConcreteTapeCanonicalEndcapCNFExact.agda`; the focused `ConcreteTapeBoundaryGuardFocusedRootExact.agda` imports both. The previously reported `NoGhostContextBoundaries` remains proof relevant. `dashi_lean4` AuthorityBoundary/Loom relation status is diagnostic comparison, never the Agda compiler receipt.
+
+**G1 (new, source-written):** `ConcreteTapeCanonicalEndcapCNFExact.plainEndcapPredicate` selects the original canonical cell-code headed flag (first bit), and `canonicalPlainEndcapCNFSound` / `canonicalPlainEndcapCNFComplete` prove literal equivalence with decoded `Pattern.IsPlainCell`. The `placedPlainEndcapSound` and `globalRowCellPlainSound` proofs transport that same literal predicate through `Rename.pullbackBits`, `Global.globalRowRename`, `Global.blockRename` and `Endpoint.liftBaseIndex`. `lastPhysicalColumn` selects an actual rightmost slot, and `globalAllRowsEndcapsCNF` compiles both physical endcaps across `allPhysicalRows (suc steps)`, with `globalAllRowsEndcapsSound` furnishing a proof-relevant per-row conjunction certificate. No alternative row codec, imaginary guard Boolean or arbitrary endcap index is used.
+
+**G2-a (new, source-written):** `ConcreteTapeAfterUniqueFromLocalityExact.frontPlainPrefixOfAppend`, `endPlainTail`, `endPlainSuffixOfAppend` and `endPlainAfterTriple` prove that *global* decoded after-row first/last plainness entails exactly the existing, extracted-centered `NoGhostContextBoundaries` through `noGhostFromAfterRowEndcaps`. The corollary `localityScanWithInteriorAndEndcapsGivesWellFormedStep` derives the ORIGINAL `WF.WellFormedMachineStep` without accepting the false unrestricted scan lemma.
+
+**G2-b (OPEN, decisive):** (i) use existing same-object fixed row decoder and global `Fin` block identities to transport `globalRowCellPlainSound` at first/last columns to `Pattern.FrontPlain` and `Pattern.EndPlain` on *each actual* `Step.decodedAfterRow`; (ii) conjoin `globalAllRowsEndcapsCNF` into the original `GlobalCNF.globalCookLevinCNF`, adapt both `GlobalFormulaPartsTrue` directions and `GlobalFormulaSemantics`, and prove the new guarded SAT↔run completeness over the same encoding. Its mere definition is not yet a conjunct of the old global formula.
+
+**G3–G5 (OPEN):** furnish the resulting `NoGhostContextBoundaries` to `Step.decodedAdjacentRowsFormMachineStep` and every time-slice in `ConcreteTapeDecodedRunInductionExact`; then finish `ConcreteTapeSATToAcceptingRunExact` and the costed machine reduction. G0 exact-head Agda 2.9 focused-root kernel acceptance is still OPEN. No local Agda installation is present here.
+
+**Finite test:** `scripts/check_karp21_canonical_endcap_cnf.py` now participates in referee preflight and its no-Agda fixture. An independent local Python equivalent exercised 33,020 exhaustive tag/payload and endcap assignments successfully. It is not an Agda compiler receipt or a proof of G2-b.
+
+
+## 2026-11-06 — guarded Cook–Levin boundary cut: source repair and exact remaining CNF obligation
+
+**Current original-owner sources:** `ConcreteTapeLocalWindowPatternsExact.agda` is rule-indexed and classifies the only all-plain-old-triple new-edge head cases. The impossible universal `legalOldLeftPlainForcesNewLeftPlain` / symmetric right lemma have been removed. `ConcreteTapeAfterUniqueFromLocalityExact.agda` contains structural forward-prefix and backward-suffix plainness inductions under `NoGhostContextBoundaries scan interior`, which requires only the *first* after-prefix and *last* after-suffix cell to be plain. The source-level `globalTransitionScanAfterUnique` and `localityScanWithInteriorGivesWellFormedStep` now consume these actual proof-relevant guards. `ConcreteTapeDecodedTransitionStepExact.agda` requires the same guard for its same-object decoded `scan` and no longer claims unconditional SAT-to-step closure. The focused compiler target is `ConcreteTapeBoundaryGuardFocusedRootExact.agda`.
+
+**Real no-go and finite controls:** `ConcreteTapeBoundaryGhostNoGoExact.agda` and `scripts/check_karp21_tape_boundary_ghost.py` already recorded the original legal-window ghost; the complementary integrated `ConcreteTapeBoundaryGhostCounterexampleExact.agda` constructs an actual original `Character.TransitionLocalityScan` and `InteriorHeadConfiguration` for a six-cell ghost example and refutes its unguarded `WF.ExactlyOneHead` conclusion. The new deterministic `scripts/check_karp21_tape_guarded_uniqueness_small.py` exhaustively checks all three direction-indexed single-state/symbol grammars at lengths 3..12; an independent matching computation checked 237 centered legal row pairs with zero non-unique results after both guards. Both executable controls are invoked from the referee preflight.
+
+**Exact frontier—not a compiler typo:** the original global Cook–Levin CNF and its `ConcreteTapeGlobalTransitionSemanticScanExact` proof currently produce window legality, but do NOT provide a source-checked `NoGhostContextBoundaries` witness for every decoded time slice. Without that, `ConcreteTapeDecodedRunInductionExact` and `ConcreteTapeSATToAcceptingRunExact` cannot unconditionally consume `Step.decodedAdjacentRowsFormMachineStep`; their downstream promotion flags have been demoted. A correct next phase must extend the *original* canonical SAT/tableau boundary predicate and prove its decoded endcap exclusion, then thread it into the same original machine/run consumers. No weakening, postulate, fake boundary boolean or second parser. Therefore the full `referee_karp21_maxcut.sh all` result remains BLOCKED until this substantive proof owner and exact-head Agda 2.9 compiler receipt exist.
+
+**Full ZKP O/R/C/S/L/P/G/F, invariants, pre/post, attribution and C4/PlantUML** are maintained at [Karp21TapeLocalityBoundaryNoGo20261106.md](Karp21TapeLocalityBoundaryNoGo20261106.md). Lean `AgdaMirror/AuthorityBoundary` and `AgdaMirror/LoomRelationAlgebra` provide governance comparison only; Golden Agda remains authoritative. No P0–P3 completeness chain is promoted.
+
+## 2026-11-06 — concurrent guarded tape-locality replacements and remaining decoded-tableau weld
+
+The original `ConcreteTapeLocalWindowPatternsExact.agda` and `ConcreteTapeAfterUniqueFromLocalityExact.agda` have now been updated by a separate worker: rule-indexed local grammar; true directional classification and middle-cell propagation; conditional after-uniqueness with one-cell `FrontPlain`/`EndPlain` guards on the **extracted after-prefix/suffix**. This is consistent with the independently verified nine-cell ghost-boundary counterexample to the former unconditional claim. The original `Pattern.LegalWindowForRule`, `Pattern.legalPlainLeftSymbolAgreement`, and `Pattern.legalPlainRightSymbolAgreement` names are preserved. The conditional `AfterUnique.localityScanWithInteriorGivesWellFormedStep` name remains but now **requires two additional proofs**.
+
+**Exact new integration cut:** `ConcreteTapeDecodedTransitionStepExact.decodedAdjacentRowsFormMachineStep` still applies `AfterUnique.localityScanWithInteriorGivesWellFormedStep` to only a scan and an interior witness. To close the same-object SAT run theorem, find or prove the two boundary guards from original canonical CNF decoded-row constraints, not arbitrary axioms or an extra `WF.ExactlyOneHead` premise. `ConcreteTapeHeadMarginExact` is forward-only from genuine well-formed steps, not an inverse remedy. Keep module typecheck and full `e20` FAIL-CLOSED until the original caller is supplied genuine guard witnesses and accepts under Agda 2.9. The disjoint no-go worker contributed `ConcreteTapeBoundaryGhostNoGoExact` plus a deterministic Python preflight counterexample; does not overwrite the two original module replacements. See [the exact ZKP/C4 interface ledger](Karp21TapeLocalityBoundaryNoGo20261106.md).
+
+
+## 2026-11-06 — genuine boundary-phantom counterexample blocks reverse Cook–Levin locality
+
+See [Karp21TapeLocalityBoundaryNoGo20261106.md](Karp21TapeLocalityBoundaryNoGo20261106.md) for exact ZKP O/R/C/S/L/P/G/F formulation, seven-cell-window finite witness, source/citation boundaries, C4 diagram, and amended P0–P3 contracts. The original unrestricted local-to-after-unique theorem is **false**: a nine-cell old row with one interior head at index 5, a right move to index 6, and an additional after-head at index 0 satisfies the original seven legal window constructors, without having a unique after head. `scripts/check_karp21_tape_boundary_ghost.py` is committed and called by every referee preflight. `ConcreteTapeBoundaryGhostNoGoExact.agda` independently uses the original Local/TapeCell and WF/ExactlyOneHead carriers to witness old uniqueness and refute new uniqueness. Agda kernel acceptance of the no-go module itself remains pending.
+
+Do not promote `ConcreteTapeAfterUniqueFromLocalityExact.globalTransitionScanAfterUnique` or `localityScanWithInteriorGivesWellFormedStep` in their current unconditional forms. Fixing the rule index of `LegalWindowForRule` is necessary but **not sufficient**, because `legalOldLeftPlainForcesNewLeftPlain` and its symmetric right-edge lemma are false for genuine centered/overlap windows. The minimal real frontier is a same-object canonical SAT/tableau **boundary head exclusion or globally coherent overlap anchor**, proved before recursive prefix/suffix plainness and after-uniqueness. The existing `ConcreteTapeHeadMarginExact` is downstream of well-formed steps and cannot supply the missing reverse implication. Do not adopt a second oracle, relaxed grammar or unproved boundary premise to conceal this.
+
+Kernel gate unchanged: original two modules halted e20 at ~2297/4475 by user-provided Agda 2.9 diagnostics. This turn's regression is executable finite evidence and typewritten no-go source, not compiler receipt. Proof consumers and full Karp21 integration remain explicitly BLOCKED pending a true strengthened contract.
+
+
+## 2026-11-06 — final three Agda 2.9 term alignments (source repaired, kernel receipt pending)
+
+At historic local head `038970cc0e27d3ac94a7fc76ca571a8a6ef8ddd9`, the remaining diagnostics concerned Cook token-count right-zero, clique selection equality, and the signed-list `length-++` implicit `ys`. Live source readback showed the clique branch already using direct `cong negBool eqU/eqV` and the signed-list branch already passing `{ys = encodeSignedValuesPure rest}`. The Cook original owner now uses `trans equality (NatP.+-identityʳ (cookFormulaTokenCount formula))` with the necessary `trans` import. These are source-level repairs; re-run the exact-head parallel Agda 2.9 compiler before promoting Golden or integration claims.
+
+See [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md) for original diagnostic coordinates, implementation decisions and fail-closed governance.
+
+**2026-11-06 Agda 2.9 follow-up:** The user reports all five preflight checks passing at historical commit `cbf4302cc90d72dcc44ce3d27847954bf56a6654`. Source fixes now on PR #1445 simplify the original clique-cover congruence witnesses, instantiate `{ys = encodeSignedValuesPure rest}` for the original signed-gamma `length-++` rewrite, and retain the previously written fuel-indexed Cook prefix parser. The latter and both repaired Agda Golden/integration roots are still **exact-head kernel-unverified** in this session. See [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md) for precise repaired lemmas and status.
+
+
+## 2026-11-06 — second compiler repair: all reported source issues patched, new Agda receipt pending
+
+The user's **local Agda 2.9.0 success receipts at historical head `972219b39894d28fed950f95fe0e2a2f050c68c6`** cover `Karp21CompilerRepairGovernanceExact`, `Karp21FinDecoderIndexBidiExact`, `Karp21BinaryFinMaterializationCostExact`, `CookLevinCircuitGCTBoundary` and `Karp21GammaBinaryRoundTripExact`. New diagnostic set: 16 line coordinates with reserved Cook/SAT constructor syntax (17 textual references on those lines), a missing `sym` in `Karp21GammaSignedListRoundTripExact`, a missing `trans` in `Karp21CliqueVertexCoverExact`, and the nonstructural recursive `parseCookFormula` with failing roundtrip rewrite in `PNotEqualsNPCookFormulaPrefixCodecExact`.
+
+**Implemented on PR #1445:** update the two original residual-constructor consumer files, fix both scope imports, and replace the original prefix codec's parser with a structurally terminating fuel-indexed parser plus a length-budgeted suffix roundtrip proof, retaining the exported `parseCookFormula`, `parseCookFormulaEncodeInto`, `decodeCookFormula`, and token-length interfaces. The source Goldens also now have a second-round typed diagnostic enumeration `FollowupRepairIssue` in `Karp21CompilerRepairGovernanceExact`. The independent local Python fuel-model run tested 1,400 formula/continuation combinations successfully; it is *not* a formal proof receipt.
+
+**Detailed current source/doc alignment:** [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md). The remaining immediate gate is the next **exact-head Agda 2.9** result from `scripts/run_agda29_parallel_check.sh`, not more compiler-free source claims. A successful old-head root is never promoted to the new head. P0 SAT bit-tape/ Cook–Levin, P1 N21/E20 clocks, P2 20 costed reductions and 21 NP memberships, and P3 `CertifiedKarpNetwork` remain separately OPEN.
+
+## 2026-11-06 — Agda 2.9 compiler repair; O/R/C/S/L/P/G/F synchronized
+
+**Detailed implementation and typed-provenance record:** [Karp21CompilerRepairORCSLPGF20261106.md](Karp21CompilerRepairORCSLPGF20261106.md). The Golden source candidate `DASHI/Mathematics/Complexity/Karp21CompilerRepairGovernanceExact.agda` encodes five historical issues and a fail-closed status boundary; the referee now checks it independently before the Cook Golden root. The read-only `dashi_lean4` comparison identified `AgdaMirror/AuthorityBoundary.lean` and `AgdaMirror/LoomRelationAlgebra.lean`, neither of which supplies an Agda kernel receipt.
+
+**Five baseline diagnostics reported by the user at `2340ed9374f825af7e61d38a7319da5901e2dded`:** reserved BooleanFormula constructor `variable` (both Cook and SAT indexed source owners); missing `_+_` in the gamma roundtrip; wrong implicit `{n = suc u}` for `NatP.≤-refl`; missing `with ... in` equalities on the clique/cover proof; and `referee_karp21_maxcut.sh` invoking its own isolated regression recursively. Source-level fixes are on PR #1445 with scoped Cook/SAT constructor consumers and a full-complexity lexical migration guard. The isolated no-Agda regression includes the new guard fixture but must only run independently of the actual referee.
+
+**Promotion boundary:** user-supplied previous local Agda 2.9.0 / Python 3.14.8 run accepted `Karp21FinDecoderIndexBidiExact.agda` at the historical head, not all modified roots at this newer head. The changed Cook, Gamma, Fin, and Clique original sources must be kernel checked again using `scripts/run_agda29_parallel_check.sh`; no exact-head receipt is available to this session. No P0/P1/P2/P3 terminal certification or binary-time clock is thereby promoted.
+
+
+## 2026-11-06 — change in acceptance policy: executable referee, not more uncompiled proof candidates
+
+**Actual PR #1445 changes:** `scripts/referee_karp21_maxcut.sh` now lets `preflight` run without an Agda installation. Previously it called `agda --version` unconditionally after allowing the `preflight` mode, so all its actual existing Python bitword/gadget checks were blocked. **Kernel modes still abort with exit 127 if Agda is missing.** An explicit `AGDA_STDLIB_ROOT` can now be supplied to direct the compiler to a clean standard-library installation. `scripts/check_karp21_referee_no_agda.py` is a new isolation regression for this exact failure mode, run locally against equivalent referee control flow and now invoked by the actual referee. A new `.github/workflows/karp21-referee.yml` requests two separate PR/push jobs: Python source/executable preflight and actual hosted Ubuntu Agda typechecking of all referee Golden/integration roots. It records exact compiler version and captures diagnostics/artifacts; no paper proof, status marker or test-only result substitutes for a compilation receipt.
+
+**Acceptance rule:** P1/N21 `n21FinFreeVerifierSameWord` and every P0/P1/E20 proof candidate remain SOURCE WRITTEN / KERNEL UNVERIFIED until the CI job reports successful Agda typechecking at the *same commit*. Source import scans, absence of holes, differential Python tests and existence of CI workflow alone do not promote any gate. The current connected GitHub commit has **no returned PR workflow run**; CI execution/diagnostics remain outstanding. The referee's current all-mode is Agda typechecking of integration roots; an additional transitive `--safe` receipt is mandatory for any Golden root whose owner/import closure is not yet --safe.
+
+**Next decisive max cut:** Retrieve the first actual Agda compiler diagnostic from `Karp21FinFreeGammaGeneralSparseBudgetExact`, `Karp21FinFreeAllWordDecoderAgreementExact` or the focused `Karp21Everything` root and repair it IN PLACE. Once N21 is kernel accepted, pay the independent binary-native bit-complexity and `PR.polynomialTimeVerifier` clock. P0 SAT bit-tape/ Cook–Levin universal costed compiler, E20 actual polynomial transducer, E01–E19+E05 encoded reductions and all 21 NP memberships, and P3 `CertifiedKarpNetwork` are still OPEN. No new full NP-completeness chain or P≠NP result claimed.
+
+
+## 2026-11-05 — N21 universal original decoder / verifier source-candidate, kernel and bit-clock still OPEN
+
+**GitHub PR #1445, focused Karp21 root updated.** Three new proof modules reduce the *actual* N21 binary gamma decoder gap without inventing an alternative graph language:
+
+1. `Karp21FinFreeGammaGeneralSparseBudgetExact.agda`: source-level `readLowBitsSuffixWithinInput`, `readGammaZerosSuffixWithinInput`, `readGammaSuffixWithinInput`, `readRawEdgesCountExact`, `twoPerEdgeWithinTripleBudget` and `originalGammaFrameHasSparseBudget`. They follow the original `Gamma.readLowBits`, `Gamma.readGammaZeros` and `Graph.readRawEdges`, establishing from the **original** (3m\leq\lvert\mathrm{afterM}\rvert) header guard that `Sparse.twoPerEdge (length raw) ≤ Word.encodingSize word` on **every** successful source raw-edge frame. There is no bound on binary gamma vertex count `n`.
+
+2. `Karp21FinFreeRawReaderSparseBudgetExact.agda`: `rawReaderBudgetOutcome` exhausts the actual `Runtime.readRawGraphWord` gamma and edge decision branches using the literal source reader and the general budget theorem. `actualFinFreeRawGraphSuccessHasSparseBudget` specializes to **any** successful original raw graph word. This is a source-level size/correctness theorem and NOT a polynomial bit-tape runtime.
+
+3. `Karp21FinFreeAllWordDecoderAgreementExact.agda`: `originalTypedDecoderRejectsInvalidRawFrame` handles the raw-validator rejection branch by reusing the generic `AllRaw.rawGuardFalseImpliesTypedReject` proof. `OriginalN21ReaderAgreement` records either exact failure of both original decoders or successful matching `Runtime.parsed-raw-graph` and original dependent `Cut.graph` outputs, with signed `Observe.RawEdgeListFieldsSame` and no equality of offDiagonal proof-function fields. `allOriginalN21GraphWordsAgree` performs the **entire original nested gamma/3m/edge/trailing/positive-threshold/validator case split**. Its positive case consumes `AllFrame.allRawGammaFrameSuccessAgreement`, whose earlier caller-supplied sparse-budget premise has now been **removed** and replaced by the derived generic theorem. `n21FinFreeVerifierSameWord` composes the all-word outcome with `Same.n21FinFreeVerifierSameWordOnMatchedFrame` and `...OnBothRejected`, targeting exact equality of the two **original** Boolean verifiers for **all** graph words and certificate words.
+
+**PROMOTION STATUS:** All three modules and revised `AllFrame` are genuine committed Agda source candidates and imported by `Karp21Everything.agda`. No Agda binary, no exact-head kernel/typecheck, no transitive `--safe` certification or CI proof receipt was available. Do NOT mark `n21FinFreeVerifierSameWord` Golden/accepted merely because the name is present or code has no visible holes. Agda will need to elaborate the nested `with ... in` equalities, the dependent matched-frame constructor and the original codec imports. Any failure must be fixed on this same PR, not bypassed by a postulate.
+
+**Exact next P1/N21 gates:** (a) kernel-check `Karp21FinFreeGammaGeneralSparseBudgetExact`, `Karp21FinFreeRawReaderSparseBudgetExact`, `Karp21FinFreeAllWordDecoderAgreementExact` and the full imported consistency/score chain; (b) select a **genuine** binary machine cost model for original gamma-decoded integers with explicit length-dependent arithmetic and scan clocks; (c) prove `PR.polynomialTimeVerifier` for an executable same-object binary tape implementation and instantiate existing `Graph.LiteralN21.karpWeightedMaxCutInNPFromMachineReceipts`, paying certificate admissibility under that nondegenerate model.
+
+**Unchanged P0/P1/E20/P2/P3:** P0 SAT binary verifier and uniform Cook–Levin costed compiler, E20 polynomial source-to-signed-MaxCut word machine and kernel acceptance, all 20 Karp reductions and all 21 NP memberships, and actual `CertifiedKarpNetwork`. No Clay/P≠NP consequence. **0/20 new kernel-certified costed reductions, 0/21 new fully certified NP-completeness chains.**
+
+
+## 2026-11-04 — N21 ALL certificate bits + original per-frame Boolean verifier alignment (Agda source candidate, NOT certified)
+
+**Two new modules on PR #1445, imported by the focused `Karp21Everything.agda` root:**
+
+1. `Karp21FinFreeSparseCertificateCanonicalExact.agda`: `sparseDecodeCanonicalOutcome` and `sparseDecodedWordIsExactOriginalEncoding` supply the *missing successful-input left inverse* of the existing `Sparse.decodeSparseEdgeBits`, recovering the exact accepted 2m-bit word, not merely a guessed binary slice. `rawScoreCannotAcceptMalformedSparseBits` follows original `Runtime.rawSparseScore` on all malformed/truncated/trailing certificate inputs and proves it returns `nothing` when the original typed decoder returns `nothing`, for any matched raw/typed field list and any history.
+
+2. `Karp21FinFreeSparseCertificateWordVerifierSameExact.agda`: `rawFrameSameTypedOnEncodedBits` composes the earlier source-written signed-`Maybe` score theorem, raw-vs-typed endpoint consistency equivalence and exact signed-threshold comparison on source-owned 2m-bit certificates. `rawFrameSameTypedForEveryCertificate` then uses the original decoder's left inverse and malformed-word rejection to prove candidate pointwise Boolean equality for **every** certificate word on an original raw/typed edge-field-matched graph. `n21FinFreeVerifierSameWordOnMatchedFrame` lifts the result to the **actual** original `Runtime.verifyFinFreeSparseGraphWord` and `Graph.LiteralN21.verifyCanonicalSparseGraphWord` on the **same graph word**, conditional solely on the two original gamma graph readers returning matched positive-threshold frame/edge data. `n21FinFreeVerifierSameWordOnBothRejected` covers words both original readers reject.
+
+**Precise remaining P1/N21 max-cut, reduced:** prove an **unconditional total graph-word decoder bridge**, without assuming matching read results: for each `word : Word.BitWord`, either `Graph.decodeGraphWord word` and `Runtime.readRawGraphWord word` both reject, or they return the **same original** positive-`W` frame with `RawEdgeListFieldsSame`. In particular, show original `3m` guard and suffix-preserving gamma consumption imply the typed decoder's `Sparse.twoPerEdge m ≤ Word.encodingSize word` on every successful raw read even for binary-coded huge `n`; prove all malformed branches; do not rely on equality of opaque offDiagonal proof-function fields. That total decoder bridge composes with the just-added same-word matched-frame theorem into `n21FinFreeVerifierSameWord` for all words and certificates.
+
+**Resource gate remains separately OPEN:** kernel-check full import closure with pinned Agda/std-lib and --safe audit; build an executable binary-native tape implementation/semantics for gamma-decoded fields, equality, signed integer sums and verifier, prove its polynomial step clock, and inhabit the **existing** nontrivial `PR.PolynomialCostModel` with `PR.polynomialTimeVerifier`. Source-written Agda functions on unary `Nat` cannot be counted as unit-cost binary operations.
+
+**Other gates unchanged:** P0 SAT verifier clock and uniform Cook–Levin compiler; E20 actual decoded graph and bit-tape polytime transducer; E01–E19+E05 encoded costed reduction network, 21 `InNP` witnesses, P3 `CertifiedKarpNetwork`. No terminal NP-completeness or P≠NP claim. **0/20 verified costed reductions, 0/21 full NP-completeness chains.**
+
+
+## 2026-11-04 — actual N21 Runtime.rawSparseScore signed-Maybe source composition
+
+**New candidate source:** `Karp21FinFreeActualSparseScoreAcceptanceExact.agda`, imported by `Karp21Everything.agda`. `rawSparseScoreExactlyExpected` follows the *actual* `Runtime.rawSparseScore` algorithm, splitting its two `Runtime.endpointConsistent` decisions, its recursive `Maybe` result and original `Golden.boolEqual` crossed-label cases. It ties the original returned signed `ℤ` to `Numeric.originalRawLocalSignedCut` through an explicit `scoreWhenHistoryAccepts` constructor. The equal-label case uses standard-library `IntP.+-identityˡ` rather than silently dropping an integer term. `rawScoreAcceptedIffHistoryConsistent` proves the raw source `Maybe` acceptance iff the source-owned original history checker succeeds. `rawScoreSameTypedSparseConsistencyIff` then reuses `Pairs.rawHistorySameOriginalTypedSparseConsistency` and `Numeric.originalRawLocalSignedCutMatchesTyped` to equate acceptance with the ORIGINAL typed `Sparse.allEndpointOccurrencesConsistent`, with actual `Sparse.sparseEdgeScore` for every signed weight.
+
+**Scope, no promotion:** these are source-written **Agda proof candidates** for a certificate known to equal `Sparse.encodeSparseEdgeBits` of a typed `Sparse.EdgeBits` that matches an actual validated raw edge list. Do not call it `n21FinFreeVerifierSameWord` yet. Its exact next leaves are: (a) original `Sparse.decodeSparseEdgeBits` successful-input re-encoding and malformed-certificate rejection iff for all arbitrary certificate words; (b) `Runtime.verifyFinFreeSparseGraphWord` vs `Graph.LiteralN21.verifyCanonicalSparseGraphWord` on all successful frames, including signed threshold comparison; (c) all malformed graph words / missing sparse 2m budget; (d) genuine source-to-binary tape polynomial clock for every gamma-decoded Nat/Int operation, plus end-to-end `PR.InNP`. **No Agda compiler/kernel receipt** is available in this session.
+
+**Unchanged global cut:** P0 SAT and uniform Cook–Levin machine clock, E20 polynomial output transducer and kernel proof, E01–E19+E05 costed reductions and all 21 NP-memberships, P3 certified Karp network. 0/20 fully costed certified reductions; 0/21 fully certified terminal NP-completeness chains.
+
+
+## 2026-11-04 — N21 raw history vs ORIGINAL typed sparse consistency, source-written exact composition
+
+**New proof-candidate modules and focused-root imports:** `Karp21FinFreeTypedObservationConsistencyBidiExact.agda`, `Karp21FinFreeChronologicalConsistencyBidiExact.agda`, and `Karp21FinFreeActualPairwiseConsistencySameExact.agda`. The first relates original `Sparse.observationsCompatible` (`Fin n` pair identity) to original `Finite.compatibleCookObservations` (`Nat` addresses via `Fin.toℕ`), proves entire typed all-pairs consistency against the corresponding actual `RawEdgeListFieldsSame` source-original endpoint observations, and proves exact signed integer local fold equality (including negative edges). The chronological module establishes the arbitrary-list theorem `chronologicalRuntimeExactlyOriginalAllPairs` using the *real* `Runtime.endpointConsistent`, and the actual per-edge-check schedule bridge `rawOriginalRuntimeHistoryExactlyCookAllPairs`. The new per-edge lemma `rawDecodedEndpointsDistinct` uses the original `Cut.offDiagonal` witness to justify checking `v` then `u` sequentially while retaining the **original** `(u,a) :: (v,b) :: history` update.
+
+`Karp21FinFreeActualPairwiseConsistencySameExact.agda` now isolates the remaining permutation/consistency branch: `rawOneAgainstSwapAllEdges` proves that changing endpoint order within every edge preserves original numeric comparisons against any checkpoint; `rawAllPairsWithinEdgeSwapInvariant` proves the full original Cook all-pairs predicate unchanged; `rawHistorySameOriginalTypedSparseConsistency` composes the chain into an original typed sparse endpoint-consistency Bool equality **for every** successfully field-matched signed raw edge list and corresponding `Sparse.EdgeBits`, not merely E20 images. This is not a reduction to an invented problem, and `n` is not enumerated.
+
+**Exact P1/N21 frontier after this source pass:** (1) prove `Runtime.rawSparseScore raw (Sparse.encodeSparseEdgeBits bits) history` has precisely the original `rawOriginalRuntimeHistoryGuard` accept/reject status and the original `originalRawLocalSignedCutMatchesTyped` signed sum, including `Maybe` and zero/contribution branches; (2) carry the same result to the source-owned `N21.LiteralN21.verifyCanonicalSparseGraphWord`, with real decoder, 2m certificate and all invalid/trailing-bit branches, establishing pointwise `n21FinFreeVerifierSameWord`; (3) establish polynomial **binary** tape runtime that pays for gamma-decoded large naturals rather than unit-cost `Nat` operations. Separate P1/E20 costs and kernel, P0 Cook–Levin costed root, E01–E19+E05, 21 `InNP` and `CertifiedKarpNetwork` remain OPEN.
+
+**Safety of status:** all these are actual GitHub source-written proof terms, not Agda-accepted results. There is no Agda compiler installed in this runtime and no exact-head kernel or transitive `--safe` receipt. No `PR.polynomialTimeVerifier` or `PR.polynomialTimeMap` was claimed on the strength of an abstract comparison count, and full NP-completeness counts remain **0/20 certified costed reductions; 0/21 end-to-end NP-completeness chains**.
+
+
+## 2026-11-04 — N21 typed/raw numeric observation and chronological all-pairs bridges (source-written; kernel OPEN)
+
+**New modules on PR #1445 and imported by `Karp21Everything.agda`:**
+
+- `Karp21FinFreeTypedObservationConsistencyBidiExact.agda` proves the *candidate* pointwise `typedNumericPairCompatible` for the original `Sparse.observationsCompatible` on `Fin n` endpoints versus `Finite.compatibleCookObservations` on their numeric `Fin.toℕ` addresses, relying on `FinP.toℕ-injective`. `typedAllPairsExactlyNumericCook` extends that to every entry list. `runtimeHistoryCheckExactlyCook` identifies the actual `Runtime.endpointConsistent` with `Finite.oneCookObservationAgainst`. On successful original raw `Graph.validateRawEdges` field observations, `originalRawPairsAreTypedNumericPairs` and `originalRawPairsTypedConsistencySame` align the exact 2m input certificate's endpoint pairs. `originalRawLocalSignedCutMatchesTyped` transfers the complete finite signed-weight local cut fold onto `Sparse.sparseEdgeScore`, with no nonnegative-weight restriction and no new graph grammar.
+
+- `Karp21FinFreeChronologicalConsistencyBidiExact.agda` proves the *candidate* generic history-vs-all-pairs invariance: `cookPairCompatibleSymmetric`, `crossFreshArrival`, `chronologicalCookWithHistory`, `chronologicalRuntimeIsCook`, and `chronologicalRuntimeExactlyOriginalAllPairs`. The latter states that for **every** `List (Nat × Bool)`, the chronological checker driven by the actual `Runtime.endpointConsistent` produces the same Boolean as the original `Finite.allCookObservationsConsistent` (the same primitive that the typed `Sparse` checker shares via `typedAllPairsExactlyNumericCook`). The pairwise conjunction reorder is implemented by explicit finite Boolean cases; no postulate, solver oracle, or theorem-level assumed status. This also reuses the original Cook SAT lemma in the N21 cut lane.
+
+**EXACT NEXT P1/N21 MAX-CUT:** (1) account for the original raw `rawSparseScore` intra-edge update: it tests both (u,a),(v,b) against the same prior history, then pushes them in `(u,a)∷(v,b)∷history` order; show `u≠v` from the source validator and prove equivalence to the chronological checker on the per-edge reversed pair trace `(v,b),(u,a)`; (2) prove all-pairs consistency invariant under swapping the two endpoint occurrences of each edge, joining the actual `originalRawPairsTypedConsistencySame` theorem; (3) show that `Runtime.rawSparseScore` returns `just` precisely for the accepted 2m-bit local trace, with the actual signed score equal to `Sparse.sparseEdgeScore`; (4) derive **both** parsers' malformed-word agreement from original outer gamma read cases and sparse budget rather than only assuming a successful frame; (5) combine with the original `N21.LiteralN21.verifyCanonicalSparseGraphWord` to prove `n21FinFreeVerifierSameWord` pointwise on **all** graph words and certificate words; (6) source-written/Agda-kernel-checked genuine binary-tape polynomial verifier clock, with gamma-unary-`Nat` physical representation costs separately modelled.
+
+**P0/P1/E20/P2/P3 remain OPEN:** P0 literal SAT verifier and Cook–Levin uniform costed compiler, E20 actual bit-tape polynomial reduction, E01–E19 and E05 encoded reductions and all 21 `InNP` attestations, P3 actual `CertifiedKarpNetwork`, and exact-head transitive `--safe` Agda receipts. No Agda binary is installed in this session; only GitHub source readback plus lightweight syntax checks are available. **No new kernel certification, no NP-completeness promotion; 0/20 fully costed reductions and 0/21 completed NP-completeness chains.**
+
+
+## 2026-11-04 — arbitrary raw gamma SUCCESS frame, two actual parsers, kernel OPEN
+
+`Karp21FinFreeAllGammaSuccessAgreementExact.agda` now composes `AllRaw.rawGuardTruePreservesOriginalFields` (generic raw acceptance, returned dependent Fin edges and original signed fields), `AllRaw.rawFieldPreservingListLength` (same returned m), `RawFrame.readFinFreeRawGraphFromActualFrame` and `TypedFrame.decodeGraphWordFromActualFrame` into one `allRawGammaFrameSuccessAgreement`. It uses the **same actual word** and exact original gamma(n), gamma(m), signed triples, gamma(W), 3m bounds, 2m sparse bit budget and strict raw-order validator. The only side condition beyond the original read-success and checks is the explicit sparse `2m ≤ |word|` bound. The result includes the literal `Runtime.readRawGraphWord` success and literal `Graph.decodeGraphWord` success, plus `Observe.RawEdgeListFieldsSame`, on an **arbitrary** strict raw input frame (not just the E20 complete-graph image).
+
+The remaining `n21FinFreeVerifierSameWord` requires recovering those frame conditions and budget unconditionally from all valid source words; ruling out every malformed word in both original readers; and equivalence of the full **sparse certificate** acceptance algorithms (typed all-pairs `Fin` consistency vs raw history-based `Nat` consistency and complete signed score/threshold). A concrete binary-tape polynomial clock, rather than implicit Agda `Nat` operation costs, is also still separate. The new module is source-written and imported by `Karp21Everything.agda`, but with no Agda executable locally, **typechecking/Golden/transitive-safe kernel receipt is absent**. All P0, E20, P2 and P3 open cost/network gates remain unchanged.
+
+
+## 2026-11-04 — N21 arbitrary-raw validator agreement: new source, receipts pending
+
+**New source owner:** `Karp21FinFreeAllRawValidatorAgreementExact.agda` (imported by `Karp21Everything.agda`) is an unconditional *source-written* proof **candidate** for agreement of the two **original** raw edge validators on EVERY `List Graph.RawEdge`, not only the E20 complete graph image. `strictRawFinEndpointsApart` uses actual `FinP.toℕ-fromℕ<` and `NatP.<-irrefl` to rule out the only extra dependent-decoder rejection branch when the shared strict numeric check `u<v<n` holds. `rawGuardTrueImpliesTypedSuccess` reconstructs a genuine `Graph.validateRawEdges` success, while `typedSuccessImpliesRawGuardTrue`, `typedRejectImpliesRawGuardFalse`, and `rawGuardFalseImpliesTypedReject` cover the converse and all failure paths. `rawValidationSameStatus` packages the actual original functions with no replacement grammar, no `Fin n` runtime lookup and no graph-specific bounded-`n` assumption.
+
+The source additionally reuses `Karp21RawGraphValidatorObservationExact` for `rawGuardTruePreservesOriginalFields`, obtains exact returned-edge count via `rawFieldPreservingListLength`, and proves the four Boolean cases `sameRawSignedCrossingContribution` using the ORIGINAL signed `Sparse.edgeBitsCut`, including all negative integer edge weights. This has no PSD/nonnegative-weight assumption.
+
+**Independent local arithmetic/structural test:** enumerated 564,725 signed raw-edge-list instances (vertex counts 0–4, edge counts 0–3, endpoint values 0–3, weights -3/0/2), comparing a Python model of the two validation gates and verifying per-edge signed crossing on accepted cases; all assertions passed. A second independent exhaustive finite comparison covered 370,570 graph/certificate/positive-threshold cases (vertex counts 0–4, edge counts 0–2, endpoint values 0–3, signed weights -2/0/3, all exactly-2m Boolean certificates, thresholds 1 and 2), comparing the original typed all-pairs consistency/signed-score semantics with the raw history-based consistency/signed-score semantics; no discrepancies. Both checks are independently coded finite sanity tests, **not the repository's own test runner or an Agda proof**, and do not establish binary tape time.
+
+**Resource/certification boundary:** the **full** `n21FinFreeVerifierSameWord` is still OPEN: the proof must relate the ORIGINAL *outer* gamma-word framing and sparse certificate parsing, the full pairwise endpoint consistency predicates (Fin typed vs Nat raw, including reordered history), the entire signed sum and threshold comparison, and all malformed words. The binary-native tape runtime must also avoid treating decoded arbitrary-size unary `Nat` as unit-cost. P0 Cook finite comparison `Karp21CookConsistencyComparisonClockExact.agda` and N21 pair-count `Karp21FinFreePairwiseQuadraticCountExact.agda` had their ring solver invocations aligned with the repo-existing `Data.Nat.Tactic.RingSolver.solve (index ∷ [])` interface, but no Agda compiler is available in this session to confirm typechecking.
+
+**Still OPEN:** exact-head Agda typechecking/Golden `--safe` receipts for all new modules, P0 literal verifier bit clock and uniform Cook–Levin root; E20 and N21 true bit-tape clocks; E05 and E01–E19 costed reductions; all 21 `InNP` certificates; actual `CertifiedKarpNetwork`. **0/20 certified costed reductions, 0/21 certified end-to-end NP-completeness chains**. Do not promote source-written names or this finite test to kernel acceptance.
+
+
+## 2026-11-04 — N21 Fin-free original gamma frame on E20 words; finite referee separation
+
+**New source:** `Karp21FinFreeOriginalGammaFrameExact.agda`, imported in `Karp21Everything.agda`, has `readFinFreeRawGraphFromActualFrame` for the actual `Runtime.readRawGraphWord` success path (including original 3m guard, no trailing suffix, signed triples, positive threshold and original raw order/endpoint check) and `e20OriginalWordFinFreeRawDecode` on `Gen.completeScaledPairEdges`. All field replay terms come from the already-existing `Karp21OriginalGammaGraphWordFieldsReplayExact`, and the actual raw runtime guard from `Karp21FinFreeE20RawValidatorAgreementExact`; no alternative grammar or dictionary verifier is smuggled in.
+
+**Independent finite arithmetic/grammar audit executed in this session:** 3,906 signed source-to-target E20 images, 111,111 small cut-label schedules, 989 rejected short bitstrings and one sparse graph with declared `n=2^1024` all passed exact integer/gamma model checks. These results came from an independent local Python reproduction, NOT an execution of the committed repository Python scripts and NOT Agda kernel certification. The repository's existing `scripts/check_karp_binary_codec.py` and `scripts/check_karp21_binary_native_sparse_verifier.py` continue to own their richer independent regression controls.
+
+**Still unpaid:** a full arbitrary-word `n21FinFreeVerifierSameWord` (both original parsers, malformed words, sparse label compatibility, negative weights, threshold score), binary native representation of gamma-decoded Nat fields and a literal polynomial tape clock. `Karp21OriginalGammaCompleteGraphParserExact` and this new N21 frame are both source-written proof candidates pending exact-head Agda. The 0/20 costed reduction and 0/21 end-to-end completion counts remain unchanged.
+
+
+## 2026-11-04 — P0 strict Cook unary-index resource representation bound (source-written; kernel OPEN)
+
+**New Golden-candidate source:** `Karp21CookUnaryIndexWordBoundExact.agda`, imported by the existing Karp focused root, reuses the **original** `Prefix.encodeNatInto` successor/zero syntax, `Prefix.cookFormulaTokenCount`, `Finite.formulaVariables`, exactly-three-bit `Binary.encodeFormulaBits`, `Finite.canonicalCookFormulaWordSizeExact`, and `Canonical.k00StrictAcceptedWordCanonicalReencode`. `formulaIndexTokenBound` bounds **every** syntactic Cook variable index by its source AST's actual token count; `k00StrictWordAllIndicesBounded` transfers it to the length of **any successfully strict-parsed original SAT input word**, not merely the canonical encoder's image.
+
+**Cost consequence with no false promotion:** the unary index representation in this specific Cook syntax consumes `index+1` source tokens, so its Nat index magnitude is at most accepted source word size. This permits a future literal ordinary tape checker to pay for unary index comparisons in polynomial input length. It is NOT transferable to the E20/N21 Elias gamma-coded vertex count; `n=2^1024` remains a valid sparse graph-code stress case. No machine cost was proved for repeated-variable lookups, prefix formula parser, total syntax evaluation, witness composition, or a standard finite-state TM; `k00StrictSATMachineVerifierClock` and `PR.InNP` remain OPEN. No exact-head Agda compiler or transitive `--safe` receipt was run.
+
+
+## 2026-11-04 — original nested gamma decoder and E20 word-receipt composition, kernel OPEN
+
+**New source, in existing PR #1445:** `Karp21OriginalGammaCompleteGraphParserExact.agda`, imported by `Karp21Everything.agda`, assembles the original `Graph.decodeGraphWord` using its exact header, edge, threshold, dependent validator and sparse bound decisions. `decodeGraphWordFromActualFrame` accepts proof terms for each literal parse result and both inequalities, then follows the original parser's rejection/acceptance branches; it does not define a second graph grammar.
+
+`completeGraphGammaGraphDecodeSameObject` specializes that assembly to the exact source `Gen.completeScaledPairEdges`, with `Fields.readEncodedGraphVertexCount`, `readEncodedGraphEdgeCount`, `readEncodedGraphEdgeTriples`, `readEncodedGraphThresholdMagnitude`, `readEncodedGraphEdgeCountBudget`, the original `Valid.scaledCompleteRawValidatorSuccess` and `Observed.sameWeightedEdgeListLength` plus `Size.encodedGraphAtLeastSparseBits`. Its target preserves `Cut.WeightedMaxCutYES` bidirectionally, not equality of the off-diagonal proof functions.
+
+`decodedGraphWordLanguageIff`, `e20ScaledCompleteWordFaithful`, and `sourceWrittenE20ImageWordReceipts` instantiate the **original** `Boundary.E20ImageWordReceipts`, then `SourceWrittenE20.e20OriginalEncodedDecisionIff` reuses the existing malformed-word totalization and exceptional fixed graph, rather than defining a proxy reduction.
+
+**PROMOTION STATUS — CRITICAL:** This code was authored against GitHub file readback and statically checked for structural source properties only. There is NO Agda binary in the runtime and NO exact-head kernel/typecheck or transitive `--safe` receipt. These are **unverified proof candidates**; the full nested gamma same-object E20 semantic gate is NOT marked accepted. Referee should first typecheck this focused new module and the import closure and repair any Agda elaboration/with-rewrite failures, rather than treating source-written names as completed results.
+
+**Still OPEN:** P0 `k00StrictSATMachineVerifierClock`, strict SAT `InNP`, the uniform costed Cook–Levin root; P1 `n21FinFreeVerifierSameWord` for arbitrary words and all malformed branches, true binary-tape clocks for N21 and E20, concrete `PR.polynomialTimeMap`; P2 E05/E01–E19 costed word reductions and N01–N20 plus N21 `InNP`; P3 actual `CertifiedKarpNetwork` and all kernel receipts. The Fin-free runtime still uses Agda `Nat` after gamma decoding: absence of inductive `Fin n` allocations does NOT by itself pay binary native operations or machine cost. Certification counters remain **0/20 new costed direct reductions, 0/21 new complete NP-completeness theorems**.
+
+
+## 2026-11-04 — K00 concrete Cook consistency full-scan comparison envelope (source-written; kernel pending)
+
+**New source owner:** `Karp21CookConsistencyComparisonClockExact.agda`, imported by `Karp21Everything.agda`, instruments the ORIGINAL `Finite.compatibleCookObservations` and `Finite.allCookObservationsConsistent` on the SAME `List (Nat × Bool)` source carrier. `countedAgainstValue`/`countedAllValue` source-write Boolean observational equivalence with the original checker, while `countedAgainstComparisons`, `countedAllComparisons`, and `fullPairCountAtMostSquare` derive a real full-scan address-comparison envelope `k²` for `k` actual syntactic variable observations. `k00ActualAcceptedWordPairComparisonBound` additionally reuses the already-existing **arbitrary accepted strict input word** length certificate and proves the full-scan pair count is at most `encodingSize(word)²` on that actual decoded `Cook.BooleanFormula` and actual `verifyStrictCookSATWord` acceptance. This is the P0 *comparison-count* component on a real strict SAT word, not merely a formula-local bound. This bound is on observed-variable occurrence count, never the maximum (binary-coded) variable number, so no unary max-index vector is introduced.
+
+**Not a P0 clock promotion:** the full SAT bitword verifier still requires canonical syntax parsing, binary Nat-index equality, repeated-bit consistency, finite formula evaluation, input/certificate checks and an executable ordinary-tape-machine realization with all bit costs accounted for. A scheduled comparison count is not `PR.polynomialTimeVerifier`, and `k00StrictSATMachineVerifierClock`, `k00StrictSATInNP`, the uniform Cook–Levin root, and the full P1/P2/P3 gates remain OPEN. Pure new module declares `{-# OPTIONS --safe #-}` but no exact-head Agda compiler/kernel or transitive `--safe` receipt was run, so Golden acceptance is pending. No CI.
+
+
+## 2026-11-04 — actual E20 image: dependent/Fin-free validator guard agreement (source-written; kernel pending)
+
+**New source owner:** `Karp21FinFreeE20RawValidatorAgreementExact.agda` is imported by the original `Karp21Everything.agda` focused root. `canonicalRawRuntimeChecksPass` is structural induction over the EXISTING `Karp21CanonicalRawValidatorPremisesExact.ValidFromPrevious` certificate. It pays exactly the two numeric endpoint inequalities and the original `strictAfter` check executed by the original `Karp21FinFreeRawSparseWordVerifierExact.validRawEdges`. No distinct graph construction, order convention, witness, or Boolean oracle is introduced.
+
+`scaledCompleteRuntimeRawValid` specializes the statement to E20's existing `Gen.completeScaledPairEdges`. `e20FiniteRawParsersAgreeAndPreserveYES` additionally reuses `Karp21CanonicalParsedGraphAcceptanceExact.scaledRawParsedGraphAcceptanceBidi` to package the ORIGINAL dependent `validateRawEdges` success, Fin-free raw-validation success and signed `WeightedMaxCutYES` equivalence on the same E20 generated finite graph and threshold. `e20DecodedEdgesFitOriginalSparseWord` additionally transports the pre-existing `2m ≤ encoded graph word length` theorem to the **actual returned dependent decoder edge list**, using `SameWeightedEdgeLists` and its exact length preservation instead of assuming the parser retains edge count. The original `3m` raw-edge guard remains supplied separately by `Karp21OriginalGammaGraphWordFieldsReplayExact.readEncodedGraphEdgeCountBudget`.
+
+**Scope / non-promotion:** this is the E20-image raw-guard portion only. `n21FinFreeVerifierSameWord` still needs *arbitrary* graph-word parsing and all malformed branches, the typed/runtime sparse-endpoint consistency equivalence, signed score and threshold equality. `completeGraphGammaGraphDecodeSameObject` still needs the composed outer gamma fields and sparse budget, and `scaledCompleteWordFaithful` remains open. Neither Nat-valued `Fin` avoidance nor operation counts alone supplies binary-tape arithmetic, parsing, comparator, and transition costs. P0 SAT `InNP`/universal Cook-Levin, E20/N21 polynomial clocks, E01–E19/N01–N20, and `CertifiedKarpNetwork` remain open. Zero new kernel-certified resource reductions or terminal NP-completeness proofs. The Agda compiler, transitive `--safe` audit, and CI have not been run; do not mark this as Golden/kernel accepted.
+
+**Cross-pollination audit:** existing P≠NP concrete tape/cost owners are preferred to fresh machine models; the Shor/RSA binary/ternary register and Euclid bridges remain model/cost testbeds, not classical SAT or factoring hardness authority; XOR-grid parity is a Boolean primitive/finite special instance, not a general signed Max-Cut solution; BSD remains a separate arithmetic domain. Attribution: Cook 1971, Leonid Levin 1973, Karp 1972 and prior DASHI owners retained.
+
+
+## 2026-11-03 — E05 original CLIQUE→NODE COVER canonical binary complement payload
+
+**Source-written at PR #1445; no Agda acceptance receipt:** `Karp21CliqueComplementUpperTriangleWordExact.agda` defines the literal off-diagonal bitwise negation of a sorted `List Bool` upper-triangle adjacency section, with `complementUpperTriangleInvolution`, `complementUpperTrianglePreservesLength` and `emittedComplementBitCountExact`. The pure binary owner imports only `--safe` DASHI definitions and is itself marked `--safe`.
+
+`Karp21CliqueComplementSameGraphWordExact.agda` imports the **original** `Karp21SimpleGraphComplementExact.SimpleGraph`, `complementSimpleGraph`, `simpleComplementOffDiagonal` and `Karp21IndexedUpperPairBijectionExact.allUpperPairs/upperPairNoLoop`. `encodeUpperPairAdjacencyBits` reads the actual original adjacency function at canonical `i<j` endpoints; `sourceComplementAddressBit` and `sourceComplementWordSameBytes` prove the original complement's off-diagonal values are **exactly the negated original bit payload**, including no erroneous diagonal loops. `e05CanonicalComplementGraphWordSameObject` and `e05CanonicalComplementGraphWordPreservesBits` specialize to the source-owned full upper-triangle enumeration. Existing `Karp21SimpleGraphComplementExact.karpSimpleGraphCliqueCoverInstanceIff` remains the actual finite witness/decision owner; no new truth markers or graph carriers were introduced.
+
+**Remaining E05 encoded reduction:** strict total graph-and-k parser over arbitrary source bit words, accepted-word language including malformed handling, same-output canonical target graph-word serializer, threshold `k→n-k` on the source-owned `Combined.complementCount` objective, and a true polynomial bit-machine clock for the full map (not merely one output bit per edge). The P2 full E01–E19, all 21 NP memberships, P0 universal SAT and P3 `CertifiedKarpNetwork` remain OPEN. The new lemmas are **binary payload / same-object finite graph facts only**, not certified NP-complete edges. No Agda kernel/CI receipt; counters 0/20 costed edges and 0/21 terminal conclusions.
+
+
+
+## 2026-11-03 — E20 actual parsed graph acceptance and N21 Fin-free comparison-count cut
+
+**Source-written in PR #1445; Agda kernel acceptance still OPEN.**
+
+- `Karp21FiniteCompleteGraphGeneratorExact.agda`: repaired an invalid positional second argument to `Data.List.Properties.length-++`. The Agda stdlib lemma takes its second list as an *implicit* argument `{ys = ...}`; this was a concrete typechecking defect in the original triangular upper-edge counting proof.
+- `Karp21CanonicalParsedGraphAcceptanceExact.agda`: `scaledRawParsedGraphAcceptanceBidi` builds the **actual** `Cut.WeightedCutGraph n` from the original `Decode.validateRawEdges` result on `Gen.completeScaledPairEdges`. Its `PR.Iff` is on the original `Cut.WeightedMaxCutYES` predicates and is witnessed by the earlier fieldwise signed cut-score theorem `Karp21DecodedWeightedCutSemanticBidiExact.sameWeightedGraphsAccept`. `e20ScaledCanonicalRawGraphAcceptsIff` specializes this to the original `Actual.sourceIndexedWeightedGraph parts nonzero`. No replacement graph, abstract language/clock receipt, or proof-function equality was introduced. This pays **typed raw-decoder acceptance equivalence**, not full `decodeGraphWord (encodeGraphWord g)` acceptance.
+- `Karp21FinFreeEndpointScanComparisonCountExact.agda`: instrumented the **original** `Karp21FinFreeRawSparseWordVerifierExact.endpointConsistent` on binary-native decoded endpoint numbers. `endpointConsistentValueSame` source-writes Boolean equivalence; `endpointConsistentComparisonCountExact` counts one address comparison per previous occurrence in a complete structural scan. The original function remains the verifier's runtime owner.
+- `Karp21FinFreePairwiseQuadraticCountExact.agda`: `maxAddressComparisons (suc j) = maxAddressComparisons j + 4*j`; `maxAddressComparisonsClosed` source-writes the non-vacuous quadratic bound `2*m*(m∸1)` for a complete `m`-edge scan (two endpoints tested against the `2*j` earlier occurrences). The pure arithmetic owner is marked `{-# OPTIONS --safe #-}`; the function-by-function instrumentation remains non-Golden because it imports the existing Fin-free runtime. The recurrence was independently checked in local Python for `m = 0..10000`; this is finite regression, not Agda acceptance.
+- `Karp21BinaryRuntimeEverything.agda` imports both new N21 owners; `Karp21Everything.agda` imports the typed E20 raw-graph acceptance theorem.
+
+**Open semantic wall:** `completeGraphGammaGraphDecodeSameObject` must still compose the **entire actual** `Graph.decodeGraphWordCertified` nested parser and nonzero gamma threshold/3m/2m guard results, rather than only the raw validator, to prove the encoded E20 image has the original signed graph-YES predicate. Then instantiate `scaledCompleteWordFaithful` in `E20ImageWordReceipts`.
+
+**Open resource wall:** An upper count of *address comparisons* is NOT a polynomial tape clock. Each binary equality compares up to input-length bits; gamma parsing, signed zigzag/accumulation and certificate comparisons require explicit worst-case bit-transition costs, code execution/realization and a true `PR.PolynomialCostModel` witness. The earlier dependent `Fin.fromℕ<` syntax can expand linearly in a binary-encoded endpoint value, which may be exponential in word length; use the source-owned Fin-free runtime for the machine-cost path, not the dependent semantic decoder. `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock`, and `e20EncodedPolynomialReduction` remain OPEN.
+
+**Original global target still OPEN:** P0 strict SAT machine cost and universal Cook–Levin SAT NP-completeness; P2 all E01–E19 executable encodings/costed reductions plus all 21 `InNP` instances; P3 unconditionally instantiate `CertifiedKarpNetwork` with the actual 20 reduction records, node languages, membership receipts and SAT root. No Agda executable, no kernel-accepted proof receipt or CI run was available here. Certified full reductions/terminals remain **0/20 and 0/21**. Preserve Cook 1971, Leonid A. Levin 1973 and Karp 1972 attribution.
+
+
+
+
+## 2026-11-03 — binary-native N21 polynomial-time representation cut
+
+**Critical operational distinction:** The already-source-written `Karp21GammaZigzagGraphWordDecodeExact.validateRawEdges` constructs `Fin.fromℕ<` for each decoded endpoint. At the *inductive source representation* level, a `Fin` vertex of numeric address `u` contains `u` successor constructors. This can be exponentially larger than the Elias-gamma binary input naming `u`; a graph with `n=2^1024`, `m=1`, and edge `(0,n-1)` is the explicit stress case. A sparse `2m`-bit certificate **does not alone certify a polynomial verifier** if the decoder builds exponentially large dependent endpoint objects. Compiler erasure/back-end optimization could change runtime behavior, but requires an independently proved concrete realization.
+
+**New exact source owner:** `Karp21BinaryFinMaterializationCostExact.agda` is a small `{-# OPTIONS --safe #-}` candidate, importing only Agda standard-library Fin/Nat. It source-writes `finConstructorDepthExact`, `decodedFinConstructorDepthExact`, and `lastVertexConstructorDepth`, showing exactly `suc u` constructors on the explicit `Fin.fromℕ<` representation. This is **not** a universal lower bound on arbitrary compiled encodings; it precisely blocks treating the original inductive object as a proven binary-tape-efficient runtime.
+
+**New executable runtime:** `scripts/karp21_binary_native_sparse_verifier.py` consumes the **same original gamma/zigzag graph word** and the original sparse `2m`-bit certificate without allocating `Fin n`, a full `Vec Bool n`, or any `n`-indexed table. It verifies each signed edge, positive threshold, strict sorted unique upper pairs, and the exact pairwise endpoint-label consistency. A successful complete scan makes exactly `m(m-1)` prior-assignment loop iterations across `m` edges, with at most **`2m(m-1)` integer address equality checks** (each iteration may check both new endpoints). Invalid inputs can exit earlier. This is worst-case deterministic, rather than relying on average-case dict hashing. All numeric operations are Python binary-int primitives; their concrete bit-tape costs are still to be proved, not assumed unit-cost.
+
+**New Agda source runtime candidate:** `Karp21FinFreeRawSparseWordVerifierExact.agda` uses the *original* `Gamma.readGamma`, `Graph.readRawEdges`, `Graph.strictAfter`, `Boolean.boolEqual/andBool`, and signed integer order. Its `readRawGraphWord`, `endpointConsistent`, `rawSparseScore`, and `verifyFinFreeSparseGraphWord` do not call `Fin.fromℕ<` or allocate an `n`-entry label vector. `Karp21BinaryRuntimeEverything.agda` is the focused **non-Golden** source root. Both are imported into `Karp21Everything.agda`. This alone is not a machine-time theorem: the Agda Nat representation, gamma parsing, signed arithmetic, exact binary tape encoding and compiler implementation still need an actual model and receipts.
+
+**Same-word executable tests:** `scripts/check_karp21_binary_native_sparse_verifier.py` compares the native verifier to the original `verifies_sparse_word` on exhaustive small Karp E20 images, malformed words, repeated endpoints, negative weights, and `n=2^1024`, `m=1`. The test is now part of `bash scripts/referee_karp21_maxcut.sh preflight`, alongside the original binary codec checks and the standard-library arity checker. An **independent** BigInt arithmetic model executed 198,701 sparse endpoint comparison checks, all agreeing, and 19,535 canonical signed E20 size checks, all satisfying `16(L+1)^3`. These executed checks did **not** execute the repository Python files; the committed Python regression is pending a repository checkout. Finite testing does not imply universal Agda semantics or complexity certificates.
+
+**Exact remaining P1 proof cut, in order:**
+1. Typecheck and repair `Karp21CookGoldenEverything`, `Karp21GammaGoldenEverything`, `Karp21BinaryFinMaterializationCostExact`, the N21 binary-runtime root, and the full Karp focused root against a pinned Agda stdlib revision. Run the real scripts; no successful kernel receipt exists here.
+2. Prove `n21FinFreeVerifierSameWord`: for every bitword and sparse certificate, the binary-native N21 verifier equals the existing `N21.LiteralN21.verifyCanonicalSparseGraphWord`. This must include malformed grammar, `m>n(n-1)/2` redundancy, positive threshold, raw-edge parser soundness, signed score and endpoint-label consistency, **without** forcing full `Fin` materialization at runtime.
+3. Prove `n21FinFreeBitTapePolynomialClock` against the chosen real binary tape cost model (not a Boolean clock field). The deterministic pairwise consistency scan makes at most `m(m-1)` prior-assignment visits and `2m(m-1)` address equality checks; each comparison still requires an explicit polynomial bit-tape cost certificate. Link that clock to the exact original word verifier via the same-word proof and a costed executable realization.
+4. Finish `completeGraphGammaGraphDecodeSameObject` and `scaledCompleteWordFaithful` by joining the already source-written raw validator, outer gamma fields, `3m`/ `2m` guards, positive threshold, and original typed Max-Cut semantics.
+5. Supply `scaledPartitionGraphMachineClock` for actual E20 gamma source decoding, signed pairwise product, edge output, and malformed-source fixed NO graph; instantiate `e20EncodedPolynomialReduction`.
+6. Continue original K00 universal Cook–Levin SAT root, E01–E19 encoded and machine-costed reductions, all 21 NP membership receipts, and `CertifiedKarpNetwork`.
+
+**Finite E20 output-size work:** `scripts/check_karp21_e20_bitlength_bound.py` checks the actual Python gamma source/target codec formula and the conservative `len(targetWord) ≤ 16*(len(sourceWord)+1)^3` envelope, including 1024--4096-bit signed magnitudes and malformed sources. The arity checker `scripts/check_karp21_agda_stdlib_arity.py` catches incorrect positional second arguments to standard-library `ListP.length-++` (its second parameter is implicit). The source calls in `Karp21GammaBinaryGoldenCoreExact` and `Karp21EncodedGraphSparseBitBoundExact` were corrected to use `{ys = ...}`. This is a real API mismatch repair, not a kernel check.
+
+**Promotion policy unchanged:** Golden Agda `{-# OPTIONS --safe #-}`, zero postulates, zero unsolved metas, no termination overrides, Agda-kernel receipt, and an actual finite-machine polynomial bit-clock required. The P0 universal SAT root, P1 E20/N21 clocks, P2 19 remaining encoded edges/21 NP memberships, and P3 terminal network are still open. **0/20 costed reductions and 0/21 certified terminal NP-complete results.**
+
+
+## 2026-11-03 — P1 original E20 raw validator and full gamma field replay (source-written, kernel OPEN)
+
+**New source-written files imported in `Karp21Everything.agda` (NOT an Agda referee receipt):**
+
+- `Karp21FinDecoderIndexBidiExact.agda`: `reconstructOriginalFin`, `reconstructOrderedFirst`, `reconstructOrderedSecond`, `reconstructProofIndependent`, and `lookupAfterReconstruction` reuse actual standard-library `Fin.fromℕ<`, `toℕ-fromℕ<`, `toℕ-injective` and `toℕ<n`. This is the only newly safe-marked module in the slice; it has stdlib dependencies alone.
+- `Karp21DecodedWeightedCutSemanticBidiExact.agda`: `SameWeightedEdgeFields`, `SameWeightedEdgeLists`, `sameWeightedEdgeListScore`, `sameWeightedGraphsAccept`, `reconstructedCanonicalListScoreSame`, and `sameWeightedEdgeListLength` preserve exactly the original signed `edgeContribution` / `edgeListCutValue` / `WeightedMaxCutYES` observations when `Fin` endpoints and signed weights match. No equality of `offDiagonal` functions is required or assumed.
+- `Karp21RawGraphValidatorObservationExact.agda`: `validateRawEdgesObservesFields`, `validateRawEdgesSuccessFields`, and `validateRawEdgesSuccessPreservesCutValue` follow every success/failure branch of the **original** raw graph decoder; a successfully returned typed edge list keeps each raw vertex address, signed weight and same cut score.
+- `Karp21CanonicalRawValidatorPremisesExact.agda`: `scaledCompleteGraphValidatorPremises` converts the prior original upper-triangle `u<v<n` and global `strictAfter` proofs into each exact recursive state transition of the actual `validateRawEdges` function.
+- `Karp21CanonicalRawValidatorCompleteExact.agda`: `validateCanonicalRawEdgesSuccess`, `validateCanonicalRawEdgesSameCut`, `scaledCompleteRawValidatorSuccess`, `scaledCompleteRawValidatorCutScore` are source-written on **the existing** `Gen.completeScaledPairEdges`. There is no caller-supplied parser oracle, alternative cut graph or reduction marker.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.agda`: `validateRawEdgesEncodedUpperPairs` now specializes actual validator success and signed cut-score preservation to `Actual.sourceIndexedWeightedGraph parts nonzero`. `e20EncodedUpperPairsRawParserAndValidator` composes it with the original gamma signed edge-list raw roundtrip, including the unconsumed word suffix. The original E20 target graph is retained.
+- `Karp21OriginalGammaGraphWordFieldsReplayExact.agda`: `readEncodedGraphVertexCount`, `readEncodedGraphEdgeCount`, `readEncodedGraphEdgeTriples`, and `readEncodedGraphThresholdMagnitude` cover all four **original** gamma field readers of `Encode.encodeGraphWord`. `readEncodedGraphEdgeCountBudget` reuses the real wire-size certificate rather than assuming an `m*3` guard.
+- `Karp21EncodedGraphSparseBitBoundExact.agda`: `encodedEdgeAtLeastThreeBits`, `encodedEdgeWordsAtLeastTripleBits` and `encodedGraphEdgeParserBudget` pay the parser's **three-bits-per-edge** guard from literal gamma(u), gamma(v), gamma(zigzag(w)) fields; the earlier `encodedGraphAtLeastSparseBits` pays the N21 **two-bits-per-edge** sparse witness guard. Neither incorrectly requires `n≤inputBits`.
+- `Karp21PositiveThresholdGammaExact.agda`: `positiveThresholdIsSuccessor`, `positiveThresholdMagnitudeSuccessor`, and `readPositiveThresholdGammaSuffix` bridge the existing graph `PositiveThreshold` (`0≤W`, `W≢0`) to the literal decoder's gamma(suc k) nonzero threshold grammar.
+
+**Exact remaining P1 composed same-object theorem:** `completeGraphGammaGraphDecodeSameObject` must combine the real nested `decodeGraphWordCertified`/`decodeGraphWord` with the new header/edge/threshold and two size-guard proofs, show its returned dependent graph is observationally equivalent to the original graph for *all* cut labels, and instantiate `scaledCompleteWordFaithful` in the original E20 image record (the two exceptional fixed-word branches are separately source-written). `e20EncodedPolynomialReduction` still requires a real signed integer-bit tape clock and nondegenerate `PolynomialCostModel`.
+
+**Gold/kernel boundary:** No local Agda compiler or repo checkout was available for independent acceptance, and no CI was run. The source leaves above have not passed Agda type checking; the graph integration modules deliberately do not claim `--safe` until older imports are safe. The focused Golden SAT and pure gamma roots also lack an acceptance receipt. **Do not count conditional/source-written lemmas as certified reductions.** P0 SAT `InNP` concrete verifier and universal costed Cook–Levin root remain OPEN, as do P2 E01–E19 + all 21 memberships, and P3 `CertifiedKarpNetwork`. Certified counters remain **0/20 costed polynomial reductions and 0/21 terminal NP-completeness theorems**.
+
+
+**Fail-closed reproducible referee entry:** `bash scripts/referee_karp21_maxcut.sh golden`, `bash scripts/referee_karp21_maxcut.sh e20`, or `bash scripts/referee_karp21_maxcut.sh all`. This new script prints Git SHA + Agda version, executes the Golden import-closure preflight, and then requires actual Agda acceptance of the focused roots; it exits 127 if Agda is missing and never invents a success receipt. It was committed but **could not be executed successfully here**, because Agda is absent.
+
+**Next referee commands** (on a machine with Agda, stdlib and repo checkout): `agda -i . DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21CanonicalRawValidatorCompleteExact.agda`, and `agda -i . DASHI/Mathematics/Complexity/Karp21Everything.agda`. Record the exact compiler version, SHA and complete diagnostics; compiler success has not been established here.
+
+
+## 2026-11-03 — P1 actual `validateRawEdgesEncodedUpperPairs` source proof chain
+
+**Source-written at PR #1445, not kernel accepted:** The prior `Karp21GammaWeightedEdgeListRoundTripExact`, `Karp21ScaledCompleteGraphEndpointOrderExact`, `Karp21ScaledCompleteGraphStrictAfterExact` and source-owned E20 graph now feed an actual validator-completeness / cut-semantics proof, without inventing a second weighted graph language or requiring function equality of `offDiagonal` proof fields.
+
+New owners, all imported by `Karp21Everything.agda`:
+
+1. `Karp21FinDecoderIndexBidiExact.agda` is a standalone `{-# OPTIONS --safe #-}` Agda-stdlib-only owner. `reconstructOriginalFin`, `reconstructOrderedFirst`, `reconstructOrderedSecond`, `reconstructProofIndependent` and `lookupAfterReconstruction` reuse `FinP.toℕ-fromℕ<`, `FinP.toℕ-injective`, `FinP.toℕ<n`. They recover original **typed finite vertices**, independently of which numeric range proof the parser returned.
+2. `Karp21DecodedWeightedCutSemanticBidiExact.agda` defines `SameWeightedEdgeFields` / `SameWeightedEdgeLists` as *fieldwise observations* on the **existing** `Cut.SignedUndirectedEdge`. `sameWeightedEdgeContribution`, `sameWeightedEdgeListScore`, and `sameWeightedGraphsAccept` transport actual signed cut scores and Max-Cut YES acceptance across equal original endpoints, signed weights and threshold. It explicitly never claims equality of `offDiagonal` proof functions. `reconstructedOffDiagonal`, `reconstructCanonicalEdgesFields`, and `reconstructedCanonicalListScoreSame` connect the exact original `Fin.fromℕ<` reconstruction to that semantic observation.
+3. `Karp21RawGraphValidatorObservationExact.agda`: `validateRawEdgesObservesFields` follows the **actual** `Decode.validateRawEdges` success/failure branches and proves that on successful parsing the returned `Fin` edges retain all source raw `u,v,w` fields; `validateRawEdgesSuccessPreservesCutValue` translates this to signed score equality against original typed graph edges, using the same-object `Raw.rawOfEdges` owner.
+4. `Karp21CanonicalRawValidatorPremisesExact.agda`: `ValidFromPrevious` records precisely each per-edge `u<v<n` and `Decode.strictAfter prev u v ≡ true` guard in recursive parser execution order. `canonicalValidatorPremises` and `scaledCompleteGraphValidatorPremises` derive those guard proofs from already-established real graph endpoint and global lex-order owners, for **all** source-signed vectors (no cut witness inspection).
+5. `Karp21CanonicalRawValidatorCompleteExact.agda`: `validateCanonicalRawEdgesSuccess` follows the original `NatP._<?_`, `FinP._≟_`, and recursive `validateRawEdges` branches, excluding both failed range guards and endpoint equality using the original off-diagonal proof. `validateCanonicalRawEdgesSameCut` composes validator success with observation soundness. `scaledCompleteRawValidatorCutScore` specializes to the actual `Gen.completeScaledPairEdges` output.
+6. `Karp21SignedPartitionActualGraphWordBoundaryExact.agda`: the requested `validateRawEdgesEncodedUpperPairs` is now source-written directly over `Actual.sourceIndexedWeightedGraph parts nonzero` and returns the REAL decoded edge list, acceptance equality and exact same signed edge-list score for any Bool labels. `e20EncodedUpperPairsRawParserAndValidator` combines it with the existing suffix-preserving literal `Decode.readRawEdges` / `Encode.encodeEdgeWords` replay.
+
+**Do not over-promote this:** all new declarations are source-written Agda proof candidates; the environment has no `agda` executable or checkout, and no kernel or CI receipt was obtained. A successful raw-edge decoder/validator **does not yet prove** `decodeGraphWord (encodeGraphWord (n,g))` for the full source graph because the outer `gamma(n)`, `gamma(m)` and `gamma(W)` fields, positive-threshold decomposition, both graph-word size guards, and dependent graph/YES semantic packaging must be composed on that literal same word. Exact next gate: `completeGraphGammaGraphDecodeSameObject` (proof-field-independent graph acceptance), then `scaledCompleteWordFaithful` to populate the sole remaining E20 image receipt. Actual `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock` and `e20EncodedPolynomialReduction` on a nondegenerate bit-machine model remain entirely OPEN. P0 universal Cook–Levin, P2 E01–E19 plus all 21 membership clocks, and P3 instantiated `CertifiedKarpNetwork` remain OPEN; **0/20 kernel-certified polynomial reductions, 0/21 terminal NP-completeness results**.
+
+**Referee commands (when Agda and repo checkout are available):** `agda -i . DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21GammaGoldenEverything.agda`, `agda -i . DASHI/Mathematics/Complexity/Karp21FinDecoderIndexBidiExact.agda`, and `agda -i . DASHI/Mathematics/Complexity/Karp21Everything.agda`. The last root is intentionally not Golden and will expose other remaining import/type blockers. Record exact Agda version, branch SHA and full diagnostics rather than asserting acceptance from a source scan.
+
+
+## 2026-11-03 — source-written original upper-triangle global lex order and parser guard reflection
+
+**Reuses original owner, no substitute graph:** `Karp21IndexedUpperPairBijectionExact.allFin/allUpperPairs`, `Karp21UpperPairGraphEnumerationExact.actualKarpGraphCanonicalUpperPairs/mapCompose`, `Karp21FiniteCompleteGraphGeneratorExact.completeScaledPairEdges`, `Karp21SignedGraphScaleAndAppendExact.scaleEdgeWeightFour`, and the literal `Karp21GammaZigzagGraphWordDecodeExact.strictAfter` Boolean comparator.
+
+- `Karp21UpperPairStructuralLexOrderExact.agda`: introduces structurally inductive `AllAfter`, `StrictSorted`, `CrossBefore`, and `UpperPairBefore` for source-owned finite pair addresses. `allFinStrictIncreasing` and `allUpperPairsStrictLexOrder` prove **every earlier listed address precedes every later address**, not merely distinctness. Uses the original head block `headTail`, tail lift `tailPair`, and proof that the entire head block precedes the entire tail block.
+- `Karp21ScaledCompleteGraphStrictLexExact.agda`: `upperPairBeforeNumeric` transports structural pair ordering into ordinary lex order of `Fin.toℕ` endpoints; `scaledAddressNumericBefore` and `sourceIndexedScaledCompleteGraphStrictLex` apply that to **every pair of earlier/later edges in the original signed 4× complete graph**. `Karp21SignedPartitionActualGraphWordBoundaryExact.e20ActualScaledGraphStrictLex` instantiates this on `Actual.sourceIndexedWeightedGraph parts nonzero`.
+- `Karp21ScaledCompleteGraphStrictAfterExact.agda`: `strictAfterRecognizesLex` proves that the existing parser's Boolean `strictAfter (previous a b) u v` evaluates to true for an actual numeric lex increase; `numericLexImpliesActualParserAfter` and `sourceIndexedScaledGraphPassesStrictAfter` apply that check to the original scaled edge list. `E20.e20ActualScaledGraphPassesStrictAfter` imports the same result on the original complete signed graph.
+- `Karp21ScaledCompleteGraphEndpointOrderExact.agda` and the earlier real graph `2m≤encodedWordBits` theorem remain independent antecedents for each edge's `u<v<n` validity and sparse witness size.
+
+**Mathematical boundary now narrower:** after raw gamma edge-list parse/replay, per-edge endpoint validity, all-pairs strict numeric lex order, and Bool `strictAfter` agreement, the E20 graph-word same-object wall is primarily `validateRawEdgesEncodedUpperPairs`: reconstruct the same `Fin n` indices from their natural numbers and comparator proofs, carry signed weights and ordered edges, handle dependent `offDiagonal` proof irrelevance semantically (not literal field equality), and identify decoded positive threshold. The existing standard-library `FinP.toℕ-injective`, `FinP.toℕ-fromℕ<`, `FinP.toℕ<n` are the correct owners for this next bridge, already referenced by other DASHI modules. Then pay `completeGraphGammaGraphDecodeSameObject`, `scaledCompleteWordFaithful`, N21/E20 genuine bit-machine clocks and `PR.InNP`.
+
+**Acceptance:** Source-written only. An independent finite Python sanity check of the *mathematical recursive upper-pair construction* for n=0..39 yielded no ordering/uniqueness/coverage discrepancies, but this does **not** compile or kernel-validate Agda. There is no local Agda binary or GitHub build receipt for these new owners. No `--safe` promotion for graph integration, no postulates/metas/termination pragmas intentionally introduced, no actual Cook–Levin polynomial clock or all-21 completion claim. The original P0 universal SAT, P2 E01–E19 and all membership clocks, and P3 `CertifiedKarpNetwork` remain open; certified counters 0/20 and 0/21.
+
+
+## 2026-11-03 — original E20 complete-graph endpoint order, not yet global lex order
+
+**GitHub PR #1445 source-written additions (Agda kernel unrun):**
+
+- `Karp21ScaledCompleteGraphEndpointOrderExact.agda` imports the **existing** `Karp21IndexedUpperPairBijectionExact`, `Karp21UpperPairGraphEnumerationExact`, `Karp21FiniteCompleteGraphGeneratorExact`, and `Karp21SignedGraphScaleAndAppendExact` owners. `finIndexInRange`, `upperPairFirstLessSecond`, and `upperPairSecondWithinVertices` prove numeric index validity by structural induction over the actual `Fin`/`UpperPair` constructors. `edgeAtAddressFirstSame` and `edgeAtAddressSecondSame` identify the source-owned edge endpoint projections with those canonical addresses. `scaledAddressCanonicalEndpoints`, `canonicalScaledEnumeratedPairs`, and `sourceIndexedScaledCompleteGraphEndpoints` lift to **every edge in the actual scaled complete graph**, retaining signed 4× weights and using the source-owned graph enumerator equality plus map composition.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.e20ActualScaledGraphEndpointBounds` instantiates that result on `Actual.sourceIndexedWeightedGraph parts nonzero`, with the original `Indexed.vectorOfList parts`. This is an exact `u < v < n` **per-edge** validation receipt, not a proposed replacement graph or an NP clock.
+- `Karp21EncodedGraphSparseBitBoundExact.agda` refactors the earlier encoded \(2m\) bit lower bound using directly recursive `appendLeftLengthLower`, `appendRightLengthLower` and `bitWordLengthSameObject`, then original `gammaNatHasBit`, `Sparse.twoPerEdge`, and `Encode.encodeGraphWord`. This removes reliance on uncertain library-specific `length-++-≤ˡ/ʳ` theorem signatures; the retained last theorem is `encodedGraphAtLeastSparseBits`.
+
+**Do not conflate:** per-edge `u < v < n` does **not** prove `Decode.strictAfter` for adjacent edges. The latter checks **strict lexicographic order across consecutive list entries**. Exact next tasks are `allFinStrictIncreasing` → `allUpperPairsLexIncreasing` → `scaledCompletePairsPassStrictAfter` → `validateRawEdgesEncodedUpperPairs` (including the `Fin.fromℕ<` same-index/witness transport) → `completeGraphGammaGraphDecodeSameObject` (including threshold and proof-field-independent cut semantics) → `scaledCompleteWordFaithful` → `e20EncodedPolynomialReduction` with actual bit-machine clock. Keep `k00StrictSATMachineVerifierClock`, universal Cook–Levin, E01–E19 and 21 NP memberships, and `CertifiedKarpNetwork` on the original critical path.
+
+**Executable reference owner:** `scripts/check_karp_binary_codec.py` already tests the Python gamma/zigzag canonical graph roundtrip, malformed-word policy and signed PARTITION→Cut semantics. Those executable tests are not an Agda kernel receipt. No Agda binary or local repository checkout was available here; no CI or compiler success is claimed. New integration owners intentionally do not assert `--safe` until their existing weighted-graph transitive dependencies can be certified. Certified counts remain 0/20 polynomial reductions and 0/21 NP-completeness terminals.
+
+
+## 2026-11-03 — E20 original gamma edge-triple and edge-list source correspondence
+
+**Source-written, NOT kernel-accepted:** `Karp21GammaWeightedEdgeListRoundTripExact.agda` (imported by the focused `Karp21Everything.agda` root), reusing the *existing* weighted edge serializer `Karp21GammaZigzagWordEncodeExact.encodeEdgeWord/encodeEdgeWords`, literal raw graph parser `Karp21GammaZigzagGraphWordDecodeExact.readOneRawEdge/readRawEdges`, numeric `gammaReadEncodeSuffix` and signed `readSignedGammaEncodeSuffix`. It does not manufacture an alternative graph.
+
+- `rawOfEdgeFirstSame`, `rawOfEdgeSecondSame`, `rawOfEdgeSignedWeightSame`, `rawOfEdgesLength`: exact `Fin.toℕ` endpoint addresses, unchanged `ℤ` weight (negative, zero, positive), and original edge count in the raw field projection.
+- `readActualEdgeWordSuffix`: `readOneRawEdge (encodeEdgeWord edge ++ suffix) ≡ just (rawOfEdge edge , suffix)`.
+- `readActualEdgeListWordSuffix`: `readRawEdges (length edges) (encodeEdgeWords edges ++ suffix) ≡ just (rawOfEdges edges , suffix)`, by induction, including empty lists and duplicate/order-preserving source lists.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.e20ScaledActualRawEdgeRoundTrip`: instantiates that identity **on `Actual.sourceIndexedWeightedGraph parts nonzero`**, not an independently chosen graph. Existing `Karp21UpperPairGraphEnumerationExact.actualKarpGraphCanonicalUpperPairs` and `Karp21IndexedUpperPairBijectionExact.upperTriangleOccurrenceUnique` are the reusable combinatorial source owners for the next validator theorem.
+
+**Precise remaining same-object lemmas** (do not erase them under the raw-parser equality): `sourceIndexedUpperPairLexIncreasing` for strict numeric lex order; `validateRawEdgesEncodedUpperPairs` showing the original `Fin.fromℕ<` endpoints and signed weights survive graph validation; `completeGraphGammaGraphDecodeSameObject` for vertex count, all edge occurrences, positive threshold and proof-field-independent cut acceptance; `scaledCompleteWordFaithful` for the actual source/output language. After this, pay graph parser/verification and E20 map polynomial machine clocks and NP-membership premises.
+
+**Verification authority:** only source-written Agda files, static delimiter/hole/postulate checks and explicit GitHub commits; no Agda kernel or CI run. These integration owners intentionally are not `--safe` until the old weighted graph dependency closure is refactored and checked. P0 universal Cook–Levin, all E01–E19 and 21 membership receipts, and concrete `CertifiedKarpNetwork` remain uncompleted. Certification stays 0/20 and 0/21.
+
+## 2026-11-03 — N21 actual serialized signed-graph sparse certificate bit-bound
+
+**Completed at source level, NOT Agda-kernel accepted:** `Karp21EncodedGraphSparseBitBoundExact.agda`, imported by `Karp21Everything.agda`. It reuses the actual `Karp21GammaZigzagWordEncodeExact.encodeEdgeWord/encodeEdgeWords/encodeGraphWord`, `Karp21GammaSignedListRoundTripExact.gammaNatHasBit`, `Karp21SparseEndpointCutCertificateExact.twoPerEdge`, and `Karp21FiniteWeightedMaxCutVerifierExact.WeightedCutGraph`; it introduces no alternative graph or word carrier. Exact new declarations:
+
+- `encodedEdgeAtLeastTwoBits`: each signed graph edge's original wire serialization has at least two endpoint gamma bits, independent of weight magnitude or declared vertex count.
+- `encodedEdgeWordsAtLeastSparseBits`: `twoPerEdge (length edges) ≤ length (encodeEdgeWords edges)`, by induction on the *actual listed edges*, valid for empty graphs and arbitrary signed weights.
+- `encodedGraphAtLeastSparseBits`: `twoPerEdge (length (edges g)) ≤ encodingSize (encodeGraphWord (n , g))` for every typed graph. The source-owned gamma headers and threshold field cannot decrease bit length.
+
+This is the **encoder-side** size theorem, not the decoder's previously checked side condition. It rules out a specific incorrect `n ≤ inputBits` inference in sparse graphs; the certificate remains exactly `2m` bits where `m` is the listed edge count. It does **not** prove the canonical graph decoder accepts all legal serializer outputs, or the `m`-edge correspondence after parsing, or the graph cut-score/signed weight same-object theorem. `completeGraphGammaGraphDecodeSameObject`, `scaledCompleteWordFaithful`, `graphWordSizeGuardRedundantForCanonicalInputs`, `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock`, and `e20EncodedPolynomialReduction` stay OPEN.
+
+**Safety/import audit correction:** Six pre-existing weighted-graph integration modules had incorrectly declared `{-# OPTIONS --safe #-}` while importing non-safe graph owners: `Karp21PartitionSparseCutBidiExact`, `Karp21SparseGraphWordNPBoundaryExact`, `Karp21GammaZigzagGraphWordDecodeExact`, `Karp21GammaZigzagWordEncodeExact`, `Karp21WeightedMaxCutFixedNoGraphExact`, and `Karp21EncodedFixedGraphWordsExact`. The false pragmas are now removed, in addition to the E20 actual graph-word boundary. This is **not** a Golden promotion; it prevents Agda's safe-mode import rule from being asserted without an import closure. The separate K00 SAT and pure gamma Golden roots remain unchanged. A later Golden graph-root promotion must first recut `Karp21FiniteWeightedMaxCutVerifierExact` and its older dependencies into safe owners and pass the actual Agda kernel. No CI was run, as requested.\n\n**Golden rule:** This integration owner intentionally has no `{-# OPTIONS --safe #-}` claim because it imports graph modules whose own transitive-safe closure is outstanding. No postulate, unsolved-hole marker, or termination pragma was introduced in this new source. No Agda kernel compilation or CI was run. Only the new source inequality is paid; keep 0/20 costed edges and 0/21 terminal NP-completeness results as **uncertified**. Continue the full K00→E01–E20/N01–N21→`CertifiedKarpNetwork` roadmap without treating this as a polynomial verifier clock.
+
+**Implementation TODO:** (1) kernel-check the focused K00 and gamma Golden roots; (2) establish sorted-unique `completeScaledPairEdges` graph-word decode/encode with the actual `Fin` endpoints and signed weights, using `Karp21UpperPairGraphEnumerationExact` and `Karp21IndexedUpperPairBijectionExact`; (3) derive the N21 decoder budget without a new rejection policy; (4) construct the concrete bit-machine cost receipts; (5) complete all remaining E01–E19/N01–N21 and the concrete DAG instance.
+
+
+## 2026-11-03 P1 source-written gamma and signed PARTITION roundtrips
+
+The literal gamma/zigzag proof cut has moved from an open binary-value bridge to source-written same-object codec lemmas. All declarations below must still pass Agda kernel acceptance before being called proved.
+
+- `Karp21GammaZigzagPartitionWordDecodeExact.agda`: `payloadValue`, `readLowBitsAppendExact`, `readGammaZeroPrefixExact`, `readGammaPayloadExact` prove that the actual gamma payload parser reads the exact bit count and retains its unconsumed suffix. The `zigzagUnzigzag` proof now retains `even n ≡ branch` by Agda `with ... in observed`, rather than asserting it via an unsupported `refl` on an abstract `n`.
+- `Karp21GammaBinaryPayloadValueExact.agda`: `payloadValueAppendBit` and `successorBitsNumericValue` connect the real standard-library binary numeral bit sequence to `suc (Bin.toℕ b)`. Uses source-owned `Data.Nat.Binary.Base` and standard-library safe natural-number ring solver, not unary enumeration or an auxiliary syntax language.
+- `Karp21GammaBinaryRoundTripExact.agda`: `zeroPrefixSameObject` pays encoder/decoder prefix equality; `successorPayloadLength` and `successorPayloadNumeric` connect the gamma header to the original binary numeral; `gammaBinaryNumeralReadSuffix` and `gammaReadEncodeSuffix` compose `Data.Nat.Binary.Properties.toℕ-fromℕ` with the literal decoder; terminal `gammaReadEncodeRoundTrip : ∀ n → readGamma (encodeGammaNat n) ≡ just (n , [])` is now **source-written**.
+- `Karp21GammaSignedListRoundTripExact.agda`: `readSignedGammaEncodeSuffix`, `readSignedItemsEncodeSuffix`, `gammaNatHasBit`, `signedListWireLengthLower`, and `partitionWordDecodeEncode` provide the **original signed-element list** gamma/zigzag decoder/encoder roundtrip, including the necessary `length values ≤ encodedTailLength` validation guard and arbitrary repeated/negative/zero source elements.
+- `Karp21GammaZigzagWordEncodeExact.agda`: `encodedSignedValuesSamePure` and `encodedPartitionWordSamePure` prove that its original E20 source serializer agrees with that Golden encoder. Its own terminal `partitionWordDecodeEncode` applies the result to the **actual E20 encoding**, not merely an auxiliary serializer.
+- The focused `Karp21GammaGoldenEverything.agda` and `Karp21Everything.agda` import this exact roundtrip chain. Verification by an Agda executable has **not** been performed; the code is an unaccepted proof proposal until the focused roots typecheck.
+
+**Local finite regression only:** 25,000 natural gamma words with an appended suffix and 25,000 zigzag values in both directions matched an independently written Python reference. This is neither a repo-owned executable receipt nor an Agda kernel acceptance and does not imply the general theorems; the source-written lemmas above carry the universal claims.
+
+**Max-cut after this source slice:** Kernel-check and repair the K00 and gamma Golden roots first. Next P1 same-object leaves: `completeGraphGammaGraphDecodeSameObject` including dependent signed weights/endpoint ordering, `scaledCompleteWordFaithful`, `graphWordSizeGuardRedundantForCanonicalInputs`; actual `n21SparseVerifierBitTapePolynomialClock` and `scaledPartitionGraphMachineClock` on a nondegenerate cost model. P0 `k00StrictSATMachineVerifierClock`, `k00StrictSATInNP`, and universal polynomial `cookLevinSATRoot` remain open, as do E01–E19 / 21 membership certificates and `CertifiedKarpNetwork`. The certified full Karp completion counters remain **0/20 costed edges and 0/21 NP-completeness terminals**.
+
+
+
+## 2026-11-03 P0 Golden safety cut and exact universe repair
+
+**Referee correction:** Agda `{-# OPTIONS --safe #-}` is coinfective. Previous PR #1445 modules were marked safe while importing older unsafeguarded DASHI modules. That is an **import-time acceptance blocker**, even in the absence of local postulates or holes. The earlier claim that a safe pragma on an importing leaf sufficed was incorrect. Also, `PR.Iff` consumes `Set` propositions, but `Runs.ExactBudgetAcceptingRun` is `Set₁`; the original P0 machine-run BIDI was ill-sorted.
+
+**Actual source changes (not merely roadmap labels):**
+
+- Promoted `FiniteWordSizeExact.agda` and `PolynomialReductionExact.agda` to `--safe` as stdlib-only/no-DASHI-import foundations.
+- Promoted `KleinGroupActionInvariantExact.agda`, `CookLevinCircuitGCTBoundary.agda`, `PNotEqualsNPCookFormulaPrefixCodecExact.agda`, `PNotEqualsNPCookFormulaBinaryCodecExact.agda`, `Karp21CookStrictTripleBitBoundaryExact.agda`, and `Karp21CookStrictSATLanguageExact.agda` in dependency order. None had local postulates/metas or explicit unsafe termination pragmas in the source audit.
+- Extracted the exact prior N21 Boolean equality/conjunction code into `Karp21BoolGoldenExact.agda` with `boolEqual`, `andBool`, `boolEqualSelf`, `andLeftTrue`, `andRightTrue`, `boolEqualTrueImpliesEqual`, `falseNotTrue`. The original N21 owners re-export these names; `Karp21CookFiniteOccurrenceWitnessExact.agda` and `Karp21CookExecutableFiniteVerifierBidiExact.agda` now import this one shared Golden owner instead of the graph verifier/consistency modules. The finite Cook witness is marked `--safe` with no local non-safe DASHI dependencies in the scanned import graph.
+- Split `Karp21CookStrictWordCanonicalReencodeExact.agda` (now imports only the above safe Cook syntax/Word chain) from `Karp21CookAllWordCertificateBoundExact.agda` (same verified-in-source inverse plus finite SAT verifier). The second theorem remains `k00StrictAcceptedWordCertificateBound` with the original exact type; `Karp21StrictSATBoundedCertificateNPBoundaryExact` imports the new owner.
+- Repaired the exact-run/witness BIDI universe mismatch via an `ExactRunWitnessIff (Run : Set₁) (Witness : Set)` record. The concrete tape bridge is now in **`Karp21StrictSATConcreteRunBidiExact.agda`**, explicitly *not* Golden because its older machine imports remain open. The separate `Karp21StrictSATBoundedCertificateNPBoundaryExact.agda` contains only the bounded strict SAT witness BIDI and conditional `PR.InNP` constructor and has a transitive-safe **repository source** import chain.
+- Isolated `Karp21GammaBinaryGoldenCoreExact.agda` with literal gamma(n+1) binary encoder, `successorBitsLeadingOne`, `successorBitsLength`, and `gammaPrefixExactlyBinarySize`. The weighted-graph serializer imports/re-exports this exact owner rather than owning a separate binary-digit definition. `Karp21GammaZigzagPartitionWordDecodeExact.agda` adds `zigzagUnzigzag`, completing the source-written **both-direction** ℤ↔ℕ zigzag equivalence.
+- Created explicit source-only checker roots `Karp21CookGoldenEverything.agda` and `Karp21GammaGoldenEverything.agda`, each marked `{-# OPTIONS --safe #-}` and importing only transitive-safe DASHI owners in the static review. **No Agda binary was available locally and neither root has an acceptance receipt.**
+- Added `scripts/check_karp21_golden_agda_import_closure.py`. It deterministically reports missing DASHI dependencies, importer/imported `--safe` violations, postulate/hole/unsafe termination markers, mismatched module paths, and a non-Golden focused entry root. It is a static preflight and explicitly does **not** claim Agda kernel acceptance. The full `Karp21Everything.agda` root is not Golden and its imports remain open.
+
+**Precise remaining theorem cut:**
+1. Run and repair real `agda -i . DASHI/Mathematics/Complexity/Karp21CookGoldenEverything.agda` and the gamma Golden root; record pinned SHA, compiler version, full diagnostics, and success only after the kernel accepts them.
+2. P0 actual `k00StrictSATMachineVerifierClock` and nondegenerate `PR.PolynomialCostModel` evidence for `k00StrictSATInNP`; `k00UniformConcreteTapeToSATWordPolynomialClock`; universal Cook–Levin reduction source and same-language kernel receipt.
+3. P1 full `gammaReadEncodeRoundTrip`, `partitionWordDecodeEncode`, `completeGraphGammaGraphDecodeSameObject`, `scaledCompleteWordFaithful`, parser budget-guard redundancy, signed weight bit-cost and N21/E20 concrete polynomial machine clocks.
+4. P2 the 19 other historical reductions, all 21 verifier/membership receipts, total binary encoders and costs; P3 instantiate `CertifiedKarpNetwork` and kernel accept the 21 conclusions.
+
+**Accounting:** import-safe *source* closure for two focused Golden roots is not synonymous with typechecking, machine-clock certificates, Karp NP-completeness or the Clay separation. Certified 20-edge/21-node counts remain **0/20 and 0/21**. Keep Cook 1971, Leonid Levin 1973, Karp 1972, Elias gamma code and Agda stdlib numerical owners separately credited.
+
+
+
+## 2026-11-03 E20 image-only exceptional encoded-word closure
+
+`Karp21EncodedFixedGraphWordsExact.agda` is imported into the focused root. It source-writes `encodedFixedUnitWordAccepts` (literal gamma-encoded original +1 edge / W=1 target has a true/false cut), `encodedFixedNoWordRejects` (same +1 edge / W=2 rejects all four cuts after the actual binary graph decoder), and `fixedUnitWordFaithful` (BIDI on the source-owned unit graph). No alternative target truth marker is used.
+
+`Karp21SignedPartitionActualGraphWordBoundaryExact.E20ImageWordReceipts` now contains exactly one *open semantic output-image field*: `scaledCompleteWordFaithful` for `Source.scaledCompletePositive parts nonzero`. Its unit-YES and malformed fixed-NO cases are directly source-filled by `FixedWords`. The `EncodedE20` total reduction retains the concrete signed PARTITION gamma decoder, concrete gamma graph encoder, concrete graph acceptance language, and fixed-NO output. Its remaining proof wall is the general sorted complete-graph parser/encoder acceptance transport (including threshold and signed weights), plus a real machine polynomial clock, all unkernelled.
+
+**Exact next max-cut lemmas (source-first, reusing original owners):**
+- `gammaReadEncodeRoundTrip`, then `partitionWordDecodeEncode`;
+- `sourceIndexedCompleteGraphUpperPairLexSorted` and `completeGraphGammaGraphDecodeSameObject` for the actual `completeScaledPairEdges` output; perform proof-field-independent cut-verifier transport;
+- `scaledCompleteWordFaithful` to instantiate `E20ImageWordReceipts` *without any conditional faithfulness field*;
+- show the parser's extra sparse-bit guard redundant for all valid Python graph words;
+- `n21SparseVerifierBitTapePolynomialClock`, `e20EncodedPolynomialReduction` against a concrete nondegenerate bit-machine cost model;
+- P0 strict SAT verifier clock and universal Cook–Levin root, E01–E19 full encoded reductions and 21 `InNP` instances, then `CertifiedKarpNetwork` and Agda kernel receipt.
+
+**Verification:** new `{-# OPTIONS --safe #-}` source imports have no explicit postulate/metavariable markers by static scan; the source has **not** received independent Agda compiler/kernel acceptance in this session. Zero genuinely kernel-accepted new full Karp-21 reductions / NP-complete terminals are claimed.
+
+
+
+## 2026-11-03 exact gamma/zigzag Python wire-model source implementation (unchecked Agda)
+
+**Actual PR #1445 source additions (all `{-# OPTIONS --safe #-}`):**
+
+- `Karp21GammaZigzagPartitionWordDecodeExact.agda`: concrete `readLowBits`, `readGammaZeros`, `readGamma`, `readSignedGamma`, `readSignedItems` and `decodePartitionWord` for Python's gamma(n+1) and zigzag signed integer words. It rejects truncated gamma fields, impossible declared source lengths and trailing source words. `unzigzagZigzag` is a source-written proof of the actual integer sign bijection; there are executable-reduction examples via `refl`.
+- `Karp21GammaZigzagGraphWordDecodeExact.agda`: concrete `readOneRawEdge`, `readRawEdges`, `strictAfter` and `validateRawEdges` parse ordered tuples into the **original dependent** signed `WeightedCutGraph`, checking Fin endpoint bounds, off-diagonal proofs, positive threshold, sorted unique pairs and trailing data. `decodeGraphWordCertified` stores a genuine `twoPerEdge (length edges) ≤ encodingSize inputWord` proof from a checked side condition. `n21GraphWordEdgeCountBitBound` projects that proof, and `literalGammaSparseGraphCodec` instantiates the earlier `N21.SparseGraphWordCodec` with an **actual executable decoder**. The additional size guard is expected to be redundant on legal Python graph words (each triple contains three nonempty gamma fields), but its full formal redundancy proof is still OPEN; do not claim verified Python same-object acceptance until paid.
+- `Karp21GammaZigzagWordEncodeExact.agda`: concrete `encodeGammaNat`, `encodeSignedGamma`, `encodePartitionWord`, `encodeEdgeWord`, `encodeGraphWord` use the Agda standard-library structural `Data.Nat.Binary.Base.fromℕ` conversion, not an output-length-expensive enumeration of unary naturals. Exact fixture equalities are source-written; the generic same-word encoder/decoder equations are still OPEN. The target encoder preserves the original listed signed graph edges rather than merging/sorting them.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.agda`: now uses the above **actual E20 decoder/encoder** and **actual N21 graph word language**. The old `∀ graph` faithfulness requirement was too strong: a generic `WeightedCutGraph` permits unsorted/duplicate edges, whereas the canonical binary decoder rightly rejects them. It is replaced by `E20ImageWordReceipts`, confined to `PositiveCutTarget`'s sorted complete-graph/zero-total unit-YES image plus the concrete fixed-NO malformed target. `EncodedE20.totalE20WordReduction` is therefore an ACTUAL total function on source `List Bool`, with word-level iff and `PolynomialManyOneReduction` constructors **conditional** on image-only faithfulness and an independent machine clock.
+- `Karp21Everything.agda` imports all new owners; attribution retains Cook 1971, Leonid Levin 1973, Karp 1972, source-owned DASHI codec and standard-library binary conversion.
+
+**Paid as source declarations, not kernel accepted:** literal E20/N21 gamma/zigzag parsing and encoding functions; strict fail-closed source/target word validation; actual signed graph construction; N21 codec's local checked input-bit certificate; narrowing E20 serialization faithfulness from impossible universal graph to its actual output family.
+
+**OPEN exact lemmas:** (i) `gammaReadEncodeRoundTrip` and `gammaEncodeReadCanonical` on arbitrary binary words; (ii) `zigzagSignedWordRoundTrip`; (iii) `partitionWordDecodeEncode`; (iv) `canonicalGraphWordDecodeEncode` (for sorted, unique image graphs, including proof-field erasure/semantic equivalence); (v) `graphWordSizeGuardRedundantForCanonicalInputs` to prove agreement with the earlier Python parser; (vi) `e20PositiveTargetEncodedFaithful` and `fixedNoEncodedWordRejects` to instantiate `E20ImageWordReceipts`; (vii) real bit-machine clocks `n21SparseVerifierBitTapePolynomialClock`, `scaledPartitionGraphMachineClock`, `k00StrictSATMachineVerifierClock`; (viii) full Cook–Levin universal polynomial root; (ix) E01–E19 and all 21 NP membership/cost certificates; (x) final `CertifiedKarpNetwork` source proof and independent Agda kernel check. No generic `NPComplete` result is being claimed and no preflight Agda/CI was executed in this session.
+
+
+
+## 2026-11-03 encoded E20/N21 bridge and non-vacuous malformed source NO target
+
+New `{-# OPTIONS --safe #-}` files imported by the focused `Karp21Everything.agda` root:
+
+- `Karp21SparseGraphWordNPBoundaryExact.agda`: `SparseGraphWordCodec` states precisely the source-owned signed `Cut.WeightedCutGraph n` decoder with a **source-word edge-bit bound** `twoPerEdge(length(edges g)) ≤ encodingSize word` for *each successfully decoded word*. Its `OnCodec` module supplies a total Boolean `verifyCanonicalSparseGraphWord`, `canonicalGraphWordToBoundedSparse`, `boundedSparseToCanonicalGraphWord`, `n21EncodedSparseWordBidi`, and `karpWeightedMaxCutInNPFromMachineReceipts` requiring the actual verifier clock and model certificate-bound proof. This is a concrete proof of **semantic bounded-witness transport, conditional on the intended actual graph decoder and bit-bound**; it is not itself `karpWeightedMaxCutInNP`.
+- `Karp21SignedPartitionActualGraphWordBoundaryExact.agda`: `graphOfPositiveTarget`, `e20ActualGraphOfSignedPartition`, `e20SignedPartitionActualGraphIff` instantiate the existing signed list PARTITION ↔ **real finite positive-threshold graph** bridge. The `EncodedE20` module reuses `Karp21MalformedWordTotalReductionExact.TotalMalformedSource`, exporting `e20EncodedSignedPartitionDecisionIff` over all input words including malformed source words and `e20EncodedPolynomialReductionFromClock` conditional on the literal word-map clock. Canonical gamma/zigzag decoder and target-word faithfulness remain separately required, not assumed completed.
+- `Karp21WeightedMaxCutFixedNoGraphExact.agda`: actual two-vertex, one-edge +1-weight, +2-threshold **NO** Max-Cut instance. `fixedNoGraphRejects` exhausts all four binary vertex assignments using `IntP.≤⇒≤ᵇ`. E20 totalization now **uses this real NO graph**, removing the former abstract NO-instance/no-proof premises.
+
+**Source-search alignment:** Python reference `scripts/karp21_signed_cut_binary_codec.py` encodes gamma(n), gamma(m), ordered edge triples `gamma(u),gamma(v),gamma(zigzag(w))` and gamma(W), rejects duplicate/reversed/out-of-range edges and malformed tails, and uses gamma(number+1) for naturals; source PARTITION is gamma(length) followed by gamma(zigzag(weight)). Agda `GraphInstance` includes dependent off-diagonal and threshold proofs, so literal record equality after decoding is not the right bridge unless proof irrelevance is handled; the **language-acceptance equivalence** is the legitimate required same-object proof. Python executable checks are regression evidence only.
+
+**Open exact resource cut:** `n21CanonicalGraphGammaZigzagDecoder`; `n21GraphWordEdgeCountBitBound` as a concrete instance of `SparseGraphWordCodec.edgeBitBound`; faithful graph-language decoder/serializer semantics; signed arithmetic/endpoint comparison `n21SparseVerifierBitTapePolynomialClock`; `scaledGraphCanonicalWordEncoding`, `scaledSignedWeightBitBound`, `scaledPartitionGraphMachineClock`, `e20EncodedPolynomialReduction` with a real machine clock; and Agda kernel acceptance for all source-written bridges. `k00StrictSATMachineVerifierClock`, `cookLevinSATRoot`, E01-E19, the 21 membership proofs, and `CertifiedKarpNetwork` remain outstanding. The 0/20 and 0/21 certified counters do not change.
+
+
+
+## 2026-11-03 P0 strict SAT word replay + fully bounded certificate BIDI (source-written, kernel-unrun)
+
+**Repository search performed on original terms and adjacent owners:** `k00StrictAcceptedWordCanonicalReencode`, `strictDecodeCookFormulaBits`, `parseCookFormulaEncodeInto`, `encodeFormulaBits`, `k00StrictSATMachineVerifierClock`, `k00StrictSATInNP`, `PolynomialCostModel`, `ExecutablePolynomialCostRefinement`, `ConcreteTape`, `CookLevin`, `MachineRunCertificate`, `n21GraphWordEdgeCountBitBound`, `GraphWord`, `zigzag`, `SparseEndpoint`, `scaledSignedWeightBitBound`, `e20EncodedPolynomialReduction`, `karpSATInNP`, `karpWeightedMaxCutInNP`, `CertifiedKarpNetwork`, `Tseitin`, `Levin`, `Leonid`, `Karp`, `bidi`, `knapsack`, `job sequencing`, `machine cost`. Default-branch code search **does not index PR #1445's unmerged files**; exact-head inspection therefore also fetched the PR changed-file list and source paths. No missing declaration is promoted merely from a generic search hit.
+
+**New exact-source Agda owners, imported in `Karp21Everything.agda`:**
+
+1. `Karp21CookStrictWordCanonicalReencodeExact.agda`: `natRebuildOutcome`, `natSuccessCanonical`, `rebuildCook` and `reencodeThreeTokens` establish a *parser left inverse* on successful unary Nat, Cook prefix grammar, and strict 3-bit token streams. `k00StrictAcceptedWordCanonicalReencode` upgrades decode(encode)=id to **encode(decode)=id on all accepted strict words**. `k00StrictAcceptedWordCertificateBound` transports the earlier finite certificate bound to **every input word** with an accepted concrete verifier certificate. These proofs are source-written only until Agda typechecks the whole chain.
+2. `Karp21StrictSATBoundedCertificateNPBoundaryExact.agda`: `strictSATCertificateAdmissible` is the ACTUAL inequality `encodingSize certificate ≤ encodingSize word`, not a record status flag. `k00StrictSATBoundedWitnessBidi` connects the existing strict SAT language to an explicit bounded executable finite witness for every word. `k00StrictSATInNPFromConcreteResourceReceipts` assembles **the exact intended `PR.InNP`** from two still-required concrete model certificates: `PR.polynomialTimeVerifier cost verifyStrictCookSATWord` and `PR.polynomialCertificateBound cost strictSATCertificateAdmissible`. `k00ConcreteTapeRunBoundedStrictSATWitnessBidi` connects the concrete existing exact-budget Cook–Levin accepting run to this bounded verifier witness on the original produced strict SAT BitWord.
+
+**P0 completion boundary recalibrated:** The first of the three P0 rows (`k00StrictAcceptedWordCanonicalReencode`) and its all-accepted-word witness-size corollary are **source-written**. The *semantic* `k00StrictSATInNP` components and Cook–Levin accepting-run/witness BIDI are source-written, but the actual verifier bit-machine clock, concrete `PolynomialCostModel` realization, verified generic model certificate-size bound, uniform Cook–Levin serialization machine clock, universal NP-to-SAT root, and independent Agda acceptance receipt remain **OPEN**. This leaves the P0 resource and generality wall, not an unbounded SAT certificate gap. An exact source theorem is not an Agda-checked theorem until the focused root is independently accepted.
+
+**Newly identified machine-cost reuse:** `StandardSingleTapeMachineExact.agda` gives conventional split-tape operational semantics and rule-table work bounds; `ConcreteTapeStandardClockExact.agda` gives source-written run-clock transport (standard run length exactly T, dispatch work bounded by `T * rulesLength`, guarded tape width linear). `PNotEqualsNPExecutablePolynomialCostRefinementExact.agda` still requires a base polynomial cost model and its executable closure; the base model must not be treated as automatically inhabited. Reuse these owners first, then prove the SAT verifier and reduction constructor's concrete clock.
+
+**Original full task retained:** E20/N21 graph input encoding and true signed bit-machine costs; E01–E19 exact encoded reductions and costs; 21 `InNP` proofs; instantiate `CertifiedKarpNetwork`; accept the full 21-node theorem. Current **kernel-accepted full Karp completion counters remain 0/20 reductions, 0/21 terminals** in the absence of pinned acceptance.
+
+
+
+**Authority:** DASHI Agda source is golden; `chboishabba/dashi_lean4` and `openai/math` supply independently attributed Lean donors.  
+**Delivery PR:** [dashi_agda #1445](https://github.com/chboishabba/dashi_agda/pull/1445).  
+**Scope:** all *21 historical problems*, all *20 historical direct reduction edges*, and the eight follow-up topics (some outside the 21).  
+**Status principle:** code in a GitHub branch != Agda kernel-accepted theorem != source-paper result != same-object port. No general NP-completeness or P != NP is claimed by this roadmap.
+
+## 2026-11-02 K00 executable Cook verifier and E20/N21 bounded-sparse BIDI (source-written; kernel-unrun)
+
+**New source owners, both imported by `Karp21Everything.agda`:**
+- `Karp21CookExecutableFiniteVerifierBidiExact.agda`: `verifyCompactCookBits` checks exact finite certificate length, same-Nat-label consistency, and the **actual Cook.evaluate** predicate. `verifyCompactCookBitsSound`, `verifyCompactCookBitsComplete` and `cookExecutableVerifierBidi` prove the Boolean verifier's same-formula soundness/completeness. `verifyStrictCookSATWord`, `strictCookExecutableVerifierSound`, `strictCookExecutableVerifierComplete`, `strictCookExecutableVerifierBidi` extend it to the **original strict binary Cook SAT language**, including malformed-word rejection. `cookExecutableCertificateCanonicalSize`, `strictCanonicalCookVerifierBidi` and `strictCanonicalCookCertificateBound` weld the Cook encoder, strict parser, executable verifier and exact witness-size inequality **on a canonical encoded SAT word**.
+- `Karp21PartitionSparseCutBidiExact.agda`: `SizeExactSparseCutYES` pairs an actual signed `verifySparseCutBitWord` acceptance with **exact `twoPerEdge (length edges)`** size. `actualCutSizeExactSparseIff` uses the original N21 checker and arbitrary-witness extension. `e20PartitionSizeExactSparseBidi`, `e20PartitionToSparseSearch`, `e20SparseSearchToPartition` compose it with **`sourcePartitionActualPositiveGraphIff`** on the same E20 graph, preserving signed weights and the T=0 exceptional fixed YES graph. `scaledGraphUpperPairCount` and `scaledGraphSparseSearchExactTriangularBits` prove the nonzero-branch witness length is **`twoPerEdge (triangularPairCount (length parts))`**.
+
+**What the new files close, provided Agda accepts them:** SAT's **executable finite verification Boolean and same-language semantic BIDI**; an **end-to-end E20 original signed PARTITION ↔ N21 accepted exact-size sparse witness** over the actual E20 graph, plus exact combinatorial bit count. The previously separate E20 and N21 graph/witness semantic tracks no longer need a second carrier or an oracle.
+
+**Still OPEN (do not promote):** `k00StrictSATMachineVerifierClock`, `k00StrictAcceptedWordCanonicalReencode` / a valid all-accepted-word length inequality, `k00StrictSATInNP`, `k00UniformConcreteTapeToSATWordPolynomialClock`, `cookLevinSATRoot`; the *graph input* signed binary codec/parser and its explicit equality to the typed E20 graph, `n21GraphWordEdgeCountBitBound`, `n21SparseVerifierBitTapePolynomialClock`, `scaledSignedWeightBitBound`, `scaledPartitionGraphMachineClock`, `e20EncodedPolynomialReduction`, `karpWeightedMaxCutInNP`. No verified `PR.PolynomialManyOneReduction` or `PR.NPComplete` is asserted here. Both new source files use `{-# OPTIONS --safe #-}`; Agda has NOT run on this branch in this session, and no kernel receipt is claimed.
+
+**Explicit repository search/cost-owner audit:** checked Cook–Levin, strict Cook/SAT/3-SAT, Leonid Levin/universal search, polynomial cost models, concrete tape clocks, binary codecs, signed PARTITION, weighted Max-Cut, sparse endpoint, E20/N21, proof transport, BIDI/same-object, and related dashi_lean4 symbols. `PNotEqualsNPExecutablePolynomialCostRefinementExact.agda` supplies an *executable-code refinement of an assumed base polynomial cost model*, not a concrete filled-in machine-time model. `DeterministicNondeterministicMachineExact.agda` supplies operational reachability but its `PolynomialClocked*` cost fields are open `Set` premises. `ConcreteTapeCookLevinSizeClosedExact.agda` has valuable exact formula counts but its status Booleans are not machine-cost proof terms. These are relevant reuse owners, not paid K00g/K00i.\n\n**BIDI discipline:** two explicit mathematical directions are paid; the source/graph object, parser and validator are reused. A dual label alone does not prove polynomial time. Do not confuse this bridge with unrelated physics, VOA or biological BIDI structures.
+
+## 2026-11-02 Leonid Levin (1973) search/decision proof-owner integration
+
+**Original sources and attribution.** Stephen A. Cook's 1971 SAT theorem and concrete DASHI Cook–Levin tape/formula owners are separate from Leonid A. Levin's independent *Universal Sequential Search Problems*, *Problemy Peredachi Informatsii* 9(3) (1973), 115–116, English *Problems of Information Transmission* 9(3), 265–266, [Math-Net primary record ppi914](https://www.mathnet.ru/eng/ppi914). Richard Karp's 1972 historical 21-problem network is a third historical root. Michael Levin's biology corpus remains a fourth, unrelated owner. Repository searches for `Leonid`, `Levin 1973`, `Levin 1986`, `LevinSearch`, `LevinKt`, `universal search`, `Kt complexity`, and the linked P-v-NP PRs did not expose a distinct named executable Leonid Levin universal-search/Kt optimizer on the **default branch**; this does **not** establish absence on other historical branches or under different terms. The already existing Cook–Levin tableau and SAT language were confirmed and reused, not recreated.
+
+**K00 finite-witness advance (source-written, Agda-unrun):** `Karp21CookFiniteOccurrenceWitnessExact.agda` now represents satisfying assignments by precisely one Boolean for each **syntactic variable occurrence** of the existing `Cook.BooleanFormula`. `formulaVariables` and `projectBits` do not allocate up to the maximum Nat variable index; `firstLabel` reconstructs a genuine total Cook assignment from the first occurrence. `evaluateAgreesOnOccurrences` and `reconstructedEvaluationEqualsOriginal` prove that this reconstruction preserves the existing Cook evaluator on all assignments. `allCookObservationsConsistent` rejects conflicting repeated-variable bits and `projectedCookObservationsConsistent` proves source-assignment projections pass the real checker. `cookCompactSatisfiabilityIff` establishes both directions between `Cook.Satisfiable` and the concrete `CompactCookWitness`, while `compactWitnessExactBitCount` proves length exactly equal to the number of formula-variable occurrences on the shared bitword metric. **Additional source-written bounds** `variableCountWithinCookTokenCount`, `canonicalCookFormulaWordSizeExact` and `compactCookWitnessAtMostCanonicalFormulaWord` prove that every such finite certificate has at most as many bits as the **actual canonically encoded** three-bit-token SAT formula. This closes the finite formula-local assignment and canonical formula-relative length obligations at source level, NOT the arbitrary accepted-word re-encoding theorem, bit-machine verifier clock, or `PR.InNP`.
+
+**Enhanced Leonid/Cook module:** `finiteStrictCookSearchDecisionIff` and `concreteRunFiniteCookSearchIff` now use that finite, checked assignment-word witness rather than an arbitrary `Nat → Bool` witness. `k00FiniteCookAssignmentCodec` is paid as finite same-formula occurrence-bit semantics and exact certificate length; `k00FiniteWitnessVsCanonicalEncodedSATWordLength` is now source-written. `k00StrictAcceptedWordCanonicalReencode`, a same-bitword pair parser, a polynomial bit-machine verifier clock, and kernel acceptance remain open.
+
+**New source-written module, imported by `Karp21Everything.agda`:** `Karp21LeonidLevinSearchDecisionExact.agda` defines `StrictCookSearchWitness` on the *actual* `List Bool` strict-SAT encoding with an explicit parsed Cook AST and a satisfying assignment; `strictCookSearchDecisionIff` transports decision to search and back for every well-/malformed word. `concreteRunStrictCookSearchIff` composes this with the actual pre-existing concrete-tape exact-budget Cook–Levin accepting-run equivalence on the same serialized word. `n21SameGraphSearchDecisionIff` reuses N21's **actual signed sparse 2m-bit endpoint certificate and consistency** equivalence, not a new graph verifier. The proofs preserve source machine/input/budget or source signed graph, respectively.
+
+**Remaining specific Levin/K00 cut:** `k00FiniteCookAssignmentCodec` (replace the unbounded `Nat → Bool` assignment witness with actual finitely bounded, same-AST satisfiability and encoded bits); `k00FiniteWitnessParseAndLength`; `k00StrictSATMachineVerifierClock`; `k00UniformConcreteTapeToSATWordPolynomialClock`; `k00AllNPMachineLanguagesToSATWord`; `k00StrictSATInNP`; `k00LevinSearchRelationCostedTransport`; optional **separate** `leonidLevinUniversalSearchSchedule`, `leonidLevinKtOptimality` only if a genuine target/solver is specified and mechanically costed. N21 still needs `n21GraphWordParserExact`, `n21GraphWordEdgeCountBitBound`, `n21SparseVerifierBitTapePolynomialClock`, `n21InNP`. None is paid by the new search/decision equivalence.
+
+**Verification:** source committed; neither pinned Agda kernel, CI, nor exact-branch checker was run. This is not a proven NP-complete root or universal optimal-search algorithm; the complete-costed reduction count stays 0/20 and the new end-to-end NP-complete theorem count stays 0/21.
+
+## 2026-11-02 explicit repo-wide K00/VOA/codec archaeology and actual SAT Word completion
+
+**Search performed before writing new Agda:** `Karp21`, `CookLevin`, `K00`, `FiniteWordSize`, `PolynomialCostModel`, `binary codec`, `zigzag`, `gammaCode`, `bitLength`, `encodedSize`, `NP membership`, `PolynomialTimeVerifier`, `TuringMachine`, `VOA`, `Monster3B`, `gradedTrace`, `GradeAction`, `FockPartition`, `C3Fourier`, `SignedLaplacian`, `PNFSignedResidualDelta0`, `Cheeger`, `MaxCut`, `representation action`, `same-object`, `FiniteConfigurationEncoding`, `ConcreteTape`, `CostRefinement`, `CookFormulaBinaryCodec`, `Data.Nat.Binary`, `binaryDigits`, `natToBits`, `bitsToNat`, `encodeSignedBits`, `BinaryNat`, `Elias gamma`, `prefix-free`, and `self-delimiting`. This is explicit source archaeology across **existing `dashi_agda` default branch** plus PR #1445, not a claim of having kernel-checked every match. No extra repo was modified.
+
+### Precise pre-existing K00 owners — stronger than the old roadmap's loose “Cook–Levin OPEN”
+
+- `ConcreteTapeCookLevinExactBudgetIff.agda`: **actual** `GuardedCookLevinSAT` iff `ExactBudgetAcceptingRun` for a source-specified concrete tape machine, input and exact budget; this is more than an abstract SAT iff field.
+- `ConcreteTapeCookLevinCookFormulaExact.agda`: **actual** `guardedCookFormula`, `cookSatisfiableToExactBudgetRun`, `exactBudgetRunToCookSatisfiable` on the source-owned `CookLevinCircuitGCTBoundary.BooleanFormula`. The single-machine concrete tableau→Cook formula semantics is already source-written, and must not be rebuilt or reported as wholly missing.
+- `ConcreteTapeCookLevinPrizeFacingExact.agda`: `prizeFacingCookLevinCertificate` compiles exact-budget SAT/run semantics, variable count and closed clause bound. `PNotEqualsNPConcreteTapeProgramCookLevinSameObjectWeldExact.agda` connects literal static-machine program code with the same exact tableau owner.
+- `ConcreteTapeStandardClockExact.agda`: projected concrete→conventional machine step clock equality and first-match dispatch work `≤ steps × ruleCount`, subject to existing model/compatibility preconditions; this is NOT a bound for the separate full Cook formula serialization. `PNotEqualsNPExecutablePolynomialCostRefinementExact.agda` supplies executable code witnesses on top of the abstract `PolynomialCostModel`, but explicitly withholds extraction from arbitrary extensional complexity predicates.
+- `PNotEqualsNPCookFormulaPrefixCodecExact.agda`: actual suffix-preserving Cook syntax parser and prefix AST roundtrip; `PNotEqualsNPCookFormulaBinaryCodecExact.agda`: eight tokens serialized in **exactly 3 bits**, formula roundtrip and bitcount `3 × tokenCount`. **Existing decoder permissiveness:** `decodeTokenStream` silently drops dangling 1/2 bits, and `decodeCookFormula` returns a default on malformed syntax. These are unsound policies for claiming canonical all-word SAT decision without a separately defined strict language.
+
+### New precise K00 source-written results in this PR (imported by `Karp21Everything.agda`)
+
+1. **`Karp21CookStrictTripleBitBoundaryExact.agda`:** total `strictDecodeThreeTokens` returns `Maybe (List CookSyntaxToken)`, never drops malformed tails. `strictDecodeThreeTokensAfterEncode` proves its exact roundtrip for all eight actual Cook syntax tokens; `strictRejectOneExtraBit` and `strictRejectTwoExtraBits` reject trailing 1/2 bits. `strictDecodeCookFormulaBits` calls the **source owner's real `Prefix.parseCookFormula`**, requiring the suffix to be `[]`; `strictCookFormulaRoundTrip` proves exact AST decode-after-encode. `strictRejectTrailingCompleteFormulaToken` rejects a complete valid extra formula token; `strictRejectStandaloneNatZero` rejects a nonformula top-level integer token. Hence malformed *complete three-bit-token* formulas are distinguished from correct SAT words, not silently decoded as false.
+2. **`Karp21CookStrictSATLanguageExact.agda`:** `strictSATLanguage : PR.Language Word.BitWord` is an **actual total binary SAT language**. `strictSATFormulaWordIff` transports `Cook.Satisfiable formula` iff strict word acceptance for every original Cook AST; `strictSATRejectsOneTrailingBit`, `strictSATRejectsTwoTrailingBits`, `strictSATRejectsCompleteExtraToken` discharge actual malformed-word *language nonmembership*. This is source-written proof-term construction, not an unimplemented parser interface.
+3. **`Karp21CookLevinConcreteBitWordReuseExact.agda`:** `guardedCookLevinBitWord` serializes the **actual existing** concrete-tape Cook formula on `FiniteWordSizeExact.BitWord = List Bool`; `guardedBitWordDecodesToActualCookFormula`, `strictSerializedCookWordParsesExactFormula`, `strictCookSATWordAcceptanceToRun` and `exactRunToStrictCookSATWordAcceptance` now prove the concrete-tape accepting-run equivalence directly on the **same actual strict `PR.Language`**, not a guessed SAT language. `wordLengthMatchesCookCodecLength` identifies the two inherited list-length functions before `serializedCookFormulaWordLength` proves exact source-size `3 × cookFormulaTokenCount`. Exact source machine/input/budget and both directions are preserved. The further `nonemptyInputBelowActualSATWordSize` **reuses** the already source-written `ConcreteTapeCookLevinQuotationGrowthExact.nonemptyPayloadStrictlyBelowCookFormulaBitCode` and transports its strict input-payload-size lower bound to the *same* `FiniteWordSizeExact.encodingSize`; it is neither a global output upper bound nor a polynomial-time clock.
+
+**What K00 *still* requires to be a genuine NP-complete SAT theorem:** every NP verifier in the selected concrete machine model → a uniformly generated machine/tableau family with an explicit polynomial clock *in the bit length of the original input and certificate*; uniform source-word→target-word real executable algorithm and its polynomial bit-cost proof (not just token-count equality or the bounded `steps × |rules|` dispatcher); compatible invalid-source policies; universal all-NP-language many-one reduction on one `Word` model; a paid `PR.InNP` instance for the strict SAT language; and pinned kernel receipts. Existing exact-budget correctness for **one machine + one budget** is mathematically substantive but does NOT quantify these obligations away. No `PR.NPComplete` inhabitant is claimed.
+
+**Remaining 20 historical direct edges and 21 NP members are retained below**, including E20/N21 gamma/zigzag signed graph Word encoding and real runtime cost, E04/E05/E06/E12 finite semantics, and E01–E19 machine reductions. Existing Monster/VOA/PNF/SSP, character, eigenspace and finite sampling work cannot stand in for any of the above universal complexity statements. No CI or Agda kernel run.
+
+
+### Common K00/N21 canonical Word size — no second binary carrier
+
+`Karp21MaxCutCertificateBinaryCodecExact.agda` now additionally imports the **same** `FiniteWordSizeExact` used by the strict K00 language. `canonicalWordLengthMatchesListLength` proves the two source-owned length functions coincide for all `List Bool` words; `cutCertificateCanonicalBitWordLength` then proves `FiniteWordSizeExact.encodingSize (encodeCutLabels bits) ≡ n` on every actual `Vec Bool n` MAX CUT witness. This pays the N21 **exact certificate bit length on the canonical K00 metric**. It does **not** establish `n ≤ encodingSize graphWord` until a faithful target graph-word codec supplies the vertex-count bound, nor a time complexity theorem for graph parsing and signed summation. No user instruction to skip CI is treated as permission to promote uncompiled sources.
+
+## 2026-11-02 Michael Levin corpus audit, real Cook prefix-free proof and signed Max-Cut observer/action weld
+
+**Source audit and name disambiguation.** The repository contains **at least 68** `DASHI/Biology/Levin/` Agda files in [PR #99](https://github.com/chboishabba/dashi_agda/pull/99), and **15 additional** Levin/Everything-related changed files in [PR #132](https://github.com/chboishabba/dashi_agda/pull/132). The older Michael Levin programme is substantially larger than the previously inspected `PrefixFreeCodingBoundary`. Source-identified related later lanes include [#669](https://github.com/chboishabba/dashi_agda/pull/669) (observer-intervention/embodied-agent trust), [#548](https://github.com/chboishabba/dashi_agda/pull/548) (physical developmental goals, invariant future compression and cost), and [#584](https://github.com/chboishabba/dashi_agda/pull/584) (refinement/observation dynamics). The default-branch code search explicitly covered `Levin`, `LevinSearch`, `UniversalSearch`, `LevinKt`, `LevinK`, and `CookLevin`. No source-supported Leonid Levin `Kt` or universal-search solver was found under the literal named-search terms. **Michael Levin** (developmental biology, problem spaces, cellular agency) is not **Leonid Levin** (complexity, universal search), nor is the shared surname evidence of a formal mathematical equivalence. Cook–Levin is a different, historical SAT theorem and is not Michael Levin's work.
+
+**Existing in-repo source owners read before implementation:**
+
+- `DASHI/Biology/Levin/PatternMemoryCore.agda`: present morphology, electrical carrier, decoded target and triggered repair are different types; successful observable phenotype is not uniquely the latent goal/control mechanism.
+- `HierarchicalGoalMemory.agda`, `CompetentGoalExecution.agda`, `ProblemSpaceAgency.agda`: hierarchical targets, accepted commands, distinct lower-level policies, task-indexed goal success; navigation/competence does not prove global algorithmic optimisation.
+- `ObserverRelativePolycomputation.agda`, `SubstrateConstrainedComputation.agda`, `PolycomputationBiologyAdapter.agda`, `FungalPolycomputationAdapter.agda`: observer-selected encoding and an abstract input-output relation do not specify a unique physical mechanism, substrate runtime, thermodynamics or complete microtrajectory.
+- `PrefixFreeCodingBoundary.agda`, `CompressionIntelligenceBoundaryCore.agda`, `PredictionCompressionEquivalence.agda`, `ContextualEntropyRateBoundary.agda`, `ShannonInformationEntropyBoundary.agda`: **their status fields are Bool**, not actual Agda witnesses of Kraft inequalities, optimal prefix-free compression, a probability model, literal tape execution or bounded computation. Decoder cost must be charged; length alone does not give polynomial machine time.
+- `EffortOutcomeAccounting.agda` and `LevinDiverseIntelligenceSurface.agda`: task success, model-relative compression, agency and unexplained outcomes require distinct source/intervention/evaluation receipts. No biological or compression performance claim automatically proves NP membership or a machine-cost polynomial.
+
+**New source-written, imported Agda proofs in PR #1445:**
+
+1. `Karp21MichaelLevinGoalExecutionWitnessExact.agda`: instantiate the **existing** `Levin.GoalExecutionSystem` and real `GoalUnderdeterminesTrajectoryWitness`/`CompetentExecutionWitness` types on **one actual signed `Cut.WeightedCutGraph (suc n)`**. The two concrete policies are identity and global label complement (already proved cut-invariant by `Karp21SignedLaplacianCutExact`). Given an **actual accepted Bool cut witness** (not an unproved solver), construct both successes, with policy distinction `samePolicy false true ≡ false` and `distinctRealisedCutWitnesses`: for every nonempty `Vec Bool (suc n)`, the flipped literal certificate is genuinely different. This formalises *goal success underdetermines policy and witness*, NOT a biological solver for Karp.
+2. `Karp21MichaelLevinObserverCutQuotientBoundaryExact.agda`: exact finite same-graph counterexample showing **global complement C2 preserves signed Karp cut score**, yet the actual first-vertex label observation changes. `sameDecisionObservableDoesNotRecoverLiteralPolicy` makes it impossible to promote the C2 quotient to a lossless observer for all provenance/policy observations. Reuse existing `ObserverRelativePolycomputation`/substrate/problem-space conceptual owners; it is not an empirical biological result.
+3. `Karp21LevinPrefixFreeCookCodingExact.agda`: imports the original Michael Levin directory coding boundary **as provenance**, but supplies real proof terms instead of its `Bool` fields. It reuses the original `PNotEqualsNPCookFormulaPrefixCodecExact.parseCookFormulaEncodeInto` and strict three-bit decoder. `cookPrefixSuffixMustBeEmpty` proves a completed `Cook.BooleanFormula` prefix cannot absorb an additional AST-token suffix and equal another completed formula; `cookCompleteTokenBinarySuffixMustBeEmpty` proves the same property for the **actual source-owned 3-bit token code**. `cookCompleteTokenPrefixWitness` packages that proof (not a `prefixFreeWitness = true` flag). This covers complete-token suffixes; malformed 1/2-bit tails are already rejected by `Karp21CookStrictTripleBitBoundaryExact`, and a fully general bitwise prefix theorem, Kraft bound or optimal code theorem is **not** claimed.
+
+**Same-object correspondence and mathematical non-promotion:**
+
+- The symmetry and goal bridge are **exact for the real Karp finite signed graph**, with a supplied accepted witness. They **cannot** compute that witness polynomially, prove P=NP, reduce other Karp problems, or show that a biological system physically executes this algorithm. No bound on the physical transition/energy resources can be derived from success observations.
+- `PrefixFreeCodingBoundary` is a *coding status record*. Its existing `prefixFreeWitness : Bool` and `CodingOptimalityBoundary` do not imply actual prefix-free Boolean languages, a Kraft–McMillan theorem or Shannon optimality; the new prefix proof does, however, discharge a precise complete-token restriction for the actual Cook source encoding. Keep Michael Levin biological attribution apart from Kraft/McMillan/Shannon coding theory and Cook's SAT code.
+- The original `Karp21VOAZ2CutOrbitExact` remains a **search-witness quotient**. Its cut score remains exact; `sameDecisionObservableDoesNotRecoverLiteralPolicy` proves that retaining only that quotient is not an all-observer-recoverable full proof/PNF/provenance record.
+
+**Unpaid exact lemma cut after this reuse (not forgotten):** `k00CookFullBitPrefixFree` beyond complete-token aligned suffixes; `k00StrictSATInNP` on genuine machine-verifier clock and binary witness bound; `k00UniformConcreteTapeToSATWordPolynomialClock` and universal all-NP source transport; `e20SignedIntegerGammaAndZigzagAgdaRoundtrip`, `e20GraphWordRoundtrip`, `e20GraphMalformedPolicy`, `e20PolynomialTapeTransducer`; `n21GraphWordParser`, `n21SignedAddBitClock`, `n21PolynomialVerifier`, `n21InNP`; all **E01–E19** machine-costed encoded maps, **N01–N20** NP membership proofs and 21-node complete DAG. Actual new Agda checks and same-revision kernel receipts are still absent; CI intentionally not run. No mutation in Biology/Levin, ITIR, SLR or SensibLaw.
+
+## 2026-11-02 N21 critical sparse-graph binary-size correction (highest priority after Levin source audit)
+
+**New exact counterexample to the old N21 NP-size argument:** The Python canonical graph word encodes the `vertices` count `n` by `gamma(n+1)`, using only `O(log(n+1))` bits. Thus there are valid *sparse graphs* with a single edge and `n=2^k` whose whole graph word uses `O(k)` bits, but the old exact `Vec Bool n` bit certificate uses `n=2^k` bits. The original `Karp21MaxCutCertificateBinaryCodecExact.cutCertificateCanonicalBitWordLength` is a correct **exact-n-bit identity**, **not** a polynomial witness bound in input length for the entire canonical signed weighted graph language. Do not promote it to `PR.InNP`. The graph representation, not the mathematics of Max-Cut, caused this debt.
+
+**Correct strategy:** For `m` actual signed edges, encode two Boolean labels per *edge-endpoint occurrence*, length exactly **`2m` bits** even when the graph has exponentially many isolated declared vertices. Require repeated uses of any `Fin n` vertex to carry identical labels. Every globally labelled cut projects to one consistent local certificate. Conversely any consistent assignment of labels to the vertices that occur in edges extends to a global cut by assigning arbitrary defaults to isolated vertices; the signed edge contribution and positive threshold are unaffected. A canonical graph word serializes each of its `m` edge triples with at least three bits, hence `2m ≤ graphWordLength` under the Python grammar. This is the *correct polynomial-size existential witness route*; the converse extension theorem and machine-time proof must be formalised in Agda before claiming `InNP`.
+
+**Implemented in DASHI PR #1445:**
+
+1. `DASHI/Mathematics/Complexity/Karp21SparseEndpointCutCertificateExact.agda` adds a dependent `EdgeBits edges` carrier, `encodeSparseEdgeBits` / `decodeSparseEdgeBits` with exact roundtrip and `sparseRejectTrailingBit`; `twoPerEdge` and `sparseWordBitCount` prove a literal 2-bits-per-edge list-word size, completely independent of vertex-count `n`. `projectEdgeBits` translates the original `Vec Bool n` cut into the local endpoint bits. `edgeBitsCutMatchesContribution`, `projectedEdgeScoreEqualsOriginal`, `projectedSparseVerifierExactlyEqualsFull`, and `fullAcceptedWitnessHasSparseWitness` prove the actual signed weighted score and computed threshold verdict are unchanged by projection.
+2. The same Agda source now contains the *real finite consistency-checking algorithm* `endpointObservations`, `observationsCompatible` using `Data.Fin.Properties._≟_`, `oneAgainstAll`, `allEndpointOccurrencesConsistent`, `verifyConsistentSparseCut`, and the full malformed-fail-closed `verifySparseCutBitWord`. `projectedObservationsAreActualVertexLookups`, `allActualVertexObservationsConsistent` and `projectedSparseCertificateAlwaysConsistent` show every globally encoded witness passes the actual repeated-vertex consistency test. `projectedConsistentSparseVerifierEqualsOriginal` / `projectedSparseBitWordVerifierEqualsOriginal` strengthen completeness to the **whole executable checker**, not a score-only surrogate. All are source-written; pinned Agda acceptance is still open.
+3. `scripts/karp21_signed_cut_binary_codec.py` implements `sparse_certificate_from_labels`, `sparse_cut_certificate_verifier`, and `verifies_sparse_word`, with an `O(m)`-entry map of encountered vertex IDs, no allocation proportional to `n`, signed edge contributions, repeated-vertex conflict rejection, and a 2m-bit certificate. It preserves the original full-length verifier only as a compatibility/reference path; the **sparse** verifier is the proper NP witness representation for this binary graph grammar.
+4. `scripts/check_karp_binary_codec.py` adds reference tests comparing the sparse and full verifier on all previously enumerated E20 cases, a graph with one edge and `n=2^1024`, signed weights, contradictory repeated-vertex label bits, exact 2m witness lengths and `2m≤encodedGraphBits`. These tests are **source-written but not run**, per the no-CI instruction; no observed pass counts are fabricated.
+
+**Strict remaining N21 max-cut:** `n21SparseConsistencyImpliesFullCutExtension` and `n21SparseWordAcceptsIffGraphYES` are now source-written in `Karp21SparseEndpointConsistencySoundExact` and require Agda acceptance; independently unpaid `n21GraphWordParserExact` + positive-threshold/edge uniqueness/canonical signed-gamma bitstring correspondence with the executable Python reader; `n21GraphWordEdgeCountBitBound` (universally prove `2m≤wordLength` against that exact grammar); `n21PairwiseConsistencyPolynomialClock` and `n21SignedAdditionMachinePolynomialClock`; `n21InNP`; kernel receipt. For K00, E20 and other 19 edges/20 NP memberships see the complete lists below. **Not certified; 0/21 complete**. The original signed Laplacian/PSD and Michael Levin observer/action bridges are unaffected.
+
+### Subsequent exact N21 finite semantic closure (same source branch, still kernel-unrun)
+
+`Karp21SparseEndpointConsistencySoundExact.agda` is a further **source-written proof** (imported by `Karp21Everything.agda`) that now implements the formerly-open *finite converse*: `checkedObservationsHaveUniqueVertexLabels` extracts actual agreement from the `allEndpointOccurrencesConsistent` Bool checker, `firstObservedLabelAgreesWithEveryOccurrence` proves the first-occurrence readout is consistent with all endpoints, `vectorFromVertexFunction` creates a mathematical full assignment with arbitrary false defaults for isolated vertices, and `projectionMatchesEveryLocalOccurrence` proves that projecting this global vector **reconstructs the entire original EdgeBits**, not only its score. `extendConsistentSparseToFullLabels` returns the fully typed reconstructed global cut witness and certificate equality.
+
+`sparseAcceptedLocalImpliesFullGraphYES` and `sparseAcceptedBitWordImpliesFullGraphYES` prove soundness of the **actual repeated-endpoint consistency and signed-threshold Boolean verifier**, including malformed no-certificate rejection; `fullGraphYieldsSparseAcceptedBitWord` proves completeness from each accepted `Vec Bool n` witness; `n21SparseBitWordDecisionIff` combines both arrows into `PR.Iff (Cut.WeightedMaxCutYES graph) (SparseBitWordYES graph)` on the exact same `Cut.WeightedCutGraph n` object, for all finite `n`, all signed weights and all edge lists. No nonnegative/PSD assumption or hidden biological solver.
+
+**Updated residual after this stronger source-written result:** the finite semantic `n21SparseConsistencyImpliesFullCutExtension` / `n21SparseWordAcceptsIffGraphYES` are **source-written**, not kernel-checked. Remaining to construct and certify: `n21GraphWordParserExact`, `n21GraphWordEdgeCountBitBound`, `n21SparseVerifierBitTapePolynomialClock`, `n21InNP`, and pinned Agda kernel acceptance. The mathematical full `Vec Bool n` reconstruction is a *proof witness only*; the executable sparse verifier still uses only `2m` label bits and pairwise checks over at most `2m` observed endpoints. **No machine-cost conclusion follows from the proof reconstruction.**
+
+## O/R/C/S/L/P/G/F: objective and contracts
+
+- **O — Objective:** one typed executable, bounded and independently auditable reduction network preserving Karp (1972) problem definitions. Exactly one DAG owner per distinct mathematical proposition.
+- **R — Prior art:** Cook (1971), DOI `10.1145/800157.805047`; Karp (1972), DOI `10.1007/978-1-4684-2001-2_9`; Zuckerman (1996), DOI `10.1137/S0097539794266407` (non-standard constrained approximation variants); Ford and Fulkerson (1956) and Edmonds and Karp (1972) (separate max-flow line); Goemans and Williamson (1995) (separate MAX CUT approximation). Original priority is not reassigned to DASHI or OpenAI.
+- **C — Code:** reuse `DASHI.Mathematics.Complexity.PolynomialReductionExact`, `CookLevinCircuitGCTBoundary`, `PNotEqualsNPClayCoreExact`, and `Karp21ReductionTransportExact`. New graph semantics in #1445 are not a substitute for finite, size-bounded reductions.
+- **S — Safety/claims:** keep historical decision, optimization, approximation, integer/signed weights, nonnegative capacities, and scheduling variants distinct. Boolean proof-of-status flags, search hits and finite numerical regressions never close a theorem.
+- **L — Lemmas:** names below are *required exact target declarations*, NOT currently proved symbols unless explicitly named in the status inventory.
+- **P — Preconditions:** finite bitstrings with a canonical parser/serializer, explicit input length, well-formedness/invalid-input policy, polynomial clock, and bounded witnesses. All reductions must handle rejected/ill-formed encodings in a specified manner.
+- **G — Gates:** independent mathematical proof term, syntactic check in focused Agda root, actual pinned-toolchain check, axioms/postulates/hole audit, executable regression as secondary evidence, consumer parity, exact source commit attribution.
+- **F — Follow-through:** after each edge, add the checked reduction to a *single* 21-node graph and propagate completeness using the existing `transportNPComplete` rather than creating 21 copied proofs.
+
+## 2026-11-02 max-cut continuation — K00 malformed words, E04/E06 finite semantics, E20 pair coverage, N21 bitword certificate
+
+**Repo boundary:** all implementation stays in `chboishabba/dashi_agda`, PR #1445. Original Cook (1971)/Karp (1972), inherited repository proof owners and subsequent DASHI proof sources retain separate attribution. No CI or Agda kernel run was performed in this tranche.
+
+### New source-written Agda exact lemmas
+
+| Owner | Source-written exact theorem / contribution | Residual before verified reduction |
+| --- | --- | --- |
+| `Karp21MaxCutCertificateBinaryCodecExact.agda` | `decodeEncodeCutLabels` gives exact `Vec Bool n` → `List Bool` → `Vec Bool n` roundtrip; `cutCertificateWordLength` is exactly `n`; `rejectTrailingCertificateBit` rejects extra data; `wordAcceptanceSound`, `wordAcceptanceComplete`, `n21PackedCertificateYESIff` prove the full existential finite MAX CUT bitword-certificate correspondence. | Graph Word decoder; quantified packed graph/cert parser correctness; actual bit-verifier machine polynomial clock, `PR.InNP`, kernel receipt |
+| `Karp21IndexedUpperPairBijectionExact.agda` | `upperPairNoLoop`, `upperPairEndpointsInjective`, `upperPairCoversDistinct`, `allUpperPairsContains`, `enumeratedUpperPairCoversDistinct`: a canonical `UpperPair n` address covers every distinct vertex pair (either orientation), and its ordered endpoints identify it injectively. The enumerator includes each address as a **membership witness**. | Both address-occurrence no-repeat and the exact weighted edge-list projection are now source-written in `Karp21IndexedUpperPairBijectionExact` / `Karp21UpperPairGraphEnumerationExact`. Pinned Agda check and canonical binary Word encoding still remain |
+| `Karp21FiniteCliquePackingDecisionExact.agda` (historical E04) | Reuses original `Karp21CliqueSetPackingExact`, same `SimpleGraph n` and `Vec Bool n` cardinality; `karpFiniteCliquePackingInstanceIff` establishes existential finite CLIQUE YES iff nonedge-incidence SET PACKING YES, all k. | Canonical explicit set-family universe/payload, source/target packed Word codecs, polynomial transform machine clock, concrete NP membership for the graph/set owner and Agda acceptance |
+| `Karp21FiniteNodeSetCoverDecisionExact.agda` (historical E06) | Reuses `Karp21VertexSetCoverIncidenceExact` and finite graph/Boolean choice; `karpFiniteNodeSetCoverInstanceIff` gives existential node-cover iff indexed-edge set-cover with budget `countChosen ≤ k`. | Actual finite edge-universe and incidence set-family bit matrix, direct source/target Word parser/serializer and size proof, polynomial graph→family machine clock, NP certificate and Agda receipt |
+| `Karp21MalformedWordTotalReductionExact.agda` (shared K00) | `TotalMalformedSource.totalMalformedReductionIff`: a **total** `Word → Word` reduction handles malformed source words by mapping them to a target NO object with a real proof of NO; valid source words use the actual instance-iff and independent target-encoding faithfulness. `makeCostedTotalReduction` creates the existing `PR.PolynomialManyOneReduction` when and **only** when a real `polynomialTimeMap` certificate for this map is supplied. | Concrete signed source/graph codecs in Agda and the actual polynomial machine clock; no resource certificate is manufactured |
+
+**Agda source repair:** `Karp21FiniteCompleteGraphGeneratorExact.agda` incorrectly omitted Nat `_+_` from its import list while defining `triangularPairCount`. The import has been repaired. This is a static source fix, not evidence of pinned Agda acceptance.
+
+### Concrete executable binary Karp E20/N21 adapter
+
+`scripts/karp21_signed_cut_binary_codec.py` is an **actual** separate Python binary encoding/transducer implementation, not a generic codec record. It emits canonical, self-delimiting `gamma(n+1)` natural numbers with zigzag signed integers, source partition vectors, sorted off-diagonal unique undirected weighted edges, and a strictly positive MAX CUT threshold. An invalid source word maps to the valid fixed-NO graph (two vertices; one unit edge; W=2); a signed zero-sum source maps to a valid fixed-YES graph (same unit edge; W=1). Arbitrarily signed nonzero inputs use edges `w_uv=4*c_u*c_v` and `W=(Σ c)²`.
+
+The target decoder rejects nonbinary words, truncated gamma tokens, out-of-range/reversed/looped/duplicated/unsorted edges, zero threshold and trailing data; the cut certificate must have exactly `n` bits. This satisfies the executable *reference semantics* for malformed input and the same finite graph decision predicate; **the same-object Agda `Word` codec/clock remains unproved**.
+
+`scripts/check_karp_binary_codec.py` now contains exhaustive small-word roundtrip and YES/NO controls for **3906** signed source vectors of length 0..5, **111111** cut labelings, malformed words, exact reconstruction, positive/zero threshold branches, and **54** signed 1024-bit envelope scenarios; it is added to `run_karp21_reduction_regressions.py`. **The exact script has not been executed in this turn.** These are test cases authored, not test results or formal bit-complexity bounds. The observed heuristic envelope `outputLength ≤ 128*(inputLength+1)^3` on finite fixtures must not be promoted to a universally proven machine-time theorem.
+
+### Remaining unclosed mathematical cut, ordered by reuse
+
+1. **K00:** actual `Word=List Bool` decoding/encoding proof for signed integer vectors and canonical weighted graph, malformed source/target policies as language predicates, `PR.PolynomialCostModel` instantiated with an audited bit-operation/tape model, Cook–Levin SAT `NPComplete` for the **same** `Word`, and certified composition for all 20 direct reductions.
+2. **E20:** source-written `e20UpperPairOccurrenceUniqueness` (`allUpperPairsNoRepeat`) and `e20UpperPairToCompletePairEdges` (`actualKarpGraphCanonicalUpperPairs`) require pinned Agda acceptance; still unpaid `e20AgdaSignedGammaCodecRoundtrip`; `e20AgdaGraphWordRoundtrip` and `e20GraphDecodeRejectsMalformed`; `e20IntMulBinaryBitCost`; `e20ConcreteTapeTransducerPolynomialClock`; `e20EncodedPolynomialReduction`. Signed finite cut objective and full finite positive-target YES iff are source-written already, not kernel accepted.
+3. **N21:** the new exact `n`-bit cut certificate codec must be paired with the graph's binary Word and verified worst-case integer summation/multiplication clock to produce the actual `PR.InNP`, not merely an existential finite verifier.
+4. **E04/E05/E06/E12 graph/set triangle:** retain the now-source-written finite existential iff; construct real packed set-universe/graph codecs, k-bound guards, polynomial clocks, and `PR.InNP` witnesses for each decision problem.
+5. **Other E01–E03, E07–E11, E13–E19 and N01–N20** remain *exactly* as separately listed below (20 reductions and 21 membership problems overall). No edge is marked costed from bounded Python controls, a semantic iff, or a typed source record.
+6. **Independent acceptance:** run pinned Agda source/axiom/termination check of `Karp21Everything.agda`, then source revision, exact statement and dependency SHA receipts. No CI was required or run in this tranche.
+
+**Status still 0/20 new end-to-end Agda kernel-certified costed concrete reductions; 0/21 new concrete Agda kernel-certified NP-complete problem proofs.** This does not diminish the finite source-written theorem additions, but it prevents a false "all done" promotion.
+
+### 2026-11-02 second Pareto pass: actual upper-pair list occurrence uniqueness + weighted graph identity
+
+New source-written `Karp21IndexedUpperPairBijectionExact.allUpperPairsNoRepeat` (also `upperTriangleOccurrenceUnique`) now proves the actual upper-triangle address **list has no repeated occurrences**, not merely an injective address-to-endpoint function. It constructs a genuine list-membership reflection argument for recursive `Fin.suc`, `headTail` and `tailPair`, their disjoint head/tail images, and a generic `noRepeatAppendSeparated` induction. This completes the abstract upper-pair uniqueness proof obligation at the source level.
+
+New source-written `Karp21UpperPairGraphEnumerationExact.agda` **connects those canonical addresses to the original generated edge list**, rather than leaving two unrelated representations. `headLinksAreCanonical` proves that the generator's head-edge weights are exactly `x * Vec.lookup tail j` for every index; `headPairsAreCanonical` proves the finite head-edge list corresponds to the canonical list; `completeGraphMatchesUpperPairEnumeration` and `actualKarpGraphCanonicalUpperPairs` inductively identify the *actual* `Gen.completePairEdges source` with `map (edgeAtUpperPair source) (Pair.allUpperPairs n)`. The edge projection preserves orientation, off-diagonal proofs and the true signed multiplication of original source values. **The algebraic and indexing prerequisites are now source-written, but no typecheck receipt exists.**
+
+The E20 *semantic/indexing* max-cut therefore narrows to verifying the new sources in Agda and connecting their already-typed graph to an **Agda** `List Bool` source/target binary codec with exact parser roundtrip, malformed words and bit-complexity. Python has the source/reference implementation, but that source is not a machine-polynomial Agda theorem. The actual Cook–Levin K00 clock, E01–E19 costed edges and all 21 NP-verifier machine bounds remain separately open and are not replaced by graph completion.
+
+## 2026-11-02 VOA / Monster 3B / Fock graded-action BIDI max-cut
+
+**Scope:** Source-first re-examination of the existing *literal VOA* and Monster/3B action owners before doing Karp-21 reduction work. All code implementation is **only** in this DASHI Agda PR. No CI or Agda kernel run. This section adds neither an unowned Monster representation nor a new graded VOA construction. **The 20 historical polynomial reductions and 21 NP membership obligations remain active.**
+
+### Actual upstream source owners and the two different "max-cuts"
+
+- `DASHI/Moonshine/GradedRepresentation.agda`: graded finite-dimensional group representations expose abstract endomorphisms and traces, but the group record itself exposes only identity, composition and associativity; **do not assume arbitrary inverses, finite enumeration, or a finite orbit solver**.
+- `DASHI/Moonshine/GradedVertexOperatorAlgebraBoundary.agda` and `VertexOperatorAlgebraCore.agda`: distinguish graded representation from actual VOA vacuum, vertex modes, linearity, truncation, Jacobi, Virasoro and grade compatibility. `GradedVOAHomogeneousLinearRealisationExact.agda` plus `GradedRepresentationLinearRealisationExact.agda` supply the correct **conditional two-sided homogeneous carrier identification and evaluated linear endomorphism**, rather than guessing a state-action from a character.
+- `DASHI/Moonshine/MonsterGradedVOALiteralActionSameObjectBidiExact.agda`, `MonsterGradedVOASelected3BSameElementBidiExact.agda`, and `DASHI/Reasoning/Trialectic369Selected3BFullGradeActionMaxCutExact.agda`: literal selected element must act on **the same carrier/grade representation** as its trace. The 3B **action max-cut** here is the unresolved faithful inclusion + selected full-grade action agreement, *not* Karp's weighted graph MAX CUT. [DASHI PR #1250](https://github.com/chboishabba/dashi_agda/pull/1250) records source-selected 6.Suz character and D4 equivariance restrictions; no mere 720/729 dimension or character fingerprint settles actual Monster representation ownership. [PR #1244](https://github.com/chboishabba/dashi_agda/pull/1244) contains a distinct finite C3 horn-tree/VOA quotient line; do not substitute C3 information-loss or directed quotient data for an undirected Karp cut.
+- `DASHI/Moonshine/RankOneFockPartitionGradingExact.agda`: oscillator-grade partitions of the integer **energy** have explicitly proved dimensions `1,1,2,3,5,7` through grade 5. These are NOT input-subset decisions of Karp's signed PARTITION problem. Its Heisenberg/VOA extension and modularity remain different proof owners.
+
+### New source-written EXACT reusable bridges (imported into Karp21Everything)
+
+1. **`Karp21VOAZ2CutOrbitExact.agda`** instantiates the action-preservation idea on a **genuine, already-paid** Karp certificate action: global bit complement `Lap.flipLabels` on `Vec Bool (suc n)`. `canonicalBitLabels` normalises the first label to false. `canonicalFirstFalse`, `canonicalCutScore`, `canonicalAcceptedIff`, `canonicalCutWitnessIff`, and `canonicalVerifierValue` prove the exact arbitrary-signed-weight cut score, acceptance, existential YES and calculated verifier-output preservation. `canonicalCertificateWord`, `canonicalCertificateWordLength`, `canonicalCertificateWordDecodes` and `canonicalCertificateWordVerifierEqualsOriginal` reuse the **actual N21 exact n-bit certificate codec**; canonicalisation does not change input/certificate bit length. This is a 2-way witness-orbit **search optimisation for graphs with n≥1**, not a polynomial-time Karp machine or a real Monster action.
+2. **`Karp21VOAGradeActionCertificateWeldExact.agda`** consumes an **actual `VOAWithGroupAction`**, a `HomogeneousGradeLinearRealisation`, and its evaluated endomorphism on that same grade. Its `SameGradeWitness.ExactCertificateActionWeld` explicitly requires `encodeCertificate`, `decodeCertificate`, `decodeAfterEncode` and `actionPreservesScore` for the actual signed `Cut.WeightedCutGraph`. Theorems `sameGradeActionPreservesVerifier`, `sameGradeActionPreservesAcceptedCut`, `sameGradeActionPreservesGraphYES` then transport the **same** verified cut through the genuine grade action. The nested **`LocalEdgewiseCertificate`** module now adds the nontrivial proof compiler **`actionPreservesEdgeList`**, deriving global score invariance by induction from `preservesEachEdge` on each actual signed graph edge; **`constructExactWeld`** packages the result without assuming a global energy equality or using character fingerprints. `certificateInclusionInjective` and `gradeActionAgreementReflectsCutWitness` reuse the selected-3B proof pattern—*agreement after inclusion, then faithfulness to recover agreement on the finite certificate*—without manufacturing an inhabitant for the selected Monster/3B source or bit-level action.
+3. **`Karp21VOAGradeDimensionCutSeparationExact.agda`** reuses *actual finite Fock basis dimension* `RankOneFockPartitionGradingExact.gradeTwoDimension` and the *actual* 2-vertex, 1-edge, W=1 `Karp21SignedPartitionActualGraphYESExact.fixedUnitGraph`: `fockGradeTwoKarpTwoVertexDecisionSeparation` source-writes a counterexample where the **same grade-2 dimension (2)** coexists with an accepted and a rejected Boolean cut assignment on the same graph. This is a stronger finite, same-object demonstration than empty artificial `WrongType` declarations. Graded trace/dimension/numerological coincidences cannot replace input-sensitive same-object maps or real verifier receipts.
+
+### Exact unpaid VOA-to-K00/E20/N21 and all-21 gates
+
+**VOA bridge, if ever promoted:** `voaGradeWitnessActualInstance` (a concrete grade embedding into the selected actual VOA, not a record declaration); `voaActualGroupElementAndGradeAction` (real literal action matching the same grade and actual group element, maintaining original Ibrahim 3B ownership); `voaActionPreservesKarpSignedCutScore` (all edge weights and original bitwords); `voaGradeActionWordCodecPolynomialClock` (machine semantics and input length); `voaCharacterObservationDoesNotEraseDecision` (injectivity if quotienting by any nontrivial VOA action). The present generic weld is conditional and does not pay these.
+
+**Non-VOA mathematical priority remains higher:** K00 same-bitword SAT machine/Cook–Levin; N21 graph Word parser, integer addition clock and `PR.InNP`; E20 source/target Word same-object Agda gamma/zigzag parser roundtrip, bit polynomial bound and `PR.PolynomialManyOneReduction`; all other E01–E19 source-to-target costed maps and N01–N20 verifiers. Do not treat VOA character modularity, finite Fock partition numbers, 3B normalizer action candidates, quotient orbit counts, or any action max-cut scheduling flag as a lower-bound theorem or as 20 completed Karp reductions.
+
+**Receipt boundary:** these are source-written new Agda lemmas imported by the focused root, **not typechecked** here. New 0/20 full costed edge and 0/21 complete NP-completeness counts remain unchanged. Primary attribution: Stephen Cook (1971), Richard Karp (1972); VOA foundations Kac (1998), FLM (1984, 1988), Borcherds (1992); prior DASHI VOA/Monster/3B mathematical owners including Ibrahim remain separate. No new Monster same-object representation or new infinite Fock VOA is claimed.
+
+## A. Honest current status (audited against #1445 GitHub tree)
+
+| Proof owner / receipt | Verified object | State |
+| --- | --- | --- |
+| `DASHI/Mathematics/Complexity/PolynomialReductionExact.agda` | generic `composeReduction`, `pullbackPAlongReduction`, `npCompleteInPImpliesPEqualsNP` over a common `Word` and assumed cost-model laws | prior source owner; *not* 21 concrete instances |
+| `.../CookLevinCircuitGCTBoundary.agda` | literal Boolean formula evaluator and a sample tautology; Cook–Levin `Simulation` is a record of **unfilled obligations** | partial |
+| `.../PNotEqualsNPClayCoreExact.agda` | SAT-not-in-P ↔ P!=NP *assuming* standard completeness premises | conditional |
+| `.../Karp21ScaledThresholdExact.agda` / `.../Karp21PartitionScaledInstanceExact.agda` | signed E20 scaled decision iff, source-list witnesses, and positive-threshold branch | source-written; concrete graph bitstring adapter/cost/kernel receipt outstanding |\n| `.../Karp21FiniteCliqueCoverCardinalityExact.agda` | finite E05 complement cardinality and all-k additive threshold iff | source-written; finite graph index/serialization/cost/kernel receipt outstanding |\n| `.../Karp21HeterogeneousEncodingExact.agda` | generic source-word decoder + target-word encoder + instance-iff to costed PR bridge | source-written; concrete faithful codecs and machine time still unpaid |\n| `.../Karp21HistoricalDagExact.agda` | `twentyOneNamedNodes`, `twentyHistoricalEdges`, `allNodesHistoricallyReachable` on a **source-authored historical graph** | source-written; no concrete reduction or Agda kernel receipt |\n| `.../Karp21ReductionTransportExact.agda` | `npCompleteIsHard`, `transportNPHard`, `transportNPComplete` given costed reductions | source-written in #1445, kernel acceptance **not checked here** |
+| `.../Karp21CliqueVertexCoverExact.agda` | `karpCliqueCoverSemanticEquivalence` over Boolean selected-vertex predicates; off-diagonal semantics | source-written; cardinality/bit cost unpaid |
+| `.../Karp21CliqueSetPackingExact.agda` | `karpCliquePackingSemanticEquivalence` on symmetric adjacency and vertex-indexed nonedge-incidence subsets | source-written; finite instance/duplicate sets/bit cost unpaid |
+| `.../Karp21WeightedCutObjectiveExact.agda` | `cutObjectiveFlip`, `flipThresholdCut`: global side reversal preserves edge-list objective | source-written; PARTITION→cut exact polynomial map unpaid |
+| `.../Karp21Everything.agda` | focused import/check root for above | source-written; no pinned Agda receipt shown |
+| `scripts/check_karp_partition_maxcut.py` | exhaustive positive-list PARTITION/cut identity and threshold finite regression | 19,530 strictly positive plus 3,906 signed/zero instances independently audited (23,436 total); all cut assignments, signed product identity, zero-total fixed YES instance and positive-threshold guard; not a proof |
+| `dashi_lean4` PR #78 | pinned `openai/math` vendor + catalogue, `OAI.OptimalMaxCut.main` and `OAI.VertexCover.every_fixed_factor_below_two` routing | sources inspected; no Agda same-object port |
+| `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` | qualitative toy joint-capacity no-promotion | not Ford–Fulkerson or maxflow/mincut |
+| `DASHI/Computation/BellmanFordRelaxationScheduleFibreExact.agda` | shortest-path Bellman–Ford schedule fibre | **not** Ford–Fulkerson |
+
+**Checked end-to-end Karp problem completions in this PR: 0/21. Checked direct concrete Karp reductions with polynomial time proof: 0/20.** The historical DAG and four semantic/transport Agda owners are source-written; their semantics do not discharge NP-hardness without the resource/certificate adapters. Do not overwrite these counts based on module names.
+
+## 2026-11-01 max-cut implementation tranche: concrete finite executables (not machine proofs)
+
+New executable checked against **independent brute-force instance predicates**:
+`scripts/check_karp_historical_reductions.py`, source-written on this PR and independently run locally, all passing.
+
+| Historical edge | Executable input construction and independent oracle | Exhaustive bounded checks |
+| --- | --- | ---: |
+| E01 SAT → 0–1 IP | literal true-count as integer equality with bounded binary slack | 523 |
+| E02 SAT → CLIQUE | one literal-occurrence node per clause; cross-clause noncomplement edges | 10,128 |
+| E03 SAT → 3-SAT | fresh-variable chain; no clauses wider than 3 | 10,132 |
+| E04 CLIQUE → SET PACKING | indexed vertex incident nonedge pairs | 437 |
+| E05 CLIQUE → NODE COVER | complement graph, threshold `n-k` with invalid `k>n` no-case | 437 |
+| E06 NODE COVER → SET COVER | universe of actual graph edges; vertex-indexed incidence sets | 437 |
+| E07 NODE COVER → FEEDBACK NODE SET | bidirected edge arcs and independent directed-acyclicity oracle | 41 |
+| E08 NODE COVER → FEEDBACK ARC SET | two-layer graph, backbone/cross arcs, independent directed-acyclicity oracle | 41 |
+| E10 DIRECTED → UNDIRECTED HAMILTON | three copies per vertex; exhaustive cycle oracle | 69 |
+| E12 CHROMATIC → CLIQUE COVER | complement graph with same palette threshold | 361 |
+| E14 EXACT COVER → HITTING SET | transpose incidence; **exactly one** hitting element | 585 |
+| E15 EXACT COVER → STEINER TREE | root-set-element weighted gadget; independent exhaustive forest/terminal connectivity oracle | 85 |
+| E17 EXACT COVER → KNAPSACK | carry-free base `numberOfSets+1` incidence digits | 585 |
+| E18 signed KNAPSACK → JOB SEQUENCING | sign-safe digit-pair normalization → positive times/penalties → deadlines | 120 |
+| E19 signed KNAPSACK → PARTITION | sign-safe digit-pair normalization before Karp's positive subset-sum gadget | 780 |
+
+**Current finite cut:** E01–E08, E10, E12, E14–E15 and E17–E19 are checked in the first script; E09/E11/E13/E16 in the second; and E20 in the signed-domain script. **All 20/20 edges have independently executed bounded finite checks**, including 23,436 E20 instances. Do **not** translate 15/20 or 16/20 into 15/20 kernel-verified reductions: the latter remains **0/20**. E20 is intentionally not duplicated into the consolidated Python file.
+
+**All 20 direct edge executable constructors are now present in the three scripts**, though E16 requires its Karp source preprocessing assumption and E09 needs full malformed/zero-budget handling. The universal mathematical correctness/cost/NP-membership obligations remain for all E01–E20.
+
+### Newly audited Agda semantic bridges
+
+- `Karp21VertexSetCoverIncidenceExact.agda`: `karpNodeCoverSetCoverWitnessIff` constructs incidence set-cover witnesses in both directions, for all off-diagonal graph edges.
+- `Karp21ColouringCliqueCoverExact.agda`: `karpColouringCliqueCoverWitnessIff` moves a given colour assignment across adjacency complement, for arbitrary Boolean colour equality.
+- `Karp21ExactHittingTransposeExact.agda`: `karpExactCoverHittingWitnessIff` retains the original **exactly-one** incidence requirement by transposition, with chosen-set uniqueness.
+- These are **source-written Agda** declarations included in `Karp21Everything.agda`; none has a pinned-toolchain Agda acceptance receipt yet. Do not count them as certified E06/E12/E14 until concrete finite cardinality/encoding and machine cost are also proved.
+
+### Critical Karp variant and signedness corrections
+
+- N15 (Karp 1972) is **exact hitting**, `|W∩U_i|=1` for every `i`; the modern unrestricted hitting set requires `|W∩U_i|≥1`. They must be separate typed problems. The historical reduction E14 uses the original one-hit formulation; a separate reduction is required for modern hitting set.
+- N18 KNAPSACK is signed subset sum `Σa_i x_i=b`, and the textbook two-extra-number E19 construction assumes positive nonnegative source items: applying it naively to arbitrary signed input admits spurious YES cases. For example `a=(-1), b=9` is NO but the naive resulting PARTITION has total 0 and an empty equal partition. **New DASHI executable extension** encodes each signed choice `a_i` by a pair of positive integers whose unique high digit forces exactly one member of each pair, with a low digit retaining the signed sum. The digit base exceeds the maximum low-digit sum, avoiding carries; then applies Karp's standard positive PARTITION gadget. Named Agda follow-on targets: `signedSubsetSumDigitPairSound`, `signedSubsetSumDigitPairComplete`, `signedSubsetSumNoCarry`, `signedSubsetSumEncodingPolynomialBits`, `positiveSubsetSumPartitionIff`, `signedKnapsackPartitionCompositeIff`.
+- E18 JOB SEQUENCING uses the same newly normalized positive subset-sum instance, with `T_i=P_i=a_i`, common deadline `D_i=b` and penalty budget `Σa_i-b`. Cases with zero penalty budget are mapped to a fixed positive-budget YES scheduling instance. This is a DASHI extension of the historic Karp positive-subset-sum reduction, **not** a new historical result attributed to Karp.
+- E01 0–1 IP is equality feasibility, not inequality-only optimization: each clause encodes `Σ_j truth(l_j) - Σ_h 2^h s_h = 1` using bounded Boolean slack. Need the exact malformed-input and bitwidth proofs.
+- For E07/E08, the directed-cycle oracle checks actual graph acyclicity, rather than relabelling graph cover as a theorem.
+- E15's bounded independent oracle checks the existence of an acyclic weighted subgraph connecting all required terminals. For nonnegative gadget weights, disconnected irrelevant forest components may be discarded without changing existence of a Steiner tree. The general proof still needs this discard lemma and a polynomial edge-count proof.
+
+### Reuse correction: SAT / Cook–Levin source already has much more than a record shell
+
+`DASHI/Mathematics/Complexity/FixedWidthCNFToCookFormulaExact.agda` source-writes `cnfCookSatisfiabilityExact` and literal CNF evaluation equivalence on the **same** `Cook.BooleanFormula` carrier.
+
+`DASHI/Mathematics/Complexity/ConcreteTapeCookLevinCookFormulaExact.agda` source-writes `cookFormulaExactBudgetIff`, connecting an **actual exact-budget concrete tape accepting run** to `Cook.Satisfiable(guardedCookFormula ...)`. This is earlier repository prior-art; do not rebuild the same semantic theorem just to satisfy K00i. Its missing universal cost/computation quantifiers and the standard `PR.NPComplete` machine witness still need an exact proved bridge. **Updated K00i:** `cookLevinSATRoot` should consume these actual owners, prove the uniform polynomial clock/bit-size and tape reduction for arbitrary NP instances, and instantiate the shared concrete SAT `PR.NPComplete`, rather than asserting it from a record field.
+
+### Exact completion acceptance counters (current)
+
+- Historical problem definitions indexed: 21/21 (source-written Agda DAG, not kernel verified).
+- Direct reduction graph entries indexed: 20/20 (source-written Agda DAG, not kernel verified).
+- Finite executable edge implementations tested independently: 20/20 across three scripts, all still awaiting Agda end-to-end kernel proof.
+- Agda kernel-verified **concrete** direct polynomial reductions on this PR: 0/20. The new `CertifiedKarpNetwork` proof compiler consumes the still-missing certificates.
+- Agda kernel-verified **end-to-end** NP-completeness results on this PR: 0/21.
+- OpenAI approximation/scheduling donor same-object kernel ports into Agda: 0.
+- Source authorship, tests and conditional interfaces are tracked separately.
+
+
+### Final 4-edge finite construction expansion (separate executable)
+
+`scripts/check_karp_remaining_four_gadgets.py` now implements and tests the remaining historical edges:
+
+| Edge | Exact finite construction | Passing bounded cases | Universal missing lemma |
+| --- | --- | ---: | --- |
+| E09 | Karp's node-cover → directed Hamiltonian anchor/incident-edge gadget; independent Held–Karp subset DP | 15 | `vertexCoverDirectedHamiltonianIff`, `vertexCoverDirectedHamiltonianCost`, incidence enumeration/isolated-node guards |
+| E11 | 3-SAT → (m+1)-colour graph, four-variable padding, clause-literal adjacency; independent finite graph-colouring backtracker | 7,555 | `threeSATColouringIff`, `threeSATColouringCost`, tautology normalization and padded-anchor palette argument |
+| E13 | Colouring → Exact Cover with vertex, edge, incident-colour slot tokens and indexed sets | 36 | `colouringExactCoverIff`, `colouringExactCoverCost`, small-palette fixed-NO guards |
+| E16 | Exact Cover → 3D Matching incidence-cycle/permutation gadget `(alpha(i),sigma,sigma)` / `(beta,sigma,pi(sigma))`; independent perfect matching DFS | 21 | `exactCoverThreeDimensionalMatchingIff`, `exactCoverThreeDimensionalMatchingCost`, general singleton/empty-set preprocessing |
+ 
+E11's construction checks the literal-source SAT truth after removing tautological clauses and duplicate literals, and uses `m≥4` so every ≤3-literal clause omits a variable to rule out spurious extra-colour assignments. E16 **only** constructs the Karp gadget for nonempty sets with ≥2 elements, exactly matching the quoted "without loss of generality" source precondition; preprocessing the general exact-cover domain remains an explicit lemma. E09 has source-domain guards (nonempty edge incidence, positive budget), with trivial positive-budget YES cases handled separately. Neither the bounded DP/DFS nor the graph-colouring backtracker is claimed polynomial.
+
+**Revised finite implementation coverage: 20/20 historical direct reductions have a source-written executable candidate and passing bounded equivalence controls, spread across three scripts** (`check_karp_historical_reductions.py`, `check_karp_remaining_four_gadgets.py`, `check_karp_partition_maxcut.py`), plus a fourth independent flow/APX consumer. This does **not** prove any complete reduction theorem in Agda. All 20 remain open for general correctness proofs, binary encoding, constructive witness sizes, and actual polynomial machine costs. Completion count for 21 NP-completeness theorems remains 0/21.
+
+### Binary-size repair (implemented, still awaiting formal time/size proofs)
+
+The finite executables now normalize actual SAT variable identifiers to a dense `1..m` index before E01 binary-IP matrix construction and E11 colouring palette construction. Otherwise an instance declaring variable index `10^15` but using only one literal would allocate `10^15` columns/anchor vertices, which is not polynomial in the input's **binary length**. Regressions include a sparse variable of index `10^15`.
+
+Likewise E13 `colouring_to_exact_cover` now returns a constant-size YES exact-cover instance whenever binary-encoded `k≥n`, rather than constructing `k` colour gadgets. The general branch only uses `k<n`. E09 already bounds nontrivial anchor count by the number of active vertices, with trivial YES guards.
+
+Required additional formal lemmas: `denseCNFRenamingSatisfiabilityIff`, `denseCNFRenamingBitCost`, `colouringBudgetAboveVertexCountAlwaysYes`, `colouringToExactCoverBoundedPalette`, `binaryIPSlackBitwidthSuffices`. Proving only the constructor's termination (or testing the above finite controls) does not discharge `PR.polynomialTimeMap` in the real encoded cost model.
+
+## Conditional kernel-facing 21-node proof compiler (source-written)
+
+`DASHI/Mathematics/Complexity/Karp21CertifiedDagTransportExact.agda` now defines:
+- `CertifiedKarpNetwork`: the **actual** shared `PR.PolynomialCostModel`, `PR.PolynomialMapComposition`, SAT NP-completeness root, all 21 NP membership proofs, and one `PR.PolynomialManyOneReduction` certificate for **each** historical `Dag.Edge`.
+- `npCompleteAlongReachability`: structural induction on a genuine `Dag.Reachable` proof; recursively applies existing `Transfer.transportNPComplete`.
+- `allTwentyOneNPCompleteIfCertified`: builds `PR.NPComplete cost (language p)` for **every** Karp node, using the source-written 21-node DAG reachability witnesses.
+- `anyKarpTargetInPImpliesPEqualsNP`: conditional classical P=NP consequence for any **independently established** polynomial-time decision algorithm on one complete target, using the existing `PR.npCompleteInPImpliesPEqualsNP`.
+
+This is a substantive proof-composition function, not a vacuous Boolean completion flag. **It assumes real evidence for each of the 20 edges, SAT-root completeness and all NP-membership certificates.** The source has not yet been kernel-checked in the pinned Agda environment; the theorem is not promoted to 21 accepted NP-completeness certificates.
+
+The **remaining graph cut** is no longer inventing repeated completeness wrappers. It is constructing these exact `CertifiedKarpNetwork` inputs and proving their machine costs in the common encoded carrier.
+
+## Additional exact finite consumer audit: flow, minimum cuts and APX
+
+The repo's earlier `DASHI/Planning/NetworkFlowCapacityCongestionExact.agda` remains a **qualitative** capacity example and is not overwritten. New `scripts/check_karp_flow_cut_apx.py` provides separate executable implementations and independent finite checks:
+
+| Target / algorithm | Exact executable invariant checked | Passed bounded cases | Missing Agda theorem |
+| --- | --- | ---: | --- |
+| Edmonds–Karp BFS residual max-flow | each augmentation strictly increases total integer flow; terminal residual reachable set excludes sink; net flow conserved at interior vertices; value equals cut capacity and exhaustive min **s-t** cut optimum | 738 directed capacitated networks | `augmentPathPreservesFlowFeasibility`, `augmentRaisesFlowValue`, `flowValueLeqCutCapacity`, `maxFlowMinCutEquality`, `edmondsKarpBFSRuntimePolynomial` |
+| MAX CUT nonnegative APX baseline | deterministic conditional expectation yields cut at least half total edge weight, hence at least half optimum | 759 weighted graphs | `conditionalExpectationMaxCutHalf`, `maxCutNonnegativeApproximationRatioTwo`, explicit bit-cost polynomial algorithm |
+| VERTEX COVER nonnegative APX baseline | endpoints of a maximal matching cover every edge and have cardinality `2*matchingSize ≤ 2*OPT` | 1,098 simple graphs | `maximalMatchingEndpointsCover`, `maximalMatchingLowerBoundOptimalCover`, `vertexCoverTwoApproximation` |
+| MINIMUM k-CUT / min-s-t relation | canonical unlabelled `k`-partitions; global 2-cut = minimum over all distinct terminal-pair s-t mincuts; min-k objective nondecreasing in k for finite nonnegative graphs | 74 finite undirected graphs | `globalTwoCutEqualsMinOverST`, `minKCutMonotone`, fixed-k vs variable-k resource bounds |
+
+**Historical boundaries:** Ford–Fulkerson is the general residual augmenting-path method, not the Bellman–Ford shortest-path algorithm. Edmonds–Karp adds BFS selection, yielding polynomial `O(VE²)` (source complexity still to be proved in Agda). Min s-t cut is a **minimum** nonnegative-capacity objective, not Karp's **maximum** signed-weight threshold objective. Constant-factor APX algorithms are not the OpenAI `OAI.OptimalMaxCut.main` optimal-inapproximability theorem and do not supply its Lean/Agda same-object port. Minimum k-cut for variable k has a different complexity contract than fixed-k.
+
+With the original 55,824 Karp-edge finite checks plus 2,669 additional flow/mincut/APX test instances, the independently executed bounded controls now cover **58,493 edge/consumer cases**. The source-committed runner `scripts/run_karp21_reduction_regressions.py` enumerates all four scripts; no exact GitHub checkout execution or pinned Agda kernel acceptance is claimed for the new source.
+
+## 2026-11-01 genuine E20 source proof cut (signed graph objective)
+
+New canonical owner: `DASHI/Mathematics/Complexity/Karp21PartitionCutQuadraticExact.agda`, directly imported by `Karp21Everything.agda`. This is **new Agda proof source**, not an Agda kernel receipt:
+
+1. `signedTotalDecomposes`: over a list of signed integer values paired with Boolean side labels, total equals left sum + right sum.
+2. `partitionCutProductIdentity`: reuse existing DASHI integer ring solver to prove `4ab=(a+b)²-(a-b)²` for arbitrary `a,b:ℤ`.
+3. `crossWithTrue` / `crossWithFalse`: crossing edges from a fixed source vertex sum to that vertex weight times the **opposite-side** total.
+4. `completeGraphCutEqualsPartitionProduct`: induction on the *actual triangular complete-graph edge enumeration*, each pair counted once; the weighted cut equals leftTotal × rightTotal for **all** signed-weight inputs and **all** side labelings.
+5. `completeGraphCutQuadratic`: compose (2) and (4) to give `4*cut=T²-(A-B)²` on the actual cut objective.
+6. `balancedSelectionIffExactMaximum`: using the earlier repo's `IntP.i*j≡0⇒i≡0∨j≡0` no-zero-divisors owner and RingZ cancellation, prove the exact bidirectional equivalence `leftTotal=rightTotal` **iff** `4*actualCompleteGraphCut=total²` for all signed input lists.
+
+This is no longer a merely assumed objective identity. **Historical intermediate status:** the old unscaled route required a ceiling lemma. Later in this roadmap, the new scaled E20 route discharges the integer threshold, zero-total and positive-threshold *semantic* obligations without ceiling. The still-open gates are a faithful explicit graph serializer, universally proved bit-cost/machine clock, target NP verification and a pinned Agda check.
+
+**Source-critical counterexample:** Karp p.100's printed typography renders the MAX CUT threshold as a bracketed quarter of a **sum of squared inputs** `ceil((Σ cᵢ²)/4)`; used literally this is **not** equivalent to PARTITION. Independent local counterexample `c=(2,1)`: source partition is NO, but graph edge weight 2 meets the printed threshold `ceil(5/4)=2`. The actual algebraically justified threshold is `ceil((Σ cᵢ)²/4)=3`, making the cut NO. Other published discussions identify the same distinction; do not silently upgrade the literal printed expression to a proof. The executable `check_karp_partition_maxcut.py` now includes this explicit false-positive regression, alongside its signed-integer/zero-total checks. The original source remains credited to Karp; the corrected formula/diagnostic is an independently documented DASHI reconstruction, not claimed as his verbatim statement.
+
+**E09 totality repair:** `graph_to_directed_hamiltonian` no longer raises an assertion for a graph with a nonempty edge set and zero cover budget; it maps this impossible source case to a fixed 3-node NO instance. This is a total-function repair, not a universal Hamiltonian-gadget proof.
+
+## 2026-11-01 additional exact-source lemma tranches
+
+**E20 signed complete-graph algebra**, `Karp21PartitionCutQuadraticExact.agda`:
+- `signedTotalDecomposes`: every signed weighted partition equals the sum of its two sides.
+- `completeGraphCutEqualsPartitionProduct`: recursively enumerated complete-graph *crossing edges* sum to `leftTotal*rightTotal`.
+- `completeGraphCutQuadratic`: compose with previously existing DASHI integer RingZ solver, yielding `4*actualCut = total²-(left-right)²`.
+- The source is part of the focused Agda root. Independent SymPy symbolic expansion passed; no pinned Agda check yet. **Historical unscaled-route alternative:** ceiling comparison remains optional; the subsequent scaled positive-threshold route covers all total values. Common remaining tasks: explicit encoded graph/word semantics, universal polynomial clock and actual `PR.PolynomialManyOneReduction`.
+
+**E03 Cook-origin four-to-three exact Boolean gadget**, `Karp21SATToThreeSATGadgetExact.agda`:
+- `fourToThreeWitness`: explicit fresh assignment `x=(c∨d)` takes an accepted `a∨b∨c∨d` to both true `a∨b∨x` and `¬x∨c∨d`.
+- `threeToFourWitness`: conversely any accepted two-clause model implies the original four-literal clause; false case closes by impossible Booleans.
+- `cookKarpFourToThreeClauseIff`: a constructive `PR.Iff` for the gadget, using no postulates or oracle.
+- Independent local truth-table check passed 16/16 assignments with both values of fresh bit examined. Still **not kernel checked**. **E03 residuals:** general >3 recursive clause compiler, fresh-name hygiene, bounded extension witnesses, global CNF satisfiability preservation, canonical source SAT/3SAT encodings, polynomial input/output tape cost.
+
+**New counterexample/malformed regression controls**:
+- `scripts/check_karp_partition_maxcut.py` pins `(2,1)` against the literal sum-of-squares reading of Karp's printed threshold, and distinguishes the mathematically correct square-of-sum threshold.
+- `scripts/check_karp_remaining_four_gadgets.py` is now total on zero/negative node-cover budgets for E09, including empty graphs; negative k is mapped to a fixed NO digraph before the vacuous edge-empty YES case.
+
+**Numerical regression status is unchanged:** the earlier bounded finite controls are evidence, not universal proofs. The new small SymPy/truth-table checks do not change the per-edge 0/20 kernel acceptance count.
+
+### Signed integer binary size regression (E20)
+
+The E20 script now measures a conservative **bit count** of each vertex identifier, sign/magnitude edge weight and positive threshold, rather than just counting arithmetic operations or edges. It checks the loose polynomial envelope `outputBits ≤ 32*(sourceBits+1)^3` on 54 zero/positive/signed instances with input magnitudes up to `2^1024`; an independently executed matching local Python check passed all 54 cases. The formal residual remains `partitionSignedWeightBitCost`: a theorem bounding **all** signed integer inputs under a precise canonical serializer and fixed machine-clock model. Sampled bit lengths do **not** close that universal obligation.
+
+## 2026-11-01 advanced E20 closure: exact signed decision iff **without ceiling**
+
+The new source-written modules are imported from the focused `Karp21Everything.agda` root:
+
+- `Karp21ScaledThresholdExact.agda`: `squareSubtractBound`, `scaledScoreBelowSquare`, `scaledThresholdIffBalanced`, `nonzeroIntegerSquare`, `nonzeroTotalSquareIsPositiveThreshold`. The scaled graph has signed weights `4*c_i*c_j` and integer threshold `T²`, where `T=Σc_i`; for nonzero T the threshold is certified as nonnegative and nonzero, hence positive. The score is at most `T²` by the previously proved exact signed quadratic identity and pre-existing integer square nonnegativity, so threshold acceptance iff balance.
+- `Karp21PartitionScaledInstanceExact.agda`: `Selection` is one Boolean label for **each input list element** (duplicates preserved); `taggedTotalMatchesSource` transports the sum independently of labels; `signedPartitionScaledCutInstanceIff` proves the existential source/target YES equivalence; `zeroTotalPartitionYES` constructs the all-false choice witness for every zero-total input. `totalPartitionToPositiveCut` returns a genuine proof-tagged positive-threshold `PositiveCutTarget` in **both** cases: the zero-total fixed two-vertex unit-edge YES graph, or the scaled signed complete graph with T≠0 proof. `positiveTargetThresholdCertified` and `totalPartitionPositiveCutIff` prove its exact threshold validity and universal total reduction YES-iff, respectively.
+- `Karp21HeterogeneousEncodingExact.agda`: `compileHeterogeneousKarpReduction` proves the **general** faithful source parser / source iff / heterogeneous instance transform / target iff / encoded map → `PR.PolynomialManyOneReduction` result, explicitly demanding a *real* `PR.polynomialTimeMap` witness. Every source word, including malformed encodings, is handled by the source-faithfulness premise. There is **no** invented polynomial time assertion.
+
+**Decisive result:** the E20 arithmetic, integer order/threshold acceptance, zero-total guard, positive threshold, and existential signed-input **semantic** equivalence are now present as source-written Agda theorems. The earlier `partitionCeilThresholdIffEquality` obligation becomes **optional** for the historical literal unscaled formula: E20's new integer-scaled reduction uses no ceiling. Attribution: Karp (1972) originated PARTITION→MAX CUT, whereas DASHI's scaled threshold `w(i,j)=4c_ic_j, W=T²` is an equivalent reconstructed convenience formulation.
+
+**E20 exact residuals before `PR.PolynomialManyOneReduction` and NP-completeness can be claimed:**
+1. `scaledCompleteGraphEdgeListFaithful`: materialize actual labelled finite undirected simple-graph edge lists/vertex ids from the input list, and prove their cut objective equals the current list-based triangular complete-graph sum (without reading any selection witness while constructing the graph).
+2. `scaledGraphCanonicalWordEncoding` / `scaledGraphMalformedInputPolicy`: canonical signed integer and graph byte serialization, faithful source and target parsers for all words (including bad encodings), and exact roundtrip.
+3. `scaledSignedWeightBitBound` / `scaledPartitionGraphMachineClock`: binary output length and real time for all input bitstrings in the repository's explicit machine cost model; the 23,436-instance Python oracle and 54 large integer bit-size samples are only secondary evidence.
+4. `e20EncodedPolynomialReduction`: instantiate `compileHeterogeneousKarpReduction` with the actual graph target, source language, semantic iff, and paid machine cost. `weightedMaxCutInNP` still requires concrete bounded cut labels, exact signed sum bit-cost and verifier clock.
+5. Run the pinned Agda type-check root and audit actual compiled imports for holes/axioms. **Source-written ≠ kernel-verified.**
+
+## 2026-11-01 E05 cardinality max-cut (source-written)
+
+`Karp21FiniteCliqueCoverCardinalityExact.agda` is included in the focused Agda root and derives:
+- `chosenAndUnchosenAddToLength`, `countFlippedEqualsNotChosen` and `cliqueCoverFiniteCardinalityComplement`: finite vertex-list slots partition exactly into selected and complement sets, preserving duplicate vertex-position identity.
+- `cliqueBoundToCoverBound`, `coverBoundToCliqueBound`, and `karpCliqueCoverFiniteThresholdIff`: **for every natural k, including k>n**, the cardinality inequality `k≤cliqueCount` iff `complementCoverCount+k≤n`. This avoids truncated Nat subtraction while proving the mathematically exact threshold relation.
+- The prior source `Karp21CliqueVertexCoverExact.karpCliqueCoverSemanticEquivalence` already has the pointwise adjacency complement iff. **Unpaid E05**: combine both in the *same finite indexed graph model* (vector-to-list selection/lookup correspondence), materialize complement graph and target budget `n-k` with its k>n fixed-NO case, prove the binary graph map and clock, and kernel-check source.
+
+An independent local Python truth-table audit of the E05 finite cardinality theorem covered **26,622** choice-list/threshold combinations (length 0..10, k 0..n+3) with no counterexample. This is secondary evidence, not Agda acceptance.
+
+## 2026-11-01 Pareto continuation: E05 same-object finite carrier + N21 signed verifier
+
+**E05 source repair:** `Karp21FiniteCliqueCoverCardinalityExact.cliqueBoundToCoverBound` had a misplaced use of `NatP.+-monoʳ-≤`: the lemma produces `k+unselected ≤ chosen+unselected`, whereas the theorem needs `unselected+k≤n`. The source now first uses `NatP.+-comm unselected k`, then the monotonicity step and the proved partition cardinality identity. This is a proof repair, not a claim that Agda was run.
+
+**E05 finite same-object bridge:** `Karp21FiniteCliqueVertexCoverCombinedExact.agda` defines `FiniteCliqueAt` and `FiniteComplementCoverAt` using precisely one `Vec Bool n`, one `Fin n` vertex carrier, one adjacency function and one natural `k`. `selectionListLength` proves list/vector length agreement structurally; `finiteCliqueToComplementCover`, `finiteComplementCoverToClique`, and `karpFiniteCliqueVertexCoverIff` jointly transport (a) pointwise complement adjacency/selection and (b) finite cardinality constraints on the **same** selection. The all-`k` additive budget `coverCount+k≤n` works even when `k>n`. **Still open:** explicit simple-graph matrix/edge-list encoding, diagonal removal, graph symmetry, ordinary target `n-k` with fixed-NO guard, faithful bitstring parsers, polynomial map clock, concrete node-cover `PR.InNP`, and pinned Agda acceptance.
+
+**N21 signed MAX CUT verifier semantics:** `Karp21FiniteWeightedMaxCutVerifierExact.agda` represents each off-diagonal edge by two `Fin n` endpoints and signed `ℤ` weight, and bundles a constructive positive integer threshold. A cut certificate is exactly a `Vec Bool n` assigning one label per position. `edgeListCutValue` sums the crossing-edge weights; `verifyWeightedMaxCut` uses existing `Data.Integer.Base._≤ᵇ_`, with `weightedMaxCutVerifierSound` and `weightedMaxCutVerifierComplete` reusing `Data.Integer.Properties.≤ᵇ⇒≤` / `≤⇒≤ᵇ`. `karpWeightedMaxCutExistentialIff` transports the full existential YES witness in both directions without assuming an oracle. The explicit finite graph is not asserted simple *as a whole*: no self-loops are constructible, but duplicate/reversed edges remain possible in a list until the canonical representation/normalizer is supplied.
+
+**Exact remaining N21 NP proof obligations:** `maxCutUndirectedUniqueEdges` (canonical unique orientation/no duplicates), `maxCutMalformedParserTotal`, `maxCutGraphWordRoundtrip`, `maxCutPackedCertificateLength`, `maxCutPackedCertificateLookup`, `maxCutSignedSumBitBound`, `maxCutVerifierPolynomialClock`, `maxCutNPCompleteCarrierBridge` (a genuine `PR.InNP`, not merely existence of a Boolean check). **E20 consumer seam:** `scaledCompleteGraphEdgeListFaithful` must connect the signed pairwise complete graph generated from source list elements to `edgeListCutValue` for the same Boolean vector; no theorem currently equates these two separately implemented objectives.
+
+**Global max-cut unchanged:** `K00` shared machine/word encoding and uniform Cook–Levin SAT completeness; `E01`–`E20` concrete encoded polynomial reductions and costs; `N01`–`N21` polynomial-time verifiers and certificate bounds; donor-source same-object correspondence and independent kernel checking. There are still **0/20** *new kernel-verified concrete costed* direct reductions and **0/21** *new kernel-verified complete problem theorems* on this PR. No CI or Agda typecheck was run.
+
+### Additional E05/N21 witness closure in the same tranche
+
+- `Karp21FiniteCliqueVertexCoverCombinedExact.karpFiniteCliqueVertexCoverInstanceIff`: quantifies over the **same** `Vec Bool n` and proves the full finite existential CLIQUE YES iff finite complement-cover YES decision predicate; not just a pointwise statement for a preselected vector. Exact source/target witness functions: `finiteCliqueYESImpliesComplementCoverYES`, `finiteComplementCoverYESImpliesCliqueYES`. The graph and threshold remain in the same typed `Fin n` representation; the concrete target bitstring's budget `n-k` and machine cost remain open.
+- `Karp21FiniteWeightedMaxCutVerifierExact.cutCertificateHasVertexCountBits`: every `Vec Bool n` cut certificate has exactly `n` Boolean entries, reusing the previously proved `FiniteCounts.selectionListLength`. `karpWeightedMaxCutExistentialIff` proves the actual existence of an accepted signed-cut witness iff the Boolean verifier accepts some witness. This closes the **mathematical finite certificate-length identity**, not the general bitstring length/clock portion of `PR.polynomialCertificateBound` / `PR.polynomialTimeVerifier`.
+
+**Still required for completion:** `e05EncodedPolynomialReduction` with a no-loop, undirected, unique-edge complement transducer and certified `k>n` guard; `e20CompleteGraphToWeightedCutEdgeListIff` connecting the signed pairweight constructor to the verifier's finite edge list; `weightedMaxCutGraphAndCertificatePackedCodec`; actual `PR.InNP` on the shared Word and polynomial clocks. The corresponding E01–E19 encoded machine reductions and all 21 NP members remain open except for explicitly reused source-level pieces.
+
+### Further E05 actual simple-graph closure (source-written)
+
+`Karp21SimpleGraphComplementExact.agda` eliminates the diagonal defect of naïve pointwise Boolean negation. Its `SimpleGraph n` contract explicitly records symmetric adjacency and absent self-loops. `simpleComplementAdjacency` uses a decidable `Fin n` equality test and negates adjacency **only off the diagonal**. Reused `Data.Fin.Properties._≟_` yields: `simpleComplementLoopFree`, `simpleComplementSymmetric`, and `simpleComplementOffDiagonal`. `complementSimpleGraph` constructs the genuine simple target graph.
+
+The exact semantic transport continues through `finiteAbstractCoverToSimpleCover` and `finiteSimpleCoverToAbstractCover`, giving `karpCliqueSimpleComplementCoverIff` for a chosen `Vec Bool n`; `karpSimpleGraphCliqueCoverInstanceIff` then proves the **existential full finite source/target decision iff** without losing the source selection or its all-`k` additive cardinality bound. This supersedes the earlier abstract finite complement for simple graph semantics, but does not claim the **canonical binary** complement graph serializer, classical `n-k` budget guard, or costed many-one reduction.
+
+**Exact remaining E05 targets**: `simpleGraphMatrixEncodingRoundtrip`, `simpleComplementCanonicalBitMap`, `simpleComplementPolynomialMachineClock`, `complementCoverAdditiveToStandardBudget` (including `k>n` fixed-NO), `finiteCliqueCertPackedCodec`, `finiteCoverCertPackedCodec`, `finiteCliqueInNP`, `finiteVertexCoverInNP`, `e05EncodedPolynomialReduction`, and pinned kernel receipt. For N21, `cutCertificateHasVertexCountBits` is source-written, but bit-level certificate parsers and a polynomial verifier clock remain open.
+
+### E12 reused finite graph/palette theorem (source-written)
+
+`Karp21FiniteColouringCliqueCoverExact.agda` reuses the **same** loop-free `SimpleGraph n` and `simpleComplementAdjacency` owner as E05. It defines a `Vec (Fin k) n` palette assignment so each actual vertex has exactly one colour from `k` choices. The finite `samePaletteColour` equality test has reflexivity/soundness lemmas. `colouringToSimpleCliqueCover` and `simpleCliqueCoverToColouring` transport the existing `Karp21ColouringCliqueCoverExact` pointwise theorem across the *actual off-diagonal simple complement*. `karpFiniteColouringCliqueCoverInstanceIff` upgrades this to the full existential source/target finite decision iff, with exactly the **same** colour assignment witness and finite graph.
+
+**Remaining E12:** `colouringCanonicalWordParser`, `cliqueCoverCanonicalWordParser`, `colouringToComplementGraphBitMap`, `colouringToCliqueCoverPolyClock`, `colouringPaletteLargeKGuard` (binary `k≥n` direct YES), `colouringNPVerifierClock`, `cliqueCoverNPVerifierClock`, `e12EncodedPolynomialReduction`; the full targeted Agda kernel typecheck remains unrun. This does not by itself complete E11 SAT→colouring, E13 colouring→EXACT COVER, nor any other E01–E20 costed reduction.
+
+### Agda source-compatibility repair before kernel validation
+
+A manual check against Agda's actual builtin module and existing DASHI stdlib imports found a concrete issue in three newly written E05 graph/cardinality owners: `Agda.Builtin.Nat` does **not** export propositional `_≤_`. This has been corrected to `Data.Nat.Base._≤_` in `Karp21FiniteCliqueCoverCardinalityExact`, `Karp21FiniteCliqueVertexCoverCombinedExact`, and `Karp21SimpleGraphComplementExact`. This is a real source repair; static/no-hole checks must not be misreported as successful compilation. The remaining required proof is the pinned Agda kernel typecheck of `Karp21Everything.agda` and its full dependency cone, followed by resolution of any actual diagnostics.
+
+## B. Canonical shared obligations (finish once; all problem nodes consume)
+
+| ID | Required exact lemma/declaration | Statement and done condition |
+| --- | --- | --- |
+| K00a | `parseEncodeRoundTrip` | parsed canonical finite instances recover same instance; `decode(encode(x)) = x`, malformed cases deterministic |
+| K00b | `encodingLengthPolynomial` | bits of every encoded finite graph, set-family, schedule, integer matrix/weights are polynomial in explicitly measured source bit-length |
+| K00c | `heterogeneousReductionToWord` (reuses `compileHeterogeneousKarpReduction`, source-written in `Karp21HeterogeneousEncodingExact.agda`) | embed `A:InstanceA→Set`, `B:InstanceB→Set` into common `Word` without changing truth; no oracle or unproved cost assumption |
+| K00d | `polynomialMapComposeConcrete` | prove actual clock polynomial composition/bit-comparison cost, instantiate `PR.PolynomialMapComposition` |
+| K00e | `verifierPolynomialWitnessLength` | witness has finite encoded length polynomial in input size; verifier computes in bounded time, *including* arithmetic bit complexity |
+| K00f | `reductionMalformedInputIff` | every source input, including bad encodings, reduces to a correctly classified target input |
+| K00g | `costModelNonDegenerate` | polynomial predicates tied to concrete machine/size model; no vacuous model assigning all maps polynomial |
+| K00h | `canonicalKarpNPCompleteTransport` | instantiate existing `transportNPComplete` with a concrete Karp edge and target NP certificate |
+| K00i | `cookLevinSATRoot` | **actual** Cook–Levin tableau/circuit compiler, polynomial cost, iff acceptance/satisfiability on shared SAT language; not a record field assumed inhabited |
+| K00j | `completeHistoricalReductionDAG` | exact 21 distinct typed nodes, exactly 20 source-labelled directed edges, proof of reachability from SAT and transport for all 21 |
+
+For every node `Nxx`, use `<stem>Instance`, `<stem>Accepts`, `<stem>VerifierSound`, `<stem>VerifierComplete`, `<stem>CertificateBound`, `<stem>VerifierPolyTime`, `<stem>InNP`. The six latter declarations are **required** and currently unpaid for every new concrete Karp instance, except for any independently kernel-verified earlier owner established by source lookup. Semantic, clock and NP claims must be explicit; `InNP` must assemble them.
+
+## C. Exact 21-node matrix (historical decision problems)
+
+Each row's exact named `<stem>InNP` is the final NP-membership lemma; the uniform six supporting obligations above apply to that same `stem` (not implicit).
+
+| Node | Karp 1972 problem / decision formulation | Exact terminal NP lemma | Current status |
+| --- | --- | --- | --- |
+| N01 | CNF SAT — satisfying Boolean assignment exists | `karpSATInNP` | BooleanFormula evaluator exists; canonical CNF/certificate/cost incomplete |
+| N02 | 0–1 INTEGER PROGRAMMING — integer matrix equation feasibility with Boolean variables, **no optimisation** | `binaryIntegerProgrammingInNP` | open |
+| N03 | CLIQUE — simple undirected graph has a clique of cardinality ≥ k | `karpCliqueInNP` | graph-selected predicate semantics only |
+| N04 | SET PACKING — at least k pairwise disjoint indexed subsets | `karpSetPackingInNP` | clique/packing semantic duality only |
+| N05 | NODE COVER / VERTEX COVER — cover all edges with ≤ k vertices | `karpVertexCoverInNP` | clique/complement-cover semantic duality only |
+| N06 | SET COVERING — cover full universe using ≤ k indexed sets | `karpSetCoverInNP` | open |
+| N07 | FEEDBACK NODE SET — delete ≤ k vertices to make directed graph acyclic | `karpFeedbackVertexSetInNP` | open |
+| N08 | FEEDBACK ARC SET — delete ≤ k arcs to make directed graph acyclic | `karpFeedbackArcSetInNP` | open |
+| N09 | DIRECTED HAMILTON CIRCUIT — single directed cycle visits every vertex once | `karpDirectedHamiltonianInNP` | open |
+| N10 | UNDIRECTED HAMILTON CIRCUIT — single undirected cycle visits every vertex once | `karpUndirectedHamiltonianInNP` | open |
+| N11 | SAT with at most 3 literals per clause — 3-CNF satisfiability | `karpThreeSATInNP` | OAI 378 CNF source donor; exact shared bridge open |
+| N12 | CHROMATIC NUMBER — proper colouring with ≤ k colours | `karpColouringInNP` | open |
+| N13 | CLIQUE COVER — partition vertices into ≤ k cliques | `karpCliqueCoverInNP` | open |
+| N14 | EXACT COVER — pairwise disjoint indexed subsets cover universe exactly | `karpExactCoverInNP` | open |
+| N15 | Karp's EXACT HITTING SET — select an index subset intersecting **each transposed set exactly once** (not modern ordinary hitting set) | `karpHittingSetInNP` | open |
+| N16 | STEINER TREE — connect required terminals with length/weight ≤ k | `karpSteinerTreeInNP` | open |
+| N17 | 3-DIMENSIONAL MATCHING — disjoint triples cover designated three sets | `karpThreeDimensionalMatchingInNP` | open |
+| N18 | KNAPSACK — Karp's *subset-sum-like* feasibility variant; not a generic utility optimisation | `karpKnapsackInNP` | open |
+| N19 | JOB SEQUENCING — single machine, deadlines, durations, tardiness penalties and budget | `karpJobSequencingInNP` | open; NOT Job-shop scheduling |
+| N20 | PARTITION — split **signed integer vector** into equal sums (original `Z^s`) | `karpPartitionInNP` | Python finite identity only |
+| N21 | MAX CUT — weighted graph has cut with weight ≥ threshold, Karp's sign/weight domain preserved | `karpWeightedMaxCutInNP` | generic edge-objective/reversal only |
+
+For Karp's exact historical variants, normalize against the 1972 original before fixing the machine encoding. For example, clique-cover convention (partition versus cover) and negative-edge/zero-weight domains require explicit variant bridges if the original and modern statements differ. Do not silently substitute an easier optimization variant.
+
+## D. Exact 20 reduction-edge matrix (historical adjacency; all currently resource-open)
+
+Every `reduce...` below is a concrete **polynomial-time total encoder**; every `...Iff` is source yes iff target yes **for every accepted encoding**; and every `...Cost` proves an actual polynomial time / bit-length bound. These three statements are all required for each row. `...Hardness` then invokes the existing generic transport.
+
+| Edge | Reduction | Exact function | Iff lemma | Time/size lemma |
+| --- | --- | --- | --- | --- |
+| E01 | N01 SAT → N02 0–1 IP | `reduceSATToBinaryIP` | `satBinaryIPIff` | `satBinaryIPCost` |
+| E02 | N01 SAT → N03 CLIQUE | `reduceSATToClique` | `satCliqueIff` | `satCliqueCost` |
+| E03 | N01 SAT → N11 3-SAT | `reduceSATToThreeSAT` | `satThreeSATIff` | `satThreeSATCost` |
+| E04 | N03 CLIQUE → N04 SET PACKING | `reduceCliqueToSetPacking` | `cliqueSetPackingIff` | `cliqueSetPackingCost` |
+| E05 | N03 CLIQUE → N05 VERTEX COVER | `reduceCliqueToVertexCover` | `cliqueVertexCoverIff` | `cliqueVertexCoverCost` |
+| E06 | N05 VERTEX COVER → N06 SET COVER | `reduceVertexCoverToSetCover` | `vertexCoverSetCoverIff` | `vertexCoverSetCoverCost` |
+| E07 | N05 VERTEX COVER → N07 FEEDBACK NODE SET | `reduceVertexCoverToFeedbackVertex` | `vertexCoverFeedbackVertexIff` | `vertexCoverFeedbackVertexCost` |
+| E08 | N05 VERTEX COVER → N08 FEEDBACK ARC SET | `reduceVertexCoverToFeedbackArc` | `vertexCoverFeedbackArcIff` | `vertexCoverFeedbackArcCost` |
+| E09 | N05 VERTEX COVER → N09 DIRECTED HAMILTON CIRCUIT | `reduceVertexCoverToDirectedHamiltonian` | `vertexCoverDirectedHamiltonianIff` | `vertexCoverDirectedHamiltonianCost` |
+| E10 | N09 DIRECTED → N10 UNDIRECTED HAMILTON CIRCUIT | `reduceDirectedToUndirectedHamiltonian` | `directedUndirectedHamiltonianIff` | `directedUndirectedHamiltonianCost` |
+| E11 | N11 3-SAT → N12 CHROMATIC NUMBER | `reduceThreeSATToColouring` | `threeSATColouringIff` | `threeSATColouringCost` |
+| E12 | N12 CHROMATIC NUMBER → N13 CLIQUE COVER | `reduceColouringToCliqueCover` | `colouringCliqueCoverIff` | `colouringCliqueCoverCost` |
+| E13 | N12 CHROMATIC NUMBER → N14 EXACT COVER | `reduceColouringToExactCover` | `colouringExactCoverIff` | `colouringExactCoverCost` |
+| E14 | N14 EXACT COVER → N15 HITTING SET | `reduceExactCoverToHittingSet` | `exactCoverHittingSetIff` | `exactCoverHittingSetCost` |
+| E15 | N14 EXACT COVER → N16 STEINER TREE | `reduceExactCoverToSteinerTree` | `exactCoverSteinerTreeIff` | `exactCoverSteinerTreeCost` |
+| E16 | N14 EXACT COVER → N17 3D MATCHING | `reduceExactCoverToThreeDimensionalMatching` | `exactCoverThreeDimensionalMatchingIff` | `exactCoverThreeDimensionalMatchingCost` |
+| E17 | N14 EXACT COVER → N18 KNAPSACK | `reduceExactCoverToKarpKnapsack` | `exactCoverKnapsackIff` | `exactCoverKnapsackCost` |
+| E18 | N18 KNAPSACK → N19 JOB SEQUENCING | `reduceKarpKnapsackToJobSequencing` | `knapsackJobSequencingIff` | `knapsackJobSequencingCost` |
+| E19 | N18 KNAPSACK → N20 PARTITION | `reduceKarpKnapsackToPartition` | `knapsackPartitionIff` | `knapsackPartitionCost` |
+| E20 | N20 PARTITION → N21 WEIGHTED MAX CUT | `reducePartitionToMaxCut` | `partitionMaxCutIff` | `partitionMaxCutCost` |
+
+**Every E01–E20 must also export** `<edge>PolynomialReduction : PR.PolynomialManyOneReduction cost source target` and `<edge>NPComplete`, *using* `Karp21ReductionTransportExact.transportNPComplete`, after proving the target's NP lemma. Avoid materializing multiple alternate proof owners.
+
+### Concrete proof obligations on the currently closest edges
+
+- **E04/Set Packing:** finite universe of nonedge pairs, vertex-indexed sets and optional unique private tokens; `nonedgeIncidenceCorrect`, `packingPairwiseDisjointIffClique`, `packingIndexInjective`, `packingPreservesAtLeastK`, `packingSetListSizeQuadratic`, `packingBitEncodingPoly`. If duplicate empty sets collapse in a set-of-sets carrier, the reduction is invalid without an indexed-family or uniqueness repair.
+- **E05/Vertex Cover:** `simpleComplementOffDiagonal`, `complementSymmetric`, `cliqueCoverFiniteCardinalityComplement` (source-written, plus `karpCliqueCoverFiniteThresholdIff` additive cardinality bridge; finite graph index model still open), `cliqueVertexCoverThresholdIff` (k↔n−k, explicit k>n cases), `complementGraphBitsQuadratic`, `cliqueVertexCoverPoly`. Existing `karpCliqueCoverSemanticEquivalence` handles the pointwise predicate, not these bounds.
+- **E20/Max Cut:** historical objective identity and actual complete-graph crossing-edge proof are source-written as `completeGraphCutEqualsPartitionProduct`; historic signed PARTITION `2A=T` iff equal sides is source-written as `historicalPartitionEquationIffBalanced`. The **new scaled integer route** source-writes `scaledThresholdIffBalanced`, `signedPartitionScaledCutInstanceIff`, `totalPartitionPositiveCutIff`, and `positiveTargetThresholdCertified`, including zero-total fixed YES and original positive MAX CUT threshold domain, with no ceiling. **Unpaid exact owners:** `scaledCompleteGraphEdgeListFaithful`, `scaledGraphCanonicalWordEncoding`, `scaledGraphMalformedInputPolicy`, `scaledSignedWeightBitBound`, `scaledPartitionGraphMachineClock`, `e20EncodedPolynomialReduction`, `weightedMaxCutInNP`. The source-written modules still need Agda kernel checking; Python's 23,436 finite cases are secondary evidence.
+- **E19/signed Knapsack:** `signedSubsetSumDigitPairSound`, `signedSubsetSumDigitPairComplete`, `signedSubsetSumNoCarry`, `signedSubsetSumEncodingPolynomialBits`, `positiveSubsetSumPartitionIff`, `signedKnapsackPartitionCompositeIff`. The pure two-extra-number Karp construction only follows after a positive normalization for signed source input.\n- **E01/Binary IP:** `binaryClauseInequalityIff`, `slackVariableBound`, `inequalityToEqualitiesIff`, `satToBinaryIPWitnessEquivalence`, `binaryCoefficientBitCost`.
+- **E03/SAT→3SAT:** `tseitinExtensionIff` (existential rather than unique unless actually proved), `threeSATWidthBound`, `threeSATClausesLinear`, `threeSATCompilerCost`, `threeSATSharedOpenAISemantics` (cross-repo exact literal identity only once proved).
+
+## E. Eight follow-on topics / exact external boundaries
+
+These are *not* extra nodes in Karp's 21. Keep as lanes consuming common graph/NP interfaces.
+
+| Lane | Exact target declarations | In-repo donors and non-conflation |
+| --- | --- | --- |
+| X01 Integer programming optimisation | `binaryIPFeasibleIffKarp`, `ipObjectiveDoesNotChangeFeasibility`, `lpRelaxationDirection`, `totalUnimodularityIntegralityUnderHypotheses` | Karp's N02 is **feasibility**. LP, integer optimisation, and TUM each require additional hypotheses |
+| X02 Set packing optimisation | `maximumPackingObjective`, `packingCliqueThresholdIff`, `packingApproximationRatioBridge` | E04 supplies decision hardness, *not* approximation hardness |
+| X03 Vertex cover optimisation | `minimumVertexCoverObjective`, `minimumCoverComplementMaximumClique`, `vertexCoverGapSameObjectWithOAI` | upstream `openai/math/lean/OAI/Computability/VertexCover/Main.lean` theorem `OAI.VertexCover.every_fixed_factor_below_two`: separate α<2 approximation-gap donor |
+| X04 Job-shop scheduling | `jobShopInstance`, `jobShopScheduleSoundComplete`, `jobSequencingEmbeddingHypotheses`, `jobShopFeasibilityCost` | Karp N19 is single-machine job sequencing; never rename it Job-shop |
+| X05 MAX CUT/APX | `maxCutDecisionOptimizationBridge`, `maxCutNonnegativeFiniteApproxObjective`, `maxCutGapSameObjectWithOAI`, `maxCutGoemansWilliamsonRatioCertificate` | upstream `OAI.OptimalMaxCut.main` is gap/hardness for unweighted finite simple graphs, not E20; DASHI #1438 27-grid example is finite |
+| X06 Minimum k-cut | `kCutPartitionSound`, `kCutObjective`, `minSTCutIsTerminalConstrainedTwoCut`, `fixedKPolynomialWithCost`, `variableKDecisionHardness` | separate MINIMUM objective; nonnegative capacities; k=2 *global* cut is not an s-t mincut without specified terminals |
+| X07 APX | `NPOObjectiveEncoding`, `approxFactorValid`, `apReductionPreservesApproxGuarantee`, `lReductionPreservesGap`, `apxMaxCutMembership`, `apxVertexCoverMembership` | zero-optimum, negative-weight, minimization/maximization, fixed-factor and PTAS domains explicit. Normal many-one reductions do not imply approximation preservation |
+| X08 Ford–Fulkerson | `residualCapacityNonnegative`, `augmentPathPreservesFlowFeasibility`, `augmentRaisesFlowValue`, `noAugmentingPathProducesCut`, `flowValueLeqCutCapacity`, `maxFlowMinCutEquality`, `edmondsKarpBFSRuntimePolynomial` | no same-object algorithm found on indexed `dashi_agda` master; `NetworkFlowCapacityCongestionExact` is toy; Bellman–Ford shortest paths is unrelated |
+
+**Historical/algorithmic caveats:** Karp's `MAX CUT` accepts signed weights in its original formulation; standard approximation theory generally assumes nonnegative edges and nonnegative optimum. Minimum k-cut is polynomial for fixed k and NP-hard when variable; an `O(n^{f(k)})` guarantee is not FPT. Ford–Fulkerson with integer capacities yields a bounded number of unit augmentations but may be pseudo-polynomial in binary capacity; Edmonds–Karp's BFS selection supports `O(V E²)`.
+
+## 2026-11-01 AO / eigen / ITIR–SLR–SensibLaw cross-repository MAX CUT audit (DASHI-only implementation)
+
+**Request boundary:** do not implement in ITIR-suite, SLR or SensibLaw; use their recent PRs as provenance/queue/evidence guidance. Golden proof code and exact remaining proof lemmas stay here in `chboishabba/dashi_agda`, PR #1445.
+
+### The three genuinely different "max-cuts" (do not conflate)
+
+1. **Literal Karp (1972) weighted MAX CUT (E20/N21):** finite undirected edges with *signed* integer weights and a positive integer decision threshold; a Boolean bipartition is a witness. The formalization uses `Karp21FiniteWeightedMaxCutVerifierExact.agda` and `Karp21PartitionScaledInstanceExact.agda`.
+2. **Finite grid max-cut donor:** DASHI PR [#1438](https://github.com/chboishabba/dashi_agda/pull/1438), `DASHI/Combinatorics/GraphColouring369PantsWeightedMaxCutExact.agda`, establishes that a native checkerboard cut saturates all 54 **enumerated native grid edges** with *nonnegative Nat* weights. It is a **special bipartite instance** and does NOT imply a general exact/max-cut algorithm or signed-Laplacian positivity. The same PR's `TrialecticGraphWaveConsumerLossCutExact` exhibits a concrete C3 orbit-averaging collision that destroys a directed edge consumer; averaged spectral fingerprints do not determine every directed edge.
+3. **AO/Pareto/snowball proof-frontier "max-cut":** task dependency and typed no-meet scheduling; **NOT** Karp's Max-Cut optimization problem. DASHI PR [#1415](https://github.com/chboishabba/dashi_agda/pull/1415) `WorldEigenResidualStratification` separates world, macro-eigen, sub-eigen and fibre; PR [#1416](https://github.com/chboishabba/dashi_agda/pull/1416) `HierarchicalSpectralParetoExact` establishes capacity/order boundaries and explicitly denies proof authority from alpha priority. PR [#1417](https://github.com/chboishabba/dashi_agda/pull/1417) covers topic-conductor costs; downstream Lean mirror [#102](https://github.com/chboishabba/dashi_lean4/pull/102) documents K=50/K=100 truncations, Fin 20 schedules, discrete Laplacian cut witness and *bounded* SDP receipt, **not** the Goemans–Williamson ratio or physical YM/NS equations. The golden `CombinatorialMaxCutPhysicsAlignmentExact` is referenced by that donor but was not found on `master` in this audit, so no source import, implicit attribution, or independent Agda proof receipt is claimed.
+
+### Native signed spectral mathematical bridge (implemented **only in PR #1445**)
+
+`Karp21SignedLaplacianCutExact.agda` imports the **actual source-owned N21 signed finite edge-list objective** and defines `spin false=-1`, `spin true=+1`. The lemma chain is:
+- `spinGapTrueTrue`, `spinGapFalseFalse`, `spinGapTrueFalse`, `spinGapFalseTrue` plus `fourCutEqualsSpinQuadratic`: exact four-case Boolean ↔ integer spin-energy equality for every signed weight `w`.
+- `edgeContributionMatchesBitCut`, `edgeCutEqualsSpinQuadratic` and **`karpCutEqualsSignedLaplacianQuadratic`**: structural induction over the same literal finite edge list, proving
+  `4*edgeListCutValue(E,b)=Σ_(e∈E) w_e*(s_first(e)-s_second(e))²`.
+  This is the unnormalised signed graph-Laplacian quadratic evaluated on a ±1 signal; edge direction, self-loop assumptions, signed weight and duplicate-edge identity are retained. **Do not** insert an extra factor 1/2 or import a positive-semidefinite approximation theorem without its hypotheses.
+- `lookupFlippedLabels`, `signedMaxCutGlobalFlipInvariant`, `signedLaplacianGlobalFlipInvariant`, `positiveThresholdAcceptanceGlobalFlip`: exact global Z₂/complement parity (gauge) symmetry on **all signed weights**; saves a factor two in exhaustive *search* with a nonempty-graph representative guard but is not a polynomial algorithm for general MAX CUT.
+- `negativeEdgeSignedQuadratic` / `unrestrictedSignedLaplacianNotPSD`: one edge `w=-1`, labels opposite, yielding `Q=-4`; the latter is a constructive contradiction of universal signed PSD, using integer Boolean-order reflection. Therefore the signed Karp quadratic is **not** generally positive semidefinite, and the nonnegative-weight donor in #1438 / standard Goemans–Williamson hypotheses cannot be promoted without a separately certified nonnegative-weight restriction.
+- `scripts/check_karp_signed_laplacian.py` independently enumerates all signed-weight undirected complete-edge subsets on up to four vertices, all labelings, the ±1 quadratic, global flip, positive decision thresholds and the negative-edge counterexample. It is now invoked by `run_karp21_reduction_regressions.py`. An independent local replication of the identical combinatorial iteration passed **251,023** finite (graph weights, labels) cases on n=0..4, including global flip and signed quadratic; the exact committed branch script itself was not executed from a checkout. The Karp runner invokes it, but no Agda or CI receipt is claimed.
+
+**Urgent exact next lemmas** to turn this mathematical bridge into certified Karp E20/N21, not another conceptual roadmap:
+- `e20CompleteGraphEdgesFiniteIndexed`: build finite **canonical** undirected edge list from input signed vector without using cut witness, exactly once per unordered off-diagonal pair.
+- `e20CompleteGraphToWeightedCutEdgeListIff`: prove that the constructed edge-list's cut value equals the source triangular `4*c_i*c_j` cut for every `Vec Bool n`, including negative and zero weights.
+- `e20GraphThresholdPositiveAndSignedCost`: reuse `totalPartitionPositiveCutIff`; establish actual positive W target and integer bit-length/multiplication/sum bounds, including `T=0` fixed YES.
+- `n21SignedGraphCanonicalCodec`, `n21FiniteCutCertificateCodec`, `n21SignedSumVerifierMachineClock`: make the finite N21 `verifyWeightedMaxCut` into `PR.InNP` over the repo's shared binary Word with malformed-word policy and **real** polynomial time.
+- `e20EncodedPolynomialReduction` on `PR.PolynomialManyOneReduction`, sourced from the existing heterogeneous proof compiler with real encoded time cost.
+- **General spectral restrictions:** `signedVsNonnegativeLaplacianDomain` and `goemansWilliamsonNonnegativeInstanceIff` are *conditional* source/typing tasks. Proving a special 27-grid optimality theorem or obtaining an eigenvector **does not** discharge E20 reduction, general cut optimization, or an approximation-ratio theorem.
+
+### Cross-repo receipt/authority reuse, no external code writes
+
+- [ITIR-suite #20](https://github.com/chboishabba/ITIR-suite/pull/20) `da51_slr_formal_evidence_artifact_contract_v1_20261017.md`: a Karp proof completion must bind obligation identity, exact statement digest, checker/dependency revision and result kind, not just a matching symbol, AO candidate or DA51 label. [ITIR #63](https://github.com/chboishabba/ITIR-suite/pull/63) explicitly classifies AO Pareto/max-cut scheduling as candidate work and kernel checking as separate.
+- [ITIR #70](https://github.com/chboishabba/ITIR-suite/pull/70) and [SLR #76](https://github.com/chboishabba/slr/pull/76) govern source-pinned epistemic deliberation and distinguish candidate assertions/authority from verified source; their Wikidata governance graph is **not** a Karp cut graph.
+- [SLR #75](https://github.com/chboishabba/slr/pull/75) adds candidate-only protected fleet grouping and a fail-closed formal-tool handoff requiring authenticated isolated kernel check, exact source/artifact/checker/dependency digests and independent success. Its receipt model helps prevent false `0/20 → 20/20` promotions.
+- [SensibLaw #508](https://github.com/chboishabba/SensibLaw/pull/508) content SHA-256/idempotency identity; [#510](https://github.com/chboishabba/SensibLaw/pull/510) content/profile/version-scoped cache keys; [#509](https://github.com/chboishabba/SensibLaw/pull/509) nested spectral/eigen progress as *observation* only. These support provenance and efficient duplicate lookup; none supply semantic equivalence or a Karp reduction.
+- [DASHI `PNFSpectralFieldGraph.agda`](https://github.com/chboishabba/dashi_agda/blob/master/DASHI/Interop/PNFSpectralFieldGraph.agda) already has signed residual severity and typed edge-source evidence; its structural origin classes **do not** by themselves witness an undirected finite labelled Karp graph with distinct endpoints, canonical weights and objective correspondence.
+- **Attribution/promotion:** Cook 1971 ↔ SAT root, Karp 1972 ↔ historic E01–E20, standard algebra `4cut=Q` ↔ signed graph formulation, DASHI source owner ↔ newly written specific lemmas. OpenAI `OAI.OptimalMaxCut.main` in Lean donor [#78](https://github.com/chboishabba/dashi_lean4/pull/78) concerns different (gap/approximation) variants. Distinguish original theorem, handwritten proof source, finite tested code, independently checked kernel theorem, empirical receipt and scheduling heuristic.
+
+**All remaining K00a–K00j, E01–E20, N01–N21 and X01–X08 remain in earlier sections.** Do not drop the other 19 historical reductions because E20 now has a Laplacian bridge. Current Agda receipt count: **0/20** new complete costed direct reductions; **0/21** new concrete NP-completeness conclusions. This pass did not run CI or Agda and does not claim a proof of P≠NP.
+
+### E20 signed graph scaling/list decomposition (same indexed edge object)
+
+`Karp21SignedGraphScaleAndAppendExact.agda` (imported in `Karp21Everything.agda`) now proves **three additional universal finite-graph laws** from the actual N21 signed weighted edge carrier:
+- `edgeListCutAppend`: `cut(E++F, bits)=cut(E,bits)+cut(F,bits)`, preserving edge multiplicities and weight signs.
+- `scaleEdgeFourContribution` / `scaleEdgeListFourCut`: changing **only** each edge's signed weight to `4*w`, keeping its original `Fin n` endpoints and off-diagonal proof, yields `cut(scale4(E),bits)=4*cut(E,bits)` for **every** finite graph and Boolean label vector.
+- `scaledSignedGraphCutEqualsSpinQuadratic`: exact same-object weld of the E20 scaled finite-edge-list graph objective to the signed ±1 Laplacian quadratic (from `Karp21SignedLaplacianCutExact`) on precisely the unscaled source edges; no unsupported spectral-eigen positive definiteness or linear-time algorithm inferred.
+
+This removes another purely semantic E20 multiplier and graph-edge-sum gap, but leaves one crucial **unpaid** construction: `e20CompleteGraphEdgesFiniteIndexed` and its `e20CompleteGraphToWeightedCutEdgeListIff` tying the **original signed PARTITION list** to the unique pairwise indexed graph without access to a cut witness. This is followed by actual canonical signed graph `Word` coding and a polynomial machine clock. The source-written lemmas still need pinned Agda kernel checking, as do all other Karp edges and NP-membership witnesses.
+
+## 2026-11-01 PNF / signed-PSD / SSP-ternary / Cheeger same-object steelman + E20 graph closure
+
+### Actual PNF owners discovered (not merely AO spectral metadata)
+
+**Checked *source archaeology*, not a new Agda compiler run:** the existing master files are `DASHI/Interop/PNFSpectralFieldGraph.agda`, `PNFHodgeResidualTopology.agda`, `PNFSignedResidualDelta0Exact.agda`, `PNFTernaryCycleSpectralExact.agda`, `PNFSignedResidualDelta0Regression.agda`, `SpectralOperatorShapeCore.agda`, and `DASHI/Physics/YangMills/BalabanReversibleRGCheegerSpectralGapExact.agda`. The PNF graph owner distinguishes **partial residual**, **noTypedMeet**, **contradiction**, source/provenance/time edges, signed residual weight severity, and diagnostic-only higher Hodge layers. This is NOT equivalent to a freely chosen Karp graph weight or to a statement's semantic truth. The literal PNF `Δ₀=BᵀWB` on its canonical triangle has edges **0→1 partial(+1), 1→2 noTypedMeet(+3), 2→0 contradiction(−9)**; the existing `signedIncidenceEnergyIdentity` and `canonicalSignedIndefiniteWitness` prove the exact signed incidence quadratic and opposite-sign zero-sum modes. `PNFTernaryCycleSpectralExact` is the distinct unsigned C3 operator, NOT that full weighted PNF Δ₀. The Lawler–Sokal Cheeger owner is an RG **Markov** conductance/spectral-gap conditional with different hypotheses; it cannot discharge unsigned dual Cheeger, signed graph Cheeger, or Karp NP-completeness without real graph/measure same-object bridges.
+
+**New Agda PNF adapter:** `Karp21PNFSignedTriangleSameObjectExact.agda` imports those **actual PNF** source owners, extracts each weight through `Hodge.graphWeight` and the original magnitudes, constructs an actual three-edge undirected `Fin 3` Karp graph with off-diagonal proof, and source-writes `pnfLiteralSignedDelta0CutIdentity`:
+`4*Cut(typedPNFtriangle,b)=spin(b)ᵀ·PNF.signedResidualDelta0(spin(b))` for each of eight binary assignments. This is the precise finite bridge to the original PNF signed-weight incidence operator. Conversion to undirected Karp edges retains weight/endpoint data, **not** the full directed/provenance/authority semantics: those must stay attached to the PNF source or be packaged as extra typed receipts. It does not imply an Agda kernel check or an external policy truth decision.
+
+### Real signed graph objects and **optimization directions**
+
+| Object and edge semantics | Finite spin edge term | What actually gets optimized | Proof state |
+| --- | --- | --- | --- |
+| **Karp signed MAX CUT** (Karp 1972) | `w*[a≠b]`; `4Cut=Σw*(s_i−s_j)²` | **MAX** signed cut; negative edges penalize crossing | Prior `Karp21SignedLaplacianCutExact` source-written |
+| **Literal signed-weight PNF incidence Δ₀** (Chung 1997 vocabulary, DASHI PNF original owner) | `w*(x_i−x_j)²`, with PNF signed -9 contradiction edge | Indefinite signed evidence-energy diagnostic; **no automatic semantic authority** | Source PNF `signedIncidenceEnergyIdentity`, new exact binary `pnfLiteralSignedDelta0CutIdentity` |
+| **PSD signed-clustering/frustration Laplacian** `D_|W|−W` (Kunegis et al. 2010 and signed-balance sources) | `|w|*(s_i−sign(w)*s_j)²` | **MIN** frustration for attraction-positive / repulsion-negative signed clustering | New `Karp21SignedFrustrationBidiExact` Boolean finite graph energy |
+| **SSP ternary partial cut** (original DASHI `SSPTritCarrier`) | `w*(x_i−x_j)²`, gaps 0/1/4 | Explicit **induced active** + **neutral bleed** signed energies; not Karp's binary decision language | New `Karp21SSPTernaryMaskedCutExact` finite carrier |
+| **Unsigned/nonnegative signless 1-Laplacian** (Shao–Yang–Zhang 2016 preprint / 2025 publication) | `|x_i+x_j|` with **Nat nonnegative** magnitude | Different nonlinear dual Cheeger objective; requires degree normalization and independent eigen/subgradient/ratio hypotheses | New `Karp21SSPDualCheegerSignlessOneExact` finite 9-case table/list additivity, not a full Cheeger theorem |
+
+The key affine signed-graph identity for fixed edges and labels is **`frustration(E,b) = cutSigned(E,b) + Σ_{e:w_e<0}|w_e|`**. The added `Karp21SignedFrustrationBidiExact.signedMaxCutFrustrationAffineBidi` and `signedPSDSpinIsAffineMaxCutScore` source-write this over every signed finite indexed edge list, with exact Boolean `4*frustration=correctedSignedPSDSpinEnergy`. Therefore the **same graph's** `MAX signed Cut` is `MAX frustration`, *not* the `MIN frustration` for repulsive negative edges. A negative weight has a perfectly coherent signed-graph meaning but **does not imply repulsion in the original signed Karp MAX objective**. The ordinary signed-weight `BᵀWB` becomes indefinite, but the `D_|W|−W` corrected-gap operator is PSD; this does **not** mean a finite normalized Rayleigh/SDP relaxation ceases to have a minimum, only that unqualified PSD/Cheeger theorems no longer apply to the *indefinite* operator. An unconstrained indefinite real quadratic can be unbounded below, while finite/discrete ±1 assignments and unit-norm spectral problems are bounded. This distinction is mathematical, not merely terminology.
+
+**Ternary decomposition:** `Karp21SSPTernaryMaskedCutExact` reuses **the original `DASHI.Foundations.SSPTritCarrier`**, not a new ternary enum, and proves `ternaryEnergyExactlyInducedPlusBleed` for *all signed graphs* and `binaryTernaryEdgeListSpecialization` back to the prior binary signed Laplacian. A masked active-zero edge contributes **`w`** (not zero); the cut of the induced active subgraph is `Q_induced` while the old full graph's ternary energy is `Q_induced+Q_bleed`. In particular zero does **not** automatically create an ordinary 3-way cut or a pure "don't-care" graph deletion. `Karp21SSPDualCheegerSignlessOneExact` separately records the `|x_i+x_j|` table on SSP trits with natural **nonnegative** magnitudes and its list additivity. `x=(+1,+1)` gives ordinary gap-square 0 and signless-one value 2: they are **not the same energy** and an SSP extension does *not* force replacing every quadratic Karp verifier with absolute-value/subgradient arithmetic. It only creates a separate target family.
+
+**Source roots/conditional spectral claims:** Fan R. K. Chung, *Spectral Graph Theory* (AMS 1997, DOI 10.1090/cbms/092); J. Kunegis et al., *Spectral Analysis of Signed Graphs for Clustering, Prediction and Visualization* (SDM 2010, DOI 10.1137/1.9781611972801.49); F. Bauer, B. Hua, J. Jost, *The dual Cheeger constant and spectra of infinite graphs* (2012, arXiv:1207.3410); F. M. Atay and S. Liu, *Cheeger constants, structural balance, and spectral clustering analysis for signed graphs* (2020, DOI 10.1016/j.disc.2019.111616); S. Shao, C. Yang, D. Zhang, *Dual Cheeger constants, signless 1-Laplacians and maxcut* (2016 preprint, 2025 SCIENCE CHINA Mathematics, DOI 10.1007/s11425-024-2376-2). Do not attach their worst-case **0.769** restricted recursive spectral-algorithm ceiling to arbitrary signed Karp cut, the PNF evidence triangle or the *non-normalized* indefinite Δ₀. No signed/unsigned degree normalization, Cheeger ratio, denominator positivity or eigenvalue interval `[0,2]` has been proven for those consumers.
+
+### Previously unpaid E20 graph construction — now source-written, including the existential list→indexed cut bridge
+
+1. `Karp21FiniteCompleteGraphGeneratorExact.agda`: `HeadLink n` retains each `Fin n` destination independently of Boolean cut choice. `headLinks`, `emitHeadLink`, `completePairEdges` generate the **upper triangle only** with off-diagonal proofs; `headPairCount` and `completePairCount` show the exact `n(n-1)/2` triangular edge count; `completeScaledPairEdges` multiplies signed weights by 4. Pair-uniqueness as an explicit proof-level all-different lemma, canonical positive `GraphWord` serializer and machine-cost bound remain unverified.
+2. `Karp21FiniteCompleteGraphObjectiveExact.agda`: `headLinkCutShift`, `headLinkCutMatchesHistoricalCross`, `emitHeadLinksScore`, `tailGraphPromotionPreservesCut`, and the requested **`e20CompleteGraphToWeightedCutEdgeListIff`** prove the constructed graph's cut score equals the historical `completeGraphCut` over a *position-preserving annotated Vec*, for **every** assignment and signed input, empty/duplicate/zero elements included. `e20ScaledIndexedGraphExactCut` transports 4× edge scaling to the exact objective.
+3. `Karp21SignedPartitionIndexedGraphDecisionExact.agda`: `vectorOfList` / `labelsOfSelection` convert original source List and dependent Selection to same-length vectors; `annotatedListIsSameObject` proves exact per-position preservation; `indexedSignedGraphCutSourceScore` welds the actual indexed graph to the **original** source partition expression; `karpPartitionActualIndexedGraphYESIff` proves full **existential** yes-iff; `sourcePartitionIndexedPositiveTargetIff` retains Karp's required positive-threshold zero/nonzero source guard without ceiling. A real fixed unit-edge `Cut.WeightedCutGraph` now exists in `Karp21SignedPartitionActualGraphYESExact` with existential witness transport; the canonical **Word parser and machine-clock** component remains unconstructed.
+
+**Finite independent numerical controls**: An independent Python replication verified 251,023 signed graph/label cases for corrected PSD frustration and **111,111** signed Partition/graph/label combinations for n=0..5, exact 4×cut = 4A(T−A) = T²−(A−B)², positive threshold and the zero-total exception. `scripts/check_karp_pnf_signed_ternary.py` is committed and invoked by the Karp runner; the exact GitHub branch script itself was not run from a checkout. Neither Python totals nor source-written Agda imply kernel acceptance.
+
+**Updated precise next high-alpha cut (do not re-open the completed source-written seam as a placeholder):** `e20IndexedPairUniqueAndComplete` (now source-written with no-repeat address list and weighted edge-list correspondence; requires Agda check), `e20PositiveUnitGraphRealization` (actual 2-node target object at total zero), `e20IndexedTargetGraphWordsRoundtrip`, `e20MalformedWordPolicy`, `e20GraphMachinePolynomialClock`, and `e20EncodedPolynomialReduction` under `PR.PolynomialCostModel`; on the NP side `n21CanonicalGraphWord`, `n21CertificateWord`, `n21SignedSumBitBound`, `n21PolynomialVerifierClock`, `n21InNP`. K00 uniform original Cook–Levin + E01–E19 concrete costed maps + N01–N20 InNP remain open. This tranche wrote no implementation into ITIR, SLR or SensibLaw.
+
+**Status gate:** All these new Agda theorem names are source-written with no run of the pinned Agda kernel. Until that check and actual costed Word reductions are available, preserve the explicit **0/20 newly kernel-certified concrete reduction** and **0/21 newly kernel-certified NP-complete result** counts. Explicitly distinguish original mathematical theorems, PNF source operators, new typed proof terms, independently executed finite controls and checker receipts.
+
+### E20 actual positive-threshold graph object and existential witness transport
+
+`Karp21SignedPartitionActualGraphYESExact.agda`, imported by the focused root, builds literal `Cut.WeightedCutGraph` objects for **both** Karp branches: `fixedUnitGraph` (two distinct `Fin 2` vertices, one unit edge, threshold +1 and actual `fixedUnitGraphAccepts` Boolean-cut certificate) and `sourceIndexedWeightedGraph parts nonzero` (new signed upper-triangular `4*c_i*c_j` edge list with exact `T²>0` certificate). `choiceFromLabels` and `choiceLabelsRoundTrip` close **both** directions of the List `Selection` ↔ `Vec Bool n` cut-certificate transport, so no target witness is lost. `sourceIndexedGraphAcceptsIff` links the indexed decision to `Cut.WeightedMaxCutYES` on the same graph, and `sourcePartitionActualPositiveGraphIff` is the full original signed PARTITION YES iff this genuine **positive-threshold finite weighted graph's** existential YES predicate, with exceptional zero-total covered by the fixed graph. The constructor depends only on original input, never its selected witness.
+
+**This advances E20's real mathematical max-cut.** Remaining E20 before costed NP-hardness: `e20IndexedPairUniqueAndComplete` beyond proven triangular cardinality; `e20GraphPackedWordRoundtrip`; `e20MalformedWordRejectOrCanonicalNo`; `e20SignedMulAdditionBinaryBitCost`; `e20ConcretePolynomialTransducerMachineClock`; `e20ConcreteManyOneReduction`. On N21: graph/labels packed parsers, `n21CutSumBinaryClock`, `n21InNP`. **All 21 end-to-end NP-completeness theorems remain OPEN** pending Cook–Levin root, 20 costed reductions, 21 NP bounds, Agda kernel and independent receipts. No CI was run.
+
+## F. Priority cut / dependency order (Pareto and snowball)
+
+**Tier 0 — proof-system blockers (must precede any "21 done" claim):**
+- K00a–K00j, especially concrete word encoding, actual cost model, Cook–Levin and malformed-input handling. Existing `PR.InNP` and `PR.NPComplete` records are typed *interfaces*, not globally supplied proofs.
+
+**Tier 1 — shortest reusable graph triangle:**
+- E03 and E02 SAT/CNF bridges → E04 CLIQUE/SET PACKING → E05 CLIQUE/NODE COVER → E06 SET COVER.
+- Aim first for the concrete *E05* theorem using #1445's `karpCliqueCoverSemanticEquivalence`, then E04 using `karpCliquePackingSemanticEquivalence`. Build finite cardinality once and reuse it throughout vertex- and set-indexed constructions.
+
+**Tier 2 — arithmetic terminal:**
+- E17 EXACT COVER→KNAPSACK → E19 KNAPSACK→PARTITION → E20 PARTITION→MAX CUT.
+- In parallel, E01 integer constraints and X01 arithmetic optimization (without conflating feasibility).
+- Reuse bit-cost exact arithmetic from existing number-theory modules, not literal numerology analogies.
+
+**Tier 3 — complete historically remaining branches:**
+- E07–E10 feedback and Hamiltonian; E11–E16 colouring/clique cover/exact cover/hitting set/Steiner/3DM; E18 sequencing.
+
+**Tier 4 — independent approximation/flow graph:**
+- X03, X05, X07 consume the actual OAI Lean declarations after pinned toolchain and same-object audit; X06/X08 consume a separate finite flow network with residual arcs and conservation.
+- Report Karp decision completeness separately from APX/flow and from the Clay P != NP frontier.
+
+## G. Mechanical acceptance checklist (per lemma, per edge, per 21-node closure)
+
+1. Source owner path and earliest actual implementation SHA/time, original author DOI/date; later source ports keep *both* provenances.
+2. Well-formed and ill-formed inputs; exact instance and certificate encoding, duplicate-index, parity, empty, weight signs, loop convention; prove parser roundtrip.
+3. Explicit `forward` and `backward` proof terms, no `postulate`, `sorry`, unconstrained boolean status, or `Set` field used as a disguised theorem.
+4. Actual polynomial **machine** steps plus output-bit budget. Do not infer a cost theorem merely from a total Agda function.
+5. Finite exhaustive regression on small instances, including at least one YES/NO per edge and malformed controls, is *secondary* evidence.
+6. `scripts/run_agda29_parallel_check.sh DASHI/Mathematics/Complexity/Karp21Everything.agda` for draft; repository-pinned Track A Agda for final acceptance. Do not claim either passed unless an actual run/receipt is attached.
+7. Same-object Agda ↔ Lean bridge (if used), pinned original source, kernel/axiom report, regression and TOE consumer after successful independent verification.
+8. Update this roadmap with exact lemma names and close only a lemma whose file/line and kernel receipt can be inspected.
+
+## H. Source bibliography / exact URLs
+
+- Cook (1971): https://doi.org/10.1145/800157.805047
+- Karp (1972): https://doi.org/10.1007/978-1-4684-2001-2_9\n- Karp 1972 source PDF (pages 96–100 for the list, reduction diagram and E20): https://cgi.di.uoa.gr/~sgk/teaching/grad/handouts/karp.pdf
+- Zuckerman (1996), *On Unapproximable Versions of NP-Complete Problems*, SIAM J. Comput. 25(6):1293–1304, DOI 10.1137/S0097539794266407: applies additional constraints to 21 historical problem families; **not** the claim that their ordinary variants all have the same approximation difficulty.\n- Karp original/tree overview: https://en.wikipedia.org/wiki/Karp%27s_21_NP-complete_problems
+- Zuckerman constrained approximation distinction: https://doi.org/10.1137/S0097539794266407
+- OpenAI original Max-Cut Lean: https://github.com/openai/math/blob/main/lean/OAI/Computability/MaxCut/Main.lean
+- OpenAI original Vertex Cover Lean: https://github.com/openai/math/blob/main/lean/OAI/Computability/VertexCover/Main.lean
+- In-repo Lean OpenAI atlas PR #78: https://github.com/chboishabba/dashi_lean4/pull/78
+- In-repo finite same-object Max-Cut graph: in `dashi_agda` PR #1438 (not a general NP-completeness proof).
+- Ford–Fulkerson background: https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm
+- Minimum k-cut distinction: https://en.wikipedia.org/wiki/Minimum_k-cut
+
+## 2026-11-06 — Conway / C3 / primorial crosswalk on updated Karp head
+
+Reference original branch head: `730f62ed27a0c45d71c89e5cdbc61bd9f1e6ab2c`.
+The separately derived integration branch imports the actual Karp original owners
+into `Karp21Everything` and records exact new gate status at
+[`Karp21ConwayC3GammaMaxCut20261106.md`](Karp21ConwayC3GammaMaxCut20261106.md).
+
+K01: source-written structurally recursive arbitrary finite Conway-chain
+evaluator and source rule-six equation, strictly-positive typed input.
+K02: source-written original Elias-gamma BitWord strict chain and
+four-prime exponent-vector roundtrips and exact wire length; not clock-certified.
+K04: `TriadicCube ≡ ThreeSuperThree` by definitional equality and actual
+`C3CubeFourier27Exact.Cube3` bidirectional lookup/additive transport.
+K03/K05/K06: all ORIGINAL signed E20/N21 cost and malformed-word
+obligations, original guarded Cook-Levin SAT lower bound, and network
+remain independently open; no synthetic C3 reduction substituted.
+K07: no Agda/`parallel_checker` executable receipt in this environment;
+source-written candidates and bounded independent tests are not kernel proofs.
+
+The new symbolic syntax is NOT interchangeable with an expanded integer
+word in a polynomial-time many-one reduction. The P != NP lower bound is
+not supplied by this bridge.
+
+## 2026-11-06 — full public Conway rule-five and factor codec strengthening
+
+On PR #1474 derived from the original updated Karp head, the
+`Karp21ConwayTotalChainExact.conwayDropAfterInternalOne` public theorem
+now states arbitrary-list prefix absorption:
+
+`evaluate (a :: (before ++ (1 :: after))) == evaluate (a :: before)`.
+
+It is derived from the actual prefix-machine invariant and the
+structural run/advance append proof. This strengthens internal
+`dropAfterOne` to a consumer-facing chain equality for every
+`before` and `after`.
+
+`Karp21ConwayGammaChainCodecExact` now has:
+- arbitrary-bit prefix-exclusion `chainFullBinaryNoProperPrefix`;
+- literal gamma chain injectivity `chainEncodeInjective`;
+- exact word lengths and strict positive-chain roundtrip.
+
+`Karp21ConwayPrimorialGammaAdapterExact` transports wire-size,
+injectivity, and arbitrary-bit prefix-exclusion to BOTH the original
+4-prime primorial coordinates and 15-prime SSP Gödel exponent vector.
+
+Independent tests: 327 successful finite Conway rewrite comparisons
+(103 short + 224 longer), 18 deliberately capped cases, 781 gamma
+roundtrips, and all 8,191 bitstrings through length 12 (133 accepted
+canonical/8,058 rejected). No Agda/parallel_checker acceptance; no
+polynomial Turing machine cost or P!=NP proof implied. The actual
+E20/N21 binary reduction and machine clock remain the original
+K03/K05/K06 critical path.
+
+## 2026-11-07 — total original N21 comparison-count resource bound
+
+The original-word N21 owner now defines `actualAllWordComparisonCount`
+on *every* binary graph word, returning zero endpoint comparisons on
+malformed raw input and the original `maxAddressComparisons m` after a
+successful parse. It proves `allWordComparisonCountBound` and
+`allWordComparisonPolynomialClock` from the source-owned read/parser,
+2m witness budget and native degree-two polynomial witness.
+
+This completes the **input-length polynomial endpoint-comparison-count
+subgate** without assuming n <= input-length or inventing any generic
+verifier cost oracle. The original `Karp21BinaryRuntimeEverything` and
+`Karp21Everything` roots import the new owner.
+
+Still required for full K05: native binary-value parsing and signed
+addition/equality bit costs, executable bit-tape instruction count,
+formal machine simulation and original `PR.polynomialTimeVerifier`
+instantiation. All new proofs remain source-written until checked by
+Agda 2.9 via the repository's parallel checker. No P != NP claim.
+
+## 2026-11-07 — rediscovered original all-word N21 semantic equivalence
+
+PR #1445 already contains the SOURCE-WRITTEN universal theorem
+`Karp21FinFreeAllWordDecoderAgreementExact.n21FinFreeVerifierSameWord`.
+It proves that the actual original typed N21 graph parser/verifier and
+the actual fin-free verifier return the same Boolean for *every*
+original binary graph word and *every* certificate word, including
+malformed words. This is considerably stronger than the older
+conditional E20 image equivalence. No different graph language or
+oracle is introduced.
+
+New owner `Karp21N21SameWordCountedAcceptanceExact` consumes this
+exact original theorem and the new native `ERQ.PolynomialBound` for
+the same original word's endpoint-comparison count. Its
+`allWordsSameVerifierAndPolynomialComparisonCount` packages both
+facts without extra assumptions, and both original `Karp21Everything`
+and `Karp21BinaryRuntimeEverything` import it.
+
+**Updated K06 source status:** original N21 all-word Boolean
+semantics are **SOURCE-WRITTEN** (including malformed graph and
+certificate words), not still awaiting a new semantic proof.
+**Remaining K06:** kernel acceptance, original E20 output compiler's
+fully costed all-word map and Cook–Levin transitive acceptance.
+**Remaining K05:** binary tape step cost of gamma/signed parsing,
+comparisons, signed score, and the explicit machine clock. The
+operation-count polynomial does NOT turn unary Nat operations into
+binary constant-time primitives.
+
+## 2026-11-07 — original raw graph validator cost folded into N21 cut
+
+Two new source-written ORIGINAL-source modules (imported by original
+Karp21Everything and Karp21BinaryRuntimeEverything):
+
+- `Karp21FinFreeRawValidatorComparisonCountExact` instruments the
+  ACTUAL `Runtime.validRawEdges` decisions `u<v`, `v<n` and
+  original `Graph.strictAfter`. `originalRawValidatorValueSame`
+  states literal Boolean equivalence on any raw edge list, including
+  invalid/unsorted/over-range edges. The actual short-circuiting
+  validation count is at most `3*m` top-level predicates.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact` composes
+  the validation count with the genuine `2m(m-1)` original sparse
+  history endpoint-equality count. For every original successfully
+  parsed graph word of length L, it proves the combined count is
+  bounded by `C(L)+5L` primitive comparisons, where `C(L)=2L(L-1)`.
+  Thus the combined number of address/order comparisons is bounded
+  by the explicit polynomial expression `2L(L-1)+5L`.
+
+No separate fabricated finite graph verifier is introduced.
+This joins the source-level original decision and address-operation
+resource accounting. It is NOT yet a binary bit-operation or Turing
+machine polynomial clock: gamma parsing, comparisons on arbitrary
+binary integers, signed cut arithmetic, all malformed parser branches,
+actual strict clock instantiation and Agda acceptance remain to pay.
+
+**2026-11-07 comparator-cost correction:** The source's `Graph.strictAfter`
+contains up to three primitive Nat comparisons (a<u, a=u, b<v),
+not one. The independent `countedStrictAfter`, `strictAfterValueSame`
+and `strictAfterPrimitiveCountBound` follow those exact branches.
+`countedRawValidatorPrimitive`, `primitiveValidatorValueSame`
+and `primitiveValidatorCountBound` now count the original u<v,
+v<n and strictAfter's internal comparisons, yielding 5m rather
+than the 3m *top-level predicate invocation* bound. The combined
+original successful-word envelope is the corrected
+`2L(L-1)+5L`. This is still not binary machine time.
+
+## 2026-11-07 — all-original-input N21 primitive-count polynomial
+
+The previous *successful graph word only* comparison envelope has now
+been strengthened without changing the original parser or graph domain.
+
+- `Karp21FinFreeAllWordValidationClockExact`: mirrors the ACTUAL
+  `readRawGraphWord` original gamma(n), gamma(m), 3m guard,
+  raw-edge read and positive W/suffix branches. It counts original
+  primitive raw-validator comparisons **even when that validator
+  rejects** a malformed graph, and proves for EVERY binary input word
+  `rawValidationCount(word) <= 5 * encodingSize(word)` from the
+  literal original source `readGammaSuffixWithinInput`,
+  `readRawEdgesCountExact` and 3m guard.
+- `Karp21FinFreeOriginalGraphComparisonEnvelopeExact`:
+  `allWordCombinedComparisonCount = original sparse consistency count
+  + original raw validator primitive count`; proves
+  `allWordCombinedComparisonBound` against
+  `C(L) + 5L = 2L(L-1) + 5L` and constructs an ACTUAL
+  `ERQ.PolynomialBound` with coefficient 7/exponent 2:
+  `count(word) <= 7*(1+L)^2` universally.
+- `Karp21N21SameWordCountedAcceptanceExact` now packages that exact
+  all-original-word primitive count with the original universal N21
+  typed/fin-free same-word Boolean theorem. In both Karp source roots.
+
+This is the strongest sound **operation-count** result of this tranche.
+It does NOT yet provide a proper bit-machine runtime: decoding
+`Nat` into unary values, binary comparisons and signed arithmetic
+cannot be treated as unit-cost steps. Nor does it typecheck itself
+without the exact Agda 2.9/parallel_checker receipt.
+
+**Updated K05 status:** original N21 raw validation + endpoint-history
+primitive-comparison count now SOURCE WRITTEN with an all-input
+native quadratic polynomial witness. Remaining: binary implementation,
+each arithmetic operation's bit-cost, end-to-end parser/score runtime,
+and original PolynomialCostModel/InNP certificate.
+**Updated K06 status:** original same-word verifier semantics source
+written, kernel acceptance and full E20/Cook compiler still pending.
+
+**Literal-source guard and referee:** The all-word raw-validator
+clock follows the original `m * 3` header guard exactly; this
+is deliberately not replaced by `3 * m` in Agda's dependent
+`with` branches. `m <= m * 3` is proved separately using native
+Nat order. The original `Graph.strictAfter` three-case decision
+tree is preserved and its internal primitive comparisons counted.
+
+A retained source-aligned independent Python model checked 26,214
+small original `strictAfter`/raw-validator input cases, with literal
+Boolean agreement and `cost <= 5m`. The repository's existing
+`referee_karp21_maxcut.sh` now executes this regression in preflight,
+alongside the prior 63,001 comparison-budget cases. These are
+differential tests only, not Agda kernel acceptance or a Turing-machine
+clock. The new all-word N21 sources are on PR #1474.
+
+**Agda source-alignment repair:** `Karp21FinFreeAllWordValidationClockExact`
+uses the EXACT original header guard `m * 3` and an explicit
+`inputListLengthIsWordSize` proof because the original gamma parser
+uses `Data.List.length`, while the existing complexity model uses
+`FiniteWordSizeExact.encodingSize`. No definitional equality between
+two separately recursive owners is assumed. This and the original
+strictAfter internal primitive-guard proof are part of the exact-head
+compiler acceptance cut, not already certified.
+
+## 2026-11-07 — K05 binary-native parser/comparison implementation (Conway integration PR)
+
+Original head context: `730f62ed27` and subsequent original Karp-21
+comparison-count owners as synchronized in PR #1474.
+
+New source owners:
+1. `Karp21N21BitWeightedComparisonEnvelopeExact` combines the
+   actual original all-word primitive-comparison count with a
+   1+|w|-bit schedule, proving a native degree-three PolynomialBound.
+   It does **not** manufacture a bit-TM implementation.
+2. `Karp21BinaryWordEqualityPrimitiveExact` implements a
+   bit-list equality machine, proves extensional equality and exact
+   symbol-inspection count <= 1+|left|.
+3. `Karp21GammaBinaryEqualitySameValueExact` proves bit-list equality
+   of the ORIGINAL gamma encoded numerals iff their actual Nat values
+   agree. Canonicality follows from existing gamma read/encode proof,
+   not a new encoding.
+4. `Karp21GammaBinaryNativePayloadExact` reads Elias-gamma headers
+   into binary payload words while preserving suffix. It is a
+   structurally terminating alternative to constructing the huge
+   unary `pow2 zeros` Nat in the original `readGamma` reader.
+   It proves roundtrip on actual original gamma encoder outputs
+   and an all-input bound of 1+|word| input-symbol inspections
+   for one gamma token.
+
+The original roots `Karp21Everything` and
+`Karp21BinaryRuntimeEverything` import these owners, and the
+original referee includes focused checks and executable independent
+controls.
+
+Independent checks ACTUALLY EXECUTED in this session:
+- original Conway/gamma reference: 103 Conway equalities, 18 capped,
+  and 781 gamma strict roundtrips;
+- new binary word equality: 16,129 bounded binary word pairs, exact
+  equality and bit-inspection-cost checks;
+- new binary gamma: ALL 8,191 words of lengths 0..12, exact
+  original parser numeric result and suffix agreement, linear
+  inspection bound, including malformed/truncated inputs.
+
+**Full remaining math**: The new gamma parser's *all-word*
+numeric correspondence (not just encoder images); native binary
+less-than/strictAfter transport for original endpoint validation;
+per-field operand width and tape movement accounting; original
+signed-zigzag score accumulation and comparison with threshold;
+whole graph parser/certificate loops; E20 all-word transducer and
+K00 original Cook–Levin clock; the other Karp-21 edges and memberships.
+No `PR.polynomialTimeVerifier` or `PR.InNP` inhabitant has been
+created. No Agda/parallel_checker kernel acceptance is available
+in the current connected GitHub environment.
+
+## 2026-11-07 — native signed parser, no unary-magnitude fabrication
+
+After the native gamma payload reader, the new
+`Karp21GammaBinaryNativeSignedExact` discharges the executable
+sign/magnitude *representation construction* for source-style
+zigzag using the LAST bit of the original Elias-gamma(n+1) payload.
+It retains the canonical literal suffix and proves a source
+encoder-image equality, with structurally linear last-bit extraction.
+No `pow2`-sized Peano Nat, repeated `even`/ `half` loops, or
+original graph-language replacement is used.
+
+The original source roots and golden referee now import this owner.
+All 8,191 binary strings through length 12 passed an independent
+signed-token/old-zigzag/suffix-equivalence check. This is a bounded
+regression, not a universal source proof of the original decoder's
+numeric semantics nor a kernel receipt.
+
+**Exact remaining N21 promotion (updated):**
+(1) all-word gamma / zigzag numerical weld for malformed and valid
+inputs, while retaining the binary-native execution path;
+(2) canonical binary less-than and `strictAfter` agreement on the
+same original graph fields; (3) bit-native signed add/threshold,
+certificate verifier, and actual bit-tape step budget over
+`|graphWord|+|certificate|`; (4) native `PR.InNP` polynomialTimeVerifier
+inhabitant under selected physical machine cost model and kernel
+acceptance. Karp E20 and original Cook–Levin clocks remain separate.
+
+
+## 2026-11-09 FRACDASH machine integration
+
+Dedicated roadmap: [Karp21FRACDASHMachineMaxCut20261109.md](Karp21FRACDASHMachineMaxCut20261109.md).
+
+New original-head `Karp21FractranPriorityFrontierExact.agda`: generic source-written `--safe` first-enabled FRACTRAN guard-cache refresh correctness and successor/halt preservation, under explicit unaffected-guard stability premises. Imported in both original Karp roots; focused Golden referee covers the new source.
+
+This is *not* an original N21 instantiation or a polynomial-time Turing-machine witness. Preserve the existing gamma reader, signed ledger, trace factors, endpoint trie, original `rawSparseScore`, and original `PR.InNP` ownership. Exact unpaid lemma phases and FRACDASH source/attribution details live in the linked roadmap. Agda 2.9/parallel_checker acceptance OPEN; E20, Cook–Levin, remaining edges/memberships, independent SAT lower bound OPEN.
+
+
+## 2026-11-09 continuation — original N21 endpoint/score guarded machine vertical slice
+
+New original-owner integration `DASHI/Mathematics/Complexity/Karp21FractranN21EndpointScoreStepExact.agda` **actually imports** `Karp21FinFreeRawSparseWordVerifierExact.endpointConsistent`, `Karp21BoolGoldenExact.boolEqual`, the real `Karp21GammaBinaryNativeSignedExact.SignedMagnitudeBits`, the executable `Karp21BinaryNativeSignedLedgerExact.insertSigned`, and the FRACDASH-style `Karp21FractranPriorityFrontierExact.Machine`.
+
+The source-written `N21Edge` instantiation fixes one original edge's u/v, certificate labels a/b, original chronological endpoint history and decoded binary signed weight. It exposes a **genuine priority-ordered two-rule machine** (`advance`, then `reject`) with first-rule guard equal to the original endpointConsistent checks and continuation status. Its rule action updates the binary positive/negative ledger if and only if original `boolEqual a b` is false. The fallback rejects. `karpFractranFirstEnabledSameN21EdgeStep` states exact same-step on this **one-edge original-guard score phase**. `unaffectedStable` is proved by case analysis on the concrete status-change dependency, and `scoreOnlyUnaffected`/ `scoreOnlyGuardStable` certify score-only binary updates cannot alter fixed endpoint guards. `karpN21CachedScoreUpdateSameStep` transports the generic first-enabled cached-step theorem to this concrete frame.
+
+This is strictly narrower than `karpFractranFirstEnabledSameVerifierStep` on ALL original N21 words. The original `rawSparseScore` recursively validates the entire history and sums `Graph.RawEdge.weight : ℤ`, while this local machine consumes one native signed bit token. **Unpaid:** original gamma signed token value/suffix equality; one-edge raw signed-ℤ to native lane correspondence; induction over whole edge list and 2m certificate; parser malformed/suffix behavior; exact acceptance and trace replay; fully costed bit-machine verifier; `PR.InNP`. The local state does not assert a global graph cursor or output acceptance.
+
+The module is imported by both original Karp roots and checked by `referee_karp21_maxcut.sh e20/all`; a bounded differential `scripts/check_karp21_fractran_n21_edge.py` is run in preflight. A local independent source-shaped Python reproduction passed **13,440** cases (two vertex addresses, both labels and live statuses, five signed weights, endpoint histories of length up to two, two small ledger lanes); conflicting-label negative control passed. This evidence **does not** typecheck Agda or prove the original word-level theorem.
+
+**Phase ledger:** P0.2 = source-written concrete endpoint/score phase, **not full graph rules**. P0.3 = local first-enabled same-step SOURCE, full `karpFractranFirstEnabledSameVerifierStep` OPEN; P0.6 bit clock OPEN; all downstream P0–P3 remain OPEN. Exact-head Agda 2.9 and parallel_checker receipt not obtained.
+
+
+## 2026-11-09 — Full original raw-score selected-trace reconstruction and all-word acceptance (SOURCE ONLY)
+
+**New owner:** `DASHI/Mathematics/Complexity/Karp21FractranOriginalRawTraceReplayExact.agda`.
+
+The runtime `rawSelectedTrace` traverses the ORIGINAL `Graph.RawEdge` list and the original **exactly two certificate bits per edge**, applies the original `Runtime.endpointConsistent` (including chronological history extensions) and `Boolean.boolEqual`, and emits just those original signed `ℤ` weights whose labels differ. It rejects inconsistent or short/long certificate lists with `nothing`. `replayOriginalSignedTrace` folds the original signed weights. Proposed source-written `rawSelectedTraceRebuildsOriginalScore` proves the full all-raw-list equality `decodeTraceScore (rawSelectedTrace edges bits history) ≡ Runtime.rawSparseScore edges bits history` via structural induction, including malformed bit lengths, all signed weights, and arbitrary histories.
+
+The same source additionally defines `verifyOriginalGraphWordByTrace` using **the actual original** `Runtime.readRawGraphWord` rather than a replacement graph parser; `karpOriginalRawTraceAllWordAcceptance` is a source-written theorem asserting Bool equality against `Runtime.verifyFinFreeSparseGraphWord` for *every original graph-word and certificate bitword*. This is a trace/replay equality at the ORIGINAL `ℤ` representation, not native signed-gamma value equivalence, a binary FRACTRAN runtime, or a bit-machine complexity result.
+
+**Independent executable evidence:** `scripts/check_karp21_fractran_original_raw_trace.py` reproduced the literal source-level branch order and checked **449,895** bounded raw edge/certificate cases (0–3 edges, small signed weights including negative, conflicting endpoint histories and malformed certificate lengths): 8,257 accepted, 441,638 rejected, all replayed decisions/scores agreed. This is a Python transcription of the original raw-language semantics, not direct execution of Agda, and does not test the complete all-word parser. Added to existing Golden roots and referee.
+
+**Exact authority:** source-written proof candidate, **no Agda 2.9 kernel receipt**. The full target `karpSignedIRSameOriginalSparseScore` is STILL OPEN because the native binary sign/magnitude token values and gamma suffix must be welded to the original `ℤ` weights. The stronger `karpFractranFirstEnabledSameVerifierStep` is ALSO OPEN beyond the preceding one-edge original-guard instance. All-word original-ℤ trace acceptance is source-written but native-binary all-word acceptance is not. Full original N21 bit-machine clock, `PR.InNP`, E20, Cook–Levin and remaining Karp-21 reductions/memberships remain open.
+
+**Next tight cut:** prove the actual original `readSignedGamma` / `readRawEdges` to native binary token value-and-suffix equivalence; use a mathematical signed-lane observation bridge to map replayed native selected tokens to this exact original signed selected trace; then instantiate a true bit-tape step bound and the original `PR.InNP`.
+
+
+## 2026-11-09 continuation — original typed N21 all-word trace composition and paired binary projection
+
+New source-written `Karp21FractranOriginalTypedTraceAcceptanceExact.agda` composes the existing source-owned `Karp21FinFreeAllWordDecoderAgreementExact.n21FinFreeVerifierSameWord` and `Karp21FractranOriginalRawTraceReplayExact.karpOriginalRawTraceAllWordAcceptance`. Its declaration `karpOriginalTraceSameTypedN21AllWords` states that the original signed-ℤ selected-trace evaluator has exactly the same Bool as `Graph.LiteralN21.verifyCanonicalSparseGraphWord` for all original graph words and certificate words, malformed included. **Composition of source-written theorems only, Agda kernel receipt not received.**
+
+New `Karp21FractranPairedBinaryTraceExact.agda` retains each original `Graph.RawEdge` together with its corresponding actual `SignedMagnitudeBits`, preserving the original endpoint `Runtime.endpointConsistent` and `Boolean.boolEqual` selection and certificate-history update. `pairedTraceProjectsToOriginal` source-writes original signed-ℤ trace recovery for every aligned paired raw-edge list, arbitrary original history and certificate, with rejection exact. `pairedTraceOriginalScoreExact` composes this projection with the original `rawSparseScore` reconstruction. Native tokens can be projected for ledger replay without losing pairing identity. Neither theorem falsely presumes token magnitude/value equals the original signed-ℤ weight: **that equality is still a separate, open signed-gamma graph-reader weld.**
+
+All sources are imported into both original Karp roots, and the exact-head referee checks each of them in e20/all. Local Python scripts already mounted in the runtime were directly executed this continuation: raw signed-score trace 449,895/449,895, original edge-guard phase 13,440/13,440, and priority frontier 38,860/38,860; passing tests are NOT Agda receipts.
+
+**Remaining exact maximum cut**: (i) original graph signed-gamma `readRawEdges` → native binary signed token/suffix equality for all input words; (ii) original signed weight ↔ native signed value and threshold `P ≥ N+W` equality; (iii) use the paired full-edge trace to prove the actual native binary ledger and full FRACDASH step agree with `rawSparseScore` and the original typed N21 Bool for all words; (iv) bit-TM clock with parsing, update, selection, storage, motion and residual costs; (v) original `PR.InNP`; (vi) E20 and Cook–Levin; (vii) E01–E19/N01–N20 and `CertifiedKarpNetwork`; (viii) exact-head Agda 2.9/parallel_checker. These remain OPEN. The new source is *not* a verified NP-completeness proof.
+
+
+## 2026-11-09 — P-vs-NP PR #1129 cross-pollination: executable verifier code transport
+
+**Audited original `chboishabba/dashi_agda` PR #1129** (`agent/pnp-maxcut-20261012`, observed head `730ec95ce0442b8ab48a17a3cc9a3d1307ba8c76`) and the branch's existing `PNotEqualsNPExecutablePolynomialCostRefinementExact`, `PNotEqualsNPClayCoreExact`, `PolynomialReductionExact`, and original `Karp21SparseGraphWordNPBoundaryExact`. The P-vs-NP branch already distinguishes extensional `polynomialTimeVerifier` from executable finite code, actual halting versus estimated upper bound, and independent `SATNotInP` lower-bound obligations. **Do not mistake its behavioural self-specialization interfaces or Cook quotation boundaries for a proved SAT lower bound.** The existing Karp NP boundary already explicitly requires a physical verifier clock and certificate-bound witness to construct `PR.InNP`.
+
+**New actual reuse, not a duplicate cost model:** `DASHI/Mathematics/Complexity/Karp21FractranPvsNPVerifierCodeTransportExact.agda` imports the SOURCE P-vs-NP `ExecutableVerifierCode` carrier, original typed N21, and this branch's all-word original signed-ℤ trace theorem. `karpTraceCodeRealizesOriginalTypedN21` transports a real concrete code, its interpreter, and its `codeSize` field from original trace verification to the actual typed N21 verifier. `karpTypedCodeRealizesOriginalTrace` transports the other way. Both update only `runExact` by transitivity/symmetry of the source-owned all-word Boolean equality; they do **not** synthesize a tape program or clock. `karpTraceRefinedToOriginalTyped` transports a P-vs-NP `ExecutablePolynomialTimeVerifier` *only when a separate original typed-verifier polynomial-time witness has been supplied*. This refuses to postulate that extensional code or numerical comparison count equals a bit-Turing-machine runtime.
+
+The new module is imported by the original `Karp21Everything` root (not marked `--safe`, matching the historical P-vs-NP import closure) and checked by `referee_karp21_maxcut.sh e20/all`. The previous `Karp21FractranPairedBinaryTraceExact` had a missing `sym` import in its all-list proof; that import was repaired. Exact-head Agda 2.9 and `parallel_checker` unavailable here.
+
+**Actually executed** bundled Python scripts in this working container this continuation: `check_karp21_fractran_priority_frontier.py` 38,860 PASS, `check_karp21_fractran_n21_edge.py` 13,440 PASS, `check_karp21_fractran_original_raw_trace.py` 449,895 PASS. These finite source-shaped tests are not Agda kernels or end-to-end N21 binary parser tests.
+
+**Exact remaining maximum cut, unchanged by code-transport:** source signed-gamma `readRawEdges` and native bit-token value/suffix alignment; binary two-lane numeric representation equal to original signed-ℤ `rawSparseScore`; actual complete N21 FRACTRAN first-enabled original machine; native all-word acceptance and residual trace reconstruction; concrete bit-machine execution/bit width/heap/tape/head/priority-frontier polynomial cost; `PR.polynomialTimeVerifier` and original `PR.InNP`; E20, Cook–Levin original Cell/Bits and remaining E01–E19/N01–N20 network; independent behavioural self-specializer and resource fixed point to derive `SATNotInP` in separate P-vs-NP lane. Source written ≠ kernel accepted ≠ Clay result.
+
+**Provenance:** Stephen Cook, Leonid Levin, Richard Karp, Elias gamma/Conway FRACTRAN; reuse of repository's original PR #1129 and PR #1445 authorship and FRACDASH compiled-machine work. No ESD paths touched.
+
+
+## 2026-11-09 — Signed-gamma original/native all-word suffix and numerical-control cut
+
+Canonical up-to-date status table and exact lemma chain: [Karp21FRACDASHMachineMaxCut20261109.md](Karp21FRACDASHMachineMaxCut20261109.md).
+
+New `--safe` Agda source owner `Karp21GammaBinaryNativeSignedSuffixExact` directly reuses original gamma/zigzag, native gamma/signed parsers and the existing unsigned numerical weld. The code source-writes `nativeScanNumericSuffixSame`, `nativeGammaOriginalSuffixAllWords`, `nativeSignedSuffixEqualsNativeGamma`, `karpNativeSignedGammaSuffixSameOriginal` and `karpSignedNativeControlNumericViewSameOriginal`. Every input bitword is included, including malformed, truncated and suffix-bearing words. This **closes only the suffix branch at SOURCE level** and gives original-ℤ numerical observation of the native grammar's control path. It **does not prove actual executable signed-token `valueLE (reverse magnitude)` equals old `unzigzag`**. That token-value theorem and the original graph `readRawEdges` frame are the next precise gates.
+
+Both original Karp roots and focused Golden referee import the owner. `scripts/check_karp21_signed_gamma_suffix_values.py` is in preflight; a local independent direct execution matched original/native value, sign, suffix and failure in **65,735 finite cases**, including 200 large inputs; this is regression evidence, not Agda semantics or polynomial runtime. Exact-head Agda 2.9 and parallel_checker are unavailable. All the original full native binary ledger/score, complete FRACTRAN N21 machine, polynomial bit-machine clock, N21 `PR.InNP`, E20/Cook–Levin, remaining network and P-vs-NP `SATNotInP` remain OPEN. Do not promote a finite test or the proof-only numeric observation into a code-to-proof execution receipt.
+
+
+## 2026-11-09 exact original gamma payload / native ledger rejection cut
+
+**Source-written and not kernel accepted:** `Karp21GammaBinarySignedPayloadValueCutExact.agda` computes the actual native `Signed.readSignedBinary` and original `Old.readSignedGamma` on the same complete source gamma frame with the exact unchanged suffix. It covers arbitrary nonempty successor payloads ending in either sign bit, plus a separate gamma-zero fixture. This is NOT the signed numerical value equality: the next required lemma equates `Value.valueLE(reverse (true ∷ prefix))` with the original `Old.unzigzag` magnitude formula, handling zero and both signs. All-word malformed/truncated suffix preservation is covered by the preceding signed-gamma suffix owner.
+
+**Real native execution and rejection theorem:** `Karp21FractranPairedBinaryTraceExact.agda` now contains `nativePairedLedger`, which runs the actual `Ledger.accumulateSigned` over the selected native tokens after original endpoint/history and 2-bit certificate checks. `nativePairedLedgerSameOriginalRejection` source-writes same success/rejection as the actual original `Runtime.rawSparseScore` on **all supplied aligned raw-edge/token lists and all certificates**, without assuming unproved token numeric equality. It does NOT validate that supplied paired binary tokens were decoded from the original graph word; that original graph-reader weld remains unpaid.
+
+Both source owners are reached through existing Karp Golden imports; signed payload owner additionally referenced in focused referee. Existing finite regression scripts directly rerun in the working container: 38,860 priority, 13,440 N21 edge and 449,895 original raw trace cases PASS. These tests are not Agda typechecks or full original/native binary score tests. Agda 2.9/parallel_checker unavailable. Current phase/status table and precise arithmetic obligation live in `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`. Original `PR.InNP`, E20, Cook–Levin, Karp network and independent P-vs-NP SAT lower bound remain OPEN.
+
+
+## 2026-11-09 — Actual N21 signed-token numerical theorem and decisive remaining cut
+
+Three new actual Agda arithmetic owners are committed on original Karp PR #1474:
+
+1. `Karp21SignedGammaNumberTheoryExact`: source zigzag (2M/2M-1) positive/negative correction, including nonzero negative magnitude.
+2. `Karp21SignedGammaBinaryValueArithmeticExact`: source original gamma BE `payloadValue` = actual native ledger `Value.valueLE(reverse bits)`; sign-bit append doubles magnitude; proves a leading-one magnitude is `suc k`.
+3. `Karp21SignedGammaNativeOriginalValueExact`: `interpretNativeToken` uses the **actual** signed token's bit value, and `karpNativeSignedTokenValueMatchesOriginalEncodedFrame` source-writes exact equality of the original signed-ℤ `readSignedGamma` and the native signed binary decoder's numeric observation on EVERY COMPLETE original gamma frame, arbitrary positive/negative sign bit, prefix, suffix; separate gamma-zero theorem. Not just agreement on acceptance/suffixes.
+
+**Status:** all new declarations **SOURCE-WRITTEN only**, Agda 2.9/`parallel_checker` exact-head unavailable; no kernel-green claim. A same-source numerical regression passed **66,334** independent finite cases for 0–14 prefix bits and 128–2048-bit additional magnitude tests, including negative and positive. This is not an Agda receipt.
+
+**Do not overpromote:** the full all-input-word numerical weld is still OPEN until successful frame decomposition and original `Graph.readRawEdges` to native word/cursor/weight alignment are proved. The actual native two-lane signed-score equality to `rawSparseScore`, full original N21 compiled FRACTRAN simulation/acceptance/trace, physical polynomial bit-machine clock, original `PR.InNP`, E20/Cook–Levin, remaining Karp-21 edges and memberships, and separate P-vs-NP behavioural fixed point/resource lower bound `SATNotInP` remain OPEN.
+
+The [canonical current phase and deliverables roadmap](Karp21FRACDASHMachineMaxCut20261109.md) has an IN-PLACE authoritative P0-A…P0-G, P1, P2, separate P-vs-NP and Golden lemma table. Earlier chronological OPEN entries in these documents may be historical and do not supersede the new canonical table. Original attribution preserved; no ESD files edited.
+
+
+## 2026-11-09 — All original bitwords: genuine native signed token ℤ value and suffix (SOURCE; kernel receipt OPEN)
+
+The current original Karp PR #1474 now source-writes `karpNativeSignedTokenValueMatchesOriginal` in `Karp21SignedGammaNativeOriginalValueExact.agda`, proving the intended equality of the actual `Signed.readSignedBinary` token's `Value.valueLE(reverse bits)` integer interpretation and the original `Old.readSignedGamma` result **on all original gamma bitwords including malformed/rejected and arbitrary suffix**, by combining the previous complete-frame genuine number theory and new `Karp21SignedGammaAllWordFrameExtractionExact.agda` (the actual `Native.scanZeros` + `Native.readPayload` successful canonical-frame decomposition), and the original/native all-word signed suffix rejection theorem. No postulate or alternate gamma grammar is assumed.
+
+**Correct adjudication:** SOURCE-WRITTEN proof candidates, not yet Agda 2.9 kernel-checked; the Golden referee now includes both owners. The signed number theory itself is no longer just a TODO or acceptedness wrapper. Bounded differential: 66,334 direct finite signed-zigzag/native BE/LE cases PASS, including long binary magnitudes, not a proof.
+
+**Next exact max-cut:** original `Graph.readRawEdges` vs native graph word cursor/endpoint/signed-weight frame (P0-B); original signed `rawSparseScore` vs native binary two-lane selected weight total (P0-C); complete FRACTRAN original N21 first-enabled machine and original threshold/all-word acceptance (P0-D/E); true physical polynomial bit-TM clock (P0-F); original `PR.InNP` (P0-G); E20 and Cook–Levin, remaining Karp network, separate P-vs-NP coded behavioural self-specialization and SAT lower bound. All remain open. Authoritative owner [P0-A..P0-G/P1/P2 exact phase and deliverables table](Karp21FRACDASHMachineMaxCut20261109.md); historical OPEN mentions in older notes are superseded only as SOURCE status.
+
+
+## 2026-11-09 source refresh — exact phases and new P0-C/E20 owners
+
+Canonical up-to-date gate ledger: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md` (CURRENT CANONICAL PHASE / DELIVERABLE / EXACT-LEMMA CUT). Existing branch source `Karp21SignedGammaNativeOriginalValueExact.karpNativeSignedTokenValueMatchesOriginal` already asserts **all-word actual SignedMagnitudeBits ↔ original signed-ℤ result**, and `Karp21SignedGammaNativeRawEdgeStreamExact.nativePairedRawEdgesSameOriginal` already asserts original raw signed-edge stream identity, subject to exact-head Agda 2.9 kernel check. New `Karp21SignedGammaNativeItemStreamExact` source-writes `nativeObservedItemsSameOriginal` and `nativeObservedPartitionSameOriginal` on the ACTUAL signed-token parser plus proof-side values, original count and strict suffix rejection. New `Karp21NativeSelectedSignedScoreExact` source-writes `selectedTraceRetainsNativeNumericalAlignment`, `alignedSelectedSignedSum`, `nativeAlignedScoreSameOriginalRawSparseScore`, `nativeRawEdgeStreamIsAligned` and `nativeRawStreamSignedScoreSameOriginal`, carrying original signed-ℤ numerical score from ACTUAL native gamma raw-edge stream through original endpoint guard, two-bit certificate and selected cut traces.
+
+**Not yet paid:** actual two-lane signed binary ledger numerical interpretation equals native ℤ trace sum; native bit-oriented endpoint/count and complete graph header/threshold; complete N21 FRACTRAN same-step, output/readout and trace; bit-tape physical polynomial clock; original `PR.InNP`; E20 fully bit-native costed compiler, Cook–Levin, all 21 historical NP reductions/memberships; separate behavioural fixed-point resource lower bound `SATNotInP`. Signed source semantics must not be mistaken for executable cost. All changes imported into Golden roots, focused referee updated; exact-head Agda 2.9/parallel_checker **not run/receipt OPEN**. No P≠NP proof claimed.
+
+
+## 2026-11-09 latest P0-C: ACTUAL native two-register signed score ↔ original rawSparseScore
+
+Canonical source-of-truth: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md` CURRENT CANONICAL PHASE table (supersedes older chronological OPEN rows).
+
+New `Karp21NativeLedgerIntegerScoreExact.agda` imports real `Karp21BinaryNativeSignedLedgerExact.accumulateSigned` and existing `accumulateEmptyPositive`/`accumulateEmptyNegative`; `integerPositiveStep`, `integerNegativeStep`, `negativeTokenInteger`, `tokenClassesEqualOriginalSignedTrace` and `nativeSignedLedgerIntegerEqualsOriginalTraceScore` source-write the binary two-register numerical observation `(+ P) + (- (+ N))` as the exact signed ℤ token fold. Neither the executable parser nor accumulator performs proof-side unary-Nat subtraction.
+
+New `Karp21NativeLedgerOriginalRawScoreExact.agda` composes `nativeLedgerScoreMatchesNativeSelectedTrace` and `nativeSignedLedgerIntegerEqualsOriginalRawSparseScore` with actual original endpoint/history/certificate selection and parser-produced native signed edge pairs. This is source-written equality with original `Runtime.rawSparseScore` **on successfully parsed source signed raw-edge streams**, including certificate failures; it is **not** the complete original graph-word / threshold decision.
+
+**Remains OPEN**: Agda 2.9 exact-head and parallel_checker receipts; native bit-coded endpoint and full strict graph header/positive-threshold parsing; original binary threshold-comparator numeric theorem; complete first-enabled N21 FRACTRAN step and acceptance/trace; physical polynomial bit-machine clock and actual `PR.InNP`; costed E20/Cook–Levin; original Karp-21 network; independent P-vs-NP code-consuming behavioural fixed point, resource lower bound and `SATNotInP`.
+
+Both new owners imported into the original Golden Karp roots and added to the focused Agda referee. A new reproducible bit-ripple two-register differential is tracked at `scripts/check_karp21_native_two_lane_raw_score.py` and called during preflight. An independently executed finite numerical differential passed 454,895 cases including 256-bit weights; the committed bit-ripple version has NOT been executed under this harness yet. No new Agda kernel receipt or Clay result.
+
+
+## 2026-11-09 P0-E/F same-source binary comparator cut
+
+New source-written `Karp21BinaryNativeThresholdStructuralExact.agda` uses the genuine `Karp21BinaryNativeThresholdExact.compareLE`, proving `compareLEReflexive`, `atLeastReflexive`, `compareLESameLowBit`, `atLeastSameLowBit`, high-priority select laws and `compareInspectionLinear` (actual source recursive comparisons ≤ combined operand width +1). Its `--safe` source is imported by original `Karp21Everything` and `Karp21BinaryRuntimeEverything` and checked by focused referee. Local independent numerical three-way ordering and atLeast differential: **71,025/71,025 PASS**, including exhaustive all bitwords of length 0..7 and 6,000 random operands up to 513 bits. Committed `scripts/check_karp21_native_comparator_exact.py`, wired into `referee_karp21_maxcut.sh`.
+
+**Exact P0-E OPEN**: `compareLENumericalCorrect` for arbitrary bitwords (regression ≠ Agda theorem); `nativePositiveThresholdParserSameOriginal`, `nativeOriginalGraphWordFieldsSame`, `karpNativeThresholdDecisionSameOriginal`, `karpFractranDecodePreservesAcceptance`, `karpFractranTraceRebuildExact`. P0-F physical bit-Turing-machine movement/allocations/bit-width clock is NOT paid by primitive inspect counts. P0-D original N21 first-enabled machine, original `PR.InNP`, original E20/Cook–Levin, Karp-21 network and independent P-vs-NP `SATNotInP` remain OPEN. Exact-head Agda 2.9 / parallel_checker not run. Canonical CURRENT table and exact phase/lemma inventory: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`.
+
+
+## 9 November 2026 continuation — P0-D/E original comparator, source positive gamma, parsed-raw FRACTRAN terminal decision
+
+**NEW SOURCE candidate** `Karp21BinaryNativeThresholdNumericalExact.agda`: `compareLENumericalCorrect` for all original bit lists (constructive strict Nat gap trichotomy, source `Compare.compareLE`, including unequal widths and zero padding); `atLeastTrueGivesNumericalOrder`, `atLeastFalseGivesNumericalOrder` follow actual `atLeast`. **NEW** `Karp21NativePositiveThresholdNonzeroExact.agda`: native bit test `anyOneFalseMeansZero`, `anyOneTrueMeansPositive`, `readPositiveGammaLEAlwaysPositive`. **NEW** `Karp21NativePositiveThresholdNumericFrameExact.agda`: `nativePredecessorValueSameOriginalGamma` pays gamma(n+1) successor correction for actual LE binary predecessor; `nativePositiveThresholdParserSameOriginal` source-writes all-word strict original gamma-positive threshold parser/number/suffix/rejection equality (no complete graph header).
+
+**NEW P0-D** `Karp21FractranOriginalRawListMachineExact.agda` follows complete original parsed raw signed-edge list and exactly-two-label-bits-per-edge cursor, original endpoint-history, actual binary two-lane ledger and halt/reject; `karpFractranFirstEnabledSameRawCursorStep` checks independently defined raw list transition. **NEW** `Karp21FractranParsedRawThresholdMachineExact.agda`: positive native threshold decision on terminal cursor, `karpFractranFirstEnabledSameParsedRawVerifierStep` and cache version exact **for parsed raw inputs**. No artificial promise that this is the full `Runtime.readRawGraphWord` or typed original verifier step.
+
+63,001-case independent full parsed raw-score + positive threshold machine regression PASS (including 7,000 random cases with 128-bit signed weights), committed `scripts/check_karp21_fractran_parsed_raw_threshold.py`, wired to focused preflight; existing 71,025 comparator and 454,895 native ripple-ledger differentials PASS independently. No Agda 2.9/parallel_checker executable; **new proof declarations are NOT kernel accepted**.
+
+Full remaining max-cut: `nativeOriginalGraphWordFieldsSame` for original n/m, strict u<v<n ordering, full suffix/threshold and sparse budget, binary endpoint representation; `karpNativeThresholdDecisionSameOriginal` for signed ℤ versus exact LE atLeast; `karpFractranFirstEnabledSameVerifierStep` on COMPLETE original graph-word decoder; all-word acceptance and trace reconstruction; true polynomial bit-machine tape/motion/allocation clock; original `PR.InNP`; costed original E20/Cell Bits Cook–Levin; Karp-21 network; separate behavioural resource proof and `SATNotInP`. Canonical current phase/deliverable and exact remaining lemma table: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`. No P≠NP theorem.
+
+
+## 2026-11-09 current P0-B/D/E/F and original P1 prior-art cross-pollination
+
+The canonical exact remaining cut, now authoritative over historical notes, is `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`. All newly added Agdas are SOURCE-WRITTEN, **not Agda kernel accepted**.
+
+- **P0-B/E whole original graph**: `Karp21NativeWholeRawGraphWordExact` executes original literal gamma n/m, 3m short-word guard, counted native signed raw-edge token stream, positive native gamma threshold, strict original u<v<n/sorted-unique edge validation, and no trailing bits. `Karp21NativeOriginalWholeGraphFieldsWeldExact.nativeOriginalGraphWordFieldsSame` source-writes equality of **whole same-input original Fin-free graph fields** incl. malformed rejection, consuming existing all-word signed-edge and native positive gamma source correspondences. Original Nat-producing header/endpoints/validation and bit clock remain OPEN.
+- **P0-D/E original FRACTRAN machine**: `Karp21FractranOriginalRawListMachineExact` implements actual remaining original raw-edge list/certificate cursor/history/two-register score/live-rejected-finished state and ordered `advance/finish/reject` priority; `karpFractranFirstEnabledSameRawCursorStep` source-writes exact direct step. `Karp21FractranParsedRawThresholdMachineExact.karpFractranFirstEnabledSameParsedRawVerifierStep` adds actual binary positive threshold terminal decision, separate direct reference and cached refresh. **This is parsed-raw scope only; original all-word `karpFractranFirstEnabledSameVerifierStep` remains OPEN.**
+- **P0-F**: `Karp21FractranParsedRawStepPotentialExact.cursorPotential`, `originalParsedRawStepStrictPotential`, `karpFirstEnabledStepStrictPotential` source-write strict decrease of remaining-edge-count+1 for every real parsed-raw first-enabled step, bounding high-level rule firings ≤ m+1. This does NOT bound original endpoint Nat decoding, bit-TM memory movement/width, tape-head operations, graph parsing and physical verifier clock.
+- **P0-E numerical**: `Karp21BinaryNativeThresholdNumericalExact.compareLENumericalCorrect` source-writes ALL-WORD constructive strict Nat gap trichotomy for actual `Compare.compareLE`. `Karp21NativePositiveThresholdNumericFrameExact.nativePositiveThresholdParserSameOriginal` source-writes strict all-word positive gamma numerical outcome/suffix/rejection. These remain Agda-kernel OPEN.
+- **P1 canonical Cook-Levin prior art**: `ConcreteTapeCanonicalCellBitsExact.canonicalWindowCodec`, `ConcreteTapeRunCNFWeldExact.runToEncodedCNFPath`, and `ConcreteTapeFlatAssignmentExact.flatTableauAssignment` already existed; `Karp21ConcreteTapeCanonicalRunFlatWeldExact.canonicalSameRunCNFPacket` now consumes them for the EXACT SAME concrete tape run/start row/flat bits, with original run length and start-row pullback. Global clause coordinate placement, endpoint clauses, accepting-run iff SAT and costed original E20/Cook-Levin remain OPEN.
+- **Separate P-vs-NP**: actual original `PNotEqualsNPClayCoreExact.SATNotInP` still requires an uninhabited lower-bound proof; existing equivalence compiler is conditional, and P0/P1/P2 constructive work does not imply `SATNotInP`.
+
+**Differential evidence**: independently tested parsed-raw signed score vs high-level first-enabled native positive threshold machine 63,001/63,001 PASS, including 7,000 random 128-bit signed weights; script `scripts/check_karp21_fractran_parsed_raw_threshold.py` is committed and called by focused preflight. Existing separate 71,025 comparator and 454,895 ripple binary-ledger differentials PASS. These do not prove Agda kernel acceptance, a bit clock, NP-completeness or P≠NP. Both original Karp Golden roots and focused referee now reach the new source owners.
+
+
+## 2026-11-09 latest P0-E original signed N21 terminal acceptance
+
+New `Karp21NativeThresholdOriginalSignedDecisionExact.agda` source-writes `compareAtLeastNumericalBoolean` on actual bit `Compare.compareLE`/Nat values and `signedThresholdBoolean` to identify the exact **original signed** criterion `Int._≤ᵇ_ (+W) ((+P) + (- (+N)))` with the native `Nat._≤ᵇ_ (N+W) P`, for ALL nonnegative register totals and threshold. `karpNativeThresholdDecisionSameOriginal` composes the REAL binary `Positive.meetsOriginalPositiveThreshold`/actual ripple add with proof-side ledger integer observation. This is a SOURCE-WRITTEN proof candidate awaiting Agda kernel, not an invented signed threshold oracle.
+
+New `Karp21NativeParsedRawAcceptanceExact.agda`: `karpNativeParsedRawAcceptanceSameOriginal` consumes the ACTUAL source grammar native signed edge stream read, the actual `Paired.nativePairedLedger` (original endpoint/certificate), previously source-written `nativeSignedLedgerIntegerEqualsOriginalRawSparseScore`, and new signed threshold equality to source-write exact acceptance of the original signed `Runtime.rawSparseScore` and original `Int._≤ᵇ_` for all original certificate words after a successful original source edge stream. Both modules in Golden roots and focused referee.
+
+**Still unpaid**: `karpFractranDecodePreservesAcceptance` across ALL original *graph word* malformed branches/header/strict validation (existing `nativeOriginalGraphWordFieldsSame` is only source-written); full N21 first-enabled whole-word step, trace/residual reconstruction; complete physical bit-TM clock and original `PR.InNP`; costed original E20/Cell Bits accepting-run iff SAT; Karp 21 full network; independent code-consuming behavioural fixed point and `SATNotInP`. No Agda 2.9/`parallel_checker` receipt, no Clay P≠NP proof. Source of truth phase/deliverable/exact-lemma: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`.
+
+
+## 2026-11-09 latest original whole-word P0-E Fin-free acceptance source candidate
+
+New `Karp21NativeWholeWordAcceptanceExact.agda`: `nativeWholeWordAccepts` runs the original full graph grammar with genuine native signed gamma weights, binary predecessor strict-positive threshold, strict original raw-edge validation and the actual binary ledger/threshold selection. `nativeWholeSuccessContainsActualEdgeReceipt` reconstructs the source signed-raw-edge stream receipt from the successful n/m/m*3/native-edge/native-threshold/validator original parsing branches, without caller-supplied arbitrary aligned values. `karpFractranDecodePreservesAcceptance` composes actual all-word `nativeOriginalGraphWordFieldsSame` and parsed-raw binary `karpNativeParsedRawAcceptanceSameOriginal` to match `Original.verifyFinFreeSparseGraphWord` on all original graph/certificate bitwords, **SOURCE-WRITTEN ONLY** (Agda 2.9 and parallel_checker unavailable; no kernel receipt). Imported into original `Karp21Everything` and `Karp21BinaryRuntimeEverything`; focused referee registers it.
+
+Precise scope: original FIN-FREE verifier Boolean on all words, NOT original typed Fin/Cut verifier identification, NOT the actual whole-word FRACTRAN first-enabled transition simulation, NOT an all-word trace/reconstruction, NOT a polynomial binary-TM clock or original `PR.InNP`. Native parser still uses original Nat gamma header/endpoint values. P0-D typed/whole verifier step and P0-E `karpFractranTraceRebuildExact` remain open; P0-F/G, E20/Cell-Bits Cook–Levin, remaining Karp network and separate `SATNotInP` remain open. Latest canonical phase/deliverable/lemma ledger: `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`.
+
+
+## 9 Nov 2026 — real remaining cut, binary endpoint implementation (current)
+
+The current authoritative source-level proof/dependency audit is `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md`, with ordered **B1–B6, D1/D2, E1/E2, F1–F4, G1–G4, P1.1–P1.4, P2 and independent P≠NP**. The historical "still missing comparator/all-word acceptance" entries above are superseded: `compareLENumericalCorrect`, `nativePositiveThresholdParserSameOriginal`, `nativeOriginalGraphWordFieldsSame`, `karpNativeThresholdDecisionSameOriginal`, `karpFractranFirstEnabledSameParsedRawVerifierStep`, `karpNativeParsedRawAcceptanceSameOriginal`, and `karpFractranDecodePreservesAcceptance` are already SOURCE-WRITTEN, awaiting exact-head Agda 2.9 kernel acceptance.
+
+The new executable P0-B/F subcomponent runs original gamma(n) as LE binary bits (zero accepted) via `Karp21NativeUnsignedEndpointBitReaderExact.readGammaNatLE`, reads actual signed N21 raw edges with LE binary u/v and native signed weight via `Karp21NativeBinaryEndpointRawEdgeStreamExact.readOneBinaryRawEdge`, and validates strict u<v<n and original lex ordered pair policy via `Karp21NativeBinaryEndpointValidatorExact.validNativeBinaryEdges` without unary endpoints in these runtime functions. All-word source proof candidates `nativeUnsignedEndpointSameOriginal`, `binaryEndpointRawEdgeStreamSameOriginal`, `nativeStrictLessNumerical` and width lemmas are Golden-imported and focused-referee targets. Independent differential: 132,271 gamma endpoint/cursor and 19,440 strict validator cases PASS; `scripts/check_karp21_binary_endpoint_cut.py` is committed.
+
+**Do not overstate:** the existing complete source graph parser still evaluates unary Nat n/m/endpoints; new binary raw-edge stream still takes original unary Nat edge count m. First real unpaid B1/B2 original strict validator correspondence, B3/B4 binary n,m header+length-budget, B5 original endpoint-history equivalence, B6 actual complete native bit graph remain. Physical tape/head/allocation bit-clock (F1–F4), source original `PR.InNP`, costed E20/Cell-Bits Cook–Levin, Karp network and distinct `SATNotInP` remain OPEN. Agda 2.9/parallel_checker not available here; source-written is NOT kernel-accepted. No terminal gate declared closed.
+
+
+## 9 November 2026 — B1–B5 source proof candidates and complete binary N21 runtime
+
+Canonical precise cut is now `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md` (supersedes all older B1–B6 OPEN paragraphs) and first table of `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`. New B1/B2 owners `Karp21NativeBinaryStrictAfterOriginalExact.nativeBinaryStrictAfterSameOriginal` and `Karp21NativeBinaryValidRawEdgesOriginalExact.nativeBinaryValidRawEdgesSameOriginal` source-write exact original Graph.strictAfter and Original.validRawEdges decisions (source NatP._<?_/≟_ reflected constructively). New B3/B4 `Karp21NativeBinaryHeaderBudgetExact` runs actual gamma n/m to LE bitwords and `Karp21NativeBinaryCountBudgetExact` runs actual bitwise `3m ≤ input suffix length` BEFORE any edge-count loop; `NatP._≤?_` source decision reflection added. B5 `Karp21NativeBinaryEndpointHistoryOriginalExact.nativeBinaryEndpointHistorySameOriginal` source-writes exact original endpointConsistent repeated-label recurrence using native binary equality.
+
+**Executable whole N21:** `Karp21NativeWholeBinaryGraphRuntimeExact.readNativeWholeBinaryGraphWord` reads original gamma headers, binary m-budget, signed original edge triples, strictly ascending binary endpoints, positive threshold/strict suffix; `readBinaryRawEdgesFuel` decrements binary m under actual input-length fuel instead of allocating unary m. `Karp21NativeWholeBinaryVerifierExact.verifyNativeWholeBinaryGraphWord` then executes the original sparse certificate, chronological binary endpoint consistency, actual two-register signed ripple ledger and native positive threshold. It **does not execute a unary decoded n/m/u/v**.
+
+**New direct B6 proof candidates** `Karp21NativeBinaryCountFuelOriginalExact.nativeBinaryCountFuelSameOriginal`, `Karp21NativeBinaryCountBudgetFuelExact.binaryBudgetSuppliesFuel` and `nativeBudgetedBinaryRawEdgesSameOriginal` connect actual binary decrement/structural-fuel signed edge loop to original Graph.readRawEdges using genuine source guard 3m ≤ length. All modules Golden-imported and focused-referee registered. `scripts/check_karp21_binary_header_budget.py` and `scripts/check_karp21_whole_binary_verifier.py` tracked preflight regressions. Independent finite differentials actually executed: 147,070 n/m gamma+budget, 66,735 complete signed graph, 25,000 binary endpoint history, and 134,668 full signed Fin-free verifier examples PASS. Tests are finite; Agda 2.9/parallel_checker not installed, **ZERO newly kernel-accepted gates**. Integration modules importing not-yet-proved --safe original sources no longer falsely assert --safe.
+
+**Actual remaining high-alpha leaves:** `nativeWholeBinaryGraphWordSameOriginal` and `nativeWholeBinaryVerifierSameOriginalFinFree` (source-written B6 count-loop is a dependency, not final); then original whole-word first-enabled FRACDASH machine and full trace, typed Fin/Cut same-word bridge; actual bit-TM tape/head/allocation/width simulation and `karpFractranBitMachineClockPolynomial`; original `PR.polynomialTimeVerifier`, certificate bound and `PR.InNP`; E20/Cell-Bits accepting-run Cook–Levin; original 21 Karp reductions/memberships and `CertifiedKarpNetwork`. Independent SATNotInP / behavioural fixed-point resource lower bound is NOT obtained and does not follow from NP completeness.
+
+
+## 2026-11-09 current binary original N21 maximum cut (supersedes old B6/E2/D1 status)
+
+The complete real original-wire LE-binary N21 graph reader and sparse signed verifier are already executable. This pass now **SOURCE-WRITES** the actual terminal proof chain:
+
+- `Karp21NativeWholeBinaryGraphOriginalExact.nativeWholeBinaryGraphWordSameOriginal`: actual full binary gamma n/m/u/v signed graph parse, input-length binary-m loop, original strict edge validation and positive threshold ↔ literal original `Original.readRawGraphWord` on ALL graph words, including rejection; explicitly handles `m*3 ≡ 3*m`.
+- `Karp21NativeBinaryCutLedgerOriginalExact.nativeBinaryCutLedgerSameOriginal`: actual chronological binary endpoint-history, arbitrary starting two-lane ledger, signed bit-token insertion and original `rawSparseScore` for all certificates.
+- `Karp21NativeWholeBinaryVerifierOriginalExact.nativeWholeBinaryVerifierSameOriginalFinFree`: actual complete original binary verifier equals original Fin-free signed Max-Cut on all words/certificates.
+- `Karp21NativeWholeBinaryTypedAcceptanceExact.nativeCanonicalTypedSparseVerifierSameWord`: same real binary program equals original **typed** Fin/Cut N21 decision via existing original theorem.
+- `Karp21NativeWholeBinaryPriorityMachineExact`: executable source actual graph→binary first-enabled N21 state, independent original-wire binary reference step, ordered advance→finish→reject, explicit halted accepted/rejected and same step/cache theorem.
+- `Karp21NativeWholeBinaryStepPotentialExact`, `Karp21NativeWholeBinaryFiniteRunExact`, `Karp21NativeWholeBinaryPriorityRunAcceptanceExact`: real binary first-enabled potential strictly decreases, finite run ≤ parsed edge count+1 top-level steps, complete terminal binary/typed N21 readout.
+- `Karp21NativeBinaryAdderWidthBoundExact`: real carry-adder output bit-width ≤ combined operand widths+1, a genuine F2 sublemma.
+
+**Status is SOURCE-WRITTEN ONLY:** exact-head pinned Agda 2.9 and `parallel_checker` remain unavailable; these proof candidates have not been accepted by the kernel and may require reductions/import/arithmetic repairs. All new owners are imported by the original Karp Golden roots and added to the fail-closed focused referee. Locally reran existing independent original Fin-free vs binary end-to-end differential 134,668/134,668 PASS, n/m+3m binary header 147,070/147,070 PASS, comparator 71,025/71,025 PASS; these test Python mirrors, not the newly written Agda.
+
+**Still truly unpaid:** original event-by-event selected-edge `karpFractranTraceRebuildExact` (terminal acceptance is not a trace); selected original typed FRACTRAN state/step relation if required beyond the binary reference; full F1 tape/cell/head configuration, F2 global intermediate widths/allocations, F3 bit-tape transition simulation, F4 `karpFractranBitMachineClockPolynomial`; G1–G4 actual `PR.polynomialTimeVerifier`, certificate bound and original `PR.InNP`; P1 costed E20 and same-Cell/Bits accepting-run CNF ↔ SAT with original bit clock; P2 original E01–E19/N01–N20 and `CertifiedKarpNetwork`. Separately a universal `SATNotInP` polynomial-time lower bound remains an open mathematical problem. No P≠NP conclusion.
+
+Canonical current proof inventory: `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md` and `Docs/roadmaps/Karp21FRACDASHMachineMaxCut20261109.md`.
+
+
+## 9 November 2026 E1 exact original selected-weight event trace — current
+
+PR #1474 new `Karp21NativeWholeBinarySelectedEventTraceExact.actualFirstEnabledSelectedEvents` actually follows ordered `Machine.Compiled.directStep` on the **real binary original-wire graph/cert/state** and records selected signed-gamma weight tokens, distinguishing a malformed sparse certificate (no valid event trace) from a valid certificate below original threshold W (trace exists). Source theorem `nativeFirstEnabledSelectedEventsSameOriginal` compares full ordered observed signed-ℤ token events with independently original `Trace.rawSelectedTrace` on arbitrary binary source edge/certificate/history/ledger/threshold. New all-original-word `Karp21NativeWholeBinaryTraceRebuildExact.karpFractranTraceRebuildExact` composes B6 original signed graph word equality and that event lemma on the SAME graph/cert, not merely Boolean terminal acceptance. Also corrected actual D1 malformed-word rejection proof's reversed parser equation (`originalGraphRejectsWhenBinaryInitialRejected`). Both event owners Golden-imported/referee-targeted.
+
+**Status: UNCHECKED AGDA SOURCE candidates; exact-head pinned Agda 2.9/`parallel_checker` kernel acceptance is still OPEN.** Further missing selected independent compiled FRACTRAN state/trace transport if applicable; selected physical bit-TM F1–F4 tape/head/width/cost, original `PR.polynomialTimeVerifier` and `PR.InNP`, costed E20/Cell-Bits accepting-run Cook–Levin, remaining original Karp 21 network and separate universal SATNotInP lower bound. No new P≠NP theorem. Canonical current cut: `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md`.
+
+
+## 9 Nov 2026: D2 original raw-list state simulation and W-aware terminal quotient (supersedes earlier "D2 all-state equality open")
+
+New `Karp21NativeBinaryToOriginalRawMachineStepExact.agda`: executable binary state is observed as the ACTUAL ORIGINAL `Karp21FractranOriginalRawListMachineExact.State` with `(Original.RawEdge, SignedMagnitudeBits)` pairs and original chronological Nat-history; `nativeBinaryFirstEnabledNonterminalSameOriginalRawStep` source-writes exact one-step agreement for every nonempty source edge cursor, including malformed/short certificates, endpoint conflicts and signed-ledger insertions. Halt and extra-certificate branches have separate source lemmas.
+
+Important **true negative control**: old original raw-list machine `finish` ignores positive W, but new binary whole-verifier fuses raw-list finish with P≥N+W; at empty ledger and W=1, old machine finishes while new binary rejects. `Karp21OriginalRawVsBinaryTerminalCounterexampleExact.agda` records the source witness and `originalRawFinishedThresholdObservationSameBinaryTerminal` pays the CORRECT threshold-aware terminal observation for all original binary ledgers and W. A literal all-state terminal phase equality is mathematically false: use stuttering/observation, not a fabricated direct step identity.
+
+`Karp21NativeWholeBinarySelectedEventTraceExact.actualFirstEnabledSelectedEvents` now actually follows `Compiled.directStep` for the terminal finish/reject rule as well as edge advance, while retaining the selected-event list on valid below-threshold witnesses. Stronger `scripts/check_karp21_first_enabled_selected_trace.py` reconstructs actual signed-gamma `splitLast` positive/negative magnitude bit tokens and only observes ℤ at emitted events. Independently executed local test: **161,946/161,946 PASS**, including 3,204 valid below-threshold traces and zero-edge W=1. `scripts/check_karp21_original_raw_machine_step.py`: **26,620** full nonterminal observed successor comparisons and **891** threshold-observed terminal states PASS. Regressions included in focused preflight, and Agda source owners imported into both Golden Karp roots/referee.
+
+**Status:** Actual new source-written candidate contracts and finite differentials, NOT pinned Agda 2.9/parallel_checker kernel receipts. Need true compiled FRACTRAN fraction/prime-exponent transition and trace correspondence if independently selected, F1-F4 selected physical bit-TM/tape/head/width/cost and original PR.InNP, original costed E20/Cell-Bits Cook-Levin, complete Karp network. Separate universal SATNotInP lower bound remains OPEN, no P≠NP result. Canonical exact cut: `Docs/roadmaps/Karp21ActualMaxCutBlockers20261109.md`.
