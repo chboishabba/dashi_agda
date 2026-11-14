@@ -135,21 +135,26 @@ wedgeTriangleIsNotBinaryPathTotalAtThree :
 wedgeTriangleIsNotBinaryPathTotalAtThree ()
 
 ------------------------------------------------------------------------
--- 6. Same-object bridge obligation.
+-- 6. Same-object bridge obligation -- positive norm only.
 --
--- A future geometric owner may independently enumerate the actual finite
--- fibres of Q(a,b)=a^2-a*b+b^2.  Promotion to the classical representation
--- theorem requires that independently constructed count to equal the divisor
--- function above for every n.  This interface prevents the divisor formula
--- from being silently relabelled as a geometric enumeration theorem.
+-- The classical representation formula is a theorem for n >= 1.  At n = 0,
+-- the geometric fibre Q(a,b)=0 contains the origin, whereas the positive-
+-- divisor scanner used here has no positive divisor contribution.  Therefore
+-- the old all-Nat bridge was mathematically false at zero.
+--
+-- A future geometric owner must independently enumerate the actual finite
+-- fibres of Q(a,b)=a^2-a*b+b^2 and prove equality with the divisor law on
+-- suc n.  This positive-domain interface is the exact theorem surface.
 ------------------------------------------------------------------------
 
 record EisensteinNormRepresentationBridge : Set₁ where
   constructor eisenstein-norm-representation-bridge
   field
     representationCount : Nat → Nat
-    representationCountAgreesWithDivisorLaw :
-      (n : Nat) → representationCount n ≡ eisensteinDivisorShellCount n
+    representationCountAgreesWithDivisorLawPositive :
+      (n : Nat) →
+      representationCount (suc n)
+      ≡ eisensteinDivisorShellCount (suc n)
 
 ------------------------------------------------------------------------
 -- 7. Claim-strength / cross-pollination boundary.
@@ -176,4 +181,4 @@ canonicalEisensteinLatticeCountingBoundary =
   eisenstein-lattice-counting-boundary
     true true true true true
     false false false false false
-    "One triangular/A2-style carrier supports several distinct observables: graph radius, wedge size, directed path multiplicity, and the chi_-3 divisor shell law. Matching 3/6 structure is not by itself an E6, modular-form, or physical identification; the geometric norm-fibre representation theorem remains an explicit same-object bridge."
+    "One triangular/A2-style carrier supports several distinct observables: graph radius, wedge size, directed path multiplicity, and the chi_-3 divisor shell law. Matching 3/6 structure is not by itself an E6, modular-form, or physical identification. The geometric norm-fibre representation theorem is required only for positive norms; the former all-Nat bridge was intentionally removed because n=0 has a geometric origin point but no positive-divisor shell contribution."
