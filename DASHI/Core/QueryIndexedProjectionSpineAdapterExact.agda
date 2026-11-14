@@ -57,9 +57,11 @@ queryAdequacyDefectRepairRequiresSeparation :
   (defect : Indexed.QueryAdequacyDefect project semantics query) →
   Repair.RefinementRepairs project refine (Indexed.answer semantics query) →
   refine
-      (Coarse.left (queryAdequacyDefectToProjectionCollision defect))
+      (Coarse.left (queryAdequacyDefectToProjectionCollision
+        {project = project} {semantics = semantics} {query = query} defect))
     ≡ refine
-      (Coarse.right (queryAdequacyDefectToProjectionCollision defect)) →
+      (Coarse.right (queryAdequacyDefectToProjectionCollision
+        {project = project} {semantics = semantics} {query = query} defect)) →
   ⊥
 queryAdequacyDefectRepairRequiresSeparation
   {project = project} {semantics = semantics}
