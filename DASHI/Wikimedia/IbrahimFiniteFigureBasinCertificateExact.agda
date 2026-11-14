@@ -4,6 +4,7 @@ open import DASHI.Core.Prelude
 
 import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact as Figure
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact as Orbit
+import DASHI.Wikimedia.IbrahimGeneralFiniteCertificateKernelExact as General
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact as FLN
 
 ------------------------------------------------------------------------
@@ -98,6 +99,67 @@ figureSameBasinForEveryPair :
 figureSameBasinForEveryPair left right =
   trans (figureBasinRepresentativeAlwaysC left)
     (sym (figureBasinRepresentativeAlwaysC right))
+
+------------------------------------------------------------------------
+-- Same original manuscript Figure 2-4 through the GENERAL certificate
+-- interface. The old seven-case witnesses now instantiate a reusable
+-- all-node finite classifier, not a second independent graph theory.
+------------------------------------------------------------------------
+
+figureGeneralCarrier :
+  General.CompleteFiniteCarrier Figure.FigureNode
+figureGeneralCarrier =
+  General.completeFiniteCarrier Figure.allStarts cover
+  where
+    cover :
+      (node : Figure.FigureNode) →
+      General.Listed node Figure.allStarts
+    cover Figure.a = General.listedHere
+    cover Figure.b = General.listedThere General.listedHere
+    cover Figure.c =
+      General.listedThere (General.listedThere General.listedHere)
+    cover Figure.d =
+      General.listedThere
+        (General.listedThere (General.listedThere General.listedHere))
+    cover Figure.e =
+      General.listedThere
+        (General.listedThere
+          (General.listedThere (General.listedThere General.listedHere)))
+    cover Figure.f =
+      General.listedThere
+        (General.listedThere
+          (General.listedThere
+            (General.listedThere
+              (General.listedThere General.listedHere))))
+    cover Figure.g =
+      General.listedThere
+        (General.listedThere
+          (General.listedThere
+            (General.listedThere
+              (General.listedThere
+                (General.listedThere General.listedHere)))))
+
+figureGeneralRepeatWitnesses :
+  General.FiniteOrbitRepeatCertificate Figure.figureFirstLink
+figureGeneralRepeatWitnesses =
+  General.finiteOrbitRepeatCertificate
+    (λ node → General.eventualCycleToCollision (figureEventuallyC node))
+
+figureGeneralCensus :
+  General.VerifiedFiniteFirstLinkCensus Figure.figureFirstLink
+figureGeneralCensus =
+  General.finiteFirstLinkOrbitClassifies
+    Figure.figureFirstLink
+    figureGeneralCarrier
+    figureGeneralRepeatWitnesses
+
+figureGeneralCensusEntrySound :
+  (node : Figure.FigureNode) →
+  Orbit.iterate Figure.figureFirstLink
+    (Orbit.entryHops (General.eventCycle figureGeneralCensus node)) node
+  ≡ Orbit.representative (General.eventCycle figureGeneralCensus node)
+figureGeneralCensusEntrySound =
+  General.terminalCensusMatchesCertificate figureGeneralCensus
 
 ------------------------------------------------------------------------
 -- Explicit scope boundary: the enumeration is of the 7-node
