@@ -307,3 +307,25 @@ Original RH A2 leading source analysis remains fail-closed. No source-specific s
 - Lean RH #50: original selected A2/G3 witness/zero-data source.
 
 Pinned golden local Agda 2.9/Nix and Lean/lake exact-head kernel/axiom receipts were **not available** here; GitHub reported zero PR workflow runs for the new heads. Every new proof body above remains SOURCE-WRITTEN / KERNEL-UNVERIFIED. All downstream Clay terminal endpoints and 43 original YM Round518 physical obligations remain unpromoted.
+
+
+## Round 4 — original R445 attached local-TV proof audit (14 November 2026)
+
+Source-owning branch [YM #1503](https://github.com/chboishabba/dashi_agda/pull/1503) now contains the postulate-free source-written `DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda`, exact rational checker `scripts/check_ym_r445_localized_tv_maxcut_countermodels.py`, eight focused regression tests and full [corrected mathematical ledger](https://github.com/chboishabba/dashi_agda/blob/chatgpt/ym-f19-p0-source-convergence-20261114/Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md). The corrected A/B/C machine gate data is `implementation_round_20261114_4` in this roadmap's paired JSON ledger. **No actual Wilson TV/RG/continuum mass-gap endpoint closed.**
+
+### Decisive mathematical corrections
+
+1. **A original map:** F19's 1024-link Wilson source, positive full effective density and partition identity are genuine, but do not identify the R445 beta(3) 3→1 blocked coarse map with a newly specified *renormalized* beta-target. Existing R445 `originalR445EffectiveCoarseExpectation` compares the actual beta(3) pushforward with a **different** beta(1) bare law; normalization of both units does not imply same nonconstant observables.
+2. **B exterior influence:** for correlated Q on (X,Y), *exterior-only* likelihood changes the interior marginal. Exact counterexample Q=(3,1,1,3)/8, w(y)=(1,3) gives Q_X=(1/2,1/2), P_X=(3/8,5/8), TV_X=1/8 despite no interacting activity touching X. Correct finite decomposition uses the intermediary `M_X=∑_y P_Y(y) Q(X|y)`, with `TV(P_X,Q_X)≤E_{P_Y} TV(P(X|y),Q(X|y))+TV(M_X,Q_X)`. The first term needs a physical source local action comparison; the second an actual **uniform influence/mixing estimate**. Simply dropping the exterior term would assume part of D1.
+3. **B normalized bad fields:** Q_bad→0 does not force P_bad→0 under an unbounded reweight: Q_bad=1/(N+1), weight N yields P_bad=1/2, TV→1/2. Source Bałaban/Wilson bad-field estimates must control the *normalized* effective and target measures, not only a positive Boltzmann penalty.
+4. **B scale summability:** fixed `a_k/L_k=1/4` implies `(a_k/L_k)^2=1/16`, not `16^-k`. A physical envelope `C/(16k)` has divergent dyadic harmonic blocks; a genuine source *per-step* irrelevant contraction or a different summable estimate is necessary.
+5. **C continuum/OS/cluster:** `TV(P_k,Q_k)=0` at every scale does not imply the `P_k` are Cauchy when the `Q_k` alternate. `P=Q` with a fair globally synchronized spin has separated covariance 1/4 at every distance. Positive normalized cylinder probability alone does not imply OS reflection positivity (finite anticorrelated two-time Gram −1). Actual projective consistency, Wilson reflection positivity, source polymer connected correlations and the same OS H spectral gap are independent gates.
+
+**Exact A/B/C remaining declaration names:**
+
+- **A:** `originalF19R445SamePhysicalCoarseMap`, `originalR445F19PushforwardCylinderEquality`, `originalR445TargetCountertermNormalizedDensity`, `originalR445ConditionalKernelDisintegration` (NEW; all OPEN).
+- **B:** `originalR445PhysicalConditionalActionOscillation`, `originalR445BadFieldTwoMeasureNormalizedBound`, `originalR445ExteriorInfluenceKernelBound`, `originalR445PhysicalLocalTVFromConditionalAndOutside`, `originalR445GenuineScaleIrrelevantContraction`, `originalR445LocalTVUniformSummable` (NEW; all OPEN).
+- **A-after-B:** existing `originalPhysicalR445CovarianceFromOneLocalTV`, downstream physical F/G/FG original Wilson consumers; no new epsilon assumptions.
+- **C:** `originalR445OSPositiveProjectiveContinuum`, `originalR445NontrivialInteractingCylinder`, `originalR445OriginalWilsonRootedPolymerCovarianceDecay`, `originalR445SameOSGeneratorPositiveGap` (NEW; all OPEN).
+
+**Independent arithmetic:** 6,561 positive 2×2 conditional-mixture pairs passed; distant reweight, rare bad-field, non-Cauchy zero TV, non-clustering zero TV, negative OS Gram and dyadic harmonic controls passed. Original Agda --safe no-go theorem and eight committed Python tests await exact-head pinned Agda 2.9/CI. Full 43 original YM Round518 leaves remain tracked and OPEN. Maintain source provenance and preserve the other five programme gates unchanged.
