@@ -8,6 +8,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 targets=(
+  DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda
   DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda
   DASHI/Analysis/BishopRiemannAnalyticSetoidExpReuseExact.agda
   DASHI/Foundations/BishopNegativeLogGeometricSourceConvergenceExact.agda
