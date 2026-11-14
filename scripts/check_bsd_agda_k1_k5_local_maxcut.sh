@@ -8,6 +8,7 @@ export AGDA_JOBS="${AGDA_JOBS:-1}"
 files=(
   DASHI/Mathematics/Arithmetic/EllipticSupportedSquareClassSieveExact.agda
   DASHI/Mathematics/Arithmetic/EllipticActualDyadicPrimePlaceExact.agda
+  DASHI/Mathematics/Arithmetic/EllipticCubicValuationParityExact.agda
   DASHI/Mathematics/Arithmetic/EllipticRationalPlaceTwoDescentProducerExact.agda
   DASHI/Mathematics/Arithmetic/EllipticOriginalSelmerCohomologyExhaustionExact.agda
   DASHI/Mathematics/Arithmetic/EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda
@@ -37,6 +38,7 @@ done
 required=(
   'EllipticSupportedSquareClassSieveExact.agda:filteredCodeRationalRepresentativeIsOriginalTorsion'
   'EllipticActualDyadicPrimePlaceExact.agda:actualTwoIsPrimeNat'
+  'EllipticCubicValuationParityExact.agda:originalCubicValuationRegimeEven'
   'EllipticRationalPlaceTwoDescentProducerExact.agda:originalAllPlaceSelmerProjectsToTorsionCode'
   'EllipticOriginalSelmerCohomologyExhaustionExact.agda:originalSelmerGlobalH1ExhaustedByActualTorsion'
   'EllipticShaTwoNotFullShaAgdaNegativeControlExact.agda:vanishingTwoTorsionDoesNotForceGroupTrivial'
