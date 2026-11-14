@@ -66,3 +66,16 @@ Required manifest keys: \`source_author\`, \`source_title\`, \`canonical_url\`, 
 ### Historical algorithm discriminator added 2026-11-14
 
 The 2016 author-hosted manuscript [Figures 2–4](https://compstorylab.org/share/papers/ibrahim2016a/paper/2015-11-wikipedia-network.pdf) defines a seven-node graph `A→B→C→A; D→C; E→C; F→E; G→E`. Its Fig. 2 traversal-visit row counts are `A=B=C=7; E=2; D=F=G=0`. Its Fig. 3–4 traversal funnels are `C=4, E=2`, all other nodes zero. To reproduce those figures, count arrival visits after the starting vertex for noncycle nodes, count all basin starts on cycle vertices for visits, and count *first cycle entry only* for funnels. The printed early pseudocode does not increment the cycle entry, whereas the author source chronology records a 2019 correction. The implementation retains both semantics separately. A passing synthetic figure test would pay only **source-figure algorithm agreement**, not full historical production equivalence. The figure and pseudocode conflict must stay in the attribution ledger rather than one retroactively rewriting the other.
+
+### First-implementation chronology (not validation)
+
+The original author publications above retain their own authorship, source chronology and rights. These commits are **DASHI new-extension source implementation** events, not Agda proof certificates:
+
+| Object | First source commit | UTC implementation time | Australia/Melbourne (AEDT, UTC+11) | Checked status at this event |
+| --- | --- | --- | --- | --- |
+| Finite orbit and revision weld | [58ea2008](https://github.com/chboishabba/dashi_agda/commit/58ea2008baae26aa8d309f0278d5a7722aaed04b) | 2026-11-14 07:57:51 | 2026-11-14 18:57:51 | source-written; no kernel receipt |
+| Multilingual ternary/Hyperfabric weld | [5959d5f](https://github.com/chboishabba/dashi_agda/commit/5959d5f83191aadf79ec3bae56f725c6ffdd5d2a) | 2026-11-14 08:00:13 | 2026-11-14 19:00:13 | source-written; no kernel receipt |
+| Reference census initial implementation | [5f919b4](https://github.com/chboishabba/dashi_agda/commit/5f919b40967654832d4e31cf561297032c97f692) | 2026-11-14 08:03:38 | 2026-11-14 19:03:38 | source-written, original algorithm parity explicitly unpaid; later figure-specific implementation in separate commit |
+| Published Fig. 2–4 Agda reconstruction | [7235671](https://github.com/chboishabba/dashi_agda/commit/72356716f3d1570030c6ccfe4229eb4a914826dc) | 2026-11-14 08:15:01 | 2026-11-14 19:15:01 | source-written; proposed finite reductions not kernel-verified |
+
+These are different events from first validation, PR creation, merge, or any later paper release.
