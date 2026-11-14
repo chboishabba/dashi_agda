@@ -11,6 +11,11 @@ import DASHI.Physics.Electromagnetism.U1ElectromagneticApplicationExact as U1
 import DASHI.Physics.Electromagnetism.RightHandRule369Exact as Orientation
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369HydrogenReducedMassExact as Hydrogen
 import DASHI.Quantum.QuantumMereologySpacetimePromotionExact as Spacetime
+import DASHI.Quantum.EntanglementGeometryMereologyBridgeExact as Entanglement
+import DASHI.Physics.Closure.FormalCompressionUniversalityBridge as PostEntropy
+import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as GlobalCausality
+import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungPeriodPartitionExact as Madelung
+import DASHI.Biology.EpigeneticBodyMemoryBridge as BodyMemory
 
 ------------------------------------------------------------------------
 -- KSW 668: exact OWNER reuse.  Do not copy original mathematical proofs,
@@ -48,6 +53,31 @@ originalQuantumSpacetimeBoundary :
   Spacetime.QuantumMereologySpacetimeBoundary
 originalQuantumSpacetimeBoundary =
   Spacetime.canonicalQuantumMereologySpacetimeBoundary
+
+originalEntanglementSpatialGeometryBoundary :
+  Entanglement.EntanglementGeometryBoundary
+originalEntanglementSpatialGeometryBoundary =
+  Entanglement.canonicalEntanglementGeometryBoundary
+
+originalPostEntropyMDLBoundary :
+  PostEntropy.FormalCompressionBridgeBoundary
+originalPostEntropyMDLBoundary =
+  PostEntropy.canonicalFormalCompressionBridgeBoundary
+
+originalGlobalCausalityAuthority :
+  GlobalCausality.GlobalCausalityAuthorityReceipt
+originalGlobalCausalityAuthority =
+  GlobalCausality.canonicalGlobalCausalityAuthorityReceipt
+
+original369MadelungBoundary :
+  Madelung.MadelungPeriodPartitionBoundary
+original369MadelungBoundary =
+  Madelung.canonicalMadelungPeriodPartitionBoundary
+
+originalBiologicalCausalityGuard :
+  BodyMemory.EpigeneticBodyMemoryGuard
+originalBiologicalCausalityGuard =
+  BodyMemory.NoCausalityClosureClaim
 
 ------------------------------------------------------------------------
 -- Source-indexed physical gates, not fictitious inhabitants.
