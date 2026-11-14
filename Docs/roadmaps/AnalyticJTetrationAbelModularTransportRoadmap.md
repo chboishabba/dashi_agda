@@ -1,0 +1,537 @@
+# Analytic modular j × carrier-parametric Abel transport × complex tetration: roadmap, phases, deliverables and exact lemmas
+
+> **2026-11-10 local winding-one theorem:** The genuine local Koenigs function satisfies `χ(z)=(z-p)u(z)` with `|u(z)-1|<0.368` on the selected disk. By the nonvanishing homotopy `(z-p)(1+t(u(z)-1))`, χ winds exactly once around zero on each sufficiently small loop around p. Thus a globally single-valued `Log χ` on the *whole punctured disk* is impossible; actual Abel coordinates require sectors whose transition differences are integer multiples of `2πi`. This mathematically establishes the local integer topological obstruction, but its native Bishop/Agda analytic log/winding cocycle and global Kneser continuation remain open. The [local proof](AnalyticJTetrationLocalKoenigsTheoremProof20261110.md) and [active cut](AnalyticJTetrationActiveMaxCut20261109.md) contain precise statements.\n\n> **2026-11-10 mathematical local-Koenigs milestone and precise global boundary.**
+> New `scripts/check_analytic_j_tetration_local_koenigs_rational.py` gives a reproducible rational Machin/atanh certificate for a *genuine* principal-log fixed point near `0.318+1.337i`, with strict centre, contraction and geometric-tail inequalities. The full **ordinary complex-analysis** proof, including uniform holomorphic Koenigs convergence, `χ'(p)=1` and `χ(Log z)=χ(z)/p`, is documented in [AnalyticJTetrationLocalKoenigsTheoremProof20261110.md](AnalyticJTetrationLocalKoenigsTheoremProof20261110.md). This is more than a numerical fit; it proves a local analytic theorem by Banach + the integral remainder + holomorphic Weierstrass. It is **NOT yet** the source-native Bishop/Agda realisation, branch-corrected Abel global continuation, conjugate-pair Kneser normalization, or Kouznetsov certification. The full exact active P0–P4 leaves and acceptance policy are in [AnalyticJTetrationActiveMaxCut20261109.md](AnalyticJTetrationActiveMaxCut20261109.md).
+
+> New `DASHI/Moonshine/AbelBishopTetrationNaturalHeightExact.agda` proves (source-written) natural-height uniqueness on the actual Bishop complex exponential setoid and specializes it to the selected Round11 complex exp. This supplies a true all-natural-height normalization test but no complex analytic interpolation. The focused local checker now runs the exact Koenigs rational certificate and includes this module.
+
+> **P2 source audit:** The existing Bishop Machin quarter-angle and Round11 trig convergence already solve source selection, rational tangent and Cauchy convergence; the original quarter-to-sin/cos identity is explicitly marked `conditional`, and `BishopRound11ClassicalTrigObjectWeldExact.canonicalStatus` sets `sameTrigObjectWeldClosed=false`. Neither proves `exp_C(2πi)=1`, original `q(τ+1)≈q(τ)`, or selected Bishop `Δ≠0`. These remain genuine original-source leaves.
+
+> **P4 primary-source attribution:** D. Kouznetsov, *Solution of F(z+1)=exp(F(z)) in complex z-plane*, *Math. Comp.* 78 (2009), DOI `10.1090/S0025-5718-09-02188-7`. Its numerical imaginary-axis integral-equation residual evidence does not supply our required exact selected contour/branch, quadrature/truncation error certificate or an original Agda existence/uniqueness result. P4 remains OPEN.
+
+
+> **Controlling live maximum cut (2026-11-09):** [AnalyticJTetrationActiveMaxCut20261109.md](AnalyticJTetrationActiveMaxCut20261109.md). That document is the active P0–P4 phase/deliverable/dependency checklist; this file preserves the historical detailed declaration ledger. Resolve conflicting statuses in favour of the active cut and an exact-head Agda kernel receipt. New source-written modules are **not** accepted theorem closures.
+
+**2026-11-09 P0 Agda source import repair:** The five new E8 modules incorrectly imported propositional symmetry/transitivity/congruence from `Agda.Builtin.Equality`; these have been changed to `Relation.Binary.PropositionalEquality`. Corrected exact owners: `AbelE8HalfOddShellInvolutionExact`, `AbelE8ThetaParityProjectorExact`, `AbelE8RootE4FirstCoefficientExact`, `AbelE8RootTriadic243CountComparisonExact`, `AbelE8GeneratedRootNormTwoExact`. This is a concrete source-repair tranche, not Agda 2.9 kernel success.\n\n**2026-11-09 unbounded E8 half-coordinate involution:** New `DASHI/Moonshine/AbelE8HalfOddShellInvolutionExact.agda` defines every signed odd doubled coordinate as `±(2m+1)` for arbitrary `m:Nat`, an exact doubled squared norm, the mod-four parity bit, and the sign-flip on the first coordinate. Source-written proofs establish involutivity, norm preservation, parity reversal, and two-sided even-/odd-parity selected shell maps for each `n`, with inverse laws on exact original coordinates. This concretely advances P2e.12 beyond an assumed `H0=H2` witness. The remaining *genuine original* leaves are the lattice-coordinate same-object equivalence, count-of-finite-shells functorial transport, source Bishop theta-series analytic convergence and Jacobi-to-E4 identity, as well as Agda 2.9 kernel acceptance. See [active P2e roadmap](AnalyticJTetrationActiveMaxCut20261109.md).\n\n**2026-11-09 E8 all-index theta projector:** New `DASHI/Moonshine/AbelE8ThetaParityProjectorExact.agda` supplies original Nat-solver proof of the coefficientwise theta parity projector for every shell index *conditional on an explicit half-parity-cancellation witness*. The source-exact all-n algebra reduces the genuine E8 theta equality to the actual half-lattice involution (flip first odd doubled coordinate), identification of the source theta power series, and Jacobi theta-to-E4 (or weight-four modular uniqueness) on the **same Bishop complex carrier**. No analytic/theta identity claimed complete. The source's exact-integer shell regression was extended to independently compare theta2/theta3/theta4 parity-split coefficients for n=0..8. See [active cut P2e.10–16](AnalyticJTetrationActiveMaxCut20261109.md). Agda 2.9 acceptance pending.\n\n**2026-11-09 E8 theta substantive norm-two advance:** New `DASHI/Moonshine/AbelE8GeneratedRootNormTwoExact.agda` computes actual doubled-coordinate squared norms for all 240 generated HalfTrit-indexed E8 roots, includes an inductive soundness proof for its exhaustive Boolean check, counts actual norm-two integer/half shells as 112/128, and establishes agreement with the original Bishop E4 first coefficient (source-written, kernel acceptance still pending). The independent exact integer DP `scripts/check_analytic_j_tetration_e8_theta_shells.py` executed successfully for n=0..8 with theta values 1,240,2160,6720,17520,30240,60480,82560,140400. This exhausts finite shells only and explicitly **does not** close native lattice norm-two completeness, all-n shell identity, analytic E8 theta modularity, global Bishop E4 identification, global Kneser or certified contours. Controlling P2e next leaves and deliverable statuses are in [AnalyticJTetrationActiveMaxCut20261109.md](AnalyticJTetrationActiveMaxCut20261109.md).\n\n**2026-11-09 240↔243 original source reconciliation:** The active [max-cut ledger](AnalyticJTetrationActiveMaxCut20261109.md) now contains P2f.01–07. `AbelE8RootTriadic243CountComparisonExact.agda` consumes the actual generated E8 240-element list, the triadic prior-art exact 3⁴−1=80 and 3⁵=243 results, and proves `240 = 3×80` and `240+3=243`/`243−3=240` in original Agda Nat arithmetic (source-written, unchecked). The independently proved 243-element **punctured Golay radius-two error sphere** is another *distinct* carrier, not an unproven E8/Kernel5 bijection. Full `Θ_E8=E4`, modular (j), a selected 240-subset of 243 and any action preservation remain unpaid.\n\n**2026-11-09 E8/E4 cross-lane expansion:** The controlling [active maximum cut](AnalyticJTetrationActiveMaxCut20261109.md) now includes P2e.01–P2e.09 for the original E8 **root-lattice theta** route. The E8 indexed generator lists have first-shell count 240 and a shape-level duplicate/completeness layer. New `AbelE8RootE4FirstCoefficientExact.agda` links the actual indexed list length to the original Bishop E4 q coefficient `240σ₃(1)` (source-written only; Agda unchecked). Full `Θ_{E8}=E4` requires native lattice/norm identification and every theta coefficient or dimension-one modular form uniqueness. Rank-eight E8 lattice theta (weight 4) must not be conflated with weight-eight Eisenstein `E8=E4²`. Existing all-SL₂(ℤ) unnormalised Delta weight-12 transport and pinned Lean eta²⁴/Delta receipt are additional prior art, **not** a local Bishop nonvanishing/normalization weld.\n\n**2026-11-09 substantive source repair / new donor receipts:** `AbelBishopQSeriesSetoidPeriodTransportExact.originalComplexSeriesLimitExtensional` now invokes existing `BishopFiniteSeriesExtensionalityExact.termwiseEquivalentSeriesHaveEquivalentLimits` (commit `c2fdf65e`), rather than an incorrectly shaped direct convergence-transport call; `AbelBishopKoenigsTrajectoryDifferenceLimitExact.originalBishopKoenigsDifferenceConverges` now supplies the missing limit/convergence pairs in `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` (commit `37ec86cc`). The new `AbelBishopMachinQuarterToQPeriodExact.agda` consumes `BishopMachinQuarterAngleBranchExact.fourTimesQuarterIsMachinPi` to source-write `2*pi_M ≃ 8*theta_M` and pin the Round11 q parameter to Machin pi, **not** a proof of `exp_C(2*pi_M*i)=1` (commit `41598b59`). No new Agda kernel run was performed.
+
+
+**Date:** 2026-11-09  
+**Branch:** `chatgpt/analytic-j-tetration-abel-transport`  
+**Theorem owner:** `DASHI/Moonshine/JInvariantTetrationAbelModularTransportExact.agda`  
+**Source picture:** Dmitrii Kouznetsov, *Tetration analytic extension* (Wikimedia Commons, `File:Tetration_analytic_extension.svg`).
+
+## Objective and exact scope
+
+Join the original analytic modular `j` programme with the analytic tetration image by transporting modular translation invariance through an Abel coordinate for the exponential map:
+
+```text
+   exponential dynamical point w --exp--> exp(w)
+                  | A                      | A
+                  v                        v
+         modular coordinate τ ---T----> τ+1
+                  | j                      | j
+                  v                        v
+             invariant value ----------> same value
+```
+
+The same-object equality is `j(A(exp w)) = j(A(w))`, with iterated and observer-fibre consequences. **Do not identify** (1) Abel summation with Abel's functional equation, (2) finite natural-number tetration with Kneser's analytic tetration, (3) a 27-state observer with an invertible analytic coordinate, or (4) modular j with tetration.
+
+The finite observer only factors through `j ∘ A` when an explicit factorization map exists. The actual prior DASHI structured observer might distinguish more data than modular j; therefore it may not be invariant under exp. This distinction is a hard correctness gate.
+
+## Existing prior art and reuse
+
+| Owner | Reuse | Boundary |
+| --- | --- | --- |
+| `DASHI/Analysis/AbelZeta.agda` | Abel summation, zeta | NOT Abel functional-coordinate construction |
+| `DASHI/Moonshine/ModularCurveJFrickeInterfaceExact.agda` | source/target j, Fricke involution | No general modular T or concrete analytic exp carrier supplied |
+| `DASHI/Moonshine/JInvariantAnalyticJCoarseFineObserverExact.agda` | loss-aware finite observer, fibres | Must establish factorization/equivariance separately |
+| `DASHI/Moonshine/JInvariantAnalyticHyperformChartGluingExact.agda` | Eisenstein q/lattice same-object and analytic atlas | Requires actual parameter-to-fine-point map |
+| `DASHI/Topology/TetrationalGateField.agda` | finite tetration/tower recurrence | Cannot imply holomorphic tetration or continuous heights |
+| `DASHI/Analysis/BishopComplexSeriesConvergenceExact.agda` | constructive complex substrate | Branch, analytic continuation and domain work still required |
+| `DASHI/Moonshine/JInvariantTetrationAbelModularTransportExact.agda` | new conditional safe transport | Needs kernel verification and analytic instantiation |
+
+## Phase plan and exact deliverables
+
+### P0 — Algebraic transport (highest immediate alpha)
+
+**Deliverable:** exact safe Agda owner and a kernel-check receipt.
+
+- [x] `AbelModularExpSystem`: exp, Abel coordinate, modular translation and modular j, with explicit equality laws.
+- [x] `transportedJInvariantUnderExp`: `j(A(exp w)) = j(A(w))`.
+- [x] `transportedJInvariantUnderExpIter`: equality for every natural-number iterate.
+- [x] `observedTransportedJInvariantUnderExp`: transport through a j-value observer.
+- [x] `observedTransportedJInvariantUnderExpIter`: observer equality under all finite exponential iterates.
+- [x] `exponentialPreservesObserverFibre`: finite observer fibres preserved.
+- [ ] **P0.01** Run Agda 2.9 `--safe` on this module and all new transitive imports, record exact command, compiler version, exit status and SHA.
+- [ ] **P0.02** Add separate named regression consumers for exponential iterate 0/1/2 and observer-fibre transport, then kernel-check.
+- [x] **P0.04** Source-write `transportedInversionSquared` and `transportedJInvariantUnderInversion` in `AbelTetrationModularSymmetryExact`, conditional on an actual involution, j-invariance and two-sided section. Kernel acceptance still pending.
+- [x] **P0.05** Source-write `exponentialHasNoFixedPointInAbelChart`: fixed-point-free translation obstructs exp fixed points inside an Abel chart. Kernel acceptance still pending.
+- [ ] **P0.03** Import the proven theorem owner into the selected Moonshine/TOE aggregation path after verifying its import policy and compile cost.
+
+### P1 — Concrete carrier/translation chart and genuine local complex Abel chart
+
+**Deliverable:** a nonempty complex analytic domain and independently justified Abel coordinate.
+
+- [ ] **P1.01** `originalComplexExponentialSameObject`: Bishop complex exponential agrees with the independently selected analytic exponential, including convergence and multiplication law.
+- [ ] **P1.02a** `originalExpFixedPointExclusion`: use the P0.05 obstruction to show the chosen analytic domain excludes all exponential fixed points, or use an atlas whose Abel coordinate is partial at them.
+- [ ] **P1.02** `originalExponentialInvariantAbelDomain`: explicit `D` with `exp(D) ⊆ D` or a partial-domain formulation for exactly the required iterates.
+- [ ] **P1.03** `originalLocalAbelCoordinateExists`: construct `A : D → H` with well-defined chosen branch, upper-half-plane codomain and `A(exp w)=A(w)+1`.
+- [ ] **P1.04** `originalAbelCoordinateBranchIndependence`: prove the claimed invariant is branch-independent where appropriate; otherwise index branch as part of the fibre.
+- [~] **P1.05** `originalAnalyticTetrationRightInverse`: source-written `abelExponentialFromInverseTetration` and `tetrationStepFromInverseAbel` in `AbelInverseTetrationSemiconjugacyExact.agda`, requiring explicit two-sided inverse/recurrence inputs, not genuine Kneser existence. Original analyticity and normalization remain open.
+- [ ] **P1.05a** `originalNontrivialInverseChartAnalyticity`: instantiate on the independently constructed holomorphic Kneser height domain and value range with branch/winding controls.
+- [ ] **P1.05b** `originalKneserNormalizationSource`: establish the selected Kneser normalization using original analytic authority or constructive convergence, including uniqueness on the selected admissible domain.
+- [ ] **P1.05c** `originalAbelCoordinateNondegeneracy`: exclude terminal/singleton or other collapsed chart models from the complex analytic completion gate.
+- [ ] **P1.05legacy** `originalAnalyticTetrationRightInverse`: establish `A(F(z))=z` locally and the corresponding `F(z+1)=exp(F(z))`.
+- [ ] **P1.06** `originalKneserNormalizationUniqueness`: establish the specified Kneser normalization and uniqueness/continuation claims, not just an arbitrary local Abel chart.
+
+**Risk:** a global total analytic `A` into the upper half-plane with exp-invariant domain cannot be assumed. Use partial domain-indexed maps where necessary.
+
+### P2 — Actual modular j instantiation
+
+**Deliverable:** populate P0 from a concrete analytic modular j, rather than an arbitrary periodic map.
+
+- [ ] **P2.01** `originalModularJTranslationInvariance`: prove `j(τ+1)=j(τ)` from the original q-series or Eisenstein model on the upper half-plane.
+- [ ] **P2.02** `originalModularJInversionInvariance`: prove `j(-1/τ)=j(τ)` on its valid domain.
+- [ ] **P2.03** `originalAbelToModularCoordinateSameObject`: identify Abel codomain `H` with the independently constructed modular parameter, not merely with an abstract type.
+- [~] **P2.04** `originalExponentiationJInvariantSameObject`: `originalRendererJUnderExponential`, `originalRendererColourUnderExponential`, `originalRendererObserver27UnderExponential` now source-written using the original `JInvariantFormulaic369RendererExact.jValue`, `JInvariantFormulaic369ModularReplicationExact.jInvariant`, and explicit `RendererAbelWeld` hypotheses. The genuine source-identified Abel map/modular T action still must be supplied.
+- [ ] **P2.04a** `originalRendererAbelWeldInstance`: construct `RendererAbelWeld` for source-selected actual analytic Abel coordinates and independently checked modular j identity; avoid assuming same-source j equality for free.
+- [ ] **P2.04legacy** `originalExponentiationJInvariantSameObject`: instantiate P0 with actual `exp`, `A`, modular `j` and the source-normalization choice.
+- [ ] **P2.05a** `originalModularInversionChartInstance`: discharge the `ModularInversionChart` assumptions using actual modular inversion plus a genuine two-sided Abel inverse on the selected chart (source-written conditional transport now exists).
+- [ ] **P2.05** `originalTransportedSInvolution`: construct `F ∘ S ∘ A` on its proper domain, prove involution and compatibility with the transported invariant. Requires local inverse and domain closure, not only P0.
+
+### P3 — Analytic observer, 369 / pants / hyperfabric
+
+**Deliverable:** factor the exact analytic transported invariant into the prior observer without erasing its fibres.
+
+- [~] **P3.01** `originalStructuredObserverFactorsThroughTransportedJ` **or** a weaker explicit equivariant-square theorem; do not assert factorization if the existing structured observer sees additional data.
+- [~] **P3.02** `originalLocal27UnderExponentiation`: source-written in `AbelOriginalStructuredObserverWeldExact.agda` as a theorem consuming the original structured observer and `localJObserver`, conditional on `OriginalFineObserverAbelSquare`. A true T-equivariance receipt for the selected fine-point observer remains outstanding.
+- [ ] **P3.02a** `originalStructuredFineTranslationInstance`: derive `fineTranslation` from an actual modular-point action, and prove its relationship with the Abel image.
+- [~] **P3.02b** `originalStructuredFineObserverAction`: `AbelOriginalMovingLevelObserverTransportExact.agda` now source-writes genuine original modular cusp-level T-equivariance on 27/9/3 observers via the pre-existing `Level27TranslationLift` and its derived `observer27TranslationCommutes`, `observer9TranslationCommutes`, `level3TranslationDerived`. Still need an actual `OriginalMovingLevelAbelWeld` connecting Abel coordinate values to the original Klein-j renderer points; this source-written theorem is conditional, not a complete structured fine point instance.
+- [ ] **P3.02legacy** `originalLocal27UnderExponentiation`: establish the exact conditional observer update, using the existing structured 27-state owner.
+- [ ] **P3.03** `originalPantsPathTransportNaturality`: commute the certified observer relation through the existing finite PantsPath 3.
+- [ ] **P3.04** `originalAnalyticHyperformSeamCompatibility`: reuse q/lattice chart gluing and preserve the analytic payload outside finite codecs.
+- [ ] **P3.05** `originalFrickeAndTetrationCompatibility`: specify and prove a joint modular/exp square; Fricke is *not* automatically the modular S generator.
+
+### P4 — Original contour and source calibration
+
+**Deliverable:** reproducible comparisons to the Kouznetsov image, not pixel resemblance masquerading as proof.
+
+- [~] **P4.01** `originalTetrationContourLevelSets`: `JInvariantTetrationOriginalComplexContourExact.agda` now source-writes exact **squared-modulus** level sets on the original `ConcreteComplex.normSqC`, plus `nextModulusLevel`; square-root modulus, comparison/positivity, phase branch and original Kneser construction remain open.
+- [~] **P4.02** `originalContourUnderOneHeightShift`: `nextModulusSquared`, `nextModulusFromCartesian` and `nextPhase` are source-written for a chart whose tetration equation is explicit; kernel acceptance and concrete analytic chart remain open.
+- [ ] **P4.03** `originalContourCriticalAndSingularLoci`: identify analytically certified critical/branch loci and separate numerical evidence.
+- [ ] **P4.04** `originalKouznetsovCalibrationReceipt`: record source provenance, normalization, parameter and plotting method; cross-check generated samples.
+- [ ] **P4.05** `originalContourObserverRetainsAnalyticFibre`: verify finite colours/ternary labels do not assert reversible reconstruction of full complex phase.
+
+### P0b — Carrier-parametric Abel transport and reuse of original j no-descent owner
+
+**Deliverables:** `AbelCarrierFixedLocusTransportExact.agda` and `AbelCarrierOriginalJNonDescentBridgeExact.agda`.
+
+- [x] **P0b.01** `fixedFineMapsToFixedCoordinate`: any fine fixed point maps to a fixed point of the selected translation; no characteristic-zero assumption.
+- [x] **P0b.02** `quotientStepInvariant`, `coarseStepInvariant`, `stepPreservesFibre`: invariant base and coarse observers, preserved fibres.
+- [x] **P0b.03** `fineCannotBeFixedWhenTranslationFree`: obstruction conditional on actual fixed-point-free translation.
+- [x] **P0b.04** `coordinateDescentForcesTranslationFixed`, `coordinateCannotDescendWhenTranslationFree`: no global decoder of a translating fine coordinate from its invariant quotient under fixed-point-free translation.
+- [x] **P0b.05** `asOriginalInvariantBaseAttempt`, `originalJNoDescentConsumed`: construct the prior DASHI `JInvariant369LevelNonDescentThroughJExact.InvariantBaseTranslationAttempt` and apply its existing `fibreCannotDescendThroughInvariantBase`.
+- [x] **P0b.06** `asCarrier`, `originalTransportEqualsCarrierTransport`: embed the P0 exponential/modular-j record into generic carriers.
+- [ ] **P0b.07** Kernel-check both owners, investigate legacy unsafe/transitive imports, run negative-control examples where translation *has* a fixed point, and report exact SHA/compiler receipt.
+- [~] **P0b.08** Concrete original level-3/9/27 cusp fibres instantiated in `AbelOriginalLevel3CarrierInstanceExact.agda` and `AbelOriginalTriadicTowerTransportExact.agda`; p-adic, Cayley–Dickson, quaternion and contextual PNF instances remain open. These finite translations are **not** complex exponentiation.
+- [x] **P0b.08a** `level3CoarseInvariant`, `level3CannotBeFixed`, `level3CoordinateCannotDescend`: specialize generic carrier theorem to the original level-3 cusp translation and consume its no-fixed-point proof (source-written, kernel-check pending).
+- [x] **P0b.08c** `level9StepNoFixed`, `level27StepNoFixed`, `level27To9StepNaturality`, `level9To3StepNaturality`, `level27To3StepNaturality`: consume original level-9/27 fixed-point exclusions and prove naturality of the entire existing 27→9→3 tower (source-written; kernel-check pending).
+- [x] **P0b.08d** `level9ObserverRoundTrip`, `level27ObserverRoundTrip`: expose pre-existing same-object observer/residue roundtrips in the new transport owner (source-written; kernel-check pending).
+- [x] **P0b.08b** `identityTranslationHasFixedPoint`, `identityCoordinateDoesDescend`: witness that a fixed-point-bearing identity action permits a decoder (source-written, kernel-check pending).
+- [ ] **P0b.09** Refactor `AbelTetrationModularSymmetryExact.FixedPointFreeTranslation` to consume the generic owner or an adapter; preserve proof semantics while removing duplication.
+
+**Prior-art references:** `DASHI/Moonshine/JInvariant369LevelNonDescentThroughJExact.agda`; `DASHI/Moonshine/JInvariant369PhaseLevelSeparationExact.agda`; `DASHI/Cognition/PNF/HypercomplexRequestedFractranComponentExact.agda`; `DASHI/Mathematics/Algebra/CayleyDicksonRationalComplexQuaternionExact.agda`; `DASHI/Codec/TriadicPAdicCodec.agda`.
+
+**Important negative controls:** ordinary `z ↦ z+1` translations on characteristic-zero complex/p-adic/quaternion carriers are still fixed-point-free; *finite cyclic translation by a nonzero group element is also fixed-point-free despite finite orbits*. A quotient making translation trivial does admit fixed points. Noncommutativity or non-Archimedean topology alone does not settle this issue.
+
+### P1b — Actual fine/quotient correspondence
+
+- [ ] **P1b.01** `originalSelectedFineTranslationSameObject`: define each concrete fine carrier and step action, rather than a nominal arbitrary type.
+- [ ] **P1b.02** `originalSelectedAbelSemiconjugacy`: prove its chosen `A(step x)=T(A x)` or a precisely scoped partial analogue.
+- [ ] **P1b.03** `originalSelectedQuotientInvariant`: prove `q(Tz)=q(z)` on that same carrier.
+- [ ] **P1b.04** `originalFineToCoarseObserverIntertwines`: either prove the existing structured observer factors through `q ∘ A`, or exhibit its nontrivial equivariant action; never conflate these alternatives.
+- [ ] **P1b.05** `originalQuotientFixedLocusCalibration`: distinguish fine fixed points, coordinate fixed points and quotient fixed points and provide witness-level negative controls.
+
+## Completion criteria
+
+1. No `postulate`, holes, unsafe pragmas or circular analytic assumptions disguised as derived theorems.
+2. Every algebraic theorem accepted by the configured Agda 2.9 safe kernel; conditional hypotheses counted explicitly.
+3. The *original* analytic functions, domains, branch choices and same-object equalities are independently established before P1–P4 are marked complete.
+4. Exact name-level acceptance records, negative controls and source attribution accompany each phase.
+5. Any aggregation into `DASHI/Unifier.agda`, `DASHI/Unified/` or `DASHI/EverythingTOESymmetryResolved369.agda` is subject to existing repository dependency governance.
+
+## Current proof status
+
+**P0 and P0b conditional algebraic transport and original-owner non-descent bridge source-written; original level-3/9/27 carrier instances, 27→9→3 naturality, identity negative control and P4's constructed-complex conditional contour shift are source-written, not kernel-checked. Actual nonfinite Abel carrier, P1/P1b/P2/P3 and original Kneser contour realization remain open.** This document is a living phase/deliverable/remaining-lemma ledger; update it in the same commit series as implementation progress.
+
+## 2026-11-09 continuation receipt
+
+- `DASHI/Moonshine/AbelTetrationModularSymmetryExact.agda` adds conditional two-sided modular S transport, `transportedInversionSquared`, `transportedJInvariantUnderInversion`, and `exponentialHasNoFixedPointInAbelChart`.
+- Fixed-point obstruction is a genuine mathematical restriction: if `exp(w)=w` and `A(exp(w))=A(w)+1` in a fixed-point-free translation space, contradiction. This means the analytic domain cannot indiscriminately include exponential fixed points.
+- The S transport assumes a two-sided inverse `section`; the earlier generic P0 theory alone does not provide one.
+- No Agda 2.9 binary is present in this execution environment; neither new module has been kernel checked here. Do not promote its statements to verified proof receipts.
+
+
+## 2026-11-09 carrier-correction implementation receipt
+
+- Source-written `AbelCarrierFixedLocusTransportExact.agda`: carrier `Fine` / `Coordinate` / `Base`, step/translation, Abel semiconjugacy, invariant quotient, observation, fibres, fixed-locus and non-descent consequences.
+- Source-written `AbelCarrierOriginalJNonDescentBridgeExact.agda`: explicitly constructs the pre-existing `InvariantBaseTranslationAttempt` and consumes `fibreCannotDescendThroughInvariantBase`. Imports legacy code and has no `--safe` claim.
+- A fine fixed point forces a *coordinate* translation fixed point; an invariant *base* is not itself a fine fixed point. The implication in general is not the reverse.
+- `originalLocalAbelCoordinateExists` is not solved merely by abstract carrier-polymorphism. Actual Kneser complex tetration requires the original analytic domain, branches, normalization and convergence.
+- Both new owners are **source-written, not kernel-checked** in this session. No executable source, scientific evidence or compiler acceptance has been invented.
+
+## 2026-11-09 concrete-carrier continuation
+
+- `DASHI/Moonshine/AbelOriginalLevel3CarrierInstanceExact.agda` consumes the existing `JInvariant369CanonicalLevelObserverTowerExact.translateLevel3Residue` action and `JInvariant369PhaseLevelSeparationExact.level3TranslationNoFixedPoint` theorem on the original cusp fibre, with a unit-valued invariant quotient.
+- The exact claims are **finite modular-level orbit/quotient facts**, not a concrete solution of the complex Abel functional equation or Kneser normalization.
+- Negative control: an identity coordinate action has fixed points and its coordinate descends through the identity quotient. Thus the non-descent obstruction must never be generalized to all quotient carriers.
+- **Verification gate:** the Agda binary is absent locally. These new source declarations need Agda 2.9 typechecking before any proof-owner promotion. The existing legacy imports may impose additional dependency constraints.
+- **Next highest physical/analytic cut** remains `originalSelectedAbelSemiconjugacy` for a genuine nontrivial analytic exponential carrier, then `originalLocalAbelCoordinateExists`. The finite level-3 instance does not discharge either.
+
+## 2026-11-09 level-9/27 completion cut
+
+- `DASHI/Moonshine/AbelOriginalTriadicTowerTransportExact.agda` adds true source-specific finite level-9 and level-27 AbelCarrier instances, with original cusp translations and constant invariant quotients. This is a finite orbit example, **not** Kneser's holomorphic tetration.
+- `level27To3StepNaturality` composes the original exact 27→9 and 9→3 equivariance witnesses, preserving the 369 tower's actual level structure.
+- Original no-fixed-point results `level9TranslationNoFixedPoint` and `level27TranslationNoFixedPoint` are consumed; observer/residue roundtrips are reexported with local theorem names.
+- Kernel acceptance and transitive import verification remain open. GitHub connector successfully wrote the sources; the local container cannot resolve github.com and has no Agda executable. No compiler status is claimed.
+- **Decisive analytic frontier unchanged:** actual `originalSelectedAbelSemiconjugacy`, `originalLocalAbelCoordinateExists`, `originalExponentiationJInvariantSameObject` and Kneser calibration. Extending the finite tower does not discharge these analytic gates.
+
+## 2026-11-09 original-complex contour continuation
+
+- New `DASHI/Moonshine/JInvariantTetrationOriginalComplexContourExact.agda` consumes the actual `DASHI.Analysis.ConcreteComplex` constructed complex package and `normSqC`; the chart takes an explicit tetration recurrence rather than manufacturing a Kneser function.
+- `nextModulusSquared` and `nextModulusLevel` transport genuine original-carrier squared-modulus contours across one height step. `nextModulusFromCartesian` uses the supplied original `expCartesian` law to express the resulting contour through real exponential, cosine and sine.
+- `nextPhase` is explicitly phase-chart-indexed; no global argument exists without a zero/branch exclusion. The phase-map implementation is **not** an original Kneser argument construction.
+- The original analytic package includes `ConcreteComplex`, `PrincipalComplexLog`, `OrdinaryComplexPolar`, `TerminalConstructedAnalyticModel`; the terminal singleton complex model is **not** a faithful analytic complex field and must not be promoted as Kneser validation.
+- **Still to implement:** `originalComplexTetrationChartInstance` with source-constructed analytic `F`; `originalComplexHeightAdvanceSameObject`, `originalLocalAbelCoordinateExists`, `originalSelectedAbelSemiconjugacy`, `originalModularJTranslationInvariance`, `originalExponentiationJInvariantSameObject`, `originalFiniteObserverTransportSquare`, `originalPrincipalPhaseContourBranch`, `originalKouznetsovCalibrationReceipt`.
+- **Kernel:** this source, like earlier PR additions, remains unverified until an Agda compiler runs. This is a correctness gate, not a CI requirement.
+
+## 2026-11-09 analytic-J / observer continuation cut
+
+- `AbelInverseTetrationSemiconjugacyExact.agda` supplies the **two directions** of the selected two-sided inverse/recurrence correspondence. It is a theorem about a chosen inverse chart, NOT proof that the chart exists or that it is holomorphic. Source-written, not kernel-checked.
+- `JInvariantTetrationOriginalRendererTransportExact.agda` consumes the original formulaic Klein-j renderer and its existing modular replication theorem; proves conditional original `jValue`, colour and 27-state invariance through a sourced modular point action. The `sameSourceJ` field is intentionally a **paid bridge**, not yet supplied by an actual source instance.
+- `AbelOriginalStructuredObserverWeldExact.agda` uses the existing analytic JCoarse/JFine observer and original `localJObserver`; the input `fineObserverTranslation` is **not** automatic from modular `j` invariance. The original level-27 cusp fibre can move under modular T, so a T-invariance assumption may be false for that observer; P3 must allow a nontrivial equivariant action.
+- Kernel-check all three new modules and imports; no compiler receipt yet. P1/P1b/P2/P3 remain substantively open on actual analyticity/source-instance hypotheses; P4 source analytic contour recurrence remains conditional.
+- Exact next highest mathematical cut: a holomorphic nonterminal Kneser Abel chart, or a genuinely source-constructed local Koenigs/Schröder linearization with proven analytic log branch and conjugacy, then an authentic modular-j normalization/observer welding.
+
+
+## 2026-11-09 next mathematical maximum-cut receipt
+
+**New source:** `DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda`.
+
+- [x] `originalMovingLevel27UnderExp`: given a paid Abel-to-original-Klein point square, the original finite level-27 observer rotates under exp via `translateObserver27`.
+- [x] `originalMovingLevel9UnderExp`: the same selected original source induces a moving level-9 observer via `translateObserver9`.
+- [x] `originalMovingLevel3UnderExp`: same-square level-3 translation via `translateTriadic Q.one`.
+- [ ] **P3.06** `originalMovingLevelAbelWeldInstance`: provide actual analytic source-point and prove `sourcePoint (T tau)=translatePoint(sourcePoint tau)` on a selected Kneser Abel chart. The new `OriginalMovingLevelAbelWeld` record requires this as an explicit input; it has NOT been constructed.
+- [ ] **P3.07** `originalStructuredLevel27ObserverIdentifies`: match the original `AnalyticJStructuredObserver.observeLocal27` with the actual cusp-level `canonicalObserver27At`, or produce an explicit counterexample/nonidentification; colour-derived 27 labels are not automatically level-27 lift labels.
+- [ ] **P1.07** `originalHolomorphicAbelDomainWithIterateClosure`: prove a nonempty analytic domain with the required iterate invariance and complex holomorphic coordinate, not just a formally inhabited Set.
+- [ ] **P1.08** `originalKoenigsLinearizationAtSelectedExponentialFixedPoint`: if using a local repelling fixed point route, prove actual local linearization, nonzero multiplier/log-branch choice and the induced Abel chart on a punctured branch domain. The fixed point itself cannot lie in a fixed-point-free additive Abel chart.
+- [ ] **P1.09** `originalKneserGlobalGluingAndNormalization`: prove overlap/monodromy consistency and the specific Kneser normalization rather than declaring any local linearization to be Kneser's tetration.
+- [ ] **P2.06** `originalJSetoidEqualityTransport`: bridge the actual Bishop setoid complex `_≈C_` to the chosen modular renderer equivalence; do not silently substitute intensional `_≡_`.
+- [ ] **P2.07** `originalQSeriesLatticeTranslationAtT`: use the real original `BishopQSeriesLatticeSameObject` and its E4/E6 transport on the selected upper-half-plane parameter to establish the actual (j(τ+1)=j(τ)) same-source property.
+- [ ] **P4.06** `originalTetrationNonzeroArgumentDomain`: build the nonzero/branch-indexed argument map from a real principal-polar authority, with phase and winding changes tracked on overlaps.
+- [ ] **P4.07** `originalKneserContourSamplingErrorBound`: use certified analytic truncation plus domain/branch error bounds; numerical plotting without these remains diagnostic only.
+
+**Critical type/semantics distinction:** current `ConcreteComplex` is a package interface and `TerminalConstructedAnalyticModel` is a singleton witness, not the analytic complex field. Meanwhile `BishopSetoidComplexExact` supplies a genuine Bishop setoid complex with `_≈C_`; a proposed literal `_≡_` bridge must be justified. `ModularCurveJFrickeInterfaceExact` is a modular interface rather than a completed analytic Hauptmodul. The immediate outstanding mathematical input is a genuinely nondegenerate holomorphic Kneser chart and its same-source modular-(j) parameterization.
+
+**Status:** P1, P1b, P2 remain open; P3 original moving-level equivariance is source-written *conditional on Abel-to-fine point selection*; P4 contour transport is source-written *conditional on tetration*. No new source was compiled in this execution pass; safe kernel acceptance and any actual numeric calibration remain open.
+
+## 2026-11-09 source-based Kneser/conformal calibration gate
+
+**Peer-reviewed reference inputs (not internal theorem receipts):**
+
+1. Hellmuth Kneser, *Reelle analytische Lösungen der Gleichung φ(φ(x)) = e^x und verwandter Funktionalgleichungen*, Journal für die reine und angewandte Mathematik **187** (1949), 56–67 (original existence/construction).
+2. Henryk Trappmann and Dmitrii Kouznetsov, *Uniqueness of holomorphic Abel functions at a complex fixed point pair*, Aequationes Mathematicae **81** (2011), 65–76, DOI **10.1007/s00010-010-0021-6**. Their uniqueness criterion selects Kneser's Abel function under specific fixed-point-pair hypotheses; the naked Abel equation does **not** have a unique analytic solution.
+3. Dmitrii Kouznetsov, *Solution of F(z+1)=exp(F(z)) in complex z-plane*, Mathematics of Computation **78** (2009), 1647–1670, DOI **10.1090/S0025-5718-09-02188-7**. Supplies a contour-integral/numerical approach, normalization F(0)=1, and documented precision estimates. This is the source linked to the supplied Wikimedia contour image.
+
+**Exact proof/implementation max-cut (no missing functions hidden behind a theorem name):**
+
+- [ ] **P1.K1** `originalExponentialConjugateFixedPair`: isolate the two selected nonreal exp fixed points and their multipliers on the *original* Bishop complex carrier; prove they satisfy exp(L)=L with complex setoid equality.
+- [ ] **P1.K2** `originalSchroederHolomorphicLocalLinearization`: produce a nonconstant holomorphic χ satisfying χ(exp w)=λχ(w) on a witnessed neighbourhood, with injectivity/nonzero and radius estimates. No abstract `record` instance counts unless the function is actually constructed.
+- [ ] **P1.K3** `originalLogMultiplierBranchAndCocycle`: construct the logarithm branch of χ and λ, prove the overlap cocycle and branch corrections; deduce a valid **local** Abel coordinate A(exp w)=A(w)+1.
+- [ ] **P1.K4** `originalKneserFundamentalRegionGluing`: prove biholomorphic fundamental-region mapping/analytic continuation and monodromy compatibility across the two fixed-point regions.
+- [ ] **P1.K5** `originalKneserRealAxisNormalization`: impose F(0)=1 and analytic reality/monotonicity conditions, then prove the Trappmann–Kouznetsov uniqueness criterion applies to the actual constructed function (no claim that the bare Abel equation has unique solutions).
+- [ ] **P2.K1** `originalUpperHalfPlaneAbelImage`: explicitly identify the open domain where A(w) lies in the upper half-plane. Outside it, ordinary analytic modular j(τ) is *not* automatically defined.
+- [ ] **P2.K2** `originalBishopQSeriesTPeriod`: derive q(τ+1)=q(τ) on the selected original complex carrier via a proof-bearing exp periodicity, and transport E4/E6, Δ and j with nonvanishing denominator and setoid-congruence conditions.
+- [ ] **P3.K1** `originalKneserToModularLevelLift`: supply the selected source-point map and commuting modular T law, then instantiate `OriginalMovingLevelAbelWeld`; compare its actual level-27 observation to the existing JCoarse/JFine local-27 observation without assuming equivalence.
+- [ ] **P4.K1** `originalKouznetsovContourNormalization`: pin the correct source F(0)=1, selected branches and level-value conventions of the actual SVG, including abs(F)=exp(k) and argument contours.
+- [ ] **P4.K2** `originalKouznetsovCertifiedNumerics`: implement paper-faithful integral-equation/iteration with independently bounded truncation and arithmetic errors, then calibrate recorded complex test values against the figure. A visual resemblance is not a proof.
+
+**Scientific caution:** a numerical residual of ~1e-14 reported by the 2009 paper is evidence about *that numerical scheme*, not an Agda certificate of Kneser existence or global uniqueness. The original `BishopSetoidComplexExact` uses setoid equality; converting it to propositional equality or to the terminal complex singleton is not authorized. The published uniqueness theorem requires its exact geometric/holomorphic hypotheses.
+
+**Most decisive outstanding gate:** `originalSchroederHolomorphicLocalLinearization` followed by `originalKneserFundamentalRegionGluing`. Once the concrete Abel chart exists, P1b/P2/P3 transport lemmas become concrete instantiation work; before that they remain conditional.
+
+## 2026-11-09 Schröder-to-Abel compiler and exact formal jet
+
+**New theorem source:** `DASHI/Moonshine/AbelSchroederLogCocycleTransportExact.agda`.
+
+- [x] `originalLogMultiplierBranchAndCocycle`: from a selected Schröder map χ and a *specified, branch-correct* logarithm cocycle, derive the log-level relation at the same fine point; **conditional** on those maps and proofs.
+- [x] `originalSelectedAbelSemiconjugacy`: compose the proved log cocycle with a normalization commuting with the additive successor. **Conditional** on an actual multiplier, nonzero logarithm, branch and source chart.
+- [x] `windingCorrectedAbel`: make the required branch/winding normalization visible and exact. It does not claim all branch corrections vanish.
+
+**New computational diagnostic:** `scripts/analytic_j_tetration_schroeder_formal.py`.
+
+- [x] **P1.K2a** Exact symbolic coefficient recurrence for the formal germ `E_a(t)=a(exp(t)-1)` at a hypothetical fixed point `exp(a)=a`, with multiplier `λ=a`. It computes `χ(E_a(t))=λχ(t) mod t^(N+1)` without floating point.
+- [x] **P1.K2b** Explicit exact finite-jet checks through degree six, run on 2026-11-09 using local SymPy 1.14.0, all six symbolic residual coefficients **zero**.
+- [ ] **P1.K2c** `originalSchroederFiniteJetKernelProof`: translate the exact coefficient recurrence and polynomial identities into Agda's original rational-function/polynomial owners and kernel-check (diagnostic Python is NOT an Agda receipt).
+- [ ] **P1.K2d** `originalExpFixedPointComplexExistence`: prove a nonreal complex fixed point of the genuine Bishop exp and establish `λ^(n-1)≠1` for all `n≥2` in the applicable linearization chart. The finite symbolic rational functions are only conditionally defined away from resonances.
+- [ ] **P1.K2e** `originalSchroederConvergentPowerSeries`: supply a constructive coefficient majorant, explicit convergence radius, nonconstant holomorphic linearization and local injectivity. **Finite jets alone are insufficient.**
+- [ ] **P1.K3a** `originalSchroederNonzeroPuncturedBranch`: select punctured region χ≠0 and genuine logarithm branches with overlap/winding receipts.
+- [ ] **P1.K3b** `originalAbelLogMultiplierNonzero`: source-construct λ-log and its inverse/normalization; prove the actual additive Abel equation in the original complex/setoid semantics.
+- [ ] **P1.K4a** `originalKneserGluingMonodromy`: recover Kneser global/real-normalized Abel chart from the selected conjugate fixed-point pair and matched strips; this is NOT an immediate consequence of local χ.
+
+**Formal coefficients found:**
+
+```text
+c_1 = 1
+c_2 = -1 / (2 (λ - 1))
+c_3 = (2λ + 1) / (6 (λ - 1)^2 (λ + 1))
+```
+
+The degree-four through six expressions and zero residuals are reproducible with `python scripts/analytic_j_tetration_schroeder_formal.py --degree 6`. This is meaningful exact algebra but **does not close** `originalSchroederHolomorphicLocalLinearization`, `originalLocalAbelCoordinateExists`, `originalKneserFundamentalRegionGluing`, `originalRendererAbelWeldInstance`, `originalKneserToModularLevelLift`, or `originalKouznetsovCertifiedNumerics`.
+
+**Verification status:** GitHub source pushed. This environment has no Agda executable. The Python exact-symbolic result was executed locally; Agda theorem sources remain source-written, not kernel-checked. P2 original Bishop-setoid modular `j` and P4 numerical Kneser calibration remain open.
+
+## 2026-11-09 explicit local analytic construction and reproducible receipts
+
+- [x] **P1.K2f — classical local analytic proof-cut:** `Docs/roadmaps/AnalyticJTetrationKoenigsLocalConstructionProofCut.md` provides a concrete local Koenigs-limit proof for the exponential germ at its selected upper complex fixed point. Explicit conditional constants: fixed point p=-W_{-1}(-1), `1.37<|p|<1.38`, disk radius 0.1, logarithmic contraction `q=0.8`, Taylor bound `M<0.311`, and geometric ratio `|p|q²<0.8832`. The complex fixed-point enclosure and complex derivative/holomorphic facts still need formal proof on the Bishop carrier. **This document is not an Agda theorem.**
+- [x] **P1.K2g — high-precision diagnostic:** `scripts/analytic_j_tetration_koenigs_diagnostic.py` executed at mpmath 80-digit working precision; two local Koenigs sequences gave consecutive-iterate differences `2.04529e-12` and `1.02224e-13` at 40 iterations. This is NOT interval-certified.
+- [x] **P1.K3c — source-written conditional log compiler:** `DASHI/Moonshine/AbelSchroederLogCocycleTransportExact.agda`, with `originalLogMultiplierBranchAndCocycle`, `originalSelectedAbelSemiconjugacy`, `windingCorrectedAbel`. These accept a selected branch/source chart; not existence proofs.
+- [ ] **P1.K2h** `originalExpFixedPointComplexExistence`: replace high-precision p diagnostics by Bishop-setoid proof of fixed-point existence, branch identity and enclosure.
+- [ ] **P1.K2i** `originalLogInverseDiskRadiusBound`, `originalLogQuadraticRemainderBound`, `originalKoenigsSequenceGeometricCauchy`: kernel-check the explicit classical local analytic proof on genuine constructed complex numbers, not the terminal singleton model.
+- [ ] **P1.K2j** `originalSchroederHolomorphicLocalLinearization`: instantiate the limit and establish derivative 1/injective local chart on the original Bishop package.
+- [ ] **P1.K3d** `originalLogMultiplierBranchAndCocycleInstance`, `originalSelectedAbelSemiconjugacyInstance`: discharge the branch winding and normalization on actual analytic exponential.
+- [ ] **P1.K4b** `originalKneserConjugatePairGluing`: global fundamental-region construction, monodromy and real normalization remain untouched by the local Koenigs proof.
+- [ ] **P2.K3** `originalBishopQSeriesTPeriod`: no source proof of `exp(2πi)=1` in the chosen Bishop complex equality was identified in current repo search; prove it or use a genuine compatible modular reindexing theorem and transport all nonzero denominators.
+- [ ] **P3.K2** `originalMovingLevelAbelWeldInstance`: selected original modular fine point and level-27 action, not just parameteric conditional data.
+- [ ] **P4.K3** `originalKouznetsovCertifiedNumerics`: original paper integral solver, complex interval arithmetic and branch/phase error bounds remain open.
+
+**Status correction:** Classical local analytic existence via a Koenigs argument is mathematically specified with explicit sufficient inequalities; actual DASHI Agda kernel existence, Kneser-global chart, modular j same-object and certified original contour computation have **not** been completed. All new Agda code is source-written and pending 2.9 checking. Keep every substantive phase OPEN until its original instance and kernel receipts exist.
+
+## 2026-11-09 rational fixed-point certificate and constructive P1 reduction
+
+**New original evidence:** `scripts/analytic_j_tetration_fixed_point_rational.py`. All inequalities below passed using exact `fractions.Fraction` arithmetic (no floating-point comparisons).
+
+- [x] **P1.K1a — rational Banach centre:** `c=318/1000+(1337/1000)i`, `1.374<|c|<1.375`. Finite series intervals (artanh-log with positive tail, arctan alternating tail, Machin π) establish `|Log(c)-c|<3/10000`.
+- [x] **P1.K1b — explicit contraction criterion:** on the closed disk `D(c,1/100)`, `|z|>1.364>4/3`, `|Log'(z)|<3/4`, and `|Log(z)-c|<3/10000+(3/4)(1/100)<1/100`. Ordinary complex Banach contraction yields a unique upper fixed point `Log(p)=p` and `exp(p)=p` with `|p-c|<12/10000`, hence `1.37<|p|<1.38`. **The exact rational inequalities are computed; the analytic identities/Banach theorem are conventional mathematics but have not been kernel-checked in Agda.**
+- [x] **P1.K2k — explicit local Koenigs constants:** `D(p,1/10)`, `q=4/5`, `M<0.311`, `|p|q²<0.8832`, with telescoping geometric Cauchy bound for `p^n(Log^n(z)-p)` in `Docs/roadmaps/AnalyticJTetrationKoenigsLocalConstructionProofCut.md`.
+- [ ] **P1.K1c** `originalRationalLogAtanMachinBoundsAgda`: port precise finite Fraction interval arithmetic, standard analytic series identities and Machin identity to native Bishop real/setoid semantics.
+- [ ] **P1.K1d** `originalBishopLogBanachFixedPoint`: build the actual complete complex closed-disk metric and Banach fixed-point witness in `BishopSetoidComplexExact` with `Log(p)=p`.
+- [ ] **P1.K2l** `originalBishopKoenigsUniformCauchy`: prove the uniform limit and holomorphic derivative/inverse chart in original Bishop analytic owners.
+- [ ] **P1.K3e** `originalPuncturedSectorLogBranchCocycle`: genuine log-branch and winding witnesses for `originalSelectedAbelSemiconjugacy`.
+- [ ] **P1.K4c** `originalKneserConjugatePairGlobalNormalization`: glue the two local fixed-point charts and prove Kneser's original normalization and uniqueness conditions.
+- [ ] **P2/P3/P4** `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalKneserToModularLevelLift`, `originalKouznetsovCertifiedNumerics`: unaffected mathematically; all OPEN.
+
+**Proof promotion boundary:** this is new precise mathematics and reproducible exact arithmetic, not an assertion that the local analytic fixed point is kernel-constructed or that global Kneser tetration is finished. No Agda available. Keep P1/P1b/P2/P3/P4 open pending genuine source construction and acceptance.
+
+## 2026-11-09 independently executed quantitative Cauchy-tail check and Banach reuse audit
+
+**New exact arithmetic file:** `scripts/analytic_j_tetration_koenigs_tail_certificate.py`; committed and executed. It proves via rational arithmetic the identity `β=(69/50)(4/5)^2=552/625`, the exact prefactor `21459/5840`, and finite geometric-sum consistency. Conditional on the original analytic logarithm bounds, the actual uniform estimate is
+
+```text
+|χ(z)-h_N(z)| ≤ (21459/5840)(552/625)^N |z-p|².
+```
+
+For `|z-p|≤1/1000`, exact rational upper bounds are approximately `2.5559894e-8` at N=40 and `1.7779579e-10` at N=80. For `|z-p|≤1/10`, N=200 yields `5.98423596e-13`. These are **conditional analytic majorants**, not globally certified Kouznetsov-contour errors.
+
+**Existing Agda reuse discovered:** `DASHI/Geometry/BanachFixedPoint.agda` and `BanachFixedPointNat.agda` have an ultrametric Banach interface. The ordinary Bishop complex norm is generally not ultrametric, so these cannot discharge `originalBishopLogBanachFixedPoint` by a carrier substitution. Reuse only the abstract fixed-point/no-go pattern, or build an honest ordinary-complete-metric Banach theorem. The original `DASHI/Analysis/BishopSetoidComplexExact.agda` supplies a setoid complex and exponential, while `DASHI/Analysis/RiemannBishopComplexAnalyticCarrierExact.agda` is an ordinary Bishop complex *carrier* plus an abstract analytic-function layer (not an actual holomorphic construction).
+
+**Exact remaining P1 compiler cut (kernel proof):**
+
+- [ ] `originalOrdinaryBishopComplexMetricComplete`: genuine complete metric over Bishop-complex setoid, not a declared package or ultrametric substitution.
+- [ ] `originalOrdinaryBanachContractionFromCauchy`: prove Banach's theorem for that metric with explicit geometric rate.
+- [ ] `originalPrincipalBishopLogAtRationalCentre`: internalize the exact rational log/atan/Machin interval certificates, branch and logarithm semantics.
+- [ ] `originalBishopLogContractionOnRationalDisk`: prove the principal log derivative bound and disk self-map; this plus the ordinary Banach theorem constructs the actual source fixed point.
+- [ ] `originalBishopLogSecondOrderRemainder`: prove M=311/1000 on `D(p,1/10)`.
+- [ ] `originalBishopKoenigsUniformCauchy`: internalize the displayed exact geometric tail and construct the source Bishop limit.
+- [ ] `originalBishopKoenigsHolomorphicLimit`: prove local uniform holomorphicity and derivative 1, then a genuine local inverse.
+- [ ] `originalPuncturedSectorLogBranchCocycle`: prove the nonzero log/winding correction, yielding a local Abel chart.
+- [ ] `originalKneserConjugatePairGlobalNormalization`: global conjugate chart gluing and Kneser normalization; still open.
+
+**P2/P3/P4 status unchanged:** actual upper-half-plane modular-j same-object, moving fine modular lift, and certified original Kouznetsov contour calibration remain OPEN; the new exact tail certificate only concerns the local inverse-log Koenigs sequence.
+
+## 2026-11-09 vendored Bishop reuse / complex Koenigs completion tranche
+
+**Concrete source-written theorem owner:** `DASHI/Moonshine/AbelBishopKoenigsComponentwiseCompletionExact.agda`; commit `3d160c0`.
+
+Direct reused owners (no replacement metric axioms):
+- `DASHI/Foundations/BishopConstructiveRealBridgeExact.agda`: already defines `bishopCauchyComplete`, `bishopLimitUnique`, original `BishopCauchy`, `BishopConvergesTo` on the imported `Real` / `Sequence`.
+- `DASHI/Analysis/BishopComplexSeriesConvergenceExact.agda`: literal real/imaginary Bishop complex pair and componentwise setoid equality `_≈C_`.
+- `DASHI/Analysis/BishopConstructedRealBackendExact.agda`: native `SetoidOrderedCompleteReal` instance with vendored sequence completeness.
+- `DASHI/Analysis/ContractiveCompartmentTailExact.agda`, `DASHI/Analysis/PolynomialGeometricTailDominationExact.agda`, `DASHI/Analysis/TailModulusCauchyBridgeExact.agda`: existing finite-tail domination, tail-smallness and a **conditional** conversion into the backend's Cauchy predicate.
+
+Source-written declarations (require Agda 2.9 kernel run):
+- [x] **P1.B01** `OriginalBishopComplexCauchy`: componentwise original Bishop Cauchy predicates on `Nat→BishopComplex`.
+- [x] **P1.B02** `originalBishopComplexCauchyLimit`: construct an actual Bishop-complex limit via the **existing** vendored real completeness theorem applied to each component.
+- [x] **P1.B03** `originalBishopComplexCauchyConverges`: prove componentwise original Bishop convergence to that limit.
+- [x] **P1.B04** `originalBishopComplexCauchyLimitUnique`: uniqueness in the original Bishop complex setoid, not unjustified propositional equality.
+- [x] **P1.B05** `originalBishopKoenigsLimitFromCauchy`, `originalBishopKoenigsLimitConverges`: specialize the complex completion results to a Koenigs trajectory. The actual Koenigs **Cauchy evidence is still an input**; the declaration must not be mistaken for `originalBishopKoenigsUniformCauchy`.
+
+Remaining exact direct producers, now without a spurious second completeness task:
+- [ ] **P1.B06** `originalBishopKoenigsIterateSameSource`: define the actual `h_n(z)=p^n(Log^n(z)-p)` on the existing `BishopSetoidComplexExact` / `BishopComplexSeriesConvergenceExact` equality surface and specify the source principal-log branch.
+- [ ] **P1.B07** `originalBishopKoenigsIncrementMagnitude`: prove original setoid/ordered-real `|h_{n+1}-h_n|≤(69/50)(311/1000)(552/625)^n|z-p|²` from the original Log remainder and contraction.
+- [ ] **P1.B08** `originalBishopKoenigsFiniteTailToCauchy`: use the existing dominated-tail machinery and establish the actual Bishop `Sequence._isCauchy` (real and imaginary) from the signed complex increments, **not** an opaque `TailVanishesToCauchyBridge` left uninhabited.
+- [ ] **P1.B09** `originalBishopKoenigsUniformCauchy`: prove the preceding step uniformly over the explicit disk; use the P1.B02–B05 completion and the existing `Sequence.fast-cauchy⇒convergent`.
+- [ ] **P1.B10** `originalBishopKoenigsHolomorphicLimit`: establish uniform-local convergence and analytic derivative transport in source semantics; existing `SetoidDerivativeLimitInterchangeBidiExact` explicitly marks such interchange as still conditional.
+- [ ] **P1.B11** Run `agda --safe` (pinned version and imports) on the new owner, record exact SHA, errors/acceptance and relevant preflight checks. **Not run here; no Agda executable.**
+
+**Correction to the earlier max-cut wording:** DASHI *already has* vendored Bishop Cauchy completeness and componentwise complex convergence. We do not need to construct a second unrelated completeness theory merely because `DASHI/Geometry/BanachFixedPoint.agda` is ultrametric. The outstanding analytic work is the **complex principal-Log contraction**, the genuine Koenigs increment-to-Cauchy conversion and uniform holomorphic limit (plus global Kneser); the independent ordinary Banach theorem may be specialized/constructed from the vendored metric if that fixed-point step cannot be reduced directly to the Cauchy iteration.
+
+**Other phases unchanged:** Kneser conjugate-pair gluing, punctured-sector logarithm cocycle, Bishop q-series T-period + renderer identification, original moving fine-level lift, and certified Kouznetsov numerics are still OPEN. No theorem status is promoted solely by constructing an abstract record, a Python receipt or a source-written Agda function.
+
+## 2026-11-09 native Bishop absolute-increment convergence compiler
+
+**Implementation:** `DASHI/Moonshine/AbelBishopKoenigsIncrementSeriesExact.agda` (new source written and pushed).
+
+This **reuses** the original Murray/Bishop `Sequence.absolute⇒isConvergent` and `Sequence.fast-convergent⇒cauchy`, via `DASHI/Foundations/BishopConstructiveRealBridgeExact.agda`, together with original complex componentwise convergence and P1.B02–B05. It does not create a new metric or a new completeness axiom.
+
+- [x] **P1.B12** `originalBishopKoenigsIncrementPrefix`: form actual Bishop series partial sums of the real and imaginary increment sequences on the native complex-pair carrier.
+- [x] **P1.B13** `originalBishopKoenigsFiniteTailToCauchy`: from existing native componentwise **absolute series convergence**, derive original Bishop `Sequence._isCauchy` of both signed partial-sum components. This is the genuine native tail/Cauchy transfer once the absolute majorant is proved.
+- [x] **P1.B14** `originalBishopKoenigsIncrementLimit`, `originalBishopKoenigsIncrementLimitConverges`, `originalBishopKoenigsIncrementLimitUnique`: construct and characterize the unique source Bishop complex limit, using native completeness/equality.
+- [ ] **P1.B15** `originalBishopKoenigsIncrementMagnitude`: prove for each actual source logarithmic Koenigs increment the complex modulus bound `(69/50)(311/1000)(552/625)^n |z-p|²`; do **not** substitute the measured Python residual.
+- [ ] **P1.B16** `originalBishopKoenigsComponentAbsoluteSummability`: convert the actual complex-norm geometric domination into both real/imaginary `SeriesOf_ConvergesAbsolutely`, using the existing Bishop ratio/comparison/series tail authorities and explicit radius certificate.
+- [ ] **P1.B17** `originalBishopKoenigsPrefixSameSource`: prove in the literal Bishop complex setoid that the original finite Koenigs sequence `h_N(z)` equals `h_0(z)+Σ_{n<N}(h_{n+1}(z)-h_n(z))` (beware equality is `_≈C_`, not `_≡_`).
+- [ ] **P1.B18** `originalBishopKoenigsUniformCauchy`: instantiate B13–B17 uniformly on the original punctured/closed disk, with the actual principal-log map and branch/radius hypotheses discharged; not just a pointwise absolutely summable arbitrary increment.
+- [ ] **P1.B19** `originalBishopKoenigsHolomorphicLimit`: apply a genuine native local-uniform-holomorphic convergence theorem and prove the Schröder equation and inverse derivative.
+- [ ] **P0.Accept** Typecheck new and transitive Agda modules with the pinned Agda 2.9 checker; none of the newly written owners in this series is yet kernel-accepted.
+
+Other phase gates stay exactly OPEN: `originalKneserConjugatePairGlobalNormalization`; `originalPuncturedSectorLogBranchCocycle`; `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`; `originalMovingLevelAbelWeldInstance`; `originalKouznetsovCertifiedNumerics`.
+
+**Execution receipt:** locally executed the exact rational fixed-point and Koenigs-tail scripts in this continuation and both PASS. These receipts certify their finite rational arithmetic only and are not Agda acceptance or the complete analytic P1 theorem.
+
+
+## 2026-11-09 actual Bishop exponential-to-Koenigs carrier weld
+
+Two new source owners:
+- `DASHI/Moonshine/AbelBishopOriginalComplexCarrierWeldExact.agda` (commit `59ccaeec`) directly identifies the two original Bishop complex record presentations **by two explicit inverse maps**, not by asserting propositional equality of their types. The one from `BishopSetoidComplexExact` owns the **actual power-series exponential**, and the one from `BishopComplexSeriesConvergenceExact` owns the original Murray/Bishop componentwise Cauchy completion. It proves round-trips, addition/subtraction/multiplication/zero/one preservation, setoid equivalence transport and `originalBishopExpOnSeriesCongruent` via the source's actual `expCongruent`.
+- `DASHI/Moonshine/AbelBishopOriginalExponentialIteratesExact.agda` (commit `b8b88b6e`) gives source-exponential finite iterations in both presentations and proves the source's setoid congruence and `originalBishopExpIterSameSource` for all finite iteration counts.
+
+Concrete declarations now source-written, requiring kernel acceptance:
+- [x] **P1.B20** `toSeries`, `toExponential`, `toExpAfterSeries`, `toSeriesAfterExp`.
+- [x] **P1.B21** `originalExpEquivalenceToSeries`, `originalSeriesEquivalenceToExp`, and original complex +-*/zero/one transport.
+- [x] **P1.B22** `originalBishopExpOnSeries`, `originalBishopExpOnSeriesCongruent`, `originalBishopExpSameSource`: genuine original Bishop setoid complex power-series exponential, no fresh uninterpreted exp.
+- [x] **P1.B23** `originalBishopExpIter`, `originalBishopExpSeriesIter`, both setoid congruence lemmas, `originalBishopExpIterSameSource`.
+
+The remaining real analytic cut, not concealed by these adapters:
+- [ ] **P1.B24** `originalBishopPrincipalLogOnSeries`: supply an actual principal-log function on an explicitly defined nonzero/cut-avoiding Bishop complex domain, with a genuine `Exp` inverse proof. The currently inspected `PrincipalComplexLog` package is an interface for a separate generic constructed complex; a source-owning Bishop setoid implementation is still required.
+- [ ] **P1.B25** `originalBishopLogInverseDiskIteration`: prove the selected source principal log is a self-map/contraction of the rational disk from the explicit rational enclosure.
+- [ ] **P1.B26** `originalBishopKoenigsIncrementMagnitude`: build `h_{n+1}-h_n` from the actual Bishop principal-log iteration and establish the `552/625` geometric majorant.
+- [ ] **P1.B27** `originalBishopKoenigsComponentAbsoluteSummability`: use native Bishop comparison/absolute convergence on the actual increments, then feed the existing `AbelBishopKoenigsIncrementSeriesExact.originalBishopKoenigsFiniteTailToCauchy`.
+- [ ] **P1.B28** `originalBishopKoenigsPrefixSameSource`: prove finite telescoping in native `_≈C_`, then identify the actual (p^n(\Log^n(z)-p)) prefix with the proven Cauchy increment series.
+- [ ] **P1.B29** `originalBishopKoenigsUniformCauchy`: finish the disk-uniform Cauchy estimate and analytic limit, then branch-corrected Abel and Kneser global continuation.
+- [ ] **P0.B30** Agda 2.9 source + transitive import kernel check, including definition reduction and setoid equality. No checker run in this response.
+
+No shortcut to other open phases: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics` remain OPEN. The concrete exponential iterations are not tetration inverse nor Kneser normalization.
+
+
+## 2026-11-09 soundness repair: carrier fixed-point-freedom
+
+In `DASHI/Moonshine/AbelCarrierFixedLocusTransportExact.agda` commit `9b333d4c`, the previous `FixedPointFree` record had a caller-selected `Empty : Set`, so its alleged contradiction was potentially an inhabited set and did **not** certify actual fixed-point freedom. This was mathematically too weak. The record now has a concrete constructorless `data Empty : Set where` as the conclusion of `contradiction`, `fineCannotBeFixedWhenTranslationFree` and `coordinateCannotDescendWhenTranslationFree`. This is a **logical soundness correction**, not a new proof of any original analytic no-fixed-point hypothesis. Agda kernel acceptance still pending. The existing original level-3 no-fixed-point lemma targets its distinct original empty type and does not become automatically convertible to this new constructorless type without an explicit elimination adapter.
+
+## 2026-11-09 maximum-cut continuation — original Bishop finite telescoping
+
+**New original proof owner:** `DASHI/Moonshine/AbelBishopKoenigsFiniteTelescopingExact.agda`, commits `463dce40`, `7832fced`. Reuses the actual vendored Murray/Bishop `Sequence.SeriesOf`, `RealProperties.ℝ-Solver` and `BishopComplexSeriesConvergenceExact`/native complex arithmetic.
+
+- [x] **P1.B28a** `originalBishopFiniteScalarTelescope`: by induction, original scalar finite increments telescope in Bishop setoid equality:
+  `SeriesOf (λn → h(n+1)-h(n)) N ≃ h(N)-h(0)`.
+- [x] **P1.B28b** `originalBishopComplexStepDifference`: literal original complex step increment `h(n+1)-h(n)`, not uninterpreted user-supplied contributions.
+- [x] **P1.B28c** `originalBishopKoenigsPrefixSameSource`: the real and imaginary native Bishop finite-prefix equalities combine into `Complex._≈C_` for the original complex increment series. Requires no analytic convergence, and does not replace `_≈C_` with propositional equality.
+- [ ] **P1.B28d** Kernel-check these three declarations with pinned Agda and transitive vendor imports. **Source-written, unchecked** in this pass.
+
+With P1.B13 (native absolute series to Cauchy), P1.B28c (same-source finite telescoping), and P1.B02 (vendored componentwise complex completeness), the remaining actual analytic leaves are sharply localized:
+- [ ] **P1.B24** `originalBishopPrincipalLogOnSeries`: source-native principal logarithm, explicit cut avoidance and inverse.
+- [ ] **P1.B25** `originalBishopLogInverseDiskIteration`: source-native disk fixed point/contraction and quadratic remainder.
+- [ ] **P1.B26** `originalBishopKoenigsIncrementMagnitude`: actual bound, without importing numeric Python tests as proofs.
+- [ ] **P1.B27** `originalBishopKoenigsComponentAbsoluteSummability`: geometric comparison to both native Bishop real absolute series.
+- [ ] **P1.B29** `originalBishopKoenigsUniformCauchy`: instantiate B13/B28c/B02 uniformly with the real original analytic trajectory, then prove the uniform holomorphic limit.
+- [ ] **P1.K4c** `originalKneserConjugatePairGlobalNormalization`, plus **P1b** `originalPuncturedSectorLogBranchCocycle`, **P2** `originalBishopQSeriesTPeriod`/`originalRendererAbelWeldInstance`, **P3** `originalMovingLevelAbelWeldInstance`, **P4** `originalKouznetsovCertifiedNumerics`.
+
+**No theorem overclaim:** telescoping is a finite algebraic theorem. It does not produce Kneser's holomorphic function. The main high-alpha frontier remains the *actual original Bishop principal logarithm with quantitative disk estimates*; all new Agda sources are awaiting local Agda 2.9 kernel acceptance.
+
+## 2026-11-09 highest-alpha Bishop comparison / summability continuation
+
+**New source-written module:** `DASHI/Moonshine/AbelBishopKoenigsGeometricAbsoluteExact.agda`, commit `b31602de`. No manufactured convergence or theorem-field: it actually invokes the existing native Bishop `Sequence.proposition-3-5` comparison theorem and the proven `BishopPolynomialGeometricDominationConvergenceExact.scaledGeometricSeriesConvergent`. Its subject is the **original componentwise Bishop complex series**, not the unrelated generic `ConcreteComplex` carrier.
+
+- [x] **P1.B27a** `OriginalBishopGeometricComponentBounds`: precise original Bishop-real `|Re increments(n)|≤Mρ^n` and `|Im increments(n)|≤Mρ^n` proof obligations, with the source `BishopScaledGeometricInputs` requiring nonnegative M and ratio 0≤ρ<1.
+- [x] **P1.B27b** `originalBishopGeometricAbsoluteFromBound`: uses actual `Sequence.proposition-3-5` and Bishop absolute-value nonnegativity/idempotence to derive `SeriesOf_ConvergesAbsolutely` from the pointwise bound. No new ratio-test theorem or completeness axiom.
+- [x] **P1.B27c** `originalBishopKoenigsComponentAbsoluteSummability`: assembles the native original Bishop complex componentwise absolute-convergence witness.
+- [x] **P1.B27d** `originalBishopKoenigsGeometricCauchy`: reuses `AbelBishopKoenigsIncrementSeriesExact.originalBishopKoenigsFiniteTailToCauchy` without assuming absolute-convergence evidence as an input; it derives evidence from quantitative componentwise geometric bounds.
+- [x] **P1.B27e** `originalBishopKoenigsGeometricLimit`, `originalBishopKoenigsGeometricLimitConverges`: consume the previously built native Bishop complex completion machinery.
+- [ ] **P1.B27f** Kernel-check the new module/transitive imports; all source-written results above remain unverified by Agda 2.9.
+- [ ] **P1.B26 — physical/original analytic producer unchanged:** `originalBishopKoenigsIncrementMagnitude`. Build the actual complex principal-log trajectory and prove the geometric upper bound as a Bishop norm inequality; derive the real/imaginary bounds consumed by B27a. **This is the first genuinely unpaid quantitative inequality.**
+- [ ] **P1.B29 — genuine local uniform convergence:** derive disk-uniform `originalBishopKoenigsUniformCauchy` and the *holomorphic* limit using native function/derivative convergence, after B26. The B27e pointwise sequence limit does not by itself prove local uniform holomorphicity.
+- [ ] **Global P1 / P1b / P2 / P3 / P4:** unchanged: `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics`.
+
+**Reuse precedence established:** original vendored real/complex sequence completion → original finite signed telescoping → original scaled-geometric comparison → actual original logarithm increment estimate. Do not reopen an unneeded separate 'build Bishop completeness' workstream. The Agda kernel and log-specific proofs remain the adjudicators.
+
+## 2026-11-09 exact geometric bound → actual trajectory convergence
+
+**Source-written additions:**
+1. `DASHI/Moonshine/AbelBishopKoenigsGeometricAbsoluteExact.agda`: native Bishop comparison theorem turns a proved original componentwise bound `|Re δ_n|,|Im δ_n| ≤ Mρⁿ` and source `BishopScaledGeometricInputs M ρ` into true `Sequence.SeriesOf_ConvergesAbsolutely` for both components, without assuming summability. It feeds the existing componentwise Cauchy and unique-limit construction.
+2. `DASHI/Moonshine/AbelBishopKoenigsTrajectoryDifferenceLimitExact.agda`: combines source-native finite Bishop telescoping with `Sequence.xₙ≃yₙ∧xₙ→x₀⇒yₙ→x₀` to transfer the increment-series convergence onto the **literal original trajectory** `h_N-h_0`, componentwise in Bishop setoid equality.
+
+**New/advanced precise lemmas:**
+- [x] **P1.B31** `originalBishopGeometricAbsoluteFromBound` — Bishop absolute convergence from geometric component magnitude bound via native comparison.
+- [x] **P1.B32** `originalBishopKoenigsComponentAbsoluteSummability` — assemble original Bishop complex absolute-series witness.
+- [x] **P1.B33** `originalBishopKoenigsGeometricCauchy`, `originalBishopKoenigsGeometricLimit`, `originalBishopKoenigsGeometricLimitConverges` — native Cauchy/limit once a geometric component bound is proved.
+- [x] **P1.B34** `originalBishopDifferenceTrajectory`, `originalBishopKoenigsDifferenceLimit`, `originalBishopKoenigsDifferenceConverges` — convergence of `h_N-h_0` rather than merely an anonymous increment-series prefix, using original Bishop finite telescoping/extensional limit transport.
+- [ ] **P1.B35** `originalBishopKoenigsIncrementMagnitude`: produce the **real original principal Log** on a rigorously cut-avoiding Bishop-complex disk and prove the analytic increment inequality; convert that complex magnitude into the two source componentwise geometric bounds consumed by B31–B34.
+- [ ] **P1.B36** `originalBishopKoenigsUniformCauchy`: parameterize B31–B34 by the actual selected source disk and prove a **common** modulus of convergence across all points in it, together with a holomorphic limit.
+- [ ] **P1.B37** Kernel-check all new modules and transitive imports with the pinned Agda 2.9 checker. Source-written is NOT a kernel receipt.
+- [ ] **P1.K4 / P1b / P2 / P3 / P4:** `originalKneserConjugatePairGlobalNormalization`, `originalPuncturedSectorLogBranchCocycle`, `originalBishopQSeriesTPeriod`, `originalRendererAbelWeldInstance`, `originalMovingLevelAbelWeldInstance`, `originalKouznetsovCertifiedNumerics` all still open.
+
+**High-alpha frontier sharpened:** The remaining conditional input to the native Bishop convergence lane is now a single original **complex principal-log iterate magnitude bound** (plus a proof that it holds uniformly across the source disk). Reuse and real/imaginary completion are already source-written; no new generic completeness/tail assumption is warranted.
+
+**Verification:** All new Agda declarations are source-written, kernel-check pending. Previous rational/Koenigs scripts are diagnostics or exact arithmetic certificates under analytic hypotheses, not evidence of the full mathematical Kneser claim.
+
+## 2026-11-09 punctured and q-series prior-art reconciliation / first native T-period compiler
+
+**Existing owners found and inspected:**
+- `JInvariantPuncturedLatticeReindexExact.agda`: actual `SL₂(ℤ)` reindexing of `ℤ² ∖ {(0,0)}`, including forward/inverse nonorigin preservation.
+- `JInvariantBishopPuncturedLatticeEisensteinCompilerExact.agda`: native Bishop raw/normalized Eisenstein modularity; the `BishopQSeriesPuncturedLatticeSameObject` interface requires real Fourier E4/E6 equality. Its `canonicalPreferredPuncturedEisensteinFrontier` explicitly records `concretePuncturedAbsoluteSumPaidHere=false`, `concreteG4G6NormalizationConstantsPaidHere=false`, `qSeriesEqualsNormalizedLatticePaidHere=false`.
+- `JInvariantBishopUnitDiskEisensteinCompletionExact.agda`: original Bishop `E₄(q)`, `E₆(q)` with source `BishopUnitDiskQ`, certified componentwise absolute convergence and limits.
+- `JInvariantBishopUpperHalfPlaneRadiusExact.agda`: original real bound `0<exp_B(-2π_B Imτ)<1` and E4/E6 majorant convergence for `Imτ>0`. **π_B (Machin) must still be identified with the complex trig π used by the original q exponential.**
+- `DASHI.Analysis.PrincipalComplexLog.agda` and `PrincipalComplexLogRealization.agda`: branch-aware **constructed-complex package interfaces**, not a supplied principal logarithm on original Bishop setoid complex.
+- `DASHI.Foundations.BishopExponentialCauchyProductExact.agda`: existing Bishop real exponential addition product theorem; no original Bishop complex `exp_C(2πi)=1` was identified.
+
+**Important disambiguation:** puncturing the integer lattice at the origin to define Eisenstein sums is not the same as removing the exponential fixed point / complex branch cut to define a local Abel logarithm. The former is source-written/proved separately; it does NOT close `originalPuncturedSectorLogBranchCocycle`.
+
+**New source-written module:** `DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda`, commit `4fa7d228`, consumes the already-constructed Bishop unit-disk Eisenstein limits, not a redefined E4/E6 or invented convergence carrier:
+- [x] **P2.Q01** `originalE4TermCongruent`, `originalE6TermCongruent`: source-native finite E4/E6 term congruence from `q ≈C r`.
+- [x] **P2.Q02** `originalComplexSeriesLimitExtensional`: original vendored Bishop termwise series extensionality and uniqueness of limits for both complex components; retains setoid equality.
+- [x] **P2.Q03** `originalBishopE4TailSetoidInvariant`, `originalBishopE6TailSetoidInvariant`: prove invariance of actual source Bishop E4/E6 tail limits under equal q.
+- [x] **P2.Q04** `originalBishopE4SetoidInvariant`, `originalBishopE6SetoidInvariant`: transport the full normalized E4=1+tail, E6=1-tail values.
+- [x] **P2.Q05** `originalBishopQSeriesTPeriodE4`, `originalBishopQSeriesTPeriodE6`: original source E4/E6 period **conditional only on** a genuine same-source `qAt(Tτ)≈CqAt(τ)` and real unit-disk proofs. That period witness is a field in `OriginalBishopQPeriodSource` and has **not** been instantiated.
+- [ ] **P2.Q06** `originalBishopComplexExpAddition`: transport already existing real Bishop exponential product and sine/cosine addition identities into original `BishopSetoidComplexExact.expC`; do not assume trig identities which have not been proven for the chosen `BishopSetoidComplexTranscendentals`.
+- [ ] **P2.Q07** `originalBishopComplexTwoPiPeriod`: identify the real Machin π with the complex sine/cosine period `π` in the *same* original Bishop setoid complex, then prove `exp_C(2πi)≈1`.
+- [ ] **P2.Q08** `originalBishopQAtTranslationPeriod`: construct genuine `q(τ)=exp_C(2πiτ)` and actual `q(τ+1)≈q(τ)` using Q06/Q07, domain positivity, setoid congruence and explicit period action.
+- [ ] **P2.Q09** `originalBishopQSeriesTPeriod`: instantiate `OriginalBishopQPeriodSource` with Q08, obtaining E4/E6 T-invariance and the original unit-disk radius evidence; currently an uninstantiated same-source input.
+- [ ] **P2.Q10** `originalBishopJInvariantFromE4E6`: prove numerator/denominator and Δ/j formation in Bishop setoid, nonvanishing of Δ, and quotient congruence; then `originalRendererAbelWeldInstance` links the original Abel chart and renderer.
+- [ ] **P2.Q11** `originalBishopPuncturedFourierSameObject`: discharge the already-owned `BishopQSeriesPuncturedLatticeSameObject` on the actual punctured absolutely convergent lattice sum and correct G4/G6 normalization constants, to get full modularity beyond generator T.
+- [ ] **P2.Q12** Kernel-check new module and all transitive imports. The entire new Q01–Q05 tranche is SOURCE-WRITTEN only and not Agda 2.9 kernel-accepted.
+
+**Priority by max-cut:** P1 original Bishop principal Log / Koenigs increment remains the analytic critical path to a nontrivial Kneser Abel chart. P2 Q06–Q08 can proceed independently using established Bishop trig/exponential owners. P3 original moving fine observer and P4 numerical certification still depend on the actual selected analytic source.
+
+**No false gate closures:** source-written code and conditional q-period instances are not the same as proving `q(τ+1)=q(τ)` on the original Bishop upper-half-plane. Global Kneser and actual contour certification remain open.
+
+## 2026-11-09 source-selected Bishop q(τ) and T-period kernel boundary
+
+**New source-written file:** `DASHI/Moonshine/AbelBishopOriginalQParameterExact.agda`, commit `e63064e4`.
+
+Unlike an opaque `OriginalBishopQPeriodSource` field, this defines the literal original Bishop complex
+`q_T(τ) := BishopSetoidComplexExact.expC T (2 · (i · piC(T)) · τ)`,
+where `T = BishopRound11MachinSetoidComplexInstanceExact.round11MachinTranscendentals inputs` pins real exponential, sine, cosine and `pi=Machin.bishopMachinPi` to actual Round11 source functions. It transports its value to the same native Bishop complex series carrier previously used in `JInvariantBishopUnitDiskEisensteinCompletionExact`.
+
+- [x] **P2.Q13** `originalTwoPiI`, `originalBishopQAt`: selected original Bishop complex expression, not an abstract parameterization.
+- [x] **P2.Q14** `originalBishopQAtCongruent`: literal complex power-series exp preserves Bishop setoid congruence, reusing source `expCongruent` and `mulCongruent`.
+- [x] **P2.Q15** `originalBishopQAtForSeries`, `originalBishopQAtSeriesCongruent`, `originalBishopQAtSourceIdentified`: same-source complex carrier weld for already-existing E4/E6 q-series and their convergence owners.
+- [x] **P2.Q16** `originalRound11MachinQAt`, `originalRound11MachinQAtForSeries`: pin source `Round11BishopCutset` and actual Bishop Machin pi.
+- [ ] **P2.Q17** `originalBishopRound11MachinPiTrigPeriod`: prove the *specific* Bishop Machin value in Round11 has `sin(2*pi)=0`, `cos(2*pi)=1`, and that the selected real exponential has `exp(0)=1`; the existing Round11 source receipt marks Machin pi = classical trigonometric pi as **conditional**. This must not be inferred from numerical Archimedes bounds.
+- [ ] **P2.Q18** `originalBishopComplexExponentialAddition`: derive true native complex exp additive law from existing Bishop real exp Cauchy-product and Bishop sine/cosine addition formulae (identify and reuse originals).
+- [ ] **P2.Q19** `originalBishopQAtTPeriod`: prove `q_T(τ+1)≈Cq_T(τ)` from Q17–Q18 using same-source complex algebra and explicit translation.
+- [ ] **P2.Q20** `originalBishopQAtNormSquareRadius`: prove `normSqC(q_T(τ))≈r²` with `r=exp_B(-2*pi*Imτ)`, using the actual trig Pythagorean identity; combined with `JInvariantBishopUpperHalfPlaneRadiusExact.qRadiusUnitInterval` this constructs `BishopUnitDiskQ` without inventing a radius record.
+- [ ] **P2.Q21** `originalBishopQSeriesTPeriod`: instantiate earlier Q01–Q05 E4/E6 period compiler using Q19 and Q20. The q-series *limit* extensionality already has a source-written proof path.
+- [ ] **P2.Q22** `originalBishopQSeriesPuncturedLatticeSameObject`: use the existing normalized punctured lattice Fourier equality owner with the correct normalization factors; its explicit three false frontier fields are still open.
+- [ ] **P2.Q23** `originalBishopJFromE4E6`: construct Delta inverse and q→j on the genuine Bishop carrier with nonzero discriminant; prove T invariance and match the original renderer.
+- [ ] **P0.Accept** Agda 2.9 acceptance of these new sources and all imports remains unchecked. Do not promote Q13–Q16 on commit alone.
+
+**Separate P1 / P1b / P3 / P4 maximum cuts remain:** actual original principal Log (not the arbitrary constructed `PrincipalComplexLog` interface), uniform Koenigs increment estimate and convergence, Kneser conjugate-pair analytic gluing, punctured *sector* log branch/winding, actual moving fine modular lift, certified Kouznetsov contours.
