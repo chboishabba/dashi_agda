@@ -80,3 +80,35 @@ were intentionally added.
 **Status:** pointwise mathematical arguments derived,
 integer parity algebra source-written, Q₂/R and H¹
 same-object welds OPEN, Agda 2.9 kernel receipt OPEN.
+
+## 14 Nov second-coordinate odd-prime source and Q2 negative control
+
+`DASHI/Mathematics/Arithmetic/EllipticOddPrimeSecondValuationParityExact.agda`
+now source-writes the second original Kummer coordinate v_p(x-1) parity
+for ODD primes, using the already-existing integer parity theorems.
+For v_p(x-1)>0 and p odd, x and x+1 are units because x=1 modulo p
+and x+1=2 modulo p. Thus 2v_p(y)=v_p(x-1). If v_p(x-1)<0,
+the three factors x,x-1,x+1 have identical valuation and
+2v_p(y)=3v_p(x-1), again forcing even parity.
+This establishes the same mathematical odd-prime support condition
+used by the more advanced Lean source owner
+`Synthesis/MillenniumBSDCMOddPrimeLocalSecondParityExact.lean` on
+`chboishabba/dashi_lean4` PR #107. Cross-kernel Agda↔Lean proof
+transport and local Qp H1 still require independent validation.
+
+**Important actual Q2 negative control:** x=39 on the original
+curve gives y²=39*38*40=59280=2^4*3705, with 3705 congruent 1 mod 8.
+Therefore 59280 is an actual Q2 square, by the standard 2-adic
+square criterion; a non-torsion E(Q2) point has x=39.
+Yet v2(x-1)=v2(38)=1 is ODD. Thus the second-coordinate parity
+claim must be restricted to ODD p; asserting the same at p=2
+would be false even for actual local points, not merely for
+an abstract square-class code.
+
+Independent deterministic arithmetic check:
+`python3 scripts/check_bsd_k1_local_squareclass_parity.py`.
+Checks rational x whose original cubic RHS is a Qp square at
+2,3,5,7,11,13 and enforces first-coordinate all-p parity and
+second-coordinate odd-prime parity, plus the x=39 negative control.
+Enumeration is NON-kernel evidence and cannot replace the
+nonarchimedean valuation theorem or Galois-H1 same-object weld.
