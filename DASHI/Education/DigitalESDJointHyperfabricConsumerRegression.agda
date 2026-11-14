@@ -102,7 +102,7 @@ labelCannotPayEveryConsumer =
 -- The authored overlap remains source-indexed, not a fused global study.
 overlapRetainsFirstSource :
   Braid.TensionReceipt.leftProvenanceRef
-    (Joint.CandidateSourceOverlap.overlap Joint.communityCollectiveOverlap)
+    (Joint.CandidateSourceOverlap.tensionOverlap Joint.communityCollectiveOverlap)
   ≡
   Attr.canonicalURL
     (Sources.attributedSource Sources.adefilaEcoCOIL)
@@ -110,7 +110,7 @@ overlapRetainsFirstSource = refl
 
 overlapRetainsSecondSource :
   Braid.TensionReceipt.rightProvenanceRef
-    (Joint.CandidateSourceOverlap.overlap Joint.communityCollectiveOverlap)
+    (Joint.CandidateSourceOverlap.tensionOverlap Joint.communityCollectiveOverlap)
   ≡
   Attr.canonicalURL
     (Sources.attributedSource Sources.singhCommunity)
