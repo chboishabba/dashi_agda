@@ -1763,7 +1763,11 @@
       "original_strict_compensation": false,
       "original_routeB_eventual_gap": false,
       "zero_shell_far_bound": false,
-      "uniform_selected_fourth_lipschitz": false
+      "original_G1_selected_uniform_K_preexisting_source_written": true,
+      "original_G1_explicit_K_bound": "quarticSignedPoleExplicitK0<4000000000; constructed floor-strength witnesses, t>=200",
+      "original_G1_strip_band_compiler_preexisting": "quarticSignedPoleThresholdBelowPlattTrudgian_proved",
+      "A2_sharp_selected_K_below_leading_ceiling_unproved": true,
+      "exact_selected_fourthLipschitz_definition": "integral |quarticFourSignedPoleCombinedProfile(u)| cosh(|u|) |u|^5 du"
     },
     "remaining_original_high_alpha": [
       "BISHOP:OriginalCosineAddition/SineAddition -> finite-source limit",
