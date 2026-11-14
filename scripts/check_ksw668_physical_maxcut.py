@@ -172,6 +172,16 @@ class KSWPhysicalBenchmarks(unittest.TestCase):
                          (Decimal("182.8"), Decimal("5.3")))
         self.assertEqual(neutron_rate(0, "1e20"), (0, 0))
 
+    def test_d_bell_amplitude_damping_cptp(self):
+        # A nonunitary local CPTP map on Bob, not just reversible unitaries.
+        for g in (s.Integer(0),s.Rational(1,4),s.Rational(1,2),s.Integer(1)):
+            k0 = s.diag(1,s.sqrt(1-g))
+            k1 = s.Matrix([[0,s.sqrt(g)],[0,0]])
+            self.assertEqual(s.simplify(k0.H*k0+k1.H*k1),s.eye(2))
+            self.assertEqual(
+                s.simplify(bell_local_after_bob(k0)+bell_local_after_bob(k1)),
+                s.eye(2)/2)
+
     def test_d_flat_lorentz_causality(self):
         x, t, c = Q(10), Q(0), Q(1)
         self.assertLess((c*t)**2 - x*x, 0)
@@ -208,7 +218,7 @@ if __name__ == "__main__":
                  "sigma_thermal_barn":"1.828 +/- 0.053",
                  "rate_at_hypothetical_flux_1e6_and_N_1e20_per_s":"182.8 +/- 5.3"},
             "D":{"flat_spacelike_event":"x=10,t=0,c=1",
-                 "bell_reduced_alice":"I/2 under Bob I,X,Z,H"},
+                 "bell_reduced_alice":"I/2 under Bob I,X,Z,H and CPTP amplitude damping"},
             "E":{"observations":"total=15 from (uptake,nuclear)=(5,0) or (2,3)",
                  "paired_residual":"3 given measured initial, uptake, clearance and final"},
             "unpaid":"physical same-object Agda triad inhabitant; general PDE boundary theorem; nuclear rate environment; KK global solution; biological isotope measurement"
