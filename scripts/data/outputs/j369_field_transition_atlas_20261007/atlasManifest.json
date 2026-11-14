@@ -1,0 +1,30 @@
+{
+  "authoritative_carriers": [
+    5,
+    9,
+    10,
+    15,
+    24,
+    27,
+    31,
+    80,
+    81,
+    144,
+    225,
+    243,
+    279,
+    729,
+    810,
+    196830
+  ],
+  "grid_cols": 37,
+  "grid_displacement_vector_count": 233,
+  "grid_rows": 36,
+  "legacy_edges": 1330,
+  "legacy_mass": 18,
+  "legacy_nodes": 1330,
+  "legacy_transition_source": "DASHI.Biology.FRACTRANSSPTransitionExact.firstEnabledStep",
+  "prime_196831": true,
+  "recognition_claimed": false,
+  "t5_subfield_object_shape_inferred": false
+}
