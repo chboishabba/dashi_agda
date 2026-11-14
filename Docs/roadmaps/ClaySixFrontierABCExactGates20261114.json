@@ -1455,7 +1455,8 @@
     "source_modules": [
       "DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda",
       "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
-      "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
+      "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda"
     ],
     "checker": "scripts/check_ym_r445_localized_tv_maxcut_countermodels.py",
     "test": "tests/test_ym_r445_localized_tv_maxcut_countermodels.py",
@@ -1546,6 +1547,26 @@
       "physical_original_Wilson_local_TV_proved": false,
       "uniform_cutoff_RG_proved": false,
       "E1_D1_D2_mass_gap_proved": false
+    },
+    "additional_F19_intrinsic_A_source": {
+      "source": "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda",
+      "owner": "chboishabba/dashi_agda #1503",
+      "producers": [
+        "originalF19AllCoarseNumeratorsSamePhysicalSource",
+        "originalF19AllCoarseNormalizedSamePhysicalSource"
+      ],
+      "genuine_result": "For every original coarse F on 64 native SU(N) links, actual interacting 1024-link Wilson 64-pair/896-spectator nested weighted numerator = original F19 effective-density Haar numerator; dividing by the SAME original physical partition yields the normalized identity",
+      "source_proof_written": true,
+      "original_f19_partition_theorem_reused": "originalFinePhysicalPartitionEqualsActualEffectivePartition",
+      "original_fibre_theorem_reused": "selected64Pair896SpectatorWeightedDisintegration",
+      "agda_2_9_kernel_accepted": false,
+      "not_proved": [
+        "F19 pair-block equals R445 selected nativeSUNBlockLinks after codec/reindex on original 1024 bonds",
+        "R445 renormalized effective target is physical same object",
+        "local conditional Wilson action oscillation/outer influence/TV",
+        "scale-summable RG",
+        "physical OS E1/D1/D2/gap"
+      ]
     }
   }
 }
