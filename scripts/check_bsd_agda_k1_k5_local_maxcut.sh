@@ -17,6 +17,7 @@ files=(
   DASHI/Mathematics/Automorphic/EllipticCMLevel32FrickeMellinExact.agda
   DASHI/Mathematics/Automorphic/EllipticCMLevel32GenusOneArithmeticExact.agda
   DASHI/Mathematics/Automorphic/EllipticCMLevel32LigozatCuspArithmeticExact.agda
+  DASHI/Mathematics/Automorphic/EllipticCMNormalizedOneDimensionalQSeriesExact.agda
 )
 
 for f in "${files[@]}"; do
@@ -46,6 +47,7 @@ required=(
   'EllipticCMLevel32FrickeMellinExact.agda:mellinCentralValueIsTwiceTail'
   'EllipticCMLevel32GenusOneArithmeticExact.agda:level32GenusOneArithmetic'
   'EllipticCMLevel32LigozatCuspArithmeticExact.agda:level32CuspOneWitness'
+  'EllipticCMNormalizedOneDimensionalQSeriesExact.agda:normalizedOneDimensionalAllNCoefficientsAgree'
 )
 for owner in "${required[@]}"; do
   module="${owner%%:*}"
