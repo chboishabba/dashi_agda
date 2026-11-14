@@ -2,7 +2,7 @@
 """KSW brane max-cut: finite-energy compact scalar emitter plus sourced TT boundary witness.
 
 This extends existing PR #1504 owners, without claiming a retarded graviton.
-Cylinder: smooth-enough compact spatial H1 profile, compact triangular temporal
+Cylinder: finite-thickness ambient emitter near cylindrical brane, compact H1 spatial profile and triangular temporal
 drive; classical finite-energy retarded wave by the energy estimate.
 AdS5: nontrivial exact TT bulk Bessel mode with the *required* nonzero
 Israel-normal source calculated on the same moving a=t brane. The latter
@@ -65,7 +65,7 @@ def cylinder_audit(eps=0.02, t=2.125, tau=0.25):
                 photon_first_arrival=math.pi, receiver_time=t,
                 spatial_source_halfwidth=eps, numerical_receiver_response=response,
                 rigorous_positive_receiver_lower=lower,
-                finite_energy_early_scalar_receiver=True,
+                finite_energy_early_scalar_receiver=True,\n                exactly_thin_brane_confined_source=False,
                 scalar_test_field_only=True, gravitational_backreaction=False)
 
 def ads_tensor_audit():
