@@ -6,6 +6,7 @@ open import Agda.Builtin.Bool using (Bool; false; true)
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCouplingScopeBidiExact as Scope
 import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Material
 import DASHI.Physics.ExoticGravity.AntigravityNegativeGCrossScaleProofSearchExact as Universal
+import DASHI.Physics.ExoticGravity.AntigravitySearchNonGeometricOppositeExact as NonGeometric
 import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 
 ------------------------------------------------------------------------
@@ -13,6 +14,11 @@ import DASHI.Law.SensibLawProofDirectedSearchIntentExact as Search
 --
 -- Same local repulsive surface, different scope -> different highest-alpha
 -- experiment.  This is a thin scheduler over existing owners, not a new planner.
+--
+-- Cross-pollination rule: a sign-opposite search role is not a geometric
+-- antipode.  Any route that claims an opposite metric/acceleration must re-solve
+-- the source at the selected coupling scope and produce the explicit geometric
+-- opposite receipt owned by AntigravitySearchNonGeometricOppositeExact.
 ------------------------------------------------------------------------
 
 data ScopeSearchStage : Set where
@@ -24,6 +30,7 @@ data ScopeSearchStage : Set where
   sourceCarrierIdentityLock : ScopeSearchStage
   sourceSpecificReplication : ScopeSearchStage
   scopeContradictionAssessment : ScopeSearchStage
+  resolvedGeometryOppositeCheck : ScopeSearchStage
 
 firstStageForScope : Scope.CouplingScope → ScopeSearchStage
 firstStageForScope Scope.universalNewtonCoupling = universalLocalSignDiscriminator
@@ -39,6 +46,7 @@ producerForScopeStage materialIndependentRegimeReplication = Search.empiricalEvi
 producerForScopeStage sourceCarrierIdentityLock = Search.identityProducer
 producerForScopeStage sourceSpecificReplication = Search.empiricalEvidenceProducer
 producerForScopeStage scopeContradictionAssessment = Search.contradictionProducer
+producerForScopeStage resolvedGeometryOppositeCheck = Search.identityProducer
 
 ------------------------------------------------------------------------
 -- Material-effective route: the sign hypothesis must track the regime on the
@@ -58,6 +66,7 @@ record MaterialEffectiveGExperimentTarget : Set where
     transitionStateMeasured : Bool
     ordinaryBackgroundsClosedInBothRegimes : Bool
     independentReplicationRequired : Bool
+    reSolvedGeometryRequiredBeforeOppositeMetricClaim : Bool
 
 open MaterialEffectiveGExperimentTarget public
 
@@ -69,7 +78,37 @@ coherentMaterialEffectiveGTarget =
     Material.coherentRegime
     refl
     (λ ())
-    true true true true true
+    true true true true true true
+
+------------------------------------------------------------------------
+-- Geometric-promotion gate.
+--
+-- A coupling/sign candidate cannot be promoted to "opposite geometry" merely
+-- from its search label.  The scope-specific model must be re-solved and the
+-- resulting metric must satisfy the explicit geometric-opposite predicate.
+------------------------------------------------------------------------
+
+record NegativeGGeometricPromotionGate : Set₁ where
+  constructor negative-g-geometric-promotion-gate
+  field
+    scope : Scope.CouplingScope
+    searchState : NonGeometric.AntigravitySearchState
+    geometricOppositeReceipt :
+      NonGeometric.GeometricOppositeReceipt searchState
+
+    scopeSpecificSourceResolved : Bool
+    scopeSpecificSourceResolvedIsTrue :
+      scopeSpecificSourceResolved ≡ true
+
+    observableReprojectedFromResolvedMetric : Bool
+    observableReprojectedFromResolvedMetricIsTrue :
+      observableReprojectedFromResolvedMetric ≡ true
+
+    sameExperimentalInputsRetained : Bool
+    sameExperimentalInputsRetainedIsTrue :
+      sameExperimentalInputsRetained ≡ true
+
+open NegativeGGeometricPromotionGate public
 
 ------------------------------------------------------------------------
 -- Exact introspective collision: observing only a local repulsive surface does
@@ -111,12 +150,20 @@ record NegativeGCouplingScopeProofSearchBoundary : Set where
     materialRouteRequiresIndependentReplication : Bool
     materialRouteAutomaticallyMutatesUniversalNewtonG : Bool
     scopeSelectionRequiresEvidenceBeyondLocalRepulsiveSurface : Bool
+    signOppositeAutomaticallyMeansGeometricOpposite : Bool
+    oppositeMetricClaimRequiresResolvedGeometryCheck : Bool
+    geometricPromotionGateRequiresReceipt : Bool
 
 canonicalNegativeGCouplingScopeProofSearchBoundary :
   NegativeGCouplingScopeProofSearchBoundary
 canonicalNegativeGCouplingScopeProofSearchBoundary =
   negative-g-coupling-scope-proof-search-boundary
-    false true true true true false true
+    false true true true true false true false true true
 
 existingUniversalSearchBoundary : Universal.NegativeGCrossScaleProofSearchBoundary
 existingUniversalSearchBoundary = Universal.canonicalNegativeGCrossScaleProofSearchBoundary
+
+existingNonGeometricOppositeBoundary :
+  NonGeometric.AntigravityNonGeometricOppositeBoundary
+existingNonGeometricOppositeBoundary =
+  NonGeometric.canonicalAntigravityNonGeometricOppositeBoundary
