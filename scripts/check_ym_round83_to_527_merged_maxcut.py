@@ -37,7 +37,7 @@ def inspect(repo: Path) -> dict:
         "source_analysis": block(r515, "sourceAnalysisLeaves"),
         "source_attachment": block(r515, "sourceLiteralAttachmentLeaves"),
         "endpoint_semantic": block(r518, "remainingEndpointSemanticLeaves"),
-        "source_bundle": ["allGroupCompactSimpleWitness", "literalCMP119Section2Family"],
+        "source_bundle": block(r518, "addedSourceLeaves"),
     }
     for layer, count in [("source_analysis",15),("source_attachment",18),
                           ("endpoint_semantic",8),("source_bundle",2)]:
