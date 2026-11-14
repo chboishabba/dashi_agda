@@ -7,6 +7,7 @@ open import Data.Maybe.Base using (nothing)
 open import Data.Product using (_,_)
 open import Relation.Binary.PropositionalEquality
   using (cong; cong₂; sym; trans; module ≡-Reasoning)
+open ≡-Reasoning
 open import Relation.Binary.PropositionalEquality.Properties using (isEquivalence)
 import Tactic.RingSolver.Core.AlmostCommutativeRing as RingCore
 import Tactic.RingSolver.NonReflective as RingSolver
