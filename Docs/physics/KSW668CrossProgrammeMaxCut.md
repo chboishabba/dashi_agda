@@ -84,3 +84,112 @@ scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668SourceCrosswalkE
 \`\`\`
 
 For P0 acceptance require actual Agda 2.9 kernel log from the exact branch head and an import closure/axiom audit. Python success cannot replace kernel acceptance. A successful finite proof cannot replace a physical Maxwell, nuclear, space-travel, Clay or medical proof.
+---
+
+## 2026-11-14 A1–E2 second physical maximum cut — exact outcomes
+
+This is the continuation after the initial 11-test finite A–E/369/QM source adapter.
+**Reproducible numerical command:** \`python3 scripts/check_ksw668_physical_maxcut.py\`
+**Local execution:** 15 / 15 SymPy/decimal/fraction tests passed (distinct from the earlier 11 / 11). The checker prints its exact source-labelled JSON receipt. These tests were executed in the assistant's Python environment, **not** against an Agda/Nix checker. No test compares to an experiment that was not actually obtained.
+
+### A1 — actual original-form helical-Elsasser finite state
+
+Source owner: \`MHDPlusMinusProjectedPseudoEnergyExact.IdealElsasserFourierState\`; \`MHDLiteralIdealElsasserGalerkinDynamicsExact.plusInteractionIsProjectedElsasser\`; \`MHDElsasserProjectedNonlinearCoefficientExact.elsasserOrderedTransferNormalForm\`.
+
+The selected Fourier triad is \(p=(1,0,0),q=(0,1,0),k=p+q=(1,1,0)\). With all other modes zero and the negative modes set by complex conjugation:
+
+- \(z^-_p=(0,1,0)\)
+- \(z^+_q=(1,0,0)\)
+- \(z^+_k=(s\,i,-s\,i,0)\), \(s=\pm1\)
+- \(b=(z^+-z^-)/2\) in Alfvén-normalized units
+
+The checker verifies every supported mode's Fourier reality and divergence-free condition, actual triad resonance and exact Leray projection. It evaluates the **literal selected ordered plus-mode transfer**
+
+\[
+ T_{kpq}=\operatorname{Re}\langle z^+_k,-iP_k[(z^-_p\cdot q)z^+_q]\rangle
+\]
+
+as \(T=-1\) for \(s=+1\) and \(T=+1\) for \(s=-1\). In both states, \(\|b_k\|^2=1/2\) and \(\|b_q\|^2=1/4\); the full modal squared-magnetic spectrum is unchanged. Thus a magnetic-amplitude ordering does not fix the sign of this selected triad transfer. It is a **constructed ideal-MHD Fourier initial state**, not a time-integrated plasma device or a claim of universal pairwise field hierarchy.
+
+New Agda source \`KSW668MHDSelectedStateTransferExact.agda\` defines \`doubleMagneticSquaredStrength\`, \`selectedPlusTransfer\`, \`originalMHDSelectedStateNormalForm\` and \`originalMHDGalerkinProjectedSameState\` directly on the original \`IdealElsasserFourierState\`. **Open:** instantiate the *selected rational coefficients* and \`IntegerEmbedding\`/\`ModeInverseSquare\` in Agda, prove strength inequalities and \(\pm1\) there, then exact-head kernel check. Numerical source-form replay does not equal kernel closure.
+
+### B1–B2 — Maxwell law to signed work and actual slab boundary
+
+New Agda owner \`KSW668MaxwellLocalPoyntingExact.TransverseMaxwellJet\` declares derivative coordinates for \(E_y,B_z,J_y\) and exact transverse Ampère/Faraday equations. \`transverseMaxwellJetPoyntingIdentity\` proves the **local algebraic identity** (given those derivative equations)
+
+\[
+E\,\partial_tE+B\,\partial_tB+
+(\partial_xE)B+E(\partial_xB)+JE=0.
+\]
+
+The general original U(1) field/socket → differentiable Maxwell PDE → arbitrary-region divergence theorem remains OPEN. The theorem name deliberately does not claim this broader weld.
+
+The executable exact three-dimensional slab with periodic unit cross-section uses \(\epsilon_0=\mu_0=c=1\),
+\(E_y=x-t+1-Jt,\ B_z=x-t,\ J_y=J=\pm1\).
+It satisfies local Ampère/Faraday plus Gauss constraints for transverse x-dependent fields. On \(0\le x\le L\),
+
+\[
+\frac{d}{dt}\int_0^L\frac{E_y^2+B_z^2}{2}dx
++[E_yB_z]_{0}^{L}+\int_0^L J E_y\,dx=0.
+\]
+
+This is checked by **symbolic integration** and all boundary faces (lateral flux cancels with periodic identifications). At \(L=1,t=0\), net outward flux is **2**, for both J signs. The electromagnetic fields and their energy are identical initially; the current can do positive or negative work. Sources and boundary conditions would have to sustain these prescribed fields; this is **not** finite-energy whole-space plasma dynamics or a measured current.
+
+### C1–C2 — four-momentum seam, original NIST masses and one real measured cross section
+
+\`KSW668IsotopeCausalResidualExact.SameReactionKinematics\` now names the **same reaction** four-momentum and rate-source obligation rather than treating stoichiometric proton/neutron equality as nuclear closure. It has no physical inhabitant.
+
+Tabulated NIST isotope atomic masses with electrons cancelling between sides and \(1\;\mathrm u=931.49410242\) MeV give:
+- \(3\alpha\to{}^{12}\mathrm C:\ Q=7.2747476075865\) MeV.
+- \(^{14}\mathrm N(n,p){}^{14}\mathrm C:\ Q=0.6258706545425\) MeV.
+
+These are decimal calculations from evaluated masses, not measurements of reactions in a body and not uncertainty-propagated full state-of-the-art mass evaluations.
+
+The independently measured 2026 thermal \(^{14}\mathrm N(n,p){}^{14}\mathrm C\) cross section is \(\sigma=1.828\pm0.053\) barn at \(E_n=0.0253\) eV, DOI [10.1080/00223131.2026.2750299](https://doi.org/10.1080/00223131.2026.2750299). Under *hypothetical* thin-target thermal flux \(\phi=10^6\) neutrons/cm²/s and \(N_{14}=10^{20}\) target atoms, \(R=\phi N_{14}\sigma=182.8\pm5.3\) reactions/s (cross-section uncertainty only). This **is not** an ambient human neutron flux or an observed biological carbon-14-production rate. Energy-dependent spectral folding, attenuation, true neutron-flux distributions, chemical uptake, background and uncertainty covariance remain OPEN. Triple-alpha needs a completely different multi-particle stellar temperature/density rate source, which has not been calibrated.
+
+Primary atomic masses: [NIST Isotopic Compositions](https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ascii=ascii). Primary reaction measurement: DOI above. Reaction data authority: [IAEA EXFOR](https://nds3.westeurope.cloudapp.azure.com/exfor/). Retain source and datum versions with every promotion.
+
+### D1–D2 — flat Lorentz + finite quantum no-signalling versus KK
+
+The checker uses a flat 1+1 Lorentz interval for \((\Delta x,\Delta t)=(10,0)\), \(c=1\), proving this illustrative event separation spacelike. On a separate two-qubit Bell state it evaluates Alice's reduced density matrix after Bob's local \(I,X,Z,H\) unitaries and finds \(I/2\) for all. These are actual finite tests, **not** the general CPTP no-signalling theorem or an Einstein/KK physical solution.
+
+\`KSW668IsotopeCausalResidualExact.SelectedPhysicalTransportTest\` is the joint physical gate requiring a selected common metric, Lorentz cone, matter/field evolution, conservation law, globally consistent causal route, synchronized arrival observations and actual KK/Einstein stress. No inhabited same-solution physical travel has been produced. PRs #1163/#1248/#1460 and quantum-mereology remain distinct owners.
+
+### E1–E2 — measured 14C biology exists; emotional nuclear production untested
+
+An external **primary human observation**, [Spalding, Bhardwaj, Buchholz, Druid & Frisén, *Cell* (2005), DOI 10.1016/j.cell.2005.04.028](https://pubmed.ncbi.nlm.nih.gov/16009139/), used atmosphere-origin bomb-pulse \(^{14}\mathrm C\) incorporated into genomic DNA to retrospectively date human cells. This demonstrates a concrete environmental tracer + biological incorporation mechanism; it did **not** manipulate emotions or measure emotion-driven nuclear transformation.
+
+The exact C3 field lemma \`originalBiologicalIsotopeReactionCausalResidual\` proves the algebraic source recovery:
+\[
+C_{\rm nuclear}=C_{\rm final}-C_{\rm initial}-C_{\rm uptake}+C_{\rm clearance},
+\]
+for a SAME-window complete carbon-14 inventory. The checker exhibits identical final isotope amounts from distinct uptake/nuclear-source choices, and source recovery when the other channels are supplied. *Measured* paired uptake/clearance/background/neutron flux and intervention data are not provided. Thus neither positive nor comprehensive exclusionary emotion→nuclear-production causality has been established by this programme.
+
+### Gate ledger after second cut
+
+| Gate | Exact delivered | Still unpaid / closure condition |
+| --- | --- | --- |
+| A1 | Real divergence-free, conjugate-paired 3-mode original-form MHD signed-transfer model + actual Agda source-state observer/normal-form | Kernel inhabitant with explicit rational wave coefficients and magnetic-order proof; global measured plasma no-go is NOT claimed |
+| B1 | Agda transverse Maxwell-jet Poynting algebra proof + exact Maxw. polynomial solution | General original U(1)/MHD field/source/constitutive PDE and kernel check |
+| B2 | Exact nonzero 2-unit slab surface flux and integrated Poynting equality | Arbitrary physically calibrated domain/boundary theorem and measured current |
+| C1 | Original nuclide count + NIST mass Q-values, typed same-reaction 4-momentum gate | Full 4-vector physical kinematics / decay channels / all rate source objects |
+| C2 | Primary 2026 thermal neutron cross section + conditional \(R=182.8\pm5.3\)/s hypothetical example | Actual neutron environment, sigma(E) folding, triple-alpha stellar reaction-rate model |
+| D1 | Spacelike flat event + finite Bell-unitary no-signalling diagnostic | General selected quantum CPTP theorem and original physical cone source |
+| D2 | Explicit original-KK/Einstein/observer operational test contract | Common solved metric, stability, signal/arrival evidence |
+| E1 | Identified original human bomb-pulse \(^{14}C\) tracer source and exact balance residual | Exact sample datasets, metabolic/uptake and neutron flux measurement, randomized confounder control |
+| E2 | Exact C3 algebraic source identification conditional on full inventory | Experimental identification/exclusion, uncertainty-bounded nuclear rate and direct effect on carbon isotopes |
+
+### Verification commands
+
+\`\`\`sh
+python3 scripts/check_ksw668_maxcut.py
+python3 scripts/check_ksw668_physical_maxcut.py
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668FiniteDiscriminatorsExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668OriginalRationalTransferCountermodelExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668MaxwellLocalPoyntingExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668IsotopeCausalResidualExact.agda
+scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
+\`\`\`
+
+**Trust:** 15/15 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
