@@ -75,5 +75,3 @@ record PoseMDLReceipt (S : PoseMDLSpec) (budget : Nat) : Set where
     residual≤budget : residualCost (canonicalize pose) program ≤ budget
 
 open PoseMDLReceipt public
-
-open PoseMDLSpec public
