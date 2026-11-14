@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+# KSW 668 original source max-cut: LOCAL receipt only; CI is irrelevant.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+MODE="--math"
+if [ "$#" -gt 0 ]; then MODE="$1"; fi
+KSW_MOVEBANK_GPS_FILE="${KSW_MOVEBANK_GPS_FILE:-}"
+KSW_ENA_ORIGINAL_RECEIPT="${KSW_ENA_ORIGINAL_RECEIPT:-}"
+KSW_ENDF_N14_FILE="${KSW_ENDF_N14_FILE:-}"
+KSW_MMS4_FGM_MANIFEST="${KSW_MMS4_FGM_MANIFEST:-}"
+KSW_MMS4_BOUNDARY_JSON="${KSW_MMS4_BOUNDARY_JSON:-}"
+KSW_SITE_SPECTRUM_CSV="${KSW_SITE_SPECTRUM_CSV:-}"
+KSW_SITE_FLUX_SOURCE="${KSW_SITE_FLUX_SOURCE:-}"
+KSW_N14_TARGET_ATOMS="${KSW_N14_TARGET_ATOMS:-}"
+mkdir -p Artifacts/ksw668/local-check
+LOG=Artifacts/ksw668/local-check/acceptance-command-log.tsv
+printf 'kind\tcommand\tstate\n' > "$LOG"
+
+run() {
+  local kind="$1"; shift
+  printf '%s\t%s\tRUN\n' "$kind" "$*" | tee -a "$LOG"
+  "$@"
+  printf '%s\t%s\tPASS\n' "$kind" "$*" | tee -a "$LOG"
+}
+
+echo "KSW668 local max-cut mode=$MODE"
+run python python3 scripts/check_ksw668_maxcut.py
+run python python3 scripts/check_ksw668_physical_maxcut.py
+run python python3 scripts/check_ksw668_human_ams_original.py
+run python python3 scripts/test_ksw668_primary_empirical_weld.py
+run python python3 scripts/check_ksw668_maxwell_3d_jet.py
+run python python3 scripts/ksw668_neutron_energy_nonextrapolation.py
+run python python3 scripts/ksw668_nuclear_electron_final_states.py
+run python python3 scripts/ksw668_bare_nuclear_two_body_kinematics.py
+run python python3 scripts/ksw668_n14_relativistic_lab_final_state.py
+run python python3 scripts/check_ksw668_spacelike_kk_projection.py
+run python python3 scripts/ksw668_a1_original_rational_fourier_witness.py
+run python python3 scripts/ksw668_u1_4potential_continuum.py
+run python python3 scripts/test_ksw668_mms4_tetrahedron.py
+run python python3 scripts/ksw668_kk_vacuum_observer_solution.py
+run python python3 scripts/ksw668_kk_einstein_scalar_cosmology.py
+run python python3 scripts/test_ksw668_endf81_primary.py
+run python python3 scripts/test_ksw668_endf81_law_integral.py
+run python python3 scripts/test_ksw668_e2_bound.py
+run python python3 scripts/ksw668_e2_neutron_isotope_visibility_bound.py
+run python python3 scripts/test_ksw668_movebank_join.py
+run python python3 scripts/ksw668_mms_burst_acquire.py
+run python python3 scripts/ksw668_mms_sdc_direct.py
+run python python3 scripts/ksw668_movebank_lisowski_original_bitstream.py
+run python python3 scripts/ksw668_parma_site_spectrum_adapter.py
+run python python3 scripts/ksw668_ena_reads_acquire.py
+
+if [ "$MODE" = "--math" ]; then
+  echo "Math-only local tests complete. Raw archives and Agda not accepted."
+  exit 0
+fi
+if [ "$MODE" != "--all" ]; then
+  echo "Usage: $0 --math | --all" >&2
+  exit 2
+fi
+
+if [ ! -f "$HOME/.cache/dashi-ksw668/mms_sdc_original_sha.json" ]; then
+  echo "BLOCKED: original raw MMS CDF receipt absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_mms_sdc_direct.py \
+  --cache data/mms_original_SDC_20170617 \
+  --verify "$HOME/.cache/dashi-ksw668/mms_sdc_original_sha.json"
+
+if [ -z "$KSW_MMS4_FGM_MANIFEST" ] || [ ! -f "$KSW_MMS4_FGM_MANIFEST" ]; then
+  echo "BLOCKED: MMS1-4 original FGM burst files and ephemeris receipts absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_mms4_fgm_ephemeris_bridge.py \
+  --manifest "$KSW_MMS4_FGM_MANIFEST" \
+  --out Artifacts/ksw668/local-check/mms4_original_fgm_ephemeris.json
+
+if [ -z "$KSW_MMS4_BOUNDARY_JSON" ] || [ ! -f "$KSW_MMS4_BOUNDARY_JSON" ]; then
+  echo "BLOCKED: measured MMS1-4 synchronized calibrated E/B/J tetra source data absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_mms4_tetrahedron_boundary.py \
+  --input "$KSW_MMS4_BOUNDARY_JSON" \
+  --out Artifacts/ksw668/local-check/mms4_affine_boundary_source_model.json
+
+
+if [ -z "$KSW_MOVEBANK_GPS_FILE" ] || [ ! -f "$KSW_MOVEBANK_GPS_FILE" ]; then
+  echo "BLOCKED: original Movebank GPS CSV/ZIP absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_movebank_gps_acquire.py \
+  --input "$KSW_MOVEBANK_GPS_FILE" \
+  --receipt Artifacts/ksw668/local-check/movebank_sha256.json
+run raw python3 scripts/ksw668_movebank_lisowski_original_bitstream.py \
+  --input "$KSW_MOVEBANK_GPS_FILE" \
+  --receipt Artifacts/ksw668/local-check/movebank_lisowski_original_sha256.json
+
+if [ -z "$KSW_ENA_ORIGINAL_RECEIPT" ] || [ ! -f "$KSW_ENA_ORIGINAL_RECEIPT" ]; then
+  echo "BLOCKED: original ENA FASTQ checksum receipt absent" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_ena_fastq_receipt_verify.py \
+  --receipt "$KSW_ENA_ORIGINAL_RECEIPT" \
+  --out Artifacts/ksw668/local-check/ena_original_fastq_verified.json
+
+if [ -z "$KSW_ENDF_N14_FILE" ] || [ ! -f "$KSW_ENDF_N14_FILE" ]; then
+  echo "BLOCKED: original ENDF/B-VIII.1 N14 data bytes absent (KSW_ENDF_N14_FILE)" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_endf81_n14np_original.py \
+  --endf "$KSW_ENDF_N14_FILE" \
+  --out Artifacts/ksw668/local-check/endf81_n14_sha_receipt.json
+
+if [ -z "$KSW_SITE_SPECTRUM_CSV" ] || [ ! -f "$KSW_SITE_SPECTRUM_CSV" ] || \
+   [ -z "$KSW_SITE_FLUX_SOURCE" ] || [ -z "$KSW_N14_TARGET_ATOMS" ]; then
+  echo "BLOCKED: actual source site spectrum + description + N14 atoms required" >&2
+  exit 65
+fi
+run raw python3 scripts/ksw668_endf81_c2_law_integral.py \
+  --endf "$KSW_ENDF_N14_FILE" \
+  --flux-csv "$KSW_SITE_SPECTRUM_CSV" \
+  --flux-source "$KSW_SITE_FLUX_SOURCE" \
+  --n14-atoms "$KSW_N14_TARGET_ATOMS" \
+  --out Artifacts/ksw668/local-check/endf81_source_spectrum_fold.json
+
+if ! command -v nix >/dev/null 2>&1 && ! command -v agda >/dev/null 2>&1; then
+  echo "BLOCKED: pinned Agda toolchain not installed" >&2
+  exit 66
+fi
+
+run agda bash scripts/run_agda29_parallel_check.sh \
+  DASHI/Physics/Plasma/KSW668FiniteDiscriminatorsExact.agda \
+  DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda \
+  DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda \
+  DASHI/Physics/Plasma/KSW668RationalThreeModeOriginalRowsExact.agda \
+  DASHI/Physics/Plasma/KSW668SparseModeLookupNegationExact.agda \
+  DASHI/Physics/Plasma/KSW668SparsePairRealityExact.agda \
+  DASHI/Physics/Plasma/KSW668MaxwellLocalPoyntingExact.agda \
+  DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda \
+  DASHI/Physics/Plasma/KSW668IsotopeCausalResidualExact.agda \
+  DASHI/Physics/Plasma/KSW668EmpiricalBoundariesExact.agda \
+  DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda \
+  DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda \
+  DASHI/Physics/Gravity/KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact.agda \
+  DASHI/Biology/KSW668EmpiricalIsotopeMagnetoreceptionSourceExact.agda \
+  DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda \
+  DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
+
+echo "Local original raw and Agda source checks PASS; no universal physics promoted."
