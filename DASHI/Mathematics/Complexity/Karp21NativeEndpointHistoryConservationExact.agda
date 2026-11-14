@@ -1,0 +1,292 @@
+module DASHI.Mathematics.Complexity.Karp21NativeEndpointHistoryConservationExact where
+
+------------------------------------------------------------------------
+-- F2.2 SAME-EXECUTION BINARY ENDPOINT HISTORY MEMORY INVARIANT.
+--
+-- The original sparse N21 certificate supplies two Boolean labels
+-- for every parsed signed raw edge. A valid actual binary first-
+-- enabled "advance" consumes one signed edge and two certificate
+-- bits, and prepends the edge's original LE u/v binary registers
+-- and those same two bits to chronological endpoint history.
+--
+-- Thus live history-bit-payload + remaining endpoint bit-registers
+-- + unconsumed certificate bits is INVARIANT under every actual
+-- first-enabled binary source step, including invalid/reject and
+-- threshold terminal branches.
+--
+-- Source graph field input theorem bounds initial edge endpoint
+-- bits by original graph word; resulting actual history length is
+-- bounded by |original graph word| + |original certificate word|.
+--
+-- Excludes list cell pointers/tags, copying, head moves and clock.
+------------------------------------------------------------------------
+
+open import Agda.Builtin.Bool using (Bool; true; false)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
+open import Agda.Builtin.List using (List; []; _∷_)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Data.Maybe.Base using (Maybe; nothing; just)
+open import Data.List.Base using (length)
+open import Data.Product using (_×_; _,_)
+open import Data.Nat.Base using (_≤_; z≤n; s≤s)
+import Data.Nat.Properties as NatP
+open import Relation.Binary.PropositionalEquality using (cong; trans; sym)
+open import Data.Nat.Tactic.RingSolver using (solve)
+
+import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointRawEdgeStreamExact as Edge
+import DASHI.Mathematics.Complexity.Karp21NativeBinaryEndpointHistoryExact as History
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryGraphRuntimeExact as Graph
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryPriorityMachineExact as Machine
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryFiniteRunExact as Run
+import DASHI.Mathematics.Complexity.Karp21NativeFullEdgeFieldInputBoundExact as Fields
+import DASHI.Mathematics.Complexity.Karp21NativeSignedLedgerWidthBudgetExact as Width
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativeSignedExact as Signed
+import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePositiveThresholdExact as Positive
+import DASHI.Mathematics.Complexity.Karp21NativeWholeBinaryStepPotentialExact as Potential
+import DASHI.Mathematics.Complexity.Karp21NativeWholeGraphEdgeFieldWordBoundExact as OriginalWord
+
+-- Every historical vertex costs its ACTUAL LE address register
+-- plus the literal original cut-label Bool bit.
+historyPayloadWidth : History.BinaryEndpointHistory → Nat
+historyPayloadWidth [] = zero
+historyPayloadWidth ((vertex , label) ∷ rest) =
+  suc (length vertex) + historyPayloadWidth rest
+
+-- Endpoint bits physically present in still-unconsumed original
+-- raw-edge records; signed weight registers are charged separately.
+remainingEndpointWidth : List Edge.BinaryRawEdge → Nat
+remainingEndpointWidth [] = zero
+remainingEndpointWidth (Edge.binary-edge u v token ∷ rest) =
+  (length u + length v) + remainingEndpointWidth rest
+
+-- All three source-original physical payload categories present in
+-- actual binary cursor states, counting label bits only ONCE.
+stateEndpointStorageCapacity : Machine.State → Nat
+stateEndpointStorageCapacity
+  (Machine.state phase edges bits history ledger threshold) =
+  historyPayloadWidth history +
+    (remainingEndpointWidth edges + length bits)
+
+-- Actual recordBinaryEndpointPair history payload plus remaining
+-- edge/certificate payload has identical total bit capacity.
+advanceHistoryEndpointStoragePreserved :
+  (u v h e c : Nat) →
+  (suc u + (suc v + h)) + (e + c)
+    ≡ h + (((u + v) + e) + suc (suc c))
+advanceHistoryEndpointStoragePreserved u v h e c =
+  solve (u ∷ v ∷ h ∷ e ∷ c ∷ [])
+
+-- ORIGINAL binary reference step, independent of compiled frontier,
+-- preserves the capacity exactly even when it rejects or finishes.
+originalBinaryStepEndpointCapacityInvariant :
+  (state next : Machine.State) →
+  Machine.originalBinaryWholeVerifierStep state ≡ just next →
+  stateEndpointStorageCapacity next ≡ stateEndpointStorageCapacity state
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.accepted es bits hist ledger threshold) next ()
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.rejected es bits hist ledger threshold) next ()
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.active [] [] hist ledger threshold) next step
+  with Positive.meetsOriginalPositiveThreshold ledger threshold
+... | true with step
+... | refl = refl
+... | false with step
+... | refl = refl
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.active [] (a ∷ bits) hist ledger threshold) next step
+  with step
+... | refl = refl
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.active (edge ∷ rest) [] hist ledger threshold) next step
+  with step
+... | refl = refl
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.active (edge ∷ rest) (a ∷ []) hist ledger threshold) next step
+  with step
+... | refl = refl
+originalBinaryStepEndpointCapacityInvariant
+  (Machine.state Machine.active
+    (Edge.binary-edge u v token ∷ rest)
+    (a ∷ b ∷ bits) hist ledger threshold) next step
+  with History.endpointConsistentBinary u a hist
+     | History.endpointConsistentBinary v b hist
+... | false | _ with step
+... | refl = refl
+... | true | false with step
+... | refl = refl
+... | true | true with step
+... | refl =
+  advanceHistoryEndpointStoragePreserved
+    (length u) (length v) (historyPayloadWidth hist)
+    (remainingEndpointWidth rest) (length bits)
+
+-- SAME first-enabled compiled source step, no substitute machine or
+-- chosen arbitrary enabled rule.
+firstEnabledBinaryStepEndpointCapacityInvariant :
+  (state next : Machine.State) →
+  Machine.Compiled.directStep Machine.rules state ≡ just next →
+  stateEndpointStorageCapacity next ≡ stateEndpointStorageCapacity state
+firstEnabledBinaryStepEndpointCapacityInvariant state next accepted =
+  originalBinaryStepEndpointCapacityInvariant state next
+    (trans
+      (sym (Machine.karpNativeBinaryFirstEnabledSameVerifierStep state))
+      accepted)
+
+-- The actual source finite-run iterator conserves this budget for
+-- EVERY fuel, including earlier halt and malformed/rejected cases.
+actualFirstEnabledFiniteRunEndpointCapacityInvariant :
+  (fuel : Nat) (state : Machine.State) →
+  stateEndpointStorageCapacity (Run.runBinaryWithFuel fuel state)
+    ≡ stateEndpointStorageCapacity state
+actualFirstEnabledFiniteRunEndpointCapacityInvariant zero state = refl
+actualFirstEnabledFiniteRunEndpointCapacityInvariant (suc fuel) state
+  with Machine.Compiled.directStep Machine.rules state in step
+... | nothing = refl
+... | just next =
+  trans
+    (actualFirstEnabledFiniteRunEndpointCapacityInvariant fuel next)
+    (firstEnabledBinaryStepEndpointCapacityInvariant state next step)
+
+-- Endpoint payload bits constitute a nonnegative part of all actual
+-- parsed u/v/signed-w edge registers.
+oneEdgeEndpointChargeAtMostAllFields :
+  (u v : Word.BitWord)
+  (token : Signed.SignedMagnitudeBits) →
+  length u + length v
+    ≤ Fields.binaryRawEdgeRegisterCharge
+        (Edge.binary-edge u v token)
+oneEdgeEndpointChargeAtMostAllFields u v token =
+  NatP.≤-trans
+    (NatP.m≤m+n
+      (length u + length v)
+      (Width.signedTokenBitCharge token))
+    (NatP.≤-reflexive
+      (NatP.+-assoc
+        (length u) (length v)
+        (Width.signedTokenBitCharge token)))
+
+remainingEndpointWidthAtMostAllFieldCharge :
+  (edges : List Edge.BinaryRawEdge) →
+  remainingEndpointWidth edges ≤
+    Fields.allBinaryRawEdgeRegisterCharges edges
+remainingEndpointWidthAtMostAllFieldCharge [] = NatP.≤-refl
+remainingEndpointWidthAtMostAllFieldCharge
+  (Edge.binary-edge u v token ∷ rest) =
+  NatP.+-mono-≤
+    (oneEdgeEndpointChargeAtMostAllFields u v token)
+    (remainingEndpointWidthAtMostAllFieldCharge rest)
+
+-- The original graph reader's initial source cursor contains no
+-- history at all. Therefore its original endpoint+certificate bits
+-- fit within the original two supplied input WORD lengths.
+initialBinaryGraphEndpointCapacityBound :
+  (word certificate : Word.BitWord) →
+  stateEndpointStorageCapacity
+    (Machine.initialBinaryWholeWordState word certificate)
+    ≤ length word + length certificate
+initialBinaryGraphEndpointCapacityBound word certificate
+  with Graph.readNativeWholeBinaryGraphWord word in parsed
+... | nothing = NatP.m≤m+n zero (length word + length certificate)
+... | just (Graph.whole-binary-graph n edges threshold) =
+  NatP.+-mono-≤
+    (NatP.≤-trans
+      (remainingEndpointWidthAtMostAllFieldCharge edges)
+      (OriginalWord.actualWholeBinaryGraphEdgeFieldWidthAtMostOriginalWord
+        word n threshold edges parsed))
+    NatP.≤-refl
+
+-- The historical LE endpoint addresses plus their original
+-- certificate labels are one nonnegative component of the total
+-- source storage invariant, for EVERY possible state.
+historyPayloadAtMostSourceStorage :
+  (state : Machine.State) →
+  historyPayloadWidth (Machine.history state)
+    ≤ stateEndpointStorageCapacity state
+historyPayloadAtMostSourceStorage
+  (Machine.state phase edges bits hist ledger threshold) =
+  NatP.m≤m+n
+    (historyPayloadWidth hist)
+    (remainingEndpointWidth edges + length bits)
+
+-- Strong F2.2 result: the ACTUAL binary N21 priority machine cannot
+-- grow its chronological endpoint-history payload beyond both source
+-- input WORD lengths at ANY intermediate step. This is not merely a
+-- bound on the terminal state.
+actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords :
+  (fuel : Nat) (word certificate : Word.BitWord) →
+  historyPayloadWidth
+    (Machine.history
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    ≤ length word + length certificate
+actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords fuel word certificate =
+  NatP.≤-trans
+    (historyPayloadAtMostSourceStorage
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    (NatP.≤-trans
+      (NatP.≤-reflexive
+        (actualFirstEnabledFiniteRunEndpointCapacityInvariant
+          fuel (Machine.initialBinaryWholeWordState word certificate)))
+      (initialBinaryGraphEndpointCapacityBound word certificate))
+
+-- At source fuel equal to the real edge-count-plus-one first-enabled
+-- machine potential, the same invariant yields the exact originally
+-- selected completed-run history capacity bound.
+actualBinaryFirstEnabledEndpointHistoryFitsInputs :
+  (word certificate : Word.BitWord) →
+  historyPayloadWidth
+    (Machine.history
+      (Run.runBinaryWithFuel
+        (Potential.binaryStatePotential
+          (Machine.initialBinaryWholeWordState word certificate))
+        (Machine.initialBinaryWholeWordState word certificate)))
+    ≤ length word + length certificate
+actualBinaryFirstEnabledEndpointHistoryFitsInputs word certificate =
+  actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords
+    (Potential.binaryStatePotential
+      (Machine.initialBinaryWholeWordState word certificate))
+    word certificate
+
+
+------------------------------------------------------------------------
+-- F2.2 actual chronological history LIST NODE COUNT.
+-- Every vertex-history entry contains at least the source cut-label
+-- Boolean, in addition to any original binary endpoint address bits.
+-- Thus the input-word history payload bound also caps the number
+-- of actual history cons/list entries at EVERY machine time.
+------------------------------------------------------------------------
+
+historyEntriesAtMostPayload :
+  (history : History.BinaryEndpointHistory) →
+  length history ≤ historyPayloadWidth history
+historyEntriesAtMostPayload [] = NatP.≤-refl
+historyEntriesAtMostPayload ((vertex , label) ∷ rest) =
+  s≤s
+    (NatP.≤-trans
+      (historyEntriesAtMostPayload rest)
+      (NatP.≤-trans
+        (NatP.m≤m+n
+          (historyPayloadWidth rest) (length vertex))
+        (NatP.≤-reflexive
+          (NatP.+-comm
+            (historyPayloadWidth rest) (length vertex)))))
+
+actualFirstEnabledHistoryNodeCountAtEveryFuelFitsOriginalWords :
+  (fuel : Nat) (word certificate : Word.BitWord) →
+  length
+    (Machine.history
+      (Run.runBinaryWithFuel fuel
+        (Machine.initialBinaryWholeWordState word certificate)))
+    ≤ length word + length certificate
+actualFirstEnabledHistoryNodeCountAtEveryFuelFitsOriginalWords
+  fuel word certificate =
+  NatP.≤-trans
+    (historyEntriesAtMostPayload
+      (Machine.history
+        (Run.runBinaryWithFuel fuel
+          (Machine.initialBinaryWholeWordState word certificate))))
+    (actualFirstEnabledHistoryAtEveryFuelFitsOriginalWords
+      fuel word certificate)
