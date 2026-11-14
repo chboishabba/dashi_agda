@@ -44,17 +44,17 @@ realMultiplyOneRight F a =
     (C3.multiplyOneLeft F a)
 
 realDistributeRight :
-  ∀ {r} (F : C3.RealField r) (a b c : C3.Carrier F) →
-  C3.multiply F (C3.add F a b) c
-  ≡ C3.add F (C3.multiply F a c) (C3.multiply F b c)
-realDistributeRight F a b c =
+  ∀ {r} (F : C3.RealField r) (x y z : C3.Carrier F) →
+  C3.multiply F (C3.add F y z) x
+  ≡ C3.add F (C3.multiply F y x) (C3.multiply F z x)
+realDistributeRight F x y z =
   trans
-    (C3.multiplyCommutative F (C3.add F a b) c)
+    (C3.multiplyCommutative F (C3.add F y z) x)
     (trans
-      (C3.distributeLeft F c a b)
+      (C3.distributeLeft F x y z)
       (cong₂ (C3.add F)
-        (C3.multiplyCommutative F c a)
-        (C3.multiplyCommutative F c b)))
+        (C3.multiplyCommutative F x y)
+        (C3.multiplyCommutative F x z)))
 
 realCommutativeRing :
   ∀ {r} (F : C3.RealField r) → CommutativeRing r r
