@@ -441,3 +441,64 @@ Hodge CM cycle-map adapter, MaxCut original graph-cost comparison,
 RH quasi-zero carrier and 4.32 OAI YM same-original Wilson E1
 correspondence remain **original-source/formalization**, not proof
 of those universal frontiers.
+
+
+## 14 November: does the Clay rollup already contain the research-level proofs?
+
+**Source-verified correction:** the rollups do own extensive exact mathematics,
+including physical finite Wilson source laws, selected spectral/covariance
+algebra, NS signed-barrier equivalences, real Galerkin *records*, RH
+same-zero finite A2 interval decisions, correct P≠NP universal quantifier
+*types*, genuine Karp gamma physical runs, Bishop finite Abel, and original
+BSD E[2]-H1/local image facts. The prior shorthand “new mathematics absent”
+was imprecise: **many mathematical ingredients and all major terminal
+interfaces are already there**.
+
+The decisive difference is **terminal witness production versus
+implication from an uninhabited premise**. This has now been audited against
+13 exact Git-blob source files on Agda #1499
+`fa751e1c9c1a0b0a52a33d97f69531bb0934786a` and Lean #108
+`df214149df612797cd1a3bb71d52dda00bd45c26`.
+Exact declaration/assumption/source hashes:
+`Docs/roadmaps/ClaySourceVerifiedExistingVsOpen20261114.json`;
+fail-closed audit and five deliberately invalid mutation controls:
+`scripts/check_clay_existing_vs_open_source_20261114.py`.
+The canonical six-frontier local acceptance runner calls this checker.
+**The checker has not been executed under the local pinned toolchains
+during this connector-only audit.** A cross-repository source SHA
+confirmation is not an Agda or Lean proof receipt.
+
+| Lane | Actual ORIGINAL owned source | Why terminal source proof still requires a producer |
+|---|---|---|
+| YM | `YangMillsDirectSourceOSLiteralClayMaxCutExact.literalClaySolution` | Its theorem type **takes** `DirectSourceOSLiteralClayInputs Y`; physical instantiation level is explicitly `conditional`. `YMClayE1OriginalSUNFiniteCylinderLawsExact` is cutoff-finite and uses non-safe real axiom infrastructure. 2026 OAI Lean external **existence** review is a candidate E1 donor, not same-object D1/D2 mass gap. |
+| NS | `NSTriadKNR650CurrentSharedWeightedWallRound736Exact` and `NSTriadKNPhysicalNSGalerkinTrajectoryRound240Exact` | R736 proves both preferred weighted-closure flags equal **false**; R240 states an original Galerkin trajectory *record* with derivative/equation fields, not a witness. R854 Lean strict negative integral assumes `hOriginalRateEnvelope`. |
+| RH | `Synthesis.RiemannA2ActualSelectedIntervalDecisionExact` | PASS and NO-GO results use explicit actual-source interval assumptions `hd,hf,hc,hm,hgap` on `W,rho,EV,n`. The same-zero signed bounds are not derived from the zero distribution in these proofs. |
+| P≠NP | `PNotEqualsNPDirectSATLowerBoundExact` and `PNotEqualsNPAnchoredCollisionEquivalenceExact` | `UniversalPolynomialSATDecisionFailure` is a **defined proposition**. Its consequences and equivalence to anchored collision are proved; no witness of `∀D∃φ` is produced. |
+| Karp-21 | `Karp21NativeGammaAllLengthCompositePhysicalExact` | Actual gamma positive-word `Tape.machineRun` is source-written for all `k≥1`; full malformed parsing, F3 N21 physical simulation, F4 actual bit clock and `originalN21InNP` remain. These require *known algorithmic formalization*, not new P≠NP mathematics. |
+| BSD | `MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence` and `MillenniumBSDCMActualEBarRestrictedShaTwoTargetExact` | Real/Q₂ image fragments and *actual E(Qbar)-coefficient* `Sha[2]` target exist; classical Kummer/Selmer exact sequence, full identified Sha and selected L/period value are not constructed here. Selected CM curve should reuse known results; universal BSD is separate new math. |
+| Bishop | `BishopOriginalEtaFiniteAbelSourceExact` | Actual finite eta Abel law is written. Same-carrier Nat-log and complex tail/compact-uniform convergence remain known-mathematics proof work. |
+
+**OpenAI vendoring precision:** the original `openai/math` source is
+**already vendored as a Git submodule link** in Lean #108 at exact
+`1581d4cb...`, containing 200 pinned headline Lean main-result
+references. Separate revision `7ef5c0cc...` carries 208 indexed
+references. The independent October OpenAI Yang--Mills Lean 4.32 source
+is only externally Git-pinned/source-registered in Golden; it has *not*
+been vendored as a second submodule or kernel-imported. A Gitlink
+makes source content available after `git submodule update --init`;
+it does **not** elaborate all upstream proofs under DASHI Lean 4.28.
+
+**Resulting max cut:** stop writing parallel Clay terminal compilers.
+For YM, target exactly the physical `DirectSourceOSLiteralClayInputs Y`
+construction (prioritize same-Wilson OAI E1 comparison first).
+For NS, pay the original R736 W1/W2 cutoff-uniform signed producer, or
+prove original-source route failure. For RH, construct/refute strict
+A2 actual-zero source intervals or Route B original signed-cap theorem.
+For P≠NP, supply `UniversalPolynomialSATDecisionFailure` witness.
+Selected BSD/Karp/Bishop instead need extant known-math carrier
+proofs and exact-head kernel tests. False promotion remains blocked.
+
+**Limit:** this is an exact-head audit of selected authoritative modules,
+not an exhaustive syntactic/theorem-semantic search of every historical
+DASHI declaration. Open status is recorded **at the audited original
+consumer interfaces**; do not interpret it as mathematical impossibility.
