@@ -150,7 +150,9 @@ actualModulationExponentIntertwinesBase369 :
 actualModulationExponentIntertwinesBase369 recognition axis state =
   trans
     (Actual.modulationExponentIntertwines recognition axis state)
-    refl
+    (cong
+      (H.modulationExponent axis)
+      (sym (Fibre.x6RoundTrip (Model.weightPosition (Actual.toModel recognition state)))))
 
 ------------------------------------------------------------------------
 -- 5. Boundary.
