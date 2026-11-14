@@ -14,6 +14,8 @@ import Tactic.RingSolver.NonReflective as RingSolver
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as ScalingLaws
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as Algebra
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianAlgebraProgram as Hermitian
 
 ------------------------------------------------------------------------
 -- The minimal real carrier used by the literal C^3 construction already
@@ -202,57 +204,22 @@ complexMultiplyAssociative = ScalingLaws.complexMultiplyAssociative
 complexMultiplyCommutative :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
   C3.complexMultiply a b ≡ C3.complexMultiply b a
-complexMultiplyCommutative {F = F}
-  (C3.complex ar ai) (C3.complex br bi) =
-  complexExt
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.multiplyReal ar ai br bi P.R.⊜ P.multiplyReal br bi ar ai)
-      refl ar ai br bi)
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.multiplyImaginary ar ai br bi P.R.⊜
-        P.multiplyImaginary br bi ar ai)
-      refl ar ai br bi)
-  where module P = Polynomial F
+complexMultiplyCommutative = Algebra.complexMultiplyCommutative
 
 complexMultiplyZeroLeft :
   ∀ {r} {F : C3.RealField r} (a : C3.Complex F) →
   C3.complexMultiply (C3.complexZero F) a ≡ C3.complexZero F
-complexMultiplyZeroLeft {F = F} (C3.complex ar ai) =
-  complexExt
-    (P.R.solve 2
-      (λ ar ai →
-        P.multiplyReal (P.R.Κ (C3.zero F)) (P.R.Κ (C3.zero F)) ar ai
-        P.R.⊜ P.R.Κ (C3.zero F)) refl ar ai)
-    (P.R.solve 2
-      (λ ar ai →
-        P.multiplyImaginary (P.R.Κ (C3.zero F)) (P.R.Κ (C3.zero F)) ar ai
-        P.R.⊜ P.R.Κ (C3.zero F)) refl ar ai)
-  where module P = Polynomial F
+complexMultiplyZeroLeft = Hermitian.complexMultiplyZeroLeft
 
 complexMultiplyZeroRight :
   ∀ {r} {F : C3.RealField r} (a : C3.Complex F) →
   C3.complexMultiply a (C3.complexZero F) ≡ C3.complexZero F
-complexMultiplyZeroRight {F = F} a =
-  trans
-    (complexMultiplyCommutative a (C3.complexZero F))
-    (complexMultiplyZeroLeft a)
+complexMultiplyZeroRight = Hermitian.complexMultiplyZeroRight
 
 complexOneMultiply :
   ∀ {r} {F : C3.RealField r} (z : C3.Complex F) →
   C3.complexMultiply (C3.complexOne F) z ≡ z
-complexOneMultiply {F = F} (C3.complex zr zi) =
-  complexExt
-    (P.R.solve 2
-      (λ zr zi →
-        P.multiplyReal (P.R.Κ (C3.one F)) (P.R.Κ (C3.zero F)) zr zi
-        P.R.⊜ zr) refl zr zi)
-    (P.R.solve 2
-      (λ zr zi →
-        P.multiplyImaginary (P.R.Κ (C3.one F)) (P.R.Κ (C3.zero F)) zr zi
-        P.R.⊜ zi) refl zr zi)
-  where module P = Polynomial F
+complexOneMultiply = Hermitian.complexMultiplyOneLeft
 
 complexNegateMultiplyLeft :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
@@ -288,31 +255,13 @@ complexConjugateMultiply :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
   C3.complexConjugate (C3.complexMultiply a b)
   ≡ C3.complexMultiply (C3.complexConjugate a) (C3.complexConjugate b)
-complexConjugateMultiply {F = F}
-  (C3.complex ar ai) (C3.complex br bi) =
-  complexExt
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.multiplyReal ar ai br bi P.R.⊜
-        P.multiplyReal ar (P.R.⊝ ai) br (P.R.⊝ bi))
-      refl ar ai br bi)
-    (P.R.solve 4
-      (λ ar ai br bi →
-        P.R.⊝ (P.multiplyImaginary ar ai br bi) P.R.⊜
-        P.multiplyImaginary ar (P.R.⊝ ai) br (P.R.⊝ bi))
-      refl ar ai br bi)
-  where module P = Polynomial F
+complexConjugateMultiply = Hermitian.complexConjugateMultiply
 
 complexConjugateNegate :
   ∀ {r} {F : C3.RealField r} (a : C3.Complex F) →
   C3.complexConjugate (C3.complexNegate a)
   ≡ C3.complexNegate (C3.complexConjugate a)
-complexConjugateNegate {F = F} (C3.complex ar ai) =
-  complexExt refl
-    (P.R.solve 1
-      (λ ai → P.R.⊝ (P.R.⊝ ai) P.R.⊜ P.R.⊝ (P.R.⊝ ai))
-      refl ai)
-  where module P = Polynomial F
+complexConjugateNegate = Hermitian.complexConjugateNegate
 
 complexConjugateZero :
   ∀ {r} {F : C3.RealField r} →
