@@ -6,6 +6,9 @@ open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.String using (String)
 
+data _≡ω_ {A : Setω} (x : A) : A → Setω where
+  refl : x ≡ω x
+
 import DASHI.Biology.AvianHepaticMacrophageMagnetoreception as Hepatic
 import DASHI.Biology.CellDifferentiationCommunicationBridge as Cell
 import DASHI.Biology.ProteinHormoneChemistryCellBridge as ProteinCell
@@ -133,7 +136,7 @@ record AvianMagnetoreceptionCrossScaleBridge : Setω where
       ProteinCell.ProteinHormoneChemistryCellBridge
 
     proteinCellBridgeIsCanonical :
-      proteinCellBridge ≡
+      proteinCellBridge ≡ω
       ProteinCell.canonicalProteinHormoneChemistryCellBridge
 
     cellPhysiologyBridge :
