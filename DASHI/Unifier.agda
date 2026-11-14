@@ -340,6 +340,8 @@ import DASHI.Reasoning.TrialecticWeightedDirectedGraph369Exact as WeightedGraph3
 import DASHI.Unified.QwenputerBinaryTernaryTOEExact as QwenputerTOE
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact as ParallelNeeds
+-- Finite quality-guard and shared-canonical history theorems; no trained-model promotion.
+import DASHI.Unified.LeechQualityGuardTOEBridgeExact as LeechQualityBridge
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
 import DASHI.Unified.Fleet58ManifestAcquisitionExact as FleetManifestTOE
 import DASHI.Unified.TOE369MaxCutKernelBidiTernaryExact as MaxCut369

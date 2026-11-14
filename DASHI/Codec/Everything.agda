@@ -21,6 +21,7 @@ import DASHI.Codec.GenBankLocationFiniteCore
 import DASHI.Codec.GenBankFeatureGeometrySymmetryExact
 import DASHI.Codec.GenBankComponentOntologyFiniteCore
 import DASHI.Codec.DNAFirstFormalismRegression
+import DASHI.Codec.DNAProductionBaseEqPairwiseJoinExact
 import DASHI.Codec.DNAProductionChoices
 import DASHI.Codec.DNAProductionConstraints
 import DASHI.Codec.DNAProductionDeBruijn
