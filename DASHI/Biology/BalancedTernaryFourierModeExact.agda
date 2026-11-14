@@ -30,7 +30,7 @@ module DASHI.Biology.BalancedTernaryFourierModeExact where
 -- Fourier transform, physical wavelength, cortical geometry, or Monster action.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Equality using (_≡_; refl; cong)
+open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc)
 open import Data.Nat using (_*_)
@@ -151,19 +151,19 @@ ordinarySymmetryResolvedDimensionIsThreePowerEleven :
 ordinarySymmetryResolvedDimensionIsThreePowerEleven = refl
 
 completionReadout : ∀ {State : Set} → Torus.Field State → State
-completionReadout field = field Torus.completionChannel
+completionReadout fld = fld Torus.completionChannel
 
 completionReadoutFirstInvariant :
-  ∀ {State : Set} (field : Torus.Field State) →
-  completionReadout (Torus.pullbackFirst field) ≡ completionReadout field
-completionReadoutFirstInvariant field = refl
+  ∀ {State : Set} (fld : Torus.Field State) →
+  completionReadout (Torus.pullbackFirst fld) ≡ completionReadout fld
+completionReadoutFirstInvariant fld = refl
 
 completionReadoutSecondInvariant :
-  ∀ {State : Set} (field : Torus.Field State) →
-  completionReadout (Torus.pullbackSecond field) ≡ completionReadout field
-completionReadoutSecondInvariant field = refl
+  ∀ {State : Set} (fld : Torus.Field State) →
+  completionReadout (Torus.pullbackSecond fld) ≡ completionReadout fld
+completionReadoutSecondInvariant fld = refl
 
-record FourierModeBoundary : Set where
+record FourierModeBoundary : Set₁ where
   constructor fourierModeBoundary
   field
     finiteCharactersAreContinuumWaveNumbers : Set
