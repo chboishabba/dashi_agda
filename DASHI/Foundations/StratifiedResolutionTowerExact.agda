@@ -339,7 +339,7 @@ pullbackConstantOnFibre :
   project tower left ≡ project tower right →
   pullbackObservable observable left
   ≡ pullbackObservable observable right
-pullbackConstantOnFibre observable refl = refl
+pullbackConstantOnFibre observable eq = cong observable eq
 
 ------------------------------------------------------------------------
 -- Coarse aggregation is additional structure, not supplied by a quotient
