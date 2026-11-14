@@ -32,6 +32,8 @@ echo "LEAN_ROLLUP_PR=108 SHA=$LEAN_SHA"
 # Existence checks ensure no implicit fallthrough to historical
 # separate donor PR heads.
 agda_required=(
+  "DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda"
+  "DASHI/Mathematics/Complexity/Karp21GammaBinaryGoldenCoreExact.agda"
   "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda"
   "DASHI/Mathematics/Complexity/Karp21NativeGammaPhysicalAcceptanceObservationExact.agda"
   "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda"
@@ -39,6 +41,7 @@ agda_required=(
   "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
 )
 lean_required=(
+  "Synthesis/ClaySixFrontierRollup20261114.lean"
   "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
   "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean"
   "Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean"
@@ -84,6 +87,8 @@ fi
 (cd "$AGDA_ROOT" && bash scripts/check_bishop_eta_native_exp_cross_pr_local.sh)
 (cd "$LEAN_ROOT" && bash scripts/check_bsd_q2_hensel_3705_local.sh)
 (cd "$AGDA_ROOT" && RH_LEAN_REPO_DIR="$LEAN_ROOT" bash scripts/check_rh_a2_g3_attachment_local.sh)
+(cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda)
+(cd "$LEAN_ROOT" && lake env lean Synthesis/ClaySixFrontierRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean)
 
