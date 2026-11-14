@@ -505,3 +505,25 @@ Leech PR #4 has implemented `matched_mixed_orientation_c3_x`, the original `Hist
 **Evidence governance correction:** prior F3 scorer accepted a required `--reserved-lockbox-ids` and read the raw reserved F5 `.npy` to exclude 16-token ngrams, so the historical statement “F5 never opened or loaded” is too strong. The evidence supports **F5 never scored for CE or used to select architecture**; its raw token bytes were consumed by an overlap guard in the old code. The revised F3 scorer prohibits raw F5 input, checks only the original probe producer's SHA-bound exclusion manifest, and explicitly marks the results as exploratory reused F3 data. The original locked F5 is still *unscored* and its official future CE evaluation must not be used for post-hoc geometry tuning.
 
 A03/A04 arbitrary-field Fourier convolution/Parseval, A05 original eight+centre↔wave pairs, and A06 original consumer remain open. Source-correct F3 negative control does not close them, nor prove a task phase/group circuit.
+
+### SymPy-cross-checked exact source triad factorization, formal target pending
+
+For original reals `x=(a,b,c)`, `h=(A,B,C)`, let `R_+(a,b,c)=(b,c,a)`, `R_-(a,b,c)=(c,a,b)`; original directed router triple `T(x,h)=(aA+bB+cC,aB+bC+cA,aC+bA+cB)`. Define
+```text
+q(a,b,c)=a²+b²+c²-ab-bc-ca
+         = [(a-b)²+(b-c)²+(c-a)²]/2.
+```
+A direct SymPy symbolic simplification of the **unconstrained** original six-variable polynomial confirms:
+```text
+||R_±x-x||²=2q(x),
+||T(R_±x,h)-T(x,h)||²=2q(x)q(h).
+```
+This is exact over commutative real scalar arithmetic, and summing over original 384/3 triads yields the *same squared original routed-feature displacement* for coherent `R_+` and arbitrary independently mixed ± triad orientations, per original expert history. Original `trialectic_router_invariants` unary terms are unchanged under either rotation; router-logit vector direction remains **unmatched**. The scalar identity can be formalized independently of empirical data.
+
+**Exact new formal target names (UNPROVED Agda; do not label checked):**
+- `originalTriadRotationSquaredDisplacementEqualsTwoQ`
+- `originalDirectedTriadC3DisplacementSquaredFactors`
+- `originalMixedTriadC3RouterFeatureEnergyEqualsCoherent`
+- `originalBlockwiseMixedC3NormUnderAllExpertHistories`
+
+Leech PR #4 has a native `directed_c3_displacement_energy_exact` analytic implementation plus route-feature audit, exact ± mixed-permutation source control, and regressions. The legacy F3 experimental null matched hidden activation norm/displacement but NOT the nonlinear feature map; this new analytic equality eliminates that specific confound without implying a trained semantic C3 mechanism. Both native-head acceptance and new RX 580 CE remain **OPEN** after current source edits. Original finite Agda A00–A05 selected 8/8 Track B prior receipts do not include these new formal targets or A03–A06 universal/weld closures.
