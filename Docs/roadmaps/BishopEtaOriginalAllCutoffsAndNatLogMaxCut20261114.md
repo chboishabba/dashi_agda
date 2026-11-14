@@ -132,6 +132,12 @@ not a floating exponent or an unproved Bishop real
 
 Example: `δ=1/2,C_K=9,eps=1/10` yields `N=8100`
 for `≤eps`, and `N=32400` for `≤eps/2<eps`.
+New source-written finite carrier: `DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda`
+defines `originalAlternatingRawTerm` and proves the proposed
+`originalRawEvenPrefixEqualsSelectedPairs` and
+`originalRawOddPrefixEqualsSelectedPairsPlusOne`, without any
+new analytic premise. Pinned Agda kernel acceptance is pending.
+
 The formal Agda proof must transport such a modulus
 through the original `SeriesOf` limit and the genuine
 source complex absolute-value/order structure.
@@ -144,7 +150,7 @@ Run:
 
 The second checker has independent cases: **21,845** exact rational
 finite Abel identities, **1,972** exact real arbitrary-endpoint tails,
-**576** exact complete-pair tails, and **245** complex numerical
+**576** exact complete-pair tails, **167,481** exact original raw odd/even-prefix parity cases, and **245** complex numerical
 arbitrary-endpoint diagnostics. Exact positive-rational modulus
 computed by integer powers. These are **not** Agda kernel
 acceptance for the actual Bishop source.
