@@ -2152,5 +2152,143 @@
     "verified_terminal_unconditional_physical_witnesses": false,
     "kernel_receipt": false,
     "note": "Precise original conditional theorem types and false R736 flags; not a universal proof absence assertion or newly solved Clay theorem"
+  },
+  "external_oai_three_frontier_bidi_20261114": {
+    "date": "2026-11-14",
+    "detailed_ledger": "Docs/roadmaps/ClayOpenAIThreeFrontierBidirectionalSteelman20261114.md",
+    "active_rollups": {
+      "golden_agda_pr": 1499,
+      "donor_lean_pr": 108
+    },
+    "attribution": "External source and review theorems retain their own authors; only conditional adapters, original source composition and independent finite tests are DASHI contributions",
+    "external_sources": [
+      {
+        "name": "OAI YM original",
+        "repository": "yang-mills-group/OpenAI-YM-20261028",
+        "commit": "3456e5e75cf8d4cd558955a5c7638fba2d68f464",
+        "lean": "4.32.0"
+      },
+      {
+        "name": "YM review A7/A8",
+        "repository": "yang-mills-group/YM",
+        "commit": "55ba9fc36293b3f4d52c6b1f813169a0be76ee98",
+        "lean": "4.32.0"
+      },
+      {
+        "name": "OAI NS C/D",
+        "repository": "openai/NavierStokesAndEuler",
+        "commit": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+        "lean": "4.34.0-rc2"
+      },
+      {
+        "name": "OAI SAT new index",
+        "repository": "openai/math",
+        "commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+        "lean": "4.34.1"
+      },
+      {
+        "name": "OAI math older vendor not new index",
+        "repository": "openai/math",
+        "commit": "1581d4cbdd69a0faf34b2089614fe2a814316a6a",
+        "lean": "4.34.1"
+      }
+    ],
+    "source_written_exact_lemmas": [
+      {
+        "programme": "PNP",
+        "file": "DASHI/Research/OpenAIMath/OpenAIMathOriginalOptimizedSATDecisionBitExact.agda",
+        "names": [
+          "originalTseitinSATDecisionBitExact",
+          "optimizedTseitinSATDecisionBitExact",
+          "creationOrderOptimizedSATDecisionBitExact"
+        ],
+        "mode": "original Agda count equality composition",
+        "agda_kernel_checked": false
+      },
+      {
+        "programme": "PNP",
+        "file": "Integration/OpenAIMath34/OriginalListFinsetCountTransportCandidate.lean",
+        "names": [
+          "normalizeListCNF_eval_true_iff",
+          "normalizeListCNF_count_eq"
+        ],
+        "mode": "external Lean 4.34.1 typed target, no native import",
+        "upstream_kernel_checked": false
+      },
+      {
+        "programme": "NS",
+        "file": "Integration/OpenAINavierStokes34/ForcedGlobalScopeCorollariesCandidate.lean",
+        "names": [
+          "no_universal_forced_periodic_global",
+          "no_universal_forced_R3_global_energy",
+          "unforced_no_solution_to_forced_periodic_breakdown",
+          "unforced_no_solution_to_forced_R3_breakdown"
+        ],
+        "mode": "external Lean 4.34.0-rc2 typed target, no native import",
+        "upstream_kernel_checked": false
+      },
+      {
+        "programme": "YM",
+        "file": "Integration/OpenAIYangMills32/CombinedA7A8SameWitnessCandidate.lean",
+        "names": [
+          "accepted_same_hierarchy_commonOPE",
+          "combined_acceptance_with_same_hierarchy_commonOPE"
+        ],
+        "mode": "external Lean 4.32.0 typed target, preexisting from earlier same-day work",
+        "upstream_kernel_checked": false
+      }
+    ],
+    "exact_remaining_gates": {
+      "YM": [
+        "YM.A01",
+        "YM.A02",
+        "YM.A03",
+        "YM.A04",
+        "YM.A05",
+        "YM.A06",
+        "YM.B01",
+        "YM.B02",
+        "YM.C01",
+        "YM.C02"
+      ],
+      "NS": [
+        "NS.A01",
+        "NS.A02",
+        "NS.A03",
+        "NS.B01",
+        "NS.B02",
+        "NS.B03",
+        "NS.C01"
+      ],
+      "PNP": [
+        "SAT.M00",
+        "SAT.M01a",
+        "SAT.M01b",
+        "SAT.M02",
+        "SAT.M03",
+        "SAT.M04",
+        "SAT.M05",
+        "SAT.F1-F4",
+        "SAT.CLAY"
+      ]
+    },
+    "local_regression": {
+      "script": "scripts/check_oai_bidi_ns_sat_20261114.py",
+      "git_blob": "5a37096a5d7579bea3a439b31020d1621259eb21",
+      "list_finset_cnf_cases": 580,
+      "forced_unforced_logic_models": 4,
+      "executed": "PASS independently from exact Git blob",
+      "not_a_kernel_receipt": true
+    },
+    "statuses": {
+      "original_oai_f19_wilson_same_object": false,
+      "oai_ns_to_unforced_R736": false,
+      "oai_sat_to_dashi_bytes_and_clock": false,
+      "original_YM_mass_gap": false,
+      "original_NS_global_PDE_endpoint": false,
+      "original_PNotEqualsNP": false,
+      "new_agda_kernel": false,
+      "new_lean_kernel": false
+    }
   }
 }
