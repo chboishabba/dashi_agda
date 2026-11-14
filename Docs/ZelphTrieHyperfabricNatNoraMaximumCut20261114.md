@@ -1,5 +1,16 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Updated external acceptance and new P0 structural name-cover prerequisite — 15 November 2026
+
+**Operator-reported exact-head PASS:** DASHI `20ef376c` 9/9 Agda 2.9 kernel targets; ITIR `712011a` 145/145 Python and native packed Cap'n Proto/original mini-bin; SLR `fc819e6` 24/24 Rust; SensibLaw `f77b28f` 17/17 Python. Those source-level results are fixed to those heads and do not imply actual HF source bytes or primary Wikidata source support.
+
+**New source-level P0/A1 partition validator in the *existing ITIR #14* (NEW head not yet locally accepted):** `tools/audit_zelph_original_packed_partition.py` checks an original header and the entire numerical-v2 manifest's source-bin offsets: one header, dense ordered `left`, `right`, `nameOfNode`, `nodeOfName`, contiguous positive-length chunks, exact counts, no gaps, no overlaps and no trailing bytes. The one-shot physical runner runs this before original selected byte-range equality and persists `original-packed-partition.json` with raw hash. This is a **structural path to the A1 complete source-name-domain witness** but is not itself a proof of source bytes, name-key exhaustive decode, collision uniqueness or source identity.
+
+**Mathematical next A1 cut:** construct a source-backed implication `complete source header + contiguous manifest name-section cover + raw equality of EVERY name shard + trusted decoded-row equivalence ⇒ every original nodeOfName entry appears in a published shard`; then instantiate `CompleteNameShardFibre` without assuming uniqueness. A1 `singletonNameFibre` only applies when the physical source separately supplies uniqueness. The new validator checks *only* the first two structural premises; real original source/head and all name shard bytes still pending.
+
+**Local unblock:** ITIR full exact-head check `bash tools/check_zelph_physical_maxcut_offline.sh`; the latest head includes the new original offset-geometry tests. The runtime here could not reach the immutable Hugging Face manifest/source URLs, so no physical source receipt was generated.
+
+
 ## New P0–P4 physical/native source-witness implementation — 15 November 2026
 
 **All prior exact-head acceptance CLOSED at their checked commits:** Agda 9/9 on DASHI `cf3ba8d`; ITIR 120/120 Python plus genuine Cap'n Proto mini-original two-pass native producer at `7385872`; SLR source-handoff 19/19 Rust at `4e0f150`; SensibLaw NORA 17/17 at `a5715ea7`. Operator-reported local clean-head receipts; do not assign them to subsequent changed source heads.
