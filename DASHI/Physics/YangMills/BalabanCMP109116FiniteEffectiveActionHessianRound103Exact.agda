@@ -1,4 +1,7 @@
-{-# OPTIONS --safe #-}
+-- TRUST BOUNDARY: legacy RealAnalysisAxioms / dependent abstract-real analysis.
+-- This module is NOT --safe. A source-written proof is not a postulate-free
+-- Agda --safe receipt. See BalabanCMP109116ConstructiveScalarCoreExact for
+-- a genuinely safe carrier-parametric replacement of the algebraic core.
 module DASHI.Physics.YangMills.BalabanCMP109116FiniteEffectiveActionHessianRound103Exact where
 
 ------------------------------------------------------------------------

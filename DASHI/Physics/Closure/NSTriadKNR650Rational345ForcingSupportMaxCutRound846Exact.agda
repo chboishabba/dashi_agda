@@ -9,8 +9,12 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345ForcingSupportMaxCutRound84
 -- Therefore the entire remaining modal forcing weld is equivalent to one
 -- finite combinatorial support statement:
 --
---   forcingActive k = false
+--   forcingActive k = false AND k != 0
 --     -> filterSelected mixedCellActive (physicalOutputFiber 4 k) = [].
+-- The previous all-mode condition is refuted constructively at k=0 by
+-- R847: six selected seed pairs there remain in the active fibre.
+-- At k=0, R436 already proves projectedNonlinearity=0 from exact
+-- transversality without falsely asserting the support list is empty.
 --
 -- From that list equality this file derives, without any estimate:
 --
@@ -19,14 +23,15 @@ module DASHI.Physics.Closure.NSTriadKNR650Rational345ForcingSupportMaxCutRound84
 --   R837.Repository345ModalSameObject.
 --
 -- The remaining R829D work after R846 is thus:
---   F1. prove the finite support-empty theorem above;
+--   F1. prove the NONZERO-output finite support-empty theorem above;
 --   F2. kernel-evaluate the finite active R224/R230 vector folds.
+-- Zero-output forcing is settled independently by source R436.
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([])
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (cong; trans)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
@@ -38,6 +43,7 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSupportMaxCutRound834
 import DASHI.Physics.Closure.NSTriadKNR650Rational345SparseSnapshotRound836Exact as Snapshot
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ActiveRepositoryReductionRound837Exact as R837
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ProjectedNonlinearityPruneRound840Exact as R840
+import DASHI.Physics.Closure.NSTriadKNProjectedNonlinearityZeroOutputRound436Exact as R436
 import DASHI.Physics.Closure.NSTriadKNR650Rational345DirectPhysicalSnapshotRound841Exact as Direct
 import DASHI.Physics.Closure.NSTriadKNR650Rational345ForcingSupportRound845Exact as R845
 
@@ -48,6 +54,7 @@ InactiveActiveFibreEmpty : Set
 InactiveActiveFibreEmpty =
   (mode : Z3.FourierMode) →
   Snapshot.forcingActive mode ≡ false →
+  Output.modeEqual mode Z3.zeroMode ≡ false →
   Sparse.filterSelected Snapshot.mixedCellActive
     (Output.physicalOutputFiber 4 mode)
   ≡ []
@@ -65,13 +72,21 @@ module Evaluate
     (mode : Z3.FourierMode) →
     Snapshot.forcingActive mode ≡ false →
     Audit.projectedNonlinearity system mode ≡ C3.complex3Zero F
-  inactiveProjectedZero mode inactive =
+  inactiveProjectedZero mode inactive
+    with Output.modeEqual mode Z3.zeroMode in modeTest
+  ... | true =
+    trans
+      (cong (Audit.projectedNonlinearity system)
+        (Output.modeEqualSound modeTest))
+      (R436.projectedNonlinearityAtZeroIsZero
+        system (Direct.snapshotVelocityTransverse E))
+  ... | false =
     trans
       (P.projectedNonlinearityIsActiveR30Fold mode)
       tail
     where
     tail : P.activeR30Fold mode ≡ C3.complex3Zero F
-    tail rewrite supportEmpty mode inactive = refl
+    tail rewrite supportEmpty mode inactive modeTest = refl
 
   module Full = R845.Evaluate unit I inactiveProjectedZero
 
@@ -106,3 +121,15 @@ round846ClayPromotion = false
 round846ForcingSameObjectReducedToFiniteSupportEmptyIsTrue :
   round846ForcingSameObjectReducedToFiniteSupportEmpty ≡ true
 round846ForcingSameObjectReducedToFiniteSupportEmptyIsTrue = refl
+
+-- Original universal support-empty is refuted by R847 (k=0), not
+-- merely left unproved. Only the new nonzero form remains F1.
+round846OriginalAllModeSupportEmptyRejected : Bool
+round846OriginalAllModeSupportEmptyRejected = true
+
+round846ZeroOutputUsesR436TransverseVanishing : Bool
+round846ZeroOutputUsesR436TransverseVanishing = true
+
+round846OriginalAllModeSupportEmptyRejectedIsTrue :
+  round846OriginalAllModeSupportEmptyRejected ≡ true
+round846OriginalAllModeSupportEmptyRejectedIsTrue = refl

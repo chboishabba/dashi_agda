@@ -1,0 +1,158 @@
+#!/usr/bin/env bash
+# Exact-head local Agda 2.9 acceptance: no CI and no success if checker absent.
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+targets=(
+  DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda
+  DASHI/Foundations/BishopPositiveInverseUpperFromLowerExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogTrueNormRemainderExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogEightTwentySevenNormExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogTrueNormRemainderExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticTrueNormLimitOrderExact.agda
+  DASHI/Analysis/BishopComplexNormTriangleFromR4Exact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticTrueNormFiniteMajorantExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticTrueNormGeometricBoundExact.agda
+  DASHI/Moonshine/AbelBishopLogUpperDiskSetoidZeroExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticSourceNormFactorExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticUpperDiskHalfGeometricExact.agda
+  DASHI/Moonshine/AbelBishopLogUpperDiskZeroNormalizationExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogUpperDiskQuadraticTailExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticUpperDiskSeriesLimitExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLocalLogDiskAdmissionExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticHalfCoefficientExact.agda
+  DASHI/Moonshine/AbelBishopLogOnePlusUpperDiskConvergenceExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogNormalizedDiskUpperExact.agda
+  DASHI/Moonshine/AbelBishopNewtonReducedNativeMaxCutExact.agda
+  DASHI/Moonshine/AbelBishopNewtonDiskSelfMapFromSquareContractionExact.agda
+  DASHI/Moonshine/AbelBishopNewtonLiteralFirstStepFromTaylorExact.agda
+  DASHI/Analysis/BishopComplexNormSquareUpperPowerEnvelopeExact.agda
+  DASHI/Moonshine/AbelBishopLogSourceFiniteDifferenceFactorExact.agda
+  DASHI/Moonshine/AbelBishopComplexPowerDifferenceExact.agda
+  DASHI/Moonshine/AbelBishopNewtonSelectedSinePositiveExact.agda
+  DASHI/Moonshine/AbelBishopNewtonSourceInhabitationExact.agda
+  DASHI/Moonshine/AbelBishopNewtonCenterDenominatorExact.agda
+  DASHI/Moonshine/AbelBishopNewtonRealTrigContinuityExact.agda
+  DASHI/Moonshine/AbelBishopAnalyticNewtonContractionExact.agda
+  DASHI/Moonshine/AbelBishopNewtonExpContinuityTransportExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogQuadraticRemainderWeldExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticSeriesLimitExact.agda
+  DASHI/Moonshine/AbelBishopLogQuadraticFiniteTailExact.agda
+  DASHI/Moonshine/AbelBishopNewtonSelectedLimitExact.agda
+  DASHI/Moonshine/JCoefficientCharacterBridge.agda
+  DASHI/Moonshine/AbelBishopNewtonSelectedOperatorExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsRemainderToSchroederExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsRemainderFactorExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsSelectedRationalConstantsExact.agda
+  DASHI/Moonshine/AbelBishopLogOnePlusZeroNormalizationExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsGeometricSchroederExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsGeometricOrbitExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsSchroederLimitExact.agda
+  DASHI/Analysis/BishopComplexConstantMultiplicationConvergenceExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsShiftConvergenceExact.agda
+  DASHI/Moonshine/AbelBishopInverseKoenigsFiniteOrbitExact.agda
+  DASHI/Analysis/BishopComplexExpFactEqualsNativeExpExact.agda
+  DASHI/Analysis/BishopComplexFactorialBinomialCapstoneExact.agda
+  DASHI/Analysis/BishopComplexFiniteBinomialExpansionBridgeExact.agda
+  DASHI/Analysis/BishopComplexFiniteBinomialScaleExact.agda
+  DASHI/Analysis/BishopComplexFiniteBinomialTheoremExact.agda
+  DASHI/Analysis/BishopComplexCommutativeSemiringExact.agda
+  DASHI/Analysis/BishopComplexCommutativeSemiringLawsExact.agda
+  DASHI/Analysis/BishopComplexExpFactFiniteBinomialReductionExact.agda
+  DASHI/Analysis/BishopComplexFactorialTriangleNativeExpExact.agda
+  DASHI/Analysis/BishopComplexFactorialRectangleLimitExact.agda
+  DASHI/Analysis/BishopComplexCauchyTriangleLimitTransportExact.agda
+  DASHI/Analysis/BishopComplexFactorialTriangleCoefficientWeldExact.agda
+  DASHI/Analysis/BishopComplexFactorialFiniteConvolutionExact.agda
+  DASHI/Analysis/BishopComplexFactorialBinomialSummandExact.agda
+  DASHI/Analysis/BishopComplexTriangleTailsVanishingExact.agda
+  DASHI/Analysis/BishopComplexFiniteSquareTriangleDifferenceExact.agda
+  DASHI/Analysis/BishopComplexFiniteRectangleProductExact.agda
+  DASHI/Moonshine/AbelBishopFactorialImaginaryAxisAllCutoffsExact.agda
+  DASHI/Foundations/BishopEvenOddFullSequenceConvergenceExact.agda
+  DASHI/Moonshine/AbelBishopFactorialOddCutoffVanishingExact.agda
+  DASHI/Moonshine/AbelBishopFactorialOddCutoffFiniteExact.agda
+  DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisFiniteReindexExact.agda
+  DASHI/Foundations/BishopFiniteEvenOddSeriesReindexExact.agda
+  DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisSignedTermsExact.agda
+  DASHI/Moonshine/AbelBishopFactorialComplexImaginaryAxisTwoStepExact.agda
+  DASHI/Moonshine/AbelBishopFactorialComplexRealAxisTermsExact.agda
+  DASHI/Moonshine/AbelBishopFactorialComplexExpDiskExact.agda
+  DASHI/Moonshine/AbelBishopSelectedLogAffineReconstructionExact.agda
+  DASHI/Moonshine/AbelBishopLogFiniteComplexDerivativeExact.agda
+  DASHI/Moonshine/AbelBishopLogFiniteGeometricDerivativeExact.agda
+  DASHI/Moonshine/AbelBishopLogOnePlusCoefficientDominationExact.agda
+  DASHI/Moonshine/AbelBishopGeometricPowerSeriesExact.agda
+  DASHI/Moonshine/AbelBishopLogOnePlusOriginalSeriesExact.agda
+  DASHI/Moonshine/AbelSchroederLogCocycleTransportExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsComponentwiseCompletionExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsIncrementSeriesExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsFiniteTelescopingExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsGeometricAbsoluteExact.agda
+  DASHI/Moonshine/AbelBishopKoenigsTrajectoryDifferenceLimitExact.agda
+  DASHI/Moonshine/AbelBishopOriginalComplexCarrierWeldExact.agda
+  DASHI/Moonshine/AbelBishopOriginalExponentialIteratesExact.agda
+  DASHI/Moonshine/AbelBishopOriginalQParameterExact.agda
+  DASHI/Moonshine/AbelBishopTetrationNaturalHeightExact.agda
+  DASHI/Moonshine/AbelBishopRound11QPeriodInstanceExact.agda
+  DASHI/Moonshine/AbelE8RootE4FirstCoefficientExact.agda
+  DASHI/Moonshine/AbelE8RootTriadic243CountComparisonExact.agda
+  DASHI/Moonshine/AbelE8GeneratedRootNormTwoExact.agda
+  DASHI/Moonshine/AbelE8ThetaParityProjectorExact.agda
+  DASHI/Moonshine/AbelE8HalfOddShellInvolutionExact.agda
+  DASHI/Moonshine/AbelBishopMachinQuarterToQPeriodExact.agda
+  DASHI/Moonshine/AbelBishopQSeriesSetoidPeriodTransportExact.agda
+  DASHI/Moonshine/AbelOriginalMovingLevelObserverTransportExact.agda
+  DASHI/Moonshine/AbelCarrierFixedLocusTransportExact.agda
+)
+
+if command -v git >/dev/null 2>&1; then
+  echo "HEAD: $(git rev-parse HEAD)"
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    echo "WARNING: worktree dirty; exact-head receipt requires recording diff" >&2
+  fi
+fi
+
+for target in "${targets[@]}"; do
+  if [[ ! -s "$target" ]]; then
+    echo "FAIL missing source: $target" >&2
+    exit 3
+  fi
+  if grep -nE '(^|[[:space:]])postulate([[:space:]]|$)|allow-unsolved-metas|no-termination-check|NO_TERMINATION_CHECK|TERMINATING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK|type-in-type' "$target"; then
+    echo "FAIL forbidden trust escape: $target" >&2
+    exit 4
+  fi
+  # A bare RHS underscore leaves an Agda metavariable, not a proof.
+  if grep -nE '=[[:space:]]*_$' "$target"; then
+    echo "FAIL unresolved placeholder RHS: $target" >&2
+    exit 4
+  fi
+  if grep -Pzo '\{!.*?!\}' "$target" >/dev/null; then
+    echo "FAIL unsolved Agda hole: $target" >&2
+    exit 4
+  fi
+done
+
+if [[ ! -x scripts/run_agda29_parallel_check.sh ]]; then
+  echo "FAIL pinned local Agda checker runner missing or not executable" >&2
+  exit 5
+fi
+
+if ! command -v python3 >/dev/null 2>&1; then
+  echo "FAIL python3 unavailable for independent exact E8 shell regression" >&2
+  exit 6
+fi
+python3 scripts/check_analytic_j_tetration_e8_theta_shells.py
+python3 scripts/check_bishop_log_true_norm_geometric_exact.py
+python3 scripts/check_bishop_selected_log_eight_twenty_seven_exact.py
+python3 scripts/check_analytic_j_tetration_newton_center_exact.py
+python3 scripts/check_analytic_j_tetration_local_koenigs_rational.py
+python3 scripts/analytic_j_tetration_koenigs_log_series_majorant.py
+python3 scripts/analytic_j_tetration_exp_log_formal_recurrence.py
+python3 scripts/analytic_j_tetration_exp_log_composition_majorant.py
+
+echo "Running pinned Agda 2.9 --safe checker on ${#targets[@]} explicit source owners"
+DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh --safe "${targets[@]}"
+echo "PASS exact-head focused Agda check (only if checker exited zero)"

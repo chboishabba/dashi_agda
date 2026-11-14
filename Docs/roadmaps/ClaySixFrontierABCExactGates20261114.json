@@ -1,0 +1,2143 @@
+{
+  "schema": "dashi-clay-abc-maxcut-v2",
+  "date": "2026-11-14",
+  "purpose": "AUTHORITATIVE original-source exact unsolved/conditional/tested ledger; never an endpoint receipt",
+  "source_roots": {
+    "agda": "chboishabba/dashi_agda",
+    "lean": "chboishabba/dashi_lean4"
+  },
+  "observed_heads": {
+    "agda": {
+      "1444": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
+      "1474": "5348713358c23f6b7e638cfb181bcb7e999645b1",
+      "1478": "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872",
+      "1499": "ade4c5995a7db1a3c7dca862f2142bf56ad8f93e",
+      "1500": "5c01456abb4a6126bec02804af6f42cdfb7e953b",
+      "1501": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+      "1502": "2ff123416c93981c3eeda3ec8002733912b0ebe9",
+      "1503": "63eddffbd133b861e6de12d2f5890580d3e4a646"
+    },
+    "lean": {
+      "40": "28e99cd51ab4dc1e538c1f70cf77e460aa3ac672",
+      "107": "a06066e49555058e3cf4694e5b1ce748b9a869c4",
+      "108": "7ac99d0807c31e20a7fd8e8a6a9ae50b63210b87"
+    }
+  },
+  "external_sources": {
+    "clay_status": "https://www.claymath.org/Millennium%20Problems/",
+    "clay_ns_2026": "https://www.claymath.org/news/navier-stokes-announcement/",
+    "external_ns_claim": "https://openai.com/index/navier-stokes-solution/",
+    "lmfdb_selected": "https://www.lmfdb.org/EllipticCurve/Q/32a2/",
+    "bishop_murray": "https://arxiv.org/abs/2205.08354",
+    "attribution": "AGENTS.md; Docs/SourceAttributionPolicy.md"
+  },
+  "classification": {
+    "A": "Known theorem/procedure requires proof term, faithful carrier transport or kernel receipt",
+    "B": "Defined strategy but nontrivial original source estimate/identity unproved",
+    "C": "General endpoint or critical new universal inequality has no valid source proof",
+    "A_TO_B": "Known finite carrier proof followed by unproved substantive source identity",
+    "B_TO_C": "Source-specific research inequality may be as hard as general endpoint",
+    "A_WITH_PHYSICAL_WELD": "Foundational implementation known, physical same-source identification unproved",
+    "A_PLUS_SOURCE_IDENTIFICATION": "Exact arithmetic proved, real trajectory/source bound conditional",
+    "A_VERIFY_EXTERNAL": "External published claim has separate identity/axiom review not owned by DASHI"
+  },
+  "programmes": {
+    "YM": [
+      {
+        "id": "YM.P0.L1",
+        "tier": "B",
+        "statement": "Literal original Wilson/FP/Haar third/fourth jet, four diagram numerators, Ward sum cancellation and C_A*11/24 physical coefficient",
+        "owners": [
+          "#1444",
+          "#1498",
+          "#1503"
+        ],
+        "next": "Source physical third/fourth background jets, indexed Fourier contracted numerators, uniform fifth remainder",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.R445.TV",
+        "tier": "A_TO_B",
+        "statement": "For original same-carrier effective P and bare Q, TV(P,Q)=D implies each F,G,FG moment discrepancy ≤D, covariance discrepancy ≤3D",
+        "owners": [
+          "#1444",
+          "#1503"
+        ],
+        "next": "PROVED generic finite total-variation algebra only; estimate actual physical D uniformly or renormalize target family",
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "round2_notes": [
+          "generic sharp action-oscillation bound established; original physical TV still unpaid"
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance",
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
+      },
+      {
+        "id": "YM.L1.RG",
+        "tier": "B_TO_C",
+        "statement": "Original Wilson RG cutoff- and volume-uniform three moments for F,G,FG",
+        "owners": [
+          "#1444",
+          "#1503"
+        ],
+        "next": "Estimate original E1 physical effective-vs-target density TV or alternative direct marked cumulants",
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
+      },
+      {
+        "id": "YM.L2",
+        "tier": "B_TO_C",
+        "statement": "Original CMP116 common analytic radius, three distinct typed marks, spatial/irrelevant shell decay",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Control physical differentiated activities in common Gibbs measure",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.L3",
+        "tier": "B_TO_C",
+        "statement": "Same Wilson Gibbs density u_t heat/Doob Hessian debt, shell-integrable positive curvature reserve",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Prove source u_t=evolution_t(exp(-V0)) Hessian signed inequality with cutoff-uniform constants",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.E1",
+        "tier": "C",
+        "statement": "Interacting 4D projective Schwinger cylinder expectations, OS positivity, tightness and nontrivial continuum",
+        "owners": [
+          "#1444",
+          "#1503"
+        ],
+        "next": "Genuine cutoff-uniform Wilson/measure bounds, common observable positivity, field reconstruction",
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
+      },
+      {
+        "id": "YM.D1",
+        "tier": "B_TO_C",
+        "statement": "Nonconstant interacting covariance exponential space-time decay",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Physical polymer activity, nonconstant marked sources and volume-uniform covariance",
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
+      },
+      {
+        "id": "YM.D2",
+        "tier": "C",
+        "statement": "Full nonvacuum positive spectrum gap of the SAME OS Hamiltonian",
+        "owners": [
+          "#1444",
+          "#1503"
+        ],
+        "next": "Uniform OS time-matrix-element decay over dense physical reconstructed class and continuum gap stability",
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
+      },
+      {
+        "id": "YM.L4",
+        "tier": "B_TO_C",
+        "statement": "Actual gauge-invariant curvature composites as local distribution-valued continuum operators",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Composite source norm/OS Hilbert smoothness and locality",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.L5",
+        "tier": "B_TO_C",
+        "statement": "Physical OPE remainder and one-step asymptotic-freedom coefficient on same family",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Actual source OPE short-distance remainder and mixing-coefficient identification",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.L6",
+        "tier": "B_TO_C",
+        "statement": "Renormalized CMP119 metric derivative and stress tensor local Ward insertion",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Actual finite stress source, completion and local translation Ward",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.L7",
+        "tier": "B_TO_C",
+        "statement": "Renormalized T00 charge equals -right derivative of common OS semigroup on a graph core",
+        "owners": [
+          "#1444",
+          "#1503"
+        ],
+        "next": "Same density local Ward and stress core closability/essential self-adjointness; generic operator closure already exists",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.N1",
+        "tier": "B_TO_C",
+        "statement": "Nontrivial interacting continuum observable, not a free or formal Wilson test",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Actual non-generalized-free truncated correlation and same family",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.G1",
+        "tier": "B_TO_C",
+        "statement": "Uniform all compact simple group constructions with physical Casimir and RG estimates",
+        "owners": [
+          "#1444"
+        ],
+        "next": "Construct group-specific gauge dynamics and uniform estimates, not positivity of C_A alone",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "YM.REAL",
+        "tier": "A_WITH_PHYSICAL_WELD",
+        "statement": "Replace legacy postulated RealAnalysisAxioms scalar with actual Bishop real setoid in original Wilson/Haar source",
+        "owners": [
+          "#1444",
+          "#1478"
+        ],
+        "next": "Construct equality/order/integration/differentiation-preserving original-source migration with no axioms",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "NS": [
+      {
+        "id": "NS.R854",
+        "tier": "A_PLUS_SOURCE_IDENTIFICATION",
+        "statement": "Selected 3-4-5 Fourier initial rate -28273644/125 and conditional affine integral bound",
+        "owners": [
+          "#1501",
+          "#1499"
+        ],
+        "next": "Actual REAL Galerkin trajectory + R853 selected signed rate + R828 Lipschitz source identification",
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "round2_notes": [
+          "real-time negative-rate compiler source-written in Lean; actual R853 trajectory envelope open"
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+      },
+      {
+        "id": "NS.C2.REMOTE",
+        "tier": "C",
+        "statement": "Low/remote coercivity pays original remote boundary flux",
+        "owners": [
+          "master",
+          "#1501"
+        ],
+        "next": "Test and prove boundary-flux transport, or build countermodel",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "NS.C2.COLLAR",
+        "tier": "C",
+        "statement": "Physical signed collar flux can be absorbed uniformly into viscosity budget",
+        "owners": [
+          "master",
+          "#1501"
+        ],
+        "next": "Test under actual nonlocal Biot-Savart interactions rather than asserted Morrey cutoff",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "NS.B.RESERVE",
+        "tier": "C",
+        "statement": "Uniform-in-N time-integrated signed reserve and W1 for actual 3D nonlinear solution",
+        "owners": [
+          "master",
+          "#1501"
+        ],
+        "next": "Replace/refine refuted universal auxiliary R823 reserve; handle all initial data",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "NS.CD.EXTERNAL",
+        "tier": "A_VERIFY_EXTERNAL",
+        "statement": "Independently verify 2026 externally announced smooth-forcing breakdown theorem for Fefferman alternatives C/D",
+        "owners": [
+          "external OpenAI 2026-09-08",
+          "Clay 2026-09-11"
+        ],
+        "next": "Separate third-party claimed theorem and source/axiom/original statement review from repo-owned periodic B continuation",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "RH": [
+      {
+        "id": "RH.A1",
+        "tier": "B_TO_C",
+        "statement": "Countable dyadic zero-shell carrier/curvature and physical far-zero compensating gain",
+        "owners": [
+          "Lean #50"
+        ],
+        "next": "Construct full zero count partition with uniform curvature including zeros near evaluation point",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "RH.A2",
+        "tier": "C",
+        "statement": "Strict signed local debt + FarExact < threshold + smooth mu gain",
+        "owners": [
+          "Lean #50",
+          "Lean #108"
+        ],
+        "next": "Prove/refute actual same-zero configuration strict inequality with negative controls",
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+      },
+      {
+        "id": "RH.B",
+        "tier": "C",
+        "statement": "Eventual signedFifthCorrelationGapAt nonnegative on original discrete operator",
+        "owners": [
+          "Lean #50",
+          "#1497"
+        ],
+        "next": "Prove/refute actual weighted signed fifth expression, do not infer sign from first gamma",
+        "status": "OPEN",
+        "proof_receipt": false,
+        "round2_notes": [
+          "first-zero positive shortcut disproved under mean-square ordering; actual W signed gap unknown"
+        ]
+      },
+      {
+        "id": "RH.G2",
+        "tier": "B_TO_C",
+        "statement": "Original source-identical prime-power/gamma/pole completed explicit formula and test space",
+        "owners": [
+          "#1497",
+          "Lean #104"
+        ],
+        "next": "Establish real analytic identity, sum/integral exchange and original Weil carrier",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "RH.G3",
+        "tier": "C",
+        "statement": "eventualCompensationGapExists on original cofinal exhaustion implies strict completed residual / excludes off-line zeros",
+        "owners": [
+          "Lean #50"
+        ],
+        "next": "Quantitative signed compensation beyond local and far adverse zero contributions",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "RH.G4",
+        "tier": "C",
+        "statement": "Universal all nontrivial zeros lie on Re=1/2",
+        "owners": [
+          "Lean #50"
+        ],
+        "next": "Requires actual off-line zero exclusion, not reusing compiler alone",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "PNP": [
+      {
+        "id": "PNP.K0",
+        "tier": "A",
+        "statement": "Pinned Agda 2.9 kernel and transitive trust checks on original #1502 aggregated source",
+        "owners": [
+          "#1502"
+        ],
+        "next": "Check all original imports, uncovered errors, no postulates",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.B6",
+        "tier": "A",
+        "statement": "nativeWholeBinaryGraphWordSameOriginal and nativeWholeBinaryVerifierSameOriginalFinFree for all words",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Total malformed/accepted graph/certificate parser correspondence",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.F1",
+        "tier": "A",
+        "statement": "Physical gamma decoder all payload lengths; latest k=1 source table covers only special case",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Compile true finite-state all-k gamma n/m/u/v/w/W and signed ledger",
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "round2_notes": [
+          "real all-prefix finite transition program source-written and tested; Agda all-k bisimulation still open"
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+      },
+      {
+        "id": "PNP.F2",
+        "tier": "A",
+        "statement": "Full live bit-machine heap/copies/stacks/tapes and intermediate width bound",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Track all temporary buffers, not just one token step",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.F3",
+        "tier": "A",
+        "statement": "originalBitTapeStepSimulatesN21Rule, first-enabled event trace and acceptance same original word",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Full physical runtime simulation for histories, ledger, thresholds, error branches",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.F4",
+        "tier": "A",
+        "statement": "karpFractranBitMachineClockPolynomial for actual compiled original N21",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Physical bit operation and tape-head time polynomial",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.G2G4",
+        "tier": "A",
+        "statement": "typed PR.polynomialTimeVerifier, certificate-bound and originalN21InNP",
+        "owners": [
+          "#1474",
+          "#1502"
+        ],
+        "next": "Inhabit nontrivial PR.PolynomialCostModel on actual executable N21 machine",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.P0P2",
+        "tier": "A",
+        "statement": "Costed original SAT tableau, E20 and 20 reductions, 21 NP memberships, CertifiedKarpNetwork",
+        "owners": [
+          "#1445",
+          "#1502"
+        ],
+        "next": "Original guarded Cell/Bits proof, faithful theorem consumer chain, clocks, kernel",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "PNP.SATNotInP",
+        "tier": "C",
+        "statement": "For every polynomial-time SAT decider D exists an input formula on which D fails",
+        "owners": [
+          "#1499"
+        ],
+        "next": "New universal lower-bound argument; NP completeness is insufficient",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "HODGE": [
+      {
+        "id": "HODGE.CYCLE",
+        "tier": "A",
+        "statement": "Actual cycleClass/pushforward naturality for selected P1xP1 rational algebraic cycles",
+        "owners": [
+          "Lean #40 merged"
+        ],
+        "next": "Recompile actual class and cross-kernel witness against selected original carrier",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "HODGE.DIVISOR",
+        "tier": "A",
+        "statement": "Lefschetz (1,1) line-bundle cycle theorem and dual Hard Lefschetz special cases",
+        "owners": [
+          "external classical theorem"
+        ],
+        "next": "Formalize actual coherent sheaf/c1/Hodge decomposed carrier; do not claim general p",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "HODGE.UNIVERSAL",
+        "tier": "C",
+        "statement": "Every rational Hodge (p,p) class on arbitrary smooth projective complex variety has rational algebraic cycle representative",
+        "owners": [
+          "Lean #40"
+        ],
+        "next": "Unknown general cycle-producing proof",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "BSD": [
+      {
+        "id": "BSD.K1.FIRST",
+        "tier": "A",
+        "statement": "Actual nonexceptional E(Qp) first Kummer coordinate even p-valuation for every finite p",
+        "owners": [
+          "#1500",
+          "#1499"
+        ],
+        "next": "Connect integer parity laws to actual Qp and H1 local Kummer point construction",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.K1.SECOND",
+        "tier": "A",
+        "statement": "Second x-1 coordinate even p-valuation only for odd primes; Q2 x=39 invalidates parity at 2",
+        "owners": [
+          "#1500",
+          "#1499"
+        ],
+        "next": "Actual odd Qp valuation rules, local image and good-prime unramified support",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.K1.LOCAL",
+        "tier": "A_TO_B",
+        "statement": "Complete real/Q2 original Kummer images and global H1(E[2]) square-class naturality",
+        "owners": [
+          "#1500",
+          "Lean #107"
+        ],
+        "next": "Real sign and Q2 local fields, torsion exceptions, H1 equivalence all places",
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "round2_notes": [
+          "Hensel local square root at x39 constructive; original H1 carrier open"
+        ],
+        "latest_live_owner": "Lean #107 already proves actual Q2 local-image first-coordinate necessary parity and original global H1 explicit Selmer image=four torsion, in source. Full local H1 Kummer compatibility remains open.",
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+      },
+      {
+        "id": "BSD.K2",
+        "tier": "A_TO_B",
+        "statement": "Classical E[2]->E continuous Kummer LES with Sel2 quotient Sha(E)[2]",
+        "owners": [
+          "#1500",
+          "Lean #107"
+        ],
+        "next": "Actual Galois action, exact localization and cohomological connecting morphism",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.K3",
+        "tier": "A_TO_B",
+        "statement": "Faithful Selmer exhaustion (four original classes) and MW finite generation/rank=0",
+        "owners": [
+          "#1500",
+          "Lean #107"
+        ],
+        "next": "Prove all original Selmer global classes exhausted; import Stoll original theorem faithfully",
+        "status": "OPEN",
+        "proof_receipt": false,
+        "latest_live_owner": "Lean #107 cmTorsionEquivOriginalExplicitSelmer and cmGlobalKummerQuotientEquivExplicitSelmer source-written original all-place explicit Selmer, not classical Sha/E[2]-cohomological Selmer."
+      },
+      {
+        "id": "BSD.K4.ETA",
+        "tier": "A_TO_B",
+        "statement": "Actual f_E=eta(4tau)^2 eta(8tau)^2 as level32 normalized newform",
+        "owners": [
+          "#1500",
+          "Lean #107"
+        ],
+        "next": "Original analytic eta and Newman/Ligozat genus one/dimension/modularity proof",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.K4.MELLIN",
+        "tier": "A_TO_B",
+        "statement": "Actual Bishop Mellin Fricke central L(E,1)>0, selected period normalization",
+        "owners": [
+          "#1500"
+        ],
+        "next": "Original analytic integral/limit, Fricke and rational positive tail",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.K5",
+        "tier": "B",
+        "statement": "Odd-primary Sha cardinality and exact original leading-coefficient formula",
+        "owners": [
+          "#1500",
+          "Lean #107"
+        ],
+        "next": "Classical Selmer/Sha nontriviality proof, local Tamagawa and period B-cycle source",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BSD.UNIVERSAL",
+        "tier": "C",
+        "statement": "BSD rank/order and full leading term for arbitrary elliptic curves, including rank>=2",
+        "owners": [
+          "external classical conjecture"
+        ],
+        "next": "New general proof, not implied by CM conductor32 example",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ],
+    "BISHOP": [
+      {
+        "id": "BISHOP.EXP.ADD",
+        "tier": "A",
+        "statement": "Original native Bishop complex exponential add from true sine/cosine addition",
+        "owners": [
+          "#1478"
+        ],
+        "next": "Inhabit OriginalCosineAddition T and OriginalSineAddition T and kernel check ring proof",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BISHOP.NATLOG",
+        "tier": "A",
+        "statement": "OriginalDyadicNatLogLaw on same original Bishop log",
+        "owners": [
+          "#1478"
+        ],
+        "next": "Prove original canonical Nat logarithm addition and selected exp/log inverse",
+        "status": "OPEN",
+        "proof_receipt": false
+      },
+      {
+        "id": "BISHOP.ETA",
+        "tier": "A_TO_B",
+        "statement": "Original compact-uniform eta tail for Re(s)>=delta>0",
+        "owners": [
+          "#1478",
+          "#1408"
+        ],
+        "next": "Bishop partial-summation estimate and uniform locally analytic continuation",
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "round2_notes": [
+          "complex eta Abel uniform tail proved analytically with exact finite identity; original Bishop analytic transport open"
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+      },
+      {
+        "id": "BISHOP.KOENIGS",
+        "tier": "B",
+        "statement": "Original Newton disk, log inverse, squared contraction, local Koenigs and global Kneser",
+        "owners": [
+          "#1478"
+        ],
+        "next": "Actual orbit bounds then continuation and normalization; don't reuse independent synthetic exp",
+        "status": "OPEN",
+        "proof_receipt": false
+      }
+    ]
+  },
+  "exact_round518": {
+    "count": 43,
+    "work_type_counts": {
+      "physical_analysis": 10,
+      "same_object_weld": 21,
+      "physical_group_realization": 1,
+      "physical_coefficient_identification": 1,
+      "endpoint_semantics": 8,
+      "source_realization": 2
+    },
+    "donor_blob_sha": "720e96eb7eb71e908d52fe653f59324b1e441925",
+    "entries": [
+      {
+        "id": "a1WilsonHessianVariation",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a1AveragingConstraintVariation",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a1GaugeProjectionVariation",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a1WQRAssembly",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a1ConstrainedGaussianMixedCoefficient",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a1PhysicalJetFiveChannelSplit",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a1FourJointReceiptEvaluation",
+        "layer": "source_analysis",
+        "controlling_cut": "A.L1",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a3ProjectiveEventExpectationConsistency",
+        "layer": "source_analysis",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "a3ContinuityAtEmpty",
+        "layer": "source_analysis",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "bWilsonTwoMarkExpansion",
+        "layer": "source_analysis",
+        "controlling_cut": "B.D1_D2",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "bWilsonConnectingWeightTail",
+        "layer": "source_analysis",
+        "controlling_cut": "B.D1_D2",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "bSameHamiltonianTransferCoordinate",
+        "layer": "source_analysis",
+        "controlling_cut": "B.same_H",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c1MarkedSourceHilbertModulus",
+        "layer": "source_analysis",
+        "controlling_cut": "D.L4",
+        "work_type": "physical_analysis",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "c4LiteralDensityMetricDerivative",
+        "layer": "source_analysis",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "g1ArbitraryCompactSimpleSourceMap",
+        "layer": "source_analysis",
+        "controlling_cut": "G1.all_groups",
+        "work_type": "physical_group_realization",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B"
+      },
+      {
+        "id": "aFiniteEuclideanSameObjectAttachment",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "aFiniteBosonicSameObjectAttachment",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "aFiniteWilsonRPSameObjectAttachment",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a2BetaMarkGeneratedHistoryShell",
+        "layer": "source_attachment",
+        "controlling_cut": "A.L2",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a3StressDensityIsLiteralFiniteMeasure",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a3SourceOSIsLiteralSchwinger",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a3CylinderEventIndicatorSemantics",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a3CylinderExpectationIntegralIdentification",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a45QuantitativeFiniteExpectationAttachment",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a4RepresentedRegularityExtensionality",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "a5RepresentedGrowthExtensionality",
+        "layer": "source_attachment",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c1CurvatureGaugeLocalSemantics",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L4",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c2PhysicalRemainderIsCompositeTail",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L5",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c3OneStepAFRGIdentification",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L5",
+        "work_type": "physical_coefficient_identification",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B"
+      },
+      {
+        "id": "c4FiniteStressInsertionIsCMP119Local",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c4StressCompletionIsCompletedMarkedStress",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c4CompletedStressIsClayStress",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "c4DensityAnchoredLaneInstantiation",
+        "layer": "source_attachment",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "same_object_weld",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "A_TO_B"
+      },
+      {
+        "id": "t4GaugeInvariantLocalObservableSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L4",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4CurvatureCorrespondenceSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L4",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4CurvatureGaugeInvariantSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L4",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4CurvatureLocalitySemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L4",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4ShortDistanceAFSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L5",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4StressTensorAndOPESemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L6_L7",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4PhysicalOPECoefficientSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L5",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "t4PhysicalOPERemainderSemantics",
+        "layer": "endpoint_semantic",
+        "controlling_cut": "D.L5",
+        "work_type": "endpoint_semantics",
+        "status": "open_source_instantiation",
+        "source_owner": "R496.ResidualLeaf",
+        "abc": "B_TO_C"
+      },
+      {
+        "id": "allGroupCompactSimpleWitness",
+        "layer": "source_bundle",
+        "controlling_cut": "G1.all_groups",
+        "work_type": "source_realization",
+        "status": "open_source_instantiation",
+        "source_owner": "R518.AddedSourceLeaf",
+        "abc": "B"
+      },
+      {
+        "id": "literalCMP119Section2Family",
+        "layer": "source_bundle",
+        "controlling_cut": "E1.continuum_OS",
+        "work_type": "source_realization",
+        "status": "open_source_instantiation",
+        "source_owner": "R518.AddedSourceLeaf",
+        "abc": "B"
+      }
+    ]
+  },
+  "attachment_false_promotions": [
+    {
+      "id": "ATTACH.YM.GEOMETRIC",
+      "status": "UNPROVED",
+      "reason": "Geometric 4^-k Wilson loop difference was asserted but original interacting normalized RG one-step bound not established",
+      "proof_target": "YM.L1.RG"
+    },
+    {
+      "id": "ATTACH.YM.PEIERLS",
+      "status": "NON_SEQUITUR",
+      "reason": "One bad plaquette Boltzmann weight bound does not imply normalized polymer activity mass or universal clustering",
+      "proof_target": "YM.D1"
+    },
+    {
+      "id": "ATTACH.YM.OS",
+      "status": "UNPROVED",
+      "reason": "Dense centered OS cylinder span + all-time uniform decay/gap stability are not provided; spatial cluster statement alone not same physical OS H",
+      "proof_target": "YM.D2"
+    },
+    {
+      "id": "ATTACH.NS.BKM",
+      "status": "CONDITIONAL_ONLY",
+      "reason": "BKM-type continuation criterion requires integral of vorticity L∞; no universal bound supplied",
+      "proof_target": "NS.B.RESERVE"
+    },
+    {
+      "id": "ATTACH.NS.COLLAR",
+      "status": "UNPROVED",
+      "reason": "Morrey delta^1/2 absorption asserted without actual original remote/collar sources and quantified constants",
+      "proof_target": "NS.C2.COLLAR"
+    },
+    {
+      "id": "ATTACH.RH.POLEFLOOR",
+      "status": "EXPLICIT_COUNTEREXAMPLE",
+      "reason": "At |sigma-beta|=1/3, -1/(sigma-beta)^2=-9<-4; algebraic no-go source on #1499",
+      "proof_target": "RH.A1"
+    },
+    {
+      "id": "ATTACH.RH.T14",
+      "status": "EXPLICIT_COUNTEREXAMPLE",
+      "reason": "At t=15>14.13, log(t/(2*pi))/(2*pi)-4<0; threshold for bare expression positivity is t>2*pi*exp(8*pi)",
+      "proof_target": "RH.A1"
+    },
+    {
+      "id": "ATTACH.RH.FIFTH",
+      "status": "UNPROVED_SIGN",
+      "reason": "A smallest zero does not force gamma1^5-E[gamma^2]gamma1^3>0; with a weighted average of squares it is nonpositive, absent special signed measure proof",
+      "proof_target": "RH.B"
+    },
+    {
+      "id": "ATTACH.PNP.COMPLETE",
+      "status": "FALSE_COMPLETION",
+      "reason": "Latest k=1 physical gamma is not F1 all length, F2 heap/F3 same-word/F4 clock or 20/21 NP receipts",
+      "proof_target": "PNP.F4"
+    },
+    {
+      "id": "ATTACH.HODGE.CM",
+      "status": "OVERGENERALIZED",
+      "reason": "CM abelian special-case statements require precise hypotheses; no universal CM all-Hodge-from-divisors theorem established by named sources",
+      "proof_target": "HODGE.UNIVERSAL"
+    },
+    {
+      "id": "ATTACH.BSD.CLASSES",
+      "status": "INCORRECT_SOURCE_OBJECT",
+      "reason": "Original rational two-torsion Kummer dictionary is (1,1),(-1,-1),(1,2),(-1,-2)",
+      "proof_target": "BSD.K3"
+    },
+    {
+      "id": "ATTACH.BSD.KOD",
+      "status": "INCORRECT_KODAIRA",
+      "reason": "For exact E 32a2 Kodaira 2 type III, c2=2; I0* is a different isogenous curve",
+      "proof_target": "BSD.K5"
+    },
+    {
+      "id": "ATTACH.BSD.SHA",
+      "status": "INVALID_IMPLICATION",
+      "reason": "Sha[2]=0 does not imply odd-primary Sha=0; analytic Sha order 1 in LMFDB not a standalone Agda proof",
+      "proof_target": "BSD.K5"
+    },
+    {
+      "id": "ATTACH.BSD.NUMERIC",
+      "status": "INCORRECT_DECIMAL",
+      "reason": "LMFDB L(E,1)=0.65551438857302995261620989747 (not 0.655518)",
+      "proof_target": "BSD.K4.MELLIN"
+    },
+    {
+      "id": "ATTACH.STATUS.EXACT",
+      "status": "FALSE_KERNEL_PROMOTION",
+      "reason": "Exact.agda filename or ProofLevel.machineChecked does not establish exact-head Agda kernel/axiom acceptance",
+      "proof_target": "ALL"
+    }
+  ],
+  "newer_integration": [
+    {
+      "from": "#1474 head 5348713358",
+      "to": "#1502",
+      "exact_files": 4,
+      "result": "gamma k=1 donor source copied exact Git blobs; all-k F1 OPEN"
+    },
+    {
+      "from": "#1500 head 5c01456abb",
+      "to": "#1499",
+      "exact_files": 2,
+      "result": "odd-prime second coordinate parity source and Q2 negative control; H1 OPEN"
+    },
+    {
+      "from": "#1501 head 98b6b63a0a",
+      "to": "#1499",
+      "exact_files": 4,
+      "result": "R854 affine integrated rational bound source; REAL ODE trajectory OPEN"
+    },
+    {
+      "from": "#1444 head 80da5e6c9f",
+      "to": "#1503",
+      "exact_files": 2,
+      "result": "R445 TV 3-moment common-density analytic reduction; physical TV estimate OPEN"
+    },
+    {
+      "from": "#1498 head 2c4204914d93",
+      "to": "#1503",
+      "exact_files": 5,
+      "result": "four-orbit midpoint/Hessian rational quadrature algebra plus four original dependencies; actual physical Hessian/integral certificates OPEN"
+    }
+  ],
+  "acceptance": {
+    "exact_head_agda_kernel_checked": false,
+    "lean_kernel_checked_in_this_round": false,
+    "external_NS_clay_award_or_accepted": false,
+    "physical_clay_closed": [],
+    "source_endpoints_formally_verified": [],
+    "PRs_merged_to_master": 0,
+    "known_tested_arithmetic": "existing regression scripts and independently tested new arithmetic negative controls",
+    "source_written_not_equivalent_to_verified": true
+  },
+  "blockers_priority": [
+    "K0 exact-head local Agda/Lean checker with traceable axiom closure",
+    "YM physical R445 actual total-variation estimate F,G,FG on same density",
+    "BISHOP original trig and log laws",
+    "BSD actual Q2 and real H1 Kummer image plus new Q2 parity counterexample",
+    "Karp all-k gamma, full bit tape F1-F4 and original InNP",
+    "NS original R854 selected real trajectory rate transport",
+    "RH candidate A1/A2/Fifth finite countermodels before global positivity claims",
+    "E1/D1/D2/N1/G1 and general universal C endpoints"
+  ],
+  "merge_policy": "Keep 1499, 1502 and 1503 draft until pinned kernel/axiom receipt; never bulk merge divergent files; original author/first-Git-implementation/date preserved",
+  "implementation_round_20261114_2": {
+    "time": "2026-11-14",
+    "scope": "Six active cuts; actual mathematical producer/finite machine and negative controls, no universal Clay promotions",
+    "lanes": {
+      "YM.R445.TV": {
+        "branch": "chatgpt/ym-f19-p0-source-convergence-20261114",
+        "new_script": "scripts/check_ym_r445_action_oscillation_tv.py",
+        "proven_mathematics": "for same finite carrier, TV(P,Q) <= (sqrt(M)-sqrt(m))/(sqrt(M)+sqrt(m)); with s=e^{-DeltaS}, <=tanh(osc(DeltaS)/4)",
+        "tested": "361 exact rational density examples and tensor-volume negative control through n=16 (TV>99/100)",
+        "unpaid": "original Wilson 1024-link fine blocked vs renormalized coarse action oscillation/TV at every cutoff uniformly in volume; generic comparison not sufficient",
+        "agda_kernel": false
+      },
+      "PNP.F1": {
+        "branch": "chatgpt/karp21-stacked-head-convergence-20261114",
+        "new_agda": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthFiniteTablePhysicalExact.agda",
+        "new_script": "scripts/check_karp21_gamma_all_length_physical.py",
+        "tested": "31713 valid gamma words k<=9, 7 malformed controls, physical 3-state/one-work tape, k>=1:2k+2 steps",
+        "new_source_proofs": [
+          "gammaAllLengthFuelledPhysicalCellBound",
+          "sourceAllLengthGammaWordExact",
+          "finishZeroPrefixGamma"
+        ],
+        "unpaid": "Agda kernel all-k physical/source bisimulation; original graph multi-token first-enabled N21 tape compiler F1-F3; F2 full heap and F4 polynomial PR.InNP",
+        "agda_kernel": false
+      },
+      "BSD.K1.LOCAL": {
+        "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+        "new_script": "scripts/check_bsd_q2_39_coherent_hensel.py",
+        "proven_mathematics": "for x=39, y=4*r in Q2 where r^2=3705 by compatible Hensel square root, r_(n+1)=r_n+2^(n-1)*(([3705-r_n^2]/2^n) mod2) produces Cauchy root mod2^(n+1)",
+        "tested": "all stages n=3..511, corrected 2-adic Cauchy congruence mod 2^(n-1), actual curve equation",
+        "unpaid": "formal original Agda complete Q2 and R carriers, actual E(Q2)/E(R), all-image local Kummer and H1 naturality, Selmer",
+        "agda_kernel": false,
+        "original_lean_producers": {
+          "repo": "chboishabba/dashi_lean4",
+          "pr": 107,
+          "head_at_discovery": "a06066e49555058e3cf4694e5b1ce748b9a869c4",
+          "new_join": "Synthesis/MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence.lean",
+          "already_original_source_written": [
+            "cmQ2LocalKummerImage_firstParity_zero",
+            "cmExplicitTwoSelmer_localQ2FirstParity_zero",
+            "cmExplicitTwoSelmer_carrier_eq_four_torsion",
+            "cmTorsionEquivOriginalExplicitSelmer",
+            "cmActualE2H1ExplicitSelmerImage_eq_torsion",
+            "cmOriginalPoint_E2H1Restriction_eq_localXT"
+          ],
+          "source_remaining": [
+            "PadicQuadraticKummerCompatibility p (uninhabited at general p)",
+            "cohomological Selmer local image equality (not just original explicit subgroup)",
+            "continuous Sha(E)[2] long exact sequence, odd primary Sha",
+            "exact head Lean kernel receipt"
+          ],
+          "instruction": "reuse actual mathlib Q_[2] and global H1 objects; do not recreate Q2 or model full local Kummer image solely via parity"
+        }
+      },
+      "NS.R854": {
+        "branch": "chatgpt/ns-c-energy-smooth-weld-20261112 (dashi_lean4)",
+        "new_lean": "Synthesis/NavierStokesR854RealTimeAffineRateConditionalExact.lean",
+        "source_proof": "for every real t in [0,T], if actual selected r(t)<=r0+L*t then r(t)<0, using original R854 r0,L,T",
+        "unpaid": "actual selected real Galerkin trajectory, R71->real chart, R853 same-rate and true Lipschitz estimate, original integral source object; Lean kernel",
+        "lean_kernel": false
+      },
+      "BISHOP.ETA": {
+        "branch": "chatgpt/analytic-j-tetration-abel-transport",
+        "new_script": "scripts/check_bishop_eta_abel_uniform_tail.py",
+        "proven_mathematics": "finite Abel identity; for sigma>0, |eta-block from N| <= (1+|s|/sigma)N^-sigma, uniform on compact sigma>=delta>0 and |s|<=M",
+        "tested": "9841 exact rational Abel sequences and 320 complex numerical tail diagnostics",
+        "unpaid": "actual Bishop canonical NatLog equals log(n+1), expC addition and trig laws; real/complex integral and uniform convergence in Bishop setoid, Agda kernel",
+        "agda_kernel": false
+      },
+      "RH.B": {
+        "branch": "chatgpt/clay-continuous-fifth-sign-20261112 (dashi_lean4)",
+        "new_lean": "Synthesis/RiemannFirstZeroSignedFifthCoefficientNoGo.lean",
+        "proven_mathematics": "if 0<=gamma and gamma²<=meanSquare, gamma^5-meanSquare*gamma³<=0; disproves proposed first-zero strictly positive shortcut",
+        "unpaid": "actual signedFifthCorrelationGapAt and full A2 selected W fourthLipschitz threshold, FarHorizontal, boundary, compensated G3 eventually; check exact-head Lean kernel",
+        "lean_kernel": false
+      }
+    },
+    "kernel_status": "NO new exact-head Agda/Lean pinned checker in this execution environment",
+    "universal_claims_promoted": [],
+    "research_hypotheses_still_unproved": [
+      "YM uniform interacting TV(R445)",
+      "full N21 physical bit clock",
+      "BSD global/local H1 proof",
+      "NS actual real R853 source envelope",
+      "original Bishop analytic function laws and eta tail transport",
+      "RH actual signed A2/G3 inequality"
+    ]
+  },
+  "implementation_round_20261114_3": {
+    "date": "2026-11-14",
+    "authority": "ORIGINAL SOURCE WRITTEN, NO PINNED AGDA/LEAN KERNEL",
+    "items": [
+      {
+        "id": "YM.R445.TV",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1503,
+        "commit": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+        "path": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+        "producer": "originalPhysicalR445CovarianceFromOneLocalTV",
+        "result": "If original same coarse local-observation TV uniformly bounds original bounded tests, each actual F,G,FG moment discrepancy is ≤the one TV; original native covariance ≤D + D*1 + 1*D",
+        "kind": "A conditional genuine original-source consumer",
+        "remaining": "Actual original interacting Wilson effective-vs-renormalized target local TV D_k→0/summability is UNPROVED; legacy real postulates and kernel unverified",
+        "endpoint": false
+      },
+      {
+        "id": "PNP.F1",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1502,
+        "commit": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+        "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "producers": [
+          "physicalRunAdditionExact",
+          "physicalPositiveGammaStagesExact",
+          "physicalAllLengthGammaRunSameOriginalPositive"
+        ],
+        "result": "All POSITIVE gamma words of arbitrary payload length k≥1 on literal original finite transition table; 2k+2 instructions and source suffix preserved",
+        "kind": "A source proof, unverified",
+        "remaining": "Malformed/error accept/reject and k=0 composite, repeated original N21 gamma parser, full original F3 first-enabled rule/trace, F2 total resource accounting, F4 actual PR.PolynomialCostModel and original InNP",
+        "regression": {
+          "literal_differential_wellformed": 31713,
+          "malformed_control": 7,
+          "result": "PASS FINITE ONLY"
+        },
+        "endpoint": false
+      },
+      {
+        "id": "BSD.K1.REAL",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "commit": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "path": "Synthesis/MillenniumBSDCMRealNonexceptionalXTSignImageCompleteExact.lean",
+        "producers": [
+          "cmOriginalRealXTPositiveSignsRealized",
+          "cmOriginalRealXTNegativeSignsRealized",
+          "cmOriginalRealNonexceptionalXTSignImage_eq"
+        ],
+        "result": "Actual nonexceptional E(R): y²=x³−x has full sign image {(+,+),(-,-)}; witnessed x=2 and x=−1/2, consumes old real locus theorem",
+        "kind": "A genuine real-curve source proof, unverified",
+        "remaining": "Connect actual E(R)/2E(R) H1 local Kummer equivalence and exceptional branches, exact-head Lean kernel",
+        "endpoint": false
+      },
+      {
+        "id": "BSD.K1.Q2",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "commit": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "path": "scripts/check_bsd_q2_original_eight_local_kummer_classes.py",
+        "result": "Classical Q2 square criterion at x=39 gives actual mathematical local point y=4sqrt(3705); four torsion original Kummer images together with its independent class give eight distinct local Q2 square-class pairs under subgroup closure",
+        "kind": "Independent exact arithmetic; not an in-kernel Q2 class theorem",
+        "regression": {
+          "distinct_classes": 8,
+          "original_point_x": 39,
+          "unit": 3705,
+          "result": "PASS"
+        },
+        "remaining": "Formally inhabit actual ℚ_[2] square root, identify local image group/quotient, local H1 quadratic Kummer compatibility and Sha",
+        "endpoint": false
+      },
+      {
+        "id": "NS.R854",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 109,
+        "commit": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba",
+        "path": "Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean",
+        "producer": "nsR854OriginalRealRateIntegralStrictlyNegative",
+        "result": "True real Lebesgue interval integral of actual selected real rate is <0 on original T given integrability and original R853 same-trajectory affine rate envelope",
+        "kind": "A conditional theorem on actual ℝ time, unverified",
+        "remaining": "Construct actual R71/R74 original real Galerkin solution, same R853 rate and source Lipschitz bound; global 3D continuation separate and open",
+        "endpoint": false
+      },
+      {
+        "id": "BISHOP.ETA",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1478,
+        "commit": "e391fcd65b75495282c90a7f23ce99195d20761c",
+        "path": "DASHI/Analysis/BishopOriginalEtaPairBlockTelescopingExact.agda",
+        "producers": [
+          "originalBishopEtaPrefixShiftedPairsExact",
+          "OriginalRound11.actualOriginalRound11ShiftedEtaTailExact",
+          "OriginalRound11.originalRound11EtaAllShiftedPairTailFromSelectedTerms"
+        ],
+        "result": "All-n,m shifted exact eta pair-block finite identity on original selected Murray/Bishop complex carrier, now consumed by original Round11 eta source",
+        "kind": "A finite setoid source theorem, unverified",
+        "remaining": "Original cosine/sine addition, NatLog matches positive-real log, complex derivative and FTC, uniform Abel modulus (1+M/delta)*N^(-delta) in source Bishop reals; RH not implied",
+        "endpoint": false
+      },
+      {
+        "id": "RH.A2.G3",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 50,
+        "commit": "2384d90f1a2c23dc59c072425e7efbc040405032",
+        "path": "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2SelectedWitnessCut.lean",
+        "result": "Existing exact positive eighth-cap criterion requires selected W.fourthLipschitz below source floor threshold; exact debt retains leading expanded zero count; no selected W headroom proof, no FarExact strict bound",
+        "kind": "C unsolved actual original analytic positivity; no new solution",
+        "negative_controls": [
+          "Lean #108 first-zero fifth coefficient nonpositive under true mean-square condition",
+          "Agda #1499 original pole floor -9 vs -4 false"
+        ],
+        "remaining": "Prove/refute actual same-zero selected W fourth-Lipschitz and horizontal far curvature and complete signed A2/G3 inequality; Route B eventual signedFifthCorrelationGapAt, boundary decay, outer terminal convergence",
+        "endpoint": false
+      }
+    ],
+    "verification": {
+      "github_source_writes_and_blob_readbacks": true,
+      "exact_head_agda_kernel": false,
+      "exact_head_lean_kernel": false,
+      "CI_pull_request_workflow_runs_returned_for_new_shas": 0,
+      "js_full_gamma_positive_differential_pass": 31713,
+      "js_gamma_malformed_controls": 7,
+      "python_q2_eight_distinct_exact_classes": 8,
+      "external_clay_endpoints_inferred": 0
+    },
+    "pr_heads_observed_pre_ledger": {
+      "agda_1478": "e391fcd65b75495282c90a7f23ce99195d20761c",
+      "agda_1502": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+      "agda_1503": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+      "lean_107": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+      "lean_109": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba"
+    },
+    "status_message": "A proofs source-written; B/C physical/analytic hypotheses not discharged; six original general Clay endpoints unproved; no merges authorized"
+  },
+  "implementation_round_20261114_4": {
+    "date": "2026-11-14",
+    "priority": "YM original local Wilson F19/P0/R445 proposed A/B/C finish attached by user",
+    "source_branch": "chboishabba/dashi_agda PR #1503 chatgpt/ym-f19-p0-source-convergence-20261114",
+    "source_head_at_snapshot": "ada2ac4da5ecef28cb512c320e25250e65910671",
+    "source_modules": [
+      "DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda",
+      "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+      "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda"
+    ],
+    "checker": "scripts/check_ym_r445_localized_tv_maxcut_countermodels.py",
+    "test": "tests/test_ym_r445_localized_tv_maxcut_countermodels.py",
+    "doc": "Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md",
+    "math_verified_independently": {
+      "two_site_positive_rational_joint_pairs": 6561,
+      "outside_only_local_tv": "1/8",
+      "outside_only_crossing_interaction": "zero",
+      "rare_bad_Q_at_N1000": "1/1001",
+      "rare_bad_P_at_N1000": "1/2",
+      "fixed_1_over_4_sq": "1/16",
+      "falsely_iterated_k2": "1/256",
+      "harmonic_dyadic_block_lower_bound": "1/32",
+      "zero_local_tv_but_non_cauchy_successor_tv": "1",
+      "zero_local_tv_but_any_distance_covariance": "1/4",
+      "positive_projective_but_OS_Gram_negative": "-1"
+    },
+    "false_promotions_in_user_attachment": [
+      {
+        "gate": "YM.R445.F19.same_source",
+        "kind": "MISSING_ORIGINAL_CARRIER_WELD",
+        "detail": "F19 original physical 1024-bond effective density != source-proof that R445 beta3 3->1 block map and independently defined renormalized target are definitionally the same objects; common normalizers alone insufficient"
+      },
+      {
+        "gate": "YM.R445.conditional_action_oscillation",
+        "kind": "MISSING_PHYSICAL_ESTIMATE",
+        "detail": "small-field Combes-Thomas resolvent and normalized bad-field comparison not instantiated for actual SU(N) Wilson+gauge fixing; rare bad-Q does not bound P or a supremum log-oscillation"
+      },
+      {
+        "gate": "YM.R445.actual_local_TV",
+        "kind": "EXPLICIT_REMOTE_INFLUENCE_COUNTERMODEL",
+        "detail": "Q=(3,1,1,3)/8 on XxY and w(Y)=(1,3) gives local P_X=(3/8,5/8), Q_X=(1/2,1/2); no perturbation meets X yet local TV=1/8; a physical exterior influence estimate is missing"
+      },
+      {
+        "gate": "YM.R445.summability",
+        "kind": "FALSE_SCALE_ITERATION",
+        "detail": "fixed (a_k/L_k)=1/4 yields square=1/16 at every k, not 16^-k; 1/(16k) has divergent harmonic dyadic blocks; source RG irrelevant-factor must be separately proven"
+      },
+      {
+        "gate": "YM.R445.three_moments",
+        "kind": "CONDITIONAL_COMPILER_ONLY",
+        "detail": "Original F/G/FG and covariance ≤3D algebra is available if actual same-source local TV is bounded; exponential spatial clustering requires separate original connected-correlation estimate"
+      },
+      {
+        "gate": "YM.E1",
+        "kind": "NON_SEQUITUR",
+        "detail": "Even zero TV(P_k,Q_k) for every k does not make P_k Cauchy without consistency of Q_k; mere positive finite cylinder consistency does not imply OS reflection positivity"
+      },
+      {
+        "gate": "YM.D1.D2",
+        "kind": "NON_SEQUITUR",
+        "detail": "P_k=Q_k can have global synchronous spin covariance 1/4 at arbitrary distance despite D_k=0; polymer activity, OS time decay, same-H and cutoff-stable physical mass bound missing"
+      }
+    ],
+    "correct_finite_theorem": "For positive finite P,Q on XxY, let M_X=∑_y P_Y(y)Q(X|y); then TV(P_X,Q_X)≤E_{P_Y}TV(P(X|y),Q(X|y))+TV(M_X,Q_X)≤sup_y TV(P(X|y),Q(X|y))+TV(P_Y,Q_Y). Source physical exterior influence is independent unknown, not secretly zero.",
+    "required_original_owners": {
+      "A": [
+        "originalF19R445SamePhysicalCoarseMap",
+        "originalR445F19PushforwardCylinderEquality",
+        "originalR445TargetCountertermNormalizedDensity",
+        "originalR445ConditionalKernelDisintegration"
+      ],
+      "B": [
+        "originalR445PhysicalConditionalActionOscillation",
+        "originalR445BadFieldTwoMeasureNormalizedBound",
+        "originalR445ExteriorInfluenceKernelBound",
+        "originalR445PhysicalLocalTVFromConditionalAndOutside",
+        "originalR445GenuineScaleIrrelevantContraction",
+        "originalR445LocalTVUniformSummable"
+      ],
+      "A_after_B": [
+        "originalPhysicalR445CovarianceFromOneLocalTV",
+        "originalR445CoarseTargetProjectiveSameFamily"
+      ],
+      "C": [
+        "originalR445OSPositiveProjectiveContinuum",
+        "originalR445NontrivialInteractingCylinder",
+        "originalR445OriginalWilsonRootedPolymerCovarianceDecay",
+        "originalR445SameOSGeneratorPositiveGap"
+      ]
+    },
+    "status": {
+      "source_countermodel_written": true,
+      "github_readback": true,
+      "python_independent_counterexample_suite_pass": true,
+      "committed_test_suite_run": false,
+      "agda_pinned_kernel_run": false,
+      "physical_original_Wilson_local_TV_proved": false,
+      "uniform_cutoff_RG_proved": false,
+      "E1_D1_D2_mass_gap_proved": false
+    },
+    "additional_F19_intrinsic_A_source": {
+      "source": "DASHI/Physics/YangMills/YMClayF19OriginalAllCoarseCylinderNormalizationExact.agda",
+      "owner": "chboishabba/dashi_agda #1503",
+      "producers": [
+        "originalF19AllCoarseNumeratorsSamePhysicalSource",
+        "originalF19AllCoarseNormalizedSamePhysicalSource"
+      ],
+      "genuine_result": "For every original coarse F on 64 native SU(N) links, actual interacting 1024-link Wilson 64-pair/896-spectator nested weighted numerator = original F19 effective-density Haar numerator; dividing by the SAME original physical partition yields the normalized identity",
+      "source_proof_written": true,
+      "original_f19_partition_theorem_reused": "originalFinePhysicalPartitionEqualsActualEffectivePartition",
+      "original_fibre_theorem_reused": "selected64Pair896SpectatorWeightedDisintegration",
+      "agda_2_9_kernel_accepted": false,
+      "not_proved": [
+        "F19 pair-block equals R445 selected nativeSUNBlockLinks after codec/reindex on original 1024 bonds",
+        "R445 renormalized effective target is physical same object",
+        "local conditional Wilson action oscillation/outer influence/TV",
+        "scale-summable RG",
+        "physical OS E1/D1/D2/gap"
+      ]
+    }
+  },
+  "implementation_round_20261114_5": {
+    "date": "2026-11-14",
+    "scope": "Six-frontier attachment maximum cut; preserve original owner and fail-closed source status",
+    "source_evidence_only": true,
+    "source_written_awaiting_kernel": true,
+    "verified_original_clay_terminal_gates": [],
+    "lanes": {
+      "YM": {
+        "owner": "#1503",
+        "new_script": "scripts/check_ym_r445_weighted_exterior_influence.py",
+        "new_doc": "Docs/physics/YMClayR445WeightedExteriorInfluenceMaxCut20261114.md",
+        "advance": "Finite weighted conditional exterior coupling inequality; 6561 rational positive 2x2 pair checks",
+        "physical_wilson_effective_target_D_k_proved": false,
+        "cutoff_uniform_summability_proved": false
+      },
+      "PNP": {
+        "owner": "#1502",
+        "new_doc": "Docs/roadmaps/Karp21N21PhysicalF3F4CompileWeld20261114.md",
+        "advance": "Reconciliation of true original raw first-enabled donor, bit-native semantic step, source run bound, all-k positive physical gamma and terminal phase quotient",
+        "actual_compiled_N21_physical_F3_proved": false,
+        "whole_machine_bit_clock_proved": false,
+        "originalN21InNP_proved": false
+      },
+      "BSD": {
+        "owner": "Lean #107",
+        "new_script": "scripts/check_bsd_q2_hensel_3705_exact.py",
+        "new_source": "Synthesis/MillenniumBSDCMQ2Hensel3705CandidateExact.lean",
+        "new_local_runner": "scripts/check_bsd_q2_hensel_3705_local.sh",
+        "advance": "Constructive coherent 2-adic lifts and actual Q2-root Hensel Lean proof candidate",
+        "lean_candidate_kernel_accepted": false,
+        "complete_Q2_kummer_image_proved": false,
+        "continuous_H1_sha_identification_proved": false
+      },
+      "NS": {
+        "owner": "#1501",
+        "new_source": "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda",
+        "updated_checker": "scripts/check_ns_r854_original_affine_integrated_rate_exact.py",
+        "advance": "Exact original horizon permits pointwise rate budget 10^7 times R828 and integrated budget 2·10^7 times R828",
+        "agda_source_kernel_accepted": false,
+        "original_real_galerkin_and_R853_weld_proved": false
+      },
+      "BISHOP": {
+        "owner": "#1478",
+        "new_source": "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda",
+        "updated_checker": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+        "advance": "Finite source Bishop complex setoid eta Abel telescope; reuse preexisting analytic compact-uniform bound and differential diagnostics",
+        "agda_source_kernel_accepted": false,
+        "canonical_Nat_log_and_FTC_proved": false,
+        "original_eta_uniform_convergence_proved": false
+      },
+      "RH": {
+        "owner": "#1499 / Lean #50/#108",
+        "new_doc": "Docs/roadmaps/RHA2FourierCurvatureCorrectedScope20261114.md",
+        "advance": "Corrected single vs paired horizontal Taylor and generic all-frequency Fourier-curvature sign no-go",
+        "actual_selected_zeta_zero_configuration_obstruction_proved": false,
+        "selected_A2_no_go_proved": false,
+        "strict_compensation_proved": false
+      }
+    },
+    "acceptance": {
+      "pinned_Agda_2_9_executed": false,
+      "pinned_Lean_executed": false,
+      "physical_or_original_source_theorem_gate_closed": false,
+      "none_of_missing_A_B_C_endpoint_gates_promoted": true
+    },
+    "next_source_gates": [
+      "originalR445ActualLocalizedEffectiveTargetTVBound",
+      "originalBitTapeStepSimulatesN21Rule",
+      "PadicQuadraticKummerCompatibility 2",
+      "originalR71RealGalerkinLocalSolution",
+      "originalRound11DirichletTermFundamentalTheorem",
+      "originalSelectedA2StrictSignedCompensation OR originalSelectedA2CompensationNoGo"
+    ]
+  },
+  "implementation_round_20261114_6": {
+    "date": "2026-11-14",
+    "scope": "User attachment Track4 NS R71/R853/R854 and Track5 Bishop eta A/B; original-source audit and implementation",
+    "observed_owner_branches": {
+      "NS": "#1501 chatgpt/ns-r846-zero-mode-source-repair-20261113",
+      "BISHOP": "#1478 chatgpt/analytic-j-tetration-abel-transport",
+      "NS_LEAN": "#109 chatgpt/ns-c-energy-smooth-weld-20261112"
+    },
+    "NS": {
+      "exact_implementation": "scripts/check_ns_r823_shear_negative_control_20261114.py",
+      "roadmap": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+      "verified_diagnostic": "72 exact rational Fourier/parity cases",
+      "critical_correction": "Proposed u_bad divergence epsilon*(K-1)*sin x*sin Kz nonzero for high K; divergence-free correction has vanishing cubic H1 transfer and negative initial E+c log(1+G) derivative",
+      "actual_original_R823_counterexample": false,
+      "R71_complete_real_chart_weld": false,
+      "R71_real_galerkin_solution": false,
+      "R853_same_flow_rate": false,
+      "R854_physical_rate_lipschitz": false,
+      "R854_true_integral": false
+    },
+    "BISHOP": {
+      "source_written": "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda",
+      "additional_source": "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda",
+      "roadmap": "Docs/roadmaps/BishopEtaOriginalAllCutoffsAndNatLogMaxCut20261114.md",
+      "diagnostic_script": "scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py",
+      "natlog_finite_script": "scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py",
+      "exact_diagnostic_counts": {
+        "finite_abel": 21845,
+        "raw_even_odd_prefix_cuts": 167481,
+        "real_arbitrary_endpoint_tails": 1972,
+        "real_pair_tails": 576,
+        "complex_numeric_tails": 245,
+        "negative_log_polynomial_derivative": 180,
+        "negative_log_polynomial_integral": 200,
+        "negative_log_finite_bound": 400
+      },
+      "new_mathematical_bridge": "For m>=1, 0<=L_N(2)+L_N(m)-L_N(2m)<=(m-1)*((2m-1)/(2m))^N, original -log(1-x) finite source, source Nat indices 1,m-1,2m-1",
+      "true_raw_cutoff_abi_source_written": true,
+      "pinned_Agda_2_9_kernel_accepted": false,
+      "originalDyadicNatLogLaw_proved": false,
+      "originalTrigAddition_proved": false,
+      "originalFTC_proved": false,
+      "originalEtaCompactUniformConvergence_proved": false
+    },
+    "acceptance": {
+      "original_A_B_gates_closed": [],
+      "source_written_is_not_kernel_checked": true,
+      "toolchain_available_here": false,
+      "supplementary_exact_tests_not_formal_acceptance": true
+    },
+    "false_promotions_in_attachment": [
+      "all targets closed claim unsupported",
+      "invalid high-frequency divergence-free shear and reserve sign inference",
+      "enstrophy-balance zero expression confused with R853 normal form",
+      "Picard lifetime formula without source ball/forcing constraints",
+      "canonical Nat log wrongly replaced by unrelated reciprocal integral",
+      "eta complete-pair estimates do not alone cover odd raw cutoff",
+      "complex parameter derivative confused with real-axis FTC derivative",
+      "locally uniform eta convergence alone does not prove all zeta divisor/removable singularities"
+    ]
+  },
+  "implementation_round_20261114_7": {
+    "date": "2026-11-14",
+    "scope": "Bishop eta Track 5 and RH A2/G3 Track 6 attachment; exact source audits and finite implementations",
+    "trust": "source-written and rational exact regressions, no pinned Lean/Agda kernel receipts",
+    "latest_owner_branches_at_audit": {
+      "bishop": "#1478 chatgpt/analytic-j-tetration-abel-transport",
+      "rh_agda": "#1499 chatgpt/clay-20261112-four-frontier-fail-closed",
+      "rh_lean_a2": "#50 agent/rh-postmerge-maxcut-20261007",
+      "rh_lean_fifth": "#108 chatgpt/clay-continuous-fifth-sign-20261112"
+    },
+    "bishop": {
+      "implemented": "scripts/check_bishop_trig_cauchy_coefficients_20261114.py",
+      "reused": [
+        "scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py",
+        "scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py",
+        "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda"
+      ],
+      "finite_results": {
+        "trigonometric_cauchy_rational_cases": 936,
+        "even_factorial_tail_envelopes": 1300,
+        "prior_original_raw_cutoff_cases": 167481,
+        "prior_natlog_geometric_cases": 400
+      },
+      "new_agda_kernel_receipt": false,
+      "original_cosine_addition": false,
+      "original_sine_addition": false,
+      "original_canonical_log_dyadic": false,
+      "original_FTC": false,
+      "original_eta_uniform_convergence": false,
+      "precise_next": [
+        "originalBishopTrigRectangleTriangleCommonLimit",
+        "originalCanonicalNatLogDyadicAddition",
+        "originalRound11DirichletTermFundamentalTheorem",
+        "originalRound11EtaCompactUniformConvergence"
+      ]
+    },
+    "rh": {
+      "agda_diagnostic": "scripts/check_rh_a2_g3_attachment_maxcut_20261114.py",
+      "lean_candidate": "Synthesis/RiemannA2G3PoleAndSignedHeatNegativeControls.lean on #108",
+      "roadmap": "Docs/roadmaps/BishopEtaRHA2G3MaximumCutRound20261114.md",
+      "exact_controls": {
+        "near_pole": "a=1/4,b=1/2,Re[(a+ib)^-2]=-48/25",
+        "far_pole_negative_cases": 55,
+        "two_mode_mobius_signed_negative_cases": 16,
+        "selected_witness_fourth_lipschitz_source_certified": false
+      },
+      "corrected_even_W_Taylor": "For real even W, odd horizontal terms vanish in Re transform; even a single translate has O(a^4) remainder",
+      "false_proposed_promotions": [
+        "local pole positive floor for all |vertical|<1",
+        "fourth derivative sup for generic smooth bump equals selected W fourthLipschitz",
+        "far original source signed as bare inverse-square sum",
+        "unbounded log far debt and bounded compensation demonstrated for original zeros",
+        "Möbius (+,-) two mode positive; in fact strict negative",
+        "surrogate Gaussian heat signed fifth identified with original physical cap"
+      ],
+      "original_selected_A2_compensation_no_go": false,
+      "original_strict_compensation": false,
+      "original_routeB_eventual_gap": false,
+      "zero_shell_far_bound": false,
+      "original_G1_selected_uniform_K_preexisting_source_written": true,
+      "original_G1_explicit_K_bound": "quarticSignedPoleExplicitK0<4000000000; constructed floor-strength witnesses, t>=200",
+      "original_G1_strip_band_compiler_preexisting": "quarticSignedPoleThresholdBelowPlattTrudgian_proved",
+      "A2_sharp_selected_K_below_leading_ceiling_unproved": true,
+      "exact_selected_fourthLipschitz_definition": "integral |quarticFourSignedPoleCombinedProfile(u)| cosh(|u|) |u|^5 du"
+    },
+    "remaining_original_high_alpha": [
+      "BISHOP:OriginalCosineAddition/SineAddition -> finite-source limit",
+      "BISHOP:OriginalDyadicNatLogLaw on negative-log source",
+      "BISHOP:real-axis derivative and FTC -> all raw-prefix compact uniform Cauchy",
+      "RH:selected witness fourthLipschitz and FarHorizontal CH",
+      "RH:actual zero-cofinal completed compensation strict sign or same-source reverse",
+      "RH:original signedFifthPhysicalCapInteriorAt eventual lower bound, boundary decay, terminal convergence"
+    ],
+    "kernel_checked_new_theorems": 0,
+    "original_rh_or_eta_endpoints_closed": 0
+  },
+  "implementation_round_20261114_8": {
+    "date": "2026-11-14",
+    "scope": "Highest-alpha Bishop eta direct discrete route, avoiding full real-variable FTC and exact dyadic Nat-log equality",
+    "owner": "Agda PR #1478",
+    "script": "scripts/check_bishop_natlog_two_sided_dyadic_20261114.py",
+    "roadmap": "Docs/roadmaps/BishopEtaOriginalAllCutoffsAndNatLogMaxCut20261114.md",
+    "exact_checked_cases": {
+      "finite_two_sided_original_NatLog_increment": 3150,
+      "rational_dyadic_shell_lower": 64,
+      "rational_dyadic_growth_lower": 15,
+      "auxiliary_complex_numeric_geometric_tails": 252
+    },
+    "new_mathematical_lemma": "For L_N(m)=Σ_{j=1}^N ((m-1)/m)^j/j: (1-((m-1)/m)^N)/(m+1)≤L_N(m+1)-L_N(m)≤(1-(m/(m+1))^N)/m",
+    "original_Bishop_limit_consequence": "1/(m+1)≤L(m+1)-L(m)≤1/m; L(2m)-L(m)≥1/2; L(2^k)≥k/2",
+    "geometric_uniform_eta_target": "For |s|≤R, Re(s)≥δ>0, q=e^{-δ/2}<1 and all M≥N≥2^K: |Σ_{n=N}^M(-1)^(n-1)expC(-sL(n))|≤(1+Re^R/(1-q))q^K",
+    "analytical_preconditions": [
+      "actual Bishop negative-log finite source order limit",
+      "true expC multiplication and modulus on original term",
+      "expC finite difference bound",
+      "original finite Abel all-cutoff transport",
+      "Bishop uniform limit and continuity"
+    ],
+    "bypasses": [
+      "continuous real-variable FTC for eta tails",
+      "exact dyadic Nat-log addition for eta tails",
+      "global exp(log Nat) inversion for eta tails"
+    ],
+    "not_bypassed": [
+      "complex trigonometric addition or equivalent native expC addition",
+      "original series/order limit",
+      "Bishop analytic uniform convergence acceptance"
+    ],
+    "source_written_implementation": true,
+    "agda_kernel_accepted": false,
+    "original_eta_uniform_convergence_proved": false,
+    "authoritative_Clay_endpoint_closed": false
+  },
+  "implementation_round_20261114_9": {
+    "date": "2026-11-14",
+    "scope": "Six-frontier source implementation and exact local diagnostics: original gates preserved fail-closed",
+    "YM": {
+      "owner_PR": "#1503",
+      "finite_implementation": "scripts/check_ym_r445_interacting_transfer_contraction_20261114.py",
+      "additional_owner": "scripts/check_ym_r445_weighted_exterior_influence.py",
+      "tested": {
+        "binary_interacting_transfer_distances": 41,
+        "exact_geometric_tails": 30
+      },
+      "new_source_compiler": "Interacting binary Markov kernel 3/4,1/4 has D_k=(1/2)^k; analogy only",
+      "original_SU_N_Wilson_conditionals_proved": false,
+      "physical_D_k_proved": false,
+      "cutoff_uniform_RG": false,
+      "E1": false,
+      "D1": false
+    },
+    "Karp": {
+      "owner_PR": "#1502",
+      "agda_candidate": "DASHI/Mathematics/Complexity/Karp21NativeGammaPhysicalAcceptanceObservationExact.agda",
+      "diagnostic": "scripts/check_karp21_literal_gamma_allwords_20261114.py",
+      "runner": "scripts/check_karp21_allwords_physical_local.sh",
+      "tested": {
+        "all_binary_words_length_up_to_14": 32767
+      },
+      "actual_positive_payload_parser_observation_source_written": true,
+      "malformed_zero_empty_rejection_source_written": true,
+      "kernel_checked": false,
+      "all_input_physical_parsing_closed": false,
+      "physical_N21_F3": false,
+      "complete_heap_F2": false,
+      "polynomial_clock_F4": false,
+      "original_InNP": false
+    },
+    "BSD": {
+      "owner_PR": "#107 dashi_lean4",
+      "lean_candidates": [
+        "Synthesis/MillenniumBSDCMQ2AllOddUnitHenselExact.lean",
+        "Synthesis/MillenniumBSDCMQ2ActualCurvePointAt39Exact.lean",
+        "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
+      ],
+      "diagnostic": "scripts/check_bsd_q2_eight_squareclasses_20261114.py",
+      "runner": "scripts/check_bsd_q2_hensel_3705_local.sh",
+      "original_E": "y^2=x^3-x",
+      "eight_distinct_original_rational_x_Q2_local_point_witnesses": [
+        "28",
+        "31",
+        "33",
+        "39",
+        "41",
+        "112",
+        "1/4",
+        "1/16"
+      ],
+      "squareclass_coordinate_triples": "(squareclass(x-1),squareclass(x),squareclass(x+1)), each (v2 mod2,odd_unit mod8) and all eight are distinct",
+      "odd_units_with_Hensel_root": [
+        5481,
+        465,
+        561,
+        3705,
+        4305,
+        87801,
+        -15,
+        -255
+      ],
+      "integer_x_window": [
+        -16384,
+        16384
+      ],
+      "integer_x_q2_compatible_cases": 2732,
+      "distinct_integer_slice_classes": 6,
+      "nonintegral_witnesses_add_new_classes": 2,
+      "lean_kernel_acceptance": false,
+      "all_eight_actual_H1_classes_proved": false,
+      "local_Kummer_image_transport": false,
+      "continuous_Kummer_to_Sha2": false
+    },
+    "NS": {
+      "owner_PR": "#1501",
+      "diagnostic": "scripts/check_ns_r853_quadratic_lie_derivative_20261114.py",
+      "symbolic_original_rate_normal_form": "6*(12*C-P+D) at nu=delta=1",
+      "exact_sparse_polynomial_lie_derivative": "sum_i partial_i(r)*F_i with rational coefficient box bound",
+      "tests": 2,
+      "original_R71_to_complete_real_field": false,
+      "real_Galerkin_trajectory": false,
+      "along_solution_R853_identity": false,
+      "true_R828_R854_rate_Lipschitz": false,
+      "original_integrated_negative_rate": false
+    },
+    "Bishop": {
+      "owner_PR": "#1478",
+      "agda_candidate": "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda",
+      "existing_predecessors": [
+        "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda",
+        "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda"
+      ],
+      "runner": "scripts/check_bishop_eta_native_exp_cross_pr_local.sh",
+      "kernel_target_roots": 16,
+      "literal_raw_re_im_prefix_to_Murray_Sequence_SeriesOf_source_written": true,
+      "kernel_checked": false,
+      "canonical_Nat_log_increment_sandwich": false,
+      "trig_addition": false,
+      "eta_geometric_variation": false,
+      "derivative_FTC": false,
+      "eta_uniform_convergence": false
+    },
+    "RH": {
+      "owner_PRs": [
+        "#108 dashi_lean4",
+        "#1499 dashi_agda"
+      ],
+      "lean_candidate": "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean",
+      "diagnostic": "scripts/check_rh_original_a2_interval_maxcut_20261114.py",
+      "runner": "scripts/check_rh_a2_g3_attachment_local.sh",
+      "exact_signed_gap": "compensationTargetThreshold + localMuGain - localPositiveDebt - literalFarExactAt; same original W,rho,EV,n",
+      "finite_interval_cases": 4,
+      "compiler_pass_source_intervals": true,
+      "compiler_cofinal_nogo_source_intervals": true,
+      "actual_selected_fourth_Lipschitz_sharp_bound": false,
+      "actual_selected_horizontal_far_curvature_CH": false,
+      "actual_zero_cofinal_signed_compensation": false,
+      "actual_same_source_no_go": false,
+      "actual_fifth_gap_sign": false,
+      "boundary_decay_and_outer_terminal": false,
+      "RH": false
+    },
+    "acceptance": {
+      "finite_checks_all_passed": true,
+      "source_written_lemmas_are_not_kernel_acceptance": true,
+      "agda_lean_nix_available_here": false,
+      "queried_PR_workflow_receipts": 0,
+      "Clay_endpoints_closed_this_round": [],
+      "open_physical_analytic_leaves_are_not_proved": true
+    }
+  },
+  "implementation_round_20261114_10": {
+    "date": "2026-11-14",
+    "phase": "two_repository_Clay_rollup_source_consolidation_and_original_import_admission",
+    "canonical_prs": {
+      "agda": {
+        "pr": 1499,
+        "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+        "source_imports": 661,
+        "existing_identical_BSD_paths": 25,
+        "focused_root": "DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda",
+        "direct_imports_available": "17/17",
+        "kernel_checked": false
+      },
+      "lean": {
+        "pr": 108,
+        "branch": "chatgpt/clay-continuous-fifth-sign-20261112",
+        "source_imports": 56,
+        "focused_root": "Synthesis/ClaySixFrontierRollup20261114.lean",
+        "direct_imports_available": "15/15",
+        "kernel_checked": false
+      }
+    },
+    "exact_A_B_C": {
+      "YM": {
+        "A": [
+          "pin source / type-check F19 P0 R445 source roots and legacy real axiom audit"
+        ],
+        "B": [
+          "originalWilsonConditionalSameOutside",
+          "originalWilsonExteriorInfluenceBound",
+          "originalWilsonLocalizedDkBound"
+        ],
+        "C": [
+          "originalWilsonDkCutoffUniformSummable",
+          "originalWilsonRGUniformMomentControl",
+          "originalWilsonPhysicalCovarianceDecay",
+          "originalWilsonInteractingContinuumLimit",
+          "originalWilsonSameE1OSGap",
+          "N1 true nontrivial observable",
+          "G1 original required compact groups"
+        ],
+        "closed_C": []
+      },
+      "Karp": {
+        "A": [
+          "physicalAllLengthGammaRunSameOriginalPositive",
+          "physicalPositiveGammaAccepted",
+          "physicalZeroLengthGammaAccepted",
+          "physicalEmptyInputRejected",
+          "physicalLoneZeroRejected",
+          "Karp21GammaBinaryGoldenCoreExact newly restored dependency"
+        ],
+        "B": [
+          "physicalGammaAllInputsMatchesOriginalParser",
+          "nativeN21PhysicalFieldStreamSameOriginal",
+          "nativeN21PhysicalLedgerThresholdStepExact",
+          "originalRawFinishedThresholdObservationSameBinaryTerminal",
+          "originalBitTapeStepSimulatesN21Rule"
+        ],
+        "C": [
+          "nativeN21CompleteLiveHeapPolynomial",
+          "karpFractranBitMachineClockPolynomial",
+          "karpFractranDecodePreservesAcceptance",
+          "originalN21InNP",
+          "P0–P2 original reductions"
+        ],
+        "closed_C": []
+      },
+      "BSD": {
+        "A": [
+          "cmQ2SquareRoot3705",
+          "cmQ2SquareRootOfOneModEight",
+          "cmActualCurveQ2PointAt39",
+          "cmE_Q2_localPoint_* eight original E(Q2) witnesses"
+        ],
+        "B": [
+          "MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence",
+          "originalQ2LocalKummerImageExhaustive",
+          "originalRealLocalKummerImage",
+          "MillenniumBSDCMOriginalGeometricKummerGaloisEquivariantExact",
+          "originalSelmerTwoEqualsKummerKernel",
+          "originalShaTwoExactSequence"
+        ],
+        "C": [
+          "K3 same-curve Mordell–Weil rank deduction",
+          "K4 same-curve level32 eta/Mellin positivity",
+          "K5 odd-primary Sha and leading coefficient",
+          "universal BSD"
+        ],
+        "closed_C": []
+      },
+      "NS": {
+        "A": [
+          "Round71/Round74/R853 source kernels",
+          "R854/R855 arithmetic and compiler source"
+        ],
+        "B": [
+          "originalR71R74PhysicalRHSIsRealQuadraticField",
+          "originalR71RealGalerkinLocalSolution",
+          "originalR853SignedRateAlongGalerkinSolution",
+          "originalR853InitialRateEqualsR829"
+        ],
+        "C": [
+          "originalR828R854RateLipschitzAlongSolution",
+          "originalR854PhysicalRateEnvelope",
+          "nsR854OriginalRealRateIntegralStrictlyNegative",
+          "originalR823UniversalReserveCounterexample"
+        ],
+        "closed_C": []
+      },
+      "Bishop": {
+        "A": [
+          "originalBishopAbelFinite",
+          "originalRound11EtaFiniteAbel",
+          "originalRawEvenPrefixEqualsSelectedPairs",
+          "originalRawOddPrefixEqualsSelectedPairsPlusOne",
+          "originalRawPrefixEqualsNativeSeriesOf"
+        ],
+        "B": [
+          "originalBishopTrigCauchyConfiguredCoefficientIdentification",
+          "originalBishopTrigRectangleTriangleCommonLimit",
+          "originalBishopCosineAddition",
+          "originalBishopSineAddition",
+          "originalCanonicalNatLogSuccessorIncrementSandwich",
+          "originalCanonicalNatLogDyadicAddition"
+        ],
+        "C": [
+          "originalRound11EtaDyadicGeometricVariation",
+          "originalRound11EtaAbelPairTailBound",
+          "originalRound11EtaCompactUniformCauchy",
+          "originalRound11EtaCompactUniformConvergence",
+          "originalRound11DirichletTermAnalyticDerivative",
+          "originalRound11DirichletTermFundamentalTheorem"
+        ],
+        "closed_C": []
+      },
+      "RH": {
+        "A": [
+          "selectedA2LiteralGap_pos_iff",
+          "selectedA2Pass_of_source_intervals",
+          "selectedA2NoGo_of_source_intervals",
+          "selectedA2CofinalNoGo_of_source_intervals",
+          "signedFifthRollupCutoffEventuallyOwned",
+          "signedFifthRollupAnalyticInput_of_three"
+        ],
+        "B": [
+          "selectedOriginalWitnessFourthLipschitzBound",
+          "selectedOriginalHorizontalFarCurvatureBound",
+          "originalA2FarExactZeroShellBound",
+          "originalSelectedA2CompensationLowerBound"
+        ],
+        "C": [
+          "originalSelectedA2StrictSignedCompensation or originalSelectedA2CompensationNoGo on original selected zeros",
+          "originalSignedFifthPhysicalCapEventualGap",
+          "originalSignedFifthUpperBoundaryDecay",
+          "originalSignedFifthOuterTerminalConvergence"
+        ],
+        "closed_C": []
+      }
+    },
+    "transfer_conflict_reconciliation": {
+      "agda_NS_R854_R855_diagnostic_variants": "two compatible source-script changes resolved in favor of newer R855 checks",
+      "lean_RH_selected_gap_audit": "existing API retained; eventual cutoff and three-producer consequences reintroduced as new nonbreaking module",
+      "ignored_global_surfaces": [
+        "CHANGELOG.md",
+        "TODO.md",
+        ".github/workflows/ym-native-maxcut-exact-agda.yml",
+        "scripts/run_agda29_parallel_check.sh",
+        "Synthesis.lean",
+        "ExternalClayNS/ stacked comparator"
+      ],
+      "uncaught_missing_root_direct_imports": 0
+    },
+    "acceptance": {
+      "old_lane_prs_are_provenance_not_new_work_destinations": true,
+      "rollup_donor_source_Git_blob_identity_preserved": true,
+      "all_six_C_gates_remain_open": true,
+      "finite_diagnostics_not_kernel": true,
+      "golden_Nix_Agda_2_9": false,
+      "pinned_Lean_4_28": false,
+      "transitive_axiom_audit": false,
+      "reviewed_global_workflow_and_import_surfaces": false,
+      "GitHub_PRs_draft": true
+    },
+    "execution": "scripts/check_clay_sixfrontier_physical_local_20261114.sh from Agda #1499 and DASHI_CLAY_LEAN_WORKTREE=Lean #108",
+    "note": "User original maxcut target list follows canonical A/B/C source ownership; source co-location != inhabited analytic/physical estimates"
+  }
+}
