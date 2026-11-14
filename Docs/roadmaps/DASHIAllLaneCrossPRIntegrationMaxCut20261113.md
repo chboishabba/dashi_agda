@@ -529,3 +529,18 @@ The authoritative exact gate registry is Docs/roadmaps/ClaySixFrontierABCExactGa
 The newly written exact sources lack current pinned Agda 2.9/Nix or Lean/lake kernel checks; GitHub API returned no workflow runs for these new commits. The independent literal-gamma finite differential PASS is 31713 original positive words + 7 malformed controls; the original Q2 squareclass arithmetic PASS yields eight distinct cases. Neither is a proof of a general Clay endpoint.
 
 Canonical stage order: **source acceptance → true original-carrier A transport → selected analytic B estimate/counterexample → universal C proof with full trust closure**. Hold drafts #1499/#1502/#1503 open and preserve original first-source authorship.
+
+
+### Round 4 — attached Wilson R445 localized-TV maximum cut (14 November 2026)
+
+The original source owner [Agda #1503](https://github.com/chboishabba/dashi_agda/pull/1503) now carries:
+
+- `YMClayR445LocalizedTVInferenceNoGoExact.agda`: Agda --safe finite exact scale/exterior-influence/non-clustering deductions as negative controls; imported by the source F19/P0/R445 acceptance root.
+- `scripts/check_ym_r445_localized_tv_maxcut_countermodels.py`: exact rational conditional-marginal TV decomposition check on 6561 pairs of strictly positive 2×2 joint laws and exact remote-weight, rare-bad-event, non-Cauchy, nonclustering, OS Gram, harmonic block negative controls.
+- Eight focused unit tests and `Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md`: full correctly typed physical A/B/C gate inventory.
+
+**Do not accept the pasted document's terminal “Closed” table.** Crucial errors: (i) fixed (1/4)^2 is 1/16 and cannot become 16^-k without a separately proven physical RG contraction; (ii) the bound C/(16k) is not summable; (iii) a perturbation acting ONLY outside X can alter P_X through Q correlations (explicit local TV=1/8), so a polymer sum touching X alone cannot bound the local Radon quotient; (iv) rare Q-bad fields can become P_bad=1/2 after reweight; (v) zero comparison TV(P_k,Q_k) need not make P_k projectively Cauchy, OS-positive, or clustering. E1,D1,D2,N1,G1 remain OPEN. The same original beta(3) blocked Wilson and beta(1) bare comparison are NOT automatically a physically matched renormalized target.
+
+Exact next source lemmas are recorded in the machine ledger `ClaySixFrontierABCExactGates20261114.json`, under `implementation_round_20261114_4`: A original F19/R445 same map and physical target; B original conditional-action Hessian, large-field normalized density, exterior influence and true summable irrelevant activity; C projective OS positivity, nontrivial cylinder, original connected covariance decay and same-H positive physical gap.
+
+This is a **new proof audit and finite no-go package**, not a Clay result and not a source physical TV bound. The independent arithmetic passed but pinned Agda 2.9 and committed Python tests have not run here. Preserve all previously filed six-lane A/B/C gates and 43 Yang–Mills Round518 leaves.
