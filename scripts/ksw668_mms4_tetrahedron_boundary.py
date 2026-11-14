@@ -181,11 +181,19 @@ def analyze(payload,synthetic=False,scale=.5,max_skew_s=.02):
         raise ValueError("MMS source must be in calibrated GSE")
     if payload.get("spatial_model")!="affine_4_spacecraft_interpolation":
         raise ValueError("Missing explicit affine spatial modelling assumption")
+    if not synthetic and payload.get("source_event_utc")!=[
+            "2017-06-17T20:24:03Z","2017-06-17T20:24:11Z"]:
+        raise ValueError("Original MMS 2017 event contract not identified")
     epochs=payload.get("epochs",[])
     if len(epochs)!=2:raise ValueError("Exactly two snapshots required for this order-2 time estimate")
     cache={}
     states=[epoch(x,cache,synthetic,max_skew_s) for x in epochs]
     a,b=states
+    if not synthetic:
+        start=parse_t("2017-06-17T20:24:03Z")
+        end=parse_t("2017-06-17T20:24:11Z")
+        if not start<=a["t"]<b["t"]<end:
+            raise ValueError("Source epochs not contained in selected 2017 event")
     dt=b["t"]-a["t"]
     if not .00000001<dt<=30:raise ValueError("Invalid MMS temporal baseline")
     ref=refine_reference(a,b,scale)
@@ -199,7 +207,7 @@ def analyze(payload,synthetic=False,scale=.5,max_skew_s=.02):
     return {
       "schema":"dashi.ksw668.mms4-affine-tetra-poynting.v1",
       "status":"SYNTHETIC MATHEMATICAL TEST ONLY" if synthetic else
-               "RAW CDF SHA-VERIFIED, PHYSICAL INTERPOLATION MODEL STILL UNCERTAIN",
+               "USER-SUPPLIED CDF BYTES MATCH USER-SUPPLIED SHA256; source provenance and field calibration remain unverified",
       "fixed_ref_spatial_model":"affine GSE four-spacecraft convex interpolation",
       "source_raw_CDF_files_verified":0 if synthetic else len(cache),
       "same_region_both_epochs_convex_hull_only":True,
@@ -214,8 +222,10 @@ def analyze(payload,synthetic=False,scale=.5,max_skew_s=.02):
       "component_uncertainty_only_residual_upper_J":error,
       "temporal_trapezoid_error_qualified":False,
       "affine_model_interpolation_error_qualified":False,
-      "same_source_original_instrument_CDF_provenance_attested":not synthetic,
-      "same_original_MMS_20170617_CDF_measurement":not synthetic,
+      "raw_file_digest_consistency_checked":not synthetic,
+      "same_source_original_instrument_CDF_provenance_verified":False,
+      "cdf_variable_source_metadata_and_instrument_error_independently_verified":False,
+      "same_original_MMS_20170617_CDF_measurement_accepted":False,
       "source_physical_boundary_empirically_accepted":False,
     }
 
