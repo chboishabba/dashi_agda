@@ -65,11 +65,12 @@
           "#1503"
         ],
         "next": "PROVED generic finite total-variation algebra only; estimate actual physical D uniformly or renormalize target family",
-        "status": "OPEN",
+        "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "generic sharp action-oscillation bound established; original physical TV still unpaid"
-        ]
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "YM.L1.RG",
@@ -230,11 +231,12 @@
           "#1499"
         ],
         "next": "Actual REAL Galerkin trajectory + R853 selected signed rate + R828 Lipschitz source identification",
-        "status": "OPEN",
+        "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "real-time negative-rate compiler source-written in Lean; actual R853 trajectory envelope open"
-        ]
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "NS.C2.REMOTE",
@@ -306,8 +308,9 @@
           "Lean #108"
         ],
         "next": "Prove/refute actual same-zero configuration strict inequality with negative controls",
-        "status": "OPEN",
-        "proof_receipt": false
+        "status": "OPEN after source advance",
+        "proof_receipt": false,
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "RH.B",
@@ -392,11 +395,12 @@
           "#1502"
         ],
         "next": "Compile true finite-state all-k gamma n/m/u/v/w/W and signed ledger",
-        "status": "OPEN",
+        "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "real all-prefix finite transition program source-written and tested; Agda all-k bisimulation still open"
-        ]
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "PNP.F2",
@@ -539,12 +543,13 @@
           "Lean #107"
         ],
         "next": "Real sign and Q2 local fields, torsion exceptions, H1 equivalence all places",
-        "status": "OPEN",
+        "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "Hensel local square root at x39 constructive; original H1 carrier open"
         ],
-        "latest_live_owner": "Lean #107 already proves actual Q2 local-image first-coordinate necessary parity and original global H1 explicit Selmer image=four torsion, in source. Full local H1 Kummer compatibility remains open."
+        "latest_live_owner": "Lean #107 already proves actual Q2 local-image first-coordinate necessary parity and original global H1 explicit Selmer image=four torsion, in source. Full local H1 Kummer compatibility remains open.",
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "BSD.K2",
@@ -650,11 +655,12 @@
           "#1408"
         ],
         "next": "Bishop partial-summation estimate and uniform locally analytic continuation",
-        "status": "OPEN",
+        "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "complex eta Abel uniform tail proved analytically with exact finite identity; original Bishop analytic transport open"
-        ]
+        ],
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
       },
       {
         "id": "BISHOP.KOENIGS",
@@ -1302,5 +1308,138 @@
       "original Bishop analytic function laws and eta tail transport",
       "RH actual signed A2/G3 inequality"
     ]
+  },
+  "implementation_round_20261114_3": {
+    "date": "2026-11-14",
+    "authority": "ORIGINAL SOURCE WRITTEN, NO PINNED AGDA/LEAN KERNEL",
+    "items": [
+      {
+        "id": "YM.R445.TV",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1503,
+        "commit": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+        "path": "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+        "producer": "originalPhysicalR445CovarianceFromOneLocalTV",
+        "result": "If original same coarse local-observation TV uniformly bounds original bounded tests, each actual F,G,FG moment discrepancy is ≤the one TV; original native covariance ≤D + D*1 + 1*D",
+        "kind": "A conditional genuine original-source consumer",
+        "remaining": "Actual original interacting Wilson effective-vs-renormalized target local TV D_k→0/summability is UNPROVED; legacy real postulates and kernel unverified",
+        "endpoint": false
+      },
+      {
+        "id": "PNP.F1",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1502,
+        "commit": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+        "path": "DASHI/Mathematics/Complexity/Karp21NativeGammaAllLengthCompositePhysicalExact.agda",
+        "producers": [
+          "physicalRunAdditionExact",
+          "physicalPositiveGammaStagesExact",
+          "physicalAllLengthGammaRunSameOriginalPositive"
+        ],
+        "result": "All POSITIVE gamma words of arbitrary payload length k≥1 on literal original finite transition table; 2k+2 instructions and source suffix preserved",
+        "kind": "A source proof, unverified",
+        "remaining": "Malformed/error accept/reject and k=0 composite, repeated original N21 gamma parser, full original F3 first-enabled rule/trace, F2 total resource accounting, F4 actual PR.PolynomialCostModel and original InNP",
+        "regression": {
+          "literal_differential_wellformed": 31713,
+          "malformed_control": 7,
+          "result": "PASS FINITE ONLY"
+        },
+        "endpoint": false
+      },
+      {
+        "id": "BSD.K1.REAL",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "commit": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "path": "Synthesis/MillenniumBSDCMRealNonexceptionalXTSignImageCompleteExact.lean",
+        "producers": [
+          "cmOriginalRealXTPositiveSignsRealized",
+          "cmOriginalRealXTNegativeSignsRealized",
+          "cmOriginalRealNonexceptionalXTSignImage_eq"
+        ],
+        "result": "Actual nonexceptional E(R): y²=x³−x has full sign image {(+,+),(-,-)}; witnessed x=2 and x=−1/2, consumes old real locus theorem",
+        "kind": "A genuine real-curve source proof, unverified",
+        "remaining": "Connect actual E(R)/2E(R) H1 local Kummer equivalence and exceptional branches, exact-head Lean kernel",
+        "endpoint": false
+      },
+      {
+        "id": "BSD.K1.Q2",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 107,
+        "commit": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+        "path": "scripts/check_bsd_q2_original_eight_local_kummer_classes.py",
+        "result": "Classical Q2 square criterion at x=39 gives actual mathematical local point y=4sqrt(3705); four torsion original Kummer images together with its independent class give eight distinct local Q2 square-class pairs under subgroup closure",
+        "kind": "Independent exact arithmetic; not an in-kernel Q2 class theorem",
+        "regression": {
+          "distinct_classes": 8,
+          "original_point_x": 39,
+          "unit": 3705,
+          "result": "PASS"
+        },
+        "remaining": "Formally inhabit actual ℚ_[2] square root, identify local image group/quotient, local H1 quadratic Kummer compatibility and Sha",
+        "endpoint": false
+      },
+      {
+        "id": "NS.R854",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 109,
+        "commit": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba",
+        "path": "Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean",
+        "producer": "nsR854OriginalRealRateIntegralStrictlyNegative",
+        "result": "True real Lebesgue interval integral of actual selected real rate is <0 on original T given integrability and original R853 same-trajectory affine rate envelope",
+        "kind": "A conditional theorem on actual ℝ time, unverified",
+        "remaining": "Construct actual R71/R74 original real Galerkin solution, same R853 rate and source Lipschitz bound; global 3D continuation separate and open",
+        "endpoint": false
+      },
+      {
+        "id": "BISHOP.ETA",
+        "source_repo": "chboishabba/dashi_agda",
+        "pr": 1478,
+        "commit": "e391fcd65b75495282c90a7f23ce99195d20761c",
+        "path": "DASHI/Analysis/BishopOriginalEtaPairBlockTelescopingExact.agda",
+        "producers": [
+          "originalBishopEtaPrefixShiftedPairsExact",
+          "OriginalRound11.actualOriginalRound11ShiftedEtaTailExact",
+          "OriginalRound11.originalRound11EtaAllShiftedPairTailFromSelectedTerms"
+        ],
+        "result": "All-n,m shifted exact eta pair-block finite identity on original selected Murray/Bishop complex carrier, now consumed by original Round11 eta source",
+        "kind": "A finite setoid source theorem, unverified",
+        "remaining": "Original cosine/sine addition, NatLog matches positive-real log, complex derivative and FTC, uniform Abel modulus (1+M/delta)*N^(-delta) in source Bishop reals; RH not implied",
+        "endpoint": false
+      },
+      {
+        "id": "RH.A2.G3",
+        "source_repo": "chboishabba/dashi_lean4",
+        "pr": 50,
+        "commit": "2384d90f1a2c23dc59c072425e7efbc040405032",
+        "path": "Synthesis/RiemannProjectiveQuarticFourWindowSignedPoleA2SelectedWitnessCut.lean",
+        "result": "Existing exact positive eighth-cap criterion requires selected W.fourthLipschitz below source floor threshold; exact debt retains leading expanded zero count; no selected W headroom proof, no FarExact strict bound",
+        "kind": "C unsolved actual original analytic positivity; no new solution",
+        "negative_controls": [
+          "Lean #108 first-zero fifth coefficient nonpositive under true mean-square condition",
+          "Agda #1499 original pole floor -9 vs -4 false"
+        ],
+        "remaining": "Prove/refute actual same-zero selected W fourth-Lipschitz and horizontal far curvature and complete signed A2/G3 inequality; Route B eventual signedFifthCorrelationGapAt, boundary decay, outer terminal convergence",
+        "endpoint": false
+      }
+    ],
+    "verification": {
+      "github_source_writes_and_blob_readbacks": true,
+      "exact_head_agda_kernel": false,
+      "exact_head_lean_kernel": false,
+      "CI_pull_request_workflow_runs_returned_for_new_shas": 0,
+      "js_full_gamma_positive_differential_pass": 31713,
+      "js_gamma_malformed_controls": 7,
+      "python_q2_eight_distinct_exact_classes": 8,
+      "external_clay_endpoints_inferred": 0
+    },
+    "pr_heads_observed_pre_ledger": {
+      "agda_1478": "e391fcd65b75495282c90a7f23ce99195d20761c",
+      "agda_1502": "699e33dc008147ff597cc35ec1d42a5e212a8e95",
+      "agda_1503": "dbcaf5a7470b89c09c01fcbb55a3d150936faeb8",
+      "lean_107": "92a3b2575d268f0d80226de885efe7e4845fc19c",
+      "lean_109": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba"
+    },
+    "status_message": "A proofs source-written; B/C physical/analytic hypotheses not discharged; six original general Clay endpoints unproved; no merges authorized"
   }
 }
