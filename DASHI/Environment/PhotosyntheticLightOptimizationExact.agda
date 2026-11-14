@@ -60,7 +60,7 @@ record PhotosyntheticLightOptimisationCandidate
     {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt photonField}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
-    (objective : PhotosyntheticObjective weld) : Set₁ where
+    (objective : PhotosyntheticObjective {ObjectiveValue = ObjectiveValue} weld) : Set₁ where
   constructor photosynthetic-light-optimisation-candidate
   field
     candidateDescription : String
@@ -81,8 +81,8 @@ record PhotosyntheticLightOptimisationAdmission
     {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt photonField}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
-    {objective : PhotosyntheticObjective weld}
-    (candidate : PhotosyntheticLightOptimisationCandidate objective) : Set₁ where
+    {objective : PhotosyntheticObjective {ObjectiveValue = ObjectiveValue} weld}
+    (candidate : PhotosyntheticLightOptimisationCandidate {ObjectiveValue = ObjectiveValue} objective) : Set₁ where
   constructor photosynthetic-light-optimisation-admission
   field
     farquharCalibrationEvidence : String

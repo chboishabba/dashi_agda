@@ -99,7 +99,7 @@ record AdaptivePhotosyntheticOptimisationWeld
     {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt photonField}
     {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
-    (objective : Optimisation.PhotosyntheticObjective weld)
+    (objective : Optimisation.PhotosyntheticObjective {ObjectiveValue = ObjectiveValue} weld)
     (importance : Cell → Scalar) : Set₁ where
   constructor adaptive-photosynthetic-optimisation-weld
   field
