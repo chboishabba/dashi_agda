@@ -55,7 +55,7 @@ open DashiRTXAdaptiveAllocationReceipt public
 
 record PhotosyntheticImportanceAdapter
     {Cell LeafPoint Wavelength PhotonFlux Scalar : Set}
-    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
     (allocationImportance : Cell → Scalar) : Set₁ where
   constructor photosynthetic-importance-adapter
   field
@@ -73,10 +73,10 @@ open PhotosyntheticImportanceAdapter public
 record AdaptiveCanopyTransportWeld
     {Wavelength Direction CanopyPoint PhotonFlux LeafPoint Scalar Cell : Set}
     {canopy : Canopy.SpectralCanopyRadiationModel Wavelength Direction CanopyPoint PhotonFlux}
-    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt field}
+    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt photonField}
     (kernel : AuthoritativeCanopyKernelReceipt canopy)
-    (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy field interception)
+    (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy photonField interception)
     (algebra : AdaptiveTransportAlgebra Scalar)
     (allocation : DashiRTXAdaptiveAllocationReceipt {Cell = Cell} algebra) : Set₁ where
   constructor adaptive-canopy-transport-weld
@@ -84,7 +84,7 @@ record AdaptiveCanopyTransportWeld
     adaptiveStrategySourceBoundary : RTXSource.DashiRTXSourceBoundary
     retainedKernel : AuthoritativeCanopyKernelReceipt canopy
     retainedKernelIsSameObject : retainedKernel ≡ kernel
-    retainedCanopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy field interception
+    retainedCanopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy photonField interception
     retainedCanopyWeldIsSameObject : retainedCanopyWeld ≡ canopyWeld
     refinementActsOnKernelEvaluationReference : String
     refinementPreservesTransportSemanticsReference : String
@@ -96,14 +96,14 @@ record AdaptivePhotosyntheticOptimisationWeld
     {LeafPoint Wavelength PhotonFlux ObjectiveValue Scalar Cell : Set}
     {leaf : Plant.LeafGasExchangeReceipt}
     {calibration : Calibration.LeafCarbonWaterCalibration leaf}
-    {field : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
-    {interception : Photo.LeafLightInterceptionReceipt field}
-    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration field interception}
+    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {interception : Photo.LeafLightInterceptionReceipt photonField}
+    {weld : Photo.PhotosyntheticOpticsPlantWeld leaf calibration photonField interception}
     (objective : Optimisation.PhotosyntheticObjective weld)
     (importance : Cell → Scalar) : Set₁ where
   constructor adaptive-photosynthetic-optimisation-weld
   field
-    importanceAdapter : PhotosyntheticImportanceAdapter {field = field} importance
+    importanceAdapter : PhotosyntheticImportanceAdapter {photonField = photonField} importance
     objectiveSensitivityReference : String
     budgetAllocationReference : String
     refinementStoppingCriterionReference : String
