@@ -25,6 +25,7 @@ import RealProperties as RP
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 import DASHI.Analysis.BishopOriginalEtaPairBlockTelescopingExact as Pair
+import DASHI.Physics.YangMills.YangMillsSubmissionRound11ExactCutset as Round11
 
 -- Recursion descends by two and advances the physical term source
 -- by two; it never uses any arbitrary Nat parity oracle.
@@ -109,3 +110,28 @@ originalRawOddPrefixEqualsSelectedPairsPlusOne term n
 --   originalBishopRawOddUnmatchedTermUniformBound
 --   originalRound11EtaAllRawCutoffsUniformCauchy
 --   originalRound11EtaCompactUniformConvergence
+
+-- Concrete original Round11 source instantiation: no replacement logNat
+-- candidate, exponent, or Dirichlet term-family can be slipped in here.
+module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
+  module Selected = Eta.OriginalRound11DirichletEta inputs
+
+  actualOriginalRound11RawEvenPrefix :
+    (s : BC.BishopComplex) (n : Nat) →
+    Eta._≈C_
+      (originalRawEtaPrefix (Selected.sourceTerms s) (Eta.twice n))
+      (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+  actualOriginalRound11RawEvenPrefix s n =
+    originalRawEvenPrefixEqualsSelectedPairs (Selected.sourceTerms s) n
+
+  actualOriginalRound11RawOddPrefix :
+    (s : BC.BishopComplex) (n : Nat) →
+    Eta._≈C_
+      (originalRawEtaPrefix
+        (Selected.sourceTerms s) (suc (Eta.twice n)))
+      (BC._+C_
+        (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+        (Selected.sourceTerms s (Eta.twice n)))
+  actualOriginalRound11RawOddPrefix s n =
+    originalRawOddPrefixEqualsSelectedPairsPlusOne
+      (Selected.sourceTerms s) n
