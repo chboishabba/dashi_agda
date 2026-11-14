@@ -20,7 +20,7 @@ for source in \
   fi
 done
 
-python3 -m compileall -q scripts/ibrahim_fln_reference_analysis.py scripts/ibrahim_fln_certificates.py tests/test_ibrahim_fln_reference_analysis.py tests/test_ibrahim_fln_certificates.py
+python3 -m compileall -q scripts/ibrahim_fln_reference_analysis.py scripts/ibrahim_fln_certificates.py tests/test_ibrahim_fln_reference_analysis.py tests/test_ibrahim_fln_certificates.py tests/test_ibrahim_fln_certificate_cli.py
 python3 -m unittest discover -s tests -p 'test_ibrahim_fln*.py' -v
 
 if [ "$(printenv IBRAHIM_SKIP_AGDA 2>/dev/null || true)" = "1" ]; then
