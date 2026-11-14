@@ -144,6 +144,6 @@ The 81 algebraic character-pair orthogonality cases were also checked independen
 - D01–D12: full original model recurrent evidence, documentary data independence, matched CE, frozen F5, three-arm F6 separate final, compute Pareto
 - X369-B/C/D/E/G: atomic, NS, YM, quantum and Monster physical/semantic source maps, still independent OPEN frontiers
 
-**Kernel command:** `DASHI_NO_TMUX=1 scripts/check_x369_finite_original_torus_maxcut.sh`, which delegates to the existing pinned `scripts/run_agda29_parallel_check.sh`; subsequently run authoritative Track A flake checks before promotion. No Agda checker was executable in the current environment, and no fresh kernel result is claimed.
+**Kernel command:** `DASHI_NO_TMUX=1 bash scripts/check_x369_finite_original_torus_maxcut.sh`, which delegates to the existing pinned `scripts/run_agda29_parallel_check.sh`; subsequently run authoritative Track A flake checks before promotion. No Agda checker was executable in the current environment, and no fresh kernel result is claimed.
 
 **Formal status:** P1 mathematical source progressed materially, Agda acceptance still OPEN; P2/P3 source code implemented in Leech, neural evidence OPEN; P4/P5 original GPU/data gates OPEN; P6 matched three-arm code implemented but native/new-data and independent final F6 OPEN; P7 original physical source gates OPEN. Keep mathematical proof, experimental code, source-level tested invariants, real GPU measurements and interpretive claims in separate status columns.
