@@ -39,9 +39,9 @@
 
 ## 2. Exact new mathematical lemmas (not generic welds)
 
-These are **proposed exact declaration names** and specifications, NOT existing proved declarations. The file owner for new proof code should be DASHI on the existing NORA/ontology Agda rollup PR #1506; reuse all modules in §1.
+These are **proposed exact declaration names** and specifications, NOT existing proved declarations. The file owner for new proof code should be DASHI on the existing NORA/ontology Agda rollup PR #1506; reuse all modules in §1. **Novelty discipline:** the abstract prefix-ultrametric law, fibrewise constancy criterion for factorisation, and conditional compatible-gluing principle are already known mathematics and in several cases already proved in the repository. The genuinely new *work here* is establishing the **concrete Zelph published-byte partition, complete-for-query physical projection, actual overlapping source/revision correspondence, and executable refinement witnesses**. A3/A4/A6 should reuse and instantiate existing theorems where the hypotheses are available, not be advertised as entirely new foundational theorems.
 
-### A — Original nontrivial mathematics / genuinely new proof obligations
+### A — New same-object proof obligations: distinguish true new content from existing theorem instantiation
 
 **A1 `zelphPhysicalNameShardPartitionExact`**: Under a verified sorted, nonoverlapping and covering index over **all** `nodeOfName` entries for a fixed language and graph revision, prove every existing key is routed to precisely the shard(s) containing it. Explicitly represent duplicate-name and collision policy; if key uniqueness is not guaranteed, return a finite set of witnesses rather than a fake singleton. Requires physical bridge data; no global claim without full index coverage.
 
@@ -89,7 +89,7 @@ These are **proposed exact declaration names** and specifications, NOT existing 
 |---|---|---|---|
 | **P0 — Same-object source lock** | C1 raw manifest+route+receipt materialisation, SHA check and source lineage; B1 observed manifest schema regression replay | [ITIR #14](https://github.com/chboishabba/ITIR-suite/pull/14) | Reported live QID identity; independent byte replay OPEN |
 | **P1 — Query-shaped index theorem** | A1 physical name partition + B2 decoder; no-coarse-fallback negative control, exact QID set; prove actual key→shard coverage on a chosen revision | [DASHI #1506](https://github.com/chboishabba/dashi_agda/pull/1506) / ITIR #14 | Mathematical hypotheses and verified index OPEN |
-| **P2 — Hyperfabric adequacy** | A2/A3/A4/A6: certified query-family closure, compatibility/gluing, fine-coarse adequacy and typed negative-answer refusal | DASHI #1506 | **Genuine new mathematical cut** |
+| **P2 — Hyperfabric adequacy** | A2/A3/A4/A6: certified query-family closure, compatibility/gluing, fine-coarse adequacy and typed negative-answer refusal | DASHI #1506 | **Concrete new physical/query proof cut; reuse known abstract theorems** |
 | **P3 — Physical transport and revision** | A5, B4, C2: revision transport; full direct shard decode; physical object coalescing; measured v2/v3 candidate budget | DASHI #1506 / [SLR #10](https://github.com/chboishabba/slr/pull/10) / ITIR #14 | OPEN |
 | **P4 — SLR native semantics** | B5/B6, C3/C4: native quantitative statement/source evidence, S29 persisted review and sparse reopen on the original QID+GUID | SLR #10 | OPEN |
 | **P5 — NORA and Nat programme** | C5/C6: actual NORA native export and governance/attribution; current full Nat population lossless inventory and external reviewed action only | [SensibLaw #514](https://github.com/chboishabba/SensibLaw/pull/514) as author-facing entry; SLR executes | OPEN |
