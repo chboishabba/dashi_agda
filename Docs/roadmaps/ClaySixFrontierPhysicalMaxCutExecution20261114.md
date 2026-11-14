@@ -317,3 +317,42 @@ Sources: https://www.lmfdb.org/EllipticCurve/Q/32/a/3 ; https://www.lmfdb.org/kn
 3. `NEW`: focus mathematical research on **actual interacting Wilson summability/continuum/mass**, **actual Riemann-zero signed compensation or sign no-go**, **3D NS cutoff-uniform global reserve**, and **universal SAT lower bounds**. Universal BSD is separately open and cannot be inferred from one CM curve.
 
 **Status:** documentation-only mathematical source audit. No source theorem, original C estimate or pinned kernel acceptance is promoted by this amendment. Attribution remains with Wilson/Bałaban, Karp/Cook–Levin, Kummer/Selmer/Kolyvagin/Rubin, Bishop/Abel, Navier–Stokes/Galerkin and the RH zero-analysis sources; DASHI's original-source adapter work remains separately attributed.
+
+
+## 14 November 2026: external OpenAI YM existence intake, source-precise
+
+**Source now PUBLIC, not just the 26 October announcement.** The October 28 OpenAI
+Wilson construction was released via the Yang--Mills shepherding group on
+11 November: `yang-mills-group/OpenAI-YM-20261028@3456e5e7...` (Lean 4.32.0),
+reviewed independently in `yang-mills-group/YM@55ba9fc3...`, with
+`YMReview.Acceptance.combined_acceptance` and separate
+`YMReview.OPE.constructed` evidence. Review checks report that the combined
+single Wilson family, phase-averaged table, fixed-volume UV and extracted IR
+hierarchy, scalar OS, stress Ward, operator dictionary and short-distance trace
+satisfy their **stated formal interfaces**. External independent validation is
+not a native DASHI kernel receipt. Source details and limits:
+`Docs/roadmaps/OpenAIYangMills2026SourceExactMaxCut20261114.md`.
+Machine source/claim manifest:
+`Docs/roadmaps/OpenAIYangMills2026ProofIngest20261114.json`.
+Typed Agda source bridge:
+`DASHI/Research/OpenAIMath/OpenAIYangMills2026SourceIntakeExact.agda`.
+
+**Effect on cut:** E1 must now be split into
+(1) **external released/reviewed candidate existence theorem** on its
+specified Wilson family, construction and permitted gauge groups;
+(2) **unpaid original DASHI F19/R445/P0-to-upstream same-source carrier**
+and native Agda/Lean kernel transport; and
+(3) independent **original physical D1/D2/N1/G1 and mass gap**.
+This can significantly shorten original E1 discovery work **if** same-source
+correspondence succeeds. It does not pay the same-family mapping, a unique
+infinite-volume limit, full-field OS matching, D1 mass decay, D2 same-H gap or
+Clay Yang--Mills. The published review expressly excludes these broader claims.
+
+**Other OAI proof ingest integrated:** exact Git blobs from Agda #1212
+`OpenAIMathUpstreamReceiptExact`, `OpenAIMathPriorityAtlasExact`,
+`OpenAIMathSourceAtlasExact`, `OpenAIMathSourceAtlasRegression`
+are now colocated on the **same Clay rollup #1499**; OpenAI's older
+`openai/math` (`1581d4cb...`, Lean 4.34.1) remains **distinct**
+from the new Yang--Mills submission (Lean 4.32.0). Local Lean world-builder
+#1495 uses Lean 4.28.0; source-only manifest cannot be promoted to an
+accepted DAG or a native kernel proof. Source identity before proof identity.

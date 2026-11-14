@@ -945,5 +945,29 @@
       "Bishop_uniform_eta": false,
       "RH_actual_zero_signed_gap": false
     }
+  },
+  "external_oai_yang_mills_20261028": {
+    "upstream_repository": "yang-mills-group/OpenAI-YM-20261028",
+    "upstream_commit": "3456e5e75cf8d4cd558955a5c7638fba2d68f464",
+    "review_repository": "yang-mills-group/YM",
+    "review_commit": "55ba9fc36293b3f4d52c6b1f813169a0be76ee98",
+    "first_submission": "2026-10-28",
+    "assessment_date": "2026-11-10",
+    "source_release": "2026-11-11",
+    "source_lean": "leanprover/lean4:v4.32.0",
+    "dashi_world_lean": "leanprover/lean4:v4.28.0",
+    "upstream_target": "YangMills.jointExistence",
+    "reviewed_combined_target": "YMReview.Acceptance.combined_acceptance",
+    "reviewed_ope_target": "YMReview.OPE.constructed",
+    "manifest": "Docs/roadmaps/OpenAIYangMills2026ProofIngest20261114.json",
+    "source_intake": "DASHI/Research/OpenAIMath/OpenAIYangMills2026SourceIntakeExact.agda",
+    "provenance_donor_agda_pr": 1212,
+    "source_only": true,
+    "local_kernel_accepted": false,
+    "same_object_e1_transport": false,
+    "local_d1": false,
+    "local_d2": false,
+    "clay_solved": false,
+    "note": "Released external existence theorem at its definitions, reviewed independently; original DASHI Wilson/F19/R445 E1 and mass gap remain open."
   }
 }
