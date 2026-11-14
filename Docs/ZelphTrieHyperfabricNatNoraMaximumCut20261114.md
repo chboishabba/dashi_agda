@@ -46,6 +46,12 @@ bash tools/check_zelph_physical_maxcut_offline.sh
 
 
 
+## Native offline acceptance 15 November — 120/120 and four packed sections
+
+The user reports a **clean exact-head ITIR #14 `a22995e4d52d167686aaa2130e2fdfbcdf4b3dca`**, confirmed as an actual upstream GitHub commit, with `bash tools/check_zelph_physical_maxcut_offline.sh` exit **0**. This ran **120/120 Python tests**, a compiled original-schema Cap'n Proto writer/decoder roundtrip for the four `left`, `right`, `nameOfNode`, `nodeOfName` sections, plus **five negative controls** (direction, index, language, QID-candidate, trailing bytes). The earlier 90/90 corrected-overlay test and decoder-compilation-only status is **superseded** by this exact-head local offline acceptance.
+
+**This closes only the OFFLINE NATIVE CONTRACT GATE.** It does **not** authenticate the original published `wikidata-20260309-all.bin` bytes against immutable HF shard offsets/hashes or prove real selected first-hop edge closure. Remaining P0/A1/A2 are **source-bin + shard original-byte identity, complete original name partition, and source↔selected query-family adjacency**, followed independently by native GUID/P14143/P854/qualifiers, SLR S29 persistence, authentic Éder Porto NORA original export and reviewed source-consumer roundtrip. Upstream [Zelph sharding](https://zelph.org/sharding/) distinguishes packed-message schema from manifest/physical range identity; no synthetic packed roundtrip is a substitute for the latter.
+
 ## 15 November 2026: Ibrahim FLN ↔ Zelph physical-gate crosswalk
 
 **Separate original objects, shared mathematics.** The [Ibrahim FLN exact-lemma matrix](https://github.com/chboishabba/dashi_agda/blob/feat/ibrahim-fln-ternary-revision-maxcut-20261114/Docs/IbrahimFLNMaximumCutAcceptanceAndExactLemmas20261115.md) (Agda [PR #1505](https://github.com/chboishabba/dashi_agda/pull/1505)) now distinguishes finite first-link graph mathematics, original author-parser source spans, and reviewed ITIR query objects. This Zelph [PR #1506](https://github.com/chboishabba/dashi_agda/pull/1506) continues to own the **different** original published HF `.bin`/Cap'n Proto source-evidence gate. Reuse the existing trie/hyperfabric and conditional consumer-lift owners, but **do not identify** an original Zelph QID/name edge with an original Wikipedia first-qualifying article link without an authenticated crosswalk.
