@@ -31,11 +31,11 @@ RegularE --> Normalized : reuse
 Casimir --> Normalized : reuse
 Stress --> Normalized : reuse
 PublishedRG --> Normalized : reuse
-Frontier --> Normalized : strict authority
-Continuum --> Normalized : non-promotion
+Frontier --> Normalized : strict authority + typed promotion eliminator
+Continuum --> Normalized : typed continuum non-promotion
 
-Normalized --> TOE : import / alias
-Normalized --> Unifier : import / alias
+Normalized --> TOE : direct owner aliases
+Normalized --> Unifier : direct owner aliases
 Normalized --> Physics : import / alias
 
 TOE --> Validation : agreement
