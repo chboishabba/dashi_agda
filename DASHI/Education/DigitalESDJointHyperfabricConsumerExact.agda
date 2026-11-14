@@ -161,12 +161,12 @@ record CandidateSourceOverlap
   field
     leftHyperedge : CandidateJointHyperedge left
     rightHyperedge : CandidateJointHyperedge right
-    overlap : Braid.TensionReceipt
+    tensionOverlap : Braid.TensionReceipt
     overlapLeftIsSource :
-      Braid.TensionReceipt.leftProvenanceRef overlap ≡
+      Braid.TensionReceipt.leftProvenanceRef tensionOverlap ≡
       Attr.canonicalURL (Cases.attributedSource left)
     overlapRightIsSource :
-      Braid.TensionReceipt.rightProvenanceRef overlap ≡
+      Braid.TensionReceipt.rightProvenanceRef tensionOverlap ≡
       Attr.canonicalURL (Cases.attributedSource right)
     researchConsumer : String
     competingInterpretation : String
