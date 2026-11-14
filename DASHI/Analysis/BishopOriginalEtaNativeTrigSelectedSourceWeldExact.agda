@@ -22,11 +22,12 @@ module DASHI.Analysis.BishopOriginalEtaNativeTrigSelectedSourceWeldExact where
 -- acceptance and original nonzero divisor arguments remain OPEN.
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Nat using (Nat; zero; suc)
+open import Agda.Builtin.Nat using (Nat; zero; suc; _+_)
 
 import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as Analytic
 import DASHI.Analysis.BishopSetoidComplexExact as Cartesian
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
+import DASHI.Analysis.BishopOriginalEtaPairBlockTelescopingExact as Shifted
 import DASHI.Analysis.BishopRiemannDirichletBaselSameObjectExact as Dirichlet
 import DASHI.Analysis.BishopRiemannDirichletExponentialTermExact as Terms
 import DASHI.Analysis.BishopOriginalEtaDyadicSourceLawReductionExact as Dyadic
@@ -69,3 +70,22 @@ module OriginalRound11 (inputs : Round11.Round11BishopCutset) where
       (Native.originalBishopAnalyticExpAddFromNativeRealExpAndTrig
         T cosAdd sinAdd)
       n
+
+
+  -- Actual ALL n,m original Round11 selected finite eta shifted-tail
+  -- identity, now directly consumed on the SAME source term family.
+  -- This pays the summation-by-parts indexing precursor, not the
+  -- missing analytic derivative, FTC or uniform Cauchy estimate.
+  module OriginalShiftedTail = Shifted.OriginalRound11 inputs
+
+  originalRound11EtaAllShiftedPairTailFromSelectedTerms :
+    (s : Analytic.BishopComplex) (n m : Nat) →
+    Eta._≈C_
+      (Eta.originalEtaPrefix (Selected.sourceTerms s)
+        (n + m))
+      (Analytic._+C_
+        (Eta.originalEtaPrefix (Selected.sourceTerms s) n)
+        (Shifted.originalShiftedEtaPairs
+          (Selected.sourceTerms s) n m))
+  originalRound11EtaAllShiftedPairTailFromSelectedTerms s n m =
+    OriginalShiftedTail.actualOriginalRound11ShiftedEtaTailExact s n m
