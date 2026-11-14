@@ -12,6 +12,8 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 python3 scripts/check_ns_r846_zero_mode_and_nonzero_support.py
+python3 scripts/check_ns_r854_original_affine_integrated_rate_exact.py
+python3 scripts/check_bsd_q2_39_coherent_hensel.py
 python3 scripts/test_bsd_level32_positive_tail.py
 python3 scripts/check_balaban_l1_adjoint_haar_local_tail.py
 python3 scripts/check_bsd_k1_local_squareclass_parity.py
