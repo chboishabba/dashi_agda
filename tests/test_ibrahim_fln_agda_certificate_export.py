@@ -39,6 +39,8 @@ class FiniteAgdaExportTests(unittest.TestCase):
         out=export.agda_text(self.graph,self.mod)
         self.assertIn('module '+self.mod+' where',out)
         self.assertIn('General.finiteFirstLinkOrbitClassifies',out)
+        self.assertIn('Pigeonhole.finiteFirstLinkOrbitClassifiesAutomatically',out)
+        self.assertIn('Pigeonhole.allFiniteStartsEventuallyCycle next complete',out)
         self.assertIn('General.terminalBasinsPartition checkedCensus',out)
         self.assertIn('General.terminalCensusMatchesCertificate checkedCensus',out)
         self.assertEqual(out.count('= General.orbitRepeat '),7)
