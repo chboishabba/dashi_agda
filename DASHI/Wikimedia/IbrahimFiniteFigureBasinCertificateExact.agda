@@ -5,6 +5,7 @@ open import DASHI.Core.Prelude
 import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact as Figure
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact as Orbit
 import DASHI.Wikimedia.IbrahimGeneralFiniteCertificateKernelExact as General
+import DASHI.Wikimedia.IbrahimFinitePigeonholeProducerExact as Pigeonhole
 import DASHI.Wikimedia.WikipediaFirstLinkNetworkExact as FLN
 
 ------------------------------------------------------------------------
@@ -152,6 +153,22 @@ figureGeneralCensus =
     Figure.figureFirstLink
     figureGeneralCarrier
     figureGeneralRepeatWitnesses
+
+-- Independent of the hand-enumerated seven orbit repeat witnesses:
+-- the generic finite pigeonhole producer now derives them solely from
+-- the already established exhaustive manuscript figure carrier.
+figurePigeonholeCensus :
+  General.VerifiedFiniteFirstLinkCensus Figure.figureFirstLink
+figurePigeonholeCensus =
+  Pigeonhole.finiteFirstLinkOrbitClassifiesAutomatically
+    Figure.figureFirstLink figureGeneralCarrier
+
+figurePigeonholeEveryStartHasCycle :
+  (node : Figure.FigureNode) →
+  Orbit.EventualCycle Figure.figureFirstLink node
+figurePigeonholeEveryStartHasCycle =
+  Pigeonhole.allFiniteStartsEventuallyCycle
+    Figure.figureFirstLink figureGeneralCarrier
 
 figureGeneralCensusEntrySound :
   (node : Figure.FigureNode) →
