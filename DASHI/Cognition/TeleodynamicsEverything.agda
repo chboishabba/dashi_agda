@@ -1,0 +1,7 @@
+module DASHI.Cognition.TeleodynamicsEverything where
+
+import DASHI.Cognition.TeleodynamicsPrincipiaTwoExact
+import DASHI.Cognition.TeleodynamicsSourceAtlas
+import DASHI.Cognition.TeleodynamicsCognitionBridge
+import DASHI.Cognition.TeleodynamicsRegression
+import DASHI.Cognition.Teleodynamics.Everything
