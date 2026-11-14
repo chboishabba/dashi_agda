@@ -47,6 +47,8 @@ record CasimirScalarModel : Set₁ where
           (((pi * pi) * (hbar * lightSpeed)) *
            inverse (fromNat 240 * power4 (lengthValue d)))
 
+open CasimirScalarModel public
+
 ------------------------------------------------------------------------
 -- Finite stroke accounting derived from endpoint work receipts.
 ------------------------------------------------------------------------
