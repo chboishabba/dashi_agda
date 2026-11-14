@@ -183,3 +183,35 @@ record U1SU2GroupTorusBoundary : Set where
 canonicalU1SU2GroupTorusBoundary : U1SU2GroupTorusBoundary
 canonicalU1SU2GroupTorusBoundary =
   u1-su2-group-torus-boundary true true true true false false
+
+------------------------------------------------------------------------
+-- Exact image characterization: every unit quaternion with zero
+-- transverse coordinates is a unique element of the embedded circle.
+-- This is reusable by Hopf fibre classification and SU2 gauge reduction.
+------------------------------------------------------------------------
+
+planarUnitToU1 :
+  (g : SU2.SU2Quaternion) →
+  SU2.q1 (SU2.quaternion g) ≡ zeroR →
+  SU2.q2 (SU2.quaternion g) ≡ zeroR →
+  U1TorusElement
+planarUnitToU1 g q1zero q2zero =
+  let x = SU2.quaternion g
+      plane = SU2.quat (SU2.q0 x) zeroR zeroR (SU2.q3 x)
+      equalPlane : x ≡ plane
+      equalPlane = SU2.quaternionExt refl q1zero q2zero refl
+  in
+  u1-torus (SU2.q0 x) (SU2.q3 x)
+    (trans (sym (axisNormSimplifies (SU2.q0 x) (SU2.q3 x)))
+      (trans (sym (cong SU2.normSquaredQ equalPlane))
+        (SU2.unitNormSquared g)))
+
+planarUnitToU1Correct :
+  (g : SU2.SU2Quaternion) →
+  (q1zero : SU2.q1 (SU2.quaternion g) ≡ zeroR) →
+  (q2zero : SU2.q2 (SU2.quaternion g) ≡ zeroR) →
+  includeU1InSU2 (planarUnitToU1 g q1zero q2zero) ≡ g
+planarUnitToU1Correct g q1zero q2zero =
+  SU2.su2QuaternionExt
+    (SU2.quaternionExt refl (sym q1zero) (sym q2zero) refl)
+
