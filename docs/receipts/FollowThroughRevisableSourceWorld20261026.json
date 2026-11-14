@@ -1,0 +1,420 @@
+{
+  "version": "2026-10-26",
+  "sources": [
+    {
+      "id": "abt1977",
+      "author": "Stebbins, Bock, Proper and Abt evaluation coauthors",
+      "role": "original evaluation",
+      "url": "https://eric.ed.gov/?id=ED148490"
+    },
+    {
+      "id": "house1978",
+      "author": "House, Glass, McLean, Walker",
+      "role": "original methodological critique",
+      "url": "https://files.ascd.org/staticfiles/ascd/pdf/journals/ed_lead/el_197803_house.pdf"
+    },
+    {
+      "id": "stpierre1978",
+      "author": "Robert G. St. Pierre",
+      "role": "original statistical sensitivity analysis",
+      "doi": "10.1177/0193841X7800200303"
+    },
+    {
+      "id": "becker1982",
+      "author": "Wesley C. Becker and Russell Gersten",
+      "role": "original five-site follow-up",
+      "doi": "10.3102/00028312019001075"
+    },
+    {
+      "id": "apm2026",
+      "author": "Emily Hanford and APM journalists",
+      "role": "modern historical reporting",
+      "url": "https://www.apmreports.org/episode/2026/10/22/sold-a-story-s2-e3-the-forgotten-experiment"
+    },
+    {
+      "id": "mediationDesign",
+      "author": "Not yet identified",
+      "role": "prospective mediation measurement/design source",
+      "status": "unresolved origin",
+      "note": "Placeholder source role, not a claimed publication"
+    },
+    {
+      "id": "nationalOutcomes",
+      "author": "Not yet identified",
+      "role": "policy exposure and nationwide comparable outcome source",
+      "status": "unresolved origin",
+      "note": "Placeholder source role, not a claimed dataset"
+    },
+    {
+      "id": "federalPolicy",
+      "author": "US education agencies (specific archival author TBD)",
+      "role": "original government administration",
+      "status": "unresolved origin",
+      "note": "Not attributed to the Abt evaluation team"
+    },
+    {
+      "id": "bankstreet1977holding",
+      "author": "Bank Street College Archives (custodian); original report Bock, Stebbins and Proper",
+      "role": "physical 1977 IV-B custody description",
+      "url": "https://bankstreetarchives.libraryhost.com/repositories/2/archival_objects/9969"
+    },
+    {
+      "id": "watkins1997",
+      "author": "Cathy L. Watkins",
+      "role": "1997 authored retrospective historical synthesis",
+      "url": "https://www.behavior.org/resources/901.pdf"
+    },
+    {
+      "id": "nmap2008",
+      "author": "National Mathematics Advisory Panel Task Group on Instructional Practices",
+      "role": "later mathematics-only evidence inclusion review",
+      "url": "https://www.ed.gov/media/document/instructional-practicespdf-89277.pdf"
+    },
+    {
+      "id": "tucker1977",
+      "author": "Eugene Tucker",
+      "role": "original 1977 AERA presentation; author viewpoints not official USOE decisions",
+      "url": "https://files.eric.ed.gov/fulltext/ED141449.pdf"
+    },
+    {
+      "id": "evans1981",
+      "author": "John W. Evans",
+      "role": "original 1981 retrospective programme R&D and social-service governance",
+      "url": "https://files.eric.ed.gov/fulltext/ED244737.pdf"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "reportOriginalAbt",
+      "root": "abt1977",
+      "status": "present",
+      "locator": "ERIC ED148490 catalogue; PDF numerical tables uninspected",
+      "kind": "catalogue"
+    },
+    {
+      "id": "housePublished",
+      "root": "house1978",
+      "status": "present",
+      "locator": "Educational Leadership March 1978 original author article",
+      "kind": "primary critique text"
+    },
+    {
+      "id": "reliabilityPaper",
+      "root": "stpierre1978",
+      "status": "present",
+      "locator": "DOI/abstract; numerical analysis uninspected",
+      "kind": "original article metadata"
+    },
+    {
+      "id": "followupPaper",
+      "root": "becker1982",
+      "status": "present",
+      "locator": "DOI/abstract; five-site cohort data uninspected",
+      "kind": "original followup metadata"
+    },
+    {
+      "id": "apmEpisode",
+      "root": "apm2026",
+      "status": "present",
+      "locator": "APM Sold a Story episode S2E3",
+      "kind": "journalistic report"
+    },
+    {
+      "id": "abtExactCells",
+      "root": "abt1977",
+      "status": "notLocated",
+      "kind": "original per-site outcome tables"
+    },
+    {
+      "id": "houseMatchedChanges",
+      "root": "house1978",
+      "status": "notLocated",
+      "kind": "quantitative reanalysis operations"
+    },
+    {
+      "id": "stpierreTwoSpecs",
+      "root": "stpierre1978",
+      "status": "notLocated",
+      "kind": "corrected/uncorrected cells"
+    },
+    {
+      "id": "policyOriginal",
+      "root": "federalPolicy",
+      "status": "notLocated",
+      "kind": "contemporaneous programme decision/funding memos"
+    },
+    {
+      "id": "followupCohort",
+      "root": "becker1982",
+      "status": "notLocated",
+      "kind": "five-site followup attrition comparison"
+    },
+    {
+      "id": "mediationDesignEvidence",
+      "root": "mediationDesign",
+      "status": "notLocated",
+      "kind": "temporal mediator and competence outcome identifying design"
+    },
+    {
+      "id": "nationalExposureAndOutcome",
+      "root": "nationalOutcomes",
+      "status": "notLocated",
+      "kind": "causally usable policy variation and downstream educational outcome"
+    },
+    {
+      "id": "bankstreetHolding",
+      "root": "bankstreet1977holding",
+      "status": "present",
+      "locator": "RG11 Box 12, archival object bsc.11.01.D.163",
+      "kind": "custodian metadata; original report numerical pages not yet inspected"
+    },
+    {
+      "id": "watkinsMonograph",
+      "root": "watkins1997",
+      "status": "present",
+      "locator": "1997 106-page monograph (PDF), printed p27 image inspected",
+      "kind": "retrospective synthesis; not independent participant cohort"
+    },
+    {
+      "id": "nmapThreeModelSubset",
+      "root": "nmap2008",
+      "status": "present",
+      "locator": "2008 Task Group Instructional Practices report, Follow Through mathematics section",
+      "kind": "later restricted three-model review, not original 1977 full ranking"
+    },
+    {
+      "id": "tuckerFirstParty",
+      "root": "tucker1977",
+      "status": "present",
+      "locator": "ERIC ED141449 scanned PDF; page index 5 visually checked; printed p4 initial appropriations",
+      "kind": "attributed author original historical account, not appropriations audit"
+    },
+    {
+      "id": "evansFirstParty",
+      "root": "evans1981",
+      "status": "present",
+      "locator": "ERIC ED244737 scanned PDF; page index 4 visually checked; printed p4 programme conversion",
+      "kind": "original author retrospective account, not policy order"
+    }
+  ],
+  "claims": [
+    {
+      "id": "reportedDIRank",
+      "statement": "APM reports DI strongest aggregate academic ranking",
+      "scope": "APM reconstruction of 1977 aggregate",
+      "level": "sourceReported",
+      "requires": [
+        "apmEpisode"
+      ],
+      "supports": [
+        "apmEpisode"
+      ],
+      "severe_test": {
+        "would_narrow": "The original 1977 model/domain weighting does not exhibit the APM-reported aggregate DI lead",
+        "would_strengthen": "An independently sourced matched-original specification reproduces the reported aggregate ranking",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "rankRobust",
+      "statement": "DI advantage stable over matched disputed adjustments",
+      "scope": "same 1977 outcome domain, population and models",
+      "level": "unresolved",
+      "requires": [
+        "abtExactCells",
+        "houseMatchedChanges",
+        "stpierreTwoSpecs"
+      ],
+      "supports": [
+        "reportOriginalAbt",
+        "housePublished",
+        "reliabilityPaper"
+      ],
+      "severe_test": {
+        "would_narrow": "A matched original House/St Pierre specification reverses DI's rank or makes it statistically indistinguishable under defined interval",
+        "would_strengthen": "Original comparable model-domain estimates preserve DI's advantage across the explicitly enumerated adjustment set",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "affectiveMediation",
+      "statement": "mastery causally increases learner self-confidence",
+      "scope": "potential mediation of specific measured affective outcome",
+      "level": "unresolved",
+      "requires": [
+        "abtExactCells",
+        "mediationDesignEvidence"
+      ],
+      "supports": [],
+      "severe_test": {
+        "would_narrow": "Measured confidence precedes competence gains or common factors explain both",
+        "would_strengthen": "Prospective temporally ordered measured mediation survives confounder and measurement sensitivity",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "durability",
+      "statement": "DI skills persist under later instructional changes",
+      "scope": "five-site grade 5-6 continuation, no universal claim",
+      "level": "sourceReported",
+      "requires": [
+        "followupPaper",
+        "followupCohort"
+      ],
+      "supports": [
+        "followupPaper"
+      ],
+      "severe_test": {
+        "would_narrow": "Follow-up attrition or comparator reconstruction explains the apparent retained skills",
+        "would_strengthen": "Within-cohort exposed-versus-comparator outcomes remain favourable after attrition and later-school corrections",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "suppression",
+      "statement": "specific evidence withheld or not disseminated by decision",
+      "scope": "date-specific original government decision",
+      "level": "unresolved",
+      "requires": [
+        "policyOriginal"
+      ],
+      "supports": [
+        "apmEpisode"
+      ],
+      "severe_test": {
+        "would_narrow": "A dated original decision releases/reports the allegedly withheld item and directly contradicts its precise suppression claim",
+        "would_strengthen": "A contemporaneous original memo establishes the specified deliberate withholding and decision authority",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "nationalDecline",
+      "statement": "government response caused nationwide later educational decline",
+      "scope": "national counterfactual under specified policy",
+      "level": "unresolved",
+      "requires": [
+        "policyOriginal",
+        "abtExactCells",
+        "nationalExposureAndOutcome"
+      ],
+      "supports": [],
+      "severe_test": {
+        "would_narrow": "No identifiable policy counterfactual links dissemination to aggregate nationwide trajectory",
+        "would_strengthen": "Credible policy exposure, downstream outcome and rival-policy identification establish attributable national effect",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    },
+    {
+      "id": "rdServiceGovernance",
+      "statement": "Original resource shortfall preceded programme conversion to R&D and subsequent service/research governance conflict",
+      "scope": "programme planning 1967–81, Tucker and Evans author accounts, no causal downstream test",
+      "level": "sourceReported",
+      "requires": [
+        "tuckerFirstParty",
+        "evansFirstParty"
+      ],
+      "supports": [
+        "tuckerFirstParty",
+        "evansFirstParty"
+      ],
+      "severe_test": {
+        "would_narrow": "Contemporaneous appropriation and charter documents contradict the specific amounts or chronology",
+        "would_strengthen": "Original FY1968 appropriations, charter and implementation memos reproduce the chronology and declared aims",
+        "test_status": "notRun",
+        "requires_original_object": true
+      }
+    }
+  ],
+  "actions": [
+    {
+      "id": "acquireAbtTables",
+      "targets": [
+        "abtExactCells"
+      ],
+      "cost": [
+        2,
+        2,
+        1
+      ],
+      "description": "Acquire original Abt IV-B model-site tables; known Bank Street RG11 Box 12 bsc.11.01.D.163 holding or authentic digital copy; original numerical pages not inspected"
+    },
+    {
+      "id": "acquireHouseCalculations",
+      "targets": [
+        "houseMatchedChanges"
+      ],
+      "cost": [
+        2,
+        1,
+        1
+      ],
+      "description": "Recover explicit reanalysis input and transformations"
+    },
+    {
+      "id": "acquireStPierreTables",
+      "targets": [
+        "stpierreTwoSpecs"
+      ],
+      "cost": [
+        2,
+        1,
+        1
+      ],
+      "description": "Recover both pretest reliability specifications"
+    },
+    {
+      "id": "acquirePolicyArchives",
+      "targets": [
+        "policyOriginal"
+      ],
+      "cost": [
+        3,
+        2,
+        1
+      ],
+      "description": "Track dated federal allocations and internal reports"
+    },
+    {
+      "id": "acquireFollowupData",
+      "targets": [
+        "followupCohort"
+      ],
+      "cost": [
+        3,
+        2,
+        2
+      ],
+      "description": "Acquire five-site cohort and attrition record"
+    },
+    {
+      "id": "acquireMediationDesign",
+      "targets": [
+        "mediationDesignEvidence"
+      ],
+      "cost": [
+        3,
+        3,
+        2
+      ],
+      "description": "Find outcome-specific causal mediation design and measures"
+    },
+    {
+      "id": "acquireNationalPolicyComparison",
+      "targets": [
+        "nationalExposureAndOutcome"
+      ],
+      "cost": [
+        3,
+        3,
+        3
+      ],
+      "description": "Find independent policy-exposure/outcome comparison and confounder records"
+    }
+  ]
+}
