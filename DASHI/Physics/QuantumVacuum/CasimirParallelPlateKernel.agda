@@ -1,7 +1,7 @@
 module DASHI.Physics.QuantumVacuum.CasimirParallelPlateKernel where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat; suc; _+_; _*_)
+open import Agda.Builtin.Nat using (Nat; suc)
 
 import DASHI.Physics.QuantumVacuum.PhysicalQuantities as Q
 
