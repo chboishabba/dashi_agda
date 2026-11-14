@@ -1,6 +1,7 @@
 module DASHI.Physics.Chemistry.AtomicPeriodicTable369ChronologyVerificationExact where
 
 open import DASHI.Core.Prelude
+open import Agda.Primitive using (Set; Set₁; Set₂)
 
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact as G
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369ProvenanceSnowballExact as P
@@ -260,7 +261,7 @@ canonicalVerificationDiscipline =
 ------------------------------------------------------------------------
 -- Dashboard consumed by the paper/PR narrative.
 
-record ChronologyVerificationDashboard : Set₁ where
+record ChronologyVerificationDashboard : Set₂ where
   field
     formalism : Set₁
     formalismIs : formalism ≡ G.CanonicalAtomicPeriodicTableStatement
