@@ -125,6 +125,25 @@ class FirstLinkCertificateTests(unittest.TestCase):
                         self.assertEqual(len(trace['cycle']), len(set(trace['cycle'])))
         self.assertEqual(count_graphs, 1440)
 
+
+    def test_m4_strict_json_decoder_rejects_ambiguous_bytes(self):
+        self.assertEqual(cert.strict_json_loads('{"a":"a","b":null}'),
+                         {'a': 'a', 'b': None})
+        for bad in (
+            '{"a":"a","a":"b"}',
+            '{"nested":{"x":1,"x":2}}',
+            '{"x":NaN}',
+            '{"x":Infinity}',
+            '{"x":-Infinity}',
+            '{"x":',
+        ):
+            with self.subTest(source=bad), self.assertRaises(ValueError):
+                cert.strict_json_loads(bad)
+        with self.assertRaises(ValueError):
+            cert.strict_json_loads('{"bad":"' + chr(0xD800) + '"}')
+        with self.assertRaises(ValueError):
+            cert.strict_json_loads(b'{"a":1}')
+
     def test_m4_boolean_node_count_must_not_pass_one_vertex_schema(self):
         graph = {'only': 'only'}
         forged = cert.certify_graph(graph)
