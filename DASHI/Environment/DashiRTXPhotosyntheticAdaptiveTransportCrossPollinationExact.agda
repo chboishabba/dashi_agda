@@ -1,6 +1,6 @@
 module DASHI.Environment.DashiRTXPhotosyntheticAdaptiveTransportCrossPollinationExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Environment.CanopySpectralRadiativeTransferExact as Canopy
@@ -13,7 +13,7 @@ import DASHI.Physics.Optics.DashiRTXAdaptiveTransportSourceAtlasExact as RTXSour
 record AdaptiveTransportAlgebra (Scalar : Set) : Set₁ where
   constructor adaptive-transport-algebra
   field
-    zero one : Scalar
+    zeroScalar oneScalar : Scalar
     add multiply : Scalar → Scalar → Scalar
     _≤_ : Scalar → Scalar → Set
 
