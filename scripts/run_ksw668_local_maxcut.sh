@@ -26,12 +26,16 @@ run python python3 scripts/check_ksw668_maxwell_3d_jet.py
 run python python3 scripts/ksw668_neutron_energy_nonextrapolation.py
 run python python3 scripts/ksw668_nuclear_electron_final_states.py
 run python python3 scripts/ksw668_bare_nuclear_two_body_kinematics.py
+run python python3 scripts/ksw668_n14_relativistic_lab_final_state.py
 run python python3 scripts/check_ksw668_spacelike_kk_projection.py
 run python python3 scripts/ksw668_a1_original_rational_fourier_witness.py
 run python python3 scripts/ksw668_u1_4potential_continuum.py
 run python python3 scripts/ksw668_kk_vacuum_observer_solution.py
+run python python3 scripts/ksw668_kk_einstein_scalar_cosmology.py
 run python python3 scripts/test_ksw668_endf81_primary.py
+run python python3 scripts/test_ksw668_endf81_law_integral.py
 run python python3 scripts/test_ksw668_e2_bound.py
+run python python3 scripts/ksw668_e2_neutron_isotope_visibility_bound.py
 run python python3 scripts/test_ksw668_movebank_join.py
 run python python3 scripts/ksw668_mms_burst_acquire.py
 run python python3 scripts/ksw668_mms_sdc_direct.py
@@ -75,12 +79,14 @@ run agda bash scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Plasma/KSW668FiniteDiscriminatorsExact.agda \
   DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda \
   DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda \
+  DASHI/Physics/Plasma/KSW668RationalThreeModeOriginalRowsExact.agda \
   DASHI/Physics/Plasma/KSW668MaxwellLocalPoyntingExact.agda \
   DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda \
   DASHI/Physics/Plasma/KSW668IsotopeCausalResidualExact.agda \
   DASHI/Physics/Plasma/KSW668EmpiricalBoundariesExact.agda \
   DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda \
   DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda \
+  DASHI/Physics/Gravity/KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact.agda \
   DASHI/Biology/KSW668EmpiricalIsotopeMagnetoreceptionSourceExact.agda \
   DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda \
   DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
