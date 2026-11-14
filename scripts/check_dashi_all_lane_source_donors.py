@@ -143,7 +143,7 @@ def verify(document: dict, *, verify_local_objects: bool = False, root: Path = R
         if got.returncode:
             raise SourceAuditError("missing eta dyadic source " + ref)
         for name in p2["declarations"]:
-            if not re.search(rf"(?<![\\w']){re.escape(name)}(?![\\w'])",
+            if not re.search(rf"(?<![\w']){re.escape(name)}(?![\w'])",
                              got.stdout):
                 raise SourceAuditError("missing eta source theorem " + name)
     assert lookup["BISHOP-ETA-TAIL"]["terminal_gate_closed"] is False
