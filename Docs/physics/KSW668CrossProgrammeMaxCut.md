@@ -501,3 +501,102 @@ The model *expands both endpoints* of each individual's birth-to-autopsy (2000) 
 | E2 | Original residual-identifiability theorem and source-bounded nuclear inputs | Matched controlled human isotope intervention, uptake/clearance/flux and detection-limit evidence; no fabricated proof or exclusion |
 
 **Acceptance:** independently locally checked mathematical source equivalents for 3D Maxwell, Decimal nuclear final-state corrections and 405 exact-rational KK diagnostic; original GitHub-head Python/Agda compiler validation remains to be run on the user's local toolchain and original downloaded data. Per request, **do not use CI status as a gating criterion**, but never call an uncompiled Agda proof kernel-green.
+
+---
+
+## Phase 4 — 2026-11-14 maximum-cut: what was actually completed, and the exact remaining witnesses
+
+**Governance:** continue the single Clay/physics programme PR #1504; do not gate on GitHub Actions/CI. Kernel-green requires a *local* pinned Agda checker; laboratory-positive requires actual original raw bytes and acceptance. Scientific citation, source-file registry, numerical model, and completed physical theorem are distinct.
+
+### P0 — complete deterministic data retrieval and source integrity
+
+Official NNDC current evaluated neutron library: **ENDF/B-VIII.1** (DOI **10.11578/endf/2571019**; 2026 source publication DOI **10.1016/j.nds.2026.04.001**). A separate pre-existing original acquisition ledger in **AvilaLabs/OpenBNCT**, file \`validation/fir1-k63-water-phantom/evaluated-neutron-source-selection.json\` at commit \`fe5150b896bf525f98bcc5c0a544b6b9d4428e79\`, records the source neutron archive and N14 member:
+
+| Original NNDC item | Source-reported size | Source-reported SHA256 |
+|---|---:|---|
+| \`neutrons-version.VIII.1.tar.gz\` | 343,724,780 bytes | \`decff90016bfb5c25c8d4c7fb8d81f94ff2f104853165f0fe6a21bf61c4164e4\` |
+| \`neutrons-version.VIII.1/n-007_N_014.endf\` | 1,253,924 bytes | \`fd5c0c0beccefbcd0b57c49bcdf835449d2014e3740830377ce24760478c06d8\` |
+
+These digests are **from an independently existing source ledger**. The original NNDC archive/member bytes have **not been downloaded or rehashed in this assistant execution**; do not imply otherwise. New exact source extractor \`scripts/ksw668_endf81_extract_n14.py\` demands both digests and sizes before extraction. New \`scripts/ksw668_endf81_n14np_original.py\` independently reads the real **ENDF-6 MAT=725, MF=3, MT=103** \(^{14}N(n,p)^{14}C\) evaluated full-energy table, respecting TAB1 record padding and NBT/INT interpolation regions, rejecting extrapolation and folding against a real differential neutron flux if supplied. \`scripts/test_ksw668_endf81_primary.py\` uses a deliberately **synthetic ENDF negative control**, including a padded interpolation record and fake-source SHA refusal. The local source-equivalent test passed.
+
+\`\`\`bash
+# Step 1: download the official NNDC ENDF/B-VIII.1 neutron archive
+# via the NNDC ENDF release page. Do not invent a direct bitstream URL.
+python3 scripts/ksw668_endf81_extract_n14.py \
+  --archive /original/neutrons-version.VIII.1.tar.gz \
+  --out data/ksw668/n-007_N_014.endf
+python3 scripts/ksw668_endf81_n14np_original.py \
+  --endf data/ksw668/n-007_N_014.endf
+
+# Step 2: AFTER author-site spectrum export AND source audit.
+# CSV must be exactly energy_eV,differential_flux_cm2_s_eV.
+python3 scripts/ksw668_endf81_n14np_original.py \
+  --endf data/ksw668/n-007_N_014.endf \
+  --flux-csv /actual_measured_or_PARMA_site_flux.csv \
+  --target-n14-atoms 1e20 \
+  --out /tmp/source_specific_n14_model.json
+\`\`\`
+
+Original ground-level neutron flux \(\Phi(E,\vec x)\), surface-to-tissue attenuation, geometry, chemical inventory, and full physical 14C source production remain **OPEN**; modern \(\sigma(E)\) is identified and an exact source-replay pipeline supplied, not measured in this execution.
+
+MMS direct original SDC source remains \`scripts/ksw668_mms_sdc_direct.py\`; original CDF bytes **not acquired** due inaccessible DNS, ENA \`PRJEB98986\` FASTQ bytes **not acquired**, and Movebank original GPS/reference files **not acquired** (landing 403). P0 cannot be declared fully accepted. Source-derived original human AMS and NH atmospheric points remain previously acquired/reconciled.
+
+### A1 — explicit rational all-mode source and an exact observational no-go
+
+New \`DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda\` defines \`sourceZPlus\` and \`sourceZMinus\` as **total original rational C3 Fourier coefficient functions** on every \(k\in\mathbb Z^3\), using the repository's exact \`Output.modeEqual\`; outside six selected ±modes they are zero. Explicit modes and coefficients:
+
+\[
+p=(1,0,0),\quad q=(0,1,0),\quad k=p+q=(1,1,0);
+\]
+\[
+z^+(q)=e_x,\quad z^+(k)=e_x-e_y,\quad z^-(p)=\pm i e_y,
+\quad z^\pm(-m)=\overline{z^\pm(m)}.
+\]
+
+Original physical \(b=(z^+-z^-)/2\) has squared strengths **\(|b(k)|^2=1/2>|b(q)|^2=1/4\)**, while original projected normal form \(\mathrm{Re}[-i(z^-(p)\cdot q)\langle z^+(k),z^+(q)\rangle]\) evaluates to **\(+1\)** for positive sign and **\(-1\)** for negative sign. \`scripts/ksw668_a1_original_rational_fourier_witness.py\` locally verifies all finite support formulas and 686 signed checks over \(7^3\) finite mode samples; all-mode behaviour follows from the explicit finite-support definition, but **Agda proof of all-mode reality and divergence-free is not yet provided**.
+
+**Sharper same-observation no-go:** at the same point \(\vec x=0\), both signed states have \(z^+(0)=(4,-2,0)\) and \(z^-(0)=(0,0,0)\) as *physical spatial field values*, although \(\partial_{x} z^-_y(0)=-2\) or \(+2\). Local values agree, actual original modal transfers oppose. Thus a single point's field values **cannot identify** the signed modal transfer without spatial-gradient/mode information. This does **not** say that calibrated multi-spacecraft MMS with measured current-density gradients cannot distinguish the states. Exact Agda \`IdealElsasserFourierState\` global proofs, rational inverse square normalization, and original MMS multi-point/source frame **OPEN**.
+
+### B1/B2 — same original continuum 4-potential and boundary field
+
+\`scripts/ksw668_u1_4potential_continuum.py\` constructs the actual smooth **four-potential** \(A_\mu=(0,t(xy+z^2),t(yz+x^2),t(zx+y^2))\) on Minkowski \((-+++)\). It derives \(F_{\mu\nu}=\partial_\mu A_\nu-\partial_\nu A_\mu\), \(E_i=-F_{0i}\), \(B=(F_{23},F_{31},F_{12})\) and physical source convention \(J^\nu=-\partial_\mu F^{\mu\nu}\), with **four current** \(J=(-x-y-z,-t,-t,-t)\). Original full antisymmetry, all four Bianchi identities, gauge invariance under \(\chi=t^2xy+3z^2/7\), Maxwell source equations and charge continuity are checked exactly by SymPy on the **same** polynomial fields.
+
+Same spatial cube \([0,L]^3\), exact source \(dU/dt=L^5t\), outward Poynting flux \(=-11L^5t/4\), and \(J\cdot E=7L^5t/4\). This pays an **actual smooth U(1) 4-potential to Maxwell/Poynting** mathematical subgate rather than assuming arbitrary jets. The original repository U1 socket is \`DASHI/Physics/Electromagnetism/U1ElectromagneticApplicationExact.agda\`; no automatic claim that socket SI typing or Agda kernel has proven this calculation. A physical measured MMS surface, original sample geometry and SI constitutive observations remain OPEN.
+
+### C1/C2 — source channels and evaluated modern energy
+
+C1 ion/electron bookkeeping, Q difference ~442.35 eV, bare \(^{14}N^{7+}+n\to{}^{14}C^{6+}+p\) two-body COM energy and CODATA mass-input ~0.317 eV independent-constants mismatch remain as earlier source. Actual ion/excited-state branching, measured final-state photon/electron/radiation and experimental geometry remain OPEN.
+
+C2 now has **actual current evaluation source identity and precise original expected archive/file hashes** (above) and a **source-bound ENDF-6 full-energy parser** with interpolation, source-spectrum integral and synthetics that refuse fake original-data acceptance. Actual modern original file/fluence download, modern uncertainties and biological geometry remain OPEN. The old 14 MeV evaluation spread was a negative control, not sufficient for modern site/whole-body calculations.
+
+### D1/D2 — a genuinely inhabited, but noninteracting, vacuum solution
+
+\`scripts/ksw668_kk_vacuum_observer_solution.py\` derives an explicit **constant Lorentz-signature 5D metric** \(ds_5^2=-dt^2+dx^2+dy^2+dz^2+(dw+\frac23dt)^2\). It checks **125/125 Christoffel entries zero, 625/625 Riemann components zero, 25/25 Ricci and 25/25 Einstein tensor components zero**. Therefore **\(G_{AB}=0=T_{AB}\) with \(\Lambda=0\)** is a real, exact **vacuum** Einstein–matter system solution with *zero* matter, not merely a symbolic dimension comparison. Its constant KK connection is **pure gauge** and cannot transport any physical field faster than the base causal cone.
+
+One explicit five-dimensional null ray moving from \(x=0\) to \(x=4\) reaches a model coordinate clock at \(t=4\); a second null ray with nonzero fifth-fibre velocity and slower four-dimensional projection arrives at \(t=5\). Both are on the same 5D metric. The original \`KSW668KaluzaKleinSpacelikeFiberCausalExact.agda\` rational no-shortcut theorem is consistent. This pays a **vacuum solution and mathematical model-clock calculation**, *not* an interacting Einstein–matter mechanism, 4D–5D operator/Hilbert/OS identification, actual detector record, or FTL physics.
+
+### E1/E2 — honest source join and exclusion test
+
+E1 \`scripts/ksw668_movebank_original_treatment_join.py\` requires original GPS CSV and separately sourced original treatment/loft/overcast/session/reference metadata with both actual SHA-256s, declared source time-zone and loft radius. Per-bird trajectories are evaluated against original release time and date; **GPS absence without documented complete same-day observation is right-censored, NOT counted as non-homing**. Synthetic regression \`test_ksw668_movebank_join.py\` passes; raw original pigeon GPS + reference metadata are not fetched. Original author 16/16 vs 0/18 intervention result must not be auto asserted as reconstructed.
+
+E2 \`scripts/ksw668_e2_zero_count_exclusion.py\` implements an **honest conditional** 95% one-sided Poisson upper bound on additional \(^{14}C\) nuclear reaction-product counts. It requires the SHA-256–verified actual raw experiment, original same specimen, matched controls, assay specifically calibrated to nuclear-product detection (not ordinary AMS radiocarbon fraction), positive lower detection efficiency, nonnegative lower known background and exposure time. For observed **zero events under those premises**, the total Poisson mean upper limit is \(-\log(0.05)\approx2.995732\), and produced-event bound is \((2.995732-b_\text{min})_+/\epsilon_\text{min}\). For a positive original count the program inverts the Poisson CDF. **No actual E2 controlled human original experimental file exists among the sources acquired here**, so the program cannot compute any genuine human exclusion or establish emotional causation. Synthetic negative control \`test_ksw668_e2_bound.py\` passes.
+
+### Local replay receipt (not CI or Agda kernel)
+
+Eight independent **local source-equivalent** Python runs all passed on this assistant's container: A1 rational finite Fourier, B1 4-potential continuum, D2 5D vacuum, modern C2 ENDF TAB1 parser, E2 conditional Poisson, E1 GPS treatment/censoring, earlier B2 3D cube, and the source 70-row atmospheric/14N fit benchmark. Actual exact GitHub PR-head scripts are **not** executed by container copy; the equivalent locally authored programs were run. This environment has no Agda/Nix or external archive DNS. Original receipt summary: \`Artifacts/ksw668/phase4_source_verified_maxcut_20261114.json\`. Full local-only runner now includes all new mathematical cases and the original A1 rational coefficient Agda target.
+
+**No CI dependency.** Per user instruction, local work and exact physical evidence are authoritative. All newly source-written Agda modules remain **not kernel-accepted** until pinned local Agda 2.9 checks.
+
+### Exact remaining atomic obligations (owner / acceptance)
+
+| Gate | Next primitive theorem or empirical witness | A/B/C |
+|---|---|---|
+| **P0** | Original CDF/Movebank/ENA/N14 ENDF source bytes; hash, actual timestamps and local Agda acceptance | A — execute on accessible local machine |
+| **A1** | \`sourceZPlus/sourceZMinus\` original global \`RealityCondition\`, \`DivergenceFreeCondition\`, normalized \`ModeInverseSquare\`; signed \`selectedPlusTransfer\` from actual \`IdealElsasserFourierState\` | A/B — source proof, then 3D instrument observation |
+| **B1/B2** | original Agda proof from smooth four-potential/field tensor through U1 source and actual measured complete boundary | B/C — continuous source weld vs measured data |
+| **C1/C2** | original measured same-event nuclear/electronic branching; acquire 1.254-MB ENDF original file and real site \(\Phi(E,\vec x)\), physical attenuation | A/C — source data / full transport |
+| **D1/D2** | nontrivial stress-energy / 5D metric solution with common four-dimensional physical observer, real communication and arrival clock | C — physical dynamics/experiment |
+| **E1** | original Movebank GPS + reference treatment & complete follow-up, raw ENA FASTQ, calibrated original human pMC/dietary transfer | A/C — source ingestion and assay data |
+| **E2** | original human controlled and source-calibrated same-specimen nuclear-product detection (or an actual bounded physical exclusion via real dose/efficiency/uncertainty) | C — experiment still absent |
+
+Do not promote the mathematical local ray/detector or the synthetic Poisson/MMS/pigeon tests to physically observed KSW 668 mechanisms.
