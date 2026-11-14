@@ -14,26 +14,23 @@ For classical projected 3D periodic Navier–Stokes at the literal cutoff N=2,
 take the real six-mode divergence-free initial field with positive helical projectors at
 p=(1,0,0), q=(0,1,2), k=(1,1,2) and negative conjugate modes.
 The exact original dyadic weight gives
-[
- X(0)=8,quad D(0)=36,quad
- P(0)=rac{5+sqrt5-sqrt{30}}{10}>rac3{20}.
-]
+$$
+X(0)=8,\quad D(0)=36,\quad
+P(0)=\frac{5+\sqrt5-\sqrt{30}}{10}>\frac3{20}.
+$$
 At amplitude a=512 and viscosity ν=1:
-[
- X'(0)=a^2(aP(0)-72) > a^2(24/5)>0.
-]
+$$
+X'(0)=a^2(aP(0)-72)>a^2(24/5)>0.
+$$
 The mixed positive/negative initial work and its first derivative vanish. The R734/W2 residual derivative is therefore positive for every δ>0. Smooth finite-dimensional Galerkin ODE and continuity give a short T>0 where **unrestricted R734 W2 fails**. This refutes a particular auxiliary inequality on actual original physical data, **not** the NSE solution/regularity claim.
 
 The retained correct conditional R735 compiler W1+W2→critical barrier is not a general theorem, since one premise is false on some admissible source data. Do not task a theorem search with `originalR406R98PositiveMarginStrictSurplus` or `originalR736W2AllData` as if the prior universal conclusion were achievable. The repaired route uses Waleffe 1992 helical calculus and the original R92/R102 identities:
-[
- X_{mathrm{dyadic}} =
- H_{mathrm{signed}}
- +2M_{mathrm{negative}}
- +R_{mathrm{weight defect}},
-quad
- R_{mathrm{weight defect}}
- =sum_m (w_m-|m|)(e_m^++e_m^-).
-]
+$$
+X_{\mathrm{dyadic}}=H_{\mathrm{signed}}+
+2M_{\mathrm{negative}}+R_{\mathrm{weight\ defect}},\qquad
+R_{\mathrm{weight\ defect}}=
+\sum_m (w_m-|m|)(e_m^++e_m^-).
+$$
 R734 now carries original Agda ring proofs of the finite rational algebra; transporting the actual irrational |m| and nonlinear tangent into the physical source remains OPEN. The source also retains the valid small-H1 residence/late-time analysis and its limitation: it does not control arbitrary-large-data early/middle critical work.
 
 **Replacement NS.B physical producer targets (not previously proved):**
@@ -57,20 +54,23 @@ These already prove the Lagrange/Cauchy q factor, conditional projected q×q bud
 ### NS R853/R854/R855/R856: exact source maximal affine headroom
 
 Original R829 selected constants:
-[
- r_0=-28273644/125,quad L=391309593930357307785216,quad
- T=226189/3938540454339300631433585885184.
-]
+$$
+r_0=-\frac{28273644}{125},\quad
+L=391309593930357307785216,\quad
+T=\frac{226189}{3938540454339300631433585885184}.
+$$
 Since L,T>0, for any scalar multiplier a≥0,
-[
- r_0+aLT<0 iff a< -r_0/(LT)
- = 284574905427456/28273625 approx 10065030.76374027.
-]
+$$
+r_0+aLT<0\iff
+a<\frac{-r_0}{LT}=\frac{284574905427456}{28273625}
+\approx10065030.76374027.
+$$
 For the integrated affine envelope,
-[
- r_0T+	frac12 bLT^2<0 iff
- b<-2r_0/(LT)=569149810854912/28273625 approx20130061.52748.
-]
+$$
+r_0T+\tfrac12 bLT^2<0\iff
+b<\frac{-2r_0}{LT}=\frac{569149810854912}{28273625}
+\approx20130061.52748.
+$$
 **Optimal integer safe coefficients are 10065030 and 20130061; the next consecutive integer yields a positive affine quantity in both cases.** Exact rational SymPy checks have PASS receipts. Source-written Agda R856 four strict neighboring inequalities and Lean `nsR856LargestPointwiseCapNegative`, `nsR856LargestIntegratedAffineNegative`, and a conditional real-time consumer are included in their canonical rollups. This is an optimal scalar bound for the fixed original r0,L,T, *not* an estimate on actual R853 r'(t). All such source-language typechecking and transitive axioms are still to be checked on Agda 2.9 and Lean 4.28.
 
 The actual R71/R74 complete-real vector-field identification, Galerkin solution on fixed T, exact R853 observable on that solution, and any true derivative bound below the R856 scalar cutoff remain the live B/short-time physical premises. R855 and R856 avoid an unnecessarily sharp R828 Lipschitz constant but cannot create the real flow.
@@ -78,10 +78,12 @@ The actual R71/R74 complete-real vector-field identification, Galerkin solution 
 ### YM: physically useful finite Gibbs locality from #1503 R445 prior art
 
 Published mathematical principle: finite-volume Gibbs/Markov-field conditioning; source original Wilson normalized Haar/plaquette action. For an interior X, exterior Y, a finite product-reference law whose action splits as S(x,y)=S_touch(x,y_near)+S_out(y) has conditional density
-[
- K(x|y)=rac{e^{-S_{mathrm{touch}}(x,y_{mathrm{near}})}}
- {int e^{-S_{mathrm{touch}}(x',y_{mathrm{near}})},d\mu_X(x')}.
-]
+$$
+K(x\mid y)=
+\frac{\exp[-S_{\mathrm{touch}}(x,y_{\mathrm{near}})]}
+{\displaystyle\int \exp[-S_{\mathrm{touch}}(x',y_{\mathrm{near}})]\,
+d\mu_X(x')}.
+$$
 The exterior-only `exp(-S_out(y))` cancels, so changing a far exterior link outside every plaquette meeting X leaves the **bare local conditional** kernel identical. No independence of the outside marginal is needed. A finite model exact SymPy/Fraction test checks 32 such far changes, with nonzero near influences, and 729 exact positive Gibbs reweightings confirming the existing sharp likelihood-ratio bound.
 
 Lean #108 source-written `Synthesis.YMFiniteRangeGibbsExteriorCancellationExact` proves the normalized *finite-sum* version (source status only, kernel pending). This is **not** the SU(N) compact-Haar version nor the blocked effective Wilson conditional. The physical identity of the actual coarse F19 bare plaquette incidence, normalized Haar, finite coupling and locality radius must be welded; the blocked effective action has long-range polymer corrections. No claim of cutoff-uniform TV, nontrivial continuum or YM mass gap follows from exact cancellation of distant bare terms.
