@@ -1,6 +1,6 @@
 # Ibrahim FLN × ITIR × balanced ternary × Hyperfabric — exact maximum cut
 
-**Status (2026-11-14):** exact Git-blob-matched Python reference suite passed (9/9); the user additionally reports that all five isolated Agda modules typechecked using Agda **2.8.0.2** after a local source-typing correction and clean-worktree library disambiguation. The typing correction is now committed in this PR. **Exact updated-PR-head and golden Agda 2.9 replay remain unrecorded; the Wikimedia aggregate exited 42 and is OPEN.** This document is an obligation ledger, **not** a completion certificate. Owners remain the pre-existing DASHI/ITIR/SensibLaw modules. The proposed first-link graph is a *navigation projection*, never ontology/proof authority.
+**Current authoritative status (15 November 2026):** see [the consolidated exact-lemma and acceptance matrix](IbrahimFLNMaximumCutAcceptanceAndExactLemmas20261115.md). **Finite-carrier pigeonhole/existence CLOSED locally** at exact source head `70babf96e29875e6fa945f1c1528b5a1b3af8277`: user-reported 36/36 Python, 8/8 Agda checks, and exit 0. **New source-written mathematics** since that acceptance now addresses arbitrary terminal-cycle uniqueness up to rotation, intrinsic basin equivalence, conditional unique canonical roots, partial FLN source distinctions, and edge-trace proof semantics; its expanded focused Agda check and exact-head acceptance are **OPEN**. **Physically original Zelph byte-range/adjacency, real bilingual source identity/licensed repair, native S29 persistence, and historical/contemporary corpus reproduction remain OPEN.** The 2026-11-14 tables and appendices below are retained as **dated historical implementation/evidence chronology**, not as the current gate table. Ibrahim/Danforth/Dodds own the original research; new proof/source adapters are DASHI contributions.
 
 ## Authoritative attribution and object boundary
 
@@ -16,7 +16,7 @@
 
 **Identifier constitution:** DOI/source ID, bibliographic attribution, source URL, version/revision, byte hash, Wikidata QID, Dewey coordinate, source kind, claim-role and payment scope are orthogonal. QIDs do not establish semantic parity, theorem identity or historical page identity; Dewey only classifies for navigation. A source URL or parser-code comment does not identify execution inputs. Missing identifiers are explicitly unresolved/not applicable, never invented. Primaryness is claim-relative. Acquisition does not equal same-object/claim-payment. Later observations do not retroactively repair original releases. A repo commit is the implementation date, not a kernel-acceptance date.
 
-## Ownership and implementation status
+## Historical ownership and implementation status (superseded by 15 November matrix)
 
 | Gate | Precise cut / target theorem or execution | Current deliverable | Status / next discriminator |
 | --- | --- | --- | --- |
@@ -54,7 +54,7 @@ Required manifest keys: `source_author`, `source_title`, `canonical_url`, `sourc
 - **No ternary zero as generic unknown:** missing alignment, both-sides evidence, epistemic neutral and conflicting support must retain original typed residuals until warranted.
 - **No universal cultural/causal inference:** wiki link order may vary by writing systems, editorial communities, revisions, extraction, article coverage and other confounders.
 
-## Next maximum-cut acceptance order
+## Historical 14 November acceptance order (superseded)
 
 1. Isolated Agda `--safe`/no-postulates type-check of the two new modules and their transitive imports, then full `DASHI/Wikimedia/Everything.agda` import regression. Do **not** substitute source presence or a passing static grep.
 2. Python unittest suite (9/9) and synthetic source-figure CLI have passed at exact Git blobs; next run a pinned real source sample with content hash. Publish counts only with the supplied input manifest and executable hash.
