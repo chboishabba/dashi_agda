@@ -1,6 +1,6 @@
 module DASHI.Physics.Optics.InverseCausticNumericalProducerExact where
 
-open import DASHI.Core.Prelude
+open import DASHI.Core.Prelude hiding (_≤_)
 open import Agda.Builtin.String using (String)
 
 import DASHI.Physics.Optics.AsphericCausticManipulationExact as Caustic
