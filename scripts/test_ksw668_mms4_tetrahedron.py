@@ -6,6 +6,7 @@ No original MMS E/B/J/ephemeris CDF bytes are fabricated or downloaded.
 import unittest
 import math
 import ksw668_mms4_tetrahedron_boundary as B
+import ksw668_mms_sdc_direct as SDC
 
 class TetPoyntingTests(unittest.TestCase):
     def test_exact_synthetic_maxwell_plane_wave(self):
@@ -39,6 +40,17 @@ class TetPoyntingTests(unittest.TestCase):
         coplanar=[(0,0,0),(1,0,0),(0,1,0),(.5,.5,0)]
         with self.assertRaises(ValueError):
             B.barycentric(coplanar,(.2,.2,0))
+
+
+    def test_original_SDC_four_probe_burst_selector(self):
+        for probe in (1,2,3,4):
+            filename=(f"mms{probe}_fgm_brst_l2_20170617202400_v1.0.0.cdf")
+            result=SDC.select_near_event([filename],10,probe,["fgm"])
+            self.assertEqual(result["fgm"][0]["filename"],filename)
+            self.assertIn("sc_id=mms"+str(probe),SDC.make_listing_url(probe))
+            wrong=(probe%4)+1
+            with self.assertRaises(ValueError):
+                SDC.select_near_event([filename],10,wrong,["fgm"])
 
     def test_wrong_or_missing_original_raw_is_not_accepted(self):
         item={"id":"mms1","sample_time_utc":"2017-06-17T20:24:04Z",
