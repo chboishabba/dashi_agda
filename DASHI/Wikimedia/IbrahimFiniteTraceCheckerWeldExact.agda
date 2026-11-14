@@ -34,8 +34,8 @@ pythonTraceStepMatchesAgdaIterate :
   Orbit.iterate next hops start ≡ finish
 pythonTraceStepMatchesAgdaIterate pathEnd = refl
 pythonTraceStepMatchesAgdaIterate {next = next}
-    (pathEdge same tail) =
-  trans (cong (Orbit.iterate next _) same)
+    (pathEdge {hops = hops} same tail) =
+  trans (cong (Orbit.iterate next hops) same)
     (pythonTraceStepMatchesAgdaIterate tail)
 
 agdaIterateEmitsCheckedPath :
