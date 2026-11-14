@@ -181,3 +181,6 @@ import DASHI.Wikimedia.IbrahimSnowballParetoFrontierExact
 import DASHI.Wikimedia.IbrahimFirstLinkNovember06DecompressedVariantStrengtheningExact
 import DASHI.Wikimedia.IbrahimSnowballOpenScienceTransparencyAuditabilityBidiExact
 import DASHI.Wikimedia.IbrahimFirstLinkV3ExecutionLanePruningExact
+-- Ibrahim source-attributed deterministic orbit and ITIR/Hyperfabric welds.
+import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact
+import DASHI.Wikimedia.IbrahimMultilingualHyperfabricWeldExact
