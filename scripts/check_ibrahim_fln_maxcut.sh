@@ -8,6 +8,7 @@ for source in \
   DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda \
   DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda \
   DASHI/Wikimedia/IbrahimGeneralFiniteCertificateKernelExact.agda \
+  DASHI/Wikimedia/IbrahimFinitePigeonholeProducerExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   test -s "$source"
@@ -40,6 +41,7 @@ for source in \
   DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda \
   DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda \
   DASHI/Wikimedia/IbrahimGeneralFiniteCertificateKernelExact.agda \
+  DASHI/Wikimedia/IbrahimFinitePigeonholeProducerExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   NO_TMUX=1 ./scripts/parallel_check.sh "$source"
