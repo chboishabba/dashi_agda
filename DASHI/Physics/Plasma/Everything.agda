@@ -6,6 +6,10 @@ import DASHI.Physics.Plasma.FRCCompressionFusionHyperfabricExact
 import DASHI.Physics.Plasma.MagneticNozzleMomentumConversionBidiExact
 import DASHI.Physics.Plasma.MHDMaxwellLorentzReductionBidiExact
 import DASHI.Physics.Plasma.FusionPropulsionScienceBidiCrossPollinationExact
+import DASHI.Physics.Plasma.FusionPropulsionLiteralMaxCutExact
+import DASHI.Physics.Plasma.FusionPropulsionPublishedFixtures202609Exact
+import DASHI.Physics.Plasma.FusionPropulsionExperimentalMaxCutExact
+import DASHI.Physics.Plasma.FusionPropulsionUncertaintyArithmeticExact
 import DASHI.Physics.Plasma.MagneticConfinementMachineExact
 import DASHI.Physics.Plasma.TokamakConfinementExact
 import DASHI.Physics.Plasma.StellaratorConfinementExact
