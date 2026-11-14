@@ -447,3 +447,57 @@ New \`scripts/ksw668_neutron_energy_nonextrapolation.py\` hard-rejects physicall
 - **E2:** controlled same-specimen emotions/uptake/clearance/neutron exposure nuclear-residual causal discrimination is neither observed nor proved. Existing original biology experiments do not imply it.
 
 **Acceptance:** Offline GitHub workflow now installs pinned \`sympy==1.14.0\` and runs the new 3D Maxwell polynomial proof/test, 14-MeV extrapolation negative control, original human AMS table checks and existing eight regressions. Execution is not claimed until a real Actions result/CI receipt is returned. **Agda/Nix binaries and internet archive fetch are not available in this task environment; no invented acceptance.**
+
+---
+
+## 2026-11-14 local-first maximum cut, tranche 4 — source-carrier status
+
+The user instructed **local verification over CI**. The current authoritative repo remains PR #1504, not a separate branch or duplicate PR. Kernel acceptance must be recorded from local Agda/Nix, and empirical claims from actual original source bytes. Nothing is passed merely because a script, proof definition, or API link exists.
+
+### P0 — deterministic original archive routes and local replay
+
+**Official MMS SDC source**, https://lasp.colorado.edu/mms/sdc/public/about/how-to/ (original file list and download API):
+- \`scripts/ksw668_mms_sdc_direct.py\` is a new PySPEDAS-independent, direct original MMS1 downloader. It requests official \`file_names/science\` for MMS1, 2017-06-17 burst L2, classifies FGM / EDP-DCE / FPI DES-MOMS / DIS-MOMS by original published filename patterns, selects only names actually returned by the SDC, obtains source CDFs one at a time through \`download/science?file=<exact filename>\`, SHA-256 hashes them, and **checks the actual original CDF Epoch entries overlap 20:24:03–20:24:11 UTC**. A burst-file *start timestamp* is explicitly insufficient to prove event coverage.
+- Prior \`scripts/ksw668_mms_burst_acquire.py\` stays as an alternate original PySPEDAS burst-segment route; \`scripts/ksw668_mms_cdf_energy_reconstruct.py\` remains a candidate time-matched \(J\cdot E'\) producer with unresolved FPI error flags/method differences, not a measured result.
+- User original Movebank DOI \`10.5441/001/1.744_2\` and pigeon FASTQ \`PRJEB98986\` acquisition programs remain on branch, but no original GPS, ENA FASTQ or source MMS CDF **bytes were acquired during this tool execution** (network DNS unavailable). No SHA-256 for a nonexistent download is invented.
+- \`scripts/run_ksw668_local_maxcut.sh\` is the **local-only** entrypoint. \`bash scripts/run_ksw668_local_maxcut.sh --math\` runs available source numerical regressions; \`--all\` requires actual raw MMS receipt, original Movebank file, ENA receipt and the repo's pinned \`scripts/run_agda29_parallel_check.sh\` for all targeted original modules. Missing raw data/toolchain **fails closed**. This assistant session has no Agda/Nix and has not executed this exact-head runner.
+
+### C1 — original NIST electron-conserving final-state channel
+
+New source-indexed Agda owner \`DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda\`. Neutral \(\mathrm{^{14}N}\) target has seven electrons, so the instantaneous nuclear product cannot simply replace it with two neutral atoms unless the electron rearrangement/recombination channel is tracked. Distinguish:
+1. **Neutral effective mass convention:** \(^{14}\mathrm N_{\mathrm{atom}}+n\to {}^{14}\mathrm C_{\mathrm{atom}}+{}^1\mathrm H_{\mathrm{atom}}\), net ground-state Q based on rounded original atomic masses **625,870.654542472395 eV**. Not a measured instantaneous 2-body microscopic scattering final state.
+2. **Ion/electron-conserving neutral daughter:** \(^{14}\mathrm C_{\mathrm{atom}}+p_{\mathrm{bare}}+e^-_{\mathrm{free}}\), a 3-particle final electronic channel in the idealized source model. Q from the same atomic mass data **625,857.056107872693 eV**, i.e. 13.5984346 eV below the neutral C+H convention (hydrogen binding).
+3. **Bare nuclear two-body:** \(^{14}\mathrm N^{7+}+n\to {}^{14}\mathrm C^{6+}+p\), before embedding in the original neutral chemical environment. Q from NIST ionization energies **626,313.005436782693 eV**, **+442.350894310298 eV** relative to neutral C+H convention.
+
+NIST ASD 5.12 DOI **10.18434/T4W30F**, successive N I–VII ionization energy sum **1486.0578277 eV**, C I–VI sum **1030.10849879 eV**, H I **13.598434599702 eV**. Source Agda has exact **fixed-point 10^-12 eV scaled** addition/electron inventory equalities. Scripts \`ksw668_nuclear_electron_final_states.py\` and \`ksw668_bare_nuclear_two_body_kinematics.py\` calculate and independently check those results.
+
+**Real bare two-body on-shell calculation:** using 2022 CODATA proton mass 1.0072764665789 u, electron mass \(5.485799090441\times10^{-4}\) u, rounded NIST original neutral masses and summed electron binding, the zero-relative-kinetic-energy COM benchmark gives \(Q_{\rm bare}\approx0.62631332268\) MeV, outgoing common momentum magnitude **~33.11702617 MeV/c**, \(T_p\approx0.5842633883\) MeV and \(T_{^{14}\mathrm C}\approx0.04204993438\) MeV. Full four-momentum, both daughter shells and kinetic sum checked with high-precision Decimal. The bare Q from independent CODATA proton/electron masses differs from the neutral-atom derived value by **~0.317244 eV**: source mass precision/constant edition/electronic isotope/rounding joins are **not** closed; retain and propagate, never erase. This is neither an ionization-resolved cross section nor a beam spectrum/physical branching experiment.
+
+### D1/D2 — conditional genuine KK spacelike-fibre no-shortcut theorem
+
+New Agda owner \`DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda\`. In sign \((-+++)\), for a **standard spacelike** fifth fibre \(g_5(v,v)=g_4(v_4,v_4)+\phi^2(v^5+A_\mu v^\mu)^2\), with \(\phi^2\ge0\), five-dimensional causal \(g_5(v,v)\le0\) implies **four-dimensional projected causal** \(g_4(v_4,v_4)\le0\). The proof uses the repository's original exact rational ordered field and square positivity, not a fictitious new gravitational field configuration. Exported into the original KSW source crosswalk.
+- \`scripts/check_ksw668_spacelike_kk_projection.py\` enumerates 405 exact-rational samples, including 135 five-dimensional causal cases; all project causally. Negative control with a **timelike fifth signature** gives a 5D causal/4D spacelike point, proving the standard metric-sign assumption is material.
+- **No** Einstein–matter 5D solution, 5D/4D stress equivalence, actual observer Hamiltonian, or measured operational transport has been constructed. Thus **D2 physical mechanism remains open**. This conditional theorem *constrains* claims of standard KK shortcuts; it does not assert FTL universally impossible under arbitrary nonstandard geometry.
+
+### E1 — Northern-zone atmospheric age/dietary-timing stress
+
+Original Arkansas Heinemeier human donor \`pMC\` cannot be calibrated against Southern Hemisphere \`F14C\` without original conventions. The prior source-pinned NH1/NH2/NH3 \(70\times3\) annual Hua curves are now joined to \`scripts/ksw668_human_lifetime_lag_sensitivity.py\` and \`Artifacts/ksw668/human_ams_nh_lifetime_lag_sensitivity_20261114.json\`.
+
+The model *expands both endpoints* of each individual's birth-to-autopsy (2000) potential atmospheric source years by \(L=0,1,2,5\) years, deliberately overconservative to stress reference-year sensitivity. **All five** original Heinemeier OL-flagged tendon assays from three donors (25, 28, 30) remain numerically outside **every NH1/NH2/NH3** annual \(100\exp(-^{14}\!C{\rm age}_{BP}/8033)\) envelope at all four L values; all other **25 original tendon assays** remain inside all three envelopes. With NH2, at L=5 the five positive outside-envelope distances are ~**1.647, 2.277, 4.311, 8.230 and 10.540 proxy units**; source assay-to-donor associations preserved in receipt.
+
+**Scope:** published author outlier diagnostic is stable under this **one** environmental timing sensitivity. This is **not a fully calibrated tissue isotope standard, probabilistic significance, actual human-diet source input, contamination test, nuclear residual or causal intervention**. A five-year extension is a stress test, not a claim the observed dietary lag is five years.
+
+### Exact remaining max-cut — differentiated
+
+| Gate | Strongest new source result | Unpaid primitive physical or proof interface |
+| --- | --- | --- |
+| P0 | Official MMS SDC direct source-file/epoch/hash acquisition plus PySPEDAS fallback, original Movebank/ENA scripts, local runner | Networked environment + actual original bytes, the exact source filenames/digests and pinned Agda run |
+| A1 | Original state/transfer normal form and source-signed finite triad | Nontrivial **all-mode** rational \`IdealElsasserFourierState\` with selected signed orders accepted by Agda, and same observation of MMS plasma |
+| B1–B2 | Full local 3-vector Poynting identity and 3D exact six-face cube budget | Physical original continuum C1 E,B,J field owner, SI constitutive medium, physically measured surface/time data |
+| C1 | Real electron conservation, original NIST ionization-corrected neutral vs bare Q and **on-shell bare two-body kinematics** | Initial physical target ionization, actual daughter ions/free electrons/photons and measured channel branching; mass-input uncertainty reconciliation |
+| C2 | Energy-bounded measured low-energy fit, 14MeV original evaluated-source negative control | Complete current evaluated \(\sigma(E)\), site/body energy-dependent neutron fluence and attenuation |
+| D1–D2 | Conditional standard spacelike KK **projected causal** theorem; timelike-sign counterexample | Actual physical same-metric Einstein–matter solution and observer/communication test (not implied by KK geometry) |
+| E1 | 34 actual human AMS original observations and 210 NH atmospheric annual source points, four lag stress windows | Real diet/residence, assay standardization/systematics, pigeon raw GPS/FASTQ and treatment join |
+| E2 | Original residual-identifiability theorem and source-bounded nuclear inputs | Matched controlled human isotope intervention, uptake/clearance/flux and detection-limit evidence; no fabricated proof or exclusion |
+
+**Acceptance:** independently locally checked mathematical source equivalents for 3D Maxwell, Decimal nuclear final-state corrections and 405 exact-rational KK diagnostic; original GitHub-head Python/Agda compiler validation remains to be run on the user's local toolchain and original downloaded data. Per request, **do not use CI status as a gating criterion**, but never call an uncompiled Agda proof kernel-green.
