@@ -23,6 +23,7 @@ open AdelicSpectralTOE public using
 import DASHI.Empirical.KozyrevMirrorClaimTesting as KozyrevMirror
 -- Reuse source-typed finite Sonic Warfare witness; no external promotion.
 import DASHI.Culture.GoodmanSonicWarfareExact as GoodmanSonicWarfare
+import DASHI.Foundations.Wette1969Rule915MajorDerivationProblemExact as Wette915
 import DASHI.Unified.BalabanIbrahimParetoSnowballTOEExact as ParetoSnowballTOE
 import DASHI.Governance.ParallelNeedsInstitutionalTransitionExact as ParallelNeeds
 import DASHI.Unified.FleetFormalGapTargetTOEExact as FleetGapTOE
@@ -2475,3 +2476,24 @@ unifierFeynmanExperimentDoesNotValidateTSFV :
   UnifiedPhysics.feynmanExperimentValidatesTSFVFlag ≡ false
 unifierFeynmanExperimentDoesNotValidateTSFV =
   UnifiedPhysics.feynmanExperimentDoesNotValidateTSFV
+-- Wette constructive-foundations canonical residual and non-promotion surface.
+------------------------------------------------------------------------
+
+unifiedWetteRule915CurrentProblemBoundary :
+  Wette915.CanonicalRule915CurrentProblemBoundary
+unifiedWetteRule915CurrentProblemBoundary =
+  Wette915.canonicalRule915CurrentProblemBoundary
+
+unifiedWetteRule915ZKPFrame : Wette915.Rule915MajorZKPFrame
+unifiedWetteRule915ZKPFrame =
+  Wette915.canonicalRule915MajorZKPFrame
+
+unifiedWetteScaffoldDoesNotCreatePremise18 :
+  Wette915.GeneratedScaffoldCreatesPremise18 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise18 =
+  Wette915.generatedScaffoldDoesNotCreatePremise18
+
+unifiedWetteScaffoldDoesNotCreatePremise27 :
+  Wette915.GeneratedScaffoldCreatesPremise27 → ⊥
+unifiedWetteScaffoldDoesNotCreatePremise27 =
+  Wette915.generatedScaffoldDoesNotCreatePremise27
