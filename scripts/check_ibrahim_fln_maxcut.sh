@@ -5,7 +5,8 @@ cd "$ROOT"
 
 for source in \
   DASHI/Wikimedia/IbrahimFiniteOrbitRevisionWeldExact.agda \
-  DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda; do
+  DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda \
+  DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda; do
   test -s "$source"
   if grep -En '(^|[[:space:]])postulate([[:space:]]|$)|--allow-unsolved-metas|--no-termination-check|--no-positivity-check|--type-in-type|--unsafe|TERMINATING|NON_COVERING|NO_POSITIVITY_CHECK|NO_UNIVERSE_CHECK' "$source"; then
     echo "forbidden proof escape in $source" >&2
@@ -33,7 +34,8 @@ command -v "$AGDA_BIN" >/dev/null || {
 "$AGDA_BIN" --version
 for source in \
   DASHI/Wikimedia/IbrahimFiniteOrbitRevisionWeldExact.agda \
-  DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda; do
+  DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda \
+  DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda; do
   "$AGDA_BIN" --safe -i . -l standard-library "$source"
 done
 
