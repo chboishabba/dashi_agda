@@ -107,3 +107,69 @@ The original Agda finite #SAT/CNF source types are now physically present
 together, so **source co-location is no longer the first gate**. Actual
 Golden Agda 2.9 elaboration, exact upstream OAI 378 bitstream and fixed
 primitive-machine M00–M05 proofs, and universal scope math are still OPEN.
+
+
+## 14 November primary source pass: exactly eight post-vendor theorem references
+
+**Source-inspected** at `openai/math@7ef5c0cc...` (again, not the
+older vendored 1581 commit):
+
+1. **CM Hodge** in `lean/ComparatorChallenges/HodgeConjectureCMAbelianVarieties/Solution.lean`,
+   Git blob `e9855a415328438d063f5f3f132473bf919595e3`.
+   `HodgeCM.hodge_conjecture_for_cm_abelian_varieties` quantifies over a
+   **smooth projective integral complex scheme with group-object structure and
+   actual `HasComplexMultiplication X`** and asserts
+   `Hdg^p(X; ℚ) ≤ algebraicCycleClassSpan X p`.
+   Its solution directly invokes
+   `OAI.AlgebraicGeometry.HodgeConjecture.MainSolution.hodge_conjecture_for_cm_abelian_varieties`.
+   Compare to original Golden
+   `DASHI/Mathematics/AlgebraicGeometry/HodgePrizeBoundaryExact.agda`,
+   whose theorem is **universal over all smooth projective complex
+   varieties**, not just CM abelian varieties. Required: same-object
+   smooth-projective/cycle map and CM subgroup instantiation, **not**
+   general Hodge promotion.
+2. **Six Fourier LocalSmoothing comparator declarations** share ONE source
+   module, `lean/OAI/Analysis/Fourier/LocalSmoothing/Comparator.lean`,
+   Git blob `6def181857b8148d9dbaed288876a225ca9ddbfb`.
+   They are `euclidean_local_smoothing`, `bochner_riesz`,
+   `spherical_restriction`, `kakeya_maximal`, `kakeya`,
+   `stein_square`, each proving its displayed reference statement
+   by direct application of **upstream native analytic declarations**
+   `OAI.Analysis.Fourier.LocalSmoothing.euclidean_local_smoothing`,
+   `BochnerRiesz.bochner_riesz_schwartz`,
+   `Restriction.spherical_restriction`,
+   `OAI.MeasureTheory.Kakeya.kakeya_maximal`,
+   `OAI.MeasureTheory.Kakeya.kakeya`,
+   `OAI.Analysis.Fourier.SquareFunction.stein_square_literal`.
+   They are **six formal named theorem witnesses but not six
+   independent DASHI proof ports**; six also share one review/source module.
+   Potential original DASHI users: Bishop harmonic/analytic carriers,
+   RH test functional geometry, NS Fourier/multiscale source, YM
+   Wick/OS test spaces. Each requires exact `ℝⁿ` Fourier normalization,
+   Schwartz/Lp measures, dimension/p/effective constant and quantified
+   source identification, not a word-level `Fourier` similarity.
+3. **SubexponentialSAT** in
+   `lean/OAI/Algorithms/SubexponentialSAT/SqrtLogSpace/Final.lean`,
+   Git blob `a69635a2492e06a26f2e33d4251edd1e21ba3332`.
+   `exact_count_and_sat` fixes a concrete
+   `BitProgram.Program 80 1220`, **output stack 1216**, and the
+   **count tape at position 256**, over an actual original
+   `SAT.CNF (Fin n)` using `Encoding.encodeCNF`. It supplies a
+   `Computation.Trace`, runtime bound, and every-prefix
+   `visitedSpace` polynomial. Existing DASHI finite Tseitin source
+   `originalGlobalCNFCountExact` does not automatically feed that
+   machine; an **original count/bitstream-input ingress** and all-source
+   runtime bounds (M00–M05) are still required.
+
+These three upstream source files pay **exact theorem signature reading**,
+not upstream local checker replay or a typed DASHI carrier transport.
+The eight source references add no general RH, Hodge, P≠NP, NS or YM mass-gap
+claim. This source comparison refines, but does not silently edit, the
+original six historical review records.
+
+**Historical 39-obligation ledger now copied byte-identically** from
+Agda PR #1212:
+`docs/superpowers/plans/2026-10-31-openai-math-exact-lemma-maxcut-ledger.md`.
+Earlier source protocols and exact first-implementation history remain
+separately identifiable; this fresh roadmap is a status addendum, not a
+retroactive claim of the old tests having run.
