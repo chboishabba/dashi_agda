@@ -71,7 +71,7 @@ twoRational = + 2 / 1
 oneRational = + 1 / 1
 
 singletonInterval : ℚ → Eval.RationalInterval
-singletonInterval value = Eval.rationalInterval value value ℚP.≤-refl
+singletonInterval value = Eval.interval value value ℚP.≤-refl
 
 fourValue twoValue oneValue : Bishop.ℝ
 fourValue = Product.embed fourRational

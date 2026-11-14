@@ -1,0 +1,141 @@
+{
+  "title": "Bałaban physical P0 exact remaining theorem cut",
+  "date": "2026-11-13",
+  "repo": "chboishabba/dashi_agda",
+  "pr": 1498,
+  "branch": "chatgpt/balaban-p0-semantic-four-orbit-20261112",
+  "statuses": {
+    "existing_donors": "present in repository; individual kernel receipts not re-run",
+    "this_round": "source-written, pushed, locally static-inspected, NOT kernel accepted",
+    "physical": "open for all 12 gates; several finite algebra subgates conditional/closed in source",
+    "local_agda": "unavailable",
+    "ci": "not used"
+  },
+  "safety": "No status promotion from ProofLevel markers, bare Set predicates, invented four scalar integrals or conditional records.",
+  "gates": [
+    {
+      "id": "P0.1",
+      "title": "Wilson 3/4 momentum vertices and Feynman gauge",
+      "reused_or_new": "physicalWilsonSecondVariationIsSixteenAtomSum; identityPhysicalWilsonIsFlatCurl; BalabanP0FeynmanGaugeRationalPropagatorInverseExact.feynmanFreeGreenIsInverse",
+      "still_unproved": "wilsonCubicBackgroundVertexMomentumExact; wilsonQuarticBackgroundVertexMomentumExact; actual P33 higher jets and indexed Fourier phases",
+      "next_action": "Implement actual background Wilson third/fourth derivative jets and Fourier phase transport; the old Hessian two-jet cannot determine them",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.2",
+      "title": "Physical reduced ghost determinant and remainder",
+      "reused_or_new": "physicalReducedGhostMatrices4; physicalGhostTraceLogJet; physicalReducedGhostFifthTailUniformCap; BalabanP0PhysicalReducedGhostFiniteLogTailWeldExact.physicalSignedAndShiftedFifthTails; physicalSignedTraceTailOneStep",
+      "still_unproved": "physicalReducedGhostBishopFifthOrderRemainderLevel; physicalReducedGhostBishopJetRemainderLevel; literalOneLoopFaddeevPopovFourierIdentificationLevel",
+      "next_action": "Same Bishop background path vs finite rational fourth jet with uniform O(g^5); principal log det identification; finite-to-Fourier momentum transform",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.3",
+      "title": "Bałaban Haar physical chart",
+      "reused_or_new": "classifiedHaarQuadraticCoefficientExact; BalabanP0SU2HaarQuarticFormalJetExact.haarLogExpFourthCoefficientExact",
+      "still_unproved": "physicalBalabanHaarCoordinateNormalizationLevel; physicalSU2HaarDensityIdentificationInputsLevel; physicalSU2HaarLogRemainderInputsLevel",
+      "next_action": "Identify exact selected exponential chart with Bałaban coordinates, Jacobian and uniform analytic log remainder",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.4",
+      "title": "Four physical diagram expression ASTs",
+      "reused_or_new": "BalabanP0LiteralDiagramTopologyFromSourceExact.literalPhysicalTopology; literalGhostDenominatorIsSamePaired; literalHaarDenominatorIsOne; BalabanP0LiteralIndexedTensorWardSourceExact.sourceDiagramAt",
+      "still_unproved": "ActualPhysicalDiagramNumeratorSources gauge bubble/tadpole/FP ghost/Haar source numerators from indexed physical vertices",
+      "next_action": "Derive each Lorentz-and-color indexed numerator from physical P33 Wilson/FP/Haar source, no chosen placeholder",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.5",
+      "title": "Ward and transverse two-jet",
+      "reused_or_new": "BalabanP0LiteralIndexedTensorWardSourceExact.fourAxisContraction; BalabanP0TransverseTensorNotAutomaticallyScalarProjectorExact.contractTIsZero; latticeWardIdentityForOneLoopKernelLiteral conditional producer",
+      "still_unproved": "LiteralWardExpressionProofs.diagramwiseWardSumIsZero; transverseFactorizationExact for actual source; source semantic contraction distributivity",
+      "next_action": "Prove true lattice derivative, indexed four-term Ward defect cancellation and CMP109 quadratic tensor decomposition; exact all-k scalar factorization is not automatic",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.6",
+      "title": "Four physical off-diagonal second jets and beta",
+      "reused_or_new": "cmp109MixedDerivativeExtractsBeta; BalabanP0FourOriginalDiagramMixedTwoJetWeldExact.fourOriginalDiagramJetsExtractBeta",
+      "still_unproved": "OriginalFourPhysicalTwoJetReceipt.fourJetIsOriginalSourceJet; literalWilsonFPHaarOffDiagonalTwoJetIdentificationLevel; LiteralScalarIntegrandExpression.singularRegularSplitExact",
+      "next_action": "Build actual same-source four off-diagonal two-jets and degree>=3 remainder; prove Bishop semantic singular/regular identity",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.7",
+      "title": "Same-Fourier source sine and cosine boxes",
+      "reused_or_new": "derivedHalfAngleCoherence; derivedCoherentGhostFromOriginalSine; originalWilsonHatSound; existing Machin outer sine bound",
+      "still_unproved": "CoherentGhostTrigBoxData physical half-angle-to-Fourier identification; ActualSourceFourSineMembership.axis0RealSine..axis3RealSine for each role and cell",
+      "next_action": "Construct actual q=pi*x source Bishop sine membership and cosine object on loop/external/shifted roles",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.8",
+      "title": "All propagator denominator intervals strictly positive",
+      "reused_or_new": "sourceRegularWilsonLower; sourceStrictPositiveAtRegularBox; freeGhostSymbolIsCanonicalHatMomentumAtom; feynmanFreeGreenIsInverse conditional positive symbol",
+      "still_unproved": "LiteralGeneratedBoxEvaluator.everyRegularDenominatorPositive for actual quotient DAG; shifted p+k bound and source box-crossing",
+      "next_action": "Prove qhat vector Lipschitz and external momentum cap; construct positive rational lower endpoint for every shifted/paired denominator in selected AST",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.9",
+      "title": "Seven source atom covariances",
+      "reused_or_new": "sourceWilsonGeneratorLowerExact; sourceWilsonGeneratorUpperExact for unshifted Wilson denominator",
+      "still_unproved": "LiteralSevenSemanticGeneratorData.atomsFlip0..atomsSwap23 for all source roles and phases",
+      "next_action": "Transport indexed source sine/cosine and nontrivial momentum phase under seven B4 generators, source physical membership preserved",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.10",
+      "title": "Physical scalar symmetry and orbit reduction",
+      "reused_or_new": "originalLiteralSemanticFourOrbitTransport conditional seven witnesses; exact original 240->4 endpoint and volume algebra",
+      "still_unproved": "LiteralSevenSemanticGeneratorData.semanticFlip0..semanticSwap23 for actual Wilson/ghost/Haar combined regular scalar",
+      "next_action": "Prove covariance of selected off-diagonal two-jet coefficient under simultaneous index/momentum action; identify actual invariant or stabilizer before 240->4",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.11",
+      "title": "Four actual physical quadrature values and analytic errors",
+      "reused_or_new": "BalabanP0FourOrbitMidpointHessianBudgetAlgebraExact.actualFourHessianBudgetExact; exact rational 1/384 x-cell and 1/6144 physical-cell coefficients",
+      "still_unproved": "CertifiedBoxQuadrature midpointInsideInterval; hessianBoundValid; quadratureErrorFormulaValid; trueIntegralInsideIntervalPlusError; source error covariance",
+      "next_action": "Derive differentiated source AST and real Hessian bounds; evaluate four source integrals with proved error and Fourier 1/16 Jacobian",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    },
+    {
+      "id": "P0.12",
+      "title": "Physical Bałaban coefficient and quartic RG remainder",
+      "reused_or_new": "combinedElevenThirdColorFactorExact; cmp109MixedDerivativeExtractsBeta; auxiliary normalized Brillouin mass exact; CompactSimpleClassificationAdjointCasimirExact.classificationStrictCasimirCarrier; BalabanCompactSimpleUniversalBetaFloorExact.classificationAdjointCasimirAtLeastTwo + classificationGroupUniversalCoefficientAtLeastElevenTwelfths; YangMillsCompactSimpleCasimirDynkinTraceExact.casimirDynkinDimensionBalance",
+      "still_unproved": "ConfiguredPhysicalOneLoopInstance.boxCoefficientMatchesBalabanCoefficient; quarticRemainderMatchesBalabanBetaPrimeError; literal Wilson/reduced-FP/Haar indexed colour contraction equals the SAME classified adjoint Casimir C_A times the selected universal scalar (not just positivity C_A>0), with actual source group and shifted-momentum Ward data",
+      "next_action": "Join actual singular integral and four physical quadratures, prove source coefficient and quartic remainder; no Clay promotion. Do NOT redo Coxeter/Dynkin or positive C_A: inherited master already proves C_A>=2 and C_A*11/24>=11/12 for all classified A/B/C/D/E/F/G. Actual beta normalization and same-source 4-diagram AST and remainder are P0.12.",
+      "source_written": true,
+      "kernel_checked_this_round": false,
+      "physical_gate_closed": false
+    }
+  ],
+  "scripts": [
+    "scripts/check_balaban_t4_semantic_p0_local.sh",
+    "scripts/check_balaban_p0_attachment_maxcut_exact.py"
+  ]
+}

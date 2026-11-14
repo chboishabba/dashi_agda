@@ -105,6 +105,53 @@ record LiteralWardExpressionProofs
 
 open LiteralWardExpressionProofs public
 
+-- Literal scalar equality MUST be semantic: the free DiagramExpression
+-- datatype has distinct `divide` and `add` constructors, so it is
+-- impossible to prove a syntactic equality between the quotient integrand
+-- and its continuum-singular-plus-regular decomposition.
+--
+-- Interpret the ORIGINAL syntax at actual physical momentum points
+-- in a source-chosen scalar setoid. The physical source must instantiate
+-- this interpreter and its relation with the genuine Wilson/ghost/Haar
+-- and Bishop-real conventions; no arbitrary unit-model implementation
+-- is an admissible physical certificate.
+record LiteralScalarPointSemantics : Set₁ where
+  field
+    Point Scalar : Set
+    _≈_ : Scalar → Scalar → Set
+    rationalValue : ℚ → Scalar
+    atomValueAt : Point → TrigAtom → Scalar
+    addScalar subtractScalar multiplyScalar divideScalar :
+      Scalar → Scalar → Scalar
+    negateScalar : Scalar → Scalar
+open LiteralScalarPointSemantics public
+
+interpretScalarAt :
+  (semantics : LiteralScalarPointSemantics) →
+  Point semantics → DiagramExpression → Scalar semantics
+interpretScalarAt semantics point (rationalConstant r) =
+  rationalValue semantics r
+interpretScalarAt semantics point (atom a) =
+  atomValueAt semantics point a
+interpretScalarAt semantics point (add x y) =
+  addScalar semantics
+    (interpretScalarAt semantics point x)
+    (interpretScalarAt semantics point y)
+interpretScalarAt semantics point (subtract x y) =
+  subtractScalar semantics
+    (interpretScalarAt semantics point x)
+    (interpretScalarAt semantics point y)
+interpretScalarAt semantics point (multiply x y) =
+  multiplyScalar semantics
+    (interpretScalarAt semantics point x)
+    (interpretScalarAt semantics point y)
+interpretScalarAt semantics point (divide x y) =
+  divideScalar semantics
+    (interpretScalarAt semantics point x)
+    (interpretScalarAt semantics point y)
+interpretScalarAt semantics point (negate x) =
+  negateScalar semantics (interpretScalarAt semantics point x)
+
 record LiteralScalarIntegrandExpression
     (expressions : LiteralDiagramExpressions)
     (ward : LiteralWardExpressionProofs expressions) : Set₁ where
@@ -117,8 +164,15 @@ record LiteralScalarIntegrandExpression
     denominatorFromTransverseKernelExact :
       denominator ≡ transverseScalarDenominator ward
     scalarIntegrandDefinition : scalarIntegrand ≡ divide numerator denominator
+    -- Real-valued / source-chosen setoid scalar identity, not impossible
+    -- propositional equality between distinct AST constructors.
+    sourcePointwiseSemantics : LiteralScalarPointSemantics
     singularRegularSplitExact :
-      scalarIntegrand ≡ add continuumSingular regularIntegrand
+      (point : Point sourcePointwiseSemantics) →
+      _≈_ sourcePointwiseSemantics
+        (interpretScalarAt sourcePointwiseSemantics point scalarIntegrand)
+        (interpretScalarAt sourcePointwiseSemantics point
+          (add continuumSingular regularIntegrand))
 
     infraredCoefficient : ℚ
     infraredCoefficientExact :
@@ -134,6 +188,13 @@ record RationalInterval : Set where
     ordered : lower ≤ upper
 
 open RationalInterval public
+
+-- Compatibility with the existing canonical Bishop and positive-reciprocal
+-- source modules. The actual proof-carrying constructor is "interval";
+-- those modules already use "rationalInterval" as a synonym.
+-- Definitional equality ensures no alternate carrier or axiom is introduced.
+rationalInterval : (lower upper : ℚ) → lower ≤ upper → RationalInterval
+rationalInterval = interval
 
 record RationalIntervalArithmetic : Set₁ where
   field
