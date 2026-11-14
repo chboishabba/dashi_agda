@@ -309,3 +309,50 @@ not an actual learned network's supervised phase, semantic output
 equivariance, or causal mechanism. The corresponding Leech readout
 change corrects the empirical scoring semantics, but its real-model
 evaluation is still unrun.
+
+
+## 2026-11-14 A00–A05 next formal tranche — source written, kernel acceptance pending
+
+The owner remains **DASHI Agda PR #1442**, with neural and empirical original owner **LeechTransformer PR #4**. No extra rollup was created. This tranche adds the following source modules to the selected `scripts/check_x369_finite_original_torus_maxcut.sh` entrypoint:
+
+| Original Agda source module | Exact declared theorems | Acceptance status |
+|---|---|---|
+| `DASHI/Cognition/PNF/X369OriginalSignedSiteOrderBidiExact.agda` | `sourceSlotRoundTrip`, `originalTorusPointRoundTrip`, `sourceFirstTranslationOriginalWeld`, `sourceSecondTranslationOriginalWeld`, original character phase signs | SOURCE-WRITTEN; selected kernel OPEN |
+| `DASHI/Cognition/PNF/X369OriginalTorusSpectralBasisExact.agda` | `encodeOriginalResidueAddition`, `originalFirstCharacterAdd`, `originalSecondCharacterAdd`, `originalCombinedCharacterAdd`, `originalDeltaFourierConvolutionCoefficient`, `originalDualInverseCoefficient`, `originalParsevalBasisCoefficient`, `originalRealConjugationBasis` | SOURCE-WRITTEN; basis coefficient proofs, kernel OPEN |
+| `DASHI/Cognition/PNF/X369OriginalPointedEightSlotBidiExact.agda` | `originalEightDecodeEncodeAt`, `originalEightEncodeDecodeAt` over all nine actual original slots, using explicit centre+eight slot record with cancellation hypotheses | SOURCE-WRITTEN; conditional spatial BIDI, kernel OPEN |
+
+The new A00 module is an **index representation of the Leech Python SITES ordering**, not a second nine-element group. The mapped points are
+
+`[(0,0),(-1,0),(1,0),(0,-1),(0,1),(-1,-1),(1,1),(-1,1),(1,-1)]`.
+
+An independent direct GitHub source-blob comparison checked the live Leech `models/punctured_nine_wave_prior.py` blob `d0d890c17ecaf18ea3efa14833405cd116038511` against the live A00 Agda blob `1007f95db7f5fea41bf57dfacda57111a3971893`: **all nine exact signed-index entries agree**. This is a source-table verification, not kernel acceptance or model-state refinement.
+
+### Remaining exact formal obligations, in dependency order
+
+**A00** `x369PythonSignedSitesToOriginalTorusBidi`: source table matched; Agda kernel and orientation/normalisation witness selected replay open. The source site order differs from `Fourier.canonicalModes` lexicographic enumeration, so the proof must preserve permutation rather than presume identical list ordering.
+
+**A01/A02** original group law and 81-case character orthogonality: source-written in previous files; fresh Agda 2.9 replay still open.
+
+**A03** `c3x3FourierConvolutionSameCarrier`: the new spectral module targets pointwise additive-character multiplicativity and the unnormalised delta Fourier coefficient, with 81 inverse basis coefficients. Still needed: the checked coefficient-ring multiplication/normalisation, a formal arbitrary **nine-site function** expansion/finite distributivity result and all-function convolution (plus the 1/9 inverse normalization convention). The Leech exact integer coefficient oracle remains independent.
+
+**A04** `c3x3ConjugationParsevalAndReality`: the new spectral module states 81 sesquilinear delta basis Parseval cases and 81 conjugation basis cases. Still needed: formal arbitrary-function complex sesquilinear extension, all Fourier/DC components, real descent and the zero-mean nine-sheet bilinear norm (all 729 Gram coefficients checked only in the independent Python oracle).
+
+**A05** `c3x3PunctureCentreGaugeBidi`: now has explicit source-order spatial eight+centre decode–encode in both directions under stated algebraic cancellation. Still needed: instantiate selected exact Eisenstein coefficient ring, full four conjugate real Fourier pair transform, original pointed-eight ↔ wave chart, true norm preservation on **centred nine** (not naive punctured-eight) and the source translation re-gauge theorem in the same Fourier basis. Actual signed floating-point Leech input/consumer mapping remains separate.
+
+**A06** `c3x3AgdaKernelSelectedSourceAccepted`: pinned `DASHI_NO_TMUX=1 bash scripts/check_x369_finite_original_torus_maxcut.sh` successful trace, transitive assumption audit and authoritative Track A checker. **Not executed in this environment.** Do not declare A00–A05 kernel accepted on source-writing alone.
+
+**B01–B05/F2/F3**: the Leech companion now has an actual router-site matched random perturbation preserving both norm and displacement relative to the cyclic action. This improves the negative control. No actual trained checkpoint causal CE or independent task/label input action was provided. `originalC3HiddenToOutputConsumerIntertwiner`, `learnedC3RelativePhaseCausalExcessLoss`, and all original recurrent/semantic welds remain open.
+
+**F4/F5/F6**: the live PR diff carries no `.pt`, `.npy`, `.npz`, or similar original checkpoint/data artifacts. Therefore the original physical development/frozen tests have not been executed in this tranche; do not manufacture a positive CE result. Freeze selection on development before using independent F5 or F6 final.
+
+### Phase deliverables and release sequence
+
+- **P1a:** A00 source/kernel, original carrier conventions and A01/A02 replay.
+- **P1b:** A03/A04 arbitrary-field theorem, ring representation, normalized inverse and Parseval.
+- **P1c:** A05 original spatial eight ↔ exact Fourier four-pair+centre, with centred norm and source re-gauge.
+- **P2:** S1/S2/S3 original recurrent source and covariance uncertainty with documentary row provenance.
+- **P3:** F2/F3 independently meaningful source action, trained h/rho/readout, causal CE excess and negative controls.
+- **P4/P5/P6:** development-only matched two-arm, once-only independent F5, separate once-only matched F6.
+- **P7:** domain-owner X369-B/C/D/E/G physical map and assumption checks; no propagation from finite ternary index coincidences.
+
+Preserve **one active X369 formal PR (#1442)** and **one neural PR (#4)**. DASHI branch is still diverged from master; perform non-destructive merge/rebase with transitive type-checking only when the golden checker can execute. No scientific closure is inferred from absence of CI checks.
