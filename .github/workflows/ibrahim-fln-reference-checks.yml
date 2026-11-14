@@ -12,6 +12,7 @@ on:
       - 'DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda'
       - 'DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda'
       - 'DASHI/Wikimedia/IbrahimFiniteCanonicalCycleRootExact.agda'
+      - 'DASHI/Wikimedia/IbrahimFiniteDecidableReachabilityExact.agda'
       - 'DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda'
       - 'DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda'
       - 'scripts/ibrahim_fln_reference_analysis.py'
