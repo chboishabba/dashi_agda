@@ -1,5 +1,48 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Latest kernel/dependency integration checkpoint — 14 November 2026 (after local Agda 2.9 investigation)
+
+**Current authoritative distinction:** The operator ran ITIR's six targeted suites at prior PR head `a119add`: **58/58 tests passed in 3.54 s**. SLR reported **4/4** focused Rust tests and SensibLaw/NORA **17/17** Python tests. These are native *local reported* test receipts for those recorded heads; they do **not** authenticate raw remote HF payloads, nor automatically certify later source heads.
+
+**Agda kernel investigation:** The operator's Agda 2.9.0 worktree first exited **42** and identified three concrete source blockers. A locally corrected overlay, using the existing core sort correction [`0dc254eabe`](https://github.com/chboishabba/dashi_agda/commit/0dc254eabeb00c4fdf1dc6d6f1a0e013d05d9606), was reported to kernel-check the new A1–A6 module cleanly (zero holes, postulates or metas in that source). This is an **operator-reported local corrected-overlay kernel result**, not yet an independent type-check of the **new committed PR head**.
+
+The exact corrections are **now committed onto this existing PR #1506**:
+
+| Error found | Corrected ownership | Exact change |
+|---|---|---|
+| A1 implicit route outside scope | `DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda` | Bind `{route = route}` in implementation |
+| Coverage parser error | `DASHI/Interop/ZelphBoundedGraphCoverageExact.agda` | Remove stray `: QueryCoverageStatus` line |
+| Query-index elaboration | `DASHI/Core/QueryIndexedProjectionSpineAdapterExact.agda` | Explicit semantics/query/project (and refine for repair) in query→collision, reverse and separation witnesses |
+| Existing core universe mismatches | `DASHI/Core/{TypedDependencyCore,AdmissibleReachability,FutureObservationLanguageQuotientExact,ReopenableConsumerInterventionKernelExact}.agda` | Bring in **exact previously authored code** from `0dc254eabe`, not a parallel reformulation |
+
+A reusable **local pinned exact-head kernel acceptance root** is now committed at
+`scripts/check_zelph_trie_hyperfabric_maxcut.sh`:
+
+```bash
+git switch agent/nora-perspective-consumer-maxcut-20261114
+git pull --ff-only
+bash scripts/check_zelph_trie_hyperfabric_maxcut.sh
+```
+
+It refuses a dirty tracked worktree, prints the exact local commit SHA and invokes the repository's pinned `scripts/run_agda29_parallel_check.sh` over the seven pertinent core, bridge, coverage and A1–A6 modules. A successful exit is a **source-level Agda kernel receipt for this head** only. It cannot certify the real physical index, Cap'n Proto bytes, query-family edge closure, native P854 statements, S29 persistence, or NORA authorship.
+
+### A/B/C/P gate disposition after this merge
+
+| Gate | Current paid deliverable | Highest-information next exact gate |
+|---|---|---|
+| **A1 (formal)** | Source-level partition theorem with route scoping repaired; local overlay reportedly checked | Exact-head Agda runner exit 0; instantiate against complete manifest-listed name objects **and prove that they exhaust original source name domain** |
+| **A2 (formal)** | Conditional family factorisation and name-only collision | Same-object original `.bin` vs **real pinned** physical HF left/right/root-neighbourhood comparison; derive full declared query-family closure rather than only one hop |
+| **A3** | Conditional compatible hyperfabric gluing theorem | Real overlapping source/revision/qualifier/temporal stalk equality |
+| **A4** | Fibre constancy criterion and name-only information-loss witness | Verified concrete prefix/range map, representative and selected query family |
+| **A5** | Conditional semantic revision transport | Actual old/new graph receipt, stable fibre and sparse S29 reopening |
+| **A6 (formal)** | Corrected bidirectional scoped negative law; operator-reported local overlay kernel acceptance | Exact-head kernel receipt and real closed-world scope/decoder certificates |
+| **P0/P1** | ITIR **58 reported tests passed**; manifest-name-cover and four-raw-file replay validators implemented | Replay the *actual* raw request/manifest/route/receipt and all real selected chunk bytes against pinned immutability and source provenance |
+| **P2/P3** | Original-bin bounded one-hop oracle and selected-chunk comparator source/tests implemented | Compile/rerun physical C++ at pinned schema; collect GET+bytes/cache metrics; prove closure on required relation words |
+| **P4/P5** | SLR candidate/native join and attributed SensibLaw NORA reference adapter; focused reported tests passed | Same-original Wikidata GUID/P14143/P854, persisted S29, actual Éder Porto NORA fixture, full Nat `(QID,GUID)` inventory |
+
+**Important:** none of these checks authorises source-support payment or external Wikidata edits. Evidence, transport, query completeness and reviewed semantic authority remain independent coordinates. **No CI-only success substitutes for local kernel or physical same-object receipts.**
+
+
 ## Latest maximum-cut checkpoint — 2026-11-14, post-local 41/4/17 regression ledger
 
 **Reported local acceptance at earlier heads (provided by operator):** ITIR #14 41/41 target tests, SLR #10 four new join tests, SensibLaw #514 17 NORA tests. These are **not tests of the subsequent commits below**. DASHI A1–A6 Agda kernel acceptance remains **OPEN**; Agda checking does not have to wait for raw HF physical premises. A6's extra antecedent was removed in DASHI commit `54f41be`; that corrected source must now be checked with the pinned Agda toolchain.
