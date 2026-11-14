@@ -18,6 +18,10 @@ import re
 from pathlib import Path
 from typing import Any
 
+import ibrahim_author_parser_port as AuthorParser
+
+AUTHOR_PORT_POLICY = "author-blob:" + AuthorParser.SOURCE_BLOB
+
 SCHEMA='dashi.itir.wikipedia.first_link_candidate.v1'
 SHA256=re.compile(r'^[0-9a-f]{64}$')
 QID=re.compile(r'^Q[1-9][0-9]*$')
@@ -63,6 +67,12 @@ def valid_surface(payload:dict[str,Any])->dict[str,Any]:
     name=selected[2:-2].split('|',1)[0].split('#',1)[0].strip()
     if name!=payload['selected_target']:
         raise ValueError('selected target does not match pinned source span')
+    port_matches = False
+    if payload['selector_policy_ref'] == AUTHOR_PORT_POLICY:
+        proposed = AuthorParser.reference_first_qualifying_link(text)
+        if proposed is None or proposed['selected_span'] != span or proposed['selected_target'] != name:
+            raise ValueError('selected link differs from the author-parser behavioural port')
+        port_matches = True
     # ITIR canonical text/span coordinates are deterministic from this exact
     # revision's bytes and offsets, not from a rendered title or QID.
     span_ref=hashlib.sha256(f'{digest}:{a}:{b}'.encode('ascii')).hexdigest()
@@ -74,6 +84,7 @@ def valid_surface(payload:dict[str,Any])->dict[str,Any]:
             'consumer_ref':payload['consumer_ref'],'observed_value':payload['observation'],
             'selected_target':name,'selected_span':span,
             'source_url':f"https://{payload['language']}.wikipedia.org/w/index.php?oldid={payload['revision_id']}",
+            'reference_port_selection_matches':port_matches,
             'first_qualifying_link_soundness_paid':False,
             'source_fetched_independently_by_this_tool':False}
 
