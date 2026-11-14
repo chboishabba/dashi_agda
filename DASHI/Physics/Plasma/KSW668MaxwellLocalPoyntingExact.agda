@@ -30,11 +30,6 @@ record TransverseMaxwellJet
 
 open TransverseMaxwellJet public
 
-private
-  _+F_ : ∀ {r} {F : C3.RealField r} →
-          C3.Carrier F → C3.Carrier F → C3.Carrier F
-  _+F_ {F = F} = C3.add F
-
 poyntingRate :
   ∀ {r} {F : C3.RealField r} →
   TransverseMaxwellJet F → C3.Carrier F
@@ -80,11 +75,11 @@ poyntingRateNormalForm {F = F} jet =
       (dtEy jet) (dtBz jet) (dxEy jet) (dxBz jet)
   where module R = Algebra.Solver F
 
-originalMaxwellDifferentialPoyntingFromU1 :
+transverseMaxwellJetPoyntingIdentity :
   ∀ {r} {F : C3.RealField r} →
   (jet : TransverseMaxwellJet F) →
   totalSignedWorkBudget jet ≡ C3.zero F
-originalMaxwellDifferentialPoyntingFromU1 {F = F} jet =
+transverseMaxwellJetPoyntingIdentity {F = F} jet =
   trans
     (poyntingRateNormalForm jet)
     (trans
@@ -93,8 +88,8 @@ originalMaxwellDifferentialPoyntingFromU1 {F = F} jet =
         (cong (C3.multiply F (bz jet)) (faraday jet)))
       (R.solve 2
         (λ e b →
-          ((e R.⊗ R.Κ (C3.zero F))
-            R.⊕ (b R.⊗ R.Κ (C3.zero F)))
+          ((e R.⊗ (R.Κ (C3.zero F)))
+            R.⊕ (b R.⊗ (R.Κ (C3.zero F))))
           R.⊜ R.Κ (C3.zero F))
         refl (ey jet) (bz jet)))
   where module R = Algebra.Solver F
