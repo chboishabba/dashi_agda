@@ -1642,5 +1642,66 @@
       "originalRound11DirichletTermFundamentalTheorem",
       "originalSelectedA2StrictSignedCompensation OR originalSelectedA2CompensationNoGo"
     ]
+  },
+  "implementation_round_20261114_6": {
+    "date": "2026-11-14",
+    "scope": "User attachment Track4 NS R71/R853/R854 and Track5 Bishop eta A/B; original-source audit and implementation",
+    "observed_owner_branches": {
+      "NS": "#1501 chatgpt/ns-r846-zero-mode-source-repair-20261113",
+      "BISHOP": "#1478 chatgpt/analytic-j-tetration-abel-transport",
+      "NS_LEAN": "#109 chatgpt/ns-c-energy-smooth-weld-20261112"
+    },
+    "NS": {
+      "exact_implementation": "scripts/check_ns_r823_shear_negative_control_20261114.py",
+      "roadmap": "Docs/roadmaps/NSR71R853R854ShearAndSameSourceMaxCut20261114.md",
+      "verified_diagnostic": "72 exact rational Fourier/parity cases",
+      "critical_correction": "Proposed u_bad divergence epsilon*(K-1)*sin x*sin Kz nonzero for high K; divergence-free correction has vanishing cubic H1 transfer and negative initial E+c log(1+G) derivative",
+      "actual_original_R823_counterexample": false,
+      "R71_complete_real_chart_weld": false,
+      "R71_real_galerkin_solution": false,
+      "R853_same_flow_rate": false,
+      "R854_physical_rate_lipschitz": false,
+      "R854_true_integral": false
+    },
+    "BISHOP": {
+      "source_written": "DASHI/Analysis/BishopOriginalEtaRawAllCutoffPrefixExact.agda",
+      "additional_source": "DASHI/Analysis/BishopOriginalEtaFiniteAbelSourceExact.agda",
+      "roadmap": "Docs/roadmaps/BishopEtaOriginalAllCutoffsAndNatLogMaxCut20261114.md",
+      "diagnostic_script": "scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py",
+      "natlog_finite_script": "scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py",
+      "exact_diagnostic_counts": {
+        "finite_abel": 21845,
+        "raw_even_odd_prefix_cuts": 167481,
+        "real_arbitrary_endpoint_tails": 1972,
+        "real_pair_tails": 576,
+        "complex_numeric_tails": 245,
+        "negative_log_polynomial_derivative": 180,
+        "negative_log_polynomial_integral": 200,
+        "negative_log_finite_bound": 400
+      },
+      "new_mathematical_bridge": "For m>=1, 0<=L_N(2)+L_N(m)-L_N(2m)<=(m-1)*((2m-1)/(2m))^N, original -log(1-x) finite source, source Nat indices 1,m-1,2m-1",
+      "true_raw_cutoff_abi_source_written": true,
+      "pinned_Agda_2_9_kernel_accepted": false,
+      "originalDyadicNatLogLaw_proved": false,
+      "originalTrigAddition_proved": false,
+      "originalFTC_proved": false,
+      "originalEtaCompactUniformConvergence_proved": false
+    },
+    "acceptance": {
+      "original_A_B_gates_closed": [],
+      "source_written_is_not_kernel_checked": true,
+      "toolchain_available_here": false,
+      "supplementary_exact_tests_not_formal_acceptance": true
+    },
+    "false_promotions_in_attachment": [
+      "all targets closed claim unsupported",
+      "invalid high-frequency divergence-free shear and reserve sign inference",
+      "enstrophy-balance zero expression confused with R853 normal form",
+      "Picard lifetime formula without source ball/forcing constraints",
+      "canonical Nat log wrongly replaced by unrelated reciprocal integral",
+      "eta complete-pair estimates do not alone cover odd raw cutoff",
+      "complex parameter derivative confused with real-axis FTC derivative",
+      "locally uniform eta convergence alone does not prove all zeta divisor/removable singularities"
+    ]
   }
 }
