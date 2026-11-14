@@ -1,5 +1,5 @@
 {
-  "schema": "dashi.ibrahim.fln.maxcut_local_receipt.v4",
+  "schema": "dashi.ibrahim.fln.maxcut_local_receipt.v5",
   "scope": "exact Git blob matched local Python sources, synthetic fixtures, no historical full corpus or Agda kernel execution in this turn",
   "authors": "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds",
   "original_method_doi": "10.1016/j.jocs.2016.12.001",
@@ -10,7 +10,7 @@
   "tests": 28,
   "failures": 0,
   "random_graph_revision_pairs": 5000,
-  "test_log_sha256": "573a9fdd429bd532fe0b571696bcb86b35a5673f76371d33d568882cc90fab19",
+  "test_log_sha256": "cb22eb6f1296cff37844ff882133f574e030f69f52e0ccb1ca4eeb0fca87c56f",
   "files": {
     "scripts/ibrahim_fln_certificates.py": {
       "git_blob_sha1": "26bb393bd5e2000e73099dd76abb7136af7645a0",
@@ -21,8 +21,8 @@
       "bytes": 16291
     },
     "scripts/ibrahim_itir_multilingual_candidate.py": {
-      "git_blob_sha1": "b96c4da8f95355b648d1e4e94681a7800006b862",
-      "bytes": 7077
+      "git_blob_sha1": "6b9a132254f9031557549d95272c524c0b6d26b4",
+      "bytes": 7146
     },
     "scripts/ibrahim_author_parser_port.py": {
       "git_blob_sha1": "261f6ec0d1f8d939d5bcaafabdd344ce1c0a7f4d",
@@ -37,8 +37,8 @@
       "bytes": 3979
     },
     "tests/test_ibrahim_itir_multilingual_candidate.py": {
-      "git_blob_sha1": "4a5b4205ca368d7d95cae10b7aec89b86338dad0",
-      "bytes": 3889
+      "git_blob_sha1": "3aac9dccb019e82ec45060a4f06e98a798859904",
+      "bytes": 4001
     },
     "tests/test_ibrahim_author_parser_port.py": {
       "git_blob_sha1": "134fdf730ae25bd5607c095b3d1113b2580ed50d",
@@ -48,5 +48,8 @@
   "historical_dump_reproduced": false,
   "upstream_parser_executed_on_original_dump": false,
   "agda_kernel_checked_in_this_tranche": false,
-  "reviewed_real_multilingual_pair": false
+  "reviewed_real_multilingual_pair": false,
+  "source_bytes_match_github_blobs": true,
+  "wikidata_qid_identity_verified": false,
+  "wikipedia_source_revision_retrieved_independently": false
 }
