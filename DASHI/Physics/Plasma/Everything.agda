@@ -83,3 +83,6 @@ import DASHI.Physics.Plasma.PlasmaActivatedWaterAgricultureSourceRegistryExact
 import DASHI.Physics.Plasma.KSW668FiniteDiscriminatorsExact
 import DASHI.Physics.Plasma.KSW668SourceCrosswalkExact
 import DASHI.Physics.Plasma.KSW668OriginalRationalTransferCountermodelExact
+import DASHI.Physics.Plasma.KSW668MHDSelectedStateTransferExact
+import DASHI.Physics.Plasma.KSW668MaxwellLocalPoyntingExact
+import DASHI.Physics.Plasma.KSW668IsotopeCausalResidualExact
