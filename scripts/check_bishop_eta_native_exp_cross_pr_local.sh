@@ -7,6 +7,9 @@ set -euo pipefail
 #
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
+# Finite exact original-indexing / negative-log regression; never a kernel receipt.
+python3 scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py
+python3 scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py
 targets=(
   DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda
   DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda
