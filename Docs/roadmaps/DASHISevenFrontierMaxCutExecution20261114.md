@@ -57,3 +57,20 @@ YM physical RG moment error; RH uniform strict signed global gap;
 NS actual real ODE and signed integral; Karp full bit-TM and P-time;
 Hodge codim-one ruling cycle and same-object cohomological cycle class.
 Universal BSD/YM/RH/NS/PneqNP/Hodge conjectures remain unresolved.
+
+
+## K3 additional original rational descent option
+
+An additional independent SAME-CURVE source route already exists on
+Lean #107: MillenniumBSDCMUnitAreaTriangleCurveWeldExact.lean and
+MillenniumBSDCMCongruentOneRankReductionExact.lean. The former constructs
+literal rational right-triangle coefficients from actual affine
+E:y²=x³-x points with y!=0, and the reverse curve point.
+The latter constructs rank(E(Q))=0 IF
+not CMHasRationalRightTriangleAreaOne. It avoids separate Stoll
+Mordell–Weil finite generation but requires the actual classical
+Fermat square-area infinite-descent theorem from Mathlib FLT(4).
+The existing source explicitly marks that donor bridge OPEN.
+Both K3 paths remain kernel unverified. Do not frame Stoll as
+the only possible mathematical reduction or insert an axiom
+for the square-area contradiction.
