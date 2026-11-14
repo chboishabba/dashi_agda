@@ -26,6 +26,7 @@ module DASHI.Mathematics.Arithmetic.EllipticBSDSourceConvergence20261114 where
 ------------------------------------------------------------------------
 
 import DASHI.Mathematics.Arithmetic.EllipticActualDyadicPrimePlaceExact
+import DASHI.Mathematics.Arithmetic.EllipticOddPrimeSecondValuationParityExact
 import DASHI.Mathematics.Arithmetic.EllipticCubicValuationParityExact
 import DASHI.Mathematics.Arithmetic.EllipticOriginalSelmerCohomologyExhaustionExact
 import DASHI.Mathematics.Arithmetic.EllipticRationalPlaceTwoDescentProducerExact
