@@ -43,8 +43,6 @@ record MDLImprovement (S : PoseMDLSpec) : Set where
       totalCost candidate (canonicalize pose) newProgram <
       totalCost baseline  (canonicalize pose) oldProgram
 
-open MDLImprovement public
-
 -- Residuals are first-class evidence.  A motif parse is not accepted merely
 -- because it returns a symbol; its unexplained remainder must fit a declared
 -- budget.
@@ -56,8 +54,6 @@ record ResidualBounded (S : PoseMDLSpec) (budget : Nat) : Set where
     program    : MotifProgram
     compiled   : compile dictionary (canonicalize pose) ≡ program
     residual≤budget : residualCost (canonicalize pose) program ≤ budget
-
-open ResidualBounded public
 
 -- A reusable deterministic receipt for pose -> motif program -> public
 -- summary.  No semantic truth claim is made here: Summary is merely the
@@ -73,5 +69,3 @@ record PoseMDLReceipt (S : PoseMDLSpec) (budget : Nat) : Set where
     compiled : compile dictionary (canonicalize pose) ≡ program
     released : publish program ≡ summary
     residual≤budget : residualCost (canonicalize pose) program ≤ budget
-
-open PoseMDLReceipt public
