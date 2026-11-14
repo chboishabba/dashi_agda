@@ -21,6 +21,8 @@ open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
 open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; _/_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
+import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 
 fourth : ℚ
 fourth = (+ 1) / 4
@@ -105,9 +107,6 @@ rationalFRWSourceOnlyIsTrue = refl
 -- The rational path-SQUARED inequality is fully exact, but monotonicity
 -- of cosmological conformal-time-to-proper-time requires real analysis.
 ------------------------------------------------------------------------
-
-import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
-import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
 
 woundPathSquaredNeverShorter :
   (detectorDistance windingDistance : ℚ) →
