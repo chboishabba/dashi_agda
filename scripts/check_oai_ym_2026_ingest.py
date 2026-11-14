@@ -23,7 +23,7 @@ BANNED = {"dashi_agda_kernel_accepted", "dashi_lean_kernel_accepted",
           "all_orders_msbar"}
 
 def git_blob(data):
-    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\0" + data).hexdigest()
+    return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + bytes([0]) + data).hexdigest()
 
 def require(ok, message):
     if not ok:

@@ -12,7 +12,7 @@ module DASHI.Research.OpenAIMath.OpenAIYangMills2026SourceIntakeExact where
 -- Original openai/math corpus source owner is distinct and imported below.
 -- Proof attribution, chronology, trust, and actual source identity are separate.
 
-open import Agda.Builtin.Bool using (Bool; false)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
 open import DASHI.Research.OpenAIMath.OpenAIMathUpstreamReceiptExact as Corpus
@@ -103,7 +103,7 @@ record CrossKernelPromotionBoundary : Set where
 
 pinnedOAIYMReceiptBoundary : CrossKernelPromotionBoundary
 pinnedOAIYMReceiptBoundary = crossKernelBoundary
-  false false false false false false false false false false false false false
+  true false false false false false false false false false false false false
 
 -- The committee's recorded independent checks are documented separately;
 -- this conservative local receipt does not construct any proof of them.

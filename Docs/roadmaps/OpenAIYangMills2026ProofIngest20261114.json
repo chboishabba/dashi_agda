@@ -67,6 +67,11 @@
         "path": "submissions/openai-20261028/evidence/README.md",
         "git_blob": "8304a11ba74141b2092507124398dfc1a9f7ad5c",
         "declaration": "review verification chronology"
+      },
+      {
+        "path": "submissions/openai-20261028/checks/OPECheck.lean",
+        "git_blob": "87baa3e02f36aee7b611bac2fe940c504c01c87c",
+        "declaration": "YMReview.OPE.constructed"
       }
     ]
   },
