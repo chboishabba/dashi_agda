@@ -19,7 +19,7 @@ open import Agda.Builtin.Bool using (Bool; true; false)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Data.Integer.Base using (+_)
-open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; _/_)
+open import Data.Rational.Base using (ℚ; 0ℚ; _+_; _*_; -_; _/_; _≤_)
 open import Data.Rational.Tactic.RingSolver using (solve)
 
 fourth : ℚ
@@ -97,3 +97,26 @@ physicalObserverDetection = false
 
 rationalFRWSourceOnlyIsTrue : rationalFRWSourceOnly ≡ true
 rationalFRWSourceOnlyIsTrue = refl
+
+------------------------------------------------------------------------
+-- Same-observer compact S1 winding benchmark at fixed cosmic source time.
+-- On the conformally flat spatial R3 x S1 carrier, a w-wound spatial
+-- null ray traverses sqrt(L²+(n*circumference)²) rather than L.
+-- The rational path-SQUARED inequality is fully exact, but monotonicity
+-- of cosmological conformal-time-to-proper-time requires real analysis.
+------------------------------------------------------------------------
+
+import DASHI.Physics.Gravity.KSW668KaluzaKleinSpacelikeFiberCausalExact as KK
+import DASHI.Physics.Closure.NSTriadKNRationalOrderedFiniteL2 as Rational
+
+woundPathSquaredNeverShorter :
+  (detectorDistance windingDistance : ℚ) →
+  (detectorDistance * detectorDistance)
+  ≤ (detectorDistance * detectorDistance)
+    + (windingDistance * windingDistance)
+woundPathSquaredNeverShorter detectorDistance windingDistance =
+  KK.addNonnegativeCannotReduceInterval
+    (detectorDistance * detectorDistance)
+    (Rational.square windingDistance)
+    (Rational.squareNonnegative windingDistance)
+
