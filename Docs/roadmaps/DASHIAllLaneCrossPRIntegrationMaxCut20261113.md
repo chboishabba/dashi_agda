@@ -459,3 +459,16 @@ Existing \`YangMillsStressWardCommonCoreGeneratorExact\`, \`YangMillsClayPinnedC
 ## Dated continuation: 14 November 2026
 
 See [DASHIAllLaneCrossPRDelta20261114.md](./DASHIAllLaneCrossPRDelta20261114.md) for the latest source-pinned eleven-lane handoff, including the new exact BSD K4 eta positive-tail bound on PR #1500. This is a donor pointer only; no Agda imports, physical claims or golden kernel receipts are promoted by this paragraph.
+
+## 14 November 2026 — attachment audit, A/B/C source truth and newest producer joins
+
+**Authoritative six-frontier audit:** [consolidated A/B/C roadmap](ClaySixFrontierABCMaximumCut20261114.md) and [machine-readable exact remaining gate register](ClaySixFrontierABCExactGates20261114.json). The previous attachments' terminal promotions are not supported by original-source or kernel evidence.
+
+- **Yang–Mills:** #1503 co-locates #1444's newest R445 common-density total-variation (TV) reduction and its rational checker with the original F19/P0 stack. The conditional result bounds F, G and FG moment differences by the same TV distance, hence the covariance difference by 3 TV; **the actual physical effective/bare Wilson TV estimate remains OPEN**, as do L3 heat, L7 physical stress and E1/D1/D2/N1/G1. The 43 Round518 leaves remain separate.
+- **Navier–Stokes:** #1499 now imports the latest source-owned R854 affine negative-integral arithmetic and negative controls from #1501. Original real Galerkin trajectory, R853 source-rate equality and Lipschitz producer remain OPEN. The external September 2026 proposed C/D breakdown and CMI review are distinct from the repository B regularity programme.
+- **BSD:** #1499 now imports #1500's new odd-prime second Kummer valuation parity module and Q2 counterexample x=39. Actual real/Q2 Kummer-image H1, Sha[2], global Selmer, rank and odd Sha remain OPEN. Correct original torsion representatives: (1,1),(-1,-1),(1,2),(-1,-2); Kodaira(2)=III; curve L(E,1)=0.655514388573... (LMFDB 32a2).
+- **Karp:** #1502 now imports latest #1474 one-bit physical gamma-token source (k=1, three steps, six-cell allowance); arbitrary-k gamma F1, complete heap/cost F2, whole N21 F3/F4 and typed original InNP remain OPEN. Universal SATNotInP is independent Category C.
+- **RH:** New postulate-free source arithmetic countermodel to false horizontal pole contribution floor (-9 is not >= -4 at separation 1/3). Actual G3 strict signed compensation, A1/A2/Route B and Weil positivity remain OPEN.
+- **Executable negative controls:** scripts/check_clay_abc_attachment_negative_controls.py, tests/test_clay_abc_attachment_negative_controls.py, and an updated scripts/check_clay_staged_source_convergence_local.sh. These disprove source-attachment inferences, **not** the Millennium conjectures.
+
+**Authority:** A = known mathematics needing proof/transport/check; B = original source-specific unproved estimate; C = genuinely new or universal unresolved theorem. A_TO_B and B_TO_C transitions remain OPEN. Newly source-written Agda/Lean files do **not** yet have new exact-head kernel receipts; do not mark any Clay terminal endpoint as closed or merge PRs in bulk.
