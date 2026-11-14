@@ -12,6 +12,13 @@ import DASHI.Physics.Closure.SSP369PolarResidualQuotient as Polar
 import DASHI.Physics.Closure.SSPPrimeLane369DepthAddressWheel as Address
 import DASHI.Physics.Closure.SSPPrimeLane369DepthWheelCantorBridge as Wheel
 import DASHI.Physics.Closure.NSTriadKNStage3Ternary369Ledger as NS369
+import DASHI.Physics.Closure.NSCross369OrientationBridgeExact as NSCross
+import DASHI.Physics.Closure.NSTriadKN369HighHighGramBridgeReceipt as NSGram
+import DASHI.Physics.Closure.NSTriadKNComplex3GalerkinEquationAudit as Galerkin
+import DASHI.Physics.Closure.IncompressibleEulerGalerkinCoreExact as EulerCompat
+import DASHI.Physics.Closure.AlpogeBuckmasterSmoothForcedEulerBlowupBoundaryExact as ABEuler
+import DASHI.Physics.Closure.NSJul26ScalarisationToSignedCriticalProductionSnowballExact as NSSnowball
+import DASHI.Physics.Closure.NSOpenAI2026EulerToClayFourAlternativeBidiExact as OpenAIEuler
 import DASHI.Foundations.Base369MobiusTransport as Mobius
 
 ------------------------------------------------------------------------
@@ -261,3 +268,148 @@ canonicalTOESymmetryResolved369Bridge = bridge
   sspNativeCompositionPreserved
   axisPlusPolarityRecoversLift
   sspPolarProjectionIsLosslessWithResidual
+
+------------------------------------------------------------------------
+-- 5. Reuse original NS 369 proof boundaries.
+--
+-- The complex three-axis cross product is an oriented-coordinate
+-- observation. It is not the cyclic C3 group or a Clay proof.
+-- The high-high Gram receipt records the still-open Rayleigh margin.
+-- This bridge preserves BOTH facts without changing either owner.
+------------------------------------------------------------------------
+
+toeNS369CrossRetainsBeltramiSuppression :
+  NSCross.nsBeltramiCrossSuppressionReused ≡ true
+toeNS369CrossRetainsBeltramiSuppression =
+  NSCross.nsBeltramiCrossSuppressionReusedIsTrue
+
+toeNS369CrossRetainsLerayCancellation :
+  NSCross.nsOutputTransverseLerayCancellationReused ≡ true
+toeNS369CrossRetainsLerayCancellation =
+  NSCross.nsOutputTransverseLerayCancellationReusedIsTrue
+
+toeNS369GramReceiptIsFailClosed :
+  NSGram.failClosed NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ true
+toeNS369GramReceiptIsFailClosed =
+  NSGram.failClosedIsTrue NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369GramTheoremNotPromoted :
+  NSGram.theoremPromoted NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ false
+toeNS369GramTheoremNotPromoted =
+  NSGram.theoremPromotedIsFalse NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369ClayNotPromoted :
+  NSGram.clayPromoted NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+  ≡ false
+toeNS369ClayNotPromoted =
+  NSGram.clayPromotedIsFalse NSGram.canonicalNSTriadKN369HighHighGramBridgeReceipt
+
+toeNS369ComplexThreeNotCyclicC3 :
+  NSCross.nsComplex3CarrierPromotedToCyclicC3 ≡ false
+toeNS369ComplexThreeNotCyclicC3 = refl
+
+
+------------------------------------------------------------------------
+-- 6. Reuse the historical Euler/Galerkin carrier and external blowup boundary.
+--
+-- Preconditions:
+--   * Galerkin.projectedNonlinearity is the existing physical Fourier owner.
+--   * EulerCompat is only a zero-origin compatibility adapter.
+--   * ABEuler is an external-result boundary with explicit non-promotion.
+--
+-- Invariants:
+--   * this TOE edge does not reassign Euler/Galerkin priority;
+--   * an external Lean proof is not a DASHI proof term;
+--   * an external smooth-forced Euler blowup theorem does not pay the
+--     unforced Navier--Stokes signed R406 / direct-companion leaf.
+--
+-- Postcondition:
+--   the focused TOE import graph reaches the canonical Galerkin owner and the
+--   exact external non-promotion theorems without a second PDE ontology.
+------------------------------------------------------------------------
+
+toeHistoricalProjectedGalerkinSumAlreadyConstructed :
+  Galerkin.literalProjectedGalerkinSumConstructed ≡ true
+toeHistoricalProjectedGalerkinSumAlreadyConstructed =
+  Galerkin.literalProjectedGalerkinSumConstructedIsTrue
+
+toeEulerCompatibilityAdapterDoesNotOriginateCarrier :
+  EulerCompat.thisAdapterOriginatesEulerGalerkinCarrier ≡ false
+toeEulerCompatibilityAdapterDoesNotOriginateCarrier =
+  EulerCompat.thisAdapterOriginatesEulerGalerkinCarrierIsFalse
+
+toeEulerCompatibilityAdapterGetsNoOriginPriority :
+  EulerCompat.thisAdapterGetsEulerOriginPriorityCredit ≡ false
+toeEulerCompatibilityAdapterGetsNoOriginPriority =
+  EulerCompat.thisAdapterGetsEulerOriginPriorityCreditIsFalse
+
+toeAlpogeBuckmasterAdapterGetsNoEulerOriginPriority :
+  ABEuler.thisAdapterReceivesEulerOriginPriorityCredit ≡ false
+toeAlpogeBuckmasterAdapterGetsNoEulerOriginPriority =
+  ABEuler.thisAdapterReceivesEulerOriginPriorityCreditIsFalse
+
+toeExternalEulerLeanProofNotTranscribed :
+  ABEuler.externalLeanProofTranscribedIntoDASHIHere ≡ false
+toeExternalEulerLeanProofNotTranscribed =
+  ABEuler.externalLeanProofTranscribedIntoDASHIHereIsFalse
+
+toeExternalEulerConstructionNotReproduced :
+  ABEuler.externalConstructionMechanismReproducedHere ≡ false
+toeExternalEulerConstructionNotReproduced =
+  ABEuler.externalConstructionMechanismReproducedHereIsFalse
+
+toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf :
+  ABEuler.forcedEulerBlowupPaysUnforcedNSLeafA ≡ false
+toeForcedEulerBlowupDoesNotPayUnforcedNSLeaf =
+  ABEuler.forcedEulerBlowupPaysUnforcedNSLeafAIsFalse
+
+
+------------------------------------------------------------------------
+-- 7. Reuse the existing NS proof-archaeology owner at the TOE boundary.
+--
+-- This does not prove the open signed spacetime estimate. It records the
+-- exact result of the snowball: same-object plumbing is recovered, while the
+-- cutoff-uniform signed payment remains the live analytic target.
+------------------------------------------------------------------------
+
+toeNSOldGramLeafEqualsModernDirectCompanionLeaf :
+  NSSnowball.oldGramLeafToModernDirectCompanionSameObjectRecovered ≡ true
+toeNSOldGramLeafEqualsModernDirectCompanionLeaf = refl
+
+toeNSSameObjectRepresentationPlumbingRecovered :
+  NSSnowball.sameObjectRepresentationPlumbingRecovered ≡ true
+toeNSSameObjectRepresentationPlumbingRecovered = refl
+
+toeNSCutoffUniformSignedSpacetimePaymentNotYetRecovered :
+  NSSnowball.cutoffUniformSignedSpacetimePaymentRecoveredInThisPass ≡ false
+toeNSCutoffUniformSignedSpacetimePaymentNotYetRecovered =
+  NSSnowball.cutoffUniformSignedSpacetimePaymentRecoveredInThisPassIsFalse
+
+toeNSRemainingNovelObjectIsCutoffUniformSignedPayment :
+  NSSnowball.remainingNovelObjectIsCutoffUniformSignedPayment ≡ true
+toeNSRemainingNovelObjectIsCutoffUniformSignedPayment = refl
+
+
+------------------------------------------------------------------------
+-- 8. Reuse the existing released OpenAI unforced-Euler source boundary.
+--
+-- The external Euler proof remains external. Its source integration is useful
+-- for adversarial comparison. It does not become a positive-viscosity NS proof.
+------------------------------------------------------------------------
+
+toeOpenAIUnforcedEulerSourceAlreadyIntegrated :
+  OpenAIEuler.releasedEulerSourceIntegrated ≡ true
+toeOpenAIUnforcedEulerSourceAlreadyIntegrated =
+  OpenAIEuler.releasedEulerSourceIntegratedIsTrue
+
+toeOpenAIEulerSameObjectWeldNotClosed :
+  OpenAIEuler.releasedEulerSameObjectWeldClosed ≡ false
+toeOpenAIEulerSameObjectWeldNotClosed =
+  OpenAIEuler.releasedEulerSameObjectWeldClosedIsFalse
+
+toeOpenAIEulerDoesNotDirectlyPayClayNS :
+  OpenAIEuler.releasedEulerPaysClayAlternativeDirectly ≡ false
+toeOpenAIEulerDoesNotDirectlyPayClayNS =
+  OpenAIEuler.releasedEulerPaysClayAlternativeDirectlyIsFalse
