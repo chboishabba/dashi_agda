@@ -616,5 +616,55 @@
     "local_symbolic_replay_scope": "D1 full SymPy Einstein-scalar 125/625 + same-detector geodesic PASS, C2 7 source-equivalent synthetic interpolation tests PASS, C1 Decimal relativistic thermal and 1MeV models PASS, E2 conditional neutron visibility numerical PASS",
     "kernel": "NOT RUN Agda/Nix unavailable",
     "physical_endpoint_all_A1_to_E2_closed": false
+  },
+  "max_cut_tranche7_20261114": {
+    "scope": "A1 actual all-integer Fourier proof reuse and B2 four-MMS measured-boundary pipeline; local-first, original raw absent and Agda not run",
+    "A1": {
+      "all_integer_selector_negation": "DASHI/Physics/Plasma/KSW668SparseModeLookupNegationExact.agda",
+      "all_mode_sparse_pair_reality": "DASHI/Physics/Plasma/KSW668SparsePairRealityExact.agda",
+      "real_original_zminus_pair_all_mode_reality_source_written": true,
+      "two_positive_mode_additive_zplus_all_mode_reality_source_written": true,
+      "original_priority_source_zplus_additive_equality_kernel_accepted": false,
+      "both_actual_global_transversality": false,
+      "original_inverse_square": false,
+      "Agda_2p9_typechecked": false,
+      "actual_MMS_transfer_observed": false
+    },
+    "B2": {
+      "original_source_four_probe_temporal_query": "2017-06-17T20:24:03Z to 20:24:11Z",
+      "instrument_geometry": "four MMS1/MMS2/MMS3/MMS4 GSE positions from original FGM L2 auxiliary Epoch_state",
+      "data_expected": "original same-event FGM EDP FPI CDF raw files, SHA256, CDF source attributes, true sensor quality flags, units, positions, source-qualified component errors",
+      "exact_affine_tetra_face_and_volume_integrator": "scripts/ksw668_mms4_tetrahedron_boundary.py",
+      "instrument_GSE_CDF_ephemeris_bridge": "scripts/ksw668_mms4_fgm_ephemeris_bridge.py",
+      "source_FGM_four_probe_receipts": "scripts/ksw668_mms4_merge_original_fgm_receipts.py",
+      "source_SDC_direct_acquisition": "scripts/ksw668_mms_sdc_direct.py --probe 1/2/3/4 --products fgm --execute",
+      "local_synthetic_tests": "scripts/test_ksw668_mms4_tetrahedron.py",
+      "independent_local_plane_wave_equivalent": {
+        "source_reference_tetra_m3": 20833.333333333332,
+        "U_t0_J": 7.378508290238188e-11,
+        "U_t1_J": 7.158964317059787e-11,
+        "flux_t0_W": 2.2120183712070335e-9,
+        "flux_t1_W": 2.1788610919844242e-9,
+        "conservation_residual_J": -1.8827608171922915e-22,
+        "relative_to_deltaU": 8.575780013156489e-11,
+        "source": "independent source-equivalent local Python mathematical benchmark, NOT an MMS original observation"
+      },
+      "source_CDF_archive_files_actually_acquired": false,
+      "source_sha256_self_rechecked": false,
+      "instrument_original_source_and_quality_verified": false,
+      "measured_B2_boundary_accepted": false,
+      "affine_model_error_bounded": false,
+      "original_full_PR_head_replay": false
+    },
+    "C2": {
+      "neptoon_source": "https://www.neptoon.org/en/latest/user-guide/parma-offline/",
+      "PARMA_model": "v4.10, NOT JAEA EXPACS v4.19",
+      "bundled_solar_W_index_through": "2026-03-26",
+      "script_future_date_fail_closed": "scripts/ksw668_parma_site_spectrum_adapter.py",
+      "actual_current_W_source_after_2026_03_26": false,
+      "original_source_evaluated_nuclear_data_downloaded": false
+    },
+    "verification": "Source code committed, mathematical equivalent tetra sanity check executed; exact-head tests and Agda not executed in this environment; no CI gate",
+    "physical_endpoints_promoted": false
   }
 }
