@@ -185,3 +185,5 @@ import DASHI.Wikimedia.IbrahimFirstLinkV3ExecutionLanePruningExact
 import DASHI.Wikimedia.IbrahimFiniteOrbitRevisionWeldExact
 import DASHI.Wikimedia.IbrahimMultilingualHyperfabricWeldExact
 import DASHI.Wikimedia.IbrahimPublishedSevenNodeFunnelExact
+import DASHI.Wikimedia.IbrahimFiniteFigureBasinCertificateExact
+import DASHI.Wikimedia.IbrahimITIRConsumerRepairExact
