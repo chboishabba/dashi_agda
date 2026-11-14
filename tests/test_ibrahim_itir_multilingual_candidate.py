@@ -31,6 +31,8 @@ class ConsumerCandidateTests(unittest.TestCase):
         self.assertFalse(result['human_review_paid'])
         self.assertFalse(result['selected_consumer_licence_paid'])
         self.assertFalse(result['translation_equivalence_paid'])
+        self.assertFalse(result['qid_identity_paid'])
+        self.assertFalse(result['source_retrieval_paid'])
         self.assertFalse(result['wiki_edit_authority_paid'])
     def test_agreement_is_not_equivalence(self):
         r=api.compare_candidate(fixture('en','Science','same'),fixture('de','Wissenschaft','same'))
