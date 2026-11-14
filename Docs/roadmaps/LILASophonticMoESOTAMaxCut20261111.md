@@ -871,3 +871,102 @@ Source-executed forward-only C2 update is now genuine GPU empirical evidence tha
 | Q3 independently loadable teacher-stripped model | **PHYSICAL FINITE-TRACE BIDI + 33.61% tensor-byte reduction PASS**, deployment quality open | Warmed ABBA timing; actual model-only resident VRAM and stable long-context prefill/decode; source all-input equivalence theorem and competitive CE |
 
 **Next work priority:** use the existing measured original checkpoint to (1) distinguish local teacher-forced history explosion from full student recurrence, (2) test early-layer 0/1 approximation and odd-even cancellation, (3) improve Dust efficient probes by caching prefix and measuring gradient credit, (4) benchmark ABBA warm inference before asserting performance gain. Physical multi-host federation remains parked; Q2.5 quality is dominant. No new named gate count; canonical programme still has 106 planning targets.
+
+---
+
+## 2026-11-14 integrated D4/B4–C3–E8–Leech–theta/zeta–Sophontic–LILA maximum cut
+
+**Scope and date:** this reconciles the user's November 14 request with the canonical 106-obligation programme, not an extra 106 claims or a replacement roadmap. This subsection is an *audit and exact delivery plan*, **not** a new Agda kernel run, a proof of RH, a physical Leech/E8 isometry of trained weights, or evidence that changing a C2 router to C3 improves CE. Do not promote an equality of multiplicities to an equality of representations.
+
+### 0. Accepted observations and next actual machine cut
+
+The RX 580/HIP 7.16 original student and teacher were independently re-evaluated on the heldout inputs: student **4.76298302 CE**, teacher **2.58340826 CE**, numerically reproducing the saved curriculum receipts within ~1e−7 nats. Five-stage curriculum has 825 optimiser steps, measured total **4806.0 s**, stage-loop sum **4685.3 s**; this does not measure a per-backward cost. Standalone `c2_pure_unpromoted.pt` physically removes **56.7 MB** of dense fallback state (**33.61% tensor-byte reduction**) and preserves the observed 8-step full logits + expert-history fingerprints with exact output parity. It remains **not quality promoted**. Initial reported **12.9×** pure/guarded throughput ratio came from one unbalanced short run; warmed ABBA verification is still OPEN and guarded `student_only=True` already bypasses dense FFN compute. The native 8-step one-readout forward-only competitor improves dev CE ~0.000031 for independent Dust versus ~0.016925 for AdamW, with lower PyTorch peak allocated memory but greater elapsed time; no general forward-only superiority follows.
+
+Train-derived development diagnoses: worst isolated replacements layers 1 and 0 (CE **5.2445 / 4.6620**); final source full-student stage best CE **4.7916**. Reported large layer-10/11 histories are *teacher-forced local MoE* diagnostics, not yet full recurrent student-runaway evidence. **Quality source maximum-cut remains layer-0/1 correction plus full-student rollout, not broad federation or another generic 80-minute training run.**
+
+### 1. Already owned mathematics (do not repeat these donors)
+
+| Carrier and role | Exact owner/source | Status of that owner's claim |
+|---|---|---|
+| Antipodal C2, three-phase C3, Fourier inverse/conjugation | `DASHI/Moonshine/C3FourierConjugationExact.agda`, `DASHI/Core/FiniteC3OrbitStabilizerExact.agda`, Leech `models/trialectic_wave_prior.py` | Finite algebra and neural source transformations; not trained model equivariance |
+| Distinct dihedral D4, D4-root, B4-root and signed Weyl carrier | `DASHI/Foundations/TrialecticD4C3ResidualBoundaryExact.agda`, `DASHI/Physics/RootSystemB4Carrier.agda`, `RootSystemB4WeylAction.agda` | Finite carriers and naming safeguards, **not** complete D4 diagram triality/S3 on same F4 root carrier |
+| C6 observer, two distinct involutions and coarse C3 phase | `DASHI/Moonshine/JInvariant369C6TenRankWeightTwelveCrossPollinationExact.agda` | Finite observer commuting/invariant claims; same C6 action as source LILA not proven |
+| Finite C3 Monster phase and 3-local E8/Leech counts | `DASHI/Moonshine/Monster3BCyclicFourierDyadicBridgeExact.agda`, `MonsterThreeLocalE8LeechBridgeExact.agda`, `Monster3BHighestAlphaValidation.agda` | Exact character **multiplicity and arithmetic** identities, not orbital lattice-coordinate intertwiners |
+| E8 rank/240 and Leech rank/196560 | `DASHI/Biology/ExceptionalLatticeGrokkingProtocolExact.agda` | Benchmark and explicit null-model protocol; not trained weights proven lattice-isometric |
+| Eisenstein/Delta modular action | `DASHI/Physics/Closure/TriadicEisensteinTransformationTheorem.agda`, `DASHI/Moonshine/EisensteinDiscriminantWeight12Exact.agda`, `DeltaNormalizedWeight12SameObjectExact.agda` | All-SL2Z weight-12 **conditional analytic model** transformation and pinned Lean same-object eta24/Delta fact recorded; transfer and same-carrier source admission still required |
+| E8 theta→J original source | `DASHI/Physics/Closure/LilaE8ThetaJBridgeSurface.agda` | **Explicit non-promoting request** for Theta(E8)=E4, E4^3/Delta−744, q normalisation; do not call complete |
+| Riemann-zeta reflection / C3 orbit | `DASHI/Analysis/RiemannReflectionC3OrbitShapeBridgeExact.agda`, `RiemannMaassMoonshineCrossPollinationExact.agda` | Fixed-versus-inverse-pair **orbit-shape only**; not RH/Weil positivity/zero spectrum |
+| Sophontic semantic paired interventions, forward-only Dust | `DASHI/Reasoning/LILAForwardOnlyDustAdapterExact.agda` (PR #1265), `ObserverRefinementLatticeExact`; canonical roadmap prior Sophontic section | Typed intervention/observer interface, some finite Dust evidence; real full-model semantic invariance, temporal learning, and deployment source weld OPEN |
+
+**Critical three-zeta distinction:** `ζ₃` / `ζ₃²` are nontrivial C3 characters; `ζ(s)` is the Riemann zeta function; `Z_Λ(s)` is a lattice Epstein zeta function. In the Monster 3B module, `zeta`/`zetaSquared` also *name multiplicity fields* for characters, not values of the Riemann zeta function. The identity `240·3·(1+16+16²)=196560` is exact **count arithmetic**. It can be arranged in 3 cyclic sectors, but doing that is not an actual C3-equivariant partition of 196560 Leech vectors unless an explicit group action and bijection are supplied.
+
+### 2. Classical same-object target identities, definitions, and exact gates
+
+Use a chosen norm-two E8 lattice, an even unimodular rank-24 rootless Leech lattice, and a single q-convention `q = exp(2πiτ)`, `Θ_L(τ)=Σ_{v∈L}q^{(v,v)/2}`. Select the exact compatible E4/E6/Δ/J analytic carriers and their pinned proof authorities. **For Leech define J=j−744; j=E4³/Δ.** Intended classical identities:
+
+```math
+\Theta_{E_8}=E_4=1+240\sum_{n\ge1}\sigma_3(n)q^n,
+\quad
+\Theta_{\Lambda_{24}}=E_4^3-720\Delta
+=\Delta(J+24).
+```
+
+For `Re(s)>4` under that norm choice, `Z_E8(s)=Σ_{v≠0}(v,v)^{-s}=240·2^{-s}ζ(s)ζ(s−3)`. The proof uses norm-2n shell multiplicities 240 σ3(n) and **absolute convergence** to exchange the Dirichlet sums. Its completed form and Mellin transform require own domains, Gamma/scaling and analytic-continuation proofs. Do not silently replace it by the Riemann explicit formula, claim that RH follows, or deduce neural CE from an arithmetic generating function.
+
+The Leech theta identity is a modular-form **weight-12** identity; the expression `Δ(J+24)` is *holomorphic* even though `J` has a pole at the cusp. Need the same lattice and modular-form coefficients, correct q constant and q first-shell coefficient, not just 196560 equality. The source `LilaE8ThetaJBridgeSurface` is a TODO owner, not an established same-carrier theorem. Prior Lean eta24/Δ does **not** in itself pay for either lattice theta identification.
+
+### 3. Exact unpaid lemmas, A/B/C split and source/acceptance conditions
+
+| Gate | Named exact target (lemma or physical weld) | Source prerequisite; acceptance definition | State |
+|---|---|---|---|
+| M1a | `d4B4EvenSignedWeylInclusion` | On same `Vec ℤ⁴` carrier, D4 even-signed subgroup closed under B4 composition, root-preserving and injectively embedded, with checkable index-two cosets | OPEN — existing B4 signed action donor |
+| M1b | `d4TrialityS3Action` | Exact norm-preserving order-3 outer D4 diagram automorphism, order-2 reflection, `srs=r⁻¹` and genuine faithful S3 action, not arbitrary C3 action | OPEN |
+| M1c | `f4D4OuterTrialityQuotient` | Same F4/D4 root object, Weyl inclusion and explicit six-coset quotient with correct permutation action | OPEN |
+| M2a | `e8RootCarrierNormInnerProduct240Bidi` | Original E8 coordinates, full 240 distinct norm-2 roots, membership/Gram and Weyl closure; reuse any authoritative source carrier already present | OPEN in inspected LILA-R2 surface; check other PR branches before reimplementing |
+| M2b | `d4TrialityToE8LeechAction` | Actual injective/gluing coordinate map with norm/inner-product preservation and commuting D4/S3 action on **actual** E8 and Leech carriers | OPEN |
+| M2c | `leechMinimalShell196560SameCarrier` | Explicit bijection onto all norm-4 Leech vectors and exact 196560 cardinality; source `240·3·819` only counting donor | OPEN |
+| M3a | `thetaE8EqualsE4SameCarrier` | Original norm-2n shell counts for all n, or modularity + rank/constant/coefficient uniqueness on the same E8 lattice and q-carrier | OPEN |
+| M3b | `thetaLeechEqualsDeltaTimesJPlus24` | Original Leech theta modularity, absence of norm-2 vectors and first nonzero shell, weight-12 uniqueness, *same* E4/Δ/J convention | OPEN |
+| M3c | `e8EpsteinZetaMellinFactorization` | Absolute convergence for Re(s)>4, Dirichlet coefficient grouping, zeta-product equality and Mellin normalisation, source carrier identical to M3a | OPEN |
+| M3d | `e8LeechDeltaSameObjectLeanAgdaWeld` | Reuse existing weight-12/Eisenstein and pinned Lean eta24=Δ proof with exact normalisation and checked cross-language digest/statement; no replacement postulate | OPEN |
+| M4a | `c3PhaseVsRiemannZetaTypeSeparation` | Explicitly preserve cyclotomic, Epstein, Riemann and Monster multiplicity types, carry existing orbit-shape no-promotion witness | Existing type-separation donor; named interface check OPEN |
+| M4b | `latticeMellinToAnalyticZetaSameObject` | Mellin theta with Gamma/π scaling, convergence/functional equation and matching classical Riemann-zeta product; not a spectral zero identification | OPEN |
+| M4c | `spectralOperatorEqualsRiemannZeroCarrier` | Genuine self-adjoint spectral carrier, all-zero correspondence and prime-side trace, positivity; absent from theta route | OPEN; **separate speculative RH-scale programme**, not required for LILA |
+| M5a | `sophonticC2SemanticInterventionDescent` | Original paired before/after-router intervention on actual model history, semantics and observer refinement; distinguish routing-change and route-fixed surfaces | OPEN full-source weld |
+| M5b | `sophonticC3DirectedCycleIntervention` | Same three semantic states before/after cycle with cyclic phase and chirality, source recognisable signal that cannot be reduced to a C2-only *invariant scalar* observer | OPEN |
+| M5c | `sophonticS3ReflectionReversesCycle` | Actual source semantic reflection reverses C3 orientation while preserving task-selected meaning and history contract, `srs=r⁻¹` | OPEN |
+| M5d | `leechC2CanRepresentC3WithoutForcingIt` | Formal separation: C2 symmetry imposes parity but allows independent 2D C3 rotation planes; prove existence of compliant C2→C3 feature consumer and negative control where no nontrivial C3 is present | OPEN |
+| M6a | `leechC2C3RouterInvariantUnderOriginalAction` | Actual `HistoryOrbitMoE` router features + selected indices/weights checked under sign and triple rotation; tie rules and untransformed parameter biases explicit | OPEN on trained original |
+| M6b | `leechTrialityExpertHistoryTransport` | Actual original expert outputs, states, cache, top-k permutation and action on full selected histories, checked source-to-Agda transport | OPEN |
+| M6c | `leechLilaRepresentationIntertwiner` | Explicit source embedding/projection from trained layer-0/1 activations to chosen E8/Leech lattice carrier, preserves stated metric/action under source tests; **do not infer from dimensions or token names** | OPEN |
+| M7a | `trialityQualityLayer01Ablation` | Original 4.763 checkpoint inspected for actual routing geometry; matched fit/dev split, seed, active parameters and training/computation budgets: C2, C2×C3, S3-compatible and lattice-feature controls | OPEN |
+| M7b | `originalC2EarlyLayerOddEvenCorrection` | Measured layer 0/1 local FFN and full-student dev CE improvement, no heldout selection | OPEN; highest empirical priority |
+| M7c | `originalStudentRecurrentHistoryNormBoundOrCounterexample` | Real autoregressive student with KV+expert history, compare per-layer magnitudes and route margins with teacher-forced local probe | OPEN |
+| M7d | `originalDustCreditMatchesSourceGradient` | Same trained early-layer readout, fit batch, exact mathematical perturbation objective, forward-only estimate vs reverse-mode gradient; caching and timed matched-token controls | OPEN |
+| M7e | `teacherStrippedStudentCheckpointBidi` | Already original **finite hardware parity ACCEPTED**; general all-input transport, long-context state and deployment speed/quality remain OPEN | PARTIAL, don't downgrade physical result |
+| M7f | `fullStudentHeldoutQualityPromotion` | Independently heldout full C2/C3/sophontic candidate CE vs frozen dense teacher with predeclared tolerance; no training on heldout | OPEN, currently FAIL 4.762983>2.583408 |
+
+**A/B/C ownership:** A = foundational same-carrier maths (M1–M3), B = finite/Sophontic mathematical-to-runtime interfaces (M4–M6), C = original trained checkpoint, real native GPU tests and generalisation (M7). These are **new descriptive subtargets of the existing 106-gate programme**, not an assertion that their source Agda theorem names currently exist or their proofs are complete. The evidence ledger must distinguish *classical theorem*, *in-repository conditional formal proof*, *finite accepted sample*, *physical test*, and *unpaid proof*.
+
+### 4. Sophontic conceptual decision: can C2 arrive at C3 results?
+
+**Yes as expressive capacity, not as a consequence of parity alone.** For an orthogonal sign-flip action `s=−I` on a real two-dimensional C3 phase plane, any linear 120° C3 rotation `r` commutes with `s`, so a C2-symmetric model can represent and learn C3-structured features. Conversely a *one-dimensional real C2 invariant scalar* cannot faithfully carry a nontrivial C3 rotation. Signed odd expert outputs plus even channel and vector-valued hidden state may admit C3 orientation, but the actual 4.763 model's trained routing/weights are not thereby C3 equivariant. For **S3 D4 triality**, `srs=r⁻¹` uses a *reflection* s, not the central antipodal `−I` used in Leech C2. The same s cannot be both central and the nontrivial inversion conjugator on a faithful C3 plane; supply a distinct reflection or a semidirect action with its own source parameter transport. Sophontic interventions should explicitly distinguish phase/directed cycle, reflection, coarse observer and semantic preservation under each action.
+
+### 5. Dependency-driven phases, precise deliverables and next execution order
+
+| Phase | Status 14 Nov | Delivered / next actual artifact | Exit requirement |
+|---|---|---|---|
+| P0 original symmetry/data provenance | Existing finite proofs and checkpoint evidence | Publish C2/C3/C6, D4-root/B4-root/S3, cyclotomic/Riemann zeta distinction and exact source hashes in shared ledger | No role conflation; original source references pinned |
+| A1 D4/F4 triality | Source B4 carrier exists; genuine same-root action OPEN | M1a–M1c Agda source imports and focused Agda 2.9 test | D4/F4 same-carrier coset/action laws kernel accepted |
+| A2 E8/Leech lattice action | Finite counts EXIST, isometry/glue OPEN | M2a–M2c original coordinate enumeration and norm-preserving action proofs | 240 E8 and 196560 Leech shell with honest coordinate/provenance receipts |
+| A3 theta/modular/zeta | Eisenstein/Delta donor EXISTS, lattice theorem weld OPEN | M3a–M3d, M4b; pinned Lean/Agda joint bridge, no new Delta postulate | Same-carrier E8/Leech theta, Mellin/Dirichlet domain accepted |
+| B1 Sophontic observer and 2:3 semantics | Paired finite interfaces EXIST, original source bridge OPEN | M5a–M5d; paired C2, directed C3 and S3 semantic interventions + counterexamples | Correct observer descent and differentiated action identities |
+| B2 LILA geometry intertwiners | `c2c3_wave` code EXISTS, checkpoint usage UNCONFIRMED | M6a–M6c with original router and train-derived activation geometry | Checkpoint config + C2/C3/S3 action residuals, no asserted global equivariance without proof |
+| C1 early-layer learner quality | Q2.1 source CE PASS; Q2.2 diagnosis PASS | M7b–M7d on layer 0/1, source Dust-vs-AdamW gradient and cached probes | Real full-student dev CE decreases under matched quality/time controls |
+| C2 standalone+promotion | Q3 finite BIDI PASS; CE FAIL | M7e–M7f, warmed ABBA, long context and independent quality | Source parity beyond 8 steps; true matched runtime and quality threshold |
+| C3 representation triality ablation | Proposed; no actual source GPU ablation | M7a with frozen semantics, matched C2/C6/S3/lattice variants, null geometry | Measured dev/heldout quality, stability and efficiency, with correct action tests |
+| D diffusion / F federation | Intentionally PARKED | Resume only after dominant learner quality/cost bottleneck resolved | Actual downstream denoising or WAN requirements |
+
+**Execution priority (highest expected information, not theorem glamour):** (1) confirm trained `moe_route_geometry` and paired semantic/intervention inputs; (2) source layer-0/1 C2, C2×C3 and S3 action residual/odd-even scale and actual recurrent history; (3) frozen-weight geometry probes and matched early-layer correction; (4) cached Dust gradient/efficiency comparison; (5) E8/Leech theta same-carrier algebra joined from existing Lean/Agda donors in parallel; (6) only then expensive full-model training, extended inference/ABBA and independent heldout promotion. Do not block Q2.5 quality work on completion of speculative RH spectral bridge or E8 lattice VOA construction.
+
+**Canonical source links:** DASHI modules named above at `https://github.com/chboishabba/dashi_agda`; existing Leech PR #4 `https://github.com/chboishabba/LeechTransformer/pull/4`, runbook `docs/C2_QUALITY_FULL_MAXCUT_Q21_Q3_20261114.md`. Precise source names here are **requested future lemmas**, not claims they already exist as accepted proof terms.
