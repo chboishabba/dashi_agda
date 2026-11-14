@@ -702,3 +702,62 @@ The existing \`ksw668_e2_zero_count_exclusion.py\` now rejects original backgrou
 | **E2** | Conditional thermal-only effect-size and source-data-gated Poisson bound | Real source verified upper spectra and actual same-human controlled isotope interventions or constrained, exposure-specific exclusion |
 
 **Promotion rule:** mathematical solution ≠ original KSW mechanism ≠ source original data ≠ actual human experiment; source script ≠ executable receipt ≠ Agda 2.9 kernel theorem.
+
+---
+
+## Tranche 7 — 2026-11-14: all-mode Fourier proof reuse and actual four-spacecraft spatial-boundary cut
+
+**Same authoritative original PR #1504; no CI acceptance requirement.** These changes are source-authored and numerically independently cross-checked where stated, but the Agda proof owners are not yet typechecked by a pinned Agda binary in this isolated execution environment. External original source data remains unavailable here.
+
+### A1-7 — real Fourier-reality proofs on all Z³, no finite mode-box assumption
+
+Original code had only total sparse \(z^+(k),z^-(k)\) source functions and a global-state constructor requiring callers to supply \`RealityCondition\` and \`DivergenceFreeCondition\`. New:
+
+1. \`DASHI/Physics/Plasma/KSW668SparseModeLookupNegationExact.agda\`: proves the generic original integer-mode selector theorem
+\[
+\texttt{modeEqual}(-m,s)=\texttt{modeEqual}(m,-s)
+\quad\forall m,s\in\mathbb Z^3
+\]
+by four exhaustive Boolean cases using original \`Output.modeEqualSound\` / \`modeEqualComplete\` and \`Symmetry.negateModeInvolutive\`, with no new choice postulate or bounded representative.
+2. \`DASHI/Physics/Plasma/KSW668SparsePairRealityExact.agda\`: constructs an explicit source \(p,-p\) conjugate pair, proves a *universal* all-mode \`pairedSparseReality\` with a real non-self-opposite witness, and applies it to the actual original source \`sourceZMinus\` for **both transfer signs**. Also constructs the separate \(q,-q\) and \(k,-k\) source pairs and their additive \(z^+\) field, proving that ADDITIVE reconstruction's global Fourier reality through existing repository \`complex3ConjugateAdd\`. A \`sourceMinusRealityCondition\` consumes the original \`Audit.RealityCondition\` target.
+3. Existing original \`KSW668RationalThreeModeOriginalRowsExact.agda\` retains source-authentic positive/negative signed transfer and exact doubled squared magnetic strengths; no arbitrary scalar transfer surrogate.
+
+**Still explicitly OPEN**: source-written Agda types must be accepted locally; the four-support additive \(z^+\) reconstruction must be proved identical to the original PRIORITY nested lookup at **all integer modes** (pair-support collision exclusion); the actual original plus/minus global \`DivergenceFreeCondition\` and normalized inverse-square projector must be constructed. Original MMS event remains unmeasured in the project. No claim that the original full \`IdealElsasserFourierState\` is already inhabited.
+
+### B2-7 — physically meaningful original MMS1–4 boundary as an explicit measurement object
+
+Prior exact U(1) four-potential/3D cube is a **mathematical solution**. A single MMS1 time series is NOT a three-dimensional measured boundary. Added:
+
+- \`scripts/ksw668_mms4_tetrahedron_boundary.py\`: source-record schema with 2 exact UTC epochs inside **2017-06-17 20:24:03–11**, all **four** source MMS spacecraft, same calibrated GSE reference frame, positions [km], E [mV/m], B [nT], J [nA/m²], timestamp skew, numerical component absolute error bounds, and user-supplied CDF SHA-256 digests that are checked against ACTUAL local bytes. It requires quality flags and rejects degenerate spacecraft geometry.
+- The *fixed* spatial observation tetra is obtained by shrinking the first-epoch source tetra. **Both epochs must interpolate strictly within their measured source convex hulls**, not extrapolate. The E,B,J data are interpolated **affinely** from each epoch's four spacecraft. On that explicit model, the surface Poynting flux over **all four faces** and volume integrals of \(u=\frac12(\epsilon_0|E|^2+|B|^2/\mu_0)\) and \(J\cdot E\) are integrated **exactly** using degree-two barycentric moments. The two-time Poynting balance and conservative, componentwise error-only residual bound are output; incomplete clock, interpolation, original physical instrument calibration and time-curvature uncertainties remain EXPLICITLY unqualified.
+- \`scripts/test_ksw668_mms4_tetrahedron.py\` adds source-free tests: 3D Maxwell affine plane wave, exact quadratic tetra face integral \(L^4/(12\mu_0)\), volume integral \(VL^2/10\), degenerate-geometry rejection and raw-source-data refusal. An independent hand-built local Python calculation of the same exact plane-wave volume/face algebra gave reference volume \(2.08333\times10^4\,\mathrm m^3\), energy change \(\simeq-2.19544\times10^{-12}\,\mathrm J\), time-integrated outward flux \(\simeq+2.19544\times10^{-12}\,\mathrm J\), relative conservation residual \(\simeq8.6\times10^{-11}\). **Exact PR-head test runner was not executed**.
+- \`scripts/ksw668_mms4_fgm_ephemeris_bridge.py\`: confirms from the FGM Level-2 **original** documented ancillary CDF \`mms#_fgm_r_gse_brst_l2\` [km] and its actual \`Epoch_state\` that source positions bracket the event; interpolates only inside original times, with 120s maximum gap, no source fill values or fabricated high-rate survey positions. Requires all four independently source-named and SHA-checkable FGM burst CDFs. FGM Data Products Guide (2016) section 2.9.2.1, Table 5; https://lasp.colorado.edu/mms/sdc/public/datasets/fields/.
+- Source provenance caveat: a *matching user-supplied CDF hash* is not independently verified archive origin or a signed instrument calibration. Actual CDF variables, multi-probe instrument error flags and original-SDC source manifest must be audited. The receipt explicitly leaves \`source_physical_boundary_empirically_accepted=false\`. The measured/original MMS boundary B2 physical gate therefore STILL OPEN.
+
+The local \`--all\` acceptance runner now requires actual four-probe FGM ephemeris CDF metadata and a separately sourced four-probe synchronized calibrated E/B/J boundary JSON, rather than accepting MMS1 alone for B2. Example:
+
+\`\`\`bash
+bash scripts/run_ksw668_local_maxcut.sh --math
+
+KSW_MMS4_FGM_MANIFEST=/verified/original_mms4_FGM_source.json \
+KSW_MMS4_BOUNDARY_JSON=/verified/synchronized_mms4_GSE_EBJ.json \
+# alongside the original MMS1/Movebank/ENA/NNDC/site env and pinned Agda
+bash scripts/run_ksw668_local_maxcut.sh --all
+\`\`\`
+
+### C2-7 — date-domain guard for the offline PARMA secondary source
+
+Official Neptoon documentation (https://www.neptoon.org/en/latest/user-guide/parma-offline/) states its **PARMA 4.10 bundled historical solar W-index ends 2026-03-26**. That is not source data for November 2026: atmospheric neutron spectra must not be silently generated from an unverified W-index extrapolation. \`scripts/ksw668_parma_site_spectrum_adapter.py\` now explicitly fails closed for dates after 2026-03-26, pending a separately provenance-checked extension; it retains the separate **official JAEA EXPACS/PARMA 4.19** versus *secondary Neptoon 4.10* version distinction. It also still requires an actual geographical site, atmospheric depth and source water fraction, and cannot infer a sample/body thermal spectrum from its documented 0.01 MeV lower bound.
+
+### Consolidated exact original max-cut (remaining)
+
+| Gate | New T7 advance | Unpaid primitive |
+| --- | --- | --- |
+| A1 | Every-Z³ original mode-negation lookup lemma; real original \(z^-\) global conjugacy and additive \(z^+\) global conjugacy are **source-written** | Kernel-accepted proof; additive-to-nested z+ source equality; global transverse C3 dot-zero for +/−, real inverse-square, measured MMS transfer |
+| B1/B2 | Original full smooth U1 PDE and now fixed geometric **four-spacecraft** real-data interface with exact affine source face/volume integration | Original multi-MMS raw data, raw ephemeris/quality/calibration uncertainty, physically observed signed flux and measured residual |
+| P0 | All-MMS four-point and ephemeris raw provenance added to original archive runner | Actual source CDF bytes, Movebank GPS, ENA FASTQ, NNDC N14 data, site flux and locally pinned Agda |
+| C1 | Existing actual NIST Q and relativistic LAB final-state generator | Original neutron event, all electronic/γ/charge-state branching, full source uncertainty |
+| C2 | ENDF/B-VIII.1 law-aware quadrature + explicit PARMA W-index date guard | Real original grid, actual thermal through fast neutron site spectrum, in-tissue transport |
+| D1/D2 | Curved Einstein–massless-scalar spacelike S1 solution and rational Friedmann source | Kernel full metric/tensor calculus, model-specific KK/observer weld, actual empirical transport |
+| E1 | Exact Movebank original independent provider MD5, real human AMS/NH curves | Original downloaded treatment-linked GPS/FASTQ, human diet/fractionation/assay calibration |
+| E2 | Source-conditional Poisson bound and isotope effect-size model | Genuine same-specimen controlled counts, measured exposure upper limits or conditional physical exclusion |
