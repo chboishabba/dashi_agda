@@ -25,6 +25,7 @@ module DASHI.Mathematics.Arithmetic.EllipticBSDSourceConvergence20261114 where
 -- Importing everything is NOT a successful proof.
 ------------------------------------------------------------------------
 
+import DASHI.Mathematics.Arithmetic.EllipticDyadicHenselSquareStepAlgebraExact
 import DASHI.Mathematics.Arithmetic.EllipticActualDyadicPrimePlaceExact
 import DASHI.Mathematics.Arithmetic.EllipticOddPrimeSecondValuationParityExact
 import DASHI.Mathematics.Arithmetic.EllipticCubicValuationParityExact
