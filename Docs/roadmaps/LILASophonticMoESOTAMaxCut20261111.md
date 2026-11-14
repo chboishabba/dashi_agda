@@ -1268,3 +1268,15 @@ python3 scripts/check_369_c3x3_cyclotomic_fourier_crosslane.py
 **Next actual execution order:** run updated source contracts (expected new four); export source original nine dev residual arrays without treating them as fresh; compute cluster/sign-permutation null for each layer; separately obtain new document-level disjoint corpus for matched C2/C2C3 routing; evaluate genuine typed C3 input/output actions and phase-scrambled negative controls before claiming a *learned grokking mechanism*. Do not block low-cost statistical audit on acquiring a fresh corpus, but do not use already-screened dev/heldout data for fresh generalisation claims.
 
 **Agda programme state unchanged:** finite C3² ring/character tests and balanced-triad C3/S3 source kernel are accepted in user-reported host; X369 NS/YM/atomic/quantum source welds and E8/Leech theta all-index results remain OPEN. No demonstration of original physical field dynamics or NS/YM regularity is implied.
+
+### C3 residual isotropy exact mathematical separation — new X369-F1 source tests
+
+The Leech `audit_c3_rotating_energy_null.py` now computes from each teacher-input residual tensor:
+`M=E[rrᵀ]` (raw pooled 3×3 triad second moments);
+`Σ=M−μμᵀ` (centred covariance);
+`||Σ−tr(Σ)I/3||_F/||Σ||_F` (spherical isotropy defect);
+`||RΣRᵀ−Σ||_F/||Σ||_F` and `||RMRᵀ−M||_F/||M||_F` (C3 commutators on the actual cyclic permutation R). These are *finite measured tests on chosen source coordinate triads*, not a full 384×384 covariance test, and cannot establish a semantic input/output phase action. Per-row bootstrap and signed feature permutation provide sampling/alignment checks, not a rigorous global mathematical isotropy proof.
+
+New synthetic counterexamples in `tests/test_c3_rotating_energy_null.py`: (a) a C3-invariant common/DC covariance with large amplitude can be highly non-isotropic and have near-zero rotating fraction; (b) mean-shifted residuals with approximately isotropic **centred** covariance can have raw rotating energy much less than 2/3. Thus the implication `centre covariance isotropic ⇒ raw rotating fraction=2/3` is INVALID without mean control, and `C3 invariance ⇒ isotropy` is INVALID. This sharpens G7/X369-F1 beyond the naive 67% dimensionality argument.
+
+**Status:** original numerical 9-row 66.8–67.4% and 45/45 host contracts are accepted as reported for the previous source head; new null source and six new regression controls are committed but require a new host test run. Full mathematical physical source/semantics intertwiners remain OPEN.
