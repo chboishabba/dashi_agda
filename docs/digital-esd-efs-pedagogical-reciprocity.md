@@ -1,5 +1,7 @@
 # Reciprocal EfS--digital pedagogy formalisation (candidate stage)
 
+**Higher-order consumer update (1 November 2026):** the 16 #1448 candidate comparisons are *source-indexed hyperedges*, not evidence that pairwise digital-principle × EfS-theme matching captures all educational pathways. [Joint hyperfabric consumer and finite non-factorability witness](../DASHI/Education/DigitalESDJointHyperfabricConsumerExact.agda) requires the original source-role/locator and canonical braid; an eventual source-specific joint review requires separate reviewed SLR, SourceAuditAdmission, same-source claim ceiling and context transfer. See [methods/implications](digital-esd-hyperfabric-implications-and-consumer-gates.md). All new proof targets are source-written, not kernel-checked; no empirical three-way interaction is inferred.
+
 ## Why this cut exists
 
 The seven Digital-ESD principles arose by cross-paper interpretive synthesis from an initial purposive digital-education corpus; they are not automatically derived from the full literature. Existing `DigitalESDTransformativePrincipleMatrixExact` pairs those principles with sustainability constraints and enactment conditions, but does not treat EfS's own pedagogy as an independent challenger. This cut does.
