@@ -773,5 +773,95 @@
       "CI_not_required": true,
       "operational_graviton_source_detection_proven": false
     }
+  },
+  "ksw668_brane_tranche2_20261115": {
+    "programme": "Same original PR #1504, no CI. Source-written Agda, exact symbolic/numeric 2026-11-15 local independent mathematics, real experimental data NOT supplied",
+    "source_originals": {
+      "bulk_shortcut": "Robert R. Caldwell & David Langlois, Phys Lett B 511 (2001) 129–135, DOI 10.1016/S0370-2693(01)00631-1",
+      "thin_wall": "Werner Israel, Nuovo Cimento B 44 (1966) 1–14, DOI 10.1007/BF02710419",
+      "TT_waves": "Maartens & Koyama, Living Rev Relativ 2010 DOI 10.12942/lrr-2010-5; moving-brane Koyama astro-ph/0407263"
+    },
+    "mathematics_completed_and_independently_tested": {
+      "bulk_test_scalar_emitter_receiver": {
+        "script": "scripts/ksw668_brane_scalar_emitter_receiver_retarded.py",
+        "ambient": "flat 5D Minkowski test cylinder, not AdS5 moving self-gravitating brane",
+        "source": "finite duration triangular q(t)=t+ -2(t-tau)+ +(t-2tau)+, ideal spatial point",
+        "field": "4-spatial-dimensional retarded scalar, G5=-d_r G3/(2pi r)",
+        "same_brane_receiver": "antipodal, R=1; ambient null chord=2, brane photon arc=pi",
+        "sample_time": 2.125,
+        "sample_nonzero_receiver_response": 0.004547233491053074,
+        "after_ambient_front_before_brane_photon": true,
+        "rational_source_polyline": "d=6, intrinsic length=10, t=15/2, tau=2, 4pi² phi=1/8",
+        "source_rational_Agda": "DASHI/Physics/Gravity/KSW668BulkScalarReceiverRationalSliceExact.agda",
+        "non_graviton_model": true,
+        "point_source_self_field_energy_singular": true,
+        "finite_spatial_source_detector_and_full_backreaction": false
+      },
+      "moving_AdS5_TT": {
+        "script": "scripts/ksw668_ads5_tensor_mode_moving_israel_bc.py",
+        "physical_equation": "-dT²+dz²-3/z dz+dx²; h=cos(kx-omegaT) z²J2(mz)",
+        "PDE_exact": true,
+        "normal": "n^A=(-1,sqrt(1+t²),0,0,0)/t² on same a=t AdS5 moving brane",
+        "tensor_no_anisotropic_stress_BC": "n^A partial_A h=0",
+        "sample_BC_residual_t1_m1_k1": 0.6223255064907095,
+        "single_separated_mode_meets_moving_BC": false,
+        "time_dependent_sourced_superposition_constructed": false
+      },
+      "strict_original_AdS_horizon": {
+        "script": "scripts/ksw668_ads5_gravitational_horizon_variance_bound.py",
+        "source_equation": "Caldwell-Langlois Eq19; bound rg-rgamma >= A*Var_w(ell H)/((1+M²)*(1+sqrt(1+M²))) for sup|ell H|<=M",
+        "proof": "rapidity asinh, cosh inequality, double integral and weighted variance",
+        "same_model_a_t_ell1_t1_to2_horizon_excess": 0.004650600539435688,
+        "lower_bound_on_excess": 0.0029670614068783773,
+        "local_random_positive_weight_variants_checked": 240,
+        "true_same_receiver_clock_advantage_separate_metric": 0.009322862731128,
+        "Agda_continuum_analytic_integration_proven": false
+      },
+      "all_mode_probe_winding": {
+        "script": "scripts/ksw668_brane_winding_allmode_linear_stability.py",
+        "original_geometry": "flat 5D test cylindrical probe brane with tension and winding scalar; 5D Einstein backreaction not included",
+        "second_variation_positive_semidefinite": true,
+        "fourier_omega_minus_sq": "k²",
+        "fourier_omega_plus_sq": "k²+(m²+1)/R0²",
+        "all_integer_angular_modes_no_tachyon_linear": true,
+        "marginal_zero_modes": true,
+        "nonlinear_Lyapunov_and_gravitating_stability_proved": false
+      },
+      "original_distributional_Israel": {
+        "script": "scripts/ksw668_ads5_z2_distributional_israel_coefficient.py",
+        "junction": "Gsing_ab=-2(K_ab-h_ab K) delta(y)=6 S_ab delta(y) with Z2 normal reflection",
+        "same_original_AdS5_cosmology": true,
+        "all_16_distributional_Einstein_source_coefficients_exact": true,
+        "rational_selected_source": "t=4/3, rho=1/4, pressure=-1/10, traceS=-91/20",
+        "Gsing_selected_diagonal": [
+          "15/2",
+          "-176/15",
+          "-176/15",
+          "-176/15"
+        ],
+        "rational_source_Agda": "DASHI/Physics/Gravity/KSW668AdS5IsraelOriginalRationalSliceExact.agda",
+        "full_global_Gaussian_normal_glue_metric_constructed": false
+      }
+    },
+    "reuse_precise": {
+      "existing_GRQFT_4D_Israel_Kottler": "DASHI/Physics/Foundations/GRQFTIsraelBranchMaxCutExact.agda",
+      "existing_Jordan_radion_fifth_force": "scripts/check_kk_jordan_sourced_sphere.py; radion mass external",
+      "existing_Monster_AdS3_and_high_dimension": "DASHI/Physics/Closure/MonsterGravityAuthorityAndDimensionExact.agda",
+      "existing_clopen_and_pants": "DASHI/Topology/WormSoilPantsSheafBoundary.agda; DASHI/Topology/ClopenNDimFibreBoundary.agda",
+      "existing_p_adic_prefix": "DASHI/Geometry/SSP369ClopenBallBridge.agda",
+      "existing_Levin": "DASHI/Biology/Levin/ProblemSpaceAgency.agda",
+      "source_owner_Agda_bridge": "DASHI/Physics/Gravity/KSW668BraneLevinStringTSFVPromotionBoundaryExact.agda",
+      "physical_same_object_equivalence_of_unrelated_geometry": false
+    },
+    "user_requested_endpoint_missing": {
+      "finite_total_energy_graviton_source_and_brane_receiver": true,
+      "fully_solved_sourced_TT_moving_Israel_boundary": true,
+      "self_gravitating_all_mode_nonlin_stability": true,
+      "physically_scaled_GW_EM_delay_and_laboratory_fifth_force_constraints": true,
+      "independently_measured_transport": true,
+      "original_Agda_2p9_kernel_replay": true
+    },
+    "local_verification_scope": "Independent local SymPy/mpmath/fractions exact source-equivalent replays PASS; previous five-check source bundle rerun PASS. Exact current GitHub PR-head scripts and Agda/Nix NOT run.",
+    "claim_conclusion": "Causal scalar test-receiver and nontrivial self-gravitating AdS5/Israel bulk shortcut have separate carriers; their same physical graviton/emitter/receiver merger remains OPEN."
   }
 }
