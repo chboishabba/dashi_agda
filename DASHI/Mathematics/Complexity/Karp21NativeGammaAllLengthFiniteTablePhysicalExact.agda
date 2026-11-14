@@ -40,7 +40,6 @@ import DASHI.Mathematics.Complexity.FiniteWordSizeExact as Word
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryNativePayloadExact as Gamma
 import DASHI.Mathematics.Complexity.Karp21GammaBinaryGoldenCoreExact as Original
 import DASHI.Mathematics.Complexity.Karp21NativeBitTapePhysicalMachineExact as Tape
-import DASHI.Mathematics.Complexity.Karp21NativeGammaOneBitPayloadPhysicalExact as K1
 
 firstState : Fin.Fin 3
 firstState = Fin.zero
@@ -101,19 +100,22 @@ rejectMarker =
   Tape.instruction payloadState Tape.Mark Tape.stay
     (Tape.Mark Vec.∷ Vec.[]) (Tape.stay Vec.∷ Vec.[]) true
 
+constantWorkRow : Tape.Instruction 3 1 → Tape.FourChoices (Tape.Instruction 3 1)
+constantWorkRow ins = Tape.four ins ins ins ins
+
 firstRow : Tape.FourChoices (Tape.FourChoices (Tape.Instruction 3 1))
 firstRow = Tape.four
-  (K1.constantWorkRow prefixZero)
-  (K1.constantWorkRow firstSeparator)
-  (K1.constantWorkRow rejectBlank)
-  (K1.constantWorkRow rejectMarker)
+  (constantWorkRow prefixZero)
+  (constantWorkRow firstSeparator)
+  (constantWorkRow rejectBlank)
+  (constantWorkRow rejectMarker)
 
 zerosRow : Tape.FourChoices (Tape.FourChoices (Tape.Instruction 3 1))
 zerosRow = Tape.four
-  (K1.constantWorkRow prefixZero)
-  (K1.constantWorkRow laterSeparator)
-  (K1.constantWorkRow rejectBlank)
-  (K1.constantWorkRow rejectMarker)
+  (constantWorkRow prefixZero)
+  (constantWorkRow laterSeparator)
+  (constantWorkRow rejectBlank)
+  (constantWorkRow rejectMarker)
 
 payloadRow : Tape.FourChoices (Tape.FourChoices (Tape.Instruction 3 1))
 payloadRow = Tape.four
