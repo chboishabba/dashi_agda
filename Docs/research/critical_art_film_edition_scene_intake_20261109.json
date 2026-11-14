@@ -1,0 +1,38 @@
+{
+  "schema": "dashi.critical_art.edition_scene_intake.v1",
+  "status": "candidate_only_no_original_film_bytes_or_independent_review_receipts",
+  "works": [
+    {
+      "id": "leon_1994",
+      "title": "Léon: The Professional",
+      "film_original_creators": "Luc Besson and credited production collaborators",
+      "publication_year": 1994,
+      "editions": [],
+      "claims": []
+    },
+    {
+      "id": "dont_look_up_2021",
+      "title": "Don't Look Up",
+      "film_original_creators": "Adam McKay and credited production collaborators",
+      "publication_year": 2021,
+      "editions": [],
+      "claims": []
+    },
+    {
+      "id": "planet_of_the_humans_2020",
+      "title": "Planet of the Humans",
+      "film_original_creators": "Jeff Gibbs and credited production collaborators",
+      "publication_year": 2020,
+      "editions": [],
+      "claims": []
+    }
+  ],
+  "no_promotion": [
+    "A cut-specific scene quotation must have actual source bytes and source offsets/timecodes.",
+    "Source file SHA256 is NOT proof of rights or independent reviewer agreement.",
+    "A critic's original claim is not an audience effect or author intent.",
+    "A Peircean triangle is not identical by definition to character/film/spectator.",
+    "An unreviewed film scene remains unresolved even when a synthetic model can be proved.",
+    "Reviewers and original creators retain their respective original attribution."
+  ]
+}

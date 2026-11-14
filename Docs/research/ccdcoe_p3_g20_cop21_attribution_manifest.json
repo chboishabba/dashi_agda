@@ -1,0 +1,537 @@
+{
+  "schema": "dashi.ccdcoe.p3.g20_cop21_attribution.v1",
+  "name": "Four-event G20-COP21 sequence with multi-voice C20/B20 source comparison",
+  "source_selection_note": "Small purposive corpus of original adopted summit/UNFCCC text and stakeholder source locators, not a census or causal experiment",
+  "source_original_owners": "G20 leaders 2014/2015/2017, UNFCCC COP21 Parties 2015, C20 Turkey 2015 and B20 Turkey 2015 retain authorship; Harrison retains PR firm authorship. No endorsement of DASHI inferred.",
+  "mathematical_prior_owner": "DASHI.Core.IntersectionalNonFactorability; DASHI.Core.DiscriminatorSynthesisExact",
+  "new_DASHI_instantiation": "DASHI.Cognition.CCDCOEP3G20COP21AttributionExact",
+  "documents": [
+    {
+      "id": "brisbane2014",
+      "author": "G20 leaders",
+      "speech_act": "leaders_adopted",
+      "event_date": "2014-11-16",
+      "date_exact": true,
+      "url": "https://g20.utoronto.ca/2014/2014-1116-communique.html",
+      "locator": "communique_paragraph_19",
+      "evidence": "primary_source_text_web_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "antalya2015",
+      "author": "G20 leaders",
+      "speech_act": "leaders_adopted",
+      "event_date": "2015-11-16",
+      "date_exact": true,
+      "url": "https://g20.org.tr/g20-leaders-commenced-the-antalya-summit/index.html",
+      "locator": "communique_paragraph_24",
+      "evidence": "primary_source_text_web_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "parisDecision2015",
+      "author": "UNFCCC COP21 Parties",
+      "speech_act": "treaty_adoption_decision",
+      "event_date": "2015-12-12",
+      "date_exact": true,
+      "url": "https://unfccc.int/files/home/application/pdf/decision1cp21.pdf",
+      "locator": "decision_1_CP_21",
+      "evidence": "pdf_source_index_and_excerpt_web_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "parisArticle4",
+      "author": "Paris Agreement Parties",
+      "speech_act": "treaty_legal_obligation",
+      "event_date": "2015-12-12",
+      "date_exact": true,
+      "url": "https://unfccc.int/process-and-meetings/the-paris-agreement/nationally-determined-contributions-ndcs",
+      "locator": "agreement_article_4_paragraph_2",
+      "evidence": "official_UNFCCC_explanatory_page_quote_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "hamburgUS2017",
+      "author": "United States position recorded by G20 leaders",
+      "speech_act": "explicit_dissent",
+      "event_date": "2017-07-08",
+      "date_exact": true,
+      "url": "https://g20.utoronto.ca/2017/2017-G20-leaders-declaration.html",
+      "locator": "climate_and_energy",
+      "evidence": "primary_source_text_web_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "hamburgOtherLeaders2017",
+      "author": "Other G20 leaders excluding the US",
+      "speech_act": "leaders_adopted_excluding_US",
+      "event_date": "2017-07-08",
+      "date_exact": true,
+      "url": "https://g20.utoronto.ca/2017/2017-G20-leaders-declaration.html",
+      "locator": "climate_and_energy",
+      "evidence": "primary_source_text_web_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "c20Turkey2015",
+      "author": "Civil 20 Turkey participant organisations",
+      "speech_act": "civil_society_recommendation",
+      "event_date": "2015-09-16",
+      "date_exact": true,
+      "url": "https://g20.utoronto.ca/c20/2015-C20%20Turkey%20Communique_FINAL_16.09.15.pdf",
+      "locator": "background_and_sustainability",
+      "evidence": "pdf_primary_text_excerpt_and_first_page_visually_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "day"
+    },
+    {
+      "id": "b20Turkey2015",
+      "author": "Business 20 Turkey taskforces",
+      "speech_act": "business_recommendation",
+      "event_date": null,
+      "date_exact": false,
+      "url": "https://g20.utoronto.ca/b20/index.html",
+      "locator": "2015_B20_Turkey_documents_index",
+      "evidence": "catalog_index_only_original_submission_not_reviewed",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "unverified_original_date"
+    },
+    {
+      "id": "gccHarrison",
+      "author": "E. Bruce Harrison Company",
+      "speech_act": "agency_self_report",
+      "event_date": null,
+      "date_exact": false,
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/one-pager-from-e-bruce-harrisons-pr-company-undated/",
+      "locator": "undated_company_case_history",
+      "evidence": "agency_self_account_original_date_unknown",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null,
+      "date_precision": "unverified_original_date"
+    },
+    {
+      "id": "g20EnergyMinisters2015",
+      "author": "G20 Energy Ministers",
+      "speech_act": "ministerial_communique",
+      "event_date": "2015-10-02",
+      "date_exact": true,
+      "date_precision": "day",
+      "url": "https://www.g20.utoronto.ca/2015/151002-energy.html",
+      "locator": "ministerial_communique_climate_change_paragraph_11",
+      "evidence": "original_2015_energy_ministers_html_source_text_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null
+    },
+    {
+      "id": "b20EnergyForum2015",
+      "author": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "speech_act": "business_forum_recommendation",
+      "event_date": "2015-10-12",
+      "date_exact": true,
+      "date_precision": "day",
+      "url": "https://g20.utoronto.ca/b20/B20-Energy-Forum-Statement-121015-final1.pdf",
+      "locator": "2015_B20_energy_forum_statement_recommendations_1_to_5",
+      "evidence": "original_primary_pdf_excerpts_read_and_cover_visually_verified",
+      "raw_sha256": null,
+      "review_receipt": null,
+      "attribution_from_document_only": true,
+      "source_endorses_DASHI": false,
+      "independent_actor_policy_transmission": null
+    }
+  ],
+  "bounded_claims": [
+    {
+      "id": "brisbane_growth",
+      "source": "brisbane2014",
+      "anchor": "our actions will support sustainable development, economic growth, and certainty for business and investment",
+      "frame": "economic_growth_investment",
+      "action": "adopted_communicated_position",
+      "speaker": "G20 leaders",
+      "source_type": "leaders_adopted"
+    },
+    {
+      "id": "brisbane_cop21",
+      "source": "brisbane2014",
+      "anchor": "at the 21st Conference of the Parties (COP21) in Paris in 2015",
+      "frame": "prospective_legal_agreement",
+      "action": "agreed_future_negotiation_intent",
+      "speaker": "G20 leaders",
+      "source_type": "leaders_adopted"
+    },
+    {
+      "id": "antalya_paris",
+      "source": "antalya2015",
+      "anchor": "Paris agreement should be fair, balanced, ambitious, durable and dynamic",
+      "frame": "ambitious_legal_agreement",
+      "action": "agreed_future_negotiation_intent",
+      "speaker": "G20 leaders",
+      "source_type": "leaders_adopted"
+    },
+    {
+      "id": "antalya_cbd",
+      "source": "antalya2015",
+      "anchor": "common but differentiated responsibilities and respective capabilities",
+      "frame": "equity_differentiation",
+      "action": "adopted_communicated_position",
+      "speaker": "G20 leaders",
+      "source_type": "leaders_adopted"
+    },
+    {
+      "id": "paris_adoption",
+      "source": "parisDecision2015",
+      "anchor": "Adoption of the Paris Agreement",
+      "frame": "formal_adoption",
+      "action": "adoption_decision",
+      "speaker": "UNFCCC COP21 Parties",
+      "source_type": "treaty_adoption_decision"
+    },
+    {
+      "id": "paris_ndc",
+      "source": "parisArticle4",
+      "anchor": "Each Party shall prepare, communicate and maintain successive nationally determined contributions",
+      "frame": "legal_ndc_procedural_duty",
+      "action": "legal_obligation",
+      "speaker": "Paris Agreement Parties",
+      "source_type": "treaty_legal_obligation"
+    },
+    {
+      "id": "hamburg_us",
+      "source": "hamburgUS2017",
+      "anchor": "decision of the United States of America to withdraw from the Paris Agreement",
+      "frame": "us_withdrawal_position",
+      "action": "position_recorded",
+      "speaker": "United States position recorded by G20 leaders",
+      "source_type": "explicit_dissent"
+    },
+    {
+      "id": "hamburg_other",
+      "source": "hamburgOtherLeaders2017",
+      "anchor": "The Leaders of the other G20 members state that the Paris Agreement is irreversible",
+      "frame": "paris_continuity",
+      "action": "adopted_communicated_position",
+      "speaker": "Other G20 leaders excluding the US",
+      "source_type": "leaders_adopted_excluding_US"
+    },
+    {
+      "id": "c20_voice",
+      "source": "c20Turkey2015",
+      "anchor": "integrating inclusive growth, gender equality, sustainability",
+      "frame": "civil_participation_and_sustainability",
+      "action": "stakeholder_recommendation_only",
+      "speaker": "Civil 20 Turkey participant organisations",
+      "source_type": "civil_society_recommendation",
+      "source_locator_note": "C20 Turkey 2015 communiqué, summary recommendation paragraph; authored by C20 participant organisations, not leaders."
+    },
+    {
+      "id": "b20_index",
+      "source": "b20Turkey2015",
+      "anchor": null,
+      "frame": "unreviewed_business_recommendations",
+      "action": "source_index_only",
+      "speaker": "Business 20 Turkey taskforces",
+      "source_type": "business_recommendation"
+    },
+    {
+      "id": "ministers_clean",
+      "source": "g20EnergyMinisters2015",
+      "anchor": "improving energy efficiency and increasing investments in clean energy technologies",
+      "frame": "clean_energy_investment",
+      "action": "ministerial_adopted_communique",
+      "speaker": "G20 Energy Ministers",
+      "source_type": "ministerial_communique"
+    },
+    {
+      "id": "ministers_cop21",
+      "source": "g20EnergyMinisters2015",
+      "anchor": "we are working together to achieve a positive and balanced outcome at COP 21",
+      "frame": "prospective_cop21_ambition",
+      "action": "ministerial_adopted_communique",
+      "speaker": "G20 Energy Ministers",
+      "source_type": "ministerial_communique"
+    },
+    {
+      "id": "b20_carbon_pricing",
+      "source": "b20EnergyForum2015",
+      "anchor": "Implement predictable international carbon pricing to enhance investor confidence",
+      "frame": "carbon_price_investment",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
+    },
+    {
+      "id": "b20_participation",
+      "source": "b20EnergyForum2015",
+      "anchor": "Establish formal B20 representation to the G20 Energy Sustainability Working Group",
+      "frame": "institutional_business_access",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
+    },
+    {
+      "id": "b20_subsidies",
+      "source": "b20EnergyForum2015",
+      "anchor": "Rationalise and phase-out inefficient energy subsidies",
+      "frame": "fossil_subsidy_reform",
+      "action": "business_forum_recommendation_only",
+      "speaker": "B20 Energy Forum participants and G20-B20 interaction participants",
+      "source_type": "business_forum_recommendation"
+    }
+  ],
+  "primary_results": [
+    {
+      "claim": "2014-2015 G20 economic-growth / climate-cooperation and Paris pre-negotiation frames documented",
+      "classification": "original_institutional_language",
+      "not_claimed": "GCC or Exxon direct authorship"
+    },
+    {
+      "claim": "Paris Article 4.2 imposes NDC prepare/communicate/maintain obligations",
+      "classification": "treaty_legal_duty",
+      "not_claimed": "binding attainment of every stated national emissions target"
+    },
+    {
+      "claim": "2017 Hamburg explicitly distinguishes US position from the other G20 leaders",
+      "classification": "within_document_actor_scope_difference",
+      "not_claimed": "uniform G20 opposition or uniform support"
+    },
+    {
+      "claim": "2015 C20 civil-society recommendations distinct from B20 source catalog and adopted G20 position",
+      "classification": "proposals_not_adoptions",
+      "not_claimed": "C20 or B20 causal influence without drafting/negotiation bridge"
+    }
+  ],
+  "admission_guards": {
+    "source_speaker_identity": true,
+    "quoted_text_remains_original_source_authorship": true,
+    "no_implied_author_endorsement": true,
+    "cross_document_semantic_match_is_not_direct_causal_link": true,
+    "source_citation_is_not_independent_attribution": true,
+    "national_circumstances_are_not_individual_opinion_measurements": true,
+    "unreviewed_business_submissions_cannot_be_frame_coded": true,
+    "paris_adoption_is_not_policy_implementation": true,
+    "international_legal_duty_is_not_completed_target": true,
+    "same_object_actor_to_negotiator_or_decision_trail": null,
+    "financial_or_lobbying_direct_receipt": null,
+    "emissions_impact": null,
+    "paris_adoption_date_is_not_entry_into_force": true,
+    "us_announced_withdrawal_is_not_2017_effective_treaty_withdrawal": true,
+    "earlier_ministerial_text_not_caused_by_later_B20_statement": true,
+    "speaker_presence_not_clause_authorship": true,
+    "iea_oecd_icc_inputs_not_entire_policy_endorsement": true
+  },
+  "status": {
+    "original_official_pages_located": true,
+    "official_pdf_excerpt_reviewed": true,
+    "web_citation_source_status": "public text reviewed, no immutable bytes or local parser receipt",
+    "agda_source_written": true,
+    "agda_kernel_accepted": false,
+    "validation_script_runtime_accepted": false,
+    "full_original_document_corpus_hashed": false,
+    "quantitative_institutional_diff_in_diff": false,
+    "summit_causal_influence_identified": false,
+    "c20_visual_check": "Original C20 PDF cover screenshot inspected, printed text excerpt inspected; original PDF bytes not archived; exact extracted full text not re-coded",
+    "b20_source_status": "Original B20 Energy Forum 12 Oct 2015 primary PDF source text and cover inspected; B20 September recommendations remain index-only",
+    "c20_anchor_specificity": "substantive original C20 recommendation phrase, not the generic repeated 'C20 calls upon G20 leaders' prefix",
+    "published_selected_commitment_compliance_observations_located": true,
+    "b20_original_primary_pdf_excerpt_reviewed": true,
+    "targeted_github_consistency_audit": "27 of 27 static schema/source-owner/wiring checks passed on 2026-11-08; not Python execution or Agda kernel",
+    "source_authority_vs_implementation": "original external authorship preserved; DASHI selected instantiation only"
+  },
+  "remaining": [
+    {
+      "gate": "I0",
+      "target": "Byte-archived official source PDFs/HTML and signed source-revision hashes, exact chapter/paragraph offsets",
+      "status": "OFFICIAL_ORIGINAL_TEXT_LOCATED_ORIGINAL_BYTE_HASH_REVIEW_OPEN"
+    },
+    {
+      "gate": "I1",
+      "target": "Full G20, COP21, B20 and C20 corpus coded under source-specific consistent unit and reliability",
+      "status": "15_PURPOSIVELY_SELECTED_CLAIMS_SOURCE_ATTRIBUTED_FULL_CENSUS_OPEN"
+    },
+    {
+      "gate": "I2",
+      "target": "Trace concrete dated submissions and drafting revisions into adopted G20/COP text; no semantic-only promotion",
+      "status": "MINISTERS_B20_LEADERS_COP_CHRONOLOGY_VERIFIED_DIRECT_DRAFT_TRANSMISSION_OPEN"
+    },
+    {
+      "gate": "I3",
+      "target": "Join country-specific implementation, NDC and G20 compliance records with legal-time scopes",
+      "status": "ORIGINAL_G20RG_SELECTED_COMPLIANCE_OBSERVATIONS_REGISTERED_MEMBER_NDC_JOIN_OPEN"
+    },
+    {
+      "gate": "I4",
+      "target": "Causal identification design with alternative speakers, trends, events and interference, and uncertainty",
+      "status": "CAUSAL_EFFECT_NOT_IDENTIFIED"
+    },
+    {
+      "gate": "I5",
+      "target": "Independent replication and institution/voice/power/consent review; Golden Agda kernel receipt",
+      "status": "GOLDEN_SOURCE_WRITTEN_KERNEL_AND_EXTERNAL_REPLICATION_OPEN"
+    }
+  ],
+  "legal_temporal_scope": {
+    "paris_adoption": "2015-12-12",
+    "paris_treaty_entry_into_force": "2016-11-04",
+    "article_4_treaty_obligation_applies_to": "Parties under the operative Agreement; adopted text in 2015 is not itself proof the treaty entered into force on adoption",
+    "hamburg_2017_us_statement": "2017-07-08 announcement/position recorded in Leaders Declaration, NOT effective legal withdrawal that day",
+    "hamburg_2017_other_parties": "other G20 leaders maintained support and said the Paris Agreement was irreversible",
+    "source": "https://treaties.un.org/pages/viewdetails.aspx?chapter=27&mtdsg_no=xxvii-7-d&src=ind",
+    "legally_operational_NDC_obligations_verified_against": "UNFCCC article 4.2 treaty language and UN Treaty Collection entry into force dates",
+    "no_assumption_of_country_specific_legal_or_emissions_compliance": true
+  },
+  "independent_compliance_studies": [
+    {
+      "id": "brisbane2014_final_G20RG",
+      "authors": "Krystel Montpetit, Theodora Mladenova, Mickael Deprez, Jonathan Tavone, Phil Gazaleh, Taylor Grott, Antonia Tsapralis (G20 Research Group), with Andrei Sakharov, Andrey Shelepov, Mark Rakhmangulov (IORI HSE)",
+      "source_url": "https://www.g20.utoronto.ca/compliance/2014brisbane-final/index.html",
+      "publication_date": "2015-11-12",
+      "evaluation_start": "2014-11-16",
+      "evaluation_end": "2015-10-01",
+      "total_summit_commitments": 205,
+      "selected_monitored_commitments": 17,
+      "method": "G20 Research Group -1/0/+1 source-coded selected-commitment compliance, presented as P=50*(S+1)",
+      "scores": [
+        {
+          "topic": "climate_change",
+          "reported_score_hundredths": 10,
+          "reported_percent": 55
+        },
+        {
+          "topic": "clean_energy_technology",
+          "reported_score_hundredths": 90,
+          "reported_percent": 95
+        },
+        {
+          "topic": "fossil_fuel_subsidies",
+          "reported_score_hundredths": -45,
+          "reported_percent": 28
+        }
+      ],
+      "full_original_member_level_reanalysis": false,
+      "original_evaluators_endorse_DASHI": false,
+      "independently_proven_emissions_effect": null
+    },
+    {
+      "id": "antalya2015_final_G20RG",
+      "authors": "Sarah Scott, Alissa Wang and the G20 Research Group, with Mark Rakhmangulov and the Center for International Institutions Research (RANEPA)",
+      "source_url": "https://g20.utoronto.ca/compliance/2015antalya-final/index.html",
+      "publication_date": "2016-09-03",
+      "revision_date": "2016-12-10",
+      "evaluation_start": "2015-11-16",
+      "evaluation_end": "2016-09-05",
+      "total_summit_commitments": 113,
+      "selected_monitored_commitments": 17,
+      "method": "G20 Research Group -1/0/+1 selected-commitment compliance; revision post original publication",
+      "scores": [
+        {
+          "topic": "fossil_fuel_subsidies",
+          "reported_score_hundredths": -35,
+          "reported_percent": 33
+        }
+      ],
+      "full_original_member_level_reanalysis": false,
+      "original_evaluators_endorse_DASHI": false,
+      "independently_proven_emissions_effect": null
+    }
+  ],
+  "compliance_scope_guard": {
+    "independent_secondary_source_not_original_G20_leaders": true,
+    "source_authorship_distinct_from_original_communique": true,
+    "one_selected_commitment_per_scored_topic": true,
+    "no_extrapolation_to_all_205_or_113_commitments": true,
+    "no_normalised_country_pooled_causal_comparison": true,
+    "different_periods_and_criteria_remain_explicit": true,
+    "fossil_subsidy_comparison_is_two_reported_scored_results_not_treatment_effect": true,
+    "emissions_change_inferred": null,
+    "original_author_endorsement_inferred": false,
+    "published_rounded_percentages_not_independent_recomputed": true
+  },
+  "b20_event_attribution": {
+    "document_id": "b20EnergyForum2015",
+    "original_date": "2015-10-12",
+    "identified_preparation_scope": "B20 Energy Forum participants and participants at G20-B20 interaction event during G20 Energy Ministers meeting on 2 October 2015, with inputs from IEA, OECD, ICC and 2015 B20 Infrastructure and Investment Taskforce",
+    "named_source_inputs": [
+      "International Energy Agency",
+      "Organisation for Economic Co-operation and Development",
+      "International Chamber of Commerce",
+      "B20 Infrastructure and Investment Taskforce"
+    ],
+    "document_annex_named_event_speakers": [
+      "Bud Fackrell (BP Turkey)",
+      "Hakan Turker (BP Turkey)",
+      "Howard Chase (Dow Chemical)",
+      "Mick Buffier (Glencore / World Coal Association)"
+    ],
+    "event_participation_does_not_prove_individual_clause_authorship": true,
+    "source_input_does_not_mean_institutional_endorsement_of_all_recommendations": true,
+    "business_participants_are_not_summit_leaders": true,
+    "october_12_submission_cannot_cause_october_2_ministerial_text": true,
+    "historically_confirmed_same_actor_to_November_G20_drafting": null,
+    "speaker_specific_quotation_origin_identified": null
+  },
+  "ordered_source_events": [
+    {
+      "date": "2015-10-02",
+      "source": "g20EnergyMinisters2015",
+      "stage": "ministerial_communique"
+    },
+    {
+      "date": "2015-10-12",
+      "source": "b20EnergyForum2015",
+      "stage": "business_forum_recommendation"
+    },
+    {
+      "date": "2015-11-16",
+      "source": "antalya2015",
+      "stage": "leaders_communique"
+    },
+    {
+      "date": "2015-12-12",
+      "source": "parisDecision2015",
+      "stage": "COP_adoption"
+    }
+  ]
+}

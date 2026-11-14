@@ -1,0 +1,140 @@
+{
+  "schema": "dashi.ccdcoe.p3.gcc1993_claim_level_protocol.v1",
+  "version": "2026-11-09",
+  "purpose": "Assess historical communication-frame selection without presuming editorial intent, cognitive effect, or cognitive warfare.",
+  "attribution": {
+    "original_reporting": "Boyce Rensberger, The Washington Post (1993)",
+    "original_scientific_reply": "James E. Hansen, The Washington Post letter (8 June 1993)",
+    "original_gcc_communications": "John Shlaes/Global Climate Coalition, 30 June response; GCC Climate Watch Vol 1 Issue 9",
+    "archival_description": "Climate Files/Climate Investigations Center",
+    "theoretical_perspectives": "Retain individual original author ownership (Peirce, Hall, Mulvey, Barthes, etc.) when directly cited; none are co-authors of this coding protocol.",
+    "formal_method": "DASHI CCDCOE P3 source-indexed mechanism discrimination and selective reopening; not a substitute for empirical validation."
+  },
+  "original_objects": [
+    {
+      "id": "rensberger_original",
+      "source_kind": "publisher_rendered_primary",
+      "analysis_eligible": true,
+      "byte_verified": false
+    },
+    {
+      "id": "hansen_original_correction",
+      "source_kind": "publisher_rendered_primary",
+      "analysis_eligible": true,
+      "byte_verified": false
+    },
+    {
+      "id": "gcc_june_response",
+      "source_kind": "archival_catalogue_of_uninspected_original",
+      "analysis_eligible": false,
+      "byte_verified": false
+    },
+    {
+      "id": "gcc_september_bulletin",
+      "source_kind": "archival_catalogue_of_uninspected_original",
+      "analysis_eligible": false,
+      "byte_verified": false
+    }
+  ],
+  "unit_of_analysis": "An original bounded passage, with exact source, edition, stable text range and independently established original author/quoted speaker. Media item != quotation != exposure.",
+  "dimensions": {
+    "uncertainty": {
+      "codes": [
+        "acknowledged_with_bounds",
+        "emphasised_without_bounds",
+        "minimised",
+        "not_addressed",
+        "undeterminable"
+      ],
+      "rule": "Only code how uncertainty is expressed in cited passages, not whether the scientific claim is correct; source quote attribution must remain distinct from reporter framing."
+    },
+    "scientific_voice": {
+      "codes": [
+        "named_supported",
+        "named_disputed",
+        "unnamed_consensus",
+        "unnamed_dissensus",
+        "not_addressed",
+        "undeterminable"
+      ],
+      "rule": "Identifies credited speaker and whether source text includes a response or competing interpretation. Multiple voices require separate units."
+    },
+    "risk_time_horizon": {
+      "codes": [
+        "short_term",
+        "long_term",
+        "both",
+        "unstated",
+        "undeterminable"
+      ],
+      "rule": "Do not infer risk horizon from positive/negative valence alone."
+    },
+    "responsibility": {
+      "codes": [
+        "institutional",
+        "individual",
+        "collective",
+        "undistributed",
+        "not_addressed",
+        "undeterminable"
+      ],
+      "rule": "Code explicit responsibility assignment only."
+    },
+    "agency": {
+      "codes": [
+        "enables_revision",
+        "closes_revision",
+        "neutral_procedural",
+        "not_addressed",
+        "undeterminable"
+      ],
+      "rule": "Textual invitation for epistemic revision; NOT actual audience capacity or behaviour."
+    },
+    "selective_reuse": {
+      "codes": [
+        "verbatim_contextual",
+        "verbatim_decontextualised",
+        "paraphrase_contextual",
+        "paraphrase_decontextualised",
+        "referenced_without_passage",
+        "not_reused",
+        "undeterminable"
+      ],
+      "rule": "Requires both original passage and independently reviewed derivative original text; archival summary alone must be undeterminable."
+    }
+  },
+  "coder_protocol": {
+    "independent_blind_coders": 2,
+    "allowed_stage_for_real_coding": "verified_original_passage",
+    "coder_reference_required": true,
+    "passage_hash_required": true,
+    "source_offset_required": true,
+    "no_inferred_nonmentions_from_missing_PDF": true,
+    "adjudication": "Keep initial independent scores, adjudicated score and disagreement/residual separately; never erase previous observations.",
+    "reliability": "Report raw agreement and Cohen kappa for each dimension; if expected agreement=1, report kappa null and insufficient variation, never convert to 1.",
+    "sample": "Predeclare full eligible source-item frame and selection denominator; archive clippings do not constitute exhaustive outlet sample."
+  },
+  "comparison_design": {
+    "primary_contrast": "Rensberger's attributed original article vs original GCC 30 June communication and Sep bulletin if independently reviewed",
+    "negative_controls": [
+      "Hansen original 8 June rebuttal already public before 30 June GCC communication: availability != GCC knowledge.",
+      "Original article precedes 30 June GCC response, which cannot cause that earlier article.",
+      "Reporter and quoted scientists are separate voices and source authors.",
+      "Later GCC bulletin highlighting an article establishes secondary reference, not original news placement."
+    ],
+    "rival_explanations": [
+      "issue_attention_cycle",
+      "other_scientific_reports",
+      "independent_journalistic_choice",
+      "routine_advocacy",
+      "selection_into_archived_materials",
+      "media_market_trends"
+    ],
+    "required_causal_design": "Original distribution/exposure, baseline, controls and sensitivity; source-only comparisons cannot identify audience belief change.",
+    "intent_standard": "Separate original attribution, targeting, coordination and alleged hostile objective from evidence of selective messaging."
+  },
+  "admitted_original_passages": [],
+  "independent_coder_observations": [],
+  "causal_effect_estimates": [],
+  "status": "protocol_source_written_no_independently_reviewed_GCC_original_passages_no_human_response_dataset"
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "dashi.ccdcoe.p3.gcc1993_claim_comparison.v1",
+  "status": "source_graded_claim_comparison_not_causal_estimate",
+  "attribution": "Boyce Rensberger retains authorship of the original reporting; James E. Hansen retains authorship of his independent corrective letter; John Shlaes and the Global Climate Coalition retain authorship of later GCC communications; Climate Files owns the archival summaries. DASHI owns only provenance classification and formal comparison.",
+  "objects": [
+    {
+      "id": "rensberger_original",
+      "date": "1993-05-31",
+      "date_conflict": "publisher page says May 31; archive URL and Hansen letter say June 1",
+      "owner": "Boyce Rensberger",
+      "kind": "publisher_primary_rendered",
+      "url": "https://www.washingtonpost.com/archive/politics/1993/06/01/greenhouse-effect-seems-benign-so-far/af0c956a-8d96-4737-9750-43fcf898c0db/",
+      "source_observation": "Reporter foregrounds seemingly benign observed warming, while reporting Michaels' optimism and Hansen's qualified disagreement; both scientific voices are present.",
+      "framing_tags": [
+        "near_term_benign",
+        "scientific_disagreement",
+        "long_term_risk_discussed"
+      ],
+      "verified_authorial_awareness_of_future_sources": false,
+      "actual_audience_effect_verified": false
+    },
+    {
+      "id": "hansen_original_correction",
+      "date": "1993-06-08",
+      "owner": "James E. Hansen",
+      "kind": "publisher_primary_rendered",
+      "url": "https://www.washingtonpost.com/archive/opinions/1993/06/08/the-heat-is-still-on/8aa70284-cba2-47a6-8759-f4b6236bf53c/",
+      "source_observation": "Hansen disputes the article's benign impression; argues climate models remain substantially supported and risks persist, while discussing increased winter/night warming.",
+      "framing_tags": [
+        "explicit_corrective_response",
+        "long_term_risk",
+        "model_validity"
+      ],
+      "verified_authorial_awareness_of_future_sources": false,
+      "actual_audience_effect_verified": false
+    },
+    {
+      "id": "gcc_june_response",
+      "date": "1993-06-30",
+      "owner": "John Shlaes, Global Climate Coalition",
+      "kind": "archive_secondary_description_of_original_gcc_source",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-michaels-benign-greenhouse/",
+      "source_observation": "Archive says the GCC letter positively promotes Michaels' view reported in the earlier article and offers journalists Michaels' research; original PDF text not independently digested.",
+      "framing_tags": [
+        "selective_promotion_of_michaels",
+        "targeted_press_outreach"
+      ],
+      "verified_authorial_awareness_of_future_sources": false,
+      "actual_audience_effect_verified": false
+    },
+    {
+      "id": "gcc_september_bulletin",
+      "date": "1993-09-01",
+      "owner": "Global Climate Coalition",
+      "kind": "archive_secondary_description_of_original_gcc_source",
+      "url": "https://www.climatefiles.com/denial-groups/global-climate-coalition-collection/1993-climate-watch-vol-1-issue-9/",
+      "source_observation": "Archive summary identifies Volume 1 Issue 9 and a front-page item foregrounding Michaels and the reporter's uncertainty framing; original PDF text has not been independently digested.",
+      "framing_tags": [
+        "downstream_amplification",
+        "selective_promotion_of_michaels"
+      ],
+      "verified_authorial_awareness_of_future_sources": false,
+      "actual_audience_effect_verified": false
+    }
+  ],
+  "comparisons": [
+    {
+      "earlier": "rensberger_original",
+      "later": "hansen_original_correction",
+      "claim": "Explicit independently authored correction of the original newspaper impression",
+      "grade": "published_response",
+      "intentional_omission_verified": false,
+      "causal_uptake_verified": false
+    },
+    {
+      "earlier": "rensberger_original",
+      "later": "gcc_june_response",
+      "claim": "GCC promoted one published scientific interpretation to reporters",
+      "grade": "archival_description_of_secondary_promotion",
+      "intentional_omission_verified": false,
+      "causal_uptake_verified": false
+    },
+    {
+      "earlier": "hansen_original_correction",
+      "later": "gcc_june_response",
+      "claim": "Original independent correction was publicly available before GCC response; no original proof that GCC authors had read it",
+      "grade": "time_order_negative_control_only",
+      "intentional_omission_verified": false,
+      "causal_uptake_verified": false
+    },
+    {
+      "earlier": "gcc_june_response",
+      "later": "gcc_september_bulletin",
+      "claim": "Two later GCC documents drawing on previously published reporting; no demonstrated editorial dependency between the two GCC items",
+      "grade": "chronological_comparison_only",
+      "intentional_omission_verified": false,
+      "causal_uptake_verified": false
+    }
+  ],
+  "missing": [
+    "Original GCC PDF bytes + independent passage review",
+    "Complete September bulletin content and countervailing scientific quotations",
+    "Dated recipients and authenticated distribution records",
+    "Representative pre/post content sample and blinded coder reliability",
+    "Causal controls and independent audience responses",
+    "Independent evidence of strategic hostile intent, coordination and targeting"
+  ]
+}
