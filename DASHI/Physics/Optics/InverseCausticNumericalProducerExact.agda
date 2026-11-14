@@ -22,7 +22,7 @@ import DASHI.Physics.Optics.CausticFreeformSourceAtlasExact as Sources
 record ResidualAlgebra (Scalar : Set) : Set₁ where
   constructor residual-algebra
   field
-    zero : Scalar
+    zeroScalar : Scalar
     _≤_ : Scalar → Scalar → Set
 
 open ResidualAlgebra public
