@@ -69,6 +69,15 @@ pycheck "$AGDA_ROOT" check_ym_r445_weighted_exterior_influence.py
 pycheck "$AGDA_ROOT" check_ym_r445_interacting_transfer_contraction_20261114.py
 pycheck "$AGDA_ROOT" check_karp21_literal_gamma_allwords_20261114.py
 pycheck "$AGDA_ROOT" check_ns_r853_quadratic_lie_derivative_20261114.py
+# R734 physical no-go and R856 optimal scalar source: independent exact
+# SymPy/Fraction math only; these do NOT validate the PDE continuation.
+pycheck "$AGDA_ROOT" check_clay_source_r855_wilson_locality_20261115.py
+(cd "$AGDA_ROOT" && python3 -m pytest -q \
+  tests/test_ns_r734_pure_plus_physical_w2_no_go.py \
+  tests/test_ns_r734_critical_small_data.py \
+  tests/test_ns_r734_critical_residence.py)
+echo "NS_R734_PHYSICAL_W2_NO_GO: known universal leaf invalid; R855 scalar only"
+
 pycheck "$AGDA_ROOT" check_bishop_eta_all_cutoffs_maxcut_20261114.py
 pycheck "$AGDA_ROOT" check_bishop_natlog_two_sided_dyadic_20261114.py
 pycheck "$LEAN_ROOT" check_bsd_q2_eight_squareclasses_20261114.py
@@ -108,10 +117,12 @@ fi
 (cd "$AGDA_ROOT" && RH_LEAN_REPO_DIR="$LEAN_ROOT" bash scripts/check_rh_a2_g3_attachment_local.sh)
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda)
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda)
+(cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Physics/Closure/NSTriadKNR650Rational345OptimalEnvelopeRound856Exact.agda)
 (cd "$LEAN_ROOT" && lake env lean Integration/OpenAIMath/ClayCrosswalkLeanSourceRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/ClaySixFrontierRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean)
+(cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR855SharpRealTimeConditionalExact.lean)
 
 echo "SOURCE_KERNEL_TARGETS_PASSED: review transitive axioms, --safe, golden pinned toolchains"
 echo "OPEN: original physical Wilson RG/E1/D1, bit-TM F3/F4/NP, BSD H1/Sha, NS flow, eta uniform, RH actual zeros."
