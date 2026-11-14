@@ -67,8 +67,8 @@ private
 originalBiologicalIsotopeReactionCausalResidual :
   ∀ {r : Level} {F : C3.RealField r}
     (initial uptake production clearance : C3.Carrier F) →
-  reconstructNuclearResidual
-    (observedIsotopeAmount initial uptake production clearance)
+  reconstructNuclearResidual {F = F}
+    (observedIsotopeAmount {F = F} initial uptake production clearance)
     initial uptake clearance
   ≡ production
 originalBiologicalIsotopeReactionCausalResidual {F = F}
