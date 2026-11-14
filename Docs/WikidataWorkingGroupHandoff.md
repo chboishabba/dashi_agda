@@ -66,6 +66,35 @@ This cross-pollinates a mature source-bound pattern from Alice Brown and collabo
 
 The source papers motivate explicit interpretation, context, missingness, participant/collective contestability and coordinate-wise epistemic authority. The Agda ontology theorems are DASHI-local extensions.
 
+## Community property-creation deliberation (Roszkowski 2024/2026)
+
+The focused working-group Agda root now imports
+`DASHI/Ontology/WikidataDeliberationGovernanceExact.agda`.
+Marcin Roszkowski's *Navigating change* (2024), DOI
+`10.1108/JD-01-2024-0008`, and his 2026 Wikimedia CEE conference
+presentation motivate the initiation, knowledge-work and closure stages.
+This research context is **not** a claim that those sources prove our Agda
+theorems or verify any particular Wikidata consensus.
+
+The new DASHI-local conditional `ClosureAdmission` preserves independent
+witness obligations for exact source/policy authentication, creator authority,
+creator/proposer separation, community consensus, historically applicable
+policy, and temporal rule compliance. Source anchors and decision records
+are evidence carriers, not an auto-edit licence. Positive support and
+counter-support remain independent, including the `bothObserved` and
+`neitherObserved` cases. The working-group regression imports the
+original `WikidataDiagnosticGovernanceExact` checker non-authority law.
+
+Physical consumers: SLR [PR #76](https://github.com/chboishabba/slr/pull/76)
+adds atomic S29/PG sidecar persistence with real canonical source byte/span
+reopening, and ITIR-suite [PR #70](https://github.com/chboishabba/ITIR-suite/pull/70)
+adds a candidate-only SLR input ABI and generic existing-Wiki-review linkage.
+Full attribution, the O/R/C/S/L/P/G/F frame, and *unpaid* kernel/physical
+acceptance are documented in [WikidataDeliberationGovernanceExact.md](WikidataDeliberationGovernanceExact.md).
+These changes do not alter JMD Lean attribution, original Peter/Ege methods,
+Rosario benchmark ownership, climate/Nat migration gates, or Wikidata
+community authority.
+
 ## Detection does not confer edit authority
 
 `WikidataDiagnosticGovernanceExact` uses the existing coordinate-wise `EpistemicInquiryGovernance` core.
