@@ -1,0 +1,29 @@
+module DASHI.Economics.AICapitalPhase2Acquisition20261016Validation where
+
+open import Agda.Builtin.Equality using (_≡_; refl)
+
+import DASHI.Economics.AICoreWeaveCreditDeterioration20261016Exact as Credit
+import DASHI.Economics.AIOpenAIPayerCashDeficit20261016Exact as OpenAI
+import DASHI.Economics.AIAustraliaOperativeAIPolicyBaseline20261016Exact as Policy
+import DASHI.Economics.AICoreWeaveSecondaryMarketResidualValue20261016Exact as Residual
+
+creditDefaultProbabilityRose : Credit.currentFiveYearDefaultProbabilityPct Credit.coreWeaveCreditTrajectory ≡ 64
+creditDefaultProbabilityRose = refl
+
+creditPriorProbabilityPinned : Credit.priorYearFiveYearDefaultProbabilityPct Credit.coreWeaveCreditTrajectory ≡ 30
+creditPriorProbabilityPinned = refl
+
+openAICumulativeNegativeFCFReported : OpenAI.reportedNegativeFCF2026to2030USDbn OpenAI.openAICashDeficitBoundary ≡ 278
+openAICumulativeNegativeFCFReported = refl
+
+openAISelfFundingStillOpen : OpenAI.coreWeavePaymentsProvedSelfFundedByOperatingCash OpenAI.openAICashDeficitBoundary ≡ false
+openAISelfFundingStillOpen = refl
+
+mandatoryGeneralGuardrailsNotProceeding : Policy.mandatoryGeneralGuardrailsProceeding Policy.currentAustralianOperativeAIPolicy ≡ false
+mandatoryGeneralGuardrailsNotProceeding = refl
+
+existingLawFoundationPaid : Policy.existingLawFoundation Policy.currentAustralianOperativeAIPolicy ≡ true
+existingLawFoundationPaid = refl
+
+commercialResidualProxyAlreadyPaid : Residual.currentSecondaryMarketExists Residual.h100ResidualObservation ≡ true
+commercialResidualProxyAlreadyPaid = refl
