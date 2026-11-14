@@ -1,0 +1,396 @@
+# Hydrogen-assisted combustion and carbon regeneration: maximum-cut ledger
+
+Date: 2026-11-09. Branch: `feat/hydrogen-fuel-cycle-maxcut-20261109`.
+
+## Attribution / authority
+
+- Existing DASHI theorem owners: `DASHI.Analysis.StoichiometricConservation`, `DASHI.Analysis.OpenSystemBalance`, `DASHI.Biology.Cell.MetabolicOpenSystemBalance`, `DASHI.Chemistry.TransitionKernel`, and `DASHI.Analysis.DissipationPathMonotonicity`.
+- Standard prior chemistry: water electrolysis; Sabatier methanation; hydrocarbon combustion. This chemistry is **not** credited as Michael McLaren's invention.
+- Michael David McLaren and related corporate statements are **claims/sources to investigate**, not authority for the mathematical balances. Patent title/inventorship is not inferred from company names or marketing.
+- User provided project direction and the source material. ChatGPT supplied the drafted implementation in this tranche; repository ownership and earlier proof authorship remain with their existing owners.
+- Static source writing, exact Agda kernel checking, independent experimental validation, and patent-chain verification remain distinct.
+
+## Formal module ownership
+
+1. `IndustrialReactiveEnergyBalanceExact`: carries the existing reaction-path conservation theorem into an industrial instance without reproving it; offers a bounded open-energy ledger, device-mode separation and evidence-class negative controls.
+2. `HydrogenFuelCycleExact`: literal balanced C/H/O equations for water splitting, Sabatier methanation, methane combustion; unique hydrogen stream allocation; conditional matched-output efficiency identity; exact 35%/50% demonstration for a 30% diesel displacement without hydrogen.
+3. `CarbonFuelRegenerationExact`: carbon capture/synthesis inventory equalities; 100→80→64→51 illustrative attrition; zero-external-input, zero-storage-change work negative control; stoichiometry ≠ measured yield.
+
+## Critical limitations
+
+- `SameCHO` proves literal element-count identities, not any reaction's kinetics, equilibrium, achievable yield, or observed apparatus.
+- `MatchedOutputCombustion` records the equal-output relation; the construction does **not** prove that hydrogen changes real engine efficiency.
+- Natural-number models are exact discrete ledgers, not calibrated SI engineering measurements.
+- The negative controls distinguish constructors/claims. They do **not** by themselves constitute measured performance.
+- The public 2026 grant number and the actual legal assignment chain remain unverified.
+- This tranche has **not** been Agda-kernel-checked in the current assistant environment. No claim of verified typechecking is made.
+
+## Highest-alpha unpaid cut
+
+| Gate | Exact next obligation | Owner / dependency |
+|---|---|---|
+| K0 | Type-check all three files and `DASHI.Chemistry.Everything` with pinned Agda 2.9 + standard library; fix concrete errors only | exact-head Agda |
+| K1 | Replace model-only `SameCHO` with a concrete `StoichiometricSystem` instance and left-kernel proof for all reaction columns; connect to the existing generic finite-path certificate | stoichiometry bridge |
+| K2 | Pay source-specific water-electrolyser electrical/chemical efficiency in exact SI units and prove H2 production bound | physical instrument/source |
+| K3 | Bind measured hydrogen allocation and no-double-counting to actual flow-meter observations | material interface |
+| K4 | Prove symbolic equal-output fuel-displacement and energy-break-even equivalence for strictly positive engine efficiency using ordered rationals | math/efficiency |
+| K5 | Bind any observed assisted efficiency to replicated calibrated paired engine tests, including oxygen control and NOx | empirical |
+| K6 | Bind CO2 capture, reactor conversion, separation and storage work to metered full carbon inventory for each repeated cycle | empirical |
+| K7 | Retrieve 2026 patent publication, independent claims, inventor names, and patent assignments; explicitly distinguish Converde, Cycle Energy, Olenox and CleanTec corporate identity | legal provenance |
+| K8 | Independent review of source attribution, acquisition chain, data uncertainties and claimed practical improvement | independent verifier |
+
+## Experimental controls
+
+Compare matched engine work or generator electricity at matched load/speed/ambient intake:
+A. stock operation; B. retrofit powered with no hydrogen; C. independently metered hydrogen; D. electrolyser-fed H2/O2; E. oxygen-only control where safe/feasible. Measure diesel mass, H2/O2 flows, battery/grid electricity, operating temperatures, exhaust carbon, NOx/particulates, and stored energy before/after. The power-plant carbon route additionally requires identified hydrocarbon product and isotope/material inventory.
+
+Modes stay separate. A low-voltage intake electrolyser does not inherit palladium-heater loads of a different plasma-membrane device.
+
+## Verification commands
+
+```sh
+agda -i . -i /path/to/agda-stdlib DASHI/Chemistry/IndustrialReactiveEnergyBalanceExact.agda
+agda -i . -i /path/to/agda-stdlib DASHI/Chemistry/HydrogenFuelCycleExact.agda
+agda -i . -i /path/to/agda-stdlib DASHI/Chemistry/CarbonFuelRegenerationExact.agda
+agda -i . -i /path/to/agda-stdlib DASHI/Chemistry/Everything.agda
+```
+
+Check under the project's pinned Nix/Agda 2.9 environment and record commit SHA, import graph, kernel output, and independent validation separately. No postulates, unsolved metas or termination/positivity escapes were intentionally introduced.
+
+## 2026-11-09 continuation: new mathematical leaves
+
+New files:
+- `DASHI.Chemistry.HydrogenFuelCycleStoichiometricExact`: a **concrete projection to elemental-total state** for all three selected reactions. The signed molecular stoichiometric matrix, feed availability, and kinetic state transition still remain open. `selectedFuelCycleCertificate` consumes the existing DASHI `SC.certifyStoichiometricConservation` theorem. The residual is computed from literal C/H/O input/output counts.
+- `DASHI.Chemistry.HydrogenFuelCycleBreakEvenExact`: `energySavingIffDisplacementExceedsElectricity` gives both directions of the energy-input criterion for a supplied fossil displacement identity, using constructive strict-order cancellation, not an assumed efficiency measurement.
+- `DASHI.Chemistry.HydrogenElectrolyserEnergyExact`: `hydrogenHHVWithinElectricity` derives an energy bound when a **source-supplied** first-law equality and nonnegative heat/storage residual are provided. It does not supply an experimental input/output record.
+
+These files have been added to `DASHI.Chemistry.Everything`.
+
+### Updated exact cut (status is proof-source, not kernel acceptance)
+
+| Gate | Narrow leaf | Source-written status | Still unpaid |
+|---|---|---|---|
+| K0 | Exact-head Agda kernel typechecking, including consumer | **OPEN** | Run under pinned project Agda 2.9 and standard library; record full output |
+| K1a | `reactionResidual` for three balanced reactions + projected `elementalLeftKernel`, finite path proof | **WRITTEN** | Kernel check |
+| K1b | Molecule-resolved inventory, source reaction-column `ν`, and valid nonnegative reaction step `x→x+ν` with feed guards | **OPEN** | Native molecule inventory and guarded transition weld |
+| K2a | `hydrogenHHVWithinElectricity`, assuming the metered first-law equality | **WRITTEN** | Kernel check |
+| K2b | Calibrated Joule/kWh unit bridge, heating value, water/H2 flow, process conditions and uncertainty intervals | **OPEN** | External measured/source receipt |
+| K3 | Actual hydrogen partition and provenance across engine, synthesis, storage, venting | **OPEN** | Metered flow/hold-up, not constructed sample partition |
+| K4a | `energySavingIffDisplacementExceedsElectricity` | **WRITTEN** | Kernel check |
+| K4b | General rational efficiency relation with positive denominator and additive fuel substitution; derivation of engine-efficiency break-even from matched output | **OPEN** | Ordered-rational constitutive abstraction |
+| K5 | Replicated baseline/device/no-H2/H2-only/O2-only matched-output tests | **OPEN** | Experiment |
+| K6 | Carbon product identity, flow, carbon isotope/mass inventory, energy, separated heat/work losses | **OPEN** | Experiment |
+| K7 | Patent claims + inventor/assignment chain | **OPEN** | Authoritative legal records |
+| K8 | Independent scientific, mathematical and provenance review | **OPEN** | Independent verification |
+
+### Precisely what the new theorems do *not* prove
+
+`electrolyserProductionWithinInput` is represented by `hydrogenHHVWithinElectricity`; its source balance is an **input proof obligation**, not discovered evidence.
+
+The atom residual is a zero discrepancy in the atomic projection of standard balanced reaction formulae. It is not an assertion that a particular plasma, palladium, electrolyser, intake or CO2 conversion mechanism implements those formulae.
+
+`energySavingIffDisplacementExceedsElectricity` compares input-energy totals for a prescribed fuel displacement. It does not establish that a hydrogen retrofit causes any efficiency rise. The full physical experiment must hold useful work constant and include changing battery/tank inventory.
+
+Do not conflate "source written", "Agda kernel accepted", "executably simulated", "independently measured", "patent disclosed", or "legal title verified". This separation implements the existing DASHI attribution policy.
+
+### Same-run source/consumer weld
+
+`DASHI.Chemistry.HydrogenCombustionBreakEvenBridgeExact` introduces `SameRunFuelSaving` with explicit field equalities between the fossil-displacement source and the matched-output engine source. `sameRunEnergySavingIff` consumes the canonical net-input theorem through this joined record. Its sample 35%→50% engine-efficiency construction is **only an arithmetic fixture** and must not be interpreted as an XFuel observation.
+
+The complete new import tranche is now six Agda modules plus the roadmap, all reached through `DASHI.Chemistry.Everything`.
+
+### Precise theorem-to-observation boundary
+
+The formalism permits an efficiency improvement as an input; it does not prove one occurs. In particular, the matched-output equation includes the combined combustible energy `diesel + hydrogen + synthetic fuel`. Neither flamespeed assertions nor corporate disclosures discharge `K5`. The next source-specific work is to calibrate engine efficiency and gas/fuel flow at identical load, output and inventory boundary with uncertainties, and to distinguish the three architectures.
+
+The next **unproved mathematical** leaves after this tranche remain: molecular nonnegative-guarded reaction transitions (K1b), explicit SI unit/higher-heating-value transport (K2b), and source-paid ordered-rational engine efficiency algebra (K4b). Kernel acceptance K0 remains unpaid for all new source.
+
+## 2026-11-09 final source tranche: molecular conservation and efficiency fractions
+
+The following subsequent modules supersede the earlier statement that a molecule-resolved reaction model had not been supplied:
+
+- `DASHI.Chemistry.HydrogenMolecularInventoryExact` defines a 5-species water/H2/O2/CO2/CH4 molecule inventory, guarded reaction constructors for water splitting, Sabatier methanation and methane combustion, and `stepConservesCarbon`, `stepConservesHydrogen`, `stepConservesOxygen`. Finite-path preservation is transported by `pathConservesCarbon`, `pathConservesHydrogen`, `pathConservesOxygen`; each algebraic reaction conservation identity is solved with the already-used Agda standard-library `Data.Nat.Solver`.
+- `DASHI.Chemistry.HydrogenEfficiencyCrossMultiplyExact` defines positive-denominator efficiency ratios from independent measured-work equalities and derives the exact `matchedOutputCrossMultiplies` identity without floating point. The numerators and denominators remain source obligations, and the theorem does not infer actual efficiency gain.
+
+Thus the **source-written abstract mathematical leaves** K1a, K1b (for the selected finite ideal reactions), K2a, K4a and matched-output rational cross-product K4b are represented. This is **not** an Agda-kernel acceptance declaration. For K1b, kinetics, transport, thermodynamic work and physical reaction feasibility are separately unpaid.
+
+### Final exact maximum cut, without false closure
+
+1. **K0 — kernel**: independently type-check each of the nine new Agda modules, their transitive imports and `DASHI.Chemistry.Everything` under repository-pinned Agda 2.9/Nix. Current execution environment has no Agda compiler. Resolve actual reported errors rather than treating static import checks as typechecking.
+2. **K2b — SI/source**: provide source-specific measured water/H2/O2 flow, HHV convention, calibrated electrical supply, storage delta and heat rejection and bind them to an `ElectrolyserFirstLaw` instance. Unit conversion and uncertainty propagation must be verified.
+3. **K3 — stream identification**: source-bound each actual H2/O2 flow to a unique combustion/synthesis/storage/vent route; distinguish true consumption from catalyst-like *effect*.
+4. **K4c — physical efficiency admission**: supply measured true matched-output efficiency across loads, air/fuel stoichiometry and oxygen-enrichment controls. Algebraic cross-multiplication and saving iff cannot establish `η_assisted > η_baseline`.
+5. **K5 — causal identification**: independent randomized/crossover baseline, powered-no-flow, H2-only, O2-only and full-system arms with measured NOx, particulate emissions and uncertainties.
+6. **K6 — carbon/reaction identity**: identify reactor, products and yields; demonstrate carbon mass closure and energy/enthalpy/auxiliary losses over cycles (including any plasma or palladium mode *only if physically present*).
+7. **K7 — intellectual-property title**: independent patent grant numbers, claim text, inventors, ownership records and corporate assignment transactions.
+8. **K8 — independent checks**: signed source, compiler, measurement, legal and review receipts kept disjoint under attribution policy.
+
+The new nine Agda files were fetched back successfully from the PR branch; no explicit `postulate`, `TERMINATING`, `NON_TERMINATING` or `trustMe` in executable declarations was found by static inspection. **No kernel check or independently replicated device experiment was performed.**
+
+## 2026-11-09 SI / Atomic369 integration extension
+
+**Inspected existing owners directly:** `DASHI.Physics.Units.SI`, `DASHI.Physics.Units.SIMetrologyBridge`, `DASHI.Physics.Chemistry.AtomicPeriodicTable369GenerativeExact`, `DASHI.Promotion.ChemistryFiniteRuleTargets`, and `DASHI.Physics.Chemistry.AtomicPeriodicTable369AdenylateKinaseAtomisticConfigurationExact`. The SI source is the BIPM 9th-edition brochure (DOI 10.59161/AUEZ1291); periodic-table proton-number identity is an existing DASHI owner; atomic standard-weight source is Prohaska et al. (DOI 10.1515/pac-2019-0603). The additional bridges do not reassign prior mathematical/scientific authorship.
+
+### New modules and declarations
+
+- `HydrogenFuelCycleSIExact`: `kilowattHourToJoule` gives 1 kWh = 3,600,000 J as an exact integer conventional conversion. `SIHydrogenProcessReceipt` requires all four measurement roles in `SI.Measurement SI.Energy SI.unitScale`, source/version/uncertainty carried by the existing SI type, explicit nonnegative signs, and a first-law balance. `siToElectrolyserFirstLaw` transports it into the existing hydrogen bound; `siHydrogenEnergyBound` reuses that theorem. The receipt has **no actual measurement inhabitant** in this tranche.
+- `HydrogenFuelCycleAtomicIdentityExact`: `hIndex`, `cIndex`, `oIndex` are existing Atomic369 `neutralAt` instances, with proton numbers exactly equal to the repository's established finite H/C/O periodic targets. `hMassMilliU`, `cMassMilliU`, `oMassMilliU` refer directly to the already attributed atomistic convention; water, methane and CO2 derived *rounded convention* masses are 18015, 16043 and 44009 milli-u respectively. These are **not exact isotopic masses, empirical molar masses, nor HHV values**.
+- `HydrogenFuelCycleAtomicMassConservationExact`: `oneStepConventionMassConserved` and `pathConventionMassConserved` apply the existing guarded molecular C/H/O conservation to any fixed weighted elemental mass functional, using the existing source's standard-atomic-weight constants. The result concerns a source convention along the **ideal, closed five-species reaction network**, not lossless capture, measured mass, or energy.
+- All three modules imported into `DASHI.Chemistry.Everything`.
+
+### High-priority outstanding verification and source maximum cut
+
+| Gate | Required payment | Why it stays open |
+|---|---|---|
+| K0 | Agda kernel check for all 12 new modules, exact-head Chemistry.Everything and imports | No Agda/Nix toolchain in current execution runtime; static file fetch is not typechecking |
+| SI-01 | Instrument-calibrated power→energy integration and timing | `SI.Measurement` carries source/version/uncertainty fields but no measured run is supplied |
+| SI-02 | Real H2 flow measured as amount/time and converted to HHV chemical energy using attributed thermochemical source with uncertainty | Periodic-table identity/atomic mass is **not** the H2 heating value |
+| SI-03 | Tight unit-aware inequality with uncertainty interval propagation, storage delta and auxiliaries | Current proof assumes nonnegative losses and an exact source-provided energy equality |
+| AT-01 | Element identity + molecular species resolution for actual reactor products beyond H2O/H2/O2/CO2/CH4 | Existing network is selected ideal chemistry only |
+| AT-02 | Actual isotope/atomic weight convention for measured inventories and calibrated gas-flow-to-moles bridge | Existing abridged weights do not prove a gas-flow instrument conversion |
+| PH-01 | Real H2/O2 injection rates, generator load/speed and paired efficiency responses, including NOx/particulate uncertainty | Vendor/patent disclosures are not actual measurement certificates |
+| PH-02 | Source-selected CO2 capture/reactor conversion/heat/plasma and inventory trajectory, when the corresponding architecture exists | No source-specific apparatus proven |
+| IP-01 | 2026 patent grant number, claims, inventor and chain of assignment | Corporate narratives alone do not identify a legally operative claim |
+| V-01 | Independent scientific, legal and kernel-verification receipts | The formal code cannot confer those on itself |
+
+### Absolute negative controls
+
+- Dimensional validity does not imply accuracy of measurement or physical process identity.
+- `AtomicIndex` identifies proton number, and `ElementEquivalent` does not imply neutron/isotope equivalence.
+- The Prohaska rounded standard atomic-weight convention must never be promoted into an exact single-isotope mass or into a fuel enthalpy.
+- Reaction balance is neither reaction feasibility nor demonstrated reactor performance.
+- Hydrogen may change flame kinetics yet its chemical energy input cannot be erased as a 'catalyst'.
+- Source code, independent checker run, empirical reproducibility and patent title remain disjoint provenance receipts.
+
+## 2026-11-09 maximum-cut continuation (user expressly deprioritised K0)
+
+Do not treat K0 as the current work blocker or claim it is complete. The following **five additional conditional modules**, plus one local independent arithmetic script, advance the *non-kernel* cut:
+
+| File / declaration | Completed construction | Required external witness |
+|---|---|---|
+| `HydrogenFuelCycleIntervalBoundsExact`: `addInterval`, `insideSum`, `robustSavingAtEveryAdmittedReading`, `actualInputReduction` | General interval sum, true-value inclusion and guaranteed strict saving whenever upper assisted fuel + upper electrical input is below lower baseline fuel | Calibrated source uncertainty envelopes, equal engine/generator work and correct run alignment |
+| `HydrogenFuelCycleMolarThermochemistryExact`: `MolarHHVSource`, `hydrogenBulkEnergy`, `HydrogenFlowReceipt`, `HydrogenProcessAllocation`, `CarbonSynthesisReceipt` | Typed J/mol→bulk-J for measured mol count, source-demand for HHV, and exact 4 H2 : 1 CH4 allocation with product identity as a separate condition | Primary thermochemistry value, temperature/phase/HHV scope, flow-to-moles calibration, actual chromatographic synthesis yield |
+| `HydrogenFuelCycleDeviceEvidenceExact`: `ModeAuxiliaries`, `PairedPerformanceStudy`, `AdmittedStudySavings` | Intake-electrolysis, plasma/membrane, carbon-synthesis auxiliaries have disjoint device-specific constructors; five experimental arms and interval-savings consumer | Independent matched-output and electrical/thermal/chemical inputs, output/emissions readings, controls and reproducibility |
+| `HydrogenCarbonOpenCycleExact`: `CarbonPath`, `carbonPathBalance`, `cyclicCarbonMakeupEqualsEmissions` | General ordered multi-step carbon inventory identity including external makeup and vented losses; no indefinite self-recycling claim | Measured recovered/vented/added carbon, products, storage, water/O2, and complete energy/auxiliary balance |
+| `HydrogenFuelCycleSourceAuthorityExact` | Specific source metadata for US9809774B2 versus US20150118145A1; grant-unresolved, patent/vendor evidence not promoted to independent measurement; patent-specific title receipt | Authoritative 2026 grant publication and claim text; executed patent-specific assignment documents (Converde/Cycle/Olenox etc.) |
+| `scripts/check_hydrogen_fuel_cycle_maxcut.py` | 11 self-contained Python unittest numerical checks committed; no CI or external dependencies | **Execution result not supplied** in this environment; should run locally |
+
+### Externally confirmed patent anchor
+
+Google Patents https://patents.google.com/patent/US9809774B2/en explicitly identifies Olev Trass and Michael David McLaren as inventors of *Method of separating solids using bio-oils*, grants on 2017-11-07, and shows the Converde 2016 assignment at 037501/0239. This is a patent-publication anchor with a registered event, **not** a verified transfer into a later Olenox entity or proof of any claimed 2026 artificial-photosynthesis grant. Search did not positively establish the 2026 grant.
+
+### Updated physical/informational maximum cut (no K0 focus)
+
+1. **SI-01** meter AC/DC power and time; integrate battery/grid/solar plus thermal/chemical inputs and changes in stored energy. Input *energy*, not voltage or installed power, is the invariant.
+2. **SI-02** acquire source-specific H2 HHV (J mol^-1) including reference state, calibration and uncertainty; gas flow, pressure, composition and temperature produce admitted molar amounts.
+3. **SI-03** assign interval uncertainties conservatively for fossil fuel, electricity and outputs; use `robustSavingAtEveryAdmittedReading` rather than nominal 30% marketing.
+4. **AL-01** source-identify all H2 streams and keep direct combustion, 4:1 methane synthesis, storage and losses disjoint.
+5. **PH-01** obtain actual paired baseline, powered-no-H2, independent H2, O2 control and full device results; verify equivalent useful output, exhaust NOx and particulate emissions.
+6. **PH-02** establish device-specific plasma/heater/thermal/electrolysis and compression duties rather than applying historical patents to unknown hardware.
+7. **C-01** demonstrate actual exhaust carbon capture, physical product identity, measured methane/hydrocarbon output, net process heat/storage and cycle losses.
+8. **IP-01** obtain the newly claimed 2026 patent number and check claim/assignment chain at the publication level, preserving corporate legal distinctions.
+9. **V-01** independent instrument/scientific replication and original proof/verification attribution, separately from this drafted code.
+
+**No empirical observation, thermochemistry constant, patent grant number, instrument uncertainty, or signed independent receipt was fabricated.** Source-level conditional record types and symbolic theorems are meaningful mathematical deliverables but they cannot themselves establish a commercial claim.
+
+### Necessary energy-bound qualification
+
+`hydrogenHHVWithinElectricity` assumes a *selected electricity-only boundary with nonnegative heat/storage residual*. For a high-temperature steam electrolyser or plasma/heat-assisted process, **imported process heat and chemical fuel must appear on the input side**. One must not apply this specialised bound to such a system without those additional energies. Oxygen injection may change combustion kinetics but oxygen is not a fuel. No claimed combustibility-enhancement factor is inferred from patent/marketing text.
+
+## Source-paid reference thermochemistry (not a device measurement)
+
+`HydrogenFuelCycleNISTThermochemistryExact` adds **attributed** literature numbers rather than invented fuel constants:
+
+- NIST water liquid standard enthalpy of formation at 298.15 K: −285.830 ± 0.040 kJ/mol. Under H2(g)+0.5 O2(g)→H2O(l), the reported HHV magnitude is represented by 285830 ± 40 J/mol, with explicit source and phase.
+- NIST methane gas combustion: Prosen/Rossini measured −890.35 ± 0.30 kJ/mol, represented by 890350 ± 300 J/mol under the specified combustion/product-water convention.
+- `fourHydrogenVersusMethaneHHVDifference` proves, as an exact identity of these **reported numerals**, 4×285830 = 890350+252970 J/mol of CH4 production; `conservativeHHVGap` uses 4×285790 = 890650+252510. This is **not a measured Sabatier synthesis thermal yield or plant efficiency**.
+- NIST literature records and numerical uncertainty are independently attributed; the Agda equation is a user-directed ChatGPT integration. Neither is McLaren's original scientific contribution.
+
+Primary locators:
+https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=187&Units=SI
+https://webbook.nist.gov/cgi/cbook.cgi?ID=C74828&Mask=1
+
+**SI-02 status:** reference-state H2 and methane HHVs sourced; device-specific H2 molar flow, gas composition and calorimetry still external. Source uncertainty is not a claim that reactor-level uncertainty is ±0.040 kJ/mol. The measurement-dependent gates SI-01, SI-03 field acquisition, AL-01, PH-01, PH-02, C-01, IP-01 and V-01 remain open. The interval theorem is conditional on actual admitted readings.
+
+**Total source tranche:** 18 new Agda modules plus an independent no-CI Python regression source file, 2026-11-09. K0 not prioritised in this iteration per user instruction; its actual kernel status is unchanged.
+
+## 2026-11-09 20:36+10:00 steelman-versus-physical maximum-cut continuation
+
+The question is now **mechanistic identification, not just admissibility**. The strongest physically plausible hypothesis is that a small externally powered H2/O2 input modifies real combustion phasing, ignition delay, temperature distribution, knock/pressure-rise limits or other dynamics enough to change the fraction of the hydrocarbon input converted into useful engine work. This is possible in principle but not a verified McLaren/XFuel effect. The amount of H2 burned remains a fuel-energy term even when it changes combustion chemistry.
+
+### Three additional source-written modules
+
+1. `HydrogenCombustionIdentifiabilityExact`: a *constructive non-identification counterexample* with the same 70-kWh diesel input and 35-kWh useful output:
+   - 0-kWh H2 + 50% engine efficiency;
+   - 10-kWh H2 + 43.75% engine efficiency.
+   Both give 35 kWh. Thus *diesel burn and useful output alone* do not identify the hydrogen-substitution versus combustion-efficiency mechanism. Also supplies exact 30% diesel displacement with 10.5-kWh H2 (15-kWh electric at a **hypothetical** 70%-HHV electrolysis efficiency), implying 70/161 = about 43.48% assisted engine efficiency.
+2. `HydrogenProcessFullBoundaryExact`: the first-law ledger explicitly counts electricity + imported process heat + chemical feed + initial stored energy, compared with H2 HHV + useful/exported energy + reject heat + final stored energy. Its nonnegative-energy consequence `hydrogenBoundedByAllInputs` **does not assume electricity is the sole hydrogen-production input**. It avoids wrongly applying the electricity-only result to heated electrolysers/plasma systems.
+3. `HydrogenOxygenFactorialIdentificationExact`: a 2×2 power-on controlled fuel-use contrast for H-only, O-only, both, and neither. The pure toy numbers (100,92,94,80; extra combined interaction 6) are explicitly separate from `CausalAdmission`, which requires same-output/load, equal doses, power-only placebo, crossover/randomisation, independently calibrated measurements, emissions and replication.
+
+The dependency-free Python script `scripts/check_hydrogen_fuel_cycle_maxcut.py` now has 17 declared tests, including six physical-steelman counterexamples. **No test execution is attested in the GitHub commit**. No new real measurements were supplied. All three modules are wired into `DASHI.Chemistry.Everything`.
+
+### Exact remaining maximum cut (K0 excluded at user's request)
+
+| Order | Gate | What a defensible closure requires |
+|---|---|---|
+| P0 | EFF-IDENT-01 | Independent same-run H2 chemical-energy flow + diesel HHV input + true useful engine/generator work; positive denominator and metered gross/net boundary; derive `η=W/(F+H+S)` and its uncertainty |
+| P0 | EFF-CAUSAL-02 | Power-only, H-only, O-only, H+O; identical work/loads, actual gas dose and injection phasing, crossover/randomised blocks, replication and uncertainty-controlled interaction |
+| P0 | EFF-ROBUST-03 | Compare *all external input energies* (battery SOC, grid/PV, thermal process heat, chemical fuel, compressed/storage streams) with the diesel displacement, using interval-wide inequalities and matched useful output |
+| P0 | MECH-04 | Measure pressure/heat-release, injection/ignition timing and engine exhaust; distinguish ignition phasing versus mere H2 calorific substitution; account for NOx, particulates, thermal stress |
+| P1 | CARBON-05 | Assay actual synthetic hydrocarbon product and all stream inventories; repeated-state carbon makeup/emissions and hydrogen/electricity/separation/capture/heat duty |
+| P1 | TECH-06 | Verify which of electrolysis-intake, plasma-membrane or carbon-synthesis architecture is physically present and pay only its actual auxiliaries |
+| P1 | THERM-07 | Transport the NIST reference-state HHV/uncertainty to the device-selected operating state/phase through source-paid calorimetry or appropriate enthalpy corrections |
+| P2 | IP-08 | Exact asserted 2026 grant ID, claims, inventors, registered assignee and patent-specific Converde/Cycle/Olenox assignments |
+| P2 | REPL-09 | Independent mathematical, physical/instrumental and legal verification receipts with role-separated attribution |
+
+**Stop conditions**: A 30% reduction in diesel-only flow is not proof of 30% energy saving, 30% relative engine efficiency gain, a catalytically regenerated H2 species, or a CO2-neutral fuel lifecycle. Even a robust positive input-energy difference is not an emissions, cost, or operational-safety certificate. Never treat the factorial toy values, the exact rational threshold or a patent publication as an instrument observation.
+
+All traditional chemistry, BIPM SI, NIST data and original DASHI theorem/provenance owners retain attribution. This tranche records user direction and ChatGPT source drafting separately. K0 remains unchanged and out of this iteration's priority order.
+
+## Executed external acceptance prototype (distinct from unexecuted repo source)
+
+A dependency-free Python acceptance prototype was generated and executed locally in the active session as `/mnt/data/hydrogen_physical_acceptance.py`; all **8/8** local unit tests passed. It is not represented as a GitHub commit or Agda kernel proof. The prototype accepts CSV rows with one complete five-arm experimental block and calculates:
+- interval-based total externally supplied input (diesel, electricity, imported heat, auxiliary chemical fuel, external hydrogen/synthetic fuel, and beginning/end storage inventory);
+- calibrated-generator/engine *shaft* efficiency from `shaft_work/(diesel+burned_H2+burned_synthetic)`;
+- H2/O2 diesel-use interaction contrast from the power-on, neither-gas baseline;
+- robust net-energy saving only when the highest assisted total is below the lowest baseline total;
+- data rejection for missing control arms, unmatched useful output, unsupported HHV convention, negative meter values, synthetic source IDs, or externally sourced H2 greater than H2 actually burned.
+
+The analyzer deliberately reports `causal_combustion_mechanism_proven=false` and `independent_replication_proven=false` regardless of the arithmetic. A CSV source or calibration **identifier** is not an independently verified instrument receipt.
+
+### New physical steelman source modules
+
+- `HydrogenCombustionIdentifiabilityExact`: two explicit observationally identical fuel-output scenarios with different hydrogen and efficiency contributions; the data alone cannot determine mechanism.
+- `HydrogenProcessFullBoundaryExact`: externally imported *heat* and chemical feed, not only electricity, are included in the overall first-law hydrogen energy bound.
+- `HydrogenOxygenFactorialIdentificationExact`: mathematical interaction contrast and a separate unfilled `CausalAdmission` for randomisation, dose matching, calibration, output matching and replication.
+
+These three sources are committed to PR #1481 and imported into `DASHI.Chemistry.Everything`. The GitHub source's original dependency-free `scripts/check_hydrogen_fuel_cycle_maxcut.py` also now contains 17 declared checks; its full runner has **not** been executed in this context.
+
+### Last outstanding physical leaves (no fabricated closures)
+
+1. Acquire genuine five-arm repeated matched-load block dataset with independent raw-meter asset references and verified calibration certificates; include H2/O2 concentrations, pressure, temperature, elapsed durations, flow composition and gas cylinder/plant inventories.
+2. Distinguish net generator output, gross generator output and **shaft work**. An engine thermal-efficiency claim requires the actual appropriate work numerator and full H2/synthetic-fuel intake denominator.
+3. Recover dose-response and combustion-phasing identification from direct in-cylinder pressure/heat-release data, ignition/injection timing and exhaust/NOx/PM; hydrogen or oxygen causality cannot be inferred from the factorial contrast alone.
+4. Compare diesel + all genuinely external energy + storage inventory changes at matched useful output, with conservative correlated instrument uncertainties if source calibration correlations are known.
+5. Demonstrate actual carbon-to-hydrocarbon product by compound analysis, yields, carbon isotope/material accounting and independent cycle-restart/battery/SOC measurements.
+6. Verify claimed 2026 patent documents and executed patent-specific chain of title; corporate affiliation is not title.
+7. Obtain independent physical replication and scientific/provenance review. K0 remains explicitly not pursued per user instruction.
+
+Attribution remains unchanged: chemistry/thermodynamics from original scientific sources; repository owners credited for prior SI/Atomic369/conservation machinery; user directs integration, ChatGPT authors the new source; vendor/patent claims and independent scientific evidence are separate authority categories.
+
+## Final SI electrical input seam, 2026-11-09
+
+`HydrogenElectricalInputIntegrationExact` is imported by Chemistry.Everything.
+It reuses the existing BIPM-attributed SI Energy carrier and represents the
+exact finite arithmetic of a constant-DC voltage×current×elapsed-time window.
+`finiteDCTraceJoules` accumulates a selected series of windows.
+
+A **15 V** line at **100 A** for **3600 s** is **5.4 MJ = 1.5 kWh**;
+the same voltage at **1000 A** for the same duration is **54 MJ = 15 kWh**.
+`voltageDoesNotDetermineEnergy` explicitly blocks treating the common
+15 V rating as an energy budget. The rectangular numerical integration
+does *not* establish actual waveform sampling accuracy, AC real-power flow,
+inverter efficiency, signed battery SOC, power-factor losses, or calibrated
+current; `ElectricalTraceReceipt` leaves those source obligations open.
+
+**Physical maximum-cut synthesis:** The first-law full input boundary,
+signed/different-source hydrogen-vs-diesel substitution, mechanistic
+non-identification counterexample, H2/O2 factorial contrast, finite carbon
+inventory, uncertainty-bounded matched-output criterion, and DC energy
+integration are source-written. The exact experiment and independent
+replication needed to identify a physically realised improvement remain
+unpaid. K0 remains excluded by user request, not declared complete.
+
+**Revised counts:** 22 new Agda modules on PR #1481, all imported into
+DASHI.Chemistry.Everything. The 17-case repo arithmetic script was source-
+updated but has not been executed in this assistant runtime. The separate
+eight-case five-arm acceptance analyzer was locally executed (8/8 pass) and
+is now also committed as `scripts/hydrogen_physical_acceptance.py`;
+the committed file was updated to label interval savings conditional and
+source/calibration verification false. No actual apparatus dataset was
+available. The blank CSV schema lives at
+`Docs/roadmaps/HydrogenPhysicalMeasurementsTemplate.csv`.
+
+**Remaining externally supplied gates:** measured, source-linked electric
+and chemical input, real calibrated H2/O2 and engine output/NOx/PM readings,
+cross-over evidence with timing/dose, true hydrocarbon synthesis and
+carbon closure, actual patent-specific title documents, and independent
+replication. Neither static declarations nor accepted unit tests pay these.
+
+## 2026-11-10 literature-paid physical steelman: pressure, CA50, work, sources
+
+Per user instruction to calculate the steelman from published primary experimental literature rather than stopping at missing device measurements:
+
+- New `DASHI.Chemistry.HydrogenDieselLiteratureSteelmanExact` records **author- and DOI-attributed** original observations from Amatnieks et al. (2026, DOI 10.3390/en19173951), Estrada et al. (2022, DOI 10.1016/j.heliyon.2022.e09285) and their different tested engines. It keeps original author/measurement ownership separate from user direction and ChatGPT integration. The two published extreme pressure/duration changes are not assumed simultaneous or transferable across apparatus.
+- New `scripts/hydrogen_literature_pressure_steelman.py` computes single-zone Wiebe heat release, slider-crank volume, ideal gas first-law pressure and indicated work for an **assumption-labelled** engine geometry sourced to Estrada et al. (2022), with sensitivity changes informed by *other* literature, not a measured McLaren apparatus. Seven self-tests are source-written in the GitHub file; the exact GitHub version has not been rerun locally. The corresponding fuller local model `/mnt/data/hydrogen_literature_physics.py` was executed with **8/8 passing** tests and wrote reproducible scenario JSON and fuel-share CSV.
+- New `Docs/roadmaps/HydrogenDieselLiteratureSteelman20261110.md` supplies the exact original sources, reported-vs-calculated-vs-assumed demarcation, published pressure findings, apparent source cell-energy discrepancy, and matched-output fuel-share equivalence.
+
+### Numerical results — conditional, not external physical validation
+
+With assumptions (not author-reported): compression ratio 20, 78 mm bore, 62.57 mm stroke (geometry reported by Estrada), rod-to-crank 3.5, gamma 1.35, BDC 1 bar, 400 J/cycle, Wiebe (a=5,m=2), start=-10°, duration=50°:
+- assumed baseline 65.25 bar peak, 234.68 J ideal indicated cycle work;
+- moving CA50 earlier by 3.5° at identical total heat and unchanged burn shape: peak 74.68 bar, indicated work 240.83 J (**+2.62%**);
+- duration +46% as a *separate* sensitivity: peak 58.47 bar, work 206.18 J (**−12.14%**).
+- These are predictions from one simplified, uncalibrated model. Neither published 20%-peak-pressure nor 56%-rise-rate findings imply a proportional work/efficiency improvement.
+
+### Primary-source energy inconsistency requiring special admission
+
+Estrada et al. 2022 Table 3's 20 L/min H2 at Table 5's .0899 kg/m³ and 119.7 MJ/kg implies **3.587 kW hydrogen LHV** at the stated NTP; Table 3's 13.45 V×15.1 A implies **0.203095 kW** listed DC input, a 17.66-fold discrepancy *if compared on the same continuous full system boundary*. The experiment describes AC power, gas stores/bubblers and a cell assembly, so those parameters must NOT be used as a demonstrated whole-system electrolyser efficiency. Original numbers and any mismatch remain attributed to their own exact sources; the ratio is a DASHI/ChatGPT-derived arithmetic comparison, not an accusation or free-energy finding.
+
+Another metric firewall: Eq. (9) of Estrada et al. defines **BFCE with diesel+H2 fuel energies**, while Eq. (10) labels **BTE relative to the neat-diesel baseline fuel input**. Headline BTE percentage changes are not automatically changes in the complete brake conversion efficiency.
+
+### Exact residual theoretical versus empirical cut
+
+**Source-written:** physical mechanism under-identification, source-cited observation envelopes, ideal single-zone pressure/heat-release sensitivity, exact H2-share/diesel-efficiency ratio and energy-input substitution, SI/Atomic369 and NIST bridges, uncertainty comparison, patent authority classification.
+
+**Not source paid:** engine-specific rod/conrod and wall-heat-transfer calibration, crank-angle pressure traces for the McLaren device, true flame kinetics, actual H2/O2 flow and electrolysis power, empirical efficiency/dose response, CO2 synthesis path, continuous carbon cycle, patent 2026 title, and independent device replication. These do not follow from the literature examples.
+
+K0 is deferred per user's explicit instruction; no Agda kernel acceptance is claimed.
+
+## 2026-11-10 user correction: two existing use cases, not a self-powering claim
+
+The user explicitly clarified the inventor's intended uses in the prior conversation and reiterated them on 2026-11-10. Treat these as **user-supplied descriptions**, not verified verbatim transcript quotations:
+
+1. **Hydrocarbon power-station retrofit / fuel synthesis:** place solar photovoltaics around existing hydrocarbon power plants. Use external solar electricity to produce hydrogen from abundant water, combine that hydrogen with carbon recovered from power-station exhaust **or captured atmospheric CO2**, and produce more hydrocarbons instead of continuing to extract as much virgin fossil fuel. The stated aim also includes improving combustion. This is an external-renewable-powered carbon-to-fuel scheme, **not a claim of energy creation**, a zero-energy fuel-making loop, or a requirement that the station's electricity powers its own synthesis.
+2. **Personal car demonstration:** inventor operates the hydrogen enrichment hardware with **externally charged batteries**. The electrical input is not assumed to come from engine alternator. It is inappropriate to dismiss the demonstration using an engine-alternator closed-loop objection unless the actual wiring says otherwise. This car claim is not evidence of on-car CO2 capture or full hydrocarbon regeneration.
+
+New `DASHI.Chemistry.HydrogenFuelCycleTwoApplicationsExact` makes the deployments distinct: `hydrocarbonPowerStation` carries a typed SI solar-input record with exhaust/atmospheric CO2 alternatives and source-gated carbon synthesis; `externallyChargedCar` carries a typed offboard-battery SI input and source-gated water/H2/fuel/work measurements. Both preserve the existing SI and atomic/stoichiometric ownership. No measurement, direct quotation, legal title, or successful synthetic-fuel reactor is promoted by constructing these types.
+
+**Revised decisive physics:** calculate the selected ideal hydrocarbon water/CO2 stoichiometry, stoichiometric oxygen production, solar electricity/heat work, carbon-cycle inventory, and comparable avoided fossil extraction; measure net round-trip efficiency and practical product yields separately. For car, count battery charging energy over its full before/after SOC boundary. A combustion efficiency effect cannot be extrapolated from solar-station fuel synthesis, nor vice versa.
+
+This corrects earlier overemphasis on hypothetical engine-alternator or fuel-self-regeneration arguments. Attribution: speaker's claims only when direct transcript/payable source is located; user-provided interpretation as user direction; classical chemistry and earlier DASHI owners retain original attribution; ChatGPT is the adapter implementation author.
+
+## 2026-11-10 completed solar power-station idealisation and constrained optimisation
+
+This extension addresses the user-established actual solar power-station proposal (PV externally supplies H2 from water; exhaust/DAC carbon forms replacement hydrocarbon; fossil extraction displacement and improved combustion are separate performance hypotheses). The distinct offboard-battery car demonstration remains separately modelled. Neither is an alternator-fed self-powering or free-energy claim.
+
+**Source-written additions:**
+- `HydrogenSolarCarbonGeneralStoichiometryExact.agda`: for selected C_x H_(2b) molecules, general 2-molecule integer-coefficient water electrolysis, hydrogenation, net synthesis and combustion, explicit H/C/O identities, exact gross water = recovered process water + net water, methane specialisation. Arbitrary CxH2b synthesis is *formal atom balance*, not a reactor mechanism.
+- `HydrogenSolarCarbonEnergyOptimizationExact.agda`: directly reuses NIST-reported H2 and methane HHV; conditional source-number identity 4×285830=890350+252970 J per CH4; explicitly separates reversible minimum electricity ≈237.13 kJ/mol H2 from thermoneutral electricity-only ≈285.83 kJ/mol H2, and the compatible heat requirement ≈48.70 kJ/mol H2; independent carbon/water/solar resource caps and actual lifecycle/product evidence demand. Do not mistake thermoneutral HHV for a universal lower bound on electrical input with external heat.
+- `scripts/hydrogen_solar_carbon_optimizer.py`: finite proportional caps for solar kWh, captured CO2, gross water, efficiencies, methane selectivity, capture/auxiliary duties and optional temperature-appropriate heat substitution. Adds transparent assumed PV aperture area and direct H2 vs methane fuel-energy comparison. Thirteen self-test declarations source-written; **the exact GitHub runner is not claimed executed**; 11 separate local mathematical numerical checks passed.
+- Full source attribution, reactions, engineering constraints, output values and independent fossil-displacement caveats at `Docs/roadmaps/HydrogenSolarPowerStationOptimisation20261110.md`.
+
+**Ideal model core:** for 1 kg captured CO2, all-CH4 selective conversion and full water recycle: 0.36454 kg CH4, 0.18324 kg H2 feed, 1.63739 kg gross water to electrolysis, 0.81870 kg process water recovered, 0.81870 kg net fresh water, ~1.454 kg O2 co-product; 7.21645 kWh thermoneutral electricity at eta_HHV=1; 5.61975 kWh methane HHV; 1.59671 kWh reaction heat in condensed-water convention. If 298 K heat can supply the 48.70 kJ/mol reversible electrolysis heat component, the ideal electric fraction drops to 5.98691 kWh/kg CO2, with 1.22954 kWh/kg CO2 of **externally paid or qualified recovered thermal energy**. Not a claim the process achieves that transfer.
+
+For 1 million tonnes CO2/year: about 7.216 TWh/year electricity-only electrolysis and 5.620 TWh/year methane HHV. Purely indicative 1500 kWh m^-2 yr^-1 annual irradiation and 20% overall PV conversion gives ~24.05 km2 PV aperture. Do not present this as a site-specific achievable land area or zero-cost energy.
+
+**Mathematical maximum cut for fixed methane yield and independent linear resource caps:** select number of CH4 moles as the minimum carbon, solar and gross water caps. This is an analytic upper bound/optimum only under constant efficiency and no time-dependent capacity constraints; capture, heat/exergy, conversion, output/instrument/source/cost constraints are explicitly unpaid.
+
+**Steelman decision:** external solar energy makes repeated carbon reuse possible, and methane helps existing fuel infrastructure / long-term energy storage, but methane synthesis sacrifices approximately 22.13% of source H2 HHV under condensed-water reference values; using PV electricity directly is electrically more efficient if storage/dispatch/compatibility are equal. Recycling power-station fossil exhaust may reduce new fossil extraction while it is captured, but it does not inherently create atmospheric net-negative carbon. External battery energy in the car must be measured across charging/SOC rather than assigned to an alternator.
+
+K0 deliberately excluded at user direction; source code and numerical arithmetic are **not** certified apparatus performance.
+
+## 2026-11-10 late P0 maximum cut: steady fossil displacement, dynamic dispatch and measured third-party analog
+
+An additional three new Agda modules, all imported by `DASHI.Chemistry.Everything`:
+- `HydrogenSolarCarbonSteadyStateExact`: distinguishes fixed output with continual source makeup from declining no-makeup single-batch reuse. Source-split \(r+v=100\) and 100-scaled exact carbon-source balance and finite cumulative displacement identity. Meaningful fossil displacement requires the additional source fact that the replaced feed was originally *virgin fossil carbon*; DAC/biogenic carbon must be distinguished.
+- `HydrogenPowerStationDispatchDecisionExact`: conditional same-valued-service competition between direct PV and stored solar-synthetic methane, including opportunity cost and temporal dispatch; does not prove a storage market value or real generator conversion.
+- `HydrogenSolarCarbonPublishedPilotExact`: original-author-attributed Moioli/Senn/Østrup/Hütter 2024 240-kW-class SNG+steam real plant, DOI 10.1039/D3YA00436H. Figure 6/Table 3: 188 kW electrolysis, 130 kW incoming biogas chemical feed, 34 kW utilities = **352 kW total**; 248 kW methane + 19 kW steam = 267 kW useful combined; methane-only 70.45%, with steam 75.85% (paper rounds 70% and 76%). This physically **demonstrates a related PV-to-SNG process**, not McLaren/XFuel or a pure electricity-only fuel generator. The 130-kW biogas feed **cannot be dropped** from the energy denominator.
+
+The prior `scripts/hydrogen_solar_carbon_optimizer.py` now contains `dispatch_choice` and `steady_state_carbon_inventory` and seven additional Python tests (20 total source-written); local *independent* 11/11 arithmetic/mass/energy sanity checks passed, but exact updated GitHub script not executed. The `Docs/roadmaps/HydrogenSolarDispatchCircularCarbonMaxCut20261110.md` report includes full specific attribution and references.
+
+A September 2026 Australian-cost prior art source (Panek, Fernando, Talei, DOI 10.1016/j.jcou.2026.103536) estimated SNG **21–32 AUD/GJ with zero-cost electricity**, premium 7–22 AUD/GJ over hydrogen, for source-specific 5–500-MW scenarios. These are independent authors' modelling inputs and never imputed to McLaren's device.
+
+For 40%-efficient methane regeneration (a deliberately assumed generator), the ideal electricity→methane→electricity ratio is **31.15%** before auxiliaries. On contemporaneously usable electricity with same value, direct PV dominates. With dispatch constraints/storage value or otherwise curtailed PV, methane may instead be rational. The marginal threshold is a decision with externally specified value and timing, not perpetual-energy or zero-carbon proof. IEA Global Hydrogen Review 2024 explicitly stresses low-carbon electricity and carbon origin for lifecycle benefits.
+
+**Remaining cuts:** actual PV geography + dispatch service definition; real CO2 source/capture/metrology; operating electrolyser+heat and synthesized product identity; steady-output carbon makeup measured and assigned fossil/DAC/biogenic origins; lifecycle carbon and methane leakage; battery-car externally supplied electricity and independent engine tests; authoritative patent/primary speaker transcript and legal ownership; independent review. K0 remains user-deprioritised, not falsely claimed complete.
