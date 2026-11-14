@@ -102,10 +102,12 @@
     {
       "repository_group": "agda",
       "pr": 1478,
-      "sha": "c66dc4ec53f98971925a82603b5c97a338f9ae7e",
+      "sha": "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872",
       "lane": "Bishop_eta_Koenigs",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "c66dc4ec53f98971925a82603b5c97a338f9ae7e",
+      "note": "New original expC add from real Bishop exp + two source trig laws, finite eta selected theorem composition; kernel-open"
     },
     {
       "repository_group": "agda",
@@ -424,5 +426,72 @@
     "No PR was merged or closed by this work",
     "Bishop/Cubical vendor changes cannot bypass source-carrier equivalence, trust and kernel gates",
     "A current GitHub mergeable flag is not proof of conflict freedom or mathematical correctness"
-  ]
+  ],
+  "execution_2026_11_14": {
+    "phase": "staged_original_source_convergence",
+    "lean_world_source_transfer": {
+      "from_pr": 1495,
+      "source_sha": "53db64eea732920eb7841bd06e9816defd91646c",
+      "recipient_pr": 1499,
+      "files": [
+        "scripts/lean_world_atomic_spool.py",
+        "scripts/lean_world_native_admission_queue.py",
+        "tests/test_lean_world_atomic_spool.py",
+        "tests/test_lean_world_native_admission_queue.py"
+      ],
+      "identical_git_blobs_verified": 4,
+      "test_status": "source_tests_transferred_not_locally_executed",
+      "world_admitted": false,
+      "authoritative_dag_validated": false
+    },
+    "karp_stacked_convergence": {
+      "pr": 1502,
+      "base_pr": 1474,
+      "additional_donor_pr": 1445,
+      "base_sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "donor_sha": "b3915126edd096cd09ce7cc1b1b195e75d9e9e87",
+      "common_ancestor": "730f62ed27a0c45d71c89e5cdbc61bd9f1e6ab2c",
+      "four_divergent_files_transplanted_exact_blobs": true,
+      "aggregate_imports_1445": [
+        102,
+        7
+      ],
+      "aggregate_imports_1474": [
+        204,
+        101
+      ],
+      "all_207_unique_direct_imports_resolved_on_1474": true,
+      "source_acceptance_root": "DASHI/Mathematics/Complexity/Karp21StackedSourceConvergence20261114.agda",
+      "state": "draft stacked PR, pinned Agda kernel open",
+      "SATNotInP": false
+    },
+    "bishop_eta_new_source": {
+      "pr": 1478,
+      "source_commits": [
+        "580950c0084e575053a89d06a6d13a9bacd8da4b",
+        "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872"
+      ],
+      "modules": [
+        "DASHI/Analysis/BishopOriginalNativeComplexExpAdditionFromTrigExact.agda",
+        "DASHI/Analysis/BishopOriginalEtaNativeTrigSelectedSourceWeldExact.agda"
+      ],
+      "scope": "genuine original Bishop expC add algebra from preexisting bishopExpAdd, conditional only on original sine/cosine addition; selected all-cutoff Round11 eta finite theorem composition",
+      "static_imports_resolve": true,
+      "ring_identitites_sympy_pass": true,
+      "source_written_not_kernel_accepted": true,
+      "remaining_analytic_leaves": [
+        "OriginalCosineAddition",
+        "OriginalSineAddition",
+        "OriginalDyadicNatLogLaw",
+        "Bishop complex compact-uniform eta convergence"
+      ],
+      "rh_proven": false
+    },
+    "source_merge_effect": {
+      "head_prs_merged_to_master": 0,
+      "branches_preserved": true,
+      "local_kernel_receipt": false,
+      "clay_problems_solved": 0
+    }
+  }
 }
