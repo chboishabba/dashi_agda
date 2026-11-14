@@ -441,5 +441,71 @@
       "scripts_exact_head_execution": "pending",
       "agda29_kernel": "pending"
     }
+  },
+  "max_cut_followup_20261114": {
+    "priority": "user: local verification, not CI",
+    "P0_archive_status": {
+      "mms_SDC": "Public REST file_names and download endpoints original source documented; direct epoch-validated SHA256 acquisition script committed; original CDF bytes NOT downloaded due unavailable DNS network",
+      "movebank": "original DOI provided; Movebank access blocked / direct original CSV not independently acquired",
+      "ENA": "official PRJEB98986 file-report and FASTQ MD5/SHA route written; raw bytes NOT retrieved",
+      "Agda": "pinned 2.9/Nix not installed in current execution environment; source-written proofs not claimed kernel accepted",
+      "local_runner": "scripts/run_ksw668_local_maxcut.sh --math | --all"
+    },
+    "P1_A1": {
+      "status": "OPEN",
+      "original_source_form_signed_triads": "available in prior KSW original MHD modules",
+      "unpaid": "construct nontrivial signed original rational IdealElsasserFourierState with all-mode reality and transverse proofs plus measured MMS same-frame alignment"
+    },
+    "P1_B1_B2": {
+      "status": "partial theorem/source algebra",
+      "three_vector_MHD_Maxwell_curl_jet": "DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda",
+      "nontrivial_3D_cube_exact_flux": "scripts/check_ksw668_maxwell_3d_jet.py",
+      "unpaid": "physical original continuum E/B/J from U1 with actual measured boundary and uncertainty, typechecking"
+    },
+    "P1_C1": {
+      "new_source_doi": "10.18434/T4W30F",
+      "CODATA": "2022 CODATA source masses",
+      "electron_counting_Agda": "DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda",
+      "neutral_atomic_effective_Q_keV": 625.8706545424724,
+      "bare_nuclear_Q_from_ionization_corrected_atomic_masses_keV": 626.3130054367826,
+      "binding_delta_eV": 442.350894310298,
+      "reactions": "neutral N14+n to C14+p(+free electron) is three-body electronic channel if neutral C product, distinct from idealized bare-nuclei two-body channel",
+      "bare_two_body_kinematics_script": "scripts/ksw668_bare_nuclear_two_body_kinematics.py",
+      "unpaid": "actual initial charge state, daughter ionization/electron/photon branching and experimental incident neutron energy"
+    },
+    "P3_D1_D2": {
+      "source_written_Agda": "DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda",
+      "exact_rational_negative_control": "scripts/check_ksw668_spacelike_kk_projection.py",
+      "tested_rational_states": 405,
+      "states_with_5D_causal": 135,
+      "theorem": "for standard spacelike 5th fibre ds5²=ds4²+φ²(dy+A·dx)² where φ²≥0, every 5D causal tangent projects to 4D causal",
+      "not_a_physical_5D_Einstein_matter_solution": true,
+      "not_an_observed_FTL_mechanism": true
+    },
+    "P1_E1": {
+      "source_original_human_2013_AMS_assays": 34,
+      "atmospheric_original_NH_zonal_70_yearly_each_hashes": {
+        "NH1": "f7ff49b2ff6ed99f2a6b5aa811c86a774082cbcf",
+        "NH2": "296b7fbbee8f69f87501be05f9b1a1391a49e0f5",
+        "NH3": "aafd74536ec0690f1c1943ac98da3caf7972f59f"
+      },
+      "lag_sensitivity_script": "scripts/ksw668_human_lifetime_lag_sensitivity.py",
+      "source_derived_receipt": "Artifacts/ksw668/human_ams_nh_lifetime_lag_sensitivity_20261114.json",
+      "lag_stress_years": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "source_outlier_results": "5/5 original author flagged outside all three original NH zonal annual min/max envelopes at all four lag stress windows; 0/25 other tendon rows outside; NOT pMC-calibrated",
+      "unpaid": "individual food source, migration, AMS normalization, blank/systematic uncertainty, actual biological intervention"
+    },
+    "P3_E2": {
+      "status": "OPEN",
+      "all_matched_human_isotope_production_causal_samples": "not acquired",
+      "exclusion_universality_claim": "none; finite observational non-identifiability previously proved"
+    },
+    "local_replay_provenance": "Local equivalent SymPy full 3D Maxwell source-form PASS; original nitrogen ionization corrected Q independent Decimal PASS; KK exhaustive 405 rational states PASS. New GitHub exact-head Python and Agda kernel not executed in current environment.",
+    "physical_gate_promotion": false
   }
 }
