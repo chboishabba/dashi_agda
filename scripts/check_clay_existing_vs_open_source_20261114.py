@@ -10,6 +10,7 @@ import hashlib
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parents[1]
@@ -64,14 +65,44 @@ def main():
         check_source(row, roots)
     check_gitlink(roots["lean"], manifest["vendoring"]["openai_math_gitlink_commit"])
     if args.self_test:
-        marker = rows[0]["signatures"][0]
-        require(marker not in "not actually the terminal physical witness", "negative marker test invalid")
-        original = rows[0]["blob"]
-        require(original != "0"*40, "negative blob test invalid")
+        # Five true fail-closed tests against the EXACT original file, not
+        # a string-only dummy. Mutations must never look kernel-accepted.
+        from copy import deepcopy
+        source_row = rows[0]
+        with tempfile.TemporaryDirectory(prefix="clay-source-audit-") as tmp:
+            scratch = Path(tmp)
+            fixture = scratch / source_row["path"]
+            fixture.parent.mkdir(parents=True, exist_ok=True)
+            fixture.write_bytes((roots["agda"] / source_row["path"]).read_bytes())
+            test_roots = {"agda": scratch, "lean": roots["lean"]}
+            check_source(source_row, test_roots)
+            def must_block(row):
+                try:
+                    check_source(row, test_roots)
+                except ValueError:
+                    return
+                raise ValueError("negative source audit unexpectedly accepted")
+            fixture.write_bytes(fixture.read_bytes() + b"alteration")
+            must_block(source_row)
+            fixture.write_bytes((roots["agda"] / source_row["path"]).read_bytes())
+            bad_marker = deepcopy(source_row)
+            bad_marker["signatures"].append("nonexistent producer result as an unconditional theorem")
+            must_block(bad_marker)
+            bad_sha = deepcopy(source_row)
+            bad_sha["blob"] = "0" * 40
+            must_block(bad_sha)
+            fixture.unlink()
+            must_block(source_row)
+        try:
+            check_gitlink(roots["lean"], "0"*40)
+        except ValueError:
+            pass
+        else:
+            raise ValueError("wrong vendor commit was not rejected")
     print(json.dumps({"status":"SOURCE_AUDIT_PASS","rows":len(rows),
         "agda_source_files":sum(r["repo"]=="agda" for r in rows),
         "lean_source_files":sum(r["repo"]=="lean" for r in rows),
-        "vendor_gitlink_pinned":True,
+        "vendor_gitlink_pinned":True, "negative_controls_passed":(5 if args.self_test else 0),
         "same_object_proof_imports_proved":False,"kernel_executed":False,
         "terminal_clay_proof_produced":False},indent=2))
 
