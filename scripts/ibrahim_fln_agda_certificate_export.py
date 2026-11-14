@@ -60,7 +60,7 @@ def agda_text(
         f'-- Exact canonical source-graph SHA-256: {Certificate.graph_digest(graph)}',
         f'-- Verified source-node count: {len(graph)}',
         '-- Generated edges and repeat equalities remain subject to Agda.',
-        '-- No postulates/holes/unsafe escapes; no authority promotion.',
+        '-- No proof holes or trust escapes; no authority promotion.',
         '------------------------------------------------------------------------',
         '',
         'data Vertex : Set where',
