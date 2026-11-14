@@ -24,4 +24,16 @@ record["conditioned_nuclear_detection"]=False
 try:E2.source_bound(record)
 except ValueError:pass
 else:raise AssertionError("Uncalibrated isotope assay accepted")
-print("PASS source-gated E2 confidence bound and no-dataset refusal")
+
+# A quoted background lower bound larger than the statistical total mean
+# upper limit is itself inconsistent with data; never claim signal <=0.
+record["conditioned_nuclear_detection"]=True
+record["background_count_lower"]=10.0
+try:
+    E2.source_bound(record)
+except ValueError:
+    pass
+else:
+    raise AssertionError("Inconsistent source background manufactured false exclusion")
+
+print("PASS source-gated E2 confidence bound and inconsistent-background refusal")
