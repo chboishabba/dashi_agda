@@ -213,3 +213,58 @@ agda --safe -i . -l standard-library DASHI/Wikimedia/Everything.agda \
 ```
 
 Record the real `PIPESTATUS`/exit code immediately for each command (or use `set -e -o pipefail` in a fresh shell), full log hash, exact worktree head, Agda/stdlib identity, any local wrapper-mask diff and first failing module if aggregate still exits 42. The prior isolated 2.8.0.2 pass and 9/9 Python pass are preserved as **separate receipts**.
+
+
+## 2026-11-14 maximum-cut P1/P2/P4/P5 implementation tranche — source, proof and runtime gates
+
+**Provenance constitution:** original historical methodology/graph attribution: **Mark Ibrahim, Christopher M. Danforth, Peter Sheridan Dodds**, *Connecting every bit of knowledge: The structure of Wikipedia's First Link Network*, *Journal of Computational Science* 19 (2017), 21–30, DOI **10.1016/j.jocs.2016.12.001**. Original parser implementation: [`marksibrahim/wikipedia_network/code/first_link_txt.py`](https://github.com/marksibrahim/wikipedia_network/blob/master/code/first_link_txt.py), original Git blob `a830c47905d4cde90876e1097f2620f4f19a63df`. Original producer extraction: `code/create_fln.py`, Git blob `595f7f52ffc03e8a9542964b9dd3fffbfae87fca`. The **new** Python 3 parser port, finite-certificate checker and candidate-envelope validator are DASHI 2026 implementations; neither source is misattributed or assigned fabricated DOI/QID/DDC. Dewey is navigation-only; QID is a proposed item-identity coordinate, not semantic parity or historical page identity.
+
+### Newly implemented paths and actual acceptance
+
+| Phase | New artifact / theorem | Acceptance this tranche | Non-promotion |
+| --- | --- | --- | --- |
+| **P1 original parser behavioural route** | `scripts/ibrahim_author_parser_port.py` and `tests/test_ibrahim_author_parser_port.py`: `spans_of_outer_links`, `original_check_link`, `reference_first_qualifying_link`; exact original upstream parser blob pinned. Keeps nested templates/parentheses, `<ref>`/`<div>`, URL namespace substring exclusions (including display text), italics not specially filtered. | **7 synthetic parser behaviour tests pass**, including the original source's counterintuitive blacklist semantics; first-link candidate has codepoint span. This is source-reviewed *port behaviour*, not yet an executed original-code binary comparison. | The original producer file/dump/chunk identity and released `fln.json` reconstruction remain **OPEN**; no historical paper dataset reproduced. |
+| **P2 finite general certificate** | `scripts/ibrahim_fln_certificates.py`: `trace_start`, `check_trace`, `certify_graph`, `check_graph_certificate`; exhaustive per-node finite trace, cycle-entry index, canonical terminal cycle, distinct dead end and unresolved target; independent checker verifies all edges, cycle closure, graph hash and all source starts. | **5,000 random graphs and revisions** (1–10 nodes, seed 1505) agree with independent reference census; malformed transitions, missing starts, false cycle labels, wrong digest and revision witnesses rejected. | Python checker is **not an Agda kernel proof** of the checker or original FLN; explicit traces can cost O(n²) space. The CLI defaults to 1,000 nodes and rejects unrequested large certificates. |
+| **P2 CLI integration** | Original `scripts/ibrahim_fln_reference_analysis.py`: new `--certificate-output`, `--verify-certificate`, `--certificate-node-cap`. Calls independent verifier after manifest SHA checking. | Exact **Git-blob-matched** CLI create→verify, forged certificate rejection and cap rejection run as deterministic tests. | A user-provided graph SHA only binds provided bytes; it does not pay upstream producer/runtime identity. |
+| **P4 / new I9 multilingual consumer/source candidate** | `scripts/ibrahim_itir_multilingual_candidate.py`: explicit two-edition `qid`, `page_id`, `revision_id`, `wikitext` byte SHA, exact link offsets and parser/query refs, with canonical ITIR text/spans `source_ref`, `text_revision_id`, `span_ref`. `AUTHOR_PORT_POLICY` verifies that the selected link is the **first** selected by the pinned behavioural port. | Synthetic same-QID first-link collision, same-observation-but-unlicensed agreement, malicious hash/span/selector/revision/policy substitution and earlier-link-skipping rejection pass. Exposes a **candidate** coordinate `observed_value` to repair this one consumer. | **No actual Wikipedia article data or Wikidata QID assertion was acquired or validated here.** No translation equivalence, global query adequacy, review approval, Wikipedia edit authority, original-parser execution or re-parsed after-state is claimed. `first_qualifying_link_soundness_paid` remains false even when the behavioural-port span matches. Unknown not mapped to signed zero. |
+| **P5 reverse edit cone** | `certify_reverse_edit_cone`, `check_reverse_edit_cone`: explicit old-graph simple paths from affected nodes to edited sources; independently rewalks the old graph to prove witness completeness as an **executable check**. | In 5,000 paired finite random graph changes, checked cone = reference reverse closure; invalid/missing witnesses rejected. | Same node carrier only; deleted/added/redirected page identity requires ITIR typed transport; no blanket reapproval of PNF dependents. |
+| **Agda P2 periodic consequences** | `IbrahimFiniteOrbitRevisionWeldExact.agda`: `iterateAppend`, `positiveCycleRepeats`, `eventualCycleReturnsAfterEveryPeriodMultiple`. Generic total graph, given a supplied positive-cycle certificate. | **Source written**; compilation has **not** been run on the new commit in this turn. | Does **not** imply a general certificate-producing algorithm, finite-pigeonhole completion, or original corpus results. |
+
+**Exact local test receipt:** [`artifacts/ibrahim_fln_maxcut_28tests_receipt_20261114.json`](../artifacts/ibrahim_fln_maxcut_28tests_receipt_20261114.json). Local Python 3.13.5 `python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v`: **28/28 passed**, zero failures, log SHA-256 `573a9fdd429bd532fe0b571696bcb86b35a5673f76371d33d568882cc90fab19`. All eight new/modified Python files have matching exact Git blob IDs in the receipt; every original author's data result remains attributed to that author, not to the new test scripts.
+
+### Revised A/B/C acceptance ledger — exact outstanding lemmas/gates, not new generic ownership
+
+**A — proof/kernel finish + source parity:**
+- **A1** Re-run **all five original/new Agda modules** *and the revised periodicity source* on the exact latest PR head in a clean Agda 2.8.0.2 worktree; then pinned golden Agda 2.9 and `DASHI/Wikimedia/Everything.agda`. Earlier local 2.8 evidence was for an older head with dependency annotation; current head has new laws. The aggregate previously returned 42 and is still **OPEN**.
+- **A2** `finiteFirstLinkOrbitClassifies`, `terminalCycleUniqueUpToRotation`, `terminalBasinsPartition`, `terminalCensusMatchesCertificate`, `missingTargetNotDeadEnd`: these are still **kernel-level theorem targets**, even though independent Python certificate checking now passes on arbitrary bounded finite input. Need finite-enumeration/decidable-equality/pigeonhole construction with a verified checker–Agda ABI; do not call the Python checker the Agda proof.
+- **A3/I9** `historicalFirstQualifiedLinkSound`, `actualSelectedEdgeProjectsToFirstLink`, `qidAlignedTrajectoryComparisonSound`, `firstLinkRepairPaysSelectedConsumer` (existing synthetic Agda), `reviewedRepairRerunSound` (new real-source target, not the existing candidate-preservation lemma): actual language revisions, independent source hashes/oldids, reviewed interpretation/repair and post-state reparse. The author-source-port parity test can be substantially strengthened by running the **original** parser at original blob on the same pinned sample; this cannot be inferred from the port's test fixture alone.
+
+**B — revision/Hyperfabric join:**
+- **B1** `oldReverseClosureContainsAllChangedTerminals`, `queryProjectionInvariantOutsideDirtyCone`, `repairedTranslationReopensOnlyAffectedDependents`, `pageIdentityTransportPreservesConsumerQuery`. The finite Python check now explicitly verifies the first bound under equal node carriers; **Agda/ITIR actual revision dependency joining remains OPEN**.
+- **B2** `selectedEdgeHasRevisionSpanReceipt`, `incidenceAndRestrictionCompatibleForSelectedEdge`, `trajectoryTritEncodingInjectiveOrResidual`, `alignedPrefixDepthSound`: actual wikitext span/source identity and Hyperfabric stalk compatibility, preserving unknown and conflict separately from signed balanced-ternary numbers.
+
+**C — full historical and modern scientific objects:**
+- **C1** `originalDumpChunkLineageSameObject`, `producerExtractionMatchesReleasedMap`, `historicalProducerPolicyParity`, `publishedFunnelCountsMatchProducerVersion`: exact dump/day/hash, splitting chain, 112 chunks, and original producer commit; source [`create_fln.py`](https://github.com/marksibrahim/wikipedia_network/blob/master/code/create_fln.py) identifies this family but does not itself provide the missing archive lineage.
+- **C2** `modernLanguageCensusReproduced`, `alignedCycleBasinComparisonCoverageBound`, `parserAndRevisionSensitivityConfounderAudit`: modern revision-pinned edition datasets, sample/coverage denominators, editor/parser sensitivity tests and independently replicated counts. The manuscript and Gabella source observations do not grant contemporary cultural causality.
+
+**Cost constraint:** full explicit per-source traces are quadratic in the worst case. Do not generate them for a 505 MB graph. For full-scale scientific replication, run the original near-linear path-compression census and use **selected hash-bound trace certificates** or a compact proof DAG with separately proved completeness; the current cap is a hard non-promotion boundary.
+
+### Commands used for bounded reproducibility
+
+```sh
+python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v
+python3 scripts/ibrahim_fln_reference_analysis.py \
+  --input /path/to/checked-source-map.json \
+  --manifest /path/to/original-input-manifest.json \
+  --certificate-output /tmp/finite-cert.json \
+  --certificate-node-cap 1000
+python3 scripts/ibrahim_fln_reference_analysis.py \
+  --input /path/to/checked-source-map.json \
+  --manifest /path/to/original-input-manifest.json \
+  --verify-certificate /tmp/finite-cert.json
+python3 scripts/ibrahim_itir_multilingual_candidate.py \
+  --left /path/to/first-edition-revision-source.json \
+  --right /path/to/second-edition-revision-source.json
+```
+
+The `--certificate-output` option is for bounded input; manifest identifiers must be original-source receipts, not invented from public current titles/QIDs. **The candidate comparison does not edit Wikipedia.** Source author/date/code first implementation, first Agda kernel acceptance, first real-source acquisition and first empirical reproduction remain separately recorded.
