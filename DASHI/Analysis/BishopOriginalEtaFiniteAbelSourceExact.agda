@@ -27,6 +27,7 @@ import DASHI.Analysis.RiemannBishopComplexAnalyticCarrierExact as BC
 import DASHI.Analysis.BishopOriginalDirichletEtaFinitePairingExact as Eta
 
 infix 4 _≈C_
+_≈C_ : BC.BishopComplex → BC.BishopComplex → Set
 _≈C_ = Eta._≈C_
 
 originalAbelDifferencePrefix :
