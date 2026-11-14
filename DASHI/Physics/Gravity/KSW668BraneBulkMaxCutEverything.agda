@@ -20,3 +20,5 @@ import DASHI.Physics.Gravity.KSW668BraneBulkRationalNullComparatorExact
 import DASHI.Physics.Gravity.KSW668BraneWindingSourceFiniteExact
 import DASHI.Physics.Gravity.KSW668CaldwellLangloisHorizonSourceRationalExact
 import DASHI.Physics.Gravity.KSW668BraneLevinStringTSFVPromotionBoundaryExact
+import DASHI.Physics.Gravity.KSW668AdS5IsraelOriginalRationalSliceExact
+import DASHI.Physics.Gravity.KSW668BulkScalarReceiverRationalSliceExact
