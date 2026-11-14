@@ -2290,5 +2290,117 @@
       "new_agda_kernel": false,
       "new_lean_kernel": false
     }
+  },
+  "ns_abcd_toe_r3_reconciliation_20261115": {
+    "date": "2026-11-15",
+    "canonical_doc": "Docs/roadmaps/ClayNSABCDTOER3OpenAIBidiReconciliation20261115.md",
+    "current_status": "source_and_symbolic_math_verified_not_kernel",
+    "canonical_agda_pr": 1499,
+    "canonical_lean_pr": 108,
+    "source_clay_alternatives": {
+      "A": "unforced_whole_space_R3_global_regular",
+      "B": "unforced_periodic_T3_global_regular",
+      "C": "forced_R3_breakdown",
+      "D": "forced_periodic_T3_breakdown"
+    },
+    "oai_ns_source": {
+      "repository": "openai/NavierStokesAndEuler",
+      "original_sample_older_commit": "8937a8f4cbc7abaab5e9e97d1cc7f5d2319d9538",
+      "actual_nested_project_pin": "f9e8bc5b38b6e212696e8a30e3e91517af887bbd",
+      "current_pinned_lean": "4.34.0-rc2",
+      "source_newer_than_older_sample_by_one_commit": true
+    },
+    "actual_existing_lean_clay_proofs": {
+      "root": "ExternalClayNS",
+      "formal_spec": "ExternalClayNS/ClaySpec.lean",
+      "semantic_bridge": "ExternalClayNS/Gap.lean",
+      "clauses": "ExternalClayNS/ClauseAudit.lean",
+      "provenance": "ExternalClayNS/ProvenanceAudit.lean",
+      "direct_source_replay": "ExternalClayNS/SubmissionAudit.lean",
+      "direct_theorems": [
+        "directComparatorC",
+        "directComparatorD",
+        "directClayC",
+        "directClayD",
+        "directClauseAuditC",
+        "directClauseAuditD",
+        "directClayC_roundTrip",
+        "directClayD_roundTrip",
+        "dualRouteReceipt"
+      ],
+      "literal_resolution": "DASHILiteralClayNS.literalAnyOneClayResolution",
+      "contains_actual_clay_spec_proof_term": true,
+      "current_round_new_exact_head_kernel_replay": false,
+      "external_independent_physical_review_completed_here": false
+    },
+    "actual_existing_agda_toe": {
+      "four_lane_root": "DASHI/Papers/NavierStokes/FourLaneProofProgramExact.agda",
+      "toe_frontier": "DASHI/Unified/NavierStokesClayFrontierTOEConvergenceExact.agda",
+      "toe_B_M2": "DASHI/Unified/NavierStokesBM2TOEConvergenceExact.agda",
+      "toe_validation": "DASHI/Unified/NavierStokesClayFrontierTOEConvergenceValidation.agda",
+      "canonical_A_radial_budget": "DASHI/Physics/Closure/NSWholeSpaceR3RadialFactorBudgetExact.agda",
+      "canonical_A_pair_resolvent": "DASHI/Physics/Closure/NSWholeSpaceCanonicalPairSaturationOriginExact.agda",
+      "source_typed_promotion_flags": "false"
+    },
+    "math_gates": {
+      "A": [
+        "originalEuclideanPhysicalResolventMatchesCanonicalPairSaturation",
+        "originalR3PhysicalSignedSecondMomentCarriesQ",
+        "originalR3RadialFubiniSameObject",
+        "originalR3FiniteEnergyConvolutionMajorantAndContinuation"
+      ],
+      "B": [
+        "originalR568CutoffUniformSignedSpacetimeBudget",
+        "originalR406R98PositiveMarginStrictSurplus",
+        "originalR71PhysicalGalerkinRealCurve",
+        "originalR853SelectedRateAlongActualCurve",
+        "originalR828RateEnvelopeAlongCurve",
+        "originalBAllDataContinuumContinuation"
+      ],
+      "C": [
+        "ExternalClayNSDirectSourceExactHeadKernelAndAxioms",
+        "IndependentR3CandidateAndUniqueGlobalEnergySourceReview"
+      ],
+      "D": [
+        "ExternalClayNSDirectSourceExactHeadKernelAndAxioms",
+        "IndependentPeriodicCandidatePressureUniquenessSourceReview"
+      ]
+    },
+    "symbolic_regression": {
+      "script": "scripts/check_ns_abcd_r3_toe_sympy_20261115.py",
+      "git_blob": "2b70c3cc0323abe7ce04c80e94668a9d6109a6af",
+      "sympy": "1.14.0",
+      "executed_local": "PASS",
+      "exact_pressure_moment": "16*pi/R",
+      "near": "12*pi/R",
+      "far": "4*pi/R",
+      "exact_r3_radial_budget": "G*Q/nu**3",
+      "missing_second_q": "G*Q/(nu**3*q)",
+      "R854_affine_final_rate": "-284574877153831/1258128000",
+      "agda_kernel": false,
+      "lean_kernel": false,
+      "physical_source_weld": false
+    },
+    "local_driver": "scripts/check_ns_toe_abcd_pinned_local_20261115.sh",
+    "driver_git_blob": "f66e99a6d37bc98ee8a06076a8f6ca2db9120efd",
+    "driver_modes": [
+      "source-only",
+      "kernel"
+    ],
+    "observed_toolchain_availability": {
+      "agda": false,
+      "lake": false,
+      "lean": false,
+      "nix": false,
+      "network_clone": false,
+      "kernel_mode_executed": false
+    },
+    "previous_elementary_forced_corollaries_redundant": true,
+    "scope_firewall": {
+      "forced_CD_does_not_disprove_unforced_AB": true,
+      "source_written_not_math_adjudication": true,
+      "source_graph_not_equivalent_to_toolchain_replay": true,
+      "raw_4_lanes_not_1_R736_route": true
+    }
   }
 }
