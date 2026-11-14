@@ -44,6 +44,7 @@ agda_required=(
   "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda"
   "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda"
   "DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda"
+  "DASHI/Research/OpenAIMath/OpenAIMathOriginalOptimizedSATDecisionBitExact.agda"
   "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
 )
 lean_required=(
@@ -74,6 +75,8 @@ pycheck "$LEAN_ROOT" check_bsd_q2_eight_squareclasses_20261114.py
 pycheck "$AGDA_ROOT" check_rh_original_a2_interval_maxcut_20261114.py
 (cd "$AGDA_ROOT" && python3 scripts/check_openai_math_full_crosswalk_20261114.py --self-test)
 (cd "$AGDA_ROOT" && python3 scripts/check_oai_ym_endpoint_logic_maxcut_20261114.py)
+(cd "$AGDA_ROOT" && python3 scripts/check_oai_bidi_ns_sat_20261114.py)
+echo "OAI_BIDI_NS_SAT_FINITE_PASS: 580 exact list/Finset CNFs, 4 forced/unforced scope models; kernel still open"
 echo "OAI_YM_A7_A8_FINITE_LOGIC_PASS: separate endpoints are not a combined same-witness theorem"
 echo "OAI_MATH_CORPUS_PINS_PASS: 721/373/208 historical source index; no mathematical import"
 (cd "$AGDA_ROOT" && python3 scripts/check_clay_existing_vs_open_source_20261114.py --lean-root "$LEAN_ROOT" --self-test)
