@@ -5,6 +5,7 @@ on:
     paths:
       - 'DASHI/Wikimedia/IbrahimFiniteOrbitRevisionWeldExact.agda'
       - 'DASHI/Wikimedia/IbrahimMultilingualHyperfabricWeldExact.agda'
+      - 'DASHI/Wikimedia/IbrahimPublishedSevenNodeFunnelExact.agda'
       - 'scripts/ibrahim_fln_reference_analysis.py'
       - 'tests/test_ibrahim_fln_reference_analysis.py'
       - 'scripts/check_ibrahim_fln_maxcut.sh'
