@@ -241,8 +241,8 @@ complexNegateMultiplyLeft {F = F}
     realPart =
       trans
         (Algebra.cong₂ (C3.add F)
-          (Algebra.realNegateMultiplyLeft F ar br)
-          (cong (C3.negate F) (Algebra.realNegateMultiplyLeft F ai bi)))
+          (sym (Algebra.realNegateMultiplyLeft F ar br))
+          (cong (C3.negate F) (sym (Algebra.realNegateMultiplyLeft F ai bi))))
         (sym (Algebra.realNegateAdd F
           (C3.multiply F ar br)
           (C3.negate F (C3.multiply F ai bi))))
@@ -259,8 +259,8 @@ complexNegateMultiplyLeft {F = F}
     imaginaryPart =
       trans
         (Algebra.cong₂ (C3.add F)
-          (Algebra.realNegateMultiplyLeft F ar bi)
-          (Algebra.realNegateMultiplyLeft F ai br))
+          (sym (Algebra.realNegateMultiplyLeft F ar bi))
+          (sym (Algebra.realNegateMultiplyLeft F ai br)))
         (sym (Algebra.realNegateAdd F
           (C3.multiply F ar bi)
           (C3.multiply F ai br)))
