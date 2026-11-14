@@ -14,9 +14,11 @@ module DASHI.Mathematics.CrossPollination.ClayStagedSourceConvergence20261114 wh
 --   NS #1501 original R846/847/848 zero-mode repair;
 --   YM #1498 physical T4/B4 Wilson/ghost/Haar P0;
 --   P vs NP #1499 original fixed-instance SAT quantifier no-go.
--- Karp original #1445 + #1474 is joined in stacked PR #1502,
--- YM original F19 + P0 + stress-OS is stacked in PR #1503,
--- Bishop exp/eta is authored in the original PR #1478.
+-- Karp #1474/#1502, YM #1444/#1498/#1503, Bishop #1478,
+-- BSD #1500, and NS #1501 are now content-addressed source
+-- donors in THIS canonical Agda Clay rollup PR #1499.
+-- Lean companion acceptance root lives in dashi_lean4 #108.
+-- This is not a donor Git merge or a complete Clay proof.
 --
 -- This module has no new bridge or endpoint axioms. It provides
 -- the exact focused import root for local Agda/2.9 source, type,
@@ -42,3 +44,12 @@ import DASHI.Physics.Closure.NSTriadKNR650Rational345ZeroOutputSupportCounterexa
 import DASHI.Mathematics.CrossPollination.Clay20261114RHPoleFloorNoGoExact
 import DASHI.Mathematics.Complexity.PNotEqualsNPFixedInstanceQuantifierNoGoExact
 import DASHI.Physics.YangMills.YangMillsClayMergedResearchAndResidualCountRound528Exact
+
+-- SIX-FRONTIER ROLLUP SOURCE OWNERS; import/type-check admission only.
+import DASHI.Physics.YangMills.YMClayOriginalF19P0CommonOSSourceConvergence20261114
+import DASHI.Mathematics.Complexity.Karp21StackedSourceConvergence20261114
+import DASHI.Mathematics.Complexity.Karp21NativeGammaPhysicalAcceptanceObservationExact
+import DASHI.Mathematics.Arithmetic.EllipticOriginalSelmerCohomologyExhaustionExact
+import DASHI.Physics.Closure.NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact
+import DASHI.Analysis.BishopComplexExpFactEqualsNativeExpExact
+import DASHI.Analysis.BishopOriginalEtaRawSeriesOfSameSourceExact
