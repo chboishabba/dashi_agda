@@ -10,6 +10,11 @@
 # CLAY_SIX_SOURCE_ONLY=1 runs exact finite diagnostics WITHOUT kernel.
 # No theorem about YM continuum, N21 NP, BSD Sha, NS regularity,
 # Bishop uniform eta, or the RH is promoted by a source-only run.
+
+# External OAI 378 uses Lean 4.34.1 (later source revision) and requires a
+# separate pinned checkout and axiom audit; never import into 4.28 on this root.
+# External October 2026 YM uses Lean 4.32.0 and is also separate. The
+# crosswalk check is a source-byte/metadata preflight only.
 set -euo pipefail
 
 AGDA_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -38,9 +43,12 @@ agda_required=(
   "DASHI/Mathematics/Complexity/Karp21NativeGammaPhysicalAcceptanceObservationExact.agda"
   "DASHI/Analysis/BishopOriginalEtaRawSeriesOfSameSourceExact.agda"
   "DASHI/Physics/Closure/NSTriadKNR650Rational345RelaxedEnvelopeRound855Exact.agda"
+  "DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda"
   "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
 )
 lean_required=(
+  "Integration/OpenAIMath/ClayCrosswalkLeanSourceRollup20261114.lean"
+  "Integration/OpenAIMath/FullUpstreamMainResultsCatalogue.lean"
   "Synthesis/ClaySixFrontierRollup20261114.lean"
   "Synthesis/MillenniumBSDCMQ2EightLocalPointWitnessesExact.lean"
   "Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean"
@@ -64,6 +72,8 @@ pycheck "$AGDA_ROOT" check_bishop_eta_all_cutoffs_maxcut_20261114.py
 pycheck "$AGDA_ROOT" check_bishop_natlog_two_sided_dyadic_20261114.py
 pycheck "$LEAN_ROOT" check_bsd_q2_eight_squareclasses_20261114.py
 pycheck "$AGDA_ROOT" check_rh_original_a2_interval_maxcut_20261114.py
+(cd "$AGDA_ROOT" && python3 scripts/check_openai_math_full_crosswalk_20261114.py --self-test)
+echo "OAI_MATH_CORPUS_PINS_PASS: 721/373/208 historical source index; no mathematical import"
 echo "EXACT_FINITE_PASS: source-only diagnostics != Agda/Lean theorem"
 
 if [[ "${CLAY_SIX_SOURCE_ONLY:-0}" == "1" ]]; then
@@ -88,6 +98,8 @@ fi
 (cd "$LEAN_ROOT" && bash scripts/check_bsd_q2_hensel_3705_local.sh)
 (cd "$AGDA_ROOT" && RH_LEAN_REPO_DIR="$LEAN_ROOT" bash scripts/check_rh_a2_g3_attachment_local.sh)
 (cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda)
+(cd "$AGDA_ROOT" && bash scripts/run_agda29_parallel_check.sh DASHI/Research/OpenAIMath/OpenAIMathFullSourceRollup20261114.agda)
+(cd "$LEAN_ROOT" && lake env lean Integration/OpenAIMath/ClayCrosswalkLeanSourceRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/ClaySixFrontierRollup20261114.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/RiemannSignedFifthEventualThreeProducerRollupExact.lean)
 (cd "$LEAN_ROOT" && lake env lean Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean)
