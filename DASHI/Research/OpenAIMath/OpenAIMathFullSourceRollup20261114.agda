@@ -21,5 +21,6 @@ import DASHI.Research.OpenAIMath.OpenAIYangMillsSameWitnessNonEntailmentExact
 import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinOptimizedCNFExact
 import DASHI.Research.OpenAIMath.OpenAIMathCreationOrderSerializationExact
 import DASHI.Research.OpenAIMath.OpenAIMathLiteralCodeTransportExact
+import DASHI.Research.OpenAIMath.OpenAIMathOriginalOptimizedSATDecisionBitExact
 import DASHI.Research.OpenAIMath.OpenAIMathCorpusRegression
 import DASHI.Research.OpenAIMath.OpenAIMathSourceAtlasRegression
