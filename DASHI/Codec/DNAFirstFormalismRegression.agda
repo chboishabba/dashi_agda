@@ -1,6 +1,7 @@
 module DASHI.Codec.DNAFirstFormalismRegression where
 
 open import Agda.Builtin.Bool using (false; true)
+import DASHI.Codec.DNAProductionConstraints
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using ([]; _∷_)
 open import Agda.Builtin.Nat using (zero; suc; _+_)
@@ -117,3 +118,25 @@ negative-sign-is-existing-negative-polarity = refl
 empty-is-generable :
   ∀ M → Generable M []
 empty-is-generable M = emptyTrace
+
+------------------------------------------------------------------------
+-- Round 4/5 protected source owner: duplicate baseEq implementations
+-- agree for all 16 cross-cluster base pairs. This is a carrier-level
+-- inspection. It does not change chemical constraints or admit bridges.
+
+import DASHI.Codec.DNAProductionBaseEqPairwiseJoinExact as Pairwise
+
+baseEq-choices-constraints-agree-A-C :
+  Pairwise.baseEq A C ≡ false
+baseEq-choices-constraints-agree-A-C = refl
+
+baseEq-choices-constraints-agree-A-A :
+  Pairwise.baseEq A A ≡ true
+baseEq-choices-constraints-agree-A-A = refl
+
+baseEq-all-cross-cluster-pairs :
+  (a b : Base) →
+  Pairwise.baseEq a b ≡
+  DASHI.Codec.DNAProductionConstraints.baseEq a b
+baseEq-all-cross-cluster-pairs =
+  Pairwise.baseEq-across-clusters

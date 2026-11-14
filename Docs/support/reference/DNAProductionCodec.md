@@ -86,3 +86,54 @@ The CI benchmark emits `dna-production-benchmark.json` with:
 
 These values are environment-specific measurements and are not imported as
 mathematical axioms.
+
+
+## Round 4/5 — pairwise noTypedMeet join and cross-cluster baseEq gate
+
+**Owner:** `DASHI/Codec/DNAProductionBaseEqPairwiseJoinExact.agda`
+(`{-# OPTIONS --safe #-}`). Existing executable definitions are
+**unchanged** in `DNAProductionChoices` and
+`DNAProductionConstraints`. The new Golden source proves
+`baseEq-across-clusters` by exhaustive 16-case pattern matching,
+`baseEq-reflexive`, `baseEq-symmetric`, and
+`joinedMeansSame`. The typed `pairwiseInspection` returns a
+proof-carrying local join only for identical bases; for unequal
+bases it returns `noTypedMeet` with a witnessed false
+`baseEq` decision. No postulate, unsolved meta or termination
+pragma was written.
+
+**Steelman:** `noTypedMeet` in this carrier comparison is
+inspection-relative. The unrelated PNF receipt owner
+`DASHI.Interop.InspectionRelativeNoTypedMeet` explicitly
+forbids promoting a structural mismatch to global
+incommensurability, truth, support or authority. This DNA
+module does not claim that two different nucleotides cannot
+meet in a chemical reaction, share a complement fibre, or
+be related by an admitted bridge. It only certifies the
+chosen base-identity relation.
+
+**Cross-cluster import:** `DNAFirstFormalismRegression`
+retains its original carrier regression surface and now
+witnesses diagonal/off-diagonal base decisions. Both
+`DNAProductionValidation` and `DASHI.Codec.Everything`
+import the Golden pairwise leaf. The four other assigned
+DNA production modules remain unchanged to preserve
+branch counts, constraints, de Bruijn walks and
+normalization fuel semantics.
+
+**Exact remaining verification:**
+1. Kernel-check the focused `DNAProductionValidation`,
+   `DNAFirstFormalismRegression` and entire `Codec.Everything`
+   import graphs with the pinned Agda version.
+2. Keep a zero-postulate/zero-meta/zero-termination-pragma
+   source audit for the Golden new leaf.
+3. For stronger intercluster joining beyond nucleotide equality,
+   require a separate typed bridge proving the relevant
+   consumer/fibre and authority conditions. Never convert
+   a current `noTypedMeet` into global impossibility.
+4. Machine/biochemistry claims need their own explicit
+   source and assay contracts; equality of base constructors
+   does not prove wet-lab synthesis viability.
+
+**Evidence level:** source-written only in this GitHub connector
+turn; no Agda kernel or chemistry benchmark was executed.
