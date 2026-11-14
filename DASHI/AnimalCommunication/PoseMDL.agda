@@ -26,8 +26,6 @@ record PoseMDLSpec : Set₁ where
       totalCost D P M ≡
       dictionaryCost D + parseCost D P M + residualCost P M
 
-open PoseMDLSpec public
-
 -- A candidate motif/dictionary refinement is justified only when it lowers
 -- the complete description length, including its own dictionary cost.
 record MDLImprovement (S : PoseMDLSpec) : Set where
@@ -77,3 +75,5 @@ record PoseMDLReceipt (S : PoseMDLSpec) (budget : Nat) : Set where
     residual≤budget : residualCost (canonicalize pose) program ≤ budget
 
 open PoseMDLReceipt public
+
+open PoseMDLSpec public
