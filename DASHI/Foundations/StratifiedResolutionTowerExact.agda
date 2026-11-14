@@ -337,9 +337,9 @@ pullbackConstantOnFibre :
     (observable : ObservableAt tower r Value)
     {left right : Carrier tower (suc r)} →
   project tower left ≡ project tower right →
-  pullbackObservable observable left
-  ≡ pullbackObservable observable right
-pullbackConstantOnFibre observable eq = cong observable eq
+  pullbackObservable {tower} {r} observable left
+  ≡ pullbackObservable {tower} {r} observable right
+pullbackConstantOnFibre {tower} {r} observable eq = cong observable eq
 
 ------------------------------------------------------------------------
 -- Coarse aggregation is additional structure, not supplied by a quotient
@@ -363,8 +363,8 @@ coarseThenStretch :
   FibreAggregator tower r Value →
   ObservableAt tower (suc r) Value →
   ObservableAt tower (suc r) Value
-coarseThenStretch aggregator fineObservable =
-  pullbackObservable (aggregate aggregator fineObservable)
+coarseThenStretch {tower} {r} aggregator fineObservable =
+  pullbackObservable {tower} {r} (aggregate aggregator fineObservable)
 
 ------------------------------------------------------------------------
 -- Claim boundary.
