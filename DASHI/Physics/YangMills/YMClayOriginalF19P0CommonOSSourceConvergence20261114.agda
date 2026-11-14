@@ -51,3 +51,4 @@ import DASHI.Physics.YangMills.YangMillsStressWardCommonCoreGeneratorExact
 import DASHI.Physics.YangMills.YangMillsStressOSSourceFirstSemigroupCoreToClosureExact
 
 import DASHI.Physics.YangMills.YMClayR445OneLocalTVThreeMomentsSourceWeldExact
+import DASHI.Physics.YangMills.YMClayR445LocalizedTVInferenceNoGoExact
