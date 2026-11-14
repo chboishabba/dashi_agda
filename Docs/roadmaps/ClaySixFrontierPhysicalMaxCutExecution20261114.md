@@ -573,8 +573,7 @@ Lean 4.34.1. Do NOT identify the later 7ef5 OAI index with the older
   A7 continuum↔original E1 and original R445→OAI marked observables
   in BOTH directions. Physical D1/D2 still open.
 
-**Verified finite reference this round:** the local exact finite script
-`check_oai_bidi_ns_sat_20261114.py` ran successfully on 580 small
+**Verified finite reference this round:** the *exact committed Git blob* `5a37096a5d7579bea3a439b31020d1621259eb21` of `check_oai_bidi_ns_sat_20261114.py` was independently executed locally and passed 580 small
 list/Finset CNF formulas and four abstract forced/unforced scope models,
 with unused-variable, duplicate and empty-clause controls. It is now
 registered in the single Agda/Lean rollup acceptance driver. No exact
