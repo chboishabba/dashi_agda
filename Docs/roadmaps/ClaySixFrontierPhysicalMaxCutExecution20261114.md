@@ -540,3 +540,42 @@ Original mathematical credit: OpenAI and the cited prior mathematical
 sources; external 10 Nov review: Douglas, Gross, Jaffe, Klebanov, Nekrasov.
 New DASHI contribution: fail-closed endpoint composition *candidate* and
 independent finite logical audit, not new existence/mass-gap mathematics.
+
+
+## 14 November late maximum cut: OpenAI × DASHI YM/NS/SAT bidirectional steelman
+
+**Canonical detailed ledger and source attribution:**
+`Docs/roadmaps/ClayOpenAIThreeFrontierBidirectionalSteelman20261114.md`
+(29 exact source/analytic gates). This adds to, rather than overwrites, the
+prior six-frontier A/B/C register. Newly inspected external pins are separate:
+October YM Lean 4.32.0, September NS Lean 4.34.0-rc2, October OAI #SAT
+Lean 4.34.1. Do NOT identify the later 7ef5 OAI index with the older
+1581d vendored source.
+
+**Positive cross-pollination this round:**
+- **PNP:** `OpenAIMathOriginalOptimizedSATDecisionBitExact.agda` composes
+  original `Source.originalGlobalCNFCountExact`,
+  `Opt.optGlobalCNFCountExact`, and
+  `Creation.creationOptimizedTseitinCountExact` to the same original
+  SAT nonzero bit. No duplicate evaluator. Golden kernel acceptance OPEN.
+- **OAI #SAT 4.34:** external staged Lean
+  `Integration/OpenAIMath34/OriginalListFinsetCountTransportCandidate.lean`
+  targets the *real* OAI `SAT.CNF (Fin n)` and `SAT.count`, not a
+  surrogate. It must be built in the pinned foreign toolchain and still
+  needs original Agda literal/byte matching M00/M01b/M02-M05.
+- **OAI NS 4.34-rc2:** external staged Lean
+  `Integration/OpenAINavierStokes34/ForcedGlobalScopeCorollariesCandidate.lean`
+  derives no universal **forced** global solution for exact Comparator C/D
+  classes and conditional unforced-no-solution→forced-breakdown lifts.
+  This does not disprove unforced R736/B or construct a blow-up.
+- **YM:** existing same-A7-F A8 OPE proof *candidate* stays intact.
+  The new ledger spells out OAI A3 finite-law↔original F19 64+896 Haar,
+  A7 continuum↔original E1 and original R445→OAI marked observables
+  in BOTH directions. Physical D1/D2 still open.
+
+**Verified finite reference this round:** the local exact finite script
+`check_oai_bidi_ns_sat_20261114.py` ran successfully on 580 small
+list/Finset CNF formulas and four abstract forced/unforced scope models,
+with unused-variable, duplicate and empty-clause controls. It is now
+registered in the single Agda/Lean rollup acceptance driver. No exact
+new Agda 2.9 or Lean 4.28/4.32/4.34 kernel receipt is claimed.
