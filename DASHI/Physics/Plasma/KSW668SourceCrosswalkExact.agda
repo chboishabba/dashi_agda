@@ -102,8 +102,7 @@ originalFull3DMaxwellPoynting =
 -- Einstein-matter field-equation solution and not exotic operational FTL.
 originalSpacelikeKaluzaKleinProjectedCausal :
   (v : KK.SpacelikeKaluzaKleinCausalTangent) →
-  KK.baseLorentzIntervalSquared v
-    ℚ.≤ ℚ.0ℚ
+  ℚ._≤_ (KK.baseLorentzIntervalSquared v) ℚ.0ℚ
 originalSpacelikeKaluzaKleinProjectedCausal =
   KK.originalKaluzaKleinCausalProjection
 
