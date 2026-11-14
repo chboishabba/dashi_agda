@@ -13,7 +13,7 @@
     {
       "repository": "chboishabba/dashi_agda",
       "pr": 1478,
-      "sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+      "sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
       "branch": "chatgpt/analytic-j-tetration-abel-transport"
     },
     {
@@ -144,21 +144,39 @@
           "declaration": "originalBishopExpFactEqualsNativeExp",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         }
       ],
       "consumer": "original Bishop dyadic a(2k+1)=2^(-s)*a(k) proof",
-      "paid": "Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written; 10 original #1408 eta source modules transferred byte-for-byte into #1478; original Round11 eta term native factorial-exp real/imag convergence source-written on same branch",
-      "missing": "Kernel typecheck 12-root imported dependency chain and the new same-term factorial/native exp weld. Mathematical: original Bishop log(2n)=log2+logn at the *actual canonical Nat log*, complex exponential addition/multiplication, and hence dyadic a(2k+1)=2^(-s) a(k) for the original n^(-s) source.",
+      "paid": "Finite eta/zeta 2N identity; arbitrary complex factorial exp equals native complex exp separately written; 10 original #1408 eta source modules transferred byte-for-byte into #1478; original Round11 eta term native factorial-exp real/imag convergence source-written on same branch; original dyadic source scaling reduced to TWO explicit real log add/native complex exponential add laws, with actual Round11 all-cutoff finite consumer on #1478",
+      "missing": "Kernel-check 13-root eta+factorial+dyadic-reduction chain. Mathematical: prove original Bishop log(2n)=log2+logn on the selected canonical Nat-log candidate, prove the original native complex exponential addition/multiplication law, then inhabit both precise leaves in the same-object dyadic scaling theorem; compact-uniform eta tails and continuation remain open.",
       "classification": "analytic_source",
       "source_closure_checker": "scripts/check_bishop_cross_pr_dependency_closure.py",
       "source_closure_regression": "scripts/test_bishop_cross_pr_dependency_closure.py",
-      "source_closure_status": "checker source committed; full exact-head import closure not yet locally executed",
+      "source_closure_status": "10 source blobs and 35 original immediate DASHI import paths co-located; 13-root focused local Agda checker registered, exact-head kernel unobserved",
       "source_closure_kernel_receipt": null,
       "cross_branch_state": "source_dependencies_co_located_on_pr1478_kernel_unverified",
       "kernel_accepted_in_this_reconciliation": false,
       "terminal_gate_closed": false,
-      "source_weld_promotion": false
+      "source_weld_promotion": false,
+      "p2_dyadic_source_reduction": {
+        "pr": 1478,
+        "pinned_pr_sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
+        "owner": "DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda",
+        "declarations": [
+          "originalDyadicNegativeSLogIsSum",
+          "originalEtaDyadicScaleFromLogAndExp",
+          "originalRound11EtaZetaFiniteFromTwoLaws"
+        ],
+        "source_readback": true,
+        "source_written": true,
+        "agda29_kernel_accepted": false,
+        "original_log_dyadic_law_inhabited": false,
+        "original_native_complex_exp_add_inhabited": false,
+        "unconditional_original_dyadic_proved": false,
+        "compact_uniform_eta_convergence_proved": false,
+        "terminal_gate_closed": false
+      }
     },
     {
       "id": "BISHOP-ETA-TAIL",
@@ -192,7 +210,7 @@
           "declaration": "originalBishopExpFactEqualsNativeExp",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         },
         {
           "pr": 1478,
@@ -200,7 +218,7 @@
           "declaration": "originalBishopLogOnePlusSeriesValue",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         },
         {
           "pr": 1478,
@@ -208,7 +226,7 @@
           "declaration": "originalBishopLogUpperDiskAbsoluteConvergence",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         },
         {
           "pr": 1478,
@@ -216,7 +234,7 @@
           "declaration": "selectedOriginalLocalLogGermOnDisk",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         },
         {
           "pr": 1478,
@@ -224,7 +242,7 @@
           "declaration": "originalBishopSelectedNewtonFixedPointIsExpFixed",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         },
         {
           "pr": 1478,
@@ -232,7 +250,7 @@
           "declaration": "originalBishopInverseKoenigsLimitSchroeder",
           "github_exact_head_source_readback": true,
           "github_exact_head_decl_seen": true,
-          "github_head_sha_observed": "c19bb2c7c3b01d493975b31c868ffa9da46eb0b9"
+          "github_head_sha_observed": "a7601784d83c7857fc6e6f0e786ce850e03f3102"
         }
       ],
       "consumer": "original Newton-orbit principal logarithm and Koenigs Schroeder fixed point",
@@ -245,7 +263,7 @@
       "source_weld_promotion": false,
       "p1l_original_source": {
         "pr": 1478,
-        "pinned_pr_sha": "6ff07d854e326c3fab9553c2254fe8cee2c416f1",
+        "pinned_pr_sha": "a7601784d83c7857fc6e6f0e786ce850e03f3102",
         "finite_to_limit_owner": "DASHI/Moonshine/AbelBishopLogQuadraticTrueNormLimitOrderExact.agda",
         "finite_to_limit_declaration": "originalBishopUpperDiskLogQuadraticTrueNormBound",
         "selected_numeric_owner": "DASHI/Moonshine/AbelBishopSelectedLogEightTwentySevenNormExact.agda",
