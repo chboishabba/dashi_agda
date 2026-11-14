@@ -102,8 +102,7 @@ zeroFluxImpliesSignedWork :
   fluxOut b ≡ zero b →
   _⊕_ b (energyDelta b) (jDotE b) ≡ zero b
 zeroFluxImpliesSignedWork b noBoundary =
-  let open IntegratedPoyntingBudget b in
-  trans (sym (cong (λ w → _⊕_ w jDotE) (trans (cong (_⊕_ energyDelta) noBoundary) (rightZero energyDelta)))) balance
+  trans (sym (cong (λ w → _⊕_ b w (jDotE b)) (trans (cong (_⊕_ b (energyDelta b)) noBoundary) (rightZero b (energyDelta b))))) (balance b)
 
 ------------------------------------------------------------------------
 -- C. Nuclear species identity: separate charge and neutron accounting.
