@@ -5,6 +5,8 @@ open import Agda.Primitive using (Level)
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as C3Algebra
+import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Plasma.MHDPlusMinusProjectedPseudoEnergyExact as State
 import DASHI.Physics.Plasma.MHDLiteralIdealElsasserGalerkinDynamicsExact as Dynamics
@@ -51,6 +53,18 @@ selectedPlusTransfer {E = E} I state k p q =
     E I k q (State.zMinus state p)
     (State.zPlus state q) (State.zPlus state k)
 
+originalMHDSelectedTransversality :
+  ∀ {r : Level} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    (state : State.IdealElsasserFourierState F E)
+    (k : Z3.FourierMode) →
+  Helical.Transverse E k (State.zPlus state k)
+originalMHDSelectedTransversality {E = E} state k =
+  trans
+    (C3Algebra.bilinearDot3Commutative
+      (C3.modeVector E k) (State.zPlus state k))
+    (State.plusDivergenceFree state k)
+
 originalMHDSelectedStateNormalForm :
   ∀ {r : Level} {F : C3.RealField r}
     {E : C3.IntegerEmbedding F}
@@ -71,6 +85,27 @@ originalMHDSelectedStateNormalForm {E = E} I state k p q transverse =
   Projected.elsasserOrderedTransferNormalForm
     E I k q (State.zMinus state p)
     (State.zPlus state q) (State.zPlus state k) transverse
+
+-- This consumer needs NO newly assumed transversality:
+-- it derives it from the actual original state plusDivergenceFree receipt.
+originalMHDSelectedNormalFormFromState :
+  ∀ {r : Level} {F : C3.RealField r}
+    {E : C3.IntegerEmbedding F}
+    (I : C3.ModeInverseSquare F E)
+    (state : State.IdealElsasserFourierState F E)
+    (k p q : Z3.FourierMode) →
+  selectedPlusTransfer I state k p q
+  ≡
+  C3.complexRealPart
+    (C3.complexMultiply
+      (Ordered.minusI F)
+      (C3.complexMultiply
+        (C3.bilinearDot3 (State.zMinus state p) (C3.modeVector E q))
+        (C3.hermitianPairing3
+          (State.zPlus state k) (State.zPlus state q))))
+originalMHDSelectedNormalFormFromState I state k p q =
+  originalMHDSelectedStateNormalForm I state k p q
+    (originalMHDSelectedTransversality state k)
 
 originalMHDGalerkinProjectedSameState :
   ∀ {r : Level} {F : C3.RealField r}
