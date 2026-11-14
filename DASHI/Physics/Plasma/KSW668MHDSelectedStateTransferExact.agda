@@ -6,7 +6,7 @@ open import Agda.Primitive using (Level)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Closure.NSTriadKNComplex3AlgebraLaws as C3Algebra
-import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans)
 import DASHI.Physics.Closure.NSTriadKNPeriodicHelicalFourierInfrastructure as Helical
 import DASHI.Physics.Plasma.MHDPlusMinusProjectedPseudoEnergyExact as State
 import DASHI.Physics.Plasma.MHDLiteralIdealElsasserGalerkinDynamicsExact as Dynamics
