@@ -90,9 +90,9 @@ record MiddleLevelRole
   constructor middleLevelRole
   field
     middle : Carrier tower (suc r)
-    coarseShadow : Carrier tower r
+    middleCoarseShadow : Carrier tower r
     finerWitness : Carrier tower (suc (suc r))
-    middleIsFineOverCoarse : project tower middle ≡ coarseShadow
+    middleIsFineOverCoarse : project tower middle ≡ middleCoarseShadow
     middleIsCoarseUnderFiner : project tower finerWitness ≡ middle
 
 open MiddleLevelRole public
