@@ -90,7 +90,8 @@ For P0 acceptance require actual Agda 2.9 kernel log from the exact branch head 
 
 This is the continuation after the initial 11-test finite A–E/369/QM source adapter.
 **Reproducible numerical command:** \`python3 scripts/check_ksw668_physical_maxcut.py\`
-**Local execution:** 15 / 15 SymPy/decimal/fraction tests passed (distinct from the earlier 11 / 11). The checker prints its exact source-labelled JSON receipt. These tests were executed in the assistant's Python environment, **not** against an Agda/Nix checker. No test compares to an experiment that was not actually obtained.
+**Local execution:** 16 / 16 SymPy/decimal/fraction tests passed (distinct from the earlier 11 / 11).
+**Source-indexed exact diagnostic receipt:** `Artifacts/ksw668/physical_maxcut_exact_receipt.json` (independently reproduced local checks; canonical exact-head script replay pending). The checker prints its exact source-labelled JSON receipt. These tests were executed in the assistant's Python environment, **not** against an Agda/Nix checker. No test compares to an experiment that was not actually obtained.
 
 ### A1 — actual original-form helical-Elsasser finite state
 
@@ -151,7 +152,7 @@ Primary atomic masses: [NIST Isotopic Compositions](https://physics.nist.gov/cgi
 
 ### D1–D2 — flat Lorentz + finite quantum no-signalling versus KK
 
-The checker uses a flat 1+1 Lorentz interval for \((\Delta x,\Delta t)=(10,0)\), \(c=1\), proving this illustrative event separation spacelike. On a separate two-qubit Bell state it evaluates Alice's reduced density matrix after Bob's local \(I,X,Z,H\) unitaries and finds \(I/2\) for all. These are actual finite tests, **not** the general CPTP no-signalling theorem or an Einstein/KK physical solution.
+The checker uses a flat 1+1 Lorentz interval for \((\Delta x,\Delta t)=(10,0)\), \(c=1\), proving this illustrative event separation spacelike. On a separate two-qubit Bell state it evaluates Alice's reduced density matrix after Bob's local \(I,X,Z,H\) unitaries **and four nonunitary amplitude-damping CPTP maps** and finds \(I/2\) for all. These are actual finite tests, **not** the general CPTP no-signalling theorem or an Einstein/KK physical solution.
 
 \`KSW668IsotopeCausalResidualExact.SelectedPhysicalTransportTest\` is the joint physical gate requiring a selected common metric, Lorentz cone, matter/field evolution, conservation law, globally consistent causal route, synchronized arrival observations and actual KK/Einstein stress. No inhabited same-solution physical travel has been produced. PRs #1163/#1248/#1460 and quantum-mereology remain distinct owners.
 
@@ -192,4 +193,4 @@ scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668IsotopeCausalRes
 scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668SourceCrosswalkExact.agda
 \`\`\`
 
-**Trust:** 15/15 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
+**Trust:** 16/16 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
