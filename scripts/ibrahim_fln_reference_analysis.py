@@ -41,7 +41,7 @@ def sha256_file(path: Path) -> str:
 
 
 def check_manifest(path: Path, data_path: Path) -> dict[str, Any]:
-    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest = Certificates.strict_json_loads(path.read_text(encoding="utf-8"))
     if not isinstance(manifest, dict):
         raise ValueError("manifest must be an object")
     for key in REQUIRED_MANIFEST:
@@ -317,7 +317,7 @@ def main() -> None:
     if not 1 <= args.certificate_node_cap <= 10000:
         parser.error("certificate cap must be between 1 and 10000")
     source = check_manifest(args.manifest, args.input)
-    graph = checked_graph(json.loads(args.input.read_text(encoding="utf-8")))
+    graph = checked_graph(Certificates.strict_json_loads(args.input.read_text(encoding="utf-8")))
     report: dict[str, Any] = {
         "schema": SCHEMA,
         "method_source_doi": METHOD_DOI,
@@ -328,7 +328,7 @@ def main() -> None:
     }
     if args.compare:
         other_source = check_manifest(args.compare_manifest, args.compare)
-        newer = checked_graph(json.loads(args.compare.read_text(encoding="utf-8")))
+        newer = checked_graph(Certificates.strict_json_loads(args.compare.read_text(encoding="utf-8")))
         report["other_attribution"] = other_source
         report["revision_comparison"] = compare_same_carrier(graph, newer)
     if args.certificate_output or args.verify_certificate:
@@ -337,7 +337,7 @@ def main() -> None:
         if args.compare and len(newer) > args.certificate_node_cap:
             parser.error("revision graph exceeds explicit finite-certificate cap")
         if args.verify_certificate:
-            certificate = json.loads(args.verify_certificate.read_text(encoding="utf-8"))
+            certificate = Certificates.strict_json_loads(args.verify_certificate.read_text(encoding="utf-8"))
         else:
             certificate = {
                 "finite_graph": Certificates.certify_graph(graph),
