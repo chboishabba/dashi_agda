@@ -21,9 +21,9 @@ NEW = "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a"
 OLD_YAML_SHA = "275eee8cfab7ce49d3a5e88f02cbb8f28fe6fee6"
 NEW_YAML_SHA = "372bcd714cd3a186a9139ac8e0f3318961fb2df1"
 YAML_ROW = re.compile(
-    r"^    - comparator_config: (\\S+)\\r?\\n"
-    r"      declaration: ([^\\r\\n]+)\\r?\\n"
-    r"      file: ([^\\r\\n]+)", re.M
+    r"^    - comparator_config: (\S+)\r?\n"
+    r"      declaration: ([^\r\n]+)\r?\n"
+    r"      file: ([^\r\n]+)", re.M
 )
 
 def require(cond, msg):
@@ -36,7 +36,7 @@ def git_blob(raw: bytes) -> str:
 def parse_yaml(path):
     raw = path.read_bytes()
     source = raw.decode("utf-8")
-    require('status:\\n  scope: "Partial progress."' in source,
+    require('status:\n  scope: "Partial progress."' in source,
             "YAML is no longer partial-progress catalogue")
     return YAML_ROW.findall(source), git_blob(raw)
 
@@ -45,7 +45,7 @@ def load(directory=DATA):
     for filename, blob in NAMES.items():
         raw = (directory / filename).read_bytes()
         require(git_blob(raw) == blob, "historical donor source-byte drift: " + filename)
-        objs[filename.split("_source_index")[0] if False else filename] = json.loads(raw)
+        objs[filename] = json.loads(raw)
     return objs
 
 def validate(x):
