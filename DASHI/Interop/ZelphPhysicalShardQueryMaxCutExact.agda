@@ -48,7 +48,7 @@ zelphPhysicalNameShardPartitionExact :
   Σ Shard (λ shard →
     contains key shard ×
     ((other : Shard) → contains key other → other ≡ shard))
-zelphPhysicalNameShardPartitionExact cert key =
+zelphPhysicalNameShardPartitionExact {route = route} cert key =
   route key ,
   (indexedCoverage cert key ,
    indexedExclusivity cert key)
