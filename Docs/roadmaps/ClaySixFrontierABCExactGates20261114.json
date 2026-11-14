@@ -1952,5 +1952,192 @@
       "Clay_endpoints_closed_this_round": [],
       "open_physical_analytic_leaves_are_not_proved": true
     }
+  },
+  "implementation_round_20261114_10": {
+    "date": "2026-11-14",
+    "phase": "two_repository_Clay_rollup_source_consolidation_and_original_import_admission",
+    "canonical_prs": {
+      "agda": {
+        "pr": 1499,
+        "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+        "source_imports": 661,
+        "existing_identical_BSD_paths": 25,
+        "focused_root": "DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda",
+        "direct_imports_available": "17/17",
+        "kernel_checked": false
+      },
+      "lean": {
+        "pr": 108,
+        "branch": "chatgpt/clay-continuous-fifth-sign-20261112",
+        "source_imports": 56,
+        "focused_root": "Synthesis/ClaySixFrontierRollup20261114.lean",
+        "direct_imports_available": "15/15",
+        "kernel_checked": false
+      }
+    },
+    "exact_A_B_C": {
+      "YM": {
+        "A": [
+          "pin source / type-check F19 P0 R445 source roots and legacy real axiom audit"
+        ],
+        "B": [
+          "originalWilsonConditionalSameOutside",
+          "originalWilsonExteriorInfluenceBound",
+          "originalWilsonLocalizedDkBound"
+        ],
+        "C": [
+          "originalWilsonDkCutoffUniformSummable",
+          "originalWilsonRGUniformMomentControl",
+          "originalWilsonPhysicalCovarianceDecay",
+          "originalWilsonInteractingContinuumLimit",
+          "originalWilsonSameE1OSGap",
+          "N1 true nontrivial observable",
+          "G1 original required compact groups"
+        ],
+        "closed_C": []
+      },
+      "Karp": {
+        "A": [
+          "physicalAllLengthGammaRunSameOriginalPositive",
+          "physicalPositiveGammaAccepted",
+          "physicalZeroLengthGammaAccepted",
+          "physicalEmptyInputRejected",
+          "physicalLoneZeroRejected",
+          "Karp21GammaBinaryGoldenCoreExact newly restored dependency"
+        ],
+        "B": [
+          "physicalGammaAllInputsMatchesOriginalParser",
+          "nativeN21PhysicalFieldStreamSameOriginal",
+          "nativeN21PhysicalLedgerThresholdStepExact",
+          "originalRawFinishedThresholdObservationSameBinaryTerminal",
+          "originalBitTapeStepSimulatesN21Rule"
+        ],
+        "C": [
+          "nativeN21CompleteLiveHeapPolynomial",
+          "karpFractranBitMachineClockPolynomial",
+          "karpFractranDecodePreservesAcceptance",
+          "originalN21InNP",
+          "P0–P2 original reductions"
+        ],
+        "closed_C": []
+      },
+      "BSD": {
+        "A": [
+          "cmQ2SquareRoot3705",
+          "cmQ2SquareRootOfOneModEight",
+          "cmActualCurveQ2PointAt39",
+          "cmE_Q2_localPoint_* eight original E(Q2) witnesses"
+        ],
+        "B": [
+          "MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence",
+          "originalQ2LocalKummerImageExhaustive",
+          "originalRealLocalKummerImage",
+          "MillenniumBSDCMOriginalGeometricKummerGaloisEquivariantExact",
+          "originalSelmerTwoEqualsKummerKernel",
+          "originalShaTwoExactSequence"
+        ],
+        "C": [
+          "K3 same-curve Mordell–Weil rank deduction",
+          "K4 same-curve level32 eta/Mellin positivity",
+          "K5 odd-primary Sha and leading coefficient",
+          "universal BSD"
+        ],
+        "closed_C": []
+      },
+      "NS": {
+        "A": [
+          "Round71/Round74/R853 source kernels",
+          "R854/R855 arithmetic and compiler source"
+        ],
+        "B": [
+          "originalR71R74PhysicalRHSIsRealQuadraticField",
+          "originalR71RealGalerkinLocalSolution",
+          "originalR853SignedRateAlongGalerkinSolution",
+          "originalR853InitialRateEqualsR829"
+        ],
+        "C": [
+          "originalR828R854RateLipschitzAlongSolution",
+          "originalR854PhysicalRateEnvelope",
+          "nsR854OriginalRealRateIntegralStrictlyNegative",
+          "originalR823UniversalReserveCounterexample"
+        ],
+        "closed_C": []
+      },
+      "Bishop": {
+        "A": [
+          "originalBishopAbelFinite",
+          "originalRound11EtaFiniteAbel",
+          "originalRawEvenPrefixEqualsSelectedPairs",
+          "originalRawOddPrefixEqualsSelectedPairsPlusOne",
+          "originalRawPrefixEqualsNativeSeriesOf"
+        ],
+        "B": [
+          "originalBishopTrigCauchyConfiguredCoefficientIdentification",
+          "originalBishopTrigRectangleTriangleCommonLimit",
+          "originalBishopCosineAddition",
+          "originalBishopSineAddition",
+          "originalCanonicalNatLogSuccessorIncrementSandwich",
+          "originalCanonicalNatLogDyadicAddition"
+        ],
+        "C": [
+          "originalRound11EtaDyadicGeometricVariation",
+          "originalRound11EtaAbelPairTailBound",
+          "originalRound11EtaCompactUniformCauchy",
+          "originalRound11EtaCompactUniformConvergence",
+          "originalRound11DirichletTermAnalyticDerivative",
+          "originalRound11DirichletTermFundamentalTheorem"
+        ],
+        "closed_C": []
+      },
+      "RH": {
+        "A": [
+          "selectedA2LiteralGap_pos_iff",
+          "selectedA2Pass_of_source_intervals",
+          "selectedA2NoGo_of_source_intervals",
+          "selectedA2CofinalNoGo_of_source_intervals",
+          "signedFifthRollupCutoffEventuallyOwned",
+          "signedFifthRollupAnalyticInput_of_three"
+        ],
+        "B": [
+          "selectedOriginalWitnessFourthLipschitzBound",
+          "selectedOriginalHorizontalFarCurvatureBound",
+          "originalA2FarExactZeroShellBound",
+          "originalSelectedA2CompensationLowerBound"
+        ],
+        "C": [
+          "originalSelectedA2StrictSignedCompensation or originalSelectedA2CompensationNoGo on original selected zeros",
+          "originalSignedFifthPhysicalCapEventualGap",
+          "originalSignedFifthUpperBoundaryDecay",
+          "originalSignedFifthOuterTerminalConvergence"
+        ],
+        "closed_C": []
+      }
+    },
+    "transfer_conflict_reconciliation": {
+      "agda_NS_R854_R855_diagnostic_variants": "two compatible source-script changes resolved in favor of newer R855 checks",
+      "lean_RH_selected_gap_audit": "existing API retained; eventual cutoff and three-producer consequences reintroduced as new nonbreaking module",
+      "ignored_global_surfaces": [
+        "CHANGELOG.md",
+        "TODO.md",
+        ".github/workflows/ym-native-maxcut-exact-agda.yml",
+        "scripts/run_agda29_parallel_check.sh",
+        "Synthesis.lean",
+        "ExternalClayNS/ stacked comparator"
+      ],
+      "uncaught_missing_root_direct_imports": 0
+    },
+    "acceptance": {
+      "old_lane_prs_are_provenance_not_new_work_destinations": true,
+      "rollup_donor_source_Git_blob_identity_preserved": true,
+      "all_six_C_gates_remain_open": true,
+      "finite_diagnostics_not_kernel": true,
+      "golden_Nix_Agda_2_9": false,
+      "pinned_Lean_4_28": false,
+      "transitive_axiom_audit": false,
+      "reviewed_global_workflow_and_import_surfaces": false,
+      "GitHub_PRs_draft": true
+    },
+    "execution": "scripts/check_clay_sixfrontier_physical_local_20261114.sh from Agda #1499 and DASHI_CLAY_LEAN_WORKTREE=Lean #108",
+    "note": "User original maxcut target list follows canonical A/B/C source ownership; source co-location != inhabited analytic/physical estimates"
   }
 }
