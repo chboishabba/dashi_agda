@@ -62,10 +62,12 @@
     {
       "repository_group": "agda",
       "pr": 1444,
-      "sha": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "sha": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
       "lane": "YM_constructed_real_L7",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "latest_update_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
@@ -94,10 +96,12 @@
     {
       "repository_group": "agda",
       "pr": 1474,
-      "sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "sha": "5348713358c23f6b7e638cfb181bcb7e999645b1",
       "lane": "Karp21_FRACTRAN",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
+      "latest_update_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
@@ -160,20 +164,23 @@
     {
       "repository_group": "agda",
       "pr": 1500,
-      "sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
+      "sha": "5c01456abb4a6126bec02804af6f42cdfb7e953b",
       "lane": "BSD_Kummer_CM_L32",
       "wave": 2,
       "state": "open",
-      "previous_snapshot_sha": "9ac648b12ee305911cef8f70e1999949cc5279c9",
-      "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof"
+      "previous_snapshot_sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
+      "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof",
+      "latest_update_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
       "pr": 1501,
-      "sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "sha": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
       "lane": "NS_zero_mode_modal",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "latest_update_date": "2026-11-14"
     },
     {
       "repository_group": "lean",
@@ -420,7 +427,7 @@
     "legacy_real_unpostulated": false,
     "clay_endpoints_solved": false
   },
-  "snapshot_policy": "This JSON freezes observed donor exact source heads, not necessarily their live state after concurrent commits. The #1499 self-reference remains an earlier source checkpoint to avoid recursive hash. Kernel and physical gate promotion fail closed.",
+  "snapshot_policy": "Donor Git SHA snapshot as of 14 November 2026 only; PR branches may advance asynchronously. #1499 self SHA not pinned recursively. No kernel/Clay promotion.",
   "last_checked_on": "2026-11-14",
   "warnings": [
     "No PR was merged or closed by this work",
@@ -579,5 +586,85 @@
     "nix_present": false,
     "lake_present": false,
     "lemmas_typechecked": false
+  },
+  "abc_attachment_reconciliation_2026_11_14": {
+    "authoritative_roadmap": "Docs/roadmaps/ClaySixFrontierABCMaximumCut20261114.md",
+    "machine_gate_register": "Docs/roadmaps/ClaySixFrontierABCExactGates20261114.json",
+    "original_round518_43_preserved": true,
+    "first_attachment_claims_overstated": [
+      "YM normalized 4^-k Wilson contraction",
+      "YM normalized polymer activity/OS gap",
+      "NS universal collar/BKM reserve",
+      "RH -4 local pole floor and t>14.13 convexity",
+      "RH discrete signed fifth sign",
+      "Karp all costs and chains already certified",
+      "BSD Sel2=0, torsion classes, Sha odd and Kodaira I0*",
+      "Exact.agda filename implies pinned kernel acceptance"
+    ],
+    "new_math_negative_control": "DASHI/Mathematics/CrossPollination/Clay20261114RHPoleFloorNoGoExact.agda",
+    "source_test_and_unit_test": [
+      "scripts/check_clay_abc_attachment_negative_controls.py",
+      "tests/test_clay_abc_attachment_negative_controls.py"
+    ],
+    "latest_exact_donor_transfers": [
+      {
+        "source_pr": 1444,
+        "donor": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
+        "destination_pr": 1503,
+        "count": 2,
+        "gate": "YM.R445.TV",
+        "physical_TV_proved": false
+      },
+      {
+        "source_pr": 1474,
+        "donor": "5348713358c23f6b7e638cfb181bcb7e999645b1",
+        "destination_pr": 1502,
+        "count": 4,
+        "gate": "PNP.F1",
+        "all_k_gamma_physical_machine_proved": false
+      },
+      {
+        "source_pr": 1500,
+        "donor": "5c01456abb4a6126bec02804af6f42cdfb7e953b",
+        "destination_pr": 1499,
+        "count": 2,
+        "gate": "BSD.K1.SECOND",
+        "Q2_local_H1_proved": false
+      },
+      {
+        "source_pr": 1501,
+        "donor": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+        "destination_pr": 1499,
+        "count": 4,
+        "gate": "NS.R854",
+        "real_ode_rate_proved": false
+      }
+    ],
+    "external_NS_announcement": {
+      "openai_date": "2026-09-08",
+      "clay_date": "2026-09-11",
+      "url": "https://www.claymath.org/news/navier-stokes-announcement/",
+      "status": "externally announced apparently settled; CMI evaluation ongoing; not original repo B theorem",
+      "accepted_by_repo": false
+    },
+    "bsd_exact_curve": {
+      "Cremona": "32a2",
+      "LMFDB": "32.a3",
+      "equation": "y^2=x^3-x",
+      "torsion_order": 4,
+      "Kodaira_at_2": "III",
+      "Tamagawa_at_2": 2,
+      "special_value_decimal_external": "0.65551438857302995261620989747",
+      "analytic_sha_size_external": 1,
+      "source": "https://www.lmfdb.org/EllipticCurve/Q/32a2/",
+      "local_agda_same_object_verified": false
+    },
+    "status": {
+      "all_universal_clay_terminal_proofs": false,
+      "pinned_agda_local_kernel_receipt": false,
+      "pinned_lean_local_kernel_receipt": false,
+      "negative_controls_mathematically_tested": true,
+      "existing_donor_source_blobs_converged": true
+    }
   }
 }
