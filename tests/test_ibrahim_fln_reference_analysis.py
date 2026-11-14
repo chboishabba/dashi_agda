@@ -35,6 +35,32 @@ class IbrahimFLNReferenceTests(unittest.TestCase):
                             for x in result["top_single_visit_funnels"]))
         self.assertFalse(result["historical_traversal_funnel_algorithm_parity_paid"])
 
+    def test_published_traversal_visits_and_funnel_figure(self) -> None:
+        # Exact graph drawn in the Ibrahim-Danforth-Dodds 2016 draft
+        # (Figure 2 traversal visits; Figures 3-4 traversal funnels).
+        graph = {
+            "A": "B", "B": "C", "C": "A",
+            "D": "C", "E": "C", "F": "E", "G": "E",
+        }
+        terminals, basins = ref.terminal_census(graph)
+        visits = ref.paper_traversal_visits(graph, terminals, basins)
+        published = ref.traversal_funnels(
+            graph, terminals, basins, include_cycle_entry=True
+        )
+        old_pseudocode = ref.traversal_funnels(
+            graph, terminals, basins, include_cycle_entry=False
+        )
+        self.assertEqual(visits, {
+            "A": 7, "B": 7, "C": 7,
+            "D": 0, "E": 2, "F": 0, "G": 0,
+        })
+        self.assertEqual(published, {
+            "A": 0, "B": 0, "C": 4,
+            "D": 0, "E": 2, "F": 0, "G": 0,
+        })
+        self.assertEqual(old_pseudocode["C"], 0)
+        self.assertEqual(old_pseudocode["E"], 2)
+
     def test_incoming_tree_and_cycle_distinct_start_counts(self) -> None:
         graph = {"a": "b", "b": "c", "c": "d", "d": "c", "e": "b"}
         terminals, basins = ref.terminal_census(graph)
