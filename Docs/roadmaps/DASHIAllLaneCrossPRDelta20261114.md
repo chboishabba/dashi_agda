@@ -83,3 +83,18 @@ No selected BSD K4 terminal-gate promotion or universal BSD claim.
 **Acceptance status at publication:** source readback only;
 no new Agda 2.9 kernel receipt, original selected curve L-function
 theorem or Clay endpoint is claimed.
+
+
+## Later same-day BSD K1 arithmetic delta (Agda #1500)
+
+Current read-back BSD #1500 head: 1586051407fb771b96a03b12c22a16373d24e6b3.
+New source donor: DASHI/Mathematics/Arithmetic/EllipticCubicValuationParityExact.agda.
+New audit: docs/bsd-k1-local-valuation-parity-maxcut-20261114.md.
+For actual non-torsion local points on y²=x(x−1)(x+1), valuation
+case analysis yields 2vy=vx (vx>0), 2vy=3vx (vx<0), or vx=0.
+The Agda integer algebra source-writes an even-vx proof, including
+the explicit vx=2(vy−vx) witness in the negative case.
+Actual Q₂/R valuation/sign realization, local E[2]-valued H¹
+Kummer transport, good-prime supported global H¹ and Agda 2.9
+kernel acceptance remain OPEN. Do NOT promote K1/Sha/rank.
+These files stay on donor #1500 until a separately checked join.
