@@ -1,7 +1,6 @@
 module DASHI.Core.AdmissibleReachability where
 
 open import Agda.Builtin.List using (List; []; _∷_)
-open import Agda.Primitive using (Level)
 
 import DASHI.Core.TypedDependencyCore as Dependency
 
@@ -13,10 +12,9 @@ import DASHI.Core.TypedDependencyCore as Dependency
 ------------------------------------------------------------------------
 
 data Reachable
-    {State : Set ℓ}
-    {Action : Set}
+    {State Action : Set}
     (system : Dependency.DependentActionSystem State Action)
-    : State → State → Set ℓ where
+    : State → State → Set where
   reachableRefl :
     ∀ {state} → Reachable system state state
   reachableStep :
@@ -33,10 +31,9 @@ data Reachable
 ------------------------------------------------------------------------
 
 data Executes
-    {State : Set ℓ}
-    {Action : Set}
+    {State Action : Set}
     (system : Dependency.DependentActionSystem State Action)
-    : List Action → State → State → Set ℓ where
+    : List Action → State → State → Set where
   executesNil :
     ∀ {state} → Executes system [] state state
   executesCons :
@@ -56,10 +53,9 @@ executesImpliesReachable (executesCons {action = action} admissible rest) =
   reachableStep action admissible (executesImpliesReachable rest)
 
 record CorrectiveReachability
-    {State : Set ℓ}
-    {Action : Set}
+    {State Action : Set}
     (system : Dependency.DependentActionSystem State Action)
-    (suppressed live : State) : Set ℓ where
+    (suppressed live : State) : Set where
   constructor correctiveReachability
   field
     reopeningPath : Reachable system suppressed live
