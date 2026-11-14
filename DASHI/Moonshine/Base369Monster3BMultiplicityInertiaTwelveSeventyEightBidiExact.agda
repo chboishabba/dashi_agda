@@ -85,7 +85,7 @@ record ActualMultiplicityTwelveSeventyEightAttachment
       (inertia : ActualMultiplicityInertiaAttachment.MultiplicityInertia inertiaAttachment) →
       (multiplicity : Fin 90) →
       Split.multiplicityAct blockRecognition inertia multiplicity
-      ≡ multiplicityAct inertia multiplicity
+      ≡ ActualMultiplicityInertiaAttachment.multiplicityAct inertiaAttachment inertia multiplicity
 
 open ActualMultiplicityTwelveSeventyEightAttachment public
 
