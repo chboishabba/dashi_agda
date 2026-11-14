@@ -220,6 +220,57 @@ oldOrbitAvoidsEditsPreservesCycleCertificate delta certificate
     (avoidanceImpliesStable delta cycleAvoid)
 
 ------------------------------------------------------------------------
+-- Generic orbit concatenation and positive-period repetitions.
+-- Unlike a data-only figure witness, these laws quantify over ANY
+-- total first-link graph and any supplied concrete eventual-cycle
+-- certificate. They do not construct such a certificate from a raw
+-- finite corpus; that algorithm-to-kernel weld remains P2 OPEN.
+------------------------------------------------------------------------
+
+iterateAppend :
+  ∀ {Node : Set} (next : Node → Node)
+    (m n : Nat) (start : Node) →
+  iterate next (m + n) start ≡
+  iterate next n (iterate next m start)
+iterateAppend next zero n start = refl
+iterateAppend next (suc m) n start =
+  iterateAppend next m n (next start)
+
+positiveCycleRepeats :
+  ∀ {Node : Set} (next : Node → Node)
+    (period : Nat) (representative : Node) →
+  iterate next period representative ≡ representative →
+  (k : Nat) →
+  iterate next (k * period) representative ≡ representative
+positiveCycleRepeats next period representative closed zero = refl
+positiveCycleRepeats next period representative closed (suc k) =
+  trans (iterateAppend next period (k * period) representative)
+    (trans
+      (cong (iterate next (k * period)) closed)
+      (positiveCycleRepeats next period representative closed k))
+
+eventualCycleReturnsAfterEveryPeriodMultiple :
+  ∀ {Node : Set} {next : Node → Node}
+    {start : Node} →
+  (certificate : EventualCycle next start) →
+  (k : Nat) →
+  iterate next
+    (entryHops certificate + (k * suc (periodTail certificate)))
+    start ≡ representative certificate
+eventualCycleReturnsAfterEveryPeriodMultiple {next = next}
+  {start = start} certificate k =
+  trans
+    (iterateAppend next
+      (entryHops certificate)
+      (k * suc (periodTail certificate))
+      start)
+    (trans
+      (cong (iterate next (k * suc (periodTail certificate)))
+        (entered certificate))
+      (positiveCycleRepeats next (suc (periodTail certificate))
+        (representative certificate) (closed certificate) k))
+
+------------------------------------------------------------------------
 -- Connection to the canonical revision-indexed FLN owner. A snapshot
 -- label is not silently identified with a corpus or a parser run.
 ------------------------------------------------------------------------
