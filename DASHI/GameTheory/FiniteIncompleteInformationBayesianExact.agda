@@ -137,7 +137,7 @@ BayesianBestResponseAt :
     (B : FiniteBayesianGame G) →
   (U : Mixed.FiniteExpectedUtilitySurface G) →
   PlanProfile B →
-  Game.Player G → Set₁
+  Game.Player G → Set
 BayesianBestResponseAt {G} B U plans player =
   (alternative : Signal B player → Game.Strategy G player) →
   worldExpectedUtility B U player
@@ -248,3 +248,5 @@ canonicalFiniteBayesianGameBoundary : FiniteBayesianGameBoundary
 canonicalFiniteBayesianGameBoundary =
   finite-bayesian-game-boundary
     true true true true true true true false false
+
+open FiniteBayesianGameBoundary public
