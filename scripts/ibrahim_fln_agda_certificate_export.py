@@ -26,6 +26,21 @@ MAX_EXPORT_NODES = 64
 MODULE_PATTERN = re.compile(r'^[A-Z][a-zA-Z0-9]*(?:\.[A-Z][a-zA-Z0-9]*)+$')
 
 
+def agda_edge_chain(step_count: int) -> str:
+    """Generate one Agda-checked pathEdge refl per source edge.
+
+    The Agda kernel, not this generator, checks each emitted edge
+    equality against the concrete `next` function. This string
+    conversion is intentionally small and deterministic.
+    """
+    if not isinstance(step_count, int) or isinstance(step_count, bool) or step_count < 0:
+        raise ValueError("invalid nonnegative edge count")
+    proof = "Trace.pathEnd"
+    for _ in range(step_count):
+        proof = f"(Trace.pathEdge refl {proof})"
+    return proof
+
+
 def agda_text(
     graph: Mapping[str, str | None],
     module: str,
@@ -113,9 +128,6 @@ def agda_text(
         '',
         'generatedExplicitTrace :',
         '  (vertex : Vertex) → Trace.AcceptedCycleTrace next vertex',
-        'generatedExplicitTrace vertex =',
-        '  Trace.eventualCycleEmitsAcceptedTrace',
-        '    (General.collisionToEventualCycle (orbitRepeat vertex))',
         '',
         'generatedTraceMatchesAutomaticCycle :',
         '  (vertex : Vertex) →',
@@ -141,6 +153,29 @@ def agda_text(
         '  General.terminalBasinsPartition checkedCensus',
         '',
     ]
+    # Each source trace comes from an independently verified full
+    # certificate. The literal Agda witness binds the ENTIRE edge
+    # sequence to next: a wrong intermediary edge makes Agda fail,
+    # rather than trusting a Python-generated cycle-endpoint equality.
+    explicit = []
+    for trace in receipt['traces']:
+        start = trace['start']
+        entry = trace['entry_index']
+        period = len(trace['cycle'])
+        representative = trace['trace'][entry]
+        explicit.extend([
+            f'generatedExplicitTrace {name[start]} =',
+            f'  Trace.acceptedCycleTrace {entry} {period - 1} {name[representative]}',
+            f'    {agda_edge_chain(entry)}',
+            f'    {agda_edge_chain(period)}',
+        ])
+    # Clauses must be inserted immediately after the type declaration,
+    # before any generatedTraceMatchesAutomaticCycle declaration.
+    header = '  (vertex : Vertex) → Trace.AcceptedCycleTrace next vertex'
+    insert_at = lines.index(header) + 1
+    lines[insert_at:insert_at] = explicit
+    lines.insert(insert_at, '')
+
     # Keep page names only as JSON escaped comments (not proof identifiers).
     lines += ['------------------------------------------------------------------------',
               '-- Source-title coordinate ledger (navigation only):']
