@@ -467,3 +467,41 @@ F3 probes frozen **unselected, best-step-zero C3 seed41**: relative C3 action CE
 **F1 crucial nuance:** Layer0's source spectral pair with **>=10% original trace variance** has achievable covariance defect `D=0.0281` (<0.05). This is a *non-null* candidate order-three covariance representation, but still only a covariance-selected candidate, not a task-defined trained map. Layer1's low-defect pair carries merely 2.97e−7 trace share (vacuous), whereas a >=10% variance pair has `D=1.09832`; the top eigenvalue has 77.01% trace and 99.43% Frobenius share. Uniform-ish source-row PC energy is not a proof of architecture-only origin or independent documents.
 
 Remaining exact named formal obligations are unchanged: `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`, `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`, `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, `signedFloatWaveConsumerRefinement`, selected-to-authoritative Track A. Continue Agda under the **same formal PR #1442**; no reattribution of original LILA model or other physical programmes. F5 reserved 32×64 tokens remain sealed and historical source-document independence is not yet independently established.
+
+## 15 Nov late — exact F3 per-triad opposite C3 orientation identity and properly matched null
+
+The latest physical RX 580 F3 live-router audit reports the historical arbitrary random tangent control moved **2.0–2.2× farther** than coherent relative C3 in the **nonlinear** actual router feature map. The earlier source result was `CE(random)-CE(baseline)=-0.1823`, `CE(relativeC3)-CE(baseline)=-0.0644`; the random control therefore **improved** CE more, not “degraded” it more. No task-semantic C3 advantage was observed; the previous perturbation was not feature-distance matched.
+
+### New exact mathematical target — avoid relying on a random numeric optimizer
+
+For each original ordered real triad `u=(a,b,c)`, define `R_+u=(b,c,a)`, `R_-u=(c,a,b)`. These are inverse order-3 rotations. Both `R_+u-u` and `R_-u-u` have the same squared Euclidean norm:
+```text
+||R_+u-u||² = ||R_-u-u||²
+            = (a-b)² + (b-c)² + (c-a)².
+```
+For the source *directed* correlation vector
+```text
+T(u,v) = (aA+bB+cC, aB+bC+cA, aC+bA+cB)
+```
+(where `v=(A,B,C)` is the original fixed expert history), we have
+```text
+T(R_+u,v) = cycle(T(u,v)),
+T(R_-u,v) = cycle²(T(u,v)),
+||T(R_+u,v)-T(u,v)||²
+  = ||T(R_-u,v)-T(u,v)||².
+```
+Moreover the exact `trialectic_router_invariants` unary channels are invariant under both shifts. Hence any **independently chosen per-triad sign** `s_j in {+,-}` yields a source activation `M_s x` with the same original source norm, displacement `||M_s x-x||`, and **full nonlinear routed-feature displacement for EVERY expert and ANY fixed history** as the globally coherent `R_+x`. This is a faithful exact mathematical negative-control identity; it does NOT identify a learned semantic or original model equivariance.
+
+Proposed formal companion contracts (not yet kernel accepted, DO NOT claim proved Agda):
+- `originalTriadOppositeOrientationSquaredDisplacementSame`
+- `originalDirectedThreeCorrelationCovariantLeft`
+- `originalDirectedThreeCorrelationCovariantRight`
+- `originalDirectedFeatureOppositeOrientationDisplacementSame`
+- `originalAllTriadsMixedOrientationRouterFeatureNormExact`
+- `originalPhaseCoherenceNotForcedByMatchedFeatureNorm`
+
+Leech PR #4 has implemented `matched_mixed_orientation_c3_x`, the original `HistoryOrbitMoE` action `c3_feature_exact_mixed_orientation_x`, new live-geometry metric fields, and source property tests. Independent local float64 source-equivalent checks across d=6,24,384 gave feature-distance errors below 8e−15. New native source head and actual original-model CE comparison must be checked **after** these commits.
+
+**Evidence governance correction:** prior F3 scorer accepted a required `--reserved-lockbox-ids` and read the raw reserved F5 `.npy` to exclude 16-token ngrams, so the historical statement “F5 never opened or loaded” is too strong. The evidence supports **F5 never scored for CE or used to select architecture**; its raw token bytes were consumed by an overlap guard in the old code. The revised F3 scorer prohibits raw F5 input, checks only the original probe producer's SHA-bound exclusion manifest, and explicitly marks the results as exploratory reused F3 data. The original locked F5 is still *unscored* and its official future CE evaluation must not be used for post-hoc geometry tuning.
+
+A03/A04 arbitrary-field Fourier convolution/Parseval, A05 original eight+centre↔wave pairs, and A06 original consumer remain open. Source-correct F3 negative control does not close them, nor prove a task phase/group circuit.
