@@ -11,6 +11,7 @@ for source in \
   DASHI/Wikimedia/IbrahimFinitePigeonholeProducerExact.agda \
   DASHI/Wikimedia/IbrahimCycleRotationRelationExact.agda \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   test -s "$source"
@@ -46,6 +47,7 @@ for source in \
   DASHI/Wikimedia/IbrahimFinitePigeonholeProducerExact.agda \
   DASHI/Wikimedia/IbrahimCycleRotationRelationExact.agda \
   DASHI/Wikimedia/IbrahimPartialFirstLinkSemanticsExact.agda \
+  DASHI/Wikimedia/IbrahimFiniteTraceCheckerWeldExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
   NO_TMUX=1 ./scripts/parallel_check.sh "$source"
