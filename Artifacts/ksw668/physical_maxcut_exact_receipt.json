@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-14",
+  "source_kind": "exact symbolic model and independently evaluated source data; NOT experiment or Agda kernel",
+  "execution": {
+    "local_equivalent_checks_passed": 16,
+    "local_equivalent_checks_failed": 0,
+    "python_requirement": "sympy",
+    "canonical_script": "scripts/check_ksw668_physical_maxcut.py",
+    "canonical_exact_head_replay": "pending"
+  },
+  "A": {
+    "source": "original MHD Fourier Galerkin projected Elsasser mathematical formula",
+    "p": [
+      1,
+      0,
+      0
+    ],
+    "q": [
+      0,
+      1,
+      0
+    ],
+    "k": [
+      1,
+      1,
+      0
+    ],
+    "magnetic_strength_squared_k": "1/2",
+    "magnetic_strength_squared_q": "1/4",
+    "transfer_sign_a": "-1",
+    "transfer_sign_b": "+1",
+    "limitations": "finite instantaneous source-form Galerkin data, Agda rational state inhabitant open"
+  },
+  "B": {
+    "source": "Maxwell transverse wave with prescribed uniform current",
+    "E_y": "x-t+1-Jt",
+    "B_z": "x-t",
+    "J_y": "J = +/-1",
+    "epsilon0_mu0_c": "1 normalized",
+    "net_outward_flux_at_t0_L1": "2",
+    "local_Poynting": "exact polynomial equality",
+    "integrated_Poynting": "exact finite slab equality",
+    "limitations": "requires boundary sources; no arbitrary-domain PDE theorem"
+  },
+  "C": {
+    "triple_alpha_Q_MeV": "7.2747476075865239838",
+    "N14_n_p_C14_Q_MeV": "0.6258706545424723950",
+    "NIST_mass_source": "https://physics.nist.gov/cgi-bin/Compositions/stand_alone.pl?ascii=ascii",
+    "neutron_mass_u": "1.00866491595",
+    "atomic_unit_MeV": "931.49410242",
+    "measured_thermal_sigma_barn": "1.828",
+    "measured_thermal_sigma_uncertainty_barn": "0.053",
+    "measured_sigma_DOI": "10.1080/00223131.2026.2750299",
+    "thermal_neutron_energy_eV": "0.0253",
+    "hypothetical_neutron_flux_per_cm2_s": "1e6",
+    "hypothetical_N14_targets": "1e20",
+    "conditional_reaction_rate_per_second": "182.8",
+    "conditional_reaction_rate_uncertainty_per_second": "5.3",
+    "limitations": "no astrophysical triple-alpha rate, biological neutron exposure or empirical patient source"
+  },
+  "D": {
+    "flat_spacelike_event": "dx=10, dt=0, c=1",
+    "bell_local_unity": "I/2 after I,X,Z,H on Bob",
+    "cptp_amplitude_damping_gamma": [
+      "0",
+      "1/4",
+      "1/2",
+      "1"
+    ],
+    "alice_reduced_state": "I/2",
+    "limitations": "not an interacted KK spacetime or general operational no-signalling proof"
+  },
+  "E": {
+    "primary_biological_source": "Spalding et al. 2005 Cell DOI 10.1016/j.cell.2005.04.028",
+    "observed_environmental_mechanism": "atmospheric bomb-pulse radiocarbon incorporated into DNA",
+    "nonidentifiable_pair": "(initial=10,uptake=5,nuclear=0,clearance=0) and (initial=10,uptake=2,nuclear=3,clearance=0) both final=15",
+    "conditional_residual": "final - initial - uptake + clearance",
+    "limitations": "no measured emotion-intervention isotope conversion data; observational identification open"
+  }
+}
