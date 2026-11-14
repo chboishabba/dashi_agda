@@ -152,3 +152,35 @@ The new source `tests/test_ibrahim_intrinsic_rotation_model.py` has been committ
 - **M3: finite non-total FLN trichotomy** `finitePartialFLNClassifiesOrTerminates` remains open: a source may have no qualifying link or may point outside the declared source carrier, distinct from an infinite total graph self-loop.
 - **M4: Python *program* and JSON/hash semantics**, `pythonJsonCertificateDecodesToCheckedEdgePath` and `pythonCertificateCheckerSoundAndComplete`, remain open. The new Agda module proves the semantics of an **already typed, edge-checked** certificate; it does not magically verify the Python implementation or MediaWiki source selection.
 - **M5: domain aggregate** `DASHI/Wikimedia/Everything.agda` still lacks a clean global import acceptance; known resource/legacy failures are independent of isolated theorem truth.
+
+
+## M2–M4 follow-on maximum-cut source — after exact-head M1 acceptance
+
+**Current acceptance reference:** `f345b3955ad0848eff256bae3cbe290f401f5912` is the independently verified GitHub source commit for the operator's 40/40 Python and 12/12 Agda 2.8.0.2 focused PASS. New commits below **postdate that kernel receipt**, so their Agda and full Python suite status is **SOURCE WRITTEN / UPDATED-HEAD CHECK OPEN**.
+
+### M2 bounded decidability (new `IbrahimFiniteDecidableReachabilityExact.agda`)
+
+- `finiteNodeEqualityFromCarrier`: from `CompleteFiniteCarrier Node`, use already accepted `carrierEncode : Node → Fin N` with `FinP._≟_` to construct `a ≡ b ⊎ ¬(a ≡ b)`. **No external decidable equality assumption on `Node`.**
+- `ReachWithin`, `decideReachWithin`: structural finite-fuel search, checked against the actual original `next` edge transition rather than a title/QID equality.
+- `boundedPathImpliesForwardRotation`: any accepted bounded path yields a native `ForwardRotation next start target`.
+- `BoundedMutualRotation`, `decideBoundedMutualRotation`, `boundedMutualRotationIsSound`: decidable two-way paths **within a declared fuel**, sound as intrinsic graph rotation.
+- **M2 remaining exact theorem:** `unboundedMutualRotationHasBoundedWitness` must establish that a length bound computed from the finite carrier is **complete** for every forward reachability path. Only once that is accepted can `finiteCycleMembershipDecidableFromFinEquality` replace the explicit `decideCycle` input in `canonicalCycleRootExistsForFiniteDecidableOrder` without an unproved assumption.
+
+### M3 partial graph bounded exhaustiveness (expanded `IbrahimPartialFirstLinkSemanticsExact.agda`)
+
+- `PartialAtDepth`, `partialAtEveryFiniteDepth`: constructive, exhaustive **three-way** observation for every finite prefix: still visiting, explicitly stopped at a source node, or unresolved target with the actual outside token retained.
+- `partialIterateAppend`, `partialDeadEndPersistsAfterDiscovery`, `partialUnresolvedPersistsAfterDiscovery`: prove a real dead end or unresolved result cannot silently revert to visiting or collapse into another signed state after more steps.
+- **M3 remaining exact theorem:** `finitePartialFLNClassifiesOrTerminates` must additionally prove that if no dead end or unknown occurs within a finite-carrier threshold, a source repeats and yields an actual cycle certificate. Merely enumerating the state after N steps is **not** that result.
+
+### M4 literal edge-chain ABI (expanded `scripts/ibrahim_fln_agda_certificate_export.py`)
+
+- `agda_edge_chain` now materializes every validated certificate edge as a literal nested `Trace.pathEdge refl`, ending in `Trace.pathEnd`. The generated seven-source `generatedExplicitTrace` clauses bind source start, verified `entry_index`, positive cycle period and representative **directly to the concrete Agda `next` function**, rather than deriving an abstract typed path afterwards from the separately emitted `OrbitRepeat`.
+- `generatedTraceMatchesAutomaticCycle` continues to join **that explicit typed trace** to the independently generated constructive pigeonhole census via `terminalCycleUniqueUpToRotation`.
+- Exporter tests now assert a literal trace for each of A–G and the exact total number of proof-checked transition edges (initial path plus cycle return). **New-head generated Agda check and Python replay remain OPEN**.
+- **M4 remaining:** `pythonJsonCertificateDecodesToCheckedEdgePath` requires a formal input-schema/bytes/order decoder-to-Agda correspondence, and `pythonCertificateCheckerSoundAndComplete` requires a proof about the implementation or a verified extraction. Literal emitted paths give strong per-instance kernel checking, not a universal proof of arbitrary Python source correctness.
+
+### New acceptance scope
+
+- **Ibrahim #1505:** previously accepted 11 source + one generated module = 12 Agda checks at `f345b395`. New `IbrahimFiniteDecidableReachabilityExact.agda` adds one further source check: expect **12 source + one generated = 13 Agda checks** on the new head. The Python full suite retains 40 test methods, but has stronger emitted-path assertions; **no newer exact-head pass is claimed**.
+- **ITIR #14:** **120/120 Python and 4 native packed section roundtrips plus 5 negatives PASS at exact `a22995e4`**. The original published `.bin` ↔ immutable shard byte comparison and actual A1/A2 physical closure remain **OPEN**.
+- **Attribution:** original Wikipedia FLN methodology and historical graph results are Ibrahim–Danforth–Dodds; these generic graph proofs and code generators are DASHI, and Zelph shard records originate with the Zelph upstream project. The crosswalk must preserve both source identities and the approved consumer scope.
