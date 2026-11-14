@@ -160,11 +160,11 @@
     {
       "repository_group": "agda",
       "pr": 1500,
-      "sha": "9ac648b12ee305911cef8f70e1999949cc5279c9",
+      "sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
       "lane": "BSD_Kummer_CM_L32",
       "wave": 2,
       "state": "open",
-      "previous_snapshot_sha": "73bc99a324bdc0251862802177e2390973ae8c0a",
+      "previous_snapshot_sha": "9ac648b12ee305911cef8f70e1999949cc5279c9",
       "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof"
     },
     {
@@ -420,7 +420,7 @@
     "legacy_real_unpostulated": false,
     "clay_endpoints_solved": false
   },
-  "snapshot_policy": "Each PR donor pin is a historical exact source commit, not a promise that live PR heads remain unchanged; run get_pr_info/compare before merges. The manifest's self-PR #1499 is intentionally a pre-manifest source checkpoint to avoid recursive self-reference.",
+  "snapshot_policy": "This JSON freezes observed donor exact source heads, not necessarily their live state after concurrent commits. The #1499 self-reference remains an earlier source checkpoint to avoid recursive hash. Kernel and physical gate promotion fail closed.",
   "last_checked_on": "2026-11-14",
   "warnings": [
     "No PR was merged or closed by this work",
@@ -492,6 +492,92 @@
       "branches_preserved": true,
       "local_kernel_receipt": false,
       "clay_problems_solved": 0
+    },
+    "bsd_actual_source": {
+      "donor_pr": 1500,
+      "donor_sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
+      "recipient_pr": 1499,
+      "donor_changed_files_transferred": 23,
+      "all_exact_git_blobs_verified": true,
+      "math_modules": 13,
+      "docs_and_scripts": 10,
+      "external_direct_imports_present": 12,
+      "focus_root": "DASHI/Mathematics/Arithmetic/EllipticBSDSourceConvergence20261114.agda",
+      "local_rational_positive_tail_and_negative_control": "PASS",
+      "identity_modularity_mellin_kernel": false,
+      "original_K1_K5_closed": false
+    },
+    "ns_actual_source": {
+      "donor_pr": 1501,
+      "donor_sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
+      "recipient_pr": 1499,
+      "six_files_exact_blobs": true,
+      "old_R846_universal_empty_fibre_refuted": true,
+      "original_R436_R847_R848_imports_present": true,
+      "exact_integer_regression": "PASS: 36 seed pairs, 22 cutoff retained, 6 zero, 16 nonzero, 226981 full triads",
+      "signed_collar_and_time_continuation": false
+    },
+    "rh_actual_source": {
+      "donor_pr": 1497,
+      "donor_sha": "f213b5bfb893e49ae9b29b2915257884b3b0e14e",
+      "recipient_pr": 1499,
+      "nine_files_exact_blobs": true,
+      "direct_external_imports_present": 9,
+      "focus_root": "DASHI/Analysis/RiemannBishopOddSourceConvergence20261114.agda",
+      "RH_Weil_positivity": false
+    },
+    "ym_p0_actual_source": {
+      "donor_pr": 1498,
+      "donor_sha": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "recipient_pr": 1499,
+      "nine_math_files_exact_blobs": true,
+      "three_original_docs_and_regression_exact_blobs": true,
+      "focus_root": "DASHI/Physics/YangMills/BalabanP0OriginalSourceConvergence20261114.agda",
+      "local_haar_rational_SU2_five_sample_regression": "PASS",
+      "physical_Wilson_FP_Ward_coefficient": false
+    },
+    "ym_same_source_stack": {
+      "draft_pr": 1503,
+      "branch": "chatgpt/ym-f19-p0-source-convergence-20261114",
+      "stacked_base_pr": 1444,
+      "base_head": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
+      "p0_donor_pr": 1498,
+      "p0_donor_head": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
+      "nine_p0_math_files_exact_blobs": true,
+      "direct_source_imports_verified": 14,
+      "focus_root": "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda",
+      "legacy_RealAnalysisAxioms_contains_postulates": true,
+      "F19_P0_common_H_physical_estimates_proved": false
+    },
+    "central_acceptance_root": {
+      "branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+      "path": "DASHI/Mathematics/CrossPollination/ClayStagedSourceConvergence20261114.agda",
+      "direct_owners": 8,
+      "imports_all_resolve": true,
+      "pinned_kernel_checked": false
+    },
+    "phases": {
+      "source_preservation": "DONE for selected owners",
+      "stacked_same_original_source": "DONE for #1502 Karp and #1503 YM at source level",
+      "all_lane_source_combined": "DONE as import-only acceptance root #1499",
+      "local_regressions": "PASS for NS, BSD and YM arithmetic; 4 convergence planner tests",
+      "pinned_Agda_Lean_kernel": "NOT RUN",
+      "merge_to_master": "NOT DONE",
+      "physical_clay_endpoint_math": "OPEN"
     }
+  },
+  "local_test_evidence": {
+    "source": "Exact donor Git blob SHA reconstructed locally in container; explicit Python test executions 2026-11-14",
+    "test_commands": [
+      "python3 /mnt/data/check_ns_r846_zero_mode_and_nonzero_support.py",
+      "python3 /mnt/data/test_bsd_level32_positive_tail.py",
+      "python3 /mnt/data/check_balaban_l1_adjoint_haar_local_tail.py",
+      "python3 -m unittest -v /mnt/data/test_plan_clay_multi_pr_integrations.py"
+    ],
+    "result": "all PASS",
+    "agda_present": false,
+    "nix_present": false,
+    "lake_present": false,
+    "lemmas_typechecked": false
   }
 }
