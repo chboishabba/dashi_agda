@@ -1,0 +1,108 @@
+# Seven Clay-priority max cuts — original-source state after 13 November 2026 PR audit
+
+**Authority:** golden Agda 2.9 local kernel/axiom receipts; matching Lean local Mathlib pinned checker for Lean donors. No CI acceptance inference, no source-written-to-physical promotion. **No solution of any open Clay Millennium problem is claimed here.**
+
+## New source implementation delivered in this round
+
+**[Agda PR #1501](https://github.com/chboishabba/dashi_agda/pull/1501)** (draft): original NS R846 zero-output false-lemma repair.
+- New R847 **constructs an actual original** p=k₁, q=k₈ resonant triad in the literal cutoff-4 physical enumeration and selected output-zero fibre, with both active velocity legs; proves old unconditional inactive-output empty-fibre implies bottom.
+- Existing R436 **already proves** projectedNonlinearity(0)=0 by transverse input, not by empty fibre.
+- Original R848 **already proves** exact finite 36-pair support and nonzero forcing-mode list; new adapter only pays boolean-mode-zero test to original `Z3.NonZeroMode` transport and supplies the corrected R846 nonzero support producer.
+- Repaired R846 handles zero via R436, all other inactive outputs via R848, and uses R844/R845 to obtain the exact direct physical `R837.Repository345ModalSameObject`.
+- Independent exact integer reference PASS: six seed modes, 36 ordered pairs, 22 cutoff-retained, SIX selected zero-output incidences, 16 selected nonzero incidences, precisely eight outputs two each; full cube output-admissible original ordered triads 226981. Source-written Agda only; **kernel-open**.
+- **Do not reopen** R849 global actual work, R850 instantaneous R829 snapshot and R853 pointwise selected rate: they already exist in master. Remaining ODE bridge described below.
+
+## Seven priorities, paid formal work versus true residuals
+
+### 13 November continuation after YM source head review
+
+[Agda #1444](https://github.com/chboishabba/dashi_agda/pull/1444) now source-writes **ten additional true original physical F19 lemmas** in `YMClayOriginalWilsonPhysicalF19PartitionExact.agda`: positivity of the actual original sorted Wilson exponential, the physically coupled 896-spectator Haar marginal, the original 64-block effective Gibbs density, the effective partition, and the unsorted canonical 1024-link partition; plus exact zero-source two-mark simplification, **Z_aff(0,0) equals original canonical Wilson Z**, positivity of that actual marked normalizer, and full fine/effective two-source normalization by the same canonical original Z. These are conditional solely on existing original SU(N)/Haar/real-exponential source interfaces. They are SOURCE-WRITTEN, **not accepted by the pinned Agda 2.9 kernel**. Exact finite `Z₂^6` rational-model two-mark regression passed 441/441 cases; it is a NON-PHYSICAL sanity check, not a substitute for SU(N) or Agda.
+
+The local checker now correctly supports `AGDA_BIN` or `agda` on PATH before Nix, checks original M.01/M.02/F18/F19 first, and separates `--safe` Bishop-only source from legacy original Wilson typechecking with explicit `RealAnalysisAxioms` postulates. Two illegitimate `--safe` flags on those transitive real-boundary-dependent Haar/Gibbs modules were removed without inventing new axioms. Source readback and absence of local new postulates/holes were checked, not compiler acceptance.
+
+**P0.E true remaining weld:** a faithful original 1024-link Wilson-loop-word and reflected/physical marked observable into the already source-written F19 64-coarse-block test and exact selected mixed-log `J11` derivative; plus transitive local kernel/safety/assumption audit. **P0.F true mathematical wall:** original source-dependent three normalized nonconstant (F,G,FG) fine-effective minus distinct bare-coarse moment errors, uniform in changing UV cutoff and volume and summably controlled across RG steps. Partition identity, positive `Z` and normalized marked equality do not yield this estimate.
+
+### P1 YM — original R445 three-moment RG errors
+
+**P0.D/E FULL ORIGINAL PHYSICAL PARTITION SOURCE-WRITTEN (do NOT re-open):** [#1444](https://github.com/chboishabba/dashi_agda/pull/1444), head inspected 2026-11-13: `YMClayNative1024ClosedReindexHaarConsequencesExact` reconstructs the original 1024-link permutation from M.01 closed native equality candidates; `YMClayNative1024WeightedWilsonReindexExact` transports the actual interacting side-four periodic Wilson Gibbs weight with spectators; `YMClayNativePairsSpectatorsFubiniExact` and `YMClaySUNWeightedDisjointPairFibreReparamExact` use the genuine 64-pair + 896-spectator non-factorizing source Haar change of variables. The SAME original **physical** partition theorem `YMClayOriginalWilsonPhysicalF19PartitionExact.originalFinePhysicalPartitionEqualsActualEffectivePartition` directly composes these owners (no new density oracle). This is an original-source **equality**, not merely an effective-density candidate, under explicit original SUN/Haar/exponential inputs. Actual Agda 2.9 kernel and assumptions audit is still pending.
+
+**Further two-marked producer already present:** `YMClayOriginalWilsonF19ConcreteWeightExact.actualF19WilsonTwoMarkTheorem` and `actualF19WilsonNormalizedTwoMarkTheorem` instantiate the original physical sorted Gibbs weight in the exact F19 two-marked numerator and common-partition normalization equality. The outstanding marked-source debt is the precise original-loop/native-observable correspondence across the 1024-link canonical codec (and the original two-source derivative carrier), **not** the arbitrary-coupled-weight F19 marked integral itself.
+
+**Additional paid R445 source:** original P0.01–P0.05 cross numerator/source moment factorization (with explicit positive division laws), `YMClayE1D1OriginalSUNTraceToAllWordsBoundExact` transport from a still-uninhabited arbitrary-SU(N) normalized trace bound, `YMClayE1D1OriginalR445BoundedMomentMajorantsExact` conditional bounded physical coarse-test moments, and the exact three-moment error -> covariance/original mixed J11 compiler. No such upper-bound compiler proves the missing moment-error sizes.
+
+**Remaining P0 SOURCE/KERNEL (not original partition construction):** original closed 1024-label sorting and all native vector equalities must type-check with the pinned local Agda 2.9 toolchain, with the actual physical one-link Haar/Fubini assumptions audited; original Wilson `RealAnalysisAxioms.ℝ` -> constructed Bishop real interpretation and source arbitrary SU(N) normalized trace bound remain uninhabited. The separate Bałaban #1498 Fourier/Wilson/ghost/Haar one-loop physical scalar/shifted denominator/certified quadrature gates are **not** implied by the Wilson finite-volume partition identity.
+
+**Actual unproved source-specific mathematical producer:** for physically relevant nonconstant Wilson tests F,G,FG and **correct cutoff trajectory** prove the original selected normalized fine-blocked versus original bare-coarse moment differences are small with genuinely cutoff/volume-uniform UV+IR constants and summable scale errors. Finite Haar partition equality and cancellation at F=1 do not give this. The independent legacy `RealAnalysisAxioms.ℝ` to constructed Bishop setoid and physical SU(N) trace-source are still real representation/semantics welds.
+
+**Verification-specific caution (newer #1444 head `8866c8762763`):** the latest commit adds `--safe` to `scripts/check_ym_bishop_partition_maxcut_local.sh`. Its target `YMClayP0BishopToOriginalWilsonRealWeldExact.agda` imports `DASHI.Foundations.RealAnalysisAxioms`, which explicitly declares `postulate ℝ` and other laws. Agda `--safe` therefore cannot be assumed compatible with the entire original legacy-real import closure. Keep a *safe-only constructive Bishop root* separate from a *normal exact-typecheck plus explicit trust/axiom audit* for the legacy Wilson root; do not interpret a static no-new-postulate grep as whole-program `--safe` acceptance.
+
+**Separate terminal Clay mathematics:** E1 interacting four-dimensional continuum and consistency, D1 full original small+large-field Wilson clustering, D2 full same-H physical spectrum, N1 interacting nontriviality and G1 all compact simple physical carriers.
+
+### P2 RH — original A2/G3 strict compensation
+
+**Paid algebra:** exact selected signed M6 cap/polarity, local positive debt minus smooth-mu gain normal form and positive mu gain; A1 finite complement chart, and Route B direct gap compiler on [Lean #50](https://github.com/chboishabba/dashi_lean4/pull/50). Agda status mirror is only provenance. The unrelated continuous fifth-moment parity/IBP sign is negative and **not** `signedFifthCorrelationGapAt`.
+
+**Genuine unsolved analysis:** establish or refute on original zero/shell carrier the exact strict A2 inequality `localPositiveDebt + signed FarExact < compensationTargetThreshold + smoothMuGain` uniformly in the required region; simultaneously, A1 countable shell sum/curvature and Route B original eventual discrete gap sign are alternative open analytic routes. These are **not compiler/elaboration gaps**. No Weil positivity or RH endpoint receipt.
+
+### P3 NS — R829 instantaneous / real ODE
+
+**Already source-written:** R837 active reduction, R840–R848 literal source geometry/forcing, R849 actual global work, R850 direct snapshot/source R829 rate strictly negative, R853 general selected-rate normal form. PR #1501 corrects one false unused R846 all-mode support shortcut by combining source R436 at zero with R848 nonzero support.
+
+**Unpaid finite-dynamics weld:** instantiate the **same** Round71 polynomial/Galerkin field as a complete-real finite-dimensional C¹ solution, identify the original R853/R828 signed rate and carry strict negative value at t=0 through a valid short-time uniform-continuity/integration argument. Include physical `R408` trajectory/packet carrier and the exact R823 reserve implication. Classical finite ODE theory is established mathematics, but this same-object implementation is not accepted. **Separate genuine open Clay NS**: periodic B global enstrophy/collar and remote flux, or exact externally valid Clay A/C/D route. A selected finite counter-trajectory does not automatically refute 3D global smoothness.
+
+### P4 YM D2 — dense same-H physical-time decay
+
+**Paid generic theory/compiler:** R581/582 CMP119 pre-gap core; R583 original selected H1->OS4 compiler; R577 same reconstructed Hamiltonian identity; proper dense spectral projector argument in `YMClayOriginalOSDenseTestAutocorrelationGapCut20261109.md`. Its implication uses one common m>0 for all dense vectors, while constants C_psi may vary by vector. Three-mode hidden-sector and reciprocal rate zero-gap negative controls prohibit weaker shortcuts.
+
+**Genuine missing original physical theorem:** original E1 Wilson continuum, complete reflection-positive cylinder OS Hilbert/H, a source-proven dense gauge-invariant nonvacuum core and a **common strict positive physical-time decay exponent** (or another direct full-sector spectral lower bound), uniform through the cutoff. This is an actual mass-gap barrier, not a missing elementary spectral theorem.
+
+### P5 Karp-21 — original bit-tape verifier/clock
+
+**Paid source** [#1474](https://github.com/chboishabba/dashi_agda/pull/1474): real binary gamma/threshold/parser and first-enabled machine, signed ledger and native acceptance witnesses, actual finite 2m<=input bits retained-register bound, source-handoff status. **Formalisation residuals:** original finite tape/cell/head interpreter, complete live allocated peak space/copies/stack, exact full-machine simulation F1/F3, polynomial physical bit-time F4, SAT Cook–Levin E20 and all original 20 reduction cost receipts/21 NP membership. Exact-head Agda 2.9 kernel-cut is prerequisite.
+
+**Distinct unsolved mathematics for P≠NP:** `UniversalPolynomialSATDecisionFailure`, a universal lower bound for all deterministic polynomial SAT deciders. All Karp-21 NP-completeness engineering could be completed without proving this lower bound. No single fixed instance defeats all machines.
+
+### P6 BSD — original selected arithmetic/cohomology/L-function
+
+**Latest source** [Agda #1500](https://github.com/chboishabba/dashi_agda/pull/1500): original 16→8→4 supported rational square-class sieve, conditional real/Q₂ Kummer image producer, seven-prime Hecke prime-power recurrence and finite Euler identity. [Lean #107](https://github.com/chboishabba/dashi_lean4/pull/107): actual rational point/Ebar doubling, Galois-equivariant E[2], source-shaped H¹ localization, all with paid/explicit local comparison premises; Gamma candidate strictly positive. Source and arithmetic evidence is not yet pinned local kernel accepted.
+
+**Original math and cohomology formalisation still required:** actual all-place p-adic and real Kummer images, genuine continuous E[2] H¹ connecting long exact sequence, **classical** `Sha(E)[2]` comparison with E(Qbar), rational triangle Fermat descent or genuine Mordell–Weil rank argument; same-curve all-n Hecke newform/Mellin equality `L(E,1)` with the positive candidate. These are largely known selected-curve mathematics requiring legitimate source-level proof, not a new general BSD theorem. **Truly unsolved Clay BSD**: arbitrary curve leading-coefficient/rank equality and finiteness/odd-primary Sha issues as needed. A selected CM curve is not universal BSD.
+
+### P7 Hodge — actual cycle-class naturality
+
+**Paid/source-written** on merged [Lean #40](https://github.com/chboishabba/dashi_lean4/pull/40): literal Proj Q[X₀,X₁] over Spec Q, source rational section, irreducibility, quasicompact genuine ruling immersions, actual `AlgebraicCycle` pushforwards, factor-swap map and anti-invariant difference cycle. No need to rebuild P¹×P¹ or imaginary ruling lattice. Kernel acceptance must be audited against exactly matching Mathlib version.
+
+**Outstanding library/formal weld:** a genuine Betti/de Rham/Hodge cohomology carrier cycle-class map on this selected scheme, proper pushforward/factor-swap naturality, and same-class comparison. Those are established standard mathematics in this test case but may require significant original library development. **Truly unsolved Clay Hodge:** arbitrary rational (p,p) classes across all smooth projective complex varieties arise from Q-linear algebraic cycles; cannot be inferred from the P¹×P¹ regression.
+
+## Exact acceptance status
+
+| Category | Accepted this round |
+|---|---|
+| Original-source GitHub commits | PR #1501 new R847, repaired R846, nonzero R848 adapter, local checker, source ledger; PR #1499 updated 34-entry six-Clay dependency ledger |
+| Independent finite integer check | PASS on 36 seed pairs, 6 zero, 16 nonzero, 226981 full allowable triads |
+| Pinned local Agda/Lean kernel proofs | **NONE newly accepted in this execution environment** |
+| Original physical/analytic Clay terminal theorems | **NONE CLOSED** |
+| Other source provenance | Original authors and PR module owners preserved, no CI promotion |
+
+**Next highest-information work:** local pinned Agda check of PR #1501; once accepted, finish actual NS real-time ODE identity; meanwhile YM quantitative uniform original R445 moment source and RH strict compensation are the genuine mathematical requests to the research programme. BSD selected all-place source and Hodge cycle-class are significant known-math formalisation welds. Endpoints remain open until their original all-quantifier content and verification receipts are supplied.
+
+
+## 13 November non-Yang–Mills cross-programme source integration (mandatory companion)
+
+**Controlling 11-lane deliverables:** [DASHIAllLaneCrossPRIntegrationMaxCut20261113.md](DASHIAllLaneCrossPRIntegrationMaxCut20261113.md) and [machine ledger](DASHIAllLaneSourceDonorMaxCut20261113.json). These reconcile **19 exact producer/consumer bridges and 20 source PR heads**, not merely the Yang–Mills branch. The default `scripts/check_clay_broad_maxcut_manifest.py` now also runs the all-lane source donor validation. The separate six-Clay terminal ledger remains fail-closed at 36 open obligations.
+
+- **Bishop #1408 / #1478 / #1497:** finite even eta source scale→2N identity, arbitrarily complex original factorial exp=native exp, original upper-disk Bishop log-series absolute convergence + selected local logarithm germ and conditional Koenigs limit all SOURCE-WRITTEN on separate branches. Branch check shows the #1408 eta proof is **absent from #1478 and four direct Bishop eta imports are missing there**. Correct next cut is import/dependency closure and actual original dyadic log-exp term, then analytic eta tail. #1497 already pays rational reduction/unnormalised Bishop embedding roundtrip; full Bishop–FastCauchy zeta-value carrier equivalence remains open. No re-proof of exp or log finite algebra.
+- **Karp #1474:** actual finite-table physical gamma zero-prefix `sourceGammaZeroPrefixAgreement`, `physicalGammaPrefixHaltExplicit` and exact accepted `|C|<=|G|` original sparse certificate via `actualN21AcceptedCertificateFitsOriginalGraphWord` now explicitly credited. Missing full physical payload/graph/history/ledger/threshold simulation, F2.2 temporary heap, F4 full bit-clock and typed original G2-G4/`PR.InNP`. Universal `SATNotInP` is distinct Clay mathematics.
+- **BSD Agda #1500 ↔ Lean #107:** native actual prime-2 local label; 16→8→4 square-class enumeration; original rational torsion Kummer representatives, conditional all-H¹ Selmer exhaustion, seven-row Hecke/Euler; constructive (C_3[2]=0) and (C_3\ne0) negative control. Lean #107 owns actual geometric E[2] Galois-equivariant Kummer, E(\bar Q) restricted Sha target and strictly positive *published Gamma candidate* (not `L(E,1)` identity). Missing K1 actual Q2/real local images, K2 classical continuous Galois LES/Sha, K3 Mordell–Weil rank, K4 modularity/Mellin/same-L and K5 odd-primary Sha. No all-curve promotion.
+- **NS R850/R853 and #1501:** original instantaneous signed selected R829 rate (-28273644/125), pointwise normal form, and corrected R846 zero-output forcing support. Remaining **real same-system R830 ODE and strict integrated selected-rate window**, not the already-paid t=0 arithmetic. Lean #109 external Fefferman C has five R³ source transport leaves, separate from periodic B global regularity.
+- **RH Lean #108 / #50:** negative continuous fifth IBP sign is an independent **no-go** for the supplied continuous candidate, not a proof/disproof of the distinct original discrete `signedFifthCorrelationGapAt`; true A2/G3 strict far-zero compensation remains genuine unsolved analysis.
+- **Hodge merged Lean #40:** genuine `P1QScheme = Proj` geometry, actual `P1QSelfProductOverQ` ruling cycles and `p1QRulingDifference_antiInvariant` already SOURCE-WRITTEN under explicit geometry instances. Do not rebuild geometry. Missing true cycle-class map/pushforward naturality, geometric instance discharge and general Hodge.
+- **World #1494/#1495 vs #1484:** immutable native handoff and builder contract versus independently advanced PostgreSQL candidate world. No authoritative admission until a pinned independently verified Lean native-v3 parser/kernel receipt is joined to the same canonical DAG. `AuthoritativeBuilder.validate` is an adapter, not a validator of its own honesty.
+- **VOA #1472, BH4 #1454 + tissue #1471, Cybersyn #1496:** historical Y443 79+central→80 presented congruence paid but Monster/FLM action ISO open; actual BH4 27×54 transport and conservation plus *global-not-cellwise* counterexample paid but nonlinear SG/Poisson and tissue future calibrated dynamics open; public-source Fed/RBA futures and Australian network-incidence code paid but true empirical forecast validation/causal assignment open.
+
+**Reconciliation status:** descriptions and original theorem paths were read at the source heads in the companion manifest; branch-level imports and kernel receipts across all donor/consumer worktrees have NOT been compiled. This update reclassifies already source-written donors, adds explicit missing joins, and does **not** claim one of the seven Clay gates solved.
+
+
+### Exact-head source verification receipt (13 November)
+
+All **40/40** pinned PR donor file paths and named declaration strings in the 11-lane ledger were individually read back from their exact GitHub commit SHA. Four initial descriptive placeholder names on NS C/R846 and world admission/PostgreSQL were replaced with the **actual source declarations** before the final receipt. The ledger now stores per-donor `github_exact_head_source_readback`, `github_exact_head_decl_seen`, and `github_head_sha_observed`; the all-lane validator enforces agreement with the recorded 20 PR heads. This is only *exact source presence and named identifier readback*, NOT syntax elaboration, dependency import closure, proof term acceptance, source provenance adjudication, a Lean-world authority receipt or mathematical validity of any analytic hypothesis. **No new Agda 2.9 / Lean kernel receipts were obtained.**
