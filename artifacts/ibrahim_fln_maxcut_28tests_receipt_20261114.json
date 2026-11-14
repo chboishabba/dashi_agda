@@ -1,0 +1,52 @@
+{
+  "schema": "dashi.ibrahim.fln.maxcut_local_receipt.v4",
+  "scope": "exact Git blob matched local Python sources, synthetic fixtures, no historical full corpus or Agda kernel execution in this turn",
+  "authors": "Mark Ibrahim; Christopher M. Danforth; Peter Sheridan Dodds",
+  "original_method_doi": "10.1016/j.jocs.2016.12.001",
+  "original_parser_blob": "a830c47905d4cde90876e1097f2620f4f19a63df",
+  "DASHI_role": "new behavioural port, finite verifier, source-envelope validator and regression suite",
+  "python_version": "3.13.5",
+  "command": "python3 -m unittest discover -s tests -p 'test_ibrahim*.py' -v",
+  "tests": 28,
+  "failures": 0,
+  "random_graph_revision_pairs": 5000,
+  "test_log_sha256": "573a9fdd429bd532fe0b571696bcb86b35a5673f76371d33d568882cc90fab19",
+  "files": {
+    "scripts/ibrahim_fln_certificates.py": {
+      "git_blob_sha1": "26bb393bd5e2000e73099dd76abb7136af7645a0",
+      "bytes": 9149
+    },
+    "scripts/ibrahim_fln_reference_analysis.py": {
+      "git_blob_sha1": "9a536fae3240dc0e554f8dc5ac5ca54b07486541",
+      "bytes": 16291
+    },
+    "scripts/ibrahim_itir_multilingual_candidate.py": {
+      "git_blob_sha1": "b96c4da8f95355b648d1e4e94681a7800006b862",
+      "bytes": 7077
+    },
+    "scripts/ibrahim_author_parser_port.py": {
+      "git_blob_sha1": "261f6ec0d1f8d939d5bcaafabdd344ce1c0a7f4d",
+      "bytes": 3797
+    },
+    "tests/test_ibrahim_fln_certificates.py": {
+      "git_blob_sha1": "456655580d0c99647638bd5cf83c33e08566db0d",
+      "bytes": 3668
+    },
+    "tests/test_ibrahim_fln_certificate_cli.py": {
+      "git_blob_sha1": "32284806535a49820e295043dd04b7343e2368a4",
+      "bytes": 3979
+    },
+    "tests/test_ibrahim_itir_multilingual_candidate.py": {
+      "git_blob_sha1": "4a5b4205ca368d7d95cae10b7aec89b86338dad0",
+      "bytes": 3889
+    },
+    "tests/test_ibrahim_author_parser_port.py": {
+      "git_blob_sha1": "134fdf730ae25bd5607c095b3d1113b2580ed50d",
+      "bytes": 2020
+    }
+  },
+  "historical_dump_reproduced": false,
+  "upstream_parser_executed_on_original_dump": false,
+  "agda_kernel_checked_in_this_tranche": false,
+  "reviewed_real_multilingual_pair": false
+}
