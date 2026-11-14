@@ -15,3 +15,8 @@ module DASHI.Research.OpenAIMath.OpenAIMathFullSourceRollup20261114 where
 import DASHI.Research.OpenAIMath.Everything
 import DASHI.Research.OpenAIMath.OpenAIMathCrosswalkReview20261114
 import DASHI.Research.OpenAIMath.OpenAIYangMills2026SourceIntakeExact
+import DASHI.Research.OpenAIMath.OpenAIMathSharedTseitinOptimizedCNFExact
+import DASHI.Research.OpenAIMath.OpenAIMathCreationOrderSerializationExact
+import DASHI.Research.OpenAIMath.OpenAIMathLiteralCodeTransportExact
+import DASHI.Research.OpenAIMath.OpenAIMathCorpusRegression
+import DASHI.Research.OpenAIMath.OpenAIMathSourceAtlasRegression
