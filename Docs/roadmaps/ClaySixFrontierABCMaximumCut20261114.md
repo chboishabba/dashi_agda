@@ -272,3 +272,38 @@ The BSD dyadic `x=39` proof is constructive mathematics with coherent Hensel lif
 The RH selected scalar is **not** replaced by a synthetic toy witness: Lean #50 already reduces positive A2 sixth/eighth leading allowance to a selected `fourthLipschitz` ceiling of roughly 737.365 for the strength-floor witness, but its actual selected witness and FarExact do not yet supply the inequalities. First-zero positive-moment sign is an invalid shortcut, not a refutation of actual signed `signedFifthCorrelationGapAt`.
 
 **No exact-head Agda/Nix/Lean/Lake binary is installed in this tool environment.** Do not treat these new declarations as kernel-proved. All six full end states, their downstream Clay endpoints, and 43 YM original residuals remain appropriately open.
+
+
+## Round 3 (14 November 2026): exact original six-cut source proofs
+
+**Authority:** Original-carrier source-written proof terms, not yet Agda/Lean-kernel-accepted. The six Clay endpoint flags remain OPEN; see the exact gate-by-gate machine-readable implementation_round_20261114_3 in ClaySixFrontierABCExactGates20261114.json.
+
+| Cut | Original theorem / current owner | Actual result and missing mathematical leaf |
+|---|---|---|
+| YM R445 | Agda #1503: YMClayR445OneLocalTVThreeMomentsSourceWeldExact.originalPhysicalR445CovarianceFromOneLocalTV | A *single explicit local observation TV hypothesis* on the actual original Wilson normalized effective/bare coarse tests F,G,FG supplies all three moment errors and the native original R445 covariance telescope. **OPEN:** prove that original effective vs renormalized-target localized TV actually decays/sums in cutoff. Global full-volume TV need not converge at all |
+| Karp F1 | Agda #1502: Karp21NativeGammaAllLengthCompositePhysicalExact.physicalAllLengthGammaRunSameOriginalPositive | Composition of literal all-k physical prefix, separator, payload and halt: k>=1 processes 2k+1 token bits in 2k+2 machine instructions preserving exact source suffix. **OPEN:** k=0 full composite, all malformed rejection, repeated N21 n/m/u/v/w/W field machine, F2 memory, original F3 simulation, physical F4 clock and InNP |
+| BSD real K1 | Lean #107: MillenniumBSDCMRealNonexceptionalXTSignImageCompleteExact.cmOriginalRealNonexceptionalXTSignImage_eq; consumed by MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence | Actual original E(R) points (x,y)=(2,sqrt 6),(-1/2,sqrt(3/8)) witness BOTH and only equal-sign x-T Kummer pairs. **OPEN:** original E(R)/2E(R) and real continuous Galois H1 equivalence, exceptions and full local-global Kummer naturality |
+| BSD Q2 K1 | Lean #107: scripts/check_bsd_q2_original_eight_local_kummer_classes.py, with existing Agda Hensel algebra and Lean original local-image subgroup | Original x=39 and y=4*sqrt_2adic(3705) gives local Kummer ([−1],[−10]) by standard 2-adic square criterion. Combining with actual four rational E[2] torsion classes yields eight distinct local Q2 square-class pairs; exact rational arithmetic independently checked. **OPEN:** in-kernel Q2 sqrt and quotient equality, full continuous H1 identification, classical Selmer/Sha |
+| NS R854 | Lean #109: NavierStokesR854RealTimeIntegratedRateConditionalExact.nsR854OriginalRealRateIntegralStrictlyNegative | Actual REAL interval integral of an integrable real selected rate on original T is strictly negative from the original r0+L*t source envelope, with true interval-integral monotonicity. **OPEN:** construct actual real R71/R74 Galerkin trajectory; prove SAME R853/R408 rate, Lipschitz constant and source time integral; not arbitrary-data NS regularity |
+| Bishop eta | Agda #1478: BishopOriginalEtaPairBlockTelescopingExact.originalBishopEtaPrefixShiftedPairsExact and original Round11 consumer | Exact all-n,m shifted pair-block source eta on Murray/Bishop setoid, connected to original selected Round11 exponential/log term family. **OPEN:** native sin/cos addition and canonical NatLog/real log law; derivative/FTC for selected expC; uniform Abel bound and Bishop source SeriesOf limit |
+| RH A2/G3 | Existing Lean #50 selected fourth-Lipschitz threshold equivalence, Lean #108 negative fifth-sign control and Agda #1499 fail-closed original selected-witness diagnostic | The exact *necessary* selected W leading sixth/eighth allowance and signed debt decompositions are already source-written. The actual selected W physical fourth-Lipschitz, FarExact and zero-sum strict compensation remain UNPROVED; no original A2/G3 counterexample or RH proof was constructed this round |
+
+### Mathematical verification evidence and trust boundary
+
+The original 3-state physical gamma transition table was independently checked on 31,713 valid k=0..9 encoded words and 7 malformed controls. Source agreement, untouched suffix, exact 2k+2 steps (k>=1) and per-head physical cell bound all PASS. This is finite differential evidence, **not** proof of arbitrary N21 bit-clock or acceptance in Agda.
+
+Original Q2 square-class invariants (valuation parity, odd-unit mod 8) produce **eight distinct** classes generated by torsion and x=39; that is an exact finite arithmetic certificate and a classical mathematical lower bound on the local image, not a Lean Q2/H1 cohomological proof.
+
+Original Yang-Mills R445 effective-vs-bare global TV can grow toward 1 with volume even when single-site TV is fixed, so do NOT promote full-volume TV to a physical continuum estimate. The exact B/C frontier is localized marginal TV or directly matched same-F,G,FG moment bounds.
+
+Original RH A2 leading source analysis remains fail-closed. No source-specific selected witness W providing the full debt/FarExact strict sign has been found. The existing first-zero signed fifth negative control does not refute RH or the full actual Moebius-weighted Route B. Never use synthetic W as a G3 certificate.
+
+**Reproducible acceptance roots:**
+- Agda #1502: DASHI/Mathematics/Complexity/Karp21StackedSourceConvergence20261114.agda
+- Agda #1503: DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda
+- Agda #1478: DASHI/Analysis/BishopOriginalEtaNativeTrigSelectedSourceWeldExact.agda
+- Lean #107: Synthesis/MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence.lean
+- Lean #109: Synthesis/NavierStokesR854RealTimeIntegratedRateConditionalExact.lean
+- Lean RH #50: original selected A2/G3 witness/zero-data source.
+
+Pinned golden local Agda 2.9/Nix and Lean/lake exact-head kernel/axiom receipts were **not available** here; GitHub reported zero PR workflow runs for the new heads. Every new proof body above remains SOURCE-WRITTEN / KERNEL-UNVERIFIED. All downstream Clay terminal endpoints and 43 original YM Round518 physical obligations remain unpromoted.
