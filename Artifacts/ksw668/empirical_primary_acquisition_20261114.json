@@ -293,7 +293,32 @@
       "approximate_excursion_abs_nW_m3": 0.1,
       "raw_MMS_CDF_acquired": false,
       "open_archive": "https://lasp.colorado.edu/mms/sdc/public/",
-      "caveat": "summary from published observations, not direct reprocessing of downloaded CDF or original local MHD Fourier triad"
+      "caveat": "summary from published observations, not direct reprocessing of downloaded CDF or original local MHD Fourier triad",
+      "original_MMS1_event_date_utc": "2017-06-17",
+      "original_paper_GSE_to_LMN_approx": {
+        "L": [
+          -0.885,
+          -0.265,
+          0.383
+        ],
+        "M": [
+          -0.37,
+          -0.099,
+          -0.924
+        ],
+        "N": [
+          0.282,
+          -0.959,
+          -0.01
+        ],
+        "source": "Original Xiong et al. 2022 GRL, DOI 10.1029/2022GL098445"
+      },
+      "exact_UTC_time_window": "not yet extracted or verified; never substitute a guessed interval",
+      "required_original_raw_missions": [
+        "MMS1 FGM magnetic field",
+        "MMS1 EDP electric field",
+        "MMS1 FPI electron and ion moments"
+      ]
     },
     "lorentz_speed_empirical": {
       "original_event": "GW170817/GRB170817A",
