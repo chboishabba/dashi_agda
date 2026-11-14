@@ -1,5 +1,16 @@
 module DASHI.Cognition.PNF.X369OriginalTorusCharacterOrthogonalityExact where
 
+-- RECOVERABLE SOURCES / ORIGINAL OWNERS
+-- Audrey Terras, Fourier Analysis on Finite Groups and Applications,
+-- Cambridge University Press (1999), DOI: 10.1017/CBO9780511626265.
+-- Jean-Pierre Serre, Linear Representations of Finite Groups,
+-- Springer (1977), DOI: 10.1007/978-1-4684-9458-7.
+-- Original finite Agda carrier: DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda.
+-- Original character table: DASHI/Algebra/TriadicDepthOneCharacters.agda.
+-- Leech source: https://github.com/chboishabba/LeechTransformer/pull/4
+-- Attribution: finite X369 proof/counterexample is a DASHI extension;
+-- never an upstream neural, physical, Monster or learned-model theorem.
+
 -- Exact C3 x C3 nine-character ORTHOGONALITY on the ORIGINAL
 -- FiniteThreeCycleTorusExact.Torus3x3 carrier.
 -- No duplicate nine-element torus, no floating cyclotomic approximations.
