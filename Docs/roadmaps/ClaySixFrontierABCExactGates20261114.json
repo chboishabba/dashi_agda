@@ -543,7 +543,8 @@
         "proof_receipt": false,
         "round2_notes": [
           "Hensel local square root at x39 constructive; original H1 carrier open"
-        ]
+        ],
+        "latest_live_owner": "Lean #107 already proves actual Q2 local-image first-coordinate necessary parity and original global H1 explicit Selmer image=four torsion, in source. Full local H1 Kummer compatibility remains open."
       },
       {
         "id": "BSD.K2",
@@ -567,7 +568,8 @@
         ],
         "next": "Prove all original Selmer global classes exhausted; import Stoll original theorem faithfully",
         "status": "OPEN",
-        "proof_receipt": false
+        "proof_receipt": false,
+        "latest_live_owner": "Lean #107 cmTorsionEquivOriginalExplicitSelmer and cmGlobalKummerQuotientEquivExplicitSelmer source-written original all-place explicit Selmer, not classical Sha/E[2]-cohomological Selmer."
       },
       {
         "id": "BSD.K4.ETA",
@@ -1244,7 +1246,28 @@
         "proven_mathematics": "for x=39, y=4*r in Q2 where r^2=3705 by compatible Hensel square root, r_(n+1)=r_n+2^(n-1)*(([3705-r_n^2]/2^n) mod2) produces Cauchy root mod2^(n+1)",
         "tested": "all stages n=3..511, corrected 2-adic Cauchy congruence mod 2^(n-1), actual curve equation",
         "unpaid": "formal original Agda complete Q2 and R carriers, actual E(Q2)/E(R), all-image local Kummer and H1 naturality, Selmer",
-        "agda_kernel": false
+        "agda_kernel": false,
+        "original_lean_producers": {
+          "repo": "chboishabba/dashi_lean4",
+          "pr": 107,
+          "head_at_discovery": "a06066e49555058e3cf4694e5b1ce748b9a869c4",
+          "new_join": "Synthesis/MillenniumBSDCMOriginalK1Q2H1SameSourceConvergence.lean",
+          "already_original_source_written": [
+            "cmQ2LocalKummerImage_firstParity_zero",
+            "cmExplicitTwoSelmer_localQ2FirstParity_zero",
+            "cmExplicitTwoSelmer_carrier_eq_four_torsion",
+            "cmTorsionEquivOriginalExplicitSelmer",
+            "cmActualE2H1ExplicitSelmerImage_eq_torsion",
+            "cmOriginalPoint_E2H1Restriction_eq_localXT"
+          ],
+          "source_remaining": [
+            "PadicQuadraticKummerCompatibility p (uninhabited at general p)",
+            "cohomological Selmer local image equality (not just original explicit subgroup)",
+            "continuous Sha(E)[2] long exact sequence, odd primary Sha",
+            "exact head Lean kernel receipt"
+          ],
+          "instruction": "reuse actual mathlib Q_[2] and global H1 objects; do not recreate Q2 or model full local Kummer image solely via parity"
+        }
       },
       "NS.R854": {
         "branch": "chatgpt/ns-c-energy-smooth-weld-20261112 (dashi_lean4)",
