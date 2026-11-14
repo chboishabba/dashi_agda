@@ -6,6 +6,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 python3 scripts/check_rh_a2_g3_attachment_maxcut_20261114.py
 python3 scripts/check_rh_g3_quartic_signed_cone_geometry.py
+python3 scripts/check_rh_original_a2_interval_maxcut_20261114.py
 
 if [[ -z "${RH_LEAN_REPO_DIR:-}" ]]; then
   echo "BLOCKED: set RH_LEAN_REPO_DIR to the checked-out dashi_lean4 #108 branch" >&2
@@ -21,6 +22,6 @@ command -v lake >/dev/null 2>&1 || {
   echo "BLOCKED: no Lake / Lean pinned toolchain" >&2
   exit 14
 }
-(cd "$RH_LEAN_REPO_DIR" && lake env lean Synthesis/RiemannA2G3PoleAndSignedHeatNegativeControls.lean)
+(cd "$RH_LEAN_REPO_DIR" && lake env lean Synthesis/RiemannA2G3PoleAndSignedHeatNegativeControls.lean && lake env lean Synthesis/RiemannA2ActualSelectedIntervalDecisionExact.lean)
 echo "LEAN PASS: *auxiliary* RH A2 pole and two-mode signed-heat negative controls"
 echo "OPEN: original selected witness K, FarHorizontal CH, zero cofinal compensation, Route B cap/outer limits, RH"
