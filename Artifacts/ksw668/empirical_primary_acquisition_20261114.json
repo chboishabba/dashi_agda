@@ -355,5 +355,316 @@
       "original nuclear event-by-energy spectrum"
     ],
     "no_invented_trial_data": true
+  },
+  "acquisition_round3_20261114": {
+    "status": "source-audited and reproducible acquisition implemented; no new external Movebank/MMS/ENA/PARMA bytes fetched",
+    "source_audits": {
+      "mms_event": {
+        "original_doi": "10.1029/2020GL088761",
+        "original_paper_selected_utc": [
+          "2017-06-17T20:24:03Z",
+          "2017-06-17T20:24:11Z"
+        ],
+        "corroborating_edr_utc": [
+          "2017-06-17T20:24:06Z",
+          "2017-06-17T20:24:09Z"
+        ],
+        "original_signed_JdotE_source": "10.1029/2022GL098445",
+        "targeted_probe": 1,
+        "product_types": [
+          "FGM L2 brst",
+          "EDP L2 DCE brst",
+          "FPI DES-MOMS L2 brst",
+          "FPI DIS-MOMS L2 brst"
+        ],
+        "raw_cdf_bytedownload": false,
+        "replayer": "scripts/ksw668_mms_burst_acquire.py",
+        "data_status": "exact event source-pinned; segment index and SHA256 pending"
+      },
+      "movebank_pigeons": {
+        "user_supplied_candidate_doi": "10.5441/001/1.744_2",
+        "user_supplied_landing": "https://datarepository.movebank.org/entities/datapackage/2f38f106-42bf-4c4a-b7a4-17d758bdd9a9",
+        "expected_member_name": "Navigation with macrophage depletion in homing pigeons.csv",
+        "direct_archive_link_confirmed": false,
+        "page_http_response_in_this_environment": "403 Forbidden",
+        "raw_bytes_acquired": false,
+        "script": "scripts/ksw668_movebank_gps_acquire.py",
+        "treatment_metadata_join": false,
+        "original_source": "10.1126/science.ady2486"
+      },
+      "ena_pigeon_transcriptomics": {
+        "study_accession": "PRJEB98986",
+        "official_api": "https://www.ebi.ac.uk/ena/portal/api/filereport",
+        "script": "scripts/ksw668_ena_reads_acquire.py",
+        "metadata_newly_downloaded": false,
+        "fastq_newly_downloaded": false,
+        "gene_count_matrix_available": false,
+        "checksum_scheme": "source MD5 plus local SHA256 when executed"
+      },
+      "neutron_ground_spectrum": {
+        "official_generator": "JAEA EXPACS/PARMA, conditions for use require compliance",
+        "measured_reference": "Gordon et al. (2004) ground cosmic-neutron Bonner sphere spectral data",
+        "spectrum_csv_acquired": false,
+        "fold_script": "scripts/ksw668_neutron_spectrum_fold.py",
+        "fit_measured_eV": [
+          0.0036,
+          1.8
+        ],
+        "PARMA_nominal_floor_meV": "10^-8 MeV = 0.01 eV",
+        "synthetic_flat_flux_0p01_to_1eV_rate_per_second": 0.00004946406530001149,
+        "synthetic_trapezoid_1000_steps_rate_per_second": 0.00004946524605506864,
+        "source_fit_covariance_only_sigma_rate_per_second": 9.846232180669247e-7,
+        "empirical_site_rate_established": false
+      },
+      "original_human_tissue_ams": {
+        "primary_DOI": "10.1096/fj.12-225599",
+        "human_original_table": "https://faseb.onlinelibrary.wiley.com/doi/10.1096/fj.12-225599",
+        "original_rows_acquired": 34,
+        "distinct_donors": 28,
+        "tendon_assays": 30,
+        "muscle_assays": 4,
+        "original_author_outlier_rows": 5,
+        "source_extracted_csv": "Artifacts/ksw668/heinemeier2013_original_human_ams_table1.csv",
+        "source_review_and_analysis": "scripts/check_ksw668_human_ams_original.py",
+        "typed_original_Agda": "DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda",
+        "typed_physics_Agda": "DASHI/Physics/Plasma/KSW668EmpiricalBoundariesExact.agda",
+        "non_outlier_paired_donor24_delta_pMC": 25.75,
+        "non_outlier_paired_donor26_delta_pMC": 38.69,
+        "interpreted_as": "different tissue turnover; no within-person repeated-time or emotion intervention",
+        "caution": "pMC not directly interchangeable with previous regional atmospheric F14C calibration without transformation"
+      }
+    },
+    "validation_status": {
+      "original_human_row_count": "cross-checked via original paper Table 1 and GitHub file parse",
+      "original_MMS_event": "two original peer-reviewed reports; raw waveform not retrieved",
+      "spectral_integration": "independent symbolic analytic baseline reproduced locally",
+      "scripts_exact_head_execution": "pending",
+      "agda29_kernel": "pending"
+    }
+  },
+  "max_cut_followup_20261114": {
+    "priority": "user: local verification, not CI",
+    "P0_archive_status": {
+      "mms_SDC": "Public REST file_names and download endpoints original source documented; direct epoch-validated SHA256 acquisition script committed; original CDF bytes NOT downloaded due unavailable DNS network",
+      "movebank": "original DOI provided; Movebank access blocked / direct original CSV not independently acquired",
+      "ENA": "official PRJEB98986 file-report and FASTQ MD5/SHA route written; raw bytes NOT retrieved",
+      "Agda": "pinned 2.9/Nix not installed in current execution environment; source-written proofs not claimed kernel accepted",
+      "local_runner": "scripts/run_ksw668_local_maxcut.sh --math | --all"
+    },
+    "P1_A1": {
+      "status": "OPEN",
+      "original_source_form_signed_triads": "available in prior KSW original MHD modules",
+      "unpaid": "construct nontrivial signed original rational IdealElsasserFourierState with all-mode reality and transverse proofs plus measured MMS same-frame alignment"
+    },
+    "P1_B1_B2": {
+      "status": "partial theorem/source algebra",
+      "three_vector_MHD_Maxwell_curl_jet": "DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda",
+      "nontrivial_3D_cube_exact_flux": "scripts/check_ksw668_maxwell_3d_jet.py",
+      "unpaid": "physical original continuum E/B/J from U1 with actual measured boundary and uncertainty, typechecking"
+    },
+    "P1_C1": {
+      "new_source_doi": "10.18434/T4W30F",
+      "CODATA": "2022 CODATA source masses",
+      "electron_counting_Agda": "DASHI/Physics/Chemistry/KSW668NuclearElectronStateLedgerExact.agda",
+      "neutral_atomic_effective_Q_keV": 625.8706545424724,
+      "bare_nuclear_Q_from_ionization_corrected_atomic_masses_keV": 626.3130054367826,
+      "binding_delta_eV": 442.350894310298,
+      "reactions": "neutral N14+n to C14+p(+free electron) is three-body electronic channel if neutral C product, distinct from idealized bare-nuclei two-body channel",
+      "bare_two_body_kinematics_script": "scripts/ksw668_bare_nuclear_two_body_kinematics.py",
+      "unpaid": "actual initial charge state, daughter ionization/electron/photon branching and experimental incident neutron energy"
+    },
+    "P3_D1_D2": {
+      "source_written_Agda": "DASHI/Physics/Gravity/KSW668KaluzaKleinSpacelikeFiberCausalExact.agda",
+      "exact_rational_negative_control": "scripts/check_ksw668_spacelike_kk_projection.py",
+      "tested_rational_states": 405,
+      "states_with_5D_causal": 135,
+      "theorem": "for standard spacelike 5th fibre ds5²=ds4²+φ²(dy+A·dx)² where φ²≥0, every 5D causal tangent projects to 4D causal",
+      "not_a_physical_5D_Einstein_matter_solution": true,
+      "not_an_observed_FTL_mechanism": true
+    },
+    "P1_E1": {
+      "source_original_human_2013_AMS_assays": 34,
+      "atmospheric_original_NH_zonal_70_yearly_each_hashes": {
+        "NH1": "f7ff49b2ff6ed99f2a6b5aa811c86a774082cbcf",
+        "NH2": "296b7fbbee8f69f87501be05f9b1a1391a49e0f5",
+        "NH3": "aafd74536ec0690f1c1943ac98da3caf7972f59f"
+      },
+      "lag_sensitivity_script": "scripts/ksw668_human_lifetime_lag_sensitivity.py",
+      "source_derived_receipt": "Artifacts/ksw668/human_ams_nh_lifetime_lag_sensitivity_20261114.json",
+      "lag_stress_years": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "source_outlier_results": "5/5 original author flagged outside all three original NH zonal annual min/max envelopes at all four lag stress windows; 0/25 other tendon rows outside; NOT pMC-calibrated",
+      "unpaid": "individual food source, migration, AMS normalization, blank/systematic uncertainty, actual biological intervention"
+    },
+    "P3_E2": {
+      "status": "OPEN",
+      "all_matched_human_isotope_production_causal_samples": "not acquired",
+      "exclusion_universality_claim": "none; finite observational non-identifiability previously proved"
+    },
+    "local_replay_provenance": "Local equivalent SymPy full 3D Maxwell source-form PASS; original nitrogen ionization corrected Q independent Decimal PASS; KK exhaustive 405 rational states PASS. New GitHub exact-head Python and Agda kernel not executed in current environment.",
+    "physical_gate_promotion": false
+  },
+  "max_cut_tranche6_20261114": {
+    "audit_scope": "same PR, local-first, no CI; original raw MMS/ENA/Movebank/NNDC files still inaccessible in this runtime",
+    "latest_original_source_BNL": {
+      "evaluation": "ENDF/B-VIII.1",
+      "original_DOI": "10.11578/endf/2571019",
+      "modern_N14_file_sha256_from_existing_independent_OpenBNCT_receipt": "fd5c0c0beccefbcd0b57c49bcdf835449d2014e3740830377ce24760478c06d8",
+      "integrator": "scripts/ksw668_endf81_c2_law_integral.py",
+      "new_quadrature_tests": "scripts/test_ksw668_endf81_law_integral.py",
+      "source_synthetic_law_tests_passed": 7,
+      "noted_old_code_issue": "naive trapezoid at ENDF histogram/repeated-energy jumps gives wrong integral; new joint-knot Gauss quadrature supports INT1-5",
+      "actual_source_N14_ENDF_bytes_acquired_here": false,
+      "calibrated_body_neutron_spectrum_acquired_here": false,
+      "optional_PARMA_adapter": "scripts/ksw668_parma_site_spectrum_adapter.py",
+      "secondary_model_version": "neptoon bundled PARMA4.10, NOT official JAEA EXPACS4.19",
+      "JAEA_official_2026_11_05": "https://phits.jaea.go.jp/expacs/top-eng.htm",
+      "thermal_0p0036_to_1p8eV_not_covered_by_documented_0p01MeV_secondary_example": true
+    },
+    "five_dimensional_interacting_Einstein_matter": {
+      "actual_nonvacuum_solution": "ds5²=-dt²+t^(1/2)(dx²+dy²+dz²+dw²), phi(t)=sqrt(3)/2 log(t); w~w+4; t>0",
+      "model": "Einstein–massless-scalar, kappa5=1, Lambda=0",
+      "script": "scripts/ksw668_kk_einstein_scalar_cosmology.py",
+      "original_Agda_rational_Friedmann_owner": "DASHI/Physics/Gravity/KSW668FiveDimensionalEinsteinScalarFRWFriedmannExact.agda",
+      "full_Riemann_slots": 625,
+      "Riemann_nonzero_slots": 40,
+      "Christoffel_nonzero_slots": 12,
+      "Einstein_equal_scalar_T_all_25": true,
+      "scalar_wave_and_stress_conservation": true,
+      "rho": "3/(8t²)",
+      "same_detector_x": 3,
+      "same_detector_w_mod_4": 0,
+      "direct_arrival_proper_time": 4.814056111161975,
+      "fibre_wrapped_arrival_proper_time": 7.984691591147538,
+      "actual_external_observation": false,
+      "claimed_KSW_mechanism": false,
+      "Agda_kernel_not_run": true
+    },
+    "nuclear_energy_dependent_FINAL_STATE": {
+      "script": "scripts/ksw668_n14_relativistic_lab_final_state.py",
+      "source": "NIST ASD 10.18434/T4W30F and original rounded CODATA neutral/bare masses",
+      "bare_kinematics_Q_MeV": 0.6263133226805406,
+      "thermal_input_eV": 0.0253,
+      "thermal_proton_lab_kinetic_mev_range": [
+        0.5842470765250526,
+        0.5842797443376734
+      ],
+      "synthetic_fast_input_eV": 1000000,
+      "one_MeV_proton_lab_kinetic_mev_range": [
+        1.2967867080835571,
+        1.6209603371798231
+      ],
+      "verified_two_body_energy_momentum_and_mass_shells": true,
+      "ionization_photon_branching_measured": false,
+      "actual_neutron_event_energy_acquired": false
+    },
+    "E1_movebank_independent_original_receipt": {
+      "source_public_repo": "zuizui0223/RSDS",
+      "source_manifest": "research/GLOBAL_SOLAR_AZIMUTH_NEW24_PROVIDER_FROZEN_SOURCE_FILE_MANIFEST_20261025.json",
+      "source_analysis": "research/GLOBAL_SOLAR_AZIMUTH_NEW24_ORIGINAL_GPS_FIRST_V2_RESULT_20261025.json",
+      "source_git_blobs": [
+        "eae522571b5902ee0ab901d6bbebbb46ece55d48"
+      ],
+      "dataset_DOI": "10.5441/001/1.744_2",
+      "original_DSpace_package": "2f38f106-42bf-4c4a-b7a4-17d758bdd9a9",
+      "original_bitstream_UUID": "b36da51a-30d5-4e4a-856c-940d7b9c27e3",
+      "original_filename": "Navigation with macrophage depletion in homing pigeons.csv",
+      "original_byte_count": 705083,
+      "original_archive_MD5": "420dd8de4e0afe50f78ac848846591ba",
+      "independent_original_MD5_verified": true,
+      "reported_original_GPS_rows": 4347,
+      "reported_original_individuals": 34,
+      "licence": "CC BY-NC 4.0",
+      "source_direct_original_acquisition": "scripts/ksw668_movebank_lisowski_original_bitstream.py",
+      "re_downloaded_and_SHA256_ourselves": false,
+      "treated_bird_gps_join_and_16_0_source_outcome": false
+    },
+    "E2_conditional_visibility": {
+      "script": "scripts/ksw668_e2_neutron_isotope_visibility_bound.py",
+      "hypothetical_n14_atoms": 100000000000000000000,
+      "hypothetical_thermal_flux_per_cm2_hour": 4,
+      "hypothetical_thermal_upper_cross_section_barn": 1.987,
+      "hypothetical_exposure_years": 1,
+      "hypothetical_carbon_g": 1,
+      "hypothetical_modern_C14_ratio": 1.2e-12,
+      "thermal_example_predicted_new_C14_upper": 6.9672168,
+      "thermal_example_pMC_delta_upper": 1.157965167685652e-8,
+      "input_ambient_mean_not_genuine_upper": true,
+      "not_a_real_physical_exclusion": true,
+      "Poisson_wrong_background_negative_control": "scripts/test_ksw668_e2_bound.py"
+    },
+    "A1_partial_exact": {
+      "Agda_real_source_selected_rows": "DASHI/Physics/Plasma/KSW668RationalThreeModeOriginalRowsExact.agda",
+      "selected_plus_minus_doubled_magnetic_strength_k": 2,
+      "selected_plus_minus_doubled_magnetic_strength_q": 1,
+      "physical_strength_approx": [
+        0.5,
+        0.25
+      ],
+      "original_transfer_signs": [
+        "+original E unit",
+        "-original E unit"
+      ],
+      "all_mode_Reality_and_Divergence_physical_state_accepted": false,
+      "same_event_MMS_calibration": false
+    },
+    "original_archive_evidence_status": "NO new original external CDF/FASTQ/ENDF/Movebank bitstream acquired; source-indexed third-party original checksum receipt is not an assistant's own raw SHA256.",
+    "local_symbolic_replay_scope": "D1 full SymPy Einstein-scalar 125/625 + same-detector geodesic PASS, C2 7 source-equivalent synthetic interpolation tests PASS, C1 Decimal relativistic thermal and 1MeV models PASS, E2 conditional neutron visibility numerical PASS",
+    "kernel": "NOT RUN Agda/Nix unavailable",
+    "physical_endpoint_all_A1_to_E2_closed": false
+  },
+  "max_cut_tranche7_20261114": {
+    "scope": "A1 actual all-integer Fourier proof reuse and B2 four-MMS measured-boundary pipeline; local-first, original raw absent and Agda not run",
+    "A1": {
+      "all_integer_selector_negation": "DASHI/Physics/Plasma/KSW668SparseModeLookupNegationExact.agda",
+      "all_mode_sparse_pair_reality": "DASHI/Physics/Plasma/KSW668SparsePairRealityExact.agda",
+      "real_original_zminus_pair_all_mode_reality_source_written": true,
+      "two_positive_mode_additive_zplus_all_mode_reality_source_written": true,
+      "original_priority_source_zplus_additive_equality_kernel_accepted": false,
+      "both_actual_global_transversality": false,
+      "original_inverse_square": false,
+      "Agda_2p9_typechecked": false,
+      "actual_MMS_transfer_observed": false
+    },
+    "B2": {
+      "original_source_four_probe_temporal_query": "2017-06-17T20:24:03Z to 20:24:11Z",
+      "instrument_geometry": "four MMS1/MMS2/MMS3/MMS4 GSE positions from original FGM L2 auxiliary Epoch_state",
+      "data_expected": "original same-event FGM EDP FPI CDF raw files, SHA256, CDF source attributes, true sensor quality flags, units, positions, source-qualified component errors",
+      "exact_affine_tetra_face_and_volume_integrator": "scripts/ksw668_mms4_tetrahedron_boundary.py",
+      "instrument_GSE_CDF_ephemeris_bridge": "scripts/ksw668_mms4_fgm_ephemeris_bridge.py",
+      "source_FGM_four_probe_receipts": "scripts/ksw668_mms4_merge_original_fgm_receipts.py",
+      "source_SDC_direct_acquisition": "scripts/ksw668_mms_sdc_direct.py --probe 1/2/3/4 --products fgm --execute",
+      "local_synthetic_tests": "scripts/test_ksw668_mms4_tetrahedron.py",
+      "independent_local_plane_wave_equivalent": {
+        "source_reference_tetra_m3": 20833.333333333332,
+        "U_t0_J": 7.378508290238188e-11,
+        "U_t1_J": 7.158964317059787e-11,
+        "flux_t0_W": 2.2120183712070335e-9,
+        "flux_t1_W": 2.1788610919844242e-9,
+        "conservation_residual_J": -1.8827608171922915e-22,
+        "relative_to_deltaU": 8.575780013156489e-11,
+        "source": "independent source-equivalent local Python mathematical benchmark, NOT an MMS original observation"
+      },
+      "source_CDF_archive_files_actually_acquired": false,
+      "source_sha256_self_rechecked": false,
+      "instrument_original_source_and_quality_verified": false,
+      "measured_B2_boundary_accepted": false,
+      "affine_model_error_bounded": false,
+      "original_full_PR_head_replay": false
+    },
+    "C2": {
+      "neptoon_source": "https://www.neptoon.org/en/latest/user-guide/parma-offline/",
+      "PARMA_model": "v4.10, NOT JAEA EXPACS v4.19",
+      "bundled_solar_W_index_through": "2026-03-26",
+      "script_future_date_fail_closed": "scripts/ksw668_parma_site_spectrum_adapter.py",
+      "actual_current_W_source_after_2026_03_26": false,
+      "original_source_evaluated_nuclear_data_downloaded": false
+    },
+    "verification": "Source code committed, mathematical equivalent tetra sanity check executed; exact-head tests and Agda not executed in this environment; no CI gate",
+    "physical_endpoints_promoted": false
   }
 }
