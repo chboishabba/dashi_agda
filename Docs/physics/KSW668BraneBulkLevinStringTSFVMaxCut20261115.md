@@ -300,3 +300,74 @@ The existing physical promotion Agda owner now imports these original donor obje
 | **Acceptance** | Independent local SymPy/mpmath/Fraction mathematical checks; same existing PR #1504 and new Agda source modules | Run exact PR HEAD Python suite and local pinned Agda kernel on networked/code-equipped machine. **No CI requirement**. |
 
 **Scientific takeaway:** We have a rigorous model **where an actual scalar disturbance reaches the same brane detector before confined light**, and a distinct sourced AdS5/Israel geometry that has earlier bulk *null causal reach*. These are NOT YET one fully coupled graviton-transport solution: the remaining same-object merger is the moving-brane sourced tensor propagator and detector. It is the true next decisive physical gate, not an unproved universal claim of FTL/free energy.
+
+
+---
+
+## 2026-11-15 exact-head continuation: finite-energy cylinder / sourced AdS5 TT trace
+
+This continuation reuses the original Caldwell–Langlois / Z2 Israel and source/receiver scripts; it deliberately does not treat an early scalar test signal as a retarded gravity wave. New producer:
+`scripts/ksw668_brane_finite_energy_and_sourced_tt_witness.py`.
+
+### Phase F0 — established same-metric baselines (DO NOT repeat)
+* `ksw668_caldwell_langlois_original_eq19.py`: bulk Einstein/FRW, null geodesic, same-receiver clock difference (dimensionless).
+* `ksw668_caldwell_langlois_israel_exact.py` and `ksw668_ads5_z2_distributional_israel_coefficient.py`: original local 16-component Z2 Israel, plus singular coefficient.
+* `ksw668_brane_scalar_emitter_receiver_retarded.py`: exact retarded point-scalar example on flat cylindrical probe brane.
+* `ksw668_ads5_tensor_mode_moving_israel_bc.py`: exact bulk TT Bessel mode and **nonzero** unsourced moving-boundary residual.
+* `ksw668_brane_winding_allmode_linear_stability.py`: all-mode quadratic probe spectrum, zero modes not controlled.
+* All original Agda modules remain source-level pending an actual pinned local kernel run.
+
+### Phase F1 — finite-energy test-scalar receiver on ORIGINAL cylindrical probe brane (new partial closure)
+Define spatial source
+\[
+\rho_\epsilon(X)=\prod_{j=1}^4\frac{15}{16\epsilon}\bigl(1-(X_j/\epsilon)^2\bigr)^2\mathbf1_{|X_j|<\epsilon},
+\quad J(t,X)=q_\tau(t)\rho_\epsilon(X-X_s).
+\]
+The compact triangular \(q_\tau(t)=t_+-2(t-\tau)_++(t-2\tau)_+\) has \(\int|q_\tau|dt=\tau^2\). The source is compactly supported and in \(L^1_tL^2_X\); \(\rho_\epsilon\in H^1\). Zero-data energy for \(\square_5\phi=J\) satisfies
+\[
+E(t)=\tfrac12\int_{\mathbb R^4}(|\partial_t\phi|^2+|\nabla\phi|^2)dX
+\le\frac12\bigl(\tau^2\|\rho_\epsilon\|_2\bigr)^2,
+\quad \|\rho_\epsilon\|_2^2=\left(\frac{5}{7\epsilon}\right)^4.
+\]
+For \(R=1,\epsilon=0.02,\tau=0.25,t_\mathrm{receive}=2.125\) and antipodal receiver at spatial distance 2 from centre, all source distances lie in
+\([2-\epsilon,\sqrt{(2+\epsilon)^2+3\epsilon^2}]\).
+This entire interval lies strictly below \(t_\mathrm{receive}\), but strictly above \(t_\mathrm{receive}-\tau\). Thus the *first* positive retarded ramp term survives everywhere on the source support; the later shifted terms vanish. A strictly positive receiver is therefore proved by positive integration (not just one quadrature value); a normalized five-node tensor-product quadrature is included for numerical replay. The response is before confined photon time \(\pi\). **This removes the ideal point-source infinite-energy objection for a scalar test source; it does NOT add scalar backreaction, tensor/graviton coupling or an apparatus.**
+
+### Phase F2 — same original AdS5 background sourced TT *boundary-trace* (new partial closure)
+The exact separated TT mode
+\[
+h(T,z,x)=\cos(kx-\sqrt{k^2+m^2}T)z^2J_2(mz)
+\]
+obeys \(L_{TT}h=(-\partial_T^2+\partial_z^2-3\partial_z/z+\partial_x^2)h=0\). On the original \(a(t)=t,z_b=1/t\) brane, its exact source-required normal derivative is
+\[
+\mathcal B h=\frac{-\omega\sin(kx-\omega T)z^2J_2(mz)
++\sqrt{1+t^2}\,mz^2\cos(kx-\omega T)J_1(mz)}{t^2}
+\Big|_{z=1/t,T=T_b(t)}.
+\]
+In particular \(\mathcal B h|_{t=z=1,T=x=0,k=m=1}=\sqrt2J_1(1)\ne0\).
+Specifying boundary data equal to this trace makes the **bulk PDE and sourced normal boundary equation** exactly compatible for this manufactured mode. But the trace is nonlocalized and was *inferred from a global standing wave*. It is NOT an independently justified Israel anisotropic-stress coupling, retarded Green function, finite-energy localized tensor source, or observable shortcut. No claim of physical B3 closure.
+
+### Precise outstanding lemmas — one-owner policy (theorem targets are specifications, not already established exports)
+
+| Rank | Proposed exact lemma / producer | Required mathematical content | Disposition |
+| --- | --- | --- | --- |
+| A1 | `cylinderCompactEmitterL1L2FiniteEnergy` | Ambient 4-space source norm, energy estimate and retarded uniqueness for compact spatial pulse | external proof + new local regression; **Agda OPEN** |
+| A2 | `cylinderCompactEmitterEarlyNonzeroReceiver` | 5D retarded Green distribution, spatial convolution, rigorous distance support and strictly positive response at same receiver before brane photon | analytic source proof + quadrature witness; **Agda OPEN** |
+| A3 | `cylinderWindingPerturbedIsraelBackreaction` | Solve original coupled 5D Einstein–matter thin-shell and Israel for curved stabilized cylinder including scalar stress | **OPEN**; probe action is insufficient |
+| B1 | `ads5TensorPDEMovingNormalExact` | Same AdS5 TT operator, moving normal and exact Bessel bulk mode | external SymPy source, **Agda OPEN** |
+| B2 | `ads5TensorSourceIsraelTTNormalization` | Derive source coefficient and signs from *linearized* Israel with physical transverse-traceless brane anisotropic stress (include brane bending/gauge where needed) | **OPEN**; inverse boundary trace is not stress |
+| B3 | `ads5RetardedTensorGreenMovingBoundary` | Well-posed finite-energy forward propagator for original moving geometry, correct initial data, exact moving boundary and chosen AdS side/horizon condition | **OPEN** |
+| B4 | `ads5LocalizedTTSourceProducesEarlyFront` | Brane-localized compact stress, convolution with B3, prove nonzero same-receiver TT gauge-invariant observable strictly before photon, and prove bulk causal support | **OPEN** |
+| B5 | `ads5TensorLinearEnergyStabilityAndModes` | Positive/controlled physical energy for permitted tensor sector and boundary flux; exclude uncontrolled tachyon/ghost and unstable zero modes | **OPEN** |
+| C1 | `ads5ObservationalArrivalBound` | Dimensional parameters \(\ell,\kappa_5\), emission lags, frequency/attenuation, detector proper-time and realistic GW–EM comparison | **OPEN** |
+| C2 | `braneBulkOriginalAnalyticAgdaKernel` | Agda 2.9 typecheck of original horizon continuum, differential geometry, distributional Israel and new F1–F2 owners | **OPEN**; SOURCE WRITTEN != KERNEL ACCEPTED |
+| D1 | `physicalGravitonObservation` | Independently measured, calibrated faster bulk-carrier response discriminating brane photon, clock and mundane coupling | **OPEN** |
+
+### Minimum implementation phases and acceptance receipts
+1. **F1:** execute `python scripts/ksw668_brane_finite_energy_and_sourced_tt_witness.py` locally; require positive compact receiver and finite analytic energy bound, symbolic TT bulk and moving boundary trace. Revalidate original scripts alongside. Record actual exact-head output/hashes. No CI gate.
+2. **F2:** prove exact linearized Israel source normalisation; do not equate \(\mathcal Bh\) automatically with physical anisotropic stress.
+3. **F3:** construct a retarded tensor boundary-value operator on *the same original a=t AdS5 Einstein/Israel background*, with chosen bulk side and physically specified source; energy estimates and initial/boundary compatibility.
+4. **F4:** smear source, calculate brane-to-brane response, identify gauge-invariant detector, wavefront/tail and compare actual arrival with intrinsic brane photon at same receiver.
+5. **F5:** nonlinear/zero-mode/global stability; dimensional scales, observational constraints, local pinned Agda kernel acceptance; independent evidence is a separate experimental gate.
+
+**Scope guard:** F1 and F2 are real but *partial* mathematical advances. No theorem currently joins the finite-energy flat cylindrical scalar receiver to a physical retarded graviton on the expanding AdS5 brane; the two spacetime metrics must not be silently equated. No empirical faster-than-light transmission or free-energy device is claimed.
