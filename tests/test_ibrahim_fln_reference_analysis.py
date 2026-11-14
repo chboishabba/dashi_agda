@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import random
 from pathlib import Path
 import sys
 import tempfile
@@ -95,6 +96,114 @@ class IbrahimFLNReferenceTests(unittest.TestCase):
     def test_different_carrier_cannot_be_compared_without_transport(self) -> None:
         with self.assertRaisesRegex(ValueError, "typed identity-transport"):
             ref.compare_same_carrier({"a": "a"}, {"b": "b"})
+
+    def test_random_small_functional_graphs_against_independent_walks(self) -> None:
+        # Independent step-by-step oracle, not the path-compression/Kahn
+        # algorithms in the reference census. Deterministic seed, no network.
+        rng = random.Random(49)
+
+        def oracle_terminal(graph: dict[str, str | None], start: str):
+            seen: dict[str, int] = {}
+            path: list[str] = []
+            node = start
+            while True:
+                if node not in graph:
+                    return "unresolved_target", (node,)
+                if node in seen:
+                    cycle = path[seen[node]:]
+                    minimum = min(range(len(cycle)), key=lambda i: cycle[i])
+                    return "cycle", tuple(cycle[minimum:] + cycle[:minimum])
+                seen[node] = len(path)
+                path.append(node)
+                target = graph[node]
+                if target is None:
+                    return "dead_end", (node,)
+                node = target
+
+        def oracle_inclusive(graph: dict[str, str | None]) -> dict[str, int]:
+            counts = dict.fromkeys(graph, 0)
+            for start in graph:
+                seen: set[str] = set()
+                node: str | None = start
+                while node in graph and node not in seen:
+                    counts[node] += 1
+                    seen.add(node)
+                    node = graph[node]
+            return counts
+
+        def oracle_visits(graph: dict[str, str | None]) -> dict[str, int]:
+            counts = dict.fromkeys(graph, 0)
+            for start in graph:
+                seen = {start}
+                nodes: set[str] = set()
+                node = graph[start]
+                while node in graph:
+                    if node in seen:
+                        if node == start:
+                            nodes.add(node)
+                        break
+                    nodes.add(node)
+                    seen.add(node)
+                    node = graph[node]
+                for visited in nodes:
+                    counts[visited] += 1
+            return counts
+
+        def oracle_funnels(
+            graph: dict[str, str | None],
+            terminal: dict[str, tuple[str, tuple[str, ...]]],
+            include_cycle_entry: bool,
+        ) -> dict[str, int]:
+            cycles = {
+                node for node, result in terminal.items()
+                if result[0] == "cycle" and node in result[1]
+            }
+            counts = dict.fromkeys(graph, 0)
+            for start in graph:
+                if start in cycles:
+                    continue
+                seen = {start}
+                node = graph[start]
+                while node in graph and node not in seen:
+                    if node in cycles:
+                        if include_cycle_entry:
+                            counts[node] += 1
+                        break
+                    counts[node] += 1
+                    seen.add(node)
+                    node = graph[node]
+            return counts
+
+        for size in range(1, 9):
+            nodes = [str(n) for n in range(size)]
+            for _ in range(200):
+                graph = {node: rng.choice(nodes + [None, "missing"])
+                         for node in nodes}
+                terminal, basins = ref.terminal_census(graph)
+                self.assertEqual(
+                    terminal,
+                    {node: oracle_terminal(graph, node) for node in graph},
+                )
+                self.assertEqual(
+                    ref.single_visit_funnels(graph, terminal, basins),
+                    oracle_inclusive(graph),
+                )
+                self.assertEqual(
+                    ref.paper_traversal_visits(graph, terminal, basins),
+                    oracle_visits(graph),
+                )
+                for include_entry in (False, True):
+                    self.assertEqual(
+                        ref.traversal_funnels(
+                            graph, terminal, basins,
+                            include_cycle_entry=include_entry,
+                        ),
+                        oracle_funnels(graph, terminal, include_entry),
+                    )
+                revised = {node: rng.choice(nodes + [None, "missing"])
+                           for node in nodes}
+                result = ref.compare_same_carrier(graph, revised)
+                self.assertTrue(result["outside_bound_unaffected"])
 
     def test_manifest_hash_and_nonpromotion(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
