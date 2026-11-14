@@ -175,3 +175,7 @@ import DASHI.Reasoning.AuthorityBooleanPolarityRepairExact
 import DASHI.Reasoning.ConsumerRelativeLatentExtractionExact
 import DASHI.Reasoning.BrainCognitionObservationSpineExact
 import DASHI.Reasoning.RelationRepresentationRegression
+
+-- Canonical Lee/SensibLaw rollup including the PNF -> WrongType -> controversy
+-- adapter and receipt-indexed runtime-closure successor.
+import DASHI.Reasoning.JusticeLeeSensibLawEverything
