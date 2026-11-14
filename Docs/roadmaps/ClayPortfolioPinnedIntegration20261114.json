@@ -1,7 +1,7 @@
 {
   "schema": "dashi-clay-portfolio-integration-v1",
   "date": "2026-11-14",
-  "status": "pinned GitHub head snapshot; source-ledger only; no merge or kernel proof",
+  "status": "Original-source donor files co-located into Agda #1499 and Lean #108; kernel/trust and C-level mathematical proofs OPEN",
   "repositories": {
     "agda": {
       "repository": "chboishabba/dashi_agda",
@@ -67,7 +67,8 @@
       "wave": 2,
       "state": "open",
       "previous_snapshot_sha": "06e9a257df0d5fd9996ba7092b19713f74101f5c",
-      "latest_update_date": "2026-11-14"
+      "latest_update_date": "2026-11-14",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
@@ -101,17 +102,19 @@
       "wave": 2,
       "state": "open",
       "previous_snapshot_sha": "fcadcb35b2d6d629952f70f2d1f46714fe77b36f",
-      "latest_update_date": "2026-11-14"
+      "latest_update_date": "2026-11-14",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
       "pr": 1478,
-      "sha": "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872",
+      "sha": "fb374e50e59a98e2b8a1eee215c77428c5728b68",
       "lane": "Bishop_eta_Koenigs",
       "wave": 2,
       "state": "open",
-      "previous_snapshot_sha": "c66dc4ec53f98971925a82603b5c97a338f9ae7e",
-      "note": "New original expC add from real Bishop exp + two source trig laws, finite eta selected theorem composition; kernel-open"
+      "previous_snapshot_sha": "4d129e117a2dd6b7c5e2b1cf4dff549baeb7c872",
+      "note": "New original expC add from real Bishop exp + two source trig laws, finite eta selected theorem composition; kernel-open",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
@@ -151,7 +154,8 @@
       "sha": "2c4204914d933aff95aa4a046a6237e42ac3eeeb",
       "lane": "YM_original_diagrams",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
@@ -170,17 +174,19 @@
       "state": "open",
       "previous_snapshot_sha": "1586051407fb771b96a03b12c22a16373d24e6b3",
       "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof",
-      "latest_update_date": "2026-11-14"
+      "latest_update_date": "2026-11-14",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "agda",
       "pr": 1501,
-      "sha": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+      "sha": "58bd8fe1a6091fe6d9e02ea93f938338658fd432",
       "lane": "NS_zero_mode_modal",
       "wave": 2,
       "state": "open",
-      "previous_snapshot_sha": "2f382b4d8e5a7c3493dfcc660099a8c0d2bd9c39",
-      "latest_update_date": "2026-11-14"
+      "previous_snapshot_sha": "98b6b63a0a93cd20639f2cfe3811e2ef3356a035",
+      "latest_update_date": "2026-11-14",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "lean",
@@ -196,7 +202,8 @@
       "sha": "2384d90f1a2c23dc59c072425e7efbc040405032",
       "lane": "RH_Weil_gap",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "lean",
@@ -217,10 +224,12 @@
     {
       "repository_group": "lean",
       "pr": 107,
-      "sha": "96d1a0ea2422769ef07afad6f513df39e9de6519",
+      "sha": "328e0de3ccb59b3674f23500611be1d985d21ee2",
       "lane": "BSD_K1_K5",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "96d1a0ea2422769ef07afad6f513df39e9de6519",
+      "last_source_transfer_date": "2026-11-14"
     },
     {
       "repository_group": "lean",
@@ -233,10 +242,30 @@
     {
       "repository_group": "lean",
       "pr": 109,
-      "sha": "317ff04a74e51f35d72e7784e3de2999f32ab15b",
+      "sha": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba",
       "lane": "NS_C_smoothness",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "317ff04a74e51f35d72e7784e3de2999f32ab15b",
+      "last_source_transfer_date": "2026-11-14"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1502,
+      "sha": "806b996866ce17a48e5842cc3f3fc18e19887580",
+      "lane": "Karp21_F1_latest",
+      "wave": 2,
+      "state": "open",
+      "last_source_transfer_date": "2026-11-14"
+    },
+    {
+      "repository_group": "agda",
+      "pr": 1503,
+      "sha": "b93909a044960a90690393fdadcb9f6692a139c0",
+      "lane": "YM_F19_P0_latest",
+      "wave": 2,
+      "state": "open",
+      "last_source_transfer_date": "2026-11-14"
     }
   ],
   "dont_reopen": [
@@ -425,9 +454,10 @@
     "agda_golden": false,
     "lean_golden": false,
     "legacy_real_unpostulated": false,
-    "clay_endpoints_solved": false
+    "clay_endpoints_solved": false,
+    "source_transferred_to_single_PR_per_repository": true
   },
-  "snapshot_policy": "Donor Git SHA snapshot as of 14 November 2026 only; PR branches may advance asynchronously. #1499 self SHA not pinned recursively. No kernel/Clay promotion.",
+  "snapshot_policy": "Individual donor head SHAs pinned above. Active rollup HEAD updated in separate commits; manifest pins its own immediately prior parent, not a recursive self-SHA.",
   "last_checked_on": "2026-11-14",
   "warnings": [
     "No PR was merged or closed by this work",
@@ -797,5 +827,123 @@
     "local_acceptance_runner": "scripts/check_ym_r445_original_physical_maxcut_local.sh",
     "source_only_command": "R445_SOURCE_ONLY=1 bash scripts/check_ym_r445_original_physical_maxcut_local.sh",
     "pinned_kernel_command": "bash scripts/check_ym_r445_original_physical_maxcut_local.sh"
+  },
+  "active_clay_rollups": {
+    "schema": "dashi-clay-two-repository-rollup-v2",
+    "agda": {
+      "repository": "chboishabba/dashi_agda",
+      "pr": 1499,
+      "head_branch": "chatgpt/clay-20261112-four-frontier-fail-closed",
+      "source_snapshot_parent_sha": "95ff2320a46de1b60ad3740edd76cc66c2e78dae",
+      "base": "master",
+      "status": "source_transferred_kernel_pending"
+    },
+    "lean": {
+      "repository": "chboishabba/dashi_lean4",
+      "pr": 108,
+      "head_branch": "chatgpt/clay-continuous-fifth-sign-20261112",
+      "source_snapshot_sha": "523ef69d47d5c333d70edfda480da68c1516dd46",
+      "base": "main",
+      "status": "source_transferred_kernel_pending"
+    },
+    "no_source_owner_pr_closed_or_merged": true,
+    "no_main_or_master_mutation": true,
+    "method": "Git blob SHA exact source transfers onto existing draft rollup heads; not a Git merge of donor histories",
+    "acceptance_runner": "scripts/check_clay_sixfrontier_physical_local_20261114.sh",
+    "Lean_worktree_env": "DASHI_CLAY_LEAN_WORKTREE",
+    "version_policy": "The Agda rollup snapshot SHA is its HEAD immediately before this manifest update; never self-pin this manifest recursively.",
+    "transfers": {
+      "agda": [
+        {
+          "source_pr": 1503,
+          "imported": 20,
+          "identical": 9,
+          "source_head": "b93909a044960a90690393fdadcb9f6692a139c0"
+        },
+        {
+          "source_pr": 1502,
+          "imported": 20,
+          "identical": 0,
+          "source_head": "806b996866ce17a48e5842cc3f3fc18e19887580"
+        },
+        {
+          "source_pr": 1474,
+          "imported": 151,
+          "identical": 4,
+          "source_head": "5348713358c23f6b7e638cfb181bcb7e999645b1"
+        },
+        {
+          "source_pr": 1478,
+          "imported": 155,
+          "identical": 0,
+          "source_head": "fb374e50e59a98e2b8a1eee215c77428c5728b68"
+        },
+        {
+          "source_pr": 1500,
+          "imported": 0,
+          "identical": 25,
+          "source_head": "5c01456abb4a6126bec02804af6f42cdfb7e953b"
+        },
+        {
+          "source_pr": 1501,
+          "imported": 4,
+          "identical": 8,
+          "source_head": "58bd8fe1a6091fe6d9e02ea93f938338658fd432",
+          "reconciled_newer_rollup_variants": 2
+        },
+        {
+          "source_pr": 1444,
+          "imported": 291,
+          "identical": 2,
+          "source_head": "80da5e6c9f24ddb221415d4f5aa15bcd4054e8f0",
+          "excluded_global_paths": [
+            "CHANGELOG.md",
+            "TODO.md",
+            ".github/workflows/ym-native-maxcut-exact-agda.yml"
+          ]
+        },
+        {
+          "source_pr": 1498,
+          "imported": 20,
+          "identical": 17,
+          "source_head": "2c4204914d933aff95aa4a046a6237e42ac3eeeb"
+        }
+      ],
+      "lean": [
+        {
+          "source_pr": 107,
+          "imported": 49,
+          "excluded": [
+            "Synthesis.lean"
+          ],
+          "source_head": "328e0de3ccb59b3674f23500611be1d985d21ee2"
+        },
+        {
+          "source_pr": 50,
+          "imported": 5,
+          "nonidentical_existing_api_retained": 2,
+          "recovered_additional_RouteB_in_new_module": true,
+          "source_head": "2384d90f1a2c23dc59c072425e7efbc040405032"
+        },
+        {
+          "source_pr": 109,
+          "imported": 2,
+          "excluded_stacked_ExternalClayNS_bridge": true,
+          "source_head": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba"
+        }
+      ]
+    },
+    "acceptance": {
+      "agda_2_9_kernel": false,
+      "lean_4_28_kernel": false,
+      "transitive_axiom_audit": false,
+      "source_attribution_audit": false,
+      "original_SUN_Wilson_Dk": false,
+      "original_N21_InNP": false,
+      "BSD_H1_Kummer_Sha2": false,
+      "NS_actual_real_flow_rate": false,
+      "Bishop_uniform_eta": false,
+      "RH_actual_zero_signed_gap": false
+    }
   }
 }
