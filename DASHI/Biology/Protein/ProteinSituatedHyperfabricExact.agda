@@ -106,8 +106,8 @@ witnessBlocksCoarseAdequacy :
     (semantics W)
     (query W) →
   ⊥
-witnessBlocksCoarseAdequacy W =
-  Query.queryAdequacyDefectBlocksFactorisation (adequacyDefect W)
+witnessBlocksCoarseAdequacy W adequate =
+  Query.queryAdequacyDefectBlocksFactorisation (adequacyDefect W) adequate
 
 ------------------------------------------------------------------------
 -- Reuse boundary: this layer points at the established protein recovery owner.
