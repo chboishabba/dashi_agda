@@ -195,3 +195,4 @@ finiteNoGo : ((w : Finite.ExchangeWorld) →
   Finite.weakMagnitude w ≡ 1 →
   Finite.forward w ≡ Finite.outflow) → Finite.⊥
 finiteNoGo = Finite.universalStrongToWeakFromPairCancellationNoGo
+import DASHI.Physics.Plasma.KSW668RationalThreeModeSourceExact as RationalSignedSource
