@@ -147,3 +147,15 @@ staleFalseClosureBitImpliesMathematicalNegation = false
 
 historicalStructuralLineageAlonePromotesClay : Bool
 historicalStructuralLineageAlonePromotesClay = false
+
+historicalStructuralLineageIsNotKernelCertificationIsTrue :
+  historicalStructuralLineageIsNotKernelCertification ≡ true
+historicalStructuralLineageIsNotKernelCertificationIsTrue = refl
+
+staleFalseClosureBitDoesNotImplyMathematicalNegation :
+  staleFalseClosureBitImpliesMathematicalNegation ≡ false
+staleFalseClosureBitDoesNotImplyMathematicalNegation = refl
+
+historicalStructuralLineageAlonePromotesClayIsFalse :
+  historicalStructuralLineageAlonePromotesClay ≡ false
+historicalStructuralLineageAlonePromotesClayIsFalse = refl
