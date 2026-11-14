@@ -458,3 +458,18 @@ The user supplied a local verifier report that checked out **exact head `70babf9
 **A3/I9, B, C remain:** independently retrieved two-edition oldid-wikitext + verified Wikidata QID sitelinks, scope-licensed consumer repair/human review and reparse; actual page-id and revision transport, SLR/ITIR/Hyperfabric source-incidence and selective reopening; 2014 dump/112-chunk original producer reconstruction and modern multilingual census. The user separately mentioned HF physical adjacency commit `0d4bd670959e` and S29 persistence, but **no physical original-object decode or persistence completion is evidenced by this report**.
 
 **Current-head status nuance:** documentation commits after `70babf96` change the PR head, not the Agda source theorem bytes. Log and test claims above explicitly attach to the exact source head that was run.
+
+
+### A2 rotation frontier — newly source-written bidirectional witness bridge
+
+Following the exact-head 36/36 Python and eight-module Agda 2.8 local acceptance at `70babf96`, the same rollup PR now includes **new source-written (NOT YET KERNEL-REPLAYED)** `DASHI/Wikimedia/IbrahimCycleRotationRelationExact.agda`.
+
+- `laterEntryIsForwardRotation`: for two `EventualCycle` witnesses of the **same start**, if the later entry time equals the earlier entry time plus an explicit offset, the later representative is exactly the forward iterate of the earlier representative by that offset.
+- `ForwardRotation` and `entryOrderCreatesForwardRotation`: retain original graph edges and the explicit offset; avoid identifying rotations just because both certificates share a QID/title label.
+- `forwardRotationTransitive`: compose graph-exact forward-reachability receipts via `iterateAppend`.
+- `cycleRotationHasReturn` and `knownPeriodMakesMutualRotation`: when a forward offset and remaining offset total a genuine certified return period, obtain both directions of graph reachability, not merely equality of selected cycle names.
+- `IbrahimFiniteFigureBasinCertificateExact.agda` now instantiates these for three non-equal vertices in the manuscript cycle: **A ↔ B**, **A ↔ C**, **B ↔ C**. This negative control distinguishes intrinsic cycle rotation from `SameRepresentativeBasin` coordinate equality.
+
+**Do not mark `terminalCycleUniqueUpToRotation` CLOSED yet.** The general theorem must still show that *any* two valid eventual-cycle certificates of the same deterministic finite orbit yield mutually reachable representatives, without requiring the caller to supply a period decomposition or entry-order witness. The algebraic witness-building steps above are genuine progress toward the theorem but have not been accepted under Agda on the new PR head. In particular, no historical or live Wikipedia source identity has been inferred from these finite graph lemmas.
+
+**Execution handoff:** run `NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh` on the exact new PR head. It now checks **eight source modules plus the dynamically generated Agda fixture = nine Agda targets**. The previous 8/8 and 36/36 local acceptance is preserved against `70babf96` and must not be silently promoted to this newer head. The Python test count is unchanged at 36.
