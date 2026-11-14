@@ -82,3 +82,4 @@ import DASHI.Physics.Plasma.LoureiroViriatoPlasmoidBidiExact
 import DASHI.Physics.Plasma.PlasmaActivatedWaterAgricultureSourceRegistryExact
 import DASHI.Physics.Plasma.KSW668FiniteDiscriminatorsExact
 import DASHI.Physics.Plasma.KSW668SourceCrosswalkExact
+import DASHI.Physics.Plasma.KSW668OriginalRationalTransferCountermodelExact
