@@ -47,6 +47,27 @@ was available but omitted.
 
 ## Operational notes
 
+The **only allowable Agda entrypoint** for this repository is:
+
+```bash
+scripts/run_agda29_parallel_check.sh
+```
+
+- **Never** invoke bare `agda`, system `/usr/bin/agda`, Nix-store ad-hoc binaries, or non-sanctioned wrappers directly.
+- **Always** run Agda verification through:
+  ```bash
+  # For non-interactive / agent execution, pass DASHI_NO_TMUX=1 to avoid detached tmux sessions:
+  DASHI_NO_TMUX=1 scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+  ```
+- If the binary needs pre-resolution for sandboxed or non-Nix environments:
+  ```bash
+  AGDA_BIN="$(nix build --no-link --print-out-paths /home/c/Documents/code/agda#debug.bin)/bin/agda"
+  DASHI_NO_TMUX=1 AGDA_BIN="$AGDA_BIN" scripts/run_agda29_parallel_check.sh DASHI/Path/To/Target.agda
+  ```
+Any Agda invocation outside `scripts/run_agda29_parallel_check.sh` is prohibited by repository operational policy.
+
+### Normative operational details
+
 The pre-existing operational, Agda/Nix, proof-lane, audit, and promotion notes
 remain normative and are preserved verbatim in
 [`Docs/AgentOperationalNotes.md`](Docs/AgentOperationalNotes.md). **Agents must
