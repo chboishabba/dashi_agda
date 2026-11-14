@@ -127,6 +127,66 @@ releasedHeadCoordinateAuditNeedNotReopen =
 
 
 ------------------------------------------------------------------------
+-- R829-vector instantaneous snapshot agreement and non-promotion.
+------------------------------------------------------------------------
+
+adapterInstantaneousVectorSnapshotClosed :
+  NSClay.instantaneousVectorSnapshotClosed ≡ true
+adapterInstantaneousVectorSnapshotClosed =
+  NSClay.instantaneousVectorSnapshotClosedIsTrue
+
+adapterInstantaneousRepositoryRateNegative :
+  NSClay.instantaneousRepositoryRateStrictlyNegative ≡ true
+adapterInstantaneousRepositoryRateNegative =
+  NSClay.instantaneousRepositoryRateStrictlyNegativeIsTrue
+
+adapterRealFiniteODETransportStillOpen :
+  NSClay.realFiniteODETransportClosed ≡ false
+adapterRealFiniteODETransportStillOpen =
+  NSClay.realFiniteODETransportStillOpen
+
+adapterUniversalR823ReserveStillUnrefuted :
+  NSClay.universalR823IntegratedReserveRefuted ≡ false
+adapterUniversalR823ReserveStillUnrefuted =
+  NSClay.universalR823IntegratedReserveStillUnrefuted
+
+adapterInstantaneousSnapshotClayStillFalse :
+  NSClay.instantaneousSnapshotClayPromotion ≡ false
+adapterInstantaneousSnapshotClayStillFalse =
+  NSClay.instantaneousSnapshotClayPromotionStillFalse
+
+toeInstantaneousVectorSnapshotMatchesAdapter :
+  TOE.toeNavierStokesInstantaneousVectorSnapshotClosed
+  ≡ NSClay.instantaneousVectorSnapshotClosed
+toeInstantaneousVectorSnapshotMatchesAdapter = refl
+
+toeInstantaneousSnapshotClayMatchesAdapter :
+  TOE.toeNavierStokesInstantaneousSnapshotClayPromotion
+  ≡ NSClay.instantaneousSnapshotClayPromotion
+toeInstantaneousSnapshotClayMatchesAdapter = refl
+
+unifierInstantaneousVectorSnapshotMatchesAdapter :
+  U.unifierNavierStokesInstantaneousVectorSnapshotClosed
+  ≡ NSClay.instantaneousVectorSnapshotClosed
+unifierInstantaneousVectorSnapshotMatchesAdapter = refl
+
+unifierUniversalR823ReserveMatchesAdapter :
+  U.unifierNavierStokesUniversalR823IntegratedReserveRefuted
+  ≡ NSClay.universalR823IntegratedReserveRefuted
+unifierUniversalR823ReserveMatchesAdapter = refl
+
+physicsInstantaneousVectorSnapshotMatchesAdapter :
+  Physics.navierStokesInstantaneousVectorSnapshotClosed
+  ≡ NSClay.instantaneousVectorSnapshotClosed
+physicsInstantaneousVectorSnapshotMatchesAdapter = refl
+
+physicsRealFiniteODETransportMatchesAdapter :
+  Physics.navierStokesRealFiniteODETransportClosed
+  ≡ NSClay.realFiniteODETransportClosed
+physicsRealFiniteODETransportMatchesAdapter = refl
+
+
+------------------------------------------------------------------------
 -- R736 current periodic-B shared weighted wall.
 ------------------------------------------------------------------------
 
