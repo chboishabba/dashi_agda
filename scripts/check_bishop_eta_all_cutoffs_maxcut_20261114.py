@@ -45,10 +45,24 @@ def real_block(s,n,m):
 
 def check():
     exact_abel=0
+    exact_raw_even_odd_prefix_cuts=0
     for n in range(8):
         for a in product((F(-5,3),F(0),F(1,7),F(3,2)),repeat=n):
             assert finite_abel(a)[0]==finite_abel(a)[1]
             exact_abel+=1
+            # Source-original 0-based raw partials vs 2n-paired eta.
+            for pairs in range(n//2+1):
+                original_pairs=sum((a[2*j]-a[2*j+1]
+                                    for j in range(pairs)),F(0))
+                raw_even=sum(((-1)**j*a[j]
+                              for j in range(2*pairs)),F(0))
+                assert raw_even==original_pairs
+                exact_raw_even_odd_prefix_cuts+=1
+                if 2*pairs<n:
+                    raw_odd=raw_even+a[2*pairs]
+                    assert raw_odd==sum(((-1)**j*a[j]
+                                        for j in range(2*pairs+1)),F(0))
+                    exact_raw_even_odd_prefix_cuts+=1
     real_all=0; real_pairs=0
     for s in (1,2,3,4):
         for N in range(1,30):
@@ -77,6 +91,7 @@ def check():
     return {'schema':'bishop-eta-original-indexed-all-cutoffs-maxcut-v1',
       'result':'PASS','source_index':'a_s(j)=expC(-s*L(j)); L(j) is intended log(j+1)',
       'exact_rational_finite_abel_cases':exact_abel,
+      'exact_raw_even_odd_prefix_cuts':exact_raw_even_odd_prefix_cuts,
       'exact_real_arbitrary_endpoint_blocks':real_all,
       'exact_real_complete_pair_tails':real_pairs,
       'complex_numeric_all_cutoff_checks':complex_checks,
