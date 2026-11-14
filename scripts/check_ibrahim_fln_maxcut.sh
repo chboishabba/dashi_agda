@@ -42,22 +42,20 @@ for source in \
   DASHI/Wikimedia/IbrahimGeneralFiniteCertificateKernelExact.agda \
   DASHI/Wikimedia/IbrahimFiniteFigureBasinCertificateExact.agda \
   DASHI/Wikimedia/IbrahimITIRConsumerRepairExact.agda; do
-  "$AGDA_BIN" --safe -i . -l standard-library "$source"
+  NO_TMUX=1 ./scripts/parallel_check.sh "$source"
 done
 
 # Compile a MANIFEST-VERIFIED full seven-node manuscript graph as an
 # independent, generated Agda proof carrier. The new generator's refl
 # equations are checked by Agda, never trusted from Python.
-GEN_TMP="$(mktemp -d)"
-trap 'rm -rf "$GEN_TMP"' EXIT
-mkdir -p "$GEN_TMP/DASHI/Wikimedia"
+GEN_FILE="DASHI/Wikimedia/GeneratedIbrahimFigureCertificateExact.agda"
+trap 'rm -f "$GEN_FILE"' EXIT
 python3 scripts/ibrahim_fln_agda_certificate_export.py \
   --input tests/fixtures/ibrahim_paper_figure_2_4.json \
   --manifest tests/fixtures/ibrahim_paper_figure_2_4.manifest.json \
   --module DASHI.Wikimedia.GeneratedIbrahimFigureCertificateExact \
-  --output "$GEN_TMP/DASHI/Wikimedia/GeneratedIbrahimFigureCertificateExact.agda"
-"$AGDA_BIN" --safe -i . -i "$GEN_TMP" -l standard-library \
-  "$GEN_TMP/DASHI/Wikimedia/GeneratedIbrahimFigureCertificateExact.agda"
+  --output "$GEN_FILE"
+NO_TMUX=1 ./scripts/parallel_check.sh "$GEN_FILE"
 
 if [ "$(printenv IBRAHIM_AGGREGATE_CHECK 2>/dev/null || true)" = "1" ]; then
   "$AGDA_BIN" --safe -i . -l standard-library DASHI/Wikimedia/Everything.agda

@@ -15,6 +15,10 @@ STATUS_DIR="${DASHI_STATUS_DIR:-${XDG_CACHE_HOME:-/home/c/.cache}/dashi-agda29/s
 mkdir -p "$STATUS_DIR"
 STATUS_FILE="$(mktemp "$STATUS_DIR/status_XXXXXX.txt")"
 
+if [ "${NO_TMUX:-0}" = "1" ]; then
+  DASHI_NO_TMUX=1
+fi
+
 if [ -z "${TMUX:-}" ] && [ "${DASHI_NO_TMUX:-0}" != "1" ] && [ -t 0 ] && command -v tmux >/dev/null 2>&1; then
   rm -f "$STATUS_FILE"
   tmux kill-session -t "${SESSION_NAME}" 2>/dev/null || true

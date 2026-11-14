@@ -1,0 +1,1 @@
+run_agda29_parallel_check.sh
