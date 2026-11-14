@@ -2,7 +2,7 @@
   "date": "2026-11-14",
   "source_kind": "exact symbolic model and independently evaluated source data; NOT experiment or Agda kernel",
   "execution": {
-    "local_equivalent_checks_passed": 16,
+    "local_equivalent_checks_passed": 17,
     "local_equivalent_checks_failed": 0,
     "python_requirement": "sympy",
     "canonical_script": "scripts/check_ksw668_physical_maxcut.py",
@@ -56,7 +56,16 @@
     "hypothetical_N14_targets": "1e20",
     "conditional_reaction_rate_per_second": "182.8",
     "conditional_reaction_rate_uncertainty_per_second": "5.3",
-    "limitations": "no astrophysical triple-alpha rate, biological neutron exposure or empirical patient source"
+    "limitations": "no astrophysical triple-alpha rate, biological neutron exposure or empirical patient source",
+    "neutral_atom_effective_rest_frame_CM_kinematics": {
+      "centre_of_mass_total_energy_MeV": "sum of N14 atom and free neutron rest energies",
+      "daughter": "C14 atom and H1 atom; electron counts balance; atomic approximation",
+      "daughter_opposite_three_momenta_MeV_over_c": "+/-33.11398405228876",
+      "daughter_H1_kinetic_MeV": "0.583838323904373",
+      "daughter_C14_kinetic_MeV": "0.04203233063809944",
+      "four_momentum_energy_and_mass_shell_checks": "exact rational / symbolic",
+      "caveat": "not a measured nuclear-ion final state or corrected atomic electron-binding calculation"
+    }
   },
   "D": {
     "flat_spacelike_event": "dx=10, dt=0, c=1",
