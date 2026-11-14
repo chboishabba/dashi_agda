@@ -158,10 +158,12 @@
     {
       "repository_group": "agda",
       "pr": 1500,
-      "sha": "73bc99a324bdc0251862802177e2390973ae8c0a",
+      "sha": "9ac648b12ee305911cef8f70e1999949cc5279c9",
       "lane": "BSD_Kummer_CM_L32",
       "wave": 2,
-      "state": "open"
+      "state": "open",
+      "previous_snapshot_sha": "73bc99a324bdc0251862802177e2390973ae8c0a",
+      "note": "Includes docs/bsd-cubical-dchott-vendor-audit-20261114.md; vendor sources are donors, not K1-K5 physical proof"
     },
     {
       "repository_group": "agda",
@@ -415,5 +417,12 @@
     "lean_golden": false,
     "legacy_real_unpostulated": false,
     "clay_endpoints_solved": false
-  }
+  },
+  "snapshot_policy": "Each PR donor pin is a historical exact source commit, not a promise that live PR heads remain unchanged; run get_pr_info/compare before merges. The manifest's self-PR #1499 is intentionally a pre-manifest source checkpoint to avoid recursive self-reference.",
+  "last_checked_on": "2026-11-14",
+  "warnings": [
+    "No PR was merged or closed by this work",
+    "Bishop/Cubical vendor changes cannot bypass source-carrier equivalence, trust and kernel gates",
+    "A current GitHub mergeable flag is not proof of conflict freedom or mathematical correctness"
+  ]
 }
