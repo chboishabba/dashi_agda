@@ -393,3 +393,40 @@ The **1011** checks above are the host's count of selected leaf checks and are n
 - **F4/F5/F6:** no original fresh corpus is included in a PR source diff; Leech now has a SHA-bound and 16-gram-distinct real source-document token-split generator with a provisional path if the historical document inventory is unavailable. Document identity must not be inferred merely from token nonoverlap.
 
 **Next handoff:** run `DASHI_NO_TMUX=1 bash scripts/check_x369_finite_original_torus_maxcut.sh` on the pushed PR #1442 head; run the Leech full native test command on the latest PR #4 head; separately rerun F1 from the existing TrueNAS residual `.npy` files to generate **actual full-hidden** row-cluster confidence intervals. Do not consume frozen F5/F6 sets to explore source actions.
+
+## Later 14 November 2026 replay — current selected Agda head accepted, full hidden C3 refuted
+
+### Corrected selected Agda Track B acceptance
+
+Host subsequently ran `scripts/check_x369_finite_original_torus_maxcut.sh` on the **synchronized branch revision `81542ade028f`** after the Agda 2.9 keyword/universe import repairs were in the PR itself. Report: **8/8 selected modules checked, exit 0, 0 errors, 0 warnings**. Individual checks: group 64, router 157, orthogonality 194, original site index BIDI 158, spectral basis 196, explicit eight-slot BIDI 159, affine BIDI 65, absolute-phase gauge 18. This supersedes the earlier ambiguity between local `test/pr1442` and the remote source head; it does NOT establish all-field A03/A04/A05, whole-repo Track A, or physical/neural mechanism.
+
+Still exact unproved:
+- **A03:** `originalNineSiteFieldExpansion`, `originalEisensteinFiniteDoubleSumInterchange`, `originalAllFieldFourierConvolution`, `originalNineSiteInverseScaledByNine`.
+- **A04:** `originalAllFieldParsevalBilinear`, `originalConjugateFrequencyRealityAllSites`, `originalCentredNineSheetGramInvariant`.
+- **A05:** `originalEightCentreToFourWavePairs`, `originalFourWavePairsToEightCentre`, `originalCentredNineNormUnderReGauge`, `signedFloatWaveConsumerRefinement`.
+- **A06:** authoritative master integrated whole-programme Track A, original carrier and assumption closure. Preserve original YAML/golden source ownership and avoid non-destructive history rewrites.
+
+### F1 cross-lane negative result, proper scope
+
+Host ran the **actual 384×384** covariance bootstrap on nine source-row clusters with 1999 draws. Reported primary full hidden defect:
+- Layer 0: `D_C3=1.33227`, familywise CI `[1.33199,1.35126]`.
+- Layer 1: `D_C3=1.41233`, familywise CI `[1.41198,1.41259]`.
+- Both exceed tolerance `0.05` in the selected fixed hidden coordinate action. Cross-triad `||C-offblockdiag||F/||C||F`: `0.9354` and `0.9926`. These are Frobenius covariance fractions, **not percent total variance**. Independent historical source-document identity has not been established, so the row-cluster population inference remains conditional.
+
+For an exact order-three orthogonal permutation `P`, with empirical PSD covariance `C`:
+```text
+D = ||C-PCP^T||F/||C||F <= sqrt(2).
+Frobenius overlap = 1 - D^2/2.
+Reynolds projection R=(C+PCP^T+P²C(P²)^T)/3.
+||C-R||F/||C||F = D/sqrt(3).
+```
+The reported point values therefore imply overlap `[0.112528, 0.002662]` and noninvariant Frobenius components `[0.769186, 0.815409]`. They **disprove approximate covariance equivariance for the particular native coherent triad generator on the measured residuals**, not all possible learned bases or group actions. A finite original-torus theorem is not automatically a learned hidden-state action.
+
+Leech PR #4 now owns a seeded `audit_x369_f1_rank_and_orientation_null.py` to quantify the PSD ceiling, Reynolds projection, covariance effective rank and an order-three *mixed-triad-orientation* null (each triad uses +1 or -1 nonidentity generator). This is a matched spectral negative control, not a physical or neural intertwiner. Five focused tests passed locally; original-model/TrueNAS rerun is still an empirical gate. No new synthetic Agda group or fabricated experimental proof should be created.
+
+### Empirical release ledger
+
+- **F1:** full hidden source covariance refutation for fixed triad action; compare rank/orientation, document provenance and alternative predeclared representations before any claim of learned group.
+- **F2/F3:** original frozen checkpoint, independently semantic C3 task action, source hidden readout and actual output consumer, paired causal CE against equal-displacement random null.
+- **F4/F5/F6:** source-bound truly fresh documents, non-overlapping 16-token windows and original model training; reserved independent holdouts must remain untouched.
+- **P0:** Host reports 103/103 Leech tests across 22 suites on a working tree referencing `4761459` with a local Python multiline syntax correction. The correction has since been pushed to the existing PR branch; later source changes require a new current-head replay. Do not label those 103 tests as an execution of a subsequent GitHub head.
