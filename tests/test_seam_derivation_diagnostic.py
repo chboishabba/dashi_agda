@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
+
+import pytest
 from pathlib import Path
 from typing import Any
 
@@ -10,8 +13,21 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "seam_derivation_diagnostic.py"
 
+SPEC = importlib.util.spec_from_file_location("seam_derivation_diagnostic", SCRIPT)
+assert SPEC is not None and SPEC.loader is not None
+SEAM = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = SEAM
+SPEC.loader.exec_module(SEAM)
 
-def run_diagnostic(tmp_path: Path, threshold: float = 0.105) -> dict[str, Any]:
+
+def run_diagnostic(
+    tmp_path: Path,
+    threshold: float = 0.105,
+    *,
+    max_reprojection_distance: float = 0.02,
+    mean_reprojection_distance: float = 0.01,
+    min_edge_retention_ratio: float = 0.99,
+) -> dict[str, Any]:
     out_dir = tmp_path / "seam_diagnostic"
     proc = subprocess.run(
         [
@@ -23,6 +39,12 @@ def run_diagnostic(tmp_path: Path, threshold: float = 0.105) -> dict[str, Any]:
             "5",
             "--residual-threshold",
             str(threshold),
+            "--max-reprojection-distance",
+            str(max_reprojection_distance),
+            "--mean-reprojection-distance",
+            str(mean_reprojection_distance),
+            "--min-edge-retention-ratio",
+            str(min_edge_retention_ratio),
             "--out-dir",
             str(out_dir),
         ],
@@ -65,6 +87,7 @@ def test_pipeline_order_is_present(tmp_path: Path) -> None:
     assert payload["pipeline_order"] == [
         "input",
         "body_gate",
+        "reprojection_gate",
         "field_summary",
         "seam_cost_graph",
         "panels",
@@ -108,3 +131,89 @@ def test_no_manufacturing_promotion(tmp_path: Path) -> None:
     assert payload["promotion"]["severity"] == 1
     assert "synthetic_body" in payload["promotion"]["blockers"]
     assert payload["promotion"]["manufacturing_exports_generated"] is False
+
+def test_reprojection_quality_gate_reports_compatible_meshes(
+    tmp_path: Path,
+) -> None:
+    payload = run_diagnostic(tmp_path)
+    gate = payload["reprojection_gate"]
+
+    assert gate["passed"] is True
+    assert 0.0 < gate["max_distance"] <= gate["thresholds"]["max_distance"]
+    assert 0.0 < gate["mean_distance"] <= gate["thresholds"]["mean_distance"]
+    assert gate["edge_retention_ratio"] == 1.0
+    assert gate["retained_edges"] == gate["source_edge_count"]
+    assert len(gate["vertex_mapping_hash"]) == 64
+    assert (
+        payload["seam_cost_graph"]["selected_source_seam_edges"]
+        == payload["seam_cost_graph"]["selected_target_seam_edges"]
+    )
+
+
+def test_reprojection_distance_gate_fails_loudly(tmp_path: Path) -> None:
+    out_dir = tmp_path / "too_far"
+    proc = subprocess.run(
+        [
+            sys.executable,
+            str(SCRIPT),
+            "--width",
+            "6",
+            "--height",
+            "5",
+            "--max-reprojection-distance",
+            "0.000001",
+            "--mean-reprojection-distance",
+            "0.000001",
+            "--out-dir",
+            str(out_dir),
+        ],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert proc.returncode != 0
+    assert "incompatible source/target meshes" in proc.stderr
+    assert "max_distance=" in proc.stderr
+    assert "mean_distance=" in proc.stderr
+    assert not (out_dir / "seam_derivation_diagnostic_summary.json").exists()
+
+
+def test_edge_retention_gate_fails_loudly() -> None:
+    source_vertices = [
+        SEAM.Vertex(0, 0, 0, 0.0, 0.0, 0.0),
+        SEAM.Vertex(1, 1, 0, 1.0, 0.0, 0.0),
+        SEAM.Vertex(2, 2, 0, 2.0, 0.0, 0.0),
+    ]
+    target_vertices = list(source_vertices)
+    source_edges = [
+        SEAM.Edge(0, 0, 1, "horizontal"),
+        SEAM.Edge(1, 1, 2, "horizontal"),
+    ]
+    target_edges = [
+        SEAM.Edge(0, 0, 1, "horizontal"),
+    ]
+
+    quality, _ = SEAM.reprojection_quality(
+        source_vertices,
+        source_edges,
+        target_vertices,
+        target_edges,
+    )
+
+    assert quality.max_distance == 0.0
+    assert quality.mean_distance == 0.0
+    assert quality.edge_retention_ratio == 0.5
+
+    with pytest.raises(
+        SEAM.ReprojectionCompatibilityError,
+        match="edge_retention_ratio=",
+    ):
+        SEAM.require_reprojection_compatible(
+            quality,
+            max_distance=0.01,
+            mean_distance=0.01,
+            min_edge_retention_ratio=0.75,
+        )
+
