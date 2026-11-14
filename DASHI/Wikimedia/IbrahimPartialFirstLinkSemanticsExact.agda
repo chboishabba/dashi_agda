@@ -59,7 +59,7 @@ activeNotMissingTarget ()
 
 activeNotDeadEnd :
   ∀ {Node Outside : Set} {node other : Node} →
-  visiting node ≡ stoppedAt other → ⊥
+  visiting {Outside = Outside} node ≡ stoppedAt {Outside = Outside} other → ⊥
 activeNotDeadEnd ()
 
 partialDeadEndAbsorbs :
@@ -100,18 +100,18 @@ totalGraphCannotCreateMissingTarget :
     (n : Nat) (start : Node) (target : Outside) →
   partialIterate (totalAsPartialSelection next)
     n (visiting start) ≡ missingTarget target → ⊥
-totalGraphCannotCreateMissingTarget next n start target false =
+totalGraphCannotCreateMissingTarget next n start target eq =
   activeNotMissingTarget
-    (trans (sym (totalGraphEmbeddedIntoPartial next n start)) false)
+    (trans (sym (totalGraphEmbeddedIntoPartial next n start)) eq)
 
 totalGraphCannotCreateDeadEnd :
   ∀ {Node Outside : Set} (next : Node → Node)
     (n : Nat) (start stop : Node) →
   partialIterate (totalAsPartialSelection {Outside = Outside} next)
     n (visiting start) ≡ stoppedAt stop → ⊥
-totalGraphCannotCreateDeadEnd next n start stop false =
-  activeNotDeadEnd
-    (trans (sym (totalGraphEmbeddedIntoPartial next n start)) false)
+totalGraphCannotCreateDeadEnd {Outside = Outside} next n start stop eq =
+  activeNotDeadEnd {Outside = Outside}
+    (trans (sym (totalGraphEmbeddedIntoPartial {Outside = Outside} next n start)) eq)
 
 -- A typed first-link observation remains a navigation projection.
 -- Source/QID identity, parser legitimacy, human repair authority and
