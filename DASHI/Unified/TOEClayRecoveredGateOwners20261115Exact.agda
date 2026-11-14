@@ -47,7 +47,7 @@ toeOriginalPhysicalSignedMomentWeldStillRequired = refl
 
 toeR406MarginIsNotIndependentThirdLeaf :
   B.round736StrictMarginR406IndependentLeafRequired ≡ false
-toeR406MarginIsNotIndependentThirdLeafRequired =
+toeR406MarginIsNotIndependentThirdLeaf =
   B.round736StrictMarginR406IndependentLeafRequiredIsFalse
 
 toeYMCanonicalH1IsOneSourcePayment :
