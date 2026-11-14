@@ -11,6 +11,7 @@ cd "$ROOT"
 python3 scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py
 python3 scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py
 python3 scripts/check_bishop_trig_cauchy_coefficients_20261114.py
+python3 scripts/check_bishop_natlog_two_sided_dyadic_20261114.py
 targets=(
   DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda
   DASHI/Analysis/BishopRiemannDirichletBaselSameObjectExact.agda
