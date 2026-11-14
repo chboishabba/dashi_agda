@@ -114,6 +114,55 @@ changedResultRequiresOldEditedReachability delta difference avoids =
   difference (unchangedOldOrbitPreservesResult delta avoids)
 
 ------------------------------------------------------------------------
+-- Constructive revision-impact witness, when edited-node membership is
+-- decidable. Unlike merely negating avoidance, this produces a
+-- concrete old-orbit path to a changed outgoing edge.
+-- It remains a finite n-step theorem, not a terminal-census equivalence.
+------------------------------------------------------------------------
+
+data OldOrbitHitsEdit {Node : Set}
+  (old : Node → Node) (changed : Node → Set) :
+  Nat → Node → Set where
+  editAtCurrent : ∀ {n v} →
+    changed v → OldOrbitHitsEdit old changed (suc n) v
+  editFurtherAlong : ∀ {n v} →
+    OldOrbitHitsEdit old changed n (old v) →
+    OldOrbitHitsEdit old changed (suc n) v
+
+oldOrbitHitOrAvoid :
+  ∀ {Node : Set}
+    (delta : TypedRevisionDelta Node)
+    {n : Nat} {v : Node} →
+  ((node : Node) → changedAt delta node ⊎
+    (changedAt delta node → ⊥)) →
+  OldOrbitHitsEdit (oldLink delta) (changedAt delta) n v
+  ⊎
+  AvoidsEditedVertices (oldLink delta) (changedAt delta) n v
+oldOrbitHitOrAvoid delta {zero} {v} decide = inj₂ avoidsZero
+oldOrbitHitOrAvoid delta {suc n} {v} decide with decide v
+... | inj₁ edited = inj₁ (editAtCurrent edited)
+... | inj₂ unchanged
+  with oldOrbitHitOrAvoid delta {n} {oldLink delta v} decide
+...   | inj₁ hit = inj₁ (editFurtherAlong hit)
+...   | inj₂ avoids = inj₂ (avoidsStep unchanged avoids)
+
+changedResultWitnessesOldEditedPath :
+  ∀ {Node : Set}
+    (delta : TypedRevisionDelta Node)
+    {n : Nat} {v : Node} →
+  ((node : Node) → changedAt delta node ⊎
+    (changedAt delta node → ⊥)) →
+  (iterate (oldLink delta) n v ≡
+   iterate (newLink delta) n v → ⊥) →
+  OldOrbitHitsEdit (oldLink delta) (changedAt delta) n v
+changedResultWitnessesOldEditedPath delta decide different
+  with oldOrbitHitOrAvoid delta decide
+... | inj₁ hit = hit
+... | inj₂ avoids =
+  ⊥-elim
+    (different (unchangedOldOrbitPreservesResult delta avoids))
+
+------------------------------------------------------------------------
 -- Positive-period eventual-cycle receipts. A zero-length "cycle"
 -- is impossible by construction: period = suc periodTail.
 -- These are certified observations, NOT a claim that all nodes have
