@@ -107,13 +107,16 @@ module Solver {r : Level} (F : C3.RealField r) =
 module Polynomial {r : Level} (F : C3.RealField r) where
   module R = Solver F
 
+  Carrier = C3.Carrier F
+  Expr = R.Expr Carrier
+
   multiplyReal :
-    ∀ {n} → R.Expr n → R.Expr n → R.Expr n → R.Expr n → R.Expr n
+    ∀ {n} → Expr n → Expr n → Expr n → Expr n → Expr n
   multiplyReal ar ai br bi =
     (ar R.⊗ br) R.⊕ (R.⊝ (ai R.⊗ bi))
 
   multiplyImaginary :
-    ∀ {n} → R.Expr n → R.Expr n → R.Expr n → R.Expr n → R.Expr n
+    ∀ {n} → Expr n → Expr n → Expr n → Expr n → Expr n
   multiplyImaginary ar ai br bi =
     (ar R.⊗ bi) R.⊕ (ai R.⊗ br)
 
