@@ -76,6 +76,8 @@ observationCollisionCreatesIdentificationDefect :
 observationCollisionCreatesIdentificationDefect {S} {query} witness =
   Fibre.sameObservationDifferentAnswerGivesDefect
     (Fibre.sameObservationDifferentConsumerAnswer
+      {system = asConsumerIndexedFibreSystem S}
+      {consumer = query}
       (leftModel witness)
       (rightModel witness)
       (sameObservation witness)
@@ -86,7 +88,11 @@ identificationDefectBlocksIdentification :
   StrategicIdentificationDefect S query →
   IdentifiedForQuery S query →
   ⊥
-identificationDefectBlocksIdentification = Fibre.consumerAdequacyDefectBlocksAdequacy
+identificationDefectBlocksIdentification {S} {query} defect adequate =
+  Fibre.consumerAdequacyDefectBlocksAdequacy
+    {system = asConsumerIndexedFibreSystem S}
+    {consumer = query}
+    defect adequate
 
 ------------------------------------------------------------------------
 -- Experiment/refinement receipt.
