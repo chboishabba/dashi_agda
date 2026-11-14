@@ -1,5 +1,18 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Source acceptance update — finite-word A2 / name-fibre A1 / native original two-pass
+
+**Still-verified base:** 7/7 Agda modules at source `4c89edb`, ITIR clean 95/95 Python plus native four schema roundtrips/five negative controls at `e64c04f`; SLR 4/4 focused Rust candidate joins and SensibLaw 17/17 reference tests at their reported older source. **New code NOT YET RUN on the new heads.**
+
+**New formal acceptance target:** pinned `bash scripts/check_zelph_trie_hyperfabric_maxcut.sh` now checks **9** Agda modules: seven previously checked plus `ZelphFiniteQueryWordClosureExact` and `ZelphMultiNameShardFibreExact`. The finite-word theorem constructs final word equality from source-reachable one-step equality certificates (frontier-preserving); multi-shard name-fibre theorem retains every collision and proves singleton coverage embeds as a special case. Physical premises remain open.
+
+**New ITIR runtime acceptance target:** `bash tools/check_zelph_physical_maxcut_offline.sh` adds finite-word boundary tests and strict numeric frontier route validation. Native fixture now constructs an original packed mini `.bin`, runs original two-pass QID `Q1` + unnamed numeric frontier `--node 8`, checks exact second-hop oracle and decoder without fabricating a name. Both new native producer compilation and physical source execution need local receipt.
+
+**New SLR acceptance target:** `cargo test -p sensiblaw-source-handoff native_statement_evidence`. Read-only native GUID/mainsnak/rank/qualifier/reference/P854 comparisons are source-written, not yet compiled. The producer does not authenticate an asserted native SHA256, primary source bytes or S29 state.
+
+**Physical P0–P5 remain as before:** original immutable HF source bytes and entire name domain, full specified query-family closure, revision transport, native P14143/P854 source payment, production S29, genuine Éder Porto NORA export and full current Nat cursor still missing. A synthetic mini `.bin` is *not* the 82 GiB Wikidata original.
+
+
 ## A1 collision-preserving proof-owner refinement — 15 November 2026
 
 **New Agda source written, NOT yet Agda-checked:** `DASHI/Interop/ZelphMultiNameShardFibreExact.agda` defines `CompleteNameShardFibre` with finite `shardFibre` lists and two independent implications: `noMissingShard` (every physically containing shard appears) and `noFabricatedShard` (every listed shard actually contains the key). `zelphDuplicateNameFibreExhaustive` exposes their bidirectional exactness. `singletonNameFibre` constructs a special case from the previously checked `NameShardPartition` singleton witness, but no reverse conversion is assumed without a physical uniqueness theorem. This retains genuine name collisions rather than erasing them.
