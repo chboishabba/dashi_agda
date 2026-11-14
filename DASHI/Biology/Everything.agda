@@ -278,3 +278,6 @@ import DASHI.Biology.AvianMagnetoreceptionStreamFiniteCore
 import DASHI.Biology.AvianMagnetoreceptionThoughtEmporiumEvidenceExact
 import DASHI.Biology.GenBankInterpretationInteropExact
 import DASHI.Biology.GenBankCanonicalDNAFibreIndexExact
+
+-- KSW 668 same-source empirical biology, read-only controls.
+import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact
