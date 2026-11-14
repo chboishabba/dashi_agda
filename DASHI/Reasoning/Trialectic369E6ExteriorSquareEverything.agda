@@ -1,0 +1,147 @@
+module DASHI.Reasoning.Trialectic369E6ExteriorSquareEverything where
+
+import DASHI.Foundations.F3SymplecticFourExteriorSquareExact
+import DASHI.Foundations.F3SymplecticFourExteriorSquareValidation
+import DASHI.Foundations.F3PrimitiveQuadraticStandardChartExact
+import DASHI.Foundations.F3PrimitiveQuadraticStandardChartValidation
+import DASHI.Foundations.E6F3ExteriorSquareRecognitionExact
+import DASHI.Foundations.E6F3ExteriorSquareRecognitionValidation
+import DASHI.Foundations.E6F3GeneratedGroupClosureExact
+import DASHI.Foundations.E6F3GeneratedGroupClosureValidation
+import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelReceiptExact
+import DASHI.Foundations.E6F3PGSpProjectivizationCrossKernelValidation
+import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelReceiptExact
+import DASHI.Foundations.E6F3ProjectiveIncidenceCrossKernelValidation
+import DASHI.Foundations.E6F3RootLineSRGCrossKernelReceiptExact
+import DASHI.Foundations.E6F3RootLineSRGCrossKernelValidation
+import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeExact
+import DASHI.Reasoning.Trialectic369E6ExteriorSquareBridgeValidation
+import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionExact
+import DASHI.Reasoning.Ternary27HyperformSchlafliRecognitionValidation
+import DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeExact
+import DASHI.Reasoning.Ternary27HeisenbergThirteenSchlafliBridgeValidation
+import DASHI.Reasoning.Ternary27A5SixFaceReorganisationReceiptExact
+import DASHI.Reasoning.E6Ternary27FullSameActionReceiptExact
+import DASHI.Reasoning.Ternary27AlbertShapeFullE6BoundaryExact
+import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportExact
+import DASHI.Reasoning.Ternary27ArbitraryPointed26TransportValidation
+import DASHI.Reasoning.E8StructuredTernary240E6A2ReceiptExact
+import DASHI.Reasoning.E8StructuredFullWeylReceiptExact
+
+-- Actual rational Albert algebra.
+import DASHI.Mathematics.Algebra.RationalAlbertHermitianCubicExact
+import DASHI.Mathematics.Algebra.RationalAlbertJordanProductExact
+import DASHI.Mathematics.Algebra.RationalAlbertJordanLawsExact
+
+-- Explicit automorphism / triality lanes on the same carrier.
+import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismExact
+import DASHI.Mathematics.Algebra.RationalAlbertS3AutomorphismLawsExact
+import DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismExact
+import DASHI.Mathematics.Algebra.RationalOctonionSignedBasisAutomorphismValidation
+import DASHI.Mathematics.Algebra.RationalOctonionLinearityExact
+import DASHI.Mathematics.Algebra.RationalOctonionG2DerivationExact
+import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisG2SubgroupExact
+import DASHI.Mathematics.Algebra.RationalAlbertSignedBasisAutomorphismExact
+import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismExact
+import DASHI.Mathematics.Algebra.RationalAlbertMoufangTrialityAutomorphismValidation
+import DASHI.Mathematics.Algebra.RationalAlbertLinearJordanAutomorphismExact
+import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyExact
+import DASHI.Mathematics.Algebra.RationalAlbertKnownGeneratorFamilyValidation
+import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureExact
+import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismClosureValidation
+import DASHI.Mathematics.Algebra.RationalAlbertAutomorphismFixesUnitExact
+
+-- Albert derivation/F4 lane and terminal form diagnostics.
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4BoundaryExact
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawExact
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationLawValidation
+import DASHI.Mathematics.Algebra.RationalAlbertF4DerivationExact
+import DASHI.Mathematics.Algebra.RationalAlbertInnerDerivationF4ReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertTrialityDerivationExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4CartanRootReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactWeightDecompositionReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ExactRootGradingReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4SplitRootDatumRecognitionExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4RootDecompositionDiagnosticExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4RealPlaceCompactnessValidation
+import DASHI.Mathematics.Algebra.RationalAlbertF4CurrentMaxCutExact
+
+-- Same-carrier exceptional-group targets and sourced classification boundary.
+import DASHI.Mathematics.Algebra.RationalAlbertLinearExceptionalGroupsExact
+import DASHI.Mathematics.Algebra.RationalAlbertClassicalE6F4SourceReceiptExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryExact
+import DASHI.Mathematics.Algebra.RationalAlbertF4ClassificationInstantiationBoundaryValidation
+import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutExact
+import DASHI.Reasoning.ExceptionalE8AlbertCurrentMaxCutValidation
+import DASHI.Reasoning.ExceptionalE8AlbertF4RootMaxCutExact
+import DASHI.Reasoning.ExceptionalE8AlbertF4ClassificationMaxCutExact
+
+-- Monster-3B realization lane. Certified source matrices are vendored and
+-- normalized into X6+X6*. Three source-word roles are kept separate:
+-- depth-5 strict lift / field-presentation seed, depth-7 primitive center
+-- inverter, and the preferred depth-8 primitive center-preserving inertia word.
+-- The last one pays the selected GF(729) punctured 728-cycle and an exact
+-- center-preserving Heisenberg lift at executable receipt level. Barraclough-
+-- Wilson independently source-align the degree-729 extraspecial irreducibles.
+--
+-- The literal VOA W_zeta VECTOR carrier is distinct from its finite basis-label
+-- surface. Constructive 729-state witness extraction closes the explicit
+-- Schrodinger irreducibility leaf. The literal monomial action now also has an
+-- exhaustive executable character derivation over all 3^13 Heisenberg
+-- coordinates and all 729 additive-character sums. Companion Lean source-writes
+-- the generic equal-character-simple-representation isomorphism theorem.
+--
+-- Promotion is proof-relevant: legacy Set-valued fields name proposition types
+-- but do not count as proofs. The fixed-phase character compiler shows that
+-- once the explicit Schrodinger rep and one actual selected constituent are
+-- transported into the same representation theory, the equivariant H_zeta iso
+-- fills both recognition/action witnesses. A second, shorter whole-character
+-- route is now source-written generically: after the SAME actual restricted
+-- sector has a proof-relevant classifier saying every simple submodule is
+-- H_zeta, pinned mathlib `IsIsotypicOfType.linearEquiv_fun` assembles finite
+-- H_zeta copies automatically. Literal ninety-constituent enumeration is thus
+-- a fallback rather than a mandatory generic assembly step. The classifier,
+-- Monster same-object bindings and copy count 90 remain independent payments.
+--
+-- The Suzuki 12+78 occurrence/orientation chain is hardened similarly:
+-- external GAP/CTblLib execution remains evidence, while Agda promotion requires
+-- inhabitants for pair restriction, main split, quotient descent, actual
+-- Monster occurrence, same-object identity and individual zeta orientation.
+import DASHI.Moonshine.Monster3BAtlasSymplectic12SourceReceiptExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticBasisIntertwinerCompilerExact
+import DASHI.Moonshine.Monster3BAtlasCompressionFieldSelectionBoundaryExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftExact
+import DASHI.Moonshine.Monster3BAtlasSymplecticSimilitudeHeisenbergLiftValidation
+import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptExact
+import DASHI.Moonshine.Monster3BAtlasSelectedHeisenbergLiftReceiptValidation
+import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftReceiptExact
+import DASHI.Moonshine.Monster3BAtlasPrimitiveInertiaHeisenbergLiftValidation
+import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptExact
+import DASHI.Moonshine.Monster3BAtlasGF729LeanReceiptValidation
+import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptExact
+import DASHI.Moonshine.Monster3BBarracloughWilson729SourceReceiptValidation
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionExact
+import DASHI.Moonshine.Monster3BWZetaBasisVectorRecognitionCorrectionValidation
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureExact
+import DASHI.Moonshine.Monster3BFiniteStoneVonNeumannIrreducibilityClosureValidation
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptExact
+import DASHI.Moonshine.Monster3BSchrodingerLiteralCharacterReceiptValidation
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptExact
+import DASHI.Moonshine.Monster3BFiniteCharacterDeterminationLeanReceiptValidation
+import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptExact
+import DASHI.Moonshine.Monster3BWholeCharacterIsotypicAssemblyLeanReceiptValidation
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningExact
+import DASHI.Moonshine.Monster3BProofRelevantRecognitionHardeningValidation
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerExact
+import DASHI.Moonshine.Monster3BHZetaCharacterTransportCompilerValidation
+import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningExact
+import DASHI.Moonshine.Monster3BSuzukiProofRelevantOccurrenceHardeningValidation
+import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutExact
+import DASHI.Moonshine.Monster3BProofRelevantCurrentMaxCutValidation
+import DASHI.Reasoning.Trialectic369Monster3BAtlasNormalizerMaxCutExact
+import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutExact
+import DASHI.Reasoning.Trialectic369Monster3BWZetaBasisVectorMaxCutValidation
+
+import DASHI.Reasoning.E8ExceptionalLiftCapstoneExact
+import DASHI.Reasoning.E8ExceptionalLiftCapstoneValidation

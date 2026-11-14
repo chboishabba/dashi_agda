@@ -5,6 +5,7 @@ on:
     branches:
       - 'agent/dewey-qid-firstlink-coverage-priorart'
       - 'agent/monster369-d4-nineorbit-kernel-character-exec'
+      - 'agent/e6-f3-exterior-square-maxcut-20261006'
     paths:
       - 'DASHI/Moonshine/Monster3BKernelCharacterCriterionExact.agda'
       - 'DASHI/Moonshine/Monster3BActualKernelCharacterPromotionExact.agda'
