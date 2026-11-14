@@ -6,6 +6,7 @@ import DASHI.Core.HistoryConditionedChoiceExact as HistoryTOE
 import DASHI.Core.TrajectoryEndpointNonfactorabilityExact as TrajectoryTOE
 import DASHI.Governance.TypedBranchingOptionConeBridgeExact as OptionConeTOE
 import DASHI.Unified.NavierStokesClayFrontierTOEConvergenceExact as NSClayTOE
+import DASHI.Unified.TOEClayRecoveredGateOwners20261115Exact as ClayRecovered20261115
 import DASHI.Analysis.RiemannG21StrictTP2TrancheReceipt as RHFrontier
 import DASHI.Mathematics.CrossPollination.MillenniumResidualDescentClassifierExact as MillenniumResidual
 import DASHI.Mathematics.CrossPollination.MillenniumLeanAssistReceiptExact as MillenniumLean
