@@ -13,6 +13,7 @@ import Tactic.RingSolver.NonReflective as RingSolver
 
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
+import DASHI.Physics.Closure.NSTriadKNComplex3HermitianScalingLaws as ScalingLaws
 
 ------------------------------------------------------------------------
 -- The minimal real carrier used by the literal C^3 construction already
@@ -196,32 +197,7 @@ complexMultiplyAssociative :
   ∀ {r} {F : C3.RealField r} (a b c : C3.Complex F) →
   C3.complexMultiply (C3.complexMultiply a b) c
   ≡ C3.complexMultiply a (C3.complexMultiply b c)
-complexMultiplyAssociative {F = F}
-  (C3.complex ar ai) (C3.complex br bi) (C3.complex cr ci) =
-  complexExt
-    (P.R.solve 6
-      (λ ar ai br bi cr ci →
-        P.multiplyReal
-          (P.multiplyReal ar ai br bi)
-          (P.multiplyImaginary ar ai br bi)
-          cr ci
-        P.R.⊜
-        P.multiplyReal ar ai
-          (P.multiplyReal br bi cr ci)
-          (P.multiplyImaginary br bi cr ci))
-      refl ar ai br bi cr ci)
-    (P.R.solve 6
-      (λ ar ai br bi cr ci →
-        P.multiplyImaginary
-          (P.multiplyReal ar ai br bi)
-          (P.multiplyImaginary ar ai br bi)
-          cr ci
-        P.R.⊜
-        P.multiplyImaginary ar ai
-          (P.multiplyReal br bi cr ci)
-          (P.multiplyImaginary br bi cr ci))
-      refl ar ai br bi cr ci)
-  where module P = Polynomial F
+complexMultiplyAssociative = ScalingLaws.complexMultiplyAssociative
 
 complexMultiplyCommutative :
   ∀ {r} {F : C3.RealField r} (a b : C3.Complex F) →
