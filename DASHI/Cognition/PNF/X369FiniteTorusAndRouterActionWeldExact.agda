@@ -1,5 +1,16 @@
 module DASHI.Cognition.PNF.X369FiniteTorusAndRouterActionWeldExact where
 
+-- RECOVERABLE SOURCES / ORIGINAL OWNERS
+-- Audrey Terras, Fourier Analysis on Finite Groups and Applications,
+-- Cambridge University Press (1999), DOI: 10.1017/CBO9780511626265.
+-- Jean-Pierre Serre, Linear Representations of Finite Groups,
+-- Springer (1977), DOI: 10.1007/978-1-4684-9458-7.
+-- Original finite Agda carrier: DASHI/Physics/Common/FiniteThreeCycleTorusExact.agda.
+-- Original character table: DASHI/Algebra/TriadicDepthOneCharacters.agda.
+-- Leech source: https://github.com/chboishabba/LeechTransformer/pull/4
+-- Attribution: finite X369 proof/counterexample is a DASHI extension;
+-- never an upstream neural, physical, Monster or learned-model theorem.
+
 -- X369 P1: reuse the ORIGINAL finite 3x3 torus Fourier carrier and
 -- verify the directed-channel C3 algebra on its exact polynomial
 -- signature. These are mathematical source-function contracts, not
