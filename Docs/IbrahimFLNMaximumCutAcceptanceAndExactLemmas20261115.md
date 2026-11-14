@@ -107,7 +107,7 @@ If any original immutable object is missing or the server rejects ranges, preser
 
 | Owner | Existing PR | Run / deliverable |
 | --- | --- | --- |
-| DASHI golden | [#1505](https://github.com/chboishabba/dashi_agda/pull/1505) | `git rev-parse HEAD && NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh`; eight earlier source checks plus **new rotation, partial and trace semantic modules**: currently **ten source modules + one generated = 11** (inspect script for exact count); compiler receipts after new mathematical edits **OPEN** |
+| DASHI golden | [#1505](https://github.com/chboishabba/dashi_agda/pull/1505) | `git rev-parse HEAD && NO_TMUX=1 ./scripts/check_ibrahim_fln_maxcut.sh`; prior 8/8 verified checks plus new rotation, partial, trace and finite minimum mathematical sources: currently **11 source modules + one generated = 12** (exact focused script checked); compiler receipts after new mathematical edits **OPEN** |
 | DASHI Zelph golden | [#1506](https://github.com/chboishabba/dashi_agda/pull/1506) | Exact previously checked conditional A1–A6 source at `4c89edb`; physical instantiation by original decoded graph remains **OPEN** |
 | ITIR | [#14](https://github.com/chboishabba/ITIR-suite/pull/14) | `bash tools/check_zelph_physical_maxcut_offline.sh` **clean head** then `--source-bin` physical audit; real A1/A2 route and query closure **OPEN** |
 | SLR | [#10](https://github.com/chboishabba/slr/pull/10) | `cargo test -p sensiblaw-source-handoff`, native GUID/qualifier/P854 crosswalk and S29 persist/reload **OPEN** |
