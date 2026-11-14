@@ -35,6 +35,12 @@ def validate(m):
                       ("review", "55ba9fc36293b3f4d52c6b1f813169a0be76ee98")):
         x = m.get(name)
         require(isinstance(x, dict) and x.get("commit") == ref, f"unpinned {name}")
+        expected_repo = ("yang-mills-group/OpenAI-YM-20261028" if name == "upstream"
+                         else "yang-mills-group/YM")
+        require(x.get("repository") == expected_repo, f"wrong {name} repository")
+        if name == "upstream":
+            require(x.get("lean_toolchain") == "leanprover/lean4:v4.32.0",
+                    "unpinned source Lean version")
         require(HEX40.fullmatch(x["commit"]) is not None, "invalid SHA")
         require(len(x.get("files", [])) > 0, f"missing {name} file inventory")
         paths = set()
@@ -67,7 +73,8 @@ def verify_bytes(files, base):
     verified = []
     for item in files:
         target = base / item["path"]
-        require(target.is_file(), f"missing pinned source {target}")
+        require(not target.is_symlink() and target.is_file(),
+                f"missing/unsafe pinned source {target}")
         actual = git_blob(target.read_bytes())
         require(actual == item["git_blob"], f"source-byte drift {target}")
         verified.append(item["path"])
