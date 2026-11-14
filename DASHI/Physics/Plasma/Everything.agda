@@ -90,3 +90,4 @@ import DASHI.Physics.Plasma.KSW668IsotopeCausalResidualExact
 -- Cross-lane source-indexed acquisition and quantitative physical closure gates.
 import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact
 import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact
+import DASHI.Physics.Plasma.KSW668RationalThreeModeSourceExact
