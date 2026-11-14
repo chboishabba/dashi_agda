@@ -79,3 +79,7 @@ The original author publications above retain their own authorship, source chron
 | Published Fig. 2–4 Agda reconstruction | [7235671](https://github.com/chboishabba/dashi_agda/commit/72356716f3d1570030c6ccfe4229eb4a914826dc) | 2026-11-14 08:15:01 | 2026-11-14 19:15:01 | source-written; proposed finite reductions not kernel-verified |
 
 These are different events from first validation, PR creation, merge, or any later paper release.
+
+### Local independent finite arithmetic receipt (2026-11-14)
+
+Executed a separate minimal Python Figure 2–4 reconstruction in the active working container against the author's seven-node fixture. The results matched the manuscript tables: visits `A=B=C=7, E=2, D=F=G=0`; published funnels `C=4, E=2`, all others zero; unamended cycle-entry exclusion gives `C=0`. Receipt: `artifacts/ibrahim_fln_figures_2_4_local_replay_receipt.json`. **Validation scope is exactly the finite seven-node source figure.** The new repository runtime implementation and Agda modules have not themselves been executed/kernel checked here. No other gate is upgraded by this independent arithmetic receipt.
