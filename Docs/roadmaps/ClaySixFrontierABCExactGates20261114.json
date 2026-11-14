@@ -2455,6 +2455,14 @@
         "commit": "058b65598ae8f85dd336a80e35f99096856937a9",
         "existing_overwritten": false,
         "existing_changed_complexity": 92
+      },
+      "additional_pnp_karp_regressions": {
+        "count": 27,
+        "pr_1129_p9_validations": 3,
+        "pr_1445_k21_docs_scripts": 24,
+        "method": "atomic original Git blob import preserving original sha",
+        "commit": "8e2b82ce8698e1e3c6d7d3b88ed891b496ad7e87",
+        "source_only": true
       }
     },
     "math": {
@@ -2520,7 +2528,8 @@
       "independent_local_6_mode_sympy": "PASS",
       "verified_native_kernel": false,
       "lean_r734_sqrt_certificate": "Synthesis/NavierStokesR734PurePlusW2NoGoScalarExact.lean",
-      "lean_r734_sqrt_native_kernel": false
+      "lean_r734_sqrt_native_kernel": false,
+      "historical_regressions_original_blobs_in_clay": true
     },
     "dont_promote": [
       "conditional implication as physical estimate",
