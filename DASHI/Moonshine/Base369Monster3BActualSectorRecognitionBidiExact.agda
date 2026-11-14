@@ -130,7 +130,7 @@ actualTranslationIntertwinesBase369 recognition axis state
     modelToBase369 (Model.translatedBasis axis basis)
     ≡ translateBase369Multiplicity axis (modelToBase369 basis)
   caseBasis (Model.zetaBasis position multiplicity)
-    rewrite Fibre.x6RoundTrip (H.translate axis position) = refl
+    rewrite Fibre.x6RoundTrip position = refl
 
 ------------------------------------------------------------------------
 -- 4. Modulation observers transport too; no phase semantics are invented.
