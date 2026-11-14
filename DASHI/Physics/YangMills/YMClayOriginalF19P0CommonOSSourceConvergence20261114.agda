@@ -53,3 +53,6 @@ import DASHI.Physics.YangMills.YangMillsStressOSSourceFirstSemigroupCoreToClosur
 
 import DASHI.Physics.YangMills.YMClayR445OneLocalTVThreeMomentsSourceWeldExact
 import DASHI.Physics.YangMills.YMClayR445LocalizedTVInferenceNoGoExact
+
+-- External OpenAI 2026 Lean YM claim/review: source receipt ONLY; no Agda proof import.
+import DASHI.Research.OpenAIMath.OpenAIYangMills2026SourceIntakeExact
