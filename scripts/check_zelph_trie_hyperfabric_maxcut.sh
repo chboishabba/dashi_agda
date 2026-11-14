@@ -30,6 +30,7 @@ TARGETS=(
   DASHI/Core/QueryIndexedProjectionSpineAdapterExact.agda
   DASHI/Interop/ZelphBoundedGraphCoverageExact.agda
   DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda
+  DASHI/Interop/ZelphFiniteQueryWordClosureExact.agda
 )
 
 for target in "${TARGETS[@]}"; do
