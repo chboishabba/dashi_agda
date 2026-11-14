@@ -731,3 +731,28 @@ Follow-up on PR #4 integrated multi-GPU code:
 **Original target ledger remains 106 named obligations**. This update changes *priority and weld status*, not proof counts: finite SBD01–04 accepted, physical/source welds open, strict teacher-free quality open, model memory/throughput Pareto open. No new diffusion or GAN architecture victory or student-quality gain is claimed.
 
 **Next maximum cut:** genuine data + full checkpoint → quality-only contracts → native progressive selected student end-to-end training on RX580 → development-ordered quality curve → final heldout teacher vs student-only CE → if successful, source-preserving teacher stripping and isolated student inference performance. Work on physical 2-host federation should not displace this until explicitly reprioritised by user.
+
+## 2026-11-14 measured Q1 curriculum result — major student improvement, quality promotion still fails
+
+**User-run physical GPU result:** the real RX 580 native Schaka 10.1 quality curriculum completed in **80.1 minutes (4,806 seconds)**, with checkpoint and receipts stored at `/mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113/`. Same experiment's independently held-out dense teacher cross-entropy **2.5834 nats/token**, strict all-student C2 CE **4.7630 nats/token**; gap **+2.1796 nats/token**, therefore quality promotion correctly **FAILED**. Earlier reported strict-student CE **11.565138** to new **4.7630** represents a **6.802138-nat** or **58.8% numerical CE reduction**; historical and new values should not be presented as strictly matched unless the heldout dataset and checkpoint protocol are verified. This proves the curriculum works as a physical native-GPU training programme, *not* that the teacher-free quality gate is closed.
+
+**Source status:** LeechTransformer PR #4 head `bffa5f89005d1654ab3aeeb01d0dfef1c000818c` includes corrected CPU-colocated original teacher/student `build_guarded_hybrid` before CUDA migration. C2 curriculum implementation source complete; user physical run establishes 80.1-minute executed training. New `scripts/audit_native_c2_quality_stages.py` parses the produced `candidate.json` to rank actual cumulative-stage development-CE regressions and weak isolated layers, preserving source checkpoint/heldout SHA, best epoch, and train/development group sizes. This audit is **source-written, not yet run against the user's actual TrueNAS receipt**. It does not invent stage-specific failure causes.
+
+**High-alpha quality cut before any more full 80-minute reruns:**
+1. Read the actual `candidate.json` stage trajectory (not just its final score) and source checkpoint hashes; inspect stage 1→2→4→8→12 etc, best-vs-last epoch, initial single-layer development scan, and whether severe CE damage concentrates at a particular cumulative insertion.
+2. Use the trained **full candidate checkpoint** as the next actual student initialization. Audit original trained model and preserved teacher/head/attention identity before editing optimizer. Avoid a new random MoE initialization and repeated broad source teacher prefill unless testing a control.
+3. Choose a focused continued training cut from the observed dev degradation with **heldout untouched during hyperparameter selection**: repeated train/dev CE, student next-token KL, local teacher-FFN MSE, routing entropy, history amplification and layer-specific activation errors. If a low-data or cross-entropy collapse dominates, compare bounded controlled remedies (e.g. more fit rows, changed KL/MSE ratio, one incremental group at a time) before expanding to all layers.
+4. The next promotion cut is strict full-student heldout CE <= matched teacher heldout CE + predeclared budget, plus a **physically teacher-stripped** checkpoint and exact source output parity. The guarded candidate checkpoint still physically contains dense teacher FFNs, even when its student-only forward branch avoids their execution.
+5. Measure full teacher-free inference memory, completed tokens/s and student model bytes, on the same original checkpoint/token task; only then compare resource/quality Pareto. Do not reuse the local federation 29.59 selected-row/s as complete student token generation throughput.
+
+**Phase update (no new artificial lemma tally):** P0 bounded original source proof/runtime and physical training accepted; Q1 progressive student training **PHYSICAL EXECUTION COMPLETE, partial quality success, promotion FAIL**; Q2 structural quality diagnosis, targeted continuation, true standalone student export **OPEN / top priority**; Q3 resource and multi-seed evaluation OPEN; diffusion Q4 deferred; remote federation F2–F6 explicitly parked. The roadmap continues to track **106 named obligations**. Exact unresolved quality welds: `fullStudentOnlyHeldoutNoTeacher`, `teacherStrippedStudentCheckpointBidi`, `cumulativeFocusedStudentRolloutSource` for actual full model, `originalDenseFFNZeroGateBidi` physical receipt/trace as needed, PERF02–08 fair quality/cost measurements. No new theorem falsely marked proved.
+
+**Receipt-only analysis command (no GPU repeat):**
+```bash
+cd /path/to/LeechTransformer
+git fetch origin && git switch experiment/consumer-preserving-multiscale-codec-20261031 && git pull --ff-only
+python3 scripts/audit_native_c2_quality_stages.py \
+  --receipt /mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113/candidate.json \
+  --output /mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113/stage_audit.json
+```
+Do not infer particular failing layers until that analysis has actually consumed the stage records. Data from prior 64-row federation receipt is a separate benchmark and must not replace this training audit.
