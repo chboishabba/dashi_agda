@@ -513,3 +513,19 @@ New original-source consumer on Lean #107:
 combines the actual E[2]-H¹ four-torsion image with the genuine Q₂ all-local first-parity condition on the **same** original explicit Selmer group. Source-written, Lean exact-head kernel receipt **OPEN**. Agda's standalone x=39 coherent Hensel witness is a **negative-control/example**, not a replacement for these much stronger already-written general image lemmas.
 
 **Highest-alpha BSD K1/K2/K5 still new source producers:** scalar local quadratic `PadicQuadraticKummerCompatibility p`; direct geometric Kummer ⇄ cohomological exactness and all local images; continuous `Sha(E)[2]` identification; all odd-primary Sha; original K4 same modular/newform/Mellin/period source proof. No classical BSD endpoint promoted.
+
+
+### 14 November round-three source welds — original six maximum cuts
+
+The authoritative exact gate registry is Docs/roadmaps/ClaySixFrontierABCExactGates20261114.json, field implementation_round_20261114_3, with human-readable counterpart Docs/roadmaps/ClaySixFrontierABCMaximumCut20261114.md. **Do not duplicate or reset its prior owners or its all-43 YM residual list.**
+
+- Karp source #1502: new Karp21NativeGammaAllLengthCompositePhysicalExact proves the k>=1 original literal finite-table gamma-token run, 2k+2 instructions and suffix preservation; focused Karp root now imports it. No malformed/full N21 F3/F4/PR.InNP claim.
+- YM source #1503: new YMClayR445OneLocalTVThreeMomentsSourceWeldExact consumes a single ORIGINAL local-observation TV hypothesis into native F,G,FG three-moment + R445 covariance; physical decay of that TV is still open and full-volume TV may fail.
+- BSD Lean #107: new actual E(R) two-sign-image theorem and original K1Q2H1 same-source consumer; the separate original Q2 x=39 arithmetic generates eight distinct local Kummer square-class representations with four actual torsion images. Full real/Q2 Galois H1 and Sha identification are open.
+- NS Lean #109: new genuine real interval-integral strict-negativity consequence for selected R854, still conditional on the actual original R853 selected-rate envelope. Real R71/R74 Galerkin solution and uniform Lipschitz bound open.
+- Bishop #1478: new selected Bishop all-n,m shifted eta pair-block source equality, consumed by native trig Round11 eta; original Nat-log, sine/cosine addition, derivative/FTC, compact Abel uniform eta open.
+- RH Lean #50/#108: selected W fourth-Lipschitz ceiling, sixth/eighth leading count debt and negative fifth-first-zero control already source-written. Actual A2/G3 strict signed compensation not paid or refuted; do not count the scalar compiler as a constructed witness.
+
+The newly written exact sources lack current pinned Agda 2.9/Nix or Lean/lake kernel checks; GitHub API returned no workflow runs for these new commits. The independent literal-gamma finite differential PASS is 31713 original positive words + 7 malformed controls; the original Q2 squareclass arithmetic PASS yields eight distinct cases. Neither is a proof of a general Clay endpoint.
+
+Canonical stage order: **source acceptance → true original-carrier A transport → selected analytic B estimate/counterexample → universal C proof with full trust closure**. Hold drafts #1499/#1502/#1503 open and preserve original first-source authorship.
