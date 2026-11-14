@@ -1,5 +1,63 @@
 # Zelph ↔ trie / ultrametric ↔ indexed hyperfabric ↔ Nat/NORA — exact maximum-cut
 
+## Latest maximum-cut checkpoint — 2026-11-14, post-local 41/4/17 regression ledger
+
+**Reported local acceptance at earlier heads (provided by operator):** ITIR #14 41/41 target tests, SLR #10 four new join tests, SensibLaw #514 17 NORA tests. These are **not tests of the subsequent commits below**. DASHI A1–A6 Agda kernel acceptance remains **OPEN**; Agda checking does not have to wait for raw HF physical premises. A6's extra antecedent was removed in DASHI commit `54f41be`; that corrected source must now be checked with the pinned Agda toolchain.
+
+**Observed same-object bytes:** Immutable HF dataset SHA `0d4bd670959ebddae72f70d973410fdea8917ec1`, full manifest raw SHA256 `cedd5cf0e4951ae1aa7c2c5968614b0eb72a4c3b5c8b2dc4ab18c40be8c83f59`, filtered route content address `fbc43156ae80b8e32f9cbd5b32dd30dcc2085ad9ead04e73e16ff8f376425233`, packaged receipt payload digest `d3970f969c4e9b030fdb75c2914318c20d9e20eb096cb0212ed3b6b421b6dd05` remain **operator-reported**, not independently replayed by this integration. A digest's presence is not cryptographic source-origin authentication. Five-QID name→node/chunk mapping is reported, not a whole-graph closure receipt.
+
+### Newly implemented after those local tests: concrete P0/P1/P2 cuts
+
+| Cut | Source & precise acceptance | What remains OPEN |
+|---|---|---|
+| **P0a — hashed route ↔ interpreted route** | ITIR `package_zelph_filtered_route_receipt.build_receipt` now refuses any dictionary that differs from the actual file whose raw bytes are hashed. Two regression tests added. | New exact-head native test; old reported package digest does not retroactively authenticate any new receipts |
+| **P0b — four-object raw replay** | ITIR `tools/verify_zelph_filtered_route_replay.py` checks raw request, v2 manifest, filtered route and receipt **independently**, recomputes manifest/route/receipt SHA256s, rejects duplicate JSON keys, requires immutable dataset SHA claim in request, checks QID/node/chunk/routing agreement and authority flags; adversarial tests added | Obtain actual four files, independent expected hashes/source URL evidence, pinned producer build and source-bin→HF graph identity |
+| **P1 — full manifest name cover** | ITIR `verify_manifest_name_cover` compares the **entire manifest-listed** `nodeOfName` chunk set to raw-byte-audited objects with chunk/language/URI/length checks. Duplicate physical name chunks and missing entries rejected. | Instantiate against downloaded full numeric-v2 manifest and all name chunks; independently verify decoder; manifest listed cover ≠ original graph name-domain completeness |
+| **P2a — original .bin one-hop oracle** | ITIR's *existing* `zelph_bin_filtered_route_builder.cpp` now gathers bounded selected-root `AdjChunk.getAdj()` values while scanning source `left/right` sections, checks section direction, reports truncation, preserves per-direction physical chunk route, and refuses QID duplicates across name chunks. No new graph backend. | Compile exact Cap'n Proto source, rerun against original locked `.bin`; bin SHA/source→HF revision bridge |
+| **P2b — selected HF one-hop comparison** | ITIR `audit_selected_adjacency_against_bin` SHA256-checks supplied selected `left/right` chunks, verifies root+section/chunk coverage and compares decoded adjacency exactly with the non-truncated original-bin oracle; corruption, omission, mismatch and truncation tests added | Fetch real *selected* immutable HF objects, bind to manifest object paths, run trusted C++ decoder and replay; then prove wider query-family closure. One-hop equality does NOT establish all relation words |
+| **A1–A6 kernel** | DASHI `ZelphPhysicalShardQueryMaxCutExact.agda` has source-written conditional A1–A6 and counterexamples, with A6 type corrected | Local pinned Agda kernel check, then actual physical propositions filling the theorem premises |
+| **P4/P5** | SLR candidate join and SensibLaw NORA reference adapter retained in original PRs; reported focused tests passed before this new tranche | Native GUID+P14143+P854 source support, real S29 persisted replay, actual attributed Éder Porto NORA export, lossless contemporary Nat population |
+
+**Status semantics:** `source-written` / `reported-local-pass` / `new-code-not-rerun` / `physical-premise-open` / `kernel-open` / `production-open` must remain separate. A dependency-set equality in `evaluate_query_closure` is NOT a demonstrated boundary-closed neighbourhood; only its labelled *dependencies* are checked, and it intentionally emits `original_graph_edge_closure_proved=false`.
+
+### Exact replay and acceptance commands
+
+```bash
+# ITIR PR #14 exact current head; includes the new test suites:
+PYTHONPATH=itir-mcp/src python -m pytest -q \
+  itir-mcp/tests/test_zelph_query_closure.py \
+  itir-mcp/tests/test_exact_wikidata_name_route.py \
+  itir-mcp/tests/test_published_zelph_manifest_compat.py \
+  tests/test_package_zelph_filtered_route_receipt.py \
+  tests/test_verify_zelph_filtered_route_replay.py \
+  tests/test_probe_zelph_hf_nat_routes.py
+
+# Four independently obtained raw JSON files. Expected hashes are compared
+# with actual file bytes; upstream HTTP authenticity is still a distinct gate.
+python tools/verify_zelph_filtered_route_replay.py \
+  --request /path/to/source-request.json \
+  --manifest /path/to/wikidata-20260309-all.hf-v2.json \
+  --route /path/to/zelph-filtered-route.json \
+  --receipt /path/to/nat_zelph_filtered_route_receipt.json \
+  --dataset-sha 0d4bd670959ebddae72f70d973410fdea8917ec1 \
+  --manifest-sha256 cedd5cf0e4951ae1aa7c2c5968614b0eb72a4c3b5c8b2dc4ab18c40be8c83f59
+
+# SLR #10:
+cargo test -p sensiblaw-source-handoff
+
+# SensibLaw #514:
+python -m pytest -q tests/test_wikidata_nora_review_handoff.py
+
+# DASHI #1506: use the repository's pinned Nix/Agda toolchain
+# and type-check DASHI/Interop/ZelphPhysicalShardQueryMaxCutExact.agda
+```
+
+**P0 verifier compatibility warning:** the new replay tool insists the historical request actually included the immutable dataset SHA and the real full manifest SHA256. If those coordinates were only recorded out of band, it must **refuse**, not edit a historical receipt into a pretend prior verification. A new explicitly versioned/revision-locked source request and freshly packaged receipt may then be necessary.
+
+**Release stop condition:** the new Python tests and C++ build pass locally, raw bytes and source provenance replay, the complete manifest cover is checked, the selected HF adjacency physically matches the source-bin oracle, A1–A6 kernel-check, and SLR's native source review is separately accepted. No single stage grants truth/source payment/migration/edit authority.
+
+
+
 **Date:** 2026-11-14. **Golden authority:** DASHI/Agda. **Production:** SLR Rust/PostgreSQL. **MCP / external graph routing:** ITIR-suite / Zelph. **Historical reference:** SensibLaw Python. **External NORA authorship:** Éder Porto. **No new parallel index, review store, scheduler or proof system.**
 
 **Source state:** A1–A6 conditional proof code is now committed on PR #1506, but has **not** been kernel-checked in this environment. The physical HF receipts remain operator-reported rather than independently rehashed; SLR PostgreSQL acceptance is still open. See the implementation delta at the end.
