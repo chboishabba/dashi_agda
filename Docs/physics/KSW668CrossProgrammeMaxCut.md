@@ -201,3 +201,74 @@ scripts/run_agda29_parallel_check.sh DASHI/Physics/Plasma/KSW668SourceCrosswalkE
 \`\`\`
 
 **Trust:** 17/17 Python symbolic/model tests passed locally for independently reproduced source-form tests. Agda 2.9/Nix kernel acceptance on exact new head not executed (no local Agda or Nix); no physical observer/calibration/cross-section spectrum/KK solution is manufactured. The original 369 atomic hydrogen, post-entropy space, quantum mereology, Lorentz/KK and Clay YM authority boundaries remain unchanged.
+
+---
+
+## 2026-11-14 primary empirical acquisition and biology-PR reconciliation
+
+**New source-indexed receipt:** \`Artifacts/ksw668/empirical_primary_acquisition_20261114.json\`.
+
+**Reproducible acquisition:** \`scripts/ksw668_empirical_acquisition.py\`.
+The script fetches the public upstream 70-row annual radiocarbon curve or accepts it through \`--curve /path/to/unmodified/source\`, verifies Git blob \`22ef8d05b8ca09d71f5b1582206a4c92304674e6\`, parses the source rows and confirms all 13 committed source-derived checkpoints. The raw rintcal data package is GPL (>=2); the original complete third-party data file is not vendored into this Agda PR. Additional source-specific tests reproduce the correlated nuclear-rate fit, pigeon intervention hypergeometric summary and measured environmental-neutron conditional comparison. Exact-head execution of this *committed GitHub script* is still pending; local independent replay of the original raw curve and the fitted numerical data was successful.
+
+\`\`\`bash
+python3 scripts/ksw668_empirical_acquisition.py --curve /path/to/postbomb_SH1-2.14C --out /tmp/ksw668_empirical.json
+# or online, to fetch the upstream public file and reject a changed blob:
+python3 scripts/ksw668_empirical_acquisition.py --out /tmp/ksw668_empirical.json
+\`\`\`
+
+### Biology owners acknowledged and reused, not duplicated
+
+- **#1021 (merged)**: original avian magnetic channel/source registry and hepatic macrophage material intervention.
+- **#1461 (unmerged)**: author-attributed 2020 Thought Emporium candidate genome artifact, robin CRY4 in vitro, pigeon vestibular activation, Lisowski hepatic macrophages, human EEG — different source scopes; a plasmid sequence is not an induced human phenotype.
+- **#1471 (unmerged)**: Kuo et al. original bacterial Shine–Dalgarno dmsC high-throughput measured-response corpus, 262,144 9-mers, 257,565 measured genotype means, 635,085 replicate observations, exact Git blob \`151cd87272cbdd6bcc2b1e70bdfd2a4ea2933d2c\`. Its measured holdout and uncertainty machinery can be reused for design, **not** as an isotope or magnetic human causal observation.
+- **#1454 (unmerged)**: BH4 pathway and GO/Rhea/Reactome crosswalk with strong failed-identification/kinetic provenance guards. It does not supply isotope reaction kinetics.
+- **#993 (unmerged)**: isotope-traced biological nitrogen fixation and source-transport boundaries; distinct \`15N\` uptake does not imply \`14C\` nuclear production.
+
+**New in this PR:** \`DASHI/Biology/KSW668EmpiricalIsotopeMagnetoreceptionSourceExact.agda\`, exported through \`DASHI/Biology/Everything.agda\` and imported by the plasma source crosswalk. It consumes the *existing original* \`AvianMagnetoreceptionSourceRegistry.lisowskiEtAl2026\` and \`AvianHepaticMacrophageMagnetoreception.canonicalHepaticMacrophageMagnetoreceptionReceipt\`, records the source-bounded n=16 and n=18 overcast intervention counts and the archive metadata. It explicitly cannot turn those facts into a human emotion-to-isotope causal model.
+
+### E1 — actual environmental radiocarbon curve acquired
+
+Hua et al., *Radiocarbon* 64 (2022), 723–745, DOI **10.1017/RDC.2021.95**: original measurements compiled for atmospheric \`14C\` 1950–2019 from clean-air samples and tree rings. The publicly redistributed **Southern Hemisphere zones 1–2 yearly curve** was read directly from Maarten Blaauw's rintcal repository, 70 rows, SHA-1 Git blob \`22ef8d05b8ca09d71f5b1582206a4c92304674e6\`. The \`cal BP, 14C age BP, sigma-age BP\` triplets were converted to \(F^{14}C=\exp(-R/8033)\) with \(\sigma_F \simeq F\sigma_R/8033\) as **DASHI derived values**, not raw author columns.
+
+Selected measured/derived checkpoints:
+- 1950: age \(+179\pm41\) yr BP; derived \(F^{14}C=0.97796\pm0.00499\).
+- **1966 peak in this annual curve**: age \(-3916\pm64\) yr BP; \(F^{14}C=1.62822\pm0.01297\).
+- 2000: age \(-763\pm15\) yr BP; \(F^{14}C=1.09964\pm0.00205\).
+- 2019: age \(-163\pm8\) yr BP; \(F^{14}C=1.02050\pm0.00102\).
+
+This is an **observed external isotope input** to biological carbon uptake, not a measurement of a person's emotions or nuclear production. Zone identity and source revision must be preserved. Later-than-2019 biological input cannot be treated as directly observed by this dataset; extrapolation is model-dependent.
+
+### C2 / E2 — measured reaction spectrum and terrestrial ambient thermal neutrons
+
+**Li et al. 2026**, DOI **10.1080/00223131.2026.2750299**, ANNRI/J-PARC author-accepted article: neutron energy \(0.0036\)–\(1.8\) eV, \(^{14}\mathrm N(n,p)^{14}\mathrm C\), thermal \(\sigma(0.0253\,\mathrm{eV})=1.828\pm0.053\) barn. The paper also reports a measured-data-fitted function \(\sigma(E)=A E^B\) (E in eV), \(A=0.2706\pm0.0074\) barn, \(B=-0.5103\pm0.0050\), **correlation \(\rho_{AB}=0.993\)**. The receipt retains an eight-energy derived curve and propagates this parameter covariance.
+
+**Exact diagnostic:** applying this published fit at 0.0253 eV gives \(\sim1.76691\) barn, **0.06109 barn below the separately reported thermal interpolation**. These are different published estimation procedures; the mismatch is recorded, not silently erased. The covariance-only fit standard error is not interchangeable with the thermal author's total 0.053-b uncertainty. **Original experimental energy-bin event counts and flux systematics were not acquired**, so the fit cannot be re-estimated from raw counts here.
+
+**Independent environmental measurement:** Dirk, Nelson, Ziegler, Thompson, *Terrestrial Thermal Neutrons* (IEEE TNS, 2003; https://research.ibm.com/publications/terrestrial-thermal-neutrons) reports a representative NIST-traceable sea-level **thermal flux about 4 neutrons cm⁻² h⁻¹** at its US reference station. This is **nine orders of magnitude below** the prior example's deliberately hypothetical \(10^6\) cm⁻² s⁻¹. Using the **same** \(10^{20}\) nitrogen-14 targets, the **uniform-unshielded-thin-target conditional** \(R=\phi N\sigma\) gives \(2.03\times10^{-7}\,\mathrm{s}^{-1}\), about **6.41 events/year**. This **is not a human-body production measurement**: different geography, indoor shielding, angular spectrum, attenuation, target geometry and biologically relevant energy distribution remain unmeasured. It bounds how misleading the prior arbitrary high-flux numerical example was, but does not exclude every other nuclear process.
+
+**UNSCEAR 2008 Annex B paragraph 70** records approximately 230 Bq per kg total carbon and ~2700 Bq of \`14C\` within the human body from environmental carbon uptake; this is activity **inventory**, not evidence of endogenous nuclear formation.
+
+### E1 / A1 — actual measured pigeon and plasma results
+
+**Lisowski et al. 2026, DOI 10.1126/science.ady2486**: randomized macrophage-depletion intervention over a 19-km pigeon homing route across six overcast experimental days in two years. In the published **summary counts**, 16/16 control birds reached home within 70 minutes, versus 0/18 macrophage-depleted birds returning the same day under persistent overcast. The one-sided hypergeometric probability conditional on 16 same-day successes among 34 birds is \(1/\binom{34}{16}=4.53728\times10^{-10}\) under independent, exchangeable assignments. **This p-value is a DASHI reconstruction, not a source author's pre-registered statistical inference**; day clustering and endpoint-time differences must be assessed using original GPS traces. Sunny-day control maintains flight ability. The same paper reports liver blocking temperature 12 K, saturation moment 0.024 A·m²/kg at 2 K, and ~7116 protein-coding gene annotations in the cell sample. Public pigeon MHC-II+ liver 3'-RNA BioProject **PRJEB98986** is verified by NCBI (one SRA experiment, reported ~395 MB sequence volume); the raw reads are **not downloaded**. Original GPS tracks remain a separate Movebank archive acquisition target.
+
+**Nordmann et al., DOI 10.1126/science.aea6425**: pigeon neural vestibular magnetic response remains observed. **Kattnig 2026, DOI 10.1098/rsif.2026.0332** is a competing *idealized modelling and information-theory* counter-analysis constraining the **particular semicircular-canal Faraday-induction explanation**; this is not a new experiment, does not disprove the original neural observation, and does not falsify independent retinal or hepatic sensing.
+
+**MMS primary observation**, DOI **10.1029/2022GL098445**, records negative electron-frame \(J\cdot E'\) in magnetic reconnection; independent DOI **10.1029/2022JA030514** describes positive and negative excursions on the order of \(0.1\) nW m⁻³. **Beware:** electron-frame \(J\cdot E'\) is not laboratory \(J\cdot E\). Source-event FGM/EDP/FPI CDF series from https://lasp.colorado.edu/mms/sdc/public/ remain **unacquired**, so an MMS model-to-measurement closure is not claimed.
+
+### D1 — independent propagation constraint
+
+**LIGO/Virgo/Fermi/INTEGRAL GW170817/GRB170817A**, original companion paper LIGO-P1700308 (https://dcc.ligo.org/LIGO-P1700308/public), reported gamma arrival \(1.74\pm0.05\) s after GW merger and conditional gravitational-versus-light relative speed bounds \([-3\times10^{-15}, +7\times10^{-16}]\). The open waveform archive is https://gwosc.org/events/GW170817/. This is a **real physics baseline**, not a test of the video's undefined conditioned-field travel. No same-metric KK worldline or observed instantaneous transport has been acquired or constructed.
+
+### Remaining empirical maximum-cut, no synthetic substitution
+
+| Gate | Acquired now | Specific missing empirical bytes / calibration |
+| --- | --- | --- |
+| A1 | Published MMS signed-energy-conversion observations + original helical-Elsasser finite model | Event-identical three-instrument burst FGM/EDP/FPI CDF and its uncertainty/frames |
+| B1/B2 | Published Maxwell/confinement provenance and modeled nonzero boundary flux | Same actual lab/space E,B,J spatial fields, surface/volume and time samples |
+| C1/C2 | Primary N14 energy-fit coefficients, covariance, measured thermal, empirical environmental neutrons | Original binned event/flux correction data, site-specific energy-dependent \(\phi(E)\), fully corrected nuclear Q/kinematics |
+| D1/D2 | LIGO original measured lag and publicly archived strain metadata | An alternative model with same-space-time propagation map, calibrated timing experiment, KK physical solution |
+| E1/E2 | **Actual 70-row SH atmospheric C14**, 2026 avian intervention summary, BioProject registration, Spalding human external incorporation | Human same-specimen C14 assay time series, measured dietary/ambient uptake, local neutron spectrum, controlled emotion interventions and confounders |
+
+The **existing biology PR #1471 measured genotype corpus** remains a real quantitative success, but it is neither a source of nuclear reaction rates nor proof of cellular longevity. The empirical sources above are not merged across distinct organism, tissue, nuclear environment or measurement protocols.
