@@ -103,6 +103,12 @@ currentGraphColouringRSAProjectionBoundary = graph-colouring-rsa-projection-boun
   false false false false
   true
 
+RSA260GraphColouringF2PairBoundary : Set
+RSA260GraphColouringF2PairBoundary = GraphColouringRSAProjectionBoundary
+
+currentRSA260GraphColouringF2PairBoundary : RSA260GraphColouringF2PairBoundary
+currentRSA260GraphColouringF2PairBoundary = currentGraphColouringRSAProjectionBoundary
+
 ------------------------------------------------------------------------
 -- WrongType firewalls.
 ------------------------------------------------------------------------
