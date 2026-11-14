@@ -21,6 +21,8 @@ from pathlib import Path
 import re
 from typing import Any, Mapping
 
+import ibrahim_fln_certificates as Certificates
+
 METHOD_DOI = "10.1016/j.jocs.2016.12.001"
 SCHEMA = "dashi.ibrahim.fln.reference_census.v1"
 REQUIRED_MANIFEST = (
@@ -300,11 +302,20 @@ def main() -> None:
     parser.add_argument("--compare-manifest", type=Path)
     parser.add_argument("--top", type=int, default=20)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--certificate-output", type=Path,
+                        help="write a bounded finite trace/revision certificate")
+    parser.add_argument("--verify-certificate", type=Path,
+                        help="independently verify an existing finite certificate")
+    parser.add_argument("--certificate-node-cap", type=int, default=1000)
     args = parser.parse_args()
     if args.top < 1:
         parser.error("--top must be positive")
     if bool(args.compare) != bool(args.compare_manifest):
         parser.error("--compare and --compare-manifest must be supplied together")
+    if args.certificate_output and args.verify_certificate:
+        parser.error("certificate output and verify are mutually exclusive")
+    if not 1 <= args.certificate_node_cap <= 10000:
+        parser.error("certificate cap must be between 1 and 10000")
     source = check_manifest(args.manifest, args.input)
     graph = checked_graph(json.loads(args.input.read_text(encoding="utf-8")))
     report: dict[str, Any] = {
@@ -320,6 +331,44 @@ def main() -> None:
         newer = checked_graph(json.loads(args.compare.read_text(encoding="utf-8")))
         report["other_attribution"] = other_source
         report["revision_comparison"] = compare_same_carrier(graph, newer)
+    if args.certificate_output or args.verify_certificate:
+        if len(graph) > args.certificate_node_cap:
+            parser.error("source graph exceeds explicit finite-certificate cap")
+        if args.compare and len(newer) > args.certificate_node_cap:
+            parser.error("revision graph exceeds explicit finite-certificate cap")
+        if args.verify_certificate:
+            certificate = json.loads(args.verify_certificate.read_text(encoding="utf-8"))
+        else:
+            certificate = {
+                "finite_graph": Certificates.certify_graph(graph),
+                "revision_cone": (Certificates.certify_reverse_edit_cone(graph, newer)
+                                  if args.compare else None),
+            }
+        if not isinstance(certificate, dict) or set(certificate) != {
+            "finite_graph", "revision_cone"
+        }:
+            raise ValueError("incorrect finite certificate envelope")
+        validated = Certificates.check_graph_certificate(graph, certificate["finite_graph"])
+        if args.compare:
+            verified_cone = Certificates.check_reverse_edit_cone(
+                graph, newer, certificate["revision_cone"]
+            )
+            if len(verified_cone) != report["revision_comparison"]["old_reverse_reachable_bound"]:
+                raise AssertionError("revision cone disagrees with census")
+        elif certificate["revision_cone"] is not None:
+            raise ValueError("unexpected revision certificate without a comparison graph")
+        report["finite_certificate"] = {
+            "source_sha256": certificate["finite_graph"]["graph_sha256"],
+            "verified_start_count": validated["partition_size"],
+            "verified_basin_count": len(validated["basin_sizes"]),
+            "revision_cone_verified": bool(args.compare),
+            "certificate_scope": "bounded source graph only; not original corpus or Agda kernel",
+        }
+        if args.certificate_output:
+            args.certificate_output.write_text(
+                json.dumps(certificate, sort_keys=True, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
     result = json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2)
     if args.output:
         args.output.write_text(result + "\n", encoding="utf-8")
