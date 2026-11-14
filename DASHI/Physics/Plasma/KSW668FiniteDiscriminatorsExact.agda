@@ -19,6 +19,9 @@ sym refl = refl
 trans : ∀ {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
 trans refl yz = yz
 
+cong : ∀ {A B : Set} (f : A → B) {x y : A} → x ≡ y → f x ≡ f y
+cong f refl = refl
+
 ------------------------------------------------------------------------
 -- A. Exchange cancellation does not determine direction from field size.
 --
@@ -98,8 +101,9 @@ zeroFluxImpliesSignedWork :
   (b : IntegratedPoyntingBudget) →
   fluxOut b ≡ zero b →
   _⊕_ b (energyDelta b) (jDotE b) ≡ zero b
-zeroFluxImpliesSignedWork b noBoundary
-  rewrite noBoundary | rightZero b (energyDelta b) = balance b
+zeroFluxImpliesSignedWork b noBoundary =
+  let open IntegratedPoyntingBudget b in
+  trans (sym (cong (λ w → _⊕_ w jDotE) (trans (cong (_⊕_ energyDelta) noBoundary) (rightZero energyDelta)))) balance
 
 ------------------------------------------------------------------------
 -- C. Nuclear species identity: separate charge and neutron accounting.
