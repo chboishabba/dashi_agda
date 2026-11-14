@@ -235,13 +235,15 @@
           "#1501",
           "#1499"
         ],
-        "next": "Actual REAL Galerkin trajectory + R853 selected signed rate + R828 Lipschitz source identification",
+        "next": "Source R855/R856 exact optimal integer scalar multiplier now source-written (10065030 pointwise; 20130061 integrated). Actual R71/R74 real Galerkin, original R853 selected rate and derivative estimate on original T still unpaid",
         "status": "OPEN after source advance",
         "proof_receipt": false,
         "round2_notes": [
           "real-time negative-rate compiler source-written in Lean; actual R853 trajectory envelope open"
         ],
-        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance",
+        "r856_scalar_source_written": true,
+        "r856_kernel_checked": false
       },
       {
         "id": "NS.C2.REMOTE",
@@ -290,6 +292,20 @@
         "next": "Separate third-party claimed theorem and source/axiom/original statement review from repo-owned periodic B continuation",
         "status": "OPEN",
         "proof_receipt": false
+      },
+      {
+        "id": "NS.B.R734.W2.UNIVERSAL_NO_GO",
+        "tier": "A_TO_B",
+        "statement": "Unrestricted original physical positive-margin W2 is refuted by a smooth unforced real six-mode N=2 Galerkin witness at amplitude 512; a conditional W1+W2 compiler remains valid but cannot serve as an all-data regularity route.",
+        "owners": [
+          "#1271",
+          "#1499"
+        ],
+        "status": "REFUTED_UNRESTRICTED_AUXILIARY_INEQUALITY",
+        "proof_receipt": false,
+        "sympy_physical_source_check": true,
+        "agda_kernel": false,
+        "next": "Use actual helicity + 2 negative-helicity mass + dyadic weight defect and prove a different valid cutoff-uniform signed production bound, plus W1. Do not attempt to prove the falsified unrestricted W2."
       }
     ],
     "RH": [
@@ -2402,5 +2418,105 @@
       "source_graph_not_equivalent_to_toolchain_replay": true,
       "raw_4_lanes_not_1_R736_route": true
     }
+  },
+  "recovered_original_source_maxcut_20261115": {
+    "dated": "2026-11-15",
+    "canonical_doc": "Docs/roadmaps/ClayRecoveredProducersW2NoGoR856SourceMaxCut20261115.md",
+    "agda_clay_pr": 1499,
+    "lean_clay_pr": 108,
+    "agda_toe_pr": 1393,
+    "heads_at_audit": {
+      "agda": "8dac42eea5316b522a84ee736f38c5bca4ce6b9c",
+      "lean": "808bb26a3b033d69e82fb25b4dd12ae12394ca8c",
+      "toe": "b3eb39f0d6ac07d3b7fbc9e126e1ca575690bb9d"
+    },
+    "archived_donor_imports": {
+      "pnp_pr_1129": {
+        "count": 172,
+        "method": "single atomic Git tree blob import",
+        "commit": "5a5d1de6bd649a1e5d18c8d420449b5d9240308a",
+        "existing_overwritten": false
+      },
+      "ns_pr_1271": {
+        "source_no_go_test": "tests/test_ns_r734_pure_plus_physical_w2_no_go.py",
+        "source_doc": "Docs/research/ns_r734_pure_plus_physical_w2_no_go_20261027.md",
+        "r734_source_blob": "74877d3c783c3f9e7634c4c521536ce99197e067"
+      },
+      "ym_pr_1440": {
+        "r320_r313_r333_direct_os_source_blob": "f94bcf270f58de263f6202b8679610ba3d6cd464"
+      },
+      "ym_pr_1503": {
+        "local_tv_three_moments_blob": "9e97eac7cd2e2de1989e699b3e53fc98d77578e3",
+        "same_in_rollup": true
+      }
+    },
+    "math": {
+      "ns_A": {
+        "closed_conditional": [
+          "directionalSquareBelowNormProduct",
+          "secondMomentCarriesRadialQ",
+          "canonicalProjectedInputsBuildRadialBudget",
+          "physicalMajorantDomination"
+        ],
+        "outstanding_original_physical": [
+          "selectedPhysicalSecondMomentIsDirectionalSquare",
+          "selectedPhysicalGramIsProjectedCellEnergy",
+          "originalR3ContinuousFTCToDerivativeSlot",
+          "physicalLowHighConvolutionEnvelopesIntegrable",
+          "originalEuclideanAllDataContinuation"
+        ]
+      },
+      "ns_B": {
+        "physical_universal_W2": false,
+        "countermodel": "original_N2_six_real_modes_pure_plus_amplitude_512",
+        "physical_W1": false,
+        "replacement_helicity_defect_bound": false,
+        "original_real_R853_curve": false,
+        "r856_optimal_integer_scalar_bounds": {
+          "pointwise_safe": 10065030,
+          "pointwise_next_fails": 10065031,
+          "integrated_safe": 20130061,
+          "integrated_next_fails": 20130062,
+          "alpha_max": "284574905427456/28273625",
+          "beta_max": "569149810854912/28273625",
+          "sympy": "PASS",
+          "agda_kernel": false,
+          "lean_kernel": false
+        }
+      },
+      "ym": {
+        "existing_conditional_clustering_to_gap": true,
+        "existing_r320_compiler": true,
+        "existing_r445_weighted_conditional_tv": true,
+        "new_finite_gibbs_exterior_cancellation_source": "Synthesis/YMFiniteRangeGibbsExteriorCancellationExact.lean",
+        "actual_compact_Haar_incidence_weld": false,
+        "actual_blocked_Wilson_effective_bare_local_tv": false,
+        "actual_R320_selected_marked_decay": false,
+        "actual_same_H_continuum_mass_gap": false
+      },
+      "pnp": {
+        "imported_original_complexity_blobs": 172,
+        "q1_is_equivalent_to_decider_failure": true,
+        "fixed_self_quotation_budget_no_go_present": true,
+        "actual_bit_TM_polynomial_clock": false,
+        "universal_SAT_lower_bound": false
+      }
+    },
+    "executable_source_receipts": {
+      "sympy_script": "scripts/check_clay_source_r855_wilson_locality_20261115.py",
+      "exact_reweighting_samples": 729,
+      "far_conditional_tests": 32,
+      "original_W2_test": "tests/test_ns_r734_pure_plus_physical_w2_no_go.py",
+      "independent_local_6_mode_sympy": "PASS",
+      "verified_native_kernel": false
+    },
+    "dont_promote": [
+      "conditional implication as physical estimate",
+      "unrestricted NS W2 (refuted)",
+      "toy Gibbs locality as blocked SU(N) bound",
+      "scalar affine rate as actual R853 flow",
+      "source-written Agda/Lean as kernel accepted",
+      "Q1 semantics as universal P!=NP lower bound"
+    ]
   }
 }
