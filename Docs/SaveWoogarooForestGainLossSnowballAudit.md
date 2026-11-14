@@ -33,7 +33,7 @@ The user-supplied Ipswich Development.i summaries establish the following curren
 | `9281/2024/OW` | Approved — negotiated decision approved, 20 Mar 2026 | No | expressly authorises operational works including **vegetation clearing**, earthworks and stormwater |
 | `9293/2024/OW` | Approved, 20 Mar 2026 | No | road work, drainage, stormwater and earthworks for Village 2 stages 1–4A |
 
-The Commonwealth decision remains separate: the EPBC 2019/8575 delegate's period is extended to **1 October 2026**.
+**Historical September 2026 snapshot (superseded):** the first section 130 extension ran to 1 October 2026. A later **25 September extension signed by Mark Hall** moved the deadline to **16 October 2026**. The Commonwealth public register records **approval with conditions on 15 October 2026**. The signed approval, delegate and binding conditions remain separate unacquired evidence. All below "federal decision still open" statements belong to the earlier snapshot only.
 
 ---
 
@@ -162,7 +162,10 @@ Evidence already acquired and retained:
 [x] 5547/2020/ADP approved
 [x] 9281/2024/OW approved, includes vegetation clearing
 [x] 9293/2024/OW approved, includes road/earthworks/drainage
-[x] federal decision deadline 1 Oct 2026
+[x] first federal deadline 1 October 2026 (historical; superseded)
+[x] later 25 September extension sets 16 October 2026 decision deadline
+[x] public approval with conditions dated 15 October 2026
+[ ] signed operative final Commonwealth notice, conditions and reasons
 ```
 
 Still unpaid:
@@ -175,7 +178,7 @@ Still unpaid:
 [ ] s13 essentiality
 [ ] s102 significant detrimental effect
 [ ] actual statutory contravention, if any
-[ ] final federal approval/refusal
+[ ] signed final approval/conditions and authorisation; public decision STATUS is already approved with conditions
 ```
 
 The important snowball rule is:
@@ -230,3 +233,19 @@ approved clearing polygon
 ```
 
 That is the current shortest path.
+
+## 27 October 2026 second and third order reconciliation
+
+Read alongside `DASHI/Law/SensibLawWoogarooSecondThirdOrderIncidenceBridge20261027Exact.agda` and the dated PR [#1276](https://github.com/chboishabba/dashi_agda/pull/1276). Earlier historical snapshots are deliberately retained rather than rewritten as if September analysts knew October's decision. Source attributions from the sibling unmerged Cognition PR [#1131](https://github.com/chboishabba/dashi_agda/pull/1131) must remain a **one-way methodology donor**, not a duplicated independent source or merged Agda import.
+
+**Order 1 (direct, conditional)** — October federal approval adds a Commonwealth regulatory permission to the separate 2024/2025 approved precinct and area development plans. Cherish proponent, the current third-party freeholder, Stockland as proposed developer and any project lender are **not automatically one corporate actor**. The consent-file labels and Stockland's first-party developer statement do not provide full current title or realised return.
+
+**Order 2 (indirect, public/private distribution)** — Politically useful housing-throughput messaging is documented in a **21 August 2026** Watt/O'Neil release, but this does not show the Springview development entered any government count or that social/affordable homes were delivered. Ipswich Council has [separate June 2024 4272/2020/ADP](https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1011265&plat=pwy) and [May 2025 5547/2020/ADP](https://edoc.ipswich.qld.gov.au/objective/?env=iccecm&id=1029140&plat=pwy) **Infrastructure Charges Notices**, as DOCUMENT INDEX ITEMS; attempts to fetch the original PDFs returned a timeout and 403 respectively. Values, actual payment, offsets, refunds, due dates and final payer **not read**. [Ipswich's original infrastructure-charges rules](https://www.ipswich.qld.gov.au/Services/Planning-and-Building/Planning/Infrastructure-Planning/Infrastructure-Planning) establish that charges attach to the land, with obligations at payment time; **Urban Utilities water/sewer charges are issued separately**, and the 2025 resolution must not silently replace the 2024 applicable rate for an older notice.
+
+**An earlier institutional incidence channel already exists:** the [Queensland Competition Authority's original 2015 Industry Assistance in Queensland report](https://s3.treasury.qld.gov.au/files/Industry-Assistance-in-Queensland-2015-Final-Report-Volume-2.pdf) describes a **1994 state–Springfield Land Corporation infrastructure loan** with CPI rather than market interest on outstanding contributions and a **10,000-Greater-Springfield-allotment** settlement trigger. Its reported **AUD 313,000** is the study's estimated assistance **2013–2018** (actual/budget/forecasts), NOT a present-day loan balance, lifetime grant, amount paid to Cherish or 2026 benefit. Publisher PDF open returned 403: text is indexed and attribution to original institution is maintained; no direct physical-page inspection claimed. All 856+982=1,838 lots of the two Springview ADPs are **maximum proposals**, not proof that the **citywide 10,000-lot contractual trigger** has been met or that those lots are completed.
+
+**Order 3 (asset/financing externality and option):** the [2005 original Queensland Hansard](https://documents.parliament.qld.gov.au/events/han/2005/2005_10_27_WEEKLY.pdf) reports an Energex/Allgas network expansion **plan** into Greater Springfield, not title/revenue of today's particular Springview pipes. The official [Mirvac Orion Springfield Central disclosure](https://www.mirvac.com/investor-centre/property-portfolio/retail/orion-springfield-central) reports **100% ownership and A$518m portfolio valuation at 30 June 2026, including sundry vacant land**. That is a *distinct retail asset*, not a measured uplift from the October 2026 Woogaroo decision. Mirvac's [2026 annual-report source](https://www.mirvac.com/investor-centre/annual-report) supports a registered BlackRock substantial holding reported at about **7.70%** as at April 2026, not direct Springfield City Group ownership or the right to 7.70% of Orion revenues. A 2026 listed-equity interest is an indirect exposure, not a proven causal return from EPBC 2019/8575.
+
+**Net-benefit arithmetic / no naive transfer:** gross entitlements and historical estimated implicit financing assistance cannot be summed with an entire asset's market valuation and infrastructure-charge notices to produce a common 2026 cash benefit. Required net-incidence join = **same legal person + same parcel/financial instrument + valid rate/version + actual paid receipts + true financing/equity exposure + counterfactual + temporal realisation**. A private uplift can coexist with public roads/services, paid developer contributions, costs to households, and habitat loss. Model all separately.
+
+**Critical close gate:** actual signed federal approval and 2024/25 council decision documents, original **both** ICNs, original water/sewer ICNs, infrastructure agreements and charge register, 1994 loan settlement ledger, precise sale/option/financing agreements and same-parcel habitat clearing/offset costs. Do not infer any specific lobbying instruction or Murray Watt personal benefit from shared party, donor, investment or regional-development adjacency.

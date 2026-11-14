@@ -56,12 +56,16 @@ federal8575Priority : LegalPriorityCoordinate
 federal8575Priority = legal-priority-coordinate
   immediateFederalDecision
   consumerPaymentOpen
-  "EPBC 2019/8575 Part 9 approval/refusal decision; project-specific written extension presently carries the practical 1 October 2026 deadline"
-  "controlled-action identity; controlling species/community; authorised delegate; final-PD-publication status; statutory s 95B -> s 130 clock rule; source-paid project-specific s 130 extension/deadline"
-  "literal final PD/comment-response material if not already acquired; exact Minister s 95B receipt date if independently reconstructing the ordinary clock; eventual literal Part 9 decision instrument; merits matrix for habitat loss/retention, significance, avoidance, residual impact, offsets and conservation-advice/recovery-plan treatment"
-  "portal Decision Status is a mutable manifestation, not operative legal state; final-PD publication does not by itself start the statutory clock; controlled-action status does not imply refusal"
-  "portal status, species list and publication date do not factor to the approval/refusal answer or the Minister-receipt date"
-  "treat the written 1 October extension as the practical decision clock while independently acquiring the s 95B receipt date/final material; compile the refusal/conditions matrix against the actual Part 9 consumer"
+  "EPBC 2019/8575 Part 9 signed 50-page approval dated 16 October 2026 by Mark Hall, with Annexure A conditions; public decision notice dated 15 October. Exact final 15 October OAMP versions and decision consideration are still unreceived"
+  "signed original approval, recorded SHA-256 f9b591f230458939dbeafc8b6178c148dbbec3e68e5e75f66fd187e2a402b808; 2 September extension signed Declan OConnor-Cox and 25 September extension signed Mark Hall; section 95B(2) notice records 1786 comments"
+  "delegate authority and decision briefing; section 95C recommendation available for request under section 135A(2) but not received; final s95B(1) PD/summary of comment response AND transmitted copies of public comments; current legal framework/transitional provisions; pre-clearance conditions, offsets and review standing/deadline"
+  "signed approval and its source status do not establish accepted expert reliability, full decision briefing, consideration of every objection or any judicial finding"
+  "mere consideration of economic/social housing factors under section 136(1)(b), housing delivery rhetoric, indexed political interests, a 2025 Queensland ministerial lobbying meeting or a 2004 gas alliance do not factor to EPBC decision legality or a conflict finding"
+  "urgent counsel filing/standing/possible interim orders assessment; retain authenticated signed notice; obtain actual section 95C report via post-decision section 135A(2) request, and section 95B document/comment-transmission receipts; freeze public decision and ecological evidence with dates and hashes; calculate exact ADJR or other Federal Court deadlines without assuming public notice starts one universal 28-day clock"
+
+-- The pre-decision s130 clock witnesses remain historically valid source receipts,
+-- but the original 1 October extension was superseded by Mark Hall's signed 25 September section 130(1A) extension to 16 October 2026; neither extension itself pays the approval signatory.
+-- The separate post-approval source owner supplies current approval evidence.
 
 federalClockReceipt : Clock.ClockReceipt
 federalClockReceipt = Clock.section130FortyBusinessDayClock
@@ -78,7 +82,7 @@ cumulative8575Priority = legal-priority-coordinate
   "same-object local/regional integration of surrounding development patterns, habitat loss/retention, corridor function and the action's marginal cumulative contribution; Final PD/comment-response and Department sufficiency record"
   "a surrounding-project map is not the requested cumulative analysis; an apparent January response gap is not legal invalidity"
   "project identifiers, generic fragmentation statements, or secondary commentary do not factor to payment of Item 4.6(c)"
-  "acquire/read the Final PD/comment-response first; then snowball primary Scenic/Peninsula/adjacent project geometry and build the time-indexed cumulative habitat/connectivity ledger only where the final material leaves the residual open"
+  "post-approval: compare actual section 95B(1) proponent response and comment copies, Secretary section 95C report requestable under 135A(2), final signed 15 October decision and conditions; reconcile Item 4.6(c) functional connectivity analysis and avoid retroactive August National Environmental Standards until individual approval tests commence"
 
 qldS13Priority : LegalPriorityCoordinate
 qldS13Priority = legal-priority-coordinate
@@ -117,12 +121,12 @@ exemptionAuditPriority : LegalPriorityCoordinate
 exemptionAuditPriority = legal-priority-coordinate
   exemptionAudit
   consumerPaymentOpen
-  "exact Queensland planning/koala exemption or grandfathering applicable to Springview and related components"
-  "Council material records mapped koala habitat together with approved/exempted development outcome"
-  "exact instrument, temporal scope, parcel scope, approval history, and variation/component coverage"
-  "mapped koala habitat is not equivalent to a prohibition where an exemption applies"
-  "mapped habitat cannot determine the approval outcome without exemption/history coordinates"
-  "recover the exact exemption authority and test whether every current component/variation remains inside it"
+  "exact Queensland planning/koala exemption and Springfield Structure Plan area development plan prerequisites applicable to Springview and related components; 2018 QCA 266 Cherish 2016 application is a source-specific prior judgment"
+  "Council material records mapped koala habitat with approved/exempted development outcome; [2018] QCA 266 judgment reprint says a Council-approved area development plan was necessary before assessment/approval of Cherish March 2016 Springview application"
+  "Council indexed approvals already located: 6243/2023/LAP precinct 21 March 2024, 4272/2020/ADP Village 2 28 June 2024, 5547/2020/ADP Village 3 14 May 2025; obtain actual signed notices/reasons/SARA conditions/plans and parcel mapping; relate 2016 litigated application without asserting identity; original habitat exemption authority remains open"
+  "2018 appeal upheld an area development plan precondition for the specific 2016 application; it neither abolished all Springfield control nor proves a missing condition in current approvals or federal EPBC invalidity"
+  "a 2018 Queensland planning judgment, historic mapped habitat or a campaign land-banking allegation cannot by itself decide the legality of the 2026 Commonwealth approval"
+  "do not look for absent ADPs: read Council 2024 Village 2 and 2025 Village 3 existing signed approval documents, conditions, SARA and plan drawings from indexed records; reconcile 2018 QCA 266 with updated plans/lot identifiers, tree clearance works 9281/2024/OW and EPBC 2019/8575 scope"
 
 enforcementPriority : LegalPriorityCoordinate
 enforcementPriority = legal-priority-coordinate
@@ -167,3 +171,58 @@ politicalAlignmentDoesNotCreateStatutoryPayment ()
 celebrityAttentionDoesNotCreatePreservationOutcome :
   CelebrityAttentionCreatesPreservationOutcome → ⊥
 celebrityAttentionDoesNotCreatePreservationOutcome ()
+
+------------------------------------------------------------------------
+-- 9 November 2026: commercial optimisation evidence firewall.
+-- Source: docs/research/Woogaroo20198575OptimizerProvenanceRoadmap20261109.md
+-- The following values record the CURRENT state of source acquisition.
+-- They are not proofs that Stockland or a consultant optimised this
+-- action, nor substitutes for original worksheets, emails or ecology.
+------------------------------------------------------------------------
+
+record OptimisationProvenanceStatus : Set where
+  constructor optimisation-provenance-status
+  field
+    stocklandHistoricalCorporateCalculatorPubliclyDocumented : Bool
+    saundersHavillOffsetCommercialTradeoffAdvertised : Bool
+    springviewDirectDeveloperLandownerIdentitySeparated : Bool
+    original20198575OptimizerUseAuthenticated : Bool
+    original20198575ScenarioRunVersionsAuthenticated : Bool
+    originalJulyIssueFOAGWorkbookAuthenticated : Bool
+    originalOctoberMWWIssueDAuthenticated : Bool
+    originalMWWConfidence75IndependentlyCalibrated : Bool
+    original95CReportReceived : Bool
+    agdaKernelAcceptanceEstablishedHere : Bool
+open OptimisationProvenanceStatus public
+
+currentOptimisationEvidenceStatus : OptimisationProvenanceStatus
+currentOptimisationEvidenceStatus = optimisation-provenance-status
+  true true true false false false false false false false
+
+corporateCapabilityKnown :
+  stocklandHistoricalCorporateCalculatorPubliclyDocumented
+    currentOptimisationEvidenceStatus ≡ true
+corporateCapabilityKnown = refl
+
+caseSpecificOptimiserUseStillUnproven :
+  original20198575OptimizerUseAuthenticated
+    currentOptimisationEvidenceStatus ≡ false
+caseSpecificOptimiserUseStillUnproven = refl
+
+mwwEcologicalConfidenceCalibrationOpen :
+  originalMWWConfidence75IndependentlyCalibrated
+    currentOptimisationEvidenceStatus ≡ false
+mwwEcologicalConfidenceCalibrationOpen = refl
+
+-- Missing source-bearing proof contracts (do not pretend inhabited):
+-- originalStocklandCalculatorIdentityAndProjectUse
+-- original20198575ScenarioRunProvenance
+-- original20198575ObjectiveConstraintSelectionWitness
+-- originalJulyIssueFApprovedOAGCellJoin
+-- originalMWWAUSourceScoreToAcceptedInputRounding
+-- originalMWWConfidence75IndependentCalibration
+-- originalSixHighGainAUWithWithoutSameTimeQuality
+-- originalWoogarooSameFunctionHabitatTransport
+-- originalAvonvaleIncrementalBenefitNonOverlap
+-- original95B95C136SameDecisionConsideration
+-- original20198575GoldenRootsKernelAccepted
