@@ -174,8 +174,10 @@ data Depends : Artifact → Artifact → Set where
 
 record OxygenReopeningReceipt : Set where
   constructor oxygenReopeningReceipt
-  field obligation : Affected.ReopeningObligation
-    Depends oxygenObservation oxygenOutcomeCertificate
+  field
+    obligation :
+      Affected.ReopeningObligation
+        Depends oxygenObservation oxygenOutcomeCertificate
 
 canonicalOxygenReopening : OxygenReopeningReceipt
 canonicalOxygenReopening = oxygenReopeningReceipt
@@ -183,8 +185,10 @@ canonicalOxygenReopening = oxygenReopeningReceipt
 
 record NetOutcomeReopeningReceipt : Set where
   constructor netOutcomeReopeningReceipt
-  field obligation : Affected.ReopeningObligation
-    Depends oxygenObservation netOutcomeCertificate
+  field
+    obligation :
+      Affected.ReopeningObligation
+        Depends oxygenObservation netOutcomeCertificate
 
 canonicalNetOutcomeReopening : NetOutcomeReopeningReceipt
 canonicalNetOutcomeReopening = netOutcomeReopeningReceipt
@@ -194,8 +198,10 @@ canonicalNetOutcomeReopening = netOutcomeReopeningReceipt
 
 record ReboundReopeningReceipt : Set where
   constructor reboundReopeningReceipt
-  field obligation : Affected.ReopeningObligation
-    Depends reboundObservation reboundOutcomeCertificate
+  field
+    obligation :
+      Affected.ReopeningObligation
+        Depends reboundObservation reboundOutcomeCertificate
 
 canonicalReboundReopening : ReboundReopeningReceipt
 canonicalReboundReopening = reboundReopeningReceipt
@@ -203,8 +209,10 @@ canonicalReboundReopening = reboundReopeningReceipt
 
 record RestorationReopeningReceipt : Set where
   constructor restorationReopeningReceipt
-  field obligation : Affected.ReopeningObligation
-    Depends communityObservation restorationOutcomeCertificate
+  field
+    obligation :
+      Affected.ReopeningObligation
+        Depends communityObservation restorationOutcomeCertificate
 
 canonicalRestorationReopening : RestorationReopeningReceipt
 canonicalRestorationReopening = restorationReopeningReceipt
@@ -212,8 +220,10 @@ canonicalRestorationReopening = restorationReopeningReceipt
 
 record AgentInteractionReopeningReceipt : Set where
   constructor agentInteractionReopeningReceipt
-  field obligation : Affected.ReopeningObligation
-    Depends agentInteractionObservation agentInteractionCertificate
+  field
+    obligation :
+      Affected.ReopeningObligation
+        Depends agentInteractionObservation agentInteractionCertificate
 
 canonicalAgentInteractionReopening : AgentInteractionReopeningReceipt
 canonicalAgentInteractionReopening = agentInteractionReopeningReceipt
@@ -277,8 +287,9 @@ agentObservationCannotReachHostSpecificity
 
 record HostSpecificityUnaffectedReceipt : Set where
   constructor hostSpecificityUnaffectedReceipt
-  field noAffectedClosure :
-    Affected.AffectedClosure Depends oxygenObservation hostSpecificityCertificate → ⊥
+  field
+    noAffectedClosure :
+      Affected.AffectedClosure Depends oxygenObservation hostSpecificityCertificate → ⊥
 
 canonicalHostSpecificityUnaffected : HostSpecificityUnaffectedReceipt
 canonicalHostSpecificityUnaffected =
