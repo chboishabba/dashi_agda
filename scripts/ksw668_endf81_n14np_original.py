@@ -105,42 +105,19 @@ def interpolate(grid,energy):
         raise ValueError("Nonphysical interpolated sigma")
     return result
 
-def source_rate(grid,flux_rows,n14_atoms):
-    """Convolve original evaluated XS with measured/modelled source spectrum.
+def source_rate(grid,flux_rows,n14_atoms,flux_source=None):
+    """Physically supported ENDF law-aware fold; source label is mandatory.
 
-    Integration is trapezoidal on union of cross-section and input-flux knots.
-    No inferred body flux from outside-ground spectra.
+    This historical API used to approximate all energy cells by trapezoids,
+    which gives WRONG answers at INT=1 histogram/repeated-knot discontinuities.
+    Delegate to the piecewise-law-aware bounded source integration instead.
     """
-    if len(flux_rows)<2 or not math.isfinite(n14_atoms) or n14_atoms<0:
-        raise ValueError("Invalid source spectrum or N14 population")
-    energies=[row[0] for row in flux_rows]
-    if any(not math.isfinite(e) or e<=0 for e in energies) or any(
-            energies[i+1]<=energies[i] for i in range(len(energies)-1)):
-        raise ValueError("Invalid flux energy grid")
-    if any(not math.isfinite(f) or f<0 for _,f in flux_rows):
-        raise ValueError("Invalid differential flux density")
-    if energies[0]<grid["pairs"][0][0] or energies[-1]>grid["pairs"][-1][0]:
-        raise ValueError("Full source flux not covered: evaluated support missing")
-    knots=sorted(set(energies+[e for e,_ in grid["pairs"]
-                               if energies[0]<e<energies[-1]]))
-    def flux(e):
-        i=bisect.bisect_right(energies,e)
-        if i==0:return flux_rows[0][1]
-        if i>=len(energies):return flux_rows[-1][1]
-        e0,f0=flux_rows[i-1];e1,f1=flux_rows[i]
-        return f0+(f1-f0)*(e-e0)/(e1-e0)
-    integral=sum((e1-e0)/2*(flux(e0)*interpolate(grid,e0)
-                           +flux(e1)*interpolate(grid,e1))
-                 for e0,e1 in zip(knots[:-1],knots[1:]))
-    return {
-       "modelled_rate_per_second":integral*1e-24*n14_atoms,
-       "spectrum_energy_eV":[energies[0],energies[-1]],
-       "mesh_points":len(knots),
-       "evaluation_covers_entire_input_spectrum":True,
-       "body_attenuation_reconstructed":False,
-       "not_a_measured_in_vivo_rate":True,
-       "numerics":"piecewise trapezoid on joint energy knots; nonlinear-law integration approximate"
-    }
+    if not flux_source or not str(flux_source).strip():
+        raise ValueError("A real provenance string --flux-source is required for C2 folding")
+    from ksw668_endf81_c2_law_integral import integrate_source
+    report=integrate_source(grid,flux_rows,n14_atoms,str(flux_source))
+    return dict(report,modelled_rate_per_second=report["modelled_reactions_per_second"])
+
 
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
@@ -149,6 +126,7 @@ def main():
                     help="SYNTHETIC TEST ONLY; never physical-data acceptance")
     ap.add_argument("--flux-csv",type=Path)
     ap.add_argument("--target-n14-atoms",type=float)
+    ap.add_argument("--flux-source",help="Original spectrum provenance, site, date, energy units and model settings")
     ap.add_argument("--out",type=Path)
     args=ap.parse_args()
     grid=get_grid(args.endf,not args.allow_unverified_source)
@@ -164,14 +142,15 @@ def main():
        "original_grid_points":grid["np"],
     }
     if args.flux_csv:
-        if args.target_n14_atoms is None:ap.error("--flux-csv requires --target-n14-atoms")
+        if args.target_n14_atoms is None or not args.flux_source:
+            ap.error("--flux-csv requires --target-n14-atoms and --flux-source")
         with args.flux_csv.open(newline="") as inp:
             r=csv.DictReader(inp)
             if set(r.fieldnames or [])!={"energy_eV","differential_flux_cm2_s_eV"}:
                 raise ValueError("Incorrect source differential flux units")
             rows=[(float(x["energy_eV"]),float(x["differential_flux_cm2_s_eV"]))
                   for x in r]
-        result["fold"]=source_rate(grid,rows,args.target_n14_atoms)
+        result["fold"]=source_rate(grid,rows,args.target_n14_atoms,args.flux_source)
     txt=json.dumps(result,indent=2,sort_keys=True)+"\n"
     if args.out:args.out.write_text(txt)
     print(txt)
