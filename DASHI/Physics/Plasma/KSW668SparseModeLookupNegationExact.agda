@@ -22,6 +22,7 @@ open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 import DASHI.Physics.Closure.NSIntegerFourierLattice as Z3
 import DASHI.Physics.Closure.NSTriadKNPhysicalOutputFiber as Output
 import DASHI.Physics.Closure.NSTriadKNPhysicalTriadSymmetry as Symmetry
+import DASHI.Physics.Plasma.KSW668RationalThreeModeSourceExact as Source
 
 sourceModeEqualNegateCorrespondence :
   (mode selected : Z3.FourierMode) →
@@ -67,7 +68,6 @@ sourceModeEqualNegateCorrespondence mode selected
 
 -- Useful explicit positive/negative selector equivalences on exactly the
 -- selected triad source p,q,k; these are the actual same-object identifiers.
-import DASHI.Physics.Plasma.KSW668RationalThreeModeSourceExact as Source
 
 pLookupAtNegatedMode :
   (mode : Z3.FourierMode) →
