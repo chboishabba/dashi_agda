@@ -34,6 +34,7 @@ run python python3 scripts/ksw668_n14_relativistic_lab_final_state.py
 run python python3 scripts/check_ksw668_spacelike_kk_projection.py
 run python python3 scripts/ksw668_a1_original_rational_fourier_witness.py
 run python python3 scripts/ksw668_u1_4potential_continuum.py
+run python python3 scripts/test_ksw668_mms4_tetrahedron.py
 run python python3 scripts/ksw668_kk_vacuum_observer_solution.py
 run python python3 scripts/ksw668_kk_einstein_scalar_cosmology.py
 run python python3 scripts/test_ksw668_endf81_primary.py
@@ -113,6 +114,8 @@ run agda bash scripts/run_agda29_parallel_check.sh \
   DASHI/Physics/Plasma/KSW668MHDSelectedStateTransferExact.agda \
   DASHI/Physics/Plasma/KSW668RationalThreeModeSourceExact.agda \
   DASHI/Physics/Plasma/KSW668RationalThreeModeOriginalRowsExact.agda \
+  DASHI/Physics/Plasma/KSW668SparseModeLookupNegationExact.agda \
+  DASHI/Physics/Plasma/KSW668SparsePairRealityExact.agda \
   DASHI/Physics/Plasma/KSW668MaxwellLocalPoyntingExact.agda \
   DASHI/Physics/Plasma/KSW668FullVectorMaxwellJetExact.agda \
   DASHI/Physics/Plasma/KSW668IsotopeCausalResidualExact.agda \
