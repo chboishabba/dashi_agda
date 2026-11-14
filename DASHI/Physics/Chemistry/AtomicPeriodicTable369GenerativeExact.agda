@@ -204,8 +204,8 @@ record PeriodicValenceStructure (G : AtomicGenerator) : Set₁ where
 -- 8. Periodic table as an ordered observable quotient of generated atoms.
 
 record GeneratedAtom (G : AtomicGenerator) : Set where
-  open AtomicGenerator G
   constructor generatedAtom
+  open AtomicGenerator G
   field
     index : AtomicIndex
     ground : GroundConfiguration
