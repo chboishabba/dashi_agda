@@ -25,10 +25,10 @@ import DASHI.Physics.Plasma.KSW668FiniteDiscriminatorsExact as Finite
 ------------------------------------------------------------------------
 
 data EvidenceRole : Set where
-  originalPublishedInterventionSummary
-  publicOriginalArchiveRegistration
-  independentReanalysisOfPublishedNumbers
-  physicalModelCounterexample
+  originalPublishedInterventionSummary : EvidenceRole
+  publicOriginalArchiveRegistration : EvidenceRole
+  independentReanalysisOfPublishedNumbers : EvidenceRole
+  physicalModelCounterexample : EvidenceRole
   notAcquired : EvidenceRole
 
 record PublishedHomingGroup : Set where
