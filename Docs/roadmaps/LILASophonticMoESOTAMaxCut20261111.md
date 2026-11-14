@@ -970,3 +970,70 @@ The Leech theta identity is a modular-form **weight-12** identity; the expressio
 **Execution priority (highest expected information, not theorem glamour):** (1) confirm trained `moe_route_geometry` and paired semantic/intervention inputs; (2) source layer-0/1 C2, C2×C3 and S3 action residual/odd-even scale and actual recurrent history; (3) frozen-weight geometry probes and matched early-layer correction; (4) cached Dust gradient/efficiency comparison; (5) E8/Leech theta same-carrier algebra joined from existing Lean/Agda donors in parallel; (6) only then expensive full-model training, extended inference/ABBA and independent heldout promotion. Do not block Q2.5 quality work on completion of speculative RH spectral bridge or E8 lattice VOA construction.
 
 **Canonical source links:** DASHI modules named above at `https://github.com/chboishabba/dashi_agda`; existing Leech PR #4 `https://github.com/chboishabba/LeechTransformer/pull/4`, runbook `docs/C2_QUALITY_FULL_MAXCUT_Q21_Q3_20261114.md`. Precise source names here are **requested future lemmas**, not claims they already exist as accepted proof terms.
+
+---
+
+## 2026-11-14 maximum-cut implementation continuation — finite E8 shell arithmetic and original C2/C3 physical probes
+
+**Existing 106 programme obligations remain the accounting owner.** This tranche adds executable source receipts, **not** an all-index same-carrier Agda theorem or a new RX580 receipt. Latest connected Leech PR #4 branch `experiment/consumer-preserving-multiscale-codec-20261031`, DASHI master. User's original 4.762983 independent heldout and 33.61% teacher-stripping results remain authoritative; no new GPU performance or CE gain is reported here.
+
+### A3. E8/Leech theta/zeta exact-integer progress
+
+New `scripts/check_e8_leech_theta_finite_same_norm.py` constructs the **actual elementary E8 coordinate cosets** in dimension eight: even-sum `D8 = {m∈Z⁸ : Σm_i even}` and the half-translate `D8+(1/2,…,1/2)`. The dynamic program tracks integer-coordinate parity and `4||v||²` **exactly**, summing both cosets at norm-square `2n`; it does **not** compute shell counts by copying the Eisenstein expected coefficients. Independent integer arithmetic in this development session checked the first five nonzero norm shells:
+`a_E8(0..5)=[1,240,2160,6720,17520,30240]`, matching `a_E4(n)=240σ₃(n)` for n>0.
+Existing modular expansion identities yield the **Leech modular-form candidate coefficients**, computed independently from `E4³−720Δ` by finite polynomial convolution: `[1,0,196560,16773120,398034000]` through degree four. The zero norm-2 shell and 196560 first nonzero coefficient are exact **candidate modular coefficients**, not a Leech-coordinate enumeration. The new regression `tests/test_e8_leech_theta_finite_same_norm.py` checks both series and fail-closed non-promotion flags.
+
+**All-index bridge still OPEN:**
+- `thetaE8EqualsE4SameCarrier`: prove original E8 lattice theta modularity and identify its modular form at every coefficient, using a same-carrier uniqueness theorem and specified q-norm, or derive an all-index divisor-shell law; five coefficients do NOT prove this.
+- `thetaLeechEqualsDeltaTimesJPlus24`: produce the **actual Leech coordinate lattice**, prove rank-24 even unimodular rootlessness and theta modularity, and identify weight-12 modular form. No partial coefficient check can replace this source theorem.
+- `e8EpsteinZetaMellinFactorization`: given full E8 shell identity and absolute convergence `Re(s)>4`, exchange `Σ_{n≥1}240σ₃(n)(2n)^(−s)` and get `240·2^(−s)ζ(s)ζ(s−3)`, with complex-power/Mellin normalisation and analytic continuation tracked separately.
+- `e8LeechDeltaSameObjectLeanAgdaWeld`: re-use `DeltaNormalizedWeight12SameObjectExact` and pinned Lean eta24 instead of assuming same-object transfer from a citation. The inspected `LilaE8ThetaJBridgeSurface` still declares the theta bridge incomplete.
+
+**No Riemann-hypothesis promotion:** cyclotomic `ζ₃`, Monster `ζ/ζ²` character multiplicities, analytic `ζ(s)`, lattice `Z_E8(s)` and the C3 fixed/inverse-pair orbit-shape witness remain distinct. `240·3(1+16+16²)=196560` is already a numerical equality and supplies no canonical Leech C3 partition or 240-root intertwiner.
+
+### B2/C1. Actual source C2/C3/S3 checkpoint tests (new executable owners)
+
+Leech PR #4 adds `scripts/audit_original_c2c3_router_actions.py` and `tests/test_original_c2c3_source_actions.py`. The audit STRICT-loads original `candidate.pt`, reports **saved `moe_route_geometry`**, source SHA and actual router under (i) central antipodal `−I` on hidden inputs and histories, (ii) simultaneous C3 rotation on specified 3-coordinate blocks, and (iii) an independent reflection. It checks the **finite group laws** `r³=1`, `s²=1`, `srs=r⁻¹` for triad reflection and `−Ir=r(−I)` for central C2, and measures original selected expert IDs/weights and exact source `c2c3_wave` feature residuals. Since the source inputs are **reproducible synthetic hidden states**, this is an algebraic/router contract, NOT semantic intervention or full transformer equivariance. The trained router may be `c2_invariant`, in which case C3 invariance is not guaranteed and its failures are expected, rather than a model bug. Reflection must not be silently conflated with the commuting central C2 generator.
+
+New `scripts/audit_actual_student_recurrent_history.py` runs the **original guarded student-only** model token-by-token under genuine KV-cache and per-layer expert-history continuation, recording each layer's history RMS/max, router boundary margin and full-step next-token choice. Both original corpus-token forced and greedy policies are supported. This is the missing physical discriminator between the previously reported **teacher-input local** RMS `1.28×10⁹` at layer11 and the **actual student autoregressive history**. The latter must be executed and interpreted independently; no stability or blow-up diagnosis is pre-claimed. `test_original_c2c3_source_actions.py` adds a constructed two-layer CPU cached-history test; `scripts/check_c2_quality_maxcut.sh` runs it.
+
+**Source run commands (native tests first):**
+
+```bash
+# DASHI: exact integer finite certificate; no GPU, no Agda kernel run
+python3 -m unittest discover -s tests -p 'test_e8_leech_theta_finite_same_norm.py' -v
+python3 scripts/check_e8_leech_theta_finite_same_norm.py --max-shell 5
+
+# LeechTransformer: source-semantic CPU suite under working Schaka Python
+bash scripts/check_c2_quality_maxcut.sh
+
+# Existing real TrueNAS candidate, within LeechTransformer checkout:
+ROOT=/mnt/truenas/comet-net/experiments/lila_quality_curriculum_20261113
+bash scripts/run_native_schaka101_lila.sh \
+  --module scripts.audit_original_c2c3_router_actions -- \
+  --candidate "$ROOT/candidate.pt" \
+  --output "$ROOT/c2c3_source_action_audit.json"
+bash scripts/run_native_schaka101_lila.sh \
+  --module scripts.audit_actual_student_recurrent_history -- \
+  --candidate "$ROOT/candidate.pt" --teacher "$TEACHER" \
+  --config "$CONFIG" --token-ids "$HELDOUT_IDS" --steps 32 \
+  --output "$ROOT/actual_student_history_32.json"
+```
+
+`$TEACHER`, `$CONFIG` and `$HELDOUT_IDS` must refer to the original matched experiment files, not invented source paths; `--config` is optional where recoverable. Do **not** use heldout results to select geometry/optimizer parameters—this history audit is observation-only. For fit/dev selection run a separate probe on the original train-derived development token source.
+
+### Revised exact status / deliverables
+
+| Roadmap obligation | This tranche delivers | Unpaid acceptance |
+|---|---|---|
+| M3a `thetaE8EqualsE4SameCarrier` | Executable **original E8 integer coset shell** coefficients through n=5, exact finite equality to E4 | All-index E8 theta modularity and same-carrier theorem, original Agda/Lean kernel |
+| M3b `thetaLeechEqualsDeltaTimesJPlus24` | Exact finite E4³−720Δ candidate coefficients through n=4 | Actual Leech lattice coordinate carrier/rootlessness and all-weight-12 theta theorem |
+| M3c `e8EpsteinZetaMellinFactorization` | Exact finite sigma3/Dirichlet coefficient relationship | Complex convergence, Fubini/Dirichlet product and Mellin integral theorem |
+| M5d `leechC2CanRepresentC3WithoutForcingIt` | Concrete C2-only/C2C3 source-router negative-control tests + exact triad S3/C6 relations | Original semantic/observer capacity and completeness theorem |
+| M6a `leechC2C3RouterInvariantUnderOriginalAction` | Exact actual router source probe and saved checkpoint config | Source-wide proof including score tie rules and learned parameters; actual trained native receipt |
+| M6b `leechTrialityExpertHistoryTransport` | Genuine recurrent-history tracer for source physical dynamics | Agda/Source action-intertwiner on selected histories; S3 noncommuting semantics |
+| M7b `originalC2EarlyLayerOddEvenCorrection` | Existing layer0/1 error receipts retained | Physical quality-corrected dev CE, same budget and heldout independence |
+| M7c `originalStudentRecurrentHistoryNormBoundOrCounterexample` | New actual KV/history observer, original policy preserved | Host 32-step native trace + stability law or counterexample |
+| M7a `trialityQualityLayer01Ablation` | Trained config and source transformation probes available | Actual capacity-matched trained feature ablation, no 4.763 checkpoint claim yet |
+
+**Do not reset source quality gates:** existing 4.763 independent heldout remains Q2.5 **FAIL**; native GPU teacher-stripped output parity and 33.61% tensor-size reduction remain Q3 finite BIDI **PASS**; apparent 12.9× throughput remains unbalanced until warmed ABBA repeated. The next decisive actual measurements are `c2c3_source_action_audit.json` and `actual_student_history_32.json`, then targeted early-layer quality repair. This tranche does not construct D4/F4 triality, E8-to-Leech coordinate intertwiners or completed infinite theta identities.
