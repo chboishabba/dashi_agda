@@ -65,12 +65,13 @@
           "#1503"
         ],
         "next": "PROVED generic finite total-variation algebra only; estimate actual physical D uniformly or renormalize target family",
-        "status": "OPEN after source advance",
+        "status": "OPEN (attachment did not discharge physical estimate)",
         "proof_receipt": false,
         "round2_notes": [
           "generic sharp action-oscillation bound established; original physical TV still unpaid"
         ],
-        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance"
+        "last_source_advance": "2026-11-14 round3; source-written, no kernel acceptance",
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
       },
       {
         "id": "YM.L1.RG",
@@ -81,8 +82,9 @@
           "#1503"
         ],
         "next": "Estimate original E1 physical effective-vs-target density TV or alternative direct marked cumulants",
-        "status": "OPEN",
-        "proof_receipt": false
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
       },
       {
         "id": "YM.L2",
@@ -115,8 +117,9 @@
           "#1503"
         ],
         "next": "Genuine cutoff-uniform Wilson/measure bounds, common observable positivity, field reconstruction",
-        "status": "OPEN",
-        "proof_receipt": false
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
       },
       {
         "id": "YM.D1",
@@ -126,8 +129,9 @@
           "#1444"
         ],
         "next": "Physical polymer activity, nonconstant marked sources and volume-uniform covariance",
-        "status": "OPEN",
-        "proof_receipt": false
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
       },
       {
         "id": "YM.D2",
@@ -138,8 +142,9 @@
           "#1503"
         ],
         "next": "Uniform OS time-matrix-element decay over dense physical reconstructed class and continuum gap stability",
-        "status": "OPEN",
-        "proof_receipt": false
+        "status": "OPEN (attachment did not discharge physical estimate)",
+        "proof_receipt": false,
+        "latest_source_audit": "14 Nov round4: see implementation_round_20261114_4; local kernel/TV premise and external influence open"
       },
       {
         "id": "YM.L4",
@@ -1441,5 +1446,106 @@
       "lean_109": "2102278f8c6ddcd627960f083a6bfd6dde9cc6ba"
     },
     "status_message": "A proofs source-written; B/C physical/analytic hypotheses not discharged; six original general Clay endpoints unproved; no merges authorized"
+  },
+  "implementation_round_20261114_4": {
+    "date": "2026-11-14",
+    "priority": "YM original local Wilson F19/P0/R445 proposed A/B/C finish attached by user",
+    "source_branch": "chboishabba/dashi_agda PR #1503 chatgpt/ym-f19-p0-source-convergence-20261114",
+    "source_head_at_snapshot": "ada2ac4da5ecef28cb512c320e25250e65910671",
+    "source_modules": [
+      "DASHI/Physics/YangMills/YMClayR445LocalizedTVInferenceNoGoExact.agda",
+      "DASHI/Physics/YangMills/YMClayR445OneLocalTVThreeMomentsSourceWeldExact.agda",
+      "DASHI/Physics/YangMills/YMClayOriginalF19P0CommonOSSourceConvergence20261114.agda"
+    ],
+    "checker": "scripts/check_ym_r445_localized_tv_maxcut_countermodels.py",
+    "test": "tests/test_ym_r445_localized_tv_maxcut_countermodels.py",
+    "doc": "Docs/physics/YMClayR445OriginalLocalizedTVCorrectedMaxCut20261114.md",
+    "math_verified_independently": {
+      "two_site_positive_rational_joint_pairs": 6561,
+      "outside_only_local_tv": "1/8",
+      "outside_only_crossing_interaction": "zero",
+      "rare_bad_Q_at_N1000": "1/1001",
+      "rare_bad_P_at_N1000": "1/2",
+      "fixed_1_over_4_sq": "1/16",
+      "falsely_iterated_k2": "1/256",
+      "harmonic_dyadic_block_lower_bound": "1/32",
+      "zero_local_tv_but_non_cauchy_successor_tv": "1",
+      "zero_local_tv_but_any_distance_covariance": "1/4",
+      "positive_projective_but_OS_Gram_negative": "-1"
+    },
+    "false_promotions_in_user_attachment": [
+      {
+        "gate": "YM.R445.F19.same_source",
+        "kind": "MISSING_ORIGINAL_CARRIER_WELD",
+        "detail": "F19 original physical 1024-bond effective density != source-proof that R445 beta3 3->1 block map and independently defined renormalized target are definitionally the same objects; common normalizers alone insufficient"
+      },
+      {
+        "gate": "YM.R445.conditional_action_oscillation",
+        "kind": "MISSING_PHYSICAL_ESTIMATE",
+        "detail": "small-field Combes-Thomas resolvent and normalized bad-field comparison not instantiated for actual SU(N) Wilson+gauge fixing; rare bad-Q does not bound P or a supremum log-oscillation"
+      },
+      {
+        "gate": "YM.R445.actual_local_TV",
+        "kind": "EXPLICIT_REMOTE_INFLUENCE_COUNTERMODEL",
+        "detail": "Q=(3,1,1,3)/8 on XxY and w(Y)=(1,3) gives local P_X=(3/8,5/8), Q_X=(1/2,1/2); no perturbation meets X yet local TV=1/8; a physical exterior influence estimate is missing"
+      },
+      {
+        "gate": "YM.R445.summability",
+        "kind": "FALSE_SCALE_ITERATION",
+        "detail": "fixed (a_k/L_k)=1/4 yields square=1/16 at every k, not 16^-k; 1/(16k) has divergent harmonic dyadic blocks; source RG irrelevant-factor must be separately proven"
+      },
+      {
+        "gate": "YM.R445.three_moments",
+        "kind": "CONDITIONAL_COMPILER_ONLY",
+        "detail": "Original F/G/FG and covariance ≤3D algebra is available if actual same-source local TV is bounded; exponential spatial clustering requires separate original connected-correlation estimate"
+      },
+      {
+        "gate": "YM.E1",
+        "kind": "NON_SEQUITUR",
+        "detail": "Even zero TV(P_k,Q_k) for every k does not make P_k Cauchy without consistency of Q_k; mere positive finite cylinder consistency does not imply OS reflection positivity"
+      },
+      {
+        "gate": "YM.D1.D2",
+        "kind": "NON_SEQUITUR",
+        "detail": "P_k=Q_k can have global synchronous spin covariance 1/4 at arbitrary distance despite D_k=0; polymer activity, OS time decay, same-H and cutoff-stable physical mass bound missing"
+      }
+    ],
+    "correct_finite_theorem": "For positive finite P,Q on XxY, let M_X=∑_y P_Y(y)Q(X|y); then TV(P_X,Q_X)≤E_{P_Y}TV(P(X|y),Q(X|y))+TV(M_X,Q_X)≤sup_y TV(P(X|y),Q(X|y))+TV(P_Y,Q_Y). Source physical exterior influence is independent unknown, not secretly zero.",
+    "required_original_owners": {
+      "A": [
+        "originalF19R445SamePhysicalCoarseMap",
+        "originalR445F19PushforwardCylinderEquality",
+        "originalR445TargetCountertermNormalizedDensity",
+        "originalR445ConditionalKernelDisintegration"
+      ],
+      "B": [
+        "originalR445PhysicalConditionalActionOscillation",
+        "originalR445BadFieldTwoMeasureNormalizedBound",
+        "originalR445ExteriorInfluenceKernelBound",
+        "originalR445PhysicalLocalTVFromConditionalAndOutside",
+        "originalR445GenuineScaleIrrelevantContraction",
+        "originalR445LocalTVUniformSummable"
+      ],
+      "A_after_B": [
+        "originalPhysicalR445CovarianceFromOneLocalTV",
+        "originalR445CoarseTargetProjectiveSameFamily"
+      ],
+      "C": [
+        "originalR445OSPositiveProjectiveContinuum",
+        "originalR445NontrivialInteractingCylinder",
+        "originalR445OriginalWilsonRootedPolymerCovarianceDecay",
+        "originalR445SameOSGeneratorPositiveGap"
+      ]
+    },
+    "status": {
+      "source_countermodel_written": true,
+      "github_readback": true,
+      "python_independent_counterexample_suite_pass": true,
+      "committed_test_suite_run": false,
+      "agda_pinned_kernel_run": false,
+      "physical_original_Wilson_local_TV_proved": false,
+      "uniform_cutoff_RG_proved": false,
+      "E1_D1_D2_mass_gap_proved": false
+    }
   }
 }
