@@ -20,10 +20,11 @@ open import Relation.Binary.PropositionalEquality using (sym; trans)
 
 import DASHI.Physics.Common.FiniteThreeCycleTorusExact as Torus
 import DASHI.Biology.BalancedTernaryFourierModeExact as Fourier
+import DASHI.Algebra.TriadicDepthOneCharacters as Characters
 
 -- Existing original C3^2 finite torus: pair of symbolic eigencharacters.
 CharacterPair : Set
-CharacterPair = Fourier.C3Phase × Fourier.C3Phase
+CharacterPair = Characters.C3Phase × Characters.C3Phase
 
 sameTorusCharacterPair :
   Torus.Torus3x3 → Torus.Torus3x3 → CharacterPair
@@ -36,7 +37,7 @@ sameTorusCharacterPair mode point =
 sameTorusFirstCharacterEigen :
   ∀ mode point →
   sameTorusCharacterPair mode (Torus.translateFirst point)
-  ≡ (Fourier.multiplyPhase
+  ≡ (Characters.multiplyPhase
        (Fourier.firstCharacter mode point)
        (Fourier.firstEigenphase mode) ,
       Fourier.secondCharacter mode point)
@@ -48,7 +49,7 @@ sameTorusSecondCharacterEigen :
   ∀ mode point →
   sameTorusCharacterPair mode (Torus.translateSecond point)
   ≡ (Fourier.firstCharacter mode point ,
-      Fourier.multiplyPhase
+      Characters.multiplyPhase
         (Fourier.secondCharacter mode point)
         (Fourier.secondEigenphase mode))
 sameTorusSecondCharacterEigen mode point
