@@ -163,12 +163,12 @@ terminalBasinsPartition census node =
 ------------------------------------------------------------------------
 
 data OldReverseDirtyCone {Node : Set}
-  (delta : Orbit.TypedRevisionDelta Node) : Node → Set where
+  (old : Node → Node) (changed : Node → Set) : Node → Set where
   editedHere : ∀ {node} →
-    Orbit.changedAt delta node → OldReverseDirtyCone delta node
+    changed node → OldReverseDirtyCone old changed node
   predecessorOfDirty : ∀ {node} →
-    OldReverseDirtyCone delta (Orbit.oldLink delta node) →
-    OldReverseDirtyCone delta node
+    OldReverseDirtyCone old changed (old node) →
+    OldReverseDirtyCone old changed node
 
 oldOrbitHitImpliesDirtyCone :
   ∀ {Node : Set}
@@ -176,7 +176,7 @@ oldOrbitHitImpliesDirtyCone :
     {n : Nat} {node : Node} →
   Orbit.OldOrbitHitsEdit
     (Orbit.oldLink delta) (Orbit.changedAt delta) n node →
-  OldReverseDirtyCone delta node
+  OldReverseDirtyCone (Orbit.oldLink delta) (Orbit.changedAt delta) node
 oldOrbitHitImpliesDirtyCone delta (Orbit.editAtCurrent edited) =
   editedHere edited
 oldOrbitHitImpliesDirtyCone delta (Orbit.editFurtherAlong hit) =
@@ -185,7 +185,7 @@ oldOrbitHitImpliesDirtyCone delta (Orbit.editFurtherAlong hit) =
 outsideConeAvoidsEveryFinitePrefix :
   ∀ {Node : Set} (delta : Orbit.TypedRevisionDelta Node)
     {node : Node} →
-  (OldReverseDirtyCone delta node → ⊥) →
+  (OldReverseDirtyCone (Orbit.oldLink delta) (Orbit.changedAt delta) node → ⊥) →
   (n : Nat) →
   Orbit.AvoidsEditedVertices
     (Orbit.oldLink delta) (Orbit.changedAt delta) n node
@@ -206,7 +206,7 @@ oldReverseClosureContainsAllChangedOrbitResults :
   (n : Nat) →
   (Orbit.iterate (Orbit.oldLink delta) n node
     ≡ Orbit.iterate (Orbit.newLink delta) n node → ⊥) →
-  OldReverseDirtyCone delta node
+  OldReverseDirtyCone (Orbit.oldLink delta) (Orbit.changedAt delta) node
 oldReverseClosureContainsAllChangedOrbitResults delta {node}
     decide n difference
   with Orbit.oldOrbitHitOrAvoid delta {n} {node} decide
@@ -220,7 +220,7 @@ queryProjectionInvariantOutsideDirtyCone :
     (delta : Orbit.TypedRevisionDelta Node)
     (consumer : Node → Outcome) →
   {node : Node} →
-  (OldReverseDirtyCone delta node → ⊥) →
+  (OldReverseDirtyCone (Orbit.oldLink delta) (Orbit.changedAt delta) node → ⊥) →
   (n : Nat) →
   consumer (Orbit.iterate (Orbit.oldLink delta) n node) ≡
   consumer (Orbit.iterate (Orbit.newLink delta) n node)
