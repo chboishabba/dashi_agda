@@ -18,7 +18,7 @@ module DASHI.Mathematics.Arithmetic.EllipticOddPrimeSecondValuationParityExact w
 ------------------------------------------------------------------------
 
 open import Agda.Builtin.Equality using (_≡_)
-open import Data.Integer using (ℤ; +_)
+open import Data.Integer using (ℤ; +_; _*_)
 import DASHI.Mathematics.Arithmetic.EllipticCubicValuationParityExact as Parity
 
 data OddPrimeSecondCoordinateRegime
@@ -32,8 +32,6 @@ data OddPrimeSecondCoordinateRegime
   secondPole :
     ((+ 2) * yValuation) ≡ ((+ 3) * secondValuation) →
     OddPrimeSecondCoordinateRegime secondValuation yValuation
-
-open import Data.Integer using (_*_)
 
 originalOddPrimeSecondCoordinateEven :
   (secondValuation yValuation : ℤ) →
