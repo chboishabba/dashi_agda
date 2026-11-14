@@ -105,7 +105,10 @@ finiteCarrierImpliesEveryStartRepeats :
     (carrier : General.CompleteFiniteCarrier Node) →
   (start : Node) → General.OrbitRepeat next start
 finiteCarrierImpliesEveryStartRepeats next carrier start
-  with FinProperties.pigeonhole ≤-refl
+  with FinProperties.pigeonhole
+    {m = carrierSize (General.allNodes carrier)}
+    {n = suc (carrierSize (General.allNodes carrier))}
+    ≤-refl
     (λ k → carrierEncode carrier
       (Orbit.iterate next (Fin.toℕ k) start))
 ... | i , j , i<j , same =
