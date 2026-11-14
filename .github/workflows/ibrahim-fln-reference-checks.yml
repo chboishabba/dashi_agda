@@ -21,6 +21,7 @@ on:
       - 'tests/test_ibrahim_author_parser_port.py'
       - 'scripts/ibrahim_fln_agda_certificate_export.py'
       - 'tests/test_ibrahim_fln_agda_certificate_export.py'
+      - 'tests/test_ibrahim_finite_pigeonhole_oracle.py'
       - 'tests/fixtures/ibrahim_paper_figure_2_4.json'
       - 'tests/fixtures/ibrahim_paper_figure_2_4.manifest.json'
       - 'scripts/check_ibrahim_fln_maxcut.sh'
