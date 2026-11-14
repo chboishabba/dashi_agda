@@ -53,3 +53,10 @@ monitor surface.
   landed through `walkObjectsSucMemberByVertices` and
   `walkObjectExtendMemberByVertices` in
   `DASHI/Physics/YangMills/GraphCombinatorics.agda`.
+
+## 2026-10-30 — Source-attributed parallel needs institutional transition
+
+- Added DASHI/Governance/ParallelNeedsInstitutionalTransitionExact.agda (declared --safe): typed service/capability/community/provisioning/federation stages, four receipt-gated transitions and conditional path closure.
+- Reused Core.AttributedSourceCore, Core.IntersectionalNonFactorability, Education.CommunityConnectednessTopologyExact, Governance.RevolutionaryPracticeBraid and Governance.LocalGlobalCouncilGluing. Finite equal-revenue/different-needs nonfactorability witness rules out revenue-only reconstruction of provisioning.
+- Added Docs/ParallelNeedsInstitutionalTransition.md; connected Governance.Everything, Unifier, EverythingTOESymmetryResolved369 and Unified.Everything imports.
+- Instagram video could not be opened; user SRT is a transcript carrier only. Reel upload date, speaker identity, economic feasibility, outcomes and political/faith legitimacy are unverified. No Agda/Lean kernel execution, CI or ESD changes.

@@ -17281,3 +17281,9 @@ Cleanup
 - [ ] Next adapter/generalization lane: lift the same shared Stage12 contract
   beyond the p13 closure row without breaking the candidate-only/fail-closed
   boundary.
+
+## 2026-10-30 — Instagram parallel-needs formalisation
+
+- [ ] Kernel-check DASHI/Governance/ParallelNeedsInstitutionalTransitionExact.agda with --safe and trace all imported trust boundaries.
+- [ ] Keep source proposal, institution mandate, actual needs coverage and national replication as separate authority gates.
+- [ ] Source quantitative service-coverage and financial-runway tests if a real pilot is later identified; retain voluntary consent/exit and compatibility criteria.

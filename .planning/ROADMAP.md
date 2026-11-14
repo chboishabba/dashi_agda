@@ -78,3 +78,10 @@ Plans:
 | 3. MDL Integration | 1/2 | In progress | - |
 | 4. Signature Elimination | 2/2 | Complete | 2026-03-01 |
 | 5. Closure Harness | 0/2 | Not started | - |
+
+## 2026-10-30 — parallel needs institutional-transition source cut
+
+- [x] Inspect user-supplied reel transcript and reuse governance/community/provenance nonfactorability owners.
+- [x] Add source-bounded, receipt-gated Agda stage machine and a finite revenue/needs counterexample; wire governance and focused TOE roots.
+- [ ] Run Agda exact-head --safe typechecking and audit transitive imports (no Agda compiler in this environment).
+- [ ] Acquire real-world delivery, surplus, consent, locality compatibility and counterfactual receipts before any causal or governance promotion.
