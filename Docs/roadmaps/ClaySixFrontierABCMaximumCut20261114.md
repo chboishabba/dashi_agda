@@ -250,3 +250,25 @@ The following is derived directly from the exact in-repository 43-row [Round83�
 - Local math negative controls: run `scripts/check_clay_abc_attachment_negative_controls.py` and unit tests once added; **not an external RH/BSD/NS theorem check**.
 - Current execution environment: no `agda`, `nix`, `lean`, or `lake`. Repository exact Git blobs and Python arithmetic do not suffice for Golden proof acceptance.
 - No general Millennium Clay endpoint is promoted in this document. The external 2026 NS announcement remains an independent reviewed/claimed source.
+
+
+## 14 November 2026 — second six-cut implementation and adversarial results
+
+This section supersedes **only** the six priority-cuts' preceding source statuses, not the 43 original Round518 residuals or unrelated original Clay gates. Source-written and finite tests remain separate from Agda/Lean golden receipt.
+
+| Cut | Actual new mathematical/software producer | Controlled dependent theorem still OPEN |
+|---|---|---|
+| **YM R445 TV** | #1503 `check_ym_r445_action_oscillation_tv.py` and `YMClayR445SharpLikelihoodRatioMaxCut20261114.md`. Sharp same-carrier density-ratio TV ≤ (√M−√m)/(√M+√m) = tanh(osc action/4). 361 rational tests; 16-tensor negative control TV>0.99 | Entire-volume TV is **not** a safe uniform RG intermediate without locality/renormalization. Physical original source **local marginal** TV or direct same-F,G,FG moments must now be bounded |
+| **Karp F1** | #1502 literal 3-state/one-work-tape `Karp21NativeGammaAllLengthFiniteTablePhysicalExact.agda` with 48 enumerated finite table entries. 31713 valid words k≤9, 7 malformed controls; k≥1 steps=2k+2, cells≤initial+2*fuel, and actual original source gamma parser theorem. Import in `Karp21StackedSourceConvergence20261114` | All-k physical-source bisimulation **not kernel checked**; all-token parser/ledger/first-enabled trace, F2 allocations and F3/F4 clock + original typed InNP OPEN |
+| **BSD K1** | #1499 `EllipticDyadicHenselSquareStepAlgebraExact.agda` original integer ring identity, and `check_bsd_q2_39_coherent_hensel.py`. Coherent 2-adic roots through 512-bit modulus imply an actual mathematical E(Q2) local point (39,4r) from Z2 completeness | No actual Agda Q2-complete field, all E(Q2)/E(R) Kummer image, Galois H1/naturality, Selmer-Sha or BSD |
+| **NS R854** | Lean PR #109 `Synthesis/NavierStokesR854RealTimeAffineRateConditionalExact.lean` proves (source-written) strict negativity of real-time rate **assuming** original R853 same-trajectory envelope with R854 constants; rational affine-integral proof remains #1501/#1499 | Original real Galerkin trajectory, R71/R74 chart, real-time R853 rate identity and actual Lipschitz bound; exact-head Lean kernel |
+| **Bishop/eta** | Original #1478 `check_bishop_eta_abel_uniform_tail.py` 9841 exact finite Abel identities, 320 complex diagnostics. Correct classical `(1+M/δ)N^(-δ)` compact eta uniform Cauchy majorant. Full derivation: `Docs/roadmaps/BishopOriginalEtaAbelUniformTail20261114.md` | Bishop source genuine NatLog/log inverse, expC sin/cos addition, derivative/FTC and actual `SeriesOf` compact uniform tail Agda proof |
+| **RH A2/G3/Route B** | Lean #108 `RiemannFirstZeroSignedFifthCoefficientNoGo.lean` source-writes first-zero nonpositive sign for any true nonnegative mean-square. #1499 `check_rh_a2_g3_selected_witness.py` demands the **actual selected Lean W** scalar; without source evidence it reports BLOCKED | Unpaid A2 selected W fourth-Lipschitz comparison, `HorizontalFarCurvatureBound`, complete signed gap and original G3 cofinal positivity. No contradiction/proof of RH |
+
+The R445 full-volume TV counterexample is material: taking repeated independent two-state distributions with original one-block TV 3/5 gives TV=30258804339/30517578125 >99/100 at volume 16. Thus **the correct target is source-local test marginal TV or direct physical moment control**, not a uniform bound on the full-volume coarse Gibbs TV without volume dependence.
+
+The BSD dyadic `x=39` proof is constructive mathematics with coherent Hensel lifts: r₃=1, set `b_n=((3705-r_n²)/2^n) mod2`, `r_(n+1)=r_n+2^(n-1)*b_n`; the square defect improves mod 2^(n+1) and r_n is Cauchy in Z₂. The Agda ring expansion is source-written and a focused import, but complete Agda Q₂ and H¹ are unbuilt.
+
+The RH selected scalar is **not** replaced by a synthetic toy witness: Lean #50 already reduces positive A2 sixth/eighth leading allowance to a selected `fourthLipschitz` ceiling of roughly 737.365 for the strength-floor witness, but its actual selected witness and FarExact do not yet supply the inequalities. First-zero positive-moment sign is an invalid shortcut, not a refutation of actual signed `signedFifthCorrelationGapAt`.
+
+**No exact-head Agda/Nix/Lean/Lake binary is installed in this tool environment.** Do not treat these new declarations as kernel-proved. All six full end states, their downstream Clay endpoints, and 43 YM original residuals remain appropriately open.
