@@ -20,6 +20,7 @@ import DASHI.Biology.EpigeneticBodyMemoryBridge as BodyMemory
 import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact as EmpiricalBiology
 import DASHI.Biology.KSW668HumanCarbon14ObservedExact as HumanAMS
 import DASHI.Physics.Plasma.KSW668EmpiricalBoundariesExact as Empirical
+import DASHI.Physics.Plasma.KSW668FullVectorMaxwellJetExact as VectorMaxwell
 
 ------------------------------------------------------------------------
 -- KSW 668: exact OWNER reuse.  Do not copy original mathematical proofs,
@@ -82,6 +83,16 @@ originalBiologicalCausalityGuard :
   BodyMemory.EpigeneticBodyMemoryGuard
 originalBiologicalCausalityGuard =
   BodyMemory.NoCausalityClosureClaim
+
+
+-- B1: reuse the same original RealField full three-vector curl-jet theorem.
+-- The existence of an analytic physical U1 continuum field remains separate.
+originalFull3DMaxwellPoynting :
+  ∀ {r} {F : C3.RealField r}
+    (j : VectorMaxwell.FullVectorMaxwellJet F) →
+  VectorMaxwell.fullVectorSignedBudget j ≡ C3.zero F
+originalFull3DMaxwellPoynting =
+  VectorMaxwell.fullVectorMaxwellPoyntingIdentity
 
 originalHumanAMSObservedDonor24 :
   HumanAMS.pMCHundredths HumanAMS.donor24Tendon
