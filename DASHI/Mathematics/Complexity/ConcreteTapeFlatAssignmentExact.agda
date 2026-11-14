@@ -18,7 +18,7 @@ module DASHI.Mathematics.Complexity.ConcreteTapeFlatAssignmentExact where
 -- exactly canonicalWindowCodec.encode(window).
 ------------------------------------------------------------------------
 
-open import Agda.Builtin.Bool using (Bool)
+open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.List using (List; []; _∷_)
 open import Agda.Builtin.Nat using (Nat; zero; suc; _+_; _*_)
@@ -46,13 +46,13 @@ encodeCells :
         (Local.Symbol machine))) →
   CNF.Bits
     (Canonical.listLength cells * Canonical.CellWidth machine)
-encodeCells stateCoverage symbolCoverage [] =
+encodeCells {machine} stateCoverage symbolCoverage [] =
   CNF.[]ᵇ
 encodeCells {machine} stateCoverage symbolCoverage
     (cell ∷ cells) =
   Canonical.appendBits
-    (Canonical.encodeCell stateCoverage symbolCoverage cell)
-    (encodeCells stateCoverage symbolCoverage cells)
+    (Canonical.encodeCell {machine} stateCoverage symbolCoverage cell)
+    (encodeCells {machine} stateCoverage symbolCoverage cells)
 
 encodeRow :
   ∀ {machine}
@@ -64,8 +64,8 @@ encodeRow :
   CNF.Bits
     (Canonical.listLength (Local.cells row) *
       Canonical.CellWidth machine)
-encodeRow stateCoverage symbolCoverage row =
-  encodeCells stateCoverage symbolCoverage (Local.cells row)
+encodeRow {machine} stateCoverage symbolCoverage row =
+  encodeCells {machine} stateCoverage symbolCoverage (Local.cells row)
 
 record FlatConcreteRowAssignment
     (machine : Local.ConcreteTapeMachine)
@@ -93,12 +93,12 @@ flatRowAssignment :
     (row : Local.TapeRow machine) →
   FlatConcreteRowAssignment
     machine stateCoverage symbolCoverage row
-flatRowAssignment stateCoverage symbolCoverage row = record
+flatRowAssignment {machine} stateCoverage symbolCoverage row = record
   { width =
       Canonical.listLength (Local.cells row) *
-      Canonical.CellWidth _
+      Canonical.CellWidth machine
   ; widthExact = refl
-  ; bits = encodeRow stateCoverage symbolCoverage row
+  ; bits = encodeRow {machine} stateCoverage symbolCoverage row
   }
 
 ------------------------------------------------------------------------
@@ -270,7 +270,7 @@ encodeSixCells :
       Canonical.EnumerationCoverage (Local.finiteSymbol machine))
     (window : Local.SixCellWindow machine) →
   CNF.Bits (Canonical.WindowWidth machine)
-encodeSixCells stateCoverage symbolCoverage window =
+encodeSixCells {machine} stateCoverage symbolCoverage window =
   Canonical.appendBits cellOldLeft
     (Canonical.appendBits cellOldCenter
       (Canonical.appendBits cellOldRight
@@ -278,22 +278,22 @@ encodeSixCells stateCoverage symbolCoverage window =
           (Canonical.appendBits cellNewCenter cellNewRight))))
   where
     cellOldLeft =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.oldLeft window)
     cellOldCenter =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.oldCenter window)
     cellOldRight =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.oldRight window)
     cellNewLeft =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.newLeft window)
     cellNewCenter =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.newCenter window)
     cellNewRight =
-      Canonical.encodeCell stateCoverage symbolCoverage
+      Canonical.encodeCell {machine} stateCoverage symbolCoverage
         (Local.newRight window)
 
 canonicalWindowEncoding_is_sixCellFlattening :
@@ -307,7 +307,7 @@ canonicalWindowEncoding_is_sixCellFlattening :
     (Canonical.canonicalWindowCodec machine stateCoverage symbolCoverage)
     window
   ≡ encodeSixCells stateCoverage symbolCoverage window
-canonicalWindowEncoding_is_sixCellFlattening
+canonicalWindowEncoding_is_sixCellFlattening {machine}
     stateCoverage symbolCoverage
     (Local.six-cell-window
       oldLeft oldCenter oldRight

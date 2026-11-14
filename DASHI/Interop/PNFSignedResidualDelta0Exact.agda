@@ -35,6 +35,7 @@ module DASHI.Interop.PNFSignedResidualDelta0Exact where
 open import Agda.Builtin.Bool using (Bool; false; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Data.Integer using (ℤ; +_; -_; _+_; _-_; _*_)
+open import Data.Product using (Σ; _,_; _×_)
 open import Relation.Binary.PropositionalEquality using (cong; sym; trans)
 
 import Data.Integer.Tactic.RingSolver as IntRS
@@ -117,11 +118,11 @@ constantField : ℤ → TriangleField
 constantField x = triangleField x x x
 
 signedResidualDelta0 : TriangleField → TriangleField
-signedResidualDelta0 field =
+signedResidualDelta0 fld =
   triangleField
-    (((- (+ 8)) * value0 field) - value1 field + ((+ 9) * value2 field))
-    ((- value0 field) + ((+ 4) * value1 field) - ((+ 3) * value2 field))
-    (((+ 9) * value0 field) - ((+ 3) * value1 field) - ((+ 6) * value2 field))
+    (((- (+ 8)) * value0 fld) - value1 fld + ((+ 9) * value2 fld))
+    ((- value0 fld) + ((+ 4) * value1 fld) - ((+ 3) * value2 fld))
+    (((+ 9) * value0 fld) - ((+ 3) * value1 fld) - ((+ 6) * value2 fld))
 
 fieldExtensional :
   (left right : TriangleField) →
@@ -169,14 +170,14 @@ square : ℤ → ℤ
 square x = x * x
 
 signedEdgeEnergy : TriangleField → ℤ
-signedEdgeEnergy field =
-  square (value1 field - value0 field)
-  + ((+ 3) * square (value2 field - value1 field))
-  - ((+ 9) * square (value0 field - value2 field))
+signedEdgeEnergy fld =
+  square (value1 fld - value0 fld)
+  + ((+ 3) * square (value2 fld - value1 fld))
+  - ((+ 9) * square (value0 fld - value2 fld))
 
 signedIncidenceEnergyIdentity :
-  (field : TriangleField) →
-  dot field (signedResidualDelta0 field) ≡ signedEdgeEnergy field
+  (fld : TriangleField) →
+  dot fld (signedResidualDelta0 fld) ≡ signedEdgeEnergy fld
 signedIncidenceEnergyIdentity (triangleField a b c) =
   RingZ.solve 3
     (λ a b c →
@@ -185,11 +186,11 @@ signedIncidenceEnergyIdentity (triangleField a b c) =
         ⊕ (c ⊗ (((Κ (+ 9) ⊗ a) ⊕ (⊝ (Κ (+ 3) ⊗ b))) ⊕ (⊝ (Κ (+ 6) ⊗ c))))
       , (((b ⊕ (⊝ a)) ⊗ (b ⊕ (⊝ a)))
         ⊕ (Κ (+ 3) ⊗ ((c ⊕ (⊝ b)) ⊗ (c ⊕ (⊝ b))))
-        ⊕ (⊝ (Κ (+ 9) ⊗ ((a ⊕ (⊝ c)) ⊗ (a ⊕ (⊝ c)))))))
+        ⊕ (⊝ (Κ (+ 9) ⊗ ((a ⊕ (⊝ c)) ⊗ (a ⊕ (⊝ c))))))))
     refl a b c
 
 fieldSum : TriangleField → ℤ
-fieldSum field = value0 field + value1 field + value2 field
+fieldSum fld = value0 fld + value1 fld + value2 fld
 
 negativeDirection : TriangleField
 negativeDirection = triangleField (+ 1) (- (+ 1)) (+ 0)

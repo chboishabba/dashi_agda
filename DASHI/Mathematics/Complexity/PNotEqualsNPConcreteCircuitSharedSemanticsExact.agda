@@ -381,7 +381,7 @@ realizationSatisfiesSharedConstraints
       ≡ true
     gateConstraintAccepted =
       equivalenceConstraintTrueFromEqualValues
-        (Cook.variable (inputs + gates))
+        (Cook.formulaVar (inputs + gates))
         (Compiler.gateExpressionFormula gate)
         assignment
         (trans
@@ -492,7 +492,7 @@ sharedConstraintsGiveRealization
         assignment
     newestValueEqualExpression =
       equivalenceConstraintTrueImpliesEqualValues
-        (Cook.variable (inputs + gates))
+        (Cook.formulaVar (inputs + gates))
         (Compiler.gateExpressionFormula gate)
         assignment
         newestConstraintAccepted

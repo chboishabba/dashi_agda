@@ -175,17 +175,15 @@ namedToFive54Appraisal
 five54NamedRoundTrip :
   (state : Stable.BulkFive54Appraisal) →
   namedToFive54Appraisal (five54AppraisalToNamed state) ≡ state
-five54NamedRoundTrip (mode , completion , appraisal) with
-  Stable.completion54ToTwoBy27 completion
-... | row , state27
-  rewrite Stable.completion54ToFrom (row , state27) = refl
+five54NamedRoundTrip (mode , (Completion.situated-slot row column , nonary) , appraisal)
+  rewrite Stable.columnRoundTrip column = refl
 
 namedFive54RoundTrip :
   (state : NamedMonsterDecisionState196830) →
   five54AppraisalToNamed (namedToFive54Appraisal state) ≡ state
 namedFive54RoundTrip
-  (named-monster-decision-state mode row decision appraisal)
-  rewrite baseDecisionRoundTrip decision = refl
+  (named-monster-decision-state mode row (decision-condition-27 comp resp auth) appraisal)
+  rewrite Stable.triColumnRoundTrip comp = refl
 
 namedMonsterDecisionIso :
   Stable.CarrierIso

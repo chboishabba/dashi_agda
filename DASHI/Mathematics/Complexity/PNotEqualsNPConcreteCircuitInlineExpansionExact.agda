@@ -67,7 +67,7 @@ wireFormula :
   Vec Cook.BooleanFormula gates →
   Cook.BooleanFormula
 wireFormula (Circuit.inputWire index) gateFormulas =
-  Cook.variable (toℕ index)
+  Cook.formulaVar (toℕ index)
 wireFormula (Circuit.gateWire index) gateFormulas =
   Circuit.lookupVec index gateFormulas
 

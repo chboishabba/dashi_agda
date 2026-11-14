@@ -15,10 +15,10 @@ module DASHI.Mathematics.Complexity.ConcreteTapeCookLevinExactBudgetIff where
 
 open import Agda.Builtin.Bool using (Bool; true)
 open import Agda.Builtin.Equality using (_≡_; refl)
-open import Agda.Builtin.Nat using (Nat)
+open import Agda.Builtin.Nat using (Nat; suc)
 open import Agda.Builtin.List using (List)
 open import Data.Product using (Σ; _,_)
-open import Relation.Binary.PropositionalEquality using (trans)
+open import Relation.Binary.PropositionalEquality using (trans; sym; subst)
 
 import DASHI.Mathematics.Complexity.ConcreteTapeMachineLocalityExact as Local
 import DASHI.Mathematics.Complexity.ConcreteTapeCanonicalCellBitsExact as Canonical
@@ -27,6 +27,10 @@ import DASHI.Mathematics.Complexity.ConcreteTapeRuleSelectorExact as Selector
 import DASHI.Mathematics.Complexity.ConcreteTapeTimeBudgetPaddingExact as Guard
 import DASHI.Mathematics.Complexity.ConcreteTapeInputInitialRowExact as Input
 import DASHI.Mathematics.Complexity.ConcreteTapeGlobalCookLevinCNFExact as GlobalCNF
+import DASHI.Mathematics.Complexity.ConcreteTapeGuardedGlobalCookLevinCNFExact as GuardedCNF
+import DASHI.Mathematics.Complexity.ConcreteTapeEncodedPaddedRunDecodeWeldExact as EncodedRows
+import DASHI.Mathematics.Complexity.ConcreteTapePaddedRunEndcapsExact as Padded
+import DASHI.Mathematics.Complexity.ConcreteTapeHeadMarginExact as Margin
 import DASHI.Mathematics.Complexity.ConcreteTapeEndpointCNFExact as Endpoint
 import DASHI.Mathematics.Complexity.ConcreteTapeSATToAcceptingRunExact as Sound
 import DASHI.Mathematics.Complexity.ConcreteTapeAcceptingRunGlobalCompleteExact as Complete
@@ -63,9 +67,9 @@ record GuardedCookLevinSAT
           (Guard.guardedInitialCols input steps))
     satisfies :
       CNF.evaluateCNF
-        (GlobalCNF.globalCookLevinCNF
+        (GuardedCNF.guardedGlobalCookLevinCNF
           stateCoverage symbolCoverage nonempty
-          steps (Guard.guardedInitialCols input steps)
+          steps (Guard.guardedInitialColsMinusOne input steps)
           (Sound.guardedInitialBits
             stateCoverage symbolCoverage input steps))
         assignment
@@ -131,18 +135,44 @@ exactRunToGuardedSAT
     stateCoverage symbolCoverage nonempty input steps exact
     with exactLength exact
        | guardedInitialCanonicalCellCount input steps
-... | refl | refl =
+       | Guard.guardedInitialColsSuccessor input steps
+... | refl | refl | refl =
   record
     { assignment =
         Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage (certificate exact)
     ; satisfies =
-        targetRewrite
-          (Complete.acceptingRunSatisfiesGlobalCookLevinCNF
-            stateCoverage symbolCoverage nonempty
-            (certificate exact))
+        GuardedCNF.guardedCompletenessFromDecodedEndcaps
+          stateCoverage symbolCoverage nonempty
+          steps (Guard.guardedInitialColsMinusOne input steps)
+          (Sound.guardedInitialBits
+            stateCoverage symbolCoverage input steps)
+          (Assignment.encodeAcceptingRunAssignment
+            stateCoverage symbolCoverage (certificate exact))
+          (targetRewrite
+            (Complete.acceptingRunSatisfiesGlobalCookLevinCNF
+              stateCoverage symbolCoverage nonempty
+              (certificate exact)))
+          (EncodedRows.encodedAcceptingAssignmentDecodedEndcaps
+            stateCoverage symbolCoverage (certificate exact)
+            paddedRows refl refl)
     }
   where
+    paddedRows :
+      Padded.AllWellFormedRunRowEndcaps
+        (Accepting.run (certificate exact))
+    paddedRows =
+      Padded.allPaddedRunRowsHavePlainEndcaps
+        (Accepting.run (certificate exact))
+        (Margin.interiorExactlyOneHead
+          (Guard.guardedInitialInterior input steps))
+        (subst
+          (λ n →
+            Margin.HeadMargin (suc n)
+              (Local.cells (Guard.guardedInitialRow input steps)))
+          (sym (exactLength exact))
+          (Guard.guardedInitialMargin input steps))
+
     targetRewrite :
       CNF.evaluateCNF
         (GlobalCNF.globalCookLevinCNF
@@ -162,8 +192,7 @@ exactRunToGuardedSAT
         (Assignment.encodeAcceptingRunAssignment
           stateCoverage symbolCoverage (certificate exact))
       ≡ true
-    targetRewrite proof =
-      proof
+    targetRewrite proof = proof
 
 
 record CookLevinExactBudgetIff

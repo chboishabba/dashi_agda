@@ -158,40 +158,43 @@ rowSliceBits_eq_blockSlice :
     (slot : Global.Slot index (suc steps))
     (globalBits :
       CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  Global.rowSliceBits slot globalBits
+  Global.rowSliceBits {machine} {steps} {cols} slot globalBits
   ≡
-  blockSliceBits slot (rowsPrefixBits globalBits)
+  blockSliceBits {width = Decode.RowBitsWidth machine cols} slot (rowsPrefixBits {machine} {steps} {cols} globalBits)
 rowSliceBits_eq_blockSlice {machine} {steps} {cols}
     slot globalBits =
   Placement.bitsExt pointwise
   where
     rowWidth = Decode.RowBitsWidth machine cols
-    rowsBits = rowsPrefixBits globalBits
+    rowsBits = rowsPrefixBits {machine} {steps} {cols} globalBits
 
     blockEq :
       Rename.pullbackBits
-        (Global.rowBlockRename slot)
+        (Global.rowBlockRename {machine} {steps} {cols} slot)
         rowsBits
-      ≡ blockSliceBits slot rowsBits
+      ≡ blockSliceBits {width = rowWidth} slot rowsBits
     blockEq =
-      pullbackBlockRename_eq_blockSlice slot rowsBits
+      pullbackBlockRename_eq_blockSlice {width = rowWidth} slot rowsBits
 
     pointwise :
       ∀ i →
-      CNF.lookupBit (Global.rowSliceBits slot globalBits) i
-      ≡ CNF.lookupBit (blockSliceBits slot rowsBits) i
+      CNF.lookupBit (Global.rowSliceBits {machine} {steps} {cols} slot globalBits) i
+      ≡ CNF.lookupBit (blockSliceBits {width = rowWidth} slot rowsBits) i
     pointwise i =
       trans
         (Rename.pullbackLookup
-          (Global.globalRowRename slot) globalBits i)
+          (Global.globalRowRename {machine} {steps} {cols} slot) globalBits i)
         (trans
           (sym
-            (lookupTakeBits globalBits
-              (Global.rowBlockRename slot i)))
+            (lookupTakeBits
+              {m = Trace.RowsTraceWidth machine steps cols}
+              {n = Trace.SelectorsTraceWidth machine steps}
+              globalBits
+              (Global.rowBlockRename {machine} {steps} {cols} slot i)))
           (trans
             (sym
               (Rename.pullbackLookup
-                (Global.rowBlockRename slot)
+                (Global.rowBlockRename {machine} {steps} {cols} slot)
                 rowsBits i))
             (congLookup blockEq i)))
       where
@@ -207,39 +210,42 @@ selectorSliceBits_eq_blockSlice :
     (slot : Global.Slot index steps)
     (globalBits :
       CNF.Bits (Trace.GlobalTraceWidth machine steps cols)) →
-  Global.selectorSliceBits slot globalBits
+  Global.selectorSliceBits {machine} {steps} {cols} slot globalBits
   ≡
-  blockSliceBits slot (selectorsSuffixBits globalBits)
+  blockSliceBits {width = Selector.RuleWidth machine} slot (selectorsSuffixBits {machine} {steps} {cols} globalBits)
 selectorSliceBits_eq_blockSlice {machine} {steps} {cols}
     slot globalBits =
   Placement.bitsExt pointwise
   where
-    selectorBits = selectorsSuffixBits globalBits
+    selectorBits = selectorsSuffixBits {machine} {steps} {cols} globalBits
 
     blockEq :
       Rename.pullbackBits
-        (Global.selectorBlockRename slot)
+        (Global.selectorBlockRename {machine} {steps} slot)
         selectorBits
-      ≡ blockSliceBits slot selectorBits
+      ≡ blockSliceBits {width = Selector.RuleWidth machine} slot selectorBits
     blockEq =
-      pullbackBlockRename_eq_blockSlice slot selectorBits
+      pullbackBlockRename_eq_blockSlice {width = Selector.RuleWidth machine} slot selectorBits
 
     pointwise :
       ∀ i →
-      CNF.lookupBit (Global.selectorSliceBits slot globalBits) i
-      ≡ CNF.lookupBit (blockSliceBits slot selectorBits) i
+      CNF.lookupBit (Global.selectorSliceBits {machine} {steps} {cols} slot globalBits) i
+      ≡ CNF.lookupBit (blockSliceBits {width = Selector.RuleWidth machine} slot selectorBits) i
     pointwise i =
       trans
         (Rename.pullbackLookup
-          (Global.globalSelectorRename slot) globalBits i)
+          (Global.globalSelectorRename {machine} {steps} {cols} slot) globalBits i)
         (trans
           (sym
-            (lookupDropBits globalBits
-              (Global.selectorBlockRename slot i)))
+            (lookupDropBits
+              {m = Trace.RowsTraceWidth machine steps cols}
+              {n = Trace.SelectorsTraceWidth machine steps}
+              globalBits
+              (Global.selectorBlockRename {machine} {steps} slot i)))
           (trans
             (sym
               (Rename.pullbackLookup
-                (Global.selectorBlockRename slot)
+                (Global.selectorBlockRename {machine} {steps} slot)
                 selectorBits i))
             (congLookup blockEq i)))
       where

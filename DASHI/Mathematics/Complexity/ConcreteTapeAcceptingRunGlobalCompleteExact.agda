@@ -42,13 +42,13 @@ acceptingRunGlobalPartsTrue :
 acceptingRunGlobalPartsTrue
     stateCoverage symbolCoverage nonempty certificate =
   record
-    { GlobalCNF.transitionTrue =
+    { transitionTrue =
         TransitionComplete.encodedAcceptingAssignment_transitionLifted
           stateCoverage symbolCoverage nonempty certificate
-    ; GlobalCNF.initialTrue =
+    ; initialTrue =
         InitialComplete.encodedAcceptingAssignment_initialPullback
           stateCoverage symbolCoverage certificate
-    ; GlobalCNF.acceptingTrue =
+    ; acceptingTrue =
         AcceptComplete.acceptingEndpointCNF_complete_for_run
           stateCoverage symbolCoverage certificate
     }
