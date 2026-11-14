@@ -272,3 +272,104 @@ This is an **observed external isotope input** to biological carbon uptake, not 
 | E1/E2 | **Actual 70-row SH atmospheric C14**, 2026 avian intervention summary, BioProject registration, Spalding human external incorporation | Human same-specimen C14 assay time series, measured dietary/ambient uptake, local neutron spectrum, controlled emotion interventions and confounders |
 
 The **existing biology PR #1471 measured genotype corpus** remains a real quantitative success, but it is neither a source of nuclear reaction rates nor proof of cellular longevity. The empirical sources above are not merged across distinct organism, tissue, nuclear environment or measurement protocols.
+
+---
+
+## 2026-11-14 primary-source closeout tranche 3 — user-supplied direct archive leads
+
+**Acquisition integrity:** This tranche separates (i) original source data read and transcribed, (ii) verified archive location and retrieval code, (iii) actual downloaded/hashed original bytes, and (iv) mathematically/source-verified same-object physical observations. Unresolved hosted datasets are not falsely upgraded to (iii).
+
+### A1/B1/B2 — MMS raw burst event is now timestamped by the original authors
+
+**Original event identity**, not a guessed burst:
+- Xiong et al., DOI **10.1029/2022GL098445**: *Distribution of Negative J·E' in the Inflow Edge of the Inner Electron Diffusion Region During Tail Magnetic Reconnection: Simulations Vs. Observations*; uses MMS1 and its cited GSE–LMN basis, not an interchangeable spacecraft/reference basis.
+- Lu et al. (2020), DOI **10.1029/2020GL088761**: explicit **17 June 2017 20:24:03–20:24:11 UTC** MMS magnetotail encounter. Another published MMS EDR analysis selects **20:24:06–20:24:09 UTC**.
+- The SDC FGM and EDP Level-2 guide exposes exact \`*_fgm_b_gse_brst_l2\` (nT), \`*_edp_dce_gse_brst_l2\` (mV/m), and FPI Level-2 \`des-moms\` and \`dis-moms\` products.
+
+**New \`scripts/ksw668_mms_burst_acquire.py\`:** exact event-probe \`mms_load_burst_intervals\` discovery (returning actual start/end pairs), four explicit original L2 products for MMS1, downloaded CDF-bytes SHA-256 manifest, replay verification. Dry-run by default; full acquisition requires \`--execute\` and PySPEDAS. It does not invent a UTC burst segment or CDF digest.
+
+\`\`\`bash
+python3 scripts/ksw668_mms_burst_acquire.py
+python3 -m pip install pyspedas cdflib
+python3 scripts/ksw668_mms_burst_acquire.py \
+  --probe 1 --execute --cache data/mms_20170617 \
+  --receipt /tmp/ksw668_mms1_rawsha.json
+python3 scripts/ksw668_mms_burst_acquire.py \
+  --cache data/mms_20170617 --verify /tmp/ksw668_mms1_rawsha.json
+\`\`\`
+
+\`eprime_and_work\` in the script supplies the **unit-correct** elementary transformation:
+\[
+E'[\mathrm{mV/m}]=E[\mathrm{mV/m}]+10^{-3}v_e[\mathrm{km/s}]\times B[\mathrm{nT}],
+\quad J\cdot E'[\mathrm{nW/m^3}]=10^{-3}J[\mathrm{nA/m^2}]\cdot E'[\mathrm{mV/m}].
+\]
+The current producer \(J=e\,n_e(V_i-V_e)\) must use consistent quasi-neutral densities, the real calibrated FPI velocity coordinates and temporal matching before it is treated as a physical measurement. **Raw CDFs and original instrument flags have NOT been downloaded/executed in this environment.**
+
+### C2 — PARMA/Gordon energy spectra, with covariance and non-extrapolation
+
+**Gordon et al. (2004)**: original ground-level Bonner sphere neutron spectral measurements across environment/altitude; source is a publication, not a ready-to-use machine-readable location-specific file. **Sato et al. JAEA EXPACS/PARMA** supports site/date/elevation/solar condition spectrum generation but the official JAEA distribution carries conditions for use and may require package execution. **No PARMA- or Gordon-derived numerical spectral CSV was acquired in this tranche.**
+
+New \`scripts/ksw668_neutron_spectrum_fold.py\` ingests a source-exported two-column \`energy_eV,differential_flux\` or \`energy_MeV,differential_flux\` CSV with measured/modelled provenance. It converts flux-density units correctly, integrates \(R=N_{14}10^{-24}\int_{\mathrm{validated}} \Phi(E) A E^B dE\) by trapezoids, propagates correlated \(A/B\) fit uncertainty using \(\rho=0.993\), and reports **partial-window** flux and rate separately from entire input spectrum.
+
+The 2026 Li et al. fit only supports \(0.0036\le E\le1.8\) eV; a nominal PARMA lower limit \(10^{-8}\) MeV equals \(0.01\) eV and therefore even its lower edge omits part of the validated 0.0036–0.01 eV range. Above 1.8 eV **no rate can be inferred from this fit alone**. No extrapolation and no fabricated whole-body rate.
+
+\`\`\`bash
+python3 scripts/ksw668_neutron_spectrum_fold.py \
+  --spectrum /path/to/original_PARMA_or_Gordon_spectrum.csv \
+  --source 'author / release / site, altitude, date, solar and soil parameters' \
+  --n14-atoms 1e20 --out /tmp/ksw668_rate_partial.json
+\`\`\`
+
+**Independent sanity check:** an explicitly synthetic, flat 1 cm⁻² s⁻¹ eV⁻¹ neutron differential flux on 0.01–1 eV, with \(10^{20}\) nitrogen-14 atoms, gives the analytical fit rate \(4.94640653\times10^{-5}\) s⁻¹; a 1000-step numerical trapezoid gives \(4.94652461\times10^{-5}\) s⁻¹ (relative error \(2.39\times10^{-5}\)), and fit-covariance-only standard deviation \(9.85\times10^{-7}\) s⁻¹. **Synthetic unit test, not an empirical site spectrum**.
+
+### E1 — human tissue: *original individual assay data acquired*
+
+**Heinemeier, Schjerling, Heinemeier, Magnusson and Kjaer (2013)**, *FASEB Journal*, DOI **10.1096/fj.12-225599**, original full accessible Table 1: **34 individual AMS assay observations**, from **28 donors** (30 tendon assays, 4 muscle assays), preserving sample identifiers, birth year, observed pMC, analytical \(\sigma\), calibration year, duplicate assays and the paper's original \`OL\` flags (5 outlier-labelled assay rows from donors 25, 28 and 30).
+
+Committed extracted original data: \`Artifacts/ksw668/heinemeier2013_original_human_ams_table1.csv\`.
+
+Two non-source-outlier matched-donor tissue contrasts:
+- donor 24: tendon 135.71±0.35 pMC, muscle 109.96±0.34 pMC, difference +25.75 pMC (separate analytical uncertainty \(\sqrt{0.35^2+0.34^2}\approx0.488\) pMC);
+- donor 26: tendon 148.48±0.41 pMC, muscle 109.79±0.34 pMC, difference +38.69 pMC (separate analytical uncertainty \(\approx0.533\) pMC).
+
+Assays from the same donor are **not longitudinal measurements** of the same tissue, and the pMC published convention is not silently equated with earlier \`F14C\` atmospheric curves. Donors 25 and 28 are intentionally excluded from naive matched-background estimates because the original authors flag their tendon entries as calibration outliers. Correct atmospheric regional input for original Arkansas donors must be NH/source-aligned (not automatically the previously acquired SH1–2 curve). No within-person emotion perturbation was present.
+
+New exact source modules:
+- \`DASHI/Biology/KSW668HumanCarbon14ObservedExact.agda\` with actual original assay IDs and exact pMC×100 paired-donor equalities;
+- \`DASHI/Physics/Plasma/KSW668EmpiricalBoundariesExact.agda\` with source status, type-checked sample-carrier witnesses, and uninhabited empirical-closure gates;
+- linked from \`Biology/Everything.agda\`, \`Plasma/Everything.agda\` and \`KSW668SourceCrosswalkExact.agda\`.
+- \`scripts/check_ksw668_human_ams_original.py\` validates 34 rows, 28 donors, original outliers and matched comparisons. **Exact checked-out script execution/kernel acceptance not verified here.**
+
+### E1 — pigeon Movebank and ENA: raw URL access not independently completed
+
+The user supplied Movebank candidate DOI \`10.5441/001/1.744_2\`, landing UUID \`2f38f106-42bf-4c4a-b7a4-17d758bdd9a9\`, and exact expected original filename \`Navigation with macrophage depletion in homing pigeons.csv\`. The landing endpoint returned **HTTP 403** and the DOI was not independently resolvable here. These identifiers are therefore **user-supplied leads pending archive identity verification**, not acquired 688.56-kB GPS data. An invented DSpace bitstream address or checksum would be unacceptable.
+
+New \`scripts/ksw668_movebank_gps_acquire.py\` takes \`--input\` (actual exported CSV/ZIP) or \`--url\` (real Movebank bitstream address found through its UI), rejects HTML and malformed CSV, validates timestamp/coordinates/animal IDs, and computes raw payload and selected member SHA-256. It **does not** manufacture treatment assignment or infer homing from GPS without the original reference file, loft coordinates, weather and endpoint definition.
+
+\`\`\`bash
+python3 scripts/ksw668_movebank_gps_acquire.py \
+  --input '/path/to/Navigation with macrophage depletion in homing pigeons.csv' \
+  --receipt /tmp/pigeon_raw_receipt.json
+\`\`\`
+
+For ENA the original study accession \`PRJEB98986\` is source-pinned (not the same as a constructed read count matrix). New \`scripts/ksw668_ena_reads_acquire.py\` uses the **official** ENA \`filereport\` endpoint for \`read_run\` and original \`fastq_ftp,fastq_md5,fastq_bytes\`, with explicit optional downloads, ENA MD5 validation, local SHA-256 and a 1-GiB default size budget. It was source-written but **not executed against the live ENA API** in this environment.
+
+\`\`\`bash
+python3 scripts/ksw668_ena_reads_acquire.py --execute --receipt /tmp/pigeon_ena_runs.json
+python3 scripts/ksw668_ena_reads_acquire.py --execute --download-reads \
+  --output-dir data/ena_PRJEB98986 --receipt /tmp/pigeon_ena_raw.json
+\`\`\`
+
+### Exact owner and acceptance status (this tranche)
+
+| Gate | Source-carrier advance | Actual missing acceptance |
+|---|---|---|
+| A1 | Published MMS original exact 8-second event and matched-instrument fetch program; physical Fourier signed counterexamples already on PR | SDC-derived exact burst segments + FGM/EDP/FPI original SHA checks + measurement frame + original physical MHD comparison |
+| B1–B2 | MMS raw acquisition pipeline + checked formula for \(J\cdot E'\) frame/unit conversion | Actual vector-calibrated same-epoch sample, boundary surface-volume Maxwell measurement and original Agda PDE weld |
+| C1 | Existing original evaluated masses, four-momentum source-form tests | Corrected original nuclear final-state physical reaction source |
+| C2 | Correlated original N14 2026 measured cross-section fit and **new finite spectral integral** | Source-author Gordon/PARMA actual numeric flux, location/date/hydrogen/geometry, energy-dependent cross-sections beyond 1.8 eV |
+| D1–D2 | Original LIGO propagation and Bell diagnostics remain separated | New actual tested metric/cone/operational KK source |
+| E1 | **Original 34 human AMS assay rows acquired**; actual typed two-donor comparisons; Movebank/ENA acquisition scripts | Raw verified pigeon GPS/FASTQ, treatment join, human diet and regional time/AMS data |
+| E2 | Explicit source/reconstruction identifiability theorem remains | Same-human within-person isotope baseline, controlled intervention, matched exposure and evidence-backed causal identification |
+
+**Verification:** Data in the human source table are transcribed from the published primary paper and reconciled as 34 rows/28 donors. Local independent analytic checks for neutron integration and published paired-donor contrasts were performed. New scripts and Agda modules are present in GitHub but exact-head Python replay and Agda 2.9 kernel verification are still pending. No original external MMS/Movebank/ENA/PARMA raw bytes downloaded here; do not claim a full physical empirical closure.
