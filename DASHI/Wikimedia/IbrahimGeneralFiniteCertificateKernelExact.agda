@@ -146,13 +146,32 @@ sameBasinTransitive :
   SameRepresentativeBasin census a c
 sameBasinTransitive census = trans
 
+record BasinEquivalence
+    (Node : Set) (sameBasin : Node → Node → Set) : Set where
+  constructor basinEquivalence
+  field
+    reflexive : (node : Node) → sameBasin node node
+    symmetric : ∀ {a b} → sameBasin a b → sameBasin b a
+    transitive : ∀ {a b c} →
+      sameBasin a b → sameBasin b c → sameBasin a c
+
 terminalBasinsPartition :
+  ∀ {Node : Set} {next : Node → Node} →
+  (census : VerifiedFiniteFirstLinkCensus next) →
+  BasinEquivalence Node (SameRepresentativeBasin census)
+terminalBasinsPartition census =
+  basinEquivalence
+    (sameBasinReflexive census)
+    (sameBasinSymmetric census)
+    (sameBasinTransitive census)
+
+terminalBasinMembership :
   ∀ {Node : Set} {next : Node → Node}
     (census : VerifiedFiniteFirstLinkCensus next)
     (node : Node) →
   Σ Node (λ representative →
     Orbit.representative (eventCycle census node) ≡ representative)
-terminalBasinsPartition census node =
+terminalBasinMembership census node =
   Orbit.representative (eventCycle census node) , refl
 
 ------------------------------------------------------------------------
