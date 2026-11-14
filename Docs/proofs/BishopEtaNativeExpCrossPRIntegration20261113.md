@@ -69,3 +69,18 @@ It checks 12 source roots with the existing project Agda 2.9 runner. Respects AG
 ## Cross-programme provenance
 
 See PR #1499, `Docs/roadmaps/DASHIAllLaneSourceDonorMaxCut20261113.json`. Source status has changed from "not co-located" to "co-located and source-written", **not** "Agda accepted" or "analytic theorem closed". The other Karp, BSD, NS, RH, Hodge, YM, Lean-world, Monster, biology and Cybersyn owner records retain their independent mathematical/empirical obligations.
+
+
+## 14 November: exact original dyadic two-leaf source reduction
+
+**New actual proof source** `DASHI/Analysis/BishopOriginalEtaDyadicSourceLawReductionExact.agda`, committed on #1478. This is in addition to the 10 original #1408 transferred files and their direct same-term native factorial exp consumer.
+
+- `OriginalDyadicNatLogLaw`: exact still-OPEN original `Terms.sourceCanonicalNatLogCandidate` source law `L(2(k+1)) ≃ L(2)+L(k+1)`, with `suc (Eta.twice k)` as the actual zero-based even-positive source index.
+- `OriginalBishopAnalyticExpAddLaw`: exact still-OPEN additive-to-multiplicative theorem for `ExpBridge.bishopAnalyticComplexExp T` on the original Bishop/Riemann complex carrier; it is NOT a new exponential or foreign `ConcreteComplex` constructor.
+- `originalDyadicNegativeSLogIsSum`: source-written **both-coordinate Bishop real ring/distributivity proof**, deriving `-s*L(2(k+1)) ≈ -s*L(2)+(-s*L(k+1))` from the first explicit analytic leaf.
+- `originalEtaDyadicScaleFromLogAndExp`: source-written composition of the preceding exponent identity, genuine `ExpBridge.bishopAnalyticExpCongruent`, and the second explicit analytic leaf. Its target is the PRE-EXISTING `Scale.OriginalDyadicSourceScale` for the ORIGINAL `Terms.bishopDirichletExponentialTerm T logNat s`, not an independent replacement of the source.
+- `OriginalRound11.originalRound11EtaZetaFiniteFromTwoLaws`: actual selected Round11 `Selected.sourceTerms`, with scale EXACTLY `Selected.sourceTerms s (suc zero)` (the literal source `a_s(1)=exp(-s L(2))`). Reuses `Scale.OriginalRound11.actualOriginalRound11EtaFiniteScaleBridge` for **every** finite cutoff on the same Bishop carrier.
+
+**Max-cut status:** the finite dyadic implication is now reduced to two named UNINHABITED original analytic laws, rather than an unspecified arbitrary source scaling premise. This is mathematical implementation of a conditional reduction, not proof of the log law, exp multiplication, full dyadic identity or infinite eta convergence. Local Agda kernel receipt still OPEN. The dedicated checker registers **13** targets; the larger Bishop golden checker registers **100** targets, neither count implies successful checker execution. P1.L's source-written original 8/27 inequality remains dependent on `R4.BishopSquareRootCalculus`, so no change to Newton, Koenigs, Kneser, or RH terminal gates.
+
+**Highest-information next proofs:** (1) prove the original Nat-log multiplicative law from the selected convergent `-log(1-x)` coefficient series, including the configured elementary-data setoid identification; (2) prove the original native Bishop sine/cosine addition laws, and combine them with the existing Bishop real exponential Cauchy-product law into `OriginalBishopAnalyticExpAddLaw`; (3) inhabit the two leaves, then construct a valid complex compact-uniform eta Cauchy tail. The source-only checker must be run with pinned Agda 2.9 before any acceptance claim.
