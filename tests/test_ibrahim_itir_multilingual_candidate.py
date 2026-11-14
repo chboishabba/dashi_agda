@@ -37,6 +37,22 @@ class ConsumerCandidateTests(unittest.TestCase):
         self.assertEqual(r['consumer_status'],'value_agrees_unlicensed')
         self.assertIsNone(r['repair_candidate'])
         self.assertFalse(r['semantic_authority_paid'])
+    def test_author_parser_port_rejects_skipping_an_earlier_valid_link(self):
+        left=fixture('en','Science','Science')
+        right=fixture('de','Philosophie','Philosophie')
+        for page in (left,right):
+            page['selector_policy_ref']=api.AUTHOR_PORT_POLICY
+        compared=api.compare_candidate(left,right)
+        self.assertTrue(compared['left']['reference_port_selection_matches'])
+        self.assertTrue(compared['right']['reference_port_selection_matches'])
+        self.assertFalse(compared['right']['first_qualifying_link_soundness_paid'])
+        right['wikitext']='[[Earlier]] '+right['wikitext']
+        right['wikitext_sha256']=hashlib.sha256(right['wikitext'].encode()).hexdigest()
+        start=right['wikitext'].index('[[Philosophie]]')
+        right['selected_span']=[start,start+len('[[Philosophie]]')]
+        with self.assertRaisesRegex(ValueError,'author-parser behavioural port'):
+            api.compare_candidate(left,right)
+
     def test_reject_tampered_bytes_links_policy_qid_and_revision(self):
         good=fixture('de','Philosophie','Philosophie')
         left=fixture('en','Science','Science')
