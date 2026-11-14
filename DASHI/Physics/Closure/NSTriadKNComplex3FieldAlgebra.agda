@@ -88,7 +88,7 @@ realCommutativeRing F = record
       ; *-cong = cong₂ (C3.multiply F)
       ; *-assoc = C3.multiplyAssociative F
       ; *-identity = C3.multiplyOneLeft F , realMultiplyOneRight F
-      ; distrib = realDistributeRight F , C3.distributeLeft F
+      ; distrib = C3.distributeLeft F , realDistributeRight F
       }
     ; *-comm = C3.multiplyCommutative F
     }
