@@ -1,0 +1,272 @@
+module DASHI.Physics.ExoticGravity.Zhang2025EMGravityPhysicalPromotionExact where
+
+open import Agda.Builtin.Bool using (Bool; false; true)
+open import Agda.Builtin.Equality using (_≡_; refl)
+open import Agda.Builtin.String using (String)
+
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravitySourceClaimExact as Zhang
+import DASHI.Physics.ExoticGravity.Zhang2025EMGravityQuantitativeSourceExact as Quant
+import DASHI.Physics.ExoticGravity.AntigravityMaterialBidiCrossPollinationExact as Anti
+import DASHI.Physics.ExoticGravity.AntigravityClaimTheoryComparisonExact as Comparison
+import DASHI.Physics.ExoticGravity.AntigravityExperimentalCutProvenanceExact as Provenance
+import DASHI.Physics.ExoticGravity.AntigravityResearchPromotionCutExact as Promotion
+import DASHI.Physics.ExoticGravity.AntigravityCalibratedFullyDerivedExperimentalCutExact as Calibrated
+import DASHI.Physics.ExoticGravity.AntigravityStrongestConditionalTheoremExact as Strong
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyCompilationExact as LabCompiler
+import DASHI.Physics.ExoticGravity.AntigravityLaboratoryStressEnergyScopeBidiExact as LabStress
+
+------------------------------------------------------------------------
+-- Gravity-consumer routing is downstream of the SAFE documentary core.
+-- It uses existing non-safe legacy comparison owners by their original types.
+------------------------------------------------------------------------
+
+data GravitationalRoute : Zhang.ScientificConsumer → Set where
+  remoteProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.remoteRepulsiveField →
+    GravitationalRoute Zhang.externalTestMass
+  freeFallProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.changedFreeFallResponse →
+    GravitationalRoute Zhang.freeFall
+  metricProbe :
+    (claim : Anti.AntigravityClaim) →
+    claim ≡ Anti.engineeredMetricResponse →
+    GravitationalRoute Zhang.metricClock
+
+canonicalExternalRoute : GravitationalRoute Zhang.externalTestMass
+canonicalExternalRoute = remoteProbe Anti.remoteRepulsiveField refl
+
+canonicalFreeFallRoute : GravitationalRoute Zhang.freeFall
+canonicalFreeFallRoute = freeFallProbe Anti.changedFreeFallResponse refl
+
+canonicalMetricRoute : GravitationalRoute Zhang.metricClock
+canonicalMetricRoute = metricProbe Anti.engineeredMetricResponse refl
+
+------------------------------------------------------------------------
+-- NO GENERIC "ANTIGRAVITY" RECEIPT MAY BE CREATED BY A PATENT NUMBER.
+-- Reuse the existing strongest provenance and experimental cut literally.
+------------------------------------------------------------------------
+
+data SourceOnlyStage : Set where
+  patentAssertionOnly : SourceOnlyStage
+  socialRetellingOnly : SourceOnlyStage
+
+data ExperimentallyGroundedStage : Set where
+  actualSameApparatusComparison : ExperimentallyGroundedStage
+
+data SourceOnlyDoesNotPromote : SourceOnlyStage → ExperimentallyGroundedStage → Set where
+
+record ChinesePatentPhysicalComparison
+  (claim : Anti.AntigravityClaim) : Set where
+  constructor chinese-patent-physical-comparison
+  field
+    documentary : Zhang.DocumentaryClaimReceipt
+    claimedMotion : Zhang.PatentClaimEntitlement Zhang.controlledTargetMotion
+    apparatusIdentification : String
+    physicalComparison : Provenance.ProvenancedComparativeAnomalyReceipt claim
+    apparatusMatchesExperimentalCut :
+      apparatusIdentification ≡
+        Promotion.apparatusCarrier
+          (Provenance.baseCut
+            (Provenance.experimentalCut physicalComparison))
+    physicalStage : ExperimentallyGroundedStage
+    stageIsExperimental : physicalStage ≡ actualSameApparatusComparison
+    physicalAnomaly : Promotion.ComparativeAnomalyReceipt claim
+    physicalAnomalySameAsProvenanced :
+      physicalAnomaly ≡ Provenance.anomaly physicalComparison
+
+open ChinesePatentPhysicalComparison public
+
+-- The compiler only projects a supplied physical provenance receipt.
+-- Documentary fields alone never build an experimental comparison.
+compileChinesePatentComparison :
+  {claim : Anti.AntigravityClaim} →
+  (source : Zhang.DocumentaryClaimReceipt) →
+  (receipt : Provenance.ProvenancedComparativeAnomalyReceipt claim) →
+  ChinesePatentPhysicalComparison claim
+compileChinesePatentComparison source receipt =
+  chinese-patent-physical-comparison
+    source
+    Zhang.claimedTargetMotion
+    (Promotion.apparatusCarrier
+      (Provenance.baseCut
+        (Provenance.experimentalCut receipt)))
+    receipt refl
+    actualSameApparatusComparison refl
+    (Provenance.anomaly receipt) refl
+
+------------------------------------------------------------------------
+-- Route a claimed stronger effect only after its exact consumer-specific
+-- experimental receipt has been provided.
+------------------------------------------------------------------------
+
+record ExternalFieldEvaluation : Set where
+  constructor external-field-evaluation
+  field
+    comparison : ChinesePatentPhysicalComparison Anti.remoteRepulsiveField
+    discriminator : GravitationalRoute Zhang.externalTestMass
+    discriminatorIsCanonical :
+      discriminator ≡ canonicalExternalRoute
+
+compileExternalFieldEvaluation :
+  ChinesePatentPhysicalComparison Anti.remoteRepulsiveField →
+  ExternalFieldEvaluation
+compileExternalFieldEvaluation comparison =
+  external-field-evaluation comparison canonicalExternalRoute refl
+
+record MetricEvaluation : Set where
+  constructor metric-evaluation
+  field
+    comparison : ChinesePatentPhysicalComparison Anti.engineeredMetricResponse
+    discriminator : GravitationalRoute Zhang.metricClock
+    discriminatorIsCanonical :
+      discriminator ≡ canonicalMetricRoute
+
+compileMetricEvaluation :
+  ChinesePatentPhysicalComparison Anti.engineeredMetricResponse →
+  MetricEvaluation
+compileMetricEvaluation comparison =
+  metric-evaluation comparison canonicalMetricRoute refl
+
+
+------------------------------------------------------------------------
+-- REAL IN-REPO SOURCE-STRESS OWNER, NOT A SECOND T_mu_nu CONSTRUCTION.
+-- Local vacuum Maxwell stress estimates alone do NOT supply mass current,
+-- material/elastic source, tensor assembly, or physical metric variation.
+-- The exact same apparatus must be retained at the physical comparison edge.
+------------------------------------------------------------------------
+
+record SameApparatusZhangLaboratoryStress
+  (claim : Anti.AntigravityClaim) : Set₁ where
+  constructor same-apparatus-zhang-laboratory-stress
+  field
+    zhangComparison : ChinesePatentPhysicalComparison claim
+    sourceTensorInput : LabCompiler.LaboratoryStressEnergyCompilationInput
+    sourceApparatusMatchesExperimentalApparatus :
+      LabCompiler.apparatusIdentity sourceTensorInput
+        ≡ apparatusIdentification zhangComparison
+    compiledSourceTensor : LabStress.LaboratoryStressEnergyReceipt
+    compiledSourceTensorIsTheSelectedPhysicalTensor :
+      compiledSourceTensor ≡
+        LabCompiler.compileLaboratoryStressEnergy sourceTensorInput
+
+open SameApparatusZhangLaboratoryStress public
+
+compileSameApparatusZhangLaboratoryStress :
+  {claim : Anti.AntigravityClaim} →
+  (comparison : ChinesePatentPhysicalComparison claim) →
+  (source : LabCompiler.LaboratoryStressEnergyCompilationInput) →
+  LabCompiler.apparatusIdentity source ≡
+    apparatusIdentification comparison →
+  SameApparatusZhangLaboratoryStress claim
+compileSameApparatusZhangLaboratoryStress comparison source sameApparatus =
+  same-apparatus-zhang-laboratory-stress
+    comparison source sameApparatus
+    (LabCompiler.compileLaboratoryStressEnergy source) refl
+
+------------------------------------------------------------------------
+-- QUANTITATIVE CONSUMER WELD (source-bounded).
+-- 2024 actual force/torque noise envelopes and the 2026 mass-resolution
+-- threshold MAY enter an EXTERNAL, REGIME-INDEXED sensitivity consumer.
+-- They cannot become one Chinese-patent same-apparatus comparative anomaly.
+------------------------------------------------------------------------
+
+record ExternalNullScreen : Set where
+  constructor external-null-screen
+  field
+    originatingStudy : Quant.SourceStudy
+    reportedEvidenceKind : Quant.EvidenceKind
+    admittedIndependentRegimeUse :
+      Quant.AdmissibleNonPromotingUse
+        originatingStudy reportedEvidenceKind
+        Quant.independentRegimeSensitivity
+    samePhysicalApparatusAsZhang : Bool
+    isNotSamePhysicalApparatus : samePhysicalApparatusAsZhang ≡ false
+
+open ExternalNullScreen public
+
+canonicalTajmar2024Screen : ExternalNullScreen
+canonicalTajmar2024Screen =
+  external-null-screen
+    Quant.tajmar2024SteadyVacuumBalance
+    Quant.authorNoiseScreening
+    Quant.independent2024Sensitivity
+    false refl
+
+canonicalTajmar2026Screen : ExternalNullScreen
+canonicalTajmar2026Screen =
+  external-null-screen
+    Quant.tajmar2026ThreeAmpereDCToroid
+    Quant.instrumentalResolution
+    Quant.independent2026Resolution
+    false refl
+
+-- This strongest composition still requires the PREEXISTING experimental
+-- physical comparison as input. The independent screen itself cannot pay it.
+record QuantitativelyScreenedPhysicalComparison
+  (claim : Anti.AntigravityClaim) : Set where
+  constructor quantitatively-screened-physical-comparison
+  field
+    physicalComparison : ChinesePatentPhysicalComparison claim
+    externalNullComparator : ExternalNullScreen
+
+compileQuantitativelyScreenedPhysicalComparison :
+  {claim : Anti.AntigravityClaim} →
+  ChinesePatentPhysicalComparison claim →
+  ExternalNullScreen →
+  QuantitativelyScreenedPhysicalComparison claim
+compileQuantitativelyScreenedPhysicalComparison comparison screen =
+  quantitatively-screened-physical-comparison comparison screen
+
+------------------------------------------------------------------------
+-- The strongest negative-G interpretation needs an ADDITIONAL constitutive
+-- receipt not supplied by patent text or an unexplained force alone.
+-- We deliberately do not define such an inhabitant for this patent.
+------------------------------------------------------------------------
+
+strongestEstablishedStatusNeedsExistingCalibratedReceipt :
+  (receipt :
+    Calibrated.CalibratedFullyDerivedComparativeAnomalyReceipt
+      Anti.remoteRepulsiveField) →
+  Strong.terminalComparativeStatus receipt ≡
+    Promotion.comparativeAnomalyEstablished
+strongestEstablishedStatusNeedsExistingCalibratedReceipt receipt =
+  Strong.terminalComparativeStatusIsEstablished receipt
+
+data CurrentZhangPhysicalAuthority : Set where
+
+record SourceSpecificPhysicalLeaves : Set where
+  constructor source-specific-physical-leaves
+  field
+    completeMeasuredEMFieldAndTargetModel : Bool
+    sourceDriveAndSuspensionMomentumClosure : Bool
+    calibratedONOFFPairWithRawData : Bool
+    ordinaryEMMechanicalThermalRFSystematicsClosed : Bool
+    heldOutExternalTestMassOrFreeFallReadout : Bool
+    independentMetricClockOpticalReadout : Bool
+    independentlyReplicated : Bool
+    measuredFarFieldTTGW : Bool
+
+-- Status refers to evidence available from the SOURCE RECORD, not an
+-- assertion that all experiments are impossible or a numeric null result.
+currentDocumentaryOnlyLeaves : SourceSpecificPhysicalLeaves
+currentDocumentaryOnlyLeaves =
+  source-specific-physical-leaves
+    false false false false false false false false
+
+record NonPromotionBoundary : Set where
+  constructor non-promotion-boundary
+  field
+    originalPatentGrantsEmpiricalAnomaly : Bool
+    nominal50kVGrantsCalibratedForce : Bool
+    nearVacuumExcludesElectrostatics : Bool
+    dielectricTargetCannotFeelEMForce : Bool
+    forceResidualAloneEstablishesMetric : Bool
+    alternativeModelBetterFitIdentifiesUniqueMechanism : Bool
+    PaisWaveClaimEqualsTargetMotion : Bool
+    sourceSpecificConsumerEvidenceRequired : Bool
+
+canonicalNonPromotionBoundary : NonPromotionBoundary
+canonicalNonPromotionBoundary =
+  non-promotion-boundary false false false false false false false true
