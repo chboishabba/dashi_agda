@@ -148,6 +148,7 @@ record AvianMagnetoreceptionCrossScaleBridge : Setω where
 
     embodiedMultisensoryBridge :
       Embodied.EmbodiedMotorMultisensoryBridge
+        Embodied.canonicalEmbodiedAnimalexicSurface
 
     embodiedMultisensoryBridgeIsCanonical :
       embodiedMultisensoryBridge ≡
