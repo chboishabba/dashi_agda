@@ -2,6 +2,7 @@ module DASHI.Physics.Plasma.KSW668SourceCrosswalkExact where
 
 open import Agda.Builtin.Equality using (_≡_; refl)
 open import Agda.Builtin.String using (String)
+open import Agda.Builtin.Nat using (_+_)
 
 import DASHI.Physics.Closure.NSTriadKNComplex3ExactCarrier as C3
 import DASHI.Physics.Plasma.MHDFullTransferFromExchangeCompatiblePayloadExact as MHD
@@ -16,6 +17,7 @@ import DASHI.Physics.Closure.FormalCompressionUniversalityBridge as PostEntropy
 import DASHI.Physics.Gravity.PenroseGlobalCausalityAuthorityExact as GlobalCausality
 import DASHI.Physics.Chemistry.AtomicPeriodicTable369MadelungPeriodPartitionExact as Madelung
 import DASHI.Biology.EpigeneticBodyMemoryBridge as BodyMemory
+import DASHI.Biology.KSW668EmpiricalIsotopeMagnetoreceptionSourceExact as EmpiricalBiology
 
 ------------------------------------------------------------------------
 -- KSW 668: exact OWNER reuse.  Do not copy original mathematical proofs,
@@ -78,6 +80,25 @@ originalBiologicalCausalityGuard :
   BodyMemory.EpigeneticBodyMemoryGuard
 originalBiologicalCausalityGuard =
   BodyMemory.NoCausalityClosureClaim
+
+publishedOriginalPigeonInterventionGroup :
+  EmpiricalBiology.PublishedHomingGroup
+publishedOriginalPigeonInterventionGroup = EmpiricalBiology.pigeonControl
+
+publishedPigeonOvercastTotal :
+  EmpiricalBiology.numberPigeons EmpiricalBiology.pigeonControl
+  + EmpiricalBiology.numberPigeons EmpiricalBiology.pigeonDepleted ≡ 34
+publishedPigeonOvercastTotal = EmpiricalBiology.publishedOvercastTotal
+
+publishedSouthernHemisphere14CArchive :
+  EmpiricalBiology.BiologicalArchiveAcquisition
+publishedSouthernHemisphere14CArchive =
+  EmpiricalBiology.originalSouthernPostbombAcquisition
+
+publishedPigeonTranscriptomeArchive :
+  EmpiricalBiology.BiologicalArchiveAcquisition
+publishedPigeonTranscriptomeArchive =
+  EmpiricalBiology.originalPigeonTranscriptomeRegistration
 
 ------------------------------------------------------------------------
 -- Source-indexed physical gates, not fictitious inhabitants.
