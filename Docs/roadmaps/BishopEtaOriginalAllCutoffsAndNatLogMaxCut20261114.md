@@ -39,6 +39,50 @@ its positive-real logarithm and prove multiplicativity in the
 original real setoid; a substitution using a different
 `∫1^n dt/t` source does not meet this interface.
 
+## 1b. New finite negative-log remainder directly on the true source
+
+Instead of postulating an equality with the reciprocal integral, set
+`ell_N(x)=sum_(j=1)^N x^j/j`, the literal original
+negative-log finite polynomial, and let `z=x+(1-x)y`.
+An EXACT rational polynomial differentiation gives
+
+`d/dt[ell_N(x+(1-x)t)-ell_N(t)-ell_N(x)]
+   = (t^N-(x+(1-x)t)^N)/(1-t)
+   = -x*sum_(j=0)^(N-1)(x+(1-x)t)^(N-1-j)t^j`.
+
+The quotient is a polynomial, so there is **no pole** at t=1
+after cancellation. For `0≤x,y<1`, integrating only
+finite polynomials and using monotonicity gives
+
+`0≤ell_N(x)+ell_N(y)-ell_N(x+(1-x)y)
+  ≤ y/(1-y)*(x+(1-x)y)^N`.
+
+For the exact original dyadic positive integers `2,m,2m`,
+choose `x=1/2`, `y=(m-1)/m`,
+`z=(2m-1)/(2m)`, obtaining
+
+`0≤L_N(2)+L_N(m)-L_N(2m)
+    ≤ (m-1)*((2m-1)/(2m))^N`.
+
+The right side has a **constructive per-m geometric modulus**.
+At m=1 it is identically 0. This directly targets the selected
+`OriginalDyadicNatLogLaw` with its true source indexing, and is
+strictly more faithful than changing L to an integral-defined log.
+To discharge it in Agda, reuse the original negative-log coefficient
+family and the existing
+`AbelBishopComplexPowerDifferenceExact.originalComplexPowerDifferenceFactorisation`
+for finite power differences; prove the finite polynomial integration
+/order bound and transport the vanishing remainder to the selected
+Bishop series limits. **That carrier-level setoid transport has not
+yet been constructed.**
+
+New exact regression:
+`python3 scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py`.
+It passes **180** polynomial derivative identities, **200**
+exact rational polynomial integral identities, **400** finite
+dyadic remainder bounds, and produces rational-power epsilon cutoffs
+without floating-point evaluation.
+
 ## 2. Real sine/cosine addition: exact remaining source leaves
 
 `BishopOriginalNativeComplexExpAdditionFromTrigExact.agda`
@@ -146,7 +190,8 @@ source complex absolute-value/order structure.
 
 Run:
 `python3 scripts/check_bishop_eta_abel_uniform_tail.py`
-`python3 scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py`.
+`python3 scripts/check_bishop_eta_all_cutoffs_maxcut_20261114.py`
+`python3 scripts/check_bishop_original_natlog_dyadic_remainder_20261114.py`.
 
 The second checker has independent cases: **21,845** exact rational
 finite Abel identities, **1,972** exact real arbitrary-endpoint tails,
