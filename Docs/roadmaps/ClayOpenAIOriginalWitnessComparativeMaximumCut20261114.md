@@ -61,5 +61,5 @@ P3. Maintain one active Clay PR **per repo**, donor branches for provenance only
 - Current source heads independently inspected: Agda PR #1499 before the new commits \`339957b8...\`, Lean PR #108 before the new commits \`2b227f1f...\`.
 - External primary reviewed A7/ A8 Lean statements read and compared. External same-witness lift **source-written candidate**, **not kernel verified**.
 - Agda independent-witness and probe non-entailment **source-written**, **not kernel verified**.
-- Exhaustive 16-case equivalent local Python regression **PASS**, source-only. Newly committed script should be replayed on canonical worktree before recording an exact-head run.
+- Exact committed Python script blob `3d72ed3b3f592dcd49f97d8a99b239ab588fa5a7` was independently reconstructed and run locally: **PASS**, all 16 predicate pairs and exactly two independent-but-not-joint cases. This is not a pinned Agda/Lean kernel or physical witness receipt.
 - No newly accepted original E1/D1/D2, RH, NS, BSD, Karp or universal Clay theorem. The 4 November OAI YM submission remains outside the available reviewed 28 October evidence.
