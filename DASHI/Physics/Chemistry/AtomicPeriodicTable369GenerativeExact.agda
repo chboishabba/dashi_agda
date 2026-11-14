@@ -400,9 +400,9 @@ record CanonicalAtomicPeriodicTableStatement : Set₁ where
   field
     Generator : AtomicGenerator
     periodicValence : PeriodicValenceStructure Generator
-    constructor : ElementConstructor Generator
+    elementConstructor : ElementConstructor Generator
     observation : PeriodicObservation Generator
     nonPromotion : Atomic369NonPromotionBoundary
 
   generatedElement : Nat -> GeneratedAtom Generator
-  generatedElement = ElementConstructor.element constructor
+  generatedElement = ElementConstructor.element elementConstructor
