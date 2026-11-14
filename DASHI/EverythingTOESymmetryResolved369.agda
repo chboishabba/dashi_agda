@@ -997,6 +997,60 @@ toeFleetContradictionGapReclassificationImpossible :
   FleetGapTOE.FleetContradictionGapReclassificationPermission → ⊥
 toeFleetContradictionGapReclassificationImpossible =
   FleetGapTOE.fleetContradictionsCannotBeRelabelledAsFormalGaps
+------------------------------------------------------------------------
+-- Fleet R5 exact target and receipt-level non-promotion projection.
+------------------------------------------------------------------------
+
+toeFleetR5OrdinalCutReceipt :
+  FleetGapTOE.FleetR5OrdinalCutReceipt
+toeFleetR5OrdinalCutReceipt =
+  FleetGapTOE.canonicalFleetR5OrdinalCutReceipt
+
+toeFleetFormalGapOrdinalCountIs58 :
+  FleetGapTOE.fleetFormalGapOrdinalCount ≡ 58
+toeFleetFormalGapOrdinalCountIs58 =
+  FleetGapTOE.fleetFormalGapOrdinalCountIs58
+
+toeFleetOrdinalRowIdentityStillUnattached :
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentity ≡ false
+toeFleetOrdinalRowIdentityStillUnattached =
+  FleetGapTOE.fleetOrdinalCarriesPersistedRowIdentityIsFalse
+
+toeFleetSharedCardinalityDoesNotCreateIdentity :
+  FleetGapTOE.FleetSharedCardinalityCreatesIdentity → ⊥
+toeFleetSharedCardinalityDoesNotCreateIdentity =
+  FleetGapTOE.fleetSharedCardinalityDoesNotCreateIdentity
+
+toeFleetEigenPriorityDoesNotCreateProof :
+  FleetGapTOE.eigenvalueMagnitudeCreatesProofAuthority
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetEigenPriorityDoesNotCreateProof =
+  FleetGapTOE.fleetEigenPriorityDoesNotCreateProof
+
+toeFleetExternalCountDoesNotCreateFormalDischarge :
+  FleetGapTOE.externalCountCreatesFormalProof
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetExternalCountDoesNotCreateFormalDischarge =
+  FleetGapTOE.fleetExternalCountDoesNotCreateFormalDischarge
+
+toeFleetDischargedFibresRemainOutOfTarget :
+  FleetGapTOE.dischargedFibresRemainDischarged
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetDischargedFibresRemainOutOfTarget =
+  FleetGapTOE.fleetDischargedFibresRemainOutOfTarget
+
+toeFleetContradictionGapsRemainSeparate :
+  FleetGapTOE.contradictionGapsRemainSeparate
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ true
+toeFleetContradictionGapsRemainSeparate =
+  FleetGapTOE.fleetContradictionGapsRemainSeparate
+
+toeFleetPlanningTextDoesNotCreateFormalResidual :
+  FleetGapTOE.externalPlanningTextCreatesFormalResidual
+    FleetGapTOE.canonicalFleetFormalGapTargetReceipt ≡ false
+toeFleetPlanningTextDoesNotCreateFormalResidual =
+  FleetGapTOE.fleetExternalPlanningTextDoesNotCreateFormalResidual
+
 
 ------------------------------------------------------------------------
 -- Fleet 58 named-manifest acquisition wall.
