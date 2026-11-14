@@ -39,6 +39,13 @@ jobs:
         run: |
           python3 scripts/ksw668_mms_burst_acquire.py
           python3 scripts/ksw668_ena_reads_acquire.py
+      - name: Run full 3D Maxwell/Poynting exact polynomial benchmark
+        run: |
+          python3 -m pip install sympy==1.14.0
+          python3 scripts/check_ksw668_maxwell_3d_jet.py
+      - name: Reject unsupported N14 14-MeV nuclear fit extrapolation
+        run: |
+          python3 scripts/ksw668_neutron_energy_nonextrapolation.py
       - name: Validate source-pinned empirical manifest JSON
         run: |
           python3 -m json.tool Artifacts/ksw668/empirical_primary_acquisition_20261114.json >/dev/null
