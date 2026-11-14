@@ -812,3 +812,20 @@ Reuse: `FleetFormalGapTargetTOEExact`, `BalabanRGTOERegression`, and `BalabanIbr
 Preconditions: canonical owners already exist. Invariants: 584 discharged fibres stay discharged; 44 contradiction gaps stay separate; the fleet 58 is not the Yang-Mills Gate-4 58; the three eigen-motif labels are planning labels only; ESD surfaces are read-only; trust escapes remain forbidden. Postcondition: both TOE roots expose the same canonical counts, target-only invariant, and discharged-owner witnesses.
 
 Verification: extend the existing Balaban max-cut validation first, then run the focused TOE referee, preflight, ESD/trust checks, and Agda kernel workflow.
+## 2026-11-08 Moonshine/VOA prerequisite is not a physics-unification promotion
+
+The current original selected Moonshine/VOA phase/lemma/deliverable owner is
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md` in PR #1472.
+Its phases R0, V0, V1, V2, V3 describe, respectively, source audit/dedup,
+actual Leech-orbifold VOA laws, canonical FLM same-object isomorphism,
+true Q80/Monster group and original u/v actions, and the source-filled
+all-state capstone. Only R0 is closed at this update; V0–V2 original
+source-specific proof is not established and V3 exists as a conditional
+compiler. The older original grade-two arithmetic, 196884-dimensional
+sector crosswalk and Griess-operation rigidity must not be reported as
+newly closing the same-object or physical metric/OS requirements.
+
+This is a coordination link, not a replacement for the current physics
+roadmap's W2/W4/W5 or original YM E1/D1/D2/N1/G1 cut. The 5D KK and
+observer geometry claims require the same sourced action, quantum/global
+anomaly data, physical solution, calibrated metric and empirical controls.

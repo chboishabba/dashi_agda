@@ -21,6 +21,16 @@ Golden Agda is authoritative.
 - [x] Implement executable discriminator tests in dashiBRAIN.
 - [ ] Verify zero postulates, zero holes, zero TERMINATING/NON_TERMINATING, zero NO_POSITIVITY_CHECK, and zero ESD edits.
 - [ ] Append changelogs only after code and tests are in place.
+## 2026-11-08 V0 paired orbifold correction
+
+- [x] Original tagged state `Fixed ⊎ Twisted` has an exact normalization/idempotence and injectivity criterion but **cannot** be the linear FLM direct sum: old disjoint embeddings cannot both preserve the VOA zero (proved in source).
+- [x] Existing `SelectedPairedGradedModule` constructs the correct `Fixed × Twisted` graded carrier using original fixed-point VOA operations and native twisted-even inputs.
+- [x] `VNaturalOriginalPairedFourSectorModesExact` constructs the canonical original paired-mode expansion, fixes **FF** from the original fixed VOA, and requires **FT** agreement with the original twisted-module mode.
+- [ ] Original twisted-even source linear/grade operations and closure; source-specific **TF/TT** intertwiners; cross-sector Jacobi/locality/translation/conformal laws; genuine original Griess mode-one; FLM same-object theorem and Y443 action equality.
+- [ ] Do not report old tagged `OriginalIdentificationInjective` alone as full linear V0 completion.
+
+---
+
 # FOR TODO GO TO '# TODO'
 
 
@@ -17500,3 +17510,153 @@ pants/sheaf matching before promoting any real-world synthesis.
 - [ ] Instantiate the historically retained observation in an actually computed, nontrivial graph-wave update with source-proved `WaveRefinementTower` and retained fibre projection compatibility; general postprocessing of full history is only the first closure layer.
 - [ ] For actual twin-prime `Λ(n)Λ(n+2)` and Pickover real phase, construct physical/arithmetic producer and quantitative consumer-specific analytic bounds; neither follows from this finite type-level interface.
 - [ ] Kernel typecheck Agda transitive imports / Lean native counterparts; no CI necessary.
+## 2026-11-08 Moonshine / Y443 / FLM highest-alpha active TODO router
+
+Canonical phase, deliverable, precise lemma and acceptance ledger:
+`Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md`.
+
+- [x] R0: audit and reuse PRs #190/#208/#433/#437/#479/#1472;
+  eliminate duplicate grade-two operation-rigidity wrappers; preserve
+  source-written DGL weak-certificate no-go.
+- [ ] V0: inhabit the **original selected** Leech-orbifold/VOA source-law
+  witnesses and `SourceNativeGriessLaws`, not a freely chosen Set flag.
+- [ ] V1: exhibit real selected-to-published FLM all-mode two-sided VOA
+  equivalence; direct original FLM selection or sound DGL route, not both.
+- [ ] V2: true selected-G ↔ Q80 ↔ Monster isomorphisms and original
+  selected-versus-published u/v action equations on real generators.
+- [ ] V3: instantiate the already-written direct same-object capstone using
+  V0–V2; do not add another conditional wrapper.
+
+194 character classes, physical KK/GR and the original 4D YM mass gap
+belong to separate PR endpoints; no proof-status promotion from finite
+196884 counts or arithmetic. Agda kernel acceptance not asserted here.
+
+### 2026-11-08 V0 state-space subcut from original orbifold (PR #1472)
+
+- [x] Actual original fixed-sector and twisted-even inclusion injectivity and
+  disjointness; exact section/reconstruction from the existing selected
+  orbifold direct-sum carrier (VNaturalOrbifoldConstruction module).
+- [ ] Prove the OPPOSITE selected-carrier reconstruction law on every
+  orbifold state: reconstructTaggedState (identifyCarrier w) = w.
+  Current assembly fields do not exclude additional/junk VOA carrier states.
+- [ ] Prove source-native actual cross-sector Jacobi/locality, conformal
+  and grade-two mode structure, then published FLM all-mode equivalence;
+  independent source-action u/v maps remain V2.
+
+Exact acceptance conditions and authorship in
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+- [x] Original selected orbifold state-fibre normalizer P=R∘I,
+  P²=P, tag preservation and equal-tag iff equal-normal-form;
+  source proof of original I-injective iff no-extra-states (PR #1472).
+- [ ] Inhabit ORIGINAL identifyCarrier injectivity from actual source
+  orbifold assembly. This is exactly equivalent to the previously
+  requested reverse reconstruction law; neither has been assumed.
+
+### 2026-11-08 V0 corrective pivot — tagged coproduct is not FLM linear direct sum
+
+- [x] Source-native no-go: old OrbifoldCarrier=A ⊎ B with disjoint
+  summand injections cannot send both true summand zeros to same VOA zero.
+- [x] Define correct paired LinearOrbifoldCarrier=A × B on actual source
+  summands, its common-zero canonical embeddings and injection proofs;
+  expose VNaturalConstruction.VnaturalLinearCarrier alongside legacy tagged.
+- [ ] Populate original componentwise linear structure and genuine mixed
+  vertex-operator laws on the paired source, including grading, vacuum,
+  translation, conformal Jacobi/locality and true selected/FLM comparison.
+- [ ] Migrate the selected orbifold assembly and dependent same-object
+  consumers through actual mode-preserving linear equivalence, rather than
+  trying to establish an insufficient no-junk property for legacy A ⊎ B.
+
+The prior original identifyCarrier-injective/no-extra-states route is
+now **LEGACY SET-LEVEL ONLY** and does not close actual FLM V0.
+The precise proof/attribution and source no-go appear in canonical
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+### 2026-11-08 V0.3/V0.4 current source implementation and concrete formal donor
+
+- [x] Source-written pair-carrier graded module on the original fixed and
+  twisted-even sector carriers; actual fixed-point VOA operations/grades
+  transported through a demanded two-sided original-source identification.
+- [x] Original fixed-fixed vertex mode transport, explicit original
+  fixed-twisted theta-twisted-mode equation, and constructed four-channel
+  Z2-parity mode formula on the paired carrier.
+- [x] Find actual unconditional Popov–Rastelli LeanVOA theorem
+  VOA.Moonshine.moonshine (2026-11-04, arXiv:2611.06616),
+  with original Ynat, simplicity, c=24 and JShift grading; actual
+  TopPairs.top_pairs0 and topPairs_one source readback.
+- [ ] Inhabit fixedCarrier↔fixedPoint.fixedVOA actual grade/linear maps and
+  twisted-even genuine linear grade laws (SourceSectorGrading).
+- [ ] Inhabit actual original twisted-fixed and twisted-twisted operators,
+  mode-index map, top-pair source proof, and all-mode Agda-to-LeanVOA
+  same-object equivalence. Lean source theorem is NOT an Agda imported proof.
+- [ ] Same original 80-relator quotient group and published Monster action
+  on JMD u/v; no theorem inferred from the LeanVOA source's noncompiled
+  historical Aut(Moonshine)=Monster sketch.
+
+Canonical exact source named-lemma map:
+Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+- [x] Source-native paired VOA vertex-data assembly: genuine fixedVOA
+  vacuum/conformal/translation, even-twisted translation source, and actual
+  four-parity mode (actualSourcePairedVertexData), with original fixed
+  vacuum/conformal decoding and mode agreement proofs. Source-written,
+  not kernel-verified and NOT full VOA Jacobi/locality.
+- [ ] Port or substantively translate Popov–Rastelli LeanVOA YnatG/topPairs_one/
+  moonshine into the original Agda selected carrier with a real all-mode
+  isomorphism; authenticate the original V0/V1 source laws.
+- [ ] The TauCeti presented-group-to-Coxeter-quotient equivalence is NOT
+  a genuine selected group-to-published-Monster action identification;
+  original V2 group/action evidence remains open.
+
+
+- [x] Pure source FT parity reduction: originalPureFTModeIsNativeTwisted
+  and originalPureFTModeAgreesWithLeechTwistedModule show that the
+  four-block paired source mode on (x,0) and (0,y) reproduces the
+  original Leech theta-twisted module after includePlus, under explicit
+  source zero laws (OriginalPureFTZeroLaws).
+- [ ] Inhabit those original zero laws, the genuine Wbar twisted-twisted
+  and reversed mixed block, and strong mixed Jacobi/locality from the
+  Popov–Rastelli LeanVOA donor on the selected Agda carrier.
+
+
+### 2026-11-09 native Lean group/VOA owner consolidation
+
+- [x] Audit existing dashi_lean4 PR #47 owners: Maschke Griess
+  complement, FDRep <-> group-algebra original-action map, Schur
+  isotypic coordinate and canonical normalizer Hom action. These are
+  already proof-coded in Lean; do not reimplement in Agda as new work.
+- [x] Deduplicate two Agda original paired four-sector modules by
+  proving they have identical source-data mode, vacuum, conformal,
+  translation and fixed source operator through source-preserving
+  toNativeMixedParity/toNativeTranslation.
+- [ ] Discover exact current worktree/vendor Popov location before any
+  additional source migration; default-branch code search cannot locate
+  Popov files, but the source may already be available on another
+  branch or in a local mounted/vendor tree.
+- [ ] Construct real selected-to-Popov FLM all-mode map and original
+  source law proofs; do not duplicate the conditional four-block owners.
+- [ ] Actual selected Y443 quotient-to-Monster iso and original u/v
+  operator equality; then apply existing Lean representation machinery
+  and Agda pair-generation/VOA action capstone.
+
+See Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
+
+
+### 2026-11-09 distinct Popov owners / same-source four-sector closure
+
+- [x] Inspect exact user-linked BalabanReducedFlatFaddeevPopovKernelExact:
+  its V. N. Popov is the Yang-Mills Faddeev-Popov author, NOT the Fedor
+  K. Popov of the Popov-Rastelli formal Moonshine VOA library.
+- [x] Complete two-sided original Agda four-sector source record equivalence:
+  fromNativeSources, nativeSourcesAfterFrom, fromAfterNativeSources,
+  atop the earlier mode/vacuum/conformal/translation equalities.
+- [x] Inspect dashi_lean4 #47 Monster representation theory as existing
+  post-recognition source; do not duplicate Maschke/Schur/Hom code.
+- [ ] Genuine original twisted-even linear/grade and mixed source laws;
+  actual selected all-mode correspondence to Popov-Rastelli Moonshine.
+- [ ] Actual Y443 selected group / Monster isomorphism and u/v action;
+  use existing capstone instead of another conditional wrapper.
+
+Canonical ledger: Docs/support/reference/Y443JMDVNaturalMaxCut20261106.md.
