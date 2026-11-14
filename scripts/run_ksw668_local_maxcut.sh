@@ -43,6 +43,7 @@ run python python3 scripts/ksw668_brane_bulk_shortcut_same_metric.py
 run python python3 scripts/ksw668_brane_winding_stability_source.py
 run python python3 scripts/ksw668_compact_kk_mode_dispersion.py
 run python python3 scripts/ksw668_caldwell_langlois_original_eq19.py
+run python python3 scripts/ksw668_caldwell_langlois_israel_exact.py
 run python python3 scripts/ksw668_original_eq19_rational_pair_horizon.py
 run python python3 scripts/test_ksw668_brane_shortcut.py
 run python python3 scripts/test_ksw668_endf81_primary.py
