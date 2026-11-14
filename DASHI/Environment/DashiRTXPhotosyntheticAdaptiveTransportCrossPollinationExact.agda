@@ -71,9 +71,9 @@ record PhotosyntheticImportanceAdapter
 open PhotosyntheticImportanceAdapter public
 
 record AdaptiveCanopyTransportWeld
-    {Wavelength Direction CanopyPoint PhotonFlux LeafPoint Scalar Cell : Set}
+    {Wavelength Direction CanopyPoint PhotonFlux Scalar Cell : Set}
     {canopy : Canopy.SpectralCanopyRadiationModel Wavelength Direction CanopyPoint PhotonFlux}
-    {photonField : Photo.PhotosyntheticPhotonField LeafPoint Wavelength PhotonFlux}
+    {photonField : Photo.PhotosyntheticPhotonField CanopyPoint Wavelength PhotonFlux}
     {interception : Photo.LeafLightInterceptionReceipt photonField}
     (kernel : AuthoritativeCanopyKernelReceipt canopy)
     (canopyWeld : Canopy.CanopyToPhotosyntheticPhotonFieldWeld canopy photonField interception)
