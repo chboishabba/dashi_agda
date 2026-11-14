@@ -299,6 +299,8 @@ prefixTransitivityReused :
 prefixTransitivityReused = Prefix.prefixAgreementTransitive
 
 uninspectedCoverageAbstentionReused :
-  Coverage.safetyCoverage Coverage.queryCoverageUninspected
-  ≡ Coverage.safetyCoverage Coverage.queryCoverageUninspected
-uninspectedCoverageAbstentionReused = refl
+  Safety.dispositionForCoverage
+    (Coverage.safetyCoverage Coverage.queryCoverageUninspected)
+  ≡ Safety.abstainForCoverage
+uninspectedCoverageAbstentionReused =
+  Coverage.uninspectedQueryCoverageAbstains
