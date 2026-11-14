@@ -27,7 +27,8 @@ with tempfile.TemporaryDirectory() as dirname:
     assert m.interpolate(grid,.01)==1
     assert m.interpolate(grid,100)==4
     assert isclose(m.interpolate(grid,5.5),2.5)
-    rate=m.source_rate(grid,[(.01,2),(100,2)],1e20)
+    rate=m.source_rate(grid,[(.01,2),(100,2)],1e20,
+                       flux_source="SYNTHETIC-only 2 cm^-2 s^-1 eV^-1")
     assert rate["modelled_rate_per_second"]>0
     try:m.interpolate(grid,200)
     except ValueError:pass
