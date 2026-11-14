@@ -56,6 +56,18 @@ Any proposed **forced-universal** extension of this method must survive the exte
 | **NS.B03 / FORMALISE** | `originalR71RealGalerkinLocalSolution`, `originalR853SignedRateAlongGalerkinSolution`, `originalR828R854RateLipschitzAlongSolution` | original finite-dimensional quadratic vector field, fixed horizon, same R853 observable; R829 negative at t=0 is already paid | OPEN |
 | **NS.C01 / NEW_PDE** | `originalR736SignedCollarAbsorbable` + `originalR736RemoteFluxControlled` + uniform PDE continuation | actual unforced 3D nonlinear trajectory, N-independent constants and time horizon; a finite example cannot pay this | OPEN |
 
+**NS pressure donor scale direction:** the exact external R³ identity
+`R3PressureKernel.integral_kernel_moment` states an L^(4/3)-moment
+of the cutoff commutator proportional to 1/R. It tends to zero in the
+**large-radius R→∞** comparison, but grows like 1/R for shrinking
+R→0; the associated L^(4/3)-norm scales like R^(-3/4).
+It is therefore a plausible donor for R³ **remote-boundary** control,
+not automatically a positive small-collar viscosity reserve.
+Transport to a periodic pressure kernel requires a new periodization/
+zero-mean and nonlocal stress correspondence, not replacing R³ by T³
+by notation. This is the exact reason NS.B01 and NS.B02 stay
+separate gates.
+
 **Historical manuscript audit:** the 27 Oct 2026 King’s/Cambridge preprint compared an earlier Lean/written proof and reported, among other differences, an inverse-operator bound using an extra input derivative (m+5 rather than m+4). The latest pinned comparator theorem is **not** thereby automatically refuted; check chronology and the exact current manuscript/Lean pair. Do not conflate logical C/D comparator acceptance with full prose-fidelity validation.
 
 ## P≠NP: source #SAT machine into original DASHI DAG/bit-cost, then back again
